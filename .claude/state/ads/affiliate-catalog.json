@@ -10,8 +10,8 @@
     "unknown": "未確認 (調べていない。none と区別する)"
   },
   "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
-  "updatedAt": "2026-07-28T08:10:00.000Z",
-  "verifiedAt": null,
+  "updatedAt": "2026-07-28T11:29:06.305Z",
+  "verifiedAt": "2026-07-28",
   "programs": {
     "moshimo-7059": {
       "name": "みんなの生命保険アドバイザーの無料保険相談",
@@ -76,6 +76,669 @@
             {
               "at": "2026-07-28T08:10:00.000Z",
               "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7404": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7404",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7614": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7614",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7494": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7494",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7462": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7462",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6298": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6298",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5537": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "5537",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5289": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "5289",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-3694": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "3694",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-54": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "54",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-170": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "170",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-936": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "936",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5857": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "5857",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5816": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "5816",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5574": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "5574",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5190": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "5190",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-1124": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "1124",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14065": {
+      "name": "【PID:14065】 専門転職（その他）",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "14065",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15637": {
+      "name": "【PID:15637】 結婚相談・婚活",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "15637",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15471": {
+      "name": "【PID:15471】 学習教材",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "15471",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15708": {
+      "name": "【PID:15708】 語学・留学",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "15708",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-7763": {
+      "name": "【PID:7763】 資格・通信講座",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "7763",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-7721": {
+      "name": "【PID:7721】 資格・通信講座",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "7721",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16464": {
+      "name": "【PID:16464】 その他",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "16464",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16143": {
+      "name": "【PID:16143】 その他",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "16143",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16153": {
+      "name": "【PID:16153】 その他",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "16153",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15580": {
+      "name": "【PID:15580】 趣味・スポーツ",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "15580",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15671": {
+      "name": "【PID:15671】 出会い",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "15671",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14611": {
+      "name": "【PID:14611】 その他",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "14611",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14033": {
+      "name": "【PID:14033】 資格・通信講座",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "14033",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13462": {
+      "name": "【PID:13462】 その他",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "13462",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13217": {
+      "name": "【PID:13217】 その他",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "13217",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16427": {
+      "name": "【PID:16427】 その他",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "16427",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16421": {
+      "name": "【PID:16421】 ボディケア",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "16421",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-11096": {
+      "name": "【PID:11096】 一般転職",
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "11096",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "afb-44": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "afb": {
+          "pid": "44",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T11:29:06.305Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            },
+            {
+              "at": "2026-07-28",
+              "note": "nameGuess が doboku-note のサイトラベル行を部分一致で誤取得したため名称を破棄。PID 44 の実在は register 時に afb 画面で確認する"
             }
           ]
         }

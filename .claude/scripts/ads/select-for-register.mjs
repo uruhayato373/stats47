@@ -109,7 +109,9 @@ console.log(`\n合計 選定 ${selected.length} 件 (${verticals.length} vertica
 // (実測 2026-07-27: 23 件が軸未解決のまま放置され、うち ahamo は energy トップの 2 倍だった)。
 // 正典: .claude/rules/affiliate-ads-standards.md §0 (意図軸ハブ) / §10 (scout パイプライン)。
 const unresolved = approvedAll
-  .filter((e) => !e.vertical)
+  // deliveryDecision (no-fit / blocked-genre) は「解決済みの配信しない判断」なので警告に混ぜない
+  // (2026-07-28: 全 25 件の明示判定を導入。未解決 = 判断がまだ無いものだけ)
+  .filter((e) => !e.vertical && !e.deliveryDecision)
   .sort((a, b) => b._ce - a._ce);
 if (unresolved.length > 0) {
   // 比較相手は **実際に配信中 (registered)** の各軸トップの中で最も弱い値。

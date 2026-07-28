@@ -1093,7 +1093,7 @@
       "company": "Ｗｉｎスクール",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1101,6 +1101,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:25:49.434Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.262Z",
+          "adId": "af_python-python-winner_a8_001"
         }
       ],
       "epcYen": 40,
@@ -1108,7 +1119,30 @@
       "rewardYen": 10000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 8
+      "_ce": 8,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_python-python-winner_a8_001",
+        "title": "未経験からの転職 Pythonでキャリアを変える【Python Winner】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B614L+OESKY+529E+HW2Q9",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www27.a8.net/svt/bgt?aid=260621877041&wid=001&eno=01&mid=s00000023621003005000&mc=1",
+        "trackingPixelUrl": "https://www14.a8.net/0.gif?a8mat=4B614L+OESKY+529E+HW2Q9",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000025713001": {
       "programId": "s00000025713001",
@@ -1373,12 +1407,20 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "no-fit",
+          "reason": "占い相談 — 10 vertical に意図適合面なし (意図不一致の汎用配信をしない)"
         }
       ],
       "epcYen": 45,
       "confirmRatePct": 50,
       "rewardYen": 17000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "deliveryDecision": "no-fit"
     },
     "s00000022994001": {
       "programId": "s00000022994001",
@@ -1387,7 +1429,7 @@
       "company": "株式会社ＹＯＳＣＡ",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1395,6 +1437,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:25:55.251Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_s00000022994001_a8_001"
         }
       ],
       "epcYen": 7,
@@ -1402,7 +1455,30 @@
       "rewardYen": 600,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 7
+      "_ce": 7,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000022994001_a8_001",
+        "title": "一生使える「ライティング思考力」を鍛える【あなたのライターキャリア講座】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+DT4YWI+4XF8+60OXD",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www23.a8.net/svt/bgt?aid=260630944835&wid=001&eno=01&mid=s00000022994001011000&mc=1",
+        "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B684G+DT4YWI+4XF8+60OXD",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000026390001": {
       "programId": "s00000026390001",
@@ -3185,9 +3261,9 @@
       "name": "環境構築不要！AIエージェント開発を非エンジニアでも即実践【AI Agent Camp】",
       "genre": "環境構築不要！AIエージェント開発を非エンジニアでも即実践【AI Agent Camp】",
       "company": "ＡＩブレインパートナーズ株式会社",
-      "vertical": null,
+      "vertical": "education",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3195,6 +3271,24 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "resolve-vertical",
+          "vertical": "education",
+          "reason": "AI Agent Camp は §2 利用プログラム表で education 既載"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:26:00.993Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_ai-ai-agent-camp_a8_text_001"
         }
       ],
       "epcYen": 0,
@@ -3202,7 +3296,30 @@
       "rewardYen": 5000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_ai-ai-agent-camp_a8_001",
+        "title": "環境構築不要！AIエージェント開発を非エンジニアでも即実践【AI Agent Camp】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
+        "areaCode": null,
+        "vertical": "education",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1",
+        "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000027324001": {
       "programId": "s00000027324001",
@@ -3339,7 +3456,7 @@
       "company": "株式会社ココナラ",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3352,6 +3469,17 @@
           "at": "2026-07-28",
           "action": "resolve-vertical",
           "by": "affiliate-manager 判断 (高確定EPC pending-vertical の解決)"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:26:07.086Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_tvcm-up-web_a8_001"
         }
       ],
       "epcYen": 3,
@@ -3359,7 +3487,30 @@
       "rewardYen": 100,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 2.8968
+      "_ce": 2.8968,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_tvcm-up-web_a8_001",
+        "title": "TVCM放映で知名度UP★ココナラ｜Webサイト・デザイン・動画・イラストなど発注者 募集",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AINPIQ+2PEO+1I5DGX",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www24.a8.net/svt/bgt?aid=260516554636&wid=001&eno=01&mid=s00000012624009095000&mc=1",
+        "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4B3RUY+AINPIQ+2PEO+1I5DGX",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000007238009": {
       "programId": "s00000007238009",
@@ -3376,6 +3527,13 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "no-fit",
+          "reason": "SEOツール — 適合 vertical なし"
         }
       ],
       "epcYen": 0,
@@ -3383,7 +3541,8 @@
       "rewardRatePct": 40,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "deliveryDecision": "no-fit"
     },
     "s00000025896001": {
       "programId": "s00000025896001",
@@ -4048,7 +4207,7 @@
       "company": "株式会社スプラッシュエンジニアリング",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4056,6 +4215,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:26:12.808Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_sap-sap-sap_a8_001"
         }
       ],
       "epcYen": 91,
@@ -4063,7 +4233,30 @@
       "rewardYen": 15000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_sap-sap-sap_a8_001",
+        "title": "SAPコンサルタント・SAPエンジニアに特化した転職サービス【SAPテンショク】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+9W18J6+5N98+BXB8X",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www29.a8.net/svt/bgt?aid=260309956598&wid=001&eno=01&mid=s00000026342002003000&mc=1",
+        "trackingPixelUrl": "https://www14.a8.net/0.gif?a8mat=4AZCG4+9W18J6+5N98+BXB8X",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000007992006": {
       "programId": "s00000007992006",
@@ -4562,12 +4755,20 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "blocked-genre",
+          "reason": "出会い系 (NGジャンル)"
         }
       ],
       "epcYen": 7,
       "confirmRatePct": 53.33,
       "rewardYen": 2500,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "deliveryDecision": "blocked-genre"
     },
     "s00000008444012": {
       "programId": "s00000008444012",
@@ -4584,12 +4785,20 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "blocked-genre",
+          "reason": "出会い系 (NGジャンル)"
         }
       ],
       "epcYen": 0,
       "confirmRatePct": 0,
       "rewardYen": 300,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "deliveryDecision": "blocked-genre"
     },
     "s00000027108001": {
       "programId": "s00000027108001",
@@ -4676,12 +4885,20 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "blocked-genre",
+          "reason": "出会い系 (NGジャンル)"
         }
       ],
       "epcYen": 29,
       "confirmRatePct": 49.8,
       "rewardYen": 4000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "deliveryDecision": "blocked-genre"
     },
     "s00000022845001": {
       "programId": "s00000022845001",
@@ -5131,9 +5348,9 @@
       "name": "アウトドアに特化！簡単便利・食べきりサイズ【孤高のキャンプ飯・アルファー食品】",
       "genre": "アウトドアに特化！簡単便利・食べきりサイズ【孤高のキャンプ飯・アルファー食品】",
       "company": "アルファー食品株式会社",
-      "vertical": null,
+      "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -5141,6 +5358,24 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "resolve-vertical",
+          "vertical": "travel",
+          "reason": "キャンプ飯 = アウトドア/レジャー → travel 軸"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:26:18.492Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_s00000023371004_a8_001"
         }
       ],
       "epcYen": 0,
@@ -5148,7 +5383,30 @@
       "rewardRatePct": 8,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000023371004_a8_001",
+        "title": "アウトドアに特化！簡単便利・食べきりサイズ【孤高のキャンプ飯・アルファー食品】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+AFOJHU+50BY+NV9N5",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www24.a8.net/svt/bgt?aid=260310961631&wid=001&eno=01&mid=s00000023371004009000&mc=1",
+        "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4AZD81+AFOJHU+50BY+NV9N5",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000025401001": {
       "programId": "s00000025401001",
@@ -5367,9 +5625,9 @@
       "name": "24時間365日カンタン予約【海外ダイナミックパッケージ】",
       "genre": "24時間365日カンタン予約【海外ダイナミックパッケージ】",
       "company": "株式会社トラベルウエスト",
-      "vertical": null,
+      "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -5377,6 +5635,24 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "resolve-vertical",
+          "vertical": "travel",
+          "reason": "海外ダイナミックパッケージ = 旅行"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:26:24.190Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_24-365_a8_001"
         }
       ],
       "epcYen": 0,
@@ -5384,7 +5660,30 @@
       "rewardYen": 2500,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_24-365_a8_001",
+        "title": "24時間365日カンタン予約【海外ダイナミックパッケージ】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DML78Y+4R2M+ZRIB5",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www23.a8.net/svt/bgt?aid=260309957824&wid=001&eno=01&mid=s00000022171006007000&mc=1",
+        "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4AZCG5+DML78Y+4R2M+ZRIB5",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000023067003": {
       "programId": "s00000023067003",
@@ -6840,12 +7139,20 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "blocked-genre",
+          "reason": "出会い系 (NGジャンル)"
         }
       ],
       "epcYen": 3,
       "confirmRatePct": 15.78,
       "rewardYen": 1000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "deliveryDecision": "blocked-genre"
     },
     "s00000009685003": {
       "programId": "s00000009685003",
@@ -6862,12 +7169,20 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "blocked-genre",
+          "reason": "出会い系 (NGジャンル)"
         }
       ],
       "epcYen": 2,
       "confirmRatePct": 11.11,
       "rewardYen": 4000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "deliveryDecision": "blocked-genre"
     },
     "s00000021593001": {
       "programId": "s00000021593001",
@@ -6884,12 +7199,20 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "blocked-genre",
+          "reason": "出会い系サービスへの導線 (NGジャンル周辺)"
         }
       ],
       "epcYen": 8,
       "confirmRatePct": 81.25,
       "rewardRatePct": 10,
-      "rewardType": "rate"
+      "rewardType": "rate",
+      "deliveryDecision": "blocked-genre"
     },
     "s00000012624008": {
       "programId": "s00000012624008",
@@ -6906,12 +7229,20 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "no-fit",
+          "reason": "ココナラ占い — 占いカテゴリは適合面なし (ココナラ本体は labor で配信)"
         }
       ],
       "epcYen": 6,
       "confirmRatePct": 99.7,
       "rewardYen": 2000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "deliveryDecision": "no-fit"
     },
     "s00000009685004": {
       "programId": "s00000009685004",
@@ -6928,6 +7259,13 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "blocked-genre",
+          "reason": "出会い系 (NGジャンル)"
         }
       ],
       "epcYen": 1,
@@ -6935,16 +7273,17 @@
       "rewardYen": 10900,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 1
+      "_ce": 1,
+      "deliveryDecision": "blocked-genre"
     },
     "s00000026135001": {
       "programId": "s00000026135001",
       "name": "【NEWサービス】メルカリアンバサダー",
       "genre": "【NEWサービス】メルカリアンバサダー",
       "company": "株式会社メルカリ（メルカリアフィリエイト）",
-      "vertical": null,
+      "vertical": "economy",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -6952,6 +7291,24 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "resolve-vertical",
+          "vertical": "economy",
+          "reason": "メルカリ = 家計/リセール"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:26:29.926Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_new_a8_text_002"
         }
       ],
       "epcYen": 1,
@@ -6959,16 +7316,39 @@
       "rewardRatePct": 2,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 1
+      "_ce": 1,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_new_a8_text_001",
+        "title": "【NEWサービス】メルカリアンバサダー",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZA46+987WC2+5LNQ+5YJRM",
+        "areaCode": null,
+        "vertical": "economy",
+        "categoryKey": null,
+        "locationCode": "sidebar-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "text",
+        "imageUrl": null,
+        "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4AZA46+987WC2+5LNQ+5YJRM",
+        "width": null,
+        "height": null,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000025671001": {
       "programId": "s00000025671001",
       "name": "九州のいちおしグルメ・ギフトがお買い得！【イオン九州オンライン】",
       "genre": "九州のいちおしグルメ・ギフトがお買い得！【イオン九州オンライン】",
       "company": "イオン九州株式会社",
-      "vertical": null,
+      "vertical": "furusato",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -6976,6 +7356,24 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "resolve-vertical",
+          "vertical": "furusato",
+          "reason": "イオン九州は §2 で furusato 既載"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:26:35.742Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_s00000025671001_a8_text_001"
         }
       ],
       "epcYen": 2,
@@ -6983,7 +7381,30 @@
       "rewardRatePct": 5,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 2
+      "_ce": 2,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000025671001_a8_001",
+        "title": "九州のいちおしグルメ・ギフトがお買い得！【イオン九州オンライン】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZA46+97MGQA+5I2U+60H7L",
+        "areaCode": null,
+        "vertical": "furusato",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www25.a8.net/svt/bgt?aid=260306934557&wid=001&eno=01&mid=s00000025671001010000&mc=1",
+        "trackingPixelUrl": "https://www14.a8.net/0.gif?a8mat=4AZA46+97MGQA+5I2U+60H7L",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000027148002": {
       "programId": "s00000027148002",
@@ -7253,9 +7674,9 @@
       "name": "アウトドア・キャンプ用品通販【エルブレス】",
       "genre": "アウトドア・キャンプ用品通販【エルブレス】",
       "company": "ゼビオ株式会社",
-      "vertical": null,
+      "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -7263,6 +7684,24 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "resolve-vertical",
+          "vertical": "travel",
+          "reason": "エルブレス = アウトドア用品"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:26:41.540Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_s00000020001003_a8_001"
         }
       ],
       "epcYen": 0,
@@ -7270,16 +7709,39 @@
       "rewardRatePct": 5.4,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000020001003_a8_001",
+        "title": "アウトドア・キャンプ用品通販【エルブレス】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=45BPUX+BQ4COI+4ABU+I22S1",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=250809513709&wid=001&eno=01&mid=s00000020001003033000&mc=1",
+        "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=45BPUX+BQ4COI+4ABU+I22S1",
+        "width": 250,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000018486001": {
       "programId": "s00000018486001",
       "name": "日本発のアウトドアブランド【WAQアウトドアストア】",
       "genre": "日本発のアウトドアブランド【WAQアウトドアストア】",
       "company": "ＷＡＱ株式会社",
-      "vertical": null,
+      "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -7287,6 +7749,24 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "resolve-vertical",
+          "vertical": "travel",
+          "reason": "WAQ = アウトドア用品"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:26:47.462Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_waq_a8_001"
         }
       ],
       "epcYen": 0,
@@ -7294,16 +7774,39 @@
       "rewardRatePct": 5,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_waq_a8_001",
+        "title": "日本発のアウトドアブランド【WAQアウトドアストア】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=45BPUX+BAN2YA+3YN0+6EMGX",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www25.a8.net/svt/bgt?aid=250809513683&wid=001&eno=01&mid=s00000018486001076000&mc=1",
+        "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=45BPUX+BAN2YA+3YN0+6EMGX",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000020001001": {
       "programId": "s00000020001001",
       "name": "スポーツ用品の通販【スーパースポーツゼビオ】",
       "genre": "スポーツ用品の通販【スーパースポーツゼビオ】",
       "company": "ゼビオ株式会社",
-      "vertical": null,
+      "vertical": "health",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -7311,6 +7814,24 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "resolve-vertical",
+          "vertical": "health",
+          "reason": "スポーツ用品 = フィットネス軸 (RIZAP/ClassPass と同軸)"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:26:53.270Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_s00000020001001_a8_001"
         }
       ],
       "epcYen": 3,
@@ -7318,16 +7839,39 @@
       "rewardRatePct": 6.5,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 2.6213999999999995
+      "_ce": 2.6213999999999995,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000020001001_a8_001",
+        "title": "スポーツ用品の通販【スーパースポーツゼビオ】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=45BPUX+B7NWXE+4ABU+6B70H",
+        "areaCode": null,
+        "vertical": "health",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www27.a8.net/svt/bgt?aid=250809513678&wid=001&eno=01&mid=s00000020001001060000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=45BPUX+B7NWXE+4ABU+6B70H",
+        "width": 250,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000023754006": {
       "programId": "s00000023754006",
       "name": "簡単60秒！投資に関するアンケート【Oh!ya（オーヤ）】",
       "genre": "簡単60秒！投資に関するアンケート【Oh!ya（オーヤ）】",
       "company": "株式会社セレス",
-      "vertical": null,
+      "vertical": "economy",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -7335,6 +7879,24 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "resolve-vertical",
+          "vertical": "economy",
+          "reason": "投資アンケート = economy"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:26:59.012Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:27:17.263Z",
+          "adId": "af_60-oh-ya_a8_001"
         }
       ],
       "epcYen": 0,
@@ -7342,7 +7904,30 @@
       "rewardYen": 500,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_60-oh-ya_a8_001",
+        "title": "簡単60秒！投資に関するアンケート【Oh!ya（オーヤ）】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=45BPUX+63OZ02+53AC+ZRIB5",
+        "areaCode": null,
+        "vertical": "economy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www25.a8.net/svt/bgt?aid=250809513369&wid=001&eno=01&mid=s00000023754006007000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=45BPUX+63OZ02+53AC+ZRIB5",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000024293001": {
       "programId": "s00000024293001",
@@ -7571,6 +8156,13 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "no-fit",
+          "reason": "カタログギフト — 適合 vertical なし"
         }
       ],
       "epcYen": 1,
@@ -7578,7 +8170,8 @@
       "rewardRatePct": 10,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 1
+      "_ce": 1,
+      "deliveryDecision": "no-fit"
     },
     "s00000013307001": {
       "programId": "s00000013307001",
@@ -7665,12 +8258,20 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "no-fit",
+          "reason": "A8 メディア会員募集 — 自己参照プログラム・配信対象外"
         }
       ],
       "epcYen": 1,
       "confirmRatePct": 75,
       "rewardYen": 300,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "deliveryDecision": "no-fit"
     },
     "s00000011623001": {
       "programId": "s00000011623001",
@@ -7687,10 +8288,18 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "no-fit",
+          "reason": "楽天アフィリエイト — 楽天系はもしも経由で運用中 (RakutenItemsCard)。ASP 二重帰属を避け A8 側は配信しない (§4)"
         }
       ],
       "epcYen": 0,
-      "confirmRatePct": 0
+      "confirmRatePct": 0,
+      "deliveryDecision": "no-fit"
     },
     "s00000008903001": {
       "programId": "s00000008903001",
@@ -7707,12 +8316,20 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "blocked-genre",
+          "reason": "FX = 高リスク金融 (NGジャンル・単価¥40,000でも配信しない)"
         }
       ],
       "epcYen": 0,
       "confirmRatePct": 63.59,
       "rewardYen": 40000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "deliveryDecision": "blocked-genre"
     },
     "s00000000018015": {
       "programId": "s00000000018015",
@@ -7787,10 +8404,18 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "no-fit",
+          "reason": "A8 成果反映用 (システム内部)"
         }
       ],
       "epcYen": 70228,
-      "confirmRatePct": 94.87
+      "confirmRatePct": 94.87,
+      "deliveryDecision": "no-fit"
     },
     "s00000005186001": {
       "programId": "s00000005186001",
@@ -7807,10 +8432,18 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "by": "affiliate-manager 判断",
+          "action": "delivery-decision",
+          "decision": "no-fit",
+          "reason": "A8 セルフバック用 (システム内部)"
         }
       ],
       "epcYen": 0,
-      "confirmRatePct": 0
+      "confirmRatePct": 0,
+      "deliveryDecision": "no-fit"
     },
     "__session": {
       "programId": "__session",
@@ -9102,5 +9735,5 @@
       }
     }
   },
-  "updatedAt": "2026-07-28T11:19:48.883Z"
+  "updatedAt": "2026-07-28T11:27:17.263Z"
 }

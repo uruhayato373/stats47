@@ -206,6 +206,61 @@ async function main() {
       console.log(`\n→ 反映するなら --write を付けて再実行 (既定は read-only)`);
     }
   }
+
+  // ── 実機にあるが台帳に無い提携/申請を取り込む (--write 時のみ書く)
+  // 2026-07-28 実測: afb 19 件・もしも 7 件が提携済みなのに台帳ゼロで「管理外の提携」になっていた。
+  // 台帳キーは `${asp}-${id}`。名前は一覧テキストの ID 近傍から best-effort (取れなければ null →
+  // 人/agent が register 時に補完する)。A8 は a8-catalog.json が正典なのでここでは取り込まない。
+  const known = new Set();
+  for (const p of Object.values(catalog.programs ?? {})) {
+    for (const [aspName, entry] of Object.entries(p.asps ?? {})) {
+      const id = idOf(entry);
+      if (id) known.add(`${aspName}-${id}`);
+    }
+  }
+  const missing = [];
+  for (const [aspName, l] of Object.entries(live)) {
+    if (aspName === "a8") continue; // A8 の状態機械は a8-catalog.json が正典
+    for (const [key, status] of [["partnered", "approved"], ["applying", "applying"]]) {
+      for (const id of l[key].ids) {
+        const ck = `${aspName}-${id}`;
+        if (known.has(ck)) continue;
+        known.add(ck); // partnered と applying の両ページに出る ID を二重登録しない
+        // 名前の best-effort: ID を**境界付き**で含む行のみ (単純 includes は "8445" が "44" を
+        // 含む等で別行に誤マッチする — 2026-07-28 に doboku-note のサイトラベル行を誤取得した)
+        const lines = l[key].text.split("\n").map((s) => s.trim()).filter(Boolean);
+        const idRe = new RegExp(`(?<![0-9])${id}(?![0-9])`);
+        const nameGuess = lines.find((ln) => idRe.test(ln) && ln.length > id.length + 4) ?? null;
+        missing.push({ ck, asp: aspName, id, status, name: nameGuess });
+      }
+    }
+  }
+  if (missing.length > 0) {
+    console.log(`\n台帳に無い実機の提携/申請 ${missing.length} 件:`);
+    for (const m of missing) console.log(`  + ${m.ck} (${m.status}) ${m.name ?? "(名称は register 時に補完)"}`);
+    if (opts.write) {
+      const now = new Date().toISOString();
+      for (const m of missing) {
+        catalog.programs[m.ck] = {
+          name: m.name,
+          vertical: null,
+          asps: {
+            [m.asp]: {
+              [m.asp === "moshimo" ? "promotionId" : "pid"]: m.id,
+              status: m.status,
+              history: [{ at: now, status: m.status, note: "affiliate-status --write が実機一覧から取り込み" }],
+            },
+          },
+        };
+      }
+      catalog.updatedAt = now;
+      catalog.verifiedAt = now.slice(0, 10);
+      writeFileSync(CATALOG, JSON.stringify(catalog, null, 2) + "\n", "utf-8");
+      console.log(`→ --write により ${missing.length} 件を台帳へ取り込みました (vertical/名称は register 時に確定)`);
+    } else {
+      console.log(`→ 取り込むなら --write を付けて再実行`);
+    }
+  }
   console.log(`ログ: ${logPath}`);
 }
 
