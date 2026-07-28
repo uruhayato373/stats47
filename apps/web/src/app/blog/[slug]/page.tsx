@@ -18,7 +18,8 @@ import { ArticleCard, RailCard, RailLinkItem, RailLinkList, SurfaceLinkCard } fr
 import {
     SidebarPromoBanner,
 } from "@/features/ads";
-import { BlogSidebarTextAds, resolveAffiliateBannersByCategory } from "@/features/ads/server";
+import { TAG_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
+import { BlogSidebarTextAds, resolveAffiliateBannersByCategory, resolveAffiliateTextAdsByTagKeys } from "@/features/ads/server";
 import { BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     RelatedRankingsSection,
@@ -126,6 +127,12 @@ export default async function BlogPostPage({ params }: PageProps) {
             resolveAffiliateBannersByCategory(),
         ]);
     const tagKeys = articleTagData.map((t) => t.tagKey);
+    // 本文インラインのテキストリンク。**サイドバーと重複させない**ため 1 回だけ 6 件解決し、
+    // 先頭 2 件はサイドバー (BlogSidebarTextAds が同じ順序で独立解決する) に譲って 3 件目以降を本文に回す。
+    // 在庫が薄い vertical では本文分が減るだけで、空枠は作らない (md-content 側が index 不足を握りつぶす)。
+    const affiliateTextPool = await resolveAffiliateTextAdsByTagKeys(tagKeys, "sidebar-bottom", 6);
+    const affiliateTextAds = affiliateTextPool.slice(2);
+    const affiliateVertical = tagKeys.map((t) => TAG_AFFILIATE_MAP[t]).find(Boolean) ?? null;
     // relatedArticles は tagKeys 依存、articleTagsMap は relatedArticles 依存 (チェーン)
     const relatedArticles = await getRelatedArticles(tagKeys, slug);
     const articleTagsMap = await getTagsForArticles(relatedArticles.map((a) => a.slug));
@@ -267,7 +274,14 @@ export default async function BlogPostPage({ params }: PageProps) {
                             </div>
 
                             {/* 記事本文 */}
-                            <ArticleRenderer article={article} slug={slug} relatedArticleTitles={relatedArticleTitles} affiliateBannersByCategory={affiliateBannersByCategory} />
+                            <ArticleRenderer
+                                article={article}
+                                slug={slug}
+                                relatedArticleTitles={relatedArticleTitles}
+                                affiliateBannersByCategory={affiliateBannersByCategory}
+                                affiliateTextAds={affiliateTextAds}
+                                affiliateVertical={affiliateVertical}
+                            />
 
                             {/* SNSシェアボタン */}
                             <div className="mt-8 pt-6 border-t flex justify-center">

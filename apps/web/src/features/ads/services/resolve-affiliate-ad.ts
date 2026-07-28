@@ -142,7 +142,12 @@ export async function resolveAffiliateTextAdsByTagKeys(
   const verticals = verticalsFromTagKeys(tagKeys);
   if (verticals.length === 0) verticals.push("economy");
 
-  const ads = await findActiveTextAdsByVerticals(verticals, locationCode);
+  let ads = await findActiveTextAdsByVerticals(verticals, locationCode);
+  // ★ 軸は解決できたが**その軸に text 在庫が無い**場合も空になる (例: furusato は text 0 件)。
+  //   tagKey が無い記事だけでなくこのケースでも枠が埋まるよう economy へ再フォールバックする。
+  if (ads.length === 0 && !verticals.includes("economy")) {
+    ads = await findActiveTextAdsByVerticals(["economy"], locationCode);
+  }
 
   // vertical 集約後も同一広告が重複しうるため title で dedupe
   const seen = new Set<string>();

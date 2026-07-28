@@ -179,3 +179,23 @@ test("buildAdDraft: vertical 未解決なら null を保つ (append 側で弾か
   const d = buildAdDraft({ name: "X", programId: "s1" }, BANNER_FIELDS);
   assert.equal(d.vertical, null);
 });
+
+test("buildAdDraft: text の id は _text_ を挟んで種別が読める", () => {
+  const b = buildAdDraft({ name: "Sample", programId: "s1", vertical: "energy" }, BANNER_FIELDS);
+  const t = buildAdDraft({ name: "Sample", programId: "s1", vertical: "energy" }, TEXT_FIELDS);
+  assert.equal(b.id, "af_sample_a8_001", "banner は従来の命名を変えない");
+  assert.equal(t.id, "af_sample_a8_text_001");
+  assert.notEqual(b.id, t.id, "同一プログラムでも id が衝突しない");
+});
+
+test("同一プログラムの banner と text は a8mat が別なので両方登録できる", () => {
+  // A8 の a8mat は 4 セグメントで素材ごとに末尾が変わる (実データで確認済み)
+  const b = buildAdDraft({ name: "S", programId: "s1", vertical: "energy" },
+    { ...BANNER_FIELDS, htmlContent: "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP" });
+  const t = buildAdDraft({ name: "S", programId: "s1", vertical: "energy" },
+    { ...TEXT_FIELDS, htmlContent: "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM" });
+  const ab = draftA8mat(b), at = draftA8mat(t);
+  assert.notEqual(ab, at, "a8mat が違えば dedup で skip されない");
+  const existing = new Set([ab]);
+  assert.equal(existing.has(at), false, "text は既登録扱いにならない");
+});

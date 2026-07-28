@@ -150,7 +150,11 @@ export function lintDirectPlacementSizes(placements) {
   return warns;
 }
 
-const AFFILIATE_BANNER_TAG = /<affiliate-banner\b[^>]*>/g;
+// ★ `<affiliate-text>` も対象にする (2026-07-28)。本文インラインのテキストリンク広告タグで、
+//   href 直書きなら直接配置扱い = 台帳登録が要る。タグ名をここに足さないと**監査を素通り**する。
+//   なお index 属性だけの自動解決型 (`<affiliate-text index="0">`) は href を持たないため
+//   下の findUnregisteredAffiliateTags が自然に無視する (直接配置ではないので登録不要)。
+const AFFILIATE_BANNER_TAG = /<(?:affiliate-banner|affiliate-text)\b[^>]*>/g;
 const HREF_ATTR = /href="([^"]+)"/;
 
 /**
