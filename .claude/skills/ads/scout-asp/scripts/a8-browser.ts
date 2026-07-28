@@ -31,6 +31,8 @@ const require = createRequire(import.meta.url);
 const core = require("../../../../scripts/ads/lib/a8-scout-core.mjs");
 const codeCore = require("../../../../scripts/ads/lib/a8-code-core.mjs");
 const applyBudget = require("../../../../scripts/ads/check-a8-apply-budget.cjs");
+const appendCore = require("../../../../scripts/ads/lib/a8-append-core.mjs");
+const { buildAdDraft } = appendCore;
 
 // ─── 設定 ──────────────────────────────────────────
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
@@ -678,36 +680,9 @@ async function fetchAdCode(page: Page, entry: any): Promise<string | null> {
 }
 
 /** parsed fields → AffiliateAd draft (id 採番は register 段で衝突チェックするので仮 id)。 */
-function buildAdDraft(entry: any, fields: any): any {
-  // 名前を ascii スラグ化。日本語のみ等でスラグが空になる場合は A8 programId を使う (一意・追跡可能)。
-  const nameSlug = String(entry.name || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 40);
-  const slug = nameSlug || String(entry.programId || "prog").replace(/[^a-z0-9]/gi, "");
-  return {
-    id: `af_${slug}_a8_001`,
-    title: entry.name,
-    htmlContent: fields.htmlContent,
-    areaCode: null,
-    vertical: entry.vertical ?? null,
-    categoryKey: null,
-    locationCode: "blog-bottom",
-    isActive: true,
-    priority: 50,
-    startDate: null,
-    endDate: null,
-    targetCategories: null,
-    adType: fields.adType,
-    imageUrl: fields.imageUrl,
-    trackingPixelUrl: fields.trackingPixelUrl,
-    width: fields.width,
-    height: fields.height,
-    createdAt: null,
-    updatedAt: null,
-  };
-}
+// buildAdDraft は判定 (locationCode の振り分け・slug 生成) を含む純関数なので
+// コア (a8-append-core.mjs) に置き、ここからは呼ぶだけにする
+// (本ファイル冒頭の方針「判定はコアに委譲・ブラウザ層は操作と生データ抽出のみ」に従う)。
 
 // ─── メイン ────────────────────────────────────────
 async function main() {

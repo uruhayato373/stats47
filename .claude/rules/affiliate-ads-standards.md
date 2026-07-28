@@ -109,7 +109,9 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 
 ## 6. GA4 計測 (custom dimension 登録) ★ユーザー操作が必要
 
-イベントは実装済 (`ad_impression` / `affiliate_click`)。だが **GA4 管理画面で custom dimension を登録しないと
+イベントは実装済 (`affiliate_impression` / `affiliate_click`。impression は 2026-07-28 に `ad_impression`
+から改名 — AdSense 自動生成イベントとの衝突解消。正典 `analytics-event-standards.md`)。
+だが **GA4 管理画面で custom dimension を登録しないと
 枠別・意図軸別の内訳が取れず eventName 総数に落ちる** (P1-AFF-01 ゲート)。以下を **ユーザーが GA4 で登録**する:
 
 **登録手順**: GA4 管理画面 → 管理 → データの表示 → **カスタム定義** → カスタムディメンションを作成。
@@ -253,28 +255,29 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 ### 計測 (ad_id 単位 CTR) と改善ループ
 
-- **ad_id 計測**: `ad_impression`/`affiliate_click` に `ad_id` (AffiliateAd.id) を送る (events.ts /
+- **ad_id 計測**: `affiliate_impression`/`affiliate_click` に `ad_id` (AffiliateAd.id) を送る (events.ts /
   AdImpressionTracker / TrackedAffiliateLink / 各 BannerAd・NativeAffiliateRow 呼び出し元)。GA4 で custom
   dimension `ad_id` (event scope) 登録が要る (**人間ステップ**)。登録前でも送信は開始してよい。
 - **(not set) の扱い**: 過去データの大半が (not set) なのは dimension 登録前データの混入。fetch 期間を登録日
   以降に絞る (`fetch-affiliate-ga4.cjs`)。
-- **🚨 現状 affiliate の CTR は計測不能 — イベント名衝突 (2026-07-27 実測)**: 自前の impression 計測が使う
-  `ad_impression` は **GA4 の AdSense 連携が自動生成するイベント名と同じ**。直近 7 日の `ad_impression`
-  3,346 件は `adSourceName` が全件 "Google AdSense account (pub-7995274743017484)" で、**総数と完全一致 =
-  自前イベントは 1 件も記録されていない**。よって **CTR の分母が存在しない**。
-  - 過去に報告された「CTR 0.079%」等は **affiliate の click を AdSense の impression で割った無意味な値**。
+- **✅ CTR 計測の修理 (2026-07-28 実施・要実測確認)**: 2026-07-27 の実測で、自前 impression が使っていた
+  `ad_impression` が **GA4 の AdSense 連携が自動生成するイベント名と同じ**で、直近 7 日の 3,346 件は
+  `adSourceName` が全件 AdSense (総数と完全一致 = **自前イベントは 1 件も記録されていない**)、
+  つまり **CTR の分母が存在しない**状態だった。2 つの原因を両方直した:
+  - **原因① (0 件の主因) → 修正済**: `AdImpressionTracker` が `firedRef.current = true` を
+    `if (window.gtag)` ガードより**前**に実行しており、gtag (afterInteractive 遅延読み込み) 未準備の
+    タイミングでは送信されないまま「発火済み」になり永久に失われていた。送信成功時のみ `firedRef` を
+    立て、未準備なら 500ms × 最大 10 回リトライする形に変更。
+  - **原因② → 改名済**: `ad_impression` → **`affiliate_impression`**。AdSense が同名イベントを
+    大量生成するため自前分と区別できないのが理由 (予約名だから破棄される、とは断定していない —
+    同じ予約名の `file_download` は自前パラメータごと正常に届いている)。
+  - **過去に報告された「CTR 0.079%」等は affiliate の click を AdSense の impression で割った無意味な値**。
     採用してはならない (`evidence-based-judgment.md`)。
-  - 下の「週次改善」(imp>500 で降格) は分母が偽なので**発火させてはならない**。当面 priority は確定EPC 主導。
-  - **原因① (0 件の主因)**: `AdImpressionTracker` が `firedRef.current = true` を `if (window.gtag)` ガードより
-    **前**に実行しており、gtag (afterInteractive 遅延読み込み) が未準備のタイミングだと送信されないまま
-    「発火済み」になり永久に失われる。初期表示から画面内にあるサイドバー広告が該当する。
-  - **原因②**: `ad_impression` は GA4 予約名 ([公式](https://support.google.com/analytics/answer/13316687)・
-    アクセス 2026-07-27)。ただし同じ予約名の `file_download` は自前パラメータごと正常に届いているため
-    「予約名だから破棄」とは断定できない。改名が必要な理由は**AdSense が同名イベントを大量生成し自前分と
-    区別できないこと**。
-  - **対処 (未実施)**: ①ガード順の修正 (gtag 未準備ならリトライ。単純撤去は例外になるので不可)
-    ②`affiliate_impression` への改名 + `fetch-affiliate-ga4.cjs` の `EVENTS` 追従。
-    正典: `analytics-event-standards.md`。
+  - **下の「週次改善」(imp>500 で降格) は、改名後の実測が取れるまで発火させない**。
+    当面 priority は確定EPC 主導。
+  - **確認待ち**: デプロイ 24-48h 後に `fetch-affiliate-ga4.cjs 7` で `affiliate_impression` が
+    0 件でなく `affiliate_vertical` 別に割れること。dimension はパラメータ名に紐づくため
+    再登録不要と考えているが**未検証**。
   - dimension 側は `affiliate_vertical` 等 6 個が **2026-07-06 登録済**。**未登録は `ad_id` のみ**。
 - **週次改善**: imp>500 かつ CTR が vertical 中央値の 1/2 未満 → priority 1 バンド降格 (次点繰り上げ)。
   比較は experiment registry (weight 50/50) で。**週次 1 vertical 1 変更まで** (配信急変防止)。effect 判定は
