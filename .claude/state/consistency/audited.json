@@ -1,5 +1,29 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-07-28T08:32:16",
-  "files": []
+  "hash": "89601cde72d36ad3add189d6bdda0e9a4b69bcdf4e297c8db541c42e781215c4",
+  "audited_at": "2026-07-28T10:38:46",
+  "files": [
+    ".claude/agents/adsense-analyst.md",
+    ".claude/rules/analytics-event-standards.md",
+    ".claude/scripts/google-admin/__tests__/google-admin.test.mjs",
+    ".claude/scripts/google-admin/apply-allowlisted-settings.mjs",
+    ".claude/scripts/google-admin/audit-ga4.mjs",
+    ".claude/scripts/google-admin/audit-gsc.mjs",
+    ".claude/scripts/google-admin/browser-context.mjs",
+    ".claude/scripts/google-admin/cli.mjs",
+    ".claude/scripts/google-admin/redact.mjs",
+    ".claude/scripts/metrics/__tests__/adsense-contract.test.mjs",
+    ".claude/scripts/metrics/__tests__/adsense-diagnostics.test.mjs",
+    ".claude/scripts/metrics/__tests__/periods.test.mjs",
+    ".claude/scripts/metrics/adsense-diagnostics-run.mjs",
+    ".claude/scripts/metrics/fetch-adsense-snapshot.mjs",
+    ".claude/scripts/metrics/lib/adsense-diagnostics.mjs",
+    ".claude/scripts/metrics/lib/adsense-report-contract.mjs",
+    ".claude/scripts/metrics/lib/page-type.mjs",
+    ".claude/scripts/metrics/lib/periods.mjs",
+    ".claude/scripts/metrics/measure-adsense-impact.mjs",
+    ".claude/scripts/metrics/update-history-csv.mjs",
+    ".claude/skills/analytics/fetch-adsense-data/SKILL.md",
+    ".claude/skills/management/weekly-plan/SKILL.md",
+    ".claude/skills/management/weekly-review/reference/runbook.md"
+  ]
 }

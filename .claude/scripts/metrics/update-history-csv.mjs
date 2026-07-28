@@ -35,6 +35,17 @@ import {
   GSC_FINALIZED_HISTORY_FIELDS,
   GA4_FINALIZED_HISTORY_FIELDS,
 } from "./lib/weekly-summary.mjs";
+import {
+  ADSENSE_HISTORY_FIELDS_V2,
+  ADSENSE_DEVICE_FIELDS_V2,
+  ADSENSE_BREAKDOWN_SPECS,
+  ADSENSE_BREAKDOWN_FIELDS,
+  migrateAdsenseHistoryRows,
+  migrateAdsenseDeviceRows,
+  adsenseHistoryRowFromOverview,
+  adsenseDeviceRowFromSnapshot,
+  adsenseBreakdownRow,
+} from "./lib/adsense-report-contract.mjs";
 
 const SNAPSHOT_DIRS = {
   gsc: ".claude/skills/analytics/gsc-improvement/reference/snapshots",
@@ -277,68 +288,56 @@ function updateGa4(week) {
   console.log(`[ga4] updated history.csv (${legacyRows.length} weeks) / history-finalized7d.csv (${finRow ? "+1" : "±0"}) / LATEST.md`);
 }
 
-// ── AdSense (従来ロジック・期間契約の対象外) ──
-
-const ADSENSE_FIELDS = ["week", "earnings", "page_views", "rpm", "impressions", "clicks", "ctr", "viewability"];
-const ADSENSE_DEVICE_FIELDS = [
-  "week", "platform", "earnings", "page_views", "rpm",
-  "impressions", "clicks", "ctr", "viewability", "cpc", "imp_per_pv",
-];
+// ── AdSense (doc41 §2.1/§4.2: 公式 CPC 契約 + breakdown 履歴) ──
 
 function aggregateAdsense(snapDir, week) {
   const overview = readCsv(join(snapDir, "overview.csv"));
   if (!overview || overview.rows.length === 0) return null;
-  const r = overview.rows[0];
-  const latest = {
-    week,
-    earnings: num(r.ESTIMATED_EARNINGS).toFixed(2),
-    page_views: num(r.PAGE_VIEWS),
-    rpm: num(r.PAGE_VIEWS_RPM).toFixed(3),
-    impressions: num(r.IMPRESSIONS),
-    clicks: num(r.CLICKS),
-    ctr: num(r.IMPRESSIONS_CTR).toFixed(4),
-    viewability: num(r.ACTIVE_VIEW_VIEWABILITY).toFixed(4),
-  };
+  const latest = adsenseHistoryRowFromOverview(week, overview.rows[0]);
   const devices = readCsv(join(snapDir, "devices.csv"));
   if (devices && devices.rows.length > 0) {
-    latest._devices = devices.rows.map((d) => {
-      const earnings = num(d.ESTIMATED_EARNINGS);
-      const pv = num(d.PAGE_VIEWS);
-      const imp = num(d.IMPRESSIONS);
-      const clicks = num(d.CLICKS);
-      return {
-        week,
-        platform: d.PLATFORM_TYPE_NAME || "unknown",
-        earnings: earnings.toFixed(2),
-        page_views: pv,
-        rpm: num(d.PAGE_VIEWS_RPM).toFixed(2),
-        impressions: imp,
-        clicks,
-        ctr: num(d.IMPRESSIONS_CTR).toFixed(4),
-        viewability: num(d.ACTIVE_VIEW_VIEWABILITY).toFixed(4),
-        // CPC = 収益/click。viewable-CPM のレバーで、モバイルの click 無価値化を検知する
-        cpc: clicks > 0 ? (earnings / clicks).toFixed(2) : "0.00",
-        // imp_per_pv = 広告表示率。1 に近いほど枠が埋まっている
-        imp_per_pv: pv > 0 ? (imp / pv).toFixed(3) : "0.000",
-      };
-    });
+    latest._devices = devices.rows.map((d) => adsenseDeviceRowFromSnapshot(week, d));
   }
   return latest;
 }
 
+/** history-devices.csv を v2 移行しつつ week 単位で dedupe して書き、全履歴を返す。 */
 function writeAdsenseDeviceHistory(stateDir, week, deviceRows) {
   const path = join(stateDir, "history-devices.csv");
   let rows = [];
   if (existsSync(path)) {
     rows = readCsv(path)?.rows ?? [];
   }
-  rows = rows.filter((r) => r.week !== week);
+  const { rows: migrated, migrated: didMigrate } = migrateAdsenseDeviceRows(rows);
+  if (didMigrate) {
+    console.log(`[adsense] history-devices.csv を schema v2 へ移行 (cpc→earnings_per_click_legacy・${migrated.length} 行・値は不変)`);
+  }
+  rows = migrated.filter((r) => r.week !== week);
   rows.push(...deviceRows);
   rows.sort((a, b) =>
     a.week !== b.week ? (a.week < b.week ? -1 : 1) : a.platform < b.platform ? -1 : 1
   );
-  writeFileSync(path, toCsv(rows, ADSENSE_DEVICE_FIELDS), "utf-8");
+  writeFileSync(path, toCsv(rows, ADSENSE_DEVICE_FIELDS_V2), "utf-8");
   return rows;
+}
+
+/** format/placement/bid-type × platform の breakdown 履歴を upsert する (snapshot にある job のみ)。 */
+function writeAdsenseBreakdownHistories(stateDir, snapDir, week) {
+  const written = [];
+  for (const spec of ADSENSE_BREAKDOWN_SPECS) {
+    const snap = readCsv(join(snapDir, spec.snapshotFile));
+    if (!snap || snap.rows.length === 0) continue;
+    const path = join(stateDir, spec.historyFile);
+    let rows = existsSync(path) ? (readCsv(path)?.rows ?? []) : [];
+    rows = rows.filter((r) => r.week !== week);
+    rows.push(...snap.rows.map((r) => adsenseBreakdownRow(week, spec.keyDim, r)));
+    rows.sort((a, b) =>
+      a.week !== b.week ? (a.week < b.week ? -1 : 1) : `${a.code}@${a.platform}` < `${b.code}@${b.platform}` ? -1 : 1,
+    );
+    writeFileSync(path, toCsv(rows, ADSENSE_BREAKDOWN_FIELDS), "utf-8");
+    written.push(`${spec.historyFile} (${rows.length} rows)`);
+  }
+  return written;
 }
 
 function markdownAdsense(history, latest, deviceHistory) {
@@ -359,19 +358,38 @@ function markdownAdsense(history, latest, deviceHistory) {
     const sign = diff > 0 ? "+" : "";
     return ` (${sign}${p}%)`;
   };
+  // 公式値が空 ("") の行は "-" 表示 (0 と混同しない・doc41 §2.1)
+  const officialOrDash = (v, unit = "") => (v === "" || v === undefined || v === null ? "-" : `${unit}${v}`);
   const lines = [];
   lines.push(`# AdSense Latest — ${latest.week}`);
   lines.push("");
-  lines.push("| Metric | 今週 | 前週比 |");
+  lines.push("## 確定7日 KPI (finalized7d・前週比は直前の重複しない7日)");
+  lines.push("");
+  lines.push("| Metric | 確定7日 | 前週比 |");
   lines.push("|---|---|---|");
   lines.push(`| Earnings | ${latest.earnings}${arrow(latest.earnings, prev?.earnings, false)} | ${pct(latest.earnings, prev?.earnings)} |`);
   lines.push(`| Page Views | ${latest.page_views}${arrow(latest.page_views, prev?.page_views, false)} | ${pct(latest.page_views, prev?.page_views)} |`);
-  lines.push(`| RPM | ${latest.rpm}${arrow(latest.rpm, prev?.rpm, false)} | |`);
+  lines.push(`| Page RPM | ${latest.rpm}${arrow(latest.rpm, prev?.rpm, false)} | |`);
   lines.push(`| Impressions | ${latest.impressions}${arrow(latest.impressions, prev?.impressions, false)} | ${pct(latest.impressions, prev?.impressions)} |`);
+  lines.push(`| 公式 Imp RPM | ${officialOrDash(latest.impressions_rpm, "¥")} | |`);
   lines.push(`| Clicks | ${latest.clicks}${arrow(latest.clicks, prev?.clicks, false)} | ${pct(latest.clicks, prev?.clicks)} |`);
   lines.push(`| CTR | ${(num(latest.ctr) * 100).toFixed(2)}%${arrow(latest.ctr, prev?.ctr, false)} | |`);
+  lines.push(`| 公式 CPC | ${officialOrDash(latest.cost_per_click, "¥")} | |`);
   lines.push(`| Viewability | ${(num(latest.viewability) * 100).toFixed(1)}%${arrow(latest.viewability, prev?.viewability, false)} | |`);
+  lines.push(`| Ad Requests | ${officialOrDash(latest.ad_requests)} | |`);
+  lines.push(`| Coverage | ${latest.ad_requests_coverage === "" || latest.ad_requests_coverage === undefined ? "-" : (num(latest.ad_requests_coverage) * 100).toFixed(1) + "%"} | |`);
   lines.push("");
+  // 収益分解 (doc41 §7.2): Page RPM 単独で判断しない
+  const pv = num(latest.page_views);
+  const imp = num(latest.impressions);
+  if (pv > 0) {
+    lines.push("## 収益分解 (§7.2)");
+    lines.push("");
+    lines.push(`- Impression density (imp/PV): **${(imp / pv).toFixed(3)}**${prev ? ` (前週 ${(num(prev.impressions) / Math.max(num(prev.page_views), 1)).toFixed(3)})` : ""}`);
+    lines.push(`- Viewable imp / PV: **${((imp * num(latest.viewability)) / pv).toFixed(3)}**`);
+    lines.push(`- 公式 Imp RPM: ${officialOrDash(latest.impressions_rpm, "¥")} / 公式 CPC: ${officialOrDash(latest.cost_per_click, "¥")}`);
+    lines.push("");
+  }
 
   if (deviceHistory && deviceHistory.length > 0) {
     const weeks = [...new Set(deviceHistory.map((r) => r.week))].sort();
@@ -386,10 +404,10 @@ function markdownAdsense(history, latest, deviceHistory) {
           : /tablet/i.test(p) ? "Tablet"
             : p;
     const alerts = [];
-    lines.push("## デバイス別（今週 / 前週比）");
+    lines.push("## デバイス別（確定7日 / 前週比）");
     lines.push("");
-    lines.push("| Platform | RPM | Viewability | CPC | imp/PV | Earnings |");
-    lines.push("|---|---|---|---|---|---|");
+    lines.push("| Platform | RPM | Viewability | 公式CPC | 収益/click(legacy) | imp/PV | Earnings |");
+    lines.push("|---|---|---|---|---|---|---|");
     for (const d of cur) {
       const p = prevByPlatform.get(d.platform);
       const viewCur = num(d.viewability) * 100;
@@ -402,7 +420,7 @@ function markdownAdsense(history, latest, deviceHistory) {
       lines.push(
         `| ${shortName(d.platform)} | ¥${d.rpm}${arrow(d.rpm, p?.rpm, false)} | ` +
           `${viewCur.toFixed(1)}%${arrow(d.viewability, p?.viewability, false)}${viewPpStr} | ` +
-          `¥${d.cpc} | ${d.imp_per_pv} | ¥${d.earnings}${pct(d.earnings, p?.earnings)} |`
+          `${officialOrDash(d.cost_per_click, "¥")} | ¥${d.earnings_per_click_legacy} | ${d.imp_per_pv} | ¥${d.earnings}${pct(d.earnings, p?.earnings)} |`
       );
       // 8pp 以上の viewability 低下は「要確認の退行」として明示する。imp 200 未満はノイズ扱い。
       if (viewPp != null && viewPp <= -8 && num(d.impressions) >= 200) {
@@ -418,7 +436,11 @@ function markdownAdsense(history, latest, deviceHistory) {
     }
   }
 
-  lines.push("履歴: [`history.csv`](./history.csv) / デバイス別: [`history-devices.csv`](./history-devices.csv)");
+  lines.push("履歴: [`history.csv`](./history.csv) / デバイス別: [`history-devices.csv`](./history-devices.csv) / 内訳: [`history-formats.csv`](./history-formats.csv)・[`history-placements.csv`](./history-placements.csv)・[`history-bid-types.csv`](./history-bid-types.csv)");
+  lines.push("");
+  lines.push("> schema v2 (2026-07-28・doc41 §2.1): 公式 `COST_PER_CLICK`/`IMPRESSIONS_RPM`/`AD_REQUESTS`/`AD_REQUESTS_COVERAGE` を追加。");
+  lines.push("> 旧 `cpc` 列 (earnings/clicks) は**公式 CPC ではない**ため `earnings_per_click_legacy` へ改名した (値は不変)。");
+  lines.push("> 公式値が無い過去週は `-` (null)。0 で埋めない。ESTIMATED_EARNINGS は月次確定まで変動しうる推定値。");
   lines.push("");
   return lines.join("\n");
 }
@@ -436,16 +458,28 @@ function updateAdsense(week) {
   }
   const stateDir = join(PROJECT_ROOT, STATE_DIRS.adsense);
   mkdirSync(stateDir, { recursive: true });
+
+  // account history v2 移行 (公式列追加・過去行は "" = null。値は不変)
+  const histPath = join(stateDir, "history.csv");
+  const existing = existsSync(histPath) ? (readCsv(histPath)?.rows ?? []) : [];
+  const { rows: migrated, migrated: didMigrate } = migrateAdsenseHistoryRows(existing);
+  if (didMigrate) {
+    writeFileSync(histPath, toCsv(migrated, ADSENSE_HISTORY_FIELDS_V2), "utf-8");
+    console.log(`[adsense] history.csv を schema v2 (公式CPC/impRPM列追加) へ移行 (${migrated.length} 行・値は不変)`);
+  }
+
   const { _devices, ...row } = latest;
-  const history = upsertHistory(join(stateDir, "history.csv"), ADSENSE_FIELDS, row);
+  const history = upsertHistory(histPath, ADSENSE_HISTORY_FIELDS_V2, row);
   let deviceHistory = null;
   if (_devices) {
     deviceHistory = writeAdsenseDeviceHistory(stateDir, week, _devices);
   }
+  const breakdowns = writeAdsenseBreakdownHistories(stateDir, snapDir, week);
   writeFileSync(join(stateDir, "LATEST.md"), markdownAdsense(history, row, deviceHistory), "utf-8");
   console.log(
     `[adsense] updated history.csv (${history.length} weeks) and LATEST.md` +
-      (deviceHistory ? ` + history-devices.csv (${deviceHistory.length} rows)` : "")
+      (deviceHistory ? ` + history-devices.csv (${deviceHistory.length} rows)` : "") +
+      (breakdowns.length ? ` + ${breakdowns.join(" / ")}` : "")
   );
 }
 

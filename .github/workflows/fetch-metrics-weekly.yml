@@ -156,6 +156,12 @@ jobs:
         continue-on-error: true
         run: node .claude/scripts/blog/measure-gsc-impact.mjs --min-weeks 2
 
+      # AdSense 収益密度の決定的候補生成 (doc41 §4.3/§7・最大3件・提示まで)。
+      # 広告配置・Auto ads・deploy の自動変更はしない。Google Admin Playwright はここに載せない (§5.1)。
+      - name: 🩺 AdSense diagnostics (candidates ≤3)
+        continue-on-error: true
+        run: npm run metrics:adsense-diagnostics -- ${{ steps.week.outputs.week }}
+
       # AdSense 施策の before/after を surface する（判定はせず improvement-triage に委ねる）。
       # deploy 済み施策ごとに history.csv + history-devices.csv で差分を出し、交絡/汚染を明示する。
       # 結果は .claude/state/metrics/adsense/impact-LATEST.md に書かれ、下の git add で commit される。

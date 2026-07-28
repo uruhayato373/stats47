@@ -139,6 +139,12 @@ primary_agent: strategy-advisor
   → CTR候補はpage×query・現行title/content・past effectを確認し、一括title書換えを計画しない。
   → 効果判定日は`npm run search-growth:measure -- --candidate <ID>`（14/28/56日）。
 
+- AdSense収益密度candidate（doc41 §7・`.claude/state/metrics/adsense/candidates-latest.json`）
+  → 週次レビューで審査した最大3件のうち、**人間承認済みを最大1件/週だけ**採用する。AdSense active WIP≤2。
+  → 1実験1レバー（lazy-load・slot・Auto ads・formatを同時に変えない）。rollback・guardrail
+    （収益/GA4 sessions/viewability/LCP/CLS）・14/28日判定日を計画に明記する。
+  → 計測が不完全な間（measurement-gap候補が出ている間）は広告枠を増やさない。
+
 - ブログ品質是正キュー（**既存記事を計画的に順次品質向上**・真実源: `.claude/state/blog/remediation-queue.json`）
   ```bash
   # 最新化 (audit fresh + GSC マージ、状態保持の upsert) → 次の 3 件を取り出す

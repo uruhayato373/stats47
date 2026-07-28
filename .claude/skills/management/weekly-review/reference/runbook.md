@@ -168,9 +168,17 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    `.env.local` に AdSense OAuth クレデンシャル（CLIENT_ID / SECRET / REFRESH_TOKEN / ACCOUNT_ID）が揃っている場合のみ実行:
    `/fetch-adsense-data snapshot <当週 YYYY-Www>` を実行する。
    保存先: `.claude/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/`
-   取得ファイル: overview.csv / pages.csv / units.csv / devices.csv / daily.csv
+   取得ファイル: overview / daily / devices / units / formats-platforms / placements-platforms /
+   bid-types-platforms / traffic-sources / countries / pages.csv + `manifest.json`（期間 metadata・status）
    取得完了後、`/adsense-improvement observe` で閾値と進行中施策を判定し、結果を`docs/todo/01_改善バックログ.md`へ反映する。
    **クレデンシャル未設定時はこのステップをスキップし、レビュー本文に「AdSense OAuth 未設定」と 1 行記載する**。
+
+   **AdSense 週次候補（doc41 §7・CI が自動生成）**: `.claude/state/metrics/adsense/candidates-latest.json`
+   （`npm run metrics:adsense-diagnostics -- <week>` で再生成可）をレビューへ載せる。
+   - 候補は最大3件・**AdSense 実験の採用は最大1件/週・active WIP≤2**。1実験1レバーのみ。
+   - CPC は**公式 `cost_per_click`** を使う。`earnings_per_click_legacy`（旧 cpc 列）は公式 CPC ではない。
+   - unit/format/placement の比較は `IMPRESSIONS_RPM`（unit の Page RPM は分母0で無意味・doc41 §2.2）。
+   - `privacy-threshold`（pages 0行）を欠損・0 と混同しない。rolling 28日差を WoW と呼ばない。
 
 4.6. R2 ストレージ定点観測 (Cloudflare cost)
    `.claude/state/metrics/cloudflare/LATEST.md` の `r2_storage_gb` を読み、前週比を確認する。
