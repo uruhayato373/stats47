@@ -17,6 +17,7 @@ import { ArticleCard, RailCard, RailLinkItem, RailLinkList, SurfaceLinkCard } fr
 
 import {
     FurusatoNozeiCard,
+    RakutenItemsCard,
     SidebarPromoBanner,
 } from "@/features/ads";
 import { TAG_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
@@ -200,6 +201,10 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             {/* 記事の対象県のふるさと納税 (タイトルから県を検出できた記事のみ) */}
             {furusatoPrefCode && <FurusatoNozeiCard areaCode={furusatoPrefCode} />}
+
+            {/* 記事の主題が品目のとき楽天市場の商品を出す (公開 430 記事中 131 件が該当)。
+                品目を検出できない記事では何も描画しない。 */}
+            <RakutenItemsCard sourceText={article.title} position="blog-sidebar" />
 
             {/* テキストリンク広告 (strategy career / 就職エージェントneo) */}
             <BlogSidebarTextAds tagKeys={tagKeys} />

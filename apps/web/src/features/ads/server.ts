@@ -3,6 +3,7 @@ import "server-only";
 export {
   resolveAffiliateBanners,
   resolveAffiliateBannersByCategory,
+  resolveAffiliateBannersByCategoryKey,
   resolveAffiliateBannersByVertical,
   resolveAffiliateTextAdsByTagKeys,
 } from "./services/resolve-affiliate-ad";

@@ -6,7 +6,8 @@ import { type Metadata } from "next";
 
 import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 
-import { FooterAdSlot } from "@/features/ads";
+import { FooterAdSlot, NativeAffiliateRow } from "@/features/ads";
+import { resolveAffiliateBannersByCategoryKey } from "@/features/ads/server";
 import { listCategories } from "@/features/category/server";
 import {
     CompareGridLayout,
@@ -133,6 +134,10 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
         : [];
 
     const currentCategory = categories.find((c) => c.categoryKey === categoryKey);
+    const compareNativeBanners = await resolveAffiliateBannersByCategoryKey(
+        categoryKey,
+        4,
+    ).catch(() => []);
 
     return (
         <PageShell>
@@ -175,6 +180,18 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
                     <CompareGridLayout regions={regions} components={pageComponents} />
                 )}
             </RegionComparisonClient>
+            {/* ★ 2026-07-28: compare はアフィリエイト枠がゼロだった。categoryKey が
+                確定しているページなので、その軸の native 行を 1 つだけ置く。 */}
+            {compareNativeBanners.length > 0 && (
+                <div className="mt-8">
+                    <NativeAffiliateRow
+                        title={`${currentCategory?.categoryName ?? "この分野"}に関連するサービス`}
+                        banners={compareNativeBanners}
+                        position="compare-native"
+                        trackingCategory={`compare-${categoryKey}`}
+                    />
+                </div>
+            )}
             {/* コンテンツ末尾の全幅フッター広告 */}
             <FooterAdSlot />
         </PageShell>
