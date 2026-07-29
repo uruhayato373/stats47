@@ -1,15 +1,15 @@
 {
   "total": 1045,
   "byStatus": {
-    "both": 914,
+    "both": 916,
     "jsonOnly": 0,
-    "neither": 131
+    "neither": 129
   },
   "byMethod": {
     "manual": 44,
-    "done": 914,
+    "done": 916,
     "ssot-restore-new": 58,
-    "ssot-restore": 29
+    "ssot-restore": 27
   },
   "entries": [
     {
@@ -1753,10 +1753,10 @@
       "slug": "energy-consumption-structure-shift",
       "base": "solar-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "energy-consumption-structure-shift",
@@ -5047,10 +5047,10 @@
       "slug": "manufacturing-aichi-dominance",
       "base": "manufacturing-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "manufacturing-aichi-dominance",

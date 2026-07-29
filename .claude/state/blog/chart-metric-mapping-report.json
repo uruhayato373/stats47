@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-29T21:33:09.697Z",
+  "generatedAt": "2026-07-29T21:43:33.779Z",
   "minRate": 0.95,
   "results": [
     {
@@ -8,9 +8,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "成人1人あたりアルコール飲料消費量　上位10・下位10",
+      "svgUnit": "L",
+      "candidates": 200,
+      "bestRate": 15,
+      "bestKey": "tofu-consumption-quantity"
     },
     {
       "slug": "alcohol-prefecture-map",
@@ -44,7 +48,7 @@
       "hasSource": false,
       "status": "no-values",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "detail": "SVG から取れた値 9 件"
     },
     {
       "slug": "childcare-friendly-prefecture-ranking",
@@ -76,9 +80,17 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "太陽光発電設備のある住宅 上位10・下位10",
+      "svgUnit": "万戸",
+      "key": "solar-power-housing",
+      "title": "太陽光を利用した発電機器のある住宅数",
+      "unit": "戸",
+      "year": "2023",
+      "rate": 1,
+      "hit": 20,
+      "tot": 20
     },
     {
       "slug": "food-consumption-prefecture-battle",
@@ -86,9 +98,13 @@
       "chartType": "tilemap",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "",
+      "svgUnit": "",
+      "candidates": 200,
+      "bestRate": 14.8,
+      "bestKey": "eggplant-consumption-quantity"
     },
     {
       "slug": "food-consumption-prefecture-battle",
@@ -96,41 +112,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
-      "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
-    },
-    {
-      "slug": "food-spending-pattern",
-      "base": "rice-map",
-      "chartType": "tilemap",
-      "hasJson": false,
-      "hasSource": false,
       "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "svgTitle": "米の消費支出額　都道府県マップ",
-      "svgUnit": "円",
+      "svgTitle": "",
+      "svgUnit": "",
       "candidates": 200,
-      "bestRate": 12.8,
-      "bestKey": "bread-consumption-expenditure"
-    },
-    {
-      "slug": "food-spending-pattern",
-      "base": "bread-map",
-      "chartType": "tilemap",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "found",
-      "restoreMethod": "ssot-restore",
-      "svgTitle": "パンの消費支出額　都道府県マップ",
-      "svgUnit": "円",
-      "key": "bread-consumption-expenditure",
-      "title": "パン消費支出額",
-      "unit": "円",
-      "year": "2024",
-      "rate": 1,
-      "hit": 47,
-      "tot": 47
+      "bestRate": 20,
+      "bestKey": "mandarin-consumption-quantity"
     },
     {
       "slug": "inbound-overnight-stay-concentration",
@@ -138,9 +126,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "外国人延べ宿泊者数　上位10・下位10",
+      "svgUnit": "万人泊",
+      "candidates": 200,
+      "bestRate": 5,
+      "bestKey": "bacon-consumption-quantity"
     },
     {
       "slug": "international-cooperation-volunteer-map",
@@ -153,8 +145,8 @@
       "svgTitle": "国際協力ボランティア行動者率",
       "svgUnit": "%",
       "candidates": 200,
-      "bestRate": 14.9,
-      "bestKey": "employment-insurance-receipt-rate"
+      "bestRate": 17,
+      "bestKey": "elderly-general-worker-old-population-ratio-pre2019"
     },
     {
       "slug": "library-museum-cultural-capital",
@@ -162,9 +154,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "博物館数（類似施設含む）上位10・下位10",
+      "svgUnit": "館",
+      "candidates": 200,
+      "bestRate": 10,
+      "bestKey": "black-tea-consumption-quantity"
     },
     {
       "slug": "livable-prefecture-composite-ranking",
@@ -182,9 +178,17 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "都道府県別 製造品出荷額等",
+      "svgUnit": "兆円",
+      "key": "manufacturing-shipment-amount",
+      "title": "製造品出荷額等",
+      "unit": "百万円",
+      "year": "2023",
+      "rate": 1,
+      "hit": 20,
+      "tot": 20
     },
     {
       "slug": "manufacturing-aichi-dominance",
@@ -194,7 +198,7 @@
       "hasSource": false,
       "status": "no-values",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "detail": "SVG から取れた値 2 件"
     },
     {
       "slug": "manufacturing-productivity",
@@ -202,9 +206,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "従業者1人当たり製造品出荷額等 都道府県ランキング",
+      "svgUnit": "万円",
+      "candidates": 200,
+      "bestRate": 45,
+      "bestKey": "manufacturing-shipment-amount-per-employee"
     },
     {
       "slug": "manufacturing-productivity",
@@ -212,9 +220,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "1事業所当たり製造品出荷額等 都道府県ランキング",
+      "svgUnit": "百万円",
+      "candidates": 200,
+      "bestRate": 20,
+      "bestKey": "cultural-facility-admission-consumption-expenditure"
     },
     {
       "slug": "per-capita-income-gap",
@@ -222,9 +234,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "1人あたり県民所得ランキング",
+      "svgUnit": "千円",
+      "candidates": 200,
+      "bestRate": 55,
+      "bestKey": "per-capita-kenmin-shotoku-h23"
     },
     {
       "slug": "per-capita-income-gap",
@@ -246,9 +262,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "県民所得対前年増加率ランキング",
+      "svgUnit": "",
+      "candidates": 200,
+      "bestRate": 22.2,
+      "bestKey": "long-absence-primary-school-illness-per-1000"
     },
     {
       "slug": "population-migration-tokyo-concentration",
@@ -256,9 +276,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "社会増減率ランキング（上位10・下位10）",
+      "svgUnit": "‰",
+      "candidates": 200,
+      "bestRate": 57.9,
+      "bestKey": "social-increase-rate"
     },
     {
       "slug": "precipitation-snow-regional-gap",
@@ -268,7 +292,7 @@
       "hasSource": false,
       "status": "no-values",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "detail": "SVG から取れた値 5 件"
     },
     {
       "slug": "public-phone-count-gap",
@@ -286,9 +310,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "1人当たり県民所得 上位10・下位10",
+      "svgUnit": "千円",
+      "candidates": 200,
+      "bestRate": 55,
+      "bestKey": "per-capita-kenmin-shotoku-h23"
     },
     {
       "slug": "purchasing-power-adjusted",
@@ -296,9 +324,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "実質購買力ランキング（物価補正後）",
+      "svgUnit": "万円（±0）",
+      "candidates": 200,
+      "bestRate": 15,
+      "bestKey": "consumption-expenditure-total"
     },
     {
       "slug": "purchasing-power-adjusted",
@@ -313,24 +345,6 @@
       "candidates": 200,
       "bestRate": 12.8,
       "bestKey": "consumption-expenditure-total"
-    },
-    {
-      "slug": "savings-balance-gap",
-      "base": "savings-map",
-      "chartType": "tilemap",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "found",
-      "restoreMethod": "ssot-restore",
-      "svgTitle": "貯蓄現在高 都道府県マップ",
-      "svgUnit": "万円",
-      "key": "financial-assets-balance-multi-person-households",
-      "title": "貯蓄現在高",
-      "unit": "千円",
-      "year": "2019",
-      "rate": 1,
-      "hit": 47,
-      "tot": 47
     },
     {
       "slug": "software-engineer-salary-prefecture-gap",
@@ -348,9 +362,13 @@
       "chartType": "ranking",
       "hasJson": false,
       "hasSource": false,
-      "status": "no-values",
+      "status": "not-found",
       "restoreMethod": "ssot-restore",
-      "detail": "SVG から取れた値 0 件"
+      "svgTitle": "待機児童数　上位10・待機児童ゼロの県",
+      "svgUnit": "人",
+      "candidates": 200,
+      "bestRate": 50,
+      "bestKey": "paid-nursing-home-residents-per-1000-65plus"
     },
     {
       "slug": "waiting-children-progress",

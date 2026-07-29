@@ -1,14 +1,10 @@
 {
-  "food-spending-pattern/bread-map": {
-    "key": "bread-consumption-expenditure",
-    "year": "2024"
+  "energy-consumption-structure-shift/solar-ranking": {
+    "key": "solar-power-housing",
+    "year": "2023"
   },
-  "savings-balance-gap/savings-map": {
-    "key": "financial-assets-balance-multi-person-households",
-    "year": "2019"
-  },
-  "food-spending-pattern/rice-map": {
-    "key": "rice-consumption-expenditure",
-    "year": "2024"
+  "manufacturing-aichi-dominance/manufacturing-ranking": {
+    "key": "manufacturing-shipment-amount",
+    "year": "2023"
   }
 }
