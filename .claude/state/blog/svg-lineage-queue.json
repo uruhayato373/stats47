@@ -1,15 +1,15 @@
 {
   "total": 1045,
   "byStatus": {
-    "both": 911,
+    "both": 914,
     "jsonOnly": 0,
-    "neither": 134
+    "neither": 131
   },
   "byMethod": {
     "manual": 44,
-    "done": 911,
+    "done": 914,
     "ssot-restore-new": 58,
-    "ssot-restore": 32
+    "ssot-restore": 29
   },
   "entries": [
     {
@@ -2239,19 +2239,19 @@
       "slug": "food-spending-pattern",
       "base": "rice-map",
       "chartType": "tilemap",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "food-spending-pattern",
       "base": "bread-map",
       "chartType": "tilemap",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "food-spending-pattern",
@@ -7216,10 +7216,10 @@
       "slug": "savings-balance-gap",
       "base": "savings-map",
       "chartType": "tilemap",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "savings-balance-gap",
