@@ -10,7 +10,7 @@
     "unknown": "未確認 (調べていない。none と区別する)"
   },
   "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
-  "updatedAt": "2026-07-28T22:29:11.782Z",
+  "updatedAt": "2026-07-28T22:59:20.315Z",
   "verifiedAt": "2026-07-28",
   "programs": {
     "moshimo-7059": {
@@ -2509,12 +2509,17 @@
       "asps": {
         "afb": {
           "promotionId": "10717",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T20:26:27.285Z",
           "history": [
             {
               "at": "2026-07-28T20:26:27.285Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 23503
@@ -2730,12 +2735,17 @@
       "asps": {
         "afb": {
           "promotionId": "14272",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T20:37:24.604Z",
           "history": [
             {
               "at": "2026-07-28T20:37:24.604Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 12691
@@ -2815,12 +2825,17 @@
       "asps": {
         "afb": {
           "promotionId": "13959",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T20:41:34.196Z",
           "history": [
             {
               "at": "2026-07-28T20:41:34.196Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 12100
@@ -3002,12 +3017,17 @@
       "asps": {
         "afb": {
           "promotionId": "13095",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T20:50:42.734Z",
           "history": [
             {
               "at": "2026-07-28T20:50:42.734Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 10153
@@ -3036,12 +3056,17 @@
       "asps": {
         "afb": {
           "promotionId": "10585",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T20:52:21.952Z",
           "history": [
             {
               "at": "2026-07-28T20:52:21.952Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 10153
@@ -3053,12 +3078,17 @@
       "asps": {
         "afb": {
           "promotionId": "6349",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T20:53:11.562Z",
           "history": [
             {
               "at": "2026-07-28T20:53:11.562Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 10153
@@ -3189,12 +3219,17 @@
       "asps": {
         "afb": {
           "promotionId": "15423",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T20:59:47.835Z",
           "history": [
             {
               "at": "2026-07-28T20:59:47.835Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 8461
@@ -3206,12 +3241,17 @@
       "asps": {
         "afb": {
           "promotionId": "15422",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T21:00:37.045Z",
           "history": [
             {
               "at": "2026-07-28T21:00:37.045Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 8461
@@ -3597,12 +3637,17 @@
       "asps": {
         "afb": {
           "promotionId": "10634",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T21:19:50.256Z",
           "history": [
             {
               "at": "2026-07-28T21:19:50.256Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 3300
@@ -3767,12 +3812,17 @@
       "asps": {
         "afb": {
           "promotionId": "15831",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T21:28:24.647Z",
           "history": [
             {
               "at": "2026-07-28T21:28:24.647Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 2537
@@ -3886,12 +3936,17 @@
       "asps": {
         "afb": {
           "promotionId": "16748",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T21:34:10.877Z",
           "history": [
             {
               "at": "2026-07-28T21:34:10.877Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 1650
@@ -4056,12 +4111,17 @@
       "asps": {
         "afb": {
           "promotionId": "14262",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T21:42:23.257Z",
           "history": [
             {
               "at": "2026-07-28T21:42:23.257Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:59:20.315Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 1100
