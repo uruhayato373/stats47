@@ -3,7 +3,8 @@
  * cli — search-growth の 1 入口 (status / next / measure は service を直接呼ぶ)。
  * collect/normalize/analyze/report は各スクリプトへ委譲する。
  *
- * 正典: docs/02_実装計画/39 §7 / §14。MCP が無くても CLI で全機能が成立する。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
+ * MCP が無くても CLI で全機能が成立する。
  *
  *   node .claude/scripts/search-growth/cli.mjs <status|next|measure|collect|normalize|analyze|report|all> [opts]
  */
@@ -75,7 +76,7 @@ switch (cmd) {
     });
     break;
   case "triage":
-    // 週次レビュー用の最大 3 件 (technical/content/measurement 各 1・§18.4)。read-only。
+    // 週次レビュー用の最大 3 件 (technical/content/measurement 各 1)。read-only。
     printJsonOr(() => {
       const doc = readJson(PATHS.candidates) ?? { candidates: [] };
       return selectTriage(doc.candidates ?? []);
@@ -90,7 +91,7 @@ switch (cmd) {
         console.log(`      承認: npm run search-growth:approve -- --candidate ${c.id}`);
       }
       if (!t.shortlist.length) console.log("  (pending 候補なし)");
-      console.log(`承認は人間判断。上限 ${WEEKLY_APPROVAL_MAX} 件/週・改善バックログへの追加も承認後 (§18.4)`);
+      console.log(`承認は人間判断。上限 ${WEEKLY_APPROVAL_MAX} 件/週・改善バックログへの追加も承認後`);
     });
     break;
   case "approve": {
@@ -104,7 +105,7 @@ switch (cmd) {
       writeJson(PATHS.candidates, { ...doc, candidates });
       console.log(`[approve] ✓ ${approved.id} (week=${approved.approvedWeek})`);
       console.log(`次: 実装 → 14/28/56 日で npm run search-growth:measure -- --candidate ${approved.id}`);
-      console.log("承認済み施策は docs/todo/01_改善バックログ.md へ手動で記録する (自動追加しない)");
+      console.log("承認済み施策は docs/todo/04_改善バックログ.md へ手動で記録する (自動追加しない)");
     } catch (e) {
       console.error(`[approve] ✗ ${e.message}`);
       process.exit(1);

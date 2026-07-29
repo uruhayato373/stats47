@@ -12,7 +12,7 @@ co_agents: [blog-editor]
 
 ```
 $ARGUMENTS — 評価対象ファイルのパス
-             （例: docs/21_ブログ記事原稿/commute-time-ranking/article.md）
+             （例: docs/21_ブログ記事原稿/overseas-travel-gap/article.md）
 ```
 
 ## 手順

@@ -16,7 +16,7 @@
     "value": "Mobile LCP 平均 10,500ms / Performance 平均 49 / 全 URL 違反",
     "source": ".claude/state/metrics/psi/psi-batch-2026-05-09T17-40-53.json"
   },
-  "md_path": "docs/04_レビュー/goals/psi-mobile-lcp-2500-2026-05-15.md",
+  "md_path": ".claude/skills/management/goal/reference/goals/psi-mobile-lcp-2500-2026-05-15.md",
   "cycles": [
     {
       "number": 1,

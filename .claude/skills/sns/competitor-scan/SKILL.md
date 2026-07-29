@@ -1,6 +1,6 @@
 ---
 name: competitor-scan
-description: SNS 競合アカウントをテーマ別の名乗り (統計/リスク/格差/ご当地 等) で巡回し、差分レポートを生成する。Use when user says "競合スキャン", "SNS競合調査", "競合分析", "competitor scan". 定点観測して docs/04_レビュー へ出力.
+description: SNS 競合アカウントをテーマ別の名乗り (統計/リスク/格差/ご当地 等) で巡回し、skill referenceへ差分レポートを生成する。Use when user says "競合スキャン", "SNS競合調査", "競合分析", "competitor scan".
 disable-model-invocation: true
 argument-hint: "[--platform x|instagram|all] [--deep]"
 primary_agent: trend-scout
@@ -11,6 +11,11 @@ primary_agent: trend-scout
 stats47 の SNS 競合を**テーマ別の名乗りで巡回**し、フォロワー・投稿頻度・伸びた投稿・差別化余地を
 差分レポートにまとめる。`feedback_sns_competitor_search` の教訓 (「統計/ランキング」だけで検索すると
 @riskmap.jp のような感情系競合を取りこぼす) を機械化したもの。
+
+> **SSOT**: SNS競合のアカウント単位定点観測は本スキルを運用正典とする。Xの投稿単位調査は
+> `.claude/skills/sns/x-viral-research/SKILL.md`、自社実測は`update-sns-metrics`へ分離する。
+> Instagram専用の投稿単位Playwright collectorは未採択・未実装であり、その存在を前提にしない。
+> 必要になった場合は、新しい効果仮説と予算を示して本スキルの拡張として再提案する。
 
 > **設計判断**: 競合は「統計アカウント」だけではない。**同じ都道府県ネタを扱う感情喚起系** (治安/災害/格差/
 > ご当地自虐) が最大の SNS 競合。名乗りの軸を複数走らせて取りこぼしを防ぐ。結果は判断材料であり、
@@ -38,11 +43,12 @@ stats47 の SNS 競合を**テーマ別の名乗りで巡回**し、フォロワ
    - X: アカウント検索 + 上記名乗り軸でハッシュタグ/キーワード検索
    - Instagram: business_discovery は不可 (memory `project_instagram_graph_api_setup`)。ハッシュタグ・手動巡回
 2. **各競合について記録**: handle / フォロワー数 (取得日) / 直近投稿頻度 / 直近で伸びた投稿 (テーマ・エンゲージ) / フォーマット
-3. **前回スキャンとの差分**: 前回の `docs/04_レビュー/*-competitor-scan.md` があれば、フォロワー増減・新規競合を diff
+3. **前回スキャンとの差分**: `reference/reports/*.md` の最新とフォロワー増減・新規競合をdiff
 4. **stats47 への示唆**: 取りこぼしている題材・フォーマット・名乗り軸を 3-5 個 (煽り追随ではなく信頼性×網羅性で差別化できる切り口)
-5. **レポート出力**: `docs/04_レビュー/YYYY-MM-DD-competitor-scan.md` (frontmatter `type: competitor-scan`)
+5. **レポート出力**: `.claude/skills/sns/competitor-scan/reference/reports/YYYY-MM-DD.md`
+6. **TODO化**: 採択した未完了策だけを `docs/todo/04_改善バックログ.md` へID付きで追加
 
-## 出力フォーマット (docs/04_レビュー/YYYY-MM-DD-competitor-scan.md)
+## 出力フォーマット
 
 ```markdown
 ---

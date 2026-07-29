@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * check-period-contract — 週次計測の期間契約 (§18.2) を検査する read-only gate。
+ * check-period-contract — 週次計測の期間契約を検査する read-only gate。
  *
  * 用途:
  * 1. fetch-metrics-weekly.yml の最終 step (--strict):
@@ -115,7 +115,7 @@ function main() {
     if ((rank[r.level] ?? 3) > (rank[worst] ?? 0)) worst = r.level;
   }
   if (worst !== "ok") {
-    console.log(`[period-contract] 結果: ${worst} — KPI/WoW/ゲート判定は insufficient-data として停止する (§18.2)`);
+    console.log(`[period-contract] 結果: ${worst} — KPI/WoW/ゲート判定は insufficient-data として停止する`);
     if (strict || maxAgeWeeks !== null) process.exit(1);
   } else {
     console.log("[period-contract] 結果: ok");

@@ -5,19 +5,18 @@
 関わる agent (`coconala-product-manager`) / skill (`/build-coconala-product`) / 人間はこれに従う。
 
 > **方式**: `buzz-map-standards.md` / `affiliate-ads-standards.md` と同じ「rules に規約 1 ファイル、
-> skill/agent は参照のみ」。実装の恒久スペック（Phase 記録・技術判定の根拠）は
-> `docs/02_実装計画/30_ココナラ商品ファクトリー実装仕様.md`、商品案の出所は
-> `docs/04_レビュー/2026-07-18-coconala-content-monetization.md`（A-01〜L-07）。値やコードは本ファイルに転記しない。
+> skill/agent は参照のみ」。本ファイルを恒久仕様の SSOT とする。旧 A-01〜L-07 の調査履歴は
+> Git履歴、現行の商品定義・由来・値・コードは下記の git TS を正典とする。
 
 ---
 
 ## 1. SSOT 構造（どのデータがどこにあるか）
 
-完全DBレス準拠（`docs/01_技術設計/12_完全DBレス設計.md`）。永続/公開 DB を持たない。
+完全DBレス準拠（`docs/01_技術設計/02_データアーキテクチャ.md`）。永続/公開 DB を持たない。
 
 | データ | SSOT | 形 | 備考 |
 |---|---|---|---|
-| 商品定義（P-01〜P-13・テーマ別 13 パック） | `packages/product-factory/src/catalog/` | git TS | `src/catalog/products/packs.ts` 1 ファイル。`ProductDefinition`（`theme`/`datasets`/`sourceIds`）型。**ここだけ編集**。旧 174 件（A-01〜L-07・family 別）は 2026-07-23 にテーマパックへ破壊的縮約（`sourceIds` にトレース） |
+| 商品定義（P-01〜P-14・テーマ別 14 パック） | `packages/product-factory/src/catalog/` | git TS | `src/catalog/products/packs.ts` 1 ファイル。`ProductDefinition`（`theme`/`datasets`/`sourceIds`）型。**ここだけ編集**。旧 174 件（A-01〜L-07・family 別）は 2026-07-23 にテーマパックへ破壊的縮約（`sourceIds` にトレース） |
 | ライセンス / テンプレ / family メタ | `src/catalog/{licenses,templates,families}.ts` | git TS | 再販売禁止は `resale: false` で型固定 |
 | 実データ（観測値） | R2 `app/ranking/<key>/values.json` | 既存 R2 | 取得は `src/data/load-ranking-values.ts` |
 | 商品に焼く実データ | `src/data/datasets/<key>.ts` | git TS スナップショット | **基準年固定**。R2 から取得して手記の SOURCES を添える |
@@ -68,7 +67,7 @@ npm run test:run   --workspace=@stats47/product-factory
 | 生成バイナリを git / 公開 R2 に置く | `.local/`（git 管理外）に生成し、配信しない |
 | 生成物 (pptx/xlsx/json) を手編集して真実源化 | git TS を編集 → `generate` で再生成 |
 | 実在しない商品 ID / licenseId / metric を書く | validator（`catalog --check`）が弾く |
-| **実データ未接続パックを status=approved/listed にする** | 実データ接続（`datasets` の全キーが `src/data/datasets/` に実在）まで `cataloged` 固定。validator の `datasets-missing` 検査が誇大表示を弾く。当面 P-01 のみ出品可（旧 D-01 の 4 データセット継承） |
+| **実データ未接続パックを status=approved/listed にする** | 実データ接続（`datasets` の全キーが `src/data/datasets/` に実在）まで `cataloged` 固定。出品可否は `packs.ts` の status と validator の `datasets-missing` 検査で決定し、文書へ商品IDを重複記載しない |
 | 架空データを実データと偽る | `Dataset.isSample` で分離・販売文に明記 |
 | **オーナー承認なしにココナラへ実公開（`--commit`）** | 下書き作成は自動化可・実公開は `--commit` + オーナー承認（§6） |
 | 全商品を一括出品して WIP を増やす | 戦略（`docs/02_実装計画/01`）どおり 1 商品ずつ需要実測 |
@@ -114,7 +113,7 @@ npm run test:run   --workspace=@stats47/product-factory
 
 ## 8. Kindle 出版チャネル（product-factory に同居）
 
-同じ product-factory に、Amazon KDP 向けの電子書籍 (EPUB3) を生成する **kindle チャネル** を持つ（2026-07-23 新設）。ココナラが「Office/データを売る」のに対し、Kindle は「読ませて送客する」役割で、既存ブログ 98 記事・ランキング ai-content を再構成して束ねる。市場評価は `docs/04_レビュー/2026-07-14-kindle-monetization.md`（ランキング大全は競合先行で弱い→ S1 論点読み物を最優先）。
+同じ product-factory に、Amazon KDP 向けの電子書籍 (EPUB3) を生成する **kindle チャネル** を持つ（2026-07-23 新設）。ココナラが「Office/データを売る」のに対し、Kindle は「読ませて送客する」役割で、既存ブログ 98 記事・ランキング ai-content を再構成して束ねる。ランキング大全は競合先行で弱いため、S1 論点読み物を最優先する。
 
 - **SSOT = `packages/product-factory/src/channels/kindle/book-catalog.ts`**（`KINDLE_BOOKS`）。4 シリーズ = S1 論点読み物 / S2 テーマ別データブック / S3 地域別 / S4 ランキング大全。本文素材の SSOT は **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。生成物 `.local/kindle-books/<id>/v1/book.epub` は派生物（git 管理外・手編集を正典にしない）。
 - **主エンジンは EPUB3 リフロー型**（`src/generators/epub.ts`・jszip）。図表は章内ブロック画像として SVG→PNG 化して同梱（sharp・density 288）。カバーは satori→sharp で 1600×2560 自動生成。**KDP は電子で PDF を実質受け付けない**ため EPUB を採る（PDF 生成器 `databook-pdf.ts` は目次・画像・チャート非対応でそもそも書籍に不向き）。
@@ -145,17 +144,54 @@ npm run test:run   --workspace=@stats47/product-factory
 | **KDP 出品フォーム操作（下書き作成・修正・公開）・出品内容 SoT** | `kdp-operator`（skill `/kdp-publish`・`.claude/scripts/kdp/`） |
 | ログイン・2FA・Tax interview・銀行口座・Kindle Previewer 最終目視・実公開（`--commit`）承認・KU 判断 | 人間（オーナー） |
 
+---
+
+## 9. note 商品チャネル
+
+`packages/product-factory/src/channels/note/` は、商品カタログから note の無料・有料記事候補、
+添付manifest、画像計画、ハッシュタグを生成するチャネルとする。商品定義を複製せず、
+商品側は `src/catalog/products/packs.ts`、note editorial メタは
+`.claude/scripts/note/catalog/` の git TS を SSOT とし、mapping で結合する。
+
+> **現在の状態**: note チャネルは旧174商品を前提とする legacy 実装。削除条件は
+> `docs/todo/05_機能バックログ.md` の `COCONALA-PRODUCT-FACTORY-01` 完了。現在はTypeScriptとVitestの
+> 対象から一時除外している。P-01〜P-14 の14パックへ移行し、coverage・重複・添付検証を更新して
+> exclude を解除するまでは `products:note:*` を実運用しない。残工程は
+> 同backlog IDを正典とする。
+
+### SSOTと生成物
+
+- mapping・記事計画・生成コードは git TS、`.local/note-products/` の生成物は派生物とする。
+- 承認前の生成物を note.com、R2、公開用カタログへ自動反映しない。
+- 添付は `.local/coconala-products/<id>/<version>/manifest.json` を参照し、商品ファイルを複製して
+  新しいSSOTを作らない。
+- 有料境界は `<!-- paid:start -->` を唯一のマーカーとし、有料ラインと添付物を境界より後ろに置く。
+
+### 決定的検証
+
+- 14パックすべてのmapping coverage、productId・slug・seriesの一意性と参照整合を検査する。
+- canonical記事間の重複、同一商品の重複割当、添付循環参照、無料記事への有料添付混入を拒否する。
+- frontmatter、有料境界、添付manifest/hash、出典、基準年、単位、ライセンス、Office対応環境を検査する。
+- 誇大表現、収益保証、行政・e-Statの公認示唆、相関を因果とする表現、根拠のない数値を拒否する。
+- Office実機未確認の商品を有料添付可能・公開可能として扱わない。
+
+### 公開ゲート
+
+- 一括処理は `.local/` へのドラフト生成までとし、一括公開しない。
+- promote は既定dry-run、note.com公開は既存の専用公開フローへ分離する。
+- 公開、価格、無料・有料境界、添付内容は人間が記事単位で確認する。
+- noteの公開頻度は `.claude/rules/sns-content-standards.md` の上限に従う。
+
 ## 関連
 
-- 恒久スペック: `docs/02_実装計画/30_ココナラ商品ファクトリー実装仕様.md`
-- 商品案の出所: `docs/04_レビュー/2026-07-18-coconala-content-monetization.md`
+- 商品案の由来: `packages/product-factory/src/catalog/products/packs.ts` の `sourceIds`（旧調査はGit履歴）
 - モジュール: `packages/product-factory/`（README + `src/`）
-- 完全DBレス: `docs/01_技術設計/12_完全DBレス設計.md` / データ保存先: `.claude/rules/data-storage.md`
-- 実証判定: `.claude/rules/evidence-based-judgment.md` / 収益化戦略: `docs/02_実装計画/01_収益化マスタープラン.md`
+- 完全DBレス: `docs/01_技術設計/02_データアーキテクチャ.md` / データ保存先: `.claude/rules/data-storage.md`
+- 実証判定: `.claude/rules/evidence-based-judgment.md` / 収益化戦略: `docs/00_プロジェクト管理/02_収益化戦略.md`
 - agent: `.claude/agents/coconala-product-manager.md`（商品生成）/ `.claude/agents/coconala-operator.md`（出品自動化）
 - skill: `.claude/skills/product/build-coconala-product/SKILL.md` / `.claude/skills/product/coconala-publish/SKILL.md`
 - 出品スクリプト: `.claude/scripts/coconala/`（`coconala-{publish,edit,delete-draft}.mjs` + `lib/coconala-{session,form}.mjs`）
 - 出品 SoT: `.claude/config/coconala-listings.json` / アカウント: `.claude/config/coconala-account.json`（★stats47 専用・sellerName 要記入）
-- 認証プロファイル: `docs/01_技術設計/playwright-auth-profiles.md`（`playwright-coconala-profile`）
+- 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`（`playwright-coconala-profile`）
 - 移植元: doboku-note `.claude/agents/coconala-operator.md` / `.claude/skills/management/coconala-publish/`
-- **Kindle チャネル (§8)**: SSOT `packages/product-factory/src/channels/kindle/book-catalog.ts` / EPUB 生成器 `src/generators/epub.ts` / CLI `src/channels/kindle/cli.ts` / 台帳 `.claude/state/products/kindle-status.json` / 市場評価 `docs/04_レビュー/2026-07-14-kindle-monetization.md` / 論点カタログ `docs/04_レビュー/2026-07-19-pdf-book-survey.md`
+- **Kindle チャネル (§8)**: SSOT `packages/product-factory/src/channels/kindle/book-catalog.ts` / EPUB 生成器 `src/generators/epub.ts` / CLI `src/channels/kindle/cli.ts` / 台帳 `.claude/state/products/kindle-status.json`

@@ -1,7 +1,7 @@
 /**
  * weekly-summary — GSC/GA4 の確定7日 KPI とローリング28日 summary を組み立てる純粋関数群。
  *
- * 正典: docs/02_実装計画/39_検索成長統合MCP・API基盤実装仕様.md §18.2。
+ * 正典: .claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md。
  * 期間の解決は periods.mjs (SSOT)。ここは集計・組み立て・履歴 schema 移行・LATEST 描画のみ。
  *
  * 契約:
@@ -118,7 +118,7 @@ export function buildGscSummary({ week = null, asOf = null, now = Date.now(), da
         source: "gsc",
         isFinalized: true,
         generatedAt,
-        limitations: [...baseLimitations, "機会発見用。前回 snapshot と 21 日重複するため WoW 比較禁止 (§18.2)"],
+        limitations: [...baseLimitations, "機会発見用。前回 snapshot と 21 日重複するため WoW 比較禁止"],
       }),
       kpis: { clicks: roll.clicks, impressions: roll.impressions, ctr: roll.ctr, position: roll.position },
       coverage: roll.coverage,
@@ -182,7 +182,7 @@ export function buildGa4Summary({
 
   const limitations = [
     `取得遅延 ${periods.delayDays} 日を考慮 (anchor=${periods.anchor})`,
-    "KPI は country=Japan の clean slice。raw (無フィルタ) は pollution 監視専用で KPI へ混ぜない (§18.2)",
+    "KPI は country=Japan の clean slice。raw (無フィルタ) は pollution 監視専用で KPI へ混ぜない",
     "activeUsers は期間内 user dedup 値 (日別行の合算ではない)",
   ];
 
@@ -222,7 +222,7 @@ export function buildGa4Summary({
   };
 }
 
-// ── history.csv schema v2 (列名で期間種別を明記・§18.2) ───────────────
+// ── history.csv schema v2 (列名で期間種別を明記) ───────────────
 
 /** GSC history.csv v2: 既存 28 日合計行の意味を列名で明記 (値は不変)。 */
 export const GSC_HISTORY_FIELDS_V2 = Object.freeze([
@@ -398,7 +398,7 @@ export function renderGscLatest({ summary, rollingRows, week }) {
     lines.push(`| Queries rows | ${latest.rows_queries} |`);
     lines.push(`| Pages rows | ${latest.rows_pages} |`);
     lines.push("");
-    lines.push("> 28日窓は前回 snapshot と 21 日重複する。この表の週次差分を WoW と呼ばない (§18.2)。");
+    lines.push("> 28日窓は前回 snapshot と 21 日重複する。この表の週次差分を WoW と呼ばない。");
   } else {
     lines.push("_rolling28d 履歴なし_");
   }

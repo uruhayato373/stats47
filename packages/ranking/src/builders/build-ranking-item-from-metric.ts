@@ -10,7 +10,7 @@
  * survey 紐付け (surveyIds/originalSurveys) は config.source から provenance 辞書で**決定的導出**して
  * 焼き込む (config.surveyId は手動オーバーライドとして優先)。正典: .claude/rules/survey-linkage-standards.md
  *
- * 関連: docs/01_技術設計/12_完全DBレス設計.md (metrics = Reference/再生成),
+ * 関連: docs/01_技術設計/02_データアーキテクチャ.md (metrics = Reference/再生成),
  *       コミット 67168f54 が残した follow-up の完成。
  */
 import {

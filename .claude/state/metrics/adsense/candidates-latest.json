@@ -13,7 +13,7 @@
     "activeWipLimit": 2,
     "weeklyAdoptionLimit": 1
   },
-  "note": "候補提示まで (自動でバックログ追加・配置変更・deploy しない・doc41 §3.3)。採用は人間承認で最大1件/週",
+  "note": "候補提示まで (自動でバックログ追加・配置変更・deploy しない)。採用は人間承認で最大1件/週",
   "candidates": [
     {
       "id": "measurement-gap::bid-types-platforms,formats-platforms,placements-platforms",

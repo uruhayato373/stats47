@@ -3,11 +3,12 @@
  *
  * GA4 + GSC + PageSpeed Insights から確定7日 (finalized7d) と直前の重複しない 7 日
  * (previous7d) を取得し、週次レビュー用のサマリ + 差分を計算する。`/weekly-review` Phase 0 から呼ばれる。
- * 期間契約: docs/02_実装計画/39 §18.2 (期間導出は ../metrics/lib/periods.mjs が SSOT)。
+ * 期間契約: .claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md
+ * (期間導出は ../metrics/lib/periods.mjs が機械 SSOT)。
  * GA4 KPI は country=Japan clean slice。GSC は日別欠損を検出し insufficient-data で WoW を止める。
  *
  * stats47 の NSM は「週間エンゲージドセッション数」(GA4 engagedSessions)。
- * 定義は `docs/04_レビュー/*-nsm.md` を参照（最新版は `ls -t docs/04_レビュー/*-nsm.md | head -1`）。
+ * 定義は `docs/00_プロジェクト管理/02_収益化戦略.md` を参照。
  *
  * 必要な資源:
  *   - stats47-*.json サービスアカウント鍵（リポジトリルート、gitignored）
@@ -42,7 +43,7 @@ const GA4_JAPAN_FILTER = {
 // ── Date helpers ─────────────────────────────────────────────────
 
 /**
- * 期間契約 (§18.2)。期間の導出は periods.mjs (SSOT) に集約する。
+ * 週次期間契約。期間の導出は periods.mjs (SSOT) に集約する。
  * - week 指定時: その ISO 週の日曜を anchor に決定的に再現 (backfill が実行日に依存しない)
  * - 未来週は periods.mjs が throw する (現在データの過去/未来 week 誤ラベル防止)
  * @param {{week?:string|null, asOf?:string|null, now?:any}} [opts]
@@ -101,7 +102,7 @@ async function fetchGa4Weekly(ranges) {
     "https://www.googleapis.com/auth/analytics.readonly",
   ]);
 
-  // KPI は Japan-only clean slice (§18.2)。raw (無フィルタ) は pollution 監視専用に別取得する。
+  // KPI は Japan-only clean slice。raw (無フィルタ) は pollution 監視専用に別取得する。
   const [thisRes, prevRes, rawThisRes] = await Promise.all([
     runGa4Report(auth, {
       dateRanges: [{ startDate: ranges.this.start, endDate: ranges.this.end }],
@@ -214,7 +215,7 @@ async function fetchGa4Weekly(ranges) {
   const organic = channels.find((c) => c.channel === "Organic Search") || null;
 
   // pollution 監視: raw (無フィルタ) − Japan-only の残余 = overseas/(not set) 汚染量の推定。
-  // raw を KPI/WoW へ混ぜない (§18.2)。
+  // raw を KPI/WoW へ混ぜない。
   const rawRow = rawThisRes.rows?.[0];
   const rawSessions = rawRow ? parseFloat(rawRow.metricValues?.[0]?.value || "0") : null;
   const pollution =
@@ -261,7 +262,7 @@ async function fetchGscWeekly(ranges) {
       dimensions: ["query"],
       rowLimit: 10,
     }),
-    // 日別行 (previous7d〜finalized7d の 14 日) — 欠損日の検出用。0 補完しない (§18.2)
+    // 日別行 (previous7d〜finalized7d の 14 日) — 欠損日の検出用。0 補完しない
     fetchGscQuery(auth, ranges.prev.start, ranges.this.end, {
       dimensions: ["date"],
       rowLimit: 31,
@@ -390,7 +391,7 @@ export async function fetchWeeklyNsmMetrics({ week = null, asOf = null } = {}) {
     fetchPsiSummary().catch((e) => ({ error: `PSI 取得失敗: ${e.message}` })),
   ]);
 
-  // §18.2 契約ブロック: 期間 metadata 付きの確定7日 KPI。weekly-plan/runbook はここを読む。
+  // 週次期間契約ブロック: 期間 metadata 付きの確定7日 KPI。weekly-plan/runbook はここを読む。
   const meta = (source, period, limitations) => ({
     periodStart: period.periodStart,
     periodEnd: period.periodEnd,
@@ -405,7 +406,7 @@ export async function fetchWeeklyNsmMetrics({ week = null, asOf = null } = {}) {
   ];
   const ga4Limitations = [
     `取得遅延 ${ranges.delayDays.ga4} 日 (anchor=${ranges.anchor})`,
-    "KPI は country=Japan clean slice。raw は pollution 監視専用 (§18.2)",
+    "KPI は country=Japan clean slice。raw は pollution 監視専用",
   ];
   const finalized7d = {
     gsc: gsc.error
@@ -476,10 +477,10 @@ export async function fetchWeeklyNsmMetrics({ week = null, asOf = null } = {}) {
     gsc,
     psi,
     notes: [
-      `期間契約 §18.2: KPI/WoW は finalized7d (GSC ${ranges.gsc.this.start}〜${ranges.gsc.this.end} / GA4 ${ranges.ga4.this.start}〜${ranges.ga4.this.end}) と直前の重複しない previous7d のみ`,
+      `週次期間契約: KPI/WoW は finalized7d (GSC ${ranges.gsc.this.start}〜${ranges.gsc.this.end} / GA4 ${ranges.ga4.this.start}〜${ranges.ga4.this.end}) と直前の重複しない previous7d のみ`,
       "GA4 は country=Japan clean slice (raw は pollution 監視専用)",
       "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計・Japan-only)",
-      "NSM 定義: docs/04_レビュー/*-nsm.md",
+      "NSM 定義: docs/00_プロジェクト管理/02_収益化戦略.md",
     ],
   };
 }
@@ -551,7 +552,7 @@ export function formatNsmSection(metrics) {
     );
     lines.push("");
     lines.push(`${metrics.gsc.insufficientReason}`);
-    lines.push("欠損日は 0 補完しない。WoW・フェーズゲート判定は停止する (§18.2)。");
+    lines.push("欠損日は 0 補完しない。WoW・フェーズゲート判定は停止する。");
     lines.push("");
   } else {
     const r = metrics.ranges.gsc;

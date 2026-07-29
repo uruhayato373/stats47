@@ -220,7 +220,7 @@ GA4 データは GSC より遅延が少なく、前日分まで取得可能。
 - `overview-clean.csv` / `channels-clean.csv` — country=Japan only クリーン値（engagedSessions / engagementRate を含む）
 - `pollution-summary.csv` — bot/spam 推定 (overseas_sessions / overseas_engagedSessions / notSet_sessions) の集計 1 行
 
-クリーン値併記の背景: `docs/04_レビュー/2026-05-16-critical-review-ga4-bot-pollution.md` で W20 の bot 混入監査と対処方針を整理。
+クリーン値併記の背景と恒久対策は memory `feedback_ga4_history_unreliable_wow` を参照。
 
 ### 実行スクリプト
 
@@ -292,7 +292,7 @@ function toRow(row, dimNames, metricNames) {
 }
 
 // クリーン値フィルタ: country=Japan のセッションのみ抽出
-// 詳細: docs/04_レビュー/2026-05-16-critical-review-ga4-bot-pollution.md
+// 詳細: .claude/memory/feedback_ga4_history_unreliable_wow.md
 const JAPAN_FILTER = {
   filter: { fieldName: 'country', stringFilter: { value: 'Japan' } },
 };

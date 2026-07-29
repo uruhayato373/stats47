@@ -207,6 +207,6 @@
   "notes": [
     "GSC データは 3 日遅延のため、直近期間は 2026-05-15 〜 2026-05-21 を採用",
     "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
-    "NSM 定義: docs/04_レビュー/critical-review/*-nsm.md"
+    "NSM 定義: docs/00_プロジェクト管理/02_収益化戦略.md"
   ]
 }

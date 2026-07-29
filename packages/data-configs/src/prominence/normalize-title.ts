@@ -23,13 +23,25 @@ const REDUNDANT_TITLE_SUFFIXES: readonly string[] = [
 ];
 
 /**
+ * 括弧とその中身をすべて落とす。
+ *
+ * 内側の文字クラスが**開き括弧も除外している**のが要点。素朴に `[^）)]*` と書くと、
+ * 閉じ括弧の無い入力 (`((((((…`) で「開始位置ごとに末尾まで走査して失敗」を繰り返し、
+ * 入力長に対して二乗の時間がかかる (polynomial ReDoS / CodeQL js/polynomial-redos)。
+ * 開き括弧で内側の走査を打ち切れば線形になる。
+ *
+ * 副次的に、入れ子 (`（あ（い）`) では内側だけを外す挙動になる。実データの title に
+ * 入れ子は無く、全 2,295 件で従来と出力一致することを確認済み。
+ */
+export function stripParentheticals(text: string): string {
+  return text.replace(/[（(][^（()）)]*[）)]/g, "");
+}
+
+/**
  * 年・調査名の括弧や空白差を無視してタイトルを正規化する（重複の代表選びに使う）。
  */
 export function normalizeTitleForDedup(title: string): string {
-  return title
-    .replace(/[（(][^）)]*[）)]/g, "")
-    .replace(/\s+/g, "")
-    .trim();
+  return stripParentheticals(title).replace(/\s+/g, "").trim();
 }
 
 /**
@@ -56,5 +68,6 @@ export function normalizeTitleForHook(title: string): string {
  * `平均初婚年齢（夫）` は末尾が「）」なので、そのままでは「年齢 → 高い」の判定に乗らない。
  */
 export function stripTrailingParenthetical(title: string): string {
-  return title.replace(/[（(][^）)]*[）)]\s*$/, "").trim();
+  // 内側で開き括弧を除外する理由は stripParentheticals と同じ (ReDoS 回避)。
+  return title.replace(/[（(][^（()）)]*[）)]\s*$/, "").trim();
 }

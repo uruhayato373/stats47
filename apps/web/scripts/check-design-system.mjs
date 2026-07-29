@@ -104,7 +104,7 @@ const rules = [
   },
   {
     // PageShell が幅・レール・余白の唯一の入口。page.tsx で container/max-w を直書きしない。
-    // 正典: docs/01_技術設計/15_デザインシステムSSOT.md / 13_統一レイアウト設計.md
+    // 正典: docs/01_技術設計/04_デザインシステム.md
     id: "no-direct-width-in-page",
     message:
       "page.tsx must not hardcode width. Use PageShell (sole width/rail/padding source). No max-w-[…]. (container mx-auto is covered by no-container-mx-auto)",

@@ -47,7 +47,7 @@ interface RightRailWidgetsProps {
  *   4. AdSense Rectangle (上 → 下)
  *
  * 既定は自然フロー（sticky/独立スクロールなし）。本文を主役にするため促進系を下げている。
- * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md
+ * 設計仕様: docs/01_技術設計/04_デザインシステム.md
  */
 export async function RightRailWidgets({
   furusatoAreaCode,

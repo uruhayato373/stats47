@@ -14,7 +14,7 @@
  *
  * 使い方:
  *   node .claude/scripts/metrics/measure-adsense-impact.mjs
- *     → docs/todo/01_改善バックログ.md の metric=adsense 施策のうち deploy 日を持つものを自動計測
+ *     → docs/todo/04_改善バックログ.md の metric=adsense 施策のうち deploy 日を持つものを自動計測
  *   node .claude/scripts/metrics/measure-adsense-impact.mjs --all
  *     → 判定済み（effect/none 等）も含めて再計測
  *   node .claude/scripts/metrics/measure-adsense-impact.mjs --deployed 2026-07-03 --label ANCHOR-01
@@ -22,7 +22,7 @@
  *   --min-weeks N  … after が deploy 週から N 週以上経過していなければ「計測不能」（既定 1）
  *
  * 入力:
- *   - docs/todo/01_改善バックログ.md              （施策 → deploy 日）
+ *   - docs/todo/04_改善バックログ.md              （施策 → deploy 日）
  *   - .claude/state/metrics/adsense/history.csv         （週次アカウント）
  *   - .claude/state/metrics/adsense/history-devices.csv （週次デバイス別）
  * 出力: 標準出力のみ（改善ログ/バックログには書かない = triage の境界を侵さない）
@@ -34,7 +34,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = join(__dirname, "..", "..", "..");
-const BACKLOG = join(PROJECT_ROOT, "docs/todo/01_改善バックログ.md");
+const BACKLOG = join(PROJECT_ROOT, "docs/todo/04_改善バックログ.md");
 const HISTORY = join(PROJECT_ROOT, ".claude/state/metrics/adsense/history.csv");
 const DEVICE_HISTORY = join(PROJECT_ROOT, ".claude/state/metrics/adsense/history-devices.csv");
 
@@ -186,7 +186,7 @@ function deviceLine(kind, bw, aw) {
   return (
     `  ${label}: RPM ¥${num(b.rpm).toFixed(0)}→¥${num(a.rpm).toFixed(0)}${pctStr(a.rpm, b.rpm)}` +
     ` | viewability ${(num(b.viewability) * 100).toFixed(1)}%→${(num(a.viewability) * 100).toFixed(1)}% (${ppStr(a.viewability, b.viewability)})` +
-    // schema v2: 旧 cpc (earnings/clicks) は公式 CPC ではないため後方互換の legacy 列を参照する (doc41 §2.1)。
+    // schema v2: 旧 cpc (earnings/clicks) は公式 CPC ではないため後方互換の legacy 列を参照する。
     // v2 移行前の行は旧 cpc 列に値が残る可能性があるため fallback する。
     ` | 収益/click(legacy) ¥${num(b.earnings_per_click_legacy ?? b.cpc).toFixed(2)}→¥${num(a.earnings_per_click_legacy ?? a.cpc).toFixed(2)}` +
     (a.cost_per_click ? ` | 公式CPC ¥${num(a.cost_per_click).toFixed(2)}` : "")

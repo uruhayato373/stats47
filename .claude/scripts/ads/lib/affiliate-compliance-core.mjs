@@ -5,7 +5,7 @@
  * SSOT (apps/web/scripts/affiliate-direct-placements-data.ts) と記事本文 (R2) を渡す。
  * テスト: .claude/scripts/ads/__tests__/affiliate-compliance-core.test.mjs (node --test)。
  *
- * 検証対象 (docs/02_実装計画/25_アフィリエイト運用SSOT移行仕様.md §6.1):
+ * 検証対象 (.claude/rules/affiliate-ads-standards.md §7-8):
  *   - 構造: ID 重複 / URL scheme / 画像サイズ / placements 形式 / addedAt 形式
  *   - 本文: 配置先 slug の存在 / 本文内タグとの双方向一致 / PR 表記 (景表法)
  */

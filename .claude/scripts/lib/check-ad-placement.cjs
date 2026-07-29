@@ -10,7 +10,7 @@
  *     (`/areas` は ranking 詳細用の定数を流用していた)
  *   - `COMPARE_PAGE_SIDEBAR` が参照ゼロのまま残存
  *
- * 規約自体は既にあった (InContentAdSlot の docstring / docs/01_技術設計/15_デザインシステムSSOT.md /
+ * 規約自体は既にあった (InContentAdSlot の docstring / docs/01_技術設計/04_デザインシステム.md /
  * .claude/rules/affiliate-ads-standards.md) が、コードで強制されていなかったため少しずつ崩れた。
  *
  * ★対象は「app 配下のページファイルに直接書かれた広告」だけ。RightRailWidgets / ThemePageLayout /
@@ -18,7 +18,7 @@
  *   ページ単位の完全な検査が要るなら、レンダリング後の `.ad-container` を数える e2e に上げること
  *   (プレースホルダーも本番と同じ `.ad-container` を出すので dev でも数えられる)。
  *
- * 正典: .claude/rules/ui-components.md / docs/01_技術設計/15_デザインシステムSSOT.md
+ * 正典: .claude/rules/ui-components.md / docs/01_技術設計/04_デザインシステム.md
  *
  * Usage: node .claude/scripts/lib/check-ad-placement.cjs
  * Exit: 違反があれば 1。
@@ -151,7 +151,7 @@ for (const abs of listFiles(APP_DIR, ".tsx")) {
   if (fluidSlots.length > 1) {
     errors.push(
       `${rel}\n   記事内 (fluid) 広告が ${fluidSlots.length} 枠ある: ${fluidSlots.join(", ")}。\n` +
-        "   fluid はページ 1 枠まで (docs/01_技術設計/15_デザインシステムSSOT.md)。",
+        "   fluid はページ 1 枠まで (docs/01_技術設計/04_デザインシステム.md)。",
     );
   }
 

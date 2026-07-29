@@ -53,8 +53,8 @@ tags: [theme, portfolio, monthly-audit]
 
 **全22テーマ GSC は measured-low (impressions 200 未満/56d)、GA4 は 2 テーマのみ measured (views 100
 以上/56d)。標本不足は計測できていない (insufficient-data) ではなく「集計できたが値が低い」
-(measured-low)。これ自体が「テーマは検索集客面ではなく回遊面」という 07_情報設計の役割分担を裏付ける
-実測** (07_情報設計・PR-3 監査結果を参照)。
+(measured-low)。これ自体が「テーマは検索集客面ではなく回遊面」という 03_情報設計の役割分担を裏付ける
+実測** (03_情報設計・PR-3 監査結果を参照)。
 
 ## 28日単独比較 (直近28日 W28 vs 前28日 W24) — 補助情報
 
@@ -138,7 +138,8 @@ local-finance=213pv・population-dynamics=206pv は W24+W28 合算のため、�
 
 reviewGate は 22 テーマ中 4 件が `proposal-ready` (aging-society / healthcare / living-housing /
 population-dynamics)、残り 18 件は各種 audit 待ち (`ready-after-*` 16件 / `blocked-by-*` 2件相当)。
-これは doc 18 の採択ゲート運用に従うものであり、本監査ではレビュー文書とカタログの乖離は検出しなかった。
+これは `.claude/skills/theme/manage-theme-portfolio/reference/theme-improvement-execution.md`
+の採択ゲート運用に従うものであり、本監査ではレビュー文書とカタログの乖離は検出しなかった。
 
 ## データ鮮度・欠測・出典確認日の監査
 
@@ -178,9 +179,9 @@ population-dynamics)、残り 18 件は各種 audit 待ち (`ready-after-*` 16�
 ## 特記事項
 
 - 全22テーマ GSC measured-low は「データ不足」ではなく「テーマは検索面でなく回遊面」という設計意図の
-  実測裏付け (07_情報設計)。merge/retire 判定の材料にする場合は GA4 の回遊指標 (現状 not-instrumented)
+  実測裏付け (03_情報設計)。merge/retire 判定の材料にする場合は GA4 の回遊指標 (現状 not-instrumented)
   の計装が前提になる。
-- reviewGate の大半 (18/22) が `ready-after-*` / `blocked-by-*` = doc 18 の採択ゲート待ち。次回監査までに
+- reviewGate の大半 (18/22) が `ready-after-*` / `blocked-by-*` = improvement execution referenceの採択ゲート待ち。次回監査までに
   theme-researcher/theme-designer への調査依頼が進捗すれば reviewGate 分布が変わる見込み。
 - manufacturing の欠測4/12は改善候補として最優先 (dataQualityStatus=gaps の中で最も欠測率が高い)。
 - local-finance/population-dynamics の単週変動は次回監査 (2026-08-01 目安) で持続性を再確認する。
@@ -206,10 +207,10 @@ population-dynamics)、残り 18 件は各種 audit 待ち (`ready-after-*` 16�
 - テーマ: 全22テーマ共通 / 種別: 計装
 - 根拠: `.claude/state/themes/README.md` §1.3 および全22テーマの `metrics.internalNav.status` =
   `not-instrumented` (portfolio.json 実測)。GSC/GA4 週次 snapshot に theme→ranking/blog の遷移・
-  指標クリックのイベント/リンク先粒度が無い。テーマページの本来の役割 (07_情報設計: 回遊ハブ) を
+  指標クリックのイベント/リンク先粒度が無い。テーマページの本来の役割 (03_情報設計: 回遊ハブ) を
   評価する主要指標が構造的に測れていない。
 - 想定効果: merge/retire 判定の主要ブロッカー解消。現状 GSC measured-low (全22テーマ imp<200/56d)
-  のみでは「需要不足」の判断はできるが「回遊寄与」は測れず、doc 24 の再編判定が不完全。
+  のみでは「需要不足」の判断はできるが「回遊寄与」は測れず、taxonomy referenceの再編判定が不完全。
 - 検証: GA4 custom event (例: `theme_to_ranking_click` 等) 実装後、
   `.claude/skills/analytics/ga4-improvement/reference/snapshots/<週>/pages.csv` 相当のイベント別
   snapshot でテーマ別遷移数が取得できること

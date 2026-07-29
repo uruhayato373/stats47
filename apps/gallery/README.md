@@ -26,7 +26,7 @@ PORT=5000 npm run gallery    # ポート上書き
 | `/assets` | 画像/動画資産 11 タブ・欠落チェック (HEAD probe)・再生成 (whitelist 5 タブのみ) |
 | `/svg` | ブログ SVG 分類カタログ (手動ロード・10 分キャッシュ) |
 | `/dashboard` | メトリクス/進捗キュー/バックログ/STP の読み取り専用ミラー (60 秒キャッシュ) |
-| `/buzz-map` | バズ地図 集客ゲート管理 (2026-07-17)。curated catalog 160 件既定 + `?lane=` で machine 全レーン。filter/score breakdown/evidence/landing 状態/素材 preview。操作 job: landing 再判定・spec 生成・レンダ (still/preview/本尺)・R2 push・draft 登録 — **push/draft は確認ダイアログ + isPostable ゲート必須** (landingContract=pass && live 200 なしでは登録不可)。ideaId/action は catalog 実在 allowlist。正典 `.claude/rules/buzz-map-standards.md` §5/§9 |
+| `/buzz-map` | バズ地図 集客ゲート管理 (2026-07-17)。curated catalog 160 件既定 + `?lane=` で machine 全レーン。filter/score breakdown/evidence/landing 状態/素材 preview。操作 job: landing 再判定・spec 生成・レンダ (still/preview/本尺)・R2 push・draft 登録 — **push/draft は確認ダイアログ + isPostable ゲート必須** (landingContract=pass && live 200 なしでは登録不可)。ideaId/action は catalog 実在 allowlist。正典 `.claude/rules/buzz-map-standards.md` §5 |
 
 ## 構成
 

@@ -1,7 +1,7 @@
 /**
  * buzz-map landing contract checker — core module.
  *
- * 仕様: docs/02_実装計画/27_buzz-map集客ゲート統合仕様.md §5.3 (landing contract)。
+ * 仕様: .claude/rules/buzz-map-standards.md §5 (landing contract)。
  * SNS と landing の整合性を機械検証する純粋関数 + fetch 注入型の検証関数を提供する。
  *
  * 完全に副作用のない純粋関数群 (deriveContractResult / isCleanCanonicalUrl /
@@ -32,7 +32,7 @@ export const GOOGLEBOT_UA =
   "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
 
 /**
- * §5.3 の「検証内容」7 項目を評価する純粋関数。
+ * landing contract の検証内容7項目を評価する純粋関数。
  *
  * liveStatus が null (未取得) なら 'pending'。
  * どれか 1 つでも false なら 'fail' で reasons に該当理由を積む。
@@ -311,7 +311,7 @@ export async function verifyLandingContract(plan, deps = {}) {
  *
  * - requiredYear がある場合は本文/シグナルに年が含まれること (対象年次の一致)。
  * - 問い (promise) への答えは、原則として requiredTerms 検証 (title/H1/本文に主要語が
- *   ある) で担保する設計 (§5.3 の「title/H1/本文またはページデータにrequiredTermsがある」)。
+ *   ある) で担保する設計（title/H1/本文またはページデータにrequiredTermsがあること）。
  *   ここでは requiredTerms が明示されていない場合のフォールバックとしてのみ promise の
  *   主要語断片が本文にあるかを緩く見る。CJK は語分割できないため、requiredTerms がある
  *   ときは promise の追加ゲートをかけない (二重の厳格化で誤 fail するのを避ける)。

@@ -1,7 +1,7 @@
 /**
  * triage — 週次トリアージ (最大3件) と人間承認・WIP guard の決定的実装。
  *
- * 正典: docs/02_実装計画/39 §18.3〜18.4。
+ * 正典: .claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md。
  * - 週次レビューへ載せる候補は最大 3 件 (原則 technical/blocker 1・acquisition/content 1・measurement 1)。
  * - 承認 (pending→approved) は人間が CLI で行う。1 週の承認は最大 2 件、
  *   全 active 施策 (approved + in-progress) の WIP は 5 以下を機械強制する。
@@ -9,10 +9,10 @@
  * - analyze の週次再構築で承認状態が消えないよう carryOverStatuses が id で引き継ぐ。
  *
  * この module は純粋 (I/O なし)。書き込みは cli.mjs が state.mjs 経由で行う。
- * MCP には mutation を公開しない (§6.3 — read-only 維持)。
+ * MCP には mutation を公開しない（read-only維持）。
  */
 
-/** candidate type → トリアージ区分。§18.4 の 3 区分。 */
+/** candidate type → トリアージの3区分。 */
 export const CANDIDATE_CATEGORY = Object.freeze({
   "server-risk": "technical",
   "soft-404-risk": "technical",

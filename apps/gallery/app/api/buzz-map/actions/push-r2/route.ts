@@ -5,7 +5,7 @@ import { jsonResponse, errorResponse, parseJsonBody } from "@/lib/server/http";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-/** confirm:true が必須 (§9.2「R2 push前に確認ダイアログを出す」)。 */
+/** confirm:true が必須（R2 push前に確認ダイアログを出す）。 */
 export async function POST(req: Request) {
   let body: unknown;
   try {

@@ -1,12 +1,12 @@
 ---
 name: adsense-improvement
-description: Google AdSense の広告収益・RPM・CTR・ビューアビリティを docs/todo/01_改善バックログ.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "AdSense改善", "広告収益改善", "RPM改善", "AdSense記録".
+description: Google AdSense の広告収益・RPM・CTR・ビューアビリティを docs/todo/04_改善バックログ.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "AdSense改善", "広告収益改善", "RPM改善", "AdSense記録".
 primary_agent: adsense-analyst
 ---
 
-AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Active View）を **`docs/todo/01_改善バックログ.md` で時系列追跡**し、打った施策と効果を記録するスキル。
+AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Active View）を snapshot と詳細ログで時系列追跡し、active 施策だけを `docs/todo/04_改善バックログ.md` で管理するスキル。
 
-広告配置・フォーマット変更・コンテンツ追加の効果は 1〜4 週間で現れるため、「何をいつしたか」「数値がどう動いたか」「次の候補は何か」を 1 ファイルに append-only で記録する。
+広告配置・フォーマット変更・コンテンツ追加の効果は 1〜4 週間で現れる。履歴と根拠は append-only の詳細ログ、次に行うことは active-only のTODOへ分離する。
 
 ## データの保管場所
 
@@ -14,25 +14,17 @@ AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Act
 |---|---|---|
 | 生メトリクス CSV | git: `reference/snapshots/YYYY-Www/` | immutable、diff 比較、オフライン可 |
 | 目標しきい値設定 | git: `reference/budgets.json` | プロジェクト設定 |
-| 施策（1 施策 1 section、人間向け要約） | `docs/todo/01_改善バックログ.md` | Obsidian で時系列・status 別に絞り込み可能 |
+| 施策（1施策1行、人間向け要約） | `docs/todo/04_改善バックログ.md` | active 施策を優先度・期日で絞り込み可能 |
 | 詳細ログ（agent 用、検証コマンド・仮説） | `reference/improvement-log.md` | append-only、agent が深掘り参照 |
 | 週次推移サマリ | `.claude/state/metrics/adsense/LATEST.md` / `history.csv` | GitHub Actions が自動更新 |
 
-→ **1 層構造**: `docs/todo/01_改善バックログ.md` (簡易表) + agent 用詳細は `.claude/skills/analytics/adsense-improvement/reference/improvement-log.md`。
+→ **責務分離**: `docs/todo/04_改善バックログ.md` はactive一覧、agent 用詳細は `.claude/skills/analytics/adsense-improvement/reference/improvement-log.md`。
 
-## frontmatter / status
+## TODO行の契約
 
-各 section の冒頭で以下を管理:
-
-```markdown
-## <施策タイトル>
-
-- **status**: pending | effect/full | effect/partial | effect/none | effect/adverse
-- **tier**: 1 | 2 | 3
-- **target_metric**: adsense-revenue | adsense-rpm | adsense-ctr | adsense-impressions | adsense-clicks | adsense-viewability
-- **deployed_at**: YYYY-MM-DD
-- **verification_command**: <copy-pasteable script>
-```
+`docs/todo/04_改善バックログ.md` の6列
+`ID | タイトル | Status | Due | Owner | Metric` を使う。baseline、deployed_at、
+検証コマンド、判定根拠は `reference/improvement-log.md` に置き、TODOへ複製しない。
 
 ## 引数
 
@@ -41,7 +33,7 @@ $ARGUMENTS — [mode]
              mode:
                - status  (デフォルト) : 直近スナップショット + 進行中施策を要約
                - observe : 新 snapshot + 目標判定 + 施策効果追記
-               - action  : 新しい施策 section を追加
+               - action  : 新しい施策行を追加
                - next    : 次に着手すべき改善候補を提示
 ```
 
@@ -61,7 +53,7 @@ AdSense メトリクス取得の優先順:
 ```
 以下を並列に実行して要約:
 1. reference/snapshots/ 配下の最新 YYYY-Www ディレクトリの CSV を Read
-2. docs/todo/01_改善バックログ.md を Read し status: pending / in-progress の section を抽出
+2. docs/todo/04_改善バックログ.md の6列表から active 行を抽出
 3. reference/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
 4. .claude/state/metrics/adsense/LATEST.md を Read し週次推移を取得
 
@@ -99,33 +91,18 @@ AdSense メトリクス取得の優先順:
    - 前月同時期（同日数分）と比較
 
 6. 進行中施策の効果判定（最重要）:
-   docs/todo/01_改善バックログ.md を Read し status: pending の section を抽出。
+   docs/todo/04_改善バックログ.md のAdSense対象行を抽出。
    各施策に対して:
    - 経過日数 = observe 実行日 - deployed_at
    - 実測 delta = 最新値 - デプロイ時点の値（前週 snapshot から読む）
-   - 判定:
-     * 経過 < 14 日 → status: pending 維持
-     * 経過 ≥ 14 かつ |実測/想定| ≥ 80% → status: effect/full
-     * 経過 ≥ 14 かつ 20-80% → status: effect/partial
-     * 経過 ≥ 14 かつ < 20% → status: effect/none
-     * 逆方向 → status: effect/adverse
-   - 判定結果を docs/todo/01_改善バックログ.md の該当 section の「実測」「判定」欄に Edit insert:
-     ```
-     ### 実測
-     - 経過日数: N 日
-     - snapshot: reference/snapshots/YYYY-Www/
-     - 実測 delta: RPM +18%（想定 RPM +20% の 90%）
-
-     ### 判定
-     - status: effect/full
-     - 判定日: YYYY-MM-DD
-     ```
-   - section 冒頭の `status: pending` を `status: effect/XXX` に Edit 更新
-   - 詳細な検証ログは reference/improvement-log.md に追記
+   - 期日前または証拠不足なら active 行を維持し、必要なら Due と次アクションを更新する。
+   - 判定可能なら full / partial / none / adverse を実測値・snapshot・判定日とともに
+     reference/improvement-log.md へ追記し、TODOから該当行を削除する。
+   - adverse の是正は別IDで追加し、確定済み行を履歴として残さない。
 
 7. 出力:
    - 目標超過アラートを先頭で強調
-   - 判定変化（pending → full/partial/none/adverse）した施策をハイライト
+   - 効果判定を確定してTODOから削除した施策をハイライト
    - adverse があれば注意喚起（ポリシー違反や収益急減は即対応）
 ```
 
@@ -143,36 +120,22 @@ AdSense メトリクス取得の優先順:
    - ポリシーチェック（配置・ラベリング・Auto ads との矛盾）
    - verification_command（copy-pasteable な fetch-adsense-data / API 呼び出し）
 
-2. docs/todo/01_改善バックログ.md を Read し、見出し直下（最新を上）に以下 section を Edit insert:
+2. docs/todo/04_改善バックログ.md の該当Tierの表に1行だけ追加:
 
    ```markdown
-   ## <施策タイトル>
-
-   - **status**: pending
-   - **tier**: <1|2|3>
-   - **target_metric**: adsense-<sub>
-   - **deployed_at**: YYYY-MM-DD
-   - **verification_command**: <copy-pasteable script>
-
-   ### 想定効果
-   <+xxx, 根拠>
-
-   ### 実測
-   （pending）
-
-   ### 判定
-   （pending）
+   | ADSENSE-NN | <次アクションを含む短い要約> | pending | YYYY-MM-DD | <owner> | adsense |
    ```
 
 3. front-matter の `updated:` を本日日付に更新。
-4. 詳細な検証コマンド・仮説・参照リンクは reference/improvement-log.md にも append。
+4. target metric、対象、baseline、想定効果、deployed_at、PR、ポリシー確認、
+   検証コマンドは reference/improvement-log.md に appendする。
 5. 次の観測日（デプロイ + 14 / 28 日）を計算して提示。
 ```
 
 #### mode = next
 
 ```
-1. docs/todo/01_改善バックログ.md を Read し status: pending を除いた施策 + 過去 effect/full の派生候補を抽出
+1. docs/todo/04_改善バックログ.md のactive行と、reference/improvement-log.md の過去判定から派生候補を抽出
 2. reference/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
 3. 最新 snapshot の「次のアクション」候補も合わせる
 
@@ -189,15 +152,15 @@ AdSense 特有の改善パターン:
 
 ### Step 3: 共通ルール
 
-- **docs/todo/01_改善バックログ.md は append-only** — section の追加・status の更新のみ。過去判定の改竄は禁止
+- **docs/todo/04_改善バックログ.md は active-only** — 未完了施策の追加・status 更新に限定する。effect 確定後は詳細を improvement-log に残し、行を削除する
 - **snapshots/YYYY-Www/ も append-only** — 過去の CSV は改変しない
 - **日付は絶対日付** — 「今週」「先週」は使わない
 - **数値はソース明示** — "snapshots/2026-W17/overview.csv" のような相対パス
-- **施策は 1 PR 1 section** — 複数目的の PR は分割
+- **施策は 1 PR 1 ID** — 複数目的の PR は分割
 - **想定効果値はデプロイ前に書く** — 後付けバイアス防止
 - **ポリシー遵守の確認は必須** — 配置変更時は AdSense ポリシーに抵触しないこと
 - **週次 /weekly-review から observe モードが自動呼び出し** される想定
-- **1 層構造を維持** — `docs/todo/01_改善バックログ.md` (簡易表)、reference/improvement-log.md は agent が深掘りする詳細
+- **責務を分離する** — `docs/todo/04_改善バックログ.md` はactive一覧、reference/improvement-log.md は判定履歴
 
 ## 参照パターン
 
@@ -206,17 +169,14 @@ AdSense 特有の改善パターン:
 ls -t .claude/skills/analytics/adsense-improvement/reference/snapshots/ | head -3
 cat .claude/state/metrics/adsense/LATEST.md
 
-# 進行中（pending）施策
-cat docs/todo/01_改善バックログ.md | grep -B1 -A4 'status.*pending'
+# 進行中施策
+node .claude/scripts/lib/scan-pending-improvements.mjs --format markdown
 
-# 効果測定済み施策
-cat docs/todo/01_改善バックログ.md | grep -B1 'status.*effect/'
-
-# 詳細ログ
+# 効果測定済み施策・詳細ログ
 cat .claude/skills/analytics/adsense-improvement/reference/improvement-log.md
 ```
 
-## 実証チェックリスト（status: effect/* に更新する前に必須）
+## 実証チェックリスト（効果判定を確定してTODO行を削除する前に必須）
 
 参照: `.claude/rules/evidence-based-judgment.md`
 
@@ -229,7 +189,7 @@ cat .claude/skills/analytics/adsense-improvement/reference/improvement-log.md
 - [ ] 効果が想定の 80% 未満なら、`[仮説] 〜 / 検証コマンド: 〜 / 検証期日: YYYY-MM-DD / 期日後の判定: 〜` の 4 点セットを書いたか
 - [ ] **CLS 対策と RPM 改善の因果は PSI 実測 + AdSense 比較の両方で確認したか**（片方だけでは判定不能）
 
-このチェック未満なら status を effect/full / effect/partial に更新しない。pending のままにすること。
+このチェック未満なら効果を確定せず、active 行を維持すること。
 
 ## 関連スキル
 
@@ -242,7 +202,7 @@ cat .claude/skills/analytics/adsense-improvement/reference/improvement-log.md
 
 ## 前提
 
-- `docs/todo/01_改善バックログ.md` が存在すること（施策 ID は `ADSENSE-*` または `AFF-*`）
+- `docs/todo/04_改善バックログ.md` が存在すること（施策 ID は `ADSENSE-*` または `AFF-*`）
 - `reference/budgets.json` / `reference/snapshots/` / `reference/improvement-log.md` 初期化済
 - AdSense Management API の OAuth 設定済（`.env.local` に CLIENT_ID / SECRET / REFRESH_TOKEN / ACCOUNT_ID）
 - Publisher ID: `ca-pub-7995274743017484`

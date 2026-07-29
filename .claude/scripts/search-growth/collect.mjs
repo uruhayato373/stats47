@@ -2,7 +2,7 @@
 /**
  * collect — source 別に raw を取得 (既存 fetcher を再利用) し manifest を書く。
  *
- * 正典: docs/02_実装計画/39 §4.1 / §7 / Phase 2。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
  * - 既定 (no --live): committed snapshot の presence/freshness を probe し「再利用」する。
  * - --live: credential がある source だけ既存 fetcher を subprocess で実行 (無い source は skipped)。
  * - source の失敗は隔離し、exit summary で success/partial/failed/skipped を返す。partial を成功に見せない。
@@ -16,7 +16,7 @@ import { PATHS, writeJson, ensureDir, getArg, hasFlag, currentIsoWeek } from "./
 import path from "node:path";
 
 function secretPresent(name) {
-  // 値は読まない。存在有無だけ (§9)。
+  // 値は読まない。存在有無だけ。
   return name ? Object.prototype.hasOwnProperty.call(process.env, name) && !!process.env[name] : false;
 }
 

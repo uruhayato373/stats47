@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-13",
+  "generatedAt": "2026-07-29",
   "themes": [
     {
       "themeKey": "aging-society",
@@ -214,11 +214,11 @@
         "relatedArticles": null
       },
       "dataQualityStatus": "ok",
-      "currentHypothesis": "学校教育/高等教育/社会教育の主問が複数同居。分割 + parent-hub 化 (doc 24)",
+      "currentHypothesis": "学校教育/高等教育/社会教育の主問が複数同居。分割 + parent-hub 化 (theme-taxonomy-reorganization)",
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-education-culture.md",
-        "docs/02_実装計画/24_テーマ分類再編成方針.md#education-culture-split--parent-hub候補"
+        ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#education-culture-split--parent-hub候補"
       ],
       "dataQuality": {
         "keysChecked": 5,
@@ -1180,11 +1180,11 @@
         "relatedArticles": null
       },
       "dataQualityStatus": "ok",
-      "currentHypothesis": "治安/交通/火災の主問が複数同居。crime-safety/traffic-safety/fire-emergency への分割 + parent-hub 化 (doc 24)",
+      "currentHypothesis": "治安/交通/火災の主問が複数同居。crime-safety/traffic-safety/fire-emergency への分割 + parent-hub 化 (theme-taxonomy-reorganization)",
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-safety.md",
-        "docs/02_実装計画/24_テーマ分類再編成方針.md#safety-split--parent-hub候補"
+        ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#safety-split--parent-hub候補"
       ],
       "dataQuality": {
         "keysChecked": 25,

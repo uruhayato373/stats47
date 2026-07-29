@@ -21,8 +21,8 @@ source: legacy implementation plan removed on 2026-06-29
 
 Related canon:
 
-- `docs/01_技術設計/12_完全DBレス設計.md`
-- `docs/01_技術設計/07_情報設計.md`
+- `docs/01_技術設計/02_データアーキテクチャ.md`
+- `docs/01_技術設計/03_情報設計.md`
 - `.claude/rules/r2-storage-design.md`
 - `.claude/rules/data-storage.md`
 
@@ -46,4 +46,4 @@ Production reflection should go through CI / snapshot workflows. Local R2 writes
 
 ## Backlog
 
-Implementation backlog lives in `docs/todo/02_機能バックログ.md`. Keep this README for architecture and local feature conventions only.
+Implementation backlog lives in `docs/todo/05_機能バックログ.md`. Keep this README for architecture and local feature conventions only.

@@ -2,8 +2,9 @@
 /**
  * normalize — 既存 snapshot (実データ) を正規化 Observation にして latest.json / health.json を書く。
  *
- * 正典: docs/02_実装計画/39 §4.2 / Phase 3。normalized state は derived で再生成可能。
- * source ごとに独立して処理し、1 source の失敗が全体を止めない (§7)。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
+ * normalized state は derived で再生成可能。
+ * source ごとに独立して処理し、1 source の失敗が全体を止めない。
  *
  *   node .claude/scripts/search-growth/normalize.mjs [--week YYYY-Www]
  */

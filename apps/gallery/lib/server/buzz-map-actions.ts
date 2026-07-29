@@ -29,11 +29,11 @@ import {
 import { query as queryPosts, insert as insertPost } from './posts-store';
 
 /**
- * buzz-map gallery アクション (§9.2 操作 + §9.3 安全)。
+ * buzz-map gallery アクション（操作と安全ガード）。
  *
  * 各操作は分離した job として起動 (同時実行 1 件ガードは jobs.ts が既に持つ)。
  * ideaId は必ず catalog 実在 (curated レーン) の allowlist で検証し、
- * 任意文字列を CLI に渡さない (§9.3)。R2 push / draft 登録は追加の確認が要る。
+ * 任意文字列を CLI に渡さない。R2 push / draft 登録は追加の確認が要る。
  */
 export type ActionResult<T = unknown> = { status: number; body: T };
 
@@ -184,7 +184,7 @@ export function pushBuzzMapR2(body: { ideaId?: string }): ActionResult {
   return 'error' in r ? { status: 409, body: r } : { status: 202, body: r };
 }
 
-// ─── draft 登録 (§8.3 gate を通ったときのみ posts.json へ insert) ─────
+// ─── draft 登録 (draft gate を通ったときのみ posts.json へ insert) ─────
 export interface RegisterDraftInput {
   ideaId?: string;
   channel?: 'x' | 'instagram';
@@ -270,7 +270,7 @@ export async function registerBuzzMapDraft(
     };
   }
 
-  // UTM (§7.1) + attribution (§7.1: x=direct 本文リンク / instagram=profile 間接導線)。
+  // UTM + attribution（x=direct 本文リンク / instagram=profile 間接導線）。
   // primaryUrl が無い候補は UTM を付けない (canonical 不明)。
   const utmUrl = entry.primaryUrl
     ? snsUtm.buildUtmForDomain({

@@ -8,7 +8,7 @@ model: sonnet
 
 `/areas/[code]` の高密度化テンプレを設計する専任エージェント。正典 (必読):
 **`.claude/rules/area-databook-standards.md`** (SSOT 構造・データ経路・ブロック文法・validator・禁止事項) +
-**`docs/01_技術設計/07_情報設計.md`** (area の県軸・回遊面としての責務) — すべてそこに従う。
+**`docs/01_技術設計/03_情報設計.md`** (area の県軸・回遊面としての責務) — すべてそこに従う。
 
 > **役割分担 (重複しない)**
 > - **area-databook-designer (本エージェント)**: `template.ts` の設計・執筆・rejectedCandidates 記録。

@@ -13,7 +13,7 @@ Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計
 - GA4 週次 snapshot 取得 (`/fetch-ga4-data`)
 - GA4 改善施策計画 + agent 用詳細記録 (`/ga4-improvement`)
 - **GA4 計装イベント台帳の維持** (`.claude/rules/analytics-event-standards.md` §2)。`apps/web/src/lib/analytics/events.ts` に追加されたイベント/パラメータの登録要否・登録状況を追跡し、GA4 で実登録を確認したら `✅登録済 (日付)` に更新する。effect/* 判定の前に「内訳が (not set) に潰れず取れるか」を確認する（推測で登録済みにしない = `evidence-based-judgment.md`）
-- ~~featured ranking 更新 (`/update-featured-rankings`)~~ → **dead**（完全DBレス移行で D1 `is_featured` 機構が消滅）。featured は現在 git TS `isFeatured`/`featuredOrder` の手動キュレーション。GA4→featured 自動化は要 DBレス再実装 (backlog `[DEAD-SKILL-DBLESS-TRIAGE]`)
+- ~~featured ranking 更新 (`/update-featured-rankings`)~~ → **skill ごと削除済（2026-07-29）**。ホーム注目は掲載価値スコア（GSC 表示回数を主軸に厚みで補正）で**自動選定**される。真実源は生成物 `packages/data-configs/src/prominence/ranking-prominence.generated.ts`（生成: `npm run generate:ranking-prominence --workspace apps/web`）。GA4 側から featured を書き換える経路は持たない
 
 ## 担当スキル
 
@@ -21,14 +21,14 @@ Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計
 |---|---|
 | `/fetch-ga4-data` | GA4 週次 snapshot (eventName, pagePath 別) |
 | `/ga4-improvement` | GA4 改善施策の agent 用詳細記録 |
-| ~~`/update-featured-rankings`~~ | **dead** (D1 機構消滅。featured は git TS 手動キュレーション) |
+| ~~`/update-featured-rankings`~~ | **削除済** (2026-07-29。ホーム注目は掲載価値スコアで自動選定) |
 
 ## 担当外
 
 - 改善ログ status 更新 → `improvement-triage` に委譲
 - GSC / PSI / AdSense 計測 → 各 analyst に委譲
 - GA4 設定変更 → 原則ユーザー手動。ユーザーの明示承認がある場合のみ
-  `docs/02_実装計画/41_AdSense継続改善・GA4_GSC設定自動化仕様.md` §6 の専用Playwright runnerで
+  `.claude/scripts/google-admin/README.md` の専用Playwright runnerで
   allowlist内設定を実行可（権限・削除・timezone等は常に対象外）
 
 ## 必読 rules
@@ -41,11 +41,11 @@ Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計
 - `.claude/state/metrics/ga4/` — GA4 週次 history (CRUD)
 - `.claude/skills/analytics/ga4-improvement/reference/snapshots/` — 週次 snapshot CSV (CRUD)
 - `.claude/skills/analytics/ga4-improvement/reference/improvement-log.md` — agent 用詳細層 (CRUD)
-- `docs/todo/01_改善バックログ.md` — read only (improvement-triage 経由)
+- `docs/todo/04_改善バックログ.md` — read only (improvement-triage 経由)
 
 ## File Boundary (並行衝突回避)
 
-- `docs/todo/01_改善バックログ.md` への write 一切なし (improvement-triage 経由)
+- `docs/todo/04_改善バックログ.md` への write 一切なし (improvement-triage 経由)
 - `.claude/state/metrics/ga4/` への write は本 agent が排他
 - 並行起動可能 agent: gsc-analyst / performance-auditor / adsense-analyst (state は別)、 improvement-triage (本 agent の state を read)
 - 並行起動 NG: 同期間 fetch-ga4-data の ga4-analyst 2 体同時

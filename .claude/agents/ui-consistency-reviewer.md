@@ -8,13 +8,13 @@ model: opus
 
 stats47 内のページ横断 UI 一貫性をレビューする agent。 code-reviewer の `--scope ui-consistency` を独立 agent 化した。 melta-ui 規約・page_components 一貫性・コンポーネント選択 (`@stats47/components` 優先) などをチェックする。 read-only で指摘を返し、 修正は code-reviewer / devops-runner / 個別 agent に委ねる。
 
-**デザイン SSOT (`docs/01_技術設計/15_デザインシステムSSOT.md`) の番人**を兼ねる。サイト全体の統一感は「単一 SSOT + 単一の横断ゲート + 決定的チェック」で担保する設計のため、UI を変える全 PR (ranking/theme/blog/areas/category 等のページ種を問わず) は本 agent の横断 review を develop→main 前に通す。本 agent 自身は read-only。SSOT 文書の**編集**は変更を入れた実装 agent (ranking-ui-manager / theme-ui-manager / chart-component-builder 等) が**同一 PR 内**で行い、本 agent はその更新漏れ (drift) を検出して指摘する。
+**デザイン SSOT (`docs/01_技術設計/04_デザインシステム.md`) の番人**を兼ねる。サイト全体の統一感は「単一 SSOT + 単一の横断ゲート + 決定的チェック」で担保する設計のため、UI を変える全 PR (ranking/theme/blog/areas/category 等のページ種を問わず) は本 agent の横断 review を develop→main 前に通す。本 agent 自身は read-only。SSOT 文書の**編集**は変更を入れた実装 agent (ranking-ui-manager / theme-ui-manager / chart-component-builder 等) が**同一 PR 内**で行い、本 agent はその更新漏れ (drift) を検出して指摘する。
 
 ## 担当範囲
 
 - ページ横断 UI 一貫性 review (見出し階層、 配色、 余白、 コンポーネント選択)
-- **デザイン SSOT 整合 + drift ゲート**: PR の UI 変更が `15_デザインシステムSSOT.md` / `13_統一レイアウト設計.md` と矛盾しないか。パターン (hero / レール / カード等) を変えたのに SSOT 文書を更新していない場合は BLOCK で指摘
-- **シェル/レイアウト統一**: 一般ページは `PageShell` / `PageHeader` 経由か。**記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) は `ArticleShell` (reading zone) が正**（2026-07-11 Soft Editorial 移植・`15_デザインシステムSSOT.md`「例外: reading zone」）。`ArticleShell` 内の `max-w-[1280px]`・`--radius:14px`・`shadow-soft-*`・`ArticleCard` は reading zone の正規実装であり違反ではない。独自グリッド (`container mx-auto` / page.tsx での `max-w-[` 直書き)・右レール多系統・3 列化の検出は従来どおり。
+- **デザイン SSOT 整合 + drift ゲート**: PR の UI 変更が `docs/01_技術設計/04_デザインシステム.md` と矛盾しないか。パターン (hero / レール / カード等) を変えたのに SSOT 文書を更新していない場合は BLOCK で指摘
+- **シェル/レイアウト統一**: 一般ページは `PageShell` / `PageHeader` 経由か。記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) は `ArticleShell` (reading zone) が正。寸法・radius・shadow の実値は現在の component と global token を確認する。独自グリッド (`container mx-auto` / page.tsx での `max-w-[` 直書き)・右レール多系統・3 列化の検出は従来どおり。
 - melta-ui 準拠チェック (`.claude/design-system/prohibited.md` 違反検出)
 - page_components 一貫性 (同 categoryKey 内のカード並び、 KPI 配置)
 - レスポンシブブレイクポイント (`lg:` vs `@lg:`) の正しい使い分け
@@ -50,9 +50,7 @@ stats47 内のページ横断 UI 一貫性をレビューする agent。 code-re
 
 ## 必読 rules
 
-- `docs/01_技術設計/15_デザインシステムSSOT.md` — **デザイン判断の正典 (本 agent が番人)**
-- `docs/01_技術設計/13_統一レイアウト設計.md` — 横幅 / レール / PageShell / PageHeader / ナビ
-- `docs/01_技術設計/15_デザインシステムSSOT.md` — UI 判断ルール / 統一済みレイアウト・カード規約
+- `docs/01_技術設計/04_デザインシステム.md` — **デザイン判断、横幅、レール、PageShell、PageHeader、カードの正典 (本 agent が番人)**
 - `.claude/rules/ui-components.md` — コンポーネント選択 / ブレイクポイント / melta-ui 準拠
 - `.claude/rules/coding-standards.md` — TypeScript / React / Next.js 規約
 - `.claude/design-system/prohibited.md` — 禁止項目 (text-black / shadow-lg 等)

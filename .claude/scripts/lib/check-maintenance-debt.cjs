@@ -8,7 +8,7 @@ const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..
 const BASELINE = process.env.MAINTENANCE_DEBT_BASELINE || path.join(ROOT, ".claude/config/maintenance-debt-baseline.json");
 const SCAN_ROOTS = ["apps", "packages", ".claude", ".github"].map((item) => path.join(ROOT, item));
 const TEXT_EXT = /\.(?:[cm]?[jt]sx?|md|ya?ml|json|sh|css|scss)$/i;
-const EXCLUDED = new Set(["node_modules", ".next", "dist", "coverage", ".git", "state"]);
+const EXCLUDED = new Set(["node_modules", ".next", "dist", "coverage", ".git", "state", "worktrees"]);
 
 function rel(file) { return path.relative(ROOT, file).split(path.sep).join("/"); }
 function walk(dir) {
@@ -50,9 +50,23 @@ function inspect(file) {
   const isTest = /(?:^|\/)(?:__tests__|tests?|fixtures?)(?:\/|$)|\.(?:spec|test)\.[cm]?[jt]sx?$/.test(relative);
   fs.readFileSync(file, "utf8").split(/\r?\n/).forEach((line, index) => {
     const number = index + 1;
+    // debt markerはコメントで宣言する。コード内のmessage/UI文言/正規表現に現れる
+    // "TODO" はタスクではないため、コード系ファイルはコメント部分だけを検査する。
+    let lineForDebt = line;
+    if (/\.[cm]?[jt]sx?$/.test(relative)) {
+      const comment = lineForDebt.match(/(?:\/\/|\/\*|^\s*\*)(.*)$/);
+      lineForDebt = comment ? comment[1] : "";
+    } else if (/\.(?:sh|ya?ml)$/.test(relative)) {
+      const comment = lineForDebt.match(/^\s*#(.*)$/);
+      lineForDebt = comment ? comment[1] : "";
+    }
     // 大文字のみ検出 (debt コメント規約は大文字)。case-insensitive だと識別子・DOM id・パス
     // (`const todo` / `section#todo` / `../../todo/`) を誤検知する (2026-07-17 精緻化・legacy 用語除外と同方針)
-    const debt = line.match(/\b(TODO|FIXME|HACK)\b/);
+    // debt markerの構文は `TODO:` / `TODO (Phase N):` / `TODO #123:`。
+    // 単なる「TODO台帳」「TODO ID」やtodo-ran固有名詞を負債として数えない。
+    const debt = lineForDebt.match(
+      /\b(TODO|FIXME|HACK)\b(?=\s*(?:(?:\([^)\r\n]*\)|Phase\s+\d+|#[0-9]+)\s*)?:)/,
+    );
     // 除外に「TODO- プレースホルダ規約への言及」を追加 (2026-07-20)。provenance では resourceId が未確定なとき
     // "TODO-" プレフィックスの sentinel 値を使い、コード/文書がその規約に言及する (startsWith("TODO-") /
     // TODO でない / TODO プレースホルダ / TODO resourceId)。これらは実タスクの debt マーカーではなくデータ値の
@@ -61,6 +75,7 @@ function inspect(file) {
       debt &&
       !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|docs\/todo\/|remove(?:d)?\s+(?:when|after|by)|期限|削除条件)/i.test(line) &&
       !/(?:["']TODO-|TODO-["']|startsWith\(["']TODO|TODO ?プレースホルダ|TODO ?placeholder|TODO ?でない|TODO resourceId|resourceId.*TODO)/.test(line)
+      && !/TODO(?:\s*(?:ID|行|契約|定義|一覧|真実源|へ|から|を|の|完了|具体化|管理)|[）)])/u.test(line)
     )
       results.push(finding("UNTRACKED_DEBT", file, number, `${debt[1].toUpperCase()} に issue/backlog/削除条件がない`, line));
 
@@ -90,7 +105,7 @@ function inspect(file) {
         // `'legacy'` / `"legacy"` は状態名リテラル (`"deprecated"` を除外しているのと同じ enum 値扱い)。
         // `legacy` と `current`/`manifest` が近接する行は image pipeline の manifest 形式名としての用法
         // (例: 「初回manifest移行だけは legacyを安全にcurrent扱いできない」) で廃止予定コードではない。
-        !/catalogStatus|LEGACY_SETS|IndicatorSet|indicator-sets|ThemeCatalog|THEME_CATALOGS|legacy ?テーマ|legacy ?\(未登録\)|未登録 ?\(legacy\)|\(legacy\) ?テーマ|カタログ駆動|legacy 2\b|"deprecated"|deprecated source|VerificationStatus|VERIFICATION_STATUSES|['"]legacy['"]|legacy[^\n]{0,20}(?:current|manifest)|(?:current|manifest)[^\n]{0,20}legacy/i.test(line))
+        !/catalogStatus|LEGACY_SETS|IndicatorSet|indicator-sets|ThemeCatalog|THEME_CATALOGS|legacy ?テーマ|legacy ?catalog|legacy\/別経路|legacy ?\(未登録\)|未登録 ?\(legacy\)|\(legacy\) ?テーマ|カタログ駆動|legacy 2\b|"deprecated"|deprecated source|VerificationStatus|VERIFICATION_STATUSES|['"]legacy['"]|legacy[^\n]{0,20}(?:current|manifest)|(?:current|manifest)[^\n]{0,20}legacy/i.test(line))
       results.push(finding("UNBOUNDED_LEGACY", file, number, `${legacy[1]} に期限・削除条件がない`, line));
 
     if (!isTest && !relative.startsWith(".github/workflows/") && !relative.endsWith("CLAUDE.md") && !relative.endsWith("AGENTS.md") &&

@@ -9,7 +9,7 @@ model: sonnet
 > **[完全DBレス Phase E (2026-05-30)]** page_components の SSOT は git TS
 > `apps/web/scripts/data/page-components/<pageType>/<key>.json`。永続/リモート D1 への INSERT は廃止。
 > 追加 = JSON 配列を直接編集 → `export-page-components-snapshot.ts` で R2 生成 → `verify-page-components-snapshot.ts` で検証。
-> `page_component_assignments` テーブルは PR #216 で page_components に統合済 (廃止)。正典: `docs/01_技術設計/12_完全DBレス設計.md`。
+> `page_component_assignments` テーブルは PR #216 で page_components に統合済 (廃止)。正典: `docs/01_技術設計/02_データアーキテクチャ.md`。
 >
 > **★ ただし theme カタログ駆動テーマ (2026-07-04〜)**: `THEME_CATALOGS` 登録済みテーマ (現状 manufacturing) の
 > `page-components/theme/<key>.json` は **`packages/data-configs/src/theme-catalog/<key>.ts` からの生成物 (手編集禁止)**。

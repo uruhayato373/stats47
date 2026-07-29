@@ -125,7 +125,7 @@ tags: [theme-catalog, consumer-prices, regional-price-index, charts]
 4. `sourceLink/rankingLink/relatedRankingKeys` を補完
 5. `sortOrder`をsection内で一意化
 6. 長文markdownを地域差指数の読み方中心に短縮
-7. 定義・注意事項カード仕様の `guidance` を追加
+7. `.claude/skills/theme/manage-theme-portfolio/reference/theme-guidance-implementation.md` に従い `guidance` を追加
 
 ### 禁止
 

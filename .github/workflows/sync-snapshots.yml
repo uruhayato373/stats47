@@ -150,7 +150,7 @@ jobs:
       # generate-known-tag-keys: R2 blog snapshot の tagMeta を KNOWN_TAG_KEYS に反映。
       #   これを止めると middleware が新しいタグを全て 410 にする。2026-04-26〜07-24 は
       #   生成元 (廃止済リモート D1) が消えたまま凍結し、タグリンク 1,988 本が死んでいた。
-      #   正典: docs/04_レビュー/2026-07-24-site-link-audit.md
+      #   正典: .claude/rules/blog-quality-standards.md「内部リンクの実在」
       - name: 🔑 Regenerate known + sitemap ranking keys / known tag keys
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp

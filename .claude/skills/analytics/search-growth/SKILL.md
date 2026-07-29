@@ -7,7 +7,8 @@ primary_agent: gsc-analyst
 # search-growth — 検索成長統合基盤
 
 GSC だけを見る運用をやめ、**検索露出・クリック・インデックス・流入後行動・実ユーザー性能・サーバー状態を
-一つの証拠チェーン**で診断する。正典: `docs/02_実装計画/39_検索成長統合MCP・API基盤実装仕様.md`。
+一つの証拠チェーン**で診断する。基盤・安全境界は`reference/platform-contract.md`、期間・承認・
+14/28/56日判定は`reference/weekly-cycle-contract.md`を正典とする。進捗は`docs/todo/`だけで管理する。
 
 ```
 既存 snapshot (GSC/GA4/PSI/coverage/inspection/cloudflare) + live collector (sitemap/crux/http/lighthouse)
@@ -25,7 +26,7 @@ npm run search-growth:analyze       # Observation → 決定的 candidate (candi
 npm run search-growth:report -- --limit 15   # 週次 digest (blocker→verified→opp→mobile→CWV→coverage→freshness→判定対象)
 npm run search-growth:status        # source freshness + candidate 件数
 npm run search-growth:next -- --limit 20      # 次にやる候補 (score 降順・決定的)
-npm run search-growth:triage        # 週次レビュー用の最大3件 (technical/content/measurement 各1・§18.4)
+npm run search-growth:triage        # 週次レビュー用の最大3件 (technical/content/measurement 各1)
 npm run search-growth:approve -- --candidate <id>   # 人間承認 (pending→approved。週2件・WIP≤5 を機械強制)
 npm run search-growth:dismiss -- --candidate <id> --reason "..."   # 却下 (理由を記録)
 npm run search-growth:measure -- --candidate <id>   # 候補の evidence + 14/28/56 日判定スケジュール
@@ -33,7 +34,8 @@ npm run search-growth:all           # collect→normalize→analyze→report を
 npm run search-growth:test          # 全テスト (compliance / foundation / candidate / pipeline / mcp / triage)
 ```
 
-週次サイクル (§18.3): fetch-metrics-weekly → search-growth-weekly (candidate 再構築・承認 lifecycle は
+週次サイクル（`reference/weekly-cycle-contract.md`）: fetch-metrics-weekly → search-growth-weekly
+(candidate 再構築・承認 lifecycle は
 carry over) → weekly-review が `triage` の最大3件を審査 → 人間が `approve` → weekly-plan が
 `status=approved` を最大1〜2件だけ採用 → `measure` の 14/28/56 日で効果判定。
 未承認候補を改善バックログへ自動追加しない。承認は repo state (candidates.json) のみ書く。
@@ -52,9 +54,9 @@ adapter。tools (全て read-only): `search_growth_status` / `search_growth_cand
 `gsc_performance` / `gsc_inspect_urls` / `gsc_sitemaps` / `ga4_organic_quality` / `crux_web_vitals` /
 `psi_diagnostics` / `cloudflare_search_health` / `seo_route_contract`。filter/limit/cursor 付き・stats47.jp
 allowlist・secret を返さない。**deploy / push / PR / sitemap submit-delete / GA4・Cloudflare 変更 / production
-write は tool として存在しない** (§6.3)。
+write は tool として存在しない**。詳細は`reference/platform-contract.md`の「CLI・MCPの境界」。
 
-## candidate type (§5.1)
+## candidate type
 
 `ctr-opportunity` / `striking-distance` / `query-gap` / `intent-mismatch` / `mobile-gap` /
 `indexability-conflict` / `crawled-not-indexed` / `soft-404-risk` / `canonical-drift` / `cwv-opportunity` /
@@ -64,12 +66,12 @@ write は tool として存在しない** (§6.3)。
 - **missing を 0 に変換しない** (需要ありでデータ欠損 → `measurement-gap` で明示)。
 - 同一 URL・原因を dedupe / past effect none・adverse で confidence 抑制 (`past-effects.json`) / 決定的順序。
 - 各 candidate は evidence refs・baseline period・freshness・limitations・expected metric・suggested
-  verification・external action flag を持つ (§5.3)。
+  verification・external action flag を持つ。詳細は`reference/platform-contract.md`の「Candidate契約」。
 
 ## 効果判定 (evidence-based-judgment 必読)
 
 candidate を実装 → 14/28/56 日で `measure` の suggestedVerification に従い再計測。**自動 issue は PSI/Cloudflare
-閾値 alert のみ**。一般候補は人間承認後に `docs/todo/01_改善バックログ.md` へ追加する (§11)。CTR 候補は過去の
+閾値 alert のみ**。一般候補は人間承認後に `docs/todo/04_改善バックログ.md` へ追加する。CTR 候補は過去の
 title rewrite の effect/none を踏まえ confidence を抑制済 — CTR だけを根拠に大量 rewrite しない。
 
 ## 専門 runbook (統合入口から参照)
@@ -83,11 +85,12 @@ title rewrite の effect/none を踏まえ confidence を抑制済 — CTR だ�
 - `cloudflare-cost-improvement` — Cloudflare (usage は cost、SEO 診断は本基盤)
 - `seo-audit` — 横断 SEO 監査
 
-## Indexing API は使わない (§3.1)
+## Indexing API は使わない
 
 Google Indexing API は公式に JobPosting / BroadcastEvent VideoObject 専用。通常ページには使わない
 (2026-07-23 に `indexing-api-submit` / `gsc-auto-resubmit-daily.yml` を退役)。再クロールは
 observe-after-fix (sitemap/内部リンク/canonical/content 修正 + URL Inspection 観測) で行う。
+詳細は`reference/platform-contract.md`の「Indexing API準拠」。
 
 ## 実装
 
@@ -97,3 +100,10 @@ observe-after-fix (sitemap/内部リンク/canonical/content 修正 + URL Inspec
 - state: `.claude/state/search-growth/{latest,candidates,health,past-effects}.json` + `manifests/`
 - CI: `.github/workflows/search-growth-weekly.yml` (weekly candidate rebuild・committed snapshot 再利用)
 - test: `.claude/scripts/search-growth/__tests__/*.test.mjs`
+
+## 参照
+
+- `reference/platform-contract.md` — source、Observation、candidate、MCP、安全・準拠境界
+- `reference/weekly-cycle-contract.md` — finalized7d / rolling28d、triage、WIP、14/28/56日判定
+- `docs/todo/05_機能バックログ.md` — 実装・live検証の残作業
+- `docs/todo/04_改善バックログ.md` — 採択施策と効果判定

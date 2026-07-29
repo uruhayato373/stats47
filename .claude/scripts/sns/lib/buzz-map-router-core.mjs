@@ -1,8 +1,8 @@
 /**
  * buzz-map landing router + score gate + curated↔machine dedup (純粋コア)
  *
- * 正典: docs/02_実装計画/27_buzz-map集客ゲート統合仕様.md
- *   §4.4 score / §4.5 hard gate / §5 landing router / §5.2 routing rule
+ * 正典: .claude/rules/buzz-map-standards.md §4-5
+ *   （score / hard gate / landing router / routing rule）
  *
  * ここには「純粋関数」だけ置く (実IOは inventory-core / contract-core に分離)。
  * curated-ideas.ts (TS) を build-buzz-map-catalog.ts が読み込み、各 idea を
@@ -10,10 +10,10 @@
  */
 
 // ---------------------------------------------------------------------------
-// §4.4 score — 8 要素 (0-100) + landing 補正
+// score — 8 要素 (0-100) + landing 補正
 // ---------------------------------------------------------------------------
 
-/** score 8 要素の満点 (§4.4)。builder が breakdown の再計算に使う。 */
+/** score 8 要素の満点。builder が breakdown の再計算に使う。 */
 export const SCORE_MAX = {
   anomaly: 20,
   selfSearch: 15,
@@ -42,7 +42,7 @@ export function computeBaseScore(breakdown) {
 }
 
 /**
- * §4.4 landing 補正:
+ * landing 補正:
  *   live の既存 ranking/blog へ約束一致で着地: +10
  *   文脈一致 vertical がある: +5
  *   landing 新規作成が必要: -5
@@ -83,11 +83,11 @@ export function computeCuratedScore(idea) {
 }
 
 // ---------------------------------------------------------------------------
-// §4.5 hard gate — 自動生成 / 自動投稿の可否
+// hard gate — 自動生成 / 自動投稿の可否
 // ---------------------------------------------------------------------------
 
 /**
- * §4.5 の hard gate を評価する。「自動生成対象か」と「自動投稿対象か」を分けて返す。
+ * hard gate を評価する。「自動生成対象か」と「自動投稿対象か」を分けて返す。
  *   - license=non-commercial (commercialUse=blocked) は収益導線に使えない
  *   - competitorOverlap=exact は自動生成対象外
  *   - story/hook が空の機械 combo は自動生成対象外
@@ -120,7 +120,7 @@ export function evaluateHardGate(idea) {
     reasons.push("sensitivity=high (自動 caption・自動投稿対象外)");
   }
   if (idea?.commercialUse === "review-required") {
-    // 生成は可・投稿前にライセンス確認が要る (§4.5 review-required)
+    // 生成は可・投稿前にライセンス確認が要る (review-required)
     reasons.push("commercialUse=review-required (投稿前にライセンス確認)");
   }
   if (Array.isArray(idea?.channels) && idea.channels.length === 0) {
@@ -135,7 +135,7 @@ export function evaluateHardGate(idea) {
 // §5 landing router — 判定順に沿って landingPlan を「解決」する
 // ---------------------------------------------------------------------------
 
-/** §4.3 の分岐 status。router が feasibility/gate から機械導出する。 */
+/** 分岐 status。router が feasibility/gate から機械導出する。 */
 export const BRANCH_STATUS = [
   "needs-content",
   "needs-pipeline",
@@ -324,7 +324,7 @@ export function curatedToCatalogEntry(idea, scored, landing, gate) {
 }
 
 // ---------------------------------------------------------------------------
-// §4.3 status machine — upsert (後段状態を巻き戻さない)
+// status machine — upsert (後段状態を巻き戻さない)
 // ---------------------------------------------------------------------------
 
 /** メインの進行 status (candidate → … → measured)。index が大きいほど後段。 */
@@ -350,7 +350,7 @@ export function isProgressStatus(s) {
 }
 
 /**
- * status upsert (§4.3 後段状態を巻き戻さない)。
+ * status upsert（後段状態を巻き戻さない）。
  * - 両方が進行 status → max(rank) を採る (後段を維持)
  * - prev が進行 status で next が分岐状態 → prev を保持 (spec/generated が needs-x / blocked で消えない)
  * - prev が分岐で next が進行 → next へ昇格
@@ -371,7 +371,7 @@ export function upsertStatus(prev, next) {
 
 /**
  * curated 統合 entry に対する status を、dedup した machine entry 群の後段 status を
- * 加味して確定する (§4.3 巻き戻し禁止・§5.4 backfill)。
+ * 加味して確定する（巻き戻し禁止・landing backfill）。
  * @param {string|undefined|null} prevStatus 前回 rebuild の curated entry status
  * @param {string[]} matchedMachineStatuses dedup した machine entry の status 群
  * @param {string|undefined|null} draftStatus posts.json 由来の draft 継承 status (無ければ null)
@@ -389,11 +389,11 @@ export function resolveMergedStatus(prevStatus, matchedMachineStatuses = [], dra
 }
 
 // ---------------------------------------------------------------------------
-// §8.3 postable predicate — draft 登録できるか
+// postable predicate — draft 登録できるか
 // ---------------------------------------------------------------------------
 
 /**
- * §8.3 draft gate。全条件を満たしたときだけ posts.json へ draft 登録できる。
+ * draft gate。全条件を満たしたときだけ posts.json へ draft 登録できる。
  * 満たさない条件を reasons に列挙する (どれが欠けているか可視化)。
  * facts は builder / gallery / Phase 4 が R2・contract・live を解決して渡す。
  * @param {{
@@ -418,11 +418,11 @@ export function isPostable(facts) {
 }
 
 // ---------------------------------------------------------------------------
-// §8.4 / §14.1 batch selection — eligible を score 順で N 件
+// batch selection — eligible を score 順で N 件
 // ---------------------------------------------------------------------------
 
 /**
- * batch eligible (§4.4 / §8.3 の予備軍):
+ * batch eligible（score / draft gate の予備軍）:
  *   - hard gate 通過 (entry.eligible !== false)
  *   - landing が blocked でない (landingStrategy が blocked でない)
  *   - status が posted/measured/rejected でない
@@ -438,7 +438,7 @@ export function isEligibleForBatch(entry) {
 }
 
 /**
- * batch 対象 (eligible = 生成対象外でない・投稿導線がある) を score 降順で N 件返す (§8.4)。
+ * batch 対象 (eligible = 生成対象外でない・投稿導線がある) を score 降順で N 件返す。
  * @param {object[]} entries curated catalog entry 群
  * @param {number} n
  * @returns {object[]}

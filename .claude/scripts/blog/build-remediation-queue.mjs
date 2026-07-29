@@ -321,7 +321,7 @@ for (const r of raw) {
 // author は常に sonnet (frontmatter 固定)。done を母集団に含めると opus 枠が是正済み記事に消費されるため除外
 // (ai-content 側も needs-regen のみを母集団にしている)。
 // workflow (blog-mass-rewrite.js) が entry.reviewTier を読んで critic の model を傾斜する。
-// 設計正典: docs/02_実装計画/01_収益化マスタープラン.md §7 / docs/04_レビュー/2026-07-03-claude-code-setup-audit.md §6
+// 設計正典: .claude/rules/model-prompting.md
 const OPUS_REVIEW_TOP_N = 30;
 queue
   .filter((e) => e.status !== "done")

@@ -30,7 +30,7 @@ interface SectionHeaderProps {
  * ページ内のセクション見出し（h2）は必ずこのコンポーネント経由にする
  * （生の `<h2>` 直書きは check-design-system の no-raw-h2-in-page で禁止）。
  *
- * 設計仕様: docs/01_技術設計/15_デザインシステムSSOT.md
+ * 設計仕様: docs/01_技術設計/04_デザインシステム.md
  */
 export function SectionHeader({
   number,

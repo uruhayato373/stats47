@@ -1,7 +1,8 @@
 /**
  * service — CLI と MCP が共有する read-only pure service。
  *
- * 正典: docs/02_実装計画/39 §6.1 (CLI を正典実装とし MCP は同じ service を呼ぶ薄い adapter)。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md
+ * (CLI を正典実装とし MCP は同じ service を呼ぶ薄い adapter)。
  * すべて derived state (latest.json / candidates.json / health.json) の read のみ。
  * network も mutation もしない。output は small (limit/cursor)。secret を返さない。
  */
@@ -43,7 +44,7 @@ function obsByPage(observations, source, metricSet) {
     .map((o) => ({ page: o.dimensions?.page ?? o.dimensions?.scope ?? null, device: o.dimensions?.device, metric: o.metric, value: o.value, freshness: o.freshness, observedAt: o.observedAt }));
 }
 
-// ── read-only tools (§6.2) ────────────────────────────────────────────
+// ── read-only tools ───────────────────────────────────────────────────
 
 export function status() {
   const health = loadHealth();

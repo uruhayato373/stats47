@@ -2,11 +2,12 @@
 /**
  * search-growth MCP server — read-only。CLI と同じ pure service (lib/service.mjs) を呼ぶ薄い adapter。
  *
- * 正典: docs/02_実装計画/39 §6 (CLI 正典・MCP は薄い adapter・read-only tools のみ・mutation 非公開)。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md
+ * (CLI 正典・MCP は薄い adapter・read-only tools のみ・mutation 非公開)。
  * stdio JSON-RPC 2.0 (newline-delimited)。外部依存ゼロ (MCP SDK を使わず最小実装)。
  * MCP が無くても CLI で全機能が成立する (この server は任意)。
  *
- * 公開しない mutation (§6.3): deploy / push / PR / sitemap submit-delete / GSC・GA4・Cloudflare 変更 /
+ * 公開しない mutation: deploy / push / PR / sitemap submit-delete / GSC・GA4・Cloudflare 変更 /
  * URL 削除 / production write。これらは tool として存在しない。
  */
 import { createInterface } from "node:readline";

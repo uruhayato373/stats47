@@ -33,12 +33,12 @@
   `categories.ts` の `CATEGORY_DEFS`。
 - **`category` は `CategoryKey` union 型なので無効キーはコンパイルエラー**になる。新規キーを増やさない。
 - category は「e-Stat 機械分類の内部 backbone」であり、ユーザー向け主要ナビは theme
-  (`/themes/*`)。役割分担: `docs/01_技術設計/07_情報設計.md`。
+  (`/themes/*`)。役割分担: `docs/01_技術設計/03_情報設計.md`。
 
 ## UI 配置 (この型を前提にした描画)
 
 - `title` → h1 (名前のみ)
-- `subtitle` → h1 直下の控えめ 1 行 (`RankingHeroCard` titleDetail)
+- `subtitle` → h1 直下の控えめ 1 行 (`RankingHeaderPanel` titleDetail)
 - `note` → チャート直下の小キャプション (`RankingKeyPageClient`)
 - `description` → 「統計の定義」カード (`RankingDefinitionCard`)
 - 一覧表 (`category`/`survey`) のタイトルは注釈(※)を連結しない (`isCaveatNote` で除外)
@@ -79,10 +79,10 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 ranking は異なる）。いずれにせよ **200 にはならない**ので、`GONE_RANKING_KEYS` から外すだけでなく下記を整合させる必要がある。
 
 公開には config(isActive) を起点に以下を整合再生成する（依存順・詳細手順は memory
-`project_ranking_publish_pipeline_gap` / `docs/todo/02_機能バックログ.md`「122 metric の本番公開」）:
+`project_ranking_publish_pipeline_gap` / `docs/todo/05_機能バックログ.md`「122 metric の本番公開」）:
 
 1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` 再生成（`packages/ranking/src/scripts/generate-ranking-items.ts`。CI: `sync-snapshots.yml` の `ranking-items` task で配線済み）
-2. R2 `app/ranking/<key>/values.json` 再生成（`packages/ranking/src/scripts/generate-ranking-values.ts`。正典 `app/stats/<metric>/values.json` から配信用に決定的変換。CI: `sync-snapshots.yml` の `ranking-values` task、**必ず ranking-items の後**に実行する。実描画値・OGP・blog がこれを読むため、未生成だと stale 配信 or 空ページになる。★2026-07-27 に Phase 6 (2026-05-27) 以降 2 ヶ月間 writer が不在化していたことが判明し復旧済み — `docs/04_レビュー/2026-07-27-ranking-values-incident.md`）
+2. R2 `app/ranking/<key>/values.json` 再生成（`packages/ranking/src/scripts/generate-ranking-values.ts`。正典 `app/stats/<metric>/values.json` から配信用に決定的変換。CI: `sync-snapshots.yml` の `ranking-values` task、**必ず ranking-items の後**に実行する。実描画値・OGP・blog がこれを読むため、未生成だと stale 配信 or 空ページになる。2026-07-27 の復旧以降は `audit-ranking-data-integrity.ts` と週次workflowで欠落を検査する）
 3. `KNOWN_RANKING_KEYS` 再生成（`apps/web/scripts/generate-known-ranking-keys.ts`）
 4. `SITEMAP_RANKING_KEYS` / `INDEXABLE_RANKING_KEYS` 再生成
 5. 再デプロイ → CDN purge（GONE の 410 は 7 日エッジキャッシュ。未登録キーの 404 は ISR）
@@ -107,5 +107,5 @@ ranking は異なる）。いずれにせよ **200 にはならない**ので、
 - 型: `packages/data-configs/src/types.ts` (`MetricConfig` / `CategoryKey` / `CATEGORY_KEYS`)
 - lint: `packages/data-configs/scripts/validate-metric-config.ts`
 - e-Stat 年の正規化: `.claude/rules/estat-api.md`
-- タクソノミー役割分担: `docs/01_技術設計/07_情報設計.md`
+- タクソノミー役割分担: `docs/01_技術設計/03_情報設計.md`
 - UI 振り分け util: `apps/web/src/features/ranking/utils/classify-subtitle.ts`

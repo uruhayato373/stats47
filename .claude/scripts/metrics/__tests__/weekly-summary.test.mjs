@@ -1,5 +1,5 @@
 /**
- * weekly-summary.mjs のテスト — 集計・WoW 抑止・履歴 schema 移行・LATEST 描画 (§18.2)。
+ * weekly-summary.mjs のテスト — 集計・WoW 抑止・履歴 schema 移行・LATEST 描画。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * buzz-map-attribution.mjs — GA4 から buzz-map campaign 別の landing attribution を取得する (§7.3)。
+ * buzz-map-attribution.mjs — GA4 から buzz-map campaign 別の landing attribution を取得する。
  *
  * SNS (utm_campaign=buzz-map-<ideaId>) → landing session / engaged / pageView / cta_click を集計し、
- * §7.4 KPI と §11 Phase 5 の score 還流入力を作って state へ書く。build-buzz-map-catalog の measured 補正入力。
+ * KPI と score 還流入力を作って state へ書く。build-buzz-map-catalog の measured 補正入力。
  *
  * 純粋集計は lib/buzz-map-attribution-core.mjs、GA4 fetch はここ (既存 fetch-affiliate-ga4 の流儀に準拠)。
  *
@@ -58,7 +58,7 @@ function impByIdeaFromPosts() {
   for (const p of posts) {
     const ideaId = p.content_key;
     if (!ideaId) continue;
-    // §7.1: 投稿レコードの attribution を優先。無ければ channel から導出 (x=direct / ig=profile)。
+    // 投稿レコードの attribution を優先。無ければ channel から導出 (x=direct / ig=profile)。
     const attr = p.attribution ?? (p.platform === "x" ? "direct" : "profile");
     if (!out[ideaId]) out[ideaId] = { impressions: 0, attribution: attr };
     out[ideaId].impressions += Number(p.impressions) || 0;

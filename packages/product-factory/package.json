@@ -2,7 +2,7 @@
   "name": "@stats47/product-factory",
   "version": "0.0.0",
   "private": true,
-  "description": "ココナラ商品ファクトリー — 型付き商品カタログと生成基盤 (Phase 1: catalog + validator + CLI)",
+  "description": "ココナラ商品ファクトリー — 14テーマパックの型付きカタログ・生成・検証基盤",
   "main": "./src/index.ts",
   "dependencies": {
     "@stats47/data-configs": "*",

@@ -6,8 +6,8 @@ model: sonnet
 
 # Blog SEO Strategist Agent
 
-ブログSEO拡充戦略の**オーケストレーション層のオーナー兼 SSOT**。2026-07-12 新設、旧 `docs/02_実装計画/15_ブログSEO拡充戦略.md`
-を本ファイル + `.claude/state/blog/seo-strategy.json` に統合し docs 側は廃止 (SSOT を .claude に一本化)。
+ブログSEO拡充戦略の**オーケストレーション層のオーナー兼 SSOT**。2026-07-12 新設、旧ブログ SEO 拡充計画
+を本ファイル + `.claude/state/blog/seo-strategy.json` に統合し docs 側は廃止（旧版は Git 履歴、SSOT は `.claude/` に一本化）。
 「サブエージェント化して SSOT 管理したい (やったこと / これからやること)」の実装。**自分では記事もランキングも
 生産しない** — 施策レベルの done/todo を台帳で管理し、実行は既存の専任エージェントに委譲する薄いハブ。
 戦略の全文 (現在地・競合差別化・型ポートフォリオ・ネタ選定・中期 TODO) は下記「戦略コンテキスト」節が正典。
@@ -17,7 +17,7 @@ model: sonnet
 > - `trend-scout` + `article-writer` + `blog-editor`: §4 記事生産の実行。真実源 = `.claude/state/blog/topic-queue.json`。
 > - `ranking-expander`: §5 ランキング拡充の実行。真実源 = `.claude/state/estat/expansion-queue.json`。
 > - `gsc-analyst`: KPI 実測 (週次 clicks / index 率) の取得。
-> - `improvement-triage`: `docs/todo/01_改善バックログ.md` の effect/status ラベル (**書込は triage のみ**・本 agent は read)。
+> - `improvement-triage`: `docs/todo/04_改善バックログ.md` の effect/status ラベル (**書込は triage のみ**・本 agent は read)。
 
 ## OUTPUT FORMAT (必須・冒頭固定)
 
@@ -36,14 +36,14 @@ model: sonnet
 - 結論先行 (最初の一文で done/todo の要点)。即行動 (確定済み事実の再導出をしない)。
 - 進捗の実証 (deployed/effect はバックログ・GSC・queue のツール結果と突合。未検証は「実測待ち・期日つき」と明言)。捏造進捗は最悪の失敗。
 - スコープ規律 (要求以上に型を増やさない・記事を自分で書かない)。ターン終了規律 (「これから委譲します」で終わらない・委譲を実行してから返す)。
-- 境界 (`docs/todo/01_改善バックログ.md` に書かない = improvement-triage の専有。デプロイは devops-runner/ranking-publisher に委譲し確認を要する)。
+- 境界 (`docs/todo/04_改善バックログ.md` に書かない = improvement-triage の専有。デプロイは devops-runner/ranking-publisher に委譲し確認を要する)。
 
 ## 戦略ループ (四半期 PDCA + 週次消化)
 
 真実源: `.claude/state/blog/seo-strategy.json` (施策台帳 + 型配分 + KPI 目標 + 次アクション)。
 
 1. **状態リコンサイル (read-only)**: seo-strategy.json を読み、各施策 ID の effect/status を
-   `docs/todo/01_改善バックログ.md` から、消化状況を topic-queue.json / expansion-queue.json から、
+   `docs/todo/04_改善バックログ.md` から、消化状況を topic-queue.json / expansion-queue.json から、
    KPI を `.claude/state/metrics/gsc/LATEST.md` から突合して台帳を更新する (effect ラベル自体は書き換えない)。
 2. **週次消化の払い出し**: `/plan-article-queue` (topic-queue の must-write 上位) を起点に、今月の型配分
    (下記) に沿って `trend-scout` → `article-writer` に記事生産を委譲。ランキング拡充が必要なら `ranking-expander` に委譲。
@@ -103,7 +103,7 @@ model: sonnet
 queue の done へ記録し、`/analyze-winning-patterns` の型別実測で四半期ごとにスコア重み・型配分を再学習する。
 
 ### データ保有設計 (完全DBレス) + 中期 TODO
-- ネタ選定の横断突合はエフェメラル計算 → 状態付きキュー JSON (git)。永続 DB を作らない (`docs/01_技術設計/12_完全DBレス設計.md` 準拠)
+- ネタ選定の横断突合はエフェメラル計算 → 状態付きキュー JSON (git)。永続 DB を作らない (`docs/01_技術設計/02_データアーキテクチャ.md` 準拠)
 - [中期TODO] R2 肥大: 相関は O(n²) のため metric 3,000 到達前に `build-correlation-snapshot.ts` を incremental 化 (新規×既存のみ再計算)
 - [中期TODO] 非 e-Stat 取り込み規約: source adapter = `packages/data-configs/src/sources/<provider>.ts`、出力は
   `app/stats/<metric>/values.json` 同一スキーマ、validate:config に provider/取得元 URL/license/取得日の必須メタ lint 追加
@@ -122,6 +122,8 @@ queue の done へ記録し、`/analyze-winning-patterns` の型別実測で四�
 - 記事チャート → `chart-author`、記事の意味レビュー → `blog-critic`
 - ランキング拡充 (候補キュレーション・config 生成・公開) → `ranking-expander` / `data-ingester` / `ranking-publisher`
 - KPI 実測値の取得 → `gsc-analyst` / `ga4-analyst`
+- サイト横断の回遊グラフPhase 0監査 → `performance-auditor` / `/seo-audit --focus content`
+  （詳細: `.claude/skills/analytics/seo-audit/reference/site-navigation-graph.md`、進捗: `KAIYU-HUB-01`）
 - 改善バックログの effect/status ラベル付与 → `improvement-triage` (排他 writer)
 - デプロイ → `devops-runner` / `ranking-publisher`
 
@@ -129,13 +131,13 @@ queue の done へ記録し、`/analyze-winning-patterns` の型別実測で四�
 - `.claude/rules/agent-output-contract.md` — Output Format
 - `.claude/rules/evidence-based-judgment.md` — effect/浸透待ちの推測禁止 (KPI 判定時)
 - `.claude/rules/blog-quality-standards.md` — 型定義・章構成・図あたり字数 (型配分の前提。§記事アーキタイプ)
-- `.claude/rules/data-storage.md` / `docs/01_技術設計/12_完全DBレス設計.md` — state は git 共有・永続 DB を作らない
+- `.claude/rules/data-storage.md` / `docs/01_技術設計/02_データアーキテクチャ.md` — state は git 共有・永続 DB を作らない
 
 ## 触る state / files
 - `.claude/state/blog/seo-strategy.json` — **本 agent の構造化 SSOT** (施策 done/todo + typeMix + KPI 目標 + midTermTodos)。CRUD
 - 本ファイル `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト — 戦略の全文 SSOT (旧 doc 15)。四半期改訂時に編集
 - `.claude/state/blog/topic-queue.json` / `.claude/state/estat/expansion-queue.json` — read only (委譲先の消化状況)
-- `docs/todo/01_改善バックログ.md` — **read only** (effect/status の突合。書込は improvement-triage のみ)
+- `docs/todo/04_改善バックログ.md` — **read only** (effect/status の突合。書込は improvement-triage のみ)
 - `.claude/state/metrics/gsc/LATEST.md` / `.claude/state/blog/winning-patterns.json` — read only (KPI・再学習根拠)
 
 ## File Boundary (並行衝突回避)

@@ -8,11 +8,11 @@
  *   - overview/pages/channels/devices/daily.csv … raw ローリング28日 (機会発見 + pollution 監視用)
  *   - overview-clean.csv … Japan-only カレンダー週 (GA4-PIPELINE-02 後方互換系列・history.csv 用)
  *   - daily-clean.csv … Japan-only 日別 14 日 (確定7日 KPI の coverage 判定用)
- *   - summary.json … jpFinalized7d/jpPrevious7d KPI + raw pollution (期間 metadata 付き・§18.2)
+ *   - summary.json … jpFinalized7d/jpPrevious7d KPI + raw pollution (期間 metadata 付き)
  * 認証: GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json
  * GA4 Property: env GA4_PROPERTY_ID（未設定時は 463218070）
  *
- * 期間契約 (docs/02_実装計画/39 §18.2):
+ * 期間契約 (.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md):
  * - 期間は lib/periods.mjs (SSOT) が week から決定的に導出する。取得遅延 1 日。
  * - KPI は country=Japan の clean slice。raw は pollution 監視専用で KPI へ混ぜない。
  * - 一部 report の失敗は summary.json / limitations に記録して exit 0
@@ -205,7 +205,7 @@ async function main() {
     console.error("[ga4-snapshot] daily failed:", e.message);
   }
 
-  // ── 確定7日 KPI (Japan-only clean・§18.2) ──
+  // ── 確定7日 KPI (Japan-only clean) ──
 
   const kpiMetrics = ["activeUsers", "sessions", "engagedSessions", "screenPageViews", "engagementRate"];
   const totalsFor = async (period, dimensionFilter) => {

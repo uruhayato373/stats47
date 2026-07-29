@@ -10,7 +10,7 @@
  *       .claude/state/metrics/{gsc,ga4}/history-finalized7d.csv （確定7日 KPI・非重複系列）
  *       .claude/state/metrics/{gsc,ga4,adsense}/LATEST.md
  *
- * 期間契約 (docs/02_実装計画/39 §18.2):
+ * 期間契約 (.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md):
  * - KPI/WoW は summary.json (finalized7d + 直前の重複しない previous7d) だけを使う。
  * - GSC history.csv の既存行はローリング28日合計 — schema v2 で列名 *_rolling28d に改名 (値は不変)。
  * - GA4 history.csv は基盤混在 (raw 28日 / Japan カレンダー週) — basis 列で行ごとに明記 (値は不変)。
@@ -288,7 +288,7 @@ function updateGa4(week) {
   console.log(`[ga4] updated history.csv (${legacyRows.length} weeks) / history-finalized7d.csv (${finRow ? "+1" : "±0"}) / LATEST.md`);
 }
 
-// ── AdSense (doc41 §2.1/§4.2: 公式 CPC 契約 + breakdown 履歴) ──
+// ── AdSense (公式 CPC 契約 + breakdown 履歴) ─────────────────
 
 function aggregateAdsense(snapDir, week) {
   const overview = readCsv(join(snapDir, "overview.csv"));
@@ -358,7 +358,7 @@ function markdownAdsense(history, latest, deviceHistory) {
     const sign = diff > 0 ? "+" : "";
     return ` (${sign}${p}%)`;
   };
-  // 公式値が空 ("") の行は "-" 表示 (0 と混同しない・doc41 §2.1)
+  // 公式値が空 ("") の行は "-" 表示 (0 と混同しない)
   const officialOrDash = (v, unit = "") => (v === "" || v === undefined || v === null ? "-" : `${unit}${v}`);
   const lines = [];
   lines.push(`# AdSense Latest — ${latest.week}`);
@@ -379,11 +379,11 @@ function markdownAdsense(history, latest, deviceHistory) {
   lines.push(`| Ad Requests | ${officialOrDash(latest.ad_requests)} | |`);
   lines.push(`| Coverage | ${latest.ad_requests_coverage === "" || latest.ad_requests_coverage === undefined ? "-" : (num(latest.ad_requests_coverage) * 100).toFixed(1) + "%"} | |`);
   lines.push("");
-  // 収益分解 (doc41 §7.2): Page RPM 単独で判断しない
+  // 収益分解: Page RPM 単独で判断しない
   const pv = num(latest.page_views);
   const imp = num(latest.impressions);
   if (pv > 0) {
-    lines.push("## 収益分解 (§7.2)");
+    lines.push("## 収益分解");
     lines.push("");
     lines.push(`- Impression density (imp/PV): **${(imp / pv).toFixed(3)}**${prev ? ` (前週 ${(num(prev.impressions) / Math.max(num(prev.page_views), 1)).toFixed(3)})` : ""}`);
     lines.push(`- Viewable imp / PV: **${((imp * num(latest.viewability)) / pv).toFixed(3)}**`);
@@ -438,7 +438,7 @@ function markdownAdsense(history, latest, deviceHistory) {
 
   lines.push("履歴: [`history.csv`](./history.csv) / デバイス別: [`history-devices.csv`](./history-devices.csv) / 内訳: [`history-formats.csv`](./history-formats.csv)・[`history-placements.csv`](./history-placements.csv)・[`history-bid-types.csv`](./history-bid-types.csv)");
   lines.push("");
-  lines.push("> schema v2 (2026-07-28・doc41 §2.1): 公式 `COST_PER_CLICK`/`IMPRESSIONS_RPM`/`AD_REQUESTS`/`AD_REQUESTS_COVERAGE` を追加。");
+  lines.push("> schema v2 (2026-07-28): 公式 `COST_PER_CLICK`/`IMPRESSIONS_RPM`/`AD_REQUESTS`/`AD_REQUESTS_COVERAGE` を追加。");
   lines.push("> 旧 `cpc` 列 (earnings/clicks) は**公式 CPC ではない**ため `earnings_per_click_legacy` へ改名した (値は不変)。");
   lines.push("> 公式値が無い過去週は `-` (null)。0 で埋めない。ESTIMATED_EARNINGS は月次確定まで変動しうる推定値。");
   lines.push("");

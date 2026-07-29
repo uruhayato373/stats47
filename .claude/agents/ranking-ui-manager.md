@@ -55,7 +55,7 @@ model: sonnet
   `ArticleShell` が `.reading-zone`（`--radius:14px`・薄グレー地・1280px + flex 密着レール）を敷き、`max-w-[1280px]` は
   この shell 内の正規実装なので違反ではない（`container mx-auto` / page.tsx での `max-w-[…]` 直書きは引き続き禁止）。
   パンくずは `ArticleShell` の `breadcrumb` slot に渡す（`RankingPageBreadcrumbs` は shell 非依存・`RankingPageClientShell` が注入）。
-  正典: `docs/01_技術設計/15_デザインシステムSSOT.md`「例外: reading zone」/ `13_統一レイアウト設計.md`。
+  正典: `docs/01_技術設計/04_デザインシステム.md`「ArticleShell」。
 - H1 は `getRankingTitle(rankingItem)`（名前のみ、年・注釈を焼かない）。本文 H1 は `text-2xl font-bold`（`text-3xl`+ 禁止）。
 - パンくず: ホーム → (category があれば) カテゴリ → ランキング名。
 - 角丸は reading zone 例外（`--radius:14px`・`shadow-soft-*`）。zone 外（他ページ）はフラット（`rounded-xl`/`shadow-lg` 禁止）。
@@ -144,7 +144,7 @@ grep -rn "container mx-auto\|max-w-\[" apps/web/src/app/ranking apps/web/src/fea
 - ページ実装: `apps/web/src/app/ranking/[rankingKey]/page.tsx`
 - reader 層: `apps/web/src/features/ranking/server.ts` / `@stats47/ranking/server`
 - 姉妹 agent: `.claude/agents/theme-ui-manager.md`（テーマ版）/ `.claude/agents/ranking-publisher.md`（公開）
-- 正典: `docs/01_技術設計/12_完全DBレス設計.md` / `docs/01_技術設計/13_統一レイアウト設計.md`
+- 正典: `docs/01_技術設計/02_データアーキテクチャ.md` / `docs/01_技術設計/04_デザインシステム.md`
 
 ## Output Contract
 

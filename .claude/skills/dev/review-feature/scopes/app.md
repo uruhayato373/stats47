@@ -108,25 +108,10 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 
 ---
 
-## 出力先
+## 保存方針
 
-`docs/04_レビュー/{YYYY-MM-DD}-dev-review-app-{ルート名}.md` に Write tool で書き出す。frontmatter:
-
-```yaml
----
-type: dev-review
-scope: app-{ルート名}
-date: 2026-MM-DD
-status: active
----
-```
-
-複数ルート指定時のファイル名例:
-- 単一ルート: `2026-05-04-dev-review-app-ranking.md`
-- 複数ルート: `2026-05-04-dev-review-app-ranking-areas.md`
-- 横断: `2026-05-04-dev-review-app.md`
-
-`ls -t docs/04_レビュー/*-dev-review-app*.md | head -5` で過去のレビューを参照できる。
+共通SKILLの規約に従い、全文はセッション出力のみ。未完了の修正だけを
+`docs/todo/05_機能バックログ.md` へ具体化する。
 
 ## 出力フォーマット
 

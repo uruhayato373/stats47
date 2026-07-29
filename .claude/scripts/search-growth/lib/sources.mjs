@@ -1,7 +1,8 @@
 /**
  * sources — 各データ源の (a) 既存 snapshot からの normalize と (b) live collect adapter。
  *
- * 正典: docs/02_実装計画/39 §2 / §4.1 (既存 fetcher を再利用・複製しない)。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md
+ * (既存 fetcher を再利用・複製しない)。
  * ローカルには live API credential が無いため、collect は既存 committed snapshot の presence /
  * freshness を probe し、live fetch は既存 fetcher を subprocess で呼ぶ設計だけ用意する
  * (creds が無い間は skipped=live 未検証)。normalize は committed snapshot (実データ) を
@@ -194,7 +195,7 @@ const PSI = {
       push("cls", numOrNull(r.lab_data?.CLS));
       push("tbt_ms", numOrNull(r.lab_data?.TBT_ms));
       push("ttfb_ms", numOrNull(r.lab_data?.TTFB_ms));
-      // PSI 埋込 CrUX (field): field data の長期 SSOT にしない (§2.5)。category のみ暫定利用。
+      // PSI 埋込 CrUX (field): field data の長期 SSOT にしない。category のみ暫定利用。
       if (r.field_data?.LCP?.category) {
         push("lcp_field_category", r.field_data.LCP.category, ["PSI 埋込 CrUX。field data の長期 SSOT にしない (CrUX API/History を使う)"]);
       }

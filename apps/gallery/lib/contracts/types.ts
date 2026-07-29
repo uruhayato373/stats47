@@ -142,7 +142,7 @@ export interface ScheduleIgResponse {
   postId: number;
 }
 
-// ─── buzz-map (§9 gallery /buzz-map) ─────────────────────
+// ─── buzz-map (gallery /buzz-map) ─────────────────────
 
 export interface BuzzMapAssetStatusDTO {
   hasLocalAssets: boolean;

@@ -1,5 +1,5 @@
 /**
- * foundation tests — contracts / freshness / redaction / join-url (§13 Normalize)。
+ * foundation tests — contracts / freshness / redaction / join-url。
  *   node --test .claude/scripts/search-growth/__tests__/foundation.test.mjs
  */
 import { test } from "node:test";

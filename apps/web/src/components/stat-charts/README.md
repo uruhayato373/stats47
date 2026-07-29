@@ -1022,7 +1022,7 @@ export const getCachedEstatData = unstable_cache(
 
 - **ブログ記事チャート**: [Blog Feature README](../blog/README.md) - ブログ用チャートとの違い
 - **e-Stat APIパッケージ**: [packages/estat-api/README.md](../../../../packages/estat-api/README.md)
-- **デザインシステム**: [デザインシステム](../../../../../docs/01_技術設計/05_フロントエンド設計/デザインシステム.md)
+- **デザインシステム**: [デザインシステム](../../../../../docs/01_技術設計/04_デザインシステム.md)
 - **データベーススキーマ**: [packages/database/src/schema/dashboard.ts](../../../../packages/database/src/schema/dashboard.ts)
 
 ---

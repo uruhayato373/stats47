@@ -8,11 +8,12 @@
  * 出力先: .claude/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/
  *   - overview/daily/devices/units/formats-platforms/placements-platforms/
  *     bid-types-platforms/traffic-sources/countries/pages.csv
- *   - manifest.json … job 別の期間 metadata・status・limitations (doc41 §4.2)
+ *   - manifest.json … job 別の期間 metadata・status・limitations
  * 認証: OAuth 2.0 (env: GOOGLE_ADSENSE_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN)
  * AdSense account: env GOOGLE_ADSENSE_ACCOUNT_ID (例 pub-7995274743017484)
  *
- * 期間契約 (doc41 §4.2 / doc39 §18.2):
+ * 期間契約 (periods.mjs /
+ * .claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md):
  * - 期間は lib/periods.mjs (SSOT) が week から決定的に導出する。取得遅延 1 日。
  * - 公式 COST_PER_CLICK / IMPRESSIONS_RPM / AD_REQUESTS / AD_REQUESTS_COVERAGE を取得する。
  * - job ごとの失敗は隔離し manifest に status=error として記録する (全滅のみ exit 1)。
@@ -138,7 +139,7 @@ async function main() {
       rows = flatten(report);
       currencyCode = currencyFromHeaders(report.headers);
       if (job.dimensions.includes("DATE")) {
-        // 日別 job は欠損日を検出する (0 補完しない・doc39 §18.2)
+        // 日別 job は欠損日を検出する (0 補完しない)
         const present = rows.map((r) => String(r.DATE ?? "").replace(/^(\d{4})(\d{2})(\d{2})$/, "$1-$2-$3"));
         const cov = assessDailyCoverage(period, present);
         missingDates = cov.missingDates;

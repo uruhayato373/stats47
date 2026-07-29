@@ -10,7 +10,7 @@
  *
  * 入力:
  *   - .claude/state/metrics/{psi,gsc,ga4,adsense}/history.csv
- *   - docs/todo/01_改善バックログ.md の status: pending|in-progress を抽出（pending 施策一覧）
+ *   - docs/todo/04_改善バックログ.md の status: pending|in-progress を抽出（pending 施策一覧）
  *   - gh issue list --label auto-generated (残存アラート Issue 集計)
  */
 
@@ -130,7 +130,7 @@ function ghIssueList(args) {
 }
 
 function gsSection(week) {
-  // KPI/WoW は確定7日 (非重複) 系列だけを使う (§18.2)。rolling28d は文脈の単一値のみ。
+  // KPI/WoW は確定7日 (非重複) 系列だけを使う。rolling28d は文脈の単一値のみ。
   const fin = readCsv(".claude/state/metrics/gsc/history-finalized7d.csv");
   const rolling = readCsv(".claude/state/metrics/gsc/history.csv");
   const lines = [];
@@ -154,7 +154,7 @@ function gsSection(week) {
 }
 
 function ga4Section(week) {
-  // KPI/WoW は Japan-only 確定7日 (非重複) を優先する (§18.2)。
+  // KPI/WoW は Japan-only 確定7日 (非重複) を優先する。
   const fin = readCsv(".claude/state/metrics/ga4/history-finalized7d.csv");
   const target = fin?.rows.find((r) => r.week === week);
   if (target) {
@@ -272,11 +272,11 @@ function alertsSection(week) {
 }
 
 function pendingSection() {
-  // 01_改善バックログ.md の pending|in-progress を scan-pending-improvements.mjs で取得
+  // 04_改善バックログ.md の pending|in-progress を scan-pending-improvements.mjs で取得
   const scanScript = join(PROJECT_ROOT, ".claude/scripts/lib/scan-pending-improvements.mjs");
   let entries;
   try {
-    const out = execSync(`node "${scanScript}" --format markdown --status pending,in-progress`, {
+    const out = execSync(`node "${scanScript}" --format markdown --status pending,in-progress,effect/pending`, {
       cwd: PROJECT_ROOT,
       encoding: "utf-8",
     });

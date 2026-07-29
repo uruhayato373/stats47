@@ -9,7 +9,7 @@ import { query as queryPosts } from "./posts-store";
 /**
  * buzz-map カタログの読み取り + 表示用 decorate。
  *
- * 正典: docs/02_実装計画/27_buzz-map集客ゲート統合仕様.md §9.1 (表示)。
+ * 正典: .claude/rules/buzz-map-standards.md §4-5。
  * SSOT は .claude/state/sns/buzz-map-catalog.json (builder = build-buzz-map-catalog.ts が生成)。
  * この module は read-only (catalog を書き換えない、書込は builder CLI 経由のみ)。
  *
@@ -172,7 +172,7 @@ export function readBuzzMapCatalog(opts: { lane?: string } = {}): BuzzMapCatalog
     };
   });
 
-  // §4.3 status machine の catalog entry.status を正とする (SSOT)。
+  // status machine の catalog entry.status を正とする (SSOT)。
   // ローカル素材の有無 (assets.hasLocalAssets) や posts.json の状態は表示用の補助情報であり、
   // 集計の母数にしない (二重の真実源によるカウントずれの再発防止)。
   const aggregate = {

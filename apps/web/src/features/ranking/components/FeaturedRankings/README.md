@@ -1,6 +1,6 @@
 # FeaturedRankings — ホーム「注目のランキング」
 
-現行UI仕様の正典: `docs/01_技術設計/15_デザインシステムSSOT.md`「カード」。
+現行UI仕様の正典: `docs/01_技術設計/04_デザインシステム.md`「Surface」。
 本書はFeaturedRankingsの実装・データ・計測契約の正典とする。
 
 > **home-featured-v1 実験は終了 (2026-07-23)**: 50/50 A/B (control=map/number vs editorial=

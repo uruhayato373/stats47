@@ -16,7 +16,7 @@
 |---|---|---|
 | **イベント定義 (コード SSOT)** | `apps/web/src/lib/analytics/events.ts` | 送信するイベント名・パラメータ名の実装。**ここだけがイベントを送る** |
 | **登録状況 (台帳 SSOT)** | 本ファイル §2 | 各パラメータが GA4 カスタムディメンション登録を要するか・登録済みか。**管理画面タスクの追跡はここ** |
-| ドメイン別の詳細 (参照) | affiliate=`affiliate-ads-standards.md §6` / home-featured=`docs/02_実装計画/28` / buzz-map=`buzz-map-standards.md` | 各ドメインの登録手順・値の意味。本台帳はこれらを**再所有せず参照**する |
+| ドメイン別の詳細 (参照) | affiliate=`affiliate-ads-standards.md §6` / home-featured=`apps/web/src/features/ranking/components/FeaturedRankings/README.md` / buzz-map=`buzz-map-standards.md` | 各ドメインの登録手順・値の意味。本台帳はこれらを**再所有せず参照**する |
 
 - **パラメータ名はコードと GA4 で完全一致が必須**（半角・小文字・`_`）。1 文字違うと永久に紐づかない。
 - カスタムディメンションは**登録後のデータにのみ適用**（遡及しない）。集計反映は 24–48h。
@@ -30,7 +30,7 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 各ディメンションで **範囲＝イベント**、**イベントパラメータ＝§2 の「パラメータ」を厳密一致入力**。
 
 通常はオーナーが実施する。ユーザーが外部設定変更を明示承認したセッションでは、
-`docs/02_実装計画/41_AdSense継続改善・GA4_GSC設定自動化仕様.md` §6 の専用Playwright runnerで、
+`.claude/scripts/google-admin/README.md` の専用Playwright runnerで、
 同書allowlist・property照合・重複確認・before/after検証を満たす登録だけを実行してよい。
 権限、既存dimension削除/置換、timezone、data retention等はrunnerの対象外。
 
@@ -52,7 +52,7 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 | `affiliate_click` (ad_id のみ) | `trackAffiliateClick` | `ad_id` | **✅登録済 (2026-07-28)** — google-admin Playwright runner で `Affiliate ad ID` (scope=Event, param=`ad_id`) を実登録・reload 後に画面 verify (最終変更日 2026年7月28日)。集計反映は 24-48h・非遡及のため、API で `customEvent:ad_id` が引けるのは反映後 | `affiliate-ads-standards.md §6` |
 | `affiliate_impression` | `AdImpressionTracker` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-06)** — dimension はパラメータ名に紐づくため、2026-07-28 の**イベント名改名では再登録不要**の想定 (初回計測で要確認) | `affiliate-ads-standards.md §6` |
 | `cta_click` | `trackCtaClick` | `cta_id` / `link_position` / `content_id` / `target_type` / `target_key` | ❓要確認 | buzz-map §7.3 / ファネル |
-| `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `card_variant` / `slot` / `experiment_id` / `experiment_variant` | ❓要確認 | `docs/02_実装計画/28 §9.3` |
+| `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `card_variant` / `slot` / `experiment_id` / `experiment_variant` | ❓要確認 | `apps/web/src/features/ranking/components/FeaturedRankings/README.md` |
 | `ranking_view` | `trackRankingView` | `ranking_key` / `category_key` / `area_type` / `year_code` | ❓要確認 | ranking |
 | `file_download` | `trackCsvDownload` | `ranking_key` / `year_code`（`file_name`/`file_extension` は GA4 標準） | ❓要確認 | ranking |
 | `year_change` / `area_type_change` | `trackYear*` / `trackAreaType*` | `ranking_key` ほか（分析頻度低・登録は任意） | 任意 | ranking |
@@ -130,13 +130,12 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 > 遷移先は `nav_href` (`/areas/<5桁code>`)。`trackNavClick` の呼び出し元は `AreaSearch` /
 > `AreaSelectionPanels` (`apps/web/src/features/area-profile/`)。
 >
-> **nav_surface の値追加 (2026-07-23・HOME-PORTAL-REDESIGN-01)**: ポータル型 home の発見セクションに
-> `home_category` / `home_use_case` / `home_area` / `home_buzz_map` / `home_blog` を追加した
+> **nav_surface の値追加 (2026-07-23)**: ポータル型 home の発見セクションに
+> `home_category` / `home_use_case` / `home_area` / `home_blog` を追加した
 > (既存 `nav_surface` dimension の**値追加**・新 dimension なし)。home → カテゴリ/テーマ/都道府県/
-> バズマップ/ブログの click 内訳を導線別に判定するのに使う。呼び出し元は `PortalNavCard`
-> (`apps/web/src/features/home-portal/`)。home 検索は `trackSearch` (GA4 標準 `search`) を使う
-> (`HomeSearch` / Header `HeaderClient` の submit)。現状 `home_buzz_map` (バズ section 未実装) と
-> `home_blog` (blog カード未計装) は値予約のみで未送出。
+> ブログのclick内訳を導線別に判定するのに使う。呼び出し元は
+> `apps/web/src/features/home-portal/`。検索はHeaderの`trackSearch`
+> (GA4標準`search`)を使う。4つのsurfaceはすべて実装済み。
 
 ---
 
@@ -171,6 +170,6 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 
 - コード SSOT: `apps/web/src/lib/analytics/events.ts`
 - 実証判定: `.claude/rules/evidence-based-judgment.md`
-- ドメイン別: `.claude/rules/affiliate-ads-standards.md §6`（affiliate）/ `docs/02_実装計画/28`（home-featured）/ `.claude/rules/buzz-map-standards.md`（cta/buzz-map）
-- UI 施策の効果判定: `docs/todo/02_機能バックログ.md` `[UI-CONSOLIDATION-RESIDUAL]`
+- ドメイン別: `.claude/rules/affiliate-ads-standards.md §6`（affiliate）/ `apps/web/src/features/ranking/components/FeaturedRankings/README.md`（home-featured）/ `.claude/rules/buzz-map-standards.md`（cta/buzz-map）
+- UI 施策の効果判定: `docs/todo/05_機能バックログ.md` `[UI-CONSOLIDATION-RESIDUAL]`
 - agent: `.claude/agents/ga4-analyst.md`

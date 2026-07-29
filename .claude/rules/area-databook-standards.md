@@ -7,13 +7,13 @@
 > **背景 (2026-07-18)**: `docs/books/2021 都道府県 Data Book` (47 県 × 6 ページの固定テンプレ・全数値に
 > 全国順位) を設計図に、47 県同一 6 チャートだった area ページを ~130 指標の県データブックへ拡張する。
 > 方式は `theme-catalog-standards.md` と同じ「rules に規約カタログ 1 ファイル、agent/skill は参照のみ」。
-> 恒久スペック = `docs/02_実装計画/29_県データブック仕様.md`。
+> 本ファイルを恒久仕様の SSOT とする。
 
 ---
 
 ## 0. 情報設計上の責務 (混ぜない)
 
-`/areas/[code]` は**県軸・回遊面** (KPI = 直帰率 / pages/session / 滞在。`docs/01_技術設計/07_情報設計.md`)。
+`/areas/[code]` は**県軸・回遊面** (KPI = 直帰率 / pages/session / 滞在。`docs/01_技術設計/03_情報設計.md`)。
 全 KPI は「**自県の値 + 全国順位バッジ**」で県軸に閉じる。
 
 | やる | やらない |
@@ -183,8 +183,7 @@ area-databook-snapshot.ts ── R2 values.json (rank 済) ──▶ R2 app/area
 - validator: `packages/data-configs/scripts/validate-area-databook.ts`
 - exporter: `packages/area-profile/src/exporters/area-databook-snapshot.ts`
 - UI: `apps/web/src/features/area-databook/`
-- 恒久スペック: `docs/02_実装計画/29_県データブック仕様.md`
-- 情報設計 (area の責務): `docs/01_技術設計/07_情報設計.md`
+- 情報設計 (area の責務): `docs/01_技術設計/03_情報設計.md`
 - チャートカタログ: `.claude/rules/chart-component-standards.md`
 - SSG 保全 (areas は ƒ): `.claude/rules/nextjs-ssg-preservation.md`
 - 指標構造: `.claude/rules/metric-config-standards.md` / e-Stat: `.claude/rules/estat-api.md`

@@ -11,9 +11,8 @@
  * 新しい *Card を足す前に、まず既存の共有カードで表現できないか検討すること。どうしても
  * 必要な場合のみ、下の BASELINE に理由コメント付きで追加する (= 意識的な許可を強制)。
  *
- * 正典: docs/01_技術設計/15_デザインシステムSSOT.md (Surface / Card)
+ * 正典: docs/01_技術設計/04_デザインシステム.md (Surface / Card)
  *       .claude/rules/ui-components.md (コンポーネント配置の 3 tier)
- *       docs/02_実装計画/13_UI統一ロードマップ.md (Phase 0-1 / 0-5)
  *
  * Usage: node .claude/scripts/lib/check-card-census.cjs
  * Exit: ベースライン外の新規 *Card が見つかれば 1。
@@ -112,7 +111,7 @@ if (added.length) {
     "\n  まず既存の共有カード (SurfaceCard / ChartPanel / ChartCard / RailCard / KpiCard) で\n" +
       "  表現できないか検討してください。どうしても必要なら理由コメント付きで\n" +
       "  .claude/scripts/lib/check-card-census.cjs の BASELINE に追加してください。\n" +
-      "  正典: docs/01_技術設計/15_デザインシステムSSOT.md / .claude/rules/ui-components.md",
+      "  正典: docs/01_技術設計/04_デザインシステム.md / .claude/rules/ui-components.md",
   );
   process.exit(1);
 }

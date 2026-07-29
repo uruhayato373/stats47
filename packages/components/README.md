@@ -15,7 +15,7 @@ shadcn/ui Blue テーマを使用。CSS 変数（`--background`, `--primary` 等
 - **本文**: system フォントスタック（游ゴシック / Hiragino。Web フォント非依存）。Inter / Noto Sans JP は読み込まない。
 - **コード**: Geist Mono のみ。
 - **サイズ**: `text-xs` (12px) から `text-2xl` までを基準（ページ h1 は `text-2xl font-bold`）。
-- 正典: `docs/01_技術設計/15_デザインシステムSSOT.md` / `.claude/rules/ui-components.md`。
+- 正典: `docs/01_技術設計/04_デザインシステム.md` / `.claude/rules/ui-components.md`。
 
 ### 3. アイコンシステム
 `lucide-react` を使用。
@@ -53,4 +53,4 @@ npx shadcn@latest add <component>     # → src/atoms/ui/<component>.tsx に生�
 - app からは `import { Button } from "@stats47/components"`（barrel）または
   `@stats47/components/atoms/ui/<name>`（個別）で使う。app-local に同名プリミティブを再定義しない。
 
-詳細は `docs/01_技術設計/15_デザインシステムSSOT.md` を参照。
+詳細は `docs/01_技術設計/04_デザインシステム.md` を参照。

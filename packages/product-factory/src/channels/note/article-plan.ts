@@ -1,7 +1,9 @@
 /**
  * canonical 記事プラン (SSOT) — 174 商品を 55 本の note 記事へ束ねる。
  *
- * 仕様: docs/02_実装計画/31_note商品展開ファクトリー実装仕様.md §3・§4・§7。
+ * 旧174商品向けの記事プラン（移行対象）。恒久仕様は
+ * .claude/rules/coconala-product-standards.md §9。削除条件:
+ * docs/todo/05_機能バックログ.md の COCONALA-PRODUCT-FACTORY-01 完了時に14パック由来へ置換する。
  * - variant (K ライセンス / empty・sample 版) を記事本文で乱立させず canonical 記事へ集約する。
  * - memberProductIds は全体で 174 商品を「漏れなく・重複なく」覆う (coverage validator が保証)。
  * - disposition は product-note-mapping.ts が (family, 記事) から決定的に導出する。

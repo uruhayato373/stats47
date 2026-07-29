@@ -31,7 +31,7 @@ ranking を本番公開するための派生物パイプライン (DBレス移�
 ## config → 本番公開の依存順
 
 1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` → `packages/ranking/src/scripts/generate-ranking-items.ts` (✅ sync-snapshots run.sh TASKS に配線済。旧「未配線」は誤り)
-1b. **R2 `app/ranking/<key>/values.json` → `packages/ranking/src/scripts/generate-ranking-values.ts`** (task `ranking-values`・ranking-items の後)。**2026-07-27 に復活**: Phase 6 (2026-05-27) で D1 export を廃止した際に代替 writer が作られず 2 ヶ月間凍結し、runtime の全描画値・OGP・blog が stale 配信、Phase 6 以降の 67 キーは空ページだった。**item.json だけ作っても値は出ない** — この 1b が必須。手動投入 metric (`fetcherKey:"manual"`) は page-data-batch を通らず正典 `app/stats` が rank を持たないため、writer 側で正典と同一規則 (値の降順・同値同順位) で導出する。整合性は週次 `ranking-integrity-audit-weekly.yml` が検査。詳細 → `docs/04_レビュー/2026-07-27-ranking-values-incident.md`
+1b. **R2 `app/ranking/<key>/values.json` → `packages/ranking/src/scripts/generate-ranking-values.ts`** (task `ranking-values`・ranking-items の後)。**2026-07-27 に復活**: Phase 6 (2026-05-27) で D1 export を廃止した際に代替 writer が作られず 2 ヶ月間凍結し、runtime の全描画値・OGP・blog が stale 配信、Phase 6 以降の 67 キーは空ページだった。**item.json だけ作っても値は出ない** — この 1b が必須。手動投入 metric (`fetcherKey:"manual"`) は page-data-batch を通らず正典 `app/stats` が rank を持たないため、writer 側で正典と同一規則 (値の降順・同値同順位) で導出する。整合性は週次 `ranking-integrity-audit-weekly.yml` が検査。実行規約は `.claude/rules/metric-config-standards.md`。
 2. ✅ `packages/ranking/src/config/known-ranking-keys.ts` (SSOT・apps/web は re-export) → `apps/web/scripts/generate-known-ranking-keys.ts` (2026-07-05 から sync-ranking-keys job で自動再生成+PR)
 3. `sitemap-ranking-keys.ts` → `node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs` (KNOWN 全キー掲載。sync-ranking-keys job で自動)
 4. `indexable-ranking-keys.ts` → legacy 安全弁 (専用生成器なし・sitemap builder が読むだけ)

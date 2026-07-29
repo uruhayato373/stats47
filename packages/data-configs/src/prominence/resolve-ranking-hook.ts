@@ -14,6 +14,7 @@ import {
   type HookAdjective,
   type RankingHookInput,
 } from "./derive-ranking-hook";
+import { stripParentheticals } from "./normalize-title";
 import { RANKING_HOOK_OVERRIDES } from "./ranking-hook-overrides";
 
 /** hook の長さ制約。旧 `validateHomeFeaturedRankings` の 8〜28 文字を引き継ぐ。 */
@@ -24,13 +25,12 @@ export const HOOK_MAX_LENGTH = 28;
 const UNREADABLE_SYMBOLS = /[／/【】[\]＜＞<>|｜＝=]/;
 
 /**
- * 括弧の中身を伏せる。記号判定を「括弧の外にある記号」に限るために使う。
+ * 記号判定は「括弧の外にある記号」に限る。
  *
  * `男女間賃金格差（女性/男性）` のスラッシュは注釈内の意味のある記号で、読みを損なわない。
+ * 括弧を落とす実装は normalize-title.ts に一本化してある (同じ正規表現を 3 箇所に
+ * 散らしていて、ReDoS 修正のときに直し漏れる形になっていた)。
  */
-function maskParentheticals(text: string): string {
-  return text.replace(/[（(][^）)]*[）)]/g, "");
-}
 
 export interface RankingHookResolveInput extends RankingHookInput {
   readonly rankingKey: string;
@@ -83,7 +83,7 @@ export function auditDerivedHooks(
 
     const length = [...hook].length;
     if (length < HOOK_MIN_LENGTH || length > HOOK_MAX_LENGTH) reasons.push("length");
-    if (UNREADABLE_SYMBOLS.test(maskParentheticals(hook))) reasons.push("symbol");
+    if (UNREADABLE_SYMBOLS.test(stripParentheticals(hook))) reasons.push("symbol");
     if (/[\s　]/.test(hook)) reasons.push("whitespace");
 
     const titleAdjective = adjectiveFromTitle(input.title);

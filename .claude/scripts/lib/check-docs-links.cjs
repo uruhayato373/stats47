@@ -40,6 +40,10 @@ const SCAN_EXTS = [".md", ".mdc", ".yml", ".yaml", ".json", ".cjs", ".mjs", ".js
 // `docs/<path>.md` を抽出。非貪欲で最初の .md まで、直後に \b (拡張子の部分列誤マッチ防止)。
 // 区切り文字 (空白・括弧・引用符・句読点・バックティック等) は path に含めない。
 const DOCS_REF_RE = /docs\/[^\s)\]}"'`<>|,;：、。（）「」]+?\.md\b/g;
+// `maintain-docs/SKILL.md` のように別path segmentの末尾が "docs" の場合は
+// ルート相対docs参照ではない。直前が識別子/path名文字なら除外する。
+const isEmbeddedDocsSegment = (text, index) =>
+  index > 0 && /[A-Za-z0-9_.-]/.test(text[index - 1]);
 
 function walk(dir, out = []) {
   let entries;
@@ -52,6 +56,9 @@ function walk(dir, out = []) {
     const p = path.join(dir, e.name);
     if (e.isDirectory()) {
       if (e.name === "node_modules" || e.name === ".git" || e.name === ".next") continue;
+      // 別 checkout は現在の working tree と独立した履歴を持つため、リンク検査へ混ぜない。
+      // 混ぜると docs 整理のたびに古い worktree 内の参照が「新規 broken」扱いになる。
+      if (rel(p) === ".claude/worktrees") continue;
       walk(p, out);
     } else {
       // ガードの baseline ファイル群は「finding 行内容の引用」であってリンク参照元ではない
@@ -108,10 +115,12 @@ for (const f of scanFiles) {
     continue;
   }
   const text = readSafe(f);
-  const matches = text.match(DOCS_REF_RE);
-  if (!matches) continue;
+  const matches = [...text.matchAll(DOCS_REF_RE)];
+  if (matches.length === 0) continue;
   const referrer = rel(f);
-  for (const m of matches) {
+  for (const match of matches) {
+    if (isEmbeddedDocsSegment(text, match.index)) continue;
+    const m = match[0];
     if (isPlaceholder(m)) continue;
     if (!refMap.has(m)) refMap.set(m, new Set());
     refMap.get(m).add(referrer);

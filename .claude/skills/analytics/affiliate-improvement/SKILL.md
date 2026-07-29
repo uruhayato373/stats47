@@ -1,6 +1,6 @@
 ---
 name: affiliate-improvement
-description: アフィリエイト広告の impression / click / CTR を GA4 (ad_impression / affiliate_click) と在庫棚卸しで分析し、弱い枠を特定して改善施策を docs/todo/01_改善バックログ.md に記録するループ。在庫の管理画面 (単体 HTML) を開く機能も持つ。Use when user says "アフィリエイト改善", "アフィリエイト分析", "imp/click 増やす", "広告クリック改善", "アフィリエイト管理画面", "管理画面を開いて", "アフィリエイト一覧見せて", "在庫見せて".
+description: アフィリエイト広告の impression / click / CTR を GA4 (affiliate_impression / affiliate_click) と在庫棚卸しで分析し、弱い枠を特定して改善施策を docs/todo/04_改善バックログ.md に記録するループ。在庫の管理画面 (単体 HTML) を開く機能も持つ。Use when user says "アフィリエイト改善", "アフィリエイト分析", "imp/click 増やす", "広告クリック改善", "アフィリエイト管理画面", "管理画面を開いて", "アフィリエイト一覧見せて", "在庫見せて".
 primary_agent: affiliate-manager
 co_agents: [improvement-triage, adsense-analyst]
 ---
@@ -12,14 +12,14 @@ co_agents: [improvement-triage, adsense-analyst]
 
 - **在庫 (SSOT)**: `apps/web/scripts/affiliate-ads-data.ts` (`AFFILIATE_ADS[]`, git TS / 完全DBレス)
 - **配信**: `export-affiliate-ads-snapshot.ts` → R2 `app/affiliate-ads/all.json`
-- **計測**: GA4 `ad_impression` (`AdImpressionTracker`, 50%+ 表示 1s) / `affiliate_click` (`TrackedAffiliateLink`)
+- **計測**: GA4 `affiliate_impression` (`AdImpressionTracker`, 50%+ 表示 1s) / `affiliate_click` (`TrackedAffiliateLink`)
 - **棚卸し (決定的)**: `npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts`
 
 ## 記録先 (データ保存)
 
 | 層 | 場所 | 用途 |
 |---|---|---|
-| 施策一覧 | `docs/todo/01_改善バックログ.md` | AFF-NN 行の追加・status 更新 |
+| 施策一覧 | `docs/todo/04_改善バックログ.md` | AFF-NN 行の追加・status 更新 |
 | agent 用詳細 | `.claude/skills/analytics/affiliate-improvement/reference/improvement-log.md` | 検証コマンド・仮説・実測値・GA4 クエリ結果 |
 | **集約状態 (機械・★入口)** | `.claude/state/ads/affiliate-operations-latest.json` | 計測ゲート・freshness・coverage・直接配置・実験・推奨アクションの現在地 (`build-affiliate-operations-state.ts` が生成、週次 CI 自動更新) |
 | 在庫 snapshot (機械) | `.claude/state/ads/inventory-*.json` | audit script が生成、ループの入力 |
@@ -30,8 +30,8 @@ co_agents: [improvement-triage, adsense-analyst]
 > state から読む (値は変動する)。stale (freshness > 10d) なら
 > `npx tsx .claude/scripts/ads/build-affiliate-operations-state.ts` で再生成する。
 
-> **effect/* を付ける前に必ず** `.claude/rules/evidence-based-judgment.md` の実証チェックリストを通す。
-> 想定値 / 実測値 / 取得コマンド / 経過日数なしに effect/full・effect/partial を付けない。
+> **効果判定を確定する前に必ず** `.claude/rules/evidence-based-judgment.md` の実証チェックリストを通す。
+> 想定値 / 実測値 / 取得コマンド / 経過日数なしに判定してTODO行を削除しない。
 
 ## 引数
 
@@ -42,7 +42,7 @@ $ARGUMENTS — [mode]
                - dashboard         : 管理画面 (単体 HTML) を再生成して開く / ユーザーに渡す
                - audit             : 在庫棚卸しのみ再実行 (vertical 10軸ギャップ + サイズ lint + 配置偏り)
                - observe           : GA4 imp/click を取得 → CTR 集計 → 弱枠特定 → 実測を追記
-               - action            : 新しい施策 section (AFF-NN) を追加
+               - action            : 新しい施策行 (AFF-NN) を追加
                - next              : 次に着手すべき改善候補を提示
 ```
 
@@ -89,7 +89,7 @@ JSON は `.claude/state/ads/inventory-latest.json` (`byVertical` / `coverage.gap
 
 ### Step 2: GA4 実績取得 (observe モードのみ)
 
-専用スクリプトで `ad_impression` / `affiliate_click` を (category × position) 別に取得する:
+専用スクリプトで `affiliate_impression` / `affiliate_click` を (category × position) 別に取得する:
 
 ```bash
 node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 直近 28 日。snapshot → .claude/state/ads/ga4-affiliate-<date>.json
@@ -127,29 +127,22 @@ baseline / 中央値は実測から決め、根拠を improvement-log に書く 
 
 ### Step 4: 施策の記録 (action モード)
 
-`docs/todo/01_改善バックログ.md` に新 section を追加 (INDEX.md の frontmatter 規約準拠):
+`docs/todo/04_改善バックログ.md` の該当Tierの6列表に1行を追加する:
 
 ```markdown
-## [AFF-NN] タイトル
-
-- **status**: pending | in-progress | effect/full | effect/partial | effect/none | effect/adverse
-- **tier**: 1 | 2 | 3
-- **target_metric**: affiliate/impression | affiliate/ctr | affiliate/click | affiliate/inventory
-- **owner**: claude | uruhayato373
-- **deployed_at**: YYYY-MM-DD
-- **due**: YYYY-MM-DD
-- **verification_command**: <copy-pasteable>
-- **related_pr**: #N
+| AFF-NN | <次アクションを含む短い要約> | pending | YYYY-MM-DD | <owner> | affiliate |
 ```
 
-詳細 (仮説 / 検証コマンド / 想定値の根拠 / 実測) は `reference/improvement-log.md` に
+target metric、deployed_at、関連PR、詳細 (仮説 / 検証コマンド / 想定値の根拠 / 実測) は
+`reference/improvement-log.md` に
 `.claude/rules/evidence-based-judgment.md` の記入テンプレで書く。
 
 ### Step 5: 効果判定 (observe モードで before/after)
 
 施策デプロイから 1〜4 週後に GA4 を再取得し、impression / CTR の before/after を比較。
-実証チェックリストを通してから `docs/todo/01_改善バックログ.md` の status を effect/* に更新する。
-status 更新は排他的 writer の `improvement-triage` に委譲してもよい。
+実証チェックリストを通し、判定結果を `reference/improvement-log.md` に追記してから
+`docs/todo/04_改善バックログ.md` の該当行を削除する。是正が必要なら別IDを追加する。
+TODOのwriteは排他的 writer の `improvement-triage` に委譲してもよい。
 
 ## 在庫追加・配置変更の実行委譲
 
@@ -164,10 +157,10 @@ status 更新は排他的 writer の `improvement-triage` に委譲してもよ�
 | ファイル | 役割 |
 |---|---|
 | `.claude/scripts/ads/audit-affiliate-inventory.ts` | 在庫棚卸し (決定的) |
-| `docs/todo/01_改善バックログ.md` | 人間向け施策ログ (AFF-NN) |
+| `docs/todo/04_改善バックログ.md` | 人間向けactive施策一覧 (AFF-NN) |
 | `reference/improvement-log.md` | agent 用詳細ログ |
 | `apps/web/scripts/affiliate-ads-data.ts` | 在庫 SSOT |
 | `apps/web/src/lib/analytics/events.ts` | GA4 計測イベント定義 |
 | `apps/web/src/features/ads/` | 描画コンポーネント |
 | `.claude/skills/ads/register-affiliate-banner/SKILL.md` | バナー登録 (実行委譲先) |
-| `.claude/rules/evidence-based-judgment.md` | effect/* 付与前の実証ルール |
+| `.claude/rules/evidence-based-judgment.md` | 効果判定確定前の実証ルール |

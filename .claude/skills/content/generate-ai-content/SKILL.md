@@ -20,7 +20,7 @@ primary_agent: ranking-content-author
 ## モデル運用ポリシー（★コストゲート・2026-07-03 確定）
 
 トークン消費を抑えつつ高流入ページの品質を守る **2段 critic** 設計。正典:
-`docs/04_レビュー/2026-07-03-claude-code-setup-audit.md`。
+`.claude/rules/model-prompting.md`。
 
 | 役割 | モデル | 根拠 |
 |---|---|---|
@@ -159,4 +159,4 @@ per-key に critic agent を起動しない。以下の 3 点でセッション�
 - 決定的ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs`
 - 型定義: `packages/ai-content/src/types/snapshot.ts`（`AiContentSnapshotRow`）
 - 担当 agent: `.claude/agents/ranking-content-author.md` / 意味レビュー: `ranking-content-critic`
-- backlog: `docs/todo/02_機能バックログ.md` `[AICONTENT-DBLESS-REBUILD]`
+- backlog: `docs/todo/05_機能バックログ.md` `[AICONTENT-DBLESS-REBUILD]`

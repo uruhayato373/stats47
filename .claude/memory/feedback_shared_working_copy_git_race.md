@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 5bf3159d-935d-444d-991d-c99ef203491f
+  modified: 2026-07-29T02:50:53.081Z
 ---
 
 2026-05-29、YouTube 撤退作業中に、別セッション(dbless)と**同一 working copy / .git を共有**していたため git レースが発生した。
@@ -43,4 +44,6 @@ metadata:
 
 **広い `git add` が CI 掃除済みファイルを出戻りさせる (2026-06-21):** 大量ブログ公開後、`blog-auto-publish.yml` の cleanup ステップ (`git rm` + commit-back `[skip ci]`) が `docs/21` の公開済みドラフトを ~100 件削除していた。その直後に「全セッション/Codex 変更の統合コミット」を広い `git add` で作ったら、**まだローカル作業ツリーに残っていた 24 件の公開済みドラフトを git に出戻り**させ、ephemeral outbox 不変条件 (公開済みは置かない) を壊した (R2 が正典・全件本番200・git 履歴も残るので無害だが outbox が散らかる)。**How to apply**: ① `docs/21` は ephemeral outbox = CI が握る領域。**統合コミットの `git add` 対象から `docs/21` を外す** (公開済みドラフトの掃除は CI に任せる)。② 出戻り検知: `find docs/21 -name article.md | xargs grep -l '^published: true'` が空でなければ掃除漏れ → published:true & 本番200 を確認して `git rm`、published:false の作業中ドラフトのみ残す。③ 掃除コミットは CI 同様 `[skip ci]` を付けると blog-auto-publish の no-op 発火を避けられる (今回は付け忘れたが deletion なので detect 空 → reconcile 無し = 無害な空振り)。`git add -A`/`commit -a` 厳禁は CI 管理領域の出戻り防止でもある。**機構化済 (2026-06-21)**: 手動掃除に依存せず、`blog-remediation-daily.yml` (日次 JST 08:00) に `.claude/scripts/blog/prune-published-outbox.mjs --apply` を配線。「published:true かつ **R2 の article.md と内容完全一致**」のドラフトを自動 `git rm` するので**出戻りしても翌日消える** (published:false は保持)。手動掃除は `node .claude/scripts/blog/prune-published-outbox.mjs`(dry-run)→`--apply` で即時実行も可。**★内容一致を要求するのは安全装置**: brushup (既 live 記事の改稿) は docs/21 に published:true のまま新版を置き R2 には旧版が live なので、「存在」だけで消すと改稿中を誤削除する (2026-06-21 整合性監査で検出した統合バグ。publish は cp -R verbatim なので完全一致=取り残しと確定でき、差分=改稿中は保持)。正典: [[project_blog_publish_cloud_first]] / blog-data-schema.md §0。
 
-関連: [[project_env_local_ci_consolidation]] [[project_dbless_migration_2026_05_29]] [[project_blog_publish_cloud_first]] [[project_blog_mass_rewrite_lessons]]
+**★worktree 分離でも「相手の未コミット source」は漏れてくる (2026-07-29・per-area 100倍バグ修正時):** worktree は `.git`/HEAD/index を分離するが、**npm workspace の symlink は本体 checkout の絶対パスを指したまま**なので、`@stats47/*` の import は**本体側の作業ツリー**に解決される。実際 worktree で `npm run type-check --workspace apps/web` が `home-portal` の型エラーで落ち、原因は**別セッションが本体で `packages/data-configs/src/{index,home-portal}.ts` を編集中**だったこと (私の変更とは無関係)。`ls -l /Users/minamidaisuke/stats47/node_modules/@stats47/data-configs` → `../../packages/data-configs` = **本体側**。**How to apply**: worktree で検証が謎の失敗をしたら、まず `git -C /Users/minamidaisuke/stats47 status --porcelain -- packages/` で相手の WIP を疑う。隔離するには worktree 内に `node_modules/@stats47/<pkg> → <worktree>/packages/<pkg>` の symlink を張る (自分のツリーを検証できる)。**もう 1 点**: worktree の `node_modules` は実質空 (`.vite` のみ) で、依存は上位ディレクトリ探索で解決されるが、**`typeRoots: ["../../node_modules/@types"]` のような相対パス指定とアセット実ファイルパスは解決できない** (pre-commit の型チェック・image-pipeline テストが `ENOENT` で落ちる)。本体 `node_modules` の全エントリを worktree に symlink すれば pre-commit 全項目が通る (`@stats47` だけは自分向きを維持)。gitignore 配下なのでリポジトリには影響しない。
+
+関連: [[project_env_local_ci_consolidation]] [[project_dbless_migration_2026_05_29]] [[project_blog_publish_cloud_first]] [[project_blog_mass_rewrite_lessons]] [[feedback_sync_snapshots_checks_out_main]]

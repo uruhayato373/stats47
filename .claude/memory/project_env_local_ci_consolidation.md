@@ -37,7 +37,7 @@ shadowban (SUGGESTED_VIDEO=0) + 低 ROI (32 subs / 81本 / ~7 views/日) + 戦�
 ## PENDING — YouTube 撤退 (2026-05-29)
 - **Phase 2 (Secrets)**: YT 撤去が main に反映された後、GitHub Secrets の `GOOGLE_OAUTH_{CLIENT_ID,CLIENT_SECRET,REFRESH_TOKEN}` を削除 (先に消すと main 残存 workflow が誤アラート起票するため順序厳守)
 - **Phase 3 (手動・ユーザーのみ)**: YouTube チャンネル削除/放棄 (YouTube Studio, **不可逆**) + 任意で Google Cloud OAuth クライアント無効化
-- `docs/15_実験ログ/youtube/` と `docs/10_SNS戦略/06_YouTube運用Playbook.md` は履歴としてアーカイブ保持 (削除しない)
+- YouTube の運用資料は削除済み。撤退方針の現行正典は `.claude/rules/sns-content-standards.md`、当時の資料は Git 履歴で参照する
 
 ## R2 S3 を `.env.local` から削除済 (2026-05-29)
 - `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT` を削除 → ポインタコメント残置。

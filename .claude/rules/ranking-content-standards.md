@@ -2,10 +2,11 @@
 
 `/ranking/<key>` ページの**コンテンツ構成・品質フロア・AI 解説文の生成パイプライン**の運用正典。
 ranking の ai-content (考察/構造解釈/時系列/相関/FAQ/県別解説) を生成・是正する agent (`ranking-content-author`) /
-critic (`ranking-content-critic`) / 人間はこれに従う。2026-07-12 に旧 `docs/02_実装計画/09_ランキング品質改修.md` の
-運用スペック (§2 コンテンツ仕様・§3 パイプライン・§5 分業) を本 rule へ抽出し、運用 SSOT を .claude に一本化した。
+critic (`ranking-content-critic`) / 人間はこれに従う。2026-07-12 に旧ランキング品質改修計画の
+運用スペック（コンテンツ仕様・パイプライン・分業）を本 rule へ抽出し、運用 SSOT を `.claude/` に一本化した。旧版が必要な場合は Git 履歴を参照する。
 
-> **役割分担**: 戦略・KPI 目標は `docs/02_実装計画/01_収益化マスタープラン.md` (P2 トラフィック成長)。
+> **役割分担**: 戦略・KPI 目標は `docs/00_プロジェクト管理/03_マーケティング戦略.md`
+> （T1〜T4・成長レバー）。
 > Wave 進捗・生成の状態は **ai-content 是正キュー** (`.claude/state/ai-content/` + `build-ai-content-queue.mjs`、
 > memory `project_ai_content_remediation_queue`) と backlog (AICONTENT-02 / RANK-WAVE) が持つ。
 > 本 rule は「どう構成し・どの品質床で・どう生成するか」の運用正典。
@@ -77,7 +78,7 @@ R2 values.json + correlation + metric config
 
 ## 関連
 
-- 戦略・KPI: `docs/02_実装計画/01_収益化マスタープラン.md` (P2)
+- 戦略・KPI: `docs/00_プロジェクト管理/03_マーケティング戦略.md`（T1〜T4・SEO品質レバー）
 - ai-content 是正キュー: memory `project_ai_content_remediation_queue` / `.claude/scripts/ranking/build-ai-content-queue.mjs`
 - 決定的ゲート: `.claude/scripts/ranking/audit-ai-content.mjs`
 - 公開: `.github/workflows/publish-ai-content.yml` (自動化インベントリ参照)

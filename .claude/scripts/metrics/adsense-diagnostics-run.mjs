@@ -2,12 +2,12 @@
 /**
  * adsense-diagnostics-run — 週次 AdSense 候補生成 (最大3件・決定的)。
  *
- * 正典: docs/02_実装計画/41_AdSense継続改善・GA4_GSC設定自動化仕様.md §4.3/§7。
+ * 診断正典: ./lib/adsense-diagnostics.mjs。運用正典: /adsense-improvement。
  * 入力: .claude/state/metrics/adsense/{history,history-devices,history-placements,history-formats}.csv
  *       + snapshot manifest.json (job status)
  *       + .claude/state/metrics/adsense/past-effects.json (任意・effect/none|adverse 台帳)
  * 出力: .claude/state/metrics/adsense/candidates-latest.json (提示まで。バックログ追加・
- *       配置変更・deploy は人間承認 — §3.3)
+ *       配置変更・deploy は人間承認)
  *
  *   node .claude/scripts/metrics/adsense-diagnostics-run.mjs [YYYY-Www]
  */
@@ -154,7 +154,7 @@ function main() {
     period: periods.finalized7d,
     previousWeek: prevWeek,
     limits: { maxCandidates: MAX_CANDIDATES, activeWipLimit: ADSENSE_ACTIVE_WIP_LIMIT, weeklyAdoptionLimit: ADSENSE_WEEKLY_ADOPTION_LIMIT },
-    note: "候補提示まで (自動でバックログ追加・配置変更・deploy しない・doc41 §3.3)。採用は人間承認で最大1件/週",
+    note: "候補提示まで (自動でバックログ追加・配置変更・deploy しない)。採用は人間承認で最大1件/週",
     candidates,
   };
   writeFileSync(join(STATE_DIR, "candidates-latest.json"), JSON.stringify(out, null, 2) + "\n");

@@ -25,8 +25,8 @@ interface ArticleShellProps {
  *   (PageShell reading variant の「1fr 列内で本文 760px 制限 → ワイド画面で空白」を根治)
  * - レールは「非 sticky 上段 + sticky TOC クラスタ末尾」の 2 段構成
  *
- * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md /
- * docs/01_技術設計/15_デザインシステムSSOT.md「reading zone」
+ * 設計仕様: docs/01_技術設計/04_デザインシステム.md /
+ * docs/01_技術設計/04_デザインシステム.md「reading zone」
  */
 export function ArticleShell({
   children,

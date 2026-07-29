@@ -77,3 +77,40 @@ test("既存brokenの解消は回帰にしない", (t) => {
     { ref: "docs/missing-known.md", referrer: "CLAUDE.md" },
   ]);
 });
+
+test(".claude/worktrees 配下の別 checkout は走査しない", (t) => {
+  const fixture = createFixture();
+  t.after(() => fs.rmSync(fixture.fixtureRoot, { recursive: true, force: true }));
+
+  const worktreeDir = path.join(fixture.fixtureRoot, ".claude/worktrees/stale");
+  fs.mkdirSync(worktreeDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(worktreeDir, "CLAUDE.md"),
+    "See docs/missing-from-another-worktree.md\n",
+  );
+
+  const result = runChecker(fixture, ["--json"]);
+  const output = JSON.parse(result.stdout);
+
+  assert.equal(result.status, 1);
+  assert.deepEqual(output.broken, [
+    { ref: "docs/missing-known.md", referrers: ["CLAUDE.md"] },
+  ]);
+});
+
+test("別path segment末尾のdocsをルートdocs参照と誤認しない", (t) => {
+  const fixture = createFixture();
+  t.after(() => fs.rmSync(fixture.fixtureRoot, { recursive: true, force: true }));
+  fs.mkdirSync(path.join(fixture.fixtureRoot, ".claude/rules"), { recursive: true });
+  fs.writeFileSync(
+    path.join(fixture.fixtureRoot, ".claude/rules/example.md"),
+    [
+      ".claude/skills/management/maintain-docs/SKILL.md",
+      ".claude/skills/blog/review-docs/SKILL.md",
+    ].join("\n"),
+  );
+  fs.writeFileSync(path.join(fixture.fixtureRoot, "docs/missing-known.md"), "# restored\n");
+  const result = runChecker(fixture, ["--json"]);
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).broken, []);
+});

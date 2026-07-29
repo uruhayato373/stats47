@@ -27,7 +27,7 @@ import { createHash } from "node:crypto";
 //   `process.platform` で分岐せず、**実在するほうを採る**フォールバック 1 本で両対応する。
 //
 // MAIN_CHECKOUT は Mac 本体チェックアウト。git worktree から実行しても同じログインを
-// 共有させるために優先する (docs/01_技術設計/playwright-auth-profiles.md)。
+// 共有させるために優先する (docs/01_技術設計/07_Playwright認証プロファイル.md)。
 // 実在しなければ、このファイル自身の位置から解決したリポジトリ root を使う
 // (`process.cwd()` だと実行ディレクトリ次第でプロファイルが分裂するため使わない)。
 const MAIN_CHECKOUT = "/Users/minamidaisuke/stats47";

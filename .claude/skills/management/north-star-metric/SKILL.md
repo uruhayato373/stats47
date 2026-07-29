@@ -73,7 +73,7 @@ stats47 はコンテンツメディアとして主に **Attention ゲーム** �
 - SNS 指標（時系列）: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` 経由）
 ```
 
-現在の週次計画（`docs/todo/current-week.md`）から追跡中の KPI を確認する。
+現在の週次計画（`docs/todo/03_今週の計画.md`）から追跡中の KPI を確認する。
 
 ### Step 3: NSM 候補の検討
 
@@ -160,40 +160,21 @@ NSM を駆動する 3-5 の Input Metrics を定義する。各 Input Metric は
 `/weekly-plan` の「現状サマリー」テーブルに NSM と Input Metrics を追加する方法を提案。
 ```
 
-### Step 6: critical-review レポートを Write する
+### Step 6: SSOTとTODOへ反映する
 
-レビュー本文（NSM 定義・7 基準評価・Input Metrics）を `docs/04_レビュー/{YYYY-MM-DD}-nsm.md` に Write tool で出力する。日付は今日（JST）の `YYYY-MM-DD` を使用する。
+NSM定義・Input Metrics・意思決定ゲートは `docs/00_プロジェクト管理/02_収益化戦略.md` へ直接反映する。
+未完了の計測・改善だけを `docs/todo/04_改善バックログ.md` へ具体化する。レビュー全文は保存しない。
+週次snapshotは `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/{YYYY-Www}.json` を継続使用する。
 
-frontmatter は以下を必ず含める:
+### Step 7: 変遷を確認する
 
-```yaml
----
-type: critical-review
-topic: nsm
-date: 2026-MM-DD
-status: active
----
-```
-
-本文は上記「出力フォーマット」のテンプレートをそのまま続ける。
-
-**注意**: NSM の週次 snapshot（JSON）の保存先は変更なし。引き続き `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/{YYYY-Www}.json` に保存する。docs/ には critical-review の結果（NSM 再定義・基準評価・Input Metrics の見直し）のみを出力する。
-
-### Step 7: 過去レビューの参照
-
-過去の NSM 定義変遷は以下で確認:
-
-```bash
-ls -t docs/04_レビュー/*.md | head -5
-```
-
-旧 GitHub Issue 運用は廃止: critical-review レポートは `docs/04_レビュー/` に蓄積する。
+`git log -p -- docs/00_プロジェクト管理/02_収益化戦略.md` と週次snapshotを参照する。
 
 ## 参照
 
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
-- `docs/02_実装計画/01_収益化マスタープラン.md` — KPI・Phase 目標
-- `docs/00_プロジェクト管理/01_概要/` — プロジェクト概要・ビジョン
+- `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM・先行指標・意思決定ゲート
+- `docs/00_プロジェクト管理/01_プロジェクト定義.md` — プロジェクト概要・ビジョン
 - `.claude/skills/management/weekly-plan/SKILL.md` — 週次計画（NSM 統合先）
 - `.claude/skills/management/growth-loops/SKILL.md` — 成長ループ分析
 - 原典: Paweł Huryn の North Star Framework（Amplitude 社ベース）

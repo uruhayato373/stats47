@@ -1,7 +1,8 @@
 /**
  * redaction — secret / query / cookie を安全に扱う純粋関数。
  *
- * 正典: docs/02_実装計画/39 §2.6 / §6.4 / §13 Normalize (secret/query redaction)。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md
+ * (secret/query redaction)。
  * - 検索 query の生文字列を公開レポートへ出さない (集計/ハッシュ化)
  * - service account key / bearer / api key / cookie をログへ出さない
  */

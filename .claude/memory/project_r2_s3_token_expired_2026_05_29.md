@@ -13,7 +13,7 @@ metadata:
 
 **復旧手段**: **Cloudflare で R2 S3 API トークン再発行** → `.env.local` の `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` 更新。ただし R2 書込は CI 専任化済のため、ローカル直叩きは通常不要。
 
-**ブロックされる作業**: 完全DBレス移行 (Phase C エフェメラル化の diff 検証 / Phase D known-ranking-keys 再生成 / Phase E 検証)、`/push-r2` `/pull-r2` の cloud 経路。詳細は [[project_dbless_migration_2026_05_29]] / `docs/02_実装計画/dbless-spec-2026-05-29.md` §5。
+**ブロックされる作業**: 完全DBレス移行 (Phase C エフェメラル化の diff 検証 / Phase D known-ranking-keys 再生成 / Phase E 検証)、`/push-r2` `/pull-r2` の cloud 経路。詳細は [[project_dbless_migration_2026_05_29]] / `docs/01_技術設計/02_データアーキテクチャ.md`（旧移行仕様は Git 履歴）。
 
 **2026-05-29 続報**: 失効した `R2_*` 3 つは `.env.local` から削除した (ポインタコメント残置 [[project_env_local_ci_consolidation]])。有効値は GitHub Secrets `CLOUDFLARE_R2_ACCESS_KEY_ID` / `CLOUDFLARE_R2_SECRET_ACCESS_KEY` (05-29 更新) にあり、cloud/CI はそちらを使う。ローカルで直接 R2 を叩く必要が出たら Cloudflare で S3 トークン再発行 → `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT` を復活。
 

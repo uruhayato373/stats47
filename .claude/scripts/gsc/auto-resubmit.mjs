@@ -15,7 +15,8 @@
  *      → node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50
  *
  * 過去の送信履歴 (.claude/state/metrics/gsc/resubmit-history.json) は証拠として保持する
- * (このスクリプトは書き込まない)。正典: docs/02_実装計画/39 Phase 1 /
+ * (このスクリプトは書き込まない)。正典:
+ * .claude/skills/analytics/search-growth/reference/platform-contract.md /
  * .claude/skills/analytics/gsc-coverage-remediation/SKILL.md。
  *
  * この stub は googleapis を import せず、Indexing API を一切呼ばない。

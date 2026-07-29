@@ -47,4 +47,4 @@ S1論点読み物12 + S2テーマ別データブック11 + S3地域別8 + S4ラ�
 - 需要ファースト: 1冊ずつmanuscript昇格→生成→人間がKDP公開→4週実測(KENP/販売)→良ければ横展開。S4ランキング大全は競合(とどラン書籍版)先行で最後発。
 
 ## 正典
-`.claude/rules/coconala-product-standards.md §8` (product-factory同居) / 市場評価 `docs/04_レビュー/2026-07-14-kindle-monetization.md` / 論点カタログ `docs/04_レビュー/2026-07-19-pdf-book-survey.md`。関連: [[project_coconala_product_factory]] [[project_blog_remediation_loop]]
+`.claude/rules/coconala-product-standards.md §8` (product-factory同居) / 企画SSOT `packages/product-factory/src/channels/kindle/book-catalog.ts`。初期市場・書籍調査はGit履歴。関連: [[project_coconala_product_factory]] [[project_blog_remediation_loop]]
