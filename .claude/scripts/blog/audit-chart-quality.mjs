@@ -32,7 +32,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { lintSvgContent, extractInlineSvgs, lintSvgSize, lintChoroplethLegend, lintFindingsParity } from "../lib/svg-lint.mjs";
+import { lintSvgContent, extractInlineSvgs, lintSvgSize, lintChoroplethLegend, lintFindingsParity, lintTileGridQuality } from "../lib/svg-lint.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -92,7 +92,7 @@ function auditArticle(slug) {
   if (fs.existsSync(dataDir)) {
     for (const f of fs.readdirSync(dataDir).filter((x) => x.endsWith(".svg"))) {
       const svg = fs.readFileSync(path.join(dataDir, f), "utf8");
-      const a = lintSvgContent(svg);
+      const a = lintSvgContent(svg, f);
       const b = lintSvgSize(f, svg); // 非正規 viewBox 幅 (アスペクト比統一・再発防止)
       // ペア検査 (json があるときのみ): 凡例の意味的ラベル誤用 / findings の内容パリティ
       let jsonData;
@@ -102,9 +102,11 @@ function auditArticle(slug) {
       }
       const c = lintChoroplethLegend(f, svg, jsonData);
       const d = jsonData !== undefined ? lintFindingsParity(f, svg, jsonData) : { errors: [], warnings: [] };
+      // タイルマップの品質不変量 (キャンバス比・透過背景・テーマ非依存・凡例位置)
+      const e = lintTileGridQuality(f, svg, jsonData);
       consume(`data/${f}`, {
-        errors: [...a.errors, ...b.errors, ...c.errors, ...d.errors],
-        warnings: [...a.warnings, ...b.warnings, ...c.warnings, ...d.warnings],
+        errors: [...a.errors, ...b.errors, ...c.errors, ...d.errors, ...e.errors],
+        warnings: [...a.warnings, ...b.warnings, ...c.warnings, ...d.warnings, ...e.warnings],
       });
     }
   }

@@ -37,7 +37,7 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 |---|---|---|---|---|---|
 | `generateBarChartSvg` | `bar-chart.ts` | `BarItem[]` + `BarChartOptions` | `*-ranking.json` / `*-top5-bottom5.json` | ~239 | ランキングはカード型のみ・**上位5+下位5固定**（10件廃止）。`layout:"columns"`=横長2列カード（左=上位/右=下位、`960×404`、ブログ本文+X 用）/ `layout:"portrait"`=縦長スタックカード（上位5↓下位5、`1080×1350` 4:5、Instagram 用 `-ig.svg`）/ `layout:"single"`=縦1列+「…中略…」(680幅)。`generate-article-charts.ts` が `*-ranking.json` から columns(`<name>.svg`)+portrait(`<name>-ig.svg`)を自動両出力 |
 | `generateScatterSvg` | `scatter.ts` | `ScatterPoint[]` + `ScatterOptions` | `*-scatter.json` | ~166 | 散布図（全都道府県・相関可視化） |
-| `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド47都道府県マップ。**600×700固定・全テキスト白+縁取り・タイトル左上・年15px・凡例=タイトル直下左上（既定ラベル 低い/高い + 実数値スケール。安全/危険 等の意味的ラベルは json `legendLabels` 明示時のみ＝2026-07-13 是正）**。色は **D3カラースキーム** `scheme`(`Blues`/`Viridis`/`RdYlGn`/`RdBu`/`Spectral`/`YlOrRd`…d3-scale-chromatic、未指定時 Reds)、`reverse`/`showValue` 可。データは SSOT(R2 app/ranking)。一括再生成: `regenerate-tile-maps.ts`。正典 `blog-data-schema.md` §1.6 |
+| `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド47都道府県マップ。**780×560固定・透過背景・テーマ非依存・左カラムにタイトル+高い順/低い順3県・凡例は地図右下**（既定ラベル 低い/高い + 実数値スケール。安全/危険 等の意味的ラベルは json `legendLabels` 明示時のみ＝2026-07-13 是正）。タイル内テキストは全て白+縁取り。色は **D3カラースキーム** `scheme`(`Blues`/`Viridis`/`RdYlGn`/`RdBu`/`Spectral`/`YlOrRd`…d3-scale-chromatic、未指定時 Reds)、`reverse`/`showValue`/`showRankList` 可。データは SSOT(R2 app/ranking)。一括再生成: `regenerate-tile-maps.ts`。**不変量の gate = `lintTileGridQuality`（§6-2）**。正典 `blog-data-schema.md` §1.6 |
 | `generateLineSvg` | `line.ts` | `StatsSchema[]` + `LineOptions` | `*-timeseries.json` / `*-trend.json` | ~39 | 多系列折れ線（時系列・年齢階級）|
 | `generateStackedBarSvg` | `stacked-bar.ts` | `StackedData` + `StackedBarOptions` | `*-stacked.json` / `*-breakdown.json` | ~5 | 積み上げ棒グラフ（構成比）|
 | `generateFindingsCardSvg` | `findings-card.ts` | `FindingsCardData`（`{ findings: string[] \| FindingsCardItem[], title?: string }`） | `*-summary-findings.json` / `*-findings.json` | ~54 | 「この記事でわかったこと」要点カード（番号付き circle + テキスト行） |
@@ -92,7 +92,17 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 
 ### ダークモード（`svgThemeStyle()`）
 
-SVG 全チャートで必須。`<svg>` の直後（`<title>` の後）に挿入する。
+**タイルマップ（choropleth）を除く**全チャートで必須。`<svg>` の直後（`<title>` の後）に挿入する。
+
+> **★タイルマップは `svgThemeStyle()` を使わない（2026-07-29）。** サイトのテーマは next-themes の
+> class 方式で `enableSystem={false}` / `defaultTheme="light"`、つまり **OS の `prefers-color-scheme` を
+> 意図的に無視する**。一方 `<img>` 内の SVG から親ページの `.dark` class は見えない。この 2 つが重なると
+> `@media (prefers-color-scheme:dark)` は「OS はダーク・サイトはライト」のユーザーで
+> **SVG だけを反転させる**（明るい記事の中に濃紺の箱が出る）。タイルマップは背景を敷かず
+> テーマ非依存の配色にすることでライト/ダーク双方に対応する。gate = `lintTileGridQuality`（§6-2）。
+>
+> 他チャート（bar / scatter / line / stacked / findings）は現状 `svgThemeStyle()` のままで、
+> 同じ不整合を抱えている。移行するかは別途判断する（本改訂ではタイルマップのみ対象）。
 
 ```ts
 svg += svgThemeStyle();
@@ -168,13 +178,13 @@ svg += svgThemeStyle();
 | ランキング縦長（portrait・IG `-ig.svg`） | `1080` | `1350`（4:5固定） | 縦長スタック（上位5↓下位5） |
 | ランキング（single・1列） | `680` | 可変（1行 ~30px） | `680×300`（95枚） |
 | 散布図（scatter） | `960` | `624` | `960×624`（80枚） |
-| タイルマップ（map） | `600` | `700` | `600×700`（47枚） |
+| タイルマップ（map） | `780` | `560` | `780×560`（2026-07-29 改訂。旧 600×700） |
 | 要点カード（findings） | `960` | 可変（要点数 × ~80px） | `960×478`（26枚） |
 | 折れ線（timeseries） | `680` | `420` | `680×420`（19枚） |
 | 積み上げ棒（stacked） | `680` | 可変 | `680×420` |
 
 `width` と `height` 属性は viewBox と必ず一致させる（svg-lint が検査）。
-**svg-builder の各チャートは §5 標準幅に収斂済（2026-06-17 Step 5）**: bar single=680（width/height も 680 に一致、旧 DISPLAY_W=780 スケーリングは廃止）/ **ランキングカード 横長columns=960×404・縦長portrait=1080×1350（2026-06-20）** / scatter=960×624 / map=600×700 / line=680×420 / stacked=680 / findings=960。新規生成は自動的にこの規格になる。
+**svg-builder の各チャートは §5 標準幅に収斂済（2026-06-17 Step 5）**: bar single=680（width/height も 680 に一致、旧 DISPLAY_W=780 スケーリングは廃止）/ **ランキングカード 横長columns=960×404・縦長portrait=1080×1350（2026-06-20）** / scatter=960×624 / map=780×560 / line=680×420 / stacked=680 / findings=960。新規生成は自動的にこの規格になる。
 **標準幅から外れる既存 SVG は再生成で是正**（`regenerate-blog-svgs.yml`・§10 Step 4）。
 
 ---
@@ -186,8 +196,25 @@ svg += svgThemeStyle();
 | 重大度 | チェック項目 |
 |---|---|
 | **error** | viewBox 未設定 / width・height 属性なし / 閉じタグなし / **カタログ別 非正規サイズ（統一済みカタログ）** |
-| **warning** | ダークモード非準拠（`svgThemeStyle()` なし） / テーマ色のインライン指定 / **カタログ別 非正規サイズ（未統一カタログ）** |
+| **warning** | ダークモード非準拠（`svgThemeStyle()` なし） / テーマ色のインライン指定 / **カタログ別 非正規サイズ（未統一カタログ）**。※ **tile-grid はこの 2 つの warning を出さない**（仕様上テーマ非依存のため。`lintSvgContent(content, filename)` に filename を渡すと抑止される） |
 | **error (json ペア検査)** | **choropleth 凡例の意味的ラベル誤用**（安全/危険 等が json `legendLabels` 明示なしに焼き込み）/ **findings の内容パリティ**（json の heading/text が SVG に未描画 = renderer の heading 脱落バグ再発防止）— `lintChoroplethLegend` / `lintFindingsParity`（2026-07-13 追加）。配線先 = `quality-gate.mjs`（公開前 blocker）+ `audit-chart-quality.mjs`（バッチ） |
+
+### 6-2. タイルマップ品質 gate（`lintTileGridQuality` / 2026-07-29 追加・★再発防止）
+
+「プロジェクト内のタイルマップを全て同じ品質に保つ」ための決定的ゲート。旧デザインの残存を検出する。
+配線先は `lintSvgSize` と同じ **`quality-gate.mjs`（公開前 blocker）+ `audit-chart-quality.mjs`（バッチ）**。
+
+| # | 不変量 | 理由 |
+|---|---|---|
+| 1 | キャンバス **780×560** | 記事内は `md:max-w-2xl`=672px 幅の `<img>`。画面上の高さは `672×H/W` で決まる。旧 600×700 は 784px で記事を占有していた（新: 482px） |
+| 2 | **背景 rect を敷かない**（透過） | 不透明な地色はページの地色と食い違う。透過ならライト/ダーク双方に馴染む |
+| 3 | `prefers-color-scheme` を含まない | §3 の理由（OS とサイトのテーマが食い違うと SVG だけ反転する） |
+| 4 | `svg-*` テーマ class を使わない | 同上 |
+| 5 | **凡例が右下**（グラデーションバーの座標で判定） | 左上は上位/下位リストが使う |
+| 6 | 上位/下位リストがある（タイル 3 枚以上のとき・warning） | 左カラムの空白を埋め、地図では読めない実数値を出す |
+
+**ゲート自体を検証済み**（全 PASS はゲートが何も見ていない場合と区別がつかないため）: 新デザイン 96 枚が
+error 0 / warning 0 で通り、旧デザイン 1 枚が **error 6 件**（不変量 1〜5 の全て）で落ちることを実測した。
 
 ### カタログ別サイズ統一 gate（`lintSvgSize` / 2026-06-21 追加・★再発防止）
 
@@ -199,7 +226,7 @@ svg += svgThemeStyle();
 | chartType | 正規幅 | 重大度 |
 |---|---|---|
 | `bar`（ranking） | 960（columns）/ 680（single） | **error** |
-| `tile-grid`（tilemap） | 600 | **error** |
+| `tile-grid`（tilemap） | 780 | **error** |
 | `summary`（findings） | 960 | **error** |
 | `line` | 680 | **error** |
 | `scatter` | 960 | **error** |

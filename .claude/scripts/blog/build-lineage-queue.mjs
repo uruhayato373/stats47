@@ -28,8 +28,19 @@ const LIMIT = process.argv.includes("--limit")
   ? Number(process.argv[process.argv.indexOf("--limit") + 1])
   : null;
 
-async function ft(u) { const r = await fetch(u); if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }
-async function head(u) { try { const r = await fetch(u); return r.ok; } catch { return false; } }
+/**
+ * CDN のキャッシュを迂回する URL を作る。
+ *
+ * R2 公開 URL は Cloudflare CDN 経由で、**404 も一定時間キャッシュされる**
+ * (2026-07-29 実測: push 成功済みのファイルが `cf-cache-status: HIT` / `age: 157` で 404 を返した)。
+ * 監査がこれを踏むと「push したのに欠落」と誤判定し、ラチェットが誤警報を出す。
+ * クエリを変えると Cloudflare は別 URL として扱うので必ず origin まで読める。
+ */
+function noCache(u) {
+  return `${u}${u.includes("?") ? "&" : "?"}__audit=${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+}
+async function ft(u) { const r = await fetch(noCache(u)); if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }
+async function head(u) { try { const r = await fetch(noCache(u)); return r.ok; } catch { return false; } }
 async function pMap(items, fn, c) {
   const out = []; let i = 0;
   const w = async () => { while (i < items.length) { const k = i++; try { out[k] = await fn(items[k]); } catch { out[k] = null; } } };
