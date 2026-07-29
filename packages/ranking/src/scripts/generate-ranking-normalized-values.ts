@@ -42,6 +42,7 @@ import {
   listAllMetrics,
   type MetricConfig,
   type NormalizationOption,
+  findExpectedEmpty,
 } from "@stats47/data-configs";
 import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
@@ -410,6 +411,18 @@ async function main(): Promise<void> {
 
   if (skippedNoValues.length > 0) {
     console.log(`[normalized] no observations: ${skippedNoValues.map((o) => o.key).join(", ")}`);
+  }
+  // 沈黙させない (2026-07-29 障害): 一覧を出すだけでは CI が緑のまま通ってしまう。
+  // EXPECTED_EMPTY に登録済みのキーだけを許容する。
+  const unexpectedSkips = skippedNoValues.filter(
+    (o) => !findExpectedEmpty(o.key, AREA_TYPE, new Date()),
+  );
+  if (unexpectedSkips.length > 0) {
+    console.error(
+      `[normalized] ✗ 観測値が無い未登録キー ${unexpectedSkips.length} 件: ${unexpectedSkips.map((o) => o.key).join(", ")}\n` +
+        `        意図した 0 件なら packages/data-configs/src/expected-empty.ts に登録します`,
+    );
+    process.exitCode = 1;
   }
   if (failed.length > 0) {
     for (const f of failed.slice(0, 20)) console.error(`  ✗ ${f.key}: ${f.error}`);

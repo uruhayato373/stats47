@@ -11,6 +11,7 @@ export default defineWorkspace([
   // --- packages ---
   'packages/area/vitest.config.ts',
   'packages/correlation/vitest.config.ts',
+  'packages/data-configs/vitest.config.ts',
   'packages/ranking/vitest.config.ts',
   'packages/r2-storage/vitest.config.ts',
   'packages/category/vitest.config.ts',
