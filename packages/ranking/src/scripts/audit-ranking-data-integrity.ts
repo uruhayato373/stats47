@@ -26,6 +26,8 @@
  *   (g) 正規化 値域         — fixture ゲート (lib/normalized-fixtures.ts) の期待レンジに入るか
  *   (h) 正規化 鮮度         — 相対 (values.json との generatedAt 差) と絶対 (現在時刻との差) の
  *                             2 軸。相対だけだと values.json ごと凍結したキーを見逃す
+ *   (i) 正典 app/stats      — active キーの `app/stats/<key>/values.json` が実在し rowCount>0 か。
+ *                             前回比 rowCount ドリフト (部分崩壊) も見る
  *
  * (f)(g)(h) は 2026-07-29 の障害 (values-per-area.json が 100 倍過大な値のまま 2 ヶ月配信) の
  * 再発検知。件数チェックだけでは「値が桁違い」も「writer 不在で凍結」も捕まえられなかった。
@@ -45,7 +47,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 
-import { HOME_FEATURED_RANKINGS } from "@stats47/data-configs";
+import { HOME_FEATURED_RANKINGS, findExpectedEmpty } from "@stats47/data-configs";
 
 import surveysMaster from "../data/surveys.json";
 
@@ -116,6 +118,11 @@ interface ValuesJson {
   }>;
 }
 
+interface StatsValuesJson {
+  meta?: { rowCount?: number };
+  rows?: unknown[];
+}
+
 interface NationalTrendJson {
   generatedAt?: string;
   series?: Array<{ basis?: string; points?: unknown[] }>;
@@ -147,6 +154,39 @@ interface NormalizedChecks {
   stale: Array<{ key: string; artifact: string; ageDays: number; kind: "relative" | "absolute" }>;
   /** 値域違反 */
   fixtureViolations: FixtureViolation[];
+  /**
+   * EXPECTED_EMPTY 済みキー由来の欠落/stale。**違反にしない**。
+   *
+   * 正典 app/stats が空なら writer は正しく生成をスキップするので、正規化 snapshot が
+   * 無い/古いのは (i) で追跡済みの既知課題の**結果**であって独立した問題ではない。
+   * これを違反に数えると根本データが直るまで監査が永久に赤くなり、
+   * 「赤いのが常態」になって新しい問題が埋もれる (本ゲート群が防ごうとしている失敗そのもの)。
+   */
+  expectedSkipped: string[];
+  ok: boolean;
+}
+
+/**
+ * (i) 正典 `app/stats/<key>/values.json` の検査結果。
+ *
+ * 2026-07-29 実測: active 2,179 件のうち 6 件が rowCount:0 のまま本番公開されていた。
+ * 配信側 `app/ranking/<key>/values.json` には旧データが残るためページは正常に見え、
+ * (a)-(h) のどれも検知できなかった (すべて app/ranking しか見ていないため)。
+ */
+interface StatsChecks {
+  checked: number;
+  /** app/stats が 404 */
+  missing: string[];
+  /** rowCount 0 (allowlist 未登録のもののみ) */
+  empty: string[];
+  /** rowCount 0 だが EXPECTED_EMPTY で許可済み */
+  emptyAllowed: string[];
+  /** 前回比で rowCount が閾値未満に急減 (部分崩壊。0 件検査では捕まらない) */
+  drift: Array<{ key: string; count: number; previous: number }>;
+  /** ネットワーク断等で判定不能 (違反にはしない) */
+  unreachable: number;
+  /** 次回のドリフト判定 baseline (key → rowCount) */
+  rowCounts?: Record<string, number>;
   ok: boolean;
 }
 
@@ -154,6 +194,8 @@ interface CountSnapshot {
   home: number;
   survey: number;
   categories: Record<string, number>;
+  /** (i) の前回比ドリフト用 */
+  statsRowCounts: Record<string, number>;
 }
 
 interface AuditReport {
@@ -177,6 +219,7 @@ interface AuditReport {
     >;
   };
   normalized: NormalizedChecks;
+  stats: StatsChecks;
   ok: boolean;
 }
 
@@ -282,7 +325,12 @@ function loadPreviousSnapshot(jsonOutPath: string | undefined): CountSnapshot | 
     for (const [key, v] of Object.entries(prev.countChecks?.categories ?? {})) {
       categories[key] = v.count;
     }
-    return { home: prev.countChecks?.home?.count ?? 0, survey: prev.countChecks?.survey?.count ?? 0, categories };
+    return {
+      home: prev.countChecks?.home?.count ?? 0,
+      survey: prev.countChecks?.survey?.count ?? 0,
+      categories,
+      statsRowCounts: prev.stats?.rowCounts ?? {},
+    };
   } catch {
     return null;
   }
@@ -315,6 +363,13 @@ async function main() {
   const valuesMissing: string[] = [];
   const yearMismatch: Array<{ key: string; itemYear: string | undefined; valuesYears: string[] }> = [];
 
+  // (i) 正典 app/stats の集計器
+  const stats: StatsChecks = {
+    checked: 0, missing: [], empty: [], emptyAllowed: [], drift: [], unreachable: 0, ok: true,
+  };
+  const statsRowCounts: Record<string, number> = {};
+  const auditNow = new Date();
+
   // (f)(g)(h) 正規化系の集計器
   const normalized: NormalizedChecks = {
     expectedKeys: 0,
@@ -323,6 +378,7 @@ async function main() {
     missing: [],
     stale: [],
     fixtureViolations: [],
+    expectedSkipped: [],
     ok: true,
   };
 
@@ -332,10 +388,34 @@ async function main() {
       .map((o) => o.type)
       .filter((t): t is NormType => (NORM_TYPES as readonly string[]).includes(t ?? ""));
 
-    const [itemRes, valuesRes] = await Promise.all([
+    const [itemRes, valuesRes, statsRes] = await Promise.all([
       fetchJson<ItemJson>(`app/ranking/${key}/item.json`),
       fetchJson<ValuesJson>(`app/ranking/${key}/values.json`),
+      fetchJson<StatsValuesJson>(`app/stats/${key}/values.json`),
     ]);
+
+    // --- (i) 正典 app/stats ---
+    // 配信側 (app/ranking) が 200 でも正典が空なら「更新できないページ」なので、
+    // values.json の有無に関わらず先に判定する。
+    if (statsRes.status === 0) {
+      stats.unreachable++; // network 断は違反にしない (fetchJson が 404 と区別している意図を活かす)
+    } else if (statsRes.status === 404) {
+      stats.checked++;
+      stats.missing.push(key);
+    } else {
+      stats.checked++;
+      const rowCount = statsRes.body?.meta?.rowCount ?? statsRes.body?.rows?.length ?? 0;
+      statsRowCounts[key] = rowCount;
+      if (rowCount === 0) {
+        if (findExpectedEmpty(key, "prefecture", auditNow)) stats.emptyAllowed.push(key);
+        else stats.empty.push(key);
+      } else {
+        const prev = previous?.statsRowCounts?.[key];
+        if (prev !== undefined && prev > 0 && rowCount < prev * DRIFT_RATIO_THRESHOLD) {
+          stats.drift.push({ key, count: rowCount, previous: prev });
+        }
+      }
+    }
 
     if (itemRes.status !== 200 || !itemRes.body) {
       itemMissing.push(key);
@@ -354,6 +434,11 @@ async function main() {
 
     // --- (f)(g)(h) 正規化 snapshot ---
     if (declaredTypes.length === 0) return;
+    // 正典が空と分かっているキーは writer が正しくスキップするため、欠落/stale を違反にしない
+    if (findExpectedEmpty(key, "prefecture", auditNow)) {
+      normalized.expectedSkipped.push(key);
+      return;
+    }
     normalized.expectedKeys++;
     const baseGeneratedAt = valuesRes.body.generatedAt;
 
@@ -405,6 +490,9 @@ async function main() {
       }
     });
   });
+
+  stats.ok =
+    stats.missing.length === 0 && stats.empty.length === 0 && stats.drift.length === 0;
 
   normalized.ok =
     normalized.missing.length === 0 &&
@@ -460,12 +548,14 @@ async function main() {
       categories: categoryChecks,
     },
     normalized,
+    stats: { ...stats, rowCounts: statsRowCounts },
     ok:
       itemMissing.length === 0 &&
       valuesMissing.length === 0 &&
       yearMismatch.length === 0 &&
       countChecksOk &&
-      normalized.ok,
+      normalized.ok &&
+      stats.ok,
   };
 
   // ---- レポート出力 ----
@@ -504,6 +594,11 @@ async function main() {
     console.log(`    ${type}: 宣言 ${c.declared} / 実在 ${c.present}`);
   }
   console.log(`    national-trend: 実在 ${normalized.trendPresent}`);
+  if (normalized.expectedSkipped.length > 0) {
+    console.log(
+      `  (EXPECTED_EMPTY のため検査対象外: ${normalized.expectedSkipped.length} 件 — ${normalized.expectedSkipped.join(", ")})`,
+    );
+  }
   console.log(`  (f) 欠落: ${normalized.missing.length} 件`);
   for (const m of normalized.missing.slice(0, 10)) console.log(`      ${m.key} / ${m.artifact}`);
   if (normalized.missing.length > 10)
@@ -522,6 +617,23 @@ async function main() {
     console.log(`      ${s.key} / ${s.artifact} (${s.kind} ${s.ageDays} 日)`);
   if (normalized.stale.length > 10)
     console.log(`      … 他 ${normalized.stale.length - 10} 件 (--json で全件)`);
+
+  console.log(`\n## (i) 正典 app/stats/<key>/values.json`);
+  console.log(`  検査: ${stats.checked} 件 (取得不能 ${stats.unreachable} 件は判定対象外)`);
+  console.log(`  404 欠落: ${stats.missing.length} 件`);
+  for (const k of stats.missing.slice(0, 10)) console.log(`      ${k}`);
+  console.log(`  rowCount 0 (未許可): ${stats.empty.length} 件 ← 公開中だが更新不能`);
+  for (const k of stats.empty.slice(0, 10)) console.log(`      ${k}`);
+  console.log(`  rowCount 0 (EXPECTED_EMPTY 許可済): ${stats.emptyAllowed.length} 件`);
+  for (const k of stats.emptyAllowed.slice(0, 10)) console.log(`      ${k}`);
+  console.log(`  前回比ドリフト (< ${DRIFT_RATIO_THRESHOLD}): ${stats.drift.length} 件`);
+  for (const d of stats.drift.slice(0, 10)) console.log(`      ${d.key}: ${d.previous} → ${d.count}`);
+  if (stats.empty.length > 0 || stats.missing.length > 0) {
+    console.log(
+      `  → 是正: config の statsDataId / cdCat01 を e-Stat メタで再確認し再取り込み。` +
+        `意図した 0 件なら packages/data-configs/src/expected-empty.ts に理由・追跡先・期限を添えて登録`,
+    );
+  }
 
   console.log(`\n## 総合判定: ${report.ok ? "✓ OK" : "✗ 違反あり"}`);
 
