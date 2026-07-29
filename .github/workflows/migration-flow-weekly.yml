@@ -7,7 +7,7 @@ name: 🗾 Migration-flow Weekly Deep Dive
 #   投稿ログで既投稿週は skip、未カバー優先 (年初リセット)
 #
 # 関連:
-# - docs/02_実装計画/migration-flow-sns-automation.md (Section C)
+# - docs/01_技術設計/06_自動化インベントリ.md / .claude/rules/sns-content-standards.md
 
 on:
   schedule:

@@ -33,7 +33,12 @@ const BASELINE_PATH = path.resolve(
 );
 
 // 参照を集める走査対象 (これらの中の `docs/...md` 言及を検証する)。
-const SCAN_ROOTS = [".claude", "docs"];
+//
+// `.github` / `apps` / `packages` を含めるのは、workflow のコメントとコードの docstring も
+// 「agent と人間が正典を辿る入口」だからである。2026-07-30 の docs 再編でここを走査して
+// いなかったため、削除済み doc への参照が 7 箇所 (workflow 5・packages/types 2) 素通りした。
+// walk が node_modules / .git / .next / .claude/worktrees を除外するので追加コストは小さい。
+const SCAN_ROOTS = [".claude", "docs", ".github", "apps", "packages"];
 const SCAN_FILES = ["CLAUDE.md"]; // ルート直下の単体ファイル
 const SCAN_EXTS = [".md", ".mdc", ".yml", ".yaml", ".json", ".cjs", ".mjs", ".js", ".ts"];
 
@@ -101,7 +106,10 @@ const isPlaceholder = (p) =>
   p.includes(">") ||
   p.includes("{") ||
   p.includes("YYYY") ||
-  p.includes("NNN");
+  p.includes("NNN") ||
+  // workflow の `docs/21_ブログ記事原稿/$SLUG/article.md` のようなシェル変数展開は
+  // 実パスではない。走査範囲を .github へ広げた 2026-07-30 に誤検知 3 件が出たため追加。
+  p.includes("$");
 // 自己 (このチェッカーの regex 例) は走査対象から外す。
 const SELF = rel(__filename);
 const BASELINE_REL = rel(BASELINE_PATH);

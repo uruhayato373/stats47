@@ -143,7 +143,7 @@ jobs:
           mkdir -p .claude/skills/management/nsm-experiment/reference/weekly-snapshots
           cp -r /tmp/metrics-publish/nsm/. .claude/skills/management/nsm-experiment/reference/weekly-snapshots/ 2>/dev/null || true
 
-      # 是正ループの自動化 (docs/02_実装計画/06_ブログ品質是正ループ.md Phase 2)。
+      # 是正ループの自動化 (.claude/rules/blog-remediation-loop.md)。
       # develop の最新 history + 今 fetch した GSC snapshot + 公開 R2 audit を入力に
       # 「次に何を直すか」(remediation-queue) を再構築し、due に達した是正 wave の効果を計測する。
       - name: ♻️ Rebuild remediation queue (next-to-fix)

@@ -9,7 +9,7 @@ export interface AffiliateProduct {
 
 /**
  * ブログ OGP 背景 (AI 生成) のビジュアル系統。6 値固定。
- * 正典: docs/02_実装計画/23_ブログOGP生成AIパイプライン仕様.md / apps/web/scripts/data/blog-ogp-visual-catalog.ts
+ * 正典: .claude/rules/ogp-image-standards.md §5 / apps/web/scripts/data/blog-ogp-visual-catalog.ts
  */
 export type OgpVisualType =
   | "map"
@@ -36,7 +36,7 @@ export interface ArticleFrontmatter {
   reviewedBy?: string;
   /**
    * OGP AI 背景のビジュアル系統 (任意)。6 値のみ。未指定時は category/archetype/tags から決定的に導出。
-   * 正典: docs/02_実装計画/23_ブログOGP生成AIパイプライン仕様.md
+   * 正典: .claude/rules/ogp-image-standards.md §5
    */
   ogpVisualType?: OgpVisualType;
   /** OGP AI 背景の motif (任意)。カタログ登録済み識別子のみ許可。自由プロンプトは不可。 */

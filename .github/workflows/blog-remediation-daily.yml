@@ -14,7 +14,7 @@ name: 📝 Blog remediation daily (今日のリライト10記事)
 # ★ラチェットを Issue 通知の「後」・commit の「前」に置く理由:
 #   - Issue の後 → 系譜が退行しても日次リライトの通知は止めない (無関係な機能を殺さない)
 #   - commit の前 → 退行時は baseline を進めない = 直すまで毎日鳴り続ける (一度きりで消えない)
-# 正典: docs/02_実装計画/06_ブログ品質是正ループ.md / .claude/rules/blog-data-schema.md §0
+# 正典: .claude/rules/blog-remediation-loop.md / .claude/rules/blog-data-schema.md §0
 
 on:
   schedule:
