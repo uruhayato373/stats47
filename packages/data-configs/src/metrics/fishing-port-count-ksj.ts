@@ -51,6 +51,4 @@ export const fishingPortCountKsj: MetricConfig = {
   "seoTitle": "漁港数ランキング都道府県【2006年】｜1位長崎県（244港）",
   "seoDescription": "2006年の漁港数の都道府県別ランキング。1位長崎県（244港）、最下位滋賀県（0港）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

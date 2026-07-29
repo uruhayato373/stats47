@@ -66,6 +66,4 @@ export const mailItemsHandled: MetricConfig = {
   "seoTitle": "郵便物引受数ランキング都道府県【2006年】｜1位東京都（629,840万通）",
   "seoDescription": "2006年の郵便物引受数の都道府県別ランキング。1位東京都（629,840万通）、最下位鳥取県（5,502万通）で114.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

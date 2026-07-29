@@ -59,6 +59,4 @@ export const elderlyGeneralWorkerOldPopulationRatioPre2019: MetricConfig = {
   "seoTitle": "高齢一般労働者割合ランキング都道府県【2019年】｜1位東京都（3.33％）",
   "seoDescription": "2019年の高齢一般労働者割合の都道府県別ランキング。1位東京都（3.33％）、最下位奈良県（1.07％）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

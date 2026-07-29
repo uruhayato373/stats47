@@ -60,6 +60,4 @@ export const privateSportsFacility: MetricConfig = {
   "seoTitle": "民間体育施設数ランキング都道府県【2021年】｜1位東京都（3,937施設）",
   "seoDescription": "2021年の民間体育施設数の都道府県別ランキング。1位東京都（3,937施設）、最下位島根県（89施設）で44.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

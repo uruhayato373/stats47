@@ -34,6 +34,4 @@ export const travelParticipationRateOvernight: MetricConfig = {
   "seoTitle": "旅行（1泊2日以上）の行動者率ランキング都道府県【2021年】｜1位東京都（41.9％）",
   "seoDescription": "2021年の旅行（1泊2日以上）の行動者率の都道府県別ランキング。1位東京都（41.9％）、最下位徳島県（16.4％）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

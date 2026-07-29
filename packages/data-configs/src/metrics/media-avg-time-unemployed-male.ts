@@ -35,6 +35,4 @@ export const mediaAvgTimeUnemployedMale: MetricConfig = {
   },
   "seoTitle": "テレビ・ラジオ・新聞・雑誌の平均時間（無業者・男）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

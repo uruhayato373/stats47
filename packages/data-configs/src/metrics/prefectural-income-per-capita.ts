@@ -27,6 +27,4 @@ export const prefecturalIncomePerCapita: MetricConfig = {
   // 観測値未投入 (R2 values.json なし)。統計表ID (cdCat01) 未確定のためデータ投入まで非公開。
   // 公開中の同名指標は per-capita-prefectural-income-h27 (H27年基準)。
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

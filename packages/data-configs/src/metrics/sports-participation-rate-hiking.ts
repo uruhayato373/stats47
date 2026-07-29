@@ -34,6 +34,4 @@ export const sportsParticipationRateHiking: MetricConfig = {
   "seoTitle": "登山・ハイキングの行動者率ランキング都道府県【2021年】｜1位兵庫県（9.8％）",
   "seoDescription": "2021年の登山・ハイキングの行動者率の都道府県別ランキング。1位兵庫県（9.8％）、最下位沖縄県（2.4％）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

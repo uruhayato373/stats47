@@ -59,6 +59,4 @@ export const gardenPlantsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "園芸用植物消費支出額ランキング都道府県【2024年】｜1位三重県（5,635円）",
   "seoDescription": "2024年の園芸用植物消費支出額の都道府県別ランキング。1位三重県（5,635円）、最下位沖縄県（1,384円）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

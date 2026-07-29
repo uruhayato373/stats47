@@ -59,6 +59,4 @@ export const adultSandalsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "大人用サンダル消費支出額ランキング都道府県【2024年】｜1位岡山県（695円）",
   "seoDescription": "2024年の大人用サンダル消費支出額の都道府県別ランキング。1位岡山県（695円）、最下位北海道（84円）で8.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -34,6 +34,4 @@ export const stereoCdMdRadioOwnershipMultiPersonHouseholdsPer1000: MetricConfig 
   },
   "seoTitle": "ステレオセットまたはＣＤ・ＭＤラジオカセット所有数量",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

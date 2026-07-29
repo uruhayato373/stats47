@@ -59,6 +59,4 @@ export const persimmonConsumptionQuantity: MetricConfig = {
   "seoTitle": "柿消費量ランキング都道府県【2024年】｜1位岐阜県（8,596g）",
   "seoDescription": "2024年の柿消費量の都道府県別ランキング。1位岐阜県（8,596g）、最下位岡山県（653g）で13.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

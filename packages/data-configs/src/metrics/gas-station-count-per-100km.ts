@@ -63,6 +63,4 @@ export const gasStationCountPer100km: MetricConfig = {
   "seoTitle": "給油所数ランキング都道府県【2023年】｜1位大阪府（4.4箇所）",
   "seoDescription": "2023年の給油所数の都道府県別ランキング。1位大阪府（4.4箇所）、最下位岩手県（1.4箇所）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

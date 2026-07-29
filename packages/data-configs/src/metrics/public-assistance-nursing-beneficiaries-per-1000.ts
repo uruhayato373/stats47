@@ -51,6 +51,4 @@ export const publicAssistanceNursingBeneficiariesPer1000: MetricConfig = {
   "seoTitle": "生活保護介護扶助人員ランキング都道府県【2023年】｜1位大阪府（7.6人）",
   "seoDescription": "2023年の生活保護介護扶助人員の都道府県別ランキング。1位大阪府（7.6人）、最下位長野県（0.95人）で8.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

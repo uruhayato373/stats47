@@ -63,6 +63,4 @@ export const highSchoolEducationCostFulltimePerStudent: MetricConfig = {
   "seoTitle": "高等学校教育費ランキング都道府県【2022年】｜1位高知県（1,907,930円）",
   "seoDescription": "2022年の高等学校教育費の都道府県別ランキング。1位高知県（1,907,930円）、最下位千葉県（1,040,309円）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

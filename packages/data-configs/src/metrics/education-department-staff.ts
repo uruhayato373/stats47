@@ -51,6 +51,4 @@ export const educationDepartmentStaff: MetricConfig = {
   "seoTitle": "教育部門職員数ランキング都道府県【2024年】｜1位東京都（79,058人）",
   "seoDescription": "2024年の教育部門職員数の都道府県別ランキング。1位東京都（79,058人）、最下位鳥取県（6,489人）で12.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

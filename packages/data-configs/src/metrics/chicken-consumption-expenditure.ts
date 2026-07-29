@@ -59,6 +59,4 @@ export const chickenConsumptionExpenditure: MetricConfig = {
   "seoTitle": "鶏肉消費支出額ランキング都道府県【2024年】｜1位熊本県（23,949円）",
   "seoDescription": "2024年の鶏肉消費支出額の都道府県別ランキング。1位熊本県（23,949円）、最下位茨城県（13,927円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -52,6 +52,4 @@ export const agriculturalOutput: MetricConfig = {
   "seoTitle": "農業産出額ランキング都道府県【2023年】｜1位北海道（1,347,800百万円）",
   "seoDescription": "2023年の農業産出額の都道府県別ランキング。1位北海道（1,347,800百万円）、最下位東京都（22,000百万円）で61.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": true,
-  "featuredOrder": 4,
 };

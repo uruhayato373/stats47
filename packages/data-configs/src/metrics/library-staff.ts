@@ -57,6 +57,4 @@ export const libraryStaff: MetricConfig = {
   "seoTitle": "図書館職員数ランキング都道府県【2021年】｜1位東京都（8,080人）",
   "seoDescription": "2021年の図書館職員数の都道府県別ランキング。1位東京都（8,080人）、最下位鳥取県（277人）で29.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

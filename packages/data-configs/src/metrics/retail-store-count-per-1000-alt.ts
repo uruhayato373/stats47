@@ -36,6 +36,4 @@ export const retailStoreCountPer1000Alt: MetricConfig = {
   },
   "groupKey": "retail-store-count-alt",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

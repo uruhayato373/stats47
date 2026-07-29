@@ -59,6 +59,4 @@ export const sportswearConsumptionExpenditure: MetricConfig = {
   "seoTitle": "スポーツウェア消費支出額ランキング都道府県【2024年】｜1位富山県（14,655円）",
   "seoDescription": "2024年のスポーツウェア消費支出額の都道府県別ランキング。1位富山県（14,655円）、最下位和歌山県（6,033円）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

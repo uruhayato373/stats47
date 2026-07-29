@@ -34,6 +34,4 @@ export const totalPopulationMale: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

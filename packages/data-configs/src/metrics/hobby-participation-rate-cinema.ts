@@ -34,6 +34,4 @@ export const hobbyParticipationRateCinema: MetricConfig = {
   "seoTitle": "映画館での映画鑑賞の行動者率ランキング都道府県【2021年】｜1位東京都（37.4％）",
   "seoDescription": "2021年の映画館での映画鑑賞の行動者率の都道府県別ランキング。1位東京都（37.4％）、最下位岩手県（19.2％）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

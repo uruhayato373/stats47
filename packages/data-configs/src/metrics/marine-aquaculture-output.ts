@@ -37,6 +37,4 @@ export const marineAquacultureOutput: MetricConfig = {
   },
   "groupKey": "fishery",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

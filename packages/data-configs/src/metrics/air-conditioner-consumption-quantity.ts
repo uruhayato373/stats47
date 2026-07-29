@@ -59,6 +59,4 @@ export const airConditionerConsumptionQuantity: MetricConfig = {
   "seoTitle": "エアコン消費量ランキング都道府県【2024年】｜1位香川県（0.2台）",
   "seoDescription": "2024年のエアコン消費量の都道府県別ランキング。1位香川県（0.2台）、最下位大分県（0.02台）で9.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

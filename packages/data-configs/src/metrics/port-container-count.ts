@@ -51,6 +51,4 @@ export const portContainerCount: MetricConfig = {
   "seoTitle": "コンテナ取扱個数（港湾統計）ランキング都道府県【2023年】｜1位東京都（4,599,530TEU）",
   "seoDescription": "2023年のコンテナ取扱個数（港湾統計）の都道府県別ランキング。1位東京都（4,599,530TEU）、最下位和歌山県（4,392TEU）で1047.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

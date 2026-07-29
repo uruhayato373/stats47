@@ -84,6 +84,4 @@ export const totalAssessedLandAreaRatio: MetricConfig = {
   "seoTitle": "評価総地積割合ランキング都道府県【2023年】｜1位千葉県（68.7％）",
   "seoDescription": "2023年の評価総地積割合の都道府県別ランキング。1位千葉県（68.7％）、最下位山梨県（29.4％）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

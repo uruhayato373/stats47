@@ -40,6 +40,4 @@ export const travelLeisureAnnualParticipationRate15plus: MetricConfig = {
   "seoTitle": "旅行・行楽の年間行動者率ランキング都道府県【2001年】｜1位埼玉県（86.5％）",
   "seoDescription": "2001年の旅行・行楽の年間行動者率の都道府県別ランキング。1位埼玉県（86.5％）、最下位沖縄県（59.3％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

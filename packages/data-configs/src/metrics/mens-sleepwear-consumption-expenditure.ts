@@ -59,6 +59,4 @@ export const mensSleepwearConsumptionExpenditure: MetricConfig = {
   "seoTitle": "男子用寝巻き消費支出額ランキング都道府県【2024年】｜1位滋賀県（1,307円）",
   "seoDescription": "2024年の男子用寝巻き消費支出額の都道府県別ランキング。1位滋賀県（1,307円）、最下位沖縄県（183円）で7.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

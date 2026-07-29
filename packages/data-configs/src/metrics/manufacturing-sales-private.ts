@@ -42,6 +42,4 @@ export const manufacturingSalesPrivate: MetricConfig = {
   },
   "seoTitle": "売上金額（民営）（製造業）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const nhkFeeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "NHK放送受信料消費支出額ランキング都道府県【2024年】｜1位秋田県（16,289円）",
   "seoDescription": "2024年のNHK放送受信料消費支出額の都道府県別ランキング。1位秋田県（16,289円）、最下位沖縄県（6,919円）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

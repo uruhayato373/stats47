@@ -35,6 +35,4 @@ export const grossPrefecturalProductRealEstateH27: MetricConfig = {
   },
   "seoTitle": "県内総生産額（不動産業）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

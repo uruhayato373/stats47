@@ -51,6 +51,4 @@ export const smartphoneOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "seoTitle": "スマートフォン所有数量ランキング都道府県【2014年】｜1位滋賀県（1,281台）",
   "seoDescription": "2014年のスマートフォン所有数量の都道府県別ランキング。1位滋賀県（1,281台）、最下位島根県（826台）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

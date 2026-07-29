@@ -44,6 +44,4 @@ export const nuclearFamilyHouseholdsRatio: MetricConfig = {
   "seoTitle": "核家族世帯割合ランキング都道府県【2020年】｜1位奈良県（62.59％）",
   "seoDescription": "2020年の核家族世帯割合の都道府県別ランキング。1位奈良県（62.59％）、最下位東京都（45.72％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

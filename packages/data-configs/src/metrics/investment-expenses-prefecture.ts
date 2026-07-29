@@ -86,6 +86,4 @@ export const investmentExpensesPrefecture: MetricConfig = {
   "seoTitle": "投資的経費ランキング都道府県【2022年】｜1位東京都（780,557,473）",
   "seoDescription": "2022年の投資的経費の都道府県別ランキング。1位東京都（780,557,473）、最下位香川県（59,137,356）で13.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

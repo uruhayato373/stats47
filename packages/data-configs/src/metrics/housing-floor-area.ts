@@ -60,6 +60,4 @@ export const housingFloorArea: MetricConfig = {
   "seoTitle": "1住宅当たり延べ面積ランキング市区町村【2023年】｜1位秋田県 美郷町（211.42m²）",
   "seoDescription": "2023年の1住宅当たり延べ面積の市区町村別ランキング。1位秋田県 美郷町（211.42m²）、最下位沖縄県 与那国町（0m²）で地図やグラフで市区町村を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

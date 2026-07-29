@@ -61,12 +61,6 @@ export const BLOG_ARTICLE_INLINE: AdSlotConfig = {
   format: "article",
 };
 
-/** 比較ページ: 右サイドバー */
-export const COMPARE_PAGE_SIDEBAR: AdSlotConfig = {
-  slotId: "6180558947",
-  format: "rectangle",
-};
-
 /**
  * ランキング詳細ページ: モバイル専用・解析セクション中盤の記事内広告
  *

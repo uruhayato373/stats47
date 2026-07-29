@@ -59,6 +59,4 @@ export const womensSocksConsumptionQuantity: MetricConfig = {
   "seoTitle": "婦人用ソックス消費量ランキング都道府県【2024年】｜1位大阪府（6.22足）",
   "seoDescription": "2024年の婦人用ソックス消費量の都道府県別ランキング。1位大阪府（6.22足）、最下位沖縄県（3.17足）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

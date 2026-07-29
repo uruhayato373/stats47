@@ -59,6 +59,4 @@ export const barbershopConsumptionQuantity: MetricConfig = {
   "seoTitle": "理髪料消費量ランキング都道府県【2024年】｜1位秋田県（2.43回）",
   "seoDescription": "2024年の理髪料消費量の都道府県別ランキング。1位秋田県（2.43回）、最下位沖縄県（1.11回）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

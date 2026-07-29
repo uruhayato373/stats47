@@ -14,7 +14,7 @@ import { isOk } from "@stats47/types";
 import { PageShell } from "@/components/layout";
 import { RightRailWidgets } from "@/components/rail";
 
-import { InContentAdSlot, RailAdSlot } from "@/features/ads";
+import { FooterAdSlot, InContentAdSlot } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
 import { AreaDatabookSection } from "@/features/area-databook";
 import {
@@ -33,7 +33,7 @@ import { getAreaProfileAction } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
 
-import { HUB_INCONTENT, RAIL_RECT } from "@/lib/google-adsense";
+import { HUB_INCONTENT } from "@/lib/google-adsense";
 
 
 import type { Metadata } from "next";
@@ -187,8 +187,13 @@ export default async function AreaProfilePage({ params }: PageProps) {
                     {/* 市区町村ナビ (サイドバー閉じてもメインで見える) */}
                     <CitiesNavCard areaCode={areaCode} areaName={profile.areaName} />
 
-                    {/* 広告②: アフィリエイト直前（独立スロットの rect で同一 slot 重複を解消） */}
-                    <RailAdSlot slot={RAIL_RECT} />
+                    {/*
+                      広告②: 本文末尾。RailAdSlot は右レール(360px)前提の SurfaceCard 枠で、
+                      本文カラム(840px)に置くと枠だけレール幅のまま浮く。他のハブ面と同じ
+                      本文末尾の Multiplex に揃える (2026-07-29 是正)。RAIL_RECT は
+                      home の左レールが引き続き使う。
+                    */}
+                    <FooterAdSlot />
                 </main>
             </PageShell>
         </>

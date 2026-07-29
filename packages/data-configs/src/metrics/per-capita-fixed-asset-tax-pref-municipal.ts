@@ -52,6 +52,4 @@ export const perCapitaFixedAssetTaxPrefMunicipal: MetricConfig = {
   "seoTitle": "固定資産税ランキング都道府県【2022年】｜1位東京都（120.2千円）",
   "seoDescription": "2022年の固定資産税の都道府県別ランキング。1位東京都（120.2千円）、最下位長崎県（54千円）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -1,27 +1,30 @@
 import { describe, it, expect } from "vitest";
 
-import {
-  RANKING_PAGE_TABLE_SIDE,
-  RANKING_SIDEBAR_TOP,
-  RANKING_PAGE_SIDEBAR,
-  RAIL_RECT,
-  RANKING_PAGE_FOOTER,
-  COMPARE_PAGE_SIDEBAR,
-} from "../constants";
+import * as constants from "../constants";
 import { AD_SIZES } from "../types";
 
-describe("AdSense スロット定数", () => {
-  const allSlots = [
-    { name: "RANKING_PAGE_TABLE_SIDE", config: RANKING_PAGE_TABLE_SIDE },
-    { name: "RANKING_SIDEBAR_TOP", config: RANKING_SIDEBAR_TOP },
-    { name: "RANKING_PAGE_SIDEBAR", config: RANKING_PAGE_SIDEBAR },
-    { name: "RAIL_RECT", config: RAIL_RECT },
-    { name: "RANKING_PAGE_FOOTER", config: RANKING_PAGE_FOOTER },
-    { name: "COMPARE_PAGE_SIDEBAR", config: COMPARE_PAGE_SIDEBAR },
-  ];
+import type { AdSlotConfig } from "../constants";
 
-  it.each(allSlots)("$name が slotId と format を持つ", ({ config }) => {
-    expect(config.slotId).toBeDefined();
+/**
+ * スロット定数はモジュールから機械的に列挙する。
+ * 旧実装は 6 個を手書きで並べており、定数を足しても検査対象に入らず、
+ * 逆に定数を消すとテストが型エラーで落ちるだけで意図が読めなかった。
+ */
+const allSlots = Object.entries(constants).filter(
+  (entry): entry is [string, AdSlotConfig] =>
+    typeof entry[1] === "object" &&
+    entry[1] !== null &&
+    "slotId" in entry[1] &&
+    "format" in entry[1],
+);
+
+describe("AdSense スロット定数", () => {
+  it("スロット定数が 1 つ以上 export されている", () => {
+    // 列挙が空振りしていたら、以下の it.each は 0 件で無言 pass してしまう
+    expect(allSlots.length).toBeGreaterThan(0);
+  });
+
+  it.each(allSlots)("%s が slotId と format を持つ", (_name, config) => {
     expect(typeof config.slotId).toBe("string");
     expect(config.slotId.length).toBeGreaterThan(0);
     expect(config.format).toBeDefined();
@@ -30,7 +33,7 @@ describe("AdSense スロット定数", () => {
   it("全スロットの format が有効な値", () => {
     // 型ソース (AD_SIZES) を単一ソースとして参照し、format リストのドリフトを防ぐ
     const validFormats = Object.keys(AD_SIZES);
-    for (const { config } of allSlots) {
+    for (const [, config] of allSlots) {
       expect(validFormats).toContain(config.format);
     }
   });

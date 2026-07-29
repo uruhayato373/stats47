@@ -41,6 +41,4 @@ export const gppForestry: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

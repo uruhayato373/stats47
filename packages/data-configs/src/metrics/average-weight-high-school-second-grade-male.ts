@@ -52,6 +52,4 @@ export const averageWeightHighSchoolSecondGradeMale: MetricConfig = {
   "seoTitle": "平均体重ランキング都道府県【2023年】｜1位青森県（64.2kg）",
   "seoDescription": "2023年の平均体重の都道府県別ランキング。1位青森県（64.2kg）、最下位愛媛県（59kg）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const writingDrawingToolsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "筆記・絵画用具消費支出額ランキング都道府県【2024年】｜1位大阪府（1,789円）",
   "seoDescription": "2024年の筆記・絵画用具消費支出額の都道府県別ランキング。1位大阪府（1,789円）、最下位青森県（807円）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

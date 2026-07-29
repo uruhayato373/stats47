@@ -55,6 +55,4 @@ export const commuteByCar: MetricConfig = {
   "seoTitle": "自宅外通勤・通学者数（自家用車）ランキング都道府県【2020年】｜1位愛知県（1,903,679人）",
   "seoDescription": "2020年の自宅外通勤・通学者数（自家用車）の都道府県別ランキング。1位愛知県（1,903,679人）、最下位高知県（185,593人）で10.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

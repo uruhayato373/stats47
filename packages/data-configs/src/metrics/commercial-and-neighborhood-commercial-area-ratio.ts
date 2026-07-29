@@ -69,6 +69,4 @@ export const commercialAndNeighborhoodCommercialAreaRatio: MetricConfig = {
   "seoTitle": "商業・近隣商業地域面積比率ランキング都道府県【2023年】｜1位島根県（13.2％）",
   "seoDescription": "2023年の商業・近隣商業地域面積比率の都道府県別ランキング。1位島根県（13.2％）、最下位茨城県（5％）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

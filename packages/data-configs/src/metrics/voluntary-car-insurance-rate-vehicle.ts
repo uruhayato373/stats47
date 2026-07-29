@@ -33,6 +33,4 @@ export const voluntaryCarInsuranceRateVehicle: MetricConfig = {
     "normalizationOptions": []
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

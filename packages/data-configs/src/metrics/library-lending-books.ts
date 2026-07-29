@@ -56,6 +56,4 @@ export const libraryLendingBooks: MetricConfig = {
   "seoTitle": "図書館館外貸出冊数ランキング都道府県【2020年】｜1位東京都（85,113,851冊）",
   "seoDescription": "2020年の図書館館外貸出冊数の都道府県別ランキング。1位東京都（85,113,851冊）、最下位秋田県（2,463,802冊）で34.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

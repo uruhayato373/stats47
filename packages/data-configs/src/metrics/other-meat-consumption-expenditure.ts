@@ -59,6 +59,4 @@ export const otherMeatConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の生鮮肉消費支出額ランキング都道府県【2024年】｜1位熊本県（6,669円）",
   "seoDescription": "2024年の他の生鮮肉消費支出額の都道府県別ランキング。1位熊本県（6,669円）、最下位茨城県（1,790円）で3.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

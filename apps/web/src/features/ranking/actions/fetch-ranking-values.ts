@@ -9,18 +9,10 @@ import {
 } from "@stats47/ranking/server";
 import { err, isOk, ok, type Result } from "@stats47/types";
 
+import { sanitizeNormalizationType } from "./normalization-types";
+
 import type { AreaType } from "@stats47/area";
 import type { RankingValue } from "@stats47/ranking";
-
-/**
- * 受け入れ可能な正規化タイプの whitelist。
- * R2 オブジェクトキー (`app/ranking/{key}/values-{type}.json`) に流入するため、
- * path traversal 対策としてサーバ側で固定値以外を弾く。
- */
-const ALLOWED_NORMALIZATION_TYPES = new Set([
-  "per_population",
-  "per_area",
-]);
 
 /**
  * ランキングデータを取得する（正規化対応）
@@ -46,10 +38,7 @@ export async function fetchRankingValuesAction(
 
     // normalizationType は ?norm= query param 由来でユーザー制御値。
     // 後続の R2 キーパス生成に流入するため、固定 whitelist でのみ受理する。
-    const safeNormalizationType =
-      normalizationType && ALLOWED_NORMALIZATION_TYPES.has(normalizationType)
-        ? normalizationType
-        : undefined;
+    const safeNormalizationType = sanitizeNormalizationType(normalizationType);
 
     // 正規化が指定されている場合
     if (safeNormalizationType) {

@@ -105,6 +105,4 @@ export const intellectualDisabilityRehabilitationCenterCases: MetricConfig = {
   "seoTitle": "知的障害者更生相談所取扱実人員ランキング都道府県【2023年】｜1位大阪府（14,262人）",
   "seoDescription": "2023年の知的障害者更生相談所取扱実人員の都道府県別ランキング。1位大阪府（14,262人）、最下位山口県（346人）で41.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

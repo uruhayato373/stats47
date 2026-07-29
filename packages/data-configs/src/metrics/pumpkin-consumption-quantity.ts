@@ -59,6 +59,4 @@ export const pumpkinConsumptionQuantity: MetricConfig = {
   "seoTitle": "かぼちゃ消費量ランキング都道府県【2024年】｜1位富山県（4,525g）",
   "seoDescription": "2024年のかぼちゃ消費量の都道府県別ランキング。1位富山県（4,525g）、最下位沖縄県（2,506g）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -51,6 +51,4 @@ export const childWelfareFacilityStaffPer100k: MetricConfig = {
   "seoTitle": "児童福祉施設等従事者数ランキング都道府県【2023年】｜1位沖縄県（238.5人）",
   "seoDescription": "2023年の児童福祉施設等従事者数の都道府県別ランキング。1位沖縄県（238.5人）、最下位新潟県（67.5人）で3.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

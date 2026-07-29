@@ -59,6 +59,4 @@ export const laspeyresIndexPrefecture: MetricConfig = {
   "seoTitle": "ラスパイレス指数ランキング都道府県【2025年】｜1位静岡県（101.8）",
   "seoDescription": "2025年のラスパイレス指数の都道府県別ランキング。1位静岡県（101.8）、最下位青森県（96.8）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

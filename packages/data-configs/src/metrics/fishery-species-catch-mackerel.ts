@@ -53,6 +53,4 @@ export const fisherySpeciesCatchMackerel: MetricConfig = {
   "seoTitle": "サバ類漁獲量ランキング｜1位は意外にも茨城、なぜ?【2015】",
   "seoDescription": "サバの水揚げ日本一は意外にも茨城県で143,403トン──なぜ茨城なのか。太平洋岸の漁場に集中する理由と47都道府県の漁獲量を2015年データで読み解きます。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

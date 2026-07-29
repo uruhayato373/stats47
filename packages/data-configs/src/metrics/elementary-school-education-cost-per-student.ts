@@ -85,6 +85,4 @@ export const elementarySchoolEducationCostPerStudent: MetricConfig = {
   "seoTitle": "小学校教育費ランキング都道府県【2022年】｜1位岩手県（1,471,632円）",
   "seoDescription": "2022年の小学校教育費の都道府県別ランキング。1位岩手県（1,471,632円）、最下位埼玉県（820,261円）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

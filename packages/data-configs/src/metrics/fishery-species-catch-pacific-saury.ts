@@ -53,6 +53,4 @@ export const fisherySpeciesCatchPacificSaury: MetricConfig = {
   "seoTitle": "サンマ漁獲量ランキング｜なぜ北海道が1位?【2015】",
   "seoDescription": "サンマの漁獲量日本一は北海道で52,093トン──記録的不漁が続く中で北海道がなぜトップなのか。漁場の北上と47都道府県の漁獲量を2015年データで読み解きます。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

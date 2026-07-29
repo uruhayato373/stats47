@@ -45,6 +45,4 @@ export const publicElementarySchoolPoolInstallationRate: MetricConfig = {
   "seoTitle": "公立小学校プール設置率ランキング都道府県【2006年】｜1位埼玉県（99.3％）",
   "seoDescription": "2006年の公立小学校プール設置率の都道府県別ランキング。1位埼玉県（99.3％）、最下位北海道（36.6％）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

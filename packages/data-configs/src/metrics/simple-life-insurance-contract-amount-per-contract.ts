@@ -54,6 +54,4 @@ export const simpleLifeInsuranceContractAmountPerContract: MetricConfig = {
   "seoTitle": "簡易生命保険保有契約保険金額ランキング都道府県【2006年】｜1位神奈川県（303.1万円）",
   "seoDescription": "2006年の簡易生命保険保有契約保険金額の都道府県別ランキング。1位神奈川県（303.1万円）、最下位山形県（239.9万円）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

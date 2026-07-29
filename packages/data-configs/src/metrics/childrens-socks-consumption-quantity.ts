@@ -59,6 +59,4 @@ export const childrensSocksConsumptionQuantity: MetricConfig = {
   "seoTitle": "子供用靴下消費量ランキング都道府県【2024年】｜1位宮城県（3.07足）",
   "seoDescription": "2024年の子供用靴下消費量の都道府県別ランキング。1位宮城県（3.07足）、最下位兵庫県（0.73足）で4.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

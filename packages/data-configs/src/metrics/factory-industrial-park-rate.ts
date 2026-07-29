@@ -29,6 +29,4 @@ export const factoryIndustrialParkRate: MetricConfig = {
     "decimalPlaces": 1,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

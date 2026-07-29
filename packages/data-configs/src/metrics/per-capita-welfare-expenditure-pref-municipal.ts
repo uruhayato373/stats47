@@ -87,6 +87,4 @@ export const perCapitaWelfareExpenditurePrefMunicipal: MetricConfig = {
   "seoTitle": "民生費ランキング都道府県【2022年】｜1位沖縄県（371.4千円）",
   "seoDescription": "2022年の民生費の都道府県別ランキング。1位沖縄県（371.4千円）、最下位静岡県（216.2千円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

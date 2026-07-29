@@ -59,6 +59,4 @@ export const watermelonConsumptionExpenditure: MetricConfig = {
   "seoTitle": "すいか消費支出額ランキング都道府県【2024年】｜1位長野県（2,846円）",
   "seoDescription": "2024年のすいか消費支出額の都道府県別ランキング。1位長野県（2,846円）、最下位山梨県（836円）で3.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

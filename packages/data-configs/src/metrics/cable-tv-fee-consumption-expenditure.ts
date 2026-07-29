@@ -59,6 +59,4 @@ export const cableTvFeeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ケーブルテレビ放送受信料消費支出額ランキング都道府県【2024年】｜1位福井県（28,188円）",
   "seoDescription": "2024年のケーブルテレビ放送受信料消費支出額の都道府県別ランキング。1位福井県（28,188円）、最下位茨城県（1,179円）で23.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

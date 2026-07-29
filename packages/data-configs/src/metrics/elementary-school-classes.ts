@@ -47,6 +47,4 @@ export const elementarySchoolClasses: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

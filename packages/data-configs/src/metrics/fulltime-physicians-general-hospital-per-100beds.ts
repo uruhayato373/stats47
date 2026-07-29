@@ -51,6 +51,4 @@ export const fulltimePhysiciansGeneralHospitalPer100beds: MetricConfig = {
   "seoTitle": "一般病院常勤医師数ランキング都道府県【2023年】｜1位東京都（20.8人）",
   "seoDescription": "2023年の一般病院常勤医師数の都道府県別ランキング。1位東京都（20.8人）、最下位山口県（9.8人）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

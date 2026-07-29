@@ -52,6 +52,4 @@ export const averageHeightMiddleSchoolSecondGradeMale: MetricConfig = {
   "seoTitle": "平均身長ランキング都道府県【2023年】｜1位秋田県（163.6cm）",
   "seoDescription": "2023年の平均身長の都道府県別ランキング。1位秋田県（163.6cm）、最下位高知県（159.7cm）で1.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -52,6 +52,4 @@ export const sewageFlushToiletPopulation: MetricConfig = {
   "seoTitle": "下水道によるトイレ水洗化人口ランキング都道府県【2021年】｜1位東京都（13,716,154人）",
   "seoDescription": "2021年の下水道によるトイレ水洗化人口の都道府県別ランキング。1位東京都（13,716,154人）、最下位徳島県（105,050人）で130.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

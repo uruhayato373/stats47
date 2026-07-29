@@ -51,6 +51,4 @@ export const factoryEstablishmentCount: MetricConfig = {
   "seoTitle": "工場立地件数ランキング都道府県【2020年】｜1位茨城県（65件）",
   "seoDescription": "2020年の工場立地件数の都道府県別ランキング。1位茨城県（65件）、最下位長崎県（1件）で65.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

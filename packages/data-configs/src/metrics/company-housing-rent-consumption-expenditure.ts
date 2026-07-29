@@ -59,6 +59,4 @@ export const companyHousingRentConsumptionExpenditure: MetricConfig = {
   "seoTitle": "給与住宅家賃消費支出額ランキング都道府県【2024年】｜1位埼玉県（16,150円）",
   "seoDescription": "2024年の給与住宅家賃消費支出額の都道府県別ランキング。1位埼玉県（16,150円）、最下位和歌山県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

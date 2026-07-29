@@ -59,6 +59,4 @@ export const airConditionerConsumptionExpenditure: MetricConfig = {
   "seoTitle": "エアコン消費支出額ランキング都道府県【2024年】｜1位香川県（27,400円）",
   "seoDescription": "2024年のエアコン消費支出額の都道府県別ランキング。1位香川県（27,400円）、最下位大分県（2,472円）で11.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

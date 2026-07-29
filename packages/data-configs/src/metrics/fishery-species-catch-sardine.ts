@@ -53,6 +53,4 @@ export const fisherySpeciesCatchSardine: MetricConfig = {
   "seoTitle": "イワシ類漁獲量ランキング｜なぜ1位が長崎?【2015】",
   "seoDescription": "イワシの漁獲量日本一は長崎県で71,391トン──なぜ九州の長崎がトップなのか。対馬海流と漁場の関係、47都道府県の漁獲量の偏りを2015年データで解説します。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

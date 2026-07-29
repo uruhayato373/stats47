@@ -70,6 +70,4 @@ export const totalAssessedLandAreaRatioResidential: MetricConfig = {
   "seoTitle": "評価総地積割合ランキング都道府県【2023年】｜1位大阪府（59.7％）",
   "seoDescription": "2023年の評価総地積割合の都道府県別ランキング。1位大阪府（59.7％）、最下位高知県（3.3％）で18.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const greenTeaConsumptionQuantity: MetricConfig = {
   "seoTitle": "緑茶消費量ランキング都道府県【2024年】｜1位静岡県（1,415g）",
   "seoDescription": "2024年の緑茶消費量の都道府県別ランキング。1位静岡県（1,415g）、最下位沖縄県（336g）で4.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

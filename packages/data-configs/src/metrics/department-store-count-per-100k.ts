@@ -53,6 +53,4 @@ export const departmentStoreCountPer100k: MetricConfig = {
   "seoTitle": "百貨店数ランキング都道府県【2006年】｜1位滋賀県（3.67店）",
   "seoDescription": "2006年の百貨店数の都道府県別ランキング。1位滋賀県（3.67店）、最下位徳島県（1.12店）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

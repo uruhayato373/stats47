@@ -59,6 +59,4 @@ export const grilledEelConsumptionExpenditure: MetricConfig = {
   "seoTitle": "うなぎのかば焼き消費支出額ランキング都道府県【2024年】｜1位和歌山県（4,776円）",
   "seoDescription": "2024年のうなぎのかば焼き消費支出額の都道府県別ランキング。1位和歌山県（4,776円）、最下位北海道（1,108円）で4.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

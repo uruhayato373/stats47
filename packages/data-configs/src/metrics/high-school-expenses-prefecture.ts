@@ -86,6 +86,4 @@ export const highSchoolExpensesPrefecture: MetricConfig = {
   "seoTitle": "高等学校費ランキング都道府県【2022年】｜1位東京都（160,537,486）",
   "seoDescription": "2022年の高等学校費の都道府県別ランキング。1位東京都（160,537,486）、最下位鳥取県（13,808,489）で11.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

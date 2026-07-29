@@ -59,6 +59,4 @@ export const juniorHighTutoringConsumptionExpenditure: MetricConfig = {
   "seoTitle": "中学校補習教育消費支出額ランキング都道府県【2024年】｜1位愛知県（35,753円）",
   "seoDescription": "2024年の中学校補習教育消費支出額の都道府県別ランキング。1位愛知県（35,753円）、最下位愛媛県（1,967円）で18.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

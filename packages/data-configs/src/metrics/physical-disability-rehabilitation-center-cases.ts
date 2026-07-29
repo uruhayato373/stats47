@@ -102,6 +102,4 @@ export const physicalDisabilityRehabilitationCenterCases: MetricConfig = {
   "seoTitle": "身体障害者更生相談所取扱実人員ランキング都道府県【2023年】｜1位愛知県（18,144人）",
   "seoDescription": "2023年の身体障害者更生相談所取扱実人員の都道府県別ランキング。1位愛知県（18,144人）、最下位福井県（460人）で39.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

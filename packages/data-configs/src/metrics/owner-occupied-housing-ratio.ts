@@ -45,6 +45,4 @@ export const ownerOccupiedHousingRatio: MetricConfig = {
   "seoTitle": "持ち家比率ランキング都道府県【2023年】｜1位秋田県（77.1％）",
   "seoDescription": "2023年の持ち家比率の都道府県別ランキング。1位秋田県（77.1％）、最下位沖縄県（42.6％）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

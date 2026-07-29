@@ -59,6 +59,4 @@ export const onionConsumptionExpenditure: MetricConfig = {
   "seoTitle": "たまねぎ消費支出額ランキング都道府県【2024年】｜1位神奈川県（5,202円）",
   "seoDescription": "2024年のたまねぎ消費支出額の都道府県別ランキング。1位神奈川県（5,202円）、最下位長野県（3,654円）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -48,6 +48,4 @@ export const workersAgricultureForestryFishery: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

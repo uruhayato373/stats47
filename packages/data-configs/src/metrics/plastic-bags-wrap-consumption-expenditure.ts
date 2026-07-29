@@ -59,6 +59,4 @@ export const plasticBagsWrapConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ポリ袋・ラップ消費支出額ランキング都道府県【2024年】｜1位山形県（6,472円）",
   "seoDescription": "2024年のポリ袋・ラップ消費支出額の都道府県別ランキング。1位山形県（6,472円）、最下位奈良県（4,148円）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

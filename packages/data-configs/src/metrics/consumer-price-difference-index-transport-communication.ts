@@ -38,6 +38,4 @@ export const consumerPriceDifferenceIndexTransportCommunication: MetricConfig = 
   },
   "seoTitle": "消費者物価地域差指数（交通・通信）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

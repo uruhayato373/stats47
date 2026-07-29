@@ -62,6 +62,4 @@ export const roomsPerDwellingOwner: MetricConfig = {
   "seoTitle": "居住室数ランキング都道府県【2023年】｜1位富山県（6.76室）",
   "seoDescription": "2023年の居住室数の都道府県別ランキング。1位富山県（6.76室）、最下位東京都（4.33室）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

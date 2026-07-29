@@ -53,6 +53,4 @@ export const sportsFacilityCount: MetricConfig = {
   "seoTitle": "社会体育施設数ランキング都道府県【2015年】｜1位北海道（3,992施設）",
   "seoDescription": "2015年の社会体育施設数の都道府県別ランキング。1位北海道（3,992施設）、最下位徳島県（382施設）で10.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

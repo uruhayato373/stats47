@@ -35,6 +35,4 @@ export const establishmentRatio59EmployeesPrivate: MetricConfig = {
   "seoTitle": "従業者5～9人の事業所割合ランキング都道府県【2021年】｜1位福岡県（20.69％）",
   "seoDescription": "2021年の従業者5～9人の事業所割合の都道府県別ランキング。1位福岡県（20.69％）、最下位和歌山県（17.74％）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

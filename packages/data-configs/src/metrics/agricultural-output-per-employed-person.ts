@@ -35,6 +35,4 @@ export const agriculturalOutputPerEmployedPerson: MetricConfig = {
   },
   "seoTitle": "就業者1人当たり農業産出額（販売農家）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

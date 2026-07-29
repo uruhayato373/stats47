@@ -49,6 +49,4 @@ export const nursingAssistantAnnualIncome: MetricConfig = {
   "seoTitle": "看護助手の平均年収ランキング都道府県【2023年】｜1位埼玉県（502万円）",
   "seoDescription": "2023年の看護助手の平均年収の都道府県別ランキング。1位埼玉県（502万円）、最下位青森県（239.2万円）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

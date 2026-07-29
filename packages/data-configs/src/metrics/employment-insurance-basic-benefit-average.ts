@@ -85,6 +85,4 @@ export const employmentInsuranceBasicBenefitAverage: MetricConfig = {
   "seoTitle": "雇用保険基本手当平均支給額ランキング都道府県【2023年】｜1位東京都（1,779.8千円）",
   "seoDescription": "2023年の雇用保険基本手当平均支給額の都道府県別ランキング。1位東京都（1,779.8千円）、最下位秋田県（1,404.2千円）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

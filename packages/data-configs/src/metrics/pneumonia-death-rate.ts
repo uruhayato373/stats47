@@ -53,6 +53,4 @@ export const pneumoniaDeathRate: MetricConfig = {
   "seoTitle": "肺炎による死亡者数ランキング都道府県【2023年】｜1位青森県（110人）",
   "seoDescription": "2023年の肺炎による死亡者数の都道府県別ランキング。1位青森県（110人）、最下位沖縄県（38人）で2.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

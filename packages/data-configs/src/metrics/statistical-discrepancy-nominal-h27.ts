@@ -37,6 +37,4 @@ export const statisticalDiscrepancyNominalH27: MetricConfig = {
   },
   "seoTitle": "統計上の不突合（名目）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

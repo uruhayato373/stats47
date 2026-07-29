@@ -78,6 +78,4 @@ export const cpiChangeRateUtilities: MetricConfig = {
   },
   "seoTitle": "消費者物価指数対前年変化率（光熱・水道）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

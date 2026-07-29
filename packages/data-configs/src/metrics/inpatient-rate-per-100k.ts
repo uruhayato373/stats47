@@ -53,6 +53,4 @@ export const inpatientRatePer100k: MetricConfig = {
   "seoTitle": "入院受療率1位は高知1,785人/10万、神奈川の2.7倍｜47都道府県2023",
   "seoDescription": "人口10万人あたり入院受療率は1位高知(1,785人)、2位鹿児島(1,743人)、3位長崎(1,651人)。最下位神奈川(665人)まで2.7倍差を47都道府県で比較する2023年最新ランキング。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

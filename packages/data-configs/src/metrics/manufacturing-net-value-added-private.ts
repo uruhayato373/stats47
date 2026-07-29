@@ -41,6 +41,4 @@ export const manufacturingNetValueAddedPrivate: MetricConfig = {
   },
   "seoTitle": "純付加価値額（民営）（製造業）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

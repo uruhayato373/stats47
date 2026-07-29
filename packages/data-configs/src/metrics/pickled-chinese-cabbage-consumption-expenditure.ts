@@ -59,6 +59,4 @@ export const pickledChineseCabbageConsumptionExpenditure: MetricConfig = {
   "seoTitle": "はくさい漬消費支出額ランキング都道府県【2024年】｜1位高知県（2,083円）",
   "seoDescription": "2024年のはくさい漬消費支出額の都道府県別ランキング。1位高知県（2,083円）、最下位沖縄県（219円）で9.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

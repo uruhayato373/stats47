@@ -75,6 +75,4 @@ export const forestRoadLength: MetricConfig = {
   "seoTitle": "林道延長ランキング都道府県【2022年】｜1位北海道（24,093ｋｍ）",
   "seoDescription": "2022年の林道延長の都道府県別ランキング。1位北海道（24,093ｋｍ）、最下位沖縄県（300ｋｍ）で80.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

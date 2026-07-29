@@ -59,6 +59,4 @@ export const chikuwaConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ちくわ消費支出額ランキング都道府県【2024年】｜1位徳島県（3,161円）",
   "seoDescription": "2024年のちくわ消費支出額の都道府県別ランキング。1位徳島県（3,161円）、最下位茨城県（1,273円）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

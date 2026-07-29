@@ -71,6 +71,4 @@ export const registeredForeignerPopulation: MetricConfig = {
   "seoTitle": "外国人登録人口ランキング都道府県【2011年】｜1位東京都（405,692人）",
   "seoDescription": "2011年の外国人登録人口の都道府県別ランキング。1位東京都（405,692人）、最下位高知県（3,429人）で118.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

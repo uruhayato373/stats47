@@ -34,6 +34,4 @@ export const fireInsuranceAmountReceivedPerContract: MetricConfig = {
   },
   "seoTitle": "火災保険住宅物件・一般物件受取保険金額（1年）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

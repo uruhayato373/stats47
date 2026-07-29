@@ -60,6 +60,4 @@ export const highSchoolGraduatesJobRatio: MetricConfig = {
   "seoTitle": "高等学校卒業者に占める就職者の割合ランキング都道府県【2023年】｜1位佐賀県（27.6％）",
   "seoDescription": "2023年の高等学校卒業者に占める就職者の割合の都道府県別ランキング。1位佐賀県（27.6％）、最下位東京都（4.2％）で6.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

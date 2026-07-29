@@ -87,6 +87,4 @@ export const specialLawCriminalArrestCountPerPopulation: MetricConfig = {
   "seoTitle": "特別法犯検挙件数ランキング都道府県【2023年】｜1位東京都（93.1件）",
   "seoDescription": "2023年の特別法犯検挙件数の都道府県別ランキング。1位東京都（93.1件）、最下位山形県（22件）で4.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

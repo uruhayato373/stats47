@@ -89,6 +89,4 @@ export const physicalDisabilityRehabilitationCenterCasesPer1000: MetricConfig = 
   "seoTitle": "身体障害者更生相談所取扱実人員ランキング都道府県【2023年】｜1位沖縄県（8.41人）",
   "seoDescription": "2023年の身体障害者更生相談所取扱実人員の都道府県別ランキング。1位沖縄県（8.41人）、最下位三重県（0.43人）で19.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

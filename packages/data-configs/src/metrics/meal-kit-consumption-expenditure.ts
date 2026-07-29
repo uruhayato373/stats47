@@ -59,6 +59,4 @@ export const mealKitConsumptionExpenditure: MetricConfig = {
   "seoTitle": "そうざい材料セット消費支出額ランキング都道府県【2024年】｜1位石川県（13,540円）",
   "seoDescription": "2024年のそうざい材料セット消費支出額の都道府県別ランキング。1位石川県（13,540円）、最下位鳥取県（566円）で23.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

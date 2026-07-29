@@ -102,6 +102,4 @@ export const buildingFireCount: MetricConfig = {
   "seoTitle": "建物火災出火件数ランキング都道府県【2023年】｜1位東京都（3,077件）",
   "seoDescription": "2023年の建物火災出火件数の都道府県別ランキング。1位東京都（3,077件）、最下位鳥取県（82件）で37.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

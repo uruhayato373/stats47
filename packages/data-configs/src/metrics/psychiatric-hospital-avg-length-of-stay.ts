@@ -85,6 +85,4 @@ export const psychiatricHospitalAvgLengthOfStay: MetricConfig = {
   "seoTitle": "精神科病院平均在院日数ランキング都道府県【2023年】｜1位富山県（603.5日）",
   "seoDescription": "2023年の精神科病院平均在院日数の都道府県別ランキング。1位富山県（603.5日）、最下位大阪府（213.9日）で2.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

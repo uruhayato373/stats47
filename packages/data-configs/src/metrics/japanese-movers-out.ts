@@ -56,6 +56,4 @@ export const japaneseMoversOut: MetricConfig = {
   "seoTitle": "転出者数ランキング都道府県【2024年】｜1位東京都（337,047人）",
   "seoDescription": "2024年の転出者数の都道府県別ランキング。1位東京都（337,047人）、最下位鳥取県（9,124人）で36.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

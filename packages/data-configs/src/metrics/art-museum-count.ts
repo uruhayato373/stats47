@@ -52,6 +52,4 @@ export const artMuseumCount: MetricConfig = {
   "seoTitle": "美術博物館数ランキング都道府県【2015年】｜1位長野県（38館）",
   "seoDescription": "2015年の美術博物館数の都道府県別ランキング。1位長野県（38館）、最下位沖縄県（1館）で38.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

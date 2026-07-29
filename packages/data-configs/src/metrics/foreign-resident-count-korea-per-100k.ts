@@ -62,6 +62,4 @@ export const foreignResidentCountKoreaPer100k: MetricConfig = {
   "seoTitle": "外国人人口ランキング都道府県【2020年】｜1位大阪府（921.5人）",
   "seoDescription": "2020年の外国人人口の都道府県別ランキング。1位大阪府（921.5人）、最下位鹿児島県（26.3人）で35.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

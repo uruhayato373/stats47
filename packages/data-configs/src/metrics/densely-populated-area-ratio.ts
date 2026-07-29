@@ -45,6 +45,4 @@ export const denselyPopulatedAreaRatio: MetricConfig = {
   "seoTitle": "人口集中地区面積比率ランキング都道府県【2020年】｜1位東京都（76.7％）",
   "seoDescription": "2020年の人口集中地区面積比率の都道府県別ランキング。1位東京都（76.7％）、最下位岩手県（2.4％）で32.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

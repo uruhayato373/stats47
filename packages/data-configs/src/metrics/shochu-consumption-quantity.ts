@@ -59,6 +59,4 @@ export const shochuConsumptionQuantity: MetricConfig = {
   "seoTitle": "焼酎消費量ランキング都道府県【2024年】｜1位宮崎県（19,273ml）",
   "seoDescription": "2024年の焼酎消費量の都道府県別ランキング。1位宮崎県（19,273ml）、最下位宮城県（3,773ml）で5.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

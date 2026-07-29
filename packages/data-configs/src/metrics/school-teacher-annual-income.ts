@@ -52,6 +52,4 @@ export const schoolTeacherAnnualIncome: MetricConfig = {
   "seoTitle": "教員年収2.8倍差｜1位愛知886万 vs 最下位愛媛316万、都道府県格差の真因（2023）",
   "seoDescription": "同じ公立小中学校の教員なのに都道府県で年収が大きく違う──愛知886万円 vs 愛媛316万円で2.8倍差。全国差が生まれる仕組みと47都道府県の分布を2023年最新データで解説。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

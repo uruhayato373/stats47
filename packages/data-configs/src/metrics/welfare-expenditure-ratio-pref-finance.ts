@@ -49,6 +49,4 @@ export const welfareExpenditureRatioPrefFinance: MetricConfig = {
   "seoTitle": "民生費割合ランキング都道府県【2022年】｜1位神奈川県（21.77％）",
   "seoDescription": "2022年の民生費割合の都道府県別ランキング。1位神奈川県（21.77％）、最下位島根県（10.81％）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

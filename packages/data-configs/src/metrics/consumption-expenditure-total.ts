@@ -58,6 +58,4 @@ export const consumptionExpenditureTotal: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -45,8 +45,6 @@ function configToRow(c: MetricConfig): Record<string, unknown> {
     seo_title: c.seoTitle ?? null,
     seo_description: c.seoDescription ?? null,
     is_active: c.isActive === false ? 0 : 1,
-    is_featured: c.isFeatured ? 1 : 0,
-    featured_order: c.featuredOrder ?? null,
   };
 }
 

@@ -51,6 +51,4 @@ export const fireRelatedPersonnelCountPer100k: MetricConfig = {
   "seoTitle": "消防関係人員数ランキング都道府県【2022年】｜1位佐賀県（2,335人）",
   "seoDescription": "2022年の消防関係人員数の都道府県別ランキング。1位佐賀県（2,335人）、最下位沖縄県（227.9人）で10.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

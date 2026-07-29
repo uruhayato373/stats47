@@ -45,6 +45,4 @@ export const nightSoilTreatmentPopulationRatio: MetricConfig = {
   "seoTitle": "し尿処理人口比率ランキング都道府県【2023年】｜1位岩手県（19.6％）",
   "seoDescription": "2023年のし尿処理人口比率の都道府県別ランキング。1位岩手県（19.6％）、最下位東京都（0.1％）で196.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

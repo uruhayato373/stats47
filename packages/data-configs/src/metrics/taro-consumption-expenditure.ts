@@ -59,6 +59,4 @@ export const taroConsumptionExpenditure: MetricConfig = {
   "seoTitle": "さといも消費支出額ランキング都道府県【2024年】｜1位山形県（2,104円）",
   "seoDescription": "2024年のさといも消費支出額の都道府県別ランキング。1位山形県（2,104円）、最下位北海道（252円）で8.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

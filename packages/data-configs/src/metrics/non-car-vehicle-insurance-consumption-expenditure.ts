@@ -59,6 +59,4 @@ export const nonCarVehicleInsuranceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "自動車保険料以外の輸送機器保険料消費支出額ランキング都道府県【2024年】｜1位岐阜県（1,301円）",
   "seoDescription": "2024年の自動車保険料以外の輸送機器保険料消費支出額の都道府県別ランキング。1位岐阜県（1,301円）、最下位愛媛県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

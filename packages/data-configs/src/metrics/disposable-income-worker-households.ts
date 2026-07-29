@@ -52,6 +52,4 @@ export const disposableIncomeWorkerHouseholds: MetricConfig = {
   "seoTitle": "可処分所得（二人以上の世帯のうち勤労者世帯）ランキング都道府県【2024年】｜1位東京都（637,958円）",
   "seoDescription": "2024年の可処分所得（二人以上の世帯のうち勤労者世帯）の都道府県別ランキング。1位東京都（637,958円）、最下位愛媛県（420,678円）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

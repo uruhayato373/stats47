@@ -85,6 +85,4 @@ export const quasiNationalParkArea: MetricConfig = {
   "seoTitle": "国定公園面積ランキング都道府県【2024年】｜1位北海道（141,478ｈａ）",
   "seoDescription": "2024年の国定公園面積の都道府県別ランキング。1位北海道（141,478ｈａ）、最下位香川県（0ｈａ）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

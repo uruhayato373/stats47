@@ -58,6 +58,4 @@ export const natureParkAreaRatio: MetricConfig = {
   "seoTitle": "自然公園面積割合ランキング都道府県【2024年】｜1位滋賀県（37.3％）",
   "seoDescription": "2024年の自然公園面積割合の都道府県別ランキング。1位滋賀県（37.3％）、最下位広島県（4.5％）で8.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

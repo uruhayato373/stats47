@@ -59,6 +59,4 @@ export const handbagConsumptionQuantity: MetricConfig = {
   "seoTitle": "ハンドバッグ消費量ランキング都道府県【2024年】｜1位千葉県（0.86個）",
   "seoDescription": "2024年のハンドバッグ消費量の都道府県別ランキング。1位千葉県（0.86個）、最下位山口県（0.28個）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

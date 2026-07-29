@@ -59,6 +59,4 @@ export const cheeseConsumptionQuantity: MetricConfig = {
   "seoTitle": "チーズ消費量ランキング都道府県【2024年】｜1位岐阜県（4,327g）",
   "seoDescription": "2024年のチーズ消費量の都道府県別ランキング。1位岐阜県（4,327g）、最下位高知県（2,065g）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

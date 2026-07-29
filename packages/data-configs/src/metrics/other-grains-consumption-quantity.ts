@@ -59,6 +59,4 @@ export const otherGrainsConsumptionQuantity: MetricConfig = {
   "seoTitle": "他の穀類のその他消費量ランキング都道府県【2024年】｜1位滋賀県（5,356g）",
   "seoDescription": "2024年の他の穀類のその他消費量の都道府県別ランキング。1位滋賀県（5,356g）、最下位青森県（2,764g）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

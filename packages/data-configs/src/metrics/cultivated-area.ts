@@ -89,6 +89,4 @@ export const cultivatedArea: MetricConfig = {
   "seoTitle": "耕地面積ランキング都道府県【2024年】｜1位北海道（1,138,000ｈａ）",
   "seoDescription": "2024年の耕地面積の都道府県別ランキング。1位北海道（1,138,000ｈａ）、最下位東京都（6,090ｈａ）で186.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -85,6 +85,4 @@ export const prefecturalNaturalParkCount: MetricConfig = {
   "seoTitle": "都道府県立自然公園数ランキング都道府県【2024年】｜1位高知県（18箇所）",
   "seoDescription": "2024年の都道府県立自然公園数の都道府県別ランキング。1位高知県（18箇所）、最下位群馬県（0箇所）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

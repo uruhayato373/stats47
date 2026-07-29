@@ -52,6 +52,4 @@ export const newOwnerOccupiedStarts: MetricConfig = {
   "seoTitle": "着工新設持家数ランキング都道府県【2024年】｜1位愛知県（15,980戸）",
   "seoDescription": "2024年の着工新設持家数の都道府県別ランキング。1位愛知県（15,980戸）、最下位高知県（1,234戸）で12.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

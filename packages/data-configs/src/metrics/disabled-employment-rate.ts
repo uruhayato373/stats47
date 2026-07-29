@@ -43,6 +43,4 @@ export const disabledEmploymentRate: MetricConfig = {
   "seoTitle": "障害者就職率ランキング都道府県【2024年】｜1位鳥取県（60.3％）",
   "seoDescription": "2024年の障害者就職率の都道府県別ランキング。1位鳥取県（60.3％）、最下位東京都（34％）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

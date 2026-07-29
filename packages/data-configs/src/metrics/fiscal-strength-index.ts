@@ -52,6 +52,4 @@ export const fiscalStrengthIndex: MetricConfig = {
   "seoTitle": "財政力指数ランキング市区町村【2021年】｜1位愛知県 飛島村（2.1‐）",
   "seoDescription": "2021年の財政力指数の市区町村別ランキング。1位愛知県 飛島村（2.1‐）、最下位熊本県 熊本市 北区（0‐）で地図やグラフで市区町村を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

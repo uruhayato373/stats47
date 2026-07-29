@@ -36,6 +36,4 @@ export const acupunctureMoxibustionCount: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

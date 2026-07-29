@@ -59,6 +59,4 @@ export const porkConsumptionQuantity: MetricConfig = {
   "seoTitle": "豚肉消費量ランキング都道府県【2024年】｜1位新潟県（27,509g）",
   "seoDescription": "2024年の豚肉消費量の都道府県別ランキング。1位新潟県（27,509g）、最下位和歌山県（17,545g）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

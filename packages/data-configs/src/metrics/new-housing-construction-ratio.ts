@@ -48,6 +48,4 @@ export const newHousingConstructionRatio: MetricConfig = {
   "seoTitle": "着工新設住宅比率ランキング都道府県【2024年】｜1位熊本県（2.1％）",
   "seoDescription": "2024年の着工新設住宅比率の都道府県別ランキング。1位熊本県（2.1％）、最下位高知県（0.7％）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

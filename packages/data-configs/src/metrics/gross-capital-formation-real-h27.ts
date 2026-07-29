@@ -38,6 +38,4 @@ export const grossCapitalFormationRealH27: MetricConfig = {
   },
   "seoTitle": "県内総資本形成（実質）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

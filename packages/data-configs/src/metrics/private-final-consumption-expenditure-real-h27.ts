@@ -35,6 +35,4 @@ export const privateFinalConsumptionExpenditureRealH27: MetricConfig = {
   },
   "seoTitle": "民間最終消費支出（実質）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -52,6 +52,4 @@ export const riceCultivatedArea: MetricConfig = {
   "seoTitle": "水稲作付面積ランキング都道府県【2019年】｜1位新潟県（119,200ha）",
   "seoDescription": "2019年の水稲作付面積の都道府県別ランキング。1位新潟県（119,200ha）、最下位東京都（129ha）で924.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

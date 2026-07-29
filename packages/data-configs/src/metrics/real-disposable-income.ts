@@ -28,6 +28,4 @@ export const realDisposableIncome: MetricConfig = {
   "seoTitle": "実質可処分所得（物価補正後）ランキング都道府県【2024年】｜1位埼玉県（618,720円）",
   "seoDescription": "2024年の実質可処分所得（物価補正後）の都道府県別ランキング。1位埼玉県（618,720円）、最下位沖縄県（423,078円）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

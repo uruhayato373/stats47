@@ -64,6 +64,4 @@ export const reserveFundsPrefecture: MetricConfig = {
   "seoTitle": "積立金ランキング都道府県【2022年】｜1位東京都（950,468,347）",
   "seoDescription": "2022年の積立金の都道府県別ランキング。1位東京都（950,468,347）、最下位高知県（2,586,360）で367.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

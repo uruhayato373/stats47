@@ -59,6 +59,4 @@ export const otherWomensClothingConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の婦人用洋服消費支出額ランキング都道府県【2024年】｜1位熊本県（14,692円）",
   "seoDescription": "2024年の他の婦人用洋服消費支出額の都道府県別ランキング。1位熊本県（14,692円）、最下位富山県（1,820円）で8.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -34,6 +34,4 @@ export const sportsParticipationRateJogging: MetricConfig = {
   "seoTitle": "ジョギング・マラソンの行動者率ランキング都道府県【2021年】｜1位東京都（15.3％）",
   "seoDescription": "2021年のジョギング・マラソンの行動者率の都道府県別ランキング。1位東京都（15.3％）、最下位岐阜県（7.3％）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

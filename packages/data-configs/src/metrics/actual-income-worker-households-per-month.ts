@@ -51,6 +51,4 @@ export const actualIncomeWorkerHouseholdsPerMonth: MetricConfig = {
   "seoTitle": "実収入ランキング都道府県【2024年】｜1位東京都（794.2千円）",
   "seoDescription": "2024年の実収入の都道府県別ランキング。1位東京都（794.2千円）、最下位沖縄県（493.6千円）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

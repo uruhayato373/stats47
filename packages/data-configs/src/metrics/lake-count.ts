@@ -50,6 +50,4 @@ export const lakeCount: MetricConfig = {
   "seoTitle": "湖沼数ランキング都道府県【2005年】｜1位北海道（104か所）",
   "seoDescription": "2005年の湖沼数の都道府県別ランキング。1位北海道（104か所）、最下位東京都（0か所）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

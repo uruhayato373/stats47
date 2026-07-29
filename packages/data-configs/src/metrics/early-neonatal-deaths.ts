@@ -64,6 +64,4 @@ export const earlyNeonatalDeaths: MetricConfig = {
   "seoTitle": "早期新生児死亡数ランキング都道府県【2023年】｜1位神奈川県（47人）",
   "seoDescription": "2023年の早期新生児死亡数の都道府県別ランキング。1位神奈川県（47人）、最下位高知県（1人）で47.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

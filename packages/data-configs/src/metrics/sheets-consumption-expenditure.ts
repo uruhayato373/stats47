@@ -59,6 +59,4 @@ export const sheetsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "敷布消費支出額ランキング都道府県【2024年】｜1位神奈川県（1,214円）",
   "seoDescription": "2024年の敷布消費支出額の都道府県別ランキング。1位神奈川県（1,214円）、最下位島根県（157円）で7.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

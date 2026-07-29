@@ -59,6 +59,4 @@ export const manjuConsumptionExpenditure: MetricConfig = {
   "seoTitle": "まんじゅう消費支出額ランキング都道府県【2024年】｜1位福島県（1,932円）",
   "seoDescription": "2024年のまんじゅう消費支出額の都道府県別ランキング。1位福島県（1,932円）、最下位青森県（369円）で5.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

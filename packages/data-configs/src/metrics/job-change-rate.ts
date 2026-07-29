@@ -38,6 +38,4 @@ export const jobChangeRate: MetricConfig = {
   "seoTitle": "転職率ランキング都道府県【2022年】｜1位福岡県（5.4％）",
   "seoDescription": "2022年の転職率の都道府県別ランキング。1位福岡県（5.4％）、最下位愛媛県（3.3％）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

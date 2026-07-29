@@ -1,10 +1,5 @@
 import "server-only";
 
-import {
-  HOME_FEATURED_RANKINGS,
-  METRICS_REGISTRY,
-  validateHomeFeaturedRankings,
-} from "@stats47/data-configs";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import {
@@ -13,6 +8,7 @@ import {
 
 import surveysMaster from "../data/surveys.json";
 import { KNOWN_RANKING_KEYS } from "../config/known-ranking-keys";
+import { compareByRepresentativeThenRecency } from "../lib/ranking-order";
 import { bakeHomeFeaturedItem, resolveHomeFeaturedItems } from "./home-featured";
 import { listRankingItemsWithTagsFromR2 } from "../repositories/ranking-item";
 import { readRankingValuesFromR2 } from "../repositories/ranking-value";
@@ -62,7 +58,7 @@ export interface ExportRankingItemsPerUrlResult {
  * R2 list が部分的な staging (item-metadata-refresh --apply が差分パッチした一部だけ) を
  * 「listing が 0 件超だから全件」と誤認し、home/featured.json 等が count:0 で R2 に
  * 上書きされた。ここで items 件数・home featured 解決の 2 点を検査し、異常なら
- * errors を返す (呼び出し元は `validateHomeFeaturedRankings` と同じ書き方で throw する)。
+ * errors を返す (呼び出し元はこれを見て throw する)。
  */
 export function checkRankingItemsCompleteness(input: {
   /** listRankingItemsWithTagsFromR2 が読めた item 数 */
@@ -147,13 +143,9 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   const uploads: Promise<{ key: string; size: number }>[] = [];
 
   // ── home/featured.json ──────────────────────────────────────────────────────
-  // ホームの選定・順番・hookはgit TS `HOME_FEATURED_RANKINGS` がSSOT
-  // (仕様 doc 28 §4-5。旧実装の isFeatured/featuredOrder 駆動から 2026-07 に移行。
-  //  isFeatured は category/survey 等の表示で使われ続けるため item からは削除しない)。
-  const configErrors = validateHomeFeaturedRankings(HOME_FEATURED_RANKINGS, METRICS_REGISTRY);
-  if (configErrors.length > 0) {
-    throw new Error(`HOME_FEATURED_RANKINGS validation failed: ${configErrors.join(" / ")}`);
-  }
+  // ホームの選定・順番・hookは掲載価値スコアの生成物 `HOME_FEATURED_PROMINENCE` が決める
+  // (2026-07-29 に手動キュレーション HOME_FEATURED_RANKINGS から自動選定へ移行)。
+  // 生成物は isActive な metric からしか選ばないので、旧 config validation は不要。
   const { resolved: featuredResolved, missingKeys } = resolveHomeFeaturedItems(items);
   const completenessErrors = checkRankingItemsCompleteness({
     itemCount: items.length,
@@ -234,12 +226,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
         }
         return false;
       })
-      .sort((a, b) => {
-        const fa = a.featuredOrder ?? 0;
-        const fb = b.featuredOrder ?? 0;
-        if (fa !== fb) return fa - fb;
-        return (b.updatedAt ?? "").localeCompare(a.updatedAt ?? "");
-      });
+      .sort(compareByRepresentativeThenRecency);
 
     const categoryItems: CategoryRankingItemWithAreaType[] = matched.map((r) => ({
       rankingKey: r.rankingKey,
@@ -253,7 +240,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
       demographicAttr: r.demographicAttr ?? null,
       normalizationBasis: r.normalizationBasis ?? null,
       groupKey: r.groupKey ?? null,
-      isFeatured: r.isFeatured ?? false,
+      hook: r.hook ?? null,
       top1: r.latestTop ?? null,
     }));
 
@@ -315,12 +302,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   for (const surveyId of surveyIdSet) {
     const matched = (itemsBySurvey.get(surveyId) ?? [])
       .slice()
-      .sort((a, b) => {
-        const fa = a.featuredOrder ?? 0;
-        const fb = b.featuredOrder ?? 0;
-        if (fa !== fb) return fa - fb;
-        return (b.updatedAt ?? "").localeCompare(a.updatedAt ?? "");
-      });
+      .sort(compareByRepresentativeThenRecency);
 
     const surveyItems: CategoryRankingItemWithAreaType[] = matched.map((r) => ({
       rankingKey: r.rankingKey,
@@ -334,7 +316,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
       demographicAttr: r.demographicAttr ?? null,
       normalizationBasis: r.normalizationBasis ?? null,
       groupKey: r.groupKey ?? null,
-      isFeatured: r.isFeatured ?? false,
+      hook: r.hook ?? null,
       top1: r.latestTop ?? null,
       // survey ページの広告 vertical 導出に使う (調査主題と広告を連動させる)。
       categoryKey: r.categoryKey ?? null,

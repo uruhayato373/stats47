@@ -87,6 +87,4 @@ export const fireDamageCasualtiesPerAccident: MetricConfig = {
   "seoTitle": "火災死傷者数ランキング都道府県【2023年】｜1位奈良県（48.4人）",
   "seoDescription": "2023年の火災死傷者数の都道府県別ランキング。1位奈良県（48.4人）、最下位宮崎県（23.5人）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

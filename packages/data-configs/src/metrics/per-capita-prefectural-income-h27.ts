@@ -35,6 +35,4 @@ export const perCapitaPrefecturalIncomeH27: MetricConfig = {
   },
   "seoTitle": "1人当たり県民所得（平成27年基準）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

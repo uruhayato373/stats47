@@ -59,6 +59,4 @@ export const shampooConsumptionExpenditure: MetricConfig = {
   "seoTitle": "シャンプー消費支出額ランキング都道府県【2024年】｜1位富山県（5,382円）",
   "seoDescription": "2024年のシャンプー消費支出額の都道府県別ランキング。1位富山県（5,382円）、最下位長崎県（3,062円）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

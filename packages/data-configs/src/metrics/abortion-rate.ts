@@ -43,6 +43,4 @@ export const abortionRate: MetricConfig = {
   "seoTitle": "中絶実施率ランキング都道府県｜なぜ宮崎が最多?茨城の2.6倍【2020】",
   "seoDescription": "同じ日本でも人工妊娠中絶の実施率は都道府県で2.6倍違います──1位宮崎県8.2‰、最下位茨城県3.1‰。地域差が生まれる背景と47都道府県の分布を2020年データで比較します。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

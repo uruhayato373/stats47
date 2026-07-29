@@ -52,6 +52,4 @@ export const generalRevenueRatioPrefFinance: MetricConfig = {
   "seoTitle": "一般財源の割合ランキング都道府県【2022年】｜1位東京都（68.1％）",
   "seoDescription": "2022年の一般財源の割合の都道府県別ランキング。1位東京都（68.1％）、最下位福島県（44.5％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -54,6 +54,4 @@ export const socialIncrease: MetricConfig = {
   "seoTitle": "社会増減数ランキング都道府県【2024年】｜1位東京都（144,456人）",
   "seoDescription": "2024年の社会増減数の都道府県別ランキング。1位東京都（144,456人）、最下位福島県（-4,687人）で-30.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

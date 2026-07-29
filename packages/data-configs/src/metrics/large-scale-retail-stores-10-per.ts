@@ -41,6 +41,4 @@ export const largeScaleRetailStores10Per: MetricConfig = {
   },
   "groupKey": "large-scale-retail-stores-10-per",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -69,6 +69,4 @@ export const specialSupportSchoolExpensesPrefecture: MetricConfig = {
   },
   "groupKey": "special-support-school-expenses-prefecture",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

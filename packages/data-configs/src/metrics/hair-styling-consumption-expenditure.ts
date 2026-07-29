@@ -59,6 +59,4 @@ export const hairStylingConsumptionExpenditure: MetricConfig = {
   "seoTitle": "整髪・養毛剤消費支出額ランキング都道府県【2024年】｜1位宮城県（4,265円）",
   "seoDescription": "2024年の整髪・養毛剤消費支出額の都道府県別ランキング。1位宮城県（4,265円）、最下位福井県（1,803円）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

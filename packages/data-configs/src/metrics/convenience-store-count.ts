@@ -65,6 +65,4 @@ export const convenienceStoreCount: MetricConfig = {
   "seoTitle": "コンビニエンスストア数ランキング都道府県【2014年】｜1位東京都（4,319所）",
   "seoDescription": "2014年のコンビニエンスストア数の都道府県別ランキング。1位東京都（4,319所）、最下位鳥取県（154所）で28.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

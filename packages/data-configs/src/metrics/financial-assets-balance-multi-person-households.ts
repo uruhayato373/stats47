@@ -52,6 +52,4 @@ export const financialAssetsBalanceMultiPersonHouseholds: MetricConfig = {
   "seoTitle": "貯蓄現在高ランキング都道府県【2019年】｜1位神奈川県（18,218千円）",
   "seoDescription": "2019年の貯蓄現在高の都道府県別ランキング。1位神奈川県（18,218千円）、最下位沖縄県（6,021千円）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

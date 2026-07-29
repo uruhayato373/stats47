@@ -59,6 +59,4 @@ export const inPrefUniversityEntranceRatioByHighschoolOrigin: MetricConfig = {
   "seoTitle": "県内大学入学者割合ランキング都道府県【2024年】｜1位愛知県（71.4％）",
   "seoDescription": "2024年の県内大学入学者割合の都道府県別ランキング。1位愛知県（71.4％）、最下位鳥取県（15.1％）で4.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

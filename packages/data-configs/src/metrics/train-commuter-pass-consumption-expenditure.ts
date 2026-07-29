@@ -59,6 +59,4 @@ export const trainCommuterPassConsumptionExpenditure: MetricConfig = {
   "seoTitle": "鉄道通勤定期代消費支出額ランキング都道府県【2024年】｜1位滋賀県（24,103円）",
   "seoDescription": "2024年の鉄道通勤定期代消費支出額の都道府県別ランキング。1位滋賀県（24,103円）、最下位徳島県（209円）で115.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

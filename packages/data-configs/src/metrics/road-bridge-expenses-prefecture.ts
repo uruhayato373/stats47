@@ -86,6 +86,4 @@ export const roadBridgeExpensesPrefecture: MetricConfig = {
   "seoTitle": "道路橋りょう費ランキング都道府県【2022年】｜1位北海道（145,347,812）",
   "seoDescription": "2022年の道路橋りょう費の都道府県別ランキング。1位北海道（145,347,812）、最下位香川県（23,016,939）で6.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const cookingApplianceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "炊事用電気器具消費支出額ランキング都道府県【2024年】｜1位佐賀県（6,542円）",
   "seoDescription": "2024年の炊事用電気器具消費支出額の都道府県別ランキング。1位佐賀県（6,542円）、最下位岐阜県（1,042円）で6.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

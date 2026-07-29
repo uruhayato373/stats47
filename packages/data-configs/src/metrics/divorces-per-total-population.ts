@@ -51,6 +51,4 @@ export const divorcesPerTotalPopulation: MetricConfig = {
   "seoTitle": "離婚率ランキング都道府県【2024年】｜東京5.7‐・秋田2.5‐、都市ほど高い構造と沖縄急落の理由",
   "seoDescription": "2024年の離婚率ランキング。東京都（5.7‐）が最多、最下位は秋田県（2.5‐）で2.3倍差。沖縄は2015年の6.1から急落。都市ほど高い理由を47都道府県で可視化。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

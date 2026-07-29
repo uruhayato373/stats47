@@ -35,6 +35,4 @@ export const sewageTreatmentCoverageRate: MetricConfig = {
   "seoTitle": "汚水処理人口普及率ランキング都道府県【2023年】｜1位東京都（99.9％）",
   "seoDescription": "2023年の汚水処理人口普及率の都道府県別ランキング。1位東京都（99.9％）、最下位徳島県（68.5％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

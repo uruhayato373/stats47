@@ -59,6 +59,4 @@ export const bambooShootConsumptionQuantity: MetricConfig = {
   "seoTitle": "たけのこ消費量ランキング都道府県【2024年】｜1位岐阜県（3,065g）",
   "seoDescription": "2024年のたけのこ消費量の都道府県別ランキング。1位岐阜県（3,065g）、最下位沖縄県（105g）で29.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

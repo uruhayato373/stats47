@@ -59,6 +59,4 @@ export const onionConsumptionQuantity: MetricConfig = {
   "seoTitle": "たまねぎ消費量ランキング都道府県【2024年】｜1位滋賀県（18,555g）",
   "seoDescription": "2024年のたまねぎ消費量の都道府県別ランキング。1位滋賀県（18,555g）、最下位山梨県（12,309g）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

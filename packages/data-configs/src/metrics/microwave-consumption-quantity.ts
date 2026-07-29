@@ -59,6 +59,4 @@ export const microwaveConsumptionQuantity: MetricConfig = {
   "seoTitle": "電子レンジ消費量ランキング都道府県【2024年】｜1位愛知県（0.11台）",
   "seoDescription": "2024年の電子レンジ消費量の都道府県別ランキング。1位愛知県（0.11台）、最下位滋賀県（0台）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

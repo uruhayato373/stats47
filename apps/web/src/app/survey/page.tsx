@@ -13,9 +13,8 @@ import { isOk } from "@stats47/types";
 import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 import { SurfaceLinkCard } from "@/components/surface";
 
-import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
+import { FooterAdSlot } from "@/features/ads";
 
-import { HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -109,9 +108,10 @@ export default async function SurveyIndexPage() {
         })}
       </div>
 
-      {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
-      <InContentAdSlot slot={HUB_INCONTENT} />
-
+      {/*
+        記事内広告は置かない。この面は単一の調査グリッドしか無く、置ける場所が
+        フッター広告の直前しか無いため、置くと必ず広告 2 連になる (2026-07-29 是正)。
+      */}
       {/* コンテンツ末尾の全幅フッター広告 */}
       <FooterAdSlot />
     </PageShell>

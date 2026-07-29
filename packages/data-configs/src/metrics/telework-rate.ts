@@ -37,6 +37,4 @@ export const teleworkRate: MetricConfig = {
   "seoTitle": "テレワーク実施率ランキング都道府県【2022年】｜1位東京都（39.8％）",
   "seoDescription": "2022年のテレワーク実施率の都道府県別ランキング。1位東京都（39.8％）、最下位秋田県（6.4％）で6.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

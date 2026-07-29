@@ -88,6 +88,4 @@ export const urbanPlanningExpensesPrefecture: MetricConfig = {
   "seoTitle": "都市計画費ランキング都道府県【2022年】｜1位東京都（430,133,699）",
   "seoDescription": "2022年の都市計画費の都道府県別ランキング。1位東京都（430,133,699）、最下位鹿児島県（2,206,056）で195.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

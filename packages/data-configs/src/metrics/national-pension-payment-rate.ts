@@ -36,6 +36,4 @@ export const nationalPensionPaymentRate: MetricConfig = {
   "seoTitle": "国民年金保険料納付率ランキング都道府県【2022年】｜1位島根県（86.8%）",
   "seoDescription": "2022年の国民年金保険料納付率の都道府県別ランキング。1位島根県（86.8%）、最下位大阪府（69.2%）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

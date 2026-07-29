@@ -85,6 +85,4 @@ export const prefecturalNatureParkArea: MetricConfig = {
   "seoTitle": "都道府県立自然公園面積ランキング都道府県【2024年】｜1位新潟県（128,580ｈａ）",
   "seoDescription": "2024年の都道府県立自然公園面積の都道府県別ランキング。1位新潟県（128,580ｈａ）、最下位群馬県（0ｈａ）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

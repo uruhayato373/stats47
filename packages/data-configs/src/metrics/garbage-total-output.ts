@@ -53,6 +53,4 @@ export const garbageTotalOutput: MetricConfig = {
   "seoTitle": "ごみ総排出量ランキング都道府県【2023年】｜1位東京都（4,046,316t）",
   "seoDescription": "2023年のごみ総排出量の都道府県別ランキング。1位東京都（4,046,316t）、最下位鳥取県（190,681t）で21.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

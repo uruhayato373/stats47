@@ -77,6 +77,4 @@ export const juvenileCriminalArrestPersonPerPopulation: MetricConfig = {
   "seoTitle": "少年刑法犯検挙人員ランキング都道府県【2023年】｜1位和歌山県（4.7人）",
   "seoDescription": "2023年の少年刑法犯検挙人員の都道府県別ランキング。1位和歌山県（4.7人）、最下位福島県（1.25人）で3.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

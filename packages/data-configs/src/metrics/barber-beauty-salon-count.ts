@@ -102,6 +102,4 @@ export const barberBeautySalonCount: MetricConfig = {
   "seoTitle": "理容・美容所数ランキング都道府県【2023年】｜1位東京都35,102所・最下位鳥取県で15.2倍格差",
   "seoDescription": "2023年最新版・47都道府県の理容・美容所数ランキング。1位東京都(35,102所)、2位大阪府(26,536所)、3位愛知県(19,075所)、最下位鳥取県(2,307所)で15.2倍の格差。地図とグラフで比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

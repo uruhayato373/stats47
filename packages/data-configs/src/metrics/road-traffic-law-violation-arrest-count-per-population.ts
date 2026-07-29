@@ -81,6 +81,4 @@ export const roadTrafficLawViolationArrestCountPerPopulation: MetricConfig = {
   "seoTitle": "道路交通法違反検挙件数ランキング都道府県【2023年】｜1位富山県（60.9件）",
   "seoDescription": "2023年の道路交通法違反検挙件数の都道府県別ランキング。1位富山県（60.9件）、最下位愛媛県（15.8件）で3.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

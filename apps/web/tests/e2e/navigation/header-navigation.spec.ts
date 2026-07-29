@@ -34,6 +34,23 @@ test.describe("ヘッダーナビゲーション", () => {
     await expect(page).toHaveURL(/\/areas/);
   });
 
+  test("テーマメガメニューから一覧へ遷移する", async ({ page }) => {
+    // テーマは直リンクではなく dropdown。トリガーを開いてから一覧リンクを踏む。
+    await page.getByRole("button", { name: "テーマ一覧" }).click();
+
+    const allThemesLink = page.getByRole("link", {
+      name: /すべてのテーマを見る/,
+    });
+    await expect(allThemesLink).toHaveAttribute("href", "/themes");
+    await allThemesLink.click();
+
+    await expect(page).toHaveURL(/\/themes/);
+    // 遷移後も dropdown が開いたままだと背後が aria-hidden になり
+    // getByRole が本文を拾えない。閉じてから本文を確認する。
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  });
+
   test("統計ブログリンクをクリックして遷移する", async ({ page }) => {
     // 統計ブログリンクを取得
     const blogLink = page.getByRole("link", { name: /統計ブログ/i });

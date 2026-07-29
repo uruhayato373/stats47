@@ -34,6 +34,4 @@ export const sportsParticipationRateBaseball: MetricConfig = {
   "seoTitle": "野球の行動者率ランキング都道府県【2021年】｜1位広島県（7.5％）",
   "seoDescription": "2021年の野球の行動者率の都道府県別ランキング。1位広島県（7.5％）、最下位高知県（4.1％）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

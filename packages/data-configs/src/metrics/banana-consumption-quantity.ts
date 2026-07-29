@@ -59,6 +59,4 @@ export const bananaConsumptionQuantity: MetricConfig = {
   "seoTitle": "バナナ消費量ランキング都道府県【2024年】｜1位兵庫県（25,910g）",
   "seoDescription": "2024年のバナナ消費量の都道府県別ランキング。1位兵庫県（25,910g）、最下位宮城県（13,746g）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

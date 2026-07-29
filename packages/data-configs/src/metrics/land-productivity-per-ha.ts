@@ -89,6 +89,4 @@ export const landProductivityPerHa: MetricConfig = {
   "seoTitle": "土地生産性ランキング都道府県【2023年】｜1位宮崎県（584万円）",
   "seoDescription": "2023年の土地生産性の都道府県別ランキング。1位宮崎県（584万円）、最下位富山県（101.7万円）で5.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

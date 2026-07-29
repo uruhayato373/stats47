@@ -51,6 +51,4 @@ export const agriculturalFarmCount: MetricConfig = {
   "seoTitle": "農家数ランキング都道府県【2019年】｜1位長野県（89,786戸）",
   "seoDescription": "2019年の農家数の都道府県別ランキング。1位長野県（89,786戸）、最下位東京都（9,567戸）で9.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const saltedSalmonConsumptionExpenditure: MetricConfig = {
   "seoTitle": "塩さけ消費支出額ランキング都道府県【2024年】｜1位新潟県（5,302円）",
   "seoDescription": "2024年の塩さけ消費支出額の都道府県別ランキング。1位新潟県（5,302円）、最下位沖縄県（518円）で10.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

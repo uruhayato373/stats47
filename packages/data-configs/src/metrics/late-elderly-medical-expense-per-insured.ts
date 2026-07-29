@@ -60,6 +60,4 @@ export const lateElderlyMedicalExpensePerInsured: MetricConfig = {
   "seoTitle": "後期高齢者医療費ランキング都道府県【2023年】｜1位福岡県（1,195,147円）",
   "seoDescription": "2023年の後期高齢者医療費の都道府県別ランキング。1位福岡県（1,195,147円）、最下位新潟県（775,287円）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

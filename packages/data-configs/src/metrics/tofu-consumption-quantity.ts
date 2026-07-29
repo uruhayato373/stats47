@@ -59,6 +59,4 @@ export const tofuConsumptionQuantity: MetricConfig = {
   "seoTitle": "豆腐消費量ランキング都道府県【2024年】｜1位宮城県（116.57丁）",
   "seoDescription": "2024年の豆腐消費量の都道府県別ランキング。1位宮城県（116.57丁）、最下位佐賀県（57.1丁）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

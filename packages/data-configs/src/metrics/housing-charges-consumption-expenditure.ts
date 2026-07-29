@@ -59,6 +59,4 @@ export const housingChargesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "住宅関係負担費消費支出額ランキング都道府県【2024年】｜1位埼玉県（75,542円）",
   "seoDescription": "2024年の住宅関係負担費消費支出額の都道府県別ランキング。1位埼玉県（75,542円）、最下位三重県（459円）で164.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

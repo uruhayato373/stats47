@@ -42,6 +42,4 @@ export const dwellingPerFloorArea: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

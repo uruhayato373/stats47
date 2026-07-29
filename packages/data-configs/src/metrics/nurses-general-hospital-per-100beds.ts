@@ -53,6 +53,4 @@ export const nursesGeneralHospitalPer100beds: MetricConfig = {
   "seoTitle": "一般病院看護師・准看護師数ランキング都道府県【2023年】｜1位長野県（80.3人）",
   "seoDescription": "2023年の一般病院看護師・准看護師数の都道府県別ランキング。1位長野県（80.3人）、最下位高知県（60.7人）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

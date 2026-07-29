@@ -52,6 +52,4 @@ export const botanicalGardenCount: MetricConfig = {
   "seoTitle": "植物園数ランキング都道府県【2015年】｜1位兵庫県（2館）",
   "seoDescription": "2015年の植物園数の都道府県別ランキング。1位兵庫県（2館）、最下位沖縄県（0館）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

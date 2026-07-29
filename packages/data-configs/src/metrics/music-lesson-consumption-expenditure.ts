@@ -59,6 +59,4 @@ export const musicLessonConsumptionExpenditure: MetricConfig = {
   "seoTitle": "音楽月謝消費支出額ランキング都道府県【2024年】｜1位岐阜県（11,643円）",
   "seoDescription": "2024年の音楽月謝消費支出額の都道府県別ランキング。1位岐阜県（11,643円）、最下位和歌山県（979円）で11.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

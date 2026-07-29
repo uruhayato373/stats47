@@ -59,6 +59,4 @@ export const whitebaitConsumptionQuantity: MetricConfig = {
   "seoTitle": "しらす干し消費量ランキング都道府県【2024年】｜1位和歌山県（1,073g）",
   "seoDescription": "2024年のしらす干し消費量の都道府県別ランキング。1位和歌山県（1,073g）、最下位宮崎県（76g）で14.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

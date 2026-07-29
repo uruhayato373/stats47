@@ -59,6 +59,4 @@ export const curtainConsumptionExpenditure: MetricConfig = {
   "seoTitle": "カーテン消費支出額ランキング都道府県【2024年】｜1位山梨県（7,340円）",
   "seoDescription": "2024年のカーテン消費支出額の都道府県別ランキング。1位山梨県（7,340円）、最下位岐阜県（246円）で29.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

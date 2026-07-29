@@ -45,6 +45,4 @@ export const voterTurnoutHouseSingle: MetricConfig = {
   "seoTitle": "衆議院議員選挙投票率（小選挙区）ランキング都道府県【2021年】｜1位山形県（64.34％）",
   "seoDescription": "2021年の衆議院議員選挙投票率（小選挙区）の都道府県別ランキング。1位山形県（64.34％）、最下位山口県（49.67％）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

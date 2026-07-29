@@ -58,6 +58,4 @@ export const highSchoolNewGraduatesEmploymentRate: MetricConfig = {
   "seoTitle": "高等学校新規卒業者の就職率ランキング都道府県【2023年】｜1位徳島県（100％）",
   "seoDescription": "2023年の高等学校新規卒業者の就職率の都道府県別ランキング。1位徳島県（100％）、最下位京都府（94.5％）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

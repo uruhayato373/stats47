@@ -86,6 +86,4 @@ export const perChildPublicElementarySchoolExpenditurePrefMunicipal: MetricConfi
   "seoTitle": "公立小学校費ランキング都道府県【2022年】｜1位岩手県（1,095.3千円）",
   "seoDescription": "2022年の公立小学校費の都道府県別ランキング。1位岩手県（1,095.3千円）、最下位埼玉県（644.3千円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

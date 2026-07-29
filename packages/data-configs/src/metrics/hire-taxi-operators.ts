@@ -83,6 +83,4 @@ export const hireTaxiOperators: MetricConfig = {
   "seoTitle": "ハイヤー・タクシー事業者ランキング都道府県【2013年】｜1位東京都（16,256社）",
   "seoDescription": "2013年のハイヤー・タクシー事業者の都道府県別ランキング。1位東京都（16,256社）、最下位鳥取県（61社）で266.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -33,6 +33,4 @@ export const standardFinancialScaleMunicipal: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const driedMackerelConsumptionQuantity: MetricConfig = {
   "seoTitle": "干しあじ消費量ランキング都道府県【2024年】｜1位宮崎県（643g）",
   "seoDescription": "2024年の干しあじ消費量の都道府県別ランキング。1位宮崎県（643g）、最下位沖縄県（34g）で18.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

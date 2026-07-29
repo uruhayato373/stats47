@@ -69,6 +69,4 @@ export const criminalRecognitionCountOfProstitutionCrimeRate: MetricConfig = {
   "seoTitle": "刑法犯認知件数に占める風俗犯の割合ランキング都道府県【2023年】｜1位島根県（3.07％）",
   "seoDescription": "2023年の刑法犯認知件数に占める風俗犯の割合の都道府県別ランキング。1位島根県（3.07％）、最下位茨城県（0.78％）で3.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

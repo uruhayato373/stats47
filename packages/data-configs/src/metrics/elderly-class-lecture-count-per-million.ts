@@ -73,6 +73,4 @@ export const elderlyClassLectureCountPerMillion: MetricConfig = {
   "seoTitle": "高齢者学級・講座数ランキング都道府県【2020年】｜1位島根県（2,378.1学級･講座）",
   "seoDescription": "2020年の高齢者学級・講座数の都道府県別ランキング。1位島根県（2,378.1学級･講座）、最下位東京都（6.7学級･講座）で354.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

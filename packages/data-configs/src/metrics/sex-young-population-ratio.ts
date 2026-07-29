@@ -38,6 +38,4 @@ export const sexYoungPopulationRatio: MetricConfig = {
   },
   "seoTitle": "人口性比（15歳未満人口）(A130101/A130102)",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

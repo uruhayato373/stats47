@@ -36,6 +36,4 @@ export const ageSpecificDeathRate04Per1000: MetricConfig = {
   "seoTitle": "年齢別死亡率ランキング都道府県【2023年】｜1位長崎県（0.66‐）",
   "seoDescription": "2023年の年齢別死亡率の都道府県別ランキング。1位長崎県（0.66‐）、最下位高知県（0.2‐）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

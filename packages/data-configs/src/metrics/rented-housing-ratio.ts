@@ -39,6 +39,4 @@ export const rentedHousingRatio: MetricConfig = {
   "seoTitle": "借家比率ランキング都道府県【2023年】｜1位沖縄県（50.7％）",
   "seoDescription": "2023年の借家比率の都道府県別ランキング。1位沖縄県（50.7％）、最下位秋田県（20.9％）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

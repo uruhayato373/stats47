@@ -59,6 +59,4 @@ export const laundryDetergentConsumptionExpenditure: MetricConfig = {
   "seoTitle": "洗濯用洗剤消費支出額ランキング都道府県【2024年】｜1位徳島県（7,522円）",
   "seoDescription": "2024年の洗濯用洗剤消費支出額の都道府県別ランキング。1位徳島県（7,522円）、最下位北海道（5,160円）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -55,6 +55,4 @@ export const barberBeauticianAnnualIncome: MetricConfig = {
   "seoTitle": "理容・美容師の平均年収ランキング都道府県【2023年】｜1位愛知県（451.8万円）",
   "seoDescription": "2023年の理容・美容師の平均年収の都道府県別ランキング。1位愛知県（451.8万円）、最下位鳥取県（227.9万円）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

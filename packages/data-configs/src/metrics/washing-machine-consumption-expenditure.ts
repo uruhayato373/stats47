@@ -59,6 +59,4 @@ export const washingMachineConsumptionExpenditure: MetricConfig = {
   "seoTitle": "電気洗濯機消費支出額ランキング都道府県【2024年】｜1位島根県（13,939円）",
   "seoDescription": "2024年の電気洗濯機消費支出額の都道府県別ランキング。1位島根県（13,939円）、最下位栃木県（938円）で14.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

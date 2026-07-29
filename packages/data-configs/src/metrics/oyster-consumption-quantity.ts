@@ -59,6 +59,4 @@ export const oysterConsumptionQuantity: MetricConfig = {
   "seoTitle": "かき(貝)消費量ランキング都道府県【2024年】｜1位広島県（959g）",
   "seoDescription": "2024年のかき(貝)消費量の都道府県別ランキング。1位広島県（959g）、最下位福岡県（0g）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

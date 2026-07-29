@@ -44,6 +44,4 @@ export const householdRatioWith65plus: MetricConfig = {
   "seoTitle": "65歳以上の世帯員のいる世帯割合ランキング都道府県【2020年】｜1位秋田県（57.5％）",
   "seoDescription": "2020年の65歳以上の世帯員のいる世帯割合の都道府県別ランキング。1位秋田県（57.5％）、最下位東京都（29.54％）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

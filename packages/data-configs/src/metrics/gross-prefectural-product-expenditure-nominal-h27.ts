@@ -34,6 +34,4 @@ export const grossPrefecturalProductExpenditureNominalH27: MetricConfig = {
   },
   "seoTitle": "県内総生産（支出側）（名目）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

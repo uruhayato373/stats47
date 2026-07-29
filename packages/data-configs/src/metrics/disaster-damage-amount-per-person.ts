@@ -76,6 +76,4 @@ export const disasterDamageAmountPerPerson: MetricConfig = {
   "seoTitle": "災害被害額ランキング都道府県【2023年】｜1位鳥取県（53,734円）",
   "seoDescription": "2023年の災害被害額の都道府県別ランキング。1位鳥取県（53,734円）、最下位東京都（2円）で26867.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

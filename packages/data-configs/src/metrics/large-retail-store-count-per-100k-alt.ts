@@ -35,6 +35,4 @@ export const largeRetailStoreCountPer100kAlt: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

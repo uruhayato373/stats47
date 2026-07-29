@@ -48,6 +48,4 @@ export const populationGrowthRate: MetricConfig = {
   "seoTitle": "人口増減率ランキング都道府県【2024年】｜1位東京都（6.6‰）",
   "seoDescription": "2024年の人口増減率の都道府県別ランキング。1位東京都（6.6‰）、最下位秋田県（-18.7‰）で-0.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

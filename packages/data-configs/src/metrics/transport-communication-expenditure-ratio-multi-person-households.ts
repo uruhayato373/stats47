@@ -47,6 +47,4 @@ export const transportCommunicationExpenditureRatioMultiPersonHouseholds: Metric
   "seoTitle": "交通・通信費割合ランキング都道府県【2024年】｜1位群馬県（19.9％）",
   "seoDescription": "2024年の交通・通信費割合の都道府県別ランキング。1位群馬県（19.9％）、最下位大阪府（10.7％）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

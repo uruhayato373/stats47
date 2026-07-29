@@ -45,6 +45,4 @@ export const roomUtilizationRate: MetricConfig = {
   "seoTitle": "客室稼働率ランキング都道府県【2024年】｜1位東京都（80.4％）",
   "seoDescription": "2024年の客室稼働率の都道府県別ランキング。1位東京都（80.4％）、最下位長野県（57.8％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

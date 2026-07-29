@@ -85,6 +85,4 @@ export const fireDepartmentBranchCountPer100Km2: MetricConfig = {
   "seoTitle": "消防団・分団数ランキング都道府県【2024年】｜1位東京都（57.3団）",
   "seoDescription": "2024年の消防団・分団数の都道府県別ランキング。1位東京都（57.3団）、最下位北海道（5.5団）で10.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

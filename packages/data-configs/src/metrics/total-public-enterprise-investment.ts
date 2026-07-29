@@ -85,6 +85,4 @@ export const totalPublicEnterpriseInvestment: MetricConfig = {
   "seoTitle": "公営企業総投資額ランキング都道府県【2022年】｜1位東京都（649,787,632）",
   "seoDescription": "2022年の公営企業総投資額の都道府県別ランキング。1位東京都（649,787,632）、最下位鳥取県（17,367,137）で37.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

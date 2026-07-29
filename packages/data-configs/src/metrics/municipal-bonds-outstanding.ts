@@ -41,6 +41,4 @@ export const municipalBondsOutstanding: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

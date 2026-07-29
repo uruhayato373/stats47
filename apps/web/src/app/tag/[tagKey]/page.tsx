@@ -5,18 +5,12 @@ import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 import { RightRailWidgets } from "@/components/rail";
 import { SurfaceCard } from "@/components/surface";
 
-import {
-    InContentAdSlot,
-    FooterAdSlot,
-    NativeAffiliateRow,
-} from "@/features/ads";
+import { FooterAdSlot, NativeAffiliateRow } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import {
     listAllUniqueTags,
     listArticleSummariesByTagKey,
 } from "@/features/blog/server";
-
-import { HUB_INCONTENT } from "@/lib/google-adsense";
 
 import type { Metadata } from "next";
 
@@ -141,8 +135,11 @@ export default async function TagArticlesPage({ params }: PageProps) {
             </div>
 
             {/* 記事内広告（一覧グリッド後。slotId 未発行の間は非表示） */}
-            <InContentAdSlot slot={HUB_INCONTENT} />
-
+            {/*
+              記事内広告は置かない。この面は単一の記事グリッドしか無く、直後の
+              ネイティブアフィリエイトは在庫ゼロで消えるため、置くとアフィリ在庫が
+              無い日にフッター広告と隣接して広告 2 連になる (2026-07-29 是正)。
+            */}
             {/* ネイティブアフィリエイト (D Phase 4) */}
             {nativeBanners.length > 0 && (
                 <div className="mt-10">

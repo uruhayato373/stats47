@@ -59,6 +59,4 @@ export const otherRentLandConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の家賃地代消費支出額ランキング都道府県【2024年】｜1位東京都（4,359円）",
   "seoDescription": "2024年の他の家賃地代消費支出額の都道府県別ランキング。1位東京都（4,359円）、最下位熊本県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

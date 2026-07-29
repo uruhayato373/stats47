@@ -51,6 +51,4 @@ export const numberOfHotelRooms: MetricConfig = {
   "seoTitle": "ホテル営業施設客室数ランキング都道府県【2017年】｜1位東京都（110,641室）",
   "seoDescription": "2017年のホテル営業施設客室数の都道府県別ランキング。1位東京都（110,641室）、最下位徳島県（3,195室）で34.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

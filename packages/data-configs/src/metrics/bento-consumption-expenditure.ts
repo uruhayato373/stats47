@@ -59,6 +59,4 @@ export const bentoConsumptionExpenditure: MetricConfig = {
   "seoTitle": "弁当消費支出額ランキング都道府県【2024年】｜1位大分県（26,945円）",
   "seoDescription": "2024年の弁当消費支出額の都道府県別ランキング。1位大分県（26,945円）、最下位石川県（12,344円）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

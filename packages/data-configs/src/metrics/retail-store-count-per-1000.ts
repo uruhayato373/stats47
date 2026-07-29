@@ -54,6 +54,4 @@ export const retailStoreCountPer1000: MetricConfig = {
   "seoTitle": "小売店数ランキング都道府県【2006年】｜1位島根県（13.61店）",
   "seoDescription": "2006年の小売店数の都道府県別ランキング。1位島根県（13.61店）、最下位神奈川県（6.68店）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

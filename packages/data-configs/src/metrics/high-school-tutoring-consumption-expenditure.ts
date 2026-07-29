@@ -59,6 +59,4 @@ export const highSchoolTutoringConsumptionExpenditure: MetricConfig = {
   "seoTitle": "高校補習教育・予備校消費支出額ランキング都道府県【2024年】｜1位埼玉県（25,969円）",
   "seoDescription": "2024年の高校補習教育・予備校消費支出額の都道府県別ランキング。1位埼玉県（25,969円）、最下位島根県（328円）で79.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

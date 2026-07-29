@@ -59,6 +59,4 @@ export const konbuTsukudaniConsumptionExpenditure: MetricConfig = {
   "seoTitle": "こんぶつくだ煮消費支出額ランキング都道府県【2024年】｜1位福島県（2,209円）",
   "seoDescription": "2024年のこんぶつくだ煮消費支出額の都道府県別ランキング。1位福島県（2,209円）、最下位沖縄県（467円）で4.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

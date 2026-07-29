@@ -99,6 +99,4 @@ export const foodBusinessFacilityPenalties: MetricConfig = {
   "seoTitle": "食品営業施設処分件数ランキング都道府県【2020年】｜1位大阪府（497件）",
   "seoDescription": "2020年の食品営業施設処分件数の都道府県別ランキング。1位大阪府（497件）、最下位富山県（1件）で497.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

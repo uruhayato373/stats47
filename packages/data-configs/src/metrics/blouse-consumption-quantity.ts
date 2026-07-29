@@ -59,6 +59,4 @@ export const blouseConsumptionQuantity: MetricConfig = {
   "seoTitle": "ブラウス消費量ランキング都道府県【2024年】｜1位山口県（1.05枚）",
   "seoDescription": "2024年のブラウス消費量の都道府県別ランキング。1位山口県（1.05枚）、最下位福岡県（0.41枚）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

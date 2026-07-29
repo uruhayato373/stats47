@@ -59,6 +59,4 @@ export const privateJuniorHighSchoolConsumptionExpenditure: MetricConfig = {
   "seoTitle": "私立中学校消費支出額ランキング都道府県【2024年】｜1位東京都（24,426円）",
   "seoDescription": "2024年の私立中学校消費支出額の都道府県別ランキング。1位東京都（24,426円）、最下位大分県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

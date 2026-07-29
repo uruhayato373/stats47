@@ -59,6 +59,4 @@ export const cosmeticCreamConsumptionExpenditure: MetricConfig = {
   "seoTitle": "化粧クリーム消費支出額ランキング都道府県【2024年】｜1位静岡県（6,169円）",
   "seoDescription": "2024年の化粧クリーム消費支出額の都道府県別ランキング。1位静岡県（6,169円）、最下位福井県（2,291円）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

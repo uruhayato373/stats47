@@ -62,6 +62,4 @@ export const nurseryUtilizationRate: MetricConfig = {
   "seoTitle": "保育所等利用率ランキング都道府県【2020年】｜1位鹿児島県（100.2％）",
   "seoDescription": "2020年の保育所等利用率の都道府県別ランキング。1位鹿児島県（100.2％）、最下位高知県（74.5％）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

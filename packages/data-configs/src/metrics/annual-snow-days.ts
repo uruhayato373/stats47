@@ -51,6 +51,4 @@ export const annualSnowDays: MetricConfig = {
   "seoTitle": "年間雪日数ランキング都道府県【2020年】｜1位北海道（118日）",
   "seoDescription": "2020年の年間雪日数の都道府県別ランキング。1位北海道（118日）、最下位沖縄県（0日）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

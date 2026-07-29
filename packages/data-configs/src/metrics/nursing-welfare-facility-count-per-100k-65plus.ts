@@ -65,6 +65,4 @@ export const nursingWelfareFacilityCountPer100k65plus: MetricConfig = {
   "seoTitle": "介護老人福祉施設数ランキング都道府県【2023年】｜1位島根県（40.5所）",
   "seoDescription": "2023年の介護老人福祉施設数の都道府県別ランキング。1位島根県（40.5所）、最下位愛知県（15.4所）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

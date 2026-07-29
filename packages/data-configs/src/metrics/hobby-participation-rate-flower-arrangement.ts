@@ -34,6 +34,4 @@ export const hobbyParticipationRateFlowerArrangement: MetricConfig = {
   "seoTitle": "華道の行動者率ランキング都道府県【2021年】｜1位島根県（2.1％）",
   "seoDescription": "2021年の華道の行動者率の都道府県別ランキング。1位島根県（2.1％）、最下位沖縄県（0.7％）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

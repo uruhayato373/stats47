@@ -56,6 +56,4 @@ export const juniorHighClubPer100Volleyball: MetricConfig = {
   "seoTitle": "中学バレーボール部の加入率、都道府県で差｜1位福井県8.94人 vs 最下位山梨県4.37人【2025年】",
   "seoDescription": "中学校のバレーボール部(運動部活動)の加盟部員数を中学生100人あたりに換算し都道府県別に比較。1位福井県(8.94人)、最下位山梨県(4.37人)で最大2.0倍の差。地図とグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -40,6 +40,4 @@ export const municipalResidentTax: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

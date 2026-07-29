@@ -83,6 +83,4 @@ export const libraryCountPerMillion: MetricConfig = {
   "seoTitle": "図書館数ランキング都道府県【2021年】｜1位山梨県（65.8館）",
   "seoDescription": "2021年の図書館数の都道府県別ランキング。1位山梨県（65.8館）、最下位神奈川県（9.2館）で7.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

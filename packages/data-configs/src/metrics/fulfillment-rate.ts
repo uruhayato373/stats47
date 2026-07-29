@@ -38,6 +38,4 @@ export const fulfillmentRate: MetricConfig = {
   "seoTitle": "充足率ランキング都道府県【2021年】｜1位長崎県（7％）",
   "seoDescription": "2021年の充足率の都道府県別ランキング。1位長崎県（7％）、最下位東京都（1.9％）で3.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

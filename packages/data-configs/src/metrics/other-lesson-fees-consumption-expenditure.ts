@@ -59,6 +59,4 @@ export const otherLessonFeesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の月謝類消費支出額ランキング都道府県【2024年】｜1位和歌山県（11,287円）",
   "seoDescription": "2024年の他の月謝類消費支出額の都道府県別ランキング。1位和歌山県（11,287円）、最下位富山県（606円）で18.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

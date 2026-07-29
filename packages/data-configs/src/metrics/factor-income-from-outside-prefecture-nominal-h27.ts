@@ -37,6 +37,4 @@ export const factorIncomeFromOutsidePrefectureNominalH27: MetricConfig = {
   },
   "seoTitle": "域外からの要素所得（名目）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

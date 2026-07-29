@@ -59,6 +59,4 @@ export const otherVegetablePicklesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の野菜の漬物消費支出額ランキング都道府県【2024年】｜1位京都府（8,269円）",
   "seoDescription": "2024年の他の野菜の漬物消費支出額の都道府県別ランキング。1位京都府（8,269円）、最下位高知県（1,938円）で4.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

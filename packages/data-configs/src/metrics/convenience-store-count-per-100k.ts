@@ -55,6 +55,4 @@ export const convenienceStoreCountPer100k: MetricConfig = {
   "seoTitle": "コンビニエンスストア数ランキング都道府県【2014年】｜1位北海道（40.6所）",
   "seoDescription": "2014年のコンビニエンスストア数の都道府県別ランキング。1位北海道（40.6所）、最下位奈良県（17.1所）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

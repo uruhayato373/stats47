@@ -52,6 +52,4 @@ export const giniCoefficientDisposableIncome: MetricConfig = {
   "seoTitle": "等価可処分所得ジニ係数ランキング都道府県【2019年】｜1位沖縄県（0）",
   "seoDescription": "2019年の等価可処分所得ジニ係数の都道府県別ランキング。1位沖縄県（0）、最下位沖縄県（0）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

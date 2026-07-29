@@ -52,6 +52,4 @@ export const denselyPopulatedArea: MetricConfig = {
   "seoTitle": "人口集中地区面積ランキング都道府県【2020年】｜1位東京都（1,091.78ｋｍ2）",
   "seoDescription": "2020年の人口集中地区面積の都道府県別ランキング。1位東京都（1,091.78ｋｍ2）、最下位島根県（41.15ｋｍ2）で26.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

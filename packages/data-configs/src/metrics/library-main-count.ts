@@ -52,6 +52,4 @@ export const libraryMainCount: MetricConfig = {
   "seoTitle": "図書館本館数ランキング都道府県【2015年】｜1位東京都（162館）",
   "seoDescription": "2015年の図書館本館数の都道府県別ランキング。1位東京都（162館）、最下位佐賀県（17館）で9.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

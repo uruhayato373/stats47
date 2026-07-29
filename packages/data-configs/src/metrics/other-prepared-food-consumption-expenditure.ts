@@ -59,6 +59,4 @@ export const otherPreparedFoodConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の調理食品のその他消費支出額ランキング都道府県【2024年】｜1位東京都（50,558円）",
   "seoDescription": "2024年の他の調理食品のその他消費支出額の都道府県別ランキング。1位東京都（50,558円）、最下位鹿児島県（28,966円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -1,7 +1,7 @@
 /**
  * impression 発火条件の純ロジック (ホーム注目ランキング home-featured-v1)。
  *
- * 条件は既存 AdImpressionTracker と同じ機械条件 (仕様 doc 28 §9.2):
+ * 条件は既存 AdImpressionTracker と同じ機械条件:
  * - 50% 以上表示 (IntersectionObserver threshold 0.5 — 呼び元が observer に設定する)
  * - 1 秒連続表示で 1 回だけ発火
  * - 1 秒経過前に viewport 外へ出たら timer 解除

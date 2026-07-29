@@ -48,6 +48,4 @@ export const portCount: MetricConfig = {
   "seoTitle": "港湾数ランキング都道府県【2024年】｜1位鹿児島県（62港）",
   "seoDescription": "2024年の港湾数の都道府県別ランキング。1位鹿児島県（62港）、最下位奈良県（0港）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -52,6 +52,4 @@ export const sewerageDrainagePopulation: MetricConfig = {
   "seoTitle": "下水道排水区域人口ランキング都道府県【2021年】｜1位東京都（13,750,230人）",
   "seoDescription": "2021年の下水道排水区域人口の都道府県別ランキング。1位東京都（13,750,230人）、最下位徳島県（161,841人）で85.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -51,6 +51,4 @@ export const averageTemperature: MetricConfig = {
   "seoTitle": "年平均気温ランキング都道府県【2024年】｜1位沖縄県（24.4℃）",
   "seoDescription": "2024年の年平均気温の都道府県別ランキング。1位沖縄県（24.4℃）、最下位北海道（10.5℃）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

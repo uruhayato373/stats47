@@ -38,6 +38,4 @@ export const secondaryIndustryEstablishmentRatio: MetricConfig = {
   "seoTitle": "第2次産業事業所数構成比ランキング都道府県【2014年】｜1位岐阜県（24.05％）",
   "seoDescription": "2014年の第2次産業事業所数構成比の都道府県別ランキング。1位岐阜県（24.05％）、最下位沖縄県（11.08％）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

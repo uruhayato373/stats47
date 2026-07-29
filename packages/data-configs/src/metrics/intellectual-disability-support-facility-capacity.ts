@@ -95,6 +95,4 @@ export const intellectualDisabilitySupportFacilityCapacity: MetricConfig = {
   "seoTitle": "知的障害者援護施設定員数ランキング都道府県【2011年】｜1位北海道（4,572人）",
   "seoDescription": "2011年の知的障害者援護施設定員数の都道府県別ランキング。1位北海道（4,572人）、最下位徳島県（153人）で29.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

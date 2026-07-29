@@ -58,6 +58,4 @@ export const housingExpenditureRatioMultiPersonHouseholds: MetricConfig = {
   "seoTitle": "住居費割合ランキング都道府県【2024年】｜1位宮城県（10.5％）",
   "seoDescription": "2024年の住居費割合の都道府県別ランキング。1位宮城県（10.5％）、最下位佐賀県（3.7％）で2.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

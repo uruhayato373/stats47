@@ -59,6 +59,4 @@ export const potatoConsumptionExpenditure: MetricConfig = {
   "seoTitle": "じゃがいも消費支出額ランキング都道府県【2024年】｜1位岐阜県（3,677円）",
   "seoDescription": "2024年のじゃがいも消費支出額の都道府県別ランキング。1位岐阜県（3,677円）、最下位岩手県（2,109円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const haircutConsumptionQuantity: MetricConfig = {
   "seoTitle": "カット代消費量ランキング都道府県【2024年】｜1位高知県（4.41回）",
   "seoDescription": "2024年のカット代消費量の都道府県別ランキング。1位高知県（4.41回）、最下位山梨県（1.34回）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

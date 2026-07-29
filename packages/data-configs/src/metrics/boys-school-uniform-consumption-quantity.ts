@@ -59,6 +59,4 @@ export const boysSchoolUniformConsumptionQuantity: MetricConfig = {
   "seoTitle": "男子用学校制服消費量ランキング都道府県【2024年】｜1位佐賀県（0.13着）",
   "seoDescription": "2024年の男子用学校制服消費量の都道府県別ランキング。1位佐賀県（0.13着）、最下位山形県（0着）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

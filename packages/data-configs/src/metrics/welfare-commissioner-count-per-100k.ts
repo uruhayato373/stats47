@@ -96,6 +96,4 @@ export const welfareCommissionerCountPer100k: MetricConfig = {
   "seoTitle": "民生委員数ランキング都道府県【2023年】｜1位秋田県（351.5人）",
   "seoDescription": "2023年の民生委員数の都道府県別ランキング。1位秋田県（351.5人）、最下位東京都（68.8人）で5.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

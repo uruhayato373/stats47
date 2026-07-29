@@ -47,6 +47,4 @@ export const juniorHighSchoolLongAbsenceRatioOver30daysPer1000: MetricConfig = {
   "seoTitle": "中学校長期欠席生徒比率ランキング都道府県【2023年】｜1位沖縄県（104.65‐）",
   "seoDescription": "2023年の中学校長期欠席生徒比率の都道府県別ランキング。1位沖縄県（104.65‐）、最下位岩手県（65.75‐）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

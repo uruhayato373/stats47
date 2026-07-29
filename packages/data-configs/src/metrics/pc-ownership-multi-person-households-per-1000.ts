@@ -51,6 +51,4 @@ export const pcOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "seoTitle": "パソコン所有数量ランキング都道府県【2014年】｜1位東京都（1,570台）",
   "seoDescription": "2014年のパソコン所有数量の都道府県別ランキング。1位東京都（1,570台）、最下位沖縄県（850台）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

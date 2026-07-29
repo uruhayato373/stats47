@@ -59,6 +59,4 @@ export const konbuConsumptionExpenditure: MetricConfig = {
   "seoTitle": "こんぶ消費支出額ランキング都道府県【2024年】｜1位富山県（1,618円）",
   "seoDescription": "2024年のこんぶ消費支出額の都道府県別ランキング。1位富山県（1,618円）、最下位高知県（403円）で4.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

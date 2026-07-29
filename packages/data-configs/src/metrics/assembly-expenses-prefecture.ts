@@ -52,6 +52,4 @@ export const assemblyExpensesPrefecture: MetricConfig = {
   "seoTitle": "議会費ランキング都道府県【2022年】｜1位東京都（5,007,912）",
   "seoDescription": "2022年の議会費の都道府県別ランキング。1位東京都（5,007,912）、最下位鳥取県（838,328）で6.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -86,6 +86,4 @@ export const sharedBurdenFeesPrefecture: MetricConfig = {
   "seoTitle": "分担金及び負担金ランキング都道府県【2022年】｜1位東京都（67,381,743）",
   "seoDescription": "2022年の分担金及び負担金の都道府県別ランキング。1位東京都（67,381,743）、最下位沖縄県（820,237）で82.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

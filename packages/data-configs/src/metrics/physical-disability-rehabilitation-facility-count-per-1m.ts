@@ -81,6 +81,4 @@ export const physicalDisabilityRehabilitationFacilityCountPer1m: MetricConfig = 
   "seoTitle": "身体障害者更生援護施設数ランキング都道府県【2011年】｜1位高知県（17.2所）",
   "seoDescription": "2011年の身体障害者更生援護施設数の都道府県別ランキング。1位高知県（17.2所）、最下位茨城県（0所）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

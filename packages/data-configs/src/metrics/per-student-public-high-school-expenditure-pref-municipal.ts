@@ -76,6 +76,4 @@ export const perStudentPublicHighSchoolExpenditurePrefMunicipal: MetricConfig = 
   "seoTitle": "公立高等学校費ランキング都道府県【2022年】｜1位高知県（1,805.5千円）",
   "seoDescription": "2022年の公立高等学校費の都道府県別ランキング。1位高知県（1,805.5千円）、最下位千葉県（898.9千円）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

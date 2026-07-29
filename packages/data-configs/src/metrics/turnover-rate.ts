@@ -38,6 +38,4 @@ export const turnoverRate: MetricConfig = {
   "seoTitle": "離職率ランキング都道府県【2022年】｜1位宮城県（4.6％）",
   "seoDescription": "2022年の離職率の都道府県別ランキング。1位宮城県（4.6％）、最下位福井県（3％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

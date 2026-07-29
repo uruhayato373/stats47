@@ -93,6 +93,4 @@ export const intellectualDisabilityRehabilitationCenterCasesPer100k: MetricConfi
   "seoTitle": "知的障害者更生相談所取扱実人員ランキング都道府県【2023年】｜1位長崎県（335人）",
   "seoDescription": "2023年の知的障害者更生相談所取扱実人員の都道府県別ランキング。1位長崎県（335人）、最下位群馬県（21.5人）で15.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

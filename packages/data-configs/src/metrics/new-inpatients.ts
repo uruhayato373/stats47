@@ -88,6 +88,4 @@ export const newInpatients: MetricConfig = {
   "seoTitle": "新入院患者数ランキング都道府県【2023年】｜1位東京都（1,615,503人）",
   "seoDescription": "2023年の新入院患者数の都道府県別ランキング。1位東京都（1,615,503人）、最下位鳥取県（85,502人）で18.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

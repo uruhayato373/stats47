@@ -65,6 +65,4 @@ export const publicBondExpensesNaturePrefecture: MetricConfig = {
   "seoTitle": "公債費ランキング都道府県【2022年】｜1位大阪府（399,371,320）",
   "seoDescription": "2022年の公債費の都道府県別ランキング。1位大阪府（399,371,320）、最下位鳥取県（50,160,830）で8.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

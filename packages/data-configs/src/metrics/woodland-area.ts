@@ -52,6 +52,4 @@ export const woodlandArea: MetricConfig = {
   "seoTitle": "森林面積ランキング都道府県【2019年】｜1位北海道（5,313,034ｈａ）",
   "seoDescription": "2019年の森林面積の都道府県別ランキング。1位北海道（5,313,034ｈａ）、最下位大阪府（56,961ｈａ）で93.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

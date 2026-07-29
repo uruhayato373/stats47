@@ -85,6 +85,4 @@ export const populationDensityPerKm2TotalArea: MetricConfig = {
   "seoTitle": "総面積１km2当たり人口密度ランキング都道府県【2024年】｜1位東京都（6,444.7人）",
   "seoDescription": "2024年の総面積１km2当たり人口密度の都道府県別ランキング。1位東京都（6,444.7人）、最下位北海道（64.3人）で100.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

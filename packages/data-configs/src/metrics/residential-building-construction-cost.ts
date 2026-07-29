@@ -54,6 +54,4 @@ export const residentialBuildingConstructionCost: MetricConfig = {
   "seoTitle": "着工居住用建築物工事費予定額ランキング都道府県【2024】東京 vs 高知で66倍の住宅投資格差",
   "seoDescription": "新築住宅にいくら投じられているか?──1位東京(約3.3兆円)、最下位高知(約499億円)で66倍の格差。住宅投資の一極集中を2024年ランキングで可視化、47都道府県を地図とグラフで比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

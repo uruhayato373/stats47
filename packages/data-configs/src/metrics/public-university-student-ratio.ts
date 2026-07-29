@@ -59,6 +59,4 @@ export const publicUniversityStudentRatio: MetricConfig = {
   "seoTitle": "公立大学学生数割合ランキング都道府県【2024年】｜1位高知県（39.8％）",
   "seoDescription": "2024年の公立大学学生数割合の都道府県別ランキング。1位高知県（39.8％）、最下位鹿児島県（0％）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

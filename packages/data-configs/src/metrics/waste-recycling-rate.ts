@@ -35,6 +35,4 @@ export const wasteRecyclingRate: MetricConfig = {
   "seoTitle": "ごみのリサイクル率ランキング都道府県【2023年】｜1位岡山県（29％）",
   "seoDescription": "2023年のごみのリサイクル率の都道府県別ランキング。1位岡山県（29％）、最下位和歌山県（11.9％）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

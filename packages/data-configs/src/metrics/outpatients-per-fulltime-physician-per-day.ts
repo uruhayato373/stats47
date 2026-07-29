@@ -51,6 +51,4 @@ export const outpatientsPerFulltimePhysicianPerDay: MetricConfig = {
   "seoTitle": "一般病院外来患者数ランキング都道府県【2023年】｜1位北海道（8.3人）",
   "seoDescription": "2023年の一般病院外来患者数の都道府県別ランキング。1位北海道（8.3人）、最下位沖縄県（4.7人）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

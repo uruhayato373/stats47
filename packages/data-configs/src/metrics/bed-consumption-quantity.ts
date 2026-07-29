@@ -59,6 +59,4 @@ export const bedConsumptionQuantity: MetricConfig = {
   "seoTitle": "ベッド消費量ランキング都道府県【2024年】｜1位宮城県（0.09台）",
   "seoDescription": "2024年のベッド消費量の都道府県別ランキング。1位宮城県（0.09台）、最下位高知県（0台）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

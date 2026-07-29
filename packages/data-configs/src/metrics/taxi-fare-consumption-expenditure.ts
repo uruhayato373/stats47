@@ -59,6 +59,4 @@ export const taxiFareConsumptionExpenditure: MetricConfig = {
   "seoTitle": "タクシー代消費支出額ランキング都道府県【2024年】｜1位奈良県（13,050円）",
   "seoDescription": "2024年のタクシー代消費支出額の都道府県別ランキング。1位奈良県（13,050円）、最下位佐賀県（1,782円）で7.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

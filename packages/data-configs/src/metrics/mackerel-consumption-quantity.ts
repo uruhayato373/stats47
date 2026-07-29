@@ -59,6 +59,4 @@ export const mackerelConsumptionQuantity: MetricConfig = {
   "seoTitle": "さば消費量ランキング都道府県【2024年】｜1位鹿児島県（1,282g）",
   "seoDescription": "2024年のさば消費量の都道府県別ランキング。1位鹿児島県（1,282g）、最下位山形県（269g）で4.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

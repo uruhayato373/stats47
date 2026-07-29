@@ -55,6 +55,4 @@ export const cleaningWorkerAnnualIncome: MetricConfig = {
   "seoTitle": "清掃・廃棄物処理従事者の平均年収ランキング都道府県【2023年】｜1位和歌山県（509.5万円）",
   "seoDescription": "2023年の清掃・廃棄物処理従事者の平均年収の都道府県別ランキング。1位和歌山県（509.5万円）、最下位佐賀県（299.7万円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

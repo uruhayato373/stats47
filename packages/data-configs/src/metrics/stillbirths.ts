@@ -77,6 +77,4 @@ export const stillbirths: MetricConfig = {
   "seoTitle": "死産数ランキング都道府県【2023年】｜1位東京都（1,934胎）",
   "seoDescription": "2023年の死産数の都道府県別ランキング。1位東京都（1,934胎）、最下位島根県（65胎）で29.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

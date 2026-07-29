@@ -65,6 +65,4 @@ export const middleAgedJobRatio45plus: MetricConfig = {
   "seoTitle": "就職者に占める中高年齢者の比率ランキング都道府県【2018年】｜1位神奈川県（48％）",
   "seoDescription": "2018年の就職者に占める中高年齢者の比率の都道府県別ランキング。1位神奈川県（48％）、最下位新潟県（33.8％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

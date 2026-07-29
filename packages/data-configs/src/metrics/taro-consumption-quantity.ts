@@ -59,6 +59,4 @@ export const taroConsumptionQuantity: MetricConfig = {
   "seoTitle": "さといも消費量ランキング都道府県【2024年】｜1位山形県（2,368g）",
   "seoDescription": "2024年のさといも消費量の都道府県別ランキング。1位山形県（2,368g）、最下位沖縄県（247g）で9.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

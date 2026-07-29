@@ -59,6 +59,4 @@ export const wakameConsumptionQuantity: MetricConfig = {
   "seoTitle": "わかめ消費量ランキング都道府県【2024年】｜1位岩手県（1,818g）",
   "seoDescription": "2024年のわかめ消費量の都道府県別ランキング。1位岩手県（1,818g）、最下位沖縄県（224g）で8.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

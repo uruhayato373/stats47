@@ -81,6 +81,4 @@ export const publicSwimmingPoolCountPerMillion: MetricConfig = {
   "seoTitle": "水泳プール数ランキング都道府県【2021年】｜1位北海道（52.9施設）",
   "seoDescription": "2021年の水泳プール数の都道府県別ランキング。1位北海道（52.9施設）、最下位埼玉県（9.9施設）で5.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

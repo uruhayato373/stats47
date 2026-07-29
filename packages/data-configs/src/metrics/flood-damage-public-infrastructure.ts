@@ -52,6 +52,4 @@ export const floodDamagePublicInfrastructure: MetricConfig = {
   "seoTitle": "水害公共土木施設被害額ランキング都道府県【2014年】｜1位高知県（20,091百万円）",
   "seoDescription": "2014年の水害公共土木施設被害額の都道府県別ランキング。1位高知県（20,091百万円）、最下位茨城県（122百万円）で164.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

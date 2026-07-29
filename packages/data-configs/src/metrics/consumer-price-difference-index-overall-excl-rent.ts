@@ -55,6 +55,4 @@ export const consumerPriceDifferenceIndexOverallExclRent: MetricConfig = {
   "seoTitle": "消費者物価地域差指数ランキング都道府県【2024年】｜1位北海道（103‐）",
   "seoDescription": "2024年の消費者物価地域差指数の都道府県別ランキング。1位北海道（103‐）、最下位群馬県（96.8‐）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

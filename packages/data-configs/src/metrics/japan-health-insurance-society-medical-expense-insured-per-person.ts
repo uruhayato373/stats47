@@ -52,6 +52,4 @@ export const japanHealthInsuranceSocietyMedicalExpenseInsuredPerPerson: MetricCo
   "seoTitle": "全国保険協会管掌健康保険医療費ランキング都道府県【2023年】｜1位北海道（214,840円）",
   "seoDescription": "2023年の全国保険協会管掌健康保険医療費の都道府県別ランキング。1位北海道（214,840円）、最下位新潟県（175,435円）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

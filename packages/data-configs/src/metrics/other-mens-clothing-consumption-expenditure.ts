@@ -59,6 +59,4 @@ export const otherMensClothingConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の男子用洋服消費支出額ランキング都道府県【2024年】｜1位群馬県（9,619円）",
   "seoDescription": "2024年の他の男子用洋服消費支出額の都道府県別ランキング。1位群馬県（9,619円）、最下位富山県（2,093円）で4.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -103,6 +103,4 @@ export const trafficAccidentCount: MetricConfig = {
   "seoTitle": "交通事故発生件数ランキング都道府県【2024年】｜1位東京都（30,103件）",
   "seoDescription": "2024年の交通事故発生件数の都道府県別ランキング。1位東京都（30,103件）、最下位鳥取県（622件）で48.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

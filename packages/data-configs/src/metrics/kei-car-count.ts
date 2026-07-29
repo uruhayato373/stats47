@@ -52,6 +52,4 @@ export const keiCarCount: MetricConfig = {
   "seoTitle": "軽自動車等台数ランキング都道府県【2024年】｜1位愛知県（2,201,199台）",
   "seoDescription": "2024年の軽自動車等台数の都道府県別ランキング。1位愛知県（2,201,199台）、最下位鳥取県（281,590台）で7.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

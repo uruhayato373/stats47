@@ -59,6 +59,4 @@ export const dressShirtConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ワイシャツ消費支出額ランキング都道府県【2024年】｜1位埼玉県（2,526円）",
   "seoDescription": "2024年のワイシャツ消費支出額の都道府県別ランキング。1位埼玉県（2,526円）、最下位三重県（720円）で3.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

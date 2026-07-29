@@ -34,6 +34,4 @@ export const hobbyParticipationRateInstrument: MetricConfig = {
   "seoTitle": "楽器の演奏の行動者率ランキング都道府県【2021年】｜1位東京都（14.5％）",
   "seoDescription": "2021年の楽器の演奏の行動者率の都道府県別ランキング。1位東京都（14.5％）、最下位青森県（5.5％）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

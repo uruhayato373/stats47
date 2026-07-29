@@ -80,6 +80,4 @@ export const criminalRecognitionCountOfViolentCrimeRate: MetricConfig = {
   "seoTitle": "刑法犯認知件数に占める粗暴犯の割合ランキング都道府県【2023年】｜1位山形県（16.31％）",
   "seoDescription": "2023年の刑法犯認知件数に占める粗暴犯の割合の都道府県別ランキング。1位山形県（16.31％）、最下位栃木県（5.03％）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const flavorSeasoningConsumptionExpenditure: MetricConfig = {
   "seoTitle": "風味調味料消費支出額ランキング都道府県【2024年】｜1位千葉県（3,401円）",
   "seoDescription": "2024年の風味調味料消費支出額の都道府県別ランキング。1位千葉県（3,401円）、最下位福島県（1,963円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

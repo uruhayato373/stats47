@@ -77,6 +77,4 @@ export const physicalDisabilityRehabilitationCasesPer1000: MetricConfig = {
   "seoTitle": "身体障害者更生援護取扱実人員ランキング都道府県【2007年】｜1位兵庫県（39.1人）",
   "seoDescription": "2007年の身体障害者更生援護取扱実人員の都道府県別ランキング。1位兵庫県（39.1人）、最下位茨城県（5.74人）で6.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

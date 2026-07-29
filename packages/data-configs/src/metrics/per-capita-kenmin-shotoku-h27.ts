@@ -34,6 +34,4 @@ export const perCapitaKenminShotokuH27: MetricConfig = {
   },
   "seoTitle": "１人当たり県民所得（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

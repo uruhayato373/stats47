@@ -34,6 +34,4 @@ export const sportsParticipationRateCycling: MetricConfig = {
   "seoTitle": "サイクリングの行動者率ランキング都道府県【2021年】｜1位東京都（14.4％）",
   "seoDescription": "2021年のサイクリングの行動者率の都道府県別ランキング。1位東京都（14.4％）、最下位長崎県（2.7％）で5.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

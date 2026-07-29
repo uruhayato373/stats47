@@ -75,6 +75,4 @@ export const maintenanceRepairExpensesPrefecture: MetricConfig = {
   "seoTitle": "維持補修費ランキング都道府県【2022年】｜1位東京都（113,039,852）",
   "seoDescription": "2022年の維持補修費の都道府県別ランキング。1位東京都（113,039,852）、最下位千葉県（2,062,254）で54.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

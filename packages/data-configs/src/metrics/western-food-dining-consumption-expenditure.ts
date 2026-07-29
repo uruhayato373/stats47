@@ -59,6 +59,4 @@ export const westernFoodDiningConsumptionExpenditure: MetricConfig = {
   "seoTitle": "洋食消費支出額ランキング都道府県【2024年】｜1位栃木県（23,173円）",
   "seoDescription": "2024年の洋食消費支出額の都道府県別ランキング。1位栃木県（23,173円）、最下位愛媛県（5,731円）で4.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const butterConsumptionQuantity: MetricConfig = {
   "seoTitle": "バター消費量ランキング都道府県【2024年】｜1位京都府（825g）",
   "seoDescription": "2024年のバター消費量の都道府県別ランキング。1位京都府（825g）、最下位長崎県（384g）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

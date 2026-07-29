@@ -35,6 +35,4 @@ export const housingLandLiabilitiesRatioMultiPersonHouseholds: MetricConfig = {
   "seoTitle": "住宅・土地のための負債割合ランキング都道府県【2019年】｜1位神奈川県（91.8％）",
   "seoDescription": "2019年の住宅・土地のための負債割合の都道府県別ランキング。1位神奈川県（91.8％）、最下位群馬県（77.1％）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

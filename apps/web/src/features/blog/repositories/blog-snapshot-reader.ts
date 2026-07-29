@@ -160,3 +160,37 @@ export async function readBlogSnapshotMetaFromR2(): Promise<{
   const snapshot = await loadSnapshot();
   return { tagMeta: snapshot.tagMeta, generatedAt: snapshot.generatedAt };
 }
+
+export interface BlogIndexPageResult {
+  articles: Article[];
+  meta: { tagMeta: SnapshotTagMeta[]; generatedAt: string };
+  /** 次ページが存在するか (総件数は数えない) */
+  hasNextPage: boolean;
+}
+
+/**
+ * `/blog` 一覧が 1 リクエストで必要とするものを snapshot 1 回読みで返す。
+ *
+ * 個別 reader (`readLatestArticlesFromR2` / `readBlogSnapshotMetaFromR2`) を並べると、
+ * module cache を持たない設計上、同一リクエスト内で full snapshot を 3 回取得していた
+ * (記事 + meta + 次ページ判定)。module cache を足すと re-push 直後の stale を招くため、
+ * 「1 回 load して必要なものを全部返す」形にする。
+ *
+ * 次ページ判定は `pageSize + 1` 件を切り出して余りの有無で見る (総件数を数えない)。
+ */
+export async function readBlogIndexPageFromR2(
+  pageSize: number,
+  offset: number,
+): Promise<BlogIndexPageResult> {
+  const snapshot = await loadSnapshot();
+  const published = snapshot.articles
+    .filter((a) => a.published === true)
+    .sort(compareByPublishedAtDesc);
+  const window = published.slice(offset, offset + pageSize + 1);
+
+  return {
+    articles: window.slice(0, pageSize).map(toArticle),
+    meta: { tagMeta: snapshot.tagMeta, generatedAt: snapshot.generatedAt },
+    hasNextPage: window.length > pageSize,
+  };
+}

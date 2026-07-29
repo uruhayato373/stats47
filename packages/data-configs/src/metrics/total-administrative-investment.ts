@@ -75,6 +75,4 @@ export const totalAdministrativeInvestment: MetricConfig = {
   "seoTitle": "行政総投資額ランキング都道府県【2022年】｜1位東京都（2,589,062,062）",
   "seoDescription": "2022年の行政総投資額の都道府県別ランキング。1位東京都（2,589,062,062）、最下位香川県（167,393,339）で15.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

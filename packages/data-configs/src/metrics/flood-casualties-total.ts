@@ -51,6 +51,4 @@ export const floodCasualtiesTotal: MetricConfig = {
   "seoTitle": "水害死傷者数（計）ランキング都道府県【2014年】｜1位広島県（145人）",
   "seoDescription": "2014年の水害死傷者数（計）の都道府県別ランキング。1位広島県（145人）、最下位大分県（0人）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

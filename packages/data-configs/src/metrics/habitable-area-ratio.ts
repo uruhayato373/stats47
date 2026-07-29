@@ -36,6 +36,4 @@ export const habitableAreaRatio: MetricConfig = {
   "seoTitle": "可住地面積割合ランキング都道府県【2024年】｜1位大阪府（70％）",
   "seoDescription": "2024年の可住地面積割合の都道府県別ランキング。1位大阪府（70％）、最下位高知県（16.3％）で4.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -60,6 +60,4 @@ export const realBalanceRatio: MetricConfig = {
   "seoTitle": "実質収支比率ランキング都道府県【2022年】｜1位島根県（7.5％）",
   "seoDescription": "2022年の実質収支比率の都道府県別ランキング。1位島根県（7.5％）、最下位長崎県（0.3％）で25.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

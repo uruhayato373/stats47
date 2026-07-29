@@ -65,6 +65,4 @@ export const highSchoolCountPer100k1517: MetricConfig = {
   "seoTitle": "高等学校数ランキング都道府県【2024年】｜1位島根県（245.7校）",
   "seoDescription": "2024年の高等学校数の都道府県別ランキング。1位島根県（245.7校）、最下位神奈川県（96.8校）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

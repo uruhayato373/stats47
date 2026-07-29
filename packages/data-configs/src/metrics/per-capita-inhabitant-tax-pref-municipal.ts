@@ -87,6 +87,4 @@ export const perCapitaInhabitantTaxPrefMunicipal: MetricConfig = {
   "seoTitle": "住民税ランキング都道府県【2022年】｜1位東京都（237.6千円）",
   "seoDescription": "2022年の住民税の都道府県別ランキング。1位東京都（237.6千円）、最下位青森県（81.3千円）で2.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

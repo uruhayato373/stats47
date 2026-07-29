@@ -59,6 +59,4 @@ export const blanketConsumptionExpenditure: MetricConfig = {
   "seoTitle": "毛布消費支出額ランキング都道府県【2024年】｜1位富山県（1,045円）",
   "seoDescription": "2024年の毛布消費支出額の都道府県別ランキング。1位富山県（1,045円）、最下位香川県（68円）で15.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

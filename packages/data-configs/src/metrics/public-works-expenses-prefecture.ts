@@ -77,6 +77,4 @@ export const publicWorksExpensesPrefecture: MetricConfig = {
   "seoTitle": "土木費ランキング都道府県【2022年】｜1位東京都（809,559,147）",
   "seoDescription": "2022年の土木費の都道府県別ランキング。1位東京都（809,559,147）、最下位香川県（48,631,187）で16.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

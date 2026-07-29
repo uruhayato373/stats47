@@ -35,6 +35,4 @@ export const apartmentRatio: MetricConfig = {
   "seoTitle": "共同住宅比率ランキング都道府県【2023年】｜1位東京都（71.6％）",
   "seoDescription": "2023年の共同住宅比率の都道府県別ランキング。1位東京都（71.6％）、最下位秋田県（18.6％）で3.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

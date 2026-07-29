@@ -59,6 +59,4 @@ export const publicUniversityConsumptionExpenditure: MetricConfig = {
   "seoTitle": "国公立大学消費支出額ランキング都道府県【2024年】｜1位徳島県（21,528円）",
   "seoDescription": "2024年の国公立大学消費支出額の都道府県別ランキング。1位徳島県（21,528円）、最下位和歌山県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

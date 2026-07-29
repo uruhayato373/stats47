@@ -60,6 +60,4 @@ export const currentSavingsBalanceMultiPersonHouseholds: MetricConfig = {
   "seoTitle": "貯蓄現在高ランキング都道府県【2014年】｜1位東京都（19,669千円）",
   "seoDescription": "2014年の貯蓄現在高の都道府県別ランキング。1位東京都（19,669千円）、最下位沖縄県（5,747千円）で3.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

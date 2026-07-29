@@ -59,6 +59,4 @@ export const pastaConsumptionQuantity: MetricConfig = {
   "seoTitle": "パスタ消費なぜ埼玉1位？西日本は2.3倍差の下位圏、麺文化の地域分断（2024）",
   "seoDescription": "パスタ消費量1位は埼玉県（4,368g）、最下位は山口県（1,880g）で2.3倍差。「麺の棲み分け」が西日本の低消費を生む構造を47都道府県データで解説（2024年）。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

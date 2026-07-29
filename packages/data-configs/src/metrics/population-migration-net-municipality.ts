@@ -9,8 +9,8 @@ import { createMetric } from "../create-metric";
  *   - 確定後 `/page-data-batch --metric population-migration-net-municipality` で R2 投入
  *   - 現状: `apps/remotion/public/migration-flow/municipalities/{NN}.json` の 2026-05-25 snapshot を継続使用
  *
- * createMetric ファクトリ採用の PoC (T4)。display/calculation/isFeatured/featuredOrder は
- * ファクトリ既定値 (conversionFactor:1, decimalPlaces:0 / isCalculated:false / false / 0) に委譲。
+ * createMetric ファクトリ採用の PoC (T4)。display/calculation は
+ * ファクトリ既定値 (conversionFactor:1, decimalPlaces:0 / isCalculated:false) に委譲。
  */
 export const populationMigrationNetMunicipality = createMetric({
   key: "population-migration-net-municipality",

@@ -34,6 +34,4 @@ export const sportsParticipationRateKendo: MetricConfig = {
   "seoTitle": "剣道の行動者率ランキング都道府県【2021年】｜1位長野県（0.9％）",
   "seoDescription": "2021年の剣道の行動者率の都道府県別ランキング。1位長野県（0.9％）、最下位徳島県（0.2％）で4.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

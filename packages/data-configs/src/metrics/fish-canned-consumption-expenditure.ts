@@ -59,6 +59,4 @@ export const fishCannedConsumptionExpenditure: MetricConfig = {
   "seoTitle": "魚介の缶詰消費支出額ランキング都道府県【2024年】｜1位沖縄県（5,512円）",
   "seoDescription": "2024年の魚介の缶詰消費支出額の都道府県別ランキング。1位沖縄県（5,512円）、最下位福井県（1,867円）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const otherTeaLeavesConsumptionQuantity: MetricConfig = {
   "seoTitle": "他の茶葉消費量ランキング都道府県【2024年】｜1位岡山県（1,969g）",
   "seoDescription": "2024年の他の茶葉消費量の都道府県別ランキング。1位岡山県（1,969g）、最下位栃木県（468g）で4.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

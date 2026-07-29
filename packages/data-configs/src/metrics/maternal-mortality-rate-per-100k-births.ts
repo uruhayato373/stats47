@@ -69,6 +69,4 @@ export const maternalMortalityRatePer100kBirths: MetricConfig = {
   "seoTitle": "妊娠等による死亡率ランキング都道府県【2023年】｜1位新潟県（26.9‐）",
   "seoDescription": "2023年の妊娠等による死亡率の都道府県別ランキング。1位新潟県（26.9‐）、最下位宮崎県（0‐）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

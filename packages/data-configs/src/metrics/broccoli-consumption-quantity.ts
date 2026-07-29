@@ -59,6 +59,4 @@ export const broccoliConsumptionQuantity: MetricConfig = {
   "seoTitle": "ブロッコリー消費量ランキング都道府県【2024年】｜1位埼玉県（6,629g）",
   "seoDescription": "2024年のブロッコリー消費量の都道府県別ランキング。1位埼玉県（6,629g）、最下位三重県（3,180g）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

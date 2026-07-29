@@ -58,6 +58,4 @@ export const perCapitaChildWelfareExpenditureUnder17PrefMunicipal: MetricConfig 
   },
   "groupKey": "child-welfare-expenses-prefecture",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

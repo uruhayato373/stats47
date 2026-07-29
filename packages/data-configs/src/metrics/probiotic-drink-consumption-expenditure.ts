@@ -59,6 +59,4 @@ export const probioticDrinkConsumptionExpenditure: MetricConfig = {
   "seoTitle": "乳酸菌飲料消費支出額ランキング都道府県【2024年】｜1位和歌山県（9,912円）",
   "seoDescription": "2024年の乳酸菌飲料消費支出額の都道府県別ランキング。1位和歌山県（9,912円）、最下位大分県（2,984円）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

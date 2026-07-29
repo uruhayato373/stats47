@@ -86,6 +86,4 @@ export const nationalTreasuryDisbursementPrefecture: MetricConfig = {
   "seoTitle": "国庫支出金ランキング都道府県【2022年】｜1位東京都（1,258,540,739）",
   "seoDescription": "2022年の国庫支出金の都道府県別ランキング。1位東京都（1,258,540,739）、最下位香川県（100,876,252）で12.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

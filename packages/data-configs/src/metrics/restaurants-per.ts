@@ -35,6 +35,4 @@ export const restaurantsPer: MetricConfig = {
   },
   "groupKey": "restaurants-per",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

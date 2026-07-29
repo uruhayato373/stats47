@@ -53,6 +53,4 @@ export const trafficAccidentDeathsPer100k: MetricConfig = {
   "seoTitle": "交通事故死者数ランキング都道府県【2024年】｜1位徳島県（4.8人）",
   "seoDescription": "2024年の交通事故死者数の都道府県別ランキング。1位徳島県（4.8人）、最下位東京都（1人）で4.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

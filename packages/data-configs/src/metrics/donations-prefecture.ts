@@ -65,6 +65,4 @@ export const donationsPrefecture: MetricConfig = {
   "seoTitle": "寄附金ランキング都道府県【2022年】｜1位山形県（2,378,211）",
   "seoDescription": "2022年の寄附金の都道府県別ランキング。1位山形県（2,378,211）、最下位三重県（47,908）で49.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -57,6 +57,4 @@ export const electricityConsumptionQuantity: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

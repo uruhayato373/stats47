@@ -35,6 +35,4 @@ export const seweragePenetrationRate2012on: MetricConfig = {
   },
   "seoTitle": "下水道普及率（2012－）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

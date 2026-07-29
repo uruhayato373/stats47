@@ -60,6 +60,4 @@ export const largeRetailStoreCountPer100k: MetricConfig = {
   "seoTitle": "大型小売店数ランキング都道府県【2006年】｜1位東京都（16.82店）",
   "seoDescription": "2006年の大型小売店数の都道府県別ランキング。1位東京都（16.82店）、最下位島根県（8.41店）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -87,6 +87,4 @@ export const urbanParkCountPer100km2: MetricConfig = {
   "seoTitle": "都市公園数ランキング都道府県【2023年】｜1位東京都（616.79所）",
   "seoDescription": "2023年の都市公園数の都道府県別ランキング。1位東京都（616.79所）、最下位秋田県（18.93所）で32.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

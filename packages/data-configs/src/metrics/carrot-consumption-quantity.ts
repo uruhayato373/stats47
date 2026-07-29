@@ -59,6 +59,4 @@ export const carrotConsumptionQuantity: MetricConfig = {
   "seoTitle": "にんじん消費量ランキング都道府県【2024年】｜1位熊本県（9,430g）",
   "seoDescription": "2024年のにんじん消費量の都道府県別ランキング。1位熊本県（9,430g）、最下位福井県（5,717g）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -70,6 +70,4 @@ export const disasterRecoveryExpenditureRatioPrefFinance: MetricConfig = {
   "seoTitle": "災害復旧費割合ランキング都道府県【2022年】｜1位熊本県（5％）",
   "seoDescription": "2022年の災害復旧費割合の都道府県別ランキング。1位熊本県（5％）、最下位大阪府（0.01％）で500.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

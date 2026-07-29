@@ -59,6 +59,4 @@ export const fishPasteConsumptionExpenditure: MetricConfig = {
   "seoTitle": "かまぼこ消費支出額ランキング都道府県【2024年】｜1位宮城県（7,074円）",
   "seoDescription": "2024年のかまぼこ消費支出額の都道府県別ランキング。1位宮城県（7,074円）、最下位滋賀県（2,246円）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

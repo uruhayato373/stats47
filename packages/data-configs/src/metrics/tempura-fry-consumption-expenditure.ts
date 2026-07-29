@@ -59,6 +59,4 @@ export const tempuraFryConsumptionExpenditure: MetricConfig = {
   "seoTitle": "天ぷら・フライ消費支出額ランキング都道府県【2024年】｜1位新潟県（18,925円）",
   "seoDescription": "2024年の天ぷら・フライ消費支出額の都道府県別ランキング。1位新潟県（18,925円）、最下位奈良県（9,752円）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

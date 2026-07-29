@@ -35,6 +35,4 @@ export const employeeRatio59EmployeeEstablishmentsPrivate: MetricConfig = {
   "seoTitle": "5〜9人事業所の従業者割合ランキング都道府県【2021年】｜1位高知県（14.94％）",
   "seoDescription": "2021年の5〜9人事業所の従業者割合の都道府県別ランキング。1位高知県（14.94％）、最下位東京都（8.47％）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

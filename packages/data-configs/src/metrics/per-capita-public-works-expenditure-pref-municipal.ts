@@ -97,6 +97,4 @@ export const perCapitaPublicWorksExpenditurePrefMunicipal: MetricConfig = {
   "seoTitle": "土木費ランキング都道府県【2022年】｜1位福島県（204.6千円）",
   "seoDescription": "2022年の土木費の都道府県別ランキング。1位福島県（204.6千円）、最下位千葉県（54.7千円）で3.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

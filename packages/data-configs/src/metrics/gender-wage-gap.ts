@@ -38,6 +38,4 @@ export const genderWageGap: MetricConfig = {
   "seoTitle": "男女間賃金格差（女性/男性）ランキング都道府県【2022年】｜1位愛媛県（89.7%）",
   "seoDescription": "2022年の男女間賃金格差（女性/男性）の都道府県別ランキング。1位愛媛県（89.7%）、最下位宮城県（67.5%）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

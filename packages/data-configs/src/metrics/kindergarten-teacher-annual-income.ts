@@ -49,6 +49,4 @@ export const kindergartenTeacherAnnualIncome: MetricConfig = {
   "seoTitle": "幼稚園教員・保育教諭の平均年収ランキング都道府県【2023年】｜1位茨城県（451.6万円）",
   "seoDescription": "2023年の幼稚園教員・保育教諭の平均年収の都道府県別ランキング。1位茨城県（451.6万円）、最下位福島県（347.6万円）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

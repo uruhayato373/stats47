@@ -59,6 +59,4 @@ export const gameSoftwareConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ゲームソフト等消費支出額ランキング都道府県【2024年】｜1位岡山県（6,991円）",
   "seoDescription": "2024年のゲームソフト等消費支出額の都道府県別ランキング。1位岡山県（6,991円）、最下位和歌山県（586円）で11.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -60,6 +60,4 @@ export const theaterMusicHall: MetricConfig = {
   "seoTitle": "劇場・音楽堂等数ランキング都道府県【2021年】｜1位東京都（132施設）",
   "seoDescription": "2021年の劇場・音楽堂等数の都道府県別ランキング。1位東京都（132施設）、最下位徳島県（13施設）で10.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

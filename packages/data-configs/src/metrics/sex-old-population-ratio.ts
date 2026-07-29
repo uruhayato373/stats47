@@ -38,6 +38,4 @@ export const sexOldPopulationRatio: MetricConfig = {
   },
   "seoTitle": "人口性比（65歳以上人口) (A130301/A130302)",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

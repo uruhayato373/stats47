@@ -59,6 +59,4 @@ export const travelBagConsumptionQuantity: MetricConfig = {
   "seoTitle": "旅行用かばん消費量ランキング都道府県【2024年】｜1位滋賀県（0.15個）",
   "seoDescription": "2024年の旅行用かばん消費量の都道府県別ランキング。1位滋賀県（0.15個）、最下位和歌山県（0.02個）で6.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

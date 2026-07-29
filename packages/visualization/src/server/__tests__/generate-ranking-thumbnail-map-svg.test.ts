@@ -75,8 +75,10 @@ describe('generateRankingThumbnailMapSvg', () => {
     expect(svg).not.toContain('47位');
     expect(svg).not.toContain('linearGradient');
 
+    // compact path は `M<x>,<y> <x>,<y> ...Z` 形式で、先頭以外に命令文字を持たない。
+    // 輪郭の実際の広がりを見るため、命令文字の有無に関わらず全座標対を読む。
     const coordinates = Array.from(
-      svg.matchAll(/[ML](-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g),
+      svg.matchAll(/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g),
       (match) => [Number(match[1]), Number(match[2])] as const
     );
     const bounds = coordinates.reduce(
@@ -96,5 +98,54 @@ describe('generateRankingThumbnailMapSvg', () => {
     const renderedWidth = bounds.maxX - bounds.minX;
     const renderedHeight = bounds.maxY - bounds.minY;
     expect(renderedWidth / renderedHeight).toBeGreaterThan(1.4);
+  });
+
+  it('compact path で 1枚あたり 100KB 未満に収まり、46都道府県を保つ', () => {
+    const svg = generateRankingThumbnailMapSvg(rows, { idSuffix: 'size' });
+
+    // 未簡略化 path の頃は1枚 1.7MB あり、home の RSC payload を肥大させていた。
+    expect(new TextEncoder().encode(svg).length).toBeLessThan(100_000);
+    expect(svg.match(/<path /g)).toHaveLength(46);
+    expect(svg).toContain('viewBox="0 0 320 190"');
+    expect(svg).toContain('data-map-rotation="clockwise-32"');
+    expect(svg).toContain('data-okinawa="excluded"');
+    expect(svg).toContain('data-map-format="compact-v1"');
+    expect(svg).not.toMatch(/NaN|undefined/);
+  });
+
+  it('同じ入力なら完全に同じ文字列を返す (静的地理の再利用が結果を汚さない)', () => {
+    const first = generateRankingThumbnailMapSvg(rows, { idSuffix: 'a' });
+    const second = generateRankingThumbnailMapSvg(rows, { idSuffix: 'a' });
+
+    expect(second).toBe(first);
+  });
+
+  it('1位リングと配色は順位に追従し、reversed で逆転する', () => {
+    // 沖縄(47)は地図から除外されるため、両端が本土に来る01-46で検証する。
+    const mainlandRows = rows
+      .filter((row) => row.areaCode !== '47000')
+      .map((row) => ({ areaCode: row.areaCode, value: row.value }));
+    const ascending = generateRankingThumbnailMapSvg(mainlandRows, {
+      idSuffix: 'asc',
+    });
+    const reversed = generateRankingThumbnailMapSvg(mainlandRows, {
+      idSuffix: 'rev',
+      isReversed: true,
+    });
+    const greens = generateRankingThumbnailMapSvg(mainlandRows, {
+      idSuffix: 'green',
+      colorScheme: 'interpolateGreens',
+    });
+
+    // 1位だけが強調リングを持つ。
+    expect(ascending.match(/stroke="#f59e0b"/g)).toHaveLength(1);
+    expect(reversed.match(/stroke="#f59e0b"/g)).toHaveLength(1);
+    // reversed は最下位が1位になるため、リングの付く path が入れ替わる。
+    const ringIndex = (svg: string) =>
+      svg.split('<path ').findIndex((part) => part.includes('#f59e0b'));
+    expect(ringIndex(reversed)).not.toBe(ringIndex(ascending));
+    // colorScheme は fill だけを変え、地理形状は共有する。
+    expect(greens).not.toBe(ascending);
+    expect(greens.match(/<path /g)).toHaveLength(46);
   });
 });

@@ -65,6 +65,4 @@ export const policeOfficerCountPerPopulation: MetricConfig = {
   "seoTitle": "警察官数ランキング都道府県【2024年】｜1位東京都（3.08人）",
   "seoDescription": "2024年の警察官数の都道府県別ランキング。1位東京都（3.08人）、最下位埼玉県（1.6人）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

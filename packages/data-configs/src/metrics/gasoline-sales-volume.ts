@@ -86,6 +86,4 @@ export const gasolineSalesVolume: MetricConfig = {
   "seoTitle": "ガソリン販売量ランキング都道府県【2023年】｜1位東京都（4,244,833ＫＬ）",
   "seoDescription": "2023年のガソリン販売量の都道府県別ランキング。1位東京都（4,244,833ＫＬ）、最下位島根県（249,750ＫＬ）で17.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -54,6 +54,4 @@ export const scheduledSalaryMale: MetricConfig = {
   "seoTitle": "所定内給与額（男）ランキング都道府県【2024年】｜1位東京都（440.8千円）",
   "seoDescription": "2024年の所定内給与額（男）の都道府県別ランキング。1位東京都（440.8千円）、最下位沖縄県（286.9千円）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

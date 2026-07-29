@@ -63,6 +63,4 @@ export const publicHealthNurseCountPer100k: MetricConfig = {
   "seoTitle": "保健師数ランキング都道府県【2022年】｜1位長野県（91.9人）",
   "seoDescription": "2022年の保健師数の都道府県別ランキング。1位長野県（91.9人）、最下位大阪府（30.1人）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

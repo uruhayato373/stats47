@@ -59,6 +59,4 @@ export const spinachConsumptionQuantity: MetricConfig = {
   "seoTitle": "ほうれんそう消費量ランキング都道府県【2024年】｜1位山形県（4,166g）",
   "seoDescription": "2024年のほうれんそう消費量の都道府県別ランキング。1位山形県（4,166g）、最下位大分県（1,458g）で2.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

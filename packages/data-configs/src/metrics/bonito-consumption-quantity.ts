@@ -59,6 +59,4 @@ export const bonitoConsumptionQuantity: MetricConfig = {
   "seoTitle": "かつお消費量ランキング都道府県【2024年】｜1位高知県3,642g・最下位大分県で13.2倍格差",
   "seoDescription": "2024年最新版・47都道府県のかつお消費量ランキング。1位高知県(3,642g)、2位和歌山県(1,492g)、3位福島県(1,488g)、最下位大分県(275g)で13.2倍の格差。地図とグラフで比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

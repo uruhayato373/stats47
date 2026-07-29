@@ -51,6 +51,4 @@ export const annualPrecipitation: MetricConfig = {
   "seoTitle": "年間降水量ランキング都道府県【2024年】｜1位静岡県（3,753.5ｍｍ）",
   "seoDescription": "2024年の年間降水量の都道府県別ランキング。1位静岡県（3,753.5ｍｍ）、最下位宮城県（1,027.5ｍｍ）で3.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

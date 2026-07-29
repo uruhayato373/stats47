@@ -59,6 +59,4 @@ export const sweetPotatoConsumptionQuantity: MetricConfig = {
   "seoTitle": "さつまいも消費量ランキング都道府県【2024年】｜1位徳島県（5,544g）",
   "seoDescription": "2024年のさつまいも消費量の都道府県別ランキング。1位徳島県（5,544g）、最下位石川県（1,854g）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

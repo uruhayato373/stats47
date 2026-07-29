@@ -52,6 +52,4 @@ export const portCargoExport: MetricConfig = {
   "seoTitle": "輸出貨物量（港湾統計）ランキング都道府県【2023年】｜1位愛知県（53,405,445トン）",
   "seoDescription": "2023年の輸出貨物量（港湾統計）の都道府県別ランキング。1位愛知県（53,405,445トン）、最下位島根県（57,392トン）で930.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

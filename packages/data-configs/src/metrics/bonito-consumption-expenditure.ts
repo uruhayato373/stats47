@@ -59,6 +59,4 @@ export const bonitoConsumptionExpenditure: MetricConfig = {
   "seoTitle": "かつお消費支出額ランキング都道府県【2024年】｜1位高知県（7,369円）",
   "seoDescription": "2024年のかつお消費支出額の都道府県別ランキング。1位高知県（7,369円）、最下位大分県（632円）で11.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

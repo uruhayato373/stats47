@@ -77,6 +77,4 @@ export const juniorHighSchoolStudentsPerTeacher: MetricConfig = {
   "seoTitle": "中学校生徒数ランキング都道府県【2024年】｜1位東京都（15.22人）",
   "seoDescription": "2024年の中学校生徒数の都道府県別ランキング。1位東京都（15.22人）、最下位高知県（8.5人）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

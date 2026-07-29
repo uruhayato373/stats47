@@ -48,6 +48,4 @@ export const juniorCollegeNewGraduatesUnemploymentRate: MetricConfig = {
   "seoTitle": "短大新規卒業者の無業者率ランキング都道府県【2023年】｜1位奈良県（17％）",
   "seoDescription": "2023年の短大新規卒業者の無業者率の都道府県別ランキング。1位奈良県（17％）、最下位宮崎県（0.9％）で18.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

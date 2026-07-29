@@ -14,6 +14,7 @@ import { logger } from "@stats47/logger/server";
 import type { AreaType } from "@stats47/types";
 import { z } from "zod";
 import type { RankingItem, SourceProvenance } from "../../types";
+import { resolveRankingHook } from "@stats47/data-configs/prominence";
 
 // 文字列としての "null" を null に変換するプレプロセス関数
 const normalizeNull = (val: unknown) => (val === "null" ? null : val);
@@ -187,6 +188,12 @@ export const RankingItemDBSchema = z.object({
 
   return {
     rankingKey: data.ranking_key,
+    // hook は列ではなく title/unit からの導出 (ranking item builder と同じ規則)。
+    hook: resolveRankingHook({
+      rankingKey: data.ranking_key,
+      title: data.title,
+      unit: data.unit,
+    }),
     areaType,
     rankingName: data.ranking_name,
     title: data.title,
@@ -204,8 +211,6 @@ export const RankingItemDBSchema = z.object({
     latestYear,
     availableYears,
     isActive: data.is_active,
-    isFeatured: data.is_featured,
-    featuredOrder: data.featured_order,
     surveyId: data.survey_id,
     dataSourceId: data.data_source_id,
     sourceConfig,

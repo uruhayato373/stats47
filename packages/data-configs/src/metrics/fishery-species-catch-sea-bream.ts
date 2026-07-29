@@ -53,6 +53,4 @@ export const fisherySpeciesCatchSeaBream: MetricConfig = {
   "seoTitle": "タイ類漁獲量ランキング都道府県【2015年】｜1位長崎県（4,262トン）",
   "seoDescription": "2015年のタイ類漁獲量の都道府県別ランキング。1位長崎県（4,262トン）、最下位福島県（1トン）で4262.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

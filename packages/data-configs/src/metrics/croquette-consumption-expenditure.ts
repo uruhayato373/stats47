@@ -59,6 +59,4 @@ export const croquetteConsumptionExpenditure: MetricConfig = {
   "seoTitle": "コロッケ消費支出額ランキング都道府県【2024年】｜1位福井県（3,687円）",
   "seoDescription": "2024年のコロッケ消費支出額の都道府県別ランキング。1位福井県（3,687円）、最下位北海道（1,236円）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

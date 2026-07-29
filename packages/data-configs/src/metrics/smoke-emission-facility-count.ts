@@ -88,6 +88,4 @@ export const smokeEmissionFacilityCount: MetricConfig = {
   "seoTitle": "ばい煙発生施設数ランキング都道府県【2023年】｜1位北海道（15,438件）",
   "seoDescription": "2023年のばい煙発生施設数の都道府県別ランキング。1位北海道（15,438件）、最下位鳥取県（994件）で15.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

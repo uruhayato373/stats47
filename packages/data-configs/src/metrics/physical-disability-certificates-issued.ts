@@ -102,6 +102,4 @@ export const physicalDisabilityCertificatesIssued: MetricConfig = {
   "seoTitle": "身体障害者手帳交付数ランキング都道府県【2023年】｜1位東京都（486,907人）",
   "seoDescription": "2023年の身体障害者手帳交付数の都道府県別ランキング。1位東京都（486,907人）、最下位鳥取県（24,719人）で19.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

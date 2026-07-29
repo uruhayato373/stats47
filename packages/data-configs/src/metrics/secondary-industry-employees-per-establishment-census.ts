@@ -60,6 +60,4 @@ export const secondaryIndustryEmployeesPerEstablishmentCensus: MetricConfig = {
   "seoTitle": "第2次産業従業者数ランキング都道府県【2006年】｜1位愛知県（16人）",
   "seoDescription": "2006年の第2次産業従業者数の都道府県別ランキング。1位愛知県（16人）、最下位高知県（9.11人）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

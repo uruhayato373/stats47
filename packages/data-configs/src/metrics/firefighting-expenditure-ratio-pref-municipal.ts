@@ -35,6 +35,4 @@ export const firefightingExpenditureRatioPrefMunicipal: MetricConfig = {
   "seoTitle": "消防費割合ランキング都道府県【2022年】｜1位青森県（6.64％）",
   "seoDescription": "2022年の消防費割合の都道府県別ランキング。1位青森県（6.64％）、最下位東京都（2.06％）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

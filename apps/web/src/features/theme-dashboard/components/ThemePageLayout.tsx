@@ -21,7 +21,7 @@ import {
 import { THEME_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
 import { resolveAffiliateBanners, resolveAffiliateBannersByVertical } from "@/features/ads/server";
 
-import { AdSenseAd, HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
+import { HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
 
 import { THEME_SECTION_REGISTRY } from "../config/theme-section-registry";
 import {
@@ -177,10 +177,11 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
       {/* このテーマの全指標 (context 指標・選定根拠を含む完全一覧) */}
       <ThemeIndicatorCatalogSection themeKey={theme.themeKey} />
 
-      {/* 広告: ダッシュボード読了後・関連記事の前 */}
-      <div className="mt-8">
-        <AdSenseAd format={THEMES_CONTENT.format} slotId={THEMES_CONTENT.slotId} />
-      </div>
+      {/*
+        広告: ダッシュボード読了後・関連記事の前。生 AdSenseAd から slot 部品へ寄せ、
+        18 テーマ全ページでラベル表記と未発行時の非描画を揃える (2026-07-29)。
+      */}
+      <InContentAdSlot slot={THEMES_CONTENT} />
 
       {/* 高単価アフィリエイトバナー (AdSense と並行) */}
       <div className="mt-8 flex justify-center">

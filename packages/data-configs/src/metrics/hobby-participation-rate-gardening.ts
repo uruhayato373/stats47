@@ -34,6 +34,4 @@ export const hobbyParticipationRateGardening: MetricConfig = {
   "seoTitle": "園芸・庭いじり・ガーデニングの行動者率ランキング都道府県【2021年】｜1位群馬県（32.8％）",
   "seoDescription": "2021年の園芸・庭いじり・ガーデニングの行動者率の都道府県別ランキング。1位群馬県（32.8％）、最下位大阪府（19.5％）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

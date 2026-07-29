@@ -51,6 +51,4 @@ export const annualNewInpatientsGeneralHospitalPer100k: MetricConfig = {
   "seoTitle": "一般病院年間新入院患者数ランキング都道府県【2023年】｜1位高知県（16,801.4人）",
   "seoDescription": "2023年の一般病院年間新入院患者数の都道府県別ランキング。1位高知県（16,801.4人）、最下位埼玉県（8,886.7人）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

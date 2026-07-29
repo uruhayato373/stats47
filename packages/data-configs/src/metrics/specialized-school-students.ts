@@ -102,6 +102,4 @@ export const specializedSchoolStudents: MetricConfig = {
   "seoTitle": "専修学校生徒数ランキング都道府県【2024年】｜1位東京都（128,161人）",
   "seoDescription": "2024年の専修学校生徒数の都道府県別ランキング。1位東京都（128,161人）、最下位滋賀県（1,539人）で83.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

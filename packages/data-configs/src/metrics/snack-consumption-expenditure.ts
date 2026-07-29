@@ -59,6 +59,4 @@ export const snackConsumptionExpenditure: MetricConfig = {
   "seoTitle": "スナック菓子消費支出額ランキング都道府県【2024年】｜1位佐賀県（9,563円）",
   "seoDescription": "2024年のスナック菓子消費支出額の都道府県別ランキング。1位佐賀県（9,563円）、最下位群馬県（4,775円）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

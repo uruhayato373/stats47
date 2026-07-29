@@ -47,6 +47,4 @@ export const infantMortalityRatePer1000Births: MetricConfig = {
   "seoTitle": "乳児死亡率ランキング都道府県【2023年】｜1位鳥取県（3.1‐）",
   "seoDescription": "2023年の乳児死亡率の都道府県別ランキング。1位鳥取県（3.1‐）、最下位岡山県（1‐）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

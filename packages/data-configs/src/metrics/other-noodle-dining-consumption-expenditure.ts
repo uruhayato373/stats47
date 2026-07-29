@@ -59,6 +59,4 @@ export const otherNoodleDiningConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の麺類外食消費支出額ランキング都道府県【2024年】｜1位群馬県（5,946円）",
   "seoDescription": "2024年の他の麺類外食消費支出額の都道府県別ランキング。1位群馬県（5,946円）、最下位青森県（963円）で6.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

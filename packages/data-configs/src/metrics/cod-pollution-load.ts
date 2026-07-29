@@ -53,6 +53,4 @@ export const codPollutionLoad: MetricConfig = {
   "seoTitle": "COD汚濁負荷量ランキング都道府県【2019年】｜1位佐賀県（205,599kg/日）",
   "seoDescription": "2019年のCOD汚濁負荷量の都道府県別ランキング。1位佐賀県（205,599kg/日）、最下位高知県（1,007.8kg/日）で204.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

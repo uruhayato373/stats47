@@ -34,6 +34,4 @@ export const studyParticipationRateEnglish: MetricConfig = {
   "seoTitle": "英語学習の行動者率ランキング都道府県【2021年】｜1位東京都（21.2％）",
   "seoDescription": "2021年の英語学習の行動者率の都道府県別ランキング。1位東京都（21.2％）、最下位青森県（6.6％）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

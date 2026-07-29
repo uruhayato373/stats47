@@ -74,6 +74,4 @@ export const nursingHomeCountPer100k65plus: MetricConfig = {
   "seoTitle": "老人ホーム数ランキング都道府県【2023年】｜1位宮崎県（183.2所）",
   "seoDescription": "2023年の老人ホーム数の都道府県別ランキング。1位宮崎県（183.2所）、最下位滋賀県（45所）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

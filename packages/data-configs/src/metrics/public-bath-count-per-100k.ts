@@ -76,6 +76,4 @@ export const publicBathCountPer100k: MetricConfig = {
   "seoTitle": "公衆浴場数ランキング都道府県【2023年】｜1位青森県（22.5所）",
   "seoDescription": "2023年の公衆浴場数の都道府県別ランキング。1位青森県（22.5所）、最下位茨城県（0所）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

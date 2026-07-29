@@ -53,6 +53,4 @@ export const savingsDepositBalance: MetricConfig = {
   "seoTitle": "預貯金（通貨性＋定期性）ランキング都道府県【2014年】｜1位福井県（12,019千円）",
   "seoDescription": "2014年の預貯金（通貨性＋定期性）の都道府県別ランキング。1位福井県（12,019千円）、最下位沖縄県（3,603千円）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

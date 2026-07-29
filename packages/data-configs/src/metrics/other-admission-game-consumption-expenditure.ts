@@ -59,6 +59,4 @@ export const otherAdmissionGameConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の入場・ゲーム代消費支出額ランキング都道府県【2024年】｜1位宮崎県（11,542円）",
   "seoDescription": "2024年の他の入場・ゲーム代消費支出額の都道府県別ランキング。1位宮崎県（11,542円）、最下位長崎県（1,624円）で7.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

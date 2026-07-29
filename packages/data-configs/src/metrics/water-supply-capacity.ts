@@ -52,6 +52,4 @@ export const waterSupplyCapacity: MetricConfig = {
   "seoTitle": "上水道施設能力ランキング都道府県【2022年】｜1位東京都（7,004,350m3/日）",
   "seoDescription": "2022年の上水道施設能力の都道府県別ランキング。1位東京都（7,004,350m3/日）、最下位鳥取県（298,680m3/日）で23.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

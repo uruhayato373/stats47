@@ -44,6 +44,4 @@ export const elementarySchoolCount: MetricConfig = {
   "seoTitle": "小学校数ランキング都道府県【2024年】｜1位東京都（1,320校）",
   "seoDescription": "2024年の小学校数の都道府県別ランキング。1位東京都（1,320校）、最下位鳥取県（112校）で11.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

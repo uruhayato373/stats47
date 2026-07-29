@@ -59,6 +59,4 @@ export const bambooShootConsumptionExpenditure: MetricConfig = {
   "seoTitle": "たけのこ消費支出額ランキング都道府県【2024年】｜1位山形県（1,301円）",
   "seoDescription": "2024年のたけのこ消費支出額の都道府県別ランキング。1位山形県（1,301円）、最下位沖縄県（247円）で5.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

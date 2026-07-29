@@ -59,6 +59,4 @@ export const horseMackerelConsumptionExpenditure: MetricConfig = {
   "seoTitle": "あじ消費支出額ランキング都道府県【2024年】｜1位山口県（2,315円）",
   "seoDescription": "2024年のあじ消費支出額の都道府県別ランキング。1位山口県（2,315円）、最下位北海道（185円）で12.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

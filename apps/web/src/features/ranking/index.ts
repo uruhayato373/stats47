@@ -30,7 +30,11 @@ export {
 export type { FeaturedRankingCardModel } from "./utils/resolve-featured-ranking-card";
 export { CategoryRankingTable } from "./components/CategoryRankingList";
 export type { CategoryRankingListItem } from "./components/CategoryRankingList";
-export { RankingHeroCard } from "./components/RankingHeroCard";
+export {
+    RankingHeaderPanel,
+    RankingHeaderControls,
+    RankingHeaderStats,
+} from "./components/RankingHeader";
 export { DataUsageCard } from "./components/DataUsageCard";
 
 // export * from "./repositories"; // Removed
@@ -41,3 +45,10 @@ export { AreaTypeToggle } from "./components/AreaTypeToggle";
 
 // Sidebar cards (client)
 export { SurveyCard } from "./components/RankingSidebar/SurveyCard";
+
+/**
+ * 索引 (/ranking・カテゴリ・ヘッダー) が代表として出すランキングキーの集合。
+ * カテゴリを跨ぐ面 (survey ページ) が「注目」を判定するのに使う。
+ * 旧 `RankingItem.isFeatured` の置き換え。
+ */
+export { REPRESENTATIVE_RANKING_KEY_SET } from "./utils/representative-keys";

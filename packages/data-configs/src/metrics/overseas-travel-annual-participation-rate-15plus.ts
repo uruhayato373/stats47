@@ -40,6 +40,4 @@ export const overseasTravelAnnualParticipationRate15plus: MetricConfig = {
   "seoTitle": "海外旅行の年間行動者率ランキング都道府県【2001年】｜1位東京都（18.2％）",
   "seoDescription": "2001年の海外旅行の年間行動者率の都道府県別ランキング。1位東京都（18.2％）、最下位秋田県（5％）で3.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

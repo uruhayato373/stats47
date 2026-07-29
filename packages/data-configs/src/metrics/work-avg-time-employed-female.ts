@@ -46,6 +46,4 @@ export const workAvgTimeEmployedFemale: MetricConfig = {
   },
   "seoTitle": "仕事の平均時間（有業者・女）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

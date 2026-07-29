@@ -61,6 +61,4 @@ export const cpiChangeRateHealthcare: MetricConfig = {
   },
   "seoTitle": "消費者物価指数対前年変化率（保健医療）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

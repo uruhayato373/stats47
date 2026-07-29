@@ -59,6 +59,4 @@ export const codRoeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "たらこ消費支出額ランキング都道府県【2024年】｜1位福岡県（4,870円）",
   "seoDescription": "2024年のたらこ消費支出額の都道府県別ランキング。1位福岡県（4,870円）、最下位沖縄県（589円）で8.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

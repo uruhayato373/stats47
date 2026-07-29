@@ -34,6 +34,4 @@ export const hobbyParticipationRatePhotography: MetricConfig = {
   "seoTitle": "写真の撮影・プリントの行動者率ランキング都道府県【2021年】｜1位東京都（27.2％）",
   "seoDescription": "2021年の写真の撮影・プリントの行動者率の都道府県別ランキング。1位東京都（27.2％）、最下位青森県（14.6％）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

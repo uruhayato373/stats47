@@ -35,6 +35,4 @@ export const currentSecuritiesBalanceRatioMultiPersonHouseholds: MetricConfig = 
   "seoTitle": "有価証券現在高割合ランキング都道府県【2019年】｜1位神奈川県（21.7％）",
   "seoDescription": "2019年の有価証券現在高割合の都道府県別ランキング。1位神奈川県（21.7％）、最下位秋田県（6％）で3.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

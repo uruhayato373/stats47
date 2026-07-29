@@ -69,6 +69,4 @@ export const publicHighSchoolStudentRatio: MetricConfig = {
   "seoTitle": "公立高等学校生徒比率ランキング都道府県【2024年】｜1位徳島県（95.8％）",
   "seoDescription": "2024年の公立高等学校生徒比率の都道府県別ランキング。1位徳島県（95.8％）、最下位東京都（41.5％）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

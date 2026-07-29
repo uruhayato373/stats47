@@ -29,12 +29,12 @@ export function RankingPageClientShell({
       rankingKey={rankingKey}
       rankingItem={model.rankingItem}
       rankingValues={model.rankingValues}
+      nationalAverageSeries={model.nationalAverageSeries}
       areaType={model.areaType}
       selectedYear={model.selectedYear}
       topology={model.topology}
       cityRankingItem={model.cityRankingItem?.isActive ? model.cityRankingItem : undefined}
       surveyName={model.surveyName ?? undefined}
-      categoryName={model.breadcrumbCategory?.name}
       groupMembers={model.groupMembers}
       nationalTrend={model.nationalTrend}
       breadcrumb={

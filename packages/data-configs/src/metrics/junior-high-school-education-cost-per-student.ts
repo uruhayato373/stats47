@@ -74,6 +74,4 @@ export const juniorHighSchoolEducationCostPerStudent: MetricConfig = {
   "seoTitle": "中学校教育費ランキング都道府県【2022年】｜1位徳島県（1,837,025円）",
   "seoDescription": "2022年の中学校教育費の都道府県別ランキング。1位徳島県（1,837,025円）、最下位神奈川県（945,954円）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

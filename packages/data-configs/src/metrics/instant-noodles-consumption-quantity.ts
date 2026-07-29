@@ -59,6 +59,4 @@ export const instantNoodlesConsumptionQuantity: MetricConfig = {
   "seoTitle": "即席麺消費量ランキング都道府県【2024年】｜1位熊本県（4,147g）",
   "seoDescription": "2024年の即席麺消費量の都道府県別ランキング。1位熊本県（4,147g）、最下位長野県（1,751g）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

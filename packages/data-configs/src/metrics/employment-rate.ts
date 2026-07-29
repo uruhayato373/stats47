@@ -38,6 +38,4 @@ export const employmentRate: MetricConfig = {
   "seoTitle": "就職率ランキング都道府県【2021年】｜1位福井県（9.5％）",
   "seoDescription": "2021年の就職率の都道府県別ランキング。1位福井県（9.5％）、最下位東京都（2.1％）で4.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

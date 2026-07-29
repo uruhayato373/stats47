@@ -55,6 +55,4 @@ export const totalOvernightGuests: MetricConfig = {
   "seoTitle": "延べ宿泊者数ランキング都道府県【2024年】｜1位東京都（91,633,100人泊）",
   "seoDescription": "2024年の延べ宿泊者数の都道府県別ランキング。1位東京都（91,633,100人泊）、最下位徳島県（1,701,370人泊）で53.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

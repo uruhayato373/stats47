@@ -59,6 +59,4 @@ export const yellowtailConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ぶり消費支出額ランキング都道府県【2024年】｜1位富山県（7,610円）",
   "seoDescription": "2024年のぶり消費支出額の都道府県別ランキング。1位富山県（7,610円）、最下位沖縄県（860円）で8.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

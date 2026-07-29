@@ -59,6 +59,4 @@ export const wheatFlourConsumptionQuantity: MetricConfig = {
   "seoTitle": "小麦粉消費量ランキング都道府県【2024】うどん県・香川は何位? 1位は三重",
   "seoDescription": "うどんの本場は香川、では小麦粉を最も使う県は?──答えは三重県(3,072g)。2位千葉(2,807g)、3位長野(2,799g)、最下位山梨(1,284g)まで2.4倍の地域差。2024年最新ランキングを地図とグラフで47都道府県比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

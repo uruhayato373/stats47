@@ -33,6 +33,4 @@ export const fireInsuranceClaimsReceivedPer1000HouseholdsAlt: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

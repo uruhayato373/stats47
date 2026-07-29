@@ -90,6 +90,4 @@ export const dentalClinicCountPer100k: MetricConfig = {
   "seoTitle": "歯科診療所数ランキング都道府県【2023年】｜1位東京都（75.3施設）",
   "seoDescription": "2023年の歯科診療所数の都道府県別ランキング。1位東京都（75.3施設）、最下位島根県（38.6施設）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

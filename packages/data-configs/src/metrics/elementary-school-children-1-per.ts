@@ -53,6 +53,4 @@ export const elementarySchoolChildren1Per: MetricConfig = {
   "seoTitle": "小学校児童数ランキング都道府県【2024年】｜1位東京都（27.9人）",
   "seoDescription": "2024年の小学校児童数の都道府県別ランキング。1位東京都（27.9人）、最下位高知県（16.2人）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

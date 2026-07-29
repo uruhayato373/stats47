@@ -51,6 +51,4 @@ export const airPassengerTransport: MetricConfig = {
   "seoTitle": "航空輸送人員ランキング都道府県【2023年】｜1位東京都（30,475.3千人）",
   "seoDescription": "2023年の航空輸送人員の都道府県別ランキング。1位東京都（30,475.3千人）、最下位奈良県（0千人）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -52,6 +52,4 @@ export const riceHarvestVolume: MetricConfig = {
   "seoTitle": "水稲収穫量ランキング都道府県【2019年】｜1位新潟県（646,100t）",
   "seoDescription": "2019年の水稲収穫量の都道府県別ランキング。1位新潟県（646,100t）、最下位東京都（519t）で1244.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

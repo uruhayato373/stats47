@@ -59,6 +59,4 @@ export const futonConsumptionQuantity: MetricConfig = {
   "seoTitle": "布団消費量ランキング都道府県【2024年】｜1位岡山県（0.35枚）",
   "seoDescription": "2024年の布団消費量の都道府県別ランキング。1位岡山県（0.35枚）、最下位長崎県（0.08枚）で4.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

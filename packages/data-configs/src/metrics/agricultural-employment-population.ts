@@ -34,6 +34,4 @@ export const agriculturalEmploymentPopulation: MetricConfig = {
   },
   "seoTitle": "農業就業人口（販売農家）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

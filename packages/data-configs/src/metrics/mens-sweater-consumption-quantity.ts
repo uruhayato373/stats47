@@ -59,6 +59,4 @@ export const mensSweaterConsumptionQuantity: MetricConfig = {
   "seoTitle": "男子用セーター消費量ランキング都道府県【2024年】｜1位岐阜県（0.48枚）",
   "seoDescription": "2024年の男子用セーター消費量の都道府県別ランキング。1位岐阜県（0.48枚）、最下位沖縄県（0.09枚）で5.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const carInsuranceMandatoryConsumptionExpenditure: MetricConfig = {
   "seoTitle": "自動車保険料(自賠責)消費支出額ランキング都道府県【2024年】｜1位群馬県（11,790円）",
   "seoDescription": "2024年の自動車保険料(自賠責)消費支出額の都道府県別ランキング。1位群馬県（11,790円）、最下位大阪府（3,230円）で3.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

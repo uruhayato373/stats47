@@ -34,6 +34,4 @@ export const sportsParticipationRateJudo: MetricConfig = {
   "seoTitle": "柔道の行動者率ランキング都道府県【2021年】｜1位山口県（1.1％）",
   "seoDescription": "2021年の柔道の行動者率の都道府県別ランキング。1位山口県（1.1％）、最下位広島県（0.1％）で11.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

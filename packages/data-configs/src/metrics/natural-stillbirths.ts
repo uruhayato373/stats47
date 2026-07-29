@@ -51,6 +51,4 @@ export const naturalStillbirths: MetricConfig = {
   "seoTitle": "自然死産数ランキング都道府県【2007年】｜1位東京都（1,201胎）",
   "seoDescription": "2007年の自然死産数の都道府県別ランキング。1位東京都（1,201胎）、最下位徳島県（60胎）で20.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

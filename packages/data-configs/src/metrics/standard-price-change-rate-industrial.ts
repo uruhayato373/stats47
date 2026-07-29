@@ -63,6 +63,4 @@ export const standardPriceChangeRateIndustrial: MetricConfig = {
   "seoTitle": "標準価格対前年平均変動率ランキング都道府県【2024年】｜1位福岡県（11.6％）",
   "seoDescription": "2024年の標準価格対前年平均変動率の都道府県別ランキング。1位福岡県（11.6％）、最下位高知県（-0.6％）で-19.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -89,6 +89,4 @@ export const trafficAccidentCountPerPopulation: MetricConfig = {
   "seoTitle": "交通事故発生件数ランキング都道府県【2024年】｜1位静岡県（494.5件）",
   "seoDescription": "2024年の交通事故発生件数の都道府県別ランキング。1位静岡県（494.5件）、最下位島根県（107.8件）で4.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

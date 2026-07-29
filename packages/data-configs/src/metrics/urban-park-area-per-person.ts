@@ -97,6 +97,4 @@ export const urbanParkAreaPerPerson: MetricConfig = {
   "seoTitle": "都市公園面積ランキング都道府県【2023年】｜1位北海道（27.84ｍ2）",
   "seoDescription": "2023年の都市公園面積の都道府県別ランキング。1位北海道（27.84ｍ2）、最下位東京都（4.34ｍ2）で6.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

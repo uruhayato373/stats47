@@ -51,6 +51,4 @@ export const buildingFireCountPer100ThousandPeople: MetricConfig = {
   "seoTitle": "火災出火件数ランキング都道府県【2023年】｜1位茨城県（49件）",
   "seoDescription": "2023年の火災出火件数の都道府県別ランキング。1位茨城県（49件）、最下位富山県（17.7件）で2.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

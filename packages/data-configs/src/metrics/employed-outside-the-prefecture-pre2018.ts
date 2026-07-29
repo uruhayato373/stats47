@@ -54,6 +54,4 @@ export const employedOutsideThePrefecturePre2018: MetricConfig = {
   "seoTitle": "県外就職者比率ランキング都道府県【2018年】｜1位千葉県（33.5％）",
   "seoDescription": "2018年の県外就職者比率の都道府県別ランキング。1位千葉県（33.5％）、最下位北海道（3.8％）で8.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

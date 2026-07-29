@@ -38,6 +38,4 @@ export const consumerPriceDifferenceIndexHousing: MetricConfig = {
   },
   "seoTitle": "消費者物価地域差指数（住居）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

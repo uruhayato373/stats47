@@ -59,6 +59,4 @@ export const nattoConsumptionExpenditure: MetricConfig = {
   "seoTitle": "納豆消費なぜ東北が独占？関西は3倍差の最下位圏・17年で+17%増（2024）",
   "seoDescription": "1位福島7,830円〜最下位和歌山2,627円で3.0倍差。上位10は東北・北関東が独占し、関西以西で急減する食文化の境界線とは？健康志向で全体+17%増の中でも東北が強い理由を47都道府県で解説（2024年）。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -70,6 +70,4 @@ export const selfFinancingRatio: MetricConfig = {
   "seoTitle": "自主財源の割合ランキング都道府県【2022年】｜1位東京都（89.1％）",
   "seoDescription": "2022年の自主財源の割合の都道府県別ランキング。1位東京都（89.1％）、最下位高知県（25.7％）で3.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

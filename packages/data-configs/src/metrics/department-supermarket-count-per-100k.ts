@@ -59,6 +59,4 @@ export const departmentSupermarketCountPer100k: MetricConfig = {
   "seoTitle": "百貨店、総合スーパー数ランキング都道府県【2021年】｜1位沖縄県（1.7店）",
   "seoDescription": "2021年の百貨店、総合スーパー数の都道府県別ランキング。1位沖縄県（1.7店）、最下位山形県（0.28店）で6.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -39,6 +39,4 @@ export const unmarriedRatioFemale4044: MetricConfig = {
   "seoTitle": "未婚者割合ランキング都道府県【2020年】｜1位高知県（22.8％）",
   "seoDescription": "2020年の未婚者割合の都道府県別ランキング。1位高知県（22.8％）、最下位滋賀県（15.5％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const generalHospitalBedOccupancyRate: MetricConfig = {
   "seoTitle": "一般病院病床利用率ランキング都道府県【2023年】｜1位佐賀県（81.5％）",
   "seoDescription": "2023年の一般病院病床利用率の都道府県別ランキング。1位佐賀県（81.5％）、最下位福島県（64.9％）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

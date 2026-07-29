@@ -9,12 +9,12 @@ import { lookupArea } from "@stats47/area";
 import { TrendingUp, MapPin, ArrowDownUp } from "lucide-react";
 
 import { ChartPanel } from "@/components/charts/ChartPanel";
+import { RankingBarList } from "@/components/charts/RankingBarList";
 import type { LineChartData } from "@/components/stat-charts/types/visualization";
 
 import { fetchMetricTimeseriesAction, type MetricTimeseriesPoint } from "../actions";
 
 import { ChartEmptyState, ChartLoading } from "./ChartState";
-import { RankingBarList } from "./RankingBarList";
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 

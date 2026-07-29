@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createImpressionWatcher, IMPRESSION_DWELL_MS } from "../impression-watcher";
 
 /**
- * impression 発火条件の unit test (仕様 doc 28 §9.2 / §13.4)。
+ * impression 発火条件の unit test。
  * 50% 閾値は IntersectionObserver 側 (TrackedFeaturedRankingCard が threshold 0.5 を設定) で、
  * ここでは「1 秒連続表示 / 1 回だけ / 離脱で timer 解除 / cleanup」を fake timer で検証する。
  */

@@ -52,6 +52,4 @@ export const beautySalonCount: MetricConfig = {
   "seoTitle": "美容所数ランキング都道府県【2020年】｜1位東京都（24,713施設）",
   "seoDescription": "2020年の美容所数の都道府県別ランキング。1位東京都（24,713施設）、最下位鳥取県（1,550施設）で15.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

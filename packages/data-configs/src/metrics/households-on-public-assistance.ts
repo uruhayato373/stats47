@@ -53,6 +53,4 @@ export const householdsOnPublicAssistance: MetricConfig = {
   "seoTitle": "生活保護被保護実世帯数ランキング都道府県【2023年】｜1位東京都（231,299世帯）",
   "seoDescription": "2023年の生活保護被保護実世帯数の都道府県別ランキング。1位東京都（231,299世帯）、最下位福井県（3,591世帯）で64.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

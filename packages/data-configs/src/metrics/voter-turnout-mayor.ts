@@ -39,6 +39,4 @@ export const voterTurnoutMayor: MetricConfig = {
   "seoTitle": "市区町村長選挙投票率ランキング都道府県【2019年】｜1位福島県（87.85％）",
   "seoDescription": "2019年の市区町村長選挙投票率の都道府県別ランキング。1位福島県（87.85％）、最下位沖縄県（27.59％）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

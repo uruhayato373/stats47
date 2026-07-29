@@ -51,6 +51,4 @@ export const householdHeadAnnualIncomePerHousehold: MetricConfig = {
   "seoTitle": "年間世帯主収入ランキング都道府県【2019年】｜1位神奈川県（3,631千円）",
   "seoDescription": "2019年の年間世帯主収入の都道府県別ランキング。1位神奈川県（3,631千円）、最下位高知県（1,891千円）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

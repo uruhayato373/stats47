@@ -55,6 +55,4 @@ export const sexRatioTotal: MetricConfig = {
   "seoTitle": "人口性比ランキング都道府県【2024年】｜1位茨城県（100.1‐）",
   "seoDescription": "2024年の人口性比の都道府県別ランキング。1位茨城県（100.1‐）、最下位奈良県（88.7‐）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

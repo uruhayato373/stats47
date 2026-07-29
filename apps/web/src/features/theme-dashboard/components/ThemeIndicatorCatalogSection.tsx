@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { THEME_CATALOGS } from "@stats47/data-configs";
+import { THEME_CATALOGS } from "@stats47/data-configs/theme-catalog";
 import { findIndicatorSet } from "@stats47/types";
 
 import { SurfaceSection } from "@/components/surface/SurfaceCard";

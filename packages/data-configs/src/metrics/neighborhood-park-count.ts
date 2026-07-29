@@ -53,6 +53,4 @@ export const neighborhoodParkCount: MetricConfig = {
   "seoTitle": "近隣公園数ランキング都道府県【2023年】｜1位北海道（504箇所）",
   "seoDescription": "2023年の近隣公園数の都道府県別ランキング。1位北海道（504箇所）、最下位鳥取県（17箇所）で29.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

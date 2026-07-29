@@ -28,6 +28,4 @@ export const disposableIncomeAfterRent: MetricConfig = {
   "seoTitle": "家賃控除後可処分所得ランキング都道府県【2024年】｜1位山形県（545,206円）",
   "seoDescription": "2024年の家賃控除後可処分所得の都道府県別ランキング。1位山形県（545,206円）、最下位沖縄県（167,326円）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const umbrellaConsumptionQuantity: MetricConfig = {
   "seoTitle": "傘消費量ランキング都道府県【2024年】｜1位埼玉県（1.14本）",
   "seoDescription": "2024年の傘消費量の都道府県別ランキング。1位埼玉県（1.14本）、最下位秋田県（0.28本）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

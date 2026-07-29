@@ -77,6 +77,4 @@ export const fiscalStrengthIndexPrefecture: MetricConfig = {
   "seoTitle": "財政力指数ランキング都道府県【2022年】｜1位東京都（1.06‐）",
   "seoDescription": "2022年の財政力指数の都道府県別ランキング。1位東京都（1.06‐）、最下位島根県（0.25‐）で4.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": true,
-  "featuredOrder": 5,
 };

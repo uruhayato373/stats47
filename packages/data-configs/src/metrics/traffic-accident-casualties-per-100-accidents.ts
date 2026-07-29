@@ -87,6 +87,4 @@ export const trafficAccidentCasualtiesPer100Accidents: MetricConfig = {
   "seoTitle": "交通事故死傷者数ランキング都道府県【2024年】｜1位佐賀県（131.4人）",
   "seoDescription": "2024年の交通事故死傷者数の都道府県別ランキング。1位佐賀県（131.4人）、最下位東京都（110.9人）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

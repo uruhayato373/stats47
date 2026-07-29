@@ -31,6 +31,4 @@ export const householdTypesByArea: MetricConfig = {
     "decimalPlaces": 1,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

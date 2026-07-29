@@ -59,6 +59,4 @@ export const cupboardConsumptionQuantity: MetricConfig = {
   "seoTitle": "食器戸棚消費量ランキング都道府県【2024年】｜1位福岡県（0.05個）",
   "seoDescription": "2024年の食器戸棚消費量の都道府県別ランキング。1位福岡県（0.05個）、最下位宮崎県（0個）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

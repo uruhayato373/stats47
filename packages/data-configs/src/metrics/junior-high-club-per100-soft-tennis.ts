@@ -56,6 +56,4 @@ export const juniorHighClubPer100SoftTennis: MetricConfig = {
   "seoTitle": "中学ソフトテニス部の加入率、都道府県で差｜1位山口県12.58人 vs 最下位沖縄県2.27人【2025年】",
   "seoDescription": "中学校のソフトテニス部(運動部活動)の加盟部員数を中学生100人あたりに換算し都道府県別に比較。1位山口県(12.58人)、最下位沖縄県(2.27人)で最大5.5倍の差。地図とグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

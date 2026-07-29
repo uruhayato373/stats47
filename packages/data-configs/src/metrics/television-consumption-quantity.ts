@@ -59,6 +59,4 @@ export const televisionConsumptionQuantity: MetricConfig = {
   "seoTitle": "テレビ消費量ランキング都道府県【2024年】｜1位熊本県（0.13台）",
   "seoDescription": "2024年のテレビ消費量の都道府県別ランキング。1位熊本県（0.13台）、最下位宮城県（0.01台）で12.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

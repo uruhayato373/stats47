@@ -59,6 +59,4 @@ export const whitebaitConsumptionExpenditure: MetricConfig = {
   "seoTitle": "しらす干し消費支出額ランキング都道府県【2024年】｜1位和歌山県（3,394円）",
   "seoDescription": "2024年のしらす干し消費支出額の都道府県別ランキング。1位和歌山県（3,394円）、最下位宮崎県（372円）で9.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

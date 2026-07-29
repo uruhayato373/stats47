@@ -59,6 +59,4 @@ export const keroseneConsumptionQuantity: MetricConfig = {
   "seoTitle": "灯油消費量ランキング都道府県【2024年】｜1位青森県（839.96l）",
   "seoDescription": "2024年の灯油消費量の都道府県別ランキング。1位青森県（839.96l）、最下位東京都（15.31l）で54.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

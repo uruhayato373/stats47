@@ -52,6 +52,4 @@ export const aquariumCount: MetricConfig = {
   "seoTitle": "水族館数ランキング都道府県【2015年】｜1位兵庫県（3館）",
   "seoDescription": "2015年の水族館数の都道府県別ランキング。1位兵庫県（3館）、最下位鹿児島県（0館）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

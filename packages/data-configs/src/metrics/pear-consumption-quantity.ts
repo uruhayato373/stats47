@@ -59,6 +59,4 @@ export const pearConsumptionQuantity: MetricConfig = {
   "seoTitle": "梨消費量ランキング都道府県【2024年】｜1位鳥取県（9,411g）",
   "seoDescription": "2024年の梨消費量の都道府県別ランキング。1位鳥取県（9,411g）、最下位山梨県（843g）で11.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

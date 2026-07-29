@@ -52,6 +52,4 @@ export const averageWeightMiddleSchoolSecondGradeFemale: MetricConfig = {
   "seoTitle": "平均体重ランキング都道府県【2023年】｜1位岩手県（48.9kg）",
   "seoDescription": "2023年の平均体重の都道府県別ランキング。1位岩手県（48.9kg）、最下位三重県（46.8kg）で1.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

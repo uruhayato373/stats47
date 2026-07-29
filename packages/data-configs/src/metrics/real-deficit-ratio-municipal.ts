@@ -34,6 +34,4 @@ export const realDeficitRatioMunicipal: MetricConfig = {
   },
   "seoTitle": "実質赤字比率（市町村財政）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

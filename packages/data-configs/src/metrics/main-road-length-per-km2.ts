@@ -85,6 +85,4 @@ export const mainRoadLengthPerKm2: MetricConfig = {
   "seoTitle": "主要道路実延長ランキング都道府県【2023年】｜1位大阪府（1.29km）",
   "seoDescription": "2023年の主要道路実延長の都道府県別ランキング。1位大阪府（1.29km）、最下位北海道（0.24km）で5.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

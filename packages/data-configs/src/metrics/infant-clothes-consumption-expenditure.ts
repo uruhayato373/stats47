@@ -59,6 +59,4 @@ export const infantClothesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "乳児服消費支出額ランキング都道府県【2024年】｜1位高知県（2,051円）",
   "seoDescription": "2024年の乳児服消費支出額の都道府県別ランキング。1位高知県（2,051円）、最下位青森県（48円）で42.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

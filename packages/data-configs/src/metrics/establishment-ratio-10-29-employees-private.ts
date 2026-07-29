@@ -40,6 +40,4 @@ export const establishmentRatio1029EmployeesPrivate: MetricConfig = {
   "seoTitle": "従業者10～29人の事業所割合ランキング都道府県【2021年】｜1位千葉県（18.97％）",
   "seoDescription": "2021年の従業者10～29人の事業所割合の都道府県別ランキング。1位千葉県（18.97％）、最下位和歌山県（13.99％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

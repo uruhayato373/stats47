@@ -59,6 +59,4 @@ export const squidConsumptionQuantity: MetricConfig = {
   "seoTitle": "いか消費量ランキング都道府県【2024】1位は意外な富山、最下位沖縄と4.3倍差",
   "seoDescription": "いかを最も食べる県は?──意外にも富山県(2,014g)が1位。最下位沖縄(463g)まで4.3倍の差。2024年最新ランキングを地図とグラフで47都道府県比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -89,6 +89,4 @@ export const dischargedPatients: MetricConfig = {
   "seoTitle": "退院患者数ランキング都道府県【2023年】｜1位東京都（1,613,660人）",
   "seoDescription": "2023年の退院患者数の都道府県別ランキング。1位東京都（1,613,660人）、最下位鳥取県（85,498人）で18.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

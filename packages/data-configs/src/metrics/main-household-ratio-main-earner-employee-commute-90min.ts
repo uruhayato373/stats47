@@ -35,6 +35,4 @@ export const mainHouseholdRatioMainEarnerEmployeeCommute90min: MetricConfig = {
   },
   "seoTitle": "家計を主に支える者が雇用者である主世帯比率（通勤時間1時間30分以上）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

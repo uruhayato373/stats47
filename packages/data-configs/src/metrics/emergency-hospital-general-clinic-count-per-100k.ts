@@ -33,6 +33,4 @@ export const emergencyHospitalGeneralClinicCountPer100k: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

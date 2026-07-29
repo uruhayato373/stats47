@@ -59,6 +59,4 @@ export const photoPrintingConsumptionExpenditure: MetricConfig = {
   "seoTitle": "写真撮影・プリント代消費支出額ランキング都道府県【2024年】｜1位石川県（7,903円）",
   "seoDescription": "2024年の写真撮影・プリント代消費支出額の都道府県別ランキング。1位石川県（7,903円）、最下位奈良県（674円）で11.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

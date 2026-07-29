@@ -64,6 +64,4 @@ export const numberOfIndividualFisheryManagement: MetricConfig = {
   "seoTitle": "個人漁業経営体系数ランキング都道府県【2003年】｜1位北海道（14,857世帯）",
   "seoDescription": "2003年の個人漁業経営体系数の都道府県別ランキング。1位北海道（14,857世帯）、最下位奈良県（0世帯）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

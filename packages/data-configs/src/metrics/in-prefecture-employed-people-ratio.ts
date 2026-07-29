@@ -35,6 +35,4 @@ export const inPrefectureEmployedPeopleRatio: MetricConfig = {
   "seoTitle": "県内就業者比率ランキング都道府県【2020年】｜1位新潟県（97.8％）",
   "seoDescription": "2020年の県内就業者比率の都道府県別ランキング。1位新潟県（97.8％）、最下位埼玉県（68.6％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

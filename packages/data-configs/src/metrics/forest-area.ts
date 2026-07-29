@@ -52,6 +52,4 @@ export const forestArea: MetricConfig = {
   "seoTitle": "林野面積ランキング都道府県【2019年】｜1位北海道（5,503,768ｈａ）",
   "seoDescription": "2019年の林野面積の都道府県別ランキング。1位北海道（5,503,768ｈａ）、最下位大阪府（57,127ｈａ）で96.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const childrensClothesConsumptionQuantity: MetricConfig = {
   "seoTitle": "子供服消費量ランキング都道府県【2024年】｜1位埼玉県（4.97着）",
   "seoDescription": "2024年の子供服消費量の都道府県別ランキング。1位埼玉県（4.97着）、最下位香川県（1.33着）で3.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

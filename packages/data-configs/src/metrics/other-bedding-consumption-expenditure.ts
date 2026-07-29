@@ -59,6 +59,4 @@ export const otherBeddingConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の寝具類消費支出額ランキング都道府県【2024年】｜1位愛知県（9,276円）",
   "seoDescription": "2024年の他の寝具類消費支出額の都道府県別ランキング。1位愛知県（9,276円）、最下位広島県（2,627円）で3.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

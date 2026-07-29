@@ -56,6 +56,4 @@ export const juniorHighClubPer100TableTennis: MetricConfig = {
   "seoTitle": "中学卓球部の加入率、都道府県で差｜1位茨城県9.18人 vs 最下位沖縄県2.14人【2025年】",
   "seoDescription": "中学校の卓球部(運動部活動)の加盟部員数を中学生100人あたりに換算し都道府県別に比較。1位茨城県(9.18人)、最下位沖縄県(2.14人)で最大4.3倍の差。地図とグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

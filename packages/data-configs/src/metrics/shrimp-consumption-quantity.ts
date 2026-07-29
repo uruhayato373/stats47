@@ -59,6 +59,4 @@ export const shrimpConsumptionQuantity: MetricConfig = {
   "seoTitle": "えび消費量ランキング都道府県【2024年】｜1位熊本県（1,994g）",
   "seoDescription": "2024年のえび消費量の都道府県別ランキング。1位熊本県（1,994g）、最下位沖縄県（615g）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

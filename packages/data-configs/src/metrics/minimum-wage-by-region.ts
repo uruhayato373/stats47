@@ -54,6 +54,4 @@ export const minimumWageByRegion: MetricConfig = {
   "seoTitle": "地域別最低賃金ランキング都道府県【2024年】｜1位東京都（1,163円）",
   "seoDescription": "2024年の地域別最低賃金の都道府県別ランキング。1位東京都（1,163円）、最下位秋田県（951円）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

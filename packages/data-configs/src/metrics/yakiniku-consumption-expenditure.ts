@@ -59,6 +59,4 @@ export const yakinikuConsumptionExpenditure: MetricConfig = {
   "seoTitle": "焼肉消費支出額ランキング都道府県【2024年】｜1位高知県（21,768円）",
   "seoDescription": "2024年の焼肉消費支出額の都道府県別ランキング。1位高知県（21,768円）、最下位兵庫県（3,943円）で5.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

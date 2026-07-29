@@ -59,6 +59,4 @@ export const healthInsurancePremiumConsumptionExpenditure: MetricConfig = {
   "seoTitle": "医療保険料消費支出額ランキング都道府県【2024年】｜1位鹿児島県（39,004円）",
   "seoDescription": "2024年の医療保険料消費支出額の都道府県別ランキング。1位鹿児島県（39,004円）、最下位長崎県（13,135円）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

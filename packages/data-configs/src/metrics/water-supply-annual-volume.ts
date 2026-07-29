@@ -52,6 +52,4 @@ export const waterSupplyAnnualVolume: MetricConfig = {
   "seoTitle": "上水道年間給水量ランキング都道府県【2022年】｜1位東京都（1,550,325千m3）",
   "seoDescription": "2022年の上水道年間給水量の都道府県別ランキング。1位東京都（1,550,325千m3）、最下位鳥取県（62,141千m3）で24.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

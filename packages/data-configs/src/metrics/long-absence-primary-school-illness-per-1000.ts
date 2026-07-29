@@ -59,6 +59,4 @@ export const longAbsencePrimarySchoolIllnessPer1000: MetricConfig = {
   "seoTitle": "病気による小学校長期欠席児童比率ランキング都道府県【2023年】｜1位茨城県（20.5‐）",
   "seoDescription": "2023年の病気による小学校長期欠席児童比率の都道府県別ランキング。1位茨城県（20.5‐）、最下位島根県（2.1‐）で9.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

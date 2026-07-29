@@ -59,6 +59,4 @@ export const textbooksConsumptionExpenditure: MetricConfig = {
   "seoTitle": "教科書消費支出額ランキング都道府県【2024年】｜1位山形県（3,423円）",
   "seoDescription": "2024年の教科書消費支出額の都道府県別ランキング。1位山形県（3,423円）、最下位長野県（143円）で23.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

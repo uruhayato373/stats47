@@ -51,6 +51,4 @@ export const psychiatricOutpatientsPerFulltimePhysicianPerDay: MetricConfig = {
   "seoTitle": "精神科病院外来患者数ランキング都道府県【2023年】｜1位高知県（17人）",
   "seoDescription": "2023年の精神科病院外来患者数の都道府県別ランキング。1位高知県（17人）、最下位京都府（4.9人）で3.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -45,6 +45,4 @@ export const treatmentRateMusculoskeletalOutpatient: MetricConfig = {
   "seoTitle": "筋骨格系及び結合組織の疾患の受療率（外来）ランキング都道府県【2023年】｜1位青森県（964人（人口10万対））",
   "seoDescription": "2023年の筋骨格系及び結合組織の疾患の受療率（外来）の都道府県別ランキング。1位青森県（964人（人口10万対））、最下位茨城県（323人（人口10万対））で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

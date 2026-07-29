@@ -59,6 +59,4 @@ export const shochuConsumptionExpenditure: MetricConfig = {
   "seoTitle": "焼酎消費支出額ランキング都道府県【2024年】｜1位宮崎県（14,008円）",
   "seoDescription": "2024年の焼酎消費支出額の都道府県別ランキング。1位宮崎県（14,008円）、最下位宮城県（3,179円）で4.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

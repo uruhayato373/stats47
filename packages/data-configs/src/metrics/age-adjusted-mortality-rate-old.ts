@@ -35,6 +35,4 @@ export const ageAdjustedMortalityRateOld: MetricConfig = {
   },
   "seoTitle": "年齢別死亡率（65歳以上）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

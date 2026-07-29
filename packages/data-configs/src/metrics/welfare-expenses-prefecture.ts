@@ -98,6 +98,4 @@ export const welfareExpensesPrefecture: MetricConfig = {
   "seoTitle": "民生費ランキング都道府県【2022年】｜1位東京都（1,244,742,759）",
   "seoDescription": "2022年の民生費の都道府県別ランキング。1位東京都（1,244,742,759）、最下位鳥取県（52,342,502）で23.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

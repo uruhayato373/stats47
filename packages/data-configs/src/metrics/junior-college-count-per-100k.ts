@@ -87,6 +87,4 @@ export const juniorCollegeCountPer100k: MetricConfig = {
   "seoTitle": "短期大学数ランキング都道府県【2024年】｜1位岐阜県（0.52校）",
   "seoDescription": "2024年の短期大学数の都道府県別ランキング。1位岐阜県（0.52校）、最下位和歌山県（0.11校）で4.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

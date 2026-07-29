@@ -18,7 +18,7 @@
  *   (c) 年整合              — values が 200 のとき item.latestYear.yearCode が
  *                             values の持つ年集合に含まれるか
  *   (d) home featured       — `app/home/featured.json` の count が
- *                             HOME_FEATURED_RANKINGS の定義数以上か
+ *                             HOME_FEATURED_PROMINENCE の定義数以上か
  *   (e) per-URL 件数下限    — `app/survey/all.json` / 17 category の `items.json` が
  *                             極端に少なくないか (絶対フロア + 前回実行比のドリフト検知)
  *   (f) 正規化 snapshot 実在 — normalizationOptions を持つキーで
@@ -47,7 +47,9 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 
-import { HOME_FEATURED_RANKINGS, findExpectedEmpty } from "@stats47/data-configs";
+import { findExpectedEmpty } from "@stats47/data-configs";
+// HOME_FEATURED_RANKINGS は掲載価値スコアへの一元化で廃止。注目 8 件は生成物が持つ。
+import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
 
 import surveysMaster from "../data/surveys.json";
 
@@ -502,7 +504,7 @@ async function main() {
   // --- (d) home featured ---
   const homeRes = await fetchJson<{ count: number }>("app/home/featured.json");
   const homeCount = homeRes.body?.count ?? 0;
-  const homeExpected = HOME_FEATURED_RANKINGS.length;
+  const homeExpected = HOME_FEATURED_PROMINENCE.length;
   const homeOk = homeRes.status === 200 && homeCount >= homeExpected;
 
   // --- (e) survey / category 件数下限 ---

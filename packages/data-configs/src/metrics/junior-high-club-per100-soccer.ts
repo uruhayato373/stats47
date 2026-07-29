@@ -56,6 +56,4 @@ export const juniorHighClubPer100Soccer: MetricConfig = {
   "seoTitle": "中学サッカー部の加入率、都道府県で差｜1位茨城県6.94人 vs 最下位秋田県2.24人【2025年】",
   "seoDescription": "中学校のサッカー部(運動部活動)の加盟部員数を中学生100人あたりに換算し都道府県別に比較。1位茨城県(6.94人)、最下位秋田県(2.24人)で最大3.1倍の差。地図とグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

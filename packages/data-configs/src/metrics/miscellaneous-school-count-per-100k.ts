@@ -76,6 +76,4 @@ export const miscellaneousSchoolCountPer100k: MetricConfig = {
   "seoTitle": "各種学校数ランキング都道府県【2024年】｜1位山口県（2.89校）",
   "seoDescription": "2024年の各種学校数の都道府県別ランキング。1位山口県（2.89校）、最下位宮崎県（0.1校）で28.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

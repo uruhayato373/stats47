@@ -35,6 +35,4 @@ export const clothingFootwearExpenditureRatioMultiPersonHouseholds: MetricConfig
   "seoTitle": "被服及び履物費割合ランキング都道府県【2024年】｜1位愛知県（3.9％）",
   "seoDescription": "2024年の被服及び履物費割合の都道府県別ランキング。1位愛知県（3.9％）、最下位島根県（2.4％）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

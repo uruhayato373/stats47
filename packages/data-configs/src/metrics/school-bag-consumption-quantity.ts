@@ -59,6 +59,4 @@ export const schoolBagConsumptionQuantity: MetricConfig = {
   "seoTitle": "通学用かばん消費量ランキング都道府県【2024年】｜1位鳥取県（0.09個）",
   "seoDescription": "2024年の通学用かばん消費量の都道府県別ランキング。1位鳥取県（0.09個）、最下位福岡県（0個）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -43,6 +43,4 @@ export const volunteerActivityAnnualParticipationRate15plus: MetricConfig = {
   "seoTitle": "ボランティア活動の年間行動者率ランキング都道府県【2021年】｜1位島根県（26.1％）",
   "seoDescription": "2021年のボランティア活動の年間行動者率の都道府県別ランキング。1位島根県（26.1％）、最下位青森県（14.2％）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

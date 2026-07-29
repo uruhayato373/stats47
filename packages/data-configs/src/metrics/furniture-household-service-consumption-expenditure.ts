@@ -59,6 +59,4 @@ export const furnitureHouseholdServiceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "家具・家事用品関連サービス消費支出額ランキング都道府県【2024年】｜1位福島県（6,727円）",
   "seoDescription": "2024年の家具・家事用品関連サービス消費支出額の都道府県別ランキング。1位福島県（6,727円）、最下位長崎県（1,964円）で3.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

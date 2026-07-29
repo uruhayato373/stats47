@@ -59,6 +59,4 @@ export const personalItemsServiceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "身の回り用品関連サービス消費支出額ランキング都道府県【2024年】｜1位長崎県（3,891円）",
   "seoDescription": "2024年の身の回り用品関連サービス消費支出額の都道府県別ランキング。1位長崎県（3,891円）、最下位佐賀県（51円）で76.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

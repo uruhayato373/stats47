@@ -52,6 +52,4 @@ export const loanFundsPrefecture: MetricConfig = {
   "seoTitle": "貸付金ランキング都道府県【2022年】｜1位大阪府（712,303,000）",
   "seoDescription": "2022年の貸付金の都道府県別ランキング。1位大阪府（712,303,000）、最下位高知県（1,606,727）で443.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

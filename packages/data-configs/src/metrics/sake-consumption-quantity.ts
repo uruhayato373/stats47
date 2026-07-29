@@ -59,6 +59,4 @@ export const sakeConsumptionQuantity: MetricConfig = {
   "seoTitle": "清酒消費量1位は福島11,756ml、沖縄の15.3倍差｜47都道府県2024",
   "seoDescription": "日本酒(清酒)の1人あたり消費量は1位福島(11,756ml)、最下位沖縄(766ml)で15.3倍の地域差。47都道府県を地図とグラフで比較する2024年最新ランキング。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

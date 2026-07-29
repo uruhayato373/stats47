@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 
 import { KNOWN_THEME_SLUGS } from "../known-theme-slugs";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+ 
 const { __loadKeySetsForTest } = await import(
   "../../../../../.claude/scripts/lib/internal-link-lint.mjs"
 );

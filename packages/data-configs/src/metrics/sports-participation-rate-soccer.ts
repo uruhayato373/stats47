@@ -34,6 +34,4 @@ export const sportsParticipationRateSoccer: MetricConfig = {
   "seoTitle": "サッカーの行動者率ランキング都道府県【2021年】｜1位愛知県（6％）",
   "seoDescription": "2021年のサッカーの行動者率の都道府県別ランキング。1位愛知県（6％）、最下位岐阜県（2.7％）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

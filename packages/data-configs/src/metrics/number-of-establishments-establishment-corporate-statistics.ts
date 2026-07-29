@@ -61,6 +61,4 @@ export const numberOfEstablishmentsEstablishmentCorporateStatistics: MetricConfi
   "seoTitle": "事業所数ランキング都道府県【2006年】｜1位東京都（690,556所）",
   "seoDescription": "2006年の事業所数の都道府県別ランキング。1位東京都（690,556所）、最下位鳥取県（29,192所）で23.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

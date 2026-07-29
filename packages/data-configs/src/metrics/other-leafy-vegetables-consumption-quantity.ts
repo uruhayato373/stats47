@@ -59,6 +59,4 @@ export const otherLeafyVegetablesConsumptionQuantity: MetricConfig = {
   "seoTitle": "他の葉茎菜消費量ランキング都道府県【2024年】｜1位山形県（11,139g）",
   "seoDescription": "2024年の他の葉茎菜消費量の都道府県別ランキング。1位山形県（11,139g）、最下位佐賀県（5,035g）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

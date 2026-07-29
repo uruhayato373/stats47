@@ -38,6 +38,4 @@ export const grossFixedCapitalFormationRealH27: MetricConfig = {
   },
   "seoTitle": "総固定資本形成（実質）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

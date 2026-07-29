@@ -52,6 +52,4 @@ export const monthlyAverageActualWorkingHoursMale: MetricConfig = {
   "seoTitle": "月間平均実労働時間数ランキング都道府県【2024年】｜1位群馬県（180時間）",
   "seoDescription": "2024年の月間平均実労働時間数の都道府県別ランキング。1位群馬県（180時間）、最下位東京都（170時間）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

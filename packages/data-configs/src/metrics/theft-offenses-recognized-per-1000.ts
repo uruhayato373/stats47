@@ -87,6 +87,4 @@ export const theftOffensesRecognizedPer1000: MetricConfig = {
   "seoTitle": "窃盗犯認知件数ランキング都道府県【2023年】｜1位大阪府（6.65件）",
   "seoDescription": "2023年の窃盗犯認知件数の都道府県別ランキング。1位大阪府（6.65件）、最下位長崎県（1.68件）で4.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

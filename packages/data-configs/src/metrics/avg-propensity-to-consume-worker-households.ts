@@ -35,6 +35,4 @@ export const avgPropensityToConsumeWorkerHouseholds: MetricConfig = {
   "seoTitle": "平均消費性向ランキング都道府県【2024年】｜1位鳥取県（71.5％）",
   "seoDescription": "2024年の平均消費性向の都道府県別ランキング。1位鳥取県（71.5％）、最下位京都府（56.1％）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

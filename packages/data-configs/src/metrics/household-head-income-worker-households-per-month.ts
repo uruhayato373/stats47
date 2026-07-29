@@ -89,6 +89,4 @@ export const householdHeadIncomeWorkerHouseholdsPerMonth: MetricConfig = {
   "seoTitle": "世帯主収入ランキング都道府県【2024年】｜1位埼玉県（605.2千円）",
   "seoDescription": "2024年の世帯主収入の都道府県別ランキング。1位埼玉県（605.2千円）、最下位沖縄県（344.7千円）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

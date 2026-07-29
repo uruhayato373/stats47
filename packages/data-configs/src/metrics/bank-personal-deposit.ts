@@ -52,6 +52,4 @@ export const bankPersonalDeposit: MetricConfig = {
   "seoTitle": "国内銀行個人預金残高ランキング都道府県【2024年】｜1位東京都（1,556,581億円）",
   "seoDescription": "2024年の国内銀行個人預金残高の都道府県別ランキング。1位東京都（1,556,581億円）、最下位鳥取県（19,650億円）で79.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

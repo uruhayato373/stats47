@@ -59,6 +59,4 @@ export const happoshuConsumptionQuantity: MetricConfig = {
   "seoTitle": "発泡酒・ビール風アルコール飲料消費量ランキング都道府県【2024年】｜1位高知県（45.49l）",
   "seoDescription": "2024年の発泡酒・ビール風アルコール飲料消費量の都道府県別ランキング。1位高知県（45.49l）、最下位静岡県（10.67l）で4.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

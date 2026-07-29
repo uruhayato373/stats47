@@ -59,6 +59,4 @@ export const carInsuranceVoluntaryConsumptionExpenditure: MetricConfig = {
   "seoTitle": "自動車保険料(任意)消費支出額ランキング都道府県【2024年】｜1位鳥取県（62,451円）",
   "seoDescription": "2024年の自動車保険料(任意)消費支出額の都道府県別ランキング。1位鳥取県（62,451円）、最下位東京都（13,073円）で4.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const gardenMaintenanceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "植木・庭手入れ代消費支出額ランキング都道府県【2024年】｜1位奈良県（9,917円）",
   "seoDescription": "2024年の植木・庭手入れ代消費支出額の都道府県別ランキング。1位奈良県（9,917円）、最下位北海道（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

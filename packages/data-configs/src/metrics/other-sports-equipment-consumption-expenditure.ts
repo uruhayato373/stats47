@@ -59,6 +59,4 @@ export const otherSportsEquipmentConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の運動用具消費支出額ランキング都道府県【2024年】｜1位群馬県（7,992円）",
   "seoDescription": "2024年の他の運動用具消費支出額の都道府県別ランキング。1位群馬県（7,992円）、最下位和歌山県（1,431円）で5.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

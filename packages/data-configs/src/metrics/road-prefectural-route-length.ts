@@ -52,6 +52,4 @@ export const roadPrefecturalRouteLength: MetricConfig = {
   "seoTitle": "道路実延長（主要地方道）ランキング都道府県【2023年】｜1位北海道（4,561.5km）",
   "seoDescription": "2023年の道路実延長（主要地方道）の都道府県別ランキング。1位北海道（4,561.5km）、最下位沖縄県（412.6km）で11.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -50,6 +50,4 @@ export const windPowerPlantCountFacility: MetricConfig = {
   "seoTitle": "風力発電施設数（施設ベース）ランキング都道府県【2013年】｜1位北海道（50か所）",
   "seoDescription": "2013年の風力発電施設数（施設ベース）の都道府県別ランキング。1位北海道（50か所）、最下位香川県（0か所）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

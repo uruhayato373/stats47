@@ -59,6 +59,4 @@ export const tomatoConsumptionQuantity: MetricConfig = {
   "seoTitle": "トマト消費量ランキング都道府県【2024年】｜1位群馬県（13,179g）",
   "seoDescription": "2024年のトマト消費量の都道府県別ランキング。1位群馬県（13,179g）、最下位鳥取県（6,829g）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

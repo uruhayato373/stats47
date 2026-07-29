@@ -65,6 +65,4 @@ export const localSpecialGrantPrefecture: MetricConfig = {
   "seoTitle": "地方特例交付金ランキング都道府県【2022年】｜1位東京都（7,790,732）",
   "seoDescription": "2022年の地方特例交付金の都道府県別ランキング。1位東京都（7,790,732）、最下位高知県（325,479）で23.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const jamConsumptionQuantity: MetricConfig = {
   "seoTitle": "ジャム消費量ランキング都道府県【2024年】｜1位和歌山県（1,639g）",
   "seoDescription": "2024年のジャム消費量の都道府県別ランキング。1位和歌山県（1,639g）、最下位高知県（553g）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

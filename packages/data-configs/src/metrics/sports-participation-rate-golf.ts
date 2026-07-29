@@ -34,6 +34,4 @@ export const sportsParticipationRateGolf: MetricConfig = {
   "seoTitle": "ゴルフの行動者率ランキング都道府県【2021年】｜1位愛知県（9％）",
   "seoDescription": "2021年のゴルフの行動者率の都道府県別ランキング。1位愛知県（9％）、最下位青森県（2.8％）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

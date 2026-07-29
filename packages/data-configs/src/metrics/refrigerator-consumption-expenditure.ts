@@ -59,6 +59,4 @@ export const refrigeratorConsumptionExpenditure: MetricConfig = {
   "seoTitle": "電気冷蔵庫消費支出額ランキング都道府県【2024年】｜1位埼玉県（14,594円）",
   "seoDescription": "2024年の電気冷蔵庫消費支出額の都道府県別ランキング。1位埼玉県（14,594円）、最下位岐阜県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

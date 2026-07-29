@@ -50,6 +50,4 @@ export const railwayStationCount: MetricConfig = {
   "seoTitle": "鉄道駅数ランキング都道府県【2024年】｜1位東京都（837駅）",
   "seoDescription": "2024年の鉄道駅数の都道府県別ランキング。1位東京都（837駅）、最下位沖縄県（19駅）で44.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

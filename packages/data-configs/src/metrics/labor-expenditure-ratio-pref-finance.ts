@@ -70,6 +70,4 @@ export const laborExpenditureRatioPrefFinance: MetricConfig = {
   "seoTitle": "労働費割合ランキング都道府県【2022年】｜1位東京都（0.5％）",
   "seoDescription": "2022年の労働費割合の都道府県別ランキング。1位東京都（0.5％）、最下位三重県（0.15％）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

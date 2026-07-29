@@ -59,6 +59,4 @@ export const chocolateSnackConsumptionExpenditure: MetricConfig = {
   "seoTitle": "チョコレート菓子消費支出額ランキング都道府県【2024年】｜1位山形県（3,700円）",
   "seoDescription": "2024年のチョコレート菓子消費支出額の都道府県別ランキング。1位山形県（3,700円）、最下位群馬県（1,656円）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

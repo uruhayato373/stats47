@@ -53,6 +53,4 @@ export const windPowerCapacity: MetricConfig = {
   "seoTitle": "風力発電導入量（設備容量）ランキング都道府県【2017年】｜1位青森県（417,463kW）",
   "seoDescription": "2017年の風力発電導入量（設備容量）の都道府県別ランキング。1位青森県（417,463kW）、最下位香川県（0kW）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

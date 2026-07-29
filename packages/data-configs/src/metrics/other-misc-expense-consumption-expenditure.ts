@@ -59,6 +59,4 @@ export const otherMiscExpenseConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の諸雑費のその他消費支出額ランキング都道府県【2024年】｜1位奈良県（33,579円）",
   "seoDescription": "2024年の他の諸雑費のその他消費支出額の都道府県別ランキング。1位奈良県（33,579円）、最下位秋田県（4,002円）で8.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const icecreamConsumptionExpenditure: MetricConfig = {
   "seoTitle": "アイスクリーム・シャーベット消費支出額ランキング都道府県【2024年】｜1位山形県（14,747円）",
   "seoDescription": "2024年のアイスクリーム・シャーベット消費支出額の都道府県別ランキング。1位山形県（14,747円）、最下位兵庫県（9,971円）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

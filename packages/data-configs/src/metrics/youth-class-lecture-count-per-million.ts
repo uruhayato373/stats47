@@ -74,6 +74,4 @@ export const youthClassLectureCountPerMillion: MetricConfig = {
   "seoTitle": "青少年学級・講座数ランキング都道府県【2020年】｜1位鳥取県（3,001.4学級･講座）",
   "seoDescription": "2020年の青少年学級・講座数の都道府県別ランキング。1位鳥取県（3,001.4学級･講座）、最下位神奈川県（41.6学級･講座）で72.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

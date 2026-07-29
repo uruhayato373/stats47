@@ -2,9 +2,9 @@ import { fetchPrefectures } from "@stats47/area";
 
 import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 
+import { FooterAdSlot } from "@/features/ads";
 import { AreaDirectory } from "@/features/area-profile";
 
-import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -56,12 +56,12 @@ export default function AreasPage() {
 
             <AreaDirectory prefectures={prefectures} />
 
-            <div className="flex justify-center mt-8">
-                <AdSenseAd
-                    format={RANKING_PAGE_FOOTER.format}
-                    slotId={RANKING_PAGE_FOOTER.slotId}
-                />
-            </div>
+            {/*
+              旧実装は AdSenseAd を直に呼び、しかも ranking 詳細用の RANKING_PAGE_FOOTER を
+              流用していた (slotId が CONTENT_FOOTER と同値なので現状は無害だが、定数を
+              分割した瞬間にこの面だけ ranking 詳細のユニットを撃つ)。一覧面の共通枠へ是正。
+            */}
+            <FooterAdSlot />
         </PageShell>
     );
 }

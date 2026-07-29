@@ -35,6 +35,4 @@ export const grossPrefecturalProductConstructionH27: MetricConfig = {
   },
   "seoTitle": "県内総生産額（建設業）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

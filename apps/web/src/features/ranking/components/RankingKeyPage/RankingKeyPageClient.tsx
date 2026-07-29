@@ -20,7 +20,9 @@ import type { AreaType } from "@/features/area";
 import {
     RankingYearSelector,
     AreaTypeToggle,
-    RankingHeroCard,
+    RankingHeaderPanel,
+    RankingHeaderControls,
+    RankingHeaderStats,
     classifyRankingSubtitle,
 } from "@/features/ranking";
 
@@ -33,6 +35,7 @@ import { RankingPageContentSections, type RankingPageSections } from "./RankingP
 import { RankingVisualizationSection } from "./RankingVisualizationSection";
 import { useRankingPageState } from "./useRankingPageState";
 
+import type { NationalAveragePoint } from "../../lib/build-national-average-series";
 import type { TopoJSONTopology } from "@stats47/types";
 
 // useBreakpoint removed from layout-gating (replaced with CSS classes for CLS fix)
@@ -41,6 +44,8 @@ interface RankingKeyPageClientProps {
     rankingKey: string;
     rankingItem: RankingItem;
     rankingValues: RankingValue[];
+    /** サーバーが全年 values から畳んだ総数ベースの全国平均系列 */
+    nationalAverageSeries: NationalAveragePoint[];
     areaType?: AreaType;
     selectedYear?: string;
     topology?: TopoJSONTopology | null;
@@ -51,8 +56,6 @@ interface RankingKeyPageClientProps {
     cityRankingItem?: RankingItem;
     /** 調査名（surveys テーブルから取得） */
     surveyName?: string;
-    /** カテゴリ名（ヒーローカードの eyebrow 表示用） */
-    categoryName?: string;
     /** グループメンバー（normalization_basis トグル用） */
     groupMembers?: RankingBasisMember[];
     /** ArticleShell の breadcrumb slot に描画するパンくず */
@@ -65,6 +68,7 @@ export function RankingKeyPageClient({
     rankingKey,
     rankingItem,
     rankingValues: initialRankingValues,
+    nationalAverageSeries: initialNationalAverageSeries,
     areaType = "prefecture",
     selectedYear,
     topology,
@@ -72,7 +76,6 @@ export function RankingKeyPageClient({
     parentAreaCode,
     cityRankingItem,
     surveyName,
-    categoryName,
     groupMembers = [],
     breadcrumb,
     nationalTrend = null,
@@ -85,12 +88,14 @@ export function RankingKeyPageClient({
         handleNormalizationChange,
         handleYearChange,
         isPending,
+        nationalAverageSeries,
         normalizationType,
         rankingValues,
     } = useRankingPageState({
         rankingKey,
         rankingItem,
         initialRankingValues,
+        initialNationalAverageSeries,
         areaType,
         selectedYear,
         parentAreaCode,
@@ -218,59 +223,86 @@ export function RankingKeyPageClient({
 
     return (
         <ArticleShell rail={rail} breadcrumb={breadcrumb}>
-            {/* ヒーローカード（Option D）: タイトル + 単位ピル + メタ操作 + 暗色スタット */}
-            <RankingHeroCard
-                categoryName={categoryName}
-                title={displayInfo.title}
-                titleDetail={[definitionalSubtitle, displayInfo.demographicAttr]
-                    .filter(Boolean)
-                    .join("・") || null}
-                sourceName={sourceObj?.name ?? null}
-                yearName={latestYearName}
-                updatedAt={formattedUpdated}
-                rankingValues={rankingValues}
-                unit={displayInfo.unit}
-                normalizationOptions={rankingItem.calculation?.normalizationOptions}
-                normalizationValue={normalizationType ?? "original"}
-                onNormalizationChange={handleNormalizationChange}
-                normalizationDisabled={isPending}
-                metaControls={metaControls}
-                shareButton={
-                    <ShareButtons title={displayInfo.title} shareText={shareText} />
-                }
-            />
+            {/*
+              モバイルは h1 の直後に地図を出す (旧構成は暗色ヒーロー約470px + タブが
+              初期テーブル選択で、地図がヘッダーから約1300px下に埋もれていた)。
+              DOM は 1 つのまま order で並べ替える:
+                <lg  : h1 → 地図/テーブル → 操作 → スタット → 本文
+                lg+ : h1 → 操作 → スタット → 地図|テーブル → 本文
+              h1 は SEO・a11y の前提なので常に DOM 先頭に置く。
+              ArticleShell が既に <main> を持つため、ここは div (main 二重を避ける)。
+            */}
+            <div className="flex min-w-0 flex-col gap-4">
+                <div className="order-1">
+                    <RankingHeaderPanel
+                        title={displayInfo.title}
+                        titleDetail={[definitionalSubtitle, displayInfo.demographicAttr]
+                            .filter(Boolean)
+                            .join("・") || null}
+                        sourceName={sourceObj?.name ?? null}
+                        yearName={latestYearName}
+                        updatedAt={formattedUpdated}
+                    />
+                </div>
 
-            <RankingBasisSwitcher rankingKey={rankingKey} members={groupMembers} />
+                <div className="order-2 min-w-0 lg:order-4">
+                    <RankingVisualizationSection
+                        rankingItem={rankingItem}
+                        activeRankingItem={activeRankingItem}
+                        rankingValues={rankingValues}
+                        areaType={currentAreaType}
+                        topology={topology}
+                        headerActions={headerActions}
+                        cardFooter={cardFooter}
+                        isPending={isPending}
+                    />
+                </div>
 
-            {/* ArticleShell が既に <main> を持つため、ここは div (main 二重を避ける) */}
-            <div className="mt-4 flex flex-col gap-4 min-w-0">
-                <RankingVisualizationSection
-                    rankingItem={rankingItem}
-                    activeRankingItem={activeRankingItem}
+                <div className="order-3 flex flex-col gap-3 lg:order-2">
+                    <RankingHeaderControls
+                        normalizationOptions={rankingItem.calculation?.normalizationOptions}
+                        normalizationValue={normalizationType ?? "original"}
+                        onNormalizationChange={handleNormalizationChange}
+                        normalizationDisabled={isPending}
+                        shareButton={
+                            <ShareButtons title={displayInfo.title} shareText={shareText} />
+                        }
+                    />
+                    <RankingBasisSwitcher rankingKey={rankingKey} members={groupMembers} />
+                </div>
+
+                <RankingHeaderStats
+                    className="order-4 lg:order-3"
                     rankingValues={rankingValues}
+                    unit={displayInfo.unit}
+                    nationalAverageSeries={nationalAverageSeries}
                     areaType={currentAreaType}
-                    topology={topology}
-                    headerActions={headerActions}
-                    cardFooter={cardFooter}
-                    isPending={isPending}
+                    yearName={latestYearName}
                 />
 
-                <NationalTrendCard
-                    nationalTrend={nationalTrend}
-                    normalizationType={normalizationType}
-                    decimalPlaces={displayInfo.decimalPlaces}
-                />
+                {/*
+                  order-5 の枠は残す。この列は order-* でモバイルの並び (地図を先に見せる) を
+                  作っているので、order を持たない兄弟を足すと並びが崩れる。
+                  全国推移カードは本文コンテンツなので同じ枠の中に入れる。
+                */}
+                <div className="order-5 flex flex-col gap-4">
+                    <NationalTrendCard
+                        nationalTrend={nationalTrend}
+                        normalizationType={normalizationType}
+                        decimalPlaces={displayInfo.decimalPlaces}
+                    />
 
-                <RankingPageContentSections
-                    rankingKey={rankingKey}
-                    rankingItem={rankingItem}
-                    activeRankingItem={activeRankingItem}
-                    areaType={currentAreaType}
-                    displayInfo={displayInfo}
-                    normalizationType={normalizationType}
-                    dataNote={dataNote}
-                    sections={sections}
-                />
+                    <RankingPageContentSections
+                        rankingKey={rankingKey}
+                        rankingItem={rankingItem}
+                        activeRankingItem={activeRankingItem}
+                        areaType={currentAreaType}
+                        displayInfo={displayInfo}
+                        normalizationType={normalizationType}
+                        dataNote={dataNote}
+                        sections={sections}
+                    />
+                </div>
             </div>
         </ArticleShell>
     );

@@ -34,6 +34,4 @@ export const hobbyParticipationRateTheater: MetricConfig = {
   "seoTitle": "演芸・演劇・舞踊鑑賞の行動者率ランキング都道府県【2021年】｜1位東京都（12.6％）",
   "seoDescription": "2021年の演芸・演劇・舞踊鑑賞の行動者率の都道府県別ランキング。1位東京都（12.6％）、最下位青森県（3.2％）で3.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

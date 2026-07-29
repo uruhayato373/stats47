@@ -59,6 +59,4 @@ export const wineConsumptionQuantity: MetricConfig = {
   "seoTitle": "ワイン消費量ランキング都道府県【2024年】｜1位千葉県（9,387ml）",
   "seoDescription": "2024年のワイン消費量の都道府県別ランキング。1位千葉県（9,387ml）、最下位徳島県（1,060ml）で8.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -35,6 +35,4 @@ export const restaurantCountPer1000Alt: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

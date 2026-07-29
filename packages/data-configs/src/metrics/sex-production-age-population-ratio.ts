@@ -38,6 +38,4 @@ export const sexProductionAgePopulationRatio: MetricConfig = {
   },
   "seoTitle": "人口性比（15～64歳人口）(A130201/A130202)",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

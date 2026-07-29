@@ -47,6 +47,4 @@ export const outflowCommuterStudentPopulation: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

@@ -86,6 +86,4 @@ export const totalRevenuePrefecture: MetricConfig = {
   "seoTitle": "歳入決算総額ランキング都道府県【2022年】｜1位東京都（9,755,045,494）",
   "seoDescription": "2022年の歳入決算総額の都道府県別ランキング。1位東京都（9,755,045,494）、最下位鳥取県（405,728,488）で24.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

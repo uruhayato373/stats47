@@ -45,6 +45,4 @@ export const treatmentRateCerebrovascularInpatient: MetricConfig = {
   "seoTitle": "脳血管疾患の受療率（入院）ランキング都道府県【2023年】｜1位高知県（179人（人口10万対））",
   "seoDescription": "2023年の脳血管疾患の受療率（入院）の都道府県別ランキング。1位高知県（179人（人口10万対））、最下位愛知県（67人（人口10万対））で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

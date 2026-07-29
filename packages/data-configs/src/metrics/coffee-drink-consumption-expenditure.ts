@@ -59,6 +59,4 @@ export const coffeeDrinkConsumptionExpenditure: MetricConfig = {
   "seoTitle": "コーヒー飲料消費支出額ランキング都道府県【2024年】｜1位青森県（7,779円）",
   "seoDescription": "2024年のコーヒー飲料消費支出額の都道府県別ランキング。1位青森県（7,779円）、最下位長崎県（3,677円）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

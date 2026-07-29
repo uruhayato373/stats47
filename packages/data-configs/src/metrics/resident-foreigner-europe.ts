@@ -50,6 +50,4 @@ export const residentForeignerEurope: MetricConfig = {
     ],
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

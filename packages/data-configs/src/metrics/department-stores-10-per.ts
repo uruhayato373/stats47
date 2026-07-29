@@ -41,6 +41,4 @@ export const departmentStores10Per: MetricConfig = {
   },
   "groupKey": "department-stores-10-per",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

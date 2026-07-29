@@ -36,6 +36,4 @@ export const vacantHousingRate: MetricConfig = {
   "seoTitle": "空き家率ランキング｜なぜ徳島が全国1位?埼玉と2.3倍差【2023】",
   "seoDescription": "全国で空き家が増える中、なぜ徳島県が21.3％で全国1位なのか──最下位の埼玉県9.3％とは2.3倍の差があります。西日本で高くなる背景と47都道府県の分布を2023年データで可視化します。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

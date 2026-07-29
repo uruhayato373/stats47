@@ -80,6 +80,4 @@ export const localAllocationTaxRatioPrefFinance: MetricConfig = {
   "seoTitle": "地方交付税割合ランキング都道府県【2022年】｜1位高知県（37.42％）",
   "seoDescription": "2022年の地方交付税割合の都道府県別ランキング。1位高知県（37.42％）、最下位東京都（0％）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

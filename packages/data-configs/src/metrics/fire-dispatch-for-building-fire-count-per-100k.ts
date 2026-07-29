@@ -33,6 +33,4 @@ export const fireDispatchForBuildingFireCountPer100k: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

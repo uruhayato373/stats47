@@ -70,6 +70,4 @@ export const commerceIndustryExpenditureRatioPrefFinance: MetricConfig = {
   "seoTitle": "商工費割合ランキング都道府県【2022年】｜1位大阪府（22.82％）",
   "seoDescription": "2022年の商工費割合の都道府県別ランキング。1位大阪府（22.82％）、最下位埼玉県（4％）で5.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

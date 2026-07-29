@@ -80,6 +80,4 @@ export const totalAssessedLandArea: MetricConfig = {
   "seoTitle": "評価総地積ランキング都道府県【2023年】｜1位北海道（27,212,846,547ｍ2）",
   "seoDescription": "2023年の評価総地積の都道府県別ランキング。1位北海道（27,212,846,547ｍ2）、最下位大阪府（885,951,984ｍ2）で30.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

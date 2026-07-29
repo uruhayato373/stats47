@@ -59,6 +59,4 @@ export const saladConsumptionExpenditure: MetricConfig = {
   "seoTitle": "サラダ消費支出額ランキング都道府県【2024年】｜1位新潟県（10,125円）",
   "seoDescription": "2024年のサラダ消費支出額の都道府県別ランキング。1位新潟県（10,125円）、最下位鹿児島県（3,941円）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

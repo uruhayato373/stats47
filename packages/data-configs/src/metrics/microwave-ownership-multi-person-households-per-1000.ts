@@ -59,6 +59,4 @@ export const microwaveOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "seoTitle": "電子レンジ所有数量ランキング都道府県【2014年】｜1位茨城県（1,105台）",
   "seoDescription": "2014年の電子レンジ所有数量の都道府県別ランキング。1位茨城県（1,105台）、最下位沖縄県（1,004台）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

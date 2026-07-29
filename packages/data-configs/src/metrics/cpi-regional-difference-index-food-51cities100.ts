@@ -38,6 +38,4 @@ export const cpiRegionalDifferenceIndexFood51cities100: MetricConfig = {
   },
   "seoTitle": "消費者物価地域差指数（食料）（51市平均＝100）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

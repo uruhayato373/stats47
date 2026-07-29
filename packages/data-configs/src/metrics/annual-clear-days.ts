@@ -54,6 +54,4 @@ export const annualClearDays: MetricConfig = {
   "seoTitle": "年間快晴日数ランキング都道府県【2020年】｜1位鹿児島県（42日）",
   "seoDescription": "2020年の年間快晴日数の都道府県別ランキング。1位鹿児島県（42日）、最下位宮崎県（0日）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": true,
-  "featuredOrder": 6,
 };

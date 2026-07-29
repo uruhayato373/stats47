@@ -52,6 +52,4 @@ export const riceYieldPer10a: MetricConfig = {
   "seoTitle": "水稲10a当たり収量ランキング都道府県【2019年】｜1位山形県（627kg）",
   "seoDescription": "2019年の水稲10a当たり収量の都道府県別ランキング。1位山形県（627kg）、最下位沖縄県（295kg）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

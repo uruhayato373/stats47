@@ -34,6 +34,4 @@ export const sportsParticipationRateGroundGolf: MetricConfig = {
   "seoTitle": "グラウンドゴルフの行動者率ランキング都道府県【2021年】｜1位鹿児島県（5.1％）",
   "seoDescription": "2021年のグラウンドゴルフの行動者率の都道府県別ランキング。1位鹿児島県（5.1％）、最下位高知県（0.6％）で8.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

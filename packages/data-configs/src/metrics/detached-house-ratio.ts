@@ -35,6 +35,4 @@ export const detachedHouseRatio: MetricConfig = {
   "seoTitle": "一戸建住宅比率ランキング都道府県【2023年】｜1位秋田県（79.4％）",
   "seoDescription": "2023年の一戸建住宅比率の都道府県別ランキング。1位秋田県（79.4％）、最下位東京都（26.3％）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

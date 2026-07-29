@@ -53,6 +53,4 @@ export const maleScheduledEarnings: MetricConfig = {
   "seoTitle": "男性所定内給与額ランキング都道府県【2022年】｜1位東京都（308.9千円）",
   "seoDescription": "2022年の男性所定内給与額の都道府県別ランキング。1位東京都（308.9千円）、最下位沖縄県（0千円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

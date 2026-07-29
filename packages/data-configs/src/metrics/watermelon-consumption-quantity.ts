@@ -59,6 +59,4 @@ export const watermelonConsumptionQuantity: MetricConfig = {
   "seoTitle": "すいか消費量ランキング都道府県【2024年】｜1位熊本県（5,710g）",
   "seoDescription": "2024年のすいか消費量の都道府県別ランキング。1位熊本県（5,710g）、最下位岩手県（1,270g）で4.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

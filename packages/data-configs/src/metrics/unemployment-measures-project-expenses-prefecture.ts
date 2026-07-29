@@ -92,6 +92,4 @@ export const unemploymentMeasuresProjectExpensesPrefecture: MetricConfig = {
   "seoTitle": "失業対策事業費ランキング都道府県【2022年】｜1位沖縄県（0）",
   "seoDescription": "2022年の失業対策事業費の都道府県別ランキング。1位沖縄県（0）、最下位沖縄県（0）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

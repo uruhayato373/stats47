@@ -34,6 +34,4 @@ export const studyParticipationRateHomeEconomics: MetricConfig = {
   "seoTitle": "家政・家事の行動者率ランキング都道府県【2021年】｜1位京都府（16.1％）",
   "seoDescription": "2021年の家政・家事の行動者率の都道府県別ランキング。1位京都府（16.1％）、最下位青森県（8.9％）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

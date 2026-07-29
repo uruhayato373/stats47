@@ -59,6 +59,4 @@ export const frozenFoodConsumptionExpenditure: MetricConfig = {
   "seoTitle": "冷凍調理食品消費支出額ランキング都道府県【2024年】｜1位新潟県（15,311円）",
   "seoDescription": "2024年の冷凍調理食品消費支出額の都道府県別ランキング。1位新潟県（15,311円）、最下位沖縄県（7,292円）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const childrensSocksConsumptionExpenditure: MetricConfig = {
   "seoTitle": "子供用靴下消費支出額ランキング都道府県【2024年】｜1位宮城県（811円）",
   "seoDescription": "2024年の子供用靴下消費支出額の都道府県別ランキング。1位宮城県（811円）、最下位滋賀県（225円）で3.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

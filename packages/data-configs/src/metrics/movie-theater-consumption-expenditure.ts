@@ -59,6 +59,4 @@ export const movieTheaterConsumptionExpenditure: MetricConfig = {
   "seoTitle": "映画・演劇等入場料消費支出額ランキング都道府県【2024年】｜1位東京都（14,059円）",
   "seoDescription": "2024年の映画・演劇等入場料消費支出額の都道府県別ランキング。1位東京都（14,059円）、最下位愛媛県（1,904円）で7.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

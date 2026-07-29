@@ -59,6 +59,4 @@ export const womensShoesConsumptionQuantity: MetricConfig = {
   "seoTitle": "婦人靴消費量ランキング都道府県【2024年】｜1位千葉県（1.15足）",
   "seoDescription": "2024年の婦人靴消費量の都道府県別ランキング。1位千葉県（1.15足）、最下位高知県（0.54足）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

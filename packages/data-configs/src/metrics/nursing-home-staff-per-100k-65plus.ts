@@ -64,6 +64,4 @@ export const nursingHomeStaffPer100k65plus: MetricConfig = {
   "seoTitle": "老人ホーム従事者数ランキング都道府県【2023年】｜1位宮崎県（2,838.2人）",
   "seoDescription": "2023年の老人ホーム従事者数の都道府県別ランキング。1位宮崎県（2,838.2人）、最下位山梨県（1,176.7人）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

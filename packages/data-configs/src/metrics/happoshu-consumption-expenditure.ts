@@ -59,6 +59,4 @@ export const happoshuConsumptionExpenditure: MetricConfig = {
   "seoTitle": "発泡酒・ビール風アルコール飲料消費支出額ランキング都道府県【2024年】｜1位高知県（17,033円）",
   "seoDescription": "2024年の発泡酒・ビール風アルコール飲料消費支出額の都道府県別ランキング。1位高知県（17,033円）、最下位静岡県（4,181円）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

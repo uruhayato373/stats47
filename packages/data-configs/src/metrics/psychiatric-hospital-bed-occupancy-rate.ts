@@ -68,6 +68,4 @@ export const psychiatricHospitalBedOccupancyRate: MetricConfig = {
   "seoTitle": "精神科病院病床利用率ランキング都道府県【2023年】｜1位富山県（94.1％）",
   "seoDescription": "2023年の精神科病院病床利用率の都道府県別ランキング。1位富山県（94.1％）、最下位福島県（69.3％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

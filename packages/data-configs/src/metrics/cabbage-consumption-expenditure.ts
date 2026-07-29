@@ -59,6 +59,4 @@ export const cabbageConsumptionExpenditure: MetricConfig = {
   "seoTitle": "キャベツ消費支出額ランキング都道府県【2024年】｜1位宮崎県（4,206円）",
   "seoDescription": "2024年のキャベツ消費支出額の都道府県別ランキング。1位宮崎県（4,206円）、最下位和歌山県（2,551円）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

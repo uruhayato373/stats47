@@ -59,6 +59,4 @@ export const potsKettlesConsumptionQuantity: MetricConfig = {
   "seoTitle": "鍋・やかん消費量ランキング都道府県【2024年】｜1位長野県（1.03個）",
   "seoDescription": "2024年の鍋・やかん消費量の都道府県別ランキング。1位長野県（1.03個）、最下位静岡県（0.51個）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

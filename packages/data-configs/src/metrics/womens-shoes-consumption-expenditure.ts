@@ -59,6 +59,4 @@ export const womensShoesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "婦人靴消費支出額ランキング都道府県【2024年】｜1位京都府（7,218円）",
   "seoDescription": "2024年の婦人靴消費支出額の都道府県別ランキング。1位京都府（7,218円）、最下位高知県（2,681円）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

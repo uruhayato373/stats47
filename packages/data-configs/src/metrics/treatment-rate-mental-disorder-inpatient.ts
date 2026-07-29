@@ -45,6 +45,4 @@ export const treatmentRateMentalDisorderInpatient: MetricConfig = {
   "seoTitle": "精神障害の入院受療率ランキング｜鹿児島は神奈川の4倍【2023】",
   "seoDescription": "精神及び行動の障害による入院受療率は都道府県で4倍の差があります──1位鹿児島県413、最下位神奈川県103（人口10万対）。地域差の背景と47都道府県の分布を2023年データで解説します。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

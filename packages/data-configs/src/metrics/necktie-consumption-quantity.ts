@@ -59,6 +59,4 @@ export const necktieConsumptionQuantity: MetricConfig = {
   "seoTitle": "ネクタイ消費量ランキング都道府県【2024年】｜1位熊本県（0.21本）",
   "seoDescription": "2024年のネクタイ消費量の都道府県別ランキング。1位熊本県（0.21本）、最下位滋賀県（0.02本）で13.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

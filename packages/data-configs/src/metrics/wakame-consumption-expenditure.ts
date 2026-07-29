@@ -59,6 +59,4 @@ export const wakameConsumptionExpenditure: MetricConfig = {
   "seoTitle": "わかめ消費支出額ランキング都道府県【2024年】｜1位岩手県（2,796円）",
   "seoDescription": "2024年のわかめ消費支出額の都道府県別ランキング。1位岩手県（2,796円）、最下位沖縄県（869円）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

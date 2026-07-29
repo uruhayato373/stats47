@@ -1,0 +1,71 @@
+"use client";
+
+import { useMemo } from "react";
+
+import { cn } from "@stats47/components";
+
+import type { AreaType } from "@/features/area";
+
+import { computeRankingHeaderStats } from "../../utils/compute-ranking-header-stats";
+
+import { RankingNationalAverageStat } from "./RankingNationalAverageStat";
+import { RankingTopThreeList } from "./RankingTopThreeList";
+
+import type { NationalAveragePoint } from "../../lib/build-national-average-series";
+import type { RankingValue } from "@stats47/ranking";
+
+interface RankingHeaderStatsProps {
+  rankingValues: RankingValue[];
+  unit: string;
+  nationalAverageSeries: NationalAveragePoint[];
+  areaType: AreaType;
+  yearName?: string | null;
+  className?: string;
+}
+
+/**
+ * ヘッダー直下の統計ブロック (上位3県+最下位 / 全国平均+推移)。
+ *
+ * 右レールの有無で本文カラム幅が変わるため、ビューポートではなくコンテナクエリで
+ * 2 カラム化する (.claude/rules/ui-components.md)。
+ */
+export function RankingHeaderStats({
+  rankingValues,
+  unit,
+  nationalAverageSeries,
+  areaType,
+  yearName,
+  className,
+}: RankingHeaderStatsProps) {
+  const stats = useMemo(
+    () => computeRankingHeaderStats(rankingValues),
+    [rankingValues],
+  );
+
+  if (stats.count === 0) return null;
+
+  // 市区町村モードでは「全国平均」を出さない。1,700 超の市区町村の単純平均は
+  // 都道府県平均とも全国値とも別の量で、同じラベルで見せると誤読になる。
+  const showNationalAverage = areaType === "prefecture";
+
+  return (
+    <div className={cn("@container", className)}>
+      <div
+        className={cn(
+          "grid grid-cols-1 gap-3",
+          showNationalAverage && "@md:grid-cols-2",
+        )}
+      >
+        <RankingTopThreeList stats={stats} unit={unit} />
+        {showNationalAverage && (
+          <RankingNationalAverageStat
+            average={stats.average}
+            unit={unit}
+            series={nationalAverageSeries}
+            yearName={yearName}
+          />
+        )}
+      </div>
+    </div>
+  );
+}

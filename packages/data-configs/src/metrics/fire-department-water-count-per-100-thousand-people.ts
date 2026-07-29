@@ -89,6 +89,4 @@ export const fireDepartmentWaterCountPer100ThousandPeople: MetricConfig = {
   "seoTitle": "消防水利数ランキング都道府県【2022年】｜1位鳥取県（3,917.6所）",
   "seoDescription": "2022年の消防水利数の都道府県別ランキング。1位鳥取県（3,917.6所）、最下位沖縄県（1,080.6所）で3.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -86,6 +86,4 @@ export const physicalDisabilityRehabilitationCases: MetricConfig = {
   "seoTitle": "身体障害者更生援護取扱実人員ランキング都道府県【2007年】｜1位東京都（413,542人）",
   "seoDescription": "2007年の身体障害者更生援護取扱実人員の都道府県別ランキング。1位東京都（413,542人）、最下位富山県（7,663人）で54.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

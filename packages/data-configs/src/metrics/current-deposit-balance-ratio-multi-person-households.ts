@@ -35,6 +35,4 @@ export const currentDepositBalanceRatioMultiPersonHouseholds: MetricConfig = {
   "seoTitle": "預貯金現在高割合ランキング都道府県【2019年】｜1位新潟県（73.1％）",
   "seoDescription": "2019年の預貯金現在高割合の都道府県別ランキング。1位新潟県（73.1％）、最下位神奈川県（57.8％）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

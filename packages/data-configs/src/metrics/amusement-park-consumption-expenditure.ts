@@ -59,6 +59,4 @@ export const amusementParkConsumptionExpenditure: MetricConfig = {
   "seoTitle": "遊園地入場・乗物代消費支出額ランキング都道府県【2024年】｜1位千葉県（7,654円）",
   "seoDescription": "2024年の遊園地入場・乗物代消費支出額の都道府県別ランキング。1位千葉県（7,654円）、最下位秋田県（239円）で32.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

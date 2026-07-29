@@ -54,6 +54,4 @@ export const materialProduction: MetricConfig = {
   "seoTitle": "素材生産量ランキング都道府県【2007年】｜1位北海道（3,511千ｍ3）",
   "seoDescription": "2007年の素材生産量の都道府県別ランキング。1位北海道（3,511千ｍ3）、最下位香川県（3千ｍ3）で1170.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

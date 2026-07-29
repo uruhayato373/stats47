@@ -59,6 +59,4 @@ export const womensDressConsumptionQuantity: MetricConfig = {
   "seoTitle": "婦人服消費量ランキング都道府県【2024年】｜1位高知県（0.84着）",
   "seoDescription": "2024年の婦人服消費量の都道府県別ランキング。1位高知県（0.84着）、最下位長崎県（0.21着）で4.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

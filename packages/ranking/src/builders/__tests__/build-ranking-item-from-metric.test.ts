@@ -31,8 +31,6 @@ const baseConfig: MetricConfig = {
   surveyId: "census",
   tags: ["人口", "人口動態"],
   isActive: true,
-  isFeatured: true,
-  featuredOrder: 2,
 };
 
 describe("yearNameOf", () => {
@@ -62,8 +60,9 @@ describe("buildRankingItemFromMetric", () => {
     expect(item.unit).toBe("人");
     expect(item.categoryKey).toBe("population");
     expect(item.isActive).toBe(true);
-    expect(item.isFeatured).toBe(true);
-    expect(item.featuredOrder).toBe(2);
+    // hook は title/unit から導出する (config に列を持たない)。
+    // total-population は override があるので、そちらが優先される
+    expect(item.hook).toBe("人口が最も多い県は？");
     expect(item.surveyId).toBe("census");
     expect(item.dataSourceId).toBe("estat");
     expect(item.tags).toEqual([{ tagKey: "人口" }, { tagKey: "人口動態" }]);
@@ -143,15 +142,13 @@ describe("buildRankingItemFromMetric", () => {
     expect(item.surveyId).toBeNull();
   });
 
-  it("isActive/isFeatured/featuredOrder の undefined は false/false/0 に正規化", () => {
-    const { isActive: _a, isFeatured: _f, featuredOrder: _o, ...minimal } = baseConfig;
+  it("isActive の undefined は false に正規化", () => {
+    const { isActive: _a, ...minimal } = baseConfig;
     const item = buildRankingItemFromMetric(minimal as MetricConfig, {
       values: null,
       now: NOW,
     });
     expect(item.isActive).toBe(false);
-    expect(item.isFeatured).toBe(false);
-    expect(item.featuredOrder).toBe(0);
   });
 
   it("createdAt は existing 無ければ now を使う", () => {

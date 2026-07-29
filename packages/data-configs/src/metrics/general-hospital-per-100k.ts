@@ -61,6 +61,4 @@ export const generalHospitalPer100k: MetricConfig = {
   "seoTitle": "一般病院数（人口10万人当たり）ランキング市区町村【2020年】｜1位高知県 越知町（77.1施設）",
   "seoDescription": "2020年の一般病院数（人口10万人当たり）の市区町村別ランキング。1位高知県 越知町（77.1施設）、最下位沖縄県 与那国町（0施設）で地図やグラフで市区町村を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

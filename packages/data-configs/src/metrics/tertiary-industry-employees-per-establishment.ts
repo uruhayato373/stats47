@@ -54,6 +54,4 @@ export const tertiaryIndustryEmployeesPerEstablishment: MetricConfig = {
   "seoTitle": "第3次産業従業者数ランキング都道府県【2014年】｜1位東京都（14.86人）",
   "seoDescription": "2014年の第3次産業従業者数の都道府県別ランキング。1位東京都（14.86人）、最下位和歌山県（7.96人）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

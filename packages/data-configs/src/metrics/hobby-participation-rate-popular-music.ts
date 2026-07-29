@@ -34,6 +34,4 @@ export const hobbyParticipationRatePopularMusic: MetricConfig = {
   "seoTitle": "ポピュラー音楽鑑賞の行動者率ランキング都道府県【2021年】｜1位東京都（8.3％）",
   "seoDescription": "2021年のポピュラー音楽鑑賞の行動者率の都道府県別ランキング。1位東京都（8.3％）、最下位沖縄県（2.4％）で3.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

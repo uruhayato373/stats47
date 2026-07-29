@@ -59,6 +59,4 @@ export const childrensShoesConsumptionQuantity: MetricConfig = {
   "seoTitle": "子供用靴・サンダル消費量ランキング都道府県【2024年】｜1位大阪府（1.49足）",
   "seoDescription": "2024年の子供用靴・サンダル消費量の都道府県別ランキング。1位大阪府（1.49足）、最下位青森県（0.54足）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

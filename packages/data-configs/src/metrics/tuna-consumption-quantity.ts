@@ -59,6 +59,4 @@ export const tunaConsumptionQuantity: MetricConfig = {
   "seoTitle": "まぐろ消費量ランキング都道府県【2024年】｜1位静岡県（3,972g）",
   "seoDescription": "2024年のまぐろ消費量の都道府県別ランキング。1位静岡県（3,972g）、最下位大分県（234g）で17.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

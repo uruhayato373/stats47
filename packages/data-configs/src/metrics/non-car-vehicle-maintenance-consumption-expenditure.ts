@@ -59,6 +59,4 @@ export const nonCarVehicleMaintenanceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "自動車以外の輸送機器整備費消費支出額ランキング都道府県【2024年】｜1位石川県（2,281円）",
   "seoDescription": "2024年の自動車以外の輸送機器整備費消費支出額の都道府県別ランキング。1位石川県（2,281円）、最下位秋田県（170円）で13.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

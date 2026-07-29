@@ -59,6 +59,4 @@ export const chickenConsumptionQuantity: MetricConfig = {
   "seoTitle": "なぜ島根が鶏肉消費1位？東北・九州・東海が上位圏、関東が最下位の1.9倍格差（2024）",
   "seoDescription": "鶏肉消費量1位は島根県（24,769g）、最下位は茨城県（12,994g）で1.9倍差。地鶏文化・食文化圏ごとの消費パターンを47都道府県ランキングで解説（2024年）。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

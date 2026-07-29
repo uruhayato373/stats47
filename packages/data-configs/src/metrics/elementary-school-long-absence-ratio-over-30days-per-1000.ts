@@ -58,6 +58,4 @@ export const elementarySchoolLongAbsenceRatioOver30daysPer1000: MetricConfig = {
   "seoTitle": "小学校長期欠席児童比率ランキング都道府県【2023年】｜1位沖縄県（56.51‐）",
   "seoDescription": "2023年の小学校長期欠席児童比率の都道府県別ランキング。1位沖縄県（56.51‐）、最下位徳島県（22‐）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

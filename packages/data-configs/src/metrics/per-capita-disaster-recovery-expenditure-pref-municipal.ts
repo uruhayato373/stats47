@@ -35,6 +35,4 @@ export const perCapitaDisasterRecoveryExpenditurePrefMunicipal: MetricConfig = {
   },
   "groupKey": "disaster-recovery-expenses-prefecture",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

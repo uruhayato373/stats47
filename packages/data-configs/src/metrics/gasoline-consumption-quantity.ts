@@ -59,6 +59,4 @@ export const gasolineConsumptionQuantity: MetricConfig = {
   "seoTitle": "ガソリン消費量ランキング都道府県【2024年】｜1位鳥取県（664.01l）",
   "seoDescription": "2024年のガソリン消費量の都道府県別ランキング。1位鳥取県（664.01l）、最下位東京都（131.8l）で5.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

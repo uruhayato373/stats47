@@ -63,6 +63,4 @@ export const jrFreightShipment: MetricConfig = {
   "seoTitle": "ＪＲ貨物発送量ランキング都道府県【2023年】｜1位神奈川県（4,007,584トン）",
   "seoDescription": "2023年のＪＲ貨物発送量の都道府県別ランキング。1位神奈川県（4,007,584トン）、最下位沖縄県（0トン）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

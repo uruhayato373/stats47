@@ -59,6 +59,4 @@ export const otherBreadConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他のパン消費支出額ランキング都道府県【2024年】｜1位岡山県（28,883円）",
   "seoDescription": "2024年の他のパン消費支出額の都道府県別ランキング。1位岡山県（28,883円）、最下位秋田県（18,298円）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

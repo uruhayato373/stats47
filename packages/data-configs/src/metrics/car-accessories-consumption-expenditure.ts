@@ -59,6 +59,4 @@ export const carAccessoriesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "自動車等関連用品消費支出額ランキング都道府県【2024年】｜1位新潟県（28,369円）",
   "seoDescription": "2024年の自動車等関連用品消費支出額の都道府県別ランキング。1位新潟県（28,369円）、最下位沖縄県（2,976円）で9.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

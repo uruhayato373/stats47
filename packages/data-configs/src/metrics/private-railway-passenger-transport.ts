@@ -64,6 +64,4 @@ export const privateRailwayPassengerTransport: MetricConfig = {
   "seoTitle": "民鉄輸送人員ランキング都道府県【2023年】｜1位東京都（6,112,042.7千人）",
   "seoDescription": "2023年の民鉄輸送人員の都道府県別ランキング。1位東京都（6,112,042.7千人）、最下位宮崎県（0千人）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

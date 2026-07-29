@@ -54,6 +54,4 @@ export const freelanceCount: MetricConfig = {
   "seoTitle": "フリーランス人口ランキング都道府県【2022年】｜1位東京都（473,500人）",
   "seoDescription": "2022年のフリーランス人口の都道府県別ランキング。1位東京都（473,500人）、最下位鳥取県（7,400人）で64.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

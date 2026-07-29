@@ -53,6 +53,4 @@ export const newHousingStarts: MetricConfig = {
   "seoTitle": "着工新設住宅戸数ランキング都道府県【2024年】｜1位東京都（129,571戸）",
   "seoDescription": "2024年の着工新設住宅戸数の都道府県別ランキング。1位東京都（129,571戸）、最下位高知県（2,110戸）で61.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

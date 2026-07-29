@@ -71,6 +71,4 @@ export const prefecturalGeneralAdministrationStaff: MetricConfig = {
   "seoTitle": "一般行政部門職員数ランキング都道府県【2024年】｜1位東京都（21,111人）",
   "seoDescription": "2024年の一般行政部門職員数の都道府県別ランキング。1位東京都（21,111人）、最下位香川県（2,855人）で7.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

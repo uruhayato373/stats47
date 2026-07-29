@@ -85,6 +85,4 @@ export const floorAreaNewOwnerDwelling: MetricConfig = {
   "seoTitle": "着工新設持ち家住宅の床面積ランキング都道府県【2024年】｜1位福井県（120.3ｍ2）",
   "seoDescription": "2024年の着工新設持ち家住宅の床面積の都道府県別ランキング。1位福井県（120.3ｍ2）、最下位鹿児島県（103.9ｍ2）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

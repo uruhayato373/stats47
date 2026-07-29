@@ -59,6 +59,4 @@ export const womensSleepwearConsumptionExpenditure: MetricConfig = {
   "seoTitle": "婦人用寝巻き消費支出額ランキング都道府県【2024年】｜1位兵庫県（1,652円）",
   "seoDescription": "2024年の婦人用寝巻き消費支出額の都道府県別ランキング。1位兵庫県（1,652円）、最下位沖縄県（250円）で6.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

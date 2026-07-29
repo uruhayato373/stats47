@@ -87,6 +87,4 @@ export const privateLifeInsuranceContractsPer1000: MetricConfig = {
   "seoTitle": "民間生命保険保有契約件数ランキング都道府県【2024年】｜1位東京都（12,718.9件）",
   "seoDescription": "2024年の民間生命保険保有契約件数の都道府県別ランキング。1位東京都（12,718.9件）、最下位沖縄県（1,198.6件）で10.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

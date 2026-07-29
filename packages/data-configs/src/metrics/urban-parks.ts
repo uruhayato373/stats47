@@ -87,6 +87,4 @@ export const urbanParks: MetricConfig = {
   "seoTitle": "都市公園数ランキング都道府県【2023年】｜1位東京都（8,812）",
   "seoDescription": "2023年の都市公園数の都道府県別ランキング。1位東京都（8,812）、最下位山梨県（212）で41.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -52,6 +52,4 @@ export const outpatientRatePer100k: MetricConfig = {
   "seoTitle": "外来受療率1位は和歌山6,846人/10万、沖縄の1.5倍｜47都道府県2023",
   "seoDescription": "人口10万人あたり外来受療率は1位和歌山(6,846人)、最下位沖縄(4,528人)で1.5倍差。47都道府県を地図とグラフで比較する2023年最新ランキング。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

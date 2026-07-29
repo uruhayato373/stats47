@@ -82,6 +82,4 @@ export const dentistsInMedicalFacilities: MetricConfig = {
   "groupKey": "dentists-in-medical-facilities",
   "seoTitle": "医療施設に従事する歯科医師数",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

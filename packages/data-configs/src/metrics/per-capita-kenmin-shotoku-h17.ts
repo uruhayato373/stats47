@@ -52,6 +52,4 @@ export const perCapitaKenminShotokuH17: MetricConfig = {
   "seoTitle": "1人当たり県民所得ランキング都道府県【2014年】｜1位東京都（4,512千円）",
   "seoDescription": "2014年の1人当たり県民所得の都道府県別ランキング。1位東京都（4,512千円）、最下位沖縄県（2,129千円）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

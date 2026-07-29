@@ -87,6 +87,4 @@ export const sportsParkCountPer100km2: MetricConfig = {
   "seoTitle": "運動公園数ランキング都道府県【2023年】｜1位東京都（3.15所）",
   "seoDescription": "2023年の運動公園数の都道府県別ランキング。1位東京都（3.15所）、最下位秋田県（0.22所）で14.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

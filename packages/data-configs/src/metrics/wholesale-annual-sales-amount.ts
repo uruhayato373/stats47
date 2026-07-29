@@ -40,6 +40,4 @@ export const wholesaleAnnualSalesAmount: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

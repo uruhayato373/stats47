@@ -59,6 +59,4 @@ export const seaBreamConsumptionExpenditure: MetricConfig = {
   "seoTitle": "たい消費支出額ランキング都道府県【2024年】｜1位兵庫県（2,524円）",
   "seoDescription": "2024年のたい消費支出額の都道府県別ランキング。1位兵庫県（2,524円）、最下位山梨県（251円）で10.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

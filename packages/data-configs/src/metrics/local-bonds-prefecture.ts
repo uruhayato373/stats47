@@ -97,6 +97,4 @@ export const localBondsPrefecture: MetricConfig = {
   "seoTitle": "地方債ランキング都道府県【2022年】｜1位愛知県（283,459,888）",
   "seoDescription": "2022年の地方債の都道府県別ランキング。1位愛知県（283,459,888）、最下位香川県（29,482,000）で9.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

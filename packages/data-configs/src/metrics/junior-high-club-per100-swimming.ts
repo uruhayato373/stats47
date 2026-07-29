@@ -56,6 +56,4 @@ export const juniorHighClubPer100Swimming: MetricConfig = {
   "seoTitle": "中学水泳部の加入率、都道府県で差｜1位大阪府1.65人 vs 最下位福井県0.08人【2025年】",
   "seoDescription": "中学校の水泳部(運動部活動)の加盟部員数を中学生100人あたりに換算し都道府県別に比較。1位大阪府(1.65人)、最下位福井県(0.08人)で最大20.6倍の差。地図とグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

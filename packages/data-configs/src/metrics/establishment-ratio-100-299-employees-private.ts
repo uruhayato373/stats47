@@ -40,6 +40,4 @@ export const establishmentRatio100299EmployeesPrivate: MetricConfig = {
   "seoTitle": "100〜299人の事業所割合ランキング都道府県【2021年】｜1位東京都（1.52％）",
   "seoDescription": "2021年の100〜299人の事業所割合の都道府県別ランキング。1位東京都（1.52％）、最下位宮崎県（0.65％）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

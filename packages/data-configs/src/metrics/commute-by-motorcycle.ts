@@ -55,6 +55,4 @@ export const commuteByMotorcycle: MetricConfig = {
   "seoTitle": "自宅外通勤・通学者数（オートバイ）ランキング都道府県【2020年】｜1位大阪府（163,880人）",
   "seoDescription": "2020年の自宅外通勤・通学者数（オートバイ）の都道府県別ランキング。1位大阪府（163,880人）、最下位秋田県（586人）で279.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

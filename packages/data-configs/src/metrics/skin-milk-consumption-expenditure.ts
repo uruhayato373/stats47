@@ -59,6 +59,4 @@ export const skinMilkConsumptionExpenditure: MetricConfig = {
   "seoTitle": "乳液消費支出額ランキング都道府県【2024年】｜1位佐賀県（3,289円）",
   "seoDescription": "2024年の乳液消費支出額の都道府県別ランキング。1位佐賀県（3,289円）、最下位沖縄県（921円）で3.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

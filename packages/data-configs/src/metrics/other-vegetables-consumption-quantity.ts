@@ -59,6 +59,4 @@ export const otherVegetablesConsumptionQuantity: MetricConfig = {
   "seoTitle": "他の野菜のその他消費量ランキング都道府県【2024年】｜1位沖縄県（12,931g）",
   "seoDescription": "2024年の他の野菜のその他消費量の都道府県別ランキング。1位沖縄県（12,931g）、最下位和歌山県（3,559g）で3.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

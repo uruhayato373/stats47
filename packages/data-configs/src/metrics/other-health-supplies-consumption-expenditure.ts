@@ -59,6 +59,4 @@ export const otherHealthSuppliesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の保健医療用品・器具消費支出額ランキング都道府県【2024年】｜1位長野県（14,713円）",
   "seoDescription": "2024年の他の保健医療用品・器具消費支出額の都道府県別ランキング。1位長野県（14,713円）、最下位愛媛県（2,167円）で6.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

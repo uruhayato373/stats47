@@ -105,6 +105,4 @@ export const psychiatricBedCount: MetricConfig = {
   "seoTitle": "精神病床数ランキング都道府県【2023年】｜1位東京都（20,665床）",
   "seoDescription": "2023年の精神病床数の都道府県別ランキング。1位東京都（20,665床）、最下位鳥取県（1,628床）で12.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

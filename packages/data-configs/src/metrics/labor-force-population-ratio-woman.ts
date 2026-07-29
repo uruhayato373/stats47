@@ -36,6 +36,4 @@ export const laborForcePopulationRatioWoman: MetricConfig = {
   "seoTitle": "労働力人口比率ランキング都道府県【2020年】｜1位福井県（54.5％）",
   "seoDescription": "2020年の労働力人口比率の都道府県別ランキング。1位福井県（54.5％）、最下位大阪府（43.9％）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

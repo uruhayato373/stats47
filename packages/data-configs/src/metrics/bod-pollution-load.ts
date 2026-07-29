@@ -53,6 +53,4 @@ export const bodPollutionLoad: MetricConfig = {
   "seoTitle": "BOD汚濁負荷量ランキング都道府県【2019年】｜1位佐賀県（65,654.4kg/日）",
   "seoDescription": "2019年のBOD汚濁負荷量の都道府県別ランキング。1位佐賀県（65,654.4kg/日）、最下位山梨県（555.1kg/日）で118.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

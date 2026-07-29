@@ -17,6 +17,7 @@ import { ArticleCard, RailCard, RailLinkItem, RailLinkList, SurfaceLinkCard } fr
 
 import {
     FurusatoNozeiCard,
+    RailAdSlot,
     RakutenItemsCard,
     SidebarPromoBanner,
 } from "@/features/ads";
@@ -36,7 +37,7 @@ import {
 } from "@/features/blog/server";
 
 import { getRequiredBaseUrl } from "@/lib/env";
-import { AdSenseAd, RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
+import { RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
 import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
@@ -193,11 +194,8 @@ export default async function BlogPostPage({ params }: PageProps) {
             <SidebarPromoBanner index={0} position="sidebar-left" />
             <SidebarPromoBanner index={1} position="sidebar-right" />
 
-            <RailCard title="広告" bodyClassName="flex justify-center overflow-hidden px-4 pb-4 pt-3">
-                <div className="flex justify-center overflow-hidden">
-                    <AdSenseAd format={RANKING_PAGE_SIDEBAR.format} slotId={RANKING_PAGE_SIDEBAR.slotId} showLabel={false} />
-                </div>
-            </RailCard>
+            {/* 右レールの広告枠。RightRailWidgets と同じ slot 部品に寄せた (2026-07-29) */}
+            <RailAdSlot slot={RANKING_PAGE_SIDEBAR} />
 
             {/* 記事の対象県のふるさと納税 (タイトルから県を検出できた記事のみ) */}
             {furusatoPrefCode && <FurusatoNozeiCard areaCode={furusatoPrefCode} />}

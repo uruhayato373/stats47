@@ -69,6 +69,4 @@ export const residentialAreaRatio: MetricConfig = {
   "seoTitle": "住居専用地域面積比率ランキング都道府県【2023年】｜1位東京都（57.6％）",
   "seoDescription": "2023年の住居専用地域面積比率の都道府県別ランキング。1位東京都（57.6％）、最下位愛媛県（21.6％）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

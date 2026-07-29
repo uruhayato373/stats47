@@ -70,6 +70,4 @@ export const finalDisposalSiteRemainingCapacity: MetricConfig = {
   "seoTitle": "最終処分場残余容量ランキング都道府県【2023年】｜1位東京都（21,771千ｍ3）",
   "seoDescription": "2023年の最終処分場残余容量の都道府県別ランキング。1位東京都（21,771千ｍ3）、最下位徳島県（57千ｍ3）で381.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

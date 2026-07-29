@@ -51,6 +51,4 @@ export const cityGasSalesVolume: MetricConfig = {
   "seoTitle": "都市ガス販売量ランキング都道府県【2016年】｜1位東京都（23,010,341万ＭＪ）",
   "seoDescription": "2016年の都市ガス販売量の都道府県別ランキング。1位東京都（23,010,341万ＭＪ）、最下位島根県（82,733万ＭＪ）で278.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

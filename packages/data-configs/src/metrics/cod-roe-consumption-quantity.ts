@@ -59,6 +59,4 @@ export const codRoeConsumptionQuantity: MetricConfig = {
   "seoTitle": "たらこ消費量ランキング都道府県【2024年】｜1位福岡県（1,145g）",
   "seoDescription": "2024年のたらこ消費量の都道府県別ランキング。1位福岡県（1,145g）、最下位沖縄県（124g）で9.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

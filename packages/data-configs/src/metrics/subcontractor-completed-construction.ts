@@ -85,6 +85,4 @@ export const subcontractorCompletedConstruction: MetricConfig = {
   "seoTitle": "下請完成工事高ランキング都道府県【2023年】｜1位東京都（13,182,266百万円）",
   "seoDescription": "2023年の下請完成工事高の都道府県別ランキング。1位東京都（13,182,266百万円）、最下位鳥取県（166,021百万円）で79.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

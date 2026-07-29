@@ -59,6 +59,4 @@ export const massageFeeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "マッサージ料金等(診療外)消費支出額ランキング都道府県【2024年】｜1位東京都（9,838円）",
   "seoDescription": "2024年のマッサージ料金等(診療外)消費支出額の都道府県別ランキング。1位東京都（9,838円）、最下位和歌山県（275円）で35.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

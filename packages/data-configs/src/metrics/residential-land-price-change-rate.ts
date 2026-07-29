@@ -36,6 +36,4 @@ export const residentialLandPriceChangeRate: MetricConfig = {
   "seoTitle": "住宅地地価変動率ランキング都道府県【2024年】｜1位沖縄県（5.8%）",
   "seoDescription": "2024年の住宅地地価変動率の都道府県別ランキング。1位沖縄県（5.8%）、最下位愛媛県（-1.2%）で-4.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

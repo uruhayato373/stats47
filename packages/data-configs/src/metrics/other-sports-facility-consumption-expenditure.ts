@@ -59,6 +59,4 @@ export const otherSportsFacilityConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他のスポーツ施設使用料消費支出額ランキング都道府県【2024年】｜1位兵庫県（7,353円）",
   "seoDescription": "2024年の他のスポーツ施設使用料消費支出額の都道府県別ランキング。1位兵庫県（7,353円）、最下位長崎県（831円）で8.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

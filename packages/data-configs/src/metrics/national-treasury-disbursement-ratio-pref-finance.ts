@@ -59,6 +59,4 @@ export const nationalTreasuryDisbursementRatioPrefFinance: MetricConfig = {
   "seoTitle": "国庫支出金割合ランキング都道府県【2022年】｜1位沖縄県（32.51％）",
   "seoDescription": "2022年の国庫支出金割合の都道府県別ランキング。1位沖縄県（32.51％）、最下位東京都（12.9％）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

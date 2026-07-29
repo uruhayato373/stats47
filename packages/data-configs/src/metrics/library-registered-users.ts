@@ -56,6 +56,4 @@ export const libraryRegisteredUsers: MetricConfig = {
   "seoTitle": "図書館登録者数ランキング都道府県【2020年】｜1位東京都（3,398,821人）",
   "seoDescription": "2020年の図書館登録者数の都道府県別ランキング。1位東京都（3,398,821人）、最下位青森県（97,898人）で34.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

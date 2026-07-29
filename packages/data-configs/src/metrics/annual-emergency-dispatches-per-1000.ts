@@ -51,6 +51,4 @@ export const annualEmergencyDispatchesPer1000: MetricConfig = {
   "seoTitle": "年間救急出動件数ランキング都道府県【2023年】｜1位大阪府（78.7件）",
   "seoDescription": "2023年の年間救急出動件数の都道府県別ランキング。1位大阪府（78.7件）、最下位福井県（46.2件）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

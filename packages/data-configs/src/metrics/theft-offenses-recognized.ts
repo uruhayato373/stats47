@@ -102,6 +102,4 @@ export const theftOffensesRecognized: MetricConfig = {
   "seoTitle": "窃盗犯認知件数ランキング都道府県【2023年】｜1位東京都（59,888件）",
   "seoDescription": "2023年の窃盗犯認知件数の都道府県別ランキング。1位東京都（59,888件）、最下位島根県（1,187件）で50.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

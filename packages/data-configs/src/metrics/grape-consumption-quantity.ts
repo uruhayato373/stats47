@@ -59,6 +59,4 @@ export const grapeConsumptionQuantity: MetricConfig = {
   "seoTitle": "ぶどう消費量ランキング都道府県【2024年】｜1位山梨県（3,937g）",
   "seoDescription": "2024年のぶどう消費量の都道府県別ランキング。1位山梨県（3,937g）、最下位沖縄県（658g）で6.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

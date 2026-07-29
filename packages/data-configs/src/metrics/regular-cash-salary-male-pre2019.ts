@@ -34,6 +34,4 @@ export const regularCashSalaryMalePre2019: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

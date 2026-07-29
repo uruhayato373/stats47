@@ -53,6 +53,4 @@ export const solarPowerHousing: MetricConfig = {
   "seoTitle": "太陽光を利用した発電機器のある住宅数ランキング都道府県【2023年】｜1位愛知県（208,300戸）",
   "seoDescription": "2023年の太陽光を利用した発電機器のある住宅数の都道府県別ランキング。1位愛知県（208,300戸）、最下位秋田県（8,400戸）で24.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

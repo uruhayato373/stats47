@@ -59,6 +59,4 @@ export const friedTofuConsumptionExpenditure: MetricConfig = {
   "seoTitle": "油揚げ・がんもどき消費支出額ランキング都道府県【2024年】｜1位福井県（5,620円）",
   "seoDescription": "2024年の油揚げ・がんもどき消費支出額の都道府県別ランキング。1位福井県（5,620円）、最下位沖縄県（1,704円）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

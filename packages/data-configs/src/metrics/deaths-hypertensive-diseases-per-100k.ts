@@ -66,6 +66,4 @@ export const deathsHypertensiveDiseasesPer100k: MetricConfig = {
   "seoTitle": "高血圧性疾患による死亡者数ランキング都道府県【2023年】｜1位群馬県（20.9人）",
   "seoDescription": "2023年の高血圧性疾患による死亡者数の都道府県別ランキング。1位群馬県（20.9人）、最下位愛知県（3.4人）で6.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -34,6 +34,4 @@ export const foodRetailStoreCountPer1000Alt: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

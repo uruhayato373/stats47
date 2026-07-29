@@ -76,6 +76,4 @@ export const majorLakeArea: MetricConfig = {
   "seoTitle": "主要湖沼面積ランキング都道府県【2024年】｜1位北海道（69,077ｈａ）",
   "seoDescription": "2024年の主要湖沼面積の都道府県別ランキング。1位北海道（69,077ｈａ）、最下位沖縄県（0ｈａ）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

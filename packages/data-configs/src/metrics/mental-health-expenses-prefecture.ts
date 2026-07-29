@@ -67,6 +67,4 @@ export const mentalHealthExpensesPrefecture: MetricConfig = {
   "seoTitle": "精神衛生費ランキング都道府県【2022年】｜1位福岡県（8,499,992）",
   "seoDescription": "2022年の精神衛生費の都道府県別ランキング。1位福岡県（8,499,992）、最下位宮崎県（34,276）で248.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

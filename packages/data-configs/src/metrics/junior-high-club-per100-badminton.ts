@@ -56,6 +56,4 @@ export const juniorHighClubPer100Badminton: MetricConfig = {
   "seoTitle": "中学バドミントン部の加入率、都道府県で差｜1位富山県8.63人 vs 最下位島根県0.43人【2025年】",
   "seoDescription": "中学校のバドミントン部(運動部活動)の加盟部員数を中学生100人あたりに換算し都道府県別に比較。1位富山県(8.63人)、最下位島根県(0.43人)で最大20.1倍の差。地図とグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

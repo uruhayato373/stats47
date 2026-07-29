@@ -95,6 +95,4 @@ export const paidNursingHomeResidentsPer100065plus: MetricConfig = {
   "seoTitle": "有料老人ホーム在所者数ランキング都道府県【2023年】｜1位宮崎県（32.23人）",
   "seoDescription": "2023年の有料老人ホーム在所者数の都道府県別ランキング。1位宮崎県（32.23人）、最下位福井県（2.86人）で11.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

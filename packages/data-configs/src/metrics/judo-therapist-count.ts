@@ -36,6 +36,4 @@ export const judoTherapistCount: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

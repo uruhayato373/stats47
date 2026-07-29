@@ -59,6 +59,4 @@ export const adultSneakersConsumptionQuantity: MetricConfig = {
   "seoTitle": "大人用運動靴消費量ランキング都道府県【2024年】｜1位高知県（1.46足）",
   "seoDescription": "2024年の大人用運動靴消費量の都道府県別ランキング。1位高知県（1.46足）、最下位鹿児島県（0.49足）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

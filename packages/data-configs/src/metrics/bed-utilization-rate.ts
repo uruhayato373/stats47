@@ -37,6 +37,4 @@ export const bedUtilizationRate: MetricConfig = {
   "seoTitle": "病床利用率ランキング都道府県【2024年】｜1位佐賀県（82.4％）",
   "seoDescription": "2024年の病床利用率の都道府県別ランキング。1位佐賀県（82.4％）、最下位福島県（66.4％）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

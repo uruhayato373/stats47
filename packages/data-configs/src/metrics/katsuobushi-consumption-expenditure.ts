@@ -59,6 +59,4 @@ export const katsuobushiConsumptionExpenditure: MetricConfig = {
   "seoTitle": "かつお節・削り節消費支出額ランキング都道府県【2024年】｜1位沖縄県（2,412円）",
   "seoDescription": "2024年のかつお節・削り節消費支出額の都道府県別ランキング。1位沖縄県（2,412円）、最下位鳥取県（566円）で4.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

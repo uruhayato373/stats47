@@ -50,6 +50,4 @@ export const voterTurnoutCouncilProportional: MetricConfig = {
   "seoTitle": "参議院議員選挙投票率（比例代表）ランキング都道府県【2022年】｜1位山形県（61.86％）",
   "seoDescription": "2022年の参議院議員選挙投票率（比例代表）の都道府県別ランキング。1位山形県（61.86％）、最下位徳島県（45.72％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

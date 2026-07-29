@@ -34,6 +34,4 @@ export const hobbyParticipationRateManga: MetricConfig = {
   "seoTitle": "マンガを読む行動者率ランキング都道府県【2021年】｜1位東京都（43.2％）",
   "seoDescription": "2021年のマンガを読む行動者率の都道府県別ランキング。1位東京都（43.2％）、最下位青森県（29.3％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

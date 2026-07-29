@@ -53,6 +53,4 @@ export const averageLengthOfStay: MetricConfig = {
   "seoTitle": "平均在院日数ランキング都道府県【2024年】｜1位高知県（38.3日）",
   "seoDescription": "2024年の平均在院日数の都道府県別ランキング。1位高知県（38.3日）、最下位東京都（20.3日）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

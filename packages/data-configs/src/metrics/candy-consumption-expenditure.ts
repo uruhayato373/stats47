@@ -59,6 +59,4 @@ export const candyConsumptionExpenditure: MetricConfig = {
   "seoTitle": "キャンデー消費支出額ランキング都道府県【2024年】｜1位北海道（3,337円）",
   "seoDescription": "2024年のキャンデー消費支出額の都道府県別ランキング。1位北海道（3,337円）、最下位栃木県（2,039円）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

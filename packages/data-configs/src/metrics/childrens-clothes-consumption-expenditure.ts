@@ -59,6 +59,4 @@ export const childrensClothesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "子供服消費支出額ランキング都道府県【2024年】｜1位埼玉県（10,244円）",
   "seoDescription": "2024年の子供服消費支出額の都道府県別ランキング。1位埼玉県（10,244円）、最下位長崎県（2,439円）で4.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

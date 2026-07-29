@@ -35,6 +35,4 @@ export const grossPrefecturalProductProfessionalScientificSupportH27: MetricConf
   },
   "seoTitle": "県内総生産額（専門・科学技術、業務支援サービス業）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

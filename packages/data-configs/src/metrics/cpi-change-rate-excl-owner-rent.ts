@@ -37,6 +37,4 @@ export const cpiChangeRateExclOwnerRent: MetricConfig = {
   },
   "seoTitle": "消費者物価指数対前年変化率（持ち家の帰属家賃を除く総合）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

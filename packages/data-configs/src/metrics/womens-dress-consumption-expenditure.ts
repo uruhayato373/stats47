@@ -59,6 +59,4 @@ export const womensDressConsumptionExpenditure: MetricConfig = {
   "seoTitle": "婦人服消費支出額ランキング都道府県【2024年】｜1位奈良県（9,903円）",
   "seoDescription": "2024年の婦人服消費支出額の都道府県別ランキング。1位奈良県（9,903円）、最下位三重県（2,063円）で4.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

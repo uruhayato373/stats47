@@ -82,6 +82,4 @@ export const manufacturingEstablishments: MetricConfig = {
   "seoTitle": "製造業事業所数ランキング都道府県【2024年】｜1位大阪府（18,481事業所）",
   "seoDescription": "2024年の製造業事業所数の都道府県別ランキング。1位大阪府（18,481事業所）、最下位鳥取県（854事業所）で21.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

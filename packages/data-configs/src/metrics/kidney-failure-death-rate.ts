@@ -53,6 +53,4 @@ export const kidneyFailureDeathRate: MetricConfig = {
   "seoTitle": "腎不全による死亡者数ランキング都道府県【2023年】｜1位高知県（45.2人）",
   "seoDescription": "2023年の腎不全による死亡者数の都道府県別ランキング。1位高知県（45.2人）、最下位神奈川県（17.3人）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

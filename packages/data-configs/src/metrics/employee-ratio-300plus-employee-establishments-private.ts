@@ -35,6 +35,4 @@ export const employeeRatio300plusEmployeeEstablishmentsPrivate: MetricConfig = {
   "seoTitle": "300人以上事業所の従業者割合ランキング都道府県【2021年】｜1位東京都（29.06％）",
   "seoDescription": "2021年の300人以上事業所の従業者割合の都道府県別ランキング。1位東京都（29.06％）、最下位高知県（4.95％）で5.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

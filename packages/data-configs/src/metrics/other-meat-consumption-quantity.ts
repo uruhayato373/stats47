@@ -59,6 +59,4 @@ export const otherMeatConsumptionQuantity: MetricConfig = {
   "seoTitle": "他の生鮮肉消費量ランキング都道府県【2024年】｜1位熊本県（2,703g）",
   "seoDescription": "2024年の他の生鮮肉消費量の都道府県別ランキング。1位熊本県（2,703g）、最下位三重県（786g）で3.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

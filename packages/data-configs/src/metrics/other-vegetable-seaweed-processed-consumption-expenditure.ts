@@ -59,6 +59,4 @@ export const otherVegetableSeaweedProcessedConsumptionExpenditure: MetricConfig 
   "seoTitle": "他の野菜・海藻加工品のその他消費支出額ランキング都道府県【2024年】｜1位静岡県（3,197円）",
   "seoDescription": "2024年の他の野菜・海藻加工品のその他消費支出額の都道府県別ランキング。1位静岡県（3,197円）、最下位大分県（1,677円）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

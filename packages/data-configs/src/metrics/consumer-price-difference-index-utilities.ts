@@ -38,6 +38,4 @@ export const consumerPriceDifferenceIndexUtilities: MetricConfig = {
   },
   "seoTitle": "消費者物価地域差指数（光熱・水道）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

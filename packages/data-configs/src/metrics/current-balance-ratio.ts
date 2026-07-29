@@ -74,6 +74,4 @@ export const currentBalanceRatio: MetricConfig = {
   "seoTitle": "経常収支比率ランキング都道府県【2022年】｜1位大阪府（102.2％）",
   "seoDescription": "2022年の経常収支比率の都道府県別ランキング。1位大阪府（102.2％）、最下位東京都（79.5％）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const tollRoadFeeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "有料道路料消費支出額ランキング都道府県【2024年】｜1位滋賀県（13,321円）",
   "seoDescription": "2024年の有料道路料消費支出額の都道府県別ランキング。1位滋賀県（13,321円）、最下位沖縄県（2,729円）で4.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

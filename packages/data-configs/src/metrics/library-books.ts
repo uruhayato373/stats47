@@ -57,6 +57,4 @@ export const libraryBooks: MetricConfig = {
   "seoTitle": "図書館蔵書数ランキング都道府県【2021年】｜1位東京都（49,412,510冊）",
   "seoDescription": "2021年の図書館蔵書数の都道府県別ランキング。1位東京都（49,412,510冊）、最下位高知県（3,118,552冊）で15.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

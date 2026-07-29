@@ -48,6 +48,4 @@ export const coreAgriculturalWorkers: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

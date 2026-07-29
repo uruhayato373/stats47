@@ -53,6 +53,4 @@ export const manufacturingShipment: MetricConfig = {
   "seoTitle": "製造品出荷額等ランキング市区町村【2022年】｜1位愛知県 豊田市（16,814,436百万円）",
   "seoDescription": "2022年の製造品出荷額等の市区町村別ランキング。1位愛知県 豊田市（16,814,436百万円）、最下位沖縄県 伊是名村（0百万円）で地図やグラフで市区町村を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

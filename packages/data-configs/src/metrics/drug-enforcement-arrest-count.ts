@@ -102,6 +102,4 @@ export const drugEnforcementArrestCount: MetricConfig = {
   "seoTitle": "覚醒剤取締検挙件数ランキング都道府県【2023年】｜1位東京都（1,351件）",
   "seoDescription": "2023年の覚醒剤取締検挙件数の都道府県別ランキング。1位東京都（1,351件）、最下位山形県（8件）で168.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

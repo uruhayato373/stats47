@@ -63,6 +63,4 @@ export const nationalParkArea: MetricConfig = {
   "seoTitle": "国立公園面積ランキング都道府県【2024年】｜1位北海道（755,572ｈａ）",
   "seoDescription": "2024年の国立公園面積の都道府県別ランキング。1位北海道（755,572ｈａ）、最下位佐賀県（0ｈａ）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };
