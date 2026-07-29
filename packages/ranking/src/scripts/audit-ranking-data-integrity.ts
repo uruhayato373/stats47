@@ -24,7 +24,8 @@
  *   (f) 正規化 snapshot 実在 — normalizationOptions を持つキーで
  *                             `values-per-*.json` / `national-trend.json` が 200 か
  *   (g) 正規化 値域         — fixture ゲート (lib/normalized-fixtures.ts) の期待レンジに入るか
- *   (h) 正規化 鮮度         — values.json と正規化 snapshot の generatedAt 差が閾値以内か
+ *   (h) 正規化 鮮度         — 相対 (values.json との generatedAt 差) と絶対 (現在時刻との差) の
+ *                             2 軸。相対だけだと values.json ごと凍結したキーを見逃す
  *
  * (f)(g)(h) は 2026-07-29 の障害 (values-per-area.json が 100 倍過大な値のまま 2 ヶ月配信) の
  * 再発検知。件数チェックだけでは「値が桁違い」も「writer 不在で凍結」も捕まえられなかった。
@@ -86,6 +87,17 @@ const DRIFT_RATIO_THRESHOLD = 0.5;
  */
 const NORMALIZED_STALE_DAYS = 8;
 
+/**
+ * 正規化 snapshot の **絶対鮮度** の上限日数 (現在時刻との差)。
+ *
+ * NORMALIZED_STALE_DAYS は values.json との**相対**比較なので、values.json 自身も同時に
+ * 凍結していると素通りする (2026-07-29 実測: inpatient-rate-per-100k は values.json 05-22 /
+ * 正規化 05-21 で 1 日差のため検知できず、100 倍の誤値が残っていた)。
+ * writer は sync-snapshots のたびに全 target を上書きするので、正常運用なら 30 日を超えない。
+ * 「writer が動かなくなった」ものを相対比較の死角なしに捕まえる。
+ */
+const NORMALIZED_ABSOLUTE_STALE_DAYS = 30;
+
 const NORM_TYPES = ["per_population", "per_area"] as const;
 type NormType = (typeof NORM_TYPES)[number];
 
@@ -131,8 +143,8 @@ interface NormalizedChecks {
   trendPresent: number;
   /** 欠落 (宣言しているのに 200 でない) */
   missing: Array<{ key: string; artifact: string }>;
-  /** 鮮度違反 (values.json との generatedAt 差が閾値超) */
-  stale: Array<{ key: string; artifact: string; ageDays: number }>;
+  /** 鮮度違反。kind="relative" = values.json との差 / "absolute" = 現在時刻との差 */
+  stale: Array<{ key: string; artifact: string; ageDays: number; kind: "relative" | "absolute" }>;
   /** 値域違反 */
   fixtureViolations: FixtureViolation[];
   ok: boolean;
@@ -166,6 +178,30 @@ interface AuditReport {
   };
   normalized: NormalizedChecks;
   ok: boolean;
+}
+
+/**
+ * 正規化 artifact の鮮度を 2 軸で検査する。
+ * - relative: values.json との差 (writer だけ止まったケース)
+ * - absolute: 現在時刻との差 (values.json ごと凍結したケース = 相対比較の死角)
+ */
+function checkFreshness(
+  key: string,
+  artifact: string,
+  baseGeneratedAt: string | undefined,
+  artifactGeneratedAt: string | undefined,
+  now: number,
+): NormalizedChecks["stale"] {
+  const out: NormalizedChecks["stale"] = [];
+  const rel = ageInDays(baseGeneratedAt, artifactGeneratedAt);
+  if (rel !== null && rel > NORMALIZED_STALE_DAYS) {
+    out.push({ key, artifact, ageDays: Math.round(rel), kind: "relative" });
+  }
+  const abs = artifactGeneratedAt ? (now - Date.parse(artifactGeneratedAt)) / 86_400_000 : null;
+  if (abs !== null && Number.isFinite(abs) && abs > NORMALIZED_ABSOLUTE_STALE_DAYS) {
+    out.push({ key, artifact, ageDays: Math.round(abs), kind: "absolute" });
+  }
+  return out;
 }
 
 /** 2 つの ISO 日時の差 (日) を返す。パース不能なら null */
@@ -260,6 +296,7 @@ async function main() {
   const concurrency = concIdx >= 0 ? Number(args[concIdx + 1]) : 25;
 
   const previous = loadPreviousSnapshot(jsonOutPath);
+  const now = Date.now();
 
   console.log(`# ranking データ整合性 監査 (${new Date().toISOString()})`);
   console.log(`R2 base: ${R2_BASE}\n`);
@@ -329,10 +366,9 @@ async function main() {
 
     if (trendRes.status === 200 && (trendRes.body?.series?.length ?? 0) > 0) {
       normalized.trendPresent++;
-      const age = ageInDays(baseGeneratedAt, trendRes.body?.generatedAt);
-      if (age !== null && age > NORMALIZED_STALE_DAYS) {
-        normalized.stale.push({ key, artifact: "national-trend.json", ageDays: Math.round(age) });
-      }
+      normalized.stale.push(
+        ...checkFreshness(key, "national-trend.json", baseGeneratedAt, trendRes.body?.generatedAt, now),
+      );
     } else {
       normalized.missing.push({ key, artifact: "national-trend.json" });
     }
@@ -348,10 +384,9 @@ async function main() {
       }
       normalized.perType[normType].present++;
 
-      const age = ageInDays(baseGeneratedAt, res.body.generatedAt);
-      if (age !== null && age > NORMALIZED_STALE_DAYS) {
-        normalized.stale.push({ key, artifact, ageDays: Math.round(age) });
-      }
+      normalized.stale.push(
+        ...checkFreshness(key, artifact, baseGeneratedAt, res.body.generatedAt, now),
+      );
 
       // (g) 値域: 最新年 partition を fixture ゲートにかける
       const latest = res.body.partitions?.[0];
@@ -477,9 +512,14 @@ async function main() {
     `  (g) 値域違反: ${normalized.fixtureViolations.length} 件 (期待レンジは lib/normalized-fixtures.ts)`,
   );
   for (const v of normalized.fixtureViolations.slice(0, 10)) console.log(`      ${v.message}`);
-  console.log(`  (h) 鮮度違反 (values.json との差 > ${NORMALIZED_STALE_DAYS} 日): ${normalized.stale.length} 件`);
+  const staleRel = normalized.stale.filter((s) => s.kind === "relative").length;
+  const staleAbs = normalized.stale.filter((s) => s.kind === "absolute").length;
+  console.log(
+    `  (h) 鮮度違反: ${normalized.stale.length} 件 ` +
+      `(relative>${NORMALIZED_STALE_DAYS}日=${staleRel} / absolute>${NORMALIZED_ABSOLUTE_STALE_DAYS}日=${staleAbs})`,
+  );
   for (const s of normalized.stale.slice(0, 10))
-    console.log(`      ${s.key} / ${s.artifact} (${s.ageDays} 日差)`);
+    console.log(`      ${s.key} / ${s.artifact} (${s.kind} ${s.ageDays} 日)`);
   if (normalized.stale.length > 10)
     console.log(`      … 他 ${normalized.stale.length - 10} 件 (--json で全件)`);
 
