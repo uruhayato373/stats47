@@ -1,7 +1,8 @@
 /**
  * live-http — production HTTP probe (read-only GET・credential 不要)。
  *
- * 正典: docs/02_実装計画/39 §2.6 / §15 (read-only smoke は許可)。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md
+ * (read-only smoke は許可)。
  * Googlebot UA と通常 UA の status 差を見て、5xx / soft-404(thin 200) / noindex / redirect を実測する。
  * mutation はしない (GET のみ)。ログに query/secret を出さない。
  */

@@ -15,13 +15,13 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ## [TRIAGE-2026-07-03] 期日到達施策の effect/* 確定 (improvement-triage)
 
-期日到達済み施策をバックログ (`docs/todo/01_改善バックログ.md`) と同期して判定確定。実測ソースは各行に併記。
+期日到達済み施策をバックログ (`docs/todo/04_改善バックログ.md`) と同期して判定確定。実測ソースは各行に併記。
 
 - **BLOG-WAVE-2026-05-25-auto → effect/none 確定**: 実測 W21→W26 clicks 127→94 (-33) / imp -787 / CTR 1.12%→0.89% (下記 §BLOG-WAVE-2026-05-25-auto の 2026-06-28 自動計測)。同期間サイト全体 clicks +75% (1,110→1,947, `.claude/state/metrics/gsc/history.csv`) の中で対象 53 記事のみ減 = 想定リフト (+131 clicks/週) 未達。**[仮説]** title reframe が既得 query との整合を崩した (下落上位: temperature-extremes -31 / price-index -22 / child-height -10 clicks)。**検証コマンド**: 対象 slug を W22/W26 の `snapshots/*/queries.csv` で query 別 diff。**検証期日**: 2026-07-12 (weekly-review)
 - **BLOG-WAVE-2026-05-29-auto → effect/none 確定**: 実測 W21→W26 clicks 7→5 (-2) / imp 1,258→881 (-377)。position 4 記事全て悪化 (+0.5〜+1.7)。サイト全体 +75% 成長下で横ばい以下
 - **SEO-TITLE-FIX-01 → effect/partial 確定**: 対象 /areas/ 群 GSC clicks 4→50 / imp 671→5,249 (W21→W26, `snapshots/{2026-W21,2026-W26}/pages.csv` を `awk '$1 ~ /\/areas\//'` で集計、取得日 2026-07-03)。ただし area-category +705 URL index化 (W23)・AREA-PROFILE-FIX-01 解消と交絡し単独寄与は分離不能
 - **BLOG-CTR-05 → effect/none 確定**: 3 記事 (child-height/manufacturing-aichi/temperature-extremes) W22→W26 clicks 59→11 / imp 5,882→2,337。temperature-extremes は position 9.14→9.03 でほぼ不変なのに CTR 1.31%→0.38% と急落。/category は imp 89→281 (W23→W26) と増加だが clicks 5→6。**[仮説]** title 変更による CTR 悪化 (query mix 変化の交絡あり)。**検証期日**: 2026-07-12
-- **INDEXING-AUTO-01 → RETIRED 2026-07-23 (準拠是正)**: Google Indexing API は公式に JobPosting/BroadcastEvent VideoObject 専用 (quickstart, アクセス日 2026-07-23) で通常ページは対象外。cron `gsc-auto-resubmit-daily.yml` を schedule 削除・retired stub 化、`auto-resubmit.mjs`/`submit-cities-indexing.mjs` の publish path 撤去、coverage queue の `resubmit` action を `observe-after-fix` へ改名。過去送信履歴 (`resubmit-history.json` 累計 7,635 success) は証拠保持。effect は公式仕様外のため未実証で終了 (URL Inspection 観測は `gsc-url-inspection-daily.yml` で継続)。詳細は下記 §[INDEXING-AUTO-01]。正典: docs/02_実装計画/39 Phase 1
+- **INDEXING-AUTO-01 → RETIRED 2026-07-23 (準拠是正)**: Google Indexing API は公式に JobPosting/BroadcastEvent VideoObject 専用 (quickstart, アクセス日 2026-07-23) で通常ページは対象外。cron `gsc-auto-resubmit-daily.yml` を schedule 削除・retired stub 化、`auto-resubmit.mjs`/`submit-cities-indexing.mjs` の publish path 撤去、coverage queue の `resubmit` action を `observe-after-fix` へ改名。過去送信履歴 (`resubmit-history.json` 累計 7,635 success) は証拠保持。effect は公式仕様外のため未実証で終了 (URL Inspection 観測は `gsc-url-inspection-daily.yml` で継続)。詳細は下記 §[INDEXING-AUTO-01]。正典: `.claude/skills/analytics/search-growth/reference/platform-contract.md`
 - **COVERAGE-LOOP-01 → effect/pending (期日 2026-07-14 に再設定)**: 件数減判定に必要な次週 GSC UI export が未取込 (`.claude/state/gsc/coverage-totals-history.csv` は 2026-W25 の 1 行のみ)。次: 人間 export → `ingest-gsc-export.py` + `build-coverage-queue.mjs`
 - **COVERAGE-DEACT-01 → effect/partial 確定**: 意図した空200→410 は本番実測で達成 — `curl -s -o /dev/null -w "%{http_code}" -A Googlebot https://stats47.jp/ranking/{marine-aquaculture-output,university-advancement}` → 410 (2026-07-03)。**副作用**: 同時の一括棚卸し (gone-ranking-keys.ts +398 キー, commit a179526) が実データ保有 56 キーを誤GONE化し本番 410 誤配信 → 2026-07-03 全復帰 (births/marriages/ratio-65-plus = 200 実測、同 curl)。再発防止は ranking-key-consistency.test.ts (GONE∩KNOWN=∅ / GONE∩isActive=∅ を CI 検証)。GSC soft404/404 減 + imp 回復は RANKING-GONE-RESTORE-01 (期日 2026-07-31) で追跡
 
@@ -572,7 +572,8 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ### [INDEXING-AUTO-01] Indexing API による問題 URL 自動再送信 — RETIRED 2026-07-23
 
-> **⚠️ RETIRED 2026-07-23 (準拠是正・正典 docs/02_実装計画/39 Phase 1)**: Google Indexing API の公式対象は
+> **⚠️ RETIRED 2026-07-23**（準拠正典:
+> `.claude/skills/analytics/search-growth/reference/platform-contract.md`）: Google Indexing API の公式対象は
 > JobPosting または BroadcastEvent を含む VideoObject ページのみ
 > (https://developers.google.com/search/apis/indexing-api/v3/quickstart、アクセス日 2026-07-23。
 > "can only be used to crawl pages with either job posting or broadcast event markup")。
@@ -629,7 +630,7 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **follow-up (COVERAGE-LOOP-01 から派生)**:
   1. **deactivate 32 → COVERAGE-DEACT-01 実装済 (2026-06-16)**: 根本原因は **stale ISR prerender** — 本 OpenNext 構成は revalidate が効かず、過去デプロイ時の prerender 200 が再デプロイまで配信される (`feedback_home_pure_ssg_r2_empty`、`x-nextjs-cache: STALE` で確認)。32 本は現在 config も R2 (all.json 2169/item.json/values.json) も無いのに stale 200 を返していた。→ `apps/web/src/config/gone-ranking-keys.ts` に 32 本追加 (middleware:72 `isGone`→410 で stale ページより前段で短絡)。KNOWN(2121)/sitemap には元々不在のため変更不要。GONE∩KNOWN=0 検証済・url-policy test 13/13 pass。**次デプロイで有効化** → 本番 410 を Googlebot UA で実測したら queue を done に。queue: content_verdict=deactivate / wave 2026-06-16-coverage-deact / status in-progress。
   2. **noindex 13** (未着手): city/search/未公開blog を noindex or 410。
-  3. **enrich 46** (未着手): area×category の県別データ化 (全国テンプレ流用の解消)。情報設計 `docs/01_技術設計/07_情報設計.md` の area ページ責務と併せて判断。
+  3. **enrich 46** (未着手): area×category の県別データ化 (全国テンプレ流用の解消)。情報設計 `docs/01_技術設計/03_情報設計.md` の area ページ責務と併せて判断。
 
 ### [PHASE-9-FOLLOWUP] Cloudflare token 集約 + Smoke Test cascade fix
 

@@ -10,7 +10,7 @@ primary_agent: snapshot-exporter
 ---
 
 R2 の `app/stats/<metric>/values.json` を入力に、指標ペアの相関を batch 計算 → R2 snapshot に書き出す。
-完全DBレス設計 (`docs/01_技術設計/12_完全DBレス設計.md`) の Derived: 永続 DB を持たず、**使い捨て
+完全DBレス設計 (`docs/01_技術設計/02_データアーキテクチャ.md`) の Derived: 永続 DB を持たず、**使い捨て
 `:memory:` SQLite** で集計してプロセス終了とともに破棄する。
 
 > ✅ **実装済み (2026-06-14)** — 実体は `packages/correlation/src/scripts/build-correlation-snapshot.ts`。

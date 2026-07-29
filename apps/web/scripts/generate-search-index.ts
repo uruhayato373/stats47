@@ -1,5 +1,5 @@
 /**
- * 検索インデックス生成スクリプト (完全DBレス: docs/01_技術設計/12_完全DBレス設計.md)
+ * 検索インデックス生成スクリプト (完全DBレス: docs/01_技術設計/02_データアーキテクチャ.md)
  *
  * 3 つの SSOT を統合して MiniSearch 用の search-index.json と
  * フィルタ用の search-index-meta.json を生成する:

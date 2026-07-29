@@ -5,7 +5,7 @@
  * posts.json の X 投稿 (template あり・impressions>0) を winners/losers に分割し、
  * feature (template / category / 時間帯 / 曜日) ごとに lift・confidence を出す。
  * 結果は投稿生成 (post-x-batch ③) が参照する `.claude/state/sns/x-winning-patterns.json` と
- * 人間向け `docs/04_レビュー/<date>-x-winning-patterns.md` に書く。
+ * 比較用レポートを `.claude/skills/sns/x-viral-research/reference/reports/<date>.md` に書く。
  *
  * ★実証ベース (evidence-based-judgment.md):
  *   - 実測 impressions を outcome にする (推測しない)。
@@ -184,7 +184,11 @@ function main() {
     "> カタログ (§2) への反映は §2-10 の人間承認ゲート経由。",
     "",
   ].join("\n");
-  const mdPath = path.join(PROJECT_ROOT, "docs/04_レビュー", `${today}-x-winning-patterns.md`);
+  const mdPath = path.join(
+    PROJECT_ROOT,
+    ".claude/skills/sns/x-viral-research/reference/reports",
+    `${today}.md`,
+  );
   fs.mkdirSync(path.dirname(mdPath), { recursive: true });
   fs.writeFileSync(mdPath, md);
 

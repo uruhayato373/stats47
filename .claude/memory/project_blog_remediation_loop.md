@@ -11,7 +11,7 @@ metadata:
 
 **「次にどのブログを直すか」の真実源 = `.claude/state/blog/remediation-queue.json`** (状態付き・GSC流入×品質blockerの統合スコア・must-fixレーン最上位)。「ブログ品質を上げたい/記事を直したい」と言われたらまずこのキューを見る。
 
-- 仕組みの正典: `docs/02_実装計画/blog-remediation-loop.md`
+- 仕組みの正典: `.claude/rules/blog-remediation-loop.md`
 - 品質基準の正典: `.claude/rules/blog-quality-standards.md` (記事アーキタイプ A-E / 図あたりprose字数の床 350・550 / callout)
 - builder: `node .claude/scripts/blog/build-remediation-queue.mjs` (build / `--next N` / `--mark-in-progress` / `--mark-done --wave-id`)
 - 実行: `/brushup-blog --target queue --next N` (article-writer が archetype+図あたり字数で是正 → blog-critic PASS 必須 → publish)

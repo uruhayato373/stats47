@@ -41,6 +41,7 @@ user-invocable: false
 |---|---|---|
 | レビューして・チェックして | `review-router` で判定 | 「レビューして」 |
 | 週次計画・振り返り | `/weekly-plan` / `/weekly-review` | 「今週の計画立てて」 |
+| ドキュメント作成・整理・統合・削除 | `/maintain-docs` | 「docsを整理して」「設計書を作成して」 |
 | 戦略を考えたい | `/growth-loops` / `/monetization-strategy` | 「収益化について考えて」 |
 
 ### 開発系 → devops-runner / code-reviewer

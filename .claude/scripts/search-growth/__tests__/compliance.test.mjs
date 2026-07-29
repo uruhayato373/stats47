@@ -1,5 +1,5 @@
 /**
- * Phase 1 compliance regression tests (docs/02_実装計画/39 §13 Compliance).
+ * Indexing API compliance regression tests.
  *
  * Google Indexing API は公式に JobPosting / BroadcastEvent VideoObject 専用。
  * stats47 の通常ページ (ranking/area/theme/blog/410) への送信 path が存在しないことを

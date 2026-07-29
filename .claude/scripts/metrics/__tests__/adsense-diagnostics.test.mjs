@@ -1,6 +1,6 @@
 /**
  * adsense-diagnostics.mjs / page-type.mjs のテスト — W26→W30 実測 fixture での検出・sample gate・
- * dedupe・past-effect 抑制・最大3件 (doc41 §4.3/§7.3)。
+ * dedupe・past-effect 抑制・最大3件。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -20,7 +20,7 @@ import { classifyPageType, aggregateByPageType, PAGE_TYPES } from "../lib/page-t
 
 const BASELINE_END = "2026-07-25";
 
-// W26 / W30 の実測 snapshot 値 (doc41 §1.2/§1.3・committed CSV と一致)
+// W26 / W30 の実測 snapshot 値 (committed CSV と一致)
 const SITE_W26 = { earnings: 139, pageViews: 2616, impressions: 1856, viewability: 0.6773, pageRpm: 53 };
 const SITE_W30 = { earnings: 129, pageViews: 3819, impressions: 4070, viewability: 0.5685, pageRpm: 34 };
 const DESKTOP_W26 = { earnings: 110, pageViews: 1683, impressions: 1502, viewability: 0.6977, pageRpm: 66 };
@@ -28,7 +28,7 @@ const DESKTOP_W30 = { earnings: 88, pageViews: 2486, impressions: 3349, viewabil
 const MOBILE_W26 = { earnings: 27, pageViews: 910, impressions: 337, viewability: 0.5732, pageRpm: 30 };
 const MOBILE_W30 = { earnings: 38, pageViews: 1294, impressions: 670, viewability: 0.5124, pageRpm: 29 };
 
-test("W26→W30: site 全体の impression-dilution を検出する (doc41 §1.2 再現)", () => {
+test("W26→W30: site 全体の impression-dilution を検出する", () => {
   const c = detectImpressionDilution({ current: SITE_W30, previous: SITE_W26, baselineEnd: BASELINE_END });
   assert.ok(c, "dilution が検出されない");
   assert.equal(c.rule, "impression-dilution");
@@ -41,7 +41,7 @@ test("W26→W30: site 全体の impression-dilution を検出する (doc41 §1.2
   assert.ok(c.rollback);
 });
 
-test("W26→W30: Desktop の device-regression を検出し Mobile は検出しない (§1.3)", () => {
+test("W26→W30: Desktop の device-regression を検出し Mobile は検出しない", () => {
   const desktop = detectDeviceRegression({ device: "Desktop", current: DESKTOP_W30, previous: DESKTOP_W26, baselineEnd: BASELINE_END });
   assert.ok(desktop, "Desktop regression が検出されない");
   assert.equal(desktop.key, "Desktop");
@@ -50,7 +50,7 @@ test("W26→W30: Desktop の device-regression を検出し Mobile は検出し�
   assert.equal(mobile, null);
 });
 
-test("sample gate: impressions 不足では判定しない (§7.3)", () => {
+test("sample gate: impressions 不足では判定しない", () => {
   const small = { ...SITE_W30, impressions: 999 };
   assert.equal(detectImpressionDilution({ current: small, previous: SITE_W26, baselineEnd: BASELINE_END }), null);
   const smallDev = { ...DESKTOP_W30, impressions: 499 };
@@ -158,12 +158,12 @@ test("buildAdsenseCandidates: 最大3件・measurement-gap 最優先・dedupe・
   assert.deepEqual(buildAdsenseCandidates(input).map((c) => c.id), out.map((c) => c.id));
 });
 
-test("WIP/採用の規律定数 (§7.3): active WIP≤2・週次採用≤1", () => {
+test("WIP/採用の規律定数: active WIP≤2・週次採用≤1", () => {
   assert.equal(ADSENSE_ACTIVE_WIP_LIMIT, 2);
   assert.equal(ADSENSE_WEEKLY_ADOPTION_LIMIT, 1);
 });
 
-test("classifyPageType: 決定的分類・高カーディナリティ dimension を作らない (§2.3)", () => {
+test("classifyPageType: 決定的分類・高カーディナリティ dimension を作らない", () => {
   assert.equal(classifyPageType("/"), "home");
   assert.equal(classifyPageType("/ranking/taxable-income-per-capita"), "ranking-detail");
   assert.equal(classifyPageType("/blog/black-tea-income-gap?utm_source=x"), "blog-detail");

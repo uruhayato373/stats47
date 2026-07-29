@@ -36,7 +36,7 @@ const SITE_ORIGIN = "https://stats47.jp";
  * top 以外の全ページで PageShell 直下の先頭に配置する（Breadcrumbs 必須ルール）。
  * JSON-LD の itemListElement を同時に出力し、ページ側の構造化データ重複を防ぐ。
  *
- * 設計仕様: docs/01_技術設計/15_デザインシステムSSOT.md
+ * 設計仕様: docs/01_技術設計/04_デザインシステム.md
  */
 export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
   const jsonLd = {

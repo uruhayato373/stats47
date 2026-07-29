@@ -15,7 +15,7 @@
  *      → node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50
  *
  * この stub は googleapis を import せず、Indexing API を一切呼ばない。
- * 正典: docs/02_実装計画/39 Phase 1。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
  */
 
 const args = process.argv.slice(2);

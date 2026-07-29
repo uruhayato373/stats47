@@ -52,7 +52,7 @@ jobs:
           fi
           echo "Week: $(cat "$GITHUB_OUTPUT")"
 
-      # source 単位の failure isolation (§18.3): 1 source の失敗が他 source・digest・commit を
+      # source 単位の failure isolation（weekly-cycle-contract）: 1 source の失敗が他 source・digest・commit を
       # 止めない。missing/partial は最終 step の Period contract gate が exit 1 で赤くする
       # (green success として隠さない)。
       - name: 🔍 Fetch GSC snapshot
@@ -143,7 +143,7 @@ jobs:
           mkdir -p .claude/skills/management/nsm-experiment/reference/weekly-snapshots
           cp -r /tmp/metrics-publish/nsm/. .claude/skills/management/nsm-experiment/reference/weekly-snapshots/ 2>/dev/null || true
 
-      # 是正ループの自動化 (docs/02_実装計画/06_ブログ品質是正ループ.md Phase 2)。
+      # 是正ループの自動化 (.claude/rules/blog-remediation-loop.md)。
       # develop の最新 history + 今 fetch した GSC snapshot + 公開 R2 audit を入力に
       # 「次に何を直すか」(remediation-queue) を再構築し、due に達した是正 wave の効果を計測する。
       - name: ♻️ Rebuild remediation queue (next-to-fix)
@@ -156,8 +156,8 @@ jobs:
         continue-on-error: true
         run: node .claude/scripts/blog/measure-gsc-impact.mjs --min-weeks 2
 
-      # AdSense 収益密度の決定的候補生成 (doc41 §4.3/§7・最大3件・提示まで)。
-      # 広告配置・Auto ads・deploy の自動変更はしない。Google Admin Playwright はここに載せない (§5.1)。
+      # AdSense 収益密度の決定的候補生成 (adsense-diagnostics.mjs・最大3件・提示まで)。
+      # 広告配置・Auto ads・deploy の自動変更はしない。Google Admin Playwright はここに載せない。
       - name: 🩺 AdSense diagnostics (candidates ≤3)
         continue-on-error: true
         run: npm run metrics:adsense-diagnostics -- ${{ steps.week.outputs.week }}
@@ -177,8 +177,25 @@ jobs:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
         run: node .claude/scripts/blog/build-topic-queue.mjs
 
+      # 索引代表 / ホーム注目 / 問いかけコピーの生成物を、今 fetch した GSC snapshot で作り直す。
+      # 需要は半桁バケットで量子化してあるので、表示回数が帯を跨いだ週だけ差分が出る。
+      # ここで再生成しないと、次の PR で `--check` (static-gates) が落ちる。
+      - name: 🏅 Rebuild ranking prominence (index + home featured)
+        continue-on-error: true # 生成失敗で週次計測本体を止めない
+        run: (cd apps/web && npx tsx scripts/generate-ranking-prominence.ts)
+
+      # 問いかけコピーの導出品質。生成物と SSOT のズレは --check が守るが、
+      # 「導出された日本語が読めるか」は誰も見ていないので、怪しい候補を週次で表に出す。
+      # 誰も見ていない仕組みは isFeatured (2,295 件中 8 件しか設定されなかった) と同じく腐る。
+      - name: 🔍 Audit derived ranking hooks
+        continue-on-error: true
+        run: (cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --audit | tee -a "$GITHUB_STEP_SUMMARY")
+
       - name: 📤 Commit & push to develop
         run: |
+          # 生成先は packages/data-configs 側 (apps/web と packages/ranking の両方が読むため)。
+          # ここを取り違えると再生成しても commit されず、次の PR で --check だけが落ちる。
+          git add packages/data-configs/src/prominence/ranking-prominence.generated.ts
           git add .claude/skills/analytics/gsc-improvement/reference/snapshots
           git add .claude/skills/analytics/ga4-improvement/reference/snapshots
           git add .claude/skills/analytics/adsense-improvement/reference/snapshots
@@ -197,7 +214,7 @@ jobs:
           git commit -m "chore(metrics): weekly snapshot ${{ steps.week.outputs.week }} + remediation queue/effect [skip ci]"
           git push origin develop
 
-      # 期間契約 gate (§18.2/§18.3): commit の後に走らせ、GSC/GA4 summary の missing/partial・
+      # 期間契約 gate（weekly-cycle-contract）: commit の後に走らせ、GSC/GA4 summary の missing/partial・
       # NSM finalized7d の欠落を exit 1 で赤くする。データは commit 済みなので failure isolation は
       # 保たれ、partial を green success として隠さない。
       - name: 🧪 Period contract gate (finalized7d/coverage)

@@ -53,7 +53,7 @@ function buildNationalSeries(
  *
  * ★データ source は R2 の `app/ranking/<key>/values.json` のみ (e-Stat ライブ取得はしない)。
  *   e-Stat ライブ取得は Cloudflare Workers ランタイムで失敗し本番で error fallback を招いたため、
- *   /ranking/* と同一の R2 source に統一した (完全DBレス: docs/01_技術設計/12_完全DBレス設計.md)。
+ *   /ranking/* と同一の R2 source に統一した (完全DBレス: docs/01_技術設計/02_データアーキテクチャ.md)。
  *   build 時は readRankingValuesFromR2 が ok([]) を返すため、ページは force-dynamic で runtime 描画する。
  *
  * - prefecture: readAllYearsRankingValuesFromR2 で全年を 1 read → current 年 values + 全国(県平均)トレンド

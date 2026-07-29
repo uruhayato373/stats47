@@ -36,8 +36,8 @@ No prose before/after. No section headers.
   を error 0 に。正典 `.claude/rules/data-provenance-standards.md`。意味判断 (出典が真に正しいか) は本 agent、機械分類は
   `.claude/scripts/provenance/audit-provenance-queue.ts`。
 
-> 初期実装手順書 (旧 docs/02 実装計画 37 番) は 2026-07-18 の初期実装完了で削除済 (git 履歴参照)。
-> 恒常仕様は本ファイル + 型 (`open-data-catalog/types.ts`) + validator に集約した。
+> open-data catalogと都道府県公式統計catalogの初期実装手順書は、2026-07-18の実装完了後に削除済
+> (git履歴参照)。恒常仕様は本ファイル、各catalogのREADME・型・validatorへ集約した。
 
 ## 必読rules・参照
 
@@ -48,13 +48,15 @@ No prose before/after. No section headers.
 - `.claude/rules/theme-catalog-standards.md` — theme候補の受け渡し
 - `.claude/rules/evidence-based-judgment.md` — 公式根拠と未検証の扱い
 - `.claude/rules/agent-output-contract.md` — 出力契約
-- `docs/02_実装計画/36_都道府県公式統計カタログ仕様.md`
+- `packages/data-configs/src/prefecture-statistics-catalog/README.md`
 
 ## 運用 (検証コマンドとカタログ現況)
 
 ```bash
 npm run validate:open-data-catalog --workspace packages/data-configs   # 構造・参照整合 (決定的)
 npm run check:open-data-links --workspace packages/data-configs        # URL 到達性 (オンデマンド・CI に入れない)
+npm run validate:prefecture-statistics --workspace packages/data-configs
+npm run check:prefecture-statistics-links --workspace packages/data-configs
 npm run type-check --workspace @stats47/data-configs
 npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KSJ 参照を触った場合
 ```
@@ -127,7 +129,7 @@ npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KS
 - 排他write: `packages/data-configs/src/open-data-catalog/**`
 - 共有write: `packages/data-configs/src/prefecture-statistics-catalog/**` は本agentのみがカタログ編集する
 - read-only: `packages/gis/src/mlit-ksj/**`, `packages/data-configs/src/metrics/**`, `theme-catalog/**`
-- `docs/todo/03_指標バックログ.md` へ直接大量追記せず、取得可能性を実証した候補だけを既存agentへ渡す
+- `docs/todo/06_指標バックログ.md` へ直接大量追記せず、取得可能性を実証した候補だけを既存agentへ渡す
 
 ## 完了条件
 

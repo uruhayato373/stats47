@@ -1,11 +1,11 @@
 # UI コンポーネント規約
 
-> デザインシステム全体の正典は `docs/01_技術設計/15_デザインシステムSSOT.md`。
+> デザインシステム全体の正典は `docs/01_技術設計/04_デザインシステム.md`。
 > このファイルは Claude Code 向けの実装時メモであり、食い違う場合は docs 側を優先する。
 
-## レイアウト・フォント・角丸（2026-06〜 / 正典: `docs/01_技術設計/13_統一レイアウト設計.md`）
+## レイアウト・フォント・角丸（2026-06〜 / 正典: `docs/01_技術設計/04_デザインシステム.md`）
 
-- **横幅は `PageShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない（1700px / 右レール 360px / 左 TOC 280px）。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（1280px + flex 密着・reading zone）を使う。
+- **横幅は `PageShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない。正確な幅と rail 寸法は `PageShell.tsx` を正典とする。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（reading zone + flex 密着）を使う。
 - **PC 常設左サイドバーは廃止**。ナビはヘッダー（カテゴリは**メガメニュー**）に集約し、モバイルは `MobileNavDrawer`（Sheet）。
 - **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0`）**。カードやパネルへの `rounded-xl`/`rounded-2xl` の手動付与は禁止し、外枠は `rounded-none` とする。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。`ArticleShell` の `.reading-zone` は薄グレー地を維持するが、角丸と影は通常カード（`rounded-none`・`shadow-sm`）に揃える。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。
@@ -38,7 +38,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 ## コンポーネント配置の 3 tier（★新規コンポーネント追加前に必読・配置の SSOT）
 
 新規 UI を作るときは、まず**どの tier に置くか**を決める。下位 tier に既にあるものを feature 内に再実装しない
-（再実装が共通化を阻む最大要因。実測で feature 層の重複が散在 → 恒久ルールは `docs/01_技術設計/15_デザインシステムSSOT.md` に集約）。
+（再実装が共通化を阻む最大要因。実測で feature 層の重複が散在 → 恒久ルールは `docs/01_技術設計/04_デザインシステム.md` に集約）。
 
 | tier | 置き場所 | import 元 | 中身 | 追加方法 |
 |---|---|---|---|---|
@@ -60,7 +60,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 規約違反の検出は `/audit-chart-components` スキルで実行する。
 
 - **ページ見出し（h1）は `text-2xl font-bold` に統一する。** `text-3xl` 以上は使わない。
-  - **例外: hero バナー内の h1**（色付き `HeroShell` / hero セクション内のキャッチコピー）は `text-2xl sm:text-3xl` のレスポンシブ大見出しを許容する。マーケ目的の意図的拡大であり、コンテンツ本文の h1（ranking/category 詳細・記事タイトル）とは役割が異なる。該当: `category/[categoryKey]`・`themes`・`survey/[surveyKey]`・`tag/[tagKey]`。**home `/` は 2026-07-23 のポータル型再設計で暗色 hero を撤去し `PageHeader`（`text-2xl`）に統一したため、この例外の対象外**（正典: `docs/02_実装計画/38_ポータル型ホーム・ヘッダー再設計仕様.md`）。本文コンテンツの h1 では `text-2xl` を厳守する。
+  - **例外: hero バナー内の h1**（色付き `HeroShell` / hero セクション内のキャッチコピー）は `text-2xl sm:text-3xl` のレスポンシブ大見出しを許容する。マーケ目的の意図的拡大であり、コンテンツ本文の h1（ranking/category 詳細・記事タイトル）とは役割が異なる。該当: `category/[categoryKey]`・`themes`・`survey/[surveyKey]`・`tag/[tagKey]`。**home `/` は 2026-07-23 のポータル型再設計で暗色 hero を撤去し `PageHeader`（`text-2xl`）に統一したため、この例外の対象外**（正典: `apps/web/src/features/home-portal/README.md`）。本文コンテンツの h1 では `text-2xl` を厳守する。
 
 ## melta-ui デザインシステム準拠
 
@@ -87,5 +87,5 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 ## ダッシュボードコンポーネント
 
-- **KPI・チャート等は `page_components` テーブルで管理する。** コード内にチャート定義をハードコードしない。新規追加は DB への INSERT のみ。
+- **KPI・チャート等は git 管理の `apps/web/scripts/data/page-components/` で管理する。** コード内にチャート定義をハードコードしない。専用 exporter で R2 snapshot へ反映する。
 - 詳細は `.claude/design-system/page-components.md` を参照。

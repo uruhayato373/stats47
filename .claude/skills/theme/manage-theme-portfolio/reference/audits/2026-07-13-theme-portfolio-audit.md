@@ -9,7 +9,8 @@ tags: [theme, portfolio, inventory]
 
 `theme-portfolio-manager` 運用 (正典: `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md`) の初回監査。
 22 テーマ全件を `.claude/state/themes/portfolio.json` に登録し、ThemeCatalog 登録状況・レビュー文書
-(22/22)・doc 24 再編案と対応付けた。**計測値 (GSC/GA4) は未集計 (PR-3) のため全テーマ
+(22/22)・`.claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md`
+の再編案と対応付けた。**計測値 (GSC/GA4) は未集計 (PR-3) のため全テーマ
 `insufficient-data`、内部遷移は GA4 未計装のため `not-instrumented`** — 推測値は保存していない。
 
 ## 生成方法 (決定的)
@@ -59,13 +60,13 @@ merge/retire 候補は 0 (56 日 measured 実測が無い現段階では validat
 - **blocked (4)**: local-economy / occupation-salary / real-income / local-finance-city —
   核心指標・系列・派生計算・財政主体の監査がブロッカー。**カタログ変更より先にデータ品質監査**。
 
-### 2. split-candidate 2 件 (doc 24 の暫定再編案と一致・根拠 2 本)
+### 2. split-candidate 2 件 (taxonomy referenceの暫定再編案と一致・根拠 2 本)
 
 - **safety**: 治安/交通/火災の主問が同居 → crime-safety / traffic-safety / fire-emergency 分割 +
-  parent-hub 化 (根拠: レビュー 07-12 + doc 24 §safety)
-- **education-culture**: 学校/高等/社会教育の分割 + parent-hub 化 (根拠: レビュー 07-12 + doc 24)
-- living-housing は doc 24 が「条件付き split・全レビュー後まで決めない」としているため improve 止まり。
-- **実行前提**: URL・canonical・redirect・関連記事・OGP・sitemap の影響評価 (doc 24 §URL/SEO 移行原則)
+  parent-hub 化 (根拠: レビュー 07-12 + taxonomy reference §safety)
+- **education-culture**: 学校/高等/社会教育の分割 + parent-hub 化 (根拠: レビュー 07-12 + taxonomy reference)
+- living-housing はtaxonomy referenceが「条件付き split・全レビュー後まで決めない」としているため improve 止まり。
+- **実行前提**: URL・canonical・redirect・関連記事・OGP・sitemap の影響評価 (taxonomy reference §URL・SEO移行原則)
   と、PR-3 以降の実測 baseline 取得。現段階で分割を実行しない。
 
 ### 3. legacy 2 件の明示
@@ -91,7 +92,7 @@ merge/retire 候補は 0 (56 日 measured 実測が無い現段階では validat
 ### 最重要の実測結果: テーマページは検索集客面ではない
 
 - **GSC: measured 0/22** — 全テーマが 56 日で impressions < 200 (最大 fishery-marine 158・
-  全 22 テーマ合算でも 732 imp/56d)。`07_情報設計` が定義する「テーマ = 回遊・深掘り面」の
+  全 22 テーマ合算でも 732 imp/56d)。`03_情報設計` が定義する「テーマ = 回遊・深掘り面」の
   ファネル役割が実測で裏付けられた。
 - **GA4: measured 2/22** — local-finance (213 pv / 56d)・population-dynamics (206 pv)。
   次点は tourism 97 / fishery-marine 93 (閾値 100 の直下)。
@@ -158,5 +159,5 @@ E2E スモーク: 監査コマンド通し実行で drift 検出 (insufficient-d
 
 - state: `.claude/state/themes/{portfolio,experiments}.json` (schema: 同 dir README.md)
 - 運用設計: `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md`
-- 判定基準: `docs/02_実装計画/24_テーマ分類再編成方針.md`
+- 判定基準: `.claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md`
 - builder: `.claude/scripts/themes/build-theme-portfolio.ts` / validator: `validate-theme-state.mjs`

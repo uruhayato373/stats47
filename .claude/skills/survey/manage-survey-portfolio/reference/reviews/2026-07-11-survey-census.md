@@ -7,7 +7,7 @@ tags: [survey, census, seo, content-cluster]
 
 # 国勢調査コンテンツクラスター監査・実装結果
 
-> 2026-07-13 に `docs/04_レビュー/2026-07-11-survey-census-cluster-audit.md` から移設・改名
+> 2026-07-13 に旧レビュー保管場所から本skill referenceへ移設・改名
 > (survey ポートフォリオ運用の .claude 一本化)。本書は監査日付時点の証跡であり、最新状態の SSOT は
 > `.claude/state/surveys/portfolio.json`、census 実験の台帳は `.claude/state/surveys/experiments.json`。
 

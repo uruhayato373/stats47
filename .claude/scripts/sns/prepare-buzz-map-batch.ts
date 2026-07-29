@@ -3,13 +3,14 @@
  * prepare-buzz-map-batch.ts — buzz-map 集客ゲート Phase 4: eligible 候補を batch で
  * spec → render → R2 → caption → landing contract → posts.json draft まで進める CLI。
  *
- * 正典: docs/02_実装計画/27_buzz-map集客ゲート統合仕様.md §8 (生成・R2・draft) / §13 Phase 4 / §7.1 (UTM)。
+ * 正典: .claude/rules/buzz-map-standards.md §5（生成・R2・draft）/
+ *       .claude/rules/sns-content-standards.md §2（UTM・投稿ガード）。
  *
  * ★安全既定: dry-run。--apply が無ければ render / R2 push / posts insert を一切実行しない
  *   (選定と実行予定ステップだけ表示)。--apply は段階フラグ (--to r2 / --to draft) で分離可。
  *
  * 選定: buzz-map-catalog.json の curated entry を selectBatch (score 降順 × isEligibleForBatch)。
- * idempotent: R2 既存素材 (HEAD 200) + posts.json 既 draft は skip。動画は 1 batch 最大 3 (§8.4)。
+ * idempotent: R2 既存素材 (HEAD 200) + posts.json 既 draft は skip。動画は 1 batch 最大 3。
  *
  * Usage:
  *   npx tsx .claude/scripts/sns/prepare-buzz-map-batch.ts                 # dry-run・top12 のプラン表示
@@ -153,7 +154,7 @@ async function main() {
   );
   const selected = selectBatch(curated, opts.limit) as CuratedEntry[];
 
-  // 動画上限 (§8.4)。asset plan を付けて capVideos に渡す
+  // 動画上限。asset plan を付けて capVideos に渡す
   const withPlans = selected.map((e) => ({
     entry: e,
     ideaId: e.ideaId as string,
@@ -389,8 +390,8 @@ async function verifyR2Key(
 /**
  * --apply の実行本体 (段階フラグ --to で分離)。
  * spec 確認/生成 → render (compositionsForType) → 決定的レンダ検査 → idea単位exact publish
- * → HEAD 200 + Content-Type 検証 → caption(UTM §7.1) → landing contract → isPostable 全条件 PASS
- * のみ posts.json draft insert。posts.json は insert 経由のみ・予約なし・実投稿しない (§8.3)。
+ * → HEAD 200 + Content-Type 検証 → caption（共通UTM）→ landing contract → isPostable 全条件 PASS
+ * のみ posts.json draft insert。posts.json は insert 経由のみ・予約なし・実投稿しない。
  */
 async function applyBatch(
   rows: ReportRow[],
@@ -422,7 +423,7 @@ async function applyBatch(
       continue;
     }
     if (!r.spec.exists) {
-      // spec 未生成は今回対象外 (spec 生成は §10 の別工程)。draft せず記録
+      // spec 未生成は今回対象外（spec 生成は別工程）。draft せず記録
       console.log(
         `[apply] ${r.ideaId}: skip (spec 未生成 — 先に build-buzz-map-spec が必要)`
       );
@@ -473,7 +474,7 @@ async function applyBatch(
       }
     }
 
-    // 6. caption (UTM §7.1)。X 用 canonical に UTM。出典/年度/対象単位を含める
+    // 6. caption（共通UTM）。X 用 canonical に UTM。出典/年度/対象単位を含める
     const variant = 'question-a';
     const utm = r.primaryUrl
       ? buildUtmUrl({
@@ -534,7 +535,7 @@ async function applyBatch(
         status: 'draft',
         template: `buzzmap-${r.type}`,
         utm_url: utm,
-        // §7.1: X は本文リンクで直接遷移 = direct (SNS CTR の分母に使える)
+        // X は本文リンクで直接遷移 = direct (SNS CTR の分母に使える)
         attribution: 'direct',
       });
       inserted.push(row);

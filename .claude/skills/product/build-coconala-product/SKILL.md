@@ -65,6 +65,7 @@ npm run products:report --workspace=@stats47/product-factory   # .claude/state/p
 
 ## 関連
 - 正典: `.claude/rules/coconala-product-standards.md`
-- スペック: `docs/02_実装計画/30_ココナラ商品ファクトリー実装仕様.md`
 - モジュール: `packages/product-factory/README.md`
 - agent: `.claude/agents/coconala-product-manager.md`
+- note・KDP・Brain・ココナラ横断の商品ポートフォリオ、需要ゲート、共通content bundleを扱う場合:
+  `reference/multi-channel-content-product-factory.md`（進捗SSOTは`docs/todo/05_機能バックログ.md`）

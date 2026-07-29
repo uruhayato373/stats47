@@ -5,11 +5,11 @@
  *   YYYY-Www (省略時は今日 JST の ISO 週。未来週は失敗する)
  *
  * 出力先: .claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/
- *   - queries/pages/devices/countries/daily.csv … ローリング28日 (機会発見用・§18.2)
+ *   - queries/pages/devices/countries/daily.csv … ローリング28日 (機会発見用)
  *   - summary.json … 確定7日 KPI (finalized7d/previous7d) + rolling28d の期間 metadata 付き summary
  * 認証: GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json
  *
- * 期間契約 (docs/02_実装計画/39 §18.2):
+ * 期間契約 (.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md):
  * - 期間は lib/periods.mjs (SSOT) が week から決定的に導出する (実行日に依存しない)。
  * - 取得遅延 3 日。欠損日は 0 補完せず summary.json の coverage に記録する。
  * - 欠損 (partial) は exit 0 で書き出し、check-period-contract.mjs が後段で赤くする
@@ -97,7 +97,7 @@ async function main() {
     if (job.dim === "date") dailyRows = normalized;
   }
 
-  // 確定7日 KPI summary (finalized7d/previous7d/rolling28d + 期間 metadata・§18.2)
+  // 確定7日 KPI summary (finalized7d/previous7d/rolling28d + 期間 metadata)
   const summary = buildGscSummary({ week, dailyRows: dailyRows ?? [] });
   writeFileSync(join(outDir, SUMMARY_FILE), JSON.stringify(summary, null, 2) + "\n");
   summaryLines.push(

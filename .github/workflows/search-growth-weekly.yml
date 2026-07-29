@@ -1,9 +1,9 @@
 name: 🔎 Search Growth (weekly candidate rebuild)
 
 # 検索成長統合基盤の週次 candidate 更新。
-# 正典: docs/02_実装計画/39_検索成長統合MCP・API基盤実装仕様.md §6 / §8。
+# 正典: .claude/skills/analytics/search-growth/reference/{platform-contract,weekly-cycle-contract}.md
 #
-# 責務分離 (§8):
+# 責務分離:
 # - daily (blocker 観測): 既存 psi-audit-daily / cloudflare-usage-daily / gsc-url-inspection-daily が
 #   snapshot を更新する。本 workflow はそれらを巨大化せず、shared script (search-growth pipeline) で
 #   committed snapshot を normalize/analyze する。
@@ -44,7 +44,7 @@ jobs:
         with:
           node-version: "20"
 
-      # stale artifact guard (§18.3): fetch-metrics-weekly が失敗/未実行のまま
+      # stale artifact guard: fetch-metrics-weekly が失敗/未実行のまま
       # workflow_run・cron で発火した場合、古い snapshot から candidate を黙って再構築しない。
       - name: 🧪 Snapshot freshness guard (stale artifact)
         run: npm run metrics:check-period-contract -- --max-age-weeks 1

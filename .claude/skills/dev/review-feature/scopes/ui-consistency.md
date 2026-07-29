@@ -217,16 +217,8 @@ Phase 1 の結果をページ種別ごとに整理する。
 - 全パネリストが同じ結論を出してはならない。意見の対立・矛盾を恐れない
 - 褒めるだけのパネリストを作ってはならない。全員が最低 1 つ批判する
 - `.claude/rules/ui-components.md` の UI コンポーネント規約・レスポンシブ規約を基準とする
-- 出力は `docs/04_レビュー/{YYYY-MM-DD}-dev-review-ui-consistency.md` に Write tool で書き出す。frontmatter:
-  ```yaml
-  ---
-  type: dev-review
-  scope: ui-consistency
-  date: 2026-MM-DD
-  status: active
-  ---
-  ```
-- 書き出したファイルパスを報告する。過去のレビューは `ls -t docs/04_レビュー/*-dev-review-ui-consistency*.md | head -5` で参照できる
+- 全文はセッション出力のみ。未完了の修正だけを `docs/todo/05_機能バックログ.md` へ
+  対象breakpoint・再現条件・UI不変条件・visual検証付きで具体化する
 
 ## 関連スキル
 

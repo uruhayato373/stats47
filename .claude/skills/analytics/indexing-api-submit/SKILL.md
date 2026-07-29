@@ -8,7 +8,8 @@ status: retired
 # indexing-api-submit — RETIRED (Google Indexing API 準拠是正)
 
 > **⚠️ このスキルは 2026-07-23 に退役しました。** 通常ページへの Indexing API 送信は行いません。
-> 正典: `docs/02_実装計画/39_検索成長統合MCP・API基盤実装仕様.md` Phase 1 / `docs/todo/01_改善バックログ.md [INDEXING-AUTO-01]`。
+> 正典: `.claude/skills/analytics/search-growth/reference/platform-contract.md`の
+> 「Indexing API準拠」/ `docs/todo/04_改善バックログ.md [INDEXING-AUTO-01]`。
 
 ## なぜ退役したか (公式仕様)
 
@@ -60,6 +61,6 @@ coverage 是正キュー (`build-coverage-queue.mjs`) の旧 `resubmit` action �
 ## 参照
 
 - 公式制約: https://developers.google.com/search/apis/indexing-api/v3/quickstart (アクセス日 2026-07-23)
-- 準拠是正の正典: `docs/02_実装計画/39_検索成長統合MCP・API基盤実装仕様.md` §3.1 / Phase 1
+- 準拠是正の正典: `.claude/skills/analytics/search-growth/reference/platform-contract.md`
 - 代替フロー: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` (observe-after-fix)
 - 観測実装: `.claude/scripts/gsc/url-inspection-daily.cjs`

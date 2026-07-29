@@ -35,8 +35,8 @@ node .claude/scripts/lib/scan-pending-improvements.mjs
 
 ## 関連
 
-- INDEX: `docs/05_改善ログ/INDEX.md`
+- 現行バックログ: `docs/todo/04_改善バックログ.md`
 - triage workflow: `.github/workflows/improvement-log-reminder-weekly.yml` (日曜 22:00 JST)
 - weekly-plan: `.claude/skills/management/weekly-plan/SKILL.md` Phase 1 Agent D で呼ばれる
-- 設計: `docs/02_実装計画/seo-todo-unify-phase-1-3.md`
+- 設計履歴: Git 履歴の旧 SEO TODO 統合計画
 - 関連プロジェクト: [[project-seo-todo-unify-phase-1]]

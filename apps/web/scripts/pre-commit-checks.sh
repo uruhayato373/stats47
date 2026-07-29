@@ -54,6 +54,22 @@ if ! node "$GUARD_ROOT/.claude/scripts/lib/check-r2-route-ssg.cjs"; then
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
 
+# 2.1a ドキュメントガバナンス
+# 文書の固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOT、
+# 削除・移動後の参照悪化を、文書関連差分があるcommitだけ検査する。
+STAGED_DOCS=$(git diff --cached --name-only --diff-filter=ACMRD | grep -E \
+  '^(docs/|CLAUDE\.md$|AGENTS\.md$|\.claude/(config/docs-governance\.json|rules/docs-vs-issues\.md|skills/management/maintain-docs/|scripts/lib/check-docs-(governance|links)\.cjs|scripts/lib/__tests__/check-docs-(governance|links)\.test\.cjs)|package\.json$)' || true)
+if [ -n "$STAGED_DOCS" ]; then
+  echo -e "${GREEN}📚 ドキュメントガバナンスチェック...${NC}"
+  if ! (cd "$GUARD_ROOT" && npm run docs:check); then
+    echo -e "${RED}❌ 文書の配置・構造・INDEX・リンク規約に違反しています。${NC}"
+    echo -e "${YELLOW}💡 自動同期: npm run docs:fix / 詳細: npm run docs:report${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  else
+    echo -e "${GREEN}✅ ドキュメントガバナンスチェック成功${NC}"
+  fi
+fi
+
 # 2.1.1 画像生成差分/publish policy ガード
 # workflow / planner / manifest / publisher の変更時だけ、CI と同じ fail-closed policy を先行実行する。
 STAGED_IMAGE_PIPELINE=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
@@ -79,7 +95,7 @@ fi
 echo -e "${GREEN}🃏 カード census ガード...${NC}"
 if ! node "$GUARD_ROOT/.claude/scripts/lib/check-card-census.cjs"; then
   echo -e "${RED}❌ ベースライン外の新規 *Card が追加されています。${NC}"
-  echo -e "${YELLOW}💡 docs/01_技術設計/15_デザインシステムSSOT.md / .claude/rules/ui-components.md${NC}"
+  echo -e "${YELLOW}💡 docs/01_技術設計/04_デザインシステム.md / .claude/rules/ui-components.md${NC}"
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
 
@@ -88,7 +104,7 @@ fi
 echo -e "${GREEN}📢 広告配置ガード...${NC}"
 if ! node "$GUARD_ROOT/.claude/scripts/lib/check-ad-placement.cjs"; then
   echo -e "${RED}❌ 広告の配置規約に違反しています。${NC}"
-  echo -e "${YELLOW}💡 docs/01_技術設計/15_デザインシステムSSOT.md / .claude/rules/ui-components.md${NC}"
+  echo -e "${YELLOW}💡 docs/01_技術設計/04_デザインシステム.md / .claude/rules/ui-components.md${NC}"
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
 

@@ -14,16 +14,6 @@
     },
     {
       "code": "UNWIRED_CHECKER",
-      "file": ".claude/scripts/lib/check-docs-links.cjs",
-      "message": "no workflow/hook/package/skill/agent/script reference found"
-    },
-    {
-      "code": "UNWIRED_CHECKER",
-      "file": "apps/web/scripts/verify-affiliate-ads-snapshot.ts",
-      "message": "no workflow/hook/package/skill/agent/script reference found"
-    },
-    {
-      "code": "UNWIRED_CHECKER",
       "file": "packages/data-configs/scripts/ssds/validate-survey-master-coverage.ts",
       "message": "no workflow/hook/package/skill/agent/script reference found"
     },

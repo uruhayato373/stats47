@@ -31,7 +31,7 @@ model: sonnet
 
 ## 正典スペック（このとおりに統一されているかを管理する）
 
-正典の詳細は `apps/web/src/features/theme-dashboard/README.md` と `docs/01_技術設計/15_デザインシステムSSOT.md`。以下はその UI 層の要約 = 監査基準。
+正典の詳細は `apps/web/src/features/theme-dashboard/README.md` と `docs/01_技術設計/04_デザインシステム.md`。以下はその UI 層の要約 = 監査基準。
 
 ### A. 汎用テーマ（hideMap=true・既定で全テーマ）
 `app/themes/[themeSlug]/page.tsx`（`local-finance` 専用ページを除く全テーマ）:
@@ -123,7 +123,7 @@ grep -rn "地図タブ\|KPI は e-Stat API ベース\|ranking_data ベースの 
 - レイアウト: `apps/web/src/features/theme-dashboard/components/{ThemePageLayout,ThemeAreaHeader,ThemeMetricsDashboard,ThemeSidebar,PrefectureSelect,ThemePrefectureContext,ThemeDashboardTabbed}.tsx`
 - データ: `apps/web/src/features/theme-dashboard/lib/load-theme-data.ts`
 - bespoke: `apps/web/src/features/local-finance-dashboard/`
-- 統一レイアウト規約: `.claude/rules/ui-components.md` / `docs/01_技術設計/13_統一レイアウト設計.md`
+- 統一レイアウト規約: `.claude/rules/ui-components.md` / `docs/01_技術設計/04_デザインシステム.md`
 - デプロイ規律: `.claude/rules/branch-workflow.md`
 
 ## Output Contract

@@ -1,5 +1,5 @@
 /**
- * candidate engine tests (§13 Candidate) — 決定的ルールの検証。
+ * candidate engine tests — 決定的ルールの検証。
  *   node --test .claude/scripts/search-growth/__tests__/candidate.test.mjs
  */
 import { test } from "node:test";

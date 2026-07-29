@@ -67,10 +67,10 @@ const snsPostsStore = require("../lib/sns-posts-store.cjs") as {
 };
 
 /**
- * posts.json の buzz-map draft content_key → curated ideaId の対応 (§8.3 draft 継承)。
+ * posts.json の buzz-map draft content_key → curated ideaId の対応（draft status 継承）。
  * literal 一致するもの (vacant-housing-muni / onsen-place-names) は明示不要だが、
  * machine 由来の旧 content_key で curated ideaId と一致しないものだけここに書く。
- * 根拠: no-station-muni は §10 P0 の「駅なし×人口」= curated stationless-large-municipalities
+ * 根拠: no-station-muni は P0 の「駅なし×人口」= curated stationless-large-municipalities
  * (renderPlan「型D 駅なし×人口上位 map」で照合)。population-growth-muni は machine themeId で、
  * curated population-growth-municipalities に aliasesOf 経由で統合される (下の resolve で解決)。
  */
@@ -129,7 +129,7 @@ interface CatalogEntry {
   primaryUrl?: string | null;
   /** curated が machine catalog の既存 entry と重複した場合の被マッチ key 群 (§4.1 統合の記録) */
   aliasesOf?: string[];
-  /** §11 Phase 5: GA4 attribution (buzz-map-attribution-latest.json) の measured 補正入力。
+  /** GA4 attribution (buzz-map-attribution-latest.json) の measured 補正入力。
    *  投稿 0 の現在は付かない (no-op)。実補正ロジックは 4 週後の実データで調整する (今は入口のみ)。 */
   measuredOutcome?: { landingSessions: number; deepClickRate: number | null; outcomeScore: number };
   // ── e-Stat 固有 (任意) ──
@@ -562,7 +562,7 @@ function buildGsiEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
  * curated lane を組み立てる (§4.1 authored source)。
  * 各 idea を score gate / hard gate / landing router に通し、machine lane との重複を
  * dedup してから catalog entry 形へ射影する。status は前回を upsert 保持。
- * §5.4 backfill: dedup 先の machine entry が generated/posted の場合、その状態を
+ * landing backfill: dedup 先の machine entry が generated/posted の場合、その状態を
  * curated entry に引き継ぎ landing readiness を live 扱いにする。
  */
 async function buildCuratedEntries(
@@ -571,9 +571,9 @@ async function buildCuratedEntries(
 ): Promise<CatalogEntry[]> {
   const inventory = await loadInventory({});
   const machineKeys = new Set(machineKeyToStatus.keys());
-  // posts.json の draft を curated ideaId → status で引けるようにする (§8.3 draft 継承・read-only)
+  // posts.json の draft を curated ideaId → status で引けるようにする（draft status 継承・read-only）
   const draftStatusByIdea = loadDraftStatusByIdea();
-  // §11 Phase 5: GA4 attribution の measured 補正入力 (投稿 0 の現在は空 = no-op)
+  // GA4 attribution の measured 補正入力 (投稿 0 の現在は空 = no-op)
   const measuredByIdea = loadMeasuredFeedback();
   const out: CatalogEntry[] = [];
 
@@ -588,7 +588,7 @@ async function buildCuratedEntries(
     // §4.1 machine lane と統合: 被マッチ key を記録
     if (dup.isDuplicate) entry.aliasesOf = dup.matchedKeys;
 
-    // §11 Phase 5: measured 補正入力を付与 (投稿 0 の現在は該当なし = no-op)。
+    // measured 補正入力を付与 (投稿 0 の現在は該当なし = no-op)。
     //   実 score 補正 (outcomeScore を breakdown に加算) は 4 週後の実データ検証後に配線する。
     const measured = measuredByIdea.get(idea.ideaId);
     if (measured) entry.measuredOutcome = measured;
@@ -598,7 +598,7 @@ async function buildCuratedEntries(
       .map((mk) => machineKeyToStatus.get(mk))
       .filter((s): s is Status => Boolean(s));
 
-    // §5.4 backfill: dedup 先が generated/posted なら readiness を live に引き上げる
+    // landing backfill: dedup 先が generated/posted なら readiness を live に引き上げる
     let backfilledLive = false;
     for (const st of matchedMachineStatuses) {
       if (st === "generated" || st === "posted") {
@@ -607,7 +607,7 @@ async function buildCuratedEntries(
       }
     }
 
-    // §4.3 status: 前回 curated status を起点に、machine 後段 status と posts.json draft を
+    // status merge: 前回 curated status を起点に、machine 後段 status と posts.json draft を
     //   max 継承 (後段を巻き戻さない)。draft は generated より後段なので draft が勝つ。
     const prev = prevByKey.get(entry.metricKey);
     const draftStatus = draftStatusByIdea.get(idea.ideaId) ?? null;
@@ -658,7 +658,7 @@ function loadDraftStatusByIdea(): Map<string, string> {
 }
 
 /**
- * §11 Phase 5: GA4 attribution の measured 補正入力を読む (buzz-map-attribution-latest.json)。
+ * GA4 attribution の measured 補正入力を読む (buzz-map-attribution-latest.json)。
  * ファイル不在 / 投稿 0 の現在は空 Map (no-op)。buzz-map-attribution.mjs が生成する。
  * ここでは score を直接書き換えず measuredOutcome として entry に添えるだけ (入口配線)。
  */
@@ -853,7 +853,7 @@ async function main() {
     // 既定は curated (SNS 企画の主レーン)。--lane で machine レーンも指定可
     const lanes: Lane[] = opts.lane ? [opts.lane] : ["curated"];
     let rows = state.entries.filter((e) => lanes.includes(e.lane) && e.status === "candidate");
-    // curated は eligible かつ landing が blocked でないものを優先 (§4.5 gate)
+    // curated は eligible かつ landing が blocked でないものを優先 (hard gate)
     if (lanes.includes("curated")) {
       rows = rows.filter((e) => e.lane !== "curated" || (e.eligible && e.landingReadiness !== "blocked"));
     }

@@ -1,5 +1,5 @@
 /**
- * buzz-map attribution core テスト (§7.3 集計 / §7.4 KPI / §11 Phase 5 score 還流) + UTM 一本化。
+ * buzz-map attribution core テスト（GA4集計 / KPI / score還流）+ UTM一本化。
  * 実行: node --test .claude/scripts/sns/lib/__tests__/buzz-map-attribution-core.test.mjs
  */
 
@@ -64,7 +64,7 @@ test("buzz-map adapter は sns-utm と同じ URL を出す (delegation 一致)",
   assert.equal(viaAdapter, viaCanonical);
 });
 
-// ── §7.3 campaign → ideaId ──────────────────────────────────────────────────
+// ── campaign → ideaId ──────────────────────────────────────────────────
 
 test("ideaIdFromCampaign: buzz-map- 接頭のみ復元", () => {
   assert.equal(ideaIdFromCampaign("buzz-map-vacant-housing-muni"), "vacant-housing-muni");
@@ -72,7 +72,7 @@ test("ideaIdFromCampaign: buzz-map- 接頭のみ復元", () => {
   assert.equal(ideaIdFromCampaign(null), null);
 });
 
-// ── §7.3 session 集計 ────────────────────────────────────────────────────────
+// ── session 集計 ────────────────────────────────────────────────────────
 
 test("aggregateSessionsByIdea: buzz-map campaign を ideaId 別に畳み込み + source 別", () => {
   const rows = [
@@ -102,7 +102,7 @@ test("aggregateCtaByIdea: content_id 別 CTA + target 別", () => {
   assert.equal(agg.b.ctaClicks, 1);
 });
 
-// ── §7.4 KPI ────────────────────────────────────────────────────────────────
+// ── KPI ────────────────────────────────────────────────────────────────
 
 test("computeKpis: engagement / deep-click / snsCTR (direct のみ)", () => {
   const sessionsByIdea = { a: { sessions: 20, engagedSessions: 10, pageViews: 40, bySource: {} } };
@@ -115,7 +115,7 @@ test("computeKpis: engagement / deep-click / snsCTR (direct のみ)", () => {
   assert.equal(kpis.a.snsCtr, 0.02); // 20/1000
 });
 
-test("computeKpis: profile 経由は snsCTR を出さない (§7.1 過大評価回避)", () => {
+test("computeKpis: profile 経由は snsCTR を出さない（過大評価回避）", () => {
   const kpis = computeKpis({
     sessionsByIdea: { a: { sessions: 20, engagedSessions: 10, pageViews: 40, bySource: {} } },
     ctaByIdea: {},
@@ -130,7 +130,7 @@ test("computeKpis: session 0 は rate 系 null (0除算しない)", () => {
   assert.equal(kpis.a.deepClickRate, null);
 });
 
-// ── §11 Phase 5 score 還流 ───────────────────────────────────────────────────
+// ── score 還流 ───────────────────────────────────────────────────
 
 test("buildScoreFeedback: session 0 は加点 0 (推測で加点しない)", () => {
   const fb = buildScoreFeedback({ a: { landingSessions: 0, deepClickRate: null } });
@@ -150,7 +150,7 @@ test("buildScoreFeedback: 高 session ほど score 単調増加 (log スケー�
   assert.ok(high > low);
 });
 
-// ── 不変条件: canonical (catalog primaryUrl) に UTM を混入させない (§7.1) ─────
+// ── 不変条件: canonical (catalog primaryUrl) に UTM を混入させない ─────
 
 test("canonical 不変条件: catalog の primaryUrl に UTM/query が付いていない", () => {
   const catalog = JSON.parse(

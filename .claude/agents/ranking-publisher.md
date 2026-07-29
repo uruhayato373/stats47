@@ -51,7 +51,7 @@ ranking の middleware は `isGone` のみ 410、未登録キー（KNOWN にも 
                                        CI: gh workflow run sync-snapshots.yml -f only=ranking-values
                                        ★必ず Step 1 (ranking-items) の後。実描画値・OGP・blog がこれを読む。
                                        2026-07-27 に Phase 6 以降 2 ヶ月間 writer 不在化していた事故の恒久対策
-                                       (docs/04_レビュー/2026-07-27-ranking-values-incident.md)
+                                       (.claude/rules/metric-config-standards.md)
 3. KNOWN_RANKING_KEYS 再生成        → apps/web/scripts/generate-known-ranking-keys.ts
                                        (isActive + R2 item.json 200 を KNOWN に。要 R2_PUBLIC_FETCH_URL)
                                        出力: packages/ranking/src/config/known-ranking-keys.ts → 要 git commit
@@ -89,7 +89,7 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 - `.claude/rules/metric-config-standards.md` —「isActive:true ≠ 本番公開」多段依存
 - `.claude/rules/branch-workflow.md` — develop→main、デプロイ規律、実行環境差分（cloud は workflow dispatch 不可）
 - `.claude/rules/r2-storage-design.md` / `.claude/rules/data-sqlite-ssot.md` — R2 namespace / 完全DBレス
-- `docs/todo/02_機能バックログ.md` —「122 metric の本番公開」手順
+- `docs/todo/05_機能バックログ.md` —「122 metric の本番公開」手順
 - memory `project_ranking_publish_pipeline_gap`
 
 ## 触る files

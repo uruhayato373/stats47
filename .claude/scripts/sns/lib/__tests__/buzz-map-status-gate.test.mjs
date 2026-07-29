@@ -1,6 +1,6 @@
 /**
  * buzz-map status machine (upsert / merged 継承) + postable predicate + batch selection のテスト。
- * §4.3 status / §8.3 draft gate / §8.4 batch。
+ * status / draft gate / batch。
  * 実行: node --test .claude/scripts/sns/lib/__tests__/buzz-map-status-gate.test.mjs
  */
 
@@ -17,7 +17,7 @@ import {
   selectBatch,
 } from "../buzz-map-router-core.mjs";
 
-// ── §4.3 upsertStatus: 後段状態を巻き戻さない ─────────────────────────────
+// ── upsertStatus: 後段状態を巻き戻さない ─────────────────────────────
 
 test("STATUS_ORDER は candidate から measured への一本道", () => {
   assert.equal(STATUS_ORDER[0], "candidate");
@@ -54,7 +54,7 @@ test("upsertStatus: 分岐 → 進行は昇格 / 分岐 → 分岐は next", () 
   assert.equal(upsertStatus("needs-content", "blocked"), "blocked");
 });
 
-// ── §4.3 / §8.3 resolveMergedStatus: machine 後段 + posts.json draft の合流 ──
+// ── resolveMergedStatus: machine 後段 + posts.json draft の合流 ──
 
 test("resolveMergedStatus: machine generated を max 継承", () => {
   assert.equal(resolveMergedStatus("candidate", ["generated"], null), "generated");
@@ -73,7 +73,7 @@ test("resolveMergedStatus: 何も無ければ candidate", () => {
   assert.equal(resolveMergedStatus(undefined, [], null), "candidate");
 });
 
-// ── §8.3 postable predicate ────────────────────────────────────────────────
+// ── postable predicate ────────────────────────────────────────────────
 
 function fullFacts(overrides = {}) {
   return {
@@ -123,7 +123,7 @@ test("isPostable: 複数欠落は全て reasons に出る", () => {
   assert.equal(r.reasons.length, 2);
 });
 
-// ── §8.4 batch selection ────────────────────────────────────────────────────
+// ── batch selection ────────────────────────────────────────────────────
 
 function entry(overrides = {}) {
   return {

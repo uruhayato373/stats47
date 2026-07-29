@@ -1,5 +1,5 @@
 /**
- * periods.mjs のテスト — 期間契約 (§18.2) の決定性・非重複・遅延・JST・跨ぎ・backfill 安全性。
+ * periods.mjs のテスト — 期間契約の決定性・非重複・遅延・JST・跨ぎ・backfill 安全性。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";

@@ -8,7 +8,7 @@ name: SNS Port Bubble Daily (Instagram)
 #   - 動画/caption: .local/r2/sns/port/<key>/instagram/ (R2 push 済)
 #   - caption テンプレ: .claude/state/sns-port-bubble-captions/<key>-instagram.txt (git 管理)
 #   - 投稿スクリプト: .claude/skills/sns/post-instagram/post-instagram.ts
-#   - 仕様: docs/02_実装計画/port-logistics-bundle.md (計画書)
+#   - 仕様: docs/01_技術設計/06_自動化インベントリ.md / .claude/rules/sns-content-standards.md
 
 on:
   schedule:

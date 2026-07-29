@@ -31,7 +31,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs            # 既定 imp>=
 ```
 
 出力:
-- `docs/04_レビュー/<date>-blog-winning-patterns.md` — 人間向け (勝ち記事 TOP / featureSignals / 次アクション)
+- `.claude/skills/blog/analyze-winning-patterns/reference/reports/<date>.md` — 比較用レポート
 - `.claude/state/blog/winning-patterns.json` — 機械向け (featureSignals + 記事別 conformance)
 
 ### Step 2: シグナルを読む (confidence で足切り)

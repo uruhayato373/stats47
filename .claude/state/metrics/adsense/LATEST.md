@@ -16,7 +16,7 @@
 | Ad Requests | - | |
 | Coverage | - | |
 
-## 収益分解 (§7.2)
+## 収益分解
 
 - Impression density (imp/PV): **1.066** (前週 1.234)
 - Viewable imp / PV: **0.606**
@@ -32,6 +32,6 @@
 
 履歴: [`history.csv`](./history.csv) / デバイス別: [`history-devices.csv`](./history-devices.csv) / 内訳: [`history-formats.csv`](./history-formats.csv)・[`history-placements.csv`](./history-placements.csv)・[`history-bid-types.csv`](./history-bid-types.csv)
 
-> schema v2 (2026-07-28・doc41 §2.1): 公式 `COST_PER_CLICK`/`IMPRESSIONS_RPM`/`AD_REQUESTS`/`AD_REQUESTS_COVERAGE` を追加。
+> schema v2 (2026-07-28): 公式 `COST_PER_CLICK`/`IMPRESSIONS_RPM`/`AD_REQUESTS`/`AD_REQUESTS_COVERAGE` を追加。
 > 旧 `cpc` 列 (earnings/clicks) は**公式 CPC ではない**ため `earnings_per_click_legacy` へ改名した (値は不変)。
 > 公式値が無い過去週は `-` (null)。0 で埋めない。ESTIMATED_EARNINGS は月次確定まで変動しうる推定値。

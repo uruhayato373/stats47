@@ -1,13 +1,13 @@
 /**
  * redact — google-admin runner の出力 sanitize (pure)。
  *
- * 正典: docs/02_実装計画/41_AdSense継続改善・GA4_GSC設定自動化仕様.md §3.2/§6.2。
+ * 正典: ./README.md「実行境界」「mutation手順」。
  * cookie / token / localStorage / Authorization / account email / URL query を
  * console・audit JSON・state へ出さない。search-growth の redaction を再利用して拡張する。
  */
 import { redactString as baseRedactString } from "../search-growth/lib/redaction.mjs";
 
-/** email をマスクする (account email を保存しない・§3.2)。 */
+/** email をマスクする (account email を保存しない)。 */
 export function redactEmail(s) {
   if (typeof s !== "string") return s;
   return s.replace(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, "[REDACTED_EMAIL]");

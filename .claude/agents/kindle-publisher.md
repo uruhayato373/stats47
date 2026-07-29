@@ -66,5 +66,5 @@ BEHAVIOR CONTRACT（命令）:
 ## 関連
 
 - 規約: `.claude/rules/coconala-product-standards.md §8` / skill: `.claude/skills/product/build-kindle-book/SKILL.md`
-- 市場評価: `docs/04_レビュー/2026-07-14-kindle-monetization.md` / 論点カタログ: `docs/04_レビュー/2026-07-19-pdf-book-survey.md`
+- 企画・市場判断: `.claude/rules/coconala-product-standards.md §8` / `packages/product-factory/src/channels/kindle/book-catalog.ts`
 - 品質基準（書き下ろし）: `.claude/rules/blog-quality-standards.md` / 実証判定: `.claude/rules/evidence-based-judgment.md`

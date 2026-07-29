@@ -235,7 +235,8 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
 
 §2-0 / §2-8 / §2-9 / §1 quota の改訂は**実測と競合観測に基づく**こと (`evidence-based-judgment.md`)。
 
-1. `analyze-x-winning-patterns.mjs` の月次レビュー (`docs/04_レビュー/<date>-x-winning-patterns.md`) か
+1. `analyze-x-winning-patterns.mjs` の月次レポート
+   (`.claude/skills/sns/x-viral-research/reference/reports/<date>.md`) か
    `/competitor-scan` の月次レビューを起点にする (思いつきで変えない)。
 2. x-strategist が「どの行をどう変えるか」の diff を提案として提示する。
 3. **人間が承認してから**本ファイルを編集する。編集後は `node .claude/scripts/lib/x-catalog.cjs --check` を通す。
@@ -365,6 +366,6 @@ SNS 投稿は `/sns` セクション、OGP/リンクカード/note カバー・
 - **バズ地図カード (日本地図×統計)**: 規約 `.claude/rules/buzz-map-standards.md` / スキル `.claude/skills/sns/buzz-map/SKILL.md` / Remotion feature `apps/remotion/src/features/buzz-map/` (owner: sns-renderer、co: X配信=x-strategist / IG配信=instagram-strategist / 地理データ=gis-curator)
 - メトリクス時系列: `.claude/skills/analytics/sns-metrics-improvement/`
 - agent 責務: `.claude/agents/README.md` (Tier 4 SNS) / X オーナー `.claude/agents/x-strategist.md`
-- 収益化での SNS 位置づけ: `docs/02_実装計画/01_収益化マスタープラン.md` §6
+- 収益化での SNS 位置づけ: `docs/00_プロジェクト管理/02_収益化戦略.md` §6
 - 競合 memory: `project_competitor_riskmap_jp` / `feedback_sns_competitor_search` / `project_competitor_indicator_benchmark`
 - SNS 10K ロードマップ memory: `project_sns_10k_roadmap`

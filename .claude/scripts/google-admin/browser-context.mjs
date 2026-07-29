@@ -1,5 +1,6 @@
 /**
- * browser-context — google-admin 専用 Playwright persistent context + lock (doc41 §6.2)。
+ * browser-context — google-admin 専用 Playwright persistent context + lock。
+ * 安全契約: ./README.md「実行境界」。
  *
  * - dedicated profile `.local/playwright-google-admin-profile/` だけを使う
  *   (通常 Chrome / X / A8 / note 等の profile を使わない)。
@@ -60,7 +61,7 @@ export function releaseLock() {
   }
 }
 
-/** 専用 profile の persistent context を 1 つ起動する (§6.2 固定パラメータ)。 */
+/** 専用 profile の persistent context を 1 つ起動する。 */
 export async function launchAdminContext() {
   fs.mkdirSync(PROFILE_DIR, { recursive: true });
   const context = await chromium.launchPersistentContext(PROFILE_DIR, {
@@ -77,7 +78,7 @@ export async function launchAdminContext() {
     args: ["--disable-blink-features=AutomationControlled", "--no-first-run", "--no-default-browser-check"],
     ignoreDefaultArgs: ["--enable-automation"],
   });
-  // download は受け付けない (§6.2)
+  // download は受け付けない
   context.on("page", (p) => p.on("download", (d) => d.cancel().catch(() => {})));
   const page = context.pages()[0] ?? (await context.newPage());
   page.on("download", (d) => d.cancel().catch(() => {}));

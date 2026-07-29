@@ -27,4 +27,4 @@ const PROFILE_ROOT = existsSync(MAIN_CHECKOUT) ? MAIN_CHECKOUT : REPO_ROOT;
 - 適用済み: `.claude/scripts/ads/lib/asp-browser-base.mjs` (3 ASP 共通基盤) /
   `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}`。
 - **SNS 系 (publish-x 等) は未適用** — Windows では再ログインになる。必要になった時点で同じ形に揃える。
-- 正典: `docs/01_技術設計/playwright-auth-profiles.md` の対策 A'。関連: [[project_asp_site_attribution]]
+- 正典: `docs/01_技術設計/07_Playwright認証プロファイル.md` の対策 A'。関連: [[project_asp_site_attribution]]

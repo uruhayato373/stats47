@@ -8,7 +8,7 @@ model: sonnet
 > `audit-ai-content.mjs` が客観フロア (数値/重複/羅列) を握るため tier-1 は sonnet で十分。
 > **tier-2**: GSC 流入上位 (queue の `reviewTier: "opus"` = 上位30件) と tier-1 が REVISE 判定した
 > 件だけ、起動時に `model: opus` を明示指定してエスカレーション審査する。正典:
-> `.claude/skills/content/generate-ai-content/SKILL.md` / `docs/04_レビュー/2026-07-03-claude-code-setup-audit.md`。
+> `.claude/rules/model-prompting.md` / `.claude/skills/content/generate-ai-content/SKILL.md`。
 
 # Ranking Content Critic Agent
 

@@ -46,9 +46,9 @@ jobs:
       - name: 📄 Step Summary
         if: always()
         run: |
-          REPORT_DIR="docs/04_レビュー"
+          REPORT_DIR=".claude/skills/sns/sns-weekly-report/reference/reports"
           # shellcheck disable=SC2012  # 最新レポートを mtime 順で取得
-          LATEST=$(ls -t "$REPORT_DIR"/*-sns-weekly.md 2>/dev/null | head -1)
+          LATEST=$(ls -t "$REPORT_DIR"/*.md 2>/dev/null | head -1)
           if [ -n "$LATEST" ]; then
             cat "$LATEST" >> "$GITHUB_STEP_SUMMARY"
           fi
@@ -57,7 +57,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "docs/04_レビュー"
+          git add ".claude/skills/sns/sns-weekly-report/reference/reports"
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else

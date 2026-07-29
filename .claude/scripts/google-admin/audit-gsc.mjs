@@ -1,10 +1,10 @@
 /**
  * audit-gsc — GSC property の存在・権限を **API (read-only)** で照合する。
  *
- * 正典: docs/02_実装計画/41_AdSense継続改善・GA4_GSC設定自動化仕様.md §5.1/§6.3。
+ * 正典: ./README.md「mutation前のidentity確認」。
  * 日常データ取得は API 優先 — GSC 側の確認は service account (既存・webmasters.readonly) で足り、
  * ブラウザは GA4 Admin UI (リンク作成側) だけに使う。
- * owner/user・change of address・bulk export 等の変更 API は呼ばない (denylist §6.5)。
+ * owner/user・change of address・bulk export 等の変更 API は呼ばない (README「denylist」)。
  */
 import { google } from "googleapis";
 import { resolveServiceAccountKeyFile } from "../metrics/lib/auth.mjs";

@@ -71,7 +71,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
 ### Step 4: wave を記録 (history + 改善ログ)
 
 - `.claude/state/blog/auto-brushup-history.json` に通過記事を追記 (wave_id 一致、`.claude/rules/blog-data-schema.md` の命名規則)。
-- `docs/todo/01_改善バックログ.md` に `## [BLOG-WAVE-<wave_id>]` section を追加 (frontmatter `status: pending` / `due: <+28日>` / `wave_id`)。
+- `docs/todo/04_改善バックログ.md` に `## [BLOG-WAVE-<wave_id>]` section を追加 (frontmatter `status: pending` / `due: <+28日>` / `wave_id`)。
 - 公開は CI (`publish-blog.yml` / develop push)。`quality-gate.mjs` が公開前に再 enforce する。
 
 ### cadence (週次・人手ゲート)
@@ -83,7 +83,8 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
 
 ### model 傾斜と delta 再審査 (トークン節約・2026-07-07 / TOKEN-CONTENT-01)
 
-critic 往復のコストを下げる 2 つの機構 (正典 `docs/02_実装計画/01_収益化マスタープラン.md` §7「Opus=blog 意味レビュー」):
+critic 往復のコストを下げる 2 つの機構。モデル選択の正典は `.claude/rules/model-prompting.md`、
+対象別 tier の決定実装は `build-remediation-queue.mjs`:
 
 agent起動promptとモデル別の共通規律は `.claude/rules/model-prompting.md` /
 `.claude/rules/agent-output-contract.md` を正典とする。

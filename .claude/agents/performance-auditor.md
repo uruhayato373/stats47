@@ -54,12 +54,12 @@ Web パフォーマンスと Cloudflare コストの監査専任 agent。 PSI �
 - `.claude/skills/analytics/performance-improvement/reference/` — agent 用詳細層 (CRUD)
 - `.claude/skills/analytics/cloudflare-cost-improvement/reference/` — agent 用詳細層 (CRUD)
 - `.claude/config/psi-urls.txt` — PSI 対象 URL リスト (read)
-- `docs/04_レビュー/{performance-report,cloudflare-cost}/` — レビュー文書 (CRUD)
-- `docs/todo/01_改善バックログ.md` — read only (improvement-triage 経由)
+- `.claude/skills/analytics/{performance,cloudflare-cost}-improvement/reference/` — 詳細履歴 (CRUD)
+- `docs/todo/04_改善バックログ.md` — read only (improvement-triage 経由)
 
 ## File Boundary (並行衝突回避)
 
-- `docs/todo/01_改善バックログ.md` への write 一切なし (improvement-triage 経由)
+- `docs/todo/04_改善バックログ.md` への write 一切なし (improvement-triage 経由)
 - `.claude/state/metrics/{psi,cloudflare}/` への write は本 agent が排他
 - 並行起動可能 agent: gsc-analyst / ga4-analyst / adsense-analyst (state は別)、 improvement-triage (本 agent の state を read)
 - 並行起動 NG: 同 URL 群への PSI 計測 2 体同時 (API rate-limit)

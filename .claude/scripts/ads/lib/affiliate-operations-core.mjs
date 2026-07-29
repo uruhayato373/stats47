@@ -5,7 +5,8 @@
  * snapshot 群 (inventory / GA4 / compliance / experiments registry / AFFILIATE_ADS) を渡す。
  * テスト: .claude/scripts/ads/__tests__/affiliate-operations-core.test.mjs (node --test)。
  *
- * 正典: docs/02_実装計画/25_アフィリエイト運用SSOT移行仕様.md §6.2 / §8。
+ * 正典: .claude/rules/affiliate-ads-standards.md §6 / §8、
+ *       .claude/skills/analytics/affiliate-improvement/SKILL.md。
  * routing・freshness・期限・sample 到達の判定はすべてここで決定的に行い、モデルに判断させない。
  */
 

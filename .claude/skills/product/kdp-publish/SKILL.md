@@ -54,4 +54,4 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit      # 公開 (�
 
 - 規約: `.claude/rules/coconala-product-standards.md §8`
 - スクリプト: `.claude/scripts/kdp/` / SoT: `.claude/config/kdp-listings.json` / アカウント: `.claude/config/kdp-account.json`
-- agent: `.claude/agents/kdp-operator.md` / 認証プロファイル: `docs/01_技術設計/playwright-auth-profiles.md`
+- agent: `.claude/agents/kdp-operator.md` / 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`

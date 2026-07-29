@@ -1,16 +1,16 @@
 /**
  * adsense-report-contract — AdSense Management API v2 の job 別 dimension/metric 互換契約 (pure)。
  *
- * 正典: docs/02_実装計画/41_AdSense継続改善・GA4_GSC設定自動化仕様.md §4.2。
+ * 本ファイルが AdSense job / metric / manifest / history schema のコード SSOT。
  *
  * - job ごとに要求してよい dimensions / metrics を固定する (全 metric を全 dimension に投げない)。
  *   unit/format/placement 系では PAGE_VIEWS / PAGE_VIEWS_RPM が 0 になり比較指標にできないため
- *   要求しない (§2.2)。主指標は IMPRESSIONS_RPM。
- * - 公式 COST_PER_CLICK / IMPRESSIONS_RPM / AD_REQUESTS / AD_REQUESTS_COVERAGE を取得する (§2.1)。
+ *   要求しない。主指標は IMPRESSIONS_RPM。
+ * - 公式 COST_PER_CLICK / IMPRESSIONS_RPM / AD_REQUESTS / AD_REQUESTS_COVERAGE を取得する。
  * - 各 job の結果は manifest (schemaVersion 2・期間 metadata・status・limitations) で保存する。
- *   PAGE_URL の 0 行は privacy-threshold であり、error や 0 PV と混同しない (§2.3)。
+ *   PAGE_URL の 0 行は privacy-threshold であり、error や 0 PV と混同しない。
  * - currency / timeZone は API response から取れた場合だけ確定値にする。取れなければ
- *   "unknown" + limitation (§4.2 末尾)。
+ *   "unknown" + limitation。
  *
  * pure module (I/O なし)。テスト: __tests__/adsense-contract.test.mjs
  */
@@ -19,7 +19,7 @@ export const ADSENSE_MANIFEST_SCHEMA_VERSION = 2;
 export const ADSENSE_SOURCE = "adsense-management-api-v2";
 export const MANIFEST_FILE = "manifest.json";
 
-/** account KPI / device で使う全 metric (§4.2)。 */
+/** account KPI / device で使う全 metric。 */
 export const METRICS_FULL = Object.freeze([
   "ESTIMATED_EARNINGS",
   "PAGE_VIEWS",
@@ -34,13 +34,13 @@ export const METRICS_FULL = Object.freeze([
   "AD_REQUESTS_COVERAGE",
 ]);
 
-/** unit/format/placement/bid-type 等 PAGE_VIEWS が意味を持たない job 用 (§2.2)。 */
+/** unit/format/placement/bid-type 等 PAGE_VIEWS が意味を持たない job 用。 */
 export const METRICS_IMPRESSION_BASED = Object.freeze(
   METRICS_FULL.filter((m) => m !== "PAGE_VIEWS" && m !== "PAGE_VIEWS_RPM"),
 );
 
 /**
- * job 契約 (§4.2 の表)。file 名は既存 snapshot 形式を維持しつつ新 job を追加する。
+ * job 契約。file 名は既存 snapshot 形式を維持しつつ新 job を追加する。
  * periodKind: finalized7d が既定。pages のみ privacy threshold 回避のため 30 日窓 (後方互換 legacy・ADSENSE-PAGES-DATA-01)。
  */
 export const REPORT_JOBS = Object.freeze([
@@ -65,9 +65,9 @@ export function jobByName(name) {
 }
 
 /**
- * job の実行結果を status に分類する (§4.2)。
+ * job の実行結果を status に分類する。
  * - error があれば "error"
- * - PAGE_URL 0 行は "privacy-threshold" (エラーや 0 PV と扱わない・§2.3)
+ * - PAGE_URL 0 行は "privacy-threshold" (エラーや 0 PV と扱わない)
  * - それ以外の 0 行は "missing"
  * - 行があり日別 job で期間内の日付が欠けるなら "partial" (呼び元が missingDates を渡す)
  */
@@ -81,7 +81,7 @@ export function classifyJobStatus(job, rowCount, { error = null, missingDates = 
 }
 
 /**
- * manifest entry (§4.2 の JSON 契約) を組み立てる。
+ * manifest entry を組み立てる。
  * currencyCode / timeZone は確定値が無ければ "unknown" とし limitation を付ける。
  */
 export function buildJobManifest({
@@ -137,7 +137,7 @@ export function currencyFromHeaders(headers) {
   return null;
 }
 
-// ── history schema v2 (公式 CPC と後方互換 legacy 収益/click の分離・§2.1) ──────────
+// ── history schema v2 (公式 CPC と後方互換 legacy 収益/click の分離) ─────────────
 
 /** account history.csv v2: 公式 metric 列を追加 (過去行は空 = null 扱い。0 で埋めない)。 */
 export const ADSENSE_HISTORY_FIELDS_V2 = Object.freeze([
@@ -262,13 +262,13 @@ export function adsenseDeviceRowFromSnapshot(week, d) {
     ctr: Number(d.IMPRESSIONS_CTR ?? 0).toFixed(4),
     viewability: Number(d.ACTIVE_VIEW_VIEWABILITY ?? 0).toFixed(4),
     cost_per_click: cpcOfficial === "" ? "" : Number(cpcOfficial).toFixed(2),
-    // 後方互換 legacy: earnings/clicks。公式 CPC ではない (CPM 等を含むため・§2.1)
+    // 後方互換 legacy: earnings/clicks。公式 CPC ではない (CPM 等を含むため)
     earnings_per_click_legacy: clicks > 0 ? (earnings / clicks).toFixed(2) : "0.00",
     imp_per_pv: pv > 0 ? (imp / pv).toFixed(3) : "0.000",
   };
 }
 
-// ── breakdown history (format / placement / bid type × platform・§4.2) ──────
+// ── breakdown history (format / placement / bid type × platform) ───────────
 
 export const ADSENSE_BREAKDOWN_SPECS = Object.freeze([
   { snapshotFile: "formats-platforms.csv", historyFile: "history-formats.csv", keyDim: "AD_FORMAT_CODE" },

@@ -64,6 +64,8 @@ npm run products:kindle:validate --workspace=@stats47/product-factory
 - 規約: `.claude/rules/coconala-product-standards.md §8`
 - SSOT: `packages/product-factory/src/channels/kindle/book-catalog.ts` / EPUB 生成器 `src/generators/epub.ts`
 - 台帳: `.claude/state/products/kindle-status.json`
-- 市場評価: `docs/04_レビュー/2026-07-14-kindle-monetization.md` / 論点カタログ: `docs/04_レビュー/2026-07-19-pdf-book-survey.md`
+- 企画・市場判断: `.claude/rules/coconala-product-standards.md §8` / `packages/product-factory/src/channels/kindle/book-catalog.ts`
 - agent: `.claude/agents/kindle-publisher.md`
 - 品質ゲート（書き下ろし）: `.claude/rules/blog-quality-standards.md`（ですます調・critic PASS）
+- note・KDP・Brain・ココナラ横断の商品ポートフォリオと需要ゲート:
+  `../build-coconala-product/reference/multi-channel-content-product-factory.md`

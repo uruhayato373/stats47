@@ -13,7 +13,8 @@
  * Usage:
  *   npx tsx .claude/scripts/themes/build-theme-portfolio.ts                 # 機械項目の再導出 (upsert)
  *   npx tsx .claude/scripts/themes/build-theme-portfolio.ts --set <themeKey> \
- *     [--lifecycle <status>] [--hypothesis "<text>"] [--add-evidence <ref>] [--next-review YYYY-MM-DD]
+ *     [--lifecycle <status>] [--hypothesis "<text>"] [--add-evidence <ref>]
+ *     [--remove-evidence <ref>] [--next-review YYYY-MM-DD]
  *
  * 実行後は必ず validate-theme-state.mjs を通すこと (根拠なし判定は validator が弾く)。
  */
@@ -171,6 +172,10 @@ function main() {
     if (hyp) entry.currentHypothesis = hyp;
     const ev = getOpt("--add-evidence");
     if (ev && !entry.evidenceRefs.includes(ev)) entry.evidenceRefs.push(ev);
+    const removedEvidence = getOpt("--remove-evidence");
+    if (removedEvidence) {
+      entry.evidenceRefs = entry.evidenceRefs.filter((ref) => ref !== removedEvidence);
+    }
     const nr = getOpt("--next-review");
     if (nr) entry.nextReviewAt = nr;
     console.log(`set: ${key} lifecycle=${entry.lifecycleStatus} evidence=${entry.evidenceRefs.length}`);

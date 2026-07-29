@@ -72,4 +72,4 @@ const areaName = lookupAreaNameSync(areaCode);
 
 ## 関連ドキュメント
 
-- [lib層とfeatures層の責務分担](../../../docs/01_技術設計/01_システム概要/06_lib層とfeatures層の責務分担.md)
+- [システムアーキテクチャ](../../../../docs/01_技術設計/01_システムアーキテクチャ.md)

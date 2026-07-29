@@ -147,4 +147,4 @@ A8 は `scout → apply → check-approval → harvest → register → 公開` 
 - コア: `.claude/scripts/ads/lib/{asp-browser-base,asp-browser,asp-site-guard}.mjs` (+ `__tests__/`)
 - agent: `.claude/agents/affiliate-operator.md`
 - 隣接 skill: `/scout-asp` (A8 案件開拓) / `/a8-report` (A8 成果取込) / `/register-affiliate-banner` (SSOT 登録)
-- 認証プロファイル: `docs/01_技術設計/playwright-auth-profiles.md`
+- 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`

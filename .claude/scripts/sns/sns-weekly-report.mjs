@@ -3,7 +3,8 @@
  * SNS Weekly Report Generator (data portion)
  *
  * .claude/skills/analytics/sns-metrics-improvement/snapshots/ から週次データを読み、
- * docs/04_レビュー/YYYY-Www-sns-weekly.md にプラットフォーム別サマリ + 上位投稿表を生成。
+ * .claude/skills/sns/sns-weekly-report/reference/reports/YYYY-Www.md に
+ * プラットフォーム別サマリ + 上位投稿表を生成。
  *
  * AI 分析・next action のコメントは `/sns-weekly-report` skill 経由で追記する設計
  * （自動化はデータ部のみ、定性判断は人 or Claude Routine で）。
@@ -181,9 +182,9 @@ function main() {
 
   const body = reportData + "\n" + reportTop + "\n" + aiPlaceholder;
 
-  const outDir = path.join(PROJECT_ROOT, "docs/04_レビュー");
+  const outDir = path.join(PROJECT_ROOT, ".claude/skills/sns/sns-weekly-report/reference/reports");
   if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true });
-  const outPath = path.join(outDir, `${weekId}-sns-weekly.md`);
+  const outPath = path.join(outDir, `${weekId}.md`);
 
   if (DRY_RUN) {
     console.log(body);

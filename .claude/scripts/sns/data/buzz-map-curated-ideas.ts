@@ -1,7 +1,7 @@
 /**
  * buzz-map 集客ゲート: 人が選定した企画 SSOT (curated ideas)
  *
- * 正典: docs/02_実装計画/27_buzz-map集客ゲート統合仕様.md (§4 型 / §10 P0 landing 案 / §11 全候補カタログ)
+ * 正典: このファイル（企画）/ .claude/rules/buzz-map-standards.md §4-5（運用・landing gate）
  * 規約: .claude/rules/buzz-map-standards.md / .claude/rules/sns-content-standards.md
  *
  * このファイルは企画の唯一の authored source。build-buzz-map-catalog.ts が machine lane と
@@ -64,7 +64,7 @@ export interface CuratedBuzzMapIdea {
   category: string;
   sourceKind: "estat" | "ksj" | "mlit-dpf" | "gsi" | "derived" | "external";
   metricKeys: string[];
-  /** §11 で同義候補を 1 件へ統合した際の別名・別候補 */
+  /** 同義候補を1件へ統合した際の別名・別候補 */
   aliases?: string[];
   dataRefs: Array<{
     id: string;
@@ -120,14 +120,14 @@ const CAP_F_MESH = "型F メッシュ塗り (未実装)";
 const CAP_FLOW = "型flow 移動フロー矢印 (OD flow renderer 未整備)";
 
 // ---------------------------------------------------------------------------
-// カタログ本体 (§11.1〜§11.8)
-//   ・§11.9 の 12 型は候補ではなく「投稿表現の横断語彙」→ 各候補の viralPatterns へ付与
-//   ・§10 の P0 15 件は該当候補と同一 ideaId で統合し priority:"P0" + landingPlan に反映
+// カタログ本体
+//   ・12種の投稿表現は候補ではなく「投稿表現の横断語彙」→ 各候補の viralPatterns へ付与
+//   ・P0 15件は該当候補と同一 ideaId で統合し priority:"P0" + landingPlan に反映
 // ---------------------------------------------------------------------------
 
 export const CURATED_BUZZ_MAP_IDEAS: CuratedBuzzMapIdea[] = [
   // =========================================================================
-  // §11.1 人口・地域の存続 (23 件)
+  // 人口・地域の存続 (23 件)
   // =========================================================================
   {
     ideaId: "population-growth-municipalities",
@@ -1420,7 +1420,7 @@ export const CURATED_BUZZ_MAP_IDEAS: CuratedBuzzMapIdea[] = [
   },
 
   // =========================================================================
-  // §11.2 住宅・生活費 (19 件 — §10 P0 #6 所得×生活費 real-affordability-pref を含む)
+  // 住宅・生活費 (19 件 — P0 #6 所得×生活費 real-affordability-pref を含む)
   // =========================================================================
   {
     ideaId: "vacant-housing-muni",
@@ -2425,7 +2425,7 @@ export const CURATED_BUZZ_MAP_IDEAS: CuratedBuzzMapIdea[] = [
   },
 
   // =========================================================================
-  // §11.3 食文化・消費 (20 件) — D2 食品・家計消費クラスタ (勝ちクラスタ)
+  // 食文化・消費 (20 件) — D2 食品・家計消費クラスタ (勝ちクラスタ)
   // =========================================================================
   {
     ideaId: "natto-east-west-boundary",
@@ -3513,7 +3513,7 @@ export const CURATED_BUZZ_MAP_IDEAS: CuratedBuzzMapIdea[] = [
   },
 
   // =========================================================================
-  // §11.4 交通・インフラ (22 件)
+  // 交通・インフラ (22 件)
   // =========================================================================
   {
     ideaId: "station-passenger-tiers",
@@ -4728,7 +4728,7 @@ export const CURATED_BUZZ_MAP_IDEAS: CuratedBuzzMapIdea[] = [
   },
 
   // =========================================================================
-  // §11.5 地名 (18 件) — GSI 地名点群。§11.5 注記: 宿/浜/新田/数字 は競合と重なる
+  // 地名 (18 件) — GSI 地名点群。宿/浜/新田/数字は競合と重なる
   //   → exact 複製を避け、比較・時系列・別レイヤーとの合成で差別化する
   // =========================================================================
   {
@@ -5683,7 +5683,7 @@ export const CURATED_BUZZ_MAP_IDEAS: CuratedBuzzMapIdea[] = [
   },
 
   // =========================================================================
-  // §11.6 経済・仕事・財政 (18 件)
+  // 経済・仕事・財政 (18 件)
   // =========================================================================
   {
     ideaId: "per-capita-taxable-income",
@@ -6625,8 +6625,8 @@ export const CURATED_BUZZ_MAP_IDEAS: CuratedBuzzMapIdea[] = [
   },
 
   // =========================================================================
-  // §11.7 教育・医療・福祉 (18 件)
-  //   §11.7 注記: 自殺・精神疾患・認知症・死亡率・不登校は sensitivity medium/high
+  // 教育・医療・福祉 (18 件)
+  //   自殺・精神疾患・認知症・死亡率・不登校は sensitivity medium/high
   //   → 自動生成・煽り表現から除外する
   // =========================================================================
   {
@@ -6878,7 +6878,7 @@ export const CURATED_BUZZ_MAP_IDEAS: CuratedBuzzMapIdea[] = [
       differentiation: 4,
     },
     blockers: [
-      "不登校は sensitivity high → 自動 caption・自動投稿から除外 (§4.5)",
+      "不登校は sensitivity high → 自動 caption・自動投稿から除外 (hard gate)",
       "定義・調査方法を明示。地域や個人を非難する表現を避ける",
     ],
     channels: [],
@@ -7188,7 +7188,7 @@ export const CURATED_BUZZ_MAP_IDEAS: CuratedBuzzMapIdea[] = [
       differentiation: 4,
     },
     blockers: [
-      "精神疾患は sensitivity high → 自動 caption・自動投稿から除外 (§4.5)",
+      "精神疾患は sensitivity high → 自動 caption・自動投稿から除外 (hard gate)",
       "偏見を助長する表現を避け、定義と背景を丁寧に示す",
     ],
     channels: [],
@@ -7581,7 +7581,7 @@ export const CURATED_BUZZ_MAP_IDEAS: CuratedBuzzMapIdea[] = [
   },
 
   // =========================================================================
-  // §11.8 気候・環境・防災 (22 件)
+  // 気候・環境・防災 (22 件)
   //   気象時系列 (さくら/猛暑/熱帯夜/初雪) は気象庁データ取得が未整備 → needs-data
   //   GIS ハザード overlay (洪水/津波/土砂/クマ/災害碑) は KSJ
   // =========================================================================

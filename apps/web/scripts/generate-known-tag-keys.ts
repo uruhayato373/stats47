@@ -9,9 +9,10 @@
  * CI ビルド環境では R2 binding が無いため、静的ファイルとして git commit する設計。
  *
  * ★2026-07-24 に生成元を差し替えた: 旧版はローカル D1 の `tags` テーブルを読んでいたが、
- *   完全DBレス移行 (docs/01_技術設計/12_完全DBレス設計.md) で D1 が廃止され生成不能になり、
+ *   完全DBレス移行 (docs/01_技術設計/02_データアーキテクチャ.md) で D1 が廃止され生成不能になり、
  *   2026-04-26 の 327 件で凍結していた。その間に増えた 866 タグが全て 410 になり、
- *   公開記事のタグリンク 1,988 本が死んでいた (docs/04_レビュー/2026-07-24-site-link-audit.md)。
+ *   公開記事のタグリンク 1,988 本が死んでいた。恒久対策は
+ *   `.claude/rules/blog-quality-standards.md`「内部リンクの実在」を参照。
  *
  * 使い方: `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
  *         `--check` を付けるとファイルを書かず、コミット済みの内容と R2 の実態が一致するかだけ検証する
@@ -96,7 +97,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
       console.error(`     ${extra.slice(0, 10).join(", ")}${extra.length > 10 ? " …" : ""}`);
     }
     console.error("   修正: cd apps/web && npx tsx scripts/generate-known-tag-keys.ts");
-    console.error("   経緯: docs/04_レビュー/2026-07-24-site-link-audit.md");
+    console.error("   手順: .claude/rules/blog-quality-standards.md「内部リンクの実在」");
     process.exit(1);
   }
 

@@ -8,7 +8,7 @@ name: 🗾 Migration-flow Annual Full Refresh
 # - X (1-2 日で 47 件)
 #
 # 関連:
-# - docs/02_実装計画/migration-flow-sns-automation.md
+# - docs/01_技術設計/06_自動化インベントリ.md / .claude/rules/sns-content-standards.md
 # - apps/remotion/src/features/migration-flow/MigrationReelVertical.tsx
 # - apps/remotion/scripts/fetch-migration-flow.ts
 

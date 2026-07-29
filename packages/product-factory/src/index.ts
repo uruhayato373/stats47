@@ -2,7 +2,7 @@
  * @stats47/product-factory — ココナラ商品ファクトリーの公開 API。
  * Phase 1: 型付き商品カタログ + 決定的 validator。
  * Phase 2: 共通デザイン・データ・地図・チャート・出典・ライセンスの基盤 + 47 県 fixture。
- * 正典: docs/02_実装計画/30_ココナラ商品ファクトリー実装仕様.md
+ * 正典: .claude/rules/coconala-product-standards.md
  */
 export * from "./catalog";
 export * from "./validators/catalog-validator";

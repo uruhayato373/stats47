@@ -10,7 +10,7 @@ tags: [kakei-chousa, blog, ranking, d2]
 書籍『マーケティングに使える「家計調査」』（吉本佳生、講談社、2015、全307p）の**論点・切り口・品目リスト**を抽出したカタログ。
 家計調査系ランキング拡充・ブログ量産（D2/A/B/C型）のネタ帳として使う。
 
-> **SSOT / 消費者 (2026-07-12 に旧 `docs/02_実装計画/17_家計調査論点カタログ.md` から .claude へ移設)**:
+> **SSOT / 消費者（2026-07-12 に旧家計調査論点カタログから `.claude/` へ移設。旧版は Git 履歴）**:
 > 本ファイルが家計調査コンテンツ論点の入力 SSOT。§A 章別論点・§D ご当地ネタ → `article-writer` / `blog-seo-strategist`
 > (D2 食品・家計型の解説の観点)、§B 品目ギャップ分析・§C 粒度 → `ranking-expander` / `data-ingester`
 > (家計調査 metric 拡充の候補)。関連: memory `project_kakei_expansion_pipeline_gotchas`。
@@ -231,7 +231,7 @@ curl "https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?appId=<APP_ID>&stat
 
 ## 関連
 
-- 実装計画（本カタログの実行側）: `docs/todo/02_機能バックログ.md` [KAKEI-EXPANSION]（追記予定）
+- 実装計画（本カタログの実行側）: `docs/todo/05_機能バックログ.md` [KAKEI-EXPANSION]（追記予定）
 - ブログの型: `.claude/rules/blog-quality-standards.md` §記事アーキタイプ（D2型）
 - topic-queue: `.claude/state/blog/topic-queue.json`
 - metric 規約: `.claude/rules/metric-config-standards.md` / e-Stat 規約: `.claude/rules/estat-api.md`

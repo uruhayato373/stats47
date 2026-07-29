@@ -1,240 +1,123 @@
 ---
 name: expand-indicators
 description: |
-  ⚠️ Phase 7 (2026-05-28) で stats_prefecture テーブル削除に伴い、本 skill の orchestrator script
-  (ingest-indicator.mjs) は runtime で「no such table」エラー。R2 直行投入用に refactor 待ち。
-  暫定運用は手動 TS-config 追加 + /sync-metrics-cache + /page-data-batch を 1 metric ずつ実行。
-  Use when user says "指標追加", "indicator 拡充", "/expand-indicators".
-argument-hint: "--target <N> [--priority high|medium|low|all] [--dry-run]"
+  docs/todo/06_指標バックログ.md の検証済み候補を、git TS config → e-Stat → R2 の
+  完全DBレス経路で少数ずつ追加する。Use when user says "指標追加", "indicator 拡充",
+  "/expand-indicators".
+argument-hint: "--target <N> [--priority high|medium] [--dry-run]"
 primary_agent: data-ingester
 ---
 
-> ⚠️ **DEPRECATED (Phase 7 — 2026-05-28 時点)**
->
-> 本 skill の中核 `ingest-indicator.mjs` が削除済 `stats_prefecture` テーブルへ INSERT する設計のため、現状実行できない。Phase 8 で R2 直行投入版 (`packages/data-configs/scripts/page-data-batch.ts` 流用) に refactor 予定 ([02_機能バックログ.md](../../../../docs/todo/02_機能バックログ.md) の Phase 8 issue を参照)。
->
-> **暫定運用** (1 metric ずつ手動):
-> 1. `packages/data-configs/src/metrics/<key>.ts` に TS-config を作成 (既存 `japanese-population.ts` をテンプレに)
->    - ⚠️ `years` は **4 桁年** (`{from:2014,to:2014}` / `{years:[2014]}`)。フルタイムコード (`2014100000`) 禁止。規約: `.claude/rules/estat-api.md`「年の正規化」
->    - ⚠️ `category` は **17 軸の `CategoryKey` のいずれか** (無効キーはコンパイルエラー)。`title` は名前のみ (年・※を焼かない)、`subtitle`=区別子、`note`=注釈、`description`=定義。規約: `.claude/rules/metric-config-standards.md`
-> 2. `npm run build:registry --workspace=packages/data-configs` で registry 再生成
-> 3. `npm run validate:years --workspace=@stats47/data-configs` で年正規化を検証 (フルコード混入なら fail)
-> 4. `npm run validate:config --workspace=@stats47/data-configs` で構造規約を検証 (**いずれも error=CI/pre-commit ブロック**: 無効 category / title 年・注釈(※)混入 / subtitle が注釈・title と冗長 / unit 空 / 重複 title に区別子なし。規約: `.claude/rules/metric-config-standards.md`)
-> 5. `/sync-metrics-cache --apply` で D1 metrics cache 同期
-> 6. `/page-data-batch --metric <key>` で e-Stat → R2 投入
-> 7. `docs/todo/03_指標バックログ.md` を手動編集 (status: pending → done)
-> 8. `docs/todo/01_改善バックログ.md` に batch entry append
+# expand-indicators — 検証済み指標の追加
 
-stats47 の指標を継続的に拡充する。`docs/todo/03_指標バックログ.md` の pending 候補から優先度上位 N 件を順次取得・登録し、backlog の status を更新、`docs/todo/01_改善バックログ.md` に施策バッチとして append する 1 コマンド型スキル (refactor 完了後)。
+`docs/todo/06_指標バックログ.md` の表から候補を選び、一次統計を再確認してから
+`packages/data-configs/src/metrics/*.ts` に追加する。観測値の経路は
+**git TS config → e-Stat → R2**。永続・リモート D1 は使わない。
 
-**現行 schema** (Phase 6/7 後):
-- TS-config (`packages/data-configs/src/metrics/<key>.ts`) — metric メタの SSOT
-- D1 `metrics(key, title, unit, source_id, category_key, ...)` — TS-config の cache
-- R2 `app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json` — 観測値の SSOT
-- D1 `sources(id, source_kind, external_id, ...)` — 出典マスタ
-- D1 `estat_metainfo(stats_data_id, status, ...)` — candidate / registered フラグ
-
-旧 SKILL は `stats_prefecture` 直書きを前提にしていたが、Phase 6 (2026-05-27) で観測値テーブルは全 DROP、Phase 7 で関連 reader/scripts も削除済。本 skill 自体の refactor は Phase 8 に繰り越し。
-
-## 用途
-
-- 競合 (todo-ran 1,501 / uub 1,843) との指標数 gap を継続的に縮める
-- e-Stat candidate pool (8,838 件) から優先度の高いものを段階的に registered に昇格
-- 「指標追加」を 1 件ずつ手動運用するコストを削減し、batch 実行 + 改善ログ append まで自動化
+大量展開は `/expand-rankings` の計測ゲート付きキューに任せ、本スキルは人が検証した
+最大20件の候補だけを扱う。
 
 ## 引数
 
-| 引数 | 必須 | デフォルト | 説明 |
-|---|---|---|---|
-| `--target <N>` | △ | `10` | 1 回の実行で処理する候補件数 (最大 30、超過時は分割実行を推奨) |
-| `--priority <p>` | △ | `high` | `high` / `medium` / `low` / `all` / カンマ区切り (`high,medium`) |
-| `--dry-run` | △ | false | 候補抽出 + recipe 整形のみ。fetch / D1 INSERT / backlog 更新 / 改善ログ append は実行しない |
+| 引数 | デフォルト | 説明 |
+|---|---|---|
+| `--target <N>` | `10` | 今回扱う件数。最大20件 |
+| `--priority <p>` | `high` | `high` または `medium` |
+| `--dry-run` | false | 調査と変更案だけを出し、ファイル・R2を変更しない |
 
-### 使用例
+## 必読
+
+- `.claude/rules/metric-config-standards.md`
+- `.claude/rules/estat-api.md`
+- `.claude/rules/data-provenance-standards.md`
+- `.claude/rules/r2-storage-design.md`
+- `.claude/rules/branch-workflow.md`
+
+## 実行手順
+
+### 1. 候補を抽出する
 
 ```bash
-# 標準: high priority 上位 10 件
-/expand-indicators --target 10
-
-# 予行演習
-/expand-indicators --target 10 --dry-run
-
-# medium priority も含めて 20 件
-/expand-indicators --target 20 --priority high,medium
+node .claude/scripts/management/parse-backlog.cjs \
+  --backlog docs/todo/06_指標バックログ.md \
+  --priority high \
+  --status pending \
+  --limit 10
 ```
 
-## 前提条件
+引数に応じて priority と limit を変える。候補が0件なら終了する。
 
-- `docs/todo/03_指標バックログ.md` が存在し、pending 候補が 1 件以上ある
-- `.env.local` に `NEXT_PUBLIC_ESTAT_APP_ID` 設定済
-- 完全DBレス: metric の SSOT は git TS (`packages/data-configs/src/metrics/<key>.ts`)、観測値は R2。永続/miniflare D1 は使わない。`/sync-metrics-cache` が触る使い捨てビルドキャッシュは `packages/database/.data/stats47.sqlite`（固定パスは `.claude/rules/local-environment.md`）で、不在でも git TS 編集 + R2 反映は可能
-- 既存スキル `/inspect-estat-meta` で recipe 雛形が作れる
-- (任意) `git status` がクリーン — rollback を容易にする
+### 2. 書く前に一次統計を再確認する
 
-## 実行フロー
+候補ごとに次を確認する。1項目でも未確定なら config を作らず、調査キューへ戻す。
 
-### Phase 1: 候補抽出
+- `candidate_slug` と既存 metric key、正規化後 title が重複しない
+- `statsDataId`、都道府県軸、分類コード、年、単位がメタ情報と一致する
+- 代表3県の値をAPI原値と照合できる
+- 47都道府県比較として欠測・秘匿・特殊地域軸を説明できる
+- provenance が `.claude/rules/data-provenance-standards.md` を満たす
 
-1. `parse-backlog.cjs` で backlog をパースし、`--priority` `--status=pending` で上位 N 件抽出:
-   ```bash
-   node .claude/scripts/management/parse-backlog.cjs \
-     --backlog docs/todo/03_指標バックログ.md \
-     --priority "${PRIORITY:-high}" \
-     --status pending \
-     --limit "${TARGET:-10}"
-   ```
-2. 0 件なら「pending なし」と報告して終了。
+調査用のrecipeや応答は `/tmp/expand-indicators/` に置く。
 
-### Phase 2: 各 candidate の recipe を author
+### 3. TS config を作る
 
-各 candidate に対して **recipe オブジェクト** を 1 件作る。recipe は以下のスキーマ:
+近い既存configを読み、同じ構造で
+`packages/data-configs/src/metrics/<candidate_slug>.ts` を作る。
 
-```json
-{
-  "slug": "convenience-store-sales-monthly",
-  "statsDataId": "0004032502",
-  "categoryKey": "commercial",
-  "title": "コンビニエンスストア販売額（都道府県別・年計）",
-  "unit": "百万円",
-  "yearCode": "2024",
-  "yearName": "2024年",
-  "query": { "cdCat01": "0101300", "cdCat02": "01040100", "cdCat03": "01030100", "cdTime": "2024000000" },
-  "prefSource": "area",
-  "allowOldYear": false
-}
+- `years` は4桁年だけを使う
+- `category` は既存の17軸から選ぶ
+- `title`、`subtitle`、`note`、`description` の責務を混ぜない
+- `isActive: true` は公開を意味しない。公開工程は `/publish-ranking` が担う
+
+### 4. 決定的検証を行う
+
+```bash
+npm run build:registry --workspace=packages/data-configs
+npm run validate:years --workspace=@stats47/data-configs
+npm run validate:config --workspace=@stats47/data-configs
+npx tsx packages/data-configs/scripts/page-data-batch.ts --metric <key> --dry-run
 ```
 
-| フィールド | 説明 |
-|---|---|
-| `slug` | backlog の candidate_slug をそのまま使う (= 将来の `metrics.key`) |
-| `statsDataId` | backlog の `estat_stats_data_id` |
-| `categoryKey` | backlog の category (例 `commercial`, `socialsecurity`) |
-| `title` | `metrics.title` に入る公式名 (e-Stat 表名 + 集計軸を簡潔に) |
-| `unit` | 「百万円」「人口10万対」など |
-| `yearCode` / `yearName` | 取得対象年。`2024` / `"2024年"` 形式 |
-| `query` | e-Stat API のクエリパラメータ (`cdCat01` 等)。**probe 必須** |
-| `prefSource` | `"area"` (標準) / `"cat02-pseudo"` / `"cat03-pseudo"` (下記参照) |
-| `allowOldYear` | true なら 5 年以上前のデータでも登録 (周期的調査向け) |
+対象packageの型チェックやテストがある場合は併せて実行する。全件バッチは起動しない。
 
-**recipe author の手順** (新規 statsDataId ごとに必須):
+### 5. 観測値と公開を分離する
 
-1. `/inspect-estat-meta` で `statsDataId` のメタを取得し、`CLASS_OBJ` 一覧を見る
-2. `area` dimension があるか確認:
-   - **ある** → `prefSource: "area"`。`cdArea` は指定しない (全国取得 → 47 都道府県をフィルタ)
-   - **ない** → 都道府県が `cat02` / `cat03` に擬似コード (2-48) で埋まっている可能性大 (患者調査系)。`prefSource: "cat02-pseudo"` or `"cat03-pseudo"`
-3. 必要な集計軸を絞る (例: 「総数 × 入院総数」のみに絞る `cdCat01` `cdCat03`)
-4. yearCode を最新に固定
-5. **経済センサス系** (`0004003256-261`) は `lvArea=2` を付けると 0 件返るので付けない
+- R2への書き込みは外部状態変更なので、ユーザーの明示承認後に
+  `page-data-batch.ts --metric <key>` を1件ずつ実行する。
+- ランキングitem、values、KNOWN、sitemap、本番200確認は `/publish-ranking <key>` に渡す。
+- デプロイは複数件をまとめ、別途ユーザー承認を得る。
 
-recipe を `/tmp/expand-indicators/recipes-YYYY-MM-DD-NN.json` (配列) として保存。
+### 6. TODOを閉じる
 
-### Phase 3: ingest 実行
+- config・R2・公開確認まで完了した候補行は `docs/todo/06_指標バックログ.md` から削除する。
+- 取得不能、重複、価値不足が確定した候補も削除する。理由はGit差分または必要に応じて
+  失敗履歴はGitに委ね、再開可能な未完了手順だけをTODOへ残す。
+- 効果測定が必要な公開施策だけ `docs/todo/04_改善バックログ.md` に追加する。
+  単なる投入履歴は追加しない。
+- frontmatter の件数と `updated` を更新する。
 
-3. `ingest-indicator.mjs` を recipe JSON 入力で実行:
-   ```bash
-   mkdir -p /tmp/expand-indicators
-   # (recipes-2026-MM-DD-NN.json を Phase 2 で作成済)
-   node .claude/scripts/management/ingest-indicator.mjs \
-     --recipes /tmp/expand-indicators/recipes-2026-MM-DD-NN.json \
-     [--dry-run]
-   ```
-   出力 (stdout): 結果 JSON 配列。各要素は `{ slug, statsDataId, status, rows, latestYear, reason }`。
-   status: `done` / `failed` / `skipped` / `dry-run`。
+## 禁止
 
-4. スクリプト内で実行される処理 (各 candidate ごと):
-   - 既存 `metrics.key` チェック → あって `stats_prefecture` が 47 件なら skip
-   - yearAge チェック (`!allowOldYear && now - yearCode > 5` で failed)
-   - e-Stat `getStatsData` 呼び出し
-   - prefSource に応じて 47 都道府県値を抽出
-   - 47 件未満なら failed (debug JSON を `/tmp/expand-indicators/<slug>.debug.json` に保存)
-   - rank 計算 (降順、同値同順位)
-   - `sources` upsert / `metrics` upsert / `stats_prefecture` DELETE+INSERT (year_code 単位)
-   - `estat_metainfo.status = 'registered'` に昇格
-   - 47 件確認 → `done`
+- 削除済み `stats_prefecture` を使う `ingest-indicator.mjs`
+- 永続・リモートD1をSSOTまたは観測値保存先にすること
+- 未検証IDの投入、候補全件の一括処理、失敗時の推測補正
+- TODO行を `done` / `failed` 履歴として残すこと
+- 承認なしのR2書き込み、PRマージ、デプロイ
 
-5. **rate limit**: スクリプト内で 7 秒 sleep (e-Stat 公称 60req/min、meta + data で 2 コール想定)。`--sleep-ms` で調整可。
+## 完了報告
 
-### Phase 4: backlog 更新
+次を簡潔に報告する。
 
-6. 結果 JSON を見て、成功 candidate の backlog 該当行を Edit:
-   - `status: pending` → `status: done`
-7. 失敗 candidate:
-   - `status: pending` → `status: failed`、行末に `<!-- failed: <reason> @ YYYY-MM-DD -->` 付与
-8. backlog frontmatter の `updated:` を本日日付に更新。
-
-### Phase 5: 改善ログ append
-
-9. `docs/todo/01_改善バックログ.md` を Read し、`## 実行履歴` セクション末尾に下記テンプレで新 batch entry を Edit append:
-   - section ID: `[BATCH-YYYY-MM-DD-NN]` (NN は当日 N 回目)
-   - 追加リスト表 (slug / category / theme / estat_id / rows / latest_year)
-   - 結果サマリ (成功 / 失敗 / skip / backlog 残)
-   - 想定効果 (`evidence-based-judgment.md` 準拠)
-   - 失敗 candidate 一覧 (あれば)
-   - 次回推奨実行コマンド
-10. frontmatter の `updated:` を本日日付に更新。
-
-### Phase 6: 次アクション提示
-
-11. 完了サマリ報告 (成功 / 失敗 / backlog 残):
-    ```
-    [expand-indicators] 完了
-      成功: 8 件 / 失敗: 1 件 / skip: 1 件
-      backlog 残: pending=29 / failed=1 / done=8
-      改善ログ: docs/todo/01_改善バックログ.md#BATCH-2026-05-19-01
-
-    次のアクション候補:
-      1. /generate-known-ranking-keys (新規 metric.key を middleware に登録)
-      2. /sync-snapshots (R2 反映 → 本番配信)
-      3. /expand-indicators --target 10 (次 batch)
-    ```
-
-## 完了後の更新先
-
-| 更新対象 | 内容 |
-|---|---|
-| `docs/todo/03_指標バックログ.md` | 該当行 `status` 更新 + frontmatter `updated:` |
-| `docs/todo/01_改善バックログ.md` | 新 batch entry append + frontmatter `updated:` |
-| ローカル D1 | `metrics` + `stats_prefecture` + `sources` (upsert) + `estat_metainfo` (status='registered') |
-| `/tmp/expand-indicators/recipes-*.json` | recipe 入力 (ephemeral) |
-| `/tmp/expand-indicators/<slug>.debug.json` | 失敗時のみ debug ダンプ (ephemeral) |
-
-**未更新で OK** (別スキル / 後続バッチ):
-- `apps/web/src/config/known-ranking-keys.ts` → `/generate-known-ranking-keys` (要実行、未実行だと middleware が 410 を返す)
-- R2 snapshot → `/sync-snapshots`
-- メモリ → 恒常事実が変わったときのみ手動更新
-
-## 規約
-
-- **1 回の実行で最大 30 件**。超過時は backlog を 2-3 回に分けて実行する。
-- **失敗時は個別 candidate を skip して次へ**。バッチ全体を中断しない。
-- **append-only**: 改善ログの既存 section を編集してはならない。新 batch は必ず新 section として append。
-- **`evidence-based-judgment.md` 準拠**: 想定効果は数値 + 根拠を必ず併記。判定は 28 日後の GSC / GA4 実測で行う。それまで `effect/pending`。
-- **新規ロジック禁止**: 取得・登録ロジックは `ingest-indicator.mjs` を再利用。本スキル内で e-Stat API を直接呼ばない。
-- **D1 パス固定**: `.claude/rules/local-environment.md` の固定パスを `ingest-indicator.mjs` 内でハードコード済。
-- **一時ファイルは `/tmp/expand-indicators/` 配下**。
-
-## トラブルシューティング
-
-| 症状 | 原因 | 対処 |
-|---|---|---|
-| `e-Stat API rate limit (429)` | 60 req/min 超過 | `--sleep-ms 20000` に増やす / `--target` を半分に / 翌日再実行 |
-| `候補が 47 件未満` | 都道府県別データが揃っていない調査 | `/tmp/expand-indicators/<slug>.debug.json` で `cat01`/`cat02`/`cat03` を確認。recipe の `query` を修正、または `prefSource` を `cat02-pseudo` / `cat03-pseudo` に変更 |
-| `重複登録 (既存 metric.key)` | 既に手動登録済 | 自動 skip (`stats_prefecture` 47 件確認後) |
-| `latest_year が 5 年以上前` | データ更新停止カテゴリ | 周期的調査 (国勢調査・経済センサス等) で意図的に古いデータが必要なら recipe に `"allowOldYear": true` を追加。それ以外は backlog で `failed` |
-| `D1 が空ファイル化` | `better-sqlite3` が誤ったパスを開いた | `.claude/rules/local-environment.md` の固定パスを再確認、空ファイル削除 |
-| `backlog 表のパース失敗` | 列順が変わった | `parse-backlog.cjs` の `EXPECTED_HEADER` を更新 |
-| **患者調査 (`0004026xxx`) が `area` で 0 件** | 都道府県が `cat02`/`cat03` に擬似コード (2-48) で埋まる | `prefSource: "cat02-pseudo"` or `"cat03-pseudo"` を使う。code N (2-48) → areaCode `(N-1).padStart(2,0) + "000"` (北海道=2→01000, 沖縄=48→47000) |
-| **経済センサス (`000400325x`) が `lvArea=2` で 0 件** | 表構造上 `lvArea` 指定が空 fetch を引き起こす | recipe の `query` に `lvArea` を含めない。`cdTab` + `cdCat01` + (必要なら `cdCat02`) で十分 |
-| **海面漁業統計 (`0003262xxx`) が 47 件超 or 部分カバー** | `area` 次元に「大海区」(48000-74000) や複合コード「青森県(太平洋北区)」等が含まれる + 内陸 8 県 (栃木/群馬/埼玉/山梨/長野/岐阜/滋賀/奈良) は構造的に欠損 | `pickPrefByArea` の regex で大海区は自動除外済 (`^(0[1-9]|[1-3]\d|4[0-7])000$`)。内陸 8 県は事後で value=0 補完が必要 (`/tmp/expand-indicators/fill-landlocked-zeros.mjs` パターン) + `metrics.subtitle` に「内陸 8 県は調査対象外」明記 |
-| `STATUS=100x` (Bad Request) | 必須 dimension の欠如 | `/inspect-estat-meta` で `CLASS_OBJ` を全部確認、各 dim から 1 値選んで recipe `query` に追加 |
+- 対象keyと一次統計
+- config追加数、見送り数と理由
+- 実行した検証と結果
+- R2・公開・デプロイの実行有無
+- `06_指標バックログ.md` の残件数
 
 ## 関連
 
-- backlog: [`docs/todo/03_指標バックログ.md`](../../../../docs/todo/03_指標バックログ.md)
-- 改善ログ: [`docs/todo/01_改善バックログ.md`](../../../../docs/todo/01_改善バックログ.md)
+- 候補: [`docs/todo/06_指標バックログ.md`](../../../../docs/todo/06_指標バックログ.md)
 - パーサ: [`.claude/scripts/management/parse-backlog.cjs`](../../../scripts/management/parse-backlog.cjs)
-- orchestrator: [`.claude/scripts/management/ingest-indicator.mjs`](../../../scripts/management/ingest-indicator.mjs)
-- 連携スキル: `/inspect-estat-meta`, `/generate-known-ranking-keys`, `/sync-snapshots`
-- 規約: `.claude/rules/estat-api.md`, `.claude/rules/evidence-based-judgment.md`, `.claude/rules/data-storage.md`, `.claude/rules/docs-vs-issues.md`
-- memory: `~/.claude/projects/-Users-minamidaisuke-stats47/memory/project_estat_metainfo_unified.md`, `~/.claude/projects/-Users-minamidaisuke-stats47/memory/feedback_skill_schema_drift.md`
-- 過去 batch ref: `/tmp/expand-indicators/run2.mjs` (2026-05-19 BATCH-01 で使った原型、ephemeral)
+- 観測値投入: [`/page-data-batch`](../../db/page-data-batch/SKILL.md)
+- 公開: [`/publish-ranking`](../../db/publish-ranking/SKILL.md)
+- 大量候補の計測ゲート: [`/expand-rankings`](../expand-rankings/SKILL.md)

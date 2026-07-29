@@ -32,11 +32,11 @@ model: sonnet
 - テーマに載せるべき指標候補を **白書 (NotebookLM) / Web / 競合ダッシュボード / GSC 検索需要** から発見
 - 各候補に **推奨チャート (componentType)** と **選定根拠 (provenance)** を付与
 - 候補の **e-Stat 実在検証を estat-researcher に委譲**し、実装可能性を確認
-- 提案を `docs/todo/03_指標バックログ.md` のテーマ節に append
+- 実在確認に合格した提案を `docs/todo/06_指標バックログ.md` の7列候補表へ1行追加
 
 ## File Boundary (read-only 原則)
 
-- **書き込み可**: `docs/todo/03_指標バックログ.md` (提案の append) と
+- **書き込み可**: `docs/todo/06_指標バックログ.md` (検証済み候補行の追加) と
   NotebookLM 台帳 `.claude/skills/theme/research-theme-catalog/reference/notebooks.md` (ノートブック追加時) のみ
 - **書き込み禁止**: カタログ TS (`packages/data-configs/src/theme-catalog/`)・IndicatorSet・page-components JSON・
   metric config。これらは採択後に theme-designer / theme-component-builder / data-ingester が編集する
@@ -64,31 +64,18 @@ Stage 2: 実在確認 — **自分で inline に調べる** (estat-researcher �
      (2026-07-04)。よって: (a) 登録済みは `grep registry.ts`、(b) 未登録候補は自分で e-Stat を
      WebFetch/検索して **statsDataId+cdCat01 を突き止める**。解決できない候補は提案へ混ぜず`unknown`として不採用記録へ送る。
      (AI 生成 key は実在 metric と乖離しがち。memory: feedback_backlog_ranking_key_audit)
-Stage 3: 統合 — 指標×チャート提案 (selection 付き) を 03_指標バックログ.md へ append
+Stage 3: 統合 — 実在確認済み候補を 06_指標バックログ.md の候補表へ追加
 ```
 
-## 提案の出力先フォーマット (03_指標バックログ.md への append)
+## 提案の出力先フォーマット
 
-テーマごとに 1 節を追記する (append-only)。既存節があれば追補として日付付きで足す。
+候補表の列順を変えず、合格候補だけを次の形式で追加する。
 
 ```markdown
-## [theme-catalog] <theme-key> 指標×チャート提案 (YYYY-MM-DD, theme-researcher)
-
-<調査方法・制約 2-3 行。実際に実行したことだけ書く>
-
-| 候補 rankingKey(仮) | shortLabel | 推奨 role | 推奨チャート | statsDataId / cdCat01 | 出典 (proposedBy / URL) | e-Stat実在 | verdict |
-|---|---|---|---|---|---|---|---|
-| manufacturing-... | ... | primary | line-chart | 0000010103 / C3401 | ものづくり白書2025 / https://... | ✅登録済 | 採用推奨 |
-| <new-key 候補> | ... | secondary | composition-chart | 0004012040 / #… | 経済センサス地域編 / https://… | ✅e-Stat実在(estat-researcher確認) | 要判断 |
-
-**不採用候補**: <rankingKey or 概念> — <理由: e-Stat 不在 / 既存重複 等> (rejectedCandidates 行き)
-**次アクション**: 採用分を theme-designer が catalog TS 化 → data-ingester が未登録指標を投入
-
-<!-- evidence: GSC snapshot=<週> / 一次資料URL / e-Stat statsDataId+cdCat01 -->
+| high | <candidate_slug> | <category> | <suggested_theme> | <statsDataId> | <調査名・年・cdCat・需要根拠> | pending |
 ```
 
-**e-Stat実在 列の値は次の3つのみ**: `✅登録済` / `✅e-Stat実在` / `❌不在→不採用`。
-statsDataId+cdCat01を一次情報で解決できない候補は`unknown`として不採用に落とす。
+statsDataId、必要なcdCat、都道府県粒度、年次、既存非重複を一次情報で解決できない候補は追加しない。不採用候補と調査経緯はバックログへ蓄積せず、必要ならレビューまたはGit履歴へ残す。
 
 ## Output Contract (呼び出し元への chat 返答)
 
@@ -96,7 +83,7 @@ statsDataId+cdCat01を一次情報で解決できない候補は`unknown`とし�
 
 - **Template A** (table-only): `候補 | 推奨チャート | statsDataId | 出典 | e-Stat実在 | verdict`
 - verdict は「採用推奨 / 要判断 / 不採用」。Reason 列は 8 words 以内
-- prose / section header / 前置き文は禁止。詳細は 03_指標バックログ.md に書き chat には出さない
+- prose / section header / 前置き文は禁止。詳細は 06_指標バックログ.md に書き chat には出さない
 - 各採用候補は一次資料URLとstatsDataId+cdCat01へ結び付ける。tool回数は証拠として扱わない。
 
 ## 連携パターン

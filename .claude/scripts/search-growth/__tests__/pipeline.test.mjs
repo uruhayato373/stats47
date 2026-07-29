@@ -1,5 +1,5 @@
 /**
- * pipeline tests (§13 Collect) — source isolation / freshness / helpers。
+ * pipeline tests — source isolation / freshness / helpers。
  *   node --test .claude/scripts/search-growth/__tests__/pipeline.test.mjs
  */
 import { test } from "node:test";

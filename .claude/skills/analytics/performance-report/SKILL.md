@@ -98,16 +98,10 @@ co_agents: [gsc-analyst]
 
 ## 出力
 
-`docs/04_レビュー/{YYYY-Www}-performance-report.md` に Write tool で書き出す。frontmatter:
-
-```yaml
----
-type: performance-report
-week: 2026-Www
-date: 2026-MM-DD
-status: active
----
-```
+週次数値は `.claude/state/metrics/psi/`、詳細な施策履歴は
+`.claude/skills/analytics/performance-improvement/reference/improvement-log.md` を使う。
+未完了の改善だけを `docs/todo/04_改善バックログ.md` へID・対象ページ・実行手順・budget・完了条件付きで統合し、
+レポート全文は保存しない。
 
 書き出し後にパスを報告。CWV 改善ログ・同週 weekly-review は「関連リンク」に相対パスで参照。
 
@@ -130,4 +124,3 @@ status: active
 - `.claude/scripts/psi/psi-threshold-check.mjs` — 閾値違反の取得（`npm run psi-audit:check`）
 - `.claude/skills/analytics/performance-improvement/budgets.json` — 閾値設定
 - `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策ログ
-- `ls -t docs/04_レビュー/*-performance-report.md` — 過去のレポート

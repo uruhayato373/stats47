@@ -79,7 +79,7 @@ OAuth 失効・個人 ch 誤投稿に加え、**2026-03 の Shorts 量産＋重�
 - 診断スキル: `.claude/skills/analytics/diagnose-youtube-shadowban/SKILL.md`
 - 回復スキル: `.claude/skills/sns/recover-youtube-shadowban/SKILL.md`
 - 戦略追記: `.claude/agents/youtube-strategist.md` §シャドウバン発生時の復帰手順 / §D1 inventory の事前確認
-- Playbook: `docs/10_SNS戦略/06_YouTube運用Playbook.md` §重複コンテンツ防止ルール
+- 現行方針: `.claude/rules/sns-content-standards.md`（YouTube 撤退済み。旧 Playbook は Git 履歴）
 - daily monitor 出力: `.claude/state/metrics/youtube/LATEST.md` / `youtube-batch-YYYY-MM-DD*.json`
 
 ## 個人 ch 誤投稿の残骸（手動削除 TODO）

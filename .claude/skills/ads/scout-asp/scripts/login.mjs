@@ -11,7 +11,7 @@
  * 使い方 (本体リポジトリで実行。worktree 不可):
  *   node .claude/skills/ads/scout-asp/scripts/login.mjs
  *
- * 参照: docs/01_技術設計/playwright-auth-profiles.md
+ * 参照: docs/01_技術設計/07_Playwright認証プロファイル.md
  */
 import { chromium } from "playwright";
 import { existsSync } from "node:fs";

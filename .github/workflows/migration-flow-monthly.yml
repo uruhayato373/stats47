@@ -5,7 +5,7 @@ name: 🗾 Migration-flow Monthly Highlight
 # - IG carousel + X reel の組み合わせ
 #
 # 関連:
-# - docs/02_実装計画/migration-flow-sns-automation.md (Section B)
+# - docs/01_技術設計/06_自動化インベントリ.md / .claude/rules/sns-content-standards.md
 
 on:
   schedule:

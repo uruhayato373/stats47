@@ -71,7 +71,7 @@ node /tmp/sns-weekly-agg.js <monday> <sunday>
 
 ### 3. レポート生成
 
-`docs/04_レビュー/{YYYY-Www}-sns-weekly.md` に Write tool で書き出す。frontmatter:
+`.claude/skills/sns/sns-weekly-report/reference/reports/{YYYY-Www}.md` に書き出す。frontmatter:
 
 ```yaml
 ---
@@ -84,7 +84,8 @@ status: active
 
 同週の Weekly Review（`.claude/skills/management/weekly-review/reference/reviews/{YYYY-Www}.md`）がある場合、対象週を相互に明記する。
 
-過去のレポートは `ls -t docs/04_レビュー/*-sns-weekly.md | head -5` で参照できる。
+過去のレポートは `ls -t .claude/skills/sns/sns-weekly-report/reference/reports/*.md | head -5`
+で参照する。未完了の改善だけを `docs/todo/04_改善バックログ.md` へ具体化する。
 
 ### 4. 分析コメント
 

@@ -1,8 +1,9 @@
 /**
  * note 商品展開ファクトリー — 型定義 (SSOT)
  *
- * 正典: docs/02_実装計画/31_note商品展開ファクトリー実装仕様.md
- * 前段: docs/02_実装計画/30_ココナラ商品ファクトリー実装仕様.md
+ * 恒久仕様: .claude/rules/coconala-product-standards.md §9
+ * 現在は旧174商品向けの legacy 実装。削除条件: docs/todo/05_機能バックログ.md の
+ * COCONALA-PRODUCT-FACTORY-01 完了時に14パック由来の型へ置換する。
  *
  * 完全DBレス: mapping・article-plan・生成コードは git TS が SSOT。
  * 商品側は productId/version、note 側は slug/series を持ち、本ファイルの型で結合する。

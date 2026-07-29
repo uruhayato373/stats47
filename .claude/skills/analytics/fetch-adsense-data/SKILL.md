@@ -223,7 +223,7 @@ main().catch(e => { console.error(e); process.exit(1); });
 ### 実行スクリプト
 
 正典実装 `.claude/scripts/metrics/fetch-adsense-snapshot.mjs` を実行する
-(旧: SKILL 内に同義スクリプトを複製していたが、公式 CPC 契約 (doc41 §4.2) 導入時の
+(旧: SKILL 内に同義スクリプトを複製していたが、公式 CPC 契約導入時の
 drift 防止のため 2026-07-28 に正典参照へ一本化した):
 
 ```bash
@@ -236,7 +236,7 @@ npm run fetch-adsense-snapshot -- <YYYY-Www> --dry-run   # API を呼ばず期�
   bid-types-platforms / traffic-sources / countries / pages.csv + `manifest.json`
   (期間 metadata・status。PAGE_URL 0 行は privacy-threshold であり欠損ではない)。
 - metric は公式 `COST_PER_CLICK` / `IMPRESSIONS_RPM` / `AD_REQUESTS` / `AD_REQUESTS_COVERAGE` を含む。
-  unit/format/placement 系 job は PAGE_VIEWS 系を要求しない (分母 0・doc41 §2.2)。
+  unit/format/placement 系 job は PAGE_VIEWS 系を要求しない (分母 0)。
 
 ### 保存後の挙動
 

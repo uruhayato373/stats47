@@ -1,14 +1,14 @@
 # MLIT KSJ（国土数値情報）モジュール
 
 国土交通省「国土数値情報ダウンロードサービス」の GIS データを、ダウンロード → TopoJSON 変換 → R2 保存する
-パイプライン。**このファイルがモジュールの設計・使い方ドキュメント**（2026-07-12 に旧 `docs/01_技術設計/04_国土数値情報GISデータ.md` を統合）。
+パイプライン。**このファイルがモジュールの設計・使い方の正典**であり、旧横断設計の内容もここへ統合済み。
 
 - **ソース**: https://nlftp.mlit.go.jp/ksj/index.html
 - **スキル**: `/fetch-mlit-ksj`
 - **規約 (SSOT・追加規約・DBレス integrity)**: `.claude/rules/gis-data.md`（正典）
 - **メタ SSOT (登録データセット一覧の真実源)**: `datasets.ts`（git TS）
 - **管理 agent**: `gis-curator`（SSOT 管理）+ `gis-pipeline-runner`（pipeline 実行）
-- **完全DBレス**: `docs/01_技術設計/12_完全DBレス設計.md`
+- **完全DBレス**: `docs/01_技術設計/02_データアーキテクチャ.md`
 
 > **登録データセットの一覧は `datasets.ts` が真実源**。旧 doc 04 の自動生成表（`generate-docs.ts`）は
 > datasets.ts と重複するため 2026-07-12 に廃止。件数・構造の確認は下記で行う:

@@ -30,7 +30,7 @@ const CHUNK = 100;
 /**
  * 市区町村プロファイル (県内 top5 = 強み) を R2 に保存する。
  *
- * 完全DBレス (docs/01_技術設計/12_完全DBレス設計.md): 削除済の run-batch-city.ts (D1 area_profiles
+ * 完全DBレス (docs/01_技術設計/02_データアーキテクチャ.md): 削除済の run-batch-city.ts (D1 area_profiles
  * 書込) と D1 読みの旧 exporter を置換し、R2 から直接計算する:
  *   - city metric = git TS `listMetricKeysByEntity("city")` (active のみ)
  *   - 観測値      = R2 `app/stats/<metric>/cities.json` (各行に prefectureCode + 全国 rank)

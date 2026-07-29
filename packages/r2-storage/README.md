@@ -191,7 +191,7 @@ npm run test:coverage
 
 ## 関連ドキュメント
 
-- [R2ストレージ移行計画](/docs/01_技術設計/08_R2ストレージ移行計画.md)
+- [データアーキテクチャ](../../docs/01_技術設計/02_データアーキテクチャ.md)
 - [Cloudflare R2 公式ドキュメント](https://developers.cloudflare.com/r2/)
 
 ## ライセンス

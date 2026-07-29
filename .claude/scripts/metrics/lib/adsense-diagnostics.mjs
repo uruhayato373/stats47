@@ -1,7 +1,7 @@
 /**
  * adsense-diagnostics — AdSense 収益密度の決定的診断 rules (pure・LLM 不使用)。
  *
- * 正典: docs/02_実装計画/41_AdSense継続改善・GA4_GSC設定自動化仕様.md §4.3 / §7.2 / §7.3。
+ * 本ファイルが AdSense 診断rule・閾値・WIP上限のコード SSOT。
  *
  * 入力は「確定7日の current / previous 集計」(account / device / breakdown)。
  * 出力 candidate は evidence・sample・confidence・expectedLever・guardrail・rollback・
@@ -17,7 +17,7 @@ export const MAX_CANDIDATES = 3;
 export const ADSENSE_ACTIVE_WIP_LIMIT = 2;
 export const ADSENSE_WEEKLY_ADOPTION_LIMIT = 1;
 
-/** rule 閾値 (§4.3)。数値は全てここに集約する。 */
+/** rule 閾値。数値は全てここに集約する。 */
 export const RULES_CONFIG = Object.freeze({
   impressionDilution: { minImpressions: 1000, impPerPvRatio: 1.2, viewabilityDropPt: 8, rpmRatio: 0.85 },
   deviceRegression: { minImpressions: 500, rpmRatio: 0.8 },
@@ -56,11 +56,11 @@ function mk({ rule, key, score, evidence, sample, confidence, expectedLever, gua
     pastEffect,
     confounders,
     notes,
-    externalActionFlag: false, // 提案のみ。配置変更・deploy は人間承認 (§3.3)
+    externalActionFlag: false, // 提案のみ。配置変更・deploy は人間承認
   };
 }
 
-/** 1. impression-dilution (§4.3 rule 1)。 */
+/** 1. impression-dilution。 */
 export function detectImpressionDilution({ current, previous, baselineEnd, scope = "site" }) {
   const c = RULES_CONFIG.impressionDilution;
   const imp = num(current?.impressions);
@@ -99,7 +99,7 @@ export function detectImpressionDilution({ current, previous, baselineEnd, scope
   });
 }
 
-/** 2. device-regression (§4.3 rule 2)。 */
+/** 2. device-regression。 */
 export function detectDeviceRegression({ device, current, previous, baselineEnd }) {
   const c = RULES_CONFIG.deviceRegression;
   const imp = num(current?.impressions);
@@ -129,7 +129,7 @@ export function detectDeviceRegression({ device, current, previous, baselineEnd 
   });
 }
 
-/** 3. placement-low-viewability (§4.3 rule 3)。2 週連続を weeksBelow で受ける。 */
+/** 3. placement-low-viewability。2 週連続を weeksBelow で受ける。 */
 export function detectPlacementLowViewability({ code, platform, current, weeksBelow, baselineEnd }) {
   const c = RULES_CONFIG.placementLowViewability;
   const imp = num(current?.impressions);
@@ -147,7 +147,7 @@ export function detectPlacementLowViewability({ code, platform, current, weeksBe
     ],
     sample: { impressions: imp, weeks: weeksBelow },
     confidence: 0.75,
-    expectedLever: "低 viewability 1 枠のみ移設または非表示 (§7.4-2)",
+    expectedLever: "低 viewability 1 枠のみ移設または非表示",
     guardrail: "収益・他枠の viewability を悪化させない。同時に複数枠を変えない",
     rollback: "枠設定の revert",
     baselineEnd,
@@ -155,7 +155,7 @@ export function detectPlacementLowViewability({ code, platform, current, weeksBe
   });
 }
 
-/** 4. format-low-yield (§4.3 rule 4)。deviceMedianImpRpm は同 platform の median。 */
+/** 4. format-low-yield。deviceMedianImpRpm は同 platform の median。 */
 export function detectFormatLowYield({ code, platform, current, previous, deviceMedianImpRpm, baselineEnd }) {
   const c = RULES_CONFIG.formatLowYield;
   const imp = num(current?.impressions);
@@ -183,7 +183,7 @@ export function detectFormatLowYield({ code, platform, current, previous, device
     ],
     sample: { impressions: imp },
     confidence: 0.6,
-    expectedLever: "低収益 format の整理提案 (Auto ads 変更は allowlist 外・提案のみ §7.4-3)",
+    expectedLever: "低収益 format の整理提案 (Auto ads 変更は allowlist 外・提案のみ)",
     guardrail: "収益 guardrail。UX (INTERSTITIAL 頻度) を悪化させない",
     rollback: "AdSense 管理画面設定を元に戻す (人間操作)",
     baselineEnd,
@@ -191,7 +191,7 @@ export function detectFormatLowYield({ code, platform, current, previous, device
   });
 }
 
-/** 5. measurement-gap (§4.3 rule 5)。manifest の status から。 */
+/** 5. measurement-gap。manifest の status から。 */
 export function detectMeasurementGap({ jobStatuses, baselineEnd }) {
   const bad = Object.entries(jobStatuses ?? {}).filter(
     ([, s]) => s === "missing" || s === "error" || s === "stale" || s === "partial",
@@ -200,7 +200,7 @@ export function detectMeasurementGap({ jobStatuses, baselineEnd }) {
   return mk({
     rule: "measurement-gap",
     key: bad.map(([k]) => k).sort().join(","),
-    score: 100 + bad.length, // 計測欠陥は最優先 (判断可能な状態が先・§3.4 Measurement)
+    score: 100 + bad.length, // 計測欠陥は最優先 (判断可能な状態が先)
     evidence: bad.map(([job, status]) => ({ metric: `job:${job}`, status })),
     sample: { jobs: bad.length },
     confidence: 0.95,
@@ -212,7 +212,7 @@ export function detectMeasurementGap({ jobStatuses, baselineEnd }) {
   });
 }
 
-/** 6. traffic-mix-shift (§4.3 rule 6)。shares は {key: sharePct} (合計 100)。 */
+/** 6. traffic-mix-shift。shares は {key: sharePct} (合計 100)。 */
 export function detectTrafficMixShift({ dimension, currentShares, previousShares, efficiencyDown, baselineEnd }) {
   const c = RULES_CONFIG.trafficMixShift;
   if (!currentShares || !previousShares || !efficiencyDown) return null;

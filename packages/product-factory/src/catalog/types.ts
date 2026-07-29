@@ -1,8 +1,8 @@
 /**
  * ココナラ商品ファクトリー — 型定義 (SSOT)
  *
- * 正典: docs/02_実装計画/30_ココナラ商品ファクトリー実装仕様.md
- * 商品案の出所: docs/04_レビュー/2026-07-18-coconala-content-monetization.md (旧 A-01〜L-07)
+ * 正典: .claude/rules/coconala-product-standards.md
+ * 商品案の由来: Git履歴上の旧 A-01〜L-07。現行トレースは packs.ts の sourceIds。
  *
  * 2026-07-23: 旧 174 件カタログ (A-01〜L-07・family 別) を、テーマ別 14 パック (P-01〜P-14)
  * へ破壊的に縮約した。同一テーマが family 横断で重複していた (観光 = B-06/C-14/D-08/E-06 等) ため、

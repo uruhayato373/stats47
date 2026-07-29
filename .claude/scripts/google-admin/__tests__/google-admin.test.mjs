@@ -1,6 +1,6 @@
 /**
  * google-admin runner のテスト — allowlist/denylist・decision fixtures・冪等 no-op・
- * redaction・lock (doc41 §6.4/§6.5/§8 Phase 3)。browser は起動しない (pure/decision 部のみ)。
+ * redaction・lock (READMEの安全契約)。browser は起動しない (pure/decision 部のみ)。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -24,7 +24,7 @@ const BASE_INV = {
   ga4AdImpressionObserved: true,
 };
 
-test("allowlist は 3 action のみ・allowlist 外は runtime で throw (§6.4/§6.5)", () => {
+test("allowlist は 3 action のみ・allowlist 外は runtime で throw", () => {
   assert.equal(ALLOWED_ACTIONS.length, 3);
   for (const a of ALLOWED_ACTIONS) assert.equal(assertAllowed(a), a);
   for (const denied of [
@@ -39,11 +39,11 @@ test("allowlist は 3 action のみ・allowlist 外は runtime で throw (§6.4/
   }
 });
 
-test("ad_id dimension の固定値 (§6.4)", () => {
+test("ad_id dimension の固定値", () => {
   assert.deepEqual(AD_ID_DIMENSION, { displayName: "Affiliate ad ID", scope: "Event", eventParameter: "ad_id" });
 });
 
-test("decision: 全て整備済みなら no-op のみ (冪等・§3.2)", () => {
+test("decision: 全て整備済みなら no-op のみ (冪等)", () => {
   const inv = { ...BASE_INV, customDimensions: { status: "ok", hasAdId: true } };
   const d = decideActions(inv);
   assert.deepEqual(d.actions, []);
@@ -82,7 +82,7 @@ test("decision: ad_id — 台帳が要登録 + 未存在なら作成・既存 (�
   assert.ok(!ledgerDone.actions.includes("create-ad-id-dimension"));
 });
 
-test("decision: AdSense link 未リンク表示 × ad_impression 実データあり = 矛盾 blocker (作成しない・§5.2)", () => {
+test("decision: AdSense link 未リンク表示 × ad_impression 実データあり = 矛盾 blocker (作成しない)", () => {
   const inv = { ...BASE_INV, adsenseLinks: { status: "ok", linked: false }, customDimensions: { status: "ok", hasAdId: true } };
   const d = decideActions(inv);
   assert.ok(d.blockers.some((b) => b.code === "adsense-link-contradiction"));
@@ -90,7 +90,7 @@ test("decision: AdSense link 未リンク表示 × ad_impression 実データあ
   assert.ok(!d.actions.some((a) => /adsense/.test(a)));
 });
 
-test("decision: selector-drift (状態不明) では mutation を決めない (fail closed・§6.3)", () => {
+test("decision: selector-drift (状態不明) では mutation を決めない (fail closed)", () => {
   const d1 = decideActions({ ...BASE_INV, scLinks: { status: "selector-drift" } });
   assert.ok(!d1.actions.includes("create-search-console-link"));
   assert.ok(d1.blockers.some((b) => b.code === "sc-links-unreadable"));
@@ -98,7 +98,7 @@ test("decision: selector-drift (状態不明) では mutation を決めない (f
   assert.ok(!d2.actions.includes("create-ad-id-dimension"));
 });
 
-test("redaction: email / bearer / cookie / URL query を出力しない (§3.2)", () => {
+test("redaction: email / bearer / cookie / URL query を出力しない", () => {
   assert.equal(redactEmail("owner uruhayato373@gmail.com here"), "owner [REDACTED_EMAIL] here");
   const s = sanitize("Authorization: Bearer ya29.abcDEF-123 cookie=SID=xyz https://x.com/p?token=abc");
   assert.ok(!s.includes("ya29.abcDEF-123"));
@@ -109,7 +109,7 @@ test("redaction: email / bearer / cookie / URL query を出力しない (§3.2)"
   assert.ok(!JSON.stringify(obj).includes("a@b.co"));
 });
 
-test("lock: 取得・多重拒否・解放 (§6.2)", () => {
+test("lock: 取得・多重拒否・解放", () => {
   acquireLock();
   try {
     assert.ok(fs.existsSync(LOCK_FILE));

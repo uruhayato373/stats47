@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * Cloudflare 月次 snapshot — 日次 snapshot を集計して月次 Markdown を docs/ に書き出し。
+ * Cloudflare 月次 snapshot — 日次 snapshot を集計してskill referenceへ保存。
  *
  * 入力: `.claude/state/metrics/cloudflare/snapshots/YYYY-MM-DD.json`（日次 GraphQL 取得結果）
  * 出力:
  *   - `.claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots/YYYY-MM.json`
- *   - `docs/04_レビュー/YYYY-MM-cloudflare-cost.md`（人間向け要約、frontmatter 付き）
+ *   - `.claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots/YYYY-MM.md`
  *
  * 集計対象: 「請求月」= 前月の 15 日から当月の 14 日（Cloudflare の請求サイクル）
  *   - 当 script が JST 09:00 of 15th に走るので、当月の請求サイクルが直前で締まる想定
@@ -28,7 +28,7 @@ const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 
 const SNAPSHOTS_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics/cloudflare/snapshots");
 const MONTHLY_DIR = path.join(PROJECT_ROOT, ".claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots");
-const DOCS_DIR = path.join(PROJECT_ROOT, "docs/04_レビュー");
+const REPORTS_DIR = MONTHLY_DIR;
 const BUDGETS_PATH = path.join(PROJECT_ROOT, ".claude/skills/analytics/cloudflare-cost-improvement/reference/budgets.json");
 
 const args = process.argv.slice(2);
@@ -217,7 +217,7 @@ function buildIssueBody(cycle, range, agg, comparisons, prevAgg) {
   return lines.join("\n");
 }
 
-function buildDocsMarkdown(cycle, range, agg, comparisons, prevAgg, snapshotBody) {
+function buildReportMarkdown(cycle, range, agg, comparisons, prevAgg, snapshotBody) {
   const lines = [];
   lines.push("---");
   lines.push(`type: cloudflare-cost-snapshot`);
@@ -275,22 +275,22 @@ function main() {
   }
 
   const snapshotBody = buildIssueBody(cycle, range, agg, comparisons, prevAgg);
-  const docsMarkdown = buildDocsMarkdown(cycle, range, agg, comparisons, prevAgg, snapshotBody);
+  const reportMarkdown = buildReportMarkdown(cycle, range, agg, comparisons, prevAgg, snapshotBody);
 
   if (NO_WRITE || DRY_RUN) {
-    console.log("\n--- docs/ markdown preview ---");
-    console.log(docsMarkdown);
+    console.log("\n--- report markdown preview ---");
+    console.log(reportMarkdown);
     return;
   }
 
-  mkdirSync(DOCS_DIR, { recursive: true });
-  const docsOut = path.join(DOCS_DIR, `${cycle}-cloudflare-cost.md`);
-  if (existsSync(docsOut)) {
-    console.log(`Already exists: ${docsOut}. Skip.`);
+  mkdirSync(REPORTS_DIR, { recursive: true });
+  const reportOut = path.join(REPORTS_DIR, `${cycle}.md`);
+  if (existsSync(reportOut)) {
+    console.log(`Already exists: ${reportOut}. Skip.`);
     return;
   }
-  writeFileSync(docsOut, docsMarkdown);
-  console.log(`✓ Wrote ${docsOut}`);
+  writeFileSync(reportOut, reportMarkdown);
+  console.log(`✓ Wrote ${reportOut}`);
 }
 
 main();

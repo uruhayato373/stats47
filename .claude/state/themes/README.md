@@ -14,7 +14,7 @@
 - **検証**: `node .claude/scripts/themes/validate-theme-state.mjs` (決定的 lint。schema +
   下記の判定規律を enforce。pre-commit/CI 配線は PR-4)。
 - 運用設計の正典: `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md`。判定基準の正典:
-  `docs/02_実装計画/24_テーマ分類再編成方針.md`。
+  `.claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md`。
 
 ## portfolio.json
 
@@ -138,7 +138,7 @@
 4. `baseline` の無い実験は登録不可 (効果測定不能な実験を作らない)。
 5. verdict 確定時は `result` と `evidenceRefs` (実測 snapshot への参照) が必須。
 6. effect/* の**バックログ status への反映は improvement-triage に依頼する** (本 state は判定材料と
-   実験履歴の台帳であり、`docs/todo/01_改善バックログ.md` へは書かない)。
+   実験履歴の台帳であり、`docs/todo/04_改善バックログ.md` へは書かない)。
 
 ## 禁止事項
 
@@ -148,4 +148,4 @@
 | ThemeCatalog に GSC/GA4 等の変動値を書く | 変動値は本 state のみ。カタログは定義のみ |
 | 推測値・代替値を measured として保存 | 取れない値は insufficient-data / not-instrumented |
 | 根拠 (evidenceRefs/56日測定) なしの merge/retire | validator が error で弾く |
-| `docs/todo/01_改善バックログ.md` へ直接書く | improvement-triage へ引き渡す |
+| `docs/todo/04_改善バックログ.md` へ直接書く | improvement-triage へ引き渡す |

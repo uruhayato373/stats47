@@ -1,5 +1,5 @@
 /**
- * adsense-report-contract.mjs のテスト — job 互換・status 分類・manifest・schema v2 移行 (doc41 §2/§4.2)。
+ * adsense-report-contract.mjs のテスト — job 互換・status 分類・manifest・schema v2 移行。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -21,7 +21,7 @@ import {
 } from "../lib/adsense-report-contract.mjs";
 import { resolvePeriods } from "../lib/periods.mjs";
 
-test("job 契約: unit/format/placement/bid-type/traffic/country は PAGE_VIEWS を要求しない (§2.2)", () => {
+test("job 契約: unit/format/placement/bid-type/traffic/country は PAGE_VIEWS を要求しない", () => {
   for (const name of ["units", "formats-platforms", "placements-platforms", "bid-types-platforms", "traffic-sources", "countries"]) {
     const job = jobByName(name);
     assert.ok(!job.metrics.includes("PAGE_VIEWS"), `${name} が PAGE_VIEWS を要求している`);
@@ -32,7 +32,7 @@ test("job 契約: unit/format/placement/bid-type/traffic/country は PAGE_VIEWS 
   for (const name of ["overview", "daily", "devices"]) {
     assert.ok(jobByName(name).metrics.includes("PAGE_VIEWS"));
   }
-  // 公式 CPC 系 4 metric が全 job に入る (§2.1)
+  // 公式 CPC 系 4 metric が全 job に入る
   for (const job of REPORT_JOBS) {
     for (const m of ["COST_PER_CLICK", "IMPRESSIONS_RPM", "AD_REQUESTS", "AD_REQUESTS_COVERAGE"]) {
       assert.ok(job.metrics.includes(m), `${job.name} に ${m} が無い`);
@@ -55,7 +55,7 @@ test("classifyJobStatus: PAGE_URL 0行=privacy-threshold / 他0行=missing / 欠
   assert.equal(classifyJobStatus(overview, 1, {}), "complete");
 });
 
-test("manifest: §4.2 の必須 metadata + currency unknown を推定で埋めない", () => {
+test("manifest: 必須 metadata + currency unknown を推定で埋めない", () => {
   const periods = resolvePeriods({ source: "adsense", week: "2026-W30", now: "2026-07-26T11:00:00Z" });
   const m = buildJobManifest({
     job: jobByName("overview"),
@@ -134,7 +134,7 @@ test("adsenseHistoryRowFromOverview: 公式列が snapshot に無ければ '' (n
   assert.deepEqual(Object.keys(withOfficial).sort(), [...ADSENSE_HISTORY_FIELDS_V2].sort());
 });
 
-test("adsenseDeviceRowFromSnapshot: 公式CPCとlegacy収益/clickを別列で持つ (混同しない・§2.1)", () => {
+test("adsenseDeviceRowFromSnapshot: 公式CPCとlegacy収益/clickを別列で持つ (混同しない)", () => {
   const r = adsenseDeviceRowFromSnapshot("2026-W31", {
     PLATFORM_TYPE_NAME: "Desktop", ESTIMATED_EARNINGS: "88", PAGE_VIEWS: "2486", PAGE_VIEWS_RPM: "35",
     IMPRESSIONS: "3349", IMPRESSIONS_RPM: "26.3", CLICKS: "4", IMPRESSIONS_CTR: "0.0012",

@@ -79,4 +79,4 @@ node .claude/scripts/coconala/coconala-delete-draft.mjs --id <n>               #
 - SoT: `.claude/config/coconala-listings.json`（出品内容・公開状態）/ `coconala-account.json`（アカウント）/ `packages/product-factory`（商品設計）
 - 規約: `.claude/rules/coconala-product-standards.md`（§6 出品規律）
 - agent: `.claude/agents/coconala-operator.md`（出品オーケストレーター）/ `coconala-product-manager.md`（商品生成・カタログ）
-- 認証プロファイル: `docs/01_技術設計/playwright-auth-profiles.md`
+- 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`

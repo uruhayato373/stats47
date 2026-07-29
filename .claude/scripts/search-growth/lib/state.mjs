@@ -1,6 +1,7 @@
 /**
  * state — search-growth の derived state 入出力 (再生成可能)。
- * 正典: docs/02_実装計画/39 §4.1。raw snapshot は既存配置を尊重し、ここには normalized/derived のみ置く。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
+ * raw snapshot は既存配置を尊重し、ここには normalized/derived のみ置く。
  */
 import fs from "node:fs";
 import path from "node:path";

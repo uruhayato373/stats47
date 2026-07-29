@@ -9,7 +9,7 @@ import { ThemeProvider as NextThemesProvider, type ThemeProviderProps } from "ne
  * - FOUC（Flash of Unstyled Content）を自動で防止
  * - localStorage（キー `theme`）への自動保存
  * - dark は opt-in（既定 light・`enableSystem={false}` で OS の prefers-color-scheme に追従しない）。
- *   仕様の正典: docs/01_技術設計/15_デザインシステムSSOT.md §「カラーモード（light / dark）」
+ *   仕様の正典: docs/01_技術設計/04_デザインシステム.md §「カラーモード（light / dark）」
  */
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return (
@@ -24,4 +24,3 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     </NextThemesProvider>
   );
 }
-

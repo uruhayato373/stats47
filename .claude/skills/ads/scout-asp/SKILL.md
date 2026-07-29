@@ -130,4 +130,4 @@ node .claude/scripts/ads/check-a8-apply-budget.cjs                # 今週の申
 - ブラウザ: `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}`
 - カタログ: `.claude/state/ads/a8-catalog.json` (状態機械) / curated: `.claude/scripts/ads/data/a8-curated.json`
 - 手動登録: `/register-affiliate-banner` / agent: `asp-scout` (ブラウザ) + `affiliate-manager` (SSOT 排他 writer)
-- 認証方式: `docs/01_技術設計/playwright-auth-profiles.md`
+- 認証方式: `docs/01_技術設計/07_Playwright認証プロファイル.md`

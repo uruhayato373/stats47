@@ -1,7 +1,9 @@
 ---
+title: アフィリエイト Playwright 継続運用・安全化実装仕様
 type: implementation-spec
 date: 2026-07-28
-status: planned
+updated: 2026-07-30
+status: in-progress
 related_backlog: ASP-CONTINUITY-01
 tags: [affiliate, Playwright, automation, operations, safety, measurement]
 ---
@@ -14,7 +16,7 @@ tags: [affiliate, Playwright, automation, operations, safety, measurement]
 Claude Code と Playwright で継続運用するための実装仕様である。
 
 未完了タスクの status / tier / 期日は
-`docs/todo/02_機能バックログ.md` の `ASP-CONTINUITY-01` を真実源とする。本書は実装方法と受入条件を扱い、
+`docs/todo/05_機能バックログ.md` の `ASP-CONTINUITY-01` を真実源とする。本書は実装方法と受入条件を扱い、
 提携状態・広告在庫・成果値の現在値を正典化しない。
 
 運用上の正典は既存の配置を維持する。
@@ -28,7 +30,7 @@ Claude Code と Playwright で継続運用するための実装仕様である�
 | A8 状態機械            | `.claude/state/ads/a8-catalog.json`                                              |
 | 3 ASP 横断台帳         | `.claude/state/ads/affiliate-catalog.json`                                       |
 | 配信時の広告データ     | git TS → R2 snapshot                                                             |
-| 未完了状態             | `docs/todo/02_機能バックログ.md` `ASP-CONTINUITY-01`                             |
+| 未完了状態             | `docs/todo/05_機能バックログ.md` `ASP-CONTINUITY-01`                             |
 
 `a8-catalog.json` と `affiliate-catalog.json` は用途が異なるためマージしない。必要な横断表示は、
 両方を入力にした read-only の派生 view で作る。
@@ -522,7 +524,8 @@ operations state の schema も v2 にし、次をすべて満たしたときだ
 `compliance-latest.json` の `missingDisclosure` または `orphaned` が 1 件以上なら、
 広告配信 snapshot の publish gate を失敗させる。
 
-現時点で検出済みの次の2件は Phase 1 で是正する。
+2026-07-29 の Phase 1 で次の2件を是正し、live compliance gate が
+`ready` になったことを確認済み。
 
 - `moshimo-ai-onikanri-93995`: blog head PR declaration
 - `a8-strategy-career-koumuin-ai-tenshoku-260601701360`: blog head PR declaration + inline PR prefix
@@ -594,7 +597,7 @@ A8 の公開規約は管理画面で提供される情報を秘密情報とし�
 - raw 管理画面 artifact を Claude / subagent に読ませない。人間が selector と最小構造へ匿名化して fixture 化する。
 - repository、CI artifact、ログ閲覧権限が秘密保持に適合するかオーナーが確認する。
 
-`docs/01_技術設計/playwright-auth-profiles.md` の「空・未ログイン」のような変動状態は削除し、
+`docs/01_技術設計/07_Playwright認証プロファイル.md` の「空・未ログイン」のような変動状態は削除し、
 固定仕様と再ログイン手順だけを残す。実ログイン状態を git 文書へ固定しない。
 
 ## 13. 成果と収益の閉ループ
@@ -666,7 +669,7 @@ Phase 0 で再確認し、既存機能と重複する場合は新規ファイル
 | `scripts/scheduled/scout-asp-weekly.sh`                           | truthful result、lock、health                                      |
 | `apps/web/src/features/ads/services/resolve-affiliate-ad.ts`      | blog economy fallback 廃止                                         |
 | `apps/web/src/features/ads/repositories/affiliate-ad-snapshot.ts` | targetRankingKeys hard allowlist                                   |
-| `docs/01_技術設計/playwright-auth-profiles.md`                    | 変動するログイン状態を削除                                         |
+| `docs/01_技術設計/07_Playwright認証プロファイル.md`                    | 変動するログイン状態を削除                                         |
 | `docs/01_技術設計/06_自動化インベントリ.md`                       | cron追加・変更時に更新                                             |
 
 想定する新規 pure core。Phase 0 で既存 core に収まるなら統合し、ファイルを増やさない。
@@ -677,7 +680,10 @@ Phase 0 で再確認し、既存機能と重複する場合は新規ファイル
 
 ## 15. 実装フェーズ
 
-### Phase 0 — read-only 監査
+### Phase 0 — read-only 監査（完了 2026-07-29）
+
+監査結果は本節と `docs/todo/05_機能バックログ.md` の `ASP-CONTINUITY-01` へ統合済み。
+判定は `ready`、pure core test は 120/120 pass。
 
 外部ブラウザを起動せず、コードと state だけを調べる。
 
@@ -686,10 +692,14 @@ Phase 0 で再確認し、既存機能と重複する場合は新規ファイル
 - 既存 test baseline を取る。
 - 追加・変更・触らないファイルを確定する。
 - `.claude/scripts/ads` 内の state writer を列挙する。
-- `docs/04_レビュー/YYYY-MM-DD-affiliate-playwright-phase0-audit.md` に結果を保存する。
+- 未完了事項だけを `ASP-CONTINUITY-01` の実行順・停止条件・完了条件へ反映する。
 - Phase 1 の開始可否を `ready / blocked` で判定する。
 
-### Phase 1 — 外部アクセス不要の安全基盤
+### Phase 1 — 外部アクセス不要の安全基盤（完了 2026-07-29）
+
+measurement gate v2、plan/journal/lock core、安全 rollback、truthful cron health、
+artifact 保護、契約ドリフトと既知 PR 表記を是正済み。apply CLI への plan 必須配線は
+Phase 2 以降で行う。
 
 - measurement gate v2
 - operation plan / hash / journal の pure core
@@ -905,63 +915,12 @@ app route、SSG、R2 export の本番挙動を変更しない phase では full 
 - `--commit` の plan を案件単位で承認する。
 - afb の手動ログインを行う。
 - afb API key の発行可否を確認する。
-- GA4 の `ad_id` custom dimension と新イベント実測を確認する。
+- GA4 の `affiliate_impression` と vertical 内訳を本番実測で確認する。
 - local diff の確認後、commit / push / PR / deploy を別途指示する。
 
 ## 21. Claude Code 用プロンプト
 
-### 21.1 最初に使うプロンプト — Phase 0 + Phase 1
-
-```text
-<task>
-  <goal>アフィリエイトPlaywright運用のPhase 0監査を行い、readyなら外部アクセス不要のPhase 1安全基盤を実装する</goal>
-  <scope>docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md のPhase 0とPhase 1だけ。ASP実アクセス、Playwright起動、配信ロジック変更、新規申請、SSOT公開は対象外</scope>
-  <sources>CLAUDE.md、repo内memory/rules、doc 42、既存agent/skill/script/state/test</sources>
-  <done_when>Phase 0監査が保存され、readyの場合はmeasurement gate v2・plan/journal/lock core・安全rollback・truthful cron health・artifact保護・契約ドリフト・既知PR表記不足が実装され、対象テストが成功する</done_when>
-  <authorization>ローカルの可逆なファイル編集とテスト実行のみ。ASP操作、ブラウザ起動、commit、push、PR、deploy、R2 writeは禁止</authorization>
-</task>
-<output_format>
-最終報告は「結果 / 変更 / 検証 / 未実行 / 要判断」の5見出し、各見出し最大5項目。
-各主張にfile pathまたはcommandを付け、未検証を完了と書かない。
-</output_format>
-
-BEHAVIOR CONTRACT:
-- 最初に git status を確認し、既存未コミット変更をユーザー所有物として保護する。
-- 対象ファイル自体に既存変更がある場合、差分を読んで共存できなければそのファイルだけ止めて報告する。
-- git checkout、git restore、git reset、stashで既存変更を退避・破棄しない。
-- 新しい万能agentを作らず、affiliate-operator / asp-scout / affiliate-manager の責務を維持する。
-- A8 catalogと3 ASP横断catalogをマージしない。
-- routing、状態遷移、hash、期限、測定gateは決定的コードで処理する。
-- 既定のsubagent数は0。同じworking treeでwriter agentを並行起動しない。
-- raw profile、Cookie、storageState、.env、管理画面artifactを読出・表示しない。
-- scope外の周辺refactorを行わない。
-
-最初に必ず読む:
-- CLAUDE.md
-- .claude/memory/MEMORY.md
-- docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md
-- docs/02_実装計画/25_アフィリエイト運用SSOT移行仕様.md
-- docs/02_実装計画/40_アフィリエイト計測是正実装仕様.md
-- .claude/rules/{affiliate-ads-standards,analytics-event-standards,data-storage,docs-vs-issues,skill-code-placement,branch-workflow,model-prompting,agent-output-contract}.md
-- .claude/agents/{asp-scout,affiliate-operator,affiliate-manager}.md
-- .claude/skills/ads/{scout-asp,affiliate-operate}/SKILL.md
-
-実行手順:
-1. Phase 0の前提を現行code/stateへ突合し、実行日の
-   docs/04_レビュー/YYYY-MM-DD-affiliate-playwright-phase0-audit.mdへ保存する。
-2. 追加・変更・触らないfile boundaryとready/blockedを確定する。
-3. blockedなら安全に進められる非競合部分以外は実装せず、根拠を報告する。
-4. readyならdoc 42のPhase 1だけを外科的に実装する。
-5. pure coreへ先にtestを追加し、I/O・Playwrightから分離する。
-6. append rollbackでgit checkout/restoreを使わず、実行前byte列を保持する。
-7. cronの各stepを集約し、失敗をexit 0へ潰さない。healthは.localに置きgitをdirtyにしない。
-8. agent/rule/skillの「全件自動」「週次全自動」「新規申請無効」「cronはdry-run」の矛盾を現行safe modeへ統一する。
-9. docs/todo/02_機能バックログ.mdのASP-CONTINUITY-01へ実測したPhase進捗だけを追記する。
-10. doc 42 §17のうちPhase 1に必要なgateを1回ずつ実行する。
-11. full build、Playwright、ASPアクセス、commit/push/deployは実行しない。
-```
-
-### 21.2 Phase 2 用プロンプト — eligibility / 配信
+### 21.1 Phase 2 用プロンプト — eligibility / 配信
 
 Phase 1 が green の場合だけ使用する。
 
@@ -969,7 +928,7 @@ Phase 1 が green の場合だけ使用する。
 <task>
   <goal>アフィリエイト候補の掲載適格性gateと、サイト配信の文脈fail-closedを実装する</goal>
   <scope>doc 42 Phase 2のみ。eligibility pure core、apply plan gate、targetRankingKeys hard allowlist、blog economy fallback廃止、関連test/rule更新</scope>
-  <sources>Phase 0監査、doc 42、affiliate rules、placement-map state、既存resolver/repository/tests</sources>
+  <sources>doc 42 Phase 0、affiliate rules、placement-map state、既存resolver/repository/tests</sources>
   <done_when>risk/target未承認案件はplanを作れず、targetRankingKeys指定広告は非ranking文脈へ出ず、blog不一致時は空を返し、対象testとweb type-checkが成功する</done_when>
   <authorization>ローカル編集とテストのみ。ASP・Playwright・commit・push・deploy・R2 writeは禁止</authorization>
 </task>
@@ -977,7 +936,7 @@ Phase 1 が green の場合だけ使用する。
 最終報告は「結果 / 変更 / 検証 / 配信差分 / 未実行」の5見出し、800語以内。
 </output_format>
 
-- git statusとPhase 0監査を先に読む。
+- git statusとdoc 42 Phase 0を先に読む。
 - 既存未コミット変更を保護し、対象fileがdirtyなら衝突箇所を示す。
 - verticalをeligibilityの代用にしない。
 - policy値はversioned config、判定はpure core、配信allowlistはgit TSの型で拘束する。
@@ -988,7 +947,7 @@ Phase 1 が green の場合だけ使用する。
 - full build、公開、ブラウザ操作はしない。
 ```
 
-### 21.3 Phase 3〜4 用プロンプト — read-only 実機監査と continuity
+### 21.2 Phase 3〜4 用プロンプト — read-only 実機監査と continuity
 
 オーナーが「ASPへのread-onlyアクセスを許可」と明示した場合だけ使用する。
 
@@ -996,7 +955,7 @@ Phase 1 が green の場合だけ使用する。
 <task>
   <goal>A8・もしも・afbの一覧と広告コード導線をread-onlyで実測し、完全走査reconciliationとharvest draftを実装する</goal>
   <scope>doc 42 Phase 3と4。新規申請・設定変更・SSOT反映・公開は対象外</scope>
-  <sources>Phase 0監査、Phase 1/2実装、doc 42、ASP config、site guard、synthetic fixtures</sources>
+  <sources>doc 42 Phase 0、Phase 1/2実装、ASP config、site guard、synthetic fixtures</sources>
   <done_when>各ASPのscan completenessが表現され、positive-only approval transitionとharvest draftがfixture testで成功し、許可されたASPだけread-only smoke結果がある</done_when>
   <authorization>headed Playwrightによるread-onlyアクセスを1 ASPずつ許可。apply/submit/confirm、一括操作、catalog --write、SSOT変更、commit/push/deployは禁止。ログインは人間のみ</authorization>
 </task>
@@ -1016,7 +975,7 @@ Phase 1 が green の場合だけ使用する。
 - SSOT appendはdry-runまで。外向き変更はしない。
 ```
 
-### 21.4 Phase 5〜6 用プロンプト — 定期実行と収益
+### 21.3 Phase 5〜6 用プロンプト — 定期実行と収益
 
 ```text
 <task>
