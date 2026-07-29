@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import {
     type RankingItem,
+    type RankingNationalTrendSnapshot,
     type RankingValue,
     buildRankingDisplayInfo,
 } from "@stats47/ranking";
@@ -24,6 +25,8 @@ import {
 } from "@/features/ranking";
 
 import { AdSenseAd, RANKING_PAGE_TABLE_SIDE } from "@/lib/google-adsense";
+
+import { NationalTrendCard } from "../NationalTrendCard/NationalTrendCard";
 
 import { RankingBasisSwitcher, type RankingBasisMember } from "./RankingBasisSwitcher";
 import { RankingPageContentSections, type RankingPageSections } from "./RankingPageContentSections";
@@ -54,6 +57,8 @@ interface RankingKeyPageClientProps {
     groupMembers?: RankingBasisMember[];
     /** ArticleShell の breadcrumb slot に描画するパンくず */
     breadcrumb?: React.ReactNode;
+    /** 事前生成済み全国時系列 (未生成なら null → カード非表示) */
+    nationalTrend?: RankingNationalTrendSnapshot | null;
 }
 
 export function RankingKeyPageClient({
@@ -70,6 +75,7 @@ export function RankingKeyPageClient({
     categoryName,
     groupMembers = [],
     breadcrumb,
+    nationalTrend = null,
 }: RankingKeyPageClientProps) {
     const {
         activeRankingItem,
@@ -247,6 +253,12 @@ export function RankingKeyPageClient({
                     headerActions={headerActions}
                     cardFooter={cardFooter}
                     isPending={isPending}
+                />
+
+                <NationalTrendCard
+                    nationalTrend={nationalTrend}
+                    normalizationType={normalizationType}
+                    decimalPlaces={displayInfo.decimalPlaces}
                 />
 
                 <RankingPageContentSections

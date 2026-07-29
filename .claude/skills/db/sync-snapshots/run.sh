@@ -33,6 +33,12 @@ TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 # 代替 writer が作られず、配信用 app/ranking/<key>/values.json が 2 ヶ月間凍結していた
 # (runtime の全描画値・OGP・blog がこれを読むため stale 配信 + 新規 metric は空ページ化)。
 # 新 writer は app/stats (正典) を入力に決定的変換する。ranking-items の後に置くこと。
+#
+# ★ranking-normalized-values は 2026-07-29 に新設 (values-per-population / values-per-area /
+# national-trend)。Phase 6 で D1 版 exporter が廃止されたまま代替が作られず、R2 には
+# 2026-05-21 生成の orphan が残り、しかも per-area は分母 (100km² 単位) の換算漏れで
+# 100 倍過大だった。計算は runtime と同じ services/normalize-core.ts に委譲し、
+# push 前に fixture 値域ゲートを通す (違反時 exit≠0 で R2 push されない)。
 # correlation は 2026-06-14 に復活: D1 ではなく R2 観測値を入力に使い捨て :memory: SQLite で
 # 集計するエフェメラル producer (build-correlation-snapshot.ts) として再実装 (DBレス Derived)。
 declare -a TASKS=(
@@ -41,6 +47,7 @@ declare -a TASKS=(
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
   "ranking-items|packages/ranking/src/scripts/generate-ranking-items.ts"
   "ranking-values|packages/ranking/src/scripts/generate-ranking-values.ts"
+  "ranking-normalized-values|packages/ranking/src/scripts/generate-ranking-normalized-values.ts"
   "item-seo-refresh|packages/ranking/src/scripts/refresh-item-seo.ts --apply"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
   "city-profile|packages/area-profile/src/scripts/export-city-snapshot.ts"

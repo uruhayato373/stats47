@@ -21,6 +21,14 @@
  *                             HOME_FEATURED_RANKINGS の定義数以上か
  *   (e) per-URL 件数下限    — `app/survey/all.json` / 17 category の `items.json` が
  *                             極端に少なくないか (絶対フロア + 前回実行比のドリフト検知)
+ *   (f) 正規化 snapshot 実在 — normalizationOptions を持つキーで
+ *                             `values-per-*.json` / `national-trend.json` が 200 か
+ *   (g) 正規化 値域         — fixture ゲート (lib/normalized-fixtures.ts) の期待レンジに入るか
+ *   (h) 正規化 鮮度         — values.json と正規化 snapshot の generatedAt 差が閾値以内か
+ *
+ * (f)(g)(h) は 2026-07-29 の障害 (values-per-area.json が 100 倍過大な値のまま 2 ヶ月配信) の
+ * 再発検知。件数チェックだけでは「値が桁違い」も「writer 不在で凍結」も捕まえられなかった。
+ * (g) の期待レンジは writer (generate-ranking-normalized-values.ts) と**同一の定義**を import する。
  *
  * enumeration source: active キー一覧は `app/ranking-items/all.json` を使う
  * (KNOWN_RANKING_KEYS を cross-package import するより単純で、これは本番配信の実体
@@ -39,6 +47,8 @@ import * as path from "node:path";
 import { HOME_FEATURED_RANKINGS } from "@stats47/data-configs";
 
 import surveysMaster from "../data/surveys.json";
+
+import { checkFixtureGates, type FixtureViolation } from "./lib/normalized-fixtures";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 
@@ -69,6 +79,16 @@ const CATEGORY_KEYS = [
 // の 2 段構えにする。初回実行時は baseline が無いので絶対フロアのみ適用する。
 const DRIFT_RATIO_THRESHOLD = 0.5;
 
+/**
+ * values.json と正規化 snapshot の generatedAt 差の許容日数。
+ * sync-snapshots は週次なので 8 日あれば正常運用では絶対に超えない。
+ * writer が止まると (2026-07-29 の 2 ヶ月 stale) 必ず超える。
+ */
+const NORMALIZED_STALE_DAYS = 8;
+
+const NORM_TYPES = ["per_population", "per_area"] as const;
+type NormType = (typeof NORM_TYPES)[number];
+
 interface ItemJson {
   item?: {
     latestYear?: { yearCode?: string };
@@ -77,7 +97,16 @@ interface ItemJson {
 }
 
 interface ValuesJson {
-  partitions?: Array<{ yearCode?: string }>;
+  generatedAt?: string;
+  partitions?: Array<{
+    yearCode?: string;
+    values?: Array<{ areaCode?: string; value?: number | null }>;
+  }>;
+}
+
+interface NationalTrendJson {
+  generatedAt?: string;
+  series?: Array<{ basis?: string; points?: unknown[] }>;
 }
 
 interface RankingItemsAll {
@@ -86,7 +115,27 @@ interface RankingItemsAll {
     rankingKey: string;
     isActive?: boolean;
     latestYear?: { yearCode?: string };
+    calculation?: {
+      normalizationOptions?: Array<{ type?: string }>;
+    };
   }>;
+}
+
+/** 正規化系 (f)(g)(h) の検査結果 */
+interface NormalizedChecks {
+  /** normalizationOptions を持つ active キー数 */
+  expectedKeys: number;
+  /** normType ごとの「宣言している / 実在する」件数 */
+  perType: Record<string, { declared: number; present: number }>;
+  /** national-trend.json が実在するキー数 */
+  trendPresent: number;
+  /** 欠落 (宣言しているのに 200 でない) */
+  missing: Array<{ key: string; artifact: string }>;
+  /** 鮮度違反 (values.json との generatedAt 差が閾値超) */
+  stale: Array<{ key: string; artifact: string; ageDays: number }>;
+  /** 値域違反 */
+  fixtureViolations: FixtureViolation[];
+  ok: boolean;
 }
 
 interface CountSnapshot {
@@ -115,7 +164,17 @@ interface AuditReport {
       { count: number; ok: boolean; driftOk: boolean; previous?: number }
     >;
   };
+  normalized: NormalizedChecks;
   ok: boolean;
+}
+
+/** 2 つの ISO 日時の差 (日) を返す。パース不能なら null */
+function ageInDays(a: string | undefined, b: string | undefined): number | null {
+  if (!a || !b) return null;
+  const ta = Date.parse(a);
+  const tb = Date.parse(b);
+  if (!Number.isFinite(ta) || !Number.isFinite(tb)) return null;
+  return Math.abs(ta - tb) / 86_400_000;
 }
 
 // ---- プロキシ対応 fetch (ローカル企業ネットワーク越しの実行を許容する) ----
@@ -219,8 +278,23 @@ async function main() {
   const valuesMissing: string[] = [];
   const yearMismatch: Array<{ key: string; itemYear: string | undefined; valuesYears: string[] }> = [];
 
+  // (f)(g)(h) 正規化系の集計器
+  const normalized: NormalizedChecks = {
+    expectedKeys: 0,
+    perType: Object.fromEntries(NORM_TYPES.map((t) => [t, { declared: 0, present: 0 }])),
+    trendPresent: 0,
+    missing: [],
+    stale: [],
+    fixtureViolations: [],
+    ok: true,
+  };
+
   await mapPool(activeItems, concurrency, async (entry) => {
     const key = entry.rankingKey;
+    const declaredTypes = (entry.calculation?.normalizationOptions ?? [])
+      .map((o) => o.type)
+      .filter((t): t is NormType => (NORM_TYPES as readonly string[]).includes(t ?? ""));
+
     const [itemRes, valuesRes] = await Promise.all([
       fetchJson<ItemJson>(`app/ranking/${key}/item.json`),
       fetchJson<ValuesJson>(`app/ranking/${key}/values.json`),
@@ -231,7 +305,7 @@ async function main() {
     }
     if (valuesRes.status !== 200 || !valuesRes.body) {
       valuesMissing.push(key);
-      return; // values が無ければ年整合は判定不能
+      return; // values が無ければ年整合も正規化検査も判定不能
     }
     const itemYear = itemRes.body?.item?.latestYear?.yearCode;
     const valuesYears = [
@@ -240,7 +314,67 @@ async function main() {
     if (itemYear && valuesYears.length > 0 && !valuesYears.includes(itemYear)) {
       yearMismatch.push({ key, itemYear, valuesYears });
     }
+
+    // --- (f)(g)(h) 正規化 snapshot ---
+    if (declaredTypes.length === 0) return;
+    normalized.expectedKeys++;
+    const baseGeneratedAt = valuesRes.body.generatedAt;
+
+    const [trendRes, ...normRes] = await Promise.all([
+      fetchJson<NationalTrendJson>(`app/ranking/${key}/national-trend.json`),
+      ...declaredTypes.map((t) =>
+        fetchJson<ValuesJson>(`app/ranking/${key}/values-${t.replace(/_/g, "-")}.json`),
+      ),
+    ]);
+
+    if (trendRes.status === 200 && (trendRes.body?.series?.length ?? 0) > 0) {
+      normalized.trendPresent++;
+      const age = ageInDays(baseGeneratedAt, trendRes.body?.generatedAt);
+      if (age !== null && age > NORMALIZED_STALE_DAYS) {
+        normalized.stale.push({ key, artifact: "national-trend.json", ageDays: Math.round(age) });
+      }
+    } else {
+      normalized.missing.push({ key, artifact: "national-trend.json" });
+    }
+
+    declaredTypes.forEach((normType, i) => {
+      normalized.perType[normType].declared++;
+      const res = normRes[i];
+      const artifact = `values-${normType.replace(/_/g, "-")}.json`;
+
+      if (res.status !== 200 || !res.body || (res.body.partitions?.length ?? 0) === 0) {
+        normalized.missing.push({ key, artifact });
+        return;
+      }
+      normalized.perType[normType].present++;
+
+      const age = ageInDays(baseGeneratedAt, res.body.generatedAt);
+      if (age !== null && age > NORMALIZED_STALE_DAYS) {
+        normalized.stale.push({ key, artifact, ageDays: Math.round(age) });
+      }
+
+      // (g) 値域: 最新年 partition を fixture ゲートにかける
+      const latest = res.body.partitions?.[0];
+      if (latest) {
+        const valuesByAreaCode = new Map<string, number | null>(
+          (latest.values ?? []).map((v) => [v.areaCode ?? "", v.value ?? null]),
+        );
+        normalized.fixtureViolations.push(
+          ...checkFixtureGates({
+            rankingKey: key,
+            normType,
+            yearCode: latest.yearCode ?? "",
+            valuesByAreaCode,
+          }),
+        );
+      }
+    });
   });
+
+  normalized.ok =
+    normalized.missing.length === 0 &&
+    normalized.stale.length === 0 &&
+    normalized.fixtureViolations.length === 0;
 
   // --- (d) home featured ---
   const homeRes = await fetchJson<{ count: number }>("app/home/featured.json");
@@ -290,11 +424,13 @@ async function main() {
       survey: { count: surveyCount, expectedFloor: surveyFloor, ok: surveyAbsOk, driftOk: surveyDriftOk },
       categories: categoryChecks,
     },
+    normalized,
     ok:
       itemMissing.length === 0 &&
       valuesMissing.length === 0 &&
       yearMismatch.length === 0 &&
-      countChecksOk,
+      countChecksOk &&
+      normalized.ok,
   };
 
   // ---- レポート出力 ----
@@ -326,6 +462,26 @@ async function main() {
     const prevStr = c.previous !== undefined ? ` prev=${c.previous}` : "";
     console.log(`  category/${key}: count=${c.count}${prevStr} ${c.ok && c.driftOk ? "✓" : "✗"}`);
   }
+
+  console.log(`\n## (f)(g)(h) 正規化 snapshot (values-per-*.json / national-trend.json)`);
+  console.log(`  対象キー (normalizationOptions 保持): ${normalized.expectedKeys} 件`);
+  for (const [type, c] of Object.entries(normalized.perType)) {
+    console.log(`    ${type}: 宣言 ${c.declared} / 実在 ${c.present}`);
+  }
+  console.log(`    national-trend: 実在 ${normalized.trendPresent}`);
+  console.log(`  (f) 欠落: ${normalized.missing.length} 件`);
+  for (const m of normalized.missing.slice(0, 10)) console.log(`      ${m.key} / ${m.artifact}`);
+  if (normalized.missing.length > 10)
+    console.log(`      … 他 ${normalized.missing.length - 10} 件 (--json で全件)`);
+  console.log(
+    `  (g) 値域違反: ${normalized.fixtureViolations.length} 件 (期待レンジは lib/normalized-fixtures.ts)`,
+  );
+  for (const v of normalized.fixtureViolations.slice(0, 10)) console.log(`      ${v.message}`);
+  console.log(`  (h) 鮮度違反 (values.json との差 > ${NORMALIZED_STALE_DAYS} 日): ${normalized.stale.length} 件`);
+  for (const s of normalized.stale.slice(0, 10))
+    console.log(`      ${s.key} / ${s.artifact} (${s.ageDays} 日差)`);
+  if (normalized.stale.length > 10)
+    console.log(`      … 他 ${normalized.stale.length - 10} 件 (--json で全件)`);
 
   console.log(`\n## 総合判定: ${report.ok ? "✓ OK" : "✗ 違反あり"}`);
 

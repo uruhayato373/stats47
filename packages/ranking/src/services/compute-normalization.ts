@@ -4,20 +4,16 @@ import { readRankingItemByKeyFromR2 } from "../repositories/ranking-item";
 import { listRankingValues } from "../repositories/ranking-value";
 import type { RankingItem, RankingValue } from "../types";
 
-import { computeCalculatedValues } from "../utils/compute-calculated-values";
-import { rankByValue } from "../utils/rank-by-value";
+import { applyNormalization, resolveDenominator } from "./normalize-core";
 
-// Well-known keys mapping
-export const WELL_KNOWN_DENOMINATORS: Record<string, Record<string, string>> = {
-  per_population: {
-    prefecture: "total-population",
-    city: "total-population",
-  },
-  per_area: {
-    prefecture: "total-area-including-northern-territories-and-takeshima",
-    city: "total-area", // Assume total-area if exists
-  },
-};
+// 計算コア・分母宣言は normalize-core.ts が単一ソース (writer と共有)。
+// ここから re-export して既存 import 元 (テスト等) の互換を保つ。
+export {
+  WELL_KNOWN_DENOMINATORS,
+  resolveDenominator,
+  applyNormalization,
+  type WellKnownDenominator,
+} from "./normalize-core";
 
 /**
  * 指標データに対して正規化計算を適用する
@@ -35,13 +31,14 @@ export async function computeNormalization(
     return [];
   }
 
-  // 分母キーの特定
-  const denominatorKey = option.denominatorKey || WELL_KNOWN_DENOMINATORS[option.type]?.[areaType];
+  // 分母キー + 単位換算係数の解決 (writer と共通の normalize-core が決める)
+  const denominator = resolveDenominator(option.type, areaType, option.denominatorKey);
 
-  if (!denominatorKey) {
+  if (!denominator) {
     logger.warn({ rankingKey, type: option.type, areaType }, "computeNormalization: 分母キーを特定できません");
     return [];
   }
+  const denominatorKey = denominator.key;
 
   // 1. 分子データの取得（DB → なければオンデマンド取得）
   const numeratorResult = await listRankingValues(rankingKey, areaType as AreaType, yearCode);
@@ -60,15 +57,13 @@ export async function computeNormalization(
     return [];
   }
 
-  // 3. 計算実行
-  const computed = computeCalculatedValues(numeratorValues, denominatorValues, {
-    type: "ratio",
+  // 3. 計算実行 (単位換算 → 除算 → rank は normalize-core が一手に担う)
+  return applyNormalization(numeratorValues, denominatorValues, {
     metricKey: rankingItem.rankingKey,
     unit: option.unit,
-    keyBy: "areaCode",
     scaleFactor: option.scaleFactor,
+    valueScaleToBaseUnit: denominator.valueScaleToBaseUnit,
   });
-  return rankByValue(computed) as RankingValue[];
 }
 
 /**

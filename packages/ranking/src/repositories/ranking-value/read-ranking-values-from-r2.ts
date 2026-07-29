@@ -7,11 +7,16 @@ import type { AreaType } from "@stats47/types";
 
 import type { RankingValue } from "../../types";
 import {
+  rankingNationalTrendPath,
   rankingNormalizedValuesKeyPath,
   rankingValuesKeyPath,
+  type RankingNationalTrendSnapshot,
   type RankingValuesKeySnapshot,
 } from "../../types/snapshot";
-import { parseRankingValuesKeySnapshot } from "../schemas/ranking-values.schemas";
+import {
+  parseNationalTrendSnapshot,
+  parseRankingValuesKeySnapshot,
+} from "../schemas/ranking-values.schemas";
 
 const STALE_AFTER_DAYS = 90;
 
@@ -201,4 +206,28 @@ export async function readRankingValuesByPrefectureFromR2(
   if (!result.success) return result;
   const prefPrefix = prefCode.slice(0, 2);
   return ok(result.data.filter((v) => v.areaCode.startsWith(prefPrefix)));
+}
+
+/**
+ * 全国時系列スナップショット (app/ranking/<key>/national-trend.json) を読む。
+ *
+ * 基準 (original / per_population / per_area) ごとの「全国平均の推移」を 1 fetch で返す。
+ * writer: `packages/ranking/src/scripts/generate-ranking-normalized-values.ts`
+ *
+ * 未生成 / 破損時は null (UI 側は非表示にフォールバックする)。
+ */
+export async function readNationalTrendFromR2(
+  rankingKey: string,
+): Promise<RankingNationalTrendSnapshot | null> {
+  try {
+    const data = await fetchFromR2AsJson<unknown>(rankingNationalTrendPath(rankingKey));
+    if (!data) return null;
+    return parseNationalTrendSnapshot(data);
+  } catch (error) {
+    logger.error(
+      { rankingKey, error: error instanceof Error ? error.message : String(error) },
+      "readNationalTrendFromR2: failed",
+    );
+    return null;
+  }
 }

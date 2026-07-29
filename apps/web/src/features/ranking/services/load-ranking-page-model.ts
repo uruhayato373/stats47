@@ -4,6 +4,7 @@ import { readRankingAiContentFromR2 } from "@stats47/ai-content/server";
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import { getRankingTitle, type RankingValue } from "@stats47/ranking";
 import {
+  readNationalTrendFromR2,
   readRankingItemsByGroupKeyFromR2,
   readRankingItemsBySurveyFromR2,
   readRankingValuesFromR2,
@@ -58,6 +59,13 @@ export async function loadRankingPageModel(rankingKey: string) {
     },
   );
 
+  // 全国平均の推移 (基準別)。事前生成済み snapshot を 1 fetch (~数KB)。
+  // 未生成なら null → カードは描画しない (段階導入できるようにする)。
+  const nationalTrendPromise = readNationalTrendFromR2(rankingKey).catch((error) => {
+    logger.error({ error }, "RankingKeyPage: 全国時系列 取得失敗");
+    return null;
+  });
+
   const cityRankingItemPromise = cachedFindRankingItem(rankingKey, "city")
     .then((r) => (isOk(r) ? r.data : null))
     .catch(() => null);
@@ -109,6 +117,7 @@ export async function loadRankingPageModel(rankingKey: string) {
     rankingValues,
     topology,
     aiContent,
+    nationalTrend,
     cityRankingItem,
     surveyRelatedItems,
     groupMembers,
@@ -118,6 +127,7 @@ export async function loadRankingPageModel(rankingKey: string) {
     rankingValuesPromise,
     topologyPromise,
     aiContentPromise,
+    nationalTrendPromise,
     cityRankingItemPromise,
     surveyRelatedItemsPromise,
     groupMembersPromise,
@@ -152,6 +162,7 @@ export async function loadRankingPageModel(rankingKey: string) {
     rankingValues,
     topology,
     aiContent,
+    nationalTrend,
     cityRankingItem,
     surveyName,
     originalSurveys,

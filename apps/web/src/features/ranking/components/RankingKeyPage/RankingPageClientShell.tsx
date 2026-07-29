@@ -36,6 +36,7 @@ export function RankingPageClientShell({
       surveyName={model.surveyName ?? undefined}
       categoryName={model.breadcrumbCategory?.name}
       groupMembers={model.groupMembers}
+      nationalTrend={model.nationalTrend}
       breadcrumb={
         <RankingPageBreadcrumbs
           rankingName={model.rankingName}
