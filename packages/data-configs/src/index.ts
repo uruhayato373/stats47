@@ -2,6 +2,15 @@ export * from "./types";
 export { createMetric, type CreateMetricInput } from "./create-metric";
 export { METRICS_REGISTRY, getMetricConfig, listAllMetrics } from "./registry";
 export {
+  EXPECTED_EMPTY,
+  classifyEmptyOutcome,
+  findExpectedEmpty,
+  type ClassifyEmptyInput,
+  type ClassifyEmptyResult,
+  type EmptyOutcome,
+  type ExpectedEmptyEntry,
+} from "./expected-empty";
+export {
   getMetricMetaMap,
   getMetricMeta,
   listMetricKeysByEntity,

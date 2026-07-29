@@ -28,6 +28,7 @@ import { readFileSync, writeFileSync, mkdirSync, statSync, existsSync } from "no
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { listAllMetrics } from "../src/registry.js";
+import { classifyEmptyOutcome } from "../src/expected-empty.js";
 import type { MetricConfig, SourceConfig } from "../src/types.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -40,11 +41,13 @@ interface Args {
   since?: string;
   dryRun: boolean;
   concurrency: number;
+  /** 0 件を警告に降格する metric key (一回きりの検証用) */
+  allowEmpty: Set<string>;
 }
 
 function parseArgs(): Args {
   const argv = process.argv.slice(2);
-  const out: Args = { dryRun: false, concurrency: 4 };
+  const out: Args = { dryRun: false, concurrency: 4, allowEmpty: new Set() };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--metric") out.metric = argv[++i];
@@ -52,6 +55,11 @@ function parseArgs(): Args {
     else if (a === "--since") out.since = argv[++i];
     else if (a === "--dry-run") out.dryRun = true;
     else if (a === "--concurrency") out.concurrency = Number(argv[++i]);
+    else if (a === "--allow-empty") {
+      for (const k of (argv[++i] ?? "").split(",").map((x) => x.trim()).filter(Boolean)) {
+        out.allowEmpty.add(k);
+      }
+    }
   }
   return out;
 }
@@ -327,23 +335,57 @@ function shapeForCity(config: MetricConfig, values: EstatValue[]) {
   return { metricKey: config.key, entityKind: "city" as const, rows, meta: buildMeta(rows) };
 }
 
+type ProcessStatus = "ok" | "fail" | "skip" | "empty" | "empty-allowed";
+
 interface ProcessResult {
   key: string;
   ok: boolean;
+  /**
+   * 明示的な結果種別。
+   *
+   * 旧実装は `result.message.includes("skipped")` の文字列一致で skip を判定しており
+   * (文言を変えると静かに壊れる)、さらに「0 件」を表す種別が無かったため
+   * rows=0 が ok に紛れて exit code に一切現れなかった (2026-07-29 の 6 件事故)。
+   */
+  status: ProcessStatus;
   message: string;
   rows?: number;
+  /** 空だった artifact の説明 (ログ用) */
+  emptyNotes?: string[];
+}
+
+/**
+ * 公開済み R2 の同 artifact の rowCount を読む (0 件になったときだけ呼ぶ)。
+ *
+ * 「既存データを空で潰す」= regression を判定するためだけの照会なので、空は稀 =
+ * 全体コストは無視できる。R2_PUBLIC_FETCH_URL は data-refresh.yml の env に既にある。
+ * 取得できない (未設定 / 404 / ネットワーク断) 場合は null を返し、
+ * regression ではなく first-empty として扱わせる (誤って「破壊」と誇張しない)。
+ */
+async function readPublishedRowCount(key: string, artifact: string): Promise<number | null> {
+  const base = process.env.R2_PUBLIC_FETCH_URL;
+  if (!base) return null;
+  try {
+    const res = await fetch(`${base}/app/stats/${key}/${artifact}`);
+    if (!res.ok) return null;
+    const json = (await res.json()) as { meta?: { rowCount?: number }; rows?: unknown[] };
+    return json.meta?.rowCount ?? json.rows?.length ?? null;
+  } catch {
+    return null;
+  }
 }
 
 async function processOne(
   config: MetricConfig,
   appId: string,
   dryRun: boolean,
+  allowEmpty: ReadonlySet<string> = new Set(),
 ): Promise<ProcessResult> {
   if (config.source.kind === "calculated") {
-    return { key: config.key, ok: false, message: "calculated metric skipped (deps required)" };
+    return { key: config.key, ok: false, status: "skip", message: "calculated metric skipped (deps required)" };
   }
   if (config.source.kind === "external" || config.source.kind === "mlit") {
-    return { key: config.key, ok: false, message: `${config.source.kind} source skipped (fetcher not implemented yet)` };
+    return { key: config.key, ok: false, status: "skip", message: `${config.source.kind} source skipped (fetcher not implemented yet)` };
   }
   // kakei-chousa は e-Stat API の通常テーブル (statsDataId + cdCat01/cdCat02 filter)。
   // filter に格納されたパラメータを estat source と同形に写して同一経路で fetch する。
@@ -355,7 +397,7 @@ async function processOne(
       cdCat02?: string;
     };
     if (!filter.statsDataId) {
-      return { key: config.key, ok: false, message: "kakei-chousa missing filter.statsDataId skipped" };
+      return { key: config.key, ok: false, status: "skip", message: "kakei-chousa missing filter.statsDataId skipped" };
     }
     src = {
       kind: "estat",
@@ -369,18 +411,60 @@ async function processOne(
   const wantPref = config.entities.includes("prefecture");
   const wantCity = config.entities.includes("city");
   if (!wantPref && !wantCity) {
-    return { key: config.key, ok: false, message: "no prefecture/city entity skipped (port/migration not in scope)" };
+    return { key: config.key, ok: false, status: "skip", message: "no prefecture/city entity skipped (port/migration not in scope)" };
   }
 
   try {
     const notes: string[] = [];
+    const emptyNotes: string[] = [];
     let totalRows = 0;
+    let hardEmpty = false;
+    let softEmpty = false;
+
+    /**
+     * 0 件の artifact を判定し、書いてよいかを返す。
+     *
+     * ★rows=0 のとき **書かない**のが要点。書かなければ diff-push-r2 は .local/r2 を
+     * walk するだけなので R2 の既存データが自動的に温存される (データ破壊の防止)。
+     * artifact 単位で判定するのは、pref=0 / city=1900 のような部分欠落が
+     * 合算値では素通りするため (旧実装の totalRows はこれを見逃した)。
+     */
+    async function gateEmpty(
+      entity: "prefecture" | "city",
+      rawCount: number,
+      rowCount: number,
+      artifact: string,
+    ): Promise<boolean> {
+      if (rowCount > 0) {
+        // allowlist に残っているのに復活した場合を知らせる (fatal にはしない)
+        const revived = classifyEmptyOutcome({
+          key: config.key, entity, rawCount, rowCount, priorRowCount: null, now: new Date(),
+        });
+        if (revived.outcome === "stale-allowlist") console.warn(`  [stale-allowlist] ${revived.message}`);
+        return true;
+      }
+      const priorRowCount = await readPublishedRowCount(config.key, artifact);
+      const verdict = classifyEmptyOutcome({
+        key: config.key, entity, rawCount, rowCount,
+        priorRowCount, now: new Date(), cliAllowed: allowEmpty,
+      });
+      if (verdict.isError) {
+        hardEmpty = true;
+        console.error(`  [empty] ${verdict.message}`);
+      } else {
+        softEmpty = true;
+        console.warn(`  [empty:allowed] ${verdict.message}`);
+      }
+      emptyNotes.push(`${entity}:${verdict.outcome}`);
+      return false; // 0 件は書かない (既存データを温存する)
+    }
 
     if (wantPref) {
       const raw = await fetchEstatData(appId, src);
       const values = config.source.kind === "kakei-chousa" ? remapKakeiAreas(raw) : raw;
       const payload = shapeForPrefecture(config, values);
-      if (!dryRun) {
+      const writable = await gateEmpty("prefecture", values.length, payload.rows.length, "values.json");
+      if (!dryRun && writable) {
         const outPath = resolve(R2_LOCAL, `app/stats/${config.key}/values.json`);
         mkdirSync(dirname(outPath), { recursive: true });
         writeFileSync(outPath, JSON.stringify(payload));
@@ -396,7 +480,8 @@ async function processOne(
       } else {
         const values = await fetchEstatData(appId, { ...src, statsDataId: cityStatsDataId });
         const payload = shapeForCity(config, values);
-        if (!dryRun) {
+        const writable = await gateEmpty("city", values.length, payload.rows.length, "cities.json");
+        if (!dryRun && writable) {
           const outPath = resolve(R2_LOCAL, `app/stats/${config.key}/cities.json`);
           mkdirSync(dirname(outPath), { recursive: true });
           writeFileSync(outPath, JSON.stringify(payload));
@@ -406,14 +491,17 @@ async function processOne(
       }
     }
 
+    const status: ProcessStatus = hardEmpty ? "empty" : softEmpty ? "empty-allowed" : "ok";
     return {
       key: config.key,
-      ok: true,
+      ok: status !== "empty",
+      status,
       message: `${dryRun ? "would write" : "wrote"} ${notes.join(",")}`,
       rows: totalRows,
+      ...(emptyNotes.length > 0 ? { emptyNotes } : {}),
     };
   } catch (e) {
-    return { key: config.key, ok: false, message: (e as Error).message };
+    return { key: config.key, ok: false, status: "fail", message: (e as Error).message };
   }
 }
 
@@ -458,7 +546,10 @@ async function main() {
   let ok = 0;
   let fail = 0;
   let skip = 0;
+  let empty = 0;
+  let emptyAllowed = 0;
   const failedKeys: string[] = [];
+  const emptyKeys: string[] = [];
 
   // concurrency-limited execution
   const queue = [...targets];
@@ -466,24 +557,41 @@ async function main() {
     while (queue.length > 0) {
       const c = queue.shift();
       if (!c) break;
-      const result = await processOne(c, appId, false);
-      if (result.ok) {
-        ok++;
-        if (ok % 20 === 0) console.log(`  ok=${ok} fail=${fail} skip=${skip} remaining=${queue.length}`);
-      } else if (result.message.includes("skipped")) {
-        skip++;
-      } else {
-        fail++;
-        failedKeys.push(result.key);
-        console.error(`  [fail] ${result.key}: ${result.message}`);
+      const result = await processOne(c, appId, false, args.allowEmpty);
+      // status で分岐する (旧実装の message.includes("skipped") は文言依存で脆く、
+      // かつ 0 件を表す種別が無いため rows=0 が ok に紛れ込んでいた)
+      switch (result.status) {
+        case "ok":
+          ok++;
+          if (ok % 20 === 0) console.log(`  ok=${ok} fail=${fail} skip=${skip} empty=${empty} remaining=${queue.length}`);
+          break;
+        case "empty-allowed":
+          emptyAllowed++;
+          break;
+        case "empty":
+          empty++;
+          emptyKeys.push(result.key);
+          break;
+        case "skip":
+          skip++;
+          break;
+        default:
+          fail++;
+          failedKeys.push(result.key);
+          console.error(`  [fail] ${result.key}: ${result.message}`);
       }
     }
   });
   await Promise.all(workers);
 
-  console.log(`\n[done] ok=${ok}, fail=${fail}, skip=${skip}`);
+  console.log(
+    `\n[done] ok=${ok}, fail=${fail}, skip=${skip}, empty=${empty}, empty-allowed=${emptyAllowed}`,
+  );
   if (failedKeys.length > 0) {
     console.log(`[done] failed keys (${failedKeys.length}): ${failedKeys.join(", ")}`);
+  }
+  if (emptyKeys.length > 0) {
+    console.log(`[done] empty keys (${emptyKeys.length}): ${emptyKeys.join(", ")}`);
   }
   console.log(
     `Next: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats`,
@@ -497,6 +605,17 @@ async function main() {
   if (isExplicitMetric && fail > 0) {
     console.error(
       `[fatal] --metric 指定実行で ${fail} 件失敗しました (復旧対象キーが未完了です)`,
+    );
+    process.exit(1);
+  }
+  // 観測値 0 件の再発防止 (2026-07-29 障害): rows=0 は fail と違い「恒常的に少数出る」性質の
+  // ものではないため、比率閾値で薄めず 1 件でも exit 1 にする。0 件の artifact は書いていない
+  // ので R2 の旧データは温存されており、exit 1 により push / 派生生成も走らない。
+  if (empty > 0) {
+    console.error(
+      `[fatal] 観測値が 0 件の metric が ${empty} 件あります: ${emptyKeys.join(", ")}\n` +
+        `        意図した 0 件なら packages/data-configs/src/expected-empty.ts の EXPECTED_EMPTY に` +
+        ` 理由・追跡先・期限を添えて登録してください (一回きりの検証は --allow-empty <keys>)`,
     );
     process.exit(1);
   }

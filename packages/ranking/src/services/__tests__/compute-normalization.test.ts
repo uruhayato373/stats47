@@ -50,11 +50,13 @@ const baseItem: RankingItem = {
         unit: "件/10万人",
         scaleFactor: 100000,
       },
+      // 実 config と同じ契約: 分母は km² 前提・scaleFactor 100 で「100km² あたり」
+      // (registry の per_area 1,619 件はすべてこの形。テスト用に別の値を置かないこと)
       {
         type: "per_area",
-        label: "面積1km²あたり",
-        unit: "件/km²",
-        scaleFactor: 1,
+        label: "面積100km²あたり",
+        unit: "件/100km²",
+        scaleFactor: 100,
       },
     ],
   },
@@ -99,13 +101,19 @@ describe("computeNormalization", () => {
   });
 
   describe("per_area 正常系", () => {
+    /**
+     * 分母 total-area-... の R2 値は **100km² 単位** (unit「１００Ｋm2」)。
+     * これを km² に直してから scaleFactor(100) を掛けるので、結果は「分子 / 分母の生値」に一致する。
+     *   100 / (50 × 100) × 100 = 2
+     * 換算を忘れると 100 / 50 × 100 = 200 (100 倍過大) になる。
+     */
     it("面積データで正規化し正しい値が返ること", async () => {
       vi.mocked(listRankingValues).mockImplementation(
         async (key: string) => {
           if (key === "crime-count")
             return { success: true, data: [makeValue("01000",100)] };
           if (key === "total-area-including-northern-territories-and-takeshima")
-            return { success: true, data: [makeValue("01000",50)] };
+            return { success: true, data: [makeValue("01000",50)] }; // 50 = 5,000km²
           return { success: true, data: [] };
         }
       );
@@ -113,8 +121,67 @@ describe("computeNormalization", () => {
       const result = await computeNormalization(baseItem, "2020", "per_area");
 
       expect(result).toHaveLength(1);
-      expect(result[0].value).toBeCloseTo(2); // 100/50 * 1
-      expect(result[0].unit).toBe("件/km²");
+      expect(result[0].value).toBeCloseTo(2);
+      expect(result[0].unit).toBe("件/100km²");
+    });
+
+    /**
+     * 回帰ガード (2026-07-29): 実データの人口密度が現実的な範囲に収まること。
+     *
+     * 分母を 100km² 単位のまま割ると値が 100 倍になり、東京が 6,143 人/km² ではなく
+     * 614,330 人/km² (地球上に存在しない密度) になる。実測値で固定して再発を止める。
+     */
+    it("実データの人口密度が現実的な範囲に収まること (100倍バグの回帰ガード)", async () => {
+      // 2015 国勢調査ベースの実測値 (R2 app/ranking/*/values.json より)
+      const POPULATION = { "13000": 13_515_271, "01000": 5_381_733 };
+      const AREA_100KM2 = { "13000": 22, "01000": 834.21 };
+
+      const populationItem: RankingItem = {
+        ...baseItem,
+        rankingKey: "total-population",
+        unit: "人",
+        calculation: {
+          isCalculated: false,
+          normalizationOptions: [
+            {
+              type: "per_area",
+              label: "面積100km²あたり",
+              unit: "人/100km²",
+              scaleFactor: 100,
+            },
+          ],
+        },
+      };
+
+      vi.mocked(listRankingValues).mockImplementation(async (key: string) => {
+        if (key === "total-population")
+          return {
+            success: true,
+            data: Object.entries(POPULATION).map(([code, v]) => makeValue(code, v)),
+          };
+        if (key === "total-area-including-northern-territories-and-takeshima")
+          return {
+            success: true,
+            data: Object.entries(AREA_100KM2).map(([code, v]) => makeValue(code, v)),
+          };
+        return { success: true, data: [] };
+      });
+
+      const result = await computeNormalization(populationItem, "2015", "per_area");
+      const per100km2 = Object.fromEntries(result.map((r) => [r.areaCode, r.value as number]));
+
+      // 東京 ≒ 614,331 人/100km² (= 6,143 人/km²)
+      expect(per100km2["13000"]).toBeCloseTo(614_330.5, 0);
+      // 北海道 ≒ 6,451 人/100km² (= 64.5 人/km²)
+      expect(per100km2["01000"]).toBeCloseTo(6_451.3, 0);
+
+      // 1km² あたりに直したとき、現実の都道府県人口密度の範囲に入ること。
+      // 100 倍バグでは東京が 614,330 人/km² になりここで落ちる。
+      for (const [code, expected] of [["13000", [4_000, 8_000]], ["01000", [40, 100]]] as const) {
+        const perKm2 = per100km2[code] / 100;
+        expect(perKm2).toBeGreaterThan(expected[0]);
+        expect(perKm2).toBeLessThan(expected[1]);
+      }
     });
   });
 

@@ -97,6 +97,46 @@ export function rankingNormalizedValuesKeyPath(
   return `app/ranking/${encodeURIComponent(rankingKey)}/values-${suffix}.json`;
 }
 
+/** 全国時系列の基準 (original = 素の値 / per_* = 正規化後) */
+export type NationalTrendBasis = "original" | "per_population" | "per_area";
+
+export interface NationalTrendPoint {
+  yearCode: string;
+  yearName: string;
+  /** 47 県の単純算術平均 (areaCode "00000" と null を除外) */
+  average: number;
+  /** 47 県の合計 */
+  total: number;
+  /** 平均・合計の母数となった有効値の件数 */
+  count: number;
+}
+
+export interface NationalTrendSeries {
+  basis: NationalTrendBasis;
+  /** UI 表示用ラベル (例「面積100km²あたり」) */
+  label: string;
+  unit: string;
+  /** 年降順 */
+  points: NationalTrendPoint[];
+}
+
+/**
+ * 全国時系列スナップショット (1 file = 1 ranking key、基準ごとの series を含む)。
+ *
+ * ランキング詳細ページが「全国平均の推移」を単一 fetch で描くための事前計算データ。
+ * 各年の値はクライアント計算 (RankingHeroCard の単年集計) と同じ定義に揃えてある。
+ */
+export interface RankingNationalTrendSnapshot {
+  generatedAt: string;
+  rankingKey: string;
+  areaType: string;
+  series: NationalTrendSeries[];
+}
+
+export function rankingNationalTrendPath(rankingKey: string): string {
+  return `app/ranking/${encodeURIComponent(rankingKey)}/national-trend.json`;
+}
+
 /**
  * 事前生成済みダウンロードファイルの R2 キーパスを返す。
  *

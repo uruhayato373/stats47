@@ -21,6 +21,17 @@
  *                             HOME_FEATURED_PROMINENCE の定義数以上か
  *   (e) per-URL 件数下限    — `app/survey/all.json` / 17 category の `items.json` が
  *                             極端に少なくないか (絶対フロア + 前回実行比のドリフト検知)
+ *   (f) 正規化 snapshot 実在 — normalizationOptions を持つキーで
+ *                             `values-per-*.json` / `national-trend.json` が 200 か
+ *   (g) 正規化 値域         — fixture ゲート (lib/normalized-fixtures.ts) の期待レンジに入るか
+ *   (h) 正規化 鮮度         — 相対 (values.json との generatedAt 差) と絶対 (現在時刻との差) の
+ *                             2 軸。相対だけだと values.json ごと凍結したキーを見逃す
+ *   (i) 正典 app/stats      — active キーの `app/stats/<key>/values.json` が実在し rowCount>0 か。
+ *                             前回比 rowCount ドリフト (部分崩壊) も見る
+ *
+ * (f)(g)(h) は 2026-07-29 の障害 (values-per-area.json が 100 倍過大な値のまま 2 ヶ月配信) の
+ * 再発検知。件数チェックだけでは「値が桁違い」も「writer 不在で凍結」も捕まえられなかった。
+ * (g) の期待レンジは writer (generate-ranking-normalized-values.ts) と**同一の定義**を import する。
  *
  * enumeration source: active キー一覧は `app/ranking-items/all.json` を使う
  * (KNOWN_RANKING_KEYS を cross-package import するより単純で、これは本番配信の実体
@@ -36,9 +47,13 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 
+import { findExpectedEmpty } from "@stats47/data-configs";
+// HOME_FEATURED_RANKINGS は掲載価値スコアへの一元化で廃止。注目 8 件は生成物が持つ。
 import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
 
 import surveysMaster from "../data/surveys.json";
+
+import { checkFixtureGates, type FixtureViolation } from "./lib/normalized-fixtures";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 
@@ -69,6 +84,27 @@ const CATEGORY_KEYS = [
 // の 2 段構えにする。初回実行時は baseline が無いので絶対フロアのみ適用する。
 const DRIFT_RATIO_THRESHOLD = 0.5;
 
+/**
+ * values.json と正規化 snapshot の generatedAt 差の許容日数。
+ * sync-snapshots は週次なので 8 日あれば正常運用では絶対に超えない。
+ * writer が止まると (2026-07-29 の 2 ヶ月 stale) 必ず超える。
+ */
+const NORMALIZED_STALE_DAYS = 8;
+
+/**
+ * 正規化 snapshot の **絶対鮮度** の上限日数 (現在時刻との差)。
+ *
+ * NORMALIZED_STALE_DAYS は values.json との**相対**比較なので、values.json 自身も同時に
+ * 凍結していると素通りする (2026-07-29 実測: inpatient-rate-per-100k は values.json 05-22 /
+ * 正規化 05-21 で 1 日差のため検知できず、100 倍の誤値が残っていた)。
+ * writer は sync-snapshots のたびに全 target を上書きするので、正常運用なら 30 日を超えない。
+ * 「writer が動かなくなった」ものを相対比較の死角なしに捕まえる。
+ */
+const NORMALIZED_ABSOLUTE_STALE_DAYS = 30;
+
+const NORM_TYPES = ["per_population", "per_area"] as const;
+type NormType = (typeof NORM_TYPES)[number];
+
 interface ItemJson {
   item?: {
     latestYear?: { yearCode?: string };
@@ -77,7 +113,21 @@ interface ItemJson {
 }
 
 interface ValuesJson {
-  partitions?: Array<{ yearCode?: string }>;
+  generatedAt?: string;
+  partitions?: Array<{
+    yearCode?: string;
+    values?: Array<{ areaCode?: string; value?: number | null }>;
+  }>;
+}
+
+interface StatsValuesJson {
+  meta?: { rowCount?: number };
+  rows?: unknown[];
+}
+
+interface NationalTrendJson {
+  generatedAt?: string;
+  series?: Array<{ basis?: string; points?: unknown[] }>;
 }
 
 interface RankingItemsAll {
@@ -86,13 +136,68 @@ interface RankingItemsAll {
     rankingKey: string;
     isActive?: boolean;
     latestYear?: { yearCode?: string };
+    calculation?: {
+      normalizationOptions?: Array<{ type?: string }>;
+    };
   }>;
+}
+
+/** 正規化系 (f)(g)(h) の検査結果 */
+interface NormalizedChecks {
+  /** normalizationOptions を持つ active キー数 */
+  expectedKeys: number;
+  /** normType ごとの「宣言している / 実在する」件数 */
+  perType: Record<string, { declared: number; present: number }>;
+  /** national-trend.json が実在するキー数 */
+  trendPresent: number;
+  /** 欠落 (宣言しているのに 200 でない) */
+  missing: Array<{ key: string; artifact: string }>;
+  /** 鮮度違反。kind="relative" = values.json との差 / "absolute" = 現在時刻との差 */
+  stale: Array<{ key: string; artifact: string; ageDays: number; kind: "relative" | "absolute" }>;
+  /** 値域違反 */
+  fixtureViolations: FixtureViolation[];
+  /**
+   * EXPECTED_EMPTY 済みキー由来の欠落/stale。**違反にしない**。
+   *
+   * 正典 app/stats が空なら writer は正しく生成をスキップするので、正規化 snapshot が
+   * 無い/古いのは (i) で追跡済みの既知課題の**結果**であって独立した問題ではない。
+   * これを違反に数えると根本データが直るまで監査が永久に赤くなり、
+   * 「赤いのが常態」になって新しい問題が埋もれる (本ゲート群が防ごうとしている失敗そのもの)。
+   */
+  expectedSkipped: string[];
+  ok: boolean;
+}
+
+/**
+ * (i) 正典 `app/stats/<key>/values.json` の検査結果。
+ *
+ * 2026-07-29 実測: active 2,179 件のうち 6 件が rowCount:0 のまま本番公開されていた。
+ * 配信側 `app/ranking/<key>/values.json` には旧データが残るためページは正常に見え、
+ * (a)-(h) のどれも検知できなかった (すべて app/ranking しか見ていないため)。
+ */
+interface StatsChecks {
+  checked: number;
+  /** app/stats が 404 */
+  missing: string[];
+  /** rowCount 0 (allowlist 未登録のもののみ) */
+  empty: string[];
+  /** rowCount 0 だが EXPECTED_EMPTY で許可済み */
+  emptyAllowed: string[];
+  /** 前回比で rowCount が閾値未満に急減 (部分崩壊。0 件検査では捕まらない) */
+  drift: Array<{ key: string; count: number; previous: number }>;
+  /** ネットワーク断等で判定不能 (違反にはしない) */
+  unreachable: number;
+  /** 次回のドリフト判定 baseline (key → rowCount) */
+  rowCounts?: Record<string, number>;
+  ok: boolean;
 }
 
 interface CountSnapshot {
   home: number;
   survey: number;
   categories: Record<string, number>;
+  /** (i) の前回比ドリフト用 */
+  statsRowCounts: Record<string, number>;
 }
 
 interface AuditReport {
@@ -115,7 +220,42 @@ interface AuditReport {
       { count: number; ok: boolean; driftOk: boolean; previous?: number }
     >;
   };
+  normalized: NormalizedChecks;
+  stats: StatsChecks;
   ok: boolean;
+}
+
+/**
+ * 正規化 artifact の鮮度を 2 軸で検査する。
+ * - relative: values.json との差 (writer だけ止まったケース)
+ * - absolute: 現在時刻との差 (values.json ごと凍結したケース = 相対比較の死角)
+ */
+function checkFreshness(
+  key: string,
+  artifact: string,
+  baseGeneratedAt: string | undefined,
+  artifactGeneratedAt: string | undefined,
+  now: number,
+): NormalizedChecks["stale"] {
+  const out: NormalizedChecks["stale"] = [];
+  const rel = ageInDays(baseGeneratedAt, artifactGeneratedAt);
+  if (rel !== null && rel > NORMALIZED_STALE_DAYS) {
+    out.push({ key, artifact, ageDays: Math.round(rel), kind: "relative" });
+  }
+  const abs = artifactGeneratedAt ? (now - Date.parse(artifactGeneratedAt)) / 86_400_000 : null;
+  if (abs !== null && Number.isFinite(abs) && abs > NORMALIZED_ABSOLUTE_STALE_DAYS) {
+    out.push({ key, artifact, ageDays: Math.round(abs), kind: "absolute" });
+  }
+  return out;
+}
+
+/** 2 つの ISO 日時の差 (日) を返す。パース不能なら null */
+function ageInDays(a: string | undefined, b: string | undefined): number | null {
+  if (!a || !b) return null;
+  const ta = Date.parse(a);
+  const tb = Date.parse(b);
+  if (!Number.isFinite(ta) || !Number.isFinite(tb)) return null;
+  return Math.abs(ta - tb) / 86_400_000;
 }
 
 // ---- プロキシ対応 fetch (ローカル企業ネットワーク越しの実行を許容する) ----
@@ -187,7 +327,12 @@ function loadPreviousSnapshot(jsonOutPath: string | undefined): CountSnapshot | 
     for (const [key, v] of Object.entries(prev.countChecks?.categories ?? {})) {
       categories[key] = v.count;
     }
-    return { home: prev.countChecks?.home?.count ?? 0, survey: prev.countChecks?.survey?.count ?? 0, categories };
+    return {
+      home: prev.countChecks?.home?.count ?? 0,
+      survey: prev.countChecks?.survey?.count ?? 0,
+      categories,
+      statsRowCounts: prev.stats?.rowCounts ?? {},
+    };
   } catch {
     return null;
   }
@@ -201,6 +346,7 @@ async function main() {
   const concurrency = concIdx >= 0 ? Number(args[concIdx + 1]) : 25;
 
   const previous = loadPreviousSnapshot(jsonOutPath);
+  const now = Date.now();
 
   console.log(`# ranking データ整合性 監査 (${new Date().toISOString()})`);
   console.log(`R2 base: ${R2_BASE}\n`);
@@ -219,19 +365,66 @@ async function main() {
   const valuesMissing: string[] = [];
   const yearMismatch: Array<{ key: string; itemYear: string | undefined; valuesYears: string[] }> = [];
 
+  // (i) 正典 app/stats の集計器
+  const stats: StatsChecks = {
+    checked: 0, missing: [], empty: [], emptyAllowed: [], drift: [], unreachable: 0, ok: true,
+  };
+  const statsRowCounts: Record<string, number> = {};
+  const auditNow = new Date();
+
+  // (f)(g)(h) 正規化系の集計器
+  const normalized: NormalizedChecks = {
+    expectedKeys: 0,
+    perType: Object.fromEntries(NORM_TYPES.map((t) => [t, { declared: 0, present: 0 }])),
+    trendPresent: 0,
+    missing: [],
+    stale: [],
+    fixtureViolations: [],
+    expectedSkipped: [],
+    ok: true,
+  };
+
   await mapPool(activeItems, concurrency, async (entry) => {
     const key = entry.rankingKey;
-    const [itemRes, valuesRes] = await Promise.all([
+    const declaredTypes = (entry.calculation?.normalizationOptions ?? [])
+      .map((o) => o.type)
+      .filter((t): t is NormType => (NORM_TYPES as readonly string[]).includes(t ?? ""));
+
+    const [itemRes, valuesRes, statsRes] = await Promise.all([
       fetchJson<ItemJson>(`app/ranking/${key}/item.json`),
       fetchJson<ValuesJson>(`app/ranking/${key}/values.json`),
+      fetchJson<StatsValuesJson>(`app/stats/${key}/values.json`),
     ]);
+
+    // --- (i) 正典 app/stats ---
+    // 配信側 (app/ranking) が 200 でも正典が空なら「更新できないページ」なので、
+    // values.json の有無に関わらず先に判定する。
+    if (statsRes.status === 0) {
+      stats.unreachable++; // network 断は違反にしない (fetchJson が 404 と区別している意図を活かす)
+    } else if (statsRes.status === 404) {
+      stats.checked++;
+      stats.missing.push(key);
+    } else {
+      stats.checked++;
+      const rowCount = statsRes.body?.meta?.rowCount ?? statsRes.body?.rows?.length ?? 0;
+      statsRowCounts[key] = rowCount;
+      if (rowCount === 0) {
+        if (findExpectedEmpty(key, "prefecture", auditNow)) stats.emptyAllowed.push(key);
+        else stats.empty.push(key);
+      } else {
+        const prev = previous?.statsRowCounts?.[key];
+        if (prev !== undefined && prev > 0 && rowCount < prev * DRIFT_RATIO_THRESHOLD) {
+          stats.drift.push({ key, count: rowCount, previous: prev });
+        }
+      }
+    }
 
     if (itemRes.status !== 200 || !itemRes.body) {
       itemMissing.push(key);
     }
     if (valuesRes.status !== 200 || !valuesRes.body) {
       valuesMissing.push(key);
-      return; // values が無ければ年整合は判定不能
+      return; // values が無ければ年整合も正規化検査も判定不能
     }
     const itemYear = itemRes.body?.item?.latestYear?.yearCode;
     const valuesYears = [
@@ -240,7 +433,73 @@ async function main() {
     if (itemYear && valuesYears.length > 0 && !valuesYears.includes(itemYear)) {
       yearMismatch.push({ key, itemYear, valuesYears });
     }
+
+    // --- (f)(g)(h) 正規化 snapshot ---
+    if (declaredTypes.length === 0) return;
+    // 正典が空と分かっているキーは writer が正しくスキップするため、欠落/stale を違反にしない
+    if (findExpectedEmpty(key, "prefecture", auditNow)) {
+      normalized.expectedSkipped.push(key);
+      return;
+    }
+    normalized.expectedKeys++;
+    const baseGeneratedAt = valuesRes.body.generatedAt;
+
+    const [trendRes, ...normRes] = await Promise.all([
+      fetchJson<NationalTrendJson>(`app/ranking/${key}/national-trend.json`),
+      ...declaredTypes.map((t) =>
+        fetchJson<ValuesJson>(`app/ranking/${key}/values-${t.replace(/_/g, "-")}.json`),
+      ),
+    ]);
+
+    if (trendRes.status === 200 && (trendRes.body?.series?.length ?? 0) > 0) {
+      normalized.trendPresent++;
+      normalized.stale.push(
+        ...checkFreshness(key, "national-trend.json", baseGeneratedAt, trendRes.body?.generatedAt, now),
+      );
+    } else {
+      normalized.missing.push({ key, artifact: "national-trend.json" });
+    }
+
+    declaredTypes.forEach((normType, i) => {
+      normalized.perType[normType].declared++;
+      const res = normRes[i];
+      const artifact = `values-${normType.replace(/_/g, "-")}.json`;
+
+      if (res.status !== 200 || !res.body || (res.body.partitions?.length ?? 0) === 0) {
+        normalized.missing.push({ key, artifact });
+        return;
+      }
+      normalized.perType[normType].present++;
+
+      normalized.stale.push(
+        ...checkFreshness(key, artifact, baseGeneratedAt, res.body.generatedAt, now),
+      );
+
+      // (g) 値域: 最新年 partition を fixture ゲートにかける
+      const latest = res.body.partitions?.[0];
+      if (latest) {
+        const valuesByAreaCode = new Map<string, number | null>(
+          (latest.values ?? []).map((v) => [v.areaCode ?? "", v.value ?? null]),
+        );
+        normalized.fixtureViolations.push(
+          ...checkFixtureGates({
+            rankingKey: key,
+            normType,
+            yearCode: latest.yearCode ?? "",
+            valuesByAreaCode,
+          }),
+        );
+      }
+    });
   });
+
+  stats.ok =
+    stats.missing.length === 0 && stats.empty.length === 0 && stats.drift.length === 0;
+
+  normalized.ok =
+    normalized.missing.length === 0 &&
+    normalized.stale.length === 0 &&
+    normalized.fixtureViolations.length === 0;
 
   // --- (d) home featured ---
   const homeRes = await fetchJson<{ count: number }>("app/home/featured.json");
@@ -290,11 +549,15 @@ async function main() {
       survey: { count: surveyCount, expectedFloor: surveyFloor, ok: surveyAbsOk, driftOk: surveyDriftOk },
       categories: categoryChecks,
     },
+    normalized,
+    stats: { ...stats, rowCounts: statsRowCounts },
     ok:
       itemMissing.length === 0 &&
       valuesMissing.length === 0 &&
       yearMismatch.length === 0 &&
-      countChecksOk,
+      countChecksOk &&
+      normalized.ok &&
+      stats.ok,
   };
 
   // ---- レポート出力 ----
@@ -325,6 +588,53 @@ async function main() {
   for (const [key, c] of Object.entries(categoryChecks)) {
     const prevStr = c.previous !== undefined ? ` prev=${c.previous}` : "";
     console.log(`  category/${key}: count=${c.count}${prevStr} ${c.ok && c.driftOk ? "✓" : "✗"}`);
+  }
+
+  console.log(`\n## (f)(g)(h) 正規化 snapshot (values-per-*.json / national-trend.json)`);
+  console.log(`  対象キー (normalizationOptions 保持): ${normalized.expectedKeys} 件`);
+  for (const [type, c] of Object.entries(normalized.perType)) {
+    console.log(`    ${type}: 宣言 ${c.declared} / 実在 ${c.present}`);
+  }
+  console.log(`    national-trend: 実在 ${normalized.trendPresent}`);
+  if (normalized.expectedSkipped.length > 0) {
+    console.log(
+      `  (EXPECTED_EMPTY のため検査対象外: ${normalized.expectedSkipped.length} 件 — ${normalized.expectedSkipped.join(", ")})`,
+    );
+  }
+  console.log(`  (f) 欠落: ${normalized.missing.length} 件`);
+  for (const m of normalized.missing.slice(0, 10)) console.log(`      ${m.key} / ${m.artifact}`);
+  if (normalized.missing.length > 10)
+    console.log(`      … 他 ${normalized.missing.length - 10} 件 (--json で全件)`);
+  console.log(
+    `  (g) 値域違反: ${normalized.fixtureViolations.length} 件 (期待レンジは lib/normalized-fixtures.ts)`,
+  );
+  for (const v of normalized.fixtureViolations.slice(0, 10)) console.log(`      ${v.message}`);
+  const staleRel = normalized.stale.filter((s) => s.kind === "relative").length;
+  const staleAbs = normalized.stale.filter((s) => s.kind === "absolute").length;
+  console.log(
+    `  (h) 鮮度違反: ${normalized.stale.length} 件 ` +
+      `(relative>${NORMALIZED_STALE_DAYS}日=${staleRel} / absolute>${NORMALIZED_ABSOLUTE_STALE_DAYS}日=${staleAbs})`,
+  );
+  for (const s of normalized.stale.slice(0, 10))
+    console.log(`      ${s.key} / ${s.artifact} (${s.kind} ${s.ageDays} 日)`);
+  if (normalized.stale.length > 10)
+    console.log(`      … 他 ${normalized.stale.length - 10} 件 (--json で全件)`);
+
+  console.log(`\n## (i) 正典 app/stats/<key>/values.json`);
+  console.log(`  検査: ${stats.checked} 件 (取得不能 ${stats.unreachable} 件は判定対象外)`);
+  console.log(`  404 欠落: ${stats.missing.length} 件`);
+  for (const k of stats.missing.slice(0, 10)) console.log(`      ${k}`);
+  console.log(`  rowCount 0 (未許可): ${stats.empty.length} 件 ← 公開中だが更新不能`);
+  for (const k of stats.empty.slice(0, 10)) console.log(`      ${k}`);
+  console.log(`  rowCount 0 (EXPECTED_EMPTY 許可済): ${stats.emptyAllowed.length} 件`);
+  for (const k of stats.emptyAllowed.slice(0, 10)) console.log(`      ${k}`);
+  console.log(`  前回比ドリフト (< ${DRIFT_RATIO_THRESHOLD}): ${stats.drift.length} 件`);
+  for (const d of stats.drift.slice(0, 10)) console.log(`      ${d.key}: ${d.previous} → ${d.count}`);
+  if (stats.empty.length > 0 || stats.missing.length > 0) {
+    console.log(
+      `  → 是正: config の statsDataId / cdCat01 を e-Stat メタで再確認し再取り込み。` +
+        `意図した 0 件なら packages/data-configs/src/expected-empty.ts に理由・追跡先・期限を添えて登録`,
+    );
   }
 
   console.log(`\n## 総合判定: ${report.ok ? "✓ OK" : "✗ 違反あり"}`);

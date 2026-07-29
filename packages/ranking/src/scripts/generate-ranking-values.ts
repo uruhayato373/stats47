@@ -40,6 +40,7 @@ import {
   listAllMetrics,
   type MetricConfig,
   type YearSpec,
+  findExpectedEmpty,
 } from "@stats47/data-configs";
 import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
@@ -294,6 +295,18 @@ async function main(): Promise<void> {
   if (skipped.length > 0) {
     // 観測値が無いキーは「公開されているが空ページ」になる。監査で追えるよう一覧を出す
     console.log(`[values] no observations: ${skipped.map((o) => o.key).join(", ")}`);
+  }
+  // 沈黙させない (2026-07-29 障害): 旧実装は一覧を console.log するだけで exit code を
+  // 汚さなかったため、正典 app/stats が空になっても CI は緑のままだった。
+  // EXPECTED_EMPTY に理由・追跡先・期限つきで登録されたキーだけを許容する。
+  const unexpectedSkips = skipped.filter((o) => !findExpectedEmpty(o.key, AREA_TYPE, new Date()));
+  if (unexpectedSkips.length > 0) {
+    console.error(
+      `[values] ✗ 観測値が無い未登録キー ${unexpectedSkips.length} 件: ${unexpectedSkips.map((o) => o.key).join(", ")}\n` +
+        `        正典 app/stats/<key>/values.json を確認してください。意図した 0 件なら` +
+        ` packages/data-configs/src/expected-empty.ts の EXPECTED_EMPTY に登録します`,
+    );
+    process.exitCode = 1;
   }
   if (failed.length > 0) {
     for (const f of failed.slice(0, 20)) console.error(`  ✗ ${f.key}: ${f.error}`);
