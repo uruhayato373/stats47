@@ -44,6 +44,10 @@ const BASELINE = new Set([
   "DefinitionsCard",
   "FeaturedRankingCard",
   "KeyMetricsTableCard",
+  // 全国平均の推移カード。外枠・描画とも既存の共有部品 (ChartCard + MiniLineChart) を
+  // そのまま使う薄い wrapper で、新しいカード枠は定義していない。norm 切替に応じて
+  // national-trend.json の series を選ぶ feature 固有ロジックのみを持つ (2026-07-29)。
+  "NationalTrendCard",
   "KpiCard",
   "MultiStatCard",
   // OperatorPromoCard からプロフィール部だけ切り出した home 用省スペースカード

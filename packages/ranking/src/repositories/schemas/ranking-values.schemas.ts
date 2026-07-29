@@ -4,7 +4,7 @@ import { logger } from "@stats47/logger/server";
 import { z } from "zod";
 
 import type { RankingValue } from "../../types";
-import type { RankingValuesKeySnapshot } from "../../types/snapshot";
+import type { RankingNationalTrendSnapshot, RankingValuesKeySnapshot } from "../../types/snapshot";
 
 const AreaTypeSchema = z.enum(["national", "prefecture", "city", "port"]);
 
@@ -52,6 +52,42 @@ export function parseRankingValuesKeySnapshot(data: unknown): RankingValuesKeySn
       logger.error({ error: error.issues }, "ランキング値スナップショットのバリデーションエラー");
       const errorMessages = error.issues.map((e) => e.message).join(", ");
       throw new Error(`ランキング値スナップショットが不正です: ${errorMessages}`);
+    }
+    throw error;
+  }
+}
+
+/** 全国時系列 (app/ranking/<key>/national-trend.json) */
+export const NationalTrendSnapshotSchema = z.object({
+  generatedAt: z.string().min(1),
+  rankingKey: z.string().min(1),
+  areaType: z.string().min(1),
+  series: z.array(
+    z.object({
+      basis: z.enum(["original", "per_population", "per_area"]),
+      label: z.string(),
+      unit: z.string(),
+      points: z.array(
+        z.object({
+          yearCode: z.string().min(1),
+          yearName: z.string(),
+          average: z.number().finite(),
+          total: z.number().finite(),
+          count: z.number().int().nonnegative(),
+        }),
+      ),
+    }),
+  ),
+}).passthrough();
+
+export function parseNationalTrendSnapshot(data: unknown): RankingNationalTrendSnapshot {
+  try {
+    return NationalTrendSnapshotSchema.parse(data) as RankingNationalTrendSnapshot;
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      logger.error({ error: error.issues }, "全国時系列スナップショットのバリデーションエラー");
+      const errorMessages = error.issues.map((e) => e.message).join(", ");
+      throw new Error(`全国時系列スナップショットが不正です: ${errorMessages}`);
     }
     throw error;
   }

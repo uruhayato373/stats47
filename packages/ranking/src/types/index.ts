@@ -7,7 +7,14 @@ export * from "./ranking-thumbnail";
 export * from "./ranking-value";
 export {
   rankingDownloadKeyPath,
+  rankingNationalTrendPath,
   rankingNormalizedValuesKeyPath,
   rankingValuesKeyPath,
+} from "./snapshot";
+export type {
+  NationalTrendBasis,
+  NationalTrendPoint,
+  NationalTrendSeries,
+  RankingNationalTrendSnapshot,
 } from "./snapshot";
 export * from "./sync-ranking-result";
