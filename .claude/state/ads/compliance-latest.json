@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-28T22:39:16.361Z",
+  "generatedAt": "2026-07-29T22:39:50.433Z",
   "live": true,
-  "scanAllBlog": false,
+  "scanAllBlog": true,
   "structureIssues": [],
   "sizeWarnings": [
     {
