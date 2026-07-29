@@ -67,6 +67,49 @@ function normalizeBody(s) {
   return String(s).replace(/\r\n/g, "\n").replace(/[ \t]+$/gm, "").trim();
 }
 
+/** R2 に指定キーが存在するか (GET・200 のみ真) */
+async function existsInR2(slug, file) {
+  const url = `${R2_BASE}/app/blog/${encodeURIComponent(slug)}/${file}`;
+  try {
+    const res = await fetch(url, { method: "GET", signal: AbortSignal.timeout(8000) });
+    return res.status === 200;
+  } catch {
+    return false;
+  }
+}
+
+/** slug ディレクトリ配下のファイルを相対パスで列挙する (再帰)。 */
+function listLocalFiles(dirAbs, prefix = "") {
+  const out = [];
+  for (const e of readdirSync(dirAbs, { withFileTypes: true })) {
+    const rel = prefix ? `${prefix}/${e.name}` : e.name;
+    if (e.isDirectory()) out.push(...listLocalFiles(join(dirAbs, e.name), rel));
+    else out.push(rel);
+  }
+  return out;
+}
+
+/**
+ * ★安全装置 2 (2026-07-29 追加): **ローカルにあるファイルが全て R2 に載っているか**を確認する。
+ *
+ * なぜ要るか: これまで article.md の内容一致だけを見て `data/` ごと削除していた。
+ * publish は `cp -R` + `diff-push-r2` なので通常は全部載るが、**push が部分的に失敗しても
+ * article.md さえ一致すれば outbox を消してしまう**構造だった。元データ (data/*.json /
+ * *.source.json) はローカルにしか無いので、そうなると再生成も出典追跡も永久に不能になる。
+ * 2026-07 のタイルマップ再生成で 12 枚が復元不能だったのと同じ状態を、今後も静かに作りうる。
+ *
+ * 判定は「R2 に無いものが 1 つでもあれば消さない」。保持側の誤りは翌日また判定されるので無害、
+ * 削除側の誤りは不可逆なので保守側に倒す。
+ *
+ * @returns {Promise<string[]>} R2 に欠けている相対パス。空配列なら削除して安全。
+ */
+async function findMissingInR2(slug, slugDirAbs) {
+  const files = listLocalFiles(slugDirAbs).filter((f) => f !== "article.md");
+  if (files.length === 0) return [];
+  const present = await mapLimit(files, CONCURRENCY, (f) => existsInR2(slug, f));
+  return files.filter((_, i) => !present[i]);
+}
+
 /** git rm -r (tracked のみ除去)。失敗は throw */
 function gitRm(relDir) {
   execFileSync("git", ["rm", "-r", "-q", relDir], { cwd: PROJECT_ROOT, stdio: "pipe" });
@@ -126,16 +169,38 @@ async function main() {
         return { slug, relDir, action: "keep", reason: "published:true だが R2 未掲載/取得失敗 (公開処理中の可能性) → 保持" };
       }
       const local = readFileSync(articlePath, "utf8");
-      if (normalizeBody(local) === normalizeBody(r2)) {
-        return { slug, relDir, action: "rm", kind: "published-identical" };
+      if (normalizeBody(local) !== normalizeBody(r2)) {
+        return { slug, relDir, action: "keep", reason: "published:true だが R2 と内容差分 (改稿中/再公開待ち) → 保持" };
       }
-      return { slug, relDir, action: "keep", reason: "published:true だが R2 と内容差分 (改稿中/再公開待ち) → 保持" };
+      // ★安全装置 2: data/ 等が R2 に載っていることを確認してから消す (上記 findMissingInR2 参照)
+      const missing = await findMissingInR2(slug, join(OUTBOX, slug));
+      if (missing.length > 0) {
+        return {
+          slug,
+          relDir,
+          action: "keep",
+          reason: `R2 に未反映のファイルが ${missing.length} 件 (${missing.slice(0, 3).join(", ")}${missing.length > 3 ? " 他" : ""}) → 保持 (消すと元データが失われる)`,
+        };
+      }
+      return { slug, relDir, action: "rm", kind: "published-identical" };
     }
 
-    // article.md なし = 孤児 (data/ 等の残骸)。R2 に公開済みなら掃除 (本文比較対象が無いので存在で判定)
+    // article.md なし = 孤児 (data/ 等の残骸)。R2 に公開済みで、かつローカルの中身が
+    // 全て R2 に載っている場合のみ掃除する (本文比較対象が無いので存在で判定)。
     const r2 = await fetchR2Article(slug);
-    if (r2 != null) return { slug, relDir, action: "rm", kind: "orphan-live" };
-    return { slug, relDir, action: "keep", reason: "article.md 無し・R2 未掲載 (新規作業中の可能性) → 保持" };
+    if (r2 == null) {
+      return { slug, relDir, action: "keep", reason: "article.md 無し・R2 未掲載 (新規作業中の可能性) → 保持" };
+    }
+    const missingOrphan = await findMissingInR2(slug, join(OUTBOX, slug));
+    if (missingOrphan.length > 0) {
+      return {
+        slug,
+        relDir,
+        action: "keep",
+        reason: `article.md 無しだが R2 に未反映のファイルが ${missingOrphan.length} 件 → 保持 (消すと元データが失われる)`,
+      };
+    }
+    return { slug, relDir, action: "rm", kind: "orphan-live" };
   });
 
   for (const c of classified) {

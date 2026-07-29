@@ -352,7 +352,8 @@ function genStubSvg(chartType, name) {
 function validateSvg(svgPath) {
   if (!fs.existsSync(svgPath)) return { errors: ["file not found"], warnings: [] };
   const content = fs.readFileSync(svgPath, "utf8");
-  return lintSvgContent(content);
+  // filename を渡すと tile-grid でテーマ関連 WARN を抑止する (仕様上テーマ非依存のため)
+  return lintSvgContent(content, path.basename(svgPath));
 }
 
 /** article.md からインライン <svg> を抽出する (ファイルパス版) */

@@ -33,7 +33,7 @@ import { fileURLToPath } from "node:url";
 import { checkArticleFactual } from "../lib/article-factual-check.mjs";
 import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
 import { lintInternalLinks } from "../lib/internal-link-lint.mjs";
-import { lintSvgSize, lintChoroplethLegend, lintFindingsParity } from "../lib/svg-lint.mjs";
+import { lintSvgSize, lintChoroplethLegend, lintFindingsParity, lintTileGridQuality } from "../lib/svg-lint.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -421,6 +421,8 @@ for (const base of svgRefs) {
   const svg = fs.readFileSync(svgFile, "utf8");
   pairBlockers.push(...lintChoroplethLegend(`${base}.svg`, svg, jsonData).errors);
   pairBlockers.push(...lintFindingsParity(`${base}.svg`, svg, jsonData).errors);
+  // タイルマップの品質不変量 (キャンバス比・透過背景・テーマ非依存・凡例位置)
+  pairBlockers.push(...lintTileGridQuality(`${base}.svg`, svg, jsonData).errors);
 }
 checks.svgPairViolations = pairBlockers.length;
 if (pairBlockers.length > 0) {

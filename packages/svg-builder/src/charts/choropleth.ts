@@ -1,15 +1,51 @@
 /**
  * タイルグリッドコロプレスマップ SVG 生成
  *
- * 47 都道府県を固定レイアウトのタイルに配置し、値に応じてセルを
- * 赤系グラデーションで着色する。タイル位置は地理的配置に近い形で固定。
+ * 47 都道府県を固定レイアウトのタイルに配置し、値に応じてセルを着色する。
+ *
+ * ## レイアウト（2026-07-29 改訂）
+ *
+ * キャンバスは **780×560**（旧 600×700）。記事本文では `md:max-w-2xl` = 672px 幅の
+ * `<img>` として描画されるため、画面上の高さは `672 × H / W` で決まる。
+ * 旧 600×700 は画面上 784px になり記事を占有していた。780×560 なら 482px に収まる。
+ *
+ * タイルを小さくせず縦を詰めることはできない（47 タイルは 14×16 の格子で、
+ * 格子自体が縦長のため）。そこでキャンバスを横長にし、空く左カラムへ
+ * タイトルと上位/下位 3 県、地図右下の空白へ凡例を置いて面積を使い切る。
+ *
+ * ```
+ * ┌──────────────┬───────────────────────────┐
+ * │ タイトル      │            ■ 北海道        │
+ * │ 上位3県       │        ■■■■■■             │
+ * │ 下位3県       │    ■■■■■■■■               │
+ * │              │  ■■■■        [凡例]        │
+ * └──────────────┴───────────────────────────┘
+ * ```
+ *
+ * ## 配色とテーマ
+ *
+ * **背景を敷かない（透過）。テーマ依存の色も使わない。** サイトのテーマは
+ * `next-themes` の class 方式 (`enableSystem={false}` / `defaultTheme="light"`) で、
+ * OS の `prefers-color-scheme` を意図的に無視する。一方 `<img>` 内の SVG は
+ * 親ページの `.dark` class を参照できない。したがって SVG 側で
+ * `@media (prefers-color-scheme:dark)` を使うと **OS とサイトが食い違ったとき
+ * SVG だけ色が反転する**（OS ダーク + サイトライトで、明るい記事の中に濃紺の箱が出る）。
+ *
+ * 解決は「テーマに依存しない配色にする」こと:
+ * - 背景 rect を描かない → ページの地色がそのまま透ける（ライト/ダーク両対応）
+ * - タイル内文字は白 + 濃い縁取り + 影 → 淡色タイルでも濃色タイルでも読める
+ * - タイトル・凡例等の文字は {@link CHROME_COLOR} → 白地 4.18:1 / 濃紺地 4.27:1
+ *
+ * 単色でライト・ダーク両方 4.5:1 を満たす色は存在しない（最良でも 4.22:1）。
+ * ここは構造的な上限なので、`@media` を足して「改善」しようとしないこと。
  *
  * ## 使い方
  * ```ts
  * import { toChoroplethItems } from "../shared/stats-schema";
  * const items = toChoroplethItems(statsSchemaData);
  * const svg = generateChoroplethSvg(items, {
- *   title: "交通事故死者数（人口10万人あたり）2023年度",
+ *   title: "交通事故死者数（人口10万人あたり）",
+ *   subtitle: "2023年度",
  *   unit: "人",
  * });
  * ```
@@ -17,7 +53,6 @@
 
 import { FONT_FAMILY } from "../shared/color";
 import { formatValueLabel } from "../shared/axis";
-import { svgThemeStyle } from "../shared/theme";
 // D3 カラースキーム (d3-scale-chromatic) を「生成時」に評価し、結果の rgb() を静的 SVG へ焼き込む。
 // （SVG 実行時に D3 は不要。）依存はモノレポ root に hoist 済（migration-flow / remotion が宣言）。
 import * as d3chromatic from "d3-scale-chromatic";
@@ -61,11 +96,22 @@ export interface ChoroplethOptions {
   /** 各タイルに県名の下へ値も表示する（省略時: false = 県名のみ）。 */
   showValue?: boolean;
   /**
-   * 凡例の端ラベル [左端, 右端]（省略時: ["低い", "高い"]）。
+   * 凡例の端ラベル（省略時: ["低い", "高い"]）。
+   *
+   * `["低い","高い"]` の配列形と `{ low, high }` のオブジェクト形の両方を受ける。
+   * 実データに両方あるため（`yato-yatsu-place-name-boundary` はオブジェクト形）。
+   * 旧実装は配列決め打ちで、オブジェクト形が来ると **本番 SVG に "undefined" と
+   * 描画されていた**（2026-07-29 に実測で発見）。不正な形は既定値へフォールバックする。
+   *
    * 意味的ラベル（"安全"/"危険" 等）は指標の意味が確実な場合のみ呼び元で明示指定する
    * （旧デフォルトの 安全/危険 は消費支出額マップ等で不適切だった）。
    */
-  legendLabels?: [string, string];
+  legendLabels?: [string, string] | { low: string; high: string };
+  /**
+   * 左カラムの上位・下位リストを出すか（省略時: true）。
+   * 値の大小だけを機械的に並べるので、指標の良し悪しとは無関係に「高い順 / 低い順」と表記する。
+   */
+  showRankList?: boolean;
 }
 
 /** D3 スキーム名 → interpolator 関数を解決（無ければ null）。 */
@@ -75,81 +121,120 @@ function resolveInterp(scheme?: string): ((t: number) => string) | null {
   return typeof fn === "function" ? (fn as (t: number) => string) : null;
 }
 
-// ─── タイルレイアウト ────────────────────────────────────────────
-
-interface TileSpec {
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-}
+// ─── タイル格子 ──────────────────────────────────────────────────
 
 /**
- * 47 都道府県の固定タイル座標（SVG px）。
- * キーは 2 桁コード "01"〜"47"。
- * 基本タイルサイズ 33px、2 マス分は 68px（33+2+33）。
+ * 47 都道府県のタイル位置を **格子座標** で持つ: `[列, 行, 列スパン, 行スパン]`。
+ *
+ * 旧実装は 47 行の px 座標をベタ書きしていたためタイルサイズを変えられなかった。
+ * 実測で完全な均等格子（ピッチ 38.167 / 原点 33,45・丸め誤差 0.0175px）と確認できたので
+ * 格子表現に置き換えた。サイズ変更は {@link TILE} と {@link GAP} だけで済む。
  */
-/**
- * 基本タイルサイズ 36px（旧 33px から scale=36/33 で拡大）、2 マス分は 74px。
- * タイル起点 y=45（旧 67.5）、水平中心 x=300 を基準にスケール変換済み。
- */
-const TILE_LAYOUT: Record<string, TileSpec> = {
-  "01": { x: 491, y:  45.0, w: 74, h: 74 }, // 北海道
-  "02": { x: 491, y: 159.5, w: 74, h: 36 }, // 青森
-  "03": { x: 529, y: 197.5, w: 36, h: 36 }, // 岩手
-  "04": { x: 529, y: 236.0, w: 36, h: 36 }, // 宮城
-  "05": { x: 491, y: 197.5, w: 36, h: 36 }, // 秋田
-  "06": { x: 491, y: 236.0, w: 36, h: 36 }, // 山形
-  "07": { x: 491, y: 274.0, w: 74, h: 36 }, // 福島
-  "08": { x: 529, y: 312.5, w: 36, h: 36 }, // 茨城
-  "09": { x: 491, y: 312.5, w: 36, h: 36 }, // 栃木
-  "10": { x: 453, y: 312.5, w: 36, h: 36 }, // 群馬
-  "11": { x: 491, y: 350.5, w: 36, h: 36 }, // 埼玉
-  "12": { x: 529, y: 350.5, w: 36, h: 74 }, // 千葉
-  "13": { x: 491, y: 388.5, w: 36, h: 36 }, // 東京
-  "14": { x: 491, y: 427.0, w: 36, h: 36 }, // 神奈川
-  "15": { x: 415, y: 274.0, w: 74, h: 36 }, // 新潟
-  "16": { x: 376, y: 274.0, w: 36, h: 36 }, // 富山
-  "17": { x: 338, y: 274.0, w: 36, h: 36 }, // 石川
-  "18": { x: 338, y: 312.5, w: 36, h: 36 }, // 福井
-  "19": { x: 453, y: 350.5, w: 36, h: 36 }, // 山梨
-  "20": { x: 415, y: 312.5, w: 36, h: 74 }, // 長野
-  "21": { x: 376, y: 312.5, w: 36, h: 74 }, // 岐阜
-  "22": { x: 415, y: 388.5, w: 74, h: 36 }, // 静岡
-  "23": { x: 376, y: 388.5, w: 36, h: 36 }, // 愛知
-  "24": { x: 338, y: 388.5, w: 36, h: 74 }, // 三重
-  "25": { x: 338, y: 350.5, w: 36, h: 36 }, // 滋賀
-  "26": { x: 262, y: 350.5, w: 74, h: 36 }, // 京都
-  "27": { x: 262, y: 388.5, w: 36, h: 36 }, // 大阪
-  "28": { x: 224, y: 350.5, w: 36, h: 74 }, // 兵庫
-  "29": { x: 300, y: 388.5, w: 36, h: 36 }, // 奈良
-  "30": { x: 262, y: 427.0, w: 74, h: 36 }, // 和歌山
-  "31": { x: 185, y: 350.5, w: 36, h: 36 }, // 鳥取
-  "32": { x: 147, y: 350.5, w: 36, h: 36 }, // 島根
-  "33": { x: 185, y: 388.5, w: 36, h: 36 }, // 岡山
-  "34": { x: 147, y: 388.5, w: 36, h: 36 }, // 広島
-  "35": { x: 109, y: 350.5, w: 36, h: 74 }, // 山口
-  "36": { x: 185, y: 503.0, w: 36, h: 36 }, // 徳島
-  "37": { x: 185, y: 465.0, w: 36, h: 36 }, // 香川
-  "38": { x: 147, y: 465.0, w: 36, h: 36 }, // 愛媛
-  "39": { x: 147, y: 503.0, w: 36, h: 36 }, // 高知
-  "40": { x:  71, y: 427.0, w: 36, h: 36 }, // 福岡
-  "41": { x:  33, y: 427.0, w: 36, h: 36 }, // 佐賀
-  "42": { x:  33, y: 465.0, w: 36, h: 36 }, // 長崎
-  "43": { x:  33, y: 503.0, w: 36, h: 36 }, // 熊本
-  "44": { x:  71, y: 465.0, w: 36, h: 36 }, // 大分
-  "45": { x:  71, y: 503.0, w: 36, h: 36 }, // 宮崎
-  "46": { x:  33, y: 541.5, w: 74, h: 36 }, // 鹿児島
-  "47": { x:  33, y: 617.5, w: 36, h: 36 }, // 沖縄
+const TILE_GRID: Record<string, readonly [number, number, number, number]> = {
+  "01": [12, 0, 2, 2], // 北海道
+  "02": [12, 3, 2, 1], // 青森
+  "03": [13, 4, 1, 1], // 岩手
+  "04": [13, 5, 1, 1], // 宮城
+  "05": [12, 4, 1, 1], // 秋田
+  "06": [12, 5, 1, 1], // 山形
+  "07": [12, 6, 2, 1], // 福島
+  "08": [13, 7, 1, 1], // 茨城
+  "09": [12, 7, 1, 1], // 栃木
+  "10": [11, 7, 1, 1], // 群馬
+  "11": [12, 8, 1, 1], // 埼玉
+  "12": [13, 8, 1, 2], // 千葉
+  "13": [12, 9, 1, 1], // 東京
+  "14": [12, 10, 1, 1], // 神奈川
+  "15": [10, 6, 2, 1], // 新潟
+  "16": [9, 6, 1, 1], // 富山
+  "17": [8, 6, 1, 1], // 石川
+  "18": [8, 7, 1, 1], // 福井
+  "19": [11, 8, 1, 1], // 山梨
+  "20": [10, 7, 1, 2], // 長野
+  "21": [9, 7, 1, 2], // 岐阜
+  "22": [10, 9, 2, 1], // 静岡
+  "23": [9, 9, 1, 1], // 愛知
+  "24": [8, 9, 1, 2], // 三重
+  "25": [8, 8, 1, 1], // 滋賀
+  "26": [6, 8, 2, 1], // 京都
+  "27": [6, 9, 1, 1], // 大阪
+  "28": [5, 8, 1, 2], // 兵庫
+  "29": [7, 9, 1, 1], // 奈良
+  "30": [6, 10, 2, 1], // 和歌山
+  "31": [4, 8, 1, 1], // 鳥取
+  "32": [3, 8, 1, 1], // 島根
+  "33": [4, 9, 1, 1], // 岡山
+  "34": [3, 9, 1, 1], // 広島
+  "35": [2, 8, 1, 2], // 山口
+  "36": [4, 12, 1, 1], // 徳島
+  "37": [4, 11, 1, 1], // 香川
+  "38": [3, 11, 1, 1], // 愛媛
+  "39": [3, 12, 1, 1], // 高知
+  "40": [1, 10, 1, 1], // 福岡
+  "41": [0, 10, 1, 1], // 佐賀
+  "42": [0, 11, 1, 1], // 長崎
+  "43": [0, 12, 1, 1], // 熊本
+  "44": [1, 11, 1, 1], // 大分
+  "45": [1, 12, 1, 1], // 宮崎
+  "46": [0, 13, 2, 1], // 鹿児島
+  "47": [0, 15, 1, 1], // 沖縄
 };
 
-// ─── カラースケール（Reds） ─────────────────────────────────────
+const GRID_COLS = 14;
+const GRID_ROWS = 16;
+
+// ─── キャンバス寸法 ──────────────────────────────────────────────
+
+/** タイル 1 マスの辺長（px）。 */
+const TILE = 30;
+/** タイル間の隙間（px）。 */
+const GAP = 2;
+/** 格子ピッチ。 */
+const PITCH = TILE + GAP;
+
+/** 地図ブロックの実寸。 */
+const MAP_W = GRID_COLS * PITCH - GAP; // 446
+const MAP_H = GRID_ROWS * PITCH - GAP; // 510
+
+/** キャンバス。§5 タイルマップ標準 780×560。 */
+const W = 780;
+const TOTAL_H = 560;
+
+/** 地図ブロックの左上（右寄せ。左カラムをテキストに使う）。 */
+const MAP_X = W - MAP_W - 20; // 314
+const MAP_Y = 24;
+
+/** 左カラム（タイトル・上位/下位リスト）。 */
+const COL_X = 22;
+const COL_W = MAP_X - COL_X - 24; // 268
+
+/**
+ * 凡例は地図ブロック右下の空白に置く。
+ * 格子の行 11 以降・列 5 以降にタイルが無いことを利用している
+ * （四国は列 3-4、九州は列 0-1、沖縄は列 0）。
+ */
+const LEGEND_BAR_W = 150;
+const LEGEND_BAR_H = 9;
+const LEGEND_X = MAP_X + 5 * PITCH + 28; // 502
+const LEGEND_Y = MAP_Y + 13 * PITCH + 8; // 448
+
+// ─── 配色 ────────────────────────────────────────────────────────
 
 const COLOR_STOPS = [
   { t: 0.0, r: 254, g: 229, b: 217 }, // #fee5d9
-  { t: 0.5, r: 251, g: 106, b:  74 }, // #fb6a4a
-  { t: 1.0, r: 165, g:  15, b:  21 }, // #a50f15
+  { t: 0.5, r: 251, g: 106, b: 74 }, // #fb6a4a
+  { t: 1.0, r: 165, g: 15, b: 21 }, // #a50f15
 ];
+
+/**
+ * タイトル・凡例など「地図以外の文字」の色。
+ *
+ * 白地 (#ffffff) に対し 4.18:1、ダーク地 (#0f172a) に対し 4.27:1。
+ * ライト・ダーク双方で 4.5:1 を満たす単色は存在しない（最良 4.22:1）ため、
+ * 両者の最小値を最大化する近傍から選んでいる。テーマ非依存にすることが目的で、
+ * `@media (prefers-color-scheme)` で「改善」しようとすると冒頭の不具合が再発する。
+ */
+const CHROME_COLOR = "#6e7d94";
 
 function interpolateColor(
   t: number,
@@ -174,34 +259,115 @@ function interpolateColor(
 
 /**
  * 都道府県名のフォントサイズ。
- * - 北海道（68x68 大タイル）: 11
- * - 3 文字以上の名前: 7（神奈川・和歌山・鹿児島）
- * - その他: 9
+ *
+ * 画面上では 672/780 = 0.86 倍で描画されるため、ここでの px は約 0.86 倍で見える。
+ * タイル 30px に対し文字を大きめに取り、縮小後も読めるようにしている。
  */
-function nameFontSize(name: string, w: number, h: number): number {
-  if (w >= 68 && h >= 68) return 11;
-  if (name.length >= 3) return 7;
-  return 9;
+function nameFontSize(name: string, w: number): number {
+  if (w > TILE) return 14; // 北海道（2x2）
+  if (name.length >= 3) return 8.5; // 神奈川・和歌山・鹿児島
+  return 11;
 }
 
-/** 概算幅でタイトルフォントをフィット（CJK≈1em / ASCII・半角≈0.55em）。 */
-function fitTitleFont(text: string, availW: number, maxF: number, minF: number): number {
-  const units = [...text].reduce((w, ch) => w + (/[ -~｡-ﾟ]/.test(ch) ? 0.55 : 1.0), 0);
-  if (units <= 0) return maxF;
-  return Math.max(minF, Math.min(maxF, Math.floor(availW / units)));
+/** 文字列の概算幅を em 単位で返す（CJK≈1em / ASCII・半角≈0.55em）。 */
+function textUnits(text: string): number {
+  return [...text].reduce((w, ch) => w + (/[ -~｡-ﾟ]/.test(ch) ? 0.55 : 1.0), 0);
 }
 
-// ─── SVG 定数 ────────────────────────────────────────────────────
+/** 行頭に来ると不自然な文字（禁則の簡易版）。 */
+const NO_LINE_START = /[）)】」』、。・％%ー]/;
 
-const W = 600;
-const TOTAL_H = 700; // §5 タイルマップ標準 600×700（既存資産の最頻 viewBox と一致）
-// 凡例：タイトル直下の左上余白に配置（日本のタイル配置で x<491,y<350 が空く。
-// 旧: 右下 y=625 の 8px は小さく目立たなかった + 左上が遊休だった）
-const BAR_X     = 64;  // グラデーションバー左端 x（左ラベル "低い" の余白を確保）
-const BAR_W     = 150; // バー幅
-const BAR_RIGHT = BAR_X + BAR_W; // = 214（最上段の左タイル x=491 まで余裕）
-const BAR_Y     = 120; // バー y（タイトル 58 + 年行 ~92 の直下）
-const BAR_H     = 10;  // バー高さ
+/**
+ * `showValue` のときタイル内に出す値ラベルを、タイル幅に収まる形に決める。
+ *
+ * 単位が長い指標（"ポイント差" 等）だと `0ポイント差` が 30px のタイルからはみ出して
+ * 隣のタイルに重なる（2026-07-29 に `yato-yatsu-place-name-boundary` で実測）。
+ * 優先順は「単位つきのまま」→「単位を落とす」→「縮める」。単位は凡例と上位/下位リストに
+ * 出ているので、タイル内で落としても情報は失われない。
+ */
+function fitValueLabel(
+  valStr: string,
+  unit: string,
+  tileW: number,
+  startFont: number,
+): { text: string; font: number } {
+  const MIN = 5;
+  const avail = tileW - 3;
+  const withUnit = `${valStr}${unit}`;
+  if (textUnits(withUnit) * startFont <= avail) return { text: withUnit, font: startFont };
+  if (textUnits(valStr) * startFont <= avail) return { text: valStr, font: startFont };
+  let f = startFont;
+  while (f > MIN && textUnits(valStr) * f > avail) f -= 0.5;
+  return { text: valStr, font: Math.max(MIN, Math.round(f * 10) / 10) };
+}
+
+/**
+ * タイトルを左カラム幅に収める。1 行で入らなければ 2 行に折り返す。
+ *
+ * フォントを縮めるだけだと長いタイトルが 13px まで落ちて読めなくなる。
+ * 2 行にすれば 1 行あたりの文字数が半減し、大きいフォントを保てる。
+ * 折返し位置は「2 行の長い方を最小化する」位置を選び、行頭禁則だけ避ける。
+ */
+function fitTitleLines(
+  text: string,
+  availW: number,
+  maxF: number,
+  minF: number,
+): { lines: string[]; font: number } {
+  const chars = [...text];
+  const total = textUnits(text);
+  if (total <= 0) return { lines: [text], font: maxF };
+
+  const oneLineFont = Math.min(maxF, availW / total);
+  if (oneLineFont >= minF) {
+    return { lines: [text], font: Math.floor(oneLineFont * 10) / 10 };
+  }
+
+  // 2 行: 長い方の行が最短になる分割点を探す（行頭禁則に当たる位置は避ける）
+  let best: { at: number; widest: number } | null = null;
+  for (let i = 1; i < chars.length; i++) {
+    if (NO_LINE_START.test(chars[i])) continue;
+    const a = textUnits(chars.slice(0, i).join(""));
+    const b = textUnits(chars.slice(i).join(""));
+    const widest = Math.max(a, b);
+    if (!best || widest < best.widest) best = { at: i, widest };
+  }
+  if (!best) return { lines: [text], font: minF };
+
+  const font = Math.max(minF, Math.min(maxF, Math.floor((availW / best.widest) * 10) / 10));
+  return {
+    lines: [chars.slice(0, best.at).join(""), chars.slice(best.at).join("")],
+    font,
+  };
+}
+
+/**
+ * 凡例の端ラベルを正規化する。配列形 / `{low,high}` オブジェクト形 / 不正値を受け、
+ * 常に `[string, string]` を返す。文字列でない要素は既定値へ落とす
+ * （不正値をそのまま埋めると SVG に "undefined" と描画される）。
+ */
+function normalizeLegendLabels(
+  input: [string, string] | { low: string; high: string } | undefined,
+): [string, string] {
+  const fallback: [string, string] = ["低い", "高い"];
+  const pick = (v: unknown, i: 0 | 1): string =>
+    typeof v === "string" && v.length > 0 ? v : fallback[i];
+  if (Array.isArray(input)) return [pick(input[0], 0), pick(input[1], 1)];
+  if (input && typeof input === "object") {
+    return [pick((input as { low?: unknown }).low, 0), pick((input as { high?: unknown }).high, 1)];
+  }
+  return fallback;
+}
+
+/** XML 特殊文字のエスケープ（タイトル等に & や < が来ても壊さない）。null 安全。 */
+function esc(s: string | undefined | null): string {
+  if (typeof s !== "string") return "";
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
 
 // ─── 公開関数 ────────────────────────────────────────────────────
 
@@ -224,8 +390,11 @@ export function generateChoroplethSvg(
     scheme,
     reverse = false,
     showValue = false,
-    legendLabels = ["低い", "高い"],
+    legendLabels: rawLegendLabels,
+    showRankList = true,
   } = options;
+  const legendLabels = normalizeLegendLabels(rawLegendLabels);
+  const safeUnit = typeof unit === "string" ? unit : "";
 
   // 色の解決: scheme（D3）指定時は interpolator、無ければ colorStops。reverse で反転。
   const interp = resolveInterp(scheme);
@@ -244,35 +413,43 @@ export function generateChoroplethSvg(
   const hi = colorMax ?? Math.max(...values);
   const toT = (v: number) => (hi === lo ? 0.5 : (v - lo) / (hi - lo));
 
-  // タイル描画
-  const tiles = Object.entries(TILE_LAYOUT).map(([code, tile]) => {
+  // ── タイル ──
+  const tiles = Object.entries(TILE_GRID).map(([code, [col, row, cs, rs]]) => {
     const item = byCode.get(code);
     if (!item) return "";
 
+    const x = MAP_X + col * PITCH;
+    const y = MAP_Y + row * PITCH;
+    const w = cs * PITCH - GAP;
+    const h = rs * PITCH - GAP;
+
     const t = toT(item.value);
     const fill = colorOf(t);
-    const nfs = nameFontSize(item.name, tile.w, tile.h);
+    const nfs = nameFontSize(item.name, w);
 
-    const cx = tile.x + tile.w / 2;
+    const cx = x + w / 2;
     const valStr = formatValue(item.value);
     // テキストは全て白。濃い縁取り(paint-order stroke)+ ソフトシャドウで
     // 淡色タイルでも背景に依らず読めるようにする（白/黒の切替はしない）。
     const strokeW = Math.max(1.1, nfs * 0.18).toFixed(1);
 
-    const tspans = showValue
+    const valueLabel = showValue
+      ? fitValueLabel(valStr, safeUnit, w, Math.max(6, nfs - 2))
+      : null;
+    const tspans = showValue && valueLabel
       ? [
-          `      <tspan x="${cx}" y="${(tile.y + tile.h / 2 - 0.5).toFixed(1)}" font-size="${nfs}" font-weight="700">${item.name}</tspan>`,
-          `      <tspan x="${cx}" y="${(tile.y + tile.h / 2 + Math.max(6, nfs - 1.5) + 1).toFixed(1)}" font-size="${Math.max(6, nfs - 1.5).toFixed(1)}" font-weight="600">${valStr}${unit}</tspan>`,
+          `      <tspan x="${cx.toFixed(1)}" y="${(y + h / 2 - 0.5).toFixed(1)}" font-size="${nfs}" font-weight="700">${esc(item.name)}</tspan>`,
+          `      <tspan x="${cx.toFixed(1)}" y="${(y + h / 2 + valueLabel.font + 1).toFixed(1)}" font-size="${valueLabel.font}" font-weight="600">${esc(valueLabel.text)}</tspan>`,
         ]
       : [
           // 名前を縦中央に配置（baseline = タイル中心 + cap-height 補正）
-          `      <tspan x="${cx}" y="${(tile.y + tile.h / 2 + nfs * 0.38).toFixed(1)}" font-size="${nfs}" font-weight="700">${item.name}</tspan>`,
+          `      <tspan x="${cx.toFixed(1)}" y="${(y + h / 2 + nfs * 0.38).toFixed(1)}" font-size="${nfs}" font-weight="700">${esc(item.name)}</tspan>`,
         ];
 
     return [
-      `  <g aria-label="${item.name} ${valStr}${unit}">`,
-      `    <title>${item.name}：${valStr}${unit}</title>`,
-      `    <rect x="${tile.x}" y="${tile.y}" width="${tile.w}" height="${tile.h}" rx="3" fill="${fill}" stroke="#ffffff" stroke-width="1"/>`,
+      `  <g aria-label="${esc(item.name)} ${valStr}${esc(unit)}">`,
+      `    <title>${esc(item.name)}：${valStr}${esc(unit)}</title>`,
+      `    <rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w}" height="${h}" rx="3" fill="${fill}" stroke="#ffffff" stroke-width="1"/>`,
       `    <text font-family="${FONT_FAMILY}" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="${strokeW}" stroke-linejoin="round" filter="url(#txt-halo-dark)">`,
       ...tspans,
       `    </text>`,
@@ -280,32 +457,93 @@ export function generateChoroplethSvg(
     ].join("\n");
   });
 
-  // タイトルは左上の余白（日本のタイル配置で空く領域）に左寄せで配置。年は別行・大きめ。
-  const TITLE_X = 28;
-  const titleFont = fitTitleFont(title, 430, 22, 15);
-  const titleLine = [
-    `  <text x="${TITLE_X}" y="58" font-size="${titleFont}" font-weight="bold" class="svg-title">${title}</text>`,
-    subtitle
-      ? `  <text x="${TITLE_X}" y="${58 + titleFont + 12}" font-size="15" class="svg-tick">${subtitle}</text>`
-      : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
+  // ── 左カラム: タイトル ──
+  const { lines: titleLines, font: titleFont } = fitTitleLines(title, COL_W, 19, 13);
+  let cursorY = 46;
+  const head: string[] = [];
+  for (const line of titleLines) {
+    head.push(
+      `  <text x="${COL_X}" y="${cursorY}" font-family="${FONT_FAMILY}" font-size="${titleFont}" font-weight="bold" fill="${CHROME_COLOR}">${esc(line)}</text>`,
+    );
+    cursorY += titleFont + 5;
+  }
+  cursorY -= titleFont + 5; // 最終行の baseline に戻す
+  if (subtitle) {
+    // サブタイトルもタイトルと同じ扱いで折り返す。実データに
+    // `居住地名1000件あたりの差 (谷戸share − 谷津share)` のような長いものがあり、
+    // 固定 12px のままだと左カラムをはみ出して地図に重なる。
+    const { lines: subLines, font: subFont } = fitTitleLines(subtitle, COL_W, 12, 9);
+    for (const line of subLines) {
+      cursorY += subFont + 8;
+      head.push(
+        `  <text x="${COL_X}" y="${cursorY}" font-family="${FONT_FAMILY}" font-size="${subFont}" fill="${CHROME_COLOR}">${esc(line)}</text>`,
+      );
+    }
+  }
 
-  // 凡例（グラデーションバー + 最小・中間・最大ラベル）
+  // ── 左カラム: 高い順 / 低い順 3 県 ──
+  // 値の大小を機械的に並べるだけ。指標の良し悪し（高い方が良いか）は判断しない。
+  const rankLists: string[] = [];
+  if (showRankList && items.length >= 3) {
+    const sorted = [...items].sort((a, b) => b.value - a.value);
+    const groups: Array<{ label: string; rows: ChoroplethItem[] }> = [
+      { label: "高い順", rows: sorted.slice(0, 3) },
+      { label: "低い順", rows: sorted.slice(-3).reverse() },
+    ];
+
+    let y = cursorY + 34;
+    for (const g of groups) {
+      rankLists.push(
+        `  <text x="${COL_X}" y="${y}" font-family="${FONT_FAMILY}" font-size="11" font-weight="600" fill="${CHROME_COLOR}" letter-spacing="0.06em">${g.label}</text>`,
+      );
+      y += 8;
+      for (const it of g.rows) {
+        y += 22;
+        const sw = colorOf(toT(it.value));
+        rankLists.push(
+          `  <rect x="${COL_X}" y="${y - 10}" width="12" height="12" rx="2" fill="${sw}" stroke="#ffffff" stroke-width="1"/>`,
+          `  <text x="${COL_X + 19}" y="${y}" font-family="${FONT_FAMILY}" font-size="13" font-weight="600" fill="${CHROME_COLOR}">${esc(it.name)}</text>`,
+          `  <text x="${COL_X + COL_W}" y="${y}" font-family="${FONT_FAMILY}" font-size="12" fill="${CHROME_COLOR}" text-anchor="end">${formatValue(it.value)}${esc(unit)}</text>`,
+        );
+      }
+      y += 30;
+    }
+  }
+
+  // ── 凡例（地図右下） ──
   const loStr = formatValue(lo);
   const midStr = formatValue((lo + hi) / 2);
   const hiStr = formatValue(hi);
-  // グラデーションストップ: scheme 指定時は interpolator を等間隔サンプル、無ければ colorStops。
   const toHex = (n: number) => n.toString(16).padStart(2, "0");
   const gradientStops = interp
     ? [0, 0.25, 0.5, 0.75, 1]
-        .map((t) => `      <stop offset="${t * 100}%"   stop-color="${colorOf(t)}"/>`)
+        .map((t) => `      <stop offset="${t * 100}%" stop-color="${colorOf(t)}"/>`)
         .join("\n")
     : colorStops
-        .map((s) => `      <stop offset="${Math.round(s.t * 100)}%"   stop-color="#${toHex(s.r)}${toHex(s.g)}${toHex(s.b)}"/>`)
+        .map(
+          (s) =>
+            `      <stop offset="${Math.round(s.t * 100)}%" stop-color="#${toHex(s.r)}${toHex(s.g)}${toHex(s.b)}"/>`,
+        )
         .join("\n");
-  // コンパクト凡例（沖縄右側: x=96〜236, y=625〜647）
+  const barRight = LEGEND_X + LEGEND_BAR_W;
+
+  // 目盛りラベルの衝突回避。単位が長い指標（"百万円" 等）で最小・中間・最大が
+  // 重なって読めなくなる（実測: 5,802,432百万円 の 3 ラベルが完全に重なった）。
+  // 決定的に: ①フォントを 10→8 まで縮めて収まるか試す ②それでも無理なら中間を落とす。
+  const tickLabels = [`${loStr}${safeUnit}`, `${midStr}${safeUnit}`, `${hiStr}${safeUnit}`];
+  let tickFont = 10;
+  let showMid = true;
+  const fitsWithMid = (f: number) =>
+    textUnits(tickLabels[0]) * f + (textUnits(tickLabels[1]) * f) / 2 <= LEGEND_BAR_W / 2 - 4 &&
+    textUnits(tickLabels[2]) * f + (textUnits(tickLabels[1]) * f) / 2 <= LEGEND_BAR_W / 2 - 4;
+  const fitsWithoutMid = (f: number) =>
+    (textUnits(tickLabels[0]) + textUnits(tickLabels[2])) * f <= LEGEND_BAR_W - 6;
+  while (tickFont > 8 && !fitsWithMid(tickFont)) tickFont -= 0.5;
+  if (!fitsWithMid(tickFont)) {
+    showMid = false;
+    while (tickFont > 7 && !fitsWithoutMid(tickFont)) tickFont -= 0.5;
+  }
+
   const legend = [
     `  <defs>`,
     `    <linearGradient id="choropleth-lg" x1="0" x2="1">`,
@@ -315,21 +553,22 @@ export function generateChoroplethSvg(
     `      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.7"/>`,
     `    </filter>`,
     `  </defs>`,
-    `  <text x="${BAR_X - 6}" y="${BAR_Y + 9}" font-size="10" class="svg-tick" text-anchor="end">${legendLabels[0]}</text>`,
-    `  <rect x="${BAR_X}" y="${BAR_Y}" width="${BAR_W}" height="${BAR_H}" rx="2" fill="url(#choropleth-lg)"/>`,
-    `  <text x="${BAR_RIGHT + 6}" y="${BAR_Y + 9}" font-size="10" class="svg-tick">${legendLabels[1]}</text>`,
-    `  <text x="${BAR_X}" y="${BAR_Y + 25}" font-size="9" class="svg-tick">${loStr}${unit}</text>`,
-    `  <text x="${BAR_X + Math.round(BAR_W / 2)}" y="${BAR_Y + 25}" font-size="9" class="svg-tick" text-anchor="middle">${midStr}${unit}</text>`,
-    `  <text x="${BAR_RIGHT}" y="${BAR_Y + 25}" font-size="9" class="svg-tick" text-anchor="end">${hiStr}${unit}</text>`,
-  ];
+    `  <text x="${LEGEND_X - 6}" y="${LEGEND_Y + 8}" font-family="${FONT_FAMILY}" font-size="11" fill="${CHROME_COLOR}" text-anchor="end">${esc(legendLabels[0])}</text>`,
+    `  <rect x="${LEGEND_X}" y="${LEGEND_Y}" width="${LEGEND_BAR_W}" height="${LEGEND_BAR_H}" rx="2" fill="url(#choropleth-lg)"/>`,
+    `  <text x="${barRight + 6}" y="${LEGEND_Y + 8}" font-family="${FONT_FAMILY}" font-size="11" fill="${CHROME_COLOR}">${esc(legendLabels[1])}</text>`,
+    `  <text x="${LEGEND_X}" y="${LEGEND_Y + 24}" font-family="${FONT_FAMILY}" font-size="${tickFont}" fill="${CHROME_COLOR}">${loStr}${esc(unit)}</text>`,
+    showMid
+      ? `  <text x="${LEGEND_X + LEGEND_BAR_W / 2}" y="${LEGEND_Y + 24}" font-family="${FONT_FAMILY}" font-size="${tickFont}" fill="${CHROME_COLOR}" text-anchor="middle">${midStr}${esc(unit)}</text>`
+      : "",
+    `  <text x="${barRight}" y="${LEGEND_Y + 24}" font-family="${FONT_FAMILY}" font-size="${tickFont}" fill="${CHROME_COLOR}" text-anchor="end">${hiStr}${esc(unit)}</text>`,
+  ].filter(Boolean);
 
-  return `<svg width="${W}" height="${TOTAL_H}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${TOTAL_H}" role="img" aria-label="${ariaLabel}">
-  <title>${title}</title>${subtitle ? `\n  <desc>${subtitle}</desc>` : ""}
-${svgThemeStyle()}
-  <rect width="${W}" height="${TOTAL_H}" class="svg-plot"/>
-${titleLine}
+  // 背景 rect は敷かない（透過 = ページの地色に追従）。冒頭の「配色とテーマ」参照。
+  return `<svg width="${W}" height="${TOTAL_H}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${TOTAL_H}" role="img" aria-label="${esc(ariaLabel)}">
+  <title>${esc(title)}</title>${subtitle ? `\n  <desc>${esc(subtitle)}</desc>` : ""}
+${head.join("\n")}
+${rankLists.join("\n")}
 ${tiles.filter(Boolean).join("\n")}
 ${legend.join("\n")}
 </svg>`;
 }
-
