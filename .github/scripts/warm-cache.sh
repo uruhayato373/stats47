@@ -72,8 +72,13 @@ PAGES=(
   "/areas/23000"
   "/areas/40000"
   "/areas/28000"
-  "/compare"
-  "/correlation"
+  # /compare は 2026-05-28 に /category/{key}/compare へ統合 (middleware.ts:393-403)。
+  # categoryKey 無しは population が既定なので、リダイレクト先を直接ウォームする
+  # (旧 "/compare" のままだと 301 が返り ✗ としてログに残り続ける)。
+  "/category/population/compare"
+  # "/correlation" は 2026-05-28 に廃止 (410)。探索 UI は各ランキングページの
+  # 「相関が高い指標」セクションに統合済みで後継 URL が無いため、warm 対象から外す
+  # (middleware.ts:204-207)。
   "/blog"
   "/sitemap.xml"
   "/robots.txt"
