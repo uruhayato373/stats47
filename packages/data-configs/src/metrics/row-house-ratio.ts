@@ -45,6 +45,4 @@ export const rowHouseRatio: MetricConfig = {
   "seoTitle": "長屋建住宅比率ランキング都道府県【2023年】｜1位山口県（4.3％）",
   "seoDescription": "2023年の長屋建住宅比率の都道府県別ランキング。1位山口県（4.3％）、最下位沖縄県（1％）で4.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

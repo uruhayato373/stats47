@@ -34,6 +34,4 @@ export const hobbyParticipationRateJapaneseDance: MetricConfig = {
   "seoTitle": "邦舞・おどりの行動者率ランキング都道府県【2021年】｜1位鹿児島県（1.5％）",
   "seoDescription": "2021年の邦舞・おどりの行動者率の都道府県別ランキング。1位鹿児島県（1.5％）、最下位山口県（0.6％）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -45,6 +45,4 @@ export const voterTurnoutHouseProportional: MetricConfig = {
   "seoTitle": "衆議院議員選挙投票率（比例代表）ランキング都道府県【2021年】｜1位山形県（64.32％）",
   "seoDescription": "2021年の衆議院議員選挙投票率（比例代表）の都道府県別ランキング。1位山形県（64.32％）、最下位山口県（49.67％）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const lettuceConsumptionQuantity: MetricConfig = {
   "seoTitle": "レタス消費量ランキング都道府県【2024年】｜1位千葉県（7,499g）",
   "seoDescription": "2024年のレタス消費量の都道府県別ランキング。1位千葉県（7,499g）、最下位福井県（3,698g）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

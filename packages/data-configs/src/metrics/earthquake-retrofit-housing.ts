@@ -52,6 +52,4 @@ export const earthquakeRetrofitHousing: MetricConfig = {
   "seoTitle": "耐震工事をした住宅数（持ち家）ランキング都道府県【2008年】｜1位東京都（88,900住宅）",
   "seoDescription": "2008年の耐震工事をした住宅数（持ち家）の都道府県別ランキング。1位東京都（88,900住宅）、最下位沖縄県（3,300住宅）で26.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

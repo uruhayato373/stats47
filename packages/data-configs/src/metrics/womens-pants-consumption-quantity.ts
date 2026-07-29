@@ -59,6 +59,4 @@ export const womensPantsConsumptionQuantity: MetricConfig = {
   "seoTitle": "婦人用スラックス消費量ランキング都道府県【2024年】｜1位山形県（2.24本）",
   "seoDescription": "2024年の婦人用スラックス消費量の都道府県別ランキング。1位山形県（2.24本）、最下位福岡県（1.13本）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

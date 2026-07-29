@@ -85,6 +85,4 @@ export const welfareFacilitiesCountPer100kOnAssistance: MetricConfig = {
   "seoTitle": "保護施設数ランキング都道府県【2023年】｜1位長野県（64.4所）",
   "seoDescription": "2023年の保護施設数の都道府県別ランキング。1位長野県（64.4所）、最下位京都府（1.9所）で33.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -11,22 +11,10 @@ import { useEffect, useRef, useState } from "react";
 
 import { logger } from "@/lib/logger";
 
-import { AD_SIZES, AdFormat, AdSlotProps } from "../types";
+import { AdSlotProps } from "../types";
 
+import { AD_CONTAINER_CLASS, getAdReservedMinHeight } from "./ad-frame";
 import { AdSensePlaceholder } from "./AdSensePlaceholder";
-
-/**
- * 広告枠の最小高さを取得（CLS 0.732 対策）
- *
- * Cloudflare Web Analytics で `ins.adsbygoogle` の CLS が 0.732 と致命値（基準 0.1 の 7 倍）だったため、
- * 広告読み込み前にレイアウト領域を予約する。desktop / mobile の大きい方を採用して予約不足を防ぐ。
- * infeed / article は 0×0（フレキシブル）なので fallback 250px（rectangle mobile 相当）を使用。
- */
-function getReservedMinHeight(format: AdFormat): number {
-  const size = AD_SIZES[format];
-  const h = Math.max(size.desktop.height, size.mobile.height);
-  return h > 0 ? h : 250;
-}
 
 /**
  * lazy-load 発火閾値のデバイス別デフォルト（ADSENSE-LAZYLOAD-02, 2026-07-12）
@@ -141,19 +129,13 @@ export function AdSenseAd({
 
   const isArticleFormat = format === "article";
   const isMultiplexFormat = format === "multiplex";
-  // article (fluid/in-article) は 0×0 フレキシブルで getReservedMinHeight が 250px fallback を返すが、
-  // 記事内広告は高さが予測困難なため 120px を確保して CLS を抑制する（infeed と同水準）。
-  // multiplex (autorelaxed) はグリッド型で高さが出るため 300px を予約する。
-  const reservedMinHeight = isArticleFormat
-    ? 120
-    : isMultiplexFormat
-      ? 300
-      : getReservedMinHeight(format);
+  // 予約高は ad-frame.ts が単一ソース（プレースホルダーと共有する）。
+  const reservedMinHeight = getAdReservedMinHeight(format);
 
   return (
     <div
       ref={adRef}
-      className={`ad-container w-full flex flex-col items-center ${className}`}
+      className={`${AD_CONTAINER_CLASS} ${className}`}
       style={reservedMinHeight > 0 ? { minHeight: `${reservedMinHeight}px` } : undefined}
     >
       {showLabel && (

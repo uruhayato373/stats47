@@ -58,6 +58,4 @@ export const universityNewGraduatesUnemploymentRate: MetricConfig = {
   "seoTitle": "大学新規卒業者の無業者率ランキング都道府県【2023年】｜1位沖縄県（20.7％）",
   "seoDescription": "2023年の大学新規卒業者の無業者率の都道府県別ランキング。1位沖縄県（20.7％）、最下位福井県（3.3％）で6.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

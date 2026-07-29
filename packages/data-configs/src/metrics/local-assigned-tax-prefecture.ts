@@ -52,6 +52,4 @@ export const localAssignedTaxPrefecture: MetricConfig = {
   "seoTitle": "地方譲与税ランキング都道府県【2022年】｜1位神奈川県（176,225,237）",
   "seoDescription": "2022年の地方譲与税の都道府県別ランキング。1位神奈川県（176,225,237）、最下位鳥取県（12,118,332）で14.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

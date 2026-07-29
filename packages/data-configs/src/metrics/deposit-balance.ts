@@ -76,6 +76,4 @@ export const depositBalance: MetricConfig = {
   "seoTitle": "預貯金残高ランキング都道府県【2004年】｜1位東京都（1,938,420億円）",
   "seoDescription": "2004年の預貯金残高の都道府県別ランキング。1位東京都（1,938,420億円）、最下位鳥取県（40,231億円）で48.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

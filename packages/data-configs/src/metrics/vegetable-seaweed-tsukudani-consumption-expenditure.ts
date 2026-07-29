@@ -59,6 +59,4 @@ export const vegetableSeaweedTsukudaniConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の野菜・海藻のつくだ煮消費支出額ランキング都道府県【2024年】｜1位山口県（747円）",
   "seoDescription": "2024年の他の野菜・海藻のつくだ煮消費支出額の都道府県別ランキング。1位山口県（747円）、最下位沖縄県（203円）で3.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

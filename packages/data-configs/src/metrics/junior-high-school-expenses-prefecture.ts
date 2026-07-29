@@ -86,6 +86,4 @@ export const juniorHighSchoolExpensesPrefecture: MetricConfig = {
   "seoTitle": "中学校費ランキング都道府県【2022年】｜1位東京都（149,622,604）",
   "seoDescription": "2022年の中学校費の都道府県別ランキング。1位東京都（149,622,604）、最下位鳥取県（11,707,579）で12.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

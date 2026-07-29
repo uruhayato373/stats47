@@ -52,6 +52,4 @@ export const roadExpresswayLength: MetricConfig = {
   "seoTitle": "道路実延長（高速道路）ランキング都道府県【2023年】｜1位北海道（786.7km）",
   "seoDescription": "2023年の道路実延長（高速道路）の都道府県別ランキング。1位北海道（786.7km）、最下位奈良県（17.8km）で44.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -51,6 +51,4 @@ export const marriagesPerTotalPopulation: MetricConfig = {
   "seoTitle": "婚姻率ランキング都道府県【2014年】｜1位東京都（6.49‐）",
   "seoDescription": "2014年の婚姻率の都道府県別ランキング。1位東京都（6.49‐）、最下位沖縄県（0.9‐）で7.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

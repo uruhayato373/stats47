@@ -30,6 +30,4 @@ export const accidentDeath30day: MetricConfig = {
     "decimalPlaces": 1,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

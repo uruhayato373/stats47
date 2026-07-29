@@ -86,6 +86,4 @@ export const movingInExcessRateJapanese: MetricConfig = {
   "seoTitle": "転入超過率ランキング都道府県【2024年】｜1位東京都（0.5％）",
   "seoDescription": "2024年の転入超過率の都道府県別ランキング。1位東京都（0.5％）、最下位高知県（-0.48％）で-1.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

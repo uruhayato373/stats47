@@ -55,6 +55,4 @@ export const inlandAquacultureHarvest: MetricConfig = {
   "seoTitle": "内水面養殖業収獲量ランキング都道府県【2023年】｜1位鹿児島県（7,966トン）",
   "seoDescription": "2023年の内水面養殖業収獲量の都道府県別ランキング。1位鹿児島県（7,966トン）、最下位沖縄県（0トン）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -52,6 +52,4 @@ export const deathCount: MetricConfig = {
   "seoTitle": "死亡数ランキング都道府県【2023年】｜1位東京都（137,241人）",
   "seoDescription": "2023年の死亡数の都道府県別ランキング。1位東京都（137,241人）、最下位鳥取県（8,290人）で16.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

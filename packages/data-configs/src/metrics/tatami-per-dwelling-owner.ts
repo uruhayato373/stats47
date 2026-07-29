@@ -61,6 +61,4 @@ export const tatamiPerDwellingOwner: MetricConfig = {
   "seoTitle": "持ち家住宅の居住室の畳数ランキング都道府県【2023年】｜1位富山県（53.16畳）",
   "seoDescription": "2023年の持ち家住宅の居住室の畳数の都道府県別ランキング。1位富山県（53.16畳）、最下位東京都（34.35畳）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const otherCitrusConsumptionQuantity: MetricConfig = {
   "seoTitle": "他の柑きつ類消費量ランキング都道府県【2024年】｜1位愛媛県（10,768g）",
   "seoDescription": "2024年の他の柑きつ類消費量の都道府県別ランキング。1位愛媛県（10,768g）、最下位三重県（1,715g）で6.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

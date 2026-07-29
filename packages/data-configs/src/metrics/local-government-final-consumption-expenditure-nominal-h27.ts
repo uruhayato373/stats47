@@ -35,6 +35,4 @@ export const localGovernmentFinalConsumptionExpenditureNominalH27: MetricConfig 
   },
   "seoTitle": "地方政府等最終消費支出（名目）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -53,6 +53,4 @@ export const nursingCareInsuranceBenefit: MetricConfig = {
   "seoTitle": "介護保険給付費用額ランキング都道府県【2023年】｜1位東京都（1,045,626,545千円）",
   "seoDescription": "2023年の介護保険給付費用額の都道府県別ランキング。1位東京都（1,045,626,545千円）、最下位鳥取県（59,818,923千円）で17.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

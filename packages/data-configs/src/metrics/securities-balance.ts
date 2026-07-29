@@ -53,6 +53,4 @@ export const securitiesBalance: MetricConfig = {
   "seoTitle": "有価証券保有額ランキング都道府県【2014年】｜1位東京都（4,303千円）",
   "seoDescription": "2014年の有価証券保有額の都道府県別ランキング。1位東京都（4,303千円）、最下位鹿児島県（508千円）で8.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

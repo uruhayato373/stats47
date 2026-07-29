@@ -59,6 +59,4 @@ export const driedMackerelConsumptionExpenditure: MetricConfig = {
   "seoTitle": "干しあじ消費支出額ランキング都道府県【2024年】｜1位神奈川県（1,100円）",
   "seoDescription": "2024年の干しあじ消費支出額の都道府県別ランキング。1位神奈川県（1,100円）、最下位沖縄県（67円）で16.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

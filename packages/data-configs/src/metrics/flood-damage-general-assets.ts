@@ -52,6 +52,4 @@ export const floodDamageGeneralAssets: MetricConfig = {
   "seoTitle": "水害一般資産等被害額ランキング都道府県【2014年】｜1位広島県（33,811百万円）",
   "seoDescription": "2014年の水害一般資産等被害額の都道府県別ランキング。1位広島県（33,811百万円）、最下位福井県（2百万円）で16905.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -74,6 +74,4 @@ export const kindergartenCountPer100k35: MetricConfig = {
   "seoTitle": "幼稚園数ランキング都道府県【2024年】｜1位徳島県（565園）",
   "seoDescription": "2024年の幼稚園数の都道府県別ランキング。1位徳島県（565園）、最下位富山県（119.1園）で4.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

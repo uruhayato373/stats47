@@ -55,6 +55,4 @@ export const portInboundShips: MetricConfig = {
   "seoTitle": "入港船舶隻数（港湾統計）ランキング都道府県【2023年】｜1位広島県（518,835隻）",
   "seoDescription": "2023年の入港船舶隻数（港湾統計）の都道府県別ランキング。1位広島県（518,835隻）、最下位山形県（3,062隻）で169.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

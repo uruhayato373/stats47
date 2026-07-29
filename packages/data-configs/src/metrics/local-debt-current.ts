@@ -65,6 +65,4 @@ export const localDebtCurrent: MetricConfig = {
   "seoTitle": "地方債現在高ランキング都道府県【2022年】｜1位北海道（5,778,413,965）",
   "seoDescription": "2022年の地方債現在高の都道府県別ランキング。1位北海道（5,778,413,965）、最下位沖縄県（564,686,266）で10.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

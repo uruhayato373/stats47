@@ -59,6 +59,4 @@ export const carPurchaseConsumptionQuantity: MetricConfig = {
   "seoTitle": "自動車購入消費量ランキング都道府県【2024年】｜1位岡山県（0.13台）",
   "seoDescription": "2024年の自動車購入消費量の都道府県別ランキング。1位岡山県（0.13台）、最下位岐阜県（0.01台）で14.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

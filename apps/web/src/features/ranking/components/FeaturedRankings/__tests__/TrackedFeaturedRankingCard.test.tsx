@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { TrackedFeaturedRankingCard } from "../TrackedFeaturedRankingCard";
 
 /**
- * 計測ラッパーの component test (仕様 doc 28 §9.1-9.2 / §13.4)。
+ * 計測ラッパーの component test。
  * IntersectionObserver を mock し threshold 0.5 の設定と発火経路を検証する。
  */
 

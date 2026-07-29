@@ -86,6 +86,4 @@ export const disasterReliefExpensesPrefecture: MetricConfig = {
   "seoTitle": "災害救助費ランキング都道府県【2022年】｜1位福島県（14,962,426）",
   "seoDescription": "2022年の災害救助費の都道府県別ランキング。1位福島県（14,962,426）、最下位山梨県（581）で25752.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

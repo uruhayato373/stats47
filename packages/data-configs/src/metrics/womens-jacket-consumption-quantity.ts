@@ -59,6 +59,4 @@ export const womensJacketConsumptionQuantity: MetricConfig = {
   "seoTitle": "婦人用上着消費量ランキング都道府県【2024年】｜1位山梨県（0.43着）",
   "seoDescription": "2024年の婦人用上着消費量の都道府県別ランキング。1位山梨県（0.43着）、最下位和歌山県（0.12着）で3.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

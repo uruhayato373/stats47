@@ -56,7 +56,6 @@ const BASELINE = new Set([
   "PortStatisticsMapCard",
   "RailCard",
   "RankingDefinitionCard",
-  "RankingHeroCard",
   "RankingSourceCard",
   "SurfaceCard",
   "SurfaceLinkCard",

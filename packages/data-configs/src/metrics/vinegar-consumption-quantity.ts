@@ -59,6 +59,4 @@ export const vinegarConsumptionQuantity: MetricConfig = {
   "seoTitle": "酢消費量ランキング都道府県【2024年】｜1位岐阜県（2,192ml）",
   "seoDescription": "2024年の酢消費量の都道府県別ランキング。1位岐阜県（2,192ml）、最下位石川県（432ml）で5.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

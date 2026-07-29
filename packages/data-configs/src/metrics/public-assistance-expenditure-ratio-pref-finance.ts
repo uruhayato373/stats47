@@ -70,6 +70,4 @@ export const publicAssistanceExpenditureRatioPrefFinance: MetricConfig = {
   "seoTitle": "生活保護費割合ランキング都道府県【2022年】｜1位福岡県（1.55％）",
   "seoDescription": "2022年の生活保護費割合の都道府県別ランキング。1位福岡県（1.55％）、最下位島根県（0.02％）で77.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const enokiConsumptionExpenditure: MetricConfig = {
   "seoTitle": "えのきたけ消費支出額ランキング都道府県【2024年】｜1位岐阜県（1,820円）",
   "seoDescription": "2024年のえのきたけ消費支出額の都道府県別ランキング。1位岐阜県（1,820円）、最下位沖縄県（907円）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

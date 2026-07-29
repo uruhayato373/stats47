@@ -10,14 +10,18 @@ import type { AreaType } from "@/features/area";
 
 import { trackAreaTypeChange, trackRankingView, trackYearChange } from "@/lib/analytics/events";
 
+import { fetchNationalAverageSeriesAction } from "../../actions/fetch-national-average-series";
 import { fetchRankingValuesAction } from "../../actions/fetch-ranking-values";
 
+import type { NationalAveragePoint } from "../../lib/build-national-average-series";
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 interface UseRankingPageStateParams {
     rankingKey: string;
     rankingItem: RankingItem;
     initialRankingValues: RankingValue[];
+    /** サーバーが全年 values から畳んだ総数ベースの全国平均系列 */
+    initialNationalAverageSeries: NationalAveragePoint[];
     areaType: AreaType;
     selectedYear?: string;
     parentAreaCode?: string;
@@ -28,12 +32,16 @@ export function useRankingPageState({
     rankingKey,
     rankingItem,
     initialRankingValues,
+    initialNationalAverageSeries,
     areaType,
     selectedYear,
     parentAreaCode,
     cityRankingItem,
 }: UseRankingPageStateParams) {
     const [rankingValues, setRankingValues] = useState<RankingValue[]>(initialRankingValues);
+    const [nationalAverageSeries, setNationalAverageSeries] = useState<NationalAveragePoint[]>(
+        initialNationalAverageSeries,
+    );
     const [currentYear, setCurrentYear] = useState(selectedYear ?? "");
     const [normalizationType, setNormalizationType] = useState<string | undefined>(undefined);
     const [currentAreaType, setCurrentAreaType] = useState<AreaType>(areaType);
@@ -43,6 +51,38 @@ export function useRankingPageState({
     const activeRankingItem = currentAreaType === "city" && cityRankingItem
         ? cityRankingItem
         : rankingItem;
+
+    /**
+     * 計算方法に対応した全国平均系列を解決する。
+     * 総数はサーバー seed をそのまま使い再取得しない (系列は年度非依存)。
+     * 正規化版スナップショットが無い指標は空配列 = 推移非表示に degrade する。
+     */
+    const resolveSeries = async (
+        area: AreaType,
+        norm?: string,
+    ): Promise<NationalAveragePoint[]> => {
+        if (!norm) return initialNationalAverageSeries;
+        const result = await fetchNationalAverageSeriesAction(rankingKey, area, norm);
+        return isOk(result) ? result.data : [];
+    };
+
+    /**
+     * 値と系列を 1 つの transition でまとめて差し替える。
+     * 別々に setState すると「数値=10万人あたり / 線=総数」の中間フレームが出る。
+     */
+    const applyValuesAndSeries = async (
+        area: AreaType,
+        year: string,
+        norm: string | undefined,
+        { syncSeries }: { syncSeries: boolean },
+    ) => {
+        const [valuesResult, series] = await Promise.all([
+            fetchRankingValuesAction(rankingKey, area, year, norm, parentAreaCode),
+            syncSeries ? resolveSeries(area, norm) : Promise.resolve(null),
+        ]);
+        if (isOk(valuesResult)) setRankingValues(valuesResult.data);
+        if (series !== null) setNationalAverageSeries(series);
+    };
 
     const buildUrl = (year: string, area: AreaType, norm?: string) => {
         const params = new URLSearchParams();
@@ -68,16 +108,10 @@ export function useRankingPageState({
         setCurrentYear(newYear);
         window.history.replaceState(null, "", buildUrl(newYear, currentAreaType, normalizationType));
         startTransition(async () => {
-            const result = await fetchRankingValuesAction(
-                rankingKey,
-                currentAreaType,
-                newYear,
-                normalizationType,
-                parentAreaCode,
-            );
-            if (isOk(result)) {
-                setRankingValues(result.data);
-            }
+            // 系列は年度非依存なので再取得しない
+            await applyValuesAndSeries(currentAreaType, newYear, normalizationType, {
+                syncSeries: false,
+            });
         });
     };
 
@@ -95,16 +129,9 @@ export function useRankingPageState({
 
         window.history.replaceState(null, "", buildUrl(newYear, newAreaType));
         startTransition(async () => {
-            const result = await fetchRankingValuesAction(
-                rankingKey,
-                newAreaType,
-                newYear,
-                normalizationType,
-                parentAreaCode,
-            );
-            if (isOk(result)) {
-                setRankingValues(result.data);
-            }
+            await applyValuesAndSeries(newAreaType, newYear, normalizationType, {
+                syncSeries: true,
+            });
         });
     };
 
@@ -125,34 +152,23 @@ export function useRankingPageState({
             if (year !== selectedYear || urlAreaType !== areaType) {
                 setCurrentYear(year);
                 startTransition(async () => {
-                    const result = await fetchRankingValuesAction(rankingKey, "city", year, urlNorm, parentAreaCode);
-                    if (isOk(result)) setRankingValues(result.data);
+                    await applyValuesAndSeries("city", year, urlNorm, { syncSeries: true });
                 });
             }
         } else if (urlYear && urlYear !== selectedYear) {
             setCurrentYear(urlYear);
             window.history.replaceState(null, "", buildUrl(urlYear, currentAreaType, urlNorm));
             startTransition(async () => {
-                const result = await fetchRankingValuesAction(
-                    rankingKey,
-                    currentAreaType,
-                    urlYear,
-                    urlNorm,
-                    parentAreaCode,
-                );
-                if (isOk(result)) setRankingValues(result.data);
+                await applyValuesAndSeries(currentAreaType, urlYear, urlNorm, {
+                    syncSeries: Boolean(urlNorm),
+                });
             });
         } else if (urlNorm) {
             startTransition(async () => {
                 if (!currentYear) return;
-                const result = await fetchRankingValuesAction(
-                    rankingKey,
-                    currentAreaType,
-                    currentYear,
-                    urlNorm,
-                    parentAreaCode,
-                );
-                if (isOk(result)) setRankingValues(result.data);
+                await applyValuesAndSeries(currentAreaType, currentYear, urlNorm, {
+                    syncSeries: true,
+                });
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -173,16 +189,9 @@ export function useRankingPageState({
 
         startTransition(async () => {
             if (!currentYear) return;
-            const result = await fetchRankingValuesAction(
-                rankingKey,
-                currentAreaType,
-                currentYear,
-                nextType,
-                parentAreaCode,
-            );
-            if (isOk(result)) {
-                setRankingValues(result.data);
-            }
+            await applyValuesAndSeries(currentAreaType, currentYear, nextType, {
+                syncSeries: true,
+            });
         });
     };
 
@@ -194,6 +203,7 @@ export function useRankingPageState({
         handleNormalizationChange,
         handleYearChange,
         isPending,
+        nationalAverageSeries,
         normalizationType,
         rankingValues,
     };

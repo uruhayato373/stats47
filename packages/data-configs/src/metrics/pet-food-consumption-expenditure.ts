@@ -59,6 +59,4 @@ export const petFoodConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ペットフード消費支出額ランキング都道府県【2024年】｜1位福島県（16,285円）",
   "seoDescription": "2024年のペットフード消費支出額の都道府県別ランキング。1位福島県（16,285円）、最下位沖縄県（4,459円）で3.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

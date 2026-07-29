@@ -35,6 +35,4 @@ export const currentLifeInsuranceBalanceRatioMultiPersonHouseholds: MetricConfig
   "seoTitle": "生命保険現在高割合ランキング都道府県【2019年】｜1位鹿児島県（29.9％）",
   "seoDescription": "2019年の生命保険現在高割合の都道府県別ランキング。1位鹿児島県（29.9％）、最下位愛知県（16.3％）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

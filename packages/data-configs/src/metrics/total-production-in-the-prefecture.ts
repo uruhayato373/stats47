@@ -52,6 +52,4 @@ export const totalProductionInThePrefecture: MetricConfig = {
   "seoTitle": "県内総生産額ランキング都道府県【2021年】｜1位東京都（113,685,917百万円）",
   "seoDescription": "2021年の県内総生産額の都道府県別ランキング。1位東京都（113,685,917百万円）、最下位鳥取県（1,926,339百万円）で59.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const pickledPlumConsumptionExpenditure: MetricConfig = {
   "seoTitle": "梅干し消費支出額ランキング都道府県【2024年】｜1位和歌山県（2,753円）",
   "seoDescription": "2024年の梅干し消費支出額の都道府県別ランキング。1位和歌山県（2,753円）、最下位高知県（717円）で3.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

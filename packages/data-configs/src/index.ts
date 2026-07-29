@@ -24,20 +24,9 @@ export {
   type SourceAttribution,
 } from "./provenance/resolve-metric-provenance";
 export {
-  HOME_FEATURED_RANKINGS,
-  validateHomeFeaturedRankings,
-  type HomeFeaturedRankingDefinition,
-  type HomeFeaturedRegistryEntry,
-} from "./home-featured-rankings";
-export {
-  HOME_PORTAL_CATEGORIES,
   HOME_PORTAL_USE_CASES,
-  HOME_PORTAL_TERMS,
-  HOME_PORTAL_LIMITS,
   validateHomePortal,
-  type HomePortalCategory,
   type HomePortalUseCase,
-  type HomePortalTerm,
 } from "./home-portal";
 export {
   THEME_CATALOGS,

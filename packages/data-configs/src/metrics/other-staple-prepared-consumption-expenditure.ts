@@ -59,6 +59,4 @@ export const otherStaplePreparedConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の主食的調理食品消費支出額ランキング都道府県【2024年】｜1位埼玉県（25,599円）",
   "seoDescription": "2024年の他の主食的調理食品消費支出額の都道府県別ランキング。1位埼玉県（25,599円）、最下位沖縄県（13,725円）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

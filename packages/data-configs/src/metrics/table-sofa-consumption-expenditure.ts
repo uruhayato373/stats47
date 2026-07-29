@@ -59,6 +59,4 @@ export const tableSofaConsumptionExpenditure: MetricConfig = {
   "seoTitle": "テーブル・ソファー消費支出額ランキング都道府県【2024年】｜1位滋賀県（12,515円）",
   "seoDescription": "2024年のテーブル・ソファー消費支出額の都道府県別ランキング。1位滋賀県（12,515円）、最下位栃木県（326円）で38.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

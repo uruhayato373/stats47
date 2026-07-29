@@ -63,6 +63,4 @@ export const nursingHomeResidentsPer100065plus: MetricConfig = {
   "seoTitle": "老人ホーム在所者数ランキング都道府県【2023年】｜1位宮崎県（53.8人）",
   "seoDescription": "2023年の老人ホーム在所者数の都道府県別ランキング。1位宮崎県（53.8人）、最下位山梨県（22.2人）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

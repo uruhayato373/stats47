@@ -59,6 +59,4 @@ export const greenBeansConsumptionExpenditure: MetricConfig = {
   "seoTitle": "さやまめ消費支出額ランキング都道府県【2024年】｜1位新潟県（5,839円）",
   "seoDescription": "2024年のさやまめ消費支出額の都道府県別ランキング。1位新潟県（5,839円）、最下位佐賀県（690円）で8.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

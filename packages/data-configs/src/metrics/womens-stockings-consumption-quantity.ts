@@ -59,6 +59,4 @@ export const womensStockingsConsumptionQuantity: MetricConfig = {
   "seoTitle": "婦人用ストッキング消費量ランキング都道府県【2024年】｜1位富山県（1.5足）",
   "seoDescription": "2024年の婦人用ストッキング消費量の都道府県別ランキング。1位富山県（1.5足）、最下位愛媛県（0.4足）で3.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

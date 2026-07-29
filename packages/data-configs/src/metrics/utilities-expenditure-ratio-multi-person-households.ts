@@ -41,6 +41,4 @@ export const utilitiesExpenditureRatioMultiPersonHouseholds: MetricConfig = {
   "seoTitle": "光熱・水道費割合ランキング都道府県【2024年】｜1位青森県（11.5％）",
   "seoDescription": "2024年の光熱・水道費割合の都道府県別ランキング。1位青森県（11.5％）、最下位東京都（6％）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const otherBeautyProductsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の理美容用品消費支出額ランキング都道府県【2024年】｜1位東京都（6,075円）",
   "seoDescription": "2024年の他の理美容用品消費支出額の都道府県別ランキング。1位東京都（6,075円）、最下位福井県（1,809円）で3.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

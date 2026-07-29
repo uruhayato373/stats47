@@ -52,6 +52,4 @@ export const pavedRoadMunicipalLength: MetricConfig = {
   "seoTitle": "舗装道路実延長（市町村道）ランキング都道府県【2023年】｜1位北海道（43,124.6km）",
   "seoDescription": "2023年の舗装道路実延長（市町村道）の都道府県別ランキング。1位北海道（43,124.6km）、最下位沖縄県（5,707.7km）で7.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

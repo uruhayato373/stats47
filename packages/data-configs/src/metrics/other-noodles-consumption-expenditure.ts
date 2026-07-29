@@ -59,6 +59,4 @@ export const otherNoodlesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の麺類消費支出額ランキング都道府県【2024年】｜1位神奈川県（1,083円）",
   "seoDescription": "2024年の他の麺類消費支出額の都道府県別ランキング。1位神奈川県（1,083円）、最下位沖縄県（226円）で4.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

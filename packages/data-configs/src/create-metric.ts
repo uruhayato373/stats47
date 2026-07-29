@@ -11,8 +11,8 @@ import type {
 
 /**
  * `createMetric` の入力。`MetricConfig` のうち、ほぼ全 metric で同一になる
- * 定型フィールド（entities / display / calculation / isActive / isFeatured /
- * featuredOrder）は省略可能で、ファクトリが既定値を補う。
+ * 定型フィールド（entities / display / calculation / isActive）は省略可能で、
+ * ファクトリが既定値を補う。
  */
 export interface CreateMetricInput {
   key: string;
@@ -38,10 +38,6 @@ export interface CreateMetricInput {
   seoDescription?: string;
   /** 既定 `true` */
   isActive?: boolean;
-  /** 既定 `false` */
-  isFeatured?: boolean;
-  /** 既定 `0` */
-  featuredOrder?: number;
 }
 
 const DEFAULT_ENTITIES: readonly EntityKind[] = ["prefecture"];
@@ -51,7 +47,7 @@ const DEFAULT_ENTITIES: readonly EntityKind[] = ["prefecture"];
  *
  * 2209 個の metric file に共通する定型（`entities: ["prefecture"]` /
  * `display.conversionFactor: 1` / `calculation.isCalculated: false` /
- * `isActive: true` / `isFeatured: false` / `featuredOrder: 0`）を既定値として吸収し、
+ * `isActive: true`）を既定値として吸収し、
  * 各ファイルの記述量を削減する。
  *
  * 返り値は通常の `MetricConfig` なので、リテラルを export している既存ファイルと
@@ -68,7 +64,7 @@ const DEFAULT_ENTITIES: readonly EntityKind[] = ["prefecture"];
  *   yearFormat: "calendar",
  * });
  * // → entities ["prefecture"], display {conversionFactor:1,decimalPlaces:0},
- * //   calculation {isCalculated:false}, isActive true, isFeatured false, featuredOrder 0
+ * //   calculation {isCalculated:false}, isActive true
  */
 export function createMetric(input: CreateMetricInput): MetricConfig {
   const {
@@ -76,8 +72,6 @@ export function createMetric(input: CreateMetricInput): MetricConfig {
     display,
     calculation,
     isActive,
-    isFeatured,
-    featuredOrder,
     ...rest
   } = input;
 
@@ -87,7 +81,5 @@ export function createMetric(input: CreateMetricInput): MetricConfig {
     display: { conversionFactor: 1, decimalPlaces: 0, ...display },
     calculation: { isCalculated: false, ...calculation },
     isActive: isActive ?? true,
-    isFeatured: isFeatured ?? false,
-    featuredOrder: featuredOrder ?? 0,
   };
 }

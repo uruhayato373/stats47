@@ -53,6 +53,4 @@ export const convenienceStoreCountCommercial: MetricConfig = {
   "seoTitle": "コンビニエンスストア店舗数ランキング都道府県【2025年】｜1位東京都（7,233店）",
   "seoDescription": "2025年のコンビニエンスストア店舗数の都道府県別ランキング。1位東京都（7,233店）、最下位鳥取県（258店）で28.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

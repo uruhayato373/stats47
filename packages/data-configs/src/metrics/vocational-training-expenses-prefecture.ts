@@ -98,6 +98,4 @@ export const vocationalTrainingExpensesPrefecture: MetricConfig = {
   "seoTitle": "職業訓練費ランキング都道府県【2022年】｜1位東京都（13,448,711）",
   "seoDescription": "2022年の職業訓練費の都道府県別ランキング。1位東京都（13,448,711）、最下位滋賀県（445,793）で30.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

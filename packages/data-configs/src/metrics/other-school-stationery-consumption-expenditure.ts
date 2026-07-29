@@ -59,6 +59,4 @@ export const otherSchoolStationeryConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の学習用文房具消費支出額ランキング都道府県【2024年】｜1位群馬県（1,954円）",
   "seoDescription": "2024年の他の学習用文房具消費支出額の都道府県別ランキング。1位群馬県（1,954円）、最下位香川県（509円）で3.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

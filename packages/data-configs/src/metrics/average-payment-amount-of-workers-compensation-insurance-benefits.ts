@@ -51,6 +51,4 @@ export const averagePaymentAmountOfWorkersCompensationInsuranceBenefits: MetricC
   "seoTitle": "労働者災害補償保険給付平均支給額ランキング都道府県【2023年】｜1位香川県（79.1千円）",
   "seoDescription": "2023年の労働者災害補償保険給付平均支給額の都道府県別ランキング。1位香川県（79.1千円）、最下位神奈川県（52.2千円）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

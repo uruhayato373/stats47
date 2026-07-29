@@ -34,6 +34,4 @@ export const studyParticipationRateAcademic: MetricConfig = {
   "seoTitle": "人文・社会・自然科学の行動者率ランキング都道府県【2021年】｜1位東京都（14.6％）",
   "seoDescription": "2021年の人文・社会・自然科学の行動者率の都道府県別ランキング。1位東京都（14.6％）、最下位宮崎県（5.7％）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

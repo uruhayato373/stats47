@@ -34,6 +34,4 @@ export const employeeCompensationH27: MetricConfig = {
   },
   "seoTitle": "雇用者報酬（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

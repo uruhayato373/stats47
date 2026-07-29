@@ -59,6 +59,4 @@ export const scallopConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ほたて貝消費支出額ランキング都道府県【2024年】｜1位青森県（3,540円）",
   "seoDescription": "2024年のほたて貝消費支出額の都道府県別ランキング。1位青森県（3,540円）、最下位宮崎県（539円）で6.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

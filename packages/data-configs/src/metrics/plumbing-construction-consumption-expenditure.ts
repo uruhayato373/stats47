@@ -59,6 +59,4 @@ export const plumbingConstructionConsumptionExpenditure: MetricConfig = {
   "seoTitle": "給排水関係工事費消費支出額ランキング都道府県【2024年】｜1位新潟県（19,441円）",
   "seoDescription": "2024年の給排水関係工事費消費支出額の都道府県別ランキング。1位新潟県（19,441円）、最下位大分県（435円）で44.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

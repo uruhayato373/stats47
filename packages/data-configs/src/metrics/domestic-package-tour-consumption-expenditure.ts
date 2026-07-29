@@ -59,6 +59,4 @@ export const domesticPackageTourConsumptionExpenditure: MetricConfig = {
   "seoTitle": "国内パック旅行費消費支出額ランキング都道府県【2024年】｜1位岐阜県（43,103円）",
   "seoDescription": "2024年の国内パック旅行費消費支出額の都道府県別ランキング。1位岐阜県（43,103円）、最下位山梨県（9,586円）で4.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const freshShiitakeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "生しいたけ消費支出額ランキング都道府県【2024年】｜1位富山県（2,766円）",
   "seoDescription": "2024年の生しいたけ消費支出額の都道府県別ランキング。1位富山県（2,766円）、最下位沖縄県（1,211円）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

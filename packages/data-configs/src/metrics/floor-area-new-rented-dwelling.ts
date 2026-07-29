@@ -95,6 +95,4 @@ export const floorAreaNewRentedDwelling: MetricConfig = {
   "seoTitle": "着工新設貸家住宅の床面積ランキング都道府県【2024年】｜1位奈良県（60.2ｍ2）",
   "seoDescription": "2024年の着工新設貸家住宅の床面積の都道府県別ランキング。1位奈良県（60.2ｍ2）、最下位岩手県（42.7ｍ2）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const sashimiPlatterConsumptionExpenditure: MetricConfig = {
   "seoTitle": "さしみ盛合わせ消費支出額ランキング都道府県【2024年】｜1位長崎県（6,759円）",
   "seoDescription": "2024年のさしみ盛合わせ消費支出額の都道府県別ランキング。1位長崎県（6,759円）、最下位高知県（1,422円）で4.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

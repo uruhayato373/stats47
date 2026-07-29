@@ -59,6 +59,4 @@ export const sushiTakeoutConsumptionExpenditure: MetricConfig = {
   "seoTitle": "すし(弁当)消費支出額ランキング都道府県【2024年】｜1位奈良県（19,518円）",
   "seoDescription": "2024年のすし(弁当)消費支出額の都道府県別ランキング。1位奈良県（19,518円）、最下位秋田県（11,798円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

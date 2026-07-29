@@ -59,6 +59,4 @@ export const pickledDaikonConsumptionQuantity: MetricConfig = {
   "seoTitle": "だいこん漬消費量ランキング都道府県【2024年】｜1位岩手県（2,161g）",
   "seoDescription": "2024年のだいこん漬消費量の都道府県別ランキング。1位岩手県（2,161g）、最下位沖縄県（630g）で3.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

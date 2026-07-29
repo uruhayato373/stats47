@@ -53,6 +53,4 @@ export const fisherySpeciesCatchYellowtail: MetricConfig = {
   "seoTitle": "ブリ類漁獲量ランキング都道府県【2015年】｜1位長崎県（15,651トン）",
   "seoDescription": "2015年のブリ類漁獲量の都道府県別ランキング。1位長崎県（15,651トン）、最下位大阪府（5トン）で3130.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const ketchupConsumptionQuantity: MetricConfig = {
   "seoTitle": "ケチャップ消費量ランキング都道府県【2024年】｜1位岐阜県（2,261g）",
   "seoDescription": "2024年のケチャップ消費量の都道府県別ランキング。1位岐阜県（2,261g）、最下位秋田県（1,117g）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

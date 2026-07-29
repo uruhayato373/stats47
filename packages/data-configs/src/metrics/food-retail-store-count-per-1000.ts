@@ -60,6 +60,4 @@ export const foodRetailStoreCountPer1000: MetricConfig = {
   "seoTitle": "飲食料品小売店数ランキング都道府県【2006年】｜1位高知県（5.28店）",
   "seoDescription": "2006年の飲食料品小売店数の都道府県別ランキング。1位高知県（5.28店）、最下位神奈川県（2.42店）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -34,7 +34,12 @@
     "workers:build": "npm run workers:prebuild && npx cross-env CLOUDFLARE_WORKERS=true npx tsx scripts/validate-env.ts && npx cross-env CLOUDFLARE_WORKERS=true opennextjs-cloudflare build --workers-runtime",
     "workers:preview": "opennextjs-cloudflare preview",
     "workers:populate-cache:production": "opennextjs-cloudflare populateCache remote --env production",
-    "workers:deploy:production": "npm run workers:populate-cache:production && wrangler deploy --env production"
+    "workers:deploy:production": "npm run workers:populate-cache:production && wrangler deploy --env production",
+    "generate:runtime-summaries": "npx tsx scripts/generate-runtime-metric-summaries.ts",
+    "check:runtime-summaries": "npx tsx scripts/generate-runtime-metric-summaries.ts --check",
+    "generate:ranking-prominence": "npx tsx scripts/generate-ranking-prominence.ts",
+    "check:ranking-prominence": "npx tsx scripts/generate-ranking-prominence.ts --check",
+    "audit:ranking-hooks": "npx tsx scripts/generate-ranking-prominence.ts --audit"
   },
   "dependencies": {
     "@stats47/ai-content": "*",

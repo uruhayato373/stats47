@@ -85,6 +85,4 @@ export const welfareCommissionerConsultationsPerPerson: MetricConfig = {
   "seoTitle": "民生委員1人当たり相談・支援件数ランキング都道府県【2023年】｜1位福岡県（37件）",
   "seoDescription": "2023年の民生委員1人当たり相談・支援件数の都道府県別ランキング。1位福岡県（37件）、最下位群馬県（12.8件）で2.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

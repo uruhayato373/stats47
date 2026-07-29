@@ -87,6 +87,4 @@ export const independentRevenuePrefecture: MetricConfig = {
   "seoTitle": "自主財源額ランキング都道府県【2022年】｜1位東京都（8,183,487,668）",
   "seoDescription": "2022年の自主財源額の都道府県別ランキング。1位東京都（8,183,487,668）、最下位鳥取県（108,458,709）で75.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

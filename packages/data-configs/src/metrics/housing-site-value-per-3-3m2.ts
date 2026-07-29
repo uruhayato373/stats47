@@ -51,6 +51,4 @@ export const housingSiteValuePer33m2: MetricConfig = {
   "seoTitle": "住宅敷地価額ランキング都道府県【2004年】｜1位東京都（781.2千円）",
   "seoDescription": "2004年の住宅敷地価額の都道府県別ランキング。1位東京都（781.2千円）、最下位沖縄県（0千円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

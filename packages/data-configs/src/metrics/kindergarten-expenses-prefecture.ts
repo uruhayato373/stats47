@@ -86,6 +86,4 @@ export const kindergartenExpensesPrefecture: MetricConfig = {
   "seoTitle": "幼稚園費ランキング都道府県【2022年】｜1位長野県（11,628,864）",
   "seoDescription": "2022年の幼稚園費の都道府県別ランキング。1位長野県（11,628,864）、最下位宮崎県（0）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

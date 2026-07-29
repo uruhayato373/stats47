@@ -74,6 +74,4 @@ export const publicKindergartenStudentRatio: MetricConfig = {
   "seoTitle": "公立幼稚園在園者比率ランキング都道府県【2024年】｜1位島根県（81.9％）",
   "seoDescription": "2024年の公立幼稚園在園者比率の都道府県別ランキング。1位島根県（81.9％）、最下位石川県（0％）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

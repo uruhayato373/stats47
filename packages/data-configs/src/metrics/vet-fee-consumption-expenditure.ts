@@ -59,6 +59,4 @@ export const vetFeeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "動物病院代消費支出額ランキング都道府県【2024年】｜1位神奈川県（21,088円）",
   "seoDescription": "2024年の動物病院代消費支出額の都道府県別ランキング。1位神奈川県（21,088円）、最下位沖縄県（1,016円）で20.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

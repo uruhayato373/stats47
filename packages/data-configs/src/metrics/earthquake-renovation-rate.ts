@@ -37,6 +37,4 @@ export const earthquakeRenovationRate: MetricConfig = {
   "seoTitle": "耐震改修工事実施率ランキング都道府県【2023年】｜1位高知県（4.53％）",
   "seoDescription": "2023年の耐震改修工事実施率の都道府県別ランキング。1位高知県（4.53％）、最下位沖縄県（1.01％）で4.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

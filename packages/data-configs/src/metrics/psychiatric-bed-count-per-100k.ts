@@ -80,6 +80,4 @@ export const psychiatricBedCountPer100k: MetricConfig = {
   "seoTitle": "精神病床数ランキング都道府県【2023年】｜1位長崎県（603床）",
   "seoDescription": "2023年の精神病床数の都道府県別ランキング。1位長崎県（603床）、最下位神奈川県（143.3床）で4.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const tableSaltConsumptionQuantity: MetricConfig = {
   "seoTitle": "食塩消費量ランキング都道府県【2024年】｜1位新潟県（2,437g）",
   "seoDescription": "2024年の食塩消費量の都道府県別ランキング。1位新潟県（2,437g）、最下位群馬県（736g）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

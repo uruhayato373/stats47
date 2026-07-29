@@ -19,6 +19,7 @@ import {
   type MetricRegistry,
   type ProvenanceSurvey,
 } from "@stats47/data-configs";
+import { resolveRankingHook } from "@stats47/data-configs/prominence";
 import type { AreaType } from "@stats47/types";
 
 import surveysMaster from "../data/surveys.json";
@@ -205,8 +206,11 @@ export function buildRankingItemFromMetric(
     sourceConfig: buildSourceProvenance(config),
     seoTitle: config.seoTitle ?? null,
     seoDescription: config.seoDescription ?? null,
-    isFeatured: config.isFeatured ?? false,
-    featuredOrder: config.featuredOrder ?? 0,
+    hook: resolveRankingHook({
+      rankingKey: config.key,
+      title: config.title,
+      unit: config.unit ?? "",
+    }),
     tags: (config.tags ?? []).map((tagKey) => ({ tagKey })),
     createdAt: ctx.existing?.createdAt ?? ctx.now,
     updatedAt: ctx.now,

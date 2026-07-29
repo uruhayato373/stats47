@@ -52,6 +52,4 @@ export const cityGasMeterCount: MetricConfig = {
   "seoTitle": "都市ガスメーター取付数ランキング都道府県【2016年】｜1位東京都（7,012,793個）",
   "seoDescription": "2016年の都市ガスメーター取付数の都道府県別ランキング。1位東京都（7,012,793個）、最下位島根県（27,626個）で253.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

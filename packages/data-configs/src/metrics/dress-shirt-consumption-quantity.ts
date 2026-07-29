@@ -59,6 +59,4 @@ export const dressShirtConsumptionQuantity: MetricConfig = {
   "seoTitle": "ワイシャツ消費量ランキング都道府県【2024年】｜1位山口県（0.7枚）",
   "seoDescription": "2024年のワイシャツ消費量の都道府県別ランキング。1位山口県（0.7枚）、最下位沖縄県（0.15枚）で4.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

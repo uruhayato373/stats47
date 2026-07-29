@@ -52,6 +52,4 @@ export const agricultureForestryFisheriesExpensesPrefecture: MetricConfig = {
   "seoTitle": "農林水産業費ランキング都道府県【2022年】｜1位北海道（270,584,874）",
   "seoDescription": "2022年の農林水産業費の都道府県別ランキング。1位北海道（270,584,874）、最下位大阪府（13,498,634）で20.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

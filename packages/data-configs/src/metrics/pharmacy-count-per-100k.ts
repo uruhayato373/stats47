@@ -86,6 +86,4 @@ export const pharmacyCountPer100k: MetricConfig = {
   "seoTitle": "人口10万人あたり薬局数ランキング都道府県【2023年】｜1位佐賀県（64.5所）",
   "seoDescription": "2023年の人口10万人あたり薬局数の都道府県別ランキング。1位佐賀県（64.5所）、最下位沖縄県（39.4所）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

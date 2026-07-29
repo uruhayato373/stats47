@@ -59,6 +59,4 @@ export const potatoConsumptionQuantity: MetricConfig = {
   "seoTitle": "じゃがいも消費量ランキング都道府県【2024】産地王者・北海道は何位? 1位は岐阜",
   "seoDescription": "じゃがいもの産地といえば北海道、では最も食べる県は?──答えは岐阜県(10,467g)。最下位沖縄(6,331g)まで1.7倍の差。2024年最新ランキングを地図とグラフで47都道府県比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

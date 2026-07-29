@@ -59,6 +59,4 @@ export const monthlyParkingConsumptionExpenditure: MetricConfig = {
   "seoTitle": "年極・月極駐車場借料消費支出額ランキング都道府県【2024年】｜1位高知県（35,979円）",
   "seoDescription": "2024年の年極・月極駐車場借料消費支出額の都道府県別ランキング。1位高知県（35,979円）、最下位青森県（5,242円）で6.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

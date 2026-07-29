@@ -59,6 +59,4 @@ export const privateElementarySchoolConsumptionExpenditure: MetricConfig = {
   "seoTitle": "私立小学校消費支出額ランキング都道府県【2024年】｜1位奈良県（27,102円）",
   "seoDescription": "2024年の私立小学校消費支出額の都道府県別ランキング。1位奈良県（27,102円）、最下位鹿児島県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

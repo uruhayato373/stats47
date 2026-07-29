@@ -59,6 +59,4 @@ export const mobilePhoneBillConsumptionExpenditure: MetricConfig = {
   "seoTitle": "携帯電話通信料消費支出額ランキング都道府県【2024年】｜1位高知県（133,324円）",
   "seoDescription": "2024年の携帯電話通信料消費支出額の都道府県別ランキング。1位高知県（133,324円）、最下位兵庫県（77,944円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

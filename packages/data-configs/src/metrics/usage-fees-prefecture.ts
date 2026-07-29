@@ -85,6 +85,4 @@ export const usageFeesPrefecture: MetricConfig = {
   "seoTitle": "使用料ランキング都道府県【2022年】｜1位東京都（122,977,604）",
   "seoDescription": "2022年の使用料の都道府県別ランキング。1位東京都（122,977,604）、最下位鳥取県（2,996,455）で41.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

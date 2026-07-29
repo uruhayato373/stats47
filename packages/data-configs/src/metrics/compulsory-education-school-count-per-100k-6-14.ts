@@ -51,6 +51,4 @@ export const compulsoryEducationSchoolCountPer100k614: MetricConfig = {
   "seoTitle": "義務教育学校数ランキング都道府県【2024年】｜1位鳥取県（13.9校）",
   "seoDescription": "2024年の義務教育学校数の都道府県別ランキング。1位鳥取県（13.9校）、最下位沖縄県（0校）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

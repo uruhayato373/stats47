@@ -45,6 +45,4 @@ export const treatmentRateOsteoporosisInpatient: MetricConfig = {
   "seoTitle": "骨の密度及び構造の障害（骨粗しょう症）の受療率（入院）ランキング都道府県【2023年】｜1位秋田県（3人（人口10万対））",
   "seoDescription": "2023年の骨の密度及び構造の障害（骨粗しょう症）の受療率（入院）の都道府県別ランキング。1位秋田県（3人（人口10万対））、最下位島根県（0人（人口10万対））で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

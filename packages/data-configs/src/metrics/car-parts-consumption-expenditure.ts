@@ -59,6 +59,4 @@ export const carPartsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "自動車等部品消費支出額ランキング都道府県【2024年】｜1位群馬県（38,278円）",
   "seoDescription": "2024年の自動車等部品消費支出額の都道府県別ランキング。1位群馬県（38,278円）、最下位東京都（9,369円）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

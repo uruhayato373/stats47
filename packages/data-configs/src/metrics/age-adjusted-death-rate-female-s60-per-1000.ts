@@ -34,6 +34,4 @@ export const ageAdjustedDeathRateFemaleS60Per1000: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

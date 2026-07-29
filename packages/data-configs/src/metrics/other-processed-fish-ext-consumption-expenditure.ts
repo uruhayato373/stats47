@@ -59,6 +59,4 @@ export const otherProcessedFishExtConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の魚介加工品のその他消費支出額ランキング都道府県【2024年】｜1位青森県（4,842円）",
   "seoDescription": "2024年の他の魚介加工品のその他消費支出額の都道府県別ランキング。1位青森県（4,842円）、最下位福岡県（2,237円）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

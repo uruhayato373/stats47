@@ -59,6 +59,4 @@ export const weddingExpenseConsumptionExpenditure: MetricConfig = {
   "seoTitle": "婚礼関係費消費支出額ランキング都道府県【2024年】｜1位長崎県（51,955円）",
   "seoDescription": "2024年の婚礼関係費消費支出額の都道府県別ランキング。1位長崎県（51,955円）、最下位鹿児島県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

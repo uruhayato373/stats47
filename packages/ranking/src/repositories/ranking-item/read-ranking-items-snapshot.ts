@@ -22,6 +22,7 @@ import {
 } from "../../types/snapshot";
 import type { CategoryRankingItem } from "../../types/ranking-item";
 import type { RankingConfigResponse } from "../../types/ranking-config-response";
+import { compareByRepresentativeThenRecency } from "../../lib/ranking-order";
 
 // Phase 7 (2026-05-28): find-ranking-items-by-group-key.ts 削除に伴い、
 // GroupRankingItem 型を本ファイルに inline 移動 (snapshot reader だけで使用)。
@@ -471,7 +472,7 @@ export async function readRankingItemsByGroupKeyFromR2(
         (it) =>
           it.isActive && it.groupKey === groupKey && it.areaType === areaType,
       )
-      .sort((a, b) => (a.featuredOrder ?? 0) - (b.featuredOrder ?? 0));
+      .sort(compareByRepresentativeThenRecency);
 
     const rows: GroupRankingItem[] = matched.map((r) => ({
       rankingKey: r.rankingKey,
@@ -511,12 +512,7 @@ export async function readRankingItemsByTagFromR2(
         (it) =>
           it.isActive && (it.tags ?? []).some((t) => t.tagKey === tagKey),
       )
-      .sort((a, b) => {
-        const fa = a.featuredOrder ?? 0;
-        const fb = b.featuredOrder ?? 0;
-        if (fa !== fb) return fa - fb;
-        return (b.updatedAt ?? "").localeCompare(a.updatedAt ?? "");
-      });
+      .sort(compareByRepresentativeThenRecency);
 
     if (matched.length === 0) {
       return err(new Error(`No ranking items found for tagKey: ${tagKey}`));

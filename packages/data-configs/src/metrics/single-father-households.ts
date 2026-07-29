@@ -61,6 +61,4 @@ export const singleFatherHouseholds: MetricConfig = {
   "seoTitle": "父子世帯数ランキング都道府県【2020年】｜1位東京都（5,981世帯）",
   "seoDescription": "2020年の父子世帯数の都道府県別ランキング。1位東京都（5,981世帯）、最下位鳥取県（359世帯）で16.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

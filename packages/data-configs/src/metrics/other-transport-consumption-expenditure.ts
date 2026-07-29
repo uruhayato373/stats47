@@ -59,6 +59,4 @@ export const otherTransportConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の交通消費支出額ランキング都道府県【2024年】｜1位大分県（5,492円）",
   "seoDescription": "2024年の他の交通消費支出額の都道府県別ランキング。1位大分県（5,492円）、最下位山形県（151円）で36.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

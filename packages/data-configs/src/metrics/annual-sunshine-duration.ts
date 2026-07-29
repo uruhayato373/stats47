@@ -51,6 +51,4 @@ export const annualSunshineDuration: MetricConfig = {
   "seoTitle": "年間日照時間ランキング都道府県【2024年】｜1位高知県（2,309時間）",
   "seoDescription": "2024年の年間日照時間の都道府県別ランキング。1位高知県（2,309時間）、最下位山形県（1,625.6時間）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": true,
-  "featuredOrder": 1,
 };

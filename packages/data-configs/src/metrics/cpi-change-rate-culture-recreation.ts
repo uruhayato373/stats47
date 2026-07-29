@@ -62,6 +62,4 @@ export const cpiChangeRateCultureRecreation: MetricConfig = {
   },
   "seoTitle": "消費者物価指数対前年変化率（教養娯楽）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

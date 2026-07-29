@@ -59,6 +59,4 @@ export const lotusRootConsumptionQuantity: MetricConfig = {
   "seoTitle": "れんこん消費量ランキング都道府県【2024年】｜1位新潟県（1,910g）",
   "seoDescription": "2024年のれんこん消費量の都道府県別ランキング。1位新潟県（1,910g）、最下位沖縄県（356g）で5.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

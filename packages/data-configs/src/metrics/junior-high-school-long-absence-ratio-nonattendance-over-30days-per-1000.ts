@@ -58,6 +58,4 @@ export const juniorHighSchoolLongAbsenceRatioNonattendanceOver30daysPer1000: Met
   "seoTitle": "不登校による中学校長期欠席生徒比率ランキング都道府県【2023年】｜1位宮城県（84.58‐）",
   "seoDescription": "2023年の不登校による中学校長期欠席生徒比率の都道府県別ランキング。1位宮城県（84.58‐）、最下位福井県（49.73‐）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

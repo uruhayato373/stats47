@@ -51,6 +51,4 @@ export const finalEnergyConsumption: MetricConfig = {
   "seoTitle": "最終エネルギー消費量ランキング都道府県【2022年】｜1位東京都（970,018TJ）",
   "seoDescription": "2022年の最終エネルギー消費量の都道府県別ランキング。1位東京都（970,018TJ）、最下位鳥取県（60,385TJ）で16.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

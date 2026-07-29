@@ -59,6 +59,4 @@ export const skinLotionConsumptionExpenditure: MetricConfig = {
   "seoTitle": "化粧水消費支出額ランキング都道府県【2024年】｜1位山形県（6,260円）",
   "seoDescription": "2024年の化粧水消費支出額の都道府県別ランキング。1位山形県（6,260円）、最下位福井県（2,487円）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

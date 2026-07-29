@@ -61,6 +61,4 @@ export const cpiChangeRateClothing: MetricConfig = {
   },
   "seoTitle": "消費者物価指数対前年変化率（被服及び履物）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

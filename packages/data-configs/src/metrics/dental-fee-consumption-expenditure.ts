@@ -59,6 +59,4 @@ export const dentalFeeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "歯科診療代消費支出額ランキング都道府県【2024年】｜1位埼玉県（49,601円）",
   "seoDescription": "2024年の歯科診療代消費支出額の都道府県別ランキング。1位埼玉県（49,601円）、最下位沖縄県（8,830円）で5.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

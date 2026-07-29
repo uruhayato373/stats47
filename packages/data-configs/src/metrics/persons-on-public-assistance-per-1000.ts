@@ -87,6 +87,4 @@ export const personsOnPublicAssistancePer1000: MetricConfig = {
   "seoTitle": "生活保護被保護実人員ランキング都道府県【2023年】｜1位大阪府（30.42人）",
   "seoDescription": "2023年の生活保護被保護実人員の都道府県別ランキング。1位大阪府（30.42人）、最下位富山県（4.23人）で7.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

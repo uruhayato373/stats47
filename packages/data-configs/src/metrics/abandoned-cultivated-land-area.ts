@@ -52,6 +52,4 @@ export const abandonedCultivatedLandArea: MetricConfig = {
   "seoTitle": "耕地放棄面積ランキング都道府県【2014年】｜1位福島県（25,226ｈａ）",
   "seoDescription": "2014年の耕地放棄面積の都道府県別ランキング。1位福島県（25,226ｈａ）、最下位東京都（956ｈａ）で26.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

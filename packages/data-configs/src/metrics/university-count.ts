@@ -103,6 +103,4 @@ export const universityCount: MetricConfig = {
   "seoTitle": "大学数ランキング都道府県【2024年】｜1位東京都（145校）",
   "seoDescription": "2024年の大学数の都道府県別ランキング。1位東京都（145校）、最下位佐賀県（2校）で72.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

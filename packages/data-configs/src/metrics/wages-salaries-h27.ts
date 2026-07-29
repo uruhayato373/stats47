@@ -34,6 +34,4 @@ export const wagesSalariesH27: MetricConfig = {
   },
   "seoTitle": "賃金・俸給（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

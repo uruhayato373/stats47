@@ -39,6 +39,4 @@ export const gdpGrowthRatePrefH17: MetricConfig = {
   "seoTitle": "県内総生産額対前年増加率ランキング都道府県【2014年】｜1位広島県（4.1％）",
   "seoDescription": "2014年の県内総生産額対前年増加率の都道府県別ランキング。1位広島県（4.1％）、最下位長崎県（-1.3％）で-3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

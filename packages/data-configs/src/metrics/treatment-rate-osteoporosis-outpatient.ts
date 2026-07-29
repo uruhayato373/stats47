@@ -45,6 +45,4 @@ export const treatmentRateOsteoporosisOutpatient: MetricConfig = {
   "seoTitle": "骨の密度及び構造の障害（骨粗しょう症）の受療率（外来）ランキング都道府県【2023年】｜1位青森県（113人（人口10万対））",
   "seoDescription": "2023年の骨の密度及び構造の障害（骨粗しょう症）の受療率（外来）の都道府県別ランキング。1位青森県（113人（人口10万対））、最下位徳島県（27人（人口10万対））で4.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

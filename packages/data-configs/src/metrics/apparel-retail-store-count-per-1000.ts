@@ -52,6 +52,4 @@ export const apparelRetailStoreCountPer1000: MetricConfig = {
   "seoTitle": "織物・衣服・身の回り品小売店数ランキング都道府県【2006年】｜1位福井県（1.87店）",
   "seoDescription": "2006年の織物・衣服・身の回り品小売店数の都道府県別ランキング。1位福井県（1.87店）、最下位埼玉県（0.88店）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

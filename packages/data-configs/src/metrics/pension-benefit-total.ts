@@ -53,6 +53,4 @@ export const pensionBenefitTotal: MetricConfig = {
   "seoTitle": "厚生年金受給権者年金総額ランキング都道府県【2022年】｜1位東京都（2,436,032,586千円）",
   "seoDescription": "2022年の厚生年金受給権者年金総額の都道府県別ランキング。1位東京都（2,436,032,586千円）、最下位鳥取県（121,806,481千円）で20.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

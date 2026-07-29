@@ -52,6 +52,4 @@ export const bankLoanBalance: MetricConfig = {
   "seoTitle": "国内銀行貸出残高ランキング都道府県【2024年】｜1位東京都（2,781,189億円）",
   "seoDescription": "2024年の国内銀行貸出残高の都道府県別ランキング。1位東京都（2,781,189億円）、最下位島根県（14,950億円）で186.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

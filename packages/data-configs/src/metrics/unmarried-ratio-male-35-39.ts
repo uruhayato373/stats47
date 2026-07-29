@@ -39,6 +39,4 @@ export const unmarriedRatioMale3539: MetricConfig = {
   "seoTitle": "未婚者割合ランキング都道府県【2020年】｜1位青森県（39.6％）",
   "seoDescription": "2020年の未婚者割合の都道府県別ランキング。1位青森県（39.6％）、最下位宮崎県（29％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

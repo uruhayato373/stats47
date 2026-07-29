@@ -76,6 +76,4 @@ export const postOfficeCountPer100km2: MetricConfig = {
   "seoTitle": "郵便局数ランキング都道府県【2024年】｜1位東京都（105.27局）",
   "seoDescription": "2024年の郵便局数の都道府県別ランキング。1位東京都（105.27局）、最下位北海道（6.57局）で16.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

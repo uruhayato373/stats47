@@ -59,6 +59,4 @@ export const lightingConsumptionExpenditure: MetricConfig = {
   "seoTitle": "照明器具消費支出額ランキング都道府県【2024年】｜1位京都府（3,910円）",
   "seoDescription": "2024年の照明器具消費支出額の都道府県別ランキング。1位京都府（3,910円）、最下位新潟県（227円）で17.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

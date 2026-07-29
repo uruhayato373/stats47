@@ -59,6 +59,4 @@ export const drivingSchoolConsumptionExpenditure: MetricConfig = {
   "seoTitle": "自動車教習料消費支出額ランキング都道府県【2024年】｜1位群馬県（13,126円）",
   "seoDescription": "2024年の自動車教習料消費支出額の都道府県別ランキング。1位群馬県（13,126円）、最下位京都府（315円）で41.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

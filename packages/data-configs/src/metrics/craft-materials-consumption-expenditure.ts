@@ -59,6 +59,4 @@ export const craftMaterialsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "手芸・工芸材料消費支出額ランキング都道府県【2024年】｜1位長野県（1,234円）",
   "seoDescription": "2024年の手芸・工芸材料消費支出額の都道府県別ランキング。1位長野県（1,234円）、最下位岐阜県（154円）で8.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

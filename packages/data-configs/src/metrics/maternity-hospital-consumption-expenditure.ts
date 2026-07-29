@@ -59,6 +59,4 @@ export const maternityHospitalConsumptionExpenditure: MetricConfig = {
   "seoTitle": "出産入院料消費支出額ランキング都道府県【2024年】｜1位栃木県（7,136円）",
   "seoDescription": "2024年の出産入院料消費支出額の都道府県別ランキング。1位栃木県（7,136円）、最下位宮崎県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

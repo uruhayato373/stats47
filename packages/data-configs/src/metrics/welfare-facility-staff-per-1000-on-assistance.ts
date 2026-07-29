@@ -64,6 +64,4 @@ export const welfareFacilityStaffPer1000OnAssistance: MetricConfig = {
   "seoTitle": "保護施設従事者数ランキング都道府県【2023年】｜1位島根県（18.6人）",
   "seoDescription": "2023年の保護施設従事者数の都道府県別ランキング。1位島根県（18.6人）、最下位京都府（0.5人）で37.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

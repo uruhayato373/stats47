@@ -52,6 +52,4 @@ export const portCargoImport: MetricConfig = {
   "seoTitle": "輸入貨物量（港湾統計）ランキング都道府県【2023年】｜1位千葉県（105,266,302トン）",
   "seoDescription": "2023年の輸入貨物量（港湾統計）の都道府県別ランキング。1位千葉県（105,266,302トン）、最下位佐賀県（520,827トン）で202.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

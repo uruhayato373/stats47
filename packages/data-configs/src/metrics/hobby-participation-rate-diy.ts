@@ -34,6 +34,4 @@ export const hobbyParticipationRateDiy: MetricConfig = {
   "seoTitle": "日曜大工の行動者率ランキング都道府県【2021年】｜1位滋賀県（13.6％）",
   "seoDescription": "2021年の日曜大工の行動者率の都道府県別ランキング。1位滋賀県（13.6％）、最下位大分県（9.3％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

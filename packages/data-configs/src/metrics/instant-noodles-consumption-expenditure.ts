@@ -59,6 +59,4 @@ export const instantNoodlesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "即席麺消費支出額ランキング都道府県【2024年】｜1位鳥取県（3,649円）",
   "seoDescription": "2024年の即席麺消費支出額の都道府県別ランキング。1位鳥取県（3,649円）、最下位茨城県（1,623円）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

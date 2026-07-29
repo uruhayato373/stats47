@@ -130,6 +130,4 @@ export const criminalRecognitionCount: MetricConfig = {
   "seoTitle": "刑法犯認知件数ランキング都道府県【2023年】｜1位東京都（89,098件）",
   "seoDescription": "2023年の刑法犯認知件数の都道府県別ランキング。1位東京都（89,098件）、最下位島根県（1,956件）で45.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

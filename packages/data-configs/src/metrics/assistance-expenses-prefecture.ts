@@ -52,6 +52,4 @@ export const assistanceExpensesPrefecture: MetricConfig = {
   "seoTitle": "扶助費ランキング都道府県【2022年】｜1位東京都（191,313,453）",
   "seoDescription": "2022年の扶助費の都道府県別ランキング。1位東京都（191,313,453）、最下位鳥取県（6,292,905）で30.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

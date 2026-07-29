@@ -45,6 +45,4 @@ export const treatmentRateAsthmaInpatient: MetricConfig = {
   "seoTitle": "喘息の受療率（入院）ランキング都道府県【2023年】｜1位新潟県（3人（人口10万対））",
   "seoDescription": "2023年の喘息の受療率（入院）の都道府県別ランキング。1位新潟県（3人（人口10万対））、最下位佐賀県（1人（人口10万対））で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

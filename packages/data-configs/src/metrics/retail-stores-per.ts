@@ -53,6 +53,4 @@ export const retailStoresPer: MetricConfig = {
   "seoTitle": "小売店数ランキング市区町村【2006年】｜1位東京都 千代田区（86.65店）",
   "seoDescription": "2006年の小売店数の市区町村別ランキング。1位東京都 千代田区（86.65店）、最下位熊本県 熊本市 北区（0店）で地図やグラフで市区町村を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

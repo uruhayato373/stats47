@@ -85,6 +85,4 @@ export const nationalHealthInsuranceMedicalExpensePerPerson: MetricConfig = {
   "seoTitle": "国民健康保険診療費ランキング都道府県【2023年】｜1位鹿児島県（415,298円）",
   "seoDescription": "2023年の国民健康保険診療費の都道府県別ランキング。1位鹿児島県（415,298円）、最下位茨城県（281,052円）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -47,6 +47,4 @@ export const healthcareExpenditureRatioMultiPersonHouseholds: MetricConfig = {
   "seoTitle": "保健医療費割合ランキング都道府県【2024年】｜1位神奈川県（5.8％）",
   "seoDescription": "2024年の保健医療費割合の都道府県別ランキング。1位神奈川県（5.8％）、最下位高知県（3.8％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

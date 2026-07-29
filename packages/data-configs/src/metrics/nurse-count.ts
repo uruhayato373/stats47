@@ -72,6 +72,4 @@ export const nurseCount: MetricConfig = {
   "seoTitle": "看護師数ランキング都道府県【2022年】｜1位東京都（125,480人）",
   "seoDescription": "2022年の看護師数の都道府県別ランキング。1位東京都（125,480人）、最下位鳥取県（7,742人）で16.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

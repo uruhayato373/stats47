@@ -56,6 +56,4 @@ export const taxpayerCountEqual: MetricConfig = {
   "seoTitle": "納税義務者数ランキング都道府県【2024年】｜1位東京都（7,938,461人）",
   "seoDescription": "2024年の納税義務者数の都道府県別ランキング。1位東京都（7,938,461人）、最下位鳥取県（278,197人）で28.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

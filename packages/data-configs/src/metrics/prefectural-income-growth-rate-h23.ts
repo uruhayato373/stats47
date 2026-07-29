@@ -39,6 +39,4 @@ export const prefecturalIncomeGrowthRateH23: MetricConfig = {
   "seoTitle": "県民所得対前年増加率ランキング都道府県【2018年】｜1位佐賀県（5.1％）",
   "seoDescription": "2018年の県民所得対前年増加率の都道府県別ランキング。1位佐賀県（5.1％）、最下位愛媛県（-2.8％）で-1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

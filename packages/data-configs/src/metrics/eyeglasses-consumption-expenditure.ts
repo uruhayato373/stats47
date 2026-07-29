@@ -59,6 +59,4 @@ export const eyeglassesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "眼鏡消費支出額ランキング都道府県【2024年】｜1位東京都（11,000円）",
   "seoDescription": "2024年の眼鏡消費支出額の都道府県別ランキング。1位東京都（11,000円）、最下位秋田県（3,097円）で3.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

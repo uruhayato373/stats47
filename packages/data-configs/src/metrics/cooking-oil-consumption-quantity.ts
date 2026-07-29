@@ -59,6 +59,4 @@ export const cookingOilConsumptionQuantity: MetricConfig = {
   "seoTitle": "食用油消費量ランキング都道府県【2024年】｜1位新潟県（9,636g）",
   "seoDescription": "2024年の食用油消費量の都道府県別ランキング。1位新潟県（9,636g）、最下位高知県（5,359g）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

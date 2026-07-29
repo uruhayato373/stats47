@@ -40,8 +40,7 @@ const baseItem: RankingItem = {
   unit: "件",
   dataSourceId: "test",
   isActive: true,
-  isFeatured: false,
-  featuredOrder: 0,
+  hook: "テスト指標が最も多い県は？",
   calculation: {
     isCalculated: false,
     normalizationOptions: [

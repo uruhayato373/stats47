@@ -59,6 +59,4 @@ export const drinkingOutConsumptionExpenditure: MetricConfig = {
   "seoTitle": "飲酒代消費支出額ランキング都道府県【2024年】｜1位熊本県（38,205円）",
   "seoDescription": "2024年の飲酒代消費支出額の都道府県別ランキング。1位熊本県（38,205円）、最下位愛媛県（8,138円）で4.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

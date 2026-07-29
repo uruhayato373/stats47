@@ -59,6 +59,4 @@ export const cookingApplianceConsumptionQuantity: MetricConfig = {
   "seoTitle": "炊事用電気器具消費量ランキング都道府県【2024年】｜1位岡山県（0.38台）",
   "seoDescription": "2024年の炊事用電気器具消費量の都道府県別ランキング。1位岡山県（0.38台）、最下位岐阜県（0.16台）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

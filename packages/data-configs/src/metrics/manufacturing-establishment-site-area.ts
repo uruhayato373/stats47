@@ -91,6 +91,4 @@ export const manufacturingEstablishmentSiteArea: MetricConfig = {
   "seoTitle": "製造業事業所敷地面積ランキング都道府県【2024年】｜1位愛知県（123,127千ｍ2）",
   "seoDescription": "2024年の製造業事業所敷地面積の都道府県別ランキング。1位愛知県（123,127千ｍ2）、最下位高知県（3,064千ｍ2）で40.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

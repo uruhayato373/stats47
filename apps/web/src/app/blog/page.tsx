@@ -3,11 +3,10 @@ import Link from "next/link";
 import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 import { RightRailWidgets } from "@/components/rail";
 
-import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
-import { BlogArticleGrid, BlogAuthorProfileCard } from "@/features/blog";
-import { listLatestArticles, readBlogSnapshotMetaFromR2 } from "@/features/blog/server";
+import { FooterAdSlot } from "@/features/ads/slots";
+import { BlogArticleGrid, BlogAuthorProfileCard } from "@/features/blog/listing";
+import { readBlogIndexPageFromR2 } from "@/features/blog/listing.server";
 
-import { HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -46,17 +45,14 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
     const currentPage = Math.max(1, parseInt(pageParam ?? "1", 10) || 1);
     const offset = (currentPage - 1) * PAGE_SIZE;
 
-    const [articles, meta] = await Promise.all([
-        listLatestArticles(PAGE_SIZE, offset).catch(() => []),
-        readBlogSnapshotMetaFromR2().catch(() => null),
-    ]);
-
-    // Total count: fetch one extra article to check if there's a next page.
-    // We don't need the exact total — just enough to render prev/next.
-    const nextArticles = articles.length === PAGE_SIZE
-        ? await listLatestArticles(1, offset + PAGE_SIZE).catch(() => [])
-        : [];
-    const hasNextPage = nextArticles.length > 0;
+    // 記事・meta・次ページ判定を snapshot 1 回読みでまとめて取る。
+    // 個別 reader を並べると同一リクエスト内で full snapshot を 3 回取得していた。
+    const indexPage = await readBlogIndexPageFromR2(PAGE_SIZE, offset).catch(
+        () => null,
+    );
+    const articles = indexPage?.articles ?? [];
+    const meta = indexPage?.meta ?? null;
+    const hasNextPage = indexPage?.hasNextPage ?? false;
     const hasPrevPage = currentPage > 1;
 
     return (
@@ -102,9 +98,11 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
             </p>
             <BlogArticleGrid articles={articles} />
 
-            {/* 記事内広告（一覧グリッド後。slotId 未発行の間は非表示） */}
-            <InContentAdSlot slot={HUB_INCONTENT} />
-
+            {/*
+              記事内広告は置かない。この面は単一の記事グリッドしか無く、直後のページネーションは
+              前後ページが両方無いと消えるため、置くと最終ページ等でフッター広告と隣接して
+              広告 2 連になる (2026-07-29 是正)。末尾の Multiplex 1 枠に統一する。
+            */}
             {/* ページネーション */}
             {(hasPrevPage || hasNextPage) && (
                 <nav className="mt-8 flex items-center justify-center gap-3" aria-label="ページネーション">

@@ -40,6 +40,4 @@ export const finalEducationJuniorCollegeTechnicalCollegeRatio: MetricConfig = {
   "seoTitle": "最終学歴が短大・高専卒の者の割合ランキング都道府県【2020年】｜1位長野県（16.9％）",
   "seoDescription": "2020年の最終学歴が短大・高専卒の者の割合の都道府県別ランキング。1位長野県（16.9％）、最下位秋田県（11.3％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

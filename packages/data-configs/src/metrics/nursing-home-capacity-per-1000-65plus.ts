@@ -63,6 +63,4 @@ export const nursingHomeCapacityPer100065plus: MetricConfig = {
   "seoTitle": "老人ホーム定員数ランキング都道府県【2023年】｜1位宮崎県（60.4人）",
   "seoDescription": "2023年の老人ホーム定員数の都道府県別ランキング。1位宮崎県（60.4人）、最下位山梨県（24.4人）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

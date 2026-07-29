@@ -59,6 +59,4 @@ export const otherHeatingCoolingConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の冷暖房用器具消費支出額ランキング都道府県【2024年】｜1位和歌山県（5,912円）",
   "seoDescription": "2024年の他の冷暖房用器具消費支出額の都道府県別ランキング。1位和歌山県（5,912円）、最下位山梨県（1,485円）で4.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

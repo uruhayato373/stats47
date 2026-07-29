@@ -52,6 +52,4 @@ export const seriousCrimePer100k: MetricConfig = {
   "seoTitle": "凶悪犯認知件数ランキング都道府県【2023年】｜1位東京都（768件）",
   "seoDescription": "2023年の凶悪犯認知件数の都道府県別ランキング。1位東京都（768件）、最下位鳥取県（14件）で54.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

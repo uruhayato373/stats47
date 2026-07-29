@@ -38,6 +38,4 @@ export const consumerPriceDifferenceIndexClothingFootwear: MetricConfig = {
   },
   "seoTitle": "消費者物価地域差指数（被服及び履物）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

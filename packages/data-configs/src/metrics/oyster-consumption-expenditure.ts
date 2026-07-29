@@ -59,6 +59,4 @@ export const oysterConsumptionExpenditure: MetricConfig = {
   "seoTitle": "かき(貝)消費支出額ランキング都道府県【2024年】｜1位広島県（2,555円）",
   "seoDescription": "2024年のかき(貝)消費支出額の都道府県別ランキング。1位広島県（2,555円）、最下位沖縄県（135円）で18.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

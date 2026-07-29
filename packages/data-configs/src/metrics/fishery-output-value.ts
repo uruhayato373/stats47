@@ -52,6 +52,4 @@ export const fisheryOutputValue: MetricConfig = {
   "seoTitle": "漁業産出額ランキング都道府県【2016年】｜1位北海道（300,014百万円）",
   "seoDescription": "2016年の漁業産出額の都道府県別ランキング。1位北海道（300,014百万円）、最下位奈良県（0百万円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

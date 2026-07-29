@@ -61,6 +61,4 @@ export const cpiChangeRateHousing: MetricConfig = {
   },
   "seoTitle": "消費者物価指数対前年変化率（住居）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

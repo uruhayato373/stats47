@@ -59,6 +59,4 @@ export const crabConsumptionQuantity: MetricConfig = {
   "seoTitle": "かに消費量ランキング都道府県【2024年】｜1位鳥取県（3,442g）",
   "seoDescription": "2024年のかに消費量の都道府県別ランキング。1位鳥取県（3,442g）、最下位沖縄県（0g）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

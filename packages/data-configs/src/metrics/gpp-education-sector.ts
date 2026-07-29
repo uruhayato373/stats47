@@ -41,6 +41,4 @@ export const gppEducationSector: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

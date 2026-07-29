@@ -37,6 +37,4 @@ export const childcareEmploymentRate: MetricConfig = {
   "seoTitle": "育児をしている人の就業率ランキング都道府県【2022年】｜1位鳥取県（93.4％）",
   "seoDescription": "2022年の育児をしている人の就業率の都道府県別ランキング。1位鳥取県（93.4％）、最下位愛知県（82％）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

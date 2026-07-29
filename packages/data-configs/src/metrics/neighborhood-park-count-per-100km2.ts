@@ -76,6 +76,4 @@ export const neighborhoodParkCountPer100km2: MetricConfig = {
   "seoTitle": "近隣公園数ランキング都道府県【2023年】｜1位大阪府（25.79所）",
   "seoDescription": "2023年の近隣公園数の都道府県別ランキング。1位大阪府（25.79所）、最下位秋田県（0.99所）で26.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

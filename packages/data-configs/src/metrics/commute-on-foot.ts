@@ -55,6 +55,4 @@ export const commuteOnFoot: MetricConfig = {
   "seoTitle": "自宅外通勤・通学者数（徒歩）ランキング都道府県【2020年】｜1位東京都（493,788人）",
   "seoDescription": "2020年の自宅外通勤・通学者数（徒歩）の都道府県別ランキング。1位東京都（493,788人）、最下位徳島県（14,146人）で34.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

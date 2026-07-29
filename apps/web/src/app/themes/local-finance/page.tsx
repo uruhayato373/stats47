@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { PageShell } from "@/components/layout";
 
+import { InContentAdSlot } from "@/features/ads";
 import type { FinanceFlowData } from "@/features/finance-flow";
 import {
   LocalFinanceDashboard,
@@ -14,6 +15,7 @@ import {
   ThemeSwitcher,
 } from "@/features/theme-dashboard/server";
 
+import { HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -82,7 +84,15 @@ export default async function LocalFinanceThemePage() {
         </Link>
       </nav>
       <LocalFinanceDashboard cards={cards} initialFinanceFlow={initialFinanceFlow} />
+
+      {/*
+        広告 2 枠。bespoke ページなので ThemePageLayout を通らず、他 17 テーマが持つ枠が
+        丸ごと抜けていた (2026-07-29 是正)。位置・スロットとも ThemePageLayout に合わせ、
+        全指標セクションを挟んで 2 枠が隣接しないようにする。
+      */}
+      <InContentAdSlot slot={HUB_INCONTENT} />
       <ThemeIndicatorCatalogSection themeKey="local-finance" />
+      <InContentAdSlot slot={THEMES_CONTENT} />
     </PageShell>
   );
 }

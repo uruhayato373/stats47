@@ -35,6 +35,4 @@ export const singlePersonHouseholdRatio: MetricConfig = {
   "seoTitle": "単独世帯割合ランキング都道府県【2020年】｜1位東京都（50.24％）",
   "seoDescription": "2020年の単独世帯割合の都道府県別ランキング。1位東京都（50.24％）、最下位山形県（28.43％）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const octopusConsumptionQuantity: MetricConfig = {
   "seoTitle": "たこ消費量ランキング都道府県【2024年】｜1位山口県（716g）",
   "seoDescription": "2024年のたこ消費量の都道府県別ランキング。1位山口県（716g）、最下位大分県（175g）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

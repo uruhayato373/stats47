@@ -75,6 +75,4 @@ export const perChildKindergartenExpenditurePrefMunicipal: MetricConfig = {
   "seoTitle": "児童1人当たり幼稚園費ランキング都道府県【2022年】｜1位長野県（1,689.6千円）",
   "seoDescription": "2022年の児童1人当たり幼稚園費の都道府県別ランキング。1位長野県（1,689.6千円）、最下位神奈川県（99.3千円）で17.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

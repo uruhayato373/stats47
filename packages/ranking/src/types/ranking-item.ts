@@ -288,11 +288,19 @@ export interface RankingItem {
   /** SEO 用説明文（meta description のオーバーライド、未設定時は自動生成） */
   seoDescription?: string | null;
 
-  // === おすすめ情報 ===
-  /** おすすめフラグ（Topページ等で表示） */
-  isFeatured: boolean;
-  /** おすすめ表示順序 */
-  featuredOrder: number;
+  // === 掲載情報 ===
+  /**
+   * 問いかけコピー。`「年間日照時間が最も長い県は？」` の 1 行。
+   *
+   * 導出規則 (`@stats47/data-configs/prominence` の `resolveRankingHook`) と
+   * 例外の override で確定し、ビルド時に焼き込む。SNS・OGP・索引が同じコピーを使えるようにする。
+   *
+   * 旧 `isFeatured` / `featuredOrder` はここにあったが、2026-07-29 に廃止した
+   * (2,295 件中 8 件しか設定されず、しかもその 8 件は HOME_FEATURED_RANKINGS と完全重複で、
+   * カテゴリページの「注目」がホームの注目をそのまま映していた)。
+   * 掲載順は prominence スコアが決める。
+   */
+  hook: string;
 
   /**
    * 関連タグ（オプショナル）
@@ -324,7 +332,7 @@ export interface RankingItem {
  * (未焼き込み item はコンポーネント側がランタイム生成にフォールバックする)。
  */
 /**
- * home/featured.json に焼き込む派生値 1 件 (仕様 doc 28 §5.2)。
+ * home/featured.json に焼き込む派生値 1 件。
  * rank は snapshot の実 rank (同順位があっても「47位」等を固定表示しない)。
  * 旧 snapshot の featuredTop には rank が無いため optional。
  */
@@ -361,7 +369,11 @@ export interface CategoryRankingItem {
   demographicAttr: string | null;
   normalizationBasis: string | null;
   groupKey: string | null;
-  isFeatured: boolean;
+  /**
+   * 問いかけコピー (RankingItem.hook からの転記)。
+   * 旧 items.json 後方互換のため optional (欠損時は UI が title で縮退)。
+   */
+  hook?: string | null;
   /**
    * 最新年の「1 位」表示 (RankingItem.latestTop からの転記)。関連ランキングレールの
    * mini 表示用。旧 items.json 後方互換のため optional (欠損時は UI が text-first に縮退)。

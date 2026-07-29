@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { HOME_FEATURED_RANKINGS } from "@stats47/data-configs";
+import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
 import { buildRankingDisplayInfo, deriveFeaturedTop } from "@stats47/ranking";
 import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
@@ -10,8 +10,11 @@ import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 
 import { logger } from "@/lib/logger";
 
-import { getFeaturedRankings } from "../../server";
+// barrel (`../../server`) 経由にすると、ランキング詳細ページ一式と
+// METRICS_REGISTRY が home の bundle に入る。
+import { getFeaturedRankings } from "../../lib/get-featured-rankings";
 import {
+  isCurrentHomeFeaturedMapSvg,
   needsHomeFeaturedValuesFetch,
   resolveFeaturedRankingCardModel,
   type HomeFeaturedSnapshotFields,
@@ -37,7 +40,7 @@ interface FeaturedRankingsProps {
 /**
  * おすすめランキングコンポーネント (Server)
  *
- * home-featured-v1 採用後の表示 (仕様 doc 28):
+ * home-featured-v1 終了後の単一カード表示:
  * - data 取得と共通card modelの解決だけをここで行い、
  *   計測・描画はFeaturedRankingGridに委譲する。
  * - 新 snapshot (派生値焼き込み済み) ではランタイムの values.json 追加 fetch は 0。
@@ -62,16 +65,16 @@ export async function FeaturedRankings({
 
       const isDevelopment = process.env.NODE_ENV === "development";
       const devConfigByKey = isDevelopment
-        ? new Map(HOME_FEATURED_RANKINGS.map((d) => [d.rankingKey, d]))
+        ? new Map(HOME_FEATURED_PROMINENCE.map((d) => [d.rankingKey, d]))
         : null;
 
       // snapshot由来のcard model材料。devではhookをgit TS設定で補完する。
       const effectiveFields = new Map<string, HomeFeaturedSnapshotFields>(
         uniqueItems.map((item) => {
           const devDef = devConfigByKey?.get(item.rankingKey);
-          const tileMapSvg = item.tileMapSvg?.includes(
-            'data-map-rotation="clockwise-',
-          )
+          // 旧世代 (タイル地図・未圧縮の巨大path) は破棄し、下で compact 版を再生成する。
+          // 破棄条件は needsHomeFeaturedValuesFetch と同じ述語を使う。
+          const tileMapSvg = isCurrentHomeFeaturedMapSvg(item.tileMapSvg)
             ? item.tileMapSvg
             : null;
           return [

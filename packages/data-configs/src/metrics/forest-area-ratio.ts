@@ -35,6 +35,4 @@ export const forestAreaRatio: MetricConfig = {
   "seoTitle": "森林面積割合ランキング都道府県【2019年】｜1位高知県（83.3％）",
   "seoDescription": "2019年の森林面積割合の都道府県別ランキング。1位高知県（83.3％）、最下位大阪府（29.9％）で2.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

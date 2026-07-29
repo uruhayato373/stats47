@@ -278,8 +278,6 @@ export interface MetricConfig {
   seoDescription?: string;
   /** 表示用 ON/OFF */
   isActive?: boolean;
-  isFeatured?: boolean;
-  featuredOrder?: number;
 }
 
 /** registry へ登録される record 型 */

@@ -39,6 +39,4 @@ export const dualIncomeHouseholdRatio: MetricConfig = {
   "seoTitle": "共働き世帯割合ランキング都道府県【2020年】｜1位福井県（34.69％）",
   "seoDescription": "2020年の共働き世帯割合の都道府県別ランキング。1位福井県（34.69％）、最下位東京都（17.43％）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

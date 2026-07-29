@@ -53,6 +53,4 @@ export const fisherySpeciesCatchBonito: MetricConfig = {
   "seoTitle": "カツオ漁獲量ランキング都道府県【2015年】｜1位静岡県（81,295トン）",
   "seoDescription": "2015年のカツオ漁獲量の都道府県別ランキング。1位静岡県（81,295トン）、最下位熊本県（0トン）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

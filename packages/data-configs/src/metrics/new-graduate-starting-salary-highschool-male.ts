@@ -52,6 +52,4 @@ export const newGraduateStartingSalaryHighschoolMale: MetricConfig = {
   "seoTitle": "新規学卒者初任給ランキング都道府県【2019年】｜1位滋賀県（178.1千円）",
   "seoDescription": "2019年の新規学卒者初任給の都道府県別ランキング。1位滋賀県（178.1千円）、最下位沖縄県（147.1千円）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

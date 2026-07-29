@@ -51,6 +51,4 @@ export const agriculturalLandConversionArea: MetricConfig = {
   "seoTitle": "農地の転用面積ランキング都道府県【2022年】｜1位茨城県（1,025ｈａ）",
   "seoDescription": "2022年の農地の転用面積の都道府県別ランキング。1位茨城県（1,025ｈａ）、最下位高知県（78ｈａ）で13.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

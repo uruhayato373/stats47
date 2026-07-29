@@ -59,6 +59,4 @@ export const womensFoundationGarmentConsumptionExpenditure: MetricConfig = {
   "seoTitle": "婦人用ファンデーション消費支出額ランキング都道府県【2024年】｜1位熊本県（4,329円）",
   "seoDescription": "2024年の婦人用ファンデーション消費支出額の都道府県別ランキング。1位熊本県（4,329円）、最下位福岡県（378円）で11.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

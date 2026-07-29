@@ -31,6 +31,4 @@ export const populationMigrationInterPrefecture: MetricConfig = {
     "isPairRelationship": true,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

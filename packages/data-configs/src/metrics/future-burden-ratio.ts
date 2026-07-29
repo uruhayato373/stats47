@@ -52,6 +52,4 @@ export const futureBurdenRatio: MetricConfig = {
   "seoTitle": "将来負担比率ランキング都道府県【2022年】｜1位兵庫県（330.8）",
   "seoDescription": "2022年の将来負担比率の都道府県別ランキング。1位兵庫県（330.8）、最下位東京都（17.3）で19.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -97,6 +97,4 @@ export const pharmacyCountPer100km2: MetricConfig = {
   "seoTitle": "薬局数ランキング都道府県【2023年】｜1位東京都（498.2所）",
   "seoDescription": "2023年の薬局数の都道府県別ランキング。1位東京都（498.2所）、最下位北海道（10.4所）で47.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

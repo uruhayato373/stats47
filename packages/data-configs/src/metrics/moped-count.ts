@@ -52,6 +52,4 @@ export const mopedCount: MetricConfig = {
   "seoTitle": "原動機付自転車台数ランキング都道府県【2024年】｜1位大阪府（633,530台）",
   "seoDescription": "2024年の原動機付自転車台数の都道府県別ランキング。1位大阪府（633,530台）、最下位鳥取県（15,361台）で41.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

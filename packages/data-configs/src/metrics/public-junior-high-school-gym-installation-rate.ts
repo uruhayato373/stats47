@@ -63,6 +63,4 @@ export const publicJuniorHighSchoolGymInstallationRate: MetricConfig = {
   "seoTitle": "公立中学校屋内運動場設置率ランキング都道府県【2006年】｜1位富山県（100％）",
   "seoDescription": "2006年の公立中学校屋内運動場設置率の都道府県別ランキング。1位富山県（100％）、最下位徳島県（84.4％）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

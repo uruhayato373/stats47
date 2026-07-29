@@ -35,6 +35,4 @@ export const privateRentedHousingRatio: MetricConfig = {
   "seoTitle": "民営借家比率ランキング都道府県【2023年】｜1位沖縄県（44.4％）",
   "seoDescription": "2023年の民営借家比率の都道府県別ランキング。1位沖縄県（44.4％）、最下位秋田県（16.7％）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

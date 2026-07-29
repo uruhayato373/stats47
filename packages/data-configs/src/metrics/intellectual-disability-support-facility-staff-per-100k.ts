@@ -54,6 +54,4 @@ export const intellectualDisabilitySupportFacilityStaffPer100k: MetricConfig = {
   "seoTitle": "知的障害者援護施設従事者数ランキング都道府県【2011年】｜1位長崎県（59.2人）",
   "seoDescription": "2011年の知的障害者援護施設従事者数の都道府県別ランキング。1位長崎県（59.2人）、最下位東京都（4.1人）で14.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

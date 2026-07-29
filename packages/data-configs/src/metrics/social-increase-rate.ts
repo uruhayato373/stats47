@@ -38,6 +38,4 @@ export const socialIncreaseRate: MetricConfig = {
   "seoTitle": "社会増減率ランキング都道府県【2019年】｜1位東京都（8.2‰）",
   "seoDescription": "2019年の社会増減率の都道府県別ランキング。1位東京都（8.2‰）、最下位長崎県（-4.8‰）で-1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

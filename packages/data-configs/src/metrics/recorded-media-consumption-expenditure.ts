@@ -59,6 +59,4 @@ export const recordedMediaConsumptionExpenditure: MetricConfig = {
   "seoTitle": "音楽・映像収録済メディア消費支出額ランキング都道府県【2024年】｜1位栃木県（7,341円）",
   "seoDescription": "2024年の音楽・映像収録済メディア消費支出額の都道府県別ランキング。1位栃木県（7,341円）、最下位和歌山県（553円）で13.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

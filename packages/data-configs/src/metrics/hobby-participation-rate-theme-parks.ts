@@ -34,6 +34,4 @@ export const hobbyParticipationRateThemeParks: MetricConfig = {
   "seoTitle": "遊園地・動植物園・水族館の行動者率ランキング都道府県【2021年】｜1位愛知県（25.5％）",
   "seoDescription": "2021年の遊園地・動植物園・水族館の行動者率の都道府県別ランキング。1位愛知県（25.5％）、最下位岩手県（8.2％）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

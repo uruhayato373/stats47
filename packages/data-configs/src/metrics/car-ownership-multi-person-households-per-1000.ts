@@ -51,6 +51,4 @@ export const carOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "seoTitle": "自動車所有数量ランキング都道府県【2014年】｜1位山形県（2,111台）",
   "seoDescription": "2014年の自動車所有数量の都道府県別ランキング。1位山形県（2,111台）、最下位東京都（665台）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

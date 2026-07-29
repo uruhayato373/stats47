@@ -97,6 +97,4 @@ export const specializedSchoolCountPer100k: MetricConfig = {
   "seoTitle": "専修学校数ランキング都道府県【2024年】｜1位大分県（4.52校）",
   "seoDescription": "2024年の専修学校数の都道府県別ランキング。1位大分県（4.52校）、最下位神奈川県（1.14校）で4.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const skinMedicineConsumptionExpenditure: MetricConfig = {
   "seoTitle": "外傷・皮膚病薬消費支出額ランキング都道府県【2024年】｜1位大阪府（1,318円）",
   "seoDescription": "2024年の外傷・皮膚病薬消費支出額の都道府県別ランキング。1位大阪府（1,318円）、最下位大分県（587円）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

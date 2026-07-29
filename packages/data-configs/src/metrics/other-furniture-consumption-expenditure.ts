@@ -59,6 +59,4 @@ export const otherFurnitureConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の家具消費支出額ランキング都道府県【2024年】｜1位青森県（4,794円）",
   "seoDescription": "2024年の他の家具消費支出額の都道府県別ランキング。1位青森県（4,794円）、最下位京都府（410円）で11.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

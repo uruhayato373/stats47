@@ -102,6 +102,4 @@ export const specializedSchoolCount: MetricConfig = {
   "seoTitle": "専修学校数ランキング都道府県【2024年】｜1位東京都（386校）",
   "seoDescription": "2024年の専修学校数の都道府県別ランキング。1位東京都（386校）、最下位徳島県（14校）で27.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

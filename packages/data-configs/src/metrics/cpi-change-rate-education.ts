@@ -72,6 +72,4 @@ export const cpiChangeRateEducation: MetricConfig = {
   },
   "seoTitle": "消費者物価指数対前年変化率（教育）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const mandarinConsumptionQuantity: MetricConfig = {
   "seoTitle": "みかん消費量ランキング都道府県【2024年】｜1位和歌山県（13,425g）",
   "seoDescription": "2024年のみかん消費量の都道府県別ランキング。1位和歌山県（13,425g）、最下位山口県（4,744g）で2.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

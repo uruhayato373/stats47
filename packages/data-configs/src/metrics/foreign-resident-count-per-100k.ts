@@ -63,6 +63,4 @@ export const foreignResidentCountPer100k: MetricConfig = {
   "seoTitle": "外国人人口ランキング都道府県【2020年】｜1位東京都（3,441人）",
   "seoDescription": "2020年の外国人人口の都道府県別ランキング。1位東京都（3,441人）、最下位秋田県（380.5人）で9.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

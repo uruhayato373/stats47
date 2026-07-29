@@ -59,6 +59,4 @@ export const musicalInstrumentConsumptionExpenditure: MetricConfig = {
   "seoTitle": "楽器消費支出額ランキング都道府県【2024年】｜1位埼玉県（14,840円）",
   "seoDescription": "2024年の楽器消費支出額の都道府県別ランキング。1位埼玉県（14,840円）、最下位和歌山県（23円）で645.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

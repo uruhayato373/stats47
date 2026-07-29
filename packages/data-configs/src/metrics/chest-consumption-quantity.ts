@@ -59,6 +59,4 @@ export const chestConsumptionQuantity: MetricConfig = {
   "seoTitle": "たんす消費量ランキング都道府県【2024年】｜1位茨城県（0.07個）",
   "seoDescription": "2024年のたんす消費量の都道府県別ランキング。1位茨城県（0.07個）、最下位鹿児島県（0個）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

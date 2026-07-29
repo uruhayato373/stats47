@@ -59,6 +59,4 @@ export const tableSaltConsumptionExpenditure: MetricConfig = {
   "seoTitle": "食塩消費支出額ランキング都道府県【2024年】｜1位富山県（651円）",
   "seoDescription": "2024年の食塩消費支出額の都道府県別ランキング。1位富山県（651円）、最下位和歌山県（269円）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

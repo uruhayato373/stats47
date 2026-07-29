@@ -1,9 +1,8 @@
 /**
  * home ポータル (`/`) の発見セクション。
- * curation config は @stats47/data-configs の HOME_PORTAL_* が SSOT。
+ * 現行契約は同ディレクトリの README.md を参照。
  */
-export { HomeSearch } from "./components/HomeSearch";
-export { PortalCategoryGrid } from "./components/PortalCategoryGrid";
-export { PortalUseCaseGrid } from "./components/PortalUseCaseGrid";
-export { PortalAreaEntry } from "./components/PortalAreaEntry";
-export { PortalBlogCard } from "./components/PortalBlogCard";
+export { PortalCategoryGrid } from './components/PortalCategoryGrid';
+export { PortalUseCaseGrid } from './components/PortalUseCaseGrid';
+export { PortalAreaEntry } from './components/PortalAreaEntry';
+export { PortalBlogCard } from './components/PortalBlogCard';

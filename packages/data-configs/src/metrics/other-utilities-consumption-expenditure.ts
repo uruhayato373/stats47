@@ -59,6 +59,4 @@ export const otherUtilitiesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の光熱のその他消費支出額ランキング都道府県【2024年】｜1位富山県（1,492円）",
   "seoDescription": "2024年の他の光熱のその他消費支出額の都道府県別ランキング。1位富山県（1,492円）、最下位宮城県（221円）で6.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

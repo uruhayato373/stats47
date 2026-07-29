@@ -59,6 +59,4 @@ export const pumpkinConsumptionExpenditure: MetricConfig = {
   "seoTitle": "かぼちゃ消費支出額ランキング都道府県【2024年】｜1位神奈川県（2,453円）",
   "seoDescription": "2024年のかぼちゃ消費支出額の都道府県別ランキング。1位神奈川県（2,453円）、最下位鳥取県（1,024円）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -45,6 +45,4 @@ export const treatmentRateCerebrovascularOutpatient: MetricConfig = {
   "seoTitle": "脳血管疾患の受療率（外来）ランキング都道府県【2023年】｜1位和歌山県（122人（人口10万対））",
   "seoDescription": "2023年の脳血管疾患の受療率（外来）の都道府県別ランキング。1位和歌山県（122人（人口10万対））、最下位埼玉県（25人（人口10万対））で4.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const carMaintenanceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "自動車整備費消費支出額ランキング都道府県【2024年】｜1位長野県（54,270円）",
   "seoDescription": "2024年の自動車整備費消費支出額の都道府県別ランキング。1位長野県（54,270円）、最下位大阪府（11,882円）で4.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

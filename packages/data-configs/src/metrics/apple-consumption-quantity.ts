@@ -59,6 +59,4 @@ export const appleConsumptionQuantity: MetricConfig = {
   "seoTitle": "りんご消費量ランキング都道府県【2024年】｜1位岩手県（20,507g）",
   "seoDescription": "2024年のりんご消費量の都道府県別ランキング。1位岩手県（20,507g）、最下位大分県（4,435g）で4.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

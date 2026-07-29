@@ -59,6 +59,4 @@ export const sportsSpectatingConsumptionExpenditure: MetricConfig = {
   "seoTitle": "スポーツ観覧料消費支出額ランキング都道府県【2024年】｜1位広島県（4,783円）",
   "seoDescription": "2024年のスポーツ観覧料消費支出額の都道府県別ランキング。1位広島県（4,783円）、最下位富山県（48円）で99.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

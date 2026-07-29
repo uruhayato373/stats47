@@ -59,6 +59,4 @@ export const mochiConsumptionQuantity: MetricConfig = {
   "seoTitle": "もち消費量ランキング都道府県【2024年】｜1位茨城県（3,367g）",
   "seoDescription": "2024年のもち消費量の都道府県別ランキング。1位茨城県（3,367g）、最下位長崎県（1,121g）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -99,6 +99,4 @@ export const publicPhoneCount: MetricConfig = {
   "seoTitle": "公衆電話は49年で85%激減｜東京が21倍格差で1位な理由と都市集積（2024）",
   "seoDescription": "1975年に全国625,000台あった公衆電話が2024年には96,126台と85%激減。それでも東京10,717台が首位を維持する理由とは？スマホ普及後も残る公衆電話の都市集積構造を47都道府県で解説。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

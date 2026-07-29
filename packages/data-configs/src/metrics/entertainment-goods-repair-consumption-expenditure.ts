@@ -59,6 +59,4 @@ export const entertainmentGoodsRepairConsumptionExpenditure: MetricConfig = {
   "seoTitle": "教養娯楽用品修理代消費支出額ランキング都道府県【2024年】｜1位茨城県（1,040円）",
   "seoDescription": "2024年の教養娯楽用品修理代消費支出額の都道府県別ランキング。1位茨城県（1,040円）、最下位新潟県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

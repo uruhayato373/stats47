@@ -59,6 +59,4 @@ export const konbuConsumptionQuantity: MetricConfig = {
   "seoTitle": "こんぶ消費1位は産地・北海道でなく岩手535g｜9.6倍差の意外な分布（2024）",
   "seoDescription": "こんぶの産地といえば北海道、では最も食べる県は？答えは岩手535gで1位。最下位山梨56gとの9.6倍差と、なぜ産地と消費地が異なるかを47都道府県で解説（2024年）。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

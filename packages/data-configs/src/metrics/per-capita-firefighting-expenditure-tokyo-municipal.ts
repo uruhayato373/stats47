@@ -53,6 +53,4 @@ export const perCapitaFirefightingExpenditureTokyoMunicipal: MetricConfig = {
   "seoTitle": "消防費ランキング都道府県【2022年】｜1位青森県（44.5千円）",
   "seoDescription": "2022年の消防費の都道府県別ランキング。1位青森県（44.5千円）、最下位神奈川県（13.3千円）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

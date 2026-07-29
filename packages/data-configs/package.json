@@ -14,6 +14,31 @@
       "types": "./src/registry.ts",
       "import": "./src/registry.ts",
       "require": "./src/registry.ts"
+    },
+    "./categories": {
+      "types": "./src/categories.ts",
+      "import": "./src/categories.ts",
+      "require": "./src/categories.ts"
+    },
+    "./home-portal": {
+      "types": "./src/home-portal.ts",
+      "import": "./src/home-portal.ts",
+      "require": "./src/home-portal.ts"
+    },
+    "./theme-catalog": {
+      "types": "./src/theme-catalog/index.ts",
+      "import": "./src/theme-catalog/index.ts",
+      "require": "./src/theme-catalog/index.ts"
+    },
+    "./prominence": {
+      "types": "./src/prominence/index.ts",
+      "import": "./src/prominence/index.ts",
+      "require": "./src/prominence/index.ts"
+    },
+    "./ranking-prominence": {
+      "types": "./src/prominence/ranking-prominence.generated.ts",
+      "import": "./src/prominence/ranking-prominence.generated.ts",
+      "require": "./src/prominence/ranking-prominence.generated.ts"
     }
   },
   "scripts": {

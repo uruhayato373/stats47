@@ -69,6 +69,4 @@ export const publicHighSchoolRatio: MetricConfig = {
   "seoTitle": "公立高等学校割合ランキング都道府県【2024年】｜1位徳島県（91.7％）",
   "seoDescription": "2024年の公立高等学校割合の都道府県別ランキング。1位徳島県（91.7％）、最下位東京都（43.4％）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const sportsLessonConsumptionExpenditure: MetricConfig = {
   "seoTitle": "スポーツ月謝消費支出額ランキング都道府県【2024年】｜1位山形県（18,604円）",
   "seoDescription": "2024年のスポーツ月謝消費支出額の都道府県別ランキング。1位山形県（18,604円）、最下位愛媛県（3,414円）で5.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

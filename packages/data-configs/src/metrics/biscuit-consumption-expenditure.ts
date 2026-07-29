@@ -59,6 +59,4 @@ export const biscuitConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ビスケット消費支出額ランキング都道府県【2024年】｜1位東京都（7,519円）",
   "seoDescription": "2024年のビスケット消費支出額の都道府県別ランキング。1位東京都（7,519円）、最下位和歌山県（4,361円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

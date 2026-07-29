@@ -77,6 +77,4 @@ export const cultivatedLandAreaPerHousehold: MetricConfig = {
   "seoTitle": "耕地面積ランキング都道府県【2024年】｜1位北海道（302,707.9ｍ2）",
   "seoDescription": "2024年の耕地面積の都道府県別ランキング。1位北海道（302,707.9ｍ2）、最下位大阪府（5,717.6ｍ2）で52.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

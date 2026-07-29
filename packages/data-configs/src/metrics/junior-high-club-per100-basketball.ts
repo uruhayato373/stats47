@@ -56,6 +56,4 @@ export const juniorHighClubPer100Basketball: MetricConfig = {
   "seoTitle": "中学バスケットボール部の加入率、都道府県で差｜1位京都府10.28人 vs 最下位熊本県5.98人【2025年】",
   "seoDescription": "中学校のバスケットボール部(運動部活動)の加盟部員数を中学生100人あたりに換算し都道府県別に比較。1位京都府(10.28人)、最下位熊本県(5.98人)で最大1.7倍の差。地図とグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

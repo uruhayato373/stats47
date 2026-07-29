@@ -3,11 +3,10 @@ import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 import { RightRailWidgets } from "@/components/rail";
 import { SurfaceLinkCard } from "@/components/surface";
 
-import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
+import { FooterAdSlot } from "@/features/ads/slots";
 import { themeHref } from "@/features/theme-dashboard/config/theme-urls";
-import { ALL_THEMES } from "@/features/theme-dashboard/server";
+import { ALL_THEMES } from "@/features/theme-dashboard/listing.server";
 
-import { HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -66,9 +65,11 @@ export default function ThemesPage() {
         ))}
       </div>
 
-      {/* 記事内広告（一覧グリッド後。slotId 未発行の間は非表示） */}
-      <InContentAdSlot slot={HUB_INCONTENT} />
-
+      {/*
+        記事内広告は置かない。この面は単一のテーマグリッドしか無く、グリッドの上は
+        ファーストビュー・下はフッター広告の直前しか置き場が無いため、置くと必ず
+        広告 2 連になる (2026-07-29 是正)。末尾の Multiplex 1 枠に統一する。
+      */}
       {/* コンテンツ末尾の全幅フッター広告 */}
       <FooterAdSlot />
     </PageShell>

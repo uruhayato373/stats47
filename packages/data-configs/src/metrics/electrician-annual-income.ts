@@ -55,6 +55,4 @@ export const electricianAnnualIncome: MetricConfig = {
   "seoTitle": "電気工事従事者の平均年収ランキング都道府県【2023年】｜1位和歌山県（739.7万円）",
   "seoDescription": "2023年の電気工事従事者の平均年収の都道府県別ランキング。1位和歌山県（739.7万円）、最下位沖縄県（388.5万円）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

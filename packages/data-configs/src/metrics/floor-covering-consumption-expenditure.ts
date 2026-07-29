@@ -59,6 +59,4 @@ export const floorCoveringConsumptionExpenditure: MetricConfig = {
   "seoTitle": "敷物消費支出額ランキング都道府県【2024年】｜1位北海道（18,190円）",
   "seoDescription": "2024年の敷物消費支出額の都道府県別ランキング。1位北海道（18,190円）、最下位兵庫県（455円）で40.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

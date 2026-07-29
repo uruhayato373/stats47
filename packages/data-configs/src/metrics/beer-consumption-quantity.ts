@@ -59,6 +59,4 @@ export const beerConsumptionQuantity: MetricConfig = {
   "seoTitle": "ビール消費量ランキング都道府県【2024年】｜1位岩手県（33.17l）",
   "seoDescription": "2024年のビール消費量の都道府県別ランキング。1位岩手県（33.17l）、最下位三重県（14.2l）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

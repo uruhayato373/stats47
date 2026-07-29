@@ -59,6 +59,4 @@ export const blackTeaConsumptionQuantity: MetricConfig = {
   "seoTitle": "紅茶消費量ランキング都道府県【2024年】｜1位宮城県（493g）",
   "seoDescription": "2024年の紅茶消費量の都道府県別ランキング。1位宮城県（493g）、最下位和歌山県（51g）で9.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

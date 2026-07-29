@@ -59,6 +59,4 @@ export const policeExpenditureRatioPrefFinance: MetricConfig = {
   "seoTitle": "警察費割合ランキング都道府県【2022年】｜1位神奈川県（7.89％）",
   "seoDescription": "2022年の警察費割合の都道府県別ランキング。1位神奈川県（7.89％）、最下位岩手県（3.3％）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

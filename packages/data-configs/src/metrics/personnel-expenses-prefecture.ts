@@ -77,6 +77,4 @@ export const personnelExpensesPrefecture: MetricConfig = {
   "seoTitle": "人件費ランキング都道府県【2022年】｜1位東京都（1,557,624,136）",
   "seoDescription": "2022年の人件費の都道府県別ランキング。1位東京都（1,557,624,136）、最下位鳥取県（89,682,115）で17.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

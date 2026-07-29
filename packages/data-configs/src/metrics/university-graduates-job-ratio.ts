@@ -69,6 +69,4 @@ export const universityGraduatesJobRatio: MetricConfig = {
   "seoTitle": "大学卒業者に占める就職者の割合ランキング都道府県【2023年】｜1位埼玉県（81.4％）",
   "seoDescription": "2023年の大学卒業者に占める就職者の割合の都道府県別ランキング。1位埼玉県（81.4％）、最下位鳥取県（61.4％）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -32,6 +32,7 @@ import {
   FeaturedRankingCard,
   CategoryRankingTable,
   isCaveatNote,
+  REPRESENTATIVE_RANKING_KEY_SET,
   type CategoryRankingListItem,
 } from '@/features/ranking';
 import { buildFeaturedRankingCardModel } from '@/features/ranking/server';
@@ -140,7 +141,11 @@ export default async function SurveyPage({ params }: PageProps) {
   const editorial = getSurveyEditorialContent(surveyKey);
 
   // Hero KPI: 最新年, 注目件数, etc.
-  const featuredCount = rankingItems.filter((i) => i.isFeatured).length;
+  // 注目の定義は索引 (/ranking) と同じ掲載価値スコアの代表集合に統一する
+  // (旧 isFeatured は 2,295 件中 8 件しか設定されておらず、ほぼ全調査で 0 件だった)。
+  const featuredCount = rankingItems.filter((i) =>
+    REPRESENTATIVE_RANKING_KEY_SET.has(i.rankingKey),
+  ).length;
   const latestYear =
     rankingItems
       .map((i) => parseLatestYear(i.latestYear))
@@ -166,13 +171,16 @@ export default async function SurveyPage({ params }: PageProps) {
     };
   });
 
+  // 調査はカテゴリを跨ぐので、索引の代表集合に入っているものを先頭 6 件まで拾う。
   const seenKeys = new Set<string>();
-  const featuredRaw = rankingItems.filter((item) => {
-    if (!item.isFeatured) return false;
-    if (seenKeys.has(item.rankingKey)) return false;
-    seenKeys.add(item.rankingKey);
-    return true;
-  });
+  const featuredRaw = rankingItems
+    .filter((item) => {
+      if (!REPRESENTATIVE_RANKING_KEY_SET.has(item.rankingKey)) return false;
+      if (seenKeys.has(item.rankingKey)) return false;
+      seenKeys.add(item.rankingKey);
+      return true;
+    })
+    .slice(0, 6);
   // home/category と同じカードモデルを、1 回の全47件 read から導出する。
   // (旧: 独自の縦型カード + baseThumbnailUrl の画像サムネイル)。
   const featuredValues = await Promise.all(
@@ -332,6 +340,14 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
+      {/*
+        記事内広告はランキング表の「前」に置く。表より後ろに置くと、そこから
+        フッター広告までの間は「数字を読むときの注意」(editorial 定義は 75 調査中 1 件)と
+        ネイティブアフィリ(在庫ゼロで消える)しか無く、どちらも欠けた調査で広告 2 連になる。
+        ランキング表は無条件で必ず描画されるので、ここに置けば必ず両枠が離れる (2026-07-29 是正)。
+      */}
+      <InContentAdSlot slot={HUB_INCONTENT} />
+
       <section className="mb-12">
         <SectionHeader
           number={String(sectionNumber++)}
@@ -339,9 +355,6 @@ export default async function SurveyPage({ params }: PageProps) {
         />
         <CategoryRankingTable items={allItems} />
       </section>
-
-      {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
-      <InContentAdSlot slot={HUB_INCONTENT} />
 
       {editorial && (
         <section className="mb-12">

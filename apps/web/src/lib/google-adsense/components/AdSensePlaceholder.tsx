@@ -2,10 +2,17 @@
  * Google AdSense広告のプレースホルダーコンポーネント
  *
  * 開発環境で広告の代わりに表示するプレースホルダーです。
- * 実際の広告と同じサイズで表示され、レイアウト確認に使用できます。
+ * 外枠 class と予約高さは本番の `AdSenseAd` と共有（`ad-frame.ts`）しているため、
+ * ローカルで見える枠は本番で確保される枠と同じ寸法になります。
  */
 
 import { AD_SIZES, AdFormat } from "../types";
+
+import {
+  AD_CONTAINER_CLASS,
+  getAdReservedMinHeight,
+  isFlexibleAdFormat,
+} from "./ad-frame";
 
 interface AdSensePlaceholderProps {
   /**
@@ -27,44 +34,50 @@ export function AdSensePlaceholder({
   className = "",
 }: AdSensePlaceholderProps) {
   const size = AD_SIZES[format];
+  const isFlexible = isFlexibleAdFormat(format);
+  // 本番と同じ予約高を使う。旧実装はフレキシブル枠を一律 250px の固定 height で描いており、
+  // 記事内 120px / Multiplex 300px という実際の予約高と食い違っていた。
+  const reservedMinHeight = getAdReservedMinHeight(format);
 
-  // インフィード・記事内広告・Multiplex はフレキシブルなので、固定サイズを使用
-  const isFlexible = format === "infeed" || format === "article" || format === "multiplex";
-  const width = isFlexible ? 300 : size.desktop.width;
-  const height = isFlexible ? 250 : size.desktop.height;
+  const fixedSizeClass = isFlexible
+    ? ""
+    : format === "banner"
+      ? "w-full max-w-[728px]"
+      : format === "rectangle"
+        ? "w-[300px] md:w-[336px]"
+        : format === "skyscraper"
+          ? "w-[160px]"
+          : "";
 
   return (
     <div
-      className={`
-        flex items-center justify-center bg-muted border-2 border-dashed border-muted-foreground/20 rounded-lg
-        ${className}
-        ${isFlexible ? "w-full" : ""}
-        ${!isFlexible && format === "banner" ? "w-full max-w-[728px] h-[50px] md:h-[90px]" : ""}
-        ${!isFlexible && format === "rectangle" ? "w-[300px] h-[250px] md:w-[336px] md:h-[280px]" : ""}
-        ${!isFlexible && format === "skyscraper" ? "w-[160px] h-[600px]" : ""}
-      `.trim().replace(/\s+/g, " ")}
-      style={{
-        maxWidth: "100%",
-        ...(isFlexible ? { height: "250px" } : {}),
-      }}
+      className={`${AD_CONTAINER_CLASS} ${className}`.trim()}
+      style={{ minHeight: `${reservedMinHeight}px` }}
     >
-      <div className="text-center p-4">
-        <div className="text-sm font-medium text-muted-foreground">
-          広告プレースホルダー
-        </div>
-        <div className="text-xs text-muted-foreground mt-1">
-          {size.description}
-        </div>
-        <div className="text-xs text-muted-foreground mt-1">
-          {isFlexible
-            ? "フレキシブルサイズ"
-            : `${width}x${height} (デスクトップ)`}
-        </div>
-        {!isFlexible && (
-          <div className="text-xs text-muted-foreground">
-            {size.mobile.width}x{size.mobile.height} (モバイル)
+      <div
+        className={`flex flex-1 items-center justify-center border-2 border-dashed border-muted-foreground/20 bg-muted ${
+          isFlexible ? "w-full" : fixedSizeClass
+        }`.trim()}
+        style={{ maxWidth: "100%", minHeight: `${reservedMinHeight}px` }}
+      >
+        <div className="p-4 text-center">
+          <div className="text-sm font-medium text-muted-foreground">
+            広告プレースホルダー
           </div>
-        )}
+          <div className="mt-1 text-xs text-muted-foreground">
+            {size.description}
+          </div>
+          <div className="mt-1 text-xs text-muted-foreground">
+            {isFlexible
+              ? `フレキシブル幅 ・ 予約高 ${reservedMinHeight}px`
+              : `${size.desktop.width}x${size.desktop.height} (デスクトップ)`}
+          </div>
+          {!isFlexible && (
+            <div className="text-xs text-muted-foreground">
+              {size.mobile.width}x{size.mobile.height} (モバイル)
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

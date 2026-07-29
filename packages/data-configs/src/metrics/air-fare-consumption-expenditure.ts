@@ -59,6 +59,4 @@ export const airFareConsumptionExpenditure: MetricConfig = {
   "seoTitle": "航空運賃消費支出額ランキング都道府県【2024年】｜1位埼玉県（19,769円）",
   "seoDescription": "2024年の航空運賃消費支出額の都道府県別ランキング。1位埼玉県（19,769円）、最下位福井県（219円）で90.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

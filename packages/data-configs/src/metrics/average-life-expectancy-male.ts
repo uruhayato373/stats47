@@ -52,6 +52,4 @@ export const averageLifeExpectancyMale: MetricConfig = {
   "seoTitle": "平均余命ランキング都道府県【2020年】｜1位滋賀県（63.07年）",
   "seoDescription": "2020年の平均余命の都道府県別ランキング。1位滋賀県（63.07年）、最下位青森県（59.66年）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -37,6 +37,4 @@ export const newEmploymentRate: MetricConfig = {
   "seoTitle": "新規就業率ランキング都道府県【2022年】｜1位沖縄県（5.9％）",
   "seoDescription": "2022年の新規就業率の都道府県別ランキング。1位沖縄県（5.9％）、最下位秋田県（4％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

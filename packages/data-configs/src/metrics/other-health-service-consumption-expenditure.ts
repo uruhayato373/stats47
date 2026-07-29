@@ -59,6 +59,4 @@ export const otherHealthServiceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の保健医療サービス消費支出額ランキング都道府県【2024年】｜1位北海道（7,723円）",
   "seoDescription": "2024年の他の保健医療サービス消費支出額の都道府県別ランキング。1位北海道（7,723円）、最下位石川県（2,697円）で2.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

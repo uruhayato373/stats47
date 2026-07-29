@@ -59,6 +59,4 @@ export const pearConsumptionExpenditure: MetricConfig = {
   "seoTitle": "梨消費支出額ランキング都道府県【2024年】｜1位鳥取県（8,846円）",
   "seoDescription": "2024年の梨消費支出額の都道府県別ランキング。1位鳥取県（8,846円）、最下位山梨県（625円）で14.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

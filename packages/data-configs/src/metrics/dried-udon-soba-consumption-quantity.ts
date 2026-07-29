@@ -59,6 +59,4 @@ export const driedUdonSobaConsumptionQuantity: MetricConfig = {
   "seoTitle": "乾うどん・そば消費量ランキング都道府県【2024年】｜1位秋田県（6,004g）",
   "seoDescription": "2024年の乾うどん・そば消費量の都道府県別ランキング。1位秋田県（6,004g）、最下位福岡県（1,578g）で3.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -36,6 +36,4 @@ export const perChildStudentSpecialSupportSchoolExpenditurePrefMunicipal: Metric
   "groupKey": "special-support-school-expenses-prefecture",
   "seoTitle": "児童・生徒1人当たり特別支援学校費",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

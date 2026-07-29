@@ -59,6 +59,4 @@ export const busCommuterPassConsumptionExpenditure: MetricConfig = {
   "seoTitle": "バス通勤定期代消費支出額ランキング都道府県【2024年】｜1位長崎県（5,571円）",
   "seoDescription": "2024年のバス通勤定期代消費支出額の都道府県別ランキング。1位長崎県（5,571円）、最下位佐賀県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

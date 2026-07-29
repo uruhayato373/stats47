@@ -7,9 +7,11 @@
  *
  * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md
  */
-import { listAllMetrics, listCategories } from "@stats47/data-configs";
+import { RANKING_PROMINENCE_CATEGORIES } from "@stats47/data-configs/ranking-prominence";
 
 import { NAV_THEMES } from "@/features/theme-dashboard/config/theme-urls";
+
+
 
 import { HeaderClient } from "./HeaderClient";
 
@@ -17,15 +19,18 @@ export default function Header() {
   // NAV_THEMES は静的 (curated・表示順)。local-finance-city は local-finance の
   // 市区町村ビューのためグローバルナビから除外済 (config/theme-urls.ts)。
   const themes = NAV_THEMES.map((t) => ({ themeKey: t.themeKey, title: t.title }));
-  const activeMetrics = listAllMetrics().filter((metric) => metric.isActive);
-  const categories = listCategories().map((category) => ({
+  // 件数と代表ランキングはビルド前に git TS から焼いた生成物を使う。ここで
+  // listAllMetrics() を呼ぶと、共通 Header 経由で METRICS_REGISTRY が
+  // ほぼ全 route の bundle に入る (generate-ranking-prominence.ts 参照)。
+  // メガメニューは索引 6 件の先頭 4 件を出す (/ranking の索引と並びが一致する)。
+  const categories = RANKING_PROMINENCE_CATEGORIES.map((category) => ({
     categoryKey: category.categoryKey,
     title: category.categoryName,
-    count: activeMetrics.filter((metric) => metric.category === category.categoryKey).length,
-    rankings: activeMetrics
-      .filter((metric) => metric.category === category.categoryKey)
-      .slice(0, 4)
-      .map((metric) => ({ rankingKey: metric.key, title: metric.title })),
+    count: category.count,
+    rankings: category.representatives.slice(0, 4).map((representative) => ({
+      rankingKey: representative.rankingKey,
+      title: representative.title,
+    })),
   }));
 
   return <HeaderClient themes={themes} categories={categories} />;

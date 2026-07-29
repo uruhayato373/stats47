@@ -62,6 +62,4 @@ export const denselyInhabitedDistrictPopulation: MetricConfig = {
   "seoTitle": "人口集中地区人口ランキング都道府県【2020年】｜1位東京都（13,844,009人）",
   "seoDescription": "2020年の人口集中地区人口の都道府県別ランキング。1位東京都（13,844,009人）、最下位島根県（171,792人）で80.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const chineseCabbageConsumptionExpenditure: MetricConfig = {
   "seoTitle": "はくさい消費支出額ランキング都道府県【2024年】｜1位兵庫県（2,042円）",
   "seoDescription": "2024年のはくさい消費支出額の都道府県別ランキング。1位兵庫県（2,042円）、最下位栃木県（987円）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

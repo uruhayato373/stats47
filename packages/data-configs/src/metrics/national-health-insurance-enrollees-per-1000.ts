@@ -85,6 +85,4 @@ export const nationalHealthInsuranceEnrolleesPer1000: MetricConfig = {
   "seoTitle": "国民健康保険被保険者数ランキング都道府県【2023年】｜1位沖縄県（250.1人）",
   "seoDescription": "2023年の国民健康保険被保険者数の都道府県別ランキング。1位沖縄県（250.1人）、最下位富山県（158.8人）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

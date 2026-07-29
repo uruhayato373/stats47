@@ -53,6 +53,4 @@ export const trafficAccidentCasualtiesElderly65plus: MetricConfig = {
   "seoTitle": "交通事故死傷者数（高齢者）ランキング都道府県【2024年】｜1位東京都（6,346人）",
   "seoDescription": "2024年の交通事故死傷者数（高齢者）の都道府県別ランキング。1位東京都（6,346人）、最下位鳥取県（140人）で45.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

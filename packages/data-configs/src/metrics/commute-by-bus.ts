@@ -55,6 +55,4 @@ export const commuteByBus: MetricConfig = {
   "seoTitle": "自宅外通勤・通学者数（乗合バス）ランキング都道府県【2020年】｜1位神奈川県（148,894人）",
   "seoDescription": "2020年の自宅外通勤・通学者数（乗合バス）の都道府県別ランキング。1位神奈川県（148,894人）、最下位高知県（2,297人）で64.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

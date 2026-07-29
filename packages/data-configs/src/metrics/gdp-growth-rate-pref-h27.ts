@@ -38,6 +38,4 @@ export const gdpGrowthRatePrefH27: MetricConfig = {
   },
   "seoTitle": "県内総生産額対前年増加率（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -61,6 +61,4 @@ export const singleMotherHouseholds: MetricConfig = {
   "seoTitle": "母子世帯数ランキング都道府県【2020年】｜1位東京都（53,043世帯）",
   "seoDescription": "2020年の母子世帯数の都道府県別ランキング。1位東京都（53,043世帯）、最下位鳥取県（3,304世帯）で16.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

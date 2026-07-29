@@ -53,6 +53,4 @@ export const startingSalaryHighschool: MetricConfig = {
   "seoTitle": "高卒初任給1位は三重20.8万円、沖縄16.5万円との1.3倍差｜47都道府県2023",
   "seoDescription": "高校新卒の初任給は1位三重県(207.6千円)、最下位沖縄県(164.9千円)で1.3倍の地域差。47都道府県を地図とグラフで比較する2023年最新ランキング。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

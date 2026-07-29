@@ -59,6 +59,4 @@ export const soySauceConsumptionQuantity: MetricConfig = {
   "seoTitle": "しょう油消費量ランキング都道府県【2024年】｜1位山形県（5,087ml）",
   "seoDescription": "2024年のしょう油消費量の都道府県別ランキング。1位山形県（5,087ml）、最下位沖縄県（2,587ml）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

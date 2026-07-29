@@ -56,6 +56,4 @@ export const juniorHighClubPer100BaseballSoft: MetricConfig = {
   "seoTitle": "中学野球部(軟式)の加入率、都道府県で差｜1位秋田県7.58人 vs 最下位佐賀県0.98人【2025年】",
   "seoDescription": "中学校の野球部(軟式)(運動部活動)の加盟部員数を中学生100人あたりに換算し都道府県別に比較。1位秋田県(7.58人)、最下位佐賀県(0.98人)で最大7.7倍の差。地図とグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

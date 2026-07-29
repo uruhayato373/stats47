@@ -47,6 +47,4 @@ export const otherConsumptionExpenditureRatioMultiPersonHouseholds: MetricConfig
   "seoTitle": "その他の消費支出割合ランキング都道府県【2024年】｜1位長崎県（22.5％）",
   "seoDescription": "2024年のその他の消費支出割合の都道府県別ランキング。1位長崎県（22.5％）、最下位北海道（15.8％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

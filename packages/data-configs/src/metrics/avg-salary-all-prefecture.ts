@@ -57,6 +57,4 @@ export const avgSalaryAllPrefecture: MetricConfig = {
   "seoTitle": "全職種 平均給与月額ランキング都道府県【2024年】｜1位東京都（470,775円）",
   "seoDescription": "2024年の全職種 平均給与月額の都道府県別ランキング。1位東京都（470,775円）、最下位佐賀県（394,822円）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

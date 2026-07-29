@@ -59,6 +59,4 @@ export const butterConsumptionExpenditure: MetricConfig = {
   "seoTitle": "バター消費支出額ランキング都道府県【2024年】｜1位神奈川県（1,894円）",
   "seoDescription": "2024年のバター消費支出額の都道府県別ランキング。1位神奈川県（1,894円）、最下位長崎県（910円）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

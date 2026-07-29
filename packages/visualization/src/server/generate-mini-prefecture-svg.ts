@@ -1,4 +1,4 @@
-import { geoCentroid, geoMercator, geoPath, type GeoProjection } from 'd3-geo';
+import { geoCentroid, geoMercator, type GeoProjection } from 'd3-geo';
 import {
   interpolateBlues,
   interpolateGreens,
@@ -47,6 +47,12 @@ export const MINI_PREFECTURE_THUMBNAIL_LAYOUT = {
   mainlandClockwiseRotationDegrees: 32,
   okinawa: 'excluded',
 } as const;
+/**
+ * mini map の path 表現バージョン。snapshot に焼かれた SVG が未圧縮の旧世代か
+ * どうかを消費側 (home featured) が判定するための非表示 marker。
+ * 表現を非互換に変えるときだけ番号を上げる。
+ */
+export const MINI_PREFECTURE_MAP_FORMAT = 'compact-v1';
 const T_MIN = 0.18;
 const T_MAX = 0.95;
 const NO_DATA_COLOR = '#e5e7eb';
@@ -54,7 +60,11 @@ const TOP_RING_COLOR = '#f59e0b';
 const OVERVIEW_REGION_OPACITY = [
   0.24, 0.3, 0.38, 0.46, 0.54, 0.42, 0.34, 0.5, 0.58,
 ] as const;
-const OVERVIEW_PATH_TOLERANCE = 0.6;
+/**
+ * 投影後の座標系での簡略化許容誤差 (px)。320×190 の表示サイズでは視認できない。
+ * overview と mini thumbnail の両方が共有する。
+ */
+const PROJECTED_PATH_TOLERANCE = 0.6;
 
 type ScreenPoint = readonly [number, number];
 
@@ -235,7 +245,7 @@ function compactProjectedPath(
           .filter((point): point is [number, number] => point !== null);
         const simplifiedPoints = simplifyProjectedPoints(
           projectedPoints,
-          OVERVIEW_PATH_TOLERANCE
+          PROJECTED_PATH_TOLERANCE
         );
         if (simplifiedPoints.length < 3) return '';
 
@@ -250,6 +260,60 @@ function compactProjectedPath(
     .join('');
 }
 
+interface MiniMainlandShape {
+  /** 順位配色の解決キー。properties から取れない場合だけ null。 */
+  readonly prefCode: number | null;
+  /** 投影・簡略化済みの path。順位や配色に依存しない。 */
+  readonly path: string;
+}
+
+let miniMainlandGeometryCache: MiniMainlandShape[] | null = null;
+
+/**
+ * mini thumbnail の本土形状を1回だけ投影・簡略化して保持する。
+ *
+ * projection と地理形状は引数 (順位・配色) に依存しないため、カードごとに
+ * 再投影・再文字列化する必要がない。順位由来の fill と1位リングは呼び出しごとに
+ * 計算するので、色を含む完成SVGはここで cache しない。
+ */
+function readMiniMainlandGeometry(): MiniMainlandShape[] {
+  if (miniMainlandGeometryCache) return miniMainlandGeometryCache;
+
+  const mainlandFeatures = readPrefectureFeatures()
+    .filter(
+      (prefecture) => normalizePrefCode(prefecture.properties?.N03_007) !== 47
+    )
+    .map(keepMainlandPolygons)
+    .filter((prefecture): prefecture is Feature => prefecture !== null);
+  const mainlandCollection: FeatureCollection = {
+    type: 'FeatureCollection',
+    features: mainlandFeatures,
+  };
+  const mainlandProjection = geoMercator()
+    // d3 projection.angle は画面上の時計回りと符号が逆なので負値を渡す。
+    .angle(-MINI_PREFECTURE_THUMBNAIL_LAYOUT.mainlandClockwiseRotationDegrees)
+    .fitExtent(
+      [
+        [MAP_PADDING, MAP_PADDING],
+        [WIDTH - MAP_PADDING, HEIGHT - MAP_PADDING],
+      ],
+      mainlandCollection
+    );
+
+  miniMainlandGeometryCache = mainlandFeatures.map((prefecture) => {
+    const properties = prefecture.properties ?? {};
+    return {
+      prefCode: normalizePrefCode(
+        properties.N03_007 ?? properties.prefCode ?? properties.code
+      ),
+      path: compactProjectedPath(prefecture, mainlandProjection),
+    };
+  });
+  return miniMainlandGeometryCache;
+}
+
+let prefectureOverviewSvgCache: string | null = null;
+
 /**
  * home の都道府県入口用に、TopoJSON SSOTから全国概観SVGを生成する。
  *
@@ -257,6 +321,10 @@ function compactProjectedPath(
  * 沖縄は省略せず左下インセットへ収め、凡例や順位表現は持ち込まない。
  */
 export function generatePrefectureOverviewSvg(): string {
+  // 引数を持たず TopoJSON と CSS token 文字列だけから決定的に生成されるため、
+  // 完成文字列をそのまま再利用してよい。
+  if (prefectureOverviewSvgCache) return prefectureOverviewSvgCache;
+
   const prefectureFeatures = readPrefectureFeatures();
   const mainlandFeatures = prefectureFeatures
     .filter(
@@ -314,13 +382,14 @@ export function generatePrefectureOverviewSvg(): string {
       ? renderShape(okinawa, compactProjectedPath(okinawa, okinawaProjection))
       : '';
 
-  return [
+  prefectureOverviewSvgCache = [
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${WIDTH} ${HEIGHT}" preserveAspectRatio="xMidYMid meet" data-map-layout="prefecture-overview" data-map-rotation="none" data-okinawa="inset">`,
     `<rect x="${OVERVIEW_OKINAWA_INSET.x}" y="${OVERVIEW_OKINAWA_INSET.y}" width="${OVERVIEW_OKINAWA_INSET.width}" height="${OVERVIEW_OKINAWA_INSET.height}" fill="none" stroke="hsl(var(--border))" stroke-width="0.8"/>`,
     mainlandShapes.join(''),
     okinawaShape,
     '</svg>',
   ].join('');
+  return prefectureOverviewSvgCache;
 }
 
 /**
@@ -355,34 +424,10 @@ export function generateMiniPrefectureSvg(
     );
   }
 
-  const mainlandFeatures = readPrefectureFeatures()
-    .filter(
-      (prefecture) => normalizePrefCode(prefecture.properties?.N03_007) !== 47
-    )
-    .map(keepMainlandPolygons)
-    .filter((prefecture): prefecture is Feature => prefecture !== null);
-  const mainlandCollection: FeatureCollection = {
-    type: 'FeatureCollection',
-    features: mainlandFeatures,
-  };
-  const mainlandProjection = geoMercator()
-    // d3 projection.angle は画面上の時計回りと符号が逆なので負値を渡す。
-    .angle(-MINI_PREFECTURE_THUMBNAIL_LAYOUT.mainlandClockwiseRotationDegrees)
-    .fitExtent(
-      [
-        [MAP_PADDING, MAP_PADDING],
-        [WIDTH - MAP_PADDING, HEIGHT - MAP_PADDING],
-      ],
-      mainlandCollection
-    );
-  const mainlandPath = geoPath(mainlandProjection);
+  const geometry = readMiniMainlandGeometry();
   const count = Math.max(rankByCode.size, 1);
 
-  const renderShape = (prefecture: Feature, pathValue: string) => {
-    const properties = prefecture.properties ?? {};
-    const prefCode = normalizePrefCode(
-      properties.N03_007 ?? properties.prefCode ?? properties.code
-    );
+  const shapes = geometry.map(({ prefCode, path }) => {
     const rank = prefCode === null ? undefined : rankByCode.get(prefCode);
     const rankT =
       rank === undefined || count === 1 ? 0 : (count - rank) / (count - 1);
@@ -391,14 +436,11 @@ export function generateMiniPrefectureSvg(
         ? NO_DATA_COLOR
         : interpolator(T_MIN + rankT * (T_MAX - T_MIN));
     const isTop = rank === 1;
-    return `<path d="${pathValue}" fill="${fill}" stroke="${isTop ? TOP_RING_COLOR : '#fff'}" stroke-width="${isTop ? 2.2 : 0.75}" stroke-linejoin="round"/>`;
-  };
-  const shapes = mainlandFeatures.map((prefecture) =>
-    renderShape(prefecture, mainlandPath(prefecture) ?? '')
-  );
+    return `<path d="${path}" fill="${fill}" stroke="${isTop ? TOP_RING_COLOR : '#fff'}" stroke-width="${isTop ? 2.2 : 0.75}" stroke-linejoin="round"/>`;
+  });
 
   return [
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${WIDTH} ${HEIGHT}" preserveAspectRatio="xMidYMid meet" data-map-rotation="clockwise-${MINI_PREFECTURE_THUMBNAIL_LAYOUT.mainlandClockwiseRotationDegrees}" data-okinawa="${MINI_PREFECTURE_THUMBNAIL_LAYOUT.okinawa}">`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${WIDTH} ${HEIGHT}" preserveAspectRatio="xMidYMid meet" data-map-rotation="clockwise-${MINI_PREFECTURE_THUMBNAIL_LAYOUT.mainlandClockwiseRotationDegrees}" data-okinawa="${MINI_PREFECTURE_THUMBNAIL_LAYOUT.okinawa}" data-map-format="${MINI_PREFECTURE_MAP_FORMAT}">`,
     shapes.join(''),
     '</svg>',
   ].join('');

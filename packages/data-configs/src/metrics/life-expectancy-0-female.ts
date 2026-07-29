@@ -62,6 +62,4 @@ export const lifeExpectancy0Female: MetricConfig = {
   "seoTitle": "平均余命ランキング都道府県【2020年】｜1位岡山県（88.29年）",
   "seoDescription": "2020年の平均余命の都道府県別ランキング。1位岡山県（88.29年）、最下位青森県（86.33年）で1.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

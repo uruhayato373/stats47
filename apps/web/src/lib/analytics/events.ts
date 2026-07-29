@@ -97,14 +97,14 @@ export function trackCtaClick(params: {
   });
 }
 
-// ─── ホーム注目ランキング (home-featured-v1 実験) ──────────────
+// ─── ホーム注目ランキング ──────────────────────────────────────
 
 /**
  * ホーム「注目のランキング」カードの共通 payload。
  * `link_position=home_featured` は両イベント固定 (GSC/GA4 で他導線と区別する)。
- * `card_variant` は実際に描画された variant (control 側は map/number、editorial 側は
- * question/comparison/territory/top-three。payload 不足 fallback 時は fallback 後の値)。
- * `slot` は 1 始まりの表示位置。custom dimension 登録は人間タスク (仕様 doc 28 §9.3)。
+ * 現行実装は `card_variant=geographic` / `experiment_variant=editorial` 固定。
+ * `slot` は 1 始まりの表示位置。custom dimension の登録状況は
+ * `.claude/rules/analytics-event-standards.md` を正典とする。
  */
 export interface HomeFeaturedEventParams {
   rankingKey: string;
@@ -151,8 +151,8 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * `nav_surface` の値:
  * - `desktop-header` / `mobile-drawer`: グローバルナビ
  * - `areas_search` / `areas_list` / `areas_map`: /areas の県選択導線（検索 / 一覧 / 地図）
- * - `home_category` / `home_use_case` / `home_area` / `home_buzz_map` / `home_blog`:
- *   home ポータルの発見セクション（カテゴリ / 知りたいこと / 都道府県 / バズマップ / ブログ）
+ * - `home_category` / `home_use_case` / `home_area` / `home_blog`:
+ *   home ポータルの発見セクション（カテゴリ / 知りたいこと / 都道府県 / ブログ）
  *
  * いずれも既存 GA4 custom dimension `nav_surface` の値追加であり、新しい dimension は増やさない
  * (`.claude/rules/analytics-event-standards.md` §2)。
@@ -169,7 +169,6 @@ export function trackNavClick(params: {
     | "home_category"
     | "home_use_case"
     | "home_area"
-    | "home_buzz_map"
     | "home_blog";
 }): void {
   sendEvent("nav_click", {

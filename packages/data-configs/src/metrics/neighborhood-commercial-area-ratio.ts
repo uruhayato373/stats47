@@ -60,6 +60,4 @@ export const neighborhoodCommercialAreaRatio: MetricConfig = {
   "seoTitle": "近隣商業地域面積比率ランキング都道府県【2023年】｜1位広島県（8％）",
   "seoDescription": "2023年の近隣商業地域面積比率の都道府県別ランキング。1位広島県（8％）、最下位埼玉県（2.5％）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

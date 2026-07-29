@@ -34,6 +34,4 @@ export const hobbyParticipationRateGo: MetricConfig = {
   "seoTitle": "囲碁の行動者率ランキング都道府県【2021年】｜1位長崎県（1.3％）",
   "seoDescription": "2021年の囲碁の行動者率の都道府県別ランキング。1位長崎県（1.3％）、最下位滋賀県（0.4％）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

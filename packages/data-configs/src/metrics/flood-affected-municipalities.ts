@@ -51,6 +51,4 @@ export const floodAffectedMunicipalities: MetricConfig = {
   "seoTitle": "水害被災市区町村数（一般資産等）ランキング都道府県【2014年】｜1位神奈川県（33延数）",
   "seoDescription": "2014年の水害被災市区町村数（一般資産等）の都道府県別ランキング。1位神奈川県（33延数）、最下位熊本県（1延数）で33.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

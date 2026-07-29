@@ -68,6 +68,4 @@ export const criminalRecognitionCountOfTheftCrimeRate: MetricConfig = {
   "seoTitle": "刑法犯認知件数に占める窃盗犯の割合ランキング都道府県【2023年】｜1位栃木県（78.19％）",
   "seoDescription": "2023年の刑法犯認知件数に占める窃盗犯の割合の都道府県別ランキング。1位栃木県（78.19％）、最下位長崎県（56.23％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

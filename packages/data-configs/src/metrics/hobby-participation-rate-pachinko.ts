@@ -34,6 +34,4 @@ export const hobbyParticipationRatePachinko: MetricConfig = {
   "seoTitle": "パチンコの行動者率ランキング都道府県【2021年】｜1位鹿児島県（8.6％）",
   "seoDescription": "2021年のパチンコの行動者率の都道府県別ランキング。1位鹿児島県（8.6％）、最下位沖縄県（3.6％）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

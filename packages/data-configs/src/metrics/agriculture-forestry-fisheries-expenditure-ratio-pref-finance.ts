@@ -36,6 +36,4 @@ export const agricultureForestryFisheriesExpenditureRatioPrefFinance: MetricConf
   "seoTitle": "農林水産業費割合ランキング都道府県【2022年】｜1位秋田県（10.8％）",
   "seoDescription": "2022年の農林水産業費割合の都道府県別ランキング。1位秋田県（10.8％）、最下位東京都（0.29％）で37.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

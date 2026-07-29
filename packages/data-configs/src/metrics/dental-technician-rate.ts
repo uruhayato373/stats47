@@ -51,6 +51,4 @@ export const dentalTechnicianRate: MetricConfig = {
   "seoTitle": "歯科技工士率（人口10万対）ランキング都道府県【2020年】｜1位香川県（58.6人）",
   "seoDescription": "2020年の歯科技工士率（人口10万対）の都道府県別ランキング。1位香川県（58.6人）、最下位埼玉県（16.1人）で3.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

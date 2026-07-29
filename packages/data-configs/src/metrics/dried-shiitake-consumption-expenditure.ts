@@ -59,6 +59,4 @@ export const driedShiitakeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "干ししいたけ消費支出額ランキング都道府県【2024年】｜1位大分県（731円）",
   "seoDescription": "2024年の干ししいたけ消費支出額の都道府県別ランキング。1位大分県（731円）、最下位高知県（101円）で7.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

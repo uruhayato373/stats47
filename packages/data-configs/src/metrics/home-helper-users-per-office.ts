@@ -51,6 +51,4 @@ export const homeHelperUsersPerOffice: MetricConfig = {
   "seoTitle": "訪問介護利用者数ランキング都道府県【2023年】｜1位富山県（43.68人）",
   "seoDescription": "2023年の訪問介護利用者数の都道府県別ランキング。1位富山県（43.68人）、最下位沖縄県（24.04人）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const whiteBreadConsumptionExpenditure: MetricConfig = {
   "seoTitle": "食パン消費支出額ランキング都道府県【2024年】｜1位兵庫県（15,424円）",
   "seoDescription": "2024年の食パン消費支出額の都道府県別ランキング。1位兵庫県（15,424円）、最下位福島県（8,460円）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

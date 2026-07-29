@@ -47,6 +47,4 @@ export const elderlySinglePersonHouseholds: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

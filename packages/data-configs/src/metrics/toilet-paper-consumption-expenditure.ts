@@ -59,6 +59,4 @@ export const toiletPaperConsumptionExpenditure: MetricConfig = {
   "seoTitle": "トイレットペーパー消費支出額ランキング都道府県【2024年】｜1位青森県（5,551円）",
   "seoDescription": "2024年のトイレットペーパー消費支出額の都道府県別ランキング。1位青森県（5,551円）、最下位和歌山県（3,884円）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -56,6 +56,4 @@ export const juniorHighClubPer100TrackAndField: MetricConfig = {
   "seoTitle": "中学陸上競技部の加入率、都道府県で差｜1位福島県10.51人 vs 最下位沖縄県0.55人【2025年】",
   "seoDescription": "中学校の陸上競技部(運動部活動)の加盟部員数を中学生100人あたりに換算し都道府県別に比較。1位福島県(10.51人)、最下位沖縄県(0.55人)で最大19.1倍の差。地図とグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

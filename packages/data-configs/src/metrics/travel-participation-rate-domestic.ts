@@ -34,6 +34,4 @@ export const travelParticipationRateDomestic: MetricConfig = {
   "seoTitle": "国内旅行の行動者率ランキング都道府県【2021年】｜1位東京都（41.7％）",
   "seoDescription": "2021年の国内旅行の行動者率の都道府県別ランキング。1位東京都（41.7％）、最下位徳島県（16.3％）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

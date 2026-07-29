@@ -76,6 +76,4 @@ export const plannedConstructionCostPerM2: MetricConfig = {
   "seoTitle": "着工居住用建築物工事費予定額ランキング都道府県【2024年】｜1位東京都（364.2千円）",
   "seoDescription": "2024年の着工居住用建築物工事費予定額の都道府県別ランキング。1位東京都（364.2千円）、最下位秋田県（214.8千円）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

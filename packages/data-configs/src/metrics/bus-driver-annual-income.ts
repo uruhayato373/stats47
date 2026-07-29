@@ -55,6 +55,4 @@ export const busDriverAnnualIncome: MetricConfig = {
   "seoTitle": "バス運転者の平均年収ランキング都道府県【2023年】｜1位東京都（570.7万円）",
   "seoDescription": "2023年のバス運転者の平均年収の都道府県別ランキング。1位東京都（570.7万円）、最下位大分県（283.2万円）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

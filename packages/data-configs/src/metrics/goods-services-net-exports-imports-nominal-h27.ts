@@ -37,6 +37,4 @@ export const goodsServicesNetExportsImportsNominalH27: MetricConfig = {
   },
   "seoTitle": "財貨・サービスの移出入（純）（名目）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -56,6 +56,4 @@ export const municipalIntellectualDisabilityConsultationsPer100k: MetricConfig =
   "seoTitle": "市町村における知的障害者相談実人員ランキング都道府県【2007年】｜1位島根県（879.3人）",
   "seoDescription": "2007年の市町村における知的障害者相談実人員の都道府県別ランキング。1位島根県（879.3人）、最下位奈良県（102.6人）で8.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

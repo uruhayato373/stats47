@@ -77,6 +77,4 @@ export const perCapitaTotalExpenditurePrefMunicipal: MetricConfig = {
   "seoTitle": "歳出決算総額ランキング都道府県【2022年】｜1位島根県（1,597.6千円）",
   "seoDescription": "2022年の歳出決算総額の都道府県別ランキング。1位島根県（1,597.6千円）、最下位埼玉県（718.7千円）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

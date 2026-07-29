@@ -64,6 +64,4 @@ export const cpiRegionalDifferenceIndexFoodTokyo100: MetricConfig = {
   },
   "seoTitle": "消費者物価地域差指数（食料：東京都区部＝100）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

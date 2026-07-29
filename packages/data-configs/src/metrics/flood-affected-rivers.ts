@@ -51,6 +51,4 @@ export const floodAffectedRivers: MetricConfig = {
   "seoTitle": "水害被災河川・海岸数（一般資産等）ランキング都道府県【2014年】｜1位静岡県（143延数）",
   "seoDescription": "2014年の水害被災河川・海岸数（一般資産等）の都道府県別ランキング。1位静岡県（143延数）、最下位鳥取県（1延数）で143.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

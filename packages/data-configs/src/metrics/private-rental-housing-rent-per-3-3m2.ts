@@ -95,6 +95,4 @@ export const privateRentalHousingRentPer33m2: MetricConfig = {
   "seoTitle": "民営賃貸住宅の家賃ランキング都道府県【2024年】｜1位東京都（9,736円）",
   "seoDescription": "2024年の民営賃貸住宅の家賃の都道府県別ランキング。1位東京都（9,736円）、最下位和歌山県（3,442円）で2.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

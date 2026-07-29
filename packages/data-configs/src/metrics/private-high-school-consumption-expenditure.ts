@@ -59,6 +59,4 @@ export const privateHighSchoolConsumptionExpenditure: MetricConfig = {
   "seoTitle": "私立高校消費支出額ランキング都道府県【2024年】｜1位神奈川県（41,443円）",
   "seoDescription": "2024年の私立高校消費支出額の都道府県別ランキング。1位神奈川県（41,443円）、最下位徳島県（811円）で51.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

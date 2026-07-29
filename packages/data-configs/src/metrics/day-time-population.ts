@@ -61,6 +61,4 @@ export const dayTimePopulation: MetricConfig = {
   "seoTitle": "昼間人口ランキング都道府県【2020年】｜1位東京都（16,315,279人）",
   "seoDescription": "2020年の昼間人口の都道府県別ランキング。1位東京都（16,315,279人）、最下位鳥取県（552,505人）で29.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

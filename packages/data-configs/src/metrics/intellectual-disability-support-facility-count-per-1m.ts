@@ -54,6 +54,4 @@ export const intellectualDisabilitySupportFacilityCountPer1m: MetricConfig = {
   "seoTitle": "知的障害者援護施設数ランキング都道府県【2011年】｜1位高知県（30.3所）",
   "seoDescription": "2011年の知的障害者援護施設数の都道府県別ランキング。1位高知県（30.3所）、最下位東京都（3.4所）で8.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

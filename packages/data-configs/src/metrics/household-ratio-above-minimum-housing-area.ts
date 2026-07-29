@@ -39,6 +39,4 @@ export const householdRatioAboveMinimumHousingArea: MetricConfig = {
   "seoTitle": "最低居住面積水準以上世帯割合ランキング都道府県【2023年】｜1位秋田県（95.2％）",
   "seoDescription": "2023年の最低居住面積水準以上世帯割合の都道府県別ランキング。1位秋田県（95.2％）、最下位東京都（82.2％）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -55,6 +55,4 @@ export const vehicleKilometersTraveled: MetricConfig = {
   "seoTitle": "自動車走行台キロランキング都道府県【2005年】｜1位北海道（61,603千台･km/12h）",
   "seoDescription": "2005年の自動車走行台キロの都道府県別ランキング。1位北海道（61,603千台･km/12h）、最下位鳥取県（8,903千台･km/12h）で6.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

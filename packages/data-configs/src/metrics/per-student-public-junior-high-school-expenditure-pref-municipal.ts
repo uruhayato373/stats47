@@ -75,6 +75,4 @@ export const perStudentPublicJuniorHighSchoolExpenditurePrefMunicipal: MetricCon
   "seoTitle": "公立中学校費ランキング都道府県【2022年】｜1位高知県（1,482.9千円）",
   "seoDescription": "2022年の公立中学校費の都道府県別ランキング。1位高知県（1,482.9千円）、最下位埼玉県（743.2千円）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

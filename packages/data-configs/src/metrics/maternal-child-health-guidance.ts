@@ -31,6 +31,4 @@ export const maternalChildHealthGuidance: MetricConfig = {
     "decimalPlaces": 0,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

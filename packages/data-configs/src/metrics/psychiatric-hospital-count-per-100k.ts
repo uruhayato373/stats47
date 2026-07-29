@@ -87,6 +87,4 @@ export const psychiatricHospitalCountPer100k: MetricConfig = {
   "seoTitle": "精神科病院数ランキング都道府県【2023年】｜1位鹿児島県（2.5施設）",
   "seoDescription": "2023年の精神科病院数の都道府県別ランキング。1位鹿児島県（2.5施設）、最下位奈良県（0.3施設）で8.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

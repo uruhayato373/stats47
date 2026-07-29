@@ -56,6 +56,4 @@ export const dentalGuidancePersons: MetricConfig = {
   "seoTitle": "歯科保健指導延人員ランキング都道府県【2023年】｜1位東京都（332,026人）",
   "seoDescription": "2023年の歯科保健指導延人員の都道府県別ランキング。1位東京都（332,026人）、最下位香川県（9,987人）で33.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

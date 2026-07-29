@@ -59,6 +59,4 @@ export const otherClothingMiscConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の被服のその他消費支出額ランキング都道府県【2024年】｜1位奈良県（3,909円）",
   "seoDescription": "2024年の他の被服のその他消費支出額の都道府県別ランキング。1位奈良県（3,909円）、最下位青森県（1,251円）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const breadConsumptionExpenditure: MetricConfig = {
   "seoTitle": "パン消費支出額ランキング都道府県【2024年】",
   "seoDescription": "2024年のパン消費支出額（合計）の都道府県別ランキング。家計調査（二人以上世帯・県庁所在市）の年間支出額を地図やグラフで47都道府県比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

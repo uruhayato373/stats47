@@ -62,6 +62,4 @@ export const ratio65Plus: MetricConfig = {
   "seoTitle": "65歳以上人口割合ランキング都道府県【2024年】｜1位秋田県（39.5％）",
   "seoDescription": "2024年の65歳以上人口割合の都道府県別ランキング。1位秋田県（39.5％）、最下位東京都（22.7％）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

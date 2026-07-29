@@ -87,6 +87,4 @@ export const truckOperators: MetricConfig = {
   "seoTitle": "トラック事業者ランキング都道府県【2023年】｜1位東京都（5,263者）",
   "seoDescription": "2023年のトラック事業者の都道府県別ランキング。1位東京都（5,263者）、最下位鳥取県（334者）で15.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

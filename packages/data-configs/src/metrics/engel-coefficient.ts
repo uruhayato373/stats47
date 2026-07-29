@@ -39,6 +39,4 @@ export const engelCoefficient: MetricConfig = {
     "denominatorKey": "consumption-expenditure-total",
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -53,6 +53,4 @@ export const dentalGuidancePersonsPer1000: MetricConfig = {
   "seoTitle": "歯科保健指導延人員ランキング都道府県【2023年】｜1位熊本県（48.4人）",
   "seoDescription": "2023年の歯科保健指導延人員の都道府県別ランキング。1位熊本県（48.4人）、最下位香川県（10.8人）で4.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

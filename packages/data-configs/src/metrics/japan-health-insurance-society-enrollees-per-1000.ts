@@ -85,6 +85,4 @@ export const japanHealthInsuranceSocietyEnrolleesPer1000: MetricConfig = {
   "seoTitle": "全国保険協会管掌健康保険加入者数ランキング都道府県【2023年】｜1位東京都（428.7人）",
   "seoDescription": "2023年の全国保険協会管掌健康保険加入者数の都道府県別ランキング。1位東京都（428.7人）、最下位千葉県（163人）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

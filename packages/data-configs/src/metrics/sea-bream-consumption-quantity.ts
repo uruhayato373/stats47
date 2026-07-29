@@ -59,6 +59,4 @@ export const seaBreamConsumptionQuantity: MetricConfig = {
   "seoTitle": "たい消費量ランキング都道府県【2024年】｜1位佐賀県（1,012g）",
   "seoDescription": "2024年のたい消費量の都道府県別ランキング。1位佐賀県（1,012g）、最下位栃木県（67g）で15.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

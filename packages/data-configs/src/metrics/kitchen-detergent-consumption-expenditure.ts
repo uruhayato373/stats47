@@ -59,6 +59,4 @@ export const kitchenDetergentConsumptionExpenditure: MetricConfig = {
   "seoTitle": "台所・住居用洗剤消費支出額ランキング都道府県【2024年】｜1位徳島県（4,648円）",
   "seoDescription": "2024年の台所・住居用洗剤消費支出額の都道府県別ランキング。1位徳島県（4,648円）、最下位高知県（3,224円）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

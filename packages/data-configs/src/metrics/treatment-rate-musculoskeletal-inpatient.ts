@@ -45,6 +45,4 @@ export const treatmentRateMusculoskeletalInpatient: MetricConfig = {
   "seoTitle": "筋骨格系及び結合組織の疾患の受療率（入院）ランキング都道府県【2023年】｜1位高知県（138人（人口10万対））",
   "seoDescription": "2023年の筋骨格系及び結合組織の疾患の受療率（入院）の都道府県別ランキング。1位高知県（138人（人口10万対））、最下位愛知県（35人（人口10万対））で3.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

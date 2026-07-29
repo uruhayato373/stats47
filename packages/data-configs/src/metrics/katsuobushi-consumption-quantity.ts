@@ -59,6 +59,4 @@ export const katsuobushiConsumptionQuantity: MetricConfig = {
   "seoTitle": "かつお節・削り節消費量ランキング都道府県【2024年】｜1位沖縄県（681g）",
   "seoDescription": "2024年のかつお節・削り節消費量の都道府県別ランキング。1位沖縄県（681g）、最下位鳥取県（78g）で8.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

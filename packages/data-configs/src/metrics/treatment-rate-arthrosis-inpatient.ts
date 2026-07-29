@@ -45,6 +45,4 @@ export const treatmentRateArthrosisInpatient: MetricConfig = {
   "seoTitle": "関節症の受療率（入院）ランキング都道府県【2023年】｜1位高知県（38人（人口10万対））",
   "seoDescription": "2023年の関節症の受療率（入院）の都道府県別ランキング。1位高知県（38人（人口10万対））、最下位愛知県（8人（人口10万対））で4.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

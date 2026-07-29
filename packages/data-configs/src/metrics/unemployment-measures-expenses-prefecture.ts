@@ -86,6 +86,4 @@ export const unemploymentMeasuresExpensesPrefecture: MetricConfig = {
   "seoTitle": "失業対策費ランキング都道府県【2022年】｜1位福島県（1,335,291）",
   "seoDescription": "2022年の失業対策費の都道府県別ランキング。1位福島県（1,335,291）、最下位沖縄県（0）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

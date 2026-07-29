@@ -55,6 +55,4 @@ export const cpiRegionalDifferenceIndexTotal51cities100: MetricConfig = {
   "seoTitle": "消費者物価地域差指数ランキング都道府県【2013年】｜1位神奈川県（106‐）",
   "seoDescription": "2013年の消費者物価地域差指数の都道府県別ランキング。1位神奈川県（106‐）、最下位宮崎県（97.1‐）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

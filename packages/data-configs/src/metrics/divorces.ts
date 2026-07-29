@@ -54,6 +54,4 @@ export const divorces: MetricConfig = {
   "seoTitle": "離婚件数ランキング都道府県【2023年】｜1位東京都（20,016組）",
   "seoDescription": "2023年の離婚件数の都道府県別ランキング。1位東京都（20,016組）、最下位鳥取県（781組）で25.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

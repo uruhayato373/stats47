@@ -69,6 +69,4 @@ export const mainRoadPavingRate: MetricConfig = {
   "seoTitle": "主要道路舗装率ランキング都道府県【2023年】｜1位鹿児島県（100％）",
   "seoDescription": "2023年の主要道路舗装率の都道府県別ランキング。1位鹿児島県（100％）、最下位岩手県（92.1％）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

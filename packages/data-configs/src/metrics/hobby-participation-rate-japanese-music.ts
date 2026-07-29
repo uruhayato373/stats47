@@ -34,6 +34,4 @@ export const hobbyParticipationRateJapaneseMusic: MetricConfig = {
   "seoTitle": "邦楽の行動者率ランキング都道府県【2021年】｜1位沖縄県（5.5％）",
   "seoDescription": "2021年の邦楽の行動者率の都道府県別ランキング。1位沖縄県（5.5％）、最下位徳島県（1.5％）で3.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

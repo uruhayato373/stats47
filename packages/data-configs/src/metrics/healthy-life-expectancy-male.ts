@@ -62,6 +62,4 @@ export const healthyLifeExpectancyMale: MetricConfig = {
   "seoTitle": "健康寿命（男性）ランキング都道府県【2019年】｜1位大分県（73.72年）",
   "seoDescription": "2019年の健康寿命（男性）の都道府県別ランキング。1位大分県（73.72年）、最下位岩手県（71.39年）で1.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

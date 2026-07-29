@@ -48,6 +48,4 @@ export const integratedKindergartenEnrollment: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

@@ -59,6 +59,4 @@ export const mensSweaterConsumptionExpenditure: MetricConfig = {
   "seoTitle": "男子用セーター消費支出額ランキング都道府県【2024年】｜1位岐阜県（3,850円）",
   "seoDescription": "2024年の男子用セーター消費支出額の都道府県別ランキング。1位岐阜県（3,850円）、最下位沖縄県（193円）で19.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

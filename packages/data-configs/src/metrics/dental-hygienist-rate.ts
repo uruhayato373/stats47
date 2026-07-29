@@ -51,6 +51,4 @@ export const dentalHygienistRate: MetricConfig = {
   "seoTitle": "歯科衛生士率（人口10万対）ランキング都道府県【2020年】｜1位徳島県（180.2人）",
   "seoDescription": "2020年の歯科衛生士率（人口10万対）の都道府県別ランキング。1位徳島県（180.2人）、最下位青森県（78.4人）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

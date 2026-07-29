@@ -49,6 +49,4 @@ export const commuterRatioFromOtherMunicipalities: MetricConfig = {
   "seoTitle": "他市区町村からの通勤者比率ランキング都道府県【2020年】｜1位東京都（93.6％）",
   "seoDescription": "2020年の他市区町村からの通勤者比率の都道府県別ランキング。1位東京都（93.6％）、最下位島根県（13.7％）で6.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

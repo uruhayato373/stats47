@@ -104,6 +104,4 @@ export const psychiatricHospitalCount: MetricConfig = {
   "seoTitle": "精神科病院数ランキング都道府県【2023年】｜1位北海道（70施設）",
   "seoDescription": "2023年の精神科病院数の都道府県別ランキング。1位北海道（70施設）、最下位鳥取県（4施設）で17.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

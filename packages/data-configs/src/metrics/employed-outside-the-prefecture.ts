@@ -39,6 +39,4 @@ export const employedOutsideThePrefecture: MetricConfig = {
   "seoTitle": "県外就職者比率ランキング都道府県【2024年】｜1位埼玉県（32.9％）",
   "seoDescription": "2024年の県外就職者比率の都道府県別ランキング。1位埼玉県（32.9％）、最下位北海道（4.9％）で6.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

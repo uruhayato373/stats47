@@ -59,6 +59,4 @@ export const strawberryConsumptionQuantity: MetricConfig = {
   "seoTitle": "いちご消費量ランキング都道府県【2024年】｜1位栃木県（3,636g）",
   "seoDescription": "2024年のいちご消費量の都道府県別ランキング。1位栃木県（3,636g）、最下位沖縄県（1,139g）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

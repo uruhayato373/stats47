@@ -54,6 +54,4 @@ export const newGraduateScheduledSalaryUniversityMale: MetricConfig = {
   "seoTitle": "新規学卒者所定内給与額ランキング都道府県【2024年】｜1位群馬県（317.9千円）",
   "seoDescription": "2024年の新規学卒者所定内給与額の都道府県別ランキング。1位群馬県（317.9千円）、最下位沖縄県（215.5千円）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

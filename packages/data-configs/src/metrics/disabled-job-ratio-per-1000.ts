@@ -38,6 +38,4 @@ export const disabledJobRatioPer1000: MetricConfig = {
   "seoTitle": "就職者に占める身体障害者の比率ランキング都道府県【2018年】｜1位大阪府（39.51‐）",
   "seoDescription": "2018年の就職者に占める身体障害者の比率の都道府県別ランキング。1位大阪府（39.51‐）、最下位秋田県（15.63‐）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

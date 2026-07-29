@@ -52,6 +52,4 @@ export const malePartTimeHourlyWagePre2019: MetricConfig = {
   "seoTitle": "男性パートタイムの給与ランキング都道府県【2019年】｜1位東京都（1,418円）",
   "seoDescription": "2019年の男性パートタイムの給与の都道府県別ランキング。1位東京都（1,418円）、最下位青森県（989円）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

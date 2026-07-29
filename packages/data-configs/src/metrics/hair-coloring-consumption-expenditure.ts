@@ -59,6 +59,4 @@ export const hairColoringConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ヘアカラーリング剤消費支出額ランキング都道府県【2024年】｜1位滋賀県（2,400円）",
   "seoDescription": "2024年のヘアカラーリング剤消費支出額の都道府県別ランキング。1位滋賀県（2,400円）、最下位宮崎県（969円）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

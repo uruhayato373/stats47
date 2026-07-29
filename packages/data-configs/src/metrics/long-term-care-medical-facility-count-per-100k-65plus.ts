@@ -51,6 +51,4 @@ export const longTermCareMedicalFacilityCountPer100k65plus: MetricConfig = {
   "seoTitle": "介護療養型医療施設数ランキング都道府県【2023年】｜1位香川県（2.7所）",
   "seoDescription": "2023年の介護療養型医療施設数の都道府県別ランキング。1位香川県（2.7所）、最下位島根県（0所）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

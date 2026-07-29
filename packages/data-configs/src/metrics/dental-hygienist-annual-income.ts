@@ -55,6 +55,4 @@ export const dentalHygienistAnnualIncome: MetricConfig = {
   "seoTitle": "歯科衛生士の平均年収ランキング都道府県【2023年】｜1位岐阜県（667.6万円）",
   "seoDescription": "2023年の歯科衛生士の平均年収の都道府県別ランキング。1位岐阜県（667.6万円）、最下位福島県（270.7万円）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

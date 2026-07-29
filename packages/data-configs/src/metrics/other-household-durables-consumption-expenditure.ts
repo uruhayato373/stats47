@@ -59,6 +59,4 @@ export const otherHouseholdDurablesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の家事用耐久財消費支出額ランキング都道府県【2024年】｜1位富山県（15,255円）",
   "seoDescription": "2024年の他の家事用耐久財消費支出額の都道府県別ランキング。1位富山県（15,255円）、最下位佐賀県（552円）で27.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

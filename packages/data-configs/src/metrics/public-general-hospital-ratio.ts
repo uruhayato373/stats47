@@ -50,6 +50,4 @@ export const publicGeneralHospitalRatio: MetricConfig = {
   "seoTitle": "公立一般病院数の割合ランキング都道府県【2023年】｜1位山形県（48.1％）",
   "seoDescription": "2023年の公立一般病院数の割合の都道府県別ランキング。1位山形県（48.1％）、最下位埼玉県（7.8％）で6.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

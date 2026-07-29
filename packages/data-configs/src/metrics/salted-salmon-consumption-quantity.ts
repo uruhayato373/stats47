@@ -59,6 +59,4 @@ export const saltedSalmonConsumptionQuantity: MetricConfig = {
   "seoTitle": "塩さけ消費量ランキング都道府県【2024年】｜1位新潟県（2,752g）",
   "seoDescription": "2024年の塩さけ消費量の都道府県別ランキング。1位新潟県（2,752g）、最下位沖縄県（207g）で13.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

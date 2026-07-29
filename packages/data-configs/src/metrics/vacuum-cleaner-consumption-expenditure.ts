@@ -59,6 +59,4 @@ export const vacuumCleanerConsumptionExpenditure: MetricConfig = {
   "seoTitle": "電気掃除機消費支出額ランキング都道府県【2024年】｜1位富山県（5,955円）",
   "seoDescription": "2024年の電気掃除機消費支出額の都道府県別ランキング。1位富山県（5,955円）、最下位徳島県（1,014円）で5.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

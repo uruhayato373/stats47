@@ -40,6 +40,4 @@ export const sportsAnnualParticipationRate10plus: MetricConfig = {
   "seoTitle": "スポーツの年間行動者率ランキング都道府県【2021年】｜1位東京都（74.5％）",
   "seoDescription": "2021年のスポーツの年間行動者率の都道府県別ランキング。1位東京都（74.5％）、最下位青森県（52.1％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const shimejiConsumptionExpenditure: MetricConfig = {
   "seoTitle": "しめじ消費支出額ランキング都道府県【2024年】｜1位長野県（2,412円）",
   "seoDescription": "2024年のしめじ消費支出額の都道府県別ランキング。1位長野県（2,412円）、最下位高知県（1,525円）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

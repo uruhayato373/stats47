@@ -59,6 +59,4 @@ export const otherSaltedDriedFishConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の塩干魚介消費支出額ランキング都道府県【2024年】｜1位青森県（10,696円）",
   "seoDescription": "2024年の他の塩干魚介消費支出額の都道府県別ランキング。1位青森県（10,696円）、最下位沖縄県（2,624円）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

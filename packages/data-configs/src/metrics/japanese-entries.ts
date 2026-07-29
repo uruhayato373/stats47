@@ -98,6 +98,4 @@ export const japaneseEntries: MetricConfig = {
   "seoTitle": "日本人入国者数ランキング都道府県【2024年】｜1位東京都（264,802人）",
   "seoDescription": "2024年の日本人入国者数の都道府県別ランキング。1位東京都（264,802人）、最下位鳥取県（1,361人）で194.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

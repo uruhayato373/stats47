@@ -59,6 +59,4 @@ export const gardeningSuppliesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "園芸用品消費支出額ランキング都道府県【2024年】｜1位茨城県（7,330円）",
   "seoDescription": "2024年の園芸用品消費支出額の都道府県別ランキング。1位茨城県（7,330円）、最下位北海道（1,610円）で4.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -95,6 +95,4 @@ export const drugEnforcementArrestCountPerPopulation: MetricConfig = {
   "seoTitle": "覚醒剤取締検挙件数ランキング都道府県【2023年】｜1位大阪府（13.3件）",
   "seoDescription": "2023年の覚醒剤取締検挙件数の都道府県別ランキング。1位大阪府（13.3件）、最下位山形県（0.8件）で16.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

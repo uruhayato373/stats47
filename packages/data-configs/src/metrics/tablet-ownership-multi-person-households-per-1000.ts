@@ -51,6 +51,4 @@ export const tabletOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "seoTitle": "タブレット端末所有数量ランキング都道府県【2014年】｜1位東京都（386台）",
   "seoDescription": "2014年のタブレット端末所有数量の都道府県別ランキング。1位東京都（386台）、最下位青森県（149台）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

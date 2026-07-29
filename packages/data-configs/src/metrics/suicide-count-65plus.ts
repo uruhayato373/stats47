@@ -54,6 +54,4 @@ export const suicideCount65plus: MetricConfig = {
   "seoTitle": "65歳以上の自殺者数ランキング都道府県【2023年】｜1位東京都（529人）",
   "seoDescription": "2023年の65歳以上の自殺者数の都道府県別ランキング。1位東京都（529人）、最下位鳥取県（19人）で27.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -57,7 +57,7 @@ fi
 # 2.1.1 画像生成差分/publish policy ガード
 # workflow / planner / manifest / publisher の変更時だけ、CI と同じ fail-closed policy を先行実行する。
 STAGED_IMAGE_PIPELINE=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
-  '^(\.github/workflows/.*\.ya?ml|\.claude/scripts/(lib/(audit-workflow-policy\.cjs|__tests__/audit-workflow-policy\.test\.cjs)|sns/(prepare-buzz-map-batch\.ts|lib/buzz-map-batch-core\.mjs))|apps/gallery/lib/server/(actions|buzz-map-actions)\.ts|apps/web/scripts/(generate-(ogp-images|blog-thumbnails(-cloud)?|category-images|portal-thumbnails)\.ts|data/(image-generator-registry|blog-ogp-visual-catalog|portal-thumbnail-catalog)\.ts|lib/(image-generation-manifest|image-generation-r2-inspector|blog-image-generation|blog-image-render|blog-ogp-visual|blog-thumbnail-render|ranking-(ogp-fallback|thumbnail)-render|satori-image-render|gemini-image-client)\.ts|lib/__tests__/(image-generation-manifest|image-pipeline-source-policy|blog-ogp-visual|gemini-image-client)\.test\.ts|lib/assets/ogp-bg-brand-(dark|light)\.jpg)|packages/(r2-storage/src/(image-pipeline\.ts|scripts/(push-(generated-image-set|exact-r2-assets(-core)?)\.ts|__tests__/push-(generated-image-set|exact-r2-assets)\.test\.ts))|types/src/(image-generation-manifest\.ts|index\.ts))|package\.json)$' || true)
+  '^(\.github/workflows/.*\.ya?ml|\.claude/scripts/(lib/(audit-workflow-policy\.cjs|__tests__/audit-workflow-policy\.test\.cjs)|sns/(prepare-buzz-map-batch\.ts|lib/buzz-map-batch-core\.mjs))|apps/gallery/lib/server/(actions|buzz-map-actions)\.ts|apps/web/scripts/(generate-(ogp-images|blog-thumbnails(-cloud)?|category-images)\.ts|data/(image-generator-registry|blog-ogp-visual-catalog)\.ts|lib/(image-generation-manifest|image-generation-r2-inspector|blog-image-generation|blog-image-render|blog-ogp-visual|blog-thumbnail-render|ranking-(ogp-fallback|thumbnail)-render|satori-image-render|gemini-image-client)\.ts|lib/__tests__/(image-generation-manifest|image-pipeline-source-policy|blog-ogp-visual|gemini-image-client)\.test\.ts|lib/assets/ogp-bg-brand-(dark|light)\.jpg)|packages/(r2-storage/src/(image-pipeline\.ts|scripts/(push-(generated-image-set|exact-r2-assets(-core)?)\.ts|__tests__/push-(generated-image-set|exact-r2-assets)\.test\.ts))|types/src/(image-generation-manifest\.ts|index\.ts))|package\.json)$' || true)
 if [ -n "$STAGED_IMAGE_PIPELINE" ]; then
   echo -e "${GREEN}🖼️  画像生成 pipeline policy チェック...${NC}"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/audit-workflow-policy.cjs" --strict; then
@@ -79,6 +79,15 @@ fi
 echo -e "${GREEN}🃏 カード census ガード...${NC}"
 if ! node "$GUARD_ROOT/.claude/scripts/lib/check-card-census.cjs"; then
   echo -e "${RED}❌ ベースライン外の新規 *Card が追加されています。${NC}"
+  echo -e "${YELLOW}💡 docs/01_技術設計/15_デザインシステムSSOT.md / .claude/rules/ui-components.md${NC}"
+  ERROR_COUNT=$((ERROR_COUNT + 1))
+fi
+
+# 2.2.1 AdSense 広告配置ガード (2026-07-29 の面別崩れの再発防止)
+# 広告どうしの隣接・rail 部品の本文誤用・生 AdSenseAd の直叩き・参照ゼロの slot 定数を弾く。
+echo -e "${GREEN}📢 広告配置ガード...${NC}"
+if ! node "$GUARD_ROOT/.claude/scripts/lib/check-ad-placement.cjs"; then
+  echo -e "${RED}❌ 広告の配置規約に違反しています。${NC}"
   echo -e "${YELLOW}💡 docs/01_技術設計/15_デザインシステムSSOT.md / .claude/rules/ui-components.md${NC}"
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
@@ -405,6 +414,42 @@ if [ -n "$STAGED_CATALOG" ]; then
     echo -e "${RED}❌ theme-catalog 生成物が古い/手編集されています。${NC}"
     grep -E "^   |❌" /tmp/catalog-check.log | head -10 || true
     echo -e "${YELLOW}💡 再生成: npm run generate:catalog --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
+# 6.6a2 runtime metric summaries (Header / home ポータル / 楽天品目語) の生成物鮮度チェック
+#       metric config か生成物が staged のとき発火。生成物を挟む理由は
+#       「共通 Header 経由で METRICS_REGISTRY が全 route の dev bundle に入るのを防ぐ」
+#       (apps/web/scripts/generate-runtime-metric-summaries.ts)。
+STAGED_RUNTIME_SUMMARY=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/(metrics/.+|categories)\.ts$|^apps/web/src/config/runtime-metric-summaries\.generated\.ts$" || true)
+if [ -n "$STAGED_RUNTIME_SUMMARY" ]; then
+  echo ""
+  echo -e "${GREEN}🧾 runtime metric summaries 鮮度チェック...${NC}"
+  if (cd "$PROJECT_ROOT/apps/web" && npx tsx scripts/generate-runtime-metric-summaries.ts --check > /tmp/runtime-summaries-check.log 2>&1); then
+    echo -e "${GREEN}✅ runtime metric summaries は最新${NC}"
+  else
+    echo -e "${RED}❌ runtime metric summaries が古い/手編集されています。${NC}"
+    grep -E "^   |❌|\[runtime-summaries\]" /tmp/runtime-summaries-check.log | head -10 || true
+    echo -e "${YELLOW}💡 再生成: npm run generate:runtime-summaries --workspace apps/web${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
+# 6.6a3 ranking prominence (索引代表 / ホーム注目 / 問いかけコピー) の生成物鮮度チェック
+#       metric config・導出規則・GSC snapshot・生成物 のいずれかが staged のとき発火。
+#       この生成物を挟む理由は「/ranking を R2 非依存の純静的 SSG のまま保つ」ため
+#       (apps/web/scripts/generate-ranking-prominence.ts)。
+STAGED_PROMINENCE=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/(metrics/.+|categories)\.ts$|^packages/data-configs/src/prominence/.+\.ts$|^\.claude/skills/analytics/gsc-improvement/reference/snapshots/.+/pages\.csv$" || true)
+if [ -n "$STAGED_PROMINENCE" ]; then
+  echo ""
+  echo -e "${GREEN}🏅 ranking prominence 鮮度チェック...${NC}"
+  if (cd "$PROJECT_ROOT/apps/web" && npx tsx scripts/generate-ranking-prominence.ts --check > /tmp/ranking-prominence-check.log 2>&1); then
+    echo -e "${GREEN}✅ ranking prominence は最新${NC}"
+  else
+    echo -e "${RED}❌ ranking prominence が古い/手編集されています。${NC}"
+    grep -E "^   |❌|\[ranking-prominence\]" /tmp/ranking-prominence-check.log | head -10 || true
+    echo -e "${YELLOW}💡 再生成: npm run generate:ranking-prominence --workspace apps/web${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
 fi

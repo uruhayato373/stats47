@@ -53,6 +53,4 @@ export const nurseSalary: MetricConfig = {
   "seoTitle": "看護師の給与ランキング都道府県【2022年】｜1位東京都（359.8千円）",
   "seoDescription": "2022年の看護師の給与の都道府県別ランキング。1位東京都（359.8千円）、最下位鹿児島県（253.4千円）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

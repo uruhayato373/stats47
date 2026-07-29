@@ -57,6 +57,4 @@ export const retirementAllowanceAdminPrefecture: MetricConfig = {
   "seoTitle": "一般行政職 定年退職者 平均退職手当ランキング都道府県【2024年】｜1位東京都（24,826千円）",
   "seoDescription": "2024年の一般行政職 定年退職者 平均退職手当の都道府県別ランキング。1位東京都（24,826千円）、最下位和歌山県（14,145千円）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": true,
-  "featuredOrder": 7,
 };

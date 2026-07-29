@@ -86,6 +86,4 @@ export const standardFiscalExpenditure: MetricConfig = {
   "seoTitle": "基準財政需要額ランキング都道府県【2022年】｜1位東京都（2,084,988,112）",
   "seoDescription": "2022年の基準財政需要額の都道府県別ランキング。1位東京都（2,084,988,112）、最下位鳥取県（202,064,705）で10.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -52,6 +52,4 @@ export const urbanPlanningArea: MetricConfig = {
   "seoTitle": "都市計画区域指定面積ランキング都道府県【2023年】｜1位北海道（643,707ha）",
   "seoDescription": "2023年の都市計画区域指定面積の都道府県別ランキング。1位北海道（643,707ha）、最下位徳島県（62,523ha）で10.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

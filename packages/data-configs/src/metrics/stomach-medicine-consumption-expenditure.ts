@@ -59,6 +59,4 @@ export const stomachMedicineConsumptionExpenditure: MetricConfig = {
   "seoTitle": "胃腸薬消費支出額ランキング都道府県【2024年】｜1位埼玉県（2,035円）",
   "seoDescription": "2024年の胃腸薬消費支出額の都道府県別ランキング。1位埼玉県（2,035円）、最下位沖縄県（698円）で2.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -89,6 +89,4 @@ export const lowestTemperature: MetricConfig = {
   "seoTitle": "最低気温ランキング都道府県【2024年】｜1位沖縄県（15.3℃）",
   "seoDescription": "2024年の最低気温の都道府県別ランキング。1位沖縄県（15.3℃）、最下位北海道（-5.1℃）で-3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

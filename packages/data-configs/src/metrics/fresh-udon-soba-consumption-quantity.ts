@@ -59,6 +59,4 @@ export const freshUdonSobaConsumptionQuantity: MetricConfig = {
   "seoTitle": "生うどん・そば消費量1位は香川16,788g、沖縄の3.8倍｜47都道府県2024",
   "seoDescription": "うどん県・香川の生うどん/そば消費量は1位16,788gで圧倒、最下位沖縄(4,378g)まで3.8倍差。47都道府県を地図とグラフで比較する2024年最新ランキング。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

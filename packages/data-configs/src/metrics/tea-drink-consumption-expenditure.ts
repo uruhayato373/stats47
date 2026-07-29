@@ -59,6 +59,4 @@ export const teaDrinkConsumptionExpenditure: MetricConfig = {
   "seoTitle": "茶飲料消費支出額ランキング都道府県【2024年】｜1位茨城県（11,844円）",
   "seoDescription": "2024年の茶飲料消費支出額の都道府県別ランキング。1位茨城県（11,844円）、最下位愛媛県（5,460円）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

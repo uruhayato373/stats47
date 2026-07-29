@@ -35,6 +35,4 @@ export const buildingFireCountPer100k: MetricConfig = {
   },
   "groupKey": "building-fire-count",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

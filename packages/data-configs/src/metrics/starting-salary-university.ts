@@ -53,6 +53,4 @@ export const startingSalaryUniversity: MetricConfig = {
   "seoTitle": "大卒初任給ランキング都道府県【2023年】｜1位秋田県（267.7千円）",
   "seoDescription": "2023年の大卒初任給の都道府県別ランキング。1位秋田県（267.7千円）、最下位鳥取県（202.4千円）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

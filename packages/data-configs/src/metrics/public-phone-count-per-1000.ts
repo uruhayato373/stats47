@@ -87,6 +87,4 @@ export const publicPhoneCountPer1000: MetricConfig = {
   "seoTitle": "公衆電話設置台数ランキング都道府県【2024年】｜1位高知県（1.43個）",
   "seoDescription": "2024年の公衆電話設置台数の都道府県別ランキング。1位高知県（1.43個）、最下位埼玉県（0.47個）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

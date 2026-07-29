@@ -55,6 +55,4 @@ export const accountantAnnualIncome: MetricConfig = {
   "seoTitle": "公認会計士・税理士の平均年収ランキング都道府県【2023年】｜1位山梨県（1,532.6万円）",
   "seoDescription": "2023年の公認会計士・税理士の平均年収の都道府県別ランキング。1位山梨県（1,532.6万円）、最下位岡山県（360.1万円）で4.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -40,6 +40,4 @@ export const finalEducationElementaryJuniorHighRatio: MetricConfig = {
   "seoTitle": "最終学歴が小学・中学卒の者の割合ランキング都道府県【2020年】｜1位青森県（22％）",
   "seoDescription": "2020年の最終学歴が小学・中学卒の者の割合の都道府県別ランキング。1位青森県（22％）、最下位東京都（5.6％）で3.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -65,6 +65,4 @@ export const dentistAnnualIncome: MetricConfig = {
   "seoTitle": "歯科医師の平均年収ランキング都道府県【2023年】｜1位三重県（4,118.9万円）",
   "seoDescription": "2023年の歯科医師の平均年収の都道府県別ランキング。1位三重県（4,118.9万円）、最下位新潟県（456.7万円）で9.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -22,6 +22,4 @@ export const currentBalanceRatioCity: MetricConfig = {
   },
   "yearFormat": "fiscal",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

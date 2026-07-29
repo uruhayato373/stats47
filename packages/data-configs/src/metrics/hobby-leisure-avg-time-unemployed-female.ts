@@ -47,6 +47,4 @@ export const hobbyLeisureAvgTimeUnemployedFemale: MetricConfig = {
   },
   "seoTitle": "趣味・娯楽の平均時間（無業者・女）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

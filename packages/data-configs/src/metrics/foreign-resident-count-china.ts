@@ -62,6 +62,4 @@ export const foreignResidentCountChina: MetricConfig = {
   "seoTitle": "外国人人口ランキング都道府県【2020年】｜1位東京都（195,740）",
   "seoDescription": "2020年の外国人人口の都道府県別ランキング。1位東京都（195,740）、最下位鳥取県（751）で260.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

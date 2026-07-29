@@ -59,6 +59,4 @@ export const womensJacketConsumptionExpenditure: MetricConfig = {
   "seoTitle": "婦人用上着消費支出額ランキング都道府県【2024年】｜1位福岡県（3,958円）",
   "seoDescription": "2024年の婦人用上着消費支出額の都道府県別ランキング。1位福岡県（3,958円）、最下位愛媛県（556円）で7.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

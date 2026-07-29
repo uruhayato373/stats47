@@ -47,6 +47,4 @@ export const juniorHighSchoolTeachers: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

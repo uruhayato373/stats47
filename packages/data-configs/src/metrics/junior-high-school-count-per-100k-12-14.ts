@@ -65,6 +65,4 @@ export const juniorHighSchoolCountPer100k1214: MetricConfig = {
   "seoTitle": "中学校数ランキング都道府県【2024年】｜1位高知県（707.5校）",
   "seoDescription": "2024年の中学校数の都道府県別ランキング。1位高知県（707.5校）、最下位神奈川県（202.9校）で3.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

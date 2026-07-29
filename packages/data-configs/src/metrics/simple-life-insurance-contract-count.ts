@@ -85,6 +85,4 @@ export const simpleLifeInsuranceContractCount: MetricConfig = {
   "seoTitle": "簡易生命保険保有契約件数ランキング都道府県【2006年】｜1位東京都（5,265,074件）",
   "seoDescription": "2006年の簡易生命保険保有契約件数の都道府県別ランキング。1位東京都（5,265,074件）、最下位沖縄県（242,978件）で21.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

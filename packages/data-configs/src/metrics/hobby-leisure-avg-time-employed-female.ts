@@ -47,6 +47,4 @@ export const hobbyLeisureAvgTimeEmployedFemale: MetricConfig = {
   },
   "seoTitle": "趣味・娯楽の平均時間（有業者・女）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

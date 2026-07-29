@@ -55,6 +55,4 @@ export const ambulanceHospitalArrivalTime: MetricConfig = {
   "seoTitle": "救急搬送、病院到着までなぜこんなに違う?｜東京60.5分 vs 富山33.1分【2024年】",
   "seoDescription": "救急車を呼んでから病院に収容されるまでの平均所要時間は、都道府県で最大1.8倍の差があります。1位東京都(60.5分)、最短は富山県(33.1分)。地図とグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

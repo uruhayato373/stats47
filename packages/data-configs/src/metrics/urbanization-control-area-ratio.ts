@@ -35,6 +35,4 @@ export const urbanizationControlAreaRatio: MetricConfig = {
   "seoTitle": "市街化調整区域面積比率ランキング都道府県【2023年】｜1位奈良県（81.6％）",
   "seoDescription": "2023年の市街化調整区域面積比率の都道府県別ランキング。1位奈良県（81.6％）、最下位香川県（0％）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

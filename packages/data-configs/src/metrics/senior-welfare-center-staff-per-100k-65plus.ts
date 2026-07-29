@@ -51,6 +51,4 @@ export const seniorWelfareCenterStaffPer100k65plus: MetricConfig = {
   "seoTitle": "老人福祉センター従事者数ランキング都道府県【2017年】｜1位鳥取県（63.4人）",
   "seoDescription": "2017年の老人福祉センター従事者数の都道府県別ランキング。1位鳥取県（63.4人）、最下位和歌山県（1人）で63.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

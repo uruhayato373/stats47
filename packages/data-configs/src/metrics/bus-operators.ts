@@ -51,6 +51,4 @@ export const busOperators: MetricConfig = {
   "seoTitle": "バス事業者ランキング都道府県【2013年】｜1位東京都（408社）",
   "seoDescription": "2013年のバス事業者の都道府県別ランキング。1位東京都（408社）、最下位鳥取県（27社）で15.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

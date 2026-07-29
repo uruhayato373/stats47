@@ -52,6 +52,4 @@ export const newGraduateScheduledSalaryHighschoolFemale: MetricConfig = {
   "seoTitle": "新規学卒者所定内給与額ランキング都道府県【2024年】｜1位広島県（214.4千円）",
   "seoDescription": "2024年の新規学卒者所定内給与額の都道府県別ランキング。1位広島県（214.4千円）、最下位鳥取県（171.3千円）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

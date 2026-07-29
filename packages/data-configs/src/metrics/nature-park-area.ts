@@ -85,6 +85,4 @@ export const natureParkArea: MetricConfig = {
   "seoTitle": "自然公園面積ランキング都道府県【2024年】｜1位北海道（1,022,400ｈａ）",
   "seoDescription": "2024年の自然公園面積の都道府県別ランキング。1位北海道（1,022,400ｈａ）、最下位大阪府（20,039ｈａ）で51.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

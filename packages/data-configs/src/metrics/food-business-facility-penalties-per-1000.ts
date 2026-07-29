@@ -53,6 +53,4 @@ export const foodBusinessFacilityPenaltiesPer1000: MetricConfig = {
   "seoTitle": "食品営業施設処分件数ランキング都道府県【2020年】｜1位愛媛県（3.9件）",
   "seoDescription": "2020年の食品営業施設処分件数の都道府県別ランキング。1位愛媛県（3.9件）、最下位沖縄県（0件）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

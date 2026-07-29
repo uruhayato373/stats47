@@ -4,9 +4,9 @@ import { readRankingAiContentFromR2 } from "@stats47/ai-content/server";
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import { getRankingTitle, type RankingValue } from "@stats47/ranking";
 import {
+  readAllYearsRankingValuesFromR2,
   readRankingItemsByGroupKeyFromR2,
   readRankingItemsBySurveyFromR2,
-  readRankingValuesFromR2,
   type GroupRankingItem,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
@@ -22,9 +22,18 @@ import {
 
 import { logger } from "@/lib/logger";
 
+import {
+  buildNationalAverageSeries,
+  type NationalAveragePoint,
+} from "../lib/build-national-average-series";
 import { cachedFindRankingItem } from "../lib/cached-ranking-item";
 
 const AREA_TYPE = "prefecture" as const;
+
+/** yearCode (4 桁 / 10 桁フルタイムコード) を 4 桁年に揃えて比較する */
+function sameYear(a: string, b: string): boolean {
+  return String(a).slice(0, 4) === String(b).slice(0, 4);
+}
 
 export async function loadRankingPageModel(rankingKey: string) {
   const rankingItemResult = await cachedFindRankingItem(rankingKey, AREA_TYPE);
@@ -37,11 +46,16 @@ export async function loadRankingPageModel(rankingKey: string) {
   const availableYears = rankingItem.availableYears || [];
   const selectedYear = availableYears[0]?.yearCode || "";
 
-  const rankingValuesPromise = selectedYear
-    ? readRankingValuesFromR2(rankingKey, AREA_TYPE, selectedYear).then((r) =>
-        isOk(r) ? r.data : []
-      )
-    : Promise.resolve([] as RankingValue[]);
+  // 全年を 1 read。readRankingValuesFromR2 (単年) も内部で values.json を丸ごと取得して
+  // からメモリ上で年 partition を絞っているだけなので、全年版に替えても R2 の GET 回数・
+  // 転送バイト数は変わらない。選択年はここで filter し、全年配列は client へ渡さない
+  // (畳んだ全国平均系列 ≤50 点だけを渡す。全年配列は最大 400KB 超で RSC payload に乗せられない)。
+  const allYearsValuesPromise = readAllYearsRankingValuesFromR2(rankingKey, AREA_TYPE)
+    .then((r) => (isOk(r) ? r.data : []))
+    .catch((error) => {
+      logger.error({ error }, "RankingKeyPage: 全年 ranking values 取得失敗");
+      return [] as RankingValue[];
+    });
 
   const topologyPromise =
     process.env.NEXT_PHASE === "phase-production-build"
@@ -106,7 +120,7 @@ export async function loadRankingPageModel(rankingKey: string) {
       : Promise.resolve([]);
 
   const [
-    rankingValues,
+    allYearsValues,
     topology,
     aiContent,
     cityRankingItem,
@@ -115,7 +129,7 @@ export async function loadRankingPageModel(rankingKey: string) {
     category,
     nativeBanners,
   ] = await Promise.all([
-    rankingValuesPromise,
+    allYearsValuesPromise,
     topologyPromise,
     aiContentPromise,
     cityRankingItemPromise,
@@ -124,6 +138,14 @@ export async function loadRankingPageModel(rankingKey: string) {
     categoryPromise,
     nativeBannersPromise,
   ]);
+
+  // 選択年の 47 行 (従来 readRankingValuesFromR2 が返していたもの)
+  const rankingValues = selectedYear
+    ? allYearsValues.filter((v) => sameYear(v.yearCode, selectedYear))
+    : [];
+  // 全国平均の推移。全年から畳むので client には ≤50 点しか渡らない
+  const nationalAverageSeries: NationalAveragePoint[] =
+    buildNationalAverageSeries(allYearsValues);
 
   const breadcrumbCategory = category
     ? { key: category.categoryKey, name: category.categoryName }
@@ -150,6 +172,7 @@ export async function loadRankingPageModel(rankingKey: string) {
     rankingItem,
     selectedYear,
     rankingValues,
+    nationalAverageSeries,
     topology,
     aiContent,
     cityRankingItem,

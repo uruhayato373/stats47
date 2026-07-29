@@ -60,6 +60,4 @@ export const tennisCourtPublic: MetricConfig = {
   "seoTitle": "テニスコート数（公共）ランキング都道府県【2021年】｜1位北海道（377施設）",
   "seoDescription": "2021年のテニスコート数（公共）の都道府県別ランキング。1位北海道（377施設）、最下位徳島県（35施設）で10.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

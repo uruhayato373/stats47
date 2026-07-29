@@ -82,6 +82,4 @@ export const welfareOfficePublicAssistanceApplicationsPer1000Households: MetricC
   "seoTitle": "福祉事務所生活保護申請件数ランキング都道府県【2023年】｜1位愛知県（199件）",
   "seoDescription": "2023年の福祉事務所生活保護申請件数の都道府県別ランキング。1位愛知県（199件）、最下位徳島県（109件）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

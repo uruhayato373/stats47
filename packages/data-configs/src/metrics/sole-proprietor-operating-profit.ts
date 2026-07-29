@@ -52,6 +52,4 @@ export const soleProprietorOperatingProfit: MetricConfig = {
   "seoTitle": "個人企業の営業利益ランキング都道府県【2025年】｜1位東京都（312万円）",
   "seoDescription": "2025年の個人企業の営業利益の都道府県別ランキング。1位東京都（312万円）、最下位沖縄県（125万円）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

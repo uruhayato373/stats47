@@ -34,6 +34,4 @@ export const sportsParticipationRateSoftball: MetricConfig = {
   "seoTitle": "ソフトボールの行動者率ランキング都道府県【2021年】｜1位山口県（3％）",
   "seoDescription": "2021年のソフトボールの行動者率の都道府県別ランキング。1位山口県（3％）、最下位青森県（0.6％）で5.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -41,6 +41,4 @@ export const industrialLandPrice: MetricConfig = {
   },
   "seoTitle": "標準価格（平均価格）（工業地）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

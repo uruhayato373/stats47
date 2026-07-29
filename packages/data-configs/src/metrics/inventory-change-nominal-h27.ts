@@ -37,6 +37,4 @@ export const inventoryChangeNominalH27: MetricConfig = {
   },
   "seoTitle": "在庫変動（名目）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

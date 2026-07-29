@@ -19,7 +19,6 @@ function item(partial: Partial<RankingItem>): RankingItem {
     title: "test",
     unit: "件",
     isActive: true,
-    isFeatured: false,
     dataSourceId: "estat",
     ...partial,
   } as RankingItem;

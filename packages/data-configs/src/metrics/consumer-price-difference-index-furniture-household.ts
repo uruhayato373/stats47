@@ -38,6 +38,4 @@ export const consumerPriceDifferenceIndexFurnitureHousehold: MetricConfig = {
   },
   "seoTitle": "消費者物価地域差指数（家具・家事用品）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

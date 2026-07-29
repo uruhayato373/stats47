@@ -69,6 +69,4 @@ export const pharmaceuticalSalesCountPer100k: MetricConfig = {
   "seoTitle": "医薬品販売業数ランキング都道府県【2023年】｜1位富山県（65.7所）",
   "seoDescription": "2023年の医薬品販売業数の都道府県別ランキング。1位富山県（65.7所）、最下位神奈川県（24.4所）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

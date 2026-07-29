@@ -76,6 +76,4 @@ export const privateLifeInsuranceContractAmountPerHousehold: MetricConfig = {
   "seoTitle": "民間生命保険保険金額ランキング都道府県【2024年】｜1位東京都（5,278.1万円）",
   "seoDescription": "2024年の民間生命保険保険金額の都道府県別ランキング。1位東京都（5,278.1万円）、最下位沖縄県（1,188.1万円）で4.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

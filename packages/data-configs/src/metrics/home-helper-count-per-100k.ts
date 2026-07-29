@@ -51,6 +51,4 @@ export const homeHelperCountPer100k: MetricConfig = {
   "seoTitle": "訪問介護員数ランキング都道府県【2002年】｜1位神奈川県（179.33人）",
   "seoDescription": "2002年の訪問介護員数の都道府県別ランキング。1位神奈川県（179.33人）、最下位岡山県（29.86人）で6.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

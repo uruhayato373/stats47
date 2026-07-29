@@ -59,6 +59,4 @@ export const mensPantsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "男子用ズボン消費支出額ランキング都道府県【2024年】｜1位岐阜県（6,879円）",
   "seoDescription": "2024年の男子用ズボン消費支出額の都道府県別ランキング。1位岐阜県（6,879円）、最下位長崎県（2,260円）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

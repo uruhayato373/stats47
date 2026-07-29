@@ -35,6 +35,4 @@ export const suicideRatePer100k: MetricConfig = {
   "seoTitle": "自殺率ランキング都道府県【2023年】｜1位和歌山県（21.8‐）",
   "seoDescription": "2023年の自殺率の都道府県別ランキング。1位和歌山県（21.8‐）、最下位福井県（13.6‐）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

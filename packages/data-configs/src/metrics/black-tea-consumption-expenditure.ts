@@ -59,6 +59,4 @@ export const blackTeaConsumptionExpenditure: MetricConfig = {
   "seoTitle": "紅茶消費支出額ランキング都道府県【2024年】｜1位神奈川県（1,780円）",
   "seoDescription": "2024年の紅茶消費支出額の都道府県別ランキング。1位神奈川県（1,780円）、最下位宮崎県（391円）で4.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

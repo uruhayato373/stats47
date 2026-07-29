@@ -144,12 +144,12 @@ describe("GA4 カスタムイベント", () => {
     }));
   });
 
-  // ─── ホーム注目ランキング (home-featured-v1) ───
+  // ─── ホーム注目ランキング ───
 
   it("trackHomeFeaturedImpression が全 parameter を送信する", () => {
     trackHomeFeaturedImpression({
       rankingKey: "annual-sunshine-duration",
-      cardVariant: "question",
+      cardVariant: "geographic",
       slot: 1,
       experimentId: "home-featured-v1",
       experimentVariant: "editorial",
@@ -157,7 +157,7 @@ describe("GA4 カスタムイベント", () => {
 
     expect(mockGtag).toHaveBeenCalledWith("event", "home_featured_impression", {
       ranking_key: "annual-sunshine-duration",
-      card_variant: "question",
+      card_variant: "geographic",
       slot: 1,
       experiment_id: "home-featured-v1",
       experiment_variant: "editorial",
@@ -165,21 +165,21 @@ describe("GA4 カスタムイベント", () => {
     });
   });
 
-  it("trackHomeFeaturedClick が control 側でも experiment parameter を送信する", () => {
+  it("trackHomeFeaturedClick が採用後の固定 experiment parameter を送信する", () => {
     trackHomeFeaturedClick({
       rankingKey: "total-population",
-      cardVariant: "map",
+      cardVariant: "geographic",
       slot: 2,
       experimentId: "home-featured-v1",
-      experimentVariant: "control",
+      experimentVariant: "editorial",
     });
 
     expect(mockGtag).toHaveBeenCalledWith("event", "home_featured_click", {
       ranking_key: "total-population",
-      card_variant: "map",
+      card_variant: "geographic",
       slot: 2,
       experiment_id: "home-featured-v1",
-      experiment_variant: "control",
+      experiment_variant: "editorial",
       link_position: "home_featured",
     });
   });
@@ -188,12 +188,12 @@ describe("GA4 カスタムイベント", () => {
     vi.stubGlobal("window", { gtag: undefined });
 
     trackHomeFeaturedImpression({
-      rankingKey: "k", cardVariant: "question", slot: 1,
+      rankingKey: "k", cardVariant: "geographic", slot: 1,
       experimentId: "home-featured-v1", experimentVariant: "editorial",
     });
     trackHomeFeaturedClick({
-      rankingKey: "k", cardVariant: "map", slot: 1,
-      experimentId: "home-featured-v1", experimentVariant: "control",
+      rankingKey: "k", cardVariant: "geographic", slot: 1,
+      experimentId: "home-featured-v1", experimentVariant: "editorial",
     });
     expect(mockGtag).not.toHaveBeenCalled();
   });

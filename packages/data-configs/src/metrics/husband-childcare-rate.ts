@@ -37,6 +37,4 @@ export const husbandChildcareRate: MetricConfig = {
   "seoTitle": "夫の育児参加率ランキング都道府県【2022年】｜1位茨城県（97.6％）",
   "seoDescription": "2022年の夫の育児参加率の都道府県別ランキング。1位茨城県（97.6％）、最下位三重県（91％）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

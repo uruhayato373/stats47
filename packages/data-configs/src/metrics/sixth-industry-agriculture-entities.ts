@@ -48,6 +48,4 @@ export const sixthIndustryAgricultureEntities: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

@@ -38,6 +38,4 @@ export const consumerPriceDifferenceIndexEducation: MetricConfig = {
   },
   "seoTitle": "消費者物価地域差指数（教育）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

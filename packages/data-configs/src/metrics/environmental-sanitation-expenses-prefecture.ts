@@ -61,6 +61,4 @@ export const environmentalSanitationExpensesPrefecture: MetricConfig = {
   "seoTitle": "環境衛生費ランキング都道府県【2022年】｜1位東京都（374,008,247）",
   "seoDescription": "2022年の環境衛生費の都道府県別ランキング。1位東京都（374,008,247）、最下位奈良県（1,323,439）で282.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

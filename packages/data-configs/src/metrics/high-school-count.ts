@@ -44,6 +44,4 @@ export const highSchoolCount: MetricConfig = {
   "seoTitle": "高等学校数ランキング都道府県【2024年】｜1位東京都（429校）",
   "seoDescription": "2024年の高等学校数の都道府県別ランキング。1位東京都（429校）、最下位鳥取県（32校）で13.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

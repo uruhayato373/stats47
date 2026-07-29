@@ -52,6 +52,4 @@ export const publicHealthExpensesPrefecture: MetricConfig = {
   "seoTitle": "公衆衛生費ランキング都道府県【2022年】｜1位東京都（668,691,717）",
   "seoDescription": "2022年の公衆衛生費の都道府県別ランキング。1位東京都（668,691,717）、最下位佐賀県（9,373,255）で71.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -52,6 +52,4 @@ export const totalMuseumCount: MetricConfig = {
   "seoTitle": "博物館総数ランキング都道府県【2015年】｜1位東京都（95館）",
   "seoDescription": "2015年の博物館総数の都道府県別ランキング。1位東京都（95館）、最下位青森県（5館）で19.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -52,6 +52,4 @@ export const floodDamageRoad: MetricConfig = {
   "seoTitle": "水害道路被害額ランキング都道府県【2014年】｜1位高知県（5,943百万円）",
   "seoDescription": "2014年の水害道路被害額の都道府県別ランキング。1位高知県（5,943百万円）、最下位東京都（0百万円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

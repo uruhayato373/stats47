@@ -52,6 +52,4 @@ export const marineFisheryCatch: MetricConfig = {
   "seoTitle": "海面漁業漁獲量ランキング都道府県【2023年】｜1位北海道（842,704トン）",
   "seoDescription": "2023年の海面漁業漁獲量の都道府県別ランキング。1位北海道（842,704トン）、最下位奈良県（0トン）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

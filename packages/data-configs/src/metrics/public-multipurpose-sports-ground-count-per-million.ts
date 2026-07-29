@@ -82,6 +82,4 @@ export const publicMultipurposeSportsGroundCountPerMillion: MetricConfig = {
   "seoTitle": "多目的運動広場数ランキング都道府県【2021年】｜1位鳥取県（202.2施設）",
   "seoDescription": "2021年の多目的運動広場数の都道府県別ランキング。1位鳥取県（202.2施設）、最下位東京都（9.6施設）で21.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const gameConsoleConsumptionQuantity: MetricConfig = {
   "seoTitle": "ゲーム機消費量ランキング都道府県【2024年】｜1位茨城県（0.06台）",
   "seoDescription": "2024年のゲーム機消費量の都道府県別ランキング。1位茨城県（0.06台）、最下位鹿児島県（0台）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

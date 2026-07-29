@@ -43,6 +43,4 @@ export const futurePopulationChangeRate2050: MetricConfig = {
   "seoTitle": "将来人口増減率ランキング都道府県【2050年】｜1位東京都（2.5％）",
   "seoDescription": "2050年の将来人口増減率の都道府県別ランキング。1位東京都（2.5％）、最下位秋田県（-41.59％）で-0.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": true,
-  "featuredOrder": 3,
 };

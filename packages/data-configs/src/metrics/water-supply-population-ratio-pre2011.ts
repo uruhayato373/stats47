@@ -35,6 +35,4 @@ export const waterSupplyPopulationRatioPre2011: MetricConfig = {
   },
   "seoTitle": "上水道給水人口比率（－2011）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

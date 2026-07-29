@@ -55,6 +55,4 @@ export const numberOfEstablishmentsEconomicCensusBasicSurvey: MetricConfig = {
   "seoTitle": "事業所数ランキング都道府県【2014年】｜1位東京都（662,360事業所）",
   "seoDescription": "2014年の事業所数の都道府県別ランキング。1位東京都（662,360事業所）、最下位鳥取県（27,885事業所）で23.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

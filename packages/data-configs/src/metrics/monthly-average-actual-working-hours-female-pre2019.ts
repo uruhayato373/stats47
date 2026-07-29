@@ -85,6 +85,4 @@ export const monthlyAverageActualWorkingHoursFemalePre2019: MetricConfig = {
   "seoTitle": "月間平均実労働時間数ランキング都道府県【2019年】｜1位岐阜県（172時間）",
   "seoDescription": "2019年の月間平均実労働時間数の都道府県別ランキング。1位岐阜県（172時間）、最下位東京都（162時間）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

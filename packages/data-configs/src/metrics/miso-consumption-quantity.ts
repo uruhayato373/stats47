@@ -59,6 +59,4 @@ export const misoConsumptionQuantity: MetricConfig = {
   "seoTitle": "みそ消費量ランキング都道府県【2024年】｜1位長野県（6,969g）",
   "seoDescription": "2024年のみそ消費量の都道府県別ランキング。1位長野県（6,969g）、最下位高知県（2,612g）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

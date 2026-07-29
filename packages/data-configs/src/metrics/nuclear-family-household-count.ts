@@ -47,6 +47,4 @@ export const nuclearFamilyHouseholdCount: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

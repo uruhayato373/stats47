@@ -59,6 +59,4 @@ export const ramenDiningConsumptionExpenditure: MetricConfig = {
   "seoTitle": "中華そば消費支出額ランキング都道府県【2024年】｜1位山形県（22,389円）",
   "seoDescription": "2024年の中華そば消費支出額の都道府県別ランキング。1位山形県（22,389円）、最下位愛媛県（3,935円）で5.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

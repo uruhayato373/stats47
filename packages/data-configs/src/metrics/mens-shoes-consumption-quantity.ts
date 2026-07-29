@@ -59,6 +59,4 @@ export const mensShoesConsumptionQuantity: MetricConfig = {
   "seoTitle": "男子靴消費量ランキング都道府県【2024年】｜1位埼玉県（0.85足）",
   "seoDescription": "2024年の男子靴消費量の都道府県別ランキング。1位埼玉県（0.85足）、最下位高知県（0.23足）で3.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

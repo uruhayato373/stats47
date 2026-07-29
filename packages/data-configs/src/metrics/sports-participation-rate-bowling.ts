@@ -34,6 +34,4 @@ export const sportsParticipationRateBowling: MetricConfig = {
   "seoTitle": "ボウリングの行動者率ランキング都道府県【2021年】｜1位沖縄県（6.7％）",
   "seoDescription": "2021年のボウリングの行動者率の都道府県別ランキング。1位沖縄県（6.7％）、最下位秋田県（2.5％）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

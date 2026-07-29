@@ -59,6 +59,4 @@ export const cupboardConsumptionExpenditure: MetricConfig = {
   "seoTitle": "食器戸棚消費支出額ランキング都道府県【2024年】｜1位大分県（4,303円）",
   "seoDescription": "2024年の食器戸棚消費支出額の都道府県別ランキング。1位大分県（4,303円）、最下位宮崎県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

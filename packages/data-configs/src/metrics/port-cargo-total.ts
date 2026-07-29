@@ -56,6 +56,4 @@ export const portCargoTotal: MetricConfig = {
   "seoTitle": "海上出入貨物量（港湾統計）ランキング都道府県【2023年】｜1位愛知県（200,603,167トン）",
   "seoDescription": "2023年の海上出入貨物量（港湾統計）の都道府県別ランキング。1位愛知県（200,603,167トン）、最下位佐賀県（4,121,407トン）で48.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

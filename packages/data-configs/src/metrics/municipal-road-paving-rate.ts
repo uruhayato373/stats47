@@ -80,6 +80,4 @@ export const municipalRoadPavingRate: MetricConfig = {
   "seoTitle": "市町村道舗装率ランキング都道府県【2023年】｜1位佐賀県（96.6％）",
   "seoDescription": "2023年の市町村道舗装率の都道府県別ランキング。1位佐賀県（96.6％）、最下位岩手県（59.8％）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

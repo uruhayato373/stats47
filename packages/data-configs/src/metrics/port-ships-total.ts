@@ -48,6 +48,4 @@ export const portShipsTotal: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

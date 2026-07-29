@@ -55,6 +55,4 @@ export const commuteByTrain: MetricConfig = {
   "seoTitle": "自宅外通勤・通学者数（鉄道・電車）ランキング都道府県【2020年】｜1位東京都（2,691,476人）",
   "seoDescription": "2020年の自宅外通勤・通学者数（鉄道・電車）の都道府県別ランキング。1位東京都（2,691,476人）、最下位島根県（3,370人）で798.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

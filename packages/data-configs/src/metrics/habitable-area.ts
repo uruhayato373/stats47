@@ -70,6 +70,4 @@ export const habitableArea: MetricConfig = {
   "seoTitle": "可住地面積ランキング都道府県【2024年】｜1位北海道（2,269,076ｈａ）",
   "seoDescription": "2024年の可住地面積の都道府県別ランキング。1位北海道（2,269,076ｈａ）、最下位奈良県（85,389ｈａ）で26.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

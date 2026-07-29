@@ -59,6 +59,4 @@ export const eggplantConsumptionQuantity: MetricConfig = {
   "seoTitle": "なす消費量ランキング都道府県【2024年】｜1位山形県（7,251g）",
   "seoDescription": "2024年のなす消費量の都道府県別ランキング。1位山形県（7,251g）、最下位沖縄県（2,106g）で3.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

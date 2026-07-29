@@ -59,6 +59,4 @@ export const tablewareConsumptionQuantity: MetricConfig = {
   "seoTitle": "茶わん・皿・鉢消費量ランキング都道府県【2024年】｜1位宮城県（4.54個）",
   "seoDescription": "2024年の茶わん・皿・鉢消費量の都道府県別ランキング。1位宮城県（4.54個）、最下位愛媛県（1.37個）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

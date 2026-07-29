@@ -103,6 +103,4 @@ export const postOfficeCount: MetricConfig = {
   "seoTitle": "郵便局数1位は東京1,504局、沖縄200局の7.5倍差｜47都道府県2024ランキング",
   "seoDescription": "都道府県別の郵便局数は1位東京(1,504局)、最下位沖縄(200局)で7.5倍の格差。47都道府県を地図とグラフで比較する2024年最新ランキング。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -70,6 +70,4 @@ export const personnelExpenditureRatioPrefFinance: MetricConfig = {
   "seoTitle": "人件費割合ランキング都道府県【2022年】｜1位三重県（25.5％）",
   "seoDescription": "2022年の人件費割合の都道府県別ランキング。1位三重県（25.5％）、最下位東京都（16.95％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

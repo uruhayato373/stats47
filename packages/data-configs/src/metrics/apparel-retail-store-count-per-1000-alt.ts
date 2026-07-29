@@ -34,6 +34,4 @@ export const apparelRetailStoreCountPer1000Alt: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

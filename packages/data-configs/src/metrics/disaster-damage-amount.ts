@@ -92,6 +92,4 @@ export const disasterDamageAmount: MetricConfig = {
   "seoTitle": "災害被害額ランキング都道府県【2023年】｜1位秋田県（48,757円）",
   "seoDescription": "2023年の災害被害額の都道府県別ランキング。1位秋田県（48,757円）、最下位東京都（28円）で1741.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

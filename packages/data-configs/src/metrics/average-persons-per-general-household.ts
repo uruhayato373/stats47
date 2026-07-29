@@ -51,6 +51,4 @@ export const averagePersonsPerGeneralHousehold: MetricConfig = {
   "seoTitle": "一般世帯の平均人員ランキング都道府県【2020年】｜1位山形県（2.61人）",
   "seoDescription": "2020年の一般世帯の平均人員の都道府県別ランキング。1位山形県（2.61人）、最下位東京都（1.92人）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

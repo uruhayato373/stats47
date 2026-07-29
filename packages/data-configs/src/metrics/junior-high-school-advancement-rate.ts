@@ -47,6 +47,4 @@ export const juniorHighSchoolAdvancementRate: MetricConfig = {
   "seoTitle": "中学校卒業者の進学率ランキング都道府県【2023年】｜1位石川県（96.7％）",
   "seoDescription": "2023年の中学校卒業者の進学率の都道府県別ランキング。1位石川県（96.7％）、最下位愛知県（90.1％）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

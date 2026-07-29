@@ -59,6 +59,4 @@ export const publicRentConsumptionQuantity: MetricConfig = {
   "seoTitle": "公営家賃消費量ランキング都道府県【2024年】｜1位長崎県（28.69畳）",
   "seoDescription": "2024年の公営家賃消費量の都道府県別ランキング。1位長崎県（28.69畳）、最下位佐賀県（0畳）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

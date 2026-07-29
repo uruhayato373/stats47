@@ -59,6 +59,4 @@ export const otherCitrusConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の柑きつ類消費支出額ランキング都道府県【2024年】｜1位愛媛県（4,754円）",
   "seoDescription": "2024年の他の柑きつ類消費支出額の都道府県別ランキング。1位愛媛県（4,754円）、最下位三重県（1,054円）で4.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

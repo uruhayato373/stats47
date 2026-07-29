@@ -45,6 +45,4 @@ export const treatmentRateSchizophreniaOutpatient: MetricConfig = {
   "seoTitle": "統合失調症の受療率（外来）ランキング都道府県【2023年】｜1位京都府（103人（人口10万対））",
   "seoDescription": "2023年の統合失調症の受療率（外来）の都道府県別ランキング。1位京都府（103人（人口10万対））、最下位奈良県（19人（人口10万対））で5.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const greenPepperConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ピーマン消費支出額ランキング都道府県【2024年】｜1位埼玉県（3,131円）",
   "seoDescription": "2024年のピーマン消費支出額の都道府県別ランキング。1位埼玉県（3,131円）、最下位山口県（1,690円）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

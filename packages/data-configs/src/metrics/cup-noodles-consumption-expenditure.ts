@@ -59,6 +59,4 @@ export const cupNoodlesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "カップ麺消費支出額ランキング都道府県【2024年】｜1位青森県（8,402円）",
   "seoDescription": "2024年のカップ麺消費支出額の都道府県別ランキング。1位青森県（8,402円）、最下位京都府（4,324円）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

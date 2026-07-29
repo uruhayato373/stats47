@@ -34,6 +34,4 @@ export const unemploymentRateWoman: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

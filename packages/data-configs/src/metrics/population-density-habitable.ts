@@ -59,6 +59,4 @@ export const populationDensityHabitable: MetricConfig = {
   "seoTitle": "人口密度（可住地面積1km²当たり）ランキング市区町村【2020年】｜1位東京都 豊島区（23,182.1人）",
   "seoDescription": "2020年の人口密度（可住地面積1km²当たり）の市区町村別ランキング。1位東京都 豊島区（23,182.1人）、最下位静岡県 浜松市 浜名区（0人）で地図やグラフで市区町村を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

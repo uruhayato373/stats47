@@ -54,6 +54,4 @@ export const penalCodeOffensesRecognizedPer1000: MetricConfig = {
   "seoTitle": "刑法犯認知件数ランキング都道府県【2023年】｜1位大阪府（9.15件）",
   "seoDescription": "2023年の刑法犯認知件数の都道府県別ランキング。1位大阪府（9.15件）、最下位岩手県（2.46件）で3.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

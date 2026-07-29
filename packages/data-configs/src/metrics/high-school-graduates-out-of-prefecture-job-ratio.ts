@@ -79,6 +79,4 @@ export const highSchoolGraduatesOutOfPrefectureJobRatio: MetricConfig = {
   "seoTitle": "高等学校卒業者に占める県外就職者の割合ランキング都道府県【2023年】｜1位青森県（41.1％）",
   "seoDescription": "2023年の高等学校卒業者に占める県外就職者の割合の都道府県別ランキング。1位青森県（41.1％）、最下位愛知県（4.9％）で8.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

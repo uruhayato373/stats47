@@ -52,6 +52,4 @@ export const carriedForwardIncomePrefecture: MetricConfig = {
   "seoTitle": "繰越金ランキング都道府県【2022年】｜1位東京都（549,525,358）",
   "seoDescription": "2022年の繰越金の都道府県別ランキング。1位東京都（549,525,358）、最下位奈良県（6,203,636）で88.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -35,6 +35,4 @@ export const agriculturalIncomeRatio: MetricConfig = {
   "seoTitle": "農業所得割合ランキング都道府県【2003年】｜1位北海道（46％）",
   "seoDescription": "2003年の農業所得割合の都道府県別ランキング。1位北海道（46％）、最下位滋賀県（2.5％）で18.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

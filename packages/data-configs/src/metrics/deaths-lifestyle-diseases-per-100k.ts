@@ -76,6 +76,4 @@ export const deathsLifestyleDiseasesPer100k: MetricConfig = {
   "seoTitle": "生活習慣病による死亡者数ランキング都道府県【2023年】｜1位秋田県（881.7人）",
   "seoDescription": "2023年の生活習慣病による死亡者数の都道府県別ランキング。1位秋田県（881.7人）、最下位沖縄県（466.2人）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

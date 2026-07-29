@@ -51,6 +51,4 @@ export const airCargoTransport: MetricConfig = {
   "seoTitle": "航空貨物輸送量ランキング都道府県【2023年】｜1位東京都（227,236,915ｋｇ）",
   "seoDescription": "2023年の航空貨物輸送量の都道府県別ランキング。1位東京都（227,236,915ｋｇ）、最下位奈良県（0ｋｇ）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

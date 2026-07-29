@@ -59,6 +59,4 @@ export const otherWomensShirtConsumptionQuantity: MetricConfig = {
   "seoTitle": "他の婦人用シャツ消費量ランキング都道府県【2024年】｜1位岐阜県（4.7枚）",
   "seoDescription": "2024年の他の婦人用シャツ消費量の都道府県別ランキング。1位岐阜県（4.7枚）、最下位兵庫県（2.53枚）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

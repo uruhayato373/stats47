@@ -28,6 +28,4 @@ export const nonRegularEmploymentRate: MetricConfig = {
   "seoTitle": "非正規雇用率ランキング都道府県【2022年】｜1位京都府（40.7%）",
   "seoDescription": "2022年の非正規雇用率の都道府県別ランキング。1位京都府（40.7%）、最下位富山県（32.32%）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

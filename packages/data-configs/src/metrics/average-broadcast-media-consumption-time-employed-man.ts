@@ -35,6 +35,4 @@ export const averageBroadcastMediaConsumptionTimeEmployedMan: MetricConfig = {
   },
   "seoTitle": "テレビ・ラジオ・新聞・雑誌の平均時間（有業者・男）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

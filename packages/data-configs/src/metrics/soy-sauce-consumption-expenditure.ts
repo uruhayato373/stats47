@@ -59,6 +59,4 @@ export const soySauceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "しょう油消費支出額ランキング都道府県【2024年】｜1位山形県（3,288円）",
   "seoDescription": "2024年のしょう油消費支出額の都道府県別ランキング。1位山形県（3,288円）、最下位沖縄県（1,399円）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

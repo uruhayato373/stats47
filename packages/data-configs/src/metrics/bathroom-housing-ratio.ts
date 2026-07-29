@@ -35,6 +35,4 @@ export const bathroomHousingRatio: MetricConfig = {
   "seoTitle": "浴室のある住宅比率ランキング都道府県【2008年】｜1位佐賀県（98.6％）",
   "seoDescription": "2008年の浴室のある住宅比率の都道府県別ランキング。1位佐賀県（98.6％）、最下位東京都（91.4％）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

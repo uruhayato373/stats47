@@ -59,6 +59,4 @@ export const publicJuniorHighSchoolConsumptionExpenditure: MetricConfig = {
   "seoTitle": "国公立中学校消費支出額ランキング都道府県【2024年】｜1位鹿児島県（11,602円）",
   "seoDescription": "2024年の国公立中学校消費支出額の都道府県別ランキング。1位鹿児島県（11,602円）、最下位和歌山県（891円）で13.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

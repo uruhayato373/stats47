@@ -91,6 +91,4 @@ export const telephoneSubscriptionCountPer1000: MetricConfig = {
   "seoTitle": "電話加入数ランキング都道府県【2024年】｜1位青森県（143.4加入）",
   "seoDescription": "2024年の電話加入数の都道府県別ランキング。1位青森県（143.4加入）、最下位沖縄県（59.9加入）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

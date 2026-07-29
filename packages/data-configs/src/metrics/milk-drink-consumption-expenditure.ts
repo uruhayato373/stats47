@@ -59,6 +59,4 @@ export const milkDrinkConsumptionExpenditure: MetricConfig = {
   "seoTitle": "乳飲料消費支出額ランキング都道府県【2024年】｜1位福島県（4,431円）",
   "seoDescription": "2024年の乳飲料消費支出額の都道府県別ランキング。1位福島県（4,431円）、最下位福岡県（1,653円）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

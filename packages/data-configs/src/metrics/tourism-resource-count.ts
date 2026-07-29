@@ -50,6 +50,4 @@ export const tourismResourceCount: MetricConfig = {
   "seoTitle": "観光資源数ランキング都道府県【2014年】｜1位福岡県（389件）",
   "seoDescription": "2014年の観光資源数の都道府県別ランキング。1位福岡県（389件）、最下位鹿児島県（9件）で43.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

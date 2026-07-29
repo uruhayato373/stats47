@@ -52,6 +52,4 @@ export const portShipsTonnage: MetricConfig = {
   "seoTitle": "入港船舶総トン数（港湾統計）ランキング都道府県【2023年】｜1位神奈川県（399,226,924総トン）",
   "seoDescription": "2023年の入港船舶総トン数（港湾統計）の都道府県別ランキング。1位神奈川県（399,226,924総トン）、最下位滋賀県（3,203,855総トン）で124.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

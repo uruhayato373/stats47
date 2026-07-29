@@ -59,6 +59,4 @@ export const interiorDecorationConsumptionExpenditure: MetricConfig = {
   "seoTitle": "室内装飾品消費支出額ランキング都道府県【2024年】｜1位富山県（13,421円）",
   "seoDescription": "2024年の室内装飾品消費支出額の都道府県別ランキング。1位富山県（13,421円）、最下位新潟県（340円）で39.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

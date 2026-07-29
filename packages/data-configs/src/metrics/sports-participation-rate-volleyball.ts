@@ -34,6 +34,4 @@ export const sportsParticipationRateVolleyball: MetricConfig = {
   "seoTitle": "バレーボールの行動者率ランキング都道府県【2021年】｜1位宮崎県（5.9％）",
   "seoDescription": "2021年のバレーボールの行動者率の都道府県別ランキング。1位宮崎県（5.9％）、最下位富山県（2.3％）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

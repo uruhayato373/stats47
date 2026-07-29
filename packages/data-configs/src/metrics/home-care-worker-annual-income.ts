@@ -49,6 +49,4 @@ export const homeCareWorkerAnnualIncome: MetricConfig = {
   "seoTitle": "訪問介護従事者の平均年収ランキング都道府県【2023年】｜1位鹿児島県（478.5万円）",
   "seoDescription": "2023年の訪問介護従事者の平均年収の都道府県別ランキング。1位鹿児島県（478.5万円）、最下位静岡県（263.5万円）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

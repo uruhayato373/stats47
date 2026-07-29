@@ -59,6 +59,4 @@ export const otherHouseholdGoodsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の家事雑貨消費支出額ランキング都道府県【2024年】｜1位千葉県（20,818円）",
   "seoDescription": "2024年の他の家事雑貨消費支出額の都道府県別ランキング。1位千葉県（20,818円）、最下位福井県（11,779円）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

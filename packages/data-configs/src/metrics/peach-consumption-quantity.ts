@@ -59,6 +59,4 @@ export const peachConsumptionQuantity: MetricConfig = {
   "seoTitle": "桃消費量ランキング都道府県【2024年】｜1位福島県（7,506g）",
   "seoDescription": "2024年の桃消費量の都道府県別ランキング。1位福島県（7,506g）、最下位福岡県（139g）で54.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -66,6 +66,4 @@ export const dentistsInMedicalFacilitiesPer100k: MetricConfig = {
   "seoTitle": "歯科医師数ランキング都道府県【2022年】｜1位東京都（116.1人）",
   "seoDescription": "2022年の歯科医師数の都道府県別ランキング。1位東京都（116.1人）、最下位青森県（55.9人）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

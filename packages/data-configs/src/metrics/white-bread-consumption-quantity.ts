@@ -59,6 +59,4 @@ export const whiteBreadConsumptionQuantity: MetricConfig = {
   "seoTitle": "食パン消費量ランキング都道府県【2024年】｜1位滋賀県（25,817g）",
   "seoDescription": "2024年の食パン消費量の都道府県別ランキング。1位滋賀県（25,817g）、最下位沖縄県（13,587g）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

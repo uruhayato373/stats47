@@ -76,6 +76,4 @@ export const miscellaneousSchoolStudentsPer1000: MetricConfig = {
   "seoTitle": "各種学校生徒数ランキング都道府県【2024年】｜1位富山県（4.03人）",
   "seoDescription": "2024年の各種学校生徒数の都道府県別ランキング。1位富山県（4.03人）、最下位鹿児島県（0.02人）で201.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

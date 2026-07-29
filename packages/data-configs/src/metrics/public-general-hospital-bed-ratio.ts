@@ -59,6 +59,4 @@ export const publicGeneralHospitalBedRatio: MetricConfig = {
   "seoTitle": "公立一般病院病床数の割合ランキング都道府県【2023年】｜1位山形県（53.5％）",
   "seoDescription": "2023年の公立一般病院病床数の割合の都道府県別ランキング。1位山形県（53.5％）、最下位栃木県（10.6％）で5.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

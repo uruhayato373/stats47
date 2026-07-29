@@ -72,6 +72,4 @@ export const cpiChangeRateTransportCommunication: MetricConfig = {
   },
   "seoTitle": "消費者物価指数対前年変化率（交通・通信）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

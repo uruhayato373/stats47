@@ -52,6 +52,4 @@ export const residentForeignerPopulation: MetricConfig = {
   "seoTitle": "在留外国人数ランキング都道府県【2024年】｜1位東京都（738,946人）",
   "seoDescription": "2024年の在留外国人数の都道府県別ランキング。1位東京都（738,946人）、最下位秋田県（5,851人）で126.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

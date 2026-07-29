@@ -41,6 +41,4 @@ export const tertiaryActivityAvgTimeEmployedMale: MetricConfig = {
   },
   "seoTitle": "3次活動の平均時間（有業者・男）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

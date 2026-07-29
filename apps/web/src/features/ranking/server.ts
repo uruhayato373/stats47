@@ -1,22 +1,7 @@
 import "server-only";
 
-import { readFeaturedRankingItemsFromR2 } from "@stats47/ranking/server";
-import { err, type Result } from "@stats47/types";
-
-import type { FeaturedRankingItem } from "@stats47/ranking";
-
-/**
- * おすすめランキングを取得する
- *
- * @param limit 取得件数
- */
-export async function getFeaturedRankings(limit: number = 20): Promise<Result<FeaturedRankingItem[], Error>> {
-  try {
-    return await readFeaturedRankingItemsFromR2(limit);
-  } catch (error) {
-    return err(error instanceof Error ? error : new Error(String(error)));
-  }
-}
+// 実体は lib/ に置く (home が barrel を経由せず読めるようにするため)。
+export { getFeaturedRankings } from "./lib/get-featured-rankings";
 
 // サーバーコンポーネントの再エクスポート (app/ から使われるものだけ個別に。
 // RankingKeyPage の他 section は RankingPageClientShell が相対 import で直接使う)

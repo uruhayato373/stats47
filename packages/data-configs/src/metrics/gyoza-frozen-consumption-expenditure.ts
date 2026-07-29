@@ -59,6 +59,4 @@ export const gyozaFrozenConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ぎょうざ消費支出額ランキング都道府県【2024年】｜1位宮崎県（3,517円）",
   "seoDescription": "2024年のぎょうざ消費支出額の都道府県別ランキング。1位宮崎県（3,517円）、最下位高知県（1,105円）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

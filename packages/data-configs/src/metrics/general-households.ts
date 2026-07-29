@@ -60,6 +60,4 @@ export const generalHouseholds: MetricConfig = {
   "seoTitle": "一般世帯数ランキング都道府県【2020年】｜1位東京都（722万世帯）",
   "seoDescription": "2020年の一般世帯数の都道府県別ランキング。1位東京都（722万世帯）、最下位鳥取県（22万世帯）で32.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

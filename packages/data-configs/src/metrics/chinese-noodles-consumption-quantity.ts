@@ -59,6 +59,4 @@ export const chineseNoodlesConsumptionQuantity: MetricConfig = {
   "seoTitle": "中華麺消費量ランキング都道府県【2024年】｜1位岩手県（11,877g）",
   "seoDescription": "2024年の中華麺消費量の都道府県別ランキング。1位岩手県（11,877g）、最下位宮崎県（5,945g）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

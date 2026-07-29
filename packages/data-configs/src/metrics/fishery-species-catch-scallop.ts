@@ -53,6 +53,4 @@ export const fisherySpeciesCatchScallop: MetricConfig = {
   "seoTitle": "ホタテガイ漁獲量ランキング都道府県【2015年】｜1位北海道（232,080トン）",
   "seoDescription": "2015年のホタテガイ漁獲量の都道府県別ランキング。1位北海道（232,080トン）、最下位沖縄県（0トン）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

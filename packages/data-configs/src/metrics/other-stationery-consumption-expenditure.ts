@@ -59,6 +59,4 @@ export const otherStationeryConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の文房具消費支出額ランキング都道府県【2024年】｜1位宮城県（2,134円）",
   "seoDescription": "2024年の他の文房具消費支出額の都道府県別ランキング。1位宮城県（2,134円）、最下位和歌山県（346円）で6.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

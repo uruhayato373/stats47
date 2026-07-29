@@ -59,6 +59,4 @@ export const publicRentConsumptionExpenditure: MetricConfig = {
   "seoTitle": "公営家賃消費支出額ランキング都道府県【2024年】｜1位埼玉県（52,398円）",
   "seoDescription": "2024年の公営家賃消費支出額の都道府県別ランキング。1位埼玉県（52,398円）、最下位佐賀県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

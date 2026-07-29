@@ -53,6 +53,4 @@ export const bookMagazineRetailAnnualSalesPerCapita: MetricConfig = {
   "seoTitle": "書籍・雑誌小売業年間商品販売額ランキング都道府県【2006年】｜1位東京都（40,070円）",
   "seoDescription": "2006年の書籍・雑誌小売業年間商品販売額の都道府県別ランキング。1位東京都（40,070円）、最下位茨城県（9,748円）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -53,6 +53,4 @@ export const childConsultationCenterCasesPer1000: MetricConfig = {
   "seoTitle": "児童相談所受付件数ランキング都道府県【2023年】｜1位宮城県（7.9件）",
   "seoDescription": "2023年の児童相談所受付件数の都道府県別ランキング。1位宮城県（7.9件）、最下位大分県（1.6件）で4.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

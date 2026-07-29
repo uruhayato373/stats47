@@ -59,6 +59,4 @@ export const propaneGasConsumptionQuantity: MetricConfig = {
   "seoTitle": "プロパンガス消費量ランキング都道府県【2024年】｜1位高知県（66.19ｍ3）",
   "seoDescription": "2024年のプロパンガス消費量の都道府県別ランキング。1位高知県（66.19ｍ3）、最下位兵庫県（1.17ｍ3）で56.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

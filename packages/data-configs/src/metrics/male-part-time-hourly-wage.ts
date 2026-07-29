@@ -52,6 +52,4 @@ export const malePartTimeHourlyWage: MetricConfig = {
   "seoTitle": "男性パートタイムの給与ランキング都道府県【2024年】｜1位香川県（3,355円）",
   "seoDescription": "2024年の男性パートタイムの給与の都道府県別ランキング。1位香川県（3,355円）、最下位熊本県（1,234円）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -51,6 +51,4 @@ export const nationalMedicalExpensePerPerson: MetricConfig = {
   "seoTitle": "1人当たりの国民医療費ランキング都道府県【2022年】｜1位高知県（479千円）",
   "seoDescription": "2022年の1人当たりの国民医療費の都道府県別ランキング。1位高知県（479千円）、最下位埼玉県（332千円）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

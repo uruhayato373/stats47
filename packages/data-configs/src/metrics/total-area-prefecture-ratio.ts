@@ -36,6 +36,4 @@ export const totalAreaPrefectureRatio: MetricConfig = {
   "seoTitle": "総面積（都道府県面積に占める割合）ランキング市区町村【2023年】｜1位富山県 富山市（29.23％）",
   "seoDescription": "2023年の総面積（都道府県面積に占める割合）の市区町村別ランキング。1位富山県 富山市（29.23％）、最下位静岡県 浜松市 浜名区（0％）で地図やグラフで市区町村を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

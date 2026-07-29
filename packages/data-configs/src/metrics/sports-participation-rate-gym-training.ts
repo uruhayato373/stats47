@@ -34,6 +34,4 @@ export const sportsParticipationRateGymTraining: MetricConfig = {
   "seoTitle": "器具を使ったトレーニングの行動者率ランキング都道府県【2021年】｜1位神奈川県（15％）",
   "seoDescription": "2021年の器具を使ったトレーニングの行動者率の都道府県別ランキング。1位神奈川県（15％）、最下位長崎県（8.3％）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

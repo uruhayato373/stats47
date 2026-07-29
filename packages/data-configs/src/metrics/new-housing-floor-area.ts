@@ -53,6 +53,4 @@ export const newHousingFloorArea: MetricConfig = {
   "seoTitle": "着工新設住宅床面積ランキング都道府県【2024年】｜1位東京都（8,562,476m2）",
   "seoDescription": "2024年の着工新設住宅床面積の都道府県別ランキング。1位東京都（8,562,476m2）、最下位高知県（191,494m2）で44.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

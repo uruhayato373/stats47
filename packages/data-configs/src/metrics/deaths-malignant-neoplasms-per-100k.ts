@@ -86,6 +86,4 @@ export const deathsMalignantNeoplasmsPer100k: MetricConfig = {
   "seoTitle": "腫瘍による死亡者数ランキング都道府県【2023年】｜1位秋田県（437.5人）",
   "seoDescription": "2023年の腫瘍による死亡者数の都道府県別ランキング。1位秋田県（437.5人）、最下位沖縄県（235.9人）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -52,6 +52,4 @@ export const newGraduateScheduledSalaryCollegeFemale: MetricConfig = {
   "seoTitle": "新規学卒者所定内給与額ランキング都道府県【2024年】｜1位千葉県（277.5千円）",
   "seoDescription": "2024年の新規学卒者所定内給与額の都道府県別ランキング。1位千葉県（277.5千円）、最下位山形県（180.4千円）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

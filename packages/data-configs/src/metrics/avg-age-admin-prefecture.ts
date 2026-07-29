@@ -57,6 +57,4 @@ export const avgAgeAdminPrefecture: MetricConfig = {
   "seoTitle": "一般行政職 平均年齢ランキング都道府県【2024年】｜1位長野県（45歳）",
   "seoDescription": "2024年の一般行政職 平均年齢の都道府県別ランキング。1位長野県（45歳）、最下位千葉県（40.1歳）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

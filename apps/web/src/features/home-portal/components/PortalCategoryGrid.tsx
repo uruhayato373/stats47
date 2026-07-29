@@ -1,8 +1,9 @@
 import Link from "next/link";
 
 import { cn } from "@stats47/components";
-import { listAllMetrics, listCategories } from "@stats47/data-configs";
+import { RANKING_PROMINENCE_CATEGORIES } from "@stats47/data-configs/ranking-prominence";
 import { ChevronRight } from "lucide-react";
+
 
 import { TrackedPortalCategoryLink } from "./TrackedPortalCategoryLink";
 
@@ -15,12 +16,6 @@ export function PortalCategoryGrid({
 }: {
   variant?: "grid" | "sidebar";
 }) {
-  const counts = new Map<string, number>();
-  for (const metric of listAllMetrics()) {
-    if (!metric.isActive) continue;
-    counts.set(metric.category, (counts.get(metric.category) ?? 0) + 1);
-  }
-
   return (
     <div
       className={cn(
@@ -28,7 +23,7 @@ export function PortalCategoryGrid({
         variant === "grid" && "md:grid-cols-2 md:[&>*:nth-child(odd)]:border-r",
       )}
     >
-      {listCategories().map((category) => (
+      {RANKING_PROMINENCE_CATEGORIES.map((category) => (
         <TrackedPortalCategoryLink
           key={category.categoryKey}
           href={`/category/${category.categoryKey}`}
@@ -54,7 +49,7 @@ export function PortalCategoryGrid({
               variant === "sidebar" ? "text-[11px]" : "text-xs",
             )}
           >
-            {(counts.get(category.categoryKey) ?? 0).toLocaleString()}件
+            {category.count.toLocaleString()}件
           </span>
           <ChevronRight
             className={cn(

@@ -59,6 +59,4 @@ export const otherStapleDiningConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の主食的外食消費支出額ランキング都道府県【2024年】｜1位東京都（103,200円）",
   "seoDescription": "2024年の他の主食的外食消費支出額の都道府県別ランキング。1位東京都（103,200円）、最下位青森県（17,152円）で6.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

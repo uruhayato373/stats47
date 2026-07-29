@@ -86,6 +86,4 @@ export const laborAdministrationExpensesPrefecture: MetricConfig = {
   "seoTitle": "労政費ランキング都道府県【2022年】｜1位東京都（31,502,504）",
   "seoDescription": "2022年の労政費の都道府県別ランキング。1位東京都（31,502,504）、最下位高知県（117,024）で269.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

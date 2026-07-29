@@ -51,6 +51,4 @@ export const finalEnergyConsumptionPerCapita: MetricConfig = {
   "seoTitle": "1人当たり最終エネルギー消費量ランキング都道府県【2022年】｜1位大分県（308.84GJ）",
   "seoDescription": "2022年の1人当たり最終エネルギー消費量の都道府県別ランキング。1位大分県（308.84GJ）、最下位埼玉県（63.32GJ）で4.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

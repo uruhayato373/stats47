@@ -59,6 +59,4 @@ export const greenPepperConsumptionQuantity: MetricConfig = {
   "seoTitle": "ピーマン消費量ランキング都道府県【2024年】｜1位熊本県（3,173g）",
   "seoDescription": "2024年のピーマン消費量の都道府県別ランキング。1位熊本県（3,173g）、最下位山口県（1,718g）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -7,7 +7,7 @@ import {
   type HomeFeaturedValueRow,
 } from "../home-featured";
 
-import type { HomeFeaturedRankingDefinition } from "@stats47/data-configs";
+import type { HomeFeaturedProminence } from "@stats47/data-configs/ranking-prominence";
 import type { RankingItem } from "../../types/ranking-item";
 
 function row(
@@ -19,8 +19,10 @@ function row(
   return { areaCode, areaName, value, rank };
 }
 
-const DEFINITION: HomeFeaturedRankingDefinition = {
+const DEFINITION: HomeFeaturedProminence = {
   rankingKey: "test-key",
+  title: "テスト指標",
+  categoryKey: "population",
   order: 1,
   hook: "テスト用のフックです？",
 };
@@ -33,8 +35,7 @@ function itemFixture(overrides: Partial<RankingItem> = {}): RankingItem {
     title: "テスト指標",
     unit: "件",
     isActive: true,
-    isFeatured: false,
-    featuredOrder: 0,
+    hook: "テスト指標が最も多い県は？",
     dataSourceId: "estat",
     createdAt: "2026-01-01T00:00:00Z",
     updatedAt: "2026-01-01T00:00:00Z",
@@ -128,12 +129,12 @@ describe("resolveHomeFeaturedItems", () => {
       itemFixture({ rankingKey: "inactive-key", isActive: false }),
       itemFixture({ rankingKey: "city-key", areaType: "city" }),
     ];
-    const definitions: HomeFeaturedRankingDefinition[] = [
-      { rankingKey: "a-key", order: 1, hook: "Aの有効なフックです？" },
-      { rankingKey: "b-key", order: 2, hook: "Bの有効なフックです？" },
-      { rankingKey: "inactive-key", order: 3, hook: "無効なフックです？" },
-      { rankingKey: "city-key", order: 4, hook: "市の有効なフックです？" },
-      { rankingKey: "missing-key", order: 5, hook: "不在のフックです？" },
+    const definitions: HomeFeaturedProminence[] = [
+      { rankingKey: "a-key", title: "テスト指標", categoryKey: "population", order: 1, hook: "Aの有効なフックです？" },
+      { rankingKey: "b-key", title: "テスト指標", categoryKey: "population", order: 2, hook: "Bの有効なフックです？" },
+      { rankingKey: "inactive-key", title: "テスト指標", categoryKey: "population", order: 3, hook: "無効なフックです？" },
+      { rankingKey: "city-key", title: "テスト指標", categoryKey: "population", order: 4, hook: "市の有効なフックです？" },
+      { rankingKey: "missing-key", title: "テスト指標", categoryKey: "population", order: 5, hook: "不在のフックです？" },
     ];
     const { resolved, missingKeys } = resolveHomeFeaturedItems(items, definitions);
     expect(resolved.map((entry) => entry.item.rankingKey)).toEqual([

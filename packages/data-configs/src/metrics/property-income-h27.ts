@@ -34,6 +34,4 @@ export const propertyIncomeH27: MetricConfig = {
   },
   "seoTitle": "財産所得（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

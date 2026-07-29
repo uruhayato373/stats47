@@ -50,6 +50,4 @@ export const airportCount: MetricConfig = {
   "seoTitle": "空港数ランキング都道府県【2007年】｜1位沖縄県（18か所）",
   "seoDescription": "2007年の空港数の都道府県別ランキング。1位沖縄県（18か所）、最下位奈良県（0か所）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const otherVegetablesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の野菜のその他消費支出額ランキング都道府県【2024年】｜1位沖縄県（8,916円）",
   "seoDescription": "2024年の他の野菜のその他消費支出額の都道府県別ランキング。1位沖縄県（8,916円）、最下位山口県（2,626円）で3.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

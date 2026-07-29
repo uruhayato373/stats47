@@ -33,6 +33,4 @@ export const retailEstablishmentsByPrefecture: MetricConfig = {
   "seoTitle": "小売業が東京に集中する理由｜東京87,895店 vs 鳥取4,733店・18.6倍の格差 (2021)",
   "seoDescription": "小売業事業所は都市に偏る──東京87,895店 vs 最下位鳥取4,733店で18.6倍の格差。なぜこれほど集中するのか？2021年経済センサスを地図とグラフで47都道府県比較。人口補正後の順位も確認できます。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

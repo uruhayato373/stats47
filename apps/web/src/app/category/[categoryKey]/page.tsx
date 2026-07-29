@@ -9,7 +9,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { fetchPrefectures, REGIONS } from "@stats47/area";
-import { getCategoryDescription } from "@stats47/data-configs";
+import { getCategoryDescription } from "@stats47/data-configs/categories";
+import { RANKING_PROMINENCE_CATEGORIES } from "@stats47/data-configs/ranking-prominence";
 import {
   readCategorySourceSurveysFromR2,
   readRankingValuesFromR2,
@@ -84,39 +85,6 @@ function parseLatestYear(latestYear: unknown): string {
   return "2024";
 }
 
-/** 年・調査名の括弧や空白差を無視してタイトルを正規化（重複の代表選びに使う） */
-function normalizeTitleForDedup(title: string): string {
-  return title
-    .replace(/[（(][^）)]*[）)]/g, "")
-    .replace(/\s+/g, "")
-    .trim();
-}
-
-/**
- * isFeatured 指定が無いカテゴリでも「入口」を用意するための代表ランキング抽出。
- * 同義タイトル（年・調査名違い）を畳み、データ年が新しい順に上位 limit 件を返す。
- */
-function pickRepresentativeRankings<
-  T extends { rankingKey: string; title: string; latestYear?: unknown },
->(items: readonly T[], limit: number): T[] {
-  const byTitle = new Map<string, T>();
-  for (const item of items) {
-    const key = normalizeTitleForDedup(item.title);
-    const existing = byTitle.get(key);
-    if (
-      !existing ||
-      parseLatestYear(item.latestYear) > parseLatestYear(existing.latestYear)
-    ) {
-      byTitle.set(key, item);
-    }
-  }
-  return [...byTitle.values()]
-    .sort((a, b) =>
-      parseLatestYear(b.latestYear).localeCompare(parseLatestYear(a.latestYear))
-    )
-    .slice(0, limit);
-}
-
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -135,8 +103,12 @@ export async function generateMetadata({
 
     const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
     const rankingCount = rankingItems.length;
+    const representativeKeySet = new Set(
+      RANKING_PROMINENCE_CATEGORIES.find((c) => c.categoryKey === categoryKey)
+        ?.representatives.map((r) => r.rankingKey) ?? [],
+    );
     const sampleTitles = rankingItems
-      .filter((i) => i.isFeatured)
+      .filter((i) => representativeKeySet.has(i.rankingKey))
       .slice(0, 3)
       .map((i) => i.title)
       .join("・");
@@ -210,21 +182,18 @@ export default async function CategoryPage({ params }: PageProps) {
     };
   });
 
-  // 注目ランキング（タイルマップSVG付き、rankingKey で重複排除）
-  const seenKeys = new Set<string>();
-  const featuredReal = rankingItems.filter((item) => {
-    if (!item.isFeatured) return false;
-    if (seenKeys.has(item.rankingKey)) return false;
-    seenKeys.add(item.rankingKey);
-    return true;
+  // 注目ランキング。選定は索引 (/ranking) と同じ掲載価値スコアの生成物を唯一の根拠にする。
+  // 旧実装は metric config の `isFeatured` を見ていたが、2,295 件中 8 件しか設定されておらず、
+  // しかもその 8 件は「ホームの注目」と完全に同じだったため、カテゴリの注目が
+  // ホームの注目をそのまま映していた (13 カテゴリは別規則の fallback に落ちていた)。
+  const representativeKeys =
+    RANKING_PROMINENCE_CATEGORIES.find((c) => c.categoryKey === categoryKey)
+      ?.representatives.map((r) => r.rankingKey) ?? [];
+  const itemByKey = new Map(rankingItems.map((item) => [item.rankingKey, item]));
+  const featuredRaw = representativeKeys.flatMap((key) => {
+    const item = itemByKey.get(key);
+    return item ? [item] : [];
   });
-
-  // isFeatured 指定が 0 件のカテゴリ (例: commercial) でも先頭に「入口」を出す。
-  // 代表ランキング (同義タイトルを畳んでデータ年が新しい順) を fallback として使う。
-  const usingFallbackFeatured = featuredReal.length === 0;
-  const featuredRaw = usingFallbackFeatured
-    ? pickRepresentativeRankings(rankingItems, 6)
-    : featuredReal;
 
   // 1 回の全47件 read から、共通カード用の top / bottom / top3 と地図を導出する。
   // 旧実装の「1位 batch + 全件」の二重 read は行わない。
@@ -355,11 +324,7 @@ export default async function CategoryPage({ params }: PageProps) {
         {/* 注目ランキング */}
         {featuredItems.length > 0 && (
           <section className="mb-12">
-            <SectionHeader
-              title={
-                usingFallbackFeatured ? "主要なランキング" : "注目のランキング"
-              }
-            />
+            <SectionHeader title="注目のランキング" />
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {featuredItems.map((item) => (
                 <FeaturedRankingCard

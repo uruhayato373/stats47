@@ -47,6 +47,4 @@ export const mealAvgTimeFemale: MetricConfig = {
     "isCalculated": false,
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

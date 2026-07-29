@@ -59,6 +59,4 @@ export const facilityEquipmentConsumptionExpenditure: MetricConfig = {
   "seoTitle": "設備器具消費支出額ランキング都道府県【2024年】｜1位三重県（125,185円）",
   "seoDescription": "2024年の設備器具消費支出額の都道府県別ランキング。1位三重県（125,185円）、最下位沖縄県（4,848円）で25.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

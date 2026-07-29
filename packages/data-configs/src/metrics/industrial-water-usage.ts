@@ -52,6 +52,4 @@ export const industrialWaterUsage: MetricConfig = {
   "seoTitle": "工業用水量ランキング都道府県【2015年】｜1位千葉県（16,122,494ｍ3／日）",
   "seoDescription": "2015年の工業用水量の都道府県別ランキング。1位千葉県（16,122,494ｍ3／日）、最下位奈良県（48,921ｍ3／日）で329.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

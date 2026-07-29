@@ -1,1 +1,0 @@
-export { RankingHeroCard } from "./RankingHeroCard";

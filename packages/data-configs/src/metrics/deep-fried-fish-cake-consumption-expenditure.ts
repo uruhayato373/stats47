@@ -59,6 +59,4 @@ export const deepFriedFishCakeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "揚げかまぼこ消費支出額ランキング都道府県【2024年】｜1位鹿児島県（5,303円）",
   "seoDescription": "2024年の揚げかまぼこ消費支出額の都道府県別ランキング。1位鹿児島県（5,303円）、最下位沖縄県（1,210円）で4.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

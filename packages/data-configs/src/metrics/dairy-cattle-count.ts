@@ -52,6 +52,4 @@ export const dairyCattleCount: MetricConfig = {
   "seoTitle": "乳用牛の1,296倍格差｜北海道が2位栃木の15倍という日本酪農の集中構造（2018）",
   "seoDescription": "1位北海道790,900頭 vs 最下位和歌山610頭で1,296倍の圧倒的格差。2位栃木の実に15倍という酪農産業の集中はなぜ生まれたか？日本の酪農構造を47都道府県で可視化（2018年）。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

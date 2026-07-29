@@ -47,6 +47,4 @@ export const garbageLandfillRate: MetricConfig = {
   "seoTitle": "ごみ埋立率ランキング都道府県【2023年】｜1位北海道（16.1％）",
   "seoDescription": "2023年のごみ埋立率の都道府県別ランキング。1位北海道（16.1％）、最下位三重県（2.8％）で5.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

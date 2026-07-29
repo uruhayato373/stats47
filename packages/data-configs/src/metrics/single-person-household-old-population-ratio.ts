@@ -45,6 +45,4 @@ export const singlePersonHouseholdOldPopulationRatio: MetricConfig = {
   "seoTitle": "65歳以上世帯員の単独世帯の割合ランキング都道府県【2020年】｜1位高知県（17.8％）",
   "seoDescription": "2020年の65歳以上世帯員の単独世帯の割合の都道府県別ランキング。1位高知県（17.8％）、最下位滋賀県（9.4％）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

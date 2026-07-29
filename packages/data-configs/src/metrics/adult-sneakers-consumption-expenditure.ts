@@ -59,6 +59,4 @@ export const adultSneakersConsumptionExpenditure: MetricConfig = {
   "seoTitle": "大人用運動靴消費支出額ランキング都道府県【2024年】｜1位高知県（8,347円）",
   "seoDescription": "2024年の大人用運動靴消費支出額の都道府県別ランキング。1位高知県（8,347円）、最下位和歌山県（2,643円）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

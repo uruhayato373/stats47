@@ -76,6 +76,4 @@ export const generalFundsPrefecture: MetricConfig = {
   "seoTitle": "一般財源ランキング都道府県【2022年】｜1位東京都（6,258,474,747）",
   "seoDescription": "2022年の一般財源の都道府県別ランキング。1位東京都（6,258,474,747）、最下位鳥取県（235,365,064）で26.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

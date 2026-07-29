@@ -42,6 +42,4 @@ export const publicJuniorHighSchoolPoolInstallationRate: MetricConfig = {
   "seoTitle": "公立中学校プール設置率ランキング都道府県【2006年】｜1位東京都（98.4％）",
   "seoDescription": "2006年の公立中学校プール設置率の都道府県別ランキング。1位東京都（98.4％）、最下位北海道（5.4％）で18.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

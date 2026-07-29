@@ -73,6 +73,4 @@ export const numberOfFreightCars: MetricConfig = {
   "seoTitle": "貨物車数ランキング都道府県【2008年】｜1位愛知県（828,810両）",
   "seoDescription": "2008年の貨物車数の都道府県別ランキング。1位愛知県（828,810両）、最下位鳥取県（114,153両）で7.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -57,6 +57,4 @@ export const baseballFieldPublic: MetricConfig = {
   "seoTitle": "野球場・ソフトボール場数（公共）ランキング都道府県【2021年】｜1位東京都（578施設）",
   "seoDescription": "2021年の野球場・ソフトボール場数（公共）の都道府県別ランキング。1位東京都（578施設）、最下位徳島県（25施設）で23.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

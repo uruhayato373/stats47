@@ -66,6 +66,4 @@ export const universityCountPer100k: MetricConfig = {
   "seoTitle": "大学数ランキング都道府県【2024年】｜1位京都府（1.35校）",
   "seoDescription": "2024年の大学数の都道府県別ランキング。1位京都府（1.35校）、最下位佐賀県（0.25校）で5.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

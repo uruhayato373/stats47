@@ -57,6 +57,4 @@ export const bonusAdminPrefecture: MetricConfig = {
   "seoTitle": "一般行政職 期末・勤勉手当（ボーナス）ランキング都道府県【2024年】｜1位東京都（1,863,900円）",
   "seoDescription": "2024年の一般行政職 期末・勤勉手当（ボーナス）の都道府県別ランキング。1位東京都（1,863,900円）、最下位高知県（1,439,400円）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

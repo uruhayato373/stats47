@@ -47,6 +47,4 @@ export const neonatalMortalityRatePer1000Births: MetricConfig = {
   "seoTitle": "新生児死亡率ランキング都道府県【2023年】｜1位秋田県（2.5‐）",
   "seoDescription": "2023年の新生児死亡率の都道府県別ランキング。1位秋田県（2.5‐）、最下位高知県（0.3‐）で8.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

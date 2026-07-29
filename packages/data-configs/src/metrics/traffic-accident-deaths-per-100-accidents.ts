@@ -87,6 +87,4 @@ export const trafficAccidentDeathsPer100Accidents: MetricConfig = {
   "seoTitle": "交通事故死者数ランキング都道府県【2024年】｜1位秋田県（3.16人）",
   "seoDescription": "2024年の交通事故死者数の都道府県別ランキング。1位秋田県（3.16人）、最下位福岡県（0.49人）で6.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

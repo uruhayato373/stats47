@@ -38,6 +38,4 @@ export const workAvgTimeEmployedMale: MetricConfig = {
   },
   "seoTitle": "仕事の平均時間（有業者・男）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

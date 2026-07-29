@@ -65,6 +65,4 @@ export const japanHealthInsuranceSocietyMedicalExpenseDependentsPerPerson: Metri
   "seoTitle": "全国保険協会管掌健康保険医療費ランキング都道府県【2023年】｜1位徳島県（224,281円）",
   "seoDescription": "2023年の全国保険協会管掌健康保険医療費の都道府県別ランキング。1位徳島県（224,281円）、最下位沖縄県（175,449円）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

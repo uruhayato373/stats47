@@ -51,6 +51,4 @@ export const mobilePhoneOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "seoTitle": "携帯電話所有数量ランキング都道府県【2014年】｜1位山形県（1,391台）",
   "seoDescription": "2014年の携帯電話所有数量の都道府県別ランキング。1位山形県（1,391台）、最下位鹿児島県（1,091台）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

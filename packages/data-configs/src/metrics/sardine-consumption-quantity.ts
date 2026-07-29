@@ -59,6 +59,4 @@ export const sardineConsumptionQuantity: MetricConfig = {
   "seoTitle": "いわし消費量ランキング都道府県【2024年】｜1位富山県（1,436g）",
   "seoDescription": "2024年のいわし消費量の都道府県別ランキング。1位富山県（1,436g）、最下位沖縄県（60g）で23.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

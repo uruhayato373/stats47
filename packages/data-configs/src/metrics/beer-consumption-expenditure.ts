@@ -59,6 +59,4 @@ export const beerConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ビール消費支出額ランキング都道府県【2024年】｜1位秋田県（17,793円）",
   "seoDescription": "2024年のビール消費支出額の都道府県別ランキング。1位秋田県（17,793円）、最下位三重県（7,533円）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

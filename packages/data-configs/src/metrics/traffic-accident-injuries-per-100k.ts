@@ -87,6 +87,4 @@ export const trafficAccidentInjuriesPer100k: MetricConfig = {
   "seoTitle": "交通事故負傷者数ランキング都道府県【2024年】｜1位静岡県（620.4人）",
   "seoDescription": "2024年の交通事故負傷者数の都道府県別ランキング。1位静岡県（620.4人）、最下位島根県（121.7人）で5.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

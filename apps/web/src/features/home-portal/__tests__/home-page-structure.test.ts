@@ -4,7 +4,7 @@ import path from 'node:path';
 import { describe, it, expect } from 'vitest';
 
 /**
- * home `/` のポータル構造を source レベルで検証する (仕様 §20 Home)。
+ * home `/` のポータル構造を source レベルで検証する。
  * DOM render は R2 依存 (FeaturedRankings / listLatestArticles) のため、hero 不在と
  * セクション順・単一 h1 の不変条件は page.tsx のソースで担保する。
  */
@@ -49,7 +49,8 @@ describe('home page structure (portal)', () => {
 
   it('PageHeader (単一 h1) から始まり、重複する本文検索を置かない', () => {
     expect(PAGE).toContain('PageHeader');
-    expect(PAGE).not.toContain('HomeSearch');
+    expect(PAGE).not.toContain('type="search"');
+    expect(PAGE).not.toContain('role="search"');
     // PageHeader は 1 回だけ (ページ唯一の h1)
     const pageHeaderUses = PAGE.match(/<PageHeader/g) ?? [];
     expect(pageHeaderUses).toHaveLength(1);

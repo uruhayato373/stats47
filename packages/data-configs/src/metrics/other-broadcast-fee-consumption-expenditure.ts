@@ -59,6 +59,4 @@ export const otherBroadcastFeeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の放送受信料消費支出額ランキング都道府県【2024年】｜1位千葉県（3,595円）",
   "seoDescription": "2024年の他の放送受信料消費支出額の都道府県別ランキング。1位千葉県（3,595円）、最下位福岡県（319円）で11.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

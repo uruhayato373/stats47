@@ -86,6 +86,4 @@ export const numberOfConstructedBuildings: MetricConfig = {
   "seoTitle": "着工建築物数ランキング都道府県【2024年】｜1位東京都（40,257棟）",
   "seoDescription": "2024年の着工建築物数の都道府県別ランキング。1位東京都（40,257棟）、最下位高知県（2,237棟）で18.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

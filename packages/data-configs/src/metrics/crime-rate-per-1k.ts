@@ -58,6 +58,4 @@ export const crimeRatePer1k: MetricConfig = {
   "seoTitle": "刑法犯認知件数（人口千人当たり）ランキング市区町村【2005年】｜1位大阪府 大阪市 中央区（191.03件）",
   "seoDescription": "2005年の刑法犯認知件数（人口千人当たり）の市区町村別ランキング。1位大阪府 大阪市 中央区（191.03件）、最下位沖縄県 北大東村（0件）で地図やグラフで市区町村を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

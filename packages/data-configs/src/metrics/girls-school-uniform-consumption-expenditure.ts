@@ -59,6 +59,4 @@ export const girlsSchoolUniformConsumptionExpenditure: MetricConfig = {
   "seoTitle": "女子用学校制服消費支出額ランキング都道府県【2024年】｜1位鹿児島県（4,033円）",
   "seoDescription": "2024年の女子用学校制服消費支出額の都道府県別ランキング。1位鹿児島県（4,033円）、最下位長崎県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

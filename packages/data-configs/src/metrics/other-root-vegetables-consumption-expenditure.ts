@@ -59,6 +59,4 @@ export const otherRootVegetablesConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の根菜消費支出額ランキング都道府県【2024年】｜1位東京都（4,314円）",
   "seoDescription": "2024年の他の根菜消費支出額の都道府県別ランキング。1位東京都（4,314円）、最下位高知県（2,154円）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

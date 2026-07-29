@@ -59,6 +59,4 @@ export const cupNoodlesConsumptionQuantity: MetricConfig = {
   "seoTitle": "カップ麺消費量ランキング都道府県【2024年】｜1位青森県（6,638g）",
   "seoDescription": "2024年のカップ麺消費量の都道府県別ランキング。1位青森県（6,638g）、最下位福岡県（3,075g）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const japanHealthInsuranceSocietyVisitRateDependentsPer1000: MetricConfig
   "seoTitle": "全国保険協会管掌健康保険受診率ランキング都道府県【2023年】｜1位香川県（10,146.81‐）",
   "seoDescription": "2023年の全国保険協会管掌健康保険受診率の都道府県別ランキング。1位香川県（10,146.81‐）、最下位沖縄県（7,578.91‐）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

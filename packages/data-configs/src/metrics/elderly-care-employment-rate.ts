@@ -37,6 +37,4 @@ export const elderlyCareEmploymentRate: MetricConfig = {
   "seoTitle": "介護をしている人の就業率ランキング都道府県【2022年】｜1位福井県（63.4％）",
   "seoDescription": "2022年の介護をしている人の就業率の都道府県別ランキング。1位福井県（63.4％）、最下位奈良県（52.5％）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

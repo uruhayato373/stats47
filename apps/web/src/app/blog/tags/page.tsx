@@ -11,10 +11,10 @@ import {
 
 import { PageShell, PageHeader } from "@/components/layout";
 
+import { FooterAdSlot } from "@/features/ads";
 import { TagCloud } from "@/features/blog";
 import { listAllTagsWithCount } from "@/features/blog/server";
 
-import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -72,9 +72,7 @@ export default async function TagsIndexPage() {
                 <TagCloud tags={tags} />
             )}
 
-            <div className="mt-8">
-                <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
-            </div>
+            <FooterAdSlot />
         </PageShell>
     );
 }

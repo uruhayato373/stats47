@@ -76,6 +76,4 @@ export const midwifeCount: MetricConfig = {
   "seoTitle": "助産師数ランキング都道府県【2022年】｜1位東京都（4,184人）",
   "seoDescription": "2022年の助産師数の都道府県別ランキング。1位東京都（4,184人）、最下位高知県（206人）で20.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

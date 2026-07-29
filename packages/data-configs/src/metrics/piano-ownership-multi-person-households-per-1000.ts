@@ -56,6 +56,4 @@ export const pianoOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "seoTitle": "ピアノ・電子ピアノ所有数量ランキング都道府県【2014年】｜1位山梨県（446台）",
   "seoDescription": "2014年のピアノ・電子ピアノ所有数量の都道府県別ランキング。1位山梨県（446台）、最下位青森県（215台）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

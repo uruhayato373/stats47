@@ -40,6 +40,4 @@ export const travelLeisureAnnualParticipationRate10plus: MetricConfig = {
   "seoTitle": "旅行・行楽の年間行動者率ランキング都道府県【2021年】｜1位愛知県（57.6％）",
   "seoDescription": "2021年の旅行・行楽の年間行動者率の都道府県別ランキング。1位愛知県（57.6％）、最下位沖縄県（31.1％）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

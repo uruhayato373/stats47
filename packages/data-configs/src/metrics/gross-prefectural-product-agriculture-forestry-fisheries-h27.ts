@@ -35,6 +35,4 @@ export const grossPrefecturalProductAgricultureForestryFisheriesH27: MetricConfi
   },
   "seoTitle": "県内総生産額（農林水産業）（平成27年基準）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

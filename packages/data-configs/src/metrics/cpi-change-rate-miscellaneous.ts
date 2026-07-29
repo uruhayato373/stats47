@@ -62,6 +62,4 @@ export const cpiChangeRateMiscellaneous: MetricConfig = {
   },
   "seoTitle": "消費者物価指数対前年変化率（諸雑費）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

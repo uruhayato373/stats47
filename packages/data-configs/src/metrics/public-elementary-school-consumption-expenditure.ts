@@ -59,6 +59,4 @@ export const publicElementarySchoolConsumptionExpenditure: MetricConfig = {
   "seoTitle": "国公立小学校消費支出額ランキング都道府県【2024年】｜1位山形県（11,649円）",
   "seoDescription": "2024年の国公立小学校消費支出額の都道府県別ランキング。1位山形県（11,649円）、最下位長崎県（1,181円）で9.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

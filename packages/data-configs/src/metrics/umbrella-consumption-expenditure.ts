@@ -59,6 +59,4 @@ export const umbrellaConsumptionExpenditure: MetricConfig = {
   "seoTitle": "傘消費支出額ランキング都道府県【2024年】｜1位埼玉県（2,055円）",
   "seoDescription": "2024年の傘消費支出額の都道府県別ランキング。1位埼玉県（2,055円）、最下位秋田県（354円）で5.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

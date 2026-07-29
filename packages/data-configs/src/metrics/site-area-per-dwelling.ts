@@ -51,6 +51,4 @@ export const siteAreaPerDwelling: MetricConfig = {
   "seoTitle": "住宅の敷地面積ランキング都道府県【2023年】｜1位茨城県（394ｍ2）",
   "seoDescription": "2023年の住宅の敷地面積の都道府県別ランキング。1位茨城県（394ｍ2）、最下位大阪府（138ｍ2）で2.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -44,6 +44,4 @@ export const generalHospitalCount: MetricConfig = {
   "seoTitle": "一般病院数ランキング都道府県【2023年】｜1位東京都（588施設）",
   "seoDescription": "2023年の一般病院数の都道府県別ランキング。1位東京都（588施設）、最下位島根県（37施設）で15.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

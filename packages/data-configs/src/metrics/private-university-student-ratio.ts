@@ -69,6 +69,4 @@ export const privateUniversityStudentRatio: MetricConfig = {
   "seoTitle": "私立大学学生数割合ランキング都道府県【2024年】｜1位神奈川県（92.7％）",
   "seoDescription": "2024年の私立大学学生数割合の都道府県別ランキング。1位神奈川県（92.7％）、最下位島根県（0％）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

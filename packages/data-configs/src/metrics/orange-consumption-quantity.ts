@@ -59,6 +59,4 @@ export const orangeConsumptionQuantity: MetricConfig = {
   "seoTitle": "オレンジ消費量ランキング都道府県【2024年】｜1位富山県（1,845g）",
   "seoDescription": "2024年のオレンジ消費量の都道府県別ランキング。1位富山県（1,845g）、最下位佐賀県（281g）で6.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const sashimiPlatterConsumptionQuantity: MetricConfig = {
   "seoTitle": "さしみ盛合わせ消費量ランキング都道府県【2024年】｜1位長崎県（1,973g）",
   "seoDescription": "2024年のさしみ盛合わせ消費量の都道府県別ランキング。1位長崎県（1,973g）、最下位高知県（460g）で4.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

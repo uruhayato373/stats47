@@ -85,6 +85,4 @@ export const naturalEnvironmentConservationArea: MetricConfig = {
   "seoTitle": "自然環境保全地域面積ランキング都道府県【2024年】｜1位神奈川県（11,236.4ｈａ）",
   "seoDescription": "2024年の自然環境保全地域面積の都道府県別ランキング。1位神奈川県（11,236.4ｈａ）、最下位山口県（0ｈａ）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

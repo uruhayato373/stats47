@@ -75,6 +75,4 @@ export const generalHospitalAvgLengthOfStay: MetricConfig = {
   "seoTitle": "一般病院平均在院日数ランキング都道府県【2023年】｜1位高知県（34.7日）",
   "seoDescription": "2023年の一般病院平均在院日数の都道府県別ランキング。1位高知県（34.7日）、最下位神奈川県（18.5日）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

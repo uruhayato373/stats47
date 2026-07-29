@@ -51,6 +51,4 @@ export const maximumSnowDepth: MetricConfig = {
   "seoTitle": "最深積雪ランキング都道府県【2007年】｜1位北海道（78ｃｍ）",
   "seoDescription": "2007年の最深積雪の都道府県別ランキング。1位北海道（78ｃｍ）、最下位沖縄県（0ｃｍ）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

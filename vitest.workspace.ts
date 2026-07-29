@@ -14,6 +14,7 @@ export default defineWorkspace([
   'packages/ranking/vitest.config.ts',
   'packages/r2-storage/vitest.config.ts',
   'packages/category/vitest.config.ts',
+  'packages/data-configs/vitest.config.ts',
   'packages/database/vitest.config.ts',
   'packages/estat-api/vitest.config.ts',
   'packages/gis/vitest.config.ts',

@@ -59,6 +59,4 @@ export const healthCheckupConsumptionExpenditure: MetricConfig = {
   "seoTitle": "人間ドック等受診料消費支出額ランキング都道府県【2024年】｜1位長野県（9,763円）",
   "seoDescription": "2024年の人間ドック等受診料消費支出額の都道府県別ランキング。1位長野県（9,763円）、最下位長崎県（544円）で17.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

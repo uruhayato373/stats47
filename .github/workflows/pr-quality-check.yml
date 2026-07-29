@@ -96,6 +96,12 @@ jobs:
         run: node .claude/scripts/lib/check-card-census.cjs
         continue-on-error: false
 
+      - name: 📢 Ad Placement Guard
+        # 広告どうしの隣接・rail 部品の本文誤用・生 AdSenseAd の直叩き・参照ゼロの slot 定数を弾く。
+        # pre-commit と同一だが --no-verify 素通り対策で CI でも実行する。
+        run: node .claude/scripts/lib/check-ad-placement.cjs
+        continue-on-error: false
+
       - name: 🚧 R2 Route SSG Guard
         # R2 依存 route への generateStaticParams 再混入を弾く (notFound 固着の再発防止)。
         # pre-commit と同一だが --no-verify 素通り対策で CI でも実行する。
@@ -287,6 +293,16 @@ jobs:
           # HTTP 200 +「記事が見つかりません」で固着する。middleware で 410 に短絡するため
           # 未公開集合が R2 の実態とズレていないかを検査する (再公開の取り残しも拾う)。
           (cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts --check)
+          # Header / home ポータル / 楽天商品カードが使うカテゴリ件数・代表ランキング・
+          # 品目語の生成物。ずれると表示が実データと食い違う。生成物を挟む理由は
+          # 「共通 Header 経由で METRICS_REGISTRY が全 route の bundle に入るのを防ぐ」
+          # (apps/web/scripts/generate-runtime-metric-summaries.ts)。
+          (cd apps/web && npx tsx scripts/generate-runtime-metric-summaries.ts --check)
+          # 索引 (/ranking のカテゴリ別代表)・ホーム注目 8 件・問いかけコピーの生成物。
+          # /ranking を R2 非依存の純静的 SSG のまま保つため、選定結果をビルド前に焼いている。
+          # 入力は git TS + git 管理下の GSC snapshot だけなのでネットワーク不要。
+          # (apps/web/scripts/generate-ranking-prominence.ts)
+          (cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --check)
         continue-on-error: false
 
   type-check:

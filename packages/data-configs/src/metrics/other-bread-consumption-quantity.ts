@@ -59,6 +59,4 @@ export const otherBreadConsumptionQuantity: MetricConfig = {
   "seoTitle": "他のパン消費量ランキング都道府県【2024年】｜1位岡山県（25,028g）",
   "seoDescription": "2024年の他のパン消費量の都道府県別ランキング。1位岡山県（25,028g）、最下位山形県（16,525g）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -70,6 +70,4 @@ export const totalAreaExcludingNorthernTerritoriesAndTakeshima: MetricConfig = {
   "seoTitle": "総面積ランキング都道府県【2024年】｜1位北海道（7,841,921ｈａ）",
   "seoDescription": "2024年の総面積の都道府県別ランキング。1位北海道（7,841,921ｈａ）、最下位香川県（187,686ｈａ）で41.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

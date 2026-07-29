@@ -59,6 +59,4 @@ export const margarineConsumptionQuantity: MetricConfig = {
   "seoTitle": "マーガリン消費量ランキング都道府県【2024年】｜1位兵庫県（1,038g）",
   "seoDescription": "2024年のマーガリン消費量の都道府県別ランキング。1位兵庫県（1,038g）、最下位宮城県（333g）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

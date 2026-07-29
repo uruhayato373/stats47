@@ -59,6 +59,4 @@ export const skirtConsumptionQuantity: MetricConfig = {
   "seoTitle": "スカート消費量ランキング都道府県【2024年】｜1位広島県（0.59枚）",
   "seoDescription": "2024年のスカート消費量の都道府県別ランキング。1位広島県（0.59枚）、最下位秋田県（0.18枚）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

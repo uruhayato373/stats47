@@ -24,7 +24,7 @@ import {
   PortalCategoryGrid,
   PortalUseCaseGrid,
 } from '@/features/home-portal';
-import { FeaturedRankings } from '@/features/ranking/server';
+import { FeaturedRankings } from '@/features/ranking/featured.server';
 
 import { RAIL_RECT } from '@/lib/google-adsense';
 
@@ -41,7 +41,7 @@ export const dynamic = 'force-dynamic';
 /**
  * ホームページ（ポータル型・2026-07-23 再設計）
  *
- * 設計思想（正典: docs/02_実装計画/38_ポータル型ホーム・ヘッダー再設計仕様.md）:
+ * 設計思想（正典: src/features/home-portal/README.md）:
  * - 暗色ヒーローと重複検索を撤去し、白基調の「h1 + 短い説明」から開始する。
  * - desktop は左カテゴリ / 右ランキング・ブログの2ペインで、初期画面の情報量を確保する。
  * - 各セクションは代表項目 + 「もっと見る」に抑え、home へ全件を詰めない。

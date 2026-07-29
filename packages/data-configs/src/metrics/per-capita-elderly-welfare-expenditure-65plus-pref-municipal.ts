@@ -69,6 +69,4 @@ export const perCapitaElderlyWelfareExpenditure65plusPrefMunicipal: MetricConfig
   },
   "groupKey": "elderly-welfare-expenses-prefecture",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

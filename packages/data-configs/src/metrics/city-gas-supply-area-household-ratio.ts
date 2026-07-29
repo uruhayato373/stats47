@@ -35,6 +35,4 @@ export const cityGasSupplyAreaHouseholdRatio: MetricConfig = {
   "seoTitle": "都市ガス供給区域内世帯比率ランキング都道府県【2016年】｜1位大阪府（106.7％）",
   "seoDescription": "2016年の都市ガス供給区域内世帯比率の都道府県別ランキング。1位大阪府（106.7％）、最下位徳島県（23.4％）で4.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -82,6 +82,4 @@ export const cpiChangeRateFood: MetricConfig = {
   },
   "seoTitle": "消費者物価指数対前年変化率（食料）",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

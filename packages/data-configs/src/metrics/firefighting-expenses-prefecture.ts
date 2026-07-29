@@ -53,6 +53,4 @@ export const firefightingExpensesPrefecture: MetricConfig = {
   "seoTitle": "消防費ランキング都道府県【2022年】｜1位東京都（234,801,616）",
   "seoDescription": "2022年の消防費の都道府県別ランキング。1位東京都（234,801,616）、最下位沖縄県（0）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

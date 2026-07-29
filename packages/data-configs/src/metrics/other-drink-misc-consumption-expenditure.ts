@@ -59,6 +59,4 @@ export const otherDrinkMiscConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の飲料のその他消費支出額ランキング都道府県【2024年】｜1位沖縄県（11,808円）",
   "seoDescription": "2024年の他の飲料のその他消費支出額の都道府県別ランキング。1位沖縄県（11,808円）、最下位奈良県（6,360円）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

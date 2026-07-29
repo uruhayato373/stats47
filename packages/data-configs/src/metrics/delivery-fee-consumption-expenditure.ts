@@ -59,6 +59,4 @@ export const deliveryFeeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "運送料消費支出額ランキング都道府県【2024年】｜1位山形県（7,076円）",
   "seoDescription": "2024年の運送料消費支出額の都道府県別ランキング。1位山形県（7,076円）、最下位大阪府（2,192円）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

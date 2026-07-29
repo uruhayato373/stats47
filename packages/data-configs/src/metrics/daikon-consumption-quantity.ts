@@ -59,6 +59,4 @@ export const daikonConsumptionQuantity: MetricConfig = {
   "seoTitle": "だいこん消費量ランキング都道府県【2024年】｜1位宮城県（12,786g）",
   "seoDescription": "2024年のだいこん消費量の都道府県別ランキング。1位宮城県（12,786g）、最下位山口県（6,798g）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

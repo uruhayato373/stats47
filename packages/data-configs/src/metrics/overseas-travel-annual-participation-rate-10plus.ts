@@ -40,6 +40,4 @@ export const overseasTravelAnnualParticipationRate10plus: MetricConfig = {
   "seoTitle": "海外旅行の年間行動者率ランキング都道府県【2021年】｜1位京都府（0.7％）",
   "seoDescription": "2021年の海外旅行の年間行動者率の都道府県別ランキング。1位京都府（0.7％）、最下位高知県（0.1％）で7.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

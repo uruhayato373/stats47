@@ -59,6 +59,4 @@ export const sauceConsumptionQuantity: MetricConfig = {
   "seoTitle": "ソース消費量ランキング都道府県【2024年】｜1位広島県（2,341ml）",
   "seoDescription": "2024年のソース消費量の都道府県別ランキング。1位広島県（2,341ml）、最下位沖縄県（722ml）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const washingMachineConsumptionQuantity: MetricConfig = {
   "seoTitle": "電気洗濯機消費量ランキング都道府県【2024年】｜1位岡山県（0.1台）",
   "seoDescription": "2024年の電気洗濯機消費量の都道府県別ランキング。1位岡山県（0.1台）、最下位栃木県（0.01台）で9.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

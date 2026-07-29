@@ -34,6 +34,4 @@ export const sportsParticipationRateBasketball: MetricConfig = {
   "seoTitle": "バスケットボールの行動者率ランキング都道府県【2021年】｜1位秋田県（5.3％）",
   "seoDescription": "2021年のバスケットボールの行動者率の都道府県別ランキング。1位秋田県（5.3％）、最下位大分県（2.4％）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

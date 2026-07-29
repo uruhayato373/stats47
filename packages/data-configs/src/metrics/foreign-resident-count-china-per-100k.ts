@@ -62,6 +62,4 @@ export const foreignResidentCountChinaPer100k: MetricConfig = {
   "seoTitle": "外国人人口ランキング都道府県【2020年】｜1位東京都（1,393.4人）",
   "seoDescription": "2020年の外国人人口の都道府県別ランキング。1位東京都（1,393.4人）、最下位青森県（83.1人）で16.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

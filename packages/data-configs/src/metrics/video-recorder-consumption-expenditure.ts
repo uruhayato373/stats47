@@ -59,6 +59,4 @@ export const videoRecorderConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ビデオレコーダー・プレイヤー消費支出額ランキング都道府県【2024年】｜1位長野県（2,292円）",
   "seoDescription": "2024年のビデオレコーダー・プレイヤー消費支出額の都道府県別ランキング。1位長野県（2,292円）、最下位宮崎県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const mensSocksConsumptionQuantity: MetricConfig = {
   "seoTitle": "男子用靴下消費量ランキング都道府県【2024年】｜1位愛媛県（5.77足）",
   "seoDescription": "2024年の男子用靴下消費量の都道府県別ランキング。1位愛媛県（5.77足）、最下位石川県（2.55足）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

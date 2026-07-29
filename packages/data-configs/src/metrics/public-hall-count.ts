@@ -52,6 +52,4 @@ export const publicHallCount: MetricConfig = {
   "seoTitle": "公民館数ランキング都道府県【2015年】｜1位長野県（1,520館）",
   "seoDescription": "2015年の公民館数の都道府県別ランキング。1位長野県（1,520館）、最下位沖縄県（80館）で19.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

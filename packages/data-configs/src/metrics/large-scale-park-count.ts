@@ -51,6 +51,4 @@ export const largeScaleParkCount: MetricConfig = {
   "seoTitle": "大規模公園数ランキング都道府県【2007年】｜1位大阪府（20箇所）",
   "seoDescription": "2007年の大規模公園数の都道府県別ランキング。1位大阪府（20箇所）、最下位岡山県（0箇所）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

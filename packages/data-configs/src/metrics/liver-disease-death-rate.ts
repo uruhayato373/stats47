@@ -53,6 +53,4 @@ export const liverDiseaseDeathRate: MetricConfig = {
   "seoTitle": "肝疾患による死亡者数ランキング都道府県【2023年】｜1位沖縄県（28.6人）",
   "seoDescription": "2023年の肝疾患による死亡者数の都道府県別ランキング。1位沖縄県（28.6人）、最下位滋賀県（11.1人）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

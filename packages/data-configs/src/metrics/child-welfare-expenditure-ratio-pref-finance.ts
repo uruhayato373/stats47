@@ -36,6 +36,4 @@ export const childWelfareExpenditureRatioPrefFinance: MetricConfig = {
   "seoTitle": "児童福祉費割合ランキング都道府県【2022年】｜1位神奈川県（5.33％）",
   "seoDescription": "2022年の児童福祉費割合の都道府県別ランキング。1位神奈川県（5.33％）、最下位長野県（1.98％）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -96,6 +96,4 @@ export const commissionFeesPrefecture: MetricConfig = {
   "seoTitle": "手数料ランキング都道府県【2022年】｜1位東京都（20,840,199）",
   "seoDescription": "2022年の手数料の都道府県別ランキング。1位東京都（20,840,199）、最下位鳥取県（823,508）で25.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

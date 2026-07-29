@@ -37,6 +37,4 @@ export const autolockApartmentRate: MetricConfig = {
   "seoTitle": "オートロック付共同住宅率ランキング都道府県【2023年】｜1位福岡県（55.5％）",
   "seoDescription": "2023年のオートロック付共同住宅率の都道府県別ランキング。1位福岡県（55.5％）、最下位鳥取県（14.4％）で3.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

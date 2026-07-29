@@ -85,6 +85,4 @@ export const waterPollutionControlLawFacilityCount: MetricConfig = {
   "seoTitle": "水質汚濁防止法上の特定事業場数ランキング都道府県【2023年】｜1位長野県（12,414件）",
   "seoDescription": "2023年の水質汚濁防止法上の特定事業場数の都道府県別ランキング。1位長野県（12,414件）、最下位沖縄県（1,894件）で6.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

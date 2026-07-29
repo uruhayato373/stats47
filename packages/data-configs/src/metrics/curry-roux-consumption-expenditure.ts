@@ -59,6 +59,4 @@ export const curryRouxConsumptionExpenditure: MetricConfig = {
   "seoTitle": "カレールウ消費支出額ランキング都道府県【2024年】｜1位新潟県（2,183円）",
   "seoDescription": "2024年のカレールウ消費支出額の都道府県別ランキング。1位新潟県（2,183円）、最下位愛知県（1,161円）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

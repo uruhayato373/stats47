@@ -102,6 +102,4 @@ export const deathsCerebrovascularDisease: MetricConfig = {
   "seoTitle": "脳血管疾患による死亡者数ランキング都道府県【2023年】｜1位東京都（8,711人）",
   "seoDescription": "2023年の脳血管疾患による死亡者数の都道府県別ランキング。1位東京都（8,711人）、最下位鳥取県（653人）で13.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

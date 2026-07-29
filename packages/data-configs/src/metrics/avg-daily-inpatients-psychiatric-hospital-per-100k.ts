@@ -51,6 +51,4 @@ export const avgDailyInpatientsPsychiatricHospitalPer100k: MetricConfig = {
   "seoTitle": "精神科病院の1日平均在院患者数ランキング都道府県【2023年】｜1位長崎県（441.9人）",
   "seoDescription": "2023年の精神科病院の1日平均在院患者数の都道府県別ランキング。1位長崎県（441.9人）、最下位奈良県（73.6人）で6.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

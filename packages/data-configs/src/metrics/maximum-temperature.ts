@@ -101,6 +101,4 @@ export const maximumTemperature: MetricConfig = {
   "seoTitle": "最高気温ランキング都道府県【2024年】｜1位熊本県（36.2℃）",
   "seoDescription": "2024年の最高気温の都道府県別ランキング。1位熊本県（36.2℃）、最下位北海道（28.4℃）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -86,6 +86,4 @@ export const employmentInsuranceDailyBasicBenefitAverage: MetricConfig = {
   "seoTitle": "雇用保険（日雇）基本手当平均支給額ランキング都道府県【2023年】｜1位三重県（1,132.5千円）",
   "seoDescription": "2023年の雇用保険（日雇）基本手当平均支給額の都道府県別ランキング。1位三重県（1,132.5千円）、最下位宮崎県（0千円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

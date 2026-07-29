@@ -39,6 +39,4 @@ export const voterTurnoutGovernor: MetricConfig = {
   "seoTitle": "都道府県知事選挙投票率ランキング都道府県【2019年】｜1位島根県（62.04％）",
   "seoDescription": "2019年の都道府県知事選挙投票率の都道府県別ランキング。1位島根県（62.04％）、最下位神奈川県（40.28％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

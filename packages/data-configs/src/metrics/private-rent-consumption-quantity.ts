@@ -59,6 +59,4 @@ export const privateRentConsumptionQuantity: MetricConfig = {
   "seoTitle": "民営家賃消費量ランキング都道府県【2024年】｜1位沖縄県（92.2畳）",
   "seoDescription": "2024年の民営家賃消費量の都道府県別ランキング。1位沖縄県（92.2畳）、最下位山形県（6.79畳）で13.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

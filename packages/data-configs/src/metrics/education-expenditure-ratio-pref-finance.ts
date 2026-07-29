@@ -48,6 +48,4 @@ export const educationExpenditureRatioPrefFinance: MetricConfig = {
   "seoTitle": "教育費割合ランキング都道府県【2022年】｜1位滋賀県（21.95％）",
   "seoDescription": "2022年の教育費割合の都道府県別ランキング。1位滋賀県（21.95％）、最下位東京都（12.23％）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

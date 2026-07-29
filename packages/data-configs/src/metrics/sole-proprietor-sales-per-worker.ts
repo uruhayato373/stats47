@@ -51,6 +51,4 @@ export const soleProprietorSalesPerWorker: MetricConfig = {
   "seoTitle": "個人企業の従業者1人当たり売上高ランキング都道府県【2025年】｜1位東京都（633万円）",
   "seoDescription": "2025年の個人企業の従業者1人当たり売上高の都道府県別ランキング。1位東京都（633万円）、最下位北海道（451万円）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

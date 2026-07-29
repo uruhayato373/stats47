@@ -59,6 +59,4 @@ export const childcareFeeConsumptionExpenditure: MetricConfig = {
   "seoTitle": "保育費用消費支出額ランキング都道府県【2024年】｜1位埼玉県（25,904円）",
   "seoDescription": "2024年の保育費用消費支出額の都道府県別ランキング。1位埼玉県（25,904円）、最下位宮崎県（3,718円）で7.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const childrensSleepwearConsumptionExpenditure: MetricConfig = {
   "seoTitle": "子供用寝巻き消費支出額ランキング都道府県【2024年】｜1位鹿児島県（998円）",
   "seoDescription": "2024年の子供用寝巻き消費支出額の都道府県別ランキング。1位鹿児島県（998円）、最下位兵庫県（110円）で9.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

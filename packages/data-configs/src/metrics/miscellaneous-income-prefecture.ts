@@ -65,6 +65,4 @@ export const miscellaneousIncomePrefecture: MetricConfig = {
   "seoTitle": "諸収入ランキング都道府県【2022年】｜1位大阪府（772,975,800）",
   "seoDescription": "2022年の諸収入の都道府県別ランキング。1位大阪府（772,975,800）、最下位高知県（7,646,445）で101.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

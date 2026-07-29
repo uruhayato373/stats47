@@ -98,6 +98,4 @@ export const generalHospitalCountPer100km2: MetricConfig = {
   "seoTitle": "一般病院数ランキング都道府県【2023年】｜1位東京都（41.2施設）",
   "seoDescription": "2023年の一般病院数の都道府県別ランキング。1位東京都（41.2施設）、最下位秋田県（1.5施設）で27.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

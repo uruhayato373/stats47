@@ -51,6 +51,4 @@ export const certifiedChildcareCenterCountPer100k05: MetricConfig = {
   "seoTitle": "認定こども園数ランキング都道府県【2024年】｜1位青森県（687.1園）",
   "seoDescription": "2024年の認定こども園数の都道府県別ランキング。1位青森県（687.1園）、最下位東京都（31.7園）で21.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

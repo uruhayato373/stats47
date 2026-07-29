@@ -46,6 +46,4 @@ export const employedPeopleRatioSecondary: MetricConfig = {
   "seoTitle": "第2次産業就業者比率ランキング都道府県【2020年】｜1位富山県（32.5％）",
   "seoDescription": "2020年の第2次産業就業者比率の都道府県別ランキング。1位富山県（32.5％）、最下位沖縄県（13.7％）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const beanSproutsConsumptionQuantity: MetricConfig = {
   "seoTitle": "もやし消費量ランキング｜なぜ山形が1位?沖縄の3倍【2024】",
   "seoDescription": "安さの代名詞もやしの消費量は都道府県で3倍違います──1位山形県10,288g、最下位沖縄県3,399g。東北で多い理由と47都道府県の食卓事情を2024年データで比較します。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

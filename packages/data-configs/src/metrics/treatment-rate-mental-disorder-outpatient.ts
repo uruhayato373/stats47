@@ -45,6 +45,4 @@ export const treatmentRateMentalDisorderOutpatient: MetricConfig = {
   "seoTitle": "精神及び行動の障害の受療率（外来）ランキング都道府県【2023年】｜1位沖縄県（344人（人口10万対））",
   "seoDescription": "2023年の精神及び行動の障害の受療率（外来）の都道府県別ランキング。1位沖縄県（344人（人口10万対））、最下位千葉県（118人（人口10万対））で2.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -53,6 +53,4 @@ export const householdsOnPublicAssistancePer1000: MetricConfig = {
   "seoTitle": "生活保護被保護実世帯数ランキング都道府県【2023年】｜1位大阪府（53.13世帯）",
   "seoDescription": "2023年の生活保護被保護実世帯数の都道府県別ランキング。1位大阪府（53.13世帯）、最下位富山県（9.19世帯）で5.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

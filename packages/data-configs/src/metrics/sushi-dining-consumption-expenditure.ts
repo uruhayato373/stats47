@@ -59,6 +59,4 @@ export const sushiDiningConsumptionExpenditure: MetricConfig = {
   "seoTitle": "外食すし消費額1位がなぜ富山？東京でも大阪でもない北陸の2.5倍格差（2024）",
   "seoDescription": "外食すし消費額の1位は富山県23,185円で、東京・神奈川より高い。北陸が上位を占め、最下位沖縄9,270円との2.5倍差の背景にある食文化とは？47都道府県で可視化（2024年）。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const trainFareConsumptionExpenditure: MetricConfig = {
   "seoTitle": "鉄道運賃消費支出額ランキング都道府県【2024年】｜1位埼玉県（49,368円）",
   "seoDescription": "2024年の鉄道運賃消費支出額の都道府県別ランキング。1位埼玉県（49,368円）、最下位愛媛県（4,157円）で11.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

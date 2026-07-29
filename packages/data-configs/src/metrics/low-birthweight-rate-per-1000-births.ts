@@ -58,6 +58,4 @@ export const lowBirthweightRatePer1000Births: MetricConfig = {
   "seoTitle": "2,500g未満の出生率ランキング都道府県【2023年】｜1位沖縄県（121‐）",
   "seoDescription": "2023年の2,500g未満の出生率の都道府県別ランキング。1位沖縄県（121‐）、最下位徳島県（80.2‐）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -70,6 +70,4 @@ export const publicWorksExpenditureRatioPrefFinance: MetricConfig = {
   "seoTitle": "土木費割合ランキング都道府県【2022年】｜1位福島県（18.56％）",
   "seoDescription": "2022年の土木費割合の都道府県別ランキング。1位福島県（18.56％）、最下位神奈川県（4.48％）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

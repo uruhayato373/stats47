@@ -59,6 +59,4 @@ export const greenBeansConsumptionQuantity: MetricConfig = {
   "seoTitle": "さやまめ消費量ランキング都道府県【2024年】｜1位新潟県（3,881g）",
   "seoDescription": "2024年のさやまめ消費量の都道府県別ランキング。1位新潟県（3,881g）、最下位佐賀県（609g）で6.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const jamConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ジャム消費支出額ランキング都道府県【2024年】｜1位神奈川県（2,211円）",
   "seoDescription": "2024年のジャム消費支出額の都道府県別ランキング。1位神奈川県（2,211円）、最下位高知県（813円）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const otherPersonalItemsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の身の回り用品消費支出額ランキング都道府県【2024年】｜1位神奈川県（9,604円）",
   "seoDescription": "2024年の他の身の回り用品消費支出額の都道府県別ランキング。1位神奈川県（9,604円）、最下位香川県（3,181円）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

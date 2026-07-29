@@ -71,6 +71,4 @@ export const farmHouseholdExpenditurePerMonth: MetricConfig = {
   "seoTitle": "農家世帯の家計費ランキング都道府県【2003年】｜1位滋賀県（560.1千円）",
   "seoDescription": "2003年の農家世帯の家計費の都道府県別ランキング。1位滋賀県（560.1千円）、最下位沖縄県（241.3千円）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

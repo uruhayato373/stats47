@@ -59,6 +59,4 @@ export const whiskyConsumptionQuantity: MetricConfig = {
   "seoTitle": "ウイスキー消費量ランキング都道府県【2024年】｜1位千葉県（3,427ml）",
   "seoDescription": "2024年のウイスキー消費量の都道府県別ランキング。1位千葉県（3,427ml）、最下位沖縄県（518ml）で6.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

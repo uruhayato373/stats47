@@ -69,6 +69,4 @@ export const nurseryCountPer100k05: MetricConfig = {
   "seoTitle": "保育所等数ランキング都道府県【2020年】｜1位青森県（1,042.8所）",
   "seoDescription": "2020年の保育所等数の都道府県別ランキング。1位青森県（1,042.8所）、最下位奈良県（404.8所）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

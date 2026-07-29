@@ -59,6 +59,4 @@ export const gasCookingApplianceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "炊事用ガス器具消費支出額ランキング都道府県【2024年】｜1位奈良県（1,514円）",
   "seoDescription": "2024年の炊事用ガス器具消費支出額の都道府県別ランキング。1位奈良県（1,514円）、最下位熊本県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

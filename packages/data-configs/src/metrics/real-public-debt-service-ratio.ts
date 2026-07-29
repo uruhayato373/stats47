@@ -52,6 +52,4 @@ export const realPublicDebtServiceRatio: MetricConfig = {
   "seoTitle": "実質公債費比率ランキング都道府県【2022年】｜1位北海道（18.9）",
   "seoDescription": "2022年の実質公債費比率の都道府県別ランキング。1位北海道（18.9）、最下位東京都（1.2）で15.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

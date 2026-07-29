@@ -34,6 +34,4 @@ export const hobbyParticipationRateWriting: MetricConfig = {
   "seoTitle": "詩・和歌・俳句・小説などの創作の行動者率ランキング都道府県【2021年】｜1位東京都（3.5％）",
   "seoDescription": "2021年の詩・和歌・俳句・小説などの創作の行動者率の都道府県別ランキング。1位東京都（3.5％）、最下位秋田県（1.2％）で2.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

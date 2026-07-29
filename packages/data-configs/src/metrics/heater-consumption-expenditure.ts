@@ -59,6 +59,4 @@ export const heaterConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ストーブ・温風ヒーター消費支出額ランキング都道府県【2024年】｜1位秋田県（8,782円）",
   "seoDescription": "2024年のストーブ・温風ヒーター消費支出額の都道府県別ランキング。1位秋田県（8,782円）、最下位長崎県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

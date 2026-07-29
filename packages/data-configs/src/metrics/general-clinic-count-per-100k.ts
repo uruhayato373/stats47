@@ -91,6 +91,4 @@ export const generalClinicCountPer100k: MetricConfig = {
   "seoTitle": "一般診療所数ランキング都道府県【2023年】｜1位和歌山県（113施設）",
   "seoDescription": "2023年の一般診療所数の都道府県別ランキング。1位和歌山県（113施設）、最下位埼玉県（61.8施設）で1.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

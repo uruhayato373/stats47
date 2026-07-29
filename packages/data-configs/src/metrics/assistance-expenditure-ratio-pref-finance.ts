@@ -36,6 +36,4 @@ export const assistanceExpenditureRatioPrefFinance: MetricConfig = {
   "seoTitle": "扶助費割合ランキング都道府県【2022年】｜1位愛媛県（4.33％）",
   "seoDescription": "2022年の扶助費割合の都道府県別ランキング。1位愛媛県（4.33％）、最下位新潟県（0.79％）で5.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

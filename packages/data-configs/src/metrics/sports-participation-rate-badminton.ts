@@ -34,6 +34,4 @@ export const sportsParticipationRateBadminton: MetricConfig = {
   "seoTitle": "バドミントンの行動者率ランキング都道府県【2021年】｜1位宮城県（7.4％）",
   "seoDescription": "2021年のバドミントンの行動者率の都道府県別ランキング。1位宮城県（7.4％）、最下位長崎県（3.8％）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -34,6 +34,4 @@ export const hobbyParticipationRateArtAppreciation: MetricConfig = {
   "seoTitle": "美術鑑賞の行動者率ランキング都道府県【2021年】｜1位東京都（17.8％）",
   "seoDescription": "2021年の美術鑑賞の行動者率の都道府県別ランキング。1位東京都（17.8％）、最下位沖縄県（6.4％）で2.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

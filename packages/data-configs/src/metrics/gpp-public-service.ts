@@ -41,6 +41,4 @@ export const gppPublicService: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

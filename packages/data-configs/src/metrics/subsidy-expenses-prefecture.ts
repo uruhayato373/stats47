@@ -65,6 +65,4 @@ export const subsidyExpensesPrefecture: MetricConfig = {
   "seoTitle": "補助費等ランキング都道府県【2022年】｜1位東京都（3,837,554,416）",
   "seoDescription": "2022年の補助費等の都道府県別ランキング。1位東京都（3,837,554,416）、最下位鳥取県（105,505,423）で36.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

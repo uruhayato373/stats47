@@ -46,6 +46,4 @@ export const totalPopulation: MetricConfig = {
   "seoTitle": "総人口ランキング都道府県【2024年】｜1位東京都（14,178,000人）",
   "seoDescription": "2024年の総人口の都道府県別ランキング。1位東京都（14,178,000人）、最下位鳥取県（531,000人）で26.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": true,
-  "featuredOrder": 2,
 };

@@ -46,6 +46,4 @@ export const employedPeopleRatioPrimary: MetricConfig = {
   "seoTitle": "第1次産業就業者比率ランキング都道府県【2020年】｜1位青森県（11.1％）",
   "seoDescription": "2020年の第1次産業就業者比率の都道府県別ランキング。1位青森県（11.1％）、最下位東京都（0.4％）で27.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

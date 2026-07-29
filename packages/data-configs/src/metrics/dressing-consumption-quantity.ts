@@ -59,6 +59,4 @@ export const dressingConsumptionQuantity: MetricConfig = {
   "seoTitle": "ドレッシング消費量ランキング都道府県【2024年】｜1位岐阜県（2,781ml）",
   "seoDescription": "2024年のドレッシング消費量の都道府県別ランキング。1位岐阜県（2,781ml）、最下位秋田県（1,481ml）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

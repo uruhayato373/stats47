@@ -59,6 +59,4 @@ export const womensStockingsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "婦人用ストッキング消費支出額ランキング都道府県【2024年】｜1位石川県（502円）",
   "seoDescription": "2024年の婦人用ストッキング消費支出額の都道府県別ランキング。1位石川県（502円）、最下位群馬県（129円）で3.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

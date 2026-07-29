@@ -63,6 +63,4 @@ export const policeDepartmentStaff: MetricConfig = {
   "seoTitle": "警察部門職員数ランキング都道府県【2024年】｜1位東京都（46,929人）",
   "seoDescription": "2024年の警察部門職員数の都道府県別ランキング。1位東京都（46,929人）、最下位鳥取県（1,438人）で32.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

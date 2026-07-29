@@ -51,6 +51,4 @@ export const avgDailyInpatientsGeneralHospitalPer100k: MetricConfig = {
   "seoTitle": "一般病院の1日平均在院患者数ランキング都道府県【2023年】｜1位高知県（1,598.9人）",
   "seoDescription": "2023年の一般病院の1日平均在院患者数の都道府県別ランキング。1位高知県（1,598.9人）、最下位神奈川県（521.9人）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const fabricSoftenerConsumptionExpenditure: MetricConfig = {
   "seoTitle": "柔軟仕上剤消費支出額ランキング都道府県【2024年】｜1位栃木県（4,194円）",
   "seoDescription": "2024年の柔軟仕上剤消費支出額の都道府県別ランキング。1位栃木県（4,194円）、最下位奈良県（2,257円）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

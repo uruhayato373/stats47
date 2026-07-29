@@ -59,6 +59,4 @@ export const otherCommunicationDeviceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の通信機器消費支出額ランキング都道府県【2024年】｜1位京都府（3,372円）",
   "seoDescription": "2024年の他の通信機器消費支出額の都道府県別ランキング。1位京都府（3,372円）、最下位愛媛県（316円）で10.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

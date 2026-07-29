@@ -73,6 +73,4 @@ export const privateAutoInsurancePenetrationRateObject: MetricConfig = {
   "seoTitle": "任意自動車保険普及率ランキング都道府県【2023年】｜1位大阪府（83％）",
   "seoDescription": "2023年の任意自動車保険普及率の都道府県別ランキング。1位大阪府（83％）、最下位沖縄県（55.1％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -59,6 +59,4 @@ export const freshwaterClamConsumptionQuantity: MetricConfig = {
   "seoTitle": "しじみ消費量ランキング都道府県【2024年】｜1位島根県（1,634g）",
   "seoDescription": "2024年のしじみ消費量の都道府県別ランキング。1位島根県（1,634g）、最下位三重県（45g）で36.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

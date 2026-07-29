@@ -59,6 +59,4 @@ export const blankMediaConsumptionExpenditure: MetricConfig = {
   "seoTitle": "音楽・映像用未使用メディア消費支出額ランキング都道府県【2024年】｜1位千葉県（1,136円）",
   "seoDescription": "2024年の音楽・映像用未使用メディア消費支出額の都道府県別ランキング。1位千葉県（1,136円）、最下位沖縄県（167円）で6.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

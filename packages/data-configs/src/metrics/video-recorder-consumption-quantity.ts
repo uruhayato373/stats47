@@ -59,6 +59,4 @@ export const videoRecorderConsumptionQuantity: MetricConfig = {
   "seoTitle": "ビデオレコーダー・プレイヤー消費量ランキング都道府県【2024年】｜1位静岡県（0.08台）",
   "seoDescription": "2024年のビデオレコーダー・プレイヤー消費量の都道府県別ランキング。1位静岡県（0.08台）、最下位宮崎県（0台）で地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

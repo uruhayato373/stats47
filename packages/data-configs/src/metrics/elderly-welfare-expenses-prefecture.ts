@@ -65,6 +65,4 @@ export const elderlyWelfareExpensesPrefecture: MetricConfig = {
   },
   "groupKey": "elderly-welfare-expenses-prefecture",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

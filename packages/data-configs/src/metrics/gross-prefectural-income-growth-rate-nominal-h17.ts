@@ -39,6 +39,4 @@ export const grossPrefecturalIncomeGrowthRateNominalH17: MetricConfig = {
   "seoTitle": "県民総所得対前年増加率ランキング都道府県【2014年】｜1位京都府（3.5％）",
   "seoDescription": "2014年の県民総所得対前年増加率の都道府県別ランキング。1位京都府（3.5％）、最下位栃木県（-1％）で-3.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

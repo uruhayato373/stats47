@@ -54,6 +54,4 @@ export const charcoalProduction: MetricConfig = {
   "seoTitle": "木炭生産量ランキング都道府県【2007年】｜1位岩手県（4,519トン）",
   "seoDescription": "2007年の木炭生産量の都道府県別ランキング。1位岩手県（4,519トン）、最下位香川県（2トン）で2259.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -50,6 +50,4 @@ export const roadsideStationCount: MetricConfig = {
   "seoTitle": "道の駅数ランキング｜北海道は東京の55倍【2018】",
   "seoDescription": "道の駅の数は都道府県で55倍もの差があります──1位北海道110か所、最下位東京都2か所。車社会と観光の関係、47都道府県の分布を2018年データで比較します。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

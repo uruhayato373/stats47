@@ -52,6 +52,4 @@ export const floodDamageTotal: MetricConfig = {
   "seoTitle": "水害被害額合計ランキング都道府県【2014年】｜1位広島県（44,441百万円）",
   "seoDescription": "2014年の水害被害額合計の都道府県別ランキング。1位広島県（44,441百万円）、最下位鳥取県（353百万円）で125.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

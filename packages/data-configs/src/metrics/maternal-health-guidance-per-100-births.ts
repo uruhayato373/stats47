@@ -74,6 +74,4 @@ export const maternalHealthGuidancePer100Births: MetricConfig = {
   "seoTitle": "妊産婦保健指導数ランキング都道府県【2023年】｜1位広島県（278.6人）",
   "seoDescription": "2023年の妊産婦保健指導数の都道府県別ランキング。1位広島県（278.6人）、最下位徳島県（90.1人）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

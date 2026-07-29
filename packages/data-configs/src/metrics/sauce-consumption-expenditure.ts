@@ -59,6 +59,4 @@ export const sauceConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ソース消費支出額ランキング都道府県【2024年】｜1位広島県（1,339円）",
   "seoDescription": "2024年のソース消費支出額の都道府県別ランキング。1位広島県（1,339円）、最下位沖縄県（573円）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

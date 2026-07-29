@@ -69,6 +69,4 @@ export const residentialAndMixedAreaRatio: MetricConfig = {
   "seoTitle": "住居専用・住居地域面積比率ランキング都道府県【2023年】｜1位奈良県（79.8％）",
   "seoDescription": "2023年の住居専用・住居地域面積比率の都道府県別ランキング。1位奈良県（79.8％）、最下位福井県（54.2％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

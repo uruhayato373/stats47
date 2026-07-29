@@ -59,6 +59,4 @@ export const mensJacketConsumptionQuantity: MetricConfig = {
   "seoTitle": "男子用上着消費量ランキング都道府県【2024年】｜1位愛知県（0.25着）",
   "seoDescription": "2024年の男子用上着消費量の都道府県別ランキング。1位愛知県（0.25着）、最下位大阪府（0.03着）で7.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

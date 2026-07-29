@@ -58,6 +58,4 @@ export const trafficAccidentPer100k: MetricConfig = {
   "seoTitle": "交通事故発生件数（人口10万人当たり）ランキング市区町村【2005年】｜1位東京都 千代田区（4,550.2件）",
   "seoDescription": "2005年の交通事故発生件数（人口10万人当たり）の市区町村別ランキング。1位東京都 千代田区（4,550.2件）、最下位沖縄県 北大東村（0件）で地図やグラフで市区町村を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

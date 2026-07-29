@@ -63,6 +63,4 @@ export const consumptionExpenditureMultiPersonHouseholdsPerMonth: MetricConfig =
   "seoTitle": "消費支出ランキング都道府県【2024年】｜1位埼玉県（357.9千円）",
   "seoDescription": "2024年の消費支出の都道府県別ランキング。1位埼玉県（357.9千円）、最下位沖縄県（256.3千円）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": true,
-  "featuredOrder": 8,
 };

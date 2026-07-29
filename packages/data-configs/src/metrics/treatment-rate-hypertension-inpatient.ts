@@ -45,6 +45,4 @@ export const treatmentRateHypertensionInpatient: MetricConfig = {
   "seoTitle": "高血圧性疾患の受療率（入院）ランキング都道府県【2023年】｜1位徳島県（18人（人口10万対））",
   "seoDescription": "2023年の高血圧性疾患の受療率（入院）の都道府県別ランキング。1位徳島県（18人（人口10万対））、最下位兵庫県（1人（人口10万対））で18.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

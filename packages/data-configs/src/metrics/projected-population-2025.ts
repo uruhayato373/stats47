@@ -36,6 +36,4 @@ export const projectedPopulation2025: MetricConfig = {
   },
   "seoTitle": "将来推計人口（2025年）",
   "isActive": false,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

@@ -64,6 +64,4 @@ export const juvenileTheftOffenderArrestsPer10001419: MetricConfig = {
   "seoTitle": "少年窃盗犯検挙人員ランキング都道府県【2023年】｜1位沖縄県（2.82人）",
   "seoDescription": "2023年の少年窃盗犯検挙人員の都道府県別ランキング。1位沖縄県（2.82人）、最下位青森県（0.68人）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

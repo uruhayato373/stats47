@@ -59,6 +59,4 @@ export const coffeeShopConsumptionExpenditure: MetricConfig = {
   "seoTitle": "喫茶代消費支出額ランキング都道府県【2024年】｜1位東京都（15,566円）",
   "seoDescription": "2024年の喫茶代消費支出額の都道府県別ランキング。1位東京都（15,566円）、最下位青森県（4,432円）で3.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

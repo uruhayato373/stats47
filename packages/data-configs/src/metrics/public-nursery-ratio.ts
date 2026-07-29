@@ -71,6 +71,4 @@ export const publicNurseryRatio: MetricConfig = {
   "seoTitle": "公営保育所等割合ランキング都道府県【2020年】｜1位長野県（63.6％）",
   "seoDescription": "2020年の公営保育所等割合の都道府県別ランキング。1位長野県（63.6％）、最下位青森県（0.4％）で159.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

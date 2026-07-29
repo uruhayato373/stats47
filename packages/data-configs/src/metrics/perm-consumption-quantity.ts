@@ -59,6 +59,4 @@ export const permConsumptionQuantity: MetricConfig = {
   "seoTitle": "パーマネント代消費量ランキング都道府県【2024年】｜1位青森県（0.64回）",
   "seoDescription": "2024年のパーマネント代消費量の都道府県別ランキング。1位青森県（0.64回）、最下位山梨県（0.09回）で7.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

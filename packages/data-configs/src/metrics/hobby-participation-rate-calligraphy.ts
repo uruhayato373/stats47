@@ -34,6 +34,4 @@ export const hobbyParticipationRateCalligraphy: MetricConfig = {
   "seoTitle": "書道の行動者率ランキング都道府県【2021年】｜1位佐賀県（4.5％）",
   "seoDescription": "2021年の書道の行動者率の都道府県別ランキング。1位佐賀県（4.5％）、最下位青森県（2.2％）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

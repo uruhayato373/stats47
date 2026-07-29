@@ -34,6 +34,4 @@ export const hobbyParticipationRateVideoGames: MetricConfig = {
   "seoTitle": "ゲームの行動者率ランキング都道府県【2021年】｜1位愛知県（48.4％）",
   "seoDescription": "2021年のゲームの行動者率の都道府県別ランキング。1位愛知県（48.4％）、最下位秋田県（33.7％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

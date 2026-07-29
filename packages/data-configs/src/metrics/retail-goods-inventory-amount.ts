@@ -40,6 +40,4 @@ export const retailGoodsInventoryAmount: MetricConfig = {
     ]
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

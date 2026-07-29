@@ -59,6 +59,4 @@ export const otherGrainsConsumptionExpenditure: MetricConfig = {
   "seoTitle": "他の穀類のその他消費支出額ランキング都道府県【2024年】｜1位愛知県（4,902円）",
   "seoDescription": "2024年の他の穀類のその他消費支出額の都道府県別ランキング。1位愛知県（4,902円）、最下位青森県（2,394円）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

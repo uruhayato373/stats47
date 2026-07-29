@@ -59,6 +59,4 @@ export const gasolineConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ガソリン消費支出額ランキング都道府県【2024年】｜1位鳥取県（113,199円）",
   "seoDescription": "2024年のガソリン消費支出額の都道府県別ランキング。1位鳥取県（113,199円）、最下位東京都（21,697円）で5.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

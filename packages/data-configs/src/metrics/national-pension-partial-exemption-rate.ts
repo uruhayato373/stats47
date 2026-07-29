@@ -32,6 +32,4 @@ export const nationalPensionPartialExemptionRate: MetricConfig = {
     "normalizationOptions": []
   },
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0
 };

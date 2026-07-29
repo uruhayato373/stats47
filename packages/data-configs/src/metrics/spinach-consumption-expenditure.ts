@@ -59,6 +59,4 @@ export const spinachConsumptionExpenditure: MetricConfig = {
   "seoTitle": "ほうれんそう消費支出額ランキング都道府県【2024年】｜1位秋田県（3,329円）",
   "seoDescription": "2024年のほうれんそう消費支出額の都道府県別ランキング。1位秋田県（3,329円）、最下位大分県（1,137円）で2.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };

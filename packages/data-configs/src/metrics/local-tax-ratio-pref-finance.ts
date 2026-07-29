@@ -71,6 +71,4 @@ export const localTaxRatioPrefFinance: MetricConfig = {
   "seoTitle": "地方税割合ランキング都道府県【2022年】｜1位東京都（63.42％）",
   "seoDescription": "2022年の地方税割合の都道府県別ランキング。1位東京都（63.42％）、最下位島根県（15.46％）で4.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
-  "isFeatured": false,
-  "featuredOrder": 0,
 };
