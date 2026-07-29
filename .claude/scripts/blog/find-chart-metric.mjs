@@ -84,8 +84,26 @@ async function pool(items, fn) {
   return out;
 }
 
-/** 日本語短縮単位を実値倍率に。 */
-const SCALE = { 万: 1e4, 千: 1e3, 億: 1e8, 兆: 1e12 };
+/**
+ * 日本語の桁接頭辞 → 実値倍率。**長いものから順に見る**。
+ * 先頭 1 文字だけで判定すると `百万円` (レジストリに 85 指標) を等倍と誤読する。
+ */
+const SCALE_PREFIXES = [
+  ["兆", 1e12],
+  ["億", 1e8],
+  ["百万", 1e6],
+  ["十万", 1e5],
+  ["万", 1e4],
+  ["千", 1e3],
+];
+/** 文字列先頭の桁接頭辞を倍率にする (無ければ 1)。 */
+function scaleOf(s) {
+  const t = String(s ?? "").trim();
+  for (const [p, mul] of SCALE_PREFIXES) if (t.startsWith(p)) return mul;
+  return 1;
+}
+/** 数値直後に付く桁接頭辞 (SVG 表示の `58.0兆円` 等) の倍率。 */
+const SCALE = { 兆: 1e12, 億: 1e8, 万: 1e4, 千: 1e3 };
 
 /** 単位の族。SSOT の unit と SVG の表示単位が違っても同じ量なら比較できるようにする。 */
 function unitFamily(u) {
@@ -100,26 +118,87 @@ function unitFamily(u) {
   return "other";
 }
 
-/** SVG の <title>県：値単位</title> を { 県名 → 実値 } と単位に分解する。 */
+/**
+ * `1,234.5兆円` のような表示文字列を実値・単位・**表示の刻み**に分解する。
+ *
+ * `step` は「表示の最小桁が表す実値の幅」。`0.7兆円` なら 0.1兆 = 1e11、`58.0兆円` も 1e11。
+ * 照合の許容をこの刻みから決めるために要る。相対 2% 固定にすると、下位県の粗い丸め
+ * (有効 1 桁) が必ず外れる (2026-07-29 実測: manufacturing-ranking が 16/20 で止まった)。
+ */
+function parseDisplayNumber(text) {
+  const m = String(text).trim().match(/^(-?[\d,]+(?:\.\d+)?)\s*(兆|億|万|千)?\s*(.*)$/);
+  if (!m) return null;
+  const digits = m[1].replace(/,/g, "");
+  const n = parseFloat(digits);
+  if (!Number.isFinite(n)) return null;
+  const decimals = digits.includes(".") ? digits.split(".")[1].length : 0;
+  const scale = SCALE[m[2]] ?? 1;
+  return { value: n * scale, unit: (m[2] ?? "") + (m[3] ?? "").trim(), step: Math.pow(10, -decimals) * scale };
+}
+
+/**
+ * SVG から { 県名 → 実値 } と代表単位を取り出す。2 形式に対応する。
+ *
+ * A) コロプレス: `<title>県名：値単位</title>` が 47 件並ぶ
+ * B) ランキング棒: `<text>` が 順位 / 県名 / 値 の順に並ぶ (上位N・下位N なので 10〜20 件)
+ *
+ * B が要る理由: ssot-restore の 22 枚は ranking で、A の形式を持たないため
+ * 初版では値が 1 件も取れず候補照合に入れなかった (2026-07-29 実測)。
+ * 20 件でも指紋としては十分機能する (照合は 10 件以上を要求)。
+ */
 function extractSvgValues(svg) {
+  const s = String(svg);
+  const title = s.match(/<title>([^：<]*)<\/title>/)?.[1] ?? "";
+
+  // --- A) コロプレスの <title> 形式 ---
   const values = new Map();
   const units = new Map();
-  for (const m of String(svg).matchAll(/<title>([^：<]+)：([\d,.\-]+)(万|千|億|兆)?([^<]*)<\/title>/g)) {
+  const steps = new Map();
+  for (const m of s.matchAll(/<title>([^：<]+)：([\d,.\-]+)(万|千|億|兆)?([^<]*)<\/title>/g)) {
     const n = parseFloat(m[2].replace(/,/g, ""));
     if (!Number.isFinite(n)) continue;
-    values.set(m[1].trim(), n * (SCALE[m[3]] ?? 1));
+    const dec = m[2].includes(".") ? m[2].split(".")[1].length : 0;
+    const sc = SCALE[m[3]] ?? 1;
+    values.set(m[1].trim(), n * sc);
+    steps.set(m[1].trim(), Math.pow(10, -dec) * sc);
     const u = (m[3] ?? "") + (m[4] ?? "").trim();
     units.set(u, (units.get(u) ?? 0) + 1);
   }
-  const unit = [...units.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "";
-  const title = String(svg).match(/<title>([^：<]*)<\/title>/)?.[1] ?? "";
-  return { values, unit, title };
+  if (values.size >= 10) {
+    return { values, steps, unit: [...units.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "", title, form: "title" };
+  }
+
+  // --- B) ランキング棒: text/tspan を文書順に並べ「県名 → 直後の数値」を拾う ---
+  const texts = [...s.matchAll(/<(?:text|tspan)\b[^>]*>([^<]+)</g)].map((m) => m[1].trim()).filter(Boolean);
+  const v2 = new Map();
+  const u2 = new Map();
+  const s2 = new Map();
+  for (let i = 0; i < texts.length - 1; i++) {
+    const name = texts[i];
+    if (!PREF_NAMES.has(name)) continue;
+    // 県名の直後、または 1 つ飛ばした位置に値が来る形の両方を許す
+    for (const j of [i + 1, i + 2]) {
+      if (j >= texts.length) break;
+      const p = parseDisplayNumber(texts[j]);
+      if (!p) continue;
+      const key = name === "北海道" ? name : name.replace(/[都府県]$/, "");
+      if (!v2.has(key)) {
+        v2.set(key, p.value);
+        s2.set(key, p.step);
+        u2.set(p.unit, (u2.get(p.unit) ?? 0) + 1);
+      }
+      break;
+    }
+  }
+  if (v2.size > values.size) {
+    return { values: v2, steps: s2, unit: [...u2.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "", title, form: "ranking-text" };
+  }
+  return { values, steps, unit: [...units.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "", title, form: "title" };
 }
 
-/** SSOT の値を実値へ (unit が 千円/万円 等なら倍率を掛ける)。 */
+/** SSOT の値を実値へ (unit が 千円/百万円 等なら倍率を掛ける)。 */
 function ssotToReal(value, unit) {
-  const head = String(unit ?? "").trim()[0];
-  return value * (SCALE[head] ?? 1);
+  return value * scaleOf(unit);
 }
 
 /** タイトルの語の重なり (2文字以上の部分列の共有数)。候補の並べ替えに使う。 */
@@ -174,9 +253,11 @@ const code2short = new Map(
     p.prefName === "北海道" ? p.prefName : p.prefName.replace(/[都府県]$/, ""),
   ]),
 );
+/** 県名の許容集合 (正式・短縮の両方)。ranking 棒の text 走査で「県名か」を判定する。 */
+const PREF_NAMES = new Set(PREF.flatMap((p) => [p.prefName, p.prefName.replace(/[都道府県]$/, "")]));
 
 /** 1 候補 × 全年で一致率の最大を返す。 */
-function matchRate(payload, disp) {
+function matchRate(payload, disp, steps) {
   if (!payload?.partitions) return null;
   let best = null;
   for (const p of payload.partitions) {
@@ -188,7 +269,10 @@ function matchRate(payload, disp) {
       tot++;
       const a = ssotToReal(row.value, row.unit);
       const b = disp.get(nm);
-      if (Math.abs(a - b) / Math.max(Math.abs(b), 1e-9) < 0.02) hit++;
+      // 許容は「相対 2%」と「表示刻みの半分」の大きい方。粗く丸められた表示 (0.7兆円 等) を
+      // 相対誤差だけで判定すると必ず外れる。
+      const tol = Math.max(Math.abs(b) * 0.02, ((steps?.get(nm) ?? 0) / 2) * 1.001);
+      if (Math.abs(a - b) <= tol) hit++;
     }
     if (tot >= 10) {
       const rate = hit / tot;
@@ -205,7 +289,7 @@ for (const t of targets) {
     results.push({ ...t, status: "svg-missing" });
     continue;
   }
-  const { values: disp, unit, title } = extractSvgValues(svg);
+  const { values: disp, steps, unit, title } = extractSvgValues(svg);
   if (disp.size < 10) {
     results.push({ ...t, status: "no-values", detail: `SVG から取れた値 ${disp.size} 件` });
     continue;
@@ -219,7 +303,7 @@ for (const t of targets) {
     .slice(0, MAX_CANDIDATES);
 
   let found = null;
-  const checked = await pool(ranked, async (c) => ({ c, m: matchRate(await fetchValues(c.key), disp) }));
+  const checked = await pool(ranked, async (c) => ({ c, m: matchRate(await fetchValues(c.key), disp, steps) }));
   for (const { c, m } of checked) {
     if (m && m.rate >= MIN_RATE && (!found || m.rate > found.rate)) {
       found = { key: c.key, title: c.title, unit: c.unit, ...m };
