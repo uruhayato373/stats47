@@ -31,7 +31,13 @@ jobs:
     if: >-
       github.event_name == 'workflow_dispatch' ||
       github.event.workflow_run.conclusion == 'success'
-    timeout-minutes: 5
+    # 実測 (2026-07-29 run 30417240556): checkout〜Playwright 完了で 3分20秒、
+    # warm-cache が 29 URL × 約5.1秒 (DELAY=2 + リクエスト) = 約2分30秒 → 合計 約5分50秒。
+    # 旧 5 分では恒常的に約 1 分超過し、**テストは全て通っているのに job が
+    # timeout で cancelled** になっていた (2026-07-28 / 07-29 と 2 回連続)。
+    # 変動 (npm ci のキャッシュミス・Playwright ブラウザ取得) を見込んで倍の余裕を取る。
+    # ハング検知の役目は残すため、無制限にはしない。
+    timeout-minutes: 12
 
     steps:
       - name: Checkout
