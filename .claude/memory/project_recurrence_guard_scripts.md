@@ -21,6 +21,44 @@ originSessionId: dfec608a-a637-4fdf-b949-56d68f37fcb8
 | `check-published-drafts.cjs` | docs/21_ブログ記事原稿/<slug> が存在し公開 SSOT `.local/r2/app/blog/<slug>/article.md` も存在 = 公開済み下書きの取り残しを exit 1（SSD 非接続時は skip） | 「publish-article 手順6（公開後の下書き削除）の skip で公開済み 6 件が docs/21 に残存し live(R2) と drift・退行リスク (2026-05-30)」 | `/deploy` Step 2、`/publish-article` 手順6 |
 | `check-ad-placement.cjs` | `apps/web/src/app/**` の広告 5 検査: ①生 `AdSenseAd` 直叩き ②広告どうしの隣接（**条件付きブロックは隔てるものに数えない** — 在庫ゼロで消えるため）③`RailAdSlot` の rail 外使用（allowlist）④fluid はページ 1 枠 ⑤参照ゼロの slot 定数 | 「2026-07-29 全 23 ルート棚卸し: /ranking 等 5 面で記事内広告とフッター広告が間にコンテンツ 0 で隣接、/areas が右レール専用部品を本文カラムで使用、4 面が slot 部品を迂回」 | `apps/web/scripts/pre-commit-checks.sh` §2.2.1、`pr-quality-check.yml` static-gates |
 
+## guard を書かない領域 (CodeQL が担う)
+
+**正規表現の ReDoS は guard スクリプトにしない。** 2026-07-29 に掲載価値スコアで
+polynomial ReDoS を 3 件出し、guard 化を検討したが**形状ベースの検出は成立しないと実測で確定**した:
+
+- 「開き区切り + 否定クラス*」という同じ形状は repo 全体で **203 箇所**ある
+  (`\[[^\]]*\]\([^)]*\)` の markdown リンク、`<tag[^>]*>` の HTML 走査など)。
+  ほぼ全部が正当なので、形状で弾くと baseline が 200 件になり guard の意味が消える
+- CodeQL は 3 件だけを報告し、同形状の残り約 200 件は報告していない。**その選別基準は未特定**。
+  解析範囲の絞り込みではない (`languages: javascript,typescript` のみ・paths 設定なし)。
+  「export された関数の引数だから」と一度書いたが**実測で否定した** — `.claude/scripts/**` は
+  285 ファイル中 75 が export を持ち同形状も含むのに報告されていない。
+  CodeQL のデータフロー解析の内部判断であり `check-*.cjs` では再現できない
+
+### ★ゲートの実体を取り違えない (2026-07-29 に実際に取り違えた)
+
+PR の check には **同名で別物の CodeQL が 2 つ**ある。`gh api repos/<o>/<r>/commits/<sha>/check-runs`
+の `app` フィールドで判別する。
+
+| check 名 | app | 挙動 |
+|---|---|---|
+| `CodeQL` | `github-advanced-security` | **これが落とす。** repo 設定側の code scanning で workflow ファイルは repo に無い |
+| `Security Scan` | `github-actions` | `security-scan.yml`。CodeQL step は **`continue-on-error: true`**（「警告のみ、失敗させない」）なので**落とさない** |
+
+PR #650 の high 3 件を止めたのは前者。`security-scan.yml` は同じ PR で success だった。
+`docs/01_技術設計/06_自動化インベントリ.md` は後者しか載せず、トリガーも
+「push to main + 毎週日曜」と書いている（実体は `pull_request: branches:[main]` も含む）。
+**台帳を読んでも本当のゲートには辿り着けない。**
+
+**関連する構造的な穴**: `lint` script を持つ workspace は **`apps/web` だけ**。
+eslint 設定ファイルは `apps/gallery` にもあるが lint script が無く `turbo run lint` で走らない。
+`packages/**` は設定も script も無い。今回 ReDoS が入った `packages/data-configs/` も対象外なので、
+`eslint-plugin-regexp` 等を足してもこの穴を埋めない限り同じ場所は守れない。
+
+**移設時の注意**: 今回の 3 件は新規に書いたのではなく、旧 `home-featured-rankings.ts` で
+既に CodeQL に flag されていた正規表現を移設で運んだもの。
+**コードを別ファイルへ移すときは、移設元に open な code-scanning alert が無いか先に見る。**
+
 ## 配置場所
 
 - 共有 (複数スキルから呼ぶ): `.claude/scripts/lib/check-*.cjs`
