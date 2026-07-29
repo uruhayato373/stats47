@@ -3,19 +3,19 @@
 棚卸し対象: 417 記事 / SVG 1045 枚
 
 ## 系譜の整備状況
-- ✅ both (json+source・系譜完全): **911** (87%)
+- ✅ both (json+source・系譜完全): **914** (87%)
 - 🟡 jsonOnly (再生成可・出典無): **0** (0%)
-- 🔴 neither (元データ消失・再生成不可): **134** (13%)
+- 🔴 neither (元データ消失・再生成不可): **131** (13%)
 
 ## 復元手法別 (restoreMethod)
-- `done`: 911
+- `done`: 914
 - `ssot-restore-new`: 58
 - `manual`: 44
-- `ssot-restore`: 32
+- `ssot-restore`: 29
 
 ## 復元順 (軽い順)
 1. `source-backfill` (0): 既存 json を SSOT に対応付け source.json 後付け
-2. `ssot-restore` (32): regenerate-tile-maps.ts / regenerate-ranking-cards.mjs で SSOT復元
+2. `ssot-restore` (29): regenerate-tile-maps.ts / regenerate-ranking-cards.mjs で SSOT復元
 3. `ssot-restore-new` (58): scatter/line/findings の復元手法を新規実装
 4. `manual` (44): 無意味名・型不明 → 個別手当て
 
