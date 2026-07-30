@@ -1,19 +1,19 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-07-30T01:48:03.536Z
+- 生成: 2026-07-30T19:29:12.175Z
 - GSC snapshot: 2026-W30 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 
-## サマリ (active ranking 全件 2179 件)
+## サマリ (active ranking 全件 2176 件)
 
 - ✅ done: 196 件 (9.0% / impressions 計 25056)
-- ⏳ needs-regen: 1983 件 (impressions 計 12252)
-  - 内訳: missing 226 / incomplete 1691 / blocker 66
+- ⏳ needs-regen: 1980 件 (impressions 計 12241)
+  - 内訳: missing 223 / incomplete 1691 / blocker 66
 
 ## 進捗 (progress-history.csv より)
 
 - 履歴 1 点。ペース算出には 2 日以上の履歴が必要
-- 残り 1983 件 (完了見込みは未算出)
+- 残り 1980 件 (完了見込みは未算出)
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
