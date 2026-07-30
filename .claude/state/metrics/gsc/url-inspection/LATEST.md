@@ -1,4 +1,4 @@
-# GSC URL Inspection — 2026-07-28
+# GSC URL Inspection — 2026-07-29
 
 **対象 URL 数**: 500
 
@@ -16,4 +16,4 @@
 | URL が Google に認識されていません | 115 | ±0 |
 | 送信して登録されました | 385 | ±0 |
 
-_詳細 CSV: `.claude/state/metrics/gsc/url-inspection/2026-07-28.csv`_
+_詳細 CSV: `.claude/state/metrics/gsc/url-inspection/2026-07-29.csv`_
