@@ -46,8 +46,66 @@ jobs:
           languages: javascript,typescript
 
       - name: 🔍 Perform CodeQL Analysis
+        id: codeql
         uses: github/codeql-action/analyze@e4fba868fa4b1b91e1fdab776edc8cfbe6e9fb81 # v4.37.3
         continue-on-error: true  # 警告のみ、失敗させない
+        with:
+          # SARIF をファイルに落として次の step で中身を出す。
+          # ★理由: 検出結果 (rule / file / line) を読む唯一の経路が Security タブと
+          #   code-scanning API で、どちらも一部のセッション/権限からは参照できない。
+          #   「CodeQL 3 件」だけが見えて中身が見えないと原因を推測で当てにいくことになり、
+          #   実際に 3 回外した (workflow の式インジェクション → prototype 汚染 →
+          #   execSync の command injection)。job summary に出せば誰でも読める。
+          output: sarif-results
+
+      - name: 📋 Dump CodeQL findings (rule / file / line)
+        if: always()
+        run: |
+          if [ ! -d sarif-results ]; then
+            echo "sarif-results が無い (analyze が SARIF を出す前に失敗した)" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          node --input-type=module -e '
+            import { readdirSync, readFileSync } from "node:fs";
+            const files = readdirSync("sarif-results").filter((f) => f.endsWith(".sarif"));
+            const rows = [];
+            for (const f of files) {
+              const sarif = JSON.parse(readFileSync(`sarif-results/${f}`, "utf-8"));
+              for (const run of sarif.runs ?? []) {
+                // rule メタ (severity) は driver.rules 側にあるので id で引く
+                const meta = new Map(
+                  (run.tool?.driver?.rules ?? []).map((r) => [r.id, r])
+                );
+                for (const res of run.results ?? []) {
+                  const rule = meta.get(res.ruleId) ?? {};
+                  const sev =
+                    rule.properties?.["security-severity"] ??
+                    rule.properties?.severity ??
+                    res.level ??
+                    "?";
+                  const loc = res.locations?.[0]?.physicalLocation;
+                  rows.push({
+                    rule: res.ruleId ?? "?",
+                    sev: String(sev),
+                    path: loc?.artifactLocation?.uri ?? "?",
+                    line: loc?.region?.startLine ?? "?",
+                    msg: (res.message?.text ?? "").replace(/\s+/g, " ").slice(0, 160),
+                  });
+                }
+              }
+            }
+            rows.sort((a, b) => Number(b.sev) - Number(a.sev) || a.path.localeCompare(b.path));
+            const out = [`### CodeQL findings: ${rows.length} 件`, ""];
+            if (rows.length === 0) {
+              out.push("検出なし");
+            } else {
+              out.push("| severity | rule | file:line | message |", "|---|---|---|---|");
+              for (const r of rows) {
+                out.push(`| ${r.sev} | \`${r.rule}\` | \`${r.path}:${r.line}\` | ${r.msg} |`);
+              }
+            }
+            console.log(out.join("\n"));
+          ' | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: ✅ Security scan completed
         run: echo "✅ Security scan completed"
