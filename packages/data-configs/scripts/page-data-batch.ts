@@ -29,6 +29,14 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { listAllMetrics } from "../src/registry.js";
 import { classifyEmptyOutcome } from "../src/expected-empty.js";
+import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly.js";
+import {
+  PREFECTURE_COUNT,
+  classifyShape,
+  hasShapeError,
+  summarizeShape,
+  type ShapeSummary,
+} from "../src/shape-gate.js";
 import type { MetricConfig, SourceConfig } from "../src/types.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -43,11 +51,21 @@ interface Args {
   concurrency: number;
   /** 0 件を警告に降格する metric key (一回きりの検証用) */
   allowEmpty: Set<string>;
+  /** 形状違反を警告に降格する metric key (一回きりの検証用) */
+  allowShape: Set<string>;
 }
 
 function parseArgs(): Args {
   const argv = process.argv.slice(2);
-  const out: Args = { dryRun: false, concurrency: 4, allowEmpty: new Set() };
+  const out: Args = {
+    dryRun: false,
+    concurrency: 4,
+    allowEmpty: new Set(),
+    allowShape: new Set(),
+  };
+  const addKeys = (target: Set<string>, raw: string | undefined) => {
+    for (const k of (raw ?? "").split(",").map((x) => x.trim()).filter(Boolean)) target.add(k);
+  };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--metric") out.metric = argv[++i];
@@ -55,11 +73,8 @@ function parseArgs(): Args {
     else if (a === "--since") out.since = argv[++i];
     else if (a === "--dry-run") out.dryRun = true;
     else if (a === "--concurrency") out.concurrency = Number(argv[++i]);
-    else if (a === "--allow-empty") {
-      for (const k of (argv[++i] ?? "").split(",").map((x) => x.trim()).filter(Boolean)) {
-        out.allowEmpty.add(k);
-      }
-    }
+    else if (a === "--allow-empty") addKeys(out.allowEmpty, argv[++i]);
+    else if (a === "--allow-shape") addKeys(out.allowShape, argv[++i]);
   }
   return out;
 }
@@ -96,14 +111,23 @@ interface EstatValue {
 }
 
 /** e-Stat API から data を fetch */
+const ESTAT_LIMIT = 100_000;
+
+/** e-Stat 応答のうち「取り切れたか」を判定するための情報 */
+interface EstatFetchResult {
+  values: EstatValue[];
+  /** RESULT_INF。総数が取得数を上回っていれば打ち切られている */
+  raw: { totalNumber: number; toNumber: number };
+}
+
 async function fetchEstatData(
   appId: string,
   config: Extract<SourceConfig, { kind: "estat" }>,
-): Promise<EstatValue[]> {
+): Promise<EstatFetchResult> {
   const params = new URLSearchParams({
     appId,
     statsDataId: config.statsDataId,
-    limit: "100000",
+    limit: String(ESTAT_LIMIT),
   });
   if (config.cdCat01) params.set("cdCat01", config.cdCat01);
   if (config.cdCat02) params.set("cdCat02", config.cdCat02);
@@ -115,21 +139,43 @@ async function fetchEstatData(
   const res = await fetch(url);
   if (!res.ok) throw new Error(`e-Stat HTTP ${res.status}`);
   const json = (await res.json()) as Record<string, unknown>;
-  const stat = (json.GET_STATS_DATA as Record<string, unknown> | undefined)
-    ?.STATISTICAL_DATA as Record<string, unknown> | undefined;
+  const getStatsData = json.GET_STATS_DATA as Record<string, unknown> | undefined;
+
+  // ★RESULT.STATUS を見る。HTTP 200 でもアプリケーションレベルのエラー
+  // (存在しない statsDataId / 不正な cdCat / API キー超過) はここにしか出ない。
+  // 旧実装は STATISTICAL_DATA の有無しか見ず、原因がログに残らなかった。
+  const result = getStatsData?.RESULT as Record<string, unknown> | undefined;
+  const statusCode = Number(result?.STATUS ?? 0);
+  if (statusCode !== 0) {
+    throw new Error(
+      `e-Stat error STATUS=${statusCode} ${String(result?.ERROR_MSG ?? "")} (statsDataId=${config.statsDataId})`,
+    );
+  }
+
+  const stat = getStatsData?.STATISTICAL_DATA as Record<string, unknown> | undefined;
   if (!stat) {
     throw new Error(`e-Stat response invalid for ${config.statsDataId}`);
   }
   const values =
     ((stat.DATA_INF as Record<string, unknown>).VALUE as EstatValue[]) ?? [];
 
+  // RESULT_INF: {TOTAL_NUMBER, FROM_NUMBER, TO_NUMBER, NEXT_KEY}
+  // 分類軸の絞り忘れで数百万セルになる表があり、limit で静かに切られたまま配信されていた。
+  const resultInf = stat.RESULT_INF as Record<string, unknown> | undefined;
+  const totalNumber = Number(resultInf?.TOTAL_NUMBER ?? values.length);
+  const toNumber = Number(resultInf?.TO_NUMBER ?? values.length);
+  const raw = {
+    totalNumber: Number.isFinite(totalNumber) ? totalNumber : values.length,
+    toNumber: Number.isFinite(toNumber) ? toNumber : values.length,
+  };
+
   // timeScope: "annual" — 月次・四半期を落として年計だけを残す。
   // 商業動態統計のように 1 年あたり 年計1 + 四半期4 + 月次12 を同居させる表があり、
   // extractYearCode で 4 桁年へ正規化すると同じ年に 17 行が潰れて重複する。
   if (config.timeScope === "annual") {
-    return values.filter((v) => /^\d{4}0{6}$/.test(String(v["@time"] ?? "")));
+    return { values: values.filter((v) => /^\d{4}0{6}$/.test(String(v["@time"] ?? ""))), raw };
   }
-  return values;
+  return { values, raw };
 }
 
 /**
@@ -347,7 +393,16 @@ function shapeForCity(config: MetricConfig, values: EstatValue[]) {
   return { metricKey: config.key, entityKind: "city" as const, rows, meta: buildMeta(rows) };
 }
 
-type ProcessStatus = "ok" | "fail" | "skip" | "empty" | "empty-allowed";
+type ProcessStatus =
+  | "ok"
+  | "fail"
+  | "skip"
+  | "empty"
+  | "empty-allowed"
+  /** 形状が壊れている (重複行 / 打ち切り / 単位矛盾 / 県の欠損)。書かずに既存を温存した */
+  | "shape"
+  /** 形状違反はあるが allowlist で許可済み */
+  | "shape-allowed";
 
 interface ProcessResult {
   key: string;
@@ -364,6 +419,8 @@ interface ProcessResult {
   rows?: number;
   /** 空だった artifact の説明 (ログ用) */
   emptyNotes?: string[];
+  /** 形状違反の説明 (ログ用) */
+  shapeNotes?: string[];
 }
 
 /**
@@ -387,11 +444,48 @@ async function readPublishedRowCount(key: string, artifact: string): Promise<num
   }
 }
 
+/**
+ * 公開済み R2 の同 artifact の県カバレッジを読む (**47 県に満たない年があるときだけ呼ぶ**)。
+ *
+ * 「以前 47 県あった年が減った」= 欠損の発生を判定するためだけの照会。
+ * 全 metric で呼ぶと R2 GET が metric 数だけ増えるので、shortfall を検出したときに限る
+ * (実測で該当は 2,179 件中 24 件なのでコストは無視できる)。
+ * 取得できない場合は null を返し、warn 止まりにさせる (誤って「欠損発生」と誇張しない)。
+ */
+async function readPublishedCoverage(
+  key: string,
+  artifact: string,
+): Promise<Pick<ShapeSummary, "perYearAreaCount"> | null> {
+  const base = process.env.R2_PUBLIC_FETCH_URL;
+  if (!base) return null;
+  try {
+    const res = await fetch(`${base}/app/stats/${key}/${artifact}`);
+    if (!res.ok) return null;
+    const json = (await res.json()) as { rows?: { areaCode: string; yearCode: string }[] };
+    if (!json.rows) return null;
+    const areasByYear = new Map<string, Set<string>>();
+    for (const row of json.rows) {
+      let set = areasByYear.get(row.yearCode);
+      if (!set) {
+        set = new Set();
+        areasByYear.set(row.yearCode, set);
+      }
+      set.add(row.areaCode);
+    }
+    const perYearAreaCount: Record<string, number> = {};
+    for (const [year, areas] of areasByYear) perYearAreaCount[year] = areas.size;
+    return { perYearAreaCount };
+  } catch {
+    return null;
+  }
+}
+
 async function processOne(
   config: MetricConfig,
   appId: string,
   dryRun: boolean,
   allowEmpty: ReadonlySet<string> = new Set(),
+  allowShape: ReadonlySet<string> = new Set(),
 ): Promise<ProcessResult> {
   if (config.source.kind === "calculated") {
     return { key: config.key, ok: false, status: "skip", message: "calculated metric skipped (deps required)" };
@@ -429,9 +523,63 @@ async function processOne(
   try {
     const notes: string[] = [];
     const emptyNotes: string[] = [];
+    const shapeNotes: string[] = [];
     let totalRows = 0;
     let hardEmpty = false;
     let softEmpty = false;
+    let hardShape = false;
+    let softShape = false;
+
+    /**
+     * 形状 (重複行 / 打ち切り / 単位と値の矛盾 / 県のカバレッジ) を判定し、書いてよいかを返す。
+     *
+     * `gateEmpty` と同じく **error なら書かない**。壊れたデータで上書きするより、
+     * 古いデータが残る方がまし (diff-push-r2 は .local/r2 を walk するだけなので
+     * 書かなければ R2 の既存データが温存される)。
+     *
+     * 2026-07-30 導入。それまで「行が多すぎる」側は全層で無検証で、
+     * 分類軸の絞り忘れで 194 metric が壊れた数値を配信していた。
+     */
+    async function gateShape(
+      entity: "prefecture" | "city",
+      payload: { rows: ShapedRow[] },
+      raw: { totalNumber: number; toNumber: number },
+      artifact: string,
+    ): Promise<boolean> {
+      const summary = summarizeShape(payload.rows);
+
+      // 47 県に満たない年があるときだけ公開済みを引く (縮小専用ラチェットの基準)。
+      // 全 metric で引くと R2 GET が metric 数だけ増えるため遅延評価にする。
+      const hasShortfall =
+        entity === "prefecture" &&
+        Object.values(summary.perYearAreaCount).some((n) => n < PREFECTURE_COUNT);
+      const priorSummary = hasShortfall ? await readPublishedCoverage(config.key, artifact) : null;
+
+      const violations = classifyShape({
+        key: config.key,
+        entity,
+        summary,
+        unit: config.unit,
+        raw,
+        priorSummary,
+        now: new Date(),
+        allowlist: EXPECTED_SHAPE_ANOMALY,
+        cliAllowed: allowShape,
+      });
+      if (violations.length === 0) return true;
+
+      for (const v of violations) {
+        if (v.isError) {
+          hardShape = true;
+          console.error(`  [shape] ${v.message}`);
+        } else {
+          softShape = true;
+          console.warn(`  [shape:allowed] ${v.message}`);
+        }
+        shapeNotes.push(`${entity}:${v.check}${v.isError ? "" : ":allowed"}`);
+      }
+      return !hasShapeError(violations);
+    }
 
     /**
      * 0 件の artifact を判定し、書いてよいかを返す。
@@ -472,10 +620,16 @@ async function processOne(
     }
 
     if (wantPref) {
-      const raw = await fetchEstatData(appId, src);
-      const values = config.source.kind === "kakei-chousa" ? remapKakeiAreas(raw) : raw;
+      const fetched = await fetchEstatData(appId, src);
+      const values =
+        config.source.kind === "kakei-chousa" ? remapKakeiAreas(fetched.values) : fetched.values;
       const payload = shapeForPrefecture(config, values);
-      const writable = await gateEmpty("prefecture", values.length, payload.rows.length, "values.json");
+      const notEmpty = await gateEmpty("prefecture", values.length, payload.rows.length, "values.json");
+      // 0 件なら形状は見ない (expected-empty の担当。二重に鳴らさない)
+      const shapeOk = notEmpty
+        ? await gateShape("prefecture", payload, fetched.raw, "values.json")
+        : true;
+      const writable = notEmpty && shapeOk;
       if (!dryRun && writable) {
         const outPath = resolve(R2_LOCAL, `app/stats/${config.key}/values.json`);
         mkdirSync(dirname(outPath), { recursive: true });
@@ -490,9 +644,14 @@ async function processOne(
       if (!cityStatsDataId) {
         notes.push("city=skip(no-city-table)");
       } else {
-        const values = await fetchEstatData(appId, { ...src, statsDataId: cityStatsDataId });
+        const fetched = await fetchEstatData(appId, { ...src, statsDataId: cityStatsDataId });
+        const values = fetched.values;
         const payload = shapeForCity(config, values);
-        const writable = await gateEmpty("city", values.length, payload.rows.length, "cities.json");
+        const notEmpty = await gateEmpty("city", values.length, payload.rows.length, "cities.json");
+        const shapeOk = notEmpty
+          ? await gateShape("city", payload, fetched.raw, "cities.json")
+          : true;
+        const writable = notEmpty && shapeOk;
         if (!dryRun && writable) {
           const outPath = resolve(R2_LOCAL, `app/stats/${config.key}/cities.json`);
           mkdirSync(dirname(outPath), { recursive: true });
@@ -503,14 +662,24 @@ async function processOne(
       }
     }
 
-    const status: ProcessStatus = hardEmpty ? "empty" : softEmpty ? "empty-allowed" : "ok";
+    // 重い順に判定する。empty (データ消失) > shape (壊れたデータ) > 許可済み > ok。
+    const status: ProcessStatus = hardEmpty
+      ? "empty"
+      : hardShape
+        ? "shape"
+        : softEmpty
+          ? "empty-allowed"
+          : softShape
+            ? "shape-allowed"
+            : "ok";
     return {
       key: config.key,
-      ok: status !== "empty",
+      ok: status !== "empty" && status !== "shape",
       status,
       message: `${dryRun ? "would write" : "wrote"} ${notes.join(",")}`,
       rows: totalRows,
       ...(emptyNotes.length > 0 ? { emptyNotes } : {}),
+      ...(shapeNotes.length > 0 ? { shapeNotes } : {}),
     };
   } catch (e) {
     return { key: config.key, ok: false, status: "fail", message: (e as Error).message };
@@ -550,9 +719,14 @@ async function main() {
 
   console.log(`[batch] targets after filter: ${targets.length}`);
   if (args.dryRun) {
-    const sample = targets.slice(0, 10).map((c) => c.key).join(", ");
-    console.log(`[dry-run] first 10: ${sample}`);
-    return;
+    // ★2026-07-30 変更: 旧実装は先頭 10 件を表示して return するだけで **fetch すらしなかった**。
+    // data-refresh.yml の既定 dispatch は dry_run=true なので、実質何も検証できていなかった。
+    // 実際に e-Stat を叩いて形状まで判定し、書き込みだけを行わないようにする
+    // (座標ミス・重複・打ち切りを本番反映の前に見つけられるようにするため)。
+    console.log(
+      `[dry-run] e-Stat を ${targets.length} 件 fetch して形状を検証します (書き込みはしません)。` +
+        `${targets.length > 50 ? " 件数が多い場合は --metric で絞ってください。" : ""}`,
+    );
   }
 
   let ok = 0;
@@ -560,8 +734,11 @@ async function main() {
   let skip = 0;
   let empty = 0;
   let emptyAllowed = 0;
+  let shape = 0;
+  let shapeAllowed = 0;
   const failedKeys: string[] = [];
   const emptyKeys: string[] = [];
+  const shapeKeys: string[] = [];
 
   // concurrency-limited execution
   const queue = [...targets];
@@ -569,13 +746,13 @@ async function main() {
     while (queue.length > 0) {
       const c = queue.shift();
       if (!c) break;
-      const result = await processOne(c, appId, false, args.allowEmpty);
+      const result = await processOne(c, appId, args.dryRun, args.allowEmpty, args.allowShape);
       // status で分岐する (旧実装の message.includes("skipped") は文言依存で脆く、
       // かつ 0 件を表す種別が無いため rows=0 が ok に紛れ込んでいた)
       switch (result.status) {
         case "ok":
           ok++;
-          if (ok % 20 === 0) console.log(`  ok=${ok} fail=${fail} skip=${skip} empty=${empty} remaining=${queue.length}`);
+          if (ok % 20 === 0) console.log(`  ok=${ok} fail=${fail} skip=${skip} empty=${empty} shape=${shape} remaining=${queue.length}`);
           break;
         case "empty-allowed":
           emptyAllowed++;
@@ -583,6 +760,13 @@ async function main() {
         case "empty":
           empty++;
           emptyKeys.push(result.key);
+          break;
+        case "shape-allowed":
+          shapeAllowed++;
+          break;
+        case "shape":
+          shape++;
+          shapeKeys.push(result.key);
           break;
         case "skip":
           skip++;
@@ -597,13 +781,17 @@ async function main() {
   await Promise.all(workers);
 
   console.log(
-    `\n[done] ok=${ok}, fail=${fail}, skip=${skip}, empty=${empty}, empty-allowed=${emptyAllowed}`,
+    `\n[done] ok=${ok}, fail=${fail}, skip=${skip}, empty=${empty}, empty-allowed=${emptyAllowed}` +
+      `, shape=${shape}, shape-allowed=${shapeAllowed}`,
   );
   if (failedKeys.length > 0) {
     console.log(`[done] failed keys (${failedKeys.length}): ${failedKeys.join(", ")}`);
   }
   if (emptyKeys.length > 0) {
     console.log(`[done] empty keys (${emptyKeys.length}): ${emptyKeys.join(", ")}`);
+  }
+  if (shapeKeys.length > 0) {
+    console.log(`[done] shape keys (${shapeKeys.length}): ${shapeKeys.join(", ")}`);
   }
   console.log(
     `Next: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats`,
@@ -628,6 +816,19 @@ async function main() {
       `[fatal] 観測値が 0 件の metric が ${empty} 件あります: ${emptyKeys.join(", ")}\n` +
         `        意図した 0 件なら packages/data-configs/src/expected-empty.ts の EXPECTED_EMPTY に` +
         ` 理由・追跡先・期限を添えて登録してください (一回きりの検証は --allow-empty <keys>)`,
+    );
+    process.exit(1);
+  }
+  // 形状違反の再発防止 (2026-07-30 導入): 重複行・打ち切り・単位矛盾・県の欠損。
+  // 0 件と同じく「恒常的に少数出る」性質のものではないので比率で薄めず 1 件でも exit 1。
+  // 違反 artifact は書いていないので R2 の旧データは温存され、push も派生生成も走らない。
+  if (shape > 0) {
+    console.error(
+      `[fatal] 形状が壊れた metric が ${shape} 件あります: ${shapeKeys.join(", ")}\n` +
+        `        原因の大半は分類軸 (cdCat01-05 / cdTab) か timeScope の絞り忘れです。` +
+        `未指定軸は diagnose-unpinned-axes.ts で列挙できます。\n` +
+        `        既知の是正待ちなら packages/data-configs/src/expected-shape-anomaly.ts に` +
+        ` 理由・追跡先・期限を添えて登録してください (一回きりの検証は --allow-shape <keys>)`,
     );
     process.exit(1);
   }

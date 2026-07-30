@@ -11,6 +11,20 @@ export {
   type ExpectedEmptyEntry,
 } from "./expected-empty";
 export {
+  PREFECTURE_COUNT,
+  classifyShape,
+  findExpectedShapeAnomaly,
+  hasShapeError,
+  summarizeShape,
+  type ClassifyShapeInput,
+  type ExpectedShapeAnomalyEntry,
+  type ShapeCheck,
+  type ShapeRow,
+  type ShapeSummary,
+  type ShapeViolation,
+} from "./shape-gate";
+export { EXPECTED_SHAPE_ANOMALY, MAX_KNOWN_BROKEN } from "./expected-shape-anomaly";
+export {
   getMetricMetaMap,
   getMetricMeta,
   listMetricKeysByEntity,
