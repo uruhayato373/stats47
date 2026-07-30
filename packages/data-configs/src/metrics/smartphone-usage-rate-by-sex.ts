@@ -8,6 +8,9 @@ export const smartphoneUsageRateBySex: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003457311",
+    "cdCat03": "0",
+    "cdCat04": "00",
+    "cdCat05": "15",
     "cdCat01": "1",
     "cdCat02": "0",
     "displayName": "スマートフォン・パソコン使用者の趣味・娯楽行動者率（10歳以上・週全体・総数）",

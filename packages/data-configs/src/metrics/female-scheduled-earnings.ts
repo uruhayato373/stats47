@@ -8,6 +8,9 @@ export const femaleScheduledEarnings: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003426933",
+    "cdTab": "10",
+    "cdCat03": "01",
+    "cdCat04": "01",
     "cdCat01": "03",
     "cdCat02": "01",
     "displayName": "賃金構造基本統計調査",

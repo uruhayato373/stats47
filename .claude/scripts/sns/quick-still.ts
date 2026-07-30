@@ -86,7 +86,9 @@ interface RankingItemPayload {
     unit?: string;
     categoryKey?: string;
     latestYear?: { yearCode: string; yearName?: string };
-    sourceConfig?: { name?: string };
+    // ★出典名は sourceConfig.source.name (sourceConfig.name というキーは存在しない)
+    sourceConfig?: { source?: { name?: string } };
+    source?: { name?: string };
   };
 }
 
@@ -151,7 +153,8 @@ async function main() {
   const unit = item?.unit || sorted[0]?.unit || "";
   const title = item?.title || item?.rankingName || KEY;
   const year = partition.yearCode;
-  const source = item?.sourceConfig?.name || "e-Stat（政府統計の総合窓口）";
+  const source =
+    item?.sourceConfig?.source?.name || item?.source?.name || "e-Stat（政府統計の総合窓口）";
   const palette = choosePalette(KEY);
   const rightPalette = palette === "red" ? "blue" : palette === "blue" ? "red" : "blue";
 

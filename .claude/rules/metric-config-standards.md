@@ -69,6 +69,123 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 
 警告 (warn) を新たに増やさない。注釈は `note` に、年は `years` に、区別は `subtitle` に置く。
 
+## 分類軸は必ず 1 系列に絞る（形状ゲート・★再発防止 2026-07-30）
+
+**e-Stat の統計表は多次元クロス集計なので、config で軸を絞りきらないと同じ県が複数行になる。**
+`page-data-batch.ts` は重複を落とさず `assignRanks` が通し番号を振るため、
+「1 位 74.5%」のような**別系列の値**がそのまま配信される。
+
+2026-07-30 の全件走査で active 2,179 件のうち **209 件**がこの状態だった
+(重複行 176 / 単位と値の矛盾 27 / 県の欠落 24)。実害の例:
+`/ranking/sports-participation-rate-swimming` は `cat03`(スポーツの種類 24 件) 未指定で
+24 種目すべてを取得し、水泳ではない種目の 74.5% を 1 位として表示していた (正しくは 8.6%)。
+
+### 絞るべき軸
+
+| config | e-Stat の軸 | 絞り忘れたときの症状 |
+|---|---|---|
+| `cdCat01` 〜 `cdCat04` | cat01-cat05 | 同じ県が「軸のコード数」倍に増える |
+| `cdTab` | tab (表章項目) | 同上。実数と率が同居する表で特に危険 |
+| `timeScope: "annual"` | time | 年計 + 四半期 + 月次が 4 桁年に潰れて 17 倍になる |
+
+**e-Stat は 4 軸目以降を持つ表が普通にある** (`smartphone-usage-students` は cat01-cat05 の 5 軸)。
+`cdCat01`/`cdCat02` だけ指定して安心しない。
+
+### 機械的な検査 (3 層)
+
+| 層 | 実装 | 発火 |
+|---|---|---|
+| 取り込み時 | `page-data-batch.ts` の `gateShape` (error なら**書かずに既存 R2 を温存**) | `data-refresh.yml` |
+| 事後監査 | `audit-ranking-data-integrity.ts` の検査 (j) | 週次 `ranking-integrity-audit-weekly.yml` |
+| 棚卸し | `scan-stats-shape.ts` (R2 走査 + allowlist 生成 + 進捗計測) | 手動 |
+
+判定はすべて `packages/data-configs/src/shape-gate.ts` の**同じ純関数**。
+両端で同一定義にすることで「書き込み時に通ったものが監査で落ちる」食い違いを防ぐ。
+
+- `duplicate-area-year` 同一 (県, 年) が 2 行以上 → **error**
+- `raw-truncated` `RESULT_INF.TOTAL_NUMBER > TO_NUMBER` → **error**
+- `percent-out-of-range` unit が `%` で最大値 > 1000 → **error** (100-1000 は warn)
+- `area-coverage` 47 県未満 → **warn**。以前 47 だった年が減ったときだけ error
+
+**coverage を既定 warn にしているのは誤検知を避けるため。** `port-cargo-total` の欠落 8 県は
+内陸 8 県と完全一致しており、素朴な「47 県必須」は `port-*` / `fishery-*` 系 15 件を誤検知する。
+誤検知を出すゲートは運用で無効化されるので、確実に欠陥と言えるものだけを error にする。
+
+### 既知の壊れは期限つきで登録する
+
+`packages/data-configs/src/expected-shape-anomaly.ts` は
+`scan-stats-shape.ts --emit-allowlist` の**生成物**。手で書かない。腐敗防止は 3 点:
+`until` 必須 / `observedSeverity` より悪化したら降格しない / `MAX_KNOWN_BROKEN` ラチェット
+(是正のたびに定数を下げる。上げる変更は原則しない)。
+
+### 是正は診断スクリプトから始める
+
+```bash
+npx tsx packages/data-configs/scripts/diagnose-unpinned-axes.ts --fetch
+```
+
+getMetaInfo から未指定軸を列挙し、title と軸コード名の一致で pin 候補を提案する。
+**「総数を pin する」を既定にしてはならない** — 「美術鑑賞の行動者率」に総数を当てると
+全趣味の合計が配信され、形状ゲートは 47 行 1 系列なので**通ってしまう**。
+判定ロジックの正典は `packages/data-configs/src/axis-match.ts` (回帰テストつき)。
+
+## 取得レシピ (MetricRecipe) — 出典だけでは値は決まらない（2026-07-30）
+
+配信データの正しさは `statsDataId` だけでは決まらない。**軸 pin (cdCat01-05)・tab 選択・
+線形結合・軸合算・率・時間粒度・地域軸**が揃って初めて決まる。この一式を「レシピ」と呼び、
+`packages/data-configs/src/recipe.ts` の **`buildRecipe(config)` が唯一の生成元**とする。
+
+### 宣言演算 (これがあると単発クエリでは再現できない)
+
+| フィールド | 用途 | 例 |
+|---|---|---|
+| `tabCombination` | 複数 tab の線形結合 | 年収 = 月額 tab08 × 12 + 賞与 tab12 × 1 |
+| `axisSum` | 軸メンバーの合算 (総数コードが無い / 一部県にしか出ない) | 港湾の輸送形態 |
+| `axisRatio` | 部分 / 部分の合計 × 100 | 非正規率 = 322 / (321+322) |
+| `timeScope: "annual"` | 年計のみ採用 (月次・四半期を持つ表) | 商業動態統計 |
+| `areaAxis` | 都道府県が area 軸ではなく cat 軸にある表 | 患者調査 (cat03 に 1〜48) |
+| (kakei-chousa) | 県庁所在市 → 都道府県の写像 | 家計調査 694 件すべて |
+
+### 両端で同一定義 (手選びコピーを作らない)
+
+```
+buildRecipe(config)  ←─ page-data-batch (値を書く)   → app/stats/<key>/values.json の meta.recipe
+                     ←─ builder (item を組む)         → app/ranking/<key>/item.json の sourceConfig.recipe
+                     ←─ 監査 (検査 k)                 → configHash を突き合わせて stale を検知
+```
+
+`configHash` は **クエリと変換だけ**の指紋。`years` や `title` は含めない
+(年を伸ばしただけで全件不整合になるのを避ける。カバレッジは shape-gate が別に見る)。
+
+### item.json `sourceConfig` の形 (★丸ごと spread しない)
+
+```jsonc
+{
+  "estatParams": { "statsDataId": "...", "cdCat01": "...", "cdCat03": "..." },  // これだけ spread してよい
+  "recipe":      { "kind": "estat", "ops": {...}, "derived": true, "configHash": "..." },
+  "derived":     true,           // true なら e-Stat を叩かず正典 values.json を読む
+  "statsDataId": "...",          // 後方互換 (survey-bucketing の SSDS 判定)
+  "source":      { "name": "...", "url": "..." }
+}
+```
+
+オンデマンド取得は必ず `resolveEstatParams()` / `isDerivedSource()`
+(`packages/ranking/src/utils/source-config.ts`) を通す。`sourceConfig` を丸ごと spread すると
+cdCat03 以降が落ちて多系列が混入し、`source`/`note` が param に混ざる。
+
+### 禁止
+
+| NG | OK |
+|---|---|
+| `sourceConfig` を丸ごと e-Stat に spread | `resolveEstatParams()` の返り値だけ |
+| derived metric を e-Stat 単発クエリで再取得 | 正典 `app/stats/<key>/values.json` を読む |
+| `calculation.formula` に自由文字列で計算式を書く | `tabCombination` / `axisRatio` / `axisSum` で宣言する (実行される) |
+| 取り込み時に計算する metric に `isCalculated: true` | `false`。`isCalculated` は **他 metric を参照して実行時計算する**ものだけ |
+
+`isCalculated: true` は `calculation.type` (`ratio`/`per_capita`/`subtraction`) と
+分子・分母キーがそろって初めて機能する。型だけ立てても
+`calculate-ranking-values.ts` の `if (!calculation.type) return []` で**必ず空になる**。
+
 ## isActive:true ≠ 本番公開（多段依存・★再発防止 2026-06-03）
 
 `MetricConfig.isActive` を `true` にしただけでは ranking は **本番公開されない**。本番アプリは R2 snapshot と

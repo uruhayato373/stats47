@@ -46,46 +46,17 @@ export interface ExpectedEmptyEntry {
  * 「まだ調べていない」を許可に使わない (それは調査中の未解決課題であって正当な 0 件ではない)。
  */
 export const EXPECTED_EMPTY: readonly ExpectedEmptyEntry[] = [
-  // 2026-07-29 実測: 下記 6 件は app/stats が rowCount:0 (generatedAt 2026-07-05 の同一バッチ)。
-  // 5 件が患者調査系で cdCat01 が全て "1" (入院と外来が同一座標 = 明らかな誤り)。
-  // 座標修正は [DATA-PATIENT-SURVEY-01] の担当範囲。ゲート導入時に CI を赤にしないため
-  // 既知分として登録し、期限を切って追跡する。
-  {
-    key: "inpatient-rate-per-100k",
-    reason: "statsDataId 0004026104 + cdCat01 '1' が誤座標 (外来・年齢別と完全同一)。要 e-Stat メタ再確認",
-    issue: "DATA-PATIENT-SURVEY-01",
-    until: "2026-10-31",
-  },
-  {
-    key: "outpatient-rate-per-100k",
-    reason: "同上 (入院と同一座標)",
-    issue: "DATA-PATIENT-SURVEY-01",
-    until: "2026-10-31",
-  },
-  {
-    key: "patient-receiving-rate-by-age",
-    reason: "同上 (入院・外来と同一座標)",
-    issue: "DATA-PATIENT-SURVEY-01",
-    until: "2026-10-31",
-  },
-  {
-    key: "patient-receiving-rate-by-disease",
-    reason: "statsDataId 0004026105 + cdCat01 '1'。3 軸表だが cdCat03 未指定",
-    issue: "DATA-PATIENT-SURVEY-01",
-    until: "2026-10-31",
-  },
-  {
-    key: "inpatient-rate-by-bedtype",
-    reason: "statsDataId 0004002555 + cdCat01 '1'。3 軸表だが cdCat03 未指定",
-    issue: "DATA-PATIENT-SURVEY-01",
-    until: "2026-10-31",
-  },
-  {
-    key: "emergency-hospital-general-clinic-count-per-100k",
-    reason: "statsDataId 0000010209 + cdCat01 '#I11101' (SSDS 正規形式だが 0 件)。別系統として要調査",
-    issue: "DATA-PATIENT-SURVEY-01",
-    until: "2026-10-31",
-  },
+  // 2026-07-30: 6 件とも **config は是正済み**。残るのは R2 の再生成だけ。
+  //
+  // 真因は当初の診断「cdCat01 の誤座標」ではなく **表の形**だった:
+  //   - 患者調査 5 件: 都道府県が area 軸ではなく cat 軸 (連番 1=全国 2=北海道…) に入る表。
+  //     `@area` を読む通常経路では構造的に 0 行。→ source.areaAxis を新設
+  //   - 救急告示病院数: 3 年ごとの調査で 2021 年のデータが無いのに years を 2021 単年に固定。
+  //     取得 1008 行が全てフィルタ落ち。→ years:"all"
+  //
+  // ★このエントリを消してよいのは **R2 再生成後**。消すと監査 (i) が赤くなる。
+  //   再生成すれば rowCount>0 になり classifyEmptyOutcome が stale-allowlist で
+  //   「削除してください」と教えてくれる。
 ];
 
 /** key (+entity) に対して**有効な** allowlist エントリを返す。期限切れは null */
@@ -93,8 +64,10 @@ export function findExpectedEmpty(
   key: string,
   entity: "prefecture" | "city",
   now: Date,
+  /** 差し替え可能にするのはテスト用 (EXPECTED_EMPTY は空になりうる) */
+  entries: readonly ExpectedEmptyEntry[] = EXPECTED_EMPTY,
 ): ExpectedEmptyEntry | null {
-  const entry = EXPECTED_EMPTY.find(
+  const entry = entries.find(
     (e) => e.key === key && (e.entities === undefined || e.entities.includes(entity)),
   );
   if (!entry) return null;
@@ -127,6 +100,8 @@ export interface ClassifyEmptyInput {
   now: Date;
   /** `--allow-empty` で明示的に許可されたキー */
   cliAllowed?: ReadonlySet<string>;
+  /** 差し替え可能にするのはテスト用 (EXPECTED_EMPTY は空になりうる) */
+  allowlist?: readonly ExpectedEmptyEntry[];
 }
 
 export interface ClassifyEmptyResult {
@@ -148,7 +123,7 @@ export interface ClassifyEmptyResult {
  */
 export function classifyEmptyOutcome(input: ClassifyEmptyInput): ClassifyEmptyResult {
   const { key, entity, rawCount, rowCount, priorRowCount, now, cliAllowed } = input;
-  const allow = findExpectedEmpty(key, entity, now);
+  const allow = findExpectedEmpty(key, entity, now, input.allowlist ?? EXPECTED_EMPTY);
 
   if (rowCount > 0) {
     if (allow) {

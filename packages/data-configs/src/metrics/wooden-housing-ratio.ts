@@ -11,6 +11,11 @@ export const woodenHousingRatio: MetricConfig = {
     "statsDataId": "0004015760",
     "cdCat01": "0",
     "cdCat02": "00",
+    "axisRatio": {
+      "axis": "cat03",
+      "numeratorCodes": ["1"],
+      "denominatorCodes": ["0"],
+    },
     "displayName": "住宅・土地統計調査",
     "url": "https://www.stat.go.jp/data/jyutaku/2023/index.html",
   },

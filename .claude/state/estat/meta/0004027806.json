@@ -1,0 +1,1049 @@
+{
+  "statsDataId": "0004027806",
+  "title": "予防接種 市区町村が実施した定期の予防接種の接種者数１，全国、都道府県－指定都市・特別区－中核市－その他政令市、対象疾病、年齢別",
+  "dimensions": [
+    {
+      "id": "tab",
+      "name": "表章項目",
+      "valueCount": 1,
+      "sampleValues": [
+        {
+          "code": "360",
+          "name": "接種者数",
+          "unit": "人"
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat01",
+      "name": "実施主体",
+      "valueCount": 1,
+      "sampleValues": [
+        {
+          "code": "120",
+          "name": "市区町村が実施",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat02",
+      "name": "定期予防接種種別",
+      "valueCount": 41,
+      "sampleValues": [
+        {
+          "code": "100",
+          "name": "沈降精製百日せきジフテリア破傷風混合ワクチン（ＤＰＴ）_第１期_初回接種_第１回",
+          "unit": null
+        },
+        {
+          "code": "110",
+          "name": "沈降精製百日せきジフテリア破傷風混合ワクチン（ＤＰＴ）_第１期_初回接種_第２回",
+          "unit": null
+        },
+        {
+          "code": "120",
+          "name": "沈降精製百日せきジフテリア破傷風混合ワクチン（ＤＰＴ）_第１期_初回接種_第３回",
+          "unit": null
+        },
+        {
+          "code": "130",
+          "name": "沈降精製百日せきジフテリア破傷風混合ワクチン（ＤＰＴ）_第１期_追加接種",
+          "unit": null
+        },
+        {
+          "code": "140",
+          "name": "沈降ジフテリア破傷風混合トキソイド（ＤＴ）_第１期_初回接種_第１回",
+          "unit": null
+        },
+        {
+          "code": "150",
+          "name": "沈降ジフテリア破傷風混合トキソイド（ＤＴ）_第１期_初回接種_第２回",
+          "unit": null
+        },
+        {
+          "code": "160",
+          "name": "沈降ジフテリア破傷風混合トキソイド（ＤＴ）_第１期_追加接種",
+          "unit": null
+        },
+        {
+          "code": "170",
+          "name": "沈降ジフテリア破傷風混合トキソイド（ＤＴ）_第２期",
+          "unit": null
+        },
+        {
+          "code": "180",
+          "name": "不活化ポリオワクチン（ＩＰＶ）_初回接種_第１回",
+          "unit": null
+        },
+        {
+          "code": "190",
+          "name": "不活化ポリオワクチン（ＩＰＶ）_初回接種_第２回",
+          "unit": null
+        },
+        {
+          "code": "200",
+          "name": "不活化ポリオワクチン（ＩＰＶ）_初回接種_第３回",
+          "unit": null
+        },
+        {
+          "code": "210",
+          "name": "不活化ポリオワクチン（ＩＰＶ）_追加接種",
+          "unit": null
+        },
+        {
+          "code": "220",
+          "name": "沈降精製百日せきジフテリア破傷風不活化ポリオ混合ワクチン（ＤＰＴ－ＩＰＶ）_第１期_初回接種_第１回",
+          "unit": null
+        },
+        {
+          "code": "230",
+          "name": "沈降精製百日せきジフテリア破傷風不活化ポリオ混合ワクチン（ＤＰＴ－ＩＰＶ）_第１期_初回接種_第２回",
+          "unit": null
+        },
+        {
+          "code": "240",
+          "name": "沈降精製百日せきジフテリア破傷風不活化ポリオ混合ワクチン（ＤＰＴ－ＩＰＶ）_第１期_初回接種_第３回",
+          "unit": null
+        },
+        {
+          "code": "250",
+          "name": "沈降精製百日せきジフテリア破傷風不活化ポリオ混合ワクチン（ＤＰＴ－ＩＰＶ）_第１期_追加接種",
+          "unit": null
+        },
+        {
+          "code": "260",
+          "name": "日本脳炎ワクチン_第１期_初回接種_第１回",
+          "unit": null
+        },
+        {
+          "code": "270",
+          "name": "日本脳炎ワクチン_第１期_初回接種_第２回",
+          "unit": null
+        },
+        {
+          "code": "280",
+          "name": "日本脳炎ワクチン_第１期_追加接種",
+          "unit": null
+        },
+        {
+          "code": "290",
+          "name": "日本脳炎ワクチン_第２期",
+          "unit": null
+        },
+        {
+          "code": "300",
+          "name": "ヒブワクチン_第１回",
+          "unit": null
+        },
+        {
+          "code": "310",
+          "name": "ヒブワクチン_第２回",
+          "unit": null
+        },
+        {
+          "code": "320",
+          "name": "ヒブワクチン_第３回",
+          "unit": null
+        },
+        {
+          "code": "330",
+          "name": "ヒブワクチン_第４回",
+          "unit": null
+        },
+        {
+          "code": "340",
+          "name": "小児用肺炎球菌ワクチン_第１回",
+          "unit": null
+        },
+        {
+          "code": "350",
+          "name": "小児用肺炎球菌ワクチン_第２回",
+          "unit": null
+        },
+        {
+          "code": "360",
+          "name": "小児用肺炎球菌ワクチン_第３回",
+          "unit": null
+        },
+        {
+          "code": "370",
+          "name": "小児用肺炎球菌ワクチン_第４回",
+          "unit": null
+        },
+        {
+          "code": "380",
+          "name": "ヒトパピローマウイルス（ＨＰＶ）ワクチン_第１回",
+          "unit": null
+        },
+        {
+          "code": "390",
+          "name": "ヒトパピローマウイルス（ＨＰＶ）ワクチン_第２回",
+          "unit": null
+        },
+        {
+          "code": "400",
+          "name": "ヒトパピローマウイルス（ＨＰＶ）ワクチン_第３回",
+          "unit": null
+        },
+        {
+          "code": "410",
+          "name": "水痘ワクチン_第１回",
+          "unit": null
+        },
+        {
+          "code": "420",
+          "name": "水痘ワクチン_第２回",
+          "unit": null
+        },
+        {
+          "code": "430",
+          "name": "Ｂ型肝炎ワクチン_第１回",
+          "unit": null
+        },
+        {
+          "code": "440",
+          "name": "Ｂ型肝炎ワクチン_第２回",
+          "unit": null
+        },
+        {
+          "code": "450",
+          "name": "Ｂ型肝炎ワクチン_第３回",
+          "unit": null
+        },
+        {
+          "code": "460",
+          "name": "ロタウイルスワクチン_１価_第１回",
+          "unit": null
+        },
+        {
+          "code": "470",
+          "name": "ロタウイルスワクチン_１価_第２回",
+          "unit": null
+        },
+        {
+          "code": "480",
+          "name": "ロタウイルスワクチン_５価_第１回",
+          "unit": null
+        },
+        {
+          "code": "490",
+          "name": "ロタウイルスワクチン_５価_第２回",
+          "unit": null
+        },
+        {
+          "code": "500",
+          "name": "ロタウイルスワクチン_５価_第３回",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat03",
+      "name": "年齢階級",
+      "valueCount": 21,
+      "sampleValues": [
+        {
+          "code": "000000",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "Y0",
+          "name": "0歳",
+          "unit": null
+        },
+        {
+          "code": "Y1",
+          "name": "1歳",
+          "unit": null
+        },
+        {
+          "code": "Y2",
+          "name": "2歳",
+          "unit": null
+        },
+        {
+          "code": "Y3",
+          "name": "3歳",
+          "unit": null
+        },
+        {
+          "code": "Y4",
+          "name": "4歳",
+          "unit": null
+        },
+        {
+          "code": "Y5",
+          "name": "5歳",
+          "unit": null
+        },
+        {
+          "code": "Y6",
+          "name": "6歳",
+          "unit": null
+        },
+        {
+          "code": "Y7",
+          "name": "7歳",
+          "unit": null
+        },
+        {
+          "code": "Y8",
+          "name": "8歳",
+          "unit": null
+        },
+        {
+          "code": "Y9",
+          "name": "9歳",
+          "unit": null
+        },
+        {
+          "code": "Y10",
+          "name": "10歳",
+          "unit": null
+        },
+        {
+          "code": "Y11",
+          "name": "11歳",
+          "unit": null
+        },
+        {
+          "code": "Y12",
+          "name": "12歳",
+          "unit": null
+        },
+        {
+          "code": "Y13",
+          "name": "13歳",
+          "unit": null
+        },
+        {
+          "code": "Y14",
+          "name": "14歳",
+          "unit": null
+        },
+        {
+          "code": "Y15",
+          "name": "15歳",
+          "unit": null
+        },
+        {
+          "code": "Y16",
+          "name": "16歳",
+          "unit": null
+        },
+        {
+          "code": "Y17",
+          "name": "17歳",
+          "unit": null
+        },
+        {
+          "code": "Y18",
+          "name": "18歳",
+          "unit": null
+        },
+        {
+          "code": "Y19",
+          "name": "19歳",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "area",
+      "name": "都道府県－指定都市・特別区－中核市－その他政令市",
+      "valueCount": 134,
+      "sampleValues": [
+        {
+          "code": "00000",
+          "name": "全国",
+          "unit": null
+        },
+        {
+          "code": "01000",
+          "name": "北海道",
+          "unit": null
+        },
+        {
+          "code": "02000",
+          "name": "青森県",
+          "unit": null
+        },
+        {
+          "code": "03000",
+          "name": "岩手県",
+          "unit": null
+        },
+        {
+          "code": "04000",
+          "name": "宮城県",
+          "unit": null
+        },
+        {
+          "code": "05000",
+          "name": "秋田県",
+          "unit": null
+        },
+        {
+          "code": "06000",
+          "name": "山形県",
+          "unit": null
+        },
+        {
+          "code": "07000",
+          "name": "福島県",
+          "unit": null
+        },
+        {
+          "code": "08000",
+          "name": "茨城県",
+          "unit": null
+        },
+        {
+          "code": "09000",
+          "name": "栃木県",
+          "unit": null
+        },
+        {
+          "code": "10000",
+          "name": "群馬県",
+          "unit": null
+        },
+        {
+          "code": "11000",
+          "name": "埼玉県",
+          "unit": null
+        },
+        {
+          "code": "12000",
+          "name": "千葉県",
+          "unit": null
+        },
+        {
+          "code": "13000",
+          "name": "東京都",
+          "unit": null
+        },
+        {
+          "code": "14000",
+          "name": "神奈川県",
+          "unit": null
+        },
+        {
+          "code": "15000",
+          "name": "新潟県",
+          "unit": null
+        },
+        {
+          "code": "16000",
+          "name": "富山県",
+          "unit": null
+        },
+        {
+          "code": "17000",
+          "name": "石川県",
+          "unit": null
+        },
+        {
+          "code": "18000",
+          "name": "福井県",
+          "unit": null
+        },
+        {
+          "code": "19000",
+          "name": "山梨県",
+          "unit": null
+        },
+        {
+          "code": "20000",
+          "name": "長野県",
+          "unit": null
+        },
+        {
+          "code": "21000",
+          "name": "岐阜県",
+          "unit": null
+        },
+        {
+          "code": "22000",
+          "name": "静岡県",
+          "unit": null
+        },
+        {
+          "code": "23000",
+          "name": "愛知県",
+          "unit": null
+        },
+        {
+          "code": "24000",
+          "name": "三重県",
+          "unit": null
+        },
+        {
+          "code": "25000",
+          "name": "滋賀県",
+          "unit": null
+        },
+        {
+          "code": "26000",
+          "name": "京都府",
+          "unit": null
+        },
+        {
+          "code": "27000",
+          "name": "大阪府",
+          "unit": null
+        },
+        {
+          "code": "28000",
+          "name": "兵庫県",
+          "unit": null
+        },
+        {
+          "code": "29000",
+          "name": "奈良県",
+          "unit": null
+        },
+        {
+          "code": "30000",
+          "name": "和歌山県",
+          "unit": null
+        },
+        {
+          "code": "31000",
+          "name": "鳥取県",
+          "unit": null
+        },
+        {
+          "code": "32000",
+          "name": "島根県",
+          "unit": null
+        },
+        {
+          "code": "33000",
+          "name": "岡山県",
+          "unit": null
+        },
+        {
+          "code": "34000",
+          "name": "広島県",
+          "unit": null
+        },
+        {
+          "code": "35000",
+          "name": "山口県",
+          "unit": null
+        },
+        {
+          "code": "36000",
+          "name": "徳島県",
+          "unit": null
+        },
+        {
+          "code": "37000",
+          "name": "香川県",
+          "unit": null
+        },
+        {
+          "code": "38000",
+          "name": "愛媛県",
+          "unit": null
+        },
+        {
+          "code": "39000",
+          "name": "高知県",
+          "unit": null
+        },
+        {
+          "code": "40000",
+          "name": "福岡県",
+          "unit": null
+        },
+        {
+          "code": "41000",
+          "name": "佐賀県",
+          "unit": null
+        },
+        {
+          "code": "42000",
+          "name": "長崎県",
+          "unit": null
+        },
+        {
+          "code": "43000",
+          "name": "熊本県",
+          "unit": null
+        },
+        {
+          "code": "44000",
+          "name": "大分県",
+          "unit": null
+        },
+        {
+          "code": "45000",
+          "name": "宮崎県",
+          "unit": null
+        },
+        {
+          "code": "46000",
+          "name": "鹿児島県",
+          "unit": null
+        },
+        {
+          "code": "47000",
+          "name": "沖縄県",
+          "unit": null
+        },
+        {
+          "code": "13100",
+          "name": "東京都区部（再掲）",
+          "unit": null
+        },
+        {
+          "code": "01100",
+          "name": "札幌市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "04100",
+          "name": "仙台市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "11100",
+          "name": "さいたま市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "12100",
+          "name": "千葉市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "14100",
+          "name": "横浜市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "14130",
+          "name": "川崎市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "14150",
+          "name": "相模原市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "15100",
+          "name": "新潟市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "22100",
+          "name": "静岡市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "22130",
+          "name": "浜松市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "23100",
+          "name": "名古屋市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "26100",
+          "name": "京都市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "27100",
+          "name": "大阪市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "27140",
+          "name": "堺市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "28100",
+          "name": "神戸市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "33100",
+          "name": "岡山市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "34100",
+          "name": "広島市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "40100",
+          "name": "北九州市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "40130",
+          "name": "福岡市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "43100",
+          "name": "熊本市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "01204",
+          "name": "旭川市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "01202",
+          "name": "函館市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "02201",
+          "name": "青森市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "02203",
+          "name": "八戸市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "03201",
+          "name": "盛岡市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "05201",
+          "name": "秋田市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "06201",
+          "name": "山形市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "07203",
+          "name": "郡山市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "07204",
+          "name": "いわき市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "07201",
+          "name": "福島市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "08201",
+          "name": "水戸市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "09201",
+          "name": "宇都宮市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "10201",
+          "name": "前橋市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "10202",
+          "name": "高崎市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "11201",
+          "name": "川越市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "11222",
+          "name": "越谷市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "11203",
+          "name": "川口市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "12204",
+          "name": "船橋市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "12217",
+          "name": "柏市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "13201",
+          "name": "八王子市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "14201",
+          "name": "横須賀市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "16201",
+          "name": "富山市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "17201",
+          "name": "金沢市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "18201",
+          "name": "福井市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "19201",
+          "name": "甲府市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "20201",
+          "name": "長野市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "21201",
+          "name": "岐阜市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "23201",
+          "name": "豊橋市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "23211",
+          "name": "豊田市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "23202",
+          "name": "岡崎市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "25201",
+          "name": "大津市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "27207",
+          "name": "高槻市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "27227",
+          "name": "東大阪市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "27203",
+          "name": "豊中市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "27210",
+          "name": "枚方市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "27212",
+          "name": "八尾市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "27215",
+          "name": "寝屋川市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "27205",
+          "name": "吹田市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "28201",
+          "name": "姫路市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "28204",
+          "name": "西宮市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "28202",
+          "name": "尼崎市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "28203",
+          "name": "明石市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "29201",
+          "name": "奈良市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "30201",
+          "name": "和歌山市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "31201",
+          "name": "鳥取市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "32201",
+          "name": "松江市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "33202",
+          "name": "倉敷市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "34207",
+          "name": "福山市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "34202",
+          "name": "呉市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "35201",
+          "name": "下関市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "37201",
+          "name": "高松市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "38201",
+          "name": "松山市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "39201",
+          "name": "高知市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "40203",
+          "name": "久留米市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "42201",
+          "name": "長崎市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "42202",
+          "name": "佐世保市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "44201",
+          "name": "大分市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "45201",
+          "name": "宮崎市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "46201",
+          "name": "鹿児島市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "47201",
+          "name": "那覇市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "01203",
+          "name": "小樽市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "13209",
+          "name": "町田市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "14205",
+          "name": "藤沢市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "14207",
+          "name": "茅ヶ崎市（再掲）",
+          "unit": null
+        },
+        {
+          "code": "24202",
+          "name": "四日市市（再掲）",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "time",
+      "name": "時間軸（年度次）",
+      "valueCount": 1,
+      "sampleValues": [
+        {
+          "code": "2020100000",
+          "name": "2020年度",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    }
+  ]
+}

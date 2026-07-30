@@ -4,7 +4,12 @@ import {
   fetchFormattedStats,
   type GetStatsDataParams,
 } from "@stats47/estat-api/server";
-import { readRankingItemFromR2 } from "@stats47/ranking/server";
+import {
+  isDerivedSource,
+  readRankingItemFromR2,
+  resolveEstatParams,
+} from "@stats47/ranking/server";
+import { readStatsValues } from "@stats47/stats-r2/readers";
 import { isOk } from "@stats47/types";
 
 import { getEstatCacheStorage } from "@/components/stat-charts/server";
@@ -23,6 +28,17 @@ export interface MetricTimeseriesPoint {
   value: number;
 }
 
+/**
+ * 集約が必要とする最小の行形。e-Stat の生応答と R2 正典 (StatsValuesPayload.rows) の
+ * 共通部分だけを見ることで、どちらから来ても同じ集約ロジックを通せる。
+ */
+interface TimeseriesSourceRow {
+  areaCode: string;
+  yearCode: string;
+  yearName?: string | null;
+  value: number | null;
+}
+
 export async function fetchMetricTimeseriesAction(
   rankingKey: string,
   areaCode: string,
@@ -38,14 +54,16 @@ export async function fetchMetricTimeseriesAction(
     return [];
   }
 
-  if (!sourceConfig?.statsDataId) return [];
+  // ★sourceConfig を丸ごと spread しない (cdCat03/04/05・cdTab の欠落と非クエリキー混入を防ぐ)
+  const params = resolveEstatParams(sourceConfig);
+  if (!params) return [];
 
   try {
-    const params: GetStatsDataParams = {
-      ...(sourceConfig as GetStatsDataParams),
-    };
-    const storage = await getEstatCacheStorage();
-    const rawData = await fetchFormattedStats(params, storage);
+    // 宣言演算 (tab 線形結合 / 軸合算 / 率 / 県庁所在市写像) を伴う metric は
+    // e-Stat 単発クエリで再現できないので、取り込み済みの正典 R2 から読む。
+    const rawData: TimeseriesSourceRow[] = isDerivedSource(sourceConfig)
+      ? ((await readStatsValues(rankingKey, "prefecture"))?.rows ?? [])
+      : await fetchFormattedStats(params as GetStatsDataParams, await getEstatCacheStorage());
     if (!rawData || rawData.length === 0) return [];
 
     // 年度ごとに集約

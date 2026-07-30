@@ -9,6 +9,7 @@ export const convenienceStoreSales: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004032502",
+    "cdCat03": "01030100",
     "cdCat01": "0101300",
     "cdCat02": "01040100",
     "displayName": "商業動態統計調査",

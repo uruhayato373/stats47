@@ -8,6 +8,10 @@ export const portCargoExport: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003130738",
+    "axisSum": {
+          "axis": "cat03",
+          "codes": ["110", "120", "130"],
+        },
     "cdCat01": "110",
     "cdCat02": "100",
   },

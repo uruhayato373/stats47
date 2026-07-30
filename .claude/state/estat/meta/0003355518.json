@@ -1,0 +1,762 @@
+{
+  "statsDataId": "0003355518",
+  "title": "世帯の種類，世帯の型，家族類型，世帯人員 世帯の種類(3区分)，家族類型(25区分)，家計を主に支える者の年齢(14区分)，住宅の所有の関係(6区分)別普通世帯数(高齢夫婦世帯数，65歳以上の世帯員のいる世帯数―特掲)－全国，都道府県, 21大都市",
+  "dimensions": [
+    {
+      "id": "tab",
+      "name": "表章項目",
+      "valueCount": 1,
+      "sampleValues": [
+        {
+          "code": "13-2018",
+          "name": "普通世帯数",
+          "unit": "世帯"
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat01",
+      "name": "世帯の種類",
+      "valueCount": 4,
+      "sampleValues": [
+        {
+          "code": "0",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "1",
+          "name": "主世帯",
+          "unit": null
+        },
+        {
+          "code": "2",
+          "name": "同居世帯",
+          "unit": null
+        },
+        {
+          "code": "3",
+          "name": "住宅以外の建物に居住する世帯",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "cat02",
+      "name": "住宅の所有の関係",
+      "valueCount": 9,
+      "sampleValues": [
+        {
+          "code": "0",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "1",
+          "name": "持ち家",
+          "unit": null
+        },
+        {
+          "code": "2",
+          "name": "借家",
+          "unit": null
+        },
+        {
+          "code": "210",
+          "name": "公営の借家",
+          "unit": null
+        },
+        {
+          "code": "220",
+          "name": "都市再生機構(UR)・公社の借家",
+          "unit": null
+        },
+        {
+          "code": "230",
+          "name": "民営借家",
+          "unit": null
+        },
+        {
+          "code": "231",
+          "name": "民営借家（木造）",
+          "unit": null
+        },
+        {
+          "code": "232",
+          "name": "民営借家（非木造）",
+          "unit": null
+        },
+        {
+          "code": "240",
+          "name": "給与住宅",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "cat03",
+      "name": "家族類型",
+      "valueCount": 40,
+      "sampleValues": [
+        {
+          "code": "0",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "1",
+          "name": "Ａ 親族のみの世帯",
+          "unit": null
+        },
+        {
+          "code": "11",
+          "name": "1 核家族世帯",
+          "unit": null
+        },
+        {
+          "code": "111",
+          "name": "(1) 夫婦のみの世帯",
+          "unit": null
+        },
+        {
+          "code": "112",
+          "name": "(2) 夫婦と子供から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "1121",
+          "name": "[1] 夫婦のいずれかが家計を主に支える者の世帯",
+          "unit": null
+        },
+        {
+          "code": "1122",
+          "name": "[2] 子供が家計を主に支える者の世帯(夫婦)",
+          "unit": null
+        },
+        {
+          "code": "113",
+          "name": "(3) 男親と子供から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "1131",
+          "name": "[1] 男親が家計を主に支える者の世帯",
+          "unit": null
+        },
+        {
+          "code": "1132",
+          "name": "[2] 子供が家計を主に支える者の世帯(男親)",
+          "unit": null
+        },
+        {
+          "code": "114",
+          "name": "(4) 女親と子供から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "1141",
+          "name": "[1] 女親が家計を主に支える者の世帯",
+          "unit": null
+        },
+        {
+          "code": "1142",
+          "name": "[2] 子供が家計を主に支える者の世帯(女親)",
+          "unit": null
+        },
+        {
+          "code": "12",
+          "name": "2 核家族以外の世帯",
+          "unit": null
+        },
+        {
+          "code": "121",
+          "name": "(5) 夫婦と両親から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "1211",
+          "name": "[1] 夫婦と夫の親から成る世帯(両親)",
+          "unit": null
+        },
+        {
+          "code": "1212",
+          "name": "[2] 夫婦と妻の親から成る世帯(両親)",
+          "unit": null
+        },
+        {
+          "code": "122",
+          "name": "(6) 夫婦とひとり親から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "1221",
+          "name": "[1] 夫婦と夫の親から成る世帯(ひとり親)",
+          "unit": null
+        },
+        {
+          "code": "1222",
+          "name": "[2] 夫婦と妻の親から成る世帯(ひとり親)",
+          "unit": null
+        },
+        {
+          "code": "123",
+          "name": "(7) 夫婦，子供と両親から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "1231",
+          "name": "[1] 夫婦，子供と夫の親から成る世帯(両親)",
+          "unit": null
+        },
+        {
+          "code": "1232",
+          "name": "[2] 夫婦，子供と妻の親から成る世帯(両親)",
+          "unit": null
+        },
+        {
+          "code": "124",
+          "name": "(8) 夫婦，子供とひとり親から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "1241",
+          "name": "[1] 夫婦，子供と夫の親から成る世帯(ひとり親)",
+          "unit": null
+        },
+        {
+          "code": "1242",
+          "name": "[2] 夫婦，子供と妻の親から成る世帯(ひとり親)",
+          "unit": null
+        },
+        {
+          "code": "125",
+          "name": "(9) 夫婦と他の親族(親，子供を含まない) から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "126",
+          "name": "(10) 夫婦，子供と他の親族(親を含まない) から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "127",
+          "name": "(11) 夫婦，親と他の親族(子供を含まない) から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "1271",
+          "name": "[1] 夫婦，夫の親と他の親族から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "1272",
+          "name": "[2] 夫婦，妻の親と他の親族から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "128",
+          "name": "(12) 夫婦，子供，親と他の親族から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "1281",
+          "name": "[1] 夫婦，子供，夫の親と他の親族から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "1282",
+          "name": "[2] 夫婦，子供，妻の親と他の親族から成る世帯",
+          "unit": null
+        },
+        {
+          "code": "129",
+          "name": "(13) 兄弟姉妹のみから成る世帯",
+          "unit": null
+        },
+        {
+          "code": "130",
+          "name": "(14) 他に分類されない世帯",
+          "unit": null
+        },
+        {
+          "code": "2",
+          "name": "Ｂ 非親族を含む世帯",
+          "unit": null
+        },
+        {
+          "code": "3",
+          "name": "Ｃ 単独世帯",
+          "unit": null
+        },
+        {
+          "code": "R1",
+          "name": "（再掲）高齢夫婦世帯",
+          "unit": null
+        },
+        {
+          "code": "R2",
+          "name": "（再掲）65歳以上の世帯員のいる世帯",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "cat04",
+      "name": "家計を主に支える者の年齢",
+      "valueCount": 16,
+      "sampleValues": [
+        {
+          "code": "00",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "01",
+          "name": "25歳未満",
+          "unit": null
+        },
+        {
+          "code": "02",
+          "name": "25～29歳",
+          "unit": null
+        },
+        {
+          "code": "03",
+          "name": "30～34歳",
+          "unit": null
+        },
+        {
+          "code": "04",
+          "name": "35～39歳",
+          "unit": null
+        },
+        {
+          "code": "05",
+          "name": "40～44歳",
+          "unit": null
+        },
+        {
+          "code": "06",
+          "name": "45～49歳",
+          "unit": null
+        },
+        {
+          "code": "07",
+          "name": "50～54歳",
+          "unit": null
+        },
+        {
+          "code": "08",
+          "name": "55～59歳",
+          "unit": null
+        },
+        {
+          "code": "09",
+          "name": "60～64歳",
+          "unit": null
+        },
+        {
+          "code": "10",
+          "name": "65～69歳",
+          "unit": null
+        },
+        {
+          "code": "11",
+          "name": "70～74歳",
+          "unit": null
+        },
+        {
+          "code": "12",
+          "name": "75～79歳",
+          "unit": null
+        },
+        {
+          "code": "13",
+          "name": "80～84歳",
+          "unit": null
+        },
+        {
+          "code": "14",
+          "name": "85歳以上",
+          "unit": null
+        },
+        {
+          "code": "99",
+          "name": "不詳",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "area",
+      "name": "地域",
+      "valueCount": 69,
+      "sampleValues": [
+        {
+          "code": "00000",
+          "name": "全国",
+          "unit": null
+        },
+        {
+          "code": "01000",
+          "name": "北海道",
+          "unit": null
+        },
+        {
+          "code": "01100",
+          "name": "札幌市",
+          "unit": null
+        },
+        {
+          "code": "02000",
+          "name": "青森県",
+          "unit": null
+        },
+        {
+          "code": "03000",
+          "name": "岩手県",
+          "unit": null
+        },
+        {
+          "code": "04000",
+          "name": "宮城県",
+          "unit": null
+        },
+        {
+          "code": "04100",
+          "name": "仙台市",
+          "unit": null
+        },
+        {
+          "code": "05000",
+          "name": "秋田県",
+          "unit": null
+        },
+        {
+          "code": "06000",
+          "name": "山形県",
+          "unit": null
+        },
+        {
+          "code": "07000",
+          "name": "福島県",
+          "unit": null
+        },
+        {
+          "code": "08000",
+          "name": "茨城県",
+          "unit": null
+        },
+        {
+          "code": "09000",
+          "name": "栃木県",
+          "unit": null
+        },
+        {
+          "code": "10000",
+          "name": "群馬県",
+          "unit": null
+        },
+        {
+          "code": "11000",
+          "name": "埼玉県",
+          "unit": null
+        },
+        {
+          "code": "11100",
+          "name": "さいたま市",
+          "unit": null
+        },
+        {
+          "code": "12000",
+          "name": "千葉県",
+          "unit": null
+        },
+        {
+          "code": "12100",
+          "name": "千葉市",
+          "unit": null
+        },
+        {
+          "code": "13000",
+          "name": "東京都",
+          "unit": null
+        },
+        {
+          "code": "13100",
+          "name": "特別区部",
+          "unit": null
+        },
+        {
+          "code": "14000",
+          "name": "神奈川県",
+          "unit": null
+        },
+        {
+          "code": "14100",
+          "name": "横浜市",
+          "unit": null
+        },
+        {
+          "code": "14130",
+          "name": "川崎市",
+          "unit": null
+        },
+        {
+          "code": "14150",
+          "name": "相模原市",
+          "unit": null
+        },
+        {
+          "code": "15000",
+          "name": "新潟県",
+          "unit": null
+        },
+        {
+          "code": "15100",
+          "name": "新潟市",
+          "unit": null
+        },
+        {
+          "code": "16000",
+          "name": "富山県",
+          "unit": null
+        },
+        {
+          "code": "17000",
+          "name": "石川県",
+          "unit": null
+        },
+        {
+          "code": "18000",
+          "name": "福井県",
+          "unit": null
+        },
+        {
+          "code": "19000",
+          "name": "山梨県",
+          "unit": null
+        },
+        {
+          "code": "20000",
+          "name": "長野県",
+          "unit": null
+        },
+        {
+          "code": "21000",
+          "name": "岐阜県",
+          "unit": null
+        },
+        {
+          "code": "22000",
+          "name": "静岡県",
+          "unit": null
+        },
+        {
+          "code": "22100",
+          "name": "静岡市",
+          "unit": null
+        },
+        {
+          "code": "22130",
+          "name": "浜松市",
+          "unit": null
+        },
+        {
+          "code": "23000",
+          "name": "愛知県",
+          "unit": null
+        },
+        {
+          "code": "23100",
+          "name": "名古屋市",
+          "unit": null
+        },
+        {
+          "code": "24000",
+          "name": "三重県",
+          "unit": null
+        },
+        {
+          "code": "25000",
+          "name": "滋賀県",
+          "unit": null
+        },
+        {
+          "code": "26000",
+          "name": "京都府",
+          "unit": null
+        },
+        {
+          "code": "26100",
+          "name": "京都市",
+          "unit": null
+        },
+        {
+          "code": "27000",
+          "name": "大阪府",
+          "unit": null
+        },
+        {
+          "code": "27100",
+          "name": "大阪市",
+          "unit": null
+        },
+        {
+          "code": "27140",
+          "name": "堺市",
+          "unit": null
+        },
+        {
+          "code": "28000",
+          "name": "兵庫県",
+          "unit": null
+        },
+        {
+          "code": "28100",
+          "name": "神戸市",
+          "unit": null
+        },
+        {
+          "code": "29000",
+          "name": "奈良県",
+          "unit": null
+        },
+        {
+          "code": "30000",
+          "name": "和歌山県",
+          "unit": null
+        },
+        {
+          "code": "31000",
+          "name": "鳥取県",
+          "unit": null
+        },
+        {
+          "code": "32000",
+          "name": "島根県",
+          "unit": null
+        },
+        {
+          "code": "33000",
+          "name": "岡山県",
+          "unit": null
+        },
+        {
+          "code": "33100",
+          "name": "岡山市",
+          "unit": null
+        },
+        {
+          "code": "34000",
+          "name": "広島県",
+          "unit": null
+        },
+        {
+          "code": "34100",
+          "name": "広島市",
+          "unit": null
+        },
+        {
+          "code": "35000",
+          "name": "山口県",
+          "unit": null
+        },
+        {
+          "code": "36000",
+          "name": "徳島県",
+          "unit": null
+        },
+        {
+          "code": "37000",
+          "name": "香川県",
+          "unit": null
+        },
+        {
+          "code": "38000",
+          "name": "愛媛県",
+          "unit": null
+        },
+        {
+          "code": "39000",
+          "name": "高知県",
+          "unit": null
+        },
+        {
+          "code": "40000",
+          "name": "福岡県",
+          "unit": null
+        },
+        {
+          "code": "40100",
+          "name": "北九州市",
+          "unit": null
+        },
+        {
+          "code": "40130",
+          "name": "福岡市",
+          "unit": null
+        },
+        {
+          "code": "41000",
+          "name": "佐賀県",
+          "unit": null
+        },
+        {
+          "code": "42000",
+          "name": "長崎県",
+          "unit": null
+        },
+        {
+          "code": "43000",
+          "name": "熊本県",
+          "unit": null
+        },
+        {
+          "code": "43100",
+          "name": "熊本市",
+          "unit": null
+        },
+        {
+          "code": "44000",
+          "name": "大分県",
+          "unit": null
+        },
+        {
+          "code": "45000",
+          "name": "宮崎県",
+          "unit": null
+        },
+        {
+          "code": "46000",
+          "name": "鹿児島県",
+          "unit": null
+        },
+        {
+          "code": "47000",
+          "name": "沖縄県",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "time",
+      "name": "時間軸(年次)",
+      "valueCount": 1,
+      "sampleValues": [
+        {
+          "code": "2018000000",
+          "name": "2018年",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    }
+  ]
+}

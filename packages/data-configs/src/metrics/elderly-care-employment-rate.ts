@@ -11,6 +11,12 @@ export const elderlyCareEmploymentRate: MetricConfig = {
     "statsDataId": "0004008584",
     "cdCat01": "0",
     "cdCat02": "00",
+    "cdCat03": "1",
+    "axisRatio": {
+      "axis": "cat04",
+      "numeratorCodes": ["1"],
+      "denominatorCodes": ["0"],
+    },
     "displayName": "就業構造基本調査",
     "url": "https://www.stat.go.jp/data/shugyou/2022/index.html",
   },

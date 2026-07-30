@@ -1,0 +1,498 @@
+{
+  "statsDataId": "0003423836",
+  "title": "野菜調査 都道府県別・品目別の作付面積、収穫量及び出荷量",
+  "dimensions": [
+    {
+      "id": "tab",
+      "name": "表章項目",
+      "valueCount": 3,
+      "sampleValues": [
+        {
+          "code": "01",
+          "name": "作付面積",
+          "unit": "ha"
+        },
+        {
+          "code": "03",
+          "name": "収穫量",
+          "unit": "t"
+        },
+        {
+          "code": "04",
+          "name": "出荷量",
+          "unit": "t"
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat01",
+      "name": "(F005-30-2-004)調査品目",
+      "valueCount": 41,
+      "sampleValues": [
+        {
+          "code": "001",
+          "name": "だいこん",
+          "unit": null
+        },
+        {
+          "code": "002",
+          "name": "かぶ",
+          "unit": null
+        },
+        {
+          "code": "003",
+          "name": "にんじん",
+          "unit": null
+        },
+        {
+          "code": "004",
+          "name": "ごぼう",
+          "unit": null
+        },
+        {
+          "code": "005",
+          "name": "れんこん",
+          "unit": null
+        },
+        {
+          "code": "006",
+          "name": "ばれいしょ",
+          "unit": null
+        },
+        {
+          "code": "007",
+          "name": "さといも",
+          "unit": null
+        },
+        {
+          "code": "008",
+          "name": "やまのいも",
+          "unit": null
+        },
+        {
+          "code": "009",
+          "name": "はくさい",
+          "unit": null
+        },
+        {
+          "code": "010",
+          "name": "こまつな",
+          "unit": null
+        },
+        {
+          "code": "011",
+          "name": "キャベツ",
+          "unit": null
+        },
+        {
+          "code": "012",
+          "name": "ちんげんさい",
+          "unit": null
+        },
+        {
+          "code": "013",
+          "name": "ほうれんそう",
+          "unit": null
+        },
+        {
+          "code": "014",
+          "name": "ふき",
+          "unit": null
+        },
+        {
+          "code": "015",
+          "name": "みつば",
+          "unit": null
+        },
+        {
+          "code": "016",
+          "name": "しゅんぎく",
+          "unit": null
+        },
+        {
+          "code": "017",
+          "name": "みずな",
+          "unit": null
+        },
+        {
+          "code": "018",
+          "name": "セルリー",
+          "unit": null
+        },
+        {
+          "code": "019",
+          "name": "アスパラガス",
+          "unit": null
+        },
+        {
+          "code": "020",
+          "name": "カリフラワー",
+          "unit": null
+        },
+        {
+          "code": "021",
+          "name": "ブロッコリー",
+          "unit": null
+        },
+        {
+          "code": "022",
+          "name": "レタス",
+          "unit": null
+        },
+        {
+          "code": "023",
+          "name": "ねぎ",
+          "unit": null
+        },
+        {
+          "code": "024",
+          "name": "にら",
+          "unit": null
+        },
+        {
+          "code": "025",
+          "name": "たまねぎ",
+          "unit": null
+        },
+        {
+          "code": "026",
+          "name": "にんにく",
+          "unit": null
+        },
+        {
+          "code": "027",
+          "name": "きゅうり",
+          "unit": null
+        },
+        {
+          "code": "028",
+          "name": "かぼちゃ",
+          "unit": null
+        },
+        {
+          "code": "029",
+          "name": "なす",
+          "unit": null
+        },
+        {
+          "code": "030",
+          "name": "トマト",
+          "unit": null
+        },
+        {
+          "code": "031",
+          "name": "ピーマン",
+          "unit": null
+        },
+        {
+          "code": "032",
+          "name": "スイートコーン",
+          "unit": null
+        },
+        {
+          "code": "033",
+          "name": "さやいんげん",
+          "unit": null
+        },
+        {
+          "code": "034",
+          "name": "さやえんどう",
+          "unit": null
+        },
+        {
+          "code": "035",
+          "name": "グリーンピース",
+          "unit": null
+        },
+        {
+          "code": "036",
+          "name": "そらまめ",
+          "unit": null
+        },
+        {
+          "code": "037",
+          "name": "えだまめ",
+          "unit": null
+        },
+        {
+          "code": "038",
+          "name": "しょうが",
+          "unit": null
+        },
+        {
+          "code": "039",
+          "name": "いちご",
+          "unit": null
+        },
+        {
+          "code": "040",
+          "name": "メロン",
+          "unit": null
+        },
+        {
+          "code": "041",
+          "name": "すいか",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "area",
+      "name": "(F005-30-1-005)地域",
+      "valueCount": 47,
+      "sampleValues": [
+        {
+          "code": "01000",
+          "name": "北海道",
+          "unit": null
+        },
+        {
+          "code": "02000",
+          "name": "青森県",
+          "unit": null
+        },
+        {
+          "code": "03000",
+          "name": "岩手県",
+          "unit": null
+        },
+        {
+          "code": "04000",
+          "name": "宮城県",
+          "unit": null
+        },
+        {
+          "code": "05000",
+          "name": "秋田県",
+          "unit": null
+        },
+        {
+          "code": "06000",
+          "name": "山形県",
+          "unit": null
+        },
+        {
+          "code": "07000",
+          "name": "福島県",
+          "unit": null
+        },
+        {
+          "code": "08000",
+          "name": "茨城県",
+          "unit": null
+        },
+        {
+          "code": "09000",
+          "name": "栃木県",
+          "unit": null
+        },
+        {
+          "code": "10000",
+          "name": "群馬県",
+          "unit": null
+        },
+        {
+          "code": "11000",
+          "name": "埼玉県",
+          "unit": null
+        },
+        {
+          "code": "12000",
+          "name": "千葉県",
+          "unit": null
+        },
+        {
+          "code": "13000",
+          "name": "東京都",
+          "unit": null
+        },
+        {
+          "code": "14000",
+          "name": "神奈川県",
+          "unit": null
+        },
+        {
+          "code": "15000",
+          "name": "新潟県",
+          "unit": null
+        },
+        {
+          "code": "16000",
+          "name": "富山県",
+          "unit": null
+        },
+        {
+          "code": "17000",
+          "name": "石川県",
+          "unit": null
+        },
+        {
+          "code": "18000",
+          "name": "福井県",
+          "unit": null
+        },
+        {
+          "code": "19000",
+          "name": "山梨県",
+          "unit": null
+        },
+        {
+          "code": "20000",
+          "name": "長野県",
+          "unit": null
+        },
+        {
+          "code": "21000",
+          "name": "岐阜県",
+          "unit": null
+        },
+        {
+          "code": "22000",
+          "name": "静岡県",
+          "unit": null
+        },
+        {
+          "code": "23000",
+          "name": "愛知県",
+          "unit": null
+        },
+        {
+          "code": "24000",
+          "name": "三重県",
+          "unit": null
+        },
+        {
+          "code": "25000",
+          "name": "滋賀県",
+          "unit": null
+        },
+        {
+          "code": "26000",
+          "name": "京都府",
+          "unit": null
+        },
+        {
+          "code": "27000",
+          "name": "大阪府",
+          "unit": null
+        },
+        {
+          "code": "28000",
+          "name": "兵庫県",
+          "unit": null
+        },
+        {
+          "code": "29000",
+          "name": "奈良県",
+          "unit": null
+        },
+        {
+          "code": "30000",
+          "name": "和歌山県",
+          "unit": null
+        },
+        {
+          "code": "31000",
+          "name": "鳥取県",
+          "unit": null
+        },
+        {
+          "code": "32000",
+          "name": "島根県",
+          "unit": null
+        },
+        {
+          "code": "33000",
+          "name": "岡山県",
+          "unit": null
+        },
+        {
+          "code": "34000",
+          "name": "広島県",
+          "unit": null
+        },
+        {
+          "code": "35000",
+          "name": "山口県",
+          "unit": null
+        },
+        {
+          "code": "36000",
+          "name": "徳島県",
+          "unit": null
+        },
+        {
+          "code": "37000",
+          "name": "香川県",
+          "unit": null
+        },
+        {
+          "code": "38000",
+          "name": "愛媛県",
+          "unit": null
+        },
+        {
+          "code": "39000",
+          "name": "高知県",
+          "unit": null
+        },
+        {
+          "code": "40000",
+          "name": "福岡県",
+          "unit": null
+        },
+        {
+          "code": "41000",
+          "name": "佐賀県",
+          "unit": null
+        },
+        {
+          "code": "42000",
+          "name": "長崎県",
+          "unit": null
+        },
+        {
+          "code": "43000",
+          "name": "熊本県",
+          "unit": null
+        },
+        {
+          "code": "44000",
+          "name": "大分県",
+          "unit": null
+        },
+        {
+          "code": "45000",
+          "name": "宮崎県",
+          "unit": null
+        },
+        {
+          "code": "46000",
+          "name": "鹿児島県",
+          "unit": null
+        },
+        {
+          "code": "47000",
+          "name": "沖縄県",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "time",
+      "name": "時間軸（年次）",
+      "valueCount": 1,
+      "sampleValues": [
+        {
+          "code": "2019000000",
+          "name": "2019年",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    }
+  ]
+}

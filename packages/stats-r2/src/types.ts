@@ -1,4 +1,4 @@
-import type { EntityKind } from "@stats47/data-configs";
+import type { EntityKind, MetricRecipe } from "@stats47/data-configs";
 
 /**
  * R2 keypath constants for stats data (Phase 6 architecture).
@@ -59,6 +59,17 @@ export interface StatsValuesPayload {
     yearRange: [string, string] | null;
     areaCount: number;
     generatedAt: string;
+    /**
+     * この値を書いた時点の config から機械生成した取得レシピ。
+     *
+     * 監査 (audit-ranking-data-integrity 検査 k) が `recipe.configHash` と現在の config の
+     * hash を突き合わせ、ズレていれば R2 が stale と判定する。SSOT は git TS のままで、
+     * これは検証つきの生成コピー。
+     *
+     * レシピ導入 (2026-07-30) より前に書かれた payload には無い。読み側は必ず optional
+     * として扱い、監査だけが「未焼き込み (unbaked)」として残数を数える。
+     */
+    recipe?: MetricRecipe;
   };
 }
 

@@ -9,6 +9,7 @@ export const barberShopCount: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004027011",
+    "cdTab": "1030",
     "cdCat01": "100",
     "displayName": "衛生行政報告例",
     "url": "https://www.mhlw.go.jp/toukei/saikin/hw/eisei_houkoku/20/",

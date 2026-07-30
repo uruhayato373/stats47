@@ -8,6 +8,9 @@ export const dentalCheckupRecipients: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004027738",
+    "cdCat03": "100",
+    "cdCat04": "100",
+    "cdCat05": "100",
     "cdCat01": "100",
     "cdCat02": "140",
     "displayName": "歯科健診・保健指導受診延人員（都道府県別・2020年度）",

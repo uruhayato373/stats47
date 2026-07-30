@@ -1,0 +1,434 @@
+{
+  "statsDataId": "0003130773",
+  "title": "第１部　入港船舶・船舶乗降人員及び海上出入貨物総括表 第１表　入港船舶表 都道府県",
+  "dimensions": [
+    {
+      "id": "tab",
+      "name": "表章項目",
+      "valueCount": 2,
+      "sampleValues": [
+        {
+          "code": "110",
+          "name": "隻数",
+          "unit": "隻"
+        },
+        {
+          "code": "130",
+          "name": "総トン数",
+          "unit": "総トン"
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat01",
+      "name": "船舶総トン数",
+      "valueCount": 3,
+      "sampleValues": [
+        {
+          "code": "100",
+          "name": "合　　計",
+          "unit": null
+        },
+        {
+          "code": "170",
+          "name": "500総トン以上",
+          "unit": null
+        },
+        {
+          "code": "180",
+          "name": "5総トン以上-500総トン未満",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "cat02",
+      "name": "入港船舶",
+      "valueCount": 10,
+      "sampleValues": [
+        {
+          "code": "100",
+          "name": "計",
+          "unit": null
+        },
+        {
+          "code": "120",
+          "name": "外航商船",
+          "unit": null
+        },
+        {
+          "code": "130",
+          "name": "内航商船",
+          "unit": null
+        },
+        {
+          "code": "140",
+          "name": "自動車航送船",
+          "unit": null
+        },
+        {
+          "code": "150",
+          "name": "外航自航",
+          "unit": null
+        },
+        {
+          "code": "160",
+          "name": "内航自航",
+          "unit": null
+        },
+        {
+          "code": "170",
+          "name": "漁船",
+          "unit": null
+        },
+        {
+          "code": "180",
+          "name": "避難船",
+          "unit": null
+        },
+        {
+          "code": "185",
+          "name": "鉄道連絡船",
+          "unit": null
+        },
+        {
+          "code": "190",
+          "name": "その他",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "cat03",
+      "name": "航路",
+      "valueCount": 2,
+      "sampleValues": [
+        {
+          "code": "110",
+          "name": "外国航路",
+          "unit": null
+        },
+        {
+          "code": "120",
+          "name": "内国航路",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "area",
+      "name": "地域（都道府県）",
+      "valueCount": 40,
+      "sampleValues": [
+        {
+          "code": "01000",
+          "name": "北海道",
+          "unit": null
+        },
+        {
+          "code": "02000",
+          "name": "青森県",
+          "unit": null
+        },
+        {
+          "code": "03000",
+          "name": "岩手県",
+          "unit": null
+        },
+        {
+          "code": "04000",
+          "name": "宮城県",
+          "unit": null
+        },
+        {
+          "code": "05000",
+          "name": "秋田県",
+          "unit": null
+        },
+        {
+          "code": "06000",
+          "name": "山形県",
+          "unit": null
+        },
+        {
+          "code": "07000",
+          "name": "福島県",
+          "unit": null
+        },
+        {
+          "code": "08000",
+          "name": "茨城県",
+          "unit": null
+        },
+        {
+          "code": "12000",
+          "name": "千葉県",
+          "unit": null
+        },
+        {
+          "code": "13000",
+          "name": "東京都",
+          "unit": null
+        },
+        {
+          "code": "14000",
+          "name": "神奈川県",
+          "unit": null
+        },
+        {
+          "code": "15000",
+          "name": "新潟県",
+          "unit": null
+        },
+        {
+          "code": "16000",
+          "name": "富山県",
+          "unit": null
+        },
+        {
+          "code": "17000",
+          "name": "石川県",
+          "unit": null
+        },
+        {
+          "code": "18000",
+          "name": "福井県",
+          "unit": null
+        },
+        {
+          "code": "22000",
+          "name": "静岡県",
+          "unit": null
+        },
+        {
+          "code": "23000",
+          "name": "愛知県",
+          "unit": null
+        },
+        {
+          "code": "24000",
+          "name": "三重県",
+          "unit": null
+        },
+        {
+          "code": "25000",
+          "name": "滋賀県",
+          "unit": null
+        },
+        {
+          "code": "26000",
+          "name": "京都府",
+          "unit": null
+        },
+        {
+          "code": "27000",
+          "name": "大阪府",
+          "unit": null
+        },
+        {
+          "code": "28000",
+          "name": "兵庫県",
+          "unit": null
+        },
+        {
+          "code": "30000",
+          "name": "和歌山県",
+          "unit": null
+        },
+        {
+          "code": "31000",
+          "name": "鳥取県",
+          "unit": null
+        },
+        {
+          "code": "32000",
+          "name": "島根県",
+          "unit": null
+        },
+        {
+          "code": "33000",
+          "name": "岡山県",
+          "unit": null
+        },
+        {
+          "code": "34000",
+          "name": "広島県",
+          "unit": null
+        },
+        {
+          "code": "35000",
+          "name": "山口県",
+          "unit": null
+        },
+        {
+          "code": "36000",
+          "name": "徳島県",
+          "unit": null
+        },
+        {
+          "code": "37000",
+          "name": "香川県",
+          "unit": null
+        },
+        {
+          "code": "38000",
+          "name": "愛媛県",
+          "unit": null
+        },
+        {
+          "code": "39000",
+          "name": "高知県",
+          "unit": null
+        },
+        {
+          "code": "40000",
+          "name": "福岡県",
+          "unit": null
+        },
+        {
+          "code": "41000",
+          "name": "佐賀県",
+          "unit": null
+        },
+        {
+          "code": "42000",
+          "name": "長崎県",
+          "unit": null
+        },
+        {
+          "code": "43000",
+          "name": "熊本県",
+          "unit": null
+        },
+        {
+          "code": "44000",
+          "name": "大分県",
+          "unit": null
+        },
+        {
+          "code": "45000",
+          "name": "宮崎県",
+          "unit": null
+        },
+        {
+          "code": "46000",
+          "name": "鹿児島県",
+          "unit": null
+        },
+        {
+          "code": "47000",
+          "name": "沖縄県",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "time",
+      "name": "時間軸（暦年）",
+      "valueCount": 19,
+      "sampleValues": [
+        {
+          "code": "2023000000",
+          "name": "2023年",
+          "unit": null
+        },
+        {
+          "code": "2022000000",
+          "name": "2022年",
+          "unit": null
+        },
+        {
+          "code": "2021000000",
+          "name": "2021年",
+          "unit": null
+        },
+        {
+          "code": "2020000000",
+          "name": "2020年",
+          "unit": null
+        },
+        {
+          "code": "2019000000",
+          "name": "2019年",
+          "unit": null
+        },
+        {
+          "code": "2018000000",
+          "name": "2018年",
+          "unit": null
+        },
+        {
+          "code": "2017000000",
+          "name": "2017年",
+          "unit": null
+        },
+        {
+          "code": "2016000000",
+          "name": "2016年",
+          "unit": null
+        },
+        {
+          "code": "2015000000",
+          "name": "2015年",
+          "unit": null
+        },
+        {
+          "code": "2014000000",
+          "name": "2014年",
+          "unit": null
+        },
+        {
+          "code": "2013000000",
+          "name": "2013年",
+          "unit": null
+        },
+        {
+          "code": "2012000000",
+          "name": "2012年",
+          "unit": null
+        },
+        {
+          "code": "2011000000",
+          "name": "2011年",
+          "unit": null
+        },
+        {
+          "code": "2010000000",
+          "name": "2010年",
+          "unit": null
+        },
+        {
+          "code": "2009000000",
+          "name": "2009年",
+          "unit": null
+        },
+        {
+          "code": "2008000000",
+          "name": "2008年",
+          "unit": null
+        },
+        {
+          "code": "2007000000",
+          "name": "2007年",
+          "unit": null
+        },
+        {
+          "code": "2006000000",
+          "name": "2006年",
+          "unit": null
+        },
+        {
+          "code": "2005000000",
+          "name": "2005年",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    }
+  ]
+}

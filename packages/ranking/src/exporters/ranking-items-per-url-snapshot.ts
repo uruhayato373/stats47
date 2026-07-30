@@ -285,8 +285,10 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
     // Use the first item as the canonical item for the file
     const item = keyItems[0];
     // 出典表記 (2 階層: 編成統計 + 原典調査)。ranking 詳細ページが統一表示に使う。
-    // SSDS の baked surveyId は誤りが多いため param から解決した attribution を焼き込む。
-    const attribution = resolveItemAttribution(item);
+    // SSDS の baked surveyId は誤りが多いため param から解決した attribution を使う。
+    // ★builder が焼いた値があればそれを尊重する (書き手を 1 つにするため。
+    //   builder 側が焼かなかった stale item への安全網としてのみ再解決する)。
+    const attribution = item.attribution ?? resolveItemAttribution(item);
     const body = JSON.stringify({
       generatedAt,
       item: { ...item, attribution },

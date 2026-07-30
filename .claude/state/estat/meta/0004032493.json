@@ -1,0 +1,421 @@
+{
+  "statsDataId": "0004032493",
+  "title": "第３部 百貨店・スーパー販売 第４表（２）都道府県別、商品別販売額等",
+  "dimensions": [
+    {
+      "id": "cat01",
+      "name": "単位_db",
+      "valueCount": 5,
+      "sampleValues": [
+        {
+          "code": "0110100",
+          "name": "店",
+          "unit": null
+        },
+        {
+          "code": "0110200",
+          "name": "百万円",
+          "unit": null
+        },
+        {
+          "code": "0110300",
+          "name": "日",
+          "unit": null
+        },
+        {
+          "code": "0110400",
+          "name": "人",
+          "unit": null
+        },
+        {
+          "code": "0110500",
+          "name": "1000平方メートル",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat02",
+      "name": "項目1_db",
+      "valueCount": 18,
+      "sampleValues": [
+        {
+          "code": "0302080",
+          "name": "事業所数",
+          "unit": null
+        },
+        {
+          "code": "0302090",
+          "name": "合計",
+          "unit": null
+        },
+        {
+          "code": "0302100",
+          "name": "衣料品計",
+          "unit": null
+        },
+        {
+          "code": "0302110",
+          "name": "紳士服・洋品",
+          "unit": null
+        },
+        {
+          "code": "0302120",
+          "name": "婦人・子供服・洋品",
+          "unit": null
+        },
+        {
+          "code": "0302130",
+          "name": "その他の衣料品",
+          "unit": null
+        },
+        {
+          "code": "0302140",
+          "name": "身の回り品",
+          "unit": null
+        },
+        {
+          "code": "0302150",
+          "name": "飲食料品",
+          "unit": null
+        },
+        {
+          "code": "0302160",
+          "name": "その他計",
+          "unit": null
+        },
+        {
+          "code": "0302170",
+          "name": "家具",
+          "unit": null
+        },
+        {
+          "code": "0302180",
+          "name": "家庭用電気機械器具",
+          "unit": null
+        },
+        {
+          "code": "0302190",
+          "name": "家庭用品",
+          "unit": null
+        },
+        {
+          "code": "0302200",
+          "name": "その他の商品",
+          "unit": null
+        },
+        {
+          "code": "0302210",
+          "name": "食堂・喫茶",
+          "unit": null
+        },
+        {
+          "code": "0303010",
+          "name": "商品券",
+          "unit": null
+        },
+        {
+          "code": "0303020",
+          "name": "営業日数",
+          "unit": null
+        },
+        {
+          "code": "0303030",
+          "name": "従業者数",
+          "unit": null
+        },
+        {
+          "code": "0303040",
+          "name": "売場面積",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "cat03",
+      "name": "表側_項目_db",
+      "valueCount": 3,
+      "sampleValues": [
+        {
+          "code": "01030100",
+          "name": "合計(百貨店＋スーパー)",
+          "unit": null
+        },
+        {
+          "code": "01030200",
+          "name": "百貨店",
+          "unit": null
+        },
+        {
+          "code": "01030300",
+          "name": "スーパー",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "area",
+      "name": "都道府県",
+      "valueCount": 48,
+      "sampleValues": [
+        {
+          "code": "00000",
+          "name": "全国",
+          "unit": null
+        },
+        {
+          "code": "01000",
+          "name": "北海道",
+          "unit": null
+        },
+        {
+          "code": "02000",
+          "name": "青森県",
+          "unit": null
+        },
+        {
+          "code": "03000",
+          "name": "岩手県",
+          "unit": null
+        },
+        {
+          "code": "04000",
+          "name": "宮城県",
+          "unit": null
+        },
+        {
+          "code": "05000",
+          "name": "秋田県",
+          "unit": null
+        },
+        {
+          "code": "06000",
+          "name": "山形県",
+          "unit": null
+        },
+        {
+          "code": "07000",
+          "name": "福島県",
+          "unit": null
+        },
+        {
+          "code": "08000",
+          "name": "茨城県",
+          "unit": null
+        },
+        {
+          "code": "09000",
+          "name": "栃木県",
+          "unit": null
+        },
+        {
+          "code": "10000",
+          "name": "群馬県",
+          "unit": null
+        },
+        {
+          "code": "11000",
+          "name": "埼玉県",
+          "unit": null
+        },
+        {
+          "code": "12000",
+          "name": "千葉県",
+          "unit": null
+        },
+        {
+          "code": "13000",
+          "name": "東京都",
+          "unit": null
+        },
+        {
+          "code": "14000",
+          "name": "神奈川県",
+          "unit": null
+        },
+        {
+          "code": "15000",
+          "name": "新潟県",
+          "unit": null
+        },
+        {
+          "code": "16000",
+          "name": "富山県",
+          "unit": null
+        },
+        {
+          "code": "17000",
+          "name": "石川県",
+          "unit": null
+        },
+        {
+          "code": "18000",
+          "name": "福井県",
+          "unit": null
+        },
+        {
+          "code": "19000",
+          "name": "山梨県",
+          "unit": null
+        },
+        {
+          "code": "20000",
+          "name": "長野県",
+          "unit": null
+        },
+        {
+          "code": "21000",
+          "name": "岐阜県",
+          "unit": null
+        },
+        {
+          "code": "22000",
+          "name": "静岡県",
+          "unit": null
+        },
+        {
+          "code": "23000",
+          "name": "愛知県",
+          "unit": null
+        },
+        {
+          "code": "24000",
+          "name": "三重県",
+          "unit": null
+        },
+        {
+          "code": "25000",
+          "name": "滋賀県",
+          "unit": null
+        },
+        {
+          "code": "26000",
+          "name": "京都府",
+          "unit": null
+        },
+        {
+          "code": "27000",
+          "name": "大阪府",
+          "unit": null
+        },
+        {
+          "code": "28000",
+          "name": "兵庫県",
+          "unit": null
+        },
+        {
+          "code": "29000",
+          "name": "奈良県",
+          "unit": null
+        },
+        {
+          "code": "30000",
+          "name": "和歌山県",
+          "unit": null
+        },
+        {
+          "code": "31000",
+          "name": "鳥取県",
+          "unit": null
+        },
+        {
+          "code": "32000",
+          "name": "島根県",
+          "unit": null
+        },
+        {
+          "code": "33000",
+          "name": "岡山県",
+          "unit": null
+        },
+        {
+          "code": "34000",
+          "name": "広島県",
+          "unit": null
+        },
+        {
+          "code": "35000",
+          "name": "山口県",
+          "unit": null
+        },
+        {
+          "code": "36000",
+          "name": "徳島県",
+          "unit": null
+        },
+        {
+          "code": "37000",
+          "name": "香川県",
+          "unit": null
+        },
+        {
+          "code": "38000",
+          "name": "愛媛県",
+          "unit": null
+        },
+        {
+          "code": "39000",
+          "name": "高知県",
+          "unit": null
+        },
+        {
+          "code": "40000",
+          "name": "福岡県",
+          "unit": null
+        },
+        {
+          "code": "41000",
+          "name": "佐賀県",
+          "unit": null
+        },
+        {
+          "code": "42000",
+          "name": "長崎県",
+          "unit": null
+        },
+        {
+          "code": "43000",
+          "name": "熊本県",
+          "unit": null
+        },
+        {
+          "code": "44000",
+          "name": "大分県",
+          "unit": null
+        },
+        {
+          "code": "45000",
+          "name": "宮崎県",
+          "unit": null
+        },
+        {
+          "code": "46000",
+          "name": "鹿児島県",
+          "unit": null
+        },
+        {
+          "code": "47000",
+          "name": "沖縄県",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "time",
+      "name": "時間軸_db",
+      "valueCount": 1,
+      "sampleValues": [
+        {
+          "code": "2025000101",
+          "name": "2025年1月",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    }
+  ]
+}

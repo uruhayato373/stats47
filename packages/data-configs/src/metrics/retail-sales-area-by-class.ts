@@ -8,6 +8,7 @@ export const retailSalesAreaByClass: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004003261",
+    "cdTab": "704-2021",
     "cdCat01": "I2",
     "cdCat02": "00",
     "displayName": "小売業売場面積（経済センサス活動調査2021・小売計）",

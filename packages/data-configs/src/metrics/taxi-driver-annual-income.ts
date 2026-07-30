@@ -8,6 +8,11 @@ export const taxiDriverAnnualIncome: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003445758",
+    "cdCat01": "01",
+    "tabCombination": [
+      { "cdTab": "08", "factor": 12 },
+      { "cdTab": "12", "factor": 1 },
+    ],
     "cdCat02": "1612",
     "displayName": "賃金構造基本統計調査",
     "url": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
@@ -30,8 +35,7 @@ export const taxiDriverAnnualIncome: MetricConfig = {
     "decimalPlaces": 1,
   },
   "calculation": {
-    "isCalculated": true,
-    "formula": "monthly*12+bonus",
+    "isCalculated": false,
     "normalizationOptions": [
       {
         "type": "per_population",

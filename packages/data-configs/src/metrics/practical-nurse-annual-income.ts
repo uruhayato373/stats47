@@ -8,6 +8,11 @@ export const practicalNurseAnnualIncome: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003445758",
+    "cdCat01": "01",
+    "tabCombination": [
+      { "cdTab": "08", "factor": 12 },
+      { "cdTab": "12", "factor": 1 },
+    ],
     "cdCat02": "1134",
     "displayName": "賃金構造基本統計調査",
     "url": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
@@ -16,21 +21,8 @@ export const practicalNurseAnnualIncome: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      2010,
-      2011,
-      2012,
-      2013,
-      2014,
-      2015,
-      2016,
-      2017,
-      2018,
-      2019,
-      2020,
-      2021,
-      2023,
-    ],
+    "from": 2010,
+    "to": 2023,
   },
   "yearFormat": "calendar",
   "visualization": {
@@ -43,8 +35,7 @@ export const practicalNurseAnnualIncome: MetricConfig = {
     "decimalPlaces": 1,
   },
   "calculation": {
-    "isCalculated": true,
-    "formula": "monthly*12+bonus",
+    "isCalculated": false,
     "normalizationOptions": [
       {
         "type": "per_population",

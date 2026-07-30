@@ -9,8 +9,14 @@ export const autolockApartmentRate: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004021535",
-    "cdCat01": "1",
     "cdCat02": "00",
+    "cdCat03": "0",
+    "cdCat04": "0",
+    "axisRatio": {
+      "axis": "cat01",
+      "numeratorCodes": ["1"],
+      "denominatorCodes": ["0"],
+    },
     "displayName": "住宅・土地統計調査",
     "url": "https://www.stat.go.jp/data/jyutaku/2023/index.html",
   },

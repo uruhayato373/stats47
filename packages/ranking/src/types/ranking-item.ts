@@ -3,6 +3,8 @@
  * 2026-01 設計見直しにより構造を階層化
  */
 import type {
+  EstatQueryParams,
+  MetricRecipe,
   ProvenanceSurvey,
   SourceAttribution,
 } from "@stats47/data-configs";
@@ -168,6 +170,24 @@ export interface CalculationConfig {
  * `{ kind: "estat" | ... }`）とは**別概念**。名前衝突を避けるため本型は SourceProvenance とする。
  */
 export interface SourceProvenance {
+  /**
+   * 取得レシピ (config から機械生成)。**新形の主フィールド**。
+   * 軸 pin・tab 選択・線形結合・軸合算・率・時間粒度・地域軸を過不足なく持つ。
+   * 正典: `packages/data-configs/src/recipe.ts`
+   */
+  recipe?: MetricRecipe;
+  /**
+   * e-Stat API へ **そのまま spread してよい** クエリ部。
+   * ★オンデマンド取得は `sourceConfig` 全体ではなくこれだけを spread する
+   * (`resolveEstatParams` 経由)。全体を spread すると非クエリキーが混ざる。
+   */
+  estatParams?: EstatQueryParams;
+  /**
+   * 単発クエリで再現できない値か (線形結合・軸合算・率・県庁所在市写像)。
+   * true のとき e-Stat を叩かず正典 `app/stats/<key>/values.json` を読む。
+   */
+  derived?: boolean;
+
   /** e-Stat 固有: データベース・系列名 (例: "社会・人口統計体系") */
   collection?: {
     name: string;

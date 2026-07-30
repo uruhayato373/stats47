@@ -8,6 +8,7 @@ export const judoTherapistRate: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004026940",
+    "cdTab": "0140",
     "cdCat01": "100",
     "displayName": "衛生行政報告例",
     "url": "https://www.mhlw.go.jp/toukei/saikin/hw/eisei_houkoku/20/",

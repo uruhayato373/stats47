@@ -1,3 +1,4 @@
+import { buildRecipe } from "@stats47/data-configs";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -76,6 +77,48 @@ describe("parseStatsValuesPayload", () => {
         rows: [{ ...statsPayload.rows[0], value: Number.NaN }],
       }),
     ).toThrow("rows[0].value must be a finite number");
+  });
+});
+
+describe("meta.recipe の round-trip (★ホワイトリスト落ちの再発防止)", () => {
+  // parseStatsMeta は meta をホワイトリストで再構築する。types.ts だけ拡張して
+  // schemas.ts を直し忘れると、書いたレシピが読み側で黙って消え、監査が
+  // 全件「未焼き込み」と誤判定する。それを構造的に検知するためのテスト。
+  const recipe = buildRecipe({
+    key: "population",
+    title: "人口",
+    unit: "人",
+    category: "population",
+    source: { kind: "estat", statsDataId: "0003448237", cdCat01: "A1101", cdCat03: "02" },
+    entities: ["prefecture"],
+    years: "all",
+  });
+
+  it("書いたレシピがそのまま読める", () => {
+    const result = parseStatsValuesPayload({
+      ...statsPayload,
+      meta: { ...statsPayload.meta, recipe: JSON.parse(JSON.stringify(recipe)) },
+    });
+
+    expect(result.meta.recipe).toEqual(recipe);
+    expect(result.meta.recipe?.configHash).toBe(recipe.configHash);
+    // 軸 pin が消えていないこと (ここが落ちると多系列混入を検知できなくなる)
+    expect(result.meta.recipe?.estatParams?.cdCat03).toBe("02");
+  });
+
+  it("recipe が無い旧 payload も従来どおり読める (読み取りを壊さない)", () => {
+    const result = parseStatsValuesPayload(statsPayload);
+    expect(result.meta.recipe).toBeUndefined();
+    expect(result.meta.rowCount).toBe(1);
+  });
+
+  it("壊れた recipe は throw せず落とす (1 フィールドで payload 全体を捨てない)", () => {
+    const result = parseStatsValuesPayload({
+      ...statsPayload,
+      meta: { ...statsPayload.meta, recipe: { kind: "estat" } },
+    });
+    expect(result.meta.recipe).toBeUndefined();
+    expect(result.meta.rowCount).toBe(1);
   });
 });
 

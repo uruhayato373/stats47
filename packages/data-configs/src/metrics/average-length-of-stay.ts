@@ -9,6 +9,7 @@ export const averageLengthOfStay: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004045406",
+    "cdTab": "310",
     "cdCat01": "100",
     "cdCat02": "100",
     "displayName": "病院報告",

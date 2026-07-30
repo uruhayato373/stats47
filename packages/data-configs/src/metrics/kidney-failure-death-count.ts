@@ -9,6 +9,8 @@ export const kidneyFailureDeathCount: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003412078",
+    "cdCat01": "00100",
+    "cdCat03": "14200",
     "cdCat02": "00100",
   },
   "entities": [

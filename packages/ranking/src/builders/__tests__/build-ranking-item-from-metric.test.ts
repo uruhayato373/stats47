@@ -1,4 +1,4 @@
-import type { MetricConfig } from "@stats47/data-configs";
+import { buildRecipe, type MetricConfig } from "@stats47/data-configs";
 import { describe, expect, it } from "vitest";
 
 import { buildRankingItemFromMetric, yearNameOf } from "../build-ranking-item-from-metric";
@@ -72,11 +72,20 @@ describe("buildRankingItemFromMetric", () => {
       colorSchemeType: "sequential",
       minValueType: "data-min",
     });
+    // 新形: 実行可能な estatParams と宣言部 recipe を分離する。
+    // 旧形は statsDataId/cdCat01/cdCat02 を手選びして flat に置くだけで、
+    // オンデマンド経路が丸ごと spread して cdCat03 以降を落としていた。
     expect(item.sourceConfig).toEqual({
+      estatParams: { statsDataId: "0000010101", cdCat01: "A1101" },
+      recipe: buildRecipe(baseConfig),
+      // survey-bucketing の SSDS 判定が参照する後方互換キー
       statsDataId: "0000010101",
       cdCat01: "A1101",
       source: { name: "社会・人口統計体系", url: "https://www.stat.go.jp/data/ssds/index.htm" },
     });
+    // 単発クエリで再現できる metric なので derived は立たない
+    expect(item.sourceConfig?.derived).toBeUndefined();
+    expect(item.sourceConfig?.recipe?.configHash).toMatch(/^[0-9a-f]{16}$/);
     // createdAt は既存を保持、updatedAt は now
     expect(item.createdAt).toBe("2025-11-09 04:27:32");
     expect(item.updatedAt).toBe(NOW);
