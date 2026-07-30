@@ -140,9 +140,9 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "労働費が最も多い県は？"
       },
       {
-        "rankingKey": "taxi-driver-annual-income",
-        "title": "タクシー運転者の平均年収",
-        "hook": "タクシー運転者の平均年収が最も高い県は？"
+        "rankingKey": "cook-annual-income",
+        "title": "飲食物調理従事者の平均年収",
+        "hook": "飲食物調理従事者の平均年収が最も高い県は？"
       }
     ]
   },
@@ -325,9 +325,9 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "居住室数が最も多い県は？"
       },
       {
-        "rankingKey": "floor-area-new-rented-dwelling",
-        "title": "着工新設貸家住宅の床面積",
-        "hook": "着工新設貸家住宅の床面積が最も広い県は？"
+        "rankingKey": "architect-annual-income",
+        "title": "建築技術者の平均年収",
+        "hook": "建築技術者の平均年収が最も高い県は？"
       }
     ]
   },
@@ -519,7 +519,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "socialsecurity",
     "categoryName": "社会保障・衛生",
-    "count": 247,
+    "count": 244,
     "representatives": [
       {
         "rankingKey": "psychiatric-bed-count",
@@ -732,7 +732,7 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "software-engineer-annual-income",
   "disabled-employment-rate",
   "labor-expenses-prefecture",
-  "taxi-driver-annual-income",
+  "cook-annual-income",
   "fishery-workers",
   "fishery-species-catch-sardine",
   "marine-fishery-aquaculture-output-value",
@@ -762,7 +762,7 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "carpenter-annual-income",
   "new-rental-starts",
   "rooms-per-dwelling-rented",
-  "floor-area-new-rented-dwelling",
+  "architect-annual-income",
   "final-disposal-site-remaining-capacity",
   "gasoline-sales-volume",
   "utilities-expenditure-ratio-multi-person-households",
