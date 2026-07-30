@@ -11,6 +11,11 @@ export const inpatientRatePer100k: MetricConfig = {
     "statsDataId": "0004026104",
     "cdCat01": "1",
     "cdCat02": "1",
+    "cdCat04": "1",
+    "areaAxis": {
+      "axis": "cat03",
+      "scheme": "seq-pref",
+    },
     "displayName": "患者調査",
     "url": "https://www.mhlw.go.jp/toukei/saikin/hw/kanja/23/index.html",
   },

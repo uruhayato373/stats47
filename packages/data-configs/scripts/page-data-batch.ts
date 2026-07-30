@@ -35,6 +35,11 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { listAllMetrics } from "../src/registry.js";
 import { buildRecipe, type MetricRecipe } from "../src/recipe.js";
+import {
+  resolveAreaAxis,
+  surveyYearFromDate,
+  type AreaAxisMember,
+} from "../src/area-axis.js";
 import { classifyEmptyOutcome } from "../src/expected-empty.js";
 import {
   combineLinear,
@@ -119,11 +124,11 @@ function getR2FileMtime(key: string): number | null {
 }
 
 interface EstatValue {
-  "@cat01"?: string;
-  "@cat02"?: string;
   "@area": string;
   "@time": string;
   $: string;
+  /** pin していない分類軸は @cat01〜@cat05 / @tab として返る (areaAxis の写像に使う) */
+  [axisAttr: string]: string | undefined;
 }
 
 /** e-Stat API から data を fetch */
@@ -338,6 +343,92 @@ async function fetchEstatAxisRatio(
   };
 }
 
+/**
+ * getMetaInfo で分類軸のメンバー一覧と調査年を取る (areaAxis 用)。
+ *
+ * 調査年も一緒に返すのは、都道府県を cat 軸に持つ表が **time 軸を持たない**ため
+ * (応答の値に `@time` が付かない)。年は `TABLE_INF.SURVEY_DATE` から採る。
+ */
+async function fetchAxisMembers(
+  appId: string,
+  statsDataId: string,
+  axis: EstatAxisName,
+): Promise<{ members: AreaAxisMember[]; surveyYear: string | null; hasTimeAxis: boolean }> {
+  const params = new URLSearchParams({ appId, lang: "J", statsDataId });
+  const res = await fetch(`https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?${params}`);
+  if (!res.ok) throw new Error(`e-Stat getMetaInfo HTTP ${res.status}`);
+  const json = (await res.json()) as Record<string, any>;
+  const metadata = json?.GET_META_INFO?.METADATA_INF;
+  const objs = metadata?.CLASS_INF?.CLASS_OBJ;
+  const list = Array.isArray(objs) ? objs : objs ? [objs] : [];
+  const target = list.find((o: any) => String(o["@id"]) === axis);
+  if (!target) throw new Error(`getMetaInfo に軸 ${axis} が無い (statsDataId=${statsDataId})`);
+  const cls = Array.isArray(target.CLASS) ? target.CLASS : target.CLASS ? [target.CLASS] : [];
+  return {
+    members: cls.map((c: any) => ({ code: String(c["@code"]), name: String(c["@name"]) })),
+    surveyYear: surveyYearFromDate(metadata?.TABLE_INF?.SURVEY_DATE),
+    hasTimeAxis: list.some((o: any) => String(o["@id"]) === "time"),
+  };
+}
+
+/**
+ * 都道府県が area 軸ではなく cat 軸に入っている表を取り込む。
+ *
+ * その軸を **pin せずに**取得し、応答の `@cat0N` を都道府県コードに写して `@area` に置く。
+ * 写像は必ず getMetaInfo の CLASS 名で検証し、47 県そろわなければ **fail** する
+ * (黙って 40 県で配信すると、形状ゲートのカバレッジ検査に頼ることになり、
+ * 「そもそも写像が間違っている」のか「その県にデータが無い」のか区別できなくなる)。
+ */
+async function fetchEstatAreaAxis(
+  appId: string,
+  config: Extract<SourceConfig, { kind: "estat" }>,
+  areaAxis: NonNullable<Extract<SourceConfig, { kind: "estat" }>["areaAxis"]>,
+): Promise<EstatFetchResult> {
+  const { members, surveyYear, hasTimeAxis } = await fetchAxisMembers(
+    appId,
+    config.statsDataId,
+    areaAxis.axis,
+  );
+  const mapping = resolveAreaAxis(members, areaAxis.scheme);
+
+  // time 軸が無い表は値に @time が付かないので、調査年をメタから補う。
+  // 推測はしない — 取り出せなければ fail する (年が違えば別の統計になってしまう)。
+  if (!hasTimeAxis && !surveyYear) {
+    throw new Error(
+      `time 軸が無く TABLE_INF.SURVEY_DATE からも年を決められません (statsDataId=${config.statsDataId})`,
+    );
+  }
+
+  if (mapping.missingPrefectures.length > 0) {
+    throw new Error(
+      `areaAxis (${areaAxis.axis}/${areaAxis.scheme}) が ${mapping.byCode.size} 県しか解決できません。` +
+        `未解決: ${mapping.missingPrefectures.slice(0, 5).join(",")}${mapping.missingPrefectures.length > 5 ? "…" : ""}` +
+        (mapping.unresolved.length > 0
+          ? ` / 名前が一致しないメンバー: ${mapping.unresolved.slice(0, 3).map((m) => `${m.code}=${m.name}`).join(", ")}`
+          : ""),
+    );
+  }
+
+  // 対象軸は pin せずに取得する (pin すると 1 県分しか返らない)
+  const fetched = await fetchEstatData(appId, { ...config, areaAxis: undefined });
+  const attr = `@${areaAxis.axis}` as const;
+
+  const values: EstatValue[] = [];
+  for (const v of fetched.values) {
+    const axisCode = (v as Record<string, unknown>)[attr];
+    if (typeof axisCode !== "string") continue;
+    const areaCode = mapping.byCode.get(axisCode);
+    if (!areaCode) continue; // 全国・地域ブロック等
+    values.push({
+      ...v,
+      "@area": areaCode,
+      "@time": v["@time"] ?? `${surveyYear}000000`,
+    });
+  }
+
+  return { values, raw: fetched.raw };
+}
+
 async function fetchEstatData(
   appId: string,
   config: Extract<SourceConfig, { kind: "estat" }>,
@@ -350,6 +441,9 @@ async function fetchEstatData(
   }
   if (config.axisSum && config.axisSum.codes.length > 0) {
     return fetchEstatAxisSum(appId, config, config.axisSum);
+  }
+  if (config.areaAxis) {
+    return fetchEstatAreaAxis(appId, config, config.areaAxis);
   }
   const params = new URLSearchParams({
     appId,

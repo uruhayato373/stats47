@@ -23,7 +23,7 @@ const base = (over: Partial<ClassifyEmptyInput> = {}): ClassifyEmptyInput => ({
 
 describe("EXPECTED_EMPTY の健全性", () => {
   it("全エントリが理由・追跡先・期限を持つこと (allowlist を腐らせない)", () => {
-    expect(EXPECTED_EMPTY.length).toBeGreaterThan(0);
+    // 空でよい (2026-07-30 に 6 件すべて解消)。エントリがあるなら必ず 3 点そろえる。
     for (const e of EXPECTED_EMPTY) {
       expect(e.reason.length).toBeGreaterThan(10);
       expect(e.issue.length).toBeGreaterThan(0);
@@ -37,7 +37,9 @@ describe("EXPECTED_EMPTY の健全性", () => {
     expect(new Set(keys).size).toBe(keys.length);
   });
 
-  it("2026-07-29 実測の 6 件が登録されていること", () => {
+  it("★2026-07-29 の 6 件が解消済みであること (是正の逆戻りを検知する)", () => {
+    // areaAxis 新設 (患者調査 5 件) と years:"all" (救急告示病院) で 47 県そろった。
+    // ここに再登録されたら「直したはずの metric がまた 0 件になった」ということ。
     const keys = new Set(EXPECTED_EMPTY.map((e) => e.key));
     for (const k of [
       "inpatient-rate-per-100k",
@@ -47,19 +49,30 @@ describe("EXPECTED_EMPTY の健全性", () => {
       "inpatient-rate-by-bedtype",
       "emergency-hospital-general-clinic-count-per-100k",
     ]) {
-      expect(keys.has(k)).toBe(true);
+      expect(keys.has(k)).toBe(false);
     }
   });
 });
 
 describe("findExpectedEmpty", () => {
+  // EXPECTED_EMPTY は空になりうるので、期限判定の検証は合成エントリで行う
+  // (実データに依存させると「是正したらテストが壊れる」ことになる)
+  const SYNTHETIC = [
+    {
+      key: "synthetic-metric",
+      reason: "テスト用の合成エントリ (期限判定の検証)",
+      issue: "TEST-ONLY",
+      until: "2026-10-31",
+    },
+  ] as const;
+
   it("期限内なら許可を返すこと", () => {
-    expect(findExpectedEmpty("inpatient-rate-per-100k", "prefecture", NOW_IN)).not.toBeNull();
+    expect(findExpectedEmpty("synthetic-metric", "prefecture", NOW_IN, SYNTHETIC)).not.toBeNull();
   });
 
   /** これが allowlist を腐らせないための本体 */
   it("期限を過ぎたら許可しないこと", () => {
-    expect(findExpectedEmpty("inpatient-rate-per-100k", "prefecture", NOW_OUT)).toBeNull();
+    expect(findExpectedEmpty("synthetic-metric", "prefecture", NOW_OUT, SYNTHETIC)).toBeNull();
   });
 
   it("未登録キーは null を返すこと", () => {
@@ -96,21 +109,36 @@ describe("classifyEmptyOutcome", () => {
     expect(r.isError).toBe(true);
   });
 
+  // 実 EXPECTED_EMPTY は空になりうるので合成 allowlist で検証する
+  // (実データに依存させると「是正したらテストが壊れる」ことになる)
+  const ALLOWLIST = [
+    {
+      key: "synthetic-metric",
+      reason: "テスト用の合成エントリ",
+      issue: "TEST-ONLY",
+      until: "2026-10-31",
+    },
+  ] as const;
+
   it("allowlist 登録済みならエラーにしないこと", () => {
-    const r = classifyEmptyOutcome(base({ key: "inpatient-rate-per-100k", priorRowCount: 47 }));
+    const r = classifyEmptyOutcome(
+      base({ key: "synthetic-metric", priorRowCount: 47, allowlist: ALLOWLIST }),
+    );
     expect(r.outcome).toBe("allowed");
     expect(r.isError).toBe(false);
-    expect(r.message).toContain("DATA-PATIENT-SURVEY-01");
+    expect(r.message).toContain("TEST-ONLY");
   });
 
   it("allowlist の期限が切れていればエラーに戻ること", () => {
-    const r = classifyEmptyOutcome(base({ key: "inpatient-rate-per-100k", now: NOW_OUT }));
+    const r = classifyEmptyOutcome(
+      base({ key: "synthetic-metric", now: NOW_OUT, allowlist: ALLOWLIST }),
+    );
     expect(r.isError).toBe(true);
   });
 
   it("allowlist にあるのにデータが復活したら stale-allowlist で知らせること (fatal にしない)", () => {
     const r = classifyEmptyOutcome(
-      base({ key: "inpatient-rate-per-100k", rawCount: 47, rowCount: 47 }),
+      base({ key: "synthetic-metric", rawCount: 47, rowCount: 47, allowlist: ALLOWLIST }),
     );
     expect(r.outcome).toBe("stale-allowlist");
     expect(r.isError).toBe(false);

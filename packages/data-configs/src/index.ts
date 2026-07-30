@@ -25,6 +25,16 @@ export {
 } from "./shape-gate";
 export { EXPECTED_SHAPE_ANOMALY, MAX_KNOWN_BROKEN } from "./expected-shape-anomaly";
 export {
+  PREFECTURES,
+  isAggregateAreaName,
+  lookupPrefectureCode,
+  normalizeAreaName,
+  resolveAreaAxis,
+  surveyYearFromDate,
+  type AreaAxisMapping,
+  type AreaAxisMember,
+} from "./area-axis";
+export {
   MISSING,
   combineLinear,
   ratioPercent,
