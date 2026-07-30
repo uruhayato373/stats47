@@ -112,10 +112,43 @@ outbox は**フラットな `<rankingKey>.json`** でなければならない (w
 
 - blog の `quality-gate.mjs` / blog-critic / `review.md` モデルを流用 (実装パターン再利用・drift 防止)。
 - スクリプト配置は `.claude/scripts/ai-content/` (`skill-code-placement.md` 準拠)。R2 書き込みは CI 専用 (`r2-storage-design.md`)。
-- **安いモデルで数をこなす方針** (無料枠の Gemini CLI 等) を採る場合、品質は「モデルを賢くする」ではなく
+- **安いモデルで数をこなす方針** を採る場合、品質は「モデルを賢くする」ではなく
   「決定的ゲート + 再試行」で担保する。`--retries N` は JSON 崩れ・ゲート落ちを同じ prompt でやり直し、
   **ゲートを緩めて通すことは絶対にしない** (品質ではなく実行時間で払う)。落ち率はモデルを変えたら
   必ず実測する (10 件パイロット → blocker 内訳を確認 → 落ち率が高ければプロンプト側を直す)。
+
+### 全件量産の日次ループ (Gemini・トークン消費ゼロ・2026-07-30 新設)
+
+Claude のトークンを使わず全 active ranking (実測 2,179 件) を完成させるための無人ループ。
+**`.github/workflows/ai-content-generate-daily.yml`** (JST 03:00) が以下を回す:
+
+```
+キュー再構築 (--scope all) → needs-regen 上位 N → Gemini API 生成 (--model gemini-api)
+  → 決定的ゲート → outbox (--outbox) → develop へ push
+  → publish-ai-content.yml が発火 (gate 再検証 → R2 → CDN purge → outbox 削除)
+  → キュー再構築して進捗を commit-back
+```
+
+| 要素 | 実装 |
+|---|---|
+| 生成 | `--model gemini-api` (`packages/ai-content/src/services/gemini-text-client.ts`)。**CLI 非依存**。CLI (`--model gemini`) は認証・バージョンが実行環境に依存するため CI では使わない |
+| 認証 | `GEMINI_API_KEY` (GitHub Secrets 専任。画像生成と共用) |
+| 件数上限 | 既定 40 = `publish-ai-content.yml` の `MAX_PUBLISH` と同数。超過分は次回に繰り越す |
+| 失敗の扱い | 429/5xx/timeout は client がバックオフ再試行 (429 は 15s 起点)、`truncated`/4xx は再試行しない |
+| 費用 | gemini-2.5-flash に無料 tier があるが、**キーが有料課金に紐づく場合は 1 件あたり入力 ~5K / 出力 ~8K トークン相当が課金される**。件数で管理する |
+
+**進捗管理**: `build-ai-content-queue.mjs --scope all` が実行のたびに
+`.claude/state/ai-content/progress-history.csv` へ 1 行追記し (同日同 scope は上書き)、
+`LATEST.md` に **消化ペース (件/日) と完了見込み日数**を出す。R2 が真実源でキューは毎回再導出する
+派生ビューなので、中断・再開しても状態がずれない。
+
+```bash
+node .claude/scripts/ai-content/build-ai-content-queue.mjs --scope all       # 全件スコープで再構築
+node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 40  # 次バッチの key 一覧
+```
+
+`--scope gsc` (既定) は GSC 流入のあるページに絞った SEO 優先母集団で、**深掘り (brushup) の対象選定**に使う。
+`--scope all` は**全件完成フェーズ**用。どちらも同じ done 判定 (auditRow) を使うので混在しても矛盾しない。
 - 「次に何を生成するか」の真実源は **ai-content 是正キュー** (`build-ai-content-queue.mjs` → `.claude/state/ai-content/`)。
   高流入 incomplete 優先。done は R2 の auditRow 通過で毎回再導出 (R2 が真実源・キューは派生)。
 
