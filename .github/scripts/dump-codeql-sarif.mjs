@@ -24,18 +24,31 @@ if (!dir) {
   process.exit(0);
 }
 
-/** SARIF 1 ファイルを行に畳む。rule メタ (severity) は driver.rules 側にあるので id で引く */
+/**
+ * SARIF 1 ファイルを行に畳む。
+ *
+ * ★rule メタ (severity) は `tool.driver.rules` だけでなく `tool.extensions[].rules` にも入る。
+ *   CodeQL は query pack を extension として載せるため、driver だけ見ると severity が全部 `?`
+ *   になる (実測: 12 件すべて `?` になり、どれが critical か判別できなかった)。両方から引く。
+ */
 function rowsFromSarif(sarif) {
   const rows = [];
   for (const run of sarif.runs ?? []) {
-    const meta = new Map((run.tool?.driver?.rules ?? []).map((r) => [r.id, r]));
+    const meta = new Map(
+      [
+        ...(run.tool?.driver?.rules ?? []),
+        ...(run.tool?.extensions ?? []).flatMap((e) => e.rules ?? []),
+      ].map((r) => [r.id, r])
+    );
     for (const res of run.results ?? []) {
       const rule = meta.get(res.ruleId) ?? {};
       const loc = res.locations?.[0]?.physicalLocation;
       rows.push({
         rule: res.ruleId ?? "?",
+        // security 系は数値 ("9.8")、それ以外は "warning"/"recommendation" などの語
         sev: String(
           rule.properties?.["security-severity"] ??
+            rule.properties?.["problem.severity"] ??
             rule.properties?.severity ??
             res.level ??
             "?"
@@ -66,8 +79,10 @@ for (const f of files) {
   }
 }
 
-// severity は数値文字列 ("9.8") のことが多い。数値として降順、同値は path 順
-rows.sort((a, b) => Number(b.sev) - Number(a.sev) || a.path.localeCompare(b.path));
+// 数値 severity (security 系) を降順で先に、非数値 ("warning" 等) は後ろ。同値は path 順。
+// ★非数値を Number() で比較すると NaN になり並びが崩れて `?` が先頭に来る (実測) ため分けて扱う
+const rank = (s) => (Number.isFinite(Number(s)) ? Number(s) : -1);
+rows.sort((a, b) => rank(b.sev) - rank(a.sev) || a.path.localeCompare(b.path));
 
 const out = [`### CodeQL findings: ${rows.length} 件`, ""];
 if (rows.length === 0) {
