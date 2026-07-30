@@ -12,7 +12,13 @@
  *   tsx packages/data-configs/scripts/page-data-batch.ts --metric <key>     # 単一
  *   tsx packages/data-configs/scripts/page-data-batch.ts --kind city        # entity 限定 (city 出力)
  *   tsx packages/data-configs/scripts/page-data-batch.ts --since 2024-01    # 更新が古いものだけ
- *   tsx packages/data-configs/scripts/page-data-batch.ts --dry-run          # 計画のみ
+ *   tsx packages/data-configs/scripts/page-data-batch.ts --dry-run          # fetch + 形状検証 (書かない)
+ *
+ * ★ローカルで dry-run するときは R2_PUBLIC_FETCH_URL を必ず設定する:
+ *     R2_PUBLIC_FETCH_URL=https://storage.stats47.jp npx tsx ... --dry-run
+ *   これが無いと公開済みデータを引けず、「0 件への退行」と「県数の減少」を検知できない
+ *   (どちらも既存データとの比較でしか判定できないため、静かに warn へ落ちる)。
+ *   CI (data-refresh.yml) では env に設定済み。
  *
  * 出力 (entities に応じて):
  *   - prefecture → app/stats/<metric>/values.json (47 県)

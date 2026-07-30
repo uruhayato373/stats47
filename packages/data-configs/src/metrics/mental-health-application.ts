@@ -8,6 +8,7 @@ export const mentalHealthApplication: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004026960",
+    "cdTab": "0390",
     "cdCat01": "100",
     "cdCat02": "100",
     "displayName": "精神障害者申請通報届出件数（都道府県別・総数）",

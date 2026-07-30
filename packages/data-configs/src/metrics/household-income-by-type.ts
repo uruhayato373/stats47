@@ -8,6 +8,7 @@ export const householdIncomeByType: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003355488",
+    "cdCat03": "0",
     "cdCat01": "0",
     "cdCat02": "00",
     "displayName": "年間収入階級別主世帯数（総数, 2018年）",

@@ -9,6 +9,7 @@ export const startingSalaryUniversity: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003445959",
+    "cdCat03": "01",
     "cdCat01": "01",
     "cdCat02": "06",
     "displayName": "賃金構造基本統計調査",

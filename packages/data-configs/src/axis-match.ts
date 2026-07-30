@@ -27,16 +27,45 @@ export function isTotalName(name: string): boolean {
  * e-Stat のコード名は "02_美術鑑賞(テレビ・スマートフォン・パソコンなどは除く)" のような形なので、
  * 先頭の連番・括弧書き・記号を落として本体だけにする。
  */
-export function normalizeCodeName(name: string): string {
-  return name
-    .replace(/^[0-9]+[_.\-\s]*/, "") // 先頭の連番
-    .replace(/[（(].*?[）)]/g, "") // 括弧書き
+/**
+ * 表記ゆれを吸収する共通正規化。
+ *
+ * e-Stat のコード名と metric の title は、全角/半角の数字と助詞「の」の有無が揺れる。
+ * 例: title「個人企業の従業者1人当たり売上高」 vs コード名「従業者１人当たりの売上高」。
+ * これを吸収しないと包含が成立せず、より短い別コード (売上高) に誤マッチする。
+ */
+function foldVariants(s: string): string {
+  return s
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
     .replace(/[\s・,、]/g, "")
-    .trim();
+    .replace(/の/g, "");
+}
+
+export function normalizeCodeName(name: string): string {
+  return foldVariants(
+    name
+      .replace(/^[0-9]+[_.\-\s]*/, "") // 先頭の連番
+      .replace(/[（(].*?[）)]/g, ""), // 括弧書き
+  ).trim();
+}
+
+/**
+ * コード名の照合候補を返す。括弧を**落とした形と残した形の両方**。
+ *
+ * 括弧書きは補足のことが多いので既定では落とすが、括弧の中に本質が入っている例がある。
+ * 実例: 社会生活基本調査「旅行・行楽の種類」の `22_海外（観光旅行）` は括弧を落とすと
+ * 「海外」2 文字になり閾値を下回って候補から漏れ、`211_観光旅行` に誤マッチした
+ * (「海外観光旅行の行動者率」に国内の観光旅行を当ててしまう)。
+ * 括弧を残した「海外観光旅行」なら title に包含されるので正しく選べる。
+ */
+export function codeNameVariants(name: string): string[] {
+  const stripped = normalizeCodeName(name);
+  const kept = foldVariants(name.replace(/^[0-9]+[_.\-\s]*/, "").replace(/[（()）]/g, "")).trim();
+  return kept === stripped ? [stripped] : [stripped, kept];
 }
 
 export function normalizeTitle(title: string): string {
-  return title.replace(/[（(].*?[）)]/g, "").replace(/[\s・,、]/g, "");
+  return foldVariants(title.replace(/[（(].*?[）)]/g, ""));
 }
 
 /** 2 文字列の最長共通部分文字列の長さ */
@@ -57,8 +86,18 @@ export function longestCommonSubstring(a: string, b: string): number {
   return best;
 }
 
-/** 一致の下限。2 文字だと「木造」「鑑賞」のような部分語が拾われすぎる */
-export const MATCH_MIN_CHARS = 3;
+/**
+ * 一致の下限。
+ *
+ * ★3 にしてはならない (2026-07-30 実測)。日本語の統計項目名には
+ * 「書道」「野球」「柔道」「剣道」「卓球」「囲碁」「将棋」「茶道」「華道」「ヨガ」「つり」
+ * のような 2 文字の項目が多数あり、3 にすると「書道の行動者率」が一致なしになって
+ * **総数 (= 全項目の合計) にフォールバックする**。誤った系列を配信することになる。
+ *
+ * 2 文字の部分語による誤マッチ (「木造」が「非木造」と紛れる等) は、
+ * 下限ではなく**一意性の判定**で防ぐ (最大スコアが並んだら ambiguous)。
+ */
+export const MATCH_MIN_CHARS = 2;
 
 export interface AxisCode {
   code: string;
@@ -69,8 +108,20 @@ export interface AxisCode {
 /**
  * title と一致する軸コードを探す。
  *
- * 最大スコアが一意でなければ `"ambiguous"` を返し**自動提案しない**
- * (「クラシック音楽鑑賞」と「ポピュラー音楽鑑賞」は共通部が「音楽鑑賞」で並びうる)。
+ * **2 段階**で評価する。順序が重要:
+ *
+ * 1. **包含** — コード名が丸ごと title に含まれるもの。最も強い証拠。
+ * 2. **最長共通部分文字列** — 包含が 1 つも無いときだけ。コード名が title より詳しい
+ *    ケース (「クラシック音楽鑑賞の行動者率」に対し「コンサートなどによるクラシック音楽鑑賞」) を拾う。
+ *
+ * ★共通部分列だけで測ると「より長いが違うコード」を選ぶ (2026-07-30 実測)。
+ * title「個人企業の売上高」に対し
+ *   「売上高（１企業当たり）」      → 正規化「売上高」        共通部 3
+ *   「従業者１人当たりの売上高…」   → 正規化「従業者１人当たりの売上高」 共通部 4 (「の売上高」)
+ * となり、従業者 1 人当たり (別 metric として存在する) を選んでしまう。
+ * 包含を先に見れば「売上高」だけが title に含まれるので正しく選べる。
+ *
+ * 最大が一意でなければ `"ambiguous"` を返し**自動提案しない**。
  * 総数コードは候補から除く (総数は「title が何とも一致しない」ときの別経路で扱う)。
  */
 export function matchCodeByTitle(
@@ -78,15 +129,34 @@ export function matchCodeByTitle(
   codes: readonly AxisCode[],
 ): AxisCode | "ambiguous" | null {
   const t = normalizeTitle(title);
-  const scored = codes
-    .filter((c) => !isTotalName(normalizeCodeName(c.name)))
-    .map((c) => ({ c, score: longestCommonSubstring(t, normalizeCodeName(c.name)) }))
-    .filter((x) => x.score >= MATCH_MIN_CHARS);
-  if (scored.length === 0) return null;
-  const max = Math.max(...scored.map((s) => s.score));
-  const best = scored.filter((s) => s.score === max);
-  if (best.length > 1) return "ambiguous";
-  return best[0].c;
+  const members = codes.filter((c) => !isTotalName(normalizeCodeName(c.name)));
+
+  const pick = (scored: Array<{ c: AxisCode; score: number }>): AxisCode | "ambiguous" | null => {
+    const ok = scored.filter((x) => x.score >= MATCH_MIN_CHARS);
+    if (ok.length === 0) return null;
+    const max = Math.max(...ok.map((s) => s.score));
+    const best = ok.filter((s) => s.score === max);
+    if (best.length > 1) return "ambiguous";
+    return best[0].c;
+  };
+
+  // 1 段目: コード名が丸ごと title に含まれる (括弧あり/なしの両形で見る)
+  const contained = members
+    .map((c) => ({
+      c,
+      score: Math.max(0, ...codeNameVariants(c.name).filter((n) => n && t.includes(n)).map((n) => n.length)),
+    }))
+    .filter((x) => x.score > 0);
+  const byContainment = pick(contained);
+  if (byContainment !== null) return byContainment;
+
+  // 2 段目: 最長共通部分文字列
+  return pick(
+    members.map((c) => ({
+      c,
+      score: Math.max(0, ...codeNameVariants(c.name).map((n) => longestCommonSubstring(t, n))),
+    })),
+  );
 }
 
 /**

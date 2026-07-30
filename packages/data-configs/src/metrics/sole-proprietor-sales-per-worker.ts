@@ -8,6 +8,7 @@ export const soleProprietorSalesPerWorker: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003421679",
+    "cdTab": "460",
     "cdCat01": "0",
     "displayName": "個人企業経済調査",
     "url": "https://www.stat.go.jp/data/kojinke/index.html",

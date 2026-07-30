@@ -185,11 +185,33 @@ describe("classifyShape — 県のカバレッジ", () => {
       base({ summary, priorSummary: { perYearAreaCount: { "2023": 47 } } }),
     );
     expect(v[0].isError).toBe(true);
-    expect(v[0].message).toContain("以前 47 県あった年");
+    expect(v[0].message).toContain("2023:47→39");
   });
 
-  it("以前も 47 未満だった年なら warn のまま", () => {
+  it("以前も同じ県数なら warn のまま", () => {
     const summary = summarizeShape(portRows(["2023"]));
+    const v = classifyShape(
+      base({ summary, priorSummary: { perYearAreaCount: { "2023": 39 } } }),
+    );
+    expect(v[0].isError).toBe(false);
+  });
+
+  it("★47 未満どうしでも減っていれば error (39 → 34)", () => {
+    // port-cargo-total は元から 39 県 (内陸 8 県が無い)。分類軸を pin した結果 34 県に
+    // 減ったが、「以前 47 だった年だけ」を条件にするとこの 5 県の欠落を見逃す。
+    const rows: ShapeRow[] = [];
+    for (let i = 1; i <= 34; i++) {
+      rows.push({ areaCode: `${String(i).padStart(2, "0")}000`, yearCode: "2023", value: 1 });
+    }
+    const v = classifyShape(
+      base({ summary: summarizeShape(rows), priorSummary: { perYearAreaCount: { "2023": 39 } } }),
+    );
+    expect(v[0].isError).toBe(true);
+    expect(v[0].message).toContain("39→34");
+  });
+
+  it("前のデータにその年が無ければ減少と判定しない", () => {
+    const summary = summarizeShape(portRows(["2024"]));
     const v = classifyShape(
       base({ summary, priorSummary: { perYearAreaCount: { "2023": 39 } } }),
     );

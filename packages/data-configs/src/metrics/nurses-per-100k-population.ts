@@ -8,6 +8,7 @@ export const nursesPer100kPopulation: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004026841",
+    "cdTab": "0270",
     "displayName": "衛生行政報告例",
     "url": "https://www.mhlw.go.jp/toukei/saikin/hw/eisei_houkoku/20/",
   },

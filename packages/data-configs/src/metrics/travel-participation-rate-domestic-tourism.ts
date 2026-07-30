@@ -8,6 +8,7 @@ export const travelParticipationRateDomesticTourism: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003456093",
+    "cdCat03": "211",
     "cdCat01": "0",
     "cdCat02": "0",
     "displayName": "社会生活基本調査",
