@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-07-30T01:48:03.536Z",
+  "generatedAt": "2026-07-30T19:29:12.175Z",
   "gscSnapshot": "2026-W30",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
-    "total": 2179,
+    "total": 2176,
     "done": 196,
-    "needsRegen": 1983,
+    "needsRegen": 1980,
     "needsByReason": {
-      "missing": 226,
+      "missing": 223,
       "incomplete": 1691,
       "blocker": 66
     },
     "doneImpressions": 25056,
-    "needsImpressions": 12252,
+    "needsImpressions": 12241,
     "opusReviewTier": 30
   },
   "entries": [
@@ -7124,16 +7124,6 @@
       "reviewTier": "sonnet"
     },
     {
-      "rankingKey": "patient-receiving-rate-by-disease",
-      "impressions": 8,
-      "clicks": 0,
-      "position": 8.38,
-      "status": "needs-regen",
-      "reason": "missing",
-      "blockers": [],
-      "reviewTier": "sonnet"
-    },
-    {
       "rankingKey": "paved-road-main-length",
       "impressions": 8,
       "clicks": 0,
@@ -12511,16 +12501,6 @@
       "reviewTier": "sonnet"
     },
     {
-      "rankingKey": "patient-receiving-rate-by-age",
-      "impressions": 2,
-      "clicks": 0,
-      "position": 6.5,
-      "status": "needs-regen",
-      "reason": "missing",
-      "blockers": [],
-      "reviewTier": "sonnet"
-    },
-    {
       "rankingKey": "pension-benefit-total",
       "impressions": 2,
       "clicks": 0,
@@ -14167,16 +14147,6 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
-    },
-    {
-      "rankingKey": "inpatient-rate-by-bedtype",
-      "impressions": 1,
-      "clicks": 0,
-      "position": 4,
-      "status": "needs-regen",
-      "reason": "missing",
-      "blockers": [],
       "reviewTier": "sonnet"
     },
     {
