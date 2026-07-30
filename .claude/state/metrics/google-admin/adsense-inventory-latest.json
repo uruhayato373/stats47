@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "kind": "adsense-inventory",
+  "generatedAt": "2026-07-30T12:18:11.122Z",
+  "propertyId": "463218070",
+  "gscProperty": "sc-domain:stats47.jp",
+  "audit": {
+    "adsenseAccount": {
+      "status": "credentials-missing",
+      "detail": "GOOGLE_ADSENSE_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN が無い (.env.local か shell env に設定する)"
+    },
+    "adUnits": {
+      "status": "credentials-missing",
+      "source": "api",
+      "units": [],
+      "desired": [],
+      "codeSlots": [
+        {
+          "exportName": "RANKING_PAGE_TABLE_SIDE",
+          "slotId": "3604399166",
+          "format": "rectangle",
+          "adUnitName": null,
+          "pending": false
+        },
+        {
+          "exportName": "RANKING_SIDEBAR_TOP",
+          "slotId": "6180558947",
+          "format": "rectangle",
+          "adUnitName": null,
+          "pending": false
+        },
+        {
+          "exportName": "RANKING_PAGE_SIDEBAR",
+          "slotId": "1047042956",
+          "format": "skyscraper",
+          "adUnitName": null,
+          "pending": false
+        },
+        {
+          "exportName": "RAIL_RECT",
+          "slotId": "7716393084",
+          "format": "rectangle",
+          "adUnitName": null,
+          "pending": false
+        },
+        {
+          "exportName": "RANKING_PAGE_FOOTER",
+          "slotId": "6137206504",
+          "format": "multiplex",
+          "adUnitName": null,
+          "pending": false
+        },
+        {
+          "exportName": "BLOG_ARTICLE_INLINE",
+          "slotId": "5610987738",
+          "format": "article",
+          "adUnitName": null,
+          "pending": false
+        },
+        {
+          "exportName": "RANKING_INCONTENT_MOBILE",
+          "slotId": "5555350674",
+          "format": "article",
+          "adUnitName": null,
+          "pending": false
+        },
+        {
+          "exportName": "THEMES_CONTENT",
+          "slotId": "4317152551",
+          "format": "rectangle",
+          "adUnitName": null,
+          "pending": false
+        },
+        {
+          "exportName": "HUB_INCONTENT",
+          "slotId": "8185387982",
+          "format": "article",
+          "adUnitName": null,
+          "pending": false
+        },
+        {
+          "exportName": "CONTENT_FOOTER",
+          "slotId": "6137206504",
+          "format": "multiplex",
+          "adUnitName": null,
+          "pending": false
+        }
+      ]
+    },
+    "codeSlotsError": null
+  },
+  "decision": null,
+  "applied": null,
+  "approvalToken": "[REDACTED]"
+}

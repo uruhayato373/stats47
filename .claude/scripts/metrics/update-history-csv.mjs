@@ -45,7 +45,13 @@ import {
   adsenseHistoryRowFromOverview,
   adsenseDeviceRowFromSnapshot,
   adsenseBreakdownRow,
+  ADSENSE_UNIT_FIELDS,
+  ADSENSE_UNIT_HISTORY_FILE,
+  AD_UNITS_FILE,
+  adsenseUnitRow,
+  resolveUnitMatch,
 } from "./lib/adsense-report-contract.mjs";
+import { loadCodeAdSlots } from "./lib/code-ad-slots.mjs";
 
 const SNAPSHOT_DIRS = {
   gsc: ".claude/skills/analytics/gsc-improvement/reference/snapshots",
@@ -321,6 +327,66 @@ function writeAdsenseDeviceHistory(stateDir, week, deviceRows) {
   return rows;
 }
 
+/**
+ * unit 単位の履歴を upsert する (ユニットごとの最適化を効果測定可能にする)。
+ *
+ * units.csv (レポート) × ad-units.csv (inventory) × constants.ts (コード側 slot) を突き合わせ、
+ * 各行に match_status を必ず付ける。inventory が無い週 (A1 導入前の snapshot) でも動き、
+ * その場合は名前ベースの解決に落ちる。
+ *
+ * @returns {{rows:number, byStatus:Record<string,number>}|null} snapshot に units.csv が無ければ null
+ */
+function writeAdsenseUnitHistory(stateDir, snapDir, week) {
+  const snap = readCsv(join(snapDir, "units.csv"));
+  if (!snap || snap.rows.length === 0) return null;
+
+  // inventory (A1)。無い週は空 Map = 名前ベース解決にフォールバックする。
+  const inventoryByUnitId = new Map();
+  const inv = readCsv(join(snapDir, AD_UNITS_FILE));
+  for (const r of inv?.rows ?? []) {
+    if (r.unit_id) inventoryByUnitId.set(r.unit_id, r);
+  }
+
+  // コード側 slot 定数。読めなければ突き合わせ不能として続行する (履歴自体は残す)。
+  let codeIndex = { bySlotId: new Map(), byAdUnitName: new Map(), slots: [] };
+  try {
+    codeIndex = loadCodeAdSlots();
+    if (codeIndex.slots.length === 0) {
+      console.warn("[adsense] コード側 slot 定数を 1 件も抽出できませんでした (constants.ts の構造変化?)");
+    }
+  } catch (e) {
+    console.warn(`[adsense] constants.ts の読み取りに失敗: ${e.message || e}`);
+  }
+
+  const byStatus = {};
+  const newRows = snap.rows.map((r) => {
+    const match = resolveUnitMatch({
+      unitId: r.AD_UNIT_ID || null,
+      unitName: r.AD_UNIT_NAME ?? "",
+      inventoryByUnitId,
+      codeIndex,
+    });
+    byStatus[match.matchStatus] = (byStatus[match.matchStatus] ?? 0) + 1;
+    return adsenseUnitRow(week, r, match);
+  });
+
+  const path = join(stateDir, ADSENSE_UNIT_HISTORY_FILE);
+  let rows = existsSync(path) ? (readCsv(path)?.rows ?? []) : [];
+  rows = rows.filter((r) => r.week !== week);
+  rows.push(...newRows);
+  rows.sort((a, b) =>
+    a.week !== b.week
+      ? a.week < b.week
+        ? -1
+        : 1
+      : `${a.unit_name}@${a.unit_id}` < `${b.unit_name}@${b.unit_id}`
+        ? -1
+        : 1,
+  );
+  writeFileSync(path, toCsv(rows, ADSENSE_UNIT_FIELDS), "utf-8");
+  return { rows: rows.length, byStatus };
+}
+
 /** format/placement/bid-type × platform の breakdown 履歴を upsert する (snapshot にある job のみ)。 */
 function writeAdsenseBreakdownHistories(stateDir, snapDir, week) {
   const written = [];
@@ -340,7 +406,7 @@ function writeAdsenseBreakdownHistories(stateDir, snapDir, week) {
   return written;
 }
 
-function markdownAdsense(history, latest, deviceHistory) {
+function markdownAdsense(history, latest, deviceHistory, stateDir = null) {
   const prev = history.length >= 2 ? history[history.length - 2] : null;
   const arrow = (cur, prv, betterLow) => {
     if (!prv) return "";
@@ -436,7 +502,21 @@ function markdownAdsense(history, latest, deviceHistory) {
     }
   }
 
-  lines.push("履歴: [`history.csv`](./history.csv) / デバイス別: [`history-devices.csv`](./history-devices.csv) / 内訳: [`history-formats.csv`](./history-formats.csv)・[`history-placements.csv`](./history-placements.csv)・[`history-bid-types.csv`](./history-bid-types.csv)");
+  // 履歴リンクは実在するファイルだけ出す (docs のリンク検査に壊れ参照を残さない)。
+  // stateDir 未指定 (テスト等) では従来どおり全件出す。
+  const linkIfExists = (file, label) => {
+    if (stateDir && !existsSync(join(stateDir, file))) return null;
+    return `[\`${file}\`](./${file})${label ? ` (${label})` : ""}`;
+  };
+  const historyLinks = [
+    linkIfExists("history.csv"),
+    linkIfExists("history-devices.csv", "デバイス別"),
+    linkIfExists(ADSENSE_UNIT_HISTORY_FILE, "ユニット別"),
+    linkIfExists("history-formats.csv", "フォーマット別"),
+    linkIfExists("history-placements.csv", "配置別"),
+    linkIfExists("history-bid-types.csv", "入札型別"),
+  ].filter(Boolean);
+  if (historyLinks.length > 0) lines.push(`履歴: ${historyLinks.join(" / ")}`);
   lines.push("");
   lines.push("> schema v2 (2026-07-28): 公式 `COST_PER_CLICK`/`IMPRESSIONS_RPM`/`AD_REQUESTS`/`AD_REQUESTS_COVERAGE` を追加。");
   lines.push("> 旧 `cpc` 列 (earnings/clicks) は**公式 CPC ではない**ため `earnings_per_click_legacy` へ改名した (値は不変)。");
@@ -475,12 +555,21 @@ function updateAdsense(week) {
     deviceHistory = writeAdsenseDeviceHistory(stateDir, week, _devices);
   }
   const breakdowns = writeAdsenseBreakdownHistories(stateDir, snapDir, week);
-  writeFileSync(join(stateDir, "LATEST.md"), markdownAdsense(history, row, deviceHistory), "utf-8");
+  const units = writeAdsenseUnitHistory(stateDir, snapDir, week);
+  writeFileSync(join(stateDir, "LATEST.md"), markdownAdsense(history, row, deviceHistory, stateDir), "utf-8");
   console.log(
     `[adsense] updated history.csv (${history.length} weeks) and LATEST.md` +
       (deviceHistory ? ` + history-devices.csv (${deviceHistory.length} rows)` : "") +
-      (breakdowns.length ? ` + ${breakdowns.join(" / ")}` : "")
+      (breakdowns.length ? ` + ${breakdowns.join(" / ")}` : "") +
+      (units ? ` + ${ADSENSE_UNIT_HISTORY_FILE} (${units.rows} rows)` : "")
   );
+  if (units) {
+    // 突き合わせ結果を必ず出す (unmanaged/orphan が増えたら unit 単位の効果測定が壊れている)
+    const summary = Object.entries(units.byStatus)
+      .map(([k, v]) => `${k}=${v}`)
+      .join(" ");
+    console.log(`[adsense] unit match: ${summary}`);
+  }
 }
 
 // ── メイン処理 ──

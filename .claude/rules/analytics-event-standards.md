@@ -34,6 +34,29 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 同書allowlist・property照合・重複確認・before/after検証を満たす登録だけを実行してよい。
 権限、既存dimension削除/置換、timezone、data retention等はrunnerの対象外。
 
+### 登録状況を機械で確定させる (❓要確認 の解消手順)
+
+台帳 §2 の `❓要確認` は「コード上は登録前提だが GA4 実登録を確認していない」状態で、放置すると
+効果判定の前提が未確定のまま残る。次のコマンドが台帳を機械的に読み、GA4 のカスタム定義画面の
+実データと突合して確定させる (headed 実行・read-only)。
+
+```bash
+npm run google-admin:audit
+```
+
+出力の `custom dimension 突合:` 行が verdict 別件数を出す。判定の意味:
+
+| verdict | 意味 | 次の行動 |
+|---|---|---|
+| `verified-registered` | ❓ だったが実際に登録済み | 台帳を `✅登録済 (日付)` に更新する |
+| `verified-absent` | ❓ で実際は未登録 | 台帳を `⏳要登録` に更新し §1 の手順で登録する |
+| `ledger-claims-registered-but-absent` | 台帳が登録済みと言うのに GA4 に無い | **台帳が誤っている**。実登録を確認して是正する |
+| `confirmed-absent` | ⏳要登録 のとおり未登録 | §1 の手順で登録する |
+
+突合ロジックは `.claude/scripts/google-admin/dimension-ledger.mjs` (pure・テスト付き)。
+パラメータ名は単語境界で照合するので `ad_id` が `ad_idx` に誤マッチしない。
+**推測で台帳の ❓ を ✅ に変えない** — このコマンドの実出力を根拠にする。
+
 確認 (登録 24–48h 後): GA4「探索（自由形式）」で ディメンション＝当該パラメータ・指標＝イベント数・
 フィルタ＝`eventName = <イベント>` → 値別に行が分かれれば成功（`(not set)` に潰れていれば名前ミス or 反映待ち）。
 

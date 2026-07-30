@@ -291,6 +291,229 @@ export const ADSENSE_BREAKDOWN_FIELDS = Object.freeze([
   "ad_requests_coverage",
 ]);
 
+// ── ad unit inventory (API read-only。レポートではないので別契約) ──────────────
+//
+// レポート job は「期間 × dimension × metric」だが inventory は「今存在する広告ユニットの一覧」で
+// 期間概念を持たない。そのため REPORT_JOBS / buildJobManifest / classifyJobStatus を流用せず
+// 専用の契約を持つ (期間や metric を持たない manifest に "ESTIMATED_EARNINGS は推定値" のような
+// レポート固有 limitation を付けないため)。
+//
+// unit_id は adunits.list の reportingDimensionId で、レポートの AD_UNIT_ID と同値。
+// これがコード側 slot と AdSense 側 unit を結ぶ突き合わせキーになる (displayName は
+// 人が管理画面で変えられるため名前だけの突合は壊れる)。
+
+/** inventory の出力ファイル名。 */
+export const AD_UNITS_FILE = "ad-units.csv";
+
+/** inventory manifest の job 名 (manifest.jobs のキー)。 */
+export const AD_UNITS_JOB_NAME = "ad-units";
+
+/** ad unit inventory CSV の列。 */
+export const AD_UNIT_INVENTORY_FIELDS = Object.freeze([
+  "unit_id",
+  "display_name",
+  "state",
+  "type",
+  "size",
+  "slot_id",
+]);
+
+/**
+ * AdSense の adCode スニペットから data-ad-slot を抽出する (pure)。
+ * 属性の引用符は "..." / '...' の両方を許す。取れなければ null を返し、推測で埋めない。
+ */
+export function extractSlotIdFromAdCode(adCode) {
+  if (typeof adCode !== "string" || adCode.length === 0) return null;
+  const m = adCode.match(/data-ad-slot\s*=\s*["'](\d+)["']/);
+  return m ? m[1] : null;
+}
+
+/**
+ * adunits.list の 1 件 (+ adCode) から inventory 行を作る (pure)。
+ * 欠損は "" にする (0 や推測値で埋めない)。
+ */
+export function adUnitInventoryRow(unit, adCode = null) {
+  const settings = unit?.contentAdsSettings ?? {};
+  return {
+    unit_id: unit?.reportingDimensionId ?? "",
+    display_name: unit?.displayName ?? "",
+    state: unit?.state ?? "",
+    type: settings.type ?? "",
+    size: settings.size ?? "",
+    slot_id: extractSlotIdFromAdCode(adCode) ?? "",
+  };
+}
+
+/**
+ * inventory の status を分類する。
+ * レポートの classifyJobStatus とは別軸 (privacy-threshold / partial の概念が無い)。
+ */
+export function classifyInventoryStatus(rowCount, { error = null } = {}) {
+  if (error) return "error";
+  return rowCount === 0 ? "missing" : "complete";
+}
+
+/**
+ * inventory の manifest entry を組み立てる (pure)。
+ * 期間・metric・通貨を持たないので buildJobManifest とは別実装にする。
+ */
+export function buildInventoryManifest({
+  rowCount,
+  status,
+  generatedAt,
+  slotIdMissingCount = 0,
+  limitations = [],
+  error = null,
+}) {
+  const lim = [...limitations];
+  if (slotIdMissingCount > 0) {
+    lim.push(
+      `slot_id を adCode から抽出できなかったユニット: ${slotIdMissingCount} 件 (推測で埋めていない)`,
+    );
+  }
+  if (error) lim.push(`API error: ${String(error).slice(0, 200)}`);
+  return {
+    schemaVersion: ADSENSE_MANIFEST_SCHEMA_VERSION,
+    source: ADSENSE_SOURCE,
+    kind: "inventory",
+    generatedAt,
+    fields: [...AD_UNIT_INVENTORY_FIELDS],
+    rowCount,
+    status,
+    limitations: lim,
+  };
+}
+
+// ── unit 単位 history (ユニットごとの最適化を効果測定可能にする) ────────────────
+//
+// 既存の history-devices.csv / history-<breakdown>.csv は platform 列を持つが units.csv は
+// platform 次元を持たないため、ADSENSE_BREAKDOWN_SPECS に entry を足す形では列が合わない。
+// そのため専用の列集合と行ビルダーを持つ。
+//
+// match_status で「コード側 slot と突き合わせられたか」を必ず記録する。突き合わせ不能を
+// 空欄で沈黙させると、ユニット最適化の効果測定が黙って壊れるため。
+
+/** unit history CSV の列。 */
+export const ADSENSE_UNIT_FIELDS = Object.freeze([
+  "week",
+  "unit_id",
+  "unit_name",
+  "slot_id",
+  "code_slot",
+  "match_status",
+  "earnings",
+  "impressions",
+  "impressions_rpm",
+  "clicks",
+  "ctr",
+  "viewability",
+  "cost_per_click",
+  "ad_requests",
+  "ad_requests_coverage",
+]);
+
+/** unit history のファイル名。 */
+export const ADSENSE_UNIT_HISTORY_FILE = "history-units.csv";
+
+/**
+ * match_status の値。
+ * - matched            … unit_id (または adUnitName) がコード側 slot 定数に解決できた
+ * - legacy-name-matched… AD_UNIT_ID 列が無い過去週で、旧名 map 経由で解決できた (後方互換。
+ *                        削除条件: history-units.csv から AD_UNIT_ID 欠落週 (〜2026-W30) が
+ *                        履歴から外れたら本 status と ADSENSE_LEGACY_UNIT_NAME_MAP ごと削除する)
+ * - unmanaged          … AdSense 側に存在するがコードが参照しない (Auto ads・アンカー枠等)
+ * - orphan             … レポートに出るが現在の inventory に無い (削除済みユニットの過去データ)
+ */
+export const ADSENSE_UNIT_MATCH_STATUSES = Object.freeze([
+  "matched",
+  "legacy-name-matched",
+  "unmanaged",
+  "orphan",
+]);
+
+/**
+ * AD_UNIT_ID 列が入る前の週にだけ適用する旧 unit 名 → canonical unit 名の対応 (append-only)。
+ *
+ * **推測で埋めない。** ad-units.csv (inventory) の実 displayName と突き合わせて確定した対応だけを
+ * 追記する。空のままでも unit history は動き、未解決行は match_status=unmanaged として残る。
+ */
+export const ADSENSE_LEGACY_UNIT_NAME_MAP = Object.freeze({});
+
+/**
+ * レポート行 1 件のコード側 slot 対応を解決する (pure)。
+ *
+ * @param {object} args
+ * @param {string|null} args.unitId    レポートの AD_UNIT_ID (列が無い週は null)
+ * @param {string} args.unitName       レポートの AD_UNIT_NAME
+ * @param {Map<string,{slot_id?:string}>} args.inventoryByUnitId ad-units.csv の索引
+ * @param {{bySlotId:Map<string,object[]>, byAdUnitName:Map<string,object[]>}} args.codeIndex
+ * @param {Record<string,string>} [args.legacyNameMap]
+ * @returns {{slotId:string, codeSlot:string, matchStatus:string}}
+ */
+export function resolveUnitMatch({
+  unitId,
+  unitName,
+  inventoryByUnitId,
+  codeIndex,
+  legacyNameMap = ADSENSE_LEGACY_UNIT_NAME_MAP,
+}) {
+  const names = (list) => (list || []).map((s) => s.exportName).join("|");
+
+  if (unitId) {
+    const inv = inventoryByUnitId?.get(unitId);
+    if (!inv) {
+      // レポートにはあるが現在の inventory に無い = 削除済みユニットの過去データ
+      return { slotId: "", codeSlot: "", matchStatus: "orphan" };
+    }
+    const slotId = inv.slot_id || "";
+    const hit = slotId ? codeIndex?.bySlotId?.get(slotId) : null;
+    if (hit && hit.length > 0) {
+      return { slotId, codeSlot: names(hit), matchStatus: "matched" };
+    }
+    return { slotId, codeSlot: "", matchStatus: "unmanaged" };
+  }
+
+  // AD_UNIT_ID 列が無い週: 名前で解決する
+  const canonical = legacyNameMap?.[unitName] ?? null;
+  if (canonical) {
+    const hit = codeIndex?.byAdUnitName?.get(canonical);
+    if (hit && hit.length > 0) {
+      return { slotId: hit[0].slotId ?? "", codeSlot: names(hit), matchStatus: "legacy-name-matched" };
+    }
+  }
+  const direct = codeIndex?.byAdUnitName?.get(unitName);
+  if (direct && direct.length > 0) {
+    return { slotId: direct[0].slotId ?? "", codeSlot: names(direct), matchStatus: "matched" };
+  }
+  return { slotId: "", codeSlot: "", matchStatus: "unmanaged" };
+}
+
+/**
+ * units.csv の 1 行 → unit history 行 (pure)。
+ * match は resolveUnitMatch が決めた結果を受け取る (この関数は数値整形だけを担う)。
+ */
+export function adsenseUnitRow(week, r, match) {
+  const f2 = (v) => (numOrEmpty(v) === "" ? "" : Number(v).toFixed(2));
+  const f4 = (v) => (numOrEmpty(v) === "" ? "" : Number(v).toFixed(4));
+  return {
+    week,
+    unit_id: r.AD_UNIT_ID ?? "",
+    unit_name: r.AD_UNIT_NAME ?? "",
+    slot_id: match?.slotId ?? "",
+    code_slot: match?.codeSlot ?? "",
+    match_status: match?.matchStatus ?? "unmanaged",
+    earnings: Number(r.ESTIMATED_EARNINGS ?? 0).toFixed(2),
+    impressions: Number(r.IMPRESSIONS ?? 0),
+    impressions_rpm: f2(r.IMPRESSIONS_RPM),
+    clicks: Number(r.CLICKS ?? 0),
+    ctr: f4(r.IMPRESSIONS_CTR),
+    viewability: f4(r.ACTIVE_VIEW_VIEWABILITY),
+    cost_per_click: f2(r.COST_PER_CLICK),
+    ad_requests: numOrEmpty(r.AD_REQUESTS),
+    ad_requests_coverage: f4(r.AD_REQUESTS_COVERAGE),
+  };
+}
+
 /** breakdown snapshot 行 → history 行。 */
 export function adsenseBreakdownRow(week, keyDim, r) {
   const f2 = (v) => (numOrEmpty(v) === "" ? "" : Number(v).toFixed(2));

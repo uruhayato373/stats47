@@ -409,6 +409,13 @@
       ]
     },
     {
+      "name": "IMPROVEMENT_BACKLOG_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "INSTAGRAM_ACCESS_TOKEN",
       "visibility": "secret",
       "contexts": [
