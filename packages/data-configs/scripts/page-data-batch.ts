@@ -178,12 +178,75 @@ async function fetchEstatCombination(
   return { values, raw: { totalNumber, toNumber } };
 }
 
+/**
+ * cat 軸のメンバーを合算する (総数コードが無い / 一部の県にしか出ない軸用)。
+ *
+ * 欠測メンバーは 0 として扱う (その県にその区分が無いだけ)。ただし全メンバーが欠測なら
+ * 合算せず欠測にする — 0 を捏造すると「貨物量 0 トンの県」を作ってしまう。
+ */
+async function fetchEstatAxisSum(
+  appId: string,
+  config: Extract<SourceConfig, { kind: "estat" }>,
+  axisSum: NonNullable<Extract<SourceConfig, { kind: "estat" }>["axisSum"]>,
+): Promise<EstatFetchResult> {
+  const paramOf = {
+    cat01: "cdCat01",
+    cat02: "cdCat02",
+    cat03: "cdCat03",
+    cat04: "cdCat04",
+    cat05: "cdCat05",
+  } as const;
+  const key = paramOf[axisSum.axis];
+
+  const parts: Array<Map<string, string>> = [];
+  let totalNumber = 0;
+  let toNumber = 0;
+  const order: string[] = [];
+  const meta = new Map<string, { area: string; time: string }>();
+
+  for (const code of axisSum.codes) {
+    const part = await fetchEstatData(appId, { ...config, [key]: code, axisSum: undefined });
+    totalNumber += part.raw.totalNumber;
+    toNumber += part.raw.toNumber;
+    const byKey = new Map<string, string>();
+    for (const v of part.values) {
+      const k = `${v["@area"]}|${v["@time"]}`;
+      byKey.set(k, v.$);
+      if (!meta.has(k)) {
+        meta.set(k, { area: v["@area"], time: v["@time"] });
+        order.push(k);
+      }
+    }
+    parts.push(byKey);
+  }
+
+  const values: EstatValue[] = order.map((k) => {
+    const { area, time } = meta.get(k)!;
+    let sum = 0;
+    let present = 0;
+    for (const byKey of parts) {
+      const raw = byKey.get(k);
+      const n = raw === undefined ? null : parseEstatValue(raw);
+      if (n === null) continue; // その区分が無い県 = 0 として扱う
+      sum += n;
+      present++;
+    }
+    if (present === 0) return { "@area": area, "@time": time, $: "-" };
+    return { "@area": area, "@time": time, $: String(Math.round(sum * 10) / 10) };
+  });
+
+  return { values, raw: { totalNumber, toNumber } };
+}
+
 async function fetchEstatData(
   appId: string,
   config: Extract<SourceConfig, { kind: "estat" }>,
 ): Promise<EstatFetchResult> {
   if (config.tabCombination && config.tabCombination.length > 0) {
     return fetchEstatCombination(appId, config, config.tabCombination);
+  }
+  if (config.axisSum && config.axisSum.codes.length > 0) {
+    return fetchEstatAxisSum(appId, config, config.axisSum);
   }
   const params = new URLSearchParams({
     appId,
@@ -208,6 +271,13 @@ async function fetchEstatData(
   // 旧実装は STATISTICAL_DATA の有無しか見ず、原因がログに残らなかった。
   const result = getStatsData?.RESULT as Record<string, unknown> | undefined;
   const statusCode = Number(result?.STATUS ?? 0);
+  // STATUS=1 は「正常に終了したが該当データなし」。座標の絞り込みが空振りしただけで
+  // API エラーではないので 0 件として返し、0 件ゲート (expected-empty) に判定させる。
+  // axisSum のようにメンバーごとに叩く経路では、一部メンバーが空なのは正常なこともある
+  // (港湾調査の入港船舶表は cdCat01=100/cdCat02=100 では外国航路にデータが無い)。
+  if (statusCode === 1) {
+    return { values: [], raw: { totalNumber: 0, toNumber: 0 } };
+  }
   if (statusCode !== 0) {
     throw new Error(
       `e-Stat error STATUS=${statusCode} ${String(result?.ERROR_MSG ?? "")} (statsDataId=${config.statsDataId})`,
@@ -218,8 +288,15 @@ async function fetchEstatData(
   if (!stat) {
     throw new Error(`e-Stat response invalid for ${config.statsDataId}`);
   }
-  const values =
-    ((stat.DATA_INF as Record<string, unknown>).VALUE as EstatValue[]) ?? [];
+  // ★VALUE は 1 行のときオブジェクト、複数行のとき配列で返る。
+  //   軸を細かく絞ると 1 行になることがあり、配列前提だと "not iterable" で落ちる
+  //   (2026-07-30 に axisSum の実装で実際に発生)。
+  const rawValue = (stat.DATA_INF as Record<string, unknown> | undefined)?.VALUE;
+  const values: EstatValue[] = Array.isArray(rawValue)
+    ? (rawValue as EstatValue[])
+    : rawValue
+      ? [rawValue as EstatValue]
+      : [];
 
   // RESULT_INF: {TOTAL_NUMBER, FROM_NUMBER, TO_NUMBER, NEXT_KEY}
   // 分類軸の絞り忘れで数百万セルになる表があり、limit で静かに切られたまま配信されていた。
