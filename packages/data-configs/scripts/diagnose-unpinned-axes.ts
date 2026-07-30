@@ -263,10 +263,28 @@ function diagnose(key: string, observedSeverity: number, meta: MetaDump | null):
 
   // 時間軸に年計以外 (月次・四半期) が混ざっていないか。
   // extractYearCode が 4 桁に潰すため、年計以外があると同じ年に複数行できる。
-  const timeDim = meta.dimensions.find((d) => d.id === "time");
-  const nonAnnualTime =
-    src.timeScope !== "annual" &&
-    (timeDim?.sampleValues ?? []).some((v) => !/^\d{4}0{6}$/.test(v.code));
+  //
+  // ★「年計コードの形 (YYYY000000) でないもの」を非年計と見なしてはならない
+  //   (2026-07-30 実測)。社会・人口統計体系 (SSDS) の年度コードは `1975100000` で、
+  //   1 年 1 コードしかないのに形だけ見ると非年計に見える。この誤判定で
+  //   timeScope:"annual" を 17 metric に付けたところ全件 0 行になり、
+  //   既存データを消しかけた (0 件ゲートが止めた)。
+  //
+  //   正しい判定は 2 条件の AND:
+  //     (a) 同じ年 (先頭 4 桁) に複数のコードがある = 粒度が混在している
+  //     (b) その中に年計コード (YYYY000000) が実在する = timeScope で残すものがある
+  //   (b) が無いのに timeScope を付けると全部落ちる。
+  const timeCodes = (meta.dimensions.find((d) => d.id === "time")?.sampleValues ?? []).map(
+    (v) => v.code,
+  );
+  const byYear = new Map<string, number>();
+  for (const c of timeCodes) {
+    const y = c.slice(0, 4);
+    byYear.set(y, (byYear.get(y) ?? 0) + 1);
+  }
+  const mixedGranularity = [...byYear.values()].some((n) => n > 1);
+  const hasAnnualCode = timeCodes.some((c) => /^\d{4}0{6}$/.test(c));
+  const nonAnnualTime = src.timeScope !== "annual" && mixedGranularity && hasAnnualCode;
 
   if (unpinned.length === 0) {
     return {
