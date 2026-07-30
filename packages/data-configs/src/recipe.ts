@@ -96,16 +96,30 @@ export interface MetricRecipe {
 // ---------------------------------------------------------------------------
 
 /**
+ * プロトタイプ汚染を起こすキー。
+ *
+ * ★任意入力のキーを `{}` へ書き戻す関数でこれらを弾かないと、`__proto__` を含む JSON が
+ * オブジェクトのプロトタイプを書き換える (CodeQL の prototype-pollution-utility)。
+ * 本モジュールは R2 payload 由来の JSON を扱うので、実際に到達しうる経路がある。
+ */
+const POLLUTING_KEYS = new Set(["__proto__", "constructor", "prototype"]);
+
+/**
  * 決定的直列化。オブジェクトのキーを再帰的に整列し、undefined を落とす。
  *
  * 配列は順序を保つ。順序が意味を持たない配列 (`axisSum.codes` / `tabCombination`) は
  * **buildRecipe 側で整列済み**なので、ここで特別扱いしない (正準形は recipe そのもの)。
+ *
+ * 出力は `Object.create(null)` 由来のプロトタイプ無しオブジェクト。任意のキーを
+ * 書き戻す再帰ユーティリティなので、プロトタイプを持たせない + 汚染キーを落とす、の
+ * 二重で防ぐ (`JSON.stringify` はプロトタイプ無しオブジェクトをそのまま直列化できる)。
  */
 function canonicalize(value: unknown): unknown {
   if (value === null || typeof value !== "object") return value;
   if (Array.isArray(value)) return value.map(canonicalize);
-  const out: Record<string, unknown> = {};
+  const out = Object.create(null) as Record<string, unknown>;
   for (const key of Object.keys(value as Record<string, unknown>).sort()) {
+    if (POLLUTING_KEYS.has(key)) continue;
     const v = (value as Record<string, unknown>)[key];
     if (v === undefined) continue;
     out[key] = canonicalize(v);
@@ -181,9 +195,16 @@ function buildEstatParams(
   }) as EstatQueryParams;
 }
 
+/**
+ * undefined のキーを落とす。汚染キーも落とす (canonicalize と同じ理由)。
+ *
+ * ここは呼び元がリテラルキーしか渡さないが、汎用ユーティリティの形をしているので
+ * 将来任意キーを渡されても壊れないようにしておく。
+ */
 function stripUndefined<T extends object>(obj: T): T {
   const out: Record<string, unknown> = {};
   for (const [k, v] of Object.entries(obj)) {
+    if (POLLUTING_KEYS.has(k)) continue;
     if (v !== undefined) out[k] = v;
   }
   return out as T;

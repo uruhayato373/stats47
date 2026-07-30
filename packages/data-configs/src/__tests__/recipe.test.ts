@@ -357,3 +357,42 @@ describe("実 registry での健全性", () => {
     REGISTRY_TIMEOUT,
   );
 });
+
+describe("プロトタイプ汚染キーの扱い (★任意 JSON を扱う再帰ユーティリティの防御)", () => {
+  // 正確な影響範囲: `out[key] = v` で key が "__proto__" のとき、壊れるのは
+  // **出力オブジェクトのプロトタイプ**であって Object.prototype ではない
+  // (JSON.parse は own property を作るが、代入側は継承 setter を踏む)。
+  // グローバル汚染ではないが、正準形が入力次第で別物になるので落とす。
+  it("★__proto__ を含む入力でも出力のプロトタイプが差し替わらない", () => {
+    const malicious = JSON.parse('{"kind":"estat","derived":false,"__proto__":{"polluted":"yes"}}');
+    const json = canonicalRecipeJson(malicious);
+    // 汚染キーは正準 JSON に出ない
+    expect(json).not.toContain("polluted");
+    expect(json).toBe('{"derived":false,"kind":"estat"}');
+    // グローバルは元々影響を受けないが、念のため確認しておく
+    expect(Object.prototype).not.toHaveProperty("polluted");
+  });
+
+  it("★汚染キーは正準 JSON から落ちる (防御を外すと落ちる回帰テスト)", () => {
+    const json = canonicalRecipeJson(
+      JSON.parse('{"kind":"estat","derived":false,"constructor":"x","prototype":"y"}'),
+    );
+    expect(json).not.toContain("constructor");
+    expect(json).not.toContain("prototype");
+    expect(json).toContain("estat");
+  });
+
+  it("入れ子の汚染キーも落ちる", () => {
+    const json = canonicalRecipeJson(
+      JSON.parse('{"kind":"estat","derived":false,"ops":{"timeScope":"annual","constructor":"bad"}}'),
+    );
+    expect(json).not.toContain("bad");
+    expect(json).toContain("annual");
+  });
+
+  it("汚染キーを落としても通常キーの正準化は不変", () => {
+    expect(canonicalRecipeJson({ kind: "estat", derived: false })).toBe(
+      '{"derived":false,"kind":"estat"}',
+    );
+  });
+});
