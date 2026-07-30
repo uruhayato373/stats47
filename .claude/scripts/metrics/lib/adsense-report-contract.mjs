@@ -418,7 +418,9 @@ export const ADSENSE_UNIT_HISTORY_FILE = "history-units.csv";
 /**
  * match_status の値。
  * - matched            … unit_id (または adUnitName) がコード側 slot 定数に解決できた
- * - legacy-name-matched… AD_UNIT_ID 列が無い過去週で、旧名 map 経由で解決できた
+ * - legacy-name-matched… AD_UNIT_ID 列が無い過去週で、旧名 map 経由で解決できた (後方互換。
+ *                        削除条件: history-units.csv から AD_UNIT_ID 欠落週 (〜2026-W30) が
+ *                        履歴から外れたら本 status と ADSENSE_LEGACY_UNIT_NAME_MAP ごと削除する)
  * - unmanaged          … AdSense 側に存在するがコードが参照しない (Auto ads・アンカー枠等)
  * - orphan             … レポートに出るが現在の inventory に無い (削除済みユニットの過去データ)
  */

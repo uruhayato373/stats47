@@ -327,7 +327,7 @@ test("resolveUnitMatch: AD_UNIT_ID 列が無い週は名前で解決する (inve
   const direct = resolveUnitMatch({ unitId: null, unitName: "stats47-hub-incontent", inventoryByUnitId: new Map(), codeIndex: idx });
   assert.equal(direct.matchStatus, "matched");
   assert.equal(direct.slotId, "8185387982");
-  // legacy map 経由 → legacy-name-matched
+  // legacy map 経由 → legacy-name-matched (後方互換。削除条件は contract の match_status 定義を参照)
   const legacy = resolveUnitMatch({
     unitId: null,
     unitName: "サイドバー右上",

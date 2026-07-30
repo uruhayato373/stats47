@@ -17,7 +17,7 @@ AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Act
 | 施策（1施策1行、人間向け要約） | `docs/todo/04_改善バックログ.md` | active 施策を優先度・期日で絞り込み可能 |
 | 詳細ログ（agent 用、検証コマンド・仮説） | `reference/improvement-log.md` | append-only、agent が深掘り参照 |
 | 週次推移サマリ | `.claude/state/metrics/adsense/LATEST.md` / `history.csv` | GitHub Actions が自動更新 |
-| **広告ユニット別推移** | `.claude/state/metrics/adsense/history-units.csv` | ユニット単位の最適化を効果測定するための時系列。`match_status` (matched / legacy-name-matched / unmanaged / orphan) で突き合わせ可否を明示する |
+| **広告ユニット別推移** | `.claude/state/metrics/adsense/history-units.csv` | ユニット単位の最適化を効果測定するための時系列。`match_status` (matched / legacy-name-matched / unmanaged / orphan) で突き合わせ可否を明示する。legacy-name-matched は後方互換で、削除条件は `adsense-report-contract.mjs` の match_status 定義を参照 |
 | **AdSense ユニット inventory** | `reference/snapshots/YYYY-Www/ad-units.csv` | `unit_id` (= レポートの `AD_UNIT_ID`) と `slot_id` (adCode の `data-ad-slot`) の対応。コード側 `constants.ts` との突き合わせキー |
 
 → **責務分離**: `docs/todo/04_改善バックログ.md` はactive一覧、agent 用詳細は `.claude/skills/analytics/adsense-improvement/reference/improvement-log.md`。
