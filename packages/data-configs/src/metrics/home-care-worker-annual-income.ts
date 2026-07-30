@@ -9,6 +9,10 @@ export const homeCareWorkerAnnualIncome: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003445758",
+    "tabCombination": [
+      { "cdTab": "08", "factor": 12 },
+      { "cdTab": "12", "factor": 1 },
+    ],
     "cdCat01": "01",
     "cdCat02": "1362",
   },
@@ -16,11 +20,8 @@ export const homeCareWorkerAnnualIncome: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      2020,
-      2021,
-      2023,
-    ],
+    "from": 2020,
+    "to": 2023,
   },
   "yearFormat": "calendar",
   "display": {

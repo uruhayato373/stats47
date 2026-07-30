@@ -8,6 +8,9 @@ export const smartphoneUsageTimeByAge: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003457306",
+    "cdTab": "202101A02",
+    "cdCat03": "0",
+    "cdCat04": "00",
     "cdCat01": "1",
     "cdCat02": "0",
     "displayName": "スマートフォン・パソコン使用者の推定人口（10歳以上・週全体・総数）",

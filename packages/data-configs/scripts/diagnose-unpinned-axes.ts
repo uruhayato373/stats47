@@ -57,6 +57,8 @@ import { fileURLToPath } from "node:url";
 import {
   isTotalName,
   matchCodeByTitle,
+  normalizeCodeName,
+  normalizeTitle,
   tabProvidesRate,
   type AxisCode,
 } from "../src/axis-match.js";
@@ -84,6 +86,7 @@ interface MetaDump {
 
 type Wave =
   | "pin-match"
+  | "pin-multi"
   | "needs-calculation"
   | "pin-total"
   | "ambiguous"
@@ -190,7 +193,9 @@ function pinnedAxes(src: Extract<SourceConfig, { kind: "estat" }>): Set<string> 
   if (src.cdCat02) out.add("cat02");
   if (src.cdCat03) out.add("cat03");
   if (src.cdCat04) out.add("cat04");
-  if (src.cdTab) out.add("tab");
+  if (src.cdCat05) out.add("cat05");
+  // tabCombination は複数 tab を線形結合するので tab 軸は解決済み扱い
+  if (src.cdTab || (src.tabCombination && src.tabCombination.length > 0)) out.add("tab");
   return out;
 }
 
@@ -382,23 +387,79 @@ function diagnose(key: string, observedSeverity: number, meta: MetaDump | null):
     };
   }
 
-  // 未指定軸が複数。title 一致する軸があればそれだけ提示して残りは人が判断する。
-  const partial = unpinnedDims
-    .map((d) => {
-      const m = matchCodeByTitle(config.title, d.sampleValues ?? []);
-      return m && m !== "ambiguous"
-        ? `${d.id === "tab" ? "cdTab" : `cdCat${d.id.replace("cat", "")}`}: "${m.code}" // ${m.name}`
-        : null;
-    })
-    .filter((x): x is string => x !== null);
+  // 未指定軸が複数。**軸ごとに独立に**解決する。
+  //
+  // 多くは「title が指す軸が 1 本 + 残りは集計軸 (男女計・産業計・総数)」という形なので、
+  // 軸ごとに (a) title 一致 → (b) その軸の総数 の順で決めれば全部埋まる。
+  // 総数を使うのは「その軸について title が何も言っていない」ときだけなので、
+  // 単一軸のときに禁じた「総数フォールバック」の罠には当たらない
+  // (title が指している軸には必ず (a) が当たるため)。
+  const resolved = unpinnedDims.map((d) => {
+    const param = d.id === "tab" ? "cdTab" : `cdCat${d.id.replace("cat", "")}`;
+    const codes = d.sampleValues ?? [];
+    const m = matchCodeByTitle(config.title, codes);
+    const total = codes.find((c) => isTotalName(c.name));
+    if (m && m !== "ambiguous") {
+      // ★短い一致 (2 文字) は位置で真偽を分ける (2026-07-30 実測)。
+      //   偶然の一致は title の途中に出る:
+      //     「バリアフリー化住宅率」の "住宅" が建て方軸の「共同住宅」に当たる
+      //     「太陽光発電機のある住宅率」も同じ
+      //   真の一致は title の先頭に出る:
+      //     「肺炎による死亡者数」の "肺炎"、「老衰による死亡者数」の "老衰"
+      //   長さだけで切ると後者を総数 (= 全死因の合計) に落としてしまう。
+      const matched = normalizeCodeName(m.name);
+      const weak =
+        matched.length < 3 && !normalizeTitle(config.title).startsWith(matched) && Boolean(total);
+      if (!weak) return { param, code: m.code as string | null, label: m.name, by: "title" as const };
+    }
+    if (total) return { param, code: total.code as string | null, label: total.name, by: "total" as const };
+    return { param, code: null as string | null, label: d.name, by: "none" as const };
+  });
 
+  // 実数の表で % を求めているなら pin では解決しない (単一軸と同じ扱い)。
+  // barrier-free-housing-rate は tab=住宅数、telework-rate は tab=人口 で、
+  // どちらも「該当 / 総数」の 2 セルが要る。
+  if (needsRatio) {
+    const memberAxis = resolved.find((r) => r.by === "title");
+    return {
+      ...base,
+      unpinned,
+      product,
+      wave: "needs-calculation",
+      ...(memberAxis
+        ? { suggestion: `分子 ${memberAxis.param}="${memberAxis.code}" (${memberAxis.label}) / 分母 同軸の総数` }
+        : {}),
+      note: `unit が「${config.unit}」だが表は実数 (tab=${tabCodes[0]?.name ?? "?"})。分子/分母の 2 セルが要る`,
+    };
+  }
+
+  const unresolved = resolved.filter((r) => r.code === null);
+  const fmt = (r: (typeof resolved)[number]) => `${r.param}: "${r.code}"  // ${r.label}`;
+
+  if (unresolved.length === 0) {
+    return {
+      ...base,
+      unpinned,
+      product,
+      wave: "pin-multi",
+      suggestion: resolved.map(fmt).join(" , "),
+      note:
+        `軸 ${resolved.length} 本を解決 (title 一致 ${resolved.filter((r) => r.by === "title").length} / ` +
+        `総数 ${resolved.filter((r) => r.by === "total").length})`,
+      ...timeNote,
+    };
+  }
+
+  const done = resolved.filter((r) => r.code !== null);
   return {
     ...base,
     unpinned,
     product,
     wave: "ambiguous",
-    ...(partial.length > 0 ? { suggestion: `一部のみ判明: ${partial.join(" , ")}` } : {}),
-    note: `未指定軸が ${unpinned.length} 本。すべて pin しないと 47 行にならない`,
+    ...(done.length > 0 ? { suggestion: `一部のみ判明: ${done.map(fmt).join(" , ")}` } : {}),
+    note:
+      `未指定軸 ${unpinned.length} 本のうち ${unresolved.length} 本が未解決 ` +
+      `(${unresolved.map((r) => `${r.param}=${r.label}`).join(", ")})。title 一致も総数も無い`,
     ...timeNote,
   };
 }
@@ -473,6 +534,7 @@ async function main(): Promise<void> {
   console.log("## wave 別の件数");
   const labels: Record<Wave, string> = {
     "pin-match": "title と一致するコードが 1 つ (そのコードを pin)",
+    "pin-multi": "未指定軸が複数だが全軸を解決できた (まとめて pin)",
     "needs-calculation": "unit が % なのに軸は実数の内訳 (分子/分母の calculation が要る)",
     "pin-total": "title が特定メンバーを指さない (総数で潰す・要確認)",
     ambiguous: "一致なし / 複数一致 / 未指定軸が複数 (コード一覧を見て判断)",

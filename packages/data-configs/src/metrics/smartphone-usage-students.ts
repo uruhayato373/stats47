@@ -8,6 +8,9 @@ export const smartphoneUsageStudents: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003457319",
+    "cdCat03": "0",
+    "cdCat04": "0",
+    "cdCat05": "06",
     "cdCat01": "1",
     "cdCat02": "0",
     "displayName": "在学者（10歳以上）の学業総平均時間（週全体・スマホ使用者・総数）",

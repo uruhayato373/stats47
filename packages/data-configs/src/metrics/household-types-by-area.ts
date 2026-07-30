@@ -8,6 +8,8 @@ export const householdTypesByArea: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003355518",
+    "cdCat03": "0",
+    "cdCat04": "00",
     "cdCat01": "0",
     "cdCat02": "0",
     "displayName": "家族類型別普通世帯数（総数, 2018年）",

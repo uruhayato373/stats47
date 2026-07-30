@@ -9,6 +9,7 @@ export const nurseSalary: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003445758",
+    "cdTab": "10",
     "cdCat01": "01",
     "cdCat02": "1133",
     "displayName": "賃金構造基本統計調査",

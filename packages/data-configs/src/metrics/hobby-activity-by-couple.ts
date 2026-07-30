@@ -8,6 +8,8 @@ export const hobbyActivityByCouple: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003455918",
+    "cdTab": "202101A02",
+    "cdCat03": "0",
     "cdCat01": "1",
     "cdCat02": "1",
     "displayName": "共働き世帯の夫の趣味・娯楽行動者推定人口",

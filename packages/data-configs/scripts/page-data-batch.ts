@@ -126,10 +126,65 @@ interface EstatFetchResult {
   raw: { totalNumber: number; toNumber: number };
 }
 
+/**
+ * 複数 tab を線形結合して 1 系列にする (年収 = 月額×12 + 賞与 など)。
+ *
+ * tab ごとに個別取得して (area, time) で合算する。まとめて取って後で分ける方式は
+ * `@tab` が返る保証を前提にするうえ limit 打ち切りの risk があるので採らない。
+ * どれか 1 つでも欠測なら "-" (欠測) として返す。部分和を配信すると
+ * 「賞与だけの年収」のような無意味な値になるため。
+ */
+async function fetchEstatCombination(
+  appId: string,
+  config: Extract<SourceConfig, { kind: "estat" }>,
+  combination: ReadonlyArray<{ cdTab: string; factor: number }>,
+): Promise<EstatFetchResult> {
+  const parts: Array<{ factor: number; byKey: Map<string, string> }> = [];
+  let totalNumber = 0;
+  let toNumber = 0;
+  const order: string[] = [];
+  const meta = new Map<string, { area: string; time: string }>();
+
+  for (const { cdTab, factor } of combination) {
+    const part = await fetchEstatData(appId, { ...config, cdTab, tabCombination: undefined });
+    totalNumber += part.raw.totalNumber;
+    toNumber += part.raw.toNumber;
+    const byKey = new Map<string, string>();
+    for (const v of part.values) {
+      const key = `${v["@area"]}|${v["@time"]}`;
+      byKey.set(key, v.$);
+      if (!meta.has(key)) {
+        meta.set(key, { area: v["@area"], time: v["@time"] });
+        order.push(key);
+      }
+    }
+    parts.push({ factor, byKey });
+  }
+
+  const values: EstatValue[] = order.map((key) => {
+    const { area, time } = meta.get(key)!;
+    let sum = 0;
+    for (const { factor, byKey } of parts) {
+      const raw = byKey.get(key);
+      const n = raw === undefined ? null : parseEstatValue(raw);
+      if (n === null) return { "@area": area, "@time": time, $: "-" };
+      sum += n * factor;
+    }
+    // 浮動小数の誤差を落とす (307.6*12+375.4 が 4066.6000000000004 になる)。
+    // 元データが小数第 1 位までなので同じ精度に丸める。
+    return { "@area": area, "@time": time, $: String(Math.round(sum * 10) / 10) };
+  });
+
+  return { values, raw: { totalNumber, toNumber } };
+}
+
 async function fetchEstatData(
   appId: string,
   config: Extract<SourceConfig, { kind: "estat" }>,
 ): Promise<EstatFetchResult> {
+  if (config.tabCombination && config.tabCombination.length > 0) {
+    return fetchEstatCombination(appId, config, config.tabCombination);
+  }
   const params = new URLSearchParams({
     appId,
     statsDataId: config.statsDataId,
@@ -140,6 +195,7 @@ async function fetchEstatData(
   if (config.cdCat03) params.set("cdCat03", config.cdCat03);
   // 4 軸目以降と表章項目 (tab)。絞り忘れると同じ県が複数行になり rank が通し番号化する
   if (config.cdCat04) params.set("cdCat04", config.cdCat04);
+  if (config.cdCat05) params.set("cdCat05", config.cdCat05);
   if (config.cdTab) params.set("cdTab", config.cdTab);
   const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${params}`;
   const res = await fetch(url);

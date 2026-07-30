@@ -9,6 +9,8 @@ export const liverDiseaseDeathCount: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003412078",
+    "cdCat01": "00100",
+    "cdCat03": "11300",
     "cdCat02": "00100",
   },
   "entities": [

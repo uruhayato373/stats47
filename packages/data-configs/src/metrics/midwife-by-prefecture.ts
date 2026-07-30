@@ -8,6 +8,7 @@ export const midwifeByPrefecture: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004026929",
+    "cdTab": "0260",
     "cdCat01": "100",
     "displayName": "就業助産師数（都道府県別・総数）",
     "url": "https://www.e-stat.go.jp/dbview?sid=0004026929",

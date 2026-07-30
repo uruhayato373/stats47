@@ -8,6 +8,7 @@ export const foodSanitationInspection: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004026844",
+    "cdTab": "1300",
     "displayName": "食品収去試験数（都道府県別）",
     "url": "https://www.e-stat.go.jp/dbview?sid=0004026844",
   },
