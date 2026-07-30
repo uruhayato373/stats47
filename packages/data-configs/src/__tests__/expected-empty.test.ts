@@ -37,19 +37,29 @@ describe("EXPECTED_EMPTY の健全性", () => {
     expect(new Set(keys).size).toBe(keys.length);
   });
 
-  it("★2026-07-29 の 6 件が解消済みであること (是正の逆戻りを検知する)", () => {
-    // areaAxis 新設 (患者調査 5 件) と years:"all" (救急告示病院) で 47 県そろった。
-    // ここに再登録されたら「直したはずの metric がまた 0 件になった」ということ。
-    const keys = new Set(EXPECTED_EMPTY.map((e) => e.key));
-    for (const k of [
+  it("★誤診のまま放置されていないこと (2026-07-30 に真因を特定)", () => {
+    // 当初は「cdCat01 の誤座標」と診断されていたが、真因は表の形 (都道府県が cat 軸) と
+    // 存在しない年の指定だった。理由が古い診断のままなら、次に見た人が同じ誤解をする。
+    for (const e of EXPECTED_EMPTY) {
+      expect(e.reason).not.toContain("誤座標");
+      expect(e.reason).not.toContain("要 e-Stat メタ再確認");
+    }
+  });
+
+  it("★config 是正済みのものは「R2 再生成待ち」と明記されていること", () => {
+    // 「まだ原因不明」と「直したが反映待ち」は対処がまったく違う
+    const fixed = [
       "inpatient-rate-per-100k",
       "outpatient-rate-per-100k",
       "patient-receiving-rate-by-age",
       "patient-receiving-rate-by-disease",
       "inpatient-rate-by-bedtype",
       "emergency-hospital-general-clinic-count-per-100k",
-    ]) {
-      expect(keys.has(k)).toBe(false);
+    ];
+    for (const k of fixed) {
+      const e = EXPECTED_EMPTY.find((x) => x.key === k);
+      expect(e, `${k} のエントリ`).toBeDefined();
+      expect(e!.reason).toContain("R2 再生成待ち");
     }
   });
 });

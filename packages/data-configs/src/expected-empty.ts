@@ -46,15 +46,65 @@ export interface ExpectedEmptyEntry {
  * 「まだ調べていない」を許可に使わない (それは調査中の未解決課題であって正当な 0 件ではない)。
  */
 export const EXPECTED_EMPTY: readonly ExpectedEmptyEntry[] = [
-  // 2026-07-30: 6 件すべて解消したため空。
+  // 2026-07-30: 6 件とも **config は是正済み**。残るのは R2 の再生成だけ。
   //
-  // 真因は「cdCat01 の誤座標」ではなく **表の形**だった:
-  //   - 患者調査 5 件 (0004026104 / 0004026105 / 0004002555): 都道府県が area 軸ではなく
-  //     cat 軸 (連番 1=全国 2=北海道…) に入る表。`@area` を読む通常経路では構造的に 0 行。
-  //     → source.areaAxis (scheme:"seq-pref") を新設して写像し、47 県そろうことを実測。
-  //   - 救急告示病院数 (0000010209): 3 年ごとの調査で **2021 年のデータが存在しない**のに
-  //     years を {from:2021,to:2021} に固定していた。取得 1008 行が全てフィルタ落ち。
-  //     → years:"all" に変更。
+  // 真因は当初の診断「cdCat01 の誤座標」ではなく **表の形**だった:
+  //   - 患者調査 5 件: 都道府県が area 軸ではなく cat 軸 (連番 1=全国 2=北海道…) に入る表。
+  //     `@area` を読む通常経路では構造的に 0 行。→ source.areaAxis を新設
+  //   - 救急告示病院数: 3 年ごとの調査で 2021 年のデータが無いのに years を 2021 単年に固定。
+  //     取得 1008 行が全てフィルタ落ち。→ years:"all"
+  //
+  // ★このエントリを消してよいのは **R2 再生成後**。消すと監査 (i) が赤くなる。
+  //   再生成すれば rowCount>0 になり classifyEmptyOutcome が stale-allowlist で
+  //   「削除してください」と教えてくれる。
+  {
+    key: "inpatient-rate-per-100k",
+    reason:
+      "config 是正済み・R2 再生成待ち。患者調査 0004026104 は都道府県が area 軸ではなく cat 軸に入る表で、" +
+      "source.areaAxis (seq-pref) を新設して 47 県そろうことを実測済み。R2 は未反映",
+    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
+    until: "2026-09-30",
+  },
+  {
+    key: "outpatient-rate-per-100k",
+    reason:
+      "config 是正済み・R2 再生成待ち。患者調査 0004026104 は都道府県が area 軸ではなく cat 軸に入る表で、" +
+      "source.areaAxis (seq-pref) を新設して 47 県そろうことを実測済み。R2 は未反映",
+    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
+    until: "2026-09-30",
+  },
+  {
+    key: "patient-receiving-rate-by-age",
+    reason:
+      "config 是正済み・R2 再生成待ち。患者調査 0004026104 は都道府県が area 軸ではなく cat 軸に入る表で、" +
+      "source.areaAxis (seq-pref) を新設して 47 県そろうことを実測済み。R2 は未反映",
+    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
+    until: "2026-09-30",
+  },
+  {
+    key: "patient-receiving-rate-by-disease",
+    reason:
+      "config 是正済み・R2 再生成待ち。患者調査 0004026105 は都道府県が area 軸ではなく cat 軸に入る表で、" +
+      "source.areaAxis (seq-pref) を新設して 47 県そろうことを実測済み。R2 は未反映",
+    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
+    until: "2026-09-30",
+  },
+  {
+    key: "inpatient-rate-by-bedtype",
+    reason:
+      "config 是正済み・R2 再生成待ち。患者調査 0004002555 は都道府県が area 軸ではなく cat 軸に入る表で、" +
+      "source.areaAxis (seq-pref) を新設して 47 県そろうことを実測済み。R2 は未反映",
+    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
+    until: "2026-09-30",
+  },
+  {
+    key: "emergency-hospital-general-clinic-count-per-100k",
+    reason:
+      "config 是正済み・R2 再生成待ち。3 年ごとの調査で 2021 年のデータが無いのに " +
+      "years を 2021 単年に固定していた。years:\"all\" に変更し 47 県そろうことを実測済み",
+    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
+    until: "2026-09-30",
+  },
 ];
 
 /** key (+entity) に対して**有効な** allowlist エントリを返す。期限切れは null */

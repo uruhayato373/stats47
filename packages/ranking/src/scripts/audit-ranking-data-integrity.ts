@@ -28,6 +28,8 @@
  *                             2 軸。相対だけだと values.json ごと凍結したキーを見逃す
  *   (i) 正典 app/stats      — active キーの `app/stats/<key>/values.json` が実在し rowCount>0 か。
  *                             前回比 rowCount ドリフト (部分崩壊) も見る
+ *   (k) レシピ整合         — 値の隣に焼かれた取得レシピが現在の config と一致するか
+ *                            (出典が同じでも軸 pin・tab・変換が違えば別の数字になる)
  *   (j) 形状               — 同一 (県, 年) の重複行 / unit が % なのに値が範囲外 /
  *                             47 県に満たない年。取り込み (page-data-batch) と同じ純関数
  *                             (`@stats47/data-configs` の classifyShape) で判定する
@@ -58,10 +60,13 @@ import * as path from "node:path";
 
 import {
   EXPECTED_SHAPE_ANOMALY,
+  buildRecipe,
   classifyShape,
   findExpectedEmpty,
   getMetricConfig,
+  parseRecipe,
   summarizeShape,
+  type MetricRecipe,
   type ShapeRow,
 } from "@stats47/data-configs";
 // HOME_FEATURED_RANKINGS は掲載価値スコアへの一元化で廃止。注目 8 件は生成物が持つ。
@@ -137,7 +142,7 @@ interface ValuesJson {
 }
 
 interface StatsValuesJson {
-  meta?: { rowCount?: number };
+  meta?: { rowCount?: number; recipe?: unknown };
   rows?: unknown[];
 }
 
@@ -172,6 +177,33 @@ interface ShapeChecks {
    * 独立した違反として扱うのは「正典は健全なのに配信側だけ壊れている」= 生成器のバグだけ。
    */
   deliveryDuplicatesExpected: string[];
+  ok: boolean;
+}
+
+/**
+ * (k) レシピ整合の検査結果。
+ *
+ * 「この値は**現在の config** で作れるか」を見る。値の隣に焼かれた
+ * `meta.recipe.configHash` と `buildRecipe(getMetricConfig(key)).configHash` を突き合わせる。
+ *
+ * ★出典 (statsDataId) が同じでも、軸 pin・tab 選択・線形結合・軸合算・率・地域軸が
+ * 変われば別の数字になる。config を直しても R2 を再生成していなければ古い値が
+ * 配信され続けるが、(a)-(j) はどれもそれを検知できない (形は正しいので通ってしまう)。
+ *
+ * `unbaked` は違反ではなく**残数**。レシピ導入 (2026-07-30) 以前に書かれた payload には
+ * レシピが無く、全面再生成が終わるまでは正常な状態。前回比で増えたときだけ fail する
+ * (縮小専用ラチェット)。0 になったら必須化する。
+ *
+ * 追加のネットワークコストは 0 (payload は (i) で取得済み)。
+ */
+interface RecipeChecks {
+  checked: number;
+  /** レシピが焼かれていない (旧 payload)。違反ではなく残数 */
+  unbaked: string[];
+  /** 焼かれたレシピが現在の config と食い違う = R2 が stale */
+  drift: Array<{ key: string; baked: string; current: string; diff: string }>;
+  /** config が registry に無い (公開だけ残っている) */
+  configMissing: string[];
   ok: boolean;
 }
 
@@ -248,6 +280,8 @@ interface CountSnapshot {
   categories: Record<string, number>;
   /** (i) の前回比ドリフト用 */
   statsRowCounts: Record<string, number>;
+  /** (k) の縮小専用ラチェット用。レシピ未焼き込みの残数 */
+  recipeUnbaked?: number;
 }
 
 interface AuditReport {
@@ -273,6 +307,7 @@ interface AuditReport {
   normalized: NormalizedChecks;
   stats: StatsChecks;
   shape: ShapeChecks;
+  recipe: RecipeChecks;
   ok: boolean;
 }
 
@@ -301,6 +336,24 @@ function checkFreshness(
 }
 
 /** 2 つの ISO 日時の差 (日) を返す。パース不能なら null */
+/**
+ * レシピ差分を 1 行で説明する。hash が違うことだけ言われても直せないので、
+ * 「どのフィールドがどう変わったか」まで出す。
+ */
+function describeRecipeDiff(baked: MetricRecipe, current: MetricRecipe): string {
+  const parts: string[] = [];
+  const b = (baked.estatParams ?? {}) as Record<string, string | undefined>;
+  const c = (current.estatParams ?? {}) as Record<string, string | undefined>;
+  for (const k of new Set([...Object.keys(b), ...Object.keys(c)])) {
+    if (b[k] !== c[k]) parts.push(`${k}: ${b[k] ?? "(なし)"} → ${c[k] ?? "(なし)"}`);
+  }
+  const bo = JSON.stringify(baked.ops ?? null);
+  const co = JSON.stringify(current.ops ?? null);
+  if (bo !== co) parts.push(`ops: ${bo} → ${co}`);
+  if (baked.kind !== current.kind) parts.push(`kind: ${baked.kind} → ${current.kind}`);
+  return parts.length > 0 ? parts.join(" / ") : "(estatParams/ops は同一。refetch 等の差)";
+}
+
 function ageInDays(a: string | undefined, b: string | undefined): number | null {
   if (!a || !b) return null;
   const ta = Date.parse(a);
@@ -383,6 +436,8 @@ function loadPreviousSnapshot(jsonOutPath: string | undefined): CountSnapshot | 
       survey: prev.countChecks?.survey?.count ?? 0,
       categories,
       statsRowCounts: prev.stats?.rowCounts ?? {},
+      // 前回レポートに recipe が無い (本検査の導入前) なら undefined = ラチェット無効
+      recipeUnbaked: prev.recipe?.unbaked?.length,
     };
   } catch {
     return null;
@@ -434,6 +489,9 @@ async function main() {
     ok: true,
   };
 
+  // (k) レシピ整合の集計器
+  const recipe: RecipeChecks = { checked: 0, unbaked: [], drift: [], configMissing: [], ok: true };
+
   // (f)(g)(h) 正規化系の集計器
   const normalized: NormalizedChecks = {
     expectedKeys: 0,
@@ -479,9 +537,30 @@ async function main() {
           stats.drift.push({ key, count: rowCount, previous: prev });
         }
 
+        // --- (k) レシピ整合 -------------------------------------------------
+        // 「この値は現在の config で作れるか」。同じく追加コスト 0。
+        const recipeConfig = getMetricConfig(key);
+        recipe.checked++;
+        if (!recipeConfig) {
+          recipe.configMissing.push(key);
+        } else {
+          const baked = parseRecipe(statsRes.body?.meta?.recipe);
+          const current = buildRecipe(recipeConfig);
+          if (!baked) {
+            recipe.unbaked.push(key);
+          } else if (baked.configHash !== current.configHash) {
+            recipe.drift.push({
+              key,
+              baked: baked.configHash,
+              current: current.configHash,
+              diff: describeRecipeDiff(baked, current),
+            });
+          }
+        }
+
         // --- (j) 形状 -----------------------------------------------------
         // payload は上で既に取得済みなので追加コスト 0。取り込みと同じ純関数で判定する。
-        const config = getMetricConfig(key);
+        const config = recipeConfig;
         if (config) {
           shape.checked++;
           const violations = classifyShape({
@@ -641,6 +720,12 @@ async function main() {
     surveyDriftOk &&
     Object.values(categoryChecks).every((c) => c.ok && c.driftOk);
 
+  // (k) 判定。drift と configMissing は即違反、unbaked は**増えたときだけ**違反
+  // (全面再生成が終わるまでは残っているのが正常なので、減る方向だけを強制する)
+  const prevUnbaked = previous?.recipeUnbaked;
+  const unbakedGrew = prevUnbaked !== undefined && recipe.unbaked.length > prevUnbaked;
+  recipe.ok = recipe.drift.length === 0 && recipe.configMissing.length === 0 && !unbakedGrew;
+
   const report: AuditReport = {
     generatedAt: new Date().toISOString(),
     r2Base: R2_BASE,
@@ -661,6 +746,7 @@ async function main() {
     normalized,
     stats: { ...stats, rowCounts: statsRowCounts },
     shape,
+    recipe,
     ok:
       itemMissing.length === 0 &&
       valuesMissing.length === 0 &&
@@ -668,7 +754,8 @@ async function main() {
       countChecksOk &&
       normalized.ok &&
       stats.ok &&
-      shape.ok,
+      shape.ok &&
+      recipe.ok,
   };
 
   // ---- レポート出力 ----
@@ -776,6 +863,31 @@ async function main() {
     console.log(
       `  → 是正: 未指定の分類軸を diagnose-unpinned-axes.ts で列挙して config に pin する。` +
         `既知の是正待ちなら packages/data-configs/src/expected-shape-anomaly.ts に登録`,
+    );
+  }
+
+  console.log(`\n## (k) レシピ整合 (値の隣のレシピ = 現在の config か)`);
+  console.log(`  検査: ${recipe.checked} 件`);
+  console.log(
+    `  未焼き込み (旧 payload・残数): ${recipe.unbaked.length} 件` +
+      (prevUnbaked !== undefined ? ` (前回 ${prevUnbaked})` : " (前回なし=ラチェット無効)"),
+  );
+  if (unbakedGrew) {
+    console.log(`      ★増加している。取り込みが meta.recipe を焼けていない可能性`);
+  }
+  console.log(`  config 不在: ${recipe.configMissing.length} 件`);
+  if (recipe.configMissing.length > 0) {
+    console.log(`      ${recipe.configMissing.slice(0, 10).join(", ")}`);
+  }
+  console.log(`  ★ドリフト (R2 が stale): ${recipe.drift.length} 件`);
+  for (const d of recipe.drift.slice(0, 10)) {
+    console.log(`      ${d.key}: ${d.diff}`);
+  }
+  if (recipe.drift.length > 10) console.log(`      … 他 ${recipe.drift.length - 10} 件`);
+  if (recipe.drift.length > 0) {
+    console.log(
+      `  → 是正: config を直したあと R2 を再生成する ` +
+        `(page-data-batch --metric <keys> → diff-push-r2 --prefix app/stats)`,
     );
   }
 
