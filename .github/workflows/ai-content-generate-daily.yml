@@ -132,7 +132,8 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          NEW=$(ls data/ai-content-staging/*.json 2>/dev/null | wc -l | tr -d ' ')
+          # ls ではなく find で数える (SC2012。ファイル名に非英数が入っても壊れない)
+          NEW=$(find data/ai-content-staging -maxdepth 1 -name '*.json' -type f 2>/dev/null | wc -l | tr -d ' ')
           git commit -q -m "chore(ai-content): daily gemini generation (outbox ${NEW} 件)"
           for i in 1 2 3; do
             if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then

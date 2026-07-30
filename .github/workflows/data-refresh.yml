@@ -102,9 +102,11 @@ jobs:
             SINCE="${{ inputs.since }}"
             DRY="${{ inputs.dry_run }}"
           fi
-          echo "metric=$METRIC" >> "$GITHUB_OUTPUT"
-          echo "since=$SINCE" >> "$GITHUB_OUTPUT"
-          echo "dry_run=$DRY" >> "$GITHUB_OUTPUT"
+          {
+            echo "metric=$METRIC"
+            echo "since=$SINCE"
+            echo "dry_run=$DRY"
+          } >> "$GITHUB_OUTPUT"
           echo "解決: metric='$METRIC' since='$SINCE' dry_run='$DRY'"
 
       - name: 🟢 Setup Node.js
