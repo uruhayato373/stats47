@@ -7,8 +7,10 @@ import {
 import {
   fetchRankingValuesFromSource,
   filterOutNationalArea,
+  isDerivedSource,
   rankByValue,
   readRankingItemFromR2,
+  resolveEstatParams,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
@@ -32,19 +34,19 @@ export async function fetchIndicatorForYearAction(
   const rankingItem = result.data;
   const { sourceConfig, calculation } = rankingItem;
 
-  // 計算型アイテムは既存ロジックに委譲
-  if (calculation?.isCalculated) {
+  // 計算型アイテム / 宣言演算を伴う metric (tab 線形結合・軸合算・率・県庁所在市写像) は
+  // e-Stat 単発クエリで再現できない。正典 (app/stats/<key>/values.json) を読む既存ロジックに委譲する。
+  if (calculation?.isCalculated || isDerivedSource(sourceConfig)) {
     return fetchRankingValuesFromSource(rankingItem, yearCode);
   }
 
-  if (!sourceConfig?.statsDataId) return [];
+  // ★sourceConfig を丸ごと spread しない (軸の欠落と非クエリキー混入を防ぐ)
+  const params = resolveEstatParams(sourceConfig);
+  if (!params) return [];
 
   try {
-    const params: GetStatsDataParams = {
-      ...(sourceConfig as GetStatsDataParams),
-    };
     const storage = await getEstatCacheStorage();
-    const rawData = await fetchFormattedStats(params, storage);
+    const rawData = await fetchFormattedStats(params as GetStatsDataParams, storage);
     const filteredData = filterOutNationalArea(rawData)
       .filter((d) => d.yearCode === yearCode);
     if (filteredData.length === 0) return [];

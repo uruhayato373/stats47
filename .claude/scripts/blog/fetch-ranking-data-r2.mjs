@@ -145,7 +145,9 @@ async function buildForKey(key, outBaseName, fullName) {
     unit,
     year,
     rankingKey: key,
-    source: item.sourceConfig?.name || "e-Stat（政府統計の総合窓口）",
+    // ★出典名は sourceConfig.source.name。sourceConfig.name は存在しないキーで、
+    //   常に undefined → 全記事が既定文言に落ちていた (2026-07-30 是正)。
+    source: item.sourceConfig?.source?.name || item.source?.name || "e-Stat（政府統計の総合窓口）",
     generatedBy: "fetch-ranking-data-r2.mjs",
     data,
   };

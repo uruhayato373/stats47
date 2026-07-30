@@ -25,6 +25,17 @@ export {
 } from "./shape-gate";
 export { EXPECTED_SHAPE_ANOMALY, MAX_KNOWN_BROKEN } from "./expected-shape-anomaly";
 export {
+  buildRecipe,
+  canonicalRecipeJson,
+  hash64,
+  parseRecipe,
+  type EstatAxis,
+  type EstatQueryParams,
+  type MetricRecipe,
+  type RecipeOps,
+  type RefetchKeys,
+} from "./recipe";
+export {
   getMetricMetaMap,
   getMetricMeta,
   listMetricKeysByEntity,

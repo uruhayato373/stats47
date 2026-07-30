@@ -8,6 +8,7 @@ import { listRankingValuesAllYears, upsertRankingValues } from "../repositories/
 import type { RankingItem, RankingValue } from "../types";
 import { filterOutNationalArea } from "../utils/filter-out-national-area";
 import { rankByValue } from "../utils/rank-by-value";
+import { isDerivedSource, resolveEstatParams } from "../utils/source-config";
 
 /**
  * e-Stat API からランキングデータをオンデマンド取得する（DB書き込みなし）。
@@ -26,16 +27,22 @@ export async function fetchRankingValuesFromSource(
     return calculateRankingValues(rankingItem, yearCode);
   }
 
-  if (!sourceConfig?.statsDataId) return [];
+  // 宣言演算 (tab 線形結合 / 軸合算 / 率 / 県庁所在市写像) を伴う metric は
+  // 単発クエリで再現できない。e-Stat を叩くと変換前の生値が出るので、
+  // 取り込み済みの正典 (app/stats/<key>/values.json) から返す。
+  if (isDerivedSource(sourceConfig)) {
+    const canonical = await listRankingValuesAllYears(rankingKey, areaType);
+    return canonical.success ? canonical.data.filter((v) => v.yearCode === yearCode) : [];
+  }
+
+  // ★sourceConfig を丸ごと spread しない (cdCat03/04/05・cdTab 欠落と非クエリキー混入を防ぐ)
+  const params = resolveEstatParams(sourceConfig);
+  if (!params) return [];
 
   try {
     // cdTimeFrom/cdTimeTo を指定せず全年度を一括取得し、R2 キャッシュを共有する。
     // yearCode によるフィルタはメモリ上で行う。
-    const params: GetStatsDataParams = {
-      ...(sourceConfig as GetStatsDataParams),
-    };
-
-    const rawData = await fetchFormattedStats(params);
+    const rawData = await fetchFormattedStats(params as GetStatsDataParams);
     const filteredData = filterOutNationalArea(rawData)
       .filter((d) => d.yearCode === yearCode);
     if (filteredData.length === 0) return [];
@@ -119,11 +126,16 @@ export async function fetchAllYearsRankingValuesOnDemand(
     return dbValues;
   }
 
-  if (!sourceConfig?.statsDataId) return dbValues;
+  // 宣言演算を伴う metric は e-Stat 単発クエリで再現できない。
+  // dbValues は既に正典 (app/stats/<key>/values.json) 由来なのでそのまま返す。
+  if (isDerivedSource(sourceConfig)) return dbValues;
+
+  const params = resolveEstatParams(sourceConfig);
+  if (!params) return dbValues;
 
   // 2. e-Stat API から全年度を一括取得（cdTime 指定なし）
   try {
-    const rawData = await fetchFormattedStats(sourceConfig as GetStatsDataParams);
+    const rawData = await fetchFormattedStats(params as GetStatsDataParams);
     const filteredData = filterOutNationalArea(rawData);
     if (filteredData.length === 0) return dbValues;
 
