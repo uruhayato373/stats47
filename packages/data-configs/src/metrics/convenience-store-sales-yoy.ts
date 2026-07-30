@@ -3,12 +3,13 @@ import type { MetricConfig } from "../types";
 export const convenienceStoreSalesYoy: MetricConfig = {
   "key": "convenience-store-sales-yoy",
   "title": "コンビニエンスストア販売額（確報旧表）",
-  "subtitle": "対前年比",
+  "subtitle": "2019年・確報旧表",
   "unit": "百万円",
   "category": "commercial",
   "source": {
     "kind": "estat",
     "statsDataId": "0003395254",
+    "cdTab": "100",
     "displayName": "コンビニエンスストア販売額（2019年・確報旧表）",
     "url": "https://www.e-stat.go.jp/dbview?sid=0003395254",
   },

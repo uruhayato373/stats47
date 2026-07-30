@@ -196,6 +196,8 @@ function pinnedAxes(src: Extract<SourceConfig, { kind: "estat" }>): Set<string> 
   if (src.cdCat05) out.add("cat05");
   // tabCombination は複数 tab を線形結合するので tab 軸は解決済み扱い
   if (src.cdTab || (src.tabCombination && src.tabCombination.length > 0)) out.add("tab");
+  // axisSum はその軸のメンバーを合算するので同じく解決済み扱い
+  if (src.axisSum && src.axisSum.codes.length > 0) out.add(src.axisSum.axis);
   return out;
 }
 
