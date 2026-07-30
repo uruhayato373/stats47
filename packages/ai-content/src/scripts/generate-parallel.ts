@@ -6,7 +6,8 @@ import "dotenv/config";
  * 旧版 (7569bd5c で削除) は D1 (`metrics` 読み + `upsertRankingAiContent` 書き) に依存していた。
  * 本版は **完全DBレス**:
  *   入力  : R2 観測値 + ranking item.json (build-input.ts)
- *   生成  : claude / gemini CLI を子プロセス起動 (API キー不要・旧 callAI を踏襲)
+ *   生成  : claude / gemini CLI を子プロセス起動 (旧 callAI を踏襲) または Gemini API 直叩き
+ *           (--model gemini-api。CI / 日次 cron の無人運転はこちら。CLI 非依存)
  *   ゲート: 生成物を audit-ai-content.mjs に通し blocker 0 のものだけ採用 (★旧版に無かった品質ゲート)
  *   出力  : staging dir に AiContentSnapshotRow を書き出す (R2 直書きしない)
  *           → r2-publisher / diff-push-r2 が staging を app/ranking/<key>/ai-content.json へ push
@@ -17,11 +18,17 @@ import "dotenv/config";
  * CLI:
  *   NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
  *     tsx packages/ai-content/src/scripts/generate-parallel.ts \
- *       [--model claude-haiku|claude-sonnet|claude-opus|gemini] [--concurrency N] \
- *       [--limit N] [--area prefecture] [--force] [--out <dir>] [--dry-run] [--keys k1,k2]
+ *       [--model claude-haiku|claude-sonnet|claude-opus|gemini|gemini-api] [--concurrency N] \
+ *       [--limit N] [--area prefecture] [--force] [--out <dir>] [--dry-run] [--keys k1,k2] \
+ *       [--retries N] [--outbox]
  *
  *   --dry-run : callAI を呼ばず、各 key の prompt 長と「書き込む予定の staging パス」だけ出す (LLM 課金なし)
  *   --keys    : 対象 key をカンマ区切りで明示 (pending 走査をスキップ)
+ *   --retries : ゲート落ち / JSON 崩れ時に同じ prompt でやり直す回数 (既定 1)。安価モデルの
+ *               失敗率を実行時間で吸収する。**ゲートを緩めて通すことはしない**
+ *   --outbox  : staging ではなく git 公開 outbox (data/ai-content-staging/<key>.json) へ書く。
+ *               R2 creds を持たない環境 (クラウドセッション / Routine) はこちらを使い、
+ *               develop へ push すると publish-ai-content.yml が gate → R2 → CDN purge まで実行する
  *   --out     : staging dir (default .local/r2 = push ツールの固定ルート)。配下に app/ranking/<key>/ai-content.json
  *               → push は `push-r2-wrangler.ts app/ranking --apply` または `diff-push-r2.ts --prefix app/ranking`
  *                 (両者とも .local/r2 を読む。ai-content だけを surgical に push したいなら .local/r2/app/ranking に
@@ -43,6 +50,7 @@ import { isOk } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { aiContentKeyPath, type AiContentSnapshotRow } from "../types/snapshot";
 import { buildRankingContentPromptForKey } from "./build-input";
+import { generateContentText } from "../services/gemini-text-client";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // packages/ai-content/src/scripts → リポジトリルートは 4 つ上
@@ -61,6 +69,10 @@ interface Options {
   outDir: string;
   dryRun: boolean;
   keys: string[] | null;
+  /** ゲート落ち / JSON 崩れ時に同じ prompt でやり直す回数 (0 = 再試行しない) */
+  retries: number;
+  /** true なら git 公開 outbox (data/ai-content-staging/<key>.json) へ書く (R2 creds 不要の公開経路) */
+  outbox: boolean;
 }
 
 function parseArgs(): Options {
@@ -79,6 +91,8 @@ function parseArgs(): Options {
     outDir: get("--out") ?? path.join(PROJECT_ROOT, ".local/r2"),
     dryRun: a.includes("--dry-run"),
     keys: get("--keys")?.split(",").map((s) => s.trim()).filter(Boolean) ?? null,
+    retries: Number(get("--retries") ?? 1),
+    outbox: a.includes("--outbox"),
   };
 }
 
@@ -86,7 +100,23 @@ function parseArgs(): Options {
 // AI 呼び出し (旧 callAI を踏襲。NODE_OPTIONS / CLAUDECODE を子に渡さない)
 // ============================================================
 
+/**
+ * Gemini API を直接叩く (CLI 不要)。日次 cron の無人運転はこちらを使う。
+ * CLI (`--model gemini`) は認証・バージョンが実行環境に依存するため CI では使わない。
+ */
+async function callGeminiApi(promptContent: string): Promise<string> {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error(
+      "GEMINI_API_KEY が未設定です (--model gemini-api は API キーが必要。CI は Secrets、ローカルは .env.local)",
+    );
+  }
+  const { text } = await generateContentText({ prompt: promptContent, apiKey });
+  return text;
+}
+
 function callAI(model: string, promptContent: string): Promise<string> {
+  if (model === "gemini-api") return callGeminiApi(promptContent);
   return new Promise((resolve, reject) => {
     let cmd: string;
     let args: string[];
@@ -177,6 +207,22 @@ function writeStaging(outDir: string, row: AiContentSnapshotRow): string {
   return dest;
 }
 
+/**
+ * git 公開 outbox (`data/ai-content-staging/<rankingKey>.json`) へ書き出す。
+ *
+ * R2 creds を持たない実行環境 (クラウドセッション / Routine) から公開へ届けるための経路。
+ * develop に push すると publish-ai-content.yml が gate → R2 push → CDN purge → outbox 削除
+ * まで自動実行する。**パスは階層化せずフラット**にすること (workflow の検出 glob が
+ * `data/ai-content-staging/*.json` なので、`app/ranking/<key>/` 配下に置くと拾われない)。
+ */
+function writeOutbox(row: AiContentSnapshotRow): string {
+  const dir = path.join(PROJECT_ROOT, "data/ai-content-staging");
+  mkdirSync(dir, { recursive: true });
+  const dest = path.join(dir, `${row.rankingKey}.json`);
+  writeFileSync(dest, JSON.stringify(row, null, 2) + "\n", "utf-8");
+  return dest;
+}
+
 // ============================================================
 // 1 件処理
 // ============================================================
@@ -203,7 +249,9 @@ async function processOne(
     const { meta, prompt } = built;
 
     if (opts.dryRun) {
-      const dest = path.join(opts.outDir, aiContentKeyPath(rankingKey));
+      const dest = opts.outbox
+        ? path.join(PROJECT_ROOT, "data/ai-content-staging", `${rankingKey}.json`)
+        : path.join(opts.outDir, aiContentKeyPath(rankingKey));
       process.stdout.write(
         `[DRY] ${rankingKey} (${meta.yearCode}): prompt ${prompt.length}字 → ${dest}\n`,
       );
@@ -211,47 +259,72 @@ async function processOne(
       return;
     }
 
-    const raw = await callAI(opts.model, prompt);
-    const stripped = stripCodeFence(raw.trim());
-    let parsed: {
-      faq?: unknown;
-      regionalAnalysis?: string;
-      insights?: string;
-      prefectureCommentary?: unknown;
-    };
-    try {
-      parsed = JSON.parse(stripped);
-    } catch {
-      process.stdout.write(`[FAIL] ${rankingKey}: JSON parse error\n`);
+    // ★生成 → 品質ゲート、失敗したら同じ prompt でやり直す。
+    //   安いモデル (haiku / gemini) は JSON 崩れ・ルール違反を一定率で出すため、品質を
+    //   下げる代わりに実行回数で払う。ゲートを緩めて通すことは絶対にしない。
+    const maxAttempts = Math.max(1, opts.retries + 1);
+    let lastFailure: { kind: "parse" | "gate"; detail: string } | null = null;
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      const raw = await callAI(opts.model, prompt);
+      const stripped = stripCodeFence(raw.trim());
+      let parsed: {
+        faq?: unknown;
+        regionalAnalysis?: string;
+        insights?: string;
+        prefectureCommentary?: unknown;
+      };
+      try {
+        parsed = JSON.parse(stripped);
+      } catch {
+        lastFailure = { kind: "parse", detail: "JSON parse error" };
+        if (attempt < maxAttempts) {
+          process.stdout.write(`[RETRY ${attempt}/${maxAttempts}] ${rankingKey}: JSON parse error\n`);
+        }
+        continue;
+      }
+
+      const now = new Date().toISOString();
+      const row: AiContentSnapshotRow = {
+        rankingKey,
+        yearCode: meta.yearCode,
+        faq: parsed.faq ? JSON.stringify(parsed.faq) : null,
+        regionalAnalysis: parsed.regionalAnalysis ?? null,
+        insights: parsed.insights ?? null,
+        prefectureCommentary: parsed.prefectureCommentary
+          ? JSON.stringify(parsed.prefectureCommentary)
+          : null,
+        createdAt: now,
+        updatedAt: now,
+      };
+
+      const gate = await runAuditGate(row);
+      if (!gate.ok) {
+        lastFailure = { kind: "gate", detail: gate.detail ?? "audit blocker" };
+        if (attempt < maxAttempts) {
+          process.stdout.write(
+            `[RETRY ${attempt}/${maxAttempts}] ${rankingKey}: audit blocker (${gate.detail})\n`,
+          );
+        }
+        continue;
+      }
+
+      const dest = opts.outbox ? writeOutbox(row) : writeStaging(opts.outDir, row);
+      const note = attempt > 1 ? ` (attempt ${attempt})` : "";
+      process.stdout.write(`[OK] ${rankingKey} (${meta.yearCode})${note} → ${dest}\n`);
+      counters.ok++;
+      return;
+    }
+
+    if (lastFailure?.kind === "parse") {
+      process.stdout.write(`[FAIL] ${rankingKey}: JSON parse error (${maxAttempts} 回)\n`);
       counters.fail++;
-      return;
-    }
-
-    const now = new Date().toISOString();
-    const row: AiContentSnapshotRow = {
-      rankingKey,
-      yearCode: meta.yearCode,
-      faq: parsed.faq ? JSON.stringify(parsed.faq) : null,
-      regionalAnalysis: parsed.regionalAnalysis ?? null,
-      insights: parsed.insights ?? null,
-      prefectureCommentary: parsed.prefectureCommentary
-        ? JSON.stringify(parsed.prefectureCommentary)
-        : null,
-      createdAt: now,
-      updatedAt: now,
-    };
-
-    // ★品質ゲート: blocker があれば採用しない (旧版に無かった安全弁)
-    const gate = await runAuditGate(row);
-    if (!gate.ok) {
-      process.stdout.write(`[REJECT] ${rankingKey}: audit blocker (${gate.detail})\n`);
+    } else {
+      process.stdout.write(
+        `[REJECT] ${rankingKey}: audit blocker (${maxAttempts} 回) ${lastFailure?.detail ?? ""}\n`,
+      );
       counters.rejected++;
-      return;
     }
-
-    const dest = writeStaging(opts.outDir, row);
-    process.stdout.write(`[OK] ${rankingKey} (${meta.yearCode}) → ${dest}\n`);
-    counters.ok++;
   } catch (err) {
     process.stdout.write(
       `[FAIL] ${rankingKey}: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}\n`,
@@ -311,7 +384,11 @@ async function main() {
     `=== AI Content Generator (model: ${opts.model}, concurrency: ${opts.concurrency}${opts.dryRun ? ", DRY-RUN" : ""}) ===\n`,
   );
   process.stdout.write(
-    `pending ${pending.length} 件中 ${targets.length} 件を処理 → staging: ${opts.outDir}\n`,
+    `pending ${pending.length} 件中 ${targets.length} 件を処理 → ${
+      opts.outbox
+        ? `outbox: ${path.join(PROJECT_ROOT, "data/ai-content-staging")} (develop へ push すると公開)`
+        : `staging: ${opts.outDir}`
+    }\n`,
   );
 
   const counters: Counters = { ok: 0, fail: 0, skip: 0, rejected: 0 };

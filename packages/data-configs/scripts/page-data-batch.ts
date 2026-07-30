@@ -108,6 +108,9 @@ async function fetchEstatData(
   if (config.cdCat01) params.set("cdCat01", config.cdCat01);
   if (config.cdCat02) params.set("cdCat02", config.cdCat02);
   if (config.cdCat03) params.set("cdCat03", config.cdCat03);
+  // 4 軸目以降と表章項目 (tab)。絞り忘れると同じ県が複数行になり rank が通し番号化する
+  if (config.cdCat04) params.set("cdCat04", config.cdCat04);
+  if (config.cdTab) params.set("cdTab", config.cdTab);
   const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${params}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`e-Stat HTTP ${res.status}`);
@@ -117,7 +120,16 @@ async function fetchEstatData(
   if (!stat) {
     throw new Error(`e-Stat response invalid for ${config.statsDataId}`);
   }
-  return ((stat.DATA_INF as Record<string, unknown>).VALUE as EstatValue[]) ?? [];
+  const values =
+    ((stat.DATA_INF as Record<string, unknown>).VALUE as EstatValue[]) ?? [];
+
+  // timeScope: "annual" — 月次・四半期を落として年計だけを残す。
+  // 商業動態統計のように 1 年あたり 年計1 + 四半期4 + 月次12 を同居させる表があり、
+  // extractYearCode で 4 桁年へ正規化すると同じ年に 17 行が潰れて重複する。
+  if (config.timeScope === "annual") {
+    return values.filter((v) => /^\d{4}0{6}$/.test(String(v["@time"] ?? "")));
+  }
+  return values;
 }
 
 /**

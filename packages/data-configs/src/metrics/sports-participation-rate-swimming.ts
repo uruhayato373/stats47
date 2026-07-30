@@ -10,6 +10,7 @@ export const sportsParticipationRateSwimming: MetricConfig = {
     "statsDataId": "0003456409",
     "cdCat01": "0",
     "cdCat02": "99000",
+    "cdCat03": "15",
     "displayName": "社会生活基本調査",
   },
   "entities": [

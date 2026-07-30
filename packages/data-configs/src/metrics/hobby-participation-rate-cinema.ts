@@ -10,6 +10,7 @@ export const hobbyParticipationRateCinema: MetricConfig = {
     "statsDataId": "0003456573",
     "cdCat01": "0",
     "cdCat02": "99000",
+    "cdCat03": "04",
     "displayName": "社会生活基本調査",
   },
   "entities": [
