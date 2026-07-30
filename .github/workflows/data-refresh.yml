@@ -91,16 +91,24 @@ jobs:
       # 以降のステップは REFRESH_* だけを見る (発火経路ごとの分岐を散らさない)。
       - name: 🧭 Resolve inputs
         id: resolve
+        # ★inputs は env 経由で受ける。`${{ inputs.x }}` を run: の中に直接展開すると
+        #   dispatch 時の入力がシェルとして評価される (Actions の式インジェクション。
+        #   CodeQL が critical で検出)。env に置けば値は環境変数として渡るだけになる。
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_METRIC: ${{ inputs.metric }}
+          INPUT_SINCE: ${{ inputs.since }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
         run: |
           REQ=data/data-refresh-requests.json
-          if [ "${{ github.event_name }}" = "push" ] && [ -f "$REQ" ]; then
+          if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
             METRIC=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.metric??''))")
             SINCE=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.since??''))")
             DRY=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
           else
-            METRIC="${{ inputs.metric }}"
-            SINCE="${{ inputs.since }}"
-            DRY="${{ inputs.dry_run }}"
+            METRIC="$INPUT_METRIC"
+            SINCE="$INPUT_SINCE"
+            DRY="$INPUT_DRY_RUN"
           fi
           {
             echo "metric=$METRIC"
