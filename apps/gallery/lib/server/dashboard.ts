@@ -50,7 +50,11 @@ function mdTableAfter(
     const l = lines[i];
     if (/^\|/.test(l)) {
       inTable = true;
-      if (/^\|[\s:-]+\|/.test(l.replace(/-/g, "-"))) continue; // 区切り行
+      // ★`l.replace(/-/g, "-")` を挟んでいたが `-` を `-` に置換する no-op で、
+      //   判定結果は素の `l` と常に同一 (CodeQL js/identity-replacement が指摘)。
+      //   全角ダッシュ (—–−) の正規化を意図していた可能性はあるが、それは挙動を変える
+      //   別の判断なので推測で実装しない。ここでは死んだ置換だけを外す。
+      if (/^\|[\s:-]+\|/.test(l)) continue; // 区切り行
       const cells = l
         .split("|")
         .slice(1, -1)
