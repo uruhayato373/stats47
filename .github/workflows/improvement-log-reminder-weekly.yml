@@ -66,6 +66,7 @@ jobs:
           mkdir -p /tmp/triage
           : > /tmp/triage/verdicts.md
           if ls .claude/state/effect-verdict/verdicts-*.json >/dev/null 2>&1; then
+            # shellcheck disable=SC2016  # node -e 内の ${...} は JS のテンプレートリテラル。shell 展開させない
             node -e '
               const fs = require("node:fs");
               const dir = ".claude/state/effect-verdict";
