@@ -27,11 +27,11 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ## [BLOG-WAVE-2026-06-10-manual]
 
-- **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
+- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target, insufficient-sample)
 - **wave_id**: 2026-06-10-manual / **記事数**: 6
 - **remediated_at**: 2026-06-10 (週 2026-W24)
 - **before**: 2026-W23 → **after**: 2026-W30 (経過 6 週)
-- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
+- **計測日**: 2026-07-30 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
@@ -46,17 +46,20 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ### 判定
 
-- **[実測]** clicks +8 / imp +419 (2026-W23→2026-W30, 6 記事)
-- **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
-- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-10-manual`
+- **[判定] effect/pending** — ガード insufficient-target, insufficient-sample により判定不能
+- **[根拠データ]** clicks (6 記事合計) 0→8 (delta +8 / 相対 +∞% / 想定値未登録) / window 2026-W23→2026-W30 (6 週)
+- **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
+- **[ガード]** insufficient-target (想定効果値 (target delta) が機械可読な形で登録されていない) / insufficient-sample (before imp 37 < sample.minImpressionsBefore 100)
+- **[再現コマンド]** `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-10-manual`
+- **[subject]** BLOG-WAVE-2026-06-10-manual / 判定日 2026-07-30 (自動: effect-verdict engine)
 
 ## [BLOG-WAVE-2026-06-07-manual-3]
 
-- **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
+- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target)
 - **wave_id**: 2026-06-07-manual-3 / **記事数**: 3
 - **remediated_at**: 2026-06-07 (週 2026-W23)
 - **before**: 2026-W22 → **after**: 2026-W30 (経過 7 週)
-- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
+- **計測日**: 2026-07-30 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
@@ -68,17 +71,20 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ### 判定
 
-- **[実測]** clicks +67 / imp +2721 (2026-W22→2026-W30, 3 記事)
-- **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
-- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual-3`
+- **[判定] effect/pending** — ガード insufficient-target により判定不能
+- **[根拠データ]** clicks (3 記事合計) 26→93 (delta +67 / 相対 257.7% / 想定値未登録) / window 2026-W22→2026-W30 (7 週)
+- **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
+- **[ガード]** insufficient-target (想定効果値 (target delta) が機械可読な形で登録されていない)
+- **[再現コマンド]** `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual-3`
+- **[subject]** BLOG-WAVE-2026-06-07-manual-3 / 判定日 2026-07-30 (自動: effect-verdict engine)
 
 ## [BLOG-WAVE-2026-06-07-manual-2]
 
-- **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
+- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target)
 - **wave_id**: 2026-06-07-manual-2 / **記事数**: 3
 - **remediated_at**: 2026-06-07 (週 2026-W23)
 - **before**: 2026-W22 → **after**: 2026-W30 (経過 7 週)
-- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
+- **計測日**: 2026-07-30 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
@@ -90,17 +96,20 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ### 判定
 
-- **[実測]** clicks +145 / imp +4839 (2026-W22→2026-W30, 3 記事)
-- **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
-- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual-2`
+- **[判定] effect/pending** — ガード insufficient-target により判定不能
+- **[根拠データ]** clicks (3 記事合計) 69→214 (delta +145 / 相対 210.1% / 想定値未登録) / window 2026-W22→2026-W30 (7 週)
+- **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
+- **[ガード]** insufficient-target (想定効果値 (target delta) が機械可読な形で登録されていない)
+- **[再現コマンド]** `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual-2`
+- **[subject]** BLOG-WAVE-2026-06-07-manual-2 / 判定日 2026-07-30 (自動: effect-verdict engine)
 
 ## [BLOG-WAVE-2026-06-07-manual]
 
-- **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
+- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target, insufficient-sample)
 - **wave_id**: 2026-06-07-manual / **記事数**: 3
 - **remediated_at**: 2026-06-07 (週 2026-W23)
 - **before**: 2026-W22 → **after**: 2026-W30 (経過 7 週)
-- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
+- **計測日**: 2026-07-30 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
@@ -112,17 +121,20 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ### 判定
 
-- **[実測]** clicks +2 / imp -121 (2026-W22→2026-W30, 3 記事)
-- **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
-- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual`
+- **[判定] effect/pending** — ガード insufficient-target, insufficient-sample により判定不能
+- **[根拠データ]** clicks (3 記事合計) 0→2 (delta +2 / 相対 +∞% / 想定値未登録) / window 2026-W22→2026-W30 (7 週)
+- **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
+- **[ガード]** insufficient-target (想定効果値 (target delta) が機械可読な形で登録されていない) / insufficient-sample (after imp 86 < sample.minImpressionsAfter 100)
+- **[再現コマンド]** `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual`
+- **[subject]** BLOG-WAVE-2026-06-07-manual / 判定日 2026-07-30 (自動: effect-verdict engine)
 
 ## [BLOG-WAVE-2026-05-29-auto]
 
-- **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
+- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target)
 - **wave_id**: 2026-05-29-auto / **記事数**: 4
 - **remediated_at**: 2026-05-29 (週 2026-W22)
 - **before**: 2026-W21 → **after**: 2026-W30 (経過 8 週)
-- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
+- **計測日**: 2026-07-30 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
@@ -135,17 +147,20 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ### 判定
 
-- **[実測]** clicks +6 / imp +2250 (2026-W21→2026-W30, 4 記事)
-- **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
-- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-29-auto`
+- **[判定] effect/pending** — ガード insufficient-target により判定不能
+- **[根拠データ]** clicks (4 記事合計) 7→13 (delta +6 / 相対 85.7% / 想定値未登録) / window 2026-W21→2026-W30 (8 週)
+- **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
+- **[ガード]** insufficient-target (想定効果値 (target delta) が機械可読な形で登録されていない)
+- **[再現コマンド]** `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-29-auto`
+- **[subject]** BLOG-WAVE-2026-05-29-auto / 判定日 2026-07-30 (自動: effect-verdict engine)
 
 ## [BLOG-WAVE-2026-05-25-auto]
 
-- **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
+- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target)
 - **wave_id**: 2026-05-25-auto / **記事数**: 53
 - **remediated_at**: 2026-05-25 (週 2026-W22)
 - **before**: 2026-W21 → **after**: 2026-W30 (経過 8 週)
-- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
+- **計測日**: 2026-07-30 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
@@ -207,17 +222,20 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ### 判定
 
-- **[実測]** clicks +36 / imp +5963 (2026-W21→2026-W30, 53 記事)
-- **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
-- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-25-auto`
+- **[判定] effect/pending** — ガード insufficient-target により判定不能
+- **[根拠データ]** clicks (53 記事合計) 127→163 (delta +36 / 相対 28.3% / 想定値未登録) / window 2026-W21→2026-W30 (8 週)
+- **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
+- **[ガード]** insufficient-target (想定効果値 (target delta) が機械可読な形で登録されていない)
+- **[再現コマンド]** `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-25-auto`
+- **[subject]** BLOG-WAVE-2026-05-25-auto / 判定日 2026-07-30 (自動: effect-verdict engine)
 
 ## [BLOG-WAVE-2026-05-23-manual]
 
-- **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
+- **status**: effect/pending (閾値エンジン判定 / thresholds.mjs v1.0.0 / ガード: insufficient-target)
 - **wave_id**: 2026-05-23-manual / **記事数**: 10
 - **remediated_at**: 2026-05-23 (週 2026-W21)
 - **before**: 2026-W20 → **after**: 2026-W30 (経過 9 週)
-- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
+- **計測日**: 2026-07-30 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
@@ -236,9 +254,12 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ### 判定
 
-- **[実測]** clicks -7 / imp +2247 (2026-W20→2026-W30, 10 記事)
-- **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
-- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-23-manual`
+- **[判定] effect/pending** — ガード insufficient-target により判定不能
+- **[根拠データ]** clicks (10 記事合計) 89→82 (delta -7 / 相対 -7.9% / 想定値未登録) / window 2026-W20→2026-W30 (9 週)
+- **[閾値 SSOT]** `.claude/scripts/lib/effect-verdict/thresholds.mjs` v1.0.0 (full ≥ 80.0% / partial ≥ 30.0% / adverse ≤ -10.0%)
+- **[ガード]** insufficient-target (想定効果値 (target delta) が機械可読な形で登録されていない)
+- **[再現コマンド]** `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-23-manual`
+- **[subject]** BLOG-WAVE-2026-05-23-manual / 判定日 2026-07-30 (自動: effect-verdict engine)
 
 ## 新規エントリテンプレ（必ず参照: `.claude/rules/evidence-based-judgment.md`）
 
