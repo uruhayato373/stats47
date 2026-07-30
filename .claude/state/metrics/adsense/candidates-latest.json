@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "week": "2026-W30",
-  "generatedAt": "2026-07-28T10:06:57.053Z",
+  "generatedAt": "2026-07-30T21:22:11.300Z",
   "period": {
     "periodStart": "2026-07-19",
     "periodEnd": "2026-07-25",
@@ -16,26 +16,58 @@
   "note": "候補提示まで (自動でバックログ追加・配置変更・deploy しない)。採用は人間承認で最大1件/週",
   "candidates": [
     {
-      "id": "measurement-gap::bid-types-platforms,formats-platforms,placements-platforms",
+      "id": "measurement-gap::ad-units,bid-types-platforms,countries,daily,devices,formats-platforms,overview,pages,placements-platforms,traffic-sources,units",
       "rule": "measurement-gap",
-      "key": "bid-types-platforms,formats-platforms,placements-platforms",
-      "score": 103,
+      "key": "ad-units,bid-types-platforms,countries,daily,devices,formats-platforms,overview,pages,placements-platforms,traffic-sources,units",
+      "score": 111,
       "evidence": [
         {
+          "metric": "job:overview",
+          "status": "error"
+        },
+        {
+          "metric": "job:daily",
+          "status": "error"
+        },
+        {
+          "metric": "job:devices",
+          "status": "error"
+        },
+        {
+          "metric": "job:units",
+          "status": "error"
+        },
+        {
           "metric": "job:formats-platforms",
-          "status": "missing"
+          "status": "error"
         },
         {
           "metric": "job:placements-platforms",
-          "status": "missing"
+          "status": "error"
         },
         {
           "metric": "job:bid-types-platforms",
-          "status": "missing"
+          "status": "error"
+        },
+        {
+          "metric": "job:traffic-sources",
+          "status": "error"
+        },
+        {
+          "metric": "job:countries",
+          "status": "error"
+        },
+        {
+          "metric": "job:pages",
+          "status": "error"
+        },
+        {
+          "metric": "job:ad-units",
+          "status": "error"
         }
       ],
       "sample": {
-        "jobs": 3
+        "jobs": 11
       },
       "confidence": 0.95,
       "expectedLever": "report job の取得是正 (creds / API 互換 / retry)",
