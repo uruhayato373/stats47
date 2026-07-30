@@ -62,16 +62,33 @@ fail closedで停止する。
 
 ## allowlist
 
-`apply`が変更してよいのは次の3操作だけ。
+`apply`が変更してよいのは次の5操作だけ。
 
 | action | 条件 |
 |---|---|
 | `create-search-console-link` | linkが0件、exact GSC property、正しいweb stream、権限あり |
 | `publish-search-console-collection` | 正しいlinkがあり、Libraryのcollectionが未公開 |
 | `create-ad-id-dimension` | 台帳が要登録、GA4にexact paramなし、event-scoped枠に空き |
+| `create-ad-unit` | account assert ok、inventoryに同名なし、コード側が`pending`宣言、1 runに1件 |
+| `rename-ad-unit` | slotId一致でdisplay nameがコードの`adUnitName`と不一致、unit IDが引ける、1 runに1件 |
 
 `ad_id`はdisplay name `Affiliate ad ID`、scope `Event`、event parameter
 `ad_id`で固定する。同じparameterが既にあれば作成せず、scope不一致はblockerにする。
+
+ad unitの2操作は`--commit`と`--approve <token>`が揃ったときだけ実行する（下記「承認ゲート」）。
+
+### ad unitだけを解禁している理由
+
+AdSenseの設定は危険性が非対称なので、unitの作成・改名だけをallowlistに置く。
+
+- **新規unit作成は既存の配信を一切変えない。** slotIdが発行されるだけで、
+  `apps/web/src/lib/google-adsense/constants.ts`に埋めるまで1 impも出ない。
+  管理画面操作とコード反映の二段ゲートが構造的に存在する。
+- **renameはunit IDを変えない。** レポートの`AD_UNIT_ID`軸の時系列
+  （`.claude/state/metrics/adsense/history-units.csv`）を壊さない。改名が必要になるのは、
+  コード側`adUnitName`とAdSense側display nameが食い違って突き合わせ不能になっている場合だけ。
+- 対して**Auto ads / ad format / exclusion / blocking controlは全ページの配信を即時・不可逆に
+  変える**。これらはdenylistのまま実行経路を作らない。
 
 ## denylist
 
@@ -83,11 +100,36 @@ fail closedで停止する。
 - timezone、currency、retention、filter、Google Signals、consent
 - GSC change of address、property削除、bulk export、association削除
 - sitemap submit/delete、URL inspection request、Indexing API publish
-- AdSense Auto ads、format、exclusion、unit、blocking control
+- AdSense Auto ads、ad format変更、exclusion、blocking control
+- **既存ad unitの削除・アーカイブ・停止・format変更**（作成と改名だけallowlist）
 - billing、payment、tax、policy、brand safety
 - production deploy、R2 write、GitHub Secrets
 
 wrong GSC linkは自動削除・再作成せず、blockerとして報告する。
+
+## 承認ゲート（ad unit mutation）
+
+ad unitの作成・改名は既定で実行しない。`apply`は計画とbefore screenshotを
+`/tmp/stats47-google-admin-<run-id>/`へ出して停止する（draft-first）。
+
+実行には次の4つすべてが必要。`--force`相当の迂回は用意しない。
+
+1. `apply`サブコマンド
+2. `--confirm-site stats47.jp`
+3. `--commit`
+4. `--approve <token>` — `audit`が出力した`approvalToken`と完全一致
+
+tokenは`plannedActionToken(site, accountId, actions, plan)`が計画から決定的に導出する。
+計画が1文字でも変わればtokenが変わるので、承認は**その計画そのもの**に対してだけ有効になる。
+
+## ad unit inventoryはAPIが一次ソース
+
+`accounts.adclients.adunits.list`が`reportingDimensionId`（=レポートの`AD_UNIT_ID`）を返し、
+`adunits.getAdcode`が`data-ad-slot`を含むadCodeを返すため、unit↔slotIdの対応は
+**read-only APIで決定的に取れる**（scopeは`adsense.readonly`。AdSense v2に書き込みAPIは無い）。
+
+DOMを使うのはapply直前のduplicate再確認とSave後verifyだけにして、selector driftの影響範囲を
+作成フォームに封じ込める。セレクタは`adsense-probe`でdumpしてから確定する（実機を見ずに書かない）。
 
 ## mutation手順
 

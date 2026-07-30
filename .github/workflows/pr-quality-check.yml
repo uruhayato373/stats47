@@ -156,6 +156,22 @@ jobs:
           node --test .claude/scripts/ads/__tests__/
         continue-on-error: false
 
+      - name: 📈 AdSense Metrics Contract Guard
+        # AdSense の job 契約 / ad unit inventory / unit history の突き合わせロジックと、
+        # コード側 slot 定数 (constants.ts) の決定的パーサを検証する。
+        # ネットワーク・AdSense API には触れない (実データ取得は週次 workflow が担当)。
+        # 正典: .claude/scripts/metrics/lib/adsense-report-contract.mjs
+        run: npm run metrics:test
+        continue-on-error: false
+
+      - name: 🔐 Google Admin Allowlist Guard
+        # allowlist が意図した集合そのものであること、ad unit の破壊的 action が denylist の
+        # ままであること、承認ゲート (--commit / --approve token) が迂回できないこと、
+        # AdSense account assert が fail closed であることを検証する。browser は起動しない。
+        # 正典: .claude/scripts/google-admin/README.md
+        run: npm run google-admin:test
+        continue-on-error: false
+
       - name: 📋 Survey Portfolio State Guard
         # survey ポートフォリオ state の schema + 判定規律 (surveys.json 双方向一致・
         # survey-editorial.ts との drift・orphan/linkage 整合・根拠なし merge/retire 禁止・

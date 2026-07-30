@@ -30,7 +30,7 @@
 | Mobile | ¥29.00 ▲ | 51.2% · | - | ¥1.52 | 0.518 | ¥38.00 (+15.2%) |
 | Tablet | ¥72.00 ▲ | 62.7% ▼ | - | ¥0.00 | 1.308 | ¥3.00 (+50.0%) |
 
-履歴: [`history.csv`](./history.csv) / デバイス別: [`history-devices.csv`](./history-devices.csv) / 内訳: [`history-formats.csv`](./history-formats.csv)・[`history-placements.csv`](./history-placements.csv)・[`history-bid-types.csv`](./history-bid-types.csv)
+履歴: [`history.csv`](./history.csv) / [`history-devices.csv`](./history-devices.csv) (デバイス別) / [`history-units.csv`](./history-units.csv) (ユニット別)
 
 > schema v2 (2026-07-28): 公式 `COST_PER_CLICK`/`IMPRESSIONS_RPM`/`AD_REQUESTS`/`AD_REQUESTS_COVERAGE` を追加。
 > 旧 `cpc` 列 (earnings/clicks) は**公式 CPC ではない**ため `earnings_per_click_legacy` へ改名した (値は不変)。

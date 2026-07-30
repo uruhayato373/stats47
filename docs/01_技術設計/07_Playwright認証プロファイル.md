@@ -2,7 +2,7 @@
 title: Playwright認証プロファイル
 type: technical-design
 status: adopted
-updated: 2026-07-29
+updated: 2026-07-30
 ---
 
 # Playwright認証プロファイル
@@ -17,6 +17,39 @@ Playwright を使う運用スクリプトのログイン状態、アカウント
 - 認証失敗を自動再登録や別アカウントで回避しない。人が headed browser で復旧する。
 - 2FA、CAPTCHA、税務・銀行情報、規約同意は人の操作として残す。
 - 実行後は `.claude/rules/browser-use-cleanup.md` に従い browser / daemon / tab を閉じる。
+
+## Playwright を使う前の判断（API 代替の可否）
+
+**公式 API がある操作に Playwright を使わない。** API 経路は OAuth scope で権限を最小化でき、ブラウザセッション（サービス全権を持つ Cookie）を扱わず、セッション期限切れによる再ログインも要らない。Playwright は「API が提供されていない操作」だけの最後の手段とする。
+
+判定を誤らないため、**API の有無は型定義または公式リファレンスで実際に確認する**。2026-07-30 に「AdSense に書き込み API は無い」と誤って断定した事故があり、原因は型定義 grep のパターン不備だった。`create` / `patch` 等のメソッド名を個別に確認する。
+
+| 操作 | 公式 API | 判定 |
+|---|---|---|
+| AdSense 広告ユニットの作成・更新 | `accounts.adclients.adunits.create` / `patch`（scope `https://www.googleapis.com/auth/adsense`） | **API を使う** |
+| GA4 カスタムディメンション作成 | `properties.customDimensions.create` / `patch` / `archive` | **API を使う** |
+| GA4 AdSense リンク作成 | `properties.adSenseLinks.create` / `delete` | **API を使う** |
+| Instagram 投稿削除 | Graph API `DELETE /<IG_MEDIA_ID>`（`instagram_manage_contents`） | **API を使う** |
+| GA4 の Search Console リンク作成 | 無い（Admin API v1alpha の型定義に `searchConsole` の語が無い。`Searchads` は Search Ads 360 で別物） | Playwright |
+| GA4 Library の collection 公開 | 無い（Properties サブリソースに Library / Collection が無い） | Playwright |
+| Amazon KDP の出品 | 無い（Amazon が公開 API を提供していない） | Playwright |
+| note の記事投稿 | 公式 API 無し。非公開エンドポイントは note が保証せず規約・アカウントリスクがある | Playwright |
+| A8 の提携申請・広告コード取得 | メディア側の該当 API は見当たらない（A8 の公開 API は広告主・ASP 事業者向けの成果確定／成果連携） | Playwright |
+| ココナラ / もしも / afb | **未確認**（推測で「無い」と書かない） | 現状 Playwright |
+
+### CI 実行について
+
+**Playwright 自体は CI で動く。** `pr-quality-check.yml` と `post-deploy-smoke.yml` が `ubuntu-latest`（GitHub ホストランナー）で実行している。CI で足りないのは**認証済みセッション**だけで、Playwright の実行環境ではない。
+
+- **セルフホストランナーは本 repo では使えない。** stats47 は PUBLIC で、GitHub 公式が「セルフホストランナーは private repository のみ推奨。public repository の fork が危険なコードをランナー上で実行しうる」と警告している。
+- 認証済みセッションを CI へ渡すなら storage state を Secrets に置く経路になるが、Playwright 公式は state ファイルを「なりすましに使える機密」として repository へのコミットを強く非推奨としている（Secrets については公式ガイダンス無し）。**この方式を採る場合は本書「禁止事項」の Cookie 非 commit 規定との整合を先に決める。**
+- セッションは期限切れするため、この経路でも初回作成と期限切れ時の再作成は人の操作として残る。
+
+### Playwright MCP の位置づけ
+
+MCP は AI エージェントを live なブラウザセッションへ接続する仕組みで、**CI/CD の無人自動化の手段ではない**。CI で回すのはコミット済みの決定的スクリプトとする（CLAUDE.md 原則 5「モデルは判断時のみ。決定的なものはコードで処理する」と同旨。無人 cron に LLM を載せない方針は `.claude/rules/affiliate-ads-standards.md` §10 の A8 cron と揃える）。
+
+MCP が有用なのは**セレクタ確定の探索工程**である。実機を見てセレクタを確定し、その結果を決定的スクリプトへ落として CI へ載せる。
 
 ## Active profile
 

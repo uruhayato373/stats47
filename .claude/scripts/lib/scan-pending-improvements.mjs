@@ -11,6 +11,10 @@
  *   node .claude/scripts/lib/scan-pending-improvements.mjs --due-before 2026-05-24
  *   node .claude/scripts/lib/scan-pending-improvements.mjs --tier 1,2
  *   node .claude/scripts/lib/scan-pending-improvements.mjs --status pending
+ *   node .claude/scripts/lib/scan-pending-improvements.mjs --overdue-days 14   # deploy から 14 日以上経過
+ *
+ * 環境変数:
+ *   IMPROVEMENT_BACKLOG_PATH … バックログのパスを差し替える (fixture 検証用。既定は docs/todo/04)
  *
  * Output JSON schema:
  *   [
@@ -23,21 +27,30 @@
  *       tier: 1,
  *       target_metric: "gsc",
  *       due: "2026-06-13",
+ *       deployed_at: "2026-06-01",   // タイトルから抽出した deploy 日 (無ければ null)
+ *       overdue_days: 59,            // deployed_at からの経過日数 (無ければ null)
  *       owner: "claude",
  *       deep_link: "docs/todo/04_改善バックログ.md"
  *     }
  *   ]
+ *
+ * deployed_at / overdue_days は `triage-matrix.mjs` の「超過」バケットが参照する。
+ * 抽出は `.claude/scripts/lib/effect-verdict/engine.mjs` の `extractDeployDate` に一本化
+ * (measure-adsense-impact.mjs と同じ正規表現。未デプロイ表現は null になる)。
  */
 
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { extractDeployDate } from "./effect-verdict/engine.mjs";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const BACKLOG_PATH = path.join(PROJECT_ROOT, "docs/todo/04_改善バックログ.md");
 const BACKLOG_REL = "docs/todo/04_改善バックログ.md";
+const BACKLOG_PATH =
+  process.env.IMPROVEMENT_BACKLOG_PATH || path.join(PROJECT_ROOT, BACKLOG_REL);
 
 const args = process.argv.slice(2);
 function getArg(flag) {
@@ -49,15 +62,33 @@ const FORMAT = getArg("--format") || "json";
 const DUE_BEFORE = getArg("--due-before");
 const TIER_FILTER = getArg("--tier");
 const STATUS_FILTER = getArg("--status") || "pending,in-progress,effect/pending";
+const OVERDUE_DAYS = getArg("--overdue-days");
 
 const TARGET_STATUSES = new Set(STATUS_FILTER.split(",").map((s) => s.trim()));
 const TARGET_TIERS = TIER_FILTER
   ? new Set(TIER_FILTER.split(",").map((s) => Number(s.trim())))
   : null;
+const MIN_OVERDUE_DAYS = OVERDUE_DAYS == null ? null : Number(OVERDUE_DAYS);
 
-/** 04_改善バックログ.md のマークダウンテーブルを行パースして施策一覧を返す */
-function parseBacklog() {
-  const content = readFileSync(BACKLOG_PATH, "utf-8");
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/** deployed_at から today までの経過日数。deployed_at が無ければ null。 */
+export function overdueDays(deployedAt, today = new Date()) {
+  if (!deployedAt) return null;
+  const d = Date.parse(`${deployedAt}T00:00:00Z`);
+  if (Number.isNaN(d)) return null;
+  const base = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
+  return Math.floor((base - d) / DAY_MS);
+}
+
+/**
+ * 04_改善バックログ.md のマークダウンテーブルを行パースして施策一覧を返す。
+ * write-past-effects.mjs も同じパーサを再利用する (行の解釈を二重実装しない)。
+ * @param {string} [backlogPath]
+ * @param {Date} [today] overdue_days の基準日 (テストで固定する)
+ */
+export function parseBacklog(backlogPath = BACKLOG_PATH, today = new Date()) {
+  const content = readFileSync(backlogPath, "utf-8");
   const entries = [];
   let currentTier = null;
 
@@ -77,6 +108,7 @@ function parseBacklog() {
     if (!id || id === "ID") continue;
 
     const dueClean = due === "-" ? null : (due.match(/^(\d{4}-\d{2}-\d{2})/) || [])[1] || null;
+    const deployedAt = extractDeployDate(title);
 
     entries.push({
       metric: metric,
@@ -87,6 +119,8 @@ function parseBacklog() {
       tier: currentTier,
       target_metric: metric,
       due: dueClean,
+      deployed_at: deployedAt,
+      overdue_days: overdueDays(deployedAt, today),
       owner: owner,
       deep_link: BACKLOG_REL,
     });
@@ -99,6 +133,8 @@ function applyFilters(entries) {
     if (!TARGET_STATUSES.has(e.status)) return false;
     if (TARGET_TIERS && e.tier !== null && !TARGET_TIERS.has(e.tier)) return false;
     if (DUE_BEFORE && e.due && e.due > DUE_BEFORE) return false;
+    if (MIN_OVERDUE_DAYS != null && !(e.overdue_days != null && e.overdue_days >= MIN_OVERDUE_DAYS))
+      return false;
     return true;
   });
 }
@@ -138,4 +174,6 @@ function main() {
   }
 }
 
-main();
+if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(__filename)) {
+  main();
+}

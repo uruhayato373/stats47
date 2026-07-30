@@ -156,6 +156,41 @@ jobs:
         continue-on-error: true
         run: node .claude/scripts/blog/measure-gsc-impact.mjs --min-weeks 2
 
+      # 効果判定ループ (.claude/rules/evidence-based-judgment.md §閾値エンジン経由の確定)。
+      # 順序は snapshot fetch → digest → measure → verdict → past-effects writer で固定する
+      # (逆だと verdict が前週データを読む)。
+      #
+      # continue-on-error を付けない: ガード hit は正常系 (exit 0) なので、ここが落ちるのは
+      # 閾値計算そのものの例外だけ。赤くして気付けるようにする。
+      # backlog の status 書き換えはしない (improvement-triage の排他 write を破るため)。
+      - name: ⚖️ Decide effect verdicts (閾値エンジン)
+        run: |
+          # `| tee` は使わない (既定 shell は pipefail 無しなので CLI の失敗が tee の成功に隠れる)
+          node .claude/scripts/lib/effect-verdict/cli.mjs --week ${{ steps.week.outputs.week }} > /tmp/effect-verdicts.txt
+          cat /tmp/effect-verdicts.txt
+          {
+            echo ""
+            echo '```'
+            cat /tmp/effect-verdicts.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # effect/none|adverse を candidate 抑制台帳へ反映する (writer 不在で台帳が空だったのを閉じる)。
+      # read 側は search-growth/lib/scoring.mjs と metrics/lib/adsense-diagnostics.mjs。
+      - name: 🗂 Write past-effects ledgers (candidate 抑制)
+        continue-on-error: true # 台帳更新の失敗で週次計測本体を止めない
+        run: node .claude/scripts/lib/write-past-effects.mjs
+
+      # コード側 slot 定数 (apps/web/src/lib/google-adsense/constants.ts) と AdSense 側 ad unit の
+      # 突き合わせ検査。ad-units.csv (inventory) は上の fetch-adsense-snapshot が出し、
+      # history-units.csv は metrics:digest が出すので、ここは読むだけ。
+      # API も browser も叩かないので CI で完結する (Playwright は載せない)。
+      # --strict は付けない: adUnitName 未記入等の整備途中は error が出るのが正常で、
+      # ここで週次計測本体を落としても直らない。内容を報告して人間/agent に渡す。
+      - name: 🔗 Check AdSense unit mapping (code slot ↔ ad unit)
+        continue-on-error: true
+        run: npm run metrics:check-adsense-units -- ${{ steps.week.outputs.week }}
+
       # AdSense 収益密度の決定的候補生成 (adsense-diagnostics.mjs・最大3件・提示まで)。
       # 広告配置・Auto ads・deploy の自動変更はしない。Google Admin Playwright はここに載せない。
       - name: 🩺 AdSense diagnostics (candidates ≤3)
@@ -205,6 +240,12 @@ jobs:
           git add .claude/state/blog/remediation-queue.json 2>/dev/null || true
           git add .claude/state/blog/topic-queue.json 2>/dev/null || true
           git add .claude/skills/analytics/gsc-improvement/reference/improvement-log.md 2>/dev/null || true
+          # 効果判定ループの成果物 (verdict JSON + 抑制台帳 + 新規 improvement-log)
+          git add .claude/state/effect-verdict 2>/dev/null || true
+          git add .claude/state/search-growth/past-effects.json 2>/dev/null || true
+          git add .claude/state/metrics/adsense/past-effects.json 2>/dev/null || true
+          git add .claude/skills/analytics/ga4-improvement/reference/improvement-log.md 2>/dev/null || true
+          git add .claude/skills/analytics/cloudflare-cost-improvement/reference/improvement-log.md 2>/dev/null || true
 
           if git diff --cached --quiet; then
             echo "No metrics changes to publish"

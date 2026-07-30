@@ -57,6 +57,53 @@ jobs:
           echo "--- preview ---"
           head -40 /tmp/triage/body.md
 
+      - name: ⚖️ Summarize machine verdicts
+        id: verdicts
+        # 閾値エンジン (.claude/scripts/lib/effect-verdict/) が確定した verdict を読み、
+        # 「機械が確定済みだが backlog へ未反映」を可視化する。
+        # verdict JSON は週次 fetch-metrics-weekly が生成するので、初回実行前は存在しない。
+        run: |
+          mkdir -p /tmp/triage
+          : > /tmp/triage/verdicts.md
+          if ls .claude/state/effect-verdict/verdicts-*.json >/dev/null 2>&1; then
+            node -e '
+              const fs = require("node:fs");
+              const dir = ".claude/state/effect-verdict";
+              const files = fs.readdirSync(dir).filter((f) => /^verdicts-.*\.json$/.test(f)).sort();
+              const latest = files[files.length - 1];
+              const data = JSON.parse(fs.readFileSync(`${dir}/${latest}`, "utf-8"));
+              // CLI が書く形: { generatedAt, week, summary: {total, byLabel, byGuard}, verdicts: [...] }
+              const rows = Array.isArray(data) ? data : (data.verdicts ?? []);
+              // 集計は CLI が既に出しているので再計算しない (二重実装で食い違わせない)
+              const by = data.summary?.byLabel ?? rows.reduce((a, r) => ((a[r.label] = (a[r.label] ?? 0) + 1), a), {});
+              const decided = rows.filter((r) => r.label && r.label !== "effect/pending");
+              const out = [];
+              out.push(`## 機械判定 (${latest})`);
+              out.push("");
+              out.push(`内訳: \`${JSON.stringify(by)}\``);
+              out.push("");
+              if (decided.length === 0) {
+                out.push("確定 verdict なし (すべて ガード hit で pending)。想定効果値 `[target: ±N 単位]` が");
+                out.push("backlog 行に無いと `insufficient-target` で pending に留まる。");
+              } else {
+                out.push("**確定済みだが backlog へ未反映の可能性がある verdict:**");
+                out.push("");
+                out.push("| subject | label | 達成率 | ガード |");
+                out.push("|---|---|---|---|");
+                for (const r of decided) {
+                  const at = r.attainment == null ? "-" : `${Math.round(r.attainment * 100)}%`;
+                  // guards は {code, detail} のオブジェクト配列 (文字列ではない)
+                  const guards = (r.guards ?? []).map((g) => g?.code ?? String(g)).join(", ") || "-";
+                  out.push(`| ${r.subjectId ?? "-"} | ${r.label} | ${at} | ${guards} |`);
+                }
+              }
+              fs.writeFileSync("/tmp/triage/verdicts.md", out.join("\n") + "\n");
+            ' || echo "(verdict 集計に失敗)" > /tmp/triage/verdicts.md
+          else
+            echo "_verdict JSON がまだありません (週次 fetch-metrics-weekly の初回実行後に出ます)_" > /tmp/triage/verdicts.md
+          fi
+          cat /tmp/triage/verdicts.md
+
       - name: 📝 Compose issue body
         if: steps.scan.outputs.has_entries == 'true'
         run: |
@@ -68,6 +115,8 @@ jobs:
             echo "デプロイ日から **${OVERDUE_DAYS} 日以上経過** した \`status: pending | in-progress\` エントリ一覧。"
             echo "実証ベース判定ルール ([.claude/rules/evidence-based-judgment.md](https://github.com/${{ github.repository }}/blob/develop/.claude/rules/evidence-based-judgment.md)) に従い、"
             echo "各エントリに検証コマンドを実行して effect/* 判定を更新してください。"
+            echo
+            cat /tmp/triage/verdicts.md
             echo
             cat /tmp/triage/body.md
             echo

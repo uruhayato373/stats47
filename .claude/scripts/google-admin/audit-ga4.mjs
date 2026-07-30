@@ -12,6 +12,7 @@
  *   決定的な文字列 (property ID / sc-domain:stats47.jp / ad_id) の有無で判定する。
  */
 import { isLoginUrl, waitForLogin } from "./browser-context.mjs";
+import { extractObservedParams } from "./dimension-ledger.mjs";
 
 export const GA4_PROPERTY_ID = process.env.GA4_PROPERTY_ID || "463218070";
 export const GA4_HOME = `https://analytics.google.com/analytics/web/#/p${GA4_PROPERTY_ID}/reports/intelligenthome`;
@@ -141,13 +142,16 @@ export async function auditAdSenseLinks(page, { screenshotDir }) {
 }
 
 /** カスタム定義 inventory: ad_id (event scope) の有無・displayName。 */
-export async function auditCustomDimensions(page, { screenshotDir }) {
+export async function auditCustomDimensions(page, { screenshotDir, knownParams = [] }) {
   const admin = await gotoAdmin(page);
   if (admin.status !== "ok") return admin;
   const nav = await openAdminSection(page, ["カスタム定義", "Custom definitions"], { screenshotDir, shotName: "06-custom-dimensions" });
   if (nav.status !== "ok") return nav;
   const text = await bodyText(page);
   const hasAdId = /\bad_id\b/.test(text);
+  // 台帳 (analytics-event-standards.md §2) の「登録が要るパラメータ」が画面に出ているかを
+  // 単語境界で照合する。表構造に依存させない (innerText 方式)。
+  const observedParams = extractObservedParams(text, knownParams);
   // ad_id 行の周辺テキスト (displayName 推定用・機密ではない)
   let adIdContext = null;
   if (hasAdId) {
@@ -155,7 +159,7 @@ export async function auditCustomDimensions(page, { screenshotDir }) {
     const i = lines.findIndex((l) => /\bad_id\b/.test(l));
     adIdContext = lines.slice(Math.max(0, i - 2), i + 2).join(" | ").slice(0, 200);
   }
-  return { status: "ok", hasAdId, adIdContext, pageLoaded: /カスタム定義|ディメンション/.test(text) };
+  return { status: "ok", hasAdId, adIdContext, observedParams, pageLoaded: /カスタム定義|ディメンション/.test(text) };
 }
 
 /** Library の Search Console collection 公開状態 (レポート → ライブラリ)。

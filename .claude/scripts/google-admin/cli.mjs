@@ -30,10 +30,27 @@ import {
   applyCreateScLink,
   applyPublishScCollection,
   applyCreateAdIdDimension,
+  plannedActionToken,
+  requireCommit,
 } from "./apply-allowlisted-settings.mjs";
+import {
+  auditAdSenseAccount,
+  auditAdUnits,
+  expectedAdSenseAccount,
+} from "./audit-adsense.mjs";
+import { loadCodeAdSlots } from "../metrics/lib/code-ad-slots.mjs";
+import { probeAdSenseUnitsPage } from "./probe-adsense.mjs";
+import {
+  parseDimensionLedger,
+  requiredDimensionParams,
+  reconcileDimensions,
+} from "./dimension-ledger.mjs";
 import { sanitizeObject } from "./redact.mjs";
 
-const STATE_FILE = path.join(PROJECT_ROOT, ".claude/state/metrics/google-admin/latest.json");
+const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics/google-admin");
+const STATE_FILE = path.join(STATE_DIR, "latest.json");
+// adsense-inventory は API only の別 run なので、DOM audit の latest.json を上書きしない
+const ADSENSE_INVENTORY_STATE_FILE = path.join(STATE_DIR, "adsense-inventory-latest.json");
 const LEDGER_FILE = path.join(PROJECT_ROOT, ".claude/rules/analytics-event-standards.md");
 const CONFIRM_SITE = "stats47.jp";
 
@@ -53,6 +70,17 @@ function readLedgerAdIdStatus() {
     return "unknown";
   } catch {
     return "unknown";
+  }
+}
+
+/** 台帳 §2 の「登録が要るパラメータ」一覧を読む (GA4 実データとの突合に使う)。 */
+function readLedgerRequiredParams() {
+  try {
+    const md = fs.readFileSync(LEDGER_FILE, "utf-8");
+    const entries = parseDimensionLedger(md);
+    return { entries, params: requiredDimensionParams(entries) };
+  } catch {
+    return { entries: [], params: [] };
   }
 }
 
@@ -79,8 +107,26 @@ async function runAudit(page, screenshotDir, promptLogin) {
   out.webStreams = await auditWebStreams(page, { screenshotDir });
   out.scLinks = await auditSearchConsoleLinks(page, { screenshotDir });
   out.adsenseLinks = await auditAdSenseLinks(page, { screenshotDir });
-  out.customDimensions = await auditCustomDimensions(page, { screenshotDir });
+  const ledger = readLedgerRequiredParams();
+  out.customDimensions = await auditCustomDimensions(page, { screenshotDir, knownParams: ledger.params });
+  out.dimensionReconcile =
+    out.customDimensions?.status === "ok"
+      ? reconcileDimensions(ledger.entries, out.customDimensions.observedParams ?? [])
+      : { rows: [], summary: {}, skipped: out.customDimensions?.status ?? "unknown" };
   out.library = await auditLibraryCollection(page, { screenshotDir });
+
+  // AdSense は API を一次ソースにする (DOM 非依存 = selector drift の影響を受けない)
+  out.adsenseAccount = await auditAdSenseAccount();
+  let codeSlots = [];
+  try {
+    codeSlots = loadCodeAdSlots().slots;
+  } catch (e) {
+    out.codeSlotsError = String(e.message ?? e).slice(0, 200);
+  }
+  out.adUnits = await auditAdUnits({
+    codeSlots,
+    accountId: out.adsenseAccount?.accountId ?? null,
+  });
   return out;
 }
 
@@ -94,10 +140,35 @@ function printAudit(audit) {
   console.log(`AdSense link: linked=${s(audit.adsenseLinks?.linked)} pub=${audit.adsenseLinks?.publisherId ?? "-"} (${audit.adsenseLinks?.status ?? "-"})`);
   console.log(`custom dimension ad_id: ${s(audit.customDimensions?.hasAdId)} (${audit.customDimensions?.status ?? "-"})`);
   console.log(`Library SC collection: has=${s(audit.library?.hasScCollection)} published=${s(audit.library?.published)} (${audit.library?.status ?? "-"})`);
+  console.log(`AdSense account assert: ${audit.adsenseAccount?.status ?? "-"}${audit.adsenseAccount?.detail ? ` (${audit.adsenseAccount.detail})` : ""}`);
+  const au = audit.adUnits;
+  console.log(
+    `AdSense ad units: ${au?.units?.length ?? 0} 件 desired=${au?.desired?.length ?? 0} コード側 slot=${au?.codeSlots?.length ?? 0} (${au?.status ?? "-"})`,
+  );
+  if (au?.status === "ok" && Array.isArray(au.units)) {
+    for (const u of au.units) {
+      console.log(`  - ${u.displayName} slot=${u.slotId || "(不明)"} state=${u.state || "-"}`);
+    }
+  }
+
+  // 台帳 (analytics-event-standards.md §2) と GA4 実データの突合
+  const rec = audit.dimensionReconcile;
+  if (rec?.skipped) {
+    console.log(`custom dimension 突合: 判定不能 (custom definitions audit ${rec.skipped})`);
+  } else if (rec) {
+    console.log(`custom dimension 突合: ${JSON.stringify(rec.summary)}`);
+    const notable = (rec.rows ?? []).filter(
+      (r) => r.verdict !== "confirmed-registered" && r.verdict !== "verified-registered",
+    );
+    for (const r of notable) {
+      console.log(`  ! ${r.param} (${r.events.join("/")}) — ${r.verdict} [台帳: ${r.ledgerStatus}]`);
+    }
+    if (notable.length === 0) console.log("  すべて登録済みを確認 (台帳の ❓ は解消できる)");
+  }
 }
 
-function saveState(kind, audit, decision, applied) {
-  fs.mkdirSync(path.dirname(STATE_FILE), { recursive: true });
+function saveState(kind, audit, decision, applied, approvalToken = null, file = STATE_FILE) {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
   const summary = sanitizeObject({
     schemaVersion: 1,
     kind,
@@ -107,9 +178,10 @@ function saveState(kind, audit, decision, applied) {
     audit,
     decision: decision ?? null,
     applied: applied ?? null,
+    approvalToken: approvalToken ?? null,
   });
-  fs.writeFileSync(STATE_FILE, JSON.stringify(summary, null, 2) + "\n");
-  console.log(`\nsanitized summary → ${path.relative(PROJECT_ROOT, STATE_FILE)}`);
+  fs.writeFileSync(file, JSON.stringify(summary, null, 2) + "\n");
+  console.log(`\nsanitized summary → ${path.relative(PROJECT_ROOT, file)}`);
 }
 
 async function main() {
@@ -129,8 +201,43 @@ async function main() {
     spawn("open", ["-na", "Google Chrome", "--args", `--user-data-dir=${PROFILE_DIR}`, "--no-first-run", "--no-default-browser-check", "https://accounts.google.com/"], { detached: true, stdio: "ignore" }).unref();
     return;
   }
-  if (!["audit", "apply", "verify"].includes(cmd)) {
-    console.error("usage: cli.mjs <login|audit|apply|verify> [--confirm-site stats47.jp]");
+  if (cmd === "adsense-inventory") {
+    // API のみの read-only 検査 (browser を起動しない = 無人 cron に載せられる)。
+    // DOM を読む audit は headed 実行が要るので人間が `google-admin:audit` を回す。
+    const account = await auditAdSenseAccount();
+    let codeSlots = [];
+    let codeSlotsError = null;
+    try {
+      codeSlots = loadCodeAdSlots().slots;
+    } catch (e) {
+      codeSlotsError = String(e.message ?? e).slice(0, 200);
+    }
+    const adUnits = await auditAdUnits({ codeSlots, accountId: account.accountId ?? null });
+    console.log("\n# adsense-inventory (API read-only)");
+    console.log(`account assert: ${account.status}${account.detail ? ` (${account.detail})` : ""}`);
+    if (codeSlotsError) console.log(`code slots: 読み取り失敗 (${codeSlotsError})`);
+    console.log(`ad units: ${adUnits.units?.length ?? 0} 件 (${adUnits.status}) desired=${adUnits.desired?.length ?? 0}`);
+    for (const u of adUnits.units ?? []) {
+      console.log(`  - ${u.displayName} slot=${u.slotId || "(不明)"} state=${u.state || "-"}`);
+    }
+    saveState(
+      "adsense-inventory",
+      { adsenseAccount: account, adUnits, codeSlotsError },
+      null,
+      null,
+      null,
+      ADSENSE_INVENTORY_STATE_FILE,
+    );
+    // 認証不足・アカウント不一致は失敗として返す (無人 cron が沈黙しないように)
+    const ok = account.status === "ok" && adUnits.status === "ok";
+    if (!ok) process.exit(1);
+    return;
+  }
+  if (!["audit", "apply", "verify", "adsense-probe"].includes(cmd)) {
+    console.error(
+      "usage: cli.mjs <login|audit|apply|verify|adsense-probe|adsense-inventory> " +
+        "[--confirm-site stats47.jp] [--commit --approve <token>]",
+    );
     process.exit(1);
   }
   if (cmd === "apply" && getArg("--confirm-site") !== CONFIRM_SITE) {
@@ -154,6 +261,16 @@ async function main() {
       console.log("   ログイン完了を自動検知して続行します (最大 10 分待機・自動入力はしません)。\n");
     };
 
+    // read-only probe: DOM 構造を dump するだけ (mutation 経路を持たない)
+    if (cmd === "adsense-probe") {
+      const r = await probeAdSenseUnitsPage(page, { runId, screenshotDir });
+      console.log(`\n# adsense-probe: ${r.status}`);
+      if (r.outFile) console.log(`dump → ${r.outFile} (counts: ${JSON.stringify(r.counts)})`);
+      if (r.detail) console.log(`detail: ${r.detail}`);
+      console.log("この dump を読んでから applyCreateAdUnit のセレクタを書く (実機を見ずに書かない)。");
+      return;
+    }
+
     const audit = await runAudit(page, screenshotDir, promptLogin);
     printAudit(audit);
 
@@ -165,20 +282,46 @@ async function main() {
       library: audit.library ?? { status: "missing" },
       ledger: { adIdStatus: readLedgerAdIdStatus() },
       ga4AdImpressionObserved: ga4AdImpressionObserved(),
+      adUnits: audit.adUnits ?? { status: "missing" },
+      adsenseAccount: audit.adsenseAccount ?? { status: "missing" },
     };
     const decision =
       audit.propertyAssert?.status === "ok" ? decideActions(inventory) : { actions: [], noops: [], blockers: [{ code: "property-assert-failed", detail: audit.propertyAssert?.status ?? audit.ga4?.status ?? "unknown" }] };
 
     console.log("\n# decision");
     for (const a of decision.actions) console.log(`  APPLY   ${a}`);
+    for (const p of decision.plan ?? []) console.log(`  PLAN    ${JSON.stringify(p)}`);
     for (const n of decision.noops) console.log(`  NO-OP   ${n.action}: ${n.reason}`);
     for (const b of decision.blockers) console.log(`  BLOCKER ${b.code}: ${b.detail}`);
+
+    // ad unit mutation の承認トークン (計画そのものに対する承認)
+    const approvalToken = plannedActionToken({
+      site: CONFIRM_SITE,
+      accountId: audit.adsenseAccount?.accountId ?? expectedAdSenseAccount() ?? "",
+      actions: decision.actions,
+      plan: decision.plan ?? [],
+    });
+    const unitActions = decision.actions.filter((a) => a === "create-ad-unit" || a === "rename-ad-unit");
+    if (unitActions.length > 0) {
+      console.log(`\n# approval (ad unit mutation)`);
+      console.log(`  approvalToken: ${approvalToken}`);
+      console.log(
+        `  実行するには: npm run google-admin:apply -- --confirm-site ${CONFIRM_SITE} --commit --approve ${approvalToken}`,
+      );
+    }
 
     let applied = null;
     if (cmd === "apply" && decision.actions.length > 0) {
       applied = [];
       // planned action JSON を /tmp に保存 (README「mutation手順」)
-      fs.writeFileSync(path.join(tmpDir, "planned-actions.json"), JSON.stringify({ site: CONFIRM_SITE, propertyId: GA4_PROPERTY_ID, actions: decision.actions }, null, 2));
+      fs.writeFileSync(
+        path.join(tmpDir, "planned-actions.json"),
+        JSON.stringify(
+          { site: CONFIRM_SITE, propertyId: GA4_PROPERTY_ID, actions: decision.actions, plan: decision.plan ?? [], approvalToken },
+          null,
+          2,
+        ),
+      );
       const navHelpers = {
         gotoScLinks: async () => {
           const r = await auditSearchConsoleLinks(page, { screenshotDir });
@@ -195,13 +338,33 @@ async function main() {
       };
       for (const action of decision.actions) {
         console.log(`\n→ apply: ${action}`);
-        let result;
+        // 未知 action で result 未定義のままクラッシュしないよう初期化する
+        let result = { status: "unknown-action", reason: `dispatch 未定義の action: ${action}` };
         if (action === "create-search-console-link") {
           result = await applyCreateScLink(page, { screenshotDir, gotoScLinks: navHelpers.gotoScLinks });
         } else if (action === "publish-search-console-collection") {
           result = await applyPublishScCollection(page, { screenshotDir, gotoLibrary: navHelpers.gotoLibrary });
         } else if (action === "create-ad-id-dimension") {
           result = await applyCreateAdIdDimension(page, { screenshotDir, gotoCustomDimensions: navHelpers.gotoCustomDimensions });
+        } else if (action === "create-ad-unit" || action === "rename-ad-unit") {
+          // ad unit は不可逆寄りなので --commit + --approve <token> を追加で要求する
+          const gate = requireCommit({
+            argv: process.argv,
+            site: getArg("--confirm-site"),
+            expectedSite: CONFIRM_SITE,
+            expectedToken: approvalToken,
+          });
+          if (!gate.allowed) {
+            result = { status: "blocked", reason: `承認ゲート: ${gate.reason}` };
+          } else {
+            // ★ 実機 probe (adsense-probe) の dump でセレクタを確定してから実装する。
+            //    推測で書くと「動いたように見えて別要素を操作する」事故になるため、
+            //    ここは意図的に未実装のまま停止する。
+            result = {
+              status: "not-implemented",
+              reason: "adsense-probe の dump でセレクタを確定してから実装する (実機を見ずに書かない)",
+            };
+          }
         }
         console.log(`  → ${result.status}${result.reason ? `: ${result.reason}` : ""}`);
         applied.push({ action, ...result });
@@ -209,7 +372,7 @@ async function main() {
       }
     }
 
-    saveState(cmd, audit, decision, applied);
+    saveState(cmd, audit, decision, applied, approvalToken);
     console.log(`\nscreenshots: ${screenshotDir} (repo へは追加しない)`);
   } finally {
     await context?.close().catch(() => {});

@@ -21,6 +21,32 @@
 
 **NG**: 「想定 +300、実測 +52 だが浸透待ち」だけで effect/pending を放置 → 「なぜ 248 不足したか」の仮説と検証コマンドがないと次に進めない
 
+#### 閾値エンジン経由の確定（2026-07-30 オーナー判断）
+
+effect ラベルは、下記 3 条件を**すべて**満たす場合に限り機械が自動確定してよい。人間の目視ゲートは
+この経路では要求しない。事故の原因は「判定が自動だったこと」ではなく「外部システムの仕様を出典なしに
+断定したこと」なので、状況 2（仕様主張）と状況 3（原因推定）は人間・機械どちらにも無条件で適用し続ける。
+
+1. **境界が SSOT にある** — 判定に使う数値は `.claude/scripts/lib/effect-verdict/thresholds.mjs`
+   だけに置く。engine 側にリテラルを書かない（テストが直書きを検出して落ちる）
+2. **根拠が残る** — `.claude/state/effect-verdict/verdicts-<week>.json` に `before` / `after` /
+   `target` / `attainment` / `sources[{name,observedAt,freshness}]` / `guards` /
+   `thresholdsVersion` を記録し、improvement-log の `### 判定` に判定・根拠データ・閾値 SSOT・
+   ガード・再現コマンドの 5 項目を出す
+3. **判定不能を宣言する** — 4 ガード（`insufficient-sample` / `stale-source` / `confounded` /
+   `insufficient-target`）が 1 つでも hit したら `effect/pending` に留める。これは人間ゲートの
+   復活ではなく「閾値ルールが判定不能と宣言している状態」で、`guards[]` がその記録である
+
+**エンジンは観測差分と閾値の比較のみを出力し、原因や外部仕様を出力してはならない。** 「なぜ未達か」
+「Google がどう扱うか」は engine の出力に含めない（人間 / improvement-triage が状況 2・3 の要件を
+満たして書く）。想定効果値は `[target: ±N 単位]` の明示記法だけを機械可読とし、散文からの推測はしない
+（取れなければ `insufficient-target` で pending に留まる = 状況 4 の担保）。
+
+**統計的有意性は導入しない** — 週次 snapshot は各 1 点で分散が取れず、比率検定を入れると
+「有意性を装った推測」を作るだけになる。判定は達成率（第一基準）と noise floor（第二基準）の 2 段のみ。
+
+手動で判定する場合は上の **必須** 3 点を人間が満たす（エンジンを通さない判定に免除はない）。
+
 ### 状況 2: Google・サードパーティの仕様主張
 
 「Google は X する」「Cloudflare は Y する」など外部システムの挙動を断定する場面。
@@ -168,6 +194,23 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 このチェック未満なら effect/full / effect/partial を付けない。effect/pending のままにすること。
 ```
 
+**このチェックリストは手動判定時に必須**。閾値エンジン経由の自動判定では engine の 4 ガードが
+同等の役割を果たし、`guards` フィールドがその記録である（対応関係は下表）。
+
+| 実証チェックリストの項目 | 自動判定での担保 |
+|---|---|
+| 検証コマンドを実行したか | verdict の `### 判定` に **[再現コマンド]** を必ず出す |
+| 比較対象が明確か | `before` / `after` / `window` を verdict JSON に記録 |
+| 効果が想定の 80% 未満なら未達の説明 | `attainment` と `boundaries` を記録し、`insufficient-target` で想定値なしを弾く |
+| 標本が足りるか | `insufficient-sample`（imp 下限 + noise floor） |
+| 根拠データが古くないか | `stale-source`（`freshness.mjs` の `classifyAge` を共有） |
+| 他施策と混ざっていないか | `confounded`（同時投入 / after 窓の後発投入） |
+| 公式ドキュメント URL を引用したか（仕様主張） | **engine は仕様を出力しない**ので対象外。仕様に触れる記述は人間が状況 2 の要件で書く |
+| NG ワードを使っていないか | engine の出力は実測値と閾値の引用のみ（テストで NG ワード非混入を固定） |
+
+閾値エンジンの入口: `node .claude/scripts/lib/effect-verdict/cli.mjs`（週次 cron で自動実行）。
+閾値 SSOT: `.claude/scripts/lib/effect-verdict/thresholds.mjs`。
+
 ---
 
 ## 改善ログ記入テンプレ
@@ -210,3 +253,6 @@ grep -rn "$NG" \
 - 過去施策の判定が「実証ベースで再評価」されたログ: 各 improvement-log の冒頭に rewrite サインがあるもの
 - 親方針: `CLAUDE.md` の行動原則 12「失敗を隠さない — 未検証部分・スキップ箇所は『完了』と言わず明示する」
 - 既存実装: `.claude/scripts/gsc/url-inspection-daily.cjs`（URL Inspection API の参照実装）
+- 閾値エンジン: `.claude/scripts/lib/effect-verdict/`（`thresholds.mjs` = 閾値 SSOT / `engine.mjs` = 判定純粋関数 / `cli.mjs` = 週次ランナー）
+- テスト: `node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs`（群 A 正常系 + 群 B mutation。閾値を動かすと判定が変わることを固定）
+- 抑制台帳 writer: `.claude/scripts/lib/write-past-effects.mjs`（effect/none|adverse → candidate の confidence 抑制）

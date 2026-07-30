@@ -17,6 +17,8 @@ AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Act
 | 施策（1施策1行、人間向け要約） | `docs/todo/04_改善バックログ.md` | active 施策を優先度・期日で絞り込み可能 |
 | 詳細ログ（agent 用、検証コマンド・仮説） | `reference/improvement-log.md` | append-only、agent が深掘り参照 |
 | 週次推移サマリ | `.claude/state/metrics/adsense/LATEST.md` / `history.csv` | GitHub Actions が自動更新 |
+| **広告ユニット別推移** | `.claude/state/metrics/adsense/history-units.csv` | ユニット単位の最適化を効果測定するための時系列。`match_status` (matched / legacy-name-matched / unmanaged / orphan) で突き合わせ可否を明示する |
+| **AdSense ユニット inventory** | `reference/snapshots/YYYY-Www/ad-units.csv` | `unit_id` (= レポートの `AD_UNIT_ID`) と `slot_id` (adCode の `data-ad-slot`) の対応。コード側 `constants.ts` との突き合わせキー |
 
 → **責務分離**: `docs/todo/04_改善バックログ.md` はactive一覧、agent 用詳細は `.claude/skills/analytics/adsense-improvement/reference/improvement-log.md`。
 
@@ -74,6 +76,7 @@ AdSense メトリクス取得の優先順:
    - overview.csv: 全期間合計（earnings / page_views / rpm / impressions / clicks / ctr / viewability）
    - pages.csv: ページ別（上位 10 件 + 全件 CSV）
    - units.csv: 広告ユニット別
+   - ad-units.csv: ユニット inventory (unit_id ↔ slot_id ↔ display_name)
    - devices.csv: mobile / desktop / tablet
    - daily.csv: 日次推移
 
@@ -204,6 +207,10 @@ cat .claude/skills/analytics/adsense-improvement/reference/improvement-log.md
 
 - `docs/todo/04_改善バックログ.md` が存在すること（施策 ID は `ADSENSE-*` または `AFF-*`）
 - `reference/budgets.json` / `reference/snapshots/` / `reference/improvement-log.md` 初期化済
-- AdSense Management API の OAuth 設定済（`.env.local` に CLIENT_ID / SECRET / REFRESH_TOKEN / ACCOUNT_ID）
+- AdSense Management API の OAuth 設定済。**creds は CI 専任** — `GOOGLE_ADSENSE_CLIENT_ID` /
+  `CLIENT_SECRET` / `REFRESH_TOKEN` / `ACCOUNT_ID` は GitHub Secrets にあり、`.env.local` には置かない
+  (2026-05-29 の秘密集約。memory `project_env_local_ci_consolidation`)。
+  そのため **snapshot 取得と unit inventory はローカルで実行できない** — `fetch-metrics-weekly.yml`
+  が生成して develop に commit-back したものを読む
 - Publisher ID: `ca-pub-7995274743017484`
 - 本番 URL: `https://stats47.jp`

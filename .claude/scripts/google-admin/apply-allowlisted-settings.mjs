@@ -15,12 +15,25 @@
  * 実行 (browser) は README の mutation 手順に従う。Save 後に verify できなければ
  * mutation-unknown とし、盲目的に再実行しない。
  */
+import { createHash } from "node:crypto";
 import { GA4_PROPERTY_ID } from "./audit-ga4.mjs";
 
+/**
+ * apply が変更してよい action。README「allowlist」と 1:1 で対応する。
+ *
+ * ad unit の 2 action を許すのは、他の AdSense 設定と危険性が非対称だからである:
+ * - 新規 unit 作成は既存の配信を一切変えない (slotId が発行されるだけで、コード側
+ *   constants.ts に埋めるまで 1 imp も出ない = 管理画面操作とコード反映の二段ゲート)。
+ * - rename は unit ID を変えないので AD_UNIT_ID 軸の時系列を壊さない。
+ * - 対して Auto ads / format / exclusion / blocking control は全ページの配信を即時・
+ *   不可逆に変える → denylist のまま (実行経路を作らない)。
+ */
 export const ALLOWED_ACTIONS = Object.freeze([
   "create-search-console-link",
   "publish-search-console-collection",
   "create-ad-id-dimension",
+  "create-ad-unit",
+  "rename-ad-unit",
 ]);
 
 export const AD_ID_DIMENSION = Object.freeze({
@@ -54,6 +67,7 @@ export function decideActions(inv) {
   const actions = [];
   const noops = [];
   const blockers = [];
+  const plan = []; // action の具体的な対象 (承認トークンの入力になる)
   const drift = (name, r) => r?.status !== "ok";
 
   // --- A. create-search-console-link ---
@@ -100,8 +114,148 @@ export function decideActions(inv) {
     }
   }
 
+  // --- D/E. ad unit (inv.adUnits が無い呼び出しでは何もしない = 後方互換) ---
+  if (inv.adUnits) {
+    const unitPlan = decideAdUnitActions(inv);
+    actions.push(...unitPlan.actions);
+    noops.push(...unitPlan.noops);
+    blockers.push(...unitPlan.blockers);
+    if (unitPlan.plan) plan.push(...unitPlan.plan);
+  }
+
   for (const a of actions) assertAllowed(a);
-  return { actions, noops, blockers };
+  return { actions, noops, blockers, plan };
+}
+
+/**
+ * D. create-ad-unit / E. rename-ad-unit を決める (pure)。
+ *
+ * 1 run あたり作成 1 件・rename 1 件に絞る (README「1 action だけ実行」の趣旨)。
+ * unit ID が引けない対象は rename しない (名前だけの推測 rename をしない)。
+ *
+ * @param {{
+ *   adUnits: {status:string, source?:string, units?:Array<{id:string,displayName:string,slotId?:string,state?:string}>,
+ *             desired?:Array<{adUnitName:string,format?:string,exportName?:string}>,
+ *             codeSlots?:Array<{exportName:string,slotId:string,adUnitName:string|null}>},
+ *   adsenseAccount?: {status:string, accountId?:string},
+ * }} inv
+ */
+export function decideAdUnitActions(inv) {
+  const actions = [];
+  const noops = [];
+  const blockers = [];
+  const plan = [];
+
+  if (inv.adUnits?.status !== "ok") {
+    blockers.push({
+      code: "adunits-unreadable",
+      detail: `ad unit inventory ${inv.adUnits?.status ?? "missing"} — 状態不明のまま作成・改名しない`,
+    });
+    return { actions, noops, blockers, plan };
+  }
+  if (inv.adsenseAccount?.status !== "ok") {
+    blockers.push({
+      code: "adsense-account-assert-failed",
+      detail: `AdSense account assert ${inv.adsenseAccount?.status ?? "missing"} — 別アカウントへの誤操作を防ぐため停止`,
+    });
+    return { actions, noops, blockers, plan };
+  }
+
+  const units = inv.adUnits.units ?? [];
+  const existingNames = new Set(units.map((u) => u.displayName).filter(Boolean));
+
+  // D. 作成: desired のうち同名がまだ無いもの (exact duplicate check)
+  const missing = (inv.adUnits.desired ?? []).filter((d) => d.adUnitName && !existingNames.has(d.adUnitName));
+  if (missing.length === 0) {
+    noops.push({ action: "create-ad-unit", reason: "未作成の desired ユニットが無い (同名は重複作成しない)" });
+  } else {
+    const target = missing[0];
+    actions.push("create-ad-unit");
+    plan.push({ action: "create-ad-unit", adUnitName: target.adUnitName, format: target.format ?? null, exportName: target.exportName ?? null });
+    if (missing.length > 1) {
+      noops.push({
+        action: "create-ad-unit",
+        reason: `残り ${missing.length - 1} 件は次回 run へ繰り越す (1 run 1 件)`,
+      });
+    }
+  }
+
+  // E. 改名: コード側 adUnitName と AdSense displayName が slotId 一致で食い違うもの
+  const unitBySlotId = new Map(units.filter((u) => u.slotId).map((u) => [u.slotId, u]));
+  const renames = [];
+  for (const s of inv.adUnits.codeSlots ?? []) {
+    if (!s.adUnitName || !s.slotId) continue;
+    const u = unitBySlotId.get(s.slotId);
+    if (!u) continue; // ID が引けない → 推測で rename しない
+    if (u.displayName !== s.adUnitName) {
+      renames.push({ unitId: u.id, from: u.displayName, to: s.adUnitName, exportName: s.exportName });
+    }
+  }
+  if (renames.length === 0) {
+    noops.push({ action: "rename-ad-unit", reason: "コード側 adUnitName と AdSense 表示名の不一致が無い" });
+  } else {
+    const target = renames[0];
+    actions.push("rename-ad-unit");
+    plan.push({ action: "rename-ad-unit", ...target });
+    if (renames.length > 1) {
+      noops.push({ action: "rename-ad-unit", reason: `残り ${renames.length - 1} 件は次回 run へ繰り越す (1 run 1 件)` });
+    }
+  }
+
+  return { actions, noops, blockers, plan };
+}
+
+// ── 承認ゲート (C2) ───────────────────────────────────────────────────────────
+
+/**
+ * 計画そのものに対する承認トークンを決定的に作る (pure)。
+ *
+ * planned が 1 文字でも変われば token が変わるので、承認は「その計画」に対してだけ有効になる
+ * (古い承認を別の計画に流用できない)。
+ */
+export function plannedActionToken({ site, accountId, actions, plan }) {
+  const canonical = JSON.stringify({
+    site: site ?? "",
+    accountId: accountId ?? "",
+    actions: [...(actions ?? [])].sort(),
+    plan: [...(plan ?? [])]
+      .map((p) => JSON.stringify(Object.entries(p).sort(([a], [b]) => (a < b ? -1 : 1))))
+      .sort(),
+  });
+  return createHash("sha256").update(canonical).digest("hex").slice(0, 16);
+}
+
+/**
+ * mutation を実行してよいかを決める (pure)。
+ *
+ * `--force` 相当の迂回は用意しない (作れば必ず使われる)。
+ *
+ * @param {{argv:string[], site:string, expectedSite:string, expectedToken:string}} args
+ * @returns {{allowed:boolean, reason:string}}
+ */
+export function requireCommit({ argv, site, expectedSite, expectedToken }) {
+  const has = (flag) => argv.includes(flag);
+  const valueOf = (flag) => {
+    const i = argv.indexOf(flag);
+    return i >= 0 ? (argv[i + 1] ?? null) : null;
+  };
+  if (site !== expectedSite) {
+    return { allowed: false, reason: `--confirm-site が ${expectedSite} でない (${String(site)})` };
+  }
+  if (!has("--commit")) {
+    return { allowed: false, reason: "--commit が無い (既定は計画の出力のみ = draft-first)" };
+  }
+  const approve = valueOf("--approve");
+  if (!approve) {
+    return { allowed: false, reason: "--approve <token> が無い (計画に対するオーナー承認が必要)" };
+  }
+  if (approve !== expectedToken) {
+    return {
+      allowed: false,
+      reason: `--approve のトークンが計画と一致しない (計画が変わった可能性: expected ${expectedToken})`,
+    };
+  }
+  return { allowed: true, reason: "commit 承認済み" };
 }
 
 // ── browser apply (README「mutation手順」) ───────────────────────────────

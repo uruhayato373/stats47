@@ -33,6 +33,12 @@ import {
   classifyJobStatus,
   currencyFromHeaders,
   MANIFEST_FILE,
+  AD_UNITS_FILE,
+  AD_UNITS_JOB_NAME,
+  AD_UNIT_INVENTORY_FIELDS,
+  adUnitInventoryRow,
+  classifyInventoryStatus,
+  buildInventoryManifest,
 } from "./lib/adsense-report-contract.mjs";
 
 function requireEnv(name) {
@@ -80,6 +86,57 @@ function flatten(report) {
   });
 }
 
+/**
+ * 広告ユニット inventory を取得する (レポートではなく「今存在するユニットの一覧」)。
+ *
+ * adclients.list → adunits.list を辿り、各ユニットの adCode から data-ad-slot を抽出する。
+ * これで unit_id (= レポートの AD_UNIT_ID) と slot_id が同じ行に並び、コード側 slot 定数
+ * (apps/web/src/lib/google-adsense/constants.ts) と機械的に突き合わせられる。
+ *
+ * 個別ユニットの adCode 取得が失敗しても、そのユニットを落とさず slot_id を空にして続ける
+ * (一覧そのものは価値があるため)。取得できなかった件数は manifest の limitation に残す。
+ *
+ * @returns {Promise<{rows: object[], slotIdMissingCount: number}>}
+ */
+async function fetchAdUnitInventory(adsense, account) {
+  const rows = [];
+  let slotIdMissingCount = 0;
+
+  const clientsRes = await adsense.accounts.adclients.list({ parent: account });
+  const adClients = clientsRes.data.adClients || [];
+
+  for (const client of adClients) {
+    if (!client.name) continue;
+    let pageToken;
+    do {
+      const res = await adsense.accounts.adclients.adunits.list({
+        parent: client.name,
+        pageSize: 100,
+        ...(pageToken ? { pageToken } : {}),
+      });
+      const units = res.data.adUnits || [];
+      for (const unit of units) {
+        let adCode = null;
+        if (unit.name) {
+          try {
+            const codeRes = await adsense.accounts.adclients.adunits.getAdcode({ name: unit.name });
+            adCode = codeRes.data.adCode ?? null;
+          } catch (e) {
+            // adCode 単体の失敗はユニット行を落とす理由にしない (slot_id を空にして続ける)
+            console.error(`[adsense-snapshot] getAdcode failed for ${unit.name}:`, e.message || e);
+          }
+        }
+        const row = adUnitInventoryRow(unit, adCode);
+        if (!row.slot_id) slotIdMissingCount++;
+        rows.push(row);
+      }
+      pageToken = res.data.nextPageToken || undefined;
+    } while (pageToken);
+  }
+
+  return { rows, slotIdMissingCount };
+}
+
 /** job の取得期間を決定する (finalized7d 既定・pages は同じ後端の 30 日窓)。 */
 function jobPeriod(job, periods) {
   if (job.periodKind === "rolling30d" || job.windowDays === 30) {
@@ -106,6 +163,9 @@ async function main() {
         `  ${job.name.padEnd(22)} ${p.periodStart}..${p.periodEnd} dims=[${job.dimensions.join(",")}] metrics=${job.metrics.length}`,
       );
     }
+    console.log(
+      `  ${AD_UNITS_JOB_NAME.padEnd(22)} (inventory・期間なし) fields=[${AD_UNIT_INVENTORY_FIELDS.join(",")}]`,
+    );
     console.log(`out: ${outDir} (+ ${MANIFEST_FILE})`);
     return;
   }
@@ -165,6 +225,34 @@ async function main() {
       error,
     });
     summary.push(`${job.file}: ${rows.length} rows (${status})`);
+  }
+
+  // 広告ユニット inventory (レポート job とは独立。失敗しても report の全滅判定 okCount には数えない)
+  {
+    let invRows = [];
+    let invError = null;
+    let slotIdMissingCount = 0;
+    try {
+      const inv = await fetchAdUnitInventory(adsense, account);
+      invRows = inv.rows;
+      slotIdMissingCount = inv.slotIdMissingCount;
+      writeFileSync(join(outDir, AD_UNITS_FILE), toCsv(invRows, AD_UNIT_INVENTORY_FIELDS));
+    } catch (e) {
+      invError = e.message || String(e);
+      if (invError.includes("invalid_grant") || e.response?.data?.error === "invalid_grant") {
+        invalidGrant = true;
+      }
+      console.error(`[adsense-snapshot] ${AD_UNITS_JOB_NAME} failed:`, invError);
+    }
+    const invStatus = classifyInventoryStatus(invRows.length, { error: invError });
+    manifest.jobs[AD_UNITS_JOB_NAME] = buildInventoryManifest({
+      rowCount: invRows.length,
+      status: invStatus,
+      generatedAt,
+      slotIdMissingCount,
+      error: invError,
+    });
+    summary.push(`${AD_UNITS_FILE}: ${invRows.length} rows (${invStatus})`);
   }
 
   writeFileSync(join(outDir, MANIFEST_FILE), JSON.stringify(manifest, null, 2) + "\n");

@@ -10,7 +10,14 @@ import {
   AD_ID_DIMENSION,
   assertAllowed,
   decideActions,
+  decideAdUnitActions,
+  plannedActionToken,
+  requireCommit,
 } from "../apply-allowlisted-settings.mjs";
+import {
+  assertAdSenseAccount,
+  deriveDesiredAdUnits,
+} from "../audit-adsense.mjs";
 import { sanitize, sanitizeObject, redactEmail } from "../redact.mjs";
 import { acquireLock, releaseLock, LOCK_FILE, isLoginUrl } from "../browser-context.mjs";
 
@@ -24,8 +31,15 @@ const BASE_INV = {
   ga4AdImpressionObserved: true,
 };
 
-test("allowlist は 3 action のみ・allowlist 外は runtime で throw", () => {
-  assert.equal(ALLOWED_ACTIONS.length, 3);
+test("allowlist は意図した 5 action の集合そのもの・allowlist 外は runtime で throw", () => {
+  // 長さだけでなく集合を順序込みで固定する (意図しない 6 個目の混入も落とす)
+  assert.deepEqual(ALLOWED_ACTIONS, [
+    "create-search-console-link",
+    "publish-search-console-collection",
+    "create-ad-id-dimension",
+    "create-ad-unit",
+    "rename-ad-unit",
+  ]);
   for (const a of ALLOWED_ACTIONS) assert.equal(assertAllowed(a), a);
   for (const denied of [
     "delete-search-console-link",
@@ -34,9 +48,18 @@ test("allowlist は 3 action のみ・allowlist 外は runtime で throw", () =>
     "delete-custom-dimension",
     "submit-sitemap",
     "change-auto-ads",
+    // ad unit のうち破壊的・配信を即時に変えるものは denylist のまま
+    "delete-ad-unit",
+    "archive-ad-unit",
+    "change-ad-format",
+    "disable-ad-unit",
   ]) {
     assert.throws(() => assertAllowed(denied), /not in allowlist/);
   }
+});
+
+test("ALLOWED_ACTIONS は凍結されている (実行時に足せない)", () => {
+  assert.throws(() => ALLOWED_ACTIONS.push("create-ad-unit-2"), TypeError);
 });
 
 test("ad_id dimension の固定値", () => {
@@ -87,7 +110,8 @@ test("decision: AdSense link 未リンク表示 × ad_impression 実データあ
   const d = decideActions(inv);
   assert.ok(d.blockers.some((b) => b.code === "adsense-link-contradiction"));
   // AdSense link を作る action は allowlist に存在しない
-  assert.ok(!d.actions.some((a) => /adsense/.test(a)));
+  // (ad unit の 2 action は allowlist に入ったので、名前の部分一致ではなく明示的に判定する)
+  assert.ok(!d.actions.includes("create-adsense-link"));
 });
 
 test("decision: selector-drift (状態不明) では mutation を決めない (fail closed)", () => {
@@ -124,4 +148,167 @@ test("lock: 取得・多重拒否・解放", () => {
 test("isLoginUrl: Google ログイン画面の検知", () => {
   assert.ok(isLoginUrl("https://accounts.google.com/v3/signin/identifier?x=1"));
   assert.ok(!isLoginUrl("https://analytics.google.com/analytics/web/#/p463218070/admin"));
+});
+
+// ── ad unit action (C1) ───────────────────────────────────────────────────────
+
+const AD_UNIT_INV_OK = {
+  adsenseAccount: { status: "ok", accountId: "accounts/pub-7995274743017484" },
+  adUnits: {
+    status: "ok",
+    source: "api",
+    units: [
+      { id: "111", displayName: "stats47-hub-incontent", slotId: "8185387982" },
+      { id: "222", displayName: "サイドバー右上", slotId: "6180558947" },
+    ],
+    desired: [],
+    codeSlots: [
+      { exportName: "HUB_INCONTENT", slotId: "8185387982", adUnitName: "stats47-hub-incontent" },
+    ],
+  },
+};
+
+test("decision: inv.adUnits が無い呼び出しでは unit action を出さない (後方互換)", () => {
+  const d = decideActions(BASE_INV);
+  assert.ok(!d.actions.includes("create-ad-unit"));
+  assert.ok(!d.actions.includes("rename-ad-unit"));
+});
+
+test("decideAdUnitActions: desired と同名の unit が既存なら作成しない (exact duplicate check)", () => {
+  const inv = {
+    ...AD_UNIT_INV_OK,
+    adUnits: {
+      ...AD_UNIT_INV_OK.adUnits,
+      desired: [{ adUnitName: "stats47-hub-incontent", format: "article", exportName: "HUB_INCONTENT" }],
+    },
+  };
+  const d = decideAdUnitActions(inv);
+  assert.ok(!d.actions.includes("create-ad-unit"));
+  assert.ok(d.noops.some((n) => n.action === "create-ad-unit" && /重複作成しない/.test(n.reason)));
+});
+
+test("decideAdUnitActions: 未作成の desired は 1 件だけ作成し残りは繰り越す", () => {
+  const inv = {
+    ...AD_UNIT_INV_OK,
+    adUnits: {
+      ...AD_UNIT_INV_OK.adUnits,
+      desired: [
+        { adUnitName: "stats47-new-a", format: "article", exportName: "NEW_A" },
+        { adUnitName: "stats47-new-b", format: "rectangle", exportName: "NEW_B" },
+      ],
+    },
+  };
+  const d = decideAdUnitActions(inv);
+  assert.deepEqual(d.actions.filter((a) => a === "create-ad-unit"), ["create-ad-unit"]);
+  const planned = d.plan.filter((p) => p.action === "create-ad-unit");
+  assert.equal(planned.length, 1);
+  assert.equal(planned[0].adUnitName, "stats47-new-a");
+  assert.ok(d.noops.some((n) => /繰り越す/.test(n.reason)));
+});
+
+test("decideAdUnitActions: slotId 一致で表示名が違えば rename・ID が引けなければ何もしない", () => {
+  const mismatch = {
+    ...AD_UNIT_INV_OK,
+    adUnits: {
+      ...AD_UNIT_INV_OK.adUnits,
+      codeSlots: [{ exportName: "RANKING_SIDEBAR_TOP", slotId: "6180558947", adUnitName: "stats47-ranking-sidebar-top" }],
+    },
+  };
+  const d = decideAdUnitActions(mismatch);
+  assert.ok(d.actions.includes("rename-ad-unit"));
+  const r = d.plan.find((p) => p.action === "rename-ad-unit");
+  assert.equal(r.unitId, "222");
+  assert.equal(r.from, "サイドバー右上");
+  assert.equal(r.to, "stats47-ranking-sidebar-top");
+
+  // slotId が inventory に無い = ID が引けない → 推測で rename しない
+  const noId = {
+    ...AD_UNIT_INV_OK,
+    adUnits: {
+      ...AD_UNIT_INV_OK.adUnits,
+      codeSlots: [{ exportName: "UNKNOWN", slotId: "9999999999", adUnitName: "stats47-unknown" }],
+    },
+  };
+  const d2 = decideAdUnitActions(noId);
+  assert.ok(!d2.actions.includes("rename-ad-unit"));
+});
+
+test("decideAdUnitActions: inventory 不明・account assert 失敗では action 0 (fail closed)", () => {
+  const drift = decideAdUnitActions({ ...AD_UNIT_INV_OK, adUnits: { status: "selector-drift" } });
+  assert.deepEqual(drift.actions, []);
+  assert.ok(drift.blockers.some((b) => b.code === "adunits-unreadable"));
+
+  const badAccount = decideAdUnitActions({
+    ...AD_UNIT_INV_OK,
+    adsenseAccount: { status: "account-mismatch" },
+    adUnits: { ...AD_UNIT_INV_OK.adUnits, desired: [{ adUnitName: "stats47-new", exportName: "NEW" }] },
+  });
+  assert.deepEqual(badAccount.actions, []);
+  assert.ok(badAccount.blockers.some((b) => b.code === "adsense-account-assert-failed"));
+});
+
+// ── 承認ゲート (C2) ───────────────────────────────────────────────────────────
+
+test("plannedActionToken: 同一入力で安定・計画が変われば変わる", () => {
+  const base = { site: "stats47.jp", accountId: "accounts/pub-1", actions: ["create-ad-unit"], plan: [{ action: "create-ad-unit", adUnitName: "a" }] };
+  const t1 = plannedActionToken(base);
+  const t2 = plannedActionToken({ ...base, plan: [{ adUnitName: "a", action: "create-ad-unit" }] });
+  assert.equal(t1, t2, "キー順が違うだけの同一計画は同じ token");
+  assert.notEqual(t1, plannedActionToken({ ...base, plan: [{ action: "create-ad-unit", adUnitName: "b" }] }));
+  assert.notEqual(t1, plannedActionToken({ ...base, actions: ["rename-ad-unit"] }));
+  assert.notEqual(t1, plannedActionToken({ ...base, accountId: "accounts/pub-2" }));
+  assert.notEqual(t1, plannedActionToken({ ...base, site: "other.jp" }));
+});
+
+test("requireCommit: --commit / --approve / site の 3 条件すべてが要る", () => {
+  const token = "abc123";
+  const ok = requireCommit({ argv: ["apply", "--confirm-site", "stats47.jp", "--commit", "--approve", token], site: "stats47.jp", expectedSite: "stats47.jp", expectedToken: token });
+  assert.equal(ok.allowed, true);
+
+  const noCommit = requireCommit({ argv: ["apply", "--approve", token], site: "stats47.jp", expectedSite: "stats47.jp", expectedToken: token });
+  assert.equal(noCommit.allowed, false);
+  assert.match(noCommit.reason, /--commit/);
+
+  const noApprove = requireCommit({ argv: ["apply", "--commit"], site: "stats47.jp", expectedSite: "stats47.jp", expectedToken: token });
+  assert.equal(noApprove.allowed, false);
+  assert.match(noApprove.reason, /--approve/);
+
+  const wrongToken = requireCommit({ argv: ["apply", "--commit", "--approve", "zzz"], site: "stats47.jp", expectedSite: "stats47.jp", expectedToken: token });
+  assert.equal(wrongToken.allowed, false);
+  assert.match(wrongToken.reason, /一致しない/);
+
+  const wrongSite = requireCommit({ argv: ["apply", "--commit", "--approve", token], site: "other.jp", expectedSite: "stats47.jp", expectedToken: token });
+  assert.equal(wrongSite.allowed, false);
+
+  // --force 相当の迂回が効かないこと (そんなフラグは実装していない)
+  const forced = requireCommit({ argv: ["apply", "--force", "--commit"], site: "stats47.jp", expectedSite: "stats47.jp", expectedToken: token });
+  assert.equal(forced.allowed, false);
+});
+
+// ── AdSense account assert (C3) ───────────────────────────────────────────────
+
+test("assertAdSenseAccount: ちょうど 1 件で expected 一致のみ ok (他は fail closed)", () => {
+  const expected = "accounts/pub-7995274743017484";
+  assert.equal(assertAdSenseAccount([{ name: expected }], expected).status, "ok");
+  assert.equal(assertAdSenseAccount([], expected).status, "no-account");
+  assert.equal(assertAdSenseAccount([{ name: expected }, { name: "accounts/pub-2" }], expected).status, "multiple-accounts");
+  assert.equal(assertAdSenseAccount([{ name: "accounts/pub-999" }], expected).status, "account-mismatch");
+  assert.equal(assertAdSenseAccount([{ name: expected }], null).status, "expected-missing");
+});
+
+test("assertAdSenseAccount: 不一致の detail に実アカウント ID を出さない (漏洩防止)", () => {
+  const r = assertAdSenseAccount([{ name: "accounts/pub-999999" }], "accounts/pub-111111");
+  assert.equal(r.status, "account-mismatch");
+  assert.ok(!/pub-999999/.test(r.detail), "detail に別アカウントの ID を書かない");
+});
+
+test("deriveDesiredAdUnits: pending かつ slotId 未発行のものだけを対象にする", () => {
+  const slots = [
+    { exportName: "A", slotId: "", adUnitName: "stats47-a", format: "article", pending: true },
+    { exportName: "B", slotId: "1234567890", adUnitName: "stats47-b", format: "article", pending: true },
+    { exportName: "C", slotId: "", adUnitName: "stats47-c", format: "article", pending: false },
+    { exportName: "D", slotId: "", adUnitName: null, format: "article", pending: true },
+  ];
+  const desired = deriveDesiredAdUnits(slots);
+  assert.deepEqual(desired.map((d) => d.exportName), ["A"]);
 });
