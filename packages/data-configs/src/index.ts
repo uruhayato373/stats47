@@ -25,6 +25,14 @@ export {
 } from "./shape-gate";
 export { EXPECTED_SHAPE_ANOMALY, MAX_KNOWN_BROKEN } from "./expected-shape-anomaly";
 export {
+  MISSING,
+  combineLinear,
+  ratioPercent,
+  round1,
+  sumMembers,
+  toEstatValue,
+} from "./estat-transform";
+export {
   buildRecipe,
   canonicalRecipeJson,
   hash64,

@@ -11,6 +11,13 @@ export const teleworkRate: MetricConfig = {
     "statsDataId": "0004008436",
     "cdCat01": "0",
     "cdCat02": "00",
+    "cdCat04": "0",
+    "cdCat05": "0",
+    "axisRatio": {
+      "axis": "cat03",
+      "numeratorCodes": ["1"],
+      "denominatorCodes": ["0"],
+    },
     "displayName": "就業構造基本調査",
     "url": "https://www.stat.go.jp/data/shugyou/2022/index.html",
   },

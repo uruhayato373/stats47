@@ -9,7 +9,11 @@ export const vacantHousingRate: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004021440",
-    "cdCat01": "22",
+    "axisRatio": {
+      "axis": "cat01",
+      "numeratorCodes": ["22"],
+      "denominatorCodes": ["0"],
+    },
     "displayName": "住宅・土地統計調査",
     "url": "https://www.stat.go.jp/data/jyutaku/2023/index.html",
   },

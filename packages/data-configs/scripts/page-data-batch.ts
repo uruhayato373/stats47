@@ -36,10 +36,19 @@ import { fileURLToPath } from "node:url";
 import { listAllMetrics } from "../src/registry.js";
 import { buildRecipe, type MetricRecipe } from "../src/recipe.js";
 import { classifyEmptyOutcome } from "../src/expected-empty.js";
+import {
+  combineLinear,
+  ratioPercent,
+  round1,
+  sumMembers,
+  toEstatValue,
+} from "../src/estat-transform.js";
+// 既知破損 allowlist。★書いてよいかの判定には使わず、run を fail させるかだけに使う
 import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly.js";
 import {
   PREFECTURE_COUNT,
   classifyShape,
+  findExpectedShapeAnomaly,
   hasShapeError,
   summarizeShape,
   type ShapeSummary,
@@ -164,16 +173,13 @@ async function fetchEstatCombination(
 
   const values: EstatValue[] = order.map((key) => {
     const { area, time } = meta.get(key)!;
-    let sum = 0;
-    for (const { factor, byKey } of parts) {
-      const raw = byKey.get(key);
-      const n = raw === undefined ? null : parseEstatValue(raw);
-      if (n === null) return { "@area": area, "@time": time, $: "-" };
-      sum += n * factor;
-    }
-    // 浮動小数の誤差を落とす (307.6*12+375.4 が 4066.6000000000004 になる)。
-    // 元データが小数第 1 位までなので同じ精度に丸める。
-    return { "@area": area, "@time": time, $: String(Math.round(sum * 10) / 10) };
+    const combined = combineLinear(
+      parts.map(({ factor, byKey }) => {
+        const raw = byKey.get(key);
+        return { value: raw === undefined ? null : parseEstatValue(raw), factor };
+      }),
+    );
+    return { "@area": area, "@time": time, $: toEstatValue(combined) };
   });
 
   return { values, raw: { totalNumber, toNumber } };
@@ -185,28 +191,55 @@ async function fetchEstatCombination(
  * 欠測メンバーは 0 として扱う (その県にその区分が無いだけ)。ただし全メンバーが欠測なら
  * 合算せず欠測にする — 0 を捏造すると「貨物量 0 トンの県」を作ってしまう。
  */
-async function fetchEstatAxisSum(
+const AXIS_PARAM = {
+  cat01: "cdCat01",
+  cat02: "cdCat02",
+  cat03: "cdCat03",
+  cat04: "cdCat04",
+  cat05: "cdCat05",
+} as const;
+
+type EstatAxisName = keyof typeof AXIS_PARAM;
+
+/** 軸メンバーを個別取得して (area, time) ごとに合算した結果 */
+interface AxisMemberSum {
+  /** key = `area|time`。全メンバー欠測なら null (0 を捏造しない) */
+  byKey: Map<string, number | null>;
+  /** 出現順のキー列 (出力順の安定用) */
+  order: string[];
+  meta: Map<string, { area: string; time: string }>;
+  raw: { totalNumber: number; toNumber: number };
+}
+
+/**
+ * 指定軸の複数コードを個別に取得し、(area, time) をキーに合算する。
+ *
+ * 欠測メンバーは 0 として扱う (その県にその区分が無いだけ)。ただし全メンバーが欠測なら
+ * null にする — 0 を捏造すると「貨物量 0 トンの県」を作ってしまう。
+ *
+ * `axisSum` と `axisRatio` (分子・分母) が共有する。まとめて取って後で分ける方式は
+ * `@cat0N` が返る保証を前提にするうえ limit 打ち切りの risk があるので採らない。
+ */
+async function sumAxisMembers(
   appId: string,
   config: Extract<SourceConfig, { kind: "estat" }>,
-  axisSum: NonNullable<Extract<SourceConfig, { kind: "estat" }>["axisSum"]>,
-): Promise<EstatFetchResult> {
-  const paramOf = {
-    cat01: "cdCat01",
-    cat02: "cdCat02",
-    cat03: "cdCat03",
-    cat04: "cdCat04",
-    cat05: "cdCat05",
-  } as const;
-  const key = paramOf[axisSum.axis];
-
+  axis: EstatAxisName,
+  codes: readonly string[],
+): Promise<AxisMemberSum> {
+  const key = AXIS_PARAM[axis];
   const parts: Array<Map<string, string>> = [];
   let totalNumber = 0;
   let toNumber = 0;
   const order: string[] = [];
   const meta = new Map<string, { area: string; time: string }>();
 
-  for (const code of axisSum.codes) {
-    const part = await fetchEstatData(appId, { ...config, [key]: code, axisSum: undefined });
+  for (const code of codes) {
+    const part = await fetchEstatData(appId, {
+      ...config,
+      [key]: code,
+      axisSum: undefined,
+      axisRatio: undefined,
+    });
     totalNumber += part.raw.totalNumber;
     toNumber += part.raw.toNumber;
     const byKey = new Map<string, string>();
@@ -221,22 +254,88 @@ async function fetchEstatAxisSum(
     parts.push(byKey);
   }
 
+  const byKey = new Map<string, number | null>();
+  for (const k of order) {
+    byKey.set(
+      k,
+      sumMembers(
+        parts.map((partMap) => {
+          const raw = partMap.get(k);
+          return raw === undefined ? null : parseEstatValue(raw);
+        }),
+      ),
+    );
+  }
+
+  return { byKey, order, meta, raw: { totalNumber, toNumber } };
+}
+
+async function fetchEstatAxisSum(
+  appId: string,
+  config: Extract<SourceConfig, { kind: "estat" }>,
+  axisSum: NonNullable<Extract<SourceConfig, { kind: "estat" }>["axisSum"]>,
+): Promise<EstatFetchResult> {
+  const { byKey, order, meta, raw } = await sumAxisMembers(
+    appId,
+    config,
+    axisSum.axis,
+    axisSum.codes,
+  );
+
   const values: EstatValue[] = order.map((k) => {
     const { area, time } = meta.get(k)!;
-    let sum = 0;
-    let present = 0;
-    for (const byKey of parts) {
-      const raw = byKey.get(k);
-      const n = raw === undefined ? null : parseEstatValue(raw);
-      if (n === null) continue; // その区分が無い県 = 0 として扱う
-      sum += n;
-      present++;
-    }
-    if (present === 0) return { "@area": area, "@time": time, $: "-" };
-    return { "@area": area, "@time": time, $: String(Math.round(sum * 10) / 10) };
+    const sum = byKey.get(k) ?? null;
+    return { "@area": area, "@time": time, $: toEstatValue(sum === null ? null : round1(sum)) };
   });
 
-  return { values, raw: { totalNumber, toNumber } };
+  return { values, raw };
+}
+
+/**
+ * 同一軸のメンバーから率を作る (分子の和 / 分母の和 × 100)。
+ *
+ * 「率」の表章項目を持たず実数だけを載せる表が多いのでこれが要る。
+ * 分母は「総数コード」でも「部分の合計」でもよい (どちらも配列で書く)。
+ *
+ * 欠測の扱い:
+ *   - 分母が null / 0 以下 → 欠測 `"-"` (0 除算も 0% も捏造しない)
+ *   - 分子が null → 欠測 `"-"` (分子不明を 0% と言い切らない)
+ *
+ * 分子と分母を取り違えると 100 を大きく超えるので、
+ * shape-gate の percent 検査 (unit が % のとき値域を見る) が自動で弾く。
+ */
+async function fetchEstatAxisRatio(
+  appId: string,
+  config: Extract<SourceConfig, { kind: "estat" }>,
+  axisRatio: NonNullable<Extract<SourceConfig, { kind: "estat" }>["axisRatio"]>,
+): Promise<EstatFetchResult> {
+  const numerator = await sumAxisMembers(
+    appId,
+    config,
+    axisRatio.axis,
+    axisRatio.numeratorCodes,
+  );
+  const denominator = await sumAxisMembers(
+    appId,
+    config,
+    axisRatio.axis,
+    axisRatio.denominatorCodes,
+  );
+
+  // 分母がある (area, time) だけが率を持ちうる
+  const values: EstatValue[] = denominator.order.map((k) => {
+    const { area, time } = denominator.meta.get(k)!;
+    const pct = ratioPercent(numerator.byKey.get(k) ?? null, denominator.byKey.get(k) ?? null);
+    return { "@area": area, "@time": time, $: toEstatValue(pct) };
+  });
+
+  return {
+    values,
+    raw: {
+      totalNumber: numerator.raw.totalNumber + denominator.raw.totalNumber,
+      toNumber: numerator.raw.toNumber + denominator.raw.toNumber,
+    },
+  };
 }
 
 async function fetchEstatData(
@@ -245,6 +344,9 @@ async function fetchEstatData(
 ): Promise<EstatFetchResult> {
   if (config.tabCombination && config.tabCombination.length > 0) {
     return fetchEstatCombination(appId, config, config.tabCombination);
+  }
+  if (config.axisRatio) {
+    return fetchEstatAxisRatio(appId, config, config.axisRatio);
   }
   if (config.axisSum && config.axisSum.codes.length > 0) {
     return fetchEstatAxisSum(appId, config, config.axisSum);
@@ -720,21 +822,39 @@ async function processOne(
         raw,
         priorSummary,
         now: new Date(),
-        allowlist: EXPECTED_SHAPE_ANOMALY,
+        // ★取り込み時は allowlist を **書いてよいかの判定には使わない**。
+        //
+        //   allowlist の意味は「**いま R2 にある公開済みデータ**が壊れているのを知っている」
+        //   であって「新しく取ってくるデータも壊れていてよい」ではない。ここで適用すると、
+        //   config を是正したのに分子分母を取り違えた、といった**新しい壊れ方**が
+        //   `allowed` に落ちてそのまま書き込まれる (2026-07-30 に空き家率の陰性対照で
+        //   実際に確認: 1076% が allowlist の重症度 896500 を下回るため素通りした)。
+        //   重症度ラチェットは「悪化」しか見ないので、この穴は塞げない。
+        //
+        //   allowlist は下で **run を fail させるかどうか**にだけ使う (既知の破損で
+        //   毎晩 CI を赤くしない)。意図的な書き込み例外は --allow-shape で 1 回ずつ明示する。
         cliAllowed: allowShape,
       });
       if (violations.length === 0) return true;
 
       for (const v of violations) {
-        if (v.isError) {
+        // 既知の破損か = run を fail させないでよいか。**書くかどうかとは別の判断**。
+        const known =
+          v.isError &&
+          findExpectedShapeAnomaly(EXPECTED_SHAPE_ANOMALY, config.key, v.check, entity, new Date()) !== null;
+        if (v.isError && !known) {
           hardShape = true;
           console.error(`  [shape] ${v.message}`);
+        } else if (v.isError) {
+          softShape = true;
+          console.warn(`  [shape:known-broken] ${v.message} (既知のため run は継続。書き込みはしない)`);
         } else {
           softShape = true;
           console.warn(`  [shape:allowed] ${v.message}`);
         }
-        shapeNotes.push(`${entity}:${v.check}${v.isError ? "" : ":allowed"}`);
+        shapeNotes.push(`${entity}:${v.check}${v.isError ? (known ? ":known" : "") : ":allowed"}`);
       }
+      // ★既知でも壊れていれば書かない (R2 の既存データが温存されるだけ)
       return !hasShapeError(violations);
     }
 
