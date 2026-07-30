@@ -18,10 +18,16 @@ import "dotenv/config";
  *   NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
  *     tsx packages/ai-content/src/scripts/generate-parallel.ts \
  *       [--model claude-haiku|claude-sonnet|claude-opus|gemini] [--concurrency N] \
- *       [--limit N] [--area prefecture] [--force] [--out <dir>] [--dry-run] [--keys k1,k2]
+ *       [--limit N] [--area prefecture] [--force] [--out <dir>] [--dry-run] [--keys k1,k2] \
+ *       [--retries N] [--outbox]
  *
  *   --dry-run : callAI を呼ばず、各 key の prompt 長と「書き込む予定の staging パス」だけ出す (LLM 課金なし)
  *   --keys    : 対象 key をカンマ区切りで明示 (pending 走査をスキップ)
+ *   --retries : ゲート落ち / JSON 崩れ時に同じ prompt でやり直す回数 (既定 1)。安価モデルの
+ *               失敗率を実行時間で吸収する。**ゲートを緩めて通すことはしない**
+ *   --outbox  : staging ではなく git 公開 outbox (data/ai-content-staging/<key>.json) へ書く。
+ *               R2 creds を持たない環境 (クラウドセッション / Routine) はこちらを使い、
+ *               develop へ push すると publish-ai-content.yml が gate → R2 → CDN purge まで実行する
  *   --out     : staging dir (default .local/r2 = push ツールの固定ルート)。配下に app/ranking/<key>/ai-content.json
  *               → push は `push-r2-wrangler.ts app/ranking --apply` または `diff-push-r2.ts --prefix app/ranking`
  *                 (両者とも .local/r2 を読む。ai-content だけを surgical に push したいなら .local/r2/app/ranking に
@@ -63,6 +69,8 @@ interface Options {
   keys: string[] | null;
   /** ゲート落ち / JSON 崩れ時に同じ prompt でやり直す回数 (0 = 再試行しない) */
   retries: number;
+  /** true なら git 公開 outbox (data/ai-content-staging/<key>.json) へ書く (R2 creds 不要の公開経路) */
+  outbox: boolean;
 }
 
 function parseArgs(): Options {
@@ -82,6 +90,7 @@ function parseArgs(): Options {
     dryRun: a.includes("--dry-run"),
     keys: get("--keys")?.split(",").map((s) => s.trim()).filter(Boolean) ?? null,
     retries: Number(get("--retries") ?? 1),
+    outbox: a.includes("--outbox"),
   };
 }
 
@@ -180,6 +189,22 @@ function writeStaging(outDir: string, row: AiContentSnapshotRow): string {
   return dest;
 }
 
+/**
+ * git 公開 outbox (`data/ai-content-staging/<rankingKey>.json`) へ書き出す。
+ *
+ * R2 creds を持たない実行環境 (クラウドセッション / Routine) から公開へ届けるための経路。
+ * develop に push すると publish-ai-content.yml が gate → R2 push → CDN purge → outbox 削除
+ * まで自動実行する。**パスは階層化せずフラット**にすること (workflow の検出 glob が
+ * `data/ai-content-staging/*.json` なので、`app/ranking/<key>/` 配下に置くと拾われない)。
+ */
+function writeOutbox(row: AiContentSnapshotRow): string {
+  const dir = path.join(PROJECT_ROOT, "data/ai-content-staging");
+  mkdirSync(dir, { recursive: true });
+  const dest = path.join(dir, `${row.rankingKey}.json`);
+  writeFileSync(dest, JSON.stringify(row, null, 2) + "\n", "utf-8");
+  return dest;
+}
+
 // ============================================================
 // 1 件処理
 // ============================================================
@@ -206,7 +231,9 @@ async function processOne(
     const { meta, prompt } = built;
 
     if (opts.dryRun) {
-      const dest = path.join(opts.outDir, aiContentKeyPath(rankingKey));
+      const dest = opts.outbox
+        ? path.join(PROJECT_ROOT, "data/ai-content-staging", `${rankingKey}.json`)
+        : path.join(opts.outDir, aiContentKeyPath(rankingKey));
       process.stdout.write(
         `[DRY] ${rankingKey} (${meta.yearCode}): prompt ${prompt.length}字 → ${dest}\n`,
       );
@@ -264,7 +291,7 @@ async function processOne(
         continue;
       }
 
-      const dest = writeStaging(opts.outDir, row);
+      const dest = opts.outbox ? writeOutbox(row) : writeStaging(opts.outDir, row);
       const note = attempt > 1 ? ` (attempt ${attempt})` : "";
       process.stdout.write(`[OK] ${rankingKey} (${meta.yearCode})${note} → ${dest}\n`);
       counters.ok++;

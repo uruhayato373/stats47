@@ -99,6 +99,17 @@ R2 values.json + correlation + metric config
   → R2 app/ranking/<key>/ai-content.json (CI push: publish-ai-content.yml、develop push で発火)
 ```
 
+**公開までの受け渡しは 2 経路あり、実行環境で選ぶ** (混同すると生成物が公開に到達しない):
+
+| 実行環境 | 出力先 | 公開手段 |
+|---|---|---|
+| R2 creds あり (ローカル / CI) | `.local/r2/app/ranking/<key>/ai-content.json` (既定) | `diff-push-r2 --prefix app/ranking` |
+| **creds なし (クラウドセッション / Routine)** | `data/ai-content-staging/<key>.json` (`--outbox`) | develop へ push → `publish-ai-content.yml` が gate → R2 → CDN purge → outbox 削除 |
+
+outbox は**フラットな `<rankingKey>.json`** でなければならない (workflow の検出 glob が
+`data/ai-content-staging/*.json` なので `app/ranking/<key>/` 配下に置くと拾われない)。
+`--out data/ai-content-staging` では階層が付くため公開されない → **`--outbox` を使う**。
+
 - blog の `quality-gate.mjs` / blog-critic / `review.md` モデルを流用 (実装パターン再利用・drift 防止)。
 - スクリプト配置は `.claude/scripts/ai-content/` (`skill-code-placement.md` 準拠)。R2 書き込みは CI 専用 (`r2-storage-design.md`)。
 - **安いモデルで数をこなす方針** (無料枠の Gemini CLI 等) を採る場合、品質は「モデルを賢くする」ではなく
