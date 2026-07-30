@@ -11,6 +11,8 @@ export const freelanceCount: MetricConfig = {
     "statsDataId": "0004008516",
     "cdCat01": "0",
     "cdCat02": "0",
+    "cdCat03": "0",
+    "cdCat04": "00",
     "displayName": "就業構造基本調査",
     "url": "https://www.stat.go.jp/data/shugyou/2022/index.html",
   },

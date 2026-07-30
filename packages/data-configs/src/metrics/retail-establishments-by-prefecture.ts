@@ -10,6 +10,7 @@ export const retailEstablishmentsByPrefecture: MetricConfig = {
     "statsDataId": "0004003256",
     "cdCat01": "9",
     "cdCat02": "I2",
+    "cdTab": "701-2021",
     "displayName": "小売業事業所数（経済センサス活動調査2021）",
     "url": "https://www.e-stat.go.jp/dbview?sid=0004003256",
   },

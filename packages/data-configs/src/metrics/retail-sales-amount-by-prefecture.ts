@@ -12,6 +12,8 @@ export const retailSalesAmountByPrefecture: MetricConfig = {
     "statsDataId": "0004003259",
     "cdCat01": "I2",
     "cdCat02": "0",
+    "cdCat03": "0",
+    "cdTab": "703-2021",
     "displayName": "小売業年間商品販売額（経済センサス活動調査2021）",
     "url": "https://www.e-stat.go.jp/dbview?sid=0004003259",
   },
