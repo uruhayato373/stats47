@@ -35,8 +35,7 @@ export const practicalNurseAnnualIncome: MetricConfig = {
     "decimalPlaces": 1,
   },
   "calculation": {
-    "isCalculated": true,
-    "formula": "monthly*12+bonus",
+    "isCalculated": false,
     "normalizationOptions": [
       {
         "type": "per_population",

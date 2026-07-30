@@ -51,8 +51,8 @@ export interface RecipeOps {
   tabCombination?: ReadonlyArray<{ cdTab: string; factor: number }>;
   /** 指定軸のメンバー合算 (総数コードが無い / 一部県にしか出ない軸用) */
   axisSum?: { axis: EstatAxis; codes: readonly string[] };
-  /** 同一軸の 2 メンバーから率を作る (分子 / 分母 × 100) */
-  axisRatio?: { axis: EstatAxis; numeratorCode: string; denominatorCode: string };
+  /** 同一軸のメンバーから率を作る (分子の和 / 分母の和 × 100)。1 コードでも配列 */
+  axisRatio?: { axis: EstatAxis; numeratorCodes: readonly string[]; denominatorCodes: readonly string[] };
   /** 年計のみ採用 (月次・四半期を同じ表に持つ統計用) */
   timeScope?: "annual";
   /** 地域が area 軸ではなく cat 軸に入っている表の写像 */
@@ -205,10 +205,11 @@ function buildOps(config: MetricConfig): RecipeOps | undefined {
       ops.axisSum = { axis: s.axisSum.axis, codes: [...s.axisSum.codes].sort() };
     }
     if (s.axisRatio) {
+      // 分子・分母とも和なのでコードを整列して正準形にする
       ops.axisRatio = {
         axis: s.axisRatio.axis,
-        numeratorCode: s.axisRatio.numeratorCode,
-        denominatorCode: s.axisRatio.denominatorCode,
+        numeratorCodes: [...s.axisRatio.numeratorCodes].sort(),
+        denominatorCodes: [...s.axisRatio.denominatorCodes].sort(),
       };
     }
     if (s.timeScope) ops.timeScope = s.timeScope;
@@ -296,6 +297,10 @@ function parseAxis(v: unknown): EstatAxis | undefined {
   return typeof v === "string" && AXES.has(v) ? (v as EstatAxis) : undefined;
 }
 
+function parseCodeList(value: unknown): string[] {
+  return Array.isArray(value) ? value.filter((c): c is string => typeof c === "string") : [];
+}
+
 function parseOps(value: unknown): RecipeOps | undefined {
   if (!isRecord(value)) return undefined;
   const ops: RecipeOps = {};
@@ -310,18 +315,16 @@ function parseOps(value: unknown): RecipeOps | undefined {
 
   if (isRecord(value.axisSum)) {
     const axis = parseAxis(value.axisSum.axis);
-    const codes = Array.isArray(value.axisSum.codes)
-      ? value.axisSum.codes.filter((c): c is string => typeof c === "string")
-      : [];
+    const codes = parseCodeList(value.axisSum.codes);
     if (axis && codes.length > 0) ops.axisSum = { axis, codes };
   }
 
   if (isRecord(value.axisRatio)) {
     const axis = parseAxis(value.axisRatio.axis);
-    const numeratorCode = optString(value.axisRatio.numeratorCode);
-    const denominatorCode = optString(value.axisRatio.denominatorCode);
-    if (axis && numeratorCode && denominatorCode) {
-      ops.axisRatio = { axis, numeratorCode, denominatorCode };
+    const numeratorCodes = parseCodeList(value.axisRatio.numeratorCodes);
+    const denominatorCodes = parseCodeList(value.axisRatio.denominatorCodes);
+    if (axis && numeratorCodes.length > 0 && denominatorCodes.length > 0) {
+      ops.axisRatio = { axis, numeratorCodes, denominatorCodes };
     }
   }
 

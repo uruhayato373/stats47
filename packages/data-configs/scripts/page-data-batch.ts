@@ -34,6 +34,7 @@ import { readFileSync, writeFileSync, mkdirSync, statSync, existsSync } from "no
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { listAllMetrics } from "../src/registry.js";
+import { buildRecipe, type MetricRecipe } from "../src/recipe.js";
 import { classifyEmptyOutcome } from "../src/expected-empty.js";
 import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly.js";
 import {
@@ -465,8 +466,23 @@ function assignRanks(rows: ShapedRow[]): void {
   }
 }
 
+/**
+ * 書き出す payload の meta。
+ *
+ * ★`recipe` を **必須**にしている。値を書く経路で焼き忘れると型エラーになり、
+ * 「値はあるがどう作ったか分からない」状態を構造的に作れなくする。
+ * (`StatsValuesPayload` 側は旧 payload を読めるよう optional。書き手だけが必須)
+ */
+interface WrittenStatsMeta {
+  rowCount: number;
+  yearRange: [string, string] | null;
+  areaCount: number;
+  generatedAt: string;
+  recipe: MetricRecipe;
+}
+
 /** meta を組み立てる共通処理 */
-function buildMeta(rows: ShapedRow[]) {
+function buildMeta(config: MetricConfig, rows: ShapedRow[]): WrittenStatsMeta {
   const years = Array.from(new Set(rows.map((r) => r.yearCode))).sort();
   const areas = new Set(rows.map((r) => r.areaCode));
   return {
@@ -476,6 +492,8 @@ function buildMeta(rows: ShapedRow[]) {
       | null,
     areaCount: areas.size,
     generatedAt: new Date().toISOString(),
+    // 値の隣にレシピを焼く。監査 (検査 k) がこの configHash と現在の config を突き合わせる
+    recipe: buildRecipe(config),
   };
 }
 
@@ -502,7 +520,7 @@ function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
         : a.yearCode.localeCompare(b.yearCode),
     );
   assignRanks(rows);
-  return { metricKey: config.key, entityKind: "prefecture" as const, rows, meta: buildMeta(rows) };
+  return { metricKey: config.key, entityKind: "prefecture" as const, rows, meta: buildMeta(config, rows) };
 }
 
 /** 取得 raw values → StatsValues 構造 (city)。areaName(市区町村マスタ join)/unit/yearName/rank を付与。 */
@@ -529,7 +547,7 @@ function shapeForCity(config: MetricConfig, values: EstatValue[]) {
         : a.yearCode.localeCompare(b.yearCode),
     );
   assignRanks(rows);
-  return { metricKey: config.key, entityKind: "city" as const, rows, meta: buildMeta(rows) };
+  return { metricKey: config.key, entityKind: "city" as const, rows, meta: buildMeta(config, rows) };
 }
 
 type ProcessStatus =

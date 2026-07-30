@@ -14,6 +14,8 @@
  *       コミット 67168f54 が残した follow-up の完成。
  */
 import {
+  buildRecipe,
+  resolveAttribution,
   resolveMetricProvenance,
   type MetricConfig,
   type MetricRegistry,
@@ -135,6 +137,17 @@ function buildVisualization(config: MetricConfig): VisualizationConfig {
   };
 }
 
+/** config が持つ複数の命名ゆれから計算種別を 1 つに正規化する */
+const CALCULATION_TYPES = new Set(["ratio", "per_capita", "subtraction"]);
+
+function resolveCalculationType(
+  c: MetricConfig["calculation"],
+): CalculationConfig["type"] | undefined {
+  // 歴史的に `type` と `calculationType` の 2 通りがある (gender-wage-gap は後者)
+  const raw = c?.type ?? c?.calculationType;
+  return raw && CALCULATION_TYPES.has(raw) ? (raw as CalculationConfig["type"]) : undefined;
+}
+
 function buildCalculation(config: MetricConfig): CalculationConfig | null {
   const c = config.calculation;
   // normalizationOptions は legacy で display 側に入る metric もある
@@ -142,31 +155,67 @@ function buildCalculation(config: MetricConfig): CalculationConfig | null {
     (c?.normalizationOptions as NormalizationOption[] | undefined) ??
     (config.display?.normalizationOptions as NormalizationOption[] | undefined);
   if (!c && !normalizationOptions) return null;
+
+  // ★`type` を焼く。焼かないと calculate-ranking-values.ts の
+  //   `if (!calculation?.isCalculated || !calculation.type) return []` に必ず引っかかり、
+  //   計算型 metric のオンデマンド取得が**全件空**になる (2026-07-30 に発見)。
+  const type = resolveCalculationType(c);
+  // 分子・分母キーも命名ゆれ (numeratorKey / numerator / numeratorRankingKey) を吸収する
+  const numeratorKey = c?.numeratorKey ?? c?.numeratorRankingKey ?? c?.numerator;
+  const denominatorKey = c?.denominatorKey ?? c?.denominatorRankingKey ?? c?.denominator;
+
   return {
     isCalculated: c?.isCalculated ?? false,
-    ...(c?.numeratorKey ? { numeratorKey: c.numeratorKey } : {}),
-    ...(c?.denominatorKey ? { denominatorKey: c.denominatorKey } : {}),
-    ...(c?.formula ? { formula: c.formula } : {}),
+    ...(type ? { type } : {}),
+    ...(numeratorKey ? { numeratorKey } : {}),
+    ...(denominatorKey ? { denominatorKey } : {}),
+    // ★`formula` (自由文字列) は焼かない。repo 全体で読むコードが 1 つも無く、
+    //   実行と結びついていないため実装と乖離しうる。正確で実行可能な表現は
+    //   sourceConfig.recipe が持つ (tabCombination / axisRatio / axisSum)。
     ...(normalizationOptions ? { normalizationOptions } : {}),
   };
 }
 
-/** config.source (取り込み union) → 表示用 SourceProvenance に再構築 */
+/**
+ * config.source → item.json の `sourceConfig`。
+ *
+ * ## 旧形の何が問題だったか
+ *
+ * 旧実装は statsDataId / cdCat01 / cdCat02 だけを**手選び**して flat に置いていた。
+ * オンデマンド取得経路がこれを丸ごと spread して e-Stat に渡すため、
+ *   - cdCat03/04/05・cdTab が落ちて多系列が混入する
+ *   - `source` / `note` のような非クエリキーが param に混ざる
+ * という 2 つの穴があった。155 metric の config 是正がこの経路に届かなかった原因。
+ *
+ * ## 新形
+ *
+ * 実行可能部 (`estatParams`) と宣言演算 (`recipe.ops`) を分離する。手選びをやめ、
+ * `buildRecipe` (取り込み・監査と同じ関数) から機械生成するのでコピーがドリフトしない。
+ *
+ * `statsDataId` / `cdCat01` を top-level にも残すのは、survey-bucketing が SSDS 判定に
+ * 使っているため (後方互換)。R2 全面再生成後に bucketing を recipe 参照へ寄せる。
+ */
 function buildSourceProvenance(config: MetricConfig): SourceProvenance | null {
   const s = config.source;
   if (!s) return null;
+  const recipe = buildRecipe(config);
   const name = "displayName" in s ? s.displayName : undefined;
   const url = "url" in s ? s.url : undefined;
-  const provenance: SourceProvenance = {};
-  if (s.kind === "estat") {
-    if (s.statsDataId) provenance.statsDataId = s.statsDataId;
-    if (s.cdCat01) provenance.cdCat01 = s.cdCat01;
-    if (s.cdCat02) provenance.cdCat02 = s.cdCat02;
-  }
+
+  const provenance: SourceProvenance = { recipe };
+  if (recipe.estatParams) provenance.estatParams = recipe.estatParams;
+  if (recipe.derived) provenance.derived = true;
+
+  // 後方互換: survey-bucketing (SSDS 原典解決) が参照する 2 キー
+  const statsDataId = recipe.estatParams?.statsDataId ?? recipe.refetch?.statsDataId;
+  const cdCat01 = recipe.estatParams?.cdCat01 ?? recipe.refetch?.cdCat01;
+  if (statsDataId) provenance.statsDataId = statsDataId;
+  if (cdCat01) provenance.cdCat01 = cdCat01;
+
   if (name || url) {
     provenance.source = { ...(name ? { name } : {}), ...(url ? { url } : {}) };
   }
-  return Object.keys(provenance).length > 0 ? provenance : null;
+  return provenance;
 }
 
 /**
@@ -179,6 +228,7 @@ export function buildRankingItemFromMetric(
 ): RankingItem {
   const { latestYear, availableYears } = buildYears(config, ctx.values);
   const { surveyIds, originalSurveys } = resolveSurveyLinkage(config, ctx.registry);
+  const sourceConfig = buildSourceProvenance(config);
 
   return {
     rankingKey: config.key,
@@ -203,7 +253,11 @@ export function buildRankingItemFromMetric(
     surveyIds,
     originalSurveys,
     dataSourceId: config.source?.kind ?? "estat",
-    sourceConfig: buildSourceProvenance(config),
+    sourceConfig,
+    // ★builder が attribution を焼く。以前は per-url exporter だけが焼いていたため、
+    //   generator が後から走ると attribution が消えていた (書き手が 2 系統あった)。
+    //   exporter 側は焼かれた値をそのまま尊重する。
+    attribution: resolveAttribution(sourceConfig?.statsDataId, sourceConfig?.cdCat01),
     seoTitle: config.seoTitle ?? null,
     seoDescription: config.seoDescription ?? null,
     hook: resolveRankingHook({

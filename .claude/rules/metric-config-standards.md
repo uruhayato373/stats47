@@ -129,6 +129,63 @@ getMetaInfo から未指定軸を列挙し、title と軸コード名の一致�
 全趣味の合計が配信され、形状ゲートは 47 行 1 系列なので**通ってしまう**。
 判定ロジックの正典は `packages/data-configs/src/axis-match.ts` (回帰テストつき)。
 
+## 取得レシピ (MetricRecipe) — 出典だけでは値は決まらない（2026-07-30）
+
+配信データの正しさは `statsDataId` だけでは決まらない。**軸 pin (cdCat01-05)・tab 選択・
+線形結合・軸合算・率・時間粒度・地域軸**が揃って初めて決まる。この一式を「レシピ」と呼び、
+`packages/data-configs/src/recipe.ts` の **`buildRecipe(config)` が唯一の生成元**とする。
+
+### 宣言演算 (これがあると単発クエリでは再現できない)
+
+| フィールド | 用途 | 例 |
+|---|---|---|
+| `tabCombination` | 複数 tab の線形結合 | 年収 = 月額 tab08 × 12 + 賞与 tab12 × 1 |
+| `axisSum` | 軸メンバーの合算 (総数コードが無い / 一部県にしか出ない) | 港湾の輸送形態 |
+| `axisRatio` | 部分 / 部分の合計 × 100 | 非正規率 = 322 / (321+322) |
+| `timeScope: "annual"` | 年計のみ採用 (月次・四半期を持つ表) | 商業動態統計 |
+| `areaAxis` | 都道府県が area 軸ではなく cat 軸にある表 | 患者調査 (cat03 に 1〜48) |
+| (kakei-chousa) | 県庁所在市 → 都道府県の写像 | 家計調査 694 件すべて |
+
+### 両端で同一定義 (手選びコピーを作らない)
+
+```
+buildRecipe(config)  ←─ page-data-batch (値を書く)   → app/stats/<key>/values.json の meta.recipe
+                     ←─ builder (item を組む)         → app/ranking/<key>/item.json の sourceConfig.recipe
+                     ←─ 監査 (検査 k)                 → configHash を突き合わせて stale を検知
+```
+
+`configHash` は **クエリと変換だけ**の指紋。`years` や `title` は含めない
+(年を伸ばしただけで全件不整合になるのを避ける。カバレッジは shape-gate が別に見る)。
+
+### item.json `sourceConfig` の形 (★丸ごと spread しない)
+
+```jsonc
+{
+  "estatParams": { "statsDataId": "...", "cdCat01": "...", "cdCat03": "..." },  // これだけ spread してよい
+  "recipe":      { "kind": "estat", "ops": {...}, "derived": true, "configHash": "..." },
+  "derived":     true,           // true なら e-Stat を叩かず正典 values.json を読む
+  "statsDataId": "...",          // 後方互換 (survey-bucketing の SSDS 判定)
+  "source":      { "name": "...", "url": "..." }
+}
+```
+
+オンデマンド取得は必ず `resolveEstatParams()` / `isDerivedSource()`
+(`packages/ranking/src/utils/source-config.ts`) を通す。`sourceConfig` を丸ごと spread すると
+cdCat03 以降が落ちて多系列が混入し、`source`/`note` が param に混ざる。
+
+### 禁止
+
+| NG | OK |
+|---|---|
+| `sourceConfig` を丸ごと e-Stat に spread | `resolveEstatParams()` の返り値だけ |
+| derived metric を e-Stat 単発クエリで再取得 | 正典 `app/stats/<key>/values.json` を読む |
+| `calculation.formula` に自由文字列で計算式を書く | `tabCombination` / `axisRatio` / `axisSum` で宣言する (実行される) |
+| 取り込み時に計算する metric に `isCalculated: true` | `false`。`isCalculated` は **他 metric を参照して実行時計算する**ものだけ |
+
+`isCalculated: true` は `calculation.type` (`ratio`/`per_capita`/`subtraction`) と
+分子・分母キーがそろって初めて機能する。型だけ立てても
+`calculate-ranking-values.ts` の `if (!calculation.type) return []` で**必ず空になる**。
+
 ## isActive:true ≠ 本番公開（多段依存・★再発防止 2026-06-03）
 
 `MetricConfig.isActive` を `true` にしただけでは ranking は **本番公開されない**。本番アプリは R2 snapshot と

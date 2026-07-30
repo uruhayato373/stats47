@@ -85,13 +85,13 @@ describe("buildRecipe — 宣言演算 (derived)", () => {
       metric({
         kind: "estat",
         statsDataId: "0004021440",
-        axisRatio: { axis: "cat01", numeratorCode: "22", denominatorCode: "0" },
+        axisRatio: { axis: "cat01", numeratorCodes: ["22"], denominatorCodes: ["0"] },
         areaAxis: { axis: "cat03", scheme: "seq-pref" },
         timeScope: "annual",
       }),
     );
     expect(r.ops).toEqual({
-      axisRatio: { axis: "cat01", numeratorCode: "22", denominatorCode: "0" },
+      axisRatio: { axis: "cat01", numeratorCodes: ["22"], denominatorCodes: ["0"] },
       areaAxis: { axis: "cat03", scheme: "seq-pref" },
       timeScope: "annual",
     });
@@ -244,7 +244,7 @@ describe("parseRecipe — round-trip", () => {
     metric({
       kind: "estat",
       statsDataId: "D",
-      axisRatio: { axis: "cat01", numeratorCode: "22", denominatorCode: "0" },
+      axisRatio: { axis: "cat01", numeratorCodes: ["22"], denominatorCodes: ["0"] },
     }),
     metric({ kind: "estat", statsDataId: "E", areaAxis: { axis: "cat03", scheme: "seq-pref" }, timeScope: "annual" }),
     metric({ kind: "kakei-chousa", filter: { statsDataId: "F", cdCat01: "x" } }),

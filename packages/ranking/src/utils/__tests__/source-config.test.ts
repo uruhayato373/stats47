@@ -83,7 +83,7 @@ describe("resolveEstatParams — 旧 flat 形 (再生成前の item.json)", () =
     // 解消には R2 の再生成が要る (Phase 6)。
     const params = resolveEstatParams({ statsDataId: "0003456573", cdCat01: "A" } as never);
     expect(params).toEqual({ statsDataId: "0003456573", cdCat01: "A" });
-    expect((params as Record<string, unknown>).cdCat03).toBeUndefined();
+    expect(params?.cdCat03).toBeUndefined();
   });
 });
 

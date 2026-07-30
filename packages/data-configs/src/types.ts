@@ -84,19 +84,26 @@ export interface EstatSource {
     codes: readonly string[];
   };
   /**
-   * 同一 cat 軸の 2 メンバーから**率**を作る (分子 / 分母 × 100)。
+   * 同一 cat 軸のメンバーから**率**を作る (分子の和 / 分母の和 × 100)。
    *
    * 「率」の表章項目を持たず実数だけを載せる表が多い。分子と分母が同じ軸の別メンバーに
    * 入っているので、取り込み時に (area, time) で join して割る。
-   * 例: 住宅・土地統計調査 0004021440 の cat01 に 0=総数 / 22=空き家 → 空き家率。
+   *
+   * **どちらも配列**なのは「部分 / 部分の合計」が実在するため:
+   *   - 総数コードがある表: `{ numeratorCodes: ["22"], denominatorCodes: ["0"] }`
+   *     (住宅・土地統計調査 0004021440 の cat01 = 0:総数 / 22:空き家 → 空き家率)
+   *   - 総数コードが無い表: `{ numeratorCodes: ["322"], denominatorCodes: ["321","322"] }`
+   *     (就業構造基本調査の cat04 = 321:正規 / 322:非正規 → 非正規率)
+   * 1 コードだけの場合も配列で書く (2 通りの書き方を作らない)。
    *
    * 分母が null または 0 以下の (area, time) は欠測 `"-"` にする (0 除算も 0% も捏造しない)。
+   * 分子側の欠測メンバーは 0 扱い (`axisSum` と同じ)。ただし分子が全欠測なら欠測。
    * 値域は shape-gate の percent 検査が自動で見る (分子分母を取り違えると 100 を超えて落ちる)。
    */
   axisRatio?: {
     axis: "cat01" | "cat02" | "cat03" | "cat04" | "cat05";
-    numeratorCode: string;
-    denominatorCode: string;
+    numeratorCodes: readonly string[];
+    denominatorCodes: readonly string[];
   };
   /**
    * 都道府県が area 軸ではなく **cat 軸**に入っている表の写像。
