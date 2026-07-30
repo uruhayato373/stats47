@@ -3,7 +3,7 @@
  * A8.net バナー画像を DL → PNG に変換して images/ ディレクトリに保存する。
  * 使い方: node .claude/scripts/note/download-affiliate-banners.mjs [--force]
  */
-import { execSync } from 'child_process'
+import { execFileSync } from 'child_process'
 import { mkdirSync, existsSync, writeFileSync } from 'fs'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -50,7 +50,8 @@ for (const b of BANNERS) {
 
   // GIF → PNG 変換（最初フレームのみ）
   try {
-    execSync(`convert '${gifPath}[0]' '${pngPath}'`, { stdio: 'pipe' })
+    // argv 形式で渡す (シェルを経由しない)。`[0]` の frame 指定は ImageMagick 側が解釈する
+    execFileSync('convert', [`${gifPath}[0]`, pngPath], { stdio: 'pipe' })
     console.log(`OK (${buf.length} bytes → PNG)`)
   } catch (e) {
     console.log(`convert error: ${e.message}`)

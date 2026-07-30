@@ -45,10 +45,12 @@ model: sonnet
 ## File Boundary
 
 - 触ってよい: `packages/product-factory/`、`.claude/state/products/`、`.local/coconala-products/`（生成先）、
-  `docs/02_実装計画/30`（Phase 記録）、`docs/todo/`（バックログ）。
+  `docs/todo/`（バックログ）。
 - 触らない: 公開 R2、永続 D1、本番 web、他ドメインの SSOT。commit/push/deploy は明示指示があるときだけ。
 
 ## 関連
 - 正典: `.claude/rules/coconala-product-standards.md`
 - スキル: `.claude/skills/product/build-coconala-product/SKILL.md`
-- スペック: `docs/02_実装計画/30_ココナラ商品ファクトリー実装仕様.md` / モジュール: `packages/product-factory/README.md`
+- モジュール: `packages/product-factory/README.md`
+- 横断商品ポートフォリオ:
+  `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md`

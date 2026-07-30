@@ -15,7 +15,7 @@ tags: [whitepaper, chart-inventory, planning]
 - `/root/.claude/plans/47-swirling-wreath.md` — Phase A-E 全体計画
 - `apps/web/scripts/data/page-components/theme/<key>.json` — theme チャート定義の実装 SSOT (17 テーマ実装済)
 - `apps/web/src/features/area-profile/` — area プロフィールチャートの実装
-- `docs/01_技術設計/07_情報設計.md` — area / theme の責務判定基準
+- `docs/01_技術設計/03_情報設計.md` — area / theme の責務判定基準
 
 ## 進捗表
 

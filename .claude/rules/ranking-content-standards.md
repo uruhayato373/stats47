@@ -2,10 +2,11 @@
 
 `/ranking/<key>` ページの**コンテンツ構成・品質フロア・AI 解説文の生成パイプライン**の運用正典。
 ranking の ai-content (考察/構造解釈/時系列/相関/FAQ/県別解説) を生成・是正する agent (`ranking-content-author`) /
-critic (`ranking-content-critic`) / 人間はこれに従う。2026-07-12 に旧 `docs/02_実装計画/09_ランキング品質改修.md` の
-運用スペック (§2 コンテンツ仕様・§3 パイプライン・§5 分業) を本 rule へ抽出し、運用 SSOT を .claude に一本化した。
+critic (`ranking-content-critic`) / 人間はこれに従う。2026-07-12 に旧ランキング品質改修計画の
+運用スペック（コンテンツ仕様・パイプライン・分業）を本 rule へ抽出し、運用 SSOT を `.claude/` に一本化した。旧版が必要な場合は Git 履歴を参照する。
 
-> **役割分担**: 戦略・KPI 目標は `docs/02_実装計画/01_収益化マスタープラン.md` (P2 トラフィック成長)。
+> **役割分担**: 戦略・KPI 目標は `docs/00_プロジェクト管理/03_マーケティング戦略.md`
+> （T1〜T4・成長レバー）。
 > Wave 進捗・生成の状態は **ai-content 是正キュー** (`.claude/state/ai-content/` + `build-ai-content-queue.mjs`、
 > memory `project_ai_content_remediation_queue`) と backlog (AICONTENT-02 / RANK-WAVE) が持つ。
 > 本 rule は「どう構成し・どの品質床で・どう生成するか」の運用正典。
@@ -36,22 +37,118 @@ GSC 表示のあるランキングは全キーの ~40% で、imp の大半は He
 
 - **CTR 側 (title 不変)**: `metric-config-standards.md` 準拠で **title は正準名のまま** (年・注釈の焼き込みは lint error)。
   改修は `seoTitle` に curiosity gap パターン (なぜ/意外/倍率/vs)、`seoDescription` に緊張感セットアップ。
-- **品質フロア (決定的 gate)**: ①数値 factual 照合 (本文の数値が R2 values と一致) ②構造解釈 ≥300字 (Torso ≥200字)
+- **品質フロア (決定的 gate)**: ①実データ照合 (下記) ②構造解釈 ≥300字 (Torso ≥200字)
   ③NG ワードなし (`evidence-based-judgment.md`) ④ですます調 (`blog-quality-standards.md` 準拠)。
   検査は `audit-ai-content.mjs` (決定的ゲート)。
+
+### 実データ照合の設計 (★安いモデルで量産する前提の砦・2026-07-30 実装)
+
+プロンプトは「括弧による数値挿入」を全面禁止するが、**FAQ の answer は実値必須・insights は倍率や
+構成比を書く仕様**なので「数値を書かせない」ことでは捏造を防げない。括弧外の裸の数値を実データ
+(`app/ranking/<key>/values.json`) と突き合わせる。実装は `.claude/scripts/ai-content/lib/number-audit.mjs`
+(純関数 + `__tests__/`)、配線は `audit-ai-content.mjs`。
+
+| 対象 | 判定 | level |
+|---|---|---|
+| **県別解説の構造フィールド** (`items[].areaCode` / `rank` / `value`) | 実データと**厳密一致** (相対 0.1%) | **blocker** `pref-data-mismatch` |
+| テキストの数値 (insights / regionalAnalysis / faq / commentary) | 実データの**最大値を超える**もののみ | **blocker** `out-of-range-number` |
+| 観測値が無い県の解説 | 未収録・対象外の可能性 | warn `pref-unknown-area` |
+| values.json に同名の県が複数行 | どの行が正か決定できず照合不能 | warn `values-duplicate-areas` |
+
+**テキスト側を「厳密一致」にできない理由** (公開済み 153 件で 2 度実測して失敗した):
+
+1. 「実データから導出できる値の集合」との一致 → **破綻**。insights は地方ブロック平均を書く仕様で、
+   任意の部分集合の平均は無限にあり列挙できない (誤検知例: 「近畿の7府県平均は21,415店」)。
+2. 「min〜max の区間内か」 → **まだ誤検知**。プロンプトが「全国平均との比較」を指示するため差分表現が
+   頻出し、差分は必ず min を下回る (誤検知例: 「全国平均を約2,849g上回り」= 実値 − 平均)。
+
+よって下限は捨て、**max 超えだけ**を見る。狙いは桁違いの捏造 (読者が検証できず実害が最大)。
+弱いゲートに見えるが**誤検知を出すゲートは運用で無効化される**ため確実性を優先し、数値の正しさの
+本体は構造照合が担う。除外規則: 年表記 (2021年)・分母表現 (人口10万対)・「約」付きは許容 5%・
+「12万6千」等の分割解釈はグループ単位で判定。
+
+**ゲート自体を検証済み** (全 PASS は「何も見ていない」と区別できないため必須):
+公開済み 153 件に捏造を注入した対照実験で、テキスト注入 (全国計×100) **153/153**・
+構造注入 (value×2+1, rank+5) **140/153** を検出 (残り 13 は下記の観測値側欠陥で照合不能な件)。
+
+> **★blocker が出ても「ai-content が悪い」とは限らない**。実測でこのゲートが検出した 2 件は
+> **配信データ側の欠陥**だった: `vacant-housing-rate` は unit が「％」なのに values が空き家戸数
+> (ai-content の率が正しい)、`dairy-cattle-count` は partition が 45 件で**北海道が欠落**し rank が
+> 繰り上がっていた。**再生成する前に「どちらが正しいか」を必ず確認する** — 壊れた観測値に合わせて
+> 書き換えると品質が劣化する。観測値側なら `data-ingester` / `/audit-ranking-data-integrity` へ回す。
+
+実行:
+
+```bash
+node .claude/scripts/ai-content/audit-ai-content.mjs <rankingKey>            # R2 から取得して照合
+node .claude/scripts/ai-content/audit-ai-content.mjs --file <path.json>      # 生成直後の staging
+node .claude/scripts/ai-content/audit-ai-content.mjs <key> --no-number-check # オフライン (テキスト規則のみ)
+node --test .claude/scripts/ai-content/__tests__/number-audit.test.mjs       # ゲート自体のテスト
+```
+
+values.json が取得できない場合は照合をスキップする (fail-open) が、**スキップしたことを出力に明示する**
+(合格と誤読させない)。
 
 ## 生成パイプライン (完全DBレス)
 
 ```
 R2 values.json + correlation + metric config
-  → Sonnet 生成 (既定はローカル CLI npm run ai:gen = haiku、TOKEN-AICONTENT-01)
-  → 決定的 factual gate (生成文中の数値を R2 実値と照合・audit-ai-content.mjs)
+  → 生成 (既定はローカル CLI npm run ai:gen。トークン規律は TOKEN-AICONTENT-01)
+  → 決定的 gate (audit-ai-content.mjs。落ちたら同じ prompt で再試行 --retries、既定 1 回)
   → critic (ranking-content-critic) 監査 → review.md
   → R2 app/ranking/<key>/ai-content.json (CI push: publish-ai-content.yml、develop push で発火)
 ```
 
+**公開までの受け渡しは 2 経路あり、実行環境で選ぶ** (混同すると生成物が公開に到達しない):
+
+| 実行環境 | 出力先 | 公開手段 |
+|---|---|---|
+| R2 creds あり (ローカル / CI) | `.local/r2/app/ranking/<key>/ai-content.json` (既定) | `diff-push-r2 --prefix app/ranking` |
+| **creds なし (クラウドセッション / Routine)** | `data/ai-content-staging/<key>.json` (`--outbox`) | develop へ push → `publish-ai-content.yml` が gate → R2 → CDN purge → outbox 削除 |
+
+outbox は**フラットな `<rankingKey>.json`** でなければならない (workflow の検出 glob が
+`data/ai-content-staging/*.json` なので `app/ranking/<key>/` 配下に置くと拾われない)。
+`--out data/ai-content-staging` では階層が付くため公開されない → **`--outbox` を使う**。
+
 - blog の `quality-gate.mjs` / blog-critic / `review.md` モデルを流用 (実装パターン再利用・drift 防止)。
-- スクリプト配置は `.claude/scripts/ranking/` (`skill-code-placement.md` 準拠)。R2 書き込みは CI 専用 (`r2-storage-design.md`)。
+- スクリプト配置は `.claude/scripts/ai-content/` (`skill-code-placement.md` 準拠)。R2 書き込みは CI 専用 (`r2-storage-design.md`)。
+- **安いモデルで数をこなす方針** を採る場合、品質は「モデルを賢くする」ではなく
+  「決定的ゲート + 再試行」で担保する。`--retries N` は JSON 崩れ・ゲート落ちを同じ prompt でやり直し、
+  **ゲートを緩めて通すことは絶対にしない** (品質ではなく実行時間で払う)。落ち率はモデルを変えたら
+  必ず実測する (10 件パイロット → blocker 内訳を確認 → 落ち率が高ければプロンプト側を直す)。
+
+### 全件量産の日次ループ (Gemini・トークン消費ゼロ・2026-07-30 新設)
+
+Claude のトークンを使わず全 active ranking (実測 2,179 件) を完成させるための無人ループ。
+**`.github/workflows/ai-content-generate-daily.yml`** (JST 03:00) が以下を回す:
+
+```
+キュー再構築 (--scope all) → needs-regen 上位 N → Gemini API 生成 (--model gemini-api)
+  → 決定的ゲート → outbox (--outbox) → develop へ push
+  → publish-ai-content.yml が発火 (gate 再検証 → R2 → CDN purge → outbox 削除)
+  → キュー再構築して進捗を commit-back
+```
+
+| 要素 | 実装 |
+|---|---|
+| 生成 | `--model gemini-api` (`packages/ai-content/src/services/gemini-text-client.ts`)。**CLI 非依存**。CLI (`--model gemini`) は認証・バージョンが実行環境に依存するため CI では使わない |
+| 認証 | `GEMINI_API_KEY` (GitHub Secrets 専任。画像生成と共用) |
+| 件数上限 | 既定 40 = `publish-ai-content.yml` の `MAX_PUBLISH` と同数。超過分は次回に繰り越す |
+| 失敗の扱い | 429/5xx/timeout は client がバックオフ再試行 (429 は 15s 起点)、`truncated`/4xx は再試行しない |
+| 費用 | gemini-2.5-flash に無料 tier があるが、**キーが有料課金に紐づく場合は 1 件あたり入力 ~5K / 出力 ~8K トークン相当が課金される**。件数で管理する |
+
+**進捗管理**: `build-ai-content-queue.mjs --scope all` が実行のたびに
+`.claude/state/ai-content/progress-history.csv` へ 1 行追記し (同日同 scope は上書き)、
+`LATEST.md` に **消化ペース (件/日) と完了見込み日数**を出す。R2 が真実源でキューは毎回再導出する
+派生ビューなので、中断・再開しても状態がずれない。
+
+```bash
+node .claude/scripts/ai-content/build-ai-content-queue.mjs --scope all       # 全件スコープで再構築
+node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 40  # 次バッチの key 一覧
+```
+
+`--scope gsc` (既定) は GSC 流入のあるページに絞った SEO 優先母集団で、**深掘り (brushup) の対象選定**に使う。
+`--scope all` は**全件完成フェーズ**用。どちらも同じ done 判定 (auditRow) を使うので混在しても矛盾しない。
 - 「次に何を生成するか」の真実源は **ai-content 是正キュー** (`build-ai-content-queue.mjs` → `.claude/state/ai-content/`)。
   高流入 incomplete 優先。done は R2 の auditRow 通過で毎回再導出 (R2 が真実源・キューは派生)。
 
@@ -77,7 +174,7 @@ R2 values.json + correlation + metric config
 
 ## 関連
 
-- 戦略・KPI: `docs/02_実装計画/01_収益化マスタープラン.md` (P2)
+- 戦略・KPI: `docs/00_プロジェクト管理/03_マーケティング戦略.md`（T1〜T4・SEO品質レバー）
 - ai-content 是正キュー: memory `project_ai_content_remediation_queue` / `.claude/scripts/ranking/build-ai-content-queue.mjs`
 - 決定的ゲート: `.claude/scripts/ranking/audit-ai-content.mjs`
 - 公開: `.github/workflows/publish-ai-content.yml` (自動化インベントリ参照)

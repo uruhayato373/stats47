@@ -18,8 +18,24 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #
 # 動作確認: workflow_dispatch + dry_run=true で fetch のみ実行し、その後 dry_run=false で
 #   1 metric (例 metric=japanese-population) を実 push 確認してから schedule を信頼すること。
+#
+# 発火経路は 3 つ:
+#   1. push (cloud 用・2026-07-30 追加): develop に data/data-refresh-requests.json を
+#      commit/push → 本 workflow が実行 → 消費した request を git rm で commit-back [skip ci]。
+#      cloud セッションは actions:write が無く workflow_dispatch 不可 (403) のため。
+#      gemini-image-run.yml と同じ方式。
+#   2. workflow_dispatch (ローカル): metric/since/dry_run を入力して手動実行
+#   3. schedule (毎月): 全 metric を実 push
+#
+# request file 形式 (data/data-refresh-requests.json):
+#   { "metric": "vacant-housing-rate,wooden-housing-ratio", "since": "", "dryRun": false }
+#   - metric: 空なら全 metric (2,295 件・60 分では終わらない可能性があるので通常は指定する)
+#   - dryRun: true = fetch と形状検証のみ (R2 に書かない)
 
 on:
+  push:
+    branches: [develop]
+    paths: ['data/data-refresh-requests.json']
   workflow_dispatch:
     inputs:
       metric:
@@ -40,7 +56,8 @@ on:
     - cron: "0 3 5 * *"
 
 permissions:
-  contents: read
+  # push トリガー時に consume commit-back するため write が要る
+  contents: write
 
 concurrency:
   # sync-snapshots.yml と同じ group で R2 push を直列化 (同時 push による破損防止)。
@@ -62,11 +79,43 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - name: 🧰 Checkout main
+      # push トリガーは develop (request file がそこにある)。
+      # dispatch / schedule は従来どおり main (本番と同じ config で走らせる)。
+      - name: 🧰 Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: main
+          ref: ${{ github.event_name == 'push' && github.ref_name || 'main' }}
           fetch-depth: 1
+
+      # request file と workflow_dispatch inputs を 1 か所に統合する。
+      # 以降のステップは REFRESH_* だけを見る (発火経路ごとの分岐を散らさない)。
+      - name: 🧭 Resolve inputs
+        id: resolve
+        # ★inputs は env 経由で受ける。`${{ inputs.x }}` を run: の中に直接展開すると
+        #   dispatch 時の入力がシェルとして評価される (Actions の式インジェクション。
+        #   CodeQL が critical で検出)。env に置けば値は環境変数として渡るだけになる。
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_METRIC: ${{ inputs.metric }}
+          INPUT_SINCE: ${{ inputs.since }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          REQ=data/data-refresh-requests.json
+          if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
+            METRIC=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.metric??''))")
+            SINCE=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.since??''))")
+            DRY=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
+          else
+            METRIC="$INPUT_METRIC"
+            SINCE="$INPUT_SINCE"
+            DRY="$INPUT_DRY_RUN"
+          fi
+          {
+            echo "metric=$METRIC"
+            echo "since=$SINCE"
+            echo "dry_run=$DRY"
+          } >> "$GITHUB_OUTPUT"
+          echo "解決: metric='$METRIC' since='$SINCE' dry_run='$DRY'"
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -88,15 +137,15 @@ jobs:
         run: |
           # ARGS は配列で組む ("$ARGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
           ARGS=()
-          [ -n "${{ inputs.metric }}" ] && ARGS+=(--metric "${{ inputs.metric }}")
-          [ -n "${{ inputs.since }}" ] && ARGS+=(--since "${{ inputs.since }}")
-          [ "${{ inputs.dry_run }}" = "true" ] && ARGS+=(--dry-run)
+          [ -n "${{ steps.resolve.outputs.metric }}" ] && ARGS+=(--metric "${{ steps.resolve.outputs.metric }}")
+          [ -n "${{ steps.resolve.outputs.since }}" ] && ARGS+=(--since "${{ steps.resolve.outputs.since }}")
+          [ "${{ steps.resolve.outputs.dry_run }}" = "true" ] && ARGS+=(--dry-run)
           echo "page-data-batch.ts ${ARGS[*]}"
           npx tsx packages/data-configs/scripts/page-data-batch.ts "${ARGS[@]}"
 
       # 観測値を R2 に push (app/stats)。schedule 実行 (inputs.dry_run='') では push される。
       - name: ☁️ Push observations to R2 (app/stats)
-        if: inputs.dry_run != 'true'
+        if: steps.resolve.outputs.dry_run != 'true'
         run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats
 
       # 派生 snapshot (master / ranking-values / area-profile 等) を git TS + 更新済観測値から
@@ -113,7 +162,35 @@ jobs:
       #   (この job は R2_ACCESS_KEY_ID 等 S3 認証を持つため、production にすれば S3 API 経由の
       #   一覧に切り替わる。既知の罠: memory project_kakei_expansion_pipeline_gotchas)。
       - name: 🗂️ Regenerate derived snapshots + push to R2
-        if: inputs.dry_run != 'true'
+        if: steps.resolve.outputs.dry_run != 'true'
         env:
           NODE_ENV: production
         run: bash .claude/skills/db/sync-snapshots/run.sh
+
+      # 形状 allowlist の**縮小だけ**を自動反映する。
+      #
+      # 再取得で直った metric を allowlist に残すと、その key ではゲートが黙るので
+      # 次の退行を見逃す。逆に「増やす」方向を自動化すると壊れたデータを自動で
+      # 追認してしまうため、**現行リストの部分集合になったときだけ** commit-back する。
+      - name: 🔻 Shrink shape allowlist (縮小時のみ commit-back)
+        if: steps.resolve.outputs.dry_run != 'true' && github.event_name != 'pull_request'
+        continue-on-error: true
+        run: npx tsx packages/data-configs/scripts/shrink-shape-allowlist.ts --apply
+
+      - name: 🧹 Consume request file (push イベント時のみ・commit-back)
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q --ignore-unmatch data/data-refresh-requests.json
+          git add -A packages/data-configs/src/expected-shape-anomaly.ts || true
+          if git diff --cached --quiet; then
+            echo "commit する変更なし"
+            exit 0
+          fi
+          git commit -q -m "chore(data): consume data-refresh request [skip ci]"
+          # 他 workflow の push と競合しても落ちないよう rebase してから push (最大3回)
+          for _ in 1 2 3; do
+            if git push origin "${{ github.ref_name }}"; then break; fi
+            git pull --rebase origin "${{ github.ref_name }}"
+          done

@@ -1,18 +1,18 @@
 /**
- * apply-allowlisted-settings — allowlist 3 action の決定 (pure) と実行 (browser・§6.4/§6.6)。
+ * apply-allowlisted-settings — allowlist 3 action の決定 (pure) と実行 (browser)。
  *
- * 正典: docs/02_実装計画/41_AdSense継続改善・GA4_GSC設定自動化仕様.md。
+ * 正典: ./README.md「allowlist」「denylist」「mutation手順」。
  *
  * decideActions (pure・テスト対象):
  *   inventory (audit 結果) + 台帳状態 → 実行すべき allowlist action / blocker / no-op を決める。
  *   - allowlist 外の action 名は型 (ALLOWED_ACTIONS) と runtime (assertAllowed) の両方で拒否。
  *   - AdSense link は audit-only: GA4 に ad_impression 実データがあるのに UI が未リンクなら
- *     矛盾 = blocker (作成しない・§5.2)。
- *   - wrong GSC link は編集不可のため削除・再作成しない = blocker (§6.5)。
+ *     矛盾 = blocker (作成しない)。
+ *   - wrong GSC link は編集不可のため削除・再作成しない = blocker。
  *   - ad_id: 同 eventParameter が別 displayName で存在 → 既存扱い (作成しない)。
  *     scope 違い → blocker (修正・削除しない)。
  *
- * 実行 (browser) は §6.6 の 13 step トランザクション。Save 後に verify できなければ
+ * 実行 (browser) は README の mutation 手順に従う。Save 後に verify できなければ
  * mutation-unknown とし、盲目的に再実行しない。
  */
 import { GA4_PROPERTY_ID } from "./audit-ga4.mjs";
@@ -32,7 +32,7 @@ export const AD_ID_DIMENSION = Object.freeze({
 /** allowlist 外 action を runtime で拒否する。 */
 export function assertAllowed(action) {
   if (!ALLOWED_ACTIONS.includes(action)) {
-    throw new Error(`action not in allowlist: ${String(action)} (denylist §6.5 — 実行しない)`);
+    throw new Error(`action not in allowlist: ${String(action)} (denylist — 実行しない)`);
   }
   return action;
 }
@@ -90,7 +90,7 @@ export function decideActions(inv) {
     actions.push("create-ad-id-dimension");
   }
 
-  // --- AdSense link 整合 (audit-only・§5.2) ---
+  // --- AdSense link 整合 (audit-only) ---
   if (!drift("adsenseLinks", inv.adsenseLinks)) {
     if (!inv.adsenseLinks.linked && inv.ga4AdImpressionObserved) {
       blockers.push({
@@ -104,7 +104,7 @@ export function decideActions(inv) {
   return { actions, noops, blockers };
 }
 
-// ── browser apply (§6.6 トランザクション) ────────────────────────────────
+// ── browser apply (README「mutation手順」) ───────────────────────────────
 
 async function bodyText(page) {
   return await page.evaluate(() => document.body?.innerText ?? "");
@@ -140,7 +140,7 @@ async function clickButton(page, names, { timeout = 8000 } = {}) {
   return null;
 }
 
-/** Save 直前の property 再照合 (§6.6-6)。 */
+/** Save 直前の property 再照合。 */
 async function reassertProperty(page) {
   const url = page.url();
   const text = await bodyText(page);
@@ -148,7 +148,7 @@ async function reassertProperty(page) {
 }
 
 /**
- * C. create-ad-id-dimension を実行する (§6.6)。
+ * C. create-ad-id-dimension を実行する。
  * 各 step で要素が見つからなければ selector-drift で停止 (盲目的に進めない)。
  */
 export async function applyCreateAdIdDimension(page, { screenshotDir, gotoCustomDimensions }) {
@@ -201,7 +201,7 @@ export async function applyCreateAdIdDimension(page, { screenshotDir, gotoCustom
   const formText = await bodyText(page);
   if (!/イベント|Event/.test(formText)) return { status: "selector-drift", step: "scope-check" };
 
-  // Save 直前の property 再照合 (§6.6-6)
+  // Save 直前の property 再照合
   if (!(await reassertProperty(page))) return { status: "blocked", reason: "property re-assert failed (Save 中止)" };
 
   const saved = await clickButton(page, ["保存", "Save"]);
@@ -209,7 +209,7 @@ export async function applyCreateAdIdDimension(page, { screenshotDir, gotoCustom
   await page.waitForTimeout(5000);
   await shot(page, screenshotDir, "apply-adid-04-after-save");
 
-  // verify: reload して ad_id 行を確認 (§6.6-9/10)
+  // verify: reload して ad_id 行を確認
   const renav = await gotoCustomDimensions();
   if (renav.status !== "ok") return { status: "mutation-unknown", reason: "verify navigation failed — 再実行しない" };
   const after = await bodyText(page);

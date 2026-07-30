@@ -2,8 +2,8 @@
 
 `/survey/<surveyKey>` を「関連ランキング一覧」から**調査ごとに異なる検索意図を受ける編集ハブ**へ育てる運用正典。
 survey ハブの編集コンテンツ (summary / 分かること / 代表的な問い / 注意点 / 関連記事) を設計・編集する
-agent (`survey-curator`) / 人間はこれに従う。2026-07-12 に旧 `docs/02_実装計画/20_survey別コンテンツクラスター戦略.md`
-の運用スペック (編集文法・ハブ構成・SSOT/境界・禁止事項) を本 rule へ抽出し、運用 SSOT を .claude に一本化した。
+agent (`survey-curator`) / 人間はこれに従う。2026-07-12 に旧 survey 別コンテンツクラスター計画
+の運用スペック（編集文法・ハブ構成・SSOT/境界・禁止事項）を本 rule へ抽出し、運用 SSOT を `.claude/` に一本化した。旧版が必要な場合は Git 履歴を参照する。
 
 > **実装済み SSOT**: survey 編集情報の git TS は `apps/web/src/features/survey/survey-editorial.ts`
 > (`summary` / `whatYouCanLearn[]` / `readerQuestions[]{question,rankingKey}` / `caveats[]` / `relatedArticleSlugs[]`)。
@@ -83,7 +83,7 @@ R2 app/survey/<id>/items.json
 - 定義欠落 survey は現行 UI へフォールバックさせる (1 survey ずつ編集ハブ化・他は壊さない)。
 - 実装前に確認: survey page.tsx の exports・取得境界 / article repository・`related-articles.ts` の再利用可否 /
   既存 page_components・SectionHeader・ArticleShell / rules `coding-standards.md`・`ui-components.md`・`survey-linkage-standards.md` /
-  docs `07_情報設計.md`・`13_統一レイアウト設計.md`・`12_完全DBレス設計.md`・(URL/metadata/構造化データを触るなら) コード `apps/web/src/lib/url-policy.ts` + `middleware.ts`。
+  docs `03_情報設計.md`・`04_デザインシステム.md`・`02_データアーキテクチャ.md`・(URL/metadata/構造化データを触るなら) コード `apps/web/src/lib/url-policy.ts` + `middleware.ts`。
 
 ## 横展開の進め方 (小さく実証してから)
 
@@ -108,6 +108,6 @@ R2 app/survey/<id>/items.json
 - 紐付けメタ (別正典): `.claude/rules/survey-linkage-standards.md`
 - 実装 SSOT: `apps/web/src/features/survey/survey-editorial.ts`
 - 横展開・census 実験の進捗: `.claude/state/surveys/{portfolio,experiments}.json` (skill `/manage-survey-portfolio`・schema は `.claude/state/surveys/README.md`)
-- 情報設計 (ファネル役割): `docs/01_技術設計/07_情報設計.md`
+- 情報設計 (ファネル役割): `docs/01_技術設計/03_情報設計.md`
 - 品質基準 (blog 側): `.claude/rules/blog-quality-standards.md` / 実証判定: `.claude/rules/evidence-based-judgment.md`
 - agent: `survey-curator` (編集コンテンツ + 紐付け) / 生成は article-writer / 監査は `/audit-survey-linkage`

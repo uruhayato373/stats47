@@ -69,4 +69,4 @@ npm run design-system:check --workspace apps/web
 ```
 
 `/areas`の未完了QAと本番反映状況は
-`docs/todo/02_機能バックログ.md#AREAS-DIRECTORY-UX-01`を正典とする。
+`docs/todo/05_機能バックログ.md#AREAS-DIRECTORY-UX-01`を正典とする。

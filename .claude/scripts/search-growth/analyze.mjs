@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * analyze — normalized Observation から決定的に candidate を生成し candidates.json を書く。
- * 正典: docs/02_実装計画/39 §5 / Phase 4。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
  *   node .claude/scripts/search-growth/analyze.mjs
  */
 import { buildCandidates, DEFAULT_CONFIG } from "./lib/scoring.mjs";
@@ -11,7 +11,7 @@ import { PATHS, readJson, writeJson, currentIsoWeek } from "./lib/state.mjs";
 
 export function analyze({ observations, pastEffects = {}, prevCandidates = [], now = new Date().toISOString() }) {
   const built = buildCandidates(observations, { config: DEFAULT_CONFIG, pastEffects, now });
-  // 週次再構築で人間承認の lifecycle (approved/in-progress 等) を消さない (§18.4)
+  // 週次再構築で人間承認の lifecycle (approved/in-progress 等) を消さない
   const candidates = carryOverStatuses(built, prevCandidates);
   const byType = {};
   for (const c of candidates) byType[c.type] = (byType[c.type] ?? 0) + 1;

@@ -86,12 +86,12 @@ export function expectedContentType(key) {
 }
 
 // ---------------------------------------------------------------------------
-// §8.4 動画上限 — 1 バッチ最大 3 本
+// 動画上限 — 1 バッチ最大 3 本
 // ---------------------------------------------------------------------------
 
 /**
  * batch の候補に動画上限 (既定 3) を課す。動画を持つ候補が上限を超えたら、
- * 超過分は「静止画のみ」に降格する (§8.4 default batch size 12・動画 1batch 最大 3)。
+ * 超過分は「静止画のみ」に降格する（default batch size 12・動画 1batch 最大 3）。
  * @param {Array<{ideaId:string, assetPlan:object}>} candidates score 降順で渡す
  * @param {number} maxVideos
  * @returns {Array<{ideaId:string, assetPlan:object, videoDeferred:boolean}>}
@@ -137,11 +137,11 @@ export function idempotencyDecision({ requiredKeys, existingR2Keys, alreadyDraft
 }
 
 // ---------------------------------------------------------------------------
-// caption 完全性 (§8.3 出典・年度・対象単位)
+// caption 完全性（draft gate: 出典・年度・対象単位）
 // ---------------------------------------------------------------------------
 
 /**
- * caption に出典・年度・対象単位が含まれるかの決定的チェック (§8.3)。
+ * caption に出典・年度・対象単位が含まれるかの決定的チェック。
  * @param {string} caption
  * @param {{ requiredYear?:string, requiredUnitTerms?:string[], sourceRequired?:boolean }} req
  * @returns {{ complete:boolean, missing:string[] }}
@@ -189,7 +189,7 @@ export function buildCandidatePlan(entry, opts = {}) {
   }
   if (entry.commercialUse !== "allowed") {
     blocked = true;
-    blockReason = `commercialUse=${entry.commercialUse} (§8.3 draft 不可)`;
+    blockReason = `commercialUse=${entry.commercialUse} (draft 不可)`;
   }
   if (entry.sensitivity === "high") {
     blocked = true;
@@ -207,7 +207,7 @@ export function buildCandidatePlan(entry, opts = {}) {
   steps.push("決定的レンダ検査 (寸法/非空)");
   steps.push("R2 push (push-exact-r2-assets --key <generated asset>)");
   steps.push("R2 HEAD 検証 (HTTP 200 + Content-Type)");
-  steps.push("caption 生成 (UTM §7.1 + 出典/年度/対象単位)");
+  steps.push("caption 生成 (UTM + 出典/年度/対象単位)");
   steps.push("landing contract 検証 (verifyLandingContract → pass)");
   steps.push("isPostable 全条件 PASS のみ posts.json draft insert (予約なし)");
 

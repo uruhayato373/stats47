@@ -1,7 +1,7 @@
 import type { AffiliateAd } from "../src/features/ads/types";
 
 /**
- * affiliate_ads SSOT (完全DBレス → docs/01_技術設計/12_完全DBレス設計.md)。
+ * affiliate_ads SSOT (完全DBレス → docs/01_技術設計/02_データアーキテクチャ.md)。
  *
  * 手動 A8.net / ValueCommerce / 楽天 バナー登録をここで管理する (git TS が単一 SSOT)。
  * 反映: export-affiliate-ads-snapshot.ts が本配列 → R2 app/affiliate-ads/all.json を生成。

@@ -70,17 +70,9 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 2. frontmatter の `tags` と本文の見出しからテーマを把握し、 ペルソナを設定する
 3. 記事本文・チャート説明・データ出典を確認する
 4. 上記の構造・観点に従いレビューを作成する
-5. レビュー結果を `docs/04_レビュー/{date}-expert-review-{slug}.md` に Write tool で書き出す。 frontmatter は以下:
-   ```yaml
-   ---
-   type: blog-review
-   slug: {blog-slug}
-   date: 2026-MM-DD
-   status: active
-   ---
-   ```
-   本文の冒頭に対象記事へのリンク (`docs/21_ブログ記事原稿/{slug}/article.md`) を含め、 ペルソナ・総評・指摘・修正提案・スコアの順で記述する。
-5b. **★公開ゲート用 `review.md` も必ず書き出す**: `docs/21_ブログ記事原稿/{slug}/review.md` に下記を Write。
+5. レビュー全文はセッション内で提示し、別ファイルには保存しない。横断的な未完了施策だけを
+   `docs/todo/04_改善バックログ.md` へID付きで統合する。
+5b. **★公開ゲート用 `review.md` は必ず書き出す**: `docs/21_ブログ記事原稿/{slug}/review.md` に下記を Write。
    `quality-gate.mjs` は `published:true` の記事でこの `review.md` (verdict: PASS・実体200字以上) が
    無いと公開を blocker で止める (自己採点公開の防止)。**記事本文 (article.md) は編集しない**。
    ```markdown
@@ -99,13 +91,11 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
    <根拠>
    ```
    BLOCK が1つでも残れば `verdict: REVISE`。呼び元 (article-writer) が修正 → 再 review で PASS に更新。
-6. 書き出したファイルパス (両方) と総評を報告する
+6. `review.md` のパス、更新したTODO ID（該当時）と総評を報告する
 
-### 出力先 (expert モード)
+### 保存先 (expert モード)
 
-`docs/04_レビュー/{date}-expert-review-{slug}.md` (slug は blog 記事の slug と一致させる)。
-
-過去のレビューは `ls -t docs/04_レビュー/*-expert-review-*.md | head -5` で参照できる。
+公開ゲート用 `docs/21_ブログ記事原稿/{slug}/review.md` のみ。レビュー全文はセッション出力に留める。
 
 ---
 

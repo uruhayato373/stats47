@@ -1,6 +1,8 @@
 ---
+title: 実装計画INDEX
 type: index
 date: 2026-07-11
+updated: 2026-07-30
 status: active
 tags: [実装計画]
 ---
@@ -11,60 +13,31 @@ tags: [実装計画]
 （サブディレクトリ・アーカイブは持たない。完了・superseded した記録は git 履歴に残す）。
 
 > **TODO (バックログ・受信箱) は 2026-07-11 に `docs/todo/` へ移設した。**
-> 「次に何をやるか」は `docs/todo/README.md` から辿る。ここには戦略・実行計画の文書だけを置く。
+> 「次に何をやるか」は `docs/todo/00_運用ガイド.md` から辿る。ここには戦略・実行計画の文書だけを置く。
 
 ## まず最初に読むファイル
 
 | 知りたいこと                                                         | ファイル                                         |
 | -------------------------------------------------------------------- | ------------------------------------------------ |
-| **何を収益の軸にするか**（収益化・チャネル・広告配置の唯一の真実源） | `01_収益化マスタープラン.md` ★収益判断時必読     |
+| **何を収益の軸にするか**（収益モデル・チャネル・広告配置の唯一の真実源） | `docs/00_プロジェクト管理/02_収益化戦略.md` ★収益判断時必読 |
 | **次に着手すべき施策はどれか**                                       | `docs/todo/`（inbox + 改善/機能/指標バックログ） |
 
 ## 🟢 領域別の実行計画（active）
 
-| ファイル                                 | 内容                                                                                           |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| ~~`06_ブログ品質是正ループ.md`~~ (廃止) | 2026-07-12 に運用正典を .claude へ一本化 → `.claude/rules/blog-remediation-loop.md` |
-| ~~`09_ランキング品質改修.md`~~ (廃止) | 2026-07-12 に運用スペックを .claude へ抽出 → `.claude/rules/ranking-content-standards.md` (戦略は 01・Wave 進捗は ai-content 是正キュー) |
-| ~~`12_GSCカバレッジ是正ループ.md`~~ (廃止) | 2026-07-12 に運用正典を .claude へ一本化 → `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` |
-| `14_収益化実装方針.md`                   | 収益化の実装詳細（広告配置・計測）                                                             |
-| ~~`15_ブログSEO拡充戦略.md`~~ (廃止)     | 2026-07-12 に SSOT を .claude へ一本化 → `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト |
-| `16_月間100万PVロードマップ.md`          | トラフィック層の長期計画（T1-T4 フェーズ・レバー別施策カタログ）。PV は先行指標で NSM ではない |
-| ~~`17_家計調査論点カタログ.md`~~ (移設) | 2026-07-12 に .claude reference へ → `.claude/skills/blog/draft-from-trend/reference/kakei-topic-catalog.md` |
-| `18_テーマ指標チャート改善運用.md`       | ThemeCatalog の指標選定・チャート提案・Claude Code 実装・検証を1テーマずつ回す運用             |
-| `19_テーマ定義・注意事項カード仕様.md`   | テーマページの定義・誤読防止カード共通仕様と4テーマ分の文靠・Claude Code実装指示               |
-| ~~`20_survey別コンテンツクラスター戦略.md`~~ (廃止) | 2026-07-12 に運用スペックを .claude へ抽出 → `.claude/rules/survey-content-standards.md` (survey-curator 所有・実装は survey-editorial.ts) |
-| `21_ランキングサムネイルAB表示仕様.md`  | ランキングリンクカードの地図型A・数値型Bを使い分けるSSOT、実装手順、受入条件                  |
-| `22_運営者カード・ホーム広告整理仕様.md` | 全ページ共通の運営者プロモとホーム汎用アフィを撤去し、プロフィールと文脈広告を整理する仕様     |
-| `23_ブログOGP生成AIパイプライン仕様.md`  | Geminiで記事別の文字なし背景を生成し、既存Satori合成・R2配信へ安全に統合するClaude Code実装仕様 |
-| `24_テーマ分類再編成方針.md`             | 22テーマを固定せず、全レビュー後にkeep/split/merge/parent-hubで再編する分類・URL移行方針         |
-| `25_アフィリエイト運用SSOT移行仕様.md`   | docs/40 の運用資料を affiliate-manager / skills / state / 型付き git TS へ移し、週次計測・改善ループを一本化する Claude Code 実装仕様 |
-| `26_統合メディアコンソールNextjs移行仕様.md` | localhost:4747 の統合メディアコンソールを、機能・安全ガード互換のまま独立 `apps/gallery` へ移す実装仕様（**実装済 2026-07-16**） |
-| `27_buzz-map集客ゲート統合仕様.md` | buzz-map全候補カタログ、SNS画像・動画、R2・draft、landingとなるranking/blog/themeの同時制作、計測を一体化するClaude Code実装仕様 |
-| `28_ホーム注目ランキングCTR改善仕様.md` | ホームの注目ランキングをAI画像なしの問い・比較・勢力図・TOP3カードへ改善し、card CTRを実験計測するClaude Code実装仕様 |
-| `30_ココナラ商品ファクトリー実装仕様.md` | 全商品案を型付きカタログと共通生成基盤からOffice・図版・販売文へ展開する仕様とClaude Code実行プロンプト |
-| `31_note商品展開ファクトリー実装仕様.md` | 全174商品をnote向けに束ね、無料・有料原稿と添付manifestを一括生成する仕様・Fable実行プロンプト |
-| `31_競合インテリジェンス・勝ちパターンカタログ仕様.md` | YouTube・X・Instagram・競合Webを横断し、検索語SSOT、公開観測、勝ちパターン、Claude agent分業、gallery、継続計測を一体化する実装仕様 |
-| `32_マルチチャネル・コンテンツ商品ファクトリー仕様.md` | stats47のデータ・記事・図表・Office資産をnote・KDP・Brain・ココナラ・講座・B2Bへ展開し、実売で集中/停止する商品ポートフォリオ実装仕様 |
-| `33_X競合調査Playwright実装仕様.md` | X公開投稿を専用Playwright profileで読み取り専用収集し、mutation防止・selector drift・証拠・継続計測を安全に実装する仕様とClaude Code prompt |
-| `34_Instagram競合調査Playwright実装仕様.md` | Instagram公開投稿・リール・カルーセルを専用Playwright profileで少量観測し、mutation防止・権利境界・勝ちパターン化を安全に実装する仕様とClaude Code prompt |
-| `35_サイト回遊グラフ・レコメンド基盤仕様.md` | blog・ranking・theme・areaを共通content graphで接続し、理由付き決定的recommendation、重複排除、GA4計測、段階実験を実装する仕様 |
-| `36_都道府県公式統計カタログ仕様.md` | 都道府県公式サイトの統計資料を再現性・権利境界付きで収集し、県データブックへ接続する仕様 |
-| `37_都道府県一覧UIUX改善実装仕様.md` | `/areas` を検索・SSR軽量地図・地方別一覧によるアクセシブルな地域選択ハブへ改善するClaude Code実装仕様 |
-| `38_ポータル型ホーム・ヘッダー再設計仕様.md` | home heroを撤去し、検索・カテゴリ・地域・テーマ・buzz-map系ランキングカードで統計ポータル化するClaude Code実装仕様 |
-| `39_検索成長統合MCP・API基盤実装仕様.md` | GSC・URL Inspection・Sitemaps・GA4・CrUX・PSI・Cloudflareをread-only MCP/CLIで統合し、検索改善候補と効果測定を閉ループ化するClaude Code実装仕様 |
-| `40_アフィリエイト計測是正実装仕様.md` | GA4予約名との衝突、意図軸欠損、native impression欠落を是正し、アフィリエイトCTRを測定可能にする実装仕様 |
-| `41_AdSense継続改善・GA4_GSC設定自動化仕様.md` | 公式CPC・imp RPM・形式別収益を整備し、GA4/GSCのallowlist設定をPlaywrightで反映して週次改善を閉ループ化する仕様 |
-| `42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` | ASP申請・承認追跡・広告コード取得・配線を、冪等性・適格性・計測・cron監視・収益照合まで閉じる段階実装仕様とClaude Code prompt |
+<!-- docs-governance:active-plans:start -->
+| ファイル | 内容 | Status | 関連バックログ |
+|---|---|---|---|
+| [`42_アフィリエイトPlaywright継続運用・安全化実装仕様.md`](./42_%E3%82%A2%E3%83%95%E3%82%A3%E3%83%AA%E3%82%A8%E3%82%A4%E3%83%88Playwright%E7%B6%99%E7%B6%9A%E9%81%8B%E7%94%A8%E3%83%BB%E5%AE%89%E5%85%A8%E5%8C%96%E5%AE%9F%E8%A3%85%E4%BB%95%E6%A7%98.md) | アフィリエイト Playwright 継続運用・安全化実装仕様 | `in-progress` | `ASP-CONTINUITY-01` |
+<!-- docs-governance:active-plans:end -->
 
 ## 関連（このフォルダ外の正典）
 
-- **TODO 真実源**: `docs/todo/`（01*改善 / 02*機能 / 03\_指標 バックログ + inbox）
+- **TODO 真実源**: `docs/todo/`（改善 / 機能 / 指標バックログ + inbox）
+- 収益化戦略（NSM・収益レーン・配置判断・ゲート）: `docs/00_プロジェクト管理/02_収益化戦略.md`
 - セッション残タスク: `docs/todo/` の該当バックログへ直接反映
-- データ層アーキテクチャ（完全DBレス・正典）: `docs/01_技術設計/12_完全DBレス設計.md`
-- 統一レイアウト設計: `docs/01_技術設計/13_統一レイアウト設計.md`
-- デザインシステム: `docs/01_技術設計/15_デザインシステムSSOT.md`
+- データ層アーキテクチャ（完全DBレス・正典）: `docs/01_技術設計/02_データアーキテクチャ.md`
+- デザインシステム（統一レイアウトを含む）: `docs/01_技術設計/04_デザインシステム.md`
 - theme-dashboard feature README: `apps/web/src/features/theme-dashboard/README.md`
-- 現在計画: `docs/todo/current-{month,week}.md` / agent用週次レビュー: `.claude/skills/management/weekly-review/reference/reviews/`
-- 批判的レビュー・パフォーマンス・コスト月報: `docs/04_レビュー/`
+- 現在計画: `docs/todo/{02_今月の重点,03_今週の計画}.md` / agent用週次レビュー: `.claude/skills/management/weekly-review/reference/reviews/`
+- レビュー由来の未完了策: `docs/todo/` / 定期レポート履歴: 各skillの `reference/`
 - 白書チャート逆引き inventory（ドーマント・skill 専用に移設）: `.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/`

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /**
- * cli — google-admin runner の入口 (doc41 §6.1)。
+ * cli — google-admin runner の入口。安全契約: ./README.md。
  *
  *   node .claude/scripts/google-admin/cli.mjs audit              # read-only 監査 (既定)
  *   node .claude/scripts/google-admin/cli.mjs apply --confirm-site stats47.jp
  *   node .claude/scripts/google-admin/cli.mjs verify             # 設定後の再監査 (= audit)
  *
- * - headed 専用 (cron/CI へ載せない・§5.1)。login/MFA はユーザー操作を待つ (突破しない)。
+ * - headed 専用 (cron/CI へ載せない)。login/MFA はユーザー操作を待つ (突破しない)。
  * - apply は allowlist 3 action のみ (decideActions が決定・denylist は実行経路が存在しない)。
  * - screenshot / planned JSON は /tmp/stats47-google-admin-<run-id>/ のみ。
  *   repo へは redact 済み summary (.claude/state/metrics/google-admin/latest.json) だけ保存する。
@@ -56,7 +56,7 @@ function readLedgerAdIdStatus() {
   }
 }
 
-/** GA4 に ad_impression 実データがあるという既知の観測 (doc41 §5.2)。台帳の実測記録から判定。 */
+/** GA4 に ad_impression 実データがあるという既知の観測。台帳の実測記録から判定。 */
 function ga4AdImpressionObserved() {
   try {
     const md = fs.readFileSync(LEDGER_FILE, "utf-8");
@@ -134,7 +134,7 @@ async function main() {
     process.exit(1);
   }
   if (cmd === "apply" && getArg("--confirm-site") !== CONFIRM_SITE) {
-    console.error(`apply には --confirm-site ${CONFIRM_SITE} が必須 (対象 site の明示・§6.1)`);
+    console.error(`apply には --confirm-site ${CONFIRM_SITE} が必須 (対象 site の明示)`);
     process.exit(1);
   }
 
@@ -177,7 +177,7 @@ async function main() {
     let applied = null;
     if (cmd === "apply" && decision.actions.length > 0) {
       applied = [];
-      // planned action JSON を /tmp に保存 (§6.6-4)
+      // planned action JSON を /tmp に保存 (README「mutation手順」)
       fs.writeFileSync(path.join(tmpDir, "planned-actions.json"), JSON.stringify({ site: CONFIRM_SITE, propertyId: GA4_PROPERTY_ID, actions: decision.actions }, null, 2));
       const navHelpers = {
         gotoScLinks: async () => {
@@ -205,7 +205,7 @@ async function main() {
         }
         console.log(`  → ${result.status}${result.reason ? `: ${result.reason}` : ""}`);
         applied.push({ action, ...result });
-        if (result.status === "mutation-unknown") break; // 盲目的に続行しない (§6.6)
+        if (result.status === "mutation-unknown") break; // 盲目的に続行しない
       }
     }
 

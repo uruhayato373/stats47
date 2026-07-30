@@ -1,0 +1,1126 @@
+{
+  "statsDataId": "0003445758",
+  "title": "令和２年以降 一般_都道府県別_職種（特掲）DB",
+  "dimensions": [
+    {
+      "id": "tab",
+      "name": "表章項目",
+      "valueCount": 16,
+      "sampleValues": [
+        {
+          "code": "01",
+          "name": "年齢",
+          "unit": "歳"
+        },
+        {
+          "code": "02",
+          "name": "勤続年数",
+          "unit": "年"
+        },
+        {
+          "code": "04",
+          "name": "所定内実労働時間数",
+          "unit": "時間"
+        },
+        {
+          "code": "06",
+          "name": "超過実労働時間数",
+          "unit": "時間"
+        },
+        {
+          "code": "08",
+          "name": "きまって支給する現金給与額",
+          "unit": "千円"
+        },
+        {
+          "code": "10",
+          "name": "所定内給与額",
+          "unit": "千円"
+        },
+        {
+          "code": "12",
+          "name": "年間賞与その他特別給与額",
+          "unit": "千円"
+        },
+        {
+          "code": "13",
+          "name": "労働者数",
+          "unit": "十人"
+        },
+        {
+          "code": "33",
+          "name": "年齢",
+          "unit": "歳"
+        },
+        {
+          "code": "34",
+          "name": "勤続年数",
+          "unit": "年"
+        },
+        {
+          "code": "36",
+          "name": "所定内実労働時間数",
+          "unit": "時間"
+        },
+        {
+          "code": "38",
+          "name": "超過実労働時間数",
+          "unit": "時間"
+        },
+        {
+          "code": "40",
+          "name": "きまって支給する現金給与額",
+          "unit": "千円"
+        },
+        {
+          "code": "42",
+          "name": "所定内給与額",
+          "unit": "千円"
+        },
+        {
+          "code": "44",
+          "name": "年間賞与その他特別給与額",
+          "unit": "千円"
+        },
+        {
+          "code": "45",
+          "name": "労働者数",
+          "unit": "十人"
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat01",
+      "name": "性別_基本",
+      "valueCount": 3,
+      "sampleValues": [
+        {
+          "code": "01",
+          "name": "男女計",
+          "unit": null
+        },
+        {
+          "code": "02",
+          "name": "男",
+          "unit": null
+        },
+        {
+          "code": "03",
+          "name": "女",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "cat02",
+      "name": "職種（小分類）（2020～）",
+      "valueCount": 145,
+      "sampleValues": [
+        {
+          "code": "1031",
+          "name": "管理的職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1051",
+          "name": "研究者",
+          "unit": null
+        },
+        {
+          "code": "1072",
+          "name": "電気・電子・電気通信技術者（通信ネットワーク技術者を除く）",
+          "unit": null
+        },
+        {
+          "code": "1073",
+          "name": "機械技術者",
+          "unit": null
+        },
+        {
+          "code": "1074",
+          "name": "輸送用機器技術者",
+          "unit": null
+        },
+        {
+          "code": "1076",
+          "name": "金属技術者",
+          "unit": null
+        },
+        {
+          "code": "1077",
+          "name": "化学技術者",
+          "unit": null
+        },
+        {
+          "code": "1091",
+          "name": "建築技術者",
+          "unit": null
+        },
+        {
+          "code": "1092",
+          "name": "土木技術者",
+          "unit": null
+        },
+        {
+          "code": "1093",
+          "name": "測量技術者",
+          "unit": null
+        },
+        {
+          "code": "1101",
+          "name": "システムコンサルタント・設計者",
+          "unit": null
+        },
+        {
+          "code": "1104",
+          "name": "ソフトウェア作成者",
+          "unit": null
+        },
+        {
+          "code": "1109",
+          "name": "その他の情報処理・通信技術者",
+          "unit": null
+        },
+        {
+          "code": "1119",
+          "name": "他に分類されない技術者",
+          "unit": null
+        },
+        {
+          "code": "1121",
+          "name": "医師",
+          "unit": null
+        },
+        {
+          "code": "1122",
+          "name": "歯科医師",
+          "unit": null
+        },
+        {
+          "code": "1123",
+          "name": "獣医師",
+          "unit": null
+        },
+        {
+          "code": "1124",
+          "name": "薬剤師",
+          "unit": null
+        },
+        {
+          "code": "1131",
+          "name": "保健師",
+          "unit": null
+        },
+        {
+          "code": "1132",
+          "name": "助産師",
+          "unit": null
+        },
+        {
+          "code": "1133",
+          "name": "看護師",
+          "unit": null
+        },
+        {
+          "code": "1134",
+          "name": "准看護師",
+          "unit": null
+        },
+        {
+          "code": "1141",
+          "name": "診療放射線技師",
+          "unit": null
+        },
+        {
+          "code": "1143",
+          "name": "臨床検査技師",
+          "unit": null
+        },
+        {
+          "code": "1144",
+          "name": "理学療法士，作業療法士，言語聴覚士，視能訓練士",
+          "unit": null
+        },
+        {
+          "code": "1146",
+          "name": "歯科衛生士",
+          "unit": null
+        },
+        {
+          "code": "1147",
+          "name": "歯科技工士",
+          "unit": null
+        },
+        {
+          "code": "1151",
+          "name": "栄養士",
+          "unit": null
+        },
+        {
+          "code": "1159",
+          "name": "その他の保健医療従事者",
+          "unit": null
+        },
+        {
+          "code": "1163",
+          "name": "保育士",
+          "unit": null
+        },
+        {
+          "code": "1168",
+          "name": "介護支援専門員（ケアマネージャー）",
+          "unit": null
+        },
+        {
+          "code": "1169",
+          "name": "その他の社会福祉専門職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1173",
+          "name": "法務従事者",
+          "unit": null
+        },
+        {
+          "code": "1181",
+          "name": "公認会計士，税理士",
+          "unit": null
+        },
+        {
+          "code": "1189",
+          "name": "その他の経営・金融・保険専門職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1191",
+          "name": "幼稚園教員，保育教諭",
+          "unit": null
+        },
+        {
+          "code": "1192",
+          "name": "小・中学校教員",
+          "unit": null
+        },
+        {
+          "code": "1194",
+          "name": "高等学校教員",
+          "unit": null
+        },
+        {
+          "code": "1196",
+          "name": "大学教授（高専含む）",
+          "unit": null
+        },
+        {
+          "code": "1197",
+          "name": "大学准教授（高専含む）",
+          "unit": null
+        },
+        {
+          "code": "1198",
+          "name": "大学講師・助教（高専含む）",
+          "unit": null
+        },
+        {
+          "code": "1199",
+          "name": "その他の教員",
+          "unit": null
+        },
+        {
+          "code": "1201",
+          "name": "宗教家",
+          "unit": null
+        },
+        {
+          "code": "1211",
+          "name": "著述家，記者，編集者",
+          "unit": null
+        },
+        {
+          "code": "1221",
+          "name": "美術家，写真家，映像撮影者",
+          "unit": null
+        },
+        {
+          "code": "1224",
+          "name": "デザイナー",
+          "unit": null
+        },
+        {
+          "code": "1231",
+          "name": "音楽家，舞台芸術家",
+          "unit": null
+        },
+        {
+          "code": "1244",
+          "name": "個人教師",
+          "unit": null
+        },
+        {
+          "code": "1249",
+          "name": "他に分類されない専門的職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1251",
+          "name": "庶務・人事事務員",
+          "unit": null
+        },
+        {
+          "code": "1253",
+          "name": "企画事務員",
+          "unit": null
+        },
+        {
+          "code": "1254",
+          "name": "受付・案内事務員",
+          "unit": null
+        },
+        {
+          "code": "1255",
+          "name": "秘書",
+          "unit": null
+        },
+        {
+          "code": "1256",
+          "name": "電話応接事務員",
+          "unit": null
+        },
+        {
+          "code": "1257",
+          "name": "総合事務員",
+          "unit": null
+        },
+        {
+          "code": "1259",
+          "name": "その他の一般事務従事者",
+          "unit": null
+        },
+        {
+          "code": "1261",
+          "name": "会計事務従事者",
+          "unit": null
+        },
+        {
+          "code": "1271",
+          "name": "生産関連事務従事者",
+          "unit": null
+        },
+        {
+          "code": "1281",
+          "name": "営業・販売事務従事者",
+          "unit": null
+        },
+        {
+          "code": "1291",
+          "name": "外勤事務従事者",
+          "unit": null
+        },
+        {
+          "code": "1301",
+          "name": "運輸・郵便事務従事者",
+          "unit": null
+        },
+        {
+          "code": "1311",
+          "name": "事務用機器操作員",
+          "unit": null
+        },
+        {
+          "code": "1321",
+          "name": "販売店員",
+          "unit": null
+        },
+        {
+          "code": "1324",
+          "name": "その他の商品販売従事者",
+          "unit": null
+        },
+        {
+          "code": "1331",
+          "name": "販売類似職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1344",
+          "name": "自動車営業職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1345",
+          "name": "機械器具・通信・システム営業職業従事者（自動車を除く）",
+          "unit": null
+        },
+        {
+          "code": "1346",
+          "name": "金融営業職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1347",
+          "name": "保険営業職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1349",
+          "name": "その他の営業職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1361",
+          "name": "介護職員（医療・福祉施設等）",
+          "unit": null
+        },
+        {
+          "code": "1362",
+          "name": "訪問介護従事者",
+          "unit": null
+        },
+        {
+          "code": "1371",
+          "name": "看護助手",
+          "unit": null
+        },
+        {
+          "code": "1379",
+          "name": "その他の保健医療サービス職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1381",
+          "name": "理容・美容師",
+          "unit": null
+        },
+        {
+          "code": "1383",
+          "name": "美容サービス・浴場従事者（美容師を除く）",
+          "unit": null
+        },
+        {
+          "code": "1385",
+          "name": "クリーニング職，洗張職",
+          "unit": null
+        },
+        {
+          "code": "1391",
+          "name": "飲食物調理従事者",
+          "unit": null
+        },
+        {
+          "code": "1403",
+          "name": "飲食物給仕従事者",
+          "unit": null
+        },
+        {
+          "code": "1404",
+          "name": "航空機客室乗務員",
+          "unit": null
+        },
+        {
+          "code": "1405",
+          "name": "身の回り世話従事者",
+          "unit": null
+        },
+        {
+          "code": "1406",
+          "name": "娯楽場等接客員",
+          "unit": null
+        },
+        {
+          "code": "1411",
+          "name": "居住施設・ビル等管理人",
+          "unit": null
+        },
+        {
+          "code": "1421",
+          "name": "その他のサービス職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1453",
+          "name": "警備員",
+          "unit": null
+        },
+        {
+          "code": "1459",
+          "name": "その他の保安職業従事者",
+          "unit": null
+        },
+        {
+          "code": "1461",
+          "name": "農林漁業従事者",
+          "unit": null
+        },
+        {
+          "code": "1491",
+          "name": "製銑・製鋼・非鉄金属製錬従事者",
+          "unit": null
+        },
+        {
+          "code": "1492",
+          "name": "鋳物製造・鍛造従事者",
+          "unit": null
+        },
+        {
+          "code": "1493",
+          "name": "金属工作機械作業従事者",
+          "unit": null
+        },
+        {
+          "code": "1494",
+          "name": "金属プレス従事者",
+          "unit": null
+        },
+        {
+          "code": "1495",
+          "name": "鉄工，製缶従事者",
+          "unit": null
+        },
+        {
+          "code": "1496",
+          "name": "板金従事者",
+          "unit": null
+        },
+        {
+          "code": "1497",
+          "name": "金属彫刻・表面処理従事者",
+          "unit": null
+        },
+        {
+          "code": "1498",
+          "name": "金属溶接・溶断従事者",
+          "unit": null
+        },
+        {
+          "code": "1499",
+          "name": "その他の製品製造・加工処理従事者（金属製品）",
+          "unit": null
+        },
+        {
+          "code": "1501",
+          "name": "化学製品製造従事者",
+          "unit": null
+        },
+        {
+          "code": "1502",
+          "name": "窯業・土石製品製造従事者",
+          "unit": null
+        },
+        {
+          "code": "1503",
+          "name": "食料品・飲料・たばこ製造従事者",
+          "unit": null
+        },
+        {
+          "code": "1505",
+          "name": "紡織・衣服・繊維製品製造従事者",
+          "unit": null
+        },
+        {
+          "code": "1506",
+          "name": "木・紙製品製造従事者",
+          "unit": null
+        },
+        {
+          "code": "1507",
+          "name": "印刷・製本従事者",
+          "unit": null
+        },
+        {
+          "code": "1508",
+          "name": "ゴム・プラスチック製品製造従事者",
+          "unit": null
+        },
+        {
+          "code": "1509",
+          "name": "その他の製品製造・加工処理従事者（金属製品を除く）",
+          "unit": null
+        },
+        {
+          "code": "1511",
+          "name": "はん用・生産用・業務用機械器具組立従事者",
+          "unit": null
+        },
+        {
+          "code": "1512",
+          "name": "電気機械器具組立従事者",
+          "unit": null
+        },
+        {
+          "code": "1513",
+          "name": "自動車組立従事者",
+          "unit": null
+        },
+        {
+          "code": "1514",
+          "name": "その他の機械組立従事者",
+          "unit": null
+        },
+        {
+          "code": "1551",
+          "name": "はん用・生産用・業務用機械器具・電気機械器具整備・修理従事者",
+          "unit": null
+        },
+        {
+          "code": "1553",
+          "name": "自動車整備・修理従事者",
+          "unit": null
+        },
+        {
+          "code": "1554",
+          "name": "その他の機械整備・修理従事者",
+          "unit": null
+        },
+        {
+          "code": "1561",
+          "name": "製品検査従事者（金属製品）",
+          "unit": null
+        },
+        {
+          "code": "1571",
+          "name": "製品検査従事者（金属製品を除く）",
+          "unit": null
+        },
+        {
+          "code": "1581",
+          "name": "機械検査従事者",
+          "unit": null
+        },
+        {
+          "code": "1591",
+          "name": "画工，塗装・看板制作従事者",
+          "unit": null
+        },
+        {
+          "code": "1592",
+          "name": "製図その他生産関連・生産類似作業従事者",
+          "unit": null
+        },
+        {
+          "code": "1601",
+          "name": "鉄道運転従事者",
+          "unit": null
+        },
+        {
+          "code": "1611",
+          "name": "バス運転者",
+          "unit": null
+        },
+        {
+          "code": "1612",
+          "name": "タクシー運転者",
+          "unit": null
+        },
+        {
+          "code": "1613",
+          "name": "乗用自動車運転者（タクシー運転者を除く）",
+          "unit": null
+        },
+        {
+          "code": "1614",
+          "name": "営業用大型貨物自動車運転者",
+          "unit": null
+        },
+        {
+          "code": "1615",
+          "name": "営業用貨物自動車運転者（大型車を除く）",
+          "unit": null
+        },
+        {
+          "code": "1616",
+          "name": "自家用貨物自動車運転者",
+          "unit": null
+        },
+        {
+          "code": "1619",
+          "name": "その他の自動車運転従事者",
+          "unit": null
+        },
+        {
+          "code": "1624",
+          "name": "航空機操縦士",
+          "unit": null
+        },
+        {
+          "code": "1631",
+          "name": "車掌",
+          "unit": null
+        },
+        {
+          "code": "1639",
+          "name": "他に分類されない輸送従事者",
+          "unit": null
+        },
+        {
+          "code": "1641",
+          "name": "発電員，変電員",
+          "unit": null
+        },
+        {
+          "code": "1643",
+          "name": "クレーン・ウインチ運転従事者",
+          "unit": null
+        },
+        {
+          "code": "1645",
+          "name": "建設・さく井機械運転従事者",
+          "unit": null
+        },
+        {
+          "code": "1649",
+          "name": "その他の定置・建設機械運転従事者",
+          "unit": null
+        },
+        {
+          "code": "1651",
+          "name": "建設躯体工事従事者",
+          "unit": null
+        },
+        {
+          "code": "1661",
+          "name": "大工",
+          "unit": null
+        },
+        {
+          "code": "1666",
+          "name": "配管従事者",
+          "unit": null
+        },
+        {
+          "code": "1669",
+          "name": "その他の建設従事者",
+          "unit": null
+        },
+        {
+          "code": "1671",
+          "name": "電気工事従事者",
+          "unit": null
+        },
+        {
+          "code": "1681",
+          "name": "土木従事者，鉄道線路工事従事者",
+          "unit": null
+        },
+        {
+          "code": "1691",
+          "name": "ダム・トンネル掘削従事者，採掘従事者",
+          "unit": null
+        },
+        {
+          "code": "1702",
+          "name": "船内・沿岸荷役従事者",
+          "unit": null
+        },
+        {
+          "code": "1703",
+          "name": "その他の運搬従事者",
+          "unit": null
+        },
+        {
+          "code": "1711",
+          "name": "ビル・建物清掃員",
+          "unit": null
+        },
+        {
+          "code": "1712",
+          "name": "清掃員（ビル・建物を除く），廃棄物処理従事者",
+          "unit": null
+        },
+        {
+          "code": "1721",
+          "name": "包装従事者",
+          "unit": null
+        },
+        {
+          "code": "1739",
+          "name": "他に分類されない運搬・清掃・包装等従事者",
+          "unit": null
+        },
+        {
+          "code": "9999",
+          "name": "不詳",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "area",
+      "name": "地域",
+      "valueCount": 48,
+      "sampleValues": [
+        {
+          "code": "00000",
+          "name": "全国",
+          "unit": null
+        },
+        {
+          "code": "01000",
+          "name": "北海道",
+          "unit": null
+        },
+        {
+          "code": "02000",
+          "name": "青森県",
+          "unit": null
+        },
+        {
+          "code": "03000",
+          "name": "岩手県",
+          "unit": null
+        },
+        {
+          "code": "04000",
+          "name": "宮城県",
+          "unit": null
+        },
+        {
+          "code": "05000",
+          "name": "秋田県",
+          "unit": null
+        },
+        {
+          "code": "06000",
+          "name": "山形県",
+          "unit": null
+        },
+        {
+          "code": "07000",
+          "name": "福島県",
+          "unit": null
+        },
+        {
+          "code": "08000",
+          "name": "茨城県",
+          "unit": null
+        },
+        {
+          "code": "09000",
+          "name": "栃木県",
+          "unit": null
+        },
+        {
+          "code": "10000",
+          "name": "群馬県",
+          "unit": null
+        },
+        {
+          "code": "11000",
+          "name": "埼玉県",
+          "unit": null
+        },
+        {
+          "code": "12000",
+          "name": "千葉県",
+          "unit": null
+        },
+        {
+          "code": "13000",
+          "name": "東京都",
+          "unit": null
+        },
+        {
+          "code": "14000",
+          "name": "神奈川県",
+          "unit": null
+        },
+        {
+          "code": "15000",
+          "name": "新潟県",
+          "unit": null
+        },
+        {
+          "code": "16000",
+          "name": "富山県",
+          "unit": null
+        },
+        {
+          "code": "17000",
+          "name": "石川県",
+          "unit": null
+        },
+        {
+          "code": "18000",
+          "name": "福井県",
+          "unit": null
+        },
+        {
+          "code": "19000",
+          "name": "山梨県",
+          "unit": null
+        },
+        {
+          "code": "20000",
+          "name": "長野県",
+          "unit": null
+        },
+        {
+          "code": "21000",
+          "name": "岐阜県",
+          "unit": null
+        },
+        {
+          "code": "22000",
+          "name": "静岡県",
+          "unit": null
+        },
+        {
+          "code": "23000",
+          "name": "愛知県",
+          "unit": null
+        },
+        {
+          "code": "24000",
+          "name": "三重県",
+          "unit": null
+        },
+        {
+          "code": "25000",
+          "name": "滋賀県",
+          "unit": null
+        },
+        {
+          "code": "26000",
+          "name": "京都府",
+          "unit": null
+        },
+        {
+          "code": "27000",
+          "name": "大阪府",
+          "unit": null
+        },
+        {
+          "code": "28000",
+          "name": "兵庫県",
+          "unit": null
+        },
+        {
+          "code": "29000",
+          "name": "奈良県",
+          "unit": null
+        },
+        {
+          "code": "30000",
+          "name": "和歌山県",
+          "unit": null
+        },
+        {
+          "code": "31000",
+          "name": "鳥取県",
+          "unit": null
+        },
+        {
+          "code": "32000",
+          "name": "島根県",
+          "unit": null
+        },
+        {
+          "code": "33000",
+          "name": "岡山県",
+          "unit": null
+        },
+        {
+          "code": "34000",
+          "name": "広島県",
+          "unit": null
+        },
+        {
+          "code": "35000",
+          "name": "山口県",
+          "unit": null
+        },
+        {
+          "code": "36000",
+          "name": "徳島県",
+          "unit": null
+        },
+        {
+          "code": "37000",
+          "name": "香川県",
+          "unit": null
+        },
+        {
+          "code": "38000",
+          "name": "愛媛県",
+          "unit": null
+        },
+        {
+          "code": "39000",
+          "name": "高知県",
+          "unit": null
+        },
+        {
+          "code": "40000",
+          "name": "福岡県",
+          "unit": null
+        },
+        {
+          "code": "41000",
+          "name": "佐賀県",
+          "unit": null
+        },
+        {
+          "code": "42000",
+          "name": "長崎県",
+          "unit": null
+        },
+        {
+          "code": "43000",
+          "name": "熊本県",
+          "unit": null
+        },
+        {
+          "code": "44000",
+          "name": "大分県",
+          "unit": null
+        },
+        {
+          "code": "45000",
+          "name": "宮崎県",
+          "unit": null
+        },
+        {
+          "code": "46000",
+          "name": "鹿児島県",
+          "unit": null
+        },
+        {
+          "code": "47000",
+          "name": "沖縄県",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "time",
+      "name": "時間軸（2020～2023）",
+      "valueCount": 4,
+      "sampleValues": [
+        {
+          "code": "2023000000",
+          "name": "2023年",
+          "unit": null
+        },
+        {
+          "code": "2022000000",
+          "name": "2022年",
+          "unit": null
+        },
+        {
+          "code": "2021000000",
+          "name": "2021年",
+          "unit": null
+        },
+        {
+          "code": "2020000000",
+          "name": "2020年",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    }
+  ]
+}

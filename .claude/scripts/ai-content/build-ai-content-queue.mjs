@@ -8,9 +8,13 @@
  *   → どのセッション・どの PC からでも、本スクリプトを実行すれば「今 done な集合 / 次にやるべき集合」が
  *     決定的に分かる。後日途中から再開しても安全 (中断耐性)。
  *
- * 対象スコープ: **GSC 流入のある /ranking/ ページ** (SEO 優先順位の母集団)。impressions 降順で優先。
- *   ※ 流入ゼロの long-tail missing は本キュー対象外 (それは list-pending.ts が全件把握)。SEO 目的では
- *     流入のある incomplete/blocker ページを優先するのが効くため、本キューはそれを管理する。
+ * 対象スコープは 2 種 (`--scope`):
+ *   - `gsc` (既定): **GSC 流入のある /ranking/ ページ**。SEO 優先順位の母集団。impressions 降順で優先
+ *   - `all`        : **R2 の active ranking 全件** (app/ranking-items/all.json の isActive)。
+ *                    「全件を完成させる」量産フェーズ用。GSC 流入が無いキーは impressions 0 として末尾に並ぶ
+ *
+ * どちらのスコープでも実行のたびに `progress-history.csv` へ 1 行追記し、
+ * 消化ペースと残件数から完了見込みを LATEST.md に出す (日次 cron の進捗管理)。
  *
  * 判定:
  *   - missing      : ai-content.json が R2 に無い → needs-regen
@@ -24,13 +28,14 @@
  *   .claude/state/ai-content/LATEST.md               (人間向けサマリ)
  *
  * Usage:
- *   node .claude/scripts/ai-content/build-ai-content-queue.mjs            # 再構築 (R2 を全 GSC key 走査)
+ *   node .claude/scripts/ai-content/build-ai-content-queue.mjs            # 再構築 (GSC 流入スコープ)
+ *   node .claude/scripts/ai-content/build-ai-content-queue.mjs --scope all # 再構築 (active 全件・量産フェーズ)
  *   node .claude/scripts/ai-content/build-ai-content-queue.mjs --next 10  # 次にやるべき needs-regen 上位10 (impressions順)
  *   node .claude/scripts/ai-content/build-ai-content-queue.mjs --json     # サマリ JSON
  *   node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 10  # 既存キューJSONから --next だけ
  *
  * 関連: audit-ai-content.mjs (auditRow) / build-input.ts / generate-parallel.ts /
- *       docs/todo/02_機能バックログ.md [AICONTENT-DBLESS-REBUILD]
+ *       docs/todo/05_機能バックログ.md [AICONTENT-DBLESS-REBUILD]
  */
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
@@ -45,6 +50,8 @@ const GSC_SNAP_DIR = join(ROOT, ".claude/skills/analytics/gsc-improvement/refere
 const STATE_DIR = join(ROOT, ".claude/state/ai-content");
 const QUEUE_JSON = join(STATE_DIR, "remediation-queue.json");
 const LATEST_MD = join(STATE_DIR, "LATEST.md");
+const HISTORY_CSV = join(STATE_DIR, "progress-history.csv");
+const RANKING_ITEMS_URL = `${R2_PUBLIC}/app/ranking-items/all.json`;
 const CONCURRENCY = 16;
 
 function latestGscPagesCsv() {
@@ -98,6 +105,23 @@ async function fetchAiContent(key) {
   }
 }
 
+/**
+ * R2 の ranking_items snapshot から active な rankingKey を全件取得する。
+ *
+ * `readActiveRankingKeysFromR2` (TS) と同じ真実源・同じ条件 (areaType 一致 + isActive) を
+ * .mjs から直接 fetch する。TS パッケージを import できないための再実装なので、
+ * **条件を変えるときは両方を合わせる**こと。
+ */
+async function fetchActiveRankingKeys(areaType = "prefecture") {
+  const res = await fetch(`${RANKING_ITEMS_URL}?cb=${Date.now()}`);
+  if (!res.ok) throw new Error(`ranking_items snapshot 取得失敗 ${res.status}: ${RANKING_ITEMS_URL}`);
+  const snapshot = await res.json();
+  const items = snapshot?.items ?? [];
+  return items
+    .filter((it) => it.areaType === areaType && it.isActive)
+    .map((it) => it.rankingKey);
+}
+
 function classify(key, gsc, fetched) {
   const base = {
     rankingKey: key,
@@ -133,18 +157,30 @@ function classify(key, gsc, fetched) {
   };
 }
 
-async function buildQueue() {
+async function buildQueue(scope = "gsc") {
   const gsc = latestGscPagesCsv();
   if (!gsc) throw new Error(`GSC pages.csv が見つかりません (${GSC_SNAP_DIR})`);
   const keyMap = parseRankingKeysFromGsc(gsc.path);
-  const keys = [...keyMap.keys()];
-  process.stderr.write(`[build-queue] GSC ${gsc.week}: /ranking/ key ${keys.length} 件を R2 で判定中…\n`);
+
+  let keys;
+  if (scope === "all") {
+    // 全件スコープ: active 全キー。GSC に無いキーは impressions 0 で末尾に並ぶ
+    const active = await fetchActiveRankingKeys();
+    keys = active;
+    process.stderr.write(
+      `[build-queue] scope=all: active ${keys.length} 件 (GSC 流入あり ${keys.filter((k) => keyMap.has(k)).length} 件) を R2 で判定中…\n`,
+    );
+  } else {
+    keys = [...keyMap.keys()];
+    process.stderr.write(`[build-queue] GSC ${gsc.week}: /ranking/ key ${keys.length} 件を R2 で判定中…\n`);
+  }
+  const gscOf = (k) => keyMap.get(k) ?? { impressions: 0, clicks: 0, position: 0 };
 
   const entries = [];
   for (let i = 0; i < keys.length; i += CONCURRENCY) {
     const batch = keys.slice(i, i + CONCURRENCY);
     const results = await Promise.all(
-      batch.map(async (k) => classify(k, keyMap.get(k), await fetchAiContent(k))),
+      batch.map(async (k) => classify(k, gscOf(k), await fetchAiContent(k))),
     );
     entries.push(...results);
   }
@@ -156,7 +192,7 @@ async function buildQueue() {
 
   // 2段 critic の tier 割り当て (機械化): GSC 流入上位 N 件の needs-regen を tier-2 (opus critic)、
   // 残りは tier-1 (sonnet critic + 決定的ゲート)。author は常に sonnet (frontmatter 固定)。
-  // 設計正典: .claude/skills/content/generate-ai-content/SKILL.md / docs/04_レビュー/2026-07-03-claude-code-setup-audit.md
+  // 設計正典: .claude/rules/model-prompting.md / .claude/skills/content/generate-ai-content/SKILL.md
   const OPUS_REVIEW_TOP_N = 30;
   needs.forEach((e, i) => {
     e.reviewTier = i < OPUS_REVIEW_TOP_N ? "opus" : "sonnet";
@@ -165,7 +201,11 @@ async function buildQueue() {
   const queue = {
     generatedAt: new Date().toISOString(),
     gscSnapshot: gsc.week,
-    scope: "GSC流入のある /ranking/ ページ (SEO優先母集団)",
+    scopeKind: scope,
+    scope:
+      scope === "all"
+        ? "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)"
+        : "GSC流入のある /ranking/ ページ (SEO優先母集団)",
     doneCriteria: "R2 の ai-content が auditRow を通る (blocker 0)",
     summary: {
       total: entries.length,
@@ -181,11 +221,58 @@ async function buildQueue() {
 
   mkdirSync(STATE_DIR, { recursive: true });
   writeFileSync(QUEUE_JSON, JSON.stringify(queue, null, 2) + "\n");
-  writeLatestMd(queue);
+  const progress = appendHistory(queue);
+  writeLatestMd(queue, progress);
   return queue;
 }
 
-function writeLatestMd(queue) {
+/**
+ * 進捗履歴を 1 行追記し、消化ペースと完了見込みを返す。
+ *
+ * 同じ日・同じ scope の行は上書きする (日次 cron が複数回走っても 1 日 1 行に保つ)。
+ * ペースは「同一 scope の最古行との done 差 ÷ 経過日数」。行が 1 本だけならペースは null。
+ */
+function appendHistory(queue) {
+  const header = "date,scope,total,done,needsRegen,missing,incomplete,blocker";
+  const s = queue.summary;
+  const r = s.needsByReason ?? {};
+  const missing = Object.entries(r)
+    .filter(([k]) => k === "missing" || k.startsWith("fetch-error"))
+    .reduce((acc, [, v]) => acc + v, 0);
+  const date = queue.generatedAt.slice(0, 10);
+  const scope = queue.scopeKind ?? "gsc";
+  const row = [date, scope, s.total, s.done, s.needsRegen, missing, r.incomplete ?? 0, r.blocker ?? 0].join(",");
+
+  let rows = [];
+  if (existsSync(HISTORY_CSV)) {
+    rows = readFileSync(HISTORY_CSV, "utf8").trim().split("\n").filter((l) => l && l !== header);
+  }
+  rows = rows.filter((l) => {
+    const c = l.split(",");
+    return !(c[0] === date && (c[1] ?? "gsc") === scope);
+  });
+  rows.push(row);
+  rows.sort();
+  writeFileSync(HISTORY_CSV, [header, ...rows].join("\n") + "\n");
+
+  // 同一 scope の履歴から消化ペースを出す
+  const same = rows
+    .map((l) => l.split(","))
+    .filter((c) => (c[1] ?? "gsc") === scope)
+    .map((c) => ({ date: c[0], done: Number(c[3]), needs: Number(c[4]) }));
+  if (same.length < 2) return { perDay: null, etaDays: null, remaining: s.needsRegen, history: same.length };
+  const first = same[0];
+  const last = same[same.length - 1];
+  const days = Math.max(
+    1,
+    Math.round((new Date(last.date) - new Date(first.date)) / 86_400_000),
+  );
+  const perDay = (last.done - first.done) / days;
+  const etaDays = perDay > 0 ? Math.ceil(s.needsRegen / perDay) : null;
+  return { perDay, etaDays, remaining: s.needsRegen, history: same.length, sinceDate: first.date };
+}
+
+function writeLatestMd(queue, progress = null) {
   const s = queue.summary;
   const top = queue.entries.filter((e) => e.status === "needs-regen").slice(0, 20);
   // done を「いつ修正したか」(R2 last-modified) 降順に。新しく直したものが上。
@@ -200,12 +287,25 @@ function writeLatestMd(queue) {
     `- GSC snapshot: ${queue.gscSnapshot} / スコープ: ${queue.scope}`,
     `- done 判定: ${queue.doneCriteria}`,
     ``,
-    `## サマリ (GSC流入 /ranking/ ページ ${s.total} 件)`,
+    `## サマリ (${queue.scopeKind === "all" ? "active ranking 全件" : "GSC流入 /ranking/ ページ"} ${s.total} 件)`,
     ``,
-    `- ✅ done: ${s.done} 件 (impressions 計 ${s.doneImpressions})`,
+    `- ✅ done: ${s.done} 件 (${((s.done / Math.max(1, s.total)) * 100).toFixed(1)}% / impressions 計 ${s.doneImpressions})`,
     `- ⏳ needs-regen: ${s.needsRegen} 件 (impressions 計 ${s.needsImpressions})`,
     `  - 内訳: ${Object.entries(s.needsByReason).map(([k, v]) => `${k} ${v}`).join(" / ") || "—"}`,
     ``,
+    ...(progress
+      ? [
+          `## 進捗 (progress-history.csv より)`,
+          ``,
+          progress.perDay == null
+            ? `- 履歴 ${progress.history} 点。ペース算出には 2 日以上の履歴が必要`
+            : `- 消化ペース: **${progress.perDay.toFixed(1)} 件/日** (${progress.sinceDate} からの平均)`,
+          progress.etaDays == null
+            ? `- 残り ${progress.remaining} 件 (完了見込みは未算出)`
+            : `- 残り ${progress.remaining} 件 → **完了見込み 約 ${progress.etaDays} 日**`,
+          ``,
+        ]
+      : []),
     `## いつ修正したか (done を R2 last-modified 降順・上位15)`,
     ``,
     `| R2 last-modified | key | impressions |`,
@@ -238,8 +338,13 @@ async function main() {
   const asJson = argv.includes("--json");
   const nextIdx = argv.indexOf("--next");
   const nextN = nextIdx >= 0 ? Number(argv[nextIdx + 1]) : null;
+  const scopeIdx = argv.indexOf("--scope");
+  const scope = scopeIdx >= 0 ? argv[scopeIdx + 1] : "gsc";
+  if (!["gsc", "all"].includes(scope)) {
+    throw new Error(`--scope は gsc | all のみ (指定: ${scope})`);
+  }
 
-  const queue = noBuild ? loadQueue() : await buildQueue();
+  const queue = noBuild ? loadQueue() : await buildQueue(scope);
 
   if (nextN != null) {
     const next = queue.entries.filter((e) => e.status === "needs-regen").slice(0, nextN);

@@ -50,22 +50,16 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
    - 例: 「DB レコード数」→ better-sqlite3 で直接 COUNT する
    - ロードマップの進捗欄は古い可能性が高いため、ソースオブトゥルースとして扱わない
 4. 上記の構造・観点に従いレビューを作成
-5. Write tool で `docs/04_レビュー/{YYYY-MM-DD}-{topic}.md` を作成（topic は対象ドキュメントから推測した短い slug、例 `nsm` / `monetization` / `growth-loops`）。frontmatter:
-   ```yaml
-   ---
-   type: critical-review
-   topic: <slug>
-   target: <レビュー対象の docs パス>
-   date: YYYY-MM-DD
-   status: draft | published | decided | archived
-   tags: []
-   ---
-   ```
-6. 作成したファイルパスを報告
+5. 確定した恒久判断は対象の戦略文書・rules・READMEへ直接反映する
+6. 未完了の対策だけを `docs/todo/04_改善バックログ.md` または
+   `05_機能バックログ.md` へ、ID・優先度・実行順・停止条件・完了条件付きで統合する
+7. レビュー全文はセッション内で提示し、別ファイルとして保存しない
 
-## 出力先
+## 保存方針
 
-`docs/04_レビュー/{YYYY-MM-DD}-{topic}.md`
+- 恒久判断: レビュー対象の既存SSOT
+- 未完了策: `docs/todo/` の該当バックログ
+- 全文: セッション出力のみ。完了履歴はGitを参照
 
 本文には以下の順でセクションを含める:
 - 対象（関連ドキュメントの相対リンク）
@@ -78,7 +72,7 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
 
 ## 関連
 
-- 出力先 docs と weekly-plan / weekly-review / pre-mortem / 改善ログ 各ドキュメントからクロスリファレンスされる
+- weekly-plan / weekly-review は追加したTODO IDを参照する
 
 ## 実証チェックリスト（批判的指摘を Issue にまとめる前に必須）
 
@@ -99,6 +93,6 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
 
 ## 参照
 
-- `ls -t docs/04_レビュー/*.md | head -5` — 過去のレビュー（トーンやフォーマットの参考）
-- `grep -l "status: draft\|status: published" docs/04_レビュー/*.md` — 意思決定待ちのレビュー
-- `docs/04_レビュー/` — 出力先ディレクトリ
+- `docs/todo/00_運用ガイド.md` — レビュー由来TODOの必須項目
+- `.claude/rules/docs-vs-issues.md` — 保存先判定
+- `git log -- <レビュー対象>` — 過去の判断変遷

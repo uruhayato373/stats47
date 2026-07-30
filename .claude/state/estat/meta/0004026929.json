@@ -1,0 +1,393 @@
+{
+  "statsDataId": "0004026929",
+  "title": "保健師・助産師・看護師・准看護師 就業助産師数，実人員－常勤換算・就業場所・都道府県別",
+  "dimensions": [
+    {
+      "id": "tab",
+      "name": "表章項目",
+      "valueCount": 2,
+      "sampleValues": [
+        {
+          "code": "0260",
+          "name": "助産師数",
+          "unit": "人"
+        },
+        {
+          "code": "0340",
+          "name": "助産師数（常勤換算）",
+          "unit": "人"
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat01",
+      "name": "就業場所",
+      "valueCount": 20,
+      "sampleValues": [
+        {
+          "code": "100",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "120",
+          "name": "病院",
+          "unit": null
+        },
+        {
+          "code": "140",
+          "name": "有床診療所",
+          "unit": null
+        },
+        {
+          "code": "150",
+          "name": "無床診療所",
+          "unit": null
+        },
+        {
+          "code": "180",
+          "name": "助産所（分娩の取り扱いあり）_開設者",
+          "unit": null
+        },
+        {
+          "code": "190",
+          "name": "助産所（分娩の取り扱いあり）_従事者",
+          "unit": null
+        },
+        {
+          "code": "200",
+          "name": "助産所（分娩の取り扱いあり）_出張のみによる者",
+          "unit": null
+        },
+        {
+          "code": "220",
+          "name": "助産所（分娩の取り扱いなし）_開設者",
+          "unit": null
+        },
+        {
+          "code": "230",
+          "name": "助産所（分娩の取り扱いなし）_従事者",
+          "unit": null
+        },
+        {
+          "code": "240",
+          "name": "助産所（分娩の取り扱いなし）_出張のみによる者",
+          "unit": null
+        },
+        {
+          "code": "260",
+          "name": "訪問看護ステーション_管理者",
+          "unit": null
+        },
+        {
+          "code": "270",
+          "name": "訪問看護ステーション_従事者",
+          "unit": null
+        },
+        {
+          "code": "400",
+          "name": "社会福祉施設_児童福祉施設",
+          "unit": null
+        },
+        {
+          "code": "410",
+          "name": "社会福祉施設_その他",
+          "unit": null
+        },
+        {
+          "code": "430",
+          "name": "保健所、都道府県又は市区町村_保健所",
+          "unit": null
+        },
+        {
+          "code": "440",
+          "name": "保健所、都道府県又は市区町村_都道府県",
+          "unit": null
+        },
+        {
+          "code": "450",
+          "name": "保健所、都道府県又は市区町村_市区町村",
+          "unit": null
+        },
+        {
+          "code": "500",
+          "name": "事業所",
+          "unit": null
+        },
+        {
+          "code": "490",
+          "name": "看護師等学校養成所又は研究機関",
+          "unit": null
+        },
+        {
+          "code": "580",
+          "name": "その他",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "area",
+      "name": "都道府県",
+      "valueCount": 48,
+      "sampleValues": [
+        {
+          "code": "00000",
+          "name": "全国",
+          "unit": null
+        },
+        {
+          "code": "01000",
+          "name": "北海道",
+          "unit": null
+        },
+        {
+          "code": "02000",
+          "name": "青森県",
+          "unit": null
+        },
+        {
+          "code": "03000",
+          "name": "岩手県",
+          "unit": null
+        },
+        {
+          "code": "04000",
+          "name": "宮城県",
+          "unit": null
+        },
+        {
+          "code": "05000",
+          "name": "秋田県",
+          "unit": null
+        },
+        {
+          "code": "06000",
+          "name": "山形県",
+          "unit": null
+        },
+        {
+          "code": "07000",
+          "name": "福島県",
+          "unit": null
+        },
+        {
+          "code": "08000",
+          "name": "茨城県",
+          "unit": null
+        },
+        {
+          "code": "09000",
+          "name": "栃木県",
+          "unit": null
+        },
+        {
+          "code": "10000",
+          "name": "群馬県",
+          "unit": null
+        },
+        {
+          "code": "11000",
+          "name": "埼玉県",
+          "unit": null
+        },
+        {
+          "code": "12000",
+          "name": "千葉県",
+          "unit": null
+        },
+        {
+          "code": "13000",
+          "name": "東京都",
+          "unit": null
+        },
+        {
+          "code": "14000",
+          "name": "神奈川県",
+          "unit": null
+        },
+        {
+          "code": "15000",
+          "name": "新潟県",
+          "unit": null
+        },
+        {
+          "code": "16000",
+          "name": "富山県",
+          "unit": null
+        },
+        {
+          "code": "17000",
+          "name": "石川県",
+          "unit": null
+        },
+        {
+          "code": "18000",
+          "name": "福井県",
+          "unit": null
+        },
+        {
+          "code": "19000",
+          "name": "山梨県",
+          "unit": null
+        },
+        {
+          "code": "20000",
+          "name": "長野県",
+          "unit": null
+        },
+        {
+          "code": "21000",
+          "name": "岐阜県",
+          "unit": null
+        },
+        {
+          "code": "22000",
+          "name": "静岡県",
+          "unit": null
+        },
+        {
+          "code": "23000",
+          "name": "愛知県",
+          "unit": null
+        },
+        {
+          "code": "24000",
+          "name": "三重県",
+          "unit": null
+        },
+        {
+          "code": "25000",
+          "name": "滋賀県",
+          "unit": null
+        },
+        {
+          "code": "26000",
+          "name": "京都府",
+          "unit": null
+        },
+        {
+          "code": "27000",
+          "name": "大阪府",
+          "unit": null
+        },
+        {
+          "code": "28000",
+          "name": "兵庫県",
+          "unit": null
+        },
+        {
+          "code": "29000",
+          "name": "奈良県",
+          "unit": null
+        },
+        {
+          "code": "30000",
+          "name": "和歌山県",
+          "unit": null
+        },
+        {
+          "code": "31000",
+          "name": "鳥取県",
+          "unit": null
+        },
+        {
+          "code": "32000",
+          "name": "島根県",
+          "unit": null
+        },
+        {
+          "code": "33000",
+          "name": "岡山県",
+          "unit": null
+        },
+        {
+          "code": "34000",
+          "name": "広島県",
+          "unit": null
+        },
+        {
+          "code": "35000",
+          "name": "山口県",
+          "unit": null
+        },
+        {
+          "code": "36000",
+          "name": "徳島県",
+          "unit": null
+        },
+        {
+          "code": "37000",
+          "name": "香川県",
+          "unit": null
+        },
+        {
+          "code": "38000",
+          "name": "愛媛県",
+          "unit": null
+        },
+        {
+          "code": "39000",
+          "name": "高知県",
+          "unit": null
+        },
+        {
+          "code": "40000",
+          "name": "福岡県",
+          "unit": null
+        },
+        {
+          "code": "41000",
+          "name": "佐賀県",
+          "unit": null
+        },
+        {
+          "code": "42000",
+          "name": "長崎県",
+          "unit": null
+        },
+        {
+          "code": "43000",
+          "name": "熊本県",
+          "unit": null
+        },
+        {
+          "code": "44000",
+          "name": "大分県",
+          "unit": null
+        },
+        {
+          "code": "45000",
+          "name": "宮崎県",
+          "unit": null
+        },
+        {
+          "code": "46000",
+          "name": "鹿児島県",
+          "unit": null
+        },
+        {
+          "code": "47000",
+          "name": "沖縄県",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "time",
+      "name": "時間軸（年次）",
+      "valueCount": 1,
+      "sampleValues": [
+        {
+          "code": "2020000000",
+          "name": "2020年",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    }
+  ]
+}

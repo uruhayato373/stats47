@@ -28,6 +28,17 @@
  *                             2 軸。相対だけだと values.json ごと凍結したキーを見逃す
  *   (i) 正典 app/stats      — active キーの `app/stats/<key>/values.json` が実在し rowCount>0 か。
  *                             前回比 rowCount ドリフト (部分崩壊) も見る
+ *   (k) レシピ整合         — 値の隣に焼かれた取得レシピが現在の config と一致するか
+ *                            (出典が同じでも軸 pin・tab・変換が違えば別の数字になる)
+ *   (j) 形状               — 同一 (県, 年) の重複行 / unit が % なのに値が範囲外 /
+ *                             47 県に満たない年。取り込み (page-data-batch) と同じ純関数
+ *                             (`@stats47/data-configs` の classifyShape) で判定する
+ *
+ * (j) は 2026-07-30 の実測 (active 2,179 件のうち 209 件が壊れた形状のまま配信) を受けた追加。
+ * (i) は payload 全体を取得しているのに `meta.rowCount` しか読んでおらず、
+ * 「1,128 行 ≠ 47 県 × 1 年」という自明な矛盾を素通りさせていた。同日に本監査を実行した
+ * 結果は違反 0 件 = ✓ OK だった。行が**少なすぎる**側 (0 件) だけを見て、
+ * **多すぎる**側を見ていなかったのが穴。追加のネットワークコストは 0。
  *
  * (f)(g)(h) は 2026-07-29 の障害 (values-per-area.json が 100 倍過大な値のまま 2 ヶ月配信) の
  * 再発検知。件数チェックだけでは「値が桁違い」も「writer 不在で凍結」も捕まえられなかった。
@@ -47,7 +58,17 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 
-import { findExpectedEmpty } from "@stats47/data-configs";
+import {
+  EXPECTED_SHAPE_ANOMALY,
+  buildRecipe,
+  classifyShape,
+  findExpectedEmpty,
+  getMetricConfig,
+  parseRecipe,
+  summarizeShape,
+  type MetricRecipe,
+  type ShapeRow,
+} from "@stats47/data-configs";
 // HOME_FEATURED_RANKINGS は掲載価値スコアへの一元化で廃止。注目 8 件は生成物が持つ。
 import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
 
@@ -121,8 +142,69 @@ interface ValuesJson {
 }
 
 interface StatsValuesJson {
-  meta?: { rowCount?: number };
+  meta?: { rowCount?: number; recipe?: unknown };
   rows?: unknown[];
+}
+
+/**
+ * (j) 形状の検査結果。
+ *
+ * 2026-07-30 実測: active 2,179 件のうち **209 件**が壊れた形状のまま配信されていた
+ * (重複行 176 / 単位と値の矛盾 27 / 県の欠落 24)。同日に本監査を実行した結果は
+ * 違反 0 件 = ✓ OK で、(a)-(i) のどれも検知できなかった。
+ * (i) は payload 全体を取得しているのに `meta.rowCount` しか読んでいなかったため、
+ * 「1,128 行 ≠ 47 県 × 1 年」という自明な矛盾が素通りしていた。
+ *
+ * 判定は取り込み (page-data-batch) と**同じ純関数** `@stats47/data-configs` の
+ * `classifyShape` を使う。追加のネットワークコストは 0 (rows は既に取得済み)。
+ */
+interface ShapeChecks {
+  checked: number;
+  /** 検査種別ごとの違反件数 */
+  byCheck: Record<string, number>;
+  /** allowlist で降格されない違反 */
+  violations: Array<{ key: string; check: string; message: string }>;
+  /** allowlist で降格された違反の件数 (是正の残数) */
+  allowedCount: number;
+  /** 配信側 app/ranking/<key>/values.json の partition 内で areaCode が重複しているキー */
+  deliveryDuplicates: string[];
+  /**
+   * 配信側の重複のうち、正典 app/stats 側が allowlist 済みのもの。**違反にしない**。
+   *
+   * 配信側は正典から決定的に変換されるだけなので、正典が壊れていれば配信側も壊れる。
+   * これを独立した違反に数えると根本データが直るまで監査が永久に赤くなり、
+   * 「赤いのが常態」になって新しい問題が埋もれる (normalized.expectedSkipped と同じ理由)。
+   * 独立した違反として扱うのは「正典は健全なのに配信側だけ壊れている」= 生成器のバグだけ。
+   */
+  deliveryDuplicatesExpected: string[];
+  ok: boolean;
+}
+
+/**
+ * (k) レシピ整合の検査結果。
+ *
+ * 「この値は**現在の config** で作れるか」を見る。値の隣に焼かれた
+ * `meta.recipe.configHash` と `buildRecipe(getMetricConfig(key)).configHash` を突き合わせる。
+ *
+ * ★出典 (statsDataId) が同じでも、軸 pin・tab 選択・線形結合・軸合算・率・地域軸が
+ * 変われば別の数字になる。config を直しても R2 を再生成していなければ古い値が
+ * 配信され続けるが、(a)-(j) はどれもそれを検知できない (形は正しいので通ってしまう)。
+ *
+ * `unbaked` は違反ではなく**残数**。レシピ導入 (2026-07-30) 以前に書かれた payload には
+ * レシピが無く、全面再生成が終わるまでは正常な状態。前回比で増えたときだけ fail する
+ * (縮小専用ラチェット)。0 になったら必須化する。
+ *
+ * 追加のネットワークコストは 0 (payload は (i) で取得済み)。
+ */
+interface RecipeChecks {
+  checked: number;
+  /** レシピが焼かれていない (旧 payload)。違反ではなく残数 */
+  unbaked: string[];
+  /** 焼かれたレシピが現在の config と食い違う = R2 が stale */
+  drift: Array<{ key: string; baked: string; current: string; diff: string }>;
+  /** config が registry に無い (公開だけ残っている) */
+  configMissing: string[];
+  ok: boolean;
 }
 
 interface NationalTrendJson {
@@ -198,6 +280,8 @@ interface CountSnapshot {
   categories: Record<string, number>;
   /** (i) の前回比ドリフト用 */
   statsRowCounts: Record<string, number>;
+  /** (k) の縮小専用ラチェット用。レシピ未焼き込みの残数 */
+  recipeUnbaked?: number;
 }
 
 interface AuditReport {
@@ -222,6 +306,8 @@ interface AuditReport {
   };
   normalized: NormalizedChecks;
   stats: StatsChecks;
+  shape: ShapeChecks;
+  recipe: RecipeChecks;
   ok: boolean;
 }
 
@@ -250,6 +336,24 @@ function checkFreshness(
 }
 
 /** 2 つの ISO 日時の差 (日) を返す。パース不能なら null */
+/**
+ * レシピ差分を 1 行で説明する。hash が違うことだけ言われても直せないので、
+ * 「どのフィールドがどう変わったか」まで出す。
+ */
+function describeRecipeDiff(baked: MetricRecipe, current: MetricRecipe): string {
+  const parts: string[] = [];
+  const b = (baked.estatParams ?? {}) as Record<string, string | undefined>;
+  const c = (current.estatParams ?? {}) as Record<string, string | undefined>;
+  for (const k of new Set([...Object.keys(b), ...Object.keys(c)])) {
+    if (b[k] !== c[k]) parts.push(`${k}: ${b[k] ?? "(なし)"} → ${c[k] ?? "(なし)"}`);
+  }
+  const bo = JSON.stringify(baked.ops ?? null);
+  const co = JSON.stringify(current.ops ?? null);
+  if (bo !== co) parts.push(`ops: ${bo} → ${co}`);
+  if (baked.kind !== current.kind) parts.push(`kind: ${baked.kind} → ${current.kind}`);
+  return parts.length > 0 ? parts.join(" / ") : "(estatParams/ops は同一。refetch 等の差)";
+}
+
 function ageInDays(a: string | undefined, b: string | undefined): number | null {
   if (!a || !b) return null;
   const ta = Date.parse(a);
@@ -332,6 +436,8 @@ function loadPreviousSnapshot(jsonOutPath: string | undefined): CountSnapshot | 
       survey: prev.countChecks?.survey?.count ?? 0,
       categories,
       statsRowCounts: prev.stats?.rowCounts ?? {},
+      // 前回レポートに recipe が無い (本検査の導入前) なら undefined = ラチェット無効
+      recipeUnbaked: prev.recipe?.unbaked?.length,
     };
   } catch {
     return null;
@@ -371,6 +477,20 @@ async function main() {
   };
   const statsRowCounts: Record<string, number> = {};
   const auditNow = new Date();
+
+  // (j) 形状の集計器
+  const shape: ShapeChecks = {
+    checked: 0,
+    byCheck: {},
+    violations: [],
+    allowedCount: 0,
+    deliveryDuplicates: [],
+    deliveryDuplicatesExpected: [],
+    ok: true,
+  };
+
+  // (k) レシピ整合の集計器
+  const recipe: RecipeChecks = { checked: 0, unbaked: [], drift: [], configMissing: [], ok: true };
 
   // (f)(g)(h) 正規化系の集計器
   const normalized: NormalizedChecks = {
@@ -416,6 +536,70 @@ async function main() {
         if (prev !== undefined && prev > 0 && rowCount < prev * DRIFT_RATIO_THRESHOLD) {
           stats.drift.push({ key, count: rowCount, previous: prev });
         }
+
+        // --- (k) レシピ整合 -------------------------------------------------
+        // 「この値は現在の config で作れるか」。同じく追加コスト 0。
+        const recipeConfig = getMetricConfig(key);
+        recipe.checked++;
+        if (!recipeConfig) {
+          recipe.configMissing.push(key);
+        } else {
+          const baked = parseRecipe(statsRes.body?.meta?.recipe);
+          const current = buildRecipe(recipeConfig);
+          if (!baked) {
+            recipe.unbaked.push(key);
+          } else if (baked.configHash !== current.configHash) {
+            recipe.drift.push({
+              key,
+              baked: baked.configHash,
+              current: current.configHash,
+              diff: describeRecipeDiff(baked, current),
+            });
+          }
+        }
+
+        // --- (j) 形状 -----------------------------------------------------
+        // payload は上で既に取得済みなので追加コスト 0。取り込みと同じ純関数で判定する。
+        const config = recipeConfig;
+        if (config) {
+          shape.checked++;
+          const violations = classifyShape({
+            key,
+            entity: "prefecture",
+            summary: summarizeShape((statsRes.body?.rows ?? []) as ShapeRow[]),
+            unit: config.unit,
+            now: auditNow,
+            allowlist: EXPECTED_SHAPE_ANOMALY,
+          });
+          for (const v of violations) {
+            shape.byCheck[v.check] = (shape.byCheck[v.check] ?? 0) + 1;
+            if (v.isError) shape.violations.push({ key, check: v.check, message: v.message });
+            else shape.allowedCount++;
+          }
+        }
+      }
+    }
+
+    // --- (j-2) 配信側の重複 ------------------------------------------------
+    // 取り込みが直っても generate-ranking-values が壊す経路を独立に捕まえる。
+    // これも既に取得済みの payload を見るだけ。
+    if (valuesRes.status === 200 && valuesRes.body?.partitions) {
+      const duplicated = valuesRes.body.partitions.some((p) => {
+        const seen = new Set<string>();
+        for (const v of p.values ?? []) {
+          const code = v.areaCode ?? "";
+          if (seen.has(code)) return true;
+          seen.add(code);
+        }
+        return false;
+      });
+      if (duplicated) {
+        // 正典側が既知の壊れなら配信側の重複はその帰結。生成器のバグと区別する。
+        const sourceKnownBroken = EXPECTED_SHAPE_ANOMALY.some(
+          (e) => e.key === key && e.check === "duplicate-area-year",
+        );
+        if (sourceKnownBroken) shape.deliveryDuplicatesExpected.push(key);
+        else shape.deliveryDuplicates.push(key);
       }
     }
 
@@ -496,6 +680,10 @@ async function main() {
   stats.ok =
     stats.missing.length === 0 && stats.empty.length === 0 && stats.drift.length === 0;
 
+  // allowlist で降格されたものは違反にしない (是正待ちの既知分で監査を永久に赤くしない)。
+  // 「赤いのが常態」になると新しい問題が埋もれる — 本ゲート群が防ごうとしている失敗そのもの。
+  shape.ok = shape.violations.length === 0 && shape.deliveryDuplicates.length === 0;
+
   normalized.ok =
     normalized.missing.length === 0 &&
     normalized.stale.length === 0 &&
@@ -532,6 +720,12 @@ async function main() {
     surveyDriftOk &&
     Object.values(categoryChecks).every((c) => c.ok && c.driftOk);
 
+  // (k) 判定。drift と configMissing は即違反、unbaked は**増えたときだけ**違反
+  // (全面再生成が終わるまでは残っているのが正常なので、減る方向だけを強制する)
+  const prevUnbaked = previous?.recipeUnbaked;
+  const unbakedGrew = prevUnbaked !== undefined && recipe.unbaked.length > prevUnbaked;
+  recipe.ok = recipe.drift.length === 0 && recipe.configMissing.length === 0 && !unbakedGrew;
+
   const report: AuditReport = {
     generatedAt: new Date().toISOString(),
     r2Base: R2_BASE,
@@ -551,13 +745,17 @@ async function main() {
     },
     normalized,
     stats: { ...stats, rowCounts: statsRowCounts },
+    shape,
+    recipe,
     ok:
       itemMissing.length === 0 &&
       valuesMissing.length === 0 &&
       yearMismatch.length === 0 &&
       countChecksOk &&
       normalized.ok &&
-      stats.ok,
+      stats.ok &&
+      shape.ok &&
+      recipe.ok,
   };
 
   // ---- レポート出力 ----
@@ -634,6 +832,62 @@ async function main() {
     console.log(
       `  → 是正: config の statsDataId / cdCat01 を e-Stat メタで再確認し再取り込み。` +
         `意図した 0 件なら packages/data-configs/src/expected-empty.ts に理由・追跡先・期限を添えて登録`,
+    );
+  }
+
+  console.log(`\n## (j) 形状 (重複行 / 単位と値の矛盾 / 県のカバレッジ)`);
+  console.log(`  検査: ${shape.checked} 件`);
+  const checkLabels: Record<string, string> = {
+    "duplicate-area-year": "同一 (県, 年) の重複行",
+    "percent-out-of-range": "unit が % なのに値が範囲外",
+    "area-coverage": "47 県に満たない年がある",
+    "raw-truncated": "e-Stat 応答の打ち切り",
+  };
+  for (const [check, n] of Object.entries(shape.byCheck).sort((a, b) => b[1] - a[1])) {
+    console.log(`  ${checkLabels[check] ?? check}: ${n} 件`);
+  }
+  console.log(`  allowlist 許可済 (是正の残数): ${shape.allowedCount} 件`);
+  console.log(`  違反 (未許可): ${shape.violations.length} 件`);
+  for (const v of shape.violations.slice(0, 10)) console.log(`      ${v.message}`);
+  if (shape.violations.length > 10) {
+    console.log(`      … 他 ${shape.violations.length - 10} 件`);
+  }
+  console.log(
+    `  配信側 partition の areaCode 重複 (生成器のバグ): ${shape.deliveryDuplicates.length} 件`,
+  );
+  for (const k of shape.deliveryDuplicates.slice(0, 10)) console.log(`      ${k}`);
+  console.log(
+    `  同 (正典が既知の壊れ = その帰結。違反にしない): ${shape.deliveryDuplicatesExpected.length} 件`,
+  );
+  if (shape.violations.length > 0) {
+    console.log(
+      `  → 是正: 未指定の分類軸を diagnose-unpinned-axes.ts で列挙して config に pin する。` +
+        `既知の是正待ちなら packages/data-configs/src/expected-shape-anomaly.ts に登録`,
+    );
+  }
+
+  console.log(`\n## (k) レシピ整合 (値の隣のレシピ = 現在の config か)`);
+  console.log(`  検査: ${recipe.checked} 件`);
+  console.log(
+    `  未焼き込み (旧 payload・残数): ${recipe.unbaked.length} 件` +
+      (prevUnbaked !== undefined ? ` (前回 ${prevUnbaked})` : " (前回なし=ラチェット無効)"),
+  );
+  if (unbakedGrew) {
+    console.log(`      ★増加している。取り込みが meta.recipe を焼けていない可能性`);
+  }
+  console.log(`  config 不在: ${recipe.configMissing.length} 件`);
+  if (recipe.configMissing.length > 0) {
+    console.log(`      ${recipe.configMissing.slice(0, 10).join(", ")}`);
+  }
+  console.log(`  ★ドリフト (R2 が stale): ${recipe.drift.length} 件`);
+  for (const d of recipe.drift.slice(0, 10)) {
+    console.log(`      ${d.key}: ${d.diff}`);
+  }
+  if (recipe.drift.length > 10) console.log(`      … 他 ${recipe.drift.length - 10} 件`);
+  if (recipe.drift.length > 0) {
+    console.log(
+      `  → 是正: config を直したあと R2 を再生成する ` +
+        `(page-data-batch --metric <keys> → diff-push-r2 --prefix app/stats)`,
     );
   }
 

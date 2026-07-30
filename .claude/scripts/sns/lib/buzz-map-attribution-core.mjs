@@ -1,7 +1,7 @@
 /**
  * buzz-map-attribution-core.mjs — SNS → landing → 回遊 の GA4 集計と score 還流入力の純粋コア。
  *
- * 正典: docs/02_実装計画/27_buzz-map集客ゲート統合仕様.md §7.3 (計測) / §7.4 (KPI) / §11 Phase 5。
+ * 正典: .claude/rules/buzz-map-standards.md §5（計測・改善ループ）。
  *
  * ここには「GA4 rows → per-ideaId 集計」「集計 → score 還流入力」の純粋関数だけ置く。
  * 実 GA4 fetch は buzz-map-attribution.mjs (network)。テストは本モジュールを直接叩く。
@@ -15,7 +15,7 @@ export function ideaIdFromCampaign(campaign) {
 }
 
 /**
- * GA4 の session 集計 rows を ideaId 別に畳み込む (§7.3)。
+ * GA4 の session 集計 rows を ideaId 別に畳み込む。
  * rows は { campaign, source, sessions, engagedSessions, pageViews } の配列 (fetch 側で正規化済)。
  * buzz-map-* campaign のみ対象。source (x/instagram) 別も保持する。
  * @param {Array<{campaign:string, source?:string, sessions:number, engagedSessions:number, pageViews:number}>} rows
@@ -39,7 +39,7 @@ export function aggregateSessionsByIdea(rows) {
 }
 
 /**
- * cta_click イベント rows を ideaId 別に畳み込む (§7.3 cta_click content_id=<ideaId>)。
+ * cta_click イベント rows を ideaId 別に畳み込む（content_id=<ideaId>）。
  * rows は { contentId, targetType, eventCount } の配列。
  * @param {Array<{contentId:string, targetType?:string, eventCount:number}>} rows
  * @returns {Record<string, { ctaClicks:number, byTarget:Record<string,number> }>}
@@ -58,8 +58,8 @@ export function aggregateCtaByIdea(rows) {
 }
 
 /**
- * §7.4 KPI を ideaId 別に計算する。SNS imp は posts.json のメトリクスから渡す (impByIdea)。
- * attribution=direct の投稿だけ SNS CTR の分母に使える (§7.1)。
+ * KPI を ideaId 別に計算する。SNS imp は posts.json のメトリクスから渡す (impByIdea)。
+ * attribution=direct の投稿だけ SNS CTR の分母に使える。
  * @param {object} p
  * @param {Record<string, object>} p.sessionsByIdea aggregateSessionsByIdea の出力
  * @param {Record<string, object>} p.ctaByIdea aggregateCtaByIdea の出力
@@ -81,7 +81,7 @@ export function computeKpis({ sessionsByIdea, ctaByIdea, impByIdea = {} }) {
       landingSessions,
       landingEngagementRate: landingSessions > 0 ? round(engaged / landingSessions) : null,
       deepClickRate: landingSessions > 0 ? round(cta / landingSessions) : null,
-      // SNS CTR は attribution=direct の投稿だけ (§7.1)。それ以外は null (過大評価しない)
+      // SNS CTR は attribution=direct の投稿だけ。それ以外は null (過大評価しない)
       snsCtr:
         imp && imp.attribution === "direct" && num(imp.impressions) > 0
           ? round(landingSessions / imp.impressions)
@@ -92,7 +92,7 @@ export function computeKpis({ sessionsByIdea, ctaByIdea, impByIdea = {} }) {
 }
 
 /**
- * §11 Phase 5: 投稿結果を catalog score へ還流する「入力」を作る (§4.4 の gscDemand 補強に相当)。
+ * 投稿結果を catalog score へ還流する「入力」を作る（gscDemand 補強に相当）。
  * ここでは score を直接書き換えず、build-buzz-map-catalog が読む outcome feedback を返すだけ
  * (実際の score 調整は builder / improvement-triage が判断)。過大評価を避け、実測ベースに保つ。
  * @param {Record<string, object>} kpisByIdea computeKpis の出力

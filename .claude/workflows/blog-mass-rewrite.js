@@ -17,7 +17,7 @@ export const meta = {
 //     3. node .claude/scripts/blog/sync-rewrite-progress.mjs --wave-id <date>-N  # docs/21→queue 記録
 //        (PASS=done / rewrite済未PASS=in-progress。--next は pending しか返さない=再リライトしない)
 //     4. 次セッションで 1 に戻る
-//   正典: docs/02_実装計画/06_ブログ品質是正ループ.md
+//   正典: .claude/rules/blog-remediation-loop.md
 
 // args = ["slug1","slug2",...] または [{slug, blockers?}, ...] (combinedScore 優先順)
 // args が文字列(JSON encoded)で届くケースに備えてパースする。

@@ -14,7 +14,7 @@ import { expect, test } from "@playwright/test";
  * 背景 (2026-07-03 運営総点検): 従来の Playwright は Desktop Chrome 単一で
  * breakpoint 別の表示検証がゼロだった。ranking と blog のサイドバー breakpoint
  * 不統一 (xl vs lg) も機械検出できなかったため、レール契約をテストとして固定する。
- * 正典: docs/01_技術設計/13_統一レイアウト設計.md / PageShell.tsx
+ * 正典: docs/01_技術設計/04_デザインシステム.md / PageShell.tsx
  */
 
 const LG_BREAKPOINT = 1024;

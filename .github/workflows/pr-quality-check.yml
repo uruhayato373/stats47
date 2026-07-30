@@ -87,7 +87,7 @@ jobs:
       - name: 🎨 Design System Check
         # トークン/カード/レイアウトの決定的ガード (pre-commit と同一)。
         # --no-verify で pre-commit を回避してもここで弾く。
-        # 正典: docs/01_技術設計/15_デザインシステムSSOT.md
+        # 正典: docs/01_技術設計/04_デザインシステム.md
         run: npm run design-system:check -w apps/web
         continue-on-error: false
 
@@ -109,10 +109,13 @@ jobs:
         run: node .claude/scripts/lib/check-r2-route-ssg.cjs
         continue-on-error: false
 
-      - name: 🔗 Docs Link Regression Guard
-        # 既存 broken は baseline で許容し、新規の ref/referrer だけをブロックする。
-        # docs 再編時に skill / agent / rule からの参照を黙って壊さないための後方互換ゲート。
-        run: node .claude/scripts/lib/check-docs-links.cjs --baseline
+      - name: 📚 Docs Governance and Link Guard
+        # 固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOTを検査。
+        # 鮮度は週次で通知し、PRでは構造errorと新規broken linkだけをブロックする。
+        run: |
+          node --test .claude/scripts/lib/__tests__/check-docs-governance.test.cjs .claude/scripts/lib/__tests__/check-docs-links.test.cjs
+          node .claude/scripts/lib/check-docs-governance.cjs
+          node .claude/scripts/lib/check-docs-links.cjs --baseline
         continue-on-error: false
 
       - name: 🤖 Agent / Skill Prompt Contract Guard
@@ -287,7 +290,7 @@ jobs:
           # このファイルが R2 blog snapshot から乖離すると、記事のタグリンクが黙って死ぬ。
           # (2026-04-26〜07-24 は生成元だった D1 の廃止で凍結し 1,988 本が 410 だった)
           # デプロイ前に PR で弾く。修正は生成スクリプトを流して commit するだけ。
-          # 経緯: docs/04_レビュー/2026-07-24-site-link-audit.md
+          # 規約: .claude/rules/blog-quality-standards.md「内部リンクの実在」
           (cd apps/web && npx tsx scripts/generate-known-tag-keys.ts --check)
           # 未公開記事の /blog/<slug> は notFound が prerender として焼き付き
           # HTTP 200 +「記事が見つかりません」で固着する。middleware で 410 に短絡するため

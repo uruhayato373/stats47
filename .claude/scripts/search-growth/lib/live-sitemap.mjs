@@ -1,7 +1,7 @@
 /**
  * live-sitemap — 公開 sitemap.xml を read-only GET して URL 一覧を取る (credential 不要)。
  *
- * 正典: docs/02_実装計画/39 §2.3 / §15。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
  * 注意: これは **sitemap.xml の内容 (掲載 URL 一覧)** の取得であり、GSC Sitemaps API の
  * submitted/pending/lastDownloaded/errors メタ (要 service account creds) とは別。API メタは live 未検証。
  * inSitemap 判定 (indexability-conflict) に使う。

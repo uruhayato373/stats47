@@ -24,6 +24,16 @@ model: sonnet
 | `/competitor-scan` | SNS 競合の月次定点観測 (アカウント単位。x-strategist と共同) |
 | `/x-viral-research` | X バズ投稿の型・画像リサーチ (投稿単位。統計/地図/GIS/可視化の軸で検索し `.claude/state/sns/x-viral-posts.json` に台帳化) |
 
+## 競合調査のSSOTルーティング
+
+- アカウント単位の月次定点観測: `.claude/skills/sns/competitor-scan/SKILL.md`
+- Xの投稿単位リサーチ: `.claude/skills/sns/x-viral-research/SKILL.md`
+- 自社SNS実測: `.claude/skills/sns/update-sns-metrics/SKILL.md`
+- 制作カタログへの反映: `.claude/rules/sns-content-standards.md`の人間承認ゲート
+
+横断的なcompetitive-intelligence catalog、共通research state、gallery viewは採択・実装されていない。
+これらの存在を前提にせず、必要になった場合は独立した効果仮説として再提案する。
+
 ## 担当外
 
 - 企画 (タイトル / カテゴリ判定) → `article-writer` に委譲

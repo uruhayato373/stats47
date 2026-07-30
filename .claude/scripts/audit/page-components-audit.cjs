@@ -2,9 +2,9 @@
 /**
  * page_components の pageType 別配置を棚卸しし、area / theme 責務分離違反を検出する。
  *
- * 判定基準: docs/01_技術設計/07_情報設計.md
+ * 判定基準: docs/01_技術設計/03_情報設計.md
  *
- * 出力: docs/04_レビュー/YYYY-MM-DD-area-theme-audit.md
+ * 出力: .claude/skills/analytics/seo-audit/reference/audits/YYYY-MM-DD-area-theme-audit.md
  *
  * 使い方:
  *   node .claude/scripts/audit/page-components-audit.cjs
@@ -144,7 +144,7 @@ lines.push("---");
 lines.push("");
 lines.push(`# area / theme 責務分離 棚卸し (${today})`);
 lines.push("");
-lines.push("判定基準: [`docs/01_技術設計/07_情報設計.md`](../../01_技術設計/07_情報設計.md)");
+lines.push("判定基準: [`docs/01_技術設計/03_情報設計.md`](../../01_技術設計/03_情報設計.md)");
 lines.push("");
 lines.push("## サマリ");
 lines.push("");
@@ -203,7 +203,7 @@ lines.push("3. ローカル D1 で反映後、`/sync-snapshots --only page-compo
 lines.push("4. 該当 area ページ・theme ページの表示を browser で確認");
 lines.push("");
 
-const outDir = path.join(PROJECT_ROOT, "docs/04_レビュー");
+const outDir = path.join(PROJECT_ROOT, ".claude/skills/analytics/seo-audit/reference/audits");
 fs.mkdirSync(outDir, { recursive: true });
 const outPath = path.join(outDir, `${today}-area-theme-audit.md`);
 fs.writeFileSync(outPath, lines.join("\n"), "utf-8");

@@ -144,7 +144,7 @@
  * ===== Reading Zone (Soft Editorial) =====
  * 記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) 専用の scoped トークン。
  * doboku-note の Soft Editorial を移植した記事ゾーン。角丸はサイト共通のフラット規約に従う。
- * 正典: docs/01_技術設計/15_デザインシステムSSOT.md「reading zone」
+ * 正典: docs/01_技術設計/04_デザインシステム.md「reading zone」
  * .dark と同じく @layer 外に置き、zone 内の shadcn 部品へ変数を波及させる。
  */
 .reading-zone {

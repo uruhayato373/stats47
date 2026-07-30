@@ -8,6 +8,7 @@ export const dentalHygienistByPrefecture: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004027006",
+    "cdTab": "0200",
     "displayName": "歯科衛生士数（都道府県別）",
     "url": "https://www.e-stat.go.jp/dbview?sid=0004027006",
   },

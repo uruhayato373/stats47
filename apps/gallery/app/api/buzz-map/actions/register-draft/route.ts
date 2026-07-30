@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * §8.3 draft gate (isPostable) を通ったときのみ posts.json へ draft 登録する。
+ * draft gate (isPostable) を通ったときのみ posts.json へ draft 登録する。
  * confirm:true が必須。実投稿・予約はしない (既存 /sns 画面に委ねる)。
  */
 export async function POST(req: Request) {

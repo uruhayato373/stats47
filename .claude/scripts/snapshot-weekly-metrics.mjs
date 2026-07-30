@@ -91,7 +91,7 @@ function updateIndex(weekId, snapshotPath) {
 
 async function main() {
   const args = parseArgs();
-  // 引数なしの既定週は JST 基準 (期間契約 §18.2 と同じ日付境界)
+  // 引数なしの既定週は JST 基準（週次期間契約と同じ日付境界）
   const isoWeek = args.weekId ? parseWeekId(args.weekId) : parseWeekId(isoWeekOf(jstDateOf()));
   const weekId = formatWeekId(isoWeek);
   const outPath = join(OUT_DIR, `${weekId}.json`);
@@ -105,7 +105,7 @@ async function main() {
     return;
   }
 
-  // 期間契約 (§18.2): weekId は保存 key であり期間の代用にしない。
+  // 週次期間契約: weekId は保存 key であり期間の代用にしない。
   // - 明示 week: その週の日曜を anchor に決定的に再現 (未来週 = 未確定は throw し誤ラベル防止)
   // - 引数なし: 実行日 (JST) を as-of とする従来挙動 (週中の手動実行を許容)
   const metrics = await fetchWeeklyNsmMetrics(args.weekId ? { week: weekId } : {});

@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "policyDocument": ".claude/rules/docs-vs-issues.md",
+  "humanIndex": "docs/INDEX.md",
+  "sharedAgentInstructions": {
+    "canonical": "CLAUDE.md",
+    "mirrors": [
+      "AGENTS.md"
+    ]
+  },
+  "requiredReferences": [
+    {
+      "file": "CLAUDE.md",
+      "contains": [
+        ".claude/rules/docs-vs-issues.md",
+        "npm run docs:check",
+        ".claude/config/docs-governance.json"
+      ]
+    },
+    {
+      "file": "docs/INDEX.md",
+      "contains": [
+        ".claude/rules/docs-vs-issues.md",
+        "npm run docs:check"
+      ]
+    },
+    {
+      "file": ".claude/skills/management/maintain-docs/SKILL.md",
+      "contains": [
+        ".claude/rules/docs-vs-issues.md",
+        "npm run docs:check"
+      ]
+    }
+  ],
+  "topLevel": {
+    "allowedFiles": [
+      "docs/INDEX.md"
+    ],
+    "allowedDirectories": [
+      "docs/00_プロジェクト管理",
+      "docs/01_技術設計",
+      "docs/02_実装計画",
+      "docs/10_SNS戦略",
+      "docs/21_ブログ記事原稿",
+      "docs/30_note記事企画",
+      "docs/31_note記事原稿",
+      "docs/assets",
+      "docs/books",
+      "docs/todo"
+    ]
+  },
+  "fixedDirectories": {
+    "docs/00_プロジェクト管理": [
+      "01_プロジェクト定義.md",
+      "02_収益化戦略.md",
+      "03_マーケティング戦略.md",
+      "04_ターゲットペルソナ.md"
+    ],
+    "docs/01_技術設計": [
+      "01_システムアーキテクチャ.md",
+      "02_データアーキテクチャ.md",
+      "03_情報設計.md",
+      "04_デザインシステム.md",
+      "05_エラーハンドリング.md",
+      "06_自動化インベントリ.md",
+      "07_Playwright認証プロファイル.md"
+    ],
+    "docs/todo": [
+      "00_運用ガイド.md",
+      "01_未整理タスク.md",
+      "02_今月の重点.md",
+      "03_今週の計画.md",
+      "04_改善バックログ.md",
+      "05_機能バックログ.md",
+      "06_指標バックログ.md"
+    ]
+  },
+  "governedDirectories": [
+    "docs/00_プロジェクト管理",
+    "docs/01_技術設計",
+    "docs/02_実装計画",
+    "docs/todo"
+  ],
+  "flatDirectories": [
+    "docs/00_プロジェクト管理",
+    "docs/01_技術設計",
+    "docs/02_実装計画",
+    "docs/todo"
+  ],
+  "frontmatter": {
+    "requiredFields": [
+      "title",
+      "type",
+      "status",
+      "updated"
+    ],
+    "allowedStatuses": [
+      "active",
+      "adopted",
+      "draft",
+      "in-progress"
+    ],
+    "inactiveStatuses": [
+      "archived",
+      "completed",
+      "deprecated",
+      "obsolete",
+      "retired",
+      "superseded"
+    ]
+  },
+  "naming": {
+    "implementationPlanPattern": "^(?:00_INDEX|[0-9]{2}_.+)\\.md$",
+    "datedFilePattern": "(?:^|[-_])[0-9]{4}-[0-9]{2}(?:-[0-9]{2})?(?:[-_]|\\.)",
+    "forbiddenDirectoryNames": [
+      "03_レビュー",
+      "04_レビュー",
+      "archive",
+      "archives",
+      "review",
+      "reviews",
+      "アーカイブ"
+    ],
+    "forbiddenFileTerms": [
+      "レビュー",
+      "review",
+      "audit-report",
+      "handoff"
+    ]
+  },
+  "contentRootsExcludedFromGovernedNaming": [
+    "docs/10_SNS戦略",
+    "docs/21_ブログ記事原稿",
+    "docs/30_note記事企画",
+    "docs/31_note記事原稿",
+    "docs/assets",
+    "docs/books"
+  ],
+  "freshness": [
+    {
+      "file": "docs/todo/02_今月の重点.md",
+      "maxAgeDays": 45
+    },
+    {
+      "file": "docs/todo/03_今週の計画.md",
+      "maxAgeDays": 14
+    },
+    {
+      "pathPrefix": "docs/todo/",
+      "maxAgeDays": 90
+    },
+    {
+      "pathPrefix": "docs/02_実装計画/",
+      "maxAgeDays": 120
+    },
+    {
+      "pathPrefix": "docs/00_プロジェクト管理/",
+      "maxAgeDays": 180
+    },
+    {
+      "pathPrefix": "docs/01_技術設計/",
+      "maxAgeDays": 180
+    }
+  ],
+  "implementationPlans": {
+    "directory": "docs/02_実装計画",
+    "index": "docs/02_実装計画/00_INDEX.md",
+    "generatedBlockStart": "<!-- docs-governance:active-plans:start -->",
+    "generatedBlockEnd": "<!-- docs-governance:active-plans:end -->",
+    "requiredRelatedBacklog": true
+  },
+  "todo": {
+    "files": [
+      "docs/todo/04_改善バックログ.md",
+      "docs/todo/05_機能バックログ.md",
+      "docs/todo/06_指標バックログ.md"
+    ],
+    "idPattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)+$",
+    "allowedImprovementStatuses": [
+      "pending",
+      "in-progress",
+      "effect/pending"
+    ]
+  }
+}

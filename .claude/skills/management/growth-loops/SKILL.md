@@ -129,37 +129,20 @@ YouTube → Instagram → X → note.com → サイト → 各 SNS のフォロ�
 |---|---|---|---|
 ```
 
-### Step 6: critical-review レポートを Write する
+### Step 6: SSOTとTODOへ反映する
 
-レビュー本文を `docs/04_レビュー/{YYYY-MM-DD}-growth-loops.md` に Write tool で出力する。日付は今日（JST）の `YYYY-MM-DD` を使用する。
+採択した成長ループとゲートは `docs/00_プロジェクト管理/03_マーケティング戦略.md` または
+`02_収益化戦略.md` へ直接反映する。未完了の実験だけを `docs/todo/04_改善バックログ.md` へ
+実行順・停止条件・完了条件付きで統合し、レビュー全文は保存しない。
 
-frontmatter は以下を必ず含める:
+### Step 7: 変遷を確認する
 
-```yaml
----
-type: critical-review
-topic: growth-loops
-date: 2026-MM-DD
-status: active
----
-```
-
-本文は上記「出力フォーマット」のテンプレートをそのまま続ける。成長ループの ASCII 図（例: `記事公開 → 検索流入 → 引用 → 被リンク → 順位上昇`）はそのまま Markdown 本文に保持してよい。
-
-### Step 7: 過去レビューの参照
-
-過去のループ設計変遷は以下で確認:
-
-```bash
-ls -t docs/04_レビュー/*.md | head -5
-```
-
-旧 GitHub Issue 運用は廃止: critical-review レポートは `docs/04_レビュー/` に蓄積する。
+戦略文書のGit履歴と `.claude/state/experiments.json` を参照する。
 
 ## 参照
 
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
-- `docs/02_実装計画/01_収益化マスタープラン.md` — KPI・Phase 目標
+- `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM・収益レーン・意思決定ゲート
 - 投稿台帳 `.claude/state/sns/posts.json`（`sns-posts-store.cjs` 経由）— SNS 投稿状況・メトリクスキャッシュ
 - `.claude/skills/management/weekly-plan/SKILL.md` — 週次計画
 - 原典: Ognjen Boskovic の Growth Loops フレームワーク

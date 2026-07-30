@@ -35,7 +35,7 @@ interface PageHeaderProps {
  * 暗色グラデの hero バナーや page-top KPI タイルを置かず、
  * h1 + 1 行説明（+ 細い統計テキスト）だけで構成する（白基調・余白主導）。
  *
- * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md
+ * 設計仕様: docs/01_技術設計/04_デザインシステム.md
  */
 export function PageHeader({
   eyebrow,

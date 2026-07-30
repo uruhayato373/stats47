@@ -6,7 +6,7 @@ model: haiku
 
 # Snapshot Exporter Agent
 
-**完全DBレス (正典: `docs/01_技術設計/12_完全DBレス設計.md`)**。SSOT は git TS + R2 で、永続 D1 は持たない。
+**完全DBレス (正典: `docs/01_技術設計/02_データアーキテクチャ.md`)**。SSOT は git TS + R2 で、永続 D1 は持たない。
 本 agent は git TS 定義 / R2 観測値を入力に R2 用 snapshot JSON と Remotion 用 static JSON を派生生成する
 (移行期は中間で再生成可能な使い捨てビルドキャッシュ SQLite を read する場合があるが、それは SSOT ではない)。
 db-manager から snapshot 系を切り出した。 永続 DB への write は行わず、 R2 への push も別 agent に委譲する。

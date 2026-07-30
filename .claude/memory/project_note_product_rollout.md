@@ -9,7 +9,7 @@ metadata:
 
 ココナラ 174 商品 ([[project_coconala_product_factory]]) を note 向けに展開する channel。**新規 `packages/product-factory/src/channels/note/`**。2026-07-18 に **N0(監査)→N1(mapping/series/validator)→N2(生成基盤+fixture3)→N3(全55記事一括生成)→N4-N5(promote基盤+全55をdraft staging)** を実装 (オーナー選択「N0〜N3全部」→「全55をdraftで一括staging」)。**note.com公開・R2 push・commit は一切していない (N6-N7=人間承認後・月1-2本・ローカルbrowser-use)**。
 
-**正典**: `docs/02_実装計画/31_note商品展開ファクトリー実装仕様.md` (末尾に Phase 記録) + `packages/product-factory/README.md`。
+**正典**: `packages/product-factory/src/channels/note/` + `packages/product-factory/README.md`。横断チャネルの需要・商品化gateは `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md`、進捗は `docs/todo/05_機能バックログ.md`。
 
 **SSOT (完全DBレス)**: `article-plan.ts` の **55 canonical 記事**が git TS SSOT で 174 商品を漏れなく重複なく束ねる。`product-note-mapping.ts` が 174 mapping を (family, 記事) から**決定的に導出** (手書き174エントリを持たない)。disposition 規則: license→catalog-only / entry・service→free-lead / 単独member有料記事→standalone-paid / 他→bundle-member。実測 = bundle-member135/standalone-paid7/free-lead22/catalog-only10、access=paid49/free6。11シリーズ (仕様§4の9 + license-guide/free-samples)。
 
@@ -25,4 +25,4 @@ metadata:
 
 **★限界/次 (N4+)**: (1) promote 未実装 (docs/31 展開+note catalog draft 化)。(2) draft は決定的雛形=原稿の磨き込み(読者価値・独自解説)は critic/人間が公開前に。(3) Office実機未検証の添付は warning 142件(`attachment-unverified`)=公開前ゲート。(4) 公開は月1-2本・オーナー承認後のみ。担当分業: note-manager(catalog/公開)・coconala-product-manager(manifest/添付)・chart-author(図表)。
 
-**2026-07-18 commit+push (git race 回避)**: 全成果を `feature/note-product-rollout` (commit fe3e42a9・420ファイル・note/ココナラのみ・親 bf802764) に commit し origin へ push 済。別セッションが feature/area-databook で同時稼働・共有 index を触っていたため、通常 commit は他作業を混入させる危険 → **private index (`GIT_INDEX_FILE`) で自分のパスだけの tree→commit-tree→専用ブランチ**で回避 (共有 index・area ブランチに非干渉)。混在ファイル (agents/README・docs/02 00_INDEX・todo/02_機能バックログ) は他作業と同居のため commit から除外。**develop への PR は未実施**。正典の Phase 記録は doc31 §N5.1 (draft.ts の完成イメージ地図固定廃止・束ね内容列挙・stale staging 再発防止=generator 修正後は generate→promote を再実行)。
+**2026-07-18 commit+push (git race 回避)**: 全成果を `feature/note-product-rollout` (commit fe3e42a9・420ファイル・note/ココナラのみ・親 bf802764) に commit し origin へ push 済。別セッションが feature/area-databook で同時稼働・共有 index を触っていたため、通常 commit は他作業を混入させる危険 → **private index (`GIT_INDEX_FILE`) で自分のパスだけの tree→commit-tree→専用ブランチ**で回避 (共有 index・area ブランチに非干渉)。混在ファイル (agents/README・docs/02 00_INDEX・todo/02_機能バックログ) は他作業と同居のため commit から除外。**develop への PR は未実施**。当時のPhase記録はgit履歴に保持し、現在はコードとTODOを正典とする。

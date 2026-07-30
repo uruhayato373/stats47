@@ -11,6 +11,12 @@ export const renovationRate: MetricConfig = {
     "statsDataId": "0004025556",
     "cdCat01": "0",
     "cdCat02": "0",
+    "cdCat03": "00",
+    "axisRatio": {
+      "axis": "cat04",
+      "numeratorCodes": ["1"],
+      "denominatorCodes": ["0"],
+    },
     "displayName": "住宅・土地統計調査",
     "url": "https://www.stat.go.jp/data/jyutaku/2023/index.html",
   },

@@ -10,6 +10,8 @@ export const convenienceStoreCountCommercial: MetricConfig = {
     "statsDataId": "0004032502",
     "cdCat01": "0105200",
     "cdCat02": "01040200",
+    "cdCat03": "01030100",
+    "timeScope": "annual",
     "displayName": "商業動態統計調査",
     "url": "https://www.meti.go.jp/statistics/tyo/syoudou/",
   },

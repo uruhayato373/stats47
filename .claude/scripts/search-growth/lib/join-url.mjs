@@ -3,7 +3,8 @@
  *
  * url-policy.ts は Node から直 import 不可 (`@/config/known-theme-slugs` → app features
  * 依存) のため、結合に必要な純粋正規化だけをここに自己完結で実装する。
- * 正典: docs/02_実装計画/39 §4.2 (trailing slash / query / fragment / canonical / domain)。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md
+ * （trailing slash / query / fragment / canonical / domain）。
  */
 
 export const SITE_ORIGIN = "https://stats47.jp";
@@ -61,7 +62,7 @@ export function stripTrackingParams(input) {
 }
 
 /**
- * MCP / CLI input の allowlist 検証 (§6.4)。stats47.jp 配下のみ許可。
+ * MCP / CLI input の allowlist 検証。stats47.jp 配下のみ許可。
  * path のみ (相対) も許可する。
  */
 export function isAllowedUrl(input, site = SITE_ORIGIN) {

@@ -1,6 +1,6 @@
 # データ管理アーキテクチャ (完全DBレス)
 
-> **⚠️ 2026-05-29 更新: 正典は [`docs/01_技術設計/12_完全DBレス設計.md`](../../docs/01_技術設計/12_完全DBレス設計.md)。**
+> **⚠️ 2026-05-29 更新: 正典は [`docs/01_技術設計/02_データアーキテクチャ.md`](../../docs/01_技術設計/02_データアーキテクチャ.md)。**
 > stats47 は **完全DBレス**に決定 (doc 18 ハイブリッド / doc 17 リモートD1 は同日 superseded)。
 > **永続/リモート D1 を SSOT に持たない。** SSOT は **git TS (コード)** と **R2 (観測値・配信)** の二つだけ。
 > 本番アプリは R2 snapshot のみ読む。Derived (area_profiles / correlations) は
@@ -92,9 +92,8 @@ correlations / area_profiles は **R2 観測値を入力に使い捨て計算 �
 
 ## 関連
 
-- **正典**: `docs/01_技術設計/12_完全DBレス設計.md`
-- 却下した代替案: `docs/01_技術設計/archive/18_データ層ハイブリッド設計.md` / `archive/17_リモートD1ハイブリッド設計.md`
-- Phase 6 観測値 R2 移行: `docs/01_技術設計/archive/10_Phase6_deprecation_log.md` (完了済み移行ログ・2026-06-21 archive 移動)
+- **正典**: `docs/01_技術設計/02_データアーキテクチャ.md`
+- 却下した代替案と完了済み移行ログ: git 履歴
 - 記録先分類: `.claude/rules/data-storage.md`
 - R2 キー設計: `.claude/rules/r2-storage-design.md`
 - TS-config 詳細: `packages/data-configs/src/types.ts` / R2 stats 型: `packages/stats-r2/src/types.ts`

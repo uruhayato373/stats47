@@ -1,5 +1,5 @@
 /**
- * triage.mjs のテスト — 週次トリアージ最大3件・人間承認 guard (WIP≤5 / 週2件)・lifecycle 引き継ぎ (§18.3-18.4)。
+ * triage.mjs のテスト — 週次トリアージ最大3件・人間承認 guard (WIP≤5 / 週2件)・lifecycle 引き継ぎ。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";

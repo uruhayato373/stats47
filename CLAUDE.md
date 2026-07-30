@@ -25,14 +25,15 @@
 - **モデル別 prompt の SSOT**: task capsule・effort・委譲上限は `.claude/rules/model-prompting.md`
 - **Agent prompt 冒頭に task capsule + Output Format を指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
-- **計画・レビュー・改善ログの保存先を分ける**: 現在計画とバックログは `docs/todo/`、批判的レビュー / pre-mortem は `docs/04_レビュー/`、agent が使う週次レビュー履歴は `.claude/skills/management/weekly-review/reference/reviews/`、機械メトリクスは `.claude/state/metrics/`。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
-- **完全 DB レスが正典** → `docs/01_技術設計/12_完全DBレス設計.md`（doc 18 ハイブリッドは 2026-05-29 同日に superseded）。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
+- **レビューをタスクへ変換する**: 批判的レビュー / pre-mortem / 監査の全文を `docs/` に蓄積しない。未完了の対策だけを優先度・実行順・停止条件・完了条件付きで `docs/todo/` へ統合する。恒久判断は既存の戦略文書・rules・コード近傍READMEへ、agent用の定期履歴は各skillの `reference/` へ、機械メトリクスは `.claude/state/metrics/` へ置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの機械アラートのみ → `.claude/rules/docs-vs-issues.md`
+- **文書作成・整理はガバナンスSSOTに従う**: 新規文書より既存SSOTへの統合を優先する。判断規則は`.claude/rules/docs-vs-issues.md`、機械契約は`.claude/config/docs-governance.json`。文書の作成・移動・削除後は`npm run docs:fix`と`npm run docs:check`を実行する。意味判断を伴う棚卸しは`/maintain-docs`
+- **完全 DB レスが正典** → `docs/01_技術設計/02_データアーキテクチャ.md`（doc 18 ハイブリッドは 2026-05-29 同日に superseded）。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
   - **Authored / 設定** (低volume・人手・型/review: テーマのチャート定義等) → **git TS が SSOT** → 生成スクリプトで R2 反映
   - **Authored / 運用** (page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes) → **git TS 定義が SSOT** → 生成スクリプトで R2 JSON（横断整合性はビルド時に検証）。手編集 JSON を SSOT にしない
   - **Reference** (metrics=TS / articles=article.md / estat_catalog=e-Stat API / prefectures=JSON) → **再生成**
   - **Derived** (area_profiles / correlations) → **エフェメラル計算**（使い捨て `:memory:` SQLite / DuckDB が R2 を読む）→ R2。永続しない
 - **永続/リモート D1 は廃止**。S3 creds さえあれば集計もクラウドで完結する（旧「集計はローカル限定」制約は消滅）。git TS → R2 反映の実装例: `apps/web/scripts/export-page-components-snapshot.ts`（page_components git TS SSOT `data/page-components/` → R2、Phase E 実装済）
-- **観測値・派生を永続 DB に入れない** (R2 のまま。Phase 6 肥大=解約の再発防止)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。移行は完了済（正典: `docs/01_技術設計/12_完全DBレス設計.md`）
+- **観測値・派生を永続 DB に入れない** (R2 のまま。Phase 6 肥大=解約の再発防止)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。移行は完了済（正典: `docs/01_技術設計/02_データアーキテクチャ.md`）
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
 - **デプロイは溜めて1回・勝手にしない**: UI/ロジックの反復ごとに本番デプロイしない（develop→main PR + CI + Cloudflare deploy が毎回 6-8分×2 走りコスト/時間の無駄）。**localhost (`npm run dev:web`) で確認し、まとまりで1回だけデプロイ**。デプロイは (a) ユーザーが明示的に求めたとき、(b) 本番でしか再現しない問題の検証時（例: Cloudflare Workers ランタイム固有の R2/env 問題）のみ。本番反映は outward-facing なので、明示指示が無ければ**実行前に確認する** → `.claude/rules/branch-workflow.md`
 - **並行エージェント (Codex 等) と SSOT を共有する**: このファイル `CLAUDE.md` が指示の単一ソース。**`AGENTS.md` は `CLAUDE.md` への symlink**（OpenAI Codex は `AGENTS.md` を読む）なので、Codex も Claude も同じ規約 (`.claude/rules/`) に従う。プロジェクト固有の恒常事実は **`.claude/memory/MEMORY.md`**（git 共有）を読む。**⚠️ git 競合注意**: Codex と Claude が同一作業ツリーで同時編集すると commit 混在・WIP 混入・型/lock 不整合が起きる（実例: 2026-06-21 に Codex の zod schema 型エラー + package-lock 未更新で CI 2回 fail）。同時に走らせない、または git worktree を分ける。検知補助: `.claude/hooks/session-guard.js`（Claude セッション間のみ）。詳細: memory `feedback_shared_working_copy_git_race`
@@ -56,16 +57,16 @@
 | 完了前検証 | `/verification-loop` (ビルド + 型チェック) |
 | バグ修正の教訓 | `/knowledge` |
 | 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
-| **改善施策の TODO 真実源** (status / tier / 期日) | `docs/todo/01_改善バックログ.md` |
+| **改善施策の TODO 真実源** (status / tier / 期日) | `docs/todo/04_改善バックログ.md` |
 | 改善施策デプロイ (agent 用詳細) | `.claude/skills/analytics/{gsc,ga4,adsense,affiliate,sns-metrics,cloudflare-cost,performance}-improvement/reference/improvement-log.md` |
-| **月次の重点 1-2 テーマ** (今月どこに張るか・Pro 予算配分) | `docs/todo/current-month.md` (`/monthly-plan` で月初上書き。週次が分割消化) |
-| 週次計画進捗 | `docs/todo/current-week.md` の TODO チェックボックスを Edit |
+| **月次の重点 1-2 テーマ** (今月どこに張るか・Pro 予算配分) | `docs/todo/02_今月の重点.md` (`/monthly-plan` で月初上書き。週次が分割消化) |
+| 週次計画進捗 | `docs/todo/03_今週の計画.md` の TODO チェックボックスを Edit |
 | 週次振り返り | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` |
-| 批判的レビュー / 事前検死 | `docs/04_レビュー/YYYY-MM-DD-<topic-slug>.md` (フラット。slug に種別を含める例 `-monetization` / `-pre-mortem-<x>`、種別は frontmatter `type:` で絞り込み) |
-| **セッション残タスク** | 未完了は `docs/todo/{01_改善,02_機能,03_指標バックログ}.md` へ直接反映。未分類のみ `docs/todo/inbox.md`（一時ハンドオフ文書は作らない） |
-| 未分類の思いつき TODO | `docs/todo/inbox.md` に 1 行 append (triage で各バックログへ → `docs/todo/README.md`) |
+| 批判的レビュー / 事前検死 | 全文はセッション内で提示。未完了策を `docs/todo/{04_改善,05_機能,06_指標バックログ}.md`、恒久判断を既存SSOTへ直接反映 |
+| **セッション残タスク** | 未完了は `docs/todo/{04_改善バックログ,05_機能バックログ,06_指標バックログ}.md` へ直接反映。未分類のみ `docs/todo/01_未整理タスク.md`（一時ハンドオフ文書は作らない） |
+| 未分類の思いつき TODO | `docs/todo/01_未整理タスク.md` に 1 行 append (triage で各バックログへ → `docs/todo/00_運用ガイド.md`) |
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |
-| 未着手の機能・自動化バックログ | `docs/todo/02_機能バックログ.md`（指標拡充候補は `docs/todo/03_指標バックログ.md`） |
+| 未着手の機能・自動化バックログ | `docs/todo/05_機能バックログ.md`（指標拡充候補は `docs/todo/06_指標バックログ.md`） |
 | 非自明な API 仕様・制約 | `/knowledge` (問題・原因・対策の 3 項目) |
 | プロジェクト固有の恒常事実 | auto memory → 正典は **repo 内 `.claude/memory/`**（git で複数 PC・クラウドと共有）。Claude Code のグローバルパス `~/.claude/projects/<hash>/memory/` は `.claude/memory/` への symlink。**新しいマシンで clone した直後に `bash .claude/scripts/setup-memory-symlink.sh` を 1 回実行**して symlink を張る |
 
@@ -91,8 +92,8 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `theme-catalog-standards.md` | テーマページの指標×チャート統合カタログ (ThemeCatalog SSOT / チャート選定文法 / selection provenance / generate:catalog・validate:catalog / theme-researcher・theme-designer) |
 | `survey-linkage-standards.md` | ranking↔統計調査の紐付け (surveys.json マスタ / provenance 辞書導出 / config.surveyId オーバーライド / 監査 /audit-survey-linkage / survey-curator) |
 | `branch-workflow.md` | PR・デプロイ作業・DB データ反映 |
-| `data-storage.md` | スキル設計時 (git TS / R2 vs `.claude/` vs `docs/` 判定。正典は `docs/01_技術設計/12_完全DBレス設計.md`) |
-| `docs-vs-issues.md` | docs/ と GitHub Issues の使い分け (新規スキル・新規記録時必読) |
+| `data-storage.md` | スキル設計時 (git TS / R2 vs `.claude/` vs `docs/` 判定。正典は `docs/01_技術設計/02_データアーキテクチャ.md`) |
+| `docs-vs-issues.md` | 文書作成・配置・整理・削除とdocs / skill / state / Issuesの使い分け (文書変更時必読) |
 | `skill-code-placement.md` | スクリプト新規作成 |
 | `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド |
 | `model-prompting.md` | Claude Opus 5 / Sonnet 5 / Fable 5 の task capsule・effort・委譲設計 |
@@ -106,17 +107,19 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 |---|---|
 | docs 全体構成・運用ルール | `docs/INDEX.md` |
 | プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_プロジェクト定義.md` |
+| ターゲット・ペルソナ | `docs/00_プロジェクト管理/04_ターゲットペルソナ.md` |
 | 実装計画 INDEX / 現在地 | `docs/02_実装計画/00_INDEX.md` |
-| **収益化マスタープラン (収益化・チャネル・広告配置の SSOT)** ★収益関連の判断時必読 | `docs/02_実装計画/01_収益化マスタープラン.md` |
-| 改善バックログ (TODO 真実源) | `docs/todo/01_改善バックログ.md` ★施策追加時必読 |
+| **収益化戦略 (収益モデル・チャネル・広告配置の SSOT)** ★収益関連の判断時必読 | `docs/00_プロジェクト管理/02_収益化戦略.md` |
+| 改善バックログ (TODO 真実源) | `docs/todo/04_改善バックログ.md` ★施策追加時必読 |
 | システム構成・技術スタック・モノレポ構造 | `docs/01_技術設計/01_システムアーキテクチャ.md` |
-| **データ層アーキテクチャ (完全DBレス・正典)** ★データ保存先判定時必読 | `docs/01_技術設計/12_完全DBレス設計.md` (doc 18 ハイブリッドは superseded) |
-| DDD ドメイン分類 | `docs/01_技術設計/01_システムアーキテクチャ.md` |
-| エラーハンドリング規約 | `docs/01_技術設計/03_エラーハンドリング規約.md` |
+| **データアーキテクチャ (完全DBレス・正典)** ★データ保存先判定時必読 | `docs/01_技術設計/02_データアーキテクチャ.md` |
+| ドメイン境界 | `docs/01_技術設計/01_システムアーキテクチャ.md` |
+| エラーハンドリング | `docs/01_技術設計/05_エラーハンドリング.md` |
 | 自動化インベントリ ★追加・削除時は必ず更新 | `docs/01_技術設計/06_自動化インベントリ.md` |
 | URL 構造・301/410・canonical 戦略 ★新規ページ作成時必読 | コード SSOT: `apps/web/src/lib/url-policy.ts` + `config/{blog-redirects,legacy-category-keys,redirect-tag-keys}.ts` + `middleware.ts` / `sitemap.ts`。機械検証: `src/__tests__/middleware.test.ts` / `.github/scripts/smoke-test-routes.sh`。新規ページ手順は `.claude/rules/coding-standards.md` |
-| **情報設計 (ページ責務・3タクソノミー・ファネル役割)** ★page_components配置/分類軸追加/ページKPI判定時必読 | `docs/01_技術設計/07_情報設計.md` |
-| 統一レイアウト (横幅/レール/フラット/フォント/ナビ) ★UI実装時必読 | `docs/01_技術設計/13_統一レイアウト設計.md` |
+| **情報設計 (ページ責務・3タクソノミー・ファネル役割)** ★page_components配置/分類軸追加/ページKPI判定時必読 | `docs/01_技術設計/03_情報設計.md` |
+| **デザインシステム** (横幅/レール/Surface/フォント/ナビ) ★UI実装時必読 | `docs/01_技術設計/04_デザインシステム.md` |
+| Playwright 認証プロファイル | `docs/01_技術設計/07_Playwright認証プロファイル.md` |
 | 国土数値情報 GIS データ | `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/README.md` |
 | 国土交通データプラットフォーム | `.claude/skills/estat/search-mlit-dpf/` (SKILL + `reference/mlit-dpf-catalog.md`・旧 docs/01/05) |
 | Pre-commit フック | `.husky/README.md` |
@@ -132,12 +135,13 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | 知りたいこと | 参照先 |
 |---|---|
 | Management スキル群 | `.claude/skills/management/README.md` |
+| 文書作成・整理・陳腐化監査 | `.claude/skills/management/maintain-docs/SKILL.md` (`/maintain-docs`) |
 | エージェントチーム構成 (Tier 0/1/2) | `.claude/agents/README.md` |
 | 画像プロンプトカタログ (43 種) | `.claude/skills/image-prompt/reference/catalog.md` |
 
 ### GitHub Issues 運用 (主要ラベル)
 
-Issues は「PR で close される機能改修・バグ」と「日次アラート」だけに絞っている (詳細: `.claude/rules/docs-vs-issues.md`)。
+Issues は「PR で close される機能改修・バグ」と「機械生成アラート」だけに絞っている (詳細: `.claude/rules/docs-vs-issues.md`)。
 
 - `enhancement` — 機能改修・改善（PR で `Closes #N` で close）
 - `bug` — バグ修正（同上）
@@ -149,6 +153,6 @@ Issues は「PR で close される機能改修・バグ」と「日次アラー
 
 過去の移行履歴:
 - `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05) → `docs/02_実装計画/{feature-backlog,indicator-backlog}.md` (2026-06-07 統合)
-- `docs/03_レビュー/` (2026-04-21 廃止) → GitHub Issues 経由 → `docs/04_レビュー/` (2026-05)
-- `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` 系ラベル (2026-05 廃止) → `docs/todo/` / `.claude/skills/management/weekly-review/reference/reviews/` / `docs/04_レビュー/` / `docs/todo/01_改善バックログ.md`
-- `docs/05_改善ログ/` (2026-06 廃止) → `docs/todo/01_改善バックログ.md` (pending 移行) + `.claude/skills/analytics/*/reference/improvement-log.md` (詳細ログ)
+- レビュー保存ディレクトリは 2026-07-30 に廃止。批判的レビュー / pre-mortem は未完了策を `docs/todo/`、恒久判断を既存SSOT、再生成可能な履歴をskill referenceへ直接反映する
+- `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` 系ラベル (2026-05 廃止) → `docs/todo/` / `.claude/skills/management/weekly-review/reference/reviews/` / 各strategy・rules・skill reference
+- `docs/05_改善ログ/` (2026-06 廃止) → `docs/todo/04_改善バックログ.md` (pending 移行) + `.claude/skills/analytics/*/reference/improvement-log.md` (詳細ログ)

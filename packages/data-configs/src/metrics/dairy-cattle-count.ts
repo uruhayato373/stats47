@@ -8,17 +8,23 @@ export const dairyCattleCount: MetricConfig = {
   "category": "agriculture",
   "source": {
     "kind": "estat",
-    "statsDataId": "0003238330",
-    "cdCat01": "110",
+    "statsDataId": "0004047181",
+    "cdCat02": "1002",
+    "areaAxis": {
+      "axis": "cat01",
+      "scheme": "name",
+    },
     "displayName": "畜産統計調査",
     "url": "https://www.maff.go.jp/j/tokei/kouhyou/tikusan/",
   },
   "entities": [
     "prefecture",
   ],
+  // 表を令和7年 (2025) 版 0004047181 に差し替えたため 2025 単年。
+  // 旧表 0003238330 は全年 46 県で **北海道が欠落**していた (都府県のみの表)。
   "years": {
-    "from": 2018,
-    "to": 2018,
+    "from": 2025,
+    "to": 2025,
   },
   "yearFormat": "calendar",
   "visualization": {

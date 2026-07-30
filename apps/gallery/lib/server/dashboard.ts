@@ -50,7 +50,11 @@ function mdTableAfter(
     const l = lines[i];
     if (/^\|/.test(l)) {
       inTable = true;
-      if (/^\|[\s:-]+\|/.test(l.replace(/-/g, "-"))) continue; // 区切り行
+      // ★`l.replace(/-/g, "-")` を挟んでいたが `-` を `-` に置換する no-op で、
+      //   判定結果は素の `l` と常に同一 (CodeQL js/identity-replacement が指摘)。
+      //   全角ダッシュ (—–−) の正規化を意図していた可能性はあるが、それは挙動を変える
+      //   別の判断なので推測で実装しない。ここでは死んだ置換だけを外す。
+      if (/^\|[\s:-]+\|/.test(l)) continue; // 区切り行
       const cells = l
         .split("|")
         .slice(1, -1)
@@ -198,7 +202,7 @@ export function readExperiments(root: string) {
 // ─── メトリクス ──────────────────────────────────────
 export function readMetricsHistory(root: string) {
   return wrap(() => {
-    // KPI/WoW 表示は確定7日 (非重複) 系列 (§18.2)。旧 history.csv はローリング28日/基盤混在のため
+    // KPI/WoW 表示は確定7日 (非重複) 系列。旧 history.csv はローリング28日/基盤混在のため
     // カードの週次 WoW には使わない。列名は UI 互換の clicks/impressions 等へ写像する。
     const gscFin = readCsvOrNull(
       path.join(root, ".claude/state/metrics/gsc/history-finalized7d.csv"),
@@ -276,10 +280,10 @@ export function readGscCoverage(root: string) {
   });
 }
 
-// ─── TODO 表 (docs/todo/01_改善バックログ.md — 6 列 pipe テーブル) ──
+// ─── TODO 表 (docs/todo/04_改善バックログ.md — 6 列 pipe テーブル) ──
 export function parseBacklogMd(root: string) {
   return wrap(() => {
-    const md = fs.readFileSync(path.join(root, "docs/todo/01_改善バックログ.md"), "utf8");
+    const md = fs.readFileSync(path.join(root, "docs/todo/04_改善バックログ.md"), "utf8");
     const lines = md.split(/\r?\n/);
     let tier: string | null = null;
     const rows: Array<{
@@ -320,7 +324,7 @@ export function parseBacklogMd(root: string) {
   });
 }
 
-// ─── TODO 表 (docs/todo/02_機能バックログ.md) ──
+// ─── TODO 表 (docs/todo/05_機能バックログ.md) ──
 interface FeatureBacklogRow {
   section: string;
   id: string;
@@ -332,7 +336,7 @@ interface FeatureBacklogRow {
 
 export function parseFeatureBacklogMd(root: string) {
   return wrap(() => {
-    const md = fs.readFileSync(path.join(root, "docs/todo/02_機能バックログ.md"), "utf8");
+    const md = fs.readFileSync(path.join(root, "docs/todo/05_機能バックログ.md"), "utf8");
     const lines = md.split(/\r?\n/);
     let section: string | null = null;
     let cur: FeatureBacklogRow | null = null;
@@ -341,13 +345,15 @@ export function parseFeatureBacklogMd(root: string) {
       const h2 = l.match(/^## (.+)/);
       if (h2) {
         const t = h2[1];
-        section = t.includes("今実装")
-          ? "今実装"
-          : t.includes("将来")
-            ? "将来・保留"
-            : t.includes("DROP")
-              ? "DROP"
-              : null;
+        section = /^P0\b/.test(t)
+          ? "P0 緊急"
+          : /^P1\b/.test(t)
+            ? "P1 今月"
+            : /^P2\b/.test(t)
+              ? "P2 次"
+              : /^P3\b/.test(t)
+                ? "P3 条件付き保留"
+                : null;
         cur = null;
         continue;
       }
@@ -382,22 +388,18 @@ export function parseFeatureBacklogMd(root: string) {
   });
 }
 
-// ─── 戦略 (STP md をパース) ─────────────
+// ─── 戦略 (マーケティング戦略 SSOT をパース) ─────────────
 export function parseStrategyDocs(root: string) {
   return wrap(() => {
-    const stpPath = "docs/04_レビュー/2026-07-07-stp-analysis.md";
     const mkPath = "docs/00_プロジェクト管理/03_マーケティング戦略.md";
-    const stp = fs.readFileSync(path.join(root, stpPath), "utf8");
     const mk = fs.readFileSync(path.join(root, mkPath), "utf8");
 
     const statement = mk.match(/^> \*\*「(.+?)」\*\*/m)?.[1] ?? null;
 
-    // §4 ターゲティング判定 (セグメント | 判定 | 役割)
-    const targeting = mdTableAfter(stp, /^## 4\./);
+    const targeting = mdTableAfter(mk, /^### セグメント評価/);
     const segments = (targeting?.rows ?? []).map(([seg, verdict, role]) => ({ seg, verdict, role }));
 
-    // §6 提言 (# | 提言 | 反映先 | 反映状況)
-    const teigenTable = mdTableAfter(stp, /^## 6\./);
+    const teigenTable = mdTableAfter(mk, /^### STP実行状況/);
     const teigen = (teigenTable?.rows ?? []).map(([n, title, target, state]) => ({
       n,
       title,
@@ -410,10 +412,9 @@ export function parseStrategyDocs(root: string) {
       segments,
       teigen,
       sources: [
-        stpPath,
         mkPath,
         "docs/00_プロジェクト管理/04_ターゲットペルソナ.md",
-        "docs/02_実装計画/16_月間100万PVロードマップ.md",
+        "docs/todo/04_改善バックログ.md",
       ],
     };
   });

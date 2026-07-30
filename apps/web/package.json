@@ -16,6 +16,7 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:stats-data": "vitest run --dir ../../packages/estat-api/src/stats-data/__tests__",
+    "test:ai-content": "vitest run --dir ../../packages/ai-content/src/services/__tests__",
     "test:stats-data:save-outputs": "npx cross-env SAVE_TEST_OUTPUTS=true vitest run src/features/estat-api/stats-data",
     "test:stats-data:watch": "npx cross-env SAVE_TEST_OUTPUTS=true vitest watch src/features/estat-api/stats-data",
     "test:analyze": "npx tsx scripts/analyze-coverage.ts",

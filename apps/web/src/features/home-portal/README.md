@@ -9,8 +9,8 @@
 | -------------------- | --------------------------------------------------------------------- |
 | ページ構造・表示件数 | `apps/web/src/app/page.tsx`                                           |
 | 利用意図と表示順     | `packages/data-configs/src/home-portal.ts`                            |
-| UI・レイアウト       | `docs/01_技術設計/15_デザインシステムSSOT.md`                         |
-| 情報設計             | `docs/01_技術設計/07_情報設計.md`                                     |
+| UI・レイアウト       | `docs/01_技術設計/04_デザインシステム.md`                         |
+| 情報設計             | `docs/01_技術設計/03_情報設計.md`                                     |
 | GA4イベント          | `.claude/rules/analytics-event-standards.md`                          |
 | 注目ランキング       | `apps/web/src/features/ranking/components/FeaturedRankings/README.md` |
 

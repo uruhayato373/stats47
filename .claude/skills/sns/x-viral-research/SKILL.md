@@ -12,9 +12,22 @@ X 上で stats47 の題材圏 (都道府県統計・ランキング・日本地�
 検索し、**投稿の型 (フック構造・画像フォーマット) を台帳に収集**する。目的は自社カタログ
 (`sns-content-standards.md` §2 / `buzz-map-standards.md` §1) の改善材料集めであり、投稿の丸写しではない。
 
+> **SSOT**: Xの投稿単位競合リサーチは本スキルを唯一の運用正典とする。独立したPlaywright collectorは
+> 採択・実装されていないため、その存在を前提にしない。再提案時も本スキルを拡張し、同義スキルを増やさない。
+
 > **/competitor-scan との棲み分け**: competitor-scan は**アカウント単位**の月次定点観測
 > (フォロワー・頻度の diff)。本スキルは**投稿単位**のパターン収集 (何が・どんな型・どんな画像で伸びたか)。
 > 両者の示唆はどちらも §2-10 の人間承認ゲート経由でカタログへ反映する。
+
+## 安全・観測契約
+
+- 調査は読み取り専用。投稿、返信、いいね、リポスト、bookmark、follow、削除等のmutationを行わない。
+- CAPTCHA、2FA、ログイン要求、rate limitを回避せず、その時点で停止して取得不能と報告する。
+- 1回の上限は3軸・各10投稿・合計30投稿。無限scrollや過去全件crawlをしない。
+- 非表示・取得不能のmetricは`0`でなく`null`相当として扱い、0件とlogin/selector/rate-limit失敗を区別する。
+- 同一投稿の再観測は取得日付きで追記し、過去metricsを上書きしない。
+- 第三者の本文・画像・動画は内部調査だけに使い、git、公開R2、自社投稿素材、画像生成入力へ流用しない。
+- browser-use終了時は`.claude/rules/browser-use-cleanup.md`のdaemon停止・タブ閉鎖・一時profile削除を必ず行う。
 
 ## 引数
 
@@ -110,9 +123,10 @@ Chrome タブクローズ) を必ず仕込む。
 }
 ```
 
-### Phase 4: レポート出力 (人間向け)
+### Phase 4: 比較用レポート出力
 
-`docs/04_レビュー/YYYY-MM-DD-x-viral-research.md` (frontmatter `type: x-viral-research`):
+`.claude/skills/sns/x-viral-research/reference/reports/YYYY-MM-DD.md`
+(frontmatter `type: x-viral-research`):
 
 ```markdown
 ---
@@ -130,6 +144,8 @@ tags: [competitor, sns]
 ## stats47 への示唆 (3-5)
 - <buzz-map カタログ / X template への反映候補。§2-10 承認ゲート経由と明記>
 ```
+
+採択した未完了策だけを `docs/todo/04_改善バックログ.md` へID付きで追加する。
 
 ### Phase 5: カタログへの反映 (★人間承認ゲート)
 

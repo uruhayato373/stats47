@@ -51,27 +51,11 @@ $ARGUMENTS — --scope <name> [scope-specific args]
 - パネリストのキャラクターを維持する（SEO 専門家がアクセシビリティを語る等は NG）
 - **コードを実際に読んでからレビューする**。推測でレビューしない
 
-### 出力先（docs/04_レビュー/）
+### 保存方針
 
-すべてのレビューは `docs/04_レビュー/{YYYY-MM-DD}-dev-review-{scope}.md` に Write tool で書き出す。frontmatter は以下:
-
-```yaml
----
-type: dev-review
-scope: {scope-name}
-date: 2026-MM-DD
-status: active
----
-```
-
-ファイル名例:
-- `2026-05-04-dev-review-feature-ads.md`
-- `2026-05-04-dev-review-app-ranking.md`
-- `2026-05-04-dev-review-packages-all.md`
-- `2026-05-04-dev-review-types.md`
-- `2026-05-04-dev-review-ui-consistency.md`
-
-過去のレビューは `ls -t docs/04_レビュー/*-dev-review-*.md | head -5` で参照できる。
+レビュー全文はセッション内で提示し、ファイルへ保存しない。修正が未完了で残る場合だけ
+`docs/todo/05_機能バックログ.md` へID付きで統合し、対象、再現・根拠、最初の修正手順、
+禁止事項、完了条件、検証コマンドを記載する。横断的な恒久規約は既存rulesへ反映する。
 
 ### 出力フォーマット（共通骨格）
 

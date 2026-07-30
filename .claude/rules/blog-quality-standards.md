@@ -23,7 +23,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 - **文字数 (prose) は「薄すぎ」を弾く床であって品質ではない。**表・markup・リンクでは稼げない (gate が prose のみ計測)。字数を満たしたいなら読者価値のある分析を書く。
 - **書いた本人が自分の記事を採点して公開してはならない。**必ず `blog-critic`(別 agent・別コンテキスト) の意味レビューを通す。執筆 (article-writer) と監査 (blog-critic) は分離する。
 - 機械 gate を pass しても「品質 OK」ではない。②③ を経て初めて品質が担保される。
-- **critic は full / delta の二相で起動する (トークン節約)**: 初回審査は `full` (正典全観点 + 記事全文)、REVISE 後の再審査は `delta` (前回指摘 + 変更 hunk のみ、正典 465行と記事全文を再読しない。床は `quality-gate.mjs` が毎回フル実行するため落ちない)。GSC 流入上位 30 記事の初回 critic は opus、他は sonnet に傾斜する (`build-remediation-queue.mjs` の `reviewTier`。正典 `docs/02_実装計画/01_収益化マスタープラン.md` §7)。
+- **critic は full / delta の二相で起動する (トークン節約)**: 初回審査は `full` (正典全観点 + 記事全文)、REVISE 後の再審査は `delta` (前回指摘 + 変更 hunk のみ、正典 465行と記事全文を再読しない。床は `quality-gate.mjs` が毎回フル実行するため落ちない)。GSC 流入上位 30 記事の初回 critic は opus、他は sonnet に傾斜する (`build-remediation-queue.mjs` の `reviewTier`。モデル規律は `.claude/rules/model-prompting.md`)。
 
 > **既存記事を計画的に順次是正するには (★どのセッションからでも開始可)**: 「次にどの記事を直すか」は
 > 状態付き是正キュー `.claude/state/blog/remediation-queue.json` が真実源 (GSC流入×品質blockerの統合スコア)。
@@ -468,7 +468,7 @@ awk -F',' 'NR>1 && $1 ~ /\/blog\// && $3 >= 200 && ($4+0) < 0.02 && ($4+0) > 0 {
 2. 必要なら本文も編集 ([!NOTE] callout 追加、内部リンク強化)
 3. `bash .claude/skills/db/sync-snapshots/run.sh --only blog` で R2 push
    （`export-blog-snapshot.ts` が article.md frontmatter を直接読んで `app/blog/all.json` を生成 = 完全DBレス。D1 articles テーブルは廃止済）
-4. 改善バックログ `docs/todo/01_改善バックログ.md` に BLOG-CTR-NN として記録
+4. 改善バックログ `docs/todo/04_改善バックログ.md` に BLOG-CTR-NN として記録
 5. feature ブランチで commit → develop merge → PR develop → main → CI green → merge → Cloudflare Pages 自動 deploy
 
 ## 実証データ (2026-05-23 ベース)
@@ -501,7 +501,7 @@ node .claude/scripts/blog/audit-article-structure.mjs
 node .claude/scripts/blog/audit-chart-quality.mjs
 
 # ★公開済み全記事を R2 公開 URL から取得し決定的チェックを一括適用 (cloud 可・週次棚卸し)
-#   → /tmp/published-blog-audit.json + docs/04_レビュー/<date>-blog-quality-inventory.md
+#   → /tmp/published-blog-audit.json。未完了の横断施策だけを改善バックログへ反映
 node .claude/scripts/blog/audit-published-blog.mjs
 ```
 
@@ -540,7 +540,7 @@ node .claude/scripts/blog/audit-published-blog.mjs
 - **新規記事の戦略 (型ポートフォリオ・ネタ選定・KPI): `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト** ★何を書くかはまずこれ
 - **是正ループの正典 (計画的に順次品質向上): `.claude/rules/blog-remediation-loop.md`** ★既存記事を直すときはまずこれ
 - 勝ち要因分析スキル: `.claude/skills/blog/analyze-winning-patterns/SKILL.md`
-- 親方針: `docs/02_実装計画/01_収益化マスタープラン.md` Phase 0 (CTR 改修)
+- 親方針: `docs/00_プロジェクト管理/03_マーケティング戦略.md`「成長レバー > SEO品質」
 - 実測判定ルール: `.claude/rules/evidence-based-judgment.md`
-- 改善バックログ: `docs/todo/01_改善バックログ.md` (BLOG-CTR-03 / BLOG-CTR-04)
+- 改善バックログ: `docs/todo/04_改善バックログ.md` (BLOG-CTR-03 / BLOG-CTR-04)
 - 既存スキル: `.claude/skills/blog/brushup-blog/SKILL.md` (`--target queue` が是正の実行エンジン)

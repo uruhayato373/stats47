@@ -7,8 +7,14 @@ name: 📝 Blog remediation daily (今日のリライト10記事)
 #      広い git add で出戻りした残骸も翌日には自動で消える (2026-06-21 追加・残骸再発防止)
 #      内容一致を要求=brushup 改稿中 (R2 旧版と差分) を誤削除しない安全装置
 #   3. pending 上位 10 件を「今日のリライト」Issue に upsert 通知
+#   4. SVG データ系譜 (json + source.json) を R2 で棚卸し → svg-lineage-queue を commit-back
+#   5. 系譜ラチェット: 元データ消失が前回より増えたら workflow を失敗させる (縮小専用)
 # 実リライトは人間が Claude セッションで `/brushup-blog --target queue --next 10` を回す。
-# 正典: docs/02_実装計画/06_ブログ品質是正ループ.md / .claude/rules/blog-data-schema.md §0
+#
+# ★ラチェットを Issue 通知の「後」・commit の「前」に置く理由:
+#   - Issue の後 → 系譜が退行しても日次リライトの通知は止めない (無関係な機能を殺さない)
+#   - commit の前 → 退行時は baseline を進めない = 直すまで毎日鳴り続ける (一度きりで消えない)
+# 正典: .claude/rules/blog-remediation-loop.md / .claude/rules/blog-data-schema.md §0
 
 on:
   schedule:
@@ -52,9 +58,35 @@ jobs:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
         run: node .claude/scripts/blog/build-remediation-queue.mjs
 
+      # SVG データ系譜の棚卸し (2026-07-29 配線): 公開済み全 SVG について
+      # <name>.json + <name>.source.json が R2 に揃っているかを走査し、復元キューを最新化する。
+      #
+      # なぜ cron に要るか: 公開時ゲート (quality-gate の svgLineageMissing) は
+      # **ローカル outbox** を見るだけで、しかも公開時にしか発火しない。ゲート導入 (2026-06-20)
+      # より前に公開された記事の系譜喪失は誰も検知せず、2026-07-29 にタイルマップを再生成しようとして
+      # 初めて 12 枚が復元不能と判明した。定期棚卸しが無いと同じことが繰り返される。
+      - name: 🧬 Rebuild SVG lineage queue
+        continue-on-error: true # R2 取得失敗等で Issue 通知本体を止めない
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: node .claude/scripts/blog/build-lineage-queue.mjs
+
+      # 出典 (source.json) の再取得可能性を検査 (2026-07-29 新設)。存在検査 (quality-gate の
+      # 系譜 gate) では「存在するが復元できない」を捕まえられない。kind ごとに必要な参照が
+      # あるか、参照先 rankingKey が R2 に実在するかまで見る。exit 3 = 欠陥あり (ラチェットで判定)。
+      - name: 🔎 Audit chart provenance (再取得できる出典か)
+        continue-on-error: true # 欠陥ありは exit 3。ここでは記録だけしてラチェットで判定する
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: node .claude/scripts/blog/audit-chart-provenance.mjs
+
       # docs/21 (ephemeral outbox) の自動掃除: 「published:true かつ R2 (正典) の article.md と
       # 内容が完全一致」するドラフトを git rm する。広い git add で出戻りした残骸も翌日には自動で消える。
       # published:false の作業中ドラフト / R2 と差分のある改稿中 (brushup) は保持。R2 が SSOT なので削除は可逆。
+      #
+      # ★2026-07-29: article.md の一致だけでなく「ローカルにあるファイルが全て R2 に載っているか」も
+      # 確認する。data/*.json / *.source.json はローカルにしか無い場合があり (実例:
+      # library-museum-cultural-capital)、article.md だけ見て消すと元データが永久に失われる。
       - name: 🧹 Prune published drafts from docs/21 outbox
         continue-on-error: true # 掃除失敗で Issue 通知本体を止めない
         env:
@@ -104,11 +136,57 @@ jobs:
               --body-file /tmp/blog-remediation/issue.md
           fi
 
+      # ラチェット (縮小専用): 元データ消失 (neither) の件数が前回より増えたら失敗させる。
+      # 公開時ゲートと prune の安全装置で増えないはずなので、増えたら未知の経路がある。
+      # R2 取得失敗時は queue が更新されず diff ゼロになるので誤検知しない。
+      - name: 🔒 Lineage ratchet (元データ消失が増えていないか)
+        run: |
+          Q=".claude/state/blog/svg-lineage-queue.json"
+          test -f "$Q" || { echo "queue が無い (rebuild 失敗) → スキップ"; exit 0; }
+          # byStatus.neither が集計値 (build-lineage-queue.mjs が書く)。
+          # entries[].status からも数えられるが、集計値を使う方がスキーマ変更に強い。
+          COUNT='const q=require(process.argv[1]);const n=q.byStatus&&q.byStatus.neither;if(typeof n!=="number"){console.error("byStatus.neither が無い — スキーマ変更?");process.exit(2)}console.log(n)'
+          NEW=$(node -e "$COUNT" "$PWD/$Q") || { echo "::error::queue のスキーマが想定と違います (ラチェットが空振りするので失敗させます)"; exit 1; }
+          if ! git show "HEAD:$Q" > /tmp/lineage-prev.json 2>/dev/null; then
+            echo "前回の queue が無い (初回) → baseline を記録するだけ: neither=$NEW"; exit 0
+          fi
+          OLD=$(node -e "$COUNT" /tmp/lineage-prev.json) || { echo "前回 queue のスキーマが古い → 比較をスキップ"; exit 0; }
+          echo "元データ消失 (neither): 前回 $OLD → 今回 $NEW"
+          if [ "$NEW" -gt "$OLD" ]; then
+            echo "::error::SVG の元データ消失が $OLD → $NEW に増えました。公開時ゲート (quality-gate の svgLineageMissing) と docs/21 prune の安全装置を通らない経路があります。正典: .claude/rules/blog-data-schema.md §1.7"
+            exit 1
+          fi
+          echo "✓ 増えていません (縮小専用ラチェット OK)"
+
+      # 出典ラチェット (縮小専用): 「存在するが再取得できない source.json」が増えたら失敗させる。
+      # 系譜ラチェットと同じ理由でここ (Issue の後・commit の前) に置く。
+      - name: 🔒 Provenance ratchet (再取得できない出典が増えていないか)
+        run: |
+          Q=".claude/state/blog/chart-provenance-queue.json"
+          test -f "$Q" || { echo "queue が無い (audit 失敗) → スキップ"; exit 0; }
+          COUNT='const q=require(process.argv[1]);if(typeof q.defectCount!=="number"){console.error("defectCount が無い — スキーマ変更?");process.exit(2)}console.log(q.defectCount)'
+          NEW=$(node -e "$COUNT" "$PWD/$Q") || { echo "::error::queue のスキーマが想定と違います (ラチェットが空振りするので失敗させます)"; exit 1; }
+          if ! git show "HEAD:$Q" > /tmp/prov-prev.json 2>/dev/null; then
+            echo "前回の queue が無い (初回) → baseline を記録するだけ: defects=$NEW"; exit 0
+          fi
+          OLD=$(node -e "$COUNT" /tmp/prov-prev.json) || { echo "前回 queue のスキーマが古い → 比較をスキップ"; exit 0; }
+          echo "再取得できない出典: 前回 $OLD → 今回 $NEW"
+          if [ "$NEW" -gt "$OLD" ]; then
+            echo "::error::再取得できない source.json が $OLD → $NEW に増えました。詳細: .claude/state/blog/chart-provenance-LATEST.md / 正典: .claude/rules/blog-data-schema.md §1.5"
+            exit 1
+          fi
+          echo "✓ 増えていません (縮小専用ラチェット OK)"
+
       - name: 📤 Commit refreshed queue + outbox prune to develop
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .claude/state/blog/remediation-queue.json
+          # SVG データ系譜キュー (build-lineage-queue.mjs の出力)。commit しないと
+          # 「元データ喪失が溜まっているか」が追跡できず、cron に配線した意味が無くなる。
+          git add .claude/state/blog/svg-lineage-queue.json .claude/state/blog/svg-lineage-LATEST.md
+          # 出典 (source.json) の再取得可能性。同じ理由で commit しないとラチェットの baseline が育たない。
+          git add .claude/state/blog/chart-provenance-queue.json .claude/state/blog/chart-provenance-LATEST.md
           # prune-published-outbox の git rm 結果 (公開済みドラフト削除) もステージ
           git add -A "docs/21_ブログ記事原稿/"
           if git diff --cached --quiet; then

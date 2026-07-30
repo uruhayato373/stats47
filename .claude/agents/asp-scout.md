@@ -64,5 +64,5 @@ SSOT への登録・公開は affiliate-manager に渡す 2-agent 分業。
 - コア: `.claude/scripts/ads/lib/{a8-scout-core,a8-code-core,a8-append-core}.mjs`
 - ブラウザ: `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}`
 - カタログ (状態機械): `.claude/state/ads/a8-catalog.json` / curated: `.claude/scripts/ads/data/a8-curated.json`
-- 認証方式: `docs/01_技術設計/playwright-auth-profiles.md`
+- 認証方式: `docs/01_技術設計/07_Playwright認証プロファイル.md`
 - 連携先: `.claude/agents/affiliate-manager.md` (SSOT 排他 writer)

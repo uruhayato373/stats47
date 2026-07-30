@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * GA4 から アフィリエイト計測イベント (ad_impression / affiliate_click) を取得し、
+ * GA4 から アフィリエイト計測イベント (affiliate_impression / affiliate_click) を取得し、
  * (affiliate_category × link_position) 別の impression / click / CTR を集計する。
  *
  * /affiliate-improvement の observe モードのデータ源。

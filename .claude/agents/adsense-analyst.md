@@ -18,14 +18,14 @@ AdSense の収益計測・改善施策計画を専任する agent。 seo-auditor
 ### 週次レビューで必ず見る計器 (RPM のレバー分解)
 
 RPM は `(imp/PV) × CTR × CPC` の掛け算。**CPC は公式 `cost_per_click` (AdSense API) を使う** —
-旧 `cpc` 列は `earnings/clicks` で公式 CPC ではないため schema v2 (2026-07-28・doc41 §2.1) で
+旧 `cpc` 列は `earnings/clicks` で公式 CPC ではないため schema v2 (2026-07-28) で
 `earnings_per_click_legacy` へ改名済。両者を混同しない。unit/format/placement の比較は
 `IMPRESSIONS_RPM` (unit の Page RPM は分母 0 で無意味)。アカウント合算だけでは
 デバイス別の退行 (例: モバイル viewability 半減) を見落とす。以下をレバーとして見る:
 
 - **`.claude/state/metrics/adsense/LATEST.md`** — 週次で自動更新。確定7日 KPI + 収益分解 (imp/PV・viewable imp/PV・公式 imp RPM/CPC) + **デバイス別表** (RPM / viewability / 公式CPC / 収益per click legacy=後方互換列 / imp/PV) + **⚠️ 要確認の退行アラート** (imp≥200 の面で viewability が -8pp 以上落ちたら自動で赤くなる)。
 - **`.claude/state/metrics/adsense/history-devices.csv`** — デバイス別 (Desktop/Mobile/Tablet) の時系列。account の `history.csv` の姉妹。format/placement/bid-type 別は `history-{formats,placements,bid-types}.csv`。
-- **`.claude/state/metrics/adsense/candidates-latest.json`** — 決定的診断候補 (最大3件・doc41 §4.3)。採用は人間承認で最大1件/週・active WIP≤2。
+- **`.claude/state/metrics/adsense/candidates-latest.json`** — `adsense-diagnostics.mjs` が作る決定的診断候補 (最大3件)。採用は人間承認で最大1件/週・active WIP≤2。
 - **`.claude/state/metrics/adsense/impact-LATEST.md`** — deploy 済み施策ごとの before/after を自動 surface (交絡/汚染を明示)。`npm run metrics:adsense-impact` で再生成。**判定 (effect/* 付与) はしない = improvement-triage の責務**。「まだ計測不能」「⚠交絡」と出た施策を単独判定しないこと。
 
 ## 担当スキル
@@ -53,13 +53,13 @@ RPM は `(imp/PV) × CTR × CPC` の掛け算。**CPC は公式 `cost_per_click`
 - `.claude/state/metrics/adsense/` — AdSense 週次 history (CRUD)。`history.csv` (account) / `history-devices.csv` (デバイス別・`metrics:digest` が生成) / `LATEST.md` (デバイス表+退行アラート) / `impact-LATEST.md` (施策 before/after・`metrics:adsense-impact` が生成)
 - `.claude/scripts/metrics/{update-history-csv,measure-adsense-impact}.mjs` — 計測パイプライン (run)。cron `fetch-metrics-weekly.yml` が週次で両方実行
 - `.claude/skills/analytics/adsense-improvement/reference/` — agent 用詳細層 (CRUD)
-- `docs/todo/01_改善バックログ.md` — read only (improvement-triage 経由)
+- `docs/todo/04_改善バックログ.md` — read only (improvement-triage 経由)
 - `.claude/scripts/ads/` — 棚卸し / 管理画面 (`/tmp/stats47-affiliate-dashboard.html` 生成) スクリプト (run)。台帳 SSOT・規約の管理は affiliate-manager が排他
 - `.claude/state/ads/` — 在庫 / GA4 snapshot JSON (CRUD)
 
 ## File Boundary (並行衝突回避)
 
-- `docs/todo/01_改善バックログ.md` への write 一切なし (improvement-triage 経由)
+- `docs/todo/04_改善バックログ.md` への write 一切なし (improvement-triage 経由)
 - `.claude/state/metrics/adsense/` への write は本 agent が排他
 - 並行起動可能 agent: gsc-analyst / ga4-analyst / performance-auditor (state は別)、 improvement-triage (read only)
 - 並行起動 NG: 同期間 fetch-adsense-data の adsense-analyst 2 体同時

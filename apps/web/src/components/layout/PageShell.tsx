@@ -40,7 +40,7 @@ export const SHELL_WIDTH_CLASS = "mx-auto w-full max-w-[1280px] px-4 sm:px-6";
  * 横幅・サイドレール・余白の SSOT。各 page.tsx は `container mx-auto` や
  * `max-w-[…]` を直接書かず、必ず本コンポーネントを経由する。
  *
- * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md
+ * 設計仕様: docs/01_技術設計/04_デザインシステム.md
  *
  * グリッド:
  * - レールなし     : 1280px 中央寄せ

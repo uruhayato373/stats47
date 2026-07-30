@@ -91,6 +91,38 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 { "kind": "manual", "source": "総務省 決算カード 2022 (URL)" }
 ```
 
+### source.json の `kind` 語彙 + 「再取得できるか」の機械検査 (2026-07-29)
+
+`kind` は当初 `ranking` / `estat` / `manual` の 3 種として書かれていたが、**実装は 14 種まで増えていた**
+（2026-07-29 に公開済み 898 件を実測）。ドリフトを止めるため、語彙と「再取得に必要なフィールド」の
+正典を **`.claude/scripts/blog/audit-chart-provenance.mjs` の `KINDS`** に置き、**未知の kind は error** にする。
+新しい kind を足すときは同ファイルも更新する。
+
+| kind | 再取得の手掛かり | 件数 (2026-07-29) |
+|---|---|---|
+| `ranking` | `rankingKey` + `year` | 649 |
+| `estat` | `statsDataId` | 58 |
+| `scatter` | `xKey` + `yKey` + `year` | 36 |
+| `derived` | `source` (`r2:...`) | 60 |
+| `manual` | `source` または `url` | 11 |
+| `correlation` | `source` (`r2:app/correlation/...`) | 5 |
+| `calculated` | `inputs[].rankingKey` + `formula` | 3 |
+| `composite` | `xMetric.rankingKey` + `yMetric.rankingKey` | 1 |
+| `ranking-pair` / `ranking-join` / `derived-scatter` | `source` / `x*RankingKey` / `rankingKeys[]` | 各 1 |
+| **`authored`** | **なし（対象外）** | 65 |
+| `bar` / `line` | `incomplete: true` = 出自不明の暫定 | 7 |
+
+- **`authored` は欠陥ではない**。記事本文由来の要点テキスト等は **SSOT 指標ではなく data json 自体が真実源**で、
+  SSOT から再取得できないのが正しい。「復元不能」と混同して SSOT から作り直すと**捏造**になる。
+- **複数キーを 1 文字列に連結する規約がある**（`"a + b"` / `"a|b"`、`transform` に式を併記）。
+  実在確認するときは分解する（分解しないと必ず 404 になり誤検知する。2026-07-29 に実際に 2 件出した）。
+
+**検査 (`audit-chart-provenance.mjs`)**: kind ごとに必要な参照があるか、参照先 rankingKey が R2 に実在するかを見る。
+存在検査（quality-gate の系譜 gate）では「**存在するが復元できない**」を捕まえられないため別に要る。
+日次 cron (`blog-remediation-daily.yml`) に**縮小専用ラチェット**付きで配線済み — 欠陥が前回より増えたら失敗する。
+実測ベースライン: restorable 804 / out-of-scope 65 / 欠陥 29（参照なし 18 + 自己申告 incomplete 11）。
+最新値は `.claude/state/blog/chart-provenance-LATEST.md` が正典。
+
 > `.source.json` は **観測値ではない**ので、`article-factual-check.mjs` / `quality-gate.mjs` の ground truth 索引と `generate-article-charts.ts` のチャート生成からは除外する（実装済: `endsWith(".source.json")` ガード）。
 
 ### カード型は2レイアウト・上位5下位5 固定
@@ -115,9 +147,12 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 
 ### デザイン（`packages/svg-builder/src/charts/choropleth.ts` が SSoT）
 
-- サイズ **600×700 固定**。テキストは **全て白 + 濃い縁取り（`paint-order` stroke）+ ソフトシャドウ**（淡色〜濃色どのタイルでも可読。白/黒の切替はしない）。
-- タイトルは**左上の余白に左寄せ・大きく**（自動フィット最大22px）、**年は別行・15px**。
-- **凡例はタイトル直下の左上余白**（2026-07-13〜。旧右下 8px は視認性が低く左上が遊休だった）。端ラベル既定は**「低い/高い」+ 実数値スケール（最小・中間・最大）**。「安全/危険」等の**意味的ラベルは指標の意味が確実な場合に json `legendLabels` で明示したときのみ**（旧デフォルト 安全/危険 が消費支出額等に焼き込まれた事故の再発防止。gate = `lintChoroplethLegend`）。
+- サイズ **780×560 固定**（2026-07-29 に 600×700 から変更）。記事内は `md:max-w-2xl`=672px 幅の `<img>` として描画されるため、**画面上の高さは `672 × H/W` で決まる**。旧 600×700 は画面上 784px になり記事を占有していた（新デザインは 482px＝38%減）。47 タイルは 14×16 の縦長格子なので、タイルを小さくせずに縦を詰めることはできない。そこで横長キャンバスにして、空く左カラムを情報に使う。
+- **背景を敷かない（透過）+ テーマ非依存の配色**。サイトのテーマは next-themes の class 方式で `enableSystem={false}`（OS の `prefers-color-scheme` を意図的に無視）だが、`<img>` 内の SVG から親の `.dark` class は見えない。SVG 側が OS に追従すると **OS ダーク + サイトライトで SVG だけ濃紺の箱**になる。透過 + 固定配色ならライト/ダーク双方で成立する（gate = `lintTileGridQuality`、正典 `blog-svg-chart-standards.md` §3 / §6-2）。
+- **左カラム**（幅 268px）にタイトル（長ければ 2 行折返し）・サブタイトル・**高い順 3 県 / 低い順 3 県**（色チップ + 県名 + 実数値）。地図だけでは読めない実数値をここで出す。値の大小を機械的に並べるだけで、指標の良し悪しは判断しない。
+- タイル内テキストは **全て白 + 濃い縁取り（`paint-order` stroke）+ ソフトシャドウ**（淡色〜濃色どのタイルでも可読。白/黒の切替はしない）。地図以外の文字は `#6e7d94`（白地 4.18:1 / 濃紺地 4.27:1。ライト・ダーク双方で 4.5:1 を満たす単色は存在せず最良 4.22:1 なので、両者の最小値を最大化する近傍から選んでいる）。
+- **凡例は地図ブロックの右下**（2026-07-29〜。左上は上位/下位リストが使うため）。端ラベル既定は**「低い/高い」+ 実数値スケール（最小・中間・最大）**。目盛りラベルは**単位が長いと重なる**ため、フォントを 10→8 まで縮め、それでも収まらなければ中間ラベルを落とす（実測: `5,802,432百万円` の 3 ラベルが完全に重なった）。「安全/危険」等の**意味的ラベルは指標の意味が確実な場合に json `legendLabels` で明示したときのみ**（旧デフォルト 安全/危険 が消費支出額等に焼き込まれた事故の再発防止。gate = `lintChoroplethLegend`）。
+- **タイル座標は格子（列・行・スパン）で持つ**。実測でピッチ 38.167 / 原点 (33,45) の完全な均等格子と確認できたため、47 行の px ベタ書きを `TILE_GRID` に置き換えた。タイルサイズの変更は `TILE` と `GAP` の 2 定数で済む。
 - **カラーは D3 カラースキーム指定可**: `scheme`（d3-scale-chromatic の `interpolate<Name>`。例 `Blues`/`Viridis`/`RdYlGn`/`RdBu`/`Spectral`/`YlOrRd`…連続・発散とも）。未指定時は既定 Reds。`reverse` で反転。
 - 値表示は `showValue`（県名のみ=既定 / 県名+値）。
 
@@ -141,6 +176,10 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 不能**と判明 (✅both 181/30% ・🟡jsonOnly 87/14% ・🔴neither 344/56%)。dark mode 未対応・デザイン不統一・
 タイルマップ未救済の**根本原因**。「1枚ずつ個別救済」でなく、全記事のデータ系譜を体系的に揃える。
 
+> **最新の実測 (2026-07-29)**: 417 記事 / SVG 1045 枚 → ✅both **898 (86%)** ・🟡jsonOnly 11 (1%) ・
+> 🔴neither **136 (13%)**。gate 導入以降の新規記事で系譜喪失は発生していない (残る 136 は gate 前の負債)。
+> 最新値は `.claude/state/blog/svg-lineage-LATEST.md` が正典 — **この段落の数字を真実源にしない**。
+
 ### 再発防止 (新規記事で元データ消失を構造的に不可能にする)
 - **gate** (`quality-gate.mjs`): 各 `data/*.svg` に対応する `.json`+`.source.json` の欠落を検出 (§1.5 の3点セット)。
   **2026-06-20 に blocker へ昇格済** (当初は warning で段階導入したが復元体制が整い昇格)。公開記事で3点セットを強制し、
@@ -151,6 +190,47 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
   で「**1画像=1設定ファイル**」を generator レベルで保証し、SVG だけ書いて source.json を書かない経路を構造的に塞ぐ。
   `fetch-ranking-data-r2.mjs` は SSOT 確定版 (rankingKey 確定) を出力。**復元 (backfill) は過去負債の処理であり、
   新規は発生源で防ぐのが先決** (場当たりに「絵だけ」を作らない)。
+- **outbox 掃除の安全装置 (2026-07-29 追加)**: `prune-published-outbox.mjs` は article.md の内容一致だけでなく
+  **「ローカルにあるファイルが全て R2 に載っているか」**を確認してから `docs/21` を削除する。
+  data/*.json・*.source.json は**ローカルにしか無い場合がある**（実例: `library-museum-cultural-capital` は
+  ローカルに json+source があるのに R2 は svg のみ 404）。article.md だけ見て消すと元データが永久に失われるため、
+  R2 に無いものが 1 つでもあれば保持する（保持側の誤りは翌日また判定されるので無害、削除側の誤りは不可逆）。
+- **定期棚卸し + ラチェット (2026-07-29 配線)**: `blog-remediation-daily.yml` (日次 JST 08:00) が
+  `build-lineage-queue.mjs` を実行して queue を develop へ commit-back し、**元データ消失 (`byStatus.neither`) が
+  前回より増えたら workflow を失敗させる**（縮小専用ラチェット）。
+  **なぜ cron が要るか**: 公開時 gate は *ローカル outbox* を見るだけで、しかも公開時にしか発火しない。
+  gate 導入 (2026-06-20) より前に公開された記事の系譜喪失は誰も検知せず、2026-07-29 にタイルマップを
+  再生成しようとして初めて 12 枚が復元不能と判明した（該当 11 記事の公開日は全て 2026-03〜06-07 = gate 導入前）。
+  定期棚卸しが無いと「gate は効いているのに負債が見えない」状態が続く。
+
+### ★「SSOT に無い」と「復元不能」を混同しない (2026-07-29 の誤判断)
+
+合成スコア (単位「点」) や増減率・差分は **SSOT から再構成できる**。`app/ranking/<key>` に
+単一 key で見つからないだけで、複数指標を e-Stat から取って計算した派生値だからである。
+正しい記録先は `kind: "calculated"` (`inputs[].rankingKey` + `year` + `formula`) または
+`kind: "derived"` (`source` + 算出の説明) で、これがあれば data json は再計算できる。
+
+2026-07-29 に「独自スコアと増減率は原理的に復元不能」と判断したが**誤り**だった。
+オーナーの指摘で是正した。実際に詰めると律速は別のところにあった:
+
+- `per-capita-income-gap/income-growth-ranking` は「県民所得 対前年増加率 2021年度」で、
+  記事本文に算出方法が書かれており 2 年差と特定できた
+- だが **SSOT に 2021 年が無い**。県民所得は年代で別 key に分割されており
+  (`per-capita-prefectural-income-h27` = 2020 のみ / `per-capita-kenmin-shotoku-h23` = 2010-2018)、
+  どの key にも 2021 が無い
+
+**律速は復元手法ではなく SSOT の年・指標カバレッジ**である。元データは e-Stat なので、
+足りない年は **e-Stat から取り込んで SSOT を伸ばせばよい** (`data-ingester` の領域)。
+「SSOT に無い」を「復元不能」と読み替えて諦めない。
+
+ゼロ (元データ消失 0) への経路は 4 つで、いずれも実行可能:
+
+1. **抽出器の追加** — scatter (2 軸あるので単一軸より特定精度が高い) / line / findings
+2. **指紋照合の改良** — 単位族の判定・候補数 (`find-chart-metric.mjs`)
+3. **SSOT の拡張** — e-Stat から不足年・不足指標を取り込む
+4. **記事の改変** — 上記で届かない図は外すか、SSOT にある図に差し替える (下記「再発防止」の既存方針)
+
+4 があるので**ゼロは必ず到達できる**。「復元できないから残す」は選択肢ではない。
 
 ### 復元 (既存の欠落を SSOT から揃える)
 真実源 = `.claude/state/blog/svg-lineage-queue.json` (`build-lineage-queue.mjs` が R2 棚卸しで生成、人間用は
@@ -189,7 +269,7 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | 場所 | 内容 |
 |---|---|
-| `docs/todo/01_改善バックログ.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (legacy: <旧 BLOG-CTR-*>)` |
+| `docs/todo/04_改善バックログ.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (旧ID: <BLOG-CTR-*>)` |
 | section frontmatter | `wave_id`, `legacy_section_ids`, `predecessor_wave`, `successor_wave` |
 | `.claude/state/blog/auto-brushup-history.json` | 各 entry に `wave_id` フィールド (2026-05-27 migration 済) |
 | commit message | 必須ではない (legacy refactoring を避けるため) |
@@ -222,10 +302,10 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | Docs | 内容 | 更新トリガ |
 |---|---|---|
-| `docs/todo/01_改善バックログ.md` | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
-| `docs/todo/current-week.md` | 現在の週次 TODO | 週次 (月曜・上書き) |
+| `docs/todo/04_改善バックログ.md` | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
+| `docs/todo/03_今週の計画.md` | 現在の週次 TODO | 週次 (月曜・上書き) |
 | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | agent用週次振り返り | 週次 (日曜) |
-| `docs/todo/02_機能バックログ.md` | 大規模 session の未完了機能・自動化を直接追記 | session 終了時 |
+| `docs/todo/05_機能バックログ.md` | 大規模 session の未完了機能・自動化を直接追記 | session 終了時 |
 
 ### Memory (auto memory)
 

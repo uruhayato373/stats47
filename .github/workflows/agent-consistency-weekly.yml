@@ -1,12 +1,13 @@
 name: 🔗 Agent/Skill Consistency (weekly)
 
-# agent/skill/script/hook の整合性ドリフト (リンク切れ・参照先不在) を週次で機械検出する。
+# agent/skill/script/hook と文書ガバナンスの整合性ドリフトを週次で機械検出する。
 # 従来は Stop hook (`check-consistency-on-stop.js`) のセッション内ゲートのみで、
 # セッション外の直接編集や複数セッションの合流によるドリフトは検出されなかった
 # (2026-07-03 運営総点検: zombie agent seo-auditor が README/skill 参照とズレたまま放置)。
 # error レベル検出時は auto-generated Issue を起票する。warn (orphan 候補) は起票しない。
 #
 # 正典: .claude/scripts/lib/check-agent-skill-consistency.cjs / .claude/skills/dev/audit-consistency/SKILL.md
+#       .claude/rules/docs-vs-issues.md / .claude/skills/management/maintain-docs/SKILL.md
 
 on:
   schedule:
@@ -82,6 +83,54 @@ jobs:
             gh issue comment "$EXISTING" --body-file /tmp/checker-wiring-issue.md
           else
             gh issue create --title "$TITLE" --label "auto-generated" --body-file /tmp/checker-wiring-issue.md
+          fi
+
+      - name: 📚 Check docs governance, freshness and links
+        id: docs
+        run: |
+          set +e
+          node --test \
+            .claude/scripts/lib/__tests__/check-docs-governance.test.cjs \
+            .claude/scripts/lib/__tests__/check-docs-links.test.cjs \
+            > /tmp/docs-test-report.txt 2>&1
+          TEST_EXIT=$?
+          node .claude/scripts/lib/check-docs-governance.cjs --fail-on-warn \
+            > /tmp/docs-governance-report.txt 2>&1
+          GOVERNANCE_EXIT=$?
+          node .claude/scripts/lib/check-docs-links.cjs --baseline --orphans \
+            > /tmp/docs-links-report.txt 2>&1
+          LINKS_EXIT=$?
+          cat /tmp/docs-test-report.txt
+          cat /tmp/docs-governance-report.txt
+          cat /tmp/docs-links-report.txt
+          if [ "$TEST_EXIT" -ne 0 ] || [ "$GOVERNANCE_EXIT" -ne 0 ] || [ "$LINKS_EXIT" -ne 0 ]; then
+            echo "exit_code=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "exit_code=0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 🚨 Create issue on docs governance drift
+        if: steps.docs.outputs.exit_code == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="[Docs Alert] 文書ガバナンスまたは鮮度のドリフト ($(date +%Y-%m-%d))"
+          EXISTING=$(gh issue list --label "auto-generated" --state open \
+            --search "文書ガバナンスまたは鮮度のドリフト in:title" --json number --jq '.[0].number // empty')
+          {
+            echo "文書の固定構成、TODO契約、鮮度、INDEX、またはリンクの週次検査で異常を検出しました。"
+            echo ""
+            echo "対処: \`/maintain-docs\` を実行し、意味判断が必要な統合・削除は差分確認後に行ってください。"
+            echo ""
+            echo '```'
+            head -80 /tmp/docs-governance-report.txt
+            head -40 /tmp/docs-links-report.txt
+            echo '```'
+          } > /tmp/docs-governance-issue.md
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file /tmp/docs-governance-issue.md
+          else
+            gh issue create --title "$TITLE" --label "auto-generated" --body-file /tmp/docs-governance-issue.md
           fi
 
       - name: 🔍 Verify public snapshots

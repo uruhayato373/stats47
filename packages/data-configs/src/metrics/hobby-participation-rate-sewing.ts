@@ -8,6 +8,7 @@ export const hobbyParticipationRateSewing: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003456573",
+    "cdCat03": "18",
     "cdCat01": "0",
     "cdCat02": "99000",
     "displayName": "社会生活基本調査",

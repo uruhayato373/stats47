@@ -59,7 +59,8 @@ URLS+=( "$(pick '/themes/[a-z]' || echo "${BASE_URL}/themes/aging-society")" )
 #   通常の URLS は 301/410 を「意図的な gone/redirect」として skip するが、その逃げ道のせいで
 #   「200 を返すべき route が丸ごと 410 になった」障害が素通りする。実際 /tag/* は
 #   2026-04-26〜07-24 の約 3 ヶ月間ずっと 410 で、記事のタグリンク 1,988 本が死んでいたが
-#   誰も気づかなかった (経緯: docs/04_レビュー/2026-07-24-site-link-audit.md)。
+#   誰も気づかなかった。恒久対策は .claude/rules/blog-quality-standards.md
+#   「内部リンクの実在」に統合済み。
 #   sitemap に載らない route (tag / survey 詳細) は pick できないので既知の安定キーを直接指定する。
 STRICT_URLS=(
   "${BASE_URL}/tag/%E5%AE%B6%E8%A8%88%E8%AA%BF%E6%9F%BB"  # /tag/家計調査 (記事 150+ 本の最大タグ)

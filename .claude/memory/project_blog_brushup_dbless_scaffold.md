@@ -62,6 +62,6 @@ quality-gate の NG_PATTERN は **title 内 `\d+位`** と **content 内 `\d{2,}
 `gh workflow run publish-blog.yml --ref develop -f slug=<slug> -f dry_run=false`。concurrency group `publish-blog` (cancel-in-progress:false) でも、**複数を連続 dispatch すると先行 pending がキャンセルされる**。1件 dispatch → 完了待ち → 次、を厳守 (local は gh 可、cloud は actions:write 無しで dispatch 不可)。[[project_r2_writes_ci_only]]
 
 ## 関連
-- 是正ループ正典: `docs/02_実装計画/blog-remediation-loop.md` / [[project_blog_remediation_loop]]
+- 是正ループ正典: `.claude/rules/blog-remediation-loop.md` / [[project_blog_remediation_loop]]
 - 品質基準: `.claude/rules/blog-quality-standards.md` (記事アーキタイプ A-E / 図あたり字数 / 表禁止)
 - factual リスク: [[project_blog_brushup_risk_2026_05_25]]

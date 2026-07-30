@@ -1,5 +1,6 @@
 /**
- * audit-ga4 — GA4 Admin UI の read-only inventory (doc41 §6.3)。
+ * audit-ga4 — GA4 Admin UI の read-only inventory。
+ * identity契約: ./README.md「mutation前のidentity確認」。
  *
  * property / web stream / Search Console link / AdSense link / custom dimensions /
  * Library の Search Console collection 公開状態を、headed browser で走査する。
@@ -46,7 +47,7 @@ export async function openGa4(page, { screenshotDir, promptLogin }) {
 }
 
 /**
- * property identity assert (§6.3-1/5): 画面上の property が GA4_PROPERTY_ID と一致するか。
+ * property identity assert: 画面上の property が GA4_PROPERTY_ID と一致するか。
  * property セレクタ (ヘッダー) のテキストに ID が含まれることを確認する。
  */
 export async function assertProperty(page, { screenshotDir }) {
@@ -123,7 +124,7 @@ export async function auditSearchConsoleLinks(page, { screenshotDir }) {
   return { status: "ok", linked, hasLinkButton, emptyStateShown: /リンクなし|リンクがありません|No links/.test(text) };
 }
 
-/** AdSense リンク inventory (audit-only・作成しない §5.2)。 */
+/** AdSense リンク inventory (audit-only・作成しない)。 */
 export async function auditAdSenseLinks(page, { screenshotDir }) {
   const admin = await gotoAdmin(page);
   if (admin.status !== "ok") return admin;

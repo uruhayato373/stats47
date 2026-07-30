@@ -73,5 +73,5 @@ cd apps/remotion && pnpm prepare-data && pnpm render --composition=<name>
 - 入力 D1: `.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite`
 - exporter 実装: `apps/remotion/scripts/exporters/`
 - 親方針: `.claude/rules/data-sqlite-ssot.md`
-- feature 別データ仕様: `docs/01_技術設計/09_動画データSSOT.md`
+- feature 別データ仕様: `apps/remotion/README.md` / `apps/remotion/scripts/pipeline/README.md`
 - 関連: `/verify-d1-integrity`, `/sync-snapshots`, `/sync-metrics-cache`, `/page-data-batch`

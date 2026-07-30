@@ -11,6 +11,16 @@ primary_agent: theme-portfolio-manager
 運用設計の正典: `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md`。
 schema・判定規律の正典: `.claude/state/themes/README.md`。
 
+## 参照ルーティング
+
+| 作業 | 必読 |
+|---|---|
+| 採択済みの指標・チャート改善を実装へ渡す | `reference/theme-improvement-execution.md` |
+| 定義・比較時の注意カードを実装する | `reference/theme-guidance-implementation.md` |
+| keep/split/merge/parent-hub判定やURL移行を設計する | `reference/theme-taxonomy-reorganization.md` |
+
+進捗と優先度は `docs/todo/05_機能バックログ.md` を正典とし、reference文書へstatusを重複記録しない。
+
 ## モード
 
 | mode | 内容 |
@@ -84,6 +94,6 @@ node --test .claude/scripts/themes/__tests__/                 # validator 自体
 ## 禁止
 
 - R2 push / deploy / production 変更 (このスキルは state と docs だけを書く)
-- `docs/todo/01_改善バックログ.md` への直接書き込み (improvement-triage へ引き渡す)
+- `docs/todo/04_改善バックログ.md` への直接書き込み (improvement-triage へ引き渡す)
 - ThemeCatalog / 生成物 TS/JSON の編集 (theme-designer / generate:catalog の領分)
 - 推測値の保存 (取れない値は insufficient-data / not-instrumented)

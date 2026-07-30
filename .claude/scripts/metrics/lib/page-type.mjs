@@ -1,7 +1,7 @@
 /**
  * page-type — GA4 built-in pagePath を決定的に page type へ分類する (pure)。
  *
- * 正典: docs/02_実装計画/41_AdSense継続改善・GA4_GSC設定自動化仕様.md §2.3。
+ * 本ファイルが AdSense / GA4 のpage type決定的分類のコード SSOT。
  * 高カーディナリティな custom dimension (page_type / URL) を GA4 側に新設しない —
  * 分類は常にローカルのこの関数で行う。
  *

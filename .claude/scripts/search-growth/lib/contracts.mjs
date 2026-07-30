@@ -1,7 +1,7 @@
 /**
  * search-growth — normalized Observation contract (SSOT for the data shape).
  *
- * 正典: docs/02_実装計画/39_検索成長統合MCP・API基盤実装仕様.md §4.2 / §5.
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
  *
  * すべての collector が raw snapshot を **正規化 Observation** に変換して積む。
  * normalized state は derived で再生成可能 (raw snapshot は既存配置を尊重する)。
@@ -9,7 +9,7 @@
  * このファイルは純粋 (Node built-ins のみ・外部依存ゼロ)。CLI と MCP の両方から使う。
  */
 
-/** Observation の source 種別 (§4.2)。 */
+/** Observation の source 種別。 */
 export const OBSERVATION_SOURCES = Object.freeze([
   "gsc", // Search Analytics
   "inspection", // URL Inspection API
@@ -24,7 +24,7 @@ export const OBSERVATION_SOURCES = Object.freeze([
 ]);
 
 /**
- * freshness の意味 (§3 / §5.2)。
+ * freshness の意味。
  * - fresh:   期待鮮度内に取得できた実データ
  * - stale:   取得はできたが古い (閾値超過 or 過去 snapshot へ fallback)
  * - partial: 一部のみ取得 (pagination 打ち切り / dimension 非対応 / origin fallback など)
@@ -32,7 +32,7 @@ export const OBSERVATION_SOURCES = Object.freeze([
  */
 export const FRESHNESS = Object.freeze(["fresh", "stale", "partial", "missing"]);
 
-/** candidate type (§5.1)。決定的ルールで付与する。 */
+/** candidate type。決定的ルールで付与する。 */
 export const CANDIDATE_TYPES = Object.freeze([
   "ctr-opportunity",
   "striking-distance",
@@ -49,7 +49,7 @@ export const CANDIDATE_TYPES = Object.freeze([
   "measurement-gap",
 ]);
 
-/** candidate lifecycle status (§5.2)。 */
+/** candidate lifecycle status。 */
 export const CANDIDATE_STATUSES = Object.freeze([
   "pending",
   "approved",
@@ -155,7 +155,7 @@ export function createObservation(input) {
 }
 
 /**
- * collector が返す per-source の実行結果。1 source の失敗を全体に波及させない (§7)。
+ * collector が返す per-source の実行結果。1 source の失敗を全体に波及させない。
  * @typedef {Object} SourceResult
  * @property {typeof OBSERVATION_SOURCES[number]} source
  * @property {"success"|"partial"|"failed"|"skipped"} status
@@ -165,7 +165,7 @@ export function createObservation(input) {
  * @property {string} [error]           failed 時の redact 済みエラー要約
  */
 
-/** SourceResult の status 値。partial を success に見せない (§7)。 */
+/** SourceResult の status 値。partial を success に見せない。 */
 export const SOURCE_STATUSES = Object.freeze(["success", "partial", "failed", "skipped"]);
 
 /**

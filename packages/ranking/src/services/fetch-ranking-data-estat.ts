@@ -11,6 +11,7 @@ import {
     rankByValue,
 } from "../index";
 import { filterToCityArea } from "../utils/filter-out-national-area";
+import { isDerivedSource, resolveEstatParams } from "../utils/source-config";
 import type { SyncRankingResult } from "../types";
 
 /**
@@ -22,8 +23,11 @@ export async function fetchEstatRankingData(
 ): Promise<SyncRankingResult> {
   const { rankingKey, areaType, sourceConfig } = rankingItem;
 
-  // statsDataIdのバリデーション
-  if (!sourceConfig?.statsDataId) {
+  // ★クエリ部の解決は resolveEstatParams に一本化する (sourceConfig を丸ごと spread しない)。
+  //   丸ごと spread すると (a) cdCat03/04/05・cdTab が欠けて多系列が混入し、
+  //   (b) source/note のような非クエリキーが param に混ざる。
+  const estatParams = resolveEstatParams(sourceConfig);
+  if (!estatParams) {
     logger.warn(
       { rankingKey, areaType, sourceConfig },
       "statsDataIdが未設定のためe-Stat APIデータ取得をスキップ"
@@ -34,9 +38,16 @@ export async function fetchEstatRankingData(
     };
   }
 
+  // 宣言演算 (tab 線形結合 / 軸合算 / 率 / 県庁所在市写像) を伴う metric は
+  // 単発クエリでは再現できない。生値を配ると変換前の数字が出るのでここでは扱わない。
+  if (isDerivedSource(sourceConfig)) {
+    return {
+      success: false,
+      error: `derived metric は e-Stat 単発クエリで再現できません (rankingKey: ${rankingKey})`,
+    };
+  }
+
   try {
-    // sourceConfigからAPI以外のフィールドを除去
-    const { source, note, ...estatParams } = sourceConfig as Record<string, unknown>;
     // e-Stat APIから年度指定なしで全データを取得
     const rawData = await fetchFormattedStats(estatParams as GetStatsDataParams);
 

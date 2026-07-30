@@ -1,7 +1,7 @@
 /**
  * periods — 週次計測の期間契約 (SSOT・pure)。
  *
- * 正典: docs/02_実装計画/39_検索成長統合MCP・API基盤実装仕様.md §18.2。
+ * 正典: .claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md。
  *
  * - finalized7d: 取得遅延を考慮した連続 7 日 (KPI / WoW / フェーズゲート用)
  * - previous7d:  finalized7d 直前の重複しない連続 7 日
@@ -20,7 +20,7 @@
  */
 
 /**
- * 取得遅延日数の SSOT (§18.2 / doc41 §4.2)。GSC は原則 3 日、GA4 は原則 1 日。
+ * 取得遅延日数の SSOT (検索成長の期間契約)。GSC は原則 3 日、GA4 は原則 1 日。
  * AdSense は 1 日 (推定収益は月次確定まで変動しうる — summary の limitations に明記する)。
  */
 export const DATA_DELAY_DAYS = Object.freeze({ gsc: 3, ga4: 1, adsense: 1 });
@@ -97,7 +97,7 @@ export function isoWeekRange(week) {
 }
 
 /**
- * 期間契約の解決 (§18.2)。source の取得遅延を織り込み、
+ * 週次期間契約の解決。source の取得遅延を織り込み、
  * finalized7d / previous7d / rolling28d を決定的に返す。
  *
  * anchor (期間計算の基準日) の決まり方:
@@ -175,7 +175,7 @@ export function expectedDates({ periodStart, periodEnd }) {
 }
 
 /**
- * 日別行の欠損を判定する。欠損日を 0 補完しない (§18.2)。
+ * 日別行の欠損を判定する。欠損日を 0 補完しない。
  * @param {{periodStart:string, periodEnd:string}} period
  * @param {Iterable<string>} presentDates 実在した日付ラベル群
  * @returns {{status:"complete"|"partial"|"missing", missingDates:string[], presentCount:number, expectedCount:number}}
@@ -191,7 +191,7 @@ export function assessDailyCoverage(period, presentDates) {
 }
 
 /**
- * summary/snapshot に埋める共通 metadata (§18.2 の必須 7 フィールド)。
+ * summary/snapshot に埋める週次期間契約の共通 metadata。
  * @param {{period:{periodStart:string,periodEnd:string,windowDays:number}, source:string,
  *          isFinalized:boolean, generatedAt:string, limitations?:string[]}} p
  */

@@ -38,7 +38,7 @@ const { buildAdDraft } = appendCore;
 
 // ─── 設定 ──────────────────────────────────────────
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
-// ログインプロファイルはメインチェックアウト固定 (docs/01_技術設計/playwright-auth-profiles.md)。
+// ログインプロファイルはメインチェックアウト固定 (docs/01_技術設計/07_Playwright認証プロファイル.md)。
 // ★ Mac パスを直書きすると Windows では別ドライブ配下に空プロファイルを掘ってしまい、
 //   「ログイン済みなのに未ログイン扱い」になる。process.platform で分岐せず、
 //   **実在するほうを採る**フォールバック 1 本で両対応する

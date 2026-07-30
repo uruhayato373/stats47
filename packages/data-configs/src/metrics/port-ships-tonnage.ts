@@ -8,6 +8,11 @@ export const portShipsTonnage: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003130773",
+    "cdTab": "130",
+    "axisSum": {
+          "axis": "cat03",
+          "codes": ["110", "120"],
+        },
     "cdCat01": "100",
     "cdCat02": "100",
   },

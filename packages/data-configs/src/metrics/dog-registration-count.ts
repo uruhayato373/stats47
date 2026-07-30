@@ -8,6 +8,7 @@ export const dogRegistrationCount: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0004026908",
+    "cdTab": "1580",
     "displayName": "衛生行政報告例",
     "url": "https://www.mhlw.go.jp/toukei/list/36-19.html",
   },

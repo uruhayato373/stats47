@@ -15,8 +15,20 @@ const CALLOUT_LABEL: Record<string, string> = {
   CAUTION: "注意",
 };
 
+/**
+ * XML エスケープ。
+ *
+ * ★`"` を必ず含める。出力は `alt="..."` / `src="..."` のように**二重引用符の属性値**へ入るため、
+ * `"` を残すと属性が途中で閉じて XHTML が整形式でなくなる (EPUB は整形式 XML を要求するので
+ * 本文中に `"` を含む alt が 1 つあるだけで書籍が壊れる)。CodeQL の
+ * js/incomplete-html-attribute-sanitization が指摘していた欠陥。
+ */
 function esc(s: string): string {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 /** インライン: 強調 **..**、画像は別処理、リンクはテキスト化 (外部リンクを書籍に残さない)。 */

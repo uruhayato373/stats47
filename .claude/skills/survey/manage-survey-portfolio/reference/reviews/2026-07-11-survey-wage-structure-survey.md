@@ -7,7 +7,7 @@ tags: [survey, wage, seo, content-cluster]
 
 # 賃金構造基本統計調査クラスター事前監査
 
-> 2026-07-13 に `docs/04_レビュー/2026-07-11-survey-wage-structure-audit.md` から移設・改名
+> 2026-07-13 に旧レビュー保管場所から本skill referenceへ移設・改名
 > (survey ポートフォリオ運用の .claude 一本化)。本書は監査日付時点の証跡 + 実装時の受入条件であり、
 > 最新状態の SSOT は `.claude/state/surveys/portfolio.json`。
 

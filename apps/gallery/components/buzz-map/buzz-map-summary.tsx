@@ -1,6 +1,6 @@
 import type { BuzzMapCatalogResponse } from "@/lib/contracts/types";
 
-/** §9.1 集計ヘッダ: 総候補、eligible、blocked、landing-ready、generated、draft、posted。 */
+/** 集計ヘッダ: 総候補、eligible、blocked、landing-ready、generated、draft、posted。 */
 export function BuzzMapSummary({ summary }: { summary: BuzzMapCatalogResponse["summary"] }) {
   const { aggregate, generatedAt } = summary;
   const items: Array<[string, number]> = [

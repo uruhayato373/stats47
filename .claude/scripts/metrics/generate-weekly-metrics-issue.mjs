@@ -10,13 +10,13 @@
  *
  * 入力:
  *   - .claude/state/metrics/{psi,gsc,ga4,adsense}/history.csv
- *   - docs/todo/01_改善バックログ.md の status: pending|in-progress を抽出（pending 施策一覧）
+ *   - docs/todo/04_改善バックログ.md の status: pending|in-progress を抽出（pending 施策一覧）
  *   - gh issue list --label auto-generated (残存アラート Issue 集計)
  */
 
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { PROJECT_ROOT, toIsoWeek } from "./lib/auth.mjs";
 
 function parseArgs() {
@@ -117,11 +117,16 @@ function monOfWeek(week) {
   return target;
 }
 
-function ghIssueList(args) {
+// ★引数は配列で渡す (execFileSync)。テンプレート文字列 + execSync だと引数がシェルとして
+//   評価されるため、日付や label 名に不正な文字が混ざると任意コマンドが動く (CodeQL の
+//   js/command-line-injection)。argv 形式ならシェルを経由しない。
+function ghIssueList(argv) {
   try {
-    const out = execSync(`gh issue list ${args} --json number,title,labels,createdAt,url --limit 50`, {
-      encoding: "utf-8",
-    });
+    const out = execFileSync(
+      "gh",
+      ["issue", "list", ...argv, "--json", "number,title,labels,createdAt,url", "--limit", "50"],
+      { encoding: "utf-8" }
+    );
     return JSON.parse(out);
   } catch (e) {
     console.error(`[gh issue list failed] ${e.message}`);
@@ -130,7 +135,7 @@ function ghIssueList(args) {
 }
 
 function gsSection(week) {
-  // KPI/WoW は確定7日 (非重複) 系列だけを使う (§18.2)。rolling28d は文脈の単一値のみ。
+  // KPI/WoW は確定7日 (非重複) 系列だけを使う。rolling28d は文脈の単一値のみ。
   const fin = readCsv(".claude/state/metrics/gsc/history-finalized7d.csv");
   const rolling = readCsv(".claude/state/metrics/gsc/history.csv");
   const lines = [];
@@ -154,7 +159,7 @@ function gsSection(week) {
 }
 
 function ga4Section(week) {
-  // KPI/WoW は Japan-only 確定7日 (非重複) を優先する (§18.2)。
+  // KPI/WoW は Japan-only 確定7日 (非重複) を優先する。
   const fin = readCsv(".claude/state/metrics/ga4/history-finalized7d.csv");
   const target = fin?.rows.find((r) => r.week === week);
   if (target) {
@@ -258,9 +263,14 @@ function alertsSection(week) {
   nextMon.setUTCDate(nextMon.getUTCDate() + 7);
   const nextMonStr = nextMon.toISOString().slice(0, 10);
 
-  const alerts = ghIssueList(
-    `--label auto-generated --state all --search "created:${weekMonStr}..${nextMonStr}"`
-  );
+  const alerts = ghIssueList([
+    "--label",
+    "auto-generated",
+    "--state",
+    "all",
+    "--search",
+    `created:${weekMonStr}..${nextMonStr}`,
+  ]);
   if (alerts.length === 0) return "今週 auto-generated な閾値違反 Issue はありません。\n";
   const lines = [];
   for (const a of alerts) {
@@ -272,14 +282,15 @@ function alertsSection(week) {
 }
 
 function pendingSection() {
-  // 01_改善バックログ.md の pending|in-progress を scan-pending-improvements.mjs で取得
+  // 04_改善バックログ.md の pending|in-progress を scan-pending-improvements.mjs で取得
   const scanScript = join(PROJECT_ROOT, ".claude/scripts/lib/scan-pending-improvements.mjs");
   let entries;
   try {
-    const out = execSync(`node "${scanScript}" --format markdown --status pending,in-progress`, {
-      cwd: PROJECT_ROOT,
-      encoding: "utf-8",
-    });
+    const out = execFileSync(
+      "node",
+      [scanScript, "--format", "markdown", "--status", "pending,in-progress,effect/pending"],
+      { cwd: PROJECT_ROOT, encoding: "utf-8" }
+    );
     return out || "なし（pending 施策なし）\n";
   } catch {
     return "なし（scan-pending-improvements 実行失敗）\n";

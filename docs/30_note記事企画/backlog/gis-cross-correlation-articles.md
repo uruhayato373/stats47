@@ -7,7 +7,7 @@ created: 2026-05-20
 updated: 2026-05-20
 status: backlog
 tags: [content-plan, note-correlation, gis-cross]
-parent: docs/todo/02_機能バックログ.md#gis-cross-content-backlog
+parent: docs/todo/05_機能バックログ.md#gis-cross-content-backlog
 ---
 
 # 掛け合わせ相関記事 note企画 (型B)
@@ -26,7 +26,7 @@ note 記事 (`docs/31_note記事原稿/sunshine-solar-housing/`) と同じ続編
 - 文字数: 3,500〜4,500字、無料
 - ブログ (SEO・解説) と差別化: note は「ランキング読み比べ」のエンタメ性を強める
 - frontmatter は既存の一般ランキング note 形式 (`title` / `description`) に合わせる
-  (執筆時に `docs/31_note記事原稿/sunshine-solar-housing/note.md` を参照)
+  （執筆時は `.claude/scripts/note/catalog/data/stats47-note.ts` の `sunshine-solar-housing` を参照し、必要なら R2 から原稿を復元）
 
 ## 共通の執筆規律 (全記事必須)
 

@@ -9,8 +9,8 @@ model: sonnet
 **サイト横断のUI/情報設計 (IA) 層**（特定ページに閉じない領域）が統一されているかを管理・監査・是正する
 専任エージェント。`ranking-ui-manager` / `theme-ui-manager` が「1 ページ種別の内部」を所有するのに対し、
 本エージェントは**ページをまたぐ骨格**（ヘッダー・ナビ IA・ホーム・一覧カード・共通 shell・レール構成・UX 計装配線）
-を所有する。site-content-layout ベンチマーク (`docs/04_レビュー/2026-07-18-sitewide-content-layout-benchmark.md`)
-の P0/P1 を継続駆動するための home が無かったため新設（2026-07-20）。
+を所有する。横断UIの恒常契約は、現在の情報設計・デザインシステム・UI rules と
+`docs/todo/` のactive項目から読む。
 
 > **役割分担（重複しない）**
 > - **site-ux-manager（本エージェント）**: サイト横断 = グローバルヘッダー/ナビ IA・モバイルドロワー・ホーム
@@ -52,14 +52,16 @@ model: sonnet
 ### B. 共通レイアウト shell（統一レイアウト規約）
 - 幅・レールは `PageShell`（1280px・`SHELL_WIDTH_CLASS`）/ 記事系は `ArticleShell`（reading zone）経由で統一。
   page 内で `container mx-auto` / `max-w-[…]` を直書きしない。既定ヘッダーは `PageHeader`（hero 無し）、
-  hero は allowlist の `HeroBanner` のみ。正典: `docs/01_技術設計/13`・`15`、`.claude/rules/ui-components.md`。
+  hero は allowlist の `HeroBanner` のみ。正典: `docs/01_技術設計/04_デザインシステム.md`、
+  `.claude/design-system/SSOT.md`、`.claude/rules/ui-components.md`。
 - sticky aside には `max-h-[calc(100vh-5.5rem)]` + overflow を必須にする（削除するとフッターが消える既知事故）。
 
 ### C. 一覧カード / リンクカード taxonomy
 - ブログ/タグ**一覧**カードは title/meta を **DOM テキスト**で必ず見せる（サムネ焼き込み文字に依存しない・
   アクセシビリティ/SEO）。実装: `features/blog/components/blog-article-grid.tsx`。
 - カード全体を 1 link（nested link 禁止）・`aspect-ratio` 固定で CLS 防止・`No Image` を出さない（text-first 縮退）。
-  正典: ベンチマーク §5/§10、画像 UX 監査 `docs/04_レビュー/2026-07-18-sitewide-image-ux-audit.md`。
+  正典: `docs/01_技術設計/04_デザインシステム.md`、`.claude/rules/ui-components.md`、
+  `.claude/rules/ogp-image-standards.md`。
 
 ### D. 右レール構成
 - 「本文ナビ → 関連 content → 信頼要素 → 文脈 promo → ad」の順で最大 4 group。mobile はレール全部を本文下へ
@@ -79,21 +81,21 @@ model: sonnet
 - 共通 layout / layout 配下の Server Component で `cookies()`/`headers()`/`draftMode()` を呼ばない（SSG 崩壊 → 500）。
   R2 依存の動的 route に `generateStaticParams` を付けない（notFound 固着）。正典: `.claude/rules/nextjs-ssg-preservation.md`。
 
-## 進め方（ベンチマーク駆動）
+## 進め方
 
-1. site-content-layout ベンチマークの P0/P1 を小変更に分割（header IA / card fallback / mobile rail / metadata）。
+1. `docs/todo/` のactive項目を小変更に分割する（header IA / card fallback / mobile rail / metadata）。
 2. **計測依存の変更（nav/rail 順・配置）は GA4 baseline を取ってから**、計測付き実験として実施。
 3. localhost で mobile/desktop/light/dark を確認。デプロイは溜めて 1 回・承認後（`devops-runner`）。
 4. 未完了事項は backlog `[UI-CONSOLIDATION-RESIDUAL]` に直接記録する。
 
 ## 必読 rules
 
-- `.claude/rules/ui-components.md` / `docs/01_技術設計/15_デザインシステムSSOT.md` / `13_統一レイアウト設計.md`
-- `docs/01_技術設計/07_情報設計.md`（ページ責務・ファネル役割）
+- `.claude/rules/ui-components.md` / `docs/01_技術設計/04_デザインシステム.md`
+- `docs/01_技術設計/03_情報設計.md`（ページ責務・ファネル役割）
 - `.claude/rules/analytics-event-standards.md`（計装台帳・登録状況）
 - `.claude/rules/ogp-image-standards.md` / `.claude/rules/nextjs-ssg-preservation.md`
 - `.claude/rules/evidence-based-judgment.md`（効果判定・計測撹乱の回避）
-- ベンチマーク: `docs/04_レビュー/2026-07-18-sitewide-content-layout-benchmark.md` / `2026-07-18-sitewide-image-ux-audit.md`
+- active TODO: `docs/todo/04_改善バックログ.md` / `docs/todo/05_機能バックログ.md`
 
 ## 担当外
 

@@ -456,5 +456,6 @@ metric config (git TS SSOT) の title から機械導出する — 家計調査�
 - GA4 計測: `.claude/scripts/ads/fetch-affiliate-ga4.cjs` / `apps/web/src/lib/analytics/events.ts`
 - agent: `.claude/agents/affiliate-manager.md` / `.claude/agents/affiliate-operator.md` (§11)
 - skill: `/register-affiliate-banner` / `/affiliate-improvement` / `/audit-affiliate-compliance` / `/manage-affiliate-experiment` / `/affiliate-operate` (§11)
-- 戦略: `docs/02_実装計画/01_収益化マスタープラン.md` §5-6 / 実装: `docs/02_実装計画/14_収益化実装方針.md` §3・付録A /
-  移行仕様: `docs/02_実装計画/25_アフィリエイト運用SSOT移行仕様.md`
+- 戦略: `docs/00_プロジェクト管理/02_収益化戦略.md` §3-6 / 実装規約: 本書 §0-6・§12
+- ASP継続運用の実装状況: `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` /
+  `docs/todo/05_機能バックログ.md` の `ASP-CONTINUITY-01`

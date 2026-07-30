@@ -15,4 +15,4 @@ metadata:
 
 **How to apply:** PV の WoW 監視は GA4 history ではなく `.claude/state/metrics/gsc/history.csv` の clicks/impressions（週次バケットで整合）と AdSense console PV を使う。GA4 を使う場合は API を直接照会し country=Japan + カレンダー週で集計する。恒久対処は GA4 history 生成スクリプトの修正（要 Issue 起票）。
 
-関連: `docs/04_レビュー/critical-review/2026-05-16-ga4-bot-pollution.md`, `docs/04_レビュー/critical-review/2026-05-21-monetization.md`, [[project_ga4_setup]]
+関連: Git履歴上のGA4 bot混入監査・収益化レビュー、[[project_ga4_setup]]

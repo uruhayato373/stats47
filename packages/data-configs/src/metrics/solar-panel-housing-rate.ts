@@ -11,6 +11,13 @@ export const solarPanelHousingRate: MetricConfig = {
     "statsDataId": "0004021642",
     "cdCat01": "0",
     "cdCat02": "0",
+    "cdCat03": "0",
+    "cdCat04": "0",
+    "axisRatio": {
+      "axis": "cat05",
+      "numeratorCodes": ["21"],
+      "denominatorCodes": ["21", "22"],
+    },
     "displayName": "住宅・土地統計調査",
     "url": "https://www.stat.go.jp/data/jyutaku/2023/index.html",
   },

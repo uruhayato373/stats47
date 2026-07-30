@@ -1,7 +1,7 @@
 /**
  * scoring — 決定的 candidate engine (LLM を使わない)。
  *
- * 正典: docs/02_実装計画/39 §5 / §13 Candidate。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
  * - opportunityScore = impact × confidence × actionability × freshness × evidenceCoverage ÷ effort
  * - impressions が最低標本未満なら CTR 判定をしない
  * - missing を 0 に変換しない / 単一 API だけで高 confidence にしない
@@ -422,7 +422,7 @@ export function buildCandidates(observations, opts = {}) {
 
 // ── helpers ───────────────────────────────────────────────────────────
 
-/** candidate object を組み立てる (evidence contract §5.3)。 */
+/** candidate object をevidence contractに従って組み立てる。 */
 function mk(bucket, type, p) {
   const freshness = evidenceFreshness(p.evidence);
   const evidenceCoverage = clamp01(distinctSources(p.evidence) / 3); // 3 source で満点

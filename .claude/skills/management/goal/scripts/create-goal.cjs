@@ -15,7 +15,7 @@
  *     --baseline-value "Mobile LCP 平均 10,500ms / Performance 平均 49" \
  *     --baseline-date "2026-05-09" \
  *     --hypothesis-pool "A1: Cookie banner SSR 化,B1: AdSense chunk 分離,B5: 広告密度削減" \
- *     --related-docs "改善策カタログ: docs/04_レビュー/2026-05-16-performance-report.md"
+ *     --related-docs "改善バックログ: docs/todo/04_改善バックログ.md"
  */
 
 "use strict";
@@ -32,7 +32,10 @@ const METRIC_ADAPTERS_PATH = path.join(
   PROJECT_ROOT,
   ".claude/skills/management/goal/reference/metric-adapters.md"
 );
-const GOALS_DOC_DIR = path.join(PROJECT_ROOT, "docs/04_レビュー");
+const GOALS_DOC_DIR = path.join(
+  PROJECT_ROOT,
+  ".claude/skills/management/goal/reference/goals"
+);
 const GOALS_STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/goals");
 
 function parseArgs(argv) {
@@ -155,7 +158,7 @@ function main() {
   fs.mkdirSync(stateDir, { recursive: true });
 
   // md 書き出し
-  const mdPath = path.join(GOALS_DOC_DIR, `${slug}-${startDate}-goals.md`);
+  const mdPath = path.join(GOALS_DOC_DIR, `${slug}-${startDate}.md`);
   fs.writeFileSync(mdPath, md);
 
   // meta.json 書き出し

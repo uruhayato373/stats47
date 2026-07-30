@@ -13,6 +13,8 @@ export const convenienceStoreSalesMonthly: MetricConfig = {
     "statsDataId": "0004032502",
     "cdCat01": "0101300",
     "cdCat02": "01040100",
+    "cdCat03": "01030100",
+    "timeScope": "annual",
     "displayName": "コンビニエンスストア販売額（都道府県別・年計）",
     "url": "https://www.e-stat.go.jp/dbview?sid=0004032502",
   },

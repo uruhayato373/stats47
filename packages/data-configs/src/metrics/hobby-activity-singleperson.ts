@@ -8,6 +8,9 @@ export const hobbyActivitySingleperson: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003455926",
+    "cdTab": "202101A02",
+    "cdCat03": "0",
+    "cdCat04": "0",
     "cdCat01": "0",
     "cdCat02": "0",
     "displayName": "趣味・娯楽の行動者数（単身世帯主・男女計・総数・全年齢, 2021年）",

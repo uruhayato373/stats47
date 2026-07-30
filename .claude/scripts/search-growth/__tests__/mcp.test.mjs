@@ -1,5 +1,5 @@
 /**
- * MCP + service tests (§13 MCP)。
+ * MCP + service tests。
  *   node --test .claude/scripts/search-growth/__tests__/mcp.test.mjs
  * 注: latest.json / candidates.json (normalize→analyze 後) を読む。無ければ構造だけ検証。
  */
@@ -14,7 +14,7 @@ test("MCP: read-only tool のみ公開 (mutation 名を含まない)", () => {
   for (const name of Object.keys(TOOLS)) {
     assert.ok(!MUTATION_WORDS.test(name), `mutation らしき tool 名: ${name}`);
   }
-  // 期待される 11 tool (§6.2)
+  // 期待される 11 tool
   assert.equal(Object.keys(TOOLS).length, 11);
 });
 

@@ -46,8 +46,24 @@ jobs:
           languages: javascript,typescript
 
       - name: 🔍 Perform CodeQL Analysis
+        id: codeql
         uses: github/codeql-action/analyze@e4fba868fa4b1b91e1fdab776edc8cfbe6e9fb81 # v4.37.3
         continue-on-error: true  # 警告のみ、失敗させない
+        with:
+          # SARIF をファイルに落として次の step で中身を出す。
+          # ★理由: 検出結果 (rule / file / line) を読む唯一の経路が Security タブと
+          #   code-scanning API で、どちらも一部のセッション/権限からは参照できない。
+          #   「CodeQL 3 件」だけが見えて中身が見えないと原因を推測で当てにいくことになり、
+          #   実際に 3 回外した (workflow の式インジェクション → prototype 汚染 →
+          #   execSync の command injection)。job summary に出せば誰でも読める。
+          output: sarif-results
+
+      # ★ロジックはスクリプトに置く。workflow に node -e でインライン展開すると
+      #   shellcheck が SC2016 (単一引用符内の ${} は展開されない) を出して
+      #   Static Gates が落ちる。中身の検証もスクリプトなら単体で回せる。
+      - name: 📋 Dump CodeQL findings (rule / file / line)
+        if: always()
+        run: node .github/scripts/dump-codeql-sarif.mjs sarif-results | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: ✅ Security scan completed
         run: echo "✅ Security scan completed"

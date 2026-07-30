@@ -52,7 +52,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
 - effect/* 判定・改善ログ status 更新 → `improvement-triage`
 - R2 push の実行 → CI (`publish-affiliate-ads.yml`) / `r2-publisher`
 - 記事内手動配置 (`<affiliate-banner>` タグ) → `blog-editor` / `article-writer`
-- 収益戦略・チャネル配分 → `/monetization-strategy` / `docs/02_実装計画/01_収益化マスタープラン.md`
+- 収益戦略・チャネル配分 → `/monetization-strategy` / `docs/00_プロジェクト管理/02_収益化戦略.md`
 
 ## Output Contract
 
@@ -68,4 +68,6 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
 - データ: `apps/web/scripts/affiliate-ads-data.ts` (自動配置) / `apps/web/scripts/affiliate-direct-placements-data.ts` (直接配置)
 - 機械状態: `.claude/state/ads/{affiliate-operations-latest,inventory-latest,compliance-latest,experiments}.json`
 - 配信: `apps/web/src/features/ads/`
-- 実装計画: `docs/02_実装計画/14_収益化実装方針.md` §3・付録A / 戦略: `docs/02_実装計画/01_収益化マスタープラン.md` §5-6 / 移行仕様: `docs/02_実装計画/25_アフィリエイト運用SSOT移行仕様.md`
+- 実装規約: `.claude/rules/affiliate-ads-standards.md` / 戦略: `docs/00_プロジェクト管理/02_収益化戦略.md` §3-6
+- ASP継続運用: `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` /
+  `docs/todo/05_機能バックログ.md` の `ASP-CONTINUITY-01`

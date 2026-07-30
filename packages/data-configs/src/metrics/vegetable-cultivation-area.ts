@@ -8,6 +8,7 @@ export const vegetableCultivationArea: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003423836",
+    "cdTab": "01",
     "cdCat01": "001",
     "displayName": "野菜作付面積 都道府県別合計（だいこん, 2019年）",
     "url": "https://www.e-stat.go.jp/dbview?sid=0003423836",

@@ -1,3 +1,5 @@
+import { parseRecipe } from "@stats47/data-configs";
+
 import type {
   MigrationFlowPayload,
   MigrationFlowRow,
@@ -95,11 +97,18 @@ function parseStatsMeta(value: unknown): StatsValuesPayload["meta"] {
     throw new Error("meta.yearRange must be null or [string, string]");
   }
 
+  // ★parseStatsMeta はホワイトリスト再構築なので、meta を拡張したら必ずここにも足す。
+  //   足し忘れると読み側で黙って消える (recipe が消えると監査が全件 unbaked になる)。
+  //   recipe の解釈は `@stats47/data-configs` の parseRecipe が単一定義 —
+  //   ここで独自にフィールドを列挙しない (二重定義はドリフトの温床)。
+  const recipe = value.recipe === undefined ? null : parseRecipe(value.recipe);
+
   return {
     rowCount: assertFiniteNumber(value.rowCount, "meta.rowCount"),
     yearRange,
     areaCount: assertFiniteNumber(value.areaCount, "meta.areaCount"),
     generatedAt: assertString(value.generatedAt, "meta.generatedAt"),
+    ...(recipe ? { recipe } : {}),
   };
 }
 

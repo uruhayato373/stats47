@@ -1,0 +1,10 @@
+{
+  "energy-consumption-structure-shift/solar-ranking": {
+    "key": "solar-power-housing",
+    "year": "2023"
+  },
+  "manufacturing-aichi-dominance/manufacturing-ranking": {
+    "key": "manufacturing-shipment-amount",
+    "year": "2023"
+  }
+}

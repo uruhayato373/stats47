@@ -8,6 +8,7 @@ export const sportsParticipationRateBadminton: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003456409",
+    "cdCat03": "08",
     "cdCat01": "0",
     "cdCat02": "99000",
     "displayName": "社会生活基本調査",

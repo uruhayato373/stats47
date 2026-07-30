@@ -12,8 +12,8 @@ W21-W26 にかけての SEO 向上 × TODO 一元化 × 自動化拡張プラン
 **Why**: pending 施策が 8 件以上滞留し、TODO が 4 箇所 (週次計画 / improvement-log / docs/50_Issues / 記事内 TODO 記号) に散在していたため、判定期日が来ても次アクションが流れない状態を解消する必要があった。
 
 **How to apply**:
-- TODO の真実源は **`docs/05_改善ログ/<metric>.md`** に集約された。新規施策は該当 metric ファイルに append。詳細 INDEX は [[reference-improvement-log-index]] 参照
-- 全体プランは `docs/02_実装計画/seo-todo-unify-phase-1-3.md` (frontmatter で Phase 進捗を管理)
+- 現行の TODO 真実源は **`docs/todo/04_改善バックログ.md`**。metric 別の agent 用詳細は `.claude/skills/analytics/*/reference/improvement-log.md`
+- 旧 SEO TODO 統合計画は完了後に削除済み。必要な履歴は Git 履歴で参照する
 - 元 plan ファイル: `~/.claude/plans/docs-gsc-ga4-seo-todo-g-rosy-hamming.md` (更新時は両方同期)
 
 **Phase 1 で deployed (✅)**:
@@ -41,6 +41,6 @@ W21-W26 にかけての SEO 向上 × TODO 一元化 × 自動化拡張プラン
 - GSC CTR: 2.50% → 3.8% by W25
 - 新規公開記事: 12 本 (内トレンド 4 本) by W26
 
-**W22 (2026-05-25-31) 動作検証宿題** (`docs/05_改善ログ/ga4.md` GA4-CLEAN-01 残作業 #3):
+**W22 (2026-05-25-31) 動作検証宿題**（`.claude/skills/analytics/ga4-improvement/reference/improvement-log.md` の GA4-CLEAN-01 残作業 #3）:
 - 自動 snapshot で `overview-clean.csv` / `channels-clean.csv` / `pollution-summary.csv` 生成確認
 - W20 6d 想定値 (sessions 911, engaged 513) と整合確認

@@ -140,7 +140,7 @@ ThemeCatalog (SSOT, git TS)
 
 | 工程 | 担当 |
 |---|---|
-| 指標×チャート候補の**調査・提案** (白書/Web/競合/GSC) | `theme-researcher` (read-only、提案を `docs/todo/03_指標バックログ.md` へ) |
+| 指標×チャート候補の**調査・提案** (白書/Web/競合/GSC) | `theme-researcher` (read-only、提案を `docs/todo/06_指標バックログ.md` へ) |
 | 提案の**採否判断・カタログ設計** (role/チャート構成) | `theme-designer` (採択分を catalog TS 化) |
 | チャート **componentProps 詳細化・監査** | `theme-component-builder` |
 | チャートコンポーネント自体の新設 | `chart-component-builder` (`chart-component-standards.md`) |
@@ -183,5 +183,5 @@ ThemeCatalog (SSOT, git TS)
 - 調査スキル: `.claude/skills/theme/research-theme-catalog/SKILL.md`
 - 調査 agent: `.claude/agents/theme-researcher.md`
 - チャートコンポーネント: `.claude/rules/chart-component-standards.md`
-- 情報設計 (テーマの責務): `docs/01_技術設計/07_情報設計.md`
-- 完全DBレス: `docs/01_技術設計/12_完全DBレス設計.md`
+- 情報設計 (テーマの責務): `docs/01_技術設計/03_情報設計.md`
+- 完全DBレス: `docs/01_技術設計/02_データアーキテクチャ.md`

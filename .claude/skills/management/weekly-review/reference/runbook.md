@@ -142,7 +142,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    `triage`が期間・freshness・sample size・past effect込みでレビュー対象の最大3件を返す
    （freshness=missingはinsufficient-dataとして除外される）。
    CTR候補はpage×queryと現行title/contentを確認し、mass title rewriteを提案しない。
-   通常候補は人間承認前に`docs/todo/01_改善バックログ.md`へ追加しない。
+   通常候補は人間承認前に`docs/todo/04_改善バックログ.md`へ追加しない。
    人間承認の機械記録は`npm run search-growth:approve -- --candidate <ID>`
    （週2件・全active WIP5以下をCLIが機械強制。却下は`search-growth:dismiss --reason "..."`）。
    承認後も翌週計画への採用は最大1〜2件。効果は`search-growth:measure`が14/28/56日の判定日を返す。
@@ -154,7 +154,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    - 詳細週次データ: `.claude/state/metrics/gsc/coverage-drilldown/YYYY-Www/{category}-urls.csv`（url-inspection 由来）
    - 関連 issue: #43（[T0-DECAY-01] Coverage Drilldown 週次記録）
 
-   **GSC カバレッジ是正ループ（COVERAGE-LOOP-01、2026-06-16〜）**:
+   **GSC カバレッジ是正ループ**:
    ユーザーが GSC UI から「ページ」export を取得していれば（API では取れない総件数・未把握 URL を含む）、是正ループを回す。
    正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` / 実行: `/gsc-coverage-remediation`。
    - 取り込み: `python3 .claude/scripts/gsc/ingest-gsc-export.py`（~/Downloads の cp932 zip を自動正規化 → `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`）
@@ -162,7 +162,8 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    - レビューに埋め込む: **`.claude/state/gsc/LATEST.md`**（要対応 action 別件数・カテゴリ総件数）と
      `.claude/state/gsc/coverage-totals-history.csv`（404/soft404 件数の前週比トレンド）
    - effect 判定は再送信 URL の coverageState 遷移を実測してから（`evidence-based-judgment.md`）。
-     真実源は `.claude/state/gsc/coverage-remediation-queue.json`、TODO は `docs/todo/01_改善バックログ.md` の `COVERAGE-LOOP-01`/`COVERAGE-DEACT-01`。
+     真実源は `.claude/state/gsc/coverage-remediation-queue.json`。今週実行する場合だけ
+     `docs/todo/03_今週の計画.md` から参照し、完了済みの旧改善IDをTODOへ戻さない。
 
 4.5. AdSense snapshot 取得
    `.env.local` に AdSense OAuth クレデンシャル（CLIENT_ID / SECRET / REFRESH_TOKEN / ACCOUNT_ID）が揃っている場合のみ実行:
@@ -170,19 +171,19 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    保存先: `.claude/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/`
    取得ファイル: overview / daily / devices / units / formats-platforms / placements-platforms /
    bid-types-platforms / traffic-sources / countries / pages.csv + `manifest.json`（期間 metadata・status）
-   取得完了後、`/adsense-improvement observe` で閾値と進行中施策を判定し、結果を`docs/todo/01_改善バックログ.md`へ反映する。
+   取得完了後、`/adsense-improvement observe` で閾値と進行中施策を判定し、結果を`docs/todo/04_改善バックログ.md`へ反映する。
    **クレデンシャル未設定時はこのステップをスキップし、レビュー本文に「AdSense OAuth 未設定」と 1 行記載する**。
 
-   **AdSense 週次候補（doc41 §7・CI が自動生成）**: `.claude/state/metrics/adsense/candidates-latest.json`
+   **AdSense 週次候補（CI が自動生成）**: `.claude/state/metrics/adsense/candidates-latest.json`
    （`npm run metrics:adsense-diagnostics -- <week>` で再生成可）をレビューへ載せる。
    - 候補は最大3件・**AdSense 実験の採用は最大1件/週・active WIP≤2**。1実験1レバーのみ。
    - CPC は**公式 `cost_per_click`** を使う。`earnings_per_click_legacy`（旧 cpc 列）は公式 CPC ではない。
-   - unit/format/placement の比較は `IMPRESSIONS_RPM`（unit の Page RPM は分母0で無意味・doc41 §2.2）。
+   - unit/format/placement の比較は `IMPRESSIONS_RPM`（unit の Page RPM は分母0で無意味）。
    - `privacy-threshold`（pages 0行）を欠損・0 と混同しない。rolling 28日差を WoW と呼ばない。
 
 4.6. R2 ストレージ定点観測 (Cloudflare cost)
    `.claude/state/metrics/cloudflare/LATEST.md` の `r2_storage_gb` を読み、前週比を確認する。
-   増勢が続く場合は `docs/todo/01_改善バックログ.md` の `[R2-STORAGE-01]` を更新する
+   増勢が続く場合は `docs/todo/04_改善バックログ.md` の `[R2-STORAGE-01]` を更新する
    (保持・削除ポリシーの正典: `.claude/rules/r2-storage-design.md`「R2 保持・削除ポリシー」)。
 
 5. SNS パフォーマンス指標
@@ -205,7 +206,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 6. SNS メトリクスのレビュー本文への埋め込み
    SNS の週次ハイライトは本レビュードキュメントの本文に直接記載する。
-   GA4/GSC の詳細データは snapshot CSV (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) と改善ログ (`docs/todo/01_改善バックログ.md`) に分離済みなので、レビュー本文では「主要指標の前週差 + 改善ログ section 参照」のみに圧縮する。
+   GA4/GSC の詳細データは snapshot CSV (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) と改善ログ (`docs/todo/04_改善バックログ.md`) に分離済みなので、レビュー本文では「主要指標の前週差 + 改善ログ section 参照」のみに圧縮する。
 
 出力形式:
 - 「パフォーマンス概況」（overview.csv / GSC サマリー + AdSense + SNS の主要指標を 1 行で明記）
@@ -213,7 +214,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 - 「改善候補」（CTR が低い高表示クエリ、順位 11-20 位のクエリ — queries.csv から抽出）
 - 「snapshot 参照」（`.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/snapshots/YYYY-Www/` と各期間）
 - 「検索成長候補」（最大3件。期間・証拠・制約・承認状態）
-- 「施策効果判定」（`docs/todo/01_改善バックログ.md`のdue施策を14/28/56日窓で判定）
+- 「施策効果判定」（`docs/todo/04_改善バックログ.md`のdue施策を14/28/56日窓で判定）
 ```
 
 #### Track E: NSM 実験進捗
@@ -246,17 +247,15 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 ```
 調査項目:
-- 当週の計画ドキュメント `docs/todo/current-week.md` を取得
+- 当週の計画ドキュメント `docs/todo/03_今週の計画.md` を取得
   → frontmatter の `week` が対象週と一致することを確認
   → Read tool で本文を取得し、計画されていたタスク（Must / Should / Could のチェックボックス）の一覧を抽出
   → git log と照合して完了/未達を判定
 - 今週 close された Issue（`gh issue list --state closed --search "closed:>=<today-7d>"`、enhancement / auto-generated ラベル等）
-- 今週追加された各種レビュー ドキュメント
-  ls -t docs/04_レビュー/*.md | grep -v 'pre-mortem' | head -5
-  ls -t docs/04_レビュー/*-pre-mortem-*.md | head -3
-  → ファイル名の日付（YYYY-MM-DD-{topic}.md）で当週分を抽出
+- 今週追加・更新されたレビュー由来TODO
+  `git diff --since` 相当で `docs/todo/{04_改善バックログ,05_機能バックログ}.md` のID差分を確認
 
-「前週からの引き継ぎ」: 直前の週次レビューの申し送りと `docs/todo/current-week.md` を照合し、本レビューの「計画 vs 実績」で「継続」「持ち越し」と判定する。
+「前週からの引き継ぎ」: 直前の週次レビューの申し送りと `docs/todo/03_今週の計画.md` を照合し、本レビューの「計画 vs 実績」で「継続」「持ち越し」と判定する。
 
 出力形式:
 - 「計画タスク vs 実績」の対照表
@@ -278,7 +277,8 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 ### Phase 2.5: 実測値の反映先確認
 
-旧「実装ロードマップ」文書は廃止済み。実測値は `docs/02_実装計画/01_収益化マスタープラン.md` の Phase / KPI と、`docs/todo/01_改善バックログ.md` の effect 判定に反映する。
+旧「実装ロードマップ」文書は廃止済み。実測値は `docs/todo/02_今月の重点.md` の重点判断と
+`docs/todo/04_改善バックログ.md` の effect 判定に反映し、収益判断は `docs/00_プロジェクト管理/02_収益化戦略.md` のゲートに従う。
 
 #### 取得するデータ
 
@@ -327,11 +327,11 @@ tags: []
 ---
 ```
 
-作成後、ファイルパスを報告する。改善施策は`docs/todo/01_改善バックログ.md`のID、実装課題は`docs/todo/02_機能バックログ.md`のIDで参照する。GitHub IssueはPRでcloseする機能改修・bugと自動アラートだけに限定する。
+作成後、ファイルパスを報告する。改善施策は`docs/todo/04_改善バックログ.md`のID、実装課題は`docs/todo/05_機能バックログ.md`のIDで参照する。GitHub IssueはPRでcloseする機能改修・bugと自動アラートだけに限定する。
 
 ### Phase 4.5: 現在計画を維持
 
-レビュードキュメント作成後も `docs/todo/current-week.md` は変更しない。次回 `/weekly-plan` が上書きする。
+レビュードキュメント作成後も `docs/todo/03_今週の計画.md` は変更しない。次回 `/weekly-plan` が上書きする。
 
 対象ファイルが見つからない場合（稀）はスキップし、報告に明記する。
 
@@ -359,7 +359,7 @@ tags: []
 ## 週
 - **ISO Week**: YYYY-Www
 - **期間**: YYYY-MM-DD 〜 YYYY-MM-DD
-- **計画ドキュメント**: `../../todo/current-week.md`（レビュー生成時点）
+- **計画ドキュメント**: `docs/todo/03_今週の計画.md`（レビュー生成時点）
 
 ## サマリー
 
@@ -438,7 +438,8 @@ raw - cleanの差分:
 
 - overseas_sessions: N（前週 N, +N% 増減）
 - notSet_sessions: N（前週 N, +N% 増減）
-- ⚠️ overseas / notSet が前週比 +30% 超で増えた場合は GA4 Admin の bot filter 設定確認 + Cloudflare WAF rule 追加を `docs/04_レビュー/` に起票
+- ⚠️ overseas / notSet が前週比 +30% 超で増えた場合は、GA4 Admin のbot filter確認と
+  Cloudflare WAF候補を `docs/todo/04_改善バックログ.md` に具体化
 
 主要な動き:
 - Organic Search (clean): N → N (+N) ※ clean ベースで評価
@@ -463,7 +464,7 @@ snapshot CSV: `.claude/skills/analytics/gsc-improvement/reference/snapshots/YYYY
 - 順位 11-20 位で表示 > N の「あと一押し」クエリを 3 件
 - CTR < 2% で表示 > N のタイトル改善候補を 3 件
 - ローリング28日は候補のsample確保に使い、前回snapshotとの差をWoWと呼ばない
-- `search-growth:next`からレビューへ載せる候補は最大3件。人間承認前に`docs/todo/01_改善バックログ.md`へ追加しない
+- `search-growth:next`からレビューへ載せる候補は最大3件。人間承認前に`docs/todo/04_改善バックログ.md`へ追加しない
 
 ### インデックスカバレッジ（GSC 画面からの手動エクスポート）
 
@@ -473,7 +474,7 @@ snapshot CSV: `.claude/skills/analytics/gsc-improvement/reference/snapshots/YYYY
 **GSC Alert**: `/gsc-improvement observe` のアラート判定結果を 1 行で記載（閾値非超過なら本節は省略）:
 - 登録済み ≤ -10% / 404 ≥ +5% / 5xx ≥ +20% のいずれか発火時、対象指標と対応方針を明記
 
-**施策効果サマリ** (`docs/todo/01_改善バックログ.md` を Read し `status: pending` 以外の行を抽出):
+**施策効果サマリ** (`docs/todo/04_改善バックログ.md` を Read し `status: pending` 以外の行を抽出):
 
 | Section | Tier | 経過日数 | ターゲット | status |
 |---|---|---|---|---|
@@ -500,7 +501,8 @@ node -e 'const q=require("./.claude/state/blog/remediation-queue.json");console.
 node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→featureSignals + 順位交絡統制
 ```
 
-- 最新 `docs/04_レビュー/<date>-blog-winning-patterns.md` の **robust かつ confidence hi/mid** のシグナルを 1-2 行で記載。
+- 最新 `.claude/skills/blog/analyze-winning-patterns/reference/reports/<date>.md` の
+  **robust かつ confidence hi/mid** のシグナルを 1-2 行で記載。
 - **robust な勝ちパターンのみ** `.claude/rules/blog-quality-standards.md` への書き戻しを検討 (定性裏取り後、`evidence-based-judgment.md` 準拠)。weakened/confounded は書き戻さない。
 
 ### AdSense（過去 7 日） — snapshot CSV: `.claude/skills/analytics/adsense-improvement/reference/snapshots/YYYY-Www/`
@@ -548,30 +550,29 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 - 未達タスクの引き継ぎ
 - 来週注意すべきこと
-<!-- 次回 /weekly-plan が docs/todo/current-week.md に引き継ぐ -->
+<!-- 次回 /weekly-plan が docs/todo/03_今週の計画.md に引き継ぐ -->
 
 ## 関連ドキュメント・施策
 
-<!-- 改善は docs/todo/01_改善バックログ.md、実装は docs/todo/02_機能バックログ.md のIDで参照 -->
-<!-- critical-review / pre-mortem は `../../04_レビュー/<file>.md` で相対リンク参照 -->
+<!-- 改善は docs/todo/04_改善バックログ.md、実装は docs/todo/05_機能バックログ.md のIDで参照 -->
+<!-- レビュー由来の未完了策は改善/機能backlog IDで参照 -->
 ```
 
 ## 運用ルール
 
 - **毎週日曜〜月曜に実行**する想定。`/weekly-plan`は依頼範囲に含まれる場合だけレビュー後に実行する
-- `docs/todo/current-week.md` が存在しない、または対象週と異なる場合でも、git log ベースで実績を収集する
-- レビュードキュメントは蓄積する（`status: active` のままでもよい。古い週は傾向分析に使用）
+- `docs/todo/03_今週の計画.md` が存在しない、または対象週と異なる場合でも、git log ベースで実績を収集する
+- 週次レビュー履歴は本skill referenceへ蓄積し、批判的レビュー全文は蓄積しない
 - `/weekly-plan` の Phase 1 Track D が前週のskill referenceレビューを参照する
 
 ## 保存先 / TODO (docs/todo/)
 
 - 本スキル出力: `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`
-- 計画: `docs/todo/current-week.md`（レビューでは変更しない）
-- 改善施策: `docs/todo/01_改善バックログ.md`
-- 未着手の機能・自動化: `docs/todo/02_機能バックログ.md`
+- 計画: `docs/todo/03_今週の計画.md`（レビューでは変更しない）
+- 改善施策: `docs/todo/04_改善バックログ.md`
+- 未着手の機能・自動化: `docs/todo/05_機能バックログ.md`
 - GitHub Issue: PRでcloseする機能改修/bug、または日次自動アラートだけ
-- 当週分の critical-review: `docs/04_レビュー/YYYY-MM-DD-*.md` (type: critical-review)
-- 当週分の pre-mortem: `docs/04_レビュー/YYYY-MM-DD-pre-mortem-*.md`
+- 当週に追加・更新したレビュー由来TODO IDを関連施策として列挙する
 
 ## 実証チェックリスト（改善バックログのeffect status変更前に必須）
 
@@ -602,13 +603,13 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 ## 参照
 
-- `.claude/skills/management/weekly-review/reference/reviews/` / `docs/todo/current-week.md` — 過去レビューと現在計画
+- `.claude/skills/management/weekly-review/reference/reviews/` / `docs/todo/03_今週の計画.md` — 過去レビューと現在計画
 - `.claude/skills/analytics/gsc-improvement/reference/snapshots/` — GSC rolling28d discovery snapshot
 - `.claude/skills/analytics/ga4-improvement/reference/snapshots/` — GA4 clean/raw snapshot
 - `.claude/skills/analytics/adsense-improvement/reference/snapshots/` — AdSense週次snapshot
-- `docs/todo/01_改善バックログ.md` — 施策status・due・ownerのSSOT
+- `docs/todo/04_改善バックログ.md` — 施策status・due・ownerのSSOT
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
-- `docs/02_実装計画/01_収益化マスタープラン.md` — KPI・Phase 目標
+- `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM・収益レーン・意思決定ゲート
 - `.claude/state/sns/posts.json` / `.claude/skills/analytics/sns-metrics-improvement/snapshots/` — SNSコンテンツ状況・メトリクス
 - `.claude/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得手順（snapshot モード）
 - `.claude/skills/analytics/fetch-gsc-data/SKILL.md` — GSC データ取得手順（snapshot モード）
@@ -621,6 +622,6 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 注: 廃止履歴
 - `docs/60_運用ログ/weekly-metrics/` — snapshot CSV で代替（2026-04-17 削除）
-- DB `seo_tracking` / `seo_actions` テーブル — 完全DBレス化で廃止。施策SSOTは`docs/todo/01_改善バックログ.md`
-- 旧GitHub Issue中心のimprovement運用 — `docs/todo/01_改善バックログ.md` + 各skillの`reference/improvement-log.md`へ移行
+- DB `seo_tracking` / `seo_actions` テーブル — 完全DBレス化で廃止。施策SSOTは`docs/todo/04_改善バックログ.md`
+- 旧GitHub Issue中心のimprovement運用 — `docs/todo/04_改善バックログ.md` + 各skillの`reference/improvement-log.md`へ移行
 - GitHub Issues `weekly-plan` / `weekly-review` ラベル — ファイル運用へ移行済み。計画は `docs/todo/`、レビューは本skill reference

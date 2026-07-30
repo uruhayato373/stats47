@@ -20,7 +20,7 @@ export interface ExportAreaProfileSnapshotResult {
 /**
  * 都道府県プロファイル (強み・弱み) を R2 `app/areas/{areaCode}/profile.json` に保存する。
  *
- * 完全DBレス (docs/01_技術設計/12_完全DBレス設計.md): 中間 D1 `area_profiles` テーブルを
+ * 完全DBレス (docs/01_技術設計/02_データアーキテクチャ.md): 中間 D1 `area_profiles` テーブルを
  * 経由せず、R2 から直接計算して書き出す:
  *   - ranking item メタ = R2 item.json (listRankingItemsWithTagsFromR2)
  *   - 観測値           = R2 app/stats/<metric>/values.json (listRankingValues)

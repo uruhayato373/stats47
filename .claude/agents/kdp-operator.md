@@ -77,5 +77,5 @@ BEHAVIOR CONTRACT (命令): 結論先行。進捗の実証 (下書き保存/公�
 - 規約: `.claude/rules/coconala-product-standards.md §8` / skill: `.claude/skills/product/kdp-publish/SKILL.md`
 - スクリプト: `.claude/scripts/kdp/{login,capture-account,kdp-publish}.mjs` + `lib/kdp-{session,form}.mjs`
 - 出品 SoT: `.claude/config/kdp-listings.json` / アカウント: `.claude/config/kdp-account.json`
-- 認証プロファイル: `docs/01_技術設計/playwright-auth-profiles.md` (`playwright-kdp-profile`)
+- 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md` (`playwright-kdp-profile`)
 - 書籍生成・カタログ: `kindle-publisher` / 移植元: `coconala-operator`

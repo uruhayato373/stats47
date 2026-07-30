@@ -96,5 +96,5 @@ model: sonnet
   - 初回セットアップ: `login.mjs`（手動ログイン）→ `capture-account.mjs --write`（userId 記入）→ `discover-categories.mjs`（カテゴリ確定）
 - SoT: `.claude/config/coconala-listings.json` / `coconala-account.json` / `packages/product-factory`
 - 規約: `.claude/rules/coconala-product-standards.md` / `.claude/rules/evidence-based-judgment.md`
-- 認証プロファイル: `docs/01_技術設計/playwright-auth-profiles.md`
+- 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`
 - 移植元: doboku-note `.claude/agents/coconala-operator.md`

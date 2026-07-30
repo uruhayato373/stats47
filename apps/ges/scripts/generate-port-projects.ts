@@ -44,7 +44,7 @@ const PROJECT_ROOT = path.join(APP_ROOT, "..", "..");
 const TEMPLATES_DIR = path.join(APP_ROOT, "templates");
 const OUTPUT_BASE_DIR = path.join(PROJECT_ROOT, ".local", "r2", "ges", "ports");
 
-// 完全DBレス (docs/01_技術設計/12_完全DBレス設計.md): ports master は git TS の静的
+// 完全DBレス (docs/01_技術設計/02_データアーキテクチャ.md): ports master は git TS の静的
 // Reference。D1 ではなく同梱 JSON (D1 ports テーブル 699 件と同一・port_code 順) を読む。
 const PORTS_JSON = path.join(__dirname, "data", "ports.json");
 

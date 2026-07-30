@@ -1,7 +1,8 @@
 /**
  * freshness — 観測の鮮度を決定的に判定する純粋関数。
  *
- * 正典: docs/02_実装計画/39 §3 / §5.2。missing を 0 と混同しない。
+ * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
+ * missing を 0 と混同しない。
  * この module は Date.now を既定に使うが、テスト容易性のため now を注入できる。
  */
 

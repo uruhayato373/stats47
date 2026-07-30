@@ -49,7 +49,7 @@ tags: [survey, portfolio, agent, governance]
 | `survey-content-standards.md` | 編集文法・ハブ構成・横展開の判定基準・禁止事項 | 「次にどの survey を編集ハブ化するか」の状態管理 |
 | 旧 docs/04 監査 3 本 (2026-07-11) | 優先順位・census 実装・wage-structure 事前監査 | 単発証跡のみ → reference へ移設し evidenceRefs 化 (§1.4) |
 | handoff `2026-07-11-survey-content-cluster.md` | census 実験の baseline 手書き | experiments.json へ移行して削除 (PR-2) |
-| 旧 `docs/02_実装計画/20_survey別コンテンツクラスター戦略.md` | — | **2026-07-12 に survey-content-standards.md へ統合済・削除済** (docs/02 INDEX に廃止明記済。追加処置不要) |
+| 旧 survey 別コンテンツクラスター計画 | — | **2026-07-12 に `.claude/rules/survey-content-standards.md` へ統合済・削除済**（旧版は Git 履歴。追加処置不要） |
 
 空白 = ①全 survey の状態台帳 ②計測の継続追跡 ③実験の期日・重複管理 ④月次/四半期の監査ループ。
 
@@ -80,17 +80,17 @@ tags: [survey, portfolio, agent, governance]
   (2026-07-13 時点・census は関連記事 0 で未使用)。portfolio の `relatedArticleCount` はフィールド実装
   まで null とする。
 
-### 1.4 docs/04_レビュー survey 文書の棚卸しと処置 (2026-07-13 実施)
+### 1.4 旧surveyレビュー文書の棚卸しと処置 (2026-07-13 実施)
 
-| 旧パス (docs/04_レビュー/) | 処置 | 継続利用箇所 |
+| 旧ファイル | 処置 | 継続利用箇所 |
 |---|---|---|
 | `2026-07-11-survey-portfolio-audit.md` | → `reference/audits/` へ移設 | 優先順位表 → portfolio.json の lifecycleStatus/editorialStatus 初期値の根拠 (evidenceRefs) |
 | `2026-07-11-survey-census-cluster-audit.md` | → `reference/reviews/2026-07-11-survey-census.md` へ移設・改名 | census baseline (W27: 23imp/0clicks/pos25.43) → experiments.json SURVEY-EXP-001 |
 | `2026-07-11-survey-wage-structure-audit.md` | → `reference/reviews/2026-07-11-survey-wage-structure-survey.md` へ移設・改名 | 実装時の受入条件・代表 5 ranking (audit-ready の根拠) |
 
 - reviews/ の命名規則 = `YYYY-MM-DD-survey-<surveyId>.md` (builder が surveyId へ機械対応付けするため)。
-- GSC/GA4 の過去 snapshot 値は運用ルール本文へ固定値として複製しない (証跡文書と state の
-  baseline のみが持つ)。docs/04_レビュー は今後も日付付き証跡の置き場であり最新状態の SSOT にしない。
+- GSC/GA4 の過去 snapshot 値は運用ルール本文へ固定値として複製しない。skill referenceとstateの
+  baselineだけが持ち、未完了策は `docs/todo/` へ統合する。
 
 ---
 
@@ -104,8 +104,7 @@ apps/web/src/features/survey/survey-editorial.ts     ← 編集本文 SSOT (cont
 .claude/state/surveys/experiments.json               ← 改善実験台帳 (baseline / 期日 / verdict)
   ↑ 書き込み: survey-curator が builder スクリプト経由でのみ
 .claude/skills/survey/manage-survey-portfolio/reference/  ← 運用設計 (本書) + reviews/ + audits/ (日付付き証跡)
-docs/04_レビュー/                                    ← 履歴・証跡 (最新状態の SSOT にしない)
-docs/todo/01_改善バックログ.md                       ← 書き込みは improvement-triage のみ (不変)
+docs/todo/04_改善バックログ.md                       ← 書き込みは improvement-triage のみ (不変)
 ```
 
 - 計測値 (GSC/GA4) は **snapshot への参照 (`gscSnapshotRef` 等) + 集計値のコピー**を portfolio.json に

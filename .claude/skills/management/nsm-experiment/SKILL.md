@@ -170,7 +170,7 @@ abandoned  abandoned  running (re-measure)
 
 ## 担当外
 
-- **NSM 定義の変更**: `docs/04_レビュー/{YYYY-MM-DD}-nsm.md` の更新は `/north-star-metric` スキルの担当
+- **NSM 定義の変更**: `docs/00_プロジェクト管理/02_収益化戦略.md` の更新は `/north-star-metric` スキルの担当
 - **コンテンツそのものの編集**: blog-editor / theme-enhancer 配下のスキルが担当
 - **週次レポート生成**: `/weekly-review` の担当（本スキルは experiments-state を提供するのみ）
 
@@ -231,6 +231,6 @@ abandoned  abandoned  running (re-measure)
 - `reference/definition.md` — NSM 定義と目標値のサマリ
 - `reference/playbook.md` — 実験パターンカタログ
 - `reference/rubric.md` — 優先順位評価軸
-- `docs/04_レビュー/{YYYY-MM-DD}-nsm.md` — NSM の完全な定義（最新版は `ls -t docs/04_レビュー/*-nsm.md | head -1` で取得）
+- `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM の完全な定義
 - `.claude/scripts/lib/experiments-state.mjs` — state 実装
 - `.claude/scripts/lib/metrics-reader.mjs` — 計測実装

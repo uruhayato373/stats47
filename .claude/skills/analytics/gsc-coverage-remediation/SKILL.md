@@ -60,7 +60,8 @@ actionable カテゴリ (404 / soft404 / 5xx / crawled / discovered) の URL を
 
 ## 命名規約 (observe-after-fix)
 
-> **Indexing API 送信は 2026-07-23 に退役** (公式に JobPosting/BroadcastEvent VideoObject 専用・準拠是正 docs/02_実装計画/39 Phase 1)。
+> **Indexing API 送信は 2026-07-23 に退役**（公式に JobPosting/BroadcastEvent VideoObject 専用。
+> 準拠正典: `.claude/skills/analytics/search-growth/reference/platform-contract.md`）。
 > 通常ページの再クロールは「送信」ではなく「直してから URL Inspection で観測 (observe-after-fix)」で行う。
 
 build が本番 HTTP を Googlebot UA で実測して live-misflagged (404/5xx/crawled だが現在 200) を選別し
@@ -127,7 +128,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 ### Phase 6 — 記録 (真実源を更新)
 - 完了した URL を done に: `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> --wave-id 2026-MM-DD-coverage`
 - `improvement-log.md` の `[COVERAGE-LOOP-01]` に「何をやったか」(送信件数・content-check 結果・fix-5xx PR) を追記。
-- 改善バックログ `docs/todo/01_改善バックログ.md` の `COVERAGE-LOOP-01` 行の status / 期日を更新 (improvement-triage)。
+- 改善バックログ `docs/todo/04_改善バックログ.md` の `COVERAGE-LOOP-01` 行の status / 期日を更新 (improvement-triage)。
 - **effect/* を付ける前に実証チェックリスト** (`evidence-based-judgment.md`): 送信した URL が次週 indexed 化したかを
   URL Inspection / totals-history で確認してからでないと effect/full を付けない。
 
@@ -146,7 +147,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 | 取り込み済 drilldown | `.claude/state/metrics/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
 | observe-after-fix 対象 | `.claude/state/metrics/gsc/coverage-drilldown/<週>/coverage-live-observe-urls.csv` | build が書く / url-inspection で観測 |
 | agent 用詳細ログ | `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |
-| TODO 真実源 | `docs/todo/01_改善バックログ.md` `COVERAGE-LOOP-01` | improvement-triage |
+| TODO 真実源 | `docs/todo/04_改善バックログ.md` `COVERAGE-LOOP-01` | improvement-triage |
 
 ## cadence (週次)
 - `/weekly-review` 前にユーザーが export (10分) → 本スキルで取り込み・是正。
@@ -154,7 +155,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
   本スキルの週次手動アームは「UI export でしか取れない総件数・未把握URL」を補う (API は自サイト視点のみ)。
 
 ## 関連
-- 運用正典: 本 SKILL (2026-07-12 に旧 `docs/02_実装計画/12_GSCカバレッジ是正ループ.md` を統合)
+- 運用正典: 本 SKILL（2026-07-12 に旧 GSC カバレッジ是正計画を統合。旧版は Git 履歴）
 - 同型: `.claude/rules/blog-remediation-loop.md` (ブログ品質是正ループ)
 - 実測判定: `.claude/rules/evidence-based-judgment.md`
 - export 手順: `.claude/skills/analytics/gsc-improvement/reference/USER_EXPORT_GUIDE.md`

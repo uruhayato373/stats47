@@ -11,7 +11,9 @@
  * scope: candidate suggestion のみ。PR 起票 / LLM 改修案生成 / workflow 改修は含まない。
  */
 
-import { execSync } from "node:child_process";
+// ★execFileSync (argv 形式) を使う。テンプレート文字列 + execSync だとパスや URL 由来の
+//   文字列がシェルとして評価される (CodeQL の js/command-line-injection)。
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -163,8 +165,9 @@ function findTsxFiles(root) {
   const stat = fs.statSync(abs);
   if (stat.isFile()) return [root];
   try {
-    const out = execSync(
-      `find "${abs}" -name "*.tsx" -type f -not -path "*/node_modules/*"`,
+    const out = execFileSync(
+      "find",
+      [abs, "-name", "*.tsx", "-type", "f", "-not", "-path", "*/node_modules/*"],
       { encoding: "utf-8" }
     );
     return out
@@ -180,8 +183,9 @@ function findTsxFiles(root) {
 // -------- git 情報 --------
 function gitInfo(relFile) {
   try {
-    const out = execSync(
-      `git -C "${PROJECT_ROOT}" log -1 --format="%h|%ad" --date=short -- "${relFile}"`,
+    const out = execFileSync(
+      "git",
+      ["-C", PROJECT_ROOT, "log", "-1", "--format=%h|%ad", "--date=short", "--", relFile],
       { encoding: "utf-8" }
     ).trim();
     if (!out) return { hash: "(no history)", date: "-" };
@@ -259,7 +263,7 @@ function renderMarkdown(results) {
     }
     lines.push("");
     lines.push("### 改善提案ポインタ");
-    lines.push("- LCP/CLS 過去施策: `docs/todo/01_改善バックログ.md`");
+    lines.push("- LCP/CLS 過去施策: `docs/todo/04_改善バックログ.md`");
     lines.push(
       "- 詳細ログ: `.claude/skills/analytics/performance-improvement/reference/improvement-log.md`"
     );

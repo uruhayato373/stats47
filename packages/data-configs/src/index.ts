@@ -11,6 +11,49 @@ export {
   type ExpectedEmptyEntry,
 } from "./expected-empty";
 export {
+  PREFECTURE_COUNT,
+  classifyShape,
+  findExpectedShapeAnomaly,
+  hasShapeError,
+  summarizeShape,
+  type ClassifyShapeInput,
+  type ExpectedShapeAnomalyEntry,
+  type ShapeCheck,
+  type ShapeRow,
+  type ShapeSummary,
+  type ShapeViolation,
+} from "./shape-gate";
+export { EXPECTED_SHAPE_ANOMALY, MAX_KNOWN_BROKEN } from "./expected-shape-anomaly";
+export {
+  PREFECTURES,
+  isAggregateAreaName,
+  lookupPrefectureCode,
+  normalizeAreaName,
+  resolveAreaAxis,
+  surveyYearFromDate,
+  type AreaAxisMapping,
+  type AreaAxisMember,
+} from "./area-axis";
+export {
+  MISSING,
+  combineLinear,
+  ratioPercent,
+  round1,
+  sumMembers,
+  toEstatValue,
+} from "./estat-transform";
+export {
+  buildRecipe,
+  canonicalRecipeJson,
+  hash64,
+  parseRecipe,
+  type EstatAxis,
+  type EstatQueryParams,
+  type MetricRecipe,
+  type RecipeOps,
+  type RefetchKeys,
+} from "./recipe";
+export {
   getMetricMetaMap,
   getMetricMeta,
   listMetricKeysByEntity,

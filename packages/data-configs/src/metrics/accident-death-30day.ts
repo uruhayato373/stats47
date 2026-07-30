@@ -8,6 +8,7 @@ export const accidentDeath30day: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003281586",
+    "cdTab": "1080",
     "cdCat02": "110",
     "displayName": "30日以内交通事故死者数（都道府県別）",
     "url": "https://www.e-stat.go.jp/dbview?sid=0003281586",

@@ -126,39 +126,17 @@ stats47 に適した収益化モデルを 3-5 案生成する。以下のカテ�
 ...
 ```
 
-### Step 6: critical-review レポートを Write する
-
-レビュー本文を `docs/04_レビュー/{YYYY-MM-DD}-monetization.md` に Write tool で出力する。日付は今日（JST）の `YYYY-MM-DD` を使用する。
-
-frontmatter は以下を必ず含める:
-
-```yaml
----
-type: critical-review
-topic: monetization
-date: 2026-MM-DD
-status: active
-related_strategy: docs/00_プロジェクト管理/02_収益化戦略.md
----
-```
-
-本文は上記「出力フォーマット」のテンプレートをそのまま続ける。
-
-### Step 7: 戦略本体（02_収益化戦略.md）への反映
+### Step 6: 戦略本体（02_収益化戦略.md）への反映
 
 critical-review の結論から戦略本体に反映すべき変更を特定し、`docs/00_プロジェクト管理/02_収益化戦略.md` の関連セクションを Edit tool で更新する。
 
-- 追記・修正対象: 推奨アクション、Phase 1/2/3 ロードマップ、優先度マトリクスの結論部分
-- 大幅な方針転換がある場合は「変更履歴」セクションに日付と要旨を追加
-- 旧 GitHub Issue 運用は廃止: critical-review レポートは `docs/04_レビュー/` に蓄積し、戦略の最新版は `02_収益化戦略.md` に集約する
+- 追記・修正対象: 収益レーン、優先順位、意思決定ゲート、禁止事項
+- 施策の status・期日・担当は戦略本体に重複記載せず、`docs/todo/` の該当バックログへ反映
+- 未完了の施策だけを `docs/todo/04_改善バックログ.md` または `05_機能バックログ.md` へ具体化し、レビュー全文は保存しない
 
-### Step 8: 過去レビューの参照
+### Step 7: 過去判断の参照
 
-過去のレビュー履歴は以下で確認:
-
-```bash
-ls -t docs/04_レビュー/*.md | head -5
-```
+`git log -p -- docs/00_プロジェクト管理/02_収益化戦略.md` と各improvement logを確認する。
 
 ## 注意事項
 
@@ -170,7 +148,7 @@ ls -t docs/04_レビュー/*.md | head -5
 ## 参照
 
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
-- `docs/02_実装計画/01_収益化マスタープラン.md` — KPI・Phase 目標
-- `docs/00_プロジェクト管理/01_概要/` — プロジェクト概要
+- `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM・収益レーン・意思決定ゲート
+- `docs/00_プロジェクト管理/01_プロジェクト定義.md` — プロジェクト概要
 - `.claude/skills/management/growth-loops/SKILL.md` — 成長ループ分析
 - 原典: Paweł Huryn の Monetization Strategy フレームワーク

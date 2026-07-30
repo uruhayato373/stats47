@@ -1,6 +1,6 @@
 # アフィリエイト戦略メモ
 
-詳細は `docs/90_課題管理/アフィリエイト戦略.md` に記載。
+現行の運用正典は `.claude/rules/affiliate-ads-standards.md`、収益戦略は `docs/00_プロジェクト管理/02_収益化戦略.md`。
 
 ## 要点
 

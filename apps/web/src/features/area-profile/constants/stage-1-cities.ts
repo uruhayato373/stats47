@@ -3,7 +3,7 @@
  *
  * area_profiles に強みデータが揃っており、indexed 化の効果が高い。
  *
- * 詳細: docs/02_実装計画/cities-revival-plan.md §2.2
+ * 選定基準は下記コメントのとおり (旧 cities-revival-plan.md は 2026-06 の実装計画統合で廃止・git 履歴)。
  */
 const STAGE_1_DESIGNATED_CITIES: Array<{ areaCode: string; cityCode: string }> = [
     { areaCode: "01000", cityCode: "01100" }, // 札幌市
@@ -34,7 +34,7 @@ const STAGE_1_DESIGNATED_CITIES: Array<{ areaCode: string; cityCode: string }> =
  * 選定基準: area_profiles の strength count 上位、level=2 (区を除く)、S1 と重複なし。
  * 中核市 + 県庁所在地 + 強み 7+ 件持つ中規模都市の組み合わせ。
  *
- * 詳細: docs/02_実装計画/cities-revival-plan.md §2.2 Stage S2
+ * 選定基準は上記のとおり (旧計画書は廃止・git 履歴)。
  */
 const STAGE_2_CITIES: Array<{ areaCode: string; cityCode: string }> = [
     { areaCode: "16000", cityCode: "16202" }, // 富山県 高岡市
@@ -105,7 +105,7 @@ const STAGE_2_CITIES: Array<{ areaCode: string; cityCode: string }> = [
  * 選定基準: area_profiles strength count >= 5、level=2 (区を除く)、S1/S2 と重複なし。
  * 「県内 top 5 入り指標が 5 個以上ある」= 地域的個性が強い都市。
  *
- * 詳細: docs/02_実装計画/cities-revival-plan.md §2.2 Stage S3
+ * 選定基準は上記のとおり (旧計画書は廃止・git 履歴)。
  */
 const STAGE_3_CITIES: Array<{ areaCode: string; cityCode: string }> = [
     { areaCode: "02000", cityCode: "02202" }, // 青森県 弘前市 (strengths: 7)

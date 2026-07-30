@@ -22,7 +22,7 @@
 | Queries rows | 2083 |
 | Pages rows | 2729 |
 
-> 28日窓は前回 snapshot と 21 日重複する。この表の週次差分を WoW と呼ばない (§18.2)。
+> 28日窓は前回 snapshot と 21 日重複する。この表の週次差分を WoW と呼ばない。
 
 履歴: 確定7日 = [`history-finalized7d.csv`](./history-finalized7d.csv) / ローリング28日 = [`history.csv`](./history.csv)
 

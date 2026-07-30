@@ -9,6 +9,7 @@
 | `/monthly-plan` | 月次計画を生成（今月の重点1-2テーマに絞る・予算配分） | 毎月初 |
 | `/weekly-plan` | 週次計画を生成（月次の重点を分割消化） | 毎週月曜 |
 | `/weekly-review` | 週次レビューを生成 | 毎週日曜〜月曜 |
+| `/maintain-docs` | 文書の作成・統合・削除と陳腐化をSSOT・機械ガードで棚卸し | 文書変更時 + 週次alert時 |
 | `/critical-review` | 設計書・計画書に対する批判的レビュー | 随時 |
 | `/knowledge` | 過去の失敗と学びを参照・追記 | バグ解決時 |
 | `/growth-loops` | 成長ループ（フライホイール）の設計・評価 | 四半期ごと |
@@ -53,6 +54,7 @@
 ```
 設計判断の検証:  /critical-review <対象ファイル>
 バグ解決の記録:  /knowledge
+文書の作成・整理:  /maintain-docs
 ```
 
 ## 各スキルの詳細
@@ -76,7 +78,7 @@
 - メトリクスツリー
 - 計測方法と `/weekly-plan` への統合提案
 
-**保存先**: `docs/04_レビュー/{YYYY-MM-DD}-nsm.md` (frontmatter `type: critical-review` / `topic: nsm`)
+**保存先**: 定義は `docs/00_プロジェクト管理/02_収益化戦略.md`、未完了策は `docs/todo/04_改善バックログ.md`
 
 ### `/growth-loops`
 
@@ -103,7 +105,7 @@
 - 30-60-90日ロードマップ
 - 計測指標
 
-**保存先**: `docs/04_レビュー/{YYYY-MM-DD}-growth-loops.md` (frontmatter `type: critical-review` / `topic: growth-loops`)
+**保存先**: 採択内容は既存戦略、未完了実験は `docs/todo/04_改善バックログ.md`
 
 ### `/monetization-strategy`
 
@@ -126,7 +128,7 @@
 - 低コスト検証実験の設計
 - 実装ロードマップ
 
-**保存先**: `docs/04_レビュー/{YYYY-MM-DD}-monetization.md` + 決定事項は `docs/00_プロジェクト管理/02_収益化戦略.md` を Edit で反映
+**保存先**: 決定事項は `docs/00_プロジェクト管理/02_収益化戦略.md`、未完了策は `docs/todo/`
 
 ### `/weekly-plan`, `/weekly-review`
 
@@ -135,7 +137,7 @@
 - `/weekly-review`: 5観点のsnapshot / scriptを同一セッションで並列収集し、計画との差分を分析
 - `/weekly-plan`: 5観点の決定的データ収集 → 戦略分析 → 批判的レビュー → 計画出力
 
-**保存先**: 計画は `docs/todo/current-week.md`（毎週上書き）、レビューは `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`（agent用履歴）
+**保存先**: 計画は `docs/todo/03_今週の計画.md`（毎週上書き）、レビューは `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`（agent用履歴）
 
 ### `/critical-review`
 
@@ -145,7 +147,7 @@
 /critical-review <対象>  # ファイルパス / スキル名 / PR 番号 等
 ```
 
-**保存先**: `docs/04_レビュー/{YYYY-MM-DD}-{topic}.md` (frontmatter `type: critical-review`)
+**保存先**: 恒久判断は対象SSOT、未完了策は `docs/todo/`
 
 ### `/knowledge`
 
@@ -158,18 +160,32 @@
 
 **保存先**: `.claude/skills/management/knowledge/` 内
 
-## 出力先早見表 (2026-05-16 以降は docs/ 配下)
+### `/maintain-docs`
 
-Management 系スキルの出力はすべて `docs/` 配下に統一されている。過去分は `ls -t docs/<path>/*.md | head -5` または Obsidian で参照。
+文書の新規作成より既存SSOTへの統合を優先し、固定構成、frontmatter、TODO ID、
+鮮度、INDEX、リンクを検査する。
+
+```bash
+/maintain-docs
+npm run docs:fix
+npm run docs:check
+```
+
+判断規則は`.claude/rules/docs-vs-issues.md`、機械契約は
+`.claude/config/docs-governance.json`。自動修正は生成管理された実装計画INDEXだけに限定する。
+
+## 出力先早見表
+
+現在計画は `docs/todo/`、戦略判断は既存SSOT、agent用履歴はskill referenceへ分離する。
 
 | スキル | 出力先 | frontmatter type |
 |---|---|---|
-| `/monthly-plan` | `docs/todo/current-month.md` | `monthly-plan` |
-| `/weekly-plan` | `docs/todo/current-week.md` | `weekly-plan` |
+| `/monthly-plan` | `docs/todo/02_今月の重点.md` | `monthly-plan` |
+| `/weekly-plan` | `docs/todo/03_今週の計画.md` | `weekly-plan` |
 | `/weekly-review` | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | `weekly-review` |
-| `/critical-review` | `docs/04_レビュー/{YYYY-MM-DD}-{topic}.md` | `critical-review` |
-| `/north-star-metric` | `docs/04_レビュー/{YYYY-MM-DD}-nsm.md` | `critical-review` (topic: nsm) |
-| `/growth-loops` | `docs/04_レビュー/{YYYY-MM-DD}-growth-loops.md` | `critical-review` (topic: growth-loops) |
-| `/monetization-strategy` | `docs/04_レビュー/{YYYY-MM-DD}-monetization.md` + 決定は `docs/00_プロジェクト管理/02_収益化戦略.md` 更新 | `critical-review` (topic: monetization) |
-| `/pre-mortem` | `docs/04_レビュー/{YYYY-MM-DD}-pre-mortem-{topic}.md` | `pre-mortem` |
-| `/performance-report` | `docs/04_レビュー/{YYYY-MM-DD}-performance-report.md` | `performance-report` |
+| `/critical-review` | 対象SSOT + `docs/todo/` | 全文はセッション出力 |
+| `/north-star-metric` | `02_収益化戦略.md` + 改善バックログ | 週次値はsnapshot |
+| `/growth-loops` | 戦略SSOT + 改善バックログ | 全文はセッション出力 |
+| `/monetization-strategy` | `02_収益化戦略.md` + `docs/todo/` | 全文はセッション出力 |
+| `/pre-mortem` | `docs/todo/` | 採択した未完了策のみ |
+| `/performance-report` | PSI state + improvement log + 改善バックログ | 定期値とTODOを分離 |

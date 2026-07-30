@@ -1,6 +1,6 @@
 /**
  * prepare-buzz-map-batch の純粋コア (batch-core / utm-core) テスト。
- * §8.1 asset plan / §8.2 R2 key / §8.4 動画上限 / idempotent skip / caption 完全性 / §7.1 UTM。
+ * asset plan / R2 key / 動画上限 / idempotent skip / caption 完全性 / UTM。
  * 実行: node --test .claude/scripts/sns/lib/__tests__/buzz-map-batch-core.test.mjs
  */
 
@@ -75,7 +75,7 @@ test("expectedContentType: 拡張子 → Content-Type", () => {
   assert.equal(expectedContentType("a/b.bin"), null);
 });
 
-// ── §8.4 動画上限 (1 batch 最大 3) ──────────────────────────────────────────
+// ── 動画上限 (1 batch 最大 3) ──────────────────────────────────────────
 
 test("capVideos: 動画候補が上限内なら全て保持", () => {
   const cands = [
@@ -145,7 +145,7 @@ test("idempotencyDecision: draft 無し → skip しない", () => {
   assert.equal(d.skip, false);
 });
 
-// ── caption 完全性 (§8.3) ────────────────────────────────────────────────────
+// ── caption 完全性 ────────────────────────────────────────────────────
 
 test("captionComplete: 出典 + 年度 + 対象単位 揃えば complete", () => {
   const c = captionComplete("出典: 総務省 2023年 空き家率(％)…", {
@@ -167,9 +167,9 @@ test("captionComplete: 年度欠落を検出", () => {
   assert.ok(c.missing.some((m) => m.includes("2023")));
 });
 
-// ── §7.1 UTM ─────────────────────────────────────────────────────────────────
+// ── UTM ─────────────────────────────────────────────────────────────────
 
-test("buildUtmUrl: §7.1 の 4 パラメータ", () => {
+test("buildUtmUrl: 4つのUTMパラメータ", () => {
   const url = buildUtmUrl({
     canonicalUrl: "/ranking/vacant-housing-rate",
     platform: "x",
@@ -194,7 +194,7 @@ test("buildUtmUrl: instagram source / 絶対 URL も可", () => {
   assert.ok(url.includes("utm_source=instagram"));
 });
 
-test("buildUtmUrl: canonical に query があれば拒否 (§7.1 clean 必須)", () => {
+test("buildUtmUrl: canonical に query があれば拒否（clean URL必須）", () => {
   assert.throws(() =>
     buildUtmUrl({
       canonicalUrl: "/ranking/x?utm_source=x",

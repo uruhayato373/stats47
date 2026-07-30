@@ -458,7 +458,7 @@ import { AdSenseAd } from "@/features/ads/components/AdSenseAd"
   - `listCities()` → `list-cities.ts`
   - `findRankingItem()` → `find-ranking-item.ts`
   - `listCitiesByPrefecture()` → `list-cities-by-prefecture.ts`
-- **理由**: ファイル名から関数が明確に分かり、検索やナビゲーションが容易になる。ドキュメントの推奨（`docs/01_技術設計/01_システム概要/05_ドメイン内ディレクトリ構成.md`）と一致させる
+- **理由**: ファイル名から関数が明確に分かり、検索やナビゲーションが容易になる。現行のコード配置は `docs/01_技術設計/01_システムアーキテクチャ.md` と `.claude/rules/coding-standards.md` に従う
 
 ### インポートの整理
 - **重複インポート禁止**: eslintの`no-duplicate-imports`ルールに従い、同一ファイルからのインポートは1行にまとめること
