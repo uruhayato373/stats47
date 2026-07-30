@@ -66,14 +66,14 @@
       ]
     },
     {
-      "name": "CHECK_RUNTIME_CONFIG",
+      "name": "CHECKER_WIRING_BASELINE",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "CHECKER_WIRING_BASELINE",
+      "name": "CHECK_RUNTIME_CONFIG",
       "visibility": "server",
       "contexts": [
         "process"
@@ -176,6 +176,27 @@
     },
     {
       "name": "DB_LOCAL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DOCS_GOVERNANCE_CONFIG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DOCS_GOVERNANCE_NOW",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DOCS_GOVERNANCE_ROOT",
       "visibility": "server",
       "contexts": [
         "process"
@@ -332,14 +353,14 @@
       ]
     },
     {
-      "name": "HTTP_PROXY",
+      "name": "HTTPS_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "HTTPS_PROXY",
+      "name": "HTTP_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
@@ -588,13 +609,6 @@
       ]
     },
     {
-      "name": "NO_PROXY",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
       "name": "NODE_ENV",
       "visibility": "server",
       "contexts": [
@@ -603,6 +617,13 @@
     },
     {
       "name": "NODE_OPTIONS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NO_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
