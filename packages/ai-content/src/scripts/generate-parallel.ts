@@ -61,6 +61,8 @@ interface Options {
   outDir: string;
   dryRun: boolean;
   keys: string[] | null;
+  /** ゲート落ち / JSON 崩れ時に同じ prompt でやり直す回数 (0 = 再試行しない) */
+  retries: number;
 }
 
 function parseArgs(): Options {
@@ -79,6 +81,7 @@ function parseArgs(): Options {
     outDir: get("--out") ?? path.join(PROJECT_ROOT, ".local/r2"),
     dryRun: a.includes("--dry-run"),
     keys: get("--keys")?.split(",").map((s) => s.trim()).filter(Boolean) ?? null,
+    retries: Number(get("--retries") ?? 1),
   };
 }
 
@@ -211,47 +214,72 @@ async function processOne(
       return;
     }
 
-    const raw = await callAI(opts.model, prompt);
-    const stripped = stripCodeFence(raw.trim());
-    let parsed: {
-      faq?: unknown;
-      regionalAnalysis?: string;
-      insights?: string;
-      prefectureCommentary?: unknown;
-    };
-    try {
-      parsed = JSON.parse(stripped);
-    } catch {
-      process.stdout.write(`[FAIL] ${rankingKey}: JSON parse error\n`);
+    // ★生成 → 品質ゲート、失敗したら同じ prompt でやり直す。
+    //   安いモデル (haiku / gemini) は JSON 崩れ・ルール違反を一定率で出すため、品質を
+    //   下げる代わりに実行回数で払う。ゲートを緩めて通すことは絶対にしない。
+    const maxAttempts = Math.max(1, opts.retries + 1);
+    let lastFailure: { kind: "parse" | "gate"; detail: string } | null = null;
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      const raw = await callAI(opts.model, prompt);
+      const stripped = stripCodeFence(raw.trim());
+      let parsed: {
+        faq?: unknown;
+        regionalAnalysis?: string;
+        insights?: string;
+        prefectureCommentary?: unknown;
+      };
+      try {
+        parsed = JSON.parse(stripped);
+      } catch {
+        lastFailure = { kind: "parse", detail: "JSON parse error" };
+        if (attempt < maxAttempts) {
+          process.stdout.write(`[RETRY ${attempt}/${maxAttempts}] ${rankingKey}: JSON parse error\n`);
+        }
+        continue;
+      }
+
+      const now = new Date().toISOString();
+      const row: AiContentSnapshotRow = {
+        rankingKey,
+        yearCode: meta.yearCode,
+        faq: parsed.faq ? JSON.stringify(parsed.faq) : null,
+        regionalAnalysis: parsed.regionalAnalysis ?? null,
+        insights: parsed.insights ?? null,
+        prefectureCommentary: parsed.prefectureCommentary
+          ? JSON.stringify(parsed.prefectureCommentary)
+          : null,
+        createdAt: now,
+        updatedAt: now,
+      };
+
+      const gate = await runAuditGate(row);
+      if (!gate.ok) {
+        lastFailure = { kind: "gate", detail: gate.detail ?? "audit blocker" };
+        if (attempt < maxAttempts) {
+          process.stdout.write(
+            `[RETRY ${attempt}/${maxAttempts}] ${rankingKey}: audit blocker (${gate.detail})\n`,
+          );
+        }
+        continue;
+      }
+
+      const dest = writeStaging(opts.outDir, row);
+      const note = attempt > 1 ? ` (attempt ${attempt})` : "";
+      process.stdout.write(`[OK] ${rankingKey} (${meta.yearCode})${note} → ${dest}\n`);
+      counters.ok++;
+      return;
+    }
+
+    if (lastFailure?.kind === "parse") {
+      process.stdout.write(`[FAIL] ${rankingKey}: JSON parse error (${maxAttempts} 回)\n`);
       counters.fail++;
-      return;
-    }
-
-    const now = new Date().toISOString();
-    const row: AiContentSnapshotRow = {
-      rankingKey,
-      yearCode: meta.yearCode,
-      faq: parsed.faq ? JSON.stringify(parsed.faq) : null,
-      regionalAnalysis: parsed.regionalAnalysis ?? null,
-      insights: parsed.insights ?? null,
-      prefectureCommentary: parsed.prefectureCommentary
-        ? JSON.stringify(parsed.prefectureCommentary)
-        : null,
-      createdAt: now,
-      updatedAt: now,
-    };
-
-    // ★品質ゲート: blocker があれば採用しない (旧版に無かった安全弁)
-    const gate = await runAuditGate(row);
-    if (!gate.ok) {
-      process.stdout.write(`[REJECT] ${rankingKey}: audit blocker (${gate.detail})\n`);
+    } else {
+      process.stdout.write(
+        `[REJECT] ${rankingKey}: audit blocker (${maxAttempts} 回) ${lastFailure?.detail ?? ""}\n`,
+      );
       counters.rejected++;
-      return;
     }
-
-    const dest = writeStaging(opts.outDir, row);
-    process.stdout.write(`[OK] ${rankingKey} (${meta.yearCode}) → ${dest}\n`);
-    counters.ok++;
   } catch (err) {
     process.stdout.write(
       `[FAIL] ${rankingKey}: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}\n`,

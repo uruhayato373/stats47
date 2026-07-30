@@ -37,22 +37,74 @@ GSC 表示のあるランキングは全キーの ~40% で、imp の大半は He
 
 - **CTR 側 (title 不変)**: `metric-config-standards.md` 準拠で **title は正準名のまま** (年・注釈の焼き込みは lint error)。
   改修は `seoTitle` に curiosity gap パターン (なぜ/意外/倍率/vs)、`seoDescription` に緊張感セットアップ。
-- **品質フロア (決定的 gate)**: ①数値 factual 照合 (本文の数値が R2 values と一致) ②構造解釈 ≥300字 (Torso ≥200字)
+- **品質フロア (決定的 gate)**: ①実データ照合 (下記) ②構造解釈 ≥300字 (Torso ≥200字)
   ③NG ワードなし (`evidence-based-judgment.md`) ④ですます調 (`blog-quality-standards.md` 準拠)。
   検査は `audit-ai-content.mjs` (決定的ゲート)。
+
+### 実データ照合の設計 (★安いモデルで量産する前提の砦・2026-07-30 実装)
+
+プロンプトは「括弧による数値挿入」を全面禁止するが、**FAQ の answer は実値必須・insights は倍率や
+構成比を書く仕様**なので「数値を書かせない」ことでは捏造を防げない。括弧外の裸の数値を実データ
+(`app/ranking/<key>/values.json`) と突き合わせる。実装は `.claude/scripts/ai-content/lib/number-audit.mjs`
+(純関数 + `__tests__/`)、配線は `audit-ai-content.mjs`。
+
+| 対象 | 判定 | level |
+|---|---|---|
+| **県別解説の構造フィールド** (`items[].areaCode` / `rank` / `value`) | 実データと**厳密一致** (相対 0.1%) | **blocker** `pref-data-mismatch` |
+| テキストの数値 (insights / regionalAnalysis / faq / commentary) | 実データの**最大値を超える**もののみ | **blocker** `out-of-range-number` |
+| 観測値が無い県の解説 | 未収録・対象外の可能性 | warn `pref-unknown-area` |
+| values.json に同名の県が複数行 | どの行が正か決定できず照合不能 | warn `values-duplicate-areas` |
+
+**テキスト側を「厳密一致」にできない理由** (公開済み 153 件で 2 度実測して失敗した):
+
+1. 「実データから導出できる値の集合」との一致 → **破綻**。insights は地方ブロック平均を書く仕様で、
+   任意の部分集合の平均は無限にあり列挙できない (誤検知例: 「近畿の7府県平均は21,415店」)。
+2. 「min〜max の区間内か」 → **まだ誤検知**。プロンプトが「全国平均との比較」を指示するため差分表現が
+   頻出し、差分は必ず min を下回る (誤検知例: 「全国平均を約2,849g上回り」= 実値 − 平均)。
+
+よって下限は捨て、**max 超えだけ**を見る。狙いは桁違いの捏造 (読者が検証できず実害が最大)。
+弱いゲートに見えるが**誤検知を出すゲートは運用で無効化される**ため確実性を優先し、数値の正しさの
+本体は構造照合が担う。除外規則: 年表記 (2021年)・分母表現 (人口10万対)・「約」付きは許容 5%・
+「12万6千」等の分割解釈はグループ単位で判定。
+
+**ゲート自体を検証済み** (全 PASS は「何も見ていない」と区別できないため必須):
+公開済み 153 件に捏造を注入した対照実験で、テキスト注入 (全国計×100) **153/153**・
+構造注入 (value×2+1, rank+5) **140/153** を検出 (残り 13 は下記の観測値側欠陥で照合不能な件)。
+
+> **★blocker が出ても「ai-content が悪い」とは限らない**。実測でこのゲートが検出した 2 件は
+> **配信データ側の欠陥**だった: `vacant-housing-rate` は unit が「％」なのに values が空き家戸数
+> (ai-content の率が正しい)、`dairy-cattle-count` は partition が 45 件で**北海道が欠落**し rank が
+> 繰り上がっていた。**再生成する前に「どちらが正しいか」を必ず確認する** — 壊れた観測値に合わせて
+> 書き換えると品質が劣化する。観測値側なら `data-ingester` / `/audit-ranking-data-integrity` へ回す。
+
+実行:
+
+```bash
+node .claude/scripts/ai-content/audit-ai-content.mjs <rankingKey>            # R2 から取得して照合
+node .claude/scripts/ai-content/audit-ai-content.mjs --file <path.json>      # 生成直後の staging
+node .claude/scripts/ai-content/audit-ai-content.mjs <key> --no-number-check # オフライン (テキスト規則のみ)
+node --test .claude/scripts/ai-content/__tests__/number-audit.test.mjs       # ゲート自体のテスト
+```
+
+values.json が取得できない場合は照合をスキップする (fail-open) が、**スキップしたことを出力に明示する**
+(合格と誤読させない)。
 
 ## 生成パイプライン (完全DBレス)
 
 ```
 R2 values.json + correlation + metric config
-  → Sonnet 生成 (既定はローカル CLI npm run ai:gen = haiku、TOKEN-AICONTENT-01)
-  → 決定的 factual gate (生成文中の数値を R2 実値と照合・audit-ai-content.mjs)
+  → 生成 (既定はローカル CLI npm run ai:gen。トークン規律は TOKEN-AICONTENT-01)
+  → 決定的 gate (audit-ai-content.mjs。落ちたら同じ prompt で再試行 --retries、既定 1 回)
   → critic (ranking-content-critic) 監査 → review.md
   → R2 app/ranking/<key>/ai-content.json (CI push: publish-ai-content.yml、develop push で発火)
 ```
 
 - blog の `quality-gate.mjs` / blog-critic / `review.md` モデルを流用 (実装パターン再利用・drift 防止)。
-- スクリプト配置は `.claude/scripts/ranking/` (`skill-code-placement.md` 準拠)。R2 書き込みは CI 専用 (`r2-storage-design.md`)。
+- スクリプト配置は `.claude/scripts/ai-content/` (`skill-code-placement.md` 準拠)。R2 書き込みは CI 専用 (`r2-storage-design.md`)。
+- **安いモデルで数をこなす方針** (無料枠の Gemini CLI 等) を採る場合、品質は「モデルを賢くする」ではなく
+  「決定的ゲート + 再試行」で担保する。`--retries N` は JSON 崩れ・ゲート落ちを同じ prompt でやり直し、
+  **ゲートを緩めて通すことは絶対にしない** (品質ではなく実行時間で払う)。落ち率はモデルを変えたら
+  必ず実測する (10 件パイロット → blocker 内訳を確認 → 落ち率が高ければプロンプト側を直す)。
 - 「次に何を生成するか」の真実源は **ai-content 是正キュー** (`build-ai-content-queue.mjs` → `.claude/state/ai-content/`)。
   高流入 incomplete 優先。done は R2 の auditRow 通過で毎回再導出 (R2 が真実源・キューは派生)。
 
