@@ -69,6 +69,66 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 
 警告 (warn) を新たに増やさない。注釈は `note` に、年は `years` に、区別は `subtitle` に置く。
 
+## 分類軸は必ず 1 系列に絞る（形状ゲート・★再発防止 2026-07-30）
+
+**e-Stat の統計表は多次元クロス集計なので、config で軸を絞りきらないと同じ県が複数行になる。**
+`page-data-batch.ts` は重複を落とさず `assignRanks` が通し番号を振るため、
+「1 位 74.5%」のような**別系列の値**がそのまま配信される。
+
+2026-07-30 の全件走査で active 2,179 件のうち **209 件**がこの状態だった
+(重複行 176 / 単位と値の矛盾 27 / 県の欠落 24)。実害の例:
+`/ranking/sports-participation-rate-swimming` は `cat03`(スポーツの種類 24 件) 未指定で
+24 種目すべてを取得し、水泳ではない種目の 74.5% を 1 位として表示していた (正しくは 8.6%)。
+
+### 絞るべき軸
+
+| config | e-Stat の軸 | 絞り忘れたときの症状 |
+|---|---|---|
+| `cdCat01` 〜 `cdCat04` | cat01-cat05 | 同じ県が「軸のコード数」倍に増える |
+| `cdTab` | tab (表章項目) | 同上。実数と率が同居する表で特に危険 |
+| `timeScope: "annual"` | time | 年計 + 四半期 + 月次が 4 桁年に潰れて 17 倍になる |
+
+**e-Stat は 4 軸目以降を持つ表が普通にある** (`smartphone-usage-students` は cat01-cat05 の 5 軸)。
+`cdCat01`/`cdCat02` だけ指定して安心しない。
+
+### 機械的な検査 (3 層)
+
+| 層 | 実装 | 発火 |
+|---|---|---|
+| 取り込み時 | `page-data-batch.ts` の `gateShape` (error なら**書かずに既存 R2 を温存**) | `data-refresh.yml` |
+| 事後監査 | `audit-ranking-data-integrity.ts` の検査 (j) | 週次 `ranking-integrity-audit-weekly.yml` |
+| 棚卸し | `scan-stats-shape.ts` (R2 走査 + allowlist 生成 + 進捗計測) | 手動 |
+
+判定はすべて `packages/data-configs/src/shape-gate.ts` の**同じ純関数**。
+両端で同一定義にすることで「書き込み時に通ったものが監査で落ちる」食い違いを防ぐ。
+
+- `duplicate-area-year` 同一 (県, 年) が 2 行以上 → **error**
+- `raw-truncated` `RESULT_INF.TOTAL_NUMBER > TO_NUMBER` → **error**
+- `percent-out-of-range` unit が `%` で最大値 > 1000 → **error** (100-1000 は warn)
+- `area-coverage` 47 県未満 → **warn**。以前 47 だった年が減ったときだけ error
+
+**coverage を既定 warn にしているのは誤検知を避けるため。** `port-cargo-total` の欠落 8 県は
+内陸 8 県と完全一致しており、素朴な「47 県必須」は `port-*` / `fishery-*` 系 15 件を誤検知する。
+誤検知を出すゲートは運用で無効化されるので、確実に欠陥と言えるものだけを error にする。
+
+### 既知の壊れは期限つきで登録する
+
+`packages/data-configs/src/expected-shape-anomaly.ts` は
+`scan-stats-shape.ts --emit-allowlist` の**生成物**。手で書かない。腐敗防止は 3 点:
+`until` 必須 / `observedSeverity` より悪化したら降格しない / `MAX_KNOWN_BROKEN` ラチェット
+(是正のたびに定数を下げる。上げる変更は原則しない)。
+
+### 是正は診断スクリプトから始める
+
+```bash
+npx tsx packages/data-configs/scripts/diagnose-unpinned-axes.ts --fetch
+```
+
+getMetaInfo から未指定軸を列挙し、title と軸コード名の一致で pin 候補を提案する。
+**「総数を pin する」を既定にしてはならない** — 「美術鑑賞の行動者率」に総数を当てると
+全趣味の合計が配信され、形状ゲートは 47 行 1 系列なので**通ってしまう**。
+判定ロジックの正典は `packages/data-configs/src/axis-match.ts` (回帰テストつき)。
+
 ## isActive:true ≠ 本番公開（多段依存・★再発防止 2026-06-03）
 
 `MetricConfig.isActive` を `true` にしただけでは ranking は **本番公開されない**。本番アプリは R2 snapshot と

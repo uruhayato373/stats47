@@ -28,6 +28,15 @@
  *                             2 軸。相対だけだと values.json ごと凍結したキーを見逃す
  *   (i) 正典 app/stats      — active キーの `app/stats/<key>/values.json` が実在し rowCount>0 か。
  *                             前回比 rowCount ドリフト (部分崩壊) も見る
+ *   (j) 形状               — 同一 (県, 年) の重複行 / unit が % なのに値が範囲外 /
+ *                             47 県に満たない年。取り込み (page-data-batch) と同じ純関数
+ *                             (`@stats47/data-configs` の classifyShape) で判定する
+ *
+ * (j) は 2026-07-30 の実測 (active 2,179 件のうち 209 件が壊れた形状のまま配信) を受けた追加。
+ * (i) は payload 全体を取得しているのに `meta.rowCount` しか読んでおらず、
+ * 「1,128 行 ≠ 47 県 × 1 年」という自明な矛盾を素通りさせていた。同日に本監査を実行した
+ * 結果は違反 0 件 = ✓ OK だった。行が**少なすぎる**側 (0 件) だけを見て、
+ * **多すぎる**側を見ていなかったのが穴。追加のネットワークコストは 0。
  *
  * (f)(g)(h) は 2026-07-29 の障害 (values-per-area.json が 100 倍過大な値のまま 2 ヶ月配信) の
  * 再発検知。件数チェックだけでは「値が桁違い」も「writer 不在で凍結」も捕まえられなかった。
@@ -47,7 +56,14 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 
-import { findExpectedEmpty } from "@stats47/data-configs";
+import {
+  EXPECTED_SHAPE_ANOMALY,
+  classifyShape,
+  findExpectedEmpty,
+  getMetricConfig,
+  summarizeShape,
+  type ShapeRow,
+} from "@stats47/data-configs";
 // HOME_FEATURED_RANKINGS は掲載価値スコアへの一元化で廃止。注目 8 件は生成物が持つ。
 import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
 
@@ -123,6 +139,40 @@ interface ValuesJson {
 interface StatsValuesJson {
   meta?: { rowCount?: number };
   rows?: unknown[];
+}
+
+/**
+ * (j) 形状の検査結果。
+ *
+ * 2026-07-30 実測: active 2,179 件のうち **209 件**が壊れた形状のまま配信されていた
+ * (重複行 176 / 単位と値の矛盾 27 / 県の欠落 24)。同日に本監査を実行した結果は
+ * 違反 0 件 = ✓ OK で、(a)-(i) のどれも検知できなかった。
+ * (i) は payload 全体を取得しているのに `meta.rowCount` しか読んでいなかったため、
+ * 「1,128 行 ≠ 47 県 × 1 年」という自明な矛盾が素通りしていた。
+ *
+ * 判定は取り込み (page-data-batch) と**同じ純関数** `@stats47/data-configs` の
+ * `classifyShape` を使う。追加のネットワークコストは 0 (rows は既に取得済み)。
+ */
+interface ShapeChecks {
+  checked: number;
+  /** 検査種別ごとの違反件数 */
+  byCheck: Record<string, number>;
+  /** allowlist で降格されない違反 */
+  violations: Array<{ key: string; check: string; message: string }>;
+  /** allowlist で降格された違反の件数 (是正の残数) */
+  allowedCount: number;
+  /** 配信側 app/ranking/<key>/values.json の partition 内で areaCode が重複しているキー */
+  deliveryDuplicates: string[];
+  /**
+   * 配信側の重複のうち、正典 app/stats 側が allowlist 済みのもの。**違反にしない**。
+   *
+   * 配信側は正典から決定的に変換されるだけなので、正典が壊れていれば配信側も壊れる。
+   * これを独立した違反に数えると根本データが直るまで監査が永久に赤くなり、
+   * 「赤いのが常態」になって新しい問題が埋もれる (normalized.expectedSkipped と同じ理由)。
+   * 独立した違反として扱うのは「正典は健全なのに配信側だけ壊れている」= 生成器のバグだけ。
+   */
+  deliveryDuplicatesExpected: string[];
+  ok: boolean;
 }
 
 interface NationalTrendJson {
@@ -222,6 +272,7 @@ interface AuditReport {
   };
   normalized: NormalizedChecks;
   stats: StatsChecks;
+  shape: ShapeChecks;
   ok: boolean;
 }
 
@@ -372,6 +423,17 @@ async function main() {
   const statsRowCounts: Record<string, number> = {};
   const auditNow = new Date();
 
+  // (j) 形状の集計器
+  const shape: ShapeChecks = {
+    checked: 0,
+    byCheck: {},
+    violations: [],
+    allowedCount: 0,
+    deliveryDuplicates: [],
+    deliveryDuplicatesExpected: [],
+    ok: true,
+  };
+
   // (f)(g)(h) 正規化系の集計器
   const normalized: NormalizedChecks = {
     expectedKeys: 0,
@@ -416,6 +478,49 @@ async function main() {
         if (prev !== undefined && prev > 0 && rowCount < prev * DRIFT_RATIO_THRESHOLD) {
           stats.drift.push({ key, count: rowCount, previous: prev });
         }
+
+        // --- (j) 形状 -----------------------------------------------------
+        // payload は上で既に取得済みなので追加コスト 0。取り込みと同じ純関数で判定する。
+        const config = getMetricConfig(key);
+        if (config) {
+          shape.checked++;
+          const violations = classifyShape({
+            key,
+            entity: "prefecture",
+            summary: summarizeShape((statsRes.body?.rows ?? []) as ShapeRow[]),
+            unit: config.unit,
+            now: auditNow,
+            allowlist: EXPECTED_SHAPE_ANOMALY,
+          });
+          for (const v of violations) {
+            shape.byCheck[v.check] = (shape.byCheck[v.check] ?? 0) + 1;
+            if (v.isError) shape.violations.push({ key, check: v.check, message: v.message });
+            else shape.allowedCount++;
+          }
+        }
+      }
+    }
+
+    // --- (j-2) 配信側の重複 ------------------------------------------------
+    // 取り込みが直っても generate-ranking-values が壊す経路を独立に捕まえる。
+    // これも既に取得済みの payload を見るだけ。
+    if (valuesRes.status === 200 && valuesRes.body?.partitions) {
+      const duplicated = valuesRes.body.partitions.some((p) => {
+        const seen = new Set<string>();
+        for (const v of p.values ?? []) {
+          const code = v.areaCode ?? "";
+          if (seen.has(code)) return true;
+          seen.add(code);
+        }
+        return false;
+      });
+      if (duplicated) {
+        // 正典側が既知の壊れなら配信側の重複はその帰結。生成器のバグと区別する。
+        const sourceKnownBroken = EXPECTED_SHAPE_ANOMALY.some(
+          (e) => e.key === key && e.check === "duplicate-area-year",
+        );
+        if (sourceKnownBroken) shape.deliveryDuplicatesExpected.push(key);
+        else shape.deliveryDuplicates.push(key);
       }
     }
 
@@ -496,6 +601,10 @@ async function main() {
   stats.ok =
     stats.missing.length === 0 && stats.empty.length === 0 && stats.drift.length === 0;
 
+  // allowlist で降格されたものは違反にしない (是正待ちの既知分で監査を永久に赤くしない)。
+  // 「赤いのが常態」になると新しい問題が埋もれる — 本ゲート群が防ごうとしている失敗そのもの。
+  shape.ok = shape.violations.length === 0 && shape.deliveryDuplicates.length === 0;
+
   normalized.ok =
     normalized.missing.length === 0 &&
     normalized.stale.length === 0 &&
@@ -551,13 +660,15 @@ async function main() {
     },
     normalized,
     stats: { ...stats, rowCounts: statsRowCounts },
+    shape,
     ok:
       itemMissing.length === 0 &&
       valuesMissing.length === 0 &&
       yearMismatch.length === 0 &&
       countChecksOk &&
       normalized.ok &&
-      stats.ok,
+      stats.ok &&
+      shape.ok,
   };
 
   // ---- レポート出力 ----
@@ -634,6 +745,37 @@ async function main() {
     console.log(
       `  → 是正: config の statsDataId / cdCat01 を e-Stat メタで再確認し再取り込み。` +
         `意図した 0 件なら packages/data-configs/src/expected-empty.ts に理由・追跡先・期限を添えて登録`,
+    );
+  }
+
+  console.log(`\n## (j) 形状 (重複行 / 単位と値の矛盾 / 県のカバレッジ)`);
+  console.log(`  検査: ${shape.checked} 件`);
+  const checkLabels: Record<string, string> = {
+    "duplicate-area-year": "同一 (県, 年) の重複行",
+    "percent-out-of-range": "unit が % なのに値が範囲外",
+    "area-coverage": "47 県に満たない年がある",
+    "raw-truncated": "e-Stat 応答の打ち切り",
+  };
+  for (const [check, n] of Object.entries(shape.byCheck).sort((a, b) => b[1] - a[1])) {
+    console.log(`  ${checkLabels[check] ?? check}: ${n} 件`);
+  }
+  console.log(`  allowlist 許可済 (是正の残数): ${shape.allowedCount} 件`);
+  console.log(`  違反 (未許可): ${shape.violations.length} 件`);
+  for (const v of shape.violations.slice(0, 10)) console.log(`      ${v.message}`);
+  if (shape.violations.length > 10) {
+    console.log(`      … 他 ${shape.violations.length - 10} 件`);
+  }
+  console.log(
+    `  配信側 partition の areaCode 重複 (生成器のバグ): ${shape.deliveryDuplicates.length} 件`,
+  );
+  for (const k of shape.deliveryDuplicates.slice(0, 10)) console.log(`      ${k}`);
+  console.log(
+    `  同 (正典が既知の壊れ = その帰結。違反にしない): ${shape.deliveryDuplicatesExpected.length} 件`,
+  );
+  if (shape.violations.length > 0) {
+    console.log(
+      `  → 是正: 未指定の分類軸を diagnose-unpinned-axes.ts で列挙して config に pin する。` +
+        `既知の是正待ちなら packages/data-configs/src/expected-shape-anomaly.ts に登録`,
     );
   }
 

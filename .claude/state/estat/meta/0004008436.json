@@ -1,0 +1,930 @@
+{
+  "statsDataId": "0004008436",
+  "title": "男女、産業、テレワーク実施の有無・頻度、テレワーク実施の場所、経営組織・従業上の地位・雇用形態別人口（有業者）－全国、都道府県、政令指定都市、県庁所在都市、人口30万以上の市",
+  "dimensions": [
+    {
+      "id": "tab",
+      "name": "表章項目",
+      "valueCount": 1,
+      "sampleValues": [
+        {
+          "code": "001-2022",
+          "name": "人口",
+          "unit": "人"
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat01",
+      "name": "男女",
+      "valueCount": 3,
+      "sampleValues": [
+        {
+          "code": "0",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "1",
+          "name": "男",
+          "unit": null
+        },
+        {
+          "code": "2",
+          "name": "女",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "cat02",
+      "name": "産業",
+      "valueCount": 21,
+      "sampleValues": [
+        {
+          "code": "00",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "01",
+          "name": "Ａ農業，林業",
+          "unit": null
+        },
+        {
+          "code": "02",
+          "name": "Ｂ漁業",
+          "unit": null
+        },
+        {
+          "code": "03",
+          "name": "Ｃ鉱業，採石業，砂利採取業",
+          "unit": null
+        },
+        {
+          "code": "04",
+          "name": "Ｄ建設業",
+          "unit": null
+        },
+        {
+          "code": "05",
+          "name": "Ｅ製造業",
+          "unit": null
+        },
+        {
+          "code": "06",
+          "name": "Ｆ電気・ガス・熱供給・水道業",
+          "unit": null
+        },
+        {
+          "code": "07",
+          "name": "Ｇ情報通信業",
+          "unit": null
+        },
+        {
+          "code": "08",
+          "name": "Ｈ運輸業，郵便業",
+          "unit": null
+        },
+        {
+          "code": "09",
+          "name": "Ｉ卸売業，小売業",
+          "unit": null
+        },
+        {
+          "code": "10",
+          "name": "Ｊ金融業，保険業",
+          "unit": null
+        },
+        {
+          "code": "11",
+          "name": "Ｋ不動産業，物品賃貸業",
+          "unit": null
+        },
+        {
+          "code": "12",
+          "name": "Ｌ学術研究，専門・技術サービス業",
+          "unit": null
+        },
+        {
+          "code": "13",
+          "name": "Ｍ宿泊業，飲食サービス業",
+          "unit": null
+        },
+        {
+          "code": "14",
+          "name": "Ｎ生活関連サービス業，娯楽業",
+          "unit": null
+        },
+        {
+          "code": "15",
+          "name": "Ｏ教育，学習支援業",
+          "unit": null
+        },
+        {
+          "code": "16",
+          "name": "Ｐ医療，福祉",
+          "unit": null
+        },
+        {
+          "code": "17",
+          "name": "Ｑ複合サービス事業",
+          "unit": null
+        },
+        {
+          "code": "18",
+          "name": "Ｒサービス業（他に分類されないもの）",
+          "unit": null
+        },
+        {
+          "code": "19",
+          "name": "Ｓ公務（他に分類されるものを除く）",
+          "unit": null
+        },
+        {
+          "code": "20",
+          "name": "Ｔ分類不能の産業",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "cat03",
+      "name": "テレ実施有無･頻度",
+      "valueCount": 2,
+      "sampleValues": [
+        {
+          "code": "0",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "1",
+          "name": "実施した",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "cat04",
+      "name": "テレ実施場所",
+      "valueCount": 2,
+      "sampleValues": [
+        {
+          "code": "0",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "1",
+          "name": "うち自宅",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "cat05",
+      "name": "経営組織･従地位･雇形",
+      "valueCount": 8,
+      "sampleValues": [
+        {
+          "code": "0",
+          "name": "総数",
+          "unit": null
+        },
+        {
+          "code": "1",
+          "name": "個人",
+          "unit": null
+        },
+        {
+          "code": "11",
+          "name": "うち雇用者",
+          "unit": null
+        },
+        {
+          "code": "2",
+          "name": "会社",
+          "unit": null
+        },
+        {
+          "code": "21",
+          "name": "合名会社・合資会社・合同会社",
+          "unit": null
+        },
+        {
+          "code": "22",
+          "name": "株式会社・相互会社（有限会社を含む）",
+          "unit": null
+        },
+        {
+          "code": "3",
+          "name": "官公庁など",
+          "unit": null
+        },
+        {
+          "code": "4",
+          "name": "その他の法人・団体",
+          "unit": null
+        }
+      ],
+      "hasTotal": true
+    },
+    {
+      "id": "area",
+      "name": "地域区分",
+      "valueCount": 134,
+      "sampleValues": [
+        {
+          "code": "00000",
+          "name": "全国",
+          "unit": null
+        },
+        {
+          "code": "01000",
+          "name": "北海道",
+          "unit": null
+        },
+        {
+          "code": "01100",
+          "name": "札幌市",
+          "unit": null
+        },
+        {
+          "code": "01204",
+          "name": "旭川市",
+          "unit": null
+        },
+        {
+          "code": "02000",
+          "name": "青森県",
+          "unit": null
+        },
+        {
+          "code": "02201",
+          "name": "青森市",
+          "unit": null
+        },
+        {
+          "code": "03000",
+          "name": "岩手県",
+          "unit": null
+        },
+        {
+          "code": "03201",
+          "name": "盛岡市",
+          "unit": null
+        },
+        {
+          "code": "04000",
+          "name": "宮城県",
+          "unit": null
+        },
+        {
+          "code": "04100",
+          "name": "仙台市",
+          "unit": null
+        },
+        {
+          "code": "05000",
+          "name": "秋田県",
+          "unit": null
+        },
+        {
+          "code": "05201",
+          "name": "秋田市",
+          "unit": null
+        },
+        {
+          "code": "06000",
+          "name": "山形県",
+          "unit": null
+        },
+        {
+          "code": "06201",
+          "name": "山形市",
+          "unit": null
+        },
+        {
+          "code": "07000",
+          "name": "福島県",
+          "unit": null
+        },
+        {
+          "code": "07201",
+          "name": "福島市",
+          "unit": null
+        },
+        {
+          "code": "07203",
+          "name": "郡山市",
+          "unit": null
+        },
+        {
+          "code": "07204",
+          "name": "いわき市",
+          "unit": null
+        },
+        {
+          "code": "08000",
+          "name": "茨城県",
+          "unit": null
+        },
+        {
+          "code": "08201",
+          "name": "水戸市",
+          "unit": null
+        },
+        {
+          "code": "09000",
+          "name": "栃木県",
+          "unit": null
+        },
+        {
+          "code": "09201",
+          "name": "宇都宮市",
+          "unit": null
+        },
+        {
+          "code": "10000",
+          "name": "群馬県",
+          "unit": null
+        },
+        {
+          "code": "10201",
+          "name": "前橋市",
+          "unit": null
+        },
+        {
+          "code": "10202",
+          "name": "高崎市",
+          "unit": null
+        },
+        {
+          "code": "11000",
+          "name": "埼玉県",
+          "unit": null
+        },
+        {
+          "code": "11100",
+          "name": "さいたま市",
+          "unit": null
+        },
+        {
+          "code": "11201",
+          "name": "川越市",
+          "unit": null
+        },
+        {
+          "code": "11203",
+          "name": "川口市",
+          "unit": null
+        },
+        {
+          "code": "11208",
+          "name": "所沢市",
+          "unit": null
+        },
+        {
+          "code": "11222",
+          "name": "越谷市",
+          "unit": null
+        },
+        {
+          "code": "12000",
+          "name": "千葉県",
+          "unit": null
+        },
+        {
+          "code": "12100",
+          "name": "千葉市",
+          "unit": null
+        },
+        {
+          "code": "12203",
+          "name": "市川市",
+          "unit": null
+        },
+        {
+          "code": "12204",
+          "name": "船橋市",
+          "unit": null
+        },
+        {
+          "code": "12207",
+          "name": "松戸市",
+          "unit": null
+        },
+        {
+          "code": "12217",
+          "name": "柏市",
+          "unit": null
+        },
+        {
+          "code": "13000",
+          "name": "東京都",
+          "unit": null
+        },
+        {
+          "code": "13100",
+          "name": "特別区部",
+          "unit": null
+        },
+        {
+          "code": "13201",
+          "name": "八王子市",
+          "unit": null
+        },
+        {
+          "code": "13209",
+          "name": "町田市",
+          "unit": null
+        },
+        {
+          "code": "14000",
+          "name": "神奈川県",
+          "unit": null
+        },
+        {
+          "code": "14100",
+          "name": "横浜市",
+          "unit": null
+        },
+        {
+          "code": "14130",
+          "name": "川崎市",
+          "unit": null
+        },
+        {
+          "code": "14150",
+          "name": "相模原市",
+          "unit": null
+        },
+        {
+          "code": "14201",
+          "name": "横須賀市",
+          "unit": null
+        },
+        {
+          "code": "14205",
+          "name": "藤沢市",
+          "unit": null
+        },
+        {
+          "code": "15000",
+          "name": "新潟県",
+          "unit": null
+        },
+        {
+          "code": "15100",
+          "name": "新潟市",
+          "unit": null
+        },
+        {
+          "code": "16000",
+          "name": "富山県",
+          "unit": null
+        },
+        {
+          "code": "16201",
+          "name": "富山市",
+          "unit": null
+        },
+        {
+          "code": "17000",
+          "name": "石川県",
+          "unit": null
+        },
+        {
+          "code": "17201",
+          "name": "金沢市",
+          "unit": null
+        },
+        {
+          "code": "18000",
+          "name": "福井県",
+          "unit": null
+        },
+        {
+          "code": "18201",
+          "name": "福井市",
+          "unit": null
+        },
+        {
+          "code": "19000",
+          "name": "山梨県",
+          "unit": null
+        },
+        {
+          "code": "19201",
+          "name": "甲府市",
+          "unit": null
+        },
+        {
+          "code": "20000",
+          "name": "長野県",
+          "unit": null
+        },
+        {
+          "code": "20201",
+          "name": "長野市",
+          "unit": null
+        },
+        {
+          "code": "21000",
+          "name": "岐阜県",
+          "unit": null
+        },
+        {
+          "code": "21201",
+          "name": "岐阜市",
+          "unit": null
+        },
+        {
+          "code": "22000",
+          "name": "静岡県",
+          "unit": null
+        },
+        {
+          "code": "22100",
+          "name": "静岡市",
+          "unit": null
+        },
+        {
+          "code": "22130",
+          "name": "浜松市",
+          "unit": null
+        },
+        {
+          "code": "23000",
+          "name": "愛知県",
+          "unit": null
+        },
+        {
+          "code": "23100",
+          "name": "名古屋市",
+          "unit": null
+        },
+        {
+          "code": "23201",
+          "name": "豊橋市",
+          "unit": null
+        },
+        {
+          "code": "23202",
+          "name": "岡崎市",
+          "unit": null
+        },
+        {
+          "code": "23203",
+          "name": "一宮市",
+          "unit": null
+        },
+        {
+          "code": "23206",
+          "name": "春日井市",
+          "unit": null
+        },
+        {
+          "code": "23211",
+          "name": "豊田市",
+          "unit": null
+        },
+        {
+          "code": "24000",
+          "name": "三重県",
+          "unit": null
+        },
+        {
+          "code": "24201",
+          "name": "津市",
+          "unit": null
+        },
+        {
+          "code": "24202",
+          "name": "四日市市",
+          "unit": null
+        },
+        {
+          "code": "25000",
+          "name": "滋賀県",
+          "unit": null
+        },
+        {
+          "code": "25201",
+          "name": "大津市",
+          "unit": null
+        },
+        {
+          "code": "26000",
+          "name": "京都府",
+          "unit": null
+        },
+        {
+          "code": "26100",
+          "name": "京都市",
+          "unit": null
+        },
+        {
+          "code": "27000",
+          "name": "大阪府",
+          "unit": null
+        },
+        {
+          "code": "27100",
+          "name": "大阪市",
+          "unit": null
+        },
+        {
+          "code": "27140",
+          "name": "堺市",
+          "unit": null
+        },
+        {
+          "code": "27203",
+          "name": "豊中市",
+          "unit": null
+        },
+        {
+          "code": "27205",
+          "name": "吹田市",
+          "unit": null
+        },
+        {
+          "code": "27207",
+          "name": "高槻市",
+          "unit": null
+        },
+        {
+          "code": "27210",
+          "name": "枚方市",
+          "unit": null
+        },
+        {
+          "code": "27227",
+          "name": "東大阪市",
+          "unit": null
+        },
+        {
+          "code": "28000",
+          "name": "兵庫県",
+          "unit": null
+        },
+        {
+          "code": "28100",
+          "name": "神戸市",
+          "unit": null
+        },
+        {
+          "code": "28201",
+          "name": "姫路市",
+          "unit": null
+        },
+        {
+          "code": "28202",
+          "name": "尼崎市",
+          "unit": null
+        },
+        {
+          "code": "28203",
+          "name": "明石市",
+          "unit": null
+        },
+        {
+          "code": "28204",
+          "name": "西宮市",
+          "unit": null
+        },
+        {
+          "code": "29000",
+          "name": "奈良県",
+          "unit": null
+        },
+        {
+          "code": "29201",
+          "name": "奈良市",
+          "unit": null
+        },
+        {
+          "code": "30000",
+          "name": "和歌山県",
+          "unit": null
+        },
+        {
+          "code": "30201",
+          "name": "和歌山市",
+          "unit": null
+        },
+        {
+          "code": "31000",
+          "name": "鳥取県",
+          "unit": null
+        },
+        {
+          "code": "31201",
+          "name": "鳥取市",
+          "unit": null
+        },
+        {
+          "code": "32000",
+          "name": "島根県",
+          "unit": null
+        },
+        {
+          "code": "32201",
+          "name": "松江市",
+          "unit": null
+        },
+        {
+          "code": "33000",
+          "name": "岡山県",
+          "unit": null
+        },
+        {
+          "code": "33100",
+          "name": "岡山市",
+          "unit": null
+        },
+        {
+          "code": "33202",
+          "name": "倉敷市",
+          "unit": null
+        },
+        {
+          "code": "34000",
+          "name": "広島県",
+          "unit": null
+        },
+        {
+          "code": "34100",
+          "name": "広島市",
+          "unit": null
+        },
+        {
+          "code": "34207",
+          "name": "福山市",
+          "unit": null
+        },
+        {
+          "code": "35000",
+          "name": "山口県",
+          "unit": null
+        },
+        {
+          "code": "35203",
+          "name": "山口市",
+          "unit": null
+        },
+        {
+          "code": "36000",
+          "name": "徳島県",
+          "unit": null
+        },
+        {
+          "code": "36201",
+          "name": "徳島市",
+          "unit": null
+        },
+        {
+          "code": "37000",
+          "name": "香川県",
+          "unit": null
+        },
+        {
+          "code": "37201",
+          "name": "高松市",
+          "unit": null
+        },
+        {
+          "code": "38000",
+          "name": "愛媛県",
+          "unit": null
+        },
+        {
+          "code": "38201",
+          "name": "松山市",
+          "unit": null
+        },
+        {
+          "code": "39000",
+          "name": "高知県",
+          "unit": null
+        },
+        {
+          "code": "39201",
+          "name": "高知市",
+          "unit": null
+        },
+        {
+          "code": "40000",
+          "name": "福岡県",
+          "unit": null
+        },
+        {
+          "code": "40100",
+          "name": "北九州市",
+          "unit": null
+        },
+        {
+          "code": "40130",
+          "name": "福岡市",
+          "unit": null
+        },
+        {
+          "code": "40203",
+          "name": "久留米市",
+          "unit": null
+        },
+        {
+          "code": "41000",
+          "name": "佐賀県",
+          "unit": null
+        },
+        {
+          "code": "41201",
+          "name": "佐賀市",
+          "unit": null
+        },
+        {
+          "code": "42000",
+          "name": "長崎県",
+          "unit": null
+        },
+        {
+          "code": "42201",
+          "name": "長崎市",
+          "unit": null
+        },
+        {
+          "code": "43000",
+          "name": "熊本県",
+          "unit": null
+        },
+        {
+          "code": "43100",
+          "name": "熊本市",
+          "unit": null
+        },
+        {
+          "code": "44000",
+          "name": "大分県",
+          "unit": null
+        },
+        {
+          "code": "44201",
+          "name": "大分市",
+          "unit": null
+        },
+        {
+          "code": "45000",
+          "name": "宮崎県",
+          "unit": null
+        },
+        {
+          "code": "45201",
+          "name": "宮崎市",
+          "unit": null
+        },
+        {
+          "code": "46000",
+          "name": "鹿児島県",
+          "unit": null
+        },
+        {
+          "code": "46201",
+          "name": "鹿児島市",
+          "unit": null
+        },
+        {
+          "code": "47000",
+          "name": "沖縄県",
+          "unit": null
+        },
+        {
+          "code": "47201",
+          "name": "那覇市",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "time",
+      "name": "時間軸",
+      "valueCount": 1,
+      "sampleValues": [
+        {
+          "code": "2022000000",
+          "name": "2022年",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    }
+  ]
+}

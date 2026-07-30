@@ -1,0 +1,441 @@
+{
+  "statsDataId": "0004032502",
+  "title": "第４部 コンビニエンスストア販売 第４表 都道府県別販売額等及び前年（度・同期・同月）比増減率",
+  "dimensions": [
+    {
+      "id": "cat01",
+      "name": "単位_db",
+      "valueCount": 2,
+      "sampleValues": [
+        {
+          "code": "0101300",
+          "name": "百万円",
+          "unit": null
+        },
+        {
+          "code": "0105200",
+          "name": "店",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat02",
+      "name": "表頭_集計項目_db",
+      "valueCount": 2,
+      "sampleValues": [
+        {
+          "code": "01040100",
+          "name": "販売額",
+          "unit": null
+        },
+        {
+          "code": "01040200",
+          "name": "店舗数",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "cat03",
+      "name": "表側_集計項目_db",
+      "valueCount": 2,
+      "sampleValues": [
+        {
+          "code": "01030100",
+          "name": "販売額等",
+          "unit": null
+        },
+        {
+          "code": "01030200",
+          "name": "増減率(%)",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "area",
+      "name": "都道府県",
+      "valueCount": 47,
+      "sampleValues": [
+        {
+          "code": "01000",
+          "name": "北海道",
+          "unit": null
+        },
+        {
+          "code": "02000",
+          "name": "青森県",
+          "unit": null
+        },
+        {
+          "code": "03000",
+          "name": "岩手県",
+          "unit": null
+        },
+        {
+          "code": "04000",
+          "name": "宮城県",
+          "unit": null
+        },
+        {
+          "code": "05000",
+          "name": "秋田県",
+          "unit": null
+        },
+        {
+          "code": "06000",
+          "name": "山形県",
+          "unit": null
+        },
+        {
+          "code": "07000",
+          "name": "福島県",
+          "unit": null
+        },
+        {
+          "code": "08000",
+          "name": "茨城県",
+          "unit": null
+        },
+        {
+          "code": "09000",
+          "name": "栃木県",
+          "unit": null
+        },
+        {
+          "code": "10000",
+          "name": "群馬県",
+          "unit": null
+        },
+        {
+          "code": "11000",
+          "name": "埼玉県",
+          "unit": null
+        },
+        {
+          "code": "12000",
+          "name": "千葉県",
+          "unit": null
+        },
+        {
+          "code": "13000",
+          "name": "東京都",
+          "unit": null
+        },
+        {
+          "code": "14000",
+          "name": "神奈川県",
+          "unit": null
+        },
+        {
+          "code": "15000",
+          "name": "新潟県",
+          "unit": null
+        },
+        {
+          "code": "16000",
+          "name": "富山県",
+          "unit": null
+        },
+        {
+          "code": "17000",
+          "name": "石川県",
+          "unit": null
+        },
+        {
+          "code": "18000",
+          "name": "福井県",
+          "unit": null
+        },
+        {
+          "code": "19000",
+          "name": "山梨県",
+          "unit": null
+        },
+        {
+          "code": "20000",
+          "name": "長野県",
+          "unit": null
+        },
+        {
+          "code": "21000",
+          "name": "岐阜県",
+          "unit": null
+        },
+        {
+          "code": "22000",
+          "name": "静岡県",
+          "unit": null
+        },
+        {
+          "code": "23000",
+          "name": "愛知県",
+          "unit": null
+        },
+        {
+          "code": "24000",
+          "name": "三重県",
+          "unit": null
+        },
+        {
+          "code": "25000",
+          "name": "滋賀県",
+          "unit": null
+        },
+        {
+          "code": "26000",
+          "name": "京都府",
+          "unit": null
+        },
+        {
+          "code": "27000",
+          "name": "大阪府",
+          "unit": null
+        },
+        {
+          "code": "28000",
+          "name": "兵庫県",
+          "unit": null
+        },
+        {
+          "code": "29000",
+          "name": "奈良県",
+          "unit": null
+        },
+        {
+          "code": "30000",
+          "name": "和歌山県",
+          "unit": null
+        },
+        {
+          "code": "31000",
+          "name": "鳥取県",
+          "unit": null
+        },
+        {
+          "code": "32000",
+          "name": "島根県",
+          "unit": null
+        },
+        {
+          "code": "33000",
+          "name": "岡山県",
+          "unit": null
+        },
+        {
+          "code": "34000",
+          "name": "広島県",
+          "unit": null
+        },
+        {
+          "code": "35000",
+          "name": "山口県",
+          "unit": null
+        },
+        {
+          "code": "36000",
+          "name": "徳島県",
+          "unit": null
+        },
+        {
+          "code": "37000",
+          "name": "香川県",
+          "unit": null
+        },
+        {
+          "code": "38000",
+          "name": "愛媛県",
+          "unit": null
+        },
+        {
+          "code": "39000",
+          "name": "高知県",
+          "unit": null
+        },
+        {
+          "code": "40000",
+          "name": "福岡県",
+          "unit": null
+        },
+        {
+          "code": "41000",
+          "name": "佐賀県",
+          "unit": null
+        },
+        {
+          "code": "42000",
+          "name": "長崎県",
+          "unit": null
+        },
+        {
+          "code": "43000",
+          "name": "熊本県",
+          "unit": null
+        },
+        {
+          "code": "44000",
+          "name": "大分県",
+          "unit": null
+        },
+        {
+          "code": "45000",
+          "name": "宮崎県",
+          "unit": null
+        },
+        {
+          "code": "46000",
+          "name": "鹿児島県",
+          "unit": null
+        },
+        {
+          "code": "47000",
+          "name": "沖縄県",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    },
+    {
+      "id": "time",
+      "name": "時間軸_db",
+      "valueCount": 26,
+      "sampleValues": [
+        {
+          "code": "2022000000",
+          "name": "2022年",
+          "unit": null
+        },
+        {
+          "code": "2023000000",
+          "name": "2023年",
+          "unit": null
+        },
+        {
+          "code": "2024000000",
+          "name": "2024年",
+          "unit": null
+        },
+        {
+          "code": "2021100000",
+          "name": "2021年度",
+          "unit": null
+        },
+        {
+          "code": "2022100000",
+          "name": "2022年度",
+          "unit": null
+        },
+        {
+          "code": "2023100000",
+          "name": "2023年度",
+          "unit": null
+        },
+        {
+          "code": "2023001012",
+          "name": "2023年10～12月",
+          "unit": null
+        },
+        {
+          "code": "2024000103",
+          "name": "2024年1～3月",
+          "unit": null
+        },
+        {
+          "code": "2024000406",
+          "name": "2024年4～6月",
+          "unit": null
+        },
+        {
+          "code": "2024000709",
+          "name": "2024年7～9月",
+          "unit": null
+        },
+        {
+          "code": "2024001012",
+          "name": "2024年10～12月",
+          "unit": null
+        },
+        {
+          "code": "2023001111",
+          "name": "2023年11月",
+          "unit": null
+        },
+        {
+          "code": "2023001212",
+          "name": "2023年12月",
+          "unit": null
+        },
+        {
+          "code": "2024000101",
+          "name": "2024年1月",
+          "unit": null
+        },
+        {
+          "code": "2024000202",
+          "name": "2024年2月",
+          "unit": null
+        },
+        {
+          "code": "2024000303",
+          "name": "2024年3月",
+          "unit": null
+        },
+        {
+          "code": "2024000404",
+          "name": "2024年4月",
+          "unit": null
+        },
+        {
+          "code": "2024000505",
+          "name": "2024年5月",
+          "unit": null
+        },
+        {
+          "code": "2024000606",
+          "name": "2024年6月",
+          "unit": null
+        },
+        {
+          "code": "2024000707",
+          "name": "2024年7月",
+          "unit": null
+        },
+        {
+          "code": "2024000808",
+          "name": "2024年8月",
+          "unit": null
+        },
+        {
+          "code": "2024000909",
+          "name": "2024年9月",
+          "unit": null
+        },
+        {
+          "code": "2024001010",
+          "name": "2024年10月",
+          "unit": null
+        },
+        {
+          "code": "2024001111",
+          "name": "2024年11月",
+          "unit": null
+        },
+        {
+          "code": "2024001212",
+          "name": "2024年12月",
+          "unit": null
+        },
+        {
+          "code": "2025000101",
+          "name": "2025年1月",
+          "unit": null
+        }
+      ],
+      "hasTotal": false
+    }
+  ]
+}
