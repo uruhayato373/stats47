@@ -17,8 +17,11 @@
  *        起票 PR は draft 必須 (LLM 改修案の正確性保証なし、人手レビュー必須)。
  */
 
-import { execSync, spawnSync } from "node:child_process";
-import { readFileSync, writeFileSync } from "node:fs";
+// ★execFileSync (argv 形式) を使う。branchName / commitMsg は --url 引数由来なので、
+//   テンプレート文字列 + execSync だとシェルとして評価される (js/command-line-injection)。
+//   この script は git push / gh pr create まで実行するため実害が大きい。
+import { execFileSync, spawnSync } from "node:child_process";
+import { readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -191,7 +194,7 @@ const slug = (entry.pathname || "/")
 const branchName = `feature/cwv-auto-${today}-${slug}`;
 
 log(`[exec] git checkout -b ${branchName}`);
-execSync(`git checkout -b ${branchName}`, { cwd: PROJECT_ROOT, stdio: "inherit" });
+execFileSync("git", ["checkout", "-b", branchName], { cwd: PROJECT_ROOT, stdio: "inherit" });
 
 // diff 適用試行 (失敗時はファイル全体上書きは行わず error 報告)
 const diffFile = path.join(PROJECT_ROOT, ".tmp-cwv.diff");
@@ -204,14 +207,14 @@ if (applyCheck.status !== 0) {
   warn("[warn] git apply --check 失敗:", applyCheck.stderr);
   warn("[warn] diff を PR description に貼り付けるのみ (ファイル変更なし)");
 } else {
-  execSync(`git apply ${diffFile}`, { cwd: PROJECT_ROOT, stdio: "inherit" });
-  execSync(`git add ${picked.file}`, { cwd: PROJECT_ROOT, stdio: "inherit" });
+  execFileSync("git", ["apply", diffFile], { cwd: PROJECT_ROOT, stdio: "inherit" });
+  execFileSync("git", ["add", picked.file], { cwd: PROJECT_ROOT, stdio: "inherit" });
 }
-execSync(`rm -f ${diffFile}`, { cwd: PROJECT_ROOT });
+rmSync(diffFile, { force: true });
 
 const commitMsg = `feat(cwv): [auto] LCP 改修案 for ${entry.pathname}\n\n対象: ${picked.file}\nURL: ${URL_ARG}\nhint: ${picked.hint}\n\n[skip ci] auto-generated`;
 try {
-  execSync(`git commit -m ${JSON.stringify(commitMsg)} --allow-empty`, {
+  execFileSync("git", ["commit", "-m", commitMsg, "--allow-empty"], {
     cwd: PROJECT_ROOT,
     stdio: "inherit",
   });
@@ -220,7 +223,7 @@ try {
 }
 
 log(`[exec] git push -u origin ${branchName}`);
-execSync(`git push -u origin ${branchName}`, { cwd: PROJECT_ROOT, stdio: "inherit" });
+execFileSync("git", ["push", "-u", "origin", branchName], { cwd: PROJECT_ROOT, stdio: "inherit" });
 
 const prBody = `## Auto-generated CWV improvement PR
 
@@ -249,11 +252,22 @@ ${diff.slice(0, 3000)}${diff.length > 3000 ? "\n... (truncated)" : ""}
 const prBodyFile = path.join(PROJECT_ROOT, ".tmp-pr-body.md");
 writeFileSync(prBodyFile, prBody);
 log(`[exec] gh pr create --draft --label cwv-auto --base develop`);
-execSync(
-  `gh pr create --draft --label cwv-auto --base develop --title ${JSON.stringify(
-    `feat(cwv): [auto] LCP 改修案 for ${entry.pathname}`
-  )} --body-file ${prBodyFile}`,
+execFileSync(
+  "gh",
+  [
+    "pr",
+    "create",
+    "--draft",
+    "--label",
+    "cwv-auto",
+    "--base",
+    "develop",
+    "--title",
+    `feat(cwv): [auto] LCP 改修案 for ${entry.pathname}`,
+    "--body-file",
+    prBodyFile,
+  ],
   { cwd: PROJECT_ROOT, stdio: "inherit" }
 );
-execSync(`rm -f ${prBodyFile}`, { cwd: PROJECT_ROOT });
+rmSync(prBodyFile, { force: true });
 log("[done] PR 起票完了");

@@ -16,7 +16,7 @@
 
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { PROJECT_ROOT, toIsoWeek } from "./lib/auth.mjs";
 
 function parseArgs() {
@@ -117,11 +117,16 @@ function monOfWeek(week) {
   return target;
 }
 
-function ghIssueList(args) {
+// ★引数は配列で渡す (execFileSync)。テンプレート文字列 + execSync だと引数がシェルとして
+//   評価されるため、日付や label 名に不正な文字が混ざると任意コマンドが動く (CodeQL の
+//   js/command-line-injection)。argv 形式ならシェルを経由しない。
+function ghIssueList(argv) {
   try {
-    const out = execSync(`gh issue list ${args} --json number,title,labels,createdAt,url --limit 50`, {
-      encoding: "utf-8",
-    });
+    const out = execFileSync(
+      "gh",
+      ["issue", "list", ...argv, "--json", "number,title,labels,createdAt,url", "--limit", "50"],
+      { encoding: "utf-8" }
+    );
     return JSON.parse(out);
   } catch (e) {
     console.error(`[gh issue list failed] ${e.message}`);
@@ -258,9 +263,14 @@ function alertsSection(week) {
   nextMon.setUTCDate(nextMon.getUTCDate() + 7);
   const nextMonStr = nextMon.toISOString().slice(0, 10);
 
-  const alerts = ghIssueList(
-    `--label auto-generated --state all --search "created:${weekMonStr}..${nextMonStr}"`
-  );
+  const alerts = ghIssueList([
+    "--label",
+    "auto-generated",
+    "--state",
+    "all",
+    "--search",
+    `created:${weekMonStr}..${nextMonStr}`,
+  ]);
   if (alerts.length === 0) return "今週 auto-generated な閾値違反 Issue はありません。\n";
   const lines = [];
   for (const a of alerts) {
@@ -276,10 +286,11 @@ function pendingSection() {
   const scanScript = join(PROJECT_ROOT, ".claude/scripts/lib/scan-pending-improvements.mjs");
   let entries;
   try {
-    const out = execSync(`node "${scanScript}" --format markdown --status pending,in-progress,effect/pending`, {
-      cwd: PROJECT_ROOT,
-      encoding: "utf-8",
-    });
+    const out = execFileSync(
+      "node",
+      [scanScript, "--format", "markdown", "--status", "pending,in-progress,effect/pending"],
+      { cwd: PROJECT_ROOT, encoding: "utf-8" }
+    );
     return out || "なし（pending 施策なし）\n";
   } catch {
     return "なし（scan-pending-improvements 実行失敗）\n";
