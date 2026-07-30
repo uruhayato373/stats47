@@ -58,54 +58,12 @@ jobs:
           #   execSync の command injection)。job summary に出せば誰でも読める。
           output: sarif-results
 
+      # ★ロジックはスクリプトに置く。workflow に node -e でインライン展開すると
+      #   shellcheck が SC2016 (単一引用符内の ${} は展開されない) を出して
+      #   Static Gates が落ちる。中身の検証もスクリプトなら単体で回せる。
       - name: 📋 Dump CodeQL findings (rule / file / line)
         if: always()
-        run: |
-          if [ ! -d sarif-results ]; then
-            echo "sarif-results が無い (analyze が SARIF を出す前に失敗した)" >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
-          node --input-type=module -e '
-            import { readdirSync, readFileSync } from "node:fs";
-            const files = readdirSync("sarif-results").filter((f) => f.endsWith(".sarif"));
-            const rows = [];
-            for (const f of files) {
-              const sarif = JSON.parse(readFileSync(`sarif-results/${f}`, "utf-8"));
-              for (const run of sarif.runs ?? []) {
-                // rule メタ (severity) は driver.rules 側にあるので id で引く
-                const meta = new Map(
-                  (run.tool?.driver?.rules ?? []).map((r) => [r.id, r])
-                );
-                for (const res of run.results ?? []) {
-                  const rule = meta.get(res.ruleId) ?? {};
-                  const sev =
-                    rule.properties?.["security-severity"] ??
-                    rule.properties?.severity ??
-                    res.level ??
-                    "?";
-                  const loc = res.locations?.[0]?.physicalLocation;
-                  rows.push({
-                    rule: res.ruleId ?? "?",
-                    sev: String(sev),
-                    path: loc?.artifactLocation?.uri ?? "?",
-                    line: loc?.region?.startLine ?? "?",
-                    msg: (res.message?.text ?? "").replace(/\s+/g, " ").slice(0, 160),
-                  });
-                }
-              }
-            }
-            rows.sort((a, b) => Number(b.sev) - Number(a.sev) || a.path.localeCompare(b.path));
-            const out = [`### CodeQL findings: ${rows.length} 件`, ""];
-            if (rows.length === 0) {
-              out.push("検出なし");
-            } else {
-              out.push("| severity | rule | file:line | message |", "|---|---|---|---|");
-              for (const r of rows) {
-                out.push(`| ${r.sev} | \`${r.rule}\` | \`${r.path}:${r.line}\` | ${r.msg} |`);
-              }
-            }
-            console.log(out.join("\n"));
-          ' | tee -a "$GITHUB_STEP_SUMMARY"
+        run: node .github/scripts/dump-codeql-sarif.mjs sarif-results | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: ✅ Security scan completed
         run: echo "✅ Security scan completed"
