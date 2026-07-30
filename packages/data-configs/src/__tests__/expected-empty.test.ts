@@ -46,8 +46,13 @@ describe("EXPECTED_EMPTY の健全性", () => {
     }
   });
 
-  it("★config 是正済みのものは「R2 再生成待ち」と明記されていること", () => {
-    // 「まだ原因不明」と「直したが反映待ち」は対処がまったく違う
+  it("★2026-07-30 に是正した 6 件が allowlist に残っていないこと", () => {
+    // 「まだ原因不明」と「直した」は対処がまったく違う。是正済みのキーを allowlist に
+    // 残すと、その metric が再び 0 件に落ちても警告が出ない (allowlist が消音器になる)。
+    //
+    // 真因:
+    //   患者調査 5 件 … 都道府県が area 軸ではなく cat 軸にある表だった (areaAxis で解決)
+    //   救急告示病院 … 3 年ごとの調査なのに years を 2021 固定にしていた
     const fixed = [
       "inpatient-rate-per-100k",
       "outpatient-rate-per-100k",
@@ -56,11 +61,8 @@ describe("EXPECTED_EMPTY の健全性", () => {
       "inpatient-rate-by-bedtype",
       "emergency-hospital-general-clinic-count-per-100k",
     ];
-    for (const k of fixed) {
-      const e = EXPECTED_EMPTY.find((x) => x.key === k);
-      expect(e, `${k} のエントリ`).toBeDefined();
-      expect(e!.reason).toContain("R2 再生成待ち");
-    }
+    const stillListed = fixed.filter((k) => EXPECTED_EMPTY.some((e) => e.key === k));
+    expect(stillListed).toEqual([]);
   });
 });
 
