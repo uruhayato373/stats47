@@ -1,7 +1,0 @@
-{
-  "limit": 1,
-  "dryRun": false,
-  "keepDraft": true,
-  "requestedAt": "2026-07-31T05:25:00Z",
-  "note": "429 のクォータ内訳 (quotaMetric/quotaValue/retryDelay) を実測するための再投入"
-}
