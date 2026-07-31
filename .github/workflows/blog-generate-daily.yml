@@ -124,12 +124,13 @@ jobs:
       - name: 🧱 Prepare articles (接地・ゲート・SVG・prompt まで)
         run: |
           set -o pipefail
-          EXTRA=""
-          if [ "${DRY_RUN}" = "true" ]; then EXTRA="$EXTRA --dry-run"; fi
+          # 引数は配列で組む (文字列を裸で展開すると glob と単語分割が起きる)
+          EXTRA=()
+          if [ "${DRY_RUN}" = "true" ]; then EXTRA+=(--dry-run); fi
           NODE_OPTIONS='--conditions react-server' \
             npx tsx packages/ai-content/src/scripts/generate-blog-article.ts \
               --limit "${LIMIT}" \
-              $EXTRA 2>&1 | tee /tmp/gen.log
+              "${EXTRA[@]}" 2>&1 | tee /tmp/gen.log
           {
             echo "### 接地結果"
             echo '```'
@@ -221,7 +222,7 @@ jobs:
         run: |
           BEFORE=$(gh run list --workflow blog-auto-publish.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')
           gh workflow run blog-auto-publish.yml --ref develop
-          for i in $(seq 1 12); do
+          for _ in $(seq 1 12); do
             sleep 10
             AFTER=$(gh run list --workflow blog-auto-publish.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')
             if [ "$AFTER" != "$BEFORE" ]; then
