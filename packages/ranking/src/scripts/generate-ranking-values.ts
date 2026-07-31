@@ -47,11 +47,14 @@ import { readStatsValues } from "@stats47/stats-r2/readers";
 
 import { rankingValuesKeyPath } from "../types/snapshot";
 
+import { selectUnexpectedEmpties } from "./lib/empty-values-alarm";
+
 import type { RankingValue } from "../types";
 import type { RankingValuesKeySnapshot } from "../types/snapshot";
 
 const CONCURRENCY = 20;
 const AREA_TYPE = "prefecture" as const;
+
 
 interface Args {
   dryRun: boolean;
@@ -299,10 +302,14 @@ async function main(): Promise<void> {
   // 沈黙させない (2026-07-29 障害): 旧実装は一覧を console.log するだけで exit code を
   // 汚さなかったため、正典 app/stats が空になっても CI は緑のままだった。
   // EXPECTED_EMPTY に理由・追跡先・期限つきで登録されたキーだけを許容する。
-  const unexpectedSkips = skipped.filter((o) => !findExpectedEmpty(o.key, AREA_TYPE, new Date()));
+  const activeByKey = new Map(targets.map((c) => [c.key, c.isActive === true]));
+  const unexpectedSkips = selectUnexpectedEmpties(
+    skipped.map((o) => ({ key: o.key, isActive: activeByKey.get(o.key) === true })),
+    (key) => findExpectedEmpty(key, AREA_TYPE, new Date()) !== null,
+  );
   if (unexpectedSkips.length > 0) {
     console.error(
-      `[values] ✗ 観測値が無い未登録キー ${unexpectedSkips.length} 件: ${unexpectedSkips.map((o) => o.key).join(", ")}\n` +
+      `[values] ✗ 観測値が無い未登録キー ${unexpectedSkips.length} 件: ${unexpectedSkips.join(", ")}\n` +
         `        正典 app/stats/<key>/values.json を確認してください。意図した 0 件なら` +
         ` packages/data-configs/src/expected-empty.ts の EXPECTED_EMPTY に登録します`,
     );

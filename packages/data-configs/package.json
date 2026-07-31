@@ -55,7 +55,8 @@
     "validate:open-data-catalog": "tsx scripts/validate-open-data-catalog.ts",
     "check:open-data-links": "tsx scripts/check-open-data-links.ts",
     "test": "vitest",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "validate:polarity": "tsx scripts/validate-polarity.ts"
   },
   "dependencies": {
     "@stats47/types": "*"
