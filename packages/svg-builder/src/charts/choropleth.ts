@@ -3,24 +3,33 @@
  *
  * 47 都道府県を固定レイアウトのタイルに配置し、値に応じてセルを着色する。
  *
- * ## レイアウト（2026-07-29 改訂）
+ * ## レイアウト（2026-07-31 改訂・正方形 720×720）
  *
- * キャンバスは **780×560**（旧 600×700）。記事本文では `md:max-w-2xl` = 672px 幅の
- * `<img>` として描画されるため、画面上の高さは `672 × H / W` で決まる。
- * 旧 600×700 は画面上 784px になり記事を占有していた。780×560 なら 482px に収まる。
+ * 記事本文では `md:max-w-2xl` = 672px 幅の `<img>` として描画されるため、
+ * 画面上の高さは `672 × H / W` で決まる。
  *
- * タイルを小さくせず縦を詰めることはできない（47 タイルは 14×16 の格子で、
- * 格子自体が縦長のため）。そこでキャンバスを横長にし、空く左カラムへ
- * タイトルと上位/下位 3 県、地図右下の空白へ凡例を置いて面積を使い切る。
+ * **旧 780×560 では左に 268px のテキストカラムを固定で確保していたが、それは地図を
+ * 狭めていなかった。** タイル格子は 14列×16行の縦長なので、キャンバスが正方形以上に
+ * 横長である限り**地図の大きさはキャンバスの高さだけで決まる**（実測: 左カラムを外して
+ * 780×560 のままだとタイルは 30px で変わらない）。左カラムは余った幅を埋めていただけ。
+ *
+ * したがって「地図を大きくする」にはキャンバスを正方形に近づけるしかない。そのうえで、
+ * タイル格子が**構造的に空ける 2 か所**へテキストを重ねて面積を使い切る。
  *
  * ```
- * ┌──────────────┬───────────────────────────┐
- * │ タイトル      │            ■ 北海道        │
- * │ 上位3県       │        ■■■■■■             │
- * │ 下位3県       │    ■■■■■■■■               │
- * │              │  ■■■■        [凡例]        │
- * └──────────────┴───────────────────────────┘
+ * ┌───────────────────────────────────┐
+ * │ タイトル                ■ 北海道   │  左上 (列0-11 × 行0-5) は完全に空く
+ * │ 1. 宮崎県  60.4 人   ■■■■■■        │  → タイトル + 上位3
+ * │ 2. 大分県  54.9 人 ■■■■■■■■        │
+ * │ 3. 群馬県  53.2 人■■■■■■           │
+ * │                ■■■■                │
+ * │            ■■■■      [凡例]        │  右下 (列5-13 × 行11-15) も空く
+ * │        ■                           │  → 凡例
+ * └───────────────────────────────────┘
  * ```
+ *
+ * 結果: タイル 30px → 39px（面積 +69%）。記事内の高さは 482px → 672px。
+ * 「地図を大きくする ⟺ 記事内で縦に長くなる」の交換を、地図優先で決めた（2026-07-31 オーナー判断）。
  *
  * ## 配色とテーマ
  *
@@ -33,11 +42,15 @@
  *
  * 解決は「テーマに依存しない配色にする」こと:
  * - 背景 rect を描かない → ページの地色がそのまま透ける（ライト/ダーク両対応）
- * - タイル内文字は白 + 濃い縁取り + 影 → 淡色タイルでも濃色タイルでも読める
+ * - タイル内文字は**タイルの明度で白⇄濃紺を切り替える**（{@link tileInkFor}）
  * - タイトル・凡例等の文字は {@link CHROME_COLOR} → 白地 4.18:1 / 濃紺地 4.27:1
  *
  * 単色でライト・ダーク両方 4.5:1 を満たす色は存在しない（最良でも 4.22:1）。
  * ここは構造的な上限なので、`@media` を足して「改善」しようとしないこと。
+ *
+ * **タイル内文字を「全て白 + 黒縁」で固定していた旧仕様は 2026-07-31 に撤回した。**
+ * カラーランプの淡い側は `rgb(239,246,255)` でほぼ白なので、白文字のコントラスト比は
+ * 1.05:1 しかなく、可読性を縁取りだけが担っていて小さい字では縁が glyph を潰していた。
  *
  * ## 使い方
  * ```ts
@@ -184,39 +197,59 @@ const GRID_COLS = 14;
 const GRID_ROWS = 16;
 
 // ─── キャンバス寸法 ──────────────────────────────────────────────
+//
+// ## 正方形キャンバス + 空きタイル領域へのオーバーレイ (2026-07-31 改訂)
+//
+// 旧版は左に 268px のテキストカラムを固定で確保していたが、**それは地図を狭めて
+// いなかった**。タイル格子は 14列×16行の縦長なので、キャンバスが正方形以上に
+// 横長である限り**地図の大きさはキャンバスの高さだけで決まる**。左カラムは
+// 余った幅を埋めていただけだった (実測: 左カラムを外して 780×560 のままだと
+// タイルは 30px で変わらない)。
+//
+// つまり「地図を大きくする」には**キャンバスを正方形に近づける**しかない。
+// そのうえで、タイル格子が構造的に空ける 2 か所へテキストを重ねる:
+//
+//   左上 (列 0-11 × 行 0-5)  … 東北以外は行 6 から始まるので完全に空く → タイトル + 上位3
+//   右下 (列 5-13 × 行 11-15) … 四国は列 3-4、九州は列 0-1 なので空く   → 凡例
+//
+// 結果: タイル 30px → 39px (面積 +69%)。記事内 (672px 幅) の高さは 482px → 672px。
+// 「地図を大きくする ⟺ 記事内で縦に長くなる」の交換を、地図優先で決めた。
 
-/** タイル 1 マスの辺長（px）。 */
-const TILE = 30;
-/** タイル間の隙間（px）。 */
-const GAP = 2;
-/** 格子ピッチ。 */
-const PITCH = TILE + GAP;
+/** キャンバス。§5 タイルマップ標準 720×720 (正方形)。 */
+const W = 720;
+const TOTAL_H = 720;
 
-/** 地図ブロックの実寸。 */
-const MAP_W = GRID_COLS * PITCH - GAP; // 446
-const MAP_H = GRID_ROWS * PITCH - GAP; // 510
-
-/** キャンバス。§5 タイルマップ標準 780×560。 */
-const W = 780;
-const TOTAL_H = 560;
-
-/** 地図ブロックの左上（右寄せ。左カラムをテキストに使う）。 */
-const MAP_X = W - MAP_W - 20; // 314
-const MAP_Y = 24;
-
-/** 左カラム（タイトル・上位/下位リスト）。 */
-const COL_X = 22;
-const COL_W = MAP_X - COL_X - 24; // 268
+/** キャンバス内側の余白。 */
+const PAD = 18;
 
 /**
- * 凡例は地図ブロック右下の空白に置く。
- * 格子の行 11 以降・列 5 以降にタイルが無いことを利用している
- * （四国は列 3-4、九州は列 0-1、沖縄は列 0）。
+ * 格子ピッチ。**幅と高さの両方に収まる最大値**を取る (縦長格子なので実際は高さが効く)。
+ * ここを固定値にすると、キャンバスを変えたときに地図が追従しなくなる。
  */
-const LEGEND_BAR_W = 150;
-const LEGEND_BAR_H = 9;
-const LEGEND_X = MAP_X + 5 * PITCH + 28; // 502
-const LEGEND_Y = MAP_Y + 13 * PITCH + 8; // 448
+const PITCH = Math.floor(Math.min((W - PAD * 2) / GRID_COLS, (TOTAL_H - PAD * 2) / GRID_ROWS));
+/** タイル間の隙間（px）。ピッチに比例させて見た目の密度を保つ。 */
+const GAP = Math.max(2, Math.round(PITCH * 0.07));
+/** タイル 1 マスの辺長（px）。 */
+const TILE = PITCH - GAP;
+
+/** 地図ブロックの実寸。 */
+const MAP_W = GRID_COLS * PITCH - GAP;
+const MAP_H = GRID_ROWS * PITCH - GAP;
+
+/** 地図ブロックの左上。余った幅は左に寄せてテキスト領域を広く取る。 */
+const MAP_X = W - PAD - MAP_W;
+const MAP_Y = TOTAL_H - PAD - MAP_H;
+
+/** 左上テキスト（タイトル・上位3）。地図の空き領域に重なる。 */
+const COL_X = PAD + 4;
+/** 上位3 の値を右揃えする位置（左上の空き = 列 11 までに収める）。 */
+const COL_W = MAP_X + 11 * PITCH - COL_X;
+
+/** 凡例は右下の空きに置く。 */
+const LEGEND_BAR_W = Math.min(200, Math.round(MAP_W * 0.44));
+const LEGEND_BAR_H = 11;
+const LEGEND_X = W - PAD - LEGEND_BAR_W - 4;
+const LEGEND_Y = TOTAL_H - PAD - 32;
 
 // ─── 配色 ────────────────────────────────────────────────────────
 
@@ -258,15 +291,76 @@ function interpolateColor(
 }
 
 /**
+ * タイル内テキストのインク（文字色とハロー）。
+ *
+ * ## 明度で切り替える理由 (2026-07-31 改訂・実測)
+ *
+ * 旧版は「タイル内テキストは全て白 + 黒縁取り」で固定していた。しかしカラーランプの
+ * 淡い側は `rgb(239,246,255)` でほぼ白なので、**白文字のコントラスト比は 1.05:1**
+ * しかない。可読性を縁取りだけが担っていて、小さい字では縁が glyph を潰していた。
+ *
+ * ランプの下限を上げる案は、白文字が 4.5:1 を満たすには全タイルをかなり暗くする
+ * 必要があり、淡→濃のランプ自体が壊れるため採らない。
+ *
+ * ## 色の選定 (ランプ全域で最悪ケースを実測)
+ *
+ * | インク | 文字 vs タイル 最小 |
+ * |---|---|
+ * | `#000000` / `#ffffff` | 4.59:1 (基準は満たすが硬い) |
+ * | **`#16243a` / `#f5f8fc`** | **3.85:1** ← 採用 |
+ * | `#233b5c` / `#eaf1fa` | 3.18:1 (ハローでも足りない) |
+ *
+ * 純黒/純白は基準を満たすが硬い。採用した組は文字とタイルの直接コントラストが
+ * 3.85:1 で WCAG の文字対背景単体では基準未満だが、**ハローが glyph を完全に囲む**
+ * ため実効の可読性は「文字 vs ハロー」(13:1 以上) と「ハロー vs タイル」(3:1 以上) で
+ * 決まる。これ以上薄くすると、その橋渡しでも成立しない。
+ */
+const TILE_INK_DARK = "#16243a";
+const TILE_INK_LIGHT = "#f5f8fc";
+
+/** WCAG 相対輝度。 */
+function relativeLuminance(r: number, g: number, b: number): number {
+  const f = (v: number) => {
+    const x = v / 255;
+    return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+  };
+  return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+}
+
+/** `rgb(r,g,b)` 文字列から輝度を出す（interpolateColor の戻り値をそのまま渡す）。 */
+function luminanceOfRgbString(rgb: string): number {
+  const m = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+  if (!m) return 1;
+  return relativeLuminance(Number(m[1]), Number(m[2]), Number(m[3]));
+}
+
+/** タイル色に対して読みやすい方のインクを選ぶ。 */
+export function tileInkFor(fill: string): { fill: string; halo: string } {
+  const L = luminanceOfRgbString(fill);
+  const contrast = (a: number, b: number) =>
+    (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+  const Ldark = relativeLuminance(0x16, 0x24, 0x3a);
+  const Llight = relativeLuminance(0xf5, 0xf8, 0xfc);
+  return contrast(L, Ldark) >= contrast(L, Llight)
+    ? { fill: TILE_INK_DARK, halo: TILE_INK_LIGHT }
+    : { fill: TILE_INK_LIGHT, halo: "rgba(16,28,46,.92)" };
+}
+
+/**
  * 都道府県名のフォントサイズ。
  *
- * 画面上では 672/780 = 0.86 倍で描画されるため、ここでの px は約 0.86 倍で見える。
- * タイル 30px に対し文字を大きめに取り、縮小後も読めるようにしている。
+ * **タイルの実寸から決める**。2 マス幅（北海道・福島・新潟・静岡・京都・和歌山・鹿児島）や
+ * 2 マス高のタイルは自動的に大きくなる。旧版は全タイル一律だったため、広いタイルで
+ * 無駄に小さく、狭いタイルで窮屈だった。
+ *
+ * 県名と値の 2 行を入れるので、1 行あたりの上限は高さの 40% 程度。
+ * `TILE_TEXT_SCALE` は A-2a（少し小さめ）の実測値。
  */
-function nameFontSize(name: string, w: number): number {
-  if (w > TILE) return 14; // 北海道（2x2）
-  if (name.length >= 3) return 8.5; // 神奈川・和歌山・鹿児島
-  return 11;
+const TILE_TEXT_SCALE = 0.92;
+
+function nameFontSize(name: string, w: number, h: number): number {
+  const byWidth = (w - 6) / Math.max(textUnits(name), 2);
+  return Math.round(Math.min(byWidth, h * 0.4) * TILE_TEXT_SCALE);
 }
 
 /** 文字列の概算幅を em 単位で返す（CJK≈1em / ASCII・半角≈0.55em）。 */
@@ -428,13 +522,14 @@ export function generateChoroplethSvg(
 
     const t = toT(item.value);
     const fill = colorOf(t);
-    const nfs = nameFontSize(item.name, w);
+    const nfs = nameFontSize(item.name, w, h);
 
     const cx = x + w / 2;
     const valStr = fmtValue(item.value);
-    // テキストは全て白。濃い縁取り(paint-order stroke)+ ソフトシャドウで
-    // 淡色タイルでも背景に依らず読めるようにする（白/黒の切替はしない）。
-    const strokeW = Math.max(1.1, nfs * 0.18).toFixed(1);
+    // タイルの明度で文字色を切り替える (淡いタイルに白文字は 1.05:1 しかなく読めない)。
+    // ハローは反対色にして glyph を囲む。縁は細くする — 太いと小さい字が潰れる。
+    const ink = tileInkFor(fill);
+    const strokeW = Math.max(1.1, nfs * 0.13).toFixed(1);
 
     const valueLabel = showValue
       ? fitValueLabel(valStr, safeUnit, w, Math.max(6, nfs - 2))
@@ -453,7 +548,7 @@ export function generateChoroplethSvg(
       `  <g aria-label="${esc(item.name)} ${valStr}${esc(unit)}">`,
       `    <title>${esc(item.name)}：${valStr}${esc(unit)}</title>`,
       `    <rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w}" height="${h}" rx="3" fill="${fill}" stroke="#ffffff" stroke-width="1"/>`,
-      `    <text font-family="${FONT_FAMILY}" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="${strokeW}" stroke-linejoin="round" filter="url(#txt-halo-dark)">`,
+      `    <text font-family="${FONT_FAMILY}" fill="${ink.fill}" text-anchor="middle" paint-order="stroke" stroke="${ink.halo}" stroke-width="${strokeW}" stroke-linejoin="round">`,
       ...tspans,
       `    </text>`,
       `  </g>`,
