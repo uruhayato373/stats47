@@ -1,7 +1,0 @@
-{
-  "limit": 1,
-  "dryRun": false,
-  "keepDraft": true,
-  "requestedAt": "2026-07-31T05:15:00Z",
-  "note": "429 で止まった初回のやり直し。requestedAt は再投入のたびに更新して diff を確実に出す"
-}
