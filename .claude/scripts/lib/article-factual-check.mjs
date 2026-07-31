@@ -54,6 +54,16 @@ export const PER_CAPITA_SKIP = /(?:一人当たり|1人当たり|1人あたり|�
 export const DERIVED_VALUE_SKIP =
   /(?:差額|の差|との差|差は|差が|差を|差で|格差|当たり|あたり|受け持|受持|につき|平均|中央値|合計|総額|総計|累計|比率|比は|比が|割合|シェア|構成比|換算|÷|割っ|割る|上回|下回|倍)/;
 
+/**
+ * 符号付き数値は差分 (増減・格差) を表す表記。
+ *
+ * ★記事側の表記ルールと対になる (2026-07-31)。差分を書くときは必ず符号を付けることで、
+ * 「data の絶対値ではない」と機械が判定できる。実記事は既にこの書き方をしている:
+ * care-worker-income-prefecture-gap の `**+145.7万円**` / `**−15.8万円**`。
+ * 正典: .claude/rules/blog-quality-standards.md §数値表記ルール
+ */
+export const SIGNED_DELTA_RE = /[+＋\-−–—▲△]\s*$/;
+
 // ============================================================================
 // Ground truth builder (data/*.json から rank/value 索引を build)
 // ============================================================================
@@ -497,6 +507,22 @@ function factBaseValue(fact) {
  * @returns {string[]} warnings
  */
 /**
+ * 位置 pos が同一行の括弧 (…) / （…） の内側か。
+ * 行をまたぐ括弧は markdown のリンク記法等と衝突するため見ない。
+ */
+function isInsideParenthesis(body, pos) {
+  const lineStart = body.lastIndexOf("\n", pos - 1) + 1;
+  let lineEnd = body.indexOf("\n", pos);
+  if (lineEnd === -1) lineEnd = body.length;
+  const before = body.slice(lineStart, pos);
+  const after = body.slice(pos, lineEnd);
+  const opens = (before.match(/[（(]/g) || []).length;
+  const closes = (before.match(/[）)]/g) || []).length;
+  if (opens <= closes) return false;
+  return /[）)]/.test(after);
+}
+
+/**
  * 記事が持つ指標名 (ground truth の label) を集める。
  * 「この記事が扱っている指標」の集合であり、これに無い指標を本文が語っていたら照合できない。
  */
@@ -512,7 +538,7 @@ function collectKnownLabels(gt) {
 
 /** 指標名らしき語 (「緑茶消費支出額」「発電量」「持ち家率」等) */
 const METRIC_PHRASE_RE =
-  /[ぁ-んァ-ヶ一-龥ー]{2,12}(?:消費支出額|消費量|支出額|保有台数|世帯数|生産量|出荷額|所得|収入|人口|面積|件数|台数|日数|時間|率|額|量|数)/g;
+  /[ぁ-んァ-ヶ一-龥ー]{2,12}(?:消費支出額|消費量|支出額|保有台数|世帯数|生産量|出荷額|年収|月収|所得|収入|単価|価格|残高|貯蓄|人口|面積|件数|台数|日数|時間|率|額|量|数)/g;
 
 /**
  * claim 直前の文脈が「この記事に ground truth が無い別指標」を語っているか。
@@ -583,6 +609,20 @@ export function checkValueClaims(content, gt) {
     );
     const beforeNumeralInMatch = m[0].slice(0, Math.max(0, m[0].lastIndexOf(m[2])));
     const metricContext = body.slice(sentenceStart, m.index) + beforeNumeralInMatch;
+
+    // 括弧内の数値は照合対象にしない。
+    // blog-quality-standards.md §文体ルールが「括弧による数値挿入を全面禁止」しており、
+    // 括弧内に現れる数値は実測上ほぼ別指標か派生値だった (「緑茶…静岡県(7,664円)」
+    // 「3位秋田県（約3.9ha）」)。禁止された書き方を照合対象にすると誤検出を量産する。
+    // 括弧内数値そのものは専用の blocker が別に落とす (責務を分ける)。
+    if (isInsideParenthesis(body, m.index + m[0].lastIndexOf(m[2]))) continue;
+
+    // 符号付き (+145.7万円 / −15.8万円) は差分表記 → data の絶対値と一致しないので対象外。
+    // markdown の強調記号は符号判定の邪魔になるので除いてから見る。
+    if (SIGNED_DELTA_RE.test(beforeNumeralInMatch.replace(/[*_`\s]+$/g, "$&").replace(/[*_`]/g, ""))) {
+      continue;
+    }
+
     if (mentionsForeignMetric(metricContext, knownLabels)) continue;
 
     // 年号らしき値 (1900-2100 で単位が無いケースは上で弾く) はここでは単位付きなので通す
