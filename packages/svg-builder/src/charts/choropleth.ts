@@ -121,8 +121,9 @@ export interface ChoroplethOptions {
    */
   legendLabels?: [string, string] | { low: string; high: string };
   /**
-   * 左カラムの上位・下位リストを出すか（省略時: true）。
-   * 値の大小だけを機械的に並べるので、指標の良し悪しとは無関係に「高い順 / 低い順」と表記する。
+   * 左上に上位 3 県を出すか（省略時: true）。
+   * 値の大小だけを機械的に並べる。指標の良し悪し（高い方が良いか）は判断しないので
+   * 「良い/悪い」とは表記せず、順位の数字だけを出す。下位は出さない。
    */
   showRankList?: boolean;
 }
@@ -192,6 +193,31 @@ const TILE_GRID: Record<string, readonly [number, number, number, number]> = {
   "46": [0, 13, 2, 1], // 鹿児島
   "47": [0, 15, 1, 1], // 沖縄
 };
+
+/**
+ * 都道府県コード → 正式名称。
+ *
+ * タイル内は幅が無いので短縮名 (`item.name`) を使うが、**上位リストは正式名称で出す**
+ * (「宮崎」ではなく「宮崎県」)。呼び元がどちらの形で name を渡してくるかに依存させたくないので、
+ * コードから決定的に引く。
+ */
+const PREF_FULL_NAME: Record<string, string> = {
+  "01": "北海道", "02": "青森県", "03": "岩手県", "04": "宮城県", "05": "秋田県",
+  "06": "山形県", "07": "福島県", "08": "茨城県", "09": "栃木県", "10": "群馬県",
+  "11": "埼玉県", "12": "千葉県", "13": "東京都", "14": "神奈川県", "15": "新潟県",
+  "16": "富山県", "17": "石川県", "18": "福井県", "19": "山梨県", "20": "長野県",
+  "21": "岐阜県", "22": "静岡県", "23": "愛知県", "24": "三重県", "25": "滋賀県",
+  "26": "京都府", "27": "大阪府", "28": "兵庫県", "29": "奈良県", "30": "和歌山県",
+  "31": "鳥取県", "32": "島根県", "33": "岡山県", "34": "広島県", "35": "山口県",
+  "36": "徳島県", "37": "香川県", "38": "愛媛県", "39": "高知県", "40": "福岡県",
+  "41": "佐賀県", "42": "長崎県", "43": "熊本県", "44": "大分県", "45": "宮崎県",
+  "46": "鹿児島県", "47": "沖縄県",
+};
+
+/** 正式名称を引く (未知コードは呼び元の name にフォールバック)。 */
+function fullNameOf(item: ChoroplethItem): string {
+  return PREF_FULL_NAME[item.code.slice(0, 2).padStart(2, "0")] ?? item.name;
+}
 
 const GRID_COLS = 14;
 const GRID_ROWS = 16;
@@ -579,32 +605,27 @@ export function generateChoroplethSvg(
     }
   }
 
-  // ── 左カラム: 高い順 / 低い順 3 県 ──
-  // 値の大小を機械的に並べるだけ。指標の良し悪し（高い方が良いか）は判断しない。
+  // ── 左上: 上位 3 県 ──
+  //
+  // 下位は出さない (2026-07-31 オーナー判断)。左上の空きは有限で、6 行入れると
+  // タイトルと合わせて地図の東北ブロックに掛かる。上位 3 件だけなら余裕に収まる。
+  // 見出し (「多い順」等) も出さない — 1. 2. 3. の並びで自明なので行を使う価値がない。
   const rankLists: string[] = [];
   if (showRankList && items.length >= 3) {
-    const sorted = [...items].sort((a, b) => b.value - a.value);
-    const groups: Array<{ label: string; rows: ChoroplethItem[] }> = [
-      { label: "高い順", rows: sorted.slice(0, 3) },
-      { label: "低い順", rows: sorted.slice(-3).reverse() },
-    ];
-
-    let y = cursorY + 34;
-    for (const g of groups) {
-      rankLists.push(
-        `  <text x="${COL_X}" y="${y}" font-family="${FONT_FAMILY}" font-size="11" font-weight="600" fill="${CHROME_COLOR}" letter-spacing="0.06em">${g.label}</text>`,
-      );
-      y += 8;
-      for (const it of g.rows) {
-        y += 22;
-        const sw = colorOf(toT(it.value));
-        rankLists.push(
-          `  <rect x="${COL_X}" y="${y - 10}" width="12" height="12" rx="2" fill="${sw}" stroke="#ffffff" stroke-width="1"/>`,
-          `  <text x="${COL_X + 19}" y="${y}" font-family="${FONT_FAMILY}" font-size="13" font-weight="600" fill="${CHROME_COLOR}">${esc(it.name)}</text>`,
-          `  <text x="${COL_X + COL_W}" y="${y}" font-family="${FONT_FAMILY}" font-size="12" fill="${CHROME_COLOR}" text-anchor="end">${fmtValue(it.value)}${esc(unit)}</text>`,
-        );
-      }
+    const top3 = [...items].sort((a, b) => b.value - a.value).slice(0, 3);
+    let y = cursorY + 30;
+    for (const [i, it] of top3.entries()) {
       y += 30;
+      const sw = colorOf(toT(it.value));
+      const valStr = fmtValue(it.value);
+      // 値は右揃え、単位はその右に小さく置く (間に余白を取って「60.4 人」と読ませる)
+      const valX = COL_X + COL_W - 44;
+      rankLists.push(
+        `  <rect x="${COL_X}" y="${y - 13}" width="15" height="15" rx="2" fill="${sw}" stroke="#ffffff" stroke-width="1"/>`,
+        `  <text x="${COL_X + 24}" y="${y}" font-family="${FONT_FAMILY}" font-size="17" font-weight="600" fill="${CHROME_COLOR}">${i + 1}. ${esc(fullNameOf(it))}</text>`,
+        `  <text x="${valX}" y="${y}" font-family="${FONT_FAMILY}" font-size="17" font-weight="700" fill="${CHROME_COLOR}" text-anchor="end">${valStr}</text>`,
+        `  <text x="${valX + 5}" y="${y}" font-family="${FONT_FAMILY}" font-size="13" fill="${CHROME_COLOR}">${esc(unit)}</text>`,
+      );
     }
   }
 
