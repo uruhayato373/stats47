@@ -3,6 +3,6 @@
   "since": "",
   "allowEmpty": "convenience-store-count-commercial,core-agricultural-workers,earmarked-tax-local,elderly-single-person-households,elementary-long-term-absent-students,elementary-school-classes,food-self-sufficiency-rate-calorie,gpp-agriculture,gpp-education-sector,gpp-forestry,gpp-manufacturing,gpp-public-service,households-with-elderly-members,junior-high-school-classes,kindergarten-education-diffusion-rate,kindergarten-teachers,national-pension-full-exemption-rate,national-pension-partial-exemption-rate,national-tax-collected,nursery-education-diffusion-rate,ordinary-tax-local,population-growth-rate,production-age-population-ratio,ratio-65-plus,retail-goods-inventory-amount,sixth-industry-agriculture-entities,sixth-industry-agriculture-sales,small-scale-farm-households,voluntary-car-insurance-rate-bodily-injury,voluntary-car-insurance-rate-property,voluntary-car-insurance-rate-vehicle,young-population-ratio",
   "dryRun": false,
-  "requestedAt": "2026-07-31T06:05:26Z",
-  "note": "全 metric refresh。treatment-rate-* 26 件は areaAxis 追加で修正済み。残る 0 件 32 件は既存 R2 データを保持したまま警告に降格し、残りの push を通す (原因は未修正)"
+  "requestedAt": "2026-07-31T10:19:54Z",
+  "note": "全 metric refresh の再実行。前回 (2026-07-31 09:02) は commuter-ratio-from-other-municipalities の形状違反 1 件で exit 1 になり、正常取得した 2,155 metric の R2 push (次ステップ diff-push-r2) まで止まっていた。実測の結果この値は正当 (07548 大熊町 9,640% / 13101 千代田区 3,907% — 通勤流入 ÷ 居住就業者なので都心区や避難自治体では 100% を大きく超える) と確定したので expected-shape-anomaly.ts に legitimate として登録済み。allowEmpty は前回と同じ 0 件 32 件 (原因は未修正・既存 R2 データは metric ごとに常時保護される)。"
 }
