@@ -27,7 +27,6 @@
     "bare-tolocalestring:packages/visualization/src/leaflet/components/KsjClusterLayer.tsx:html: `<div style=\"background:${color};color:#fff;border-radius:50%;width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:2px so": 1,
     "bare-tolocalestring:packages/visualization/src/leaflet/components/LeafletChoroplethMap.tsx:return `${item.value.toLocaleString()}${unit ? ` ${unit}` : \"\"}`;": 2,
     "bare-tolocalestring:packages/visualization/src/leaflet/components/MapColorLegend.tsx:if (Number.isInteger(value)) return value.toLocaleString();": 1,
-    "max-fraction-digits-only:apps/web/src/components/charts/RankingBarList.tsx:maximumFractionDigits: valueMaximumFractionDigits,": 1,
     "max-fraction-digits-only:apps/web/src/features/ranking/lib/build-national-average-series.ts:maximumFractionDigits: 1,": 1
   }
 }
