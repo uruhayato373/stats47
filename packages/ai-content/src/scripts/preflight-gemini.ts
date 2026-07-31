@@ -61,9 +61,10 @@ async function main() {
             );
           }
           if (!e.quota && e.debugSnippet) {
-            // 構造化抽出に失敗したときだけ本文を見せる (なぜ抽出できないかを突き止めるため)
+            // Google が構造化 quota を返さない 429 もある (クレジット枯渇はこれ)。
+            // その場合は判断材料が本文の自由文しかないのでそのまま見せる
             process.stdout.write(
-              `[preflight]   quota 抽出不可。本文先頭: ${e.debugSnippet.replace(/\s+/g, " ")}\n`,
+              `[preflight]   429 本文 (構造化 quota なし): ${e.debugSnippet.replace(/\s+/g, " ")}\n`,
             );
           }
           return { ok: false, classification: e.classification, status: e.status };
@@ -79,21 +80,26 @@ async function main() {
     return;
   }
 
+  // クレジット枯渇はモデルの問題ではないので、モデル復旧の一般論を足さない
+  // (足すと「モデルを変えれば直る」と読めてしまい、実際には直らない)
+  const modelHint =
+    report.classification === "billing"
+      ? ""
+      : (report.suggestions.length > 0
+          ? "  代替候補 (良い順・自動では切り替えない):\n" +
+            report.suggestions
+              .slice(0, 8)
+              .map((m) => `    - ${m}`)
+              .join("\n") +
+            "\n"
+          : "") +
+        "  復旧: リポジトリ変数 GEMINI_TEXT_MODEL に候補を設定するか、" +
+        "gemini-text-client.ts の GEMINI_TEXT_MODEL 既定値を更新する。\n" +
+        "  bad-request (400) / auth (401/403) はキーが無効か Generative Language API が未有効\n" +
+        "    (無効キーでの実測は 400 = API_KEY_INVALID。2026-07-30 確認)。\n";
+
   process.stderr.write(
-    report.messages.map((m) => `[preflight] ${m}`).join("\n") +
-      "\n" +
-      (report.suggestions.length > 0
-        ? "  代替候補 (良い順・自動では切り替えない):\n" +
-          report.suggestions
-            .slice(0, 8)
-            .map((m) => `    - ${m}`)
-            .join("\n") +
-          "\n"
-        : "") +
-      "  復旧: リポジトリ変数 GEMINI_TEXT_MODEL に候補を設定するか、" +
-      "gemini-text-client.ts の GEMINI_TEXT_MODEL 既定値を更新する。\n" +
-      "  bad-request (400) / auth (401/403) はキーが無効か Generative Language API が未有効\n" +
-      "    (無効キーでの実測は 400 = API_KEY_INVALID。2026-07-30 確認)。\n",
+    report.messages.map((m) => `[preflight] ${m}`).join("\n") + "\n" + modelHint,
   );
   process.exit(1);
 }

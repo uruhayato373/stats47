@@ -55,6 +55,7 @@ const DEFAULT_TIMEOUT_MS = 180_000;
 
 export type GeminiTextErrorClass =
   | "rate-limit"
+  | "billing"
   | "server"
   | "bad-request"
   | "auth"
@@ -88,6 +89,35 @@ const DEBUG_SNIPPET_MAX = 500;
 export function redactApiKey(text: string, apiKey: string): string {
   if (!apiKey) return text;
   return text.split(apiKey).join("***");
+}
+
+/**
+ * 429 のうち**課金枯渇**を見分ける (2026-07-31 実測)。
+ *
+ * 同じ HTTP 429 / RESOURCE_EXHAUSTED に、意味も対処も正反対の 2 つが入っている:
+ *
+ *   - レート制限 (RPM/RPD)  … 時間をおけば戻る。再試行に意味がある
+ *   - **前払いクレジット枯渇** … 待っても戻らない。人がクレジットを補充するまで全モデルで失敗する
+ *
+ * 実測した本文には `error.details` が無く (だから `extractQuotaDetails` は undefined を返した。
+ * これはパーサの不具合ではない)、判別材料は `error.message` の自由文しかない:
+ *
+ *   "Your prepayment credits are depleted. Please go to AI Studio ... to manage your project and billing."
+ *
+ * 判定は**狭く**取る。`billing` の語だけで見ると、レート制限の本文にも
+ * 「billing を有効にすると上限が上がる」という案内が入るため誤爆する。
+ * 迷ったら rate-limit のまま扱う (再試行して次の cron で拾い直せる方に倒す)。
+ */
+const BILLING_EXHAUSTED_MARKERS = [
+  "credits are depleted",
+  "credit balance is too low",
+  "insufficient credits",
+];
+
+export function isBillingExhausted(raw: string): boolean {
+  if (!raw) return false;
+  const lower = raw.toLowerCase();
+  return BILLING_EXHAUSTED_MARKERS.some((m) => lower.includes(m));
 }
 
 export interface GeminiQuotaDetails {
@@ -174,6 +204,8 @@ function classify(status: number): GeminiTextErrorClass {
 
 function isRetriable(cls: GeminiTextErrorClass): boolean {
   // truncated は maxOutputTokens 到達なので再試行しても同じ → 対象外
+  // billing (クレジット枯渇) も同じ。人が補充するまで何度投げても同じ 429 が返るので、
+  // 15s → 30s → 60s と待つのは純粋な浪費 (実測でこの待ちが毎 run 発生していた)
   return cls === "rate-limit" || cls === "server" || cls === "timeout" || cls === "network";
 }
 
@@ -240,13 +272,14 @@ export async function generateContentText(
         // 基づいて決められなかった。抜くのは quotaMetric / quotaValue / retryDelay だけで、
         // 自由文やキーは触らない。
         const raw = await res.text().catch(() => "");
-        const cls = classify(res.status);
-        const quota = cls === "rate-limit" ? extractQuotaDetails(raw) : undefined;
+        const is429 = res.status === 429;
+        // 429 は「待てば戻る」と「人が課金を直すまで戻らない」の 2 種が同居する。混ぜない
+        const cls = is429 && isBillingExhausted(raw) ? "billing" : classify(res.status);
+        const quota = is429 ? extractQuotaDetails(raw) : undefined;
         // 抽出できなかった理由を 1 回で突き止めるため、429 のときだけ本文の先頭を診断に載せる
-        const debugSnippet =
-          cls === "rate-limit"
-            ? redactApiKey(raw.slice(0, DEBUG_SNIPPET_MAX), opts.apiKey)
-            : undefined;
+        const debugSnippet = is429
+          ? redactApiKey(raw.slice(0, DEBUG_SNIPPET_MAX), opts.apiKey)
+          : undefined;
         opts.onAttempt?.({ attempt, status: res.status, classification: cls, quota, debugSnippet });
         const err = new GeminiTextError(cls, res.status, quota, debugSnippet);
         if (isRetriable(cls) && attempt < maxAttempts) {

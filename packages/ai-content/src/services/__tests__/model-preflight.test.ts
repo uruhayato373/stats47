@@ -234,3 +234,39 @@ describe("runModelPreflight: rate-limit の扱い", () => {
     expect(report.suggestions.length).toBeGreaterThan(0);
   });
 });
+
+// ============================================================================
+// クレジット枯渇の案内 (2026-07-31 実測)
+//
+// 実測前はこの状態でも「時間をおいて再実行」「lite 系候補で回避」と出していた。
+// どちらも効かない (課金はプロジェクト単位)。誤った回避策を出さないことを固定する。
+// ============================================================================
+describe("runModelPreflight — billing", () => {
+  const deps = {
+    configured: "gemini-3.5-flash",
+    smoke: async () => ({ ok: false as const, classification: "billing", status: 429 }),
+    listModels: async () => {
+      throw new Error("billing のときは ListModels を呼んではいけない");
+    },
+  };
+
+  it("★クレジット補充を促し、モデル候補は出さない", async () => {
+    const report = await runModelPreflight(deps);
+    const text = report.messages.join("\n");
+
+    expect(report.ok).toBe(false);
+    expect(report.classification).toBe("billing");
+    expect(report.suggestions).toEqual([]);
+    expect(text).toContain("クレジット");
+    expect(text).toContain("ai.studio");
+  });
+
+  it("★「時間をおけ」「lite で回避できる」という効かない案内を出さない", async () => {
+    const text = (await runModelPreflight(deps)).messages.join("\n");
+    expect(text).not.toContain("時間をおいて");
+    // lite に言及すること自体は正しい (効かないと否定するため)。
+    // 禁止したいのは**回避策として勧めること**なので、肯定形が出ないことを見る
+    expect(text).not.toContain("回避できる");
+    expect(text).toContain("回避できない");
+  });
+});

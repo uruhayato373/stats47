@@ -115,6 +115,8 @@ export interface PreflightReport {
   /** 標準出力 / エラー出力に出す行 (呼び出し側が整形せずそのまま出す) */
   messages: string[];
   suggestions: string[];
+  /** 失敗時の分類 (呼び出し側が汎用の復旧文を出すか決めるのに使う) */
+  classification?: string;
 }
 
 /**
@@ -137,7 +139,19 @@ export async function runModelPreflight(deps: PreflightDeps): Promise<PreflightR
     `❌ ${deps.configured} で generateContent に失敗: ${smoke.classification}${status}`,
   ];
 
-  // ★429 は「モデルが使えない」ではなく「いま呼べない」。原因も対処も別なので分けて出す
+  // ★クレジット枯渇 (2026-07-31 実測)。これは「モデルが使えない」でも「いま混んでいる」でもなく
+  //   **人がクレジットを補充するまで全モデルで失敗し続ける**状態。時間をおくのも lite に逃げるのも
+  //   効かない (課金はプロジェクト単位なのでモデルを変えても同じ)。誤った回避策を出さない。
+  if (smoke.classification === "billing") {
+    messages.push(
+      "  ⚠ **前払いクレジットが枯渇している**。レート制限ではないので待っても戻らない",
+      "  対処 (人の作業): AI Studio (https://ai.studio/projects) でクレジットを補充するか請求設定を見直す",
+      "  モデル変更では回避できない (課金はプロジェクト単位。lite に落としても同じ 429 が返る)",
+    );
+    return { ok: false, messages, suggestions: [], classification: smoke.classification };
+  }
+
+  // ★429 (レート制限) は「モデルが使えない」ではなく「いま呼べない」。原因も対処も別なので分けて出す
   //   (2026-07-31 実測: 同じキー・同じモデルで数時間前は成功しており、提供終了ではなかった)。
   //   ここを混ぜると「モデルを変えろ」と読めてしまい、品質もコストも変わる変更を促してしまう。
   if (smoke.classification === "rate-limit") {
@@ -145,7 +159,7 @@ export async function runModelPreflight(deps: PreflightDeps): Promise<PreflightR
       "  ⚠ これはクォータ/レート制限であって提供終了ではない。**モデルを変える前に時間をおいて再実行する**",
       "  (無料 tier はモデルごとに別枠なので、急ぐなら下の lite 系候補で回避できる。ただし品質は変わる)",
     );
-    return { ok: false, messages, suggestions: [] };
+    return { ok: false, messages, suggestions: [], classification: smoke.classification };
   }
 
   let models: string[] = [];
@@ -155,7 +169,7 @@ export async function runModelPreflight(deps: PreflightDeps): Promise<PreflightR
     messages.push(
       "  ListModels も失敗したためモデル候補を出せない (キー・ネットワークを確認する)",
     );
-    return { ok: false, messages, suggestions: [] };
+    return { ok: false, messages, suggestions: [], classification: smoke.classification };
   }
 
   const listed = models.includes(deps.configured);
@@ -167,5 +181,10 @@ export async function runModelPreflight(deps: PreflightDeps): Promise<PreflightR
       : `  ${deps.configured} は ListModels にも無い (提供終了)`,
   );
 
-  return { ok: false, messages, suggestions: suggestTextModels(models, deps.configured) };
+  return {
+    ok: false,
+    messages,
+    suggestions: suggestTextModels(models, deps.configured),
+    classification: smoke.classification,
+  };
 }

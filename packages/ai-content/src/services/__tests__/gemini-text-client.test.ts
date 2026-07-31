@@ -11,6 +11,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { GeminiTextError, generateContentText,
   extractQuotaDetails,
+  isBillingExhausted,
   redactApiKey,
 } from "../gemini-text-client";
 
@@ -217,5 +218,102 @@ describe("redactApiKey", () => {
   });
   it("空のキーでも落ちない", () => {
     expect(redactApiKey("body", "")).toBe("body");
+  });
+});
+
+// ============================================================================
+// 429 の 2 種を見分ける (2026-07-31 実測)
+//
+// 同じ HTTP 429 / RESOURCE_EXHAUSTED に、対処が正反対の 2 つが同居している。
+// レート制限は待てば戻るが、クレジット枯渇は人が補充するまで戻らない。
+// ここを混ぜると (a) 無意味な再試行で毎 run 45s を捨て (b) preflight が
+// 「時間をおけ」「lite に逃げろ」という**効かない**回避策を出す。
+//
+// 判定は狭く取る。広げるとレート制限の本文にある billing の案内文で誤爆する。
+// ============================================================================
+describe("isBillingExhausted", () => {
+  // CI run 30607349739 で実際に返ってきた本文
+  const REAL_BILLING_BODY = JSON.stringify({
+    error: {
+      code: 429,
+      message:
+        "Your prepayment credits are depleted. Please go to AI Studio at " +
+        "https://ai.studio/projects to manage your project and billing. " +
+        "Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+      status: "RESOURCE_EXHAUSTED",
+    },
+  });
+
+  it("★実測したクレジット枯渇の本文を検出する", () => {
+    expect(isBillingExhausted(REAL_BILLING_BODY)).toBe(true);
+  });
+
+  it("★レート制限の本文では発火しない (billing の語を含んでいても)", () => {
+    const rateLimitBody = JSON.stringify({
+      error: {
+        code: 429,
+        message:
+          "You exceeded your current quota. Enable billing to raise your limits. " +
+          "Learn more at https://ai.google.dev/gemini-api/docs/rate-limits.",
+        status: "RESOURCE_EXHAUSTED",
+        details: [
+          {
+            "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+            violations: [{ quotaMetric: "generate_content_free_tier_requests", quotaValue: "25" }],
+          },
+        ],
+      },
+    });
+    expect(isBillingExhausted(rateLimitBody)).toBe(false);
+  });
+
+  it("空文字・無関係な本文では発火しない", () => {
+    expect(isBillingExhausted("")).toBe(false);
+    expect(isBillingExhausted("<html>502 Bad Gateway</html>")).toBe(false);
+  });
+
+  it("実測本文に構造化 quota は無い (パーサの不具合ではない)", () => {
+    expect(extractQuotaDetails(REAL_BILLING_BODY)).toBeUndefined();
+  });
+});
+
+describe("クレジット枯渇は再試行しない", () => {
+  const billingBody = {
+    error: { code: 429, message: "Your prepayment credits are depleted.", status: "RESOURCE_EXHAUSTED" },
+  };
+
+  it("★billing に分類し、待たずに 1 回で諦める", async () => {
+    const fetchImpl = vi.fn().mockResolvedValue(jsonResponse(429, billingBody));
+    const sleep = vi.fn(() => Promise.resolve());
+
+    await expect(
+      generateContentText({
+        prompt: "p",
+        apiKey: "k",
+        maxAttempts: 3,
+        fetchImpl: fetchImpl as unknown as typeof fetch,
+        sleepImpl: sleep,
+      }),
+    ).rejects.toMatchObject({ classification: "billing", status: 429 });
+
+    expect(fetchImpl).toHaveBeenCalledTimes(1); // 再試行しない
+    expect(sleep).not.toHaveBeenCalled(); // 待たない
+  });
+
+  it("★レート制限のほうは従来どおり再試行する (振る舞いを変えていない)", async () => {
+    const rateBody = { error: { code: 429, message: "You exceeded your current quota." } };
+    const fetchImpl = vi.fn().mockResolvedValue(jsonResponse(429, rateBody));
+
+    await expect(
+      generateContentText({
+        prompt: "p",
+        apiKey: "k",
+        maxAttempts: 3,
+        fetchImpl: fetchImpl as unknown as typeof fetch,
+        sleepImpl: noSleep,
+      }),
+    ).rejects.toMatchObject({ classification: "rate-limit" });
+
+    expect(fetchImpl).toHaveBeenCalledTimes(3);
   });
 });
