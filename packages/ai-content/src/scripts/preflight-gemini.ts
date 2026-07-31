@@ -53,6 +53,13 @@ async function main() {
         return { ok: true };
       } catch (e) {
         if (e instanceof GeminiTextError) {
+          if (e.quota) {
+            // 「40 件/日が成り立つのか」を判断できるよう実測値を出す (機密は含まない)
+            process.stdout.write(
+              `[preflight]   quota: metric=${e.quota.metric ?? "?"} ` +
+                `limit=${e.quota.limit ?? "?"} retryAfter=${e.quota.retryAfter ?? "?"}\n`,
+            );
+          }
           return { ok: false, classification: e.classification, status: e.status };
         }
         return { ok: false, classification: "unknown" };

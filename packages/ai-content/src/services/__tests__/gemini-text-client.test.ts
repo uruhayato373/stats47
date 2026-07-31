@@ -9,7 +9,9 @@
 
 import { describe, expect, it, vi } from "vitest";
 
-import { GeminiTextError, generateContentText } from "../gemini-text-client";
+import { GeminiTextError, generateContentText,
+  extractQuotaDetails,
+} from "../gemini-text-client";
 
 const noSleep = () => Promise.resolve();
 
@@ -157,5 +159,50 @@ describe("generateContentText — ネットワーク", () => {
     }) as unknown as typeof fetch;
     const res = await generateContentText({ ...base, fetchImpl });
     expect(res.attempts).toBe(2);
+  });
+});
+
+// ============================================================================
+// 429 のクォータ内訳 (2026-07-31)
+//
+// 本文を丸ごと読み捨てていたため「分あたりで詰まったのか日あたりを使い切ったのか」が
+// 分からず、日次件数 (ai-content 40 / blog 2) を実測で決められなかった。
+// 抜くのは quotaMetric / quotaValue / retryDelay の 3 項目だけ (機密ではない)。
+// ============================================================================
+describe("extractQuotaDetails", () => {
+  it("★QuotaFailure と RetryInfo から 3 項目だけ取り出す", () => {
+    const body = JSON.stringify({
+      error: {
+        code: 429,
+        message: "Resource has been exhausted",
+        details: [
+          {
+            "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+            violations: [
+              {
+                quotaMetric: "generativelanguage.googleapis.com/generate_content_free_tier_requests",
+                quotaId: "GenerateRequestsPerDayPerProjectPerModel-FreeTier",
+                quotaValue: "25",
+              },
+            ],
+          },
+          { "@type": "type.googleapis.com/google.rpc.RetryInfo", retryDelay: "38s" },
+        ],
+      },
+    });
+    expect(extractQuotaDetails(body)).toEqual({
+      metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests",
+      limit: "25",
+      retryAfter: "38s",
+    });
+  });
+
+  it("JSON でない本文でも落ちない", () => {
+    expect(extractQuotaDetails("<html>502</html>")).toBeUndefined();
+  });
+
+  it("空文字・クォータ項目なしは undefined", () => {
+    expect(extractQuotaDetails("")).toBeUndefined();
+    expect(extractQuotaDetails(JSON.stringify({ error: { details: [] } }))).toBeUndefined();
   });
 });
