@@ -101,7 +101,19 @@ async function main() {
   process.stderr.write(
     report.messages.map((m) => `[preflight] ${m}`).join("\n") + "\n" + modelHint,
   );
-  process.exit(1);
+
+  // ★終了コードで「モデルが壊れている」と「判定できなかった」を分ける (2026-07-31)。
+  //
+  //   1 = モデルが使えない (提供終了・権限)。PR gate はこれを止めるためにある
+  //   3 = 判定不能 (クレジット枯渇・レート制限)。**モデルまで到達していない**ので
+  //       「モデルが壊れている」とは言えない
+  //
+  // 混ぜると PR gate が課金状態で全 PR を止める。モデルを何も検査していないのに
+  // 「モデルが壊れている」と報告するのは、合格を装うのと同じくらい誤りなので、
+  // 判定不能は判定不能として出す (呼び出し側が gate か停止かを決める)。
+  process.exit(
+    report.classification === "billing" || report.classification === "rate-limit" ? 3 : 1,
+  );
 }
 
 main().catch((err) => {

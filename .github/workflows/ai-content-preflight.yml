@@ -69,11 +69,25 @@ jobs:
           fi
           echo "GEMINI_API_KEY: 設定あり (値は出力しない)"
 
+      # ★終了コードで gate するかを分ける (2026-07-31)。
+      #   0 = 使える / 1 = モデルが使えない (提供終了・権限) → PR を止める
+      #   3 = 判定不能 (クレジット枯渇・レート制限) → **モデルまで到達していない**ので止めない
+      #
+      # この gate の目的はモデル提供終了の検出であって、課金状態の監視ではない。
+      # 3 で PR を止めると、モデルが健全でも課金が尽きている間は該当ファイルに触る PR が
+      # すべて通らなくなる。かといって success にすると「モデルを確認できた」と誤読されるので、
+      # warning として残す (確認できていないことを見えるようにする)。
       - name: 🔎 Preflight (極小の実生成で使用可否を確認)
         run: |
-          set -o pipefail
+          set +e
           NODE_OPTIONS='--conditions react-server' \
             npx tsx packages/ai-content/src/scripts/preflight-gemini.ts 2>&1 | tee /tmp/preflight.log
+          code=${PIPESTATUS[0]}
+          if [ "$code" = "3" ]; then
+            echo "::warning::クォータ/課金の都合でモデルを検証できなかった (モデルの故障ではない)"
+            exit 0
+          fi
+          exit "$code"
 
       - name: 📝 Summary
         if: always()
