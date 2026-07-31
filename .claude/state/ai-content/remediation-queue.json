@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-07-31T02:08:53.113Z",
+  "generatedAt": "2026-07-31T19:26:27.998Z",
   "gscSnapshot": "2026-W30",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2176,
-    "done": 198,
-    "needsRegen": 1978,
+    "done": 208,
+    "needsRegen": 1968,
     "needsByReason": {
-      "incomplete": 1690,
-      "missing": 222,
-      "blocker": 66
+      "incomplete": 1682,
+      "missing": 221,
+      "blocker": 65
     },
-    "doneImpressions": 25105,
-    "needsImpressions": 11921,
+    "doneImpressions": 26198,
+    "needsImpressions": 10828,
     "opusReviewTier": 30
   },
   "entries": [
@@ -695,13 +695,16 @@
       "impressions": 135,
       "clicks": 9,
       "position": 5.54,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Fri, 31 Jul 2026 02:10:16 GMT",
+      "updatedAt": "2026-07-31T02:01:54.833Z"
     },
     {
       "rankingKey": "bean-sprouts-consumption-quantity",
@@ -798,15 +801,14 @@
       "impressions": 121,
       "clicks": 1,
       "position": 7.61,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Fri, 31 Jul 2026 02:10:14 GMT",
+      "updatedAt": "2026-07-31T02:02:31.670Z"
     },
     {
       "rankingKey": "university-graduates-job-ratio",
@@ -875,10 +877,16 @@
       "impressions": 117,
       "clicks": 12,
       "position": 7.23,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Fri, 31 Jul 2026 02:10:15 GMT",
+      "updatedAt": "2026-07-31T02:03:06.791Z"
     },
     {
       "rankingKey": "annual-clear-days",
@@ -909,43 +917,40 @@
       "impressions": 111,
       "clicks": 5,
       "position": 9,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-long"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Fri, 31 Jul 2026 02:10:14 GMT",
+      "updatedAt": "2026-07-31T02:03:58.077Z"
     },
     {
       "rankingKey": "per-capita-fixed-asset-tax-pref-municipal",
       "impressions": 109,
       "clicks": 2,
       "position": 10.06,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Fri, 31 Jul 2026 02:10:14 GMT",
+      "updatedAt": "2026-07-31T02:04:32.386Z"
     },
     {
       "rankingKey": "road-length-per-km2",
       "impressions": 109,
       "clicks": 6,
       "position": 7.76,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Fri, 31 Jul 2026 02:10:14 GMT",
+      "updatedAt": "2026-07-31T02:05:08.630Z"
     },
     {
       "rankingKey": "cod-roe-consumption-quantity",
@@ -976,12 +981,15 @@
       "impressions": 99,
       "clicks": 7,
       "position": 11.01,
-      "status": "needs-regen",
-      "reason": "blocker",
-      "blockers": [
-        "paren-number"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "causal-insights",
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Fri, 31 Jul 2026 02:10:14 GMT",
+      "updatedAt": "2026-07-31T02:05:53.603Z"
     },
     {
       "rankingKey": "paved-road-total-length",
@@ -1000,29 +1008,28 @@
       "impressions": 99,
       "clicks": 2,
       "position": 6.14,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Fri, 31 Jul 2026 02:10:14 GMT",
+      "updatedAt": "2026-07-31T02:06:25.682Z"
     },
     {
       "rankingKey": "sewage-treatment-coverage-rate",
       "impressions": 98,
       "clicks": 2,
       "position": 8.24,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Fri, 31 Jul 2026 02:10:15 GMT",
+      "updatedAt": "2026-07-31T02:07:10.438Z"
     },
     {
       "rankingKey": "konbu-consumption-expenditure",
@@ -1041,14 +1048,12 @@
       "impressions": 95,
       "clicks": 5,
       "position": 7.59,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Fri, 31 Jul 2026 02:10:16 GMT",
+      "updatedAt": "2026-07-31T02:07:57.374Z"
     },
     {
       "rankingKey": "retail-store-count-alt",
@@ -1644,7 +1649,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "sake-consumption-expenditure",
@@ -1673,7 +1678,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "wind-power-turbine-count",
@@ -1688,7 +1693,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "annual-snow-days",
@@ -1703,7 +1708,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "hobby-participation-rate-instrument",
@@ -1718,7 +1723,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "katsuobushi-consumption-expenditure",
@@ -1733,7 +1738,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "study-participation-rate-arts-culture",
@@ -1746,7 +1751,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "sugar-consumption-quantity",
@@ -1772,7 +1777,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "avg-salary-education-prefecture",
@@ -1813,7 +1818,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "other-mushroom-consumption-quantity",
@@ -1826,7 +1831,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "garbage-final-disposal",
