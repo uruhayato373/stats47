@@ -2,7 +2,7 @@
  * 軸スケール・目盛り計算ユーティリティ
  */
 
-import { formatValueWithPrecision, getMaxDecimalPlaces } from "@stats47/utils";
+import { formatValueWithPrecision } from "@stats47/utils";
 
 export interface NiceScale {
   max: number;
@@ -93,17 +93,8 @@ export function formatValueLabel(value: number, decimals = 1): string {
 /**
  * データセット全体で揃える小数桁を決める。**図を描く前に 1 度だけ呼ぶ。**
  *
- * 実データは 44.0 を 44 として持つ (JSON の number なので区別できない) ため、
- * 「そのデータセットに現れる最大の小数桁」を採る。1 県でも 60.4 があれば
- * その指標は小数第1位まで意味があるので、44 も "44.0" と表示する。
- *
- * @param maxDecimals 上限 (既定 2)。桁が多すぎるとラベルが読めなくなるため
+ * 実体は `@stats47/utils` にある (apps/web のランキング表・ヘッダーと同じ実装を使う。
+ * 桁揃えを共通化する作業で 2 か所に別実装を置くと本末転倒になる)。
+ * ここは svg-builder 内の呼び出し元のための re-export。
  */
-export function resolveValuePrecision(
-  values: readonly number[],
-  maxDecimals = 2,
-): number {
-  const finite = values.filter((v) => Number.isFinite(v));
-  if (finite.length === 0) return 0;
-  return Math.min(getMaxDecimalPlaces(finite as number[]), maxDecimals);
-}
+export { resolveValuePrecision } from "@stats47/utils";

@@ -171,6 +171,16 @@ if ! node "$PROJECT_ROOT/.claude/scripts/lib/check-repo-hygiene.cjs" --baseline;
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
 
+# 3.2 観測値の桁揃えガード
+# 共有規約 (@stats47/utils の resolveValuePrecision + formatValueWithPrecision) の迂回を検出。
+# maximumFractionDigits の単独指定・素の toLocaleString は同じ図の中で「60.4」と「44」を
+# 混在させる (2026-07-31 実発生)。既存違反は baseline で許容し、新規混入だけをブロックする。
+echo -e "${GREEN}🔢 数値整形（桁揃え）チェック...${NC}"
+if ! node "$PROJECT_ROOT/.claude/scripts/lib/check-value-format.cjs" --baseline; then
+  echo -e "${RED}❌ 観測値の桁揃えが共有規約を迂回しています。${NC}"
+  ERROR_COUNT=$((ERROR_COUNT + 1))
+fi
+
 # 4. ファイルサイズチェック
 echo -e "${GREEN}📏 ファイルサイズチェック...${NC}"
 MAX_FILE_SIZE=1048576 # 1MB

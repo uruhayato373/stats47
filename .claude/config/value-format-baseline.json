@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "findings": {
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/cards/KpiCard/KpiCardClient.tsx:? typeof value === \"number\" ? value.toLocaleString() : value": 1,
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/cards/MultiStatCard/MultiStatCardClient.tsx:{r.value !== null ? r.value.toLocaleString() : \"---\"}": 1,
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/cards/MultiStatCard/MultiStatCardClient.tsx:{totalValue.toLocaleString()}": 1,
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/cards/StatsTable/StatsTableClient.tsx:{row.value !== null ? row.value.toLocaleString() : \"---\"}": 1,
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/charts/AttributeMatrix/AttributeMatrixClient.tsx:? `${value.toLocaleString()}${unit ? ` ${unit}` : \"\"}`": 1,
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/charts/BarChart/BarChartClient.tsx:valueFormat={(d) => d.toLocaleString()}": 2,
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/charts/CompositionChart/CompositionChartClient.tsx:.tickFormat((v) => Number(v).toLocaleString());": 1,
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/charts/CompositionChart/CompositionChartClient.tsx:{value.toLocaleString()}": 2,
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/charts/CompositionChart/CompositionChartClient.tsx:tooltip.innerHTML = `<span style=\"color:${d.data.color}\">●</span> ${d.data.label}<br><strong>${d.data.value.toLocaleString()}${unitText}</strong>（${d.data.pct}%）`;": 1,
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/charts/DivergingBarChart/DivergingBarChartClient.tsx:<span className=\"text-lg font-bold\">{latestValues.negative.toLocaleString()}</span>": 1,
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/charts/DivergingBarChart/DivergingBarChartClient.tsx:<span className=\"text-lg font-bold\">{latestValues.positive.toLocaleString()}</span>": 1,
+    "bare-tolocalestring:apps/web/src/components/stat-charts/components/charts/LineChart/LineChartClient.tsx:{value.toLocaleString()}": 1,
+    "bare-tolocalestring:apps/web/src/features/ranking/components/RankingPageCards/StatsLineChartCard.tsx:{displayValue.toLocaleString()}": 1,
+    "bare-tolocalestring:packages/visualization/src/d3/components/BarChart/BarChart.tsx:valueFormat = (d) => d.toLocaleString(),": 1,
+    "bare-tolocalestring:packages/visualization/src/d3/components/CityMapChart/CityMapChart.tsx:return value.toLocaleString();": 1,
+    "bare-tolocalestring:packages/visualization/src/d3/components/DivergingBarChart/DivergingBarChart.tsx:return abs.toLocaleString();": 1,
+    "bare-tolocalestring:packages/visualization/src/d3/components/DonutChart/DonutChart.tsx:return [d.data.name, d.data.value.toLocaleString()];": 1,
+    "bare-tolocalestring:packages/visualization/src/d3/components/LineChart/LineChart.tsx:return value.toLocaleString();": 1,
+    "bare-tolocalestring:packages/visualization/src/d3/components/PrefectureMapChart/PrefectureMapChart.tsx:return value.toLocaleString();": 1,
+    "bare-tolocalestring:packages/visualization/src/d3/components/RadarChart/RadarChart.tsx:return value.toLocaleString();": 1,
+    "bare-tolocalestring:packages/visualization/src/d3/components/StackedAreaChart/StackedAreaChart.tsx:return `<div style=\"display:flex;align-items:center;gap:4px;\"><span style=\"display:inline-block;width:7px;height:7px;border-radius:2px;background:${escapeHtml(String(s.color))};opacity:0.7;flex-shrink": 1,
+    "bare-tolocalestring:packages/visualization/src/d3/components/StackedAreaChart/StackedAreaChart.tsx:return value.toLocaleString();": 1,
+    "bare-tolocalestring:packages/visualization/src/d3/constants/chart-styles.ts:if (Number.isInteger(value)) return value.toLocaleString();": 1,
+    "bare-tolocalestring:packages/visualization/src/leaflet/components/KsjClusterLayer.tsx:html: `<div style=\"background:${color};color:#fff;border-radius:50%;width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:2px so": 1,
+    "bare-tolocalestring:packages/visualization/src/leaflet/components/LeafletChoroplethMap.tsx:return `${item.value.toLocaleString()}${unit ? ` ${unit}` : \"\"}`;": 2,
+    "bare-tolocalestring:packages/visualization/src/leaflet/components/MapColorLegend.tsx:if (Number.isInteger(value)) return value.toLocaleString();": 1,
+    "max-fraction-digits-only:apps/web/src/components/charts/RankingBarList.tsx:maximumFractionDigits: valueMaximumFractionDigits,": 1,
+    "max-fraction-digits-only:apps/web/src/features/ranking/lib/build-national-average-series.ts:maximumFractionDigits: 1,": 1
+  }
+}

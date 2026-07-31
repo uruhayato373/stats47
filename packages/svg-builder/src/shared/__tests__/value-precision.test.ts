@@ -16,28 +16,15 @@ import { describe, expect, it } from "vitest";
 import { generateChoroplethSvg } from "../../charts/choropleth";
 import { formatValueLabel, resolveValuePrecision } from "../axis";
 
-describe("resolveValuePrecision", () => {
-  it("★1 県でも小数があればその桁数を採る (44 も 44.0 にするため)", () => {
+// `resolveValuePrecision` 自体の単体テストは実体のある `packages/utils` 側にある。
+// ここでは **svg-builder が re-export 越しに同じ実装を使っているか**だけを確かめる。
+describe("resolveValuePrecision (@stats47/utils の re-export)", () => {
+  it("★1 件でも小数があればその桁数を採る (44 も 44.0 にするため)", () => {
     expect(resolveValuePrecision([60.4, 54.9, 44, 24.4])).toBe(1);
   });
 
   it("★整数だけなら 0 (人口などに .0 を付けない)", () => {
     expect(resolveValuePrecision([110700, 98000, 44])).toBe(0);
-  });
-
-  it("小数第2位まであれば 2", () => {
-    expect(resolveValuePrecision([1.25, 3.4, 7])).toBe(2);
-  });
-
-  it("★上限を超えたら丸める (桁が多すぎるとラベルが読めない)", () => {
-    expect(resolveValuePrecision([1.23456789, 2])).toBe(2);
-    expect(resolveValuePrecision([1.23456789, 2], 1)).toBe(1);
-  });
-
-  it("空・非有限値でも落ちない", () => {
-    expect(resolveValuePrecision([])).toBe(0);
-    expect(resolveValuePrecision([Number.NaN, Number.POSITIVE_INFINITY])).toBe(0);
-    expect(resolveValuePrecision([Number.NaN, 3.5])).toBe(1);
   });
 });
 
