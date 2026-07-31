@@ -20,6 +20,7 @@ import fs from "node:fs";
 
 import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
 import { lintInternalLinks } from "../lib/internal-link-lint.mjs";
+import { lintParenNumbers } from "../lib/paren-number-lint.mjs";
 
 const BASE_URL = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const CONCURRENCY = 8;
@@ -220,6 +221,17 @@ function auditArticle(meta, body) {
   const linkLint = lintInternalLinks(body, { blogSlugs: PUBLISHED_SLUGS });
   for (const b of linkLint.blockers) flags.push(["blocker", b]);
   for (const w of linkLint.warnings) flags.push(["warning", w]);
+
+  // 括弧内の値・順位併記 (blog-quality-standards.md「数値の書き方」)。
+  // ★ここだけ quality-gate と severity を変える (2026-07-31)。
+  //   公開ゲート = blocker (これから出す記事は最初からこの形で書く)
+  //   既存棚卸し = warning (公開済み 424 記事の 79.5% が該当)
+  // 理由は運用ではなく影響度。リンク切れ・図欠落・である調は読者にとって実害があるが、
+  // 括弧内数値は読者には読める形で、困るのは「機械が照合できない」点だけ。これを must-fix に
+  // 流すと lane が 34 件 → 約190 件に膨らみ「本当に壊れている記事を先に直す」という
+  // 優先度の意味が消える。検出規則は同一で、扱いだけを分ける。
+  const parenLint = lintParenNumbers(body);
+  for (const w of parenLint.blockers) flags.push(["warning", w]);
 
   for (const [s] of flags) sev[s]++;
   return {

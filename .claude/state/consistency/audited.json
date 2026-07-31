@@ -1,10 +1,5 @@
 {
-  "hash": "588a71983249ad4e0520ecfd7a805432ea5c05ba5a0a608743c29f26032b1290",
-  "audited_at": "2026-07-30T21:35:16",
-  "files": [
-    ".claude/scripts/google-admin/__tests__/google-admin.test.mjs",
-    ".claude/scripts/google-admin/audit-adsense.mjs",
-    ".claude/scripts/google-admin/cli.mjs",
-    ".claude/scripts/google-admin/redact.mjs"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-07-31T04:38:26",
+  "files": []
 }

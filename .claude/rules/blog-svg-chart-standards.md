@@ -193,9 +193,22 @@ svg += svgThemeStyle();
 
 `packages/svg-builder` の全出力は `.claude/scripts/lib/svg-lint.mjs` で検査。
 
+**配線先 (2026-07-31 に公開前 gate へ拡張)**: `quality-gate.mjs`（pre-commit + publish-blog.yml で公開前
+blocker）+ `audit-chart-quality.mjs`（バッチ）+ `generate-article-charts.ts --validate`。
+従来 `lintSvgContent` はバッチと生成時にしか配線されておらず、**公開前 gate は SVG 本体の構造を
+見ていなかった**。実測影響は公開済み 424 記事中 1 記事（0.2%）で、error はそのまま blocker に昇格できた。
+dark mode 非対応 / theme 色 inline の 2 つは 140 枚該当のため warning のまま（再生成で解消する）。
+
+加えて公開前 gate は SVG まわりで次の 2 つも見る（`quality-gate.mjs` 側の実装）:
+**①参照先の実在** — `![](data/x.svg)` と書いてファイルが無ければ本番で画像切れになる。系譜 gate は
+`.json`/`.source.json` しか見ておらず SVG 本体の欠落は誰も検査していなかった（実測 3 記事 / 8 枚）。
+**②型を判別できる basename** — `chart-1` / `inline-chart-2` は §4 が禁止する無意味名で、型が
+判定できないと再生成もサイズ検査もディスパッチできない（実測 19 枚）。suffix 規約全体の遵守は
+既存負債 14.9% かつ `-quintile` 等の正当名を巻き込むため gate にせず critic の判断に委ねる。
+
 | 重大度 | チェック項目 |
 |---|---|
-| **error** | viewBox 未設定 / width・height 属性なし / 閉じタグなし / **カタログ別 非正規サイズ（統一済みカタログ）** |
+| **error** | viewBox 未設定 / width・height 属性なし / 閉じタグなし / `<text>` に未解決のテンプレート値（undefined・NaN・[object Object]）/ **カタログ別 非正規サイズ（統一済みカタログ）** |
 | **warning** | ダークモード非準拠（`svgThemeStyle()` なし） / テーマ色のインライン指定 / **カタログ別 非正規サイズ（未統一カタログ）**。※ **tile-grid はこの 2 つの warning を出さない**（仕様上テーマ非依存のため。`lintSvgContent(content, filename)` に filename を渡すと抑止される） |
 | **error (json ペア検査)** | **choropleth 凡例の意味的ラベル誤用**（安全/危険 等が json `legendLabels` 明示なしに焼き込み）/ **findings の内容パリティ**（json の heading/text が SVG に未描画 = renderer の heading 脱落バグ再発防止）— `lintChoroplethLegend` / `lintFindingsParity`（2026-07-13 追加）。配線先 = `quality-gate.mjs`（公開前 blocker）+ `audit-chart-quality.mjs`（バッチ） |
 

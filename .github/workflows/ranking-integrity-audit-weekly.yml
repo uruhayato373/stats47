@@ -61,11 +61,34 @@ jobs:
             2>&1 | tee /tmp/ranking-integrity-audit.log
           echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
+      # 「config は直っているのに配信データが古いまま」を列挙する (2026-07-31 追加)。
+      #
+      # 形状ゲート 3 層はどれも「いま R2 にあるデータが壊れている」しか言わず、config を是正しても
+      # 再取り込みが走らなければ配信は古いまま。allowlist の until が来るまで誰も催促しない。
+      # 検査(k) (レシピ整合) が同じ乖離を狙うが、レシピ導入前の payload は unbaked (残数) に落ちて
+      # 発火しないため、recipe に依存しないこの検査で空白を埋める。
+      #
+      # 縮小専用ラチェット: 増えたときだけ失敗する。0 件でなければ失敗にすると恒久的に赤くなり
+      # 無視されるため。
+      - name: 🔁 Audit re-ingest queue (config 是正 vs 配信の乖離)
+        id: reingest
+        run: |
+          set +e
+          npx tsx packages/data-configs/scripts/audit-reingest-queue.ts --ratchet \
+            2>&1 | tee /tmp/reingest-queue.log
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+          {
+            echo "### 再取り込みキュー"
+            echo '```'
+            head -20 /tmp/reingest-queue.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: 📤 Commit audit result to develop
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/ranking/integrity-audit.json
+          git add .claude/state/ranking/integrity-audit.json .claude/state/data
           if git diff --cached --quiet; then
             echo "No audit changes"
             exit 0
@@ -74,7 +97,7 @@ jobs:
           git push origin develop
 
       - name: 🚨 Open issue on integrity violations
-        if: steps.check.outputs.exit_code != '0'
+        if: steps.check.outputs.exit_code != '0' || steps.reingest.outputs.exit_code != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -95,6 +118,20 @@ jobs:
             echo "- home/survey/category 件数の急減 → \`export-master-snapshots.ts\` の再生成漏れ・部分集合汚染を疑う"
             echo ""
             echo "詳細 (全件 JSON): \`.claude/state/ranking/integrity-audit.json\` (このコミットで develop に反映済み)"
+            echo ""
+            echo "### 再取り込みキュー"
+            echo ""
+            echo "「config は直っているのに配信データが古いまま」の metric。"
+            echo "増えたときだけ失敗する (縮小専用ラチェット)。"
+            echo ""
+            echo '```'
+            head -20 /tmp/reingest-queue.log
+            echo '```'
+            echo ""
+            echo "- stale-delivery → 再取り込みで直る (\`page-data-batch.ts --metric <key>\`)"
+            echo "- config-insufficient → 再取り込みでは直らない (\`diagnose-unpinned-axes.ts --fetch\` で軸を診断)"
+            echo ""
+            echo "詳細: \`.claude/state/data/LATEST.md\`"
             echo ""
             echo "正典: packages/ranking/src/scripts/audit-ranking-data-integrity.ts"
           } > /tmp/ranking-integrity-issue.md

@@ -77,7 +77,10 @@ env:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    # 全 metric (2,295 件) の実 push は e-Stat fetch + 派生 snapshot 再生成で 60 分に収まらない。
+    # 2026-07-05 の月次は 42 分で correlation OOM 死しており、その先の所要は未計測。
+    # GitHub hosted の上限 360 分の範囲で余裕を取る (metric 指定の部分更新は従来どおり数分で終わる)。
+    timeout-minutes: 180
     steps:
       # push トリガーは develop (request file がそこにある)。
       # dispatch / schedule は従来どおり main (本番と同じ config で走らせる)。
@@ -150,8 +153,14 @@ jobs:
 
       # 派生 snapshot (master / ranking-values / area-profile 等) を git TS + 更新済観測値から
       # 再生成 → R2 push (run.sh は CI=true で push する)。
-      # ※ correlation snapshot の生成 task は run.sh から廃止済 (producer 未実装)。観測値更新後も
-      #   app/correlation/* は再生成されない (別途エフェメラル計算の実装が必要 / 機能バックログ)。
+      # ※ correlation task は 2026-06-14 に復活済 (R2 観測値 → 使い捨て :memory: SQLite の
+      #   エフェメラル producer)。上の「廃止済」記述は stale だったので 2026-07-31 に是正した。
+      #
+      # ★max-old-space-size 必須 (2026-07-05 障害の再発防止): 月次の全 metric refresh が
+      #   correlation task で **JS ヒープ OOM** (4,051 MB で Mark-Compact 失敗) して落ちていた。
+      #   全 metric の観測値を読んで総当たりで相関を出すため入力が大きい。runner (ubuntu-latest) は
+      #   16 GB あるので既定の ~4 GB から引き上げる。**メモリ profile を直したわけではなく上限を
+      #   上げただけ**なので、metric 数が増え続ければまた頭を打つ (その時は streaming 化が要る)。
       #
       # ★NODE_ENV=production 必須 (2026-07-27 障害の再発防止): run.sh の TSX ラッパ
       #   (packages/ranking/src/scripts/setup-cli.js) は NODE_ENV 未設定なら "development" を
@@ -165,6 +174,7 @@ jobs:
         if: steps.resolve.outputs.dry_run != 'true'
         env:
           NODE_ENV: production
+          NODE_OPTIONS: --max-old-space-size=8192
         run: bash .claude/skills/db/sync-snapshots/run.sh
 
       # 形状 allowlist の**縮小だけ**を自動反映する。

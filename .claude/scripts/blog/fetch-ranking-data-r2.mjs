@@ -51,9 +51,11 @@ const WRITE_DIGEST = args.includes("--digest");
 //   既存記事の参照SVG名 (例: aging-solo-ranking) に合わせて復旧する用途。
 //   未指定時は従来通り `<slug>-prefecture-rankings`。
 const DATA_NAME = getArg("--data-name");
+// --with-map: 同じ観測値からタイルマップ用 json も出力する (新規記事の既定構成)
+const WITH_MAP = args.includes("--with-map");
 
 if (!SLUG) {
-  console.error("usage: --slug <slug> [--base <dir>] [--keys k1,k2] [--year YYYY] [--dry-run] [--digest]");
+  console.error("usage: --slug <slug> [--base <dir>] [--keys k1,k2] [--year YYYY] [--with-map] [--dry-run] [--digest]");
   process.exit(1);
 }
 
@@ -61,8 +63,11 @@ const articleDir = path.join(PROJECT_ROOT, BASE, SLUG);
 const articlePath = fs.existsSync(path.join(articleDir, "article.md"))
   ? path.join(articleDir, "article.md")
   : path.join(articleDir, "article.mdx");
-if (!fs.existsSync(articlePath)) {
-  console.error(`[error] article not found: ${articlePath}`);
+// 記事がまだ無くても --keys があればデータだけ先に接地できる (2026-07-31)。
+// 新規記事の自動生成は「データを取ってから本文を書く」順なので、記事の存在を前提にできない。
+// --keys 無しのときだけ記事から /ranking/<key> を抽出するため article.md が要る。
+if (!fs.existsSync(articlePath) && !KEYS_OVERRIDE) {
+  console.error(`[error] article not found: ${articlePath} (--keys を指定すれば記事なしでも取得できます)`);
   process.exit(1);
 }
 
@@ -182,8 +187,40 @@ async function buildForKey(key, outBaseName, fullName) {
     fs.writeFileSync(sourcePath, JSON.stringify(manifest, null, 2));
   }
 
+  // --with-map: 同じ観測値からタイルマップ用 json も出す (2026-07-31)。
+  // 地理分布の図は winning-patterns で効果が実測されており (hasMap +15.4%)、新規記事の既定構成
+  // (ランキング + 地図) に要る。値は同一なので別途 R2 を叩かない。
+  let mapFile = null;
+  if (WITH_MAP) {
+    const mapBase = `${outBaseName}-map`;
+    const mapPayload = {
+      title,
+      subtitle: `${year}年`,
+      label: title,
+      unit,
+      year,
+      rankingKey: key,
+      source: payload.source,
+      generatedBy: "fetch-ranking-data-r2.mjs",
+      data: data.map((d) => ({ pref: d.areaName, areaName: d.areaName, value: d.value })),
+    };
+    const mapManifest = {
+      ...manifest,
+      transform: "all47 (choropleth・値は ranking と同一)",
+      restore: `node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug ${SLUG} --keys ${key} --with-map`,
+    };
+    if (!DRY_RUN) {
+      fs.writeFileSync(path.join(articleDir, "data", `${mapBase}.json`), JSON.stringify(mapPayload, null, 2));
+      fs.writeFileSync(
+        path.join(articleDir, "data", `${mapBase}.source.json`),
+        JSON.stringify(mapManifest, null, 2),
+      );
+    }
+    mapFile = `${mapBase}.json`;
+  }
+
   const ratio = (data[0].value / data[data.length - 1].value).toFixed(1);
-  return { key, year, unit, title, count: data.length, file: path.relative(PROJECT_ROOT, outPath), data, ratio };
+  return { key, year, unit, title, count: data.length, file: path.relative(PROJECT_ROOT, outPath), mapFile, data, ratio };
 }
 
 // ---------- digest (リライト agent のグラウンドトゥルース) ----------
