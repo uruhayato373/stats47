@@ -574,8 +574,12 @@ GSC 実測と是正ループ (`blog-remediation-loop.md`) で品質を上げる�
 | 経路 | 用途 |
 |---|---|
 | schedule (JST 04:30) | 無人の日次ループ |
-| **push `data/blog-generate-requests.json`** | **cloud セッション用**。`{ "limit": 1, "dryRun": false, "keepDraft": true }` を develop へ commit すると実行し、消費した request を git rm で commit-back する |
+| **push `data/blog-generate-requests.json`** | **cloud セッション用**。`{ "limit": 1, "dryRun": false, "keepDraft": true, "requestedAt": "<ISO>" }` を develop へ commit すると実行し、request を git rm で commit-back する |
 | workflow_dispatch | ローカルからの手動 |
+
+**再投入するときは `requestedAt` を必ず更新する。** paths フィルタは差分で判定するので、同じ内容を
+書き直しても diff が出ず発火しない (2026-07-31 に実際に踏んだ)。request は**結果によらず消費される**
+(失敗した run が残すと、同じ内容では再実行できなくなるため)。
 
 push 経路が要るのは、**cloud セッションが `actions:write` を持たず workflow_dispatch できない (403)**
 ため。`data-refresh.yml` / `gemini-image-run.yml` と同じ方式で、`ai-content-generate-daily.yml` にも

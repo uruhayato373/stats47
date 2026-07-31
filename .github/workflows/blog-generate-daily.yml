@@ -181,16 +181,20 @@ jobs:
           echo "::error::develop への push に 3 回失敗した (outbox ${NEW} 件が未配送)"
           exit 1
 
-      # dry-run は上の commit step が走らないので request が残る。別途消費する
-      # (残すと「未処理の要求がある」ように見えて紛らわしい)。
-      - name: 🧹 Consume request (dry-run 時)
-        if: ${{ github.event_name == 'push' && env.DRY_RUN == 'true' }}
+      # ★request は結果によらず必ず消費する (2026-07-31 の実測で必要と判明)。
+      #
+      #   preflight で落ちた run が request を消費せず develop に残り、同じ内容を再 push しても
+      #   **diff が出ないので paths フィルタに掛からず再実行できなかった**。残った request は
+      #   「未処理の要求がある」ようにも見えて紛らわしい。
+      #   成功時は上の outbox commit が同じ commit で消しているので、ここは no-op になる。
+      - name: 🧹 Consume request (未消費なら)
+        if: ${{ always() && github.event_name == 'push' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git rm -q --ignore-unmatch data/blog-generate-requests.json || true
           if git diff --cached --quiet; then exit 0; fi
-          git commit -q -m "chore(blog): consume blog-generate request (dry-run) [skip ci]"
+          git commit -q -m "chore(blog): consume blog-generate request [skip ci]"
           git pull --rebase --quiet origin develop && git push origin HEAD:develop
 
       # 既定 token の push は blog-auto-publish の push トリガーを発火させないため明示 dispatch する。
