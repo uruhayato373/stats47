@@ -8,6 +8,22 @@ export type { AreaType } from './area';
 export type { StatsSchema } from './stats-schema';
 export { type YearFormat, formatYearName } from './year-format';
 
+// コロプレス配色の語彙 SSOT (data-configs / visualization / svg-builder が共有)
+export {
+  type ColorSchemeEntry,
+  type ColorSchemeType,
+  COLOR_SCHEME_CATALOG,
+  DEFAULT_SEQUENTIAL_SCHEME,
+  DEFAULT_DIVERGING_SCHEME,
+  findColorScheme,
+  normalizeColorScheme,
+  toShortColorScheme,
+  isKnownColorScheme,
+  colorSchemeTypeOf,
+  d3KeyOfColorScheme,
+  assertKnownColorScheme,
+} from './color-scheme';
+
 export type {
   TopoJSONGeometry,
   TopoJSONGeometryCollection,
