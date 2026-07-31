@@ -1,5 +1,8 @@
 {
   "metric": "",
   "since": "",
-  "dryRun": false
+  "allowEmpty": "convenience-store-count-commercial,core-agricultural-workers,earmarked-tax-local,elderly-single-person-households,elementary-long-term-absent-students,elementary-school-classes,food-self-sufficiency-rate-calorie,gpp-agriculture,gpp-education-sector,gpp-forestry,gpp-manufacturing,gpp-public-service,households-with-elderly-members,junior-high-school-classes,kindergarten-education-diffusion-rate,kindergarten-teachers,national-pension-full-exemption-rate,national-pension-partial-exemption-rate,national-tax-collected,nursery-education-diffusion-rate,ordinary-tax-local,population-growth-rate,production-age-population-ratio,ratio-65-plus,retail-goods-inventory-amount,sixth-industry-agriculture-entities,sixth-industry-agriculture-sales,small-scale-farm-households,voluntary-car-insurance-rate-bodily-injury,voluntary-car-insurance-rate-property,voluntary-car-insurance-rate-vehicle,young-population-ratio",
+  "dryRun": false,
+  "requestedAt": "2026-07-31T06:05:26Z",
+  "note": "全 metric refresh。treatment-rate-* 26 件は areaAxis 追加で修正済み。残る 0 件 32 件は既存 R2 データを保持したまま警告に降格し、残りの push を通す (原因は未修正)"
 }

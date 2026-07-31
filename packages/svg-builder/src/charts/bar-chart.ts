@@ -22,7 +22,7 @@
  * "single" レイアウトのみ対応。
  */
 
-import { niceScale, formatTick, formatValueLabel } from "../shared/axis";
+import { niceScale, formatTick, formatValueLabel, resolveValuePrecision } from "../shared/axis";
 import { FONT_FAMILY, PALETTES, PaletteName, colorByIndex } from "../shared/color";
 import { svgThemeStyle } from "../shared/theme";
 
@@ -136,6 +136,8 @@ function renderCardColumn(
   headerLabel: string,
   toBarW: (v: number) => number,
   unit: string,
+  /** データセット全体で解決した小数桁。上位/下位で揃わないと読み比べられないので呼び元が決める */
+  precision: number,
 ): string {
   const header = [
     `  <rect x="${colX}" y="${HEADER_Y}" width="${CARD_W}" height="${HEADER_H}" rx="8" fill="${theme.header}"/>`,
@@ -151,8 +153,8 @@ function renderCardColumn(
       const rank = d.rank ?? i + 1;
       const name = d.name ?? d.label;
       const valStr = unit
-        ? `${formatValueLabel(d.value, 1)} ${unit}`
-        : formatValueLabel(d.value, 1);
+        ? `${formatValueLabel(d.value, precision)} ${unit}`
+        : formatValueLabel(d.value, precision);
       return [
         `  <rect x="${colX}" y="${rowY}" width="${CARD_W}" height="${CARD_H}" rx="6" fill="${cardBg}"/>`,
         `  <circle cx="${colX + BADGE_DX}" cy="${cy}" r="${BADGE_R}" fill="${theme.header}"/>`,
@@ -191,14 +193,16 @@ function renderColumnsLayout(
   // 両カラム共通スケール（全件の最大値を基準にバー長を決める）
   const allValues = [...topItems, ...bottomItems].map((d) => d.value);
   const globalMax = Math.max(...allValues, 1);
+  // 桁数も同じ集合から 1 度だけ決める (上位/下位で揃わないと読み比べられない)
+  const precision = resolveValuePrecision(allValues);
   const toBarW = (v: number) =>
     Math.max(0, Math.round((Math.max(0, v) / globalMax) * CARD_BAR_AREA_W * 1000) / 1000);
 
   const N = Math.max(topItems.length, bottomItems.length);
   const totalH = FIRST_ROW_Y + N * ROW_GAP + BOTTOM_PAD;
 
-  const leftCol = renderCardColumn(topItems, COL_L_X, leftTheme, highLabel, toBarW, unit);
-  const rightCol = renderCardColumn(bottomItems, COL_R_X, rightTheme, lowLabel, toBarW, unit);
+  const leftCol = renderCardColumn(topItems, COL_L_X, leftTheme, highLabel, toBarW, unit, precision);
+  const rightCol = renderCardColumn(bottomItems, COL_R_X, rightTheme, lowLabel, toBarW, unit, precision);
 
   const titleText = subtitle
     ? `${title}<tspan font-size="14" font-weight="normal" class="svg-tick">　${subtitle}</tspan>`
@@ -253,6 +257,8 @@ function renderPortraitSection(
   headerLabel: string,
   toBarW: (v: number) => number,
   unit: string,
+  /** データセット全体で解決した小数桁 (呼び元が 1 度だけ決める) */
+  precision: number,
 ): string {
   const x = PORT_PAD;
   const header = [
@@ -268,8 +274,8 @@ function renderPortraitSection(
       const rank = d.rank ?? i + 1;
       const name = d.name ?? d.label;
       const valStr = unit
-        ? `${formatValueLabel(d.value, 1)} ${unit}`
-        : formatValueLabel(d.value, 1);
+        ? `${formatValueLabel(d.value, precision)} ${unit}`
+        : formatValueLabel(d.value, precision);
       const badgeCx = x + 42;
       const badgeCy = y + 38;
       const w = toBarW(d.value);
@@ -311,6 +317,8 @@ function renderPortraitLayout(
 
   const allValues = [...topItems, ...bottomItems].map((d) => d.value);
   const globalMax = Math.max(...allValues, 1);
+  // 桁数も同じ集合から 1 度だけ決める (上位/下位で揃わないと読み比べられない)
+  const precision = resolveValuePrecision(allValues);
   const toBarW = (v: number) =>
     Math.max(0, Math.round((Math.max(0, v) / globalMax) * PORT_BAR_AREA_W * 1000) / 1000);
 
@@ -326,11 +334,11 @@ function renderPortraitLayout(
   const startY = PORT_TITLE_BOTTOM + Math.max(0, Math.floor((avail - contentH) / 2));
 
   const sec1 = renderPortraitSection(
-    topItems, startY, rowH, topTheme, `${highLabel}${tN}`, toBarW, unit,
+    topItems, startY, rowH, topTheme, `${highLabel}${tN}`, toBarW, unit, precision,
   );
   const sec2Top = startY + sec1H + PORT_SECTION_GAP;
   const sec2 = renderPortraitSection(
-    bottomItems, sec2Top, rowH, bottomTheme, `${lowLabel}${bN}`, toBarW, unit,
+    bottomItems, sec2Top, rowH, bottomTheme, `${lowLabel}${bN}`, toBarW, unit, precision,
   );
 
   // 長いタイトルは見切れるため概算幅でフォントを自動フィット。年(サブタイトル)は別行・大きめ。
@@ -384,6 +392,8 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
 
   const dataItems = items.filter((d) => !d.isSeparator);
   const maxVal = Math.max(...dataItems.map((d) => d.value), xMin + 1);
+  // 桁数はこの図に載る全値から 1 度だけ決める (値ごとに変えると 60.4 と 44 が混ざる)
+  const precision = resolveValuePrecision(dataItems.map((d) => d.value));
   const { max: scaleMax, step } = niceScale(maxVal - xMin);
 
   const toBarWidth = (v: number) => ((v - xMin) / scaleMax) * BAR_AREA_W;
@@ -435,7 +445,7 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
     const fill = getColor(idx);
     const midY = y + 13;
     const valX = LABEL_X + w + 4;
-    const valStr = formatValueLabel(d.value, 1);
+    const valStr = formatValueLabel(d.value, precision);
     return [
       `  <rect x="${LABEL_X}" y="${y}" width="${w}" height="${BAR_H}" fill="${fill}" rx="2"/>`,
       `  <text x="${LABEL_X - 5}" y="${midY}" text-anchor="end" font-size="12" class="svg-axis">${d.label}</text>`,

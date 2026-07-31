@@ -236,6 +236,16 @@ jobs:
           node .claude/scripts/lib/check-maintenance-debt.cjs --ratchet-check
         continue-on-error: false
 
+      - name: 🔢 Value Formatting Guard
+        # 観測値の桁揃えが共有規約 (@stats47/utils の resolveValuePrecision +
+        # formatValueWithPrecision) を迂回していないかを検査する。max 単独指定・素の
+        # toLocaleString は同じ図の中で「60.4」と「44」を混在させる (2026-07-31 実発生)。
+        # 既存違反は baseline に固定し、新規混入だけを止める (baseline は縮小専用)。
+        run: |
+          node .claude/scripts/lib/check-value-format.cjs --baseline
+          node .claude/scripts/lib/check-value-format.cjs --ratchet-check
+        continue-on-error: false
+
       - name: 🔗 github-script await Guard
         # actions/github-script の inline JS で GitHub API 呼び出し (github.rest.*/graphql) の
         # await 忘れを弾く。未await だと 503 等の reject が unhandled rejection になり、テスト

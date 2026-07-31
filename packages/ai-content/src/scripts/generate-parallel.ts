@@ -6,8 +6,12 @@ import "dotenv/config";
  * 旧版 (7569bd5c で削除) は D1 (`metrics` 読み + `upsertRankingAiContent` 書き) に依存していた。
  * 本版は **完全DBレス**:
  *   入力  : R2 観測値 + ranking item.json (build-input.ts)
- *   生成  : claude / gemini CLI を子プロセス起動 (旧 callAI を踏襲) または Gemini API 直叩き
- *           (--model gemini-api。CI / 日次 cron の無人運転はこちら。CLI 非依存)
+ *   生成  : claude / gemini CLI を子プロセス起動 (旧 callAI を踏襲)
+ *
+ * ★Gemini API 直叩き (--model gemini-api) は 2026-07-31 に撤去した。GitHub Actions の中で
+ *   LLM を呼ぶ形は Claude でも Gemini でも別課金になるため、生成は Claude セッション
+ *   (Max サブスク内) が担う。セッションからは skill /generate-ai-content を使う
+ *   (build-input.ts --prompt-only で prompt を取り、agent が書く)。
  *   ゲート: 生成物を audit-ai-content.mjs に通し blocker 0 のものだけ採用 (★旧版に無かった品質ゲート)
  *   出力  : staging dir に AiContentSnapshotRow を書き出す (R2 直書きしない)
  *           → r2-publisher / diff-push-r2 が staging を app/ranking/<key>/ai-content.json へ push
@@ -18,7 +22,7 @@ import "dotenv/config";
  * CLI:
  *   NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
  *     tsx packages/ai-content/src/scripts/generate-parallel.ts \
- *       [--model claude-haiku|claude-sonnet|claude-opus|gemini|gemini-api] [--concurrency N] \
+ *       [--model claude-haiku|claude-sonnet|claude-opus|gemini] [--concurrency N] \
  *       [--limit N] [--area prefecture] [--force] [--out <dir>] [--dry-run] [--keys k1,k2] \
  *       [--retries N] [--outbox]
  *
@@ -50,7 +54,6 @@ import { isOk } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import { aiContentKeyPath, type AiContentSnapshotRow } from "../types/snapshot";
 import { buildRankingContentPromptForKey } from "./build-input";
-import { generateContentText } from "../services/gemini-text-client";
 import { decideOutcome } from "../services/generation-outcome";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -101,23 +104,8 @@ function parseArgs(): Options {
 // AI 呼び出し (旧 callAI を踏襲。NODE_OPTIONS / CLAUDECODE を子に渡さない)
 // ============================================================
 
-/**
- * Gemini API を直接叩く (CLI 不要)。日次 cron の無人運転はこちらを使う。
- * CLI (`--model gemini`) は認証・バージョンが実行環境に依存するため CI では使わない。
- */
-async function callGeminiApi(promptContent: string): Promise<string> {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
-    throw new Error(
-      "GEMINI_API_KEY が未設定です (--model gemini-api は API キーが必要。CI は Secrets、ローカルは .env.local)",
-    );
-  }
-  const { text } = await generateContentText({ prompt: promptContent, apiKey });
-  return text;
-}
 
 function callAI(model: string, promptContent: string): Promise<string> {
-  if (model === "gemini-api") return callGeminiApi(promptContent);
   return new Promise((resolve, reject) => {
     let cmd: string;
     let args: string[];

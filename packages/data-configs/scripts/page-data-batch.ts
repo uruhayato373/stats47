@@ -372,6 +372,74 @@ async function fetchAxisMembers(
 }
 
 /**
+ * SSDS の分類名から先頭のコード接頭辞を落とす。
+ *
+ * e-Stat の CLASS 名は `#A03503_65歳以上人口割合` の形で、**コードが名前に埋まっている**。
+ * 都道府県表と市区町村表で同じ指標に別コードが振られているため、コードのまま突き合わせると
+ * 一致しない。名前部分だけを比較の鍵にする。
+ */
+export function stripCatCodePrefix(name: string): string {
+  return name.replace(/^#?[A-Za-z0-9]+_/, "").trim();
+}
+
+/**
+ * 市区町村表の cdCat01 を**指標名の完全一致**で解決する (2026-07-31)。
+ *
+ * ## なぜ要るか
+ *
+ * `prefToCityStatsDataId` は「同一 cdCat01 で city 表から取れる」前提だったが、実測すると
+ * SSDS は表ごとにコードを振り直している:
+ *
+ *   都道府県表 0000010201: #A03501 15歳未満 / #A03502 15〜64歳 / #A03503 65歳以上
+ *   市区町村表 0000020301: #A03504 15歳未満 / #A03505 15〜64歳 / #A03506 65歳以上
+ *
+ * 同じ指標に別コードが割り当たっているため、pref のコードを city 表に渡すと 0 行になる
+ * (該当データなし)。一致する指標もあるので前提が長く成立して見えていた。
+ *
+ * ## 安全側の設計
+ *
+ * - **接頭辞を落とした名前の完全一致だけ**を採る。曖昧一致はしない
+ *   (「15歳未満」を「65歳以上」に取り違えたら、47 行そろって値も妥当なので
+ *    形状ゲートでは捕まらない。空のままの方がはるかに安全)
+ * - 候補が 1 件に定まらなければ null を返す
+ * - **コードでの取得が 0 行だったときだけ**呼ぶ。今動いている metric の経路は変わらない
+ */
+export function resolveCat01ByName(
+  prefMembers: readonly AreaAxisMember[],
+  cityMembers: readonly AreaAxisMember[],
+  prefCat01: string,
+): string | null {
+  const pref = prefMembers.find((m) => m.code === prefCat01);
+  if (!pref) return null;
+  const want = stripCatCodePrefix(pref.name);
+  if (!want) return null;
+  const hits = cityMembers.filter((m) => stripCatCodePrefix(m.name) === want);
+  return hits.length === 1 ? hits[0].code : null;
+}
+
+/**
+ * pref/city 両方の cat01 メンバーを取り、名前一致で city 側のコードを解決する。
+ *
+ * getMetaInfo が落ちたら **null を返して空のまま進む** (推測で別コードを当てない)。
+ */
+async function resolveCityCat01(
+  appId: string,
+  prefStatsDataId: string,
+  cityStatsDataId: string,
+  prefCat01: string,
+): Promise<string | null> {
+  try {
+    const [prefMeta, cityMeta] = await Promise.all([
+      fetchAxisMembers(appId, prefStatsDataId, "cat01"),
+      fetchAxisMembers(appId, cityStatsDataId, "cat01"),
+    ]);
+    return resolveCat01ByName(prefMeta.members, cityMeta.members, prefCat01);
+  } catch {
+    return null;
+  }
+}
+
+/**
  * 都道府県が area 軸ではなく cat 軸に入っている表を取り込む。
  *
  * その軸を **pin せずに**取得し、応答の `@cat0N` を都道府県コードに写して `@area` に置く。
@@ -1015,7 +1083,21 @@ async function processOne(
       if (!cityStatsDataId) {
         notes.push("city=skip(no-city-table)");
       } else {
-        const fetched = await fetchEstatData(appId, { ...src, statsDataId: cityStatsDataId });
+        let fetched = await fetchEstatData(appId, { ...src, statsDataId: cityStatsDataId });
+        // ★city 表はコードを振り直していることがある (2026-07-31 実測)。
+        //   コードで 0 行だったときだけ、指標名の完全一致で cdCat01 を引き直す。
+        //   取得できている metric の経路は通らないので、既存の挙動は変わらない。
+        if (fetched.values.length === 0 && src.cdCat01) {
+          const alt = await resolveCityCat01(appId, src.statsDataId, cityStatsDataId, src.cdCat01);
+          if (alt) {
+            notes.push(`city-cat01=${src.cdCat01}->${alt}`);
+            fetched = await fetchEstatData(appId, {
+              ...src,
+              statsDataId: cityStatsDataId,
+              cdCat01: alt,
+            });
+          }
+        }
         const values = fetched.values;
         const payload = shapeForCity(config, values);
         const notEmpty = await gateEmpty("city", values.length, payload.rows.length, "cities.json");
@@ -1215,7 +1297,16 @@ async function main() {
   }
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+// ★直接実行されたときだけ走らせる (2026-07-31)。
+//   純粋関数をテストから import しただけで全 metric の取り込みが始まってしまい、
+//   e-Stat へ数千リクエストを投げかけた。import は副作用を持ってはいけない。
+const invokedDirectly = process.argv[1]
+  ? resolve(process.argv[1]).includes("page-data-batch")
+  : false;
+
+if (invokedDirectly) {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}

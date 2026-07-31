@@ -3,36 +3,47 @@ import "dotenv/config";
 /**
  * generate-blog-article.ts — ブログ新規記事の無人生成 orchestrator。
  *
- * `generate-parallel.ts` (ランキング ai-content) のブログ版。同じ思想で組む:
+ * `generate-parallel.ts` (ランキング ai-content) のブログ版。**このスクリプトは LLM を呼ばない**:
  *   入力  : topic-queue (何を書くか) + R2 観測値 (数値の出どころ)
- *   生成  : Gemini API 直叩き (CLI 非依存。CI で無人運転できる)
+ *   生成  : **Claude セッション** (Max サブスク内)。ここは prompt を渡すだけ
  *   ゲート: quality-gate.mjs で blocker 0 のものだけ採用。**ゲートを緩めて通すことはしない**
  *   出力  : docs/21_ブログ記事原稿/<slug>/ (git outbox)。R2 直書きしない
  *           → develop へ push すると blog-auto-publish.yml が再検証して R2 公開まで実行する
  *
+ * ## なぜ LLM 呼び出しを持たないか (2026-07-31 に Gemini から移行)
+ *
+ * 当初は「Claude のトークンを使わない」ために Gemini API を直叩きしていたが、
+ * **GitHub Actions の中で LLM を呼ぶ形にすると Claude でも Gemini でも別課金になる**。
+ * Max サブスクの範囲で回すには生成を Claude セッション側に置く必要があるため、
+ * 決定的な工程だけをこのスクリプトに残し、「書く」ところをセッションへ渡す形にした。
+ * (既存記事の是正 `blog-remediation-loop.md` は元からこの型で運用している)
+ *
  * ## 工程
  *
- *   1. topic-queue から pending を取る
- *   2. R2 観測値を接地 (fetch-ranking-data-r2.mjs)
- *   3. **データ健全性ゲート** (blog-topic-gate)。壊れた metric の記事は書かない
- *   4. SVG 生成 (generate-article-charts.ts)
- *   5. Gemini で本文生成 → quality-gate → 落ちたら指摘を添えて再試行
- *   6. **別コンテキストの Gemini で critic レビュー** → review.md
- *   7. verdict PASS なら published:true にして再度ゲート → 確定
+ *   1. topic-queue から pending を取る            ← このスクリプト
+ *   2. R2 観測値を接地 (fetch-ranking-data-r2.mjs) ← このスクリプト
+ *   3. **データ健全性ゲート** (blog-topic-gate)    ← このスクリプト。壊れた metric の記事は書かない
+ *   4. SVG 生成 (generate-article-charts.ts)       ← このスクリプト
+ *   5. prompt を article.prompt.txt に書き出す     ← このスクリプト (ここで停止)
+ *   ---- ここから Claude セッション ----
+ *   6. prompt を読んで article.md を書く           ← セッション / article-writer
+ *   7. `--ingest <slug>` でゲート                  ← このスクリプト。落ちたら 6 に戻る
+ *   8. blog-critic (別コンテキストの subagent)     ← review.md を書く
+ *   9. `--ingest <slug>` で PASS 確認 → published:true → 最終ゲート
  *
- * ## critic を同じモデルにしてよいのか
+ * ## critic を分ける理由
  *
- * `blog-quality-standards.md` が禁じているのは「**書いた本人が自己採点して公開する**」ことです。
- * critic には記事本文だけを渡し、ground truth も型の指示も再試行履歴も渡しません。文脈が違えば
- * 独立した読者として読めるので、この構造は保たれます。人間 (または別 agent) のレビューに
- * 比べて弱いのは事実なので、公開後の実測 (GSC) と是正ループで品質を上げます。
+ * `blog-quality-standards.md` が禁じているのは「**書いた本人が自己採点して公開する**」こと。
+ * critic は別コンテキストの subagent が担い、記事本文だけを読む (ground truth も型の指示も
+ * 渡さない)。`--ingest` は review.md の verdict を読むだけで、自分では審査しない。
  *
  * CLI:
- *   GEMINI_API_KEY=... npx tsx packages/ai-content/src/scripts/generate-blog-article.ts \
- *     [--limit N] [--topic <topicKey>] [--retries N] [--dry-run] [--keep-draft]
+ *   npx tsx packages/ai-content/src/scripts/generate-blog-article.ts \
+ *     [--limit N] [--topic <topicKey>] [--dry-run] [--ingest <slug>]
  *
- *   --dry-run    : Gemini を呼ばず、接地・ゲート・prompt 長までを実行する (課金なし)
- *   --keep-draft : ゲート落ち / critic REVISE でも下書きを残す (既定は破棄)
+ *   (既定)       : 接地〜prompt 書き出しまで。LLM は呼ばない
+ *   --dry-run    : 接地とゲートだけ確認して接地物を残さない
+ *   --ingest S   : セッションが書いた article.md をゲート → critic PASS なら公開待ちに確定
  *
  * 正典: .claude/rules/blog-quality-standards.md / .claude/rules/blog-data-schema.md §0
  */
@@ -43,11 +54,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { gateTopicData, type GroundedRow } from "../services/blog-topic-gate";
-import { generateContentText, resolveTextModel } from "../services/gemini-text-client";
 import { decideOutcome } from "../services/generation-outcome";
 import {
   buildBlogArticlePrompt,
-  buildBlogCriticPrompt,
   type BlogArchetype,
   type GroundTruthMetric,
 } from "../services/prompts/blog-article-prompt";
@@ -66,9 +75,10 @@ const getArg = (f: string) => {
 };
 const LIMIT = Number(getArg("--limit") ?? "1");
 const ONLY_TOPIC = getArg("--topic");
-const RETRIES = Number(getArg("--retries") ?? "1");
 const DRY_RUN = args.includes("--dry-run");
 const KEEP_DRAFT = args.includes("--keep-draft");
+/** セッションが書いた article.md を取り込んで仕上げる */
+const INGEST_SLUG = getArg("--ingest");
 
 /**
  * 扱う型。
@@ -199,14 +209,67 @@ function today(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
+/**
+ * セッションが書いた article.md を取り込む (`--ingest <slug>`)。
+ *
+ * ゲートに掛け、review.md が PASS なら published:true にして最終ゲートを通す。
+ * **critic はここでは呼ばない** — 別コンテキストの subagent (blog-critic) が
+ * review.md を書く責務を持つ。「書いた本人が自己採点して公開する」形を作らないため。
+ *
+ * 終了コード: 0=公開可 / 1=ゲート落ち or critic 未通過 (blocker を出す)
+ */
+function ingest(slug: string): number {
+  const dir = path.join(OUTBOX, slug);
+  const articlePath = path.join(dir, "article.md");
+  if (!fs.existsSync(articlePath)) {
+    log(`[fail] ${slug}: article.md がありません (先にセッションが書きます)`);
+    return 1;
+  }
+
+  const gate = runQualityGate(articlePath);
+  if (!gate.pass) {
+    log(`[reject] ${slug}: ゲート blocker ${gate.blockers.length} 件`);
+    for (const b of gate.blockers.slice(0, 10)) log(`    - ${b}`);
+    return 1;
+  }
+  log(`[ok] ${slug}: ゲート PASS`);
+
+  const reviewPath = path.join(dir, "review.md");
+  if (!fs.existsSync(reviewPath)) {
+    log(`[wait] ${slug}: review.md がありません (blog-critic の審査待ち)`);
+    return 1;
+  }
+  const review = fs.readFileSync(reviewPath, "utf8");
+  if (!/^verdict:\s*PASS\b/im.test(review)) {
+    log(`[reject] ${slug}: critic が REVISE`);
+    return 1;
+  }
+  log(`[ok] ${slug}: critic PASS`);
+
+  const body = fs
+    .readFileSync(articlePath, "utf8")
+    .replace(/^published:\s*false\s*$/m, "published: true")
+    .replace(/^publishedAt:\s*未定\s*$/m, `publishedAt: ${today()}`);
+  fs.writeFileSync(articlePath, body);
+
+  const finalGate = runQualityGate(articlePath);
+  if (!finalGate.pass) {
+    log(`[reject] ${slug}: 公開フラグ後のゲートで落ちた`);
+    for (const b of finalGate.blockers.slice(0, 10)) log(`    - ${b}`);
+    return 1;
+  }
+  log(`[ok] ${slug} — 公開待ち (develop へ push すると blog-auto-publish が公開します)`);
+  return 0;
+}
+
 async function main() {
+  // --ingest はキューを見ない (セッションが書き終えた 1 件を仕上げるだけ)
+  if (INGEST_SLUG) {
+    process.exit(ingest(INGEST_SLUG));
+  }
+
   if (!fs.existsSync(QUEUE)) {
     process.stderr.write(`::error::topic-queue がありません: ${QUEUE}\n`);
-    process.exit(1);
-  }
-  const apiKey = process.env.GEMINI_API_KEY?.trim();
-  if (!apiKey && !DRY_RUN) {
-    process.stderr.write("::error::GEMINI_API_KEY が未設定です (--dry-run なら不要)\n");
     process.exit(1);
   }
 
@@ -416,75 +479,17 @@ async function main() {
       continue;
     }
 
-    // --- 5. 本文生成 + ゲート再試行 ---
-    const articlePath = path.join(dir, "article.md");
-    let gate = { pass: false, blockers: ["未生成"] as string[] };
-    for (let attempt = 0; attempt <= RETRIES; attempt++) {
-      const prompt = buildBlogArticlePrompt({
-        ...promptInput,
-        previousBlockers: attempt === 0 ? undefined : gate.blockers,
-      });
-      try {
-        const res = await generateContentText({
-          prompt,
-          apiKey: apiKey as string,
-          model: resolveTextModel(),
-        });
-        fs.writeFileSync(articlePath, ensureTrailingNewline(stripFence(res.text)));
-      } catch (e) {
-        log(`[fail] 生成エラー (attempt ${attempt + 1}): ${(e as Error).message}`);
-        continue;
-      }
-      gate = runQualityGate(articlePath);
-      log(`  attempt ${attempt + 1}: gate ${gate.pass ? "PASS" : `blocker ${gate.blockers.length}`}`);
-      if (gate.pass) break;
-    }
-    if (!gate.pass) {
-      log(`[reject] ゲート通過せず: ${gate.blockers.slice(0, 3).join(" / ")}`);
-      if (!KEEP_DRAFT) fs.rmSync(dir, { recursive: true, force: true });
-      counters.rejected++;
-      continue;
-    }
-
-    // --- 6. critic (別コンテキスト) ---
-    let review = "";
-    try {
-      const res = await generateContentText({
-        prompt: buildBlogCriticPrompt(fs.readFileSync(articlePath, "utf8")),
-        apiKey: apiKey as string,
-        model: resolveTextModel(),
-      });
-      review = stripFence(res.text);
-    } catch (e) {
-      log(`[fail] critic 呼び出しエラー: ${(e as Error).message}`);
-      if (!KEEP_DRAFT) fs.rmSync(dir, { recursive: true, force: true });
-      counters.fail++;
-      continue;
-    }
-    fs.writeFileSync(path.join(dir, "review.md"), ensureTrailingNewline(review));
-    const passed = /^verdict:\s*PASS\b/im.test(review);
-    log(`  critic: ${passed ? "PASS" : "REVISE"}`);
-    if (!passed) {
-      log(`[reject] critic が REVISE (下書きは ${KEEP_DRAFT ? "残す" : "破棄"})`);
-      if (!KEEP_DRAFT) fs.rmSync(dir, { recursive: true, force: true });
-      counters.rejected++;
-      continue;
-    }
-
-    // --- 7. 公開フラグを立てて最終ゲート ---
-    const publishedBody = fs
-      .readFileSync(articlePath, "utf8")
-      .replace(/^published:\s*false\s*$/m, "published: true")
-      .replace(/^publishedAt:\s*未定\s*$/m, `publishedAt: ${today()}`);
-    fs.writeFileSync(articlePath, publishedBody);
-    const finalGate = runQualityGate(articlePath);
-    if (!finalGate.pass) {
-      log(`[reject] 公開フラグ後のゲートで落ちた: ${finalGate.blockers.slice(0, 2).join(" / ")}`);
-      if (!KEEP_DRAFT) fs.rmSync(dir, { recursive: true, force: true });
-      counters.rejected++;
-      continue;
-    }
-    log(`[ok] ${slug} — 公開待ち (develop へ push すると blog-auto-publish が公開します)`);
+    // --- 5. prompt を書き出してセッションに渡す ---
+    //
+    // ここで LLM を呼ばない。書くのは Claude セッション (サブスク内) の担当で、
+    // このスクリプトは決定的な部分 (接地・健全性ゲート・SVG・prompt 構築) だけを持つ。
+    // セッションが article.md を書いたら `--ingest <slug>` でゲートに掛ける。
+    const promptPath = path.join(dir, "article.prompt.txt");
+    fs.writeFileSync(promptPath, ensureTrailingNewline(buildBlogArticlePrompt(promptInput)));
+    log(
+      `[ready] ${slug} — 接地 ${metric.rows.length} 県 / 図 ${promptInput.figures.length} 枚 / ` +
+        `リンク候補 ${allowedLinks.length} 件。prompt: ${path.relative(PROJECT_ROOT, promptPath)}`,
+    );
     counters.ok++;
   }
 

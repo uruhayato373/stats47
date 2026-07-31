@@ -792,6 +792,13 @@
       ]
     },
     {
+      "name": "VALUE_FORMAT_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "VITEST",
       "visibility": "server",
       "contexts": [

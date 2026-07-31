@@ -18,6 +18,11 @@ interface RankingNationalAverageStatProps {
   series: NationalAveragePoint[];
   /** 大きい数値がどの年のものか */
   yearName?: string | null;
+  /**
+   * 表示する小数桁。**47 県の観測値から親が 1 度だけ解決して渡す。**
+   * 平均だけ別の桁数で出すと表と食い違うため、ここで独自に決めない。
+   */
+  precision: number;
 }
 
 const CHART_HEIGHT = 84;
@@ -34,6 +39,7 @@ export function RankingNationalAverageStat({
   unit,
   series,
   yearName,
+  precision,
 }: RankingNationalAverageStatProps) {
   if (average === null) return null;
 
@@ -43,7 +49,7 @@ export function RankingNationalAverageStat({
   return (
     <ChartCard
       label={yearName ? `全国平均 ${yearName}` : "全国平均"}
-      value={`${formatRankingValue(average)}${unit}`}
+      value={`${formatRankingValue(average, precision)}${unit}`}
       chart={
         hasTrend ? (
           <MiniLineChart

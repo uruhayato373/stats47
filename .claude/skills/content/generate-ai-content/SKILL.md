@@ -123,6 +123,41 @@ node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
 # 4) blocker 0 なら staging に置く → r2-publisher が push
 ```
 
+## ★公開経路は 2 つ。実行環境で選ぶ（間違えると生成物が公開に到達しない）
+
+| 実行環境 | 置き場所 | 公開手段 |
+|---|---|---|
+| R2 creds あり（ローカル / CI） | `.local/r2/app/ranking/<key>/ai-content.json` | `diff-push-r2 --prefix app/ranking` |
+| **creds なし（クラウド / Routine セッション）** | **`data/ai-content-staging/<key>.json`**（フラット） | develop へ push → `publish-ai-content.yml` が gate 再検証 → R2 → CDN purge → outbox 削除 |
+
+**outbox はフラットな `<rankingKey>.json` でなければならない**。workflow の検出 glob が
+`data/ai-content-staging/*.json` なので、`app/ranking/<key>/` の階層を作ると拾われない。
+
+## Routine（日次セッション）での回し方
+
+CI (`ai-content-generate-daily.yml`) がキューを更新して「今日の対象」を Issue に出すので、
+セッションはその key リストを受けて以下を回す。**CI 側は LLM を呼ばない**（Actions の中で
+LLM を呼ぶと Claude でも別課金になるため。正典 `.claude/rules/ranking-content-standards.md`）。
+
+```bash
+# 1) 今日の対象を取る（Issue と同じ並び。CI を待たずに自分で出すこともできる）
+node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 10
+
+# 2) 各 key: prompt 取得 → agent が生成 → 決定的ゲート → outbox
+NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
+  npm run ai:input --workspace=@stats47/ai-content -- <key> --prompt-only
+#   → ranking-content-author に書かせる（frontmatter の model: sonnet に任せ、model を渡さない）
+node .claude/scripts/ai-content/audit-ai-content.mjs --file data/ai-content-staging/<key>.json
+
+# 3) critic（≤10 key を 1 回の batch 起動でまとめて）→ REVISE は外科修正して delta 再審査
+
+# 4) develop へ push（publish-ai-content.yml が gate 再検証して R2 まで運ぶ）
+```
+
+**ゲートは緩めない。** blocker が残る key はその日は出さず、次回のキューが拾う。
+件数は**控えめに始めて実測する**（初回 10 件）。サブスクの利用上限が制約なので、
+実際の消費を測ってから増やす。
+
 ## 品質ゲート（必須）
 
 `audit-ai-content.mjs` が検出する blocker（1 件でもあれば不採用）:

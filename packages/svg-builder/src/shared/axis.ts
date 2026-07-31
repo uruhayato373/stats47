@@ -2,6 +2,8 @@
  * 軸スケール・目盛り計算ユーティリティ
  */
 
+import { formatValueWithPrecision } from "@stats47/utils";
+
 export interface NiceScale {
   max: number;
   step: number;
@@ -68,10 +70,31 @@ export function formatTick(value: number, decimals = 2): string {
 }
 
 /**
- * 値ラベル表示用フォーマット（整数部を 3 桁カンマ区切り）。
- * 例: 110700 → "110,700" / 4.63 → "4.6" / 5 → "5"。
- * 軸目盛り (formatTick) とは別。読み手向けの value 表示に使う。
+ * 値ラベル表示用フォーマット（整数部を 3 桁カンマ区切り・**小数桁は固定**）。
+ *
+ * ## 桁数はデータセット単位で揃える (2026-07-31)
+ *
+ * 以前は `maximumFractionDigits` だけを指定していたため、同じ図の中で
+ * `60.4` と `44` が混ざり、読み比べにくかった。**桁数は 1 つの値では決まらず、
+ * データセット全体で決まる**ので、呼び出し側が `resolveValuePrecision(values)` で
+ * 1 度解決し、その値を全ラベルに使う。
+ *
+ * 実装は `@stats47/utils` の確立した組 (`getMaxDecimalPlaces` +
+ * `formatValueWithPrecision`) に委譲する。Remotion / visualization も同じ組を使っており、
+ * svg-builder だけが独自実装だった。
+ *
+ * 例 (precision=1): 110700 → "110,700.0" / 4.63 → "4.6" / 44 → "44.0"
+ * 例 (precision=0): 110700 → "110,700" / 44 → "44"
  */
 export function formatValueLabel(value: number, decimals = 1): string {
-  return value.toLocaleString("en-US", { maximumFractionDigits: decimals });
+  return formatValueWithPrecision(value, decimals);
 }
+
+/**
+ * データセット全体で揃える小数桁を決める。**図を描く前に 1 度だけ呼ぶ。**
+ *
+ * 実体は `@stats47/utils` にある (apps/web のランキング表・ヘッダーと同じ実装を使う。
+ * 桁揃えを共通化する作業で 2 か所に別実装を置くと本末転倒になる)。
+ * ここは svg-builder 内の呼び出し元のための re-export。
+ */
+export { resolveValuePrecision } from "@stats47/utils";
