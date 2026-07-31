@@ -123,7 +123,38 @@ outbox は**フラットな `<rankingKey>.json`** でなければならない (w
   **ゲートを緩めて通すことは絶対にしない** (品質ではなく実行時間で払う)。落ち率はモデルを変えたら
   必ず実測する (10 件パイロット → blocker 内訳を確認 → 落ち率が高ければプロンプト側を直す)。
 
-### 全件量産の日次ループ (Gemini・トークン消費ゼロ・2026-07-30 新設)
+### ★2026-07-31: 生成を Claude セッションへ戻した (Gemini テキスト経路は撤去)
+
+**GitHub Actions の中で LLM を呼ぶ形は、Claude でも Gemini でも別課金になる。** Max サブスクの
+範囲で回すには生成を Claude セッション側に置く必要があるため、Gemini テキスト経路
+(`gemini-text-client` / `model-preflight` / `preflight-gemini` / `--model gemini-api` /
+`ai-content-preflight.yml`) を**撤去**した。画像生成 (`gemini-image-client`) は別経路なので残す。
+
+| 経路 | 課金 |
+|---|---|
+| Claude Code セッション (対話 / Routine が起こす新セッション) | **Max サブスク内** |
+| Anthropic API キーを Actions から叩く (`claude-code-action` 等) | API 従量課金 (サブスク外) |
+| Gemini API | Google の従量課金 |
+
+**新しい形**: 決定的で無料な工程 (キュー再構築・接地・データ健全性ゲート・SVG・prompt 構築) は
+CI が担い、「書く」工程だけを Claude セッションが担う。既存記事の是正
+(`blog-remediation-loop.md`) は元からこの型なので、新規生成をそれに揃えた形になる。
+
+```
+CI (無料)                          Claude セッション (サブスク内)
+  キュー再構築                  →   /generate-ai-content (agent: ranking-content-author)
+  今日の対象を Issue で提示           ↓ 決定的ゲート audit-ai-content.mjs
+  ↑                                  ↓ critic (別コンテキスト)
+  outbox を push → publish 起動  ←   outbox へ書き出し
+```
+
+日次件数は**控えめに始めて実測**する (初回 ai-content 10 件 / blog 1 本)。サブスクの利用上限が
+制約になるため、実際の消費を測ってから増やす。**旧 40 件/日は Gemini 前提の根拠なき暫定値**で、
+そのまま引き継がない。
+
+以下は撤去前の Gemini 運用の記録 (経緯として保持する)。
+
+### (撤去済) 全件量産の日次ループ (Gemini・2026-07-30〜2026-07-31)
 
 Claude のトークンを使わず全 active ranking (実測 2,179 件) を完成させるための無人ループ。
 **`.github/workflows/ai-content-generate-daily.yml`** (JST 03:00) が以下を回す:
@@ -280,7 +311,8 @@ node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 40 
 - 戦略・KPI: `docs/00_プロジェクト管理/03_マーケティング戦略.md`（T1〜T4・SEO品質レバー）
 - ai-content 是正キュー: memory `project_ai_content_remediation_queue` / `.claude/scripts/ranking/build-ai-content-queue.mjs`
 - 決定的ゲート: `.claude/scripts/ranking/audit-ai-content.mjs`
-- モデル preflight: `packages/ai-content/src/scripts/preflight-gemini.ts` + `src/services/model-preflight.ts` / 生成 0 件ゲート: `src/services/generation-outcome.ts` (いずれも `src/services/__tests__/` にテスト)
+- 生成 0 件ゲート: `packages/ai-content/src/services/generation-outcome.ts` (`src/services/__tests__/` にテスト)
+- セッション側の入口: skill `/generate-ai-content` (agent: `ranking-content-author`) / prompt 取得: `build-input.ts --prompt-only`
 - 公開: `.github/workflows/publish-ai-content.yml` (自動化インベントリ参照)
 - agent: `ranking-content-author` (生成) / `ranking-content-critic` (審査) / `ranking-publisher` (公開) / `ranking-ui-manager` (UI)
 - 関連 rule: `.claude/rules/metric-config-standards.md` (title/seoTitle) / `blog-quality-standards.md` (ですます調・archetype A) / `evidence-based-judgment.md`

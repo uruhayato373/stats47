@@ -1,15 +1,17 @@
 name: 📝 Blog Generate Daily (Gemini)
 
-# ブログ新規記事の無人生成ループ (2026-07-31 新設)。
-# ranking ai-content の日次ループ (ai-content-generate-daily.yml) と同じ形で、
-# Claude のトークンを使わず Gemini API + 決定的ゲートだけで回す。
+# ブログ新規記事の日次「準備」ループ (2026-07-31 に Gemini から移行)。
+#
+# ★LLM はこの workflow では呼ばない。GitHub Actions の中で LLM を呼ぶ形は Claude でも
+#   Gemini でも別課金になるため、「書く」工程は Claude セッション (Max サブスク内) が担う。
+#   ここは決定的で無料な工程だけを回して、今日書く分を用意する。
 #
 #   1. topic-queue を再構築 (何を書くか。GSC 需要 × 相関 × カテゴリから決定的に並ぶ)
-#   2. pending 上位を生成:
-#        R2 観測値を接地 → **データ健全性ゲート** → SVG 生成 → 本文生成 → quality-gate
-#        → **別コンテキストの critic** → published:true → 最終ゲート
-#   3. outbox (docs/21_ブログ記事原稿) を develop に push
-#   4. blog-auto-publish.yml を dispatch → factual/quality ゲート再検証 → R2 公開
+#   2. pending 上位を**準備**:
+#        R2 観測値を接地 → **データ健全性ゲート** → SVG 生成 → article.prompt.txt 書き出し
+#   3. 準備物を develop に push し、今日の対象を Issue で提示
+#   4. セッションが article.md を書いて push → blog-auto-publish.yml が R2 公開
+#      (この workflow も article.md が既にあれば dispatch する)
 #
 # ★なぜ push トリガー任せにしないか
 #   blog-auto-publish.yml は develop への push トリガーを持つが、GitHub Actions は
@@ -55,6 +57,7 @@ on:
 
 permissions:
   contents: write
+  issues: write # 今日の執筆対象を Issue で提示するため
   actions: write # blog-auto-publish.yml を dispatch するため
 
 concurrency:
@@ -63,10 +66,7 @@ concurrency:
 
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-  # 空なら gemini-text-client.ts の既定値。モデル提供終了時はリポジトリ変数で復旧できる
-  GEMINI_TEXT_MODEL: ${{ vars.GEMINI_TEXT_MODEL }}
-  LIMIT: ${{ inputs.limit || '2' }}
+  LIMIT: ${{ inputs.limit || '1' }}
   DRY_RUN: ${{ inputs.dry_run || 'false' }}
   KEEP_DRAFT: ${{ inputs.keep_draft || 'false' }}
 
@@ -111,46 +111,56 @@ jobs:
             echo "inputs 使用: limit=${LIMIT} dry_run=${DRY_RUN} keep_draft=${KEEP_DRAFT}"
           fi
 
-      - name: 🔑 Assert API key (dry-run 以外)
-        if: ${{ env.DRY_RUN != 'true' }}
-        run: |
-          if [ -z "${GEMINI_API_KEY}" ]; then
-            echo "::error::GEMINI_API_KEY (Secrets) が未設定です"
-            exit 1
-          fi
-          echo "GEMINI_API_KEY: 設定あり (値は出力しない)"
-
-      # モデル提供終了で全件 404 になる事故の再発防止 (2026-07-30)。
-      # ListModels の一覧照合では不十分 — 載っていても generateContent が 404 になる (2026-07-31 実測)。
-      - name: 🔎 Preflight (極小の実生成で使用可否を確認)
-        if: ${{ env.DRY_RUN != 'true' }}
-        run: |
-          set -o pipefail
-          NODE_OPTIONS='--conditions react-server' \
-            npx tsx packages/ai-content/src/scripts/preflight-gemini.ts 2>&1 | tee /tmp/preflight.log
-
       # 何を書くか。GSC 需要・相関・カテゴリ網羅から決定的に並ぶ。
       # 外部 fetch を含むので失敗しても既存キューで続行する (生成を止める理由にはならない)。
       - name: 📊 Rebuild topic-queue
         run: node .claude/scripts/blog/build-topic-queue.mjs || echo "::warning::topic-queue 再構築に失敗。既存キューで続行する"
 
-      - name: ✍️ Generate articles (gate 通過分のみ outbox へ)
+      # ★LLM はここでは呼ばない (2026-07-31 に Gemini から移行)。
+      #   GitHub Actions の中で LLM を呼ぶ形は Claude でも Gemini でも別課金になるため、
+      #   決定的な工程 (接地 → データ健全性ゲート → SVG → prompt 構築) までを CI が担い、
+      #   「書く」工程は Claude セッション (Max サブスク内) が担う。
+      #   準備済みディレクトリには article.md が無いので公開 workflow には拾われない。
+      - name: 🧱 Prepare articles (接地・ゲート・SVG・prompt まで)
         run: |
           set -o pipefail
           EXTRA=""
           if [ "${DRY_RUN}" = "true" ]; then EXTRA="$EXTRA --dry-run"; fi
-          if [ "${KEEP_DRAFT}" = "true" ]; then EXTRA="$EXTRA --keep-draft"; fi
           NODE_OPTIONS='--conditions react-server' \
             npx tsx packages/ai-content/src/scripts/generate-blog-article.ts \
               --limit "${LIMIT}" \
-              --retries 1 \
               $EXTRA 2>&1 | tee /tmp/gen.log
           {
-            echo "### 生成結果"
+            echo "### 接地結果"
             echo '```'
-            grep -E '^(===|\[(ok|reject|fail|skip|dry-run)\]|生成:)' /tmp/gen.log | tail -60 || true
+            grep -E '^(===|\[(ready|reject|fail|skip|dry-run)\])' /tmp/gen.log | tail -60 || true
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 📋 今日の執筆対象を Issue に出す
+        if: ${{ env.DRY_RUN != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          READY=$(find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.prompt.txt' -type f 2>/dev/null \
+            | sed 's|.*/\([^/]*\)/article.prompt.txt|\1|' | paste -sd' ')
+          if [ -z "$READY" ]; then echo "準備済みなし"; exit 0; fi
+          TITLE="📝 ブログ: 今日の執筆対象"
+          BODY=$(
+            echo "接地・データ健全性ゲート・SVG・prompt まで準備できています。Claude セッションで書いてください。"
+            echo
+            echo "対象: $READY"
+            echo
+            echo "各 slug の docs/21_ブログ記事原稿/<slug>/article.prompt.txt を読んで article.md を書き、"
+            echo "generate-blog-article.ts --ingest <slug> でゲート → blog-critic で review.md →"
+            echo "再度 --ingest で確定します。ゲートは緩めません。"
+          )
+          EXIST=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$EXIST" ]; then
+            gh issue edit "$EXIST" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY" --label auto-generated
+          fi
 
       - name: 📤 Commit outbox and push
         id: commit
@@ -161,8 +171,11 @@ jobs:
             git rm -q --ignore-unmatch data/blog-generate-requests.json || true
           fi
           git add "docs/21_ブログ記事原稿" .claude/state/blog/topic-queue.json || true
-          NEW=$(find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.md' -type f 2>/dev/null | wc -l | tr -d ' ')
+          # 準備段階なので prompt の数を見る。公開対象は article.md がある数 (別で数える)
+          NEW=$(find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.prompt.txt' -type f 2>/dev/null | wc -l | tr -d ' ')
+          WRITTEN=$(find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.md' -type f 2>/dev/null | wc -l | tr -d ' ')
           echo "outbox=${NEW}" >> "$GITHUB_OUTPUT"
+          echo "written=${WRITTEN}" >> "$GITHUB_OUTPUT"
           if git diff --cached --quiet; then
             echo "変更なし (生成 0 件)"
             exit 0
@@ -199,8 +212,10 @@ jobs:
 
       # 既定 token の push は blog-auto-publish の push トリガーを発火させないため明示 dispatch する。
       # run が生まれたことを確認してから成功とする (ai-content で滞留を実際に踏んだ)。
-      - name: 🚀 Dispatch blog-auto-publish (outbox を R2 へ)
-        if: ${{ env.DRY_RUN != 'true' && steps.commit.outputs.outbox != '0' }}
+      # 準備しただけでは公開しない。セッションが article.md を書いたときだけ公開へ回す
+      # (blog-auto-publish は published:true の article.md しか拾わない)。
+      - name: 🚀 Dispatch blog-auto-publish (書き終えた記事があれば)
+        if: ${{ env.DRY_RUN != 'true' && steps.commit.outputs.written != '0' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

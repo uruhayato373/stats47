@@ -1,27 +1,25 @@
-name: 🤖 AI Content Generate Daily (Gemini)
+name: 🤖 AI Content Daily (キュー更新 + 今日の対象提示)
 
-# ranking ai-content の「全件完成」を日次で進める無人ループ (2026-07-30 新設)。
-# Claude のトークンを消費せず、Gemini API + 決定的ゲートだけで回す。
+# ranking ai-content の「全件完成」を日次で進めるループ (2026-07-31 に Gemini から移行)。
+#
+# ★LLM はこの workflow では呼ばない。GitHub Actions の中で LLM を呼ぶ形は Claude でも
+#   Gemini でも別課金になるため、「書く」工程は Claude セッション (Max サブスク内) が担う。
+#   ここは決定的で無料な工程だけを回す。
 #
 #   1. キューを全件スコープで再構築 (R2 が真実源・派生ビュー)
-#   2. needs-regen 上位 N 件を Gemini API で生成 (--model gemini-api・CLI 非依存)
-#   3. 決定的ゲート (audit-ai-content.mjs) を通ったものだけ outbox へ
-#   4. outbox を develop に push し、publish-ai-content.yml を dispatch → gate 再検証 → R2 → CDN purge
+#   2. needs-regen 上位 N 件を Issue に提示 (生成は Claude セッション: /generate-ai-content)
+#   3. セッションが outbox に置いた生成物を develop に push し、publish-ai-content.yml を
+#      dispatch → 決定的ゲート再検証 → R2 → CDN purge
 #      (★push トリガー任せにしない。既定 GITHUB_TOKEN の push は後続 workflow を発火させない仕様)
-#   5. キューを再構築して進捗を commit-back (LATEST.md / progress-history.csv)
+#   4. キューを再構築して進捗を commit-back (LATEST.md / progress-history.csv)
 #
-# 品質は「賢いモデル」ではなく「決定的ゲート + 再試行」で担保する。ゲートは緩めない
+# 品質は「賢いモデル」ではなく「決定的ゲート + critic」で担保する。ゲートは緩めない
 # (正典: .claude/rules/ranking-content-standards.md §実データ照合 / §生成パイプライン)。
 #
 # ★安全装置
-#   - LIMIT は publish-ai-content.yml の MAX_PUBLISH (40) に合わせる。超えると公開が次回に繰り越す
-#   - dry_run: LLM を呼ばず対象 key と prompt 長だけ出す (課金ゼロ・配線確認用)
-#   - GEMINI_API_KEY 未設定なら生成前に失敗する (無音で何もしないより明示的に落とす)
+#   - LIMIT は publish-ai-content.yml の MAX_PUBLISH (40) を超えない。超えると公開が次回に繰り越す
 #   - 進捗 commit は outbox と同一 commit にする (生成物と進捗がずれない)
 #   - push も dispatch も失敗を握り潰さない。届かなければ run を赤くする
-#
-# ⚠️ 費用: flash 系は無料 tier があるが、API キーが有料課金に紐づいている場合は
-#    1 件あたり入力 ~5K / 出力 ~8K トークン相当の課金が発生する。LIMIT で件数を絞って運用する。
 
 on:
   schedule:
@@ -50,6 +48,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
   actions: write # publish-ai-content.yml を dispatch するため (既定 token の push は後続 workflow を発火させない)
 
 concurrency:
@@ -58,10 +57,6 @@ concurrency:
 
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-  # 空なら gemini-text-client.ts の既定値。モデル提供終了時はリポジトリ変数に実在モデルを
-  # 設定するだけで復旧できる (コード変更 + デプロイを待たない)。実在確認は下の preflight step
-  GEMINI_TEXT_MODEL: ${{ vars.GEMINI_TEXT_MODEL }}
   LIMIT: ${{ inputs.limit || '40' }}
   GEN_CONCURRENCY: ${{ inputs.concurrency || '3' }}
   DRY_RUN: ${{ inputs.dry_run || 'false' }}
@@ -102,25 +97,6 @@ jobs:
             echo "request で上書きした (値は上の行のとおり)"
           fi
 
-      - name: 🔑 Assert API key (dry-run 以外)
-        if: ${{ env.DRY_RUN != 'true' }}
-        run: |
-          if [ -z "${GEMINI_API_KEY}" ]; then
-            echo "::error::GEMINI_API_KEY (Secrets) が未設定です"
-            exit 1
-          fi
-          echo "GEMINI_API_KEY: 設定あり (値は出力しない)"
-
-      # ★本番バッチの前に「そのモデルで本当に生成できるか」を 1 回試す (2026-07-30 の全件 404 の再発防止)。
-      #   極小プロンプト = 出力数十トークンで実質無料。使えなければ候補付きでここで落とす。
-      #   ListModels の一覧照合では不十分 (載っていても 404 になる。2026-07-31 実測)。
-      - name: 🔎 Preflight (極小の実生成で使用可否を確認)
-        if: ${{ env.DRY_RUN != 'true' }}
-        run: |
-          set -o pipefail
-          NODE_OPTIONS='--conditions react-server' \
-            npx tsx packages/ai-content/src/scripts/preflight-gemini.ts 2>&1 | tee /tmp/preflight.log
-
       - name: 📊 Rebuild queue (scope=all) and pick targets
         id: pick
         run: |
@@ -133,30 +109,35 @@ jobs:
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
           echo "対象 ${COUNT} 件: $(head -5 /tmp/targets.txt | paste -sd' ')…"
 
-      - name: 🤖 Generate with Gemini (gate 通過分のみ outbox へ)
-        if: ${{ steps.pick.outputs.count != '0' }}
+      # ★生成はここでは行わない (2026-07-31 に Gemini から移行)。
+      #   GitHub Actions の中で LLM を呼ぶ形は Claude でも Gemini でも別課金になるため、
+      #   「書く」工程は Claude セッション (Max サブスク内) が担う。この workflow は
+      #   キューを最新化して**今日の対象を提示するところまで**。
+      #   セッション側の入口: skill /generate-ai-content (agent: ranking-content-author)
+      - name: 📋 今日の対象を Issue に出す
+        if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          set -o pipefail
-          EXTRA=""
-          if [ "${DRY_RUN}" = "true" ]; then EXTRA="--dry-run"; fi
-          NODE_OPTIONS='--conditions react-server' \
-            npx tsx packages/ai-content/src/scripts/generate-parallel.ts \
-              --model gemini-api \
-              --keys "${{ steps.pick.outputs.keys }}" \
-              --concurrency "${GEN_CONCURRENCY}" \
-              --retries 1 \
-              --outbox \
-              $EXTRA 2>&1 | tee /tmp/gen.log
-          {
-            echo "### 生成結果"
+          TITLE="🤖 ai-content: 今日の生成対象"
+          BODY=$(
+            echo "本日の対象 ${{ steps.pick.outputs.count }} 件です。Claude セッションで次を実行してください:"
+            echo
             echo '```'
-            grep -E '^\[(OK|REJECT|FAIL|SKIP|RETRY|DRY)\]' /tmp/gen.log | tail -60 || true
+            echo "/generate-ai-content --keys ${{ steps.pick.outputs.keys }}"
             echo '```'
-            echo "- OK: $(grep -c '^\[OK\]' /tmp/gen.log || echo 0)"
-            echo "- REJECT (gate 落ち): $(grep -c '^\[REJECT\]' /tmp/gen.log || echo 0)"
-            echo "- FAIL: $(grep -c '^\[FAIL\]' /tmp/gen.log || echo 0)"
-            echo "- SKIP (入力なし): $(grep -c '^\[SKIP\]' /tmp/gen.log || echo 0)"
-          } >> "$GITHUB_STEP_SUMMARY"
+            echo
+            echo "生成 → 決定的ゲート (audit-ai-content.mjs) → critic → outbox → publish の順です。"
+            echo "ゲートは緩めません。落ちたら直して通します。"
+            echo
+            echo "進捗: \`.claude/state/ai-content/LATEST.md\`"
+          )
+          EXIST=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$EXIST" ]; then
+            gh issue edit "$EXIST" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY" --label auto-generated
+          fi
 
       - name: 📈 Rebuild queue (progress) and commit
         id: commit

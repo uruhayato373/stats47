@@ -57,9 +57,8 @@ export function decideOutcome(
     return {
       exitCode: 1,
       reason:
-        `対象 ${targets} 件すべてが FAIL で生成 0 件。API 呼び出しが成立していない ` +
-        `(モデル名・API キー・ネットワークを確認する。HTTP 404 ならモデル提供終了を疑い ` +
-        `preflight-gemini.ts で実在モデルを実測する)`,
+        `対象 ${targets} 件すべてが FAIL で生成 0 件。生成が 1 件も成立していない ` +
+        `(CLI・認証・ネットワーク・接地のいずれかを疑う)`,
     };
   }
   if (counters.skip > 0 && counters.fail === 0 && counters.rejected === 0) {
