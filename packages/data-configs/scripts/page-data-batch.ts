@@ -41,6 +41,7 @@ import {
   type AreaAxisMember,
 } from "../src/area-axis.js";
 import { classifyEmptyOutcome } from "../src/expected-empty.js";
+import { fillMissingTimeFromSurveyDate } from "../src/estat-time.js";
 import {
   combineLinear,
   ratioPercent,
@@ -572,6 +573,23 @@ async function fetchEstatData(
     totalNumber: Number.isFinite(totalNumber) ? totalNumber : values.length,
     toNumber: Number.isFinite(toNumber) ? toNumber : values.length,
   };
+
+  // ★time 軸を持たない表は値に `@time` が付かない (2026-07-31 実測)。
+  //
+  // 単年調査の表 (漁業センサス等) は CLASS_OBJ が tab/cat01/area だけで time を持たない。
+  // 旧実装はこれを想定しておらず `v["@time"].slice(0,4)` が **TypeError で落ちていた**
+  // (「Cannot read properties of undefined (reading 'slice')」= 原因が分からない失敗メッセージ)。
+  // 実測で 8 metric がこの経路で毎回失敗していた。
+  //
+  // 年は areaAxis 経路と**同じ規則**で `TABLE_INF.SURVEY_DATE` から採る。config.years から
+  // 採らないのは、config は「どの年を採用するか」の希望であって出典ではないため
+  // (実際この 8 件は config が 2018 なのに表は 2003 年調査で、config を年の根拠にすると
+  //  2003 年のデータを 2018 年として配信してしまう)。取り出せなければ推測せず失敗させる。
+  fillMissingTimeFromSurveyDate(
+    values,
+    (stat.TABLE_INF as Record<string, unknown> | undefined)?.SURVEY_DATE,
+    config.statsDataId,
+  );
 
   // timeScope: "annual" — 月次・四半期を落として年計だけを残す。
   // 商業動態統計のように 1 年あたり 年計1 + 四半期4 + 月次12 を同居させる表があり、
