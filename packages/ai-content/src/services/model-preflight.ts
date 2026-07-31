@@ -137,6 +137,17 @@ export async function runModelPreflight(deps: PreflightDeps): Promise<PreflightR
     `❌ ${deps.configured} で generateContent に失敗: ${smoke.classification}${status}`,
   ];
 
+  // ★429 は「モデルが使えない」ではなく「いま呼べない」。原因も対処も別なので分けて出す
+  //   (2026-07-31 実測: 同じキー・同じモデルで数時間前は成功しており、提供終了ではなかった)。
+  //   ここを混ぜると「モデルを変えろ」と読めてしまい、品質もコストも変わる変更を促してしまう。
+  if (smoke.classification === "rate-limit") {
+    messages.push(
+      "  ⚠ これはクォータ/レート制限であって提供終了ではない。**モデルを変える前に時間をおいて再実行する**",
+      "  (無料 tier はモデルごとに別枠なので、急ぐなら下の lite 系候補で回避できる。ただし品質は変わる)",
+    );
+    return { ok: false, messages, suggestions: [] };
+  }
+
   let models: string[] = [];
   try {
     models = await deps.listModels();
@@ -151,7 +162,8 @@ export async function runModelPreflight(deps: PreflightDeps): Promise<PreflightR
   messages.push(
     listed
       ? `  ⚠ ${deps.configured} は ListModels には載っている。` +
-        "一覧に載っていても generateContent が使えないことがある (2026-07-31 実測)"
+        "一覧に載っていても generateContent が使えないことがある (2026-07-31 実測)。" +
+        "提供終了かキーの権限を疑う"
       : `  ${deps.configured} は ListModels にも無い (提供終了)`,
   );
 

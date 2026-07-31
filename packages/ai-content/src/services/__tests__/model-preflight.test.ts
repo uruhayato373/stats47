@@ -201,3 +201,36 @@ describe("listGenerateContentModels", () => {
     expect((err as GeminiTextError).message).not.toContain("invalid");
   });
 });
+
+// ============================================================================
+// 429 は「提供終了」と混同しない (2026-07-31 実測)
+//
+// blog-generate の初回実走が 429 で止まったとき、preflight が 404 用の文言
+// (「一覧に載っていても使えないことがある」+ 代替候補) を出していた。
+// 同じキー・同じモデルで数時間前は成功しており、提供終了ではなかった。
+// メッセージを混ぜると「モデルを変えろ」と読めてしまい、品質もコストも変わる変更を促す。
+// ============================================================================
+describe("runModelPreflight: rate-limit の扱い", () => {
+  it("★429 は提供終了と切り分け、モデル候補を出さない", async () => {
+    const report = await runModelPreflight({
+      configured: "gemini-3.5-flash",
+      smoke: async () => ({ ok: false, classification: "rate-limit", status: 429 }),
+      listModels: async () => ["gemini-3.5-flash", "gemini-2.5-flash-lite"],
+    });
+    expect(report.ok).toBe(false);
+    expect(report.messages.join("\n")).toMatch(/クォータ\/レート制限であって提供終了ではない/);
+    expect(report.messages.join("\n")).toMatch(/時間をおいて再実行/);
+    // 候補を出すと「モデルを変えろ」と読める。429 では出さない。
+    expect(report.suggestions).toEqual([]);
+  });
+
+  it("429 以外 (提供終了) では従来どおり候補を出す", async () => {
+    const report = await runModelPreflight({
+      configured: "gemini-3.5-flash",
+      smoke: async () => ({ ok: false, classification: "http-error", status: 404 }),
+      listModels: async () => ["gemini-2.5-flash-lite", "gemini-flash-latest"],
+    });
+    expect(report.ok).toBe(false);
+    expect(report.suggestions.length).toBeGreaterThan(0);
+  });
+});
