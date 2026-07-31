@@ -37,7 +37,7 @@
 | 散布図 | `scripts/scatter.js` | 600×540 | JSON 設定から自動生成 |
 | カバー画像 | `scripts/cover-template.js` | 1280×670 | テンプレートをコピーして編集 |
 | 横棒グラフ | `@stats47/svg-builder` | 960×624 | `generateBarChartSvg` |
-| タイルマップ | `@stats47/svg-builder` | 780×560 | `generateChoroplethSvg` |
+| タイルマップ | `@stats47/svg-builder` | 720×720 | `generateChoroplethSvg`（寸法の正典は `blog-svg-chart-standards.md` §5） |
 | 折れ線 | `@stats47/svg-builder` | 680×400 | `generateLineSvg` |
 | フレームワーク図 | カスタムスクリプト | 任意 | design-system.md に従う |
 | CSV サンプル | カスタムスクリプト | 332×任意 | テーブル形式 |

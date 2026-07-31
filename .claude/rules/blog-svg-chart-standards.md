@@ -37,7 +37,7 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 |---|---|---|---|---|---|
 | `generateBarChartSvg` | `bar-chart.ts` | `BarItem[]` + `BarChartOptions` | `*-ranking.json` / `*-top5-bottom5.json` | ~239 | ランキングはカード型のみ・**上位5+下位5固定**（10件廃止）。`layout:"columns"`=横長2列カード（左=上位/右=下位、`960×404`、ブログ本文+X 用）/ `layout:"portrait"`=縦長スタックカード（上位5↓下位5、`1080×1350` 4:5、Instagram 用 `-ig.svg`）/ `layout:"single"`=縦1列+「…中略…」(680幅)。`generate-article-charts.ts` が `*-ranking.json` から columns(`<name>.svg`)+portrait(`<name>-ig.svg`)を自動両出力 |
 | `generateScatterSvg` | `scatter.ts` | `ScatterPoint[]` + `ScatterOptions` | `*-scatter.json` | ~166 | 散布図（全都道府県・相関可視化） |
-| `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド47都道府県マップ。**780×560固定・透過背景・テーマ非依存・左カラムにタイトル+高い順/低い順3県・凡例は地図右下**（既定ラベル 低い/高い + 実数値スケール。安全/危険 等の意味的ラベルは json `legendLabels` 明示時のみ＝2026-07-13 是正）。タイル内テキストは全て白+縁取り。色は **D3カラースキーム** `scheme`(`Blues`/`Viridis`/`RdYlGn`/`RdBu`/`Spectral`/`YlOrRd`…d3-scale-chromatic、未指定時 Reds)、`reverse`/`showValue`/`showRankList` 可。データは SSOT(R2 app/ranking)。一括再生成: `regenerate-tile-maps.ts`。**不変量の gate = `lintTileGridQuality`（§6-2）**。正典 `blog-data-schema.md` §1.6 |
+| `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド47都道府県マップ。**720×720固定（正方形・地図を最大化）・透過背景・テーマ非依存・左上にタイトル+上位3県・凡例は右下**（既定ラベル 低い/高い + 実数値スケール。安全/危険 等の意味的ラベルは json `legendLabels` 明示時のみ＝2026-07-13 是正）。タイル内テキストはタイル色の明度で白/濃紺を切り替え+縁取り（2026-07-31 改訂。単色白は淡色タイルで読めなかった）。色は **D3カラースキーム** `scheme`(`Blues`/`Viridis`/`RdYlGn`/`RdBu`/`Spectral`/`YlOrRd`…d3-scale-chromatic、未指定時 Reds)、`reverse`/`showValue`/`showRankList` 可。データは SSOT(R2 app/ranking)。一括再生成: `regenerate-tile-maps.ts`。**不変量の gate = `lintTileGridQuality`（§6-2）**。正典 `blog-data-schema.md` §1.6 |
 | `generateLineSvg` | `line.ts` | `StatsSchema[]` + `LineOptions` | `*-timeseries.json` / `*-trend.json` | ~39 | 多系列折れ線（時系列・年齢階級）|
 | `generateStackedBarSvg` | `stacked-bar.ts` | `StackedData` + `StackedBarOptions` | `*-stacked.json` / `*-breakdown.json` | ~5 | 積み上げ棒グラフ（構成比）|
 | `generateFindingsCardSvg` | `findings-card.ts` | `FindingsCardData`（`{ findings: string[] \| FindingsCardItem[], title?: string }`） | `*-summary-findings.json` / `*-findings.json` | ~54 | 「この記事でわかったこと」要点カード（番号付き circle + テキスト行） |
@@ -128,6 +128,33 @@ svg += svgThemeStyle();
 `FONT_FAMILY = "'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif"`
 全チャートで統一。ウェブフォント読み込みなし。
 
+### 数値の桁揃え（2026-07-31 確定・決定的ガードあり）
+
+**小数桁は 1 つの値では決まらず、データセット全体で決まる。** 同じ図の中に `60.4` があるなら
+`44` は `44.0` と表示しないと読み比べられない。値ごとに整形している限り揃わないので、
+**描画の前にデータセット全体から 1 度だけ解決**する。
+
+```ts
+import { resolveValuePrecision, formatValueWithPrecision } from "@stats47/utils";
+
+const precision = resolveValuePrecision(values);          // 図を描く前に 1 度だけ
+const labels = values.map((v) => formatValueWithPrecision(v, precision));
+```
+
+| NG | なぜ |
+|---|---|
+| `toLocaleString("ja-JP", { maximumFractionDigits: 1 })` | **`44.0` は number では `44`** なので max 指定だけでは小数が消える。min とセットで指定する |
+| `value.toLocaleString()` を素で呼ぶ | 桁数が制御されずデータセット内で揃わない |
+| 呼び出し側で桁数を `1` に決め打ち | 整数だけの指標（人口など）に余計な `.0` が付く |
+
+- 実体は `@stats47/utils`（`resolveValuePrecision` / `formatValueWithPrecision`）に **1 つだけ**置く。
+  svg-builder の `shared/axis.ts` と apps/web ランキングはそこを re-export / import する。
+- **例外**: 率・倍率・偏差値・変化率など、その場で意味が閉じる派生値はデータセットの桁数と無関係。
+- ガード: `node .claude/scripts/lib/check-value-format.cjs --baseline`
+  （pre-commit + `pr-quality-check.yml`）。既存違反は baseline に固定し、新規混入だけを止める
+  （baseline は縮小専用）。派生値の汎用フォーマッタは意図が呼び出し元にしかなく行の近傍から
+  機械的に判別できないため、キーワード推測ではなく baseline で扱う。
+
 ---
 
 ## 4. ファイル命名規則
@@ -178,13 +205,13 @@ svg += svgThemeStyle();
 | ランキング縦長（portrait・IG `-ig.svg`） | `1080` | `1350`（4:5固定） | 縦長スタック（上位5↓下位5） |
 | ランキング（single・1列） | `680` | 可変（1行 ~30px） | `680×300`（95枚） |
 | 散布図（scatter） | `960` | `624` | `960×624`（80枚） |
-| タイルマップ（map） | `780` | `560` | `780×560`（2026-07-29 改訂。旧 600×700） |
+| タイルマップ（map） | `720` | `720` | `720×720`（2026-07-31 改訂。旧 780×560 / 600×700） |
 | 要点カード（findings） | `960` | 可変（要点数 × ~80px） | `960×478`（26枚） |
 | 折れ線（timeseries） | `680` | `420` | `680×420`（19枚） |
 | 積み上げ棒（stacked） | `680` | 可変 | `680×420` |
 
 `width` と `height` 属性は viewBox と必ず一致させる（svg-lint が検査）。
-**svg-builder の各チャートは §5 標準幅に収斂済（2026-06-17 Step 5）**: bar single=680（width/height も 680 に一致、旧 DISPLAY_W=780 スケーリングは廃止）/ **ランキングカード 横長columns=960×404・縦長portrait=1080×1350（2026-06-20）** / scatter=960×624 / map=780×560 / line=680×420 / stacked=680 / findings=960。新規生成は自動的にこの規格になる。
+**svg-builder の各チャートは §5 標準幅に収斂済（2026-06-17 Step 5）**: bar single=680（width/height も 680 に一致、旧 DISPLAY_W=780 スケーリングは廃止）/ **ランキングカード 横長columns=960×404・縦長portrait=1080×1350（2026-06-20）** / scatter=960×624 / map=720×720 / line=680×420 / stacked=680 / findings=960。新規生成は自動的にこの規格になる。
 **標準幅から外れる既存 SVG は再生成で是正**（`regenerate-blog-svgs.yml`・§10 Step 4）。
 
 ---
@@ -212,22 +239,37 @@ dark mode 非対応 / theme 色 inline の 2 つは 140 枚該当のため warni
 | **warning** | ダークモード非準拠（`svgThemeStyle()` なし） / テーマ色のインライン指定 / **カタログ別 非正規サイズ（未統一カタログ）**。※ **tile-grid はこの 2 つの warning を出さない**（仕様上テーマ非依存のため。`lintSvgContent(content, filename)` に filename を渡すと抑止される） |
 | **error (json ペア検査)** | **choropleth 凡例の意味的ラベル誤用**（安全/危険 等が json `legendLabels` 明示なしに焼き込み）/ **findings の内容パリティ**（json の heading/text が SVG に未描画 = renderer の heading 脱落バグ再発防止）— `lintChoroplethLegend` / `lintFindingsParity`（2026-07-13 追加）。配線先 = `quality-gate.mjs`（公開前 blocker）+ `audit-chart-quality.mjs`（バッチ） |
 
-### 6-2. タイルマップ品質 gate（`lintTileGridQuality` / 2026-07-29 追加・★再発防止）
+### 6-2. タイルマップ品質 gate（`lintTileGridQuality` / 2026-07-29 追加・**2026-07-31 に 720×720 へ改訂**）
 
 「プロジェクト内のタイルマップを全て同じ品質に保つ」ための決定的ゲート。旧デザインの残存を検出する。
 配線先は `lintSvgSize` と同じ **`quality-gate.mjs`（公開前 blocker）+ `audit-chart-quality.mjs`（バッチ）**。
 
 | # | 不変量 | 理由 |
 |---|---|---|
-| 1 | キャンバス **780×560** | 記事内は `md:max-w-2xl`=672px 幅の `<img>`。画面上の高さは `672×H/W` で決まる。旧 600×700 は 784px で記事を占有していた（新: 482px） |
+| 1 | キャンバス **720×720**（正方形） | 記事内は `md:max-w-2xl`=672px 幅の `<img>`。画面上の高さは `672×H/W` で決まる。780×560 は地図そのものが小さく県名と値が読めなかった（2026-07-31 の指摘）。正方形にして**地図を最大化**し、余る左上と右下にタイトル・上位3県・凡例を置く |
 | 2 | **背景 rect を敷かない**（透過） | 不透明な地色はページの地色と食い違う。透過ならライト/ダーク双方に馴染む |
 | 3 | `prefers-color-scheme` を含まない | §3 の理由（OS とサイトのテーマが食い違うと SVG だけ反転する） |
 | 4 | `svg-*` テーマ class を使わない | 同上 |
-| 5 | **凡例が右下**（グラデーションバーの座標で判定） | 左上は上位/下位リストが使う |
-| 6 | 上位/下位リストがある（タイル 3 枚以上のとき・warning） | 左カラムの空白を埋め、地図では読めない実数値を出す |
+| 5 | **凡例が右下**（グラデーションバーの座標で判定） | 左上は上位3県リストが使う |
+| 6 | 上位3県のリストがある（タイル 3 枚以上のとき・warning） | 左上の空白を埋め、地図では読めない実数値を出す。**下位3県は出さない**（地図を最大化した分スペースが減り、上位だけの方が読みやすい） |
+| 7 | **旧見出し（高い順/低い順/多い順）が残っていない** | 見出しを持たず「1. 宮崎県」の形で並べる。780×560 世代の確実な検出手段 |
 
-**ゲート自体を検証済み**（全 PASS はゲートが何も見ていない場合と区別がつかないため）: 新デザイン 96 枚が
-error 0 / warning 0 で通り、旧デザイン 1 枚が **error 6 件**（不変量 1〜5 の全て）で落ちることを実測した。
+#### ゲート自体の検証（2026-07-31 実測・★数値は実データ）
+
+全 PASS は「ゲートが何も見ていない」状態と区別がつかないため、**両方向**を実測する。
+
+| 検体 | 実測 |
+|---|---|
+| 旧 2 世代前（600×700・`docs/21` の 2 検体） | **error 5 / 4**（キャンバス・背景 rect・prefers-color-scheme・svg-* class・凡例位置） |
+| 旧 1 世代前（780×560・**本番 R2 の実物**） | **error 2**（キャンバス + 旧見出し）— 不変量 #7 が本番集団を捉えることの確認 |
+| 現行（720×720・svg-builder の実出力） | **error 0 / warning 0** |
+
+恒久テストは 2 本。`docs/21` は公開後に自動削除される ephemeral outbox なので、実ファイルに依存させない:
+
+- `.claude/scripts/lib/__tests__/svg-lint.tile-grid.test.mjs` — 不変量ごとに 1 つだけ壊した合成検体で
+  **ゲートの感度**を固定（mutation testing）。検査自体も検証済み（見出しチェックを 1 つ無効化すると落ちる）
+- `packages/svg-builder/src/charts/__tests__/choropleth.gate.test.ts` — 生成器の**実出力**がゲートを通ることを
+  固定（**配線**）。片方だけ更新すると「生成した瞬間に公開できない SVG」ができる
 
 ### カタログ別サイズ統一 gate（`lintSvgSize` / 2026-06-21 追加・★再発防止）
 
@@ -239,7 +281,7 @@ error 0 / warning 0 で通り、旧デザイン 1 枚が **error 6 件**（不�
 | chartType | 正規幅 | 重大度 |
 |---|---|---|
 | `bar`（ranking） | 960（columns）/ 680（single） | **error** |
-| `tile-grid`（tilemap） | 780 | **error** |
+| `tile-grid`（tilemap） | 720 | **error** |
 | `summary`（findings） | 960 | **error** |
 | `line` | 680 | **error** |
 | `scatter` | 960 | **error** |

@@ -40,15 +40,16 @@ export function barKind(svg) {
 }
 
 /**
- * §5 標準 map=600×700。多数の rect タイル・polyline/path なしの地理タイルマップを寸法で検出。
+ * ファイル名で判別できないタイルマップを**中身**で拾う fallback (gallery の分類用)。
+ *
+ * 寸法は世代で変わる (600×700 → 780×560 → 720×720。正典は §5 / `lintTileGridQuality`) ので、
+ * 寸法の窓で絞らない。「47 タイル相当の rect が並び、地理パスを持たない」という
+ * **タイルマップ固有の構造**で判定する。デザイン改訂のたびにここが腐るのを防ぐ。
  */
 export function isTileMapLike(svg) {
-  const vb = svg.match(/viewBox="0 0 (\d+(?:\.\d+)?) (\d+(?:\.\d+)?)"/);
-  if (!vb) return false;
-  const w = +vb[1];
-  const h = +vb[2];
+  if (!/viewBox="0 0 \d/.test(svg)) return false;
   const rects = svg.match(/<rect/g)?.length ?? 0;
-  return w >= 560 && w <= 620 && h >= 640 && h <= 720 && rects > 40 && !/<polyline/.test(svg) && !/<path/.test(svg);
+  return rects > 40 && !/<polyline/.test(svg) && !/<path/.test(svg);
 }
 
 /** ファイル名 + SVG 内容からカタログを判定する (§4 alias 表 + 内容ヒューリスティック)。 */
