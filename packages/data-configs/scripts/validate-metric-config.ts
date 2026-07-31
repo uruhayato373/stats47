@@ -69,6 +69,7 @@ interface Row {
   resourceId: string | null;
   statsDataId: string | null;
   isActive: boolean | null;
+  colorScheme: string | null;
 }
 
 /**
