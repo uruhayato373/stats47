@@ -29,6 +29,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { generateChoroplethSvg } from "../../../packages/svg-builder/src/charts/index.ts";
+import { toShortColorScheme } from "../../../packages/types/src/color-scheme.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -98,7 +99,12 @@ function parseMapDisplay(svg: string): Map<string, string> {
 /** SSOT: ranking values.json の各年 partition */
 async function ssotPartitions(key: string) {
   const v = await fj(`${RANK}/${key}/values.json`);
-  let item: { unit?: string; title?: string; rankingName?: string } = {};
+  let item: {
+    unit?: string;
+    title?: string;
+    rankingName?: string;
+    visualization?: { colorScheme?: string; isReversed?: boolean };
+  } = {};
   try {
     const it = await fj(`${RANK}/${key}/item.json`);
     item = it.item || it || {};
@@ -106,11 +112,19 @@ async function ssotPartitions(key: string) {
     /* item は best-effort */
   }
   const unit = item.unit || v.partitions?.[0]?.values?.[0]?.unit || "";
+  // ★配色は item.json (= config → 決定規則 resolveColorScheme の結果) から採る。
+  //   ここで短縮名に直すのが要 — svg-builder は短縮名しか受けず、正式名を渡すと
+  //   `interpolate` + `interpolateBlues` を引いて null になり **全部赤**になる (2026-07-31 是正)。
+  //   item.json が無い / 未知の色なら undefined にして svg-builder の既定に委ねる。
+  const colorScheme = toShortColorScheme(item.visualization?.colorScheme) ?? undefined;
+  const isReversed = item.visualization?.isReversed === true;
   return (v.partitions || []).map((p: { yearCode: string; values: unknown[] }) => ({
     year: p.yearCode,
     values: p.values as Array<{ areaName: string; value: number; areaCode: string }>,
     unit,
     title: item.title || item.rankingName || key,
+    colorScheme,
+    isReversed,
   }));
 }
 
@@ -213,6 +227,12 @@ async function main() {
         unit: best.unit,
         year: best.year,
         rankingKey: best.key,
+        // ★配色を data JSON に**焼き込む**。generate-article-charts.ts は fetch を一切
+        //   しないので、ここに書かないとオフライン再生成で色が既定 (赤) に戻る。
+        //   scheme=短縮名 (svg-builder が食う形) / colorScheme=正典形 (追跡用)。
+        ...(best.colorScheme ? { scheme: best.colorScheme } : {}),
+        ...(best.colorScheme ? { colorScheme: `interpolate${best.colorScheme}` } : {}),
+        ...(best.isReversed ? { reverse: true } : {}),
         data: best.values.map((v, i) => ({ rank: i + 1, areaName: v.areaName, value: v.value, areaCode: v.areaCode })),
       };
       fs.writeFileSync(path.join(dir, `${t.base}.json`), JSON.stringify(json, null, 2));
@@ -226,6 +246,7 @@ async function main() {
             unit: best.unit,
             source: `r2:app/ranking/${best.key}/values.json`,
             verifiedMatchRate: Math.round(best.rate * 100),
+            schemeSource: best.colorScheme ? "item.json" : "svg-builder default",
             ...(trusted
               ? { trusted: "記事本文の数値を agent が SSOT と照合済み (旧地図SVGは県別title欠落で自動照合不可)" }
               : {}),
@@ -235,7 +256,13 @@ async function main() {
           2,
         ),
       );
-      const newSvg = generateChoroplethSvg(items, { title: best.title, subtitle: `${best.year}年`, unit: best.unit });
+      const newSvg = generateChoroplethSvg(items, {
+        title: best.title,
+        subtitle: `${best.year}年`,
+        unit: best.unit,
+        ...(best.colorScheme ? { scheme: best.colorScheme } : {}),
+        ...(best.isReversed ? { reverse: true } : {}),
+      });
       fs.writeFileSync(path.join(dir, `${t.base}.svg`), newSvg);
       results.push({ ...t, oldSvg, newSvg, key: best.key, year: best.year, rate: Math.round(best.rate * 100), n: items.length });
     } catch (e) {

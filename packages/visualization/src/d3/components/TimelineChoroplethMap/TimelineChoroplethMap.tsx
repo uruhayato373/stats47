@@ -6,6 +6,9 @@ import { Button, Slider } from "@stats47/components";
 
 import type { Topology } from "topojson-specification";
 
+import { DEFAULT_DIVERGING_SCHEME } from "@stats47/types";
+
+import { legendGradientCss } from "../../utils/color-scale/legend-gradient";
 import { DivergingChoroplethMap } from "../DivergingChoroplethMap";
 import type {
   DivergingChoroplethMapFixedProjection,
@@ -26,6 +29,8 @@ export interface TimelineChoroplethMapProps {
   frames: TimelineChoroplethFrame[];
   /** Half-width of the color domain */
   colorClamp: number;
+  /** 配色 (正典形 / 短縮形どちらも可)。既定は発散配色 interpolateRdBu。凡例も同じ値から導出する */
+  colorScheme?: string;
   projection:
     | DivergingChoroplethMapProjection
     | DivergingChoroplethMapFixedProjection;
@@ -47,6 +52,7 @@ export function TimelineChoroplethMap({
   topology,
   frames,
   colorClamp,
+  colorScheme = DEFAULT_DIVERGING_SCHEME,
   projection,
   codeProp,
   nameProp,
@@ -144,6 +150,7 @@ export function TimelineChoroplethMap({
         codeProp={codeProp}
         nameProp={nameProp}
         colorClamp={colorClamp}
+        colorScheme={colorScheme}
         projection={projection}
         excludeCodes={excludeCodes}
         valueFormatter={valueFormatter}
@@ -184,7 +191,7 @@ export function TimelineChoroplethMap({
               className="h-2 w-32 rounded-sm"
               style={{
                 background:
-                  "linear-gradient(to right, #b2182b, #ef8a62, #f7f7f7, #67a9cf, #2166ac)",
+                  legendGradientCss(colorScheme, { reverse: true }),
               }}
             />
             <span className="font-medium text-blue-600">増加 →</span>

@@ -1,5 +1,6 @@
 import { lookupArea } from "@stats47/area";
 import { cn } from "@stats47/components";
+import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 
 export interface RankingBarListItem {
   key: string;
@@ -16,6 +17,12 @@ interface RankingBarListProps {
   max?: number;
   unit?: string;
   showRank?: boolean;
+  /**
+   * 小数桁の**上限**。実際の桁数は items 全体から 1 度だけ解決する
+   * (この上限で頭打ちにする)。上限だけを指定していた旧実装は、同じリストの中で
+   * 「2,309」と「2,285.4」が混ざっていた — 44.0 は number では 44 なので、
+   * max 指定だけでは整数値の小数が消えるため (2026-07-31)。
+   */
   valueMaximumFractionDigits?: number;
   className?: string;
   rowClassName?: string;
@@ -45,6 +52,12 @@ export function RankingBarList({
 }: RankingBarListProps) {
   const resolvedMax =
     max ?? Math.max(...items.map((item) => Math.abs(item.value)), 1);
+  // 桁数は 1 つの値では決まらずデータセット全体で決まる。上限を超えない範囲で
+  // items から 1 度だけ解決し、全行に同じ桁数を使う。
+  const precision = resolveValuePrecision(
+    items.map((item) => item.value),
+    valueMaximumFractionDigits,
+  );
 
   return (
     <div className={cn("space-y-1", className)}>
@@ -55,7 +68,7 @@ export function RankingBarList({
           max={resolvedMax}
           unit={unit}
           showRank={showRank}
-          valueMaximumFractionDigits={valueMaximumFractionDigits}
+          precision={precision}
           rowClassName={rowClassName}
           labelClassName={labelClassName}
           barClassName={barClassName}
@@ -71,7 +84,7 @@ function RankingBarRow({
   max,
   unit,
   showRank,
-  valueMaximumFractionDigits,
+  precision,
   rowClassName,
   labelClassName,
   barClassName,
@@ -81,7 +94,7 @@ function RankingBarRow({
   max: number;
   unit: string;
   showRank: boolean;
-  valueMaximumFractionDigits: number;
+  precision: number;
   rowClassName?: string;
   labelClassName?: string;
   barClassName?: string;
@@ -114,9 +127,7 @@ function RankingBarRow({
         />
       </div>
       <span className={cn("w-20 shrink-0 text-right tabular-nums", valueClassName)}>
-        {item.value.toLocaleString("ja-JP", {
-          maximumFractionDigits: valueMaximumFractionDigits,
-        })}
+        {formatValueWithPrecision(item.value, precision)}
         {unit && (
           <span className="ml-0.5 font-normal text-muted-foreground">
             {unit}

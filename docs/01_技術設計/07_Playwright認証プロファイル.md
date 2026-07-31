@@ -2,7 +2,7 @@
 title: Playwright認証プロファイル
 type: technical-design
 status: adopted
-updated: 2026-07-30
+updated: 2026-07-31
 ---
 
 # Playwright認証プロファイル
@@ -22,13 +22,16 @@ Playwright を使う運用スクリプトのログイン状態、アカウント
 
 **公式 API がある操作に Playwright を使わない。** API 経路は OAuth scope で権限を最小化でき、ブラウザセッション（サービス全権を持つ Cookie）を扱わず、セッション期限切れによる再ログインも要らない。Playwright は「API が提供されていない操作」だけの最後の手段とする。
 
-判定を誤らないため、**API の有無は型定義または公式リファレンスで実際に確認する**。2026-07-30 に「AdSense に書き込み API は無い」と誤って断定した事故があり、原因は型定義 grep のパターン不備だった。`create` / `patch` 等のメソッド名を個別に確認する。
+判定を誤らないため、**API の有無と利用条件を型定義・公式リファレンスで実際に確認する**。
+2026-07-30にはAdSense write methodをgrepで取りこぼし、翌日はmethodの存在だけを見て
+一般publisherでも使えると誤認した。`create` / `patch`等の名前だけでなく、利用主体、
+product code、対応format、scope、必要roleまで確認する。
 
 | 操作 | 公式 API | 判定 |
 |---|---|---|
-| AdSense 広告ユニットの作成・更新 | `accounts.adclients.adunits.create` / `patch`（scope `https://www.googleapis.com/auth/adsense`） | **API を使う** |
+| AdSense 広告ユニットの作成・更新 | `accounts.adclients.adunits.create` / `patch` は存在するが、AdSense for Platforms 系の制限プロジェクト向けかつ現状 `DISPLAY` のみ。stats47 の利用権限は未証明 | **API化しない。人間が管理画面で実施** |
 | GA4 カスタムディメンション作成 | `properties.customDimensions.create` / `patch` / `archive` | **API を使う** |
-| GA4 AdSense リンク作成 | `properties.adSenseLinks.create` / `delete` | **API を使う** |
+| GA4 AdSense リンク監査・作成 | `properties.adSenseLinks.list` / `create` / `delete` | 監査はAPI。作成・削除は必要性と承認がある場合だけ個別allowlist化 |
 | Instagram 投稿削除 | Graph API `DELETE /<IG_MEDIA_ID>`（`instagram_manage_contents`） | **API を使う** |
 | GA4 の Search Console リンク作成 | 無い（Admin API v1alpha の型定義に `searchConsole` の語が無い。`Searchads` は Search Ads 360 で別物） | Playwright |
 | GA4 Library の collection 公開 | 無い（Properties サブリソースに Library / Collection が無い） | Playwright |
@@ -74,7 +77,7 @@ MCP が有用なのは**セレクタ確定の探索工程**である。実機を
 | `playwright-afb-profile/`                             | afb                  | `.claude/scripts/ads/`                                                  | login から完了まで同一 headed process                   |
 | `playwright-coconala-profile/`                        | ココナラ             | `.claude/scripts/coconala/`                                             | `.claude/config/coconala-account.json` の seller を照合 |
 | `playwright-kdp-profile/`                             | Amazon KDP           | `.claude/scripts/kdp/`                                                  | `.claude/config/kdp-account.json` の account を照合     |
-| `playwright-google-admin-profile/`                    | Google Admin         | `.claude/scripts/google-admin/`                                         | GA4 / GSC の allowlist と read-before-write gate を使う |
+| `playwright-google-admin-profile/`                    | Google Admin         | `.claude/scripts/google-admin/`                                         | GSC link / GA4 Library のAPI非提供操作だけに使う         |
 
 archive skill だけが参照する profile は Active 一覧へ含めない。復活させる場合は script、profile、account assertion、cleanup を再監査してから追加する。
 
@@ -97,7 +100,9 @@ archive skill だけが参照する profile は Active 一覧へ含めない。�
 
 ### Google Admin
 
-profile はログイン保持だけに使う。設定変更の許可範囲、secret の redaction、read-before-write は `.claude/scripts/google-admin/README.md` と CLI の allowlist を正典とする。
+profile はログイン保持だけに使い、GSC link作成とGA4 Library collection公開に限定する。
+GA4 Admin API、AdSense read API、CIの承認境界、設定変更のallowlistは
+`.claude/scripts/google-admin/README.md`を正典とする。
 
 ## worktree と OS
 

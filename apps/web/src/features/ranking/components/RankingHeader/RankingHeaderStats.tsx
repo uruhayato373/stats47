@@ -69,7 +69,7 @@ export function RankingHeaderStats({
           showNationalAverage && "@md:grid-cols-2",
         )}
       >
-        <RankingTopThreeList stats={stats} unit={unit} />
+        <RankingTopThreeList stats={stats} unit={unit} precision={precision} />
         {showNationalAverage && (
           <RankingNationalAverageStat
             average={stats.average}

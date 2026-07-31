@@ -8,7 +8,12 @@ const test = require("node:test");
 const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
 const CHECKER = path.join(ROOT, ".claude/scripts/lib/check-workspace-contract.cjs");
 
-function fixture(packages) {
+/**
+ * @param packages  relative path → package.json の内容
+ * @param options.testFilesIn  テストファイルを置くパッケージ (UNWIRED_TEST_SUITE 用)
+ * @param options.registered   vitest.workspace.ts に登録するパッケージ。省略時は全件
+ */
+function fixture(packages, options = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-workspace-contract-"));
   const checker = path.join(root, ".claude/scripts/lib/check-workspace-contract.cjs");
   fs.mkdirSync(path.dirname(checker), { recursive: true });
@@ -19,8 +24,16 @@ function fixture(packages) {
     fs.mkdirSync(path.join(directory, "src"), { recursive: true });
     fs.writeFileSync(path.join(directory, "package.json"), `${JSON.stringify(manifest)}\n`);
     fs.writeFileSync(path.join(directory, "src/index.ts"), "export {};\n");
+    if ((options.testFilesIn ?? []).includes(relative)) {
+      fs.writeFileSync(path.join(directory, "src/index.test.ts"), "export {};\n");
+    }
     lockPackages[relative] = { name: manifest.name };
   }
+  const registered = options.registered ?? Object.keys(packages);
+  fs.writeFileSync(
+    path.join(root, "vitest.workspace.ts"),
+    `export default [\n${registered.map((r) => `  '${r}/vitest.config.ts',`).join("\n")}\n];\n`,
+  );
   fs.writeFileSync(path.join(root, "package-lock.json"), JSON.stringify({ lockfileVersion: 3, packages: lockPackages }));
   return { root, checker };
 }
@@ -74,4 +87,72 @@ test("package-lockのworkspace欠落を検出する", (t) => {
   const result = run(item);
   assert.equal(result.status, 1);
   assert.ok(result.output.findings.some((finding) => finding.code === "LOCK_MISSING_WORKSPACE"));
+});
+
+// --- UNWIRED_TEST_SUITE (2026-07-31 追加) ---
+// 「テストがあるのに workspace 未登録 = どこからも実行されない」を検出する。
+// 全 PASS はゲートが何も見ていない状態と区別がつかないので、両方向を固定する。
+
+test("テストを持つパッケージが未登録なら検出する", (t) => {
+  const item = fixture(
+    {
+      "packages/a": { name: "@stats47/a", main: "./src/index.ts" },
+      "packages/b": { name: "@stats47/b", main: "./src/index.ts" },
+    },
+    { testFilesIn: ["packages/b"], registered: ["packages/a"] },
+  );
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item);
+  const unwired = result.output.findings.filter((f) => f.code === "UNWIRED_TEST_SUITE");
+  assert.equal(unwired.length, 1);
+  assert.match(unwired[0].message, /packages\/b/);
+  assert.equal(result.status, 1);
+});
+
+test("テストを持たない未登録パッケージは検出しない (誤検知の抑止)", (t) => {
+  const item = fixture(
+    {
+      "packages/a": { name: "@stats47/a", main: "./src/index.ts" },
+      "packages/b": { name: "@stats47/b", main: "./src/index.ts" },
+    },
+    { registered: ["packages/a"] },
+  );
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item);
+  assert.deepEqual(result.output.findings, []);
+  assert.equal(result.status, 0);
+});
+
+test("登録済みならテストを持っていても検出しない", (t) => {
+  const item = fixture(
+    { "packages/a": { name: "@stats47/a", main: "./src/index.ts" } },
+    { testFilesIn: ["packages/a"] },
+  );
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item);
+  assert.deepEqual(result.output.findings, []);
+});
+
+test("node_modules 配下のテストは登録要求の根拠にしない", (t) => {
+  const item = fixture(
+    { "packages/a": { name: "@stats47/a", main: "./src/index.ts" } },
+    { registered: [] },
+  );
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const nested = path.join(item.root, "packages/a/node_modules/dep");
+  fs.mkdirSync(nested, { recursive: true });
+  fs.writeFileSync(path.join(nested, "dep.test.ts"), "export {};\n");
+  const result = run(item);
+  assert.deepEqual(result.output.findings, []);
+});
+
+test("vitest.workspace.ts が無ければ検出する", (t) => {
+  const item = fixture({ "packages/a": { name: "@stats47/a", main: "./src/index.ts" } });
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  fs.rmSync(path.join(item.root, "vitest.workspace.ts"));
+  const result = run(item);
+  assert.deepEqual(
+    result.output.findings.map((f) => f.code),
+    ["MISSING_VITEST_WORKSPACE"],
+  );
 });

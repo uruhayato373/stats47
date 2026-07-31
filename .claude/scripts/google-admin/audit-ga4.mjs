@@ -1,18 +1,18 @@
 /**
- * audit-ga4 — GA4 Admin UI の read-only inventory。
- * identity契約: ./README.md「mutation前のidentity確認」。
+ * audit-ga4 — GA4 Admin UI の **residual 専用** read-only inventory (headed browser)。
+ * identity契約: ./README.md「Phase 4」「不変の安全契約」。
  *
- * property / web stream / Search Console link / AdSense link / custom dimensions /
- * Library の Search Console collection 公開状態を、headed browser で走査する。
+ * ★ これは公式 API が無い操作 (Search Console link / Library collection 公開) の
+ *   read-only 監査だけを担う。property / web stream / custom dimensions / AdSense link の
+ *   inventory は **audit-ga4-api.mjs (API)** へ移した (Phase 1)。ここに UI での再実装を戻さない。
  *
  * - 完全 read-only (クリックはナビゲーションのみ・Save/リンク/公開ボタンは押さない)。
  * - 各 step は {status, ...data} を返し、要素が見つからない場合は "selector-drift" として
  *   fail-closed (推測で ok にしない)。screenshot は /tmp のみ。
  * - 値の取得は主に本文テキスト (innerText) の走査 — CSS class への依存を避け、
- *   決定的な文字列 (property ID / sc-domain:stats47.jp / ad_id) の有無で判定する。
+ *   決定的な文字列 (property ID / sc-domain:stats47.jp) の有無で判定する。
  */
 import { isLoginUrl, waitForLogin } from "./browser-context.mjs";
-import { extractObservedParams } from "./dimension-ledger.mjs";
 
 export const GA4_PROPERTY_ID = process.env.GA4_PROPERTY_ID || "463218070";
 export const GA4_HOME = `https://analytics.google.com/analytics/web/#/p${GA4_PROPERTY_ID}/reports/intelligenthome`;
@@ -94,20 +94,6 @@ async function openAdminSection(page, labels, { screenshotDir, shotName }) {
   return { status: "selector-drift", step: shotName, tried: labels };
 }
 
-/** データストリーム inventory: stats47.jp の web stream 有無。 */
-export async function auditWebStreams(page, { screenshotDir }) {
-  const admin = await gotoAdmin(page);
-  if (admin.status !== "ok") return admin;
-  const nav = await openAdminSection(page, ["データ ストリーム", "データストリーム", "Data streams"], { screenshotDir, shotName: "03-streams" });
-  if (nav.status !== "ok") return nav;
-  const text = await bodyText(page);
-  return {
-    status: "ok",
-    hasStats47Stream: /stats47\.jp/.test(text),
-    streamListText: text.length > 0,
-  };
-}
-
 /** Search Console リンク inventory。リンク行に sc-domain / stats47.jp が出るか。 */
 export async function auditSearchConsoleLinks(page, { screenshotDir }) {
   const admin = await gotoAdmin(page);
@@ -123,43 +109,6 @@ export async function auditSearchConsoleLinks(page, { screenshotDir }) {
   // 「リンク」作成ボタンの有無 (権限の間接確認)
   const hasLinkButton = /リンク\s*$|^リンク/m.test(text) || text.includes("リンク設定");
   return { status: "ok", linked, hasLinkButton, emptyStateShown: /リンクなし|リンクがありません|No links/.test(text) };
-}
-
-/** AdSense リンク inventory (audit-only・作成しない)。 */
-export async function auditAdSenseLinks(page, { screenshotDir }) {
-  const admin = await gotoAdmin(page);
-  if (admin.status !== "ok") return admin;
-  const nav = await openAdminSection(
-    page,
-    ["AdSense のリンク", "AdSense リンク", "AdSense links"],
-    { screenshotDir, shotName: "05-adsense-links" },
-  );
-  if (nav.status !== "ok") return nav;
-  const text = await bodyText(page);
-  const linked = /pub-\d{10,}/.test(text) && !/リンクなし|リンクがありません|No links/.test(text);
-  const pubId = text.match(/pub-\d{10,}/)?.[0] ?? null;
-  return { status: "ok", linked, publisherId: pubId };
-}
-
-/** カスタム定義 inventory: ad_id (event scope) の有無・displayName。 */
-export async function auditCustomDimensions(page, { screenshotDir, knownParams = [] }) {
-  const admin = await gotoAdmin(page);
-  if (admin.status !== "ok") return admin;
-  const nav = await openAdminSection(page, ["カスタム定義", "Custom definitions"], { screenshotDir, shotName: "06-custom-dimensions" });
-  if (nav.status !== "ok") return nav;
-  const text = await bodyText(page);
-  const hasAdId = /\bad_id\b/.test(text);
-  // 台帳 (analytics-event-standards.md §2) の「登録が要るパラメータ」が画面に出ているかを
-  // 単語境界で照合する。表構造に依存させない (innerText 方式)。
-  const observedParams = extractObservedParams(text, knownParams);
-  // ad_id 行の周辺テキスト (displayName 推定用・機密ではない)
-  let adIdContext = null;
-  if (hasAdId) {
-    const lines = text.split("\n");
-    const i = lines.findIndex((l) => /\bad_id\b/.test(l));
-    adIdContext = lines.slice(Math.max(0, i - 2), i + 2).join(" | ").slice(0, 200);
-  }
-  return { status: "ok", hasAdId, adIdContext, observedParams, pageLoaded: /カスタム定義|ディメンション/.test(text) };
 }
 
 /** Library の Search Console collection 公開状態 (レポート → ライブラリ)。

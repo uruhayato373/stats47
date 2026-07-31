@@ -9,6 +9,7 @@
 | PR Quality Check | PR作成・更新 (main) | Lint、Type Check、Unit Test、Coverage、Build、Playwright E2E |
 | Deploy to Cloudflare Workers | Push (main) | Build、認証確認、デプロイ、ヘルスチェック |
 | Security Scan | PR/Push、毎週日曜0時、手動 | npm audit、CodeQL分析 |
+| Google Admin settings (`google-admin-settings.yml`) | 毎週月曜5時JST (schedule)、手動 (audit/plan/apply) | GA4 Admin API / GSC / AdSense を read-only 監査。dispatch の `apply` だけが protected Environment `google-admin-production` で GA4 custom dimension を 1 件作成。正典: `.claude/scripts/google-admin/README.md` |
 
 ### ブランチ戦略
 
@@ -46,6 +47,7 @@ feature/* → PR作成 → 品質チェック
 |--------|------|
 | `CODECOV_TOKEN` | カバレッジアップロード（オプション） |
 | `SLACK_WEBHOOK_URL` | Slack通知（オプション） |
+| `GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON` | GA4 custom dimension 作成用の `analytics.edit` サービスアカウント鍵。**Environment `google-admin-production` の secret** として登録し、`google-admin-settings.yml` の `apply` job だけが参照する（required reviewer 承認が要る・人間工程）。正典: `.claude/scripts/google-admin/README.md` |
 
 ## PRマージ前チェック
 

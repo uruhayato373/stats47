@@ -1,46 +1,53 @@
 /**
- * apply-allowlisted-settings — allowlist 3 action の決定 (pure) と実行 (browser)。
+ * apply-allowlisted-settings — 変更 (mutation) の決定 (pure) と Playwright residual の実行。
  *
- * 正典: ./README.md「allowlist」「denylist」「mutation手順」。
+ * 正典: ./README.md「allowlist」「denylist」「Phase 2」「Phase 4」。
  *
- * decideActions (pure・テスト対象):
- *   inventory (audit 結果) + 台帳状態 → 実行すべき allowlist action / blocker / no-op を決める。
- *   - allowlist 外の action 名は型 (ALLOWED_ACTIONS) と runtime (assertAllowed) の両方で拒否。
- *   - AdSense link は audit-only: GA4 に ad_impression 実データがあるのに UI が未リンクなら
- *     矛盾 = blocker (作成しない)。
- *   - wrong GSC link は編集不可のため削除・再作成しない = blocker。
- *   - ad_id: 同 eventParameter が別 displayName で存在 → 既存扱い (作成しない)。
- *     scope 違い → blocker (修正・削除しない)。
+ * このモジュールが持つのは 2 系統の mutation:
+ *   1. GA4 custom dimension (API・承認付き) の **計画** — planCustomDimension (pure)。
+ *      実際の作成 (customDimensions.create) は audit-ga4-api.mjs の I/O が行う。
+ *   2. Playwright residual (公式 API が無い操作) の **決定と実行**:
+ *      - create-search-console-link / publish-search-console-collection のみ。
  *
- * 実行 (browser) は README の mutation 手順に従う。Save 後に verify できなければ
- * mutation-unknown とし、盲目的に再実行しない。
+ * AdSense unit の create/patch・GA4 AdSense link 作成・custom dimension の
+ * 削除/archive/rename/scope 変更は denylist で、ここに実行経路を作らない
+ * (README「denylist」)。ALLOWED_ACTIONS は Playwright residual の 2 action だけ。
  */
 import { createHash } from "node:crypto";
-import { GA4_PROPERTY_ID } from "./audit-ga4.mjs";
 
 /**
- * apply が変更してよい action。README「allowlist」と 1:1 で対応する。
+ * ローカル Playwright で実行してよい action。README「allowlist」(ローカル Playwright) と 1:1。
  *
- * ad unit の 2 action を許すのは、他の AdSense 設定と危険性が非対称だからである:
- * - 新規 unit 作成は既存の配信を一切変えない (slotId が発行されるだけで、コード側
- *   constants.ts に埋めるまで 1 imp も出ない = 管理画面操作とコード反映の二段ゲート)。
- * - rename は unit ID を変えないので AD_UNIT_ID 軸の時系列を壊さない。
- * - 対して Auto ads / format / exclusion / blocking control は全ページの配信を即時・
- *   不可逆に変える → denylist のまま (実行経路を作らない)。
+ * GA4 custom dimension は承認付き API 経路へ移した (Phase 2) ため、ここには含めない。
+ * AdSense unit / GA4 AdSense link は denylist なので実行経路が存在しない。
  */
 export const ALLOWED_ACTIONS = Object.freeze([
   "create-search-console-link",
   "publish-search-console-collection",
-  "create-ad-id-dimension",
-  "create-ad-unit",
-  "rename-ad-unit",
 ]);
 
-export const AD_ID_DIMENSION = Object.freeze({
-  displayName: "Affiliate ad ID",
-  scope: "Event",
-  eventParameter: "ad_id",
-});
+/**
+ * 承認付き API で作成してよい GA4 custom dimension の **authored 定義**。
+ *
+ * README「allowlist」: display name / parameter / scope を台帳の文章から推測しない。
+ * コードに明示したこの定義だけを plan 対象にする。parameterName は
+ * events.ts が実際に送るパラメータ名と一致させる。scope は API の enum ("EVENT")。
+ */
+export const AUTHORED_DIMENSIONS = Object.freeze([
+  { parameterName: "ad_id", displayName: "Affiliate ad ID", scope: "EVENT", description: "stats47: アフィリエイト広告の識別子 (affiliate_click / affiliate_impression)" },
+  { parameterName: "cta_id", displayName: "CTA ID", scope: "EVENT", description: "stats47: CTA クリックの識別子 (cta_click)" },
+  { parameterName: "content_id", displayName: "Content ID", scope: "EVENT", description: "stats47: CTA の対象コンテンツ識別子 (cta_click)" },
+  { parameterName: "target_type", displayName: "Target type", scope: "EVENT", description: "stats47: CTA の遷移先種別 (cta_click)" },
+  { parameterName: "target_key", displayName: "Target key", scope: "EVENT", description: "stats47: CTA の遷移先キー (cta_click)" },
+  { parameterName: "card_variant", displayName: "Card variant", scope: "EVENT", description: "stats47: ホーム注目カードのバリアント (home_featured_*)" },
+  { parameterName: "slot", displayName: "Slot", scope: "EVENT", description: "stats47: ホーム注目カードのスロット (home_featured_*)" },
+  { parameterName: "experiment_variant", displayName: "Experiment variant", scope: "EVENT", description: "stats47: ホーム注目カードの実験バリアント (home_featured_*)" },
+]);
+
+/** event-scoped custom dimension の無料枠上限 (README「集計反映」)。 */
+export const EVENT_SCOPED_DIMENSION_CAP = 50;
+
+const AUTHORED_BY_PARAM = new Map(AUTHORED_DIMENSIONS.map((d) => [d.parameterName, d]));
 
 /** allowlist 外 action を runtime で拒否する。 */
 export function assertAllowed(action) {
@@ -51,27 +58,23 @@ export function assertAllowed(action) {
 }
 
 /**
- * audit inventory から実行 action / blocker / no-op を決める (pure・決定的)。
+ * Playwright residual (SC link / collection) の決定 (pure・決定的)。
+ *
  * @param {{
  *   gsc: {present:boolean|null, permissionLevel?:string|null},
  *   scLinks: {status:string, linked?:boolean},
- *   adsenseLinks: {status:string, linked?:boolean},
- *   customDimensions: {status:string, hasAdId?:boolean},
  *   library: {status:string, hasScCollection?:boolean, published?:boolean, unpublished?:boolean},
- *   ledger: {adIdStatus: "要登録"|"登録済"|string},
- *   ga4AdImpressionObserved: boolean,
  * }} inv
  * @returns {{actions:string[], noops:Array<{action:string,reason:string}>, blockers:Array<{code:string,detail:string}>}}
  */
-export function decideActions(inv) {
+export function decideScActions(inv) {
   const actions = [];
   const noops = [];
   const blockers = [];
-  const plan = []; // action の具体的な対象 (承認トークンの入力になる)
-  const drift = (name, r) => r?.status !== "ok";
+  const drift = (r) => r?.status !== "ok";
 
   // --- A. create-search-console-link ---
-  if (drift("scLinks", inv.scLinks)) {
+  if (drift(inv.scLinks)) {
     blockers.push({ code: "sc-links-unreadable", detail: `SC links audit ${inv.scLinks?.status} — 状態不明のまま作成しない` });
   } else if (inv.scLinks.linked) {
     noops.push({ action: "create-search-console-link", reason: "既存リンクあり (重複作成しない)" });
@@ -82,7 +85,7 @@ export function decideActions(inv) {
   }
 
   // --- B. publish-search-console-collection ---
-  if (drift("library", inv.library)) {
+  if (drift(inv.library)) {
     blockers.push({ code: "library-unreadable", detail: `Library audit ${inv.library?.status}` });
   } else if (!inv.library.hasScCollection) {
     // リンク作成前は collection 自体が無いことがある → リンク後の verify で再評価する
@@ -93,134 +96,107 @@ export function decideActions(inv) {
     actions.push("publish-search-console-collection");
   }
 
-  // --- C. create-ad-id-dimension ---
-  if (drift("customDimensions", inv.customDimensions)) {
-    blockers.push({ code: "dimensions-unreadable", detail: `custom definitions audit ${inv.customDimensions?.status}` });
-  } else if (inv.customDimensions.hasAdId) {
-    noops.push({ action: "create-ad-id-dimension", reason: "eventParameter ad_id が既に存在 (displayName が違っても新規作成しない・scope 違いは手動確認)" });
-  } else if (!/要登録/.test(inv.ledger?.adIdStatus ?? "")) {
-    noops.push({ action: "create-ad-id-dimension", reason: `台帳が要登録ではない (${inv.ledger?.adIdStatus ?? "unknown"})` });
-  } else {
-    actions.push("create-ad-id-dimension");
-  }
-
-  // --- AdSense link 整合 (audit-only) ---
-  if (!drift("adsenseLinks", inv.adsenseLinks)) {
-    if (!inv.adsenseLinks.linked && inv.ga4AdImpressionObserved) {
-      blockers.push({
-        code: "adsense-link-contradiction",
-        detail: "GA4 に ad_impression 実データがあるのに UI が未リンク表示 — 矛盾のため mutation 停止・人間確認 (作成しない)",
-      });
-    }
-  }
-
-  // --- D/E. ad unit (inv.adUnits が無い呼び出しでは何もしない = 後方互換) ---
-  if (inv.adUnits) {
-    const unitPlan = decideAdUnitActions(inv);
-    actions.push(...unitPlan.actions);
-    noops.push(...unitPlan.noops);
-    blockers.push(...unitPlan.blockers);
-    if (unitPlan.plan) plan.push(...unitPlan.plan);
-  }
-
   for (const a of actions) assertAllowed(a);
-  return { actions, noops, blockers, plan };
+  return { actions, noops, blockers };
 }
 
 /**
- * D. create-ad-unit / E. rename-ad-unit を決める (pure)。
+ * GA4 custom dimension の作成計画を決める (pure・決定的・1 run 1 件)。
  *
- * 1 run あたり作成 1 件・rename 1 件に絞る (README「1 action だけ実行」の趣旨)。
- * unit ID が引けない対象は rename しない (名前だけの推測 rename をしない)。
+ * README「Phase 2 plan」: 台帳の ⏳要登録 だけを候補にし、authored 定義があり、GA4 に同じ
+ * parameterName が無く、EVENT scope で、空き枠があるものを安定順で 1 件だけ plan にする。
  *
  * @param {{
- *   adUnits: {status:string, source?:string, units?:Array<{id:string,displayName:string,slotId?:string,state?:string}>,
- *             desired?:Array<{adUnitName:string,format?:string,exportName?:string}>,
- *             codeSlots?:Array<{exportName:string,slotId:string,adUnitName:string|null}>},
- *   adsenseAccount?: {status:string, accountId?:string},
- * }} inv
+ *   needsRegistrationParams: string[],   // 台帳 ⏳要登録 の required parameter (安定順)
+ *   existingParams?: string[],           // GA4 に既にある parameterName
+ *   existingScopeByParam?: Record<string,string>, // GA4 の param -> scope
+ *   eventScopedCount?: number|null,      // 現在の EVENT-scoped custom dimension 件数 (null=不明)
+ *   cap?: number,
+ * }} args
+ * @returns {{plan: object|null, noops: Array<object>, blockers: Array<object>}}
  */
-export function decideAdUnitActions(inv) {
-  const actions = [];
+export function planCustomDimension({
+  needsRegistrationParams,
+  existingParams = [],
+  existingScopeByParam = {},
+  eventScopedCount = null,
+  cap = EVENT_SCOPED_DIMENSION_CAP,
+}) {
   const noops = [];
   const blockers = [];
-  const plan = [];
+  const existing = new Set(existingParams ?? []);
+  // 安定順 (parameterName の昇順) で候補を並べる。入力順に依存させない。
+  const candidates = [...new Set(needsRegistrationParams ?? [])].sort();
 
-  if (inv.adUnits?.status !== "ok") {
-    blockers.push({
-      code: "adunits-unreadable",
-      detail: `ad unit inventory ${inv.adUnits?.status ?? "missing"} — 状態不明のまま作成・改名しない`,
-    });
-    return { actions, noops, blockers, plan };
-  }
-  if (inv.adsenseAccount?.status !== "ok") {
-    blockers.push({
-      code: "adsense-account-assert-failed",
-      detail: `AdSense account assert ${inv.adsenseAccount?.status ?? "missing"} — 別アカウントへの誤操作を防ぐため停止`,
-    });
-    return { actions, noops, blockers, plan };
-  }
-
-  const units = inv.adUnits.units ?? [];
-  const existingNames = new Set(units.map((u) => u.displayName).filter(Boolean));
-
-  // D. 作成: desired のうち同名がまだ無いもの (exact duplicate check)
-  const missing = (inv.adUnits.desired ?? []).filter((d) => d.adUnitName && !existingNames.has(d.adUnitName));
-  if (missing.length === 0) {
-    noops.push({ action: "create-ad-unit", reason: "未作成の desired ユニットが無い (同名は重複作成しない)" });
-  } else {
-    const target = missing[0];
-    actions.push("create-ad-unit");
-    plan.push({ action: "create-ad-unit", adUnitName: target.adUnitName, format: target.format ?? null, exportName: target.exportName ?? null });
-    if (missing.length > 1) {
-      noops.push({
-        action: "create-ad-unit",
-        reason: `残り ${missing.length - 1} 件は次回 run へ繰り越す (1 run 1 件)`,
-      });
+  const eligible = [];
+  for (const param of candidates) {
+    if (existing.has(param)) {
+      // 既存: 作成しない。ただし EVENT 以外の scope なら台帳と食い違うので blocker (直さない・止める)
+      const scope = existingScopeByParam[param];
+      if (scope && scope !== "EVENT") {
+        blockers.push({ code: "scope-mismatch", detail: `${param} は GA4 で ${scope} scope で存在 — EVENT でないため作成も修正もしない (人間確認)` });
+      } else {
+        noops.push({ action: "create-ga4-custom-dimension", parameterName: param, reason: "GA4 に既に存在 (作成しない)" });
+      }
+      continue;
     }
+    const authored = AUTHORED_BY_PARAM.get(param);
+    if (!authored) {
+      blockers.push({ code: "authored-definition-missing", detail: `${param} は台帳が ⏳要登録 だが authored 定義が無い — 推測で作らない` });
+      continue;
+    }
+    if (authored.scope !== "EVENT") {
+      blockers.push({ code: "authored-scope-not-event", detail: `${param} の authored scope が EVENT でない (${authored.scope})` });
+      continue;
+    }
+    eligible.push(authored);
   }
 
-  // E. 改名: コード側 adUnitName と AdSense displayName が slotId 一致で食い違うもの
-  const unitBySlotId = new Map(units.filter((u) => u.slotId).map((u) => [u.slotId, u]));
-  const renames = [];
-  for (const s of inv.adUnits.codeSlots ?? []) {
-    if (!s.adUnitName || !s.slotId) continue;
-    const u = unitBySlotId.get(s.slotId);
-    if (!u) continue; // ID が引けない → 推測で rename しない
-    if (u.displayName !== s.adUnitName) {
-      renames.push({ unitId: u.id, from: u.displayName, to: s.adUnitName, exportName: s.exportName });
-    }
-  }
-  if (renames.length === 0) {
-    noops.push({ action: "rename-ad-unit", reason: "コード側 adUnitName と AdSense 表示名の不一致が無い" });
-  } else {
-    const target = renames[0];
-    actions.push("rename-ad-unit");
-    plan.push({ action: "rename-ad-unit", ...target });
-    if (renames.length > 1) {
-      noops.push({ action: "rename-ad-unit", reason: `残り ${renames.length - 1} 件は次回 run へ繰り越す (1 run 1 件)` });
-    }
+  if (eligible.length === 0) {
+    return { plan: null, noops, blockers };
   }
 
-  return { actions, noops, blockers, plan };
+  // 空き枠の確認 (件数が取れないときは fail closed で作らない)
+  if (eventScopedCount == null || !Number.isFinite(eventScopedCount)) {
+    blockers.push({ code: "capacity-unknown", detail: "EVENT-scoped custom dimension の件数を取得できない — 空き枠不明のため作成しない" });
+    return { plan: null, noops, blockers };
+  }
+  if (eventScopedCount >= cap) {
+    blockers.push({ code: "no-capacity", detail: `EVENT-scoped custom dimension が上限 ${cap} 件に達している (現在 ${eventScopedCount})` });
+    return { plan: null, noops, blockers };
+  }
+
+  const target = eligible[0];
+  const plan = {
+    action: "create-ga4-custom-dimension",
+    displayName: target.displayName,
+    parameterName: target.parameterName,
+    scope: "EVENT",
+    description: target.description,
+  };
+  for (const rest of eligible.slice(1)) {
+    noops.push({ action: "create-ga4-custom-dimension", parameterName: rest.parameterName, reason: "次回 run へ繰り越す (1 run 1 件)" });
+  }
+  return { plan, noops, blockers };
 }
 
-// ── 承認ゲート (C2) ───────────────────────────────────────────────────────────
+// ── 承認ゲート ────────────────────────────────────────────────────────────────
 
 /**
  * 計画そのものに対する承認トークンを決定的に作る (pure)。
  *
  * planned が 1 文字でも変われば token が変わるので、承認は「その計画」に対してだけ有効になる
- * (古い承認を別の計画に流用できない)。
+ * (古い承認を別の計画に流用できない)。site / propertyId / action / request body から作る
+ * (README「Phase 2 plan」step 8)。
  */
-export function plannedActionToken({ site, accountId, actions, plan }) {
+export function plannedActionToken({ site, propertyId, plan }) {
+  const body = plan
+    ? JSON.stringify(Object.entries(plan).sort(([a], [b]) => (a < b ? -1 : 1)))
+    : "";
   const canonical = JSON.stringify({
     site: site ?? "",
-    accountId: accountId ?? "",
-    actions: [...(actions ?? [])].sort(),
-    plan: [...(plan ?? [])]
-      .map((p) => JSON.stringify(Object.entries(p).sort(([a], [b]) => (a < b ? -1 : 1))))
-      .sort(),
+    propertyId: String(propertyId ?? ""),
+    plan: body,
   });
   return createHash("sha256").update(canonical).digest("hex").slice(0, 16);
 }
@@ -228,7 +204,8 @@ export function plannedActionToken({ site, accountId, actions, plan }) {
 /**
  * mutation を実行してよいかを決める (pure)。
  *
- * `--force` 相当の迂回は用意しない (作れば必ず使われる)。
+ * `--force` 相当の迂回は用意しない (作れば必ず使われる)。README「Phase 2 apply」の
+ * --confirm-site / --commit / --approve <token> を要求する。
  *
  * @param {{argv:string[], site:string, expectedSite:string, expectedToken:string}} args
  * @returns {{allowed:boolean, reason:string}}
@@ -258,7 +235,7 @@ export function requireCommit({ argv, site, expectedSite, expectedToken }) {
   return { allowed: true, reason: "commit 承認済み" };
 }
 
-// ── browser apply (README「mutation手順」) ───────────────────────────────
+// ── browser apply (Playwright residual・README「Phase 4」) ─────────────────────
 
 async function bodyText(page) {
   return await page.evaluate(() => document.body?.innerText ?? "");
@@ -295,88 +272,17 @@ async function clickButton(page, names, { timeout = 8000 } = {}) {
 }
 
 /** Save 直前の property 再照合。 */
-async function reassertProperty(page) {
+async function reassertProperty(page, propertyId) {
   const url = page.url();
   const text = await bodyText(page);
-  return url.includes(`p${GA4_PROPERTY_ID}`) || text.includes(GA4_PROPERTY_ID);
-}
-
-/**
- * C. create-ad-id-dimension を実行する。
- * 各 step で要素が見つからなければ selector-drift で停止 (盲目的に進めない)。
- */
-export async function applyCreateAdIdDimension(page, { screenshotDir, gotoCustomDimensions }) {
-  const nav = await gotoCustomDimensions();
-  if (nav.status !== "ok") return { status: "blocked", reason: `navigation: ${nav.status}` };
-  await shot(page, screenshotDir, "apply-adid-01-before");
-
-  // duplicate re-check (直前確認)
-  const before = await bodyText(page);
-  if (/\bad_id\b/.test(before)) return { status: "no-op", reason: "ad_id が既に存在 (直前再確認)" };
-
-  const createClicked = await clickButton(page, ["カスタム ディメンションを作成", "カスタムディメンションを作成", "Create custom dimension"]);
-  if (!createClicked) {
-    // ボタンがテキスト要素の場合
-    const alt = await clickByText(page, ["カスタム ディメンションを作成", "カスタムディメンションを作成"]);
-    if (!alt) return { status: "selector-drift", step: "create-button" };
-  }
-  await page.waitForTimeout(3000);
-  await shot(page, screenshotDir, "apply-adid-02-form");
-
-  // フォーム入力は label 基準でダイアログ内の欄に限定する
-  // (getByRole("textbox").first() はヘッダー検索窓に誤入力した — 2026-07-28 実監査のバグ)。
-  try {
-    const nameBox = page.getByLabel(/ディメンション名|Dimension name/).first();
-    await nameBox.waitFor({ state: "visible", timeout: 8000 });
-    await nameBox.fill(AD_ID_DIMENSION.displayName);
-  } catch {
-    return { status: "selector-drift", step: "displayName-input" };
-  }
-  let paramFilled = false;
-  try {
-    const paramBox = page.getByLabel(/イベント パラメータ|イベントパラメータ|Event parameter/).first();
-    await paramBox.waitFor({ state: "visible", timeout: 8000 });
-    await paramBox.fill(AD_ID_DIMENSION.eventParameter);
-    await page.waitForTimeout(1200);
-    // 候補 dropdown が開いていれば ad_id を選択して確定 (無ければ Escape で閉じる)
-    try {
-      const opt = page.getByRole("option", { name: AD_ID_DIMENSION.eventParameter, exact: true }).first();
-      await opt.waitFor({ state: "visible", timeout: 3000 });
-      await opt.click();
-    } catch {
-      await page.keyboard.press("Escape").catch(() => {});
-    }
-    paramFilled = true;
-  } catch { /* drift below */ }
-  if (!paramFilled) return { status: "selector-drift", step: "eventParameter-input" };
-  await shot(page, screenshotDir, "apply-adid-03-filled");
-
-  // 範囲がイベントであることを画面テキストで確認 (既定 Event)
-  const formText = await bodyText(page);
-  if (!/イベント|Event/.test(formText)) return { status: "selector-drift", step: "scope-check" };
-
-  // Save 直前の property 再照合
-  if (!(await reassertProperty(page))) return { status: "blocked", reason: "property re-assert failed (Save 中止)" };
-
-  const saved = await clickButton(page, ["保存", "Save"]);
-  if (!saved) return { status: "selector-drift", step: "save-button" };
-  await page.waitForTimeout(5000);
-  await shot(page, screenshotDir, "apply-adid-04-after-save");
-
-  // verify: reload して ad_id 行を確認
-  const renav = await gotoCustomDimensions();
-  if (renav.status !== "ok") return { status: "mutation-unknown", reason: "verify navigation failed — 再実行しない" };
-  const after = await bodyText(page);
-  await shot(page, screenshotDir, "apply-adid-05-verify");
-  if (/\bad_id\b/.test(after)) return { status: "applied", verified: true };
-  return { status: "mutation-unknown", reason: "Save 後に ad_id 行を確認できない — 重複作成を避けるため再実行しない" };
+  return url.includes(`p${propertyId}`) || text.includes(String(propertyId));
 }
 
 /**
  * B. publish-search-console-collection を実行する。
  * Library の Search Console collection カードのメニューから公開する。
  */
-export async function applyPublishScCollection(page, { screenshotDir, gotoLibrary }) {
+export async function applyPublishScCollection(page, { screenshotDir, gotoLibrary, propertyId }) {
   const nav = await gotoLibrary();
   if (nav.status !== "ok") return { status: "blocked", reason: `navigation: ${nav.status}` };
   await shot(page, screenshotDir, "apply-publish-01-before");
@@ -387,7 +293,6 @@ export async function applyPublishScCollection(page, { screenshotDir, gotoLibrar
   }
 
   // collection カード内のメニュー (︙) → 公開
-  // カードは "Search Console" テキストを含む要素の祖先。メニュー button を探す。
   let opened = false;
   try {
     const card = page.locator("ga-collection-card, mat-card, [class*='collection-card']", { hasText: "Search Console" }).first();
@@ -400,7 +305,7 @@ export async function applyPublishScCollection(page, { screenshotDir, gotoLibrar
   await page.waitForTimeout(1500);
   await shot(page, screenshotDir, "apply-publish-02-menu");
 
-  if (!(await reassertProperty(page))) return { status: "blocked", reason: "property re-assert failed" };
+  if (!(await reassertProperty(page, propertyId))) return { status: "blocked", reason: "property re-assert failed" };
   // ★「公開」は exact 一致のみ。部分一致は「公開停止」(unpublish) に誤爆する (2026-07-28 実監査で危険を確認)
   let published = null;
   try {
@@ -435,7 +340,7 @@ export async function applyPublishScCollection(page, { screenshotDir, gotoLibrar
  * 管理 → Search Console のリンク → リンク → property 選択 (exact sc-domain:stats47.jp) →
  * web stream 選択 (stats47.jp) → 送信。
  */
-export async function applyCreateScLink(page, { screenshotDir, gotoScLinks }) {
+export async function applyCreateScLink(page, { screenshotDir, gotoScLinks, propertyId }) {
   const nav = await gotoScLinks();
   if (nav.status !== "ok") return { status: "blocked", reason: `navigation: ${nav.status}` };
   await shot(page, screenshotDir, "apply-sclink-01-before");
@@ -452,7 +357,6 @@ export async function applyCreateScLink(page, { screenshotDir, gotoScLinks }) {
   if (choose) await page.waitForTimeout(2500);
   const propRow = await clickByText(page, ["sc-domain:stats47.jp", "stats47.jp"]);
   if (!propRow) return { status: "selector-drift", step: "gsc-property-row" };
-  // 選択の確定 (チェックボックス方式の場合は行クリックで選択される)
   await clickButton(page, ["確認", "確定", "Confirm"]);
   await page.waitForTimeout(1500);
   const next1 = await clickButton(page, ["次へ", "Next"]);
@@ -470,7 +374,7 @@ export async function applyCreateScLink(page, { screenshotDir, gotoScLinks }) {
   await page.waitForTimeout(1500);
   await shot(page, screenshotDir, "apply-sclink-04-confirm");
 
-  if (!(await reassertProperty(page))) return { status: "blocked", reason: "property re-assert failed (送信中止)" };
+  if (!(await reassertProperty(page, propertyId))) return { status: "blocked", reason: "property re-assert failed (送信中止)" };
   const submit = await clickButton(page, ["送信", "Submit"]);
   if (!submit) return { status: "selector-drift", step: "submit-button" };
   await page.waitForTimeout(5000);

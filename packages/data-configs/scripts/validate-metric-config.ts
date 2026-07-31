@@ -23,6 +23,8 @@ import { readdirSync, readFileSync } from "node:fs";
 import { dirname, resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { COLOR_SCHEME_CATALOG, isKnownColorScheme } from "@stats47/types";
+
 import { CATEGORY_KEYS } from "../src/types";
 import { METRICS_REGISTRY } from "../src/registry";
 
@@ -67,6 +69,7 @@ interface Row {
   resourceId: string | null;
   statsDataId: string | null;
   isActive: boolean | null;
+  colorScheme: string | null;
 }
 
 /**
@@ -119,11 +122,26 @@ function main() {
       resourceId: strField(text, "resourceId"),
       statsDataId: strField(text, "statsDataId"),
       isActive: boolField(text, "isActive"),
+      colorScheme: strField(text, "colorScheme"),
     });
   }
 
   const errors: string[] = [];
   const warns: string[] = [];
+
+  // error: 語彙外の colorScheme
+  //
+  // ★描画側は未知の色を黙って既定にフォールバックする (ページを白画面にしないため)。
+  //   つまり typo は**どこにも現れない**。config の時点で止めるのが唯一の防波堤。
+  //   正典: packages/types/src/color-scheme.ts / .claude/rules/blog-svg-chart-standards.md §3
+  for (const r of rows) {
+    if (r.colorScheme && !isKnownColorScheme(r.colorScheme)) {
+      errors.push(
+        `[color-scheme] ${r.file}: 語彙外の colorScheme "${r.colorScheme}" ` +
+          `(COLOR_SCHEME_CATALOG の ${COLOR_SCHEME_CATALOG.length} 件から選ぶ)`,
+      );
+    }
+  }
 
   // error: 無効 category
   for (const r of rows) {

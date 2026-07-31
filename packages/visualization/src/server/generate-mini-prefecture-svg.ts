@@ -1,15 +1,6 @@
+import { DEFAULT_SEQUENTIAL_SCHEME, d3KeyOfColorScheme } from '@stats47/types';
 import { geoCentroid, geoMercator, type GeoProjection } from 'd3-geo';
-import {
-  interpolateBlues,
-  interpolateGreens,
-  interpolateOranges,
-  interpolatePiYG,
-  interpolatePurples,
-  interpolateRdBu,
-  interpolateRdYlBu,
-  interpolateRdYlGn,
-  interpolateReds,
-} from 'd3-scale-chromatic';
+import * as d3chromatic from 'd3-scale-chromatic';
 import { feature } from 'topojson-client';
 import type {
   Feature,
@@ -21,17 +12,22 @@ import type { GeometryCollection, Topology } from 'topojson-specification';
 
 import prefectureTopology from './prefecture-topology.generated.json';
 
-const INTERPOLATORS: Record<string, (t: number) => string> = {
-  interpolateBlues,
-  interpolateGreens,
-  interpolateOranges,
-  interpolatePiYG,
-  interpolatePurples,
-  interpolateRdBu,
-  interpolateRdYlBu,
-  interpolateRdYlGn,
-  interpolateReds,
-};
+/**
+ * 配色を解決する。語彙とd3の実名は `@stats47/types` のカタログが SSOT (2026-07-31)。
+ *
+ * ★旧実装は手書きの 9 種だけを import しており、カタログ 46 種のうち **35 種が
+ * 黙って青に落ちていた** (OGP / サムネ)。例外も警告も出ないので誰も気づかない。
+ * 名前空間 import + カタログ照合にして、未知の値だけが既定にフォールバックする形にする。
+ */
+function resolveInterpolator(colorScheme?: string): (t: number) => string {
+  const d3Key = d3KeyOfColorScheme(colorScheme) ?? DEFAULT_SEQUENTIAL_SCHEME;
+  const fn = (d3chromatic as unknown as Record<string, unknown>)[d3Key];
+  if (typeof fn === 'function') {
+    const probe = (fn as (t: number) => unknown)(0.5);
+    if (typeof probe === 'string') return fn as (t: number) => string;
+  }
+  return d3chromatic.interpolateBlues;
+}
 
 const WIDTH = 320;
 const HEIGHT = 190;
@@ -404,9 +400,7 @@ export function generateMiniPrefectureSvg(
   isReversed?: boolean,
   gradientIdSuffix?: string
 ): string {
-  const interpolator =
-    INTERPOLATORS[colorScheme ?? 'interpolateBlues'] ??
-    INTERPOLATORS.interpolateBlues;
+  const interpolator = resolveInterpolator(colorScheme);
   const sorted = [...data].sort((a, b) =>
     isReversed ? a.value - b.value : b.value - a.value
   );

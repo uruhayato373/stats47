@@ -2,10 +2,15 @@
 
 import { useCallback, useMemo, useRef, useState } from "react";
 
+import { DEFAULT_DIVERGING_SCHEME } from "@stats47/types";
 import { geoMercator, geoPath } from "d3-geo";
 import { scaleDiverging } from "d3-scale";
-import { interpolateRdBu } from "d3-scale-chromatic";
 import { feature } from "topojson-client";
+
+import {
+  legendGradientCss,
+  resolveSchemeInterpolator,
+} from "../../utils/color-scale/legend-gradient";
 
 import type { Feature, FeatureCollection } from "geojson";
 import type { GeometryCollection, Topology } from "topojson-specification";
@@ -40,6 +45,12 @@ export interface DivergingChoroplethMapProps {
   nameProp?: string;
   /** Half-width of the color domain: domain = [1-clamp, 1, 1+clamp] */
   colorClamp: number;
+  /**
+   * 配色 (正典形 / 短縮形どちらも可)。既定は発散配色 interpolateRdBu。
+   * ★凡例のグラデーションも同じ値から導出されるので、ここを変えれば凡例も追従する
+   *   (以前は 5 色の CSS リテラルが 2 ファイルに複製されていて追従しなかった)。
+   */
+  colorScheme?: string;
   projection:
     | DivergingChoroplethMapProjection
     | DivergingChoroplethMapFixedProjection;
@@ -70,6 +81,7 @@ export function DivergingChoroplethMap({
   codeProp = "N03_007",
   nameProp = "N03_001",
   colorClamp,
+  colorScheme = DEFAULT_DIVERGING_SCHEME,
   projection: projectionConfig,
   excludeCodes,
   valueFormatter = defaultValueFormatter,
@@ -125,10 +137,10 @@ export function DivergingChoroplethMap({
 
   const colorScale = useMemo(
     () =>
-      scaleDiverging(interpolateRdBu)
+      scaleDiverging(resolveSchemeInterpolator(colorScheme))
         .domain([1 - colorClamp, 1, 1 + colorClamp])
         .clamp(true),
-    [colorClamp],
+    [colorClamp, colorScheme],
   );
 
   const handleMouseEnter = useCallback(
@@ -237,10 +249,7 @@ export function DivergingChoroplethMap({
           <span className="font-medium text-red-600">← 減少</span>
           <div
             className="h-2 w-32 rounded-sm"
-            style={{
-              background:
-                "linear-gradient(to right, #b2182b, #ef8a62, #f7f7f7, #67a9cf, #2166ac)",
-            }}
+            style={{ background: legendGradientCss(colorScheme, { reverse: true }) }}
           />
           <span className="font-medium text-blue-600">増加 →</span>
           <span className="text-muted-foreground">

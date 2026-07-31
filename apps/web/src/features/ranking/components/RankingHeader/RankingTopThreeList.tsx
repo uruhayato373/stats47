@@ -11,6 +11,12 @@ import type {
 interface RankingTopThreeListProps {
   stats: RankingHeaderStats;
   unit: string;
+  /**
+   * 小数桁。**47 県全体から解決した値**を呼び元 (RankingHeaderStats) が渡す。
+   * ここで items から解決すると、上位3件と最下位を別リストで描くため
+   * 2 つのリストで桁数が食い違いうる (2026-07-31)。
+   */
+  precision: number;
 }
 
 function toBarItem(entry: RankingHeaderEntry, tone: "top" | "bottom") {
@@ -30,7 +36,7 @@ function toBarItem(entry: RankingHeaderEntry, tone: "top" | "bottom") {
  * これをしないと最下位のバーが常に全長になり、幅が広いほど値が大きいという
  * 読み方が崩れる。
  */
-export function RankingTopThreeList({ stats, unit }: RankingTopThreeListProps) {
+export function RankingTopThreeList({ stats, unit, precision }: RankingTopThreeListProps) {
   const { top3, last } = stats;
   if (top3.length === 0) return null;
 
@@ -43,7 +49,7 @@ export function RankingTopThreeList({ stats, unit }: RankingTopThreeListProps) {
     max: scaleMax,
     unit,
     showRank: true,
-    valueMaximumFractionDigits: 1,
+    valueMaximumFractionDigits: precision,
     labelClassName: "w-20",
     // 既定の w-20 だと総人口のような桁数で単位が折り返すため内容幅に任せる
     valueClassName: "w-auto whitespace-nowrap",

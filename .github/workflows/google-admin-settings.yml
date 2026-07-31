@@ -1,0 +1,182 @@
+name: 🛠️ Google Admin settings (audit / plan / apply)
+
+# GA4 Admin API / GSC / AdSense を API で監査し、承認付きで GA4 custom dimension を作成する。
+# 正典: .claude/scripts/google-admin/README.md。
+# - schedule は read-only audit だけ (mutation job を構造的に作らない)。
+# - plan は read-only (計画と plan token を出す)。
+# - apply だけが protected Environment google-admin-production を使い、custom dimension を 1 件作成する。
+# - PR trigger なし。screenshot / storageState / Cookie を artifact に含めない (sanitized JSON のみ)。
+# - repo / R2 / GitHub Secrets へ書かない (permissions: contents: read)。
+
+on:
+  schedule:
+    - cron: "0 20 * * 0" # 日 20:00 UTC = 月 05:00 JST (他 cron と非重複)。audit のみ
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "audit (API read-only) / plan (計画+token) / apply (承認付き作成)"
+        type: choice
+        required: true
+        default: "audit"
+        options:
+          - audit
+          - plan
+          - apply
+      confirm_site:
+        description: "apply 時に stats47.jp を明示 (対象 site)"
+        required: false
+        default: ""
+      approval_token:
+        description: "apply 時に前回 plan の token"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: google-admin-settings
+  cancel-in-progress: false
+
+jobs:
+  # audit (schedule + dispatch audit/plan)。repository read secrets のみ。mutation しない。
+  read:
+    if: github.event_name == 'schedule' || inputs.mode == 'audit' || inputs.mode == 'plan'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 GA4 Admin API read-only audit
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GOOGLE_ADSENSE_CLIENT_ID: ${{ secrets.GOOGLE_ADSENSE_CLIENT_ID }}
+          GOOGLE_ADSENSE_CLIENT_SECRET: ${{ secrets.GOOGLE_ADSENSE_CLIENT_SECRET }}
+          GOOGLE_ADSENSE_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADSENSE_REFRESH_TOKEN }}
+          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ secrets.GOOGLE_ADSENSE_ACCOUNT_ID }}
+        # audit は identity 未達 (AdSense OAuth 未復旧等) で exit 1 になりうる。green に隠さず出す。
+        continue-on-error: true
+        run: node .claude/scripts/google-admin/cli.mjs audit-api
+
+      - name: 📝 Plan GA4 custom dimension
+        if: inputs.mode == 'plan'
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GOOGLE_ADSENSE_CLIENT_ID: ${{ secrets.GOOGLE_ADSENSE_CLIENT_ID }}
+          GOOGLE_ADSENSE_CLIENT_SECRET: ${{ secrets.GOOGLE_ADSENSE_CLIENT_SECRET }}
+          GOOGLE_ADSENSE_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADSENSE_REFRESH_TOKEN }}
+          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ secrets.GOOGLE_ADSENSE_ACCOUNT_ID }}
+        continue-on-error: true
+        run: node .claude/scripts/google-admin/cli.mjs plan
+
+      - name: 📄 Step summary (sanitized)
+        if: always()
+        run: |
+          echo "# Google Admin — ${{ github.event_name == 'schedule' && 'audit (schedule)' || inputs.mode }}" >> "$GITHUB_STEP_SUMMARY"
+          for f in api-latest.json plan-latest.json; do
+            P=".claude/state/metrics/google-admin/$f"
+            if [ -f "$P" ]; then
+              {
+                echo ""
+                echo "## $f"
+                echo '```json'
+                cat "$P"
+                echo '```'
+              } >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done
+
+      - name: 📦 Upload sanitized state (JSON only)
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: google-admin-read
+          path: .claude/state/metrics/google-admin/*.json
+          if-no-files-found: ignore
+          retention-days: 7
+
+  # apply — 承認付き mutation。protected Environment の reviewer 承認が要る。
+  # dispatch の mode=apply のときだけ。schedule では構造的に起動しない。
+  apply:
+    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'apply'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: google-admin-production
+    steps:
+      - name: 🚦 Guard apply inputs
+        env:
+          CONFIRM_SITE: ${{ inputs.confirm_site }}
+          APPROVAL_TOKEN: ${{ inputs.approval_token }}
+        run: |
+          if [ "$CONFIRM_SITE" != "stats47.jp" ]; then
+            echo "apply には confirm_site=stats47.jp が必須" >&2
+            exit 1
+          fi
+          if [ -z "$APPROVAL_TOKEN" ]; then
+            echo "apply には approval_token (前回 plan の token) が必須" >&2
+            exit 1
+          fi
+
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: ⚙️ Apply GA4 custom dimension (1 件・承認済み)
+        env:
+          # read 系は repository secrets、admin edit 鍵は Environment secret から解決する
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GOOGLE_ADSENSE_CLIENT_ID: ${{ secrets.GOOGLE_ADSENSE_CLIENT_ID }}
+          GOOGLE_ADSENSE_CLIENT_SECRET: ${{ secrets.GOOGLE_ADSENSE_CLIENT_SECRET }}
+          GOOGLE_ADSENSE_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADSENSE_REFRESH_TOKEN }}
+          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ secrets.GOOGLE_ADSENSE_ACCOUNT_ID }}
+          GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON }}
+          CONFIRM_SITE: ${{ inputs.confirm_site }}
+          APPROVAL_TOKEN: ${{ inputs.approval_token }}
+        run: node .claude/scripts/google-admin/cli.mjs apply --confirm-site "$CONFIRM_SITE" --commit --approve "$APPROVAL_TOKEN"
+
+      - name: 📄 Step summary (sanitized)
+        if: always()
+        run: |
+          P=".claude/state/metrics/google-admin/apply-latest.json"
+          if [ -f "$P" ]; then
+            {
+              echo "# Google Admin — apply"
+              echo '```json'
+              cat "$P"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: 📦 Upload sanitized state (JSON only)
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: google-admin-apply
+          path: .claude/state/metrics/google-admin/apply-latest.json
+          if-no-files-found: ignore
+          retention-days: 7

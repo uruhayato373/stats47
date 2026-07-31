@@ -133,3 +133,20 @@ export {
   type VerificationStatus,
   type Stats47Use,
 } from "./open-data-catalog";
+
+// コロプレス配色の決定規則 + 極性 SSOT (正典: .claude/rules/blog-svg-chart-standards.md §3)
+export {
+  resolveColorScheme,
+  type ColorSchemeDecision,
+  type ColorSchemeInput,
+  type ColorSchemeReason,
+} from "./color-scheme-policy";
+export {
+  METRIC_POLARITY,
+  EXCLUDED_FROM_SEED,
+  MIN_POLARITY_COVERAGE,
+  findMetricPolarity,
+  type MetricPolarity,
+  type PolarityEntry,
+} from "./metric-polarity";
+export { fillMissingTimeFromSurveyDate } from "./estat-time";

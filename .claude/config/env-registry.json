@@ -296,6 +296,14 @@
       ]
     },
     {
+      "name": "GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
       "name": "GOOGLE_ADSENSE_ACCOUNT_ID",
       "visibility": "secret",
       "contexts": [
@@ -730,6 +738,13 @@
     },
     {
       "name": "ROUTE_CONTRACT_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "RUN_RENDER_TESTS",
       "visibility": "server",
       "contexts": [
         "process"

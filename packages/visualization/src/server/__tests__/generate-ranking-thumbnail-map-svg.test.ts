@@ -17,8 +17,10 @@ const rows = Array.from({ length: 47 }, (_, index) => ({
 
 describe('generateRankingThumbnailMapSvg', () => {
   it('同梱TopoJSONはGIS SSOTと一致する', () => {
+    // ★cwd 相対にすると workspace 一括実行 (cwd = リポジトリ root) で別パスを見て
+    //   ENOENT になる。このファイルからの相対で解決する (2026-07-31 是正)。
     const sourceText = readFileSync(
-      resolve(process.cwd(), '../gis/data/geoshape/prefecture.topojson'),
+      resolve(__dirname, '../../../../gis/data/geoshape/prefecture.topojson'),
       'utf8'
     );
     const sourceHash = createHash('sha256').update(sourceText).digest('hex');

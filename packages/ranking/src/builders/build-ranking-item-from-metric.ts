@@ -16,12 +16,14 @@
 import {
   buildRecipe,
   resolveAttribution,
+  resolveColorScheme,
   resolveMetricProvenance,
   type MetricConfig,
   type MetricRegistry,
   type ProvenanceSurvey,
 } from "@stats47/data-configs";
 import { resolveRankingHook } from "@stats47/data-configs/prominence";
+import { assertKnownColorScheme } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 
 import surveysMaster from "../data/surveys.json";
@@ -121,9 +123,22 @@ function buildValueDisplay(config: MetricConfig): ValueDisplayConfig {
 
 function buildVisualization(config: MetricConfig): VisualizationConfig {
   const v = config.visualization;
-  // config 側は colorScheme/colorSchemeType を string で持つ。値は妥当なため brand 型に cast。
+  // 配色は決定規則に委ねる (正典: packages/data-configs/src/color-scheme-policy.ts)。
+  // Blues 以外の明示指定はそのまま尊重され、Blues / 未設定のときだけ
+  // diverging → 極性 → category topical → 既定 の順で決まる。
+  // ★assertKnownColorScheme を通すのは生成側だから — 未知の色が item.json に
+  //   焼き込まれると描画側は黙って既定色に落ち、誰も気づかない。
+  const decided = resolveColorScheme({
+    key: config.key,
+    explicit: v?.colorScheme,
+    colorSchemeType: v?.colorSchemeType,
+    category: config.category,
+  });
   return {
-    colorScheme: (v?.colorScheme ?? "interpolateBlues") as D3ColorScheme,
+    colorScheme: assertKnownColorScheme(
+      decided.scheme,
+      `build-ranking-item(${config.key})`,
+    ) as D3ColorScheme,
     colorSchemeType: (v?.colorSchemeType ?? "sequential") as ColorSchemeType,
     minValueType: (v?.minValueType ?? "data-min") as MinValueType,
     ...(v?.divergingMidpoint
