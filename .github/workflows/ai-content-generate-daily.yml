@@ -224,3 +224,15 @@ jobs:
             echo "### 進捗 (キュー再構築後)"
             sed -n '/^## サマリ/,/^## いつ修正したか/p' .claude/state/ai-content/LATEST.md | head -20
           } >> "$GITHUB_STEP_SUMMARY"
+
+      # ★request は結果によらず必ず消費する (blog 側と同じ理由。2026-07-31)。
+      #   失敗した run が request を残すと、同じ内容の再 push では diff が出ず再実行できない。
+      - name: 🧹 Consume request (未消費なら)
+        if: ${{ always() && github.event_name == 'push' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q --ignore-unmatch data/ai-content-generate-requests.json || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -q -m "chore(ai-content): consume generate request [skip ci]"
+          git pull --rebase --quiet origin develop && git push origin HEAD:develop
