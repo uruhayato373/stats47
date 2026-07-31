@@ -263,6 +263,12 @@ dark mode 非対応 / theme 色 inline の 2 つは 140 枚該当のため warni
 | 旧 2 世代前（600×700・`docs/21` の 2 検体） | **error 5 / 4**（キャンバス・背景 rect・prefers-color-scheme・svg-* class・凡例位置） |
 | 旧 1 世代前（780×560・**本番 R2 の実物**） | **error 2**（キャンバス + 旧見出し）— 不変量 #7 が本番集団を捉えることの確認 |
 | 現行（720×720・svg-builder の実出力） | **error 0 / warning 0** |
+| 再生成した実データ **85 枚**（`regenerate-tile-maps.ts` dry-run） | **error 0 / warning 0**・viewBox は全件 720×720 |
+
+**母集団の実測（2026-07-31 dry-run）**: 公開記事 430 本 / タイルマップ **123 枚**。うち SSOT 照合
+（`app/ranking/<key>/values.json` と旧 SVG の表示値を突合・一致率 ≥ 0.8）を通った **85 枚**を再生成し、
+**38 枚は flag のまま**（記事内に `/ranking/<key>` 候補が無い 11 枚 + 候補はあるが値が一致しない 27 枚）。
+flag は個別に metric→key を特定する必要があり、**SVG の絵から値を逆復元しない**（捏造防止）。
 
 恒久テストは 2 本。`docs/21` は公開後に自動削除される ephemeral outbox なので、実ファイルに依存させない:
 
