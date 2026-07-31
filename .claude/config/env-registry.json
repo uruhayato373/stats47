@@ -247,6 +247,13 @@
       ]
     },
     {
+      "name": "GEMINI_TEXT_MODEL",
+      "visibility": "workflow",
+      "contexts": [
+        "variable"
+      ]
+    },
+    {
       "name": "GH_SECRETS_PAT",
       "visibility": "secret",
       "contexts": [

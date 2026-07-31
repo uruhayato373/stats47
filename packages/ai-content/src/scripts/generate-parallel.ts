@@ -51,6 +51,7 @@ import type { AreaType } from "@stats47/types";
 import { aiContentKeyPath, type AiContentSnapshotRow } from "../types/snapshot";
 import { buildRankingContentPromptForKey } from "./build-input";
 import { generateContentText } from "../services/gemini-text-client";
+import { decideOutcome } from "../services/generation-outcome";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // packages/ai-content/src/scripts → リポジトリルートは 4 つ上
@@ -407,6 +408,16 @@ async function main() {
         `   (または diff-push-r2.ts --prefix app/ranking。両者とも .local/r2 を読む)\n`,
     );
   }
+
+  // ★1 件も出せなかったら run を失敗させる (silent green の再発防止・2026-07-30)。
+  //   部分的な失敗は成功扱い (残りは次回のキューが拾う)。判定は generation-outcome.ts。
+  const outcome = decideOutcome(counters, targets.length, { dryRun: opts.dryRun });
+  if (outcome.exitCode !== 0) {
+    process.stderr.write(`::error::[generate-parallel] ${outcome.reason}\n`);
+    process.exitCode = outcome.exitCode;
+    return;
+  }
+  process.stdout.write(`${outcome.reason}\n`);
 }
 
 main().catch((err) => {

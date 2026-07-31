@@ -123,7 +123,8 @@ Claude のトークンを使わず全 active ranking (実測 2,179 件) を完�
 **`.github/workflows/ai-content-generate-daily.yml`** (JST 03:00) が以下を回す:
 
 ```
-キュー再構築 (--scope all) → needs-regen 上位 N → Gemini API 生成 (--model gemini-api)
+モデル preflight (ListModels で実在確認・生成しない)
+  → キュー再構築 (--scope all) → needs-regen 上位 N → Gemini API 生成 (--model gemini-api)
   → 決定的ゲート → outbox (--outbox) → develop へ push
   → publish-ai-content.yml が発火 (gate 再検証 → R2 → CDN purge → outbox 削除)
   → キュー再構築して進捗を commit-back
@@ -133,9 +134,40 @@ Claude のトークンを使わず全 active ranking (実測 2,179 件) を完�
 |---|---|
 | 生成 | `--model gemini-api` (`packages/ai-content/src/services/gemini-text-client.ts`)。**CLI 非依存**。CLI (`--model gemini`) は認証・バージョンが実行環境に依存するため CI では使わない |
 | 認証 | `GEMINI_API_KEY` (GitHub Secrets 専任。画像生成と共用) |
+| **モデル** | 既定は `gemini-text-client.ts` の `GEMINI_TEXT_MODEL`。**リポジトリ変数 `GEMINI_TEXT_MODEL` で上書きできる** (提供終了時にコード変更 + デプロイを待たず復旧するため) |
 | 件数上限 | 既定 40 = `publish-ai-content.yml` の `MAX_PUBLISH` と同数。超過分は次回に繰り越す |
 | 失敗の扱い | 429/5xx/timeout は client がバックオフ再試行 (429 は 15s 起点)、`truncated`/4xx は再試行しない |
-| 費用 | gemini-2.5-flash に無料 tier があるが、**キーが有料課金に紐づく場合は 1 件あたり入力 ~5K / 出力 ~8K トークン相当が課金される**。件数で管理する |
+| 費用 | flash 系に無料 tier があるが、**キーが有料課金に紐づく場合は 1 件あたり入力 ~5K / 出力 ~8K トークン相当が課金される**。件数で管理する |
+
+#### ★モデル提供終了と silent green の再発防止 (2026-07-30 の障害)
+
+日次 cron の初回実行は **40 件すべて HTTP 404** で失敗し、生成 0 件で終わった。原因はキーでも
+配線でもなく「設定モデルが API に存在しない」ことだった。しかも `generate-parallel.ts` が
+全件失敗でも exit 0 を返すため **workflow は success** となり、毎晩失敗し続けても気づけなかった。
+モデルは提供終了するので、コードに焼いたモデル名はいつか必ず 404 になる。二重に守る:
+
+| 層 | 実装 | 効果 |
+|---|---|---|
+| ① 事前 (preflight) | `packages/ai-content/src/scripts/preflight-gemini.ts` — **極小の生成を 1 回試す**。落ちたときだけ ListModels を呼び候補付きで exit 1。日次 cron の生成前 step + `ai-content-preflight.yml` (モデル設定に触る PR) | 全件 404 を「生成前に 1 回」で止める |
+| ② 事後 (exit gate) | `packages/ai-content/src/services/generation-outcome.ts` の `decideOutcome` — **1 件も出せなければ exit 1**。部分的な失敗 (OK ≥ 1) は成功扱いで運用を止めない | 原因を問わず「何も出ていない」を必ず赤くする |
+
+**★ListModels に載っていることは「使える」証明にならない (2026-07-31 CI 実測)**。preflight を最初
+ListModels の一覧照合だけで作ったところ、`gemini-2.5-flash` は**一覧に載り
+`supportedGenerationMethods` に `generateContent` を持つのに、実際に叩くと 404** だった。
+一覧は代理指標にならず、そのゲートは壊れたパイプラインを素通りさせる。**合否は実生成でだけ判定する**
+(一覧は失敗時の候補出しにのみ使う)。
+
+**モデル選定 (2026-07-31 に `gemini-2.5-flash` → `gemini-3.5-flash`)**: 既定は **pinned なモデル名**にする。
+`gemini-flash-latest` のような浮動 alias は 404 を避けられる代わりに**品質もコストも黙って変わる**。
+提供終了は preflight が実生成で必ず検出するので、pinned でも気づけないまま止まることはない。
+lite ではなく flash (47 県の解説を書かせるため)、preview / experimental は使わない。
+
+候補は**提案であって自動選択ではない** (勝手に別モデルへ切り替えると品質もコストも黙って変わる)。
+復旧はリポジトリ変数 `GEMINI_TEXT_MODEL` に実在モデルを設定するか、`GEMINI_TEXT_MODEL` 既定値を更新する。
+
+**HTTP status での切り分け** (実測 2026-07-30): 無効キーは **400** (`API_KEY_INVALID`) を返す。
+したがって **404 が出たらキーではなくモデル名**を疑う。400 / 401 / 403 のときはキーか
+Generative Language API の有効化を確認する。
 
 **進捗管理**: `build-ai-content-queue.mjs --scope all` が実行のたびに
 `.claude/state/ai-content/progress-history.csv` へ 1 行追記し (同日同 scope は上書き)、
@@ -177,6 +209,7 @@ node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 40 
 - 戦略・KPI: `docs/00_プロジェクト管理/03_マーケティング戦略.md`（T1〜T4・SEO品質レバー）
 - ai-content 是正キュー: memory `project_ai_content_remediation_queue` / `.claude/scripts/ranking/build-ai-content-queue.mjs`
 - 決定的ゲート: `.claude/scripts/ranking/audit-ai-content.mjs`
+- モデル preflight: `packages/ai-content/src/scripts/preflight-gemini.ts` + `src/services/model-preflight.ts` / 生成 0 件ゲート: `src/services/generation-outcome.ts` (いずれも `src/services/__tests__/` にテスト)
 - 公開: `.github/workflows/publish-ai-content.yml` (自動化インベントリ参照)
 - agent: `ranking-content-author` (生成) / `ranking-content-critic` (審査) / `ranking-publisher` (公開) / `ranking-ui-manager` (UI)
 - 関連 rule: `.claude/rules/metric-config-standards.md` (title/seoTitle) / `blog-quality-standards.md` (ですます調・archetype A) / `evidence-based-judgment.md`
