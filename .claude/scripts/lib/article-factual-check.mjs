@@ -363,6 +363,35 @@ function parseNumeric(s) {
   return Number.isFinite(n) ? n : null;
 }
 
+/**
+ * 日本語の複合数値表記を実数へ (「4万5,897」「1億2,000万」「1万5千」「2.5万」「12,345」)。
+ *
+ * ★なぜ要るか (2026-07-31 実測): 旧実装は「数値 + スケール 1 個」しか解釈できず、
+ * 日本語散文で普通に使う **漢数字スケール混在表記**を取りこぼしていた。
+ * 「4万5,897円」は末尾の `5,897` だけが数値として拾われ、data の 45,897 と
+ * 「7.8倍 乖離」と誤検出される。公開済み 388 記事の測定で検出 172 件のうち多数がこれだった。
+ *
+ * 取りこぼしは誤検出だけでなく **検出漏れ**も生む (本当に誤った「4万5,897円」を
+ * 別の数として比較してしまう)。パーサを直さない限りこのチェックは blocker にできない。
+ *
+ * @returns {number|null} 解釈できなければ null
+ */
+export function parseJapaneseNumeral(s) {
+  if (typeof s !== "string") return null;
+  const partRe = /([\d,]+(?:\.\d+)?)\s*(百万|兆|億|万|千)?/g;
+  let total = 0;
+  let sawAny = false;
+  let m;
+  while ((m = partRe.exec(s)) !== null) {
+    if (!m[1]) continue;
+    const n = parseFloat(m[1].replace(/,/g, ""));
+    if (!Number.isFinite(n)) continue;
+    total += n * (m[2] ? JA_SCALE[m[2]] ?? 1 : 1);
+    sawAny = true;
+  }
+  return sawAny ? total : null;
+}
+
 /** ja スケール接頭/接尾 (兆/億/万/千/百万) を倍率に。無ければ 1 */
 function jaScaleMultiplier(token) {
   if (!token) return 1;
@@ -399,12 +428,15 @@ export function checkValueClaims(content, gt) {
   const body = content.replace(/^---[\s\S]*?\n---\n/, "");
   const prefPattern = PREF_NAMES.join("|");
 
-  // {pref}(都府県)?{≤20 文字, 句点なし}{数値}{スケール?}{単位実体}
+  // {pref}(都府県)?{≤20 文字, 句点なし}{複合数値}{単位実体}
   // 単位実体は明示的なもののみ (裸の数値・位・年を除外)
   // 単位実体: エネルギー単位 (MWh 等) を bare 単位より先に置き leftmost で取りこぼさない
+  // ★複合数値: 「4万5,897」「1億2,000万」のようにスケールを跨ぐ表記を 1 グループで取る
+  //   (旧実装は末尾の「5,897」だけを拾い、誤検出と検出漏れの両方を生んでいた)
   const claimRe = new RegExp(
     `(${prefPattern})(?:都|府|県)?[^、。\\n]{0,20}?` +
-      `([\\d,]+(?:\\.\\d+)?)\\s*(百万|兆|億|万|千)?\\s*(MWh|kWh|GWh|kW|MW|Wh|円|人|世帯|戸|床|件|台|校|時間|ha|㎡|kg|%|％|社|店)`,
+      `((?:[\\d,]+(?:\\.\\d+)?\\s*(?:百万|兆|億|万|千)?)+)\\s*` +
+      `(MWh|kWh|GWh|kW|MW|Wh|円|人|世帯|戸|床|件|台|校|時間|ha|㎡|kg|%|％|社|店)`,
     "gi",
   );
 
@@ -412,11 +444,10 @@ export function checkValueClaims(content, gt) {
   let m;
   while ((m = claimRe.exec(body)) !== null) {
     const pref = m[1];
-    const numRaw = m[2];
-    const scaleTok = m[3] || "";
-    const unitTail = m[4];
-    const num = parseNumeric(numRaw);
-    if (num === null) continue;
+    const numeralRaw = m[2].trim();
+    const unitTail = m[3];
+    const claimBase = parseJapaneseNumeral(numeralRaw);
+    if (claimBase === null) continue;
 
     // 派生値 (差額/比/当たり/平均/換算 等) は data の絶対 value と一致しない → WARN 対象外。
     // claim 周辺 (matched span + 直前 24 字 + 直後 16 字) に derived/per-capita マーカーがあれば skip。
@@ -429,11 +460,11 @@ export function checkValueClaims(content, gt) {
     ) continue;
 
     // 年号らしき値 (1900-2100 で単位が無いケースは上で弾く) はここでは単位付きなので通す
-    const claimBase = num * jaScaleMultiplier(scaleTok);
-    const claimDim = unitDimension(scaleTok + unitTail);
+    // スケールは numeralRaw 側で解釈済みなので、次元は単位実体だけから取る
+    const claimDim = unitDimension(unitTail);
     if (!claimDim) continue;
 
-    const key = `${pref}:${numRaw}:${scaleTok}${unitTail}`;
+    const key = `${pref}:${numeralRaw}:${unitTail}`;
     if (seen.has(key)) continue;
     seen.add(key);
 
@@ -469,7 +500,7 @@ export function checkValueClaims(content, gt) {
         .map((f) => `${f.label || "?"}=${f.value}${f.unit || ""}`)
         .join(" / ");
       warnings.push(
-        `VALUE_MISMATCH (要確認): 本文「${pref}...${numRaw}${scaleTok}${unitTail}」` +
+        `VALUE_MISMATCH (要確認): 本文「${pref}...${numeralRaw}${unitTail}」` +
           ` が data と ${grossest.r.toFixed(1)}倍 乖離 → data: ${dataList}`,
       );
     }
