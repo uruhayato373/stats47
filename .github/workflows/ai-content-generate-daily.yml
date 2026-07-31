@@ -26,6 +26,13 @@ name: 🤖 AI Content Generate Daily (Gemini)
 on:
   schedule:
     - cron: "0 18 * * *" # JST 03:00 (UTC 18:00)
+  # push トリガー (cloud 用): develop に data/ai-content-generate-requests.json を commit/push
+  # すると実行し、消費した request を git rm で commit-back する。cloud セッションは
+  # actions:write が無く workflow_dispatch できない (403) ため。data-refresh.yml と同じ方式。
+  #   { "limit": 10, "dryRun": false, "concurrency": 3 }
+  push:
+    branches: [develop]
+    paths: ['data/ai-content-generate-requests.json']
   workflow_dispatch:
     inputs:
       limit:
@@ -78,6 +85,22 @@ jobs:
 
       - name: 📦 Install dependencies
         run: npm ci
+
+      # push トリガー時は request file を、それ以外は workflow_dispatch の inputs を使う。
+      # GITHUB_ENV に書くので、後続 step の if: env.DRY_RUN も解決される。
+      - name: 🧭 Resolve inputs
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          REQ=data/ai-content-generate-requests.json
+          if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
+            {
+              echo "LIMIT=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.limit??40))")"
+              echo "DRY_RUN=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")"
+              echo "GEN_CONCURRENCY=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.concurrency??3))")"
+            } >> "$GITHUB_ENV"
+            echo "request で上書きした (値は上の行のとおり)"
+          fi
 
       - name: 🔑 Assert API key (dry-run 以外)
         if: ${{ env.DRY_RUN != 'true' }}
@@ -141,6 +164,10 @@ jobs:
         run: |
           # 生成物 (outbox) と進捗を同一 commit で push する。
           node .claude/scripts/ai-content/build-ai-content-queue.mjs --scope all || true
+          # push トリガーで来た request は同じ commit で消費する (再実行のループを防ぐ)
+          if [ "${{ github.event_name }}" = "push" ]; then
+            git rm -q --ignore-unmatch data/ai-content-generate-requests.json || true
+          fi
           git add data/ai-content-staging .claude/state/ai-content || true
           # ls ではなく find で数える (SC2012。ファイル名に非英数が入っても壊れない)
           NEW=$(find data/ai-content-staging -maxdepth 1 -name '*.json' -type f 2>/dev/null | wc -l | tr -d ' ')

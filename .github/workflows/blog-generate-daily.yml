@@ -31,6 +31,13 @@ name: 📝 Blog Generate Daily (Gemini)
 on:
   schedule:
     - cron: "30 19 * * *" # JST 04:30 (UTC 19:30)。ai-content (JST 03:00) と重ならせない
+  # push トリガー (cloud 用): develop に data/blog-generate-requests.json を commit/push すると
+  # 実行し、消費した request を git rm で commit-back する。cloud セッションは actions:write が
+  # 無く workflow_dispatch できない (403) ため。data-refresh.yml / gemini-image-run.yml と同じ方式。
+  #   { "limit": 1, "dryRun": false, "keepDraft": true }
+  push:
+    branches: [develop]
+    paths: ['data/blog-generate-requests.json']
   workflow_dispatch:
     inputs:
       limit:
@@ -83,6 +90,27 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
+      # push トリガー時は request file を、それ以外は workflow_dispatch の inputs を使う。
+      # GITHUB_ENV に書くので、後続 step の if: env.DRY_RUN も解決される。
+      - name: 🧭 Resolve inputs
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          REQ=data/blog-generate-requests.json
+          if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
+            LIMIT=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.limit??2))")
+            DRY_RUN=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
+            KEEP_DRAFT=$(node -e "const r=require('./$REQ');process.stdout.write(r.keepDraft===true?'true':'false')")
+            {
+              echo "LIMIT=$LIMIT"
+              echo "DRY_RUN=$DRY_RUN"
+              echo "KEEP_DRAFT=$KEEP_DRAFT"
+            } >> "$GITHUB_ENV"
+            echo "request 解決: limit=$LIMIT dry_run=$DRY_RUN keep_draft=$KEEP_DRAFT"
+          else
+            echo "inputs 使用: limit=${LIMIT} dry_run=${DRY_RUN} keep_draft=${KEEP_DRAFT}"
+          fi
+
       - name: 🔑 Assert API key (dry-run 以外)
         if: ${{ env.DRY_RUN != 'true' }}
         run: |
@@ -128,6 +156,10 @@ jobs:
         id: commit
         if: ${{ env.DRY_RUN != 'true' }}
         run: |
+          # push トリガーで来た request は同じ commit で消費する (再実行のループを防ぐ)
+          if [ "${{ github.event_name }}" = "push" ]; then
+            git rm -q --ignore-unmatch data/blog-generate-requests.json || true
+          fi
           git add "docs/21_ブログ記事原稿" .claude/state/blog/topic-queue.json || true
           NEW=$(find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.md' -type f 2>/dev/null | wc -l | tr -d ' ')
           echo "outbox=${NEW}" >> "$GITHUB_OUTPUT"
@@ -148,6 +180,18 @@ jobs:
           # push できなければ記事が届かない。黙って成功にしない
           echo "::error::develop への push に 3 回失敗した (outbox ${NEW} 件が未配送)"
           exit 1
+
+      # dry-run は上の commit step が走らないので request が残る。別途消費する
+      # (残すと「未処理の要求がある」ように見えて紛らわしい)。
+      - name: 🧹 Consume request (dry-run 時)
+        if: ${{ github.event_name == 'push' && env.DRY_RUN == 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q --ignore-unmatch data/blog-generate-requests.json || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -q -m "chore(blog): consume blog-generate request (dry-run) [skip ci]"
+          git pull --rebase --quiet origin develop && git push origin HEAD:develop
 
       # 既定 token の push は blog-auto-publish の push トリガーを発火させないため明示 dispatch する。
       # run が生まれたことを確認してから成功とする (ai-content で滞留を実際に踏んだ)。

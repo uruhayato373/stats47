@@ -555,12 +555,32 @@ quality-gate は「本文の数値が data/*.json と一致するか」しか見
 独立した読者として読める。人間 (または別 agent) のレビューより弱いのは事実なので、公開後の
 GSC 実測と是正ループ (`blog-remediation-loop.md`) で品質を上げる。
 
-### v1 が扱わない型
+### 型ごとの図の構成
 
-**型B (相関) は生成しない。** 散布図が無いと成立しない型で、主指標だけのランキング図と地図を
-貼っても問いに答えられない (dry-run で実際にその形になることを確認した)。散布図の接地
-(`fetch-correlation-scatter.mjs`) を通してから解禁する。黙って劣化した記事を書くより書かない方を選ぶ。
-topic-queue の pending 145 件のうち B は 48 件で、残る A / D2 / F / G の 94 件が生成対象。
+| 型 | 図 | 接地 |
+|---|---|---|
+| A / C / D / D2 / F / G | ランキング + タイルマップ (2 枚) | `fetch-ranking-data-r2.mjs --with-map` |
+| **B (相関)** | 指標A ランキング + 指標B ランキング + **散布図** (3 枚) | 上記 + `fetch-correlation-scatter.mjs` |
+
+型B に散布図が要るのは、2 指標の関係を論じる記事に主指標だけの図を貼っても問いに答えられない
+から (2026-07-31 に dry-run で実際にその形になることを確認し、散布図の接地を通してから解禁した)。
+相関 snapshot にペアが無ければその記事は成立しないので skip する。**第2指標もデータ健全性ゲートを
+通す**。カードは 1 枚だけ (dup-ranking-link を避ける) なので、第2指標へはテキストリンクで導線を作る。
+
+### 起動経路 (cloud セッションからも回せる)
+
+`blog-generate-daily.yml` は 3 経路で発火する。
+
+| 経路 | 用途 |
+|---|---|
+| schedule (JST 04:30) | 無人の日次ループ |
+| **push `data/blog-generate-requests.json`** | **cloud セッション用**。`{ "limit": 1, "dryRun": false, "keepDraft": true }` を develop へ commit すると実行し、消費した request を git rm で commit-back する |
+| workflow_dispatch | ローカルからの手動 |
+
+push 経路が要るのは、**cloud セッションが `actions:write` を持たず workflow_dispatch できない (403)**
+ため。`data-refresh.yml` / `gemini-image-run.yml` と同じ方式で、`ai-content-generate-daily.yml` にも
+同型の口 (`data/ai-content-generate-requests.json`) を用意した。これが無いと cloud からは cron を
+待つしかなく、実生成を検証できない (2026-07-31 に実際に詰まった)。
 
 ### 件数は実測してから増やす
 
