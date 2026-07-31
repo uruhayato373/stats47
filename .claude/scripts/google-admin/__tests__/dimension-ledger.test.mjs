@@ -121,15 +121,22 @@ test("extractObservedParams: 単語境界で照合し部分一致で誤検出し
   assert.deepEqual(extractObservedParams("", known), []);
 });
 
-test("実台帳をパースでき、❓要確認 が検出される (0 件ならパーサ空振り)", () => {
+test("実台帳をパースでき、登録済みと要登録を区別できる", () => {
   const md = fs.readFileSync(LEDGER_PATH, "utf-8");
   const entries = parseDimensionLedger(md);
   assert.ok(entries.length >= 10, `台帳の行数が少なすぎる: ${entries.length}`);
 
-  const needsVerification = entries.filter((e) => e.statusKind === LEDGER_STATUS_KINDS.NEEDS_VERIFICATION);
-  assert.ok(needsVerification.length > 0, "❓要確認 の行を 1 つも検出できていない (パーサ空振り)");
+  const registered = entries.filter((e) => e.statusKind === LEDGER_STATUS_KINDS.REGISTERED);
+  const needsRegistration = entries.filter((e) => e.statusKind === LEDGER_STATUS_KINDS.NEEDS_REGISTRATION);
+  assert.ok(registered.length > 0, "登録済みの行を1つも検出できていない");
+  assert.ok(needsRegistration.length > 0, "要登録の行を1つも検出できていない");
+  assert.equal(
+    entries.filter((e) => e.statusKind === LEDGER_STATUS_KINDS.UNKNOWN).length,
+    0,
+    "状態を分類できない台帳行がある",
+  );
 
-  // 実台帳で確認が必要なイベントが含まれること (台帳を直すまで固定)
+  // 実台帳の代表イベントが含まれること
   const events = entries.flatMap((e) => e.events);
   for (const expected of ["nav_click", "cta_click", "ranking_view"]) {
     assert.ok(events.includes(expected), `${expected} を台帳から読めていない`);

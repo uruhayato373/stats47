@@ -6,22 +6,25 @@
  * 設計上の要点: inventory は API が一次ソースで、DOM は使わない。
  * `accounts.adclients.adunits.list` が `reportingDimensionId` (= レポートの AD_UNIT_ID) を返し、
  * `adunits.getAdcode` が `data-ad-slot` を含む adCode を返すため、unit ↔ slotId の対応が
- * 決定的に取れる。DOM に頼るのは apply 直前の duplicate 再確認と Save 後 verify だけにして、
- * selector drift の影響範囲を作成フォームに封じ込める。
+ * 決定的に取れる。inventory は API のみで取り、DOM には一切依存しない (read-only)。
  *
- * scope は adsense.readonly のみ (書き込み API は AdSense v2 に存在しない)。
+ * scope は adsense.readonly のみを使う。`accounts.adclients.adunits.create` / `patch` という
+ * メソッドは AdSense Management API v2 に存在するが、AdSense for Platforms 系の制限プロジェクト
+ * 向けで現状 DISPLAY のみであり、stats47 での利用権限は未証明のため自動化対象にしない
+ * (README「結論」「denylist」/ evidence-based-judgment.md)。
  * 認証は OAuth (env: GOOGLE_ADSENSE_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN)。
  * env が無ければ fail closed で status を返し、推測で先に進まない。
+ * AdSense を叩けるかの gate は「OAuth client での accounts.list 成功」だけを見る
+ * (GA4/GSC 用サービスアカウントの project 有効化を AdSense の判定に使わない — 別 project を
+ * 見ており誤判定になる。2026-07-31 是正)。
  */
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { google } from "googleapis";
-import { PROJECT_ROOT } from "./browser-context.mjs";
+// PROJECT_ROOT は auth.mjs から取る (browser-context.mjs 経由だと playwright を巻き込み、
+// API-only の read 経路が browser 依存になるため)。
+import { PROJECT_ROOT } from "../metrics/lib/auth.mjs";
 import { extractSlotIdFromAdCode } from "../metrics/lib/adsense-report-contract.mjs";
-import { resolveServiceAccountKeyFile } from "../metrics/lib/auth.mjs";
-
-/** 有効化を確認する API。 */
-export const ADSENSE_SERVICE_NAME = "adsense.googleapis.com";
 
 const ADSENSE_ENV_KEYS = Object.freeze([
   "GOOGLE_ADSENSE_CLIENT_ID",
@@ -106,70 +109,6 @@ function adsenseClient() {
   const oauth2Client = new google.auth.OAuth2(clientId, clientSecret);
   oauth2Client.setCredentials({ refresh_token: refreshToken });
   return google.adsense({ version: "v2", auth: oauth2Client });
-}
-
-/**
- * `serviceusage.services.get` の結果から有効状態を判定する (pure)。
- *
- * state は "ENABLED" / "DISABLED" / "STATE_UNSPECIFIED"。ENABLED 以外は fail closed 扱いにする
- * (未有効のまま token を発行しても、レポート取得が全 job 失敗するため)。
- */
-export function classifyApiState(service) {
-  const state = service?.state ?? null;
-  if (state === "ENABLED") return { status: "ok", state };
-  if (state === "DISABLED") {
-    return {
-      status: "api-not-enabled",
-      state,
-      detail: `${ADSENSE_SERVICE_NAME} がこのプロジェクトで無効です。有効化しないと全レポート job が失敗します`,
-    };
-  }
-  return { status: "api-state-unknown", state, detail: `state を判定できません (${String(state)})` };
-}
-
-/** サービスアカウント鍵から project_id / project_number を読む (I/O)。 */
-function serviceAccountProject() {
-  try {
-    const keyFile = resolveServiceAccountKeyFile();
-    const key = JSON.parse(readFileSync(keyFile, "utf-8"));
-    return key.project_id ?? null;
-  } catch {
-    return null;
-  }
-}
-
-/**
- * AdSense Management API がプロジェクトで有効か確認する。
- *
- * これを事前に見ないと「Secrets を更新したのに CI で初めて全 job 失敗」になる
- * (2026-07-30 に実際に発生。原因は別プロジェクトで API 未有効化だった)。
- *
- * 認証は GA4/GSC と同じサービスアカウントを使う。権限が無い場合も fail closed で報告し、
- * 「確認できなかった」を「有効」と読み替えない。
- */
-export async function auditAdSenseApiEnabled({ projectId = null } = {}) {
-  const project = projectId ?? serviceAccountProject();
-  if (!project) {
-    return { status: "project-unknown", detail: "サービスアカウント鍵から project_id を取得できません" };
-  }
-  try {
-    const auth = new google.auth.GoogleAuth({
-      keyFile: resolveServiceAccountKeyFile(),
-      scopes: ["https://www.googleapis.com/auth/cloud-platform.read-only"],
-    });
-    const su = google.serviceusage({ version: "v1", auth });
-    const res = await su.services.get({ name: `projects/${project}/services/${ADSENSE_SERVICE_NAME}` });
-    return { ...classifyApiState(res.data), project, service: ADSENSE_SERVICE_NAME };
-  } catch (e) {
-    const msg = String(e.message ?? e);
-    // Service Usage API 自体が無効 / 権限不足も「確認できない」として fail closed
-    return {
-      status: "api-check-failed",
-      project,
-      service: ADSENSE_SERVICE_NAME,
-      detail: msg.slice(0, 250),
-    };
-  }
 }
 
 /** AdSense account を API で照合する。 */
@@ -257,21 +196,5 @@ export async function auditAdUnits({ codeSlots = [], accountId = null } = {}) {
       codeSlots,
       detail: String(e.message ?? e).slice(0, 200),
     };
-  }
-}
-
-/**
- * Save 直前の publisher 再照合 (DOM)。
- * URL か本文に expected の pub-ID が現れることを要求する。
- */
-export async function reassertPublisher(page, expected = expectedAdSenseAccount()) {
-  if (!expected) return false;
-  const pub = expected.replace(/^accounts\//, "");
-  try {
-    const url = page.url();
-    const text = await page.evaluate(() => document.body?.innerText ?? "");
-    return url.includes(pub) || text.includes(pub);
-  } catch {
-    return false;
   }
 }

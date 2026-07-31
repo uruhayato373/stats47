@@ -296,6 +296,14 @@
       ]
     },
     {
+      "name": "GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
       "name": "GOOGLE_ADSENSE_ACCOUNT_ID",
       "visibility": "secret",
       "contexts": [

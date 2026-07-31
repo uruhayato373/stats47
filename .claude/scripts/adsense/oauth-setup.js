@@ -2,8 +2,10 @@
 /**
  * AdSense Management API 用 OAuth 2.0 セットアップ (refresh token の再発行)。
  *
- * scope は **書き込み込み** の https://www.googleapis.com/auth/adsense を要求する。
- * readonly を包含するので週次レポート取得は壊れず、広告ユニットの create/patch も可能になる。
+ * scope は read-only の https://www.googleapis.com/auth/adsense.readonly を要求する。
+ * 週次レポート取得と inventory 監査はこれで足りる。広告ユニットの create/patch は
+ * AdSense for Platforms 系の制限プロジェクト向けで stats47 の利用権限が未証明のため
+ * 自動化しない (README「結論」「denylist」)。書き込み scope は権限の証拠ができるまで要求しない。
  *
  * ★ 値の取り扱い:
  *   - refresh token は最後にまとめて 1 度だけ出力する (先頭 N 文字の部分出力もしない)。
@@ -13,7 +15,7 @@
  * ★ 前提 (満たさないと失敗する。2026-07-31 に全部踏んだので明記する):
  *   1. 対象プロジェクトで AdSense Management API が有効
  *      (未有効だと "AdSense Management API has not been used in project ..." で全 job 失敗)
- *   2. Google Auth Platform → データアクセス に auth/adsense がある (非機密スコープなので検証不要)
+ *   2. Google Auth Platform → データアクセス に auth/adsense.readonly がある
  *   3. Google Auth Platform → 対象 の公開ステータスが「本番環境」
  *      (テストのままだと refresh token が 7 日で失効する)
  *   4. OAuth クライアントが Desktop app タイプ (Web app だと redirect_uri_mismatch)
@@ -51,7 +53,7 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
 
 const PORT = 53217;
 const REDIRECT_URI = `http://localhost:${PORT}`;
-const SCOPES = ["https://www.googleapis.com/auth/adsense"];
+const SCOPES = ["https://www.googleapis.com/auth/adsense.readonly"];
 
 const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 const authUrl = oauth2Client.generateAuthUrl({
@@ -88,10 +90,10 @@ const server = http.createServer(async (req, res) => {
 
     const granted = String(tokens.scope || "");
     console.log(`\n付与された scope: ${granted || "(不明)"}`);
-    if (!granted.includes("auth/adsense") || granted.includes("adsense.readonly")) {
+    if (!granted.includes("adsense")) {
       console.log(
-        "\n⚠️  書き込み scope が付与されていません。" +
-          "\n   Google Auth Platform → データアクセス に https://www.googleapis.com/auth/adsense を追加してください。",
+        "\n⚠️  AdSense scope が付与されていません。" +
+          "\n   Google Auth Platform → データアクセス に https://www.googleapis.com/auth/adsense.readonly を追加してください。",
       );
     }
     if (!tokens.refresh_token) {
