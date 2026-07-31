@@ -84,11 +84,54 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 > 専用色セット（`CARD_THEMES`、red=`#dc2626`/`#ef4444`/`#fef2f2` 等の Tailwind 系）を使う。カードはライト固定の
 > 島として描画し、外枠 (`svg-bg`/`svg-title`) のみ dark 追従する（手本 aging-solo / alcohol に忠実）。
 
-**選択基準**:
+**選択基準**（棒グラフ等の静的 SVG）:
 - 指標が高い = 悪い（死亡率・犯罪率・失業率） → `red`
 - 指標が高い = 良い（収入・平均寿命） → `blue`
 - 指標が高い = 中立（生産量・観光客数） → `orange`
 - 相関可視化（散布図）→ `SCATTER_COLORS.mid`（単色均一）
+
+### コロプレス（タイルマップ）の配色 — 正典はコード（2026-07-31 SSOT 化）
+
+上の選択基準を**コロプレスについては `packages/data-configs/src/color-scheme-policy.ts` の
+`resolveColorScheme` が実装する**。文章のルールと実装が乖離しないよう、判断はこの関数に一本化する。
+
+| 層 | 正典 |
+|---|---|
+| 配色の語彙（46 種・短縮名 ⇄ 正式名・d3 実名） | `packages/types/src/color-scheme.ts`（`COLOR_SCHEME_CATALOG`） |
+| どの配色を選ぶか（決定規則） | `packages/data-configs/src/color-scheme-policy.ts`（`resolveColorScheme`） |
+| 指標の極性（高いほど良い/悪い） | `packages/data-configs/src/metric-polarity.ts`（`METRIC_POLARITY`） |
+| 配信への焼き込み | `build-ranking-item-from-metric.ts` → R2 `app/ranking/<key>/item.json` |
+| ブログ地図への伝搬 | `regenerate-tile-maps.ts` が item.json から読み、地図 JSON に `scheme` を焼く |
+
+**決定順序**（`reason` として返るので分布を機械集計できる）:
+
+1. `explicit` — config の明示指定が **Blues 以外**なら採用（deliberate）
+2. `diverging` — `colorSchemeType: "diverging"` → `interpolateRdBu`
+3. `polarity` — 極性が確定していれば worse→Reds / better→Blues
+4. `category` — topical 色（agriculture→Greens / landweather・energy→Oranges）
+5. `default` — `interpolateBlues`
+
+> **明示 Blues を「選択」として扱わない理由**: `interpolateBlues` は 2,295 metric 中 1,960 件（85%）に
+> 書かれており、**選択ではなく全 config に焼かれた既定値**。deliberate 扱いすると極性を入れても
+> どの色も変わらず、カタログが飾りになる。
+>
+> **polarity を category から推定しない理由**: category は粗すぎて同じ軸に「高いほど良い」と
+> 「高いほど悪い」が同居する（safetyenvironment に犯罪件数と検挙率が両方いる）。
+> 一方 topical 色は良し悪しを主張しないので粗さが問題にならない。
+> 極性は**証拠のある分だけ収載**し、未収載は未割当のまま（推測で埋めない）。
+
+**禁止**:
+
+| NG | OK |
+|---|---|
+| 語彙外の配色名を config に書く | `validate:config` の `[color-scheme]` が error で弾く |
+| svg-builder に正式名（`interpolateBlues`）を渡す | `toShortColorScheme` で短縮名に直す（渡すと**全部赤**になる） |
+| 凡例のグラデーションを CSS リテラルで書く | `legendGradientCss(colorScheme)` で interpolator から導出する |
+| 極性を推測で埋める | 証拠のある分だけ収載。判断が割れたものは `EXCLUDED_FROM_SEED` に理由付きで残す |
+
+**ゲート**: `npm run validate:polarity --workspace=@stats47/data-configs`（pre-commit + CI の
+Colorscheme Policy Gate）。幽霊キー・evidence 空・カバレッジの減少（増加専用ラチェット）・
+決定規則が語彙外の色を返す、を error にする。
 
 ### ダークモード（`svgThemeStyle()`）
 

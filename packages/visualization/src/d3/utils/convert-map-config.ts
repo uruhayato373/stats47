@@ -2,16 +2,17 @@
  * MapVisualizationConfigをColorScaleOptionsに変換
  */
 
+import { DEFAULT_DIVERGING_SCHEME, DEFAULT_SEQUENTIAL_SCHEME } from "@stats47/types";
 import type { ColorScaleOptions, VisualizationDataPoint } from "../types";
 import type { MapVisualizationConfig } from "../types/map-chart";
 import { normalizeColorScheme } from "./color-scale/normalize-color-scheme";
 
 function normalizeSequentialScheme(colorScheme: string | undefined): string {
-  return normalizeColorScheme(colorScheme || "interpolateBlues");
+  return normalizeColorScheme(colorScheme || DEFAULT_SEQUENTIAL_SCHEME);
 }
 
 function normalizeDivergingScheme(colorScheme: string | undefined): string {
-  return normalizeColorScheme(colorScheme || "interpolateRdBu");
+  return normalizeColorScheme(colorScheme || DEFAULT_DIVERGING_SCHEME);
 }
 
 /**
@@ -52,7 +53,7 @@ export function mapConfigToColorOptions(
       return {
         type: "categorical",
         data,
-        colorScheme: colorConfig.colorScheme || "interpolateBlues",
+        colorScheme: colorConfig.colorScheme || DEFAULT_SEQUENTIAL_SCHEME,
         isReversed: colorConfig.isReversed,
         noDataColor: colorConfig.noDataColor || "#e0e0e0",
       };
@@ -61,7 +62,7 @@ export function mapConfigToColorOptions(
       return {
         type: "sequential",
         data,
-        colorScheme: "interpolateBlues",
+        colorScheme: DEFAULT_SEQUENTIAL_SCHEME,
         noDataColor: "#e0e0e0",
       };
   }

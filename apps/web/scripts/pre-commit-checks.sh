@@ -414,6 +414,17 @@ if [ -n "$STAGED_METRICS" ]; then
     echo -e "${YELLOW}💡 規約: .claude/rules/metric-config-standards.md / 確認: npm run validate:config --workspace=@stats47/data-configs${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+
+  # 配色の決定規則 + 極性 SSOT (.claude/rules/blog-svg-chart-standards.md §3)
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/validate-polarity.ts > /tmp/validate-polarity.log 2>&1); then
+    echo -e "${GREEN}✅ 配色・極性チェック成功${NC}"
+    grep -E "配色の決定内訳" /tmp/validate-polarity.log || true
+  else
+    echo -e "${RED}❌ 極性カタログ / 配色決定規則に error があります。${NC}"
+    grep -E "^  ✗" /tmp/validate-polarity.log | head -10 || true
+    echo -e "${YELLOW}💡 規約: .claude/rules/blog-svg-chart-standards.md §3 / 確認: npm run validate:polarity --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
 else
   echo -e "${GREEN}✅ metric config の変更なし${NC}"
 fi

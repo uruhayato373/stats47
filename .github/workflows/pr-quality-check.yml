@@ -304,6 +304,15 @@ jobs:
           npm run build:registry --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
+      - name: 🎨 Colorscheme Policy Gate
+        run: |
+          # コロプレス配色の決定規則と極性 SSOT を担保。
+          # 幽霊キー (metric の改名・削除で腐る) / evidence 空 (推測の混入) /
+          # カバレッジの減少 (増加専用ラチェット) / 決定規則が語彙外の色を返す、を error にする。
+          # 規約: .claude/rules/blog-svg-chart-standards.md §3
+          npm run validate:polarity --workspace=@stats47/data-configs
+        continue-on-error: false
+
       - name: 📚 Theme Catalog Gate
         run: |
           # テーマ指標×チャート統合カタログ (SSOT) の整合と生成物の鮮度を担保。
