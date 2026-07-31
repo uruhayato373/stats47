@@ -34,7 +34,13 @@ import { checkArticleFactual } from "../lib/article-factual-check.mjs";
 import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
 import { lintParenNumbers } from "../lib/paren-number-lint.mjs";
 import { lintInternalLinks } from "../lib/internal-link-lint.mjs";
-import { lintSvgSize, lintChoroplethLegend, lintFindingsParity, lintTileGridQuality } from "../lib/svg-lint.mjs";
+import {
+  lintSvgContent,
+  lintSvgSize,
+  lintChoroplethLegend,
+  lintFindingsParity,
+  lintTileGridQuality,
+} from "../lib/svg-lint.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -150,8 +156,12 @@ function getH2Count(text) {
   return matches ? matches.length : 0;
 }
 
+// YAML はクォートを要求しないので、引用符の有無で判定しない (2026-07-31 修正)。
+// 旧実装は `seoTitle: 製造品出荷額ランキング` を「欠落」と誤報していた。実コーパス 424 記事は
+// 全件クォート付きで実害は無かったが、生成モデルが書く frontmatter では普通に起こる形で、
+// しかもメッセージが「欠落」なので原因を誤らせる。description 側の判定と揃える。
 function hasSeoTitle(text) {
-  return /^seoTitle:\s*["'].+["']/m.test(text);
+  return /^seoTitle:\s*["']?\S/m.test(text);
 }
 
 function hasDescription(text) {
@@ -306,14 +316,15 @@ checks.noFigureSectionLinks = sourceLinkLint.stats.noFigureSectionLinks;
 blockers.push(...sourceLinkLint.blockers);
 warnings.push(...sourceLinkLint.warnings);
 
-// 括弧内数値挿入の計測 (2026-07-31 追加、paren-number-lint.mjs)
-// ★現時点では **計測のみ**。blocker にはしない。
-//   「都道府県名の直後に括弧で値・順位を入れない」は ranking ai-content 側のルール
-//   (ranking-content-standards.md / 生成プロンプト) であって、blog-quality-standards.md には
-//   無い。blog に持ち込むかは方針判断であり、公開済み 424 記事の 79.5% (4,671 箇所) が
-//   該当するため影響が大きい。採用が決まったら blockers.push(...parenLint.blockers) に変える。
+// 括弧内数値挿入 (2026-07-31 追加、paren-number-lint.mjs)
+// 「都道府県名の直後に括弧で値・順位を入れない」= blog-quality-standards.md「数値の書き方」。
+// 括弧内の数値は factual-check が照合対象から外すため (主指標か別指標かを機械が判別できない)、
+// 括弧に入れた瞬間に検証されなくなる。散文へ開けば照合対象に入る。
+// 既存負債は公開済み 424 記事の 79.5% だが、gate がかかるのは「これから公開する記事」なので
+// 既存は brushup で順次是正される (是正キューが blocker として拾う)。
 const parenLint = lintParenNumbers(content);
 checks.parenNumbers = parenLint.hits.length;
+blockers.push(...parenLint.blockers);
 
 // 内部リンクの実在チェック (2026-07-24 追加、internal-link-lint.mjs)
 // 実在しない ranking key は HTTP 200 + 「ランキングが見つかりません」の soft 404 を返すため、
@@ -378,6 +389,35 @@ if (rankClaimCount >= 2 && checks.groundTruthPrefCount === 0) {
 // blocker (徹底・2026-06-20 昇格): generator (generate-article-charts) が SVG とセットで source.json を必ず
 // 出力するため新規記事は通る。既存負債を再公開する記事は復元 (backfill/ssot-restore) してから公開すること。
 const svgRefs = [...new Set([...content.matchAll(/\]\(data\/([^)]+)\.svg\)/g)].map((m) => m[1]))];
+
+// 参照 SVG の実在 gate (2026-07-31 追加): article.md が `![](data/x.svg)` と書いているのに
+// ファイルが無ければ本番で画像切れになる。系譜 gate は .json/.source.json しか見ておらず、
+// SVG 本体の欠落は誰も検査していなかった (実測: 公開済み 424 記事中 3 記事 / 8 枚が画像切れ)。
+const missingSvgFiles = svgRefs.filter((base) => !fs.existsSync(path.join(dataDir, `${base}.svg`)));
+checks.missingSvgFiles = missingSvgFiles.length;
+if (missingSvgFiles.length > 0) {
+  blockers.push(
+    `参照 SVG が存在しない ${missingSvgFiles.length}/${svgRefs.length} 件: ` +
+      `${missingSvgFiles.slice(0, 3).join(", ")}${missingSvgFiles.length > 3 ? " 他" : ""} — ` +
+      `本番で画像切れになる。generate-article-charts を通すか本文の参照を外すこと`,
+  );
+}
+
+// SVG basename の型判別可能性 gate (2026-07-31 追加): `chart-1` / `inline-chart-2` のような
+// 無意味名は blog-svg-chart-standards.md §4 が明確に禁止している。型 (bar/map/line/…) を
+// 名前から判定できないと再生成もサイズ検査もディスパッチできない (実測: 公開済み 19 枚)。
+// suffix 規約 (-ranking/-map/…) 全体の遵守は既存負債 14.9% のため gate にしない。
+const MEANINGLESS_BASENAME_RE = /(?:^|-)(?:inline-)?chart-?\d+$/i;
+const meaninglessNames = svgRefs.filter((base) => MEANINGLESS_BASENAME_RE.test(base));
+checks.meaninglessSvgNames = meaninglessNames.length;
+if (meaninglessNames.length > 0) {
+  blockers.push(
+    `型を判別できない SVG 名 ${meaninglessNames.length} 件: ${meaninglessNames.join(", ")} — ` +
+      `blog-svg-chart-standards.md §4 の canonical 命名 (*-ranking / *-map / *-scatter / ` +
+      `*-timeseries / *-stacked / *-summary-findings) に沿った名前にすること`,
+  );
+}
+
 const lineageMissing = [];
 for (const base of svgRefs) {
   const hasJson = fs.existsSync(path.join(dataDir, `${base}.json`));
@@ -401,14 +441,39 @@ if (lineageMissing.length > 0) {
 // 正規サイズ (blog-svg-chart-standards.md §5) に一致するか検査。統一済み (ranking 960/680・
 // tilemap 600・findings 960) は blocker / 未統一 (scatter/line/stacked) は warning。
 // 新規記事・校正で非正規サイズ SVG が混入するのを公開前に止める。
+// 併せて SVG 本体の構造 lint (lintSvgContent) もここで回す (2026-07-31 配線)。
+// viewBox/width/height/閉じタグの欠落 = 描画が壊れる、<text> の "undefined"/NaN/[object Object]
+// = 生成器がテンプレート値を解決できていない、を error として弾く。従来 audit-chart-quality
+// (バッチ) と generate-article-charts (--validate) にしか配線されておらず、公開前 gate は
+// これを見ていなかった。実測影響は公開済み 424 記事中 1 記事 (0.2%) で安全に blocker 化できる。
+// dark mode 非対応 / theme 色 inline の 2 つは warning のまま (140 枚該当・再生成で解消)。
 const sizeBlockers = [];
 const sizeWarnings = [];
+const contentErrors = [];
+const contentWarnings = [];
 for (const base of svgRefs) {
   const svgFile = path.join(dataDir, `${base}.svg`);
-  if (!fs.existsSync(svgFile)) continue; // 欠落は lineage gate が別途捕捉
-  const { errors, warnings } = lintSvgSize(`${base}.svg`, fs.readFileSync(svgFile, "utf8"));
+  if (!fs.existsSync(svgFile)) continue; // 欠落は実在 gate が別途捕捉
+  const svg = fs.readFileSync(svgFile, "utf8");
+  const { errors, warnings } = lintSvgSize(`${base}.svg`, svg);
   sizeBlockers.push(...errors);
   sizeWarnings.push(...warnings);
+  const structural = lintSvgContent(svg, `${base}.svg`);
+  contentErrors.push(...structural.errors.map((e) => `${base}.svg: ${e}`));
+  contentWarnings.push(...structural.warnings.map((w) => `${base}.svg: ${w}`));
+}
+checks.svgContentErrors = contentErrors.length;
+if (contentErrors.length > 0) {
+  blockers.push(
+    `SVG 構造エラー ${contentErrors.length} 件: ` +
+      `${contentErrors.slice(0, 2).join(" / ")}${contentErrors.length > 2 ? " 他" : ""}`,
+  );
+}
+if (contentWarnings.length > 0) {
+  warnings.push(
+    `SVG 品質 warning ${contentWarnings.length} 件: ` +
+      `${contentWarnings.slice(0, 2).join(" / ")}${contentWarnings.length > 2 ? " 他" : ""}`,
+  );
 }
 checks.svgSizeViolations = sizeBlockers.length + sizeWarnings.length;
 if (sizeBlockers.length > 0) {

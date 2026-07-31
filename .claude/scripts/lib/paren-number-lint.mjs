@@ -1,18 +1,19 @@
 /**
  * paren-number-lint — 都道府県名の直後の括弧に値・順位を併記した箇所を検出する (共有ライブラリ)
  *
- * ★ルールの所在に注意 (2026-07-31 時点):
- *   このルールは **ranking ai-content 側** (`.claude/rules/ranking-content-standards.md` と
- *   生成プロンプト) のもので、`blog-quality-standards.md` には存在しない。
+ * ルールの所在 (2026-07-31 に blog へも導入):
+ *   - ranking ai-content: `.claude/rules/ranking-content-standards.md` + 生成プロンプト
+ *   - blog:              `.claude/rules/blog-quality-standards.md`「数値の書き方」
  *
  *   NG:「愛知県（746.0万人）が4位」「石川県（2.5人、31位）」
- *   OK:「愛知県は4位で、中部地方の中核を担っている」
+ *   OK:「愛知県は746.0万人で4位となっています」
  *
- * blog に同じルールを持ち込むかは方針判断。公開済み 424 記事の 79.5% (4,671 箇所) が
- * 該当するため影響が大きく、現時点で blog の quality-gate は **計測のみ**で blocker にしない。
+ * なぜ禁じるか: 括弧内の数値は主指標か別指標かを機械が判別できず、value 照合
+ * (article-factual-check) が**括弧内を対象から外している**。括弧に入れた数値は誰にも
+ * 検証されない。散文に開けば照合対象に入る。
  *
- * 一方 value 照合 (article-factual-check) は括弧内数値を対象外にしている。これはルールの
- * 有無とは独立した理由で、実測上ほぼ別指標か派生値であり照合できないため。
+ * 既存負債: 公開済み 424 記事の 79.5% (4,671 箇所) が該当する。blocker だが、gate が
+ * かかるのは「これから公開する記事」なので既存記事は brushup で順次是正される。
  *
  * 判定は ai-content の audit-ai-content.mjs と同じ許容規則に揃える (二重基準を作らない):
  *   - 数字を含まない括弧は対象外
@@ -81,8 +82,10 @@ export function lintParenNumbers(md) {
 
   const blockers = hits.length
     ? [
-        `paren-number: 都道府県名の直後に値・順位を括弧で併記 ${hits.length} 件 ` +
-          `(ranking-content-standards.md 由来のルール。blog では現在 計測のみ)。例: ` +
+        `paren-number: 都道府県名の直後に値・順位を括弧で併記 ${hits.length} 件 — ` +
+          `括弧内の数値は factual-check の照合対象外になり検証不能になる。` +
+          `「愛知県は746.0万人で4位」のように散文へ開くこと ` +
+          `(blog-quality-standards.md「数値の書き方」)。例: ` +
           hits
             .slice(0, 3)
             .map((h) => `L${h.line}${h.text}`)
