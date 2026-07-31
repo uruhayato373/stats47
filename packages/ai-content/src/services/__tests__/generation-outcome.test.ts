@@ -52,9 +52,10 @@ describe("decideOutcome — 落とさない (運用を止めない)", () => {
 });
 
 describe("decideOutcome — 診断メッセージ", () => {
-  it("全件 FAIL のときはモデル名 / 404 の確認手順を示す", () => {
+  it("全件 FAIL のときは切り分けの観点を示す", () => {
     const d = decideOutcome({ ...zero, fail: 40 }, 40);
-    expect(d.reason).toContain("404");
-    expect(d.reason).toContain("preflight");
+    // 何を疑えばよいかが読み取れること (0 件という事実だけで終わらせない)
+    expect(d.reason).toContain("生成 0 件");
+    expect(d.reason).toMatch(/認証|ネットワーク|接地/);
   });
 });

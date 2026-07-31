@@ -1,0 +1,234 @@
+name: 📝 Blog Generate Daily (Gemini)
+
+# ブログ新規記事の日次「準備」ループ (2026-07-31 に Gemini から移行)。
+#
+# ★LLM はこの workflow では呼ばない。GitHub Actions の中で LLM を呼ぶ形は Claude でも
+#   Gemini でも別課金になるため、「書く」工程は Claude セッション (Max サブスク内) が担う。
+#   ここは決定的で無料な工程だけを回して、今日書く分を用意する。
+#
+#   1. topic-queue を再構築 (何を書くか。GSC 需要 × 相関 × カテゴリから決定的に並ぶ)
+#   2. pending 上位を**準備**:
+#        R2 観測値を接地 → **データ健全性ゲート** → SVG 生成 → article.prompt.txt 書き出し
+#   3. 準備物を develop に push し、今日の対象を Issue で提示
+#   4. セッションが article.md を書いて push → blog-auto-publish.yml が R2 公開
+#      (この workflow も article.md が既にあれば dispatch する)
+#
+# ★なぜ push トリガー任せにしないか
+#   blog-auto-publish.yml は develop への push トリガーを持つが、GitHub Actions は
+#   **既定の GITHUB_TOKEN で push した場合、後続 workflow を発火させない** (無限ループ防止)。
+#   ai-content で実際に outbox が滞留した (2026-07-31)。明示 dispatch し、run が生まれたことを
+#   確認してから成功とする。
+#
+# ★安全装置
+#   - 壊れた metric の記事は書かない (blog-topic-gate。分類軸の絞り忘れ等を生成前に弾く)
+#   - quality-gate の blocker が 1 つでも残れば公開しない。**ゲートは緩めない**
+#   - critic が REVISE なら下書きごと破棄する (自己採点での公開を作らない)
+#   - LIMIT は小さく始める。品質が実測で確認できるまで増やさない
+#   - dry_run: LLM を呼ばず接地・ゲート・prompt 長だけ出す (課金ゼロ)
+#
+# ⚠️ 費用: 1 記事あたり本文生成 + critic の 2 回。入力 ~3K / 出力 ~4K トークン相当 × 2。
+#
+# 正典: .claude/rules/blog-quality-standards.md / .claude/rules/blog-data-schema.md §0
+
+on:
+  schedule:
+    - cron: "30 19 * * *" # JST 04:30 (UTC 19:30)。ai-content (JST 03:00) と重ならせない
+  # push トリガー (cloud 用): develop に data/blog-generate-requests.json を commit/push すると
+  # 実行し、消費した request を git rm で commit-back する。cloud セッションは actions:write が
+  # 無く workflow_dispatch できない (403) ため。data-refresh.yml / gemini-image-run.yml と同じ方式。
+  #   { "limit": 1, "dryRun": false, "keepDraft": true }
+  push:
+    branches: [develop]
+    paths: ['data/blog-generate-requests.json']
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "生成件数 (既定 2。品質を実測してから増やす)"
+        required: false
+        default: "2"
+      dry_run:
+        description: "true: LLM を呼ばず接地とゲートだけ実行する"
+        required: false
+        default: "false"
+      keep_draft:
+        description: "true: ゲート落ち / critic REVISE の下書きを残して原因を見る"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+  issues: write # 今日の執筆対象を Issue で提示するため
+  actions: write # blog-auto-publish.yml を dispatch するため
+
+concurrency:
+  group: blog-generate
+  cancel-in-progress: false
+
+env:
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  LIMIT: ${{ inputs.limit || '1' }}
+  DRY_RUN: ${{ inputs.dry_run || 'false' }}
+  KEEP_DRAFT: ${{ inputs.keep_draft || 'false' }}
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 2
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # push トリガー時は request file を、それ以外は workflow_dispatch の inputs を使う。
+      # GITHUB_ENV に書くので、後続 step の if: env.DRY_RUN も解決される。
+      - name: 🧭 Resolve inputs
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          REQ=data/blog-generate-requests.json
+          if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
+            LIMIT=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.limit??2))")
+            DRY_RUN=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
+            KEEP_DRAFT=$(node -e "const r=require('./$REQ');process.stdout.write(r.keepDraft===true?'true':'false')")
+            {
+              echo "LIMIT=$LIMIT"
+              echo "DRY_RUN=$DRY_RUN"
+              echo "KEEP_DRAFT=$KEEP_DRAFT"
+            } >> "$GITHUB_ENV"
+            echo "request 解決: limit=$LIMIT dry_run=$DRY_RUN keep_draft=$KEEP_DRAFT"
+          else
+            echo "inputs 使用: limit=${LIMIT} dry_run=${DRY_RUN} keep_draft=${KEEP_DRAFT}"
+          fi
+
+      # 何を書くか。GSC 需要・相関・カテゴリ網羅から決定的に並ぶ。
+      # 外部 fetch を含むので失敗しても既存キューで続行する (生成を止める理由にはならない)。
+      - name: 📊 Rebuild topic-queue
+        run: node .claude/scripts/blog/build-topic-queue.mjs || echo "::warning::topic-queue 再構築に失敗。既存キューで続行する"
+
+      # ★LLM はここでは呼ばない (2026-07-31 に Gemini から移行)。
+      #   GitHub Actions の中で LLM を呼ぶ形は Claude でも Gemini でも別課金になるため、
+      #   決定的な工程 (接地 → データ健全性ゲート → SVG → prompt 構築) までを CI が担い、
+      #   「書く」工程は Claude セッション (Max サブスク内) が担う。
+      #   準備済みディレクトリには article.md が無いので公開 workflow には拾われない。
+      - name: 🧱 Prepare articles (接地・ゲート・SVG・prompt まで)
+        run: |
+          set -o pipefail
+          # 引数は配列で組む (文字列を裸で展開すると glob と単語分割が起きる)
+          EXTRA=()
+          if [ "${DRY_RUN}" = "true" ]; then EXTRA+=(--dry-run); fi
+          NODE_OPTIONS='--conditions react-server' \
+            npx tsx packages/ai-content/src/scripts/generate-blog-article.ts \
+              --limit "${LIMIT}" \
+              "${EXTRA[@]}" 2>&1 | tee /tmp/gen.log
+          {
+            echo "### 接地結果"
+            echo '```'
+            grep -E '^(===|\[(ready|reject|fail|skip|dry-run)\])' /tmp/gen.log | tail -60 || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 📋 今日の執筆対象を Issue に出す
+        if: ${{ env.DRY_RUN != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          READY=$(find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.prompt.txt' -type f 2>/dev/null \
+            | sed 's|.*/\([^/]*\)/article.prompt.txt|\1|' | paste -sd' ')
+          if [ -z "$READY" ]; then echo "準備済みなし"; exit 0; fi
+          TITLE="📝 ブログ: 今日の執筆対象"
+          BODY=$(
+            echo "接地・データ健全性ゲート・SVG・prompt まで準備できています。Claude セッションで書いてください。"
+            echo
+            echo "対象: $READY"
+            echo
+            echo "各 slug の docs/21_ブログ記事原稿/<slug>/article.prompt.txt を読んで article.md を書き、"
+            echo "generate-blog-article.ts --ingest <slug> でゲート → blog-critic で review.md →"
+            echo "再度 --ingest で確定します。ゲートは緩めません。"
+          )
+          EXIST=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$EXIST" ]; then
+            gh issue edit "$EXIST" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY" --label auto-generated
+          fi
+
+      - name: 📤 Commit outbox and push
+        id: commit
+        if: ${{ env.DRY_RUN != 'true' }}
+        run: |
+          # push トリガーで来た request は同じ commit で消費する (再実行のループを防ぐ)
+          if [ "${{ github.event_name }}" = "push" ]; then
+            git rm -q --ignore-unmatch data/blog-generate-requests.json || true
+          fi
+          git add "docs/21_ブログ記事原稿" .claude/state/blog/topic-queue.json || true
+          # 準備段階なので prompt の数を見る。公開対象は article.md がある数 (別で数える)
+          NEW=$(find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.prompt.txt' -type f 2>/dev/null | wc -l | tr -d ' ')
+          WRITTEN=$(find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.md' -type f 2>/dev/null | wc -l | tr -d ' ')
+          echo "outbox=${NEW}" >> "$GITHUB_OUTPUT"
+          echo "written=${WRITTEN}" >> "$GITHUB_OUTPUT"
+          if git diff --cached --quiet; then
+            echo "変更なし (生成 0 件)"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "chore(blog): daily gemini article generation (outbox ${NEW} 件)"
+          for i in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ pushed (outbox ${NEW} 件)"
+              exit 0
+            fi
+            echo "push retry $i"; sleep 5
+          done
+          # push できなければ記事が届かない。黙って成功にしない
+          echo "::error::develop への push に 3 回失敗した (outbox ${NEW} 件が未配送)"
+          exit 1
+
+      # ★request は結果によらず必ず消費する (2026-07-31 の実測で必要と判明)。
+      #
+      #   preflight で落ちた run が request を消費せず develop に残り、同じ内容を再 push しても
+      #   **diff が出ないので paths フィルタに掛からず再実行できなかった**。残った request は
+      #   「未処理の要求がある」ようにも見えて紛らわしい。
+      #   成功時は上の outbox commit が同じ commit で消しているので、ここは no-op になる。
+      - name: 🧹 Consume request (未消費なら)
+        if: ${{ always() && github.event_name == 'push' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q --ignore-unmatch data/blog-generate-requests.json || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -q -m "chore(blog): consume blog-generate request [skip ci]"
+          git pull --rebase --quiet origin develop && git push origin HEAD:develop
+
+      # 既定 token の push は blog-auto-publish の push トリガーを発火させないため明示 dispatch する。
+      # run が生まれたことを確認してから成功とする (ai-content で滞留を実際に踏んだ)。
+      # 準備しただけでは公開しない。セッションが article.md を書いたときだけ公開へ回す
+      # (blog-auto-publish は published:true の article.md しか拾わない)。
+      - name: 🚀 Dispatch blog-auto-publish (書き終えた記事があれば)
+        if: ${{ env.DRY_RUN != 'true' && steps.commit.outputs.written != '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BEFORE=$(gh run list --workflow blog-auto-publish.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')
+          gh workflow run blog-auto-publish.yml --ref develop
+          for _ in $(seq 1 12); do
+            sleep 10
+            AFTER=$(gh run list --workflow blog-auto-publish.yml --limit 1 --json databaseId --jq '.[0].databaseId // 0')
+            if [ "$AFTER" != "$BEFORE" ]; then
+              echo "✅ blog-auto-publish の run が生成された: $AFTER"
+              exit 0
+            fi
+          done
+          echo "::error::blog-auto-publish の run を確認できなかった (outbox が滞留している可能性)"
+          exit 1

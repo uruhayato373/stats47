@@ -54,6 +54,16 @@ export const PER_CAPITA_SKIP = /(?:一人当たり|1人当たり|1人あたり|�
 export const DERIVED_VALUE_SKIP =
   /(?:差額|の差|との差|差は|差が|差を|差で|格差|当たり|あたり|受け持|受持|につき|平均|中央値|合計|総額|総計|累計|比率|比は|比が|割合|シェア|構成比|換算|÷|割っ|割る|上回|下回|倍)/;
 
+/**
+ * 符号付き数値は差分 (増減・格差) を表す表記。
+ *
+ * ★記事側の表記ルールと対になる (2026-07-31)。差分を書くときは必ず符号を付けることで、
+ * 「data の絶対値ではない」と機械が判定できる。実記事は既にこの書き方をしている:
+ * care-worker-income-prefecture-gap の `**+145.7万円**` / `**−15.8万円**`。
+ * (差分表記そのものを義務づけるルールは未制定。現状は記事が自然にこう書いている)
+ */
+export const SIGNED_DELTA_RE = /[+＋\-−–—▲△]\s*$/;
+
 // ============================================================================
 // Ground truth builder (data/*.json から rank/value 索引を build)
 // ============================================================================
@@ -94,7 +104,68 @@ function extractUnit(item) {
   return null;
 }
 
+/** `<base>.json` に対応する `<base>.source.json` の {label, unit} を読む (無ければ空) */
+function readSourceMeta(dataDir, jsonFile) {
+  const sourcePath = path.join(dataDir, jsonFile.replace(/\.json$/, ".source.json"));
+  if (!fs.existsSync(sourcePath)) return {};
+  try {
+    const meta = JSON.parse(fs.readFileSync(sourcePath, "utf8"));
+    return {
+      label: typeof meta.label === "string" ? meta.label : null,
+      unit: typeof meta.unit === "string" ? meta.unit : null,
+    };
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * 散布図 `{xLabel, xUnit, yLabel, yUnit, points:[{x, y, label}]}` を 2 軸ぶん索引する。
+ *
+ * ★なぜ要るか (2026-07-31 実測): 散布図の点は `pref`/`value` フィールドを持たないため
+ * `isPrefEntry` が false になり、**ground truth に 1 件も入らなかった**。その結果、
+ * 散布図の軸を本文で引用すると「照合先が無い」ではなく「別指標と乖離」と誤検出される。
+ *
+ * 実例: black-tea-income-gap は所得 (千円) と紅茶支出 (円) の散布図を持つ。本文の
+ * 「神奈川…6,220千円」は散布図 x 軸の正しい値なのに、同じ次元 (円) の紅茶支出 1,780円 と
+ * 比較され「3494倍 乖離」と報告されていた。軸ごとに単位を付けて索引すれば一致し、消える。
+ *
+ * @returns {boolean} 索引したら true (呼び出し側は generic 再帰を省略できる)
+ */
+function indexScatterPoints(node, idx, source) {
+  if (!node || !Array.isArray(node.points)) return false;
+  const axes = [
+    { key: "x", label: node.xLabel, unit: node.xUnit },
+    { key: "y", label: node.yLabel, unit: node.yUnit },
+  ].filter((a) => typeof a.unit === "string");
+  if (axes.length === 0) return false;
+
+  let indexed = false;
+  for (const point of node.points) {
+    if (!point || typeof point !== "object") continue;
+    const pref = normalizePref(point.label ?? point.areaName ?? point.pref ?? "");
+    if (!pref || !PREF_NAMES.includes(pref)) continue;
+    for (const axis of axes) {
+      if (typeof point[axis.key] !== "number") continue;
+      if (!idx[pref]) idx[pref] = [];
+      idx[pref].push({
+        rank: null,
+        value: point[axis.key],
+        unit: axis.unit,
+        label: axis.label || axis.key,
+        source,
+      });
+      indexed = true;
+    }
+  }
+  return indexed;
+}
+
 function walkAndIndex(node, idx, source, currentLabel, currentUnit) {
+  if (node && typeof node === "object" && !Array.isArray(node)) {
+    // 散布図は専用形式 (points + 軸ごとの単位) なので generic 走査より先に処理する
+    if (indexScatterPoints(node, idx, source)) return;
+  }
   if (Array.isArray(node)) {
     if (node.length > 0 && isPrefEntry(node[0])) {
       for (const item of node) {
@@ -153,7 +224,12 @@ export function buildGroundTruth(dataDir) {
     if (!file.endsWith(".json") || file.endsWith(".source.json")) continue;
     try {
       const json = JSON.parse(fs.readFileSync(path.join(dataDir, file), "utf8"));
-      walkAndIndex(json, idx, file, "", null);
+      // 出典 manifest の label/unit を既定値として引き継ぐ (2026-07-31)。
+      // ranking 形式の JSON は label が "data" のような汎用キーになり、どの指標の値か
+      // 判別できない。source.json は人間可読な指標名 (例「紅茶消費支出額」) を持つので、
+      // これを既定 label にすると「本文が別指標を語っているか」を判定できるようになる。
+      const meta = readSourceMeta(dataDir, file);
+      walkAndIndex(json, idx, file, meta.label || "", meta.unit || null);
     } catch {
       // skip malformed JSON
     }
@@ -363,10 +439,47 @@ function parseNumeric(s) {
   return Number.isFinite(n) ? n : null;
 }
 
-/** ja スケール接頭/接尾 (兆/億/万/千/百万) を倍率に。無ければ 1 */
+/**
+ * 日本語の複合数値表記を実数へ (「4万5,897」「1億2,000万」「1万5千」「2.5万」「12,345」)。
+ *
+ * ★なぜ要るか (2026-07-31 実測): 旧実装は「数値 + スケール 1 個」しか解釈できず、
+ * 日本語散文で普通に使う **漢数字スケール混在表記**を取りこぼしていた。
+ * 「4万5,897円」は末尾の `5,897` だけが数値として拾われ、data の 45,897 と
+ * 「7.8倍 乖離」と誤検出される。公開済み 388 記事の測定で検出 172 件のうち多数がこれだった。
+ *
+ * 取りこぼしは誤検出だけでなく **検出漏れ**も生む (本当に誤った「4万5,897円」を
+ * 別の数として比較してしまう)。パーサを直さない限りこのチェックは blocker にできない。
+ *
+ * @returns {number|null} 解釈できなければ null
+ */
+export function parseJapaneseNumeral(s) {
+  if (typeof s !== "string") return null;
+  const partRe = /([\d,]+(?:\.\d+)?)\s*(百万|兆|億|万|千)?/g;
+  let total = 0;
+  let sawAny = false;
+  let m;
+  while ((m = partRe.exec(s)) !== null) {
+    if (!m[1]) continue;
+    const n = parseFloat(m[1].replace(/,/g, ""));
+    if (!Number.isFinite(n)) continue;
+    total += n * (m[2] ? JA_SCALE[m[2]] ?? 1 : 1);
+    sawAny = true;
+  }
+  return sawAny ? total : null;
+}
+
+/**
+ * ja スケール接頭/接尾 (兆/億/百万/万/千) を倍率に。無ければ 1。
+ *
+ * ★長い語から順に判定する (2026-07-31 修正)。旧実装は JA_SCALE の宣言順で `includes` して
+ * いたため、`"百万円"` が **`万` に先にマッチして 1e4** を返していた。data 側だけが 100 分の 1 に
+ * 評価され、本文と data が同じ値でも「100.0倍 乖離」と誤検出される (cc-estat 系記事で実発生)。
+ */
+const JA_SCALE_BY_LENGTH = Object.entries(JA_SCALE).sort((a, b) => b[0].length - a[0].length);
+
 function jaScaleMultiplier(token) {
   if (!token) return 1;
-  for (const [k, v] of Object.entries(JA_SCALE)) {
+  for (const [k, v] of JA_SCALE_BY_LENGTH) {
     if (token.includes(k)) return v;
   }
   return 1;
@@ -393,18 +506,75 @@ function factBaseValue(fact) {
  * 本文の value claim を抽出し、data ground truth と突合 (WARN のみ)。
  * @returns {string[]} warnings
  */
+/**
+ * 位置 pos が同一行の括弧 (…) / （…） の内側か。
+ * 行をまたぐ括弧は markdown のリンク記法等と衝突するため見ない。
+ */
+function isInsideParenthesis(body, pos) {
+  const lineStart = body.lastIndexOf("\n", pos - 1) + 1;
+  let lineEnd = body.indexOf("\n", pos);
+  if (lineEnd === -1) lineEnd = body.length;
+  const before = body.slice(lineStart, pos);
+  const after = body.slice(pos, lineEnd);
+  const opens = (before.match(/[（(]/g) || []).length;
+  const closes = (before.match(/[）)]/g) || []).length;
+  if (opens <= closes) return false;
+  return /[）)]/.test(after);
+}
+
+/**
+ * 記事が持つ指標名 (ground truth の label) を集める。
+ * 「この記事が扱っている指標」の集合であり、これに無い指標を本文が語っていたら照合できない。
+ */
+function collectKnownLabels(gt) {
+  const labels = new Set();
+  for (const facts of Object.values(gt)) {
+    for (const f of facts) {
+      if (typeof f.label === "string" && f.label.length >= 2) labels.add(f.label);
+    }
+  }
+  return [...labels];
+}
+
+/** 指標名らしき語 (「緑茶消費支出額」「発電量」「持ち家率」等) */
+const METRIC_PHRASE_RE =
+  /[ぁ-んァ-ヶ一-龥ー]{2,12}(?:消費支出額|消費量|支出額|保有台数|世帯数|生産量|出荷額|年収|月収|所得|収入|単価|価格|残高|貯蓄|人口|面積|件数|台数|日数|時間|率|額|量|数)/g;
+
+/**
+ * claim 直前の文脈が「この記事に ground truth が無い別指標」を語っているか。
+ *
+ * ★なぜ要るか (2026-07-31 実測): 記事は比較のため他指標の数値を引くことがある。
+ * 例 black-tea-income-gap:「ちなみに緑茶消費支出額の全国1位は静岡県(7,664円)」。
+ * 緑茶の値はこの記事の data/ に無いので **検証不能**なのに、同じ次元 (円) の
+ * 紅茶消費支出額 597円 と比較され「771倍 乖離」と誤検出されていた。
+ *
+ * 判定は保守的にする: 直前に指標名らしき語があり、それが記事の既知指標のどれとも
+ * 結び付かないときだけ skip する。「1位の神奈川県は1,780円」のように指標名を伴わない
+ * 通常の文は従来どおり照合する (検出力を落とさない)。
+ */
+function mentionsForeignMetric(lead, knownLabels) {
+  const phrases = lead.match(METRIC_PHRASE_RE);
+  if (!phrases || phrases.length === 0) return false;
+  const phrase = phrases[phrases.length - 1]; // claim に最も近い語
+  return !knownLabels.some((label) => label.includes(phrase) || phrase.includes(label));
+}
+
 export function checkValueClaims(content, gt) {
   const warnings = [];
   if (Object.keys(gt).length === 0) return warnings;
   const body = content.replace(/^---[\s\S]*?\n---\n/, "");
   const prefPattern = PREF_NAMES.join("|");
+  const knownLabels = collectKnownLabels(gt);
 
-  // {pref}(都府県)?{≤20 文字, 句点なし}{数値}{スケール?}{単位実体}
+  // {pref}(都府県)?{≤20 文字, 句点なし}{複合数値}{単位実体}
   // 単位実体は明示的なもののみ (裸の数値・位・年を除外)
   // 単位実体: エネルギー単位 (MWh 等) を bare 単位より先に置き leftmost で取りこぼさない
+  // ★複合数値: 「4万5,897」「1億2,000万」のようにスケールを跨ぐ表記を 1 グループで取る
+  //   (旧実装は末尾の「5,897」だけを拾い、誤検出と検出漏れの両方を生んでいた)
   const claimRe = new RegExp(
     `(${prefPattern})(?:都|府|県)?[^、。\\n]{0,20}?` +
-      `([\\d,]+(?:\\.\\d+)?)\\s*(百万|兆|億|万|千)?\\s*(MWh|kWh|GWh|kW|MW|Wh|円|人|世帯|戸|床|件|台|校|時間|ha|㎡|kg|%|％|社|店)`,
+      `((?:[\\d,]+(?:\\.\\d+)?\\s*(?:百万|兆|億|万|千)?)+)\\s*` +
+      `(MWh|kWh|GWh|kW|MW|Wh|円|人|世帯|戸|床|件|台|校|時間|ha|㎡|kg|%|％|社|店)`,
     "gi",
   );
 
@@ -412,11 +582,10 @@ export function checkValueClaims(content, gt) {
   let m;
   while ((m = claimRe.exec(body)) !== null) {
     const pref = m[1];
-    const numRaw = m[2];
-    const scaleTok = m[3] || "";
-    const unitTail = m[4];
-    const num = parseNumeric(numRaw);
-    if (num === null) continue;
+    const numeralRaw = m[2].trim();
+    const unitTail = m[3];
+    const claimBase = parseJapaneseNumeral(numeralRaw);
+    if (claimBase === null) continue;
 
     // 派生値 (差額/比/当たり/平均/換算 等) は data の絶対 value と一致しない → WARN 対象外。
     // claim 周辺 (matched span + 直前 24 字 + 直後 16 字) に derived/per-capita マーカーがあれば skip。
@@ -428,12 +597,40 @@ export function checkValueClaims(content, gt) {
       DERIVED_VALUE_SKIP.test(valTrail)
     ) continue;
 
+    // この記事に ground truth が無い別指標を語っている箇所は照合できない → skip。
+    // 窓は固定長ではなく **文単位** にする: 「A でも1位(10,098円)、7位の B も2位(9,799円)」のような
+    // 列挙では、2 つ目以降の claim から指標名が固定窓の外に出てしまうため (2026-07-31 実測)。
+    // 文脈は「文頭 〜 数値の直前」。指標名は県名より後ろに来ることがある
+    // (「兵庫県はコーヒー消費支出額でも1位で10,098円」) ため、マッチ範囲の内側も含める。
+    const sentenceStart = Math.max(
+      body.lastIndexOf("。", m.index - 1) + 1,
+      body.lastIndexOf("\n", m.index - 1) + 1,
+      m.index - 200,
+    );
+    const beforeNumeralInMatch = m[0].slice(0, Math.max(0, m[0].lastIndexOf(m[2])));
+    const metricContext = body.slice(sentenceStart, m.index) + beforeNumeralInMatch;
+
+    // 括弧内の数値は照合対象にしない。
+    // 括弧内に現れる数値は実測上ほぼ別指標か派生値であり、data の絶対値と照合できない
+    // (「緑茶…静岡県(7,664円)」「3位秋田県（約3.9ha）」)。照合対象に含めると誤検出を量産する。
+    // (括弧内数値そのものの是非は別問題。ranking ai-content 側にはこれを禁じるルールがあるが、
+    //  blog-quality-standards.md には無い。paren-number-lint.mjs は現時点で計測のみ。)
+    if (isInsideParenthesis(body, m.index + m[0].lastIndexOf(m[2]))) continue;
+
+    // 符号付き (+145.7万円 / −15.8万円) は差分表記 → data の絶対値と一致しないので対象外。
+    // markdown の強調記号は符号判定の邪魔になるので除いてから見る。
+    if (SIGNED_DELTA_RE.test(beforeNumeralInMatch.replace(/[*_`\s]+$/g, "$&").replace(/[*_`]/g, ""))) {
+      continue;
+    }
+
+    if (mentionsForeignMetric(metricContext, knownLabels)) continue;
+
     // 年号らしき値 (1900-2100 で単位が無いケースは上で弾く) はここでは単位付きなので通す
-    const claimBase = num * jaScaleMultiplier(scaleTok);
-    const claimDim = unitDimension(scaleTok + unitTail);
+    // スケールは numeralRaw 側で解釈済みなので、次元は単位実体だけから取る
+    const claimDim = unitDimension(unitTail);
     if (!claimDim) continue;
 
-    const key = `${pref}:${numRaw}:${scaleTok}${unitTail}`;
+    const key = `${pref}:${numeralRaw}:${unitTail}`;
     if (seen.has(key)) continue;
     seen.add(key);
 
@@ -469,7 +666,7 @@ export function checkValueClaims(content, gt) {
         .map((f) => `${f.label || "?"}=${f.value}${f.unit || ""}`)
         .join(" / ");
       warnings.push(
-        `VALUE_MISMATCH (要確認): 本文「${pref}...${numRaw}${scaleTok}${unitTail}」` +
+        `VALUE_MISMATCH (要確認): 本文「${pref}...${numeralRaw}${unitTail}」` +
           ` が data と ${grossest.r.toFixed(1)}倍 乖離 → data: ${dataList}`,
       );
     }

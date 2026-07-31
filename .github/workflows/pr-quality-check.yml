@@ -118,6 +118,21 @@ jobs:
           node .claude/scripts/lib/check-docs-links.cjs --baseline
         continue-on-error: false
 
+      - name: 📝 Blog Quality Gate Self-Test
+        # quality-gate.mjs が守る blog ルール (数値の書き方・SVG 構造/実在/命名・値照合) の
+        # 回帰テスト。ゲート本体ではなく **ゲートが壊れていないこと** を検査する。
+        # 正常データで発火しないことと違反注入で発火することの両方を見る (mutation testing)。
+        # 従来これらは手動実行しか経路が無く、gate が黙って効かなくなっても誰も気づけなかった。
+        # 正典: .claude/rules/blog-quality-standards.md「ルール ↔ 機械チェック 対応表」
+        run: |
+          node .claude/scripts/lib/__tests__/paren-number-lint.test.mjs
+          node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
+          node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
+          # 生成側のゲート (壊れた metric で記事を書き始めないこと・モデル可用性・生成 0 件の扱い)。
+          # API キー不要の純粋関数テストなので PR で毎回回せる。
+          npm run test:ai-content --workspace apps/web
+        continue-on-error: false
+
       - name: 🤖 Agent / Skill Prompt Contract Guard
         # 全custom agentのmodel/Output Contract、全active skillのowner、
         # frontmatter構文、Opus 5過剰検証文言、subagent上限と共通契約参照を決定的に検査する。
@@ -219,6 +234,16 @@ jobs:
         run: |
           node .claude/scripts/lib/check-maintenance-debt.cjs --baseline
           node .claude/scripts/lib/check-maintenance-debt.cjs --ratchet-check
+        continue-on-error: false
+
+      - name: 🔢 Value Formatting Guard
+        # 観測値の桁揃えが共有規約 (@stats47/utils の resolveValuePrecision +
+        # formatValueWithPrecision) を迂回していないかを検査する。max 単独指定・素の
+        # toLocaleString は同じ図の中で「60.4」と「44」を混在させる (2026-07-31 実発生)。
+        # 既存違反は baseline に固定し、新規混入だけを止める (baseline は縮小専用)。
+        run: |
+          node .claude/scripts/lib/check-value-format.cjs --baseline
+          node .claude/scripts/lib/check-value-format.cjs --ratchet-check
         continue-on-error: false
 
       - name: 🔗 github-script await Guard

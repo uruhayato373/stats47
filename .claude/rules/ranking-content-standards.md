@@ -123,7 +123,38 @@ outbox は**フラットな `<rankingKey>.json`** でなければならない (w
   **ゲートを緩めて通すことは絶対にしない** (品質ではなく実行時間で払う)。落ち率はモデルを変えたら
   必ず実測する (10 件パイロット → blocker 内訳を確認 → 落ち率が高ければプロンプト側を直す)。
 
-### 全件量産の日次ループ (Gemini・トークン消費ゼロ・2026-07-30 新設)
+### ★2026-07-31: 生成を Claude セッションへ戻した (Gemini テキスト経路は撤去)
+
+**GitHub Actions の中で LLM を呼ぶ形は、Claude でも Gemini でも別課金になる。** Max サブスクの
+範囲で回すには生成を Claude セッション側に置く必要があるため、Gemini テキスト経路
+(`gemini-text-client` / `model-preflight` / `preflight-gemini` / `--model gemini-api` /
+`ai-content-preflight.yml`) を**撤去**した。画像生成 (`gemini-image-client`) は別経路なので残す。
+
+| 経路 | 課金 |
+|---|---|
+| Claude Code セッション (対話 / Routine が起こす新セッション) | **Max サブスク内** |
+| Anthropic API キーを Actions から叩く (`claude-code-action` 等) | API 従量課金 (サブスク外) |
+| Gemini API | Google の従量課金 |
+
+**新しい形**: 決定的で無料な工程 (キュー再構築・接地・データ健全性ゲート・SVG・prompt 構築) は
+CI が担い、「書く」工程だけを Claude セッションが担う。既存記事の是正
+(`blog-remediation-loop.md`) は元からこの型なので、新規生成をそれに揃えた形になる。
+
+```
+CI (無料)                          Claude セッション (サブスク内)
+  キュー再構築                  →   /generate-ai-content (agent: ranking-content-author)
+  今日の対象を Issue で提示           ↓ 決定的ゲート audit-ai-content.mjs
+  ↑                                  ↓ critic (別コンテキスト)
+  outbox を push → publish 起動  ←   outbox へ書き出し
+```
+
+日次件数は**控えめに始めて実測**する (初回 ai-content 10 件 / blog 1 本)。サブスクの利用上限が
+制約になるため、実際の消費を測ってから増やす。**旧 40 件/日は Gemini 前提の根拠なき暫定値**で、
+そのまま引き継がない。
+
+以下は撤去前の Gemini 運用の記録 (経緯として保持する)。
+
+### (撤去済) 全件量産の日次ループ (Gemini・2026-07-30〜2026-07-31)
 
 Claude のトークンを使わず全 active ranking (実測 2,179 件) を完成させるための無人ループ。
 **`.github/workflows/ai-content-generate-daily.yml`** (JST 03:00) が以下を回す:
@@ -148,9 +179,67 @@ push トリガーは**発火しない**。初めて生成が成功した回に 2
 | 生成 | `--model gemini-api` (`packages/ai-content/src/services/gemini-text-client.ts`)。**CLI 非依存**。CLI (`--model gemini`) は認証・バージョンが実行環境に依存するため CI では使わない |
 | 認証 | `GEMINI_API_KEY` (GitHub Secrets 専任。画像生成と共用) |
 | **モデル** | 既定は `gemini-text-client.ts` の `GEMINI_TEXT_MODEL`。**リポジトリ変数 `GEMINI_TEXT_MODEL` で上書きできる** (提供終了時にコード変更 + デプロイを待たず復旧するため) |
-| 件数上限 | 既定 40 = `publish-ai-content.yml` の `MAX_PUBLISH` と同数。超過分は次回に繰り越す |
+| 件数上限 | 既定 40 = `publish-ai-content.yml` の `MAX_PUBLISH` と同数。超過分は次回に繰り越す。**★この 40 はクォータ実測に基づいていない** (下記) |
 | 失敗の扱い | 429/5xx/timeout は client がバックオフ再試行 (429 は 15s 起点)、`truncated`/4xx は再試行しない |
 | 費用 | flash 系に無料 tier があるが、**キーが有料課金に紐づく場合は 1 件あたり入力 ~5K / 出力 ~8K トークン相当が課金される**。件数で管理する |
+
+#### ★件数はクォータ実測で決める (2026-07-31 に矛盾が判明)
+
+**既定 40 件/日はクォータを測らずに置いた数字で、成り立つ保証がない。**
+
+実測: 01:58 UTC の dispatch で 10 件生成に成功した後、**3 時間後の 04:56 / 05:15 UTC に
+preflight が 429** で落ちた。1 日 10 件強で枯れているなら 40 件は成立しない。ブログ生成
+(1 記事 = 本文 + critic の 2 回) も同じキーを共有するので、先に走った方が後を枯らす。
+
+原因を切り分けられなかったのは、client が **429 の本文を丸ごと読み捨てていた**ため。
+安全のため本文をログに出さない規律は正しいが、そのせいで「分あたりで詰まったのか、
+日あたりを使い切ったのか」「上限がいくつか」が一切見えなかった。
+
+→ `extractQuotaDetails` を追加し、**構造化された 3 項目だけ**を取り出して preflight が出す
+(`quotaMetric` / `quotaValue` / `retryDelay`)。自由文もキーも触らない。次の 429 で実測値が出る。
+
+**実測が出るまで件数を上げない。** 40 と 2 は暫定値で、`quotaValue` を見てから
+「ai-content と blog の合計が 1 日の上限に収まる」ように配分し直す。
+
+#### ★429 には対処が正反対の 2 種が同居する (2026-07-31 に本文を実測)
+
+本文を出して分かったのは、**この 429 はレート制限ではなかった**ということ:
+
+```json
+{ "error": { "code": 429, "status": "RESOURCE_EXHAUSTED",
+  "message": "Your prepayment credits are depleted. Please go to AI Studio ... billing." } }
+```
+
+| 429 の種類 | 意味 | 正しい対処 | 誤った対処 |
+|---|---|---|---|
+| レート制限 (RPM/RPD) | いま混んでいる | 時間をおいて再実行 | — |
+| **前払いクレジット枯渇** | **課金が尽きた** | **人がクレジットを補充する** | 待つ / モデルを変える (どちらも効かない) |
+
+`error.details` が無いので `extractQuotaDetails` が undefined を返したのは**パーサの不具合ではない**。
+Google はこのクラスで構造化 quota を返さず、判別材料は `error.message` の自由文しかない。
+
+- クライアントは `isBillingExhausted` で 429 を 2 分し、`billing` は **再試行しない**
+  (人が補充するまで同じ 429 が返るので、15s→30s→60s の待ちは純粋な浪費)。
+- preflight も分けて案内する。分ける前は「時間をおいて再実行」「lite 系候補で回避できる」と
+  出していたが、**課金はプロジェクト単位なのでモデルを変えても同じ 429 が返る**。効かない回避策を
+  出さないことをテストで固定した。
+- 判定は狭く取る (`credits are depleted` 等)。`billing` の語だけで見るとレート制限本文の
+  「billing を有効にすると上限が上がる」案内で誤爆する。迷ったら rate-limit のままにする。
+
+**preflight の終了コードで「壊れている」と「判定できなかった」を分ける**:
+
+| exit | 意味 | PR gate (`ai-content-preflight.yml`) | 日次 cron |
+|---|---|---|---|
+| 0 | モデルが使える | pass | 生成へ進む |
+| 1 | **モデルが使えない** (提供終了・権限) | **fail** (この gate の本来の目的) | 停止 |
+| 3 | **判定不能** (クレジット枯渇・レート制限) | warning で pass | 停止 (生成できないので) |
+
+exit 3 で PR を止めると、モデルが健全でも課金が尽きている間は該当ファイルに触る PR が
+すべて通らなくなる。**モデルまで到達していないのに「モデルが壊れている」と報告するのは、
+合格を装うのと同じくらい誤り**なので、判定不能は判定不能として出す (止めるかは呼び出し側が決める)。
+
+**したがって「1 日何件回せるか」はまだ実測できていない。** クレジット補充後に初めて
+`quotaValue` が観測できる。40 / 2 は依然として根拠のない暫定値。
 
 #### ★モデル提供終了と silent green の再発防止 (2026-07-30 の障害)
 
@@ -222,7 +311,8 @@ node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 40 
 - 戦略・KPI: `docs/00_プロジェクト管理/03_マーケティング戦略.md`（T1〜T4・SEO品質レバー）
 - ai-content 是正キュー: memory `project_ai_content_remediation_queue` / `.claude/scripts/ranking/build-ai-content-queue.mjs`
 - 決定的ゲート: `.claude/scripts/ranking/audit-ai-content.mjs`
-- モデル preflight: `packages/ai-content/src/scripts/preflight-gemini.ts` + `src/services/model-preflight.ts` / 生成 0 件ゲート: `src/services/generation-outcome.ts` (いずれも `src/services/__tests__/` にテスト)
+- 生成 0 件ゲート: `packages/ai-content/src/services/generation-outcome.ts` (`src/services/__tests__/` にテスト)
+- セッション側の入口: skill `/generate-ai-content` (agent: `ranking-content-author`) / prompt 取得: `build-input.ts --prompt-only`
 - 公開: `.github/workflows/publish-ai-content.yml` (自動化インベントリ参照)
 - agent: `ranking-content-author` (生成) / `ranking-content-critic` (審査) / `ranking-publisher` (公開) / `ranking-ui-manager` (UI)
 - 関連 rule: `.claude/rules/metric-config-standards.md` (title/seoTitle) / `blog-quality-standards.md` (ですます調・archetype A) / `evidence-based-judgment.md`

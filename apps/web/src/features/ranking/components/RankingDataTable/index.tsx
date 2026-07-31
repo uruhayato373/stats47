@@ -19,6 +19,11 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
 
+import {
+  formatRankingValue,
+  resolveRankingPrecision,
+} from "../../utils/compute-ranking-header-stats";
+
 import type { StatsSchema } from "@stats47/types";
 
 
@@ -90,6 +95,16 @@ export function RankingDataTable({
   }, [rankingValues, statistics]);
 
   // カラム定義
+  // 桁数は 47 県の値から 1 度だけ決める。値ごとに整形すると 60.4 と 44 が混ざり、
+  // ヘッダー (formatRankingValue) とも食い違う (旧実装で実際に起きていた)
+  const precision = useMemo(
+    () =>
+      resolveRankingPrecision(
+        processedData.map((d) => d.value).filter((v): v is number => v !== null),
+      ),
+    [processedData],
+  );
+
   const columns = useMemo<ColumnDef<RankingDataRow>[]>(
     () => [
       {
@@ -128,7 +143,7 @@ export function RankingDataTable({
           const unit = rankingItem?.unit || processedData[0]?.unit || "";
           return (
             <div className="text-right font-mono whitespace-nowrap">
-              {row.getValue<number>("value").toLocaleString("ja-JP")}
+              {formatRankingValue(row.getValue<number>("value"), precision)}
               {unit && (
                 <span className="text-xs text-muted-foreground ml-1">{unit}</span>
               )}
@@ -150,7 +165,7 @@ export function RankingDataTable({
         },
       },
     ],
-    [rankingItem, processedData]
+    [rankingItem, processedData, precision]
   );
 
   if (!rankingValues || processedData.length === 0) {

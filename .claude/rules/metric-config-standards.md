@@ -111,6 +111,48 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 内陸 8 県と完全一致しており、素朴な「47 県必須」は `port-*` / `fishery-*` 系 15 件を誤検知する。
 誤検知を出すゲートは運用で無効化されるので、確実に欠陥と言えるものだけを error にする。
 
+### 「config は直ったのに配信が古い」を検出する (★2026-07-31 追加)
+
+上の 3 層はどれも **「いま R2 にあるデータが壊れている」** しか言わない。config を是正しても
+**再取り込みが走らなければ配信は古いまま**で、その状態を指す仕組みが無かった。
+
+実例: `convenience-store-count-commercial` は 2026-07-30 の commit `aa5f7c37` で config を是正し、
+e-Stat を実際に叩いて 47県×1行になることまで確認済みだった。にもかかわらず R2 は
+**94 行 (重複 47 県・値域 -1.7〜7233)** のままで、負の値は店舗数ではなく増減率の系列だった。
+allowlist の `until: 2026-12-31` まで誰も催促せず、`MAX_KNOWN_BROKEN` のラチェットも
+「増やさない」だけで減らす圧力が無い。
+
+検査 (k) (レシピ整合) が同じ乖離を狙う設計だが、**レシピ導入 (2026-07-30) 以前の payload は
+`meta.recipe` を持たず `unbaked` (違反ではなく残数) に落ちるため発火しない**。全面再生成が
+終わるまでこの空白が残る。
+
+`packages/data-configs/scripts/audit-reingest-queue.ts` が recipe に依存せず、
+**git の config 更新日** と **R2 の `meta.generatedAt`** の前後だけで判定する:
+
+| verdict | 意味 | 直し方 |
+|---|---|---|
+| `stale-delivery` | config の方が新しい = 再取り込みで直る | `page-data-batch.ts --metric <key>` |
+| `config-insufficient` | データの方が新しい = 是正後に取り込んでもこの形 | `diagnose-unpinned-axes.ts --fetch` で軸を診断 |
+| `unknown` | どちらかの日付が取れず判定不能 | — |
+
+同時刻は `config-insufficient` に倒す。「直したのに古い」と誤報して無駄な再取り込みを促すより、
+「まだ壊れている」と報告して調査を促す方が安全なため。
+
+**対象は allowlist の `known-broken` に限る。全 metric に広げてはいけない** — 一度 2,295 件全部で
+実測したら **2,063 件 (90%)** が stale-delivery になった。一括コミットが全 config ファイルに触れるため、
+git の更新日では「クエリが変わった」と「ただ触った (整形・registry 再生成)」を区別できない。
+90% が該当するキューは優先度を示さない。この区別は本来 `configHash` の仕事で、検査(k) が担う
+(全面再生成後に有効になる)。壊れていると分かっている集団の中でだけ、config への編集は
+ほぼ確実に是正なので日付が意味を持つ。
+
+初回実測 (2026-07-31): known-broken 14 件のうち **stale-delivery 2 / config-insufficient 12**。
+後者は率系で、`aa5f7c37` 自身が「率系 4 は単一セルでは取れず calculation の設計が要る」と
+書いている残件と一致する。
+
+週次 `ranking-integrity-audit-weekly.yml` に **縮小専用ラチェット**で配線済み
+(`--ratchet`: 前回より増えたときだけ失敗する)。0 件でなければ失敗にすると恒久的に赤くなり
+無視されるため、増加を止めて減る方へ向ける。state は `.claude/state/data/{reingest-queue.json,LATEST.md}`。
+
 ### 既知の壊れは期限つきで登録する
 
 `packages/data-configs/src/expected-shape-anomaly.ts` は

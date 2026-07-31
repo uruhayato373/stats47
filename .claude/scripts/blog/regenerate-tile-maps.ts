@@ -2,8 +2,9 @@
 /**
  * regenerate-tile-maps.ts
  *
- * 公開済みブログ記事のタイルマップ(choropleth)を統一デザイン(600×700・白文字+縁取り・
- * タイトル左上)で一括再生成するオーケストレータ。
+ * 公開済みブログ記事のタイルマップ(choropleth)を現行デザインで一括再生成するオーケストレータ。
+ * デザインの正典は svg-builder の `generateChoroplethSvg` (本スクリプトは寸法や配色を持たない)。
+ * 不変量は `lintTileGridQuality` が公開前にブロックする → `.claude/rules/blog-svg-chart-standards.md` §6-2。
  *
  * ## データ取得ルール (SSOT・捏造禁止)
  *   データ源は SSOT = R2 `app/ranking/<key>/values.json`(metric config → e-Stat → R2 派生)。

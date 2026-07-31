@@ -121,7 +121,7 @@ export function lintSvgContent(content, filename) {
 // 統一済みカタログ (ENFORCED) = error / 未統一 = warning (統一完了後 error に昇格)。
 const CANONICAL_WIDTH = {
   bar: [960, 680],          // columns 960 (標準) / single 680。760/720/600 等の旧サイズは違反
-  "tile-grid": [780],       // 780×560 (2026-07-29 に 600×700 から変更。lintTileGridQuality 参照)
+  "tile-grid": [720],       // 720×720 (2026-07-31 に 780×560 から変更。lintTileGridQuality 参照)
   summary: [960],           // findings card 幅 960 (高さ可変)
   line: [680],              // 680×420
   scatter: [960],           // 960×624
@@ -223,7 +223,7 @@ export function lintChoroplethLegend(filename, svgContent, jsonData) {
 
 // ---------- tile-grid の品質不変量 (2026-07-29) ----------
 /** タイルマップの正規キャンバス。blog-svg-chart-standards.md §5 と choropleth.ts が正典。 */
-export const TILE_GRID_CANVAS = { w: 780, h: 560 };
+export const TILE_GRID_CANVAS = { w: 720, h: 720 };
 
 /**
  * タイルマップ (choropleth) が現行デザインの不変量を満たすか検査する。
@@ -233,8 +233,10 @@ export const TILE_GRID_CANVAS = { w: 780, h: 560 };
  *
  * 検査する不変量と、それぞれの理由:
  *
- * 1. **キャンバス 780×560** — 記事では 672px 幅の `<img>` になるため、画面上の高さは
- *    `672 × H/W` で決まる。旧 600×700 は 784px となり記事を占有していた。
+ * 1. **キャンバス 720×720 (正方形)** — タイル格子は 14列×16行の縦長なので、キャンバスが
+ *    正方形以上に横長である限り**地図の大きさはキャンバスの高さだけで決まる**。旧 780×560 は
+ *    左に 268px のテキストカラムを確保していたが、それは地図を狭めておらず余った幅を
+ *    埋めていただけだった (実測)。正方形にしてタイルを 30px→39px に拡大した。
  * 2. **背景を敷かない** — 不透明な地色があるとページの地色と食い違う。透過ならライトでも
  *    ダークでも記事に馴染む。
  * 3. **`prefers-color-scheme` を使わない** — サイトのテーマは next-themes の class 方式で
@@ -242,8 +244,9 @@ export const TILE_GRID_CANVAS = { w: 780, h: 560 };
  *    **OS ダーク + サイトライト**で SVG だけ反転する。`<img>` 内から親の class は見えないため、
  *    テーマ非依存の配色にするのが唯一の正解。
  * 4. **`svg-*` テーマ class を使わない** — 3 と同じ理由。`svgThemeStyle()` は tile-grid では使わない。
- * 5. **凡例が右下** — 左上は上位/下位リストが占めるため。
- * 6. **上位/下位リストがある** — 左カラムの空白を埋め、地図だけでは読み取れない実数値を出す。
+ * 5. **凡例が右下** — 左上は上位 3 県が占めるため。
+ * 6. **上位 3 県のリストがある** — 左上の空きを埋め、地図だけでは読み取れない実数値を出す。
+ *    下位は出さない (2026-07-31 オーナー判断。6 行入れると地図の東北ブロックに掛かる)。
  *
  * @param {string} filename - SVG ファイル名 (chartType 推定)
  * @param {string} svgContent - SVG 文字列
@@ -310,11 +313,22 @@ export function lintTileGridQuality(filename, svgContent, jsonData) {
     }
   }
 
-  // 6. 上位/下位リスト (タイルが 3 件以上あるときのみ要求)
+  // 6. 上位 3 県のリスト (タイルが 3 件以上あるときのみ要求)
+  //    旧デザインは「高い順 / 低い順」の見出しを持っていた。現行は見出しを持たず
+  //    「1. 宮崎県」の形で並べるので、その形を探す。
   const tileCount = (svg.match(/<rect [^>]*rx="3"[^>]*fill="(?:rgb\(|#)/g) || []).length;
-  const hasRankList = /高い順/.test(svg) && /低い順/.test(svg);
-  if (tileCount >= 3 && !hasRankList) {
-    warnings.push("上位/下位リストが見つからない — 旧デザインの可能性。svg-builder で再生成して統一する");
+  const rankRows = (svg.match(/>[1-3]\.\s/g) || []).length;
+  if (tileCount >= 3 && rankRows < 3) {
+    warnings.push(
+      "上位 3 県のリストが見つからない — 旧デザインの可能性。svg-builder で再生成して統一する",
+    );
+  }
+  // 旧デザインの残存を積極的に検出する (見出しが残っていれば確実に旧版)
+  if (/高い順|低い順|多い順/.test(svg)) {
+    errors.push(
+      "旧デザインの見出し (高い順/低い順/多い順) が残っている — 現行は見出しを持たず" +
+        " 上位 3 県のみを「1. 県名」の形で出す。svg-builder で再生成する",
+    );
   }
   return { errors, warnings };
 }

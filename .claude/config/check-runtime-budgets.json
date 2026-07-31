@@ -11,6 +11,7 @@
     { "name": "accessibility-static", "budgetMs": 10000, "command": ["node", ".claude/scripts/lib/check-accessibility-static.cjs", "--baseline"] },
     { "name": "maintenance-debt", "budgetMs": 10000, "command": ["node", ".claude/scripts/lib/check-maintenance-debt.cjs", "--baseline"] },
     { "name": "github-script-await", "budgetMs": 3000, "command": ["node", ".claude/scripts/lib/check-github-script-await.cjs"] },
-    { "name": "ad-placement", "budgetMs": 5000, "command": ["node", ".claude/scripts/lib/check-ad-placement.cjs"] }
+    { "name": "ad-placement", "budgetMs": 5000, "command": ["node", ".claude/scripts/lib/check-ad-placement.cjs"] },
+    { "name": "value-format", "budgetMs": 5000, "command": ["node", ".claude/scripts/lib/check-value-format.cjs", "--baseline"] }
   ]
 }

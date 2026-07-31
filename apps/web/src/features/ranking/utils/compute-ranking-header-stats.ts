@@ -1,3 +1,5 @@
+import { formatValueWithPrecision } from "@stats47/utils";
+
 import type { RankingValue } from "@stats47/ranking";
 
 /** ヘッダーに出す 1 件分 (上位 3 件 / 最下位) */
@@ -64,10 +66,26 @@ export function computeRankingHeaderStats(
 /**
  * ヘッダーの数値表記。
  *
- * RankingDataTable と同じ `toLocaleString("ja-JP")` 系に揃える。旧 formatStatValue の
- * 億/万丸めは 56px の巨大数値があってこそ意味があったもので、表とヘッダーで別の数字が
- * 見えるほうが害が大きい。
+ * ## 桁数はデータセット単位で揃える (2026-07-31)
+ *
+ * 旧実装は `maximumFractionDigits: 1` の決め打ちで、**RankingDataTable の
+ * `toLocaleString("ja-JP")` (上限なし) と食い違っていた** — 60.42 が表では「60.42」、
+ * ヘッダーでは「60.4」と表示されていた (コメントは「揃えた」と書いてあったが揃っていない)。
+ *
+ * 桁数は 1 つの値では決まらずデータセット全体で決まる。呼び元が
+ * `getMaxDecimalPlaces(values)` で 1 度解決し、表・ヘッダー・チャートへ同じ値を渡す。
+ * これは `@stats47/utils` の確立した組で、Remotion / visualization / svg-builder も使う。
+ *
+ * @param precision 小数桁。省略時は 1 (旧挙動。**新規の呼び出しでは必ず渡す**)
  */
-export function formatRankingValue(value: number): string {
-  return value.toLocaleString("ja-JP", { maximumFractionDigits: 1 });
+export function formatRankingValue(value: number, precision = 1): string {
+  return formatValueWithPrecision(value, precision);
 }
+
+/**
+ * 表示に使う小数桁を 47 県の観測値から決める。
+ *
+ * 実体は `@stats47/utils` (svg-builder のチャートと同じ実装)。桁揃えを共通化する
+ * 作業なので、ここに別実装を置かない。
+ */
+export { resolveValuePrecision as resolveRankingPrecision } from "@stats47/utils";

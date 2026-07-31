@@ -143,6 +143,37 @@ date: YYYY-MM-DD
 - **執筆 agent (article-writer) は最初から ですます調で書く**。brushup で既存の である調記事を是正する場合は全文を ですます に変換する (数値・構造・チャート・リンクは変えない)。
 - **★copula だけの機械置換は禁止 (2026-06-13 実証)**: `である。/だ。/だった。/ではない。` 等の copula 文末だけを正規表現で一括置換すると、**動詞終止形・形容詞終止 (〜もたらす。/〜連なる。/〜多い。) が常体のまま残り、「です。」と混在して文体が崩壊する**。`quality-gate.mjs` は copula しか検出しないため **gate は通ってしまい崩壊に気づけない**。である調記事の是正は必ず **article-writer agent で文単位に ですます完全化**する (機械の正規表現スクリプトで一括処理してはならない)。残った混在は blog-critic が MAJOR で弾く。
 
+## 数値の書き方 (★2026-07-31 確定・決定的 gate)
+
+数値は記事の信頼性そのものなので、**機械が照合できる形で書く**。以下は書き方の制約であり、
+守れば `quality-gate.mjs` の factual-check が本文の数値を data/*.json と自動突合できる。
+守らないと検証不能な数値が本文に残り、捏造を機械では止められない。
+
+### 都道府県名の直後の括弧に値・順位を書かない (blocker)
+
+```
+❌ 愛知県（746.0万人）が4位となっている
+❌ 石川県（2.5人、31位）は全国平均を下回ります
+✅ 愛知県は746.0万人で4位となっています
+✅ 石川県は2.5人で31位、全国平均を下回ります
+```
+
+- **なぜ**: 括弧内の数値は文脈が閉じており、記事の主指標なのか別指標・派生値なのかが機械には判別できない。
+  実測でも括弧内はほぼ別指標か派生値だったため、factual-check は**括弧内を照合対象から外している**。
+  つまり括弧に入れた瞬間その数値は誰にも検証されなくなる。散文に開けば照合対象に入る。
+- **例外 (gate も許容)**: 年次 `(2020年度)` `(令和5年)` / 出典・注記 `(出典: …)` `(※ …)` /
+  単位・対象の限定 `(人口10万人当たり)` `(2人以上の世帯)` — これらは**値の挿入ではない**ので対象外。
+- **検査**: `paren-number-lint.mjs` (`lintParenNumbers`)。判定は ai-content 側の
+  `audit-ai-content.mjs` と同じ許容規則に揃える (blog と ranking で二重基準を作らない)。
+- **既存負債**: 2026-07-31 実測で公開済み 424 記事の **79.5% (4,671 箇所)** が該当。既存記事は
+  brushup で順次是正する (是正キューが blocker として拾う)。**新規記事は最初からこの形で書く**。
+
+### 複合スケールの数値は表記を混ぜない
+
+`4万5,897円` のようにスケールを跨いだ表記も、`45,897円` の表記も許容する
+(factual-check の `parseJapaneseNumeral` が両方を同じ値として解釈する)。ただし
+**同一記事内では表記を統一する** (読者が桁を読み違える)。gate では検出せず critic が見る。
+
 ## 推奨パターン (本文)
 
 ### コール アウトの活用
@@ -482,6 +513,131 @@ BLOG-CTR-03 / 04 で 10 記事を curiosity gap 改修:
 | **合計 (Top 10)** | **6,806** | 1.31% | 3.4% | **+131 clicks/週 (+645/月)** |
 
 4 週後 (2026-06-20) に GSC snapshot で検証。実測 CTR が想定の 70% 以上なら本パターンは effect/full 確定。
+
+## 新規記事の無人生成パイプライン (★2026-07-31 新設)
+
+Claude のトークンを使わず、Gemini API + 決定的ゲートだけで新規記事を書いて公開まで届ける。
+ranking ai-content の日次ループ (`ranking-content-standards.md` §全件量産の日次ループ) と同じ形。
+
+```
+topic-queue (何を書くか)
+  → R2 観測値を接地 (fetch-ranking-data-r2.mjs --with-map)
+  → ★データ健全性ゲート (blog-topic-gate) — 壊れた metric の記事は書かない
+  → SVG 生成 (generate-article-charts.ts。ランキング + タイルマップの 2 枚)
+  → 本文生成 (Gemini) → quality-gate → 落ちたら指摘を添えて再試行
+  → ★critic (別コンテキストの Gemini。記事本文だけを渡す) → review.md
+  → published:true → 最終ゲート → docs/21 outbox → develop push
+  → blog-auto-publish.yml を dispatch → factual/quality 再検証 → R2 公開
+```
+
+| 要素 | 実装 |
+|---|---|
+| 生成 | `packages/ai-content/src/scripts/generate-blog-article.ts` |
+| prompt | `packages/ai-content/src/services/prompts/blog-article-prompt.ts` (本文 + critic) |
+| データ健全性ゲート | `packages/ai-content/src/services/blog-topic-gate.ts` (+ `__tests__/`) |
+| 日次 cron | `.github/workflows/blog-generate-daily.yml` (JST 04:30) |
+
+### データ健全性ゲートが生成の**前**に要る理由
+
+quality-gate は「本文の数値が data/*.json と一致するか」しか見ないので、**その data 自体が
+壊れていれば一致してしまう**。壊れた観測値から書き始めると捏造記事を量産する。
+
+実例 (2026-07-31 に topic-queue 上位で実際に踏んだ): `convenience-store-count-commercial` は
+分類軸の絞り忘れで 94 行 (47県 × 2系列) あり、下位が「-1.7 店」という負の増減率だった。
+判定は取り込み側・週次監査と同じ `findExpectedShapeAnomaly` を使い、加えて接地した行そのもの
+(県の重複・件数・非有限値・全件同値) を見る。**「47 県でなければ違反」にはしない** — 港湾・
+漁港系は内陸県が対象外で 40 県台が正常なので、誤検知を出すゲートは運用で無効化される。
+
+### critic を同じモデルにしてよいのか
+
+本ファイルが禁じているのは「**書いた本人が自己採点して公開する**」ことなので、critic には
+**記事本文だけ**を渡し、ground truth も型の指示も再試行履歴も渡さない。文脈が違えば同じモデルでも
+独立した読者として読める。人間 (または別 agent) のレビューより弱いのは事実なので、公開後の
+GSC 実測と是正ループ (`blog-remediation-loop.md`) で品質を上げる。
+
+### 型ごとの図の構成
+
+| 型 | 図 | 接地 |
+|---|---|---|
+| A / C / D / D2 / F / G | ランキング + タイルマップ (2 枚) | `fetch-ranking-data-r2.mjs --with-map` |
+| **B (相関)** | 指標A ランキング + 指標B ランキング + **散布図** (3 枚) | 上記 + `fetch-correlation-scatter.mjs` |
+
+型B に散布図が要るのは、2 指標の関係を論じる記事に主指標だけの図を貼っても問いに答えられない
+から (2026-07-31 に dry-run で実際にその形になることを確認し、散布図の接地を通してから解禁した)。
+相関 snapshot にペアが無ければその記事は成立しないので skip する。**第2指標もデータ健全性ゲートを
+通す**。カードは 1 枚だけ (dup-ranking-link を避ける) なので、第2指標へはテキストリンクで導線を作る。
+
+### 起動経路 (cloud セッションからも回せる)
+
+`blog-generate-daily.yml` は 3 経路で発火する。
+
+| 経路 | 用途 |
+|---|---|
+| schedule (JST 04:30) | 無人の日次ループ |
+| **push `data/blog-generate-requests.json`** | **cloud セッション用**。`{ "limit": 1, "dryRun": false, "keepDraft": true, "requestedAt": "<ISO>" }` を develop へ commit すると実行し、request を git rm で commit-back する |
+| workflow_dispatch | ローカルからの手動 |
+
+**再投入するときは `requestedAt` を必ず更新する。** paths フィルタは差分で判定するので、同じ内容を
+書き直しても diff が出ず発火しない (2026-07-31 に実際に踏んだ)。request は**結果によらず消費される**
+(失敗した run が残すと、同じ内容では再実行できなくなるため)。
+
+push 経路が要るのは、**cloud セッションが `actions:write` を持たず workflow_dispatch できない (403)**
+ため。`data-refresh.yml` / `gemini-image-run.yml` と同じ方式で、`ai-content-generate-daily.yml` にも
+同型の口 (`data/ai-content-generate-requests.json`) を用意した。これが無いと cloud からは cron を
+待つしかなく、実生成を検証できない (2026-07-31 に実際に詰まった)。
+
+### 件数は実測してから増やす
+
+既定 `limit: 2`。1 記事あたり本文生成 + critic の 2 回 Gemini を呼ぶ。公開された記事の品質を
+GSC と critic の指摘で確認してから増やす (ai-content の 40 件と同列に扱わない)。
+
+## ルール ↔ 機械チェック 対応表 (★2026-07-31 棚卸し・ゲート設計の SSOT)
+
+「どのルールが決定的に守られ、どれが critic の意味判断に委ねられているか」を 1 箇所で見えるようにする。
+**ルールを追加したらこの表に行を足し、gate に配線するか「critic 判断」と明記する。**
+配線せず表にも書かないルールは、書いた翌日から誰にも守られない。
+
+| ルール | 検査 | tier | 実装 |
+|---|---|---|---|
+| タイトル: 事実羅列型 NG (「N位」で終わる等) | 機械 | blocker | `NG_PATTERNS` |
+| タイトル: 扇情語 (驚愕/衝撃/ヤバい/最大級) | 機械 | blocker | `NG_PATTERNS` |
+| タイトル: 短く (~17字) / gap 要素 1 個 | **critic** | — | 実測 75.5% / 36.6% 該当で gate 不可。目標であり禁止ではない |
+| description: 50字以上 + frontmatter 必須 | 機械 | blocker | `hasDescription` / `hasSeoTitle` |
+| description: 緊張感セットアップの質 | **critic** | — | — |
+| 文体: ですます調 (copula である調) | 機械 | blocker | `countDearuEndings` |
+| 文体: 動詞終止形の常体混在 | **critic** | — | 誤検出を避け gate では見ない |
+| **数値: 県名直後の括弧に値・順位を書かない** | 機械 | blocker | `lintParenNumbers` |
+| 数値: 本文の値が data/*.json と一致 | 機械 | warn/blocker | `checkArticleFactual` |
+| 数値: rank 主張があるのに ground truth 無し | 機械 | blocker | `rankClaimCount` gate |
+| callout 2 個以上 / 3 個推奨 | 機械 | blocker/warn | `countCallouts` |
+| callout の中身が定型でない | **critic** | — | 数は数えられるが情報量は測れない |
+| H2 4 個以上 | 機械 | blocker | `getH2Count` |
+| prose 1600字 (床) / 2400字 (推奨) | 機械 | blocker/warn | `getCharCount` |
+| 図あたり prose 350字 (床) / 550字 | 機械 | blocker/warn | `prosePerChart` |
+| markdown 表の全面禁止 | 機械 | blocker | `countMarkdownTables` |
+| chart-placeholder / インライン svg / 記事内「関連」見出し | 機械 | blocker | 正規表現 |
+| 内部リンク 3 本以上 | 機械 | blocker | `countInternalLinks` |
+| 内部リンクの実在 (soft 404 含む) | 機械 | blocker | `lintInternalLinks` |
+| source-link: 図直下1枚 / 末尾集約・重複・隣接・図なし節 禁止 | 機械 | blocker | `lintSourceLinkPlacement` |
+| **SVG: 参照先が実在する (画像切れ)** | 機械 | blocker | `missingSvgFiles` |
+| SVG: 3点セット (.json + .source.json) | 機械 | blocker | 系譜 gate |
+| **SVG: 構造 (viewBox/width/height/閉じタグ/未解決テンプレート値)** | 機械 | blocker | `lintSvgContent` |
+| SVG: dark mode 非対応 / theme 色 inline | 機械 | warn | `lintSvgContent` (140枚該当・再生成で解消) |
+| SVG: カタログ別 正規サイズ | 機械 | blocker | `lintSvgSize` |
+| SVG: choropleth 凡例 / findings パリティ / tile-grid 不変量 | 機械 | blocker | `lintChoroplethLegend` 他 |
+| **SVG: 型を判別できる basename (`chart-1` 禁止)** | 機械 | blocker | `MEANINGLESS_BASENAME_RE` |
+| SVG: canonical suffix 命名 (`-ranking` 等) の全面遵守 | **critic** | — | 既存負債 14.9%。`-quintile` 等の正当名を巻き込むため gate 不可 |
+| 記事アーキタイプ (A/B/C/D/D2/E/F/G) の必須分析視点 | **critic** | — | 型は宣言できるが「視点を満たしたか」は意味判断 |
+| 読者価値・冗長・図表重複・curiosity gap の真正性 | **critic** | — | review.md verdict PASS が公開の必須条件 |
+| critic レビュー通過 (review.md PASS) | 機械 | blocker | `hasCriticPass` |
+
+**ゲートを足す前に必ずコーパスで該当率を測る。** 「括弧に数字があれば違反」と広げた lint は
+公開済み 424 記事の 97.6% を弾き、`(人口10万人当たり)` のような正当な注記まで巻き込んだ
+(2026-07-31 実測)。誤検知を出す gate は運用で無効化されるので、確実に違反と言えるものだけを
+blocker にし、境界は非検出テストで固定する。
+
+**gate 自体も検証する。** 全 PASS は「ゲートが何も見ていない」状態と区別がつかない。
+新しい gate は正常データで発火しないことと、違反を注入したデータで発火することの両方を確認する。
 
 ## 違反検知
 

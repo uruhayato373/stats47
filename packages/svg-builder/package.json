@@ -32,6 +32,9 @@
     "test:run": "vitest run",
     "type-check": "tsc --noEmit"
   },
+  "dependencies": {
+    "@stats47/utils": "*"
+  },
   "devDependencies": {
     "typescript": "^5.0.0",
     "vitest": "^2.1.8"
