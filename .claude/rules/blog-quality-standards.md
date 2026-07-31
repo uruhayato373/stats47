@@ -514,6 +514,59 @@ BLOG-CTR-03 / 04 で 10 記事を curiosity gap 改修:
 
 4 週後 (2026-06-20) に GSC snapshot で検証。実測 CTR が想定の 70% 以上なら本パターンは effect/full 確定。
 
+## 新規記事の無人生成パイプライン (★2026-07-31 新設)
+
+Claude のトークンを使わず、Gemini API + 決定的ゲートだけで新規記事を書いて公開まで届ける。
+ranking ai-content の日次ループ (`ranking-content-standards.md` §全件量産の日次ループ) と同じ形。
+
+```
+topic-queue (何を書くか)
+  → R2 観測値を接地 (fetch-ranking-data-r2.mjs --with-map)
+  → ★データ健全性ゲート (blog-topic-gate) — 壊れた metric の記事は書かない
+  → SVG 生成 (generate-article-charts.ts。ランキング + タイルマップの 2 枚)
+  → 本文生成 (Gemini) → quality-gate → 落ちたら指摘を添えて再試行
+  → ★critic (別コンテキストの Gemini。記事本文だけを渡す) → review.md
+  → published:true → 最終ゲート → docs/21 outbox → develop push
+  → blog-auto-publish.yml を dispatch → factual/quality 再検証 → R2 公開
+```
+
+| 要素 | 実装 |
+|---|---|
+| 生成 | `packages/ai-content/src/scripts/generate-blog-article.ts` |
+| prompt | `packages/ai-content/src/services/prompts/blog-article-prompt.ts` (本文 + critic) |
+| データ健全性ゲート | `packages/ai-content/src/services/blog-topic-gate.ts` (+ `__tests__/`) |
+| 日次 cron | `.github/workflows/blog-generate-daily.yml` (JST 04:30) |
+
+### データ健全性ゲートが生成の**前**に要る理由
+
+quality-gate は「本文の数値が data/*.json と一致するか」しか見ないので、**その data 自体が
+壊れていれば一致してしまう**。壊れた観測値から書き始めると捏造記事を量産する。
+
+実例 (2026-07-31 に topic-queue 上位で実際に踏んだ): `convenience-store-count-commercial` は
+分類軸の絞り忘れで 94 行 (47県 × 2系列) あり、下位が「-1.7 店」という負の増減率だった。
+判定は取り込み側・週次監査と同じ `findExpectedShapeAnomaly` を使い、加えて接地した行そのもの
+(県の重複・件数・非有限値・全件同値) を見る。**「47 県でなければ違反」にはしない** — 港湾・
+漁港系は内陸県が対象外で 40 県台が正常なので、誤検知を出すゲートは運用で無効化される。
+
+### critic を同じモデルにしてよいのか
+
+本ファイルが禁じているのは「**書いた本人が自己採点して公開する**」ことなので、critic には
+**記事本文だけ**を渡し、ground truth も型の指示も再試行履歴も渡さない。文脈が違えば同じモデルでも
+独立した読者として読める。人間 (または別 agent) のレビューより弱いのは事実なので、公開後の
+GSC 実測と是正ループ (`blog-remediation-loop.md`) で品質を上げる。
+
+### v1 が扱わない型
+
+**型B (相関) は生成しない。** 散布図が無いと成立しない型で、主指標だけのランキング図と地図を
+貼っても問いに答えられない (dry-run で実際にその形になることを確認した)。散布図の接地
+(`fetch-correlation-scatter.mjs`) を通してから解禁する。黙って劣化した記事を書くより書かない方を選ぶ。
+topic-queue の pending 145 件のうち B は 48 件で、残る A / D2 / F / G の 94 件が生成対象。
+
+### 件数は実測してから増やす
+
+既定 `limit: 2`。1 記事あたり本文生成 + critic の 2 回 Gemini を呼ぶ。公開された記事の品質を
+GSC と critic の指摘で確認してから増やす (ai-content の 40 件と同列に扱わない)。
+
 ## ルール ↔ 機械チェック 対応表 (★2026-07-31 棚卸し・ゲート設計の SSOT)
 
 「どのルールが決定的に守られ、どれが critic の意味判断に委ねられているか」を 1 箇所で見えるようにする。

@@ -128,6 +128,9 @@ jobs:
           node .claude/scripts/lib/__tests__/paren-number-lint.test.mjs
           node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
           node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
+          # 生成側のゲート (壊れた metric で記事を書き始めないこと・モデル可用性・生成 0 件の扱い)。
+          # API キー不要の純粋関数テストなので PR で毎回回せる。
+          npm run test:ai-content --workspace apps/web
         continue-on-error: false
 
       - name: 🤖 Agent / Skill Prompt Contract Guard
