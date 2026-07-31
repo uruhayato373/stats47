@@ -744,6 +744,13 @@
       ]
     },
     {
+      "name": "RUN_RENDER_TESTS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "SCRATCHPAD",
       "visibility": "server",
       "contexts": [
