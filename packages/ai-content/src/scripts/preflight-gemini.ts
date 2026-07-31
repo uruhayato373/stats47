@@ -60,6 +60,12 @@ async function main() {
                 `limit=${e.quota.limit ?? "?"} retryAfter=${e.quota.retryAfter ?? "?"}\n`,
             );
           }
+          if (!e.quota && e.debugSnippet) {
+            // 構造化抽出に失敗したときだけ本文を見せる (なぜ抽出できないかを突き止めるため)
+            process.stdout.write(
+              `[preflight]   quota 抽出不可。本文先頭: ${e.debugSnippet.replace(/\s+/g, " ")}\n`,
+            );
+          }
           return { ok: false, classification: e.classification, status: e.status };
         }
         return { ok: false, classification: "unknown" };
