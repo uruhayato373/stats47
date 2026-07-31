@@ -52,7 +52,7 @@
  */
 
 import { FONT_FAMILY } from "../shared/color";
-import { formatValueLabel } from "../shared/axis";
+import { formatValueLabel, resolveValuePrecision } from "../shared/axis";
 // D3 カラースキーム (d3-scale-chromatic) を「生成時」に評価し、結果の rgb() を静的 SVG へ焼き込む。
 // （SVG 実行時に D3 は不要。）依存はモノレポ root に hoist 済（migration-flow / remotion が宣言）。
 import * as d3chromatic from "d3-scale-chromatic";
@@ -385,7 +385,7 @@ export function generateChoroplethSvg(
     ariaLabel = title,
     colorMin,
     colorMax,
-    formatValue = (v) => formatValueLabel(v, 1),
+    formatValue,
     colorStops = COLOR_STOPS,
     scheme,
     reverse = false,
@@ -409,6 +409,9 @@ export function generateChoroplethSvg(
   );
 
   const values = items.map((d) => d.value);
+  // 桁数は 47 県全体で 1 度だけ決める。値ごとに決めると 60.4 と 44 が混ざって読み比べにくい
+  // (2026-07-31。既定 formatValue は呼び元が渡さなければこれを使う)
+  const fmtValue = formatValue ?? ((v: number) => formatValueLabel(v, resolveValuePrecision(values)));
   const lo = colorMin ?? Math.min(...values);
   const hi = colorMax ?? Math.max(...values);
   const toT = (v: number) => (hi === lo ? 0.5 : (v - lo) / (hi - lo));
@@ -428,7 +431,7 @@ export function generateChoroplethSvg(
     const nfs = nameFontSize(item.name, w);
 
     const cx = x + w / 2;
-    const valStr = formatValue(item.value);
+    const valStr = fmtValue(item.value);
     // テキストは全て白。濃い縁取り(paint-order stroke)+ ソフトシャドウで
     // 淡色タイルでも背景に依らず読めるようにする（白/黒の切替はしない）。
     const strokeW = Math.max(1.1, nfs * 0.18).toFixed(1);
@@ -503,7 +506,7 @@ export function generateChoroplethSvg(
         rankLists.push(
           `  <rect x="${COL_X}" y="${y - 10}" width="12" height="12" rx="2" fill="${sw}" stroke="#ffffff" stroke-width="1"/>`,
           `  <text x="${COL_X + 19}" y="${y}" font-family="${FONT_FAMILY}" font-size="13" font-weight="600" fill="${CHROME_COLOR}">${esc(it.name)}</text>`,
-          `  <text x="${COL_X + COL_W}" y="${y}" font-family="${FONT_FAMILY}" font-size="12" fill="${CHROME_COLOR}" text-anchor="end">${formatValue(it.value)}${esc(unit)}</text>`,
+          `  <text x="${COL_X + COL_W}" y="${y}" font-family="${FONT_FAMILY}" font-size="12" fill="${CHROME_COLOR}" text-anchor="end">${fmtValue(it.value)}${esc(unit)}</text>`,
         );
       }
       y += 30;
@@ -511,9 +514,9 @@ export function generateChoroplethSvg(
   }
 
   // ── 凡例（地図右下） ──
-  const loStr = formatValue(lo);
-  const midStr = formatValue((lo + hi) / 2);
-  const hiStr = formatValue(hi);
+  const loStr = fmtValue(lo);
+  const midStr = fmtValue((lo + hi) / 2);
+  const hiStr = fmtValue(hi);
   const toHex = (n: number) => n.toString(16).padStart(2, "0");
   const gradientStops = interp
     ? [0, 0.25, 0.5, 0.75, 1]
