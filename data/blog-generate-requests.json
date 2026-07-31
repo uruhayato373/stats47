@@ -1,7 +1,0 @@
-{
-  "limit": 1,
-  "dryRun": false,
-  "keepDraft": true,
-  "requestedAt": "2026-07-31T05:40:00Z",
-  "note": "429 本文の先頭 500 文字を出して quota 抽出できない理由を突き止める"
-}
