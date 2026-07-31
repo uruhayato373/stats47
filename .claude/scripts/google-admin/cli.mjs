@@ -36,6 +36,7 @@ import {
 import {
   auditAdSenseAccount,
   auditAdUnits,
+  auditAdSenseApiEnabled,
   expectedAdSenseAccount,
 } from "./audit-adsense.mjs";
 import { loadCodeAdSlots } from "../metrics/lib/code-ad-slots.mjs";
@@ -204,6 +205,8 @@ async function main() {
   if (cmd === "adsense-inventory") {
     // API のみの read-only 検査 (browser を起動しない = 無人 cron に載せられる)。
     // DOM を読む audit は headed 実行が要るので人間が `google-admin:audit` を回す。
+    // API が有効かを最初に見る。無効なら token が正しくても全 job が失敗するため。
+    const apiEnabled = await auditAdSenseApiEnabled();
     const account = await auditAdSenseAccount();
     let codeSlots = [];
     let codeSlotsError = null;
@@ -214,6 +217,11 @@ async function main() {
     }
     const adUnits = await auditAdUnits({ codeSlots, accountId: account.accountId ?? null });
     console.log("\n# adsense-inventory (API read-only)");
+    console.log(
+      `AdSense API 有効化: ${apiEnabled.status}` +
+        (apiEnabled.project ? ` (project=${apiEnabled.project})` : "") +
+        (apiEnabled.detail ? ` — ${apiEnabled.detail}` : ""),
+    );
     console.log(`account assert: ${account.status}${account.detail ? ` (${account.detail})` : ""}`);
     if (codeSlotsError) console.log(`code slots: 読み取り失敗 (${codeSlotsError})`);
     console.log(`ad units: ${adUnits.units?.length ?? 0} 件 (${adUnits.status}) desired=${adUnits.desired?.length ?? 0}`);
@@ -222,14 +230,14 @@ async function main() {
     }
     saveState(
       "adsense-inventory",
-      { adsenseAccount: account, adUnits, codeSlotsError },
+      { adsenseApi: apiEnabled, adsenseAccount: account, adUnits, codeSlotsError },
       null,
       null,
       null,
       ADSENSE_INVENTORY_STATE_FILE,
     );
     // 認証不足・アカウント不一致は失敗として返す (無人 cron が沈黙しないように)
-    const ok = account.status === "ok" && adUnits.status === "ok";
+    const ok = apiEnabled.status === "ok" && account.status === "ok" && adUnits.status === "ok";
     if (!ok) process.exit(1);
     return;
   }

@@ -19,9 +19,22 @@ export function redactUrl(s) {
   return s.replace(/(https?:\/\/[^\s"'?#]+)[?#][^\s"']*/g, "$1[REDACTED_QUERY]");
 }
 
+/**
+ * Google API のエラー本文に含まれる `Help Token: <値>` を落とす。
+ *
+ * サポート用の識別子だが、README「Cookie、token、localStorage、認証header を保存・出力しない」に
+ * 従い state / console へ残さない。キー名ベースの SENSITIVE_KEY_RE では、`detail` のような
+ * 無害な名前のキーの**値の中**に埋まった token を捕まえられないため、文字列側で落とす
+ * (2026-07-30 に adsense-inventory-latest.json へ実際に保存されていた)。
+ */
+export function redactHelpToken(s) {
+  if (typeof s !== "string") return s;
+  return s.replace(/Help Token:\s*\S+/gi, "Help Token: [REDACTED]");
+}
+
 /** 文字列を全段 sanitize。 */
 export function sanitize(s) {
-  return redactUrl(redactEmail(baseRedactString(s)));
+  return redactHelpToken(redactUrl(redactEmail(baseRedactString(s))));
 }
 
 /** object を再帰 sanitize (機密キーは値ごとマスクする)。 */

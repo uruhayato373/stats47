@@ -18,6 +18,10 @@ import { join } from "node:path";
 import { google } from "googleapis";
 import { PROJECT_ROOT } from "./browser-context.mjs";
 import { extractSlotIdFromAdCode } from "../metrics/lib/adsense-report-contract.mjs";
+import { resolveServiceAccountKeyFile } from "../metrics/lib/auth.mjs";
+
+/** 有効化を確認する API。 */
+export const ADSENSE_SERVICE_NAME = "adsense.googleapis.com";
 
 const ADSENSE_ENV_KEYS = Object.freeze([
   "GOOGLE_ADSENSE_CLIENT_ID",
@@ -102,6 +106,70 @@ function adsenseClient() {
   const oauth2Client = new google.auth.OAuth2(clientId, clientSecret);
   oauth2Client.setCredentials({ refresh_token: refreshToken });
   return google.adsense({ version: "v2", auth: oauth2Client });
+}
+
+/**
+ * `serviceusage.services.get` の結果から有効状態を判定する (pure)。
+ *
+ * state は "ENABLED" / "DISABLED" / "STATE_UNSPECIFIED"。ENABLED 以外は fail closed 扱いにする
+ * (未有効のまま token を発行しても、レポート取得が全 job 失敗するため)。
+ */
+export function classifyApiState(service) {
+  const state = service?.state ?? null;
+  if (state === "ENABLED") return { status: "ok", state };
+  if (state === "DISABLED") {
+    return {
+      status: "api-not-enabled",
+      state,
+      detail: `${ADSENSE_SERVICE_NAME} がこのプロジェクトで無効です。有効化しないと全レポート job が失敗します`,
+    };
+  }
+  return { status: "api-state-unknown", state, detail: `state を判定できません (${String(state)})` };
+}
+
+/** サービスアカウント鍵から project_id / project_number を読む (I/O)。 */
+function serviceAccountProject() {
+  try {
+    const keyFile = resolveServiceAccountKeyFile();
+    const key = JSON.parse(readFileSync(keyFile, "utf-8"));
+    return key.project_id ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * AdSense Management API がプロジェクトで有効か確認する。
+ *
+ * これを事前に見ないと「Secrets を更新したのに CI で初めて全 job 失敗」になる
+ * (2026-07-30 に実際に発生。原因は別プロジェクトで API 未有効化だった)。
+ *
+ * 認証は GA4/GSC と同じサービスアカウントを使う。権限が無い場合も fail closed で報告し、
+ * 「確認できなかった」を「有効」と読み替えない。
+ */
+export async function auditAdSenseApiEnabled({ projectId = null } = {}) {
+  const project = projectId ?? serviceAccountProject();
+  if (!project) {
+    return { status: "project-unknown", detail: "サービスアカウント鍵から project_id を取得できません" };
+  }
+  try {
+    const auth = new google.auth.GoogleAuth({
+      keyFile: resolveServiceAccountKeyFile(),
+      scopes: ["https://www.googleapis.com/auth/cloud-platform.read-only"],
+    });
+    const su = google.serviceusage({ version: "v1", auth });
+    const res = await su.services.get({ name: `projects/${project}/services/${ADSENSE_SERVICE_NAME}` });
+    return { ...classifyApiState(res.data), project, service: ADSENSE_SERVICE_NAME };
+  } catch (e) {
+    const msg = String(e.message ?? e);
+    // Service Usage API 自体が無効 / 権限不足も「確認できない」として fail closed
+    return {
+      status: "api-check-failed",
+      project,
+      service: ADSENSE_SERVICE_NAME,
+      detail: msg.slice(0, 250),
+    };
+  }
 }
 
 /** AdSense account を API で照合する。 */

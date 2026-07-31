@@ -6,7 +6,8 @@ name: 🤖 AI Content Generate Daily (Gemini)
 #   1. キューを全件スコープで再構築 (R2 が真実源・派生ビュー)
 #   2. needs-regen 上位 N 件を Gemini API で生成 (--model gemini-api・CLI 非依存)
 #   3. 決定的ゲート (audit-ai-content.mjs) を通ったものだけ outbox へ
-#   4. outbox を develop に push → publish-ai-content.yml が発火し gate 再検証 → R2 → CDN purge
+#   4. outbox を develop に push し、publish-ai-content.yml を dispatch → gate 再検証 → R2 → CDN purge
+#      (★push トリガー任せにしない。既定 GITHUB_TOKEN の push は後続 workflow を発火させない仕様)
 #   5. キューを再構築して進捗を commit-back (LATEST.md / progress-history.csv)
 #
 # 品質は「賢いモデル」ではなく「決定的ゲート + 再試行」で担保する。ゲートは緩めない
@@ -16,9 +17,10 @@ name: 🤖 AI Content Generate Daily (Gemini)
 #   - LIMIT は publish-ai-content.yml の MAX_PUBLISH (40) に合わせる。超えると公開が次回に繰り越す
 #   - dry_run: LLM を呼ばず対象 key と prompt 長だけ出す (課金ゼロ・配線確認用)
 #   - GEMINI_API_KEY 未設定なら生成前に失敗する (無音で何もしないより明示的に落とす)
-#   - 進捗 commit は outbox と同一 commit にする ([skip ci] を付けない = publish を発火させる)
+#   - 進捗 commit は outbox と同一 commit にする (生成物と進捗がずれない)
+#   - push も dispatch も失敗を握り潰さない。届かなければ run を赤くする
 #
-# ⚠️ 費用: gemini-2.5-flash は無料 tier があるが、API キーが有料課金に紐づいている場合は
+# ⚠️ 費用: flash 系は無料 tier があるが、API キーが有料課金に紐づいている場合は
 #    1 件あたり入力 ~5K / 出力 ~8K トークン相当の課金が発生する。LIMIT で件数を絞って運用する。
 
 on:
@@ -41,6 +43,7 @@ on:
 
 permissions:
   contents: write
+  actions: write # publish-ai-content.yml を dispatch するため (既定 token の push は後続 workflow を発火させない)
 
 concurrency:
   group: ai-content-generate
@@ -49,6 +52,9 @@ concurrency:
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  # 空なら gemini-text-client.ts の既定値。モデル提供終了時はリポジトリ変数に実在モデルを
+  # 設定するだけで復旧できる (コード変更 + デプロイを待たない)。実在確認は下の preflight step
+  GEMINI_TEXT_MODEL: ${{ vars.GEMINI_TEXT_MODEL }}
   LIMIT: ${{ inputs.limit || '40' }}
   GEN_CONCURRENCY: ${{ inputs.concurrency || '3' }}
   DRY_RUN: ${{ inputs.dry_run || 'false' }}
@@ -81,6 +87,16 @@ jobs:
             exit 1
           fi
           echo "GEMINI_API_KEY: 設定あり (値は出力しない)"
+
+      # ★本番バッチの前に「そのモデルで本当に生成できるか」を 1 回試す (2026-07-30 の全件 404 の再発防止)。
+      #   極小プロンプト = 出力数十トークンで実質無料。使えなければ候補付きでここで落とす。
+      #   ListModels の一覧照合では不十分 (載っていても 404 になる。2026-07-31 実測)。
+      - name: 🔎 Preflight (極小の実生成で使用可否を確認)
+        if: ${{ env.DRY_RUN != 'true' }}
+        run: |
+          set -o pipefail
+          NODE_OPTIONS='--conditions react-server' \
+            npx tsx packages/ai-content/src/scripts/preflight-gemini.ts 2>&1 | tee /tmp/preflight.log
 
       - name: 📊 Rebuild queue (scope=all) and pick targets
         id: pick
@@ -120,27 +136,59 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: 📈 Rebuild queue (progress) and commit
+        id: commit
         if: ${{ env.DRY_RUN != 'true' }}
         run: |
           # 生成物 (outbox) と進捗を同一 commit で push する。
-          # ★[skip ci] を付けない — publish-ai-content.yml を発火させる必要がある。
           node .claude/scripts/ai-content/build-ai-content-queue.mjs --scope all || true
           git add data/ai-content-staging .claude/state/ai-content || true
+          # ls ではなく find で数える (SC2012。ファイル名に非英数が入っても壊れない)
+          NEW=$(find data/ai-content-staging -maxdepth 1 -name '*.json' -type f 2>/dev/null | wc -l | tr -d ' ')
+          echo "outbox=${NEW}" >> "$GITHUB_OUTPUT"
           if git diff --cached --quiet; then
             echo "変更なし (生成 0 件・進捗も不変)"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # ls ではなく find で数える (SC2012。ファイル名に非英数が入っても壊れない)
-          NEW=$(find data/ai-content-staging -maxdepth 1 -name '*.json' -type f 2>/dev/null | wc -l | tr -d ' ')
           git commit -q -m "chore(ai-content): daily gemini generation (outbox ${NEW} 件)"
           for i in 1 2 3; do
             if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
-              echo "✅ pushed (outbox ${NEW} 件 → publish-ai-content.yml が発火)"; break
+              echo "✅ pushed (outbox ${NEW} 件)"
+              exit 0
             fi
             echo "push retry $i"; sleep 5
           done
+          # ★push できなければ生成物が届かない。黙って成功にしない
+          echo "::error::develop への push に 3 回失敗した (outbox ${NEW} 件が未配送)"
+          exit 1
+
+      # ★outbox を publish へ渡す (2026-07-31 追加)。
+      #   GitHub Actions は **既定の GITHUB_TOKEN で push した場合、後続 workflow を発火させない**
+      #   (無限ループ防止の仕様)。そのため上の push だけでは publish-ai-content.yml の push トリガーは
+      #   発火せず、生成物が outbox に滞留する。実際 2026-07-31 の初回成功時に 2 件が滞留した。
+      #   → ここで明示的に dispatch し、**run が生まれたことを確認**してから成功とする。
+      - name: 🚀 Dispatch publish-ai-content (outbox を R2 へ)
+        if: ${{ env.DRY_RUN != 'true' && steps.commit.outputs.outbox != '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          LATEST_BEFORE=$(gh run list --workflow publish-ai-content.yml --branch develop \
+            --limit 1 --json databaseId --jq '.[0].databaseId // 0')
+          gh workflow run publish-ai-content.yml --ref develop
+          # dispatch は非同期。「発火した」と言い切らず run の出現を実測する
+          for _ in $(seq 1 12); do
+            sleep 5
+            LATEST_AFTER=$(gh run list --workflow publish-ai-content.yml --branch develop \
+              --limit 1 --json databaseId --jq '.[0].databaseId // 0')
+            if [ "${LATEST_AFTER}" != "${LATEST_BEFORE}" ]; then
+              echo "✅ publish-ai-content を起動 (run ${LATEST_AFTER} / outbox ${{ steps.commit.outputs.outbox }} 件)"
+              exit 0
+            fi
+          done
+          echo "::error::publish-ai-content の run を確認できなかった (outbox が滞留する)"
+          exit 1
 
       - name: 📝 Summary
         if: always()

@@ -17,8 +17,9 @@ import {
 import {
   assertAdSenseAccount,
   deriveDesiredAdUnits,
+  classifyApiState,
 } from "../audit-adsense.mjs";
-import { sanitize, sanitizeObject, redactEmail } from "../redact.mjs";
+import { sanitize, sanitizeObject, redactEmail, redactHelpToken } from "../redact.mjs";
 import { acquireLock, releaseLock, LOCK_FILE, isLoginUrl } from "../browser-context.mjs";
 
 const BASE_INV = {
@@ -311,4 +312,34 @@ test("deriveDesiredAdUnits: pending かつ slotId 未発行のものだけを対
   ];
   const desired = deriveDesiredAdUnits(slots);
   assert.deepEqual(desired.map((d) => d.exportName), ["A"]);
+});
+
+// ── API 有効化チェック (手順 2 の自動化) ─────────────────────────────────────
+
+test("classifyApiState: ENABLED のみ ok。DISABLED と不明は fail closed", () => {
+  assert.equal(classifyApiState({ state: "ENABLED" }).status, "ok");
+
+  const disabled = classifyApiState({ state: "DISABLED" });
+  assert.equal(disabled.status, "api-not-enabled");
+  assert.match(disabled.detail, /有効化/);
+
+  // 不明な state を「有効」に倒さない (2026-07-30 の事故: 未有効化に CI で初めて気づいた)
+  assert.equal(classifyApiState({ state: "STATE_UNSPECIFIED" }).status, "api-state-unknown");
+  assert.equal(classifyApiState({}).status, "api-state-unknown");
+  assert.equal(classifyApiState(null).status, "api-state-unknown");
+  assert.equal(classifyApiState(undefined).status, "api-state-unknown");
+});
+
+test("redactHelpToken: Google API エラーの Help Token を落とす (無害な名前のキーの値でも)", () => {
+  const raw = "Permission denied to get service [adsense.googleapis.com]\nHelp Token: AdZh9GftnGif_8N7huWgdS5KtXBV_LhQ";
+  const out = redactHelpToken(raw);
+  assert.ok(!/AdZh9GftnGif/.test(out), "token 本体が残っている");
+  assert.match(out, /Help Token: \[REDACTED\]/);
+  assert.match(out, /Permission denied/, "エラー本文自体は残す (診断に要る)");
+
+  // sanitize / sanitizeObject の経路でも落ちること。
+  // `detail` はキー名が機密パターンに当たらないので、文字列側で落とせているかが要点。
+  assert.ok(!/AdZh9GftnGif/.test(sanitize(raw)));
+  const obj = sanitizeObject({ audit: { adsenseApi: { status: "api-check-failed", detail: raw } } });
+  assert.ok(!/AdZh9GftnGif/.test(JSON.stringify(obj)), "state JSON に token が残っている");
 });

@@ -15,12 +15,12 @@
 
 | Metric | ローリング28日 |
 |---|---|
-| Clicks | 3224 |
-| Impressions | 95831 |
-| CTR | 3.36% |
-| Avg Position | 8.11 |
-| Queries rows | 2083 |
-| Pages rows | 2729 |
+| Clicks | 3157 |
+| Impressions | 94448 |
+| CTR | 3.34% |
+| Avg Position | 8.12 |
+| Queries rows | 2068 |
+| Pages rows | 2708 |
 
 > 28日窓は前回 snapshot と 21 日重複する。この表の週次差分を WoW と呼ばない。
 
