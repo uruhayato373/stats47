@@ -1001,20 +1001,26 @@ async function processOne(
 
       for (const v of violations) {
         // 既知の破損か = run を fail させないでよいか。**書くかどうかとは別の判断**。
-        const known =
-          v.isError &&
-          findExpectedShapeAnomaly(EXPECTED_SHAPE_ANOMALY, config.key, v.check, entity, new Date()) !== null;
-        if (v.isError && !known) {
+        // 既知か = run を fail させないでよいか。**書くかどうかとは別の判断**。
+        const allow = v.isError
+          ? findExpectedShapeAnomaly(EXPECTED_SHAPE_ANOMALY, config.key, v.check, entity, new Date())
+          : null;
+        if (v.isError && !allow) {
           hardShape = true;
           console.error(`  [shape] ${v.message}`);
         } else if (v.isError) {
           softShape = true;
-          console.warn(`  [shape:known-broken] ${v.message} (既知のため run は継続。書き込みはしない)`);
+          // ★disposition をそのまま出す。legitimate を known-broken と表示すると
+          //   「壊れている」と誤読させる (2026-07-31)。
+          console.warn(
+            `  [shape:${allow!.disposition}] ${v.message} (allowlist 済のため run は継続。` +
+              `書き込みはしない — allowlist は fail 判定専用で、書き込み例外は --allow-shape)`,
+          );
         } else {
           softShape = true;
           console.warn(`  [shape:allowed] ${v.message}`);
         }
-        shapeNotes.push(`${entity}:${v.check}${v.isError ? (known ? ":known" : "") : ":allowed"}`);
+        shapeNotes.push(`${entity}:${v.check}${v.isError ? (allow ? `:${allow.disposition}` : "") : ":allowed"}`);
       }
       // ★既知でも壊れていれば書かない (R2 の既存データが温存されるだけ)
       return !hasShapeError(violations);
