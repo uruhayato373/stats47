@@ -567,6 +567,21 @@ GSC 実測と是正ループ (`blog-remediation-loop.md`) で品質を上げる�
 相関 snapshot にペアが無ければその記事は成立しないので skip する。**第2指標もデータ健全性ゲートを
 通す**。カードは 1 枚だけ (dup-ranking-link を避ける) なので、第2指標へはテキストリンクで導線を作る。
 
+### 起動経路 (cloud セッションからも回せる)
+
+`blog-generate-daily.yml` は 3 経路で発火する。
+
+| 経路 | 用途 |
+|---|---|
+| schedule (JST 04:30) | 無人の日次ループ |
+| **push `data/blog-generate-requests.json`** | **cloud セッション用**。`{ "limit": 1, "dryRun": false, "keepDraft": true }` を develop へ commit すると実行し、消費した request を git rm で commit-back する |
+| workflow_dispatch | ローカルからの手動 |
+
+push 経路が要るのは、**cloud セッションが `actions:write` を持たず workflow_dispatch できない (403)**
+ため。`data-refresh.yml` / `gemini-image-run.yml` と同じ方式で、`ai-content-generate-daily.yml` にも
+同型の口 (`data/ai-content-generate-requests.json`) を用意した。これが無いと cloud からは cron を
+待つしかなく、実生成を検証できない (2026-07-31 に実際に詰まった)。
+
 ### 件数は実測してから増やす
 
 既定 `limit: 2`。1 記事あたり本文生成 + critic の 2 回 Gemini を呼ぶ。公開された記事の品質を
