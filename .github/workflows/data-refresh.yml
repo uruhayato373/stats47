@@ -31,6 +31,18 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #   { "metric": "vacant-housing-rate,wooden-housing-ratio", "since": "", "dryRun": false }
 #   - metric: 空なら全 metric (2,295 件・60 分では終わらない可能性があるので通常は指定する)
 #   - dryRun: true = fetch と形状検証のみ (R2 に書かない)
+#   - allowEmpty: 0 件 fatal を警告に落とす key (カンマ区切り)。★下記の注意を読むこと
+#
+# ★allowEmpty の位置づけ (2026-07-31 追加)
+#   0 件 metric があると batch は fatal で止まり、**成功した 2,000 件超の push まで巻き添えで
+#   止まる**。実際に 58 件の 0 件で全体が止まり、R2 更新が 1 件も進まなかった。
+#   allowEmpty はその 1 回だけ fatal を警告に落として残りを通すためのもので、
+#   **データ破壊の防止とは別の仕組み**:
+#     - 「既存データを 0 件で上書きしない」保護は metric ごとに常時働く (allowEmpty でも無効化されない)
+#     - allowEmpty が落とすのは「未登録の 0 件があったら全体を止める」という一括ゲートだけ
+#   request file は消費されるので効果はその run 限り。恒久的に 0 件が正しいなら
+#   expected-empty.ts の EXPECTED_EMPTY に理由・追跡先・期限を添えて登録する。
+#   **0 件の原因調査を省略する口実に使わない** (使うたびに未修正の defect が残っている)。
 
 on:
   push:
@@ -44,6 +56,10 @@ on:
         default: ""
       since:
         description: "差分取得の起点 (YYYY-MM-DD、空なら全期間)"
+        required: false
+        default: ""
+      allow_empty:
+        description: "0 件 fatal を警告に落とす key (カンマ区切り)。原因調査の代わりにしない"
         required: false
         default: ""
       dry_run:
@@ -103,24 +119,33 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           INPUT_METRIC: ${{ inputs.metric }}
           INPUT_SINCE: ${{ inputs.since }}
+          INPUT_ALLOW_EMPTY: ${{ inputs.allow_empty }}
           INPUT_DRY_RUN: ${{ inputs.dry_run }}
         run: |
           REQ=data/data-refresh-requests.json
           if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
             METRIC=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.metric??''))")
             SINCE=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.since??''))")
+            ALLOW_EMPTY=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.allowEmpty??''))")
             DRY=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
           else
             METRIC="$INPUT_METRIC"
             SINCE="$INPUT_SINCE"
+            ALLOW_EMPTY="$INPUT_ALLOW_EMPTY"
             DRY="$INPUT_DRY_RUN"
           fi
           {
             echo "metric=$METRIC"
             echo "since=$SINCE"
+            echo "allow_empty=$ALLOW_EMPTY"
             echo "dry_run=$DRY"
           } >> "$GITHUB_OUTPUT"
           echo "解決: metric='$METRIC' since='$SINCE' dry_run='$DRY'"
+          # allowEmpty は「未修正の 0 件を通した」証跡なので件数を必ず残す
+          if [ -n "$ALLOW_EMPTY" ]; then
+            n=$(echo "$ALLOW_EMPTY" | tr ',' '\n' | grep -c . || true)
+            echo "::warning::allowEmpty: ${n} 件の 0 件 metric を警告に降格した (原因は未修正のまま)"
+          fi
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -144,6 +169,7 @@ jobs:
           ARGS=()
           [ -n "${{ steps.resolve.outputs.metric }}" ] && ARGS+=(--metric "${{ steps.resolve.outputs.metric }}")
           [ -n "${{ steps.resolve.outputs.since }}" ] && ARGS+=(--since "${{ steps.resolve.outputs.since }}")
+          [ -n "${{ steps.resolve.outputs.allow_empty }}" ] && ARGS+=(--allow-empty "${{ steps.resolve.outputs.allow_empty }}")
           [ "${{ steps.resolve.outputs.dry_run }}" = "true" ] && ARGS+=(--dry-run)
           echo "page-data-batch.ts ${ARGS[*]}"
           npx tsx packages/data-configs/scripts/page-data-batch.ts "${ARGS[@]}"
