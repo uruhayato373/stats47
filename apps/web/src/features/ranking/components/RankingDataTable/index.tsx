@@ -19,12 +19,12 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
 
-import type { StatsSchema } from "@stats47/types";
-
 import {
   formatRankingValue,
   resolveRankingPrecision,
 } from "../../utils/compute-ranking-header-stats";
+
+import type { StatsSchema } from "@stats47/types";
 
 
 const PREFECTURE_CODE_PATTERN = /^\d{2}000$/;

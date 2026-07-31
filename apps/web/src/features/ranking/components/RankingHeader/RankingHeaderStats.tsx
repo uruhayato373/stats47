@@ -6,9 +6,11 @@ import { cn } from "@stats47/components";
 
 import type { AreaType } from "@/features/area";
 
-import { computeRankingHeaderStats } from "../../utils/compute-ranking-header-stats";
+import {
+  computeRankingHeaderStats,
+  resolveRankingPrecision,
+} from "../../utils/compute-ranking-header-stats";
 
-import { resolveRankingPrecision } from "../../utils/compute-ranking-header-stats";
 import { RankingNationalAverageStat } from "./RankingNationalAverageStat";
 import { RankingTopThreeList } from "./RankingTopThreeList";
 
