@@ -27,9 +27,10 @@ Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計
 
 - 改善ログ status 更新 → `improvement-triage` に委譲
 - GSC / PSI / AdSense 計測 → 各 analyst に委譲
-- GA4 設定変更 → 原則ユーザー手動。ユーザーの明示承認がある場合のみ
-  `.claude/scripts/google-admin/README.md` の専用Playwright runnerで
-  allowlist内設定を実行可（権限・削除・timezone等は常に対象外）
+- GA4 設定変更 → 原則ユーザー手動。API/UIの境界と承認契約は
+  `.claude/scripts/google-admin/README.md`を正典とする。
+  `GOOGLE-ADMIN-AUTOMATION-01`完了後のcustom dimension作成は承認付きAdmin API、
+  GSC link / LibraryだけはローカルPlaywrightを使う。権限・削除・timezone等は常に対象外
 
 ## 必読 rules
 

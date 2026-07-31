@@ -29,87 +29,43 @@ $ARGUMENTS — [期間] [ディメンション] [snapshot YYYY-Www]
 
 ## 前提
 
-AdSense Management API は **OAuth 2.0** が必須（サービスアカウントでは広告主データにアクセス不可）。以下の環境変数を `.env.local` に設定:
+AdSense Management API は **OAuth 2.0** が必須（サービスアカウントでは広告主データにアクセス不可）。scope は read-only の `https://www.googleapis.com/auth/adsense.readonly` だけを使う（書き込み API は自動化しない。正典 `.claude/scripts/google-admin/README.md`）。
 
-```bash
-GOOGLE_ADSENSE_CLIENT_ID=xxxxx.apps.googleusercontent.com
-GOOGLE_ADSENSE_CLIENT_SECRET=GOCSPX-xxxxx
-GOOGLE_ADSENSE_REFRESH_TOKEN=1//xxxxx
-GOOGLE_ADSENSE_ACCOUNT_ID=pub-7995274743017484
-```
-
-初回のみリフレッシュトークン取得手順が必要（後述）。
-
+- **認証情報の正典は GitHub Secrets**（CI 専任・`.env.local` を正典にしない。2026-05-29 の秘密集約 memory `project_env_local_ci_consolidation`）。次の 4 つを設定する:
+  - `GOOGLE_ADSENSE_CLIENT_ID`
+  - `GOOGLE_ADSENSE_CLIENT_SECRET`
+  - `GOOGLE_ADSENSE_REFRESH_TOKEN`（`adsense.readonly`）
+  - `GOOGLE_ADSENSE_ACCOUNT_ID`（`pub-7995274743017484`）
+- ローカルで ad hoc 実行する場合のみ、同じ 4 変数を shell env か `.env.local` に置く（`.claude/scripts/google-admin/audit-adsense.mjs` が `.env.local` から自己ロードする）。値は git へ commit しない。
 - npm パッケージ: `googleapis`（既にインストール済み）
 - AdSense 管理画面: `ca-pub-7995274743017484` の審査通過・広告配信中
 
 ## 初回セットアップ: リフレッシュトークン取得
 
-Google は 2022 年末に OOB flow を廃止したため、**loopback redirect 方式**で取得する。
+**正典スクリプトは `.claude/scripts/adsense/oauth-setup.js`**（read-only scope で loopback redirect。使い捨て一時スクリプトを新たに書かない）。
 
-### 前提
-1. Google Cloud Console で AdSense Management API を有効化
-2. OAuth 同意画面の scope に `https://www.googleapis.com/auth/adsense.readonly` を追加
-3. OAuth クライアント（**Desktop app** type）を作成し、Client ID / Secret を取得
-4. AdSense 管理画面で認可に使う Google アカウントを Users に追加（別アカウントで管理している場合）
-
-### スクリプト（プロジェクトルートで実行）
-
-以下を `get-adsense-token.mjs` として保存（実行後に削除すること、コミット禁止）:
-
-```javascript
-import { google } from 'googleapis';
-import http from 'node:http';
-import { URL } from 'node:url';
-import open from 'open';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
-
-const PORT = 53217;
-const REDIRECT_URI = `http://localhost:${PORT}`;
-
-const oauth2Client = new google.auth.OAuth2(
-  process.env.GOOGLE_ADSENSE_CLIENT_ID,
-  process.env.GOOGLE_ADSENSE_CLIENT_SECRET,
-  REDIRECT_URI
-);
-
-const authUrl = oauth2Client.generateAuthUrl({
-  access_type: 'offline',
-  prompt: 'consent',
-  scope: ['https://www.googleapis.com/auth/adsense.readonly'],
-});
-
-const server = http.createServer(async (req, res) => {
-  const url = new URL(req.url, REDIRECT_URI);
-  const code = url.searchParams.get('code');
-  if (!code) { res.end('no code'); return; }
-  const { tokens } = await oauth2Client.getToken(code);
-  res.end('<h1>OK. Close this tab.</h1>');
-  console.log(`\nGOOGLE_ADSENSE_REFRESH_TOKEN=${tokens.refresh_token}`);
-  server.close();
-  process.exit(0);
-});
-
-server.listen(PORT, async () => {
-  console.log('ブラウザを自動で開きます...');
-  await open(authUrl).catch(() => console.log('手動で開いてください:\n' + authUrl));
-});
+```bash
+# Google Cloud Console 側の前提: AdSense Management API 有効・データアクセスに adsense.readonly・
+# 公開ステータス「本番環境」・OAuth クライアントは Desktop app タイプ（詳細はスクリプト冒頭のコメント）
+cd ~/stats47 && read -r CID && read -rs CSEC && \
+  GOOGLE_ADSENSE_CLIENT_ID="$CID" GOOGLE_ADSENSE_CLIENT_SECRET="$CSEC" \
+  node .claude/scripts/adsense/oauth-setup.js; unset CID CSEC
+# → ブラウザで認可 → refresh_token を stdout に 1 度だけ出力し accounts.list で実接続を検証する
 ```
 
-### 実行
+取得後は 3 つの Secret を更新する（対話プロンプトに貼る。コマンド引数にしない）:
+
 ```bash
-cd /path/to/stats47
-node get-adsense-token.mjs
-# → ブラウザで認可 → refresh_token が stdout に出力される
-# → .env.local に追記してスクリプトを削除
+gh secret set GOOGLE_ADSENSE_CLIENT_ID
+gh secret set GOOGLE_ADSENSE_CLIENT_SECRET
+gh secret set GOOGLE_ADSENSE_REFRESH_TOKEN
 ```
 
 ### トラブルシューティング
 - **refresh_token が undefined**: https://myaccount.google.com/permissions でアプリ権限を削除してから再実行
 - **403 PERMISSION_DENIED / accounts.list が空**: 認可に使った Google アカウントが AdSense にアクセス権を持っていない。AdSense 管理画面 → Account → Access and authorization → Users で招待
 - **redirect_uri_mismatch**: OAuth クライアントが Web app タイプになっている。Desktop app で再作成
+- **has not been used in project ...**: AdSense OAuth client の Google Cloud project で AdSense Management API が未有効。正しい project で有効化する（GA4/GSC 用サービスアカウントの project とは別物）
 
 ## 手順
 

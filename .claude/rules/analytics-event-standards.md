@@ -29,19 +29,20 @@
 GA4 → 管理（歯車）→ プロパティ列「データの表示」→「カスタム定義」→「カスタムディメンションを作成」。
 各ディメンションで **範囲＝イベント**、**イベントパラメータ＝§2 の「パラメータ」を厳密一致入力**。
 
-通常はオーナーが実施する。ユーザーが外部設定変更を明示承認したセッションでは、
-`.claude/scripts/google-admin/README.md` の専用Playwright runnerで、
-同書allowlist・property照合・重複確認・before/after検証を満たす登録だけを実行してよい。
-権限、既存dimension削除/置換、timezone、data retention等はrunnerの対象外。
+通常はオーナーが実施する。自動化経路は
+`.claude/scripts/google-admin/README.md`の承認付きGA4 Admin APIだけとし、
+`GOOGLE-ADMIN-AUTOMATION-01`完了前は新しい自動登録を行わない。
+PlaywrightはGSC linkとLibrary collectionのAPI非提供操作だけに使う。
+権限、既存dimension削除/置換、timezone、data retention等は常に対象外。
 
 ### 登録状況を機械で確定させる (❓要確認 の解消手順)
 
 台帳 §2 の `❓要確認` は「コード上は登録前提だが GA4 実登録を確認していない」状態で、放置すると
-効果判定の前提が未確定のまま残る。次のコマンドが台帳を機械的に読み、GA4 のカスタム定義画面の
-実データと突合して確定させる (headed 実行・read-only)。
+効果判定の前提が未確定のまま残る。次のコマンドが台帳を機械的に読み、GA4 Admin API の
+custom dimension 実データと突合して確定させる (API・browser 無し・read-only。CI でも実行できる)。
 
 ```bash
-npm run google-admin:audit
+npm run google-admin:audit-api
 ```
 
 出力の `custom dimension 突合:` 行が verdict 別件数を出す。判定の意味:
@@ -73,11 +74,13 @@ npm run google-admin:audit
 | `rail_click` | `trackRailClick` | `rail_widget` / `rail_slot`（`rail_href` は任意） | ✅登録済 (2026-07-20) | UI (P0-2) |
 | `affiliate_click` | `trackAffiliateClick` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-06)** | `affiliate-ads-standards.md §6` |
 | `affiliate_click` (ad_id のみ) | `trackAffiliateClick` | `ad_id` | **✅登録済 (2026-07-28)** — google-admin Playwright runner で `Affiliate ad ID` (scope=Event, param=`ad_id`) を実登録・reload 後に画面 verify (最終変更日 2026年7月28日)。集計反映は 24-48h・非遡及のため、API で `customEvent:ad_id` が引けるのは反映後 | `affiliate-ads-standards.md §6` |
-| `affiliate_impression` | `AdImpressionTracker` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-06)** — dimension はパラメータ名に紐づくため、2026-07-28 の**イベント名改名では再登録不要**の想定 (初回計測で要確認) | `affiliate-ads-standards.md §6` |
-| `cta_click` | `trackCtaClick` | `cta_id` / `link_position` / `content_id` / `target_type` / `target_key` | ❓要確認 | buzz-map §7.3 / ファネル |
-| `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `card_variant` / `slot` / `experiment_id` / `experiment_variant` | ❓要確認 | `apps/web/src/features/ranking/components/FeaturedRankings/README.md` |
-| `ranking_view` | `trackRankingView` | `ranking_key` / `category_key` / `area_type` / `year_code` | ❓要確認 | ranking |
-| `file_download` | `trackCsvDownload` | `ranking_key` / `year_code`（`file_name`/`file_extension` は GA4 標準） | ❓要確認 | ranking |
+| `affiliate_impression` | `AdImpressionTracker` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-31 API確認)** — dimensionはparameter名に紐づき、イベント名改名後もlive定義に存在 | `affiliate-ads-standards.md §6` |
+| `cta_click` | `trackCtaClick` | `link_position` | ✅登録済 (2026-07-31 API確認) | buzz-map §7.3 / ファネル |
+| `cta_click` | `trackCtaClick` | `cta_id` / `content_id` / `target_type` / `target_key` | ⏳要登録 (2026-07-31 API確認) | buzz-map §7.3 / ファネル |
+| `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `experiment_id` | ✅登録済 (2026-07-31 API確認) | `apps/web/src/features/ranking/components/FeaturedRankings/README.md` |
+| `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `card_variant` / `slot` / `experiment_variant` | ⏳要登録 (2026-07-31 API確認) | `apps/web/src/features/ranking/components/FeaturedRankings/README.md` |
+| `ranking_view` | `trackRankingView` | `ranking_key` / `category_key` / `area_type` / `year_code` | ✅登録済 (2026-07-31 API確認) | ranking |
+| `file_download` | `trackCsvDownload` | `ranking_key` / `year_code`（`file_name`/`file_extension` は GA4 標準） | ✅登録済 (2026-07-31 API確認) | ranking |
 | `year_change` / `area_type_change` | `trackYear*` / `trackAreaType*` | `ranking_key` ほか（分析頻度低・登録は任意） | 任意 | ranking |
 | `search` | `trackSearch` | `search_term` は GA4 推奨イベント標準（要否×） | 要否× | 検索 |
 | `share` | `trackShare` | `method` / `content_type` / `item_id` は GA4 標準（要否×） | 要否× | 共有 |
@@ -86,6 +89,11 @@ npm run google-admin:audit
 > `❓要確認` は「code コメントで登録前提と書かれているが、GA4 管理画面での実登録を確認していない」状態。
 > `.claude/rules/evidence-based-judgment.md` に従い、GA4 で実登録を確認したら `✅登録済 (日付)` に更新する。
 > 推測で `✅` にしない。
+>
+> **2026-07-31 API監査**: GA4 Admin API `properties.customDimensions.list`を
+> `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`のread-only認証で実行し、live custom dimension 16件を取得した。
+> 台帳とのexact parameter突合で上表の7 parameterが未登録、その他の`❓要確認`は登録済みと確定した。
+> 実行層の恒久API化は`GOOGLE-ADMIN-AUTOMATION-01`で追跡する。
 >
 > ## ✅ 解消: `ad_impression` の衝突 → `affiliate_impression` へ改名 (2026-07-28)
 >
@@ -186,7 +194,7 @@ npm run google-admin:audit
 |---|---|
 | イベント定義 (events.ts) の実装・パラメータ設計 | 各 UI/機能オーナー agent（横断 UX 計装配線 = `site-ux-manager`、ページ内 = `ranking-ui-manager` / `theme-ui-manager`、広告 = `affiliate-manager` ほか） |
 | **本台帳 §2 の維持・登録状況の追跡・実登録の確認** | `ga4-analyst`（GA4 計測の所有者） |
-| カスタムディメンション登録（GA4 管理画面操作） | 人間（オーナー）、または明示承認済みPlaywright runner（doc 41 §6 allowlist内のみ） |
+| カスタムディメンション登録 | 人間（オーナー）、または`google-admin`の明示承認済みAdmin API（Playwrightは使わない） |
 | effect/* 判定 | `improvement-triage`（登録・反映確認を前提に） |
 
 ## 関連
