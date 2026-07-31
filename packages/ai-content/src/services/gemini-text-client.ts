@@ -21,8 +21,19 @@
 
 const API_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 
-/** 既定モデル。テキストは flash 系で足りる (品質フロアは決定的ゲートが握る) */
-export const GEMINI_TEXT_MODEL = "gemini-2.5-flash";
+/**
+ * 既定モデル。テキストは flash 系で足りる (品質フロアは決定的ゲートが握る)。
+ *
+ * ★2026-07-31 に `gemini-2.5-flash` から変更。旧モデルは **ListModels に載ったまま
+ * generateContent が 404** になっており (提供終了)、日次 cron が全件失敗していた。
+ *
+ * 選定の考え方:
+ *   - **pinned なモデル名にする** (`gemini-flash-latest` のような浮動 alias にしない)。
+ *     浮動 alias は 404 を避けられる代わりに、品質もコストも黙って変わる。提供終了は
+ *     preflight が実生成で必ず検出するので、pinned でも気づけないまま止まることはない
+ *   - lite ではなく flash (47 県の解説を書かせるため)。preview / experimental は使わない
+ */
+export const GEMINI_TEXT_MODEL = "gemini-3.5-flash";
 
 /**
  * 実際に使うモデル名。`GEMINI_TEXT_MODEL` env で上書きできる。

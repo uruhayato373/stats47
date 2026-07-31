@@ -69,7 +69,7 @@ jobs:
           fi
           echo "GEMINI_API_KEY: 設定あり (値は出力しない)"
 
-      - name: 🔎 Preflight (ListModels で実在確認)
+      - name: 🔎 Preflight (極小の実生成で使用可否を確認)
         run: |
           set -o pipefail
           NODE_OPTIONS='--conditions react-server' \
