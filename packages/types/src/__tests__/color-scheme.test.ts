@@ -105,7 +105,7 @@ describe("★mutation — 現行バグの再現で感度を固定する", () => 
 
   it("カタログから Blues を落とすと assert が落ちる (カタログが照合に効いている証明)", () => {
     const without = COLOR_SCHEME_CATALOG.filter((e) => e.short !== "Blues");
-    const lookup = new Map(without.map((e) => [e.canonical, e]));
+    const lookup = new Map<string, unknown>(without.map((e) => [e.canonical, e]));
     expect(lookup.has("interpolateBlues")).toBe(false);
   });
 });

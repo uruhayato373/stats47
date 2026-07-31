@@ -10,6 +10,8 @@ export { type YearFormat, formatYearName } from './year-format';
 
 // コロプレス配色の語彙 SSOT (data-configs / visualization / svg-builder が共有)
 export {
+  type CanonicalColorScheme,
+  type ShortColorScheme,
   type ColorSchemeEntry,
   type ColorSchemeType,
   COLOR_SCHEME_CATALOG,

@@ -399,6 +399,16 @@ jobs:
         run: npm run test:coverage -w apps/web
         continue-on-error: false # テスト失敗で止める
 
+      # ★2026-07-31 新設。この step が無かった間、packages/* の vitest (12 パッケージ・
+      #   1,000 件超) は CI にも pre-commit にも配線されておらず**一度も実行されていなかった**。
+      #   実際に fixture が空配列に潰れたテストや、node_modules の依存パッケージ自身の
+      #   テストを収集する設定ミスが赤のまま放置されていた。
+      #   環境依存のレンダリング比較は packages/visualization/vitest.config.ts で
+      #   RUN_RENDER_TESTS=1 の opt-in に分けてある。
+      - name: 🧪 Run Package Unit Tests
+        run: npm run test:packages
+        continue-on-error: false
+
       - name: 📊 Upload coverage to artifacts
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:

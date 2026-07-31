@@ -1,166 +1,41 @@
+import { COLOR_SCHEME_CATALOG } from "@stats47/types";
+
 import type { ColorScheme, ColorSchemeType, D3ColorScheme } from "../types";
 
 /**
- * Sequential（順序）カラースキーム
- * 値の大小を連続的に表現するためのスキーム
+ * 配色の語彙は `@stats47/types` の COLOR_SCHEME_CATALOG が SSOT (2026-07-31)。
+ * このファイルは UI (セレクタ) 向けの形へ**導出**するだけで、値・ラベルを持たない。
+ *
+ * 以前はここが 3 本ある語彙実装の 1 つで、短縮名 alias (大小 2 通りを手書き) と
+ * 正式名の対応が別々に管理されていた。カタログ側で双方向変換を持つので不要になった。
  */
-export const SEQUENTIAL_COLOR_SCHEMES: ColorScheme[] = [
-  // 単色グラデーション
-  { value: 'interpolateBlues', label: '青', type: 'sequential' },
-  { value: 'interpolateGreens', label: '緑', type: 'sequential' },
-  { value: 'interpolateGreys', label: 'グレー', type: 'sequential' },
-  { value: 'interpolateOranges', label: 'オレンジ', type: 'sequential' },
-  { value: 'interpolatePurples', label: '紫', type: 'sequential' },
-  { value: 'interpolateReds', label: '赤', type: 'sequential' },
-  
-  // マルチカラー系
-  { value: 'interpolateBuGn', label: '青→緑', type: 'sequential' },
-  { value: 'interpolateBuPu', label: '青→紫', type: 'sequential' },
-  { value: 'interpolateGnBu', label: '緑→青', type: 'sequential' },
-  { value: 'interpolateOrRd', label: 'オレンジ→赤', type: 'sequential' },
-  { value: 'interpolatePuBuGn', label: '紫→青→緑', type: 'sequential' },
-  { value: 'interpolatePuBu', label: '紫→青', type: 'sequential' },
-  { value: 'interpolatePuRd', label: '紫→赤', type: 'sequential' },
-  { value: 'interpolateRdPu', label: '赤→紫', type: 'sequential' },
-  { value: 'interpolateYlGnBu', label: '黄→緑→青', type: 'sequential' },
-  { value: 'interpolateYlGn', label: '黄→緑', type: 'sequential' },
-  { value: 'interpolateYlOrBr', label: '黄→橙→茶', type: 'sequential' },
-  { value: 'interpolateYlOrRd', label: '黄→橙→赤', type: 'sequential' },
+const byType = (type: ColorSchemeType): ColorScheme[] =>
+  COLOR_SCHEME_CATALOG.filter((e) => e.type === type).map((e) => ({
+    value: e.canonical,
+    label: e.label,
+    type: e.type,
+  }));
 
-  // 知覚的に均一（色覚異常対応）
-  { value: 'interpolateViridis', label: 'Viridis', type: 'sequential' },
-  { value: 'interpolatePlasma', label: 'Plasma', type: 'sequential' },
-  { value: 'interpolateInferno', label: 'Inferno', type: 'sequential' },
-  { value: 'interpolateMagma', label: 'Magma', type: 'sequential' },
-  { value: 'interpolateTurbo', label: 'Turbo', type: 'sequential' },
-  { value: 'interpolateCool', label: 'Cool', type: 'sequential' },
-  { value: 'interpolateWarm', label: 'Warm', type: 'sequential' },
-  { value: 'interpolateCividis', label: 'Cividis', type: 'sequential' },
-  { value: 'interpolateCubehelix', label: 'Cubehelix', type: 'sequential' },
-];
+/** Sequential（順序）カラースキーム — 値の大小を連続的に表現する */
+export const SEQUENTIAL_COLOR_SCHEMES: ColorScheme[] = byType("sequential");
+
+/** Diverging（発散）カラースキーム — 中央値を基準に両方向へ変化する */
+export const DIVERGING_COLOR_SCHEMES: ColorScheme[] = byType("diverging");
+
+/** Categorical（カテゴリ）カラースキーム — ランキング可視化では未使用 (将来拡張用) */
+export const CATEGORICAL_COLOR_SCHEMES: ColorScheme[] = byType("categorical");
 
 /**
- * Diverging（発散）カラースキーム
- * 中央値を基準に両方向に変化するスキーム（例：負←0→正）
+ * カラースキーム名の略称から正式名へのマッピング。
+ *
+ * @deprecated `normalizeColorScheme` (@stats47/types) を使う。大小の揺れも吸収する。
  */
-export const DIVERGING_COLOR_SCHEMES: ColorScheme[] = [
-  { value: 'interpolateBrBG', label: '茶→青緑', type: 'diverging' },
-  { value: 'interpolatePRGn', label: '紫→緑', type: 'diverging' },
-  { value: 'interpolatePiYG', label: 'ピンク→黄緑', type: 'diverging' },
-  { value: 'interpolatePuOr', label: '紫→オレンジ', type: 'diverging' },
-  { value: 'interpolateRdBu', label: '赤→青', type: 'diverging' },
-  { value: 'interpolateRdGy', label: '赤→グレー', type: 'diverging' },
-  { value: 'interpolateRdYlBu', label: '赤→黄→青', type: 'diverging' },
-  { value: 'interpolateRdYlGn', label: '赤→黄→緑', type: 'diverging' },
-  { value: 'interpolateSpectral', label: 'スペクトラル', type: 'diverging' },
-];
-
-/**
- * Categorical（カテゴリ）カラースキーム
- * カテゴリデータ用の離散的な色セット
- * 
- * 注意: 現時点ではランキング可視化では使用しませんが、
- * 将来的な拡張のために定義しています。
- */
-export const CATEGORICAL_COLOR_SCHEMES: ColorScheme[] = [
-  { value: 'schemeCategory10', label: 'Category 10色', type: 'categorical' },
-  { value: 'schemeAccent', label: 'Accent', type: 'categorical' },
-  { value: 'schemeDark2', label: 'Dark2', type: 'categorical' },
-  { value: 'schemePaired', label: 'Paired', type: 'categorical' },
-  { value: 'schemePastel1', label: 'Pastel1', type: 'categorical' },
-  { value: 'schemePastel2', label: 'Pastel2', type: 'categorical' },
-  { value: 'schemeSet1', label: 'Set1', type: 'categorical' },
-  { value: 'schemeSet2', label: 'Set2', type: 'categorical' },
-  { value: 'schemeSet3', label: 'Set3', type: 'categorical' },
-  { value: 'schemeTableau10', label: 'Tableau 10色', type: 'categorical' },
-];
-
-/**
- * カラースキーム名の略称から正式名へのマッピング
- * d3jsの正式名は "interpolate" プレフィックスが必要
- */
-export const COLOR_SCHEME_ALIASES: Record<string, D3ColorScheme> = {
-  // Sequential - 単色系
-  Blues: "interpolateBlues",
-  blues: "interpolateBlues",
-  Greens: "interpolateGreens",
-  greens: "interpolateGreens",
-  Greys: "interpolateGreys",
-  greys: "interpolateGreys",
-  grays: "interpolateGreys",
-  Oranges: "interpolateOranges",
-  oranges: "interpolateOranges",
-  Purples: "interpolatePurples",
-  purples: "interpolatePurples",
-  Reds: "interpolateReds",
-  reds: "interpolateReds",
-
-  // Sequential - マルチカラー系
-  BuGn: "interpolateBuGn",
-  bugn: "interpolateBuGn",
-  BuPu: "interpolateBuPu",
-  bupu: "interpolateBuPu",
-  GnBu: "interpolateGnBu",
-  gnbu: "interpolateGnBu",
-  OrRd: "interpolateOrRd",
-  orrd: "interpolateOrRd",
-  PuBuGn: "interpolatePuBuGn",
-  pubugn: "interpolatePuBuGn",
-  PuBu: "interpolatePuBu",
-  pubu: "interpolatePuBu",
-  PuRd: "interpolatePuRd",
-  purd: "interpolatePuRd",
-  RdPu: "interpolateRdPu",
-  rdpu: "interpolateRdPu",
-  YlGnBu: "interpolateYlGnBu",
-  ylgnbu: "interpolateYlGnBu",
-  YlGn: "interpolateYlGn",
-  ylgn: "interpolateYlGn",
-  YlOrBr: "interpolateYlOrBr",
-  ylorbr: "interpolateYlOrBr",
-  YlOrRd: "interpolateYlOrRd",
-  ylorrd: "interpolateYlOrRd",
-
-  // Sequential - 知覚的に均一
-  Viridis: "interpolateViridis",
-  viridis: "interpolateViridis",
-  Plasma: "interpolatePlasma",
-  plasma: "interpolatePlasma",
-  Inferno: "interpolateInferno",
-  inferno: "interpolateInferno",
-  Magma: "interpolateMagma",
-  magma: "interpolateMagma",
-  Cividis: "interpolateCividis",
-  cividis: "interpolateCividis",
-  Warm: "interpolateWarm",
-  warm: "interpolateWarm",
-  Cool: "interpolateCool",
-  cool: "interpolateCool",
-  Turbo: "interpolateTurbo",
-  turbo: "interpolateTurbo",
-  Cubehelix: "interpolateCubehelix",
-  cubehelix: "interpolateCubehelix",
-
-  // Diverging
-  BrBG: "interpolateBrBG",
-  brbg: "interpolateBrBG",
-  PRGn: "interpolatePRGn",
-  prgn: "interpolatePRGn",
-  PiYG: "interpolatePiYG",
-  piyg: "interpolatePiYG",
-  PuOr: "interpolatePuOr",
-  puor: "interpolatePuOr",
-  RdBu: "interpolateRdBu",
-  rdbu: "interpolateRdBu",
-  RdGy: "interpolateRdGy",
-  rdgy: "interpolateRdGy",
-  RdYlBu: "interpolateRdYlBu",
-  rdylbu: "interpolateRdYlBu",
-  RdYlGn: "interpolateRdYlGn",
-  rdylgn: "interpolateRdYlGn",
-  Spectral: "interpolateSpectral",
-  spectral: "interpolateSpectral",
-};
+export const COLOR_SCHEME_ALIASES: Record<string, D3ColorScheme> = Object.fromEntries(
+  COLOR_SCHEME_CATALOG.flatMap((e) => [
+    [e.short, e.canonical],
+    [e.short.toLowerCase(), e.canonical],
+  ]),
+);
 
 /**
  * 用途別おすすめカラースキーム

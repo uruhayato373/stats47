@@ -5,12 +5,9 @@
  * 手動マッピングを排除し、D3ColorScheme 型に定義された全スキームを自動的にサポートする。
  */
 
-import type { D3Module } from "../../types";
+import { DEFAULT_SEQUENTIAL_SCHEME, d3KeyOfColorScheme } from "@stats47/types";
 
-// D3 ではファクトリ関数になっているスキームの正式名マッピング
-const D3_NAME_OVERRIDES: Record<string, string> = {
-  interpolateCubehelix: "interpolateCubehelixDefault",
-};
+import type { D3Module } from "../../types";
 
 /**
  * D3オブジェクトからカラースキーム補間関数を取得
@@ -23,9 +20,11 @@ const D3_NAME_OVERRIDES: Record<string, string> = {
 export function resolveColorInterpolator(
   d3: D3Module,
   colorScheme: string,
-  fallback = "interpolateBlues",
+  fallback: string = DEFAULT_SEQUENTIAL_SCHEME,
 ): (t: number) => string {
-  const d3Key = D3_NAME_OVERRIDES[colorScheme] ?? colorScheme;
+  // canonical と d3 の実名がずれるもの (interpolateCubehelix → interpolateCubehelixDefault) は
+  // カタログの d3Key が吸収する。消費者ごとの override マップを持たない (2026-07-31)。
+  const d3Key = d3KeyOfColorScheme(colorScheme) ?? colorScheme;
   const fn = (d3 as Record<string, unknown>)[d3Key];
   if (typeof fn === "function") {
     // 関数が (t) => string ではなくファクトリの可能性を検証

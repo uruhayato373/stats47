@@ -47,18 +47,24 @@ export interface ColorSchemeEntry {
   label: string;
 }
 
-/** `interpolate<Name>` から `<Name>` を作る (categorical は `scheme<Name>`)。 */
-function seq(short: string, label: string, d3Key?: string): ColorSchemeEntry {
-  const canonical = `interpolate${short}`;
-  return { short, canonical, d3Key: d3Key ?? canonical, type: "sequential", label };
+/**
+ * `interpolate<Name>` から `<Name>` を作る (categorical は `scheme<Name>`)。
+ *
+ * 戻り値を**リテラル型**にしてあるのは、`CanonicalColorScheme` (下記) を
+ * カタログから型導出するため。`ColorSchemeEntry` で注釈すると string に広がり、
+ * visualization の `D3ColorScheme` union を手書きで持ち続けることになる。
+ */
+function seq<S extends string>(short: S, label: string, d3Key?: string) {
+  const canonical = `interpolate${short}` as const;
+  return { short, canonical, d3Key: d3Key ?? canonical, type: "sequential" as const, label };
 }
-function div(short: string, label: string): ColorSchemeEntry {
-  const canonical = `interpolate${short}`;
-  return { short, canonical, d3Key: canonical, type: "diverging", label };
+function div<S extends string>(short: S, label: string) {
+  const canonical = `interpolate${short}` as const;
+  return { short, canonical, d3Key: canonical, type: "diverging" as const, label };
 }
-function cat(short: string, label: string): ColorSchemeEntry {
-  const canonical = `scheme${short}`;
-  return { short, canonical, d3Key: canonical, type: "categorical", label };
+function cat<S extends string>(short: S, label: string) {
+  const canonical = `scheme${short}` as const;
+  return { short, canonical, d3Key: canonical, type: "categorical" as const, label };
 }
 
 /**
@@ -68,7 +74,7 @@ function cat(short: string, label: string): ColorSchemeEntry {
  * SEQUENTIAL / DIVERGING / CATEGORICAL 3 配列。値・ラベル・type をそのまま持ち込み、
  * 短縮名を機械的に導出して**双方向**にした。
  */
-export const COLOR_SCHEME_CATALOG: readonly ColorSchemeEntry[] = [
+export const COLOR_SCHEME_CATALOG = [
   // 単色グラデーション
   seq("Blues", "青"),
   seq("Greens", "緑"),
@@ -121,17 +127,34 @@ export const COLOR_SCHEME_CATALOG: readonly ColorSchemeEntry[] = [
   cat("Set2", "Set2"),
   cat("Set3", "Set3"),
   cat("Tableau10", "Tableau 10色"),
-];
+] as const satisfies readonly ColorSchemeEntry[];
+
+/**
+ * 正典形の union 型。**カタログから導出**する。
+ *
+ * visualization の `D3ColorScheme` はこれの別名にしてある。手書き union を
+ * 2 本持つと、カタログに足しても型が受け付けない (逆も然り) というドリフトが起きる。
+ */
+export type CanonicalColorScheme = (typeof COLOR_SCHEME_CATALOG)[number]["canonical"];
+/** 短縮形の union 型 (svg-builder が受ける形)。 */
+export type ShortColorScheme = (typeof COLOR_SCHEME_CATALOG)[number]["short"];
 
 /** 既定値の単一定義。以前は 4 箇所に散在していた。 */
-export const DEFAULT_SEQUENTIAL_SCHEME = "interpolateBlues";
-export const DEFAULT_DIVERGING_SCHEME = "interpolateRdBu";
+export const DEFAULT_SEQUENTIAL_SCHEME = "interpolateBlues" satisfies CanonicalColorScheme;
+export const DEFAULT_DIVERGING_SCHEME = "interpolateRdBu" satisfies CanonicalColorScheme;
 
-const BY_CANONICAL = new Map(COLOR_SCHEME_CATALOG.map((e) => [e.canonical, e]));
-const BY_SHORT_LOWER = new Map(COLOR_SCHEME_CATALOG.map((e) => [e.short.toLowerCase(), e]));
+/** カタログ要素の実型 (canonical / short がリテラルなので、変換の戻り値も union になる)。 */
+type CatalogEntry = (typeof COLOR_SCHEME_CATALOG)[number];
+
+const BY_CANONICAL = new Map<string, CatalogEntry>(
+  COLOR_SCHEME_CATALOG.map((e) => [e.canonical, e]),
+);
+const BY_SHORT_LOWER = new Map<string, CatalogEntry>(
+  COLOR_SCHEME_CATALOG.map((e) => [e.short.toLowerCase(), e]),
+);
 
 /** 任意の表記 (短縮名・正式名・大小違い) からカタログ項目を引く。未知なら null。 */
-export function findColorScheme(value: string | null | undefined): ColorSchemeEntry | null {
+export function findColorScheme(value: string | null | undefined): CatalogEntry | null {
   if (!value) return null;
   const v = value.trim();
   if (!v) return null;
@@ -139,7 +162,9 @@ export function findColorScheme(value: string | null | undefined): ColorSchemeEn
 }
 
 /** 任意の表記 → 正典形 (`interpolateBlues`)。未知なら null。 */
-export function normalizeColorScheme(value: string | null | undefined): string | null {
+export function normalizeColorScheme(
+  value: string | null | undefined,
+): CanonicalColorScheme | null {
   return findColorScheme(value)?.canonical ?? null;
 }
 
@@ -149,7 +174,9 @@ export function normalizeColorScheme(value: string | null | undefined): string |
  * ★この方向の変換が存在しなかったことが、svg-builder に正式名を渡すと
  * 全部赤になる欠陥の原因だった。
  */
-export function toShortColorScheme(value: string | null | undefined): string | null {
+export function toShortColorScheme(
+  value: string | null | undefined,
+): ShortColorScheme | null {
   return findColorScheme(value)?.short ?? null;
 }
 
@@ -173,7 +200,7 @@ export function colorSchemeTypeOf(value: string | null | undefined): ColorScheme
  *
  * @param context どこで起きたかを例外文に含める (例: `build-ranking-item(taxable-income)`)
  */
-export function assertKnownColorScheme(value: string, context: string): string {
+export function assertKnownColorScheme(value: string, context: string): CanonicalColorScheme {
   const canonical = normalizeColorScheme(value);
   if (!canonical) {
     throw new Error(
