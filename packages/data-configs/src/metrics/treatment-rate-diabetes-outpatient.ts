@@ -12,6 +12,10 @@ export const treatmentRateDiabetesOutpatient: MetricConfig = {
     "statsDataId": "0004026105",
     "cdCat01": "15",
     "cdCat03": "4",
+    "areaAxis": {
+      "axis": "cat02",
+      "scheme": "seq-pref",
+    },
     "displayName": "患者調査 第37表 傷病分類別受療率（糖尿病・外来）",
     "url": "https://www.e-stat.go.jp/dbview?sid=0004026105",
   },
