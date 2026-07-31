@@ -71,14 +71,16 @@ const DRY_RUN = args.includes("--dry-run");
 const KEEP_DRAFT = args.includes("--keep-draft");
 
 /**
- * v1 が扱う型。**単一指標の型に限る**。
+ * 扱う型。
  *
- * 型B (相関) を外しているのは実装の都合ではなく、**散布図が無いと成立しない型**だからです。
- * 2 指標の関係を論じる記事に、主指標だけのランキング図と地図を貼っても問いに答えられません
- * (dry-run で実際にその形になることを確認しました)。散布図の接地 (fetch-correlation-scatter)
- * を通してから解禁します。それまでは黙って劣化した記事を書くより、書かない方を選びます。
+ * 単一指標の型は「ランキング + タイルマップ」の 2 枚、型B (相関) は
+ * 「指標A ランキング + 指標B ランキング + 散布図」の 3 枚で構成する。
+ *
+ * 型B に散布図が要るのは、2 指標の関係を論じる記事に主指標だけの図を貼っても問いに
+ * 答えられないからです (2026-07-31 に dry-run で実際にその形になることを確認し、
+ * 散布図の接地 fetch-correlation-scatter.mjs を通してから解禁しました)。
  */
-const SUPPORTED_ARCHETYPES = new Set(["A", "C", "D", "D2", "F", "G"]);
+const SUPPORTED_ARCHETYPES = new Set(["A", "B", "C", "D", "D2", "F", "G"]);
 
 interface TopicEntry {
   topicKey: string;
@@ -100,7 +102,12 @@ function log(msg: string) {
  */
 export function slugForTopic(topic: Pick<TopicEntry, "topicKey" | "metricKeys" | "archetype">): string {
   const primary = topic.metricKeys[0] ?? topic.topicKey;
-  const base = `${primary}-prefecture-gap`;
+  // 型B は 2 指標の関係が主題なので slug も両方を含める。切り詰めで衝突しても
+  // 「既に存在」でスキップされるだけなので安全側に倒れる。
+  const base =
+    topic.archetype === "B" && topic.metricKeys.length >= 2
+      ? `${topic.metricKeys[0]}-vs-${topic.metricKeys[1]}`
+      : `${primary}-prefecture-gap`;
   if (base.length <= 60) return base;
   const cut = base.slice(0, 60);
   const boundary = cut.lastIndexOf("-");
@@ -233,14 +240,18 @@ async function main() {
     log(`\n=== ${slug} (型${topic.archetype}) ===`);
 
     // --- 1. データ接地 ---
-    const fetched = run("node", [
+    // 型B は 2 指標のランキング + 散布図で構成するため地図は作らない (図が多すぎると
+    // 図あたりの解説字数の床に届かなくなる)。単一指標の型はランキング + 地図。
+    const isPair = topic.archetype === "B" && topic.metricKeys.length >= 2;
+    const fetchArgs = [
       ".claude/scripts/blog/fetch-ranking-data-r2.mjs",
       "--slug",
       slug,
       "--keys",
       topic.metricKeys.join(","),
-      "--with-map",
-    ]);
+      ...(isPair ? [] : ["--with-map"]),
+    ];
+    const fetched = run("node", fetchArgs);
     if (!fetched.ok) {
       log(`[reject] データ接地に失敗: ${fetched.stderr.trim().slice(0, 200)}`);
       fs.rmSync(dir, { recursive: true, force: true });
@@ -273,6 +284,52 @@ async function main() {
       continue;
     }
 
+    // 型B: 散布図を R2 相関 snapshot から接地する。相関ペアが snapshot に無ければ
+    // この記事は成立しないので skip する (主指標だけの図で相関記事を書かない)。
+    let scatterBase: string | null = null;
+    let secondMetric: GroundTruthMetric | null = null;
+    if (isPair) {
+      const [aKey, bKey] = topic.metricKeys;
+      const secondJson = path.join(dataDir, `${bKey}-prefecture-rankings.json`);
+      if (!fs.existsSync(secondJson)) {
+        log(`[reject] 第2指標の接地に失敗: ${bKey}`);
+        fs.rmSync(dir, { recursive: true, force: true });
+        counters.rejected++;
+        continue;
+      }
+      const second = JSON.parse(fs.readFileSync(secondJson, "utf8")) as typeof payload;
+      const secondVerdict = gateTopicData(second.rankingKey, second.data, new Date());
+      if (!secondVerdict.ok) {
+        log(`[reject] 第2指標のデータ健全性ゲート: ${secondVerdict.reasons.join(" / ")}`);
+        fs.rmSync(dir, { recursive: true, force: true });
+        counters.rejected++;
+        continue;
+      }
+      const scatter = run("node", [
+        ".claude/scripts/blog/fetch-correlation-scatter.mjs",
+        "--slug", slug, "--base", aKey, "--pair", bKey,
+      ]);
+      if (!scatter.ok) {
+        log(`[reject] 散布図の接地に失敗 (相関 snapshot に無い): ${scatter.stderr.trim().slice(0, 160)}`);
+        fs.rmSync(dir, { recursive: true, force: true });
+        counters.rejected++;
+        continue;
+      }
+      scatterBase = `${aKey}--${bKey}-scatter`;
+      secondMetric = {
+        rankingKey: second.rankingKey,
+        label: second.title,
+        unit: second.unit,
+        year: second.year,
+        source: second.source,
+        rows: second.data.map((r) => ({
+          rank: r.rank as number,
+          areaName: r.areaName as string,
+          value: r.value as number,
+        })),
+      };
+    }
+
     // --- 3. SVG 生成 ---
     const charted = run("npx", [
       "tsx",
@@ -301,21 +358,43 @@ async function main() {
       })),
     };
     const allowedLinks = await buildAllowedLinks(payload.rankingKey, payload.data);
+    if (secondMetric) {
+      // カードは 1 枚だけ (dup-ranking-link を避ける) なので、第2指標へはテキストリンクで導線を作る。
+      allowedLinks.unshift({
+        href: `/ranking/${secondMetric.rankingKey}`,
+        label: `${secondMetric.label}ランキング`,
+      });
+    }
     const promptInput = {
       slug,
       archetype: (topic.archetype as BlogArchetype) ?? "A",
       suggestedTitle: topic.suggestedTitle,
-      metrics: [metric],
-      figures: [
-        {
-          caption: "ランキング (上位5+下位5)",
-          markdown: `![${payload.title}の上位と下位](data/${slug}-prefecture-rankings.svg)`,
-        },
-        {
-          caption: "地理分布のタイルマップ",
-          markdown: `![${payload.title}の地理分布](data/${slug}-map.svg)`,
-        },
-      ],
+      metrics: secondMetric ? [metric, secondMetric] : [metric],
+      figures: scatterBase
+        ? [
+            {
+              caption: `${metric.label}のランキング (上位5+下位5)`,
+              markdown: `![${metric.label}の上位と下位](data/${slug}-prefecture-rankings.svg)`,
+            },
+            {
+              caption: `${secondMetric?.label}のランキング (上位5+下位5)`,
+              markdown: `![${secondMetric?.label}の上位と下位](data/${secondMetric?.rankingKey}-prefecture-rankings.svg)`,
+            },
+            {
+              caption: "2 指標の散布図 (相関の可視化)",
+              markdown: `![${metric.label}と${secondMetric?.label}の関係](data/${scatterBase}.svg)`,
+            },
+          ]
+        : [
+            {
+              caption: "ランキング (上位5+下位5)",
+              markdown: `![${payload.title}の上位と下位](data/${slug}-prefecture-rankings.svg)`,
+            },
+            {
+              caption: "地理分布のタイルマップ",
+              markdown: `![${payload.title}の地理分布](data/${slug}-map.svg)`,
+            },
+          ],
       sourceLinkHref: `/ranking/${payload.rankingKey}`,
       sourceLinkLabel: `${payload.title}ランキングをもっと見る`,
       allowedLinks,
@@ -326,7 +405,10 @@ async function main() {
       log(
         `[dry-run] データ健全 / prompt ${prompt.length.toLocaleString()} 文字 / リンク候補 ${allowedLinks.length} 件`,
       );
-      log(`[dry-run] 図 2 枚・接地 ${metric.rows.length} 県 (${metric.year}年 ${metric.unit})`);
+      log(
+        `[dry-run] 図 ${promptInput.figures.length} 枚・指標 ${promptInput.metrics.length} 件・` +
+          `接地 ${metric.rows.length} 県 (${metric.year}年 ${metric.unit})`,
+      );
       // dry-run は「書ける状態か」を確かめるだけなので接地物を残さない。
       // 残すと article.md の無いディレクトリが outbox に溜まり、公開 workflow の検出を汚す。
       fs.rmSync(dir, { recursive: true, force: true });

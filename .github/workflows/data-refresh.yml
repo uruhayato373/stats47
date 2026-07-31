@@ -58,6 +58,8 @@ on:
 permissions:
   # push トリガー時に consume commit-back するため write が要る
   contents: write
+  # 失敗時に Issue を起票するため (2026-07-31 追加。下の「失敗を通知する」参照)
+  issues: write
 
 concurrency:
   # sync-snapshots.yml と同じ group で R2 push を直列化 (同時 push による破損防止)。
@@ -204,3 +206,53 @@ jobs:
             if git push origin "${{ github.ref_name }}"; then break; fi
             git pull --rebase origin "${{ github.ref_name }}"
           done
+
+  # ★失敗を通知する (2026-07-31 追加)
+  #
+  # 2026-07-05 の月次 full refresh は correlation task の JS ヒープ OOM で落ちたが、
+  # **どこにも通知が無く Actions タブに赤が残るだけ**だった。この workflow は月次でしか
+  # 走らないので、気づかなければ次の実行まで 1 ヶ月 R2 が更新されない。
+  #
+  # 他の定期 workflow (ranking-integrity-audit-weekly / ogp-image-audit-weekly /
+  # cloudflare-usage-daily) は失敗時に Issue を起票しており、ここだけ欠けていた。同じ方式に揃える。
+  #
+  # 手動 dispatch の失敗は起票しない (人がその場で見ているため)。
+      - name: 🚨 Open issue on failure (schedule / push のみ)
+        if: failure() && github.event_name != 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[Data Refresh Alert] e-Stat → R2 の更新が失敗した"
+          {
+            echo "## Data Refresh 失敗 ($DATE)"
+            echo ""
+            echo "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "- trigger: \`${{ github.event_name }}\`"
+            echo "- metric: \`${{ steps.resolve.outputs.metric }}\` (空 = 全 metric)"
+            echo ""
+            echo "R2 の配信データが更新されていません。**次の月次まで放置すると 1 ヶ月古いまま**になります。"
+            echo ""
+            echo "### 見るところ"
+            echo ""
+            echo "- \`page-data-batch\` で落ちた → e-Stat 側の障害か config の不正。形状ゲートが"
+            echo "  書き込みを止めた場合は既存 R2 が温存されているので配信は壊れていない"
+            echo "- \`sync-snapshots\` で落ちた → 観測値の push は完了済み。派生 snapshot だけが古い。"
+            echo "  2026-07-05 は correlation task で JS ヒープ OOM (4,051 MB)。heap は 8 GB へ"
+            echo "  引き上げ済だが、metric 数が増えれば再発しうる (その時は streaming 化が要る)"
+            echo ""
+            echo "### 再実行"
+            echo ""
+            echo "\`data/data-refresh-requests.json\` を develop へ push するか、workflow_dispatch。"
+            echo ""
+            echo "正典: .claude/rules/metric-config-standards.md"
+          } > /tmp/data-refresh-issue.md
+
+          gh label create data-refresh-alert --description "e-Stat → R2 更新の失敗" --color "b60205" --force 2>/dev/null || true
+
+          EXISTING=$(gh issue list --state open --label data-refresh-alert --search "\"[Data Refresh Alert]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file /tmp/data-refresh-issue.md
+          else
+            gh issue create --title "$TITLE" --label "data-refresh-alert,auto-generated" --body-file /tmp/data-refresh-issue.md
+          fi
