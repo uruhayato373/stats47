@@ -123,12 +123,19 @@ Claude のトークンを使わず全 active ranking (実測 2,179 件) を完�
 **`.github/workflows/ai-content-generate-daily.yml`** (JST 03:00) が以下を回す:
 
 ```
-モデル preflight (ListModels で実在確認・生成しない)
+モデル preflight (極小の実生成で使用可否を確認)
   → キュー再構築 (--scope all) → needs-regen 上位 N → Gemini API 生成 (--model gemini-api)
   → 決定的ゲート → outbox (--outbox) → develop へ push
-  → publish-ai-content.yml が発火 (gate 再検証 → R2 → CDN purge → outbox 削除)
+  → publish-ai-content.yml を dispatch (gate 再検証 → R2 → CDN purge → outbox 削除)
   → キュー再構築して進捗を commit-back
 ```
+
+**★outbox の配送は push トリガー任せにしない (2026-07-31 実測)**。GitHub Actions は
+**既定の `GITHUB_TOKEN` で push した場合、後続 workflow を発火させない**(無限ループ防止の仕様)。
+日次 cron の commit-back は既定トークンで push するため、`publish-ai-content.yml` の
+push トリガーは**発火しない**。初めて生成が成功した回に 2 件が outbox へ滞留してこれが露見した
+(生成が常に 0 件だったため、それまで一度も露見しなかった)。日次 cron は `actions: write` を持ち
+**明示的に dispatch し、run が生まれたことを実測してから成功**とする。push 失敗も握り潰さない。
 
 | 要素 | 実装 |
 |---|---|
