@@ -106,7 +106,14 @@ export interface ChoroplethOptions {
   scheme?: string;
   /** カラースケールを反転する（高い値を淡色側にする等）。 */
   reverse?: boolean;
-  /** 各タイルに県名の下へ値も表示する（省略時: false = 県名のみ）。 */
+  /**
+   * 各タイルに県名の下へ値も表示する（**省略時: true**）。
+   *
+   * 2026-07-31 に既定を反転した。地図を最大化した目的が「県名と値を読めるようにする」
+   * ことなので、既定で値を出さないと目的を果たさない（実データの再生成で値が
+   * 1 枚も入っていなかった）。値が読めないほどタイルが狭い場合は
+   * `fitValueLabel` が単位を落とし、それでも入らなければ縮める。
+   */
   showValue?: boolean;
   /**
    * 凡例の端ラベル（省略時: ["低い", "高い"]）。
@@ -217,6 +224,19 @@ const PREF_FULL_NAME: Record<string, string> = {
 /** 正式名称を引く (未知コードは呼び元の name にフォールバック)。 */
 function fullNameOf(item: ChoroplethItem): string {
   return PREF_FULL_NAME[item.code.slice(0, 2).padStart(2, "0")] ?? item.name;
+}
+
+/**
+ * タイル内に出す短縮名。**呼び元の `name` に依存させず、コードから決定的に作る。**
+ *
+ * 呼び元のデータは末尾の「県/府/都/道」を一律に落としていることがあり、
+ * **北海道が「北海」になっていた** (2026-07-31 実データで確認)。「北海」は地名として
+ * 存在しないので、道だけは落とさない。都・府・県は落として構わない (東京・大阪・京都)。
+ */
+function shortNameOf(item: ChoroplethItem): string {
+  const full = PREF_FULL_NAME[item.code.slice(0, 2).padStart(2, "0")];
+  if (!full) return item.name;
+  return full === "北海道" ? full : full.replace(/[都府県]$/, "");
 }
 
 const GRID_COLS = 14;
@@ -375,18 +395,33 @@ export function tileInkFor(fill: string): { fill: string; halo: string } {
 /**
  * 都道府県名のフォントサイズ。
  *
- * **タイルの実寸から決める**。2 マス幅（北海道・福島・新潟・静岡・京都・和歌山・鹿児島）や
- * 2 マス高のタイルは自動的に大きくなる。旧版は全タイル一律だったため、広いタイルで
- * 無駄に小さく、狭いタイルで窮屈だった。
+ * ## 全タイルで同じ大きさにする (2026-07-31 改訂)
  *
- * 県名と値の 2 行を入れるので、1 行あたりの上限は高さの 40% 程度。
- * `TILE_TEXT_SCALE` は A-2a（少し小さめ）の実測値。
+ * 旧版はタイルの実寸から個別に決めていたため、2 マス幅・2 マス高のタイル
+ * (北海道・兵庫・岐阜・長野・千葉…) だけ字が 2 倍以上大きくなり、地図が騒がしく見えた
+ * (実データで北海道 23px vs 1 マス 11px)。タイルグリッドは**どの県も同じ重みで**
+ * 並べる図なので、字の大きさが県によって変わるのは意味が生じてしまう。
+ *
+ * そこで**基準は 1 マスタイル**で決め、全タイルに同じ値を使う。広いタイルは
+ * 余白が広がるだけにする。1 マスに収まらない長い名前 (神奈川・和歌山・鹿児島) だけ
+ * そのタイルで縮める。
+ *
+ * **高さの取り分は行数で変える**。値を出すときは県名 + 値の 2 行が入るので、
+ * 県名に高さの 40% を割くと 2 行が収まらない。名前だけなら 40%、値も出すなら 32%。
  */
 const TILE_TEXT_SCALE = 0.92;
 
-function nameFontSize(name: string, w: number, h: number): number {
-  const byWidth = (w - 6) / Math.max(textUnits(name), 2);
-  return Math.round(Math.min(byWidth, h * 0.4) * TILE_TEXT_SCALE);
+/** 1 マスタイルを基準にした共通フォントサイズ。 */
+function baseNameFontSize(tile: number, withValue: boolean): number {
+  const byWidth = (tile - 6) / 2; // 2 文字 (最頻) が収まる幅
+  const byHeight = tile * (withValue ? 0.32 : 0.4);
+  return Math.round(Math.min(byWidth, byHeight) * TILE_TEXT_SCALE);
+}
+
+/** 共通サイズを基準に、そのタイルで名前がはみ出す場合だけ縮める。 */
+function nameFontSize(name: string, w: number, base: number): number {
+  const byWidth = (w - 6) / Math.max(textUnits(name), 1);
+  return Math.max(6, Math.round(Math.min(base, byWidth)));
 }
 
 /** 文字列の概算幅を em 単位で返す（CJK≈1em / ASCII・半角≈0.55em）。 */
@@ -509,7 +544,7 @@ export function generateChoroplethSvg(
     colorStops = COLOR_STOPS,
     scheme,
     reverse = false,
-    showValue = false,
+    showValue = true,
     legendLabels: rawLegendLabels,
     showRankList = true,
   } = options;
@@ -537,6 +572,8 @@ export function generateChoroplethSvg(
   const toT = (v: number) => (hi === lo ? 0.5 : (v - lo) / (hi - lo));
 
   // ── タイル ──
+  // 字の大きさは 1 マスタイルで 1 度だけ決め、全タイルで共有する (県ごとに変えない)
+  const baseFont = baseNameFontSize(TILE, showValue);
   const tiles = Object.entries(TILE_GRID).map(([code, [col, row, cs, rs]]) => {
     const item = byCode.get(code);
     if (!item) return "";
@@ -548,7 +585,9 @@ export function generateChoroplethSvg(
 
     const t = toT(item.value);
     const fill = colorOf(t);
-    const nfs = nameFontSize(item.name, w, h);
+    // タイル内の表示名はコードから決定的に作る (呼び元データの「北海」を持ち込まない)
+    const tileName = shortNameOf(item);
+    const nfs = nameFontSize(tileName, w, baseFont);
 
     const cx = x + w / 2;
     const valStr = fmtValue(item.value);
@@ -562,17 +601,17 @@ export function generateChoroplethSvg(
       : null;
     const tspans = showValue && valueLabel
       ? [
-          `      <tspan x="${cx.toFixed(1)}" y="${(y + h / 2 - 0.5).toFixed(1)}" font-size="${nfs}" font-weight="700">${esc(item.name)}</tspan>`,
+          `      <tspan x="${cx.toFixed(1)}" y="${(y + h / 2 - 0.5).toFixed(1)}" font-size="${nfs}" font-weight="700">${esc(tileName)}</tspan>`,
           `      <tspan x="${cx.toFixed(1)}" y="${(y + h / 2 + valueLabel.font + 1).toFixed(1)}" font-size="${valueLabel.font}" font-weight="600">${esc(valueLabel.text)}</tspan>`,
         ]
       : [
           // 名前を縦中央に配置（baseline = タイル中心 + cap-height 補正）
-          `      <tspan x="${cx.toFixed(1)}" y="${(y + h / 2 + nfs * 0.38).toFixed(1)}" font-size="${nfs}" font-weight="700">${esc(item.name)}</tspan>`,
+          `      <tspan x="${cx.toFixed(1)}" y="${(y + h / 2 + nfs * 0.38).toFixed(1)}" font-size="${nfs}" font-weight="700">${esc(tileName)}</tspan>`,
         ];
 
     return [
-      `  <g aria-label="${esc(item.name)} ${valStr}${esc(unit)}">`,
-      `    <title>${esc(item.name)}：${valStr}${esc(unit)}</title>`,
+      `  <g aria-label="${esc(fullNameOf(item))} ${valStr}${esc(unit)}">`,
+      `    <title>${esc(fullNameOf(item))}：${valStr}${esc(unit)}</title>`,
       `    <rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w}" height="${h}" rx="3" fill="${fill}" stroke="#ffffff" stroke-width="1"/>`,
       `    <text font-family="${FONT_FAMILY}" fill="${ink.fill}" text-anchor="middle" paint-order="stroke" stroke="${ink.halo}" stroke-width="${strokeW}" stroke-linejoin="round">`,
       ...tspans,
@@ -613,18 +652,30 @@ export function generateChoroplethSvg(
   const rankLists: string[] = [];
   if (showRankList && items.length >= 3) {
     const top3 = [...items].sort((a, b) => b.value - a.value).slice(0, 3);
+    const NAME_F = 17;
+    const VAL_F = 17;
+    const UNIT_F = 13;
+    // 値カラムは**左カラムの右端ではなく、県名の実幅**で決める (2026-07-31)。
+    // 右端に右揃えすると「東京都 …………… 9,320」と離れて 1 行として読めなくなる。
+    // 3 行で最も長い県名 (神奈川県) に合わせて揃えるので、行同士の縦の揃いは保たれる。
+    const nameEnd =
+      COL_X +
+      24 +
+      Math.max(...top3.map((it) => textUnits(`1. ${fullNameOf(it)}`))) * NAME_F +
+      14;
+    const valW = Math.max(...top3.map((it) => textUnits(fmtValue(it.value)))) * VAL_F;
     let y = cursorY + 30;
     for (const [i, it] of top3.entries()) {
       y += 30;
       const sw = colorOf(toT(it.value));
       const valStr = fmtValue(it.value);
-      // 値は右揃え、単位はその右に小さく置く (間に余白を取って「60.4 人」と読ませる)
-      const valX = COL_X + COL_W - 44;
+      // 値は右揃え (桁が揃う)、単位はその右に小さく置く
+      const valX = nameEnd + valW;
       rankLists.push(
         `  <rect x="${COL_X}" y="${y - 13}" width="15" height="15" rx="2" fill="${sw}" stroke="#ffffff" stroke-width="1"/>`,
-        `  <text x="${COL_X + 24}" y="${y}" font-family="${FONT_FAMILY}" font-size="17" font-weight="600" fill="${CHROME_COLOR}">${i + 1}. ${esc(fullNameOf(it))}</text>`,
-        `  <text x="${valX}" y="${y}" font-family="${FONT_FAMILY}" font-size="17" font-weight="700" fill="${CHROME_COLOR}" text-anchor="end">${valStr}</text>`,
-        `  <text x="${valX + 5}" y="${y}" font-family="${FONT_FAMILY}" font-size="13" fill="${CHROME_COLOR}">${esc(unit)}</text>`,
+        `  <text x="${COL_X + 24}" y="${y}" font-family="${FONT_FAMILY}" font-size="${NAME_F}" font-weight="600" fill="${CHROME_COLOR}">${i + 1}. ${esc(fullNameOf(it))}</text>`,
+        `  <text x="${valX.toFixed(1)}" y="${y}" font-family="${FONT_FAMILY}" font-size="${VAL_F}" font-weight="700" fill="${CHROME_COLOR}" text-anchor="end">${valStr}</text>`,
+        `  <text x="${(valX + 5).toFixed(1)}" y="${y}" font-family="${FONT_FAMILY}" font-size="${UNIT_F}" fill="${CHROME_COLOR}">${esc(unit)}</text>`,
       );
     }
   }
