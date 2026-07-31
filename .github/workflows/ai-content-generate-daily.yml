@@ -27,24 +27,20 @@ on:
   # push トリガー (cloud 用): develop に data/ai-content-generate-requests.json を commit/push
   # すると実行し、消費した request を git rm で commit-back する。cloud セッションは
   # actions:write が無く workflow_dispatch できない (403) ため。data-refresh.yml と同じ方式。
-  #   { "limit": 10, "dryRun": false, "concurrency": 3 }
+  #   { "limit": 10, "dryRun": false }
   push:
     branches: [develop]
     paths: ['data/ai-content-generate-requests.json']
   workflow_dispatch:
     inputs:
       limit:
-        description: "生成件数 (既定 40 = publish の MAX_PUBLISH と同数)"
+        description: "提示する件数 (既定 10。サブスク消費を実測してから増やす)"
         required: false
-        default: "40"
+        default: "10"
       dry_run:
-        description: "true: LLM を呼ばず対象と prompt 長だけ出す"
+        description: "true: Issue を出さず対象だけ確認する"
         required: false
         default: "false"
-      concurrency:
-        description: "並列数 (無料 tier のレート制限に合わせる。既定 3)"
-        required: false
-        default: "3"
 
 permissions:
   contents: write
@@ -57,8 +53,8 @@ concurrency:
 
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  LIMIT: ${{ inputs.limit || '40' }}
-  GEN_CONCURRENCY: ${{ inputs.concurrency || '3' }}
+  # 控えめに始めて実測する。旧 40 は Gemini 前提の根拠なき暫定値なので引き継がない
+  LIMIT: ${{ inputs.limit || '10' }}
   DRY_RUN: ${{ inputs.dry_run || 'false' }}
 
 jobs:
@@ -90,9 +86,8 @@ jobs:
           REQ=data/ai-content-generate-requests.json
           if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
             {
-              echo "LIMIT=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.limit??40))")"
+              echo "LIMIT=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.limit??10))")"
               echo "DRY_RUN=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")"
-              echo "GEN_CONCURRENCY=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.concurrency??3))")"
             } >> "$GITHUB_ENV"
             echo "request で上書きした (値は上の行のとおり)"
           fi
