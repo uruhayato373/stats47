@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-07-31T00:32:54.200Z",
+  "generatedAt": "2026-07-31T02:08:53.113Z",
   "gscSnapshot": "2026-W30",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2176,
-    "done": 196,
-    "needsRegen": 1980,
+    "done": 198,
+    "needsRegen": 1978,
     "needsByReason": {
-      "missing": 223,
-      "incomplete": 1691,
+      "incomplete": 1690,
+      "missing": 222,
       "blocker": 66
     },
-    "doneImpressions": 24837,
-    "needsImpressions": 12189,
+    "doneImpressions": 25105,
+    "needsImpressions": 11921,
     "opusReviewTier": 30
   },
   "entries": [
@@ -643,10 +643,14 @@
       "impressions": 145,
       "clicks": 6,
       "position": 7.72,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [
+        "pref-len"
+      ],
+      "lastModified": "Fri, 31 Jul 2026 01:48:35 GMT",
+      "updatedAt": "2026-07-31T00:29:34.320Z"
     },
     {
       "rankingKey": "new-hire-count",
@@ -768,14 +772,12 @@
       "impressions": 123,
       "clicks": 22,
       "position": 3.83,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Fri, 31 Jul 2026 01:48:35 GMT",
+      "updatedAt": "2026-07-31T00:32:11.054Z"
     },
     {
       "rankingKey": "fishery-species-catch-scallop",
@@ -1591,7 +1593,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "airport-count",
@@ -1615,7 +1617,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "pickled-plum-consumption-expenditure",
