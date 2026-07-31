@@ -60,7 +60,7 @@ export const DERIVED_VALUE_SKIP =
  * ★記事側の表記ルールと対になる (2026-07-31)。差分を書くときは必ず符号を付けることで、
  * 「data の絶対値ではない」と機械が判定できる。実記事は既にこの書き方をしている:
  * care-worker-income-prefecture-gap の `**+145.7万円**` / `**−15.8万円**`。
- * 正典: .claude/rules/blog-quality-standards.md §数値表記ルール
+ * (差分表記そのものを義務づけるルールは未制定。現状は記事が自然にこう書いている)
  */
 export const SIGNED_DELTA_RE = /[+＋\-−–—▲△]\s*$/;
 
@@ -611,10 +611,10 @@ export function checkValueClaims(content, gt) {
     const metricContext = body.slice(sentenceStart, m.index) + beforeNumeralInMatch;
 
     // 括弧内の数値は照合対象にしない。
-    // blog-quality-standards.md §文体ルールが「括弧による数値挿入を全面禁止」しており、
-    // 括弧内に現れる数値は実測上ほぼ別指標か派生値だった (「緑茶…静岡県(7,664円)」
-    // 「3位秋田県（約3.9ha）」)。禁止された書き方を照合対象にすると誤検出を量産する。
-    // 括弧内数値そのものは専用の blocker が別に落とす (責務を分ける)。
+    // 括弧内に現れる数値は実測上ほぼ別指標か派生値であり、data の絶対値と照合できない
+    // (「緑茶…静岡県(7,664円)」「3位秋田県（約3.9ha）」)。照合対象に含めると誤検出を量産する。
+    // (括弧内数値そのものの是非は別問題。ranking ai-content 側にはこれを禁じるルールがあるが、
+    //  blog-quality-standards.md には無い。paren-number-lint.mjs は現時点で計測のみ。)
     if (isInsideParenthesis(body, m.index + m[0].lastIndexOf(m[2]))) continue;
 
     // 符号付き (+145.7万円 / −15.8万円) は差分表記 → data の絶対値と一致しないので対象外。

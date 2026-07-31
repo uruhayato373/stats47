@@ -32,6 +32,7 @@ import { fileURLToPath } from "node:url";
 
 import { checkArticleFactual } from "../lib/article-factual-check.mjs";
 import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
+import { lintParenNumbers } from "../lib/paren-number-lint.mjs";
 import { lintInternalLinks } from "../lib/internal-link-lint.mjs";
 import { lintSvgSize, lintChoroplethLegend, lintFindingsParity, lintTileGridQuality } from "../lib/svg-lint.mjs";
 
@@ -304,6 +305,15 @@ checks.adjacentClusters = sourceLinkLint.stats.adjacentClusters;
 checks.noFigureSectionLinks = sourceLinkLint.stats.noFigureSectionLinks;
 blockers.push(...sourceLinkLint.blockers);
 warnings.push(...sourceLinkLint.warnings);
+
+// 括弧内数値挿入の計測 (2026-07-31 追加、paren-number-lint.mjs)
+// ★現時点では **計測のみ**。blocker にはしない。
+//   「都道府県名の直後に括弧で値・順位を入れない」は ranking ai-content 側のルール
+//   (ranking-content-standards.md / 生成プロンプト) であって、blog-quality-standards.md には
+//   無い。blog に持ち込むかは方針判断であり、公開済み 424 記事の 79.5% (4,671 箇所) が
+//   該当するため影響が大きい。採用が決まったら blockers.push(...parenLint.blockers) に変える。
+const parenLint = lintParenNumbers(content);
+checks.parenNumbers = parenLint.hits.length;
 
 // 内部リンクの実在チェック (2026-07-24 追加、internal-link-lint.mjs)
 // 実在しない ranking key は HTTP 200 + 「ランキングが見つかりません」の soft 404 を返すため、
