@@ -72,6 +72,24 @@ export type GeminiTextErrorClass =
  * `RetryInfo` (retryDelay) を返す。どれも機密ではなく、これが無いと
  * 「分あたりで詰まったのか、日あたりを使い切ったのか」が判別できない。
  */
+/**
+ * 429 本文の先頭スニペット (診断用・2026-07-31 追加)。
+ *
+ * `extractQuotaDetails` が undefined を返した実測があり (run 30606687068)、**なぜ抽出できな
+ * かったか**が分からなかった。Google のエラー本文は `error.message` / `error.status` /
+ * `error.details` で、**API キーは含まれない** (キーはヘッダで送るだけで echo されない)。
+ * それでも保険として、万一キー文字列が現れたら伏せる。
+ *
+ * 出すのは 429 のときだけ・先頭 500 文字だけ。成功時や他のエラーでは本文に触れない。
+ */
+const DEBUG_SNIPPET_MAX = 500;
+
+/** 本文にキーが現れた場合だけ伏せる (通常は現れない) */
+export function redactApiKey(text: string, apiKey: string): string {
+  if (!apiKey) return text;
+  return text.split(apiKey).join("***");
+}
+
 export interface GeminiQuotaDetails {
   /** 例: generativelanguage.googleapis.com/generate_content_free_tier_requests */
   metric?: string;
@@ -109,6 +127,8 @@ export class GeminiTextError extends Error {
     readonly status?: number,
     /** 429 のときだけ入る構造化クォータ情報 (機密ではない) */
     readonly quota?: GeminiQuotaDetails,
+    /** 429 のときだけ入る本文スニペット (先頭 500 文字・キーは伏せ済) */
+    readonly debugSnippet?: string,
   ) {
     super(status ? `${classification} (HTTP ${status})` : classification);
     this.name = "GeminiTextError";
@@ -134,6 +154,8 @@ export interface GenerateTextOptions {
     classification: GeminiTextErrorClass | "ok";
     /** 429 のときだけ入る */
     quota?: GeminiQuotaDetails;
+    /** 429 のときだけ入る本文スニペット (先頭 500 文字・キーは伏せ済) */
+    debugSnippet?: string;
   }) => void;
 }
 
@@ -220,8 +242,13 @@ export async function generateContentText(
         const raw = await res.text().catch(() => "");
         const cls = classify(res.status);
         const quota = cls === "rate-limit" ? extractQuotaDetails(raw) : undefined;
-        opts.onAttempt?.({ attempt, status: res.status, classification: cls, quota });
-        const err = new GeminiTextError(cls, res.status, quota);
+        // 抽出できなかった理由を 1 回で突き止めるため、429 のときだけ本文の先頭を診断に載せる
+        const debugSnippet =
+          cls === "rate-limit"
+            ? redactApiKey(raw.slice(0, DEBUG_SNIPPET_MAX), opts.apiKey)
+            : undefined;
+        opts.onAttempt?.({ attempt, status: res.status, classification: cls, quota, debugSnippet });
+        const err = new GeminiTextError(cls, res.status, quota, debugSnippet);
         if (isRetriable(cls) && attempt < maxAttempts) {
           lastError = err;
           // 429 は無料 tier のレート制限なので長めに待つ

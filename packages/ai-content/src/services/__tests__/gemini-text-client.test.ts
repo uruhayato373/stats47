@@ -11,6 +11,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { GeminiTextError, generateContentText,
   extractQuotaDetails,
+  redactApiKey,
 } from "../gemini-text-client";
 
 const noSleep = () => Promise.resolve();
@@ -204,5 +205,17 @@ describe("extractQuotaDetails", () => {
   it("空文字・クォータ項目なしは undefined", () => {
     expect(extractQuotaDetails("")).toBeUndefined();
     expect(extractQuotaDetails(JSON.stringify({ error: { details: [] } }))).toBeUndefined();
+  });
+});
+
+describe("redactApiKey", () => {
+  it("本文にキーが現れたら伏せる", () => {
+    expect(redactApiKey("err key=AIzaSECRET end", "AIzaSECRET")).toBe("err key=*** end");
+  });
+  it("キーが無ければそのまま", () => {
+    expect(redactApiKey("quota exceeded", "AIzaSECRET")).toBe("quota exceeded");
+  });
+  it("空のキーでも落ちない", () => {
+    expect(redactApiKey("body", "")).toBe("body");
   });
 });
