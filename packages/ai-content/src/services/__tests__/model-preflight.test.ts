@@ -15,7 +15,7 @@ import {
   resolveTextModel,
   GEMINI_TEXT_MODEL,
 } from "../gemini-text-client";
-import { evaluateModelAvailability } from "../model-preflight";
+import { evaluateModelAvailability, runModelPreflight } from "../model-preflight";
 
 function jsonResponse(status: number, body: unknown): Response {
   return {
@@ -83,6 +83,63 @@ describe("evaluateModelAvailability", () => {
     const v = evaluateModelAvailability("gemini-2.5-flash", ["text-embedding-004"]);
     expect(v.ok).toBe(false);
     expect(v.suggestions).toEqual([]);
+  });
+});
+
+describe("runModelPreflight — 合否は実生成だけで決める", () => {
+  it("実生成が通れば ok (ListModels は呼ばない = API 呼び出し 1 回)", async () => {
+    const listModels = vi.fn(async () => ["gemini-2.5-flash"]);
+    const r = await runModelPreflight({
+      configured: "gemini-2.5-flash",
+      smoke: async () => ({ ok: true }),
+      listModels,
+    });
+    expect(r.ok).toBe(true);
+    expect(listModels).not.toHaveBeenCalled();
+  });
+
+  it("★一覧に載っていても実生成が 404 なら落とす (2026-07-31 に実測した罠)", async () => {
+    const r = await runModelPreflight({
+      configured: "gemini-2.5-flash",
+      smoke: async () => ({ ok: false, classification: "bad-request", status: 404 }),
+      listModels: async () => ["gemini-2.5-flash", "gemini-3.5-flash"],
+    });
+    expect(r.ok).toBe(false);
+    expect(r.messages.join("\n")).toContain("ListModels には載っている");
+    expect(r.suggestions).toContain("gemini-3.5-flash");
+    // 設定中のモデル自身を「代替候補」として出さない
+    expect(r.suggestions).not.toContain("gemini-2.5-flash");
+  });
+
+  it("一覧にも無ければ提供終了として報告する", async () => {
+    const r = await runModelPreflight({
+      configured: "gemini-1.5-flash",
+      smoke: async () => ({ ok: false, classification: "bad-request", status: 404 }),
+      listModels: async () => ["gemini-3.5-flash"],
+    });
+    expect(r.ok).toBe(false);
+    expect(r.messages.join("\n")).toContain("提供終了");
+  });
+
+  it("ListModels も落ちたら候補なしで報告 (捏造しない)", async () => {
+    const r = await runModelPreflight({
+      configured: "gemini-2.5-flash",
+      smoke: async () => ({ ok: false, classification: "auth", status: 403 }),
+      listModels: async () => {
+        throw new Error("boom");
+      },
+    });
+    expect(r.ok).toBe(false);
+    expect(r.suggestions).toEqual([]);
+  });
+
+  it("失敗報告に HTTP status を残す (切り分けの材料)", async () => {
+    const r = await runModelPreflight({
+      configured: "m",
+      smoke: async () => ({ ok: false, classification: "bad-request", status: 404 }),
+      listModels: async () => [],
+    });
+    expect(r.messages[0]).toContain("404");
   });
 });
 

@@ -148,8 +148,14 @@ Claude のトークンを使わず全 active ranking (実測 2,179 件) を完�
 
 | 層 | 実装 | 効果 |
 |---|---|---|
-| ① 事前 (preflight) | `packages/ai-content/src/scripts/preflight-gemini.ts` — ListModels で `generateContent` 可能なモデルを実測し、設定モデルが無ければ**候補付きで即 exit 1** (生成しないので課金ゼロ)。日次 cron の生成前 step + `ai-content-preflight.yml` (モデル設定に触る PR) | 全件 404 を「生成前に 1 回」で止める |
+| ① 事前 (preflight) | `packages/ai-content/src/scripts/preflight-gemini.ts` — **極小の生成を 1 回試す**。落ちたときだけ ListModels を呼び候補付きで exit 1。日次 cron の生成前 step + `ai-content-preflight.yml` (モデル設定に触る PR) | 全件 404 を「生成前に 1 回」で止める |
 | ② 事後 (exit gate) | `packages/ai-content/src/services/generation-outcome.ts` の `decideOutcome` — **1 件も出せなければ exit 1**。部分的な失敗 (OK ≥ 1) は成功扱いで運用を止めない | 原因を問わず「何も出ていない」を必ず赤くする |
+
+**★ListModels に載っていることは「使える」証明にならない (2026-07-31 CI 実測)**。preflight を最初
+ListModels の一覧照合だけで作ったところ、`gemini-2.5-flash` は**一覧に載り
+`supportedGenerationMethods` に `generateContent` を持つのに、実際に叩くと 404** だった。
+一覧は代理指標にならず、そのゲートは壊れたパイプラインを素通りさせる。**合否は実生成でだけ判定する**
+(一覧は失敗時の候補出しにのみ使う)。
 
 候補は**提案であって自動選択ではない** (勝手に別モデルへ切り替えると品質もコストも黙って変わる)。
 復旧はリポジトリ変数 `GEMINI_TEXT_MODEL` に実在モデルを設定するか、`GEMINI_TEXT_MODEL` 既定値を更新する。

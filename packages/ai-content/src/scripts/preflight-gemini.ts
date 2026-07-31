@@ -1,11 +1,15 @@
 /**
- * Gemini テキストモデルの preflight (生成前の実在確認)。
+ * Gemini テキストモデルの preflight (生成前の使用可否確認)。
  *
  *   npx tsx packages/ai-content/src/scripts/preflight-gemini.ts
- *   GEMINI_TEXT_MODEL=gemini-3-flash npx tsx .../preflight-gemini.ts   # 候補を試すとき
+ *   GEMINI_TEXT_MODEL=gemini-3.5-flash npx tsx .../preflight-gemini.ts   # 候補を試すとき
  *
- * ListModels を 1 回叩くだけで生成は行わない (課金ゼロ)。設定中のモデルが `generateContent` を
- * 提供していなければ、実在モデルの候補を出して **exit 1** する。
+ * **極小の生成を 1 回だけ試す** (出力数十トークン = 実質無料)。失敗したときだけ ListModels を
+ * 呼んで代替候補を出し、**exit 1** する。
+ *
+ * ★ListModels に載っていることは「使える」証明にならない (2026-07-31 CI 実測):
+ *   `gemini-2.5-flash` は一覧に載り generateContent を supportedGenerationMethods に持つのに、
+ *   実際に叩くと 404 だった。だから合否は実生成だけで決める。
  *
  * 2026-07-30 の障害 (日次 cron が全件 HTTP 404 / それでも success) の再発防止。
  * 正典: .claude/rules/ranking-content-standards.md §生成パイプライン
@@ -13,10 +17,14 @@
 
 import {
   GeminiTextError,
+  generateContentText,
   listGenerateContentModels,
   resolveTextModel,
 } from "../services/gemini-text-client";
-import { evaluateModelAvailability } from "../services/model-preflight";
+import { runModelPreflight, type SmokeResult } from "../services/model-preflight";
+
+/** 本番と同じ request 形 (responseMimeType: application/json) を通す極小プロンプト */
+const SMOKE_PROMPT = 'Return exactly this JSON and nothing else: {"ok":true}';
 
 async function main() {
   const apiKey = process.env.GEMINI_API_KEY?.trim();
@@ -30,42 +38,49 @@ async function main() {
   const configured = resolveTextModel();
   process.stdout.write(`[preflight] 設定モデル: ${configured}\n`);
 
-  let models: string[];
-  try {
-    models = await listGenerateContentModels({ apiKey });
-  } catch (e) {
-    // GeminiTextError は分類 + HTTP status だけを持つ (キー・本文は含まない)
-    const detail = e instanceof GeminiTextError ? e.message : "unknown";
-    process.stderr.write(
-      `[preflight] ListModels に失敗: ${detail}\n` +
-        "  bad-request (400) / auth (401/403) はキーが無効か Generative Language API が未有効\n" +
-        "    (無効キーでの実測は 400 = API_KEY_INVALID。2026-07-30 確認)。\n" +
-        "  network/timeout なら一時障害の可能性があるので再実行する。\n",
-    );
-    process.exit(1);
-  }
+  const report = await runModelPreflight({
+    configured,
+    smoke: async (): Promise<SmokeResult> => {
+      try {
+        // maxOutputTokens は本番既定のまま (課金は実出力トークンで決まるため小さいプロンプトなら安い)。
+        // 再試行は 2 回まで — 一時的な 429 / 5xx で preflight を落として cron を止めない。
+        await generateContentText({
+          prompt: SMOKE_PROMPT,
+          apiKey,
+          maxAttempts: 2,
+          timeoutMs: 60_000,
+        });
+        return { ok: true };
+      } catch (e) {
+        if (e instanceof GeminiTextError) {
+          return { ok: false, classification: e.classification, status: e.status };
+        }
+        return { ok: false, classification: "unknown" };
+      }
+    },
+    listModels: () => listGenerateContentModels({ apiKey }),
+  });
 
-  process.stdout.write(
-    `[preflight] generateContent 可能なモデル ${models.length} 件:\n` +
-      models.map((m) => `  - ${m}`).join("\n") +
-      "\n",
-  );
-
-  const verdict = evaluateModelAvailability(configured, models);
-  if (verdict.ok) {
-    process.stdout.write(`[preflight] ✅ ${configured} は利用可能\n`);
+  if (report.ok) {
+    process.stdout.write(`[preflight] ${report.messages.join("\n")}\n`);
     return;
   }
 
   process.stderr.write(
-    `[preflight] ❌ ${configured} は generateContent を提供していない (これが HTTP 404 の正体)\n` +
-      "  代替候補 (良い順・自動では切り替えない):\n" +
-      verdict.suggestions
-        .slice(0, 8)
-        .map((m) => `    - ${m}`)
-        .join("\n") +
-      "\n  復旧: workflow の env GEMINI_TEXT_MODEL に候補を設定するか、" +
-      "gemini-text-client.ts の GEMINI_TEXT_MODEL 既定値を更新する。\n",
+    report.messages.map((m) => `[preflight] ${m}`).join("\n") +
+      "\n" +
+      (report.suggestions.length > 0
+        ? "  代替候補 (良い順・自動では切り替えない):\n" +
+          report.suggestions
+            .slice(0, 8)
+            .map((m) => `    - ${m}`)
+            .join("\n") +
+          "\n"
+        : "") +
+      "  復旧: リポジトリ変数 GEMINI_TEXT_MODEL に候補を設定するか、" +
+      "gemini-text-client.ts の GEMINI_TEXT_MODEL 既定値を更新する。\n" +
+      "  bad-request (400) / auth (401/403) はキーが無効か Generative Language API が未有効\n" +
+      "    (無効キーでの実測は 400 = API_KEY_INVALID。2026-07-30 確認)。\n",
   );
   process.exit(1);
 }
