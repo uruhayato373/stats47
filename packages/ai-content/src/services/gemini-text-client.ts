@@ -65,11 +65,50 @@ export type GeminiTextErrorClass =
   | "network"
   | "unknown";
 
+/**
+ * 429 の本文から取り出す**構造化されたクォータ情報だけ**。
+ *
+ * Google は 429 で `QuotaFailure` (violations[].quotaMetric / quotaValue) と
+ * `RetryInfo` (retryDelay) を返す。どれも機密ではなく、これが無いと
+ * 「分あたりで詰まったのか、日あたりを使い切ったのか」が判別できない。
+ */
+export interface GeminiQuotaDetails {
+  /** 例: generativelanguage.googleapis.com/generate_content_free_tier_requests */
+  metric?: string;
+  /** その metric の上限 */
+  limit?: string;
+  /** 例: "38s"。日次枯渇だと長い値か未設定になる */
+  retryAfter?: string;
+}
+
+/** 本文から上記 3 項目だけを拾う。自由文・キー・その他のフィールドは一切触らない。 */
+export function extractQuotaDetails(raw: string): GeminiQuotaDetails | undefined {
+  if (!raw) return undefined;
+  try {
+    const json = JSON.parse(raw) as { error?: { details?: Array<Record<string, unknown>> } };
+    const out: GeminiQuotaDetails = {};
+    for (const d of json.error?.details ?? []) {
+      const violations = d.violations as Array<Record<string, unknown>> | undefined;
+      if (Array.isArray(violations) && violations.length > 0) {
+        const v = violations[0];
+        if (typeof v.quotaMetric === "string") out.metric = v.quotaMetric;
+        if (typeof v.quotaValue === "string") out.limit = v.quotaValue;
+      }
+      if (typeof d.retryDelay === "string") out.retryAfter = d.retryDelay;
+    }
+    return out.metric || out.limit || out.retryAfter ? out : undefined;
+  } catch {
+    return undefined; // 本文が JSON でなくても落とさない
+  }
+}
+
 /** 機密・レスポンス本文を含まないエラー (message は分類のみ)。 */
 export class GeminiTextError extends Error {
   constructor(
     readonly classification: GeminiTextErrorClass,
     readonly status?: number,
+    /** 429 のときだけ入る構造化クォータ情報 (機密ではない) */
+    readonly quota?: GeminiQuotaDetails,
   ) {
     super(status ? `${classification} (HTTP ${status})` : classification);
     this.name = "GeminiTextError";
@@ -93,6 +132,8 @@ export interface GenerateTextOptions {
     attempt: number;
     status?: number;
     classification: GeminiTextErrorClass | "ok";
+    /** 429 のときだけ入る */
+    quota?: GeminiQuotaDetails;
   }) => void;
 }
 
@@ -171,11 +212,16 @@ export async function generateContentText(
       });
 
       if (!res.ok) {
-        // 本文はログ・エラーに残さない (安全に読み捨て)
-        await res.text().catch(() => "");
+        // 本文はログ・エラーに残さない。ただし 429 のときだけ**構造化されたクォータ項目**を
+        // 抜き出す (2026-07-31 追加)。本文を丸ごと捨てていたため「RPM なのか RPD なのか」
+        // 「上限がいくつなのか」が分からず、日次の件数 (ai-content 40 / blog 2) を実測に
+        // 基づいて決められなかった。抜くのは quotaMetric / quotaValue / retryDelay だけで、
+        // 自由文やキーは触らない。
+        const raw = await res.text().catch(() => "");
         const cls = classify(res.status);
-        opts.onAttempt?.({ attempt, status: res.status, classification: cls });
-        const err = new GeminiTextError(cls, res.status);
+        const quota = cls === "rate-limit" ? extractQuotaDetails(raw) : undefined;
+        opts.onAttempt?.({ attempt, status: res.status, classification: cls, quota });
+        const err = new GeminiTextError(cls, res.status, quota);
         if (isRetriable(cls) && attempt < maxAttempts) {
           lastError = err;
           // 429 は無料 tier のレート制限なので長めに待つ
