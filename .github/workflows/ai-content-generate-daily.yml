@@ -49,6 +49,9 @@ concurrency:
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  # 空なら gemini-text-client.ts の既定値。モデル提供終了時はリポジトリ変数に実在モデルを
+  # 設定するだけで復旧できる (コード変更 + デプロイを待たない)。実在確認は下の preflight step
+  GEMINI_TEXT_MODEL: ${{ vars.GEMINI_TEXT_MODEL }}
   LIMIT: ${{ inputs.limit || '40' }}
   GEN_CONCURRENCY: ${{ inputs.concurrency || '3' }}
   DRY_RUN: ${{ inputs.dry_run || 'false' }}
@@ -81,6 +84,15 @@ jobs:
             exit 1
           fi
           echo "GEMINI_API_KEY: 設定あり (値は出力しない)"
+
+      # ★生成の前にモデルの実在を確かめる (2026-07-30 の全件 404 の再発防止)。
+      #   ListModels 1 回だけで生成しないので課金ゼロ。存在しなければ候補付きでここで落とす。
+      - name: 🔎 Preflight (モデル実在確認)
+        if: ${{ env.DRY_RUN != 'true' }}
+        run: |
+          set -o pipefail
+          NODE_OPTIONS='--conditions react-server' \
+            npx tsx packages/ai-content/src/scripts/preflight-gemini.ts 2>&1 | tee /tmp/preflight.log
 
       - name: 📊 Rebuild queue (scope=all) and pick targets
         id: pick

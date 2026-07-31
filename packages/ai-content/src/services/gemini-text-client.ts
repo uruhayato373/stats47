@@ -24,6 +24,18 @@ const API_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 /** 既定モデル。テキストは flash 系で足りる (品質フロアは決定的ゲートが握る) */
 export const GEMINI_TEXT_MODEL = "gemini-2.5-flash";
 
+/**
+ * 実際に使うモデル名。`GEMINI_TEXT_MODEL` env で上書きできる。
+ *
+ * ★なぜ上書き口が要るか (2026-07-30): モデルは提供終了する。既定値をコードに焼き切ると、
+ * 提供終了のたびにコード変更 → デプロイまで日次 cron が全件 404 で止まる。env で差し替えられれば
+ * workflow の 1 行変更で復旧できる。正しいモデル名は preflight-gemini.ts が ListModels で実測する。
+ */
+export function resolveTextModel(env: NodeJS.ProcessEnv = process.env): string {
+  const override = env.GEMINI_TEXT_MODEL?.trim();
+  return override ? override : GEMINI_TEXT_MODEL;
+}
+
 /** 47 県解説を含む JSON を出し切れる長さ (実測 ~13K 文字 ≒ 8K トークン) */
 const DEFAULT_MAX_OUTPUT_TOKENS = 32_768;
 
@@ -115,7 +127,7 @@ interface GeminiResponse {
 export async function generateContentText(
   opts: GenerateTextOptions,
 ): Promise<GenerateTextResult> {
-  const model = opts.model ?? GEMINI_TEXT_MODEL;
+  const model = opts.model ?? resolveTextModel();
   const maxAttempts = Math.min(Math.max(opts.maxAttempts ?? 3, 1), 5);
   const timeoutMs = opts.timeoutMs ?? DEFAULT_TIMEOUT_MS;
   const maxOutputTokens = opts.maxOutputTokens ?? DEFAULT_MAX_OUTPUT_TOKENS;
@@ -198,4 +210,75 @@ export async function generateContentText(
   }
 
   throw lastError ?? new GeminiTextError("unknown");
+}
+
+// ============================================================
+// ListModels (preflight 用)
+// ============================================================
+
+interface ListModelsResponse {
+  models?: {
+    name?: string;
+    supportedGenerationMethods?: string[];
+  }[];
+  nextPageToken?: string;
+}
+
+export interface ListModelsOptions {
+  apiKey: string;
+  timeoutMs?: number;
+  fetchImpl?: typeof fetch;
+  /** 取得ページ数の上限 (暴走防止)。既定 5 */
+  maxPages?: number;
+}
+
+/**
+ * `generateContent` を提供するモデル名を実測して返す (`models/` 接頭辞は落とす)。
+ *
+ * 用途は preflight だけ。生成本体は叩かない (課金ゼロ)。失敗は GeminiTextError (分類のみ) で、
+ * ここでも **API キー・レスポンス本文は絶対に出さない**。
+ */
+export async function listGenerateContentModels(
+  opts: ListModelsOptions,
+): Promise<string[]> {
+  const fetchImpl = opts.fetchImpl ?? fetch;
+  const timeoutMs = opts.timeoutMs ?? 30_000;
+  const maxPages = Math.min(Math.max(opts.maxPages ?? 5, 1), 20);
+
+  const names: string[] = [];
+  let pageToken: string | undefined;
+
+  for (let page = 0; page < maxPages; page++) {
+    const url = pageToken
+      ? `${API_BASE}?pageSize=200&pageToken=${encodeURIComponent(pageToken)}`
+      : `${API_BASE}?pageSize=200`;
+    const ac = new AbortController();
+    const timer = setTimeout(() => ac.abort(), timeoutMs);
+    try {
+      const res = await fetchImpl(url, {
+        method: "GET",
+        headers: { "x-goog-api-key": opts.apiKey },
+        signal: ac.signal,
+      });
+      if (!res.ok) {
+        await res.text().catch(() => "");
+        throw new GeminiTextError(classify(res.status), res.status);
+      }
+      const json = (await res.json()) as ListModelsResponse;
+      for (const m of json.models ?? []) {
+        if (!m.name) continue;
+        if (!(m.supportedGenerationMethods ?? []).includes("generateContent")) continue;
+        names.push(m.name.replace(/^models\//, ""));
+      }
+      pageToken = json.nextPageToken;
+      if (!pageToken) break;
+    } catch (e) {
+      if (e instanceof GeminiTextError) throw e;
+      throw new GeminiTextError(isAbort(e) ? "timeout" : "network");
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  return names;
 }
