@@ -1,6 +1,6 @@
 import { COLOR_SCHEME_CATALOG } from "@stats47/types";
 
-import type { ColorScheme, ColorSchemeType, D3ColorScheme } from "../types";
+import type { ColorScheme, ColorSchemeType } from "../types";
 
 /**
  * 配色の語彙は `@stats47/types` の COLOR_SCHEME_CATALOG が SSOT (2026-07-31)。
@@ -24,18 +24,6 @@ export const DIVERGING_COLOR_SCHEMES: ColorScheme[] = byType("diverging");
 
 /** Categorical（カテゴリ）カラースキーム — ランキング可視化では未使用 (将来拡張用) */
 export const CATEGORICAL_COLOR_SCHEMES: ColorScheme[] = byType("categorical");
-
-/**
- * カラースキーム名の略称から正式名へのマッピング。
- *
- * @deprecated `normalizeColorScheme` (@stats47/types) を使う。大小の揺れも吸収する。
- */
-export const COLOR_SCHEME_ALIASES: Record<string, D3ColorScheme> = Object.fromEntries(
-  COLOR_SCHEME_CATALOG.flatMap((e) => [
-    [e.short, e.canonical],
-    [e.short.toLowerCase(), e.canonical],
-  ]),
-);
 
 /**
  * 用途別おすすめカラースキーム
