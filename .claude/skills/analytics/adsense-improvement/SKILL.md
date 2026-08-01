@@ -207,9 +207,10 @@ cat .claude/skills/analytics/adsense-improvement/reference/improvement-log.md
 
 - `docs/todo/04_改善バックログ.md` が存在すること（施策 ID は `ADSENSE-*` または `AFF-*`）
 - `reference/budgets.json` / `reference/snapshots/` / `reference/improvement-log.md` 初期化済
-- AdSense Management API の OAuth 設定済。**creds は CI 専任** — `GOOGLE_ADSENSE_CLIENT_ID` /
-  `CLIENT_SECRET` / `REFRESH_TOKEN` / `ACCOUNT_ID` は GitHub Secrets にあり、`.env.local` には置かない
-  (2026-05-29 の秘密集約。memory `project_env_local_ci_consolidation`)。
+- AdSense Management API の OAuth 設定済。**CI 専任** — `GOOGLE_ADSENSE_CLIENT_ID` /
+  `GOOGLE_ADSENSE_ACCOUNT_ID` は GitHub Repository Variables、
+  `GOOGLE_ADSENSE_CLIENT_SECRET` / `GOOGLE_ADSENSE_REFRESH_TOKEN` は GitHub Secrets に置き、
+  `.env.local` には置かない。
   そのため **snapshot 取得と unit inventory はローカルで実行できない** — `fetch-metrics-weekly.yml`
   が生成して develop に commit-back したものを読む
 - Publisher ID: `ca-pub-7995274743017484`

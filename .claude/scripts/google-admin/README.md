@@ -79,14 +79,14 @@ status、期日、実測件数を本READMEへ複製しない。
 
 ### 既存read-only経路
 
-| 環境変数 / Secret | 用途 | 置き場所 |
+| 環境変数 | 用途 | 置き場所 |
 |---|---|---|
 | `GOOGLE_SERVICE_ACCOUNT_KEY_JSON` | GSC / GA4 Data API / GA4 Admin read | GitHub repository secret |
-| `GA4_PROPERTY_ID` | 対象propertyの固定 | GitHub repository secret |
-| `GOOGLE_ADSENSE_CLIENT_ID` | AdSense OAuth client | GitHub repository secret |
+| `GA4_PROPERTY_ID` | 対象propertyの固定 | GitHub repository variable |
+| `GOOGLE_ADSENSE_CLIENT_ID` | AdSense OAuth client識別子 | GitHub repository variable |
 | `GOOGLE_ADSENSE_CLIENT_SECRET` | AdSense OAuth secret | GitHub repository secret |
 | `GOOGLE_ADSENSE_REFRESH_TOKEN` | `adsense.readonly` | GitHub repository secret |
-| `GOOGLE_ADSENSE_ACCOUNT_ID` | account assert | GitHub repository secret |
+| `GOOGLE_ADSENSE_ACCOUNT_ID` | account assert | GitHub repository variable |
 
 AdSense の週次取得に書き込みscopeを与えない。`.claude/scripts/adsense/oauth-setup.js` は
 旧前提で `https://www.googleapis.com/auth/adsense` を要求していたが、Phase 0 で既定を
@@ -373,8 +373,8 @@ Claude Codeのローカル実装と分離し、次を自動実行しない。
 
 1. AdSense OAuth clientの正しいGoogle Cloud projectを選ぶ。
 2. read-only scopeでrefresh tokenを再発行し、
-   `GOOGLE_ADSENSE_CLIENT_ID` / `CLIENT_SECRET` / `REFRESH_TOKEN`を
-   3つ同時に更新する。
+   repository variable `GOOGLE_ADSENSE_CLIENT_ID` と repository secrets
+   `GOOGLE_ADSENSE_CLIENT_SECRET` / `GOOGLE_ADSENSE_REFRESH_TOKEN`を同時に更新する。
 3. 完了済みISO週を指定して`fetch-metrics-weekly.yml`を手動実行し、
    AdSense各jobが0行errorでないことをログとmanifestで確認する。
 4. `google-admin-production` Environmentとrequired reviewerを作る。

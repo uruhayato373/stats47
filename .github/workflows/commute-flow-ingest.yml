@@ -3,7 +3,7 @@ name: 🚇 Commute-flow Ingest (e-Stat → R2)
 # 国勢調査「従業地・通学地集計」(statsDataId 0003454526) から通勤 O-D を取得し、
 # 47 県分の per-prefecture JSON を R2 (app/commute-flow/{NN}.json) に反映する。
 #
-# e-Stat APP_ID は CI 専任 (secrets.NEXT_PUBLIC_ESTAT_APP_ID)。次元コードは名称から自動検出。
+# e-Stat APP_ID は CI 専任 (vars.NEXT_PUBLIC_ESTAT_APP_ID)。次元コードは名称から自動検出。
 # 国勢調査は5年に1回 → 低頻度。まず dry_run=true で検出ログを確認してから本実行する。
 
 on:
@@ -18,10 +18,10 @@ permissions:
   contents: read
 
 env:
-  NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
+  NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   NODE_OPTIONS: "--conditions react-server"
-  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
   R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
   CLOUDFLARE_R2_BUCKET_NAME: stats47
