@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-25T20:06:19.951Z",
+  "generatedAt": "2026-08-01T20:06:06.671Z",
   "metricTotal": 2295,
   "byClass": {
     "A": 2239,
@@ -10,11 +10,11 @@
   "needsWorkCount": 0,
   "needsWork": [],
   "blogLineage": {
-    "total": 612,
+    "total": 1045,
     "byStatus": {
-      "both": 381,
-      "jsonOnly": 22,
-      "neither": 209
+      "both": 916,
+      "jsonOnly": 0,
+      "neither": 129
     }
   }
 }
