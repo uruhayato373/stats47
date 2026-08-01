@@ -1,16 +1,14 @@
 {
-  "generatedAt": "2026-07-31T04:31:12.350Z",
+  "generatedAt": "2026-08-01T20:29:14.536Z",
   "summary": {
     "total": 14,
     "staleDelivery": [
-      "convenience-store-count-commercial",
-      "employment-insurance-daily-receipt-rate"
-    ],
-    "configInsufficient": [
       "city-gas-supply-area-household-ratio",
+      "convenience-store-count-commercial",
       "current-balance-ratio",
       "day-time-population-ratio",
       "daytime-population-ratio",
+      "employment-insurance-daily-receipt-rate",
       "flush-toilet-population-ratio",
       "food-self-sufficiency-rate-calorie",
       "future-burden-ratio",
@@ -20,119 +18,120 @@
       "water-supply-population-ratio-2012on",
       "water-supply-population-ratio-pre2011"
     ],
+    "configInsufficient": [],
     "unknown": []
   },
   "assessments": [
     {
       "key": "city-gas-supply-area-household-ratio",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:12:40.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:31:07.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "convenience-store-count-commercial",
-      "configModifiedAt": "2026-07-30T02:14:59+00:00",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
       "dataGeneratedAt": "2026-07-05T04:34:05.000Z",
       "verdict": "stale-delivery",
-      "note": "config はデータより 24 日新しい — 再取り込みで直る見込み",
+      "note": "config はデータより 27 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "current-balance-ratio",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:12:41.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:31:29.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "day-time-population-ratio",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:12:41.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:31:31.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "daytime-population-ratio",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:12:41.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:31:31.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "employment-insurance-daily-receipt-rate",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
       "dataGeneratedAt": "2026-07-05T04:34:37.000Z",
       "verdict": "stale-delivery",
-      "note": "config はデータより 24 日新しい — 再取り込みで直る見込み",
+      "note": "config はデータより 27 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "flush-toilet-population-ratio",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:12:43.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:32:39.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "food-self-sufficiency-rate-calorie",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:12:43.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:32:41.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "future-burden-ratio",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:12:44.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:32:53.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "local-debt-current-ratio",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:12:52.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:34:20.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "nursery-utilization-rate",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:12:53.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:35:10.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "psychiatric-hospital-bed-occupancy-rate",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:12:55.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:36:21.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "water-supply-population-ratio-2012on",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:13:04.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:37:52.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     },
     {
       "key": "water-supply-population-ratio-pre2011",
-      "configModifiedAt": "2026-07-29T14:38:03+09:00",
-      "dataGeneratedAt": "2026-07-30T08:13:04.000Z",
-      "verdict": "config-insufficient",
-      "note": "是正後に取り込んでもこの形 — config の直しが足りない (再取り込みでは直らない)",
+      "configModifiedAt": "2026-08-01T20:26:15Z",
+      "dataGeneratedAt": "2026-07-31T10:37:52.000Z",
+      "verdict": "stale-delivery",
+      "note": "config はデータより 1 日新しい — 再取り込みで直る見込み",
       "knownBroken": true
     }
   ]
