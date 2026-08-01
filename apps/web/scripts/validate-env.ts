@@ -53,7 +53,7 @@ async function main() {
     console.error(errorMessage);
 
     if (isCIEnvironment()) {
-      console.error("\nCI環境では、環境変数はGitHub Secretsから設定されます。");
+      console.error("\nCI環境では、環境変数はGitHub Actions Secrets / Variablesから設定されます。");
       console.error(
         "GitHub Actionsのワークフローで必要な環境変数が設定されているか確認してください。"
       );

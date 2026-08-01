@@ -109,10 +109,10 @@
     },
     {
       "name": "CLOUDFLARE_ACCOUNT_ID",
-      "visibility": "secret",
+      "visibility": "server",
       "contexts": [
         "process",
-        "secret"
+        "variable"
       ]
     },
     {
@@ -132,10 +132,10 @@
     },
     {
       "name": "CLOUDFLARE_R2_BUCKET_NAME",
-      "visibility": "secret",
+      "visibility": "server",
       "contexts": [
         "process",
-        "secret"
+        "variable"
       ]
     },
     {
@@ -154,10 +154,10 @@
     },
     {
       "name": "CLOUDFLARE_ZONE_ID",
-      "visibility": "secret",
+      "visibility": "server",
       "contexts": [
         "process",
-        "secret"
+        "variable"
       ]
     },
     {
@@ -232,10 +232,10 @@
     },
     {
       "name": "GA4_PROPERTY_ID",
-      "visibility": "secret",
+      "visibility": "server",
       "contexts": [
         "process",
-        "secret"
+        "variable"
       ]
     },
     {
@@ -305,16 +305,18 @@
     },
     {
       "name": "GOOGLE_ADSENSE_ACCOUNT_ID",
-      "visibility": "secret",
+      "visibility": "server",
       "contexts": [
-        "secret"
+        "process",
+        "variable"
       ]
     },
     {
       "name": "GOOGLE_ADSENSE_CLIENT_ID",
-      "visibility": "secret",
+      "visibility": "server",
       "contexts": [
-        "secret"
+        "process",
+        "variable"
       ]
     },
     {
@@ -440,10 +442,10 @@
     },
     {
       "name": "INSTAGRAM_BUSINESS_ACCOUNT_ID",
-      "visibility": "secret",
+      "visibility": "server",
       "contexts": [
         "process",
-        "secret"
+        "variable"
       ]
     },
     {
@@ -513,7 +515,7 @@
       "name": "NEXT_PUBLIC_BASE_URL_PRODUCTION",
       "visibility": "public",
       "contexts": [
-        "secret"
+        "variable"
       ]
     },
     {
@@ -528,7 +530,7 @@
       "visibility": "public",
       "contexts": [
         "process",
-        "secret"
+        "variable"
       ]
     },
     {
@@ -564,7 +566,7 @@
       "visibility": "public",
       "contexts": [
         "process",
-        "secret"
+        "variable"
       ]
     },
     {

@@ -10,7 +10,7 @@
  *   - collectArea を 2 (都道府県) に変更
  *   - D1 estat_metainfo への INSERT を廃止し、既存 config との差集合を JSON 出力
  *
- * D1 非依存。CI (secrets.NEXT_PUBLIC_ESTAT_APP_ID) / ローカル (.env.local) 両対応。
+ * D1 非依存。CI (vars.NEXT_PUBLIC_ESTAT_APP_ID) / ローカル (.env.local) 両対応。
  *
  * Usage:
  *   node .claude/scripts/estat/discover-prefecture-candidates.mjs [--dry-run] [--limit N]

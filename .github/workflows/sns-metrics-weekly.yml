@@ -39,7 +39,7 @@ jobs:
       - name: 📸 Instagram metrics
         env:
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
-          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
+          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ vars.INSTAGRAM_BUSINESS_ACCOUNT_ID || secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
         run: node .claude/scripts/instagram/fetch-metrics-ci.cjs
 
       - name: 📤 Commit snapshot to develop

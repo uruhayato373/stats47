@@ -95,7 +95,7 @@ jobs:
         if: steps.pick.outputs.skip != 'true'
         env:
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
-          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
+          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ vars.INSTAGRAM_BUSINESS_ACCOUNT_ID || secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
         run: |
           npx tsx .claude/skills/sns/post-instagram/post-instagram.ts \
             ${{ steps.pick.outputs.metric }} --domain port --type reels

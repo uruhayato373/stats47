@@ -84,13 +84,13 @@ concurrency:
 
 env:
   # diff-push-r2.ts が要求する R2 S3 認証 (CLOUDFLARE_* secrets から導出)
-  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
   R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
   CLOUDFLARE_R2_BUCKET_NAME: stats47
   # exporter の R2 観測値読み取りは公開 URL 経由 (認証不要・ビルド DB 非依存)
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
+  NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
 
 jobs:
   refresh:

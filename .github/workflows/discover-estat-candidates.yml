@@ -3,7 +3,7 @@ name: 🔎 Discover e-Stat Prefecture Candidates
 # e-Stat 都道府県レベル統計表を列挙し、既存 metric config と突合して「未カバー candidate」を
 # 洗い出す (完全DBレス・Phase 1 発見)。R2 も D1 も書かない read-only ジョブ。
 #
-# e-Stat APP_ID は CI 専任 (secrets.NEXT_PUBLIC_ESTAT_APP_ID)。ローカルには無い。
+# e-Stat APP_ID は CI 専任 (vars.NEXT_PUBLIC_ESTAT_APP_ID)。ローカルには無い。
 # 結果は artifact (prefecture-candidates.json / summary) + workflow ログに出す。
 # サマリでスコープ (本当に増やせる件数) を確定してから Phase 2 (config 一括生成) を設計する。
 
@@ -28,7 +28,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
+  NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
 
 jobs:
   discover:
