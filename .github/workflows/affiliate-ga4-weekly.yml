@@ -55,7 +55,7 @@ jobs:
         continue-on-error: true
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
-          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
         run: |
           set -euo pipefail
           if [ -z "${GOOGLE_SERVICE_ACCOUNT_KEY_JSON:-}" ]; then

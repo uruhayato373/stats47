@@ -99,7 +99,7 @@ export function validateRequiredEnvVars(): void {
     
     if (isCI) {
       errorMessage +=
-        "CI環境では、環境変数はGitHub Secretsから設定されます。\n" +
+        "CI環境では、環境変数はGitHub Actions Secrets / Variablesから設定されます。\n" +
         "GitHub Actionsのワークフローで必要な環境変数が設定されているか確認してください。\n" +
         "必要な環境変数: NEXT_PUBLIC_BASE_URL, NEXT_PUBLIC_ESTAT_APP_ID";
     } else {

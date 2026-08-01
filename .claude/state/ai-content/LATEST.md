@@ -1,6 +1,6 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-07-31T19:26:27.998Z
+- 生成: 2026-08-01T19:10:50.904Z
 - GSC snapshot: 2026-W30 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 
@@ -12,8 +12,8 @@
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **12.0 件/日** (2026-07-30 からの平均)
-- 残り 1968 件 → **完了見込み 約 164 日**
+- 消化ペース: **6.0 件/日** (2026-07-30 からの平均)
+- 残り 1968 件 → **完了見込み 約 328 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 

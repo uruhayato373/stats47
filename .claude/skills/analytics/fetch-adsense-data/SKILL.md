@@ -31,11 +31,11 @@ $ARGUMENTS — [期間] [ディメンション] [snapshot YYYY-Www]
 
 AdSense Management API は **OAuth 2.0** が必須（サービスアカウントでは広告主データにアクセス不可）。scope は read-only の `https://www.googleapis.com/auth/adsense.readonly` だけを使う（書き込み API は自動化しない。正典 `.claude/scripts/google-admin/README.md`）。
 
-- **認証情報の正典は GitHub Secrets**（CI 専任・`.env.local` を正典にしない。2026-05-29 の秘密集約 memory `project_env_local_ci_consolidation`）。次の 4 つを設定する:
-  - `GOOGLE_ADSENSE_CLIENT_ID`
+- **CI設定の正典は GitHub Actions**（CI 専任・`.env.local` を正典にしない）。公開識別子は Repository Variables、秘密情報は Secrets に分離して次の 4 つを設定する:
+  - Repository Variable `GOOGLE_ADSENSE_CLIENT_ID`
   - `GOOGLE_ADSENSE_CLIENT_SECRET`
   - `GOOGLE_ADSENSE_REFRESH_TOKEN`（`adsense.readonly`）
-  - `GOOGLE_ADSENSE_ACCOUNT_ID`（`pub-7995274743017484`）
+  - Repository Variable `GOOGLE_ADSENSE_ACCOUNT_ID`（`pub-7995274743017484`）
 - ローカルで ad hoc 実行する場合のみ、同じ 4 変数を shell env か `.env.local` に置く（`.claude/scripts/google-admin/audit-adsense.mjs` が `.env.local` から自己ロードする）。値は git へ commit しない。
 - npm パッケージ: `googleapis`（既にインストール済み）
 - AdSense 管理画面: `ca-pub-7995274743017484` の審査通過・広告配信中
@@ -53,10 +53,11 @@ cd ~/stats47 && read -r CID && read -rs CSEC && \
 # → ブラウザで認可 → refresh_token を stdout に 1 度だけ出力し accounts.list で実接続を検証する
 ```
 
-取得後は 3 つの Secret を更新する（対話プロンプトに貼る。コマンド引数にしない）:
+取得後は Client ID の Variable と 2 つの Secret を更新する
+（Secret は対話プロンプトに貼る。コマンド引数にしない）:
 
 ```bash
-gh secret set GOOGLE_ADSENSE_CLIENT_ID
+read -r CID && printf '%s' "$CID" | gh variable set GOOGLE_ADSENSE_CLIENT_ID; unset CID
 gh secret set GOOGLE_ADSENSE_CLIENT_SECRET
 gh secret set GOOGLE_ADSENSE_REFRESH_TOKEN
 ```

@@ -62,11 +62,11 @@ jobs:
       - name: 🔍 GA4 Admin API read-only audit
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
-          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
-          GOOGLE_ADSENSE_CLIENT_ID: ${{ secrets.GOOGLE_ADSENSE_CLIENT_ID }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          GOOGLE_ADSENSE_CLIENT_ID: ${{ vars.GOOGLE_ADSENSE_CLIENT_ID || secrets.GOOGLE_ADSENSE_CLIENT_ID }}
           GOOGLE_ADSENSE_CLIENT_SECRET: ${{ secrets.GOOGLE_ADSENSE_CLIENT_SECRET }}
           GOOGLE_ADSENSE_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADSENSE_REFRESH_TOKEN }}
-          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ secrets.GOOGLE_ADSENSE_ACCOUNT_ID }}
+          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ vars.GOOGLE_ADSENSE_ACCOUNT_ID }}
         # audit は identity 未達 (AdSense OAuth 未復旧等) で exit 1 になりうる。green に隠さず出す。
         continue-on-error: true
         run: node .claude/scripts/google-admin/cli.mjs audit-api
@@ -75,11 +75,11 @@ jobs:
         if: inputs.mode == 'plan'
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
-          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
-          GOOGLE_ADSENSE_CLIENT_ID: ${{ secrets.GOOGLE_ADSENSE_CLIENT_ID }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          GOOGLE_ADSENSE_CLIENT_ID: ${{ vars.GOOGLE_ADSENSE_CLIENT_ID || secrets.GOOGLE_ADSENSE_CLIENT_ID }}
           GOOGLE_ADSENSE_CLIENT_SECRET: ${{ secrets.GOOGLE_ADSENSE_CLIENT_SECRET }}
           GOOGLE_ADSENSE_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADSENSE_REFRESH_TOKEN }}
-          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ secrets.GOOGLE_ADSENSE_ACCOUNT_ID }}
+          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ vars.GOOGLE_ADSENSE_ACCOUNT_ID }}
         continue-on-error: true
         run: node .claude/scripts/google-admin/cli.mjs plan
 
@@ -147,13 +147,13 @@ jobs:
 
       - name: ⚙️ Apply GA4 custom dimension (1 件・承認済み)
         env:
-          # read 系は repository secrets、admin edit 鍵は Environment secret から解決する
+          # read 系の公開IDは repository variables、credential と admin edit 鍵は secrets から解決する
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
-          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
-          GOOGLE_ADSENSE_CLIENT_ID: ${{ secrets.GOOGLE_ADSENSE_CLIENT_ID }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          GOOGLE_ADSENSE_CLIENT_ID: ${{ vars.GOOGLE_ADSENSE_CLIENT_ID || secrets.GOOGLE_ADSENSE_CLIENT_ID }}
           GOOGLE_ADSENSE_CLIENT_SECRET: ${{ secrets.GOOGLE_ADSENSE_CLIENT_SECRET }}
           GOOGLE_ADSENSE_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADSENSE_REFRESH_TOKEN }}
-          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ secrets.GOOGLE_ADSENSE_ACCOUNT_ID }}
+          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ vars.GOOGLE_ADSENSE_ACCOUNT_ID }}
           GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON }}
           CONFIRM_SITE: ${{ inputs.confirm_site }}
           APPROVAL_TOKEN: ${{ inputs.approval_token }}

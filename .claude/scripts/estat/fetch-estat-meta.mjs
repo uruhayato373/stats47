@@ -6,7 +6,7 @@
  * ための素材。多次元クロス集計テーブルの各次元 (cat01/cat02/.../area/time) とその値一覧を
  * 人 (LLM) が読んで意味あるスライスを選抜する。
  *
- * e-Stat APP_ID は CI 専任 (secrets.NEXT_PUBLIC_ESTAT_APP_ID)。R2/D1 は書かない read-only。
+ * e-Stat APP_ID は CI 専任 (vars.NEXT_PUBLIC_ESTAT_APP_ID)。R2/D1 は書かない read-only。
  *
  * Usage:
  *   node .claude/scripts/estat/fetch-estat-meta.mjs --list <statsids.json>

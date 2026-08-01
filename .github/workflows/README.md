@@ -21,25 +21,36 @@ feature/* → PR作成 → 品質チェック
 **並列実行制御**:
 - 同じPRに対する複数実行は最新のみ実行（古いものは自動キャンセル）
 
-## GitHub Secrets
+## GitHub Actions の設定値
 
 リポジトリ設定（Settings → Secrets and variables → Actions）で以下を設定：
 
-### 必須
+認証情報・トークン・秘密鍵だけを Secrets に置き、公開識別子・URL・バケット名は
+Repository Variables に置く。Workflow では前者を `secrets.*`、後者を `vars.*` で参照する。
 
 | Secret | 用途 | 形式 |
 |--------|------|------|
 | `CLOUDFLARE_API_TOKEN` | Cloudflareデプロイ認証 | 40文字の英数字（Workers Scripts、D1、R2の編集権限が必要） |
-| `CLOUDFLARE_ACCOUNT_ID` | Cloudflareアカウント識別 | 32文字の16進数 |
 | `AUTH_SECRET` | NextAuth認証シークレット | 32文字以上のランダム文字列 |
 
-### 環境別設定
+### Repository Variables
 
-| Secret | 用途 |
-|--------|------|
+| Variable | 用途 |
+|----------|------|
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflareアカウント識別 |
+| `CLOUDFLARE_ZONE_ID` | CDN purge対象zone |
+| `CLOUDFLARE_R2_BUCKET_NAME` | R2バケット名 |
+| `GA4_PROPERTY_ID` | GA4 property識別 |
+| `GOOGLE_ADSENSE_ACCOUNT_ID` | AdSense account assert |
+| `GOOGLE_ADSENSE_CLIENT_ID` | AdSense OAuth client識別子 |
+| `INSTAGRAM_BUSINESS_ACCOUNT_ID` | Instagram Graph APIのbusiness account識別 |
 | `NEXT_PUBLIC_ESTAT_APP_ID` | e-Stat API アプリケーションID |
 | `NEXT_PUBLIC_BASE_URL_PRODUCTION` | 本番環境URL（例: https://stats47.jp） |
-| `NEXT_PUBLIC_GA_MEASUREMENT_ID_PRODUCTION` | 本番環境 Google Analytics測定ID |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | 本番環境 Google Analytics測定ID |
+
+移行中の `CLOUDFLARE_ZONE_ID` / `INSTAGRAM_BUSINESS_ACCOUNT_ID` /
+`GOOGLE_ADSENSE_CLIENT_ID` だけは、Variable 未登録時に同名の旧Secretへフォールバックする。
+正しいVariable登録後に旧Secretとフォールバックを削除する。
 
 ### オプション
 
@@ -260,7 +271,7 @@ GitHub Actionsのキャッシュが古い場合:
 ### デプロイ前
 
 - [ ] D1データベースマイグレーション実行済み（必要な場合）
-- [ ] 環境変数が設定済み（GitHub Secrets）
+- [ ] 環境変数が設定済み（GitHub Secrets / Repository Variables）
 - [ ] ロールバックプランを準備
 - [ ] 関係者への通知済み（本番デプロイの場合）
 

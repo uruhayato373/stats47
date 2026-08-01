@@ -9,8 +9,8 @@
  *
  * ★ 値の取り扱い:
  *   - refresh token は最後にまとめて 1 度だけ出力する (先頭 N 文字の部分出力もしない)。
- *   - `.env.local` へは書かない。creds は CI 専任で GitHub Secrets が正
- *     (2026-05-29 の秘密集約。memory project_env_local_ci_consolidation)。
+ *   - `.env.local` へは書かない。Client ID は GitHub Repository Variable、
+ *     Client Secret / refresh token は GitHub Secrets が正。
  *
  * ★ 前提 (満たさないと失敗する。2026-07-31 に全部踏んだので明記する):
  *   1. 対象プロジェクトで AdSense Management API が有効
@@ -29,10 +29,10 @@
  *     node .claude/scripts/adsense/oauth-setup.js; unset CID CSEC
  *
  * 取得後:
- *   gh secret set GOOGLE_ADSENSE_CLIENT_ID
+ *   read -r CID && printf '%s' "$CID" | gh variable set GOOGLE_ADSENSE_CLIENT_ID; unset CID
  *   gh secret set GOOGLE_ADSENSE_CLIENT_SECRET
  *   gh secret set GOOGLE_ADSENSE_REFRESH_TOKEN
- *   (いずれも対話プロンプトへ貼る。コマンド引数にするとシェル履歴に残る)
+ *   (Secret は対話プロンプトへ貼る。コマンド引数にするとシェル履歴に残る)
  */
 
 const { google } = require("googleapis");
@@ -130,8 +130,10 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
-    console.log("\n=== GitHub Secrets を 3 つ更新してください ===\n");
-    console.log("  gh secret set GOOGLE_ADSENSE_CLIENT_ID      # 今回使った Client ID");
+    console.log("\n=== GitHub Variable 1つ / Secrets 2つを更新してください ===\n");
+    console.log(
+      "  read -r CID && printf '%s' \"$CID\" | gh variable set GOOGLE_ADSENSE_CLIENT_ID; unset CID",
+    );
     console.log("  gh secret set GOOGLE_ADSENSE_CLIENT_SECRET  # 今回使った Client Secret");
     console.log("  gh secret set GOOGLE_ADSENSE_REFRESH_TOKEN  # 下の値\n");
     console.log("--- refresh_token ---");

@@ -65,15 +65,15 @@ jobs:
         continue-on-error: true
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
-          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
         run: npm run fetch-ga4-snapshot -- ${{ steps.week.outputs.week }}
 
       - name: 💰 Fetch AdSense snapshot
         env:
-          GOOGLE_ADSENSE_CLIENT_ID: ${{ secrets.GOOGLE_ADSENSE_CLIENT_ID }}
+          GOOGLE_ADSENSE_CLIENT_ID: ${{ vars.GOOGLE_ADSENSE_CLIENT_ID || secrets.GOOGLE_ADSENSE_CLIENT_ID }}
           GOOGLE_ADSENSE_CLIENT_SECRET: ${{ secrets.GOOGLE_ADSENSE_CLIENT_SECRET }}
           GOOGLE_ADSENSE_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADSENSE_REFRESH_TOKEN }}
-          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ secrets.GOOGLE_ADSENSE_ACCOUNT_ID }}
+          GOOGLE_ADSENSE_ACCOUNT_ID: ${{ vars.GOOGLE_ADSENSE_ACCOUNT_ID }}
         continue-on-error: true # OAuth refresh token が切れていても他の計測は進める
         run: npm run fetch-adsense-snapshot -- ${{ steps.week.outputs.week }}
 
@@ -83,7 +83,7 @@ jobs:
       - name: 🌟 NSM weekly snapshot
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
-          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
         continue-on-error: true
         run: |
           # metrics-reader.mjs はリポジトリルートのキーファイルを直接読むため env から書き出す
