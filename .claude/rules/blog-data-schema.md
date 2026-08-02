@@ -294,7 +294,7 @@ YYYY-MM-DD-<method>[-<batch>]
 | `docs/todo/04_改善バックログ.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (旧ID: <BLOG-CTR-*>)`               |
 | section frontmatter                                 | `wave_id`, `legacy_section_ids`, `predecessor_wave`, `successor_wave` |
 | `.claude/state/blog/auto-brushup-history.json`      | 各 entry に `wave_id` フィールド (2026-05-27 migration 済)            |
-| commit message                                      | 必須ではない (legacy refactoring を避けるため)                        |
+| commit message                                      | 必須ではない (過去 commit の履歴改変を避けるため)                     |
 
 ### Predecessor / Successor
 
