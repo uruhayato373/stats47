@@ -11,8 +11,7 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #
 # ※ 旧 db:pull/db:push (ビルド DB round-trip) は廃止。観測値も exporter も DB を読まない
 #   (page-data-batch / export-master-snapshots / generate-ranking-items / area-profile は
-#   いずれも R2 + git TS 直結)。build DB pull は remotion-static 等 一部 task の保険として
-#   best-effort で残す (失敗しても続行)。SSOT は git TS と R2 のみ。
+#   いずれも R2 + git TS 直結)。SSOT は git TS と R2 のみ。
 #
 # R2 書き込みはこの CI / クラウド専用 (_assert-ci-write ガードでローカル push は停止)。
 #
@@ -156,12 +155,6 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
-      # 一部 task (remotion-static 等) が読むビルド DB を R2 から取得 (read-only / best-effort)。
-      # DBレスで不要になった観測値・ranking 系 exporter には影響しないため、不在でも続行する。
-      - name: ⬇️ Pull build DB (best-effort)
-        continue-on-error: true
-        run: npm run db:pull --workspace=packages/r2-storage
-
       # e-Stat → .local/r2/app/stats (観測値 R2 直書き)。dry_run=true なら fetch のみ。
       - name: 📊 page-data-batch (e-Stat fetch)
         run: |
@@ -278,7 +271,18 @@ jobs:
 
           EXISTING=$(gh issue list --state open --label data-refresh-alert --search "\"[Data Refresh Alert]\" in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
-            gh issue comment "$EXISTING" --body-file /tmp/data-refresh-issue.md
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/data-refresh-issue.md
           else
             gh issue create --title "$TITLE" --label "data-refresh-alert,auto-generated" --body-file /tmp/data-refresh-issue.md
           fi
+
+      - name: ✅ Close recovered data refresh alert
+        if: success() && github.event_name != 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label data-refresh-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "e-StatからR2への更新が正常完了したため自動Closeします。"
+            done

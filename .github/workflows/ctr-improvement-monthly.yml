@@ -12,7 +12,6 @@ on:
 
 permissions:
   contents: read
-  issues: write
 
 concurrency:
   group: ctr-improvement-monthly
@@ -79,27 +78,3 @@ jobs:
       - name: 📄 Write GitHub Step Summary
         if: steps.extract.outputs.skipped == 'false'
         run: cat /tmp/ctr/issue.md >> "$GITHUB_STEP_SUMMARY"
-
-      - name: 🚨 Open or update monthly issue
-        if: steps.extract.outputs.skipped == 'false'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          MONTH="${{ steps.month.outputs.month }}"
-          TITLE="[CTR Improvement Candidates] ${MONTH}"
-
-          EXISTING=$(gh issue list \
-            --state open \
-            --label ctr-improvement-candidate \
-            --search "\"${TITLE}\" in:title" \
-            --json number --jq '.[0].number // empty')
-
-          if [ -n "$EXISTING" ]; then
-            echo "Existing open issue #$EXISTING — appending latest extraction"
-            gh issue comment "$EXISTING" --body-file /tmp/ctr/issue.md
-          else
-            gh issue create \
-              --title "$TITLE" \
-              --label "ctr-improvement-candidate,auto-generated" \
-              --body-file /tmp/ctr/issue.md
-          fi

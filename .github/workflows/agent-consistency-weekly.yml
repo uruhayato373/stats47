@@ -176,9 +176,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TITLE="[Consistency Alert] agent/skill 整合性ドリフト検出 ($(date +%Y-%m-%d))"
+          TITLE="[Consistency Alert] agent/skill 整合性ドリフト検出"
           EXISTING=$(gh issue list --label "auto-generated" --state open \
-            --search "Consistency Alert in:title" --json number --jq '.[0].number // empty')
+            --search "\"agent/skill 整合性ドリフト検出\" in:title" --json number --jq '.[0].number // empty')
           {
             echo "週次整合性チェックで error レベルのドリフトを検出しました。"
             echo ""
@@ -189,13 +189,25 @@ jobs:
             echo '```'
           } > /tmp/issue-body.md
           if [ -n "$EXISTING" ]; then
-            gh issue comment "$EXISTING" --body-file /tmp/issue-body.md
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/issue-body.md
           else
             gh issue create \
               --title "$TITLE" \
               --label "auto-generated" \
               --body-file /tmp/issue-body.md
           fi
+
+      - name: ✅ Close recovered agent/skill consistency alert
+        if: steps.check.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue list --label "auto-generated" --state open \
+            --search "\"agent/skill 整合性ドリフト検出\" in:title" --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "agent/skill整合性チェックが正常へ復旧したため自動Closeします。"
+            done
 
       - name: 📦 Check active ranking → R2 coverage (公開漏れ)
         # 逆方向突合: isActive:true + KNOWN なのに R2 item.json が無い「公開漏れ」を検出。
@@ -233,9 +245,8 @@ jobs:
 
       - name: 📦 Check .claude/state size budget (肥大歯止め・WARN のみ)
         # git 追跡下の .claude/state/ が肥大すると clone/checkout が重くなる (監査 2026-07-03: 13MB)。
-        # 予算 15MB 超で auto-generated Issue を起票し人間に prune 判断を促す。
-        # ★自動削除はしない: resubmit-history 等は GSC dedup が消費する履歴で、機械的な世代 prune は
-        #   誤爆リスクがある (どの世代が安全に落とせるかは意味判断)。WARN に留める。
+        # 予算 15MB 超で auto-generated Issue を起票する。PSI/GSC/Cloudflare の生snapshotは
+        # 専用producerで保持上限を適用し、履歴SSOTや運用queueは削除しない。
         id: statesize
         run: |
           SIZE_MB=$(du -sm .claude/state 2>/dev/null | cut -f1)
@@ -254,18 +265,30 @@ jobs:
           {
             echo ".claude/state/ が予算 15MB を超えました (${{ steps.statesize.outputs.state_mb }}MB)。clone/checkout が重くなります。"
             echo ""
-            echo "対処 (人間判断・自動削除しない): 古い世代 snapshot / history CSV のアーカイブ・間引きを検討。"
-            echo "消費側 (GSC dedup 等) が参照する履歴を消さないこと。"
+            echo "対処: \`npm run state:snapshots:prune\` で安全対象だけを間引き、残りは用途を確認して判断。"
+            echo "history CSV・LATEST・queue・resubmit-history は自動削除しないこと。"
             echo ""
             echo '```'
             find .claude/state -type f -size +512k -exec du -h {} \; | sort -rh | head -20
             echo '```'
           } > /tmp/state-issue.md
           if [ -n "$EXISTING" ]; then
-            gh issue comment "$EXISTING" --body-file /tmp/state-issue.md
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/state-issue.md
           else
             gh issue create \
               --title "$TITLE" \
               --label "auto-generated" \
               --body-file /tmp/state-issue.md
           fi
+
+      - name: ✅ Close recovered state budget alert
+        if: ${{ steps.statesize.outputs.state_mb != '' && fromJSON(steps.statesize.outputs.state_mb) <= 15 }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue list --label "auto-generated" --state open \
+            --search "\"state が予算超過\" in:title" --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment ".claude/state が15MB以下へ復旧したため自動Closeします。"
+            done

@@ -8,16 +8,15 @@ import "dotenv/config";
  *   入力  : R2 観測値 + ranking item.json (build-input.ts)
  *   生成  : claude / gemini CLI を子プロセス起動 (旧 callAI を踏襲)
  *
- * ★Gemini API 直叩き (--model gemini-api) は 2026-07-31 に撤去した。GitHub Actions の中で
- *   LLM を呼ぶ形は Claude でも Gemini でも別課金になるため、生成は Claude セッション
- *   (Max サブスク内) が担う。セッションからは skill /generate-ai-content を使う
- *   (build-input.ts --prompt-only で prompt を取り、agent が書く)。
+ * ★Gemini API 直叩き (--model gemini-api) は 2026-07-31 に撤去した。日次 CI は本スクリプトの
+ *   CLI 子プロセスではなく、公式 Claude Code Base Action を OAuth 認証で起動する。
+ *   本スクリプトはユーザー端末からの手動フォールバックに残す。
  *   ゲート: 生成物を audit-ai-content.mjs に通し blocker 0 のものだけ採用 (★旧版に無かった品質ゲート)
  *   出力  : staging dir に AiContentSnapshotRow を書き出す (R2 直書きしない)
  *           → r2-publisher / diff-push-r2 が staging を app/ranking/<key>/ai-content.json へ push
  *
  * ★Claude Code セッション内では claude CLI への大きい stdin がサンドボックスでブロックされるため、
- *   実生成は **ユーザー端末 (Claude Code 外) か CI** で実行する。セッション内検証は --dry-run を使う。
+ *   実生成は **ユーザー端末 (Claude Code 外)** で実行する。セッション内検証は --dry-run を使う。
  *
  * CLI:
  *   NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \

@@ -12,10 +12,12 @@ name: 🗾 Migration-flow Annual Full Refresh
 # - apps/remotion/src/features/migration-flow/MigrationReelVertical.tsx
 # - apps/remotion/scripts/fetch-migration-flow.ts
 
+# ★schedule は Phase 2 (fetch / render / caption / copy) を実装するまで停止する (2026-08-01)。
+# monthly と同じ構造欠陥を持つ: 生成ステップが `echo "TODO"` のまま R2 push と
+# Instagram 投稿が無条件で走るため、cron が発火すれば必ず落ちる (monthly は
+# 2026-06/07/08 の 3 回とも同じ原因で failure)。実装が入るまで手動 dispatch のみ。
+# 再開条件: 下の「Fetch」「Render」「Generate captions」「Copy to .local/r2/」を実装すること。
 on:
-  schedule:
-    # 1/20 11:00 JST = 1/20 02:00 UTC
-    - cron: "0 2 20 1 *"
   workflow_dispatch:
     inputs:
       skip_render:
@@ -77,8 +79,20 @@ jobs:
           echo "TODO: Phase 2 で実装"
           # node .claude/scripts/sns/migration-flow/copy-to-r2.mjs
 
+      # 生成ステップが未実装の間は staging が作られない。無条件に push すると
+      # diff-push-r2 が「見つかりません」で exit 1 する。投稿も素材が無いまま走らせない。
+      - name: 🔎 Check generated assets
+        id: assets
+        run: |
+          if [ -d .local/r2/sns/migration-flow ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::生成ステップが未実装のため R2 push と投稿をスキップします (Phase 2)"
+          fi
+
       - name: ☁️ Push to R2
-        if: inputs.dry_run != 'true'
+        if: steps.assets.outputs.exists == 'true' && inputs.dry_run != 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
@@ -88,7 +102,7 @@ jobs:
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix sns/migration-flow
 
       - name: "📱 Post to Instagram (Day 1: 25 件)"
-        if: inputs.dry_run != 'true'
+        if: steps.assets.outputs.exists == 'true' && inputs.dry_run != 'true'
         env:
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
           INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ vars.INSTAGRAM_BUSINESS_ACCOUNT_ID || secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}

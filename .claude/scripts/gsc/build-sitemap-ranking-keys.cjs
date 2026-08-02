@@ -131,15 +131,18 @@ function main() {
     }
   }
 
-  const sorted = [...union].sort();
+  // GSC履歴や旧INDEXABLEに残る、現在は配信対象外のキーをsitemapへ戻さない。
+  // KNOWNは active・prefecture対応・R2 item実在を満たす現在の配信集合。
+  const sorted = [...union].filter((key) => knownKeys.has(key)).sort();
 
   const header = `/**
  * SITEMAP_RANKING_KEYS — sitemap.ts /ranking 出力対象キー (自動生成・手動編集禁止)
  *
  * **生成: node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs**
  *
- * 複数週 GSC impressions の和集合 + 既存 INDEXABLE_RANKING_KEYS + 全 KNOWN_RANKING_KEYS (isActive)。
- * INDEXING-SITEMAP-02: 「コンテンツ実体のある URL」= isActive な全ランキングを sitemap に包含。
+ * 複数週 GSC impressions の和集合 + 既存 INDEXABLE_RANKING_KEYS + 全 KNOWN_RANKING_KEYS を
+ * 現在の KNOWN_RANKING_KEYS で絞り込む。
+ * INDEXING-SITEMAP-02: 「コンテンツ実体のある URL」= active・prefecture対応・R2実在。
  * 2026-05-05 の単一週絞り込みによる大量インデックス削除を回避する設計 (詳細はスクリプト docstring)。
  *
  * 集計週: ${weeks.join(", ")}

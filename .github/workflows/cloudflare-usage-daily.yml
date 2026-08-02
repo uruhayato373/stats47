@@ -42,6 +42,9 @@ jobs:
       - name: 📝 Update history.csv and LATEST.md
         run: npm run cloudflare-usage:digest
 
+      - name: 🧹 Retain recent raw Cloudflare snapshots
+        run: node .claude/scripts/lib/prune-state-snapshots.mjs --scope cloudflare
+
       - name: 🔍 Threshold check
         id: check
         run: |
@@ -94,22 +97,32 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          DATE=$(date -u +%Y-%m-%d)
           if [ "${{ steps.check.outputs.exit_code }}" = "2" ]; then
             SEVERITY="🔴 Critical"
           else
             SEVERITY="⚠️ Warning"
           fi
-          TITLE="[Cloudflare Alert] ${SEVERITY} しきい値割れ ${DATE}"
+          TITLE="[Cloudflare Alert] しきい値違反"
           BODY_FILE=/tmp/cf-report/report.md
 
           EXISTING=$(gh issue list --state open --label cloudflare-alert --search "\"[Cloudflare Alert]\" in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
-            echo "Existing open issue #$EXISTING — appending comment instead of creating duplicate"
-            gh issue comment "$EXISTING" --body-file "$BODY_FILE"
+            echo "Existing open issue #$EXISTING — replacing with latest ${SEVERITY} measurement"
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file "$BODY_FILE"
           else
             gh issue create \
               --title "$TITLE" \
               --label "cloudflare-alert,auto-generated" \
               --body-file "$BODY_FILE"
           fi
+
+      - name: ✅ Close recovered Cloudflare alert
+        if: steps.check.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label cloudflare-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "Cloudflareの最新計測がしきい値内へ復旧したため自動Closeします。"
+            done

@@ -72,6 +72,17 @@ jobs:
         run: node .claude/scripts/lib/audit-workflow-policy.cjs --strict
         continue-on-error: false
 
+      - name: 🚨 Alert lifecycle contract
+        # domain alert は1障害=1Issue。日付違いの量産と、復旧後もopenのまま残る退行を止める。
+        run: npm run test:alert-lifecycle
+        continue-on-error: false
+
+      - name: 🤖 Content Generation Routine Contract Gate
+        # 対象あり生成0件をgreenに戻さない。LLM実行→決定的検証→公開の順序と
+        # OAuth / MCP / full-output の安全契約を静的に固定する。
+        run: npm run test:content-routines
+        continue-on-error: false
+
       - name: 🖼️ Image Generation Pipeline Contract Gate
         # planner/manifest/exact publisher/renderer hash と workflow policy の契約を
         # ネットワークや本番R2に依存せず検証する。公開R2の鮮度監査は週次・post-deploy が担当する。

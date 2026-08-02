@@ -30,6 +30,19 @@ export function getAdReservedMinHeight(format: AdFormat): number {
 }
 
 /**
+ * responsive display広告の形状を配置契約へ固定する。
+ * `auto` のままだとrectangle railへ縦長広告が配信され、予約高を超えてCLSを起こしうる。
+ */
+export function getResponsiveAdFormat(
+  format: AdFormat,
+): "rectangle" | "horizontal" | "vertical" | "auto" {
+  if (format === "rectangle") return "rectangle";
+  if (format === "banner") return "horizontal";
+  if (format === "skyscraper") return "vertical";
+  return "auto";
+}
+
+/**
  * 広告枠の外枠 class。
  *
  * `.ad-container` は本番・開発とも必ず付く唯一の DOM マーカーで、レンダリング後に

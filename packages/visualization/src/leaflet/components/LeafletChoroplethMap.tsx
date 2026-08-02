@@ -26,10 +26,10 @@ export interface LeafletChoroplethMapProps {
   data: MapDataPoint[];
   /** 色スケール設定 */
   colorConfig: MapVisualizationConfig;
-  /** タイル URL（light/dark） */
-  tileUrl: string;
+  /** タイル URL（省略時はTopoJSONだけを描画） */
+  tileUrl?: string;
   /** タイル attribution */
-  attribution: string;
+  attribution?: string;
   /** 値の単位 */
   unit?: string;
   /** 都道府県クリック時コールバック */
@@ -164,7 +164,7 @@ export function LeafletChoroplethMap({
         scrollWheelZoom
         style={{ height: "100%", width: "100%", minHeight: 400, borderRadius: "0.375rem" }}
       >
-        <TileLayer url={tileUrl} attribution={attribution} />
+        {tileUrl && <TileLayer url={tileUrl} attribution={attribution ?? ""} />}
 
         {/* 都道府県レイヤー */}
         <ChoroplethGeoJsonLayer

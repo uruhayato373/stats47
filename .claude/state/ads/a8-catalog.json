@@ -8081,7 +8081,7 @@
       "company": "イオンコンパス株式会社",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "error",
       "source": "existing-partnership",
       "history": [
         {
@@ -8089,6 +8089,13 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-01T22:00:29.587Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
       ],
       "epcYen": 0,
@@ -8096,7 +8103,9 @@
       "rewardRatePct": 1,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000026954001": {
       "programId": "s00000026954001",
@@ -8473,7 +8482,7 @@
       "lastError": {
         "step": "harvest",
         "error": "session-expired",
-        "at": "2026-07-19T23:03:53.206Z"
+        "at": "2026-08-01T22:00:29.551Z"
       }
     },
     "s00000019877001": {
@@ -9991,5 +10000,5 @@
       }
     }
   },
-  "updatedAt": "2026-07-28T11:42:35.022Z"
+  "updatedAt": "2026-08-01T22:00:29.587Z"
 }

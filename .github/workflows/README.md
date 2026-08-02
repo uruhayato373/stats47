@@ -9,6 +9,8 @@
 | PR Quality Check | PR作成・更新 (main) | Lint、Type Check、Unit Test、Coverage、Build、Playwright E2E |
 | Deploy to Cloudflare Workers | Push (main) | Build、認証確認、デプロイ、ヘルスチェック |
 | Security Scan | PR/Push、毎週日曜0時、手動 | npm audit、CodeQL分析 |
+| AI Content Daily (`ai-content-generate-daily.yml`) | 毎日3時JST、手動、request push | Claude Code OAuthでランキング本文を生成し、audit・独立critic・件数照合後に公開workflowを起動 |
+| Blog Generate Daily (`blog-generate-daily.yml`) | 毎日4時30分JST、手動、request push | 接地後にClaude Code OAuthで記事を執筆し、factual・quality・独立critic・件数照合後に公開workflowを起動 |
 | Google Admin settings (`google-admin-settings.yml`) | 毎週月曜5時JST (schedule)、手動 (audit/plan/apply) | GA4 Admin API / GSC / AdSense を read-only 監査。dispatch の `apply` だけが protected Environment `google-admin-production` で GA4 custom dimension を 1 件作成。正典: `.claude/scripts/google-admin/README.md` |
 
 ### ブランチ戦略
@@ -28,10 +30,13 @@ feature/* → PR作成 → 品質チェック
 認証情報・トークン・秘密鍵だけを Secrets に置き、公開識別子・URL・バケット名は
 Repository Variables に置く。Workflow では前者を `secrets.*`、後者を `vars.*` で参照する。
 
+定期監視のdomain alertは、日付ごとにIssueを増やさず1件を最新状態へ更新し、正常復帰した実行で自動Closeする。PRでは `npm run test:alert-lifecycle` がこの契約を検査する。PSI・GSC URL Inspection・Cloudflareの生snapshotは `npm run state:snapshots:prune` でそれぞれ最新1・7・30件に限定し、`history.csv`、`LATEST`、queue、台帳は削除しない。
+
 | Secret | 用途 | 形式 |
 |--------|------|------|
 | `CLOUDFLARE_API_TOKEN` | Cloudflareデプロイ認証 | 40文字の英数字（Workers Scripts、D1、R2の編集権限が必要） |
 | `AUTH_SECRET` | NextAuth認証シークレット | 32文字以上のランダム文字列 |
+| `CLAUDE_CODE_OAUTH_TOKEN` | `ai-content-generate-daily.yml` / `blog-generate-daily.yml` の Claude Code 認証。ローカルで `claude setup-token` を実行して発行し、Repository Secret に登録する | OAuth token。Variable やログへ出さない |
 
 ### Repository Variables
 
@@ -59,6 +64,9 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 | `CODECOV_TOKEN` | カバレッジアップロード（オプション） |
 | `SLACK_WEBHOOK_URL` | Slack通知（オプション） |
 | `GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON` | GA4 custom dimension 作成用の `analytics.edit` サービスアカウント鍵。**Environment `google-admin-production` の secret** として登録し、`google-admin-settings.yml` の `apply` job だけが参照する（required reviewer 承認が要る・人間工程）。正典: `.claude/scripts/google-admin/README.md` |
+
+`CLAUDE_CODE_OAUTH_TOKEN` が未登録または失効している場合、生成対象がある日次 routine は
+生成工程の前で hard fail する。対象あり生成0件を success にしないための必須認証である。
 
 ## PRマージ前チェック
 
