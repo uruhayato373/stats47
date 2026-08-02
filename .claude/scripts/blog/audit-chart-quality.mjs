@@ -28,26 +28,37 @@
  *   → select-brushup-candidates.mjs が本 JSON を読み chartQuality を加味する。
  */
 
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import { lintSvgContent, extractInlineSvgs, lintSvgSize, lintChoroplethLegend, lintFindingsParity, lintScatterQuality, lintTileGridQuality } from "../lib/svg-lint.mjs";
+import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
+import {
+  lintSvgContent,
+  extractInlineSvgs,
+  lintSvgSize,
+  lintChoroplethLegend,
+  lintFindingsParity,
+  lintScatterData,
+  lintScatterParity,
+  lintScatterQuality,
+  lintTileGridQuality,
+} from '../lib/svg-lint.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
+const PROJECT_ROOT = path.resolve(__dirname, '..', '..', '..');
 
 const args = process.argv.slice(2);
 const getArg = (flag, fallback) => {
   const i = args.indexOf(flag);
   return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
 };
-const BASE = path.resolve(PROJECT_ROOT, getArg("--base", ".local/r2/app/blog"));
-const JSON_OUT = args.includes("--json");
+const BASE = path.resolve(PROJECT_ROOT, getArg('--base', '.local/r2/app/blog'));
+const JSON_OUT = args.includes('--json');
 const OUT_PATH = path.resolve(
   PROJECT_ROOT,
-  getArg("--out", ".claude/state/blog/chart-audit.json"),
+  getArg('--out', '.claude/state/blog/chart-audit.json')
 );
 
 const log = (m) => !JSON_OUT && console.log(m);
@@ -57,7 +68,7 @@ if (!fs.existsSync(BASE)) {
   console.error(`[error] base dir not found: ${BASE}`);
   console.error(
     `先に R2 を pull してください (例: /pull-r2 --prefix blog)。` +
-      ` または --base docs/21_ブログ記事原稿 でドラフトを監査。`,
+      ` または --base docs/21_ブログ記事原稿 でドラフトを監査。`
   );
   process.exit(1);
 }
@@ -65,8 +76,8 @@ if (!fs.existsSync(BASE)) {
 // ---------- 1 記事を監査 ----------
 function auditArticle(slug) {
   const dir = path.join(BASE, slug);
-  const dataDir = path.join(dir, "data");
-  const articleMd = path.join(dir, "article.md");
+  const dataDir = path.join(dir, 'data');
+  const articleMd = path.join(dir, 'article.md');
 
   let errors = 0;
   let warnings = 0;
@@ -80,8 +91,8 @@ function auditArticle(slug) {
     errors += errs.length;
     warnings += warns.length;
     for (const w of warns) {
-      if (w.includes("dark mode 非対応")) darkModeMissing++;
-      if (w.includes("theme 依存色")) themeColorInline++;
+      if (w.includes('dark mode 非対応')) darkModeMissing++;
+      if (w.includes('theme 依存色')) themeColorInline++;
     }
     if (errs.length || warns.length) {
       details.push({ target: label, errors: errs, warnings: warns });
@@ -90,34 +101,93 @@ function auditArticle(slug) {
 
   // data/*.svg (内容 lint + カタログ別サイズ統一 lint + json ペア検査)
   if (fs.existsSync(dataDir)) {
-    for (const f of fs.readdirSync(dataDir).filter((x) => x.endsWith(".svg"))) {
-      const svg = fs.readFileSync(path.join(dataDir, f), "utf8");
+    for (const f of fs.readdirSync(dataDir).filter((x) => x.endsWith('.svg'))) {
+      const svg = fs.readFileSync(path.join(dataDir, f), 'utf8');
       const a = lintSvgContent(svg, f);
       const b = lintSvgSize(f, svg); // 非正規 viewBox 幅 (アスペクト比統一・再発防止)
       // ペア検査 (json があるときのみ): 凡例の意味的ラベル誤用 / findings の内容パリティ
       let jsonData;
-      const jsonPath = path.join(dataDir, f.replace(/\.svg$/, ".json"));
+      let sourceData;
+      const pairErrors = [];
+      const jsonPath = path.join(dataDir, f.replace(/\.svg$/, '.json'));
       if (fs.existsSync(jsonPath)) {
-        try { jsonData = JSON.parse(fs.readFileSync(jsonPath, "utf8")); } catch { /* 壊れた json は系譜 gate が捕捉 */ }
+        try {
+          jsonData = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+        } catch (error) {
+          pairErrors.push(
+            `${f.replace(/\.svg$/, '.json')} を解析できない: ${error instanceof Error ? error.message : String(error)}`
+          );
+        }
+      }
+      const sourcePath = path.join(
+        dataDir,
+        f.replace(/\.svg$/, '.source.json')
+      );
+      if (fs.existsSync(sourcePath)) {
+        try {
+          sourceData = JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
+          const inspection = inspectChartSourceManifest(sourceData);
+          if (inspection.verdict === 'invalid') {
+            pairErrors.push(
+              `${f.replace(/\.svg$/, '.source.json')} は再取得不能: ${inspection.detail}`
+            );
+          }
+        } catch (error) {
+          pairErrors.push(
+            `${f.replace(/\.svg$/, '.source.json')} を解析できない: ${error instanceof Error ? error.message : String(error)}`
+          );
+        }
       }
       const c = lintChoroplethLegend(f, svg, jsonData);
-      const d = jsonData !== undefined ? lintFindingsParity(f, svg, jsonData) : { errors: [], warnings: [] };
+      const d =
+        jsonData !== undefined
+          ? lintFindingsParity(f, svg, jsonData)
+          : { errors: [], warnings: [] };
       const e = lintScatterQuality(f, svg, jsonData);
+      const scatterData = lintScatterData(f, jsonData, sourceData);
+      const scatterParity = lintScatterParity(f, svg, jsonData);
       // タイルマップの品質不変量 (キャンバス比・透過背景・テーマ非依存・凡例位置)
       const g = lintTileGridQuality(f, svg, jsonData);
       consume(`data/${f}`, {
-        errors: [...a.errors, ...b.errors, ...c.errors, ...d.errors, ...e.errors, ...g.errors],
-        warnings: [...a.warnings, ...b.warnings, ...c.warnings, ...d.warnings, ...e.warnings, ...g.warnings],
+        errors: [
+          ...a.errors,
+          ...b.errors,
+          ...pairErrors,
+          ...c.errors,
+          ...d.errors,
+          ...scatterData.errors,
+          ...scatterParity.errors,
+          ...e.errors,
+          ...g.errors,
+        ],
+        warnings: [
+          ...a.warnings,
+          ...b.warnings,
+          ...c.warnings,
+          ...d.warnings,
+          ...e.warnings,
+          ...g.warnings,
+        ],
       });
     }
   }
   // article.md インライン <svg>
   if (fs.existsSync(articleMd)) {
-    const inline = extractInlineSvgs(fs.readFileSync(articleMd, "utf8"));
-    inline.forEach((svg, i) => consume(`inline-svg#${i + 1}`, lintSvgContent(svg)));
+    const inline = extractInlineSvgs(fs.readFileSync(articleMd, 'utf8'));
+    inline.forEach((svg, i) =>
+      consume(`inline-svg#${i + 1}`, lintSvgContent(svg))
+    );
   }
 
-  return { slug, svgCount, errors, warnings, darkModeMissing, themeColorInline, details };
+  return {
+    slug,
+    svgCount,
+    errors,
+    warnings,
+    darkModeMissing,
+    themeColorInline,
+    details,
+  };
 }
 
 // ---------- 全記事走査 ----------
@@ -127,14 +197,13 @@ const slugs = fs
   .map((d) => d.name)
   .sort();
 
-const results = slugs
-  .map(auditArticle)
-  .filter((r) => r.svgCount > 0); // チャートを持つ記事のみ
+const results = slugs.map(auditArticle).filter((r) => r.svgCount > 0); // チャートを持つ記事のみ
 
 // 優先度: errors 最優先 → dark mode 非対応数 → theme 色 inline 数
 const ranked = [...results].sort((a, b) => {
   if (b.errors !== a.errors) return b.errors - a.errors;
-  if (b.darkModeMissing !== a.darkModeMissing) return b.darkModeMissing - a.darkModeMissing;
+  if (b.darkModeMissing !== a.darkModeMissing)
+    return b.darkModeMissing - a.darkModeMissing;
   return b.themeColorInline - a.themeColorInline;
 });
 
@@ -144,7 +213,8 @@ const summary = {
   articlesWithCharts: results.length,
   totalSvgs: results.reduce((s, r) => s + r.svgCount, 0),
   articlesWithErrors: results.filter((r) => r.errors > 0).length,
-  articlesDarkModeNonCompliant: results.filter((r) => r.darkModeMissing > 0).length,
+  articlesDarkModeNonCompliant: results.filter((r) => r.darkModeMissing > 0)
+    .length,
   articles: ranked.map((r) => ({
     slug: r.slug,
     svgCount: r.svgCount,
@@ -157,7 +227,7 @@ const summary = {
 
 // 機械可読 JSON を常に state に保存 (brushup が読む)
 fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
-fs.writeFileSync(OUT_PATH, JSON.stringify(summary, null, 2), "utf8");
+fs.writeFileSync(OUT_PATH, JSON.stringify(summary, null, 2), 'utf8');
 
 if (JSON_OUT) {
   process.stdout.write(JSON.stringify(summary));
@@ -166,26 +236,30 @@ if (JSON_OUT) {
 
 // ---------- 人間向けレポート ----------
 log(`\n=== チャート品質監査 (${summary.base}) ===`);
-log(`チャート保有記事: ${summary.articlesWithCharts} / SVG 総数: ${summary.totalSvgs}`);
+log(
+  `チャート保有記事: ${summary.articlesWithCharts} / SVG 総数: ${summary.totalSvgs}`
+);
 log(`構造エラーあり: ${summary.articlesWithErrors} 記事`);
 log(`dark mode 非対応: ${summary.articlesDarkModeNonCompliant} 記事`);
 log(`保存先: ${path.relative(PROJECT_ROOT, OUT_PATH)}\n`);
 
-const top = ranked.filter((r) => r.errors > 0 || r.darkModeMissing > 0).slice(0, 30);
+const top = ranked
+  .filter((r) => r.errors > 0 || r.darkModeMissing > 0)
+  .slice(0, 30);
 if (top.length === 0) {
-  log("✓ 修正が必要な記事はありません");
+  log('✓ 修正が必要な記事はありません');
 } else {
-  log("優先度順 (errors → dark mode 非対応 → theme 色 inline):");
-  log("err  dark  inline  slug");
+  log('優先度順 (errors → dark mode 非対応 → theme 色 inline):');
+  log('err  dark  inline  slug');
   for (const r of top) {
     log(
       `${String(r.errors).padStart(3)}  ${String(r.darkModeMissing).padStart(4)}  ` +
-        `${String(r.themeColorInline).padStart(6)}  ${r.slug}`,
+        `${String(r.themeColorInline).padStart(6)}  ${r.slug}`
     );
   }
   log(
     `\n再生成は brushup サイクル (/brushup-blog --target batch) で data 再取得しながら行う。` +
-      ` select-brushup-candidates.mjs が本監査の chartQuality を加味する。`,
+      ` select-brushup-candidates.mjs が本監査の chartQuality を加味する。`
   );
 }
 

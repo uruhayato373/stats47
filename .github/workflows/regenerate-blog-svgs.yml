@@ -22,12 +22,16 @@ name: 🎨 Regenerate Blog SVGs (svg-builder 経由・dark mode 付与)
 #   gh workflow run regenerate-blog-svgs.yml -f slugs="slug-a" -f dry_run=false  # 指定 slug を本番反映
 #   gh workflow run regenerate-blog-svgs.yml -f mode=scatter-canonical # 散布図71件 dry-run
 #   gh workflow run regenerate-blog-svgs.yml -f mode=scatter-canonical -f dry_run=false # 同じ対象をR2反映
+#
+# scatter-canonical は SVG だけでなく source.json も検査する。破損2件は一次ソースから
+# data/source/article を復元し、旧5件は公開JSONと一次ソースの点集合が一致した場合だけ
+# source.json を復旧する。key file に列挙した差分だけを R2 へ反映する。
 
 on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'all: 全チャート / scatter-canonical: 散布図カタログの正方形・単色統一'
+        description: 'all: 全チャート / scatter-canonical: 散布図の描画・データ・出典を正規化'
         required: false
         type: choice
         options:
