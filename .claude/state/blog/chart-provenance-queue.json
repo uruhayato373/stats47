@@ -1,26 +1,19 @@
 {
-  "generatedAt": "2026-08-02T08:28:47.969Z",
+  "generatedAt": "2026-08-02T08:43:03.049Z",
   "checked": 916,
   "byVerdict": {
-    "restorable": 823,
+    "restorable": 828,
     "out-of-scope": 65,
-    "self-declared-incomplete": 19,
+    "self-declared-incomplete": 14,
     "missing-reference": 5,
     "dead-estat-reference": 4
   },
-  "defectCount": 28,
+  "defectCount": 23,
   "defects": [
     {
       "slug": "cc-estat-17-edu-slope-graph",
       "base": "slope-structure-timeseries",
       "kind": "line",
-      "verdict": "self-declared-incomplete",
-      "detail": "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること"
-    },
-    {
-      "slug": "communication-cost-burden",
-      "base": "comm-cost-scatter",
-      "kind": "scatter",
       "verdict": "self-declared-incomplete",
       "detail": "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること"
     },
@@ -103,13 +96,6 @@
     },
     {
       "slug": "nurse-income-prefecture-gap",
-      "base": "nurse-vs-govwage-scatter",
-      "kind": "scatter",
-      "verdict": "self-declared-incomplete",
-      "detail": "出自(rankingKey/derived)が data json に無い。SSOTを特定して補完すること"
-    },
-    {
-      "slug": "nurse-income-prefecture-gap",
       "base": "nurse-favored-prefecture-rankings",
       "kind": "ranking",
       "verdict": "self-declared-incomplete",
@@ -163,27 +149,6 @@
       "kind": "estat",
       "verdict": "missing-reference",
       "detail": "再取得に必要な参照または計算式が無い"
-    },
-    {
-      "slug": "travel-behavior-gender-gap",
-      "base": "travel-gender-scatter",
-      "kind": "scatter",
-      "verdict": "self-declared-incomplete",
-      "detail": "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること"
-    },
-    {
-      "slug": "urban-parks-green-infrastructure",
-      "base": "park-area-vs-count-scatter",
-      "kind": "scatter",
-      "verdict": "self-declared-incomplete",
-      "detail": "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること"
-    },
-    {
-      "slug": "vacant-housing-vs-land-price",
-      "base": "vacant-vs-land-price-scatter",
-      "kind": "scatter",
-      "verdict": "self-declared-incomplete",
-      "detail": "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること"
     },
     {
       "slug": "welfare-expenses-squeeze",
