@@ -170,6 +170,26 @@ jobs:
             --strict-mcp-config
             --mcp-config '{"mcpServers":{}}'
 
+      # ★失敗を診断可能にする (2026-08-02)。show_full_output は false のままにする
+      #   (assistant 本文や tool 出力に secret が混ざる事故を避けるため) が、それだけだと
+      #   「is_error だが理由不明」で終わり切り分けができない。実際 2026-08-02 の初回実行は
+      #   両 workflow とも turn 1 / cost 0 で落ち、認証か上限かモデルか判別できなかった。
+      #   切り分けに要る最小限 (構造フィールド + 伏字済みエラー文 + tool 呼び出し有無) だけ出す。
+      - name: 🩺 Diagnose Claude failure
+        if: ${{ always() && steps.claude.outcome == 'failure' }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
+          mkdir -p .local/ci
+          node .claude/scripts/lib/summarize-claude-execution.mjs "$FILE" > .local/ci/claude-diagnosis.txt 2>&1 || true
+          {
+            echo "### Claude 実行の失敗診断"
+            echo '```'
+            cat .local/ci/claude-diagnosis.txt
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
       - name: ✅ Verify target completeness, audit, and critic PASS
         id: verify
         if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
@@ -305,10 +325,20 @@ jobs:
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           TITLE="🚨 AI-content routine failed"
+          DIAG="(診断なし: Claude step まで到達していないか、execution log を読めなかった)"
+          if [ -s .local/ci/claude-diagnosis.txt ]; then DIAG=$(cat .local/ci/claude-diagnosis.txt); fi
           BODY="日次AI-content生成が失敗しました。対象あり生成0件、認証、audit、critic、push/dispatchのいずれかです。
 
           Run: ${RUN_URL}
           Target count: ${{ steps.pick.outputs.count || 'unknown' }}
+
+          <details><summary>Claude 実行の失敗診断</summary>
+
+          \`\`\`
+          ${DIAG}
+          \`\`\`
+
+          </details>
 
           成功するまでgreen扱いにはなりません。"
           NUMBER=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')

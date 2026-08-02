@@ -197,6 +197,23 @@ jobs:
             --strict-mcp-config
             --mcp-config '{"mcpServers":{}}'
 
+      # ★失敗を診断可能にする (2026-08-02)。理由は ai-content-generate-daily.yml の同名 step と同じ。
+      #   show_full_output は false のままにし、切り分けに要る最小限だけを出す。
+      - name: 🩺 Diagnose Claude failure
+        if: ${{ always() && steps.claude.outcome == 'failure' }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
+          mkdir -p .local/ci
+          node .claude/scripts/lib/summarize-claude-execution.mjs "$FILE" > .local/ci/claude-diagnosis.txt 2>&1 || true
+          {
+            echo "### Claude 実行の失敗診断"
+            echo '```'
+            cat .local/ci/claude-diagnosis.txt
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
       - name: ✅ Verify target completeness, gates, and critic PASS
         id: verify
         if: ${{ env.DRY_RUN != 'true' && steps.prepare.outputs.count != '0' }}
@@ -346,10 +363,20 @@ jobs:
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           TITLE="🚨 Blog generation routine failed"
+          DIAG="(診断なし: Claude step まで到達していないか、execution log を読めなかった)"
+          if [ -s .local/ci/claude-diagnosis.txt ]; then DIAG=$(cat .local/ci/claude-diagnosis.txt); fi
           BODY="日次ブログ生成が失敗しました。対象あり生成0件、認証、factual/quality gate、critic、push/dispatchのいずれかです。
 
           Run: ${RUN_URL}
           Target count: ${{ steps.prepare.outputs.count || 'unknown' }}
+
+          <details><summary>Claude 実行の失敗診断</summary>
+
+          \`\`\`
+          ${DIAG}
+          \`\`\`
+
+          </details>
 
           成功するまでgreen扱いにはなりません。"
           NUMBER=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
