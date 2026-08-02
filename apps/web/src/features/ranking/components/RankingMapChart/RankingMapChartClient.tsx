@@ -14,6 +14,7 @@ import dynamic from "next/dynamic";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 
+
 import { ChartPanel } from "@/components/charts/ChartPanel";
 
 import type { AreaType } from "@/features/area";
@@ -23,7 +24,6 @@ import {
   getLeafletBorderColor,
   rankingItemToMapConfig,
 } from "@/features/map-visualization/utils/ranking-map-adapters";
-import { useThemedLeafletTile } from "@/features/map-visualization/utils/use-themed-leaflet-tile";
 
 import { useTheme } from "@/hooks/useTheme";
 
@@ -32,16 +32,9 @@ import { fetchCityTopologyAction } from "../../actions/fetch-city-topology";
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 import type { StatsSchema, TopoJSONTopology } from "@stats47/types";
 
-
-
 const LeafletChoroplethMap = dynamic(
   () => import("@stats47/visualization/leaflet").then((mod) => mod.LeafletChoroplethMap),
   { ssr: false, loading: () => <Skeleton className="h-[500px] w-full rounded-md" /> }
-);
-
-const TileSwitcher = dynamic(
-  () => import("@stats47/visualization/leaflet").then((mod) => mod.TileSwitcher),
-  { ssr: false }
 );
 
 /**
@@ -89,7 +82,6 @@ export function RankingMapChartClient({
   headerActions,
 }: Props) {
   const { theme } = useTheme();
-  const { currentTile, setCurrentTile, isDark } = useThemedLeafletTile(theme);
 
   const mapConfig = useMemo(() => rankingItemToMapConfig(rankingItem), [rankingItem]);
 
@@ -155,12 +147,10 @@ export function RankingMapChartClient({
               aria-label={`${rankingItem.title}の${areaType === "city" ? "市区町村" : "都道府県"}別カラーマップ`}
             >
               <LeafletChoroplethMap
-                key={`${areaType}-${currentTile.url}`}
+                key={areaType}
                 topology={activeTopology}
                 data={filteredData}
                 colorConfig={mapConfig}
-                tileUrl={currentTile.url}
-                attribution={currentTile.attribution}
                 unit={rankingItem.unit}
                 onPrefectureClick={areaType === "prefecture" ? handlePrefectureClick : undefined}
                 selectedPrefectureCode={areaType === "prefecture" ? selectedPrefectureCode : undefined}
@@ -170,7 +160,6 @@ export function RankingMapChartClient({
                 showNoDataLabel={areaType === "prefecture" && filteredData.length < 47}
               />
             </div>
-            <TileSwitcher onTileChange={setCurrentTile} isDark={isDark} />
           </>
         )}
       </div>

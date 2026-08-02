@@ -87,22 +87,21 @@ lane = blockers>0 ? "must-fix" : expectedLift>0 ? "opportunity" : "clean"(キュ
 
 ## cadence (日次運用 / 週次)
 
-### 日次運用 (推奨・2026-06-09〜): 「今日の10記事を教わって Pro セッションで agent がリライト」
+### 日次運用 (推奨・2026-06-09〜): Workflow Summary の上位10件を Pro セッションでリライト
 
 CI で Claude を動かさず (APIコストゼロ)、リライト本体は人間が **Claude Pro セッション**で agent に回させる運用。
 
 - **毎朝 JST08:00**: `blog-remediation-daily.yml` (cron) が ① キューを最新化 (公開R2 audit + 最新GSC) して
   develop へ commit-back ② **docs/21 (ephemeral outbox) を自動掃除** (`prune-published-outbox.mjs --apply`:
   「published:true かつ R2 の article.md と内容完全一致」の公開済みドラフトを git rm。広い `git add` で出戻りした残骸も翌日自動消去。
-  published:false の作業中ドラフトは保持。内容一致を要求=brushup 改稿中 (R2 旧版と差分) を誤削除しない安全装置) ③ pending 上位 10 件を GitHub Issue **「📝 ブログ是正: 今日のリライト」**に upsert
-  (body 置換で常に当日の10件を表示・`auto-generated` ラベル)。
-- **人間の作業 (1 セッション/日)**: Issue を見て Claude セッションで `/brushup-blog --target queue --next 10`
+  published:false の作業中ドラフトは保持。内容一致を要求=brushup 改稿中 (R2 旧版と差分) を誤削除しない安全装置) ③ pending 上位 10 件を GitHub Actions の **Workflow Summary** に出す。
+- **人間の作業 (1 セッション/日)**: Workflow Summary を見て Claude セッションで `/brushup-blog --target queue --next 10`
   を回す → article-writer が archetype + 図あたり字数で是正 → **quality-gate (決定的) + blog-critic PASS** →
   PASS のみ公開・REVISE はドラフト保留 → mark-done(wave_id)。
 - **品質の担保**: CI を通さず人間がセッションで見届けるため、無人公開の drift を避けつつ throughput を上げられる。
   `measure-gsc-impact.mjs` が翌週次で効果を自動計測。
 - **なぜ CI 全自動 (claude-code-action) にしないか**: auto-brushup は 13% FAIL + 27% WARN の実績
-  (memory `project_blog_brushup_risk_2026_05_25`)。API トークンコストも発生する。日次 Issue + Pro セッションなら
+  (memory `project_blog_brushup_risk_2026_05_25`)。API トークンコストも発生する。Workflow Summary + Pro セッションなら
   コストゼロで critic ゲートと人間の見届けを両立できる。
 
 ### 週次 (補助)

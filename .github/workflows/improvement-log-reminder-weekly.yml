@@ -11,7 +11,6 @@ on:
 
 permissions:
   contents: read
-  issues: write
 
 concurrency:
   group: improvement-log-reminder
@@ -128,27 +127,3 @@ jobs:
       - name: 📄 Write GitHub Step Summary
         if: steps.scan.outputs.has_entries == 'true'
         run: cat /tmp/triage/issue.md >> "$GITHUB_STEP_SUMMARY"
-
-      - name: 🚨 Open or update triage issue
-        if: steps.scan.outputs.has_entries == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          WEEK="${{ steps.week.outputs.week }}"
-          TITLE="[Improvement Triage] ${WEEK}"
-
-          EXISTING=$(gh issue list \
-            --state open \
-            --label improvement-log-triage \
-            --search "\"${TITLE}\" in:title" \
-            --json number --jq '.[0].number // empty')
-
-          if [ -n "$EXISTING" ]; then
-            echo "Existing open issue #$EXISTING — updating with latest scan"
-            gh issue comment "$EXISTING" --body-file /tmp/triage/issue.md
-          else
-            gh issue create \
-              --title "$TITLE" \
-              --label "improvement-log-triage,auto-generated" \
-              --body-file /tmp/triage/issue.md
-          fi

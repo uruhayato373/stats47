@@ -163,7 +163,6 @@ export const INDEXABLE_RANKING_KEYS = new Set<string>([
   "male-parttime-workers-upto2019",
   "manager-annual-income",
   "mandarin-consumption-expenditure",
-  "manufacturing-net-value-added-private",
   "margarine-consumption-expenditure",
   "mens-jacket-consumption-expenditure",
   "mens-shoes-consumption-expenditure",

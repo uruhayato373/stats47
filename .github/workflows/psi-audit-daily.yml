@@ -41,6 +41,10 @@ jobs:
       - name: 📝 Update history.csv and LATEST.md
         run: npm run psi-audit:digest
 
+      - name: 🧹 Retain latest raw PSI snapshot
+        # 長期比較は history.csv がSSOT。生JSONは最新1件だけ残し、Git履歴から復元可能にする。
+        run: node .claude/scripts/lib/prune-state-snapshots.mjs --scope psi
+
       - name: 🔍 Threshold check
         id: check
         run: |
@@ -135,8 +139,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          DATE=$(date -u +%Y-%m-%d)
-          TITLE="[PSI Alert] しきい値割れ検知 ${DATE}"
+          TITLE="[PSI Alert] しきい値割れ検知"
           # report.md + candidates.md を結合して body にする
           BODY_FILE=/tmp/psi-report/body-with-candidates.md
           cat /tmp/psi-report/report.md > "$BODY_FILE"
@@ -144,13 +147,24 @@ jobs:
             cat /tmp/psi-report/candidates.md >> "$BODY_FILE"
           fi
 
-          EXISTING=$(gh issue list --state open --label psi-alert --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
+          EXISTING=$(gh issue list --state open --label psi-alert --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
-            echo "Existing open issue #$EXISTING — appending comment instead of creating duplicate"
-            gh issue comment "$EXISTING" --body-file "$BODY_FILE"
+            echo "Existing open issue #$EXISTING — replacing with latest measurement"
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file "$BODY_FILE"
           else
             gh issue create \
               --title "$TITLE" \
               --label "psi-alert,auto-generated" \
               --body-file "$BODY_FILE"
           fi
+
+      - name: ✅ Close recovered PSI alert
+        if: steps.check.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label psi-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "PSIの最新計測がしきい値内へ復旧したため自動Closeします。"
+            done

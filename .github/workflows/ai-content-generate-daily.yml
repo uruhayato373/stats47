@@ -1,23 +1,24 @@
-name: 🤖 AI Content Daily (キュー更新 + 今日の対象提示)
+name: 🤖 AI Content Daily (Claude Code生成 + 公開)
 
-# ranking ai-content の「全件完成」を日次で進めるループ (2026-07-31 に Gemini から移行)。
+# ranking ai-content の「全件完成」を日次で進めるループ。
 #
-# ★LLM はこの workflow では呼ばない。GitHub Actions の中で LLM を呼ぶ形は Claude でも
-#   Gemini でも別課金になるため、「書く」工程は Claude セッション (Max サブスク内) が担う。
-#   ここは決定的で無料な工程だけを回す。
-#
-#   1. キューを全件スコープで再構築 (R2 が真実源・派生ビュー)
-#   2. needs-regen 上位 N 件を Issue に提示 (生成は Claude セッション: /generate-ai-content)
-#   3. セッションが outbox に置いた生成物を develop に push し、publish-ai-content.yml を
-#      dispatch → 決定的ゲート再検証 → R2 → CDN purge
+#   1. キューを全件スコープで再構築し、needs-regen 上位 N 件を選ぶ
+#   2. R2 観測値から key ごとの prompt を決定的に準備する
+#   3. Claude Code Base Action (OAuth / Max) で author → audit → 独立 critic を実行する
+#   4. 対象全件の outbox + audit + critic PASS を決定的に照合する
+#   5. outbox を develop に push し、publish-ai-content.yml を
+#      dispatch → gate 再検証 → R2 → CDN purge
 #      (★push トリガー任せにしない。既定 GITHUB_TOKEN の push は後続 workflow を発火させない仕様)
-#   4. キューを再構築して進捗を commit-back (LATEST.md / progress-history.csv)
+#   6. 失敗時は run を赤くし、運用 Issue を upsert する
 #
 # 品質は「賢いモデル」ではなく「決定的ゲート + critic」で担保する。ゲートは緩めない
 # (正典: .claude/rules/ranking-content-standards.md §実データ照合 / §生成パイプライン)。
 #
 # ★安全装置
-#   - LIMIT は publish-ai-content.yml の MAX_PUBLISH (40) を超えない。超えると公開が次回に繰り越す
+#   - 初期 LIMIT は 1。成功実測後に増やす。入力は 1..10 に制限する
+#   - OAuth token 未登録、対象あり生成0件、audit/critic未通過はすべて hard fail
+#   - Claude が変更できるのは target の outbox と gitignore 済み review manifest だけ
+#   - Base Action は commit SHA 固定、MCP/Web、project hooks、full output を無効化
 #   - 進捗 commit は outbox と同一 commit にする (生成物と進捗がずれない)
 #   - push も dispatch も失敗を握り潰さない。届かなければ run を赤くする
 
@@ -27,18 +28,18 @@ on:
   # push トリガー (cloud 用): develop に data/ai-content-generate-requests.json を commit/push
   # すると実行し、消費した request を git rm で commit-back する。cloud セッションは
   # actions:write が無く workflow_dispatch できない (403) ため。data-refresh.yml と同じ方式。
-  #   { "limit": 10, "dryRun": false }
+  #   { "limit": 1, "dryRun": false }
   push:
     branches: [develop]
     paths: ['data/ai-content-generate-requests.json']
   workflow_dispatch:
     inputs:
       limit:
-        description: "提示する件数 (既定 10。サブスク消費を実測してから増やす)"
+        description: "生成件数 (1..10、既定1。成功実測後に増やす)"
         required: false
-        default: "10"
+        default: "1"
       dry_run:
-        description: "true: Issue を出さず対象だけ確認する"
+        description: "true: LLMを呼ばず対象・promptだけ確認する"
         required: false
         default: "false"
 
@@ -53,8 +54,7 @@ concurrency:
 
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  # 控えめに始めて実測する。旧 40 は Gemini 前提の根拠なき暫定値なので引き継がない
-  LIMIT: ${{ inputs.limit || '10' }}
+  LIMIT: ${{ inputs.limit || '1' }}
   DRY_RUN: ${{ inputs.dry_run || 'false' }}
 
 jobs:
@@ -85,54 +85,146 @@ jobs:
         run: |
           REQ=data/ai-content-generate-requests.json
           if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
+            LIMIT=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.limit??1))")
+            DRY_RUN=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
             {
-              echo "LIMIT=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.limit??10))")"
-              echo "DRY_RUN=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")"
+              echo "LIMIT=$LIMIT"
+              echo "DRY_RUN=$DRY_RUN"
             } >> "$GITHUB_ENV"
-            echo "request で上書きした (値は上の行のとおり)"
+            echo "request 解決: limit=$LIMIT dry_run=$DRY_RUN"
+          fi
+          if ! [[ "${LIMIT}" =~ ^[0-9]+$ ]] || [ "${LIMIT}" -lt 1 ] || [ "${LIMIT}" -gt 10 ]; then
+            echo "::error::LIMIT は 1..10 の整数が必須: ${LIMIT}"
+            exit 1
+          fi
+          if [ "${DRY_RUN}" != "true" ] && [ "${DRY_RUN}" != "false" ]; then
+            echo "::error::DRY_RUN は true / false が必須: ${DRY_RUN}"
+            exit 1
           fi
 
-      - name: 📊 Rebuild queue (scope=all) and pick targets
+      - name: 📊 Rebuild queue, pick targets, and prepare prompts
         id: pick
         run: |
+          set -euo pipefail
+          mkdir -p .local/ci/ai-content-prompts .local/ci/ai-content-reviews
           node .claude/scripts/ai-content/build-ai-content-queue.mjs --scope all
           # needs-regen 上位 N (impressions 降順) を取得
-          node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next "${LIMIT}" > /tmp/targets.txt
-          KEYS=$(paste -sd, /tmp/targets.txt)
-          COUNT=$(wc -l < /tmp/targets.txt | tr -d ' ')
+          node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next "${LIMIT}" \
+            > .local/ci/ai-content-targets.txt
+          node -e '
+            const fs = require("node:fs");
+            const keys = fs.readFileSync(".local/ci/ai-content-targets.txt", "utf8").trim().split(/\n/).filter(Boolean);
+            for (const key of keys) {
+              if (!/^[a-z0-9][a-z0-9-]*$/.test(key)) throw new Error("不正な ranking key: " + key);
+            }
+          '
+          KEYS=$(paste -sd, .local/ci/ai-content-targets.txt)
+          COUNT=$(grep -c . .local/ci/ai-content-targets.txt || true)
           echo "keys=$KEYS" >> "$GITHUB_OUTPUT"
           echo "count=$COUNT" >> "$GITHUB_OUTPUT"
-          echo "対象 ${COUNT} 件: $(head -5 /tmp/targets.txt | paste -sd' ')…"
+          echo "対象 ${COUNT} 件: ${KEYS:-なし}"
+          while IFS= read -r KEY; do
+            [ -z "$KEY" ] && continue
+            NODE_OPTIONS='--conditions react-server' \
+              npm run ai:input --workspace=@stats47/ai-content -- "$KEY" --prompt-only \
+              > ".local/ci/ai-content-prompts/${KEY}.txt"
+            test -s ".local/ci/ai-content-prompts/${KEY}.txt"
+          done < .local/ci/ai-content-targets.txt
 
-      # ★生成はここでは行わない (2026-07-31 に Gemini から移行)。
-      #   GitHub Actions の中で LLM を呼ぶ形は Claude でも Gemini でも別課金になるため、
-      #   「書く」工程は Claude セッション (Max サブスク内) が担う。この workflow は
-      #   キューを最新化して**今日の対象を提示するところまで**。
-      #   セッション側の入口: skill /generate-ai-content (agent: ranking-content-author)
-      - name: 📋 今日の対象を Issue に出す
+      - name: 🔐 Require Claude Code OAuth token
         if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
         env:
-          GH_TOKEN: ${{ github.token }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
-          TITLE="🤖 ai-content: 今日の生成対象"
-          BODY=$(
-            echo "本日の対象 ${{ steps.pick.outputs.count }} 件です。Claude セッションで次を実行してください:"
-            echo
-            echo '```'
-            echo "/generate-ai-content --keys ${{ steps.pick.outputs.keys }}"
-            echo '```'
-            echo
-            echo "生成 → 決定的ゲート (audit-ai-content.mjs) → critic → outbox → publish の順です。"
-            echo "ゲートは緩めません。落ちたら直して通します。"
-            echo
-            echo "進捗: \`.claude/state/ai-content/LATEST.md\`"
-          )
-          EXIST=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
-          if [ -n "$EXIST" ]; then
-            gh issue edit "$EXIST" --body "$BODY"
-          else
-            gh issue create --title "$TITLE" --body "$BODY" --label auto-generated
+          if [ -z "${CLAUDE_CODE_OAUTH_TOKEN}" ]; then
+            echo "::error::CLAUDE_CODE_OAUTH_TOKEN が未登録です。claude setup-token で発行し、Repository Secretへ登録してください"
+            exit 1
           fi
+
+      # High-level claude-code-action は schedule event を正式対応対象にしていないため、
+      # event 非依存の公式 Base Action を使う。main SHA と内包 Claude Code version を固定する。
+      - name: ✍️ Generate and review AI content with Claude Code
+        id: claude
+        if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
+        uses: anthropics/claude-code-base-action@e257d767763882223c40b615cbbe0d26ca75a981 # Claude Code v2.1.220 (base-action main 2026-08-02)
+        env:
+          NODE_VERSION: "20.x"
+        with:
+          prompt_file: .claude/prompts/ci/ai-content-routine.md
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          show_full_output: "false"
+          settings: |
+            {
+              "disableAllHooks": true
+            }
+          claude_args: |
+            --model sonnet
+            --effort high
+            --max-turns 60
+            --no-session-persistence
+            --setting-sources project
+            --permission-mode dontAsk
+            --tools "Read,Write,Edit,Glob,Grep,Agent,Skill,Bash"
+            --allowedTools "Read,Write,Edit,Glob,Grep,Agent,Skill,Bash(node .claude/scripts/ai-content/audit-ai-content.mjs --file data/ai-content-staging/*.json)"
+            --disallowedTools "WebFetch,WebSearch,Bash(env *),Bash(printenv *),Read(.env*),Read(**/.env*)"
+            --strict-mcp-config
+            --mcp-config '{"mcpServers":{}}'
+
+      - name: ✅ Verify target completeness, audit, and critic PASS
+        id: verify
+        if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          set -euo pipefail
+          EXPECTED="${{ steps.pick.outputs.count }}"
+          if [ ! -s "$CLAUDE_EXECUTION_FILE" ]; then
+            echo "::error::Claude execution log が無く、author / critic 実行を証明できません"
+            exit 1
+          fi
+          GENERATED=0
+          while IFS= read -r KEY; do
+            [ -z "$KEY" ] && continue
+            CONTENT="data/ai-content-staging/${KEY}.json"
+            REVIEW=".local/ci/ai-content-reviews/${KEY}.json"
+            for AGENT_TYPE in ranking-content-author ranking-content-critic; do
+              if ! jq -e --arg agent "$AGENT_TYPE" --arg target "$KEY" \
+                'any(.[] | select(.type == "assistant") | .message.content[]?;
+                  .type == "tool_use" and .name == "Agent"
+                  and .input.subagent_type == $agent
+                  and ((.input.prompt // "") | contains($target)))' \
+                "$CLAUDE_EXECUTION_FILE" >/dev/null; then
+                echo "::error::Agent 実行記録なし: ${AGENT_TYPE} / ${KEY}"
+                exit 1
+              fi
+            done
+            if [ ! -s "$CONTENT" ]; then
+              echo "::error::対象あり・生成物なし: ${KEY}"
+              exit 1
+            fi
+            node .claude/scripts/ai-content/audit-ai-content.mjs --file "$CONTENT"
+            if [ ! -s "$REVIEW" ] || [ "$(jq -r '.verdict // empty' "$REVIEW")" != "PASS" ] \
+              || [ "$(jq -r '.rankingKey // empty' "$REVIEW")" != "$KEY" ]; then
+              echo "::error::critic PASS manifest が無いか不正: ${KEY}"
+              exit 1
+            fi
+            GENERATED=$((GENERATED + 1))
+          done < .local/ci/ai-content-targets.txt
+          if [ "$GENERATED" -ne "$EXPECTED" ]; then
+            echo "::error::対象 ${EXPECTED} 件に対して検証済み生成 ${GENERATED} 件"
+            exit 1
+          fi
+          while IFS= read -r FILE; do
+            case "$FILE" in
+              data/ai-content-staging/*.json|.claude/state/ai-content/*) ;;
+              *)
+                echo "::error::Claude routine の許可外変更: ${FILE}"
+                exit 1
+                ;;
+            esac
+          done < <(git status --porcelain=v1 --untracked-files=all | cut -c4-)
+          echo "count=$GENERATED" >> "$GITHUB_OUTPUT"
+          echo "✅ 対象 ${EXPECTED} 件すべて audit + critic PASS"
 
       - name: 📈 Rebuild queue (progress) and commit
         id: commit
@@ -145,16 +237,19 @@ jobs:
             git rm -q --ignore-unmatch data/ai-content-generate-requests.json || true
           fi
           git add data/ai-content-staging .claude/state/ai-content || true
-          # ls ではなく find で数える (SC2012。ファイル名に非英数が入っても壊れない)
-          NEW=$(find data/ai-content-staging -maxdepth 1 -name '*.json' -type f 2>/dev/null | wc -l | tr -d ' ')
+          NEW="${{ steps.verify.outputs.count || '0' }}"
           echo "outbox=${NEW}" >> "$GITHUB_OUTPUT"
           if git diff --cached --quiet; then
-            echo "変更なし (生成 0 件・進捗も不変)"
+            if [ "${{ steps.pick.outputs.count }}" != "0" ]; then
+              echo "::error::対象ありなのに commit 対象がありません"
+              exit 1
+            fi
+            echo "対象0件・進捗変更なし"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -q -m "chore(ai-content): daily gemini generation (outbox ${NEW} 件)"
+          git commit -q -m "chore(ai-content): daily Claude Code generation (outbox ${NEW} 件)"
           for i in 1 2 3; do
             if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
               echo "✅ pushed (outbox ${NEW} 件)"
@@ -172,7 +267,7 @@ jobs:
       #   発火せず、生成物が outbox に滞留する。実際 2026-07-31 の初回成功時に 2 件が滞留した。
       #   → ここで明示的に dispatch し、**run が生まれたことを確認**してから成功とする。
       - name: 🚀 Dispatch publish-ai-content (outbox を R2 へ)
-        if: ${{ env.DRY_RUN != 'true' && steps.commit.outputs.outbox != '0' }}
+        if: ${{ env.DRY_RUN != 'true' && steps.verify.outputs.count != '0' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -192,6 +287,36 @@ jobs:
           done
           echo "::error::publish-ai-content の run を確認できなかった (outbox が滞留する)"
           exit 1
+
+      - name: 🧹 Close resolved routine issues
+        if: ${{ success() && env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for TITLE in "🤖 ai-content: 今日の生成対象" "🚨 AI-content routine failed"; do
+            NUMBER=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
+            if [ -n "$NUMBER" ]; then gh issue close "$NUMBER" --reason completed; fi
+          done
+
+      - name: 🚨 Upsert failure issue
+        if: ${{ failure() && env.DRY_RUN != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE="🚨 AI-content routine failed"
+          BODY="日次AI-content生成が失敗しました。対象あり生成0件、認証、audit、critic、push/dispatchのいずれかです。
+
+          Run: ${RUN_URL}
+          Target count: ${{ steps.pick.outputs.count || 'unknown' }}
+
+          成功するまでgreen扱いにはなりません。"
+          NUMBER=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$NUMBER" ]; then
+            gh issue edit "$NUMBER" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY" --label auto-generated
+          fi
 
       - name: 📝 Summary
         if: always()

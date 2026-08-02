@@ -1,6 +1,6 @@
 ---
 name: generate-ai-content
-description: ランキングページ向け AI コンテンツ（考察・地域傾向・FAQ・県別解説）を R2 観測値から生成し、決定的ゲートを通して staging→R2 に反映する。Use when user says "AIコンテンツ生成", "FAQ生成", "ランキング分析生成". Claude並列/Gemini逐次選択可.
+description: ランキングページ向け AI コンテンツ（考察・地域傾向・FAQ・県別解説）を R2 観測値から生成し、決定的ゲートを通して staging→R2 に反映する。Use when user says "AIコンテンツ生成", "FAQ生成", "ランキング分析生成".
 disable-model-invocation: true
 primary_agent: ranking-content-author
 ---
@@ -54,18 +54,16 @@ R2 読み取り env（認証不要）: `NODE_OPTIONS='--conditions react-server'
 |---|---|---|
 | `list-pending.ts` | `ai:list` | R2 active keys → missing / incomplete / complete を分類（ワークリスト） |
 | `build-input.ts` | `ai:input -- <key>` | R2 → `RankingContentInput` + prompt 文字列（純 read） |
-| `generate-parallel.ts` | `ai:gen -- [opts]` | buildInput → claude/gemini CLI 生成 → **audit ゲート** → staging 書込 |
+| `generate-parallel.ts` | `ai:gen -- [opts]` | 手動フォールバック: buildInput → ローカル CLI 生成 → **audit ゲート** → staging 書込 |
 
 ## クイックスタート
 
-> **重要**: `generate-parallel.ts` の生成（`--dry-run` 以外）は **Claude Code の外（ユーザーの端末）か CI で実行する**。
-> claude CLI サブプロセスは Claude Code の Bash 内で stdin が ~3KB 以上だと詰まる制限があるため、セッション内では
-> `--dry-run`（LLM を呼ばず prompt 長と staging パスだけ確認）で検証する。
+> **日次量産の正典**は `.github/workflows/ai-content-generate-daily.yml`。Claude Code OAuth で
+> author → audit → 独立 critic → 対象全件照合 → publish dispatch まで実行する。
+> `generate-parallel.ts` はローカルの手動フォールバックであり、日次 workflow からは呼ばない。
 
-> **実行経路の既定 (★トークン規律・2026-07-07 / TOKEN-AICONTENT-01)**: 量産生成は**ローカル CLI
-> `npm run ai:gen` (haiku・セッション外) が既定**。セッション内の agent 生成は blocker 是正・少数 (≤5 key)
-> の例外に限る (1 key で prompt ~4.9K chars + 出力 ~13K chars がセッションに積まれるため)。
-> セッションの役割は「キュー管理 (`ai:list` / queue) + critic (batch) + 公開段取り」に限定する。
+> Claude Code の Bash から `generate-parallel.ts` の claude CLI 子プロセスを起動しない。
+> 大きい stdin が詰まるため、対話セッションでは agent 生成、端末では CLI、日次は workflow と経路を混在させない。
 
 ### 1. 対象把握
 
@@ -76,7 +74,7 @@ NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.sta
 # 例: total 2093 | missing 1556 | incomplete 488 | complete 49
 ```
 
-### 2. 生成（ユーザー端末 / CI）
+### 2. 手動フォールバック生成（ユーザー端末）
 
 ```bash
 # 未完を最初の 50 件だけ Claude 並列生成（audit ゲート通過分のみ staging へ）
@@ -133,30 +131,18 @@ node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
 **outbox はフラットな `<rankingKey>.json` でなければならない**。workflow の検出 glob が
 `data/ai-content-staging/*.json` なので、`app/ranking/<key>/` の階層を作ると拾われない。
 
-## Routine（日次セッション）での回し方
+## Routine（日次 CI）
 
-CI (`ai-content-generate-daily.yml`) がキューを更新して「今日の対象」を Issue に出すので、
-セッションはその key リストを受けて以下を回す。**CI 側は LLM を呼ばない**（Actions の中で
-LLM を呼ぶと Claude でも別課金になるため。正典 `.claude/rules/ranking-content-standards.md`）。
+`ai-content-generate-daily.yml` が次を一続きで実行する。
 
-```bash
-# 1) 今日の対象を取る（Issue と同じ並び。CI を待たずに自分で出すこともできる）
-node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 10
+1. 全件キューを再構築し、needs-regen を既定1件選ぶ
+2. R2観測値から対象別 prompt を決定的に準備する
+3. 公式 Claude Code Base Action を OAuth 認証で起動し、author → audit → 独立 critic を回す
+4. shell step が対象全件の outbox・audit・critic PASS manifest を再照合する
+5. develop へ push し、`publish-ai-content.yml` を明示 dispatch する
 
-# 2) 各 key: prompt 取得 → agent が生成 → 決定的ゲート → outbox
-NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
-  npm run ai:input --workspace=@stats47/ai-content -- <key> --prompt-only
-#   → ranking-content-author に書かせる（frontmatter の model: sonnet に任せ、model を渡さない）
-node .claude/scripts/ai-content/audit-ai-content.mjs --file data/ai-content-staging/<key>.json
-
-# 3) critic（≤10 key を 1 回の batch 起動でまとめて）→ REVISE は外科修正して delta 再審査
-
-# 4) develop へ push（publish-ai-content.yml が gate 再検証して R2 まで運ぶ）
-```
-
-**ゲートは緩めない。** blocker が残る key はその日は出さず、次回のキューが拾う。
-件数は**控えめに始めて実測する**（初回 10 件）。サブスクの利用上限が制約なので、
-実際の消費を測ってから増やす。
+`CLAUDE_CODE_OAUTH_TOKEN` 未登録、対象あり生成0件、一部対象の欠落、gate / critic 不通過、
+push / dispatch 未確認はいずれも hard fail する。既定件数は1で、成功実測後にだけ増やす。
 
 ## 品質ゲート（必須）
 

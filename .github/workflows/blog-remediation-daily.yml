@@ -28,7 +28,6 @@ on:
 
 permissions:
   contents: write
-  issues: write
 
 concurrency:
   group: blog-remediation-daily
@@ -111,30 +110,6 @@ jobs:
       - name: 📄 Write GitHub Step Summary
         if: steps.compose.outputs.skipped == 'false'
         run: cat /tmp/blog-remediation/issue.md >> "$GITHUB_STEP_SUMMARY"
-
-      - name: 🔔 Open or update daily rewrite issue
-        if: steps.compose.outputs.skipped == 'false'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TITLE="📝 ブログ是正: 今日のリライト"
-
-          # 既存ラベルのみ使用 (auto-generated は運用済)。
-          EXISTING=$(gh issue list \
-            --state open \
-            --search "\"${TITLE}\" in:title" \
-            --json number,title --jq ".[] | select(.title==\"${TITLE}\") | .number" | head -1)
-
-          if [ -n "$EXISTING" ]; then
-            echo "Updating existing issue #$EXISTING (body 置換で常に今日の10件を表示)"
-            gh issue edit "$EXISTING" --body-file /tmp/blog-remediation/issue.md
-          else
-            echo "Creating new daily rewrite issue"
-            gh issue create \
-              --title "$TITLE" \
-              --label "auto-generated" \
-              --body-file /tmp/blog-remediation/issue.md
-          fi
 
       # ラチェット (縮小専用): 元データ消失 (neither) の件数が前回より増えたら失敗させる。
       # 公開時ゲートと prune の安全装置で増えないはずなので、増えたら未知の経路がある。

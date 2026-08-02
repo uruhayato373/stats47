@@ -5,18 +5,16 @@ import "dotenv/config";
  *
  * `generate-parallel.ts` (ランキング ai-content) のブログ版。**このスクリプトは LLM を呼ばない**:
  *   入力  : topic-queue (何を書くか) + R2 観測値 (数値の出どころ)
- *   生成  : **Claude セッション** (Max サブスク内)。ここは prompt を渡すだけ
+ *   生成  : Claude Code Base Action / 対話セッション。ここは prompt を渡すだけ
  *   ゲート: quality-gate.mjs で blocker 0 のものだけ採用。**ゲートを緩めて通すことはしない**
  *   出力  : docs/21_ブログ記事原稿/<slug>/ (git outbox)。R2 直書きしない
  *           → develop へ push すると blog-auto-publish.yml が再検証して R2 公開まで実行する
  *
- * ## なぜ LLM 呼び出しを持たないか (2026-07-31 に Gemini から移行)
+ * ## なぜ本スクリプト自身は LLM 呼び出しを持たないか
  *
- * 当初は「Claude のトークンを使わない」ために Gemini API を直叩きしていたが、
- * **GitHub Actions の中で LLM を呼ぶ形にすると Claude でも Gemini でも別課金になる**。
- * Max サブスクの範囲で回すには生成を Claude セッション側に置く必要があるため、
- * 決定的な工程だけをこのスクリプトに残し、「書く」ところをセッションへ渡す形にした。
- * (既存記事の是正 `blog-remediation-loop.md` は元からこの型で運用している)
+ * prompt 準備と LLM orchestration を分けることで、接地・データゲートをモデルに委ねず、
+ * CI と対話セッションの双方が同じ決定的な準備・ingest を再利用できる。日次 CI は
+ * `CLAUDE_CODE_OAUTH_TOKEN` で公式 Base Action を起動し、執筆と critic だけをモデルに任せる。
  *
  * ## 工程
  *
@@ -25,8 +23,8 @@ import "dotenv/config";
  *   3. **データ健全性ゲート** (blog-topic-gate)    ← このスクリプト。壊れた metric の記事は書かない
  *   4. SVG 生成 (generate-article-charts.ts)       ← このスクリプト
  *   5. prompt を article.prompt.txt に書き出す     ← このスクリプト (ここで停止)
- *   ---- ここから Claude セッション ----
- *   6. prompt を読んで article.md を書く           ← セッション / article-writer
+ *   ---- ここから Claude Code routine / 対話セッション ----
+ *   6. prompt を読んで article.md を書く           ← article-writer
  *   7. `--ingest <slug>` でゲート                  ← このスクリプト。落ちたら 6 に戻る
  *   8. blog-critic (別コンテキストの subagent)     ← review.md を書く
  *   9. `--ingest <slug>` で PASS 確認 → published:true → 最終ゲート
@@ -481,7 +479,7 @@ async function main() {
 
     // --- 5. prompt を書き出してセッションに渡す ---
     //
-    // ここで LLM を呼ばない。書くのは Claude セッション (サブスク内) の担当で、
+    // ここで LLM を呼ばない。書くのは Claude Code routine / 対話セッションの担当で、
     // このスクリプトは決定的な部分 (接地・健全性ゲート・SVG・prompt 構築) だけを持つ。
     // セッションが article.md を書いたら `--ingest <slug>` でゲートに掛ける。
     const promptPath = path.join(dir, "article.prompt.txt");

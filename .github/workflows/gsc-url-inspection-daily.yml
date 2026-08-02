@@ -54,6 +54,10 @@ jobs:
         id: date
         run: echo "date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
 
+      - name: 🧹 Retain recent raw inspection snapshots
+        # 集計履歴は history.csv、詳細調査は最新7日。古い生CSVはGit履歴から復元できる。
+        run: node .claude/scripts/lib/prune-state-snapshots.mjs --scope gsc
+
       - name: 💾 Commit results
         run: |
           git config user.name "github-actions[bot]"

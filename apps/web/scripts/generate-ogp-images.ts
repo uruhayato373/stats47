@@ -73,6 +73,7 @@ import {
   type ImageGenerationPlan,
 } from './lib/image-generation-manifest';
 import { createImageGenerationInspector } from './lib/image-generation-r2-inspector';
+import { isSafeNoteSlug } from './lib/image-entity-policy';
 
 const PUBLIC_URL =
   process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
@@ -254,7 +255,7 @@ async function listNoteEntries(): Promise<NoteEntry[]> {
     drafts?: Record<string, { vertical?: string; r2_path?: string }>;
   } | null;
   for (const [slug, v] of Object.entries(draft?.drafts ?? {})) {
-    if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
+    if (!isSafeNoteSlug(slug)) {
       throw new Error(`note slug が不正です: ${slug}`);
     }
     if (v?.r2_path) {
@@ -277,7 +278,7 @@ async function listNoteEntries(): Promise<NoteEntry[]> {
   } | null;
   for (const [slug, v] of Object.entries(pub?.articles ?? {})) {
     if (slug.startsWith('_') || !v?.r2_path) continue;
-    if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) {
+    if (!isSafeNoteSlug(slug)) {
       throw new Error(`note slug が不正です: ${slug}`);
     }
     if (

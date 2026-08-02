@@ -14,9 +14,9 @@
  *   [B] GONE ∩ isActive:true = ∅ — 410 対象は config も非アクティブであること
  *   [C] INDEXABLE ⊆ KNOWN        — インデックス対象は必ず配信中
  *   [D] INDEXABLE ∩ GONE = ∅     — インデックス対象が 410 は矛盾
- *   [E] SITEMAP ∩ GONE           — shouldIncludeInSitemap が実行時に除外するため
- *                                   実害は無いが、汚染として warning を出す（生成
- *                                   スクリプトが GONE を除外しない既知の残余 5 件）
+ *   [E] KNOWN ⊆ active prefecture — 市区町村専用metricを県rankingへ混入させない
+ *   [F] SITEMAP ⊆ KNOWN          — 履歴に残る非公開URLを再混入させない
+ *   [G] SITEMAP ∩ GONE = ∅       — sitemap と 410 は排他
  *
  * 違反時の直し方:
  *   - ページを公開したい (データ・config が生きている) → GONE から削除
@@ -73,20 +73,32 @@ describe("ranking キーリスト集合整合性", () => {
     expect(conflict, `INDEXABLE なのに GONE のキー ${conflict.length} 件`).toEqual([]);
   });
 
-  it("[E] SITEMAP ∩ GONE は警告のみ（実行時 shouldIncludeInSitemap が除外）", () => {
-    const polluted = intersection(SITEMAP_RANKING_KEYS, GONE_RANKING_KEYS);
-    if (polluted.length > 0) {
-      // 生成スクリプト (build-sitemap-ranking-keys.cjs) が GONE を除外しないため
-      // 残余が出る。実害は無い（url-policy が実行時に除外）が、増加傾向なら
-      // 生成スクリプト側に GONE フィルタを追加すること。
-      console.warn(
-        `[ranking-key-consistency] SITEMAP ∩ GONE = ${polluted.length} 件 (実害なし・情報): ` +
-          polluted.slice(0, 10).join(", ") +
-          (polluted.length > 10 ? " …" : ""),
-      );
-    }
-    // ベースライン 5 件 (2026-07-03) から大幅増加したら生成スクリプトの退行を疑う
-    expect(polluted.length).toBeLessThanOrEqual(10);
+  it("[E] KNOWN ⊆ active prefecture（市区町村専用metricを県rankingへ混入させない）", () => {
+    const activePrefectureKeys = new Set(
+      listAllMetrics()
+        .filter((m) => m.isActive && m.entities.includes("prefecture"))
+        .map((m) => m.key),
+    );
+    const invalid = [...KNOWN_RANKING_KEYS]
+      .filter((key) => !activePrefectureKeys.has(key))
+      .sort();
+    expect(
+      invalid,
+      `KNOWN だが active prefecture metric ではないキー ${invalid.length} 件。` +
+        `generate-known-ranking-keys.ts の対象判定を確認。`,
+    ).toEqual([]);
+  });
+
+  it("[F] SITEMAP ⊆ KNOWN（現在配信しない履歴URLをsitemapへ戻さない）", () => {
+    const invalid = [...SITEMAP_RANKING_KEYS]
+      .filter((key) => !KNOWN_RANKING_KEYS.has(key))
+      .sort();
+    expect(invalid, `SITEMAP だが KNOWN ではないキー ${invalid.length} 件`).toEqual([]);
+  });
+
+  it("[G] SITEMAP ∩ GONE = ∅（sitemapと410は排他）", () => {
+    const conflict = intersection(SITEMAP_RANKING_KEYS, GONE_RANKING_KEYS);
+    expect(conflict, `SITEMAP なのにGONEのキー ${conflict.length} 件`).toEqual([]);
   });
 });
 

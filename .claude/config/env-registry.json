@@ -94,6 +94,13 @@
       ]
     },
     {
+      "name": "CLAUDE_CODE_OAUTH_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
       "name": "CLAUDE_PROJECT_DIR",
       "visibility": "server",
       "contexts": [

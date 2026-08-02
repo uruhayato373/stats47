@@ -13,7 +13,11 @@ import { logger } from "@/lib/logger";
 
 import { AdSlotProps } from "../types";
 
-import { AD_CONTAINER_CLASS, getAdReservedMinHeight } from "./ad-frame";
+import {
+  AD_CONTAINER_CLASS,
+  getAdReservedMinHeight,
+  getResponsiveAdFormat,
+} from "./ad-frame";
 import { AdSensePlaceholder } from "./AdSensePlaceholder";
 
 /**
@@ -177,7 +181,7 @@ export function AdSenseAd({
             }}
             data-ad-client={clientId}
             data-ad-slot={slotId}
-            data-ad-format="auto"
+            data-ad-format={getResponsiveAdFormat(format)}
             data-full-width-responsive="true"
           />
         )

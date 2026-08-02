@@ -129,8 +129,19 @@ jobs:
 
           EXISTING=$(gh issue list --state open --label link-alert --search "\"[Link Alert]\" in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
-            echo "Existing open issue #$EXISTING — appending comment"
-            gh issue comment "$EXISTING" --body-file /tmp/link-issue.md
+            echo "Existing open issue #$EXISTING — replacing with latest audit"
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/link-issue.md
           else
             gh issue create --title "$TITLE" --label "link-alert,auto-generated" --body-file /tmp/link-issue.md
           fi
+
+      - name: ✅ Close recovered link alert
+        if: steps.check.outputs.exit_code == '0' && steps.check_site.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label link-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "ブログ本文とサイト横断の内部リンク監査がともに正常へ復旧したため自動Closeします。"
+            done

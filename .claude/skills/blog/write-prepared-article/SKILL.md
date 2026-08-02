@@ -1,18 +1,17 @@
 ---
 name: write-prepared-article
-description: CI が準備済みのブログ記事 (接地・データ健全性ゲート・SVG・prompt まで完了) を Claude セッションで書き上げ、決定的ゲート → critic → 公開待ちまで確定する。Use when user says "準備済み記事を書く", "今日のブログを書く", "write-prepared-article".
+description: 準備済みのブログ記事 (接地・データ健全性ゲート・SVG・prompt まで完了) を手動で書き上げ、決定的ゲート → critic → 公開待ちまで確定する。日次CIが失敗した場合の再実行・調査にも使う。Use when user says "準備済み記事を書く", "今日のブログを書く", "write-prepared-article".
 disable-model-invocation: true
 primary_agent: article-writer
 ---
 
 # /write-prepared-article — 準備済みブログ記事を書き上げる
 
-`blog-generate-daily.yml` が **接地 → データ健全性ゲート → SVG 生成 → prompt 構築** まで
-済ませた記事を、Claude セッション（Max サブスク内）で書き上げて公開待ちにする。
+`blog-generate-daily.yml` が用意した記事を、対話セッションから手動で書き上げるフォールバック。
+日次 workflow 自身は Claude Code OAuth で執筆・機械ゲート・独立 critic・publish dispatch まで完結する。
 
-> **なぜセッションが書くか**: GitHub Actions の中で LLM を呼ぶ形は Claude でも Gemini でも
-> 別課金になる。決定的で無料な工程だけを CI に残し、「書く」工程をセッションに置くことで
-> サブスクの範囲で回す。既存記事の是正（`blog-remediation-loop.md`）は元からこの型。
+> CI は `claude setup-token` で発行した `CLAUDE_CODE_OAUTH_TOKEN` を Repository Secret から読み、
+> Pro / Max の利用枠で公式 Base Action を起動する。API従量課金の `ANTHROPIC_API_KEY` は使わない。
 > 正典: `.claude/rules/blog-quality-standards.md` / `.claude/rules/blog-data-schema.md` §0
 
 ## 前提（CI が用意しているもの）
@@ -36,7 +35,8 @@ find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.prom
   | sed 's|.*/\([^/]*\)/article.prompt.txt|\1|'
 ```
 
-Issue「📝 ブログ: 今日の執筆対象」にも同じ一覧が出ている。
+日次 routine は当日の対象だけを `.local/ci/blog-targets.txt` に固定する。手動時は上の一覧から
+未完成の slug を1件選び、複数の残存 prompt をまとめて処理しない。
 
 ### 2. 記事を書く（`article-writer` に委譲）
 
@@ -93,7 +93,7 @@ R2 に公開する。公開後は CI が `docs/21` の当該ドラフトを自�
 | 自分で書いた記事を自分で critic する | `blog-critic` を別コンテキストで起動する |
 | ground truth に無い数値を書く | `data/*.json` にある値だけを使う |
 | R2 の article.md を直接編集する | outbox → push → CI が公開する |
-| 準備済みディレクトリを手で消す | 書かない日はそのまま残す（次回のセッションが拾う） |
+| 準備済みディレクトリを手で消す | 原因を直して日次 routine を再実行する |
 
 ## 関連
 

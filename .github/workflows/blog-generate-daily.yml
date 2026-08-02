@@ -1,17 +1,14 @@
-name: 📝 Blog Generate Daily (Gemini)
+name: 📝 Blog Generate Daily (Claude Code生成 + 公開)
 
-# ブログ新規記事の日次「準備」ループ (2026-07-31 に Gemini から移行)。
+# ブログ新規記事の日次生成ループ。
 #
-# ★LLM はこの workflow では呼ばない。GitHub Actions の中で LLM を呼ぶ形は Claude でも
-#   Gemini でも別課金になるため、「書く」工程は Claude セッション (Max サブスク内) が担う。
-#   ここは決定的で無料な工程だけを回して、今日書く分を用意する。
-#
-#   1. topic-queue を再構築 (何を書くか。GSC 需要 × 相関 × カテゴリから決定的に並ぶ)
-#   2. pending 上位を**準備**:
+#   1. topic-queue を再構築 (GSC 需要 × 相関 × カテゴリから決定的に並ぶ)
+#   2. pending 上位を準備:
 #        R2 観測値を接地 → **データ健全性ゲート** → SVG 生成 → article.prompt.txt 書き出し
-#   3. 準備物を develop に push し、今日の対象を Issue で提示
-#   4. セッションが article.md を書いて push → blog-auto-publish.yml が R2 公開
-#      (この workflow も article.md が既にあれば dispatch する)
+#   3. Claude Code Base Action (OAuth / Max) で author → 機械ゲート → 独立 critic を実行
+#   4. 対象全件の article.md + critic PASS + published:true を決定的に照合
+#   5. develop に push し、blog-auto-publish.yml を明示 dispatch
+#   6. 失敗時は run を赤くし、運用 Issue を upsert
 #
 # ★なぜ push トリガー任せにしないか
 #   blog-auto-publish.yml は develop への push トリガーを持つが、GitHub Actions は
@@ -22,11 +19,11 @@ name: 📝 Blog Generate Daily (Gemini)
 # ★安全装置
 #   - 壊れた metric の記事は書かない (blog-topic-gate。分類軸の絞り忘れ等を生成前に弾く)
 #   - quality-gate の blocker が 1 つでも残れば公開しない。**ゲートは緩めない**
-#   - critic が REVISE なら下書きごと破棄する (自己採点での公開を作らない)
-#   - LIMIT は小さく始める。品質が実測で確認できるまで増やさない
+#   - OAuth token 未登録、対象あり生成0件、critic未通過はすべて hard fail
+#   - 初期 LIMIT は 1。成功実測後に増やす。入力は 1..3 に制限
+#   - Claude が変更できるのは当日 target の原稿ディレクトリだけ
+#   - Base Action は commit SHA 固定、MCP/Web、project hooks、full output を無効化
 #   - dry_run: LLM を呼ばず接地・ゲート・prompt 長だけ出す (課金ゼロ)
-#
-# ⚠️ 費用: 1 記事あたり本文生成 + critic の 2 回。入力 ~3K / 出力 ~4K トークン相当 × 2。
 #
 # 正典: .claude/rules/blog-quality-standards.md / .claude/rules/blog-data-schema.md §0
 
@@ -43,21 +40,21 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "生成件数 (既定 2。品質を実測してから増やす)"
+        description: "生成件数 (1..3、既定1。成功実測後に増やす)"
         required: false
-        default: "2"
+        default: "1"
       dry_run:
         description: "true: LLM を呼ばず接地とゲートだけ実行する"
         required: false
         default: "false"
       keep_draft:
-        description: "true: ゲート落ち / critic REVISE の下書きを残して原因を見る"
+        description: "互換入力 (現在は失敗時にrunを赤くし、未完成原稿はcommitしない)"
         required: false
         default: "false"
 
 permissions:
   contents: write
-  issues: write # 今日の執筆対象を Issue で提示するため
+  issues: write # 失敗 Issue を upsert するため
   actions: write # blog-auto-publish.yml を dispatch するため
 
 concurrency:
@@ -73,7 +70,7 @@ env:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -98,7 +95,7 @@ jobs:
         run: |
           REQ=data/blog-generate-requests.json
           if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
-            LIMIT=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.limit??2))")
+            LIMIT=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.limit??1))")
             DRY_RUN=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
             KEEP_DRAFT=$(node -e "const r=require('./$REQ');process.stdout.write(r.keepDraft===true?'true':'false')")
             {
@@ -110,20 +107,25 @@ jobs:
           else
             echo "inputs 使用: limit=${LIMIT} dry_run=${DRY_RUN} keep_draft=${KEEP_DRAFT}"
           fi
+          if ! [[ "${LIMIT}" =~ ^[0-9]+$ ]] || [ "${LIMIT}" -lt 1 ] || [ "${LIMIT}" -gt 3 ]; then
+            echo "::error::LIMIT は 1..3 の整数が必須: ${LIMIT}"
+            exit 1
+          fi
+          if [ "${DRY_RUN}" != "true" ] && [ "${DRY_RUN}" != "false" ]; then
+            echo "::error::DRY_RUN は true / false が必須: ${DRY_RUN}"
+            exit 1
+          fi
 
       # 何を書くか。GSC 需要・相関・カテゴリ網羅から決定的に並ぶ。
       # 外部 fetch を含むので失敗しても既存キューで続行する (生成を止める理由にはならない)。
       - name: 📊 Rebuild topic-queue
         run: node .claude/scripts/blog/build-topic-queue.mjs || echo "::warning::topic-queue 再構築に失敗。既存キューで続行する"
 
-      # ★LLM はここでは呼ばない (2026-07-31 に Gemini から移行)。
-      #   GitHub Actions の中で LLM を呼ぶ形は Claude でも Gemini でも別課金になるため、
-      #   決定的な工程 (接地 → データ健全性ゲート → SVG → prompt 構築) までを CI が担い、
-      #   「書く」工程は Claude セッション (Max サブスク内) が担う。
-      #   準備済みディレクトリには article.md が無いので公開 workflow には拾われない。
       - name: 🧱 Prepare articles (接地・ゲート・SVG・prompt まで)
+        id: prepare
         run: |
-          set -o pipefail
+          set -euo pipefail
+          mkdir -p .local/ci
           # 引数は配列で組む (文字列を裸で展開すると glob と単語分割が起きる)
           EXTRA=()
           if [ "${DRY_RUN}" = "true" ]; then EXTRA+=(--dry-run); fi
@@ -131,6 +133,24 @@ jobs:
             npx tsx packages/ai-content/src/scripts/generate-blog-article.ts \
               --limit "${LIMIT}" \
               "${EXTRA[@]}" 2>&1 | tee /tmp/gen.log
+          if [ "${DRY_RUN}" = "true" ]; then
+            : > .local/ci/blog-targets.txt
+          else
+            awk '$1 == "[ready]" { print $2 }' /tmp/gen.log > .local/ci/blog-targets.txt
+          fi
+          node -e '
+            const fs = require("node:fs");
+            const slugs = fs.readFileSync(".local/ci/blog-targets.txt", "utf8").trim().split(/\n/).filter(Boolean);
+            for (const slug of slugs) {
+              if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) throw new Error("不正な slug: " + slug);
+              const prompt = "docs/21_ブログ記事原稿/" + slug + "/article.prompt.txt";
+              if (!fs.statSync(prompt).size) throw new Error("空の prompt: " + prompt);
+            }
+          '
+          COUNT=$(grep -c . .local/ci/blog-targets.txt || true)
+          SLUGS=$(paste -sd, .local/ci/blog-targets.txt)
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "slugs=$SLUGS" >> "$GITHUB_OUTPUT"
           {
             echo "### 接地結果"
             echo '```'
@@ -138,52 +158,130 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: 📋 今日の執筆対象を Issue に出す
-        if: ${{ env.DRY_RUN != 'true' }}
+      - name: 🔐 Require Claude Code OAuth token
+        if: ${{ env.DRY_RUN != 'true' && steps.prepare.outputs.count != '0' }}
         env:
-          GH_TOKEN: ${{ github.token }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
-          READY=$(find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.prompt.txt' -type f 2>/dev/null \
-            | sed 's|.*/\([^/]*\)/article.prompt.txt|\1|' | paste -sd' ')
-          if [ -z "$READY" ]; then echo "準備済みなし"; exit 0; fi
-          TITLE="📝 ブログ: 今日の執筆対象"
-          BODY=$(
-            echo "接地・データ健全性ゲート・SVG・prompt まで準備できています。Claude セッションで書いてください。"
-            echo
-            echo "対象: $READY"
-            echo
-            echo "各 slug の docs/21_ブログ記事原稿/<slug>/article.prompt.txt を読んで article.md を書き、"
-            echo "generate-blog-article.ts --ingest <slug> でゲート → blog-critic で review.md →"
-            echo "再度 --ingest で確定します。ゲートは緩めません。"
-          )
-          EXIST=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
-          if [ -n "$EXIST" ]; then
-            gh issue edit "$EXIST" --body "$BODY"
-          else
-            gh issue create --title "$TITLE" --body "$BODY" --label auto-generated
+          if [ -z "${CLAUDE_CODE_OAUTH_TOKEN}" ]; then
+            echo "::error::CLAUDE_CODE_OAUTH_TOKEN が未登録です。claude setup-token で発行し、Repository Secretへ登録してください"
+            exit 1
           fi
+
+      # High-level claude-code-action は schedule event を正式対応対象にしていないため、
+      # event 非依存の公式 Base Action を使う。main SHA と内包 Claude Code version を固定する。
+      - name: ✍️ Write and review articles with Claude Code
+        id: claude
+        if: ${{ env.DRY_RUN != 'true' && steps.prepare.outputs.count != '0' }}
+        uses: anthropics/claude-code-base-action@e257d767763882223c40b615cbbe0d26ca75a981 # Claude Code v2.1.220 (base-action main 2026-08-02)
+        env:
+          NODE_VERSION: "20.x"
+        with:
+          prompt_file: .claude/prompts/ci/blog-routine.md
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          show_full_output: "false"
+          settings: |
+            {
+              "disableAllHooks": true
+            }
+          claude_args: |
+            --model sonnet
+            --effort high
+            --max-turns 100
+            --no-session-persistence
+            --setting-sources project
+            --permission-mode dontAsk
+            --tools "Read,Write,Edit,Glob,Grep,Agent,Skill,Bash"
+            --allowedTools "Read,Write,Edit,Glob,Grep,Agent,Skill,Bash(node .claude/scripts/lib/article-factual-check.mjs *),Bash(node .claude/scripts/blog/quality-gate.mjs *),Bash(node --conditions=react-server --import tsx packages/ai-content/src/scripts/generate-blog-article.ts --ingest *)"
+            --disallowedTools "WebFetch,WebSearch,Bash(env *),Bash(printenv *),Read(.env*),Read(**/.env*)"
+            --strict-mcp-config
+            --mcp-config '{"mcpServers":{}}'
+
+      - name: ✅ Verify target completeness, gates, and critic PASS
+        id: verify
+        if: ${{ env.DRY_RUN != 'true' && steps.prepare.outputs.count != '0' }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          set -euo pipefail
+          EXPECTED="${{ steps.prepare.outputs.count }}"
+          if [ ! -s "$CLAUDE_EXECUTION_FILE" ]; then
+            echo "::error::Claude execution log が無く、author / critic 実行を証明できません"
+            exit 1
+          fi
+          GENERATED=0
+          while IFS= read -r SLUG; do
+            [ -z "$SLUG" ] && continue
+            DIR="docs/21_ブログ記事原稿/${SLUG}"
+            ARTICLE="${DIR}/article.md"
+            REVIEW="${DIR}/review.md"
+            for AGENT_TYPE in article-writer blog-critic; do
+              if ! jq -e --arg agent "$AGENT_TYPE" --arg target "$SLUG" \
+                'any(.[] | select(.type == "assistant") | .message.content[]?;
+                  .type == "tool_use" and .name == "Agent"
+                  and .input.subagent_type == $agent
+                  and ((.input.prompt // "") | contains($target)))' \
+                "$CLAUDE_EXECUTION_FILE" >/dev/null; then
+                echo "::error::Agent 実行記録なし: ${AGENT_TYPE} / ${SLUG}"
+                exit 1
+              fi
+            done
+            if [ ! -s "$ARTICLE" ]; then
+              echo "::error::対象あり・article.mdなし: ${SLUG}"
+              exit 1
+            fi
+            if [ ! -s "$REVIEW" ] || [ "$(wc -c < "$REVIEW" | tr -d ' ')" -lt 200 ] \
+              || ! grep -Eq '^verdict:[[:space:]]*PASS[[:space:]]*$' "$REVIEW"; then
+              echo "::error::critic PASS review が無いか不正: ${SLUG}"
+              exit 1
+            fi
+            node .claude/scripts/lib/article-factual-check.mjs "$ARTICLE" "${DIR}/data"
+            node .claude/scripts/blog/quality-gate.mjs "$ARTICLE"
+            NODE_OPTIONS='--conditions react-server' \
+              npx tsx packages/ai-content/src/scripts/generate-blog-article.ts --ingest "$SLUG" \
+              | tee "/tmp/blog-ingest-${SLUG}.log"
+            grep -q 'published: true' "$ARTICLE"
+            GENERATED=$((GENERATED + 1))
+          done < .local/ci/blog-targets.txt
+          if [ "$GENERATED" -ne "$EXPECTED" ]; then
+            echo "::error::対象 ${EXPECTED} 件に対して検証済み生成 ${GENERATED} 件"
+            exit 1
+          fi
+          while IFS= read -r FILE; do
+            case "$FILE" in
+              docs/21_ブログ記事原稿/*|.claude/state/blog/topic-queue.json) ;;
+              *)
+                echo "::error::Claude routine の許可外変更: ${FILE}"
+                exit 1
+                ;;
+            esac
+          done < <(git status --porcelain=v1 --untracked-files=all | cut -c4-)
+          echo "count=$GENERATED" >> "$GITHUB_OUTPUT"
+          echo "✅ 対象 ${EXPECTED} 件すべて factual + quality + critic PASS"
 
       - name: 📤 Commit outbox and push
         id: commit
         if: ${{ env.DRY_RUN != 'true' }}
         run: |
+          set -euo pipefail
           # push トリガーで来た request は同じ commit で消費する (再実行のループを防ぐ)
           if [ "${{ github.event_name }}" = "push" ]; then
             git rm -q --ignore-unmatch data/blog-generate-requests.json || true
           fi
           git add "docs/21_ブログ記事原稿" .claude/state/blog/topic-queue.json || true
-          # 準備段階なので prompt の数を見る。公開対象は article.md がある数 (別で数える)
-          NEW=$(find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.prompt.txt' -type f 2>/dev/null | wc -l | tr -d ' ')
-          WRITTEN=$(find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.md' -type f 2>/dev/null | wc -l | tr -d ' ')
+          NEW="${{ steps.verify.outputs.count || '0' }}"
           echo "outbox=${NEW}" >> "$GITHUB_OUTPUT"
-          echo "written=${WRITTEN}" >> "$GITHUB_OUTPUT"
           if git diff --cached --quiet; then
-            echo "変更なし (生成 0 件)"
+            if [ "${{ steps.prepare.outputs.count }}" != "0" ]; then
+              echo "::error::対象ありなのに commit 対象がありません"
+              exit 1
+            fi
+            echo "対象0件・進捗変更なし"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -q -m "chore(blog): daily gemini article generation (outbox ${NEW} 件)"
+          git commit -q -m "chore(blog): daily Claude Code generation (outbox ${NEW} 件)"
           for i in 1 2 3; do
             if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
               echo "✅ pushed (outbox ${NEW} 件)"
@@ -213,10 +311,8 @@ jobs:
 
       # 既定 token の push は blog-auto-publish の push トリガーを発火させないため明示 dispatch する。
       # run が生まれたことを確認してから成功とする (ai-content で滞留を実際に踏んだ)。
-      # 準備しただけでは公開しない。セッションが article.md を書いたときだけ公開へ回す
-      # (blog-auto-publish は published:true の article.md しか拾わない)。
-      - name: 🚀 Dispatch blog-auto-publish (書き終えた記事があれば)
-        if: ${{ env.DRY_RUN != 'true' && steps.commit.outputs.written != '0' }}
+      - name: 🚀 Dispatch blog-auto-publish
+        if: ${{ env.DRY_RUN != 'true' && steps.verify.outputs.count != '0' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -232,3 +328,33 @@ jobs:
           done
           echo "::error::blog-auto-publish の run を確認できなかった (outbox が滞留している可能性)"
           exit 1
+
+      - name: 🧹 Close resolved routine issues
+        if: ${{ success() && env.DRY_RUN != 'true' && steps.prepare.outputs.count != '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for TITLE in "📝 ブログ: 今日の執筆対象" "🚨 Blog generation routine failed"; do
+            NUMBER=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
+            if [ -n "$NUMBER" ]; then gh issue close "$NUMBER" --reason completed; fi
+          done
+
+      - name: 🚨 Upsert failure issue
+        if: ${{ failure() && env.DRY_RUN != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE="🚨 Blog generation routine failed"
+          BODY="日次ブログ生成が失敗しました。対象あり生成0件、認証、factual/quality gate、critic、push/dispatchのいずれかです。
+
+          Run: ${RUN_URL}
+          Target count: ${{ steps.prepare.outputs.count || 'unknown' }}
+
+          成功するまでgreen扱いにはなりません。"
+          NUMBER=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$NUMBER" ]; then
+            gh issue edit "$NUMBER" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY" --label auto-generated
+          fi

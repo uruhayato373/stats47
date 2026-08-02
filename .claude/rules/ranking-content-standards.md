@@ -123,34 +123,33 @@ outbox は**フラットな `<rankingKey>.json`** でなければならない (w
   **ゲートを緩めて通すことは絶対にしない** (品質ではなく実行時間で払う)。落ち率はモデルを変えたら
   必ず実測する (10 件パイロット → blocker 内訳を確認 → 落ち率が高ければプロンプト側を直す)。
 
-### ★2026-07-31: 生成を Claude セッションへ戻した (Gemini テキスト経路は撤去)
+### ★2026-08-02: Claude Code OAuth の日次 CI へ統合 (Gemini テキスト経路は撤去)
 
-**GitHub Actions の中で LLM を呼ぶ形は、Claude でも Gemini でも別課金になる。** Max サブスクの
-範囲で回すには生成を Claude セッション側に置く必要があるため、Gemini テキスト経路
+Gemini テキスト経路
 (`gemini-text-client` / `model-preflight` / `preflight-gemini` / `--model gemini-api` /
 `ai-content-preflight.yml`) を**撤去**した。画像生成 (`gemini-image-client`) は別経路なので残す。
 
 | 経路 | 課金 |
 |---|---|
-| Claude Code セッション (対話 / Routine が起こす新セッション) | **Max サブスク内** |
-| Anthropic API キーを Actions から叩く (`claude-code-action` 等) | API 従量課金 (サブスク外) |
+| Claude Code OAuth (`claude setup-token` → `CLAUDE_CODE_OAUTH_TOKEN`) | Pro / Max プランの利用枠 |
+| Anthropic API キー (`ANTHROPIC_API_KEY`) | API 従量課金 (サブスク外) |
 | Gemini API | Google の従量課金 |
 
-**新しい形**: 決定的で無料な工程 (キュー再構築・接地・データ健全性ゲート・SVG・prompt 構築) は
-CI が担い、「書く」工程だけを Claude セッションが担う。既存記事の是正
-(`blog-remediation-loop.md`) は元からこの型なので、新規生成をそれに揃えた形になる。
+日次 workflow は schedule event に依存しない公式 `claude-code-base-action` を commit SHA 固定で使う。
+`CLAUDE_CODE_OAUTH_TOKEN` は Repository Secret のみで扱い、full output・Web・MCP・project hooks を
+無効化する。キュー・prompt 準備と、生成後の gate / 対象件数照合は通常の shell step が担う。
 
 ```
-CI (無料)                          Claude セッション (サブスク内)
-  キュー再構築                  →   /generate-ai-content (agent: ranking-content-author)
-  今日の対象を Issue で提示           ↓ 決定的ゲート audit-ai-content.mjs
-  ↑                                  ↓ critic (別コンテキスト)
-  outbox を push → publish 起動  ←   outbox へ書き出し
+CI: キュー再構築 → 対象別 prompt
+  → Claude Code: author → audit → critic (別コンテキスト) → outbox
+  → CI: 対象全件の outbox / audit / critic PASS を再照合
+  → develop push → publish workflow を明示 dispatch
 ```
 
-日次件数は**控えめに始めて実測**する (初回 ai-content 10 件 / blog 1 本)。サブスクの利用上限が
-制約になるため、実際の消費を測ってから増やす。**旧 40 件/日は Gemini 前提の根拠なき暫定値**で、
-そのまま引き継がない。
+対象ありで OAuth token が無い、生成物が1件でも欠ける、audit / critic が通らない、push / dispatch を
+確認できない場合は run を赤くする。日次件数は ai-content / blog とも**既定1件**から実測し、
+成功率と Pro / Max 利用枠を確認してから増やす。**旧 40 件/日は Gemini 前提の根拠なき暫定値**で、
+引き継がない。
 
 以下は撤去前の Gemini 運用の記録 (経緯として保持する)。
 

@@ -45,7 +45,7 @@ export function ArticleShell({
           <>
             <div className="lg:flex lg:items-start lg:gap-8">
               <main className="min-w-0 flex-1">{children}</main>
-              <aside className="hidden w-[360px] shrink-0 lg:flex lg:flex-col lg:gap-3">
+              <aside className="hidden w-[360px] shrink-0 lg:flex lg:max-h-[calc(100vh-5.5rem)] lg:flex-col lg:gap-3 lg:overflow-y-auto lg:pr-1">
                 {rail}
                 {railSticky && (
                   <div className="sticky top-20 flex max-h-[calc(100vh-5.5rem)] flex-col gap-3 overflow-y-auto pr-1">
