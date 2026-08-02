@@ -14,6 +14,7 @@
 
 CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-h-[calc(100vh-5.5rem)]` と `overflow-hidden` または `overflow-y-auto` を付ける**。
 
+- **右レールは独立スクロールを作らない**。`ArticleShell` と `RightRailWidgets` は flex の自然フローで配置し、ページ本体のスクロールだけで全 widget に到達できるようにする。`max-h` と `overflow-y-auto`、それらを有効化する option は追加しない。
 - Grid の行高 = 列のうち最も高い要素で決まる。aside に `max-h` がないと aside の自然高が行高を決定し、フッターが画面外に押し出される（記事本文の末尾でスクロール終了しているように見えてもフッターに届かない）。
 - **削除した事例**: 2026-06-06、subagent が blog/category/ranking ページの aside から `max-h` を除去してフッターが非表示になった（commit `5d9afb24`、revert `a2c76216`・`b18be52a`）。
 
@@ -22,18 +23,22 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20
                   lg:max-h-[calc(100vh-5.5rem)] lg:overflow-hidden lg:pr-1">
 
-// ✅ RightRailWidgets の scrollClass (stickyScroll=true 時)
-"xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1"
+// ✅ flex の右レールは自然フロー（内部スクロールなし）
+<aside className="hidden w-[360px] shrink-0 lg:flex lg:flex-col lg:gap-3">
 
-// ❌ max-h なしは禁止 (フッターが見えなくなる)
+// ❌ sticky grid aside で max-h なしは禁止 (フッターが見えなくなる)
 <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20 lg:pr-1">
 ```
 
 適用箇所:
 - `apps/web/src/app/blog/[slug]/page.tsx` — 左・右 aside
 - `apps/web/src/app/category/[categoryKey]/page.tsx` — 右 aside
-- `apps/web/src/components/rail/RightRailWidgets.tsx` — `scrollClass`
 - 3カラムレイアウトを持つすべての新規ページ
+
+独立スクロール禁止の適用箇所:
+- `apps/web/src/components/layout/ArticleShell.tsx`
+- `apps/web/src/components/rail/RightRailWidgets.tsx`
+- 右レールに渡す widget
 
 ## コンポーネント配置の 3 tier（★新規コンポーネント追加前に必読・配置の SSOT）
 
