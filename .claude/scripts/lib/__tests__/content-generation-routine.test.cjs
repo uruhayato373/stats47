@@ -73,6 +73,28 @@ test('blog routine invokes Claude before deterministic verification and publish'
   assert.doesNotMatch(source, /今日の執筆対象を Issue に出す/);
 });
 
+// 2026-08-02 run 30769885097 で実測: キュー再構築 step が tracked な state を書き換えるため
+// 作業ツリーが汚れ、consume の `git pull --rebase` が
+// "cannot pull with rebase: You have unstaged changes" で落ちて request が消費されずに残った。
+// 残ると同内容の再 push が paths フィルタで発火しなくなるので、退避を不変条件として固定する。
+test('both routines stash the dirty tree before rebasing to consume the request', () => {
+  for (const workflow of [
+    '.github/workflows/ai-content-generate-daily.yml',
+    '.github/workflows/blog-generate-daily.yml',
+  ]) {
+    const source = read(workflow);
+    const consume = source.slice(source.indexOf('Consume request'));
+    assert.ok(consume.length > 0, `${workflow}: consume step が無い`);
+    const stashAt = consume.indexOf('git stash push');
+    const rebaseAt = consume.indexOf('git pull --rebase');
+    assert.ok(stashAt !== -1, `${workflow}: consume が rebase 前に stash していない`);
+    assert.ok(
+      stashAt < rebaseAt,
+      `${workflow}: stash は git pull --rebase より前でなければならない`,
+    );
+  }
+});
+
 test('CI prompts preserve author/critic separation and prohibit external writes', () => {
   for (const prompt of [
     '.claude/prompts/ci/ai-content-routine.md',
