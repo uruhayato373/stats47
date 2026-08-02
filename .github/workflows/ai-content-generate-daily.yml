@@ -366,4 +366,17 @@ jobs:
           git rm -q --ignore-unmatch data/ai-content-generate-requests.json || true
           if git diff --cached --quiet; then exit 0; fi
           git commit -q -m "chore(ai-content): consume generate request [skip ci]"
-          git pull --rebase --quiet origin develop && git push origin HEAD:develop
+          # ★キュー再構築の step が tracked な state を書き換えるため作業ツリーが汚れる。
+          #   そのまま rebase すると "cannot pull with rebase: You have unstaged changes" で
+          #   落ち、request が消費されないまま develop に残る (2026-08-02 run 30769885097 で実測)。
+          #   残ると同内容の再 push が paths フィルタで発火しなくなる。消費に不要な差分なので退避する。
+          git stash push --include-untracked --quiet || true
+          for i in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ request を消費した"
+              exit 0
+            fi
+            echo "consume retry $i"; sleep 5
+          done
+          echo "::error::request の消費に失敗した (同内容の再 push が発火しなくなる)"
+          exit 1
