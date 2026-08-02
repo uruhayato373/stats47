@@ -4,7 +4,6 @@ export { FurusatoNozeiCard } from "./components/FurusatoNozeiCard";
 export { RakutenItemsCard } from "./components/RakutenItemsCard";
 export { OperatorProfileCard } from "./components/OperatorProfileCard";
 export { SidebarPromoBanner } from "./components/SidebarPromoBanner";
-export { TechSchoolPromoCard } from "./components/TechSchoolPromoCard";
 export { NativeAffiliateRow } from "./components/NativeAffiliateRow";
 
 // 標準広告スロット部品（エディトリアル文法の統一枠）

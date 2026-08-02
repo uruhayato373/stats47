@@ -38,7 +38,7 @@ function RankingCard({
             </div>
             <div className="px-3 pb-3 pt-3">
                 <TooltipProvider delayDuration={300}>
-                    <nav className="flex flex-col gap-0.5 max-h-[40vh] overflow-y-auto">
+                    <nav className="flex flex-col gap-0.5">
                         {items.map((item) => (
                             <Tooltip key={item.rankingKey}>
                                 <TooltipTrigger asChild>

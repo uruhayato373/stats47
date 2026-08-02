@@ -108,7 +108,7 @@ jobs:
         continue-on-error: false
 
       - name: 📢 Ad Placement Guard
-        # 広告どうしの隣接・rail 部品の本文誤用・生 AdSenseAd の直叩き・参照ゼロの slot 定数を弾く。
+        # 広告の隣接・rail 部品誤用・生 AdSenseAd・右レール独立scroll/テキストPR・死んだ slot 定数を弾く。
         # pre-commit と同一だが --no-verify 素通り対策で CI でも実行する。
         run: node .claude/scripts/lib/check-ad-placement.cjs
         continue-on-error: false
@@ -139,6 +139,7 @@ jobs:
           node .claude/scripts/lib/__tests__/paren-number-lint.test.mjs
           node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
           node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
+          node --test .claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs
           # 生成側のゲート (壊れた metric で記事を書き始めないこと・モデル可用性・生成 0 件の扱い)。
           # API キー不要の純粋関数テストなので PR で毎回回せる。
           npm run test:ai-content --workspace apps/web

@@ -36,7 +36,7 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 | 関数 | ファイル | 入力型 | データ命名パターン | 実出現 | 用途 |
 |---|---|---|---|---|---|
 | `generateBarChartSvg` | `bar-chart.ts` | `BarItem[]` + `BarChartOptions` | `*-ranking.json` / `*-top5-bottom5.json` | ~239 | ランキングはカード型のみ・**上位5+下位5固定**（10件廃止）。`layout:"columns"`=横長2列カード（左=上位/右=下位、`960×404`、ブログ本文+X 用）/ `layout:"portrait"`=縦長スタックカード（上位5↓下位5、`1080×1350` 4:5、Instagram 用 `-ig.svg`）/ `layout:"single"`=縦1列+「…中略…」(680幅)。`generate-article-charts.ts` が `*-ranking.json` から columns(`<name>.svg`)+portrait(`<name>-ig.svg`)を自動両出力 |
-| `generateScatterSvg` | `scatter.ts` | `ScatterPoint[]` + `ScatterOptions` | `*-scatter.json` | ~166 | 散布図（全都道府県・相関可視化） |
+| `generateScatterSvg` | `scatter.ts` | `ScatterPoint[]` + `ScatterOptions` | `*-scatter.json` | ~166 | 散布図（全都道府県・相関可視化）。**720×720固定、実プロット領域も正方形、全点をニュートラル単色、地域凡例なし** |
 | `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド47都道府県マップ。**720×720固定（正方形・地図を最大化）・透過背景・テーマ非依存・左上にタイトル+上位3県・凡例は右下**（既定ラベル 低い/高い + 実数値スケール。安全/危険 等の意味的ラベルは json `legendLabels` 明示時のみ＝2026-07-13 是正）。タイル内は**県名+値の2行**（`showValue` 既定 true）・**字の大きさは1マスタイル基準で全タイル共通**（2マス幅だけ大きくしない）・表示名はコードから決定的に作る（北海道を「北海」にしない）。タイル内テキストはタイル色の明度で白/濃紺を切り替え+縁取り（2026-07-31 改訂。単色白は淡色タイルで読めなかった）。色は **D3カラースキーム** `scheme`(`Blues`/`Viridis`/`RdYlGn`/`RdBu`/`Spectral`/`YlOrRd`…d3-scale-chromatic、未指定時 Reds)、`reverse`/`showValue`/`showRankList` 可。データは SSOT(R2 app/ranking)。一括再生成: `regenerate-tile-maps.ts`。**不変量の gate = `lintTileGridQuality`（§6-2）**。正典 `blog-data-schema.md` §1.6 |
 | `generateLineSvg` | `line.ts` | `StatsSchema[]` + `LineOptions` | `*-timeseries.json` / `*-trend.json` | ~39 | 多系列折れ線（時系列・年齢階級）|
 | `generateStackedBarSvg` | `stacked-bar.ts` | `StackedData` + `StackedBarOptions` | `*-stacked.json` / `*-breakdown.json` | ~5 | 積み上げ棒グラフ（構成比）|
@@ -78,7 +78,7 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 | `PALETTES.orange` | 中立的に多い（消費量・観光客数等） | `#e65100`（濃）〜`#fff8f0`（薄） |
 | `PALETTES.purple` | 中立的・嗜好品（アルコール等） | `#7b1fa2`（濃）〜`#fdf7ff`（薄） |
 | `PALETTES.green` | 中立的・自然/環境 | `#2e7d32`（濃）〜`#f7fcf8`（薄） |
-| `SCATTER_COLORS.mid` | 散布図ドット（均一色） | fill `#6b8fc9` / stroke `#3b6fa0` |
+| `SCATTER_COLORS.mid` | 散布図ドット（均一なニュートラル色） | fill `#64748b` / stroke `#475569` |
 
 > **CARD_THEMES（カード型2列ランキング専用）**: `bar-chart.ts` の `layout:"columns"` は header/bar/cardAlt の
 > 専用色セット（`CARD_THEMES`、red=`#dc2626`/`#ef4444`/`#fef2f2` 等の Tailwind 系）を使う。カードはライト固定の
@@ -247,14 +247,14 @@ const labels = values.map((v) => formatValueWithPrecision(v, precision));
 | ランキング横長（columns・ブログ/X） | `960` | `404`（上位5+下位5固定） | カード型2列（aging-solo / alcohol スタイル） |
 | ランキング縦長（portrait・IG `-ig.svg`） | `1080` | `1350`（4:5固定） | 縦長スタック（上位5↓下位5） |
 | ランキング（single・1列） | `680` | 可変（1行 ~30px） | `680×300`（95枚） |
-| 散布図（scatter） | `960` | `624` | `960×624`（80枚） |
+| 散布図（scatter） | `720` | `720` | `960×624`（80枚、旧形式） |
 | タイルマップ（map） | `720` | `720` | `720×720`（2026-07-31 改訂。旧 780×560 / 600×700） |
 | 要点カード（findings） | `960` | 可変（要点数 × ~80px） | `960×478`（26枚） |
 | 折れ線（timeseries） | `680` | `420` | `680×420`（19枚） |
 | 積み上げ棒（stacked） | `680` | 可変 | `680×420` |
 
 `width` と `height` 属性は viewBox と必ず一致させる（svg-lint が検査）。
-**svg-builder の各チャートは §5 標準幅に収斂済（2026-06-17 Step 5）**: bar single=680（width/height も 680 に一致、旧 DISPLAY_W=780 スケーリングは廃止）/ **ランキングカード 横長columns=960×404・縦長portrait=1080×1350（2026-06-20）** / scatter=960×624 / map=720×720 / line=680×420 / stacked=680 / findings=960。新規生成は自動的にこの規格になる。
+**svg-builder の各チャートは §5 標準幅に収斂済**: bar single=680（width/height も 680 に一致、旧 DISPLAY_W=780 スケーリングは廃止）/ **ランキングカード 横長columns=960×404・縦長portrait=1080×1350（2026-06-20）** / scatter=720×720（2026-08-02）/ map=720×720 / line=680×420 / stacked=680 / findings=960。新規生成は自動的にこの規格になる。
 **標準幅から外れる既存 SVG は再生成で是正**（`regenerate-blog-svgs.yml`・§10 Step 4）。
 
 ---
@@ -333,16 +333,29 @@ flag は個別に metric→key を特定する必要があり、**SVG の絵か�
 | `tile-grid`（tilemap） | 720 | **error** |
 | `summary`（findings） | 960 | **error** |
 | `line` | 680 | **error** |
-| `scatter` | 960 | **error** |
+| `scatter` | 720 | **error** |
 | `stacked-bar` | 680 | **error** |
 
 **全 6 カタログ統一完了（2026-06-21）→ 全て error**。both（json+source あり）の全 SVG が正規幅。
-是正ツール: ranking=`rerender-ranking-columns.mts`（960×404 columns）/ scatter=`rerender-scatter-canonical.mts`（960×624）。
+是正ツール: ranking=`rerender-ranking-columns.mts`（960×404 columns）/ scatter=`rerender-scatter-canonical.mts`（720×720・単色）。
 いずれも既存検証済み json から svg-builder で再描画（値不変・サイズのみ正規化）。line/stacked は generateLineSvg/generateStackedBarSvg が固定幅 680 を出すため新規は自動的に正規。
 > ★ R2 反映は **S3 API 経由（diff-push-r2）が確実**。`push-r2-wrangler`（wrangler put）は稀に「Upload complete」と言いつつ永続化しない flaky 挙動があり、S3 GET で検証すること（2026-06-21 scatter 統一時に発生）。
 **幅は不変量**（高さは件数/内容で可変）なので幅で判定する。分類不能名（`inline-chart-N` 等）は対象外。
 
 バッチ監査: `.claude/scripts/blog/audit-chart-quality.mjs` で全記事を一括チェック（内容 lint + サイズ lint）。
+
+### 6-3. 散布図品質 gate（`lintScatterQuality` / 2026-08-02 追加）
+
+散布図は次の4点を公開前 blocker として検査する。`quality-gate.mjs`、`audit-chart-quality.mjs`、
+`generate-article-charts.ts --validate` に配線済み。
+
+1. キャンバスが **720×720**
+2. 実プロット領域の幅と高さが同じ
+3. 全点が `SCATTER_COLORS.mid` の単色
+4. 地域別の凡例を持たない
+
+ゲートの感度は `.claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs`、生成器との配線は
+`packages/svg-builder/src/charts/__tests__/scatter.gate.test.ts` で固定する。
 
 ---
 

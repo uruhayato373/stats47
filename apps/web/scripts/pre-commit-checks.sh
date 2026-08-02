@@ -99,8 +99,8 @@ if ! node "$GUARD_ROOT/.claude/scripts/lib/check-card-census.cjs"; then
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
 
-# 2.2.1 AdSense 広告配置ガード (2026-07-29 の面別崩れの再発防止)
-# 広告どうしの隣接・rail 部品の本文誤用・生 AdSenseAd の直叩き・参照ゼロの slot 定数を弾く。
+# 2.2.1 広告配置・右レール契約ガード (2026-07-29 / 2026-08-02 の再発防止)
+# 広告の隣接・rail 部品誤用・生 AdSenseAd・右レール独立scroll/テキストPR・死んだ slot 定数を弾く。
 echo -e "${GREEN}📢 広告配置ガード...${NC}"
 if ! node "$GUARD_ROOT/.claude/scripts/lib/check-ad-placement.cjs"; then
   echo -e "${RED}❌ 広告の配置規約に違反しています。${NC}"

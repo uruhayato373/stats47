@@ -63,7 +63,6 @@ const BASELINE = new Set([
   "SurfaceCard",
   "SurfaceLinkCard",
   "SurveyCard",
-  "TechSchoolPromoCard",
   // home-featured-v1 の計測ラッパー (doc 28 §9)。カード枠を描画しない (impression/click 計測の
   // ための div ラップのみ)。表示は children (EditorialFeaturedCard / FeaturedRankingCard) に委譲。
   "TrackedFeaturedRankingCard",

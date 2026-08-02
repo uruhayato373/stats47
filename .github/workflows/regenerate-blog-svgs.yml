@@ -20,12 +20,22 @@ name: 🎨 Regenerate Blog SVGs (svg-builder 経由・dark mode 付与)
 #   gh workflow run regenerate-blog-svgs.yml -f slugs="slug-a slug-b" # 指定 slug のみ dry-run
 #   gh workflow run regenerate-blog-svgs.yml -f dry_run=false         # 本番 push (全件)
 #   gh workflow run regenerate-blog-svgs.yml -f slugs="slug-a" -f dry_run=false  # 指定 slug を本番反映
+#   gh workflow run regenerate-blog-svgs.yml -f mode=scatter-canonical # 散布図71件 dry-run
+#   gh workflow run regenerate-blog-svgs.yml -f mode=scatter-canonical -f dry_run=false # 同じ対象をR2反映
 
 on:
   workflow_dispatch:
     inputs:
+      mode:
+        description: 'all: 全チャート / scatter-canonical: 散布図カタログの正方形・単色統一'
+        required: false
+        type: choice
+        options:
+          - all
+          - scatter-canonical
+        default: 'all'
       slugs:
-        description: '対象 slug (スペース区切り)。空なら all.json の全 slug'
+        description: 'all モードの対象 slug (スペース区切り)。空なら all.json の全 slug'
         required: false
         default: ''
       dry_run:
@@ -46,6 +56,7 @@ env:
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
   CLOUDFLARE_R2_BUCKET_NAME: stats47
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
 
 jobs:
   regenerate:
@@ -68,9 +79,11 @@ jobs:
         run: npm ci
 
       - name: 📥 Download blog data from R2 (app/blog)
+        if: ${{ github.event.inputs.mode == 'all' }}
         run: npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix app/blog
 
       - name: 🔎 Resolve target slugs
+        if: ${{ github.event.inputs.mode == 'all' }}
         id: targets
         run: |
           SLUGS="${{ github.event.inputs.slugs }}"
@@ -89,6 +102,7 @@ jobs:
           echo "対象 slug 数: $(echo "$SLUGS" | wc -w)"
 
       - name: 🎨 Regenerate SVGs via svg-builder
+        if: ${{ github.event.inputs.mode == 'all' }}
         run: |
           : > .local/generated-blog-svg-keys.txt
           OK=0; SKIP=0; FAIL=0
@@ -114,10 +128,21 @@ jobs:
             exit 1
           fi
 
+      - name: ⬜ Regenerate canonical scatter catalog
+        if: ${{ github.event.inputs.mode == 'scatter-canonical' }}
+        run: |
+          npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts \
+            --key-file .local/generated-blog-svg-keys.txt
+          COUNT=$(wc -l < .local/generated-blog-svg-keys.txt)
+          echo "exact publish候補: $COUNT"
+          if [ "$COUNT" -eq 0 ]; then
+            echo "散布図はすでに正規化済みです（R2更新なし）"
+          fi
+
       - name: 🖼️ Build review gallery (local)
         run: |
           node .claude/scripts/blog/build-svg-gallery.mjs --source local \
-            --out /tmp/blog-svg-gallery.html || true
+            --out /tmp/blog-svg-gallery.html
 
       - name: 📤 Upload gallery artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -126,11 +151,15 @@ jobs:
           path: /tmp/blog-svg-gallery.html
           if-no-files-found: warn
 
-      - name: 📤 Push regenerated SVGs to R2 (本番時のみ)
+      - name: 📤 Push regenerated assets to R2 (本番時のみ)
         if: ${{ github.event.inputs.dry_run == 'false' }}
         run: |
           KEY_FILE=".local/generated-blog-svg-keys.txt"
           if [ ! -s "$KEY_FILE" ]; then
+            if [ "${{ github.event.inputs.mode }}" = "scatter-canonical" ]; then
+              echo "散布図はすでに正規化済みです（R2更新なし）"
+              exit 0
+            fi
             echo "::error::再生成されたSVG keyが0件です"
             exit 1
           fi
@@ -153,6 +182,7 @@ jobs:
         run: |
           {
             echo "### 🎨 Regenerate Blog SVGs"
+            echo "- mode: \`${{ github.event.inputs.mode }}\`"
             echo "- dry_run: \`${{ github.event.inputs.dry_run }}\`"
             echo "- 対象 slug: \`${{ github.event.inputs.slugs || 'all' }}\`"
             echo "- ギャラリー: artifact \`blog-svg-gallery\` をダウンロードして視覚確認"

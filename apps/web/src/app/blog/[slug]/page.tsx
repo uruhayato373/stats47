@@ -16,14 +16,13 @@ import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { ArticleCard, RailCard, RailLinkItem, RailLinkList, SurfaceLinkCard } from "@/components/surface";
 
 import {
-    FurusatoNozeiCard,
     RailAdSlot,
     RakutenItemsCard,
     SidebarPromoBanner,
+    selectPromoBannerIndexForRanking,
 } from "@/features/ads";
 import { TAG_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
-import { detectPrefCodeFromText } from "@/features/ads/constants/furusato-nozei";
-import { BlogSidebarTextAds, resolveAffiliateBannersByCategory, resolveAffiliateTextAdsByTagKeys } from "@/features/ads/server";
+import { resolveAffiliateBannersByCategory, resolveAffiliateTextAdsByTagKeys } from "@/features/ads/server";
 import { BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     RelatedRankingsSection,
@@ -131,16 +130,14 @@ export default async function BlogPostPage({ params }: PageProps) {
             resolveAffiliateBannersByCategory(),
         ]);
     const tagKeys = articleTagData.map((t) => t.tagKey);
-    // 本文インラインのテキストリンク。**サイドバーと重複させない**ため 1 回だけ 6 件解決し、
-    // 先頭 2 件はサイドバー (BlogSidebarTextAds が同じ順序で独立解決する) に譲って 3 件目以降を本文に回す。
-    // 在庫が薄い vertical では本文分が減るだけで、空枠は作らない (md-content 側が index 不足を握りつぶす)。
-    const affiliateTextPool = await resolveAffiliateTextAdsByTagKeys(tagKeys, "sidebar-bottom", 6);
-    const affiliateTextAds = affiliateTextPool.slice(2);
+    // テキスト広告は本文 inline のみに置く。右レールの PR は画像バナーへ統一する。
+    // 在庫が薄い vertical では空枠を作らない (md-content 側が index 不足を握りつぶす)。
+    const affiliateTextAds = await resolveAffiliateTextAdsByTagKeys(
+        tagKeys,
+        "sidebar-bottom",
+        4,
+    );
     const affiliateVertical = tagKeys.map((t) => TAG_AFFILIATE_MAP[t]).find(Boolean) ?? null;
-    // 記事タイトルから都道府県を検出し、その県の楽天ふるさと納税を出す (公開 430 記事の 60% が該当)。
-    // GSC 実測で最大流入は食品消費量クエリ 46% で、返礼品 (食品中心) と文脈が近い。
-    // 県名が無い全国系の記事では null → カードを描画しない。
-    const furusatoPrefCode = detectPrefCodeFromText(article.title);
     // relatedArticles は tagKeys 依存、articleTagsMap は relatedArticles 依存 (チェーン)
     const relatedArticles = await getRelatedArticles(tagKeys, slug);
     const articleTagsMap = await getTagsForArticles(relatedArticles.map((a) => a.slug));
@@ -191,21 +188,17 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             <hr className="my-1 border-t border-border" />
 
-            <SidebarPromoBanner index={0} position="sidebar-left" />
-            <SidebarPromoBanner index={1} position="sidebar-right" />
+            <SidebarPromoBanner
+                index={selectPromoBannerIndexForRanking()}
+                position="sidebar"
+            />
 
             {/* 右レールの広告枠。RightRailWidgets と同じ slot 部品に寄せた (2026-07-29) */}
             <RailAdSlot slot={RANKING_PAGE_SIDEBAR} />
 
-            {/* 記事の対象県のふるさと納税 (タイトルから県を検出できた記事のみ) */}
-            {furusatoPrefCode && <FurusatoNozeiCard areaCode={furusatoPrefCode} />}
-
             {/* 記事の主題が品目のとき楽天市場の商品を出す (公開 430 記事中 131 件が該当)。
                 品目を検出できない記事では何も描画しない。 */}
             <RakutenItemsCard sourceText={article.title} position="blog-sidebar" />
-
-            {/* テキストリンク広告 (strategy career / 就職エージェントneo) */}
-            <BlogSidebarTextAds tagKeys={tagKeys} />
         </>
     );
 
@@ -278,11 +271,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                             {/* TOC (lg 未満で記事冒頭に表示。lg 以上は右 rail に表示) */}
                             <div className="mb-8 lg:hidden">
                                 <ArticleTableOfContents content={article.content} />
-                            </div>
-
-                            {/* モバイルでは右レールが本文下へ落ちるため、文脈一致アフィリエイトを1枠だけ早めに表示する。 */}
-                            <div className="mb-8 lg:hidden">
-                                <BlogSidebarTextAds tagKeys={tagKeys} limit={1} />
                             </div>
 
                             {/* 記事本文 */}

@@ -39,6 +39,7 @@ import {
   lintSvgSize,
   lintChoroplethLegend,
   lintFindingsParity,
+  lintScatterQuality,
   lintTileGridQuality,
 } from "../lib/svg-lint.mjs";
 
@@ -496,6 +497,7 @@ for (const base of svgRefs) {
   const svg = fs.readFileSync(svgFile, "utf8");
   pairBlockers.push(...lintChoroplethLegend(`${base}.svg`, svg, jsonData).errors);
   pairBlockers.push(...lintFindingsParity(`${base}.svg`, svg, jsonData).errors);
+  pairBlockers.push(...lintScatterQuality(`${base}.svg`, svg, jsonData).errors);
   // タイルマップの品質不変量 (キャンバス比・透過背景・テーマ非依存・凡例位置)
   pairBlockers.push(...lintTileGridQuality(`${base}.svg`, svg, jsonData).errors);
 }

@@ -18,7 +18,7 @@ interface AffiliateTextAdListProps {
 
 /**
  * テキストリンク型アフィリエイトを複数並べて表示する presentational コンポーネント。
- * ランキングサイドバー (AffiliateAdSlot) とブログサイドバー (BlogSidebarTextAds) で共有する。
+ * 本文・footer のテキスト広告表示に使う。desktop 右レールでは使用しない。
  * 各リンクは GA4 クリック計測 (TrackedAffiliateLink) + インプレッション計測 (AdImpressionTracker)
  * + rel="sponsored" + 1x1 計測ピクセルを保証する。
  */
