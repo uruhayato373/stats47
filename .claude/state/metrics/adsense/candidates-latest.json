@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "week": "2026-W30",
-  "generatedAt": "2026-07-30T21:22:11.300Z",
+  "week": "2026-W31",
+  "generatedAt": "2026-08-02T11:56:44.211Z",
   "period": {
-    "periodStart": "2026-07-19",
-    "periodEnd": "2026-07-25",
+    "periodStart": "2026-07-26",
+    "periodEnd": "2026-08-01",
     "windowDays": 7
   },
-  "previousWeek": "2026-W29",
+  "previousWeek": "2026-W30",
   "limits": {
     "maxCandidates": 3,
     "activeWipLimit": 2,
@@ -16,117 +16,34 @@
   "note": "候補提示まで (自動でバックログ追加・配置変更・deploy しない)。採用は人間承認で最大1件/週",
   "candidates": [
     {
-      "id": "measurement-gap::ad-units,bid-types-platforms,countries,daily,devices,formats-platforms,overview,pages,placements-platforms,traffic-sources,units",
+      "id": "measurement-gap::ad-units",
       "rule": "measurement-gap",
-      "key": "ad-units,bid-types-platforms,countries,daily,devices,formats-platforms,overview,pages,placements-platforms,traffic-sources,units",
-      "score": 111,
+      "key": "ad-units",
+      "score": 101,
       "evidence": [
-        {
-          "metric": "job:overview",
-          "status": "error"
-        },
-        {
-          "metric": "job:daily",
-          "status": "error"
-        },
-        {
-          "metric": "job:devices",
-          "status": "error"
-        },
-        {
-          "metric": "job:units",
-          "status": "error"
-        },
-        {
-          "metric": "job:formats-platforms",
-          "status": "error"
-        },
-        {
-          "metric": "job:placements-platforms",
-          "status": "error"
-        },
-        {
-          "metric": "job:bid-types-platforms",
-          "status": "error"
-        },
-        {
-          "metric": "job:traffic-sources",
-          "status": "error"
-        },
-        {
-          "metric": "job:countries",
-          "status": "error"
-        },
-        {
-          "metric": "job:pages",
-          "status": "error"
-        },
         {
           "metric": "job:ad-units",
           "status": "error"
         }
       ],
       "sample": {
-        "jobs": 11
+        "jobs": 1
       },
       "confidence": 0.95,
       "expectedLever": "report job の取得是正 (creds / API 互換 / retry)",
       "guardrail": "—",
       "rollback": "—",
-      "earliestDecisionDate": "2026-08-08",
+      "earliestDecisionDate": "2026-08-15",
       "judgment": {
-        "day14": "2026-08-08",
-        "day28": "2026-08-22",
-        "day56": "2026-09-19"
+        "day14": "2026-08-15",
+        "day28": "2026-08-29",
+        "day56": "2026-09-26"
       },
       "pastEffect": null,
       "confounders": [],
       "notes": [
         "privacy-threshold は gap に数えない (仕様上の制約)"
       ],
-      "externalActionFlag": false
-    },
-    {
-      "id": "device-regression::Desktop",
-      "rule": "device-regression",
-      "key": "Desktop",
-      "score": 1.3714,
-      "evidence": [
-        {
-          "metric": "page_rpm",
-          "previous": 48,
-          "current": 35
-        },
-        {
-          "metric": "earnings",
-          "previous": 128,
-          "current": 88
-        },
-        {
-          "metric": "impressions",
-          "previous": 4137,
-          "current": 3349
-        }
-      ],
-      "sample": {
-        "impressions": 3349
-      },
-      "confidence": 0.7,
-      "expectedLever": "Desktop の広告密度/読み込み距離の見直し (1 レバーのみ)",
-      "guardrail": "他 device の収益・viewability を悪化させない",
-      "rollback": "変更 commit の revert",
-      "earliestDecisionDate": "2026-08-08",
-      "judgment": {
-        "day14": "2026-08-08",
-        "day28": "2026-08-22",
-        "day56": "2026-09-19"
-      },
-      "pastEffect": null,
-      "confounders": [
-        "traffic mix の変化 (query/ページ種別)",
-        "季節性"
-      ],
-      "notes": [],
       "externalActionFlag": false
     }
   ]
