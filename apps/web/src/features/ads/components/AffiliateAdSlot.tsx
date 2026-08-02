@@ -24,6 +24,8 @@ interface AffiliateAdSlotProps {
   position?: "sidebar" | "footer";
   /** ranking ページで指定。targetRankingKeys を持つ広告の文脈一致フィルタに使う (任意) */
   rankingKey?: string;
+  /** 右レールを画像バナーだけに限定し、テキスト広告へフォールバックしない */
+  bannerOnly?: boolean;
 }
 
 function mapPositionToLocation(position: "sidebar" | "footer"): AffiliateLocationCode {
@@ -36,7 +38,7 @@ function mapPositionToLocation(position: "sidebar" | "footer"): AffiliateLocatio
  * 優先順位 (AFF-05 で実験を最優先に追加):
  * 0. A/B 実験 variant (sidebar・experimentId 付きが 2 件以上) → VariantAdSlot でクライアント加重ランダム
  * 1. バナー広告 (sidebar のみ・categoryKey 一致の上位1件) — 視認性が高く impression を稼ぐ (AFF-03)
- * 2. テキスト広告 (最大 2 件)
+ * 2. テキスト広告 (最大 2 件。bannerOnly ではスキップ)
  * 3. なければ AdSense にフォールバック
  *
  * experiment / banner 在庫の無いカテゴリ (広告ゼロ8軸など) は下位へ流れるため従来挙動と同じ。
@@ -47,6 +49,7 @@ export async function AffiliateAdSlot({
   categoryKey,
   position = "sidebar",
   rankingKey,
+  bannerOnly = false,
 }: AffiliateAdSlotProps) {
   const locationCode = mapPositionToLocation(position);
   const affiliateCategory = CATEGORY_AFFILIATE_MAP[categoryKey] ?? null;
@@ -54,10 +57,15 @@ export async function AffiliateAdSlot({
   // 0. A/B 実験 (sidebar のみ)。experimentId 付き variant が 2 件以上あればクライアント加重ランダム出し分け。
   if (position === "sidebar") {
     const variants = await resolveExperimentVariantsByCategoryKey(categoryKey);
-    if (variants.length >= 2) {
+    const eligibleVariants = bannerOnly
+      ? variants.filter(
+          (variant) => variant.adType === "banner" && !!variant.imageUrl,
+        )
+      : variants;
+    if (eligibleVariants.length >= 2) {
       return (
         <VariantAdSlot
-          variants={variants}
+          variants={eligibleVariants}
           category={affiliateCategory ?? "other"}
           position="ranking-sidebar"
         />
@@ -89,11 +97,22 @@ export async function AffiliateAdSlot({
   }
 
   // 2. テキスト広告
-  const ads = await resolveAffiliateTextAds(categoryKey, locationCode, 2, rankingKey);
-  if (ads.length > 0) {
-    return (
-      <AffiliateTextAdList ads={ads} affiliateCategory={affiliateCategory} position={position} />
+  if (!bannerOnly) {
+    const ads = await resolveAffiliateTextAds(
+      categoryKey,
+      locationCode,
+      2,
+      rankingKey,
     );
+    if (ads.length > 0) {
+      return (
+        <AffiliateTextAdList
+          ads={ads}
+          affiliateCategory={affiliateCategory}
+          position={position}
+        />
+      );
+    }
   }
 
   // 3. AdSense フォールバック

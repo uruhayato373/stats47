@@ -128,6 +128,9 @@ const svg = generateChoroplethSvg(toChoroplethItems(data), {
 
 ### `generateScatterSvg(points, options)` — 散布図（回帰直線付き）
 
+720×720 の正方形で生成し、実プロット領域も正方形にする。点は地域別に色分けせず、
+ニュートラルな単色で描画するため凡例は付けない。
+
 ```ts
 import { joinStats, generateScatterSvg } from "@stats47/svg-builder";
 

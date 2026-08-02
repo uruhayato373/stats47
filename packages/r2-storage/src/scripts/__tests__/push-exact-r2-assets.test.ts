@@ -160,6 +160,24 @@ describe('exact R2 asset publisher', () => {
     expect(objects.get(key)?.body).toEqual(body);
   });
 
+  it('記事Markdownをtext/markdownとしてPUTする', async () => {
+    const root = makeRoot();
+    const key = 'app/blog/article-a/article.md';
+    const body = Buffer.from('# article\n');
+    writeFileSync(join(root, '.local/r2', key), body);
+    const candidates = resolveExactAssetCandidates(root, {
+      keys: [key],
+      prefix: null,
+      extensions: [],
+    });
+    const { store, objects } = makeStore();
+
+    await publishExactR2Assets({ candidates, store, dryRun: false });
+
+    expect(objects.get(key)?.contentType).toBe('text/markdown; charset=utf-8');
+    expect(objects.get(key)?.body).toEqual(body);
+  });
+
   it('dry-runは差分を検出してもPUTしない', async () => {
     const root = makeRoot();
     const key = 'app/blog/article-a/chart.svg';

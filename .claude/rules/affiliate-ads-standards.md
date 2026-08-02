@@ -94,9 +94,13 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 | ページ種別 | 解決キー |
 |---|---|
 | ranking / category | `categoryKey` → vertical の banner (priority 上位) → text → AdSense fallback |
-| blog | 記事 `tags` → vertical の banner/text。**本文にはテキストリンクを自動挿入** (`<affiliate-text>`・h2 の 2/4/6 番目直前 + 末尾 = 最大 4 本)。サイドバーと重複しないよう 6 件解決して先頭 2 件をサイドバー、3 件目以降を本文に回す |
+| blog | 記事 `tags` → vertical の banner/text。**テキストリンクは本文だけに自動挿入** (`<affiliate-text>`・h2 の 2/4/6 番目直前 + 末尾 = 最大 4 本)。右レールは画像バナーのみ |
 | theme | `relatedArticleTagKeys` → vertical、空なら `THEME_AFFILIATE_MAP[themeKey]` → vertical (フォールバック) |
 | area | `locationCode="area-sidebar"` の banner |
+
+- **desktop の右レールに置く PR は画像バナー (`BannerAd`) のみ**。独自テキスト promo card、`FurusatoNozeiCard`、
+  `AffiliateTextAdList` は右レールへ置かない。banner 在庫が無い場合は AdSense へフォールバックし、テキスト広告は
+  本文 inline / footer に限定する。
 
 ### priority 規約
 

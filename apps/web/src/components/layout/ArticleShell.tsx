@@ -24,6 +24,7 @@ interface ArticleShellProps {
  * - コンテナ 1280px + flex で本文がレールに密着する
  *   (PageShell reading variant の「1fr 列内で本文 760px 制限 → ワイド画面で空白」を根治)
  * - レールは「非 sticky 上段 + sticky TOC クラスタ末尾」の 2 段構成
+ * - レール内に独立スクロールを作らず、ページ本体のスクロールで全内容に到達する
  *
  * 設計仕様: docs/01_技術設計/04_デザインシステム.md /
  * docs/01_技術設計/04_デザインシステム.md「reading zone」
@@ -45,10 +46,10 @@ export function ArticleShell({
           <>
             <div className="lg:flex lg:items-start lg:gap-8">
               <main className="min-w-0 flex-1">{children}</main>
-              <aside className="hidden w-[360px] shrink-0 lg:flex lg:max-h-[calc(100vh-5.5rem)] lg:flex-col lg:gap-3 lg:overflow-y-auto lg:pr-1">
+              <aside className="hidden w-[360px] shrink-0 lg:flex lg:flex-col lg:gap-3">
                 {rail}
                 {railSticky && (
-                  <div className="sticky top-20 flex max-h-[calc(100vh-5.5rem)] flex-col gap-3 overflow-y-auto pr-1">
+                  <div className="sticky top-20 flex flex-col gap-3">
                     {railSticky}
                   </div>
                 )}

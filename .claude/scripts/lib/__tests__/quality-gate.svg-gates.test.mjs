@@ -23,6 +23,14 @@ const GOOD_SVG =
   "<style>@media (prefers-color-scheme:dark){.svg-bg{fill:#0f172a}}</style>" +
   "<text>愛知</text></svg>";
 
+const GOOD_SCATTER_SVG =
+  '<svg viewBox="0 0 720 720" width="720" height="720">' +
+  "<style>@media (prefers-color-scheme:dark){.svg-bg{fill:#0f172a}}</style>" +
+  '<rect x="80" y="56" width="600" height="600" class="svg-plot svg-plot-border"/>' +
+  '<circle cx="100" cy="100" fill="#64748b" stroke="#475569"><title>愛知県：X=58 Y=1</title></circle>' +
+  '<circle cx="200" cy="200" fill="#64748b" stroke="#475569"><title>石川県：X=2.5 Y=2</title></circle>' +
+  "</svg>";
+
 const GOOD_ARTICLE = `---
 title: なぜ東北で製造品出荷額が伸びたのか
 seoTitle: "製造品出荷額ランキング｜なぜ東北が伸びたのか"
@@ -86,6 +94,16 @@ function makeFixture(mutate = () => {}) {
   fs.writeFileSync(path.join(dir, "article.md"), f.article);
   for (const [name, body] of Object.entries(f.files)) fs.writeFileSync(path.join(data, name), body);
   return dir;
+}
+
+function convertToScatterFixture(f, svg = GOOD_SCATTER_SVG) {
+  f.article = f.article.replace("data/sample-ranking.svg", "data/sample-scatter.svg");
+  f.files["sample-scatter.svg"] = svg;
+  f.files["sample-scatter.json"] = f.files["sample-ranking.json"];
+  f.files["sample-scatter.source.json"] = f.files["sample-ranking.source.json"];
+  delete f.files["sample-ranking.svg"];
+  delete f.files["sample-ranking.json"];
+  delete f.files["sample-ranking.source.json"];
 }
 
 function runGate(dir) {
@@ -171,6 +189,22 @@ test("SVG の <text> に未解決値 (undefined) → SVG 構造エラー blocker
   }, dirs);
   assert.ok(
     b.some((x) => x.includes("未解決のテンプレート値")),
+    `検出されず: ${b.join(" / ")}`,
+  );
+});
+
+test("散布図の地域別色分け → 散布図品質 blocker", (dirs) => {
+  const b = newBlockers((f) => {
+    convertToScatterFixture(
+      f,
+      GOOD_SCATTER_SVG.replace(
+        '<circle cx="200" cy="200" fill="#64748b" stroke="#475569">',
+        '<circle cx="200" cy="200" fill="#42a5f5" stroke="#ffffff">',
+      ),
+    );
+  }, dirs);
+  assert.ok(
+    b.some((x) => x.includes("散布図") && x.includes("複数色")),
     `検出されず: ${b.join(" / ")}`,
   );
 });

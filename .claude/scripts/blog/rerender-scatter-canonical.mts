@@ -1,109 +1,556 @@
 #!/usr/bin/env -S npx tsx
 /**
- * rerender-scatter-canonical.mts — scatter カタログのサイズ統一 (960×624)。
+ * rerender-scatter-canonical.mts — scatter カタログの正方形・単色統一 (720×720)。
  *
- * 既存の検証済み scatter json (status=both) から、svg-builder の generateScatterSvg(W=960,H=624 固定)
- * で SVG を再描画し、非正規サイズ (680×420/700×560 等) を是正する。値 (points) は変えない。
- * generate-article-charts の genScatterChartSvg アダプタを再現 (points→ScatterPoint[] + 地域色)。
+ * 既存の検証済み scatter json (status=both) から、svg-builder の generateScatterSvg(W=720,H=720 固定)
+ * で SVG を再描画し、横長キャンバスと地域色分けを是正する。
+ * 欠損が判明している2件だけは、記録済みの一次ソースから標準 points schema を復元する。
+ * generate-article-charts の genScatterChartSvg アダプタを再現する。
  *
- * - 既に 960×624 の SVG はスキップ (no-op)。
+ * - 生成結果と同一の SVG はスキップ (no-op)。
  * - title/xLabel/yLabel/xUnit/yUnit は json から継承。
  *
- * 出力: staging .local/r2/app/blog/<slug>/data/<base>.svg (json/source.json は不変)
- * R2 反映: push-r2-wrangler.ts app/blog --apply
+ * 出力: staging .local/r2/app/blog/<slug>/data/<base>.{svg,json,source.json}
+ * R2 反映: key file を push-exact-r2-assets.ts に渡す（CIのみ）
  *
  *   npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts --probe-only
- *   npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts
+ *   npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts \
+ *     --key-file .local/generated-blog-svg-keys.txt
  */
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { generateScatterSvg } from "../../../packages/svg-builder/src/charts/scatter.ts";
+import ExcelJS from 'exceljs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { generateScatterSvg } from '../../../packages/svg-builder/src/charts/scatter.ts';
+import { lintScatterQuality } from '../lib/svg-lint.mjs';
 
-const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
-const STAGE = path.join(PROJECT_ROOT, ".local/r2/app/blog");
+const PROJECT_ROOT = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '..',
+  '..',
+  '..'
+);
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+const STAGE = path.join(PROJECT_ROOT, '.local/r2/app/blog');
 const args = process.argv.slice(2);
-const PROBE_ONLY = args.includes("--probe-only");
-const BASE_ARG = (() => { const i = args.indexOf("--base"); return i >= 0 ? args[i + 1] : null; })();
-
-// prefName→2桁コード (地域色分け用。generate-article-charts の prefCodeOf 同等)
-const PREF_NAME_TO_CODE: Map<string, string> = (() => {
-  const map = new Map<string, string>();
-  try {
-    const raw = fs.readFileSync(path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json"), "utf8");
-    for (const p of JSON.parse(raw)) {
-      const code2 = String(p.prefCode).slice(0, 2);
-      map.set(p.prefName, code2);
-      map.set(String(p.prefName).replace(/[都道府県]$/, ""), code2);
-    }
-  } catch { /* 地域色なしで続行 */ }
-  return map;
+const PROBE_ONLY = args.includes('--probe-only');
+const BASE_ARG = (() => {
+  const i = args.indexOf('--base');
+  return i >= 0 ? args[i + 1] : null;
 })();
-const prefCodeOf = (name: string) => PREF_NAME_TO_CODE.get(String(name || "").trim()) || "";
+const KEY_FILE_ARG = (() => {
+  const i = args.indexOf('--key-file');
+  return i >= 0 ? args[i + 1] : null;
+})();
+const ESTAT_APP_ID = process.env.NEXT_PUBLIC_ESTAT_APP_ID || '';
+const LODGING_2024_XLSX =
+  'https://www.mlit.go.jp/kankocho/content/001905499.xlsx';
+const CHINA_SCATTER =
+  'inbound-by-nationality-regional-preference/resident-vs-guest-china-scatter';
+const SEMICONDUCTOR_SCATTER =
+  'semiconductor-electronics-regional-map/semiconductor-dependency-scatter';
 
-async function fj(u: string): Promise<any> { const r = await fetch(u); if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }
-async function ft(u: string): Promise<string> { const r = await fetch(u); if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }
-function viewBoxOf(svg: string): string { const m = svg.match(/viewBox="0 0 (\d+) (\d+)"/); return m ? `${m[1]}x${m[2]}` : "?"; }
+function noCache(url: string): string {
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}__scatter=${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+}
+
+async function fetchOk(url: string): Promise<Response> {
+  const r = await fetch(url, { signal: AbortSignal.timeout(30_000) });
+  if (!r.ok) throw new Error(`HTTP ${r.status}: ${url}`);
+  return r;
+}
+
+async function fj(u: string): Promise<any> {
+  return (await fetchOk(noCache(u))).json();
+}
+async function ft(u: string): Promise<string> {
+  return (await fetchOk(noCache(u))).text();
+}
+function viewBoxOf(svg: string): string {
+  const m = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
+  return m ? `${m[1]}x${m[2]}` : '?';
+}
+function asArray<T>(value: T | T[] | null | undefined): T[] {
+  if (value == null) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+type CanonicalPoint = {
+  areaCode: string;
+  areaName: string;
+  label: string;
+  x: number;
+  y: number;
+};
+
+type Repair = {
+  json: any;
+  source: any;
+};
+
+function writeJson(filePath: string, value: unknown): void {
+  fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
+}
+
+function canonicalPointCount(data: any): number {
+  const raw = data?.points || data?.data || [];
+  return raw.filter(
+    (p: any) => typeof p.x === 'number' && typeof p.y === 'number'
+  ).length;
+}
+
+async function fetchEstatValues(params: Record<string, string>): Promise<any> {
+  if (!ESTAT_APP_ID) {
+    throw new Error(
+      'NEXT_PUBLIC_ESTAT_APP_ID が未設定のため欠損scatterを一次ソースから復元できません'
+    );
+  }
+  const url = new URL(
+    'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData'
+  );
+  for (const [key, value] of Object.entries({
+    appId: ESTAT_APP_ID,
+    lang: 'J',
+    metaGetFlg: 'Y',
+    cntGetFlg: 'N',
+    ...params,
+  })) {
+    url.searchParams.set(key, value);
+  }
+  const json = await (await fetchOk(url.toString())).json();
+  const result = json?.GET_STATS_DATA?.RESULT;
+  if (result?.STATUS !== 0) {
+    throw new Error(
+      `e-Stat ${params.statsDataId}: ${result?.ERROR_MSG || 'unknown error'}`
+    );
+  }
+  const data = json?.GET_STATS_DATA?.STATISTICAL_DATA;
+  if (!data)
+    throw new Error(
+      `e-Stat ${params.statsDataId}: STATISTICAL_DATA がありません`
+    );
+  return data;
+}
+
+function prefectureValueMap(
+  statisticalData: any
+): Map<string, { areaName: string; value: number }> {
+  const areaClass = asArray<any>(statisticalData?.CLASS_INF?.CLASS_OBJ).find(
+    (obj) => obj?.['@id'] === 'area'
+  );
+  const names = new Map(
+    asArray<any>(areaClass?.CLASS).map((item) => [
+      String(item['@code']),
+      String(item['@name']),
+    ])
+  );
+  const values = new Map<string, { areaName: string; value: number }>();
+  for (const item of asArray<any>(statisticalData?.DATA_INF?.VALUE)) {
+    const areaCode = String(item?.['@area'] || '');
+    if (!/^\d{2}000$/.test(areaCode)) continue;
+    const value = Number(item?.['$']);
+    const areaName = names.get(areaCode);
+    if (!areaName || !Number.isFinite(value)) continue;
+    values.set(areaCode, { areaName, value });
+  }
+  return values;
+}
+
+async function repairChinaScatter(): Promise<Repair> {
+  const residents = prefectureValueMap(
+    await fetchEstatValues({
+      statsDataId: '0003445244',
+      cdCat01: '0',
+      cdCat02: '102',
+      cdTime: '2020000000',
+      lvArea: '2',
+    })
+  );
+
+  const workbook = new ExcelJS.Workbook();
+  const xlsx = await (await fetchOk(LODGING_2024_XLSX)).arrayBuffer();
+  await workbook.xlsx.load(Buffer.from(xlsx));
+  const sheet = workbook.getWorksheet('参考第1表(年計)');
+  if (!sheet) throw new Error('観光庁Excelに「参考第1表(年計)」がありません');
+
+  const guests = new Map<string, { areaName: string; value: number }>();
+  for (let rowNumber = 8; rowNumber <= 54; rowNumber += 1) {
+    const row = sheet.getRow(rowNumber);
+    const areaText = String(row.getCell(1).value || '').trim();
+    const match = areaText.match(/^(\d{2})(.+)$/u);
+    const value = Number(row.getCell(4).value);
+    if (!match || !Number.isFinite(value)) {
+      throw new Error(
+        `観光庁Excel ${rowNumber}行目を都道府県データとして解釈できません`
+      );
+    }
+    guests.set(`${match[1]}000`, { areaName: match[2].trim(), value });
+  }
+
+  if (residents.size !== 47 || guests.size !== 47) {
+    throw new Error(
+      `中国scatterの都道府県数が不正です: residents=${residents.size}, guests=${guests.size}`
+    );
+  }
+
+  const points: CanonicalPoint[] = [...residents.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([areaCode, resident]) => {
+      const guest = guests.get(areaCode);
+      if (!guest)
+        throw new Error(`宿泊値がありません: ${areaCode} ${resident.areaName}`);
+      return {
+        areaCode,
+        areaName: resident.areaName,
+        label: resident.areaName,
+        x: resident.value,
+        y: guest.value,
+      };
+    });
+
+  return {
+    json: {
+      title: '在留中国人数 × 中国人延べ宿泊者数',
+      label: '在留中国人数 vs 中国人延べ宿泊者数',
+      xLabel: '在留中国人数',
+      yLabel: '中国人延べ宿泊者数',
+      xUnit: '人',
+      yUnit: '人泊',
+      yearX: '2020',
+      yearY: '2024',
+      points,
+    },
+    source: {
+      kind: 'calculated',
+      inputs: [
+        {
+          statsDataId: '0003445244',
+          params: {
+            cdCat01: '0',
+            cdCat02: '102',
+            cdTime: '2020000000',
+            lvArea: '2',
+          },
+          year: '2020',
+          label: '中国籍人口',
+        },
+        {
+          url: LODGING_2024_XLSX,
+          sheet: '参考第1表(年計)',
+          column: '中国',
+          rows: '8-54',
+          year: '2024',
+          label: '中国人延べ宿泊者数（従業者数10人以上の施設）',
+        },
+      ],
+      formula:
+        'x=中国籍人口(2020), y=中国人延べ宿泊者数(2024) を都道府県コードで内部結合',
+      source: '国勢調査2020（e-Stat） + 宿泊旅行統計調査2024年確定値（観光庁）',
+      year: '2020/2024',
+      label: '在留中国人数 vs 中国人延べ宿泊者数',
+      note: '年が異なる2系列の相関。宿泊値は従業者数10人以上の施設。',
+    },
+  };
+}
+
+async function repairSemiconductorScatter(): Promise<Repair> {
+  const ranking = await fj(
+    `${R2}/app/ranking/manufacturing-shipment-amount/values.json`
+  );
+  const partition = asArray<any>(ranking?.partitions).find(
+    (item) => String(item?.yearCode) === '2023'
+  );
+  const manufacturing = new Map<string, { areaName: string; value: number }>(
+    asArray<any>(partition?.values).map((item) => [
+      String(item.areaCode),
+      { areaName: String(item.areaName), value: Number(item.value) },
+    ])
+  );
+  const electronics = prefectureValueMap(
+    await fetchEstatValues({
+      statsDataId: '0003448099',
+      cdCat01: '28',
+      cdCat02: '01020',
+    })
+  );
+  if (manufacturing.size !== 47 || electronics.size !== 45) {
+    throw new Error(
+      `半導体scatterの都道府県数が不正です: manufacturing=${manufacturing.size}, electronics=${electronics.size}`
+    );
+  }
+
+  const points: CanonicalPoint[] = [...manufacturing.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .flatMap(([areaCode, total]) => {
+      const electronic = electronics.get(areaCode);
+      // e-Stat 原表で高知県・沖縄県は秘匿値「X」。0 とみなさず散布図から除外する。
+      if (!electronic) return [];
+      return [
+        {
+          areaCode,
+          areaName: total.areaName,
+          label: total.areaName,
+          x: total.value / 1_000_000,
+          y: (electronic.value / total.value) * 100,
+        },
+      ];
+    });
+  if (points.length !== 45)
+    throw new Error(`半導体scatterの描画点数が不正です: ${points.length}`);
+
+  return {
+    json: {
+      title: '製造業規模 × 半導体依存度',
+      label: '半導体依存度（電子部品出荷額2020 ÷ 製造品出荷額等2023）',
+      xLabel: '製造品出荷額等',
+      yLabel: '半導体依存度',
+      xUnit: '兆円',
+      yUnit: '%',
+      yearX: '2023',
+      yearY: '2020/2023',
+      note: '電子部品は2020年、製造品出荷額等は2023年度。高知県・沖縄県は電子部品出荷額が秘匿値(X)のため除外。年次が異なるため依存度は目安。',
+      points,
+    },
+    source: {
+      kind: 'calculated',
+      inputs: [
+        {
+          rankingKey: 'manufacturing-shipment-amount',
+          source: 'r2:app/ranking/manufacturing-shipment-amount/values.json',
+          year: '2023',
+          label: '製造品出荷額等',
+        },
+        {
+          statsDataId: '0003448099',
+          params: { cdCat01: '28', cdCat02: '01020' },
+          year: '2020',
+          label: '電子部品・デバイス・電子回路製造業 出荷額',
+        },
+      ],
+      formula:
+        'x=製造品出荷額等(百万円)/1,000,000; y=電子部品出荷額(百万円)/製造品出荷額等(百万円)*100',
+      year: '2020/2023',
+      unit: '%',
+      label: '半導体依存度（電子部品出荷額2020 ÷ 製造品出荷額等2023）',
+      excludedAreas: ['高知県', '沖縄県'],
+      exclusionReason: 'e-Stat原表の電子部品出荷額が秘匿値(X)のため',
+    },
+  };
+}
+
+async function repairIfNeeded(
+  target: { slug: string; base: string },
+  data: any
+): Promise<Repair | null> {
+  if (canonicalPointCount(data) > 0) return null;
+  const id = `${target.slug}/${target.base}`;
+  if (id === CHINA_SCATTER) return repairChinaScatter();
+  if (id === SEMICONDUCTOR_SCATTER) return repairSemiconductorScatter();
+  return null;
+}
+
+async function repairedArticle(
+  id: string,
+  slug: string
+): Promise<string | null> {
+  if (id !== CHINA_SCATTER && id !== SEMICONDUCTOR_SCATTER) return null;
+  const article = await ft(`${R2}/app/blog/${slug}/article.md`);
+  if (id === CHINA_SCATTER) {
+    const corrected = article
+      .replace(
+        '[宿泊旅行統計調査（e-Stat）](https://www.e-stat.go.jp/stat-search/files?stat_infid=000040199338)',
+        '[宿泊旅行統計調査（観光庁）](https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html)'
+      )
+      .replace(
+        '[国勢調査（e-Stat）](https://www.e-stat.go.jp/stat-search/files?stat_infid=000032142404)',
+        '[国勢調査（e-Stat）](https://www.e-stat.go.jp/dbview?sid=0003445244)'
+      );
+    if (corrected === article)
+      throw new Error(`${slug}/article.md の誤った出典リンクを特定できません`);
+    return corrected;
+  }
+  const corrected = article.replace(
+    '縦軸に半導体依存度をとって47都道府県をプロットしたのが次の散布図です。',
+    '縦軸に半導体依存度をとって、公表値のある45都道府県をプロットしたのが次の散布図です（高知県・沖縄県は電子部品出荷額が秘匿値のため除外）。'
+  );
+  if (corrected === article)
+    throw new Error(`${slug}/article.md の散布図対象数を特定できません`);
+  return corrected;
+}
 
 /** scatter json → generateScatterSvg (genScatterChartSvg と同等) */
 function renderScatter(data: any): string {
-  const title = data.title ?? "散布図";
-  const xLabel = data.xLabel ?? "X";
-  const yLabel = data.yLabel ?? "Y";
+  const title = data.title ?? '散布図';
+  const xLabel = data.xLabel ?? 'X';
+  const yLabel = data.yLabel ?? 'Y';
   const raw = data.points || data.data || [];
   const points = raw
-    .filter((p: any) => typeof p.x === "number" && typeof p.y === "number")
-    .map((p: any) => ({ name: p.label || p.pref || p.areaName || "", code: p.code || prefCodeOf(p.label || p.pref || p.areaName || ""), x: p.x, y: p.y }));
-  if (!points.length) return "";
+    .filter((p: any) => typeof p.x === 'number' && typeof p.y === 'number')
+    .map((p: any) => ({
+      name: p.label || p.pref || p.areaName || '',
+      code: p.code || '',
+      x: p.x,
+      y: p.y,
+    }));
+  if (!points.length) return '';
   return generateScatterSvg(points, {
     title,
     xLabel: data.xUnit ? `${xLabel}（${data.xUnit}）` : xLabel,
     yLabel: data.yUnit ? `${yLabel}（${data.yUnit}）` : yLabel,
-    colorByRegion: true,
-  } as any);
+  });
 }
 
 function loadTargets(): { slug: string; base: string }[] {
-  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, ".claude/state/blog/svg-lineage-queue.json"), "utf8"));
-  let entries = q.entries.filter((e: any) => e.status === "both" && e.chartType === "scatter").map((e: any) => ({ slug: e.slug, base: e.base }));
-  if (BASE_ARG) { const [s, b] = BASE_ARG.split("/"); entries = entries.filter((e: any) => e.slug === s && e.base === b); }
+  const q = JSON.parse(
+    fs.readFileSync(
+      path.join(PROJECT_ROOT, '.claude/state/blog/svg-lineage-queue.json'),
+      'utf8'
+    )
+  );
+  let entries = q.entries
+    .filter((e: any) => e.status === 'both' && e.chartType === 'scatter')
+    .map((e: any) => ({ slug: e.slug, base: e.base }));
+  if (BASE_ARG) {
+    const [s, b] = BASE_ARG.split('/');
+    entries = entries.filter((e: any) => e.slug === s && e.base === b);
+  }
   return entries;
 }
 
-async function pMap<T, R>(items: T[], fn: (t: T) => Promise<R>, c: number): Promise<R[]> {
-  const out: R[] = []; let i = 0;
-  const w = async () => { while (i < items.length) { const k = i++; try { out[k] = await fn(items[k]); } catch (e: any) { out[k] = { error: String(e.message || e) } as any; } } };
+async function pMap<T, R>(
+  items: T[],
+  fn: (t: T) => Promise<R>,
+  c: number
+): Promise<R[]> {
+  const out: R[] = [];
+  let i = 0;
+  const w = async () => {
+    while (i < items.length) {
+      const k = i++;
+      try {
+        out[k] = await fn(items[k]);
+      } catch (e: any) {
+        out[k] = {
+          ...(typeof items[k] === 'object' && items[k] !== null
+            ? items[k]
+            : {}),
+          result: 'error',
+          err: String(e.message || e),
+        } as any;
+      }
+    }
+  };
   await Promise.all(Array.from({ length: Math.min(c, items.length) }, w));
   return out;
 }
 
 async function main() {
   const targets = loadTargets();
-  console.error(`[rerender-scatter] ${targets.length} both-scatter を ${PROBE_ONLY ? "probe" : "再描画"}`);
-  const results = await pMap(targets, async (t) => {
-    const rec: any = { slug: t.slug, base: t.base };
-    let json: any;
-    try { json = await fj(`${R2}/app/blog/${t.slug}/data/${t.base}.json`); } catch (e: any) { rec.result = "json-fail"; rec.err = String(e.message || e); return rec; }
-    let oldSvg = ""; try { oldSvg = await ft(`${R2}/app/blog/${t.slug}/data/${t.base}.svg?cb=${PROJECT_ROOT.length}`); } catch {}
-    rec.oldSize = oldSvg ? viewBoxOf(oldSvg) : "none";
-    const newSvg = renderScatter(json);
-    if (!newSvg) { rec.result = "empty"; return rec; }
-    rec.newSize = viewBoxOf(newSvg);
-    if (rec.oldSize === "960x624") { rec.result = "already-canonical"; return rec; }
-    rec.result = "rerender";
-    if (!PROBE_ONLY) {
-      const dir = path.join(STAGE, t.slug, "data");
-      fs.mkdirSync(dir, { recursive: true });
-      fs.writeFileSync(path.join(dir, `${t.base}.svg`), newSvg);
-    }
-    return rec;
-  }, 4);
+  console.error(
+    `[rerender-scatter] ${targets.length} both-scatter を ${PROBE_ONLY ? 'probe' : '再描画'}`
+  );
+  const results = await pMap(
+    targets,
+    async (t) => {
+      const rec: any = { slug: t.slug, base: t.base };
+      let json: any;
+      try {
+        json = await fj(`${R2}/app/blog/${t.slug}/data/${t.base}.json`);
+      } catch (e: any) {
+        rec.result = 'json-fail';
+        rec.err = String(e.message || e);
+        return rec;
+      }
+      const repair = await repairIfNeeded(t, json);
+      if (repair) {
+        json = repair.json;
+        rec.repaired = true;
+      }
+      let oldSvg = '';
+      try {
+        oldSvg = await ft(`${R2}/app/blog/${t.slug}/data/${t.base}.svg`);
+      } catch {}
+      rec.oldSize = oldSvg ? viewBoxOf(oldSvg) : 'none';
+      const newSvg = renderScatter(json);
+      if (!newSvg) {
+        rec.result = 'empty';
+        return rec;
+      }
+      const lint = lintScatterQuality(`${t.base}.svg`, newSvg, json);
+      if (lint.errors.length) {
+        rec.result = 'lint-fail';
+        rec.err = lint.errors.join(' | ');
+        return rec;
+      }
+      rec.newSize = viewBoxOf(newSvg);
+      if (oldSvg === newSvg && !repair) {
+        rec.result = 'already-canonical';
+        return rec;
+      }
+      rec.result = repair ? 'repair-and-rerender' : 'rerender';
+      if (!PROBE_ONLY) {
+        const dir = path.join(STAGE, t.slug, 'data');
+        fs.mkdirSync(dir, { recursive: true });
+        fs.writeFileSync(path.join(dir, `${t.base}.svg`), newSvg);
+        rec.keys = [`app/blog/${t.slug}/data/${t.base}.svg`];
+        if (repair) {
+          writeJson(path.join(dir, `${t.base}.json`), repair.json);
+          writeJson(path.join(dir, `${t.base}.source.json`), repair.source);
+          rec.keys.push(
+            `app/blog/${t.slug}/data/${t.base}.json`,
+            `app/blog/${t.slug}/data/${t.base}.source.json`
+          );
+          const article = await repairedArticle(`${t.slug}/${t.base}`, t.slug);
+          if (article) {
+            fs.writeFileSync(path.join(STAGE, t.slug, 'article.md'), article);
+            rec.keys.push(`app/blog/${t.slug}/article.md`);
+          }
+        }
+      }
+      return rec;
+    },
+    4
+  );
   const by: Record<string, number> = {};
   for (const r of results) by[r.result] = (by[r.result] || 0) + 1;
   console.error(`[rerender-scatter] ${JSON.stringify(by)}`);
-  const changed = results.filter((r) => r.result === "rerender");
-  if (changed.length) console.error("再描画:", changed.map((r) => `${r.oldSize}→${r.newSize} ${r.base}`).join("\n  "));
-  console.log(JSON.stringify({ by, total: results.length, probeOnly: PROBE_ONLY }));
+  const changed = results.filter(
+    (r) => r.result === 'rerender' || r.result === 'repair-and-rerender'
+  );
+  if (changed.length)
+    console.error(
+      '再描画:',
+      changed.map((r) => `${r.oldSize}→${r.newSize} ${r.base}`).join('\n  ')
+    );
+  const failed = results.filter((r) =>
+    ['json-fail', 'empty', 'lint-fail', 'error'].includes(r.result)
+  );
+  if (KEY_FILE_ARG && !PROBE_ONLY) {
+    const keyFile = path.resolve(PROJECT_ROOT, KEY_FILE_ARG);
+    fs.mkdirSync(path.dirname(keyFile), { recursive: true });
+    const keys = [...new Set(results.flatMap((r) => r.keys || []))].sort();
+    fs.writeFileSync(keyFile, keys.length ? `${keys.join('\n')}\n` : '');
+  }
+  console.log(
+    JSON.stringify({
+      by,
+      total: results.length,
+      changed: changed.length,
+      keyCount: results.flatMap((r) => r.keys || []).length,
+      probeOnly: PROBE_ONLY,
+    })
+  );
+  if (failed.length) {
+    console.error(
+      failed
+        .map(
+          (r) =>
+            `[${r.result}] ${r.slug}/${r.base}: ${r.err || 'no canonical points'}`
+        )
+        .join('\n')
+    );
+    process.exitCode = 1;
+  }
 }
 main();

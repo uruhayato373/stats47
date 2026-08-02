@@ -31,8 +31,9 @@ model: sonnet
 | `build-lineage-queue.mjs` | 全SVGのデータ系譜を棚卸し→復元キュー生成（`.claude/state/blog/svg-lineage-queue.json`）。系譜整備の真実源 |
 
 > **★アスペクト比統一（再発防止）**: チャート生成・是正後は **カタログ別の正規 viewBox 幅**（§5）を守ること。
-> `quality-gate.mjs` / `audit-chart-quality.mjs` の `lintSvgSize` が ranking=960/680・tilemap=780・findings=960 を
-> **blocker** で検査する（scatter/line/stacked は warn・順次統一）。非正規サイズを作らない／見つけたら上記ツールで再描画する。
+> `quality-gate.mjs` / `audit-chart-quality.mjs` の `lintSvgSize` が ranking=960/680・tilemap=720・scatter=720・findings=960 を
+> **blocker** で検査する。散布図は `lintScatterQuality` で 720×720・正方形プロット・単色・凡例なしも固定する。
+> 非正規サイズを作らない／見つけたら上記ツールで再描画する。
 
 ## 担当外
 

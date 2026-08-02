@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * recurrence guard: AdSense 広告枠の配置崩れ
+ * recurrence guard: 広告枠と右レールの配置崩れ
  *
  * 2026-07-29 の全 23 ルート棚卸しで、面ごとに次の崩れが混入していた:
  *   - `/ranking` `/themes` `/survey` `/tag` で記事内広告とフッター広告が「間にコンテンツ 0」で隣接
@@ -9,12 +9,13 @@
  *   - `/areas` `/blog/tags` `/search` が slot 部品を通さず AdSenseAd を直叩き
  *     (`/areas` は ranking 詳細用の定数を流用していた)
  *   - `COMPARE_PAGE_SIDEBAR` が参照ゼロのまま残存
+ *   - 右レールに独立スクロールと独自テキスト PR が入り、本文と別操作になっていた
  *
  * 規約自体は既にあった (InContentAdSlot の docstring / docs/01_技術設計/04_デザインシステム.md /
  * .claude/rules/affiliate-ads-standards.md) が、コードで強制されていなかったため少しずつ崩れた。
  *
- * ★対象は「app 配下のページファイルに直接書かれた広告」だけ。RightRailWidgets / ThemePageLayout /
- *   CityPageFooter 経由で間接的に入る広告はファイル横断なので静的には追えない。
+ * ★広告隣接検査の対象は「app 配下のページファイルに直接書かれた広告」だけ。
+ *   右レール契約は共有 shell / widget と既知の ranking / blog rail を別途ファイル横断で検査する。
  *   ページ単位の完全な検査が要るなら、レンダリング後の `.ad-container` を数える e2e に上げること
  *   (プレースホルダーも本番と同じ `.ad-container` を出すので dev でも数えられる)。
  *
@@ -30,6 +31,16 @@ const PROJECT_ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "
 const APP_DIR = path.join(PROJECT_ROOT, "apps/web/src/app");
 const SRC_DIR = path.join(PROJECT_ROOT, "apps/web/src");
 const CONSTANTS_FILE = path.join(SRC_DIR, "lib/google-adsense/constants.ts");
+
+const RIGHT_RAIL_FILES = {
+  articleShell: "apps/web/src/components/layout/ArticleShell.tsx",
+  sharedWidgets: "apps/web/src/components/rail/RightRailWidgets.tsx",
+  areaProfile: "apps/web/src/features/area-profile/components/AreaProfileSidebar.tsx",
+  ranking: "apps/web/src/features/ranking/components/RankingKeyPage/RankingPageSidebarSection.tsx",
+  blog: "apps/web/src/app/blog/[slug]/page.tsx",
+  affiliateSlot: "apps/web/src/features/ads/components/AffiliateAdSlot.tsx",
+  promoBanner: "apps/web/src/features/ads/components/SidebarPromoBanner.tsx",
+};
 
 /** 広告枠を描画するコンポーネント。隣接判定の対象。 */
 const AD_COMPONENTS = [
@@ -80,6 +91,41 @@ function listFiles(dir, ext, out = []) {
 /** コメントを除去する。JSX コメント `{/* ... *\/}` は `{}` が残るだけで括弧は釣り合う。 */
 function stripComments(text) {
   return text.replace(/\/\*[\s\S]*?\*\//g, "");
+}
+
+function readRequiredSource(rel) {
+  const abs = path.join(PROJECT_ROOT, rel);
+  if (!fs.existsSync(abs)) {
+    errors.push(`${rel}\n   右レール契約の検査対象ファイルが見つからない。移動時は guard も更新すること。`);
+    return "";
+  }
+  return fs.readFileSync(abs, "utf8");
+}
+
+function checkForbiddenPatterns(rel, src, patterns) {
+  for (const { pattern, message } of patterns) {
+    if (pattern.test(src)) errors.push(`${rel}\n   ${message}`);
+  }
+}
+
+function findPromotionalTags(src) {
+  return [
+    ...src.matchAll(
+      /<([A-Z][A-Za-z0-9]*(?:Promo|Affiliate|Furusato|TextAd)[A-Za-z0-9]*)\b/g,
+    ),
+  ].map((match) => match[1]);
+}
+
+function checkAllowedPromotionalTags(rel, src, allowed) {
+  const invalid = [...new Set(findPromotionalTags(src))].filter(
+    (name) => !allowed.has(name),
+  );
+  if (invalid.length > 0) {
+    errors.push(
+      `${rel}\n   右レールに画像バナー契約外の PR component がある: ${invalid.join(", ")}。\n` +
+        "   PR は SidebarPromoBanner / bannerOnly の AffiliateAdSlot を使うこと。",
+    );
+  }
 }
 
 /**
@@ -170,7 +216,89 @@ for (const abs of listFiles(APP_DIR, ".tsx")) {
 }
 
 // ---------------------------------------------------------------------------
-// 検査 5: 参照ゼロの slot 定数
+// 検査 5-6: 右レールはページ scroll + 画像 PR のみ
+// ---------------------------------------------------------------------------
+const noIndependentScroll = [
+  {
+    pattern: /overflow-y-(?:auto|scroll)/,
+    message:
+      "右レールに overflow-y-auto/scroll がある。ページ本体の scroll だけで全内容へ到達させること。",
+  },
+  {
+    pattern: /max-h-\[(?:calc\(100vh|40vh)/,
+    message:
+      "右レールに viewport 高さ制限がある。独立 scroll の再導入につながるため自然高にすること。",
+  },
+];
+
+const articleShell = stripComments(readRequiredSource(RIGHT_RAIL_FILES.articleShell));
+const sharedWidgets = stripComments(readRequiredSource(RIGHT_RAIL_FILES.sharedWidgets));
+const areaProfile = stripComments(readRequiredSource(RIGHT_RAIL_FILES.areaProfile));
+const rankingRail = stripComments(readRequiredSource(RIGHT_RAIL_FILES.ranking));
+const blogPage = readRequiredSource(RIGHT_RAIL_FILES.blog);
+const affiliateSlot = stripComments(readRequiredSource(RIGHT_RAIL_FILES.affiliateSlot));
+const promoBanner = stripComments(readRequiredSource(RIGHT_RAIL_FILES.promoBanner));
+
+checkForbiddenPatterns(RIGHT_RAIL_FILES.articleShell, articleShell, noIndependentScroll);
+checkForbiddenPatterns(RIGHT_RAIL_FILES.sharedWidgets, sharedWidgets, noIndependentScroll);
+checkForbiddenPatterns(RIGHT_RAIL_FILES.areaProfile, areaProfile, noIndependentScroll);
+
+if (!/<SidebarPromoBanner\b/.test(sharedWidgets)) {
+  errors.push(
+    `${RIGHT_RAIL_FILES.sharedWidgets}\n   共通右レールに登録済み画像バナー SidebarPromoBanner がない。`,
+  );
+}
+checkAllowedPromotionalTags(
+  RIGHT_RAIL_FILES.sharedWidgets,
+  sharedWidgets,
+  new Set(["SidebarPromoBanner"]),
+);
+
+if (!/<SidebarPromoBanner\b/.test(rankingRail)) {
+  errors.push(`${RIGHT_RAIL_FILES.ranking}\n   ranking 右レールに画像バナーがない。`);
+}
+if (!/<AffiliateAdSlot[\s\S]*?\bbannerOnly\b[\s\S]*?\/>/.test(rankingRail)) {
+  errors.push(
+    `${RIGHT_RAIL_FILES.ranking}\n   AffiliateAdSlot に bannerOnly がない。テキスト広告へ戻さないこと。`,
+  );
+}
+checkAllowedPromotionalTags(
+  RIGHT_RAIL_FILES.ranking,
+  rankingRail,
+  new Set(["SidebarPromoBanner", "AffiliateAdSlot"]),
+);
+
+const blogRailStart = blogPage.indexOf("const rail = (");
+const blogRailEnd = blogPage.indexOf("// レール末尾", blogRailStart);
+if (blogRailStart < 0 || blogRailEnd <= blogRailStart) {
+  errors.push(
+    `${RIGHT_RAIL_FILES.blog}\n   blog 右レールの静的範囲を特定できない。構造変更時は guard も更新すること。`,
+  );
+} else {
+  const blogRail = stripComments(blogPage.slice(blogRailStart, blogRailEnd));
+  if (!/<SidebarPromoBanner\b/.test(blogRail)) {
+    errors.push(`${RIGHT_RAIL_FILES.blog}\n   blog 右レールに画像バナーがない。`);
+  }
+  checkAllowedPromotionalTags(
+    RIGHT_RAIL_FILES.blog,
+    blogRail,
+    new Set(["SidebarPromoBanner"]),
+  );
+}
+
+if (!/\bbannerOnly\?: boolean/.test(affiliateSlot) || !/if \(!bannerOnly\)/.test(affiliateSlot)) {
+  errors.push(
+    `${RIGHT_RAIL_FILES.affiliateSlot}\n   bannerOnly の型または text fallback guard がない。`,
+  );
+}
+if (!/<BannerAd\b/.test(promoBanner)) {
+  errors.push(
+    `${RIGHT_RAIL_FILES.promoBanner}\n   SidebarPromoBanner が BannerAd を描画していない。`,
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 検査 7: 参照ゼロの slot 定数
 // ---------------------------------------------------------------------------
 const srcFiles = listFiles(SRC_DIR, ".ts").concat(listFiles(SRC_DIR, ".tsx"));
 for (const [name] of slotFormats) {
@@ -193,5 +321,5 @@ if (errors.length > 0) {
   process.exit(1);
 }
 console.log(
-  "✓ ad placement guard: 広告の隣接・rail 部品誤用・生 AdSenseAd・死んだ slot 定数なし",
+  "✓ ad placement guard: 広告配置・右レール画像/scroll契約・slot 定数に違反なし",
 );

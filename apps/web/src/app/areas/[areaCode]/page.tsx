@@ -120,7 +120,6 @@ export default async function AreaProfilePage({ params }: PageProps) {
             <PageShell
                 rightRail={
                     <RightRailWidgets
-                        furusatoAreaCode={areaCode}
                         topWidgets={
                             <AreaProfileSidebar
                                 strengths={profile.strengths}

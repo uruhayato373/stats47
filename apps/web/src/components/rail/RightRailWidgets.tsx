@@ -1,17 +1,14 @@
 import { type ReactNode } from "react";
 
 import {
-  FurusatoNozeiCard,
   RailAdSlot,
   SidebarPromoBanner,
-  TechSchoolPromoCard,
+  selectPromoBannerIndexForRanking,
 } from "@/features/ads";
 
 import { RANKING_PAGE_SIDEBAR, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 
 interface RightRailWidgetsProps {
-  /** ふるさと納税 widget の都道府県コード (省略時は表示しない) */
-  furusatoAreaCode?: string;
   /** 上部に挿入する追加 widget (関連ランキング・関連記事など) */
   topWidgets?: ReactNode;
   /** 中部に挿入する追加 widget */
@@ -22,18 +19,10 @@ interface RightRailWidgetsProps {
   showBottomAd?: boolean;
   /** AdSense Rectangle (上部) を表示するか (default: true) */
   showTopAd?: boolean;
-  /** Claude Code 講座カードを表示するか (default: true) */
-  showTechSchool?: boolean;
   /** 高単価アフィリエイトバナーを表示するか (default: true) */
   showPromoBanner?: boolean;
-  /** 表示する SIDEBAR_PROMO_BANNERS の index (default: 0 = STRATEGY CAREER) */
+  /** 表示する SIDEBAR_PROMO_BANNERS の index (default: 汎用画像バナー) */
   promoBannerIndex?: number;
-  /**
-   * 独立スクロール (xl で sticky + `max-h+overflow-auto`) を有効にするか (default: false)。
-   * 既定は自然フロー = レールが本文と一緒にスクロールする（本文を主役にするため）。
-   * sticky にすると max-h+overflow が必須になる（フッター消失防止 / ui-components.md）。
-   */
-  stickyScroll?: boolean;
 }
 
 /**
@@ -41,50 +30,39 @@ interface RightRailWidgetsProps {
  *
  * 配置順 (本文関連 widget を上・promo/広告を下):
  *   1. topWidgets / midWidgets / bottomWidgets (関連ランキング・関連記事など)
- *   2. ふるさと納税 (furusatoAreaCode 指定時)
  *   ── 区切り ──
- *   3. promo 群 (運営者カード / Claude Code 講座 / アフィリエイトバナー)
- *   4. AdSense Rectangle (上 → 下)
+ *   2. 画像アフィリエイトバナー
+ *   3. AdSense Rectangle (上 → 下)
  *
- * 既定は自然フロー（sticky/独立スクロールなし）。本文を主役にするため促進系を下げている。
+ * 右レールの PR は登録済み画像バナーに限定し、独自テキストカードを置かない。
+ * 自然フロー（sticky/独立スクロールなし）。本文を主役にするため促進系を下げている。
  * 設計仕様: docs/01_技術設計/04_デザインシステム.md
  */
 export async function RightRailWidgets({
-  furusatoAreaCode,
   topWidgets,
   midWidgets,
   bottomWidgets,
   showBottomAd = true,
   showTopAd = true,
-  showTechSchool = true,
   showPromoBanner = true,
-  promoBannerIndex = 0,
-  stickyScroll = false,
+  promoBannerIndex = selectPromoBannerIndexForRanking(),
 }: RightRailWidgetsProps) {
-  const scrollClass = stickyScroll
-    ? "xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1"
-    : "";
-
-  const hasContent =
-    !!topWidgets || !!midWidgets || !!bottomWidgets || !!furusatoAreaCode;
-  const hasPromoOrAds =
-    showTechSchool || showPromoBanner || showTopAd || showBottomAd;
+  const hasContent = !!topWidgets || !!midWidgets || !!bottomWidgets;
+  const hasPromoOrAds = showPromoBanner || showTopAd || showBottomAd;
 
   return (
-    <div className={`flex flex-col gap-3 ${scrollClass}`}>
+    <div className="flex flex-col gap-3">
       {/* 本文関連 widget（主役） */}
       {topWidgets}
       {midWidgets}
       {bottomWidgets}
-      {furusatoAreaCode && <FurusatoNozeiCard areaCode={furusatoAreaCode} />}
 
       {/* 区切り: 本文関連と promo/広告の境界 */}
       {hasContent && hasPromoOrAds && (
         <hr className="my-1 border-t border-border" />
       )}
 
-      {/* promo 群（本文関連の下へ降格） */}
-      {showTechSchool && <TechSchoolPromoCard />}
+      {/* PR は ASP 登録済みの画像バナーだけを表示する */}
       {showPromoBanner && <SidebarPromoBanner index={promoBannerIndex} />}
 
       {/* AdSense（収益枠は維持・最下部）。RailAdSlot に統一 */}

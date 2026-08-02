@@ -105,7 +105,7 @@ node scripts/temp-generate-charts.mjs
 | 属性 | 値 |
 |---|---|
 | `width`/`height` | **`viewBox` の幅・高さと一致させること**（不一致だと `preserveAspectRatio` で左右に余白ができる） |
-| `viewBox` | 論理座標。ランキング横長(columns・ブログ/X): `0 0 960 404`（上位5+下位5）, ランキング縦長(portrait・IG `-ig.svg`): `0 0 1080 1350`（4:5）, 折れ線: `0 0 680 420`, 散布図: `0 0 960 624`, タイルグリッド: `0 0 600 700`。※手書き値ではなく svg-builder が自動付与 |
+| `viewBox` | 論理座標。ランキング横長(columns・ブログ/X): `0 0 960 404`（上位5+下位5）, ランキング縦長(portrait・IG `-ig.svg`): `0 0 1080 1350`（4:5）, 折れ線: `0 0 680 420`, 散布図: `0 0 720 720`, タイルグリッド: `0 0 720 720`。※手書き値ではなく svg-builder が自動付与 |
 | `rx` | バー/折れ線: `8`, タイルグリッド: なし |
 | `font-family` | `'Hiragino Sans','Noto Sans JP',sans-serif`（タイルグリッド内テキストは `'Noto Sans JP',sans-serif`） |
 
@@ -135,7 +135,7 @@ node scripts/temp-generate-charts.mjs
 | 青（男性・出生） | `#90caf9` → `#42a5f5` → `#1565c0` |
 | 赤（女性・死亡） | `#ef9a9a` → `#ef5350` → `#b71c1c` |
 | 緑（正・増加） | `#a5d6a7` → `#2e7d32` |
-| 散布図ドット | `fill="#6b8fc9" fill-opacity="0.8" stroke="#3b6fa0"` |
+| 散布図ドット | `fill="#64748b" fill-opacity="0.85" stroke="#475569"`（全点同色） |
 | 平均線 | `stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"` |
 
 **コロプレスマップ（段階色）:**
@@ -230,7 +230,7 @@ JSON で制御できるオプション（`data/*-ranking.json` のオブジェ�
 <text x="{startX+item1W+44}" y="{ly+4}" font-size="11" fill="{color2}">系列2</text>
 ```
 
-- 散布図でドット色が地方ブロック別の場合、凡例は2〜3行に分けてもよい
+- 散布図は全点同色の単一系列なので凡例を付けない
 - 凡例が1系列のみの場合は省略可（タイトルで自明な場合）
 
 #### タイルグリッドマップ
@@ -327,8 +327,8 @@ const tileGrid = TILE_GRID_LAYOUT.map(c => ({
 <rect x="{ml}" y="{mt}" width="{pw}" height="{ph}" fill="#f9fafb" stroke="#d1d5db"/>
 <!-- 平均線（4象限分割） -->
 <line ... stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
-<!-- ドット -->
-<circle cx="{x}" cy="{y}" r="4.5" fill="{地方色}" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+<!-- ドット（全点同色） -->
+<circle cx="{x}" cy="{y}" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1">
   <title>{県名}：X={xVal} Y={yVal}</title>
 </circle>
 <!-- 注目県のラベル -->
@@ -342,31 +342,17 @@ const tileGrid = TILE_GRID_LAYOUT.map(c => ({
 **散布図の軸ラベル（必須ルール）**:
 - X軸・Y軸の両方に「指標名（年度）」形式のラベルを必ず付ける
 - 散布図は2つの異なるデータを組み合わせるため、年次が異なることが多い。軸ラベルで明示する
-- viewBox の高さを +20px 程度拡張して X軸ラベルのスペースを確保する
-
-**散布図の凡例（共通ルール）**:
-- 凡例は必ず **下側中央** に配置する（上部やプロットエリア内に置かない）
-- viewBox の高さを凡例分（+24px）拡張してスペースを確保する
-- `svg-builder` の `generateScatterSvg` を使う場合: `colorByRegion: true` で自動配置される
-- 手書き SVG の場合: X軸ラベルの下、SVG 下端から 14px 上に横並びで中央揃え
-
-地方ブロック色:
-```
-北海道・東北: #42a5f5    関東: #66bb6a    中部: #fdd835
-近畿: #ffa726            中国・四国: #ef5350    九州・沖縄: #ab47bc
-```
+- キャンバスと実プロット領域をどちらも正方形にし、X軸ラベルは下部余白内に置く
+- 地域別の色分けは行わない。相関を読む単一系列なので凡例も表示しない
 
 `svg-builder` での使い方:
 ```ts
-import { generateScatterSvg, REGION_BLOCKS } from "@stats47/svg-builder";
+import { generateScatterSvg } from "@stats47/svg-builder";
 
-// 標準6ブロック色分け + 下部中央凡例
 const svg = generateScatterSvg(points, {
   title: "...",
   xLabel: "...",
   yLabel: "...",
-  colorByRegion: true,         // REGION_BLOCKS を使用
-  // colorByRegion: REGION_BLOCKS, // 同じ結果（カスタム定義も可）
 });
 ```
 

@@ -11,6 +11,7 @@
 | Security Scan | PR/Push、毎週日曜0時、手動 | npm audit、CodeQL分析 |
 | AI Content Daily (`ai-content-generate-daily.yml`) | 毎日3時JST、手動、request push | Claude Code OAuthでランキング本文を生成し、audit・独立critic・件数照合後に公開workflowを起動 |
 | Blog Generate Daily (`blog-generate-daily.yml`) | 毎日4時30分JST、手動、request push | 接地後にClaude Code OAuthで記事を執筆し、factual・quality・独立critic・件数照合後に公開workflowを起動 |
+| Regenerate Blog SVGs (`regenerate-blog-svgs.yml`) | 手動 | `all` は既存JSONから全チャートを再描画。`scatter-canonical` は散布図71件だけを正方形・単色で再描画し、欠損2件を一次ソースから復元。dry-run確認後、明示keyだけR2へ反映 |
 | Google Admin settings (`google-admin-settings.yml`) | 毎週月曜5時JST (schedule)、手動 (audit/plan/apply) | GA4 Admin API / GSC / AdSense を read-only 監査。dispatch の `apply` だけが protected Environment `google-admin-production` で GA4 custom dimension を 1 件作成。正典: `.claude/scripts/google-admin/README.md` |
 
 ### ブランチ戦略
@@ -245,6 +246,7 @@ GitHub Actionsのキャッシュが古い場合:
 以下のワークフローは手動実行可能（`workflow_dispatch`）:
 - Security Scan
 - Upload Area Data to R2
+- Regenerate Blog SVGs（R2反映は `dry_run=false` を明示）
 
 **実行方法**:
 1. GitHub > Actions > 対象ワークフロー選択
