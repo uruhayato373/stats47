@@ -28,12 +28,6 @@ interface RightRailWidgetsProps {
   showPromoBanner?: boolean;
   /** 表示する SIDEBAR_PROMO_BANNERS の index (default: 0 = STRATEGY CAREER) */
   promoBannerIndex?: number;
-  /**
-   * 独立スクロール (xl で sticky + `max-h+overflow-auto`) を有効にするか (default: false)。
-   * 既定は自然フロー = レールが本文と一緒にスクロールする（本文を主役にするため）。
-   * sticky にすると max-h+overflow が必須になる（フッター消失防止 / ui-components.md）。
-   */
-  stickyScroll?: boolean;
 }
 
 /**
@@ -46,7 +40,7 @@ interface RightRailWidgetsProps {
  *   3. promo 群 (運営者カード / Claude Code 講座 / アフィリエイトバナー)
  *   4. AdSense Rectangle (上 → 下)
  *
- * 既定は自然フロー（sticky/独立スクロールなし）。本文を主役にするため促進系を下げている。
+ * 自然フロー（sticky/独立スクロールなし）。本文を主役にするため促進系を下げている。
  * 設計仕様: docs/01_技術設計/04_デザインシステム.md
  */
 export async function RightRailWidgets({
@@ -59,19 +53,14 @@ export async function RightRailWidgets({
   showTechSchool = true,
   showPromoBanner = true,
   promoBannerIndex = 0,
-  stickyScroll = false,
 }: RightRailWidgetsProps) {
-  const scrollClass = stickyScroll
-    ? "xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1"
-    : "";
-
   const hasContent =
     !!topWidgets || !!midWidgets || !!bottomWidgets || !!furusatoAreaCode;
   const hasPromoOrAds =
     showTechSchool || showPromoBanner || showTopAd || showBottomAd;
 
   return (
-    <div className={`flex flex-col gap-3 ${scrollClass}`}>
+    <div className="flex flex-col gap-3">
       {/* 本文関連 widget（主役） */}
       {topWidgets}
       {midWidgets}
