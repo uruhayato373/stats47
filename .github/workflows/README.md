@@ -4,14 +4,14 @@
 
 ### GitHub Actions
 
-| ワークフロー | トリガー | 実行内容 |
-|------------|---------|---------|
-| PR Quality Check | PR作成・更新 (main) | Lint、Type Check、Unit Test、Coverage、Build、Playwright E2E |
-| Deploy to Cloudflare Workers | Push (main) | Build、認証確認、デプロイ、ヘルスチェック |
-| Security Scan | PR/Push、毎週日曜0時、手動 | npm audit、CodeQL分析 |
-| AI Content Daily (`ai-content-generate-daily.yml`) | 毎日3時JST、手動、request push | Claude Code OAuthでランキング本文を生成し、audit・独立critic・件数照合後に公開workflowを起動 |
-| Blog Generate Daily (`blog-generate-daily.yml`) | 毎日4時30分JST、手動、request push | 接地後にClaude Code OAuthで記事を執筆し、factual・quality・独立critic・件数照合後に公開workflowを起動 |
-| Regenerate Blog SVGs (`regenerate-blog-svgs.yml`) | 手動 | `all` は既存JSONから全チャートを再描画。`scatter-canonical` は散布図71件だけを正方形・単色で再描画し、欠損2件を一次ソースから復元。dry-run確認後、明示keyだけR2へ反映 |
+| ワークフロー                                        | トリガー                                           | 実行内容                                                                                                                                                                                                        |
+| --------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PR Quality Check                                    | PR作成・更新 (main)                                | Lint、Type Check、Unit Test、Coverage、Build、Playwright E2E                                                                                                                                                    |
+| Deploy to Cloudflare Workers                        | Push (main)                                        | Build、認証確認、デプロイ、ヘルスチェック                                                                                                                                                                       |
+| Security Scan                                       | PR/Push、毎週日曜0時、手動                         | npm audit、CodeQL分析                                                                                                                                                                                           |
+| AI Content Daily (`ai-content-generate-daily.yml`)  | 毎日3時JST、手動、request push                     | Claude Code OAuthでランキング本文を生成し、audit・独立critic・件数照合後に公開workflowを起動                                                                                                                    |
+| Blog Generate Daily (`blog-generate-daily.yml`)     | 毎日4時30分JST、手動、request push                 | 接地後にClaude Code OAuthで記事を執筆し、factual・quality・独立critic・件数照合後に公開workflowを起動                                                                                                           |
+| Regenerate Blog SVGs (`regenerate-blog-svgs.yml`)   | 手動                                               | `all` は既存JSONから全チャートを再描画。`scatter-canonical` は散布図71件を正方形・単色で再描画し、破損2件のデータと旧5件の出典manifestを一次ソース照合後に復旧。dry-run確認後、明示keyだけR2へ反映              |
 | Google Admin settings (`google-admin-settings.yml`) | 毎週月曜5時JST (schedule)、手動 (audit/plan/apply) | GA4 Admin API / GSC / AdSense を read-only 監査。dispatch の `apply` だけが protected Environment `google-admin-production` で GA4 custom dimension を 1 件作成。正典: `.claude/scripts/google-admin/README.md` |
 
 ### ブランチ戦略
@@ -22,6 +22,7 @@ feature/* → PR作成 → 品質チェック
 ```
 
 **並列実行制御**:
+
 - 同じPRに対する複数実行は最新のみ実行（古いものは自動キャンセル）
 
 ## GitHub Actions の設定値
@@ -33,26 +34,26 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 
 定期監視のdomain alertは、日付ごとにIssueを増やさず1件を最新状態へ更新し、正常復帰した実行で自動Closeする。PRでは `npm run test:alert-lifecycle` がこの契約を検査する。PSI・GSC URL Inspection・Cloudflareの生snapshotは `npm run state:snapshots:prune` でそれぞれ最新1・7・30件に限定し、`history.csv`、`LATEST`、queue、台帳は削除しない。
 
-| Secret | 用途 | 形式 |
-|--------|------|------|
-| `CLOUDFLARE_API_TOKEN` | Cloudflareデプロイ認証 | 40文字の英数字（Workers Scripts、D1、R2の編集権限が必要） |
-| `AUTH_SECRET` | NextAuth認証シークレット | 32文字以上のランダム文字列 |
-| `CLAUDE_CODE_OAUTH_TOKEN` | `ai-content-generate-daily.yml` / `blog-generate-daily.yml` の Claude Code 認証。ローカルで `claude setup-token` を実行して発行し、Repository Secret に登録する | OAuth token。Variable やログへ出さない |
+| Secret                    | 用途                                                                                                                                                            | 形式                                                      |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`    | Cloudflareデプロイ認証                                                                                                                                          | 40文字の英数字（Workers Scripts、D1、R2の編集権限が必要） |
+| `AUTH_SECRET`             | NextAuth認証シークレット                                                                                                                                        | 32文字以上のランダム文字列                                |
+| `CLAUDE_CODE_OAUTH_TOKEN` | `ai-content-generate-daily.yml` / `blog-generate-daily.yml` の Claude Code 認証。ローカルで `claude setup-token` を実行して発行し、Repository Secret に登録する | OAuth token。Variable やログへ出さない                    |
 
 ### Repository Variables
 
-| Variable | 用途 |
-|----------|------|
-| `CLOUDFLARE_ACCOUNT_ID` | Cloudflareアカウント識別 |
-| `CLOUDFLARE_ZONE_ID` | CDN purge対象zone |
-| `CLOUDFLARE_R2_BUCKET_NAME` | R2バケット名 |
-| `GA4_PROPERTY_ID` | GA4 property識別 |
-| `GOOGLE_ADSENSE_ACCOUNT_ID` | AdSense account assert |
-| `GOOGLE_ADSENSE_CLIENT_ID` | AdSense OAuth client識別子 |
-| `INSTAGRAM_BUSINESS_ACCOUNT_ID` | Instagram Graph APIのbusiness account識別 |
-| `NEXT_PUBLIC_ESTAT_APP_ID` | e-Stat API アプリケーションID |
-| `NEXT_PUBLIC_BASE_URL_PRODUCTION` | 本番環境URL（例: https://stats47.jp） |
-| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | 本番環境 Google Analytics測定ID |
+| Variable                          | 用途                                      |
+| --------------------------------- | ----------------------------------------- |
+| `CLOUDFLARE_ACCOUNT_ID`           | Cloudflareアカウント識別                  |
+| `CLOUDFLARE_ZONE_ID`              | CDN purge対象zone                         |
+| `CLOUDFLARE_R2_BUCKET_NAME`       | R2バケット名                              |
+| `GA4_PROPERTY_ID`                 | GA4 property識別                          |
+| `GOOGLE_ADSENSE_ACCOUNT_ID`       | AdSense account assert                    |
+| `GOOGLE_ADSENSE_CLIENT_ID`        | AdSense OAuth client識別子                |
+| `INSTAGRAM_BUSINESS_ACCOUNT_ID`   | Instagram Graph APIのbusiness account識別 |
+| `NEXT_PUBLIC_ESTAT_APP_ID`        | e-Stat API アプリケーションID             |
+| `NEXT_PUBLIC_BASE_URL_PRODUCTION` | 本番環境URL（例: https://stats47.jp）     |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID`   | 本番環境 Google Analytics測定ID           |
 
 移行中の `CLOUDFLARE_ZONE_ID` / `INSTAGRAM_BUSINESS_ACCOUNT_ID` /
 `GOOGLE_ADSENSE_CLIENT_ID` だけは、Variable 未登録時に同名の旧Secretへフォールバックする。
@@ -60,10 +61,10 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 
 ### オプション
 
-| Secret | 用途 |
-|--------|------|
-| `CODECOV_TOKEN` | カバレッジアップロード（オプション） |
-| `SLACK_WEBHOOK_URL` | Slack通知（オプション） |
+| Secret                                  | 用途                                                                                                                                                                                                                                                                                       |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CODECOV_TOKEN`                         | カバレッジアップロード（オプション）                                                                                                                                                                                                                                                       |
+| `SLACK_WEBHOOK_URL`                     | Slack通知（オプション）                                                                                                                                                                                                                                                                    |
 | `GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON` | GA4 custom dimension 作成用の `analytics.edit` サービスアカウント鍵。**Environment `google-admin-production` の secret** として登録し、`google-admin-settings.yml` の `apply` job だけが参照する（required reviewer 承認が要る・人間工程）。正典: `.claude/scripts/google-admin/README.md` |
 
 `CLAUDE_CODE_OAUTH_TOKEN` が未登録または失効している場合、生成対象がある日次 routine は
@@ -93,6 +94,7 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
    - 失敗時を含め、HTMLレポートとtest-resultsを30日間保存
 
 **並列実行制御**:
+
 - 同じPRの古い実行は自動的にキャンセルされ、最新のコミットのみが実行されます
 
 ## デプロイフロー
@@ -139,17 +141,20 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 ### CI失敗時の対処
 
 #### 型エラー（Type Check失敗）
+
 ```bash
 # ローカルで型チェックを実行
 npx tsc --noEmit --skipLibCheck
 ```
 
 **よくある原因**:
+
 - 型定義の不一致
 - importパスの誤り
 - 未定義の型を使用
 
 #### Lintエラー（ESLint失敗）
+
 ```bash
 # ローカルでLintを実行
 npm run lint
@@ -159,11 +164,13 @@ npm run lint:fix
 ```
 
 **よくある原因**:
+
 - コーディング規約違反
 - 未使用の変数やimport
 - console.logの残存
 
 #### テスト失敗
+
 ```bash
 # ローカルでテストを実行
 npm run test:run
@@ -173,11 +180,13 @@ npm run test:coverage
 ```
 
 **よくある原因**:
+
 - 変更により既存のテストが壊れた
 - 新しいコードにテストが不足
 - モックの設定ミス
 
 #### ビルドエラー
+
 ```bash
 # ローカルでビルドを実行
 npm run build
@@ -187,6 +196,7 @@ npm run workers:build
 ```
 
 **よくある原因**:
+
 - 環境変数の不足
 - 依存関係の問題
 - Next.jsの設定ミス
@@ -198,6 +208,7 @@ npm run workers:build
 **エラーメッセージ**: `❌ 認証失敗: Cloudflare APIトークンが無効または権限が不足しています`
 
 **解決方法**:
+
 1. Cloudflare Dashboard > My Profile > API Tokens で新しいトークンを作成
 2. 以下の権限を設定:
    - Account - Workers Scripts - Read
@@ -212,6 +223,7 @@ npm run workers:build
 **エラーメッセージ**: `⚠️ 警告: APIトークンの形式が期待と異なります`
 
 **確認事項**:
+
 - API Tokenは40文字の英数字、ハイフン、アンダースコアであること
 - Account IDは32文字の16進数であること
 
@@ -220,6 +232,7 @@ npm run workers:build
 **エラーメッセージ**: `.open-next/` ディレクトリが見つからない
 
 **解決方法**:
+
 ```bash
 # ローカルでビルドを確認
 npm run workers:build
@@ -244,11 +257,13 @@ GitHub Actionsのキャッシュが古い場合:
 ### 手動実行
 
 以下のワークフローは手動実行可能（`workflow_dispatch`）:
+
 - Security Scan
 - Upload Area Data to R2
 - Regenerate Blog SVGs（R2反映は `dry_run=false` を明示）
 
 **実行方法**:
+
 1. GitHub > Actions > 対象ワークフロー選択
 2. 「Run workflow」ボタンをクリック
 3. ブランチを選択して実行
@@ -257,12 +272,14 @@ GitHub Actionsのキャッシュが古い場合:
 
 **ワークフロー**: `security-scan.yml`
 **実行タイミング**:
+
 - PR作成・更新時（main）
 - Push時（main）
 - 毎週日曜日 0時（UTC）
 - 手動実行
 
 **チェック内容**:
+
 1. `npm audit` - 依存関係の脆弱性チェック（moderate以上）
 2. CodeQL分析 - コードの静的解析（JavaScript/TypeScript）
 

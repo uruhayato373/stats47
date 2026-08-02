@@ -22,7 +22,7 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
 - **置換**: 企画 → `/draft-from-trend` の metric 選定に統合 / データ接地 → `fetch-ranking-data-r2.mjs` (R2直) / brushup キュー → `.claude/state/blog/remediation-queue.json` (`brushup-queue.md` は廃止)。
 - 新規記事の生成・公開はクラウド版でも完結する (git push → push トリガー CI が R2 反映。R2 直書きは CI 専用)。
 
-## 1. data/*.json 統一 schema (Phase B で実装、ここでは規約のみ宣言)
+## 1. data/\*.json 統一 schema (Phase B で実装、ここでは規約のみ宣言)
 
 `.local/r2/app/blog/<slug>/data/*.json` の **統一 schema** (Phase B 完了後の状態):
 
@@ -47,11 +47,11 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 
 **現状 (Phase B 前) の 3 種共存** (探索結果より):
 
-| Schema 形式 | 構造例 | label 位置 | unit 位置 |
-|---|---|---|---|
-| flat array | `[{areaName, rank, value, unit}]` | item 内 (空 or なし) | item 内 |
-| nested-metrics | `{rankings: {label, unit, data: [{rank, value}]}}` | wrapper | wrapper |
-| timeseries | `{series: {label, data: [{year, value}]}}` | wrapper | なし ❌ |
+| Schema 形式    | 構造例                                             | label 位置           | unit 位置 |
+| -------------- | -------------------------------------------------- | -------------------- | --------- |
+| flat array     | `[{areaName, rank, value, unit}]`                  | item 内 (空 or なし) | item 内   |
+| nested-metrics | `{rankings: {label, unit, data: [{rank, value}]}}` | wrapper              | wrapper   |
+| timeseries     | `{series: {label, data: [{year, value}]}}`         | wrapper              | なし ❌   |
 
 3 種が混在することで `article-factual-check.mjs` の `walkAndIndex()` が label/unit を完全 index 化できず、value mismatch detector が実装不能になっている (2026-05-27 検出力テスト: rank 系 100% / value 系 0%)。
 
@@ -64,11 +64,11 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 
 ### 3点セット (1 ランキング = basename 共通の 3 ファイル)
 
-| ファイル | 役割 | 必須 |
-|---|---|---|
-| `data/<name>.source.json` | **出典 manifest**（復元用） | ✅ |
-| `data/<name>.json` | 型付きデータ（§1 統一 schema） | ✅ |
-| `data/<name>.svg`（横長）+ `data/<name>-ig.svg`（縦長） | データから決定的生成 | ✅ |
+| ファイル                                                | 役割                           | 必須 |
+| ------------------------------------------------------- | ------------------------------ | ---- |
+| `data/<name>.source.json`                               | **出典 manifest**（復元用）    | ✅   |
+| `data/<name>.json`                                      | 型付きデータ（§1 統一 schema） | ✅   |
+| `data/<name>.svg`（横長）+ `data/<name>-ig.svg`（縦長） | データから決定的生成           | ✅   |
 
 - **永続SSOT = R2 `app/blog/<slug>/data/`**（作業中は docs/21、公開後は R2 のみ）。3点とも R2 に残す。
 - **basename はドリフトさせない**。SVG は必ず data JSON から再生成し、SVG だけ改名しない。
@@ -95,33 +95,43 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 
 `kind` は当初 `ranking` / `estat` / `manual` の 3 種として書かれていたが、**実装は 14 種まで増えていた**
 （2026-07-29 に公開済み 898 件を実測）。ドリフトを止めるため、語彙と「再取得に必要なフィールド」の
-正典を **`.claude/scripts/blog/audit-chart-provenance.mjs` の `KINDS`** に置き、**未知の kind は error** にする。
-新しい kind を足すときは同ファイルも更新する。
+正典を **`.claude/scripts/lib/chart-provenance.mjs` の `CHART_SOURCE_KIND_SPECS`** に置き、
+**未知の kind は error** にする。新しい kind を足すときは共有定義も更新する。公開前の
+`quality-gate.mjs` と定期監査 `audit-chart-provenance.mjs` はこの純粋関数を共用し、
+片方だけ判定が緩むドリフトを防ぐ。
 
-| kind | 再取得の手掛かり | 件数 (2026-07-29) |
-|---|---|---|
-| `ranking` | `rankingKey` + `year` | 649 |
-| `estat` | `statsDataId` | 58 |
-| `scatter` | `xKey` + `yKey` + `year` | 36 |
-| `derived` | `source` (`r2:...`) | 60 |
-| `manual` | `source` または `url` | 11 |
-| `correlation` | `source` (`r2:app/correlation/...`) | 5 |
-| `calculated` | `inputs[].rankingKey` + `formula` | 3 |
-| `composite` | `xMetric.rankingKey` + `yMetric.rankingKey` | 1 |
-| `ranking-pair` / `ranking-join` / `derived-scatter` | `source` / `x*RankingKey` / `rankingKeys[]` | 各 1 |
-| **`authored`** | **なし（対象外）** | 65 |
-| `bar` / `line` | `incomplete: true` = 出自不明の暫定 | 7 |
+| kind                                                | 再取得の手掛かり                            | 件数 (2026-07-29) |
+| --------------------------------------------------- | ------------------------------------------- | ----------------- |
+| `ranking`                                           | `rankingKey` + `year`                       | 649               |
+| `estat`                                             | `statsDataId`                               | 58                |
+| `scatter`                                           | `xKey` + `yKey` + `year`                    | 36                |
+| `derived`                                           | `source` (`r2:...`)                         | 60                |
+| `manual`                                            | `source` または `url`                       | 11                |
+| `correlation`                                       | `source` (`r2:app/correlation/...`)         | 5                 |
+| `calculated`                                        | `inputs[].rankingKey` + `formula`           | 3                 |
+| `composite`                                         | `xMetric.rankingKey` + `yMetric.rankingKey` | 1                 |
+| `ranking-pair` / `ranking-join` / `derived-scatter` | `source` / `x*RankingKey` / `rankingKeys[]` | 各 1              |
+| **`authored`**                                      | **なし（対象外）**                          | 65                |
+| `bar` / `line`                                      | `incomplete: true` = 出自不明の暫定         | 7                 |
 
 - **`authored` は欠陥ではない**。記事本文由来の要点テキスト等は **SSOT 指標ではなく data json 自体が真実源**で、
   SSOT から再取得できないのが正しい。「復元不能」と混同して SSOT から作り直すと**捏造**になる。
 - **複数キーを 1 文字列に連結する規約がある**（`"a + b"` / `"a|b"`、`transform` に式を併記）。
   実在確認するときは分解する（分解しないと必ず 404 になり誤検知する。2026-07-29 に実際に 2 件出した）。
 
-**検査 (`audit-chart-provenance.mjs`)**: kind ごとに必要な参照があるか、参照先 rankingKey が R2 に実在するかを見る。
+**検査 (`audit-chart-provenance.mjs`)**: kind ごとに必要な参照があるか、参照先 rankingKey が R2 に実在するか、
+`NEXT_PUBLIC_ESTAT_APP_ID` がある CI では statsDataId が e-Stat API に実在するかを見る（最大3回再試行）。
 存在検査（quality-gate の系譜 gate）では「**存在するが復元できない**」を捕まえられないため別に要る。
 日次 cron (`blog-remediation-daily.yml`) に**縮小専用ラチェット**付きで配線済み — 欠陥が前回より増えたら失敗する。
 実測ベースライン: restorable 804 / out-of-scope 65 / 欠陥 29（参照なし 18 + 自己申告 incomplete 11）。
 最新値は `.claude/state/blog/chart-provenance-LATEST.md` が正典。
+
+散布図は追加で `lintScatterData` が、有限数の x/y、都道府県識別子の一意性、原則47点、
+秘匿値等を除外する場合の `excludedAreas` + `exclusionReason` + `expectedPointCount` の整合、
+`kind: calculated` の計算式を blocker として検査する。`lintScatterParity` は data JSON の
+有効点数と SVG の描画点数を一致させる。公開後も日次 cron が全散布図を JSON から再生成して
+SVG の byte 一致を要求し、既知の復元対象7件は ranking / e-Stat / 観光庁原表から点集合を
+再計算して公開 JSON と照合する。監査は読み取り専用で、差異・取得失敗とも fail-closed。
 
 > `.source.json` は **観測値ではない**ので、`article-factual-check.mjs` / `quality-gate.mjs` の ground truth 索引と `generate-article-charts.ts` のチャート生成からは除外する（実装済: `endsWith(".source.json")` ガード）。
 
@@ -129,9 +139,9 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 
 ランキングは **上位5+下位5 のカード型のみ**（10件は廃止）。1 データから2バリアントを出力:
 
-| 出力 | layout | 用途 | viewBox |
-|---|---|---|---|
-| `<name>.svg`（article.md が参照） | `columns`（横長2列・上位左/下位右） | ブログ本文 + X | `960×404` |
+| 出力                                   | layout                                  | 用途                      | viewBox            |
+| -------------------------------------- | --------------------------------------- | ------------------------- | ------------------ |
+| `<name>.svg`（article.md が参照）      | `columns`（横長2列・上位左/下位右）     | ブログ本文 + X            | `960×404`          |
 | `<name>-ig.svg`（SNS専用・未埋め込み） | `portrait`（縦長スタック・上位5↓下位5） | Instagram フィード/リール | `1080×1350`（4:5） |
 
 実装: `fetch-ranking-data-r2.mjs`（取得 + manifest）→ `generate-article-charts.ts`（2レイアウト生成、`packages/svg-builder` の `generateBarChartSvg` `layout:"columns"|"portrait"`）。
@@ -191,6 +201,7 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 > 最新値は `.claude/state/blog/svg-lineage-LATEST.md` が正典 — **この段落の数字を真実源にしない**。
 
 ### 再発防止 (新規記事で元データ消失を構造的に不可能にする)
+
 - **gate** (`quality-gate.mjs`): 各 `data/*.svg` に対応する `.json`+`.source.json` の欠落を検出 (§1.5 の3点セット)。
   **2026-06-20 に blocker へ昇格済** (当初は warning で段階導入したが復元体制が整い昇格)。公開記事で3点セットを強制し、
   SVG だけ残る状態を止める。**既存負債を再公開する記事は SSOT から復元 (backfill/ssot-restore) してから公開すること**
@@ -202,13 +213,13 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
   新規は発生源で防ぐのが先決** (場当たりに「絵だけ」を作らない)。
 - **outbox 掃除の安全装置 (2026-07-29 追加)**: `prune-published-outbox.mjs` は article.md の内容一致だけでなく
   **「ローカルにあるファイルが全て R2 に載っているか」**を確認してから `docs/21` を削除する。
-  data/*.json・*.source.json は**ローカルにしか無い場合がある**（実例: `library-museum-cultural-capital` は
+  data/_.json・_.source.json は**ローカルにしか無い場合がある**（実例: `library-museum-cultural-capital` は
   ローカルに json+source があるのに R2 は svg のみ 404）。article.md だけ見て消すと元データが永久に失われるため、
   R2 に無いものが 1 つでもあれば保持する（保持側の誤りは翌日また判定されるので無害、削除側の誤りは不可逆）。
 - **定期棚卸し + ラチェット (2026-07-29 配線)**: `blog-remediation-daily.yml` (日次 JST 08:00) が
   `build-lineage-queue.mjs` を実行して queue を develop へ commit-back し、**元データ消失 (`byStatus.neither`) が
   前回より増えたら workflow を失敗させる**（縮小専用ラチェット）。
-  **なぜ cron が要るか**: 公開時 gate は *ローカル outbox* を見るだけで、しかも公開時にしか発火しない。
+  **なぜ cron が要るか**: 公開時 gate は _ローカル outbox_ を見るだけで、しかも公開時にしか発火しない。
   gate 導入 (2026-06-20) より前に公開された記事の系譜喪失は誰も検知せず、2026-07-29 にタイルマップを
   再生成しようとして初めて 12 枚が復元不能と判明した（該当 11 記事の公開日は全て 2026-03〜06-07 = gate 導入前）。
   定期棚卸しが無いと「gate は効いているのに負債が見えない」状態が続く。
@@ -243,15 +254,16 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 4 があるので**ゼロは必ず到達できる**。「復元できないから残す」は選択肢ではない。
 
 ### 復元 (既存の欠落を SSOT から揃える)
+
 真実源 = `.claude/state/blog/svg-lineage-queue.json` (`build-lineage-queue.mjs` が R2 棚卸しで生成、人間用は
 `svg-lineage-LATEST.md`)。各 SVG に `restoreMethod` を割り当て、軽い順に消化する:
 
-| restoreMethod | 枚数 | 手法 |
-|---|---|---|
-| `source-backfill` | 87 | 既存 json を SSOT に対応付け → `source.json` 後付け (`backfill-source.mjs`、再生成不要・最軽)。json の値を SSOT照合・埋め込み rankingKey 優先。県キーは areaName/pref/name 対応 |
-| `ssot-restore` | 99 | ranking/tilemap の元データ消失 → `regenerate-tile-maps.ts` / `regenerate-ranking-cards.mjs` で SSOT復元 |
-| `ssot-restore-new` | 169 | scatter/line/findings の元データ消失 → 復元手法 (SSOT照合) の新規実装が要る |
-| `manual` | 76 | 無意味名 (`inline-chart-N`) ・型不明 → 個別手当て |
+| restoreMethod      | 枚数 | 手法                                                                                                                                                                            |
+| ------------------ | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `source-backfill`  | 87   | 既存 json を SSOT に対応付け → `source.json` 後付け (`backfill-source.mjs`、再生成不要・最軽)。json の値を SSOT照合・埋め込み rankingKey 優先。県キーは areaName/pref/name 対応 |
+| `ssot-restore`     | 99   | ranking/tilemap の元データ消失 → `regenerate-tile-maps.ts` / `regenerate-ranking-cards.mjs` で SSOT復元                                                                         |
+| `ssot-restore-new` | 169  | scatter/line/findings の元データ消失 → 復元手法 (SSOT照合) の新規実装が要る                                                                                                     |
+| `manual`           | 76   | 無意味名 (`inline-chart-N`) ・型不明 → 個別手当て                                                                                                                               |
 
 **復元は SSOT (`app/ranking`) から行う (SVG の絵から逆復元しない、§1.6)。** 値が記事本文と一致するか自己検算
 (タイルマップの trusted/Derived 手法) して捏造を防ぐ。担当 = `chart-author` agent (データ系譜の整備・復元責務)。
@@ -277,12 +289,12 @@ YYYY-MM-DD-<method>[-<batch>]
 
 ### Wave に紐づくデータ
 
-| 場所 | 内容 |
-|---|---|
-| `docs/todo/04_改善バックログ.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (旧ID: <BLOG-CTR-*>)` |
-| section frontmatter | `wave_id`, `legacy_section_ids`, `predecessor_wave`, `successor_wave` |
-| `.claude/state/blog/auto-brushup-history.json` | 各 entry に `wave_id` フィールド (2026-05-27 migration 済) |
-| commit message | 必須ではない (legacy refactoring を避けるため) |
+| 場所                                                | 内容                                                                  |
+| --------------------------------------------------- | --------------------------------------------------------------------- |
+| `docs/todo/04_改善バックログ.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (旧ID: <BLOG-CTR-*>)`               |
+| section frontmatter                                 | `wave_id`, `legacy_section_ids`, `predecessor_wave`, `successor_wave` |
+| `.claude/state/blog/auto-brushup-history.json`      | 各 entry に `wave_id` フィールド (2026-05-27 migration 済)            |
+| commit message                                      | 必須ではない (legacy refactoring を避けるため)                        |
 
 ### Predecessor / Successor
 
@@ -299,42 +311,42 @@ YYYY-MM-DD-<method>[-<batch>]
 
 ### Skill (実装)
 
-| Skill | 役割 | 関連 script |
-|---|---|---|
-| `/brushup-blog` | リライトの唯一エンジン。`--target priority` (キュー) / `--target article` (1 記事、CTR-reframe 既定。エキスパート視点追加は対話実行のみ NotebookLM) / `--target batch` (ユーザー指示時の一括、cron なし) | `.claude/scripts/blog/{select-brushup-candidates,quality-gate}.mjs`, `lint-article.cjs` |
-| `/publish-article` | draft → publish (factual gate あり) | `.claude/scripts/lib/article-factual-check.mjs` |
-| `/draft-from-trend` | trend → 新規 draft 生成 | `.claude/scripts/blog/{fetch-ranking-data-r2,generate-article-charts}.mjs` |
-| `/publish-bulk-articles` | 複数記事の bulk publish | factual gate 共有 |
-| `measure-gsc-impact.mjs` (wave_id 駆動・2026-06-08〜) | due 到達 wave の before/after を週次 GSC で自動 diff → `improvement-log.md` の `## [BLOG-WAVE-<id>]` upsert。`fetch-metrics-weekly.yml` cron に配線済 (delta 提示まで・status 確定は weekly-review) | `measure-gsc-impact.mjs` |
-| `/analyze-winning-patterns` | 天井ループ: GSC実測×構造特徴で勝ち要因抽出 (順位交絡統制付き)。概念: `.claude/rules/blog-quality-standards.md` §継続品質ループ | `.claude/scripts/blog/analyze-winning-patterns.mjs` |
+| Skill                                                 | 役割                                                                                                                                                                                                     | 関連 script                                                                             |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `/brushup-blog`                                       | リライトの唯一エンジン。`--target priority` (キュー) / `--target article` (1 記事、CTR-reframe 既定。エキスパート視点追加は対話実行のみ NotebookLM) / `--target batch` (ユーザー指示時の一括、cron なし) | `.claude/scripts/blog/{select-brushup-candidates,quality-gate}.mjs`, `lint-article.cjs` |
+| `/publish-article`                                    | draft → publish (factual gate あり)                                                                                                                                                                      | `.claude/scripts/lib/article-factual-check.mjs`                                         |
+| `/draft-from-trend`                                   | trend → 新規 draft 生成                                                                                                                                                                                  | `.claude/scripts/blog/{fetch-ranking-data-r2,generate-article-charts}.mjs`              |
+| `/publish-bulk-articles`                              | 複数記事の bulk publish                                                                                                                                                                                  | factual gate 共有                                                                       |
+| `measure-gsc-impact.mjs` (wave_id 駆動・2026-06-08〜) | due 到達 wave の before/after を週次 GSC で自動 diff → `improvement-log.md` の `## [BLOG-WAVE-<id>]` upsert。`fetch-metrics-weekly.yml` cron に配線済 (delta 提示まで・status 確定は weekly-review)      | `measure-gsc-impact.mjs`                                                                |
+| `/analyze-winning-patterns`                           | 天井ループ: GSC実測×構造特徴で勝ち要因抽出 (順位交絡統制付き)。概念: `.claude/rules/blog-quality-standards.md` §継続品質ループ                                                                           | `.claude/scripts/blog/analyze-winning-patterns.mjs`                                     |
 
 ### Docs (人間向け真実源)
 
-| Docs | 内容 | 更新トリガ |
-|---|---|---|
-| `docs/todo/04_改善バックログ.md` | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
-| `docs/todo/03_今週の計画.md` | 現在の週次 TODO | 週次 (月曜・上書き) |
-| `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | agent用週次振り返り | 週次 (日曜) |
-| `docs/todo/05_機能バックログ.md` | 大規模 session の未完了機能・自動化を直接追記 | session 終了時 |
+| Docs                                                                    | 内容                                               | 更新トリガ                     |
+| ----------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------ |
+| `docs/todo/04_改善バックログ.md`                                        | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
+| `docs/todo/03_今週の計画.md`                                            | 現在の週次 TODO                                    | 週次 (月曜・上書き)            |
+| `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | agent用週次振り返り                                | 週次 (日曜)                    |
+| `docs/todo/05_機能バックログ.md`                                        | 大規模 session の未完了機能・自動化を直接追記      | session 終了時                 |
 
 ### Memory (auto memory)
 
-| Memory | 内容 | 更新タイミング |
-|---|---|---|
+| Memory                                    | 内容                                                 | 更新タイミング             |
+| ----------------------------------------- | ---------------------------------------------------- | -------------------------- |
 | `project_blog_brushup_risk_2026_05_25.md` | brushup の FAIL/WARN リスクと factual-check 実装状態 | factual-check 検出力測定後 |
-| `feedback_bulk_blog_publish_isr_404.md` | bulk publish の ISR 404 リスク | 該当現象観測時 |
-| `feedback_evidence_based_judgment` | 実証ベース判定ルールの参照 | 判定方針変更時 |
-| `feedback_skill_schema_drift` | SKILL.md と実 schema 乖離リスク | schema migration 時 |
+| `feedback_bulk_blog_publish_isr_404.md`   | bulk publish の ISR 404 リスク                       | 該当現象観測時             |
+| `feedback_evidence_based_judgment`        | 実証ベース判定ルールの参照                           | 判定方針変更時             |
+| `feedback_skill_schema_drift`             | SKILL.md と実 schema 乖離リスク                      | schema migration 時        |
 
 ### State (機械向け真実源)
 
-| State | 内容 | 書き込み箇所 |
-|---|---|---|
-| `.claude/state/blog/remediation-queue.json` | **品質是正キュー (状態付き)**。「次に何を直すか」の真実源。pending/in-progress/done + wave_id。GSC×品質 blocker の統合スコア。**正典: `.claude/rules/blog-remediation-loop.md`** | `build-remediation-queue.mjs` (build / --mark-* / --next) |
-| `.claude/state/blog/winning-patterns.json` | **勝ち要因 (天井ループ)**。featureSignals (confidence付) + 順位交絡統制 (robust/confounded) + 記事別 conformance。build-remediation-queue が conformance を tiebreaker に読む。概念: `.claude/rules/blog-quality-standards.md` §継続品質ループ | `analyze-winning-patterns.mjs` |
-| `.claude/state/blog/auto-brushup-history.json` | wave_id 駆動 source of truth (effect 計測の入力 + 是正キューの done シード) | `/brushup-blog --target batch\|queue` 実行時 |
-| `.claude/state/blog/auto-brushup-skipped.log` | dedup でスキップした slug ログ | 同上 |
-| `.claude/state/blog/SHARED-failure-cases.md` | F-001〜N の failure ledger | factual FAIL 検出時 |
+| State                                          | 内容                                                                                                                                                                                                                                           | 書き込み箇所                                               |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `.claude/state/blog/remediation-queue.json`    | **品質是正キュー (状態付き)**。「次に何を直すか」の真実源。pending/in-progress/done + wave_id。GSC×品質 blocker の統合スコア。**正典: `.claude/rules/blog-remediation-loop.md`**                                                               | `build-remediation-queue.mjs` (build / --mark-\* / --next) |
+| `.claude/state/blog/winning-patterns.json`     | **勝ち要因 (天井ループ)**。featureSignals (confidence付) + 順位交絡統制 (robust/confounded) + 記事別 conformance。build-remediation-queue が conformance を tiebreaker に読む。概念: `.claude/rules/blog-quality-standards.md` §継続品質ループ | `analyze-winning-patterns.mjs`                             |
+| `.claude/state/blog/auto-brushup-history.json` | wave_id 駆動 source of truth (effect 計測の入力 + 是正キューの done シード)                                                                                                                                                                    | `/brushup-blog --target batch\|queue` 実行時               |
+| `.claude/state/blog/auto-brushup-skipped.log`  | dedup でスキップした slug ログ                                                                                                                                                                                                                 | 同上                                                       |
+| `.claude/state/blog/SHARED-failure-cases.md`   | F-001〜N の failure ledger                                                                                                                                                                                                                     | factual FAIL 検出時                                        |
 
 ## 4. 整理の判断指針 (次に同じ混乱が起きたとき)
 
@@ -346,6 +358,7 @@ YYYY-MM-DD-<method>[-<batch>]
 4. **改善ログの section が「単一施策 = 1 section」になっているか** (重複対応の場合は `predecessor_wave` / `successor_wave` で明示)
 
 混乱の兆候:
+
 - 同じ slug が複数 section に登場
 - effect 計測時に「どの section の数字を更新すべきか不明」
 - factual-check 実装と memory に乖離

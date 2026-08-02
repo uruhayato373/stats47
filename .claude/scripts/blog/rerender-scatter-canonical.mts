@@ -15,6 +15,8 @@
  *
  *   npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts --probe-only
  *   npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts \
+ *     --probe-only --require-canonical --verify-sources
+ *   npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts \
  *     --key-file .local/generated-blog-svg-keys.txt
  */
 import ExcelJS from 'exceljs';
@@ -22,7 +24,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { generateScatterSvg } from '../../../packages/svg-builder/src/charts/scatter.ts';
-import { lintScatterQuality } from '../lib/svg-lint.mjs';
+import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
+import {
+  lintScatterData,
+  lintScatterParity,
+  lintScatterQuality,
+} from '../lib/svg-lint.mjs';
 
 const PROJECT_ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -34,6 +41,8 @@ const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
 const STAGE = path.join(PROJECT_ROOT, '.local/r2/app/blog');
 const args = process.argv.slice(2);
 const PROBE_ONLY = args.includes('--probe-only');
+const REQUIRE_CANONICAL = args.includes('--require-canonical');
+const VERIFY_SOURCES = args.includes('--verify-sources');
 const BASE_ARG = (() => {
   const i = args.indexOf('--base');
   return i >= 0 ? args[i + 1] : null;
@@ -49,6 +58,14 @@ const CHINA_SCATTER =
   'inbound-by-nationality-regional-preference/resident-vs-guest-china-scatter';
 const SEMICONDUCTOR_SCATTER =
   'semiconductor-electronics-regional-map/semiconductor-dependency-scatter';
+const COMMUNICATION_SCATTER = 'communication-cost-burden/comm-cost-scatter';
+const NURSE_SCATTER = 'nurse-income-prefecture-gap/nurse-vs-govwage-scatter';
+const TRAVEL_GENDER_SCATTER =
+  'travel-behavior-gender-gap/travel-gender-scatter';
+const URBAN_PARK_SCATTER =
+  'urban-parks-green-infrastructure/park-area-vs-count-scatter';
+const VACANT_LAND_SCATTER =
+  'vacant-housing-vs-land-price/vacant-vs-land-price-scatter';
 
 function noCache(url: string): string {
   const separator = url.includes('?') ? '&' : '?';
@@ -100,6 +117,25 @@ function canonicalPointCount(data: any): number {
   ).length;
 }
 
+function pointFingerprint(data: any): string {
+  const raw = data?.points || data?.data || [];
+  return JSON.stringify(
+    raw
+      .filter(
+        (point: any) =>
+          point &&
+          typeof point === 'object' &&
+          Number.isFinite(point.x) &&
+          Number.isFinite(point.y)
+      )
+      .map((point: any) => ({
+        x: point.x,
+        y: point.y,
+      }))
+      .sort((a: any, b: any) => a.x - b.x || a.y - b.y)
+  );
+}
+
 async function fetchEstatValues(params: Record<string, string>): Promise<any> {
   if (!ESTAT_APP_ID) {
     throw new Error(
@@ -148,13 +184,96 @@ function prefectureValueMap(
   const values = new Map<string, { areaName: string; value: number }>();
   for (const item of asArray<any>(statisticalData?.DATA_INF?.VALUE)) {
     const areaCode = String(item?.['@area'] || '');
-    if (!/^\d{2}000$/.test(areaCode)) continue;
+    if (!/^(?:0[1-9]|[1-3]\d|4[0-7])000$/.test(areaCode)) continue;
     const value = Number(item?.['$']);
     const areaName = names.get(areaCode);
     if (!areaName || !Number.isFinite(value)) continue;
     values.set(areaCode, { areaName, value });
   }
   return values;
+}
+
+async function rankingValueMap(
+  rankingKey: string,
+  yearCode: string
+): Promise<Map<string, { areaName: string; value: number }>> {
+  const ranking = await fj(`${R2}/app/ranking/${rankingKey}/values.json`);
+  const partition = asArray<any>(ranking?.partitions).find(
+    (item) => String(item?.yearCode) === yearCode
+  );
+  const values = new Map<string, { areaName: string; value: number }>(
+    asArray<any>(partition?.values).flatMap((item) => {
+      const value = Number(item?.value);
+      const areaCode = String(item?.areaCode || '');
+      const areaName = String(item?.areaName || '');
+      return areaCode && areaName && Number.isFinite(value)
+        ? [[areaCode, { areaName, value }]]
+        : [];
+    })
+  );
+  if (values.size !== 47) {
+    throw new Error(
+      `${rankingKey} (${yearCode}) の都道府県数が不正です: ${values.size}`
+    );
+  }
+  return values;
+}
+
+function joinValueMaps(
+  xValues: Map<string, { areaName: string; value: number }>,
+  yValues: Map<string, { areaName: string; value: number }>,
+  transformX: (value: number) => number = (value) => value,
+  transformY: (value: number) => number = (value) => value
+): CanonicalPoint[] {
+  const points = [...xValues.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .flatMap(([areaCode, x]) => {
+      const y = yValues.get(areaCode);
+      if (!y) return [];
+      return [
+        {
+          areaCode,
+          areaName: x.areaName,
+          label: x.areaName,
+          x: transformX(x.value),
+          y: transformY(y.value),
+        },
+      ];
+    });
+  if (points.length !== 47) {
+    throw new Error(`2系列の都道府県結合件数が不正です: ${points.length}`);
+  }
+  return points;
+}
+
+function rankingJoinSource(
+  target: { slug: string; base: string },
+  xRankingKey: string,
+  xYear: string,
+  yRankingKey: string,
+  yYear: string,
+  formula: string
+): any {
+  return {
+    kind: 'ranking-join',
+    expectedPointCount: 47,
+    xRankingKey,
+    xYear,
+    yRankingKey,
+    yYear,
+    formula,
+    restore: `npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts --base ${target.slug}/${target.base}`,
+  };
+}
+
+function rebuiltJson(template: any, points: CanonicalPoint[]): any {
+  const copy = { ...template, expectedPointCount: 47 };
+  if (Array.isArray(template?.data) && !Array.isArray(template?.points)) {
+    copy.data = points;
+  } else {
+    copy.points = points;
+  }
+  return copy;
 }
 
 async function repairChinaScatter(): Promise<Repair> {
@@ -219,10 +338,12 @@ async function repairChinaScatter(): Promise<Repair> {
       yUnit: '人泊',
       yearX: '2020',
       yearY: '2024',
+      expectedPointCount: 47,
       points,
     },
     source: {
       kind: 'calculated',
+      expectedPointCount: 47,
       inputs: [
         {
           statsDataId: '0003445244',
@@ -250,6 +371,8 @@ async function repairChinaScatter(): Promise<Repair> {
       year: '2020/2024',
       label: '在留中国人数 vs 中国人延べ宿泊者数',
       note: '年が異なる2系列の相関。宿泊値は従業者数10人以上の施設。',
+      restore:
+        'npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts --base inbound-by-nationality-regional-preference/resident-vs-guest-china-scatter',
     },
   };
 }
@@ -309,11 +432,13 @@ async function repairSemiconductorScatter(): Promise<Repair> {
       yUnit: '%',
       yearX: '2023',
       yearY: '2020/2023',
+      expectedPointCount: 45,
       note: '電子部品は2020年、製造品出荷額等は2023年度。高知県・沖縄県は電子部品出荷額が秘匿値(X)のため除外。年次が異なるため依存度は目安。',
       points,
     },
     source: {
       kind: 'calculated',
+      expectedPointCount: 45,
       inputs: [
         {
           rankingKey: 'manufacturing-shipment-amount',
@@ -335,8 +460,215 @@ async function repairSemiconductorScatter(): Promise<Repair> {
       label: '半導体依存度（電子部品出荷額2020 ÷ 製造品出荷額等2023）',
       excludedAreas: ['高知県', '沖縄県'],
       exclusionReason: 'e-Stat原表の電子部品出荷額が秘匿値(X)のため',
+      restore:
+        'npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts --base semiconductor-electronics-regional-map/semiconductor-dependency-scatter',
     },
   };
+}
+
+async function rebuildRankingJoinScatter(
+  target: { slug: string; base: string },
+  template: any,
+  xRankingKey: string,
+  xYear: string,
+  yRankingKey: string,
+  yYear: string,
+  formula: string
+): Promise<Repair> {
+  const [xValues, yValues] = await Promise.all([
+    rankingValueMap(xRankingKey, xYear),
+    rankingValueMap(yRankingKey, yYear),
+  ]);
+  return {
+    json: rebuiltJson(template, joinValueMaps(xValues, yValues)),
+    source: rankingJoinSource(
+      target,
+      xRankingKey,
+      xYear,
+      yRankingKey,
+      yYear,
+      formula
+    ),
+  };
+}
+
+async function rebuildNurseScatter(
+  target: { slug: string; base: string },
+  template: any
+): Promise<Repair> {
+  const [salary, nurseMonthly, nurseBonus] = await Promise.all([
+    rankingValueMap('avg-salary-all-prefecture', '2023'),
+    fetchEstatValues({
+      statsDataId: '0003445758',
+      cdTab: '40',
+      cdCat01: '01',
+      cdCat02: '1133',
+      cdTime: '2023000000',
+    }).then(prefectureValueMap),
+    fetchEstatValues({
+      statsDataId: '0003445758',
+      cdTab: '44',
+      cdCat01: '01',
+      cdCat02: '1133',
+      cdTime: '2023000000',
+    }).then(prefectureValueMap),
+  ]);
+  if (nurseMonthly.size !== 47 || nurseBonus.size !== 47) {
+    throw new Error(
+      `看護師賃金の都道府県数が不正です: monthly=${nurseMonthly.size}, bonus=${nurseBonus.size}`
+    );
+  }
+  const nurseAnnual = new Map(
+    [...nurseMonthly.entries()].map(([areaCode, monthly]) => {
+      const bonus = nurseBonus.get(areaCode);
+      if (!bonus) throw new Error(`看護師賞与がありません: ${areaCode}`);
+      return [
+        areaCode,
+        {
+          areaName: monthly.areaName,
+          value: Math.round(monthly.value * 12 + bonus.value) / 10,
+        },
+      ];
+    })
+  );
+  return {
+    json: rebuiltJson(
+      template,
+      joinValueMaps(
+        salary,
+        nurseAnnual,
+        (value) => Math.round(value / 1_000) / 10
+      )
+    ),
+    source: {
+      kind: 'calculated',
+      expectedPointCount: 47,
+      inputs: [
+        {
+          rankingKey: 'avg-salary-all-prefecture',
+          year: '2023',
+          source: 'r2:app/ranking/avg-salary-all-prefecture/values.json',
+        },
+        {
+          statsDataId: '0003445758',
+          params: {
+            cdTab: ['40', '44'],
+            cdCat01: '01',
+            cdCat02: '1133',
+            cdTime: '2023000000',
+          },
+          year: '2023',
+          source: '賃金構造基本統計調査',
+        },
+      ],
+      formula:
+        'x=地方公務員平均給与月額(円)/10,000を小数1桁丸め; y=(看護師きまって支給する現金給与額(千円)*12+年間賞与(千円))/10を小数1桁丸め; areaCodeで結合',
+      restore: `npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts --base ${target.slug}/${target.base}`,
+    },
+  };
+}
+
+async function rebuildTravelGenderScatter(
+  target: { slug: string; base: string },
+  template: any
+): Promise<Repair> {
+  const [male, female] = await Promise.all([
+    fetchEstatValues({
+      statsDataId: '0003456093',
+      cdCat01: '1',
+      cdCat02: '0',
+      cdCat03: '2',
+      cdTime: '2021000000',
+    }).then(prefectureValueMap),
+    fetchEstatValues({
+      statsDataId: '0003456093',
+      cdCat01: '2',
+      cdCat02: '0',
+      cdCat03: '2',
+      cdTime: '2021000000',
+    }).then(prefectureValueMap),
+  ]);
+  return {
+    json: rebuiltJson(
+      template,
+      joinValueMaps(male, female, Math.round, Math.round)
+    ),
+    source: {
+      kind: 'calculated',
+      expectedPointCount: 47,
+      inputs: [
+        {
+          statsDataId: '0003456093',
+          params: {
+            cdCat01: '1',
+            cdCat02: '0',
+            cdCat03: '2',
+            cdTime: '2021000000',
+          },
+          label: '男性 旅行（1泊2日以上）行動者率',
+        },
+        {
+          statsDataId: '0003456093',
+          params: {
+            cdCat01: '2',
+            cdCat02: '0',
+            cdCat03: '2',
+            cdTime: '2021000000',
+          },
+          label: '女性 旅行（1泊2日以上）行動者率',
+        },
+      ],
+      formula: '男女別行動者率をareaCodeで結合し、表示値を整数丸め',
+      restore: `npx tsx .claude/scripts/blog/rerender-scatter-canonical.mts --base ${target.slug}/${target.base}`,
+    },
+  };
+}
+
+async function rebuildKnownScatter(
+  target: { slug: string; base: string },
+  template: any = {}
+): Promise<Repair | null> {
+  const id = `${target.slug}/${target.base}`;
+  if (id === CHINA_SCATTER) return repairChinaScatter();
+  if (id === SEMICONDUCTOR_SCATTER) return repairSemiconductorScatter();
+  if (id === COMMUNICATION_SCATTER) {
+    return rebuildRankingJoinScatter(
+      target,
+      template,
+      'mobile-phone-contract-count-per-1000',
+      '2023',
+      'transport-communication-expenditure-ratio-multi-person-households',
+      '2024',
+      'x=携帯電話契約数(2023); y=交通・通信費割合(2024); areaCodeで結合'
+    );
+  }
+  if (id === NURSE_SCATTER) return rebuildNurseScatter(target, template);
+  if (id === TRAVEL_GENDER_SCATTER) {
+    return rebuildTravelGenderScatter(target, template);
+  }
+  if (id === URBAN_PARK_SCATTER) {
+    return rebuildRankingJoinScatter(
+      target,
+      template,
+      'urban-park-area-per-person',
+      '2023',
+      'urban-park-count-per-100km2',
+      '2023',
+      'x=1人当たり都市公園面積(2023); y=面積100km²当たり都市公園数(2023); areaCodeで結合'
+    );
+  }
+  if (id === VACANT_LAND_SCATTER) {
+    return rebuildRankingJoinScatter(
+      target,
+      template,
+      'vacant-housing-rate',
+      '2023',
+      'standard-price-change-rate-commercial',
+      '2024',
+      'x=空き家率(2023); y=商業地の標準価格対前年平均変動率(2024); areaCodeで結合'
+    );
+  }
+  return null;
 }
 
 async function repairIfNeeded(
@@ -344,10 +676,7 @@ async function repairIfNeeded(
   data: any
 ): Promise<Repair | null> {
   if (canonicalPointCount(data) > 0) return null;
-  const id = `${target.slug}/${target.base}`;
-  if (id === CHINA_SCATTER) return repairChinaScatter();
-  if (id === SEMICONDUCTOR_SCATTER) return repairSemiconductorScatter();
-  return null;
+  return rebuildKnownScatter(target, data);
 }
 
 async function repairedArticle(
@@ -446,6 +775,9 @@ async function pMap<T, R>(
 }
 
 async function main() {
+  if (REQUIRE_CANONICAL && !PROBE_ONLY) {
+    throw new Error('--require-canonical は --probe-only と併用してください');
+  }
   const targets = loadTargets();
   console.error(
     `[rerender-scatter] ${targets.length} both-scatter を ${PROBE_ONLY ? 'probe' : '再描画'}`
@@ -462,10 +794,93 @@ async function main() {
         rec.err = String(e.message || e);
         return rec;
       }
+      let source: any;
+      try {
+        source = await fj(
+          `${R2}/app/blog/${t.slug}/data/${t.base}.source.json`
+        );
+      } catch (e: any) {
+        rec.result = 'source-fail';
+        rec.err = String(e.message || e);
+        return rec;
+      }
       const repair = await repairIfNeeded(t, json);
+      let rebuiltKnown = repair;
+      let sourceRepair: any = null;
       if (repair) {
         json = repair.json;
+        source = repair.source;
         rec.repaired = true;
+      }
+      let sourceInspection = inspectChartSourceManifest(source);
+      if (sourceInspection.verdict === 'invalid' && !repair) {
+        rebuiltKnown = await rebuildKnownScatter(t, json);
+        if (
+          rebuiltKnown &&
+          pointFingerprint(rebuiltKnown.json) === pointFingerprint(json)
+        ) {
+          const rebuiltInspection = inspectChartSourceManifest(
+            rebuiltKnown.source
+          );
+          if (rebuiltInspection.verdict !== 'invalid') {
+            sourceRepair = rebuiltKnown.source;
+            source = sourceRepair;
+            sourceInspection = rebuiltInspection;
+            rec.sourceRepaired = true;
+            rec.sourceVerified = true;
+          }
+        }
+      }
+      if (sourceInspection.verdict === 'invalid') {
+        rec.result = 'source-invalid';
+        rec.err = sourceInspection.detail;
+        return rec;
+      }
+      const dataLint = lintScatterData(`${t.base}.svg`, json, source);
+      if (dataLint.errors.length > 0) {
+        rec.result = 'data-invalid';
+        rec.err = dataLint.errors.join(' | ');
+        return rec;
+      }
+      if (VERIFY_SOURCES) {
+        try {
+          const rebuilt = rebuiltKnown || (await rebuildKnownScatter(t, json));
+          if (rebuilt) {
+            const rebuiltSourceInspection = inspectChartSourceManifest(
+              rebuilt.source
+            );
+            const rebuiltDataLint = lintScatterData(
+              `${t.base}.svg`,
+              rebuilt.json,
+              rebuilt.source
+            );
+            if (
+              rebuiltSourceInspection.verdict === 'invalid' ||
+              rebuiltDataLint.errors.length > 0
+            ) {
+              rec.result = 'source-rebuild-invalid';
+              rec.err = [
+                rebuiltSourceInspection.verdict === 'invalid'
+                  ? rebuiltSourceInspection.detail
+                  : '',
+                ...rebuiltDataLint.errors,
+              ]
+                .filter(Boolean)
+                .join(' | ');
+              return rec;
+            }
+            if (pointFingerprint(rebuilt.json) !== pointFingerprint(json)) {
+              rec.result = 'source-drift';
+              rec.err = '公開JSONが一次ソースから再計算した点集合と一致しない';
+              return rec;
+            }
+            rec.sourceVerified = true;
+          }
+        } catch (e: any) {
+          rec.result = 'source-verify-fail';
+          rec.err = String(e.message || e);
+          return rec;
+        }
       }
       let oldSvg = '';
       try {
@@ -478,22 +893,30 @@ async function main() {
         return rec;
       }
       const lint = lintScatterQuality(`${t.base}.svg`, newSvg, json);
-      if (lint.errors.length) {
+      const parity = lintScatterParity(`${t.base}.svg`, newSvg, json);
+      if (lint.errors.length || parity.errors.length) {
         rec.result = 'lint-fail';
-        rec.err = lint.errors.join(' | ');
+        rec.err = [...lint.errors, ...parity.errors].join(' | ');
         return rec;
       }
       rec.newSize = viewBoxOf(newSvg);
-      if (oldSvg === newSvg && !repair) {
+      if (oldSvg === newSvg && !repair && !sourceRepair) {
         rec.result = 'already-canonical';
         return rec;
       }
-      rec.result = repair ? 'repair-and-rerender' : 'rerender';
+      rec.result = repair
+        ? 'repair-and-rerender'
+        : sourceRepair
+          ? 'source-repair'
+          : 'rerender';
       if (!PROBE_ONLY) {
         const dir = path.join(STAGE, t.slug, 'data');
         fs.mkdirSync(dir, { recursive: true });
-        fs.writeFileSync(path.join(dir, `${t.base}.svg`), newSvg);
-        rec.keys = [`app/blog/${t.slug}/data/${t.base}.svg`];
+        rec.keys = [];
+        if (oldSvg !== newSvg) {
+          fs.writeFileSync(path.join(dir, `${t.base}.svg`), newSvg);
+          rec.keys.push(`app/blog/${t.slug}/data/${t.base}.svg`);
+        }
         if (repair) {
           writeJson(path.join(dir, `${t.base}.json`), repair.json);
           writeJson(path.join(dir, `${t.base}.source.json`), repair.source);
@@ -506,6 +929,9 @@ async function main() {
             fs.writeFileSync(path.join(STAGE, t.slug, 'article.md'), article);
             rec.keys.push(`app/blog/${t.slug}/article.md`);
           }
+        } else if (sourceRepair) {
+          writeJson(path.join(dir, `${t.base}.source.json`), sourceRepair);
+          rec.keys.push(`app/blog/${t.slug}/data/${t.base}.source.json`);
         }
       }
       return rec;
@@ -516,7 +942,10 @@ async function main() {
   for (const r of results) by[r.result] = (by[r.result] || 0) + 1;
   console.error(`[rerender-scatter] ${JSON.stringify(by)}`);
   const changed = results.filter(
-    (r) => r.result === 'rerender' || r.result === 'repair-and-rerender'
+    (r) =>
+      r.result === 'rerender' ||
+      r.result === 'repair-and-rerender' ||
+      r.result === 'source-repair'
   );
   if (changed.length)
     console.error(
@@ -524,8 +953,20 @@ async function main() {
       changed.map((r) => `${r.oldSize}→${r.newSize} ${r.base}`).join('\n  ')
     );
   const failed = results.filter((r) =>
-    ['json-fail', 'empty', 'lint-fail', 'error'].includes(r.result)
+    [
+      'json-fail',
+      'source-fail',
+      'source-invalid',
+      'source-rebuild-invalid',
+      'source-drift',
+      'source-verify-fail',
+      'data-invalid',
+      'empty',
+      'lint-fail',
+      'error',
+    ].includes(r.result)
   );
+  if (REQUIRE_CANONICAL) failed.push(...changed);
   if (KEY_FILE_ARG && !PROBE_ONLY) {
     const keyFile = path.resolve(PROJECT_ROOT, KEY_FILE_ARG);
     fs.mkdirSync(path.dirname(keyFile), { recursive: true });
@@ -537,8 +978,11 @@ async function main() {
       by,
       total: results.length,
       changed: changed.length,
+      sourceVerified: results.filter((result) => result.sourceVerified).length,
       keyCount: results.flatMap((r) => r.keys || []).length,
       probeOnly: PROBE_ONLY,
+      requireCanonical: REQUIRE_CANONICAL,
+      verifySources: VERIFY_SOURCES,
     })
   );
   if (failed.length) {
@@ -546,7 +990,12 @@ async function main() {
       failed
         .map(
           (r) =>
-            `[${r.result}] ${r.slug}/${r.base}: ${r.err || 'no canonical points'}`
+            `[${r.result}] ${r.slug}/${r.base}: ${
+              r.err ||
+              (REQUIRE_CANONICAL && changed.includes(r)
+                ? '公開R2が正規生成結果と一致しない'
+                : 'no canonical points')
+            }`
         )
         .join('\n')
     );

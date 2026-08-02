@@ -35,11 +35,14 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
+  lintScatterData,
+  lintScatterParity,
   lintScatterQuality,
   lintSvgContent,
   lintSvgSize,
   extractInlineSvgs,
 } from '../lib/svg-lint.mjs';
+import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
 // Layer 1 共有ライブラリ (SSoT)。CLI 内インライン生成を廃し svg-builder に一本化。
 // tsx 実行のため TS ソースを直接 import する (このスクリプトは tsx で起動する)。
 import {
@@ -382,11 +385,14 @@ function validateSvg(svgPath) {
     return { errors: ['file not found'], warnings: [] };
   const content = fs.readFileSync(svgPath, 'utf8');
   const filename = path.basename(svgPath);
+  const jsonFilename = filename.replace(/\.svg$/, '.json');
+  const jsonData = jsonMeta.find((item) => item.file === jsonFilename)?.parsed;
   // filename を渡すと tile-grid でテーマ関連 WARN を抑止する (仕様上テーマ非依存のため)
   const checks = [
     lintSvgContent(content, filename),
     lintSvgSize(filename, content),
-    lintScatterQuality(filename, content),
+    lintScatterQuality(filename, content, jsonData),
+    lintScatterParity(filename, content, jsonData),
   ];
   return {
     errors: checks.flatMap((result) => result.errors),
@@ -524,6 +530,28 @@ for (const f of jsonFiles) {
   try {
     const parsed = JSON.parse(fs.readFileSync(fp, 'utf8'));
     const type = detectChartType(f, parsed);
+    if (type === 'scatter') {
+      const sourcePath = path.join(
+        DATA_DIR,
+        f.replace(/\.json$/, '.source.json')
+      );
+      if (!fs.existsSync(sourcePath)) {
+        throw new Error(
+          'scatter source.json が無い。一次ソースの取得レシピを用意してから生成する'
+        );
+      }
+      const sourceData = JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
+      const sourceInspection = inspectChartSourceManifest(sourceData);
+      if (sourceInspection.verdict === 'invalid') {
+        throw new Error(
+          `scatter source.json が再取得不能: ${sourceInspection.detail}`
+        );
+      }
+      const dataLint = lintScatterData(f, parsed, sourceData);
+      if (dataLint.errors.length > 0) {
+        throw new Error(dataLint.errors.join(' | '));
+      }
+    }
     jsonMeta.push({ file: f, type, parsed });
     jsonOkCount++;
     log(`  [ok ] ${f}  type=${type || 'unknown'}`);

@@ -18,17 +18,31 @@
 // データ色 (棒・ドット・地方ブロックの vivid 色) は light/dark 両対応なので対象外。
 export const THEME_DEPENDENT_COLORS = [
   // 背景
-  "#ffffff", "#fff", "#fafafa", "#f9fafb", "#f8fafc",
+  '#ffffff',
+  '#fff',
+  '#fafafa',
+  '#f9fafb',
+  '#f8fafc',
   // 暗いテキスト
-  "#333", "#222", "#111827", "#1f2937", "#374151",
+  '#333',
+  '#222',
+  '#111827',
+  '#1f2937',
+  '#374151',
   // 中間テキスト
-  "#6b7280", "#888", "#999", "#aaa", "#bbb",
+  '#6b7280',
+  '#888',
+  '#999',
+  '#aaa',
+  '#bbb',
   // グリッド
-  "#e5e7eb", "#ebebeb", "#ccc",
+  '#e5e7eb',
+  '#ebebeb',
+  '#ccc',
 ];
 
 function escapeRegExp(s) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 /**
@@ -49,23 +63,24 @@ export function lintSvgContent(content, filename) {
   const warnings = [];
   const c = content.trim();
   const isThemeIndependent =
-    filename !== undefined && classifyChartTypeFromName(filename) === "tile-grid";
+    filename !== undefined &&
+    classifyChartTypeFromName(filename) === 'tile-grid';
   // 先頭の HTML コメント (svg-builder/CLI が付与する <!-- data-source... --> provenance) を
   // 除いた本体で開始タグを判定する。
-  const body = c.replace(/^(?:<!--[\s\S]*?-->\s*)+/, "");
+  const body = c.replace(/^(?:<!--[\s\S]*?-->\s*)+/, '');
 
   // --- 構造 (ERROR) ---
-  if (!body.startsWith("<svg") && !body.startsWith("<?xml")) {
-    errors.push("does not start with <svg or <?xml");
+  if (!body.startsWith('<svg') && !body.startsWith('<?xml')) {
+    errors.push('does not start with <svg or <?xml');
   }
-  if (!c.endsWith("</svg>")) {
-    errors.push("does not end with </svg>");
+  if (!c.endsWith('</svg>')) {
+    errors.push('does not end with </svg>');
   }
   if (!/viewBox\s*=/.test(c)) {
-    errors.push("missing viewBox attribute");
+    errors.push('missing viewBox attribute');
   }
   if (!/\bwidth\s*=/.test(c) || !/\bheight\s*=/.test(c)) {
-    errors.push("missing width or height attribute");
+    errors.push('missing width or height attribute');
   }
 
   // --- テンプレート未解決の描画 (ERROR) ---
@@ -79,7 +94,7 @@ export function lintSvgContent(content, filename) {
     if (/\b(?:undefined|NaN)\b|\[object Object\]/.test(t)) {
       errors.push(
         `SVG に未解決のテンプレート値が描画されている: "${t.trim().slice(0, 40)}" —` +
-          ` 生成器に渡すデータの形を確認する (欠損値をそのまま埋めていないか)`,
+          ` 生成器に渡すデータの形を確認する (欠損値をそのまま埋めていないか)`
       );
       break; // 1 件出れば十分 (同じ原因で複数出るため)
     }
@@ -88,8 +103,8 @@ export function lintSvgContent(content, filename) {
   // --- dark mode 対応 (WARN) ---
   if (!isThemeIndependent && !/prefers-color-scheme\s*:\s*dark/.test(c)) {
     warnings.push(
-      "dark mode 非対応: @media (prefers-color-scheme:dark) の <style> がない。" +
-        " svg-builder 経由で再生成すると dark 対応になる",
+      'dark mode 非対応: @media (prefers-color-scheme:dark) の <style> がない。' +
+        ' svg-builder 経由で再生成すると dark 対応になる'
     );
   }
 
@@ -101,13 +116,16 @@ export function lintSvgContent(content, filename) {
   const hasThemeStyle = /prefers-color-scheme\s*:\s*dark/.test(c);
   if (!hasThemeStyle && !isThemeIndependent) {
     const foundColors = THEME_DEPENDENT_COLORS.filter((col) => {
-      const re = new RegExp(`(?:fill|stroke)\\s*=\\s*"${escapeRegExp(col)}"`, "i");
+      const re = new RegExp(
+        `(?:fill|stroke)\\s*=\\s*"${escapeRegExp(col)}"`,
+        'i'
+      );
       return re.test(c);
     });
     if (foundColors.length > 0) {
       warnings.push(
-        `theme 依存色を inline 指定: ${foundColors.join(", ")} —` +
-          ` svg-* class (svg-bg/svg-title/svg-axis/svg-tick/svg-grid) に置換すると dark mode 追従`,
+        `theme 依存色を inline 指定: ${foundColors.join(', ')} —` +
+          ` svg-* class (svg-bg/svg-title/svg-axis/svg-tick/svg-grid) に置換すると dark mode 追従`
       );
     }
   }
@@ -120,25 +138,40 @@ export function lintSvgContent(content, filename) {
 // width が固定の不変量 (高さは件数/内容で可変)。違反は「非正規サイズ = 再生成すべき」。
 // 統一済みカタログ (ENFORCED) = error / 未統一 = warning (統一完了後 error に昇格)。
 const CANONICAL_WIDTH = {
-  bar: [960, 680],          // columns 960 (標準) / single 680。760/720/600 等の旧サイズは違反
-  "tile-grid": [720],       // 720×720 (2026-07-31 に 780×560 から変更。lintTileGridQuality 参照)
-  summary: [960],           // findings card 幅 960 (高さ可変)
-  line: [680],              // 680×420
-  scatter: [720],           // 720×720
-  "stacked-bar": [680],     // 680×可変
+  bar: [960, 680], // columns 960 (標準) / single 680。760/720/600 等の旧サイズは違反
+  'tile-grid': [720], // 720×720 (2026-07-31 に 780×560 から変更。lintTileGridQuality 参照)
+  summary: [960], // findings card 幅 960 (高さ可変)
+  line: [680], // 680×420
+  scatter: [720], // 720×720
+  'stacked-bar': [680], // 680×可変
 };
 // 全カタログ統一完了 (2026-06-21): both 全件が正規幅。error で再発防止する。
-const SIZE_ENFORCED = new Set(["bar", "tile-grid", "summary", "scatter", "line", "stacked-bar"]);
+const SIZE_ENFORCED = new Set([
+  'bar',
+  'tile-grid',
+  'summary',
+  'scatter',
+  'line',
+  'stacked-bar',
+]);
 
 /** SVG ファイル名 → chartType (generate-article-charts の classifyChartType と同等の suffix 判定) */
 export function classifyChartTypeFromName(filename) {
-  const f = String(filename).replace(/\.svg$/i, "").toLowerCase();
-  if (/(?:-prefecture-rankings|-top5-bottom5|-top-bottom|-rate-ranking|-income-ranking|-ranking|-rankings)$/.test(f)) return "bar";
-  if (/(?:-tile-grid|-tilemap|-income-map|-ratio-map|-map)$/.test(f)) return "tile-grid";
-  if (/(?:-national-trend|-timeseries|-trend)$/.test(f)) return "line";
-  if (/-scatter$/.test(f)) return "scatter";
-  if (/-stacked$/.test(f)) return "stacked-bar";
-  if (/(?:-summary-findings|-findings)$/.test(f)) return "summary";
+  const f = String(filename)
+    .replace(/\.svg$/i, '')
+    .toLowerCase();
+  if (
+    /(?:-prefecture-rankings|-top5-bottom5|-top-bottom|-rate-ranking|-income-ranking|-ranking|-rankings)$/.test(
+      f
+    )
+  )
+    return 'bar';
+  if (/(?:-tile-grid|-tilemap|-income-map|-ratio-map|-map)$/.test(f))
+    return 'tile-grid';
+  if (/(?:-national-trend|-timeseries|-trend)$/.test(f)) return 'line';
+  if (/-scatter$/.test(f)) return 'scatter';
+  if (/-stacked$/.test(f)) return 'stacked-bar';
+  if (/(?:-summary-findings|-findings)$/.test(f)) return 'summary';
   return null; // 分類不能 (無意味名 inline-chart-N 等) は対象外
 }
 
@@ -153,22 +186,241 @@ export function lintSvgSize(filename, content) {
   const warnings = [];
   const ct = classifyChartTypeFromName(filename);
   if (!ct || !CANONICAL_WIDTH[ct]) return { errors, warnings }; // 分類不能は対象外
-  const m = String(content).match(/viewBox\s*=\s*"0 0 (\d+(?:\.\d+)?) (\d+(?:\.\d+)?)"/);
+  const m = String(content).match(
+    /viewBox\s*=\s*"0 0 (\d+(?:\.\d+)?) (\d+(?:\.\d+)?)"/
+  );
   if (!m) return { errors, warnings }; // viewBox 欠落は別 check (lintSvgContent) が捕捉
   const w = Math.round(parseFloat(m[1]));
   const allowed = CANONICAL_WIDTH[ct];
   if (!allowed.includes(w)) {
-    const msg = `非正規サイズ: ${ct} の viewBox 幅 ${w} は正規 [${allowed.join("/")}] でない (${path_base(filename)})。` +
+    const msg =
+      `非正規サイズ: ${ct} の viewBox 幅 ${w} は正規 [${allowed.join('/')}] でない (${path_base(filename)})。` +
       ` svg-builder で再生成して統一する (ranking は rerender-ranking-columns.mts、tile/scatter/line は対応 restorer)`;
     (SIZE_ENFORCED.has(ct) ? errors : warnings).push(msg);
   }
   return { errors, warnings };
 }
-function path_base(p) { const s = String(p).split("/"); return s[s.length - 1]; }
+function path_base(p) {
+  const s = String(p).split('/');
+  return s[s.length - 1];
+}
 
 // ---------- scatter の品質不変量 (2026-08-02) ----------
 /** 散布図の正規キャンバス。blog-svg-chart-standards.md §5 と scatter.ts が正典。 */
 export const SCATTER_CANVAS = { w: 720, h: 720 };
+export const PREFECTURE_SCATTER_POINT_COUNT = 47;
+
+function scatterChartType(filename, jsonData) {
+  return jsonData?.chartType === 'scatter'
+    ? 'scatter'
+    : classifyChartTypeFromName(filename);
+}
+
+function scatterRawPoints(jsonData) {
+  if (Array.isArray(jsonData?.points)) return jsonData.points;
+  if (Array.isArray(jsonData?.data)) return jsonData.data;
+  return null;
+}
+
+function scatterPointLabel(point) {
+  if (!point || typeof point !== 'object') return '';
+  return String(
+    point.label ?? point.pref ?? point.areaName ?? point.name ?? ''
+  ).trim();
+}
+
+function scatterPointIdentity(point) {
+  if (!point || typeof point !== 'object') return '';
+  return String(
+    point.areaCode ?? point.code ?? scatterPointLabel(point)
+  ).trim();
+}
+
+function explicitScatterPointCount(jsonData, sourceData) {
+  return jsonData?.expectedPointCount ?? sourceData?.expectedPointCount;
+}
+
+/**
+ * 散布図 data JSON の再生成可能な最小契約を検査する。
+ *
+ * stats47 のブログ散布図は都道府県単位なので原則47点。秘匿値等で除外する場合は
+ * source.json の excludedAreas と exclusionReason を必須にし、暗黙の欠損を許さない。
+ *
+ * @param {string} filename
+ * @param {object|undefined} jsonData
+ * @param {object|undefined} [sourceData]
+ * @returns {{ errors: string[], warnings: string[] }}
+ */
+export function lintScatterData(filename, jsonData, sourceData) {
+  const errors = [];
+  const warnings = [];
+  if (scatterChartType(filename, jsonData) !== 'scatter')
+    return { errors, warnings };
+
+  if (!jsonData || typeof jsonData !== 'object' || Array.isArray(jsonData)) {
+    errors.push('散布図JSONをオブジェクトとして解析できない');
+    return { errors, warnings };
+  }
+
+  const points = scatterRawPoints(jsonData);
+  if (!points) {
+    errors.push('散布図JSONに points または data 配列がない');
+    return { errors, warnings };
+  }
+  if (
+    sourceData?.kind === 'calculated' &&
+    !String(sourceData?.formula ?? '').trim()
+  ) {
+    errors.push('calculated 散布図は source.json の formula が必須');
+  }
+
+  const invalidIndexes = [];
+  const missingLabelIndexes = [];
+  const identities = [];
+  for (const [index, point] of points.entries()) {
+    if (
+      !point ||
+      typeof point !== 'object' ||
+      !Number.isFinite(point.x) ||
+      !Number.isFinite(point.y)
+    ) {
+      invalidIndexes.push(index);
+      continue;
+    }
+    if (!scatterPointLabel(point)) missingLabelIndexes.push(index);
+    identities.push(scatterPointIdentity(point));
+  }
+  if (invalidIndexes.length > 0) {
+    errors.push(
+      `散布図JSONに有限数の x/y を持たない点が ${invalidIndexes.length}/${points.length} 件ある` +
+        ` (index: ${invalidIndexes.slice(0, 5).join(', ')})`
+    );
+  }
+  if (missingLabelIndexes.length > 0) {
+    errors.push(
+      `散布図JSONに都道府県ラベルがない点が ${missingLabelIndexes.length}/${points.length} 件ある` +
+        ` (index: ${missingLabelIndexes.slice(0, 5).join(', ')})`
+    );
+  }
+
+  const duplicateIdentities = [
+    ...new Set(
+      identities.filter(
+        (identity, index) => identity && identities.indexOf(identity) !== index
+      )
+    ),
+  ];
+  if (duplicateIdentities.length > 0) {
+    errors.push(
+      `散布図JSONの都道府県識別子が重複している: ${duplicateIdentities.slice(0, 5).join(', ')}`
+    );
+  }
+
+  const explicitCount = explicitScatterPointCount(jsonData, sourceData);
+  if (
+    explicitCount !== undefined &&
+    (!Number.isInteger(explicitCount) ||
+      explicitCount < 1 ||
+      explicitCount > PREFECTURE_SCATTER_POINT_COUNT)
+  ) {
+    errors.push(
+      `expectedPointCount=${String(explicitCount)} は1〜${PREFECTURE_SCATTER_POINT_COUNT}の整数でなければならない`
+    );
+  }
+
+  const excludedAreas = sourceData?.excludedAreas;
+  let expectedFromExclusions;
+  if (excludedAreas !== undefined) {
+    if (
+      !Array.isArray(excludedAreas) ||
+      excludedAreas.some((area) => typeof area !== 'string' || !area.trim())
+    ) {
+      errors.push(
+        'source.json の excludedAreas は空でない都道府県名の配列でなければならない'
+      );
+    } else {
+      const normalizedExcluded = excludedAreas.map((area) => area.trim());
+      const uniqueExcluded = new Set(normalizedExcluded);
+      if (uniqueExcluded.size !== normalizedExcluded.length) {
+        errors.push('source.json の excludedAreas に重複がある');
+      }
+      if (!String(sourceData?.exclusionReason ?? '').trim()) {
+        errors.push(
+          'excludedAreas がある散布図は source.json の exclusionReason が必須'
+        );
+      }
+      expectedFromExclusions =
+        PREFECTURE_SCATTER_POINT_COUNT - uniqueExcluded.size;
+      const includedExcludedAreas = normalizedExcluded.filter((area) =>
+        points.some((point) => scatterPointLabel(point) === area)
+      );
+      if (includedExcludedAreas.length > 0) {
+        errors.push(
+          `excludedAreas の点が散布図JSONに含まれている: ${includedExcludedAreas.join(', ')}`
+        );
+      }
+    }
+  }
+
+  if (
+    Number.isInteger(explicitCount) &&
+    expectedFromExclusions !== undefined &&
+    explicitCount !== expectedFromExclusions
+  ) {
+    errors.push(
+      `expectedPointCount=${explicitCount} と excludedAreas から算出した ${expectedFromExclusions} が一致しない`
+    );
+  }
+
+  const expectedCount =
+    Number.isInteger(explicitCount) && explicitCount >= 1
+      ? explicitCount
+      : (expectedFromExclusions ?? PREFECTURE_SCATTER_POINT_COUNT);
+  if (points.length !== expectedCount) {
+    errors.push(
+      `散布図JSONの点数が ${points.length} 件 — 期待値は ${expectedCount} 件` +
+        (expectedFromExclusions === undefined
+          ? '。欠損を許容する場合は source.json に excludedAreas と exclusionReason を明記する'
+          : '')
+    );
+  }
+
+  return { errors, warnings };
+}
+
+/**
+ * data JSON の有効点数と SVG に実際に描かれた点数の一致を検査する。
+ *
+ * @param {string} filename
+ * @param {string} svgContent
+ * @param {object|undefined} jsonData
+ * @returns {{ errors: string[], warnings: string[] }}
+ */
+export function lintScatterParity(filename, svgContent, jsonData) {
+  const errors = [];
+  const warnings = [];
+  if (scatterChartType(filename, jsonData) !== 'scatter')
+    return { errors, warnings };
+  const points = scatterRawPoints(jsonData);
+  if (!points) return { errors, warnings };
+
+  const validPointCount = points.filter(
+    (point) =>
+      point &&
+      typeof point === 'object' &&
+      Number.isFinite(point.x) &&
+      Number.isFinite(point.y)
+  ).length;
+  const renderedPointCount = (
+    String(svgContent).match(/<circle\b[^>]*>\s*<title>[^<]*：X=/g) || []
+  ).length;
+  if (renderedPointCount !== validPointCount) {
+    errors.push(
+      `散布図の点数不一致: JSON=${validPointCount} 件 / SVG=${renderedPointCount} 件。JSONから再生成する`
+    );
+  }
+  return { errors, warnings };
+}
 
 /**
  * 散布図が「正方形・単色・凡例なし」の現行デザインを満たすか検査する。
@@ -181,8 +433,8 @@ export const SCATTER_CANVAS = { w: 720, h: 720 };
 export function lintScatterQuality(filename, svgContent, jsonData) {
   const errors = [];
   const warnings = [];
-  const ct = jsonData?.chartType === "scatter" ? "scatter" : classifyChartTypeFromName(filename);
-  if (ct !== "scatter") return { errors, warnings };
+  const ct = scatterChartType(filename, jsonData);
+  if (ct !== 'scatter') return { errors, warnings };
   const svg = String(svgContent);
   const { w: CW, h: CH } = SCATTER_CANVAS;
 
@@ -191,38 +443,53 @@ export function lintScatterQuality(filename, svgContent, jsonData) {
     const w = Math.round(parseFloat(vb[1]));
     const h = Math.round(parseFloat(vb[2]));
     if (w !== CW || h !== CH) {
-      errors.push(`散布図のキャンバスが ${w}×${h} — 正規は ${CW}×${CH} の正方形。svg-builder で再生成する`);
+      errors.push(
+        `散布図のキャンバスが ${w}×${h} — 正規は ${CW}×${CH} の正方形。svg-builder で再生成する`
+      );
     }
   }
 
   const plot = svg.match(
-    /<rect\b[^>]*\bwidth="(\d+(?:\.\d+)?)"[^>]*\bheight="(\d+(?:\.\d+)?)"[^>]*\bclass="svg-plot svg-plot-border"[^>]*>/,
+    /<rect\b[^>]*\bwidth="(\d+(?:\.\d+)?)"[^>]*\bheight="(\d+(?:\.\d+)?)"[^>]*\bclass="svg-plot svg-plot-border"[^>]*>/
   );
   if (!plot) {
-    errors.push("散布図のプロット領域が見つからない — svg-builder で再生成する");
+    errors.push(
+      '散布図のプロット領域が見つからない — svg-builder で再生成する'
+    );
   } else if (Math.abs(parseFloat(plot[1]) - parseFloat(plot[2])) > 0.1) {
-    errors.push(`散布図のプロット領域が ${plot[1]}×${plot[2]} — 幅と高さを同じにして正方形にする`);
+    errors.push(
+      `散布図のプロット領域が ${plot[1]}×${plot[2]} — 幅と高さを同じにして正方形にする`
+    );
   }
 
-  const dotTags = [...svg.matchAll(/<circle\b[^>]*>\s*<title>[^<]*：X=/g)].map((match) => match[0]);
+  const dotTags = [...svg.matchAll(/<circle\b[^>]*>\s*<title>[^<]*：X=/g)].map(
+    (match) => match[0]
+  );
   const fills = new Set(
     dotTags
       .map((tag) => tag.match(/\bfill="([^"]+)"/)?.[1]?.toLowerCase())
-      .filter(Boolean),
+      .filter(Boolean)
   );
   const strokes = new Set(
     dotTags
       .map((tag) => tag.match(/\bstroke="([^"]+)"/)?.[1]?.toLowerCase())
-      .filter(Boolean),
+      .filter(Boolean)
   );
   if (fills.size > 1 || strokes.size > 1) {
-    errors.push("散布図の点が複数色で描かれている — 地域別色分けをやめ、全点を単色にする");
+    errors.push(
+      '散布図の点が複数色で描かれている — 地域別色分けをやめ、全点を単色にする'
+    );
   }
-  if ([...fills].some((fill) => fill !== "#64748b") || [...strokes].some((stroke) => stroke !== "#475569")) {
-    errors.push("散布図の点が正規のニュートラル色でない — fill=#64748b / stroke=#475569 で再生成する");
+  if (
+    [...fills].some((fill) => fill !== '#64748b') ||
+    [...strokes].some((stroke) => stroke !== '#475569')
+  ) {
+    errors.push(
+      '散布図の点が正規のニュートラル色でない — fill=#64748b / stroke=#475569 で再生成する'
+    );
   }
   if (/<!--\s*凡例\s*-->|北海道・東北|中国・四国|九州・沖縄/.test(svg)) {
-    errors.push("散布図に地域凡例が残っている — 単一系列なので凡例を削除する");
+    errors.push('散布図に地域凡例が残っている — 単一系列なので凡例を削除する');
   }
 
   return { errors, warnings };
@@ -241,14 +508,14 @@ export function extractInlineSvgs(md) {
 /** SVG 文字列 → 表示テキスト (タグ除去 + XML エンティティ復元 + 空白正規化) */
 function svgPlainText(svgContent) {
   return String(svgContent)
-    .replace(/<!--[\s\S]*?-->/g, "")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&apos;/g, "'")
-    .replace(/\s+/g, "");
+    .replace(/\s+/g, '');
 }
 
 /**
@@ -266,19 +533,25 @@ function svgPlainText(svgContent) {
 export function lintChoroplethLegend(filename, svgContent, jsonData) {
   const errors = [];
   const warnings = [];
-  const ct = jsonData?.chartType === "tile-grid" ? "tile-grid" : classifyChartTypeFromName(filename);
-  if (ct !== "tile-grid") return { errors, warnings };
+  const ct =
+    jsonData?.chartType === 'tile-grid'
+      ? 'tile-grid'
+      : classifyChartTypeFromName(filename);
+  if (ct !== 'tile-grid') return { errors, warnings };
   const svg = String(svgContent);
-  const hasExplicit = Array.isArray(jsonData?.legendLabels) && jsonData.legendLabels.length === 2;
+  const hasExplicit =
+    Array.isArray(jsonData?.legendLabels) && jsonData.legendLabels.length === 2;
   const semantic = svg.match(/<text[^>]*>(安全|危険|良い|悪い)<\/text>/);
   if (semantic && !hasExplicit) {
     errors.push(
       `凡例に意味的ラベル「${semantic[1]}」が json の legendLabels 明示なしに焼き込まれている` +
-      ` (既定は 低い/高い。意味的ラベルは指標の意味が確実な場合のみ json に legendLabels を明示する)`
+        ` (既定は 低い/高い。意味的ラベルは指標の意味が確実な場合のみ json に legendLabels を明示する)`
     );
   }
   if (!semantic && !hasExplicit && !/<text[^>]*>低い</.test(svg)) {
-    warnings.push("凡例ラベル (低い/高い) が見つからない — 旧デザインの可能性。svg-builder で再生成して統一する");
+    warnings.push(
+      '凡例ラベル (低い/高い) が見つからない — 旧デザインの可能性。svg-builder で再生成して統一する'
+    );
   }
   return { errors, warnings };
 }
@@ -318,8 +591,11 @@ export const TILE_GRID_CANVAS = { w: 720, h: 720 };
 export function lintTileGridQuality(filename, svgContent, jsonData) {
   const errors = [];
   const warnings = [];
-  const ct = jsonData?.chartType === "tile-grid" ? "tile-grid" : classifyChartTypeFromName(filename);
-  if (ct !== "tile-grid") return { errors, warnings };
+  const ct =
+    jsonData?.chartType === 'tile-grid'
+      ? 'tile-grid'
+      : classifyChartTypeFromName(filename);
+  if (ct !== 'tile-grid') return { errors, warnings };
   const svg = String(svgContent);
   const { w: CW, h: CH } = TILE_GRID_CANVAS;
 
@@ -331,46 +607,50 @@ export function lintTileGridQuality(filename, svgContent, jsonData) {
     if (w !== CW || h !== CH) {
       errors.push(
         `タイルマップのキャンバスが ${w}×${h} — 正規は ${CW}×${CH}` +
-          ` (記事内は 672px 幅で描画されるため、この比率が画面上の占有高さを決める)。svg-builder で再生成する`,
+          ` (記事内は 672px 幅で描画されるため、この比率が画面上の占有高さを決める)。svg-builder で再生成する`
       );
     }
   }
 
   // 2. 不透明な背景 (キャンバス全面を覆う rect)
   const bgRect = svg.match(
-    new RegExp(`<rect(?![^>]*\\bx=)[^>]*width="${CW}"[^>]*height="${CH}"[^>]*>`),
+    new RegExp(`<rect(?![^>]*\\bx=)[^>]*width="${CW}"[^>]*height="${CH}"[^>]*>`)
   );
   if (bgRect || /class="svg-(bg|plot)"/.test(svg)) {
     errors.push(
-      "背景 rect が敷かれている — タイルマップは透過にしてページの地色に馴染ませる" +
-        " (ライト/ダークの両対応がこれで同時に成立する)",
+      '背景 rect が敷かれている — タイルマップは透過にしてページの地色に馴染ませる' +
+        ' (ライト/ダークの両対応がこれで同時に成立する)'
     );
   }
 
   // 3-4. テーマ依存の指定
   if (/prefers-color-scheme/.test(svg)) {
     errors.push(
-      "`@media (prefers-color-scheme)` を含む — サイトのテーマは OS を参照しない" +
-        " (next-themes / enableSystem=false) ため、OS とサイトが食い違うと SVG だけ色が反転する。" +
-        "テーマ非依存の配色にする",
+      '`@media (prefers-color-scheme)` を含む — サイトのテーマは OS を参照しない' +
+        ' (next-themes / enableSystem=false) ため、OS とサイトが食い違うと SVG だけ色が反転する。' +
+        'テーマ非依存の配色にする'
     );
   }
   if (/class="svg-(title|axis|tick|grid|plot-border)"/.test(svg)) {
     errors.push(
-      "テーマ依存の svg-* class を使っている — tile-grid では svgThemeStyle() を使わない (理由は上に同じ)",
+      'テーマ依存の svg-* class を使っている — tile-grid では svgThemeStyle() を使わない (理由は上に同じ)'
     );
   }
 
   // 5. 凡例が右下にあるか (グラデーションバーの位置で判定)
-  const bar = svg.match(/<rect x="([\d.]+)" y="([\d.]+)"[^>]*fill="url\(#choropleth-lg\)"/);
+  const bar = svg.match(
+    /<rect x="([\d.]+)" y="([\d.]+)"[^>]*fill="url\(#choropleth-lg\)"/
+  );
   if (!bar) {
-    errors.push("凡例のグラデーションバーが見つからない — svg-builder で再生成する");
+    errors.push(
+      '凡例のグラデーションバーが見つからない — svg-builder で再生成する'
+    );
   } else {
     const bx = parseFloat(bar[1]);
     const by = parseFloat(bar[2]);
     if (bx < CW / 2 || by < CH / 2) {
       errors.push(
-        `凡例が右下にない (x=${bx}, y=${by})。左上は上位/下位リストが使うため凡例は右下に置く`,
+        `凡例が右下にない (x=${bx}, y=${by})。左上は上位/下位リストが使うため凡例は右下に置く`
       );
     }
   }
@@ -378,18 +658,20 @@ export function lintTileGridQuality(filename, svgContent, jsonData) {
   // 6. 上位 3 県のリスト (タイルが 3 件以上あるときのみ要求)
   //    旧デザインは「高い順 / 低い順」の見出しを持っていた。現行は見出しを持たず
   //    「1. 宮崎県」の形で並べるので、その形を探す。
-  const tileCount = (svg.match(/<rect [^>]*rx="3"[^>]*fill="(?:rgb\(|#)/g) || []).length;
+  const tileCount = (
+    svg.match(/<rect [^>]*rx="3"[^>]*fill="(?:rgb\(|#)/g) || []
+  ).length;
   const rankRows = (svg.match(/>[1-3]\.\s/g) || []).length;
   if (tileCount >= 3 && rankRows < 3) {
     warnings.push(
-      "上位 3 県のリストが見つからない — 旧デザインの可能性。svg-builder で再生成して統一する",
+      '上位 3 県のリストが見つからない — 旧デザインの可能性。svg-builder で再生成して統一する'
     );
   }
   // 旧デザインの残存を積極的に検出する (見出しが残っていれば確実に旧版)
   if (/高い順|低い順|多い順/.test(svg)) {
     errors.push(
-      "旧デザインの見出し (高い順/低い順/多い順) が残っている — 現行は見出しを持たず" +
-        " 上位 3 県のみを「1. 県名」の形で出す。svg-builder で再生成する",
+      '旧デザインの見出し (高い順/低い順/多い順) が残っている — 現行は見出しを持たず' +
+        ' 上位 3 県のみを「1. 県名」の形で出す。svg-builder で再生成する'
     );
   }
   return { errors, warnings };
@@ -410,24 +692,29 @@ export function lintTileGridQuality(filename, svgContent, jsonData) {
 export function lintFindingsParity(filename, svgContent, jsonData) {
   const errors = [];
   const warnings = [];
-  const ct = jsonData?.chartType === "summary" ? "summary" : classifyChartTypeFromName(filename);
-  if (ct !== "summary") return { errors, warnings };
+  const ct =
+    jsonData?.chartType === 'summary'
+      ? 'summary'
+      : classifyChartTypeFromName(filename);
+  if (ct !== 'summary') return { errors, warnings };
   const items = Array.isArray(jsonData) ? jsonData : jsonData?.findings;
   if (!Array.isArray(items) || items.length === 0) return { errors, warnings };
   const plain = svgPlainText(svgContent);
   const expected = [];
   for (const it of items) {
-    if (typeof it === "string") expected.push(it);
-    else if (it && typeof it === "object") {
+    if (typeof it === 'string') expected.push(it);
+    else if (it && typeof it === 'object') {
       if (it.heading) expected.push(it.heading);
       if (it.text) expected.push(it.text);
     }
   }
-  const missing = expected.filter((t) => t && !plain.includes(String(t).replace(/\s+/g, "")));
+  const missing = expected.filter(
+    (t) => t && !plain.includes(String(t).replace(/\s+/g, ''))
+  );
   if (missing.length > 0) {
     errors.push(
       `findings の内容欠落 ${missing.length}/${expected.length} 件 — json の heading/text が SVG に描画されていない` +
-      ` (例: "${String(missing[0]).slice(0, 30)}")。generate-article-charts で再生成が必要 (過去に renderer の heading 脱落バグで発生)`
+        ` (例: "${String(missing[0]).slice(0, 30)}")。generate-article-charts で再生成が必要 (過去に renderer の heading 脱落バグで発生)`
     );
   }
   return { errors, warnings };

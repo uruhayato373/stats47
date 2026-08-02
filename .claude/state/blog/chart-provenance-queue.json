@@ -1,13 +1,14 @@
 {
-  "generatedAt": "2026-08-01T23:50:51.265Z",
+  "generatedAt": "2026-08-02T08:28:47.969Z",
   "checked": 916,
   "byVerdict": {
-    "restorable": 813,
+    "restorable": 823,
     "out-of-scope": 65,
-    "self-declared-incomplete": 20,
-    "missing-reference": 18
+    "self-declared-incomplete": 19,
+    "missing-reference": 5,
+    "dead-estat-reference": 4
   },
-  "defectCount": 38,
+  "defectCount": 28,
   "defects": [
     {
       "slug": "cc-estat-17-edu-slope-graph",
@@ -38,20 +39,6 @@
       "detail": "出自(rankingKey/derived)が data json に無い。SSOTを特定して補完すること"
     },
     {
-      "slug": "dual-income-reversal",
-      "base": "head-vs-actual-scatter",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
-      "slug": "dual-income-reversal",
-      "base": "income-summary-findings",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
       "slug": "extreme-heat-days-prefecture",
       "base": "hokkaido-kumamoto-timeseries",
       "kind": "line",
@@ -59,60 +46,46 @@
       "detail": "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること"
     },
     {
-      "slug": "gasoline-car-society-map",
-      "base": "gasoline-vs-citygas-scatter",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
-      "slug": "gasoline-car-society-map",
-      "base": "gasoline-summary-findings",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
-      "slug": "household-income-tokyo-okinawa",
-      "base": "income-tax-scatter",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
       "slug": "ict-media-consumption-gender-gap",
       "base": "media-gender-gap-map",
       "kind": "derived",
       "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
+      "detail": "再取得に必要な参照または計算式が無い"
+    },
+    {
+      "slug": "inbound-by-nationality-regional-preference",
+      "base": "korea-guest-map",
+      "kind": "estat",
+      "verdict": "dead-estat-reference",
+      "detail": "e-Stat API で取得できない statsDataId: 000040199338"
+    },
+    {
+      "slug": "inbound-by-nationality-regional-preference",
+      "base": "taiwan-guest-map",
+      "kind": "estat",
+      "verdict": "dead-estat-reference",
+      "detail": "e-Stat API で取得できない statsDataId: 000040199338"
+    },
+    {
+      "slug": "inbound-by-nationality-regional-preference",
+      "base": "nationality-composition-top15",
+      "kind": "estat",
+      "verdict": "dead-estat-reference",
+      "detail": "e-Stat API で取得できない statsDataId: 000040199338"
+    },
+    {
+      "slug": "inbound-by-nationality-regional-preference",
+      "base": "usa-guests-ranking",
+      "kind": "estat",
+      "verdict": "dead-estat-reference",
+      "detail": "e-Stat API で取得できない statsDataId: 000040199338"
     },
     {
       "slug": "inbound-overnight-stay-concentration",
       "base": "foreign-guest-ratio-map",
       "kind": "derived",
       "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
-      "slug": "industrial-water-manufacturing-nexus",
-      "base": "water-efficiency-ranking",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
-      "slug": "industrial-water-manufacturing-nexus",
-      "base": "water-vs-shipment-scatter",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
-      "slug": "industrial-water-manufacturing-nexus",
-      "base": "water-vs-addedvalue-scatter",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
+      "detail": "再取得に必要な参照または計算式が無い"
     },
     {
       "slug": "international-cooperation-volunteer-map",
@@ -154,14 +127,7 @@
       "base": "burden-score-tilemap",
       "kind": "derived",
       "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
-      "slug": "prefecture-salary-gap-career",
-      "base": "salary-gap-by-job",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
+      "detail": "再取得に必要な参照または計算式が無い"
     },
     {
       "slug": "prefecture-salary-remote-gap",
@@ -178,13 +144,6 @@
       "detail": "出自(rankingKey/derived)が data json に無い。SSOTを特定して補完すること"
     },
     {
-      "slug": "renewable-energy-regional-gap",
-      "base": "solar-vs-wind-scatter",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
       "slug": "retail-establishments-by-prefecture",
       "base": "retail-establishments-density-prefecture-rankings",
       "kind": "ranking",
@@ -196,21 +155,14 @@
       "base": "road-summary-findings",
       "kind": "manual",
       "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
-      "slug": "semiconductor-electronics-regional-map",
-      "base": "semiconductor-dependency-scatter",
-      "kind": "scatter",
-      "verdict": "self-declared-incomplete",
-      "detail": "出自(rankingKey/derived)が data json に無い。SSOTを特定して補完すること"
+      "detail": "再取得に必要な参照または計算式が無い"
     },
     {
       "slug": "software-engineer-income-gap",
       "base": "software-engineer-income-national-trend",
       "kind": "estat",
       "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
+      "detail": "再取得に必要な参照または計算式が無い"
     },
     {
       "slug": "travel-behavior-gender-gap",
@@ -253,27 +205,6 @@
       "kind": "bar",
       "verdict": "self-declared-incomplete",
       "detail": "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること"
-    },
-    {
-      "slug": "wheat-flour-expenditure-vs-quantity",
-      "base": "wheat-flour-qty-vs-expenditure-scatter",
-      "kind": "scatter",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
-      "slug": "womens-clothing-expenditure-ranking",
-      "base": "mens-womens-clothing-scatter",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
-    },
-    {
-      "slug": "workplace-accident-regional-map",
-      "base": "freq-severity-scatter",
-      "kind": "derived",
-      "verdict": "missing-reference",
-      "detail": "再取得に必要な参照が無い"
     }
   ]
 }
