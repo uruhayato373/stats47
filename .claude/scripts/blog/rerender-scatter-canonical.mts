@@ -1,12 +1,12 @@
 #!/usr/bin/env -S npx tsx
 /**
- * rerender-scatter-canonical.mts — scatter カタログのサイズ統一 (960×624)。
+ * rerender-scatter-canonical.mts — scatter カタログの正方形・単色統一 (720×720)。
  *
- * 既存の検証済み scatter json (status=both) から、svg-builder の generateScatterSvg(W=960,H=624 固定)
- * で SVG を再描画し、非正規サイズ (680×420/700×560 等) を是正する。値 (points) は変えない。
- * generate-article-charts の genScatterChartSvg アダプタを再現 (points→ScatterPoint[] + 地域色)。
+ * 既存の検証済み scatter json (status=both) から、svg-builder の generateScatterSvg(W=720,H=720 固定)
+ * で SVG を再描画し、横長キャンバスと地域色分けを是正する。値 (points) は変えない。
+ * generate-article-charts の genScatterChartSvg アダプタを再現する。
  *
- * - 既に 960×624 の SVG はスキップ (no-op)。
+ * - 生成結果と同一の SVG はスキップ (no-op)。
  * - title/xLabel/yLabel/xUnit/yUnit は json から継承。
  *
  * 出力: staging .local/r2/app/blog/<slug>/data/<base>.svg (json/source.json は不変)
@@ -27,21 +27,6 @@ const args = process.argv.slice(2);
 const PROBE_ONLY = args.includes("--probe-only");
 const BASE_ARG = (() => { const i = args.indexOf("--base"); return i >= 0 ? args[i + 1] : null; })();
 
-// prefName→2桁コード (地域色分け用。generate-article-charts の prefCodeOf 同等)
-const PREF_NAME_TO_CODE: Map<string, string> = (() => {
-  const map = new Map<string, string>();
-  try {
-    const raw = fs.readFileSync(path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json"), "utf8");
-    for (const p of JSON.parse(raw)) {
-      const code2 = String(p.prefCode).slice(0, 2);
-      map.set(p.prefName, code2);
-      map.set(String(p.prefName).replace(/[都道府県]$/, ""), code2);
-    }
-  } catch { /* 地域色なしで続行 */ }
-  return map;
-})();
-const prefCodeOf = (name: string) => PREF_NAME_TO_CODE.get(String(name || "").trim()) || "";
-
 async function fj(u: string): Promise<any> { const r = await fetch(u); if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }
 async function ft(u: string): Promise<string> { const r = await fetch(u); if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }
 function viewBoxOf(svg: string): string { const m = svg.match(/viewBox="0 0 (\d+) (\d+)"/); return m ? `${m[1]}x${m[2]}` : "?"; }
@@ -54,14 +39,13 @@ function renderScatter(data: any): string {
   const raw = data.points || data.data || [];
   const points = raw
     .filter((p: any) => typeof p.x === "number" && typeof p.y === "number")
-    .map((p: any) => ({ name: p.label || p.pref || p.areaName || "", code: p.code || prefCodeOf(p.label || p.pref || p.areaName || ""), x: p.x, y: p.y }));
+    .map((p: any) => ({ name: p.label || p.pref || p.areaName || "", code: p.code || "", x: p.x, y: p.y }));
   if (!points.length) return "";
   return generateScatterSvg(points, {
     title,
     xLabel: data.xUnit ? `${xLabel}（${data.xUnit}）` : xLabel,
     yLabel: data.yUnit ? `${yLabel}（${data.yUnit}）` : yLabel,
-    colorByRegion: true,
-  } as any);
+  });
 }
 
 function loadTargets(): { slug: string; base: string }[] {
@@ -90,7 +74,7 @@ async function main() {
     const newSvg = renderScatter(json);
     if (!newSvg) { rec.result = "empty"; return rec; }
     rec.newSize = viewBoxOf(newSvg);
-    if (rec.oldSize === "960x624") { rec.result = "already-canonical"; return rec; }
+    if (oldSvg === newSvg) { rec.result = "already-canonical"; return rec; }
     rec.result = "rerender";
     if (!PROBE_ONLY) {
       const dir = path.join(STAGE, t.slug, "data");

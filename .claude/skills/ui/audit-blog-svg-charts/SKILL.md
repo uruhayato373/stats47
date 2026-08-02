@@ -56,7 +56,7 @@ grep -rn \
 `#e65100`, `#ef6c00`, `#f57c00`, `#fb8c00`, `#ffa726`, `#ffb74d`, `#ffcc80`, `#ffe0b2`, `#fff3e0`, `#fff8f0`,
 `#7b1fa2`, `#8e24aa`, `#9c27b0`, `#ab47bc`, `#ba68c8`, `#ce93d8`, `#e1bee7`, `#f3e5f5`, `#f8eafc`, `#fdf7ff`,
 `#2e7d32`, `#388e3c`, `#43a047`, `#66bb6a`, `#81c784`, `#a5d6a7`, `#c8e6c9`, `#e8f5e9`, `#f1f8f2`, `#f7fcf8`,
-`#6b8fc9`, `#3b6fa0`,
+`#64748b`, `#475569`,
 `#dc2626`, `#ef4444`, `#fef2f2`, `#eff6ff`）を除いた残りが是正対象。
 
 > **CARD_THEMES（カード型ランキングの専用色）**: `bar-chart.ts` の `CARD_THEMES`
@@ -155,9 +155,9 @@ find .local/r2/app/blog -name "*.json" -path "*/data/*" | \
 | `.claude/scripts/blog/audit-chart-quality.mjs` | 全記事バッチ監査（内容 lint + **サイズ lint**）。本スキルよりも広範・パブリック R2 対応 |
 
 > **★アスペクト比統一 gate（2026-06-21）**: `lintSvgSize(filename, content)` が filename→chartType→正規 viewBox 幅
-> （bar 960/680・scatter 960・tile-grid 600・line/stacked 680・summary 960）を blocker で検査。`audit-chart-quality.mjs`
+> （bar 960/680・scatter 720・tile-grid 720・line/stacked 680・summary 960）を blocker で検査。`audit-chart-quality.mjs`
 > と `quality-gate.mjs`（pre-commit + publish-blog.yml）に配線済。正典 `blog-svg-chart-standards.md` §6。是正は
-> `rerender-ranking-columns.mts`（960×404）/ `rerender-scatter-canonical.mts`（960×624）。
+> `rerender-ranking-columns.mts`（960×404）/ `rerender-scatter-canonical.mts`（720×720・単色）。
 > **R2 反映は S3 API（diff-push-r2）で。`push-r2-wrangler` は flaky（Upload 完了表示でも未永続化）→ S3 GET で検証。**
 | `.claude/scripts/blog/build-svg-gallery.mjs` | 全 SVG の目視レビュー用 HTML ギャラリー生成（下記） |
 

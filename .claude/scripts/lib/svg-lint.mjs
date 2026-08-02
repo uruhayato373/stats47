@@ -124,7 +124,7 @@ const CANONICAL_WIDTH = {
   "tile-grid": [720],       // 720×720 (2026-07-31 に 780×560 から変更。lintTileGridQuality 参照)
   summary: [960],           // findings card 幅 960 (高さ可変)
   line: [680],              // 680×420
-  scatter: [960],           // 960×624
+  scatter: [720],           // 720×720
   "stacked-bar": [680],     // 680×可変
 };
 // 全カタログ統一完了 (2026-06-21): both 全件が正規幅。error で再発防止する。
@@ -165,6 +165,68 @@ export function lintSvgSize(filename, content) {
   return { errors, warnings };
 }
 function path_base(p) { const s = String(p).split("/"); return s[s.length - 1]; }
+
+// ---------- scatter の品質不変量 (2026-08-02) ----------
+/** 散布図の正規キャンバス。blog-svg-chart-standards.md §5 と scatter.ts が正典。 */
+export const SCATTER_CANVAS = { w: 720, h: 720 };
+
+/**
+ * 散布図が「正方形・単色・凡例なし」の現行デザインを満たすか検査する。
+ *
+ * @param {string} filename - SVG ファイル名 (chartType 推定)
+ * @param {string} svgContent - SVG 文字列
+ * @param {object|undefined} [jsonData] - 対応する data/<name>.json (chartType の明示に使う)
+ * @returns {{ errors: string[], warnings: string[] }}
+ */
+export function lintScatterQuality(filename, svgContent, jsonData) {
+  const errors = [];
+  const warnings = [];
+  const ct = jsonData?.chartType === "scatter" ? "scatter" : classifyChartTypeFromName(filename);
+  if (ct !== "scatter") return { errors, warnings };
+  const svg = String(svgContent);
+  const { w: CW, h: CH } = SCATTER_CANVAS;
+
+  const vb = svg.match(/viewBox\s*=\s*"0 0 (\d+(?:\.\d+)?) (\d+(?:\.\d+)?)"/);
+  if (vb) {
+    const w = Math.round(parseFloat(vb[1]));
+    const h = Math.round(parseFloat(vb[2]));
+    if (w !== CW || h !== CH) {
+      errors.push(`散布図のキャンバスが ${w}×${h} — 正規は ${CW}×${CH} の正方形。svg-builder で再生成する`);
+    }
+  }
+
+  const plot = svg.match(
+    /<rect\b[^>]*\bwidth="(\d+(?:\.\d+)?)"[^>]*\bheight="(\d+(?:\.\d+)?)"[^>]*\bclass="svg-plot svg-plot-border"[^>]*>/,
+  );
+  if (!plot) {
+    errors.push("散布図のプロット領域が見つからない — svg-builder で再生成する");
+  } else if (Math.abs(parseFloat(plot[1]) - parseFloat(plot[2])) > 0.1) {
+    errors.push(`散布図のプロット領域が ${plot[1]}×${plot[2]} — 幅と高さを同じにして正方形にする`);
+  }
+
+  const dotTags = [...svg.matchAll(/<circle\b[^>]*>\s*<title>[^<]*：X=/g)].map((match) => match[0]);
+  const fills = new Set(
+    dotTags
+      .map((tag) => tag.match(/\bfill="([^"]+)"/)?.[1]?.toLowerCase())
+      .filter(Boolean),
+  );
+  const strokes = new Set(
+    dotTags
+      .map((tag) => tag.match(/\bstroke="([^"]+)"/)?.[1]?.toLowerCase())
+      .filter(Boolean),
+  );
+  if (fills.size > 1 || strokes.size > 1) {
+    errors.push("散布図の点が複数色で描かれている — 地域別色分けをやめ、全点を単色にする");
+  }
+  if ([...fills].some((fill) => fill !== "#64748b") || [...strokes].some((stroke) => stroke !== "#475569")) {
+    errors.push("散布図の点が正規のニュートラル色でない — fill=#64748b / stroke=#475569 で再生成する");
+  }
+  if (/<!--\s*凡例\s*-->|北海道・東北|中国・四国|九州・沖縄/.test(svg)) {
+    errors.push("散布図に地域凡例が残っている — 単一系列なので凡例を削除する");
+  }
+
+  return { errors, warnings };
+}
 
 /**
  * Markdown 本文からインライン <svg>...</svg> ブロックを抽出する。
