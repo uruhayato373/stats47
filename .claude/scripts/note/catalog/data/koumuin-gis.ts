@@ -25,7 +25,7 @@ export const koumuinGisArticles: NoteArticle[] = [
     key: "paid-nf80da34b28c3",
     vertical: "koumuin-gis",
     title: "【D3.js×Next.js】ダサい地図から脱却するデータ可視化の配色理論。AIへの的確な指示にも使える全98種コード付き",
-    magazine: "koumuin-gis",
+    magazine: "product-d3-colors",
     isPaid: true,
     priceJpy: 200,
     status: "published",

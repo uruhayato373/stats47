@@ -19,24 +19,26 @@ import type { NoteMagazine } from "./types";
 
 export const NOTE_MAGAZINES: NoteMagazine[] = [
   // ── koumuin 系 (既存フッター運用をカタログ化。マガジン未作成 = noteUrl null) ──
+  // note.com 実在マガジン (2026-08-03 照合)。isPaid=true は buy-once の有料マガジンで、
+  // 無料記事も束ねる note.com のモデル (validate の「有料マガジンに無料記事」warn は想定内)。
   {
     key: "koumuin-claude-code",
-    name: "自治体職員のための Claude Code 実務ガイド",
-    isPaid: false,
+    name: "公務員 × Claude Code 実務活用ガイド",
+    isPaid: true,
     description:
-      "ターミナル未経験の公務員向けに Claude Code の導入〜実務活用を段階解説するシリーズ。",
+      "ターミナル未経験の公務員向けに Claude Code の導入〜実務活用を段階解説する有料マガジン (¥1,980)。",
     verticals: ["koumuin-claude-code"],
-    noteUrl: null,
+    noteUrl: "https://note.com/stats47/m/m512ad7023815",
     placeholder: "{{MAGAZINE_URL}}",
   },
   {
     key: "koumuin-estat-claude-code",
-    name: "自治体職員のための e-Stat × Claude Code",
-    isPaid: false,
+    name: "公務員のe-Stat×Claude Code実務ガイド",
+    isPaid: true,
     description:
-      "公的統計 (e-Stat) を Claude Code で取得・整形・可視化する自治体職員向けシリーズ。",
+      "公的統計 (e-Stat) を Claude Code で取得・整形・可視化する自治体職員向け有料マガジン (¥1,480)。",
     verticals: ["koumuin-estat-claude-code"],
-    noteUrl: null,
+    noteUrl: "https://note.com/stats47/m/m1b836e4c8dce",
     placeholder: "{{ESTAT_MAGAZINE_URL}}",
   },
   {
@@ -44,10 +46,19 @@ export const NOTE_MAGAZINES: NoteMagazine[] = [
     name: "自治体職員のための GIS 入門",
     isPaid: false,
     description:
-      "無料の国土数値情報で地域課題を可視化する GIS 入門シリーズ (過疎×医療 など)。",
+      "無料の国土数値情報で地域課題を可視化する GIS 入門シリーズ (過疎×医療 など)。note.com 未作成。",
     verticals: ["koumuin-gis"],
     noteUrl: null,
     placeholder: "{{GIS_MAGAZINE_URL}}",
+  },
+  {
+    key: "product-d3-colors",
+    name: "D3.js 地図可視化のための配色完全ガイド",
+    isPaid: true,
+    description:
+      "D3.js での地図可視化の配色を体系化した有料マガジン (¥500・全6章)。note.com 実在マガジン。",
+    verticals: ["stats47-note", "koumuin-gis"],
+    noteUrl: "https://note.com/stats47/m/mfe0fab2606eb",
   },
 
   // ── stats47-note ランキング系 (e-Stat 17 カテゴリ + 行動者率クラスタ) ──
