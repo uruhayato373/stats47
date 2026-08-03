@@ -45,7 +45,7 @@ let body = raw.replace(/^---\n[\s\S]*?\n---\n*/, "");
 const imgRefs = []; let lastH = "";
 for (const l of raw.split("\n")) {
   const h = l.match(/^#{1,3}\s+(.+)/); if (h) lastH = h[1].trim();
-  const im = l.match(/!\[.*?\]\(\.\/images\/([^)]+)\)/); if (im) imgRefs.push({ file: im[1], afterHeading: lastH });
+  const im = l.match(/!\[.*?\]\((?:\.\/)?images\/([^)]+)\)/); if (im) imgRefs.push({ file: im[1], afterHeading: lastH });
 }
 // アフィリエイトバナープレースホルダー {{AFFILIATE_BANNER:X}} を抽出して除去
 const affiliateBanners = [];
