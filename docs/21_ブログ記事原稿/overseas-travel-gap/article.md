@@ -52,8 +52,6 @@ publishedAt: 2026-03-06
 
 <source-link href="/ranking/per-taxpayer-taxable-income">課税対象所得の47都道府県ランキング全順位を確認する</source-link>
 
-あわせて見る: [国内旅行行動者率ランキング](/ranking/travel-participation-rate-domestic)
-
 <ad-slot></ad-slot>
 
 ## まとめ
@@ -64,12 +62,9 @@ publishedAt: 2026-03-06
 
 海外旅行率は単なる「旅行好き度」の指標ではなく、その地域の国際的な開放度や移動環境を映し出す鏡でもあります。ただしこのデータは2001年時点のもので、23年が経過した今も同じ格差構造が続いているかは検証できていません。むしろこの間にLCC路線の拡充や地方空港の国際化が進んでおり、格差が縮小している可能性もあります。空港アクセスの改善が地方の「外向き度」をどう変えたか、最新の統計が公表された際に改めて検証する価値があるテーマです。
 
-**データ出典:**
-- [社会生活基本調査（e-Stat）](https://www.e-stat.go.jp/stat-search/files?stat_infid=000001017814)（2001年）
-- [社会・人口統計体系 都道府県データ（e-Stat）](https://www.e-stat.go.jp/regional-statistics/ssdsview)（1人当たり課税対象所得）
-
 ## データ出典
 
-本記事のデータはe-Stat（政府統計の総合窓口）を基に作成しています。
+- [社会生活基本調査（e-Stat）](https://www.e-stat.go.jp/stat-search/files?stat_infid=000001017814)（海外旅行行動者率: 2001年）
+- [社会・人口統計体系 都道府県データ（e-Stat）](https://www.e-stat.go.jp/regional-statistics/ssdsview)（納税義務者1人当たり課税対象所得: 2024年）
 
 本記事の対象データ: [関連カテゴリ](/category/international)
