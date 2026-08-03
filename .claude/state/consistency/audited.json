@@ -1,8 +1,5 @@
 {
-  "hash": "db49000a0d20301b626c153b2d81b8239dad51b6c5f7e1ef8e35347b03003049",
-  "audited_at": "2026-08-03T10:53:59",
-  "files": [
-    ".claude/scripts/note/catalog/magazines.ts",
-    ".claude/scripts/note/note-magazine.mjs"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-08-03T11:02:37",
+  "files": []
 }
