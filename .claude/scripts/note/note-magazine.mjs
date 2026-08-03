@@ -19,7 +19,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { launchContext, assertAccount } from "./lib/note-session.mjs";
+import { launchContext, assertAccount, UA } from "./lib/note-session.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const MAGAZINES_TS = join(ROOT, ".claude/scripts/note/catalog/magazines.ts");
@@ -161,7 +161,83 @@ function writeBackNoteUrl(key, noteUrl) {
   writeFileSync(MAGAZINES_TS, out);
 }
 
+// ── add-articles: catalog の割当どおりに記事をマガジンへ追加 (idempotent) ──
+async function fetchNoteIdMap(ctx) {
+  const map = {};
+  for (let p = 1; p <= 100; p++) {
+    const r = await ctx.request.get(`https://note.com/api/v2/creators/stats47/contents?kind=note&page=${p}`, { headers: { "User-Agent": UA } });
+    const j = await r.json().catch(() => ({}));
+    const contents = j?.data?.contents || [];
+    if (!contents.length) break;
+    for (const c of contents) if (c.key && c.id) map[c.key] = c.id;
+    if (j?.data?.isLastPage) break;
+  }
+  return map;
+}
+async function fetchMemberKeys(ctx, magNoteKey) {
+  const keys = new Set();
+  for (let p = 1; p <= 60; p++) {
+    const r = await ctx.request.get(`https://note.com/api/v1/magazines/${magNoteKey}/notes?page=${p}`, { headers: { "User-Agent": UA } });
+    const j = await r.json().catch(() => ({}));
+    const notes = j?.data?.notes || j?.data?.contents || [];
+    if (!notes.length) break;
+    for (const n of notes) if (n.key) keys.add(n.key);
+    if (j?.data?.isLastPage) break;
+  }
+  return keys;
+}
+async function addNote(ctx, magNoteKey, noteKey, noteId) {
+  const r = await ctx.request.post(`https://note.com/api/v1/our/magazines/${magNoteKey}/notes`, {
+    headers: { "User-Agent": UA, "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest" },
+    data: { note_id: noteId, note_key: noteKey },
+  });
+  return r.status();
+}
+const noteKeyOf = (url) => url?.match(/\/n\/(n[0-9a-z]+)/i)?.[1] ?? null;
+const magKeyOf = (url) => url?.match(/\/m\/(m[0-9a-f]+)/)?.[1] ?? null;
+
+async function cmdAddArticles() {
+  const catalog = getCatalog();
+  const targets = catalog.filter((m) => m.noteUrl && (!keyArg || m.key === keyArg) && m.publishedMembers.length);
+  if (!targets.length) { console.log("対象マガジンなし (noteUrl 有 + publishedMembers>0)"); return; }
+  console.log(`=== 記事追加 ${COMMIT ? "(★COMMIT)" : "(dry-run)"} : マガジン ${targets.length} ===`);
+  const ctx = await launchContext({ headless: true });
+  try {
+    await assertAccount(ctx);
+    const idMap = await fetchNoteIdMap(ctx);
+    console.log(`note id マップ: ${Object.keys(idMap).length} 件\n`);
+    let totalAdd = 0;
+    for (const m of targets) {
+      const magKey = magKeyOf(m.noteUrl);
+      const current = await fetchMemberKeys(ctx, magKey);
+      const toAdd = [], noId = [];
+      for (const a of m.publishedMembers) {
+        const nk = noteKeyOf(a.noteUrl);
+        if (!nk) continue;
+        if (current.has(nk)) continue; // 既にメンバー
+        if (!idMap[nk]) { noId.push(a); continue; } // note_id 不明 (下書き等)
+        toAdd.push({ ...a, nk });
+      }
+      console.log(`[${m.key}] 現在 ${current.size} / 追加対象 ${toAdd.length}${noId.length ? ` / id不明 ${noId.length}` : ""}`);
+      if (!COMMIT) continue;
+      let ok = 0;
+      for (const a of toAdd) {
+        const st = await addNote(ctx, magKey, a.nk, idMap[a.nk]);
+        if (st >= 200 && st < 300) ok++;
+        else console.log(`  ✗ ${a.title.slice(0, 24)} → ${st}`);
+        await new Promise((r) => setTimeout(r, 400)); // note へ配慮した間隔
+      }
+      totalAdd += ok;
+      console.log(`  ✓ ${ok}/${toAdd.length} 追加`);
+    }
+    console.log(`\n完了: 合計 ${totalAdd} 記事を追加`);
+  } finally {
+    await ctx.close();
+  }
+}
+
 if (cmd === "plan") cmdPlan();
 else if (cmd === "create") await cmdCreate();
 else if (cmd === "create-all") await cmdCreateAll();
-else { console.log("usage: note-magazine.mjs plan | create --key <key> [--commit] | create-all [--commit]"); process.exit(1); }
+else if (cmd === "add-articles") await cmdAddArticles();
+else { console.log("usage: note-magazine.mjs plan | create --key <key> [--commit] | create-all [--commit] | add-articles [--key <key>] [--commit]"); process.exit(1); }
