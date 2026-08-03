@@ -84,6 +84,27 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
+      # ★計算型 ranking の配信値が config から再計算した値と一致するか (2026-08-03 配線)。
+      #   read-only。R2 を全件読むので数分かかり PR CI には重すぎるが、週次なら妥当。
+      #   スクリプト自体は 2026-07-24 からあったのに、どこからも呼ばれていなかった。
+      #   ここが壊れると per_capita / ratio / subtraction の配信値が静かにずれる。
+      - name: 🧮 Verify calculated rankings
+        id: calculated
+        continue-on-error: true
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+          NODE_OPTIONS: --conditions react-server
+        run: |
+          npx tsx packages/ranking/scripts/verify-calculated-rankings.ts 2>&1 \
+            | tee /tmp/calculated-rankings.log
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+          {
+            echo "### 計算型 ranking の再計算突合"
+            echo '```'
+            tail -30 /tmp/calculated-rankings.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: 📤 Commit audit result to develop
         run: |
           git config user.name "github-actions[bot]"
@@ -97,7 +118,7 @@ jobs:
           git push origin develop
 
       - name: 🚨 Open issue on integrity violations
-        if: steps.check.outputs.exit_code != '0' || steps.reingest.outputs.exit_code != '0'
+        if: steps.check.outputs.exit_code != '0' || steps.reingest.outputs.exit_code != '0' || steps.calculated.outputs.exit_code != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -111,6 +132,13 @@ jobs:
             echo '```'
             sed -n '/^## /,$p' /tmp/ranking-integrity-audit.log | head -80
             echo '```'
+            if [ "${{ steps.calculated.outputs.exit_code }}" != "0" ]; then
+              echo ""
+              echo "### 計算型 ranking の再計算突合"
+              echo '```'
+              tail -40 /tmp/calculated-rankings.log 2>/dev/null || echo "(ログなし)"
+              echo '```'
+            fi
             echo ""
             echo "是正手順:"
             echo "- values.json 欠落 → Phase C の values writer 復活を待つか、個別に \`generate-ranking-values.ts\` で再生成"
@@ -147,7 +175,7 @@ jobs:
           fi
 
       - name: ✅ Close recovered ranking alert
-        if: steps.check.outputs.exit_code == '0' && steps.reingest.outputs.exit_code == '0'
+        if: steps.check.outputs.exit_code == '0' && steps.reingest.outputs.exit_code == '0' && steps.calculated.outputs.exit_code == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

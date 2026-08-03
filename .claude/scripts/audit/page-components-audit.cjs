@@ -9,39 +9,26 @@
  * 使い方:
  *   node .claude/scripts/audit/page-components-audit.cjs
  *
- * 必要: ローカル D1 が存在すること
- *   .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
+ * データ源: apps/web/scripts/data/page-components/<pageType>/<pageKey>.json (git TS SSOT)
+ *
+ * ★2026-08-03 に D1 から git TS へ移植した。
+ *   完全DBレス移行で .local/d1 の miniflare sqlite は無くなっていたのに、このスクリプトは
+ *   そこを読み続けており「ローカル D1 が見つかりません」と出したうえで **exit 0** していた。
+ *   つまり呼んでも何も検査せず成功したように見える状態で、どの CI からも呼ばれていなかった
+ *   ため誰も気づいていなかった (UNWIRED_CHECKER)。
+ *   正典: docs/01_技術設計/02_データアーキテクチャ.md (SSOT は git TS と R2 のみ)
  */
 
 const path = require("path");
 const fs = require("fs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const DB_PATH = path.join(
-  PROJECT_ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite",
-);
+const COMPONENTS_DIR = path.join(PROJECT_ROOT, "apps/web/scripts/data/page-components");
 
-if (!fs.existsSync(DB_PATH)) {
-  console.error(`[ERROR] ローカル D1 が見つかりません: ${DB_PATH}`);
-  console.error("  /pull-r2 または DB 初期化を実行してください");
+if (!fs.existsSync(COMPONENTS_DIR)) {
+  console.error(`[ERROR] page_components の SSOT が見つかりません: ${COMPONENTS_DIR}`);
   process.exit(1);
 }
-
-// better-sqlite3 は packages/database 配下に install されている想定
-let Database;
-try {
-  Database = require(path.join(PROJECT_ROOT, "packages/database/node_modules/better-sqlite3"));
-} catch {
-  try {
-    Database = require("better-sqlite3");
-  } catch {
-    console.error("[ERROR] better-sqlite3 が見つかりません。`npm install --workspace=packages/database` を実行してください");
-    process.exit(1);
-  }
-}
-
-const db = new Database(DB_PATH, { readonly: true });
 
 /**
  * 主題深掘り可視化と判定するヒューリスティック。
@@ -96,14 +83,38 @@ function classifyForTheme(row) {
 const today = new Date().toISOString().slice(0, 10);
 
 function fetchRows(pageType) {
-  return db
-    .prepare(
-      `SELECT page_type, page_key, chart_key AS component_key, component_type, title, section, is_active
-         FROM page_components
-        WHERE page_type = ?
-        ORDER BY page_key, sort_order`,
-    )
-    .all(pageType);
+  // <pageType>/<pageKey>.json を読む。page_key はファイル名、is_active は
+  // 「ファイルに載っている = 配信対象」なので常に真 (git TS には無効行を置かない)。
+  const dir = path.join(COMPONENTS_DIR, pageType);
+  if (!fs.existsSync(dir)) return [];
+  const rows = [];
+  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort()) {
+    const pageKey = path.basename(file, ".json");
+    let parsed;
+    try {
+      parsed = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8"));
+    } catch (error) {
+      // 壊れた SSOT を「0 件」として黙って通さない
+      console.error(`[ERROR] ${pageType}/${file} を読めません: ${error.message}`);
+      process.exit(1);
+    }
+    const list = Array.isArray(parsed) ? parsed : (parsed.components ?? []);
+    for (const entry of list) {
+      rows.push({
+        page_type: pageType,
+        page_key: pageKey,
+        component_key: entry.componentKey,
+        component_type: entry.componentType,
+        title: entry.title,
+        section: entry.section ?? null,
+        is_active: 1,
+        sort_order: entry.sortOrder ?? 0,
+      });
+    }
+  }
+  return rows.sort((a, b) =>
+    a.page_key === b.page_key ? a.sort_order - b.sort_order : a.page_key.localeCompare(b.page_key),
+  );
 }
 
 const areaRows = fetchRows("area");
@@ -214,4 +225,3 @@ console.log(`  theme unique components: ${themeUnique.length}`);
 console.log(`  違反候補 (area→theme): ${moveCandidates.length}`);
 console.log(`  レビュー必要 (theme 内): ${reviewNeeded.length}`);
 
-db.close();

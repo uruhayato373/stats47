@@ -422,7 +422,7 @@ const svg = generateBarChartSvg(items, { title: "...", palette: "red", ... });
 
 ## 10. 現状ベースライン & 共通化ロードマップ
 
-611 枚の実測（2026-06-17 `analyze-svg-patterns` 集計）から、**6 つの型に収斂する**ことが確定した。
+611 枚の実測（2026-06-17 `.claude/scripts/blog/analyze-svg-patterns.mjs` 集計）から、**6 つの型に収斂する**ことが確定した。
 実物の大半は svg-builder ではなく `generate-article-charts.ts` のインライン生成・旧スクリプト由来で、
 命名・配色・viewBox・ダークモードが不統一。以下が是正ベースラインと共通化ロードマップ。
 
