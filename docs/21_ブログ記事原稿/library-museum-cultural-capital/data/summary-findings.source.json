@@ -1,9 +1,0 @@
-{
-  "kind": "authored",
-  "chartType": "findings",
-  "dataFile": "summary-findings.json",
-  "note": "2026-08-03 に内容を書き換え、generate-article-charts で SVG を再生成 (SVG は json から決定的に生成)",
-  "regenerated": true,
-  "upstream": "記事本文 (authored)。SSOT指標ではない。",
-  "generatedBy": "generate-article-charts.ts"
-}
