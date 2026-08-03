@@ -15,7 +15,10 @@ name: 🤖 AI Content Daily (Claude Code生成 + 公開)
 # (正典: .claude/rules/ranking-content-standards.md §実データ照合 / §生成パイプライン)。
 #
 # ★安全装置
-#   - 初期 LIMIT は 1。成功実測後に増やす。入力は 1..10 に制限する
+#   - LIMIT 5 / timeout 240 分 / max-turns 300 (実測 1 件 ≈ 29 分・turn 60 に対し 5 件分)。
+#     入力は 1..10 に制限する。**LIMIT を上げるときは timeout と max-turns も比例させる**
+#     (足りないと途中で切れ、verify が「対象あり・生成物なし」で落ちて 1 日分が無駄になる)。
+#     律速は job timeout ではなく Pro / Max の利用枠なので、10 まで一気に上げず実測して刻む
 #   - OAuth token 未登録、対象あり生成0件、audit/critic未通過はすべて hard fail
 #   - Claude が変更できるのは target の outbox と gitignore 済み review manifest だけ
 #   - Base Action は commit SHA 固定、MCP/Web、project hooks、full output を無効化
@@ -35,9 +38,9 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "生成件数 (1..10、既定1。成功実測後に増やす)"
+        description: "生成件数 (1..10、既定5)。1 件 ≈ 29 分・turn 60。増やすなら timeout と max-turns も比例させる"
         required: false
-        default: "1"
+        default: "5"
       dry_run:
         description: "true: LLMを呼ばず対象・promptだけ確認する"
         required: false
@@ -54,13 +57,13 @@ concurrency:
 
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  LIMIT: ${{ inputs.limit || '1' }}
+  LIMIT: ${{ inputs.limit || '5' }}
   DRY_RUN: ${{ inputs.dry_run || 'false' }}
 
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 240
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -160,7 +163,7 @@ jobs:
           claude_args: |
             --model sonnet
             --effort high
-            --max-turns 60
+            --max-turns 300
             --no-session-persistence
             --setting-sources project
             --permission-mode dontAsk

@@ -127,6 +127,16 @@ jobs:
             SINCE=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.since??''))")
             ALLOW_EMPTY=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.allowEmpty??''))")
             DRY=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
+          elif [ "$EVENT_NAME" = "push" ]; then
+            # ★request file が無い push (= request の削除 commit) で本体を走らせない (2026-08-03)。
+            #   ここは以前 workflow_dispatch 用の else に落ちていた。push イベントに inputs は
+            #   無いので METRIC="" (全 2,295 metric)・DRY="" (≠true = 実 push) となり、
+            #   **request を消すだけの commit が本番 R2 の全件更新を起動する**。
+            #   consume step は [skip ci] を付けるので普段は発火しないが、人がファイルを消した
+            #   瞬間に 180 分の全件 refresh が走る。要求が無いので何もしないのが正しい。
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "request file が無い push (削除 commit) のため何もしない"
+            exit 0
           else
             METRIC="$INPUT_METRIC"
             SINCE="$INPUT_SINCE"
@@ -147,16 +157,19 @@ jobs:
           fi
 
       - name: 🟢 Setup Node.js
+        if: steps.resolve.outputs.skip != 'true'
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "20"
           cache: "npm"
 
       - name: 📦 Install dependencies
+        if: steps.resolve.outputs.skip != 'true'
         run: npm ci
 
       # e-Stat → .local/r2/app/stats (観測値 R2 直書き)。dry_run=true なら fetch のみ。
       - name: 📊 page-data-batch (e-Stat fetch)
+        if: steps.resolve.outputs.skip != 'true'
         run: |
           # ARGS は配列で組む ("$ARGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
           ARGS=()
@@ -169,7 +182,7 @@ jobs:
 
       # 観測値を R2 に push (app/stats)。schedule 実行 (inputs.dry_run='') では push される。
       - name: ☁️ Push observations to R2 (app/stats)
-        if: steps.resolve.outputs.dry_run != 'true'
+        if: steps.resolve.outputs.skip != 'true' && (steps.resolve.outputs.dry_run != 'true')
         run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats
 
       # 派生 snapshot (master / ranking-values / area-profile 等) を git TS + 更新済観測値から
@@ -192,7 +205,7 @@ jobs:
       #   (この job は R2_ACCESS_KEY_ID 等 S3 認証を持つため、production にすれば S3 API 経由の
       #   一覧に切り替わる。既知の罠: memory project_kakei_expansion_pipeline_gotchas)。
       - name: 🗂️ Regenerate derived snapshots + push to R2
-        if: steps.resolve.outputs.dry_run != 'true'
+        if: steps.resolve.outputs.skip != 'true' && (steps.resolve.outputs.dry_run != 'true')
         env:
           NODE_ENV: production
           NODE_OPTIONS: --max-old-space-size=8192
@@ -204,27 +217,45 @@ jobs:
       # 次の退行を見逃す。逆に「増やす」方向を自動化すると壊れたデータを自動で
       # 追認してしまうため、**現行リストの部分集合になったときだけ** commit-back する。
       - name: 🔻 Shrink shape allowlist (縮小時のみ commit-back)
-        if: steps.resolve.outputs.dry_run != 'true' && github.event_name != 'pull_request'
+        if: steps.resolve.outputs.skip != 'true' && (steps.resolve.outputs.dry_run != 'true' && github.event_name != 'pull_request')
         continue-on-error: true
         run: npx tsx packages/data-configs/scripts/shrink-shape-allowlist.ts --apply
 
+      # ★request は結果によらず必ず消費する (2026-08-03)。
+      #   旧実装は成功時しか走らなかったため、2026-07-31 の失敗 run 30623199884 が request を
+      #   develop に残し、**同内容を再 push しても diff が出ず paths フィルタに掛からない**状態に
+      #   なった (実際に 3 日間放置され、オーナーが workflow_dispatch で手動実行して回避した)。
+      #   残った request は「未処理の要求がある」ようにも見えて紛らわしい。
+      #   allowlist の commit-back は成功時だけ (失敗 run の中途半端な状態を追認しない)。
       - name: 🧹 Consume request file (push イベント時のみ・commit-back)
-        if: github.event_name == 'push'
+        if: ${{ always() && github.event_name == 'push' }}
+        env:
+          JOB_STATUS: ${{ job.status }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git rm -q --ignore-unmatch data/data-refresh-requests.json
-          git add -A packages/data-configs/src/expected-shape-anomaly.ts || true
+          if [ "$JOB_STATUS" = "success" ]; then
+            git add -A packages/data-configs/src/expected-shape-anomaly.ts || true
+          fi
           if git diff --cached --quiet; then
             echo "commit する変更なし"
             exit 0
           fi
           git commit -q -m "chore(data): consume data-refresh request [skip ci]"
-          # 他 workflow の push と競合しても落ちないよう rebase してから push (最大3回)
+          # batch が tracked な state を書き換えて作業ツリーが汚れていると rebase が
+          # "cannot pull with rebase: You have unstaged changes" で落ちる。消費に不要なので退避する。
+          git stash push --include-untracked --quiet || true
           for _ in 1 2 3; do
-            if git push origin "${{ github.ref_name }}"; then break; fi
-            git pull --rebase origin "${{ github.ref_name }}"
+            if git pull --rebase --quiet origin "${{ github.ref_name }}" \
+              && git push origin "HEAD:${{ github.ref_name }}"; then
+              echo "✅ request を消費した"
+              exit 0
+            fi
+            sleep 5
           done
+          echo "::error::request の消費に失敗した (同内容の再 push が発火しなくなる)"
+          exit 1
 
   # ★失敗を通知する (2026-07-31 追加)
   #

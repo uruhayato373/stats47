@@ -178,6 +178,143 @@ test('the allowlist gate test is sensitive to losing core.quotepath=false', () =
   );
 });
 
+/**
+ * request file が無い push (= request を削除する commit) で本体を走らせてはならない。
+ * push イベントに inputs は無いので、workflow_dispatch 用の分岐に落ちると
+ * metric="" (全 2,295 件)・dry_run="" (≠true = 実 push) となり、
+ * **ファイルを消すだけの commit が本番 R2 の全件更新を起動する**。
+ * 実際の run script を取り出して走らせて確認する (条件式を目視しても気づけない類のため)。
+ */
+test('data-refresh does nothing when a push carries no request file', () => {
+  const doc = YAML.parse(read('.github/workflows/data-refresh.yml'));
+  const step = doc.jobs.refresh.steps.find((s) => s.id === 'resolve');
+  assert.ok(step?.run, 'resolve step が読めない');
+
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'data-refresh-resolve-'));
+  try {
+    const outFile = path.join(dir, 'gh-output');
+    fs.writeFileSync(outFile, '');
+    // request file は置かない (削除 commit の再現)
+    const stdout = execFileSync('bash', ['-c', step.run], {
+      cwd: dir,
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        EVENT_NAME: 'push',
+        INPUT_METRIC: '',
+        INPUT_SINCE: '',
+        INPUT_ALLOW_EMPTY: '',
+        INPUT_DRY_RUN: '',
+        GITHUB_OUTPUT: outFile,
+      },
+    });
+    const outputs = fs.readFileSync(outFile, 'utf8');
+    assert.match(outputs, /^skip=true$/m, `request なし push で skip=true にならない: ${stdout}`);
+    assert.doesNotMatch(
+      outputs,
+      /^dry_run=$/m,
+      'dry_run が空のまま出力されている (実 push 扱いになる)',
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+
+  // 本体ステップが skip ガードを持たないと、上の skip=true が意味を持たない
+  for (const name of ['📊 page-data-batch (e-Stat fetch)', '☁️ Push observations to R2 (app/stats)']) {
+    const s = doc.jobs.refresh.steps.find((x) => x.name === name);
+    assert.ok(s, `${name} が見つからない`);
+    assert.match(
+      String(s.if ?? ''),
+      /steps\.resolve\.outputs\.skip != 'true'/,
+      `${name}: skip ガードが無い`,
+    );
+  }
+});
+
+/**
+ * push トリガーで動く workflow は、request file を **結果によらず** 消費しなければならない。
+ * 成功時しか消費しないと、失敗 run の request が develop に残り、同内容を再 push しても
+ * diff が出ず paths フィルタに掛からなくなる (2026-07-31 の data-refresh で 3 日間発生)。
+ */
+test('every request-driven workflow consumes its request even when the run fails', () => {
+  for (const workflow of [
+    '.github/workflows/ai-content-generate-daily.yml',
+    '.github/workflows/blog-generate-daily.yml',
+    '.github/workflows/data-refresh.yml',
+    '.github/workflows/gemini-image-run.yml',
+  ]) {
+    const source = read(workflow);
+    const at = source.indexOf('Consume');
+    assert.ok(at !== -1, `${workflow}: consume step が無い`);
+    const step = source.slice(at, at + 1600);
+    assert.match(
+      step,
+      /if:\s*\$\{\{\s*always\(\)\s*&&/,
+      `${workflow}: consume が always() でない (失敗 run で request が残る)`,
+    );
+    assert.match(
+      step,
+      /git rm -q --ignore-unmatch/,
+      `${workflow}: request が既に無い場合に consume 自体が落ちる`,
+    );
+    assert.match(step, /::error::/, `${workflow}: consume 失敗を握り潰している`);
+  }
+});
+
+/**
+ * 日次件数は「1 件あたりの実測コスト × 件数」が job timeout と turn 予算に収まる必要がある。
+ * 足りないと生成が途中で切れ、verify が「対象あり・生成物なし」で落ちて 1 日分が丸ごと無駄になる。
+ * 件数だけ上げて予算を据え置く変更をここで止める。
+ * 実測値の出どころ (2026-08-03 の green run):
+ *   ai-content run 30775103091 … Claude step 28分36秒 / 1 件
+ *   blog       run 30777677268 … Claude step  9分29秒 / 1 件
+ */
+const ROUTINE_BUDGETS = [
+  {
+    workflow: '.github/workflows/ai-content-generate-daily.yml',
+    minutesPerItem: 29,
+    turnsPerItem: 60,
+    overheadMinutes: 5, // npm ci + キュー再構築 + push + dispatch
+  },
+  {
+    workflow: '.github/workflows/blog-generate-daily.yml',
+    minutesPerItem: 10,
+    turnsPerItem: 100,
+    overheadMinutes: 5,
+  },
+];
+
+test('daily limits stay inside the job timeout and turn budget', () => {
+  for (const { workflow, minutesPerItem, turnsPerItem, overheadMinutes } of ROUTINE_BUDGETS) {
+    const source = read(workflow);
+    const limit = Number(source.match(/LIMIT: \$\{\{ inputs\.limit \|\| '(\d+)' \}\}/)?.[1]);
+    const timeout = Number(source.match(/timeout-minutes: (\d+)/)?.[1]);
+    const turns = Number(source.match(/--max-turns (\d+)/)?.[1]);
+    assert.ok(limit && timeout && turns, `${workflow}: limit/timeout/max-turns が読めない`);
+
+    const neededMinutes = limit * minutesPerItem + overheadMinutes;
+    assert.ok(
+      timeout >= neededMinutes,
+      `${workflow}: limit ${limit} 件には ${neededMinutes} 分要るが timeout は ${timeout} 分`,
+    );
+    assert.ok(
+      turns >= limit * turnsPerItem,
+      `${workflow}: limit ${limit} 件には turn ${limit * turnsPerItem} 要るが max-turns は ${turns}`,
+    );
+
+    // schedule / push は inputs 空で fallback、workflow_dispatch は input の default を使う。
+    // ここがずれると手動実行だけ件数が変わる。
+    const dispatchDefault = Number(
+      source.match(/limit:\n\s+description:[^\n]*\n\s+required: false\n\s+default: "(\d+)"/)?.[1],
+    );
+    assert.equal(
+      dispatchDefault,
+      limit,
+      `${workflow}: workflow_dispatch の既定 (${dispatchDefault}) が fallback (${limit}) と食い違う`,
+    );
+  }
+});
+
 test('CI prompts preserve author/critic separation and prohibit external writes', () => {
   for (const prompt of [
     '.claude/prompts/ci/ai-content-routine.md',
