@@ -21,6 +21,10 @@ name: 📝 Blog Generate Daily (Claude Code生成 + 公開)
 #   - quality-gate の blocker が 1 つでも残れば公開しない。**ゲートは緩めない**
 #   - OAuth token 未登録、対象あり生成0件、critic未通過はすべて hard fail
 #   - LIMIT 3 (入力上限) / timeout 120 分 / max-turns 300 (実測 1 本 ≈ 10 分・turn 100 に対し 3 本分)
+#     ★既定は 1 本/日。上限 3 はトークン予算だけで決まるが、既定は**記事の月産上限**で決まる。
+#     .claude/state/blog/seo-strategy.json の typeMix.perMonth は計 17-20 本/月、BLOG-SEO-PACE-01 も
+#     「月 15〜20 本の上限内」。3 本/日 = 月 84 本はこれを 4-5 倍超える (2026-08-03 に一度 3 を既定に
+#     してしまい、同日の週次計画で検知して 1 へ戻した)。既定を上げるときは型配分 SSOT を先に更新する。
 #   - Claude が変更できるのは当日 target の原稿ディレクトリだけ
 #   - Base Action は commit SHA 固定、MCP/Web、project hooks、full output を無効化
 #   - dry_run: LLM を呼ばず接地・ゲート・prompt 長だけ出す (課金ゼロ)
@@ -40,9 +44,9 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "生成件数 (1..3、既定3)。1 本 ≈ 10 分・turn 100"
+        description: "生成件数 (1..3、既定1)。1 本 ≈ 10 分・turn 100。既定は型配分の月産上限で決まる"
         required: false
-        default: "3"
+        default: "1"
       dry_run:
         description: "true: LLM を呼ばず接地とゲートだけ実行する"
         required: false
@@ -63,7 +67,7 @@ concurrency:
 
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  LIMIT: ${{ inputs.limit || '3' }}
+  LIMIT: ${{ inputs.limit || '1' }}
   DRY_RUN: ${{ inputs.dry_run || 'false' }}
   KEEP_DRAFT: ${{ inputs.keep_draft || 'false' }}
 
