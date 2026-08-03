@@ -40,7 +40,12 @@ while IFS= read -r url; do
   BU keys Enter >/dev/null 2>&1; sleep 4
 done < /tmp/urls-$SLUG.txt
 
-echo "[4] 画像挿入 ($(jq -r '.imgRefs|length' "$J") 枚) ..."
+echo "[4] 目次を折りたたむ (ins_img の TOC 同名衝突を防ぐ) ..."
+BU state 2>&1 > /tmp/ns.txt
+TOC=$(grep -oE '\[[0-9]+\]<button aria-label=目次 expanded=true' /tmp/ns.txt | grep -oE '[0-9]+' | head -1)
+[ -n "$TOC" ] && { BU click "$TOC" >/dev/null 2>&1; sleep 1; echo "    目次 collapsed (btn=$TOC)"; } || echo "    目次 already collapsed"
+
+echo "[5] 画像挿入 ($(jq -r '.imgRefs|length' "$J") 枚) ..."
 NIMG=$(jq -r '.imgRefs | length' "$J")
 for i in $(seq 0 $((NIMG-1))); do
   FILE=$(jq -r ".imgRefs[$i].file" "$J" | sed 's/\.svg$/.png/')

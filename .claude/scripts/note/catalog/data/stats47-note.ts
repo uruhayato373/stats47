@@ -65,9 +65,11 @@ export const stats47NoteArticles: NoteArticle[] = [
     vertical: "stats47-note",
     series: "A",
     title: "a-maximum-temperature",
-    magazine: null,
+    magazine: "s47-climate",
     isPaid: false,
-    status: "draft",
+    status: "published",
+    noteUrl: "https://note.com/stats47/n/n91e96edf3950",
+    publishedAt: "2026-08-03",
     r2Path: "note/stats47-note/a-maximum-temperature",
   },
   {
