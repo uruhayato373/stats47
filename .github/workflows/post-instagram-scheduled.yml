@@ -67,15 +67,27 @@ jobs:
             echo "skipped=${SKIP}"
           } >> "$GITHUB_OUTPUT"
 
-      - name: 📝 Append to ig-posted-log
+      # ig-posted-log は「同日多重投稿の防止」だけが役割で SSOT ではない。
+      # 投稿台帳の SSOT は posts.json (sns-content-standards.md §3) なので、
+      # 両方を同じ commit で更新する。台帳側を落とすと投稿が /update-sns-metrics の
+      # 対象から外れ、主力チャネルの実績が計測できなくなる
+      # (2026-05-18〜08-03 に 94 件がこの状態で滞留していた)。
+      - name: 📝 Record post (ig-posted-log + 投稿台帳)
         if: success() && steps.post.outputs.permalink != ''
         run: |
           POSTED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           echo "{\"date\":\"${{ steps.post.outputs.post_date }}\",\"domain\":\"${{ steps.post.outputs.domain }}\",\"content_key\":\"${{ steps.post.outputs.content_key }}\",\"permalink\":\"${{ steps.post.outputs.permalink }}\",\"posted_at\":\"${POSTED_AT}\"}" \
             >> .claude/state/ig-posted-log.jsonl
+          # 台帳への書き込みは sns-posts-store.cjs 経由のみ (rules §3)。
+          # scheduled 行があれば昇格、既に posted なら no-op で冪等。
+          node .claude/scripts/instagram/record-posted.cjs \
+            --domain "${{ steps.post.outputs.domain }}" \
+            --content-key "${{ steps.post.outputs.content_key }}" \
+            --permalink "${{ steps.post.outputs.permalink }}" \
+            --posted-at "${POSTED_AT}"
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-          git add .claude/state/ig-posted-log.jsonl
+          git add .claude/state/ig-posted-log.jsonl .claude/state/sns/posts.json
           git commit -m "chore(ig): mark ${{ steps.post.outputs.content_key }} as posted [skip ci]"
           git push origin main
 

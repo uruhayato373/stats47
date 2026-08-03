@@ -90,24 +90,20 @@ jobs:
               | grep -E '^docs/21_ブログ記事原稿/[^/]+/article\.md$' || true)
             CANDIDATES=""
             for f in $CHANGED; do CANDIDATES="$CANDIDATES $(basename "$(dirname "$f")")"; done
-            # reconcile: 変更検出が空なら、published:true なのに配信 all.json に未掲載の記事を backfill。
-            # (workflow 自身の変更で発火したケースや、過去の取りこぼしを self-heal する)
+            # reconcile: 変更検出が空なら、公開が要る記事を backfill する。
+            # 対象は「未公開 (R2 に無い)」+「**改稿版 (R2 に旧版が live)**」の 2 つ。
+            #
+            # ★改稿版を含めるのが要 (2026-08-03 修正): 旧実装は all.json 未掲載だけを見ており、
+            #   brushup 済みの記事は既に live なので永久に選ばれなかった。pruner は内容差分を見て
+            #   正しく保持するため、outbox に溜まる一方で公開されない状態になっていた
+            #   (実際に 2 本が滞留)。ブログ是正ループの出力は全てこの経路を通るので、
+            #   塞がっていると是正キューの成果が本番に届かない。
+            #
+            #   判定は pruner と同じ .claude/scripts/blog/lib/outbox-r2.mjs を使う。
+            #   prune (消す) と publish (出す) は裏表で、片方だけズレると同じ事故が再発する。
             if [ -z "$(echo "$CANDIDATES" | xargs)" ]; then
-              echo "変更検出 0 → 未公開 backfill (reconcile) モード"
-              curl -fsS "${R2_PUBLIC_FETCH_URL}/app/blog/all.json" -o /tmp/live-all.json 2>/dev/null || echo '{"articles":[]}' > /tmp/live-all.json
-              # shellcheck disable=SC2016  # node -e 内の ${...} は JS。shell 展開させない
-              CANDIDATES=$(node -e '
-                const fs=require("fs");
-                let live=new Set();
-                try{ live=new Set((JSON.parse(fs.readFileSync("/tmp/live-all.json","utf8")).articles||[]).map(a=>a.slug)); }catch(e){}
-                const root="docs/21_ブログ記事原稿";
-                for(const d of fs.readdirSync(root)){
-                  const f=`${root}/${d}/article.md`;
-                  if(!fs.existsSync(f)) continue;
-                  const t=fs.readFileSync(f,"utf8");
-                  if(/^published:\s*true\s*$/m.test(t) && !live.has(d)) console.log(d);
-                }
-              ')
+              echo "変更検出 0 → 公開待ち backfill (reconcile) モード"
+              CANDIDATES=$(node .claude/scripts/blog/select-republish-slugs.mjs)
             fi
           fi
           # published:true のものだけ残す
