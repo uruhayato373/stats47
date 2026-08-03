@@ -1,0 +1,6 @@
+{
+  "limit": 1,
+  "dryRun": false,
+  "requestedAt": "2026-08-03T00:50:00Z",
+  "reason": "critic の Agent 記録が無かった件の切り分け。#693 で入れた observed subagent 出力で、未起動か照合ミスかを確定する"
+}
