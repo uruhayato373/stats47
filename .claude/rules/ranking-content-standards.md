@@ -147,9 +147,18 @@ CI: キュー再構築 → 対象別 prompt
 ```
 
 対象ありで OAuth token が無い、生成物が1件でも欠ける、audit / critic が通らない、push / dispatch を
-確認できない場合は run を赤くする。日次件数は ai-content / blog とも**既定1件**から実測し、
-成功率と Pro / Max 利用枠を確認してから増やす。**旧 40 件/日は Gemini 前提の根拠なき暫定値**で、
-引き継がない。
+確認できない場合は run を赤くする。
+
+**日次件数の SSOT は workflow の `LIMIT` (`.github/workflows/{ai-content,blog}-generate-daily.yml`)。
+ここに数値を書かない** (2026-08-03 に 1→5 / 1→3 へ変えた際、この行が「既定1件」のまま取り残された)。
+増やすときの規律だけを置く:
+
+- 1 件あたりの実測コストから `timeout-minutes` と `--max-turns` も比例させる。足りないと生成が
+  途中で切れ、verify が「対象あり・生成物なし」で落ちて 1 日分が無駄になる。
+  この関係は `content-generation-routine.test.cjs` が機械的に強制する
+- 律速は job timeout ではなく **Pro / Max の利用枠** (オーナーの対話利用と共有)。一気に上限まで
+  上げず、`.claude/state/metrics/claude-usage/history.csv` の実測を見て刻む
+- **旧 40 件/日は Gemini 前提の根拠なき暫定値**で、引き継がない
 
 以下は撤去前の Gemini 運用の記録 (経緯として保持する)。
 

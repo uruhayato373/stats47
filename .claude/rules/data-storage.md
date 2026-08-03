@@ -96,6 +96,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | SNS 投稿メトリクス時系列 | `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
 | アフィリエイト運用 state (在庫棚卸し / GA4 実測 / compliance / 実験 registry / **集約状態**) | `.claude/state/ads/{inventory-*.json,ga4-affiliate-*.json,compliance-latest.json,experiments.json,affiliate-operations-latest.json}`（`affiliate-dashboard-refresh.yml` / `affiliate-ga4-weekly.yml` が生成・commit-back。実験 registry の書込は `/manage-affiliate-experiment` のみ。dashboard HTML は `/tmp` 生成の派生物で git 管理しない） |
 | NSM 週次 JSON snapshot | `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` |
+| **Claude routine のトークン実績** (日次生成 1 run 1 行) | `.claude/state/metrics/claude-usage/history.csv`（書込: `.claude/scripts/lib/record-claude-usage.mjs` のみ・追記専用。件数を上げる判断の実測根拠。**4 種を合計しない** — cache_read は割引されるため。`token_source=none` は 0 ではなく未取得。読み方は同ディレクトリの README） |
 | 実験 state（PDCA） | `.claude/state/experiments.json` |
 | RemoteTrigger 記録 | `.claude/state/triggers.json` |
 
