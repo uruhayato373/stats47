@@ -1,6 +1,6 @@
 {
   "limit": 1,
   "dryRun": false,
-  "requestedAt": "2026-08-02T22:30:00Z",
-  "reason": "PR #689 で入れた診断 step の実地検証。cron (JST03:00) を待たずに失敗理由を確定させる"
+  "requestedAt": "2026-08-02T22:45:00Z",
+  "reason": "CLAUDE_CODE_OAUTH_TOKEN 差し替え後の検証。401 が解消したか、生成が publish まで通るかを実測する"
 }
