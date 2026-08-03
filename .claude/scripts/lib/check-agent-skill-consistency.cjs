@@ -436,6 +436,17 @@ function checkOrphanScripts(findings) {
   // 参照コーパス (basename がどこかに出現すれば参照ありとみなす)
   const corpusDirs = [".claude/skills", ".claude/agents", ".claude/scripts", ".claude/hooks", ".github/workflows", "scripts", "docs"];
   let corpus = "";
+  // ★npm script への登録は単独で「配線済み」の証拠 (2026-08-03)。
+  //   ここを見ていなかったため、CI (pr-quality-check) から実際に走っているテスト 8 本を
+  //   含む 11 件を orphan と誤報していた。誤報が多い checker は読まれなくなる。
+  //   散文コーパスと違い npm script は「実行される」ことの直接の証拠なので、
+  //   出現回数 > 1 を要求せず 1 回で参照ありとする (下の count と別扱い)。
+  let pkgScripts = "";
+  try {
+    pkgScripts = JSON.stringify(JSON.parse(readSafe(path.join(ROOT, "package.json"))).scripts ?? {});
+  } catch {
+    pkgScripts = "";
+  }
   for (const d of corpusDirs) {
     for (const f of walk(path.join(ROOT, d), [".md", ".mjs", ".cjs", ".js", ".py", ".sh", ".yml", ".yaml", ".json", ".ts"])) {
       const st = fs.statSync(f);
@@ -445,6 +456,7 @@ function checkOrphanScripts(findings) {
   }
   for (const s of scripts) {
     const base = path.basename(s);
+    if (pkgScripts.includes(base)) continue; // npm script から実行される = 配線済み
     // 自身の定義行以外で basename が出現するか (定義ファイルだけの一致を除くため出現回数 > 1 を要求)
     let idx = 0,
       count = 0;

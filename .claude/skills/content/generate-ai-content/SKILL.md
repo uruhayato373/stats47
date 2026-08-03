@@ -135,7 +135,7 @@ node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
 
 `ai-content-generate-daily.yml` が次を一続きで実行する。
 
-1. 全件キューを再構築し、needs-regen を既定1件選ぶ
+1. 全件キューを再構築し、needs-regen を `LIMIT` 件選ぶ (件数の SSOT は workflow。ここに数値を書かない)
 2. R2観測値から対象別 prompt を決定的に準備する
 3. 公式 Claude Code Base Action を OAuth 認証で起動し、author → audit → 独立 critic を回す
 4. shell step が対象全件の outbox・audit・critic PASS manifest を再照合する
