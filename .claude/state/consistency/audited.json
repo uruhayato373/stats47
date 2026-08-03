@@ -1,10 +1,8 @@
 {
-  "hash": "9af47fc8d4f68d9661c77a1a2636d52706c7a21e935aaa9345249a727ee7872b",
-  "audited_at": "2026-08-03T10:41:54",
+  "hash": "db49000a0d20301b626c153b2d81b8239dad51b6c5f7e1ef8e35347b03003049",
+  "audited_at": "2026-08-03T10:53:59",
   "files": [
-    ".claude/scripts/note/catalog/dump-magazines-json.ts",
-    ".claude/scripts/note/lib/note-session.mjs",
-    ".claude/scripts/note/note-magazine.mjs",
-    ".claude/scripts/note/probe-create-form.mjs"
+    ".claude/scripts/note/catalog/magazines.ts",
+    ".claude/scripts/note/note-magazine.mjs"
   ]
 }

@@ -85,27 +85,58 @@ async function cmdCreate() {
     const acct = await assertAccount(ctx);
     console.log(`  account assert OK: ${acct}`);
     const page = ctx.pages()[0] ?? (await ctx.newPage());
-    await page.goto(NEW_URL, { waitUntil: "domcontentloaded" });
-    await page.waitForTimeout(2500);
-    // 名前 (30字以内) / 説明 (400字以内)
-    await page.fill('input[placeholder*="30字以内"]', m.name);
-    await page.fill('textarea[placeholder*="400字以内"]', m.description);
-    // 無料 を選択
-    await page.click('button:has-text("無料")').catch(() => {});
-    await page.waitForTimeout(500);
-    // 作成 (submit)
-    await page.click('button:has-text("作成")');
-    // 新マガジンページ (/m/mXXXX) へのリダイレクトを待つ
-    await page.waitForURL(/\/m\/m[0-9a-f]+/, { timeout: 20000 }).catch(() => {});
-    await page.waitForTimeout(1500);
-    const finalUrl = page.url();
-    const mk = finalUrl.match(/\/m\/(m[0-9a-f]+)/);
-    if (!mk) { console.error(`✗ 作成後 URL が想定外: ${finalUrl}。手動確認してください`); process.exit(1); }
-    const noteUrl = `https://note.com/stats47/m/${mk[1]}`;
+    const noteUrl = await createOnPage(page, m);
     console.log(`\n✓ 作成成功: ${noteUrl}`);
-    // magazines.ts の該当エントリの noteUrl: null → 実URL へ書き戻す
     writeBackNoteUrl(m.key, noteUrl);
     console.log(`✓ magazines.ts の "${m.key}" に noteUrl を記録`);
+  } finally {
+    await ctx.close();
+  }
+}
+
+/** 1マガジンを note.com 作成フォームで作る (page は既にログイン済み)。noteUrl を返す。 */
+async function createOnPage(page, m) {
+  await page.goto(NEW_URL, { waitUntil: "domcontentloaded" });
+  await page.waitForTimeout(2500);
+  await page.fill('input[placeholder*="30字以内"]', m.name); // 名前 (≤30字)
+  await page.fill('textarea[placeholder*="400字以内"]', m.description); // 説明 (≤400字)
+  await page.click('button:has-text("無料")').catch(() => {}); // 無料 を選択
+  await page.waitForTimeout(500);
+  await page.click('button:has-text("作成")'); // submit
+  await page.waitForURL(/\/m\/m[0-9a-f]+/, { timeout: 20000 }).catch(() => {});
+  await page.waitForTimeout(1500);
+  const mk = page.url().match(/\/m\/(m[0-9a-f]+)/);
+  if (!mk) throw new Error(`作成後 URL が想定外: ${page.url()}`);
+  return `https://note.com/stats47/m/${mk[1]}`;
+}
+
+/** 未作成 (noteUrl null・member>0・無料) を 1 セッションで全作成。 */
+async function cmdCreateAll() {
+  const catalog = getCatalog();
+  const todo = pending(catalog).filter((m) => !m.isPaid && [...m.name].length <= NAME_MAX);
+  const skipped = pending(catalog).filter((m) => m.isPaid || [...m.name].length > NAME_MAX);
+  console.log(`=== 一括作成 ${COMMIT ? "(★COMMIT)" : "(dry-run)"} : 対象 ${todo.length} / スキップ ${skipped.length} ===`);
+  for (const m of todo) console.log(`  - ${m.key} 「${m.name}」(${m.publishedMemberCount}件)`);
+  if (skipped.length) console.log(`  スキップ(有料/名前超過): ${skipped.map((m) => m.key).join(", ")}`);
+  if (!COMMIT) { console.log("\n(dry-run。--commit で一括実作成)"); return; }
+
+  const ctx = await launchContext({ headless: false });
+  try {
+    const acct = await assertAccount(ctx);
+    console.log(`\naccount assert OK: ${acct}\n`);
+    const page = ctx.pages()[0] ?? (await ctx.newPage());
+    let ok = 0;
+    for (const m of todo) {
+      try {
+        const noteUrl = await createOnPage(page, m);
+        writeBackNoteUrl(m.key, noteUrl);
+        ok++;
+        console.log(`  ✓ ${m.key} → ${noteUrl}`);
+      } catch (e) {
+        console.log(`  ✗ ${m.key} 失敗: ${String(e).slice(0, 80)} (残りは継続)`);
+      }
+    }
+    console.log(`\n完了: ${ok}/${todo.length} 作成・noteUrl 書き戻し済み`);
   } finally {
     await ctx.close();
   }
@@ -132,4 +163,5 @@ function writeBackNoteUrl(key, noteUrl) {
 
 if (cmd === "plan") cmdPlan();
 else if (cmd === "create") await cmdCreate();
-else { console.log("usage: note-magazine.mjs plan | create --key <key> [--commit]"); process.exit(1); }
+else if (cmd === "create-all") await cmdCreateAll();
+else { console.log("usage: note-magazine.mjs plan | create --key <key> [--commit] | create-all [--commit]"); process.exit(1); }
