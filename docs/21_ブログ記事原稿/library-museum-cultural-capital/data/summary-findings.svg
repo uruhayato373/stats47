@@ -1,5 +1,5 @@
-<!-- data-source: summary-findings.json | generated: 2026-07-13T09:54:42.924Z -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 504" width="960" height="504" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+<!-- data-source: summary-findings.json | generated: 2026-08-03T08:42:16.911Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 422" width="960" height="422" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
   <style>
     .svg-bg{fill:#ffffff}
     .svg-plot{fill:#f9fafb}
@@ -18,18 +18,18 @@
     .svg-grid{stroke:#334155}
     }
   </style>
-  <rect width="960" height="504" class="svg-bg"/>
+  <rect width="960" height="422" class="svg-bg"/>
   <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
   <rect x="40" y="72" width="880" height="72" class="svg-plot" rx="8"/>
   <circle cx="58" cy="108" r="18" fill="#dc2626"/>
   <text x="58" y="114" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
   <text x="90" y="103.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">人口あたり図書館数で約7倍の格差</tspan></text>
-  <text x="90" y="125.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">上位は山梨県（6.70）、下位は神奈川県（0.92）</tspan></text>
+  <text x="90" y="125.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">上位は山梨県6.58館、下位は神奈川県0.92館</tspan></text>
   <rect x="40" y="154" width="880" height="72" class="svg-plot" rx="8"/>
   <circle cx="58" cy="190" r="18" fill="#dc2626"/>
   <text x="58" y="196" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
-  <text x="90" y="185.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">蔵書数と貸出冊数は必ずしも比例しない</tspan></text>
-  <text x="90" y="207.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">1人あたり貸出冊数が多い県は図書館の利用文化が根付いている</tspan></text>
+  <text x="90" y="185.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">館数の多さと利用度は一致しない</tspan></text>
+  <text x="90" y="207.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">貸出冊数上位の滋賀・東京は人口あたり館数では上位5県に入らない</tspan></text>
   <rect x="40" y="236" width="880" height="72" class="svg-plot" rx="8"/>
   <circle cx="58" cy="272" r="18" fill="#dc2626"/>
   <text x="58" y="278" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
@@ -38,11 +38,6 @@
   <rect x="40" y="318" width="880" height="72" class="svg-plot" rx="8"/>
   <circle cx="58" cy="354" r="18" fill="#dc2626"/>
   <text x="58" y="360" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
-  <text x="90" y="349.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">文化施設が多い県ほど趣味活動が盛んとは限らない</tspan></text>
-  <text x="90" y="371.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">図書館数と趣味・娯楽行動者率の相関は明確ではない</tspan></text>
-  <rect x="40" y="400" width="880" height="72" class="svg-plot" rx="8"/>
-  <circle cx="58" cy="436" r="18" fill="#dc2626"/>
-  <text x="58" y="442" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
-  <text x="90" y="431.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">劇場・音楽堂は大都市圏に偏在</tspan></text>
-  <text x="90" y="453.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">舞台芸術のインフラは人口集積地に依存する構造</tspan></text>
+  <text x="90" y="349.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">劇場・音楽堂は大都市圏に偏在</tspan></text>
+  <text x="90" y="371.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">東京132施設に対し徳島・鳥取は13施設で約10倍差</tspan></text>
 </svg>
