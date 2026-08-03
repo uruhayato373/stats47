@@ -12,7 +12,9 @@ co_agents: [blog-editor]
 
 ```
 $ARGUMENTS — 評価対象ファイルのパス
-             （例: docs/21_ブログ記事原稿/overseas-travel-gap/article.md）
+             （例: docs/21_ブログ記事原稿/<slug>/article.md）
+             docs/21 は ephemeral outbox で公開後に自動削除されるため、
+             実在 slug を例として書かない（リンク切れになる）。
 ```
 
 ## 手順
