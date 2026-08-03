@@ -26,10 +26,16 @@ export interface LeafletChoroplethMapProps {
   data: MapDataPoint[];
   /** 色スケール設定 */
   colorConfig: MapVisualizationConfig;
-  /** タイル URL（省略時はTopoJSONだけを描画） */
-  tileUrl?: string;
+  /**
+   * タイル URL（ベースマップ）。**必須**。
+   *
+   * 2026-08-02 に LCP 対策として optional 化され、同じ commit でランキングページの
+   * `tileUrl` が外れて背景が消えたまま本番配信された。対策は 2026-08-03 に撤回。
+   * 省略できると同じ事故が型検査を通ってしまうため必須に戻している。
+   */
+  tileUrl: string;
   /** タイル attribution */
-  attribution?: string;
+  attribution: string;
   /** 値の単位 */
   unit?: string;
   /** 都道府県クリック時コールバック */
@@ -164,7 +170,7 @@ export function LeafletChoroplethMap({
         scrollWheelZoom
         style={{ height: "100%", width: "100%", minHeight: 400, borderRadius: "0.375rem" }}
       >
-        {tileUrl && <TileLayer url={tileUrl} attribution={attribution ?? ""} />}
+        <TileLayer url={tileUrl} attribution={attribution} />
 
         {/* 都道府県レイヤー */}
         <ChoroplethGeoJsonLayer
