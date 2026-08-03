@@ -177,3 +177,19 @@ npx tsx scripts/temp-search-estat.mts
 ## 関連スキル
 
 - `/fetch-estat-data` — statsDataId 確定後にメタデータ調査 → ランキングデータ取得
+
+## 年度カバレッジの事前確認 (metric 化する前に)
+
+statsDataId を絞り込んだあと、**その座標で実際に何年分取れるか**を e-Stat API に問い合わせて
+確認できる。年が数年しか無い metric を投入してから気づくと、config・R2・ranking の
+再生成をやり直すことになる。
+
+```bash
+node .claude/scripts/estat/audit-time-coverage.cjs
+```
+
+候補 metric ごとに「期待年範囲 / 実在年範囲 / 年数 / 推定行数 / 充分か」の表を出す
+(getMetaInfo で軽く当たり、必要な場合だけ getStatsData を叩く)。`NEXT_PUBLIC_ESTAT_APP_ID` が要る。
+
+**gate ではなく調査ツール**。CI に入れない (実 API を叩くうえ、少ない年数が常に欠陥とは限らない —
+調査自体が数年しか実施されていない統計もある)。判断は `estat-researcher` が行う。
