@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "tuna-consumption-quantity",
+  "pair": "annual-new-inpatients-general-hospital-per-100k",
+  "pearsonR": -0.6581949349067768,
+  "partialRPopulation": -0.6178092455974729,
+  "unit": "g × 人",
+  "label": "まぐろ消費量 と 一般病院年間新入院患者数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/tuna-consumption-quantity.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug tuna-consumption-quantity-vs-annual-new-inpatients-general --base tuna-consumption-quantity --pair annual-new-inpatients-general-hospital-per-100k --data-name tuna-consumption-quantity--annual-new-inpatients-general-hospital-per-100k"
+}
