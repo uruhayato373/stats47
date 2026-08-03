@@ -2,9 +2,8 @@
   "kind": "authored",
   "chartType": "findings",
   "dataFile": "summary-findings.json",
-  "note": "2026-08-03 に generate-article-charts で再生成 (SVG は json から決定的に生成)",
+  "note": "2026-08-03 に内容を書き換え、generate-article-charts で SVG を再生成 (SVG は json から決定的に生成)",
   "regenerated": true,
-  "regenerationCaveat": "現renderer で再生成すると見出し/本文の区別が失われ簡易形式になる。視覚維持のため旧SVGを保持。",
   "upstream": "記事本文 (authored)。SSOT指標ではない。",
   "generatedBy": "generate-article-charts.ts"
 }
