@@ -390,6 +390,16 @@
       "r2_body": true,
       "status": "r2_ready"
     },
+    "a-maximum-temperature": {
+      "vertical": "stats47-note",
+      "title": "a-maximum-temperature",
+      "url": "https://note.com/stats47/n/n91e96edf3950",
+      "is_paid": false,
+      "published_at": "2026-08-03",
+      "r2_path": "note/stats47-note/a-maximum-temperature",
+      "r2_body": true,
+      "status": "r2_ready"
+    },
     "koumuin-gis-01-depopulation-medical": {
       "vertical": "koumuin-gis",
       "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
