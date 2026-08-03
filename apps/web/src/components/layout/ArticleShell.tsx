@@ -19,6 +19,11 @@ interface ArticleShellProps {
  * 記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) 専用の Shell。
  * doboku-note の Soft Editorial レイアウトを移植したもの。
  *
+ * 寸法は doboku-note に合わせている (2026-08-03)。1280px コンテナ / lg+ 左右 40px /
+ * gap 40px / 右レール 316px。**316 = 300 + 8 + 8** で、300×250 の固定サイズ広告が
+ * `SidebarPromoBanner` の `p-2` 内に等倍で収まる幅として決まっている。
+ * レール幅を変えるときは広告カードの padding も同時に見ること。
+ *
  * PageShell (1280px grid・2026-07-11 に 1700px から統一) との違い:
  * - `.reading-zone` トークン（薄グレー地・--radius: 0）を全幅で敷く
  * - コンテナ 1280px + flex で本文がレールに密着する
@@ -40,13 +45,13 @@ export function ArticleShell({
 
   return (
     <div className={cn("reading-zone w-full bg-background", className)}>
-      <div className="mx-auto w-full max-w-[1280px] px-4 py-6 sm:px-6 sm:py-8">
+      <div className="mx-auto w-full max-w-[1280px] px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
         {breadcrumb}
         {hasRail ? (
           <>
-            <div className="lg:flex lg:items-start lg:gap-8">
+            <div className="lg:flex lg:items-start lg:gap-10">
               <main className="min-w-0 flex-1">{children}</main>
-              <aside className="hidden w-[360px] shrink-0 lg:flex lg:flex-col lg:gap-3">
+              <aside className="hidden w-[316px] shrink-0 lg:flex lg:flex-col lg:gap-3">
                 {rail}
                 {railSticky && (
                   <div className="sticky top-20 flex flex-col gap-3">

@@ -16,8 +16,11 @@ describe("right rail scroll contract", () => {
 
     expect(source).not.toContain("overflow-y-auto");
     expect(source).not.toContain("max-h-[calc(100vh");
+    // 幅も含めて完全一致で固定する。scroll を有効化するクラスの混入を防ぐのが主目的だが、
+    // 寸法を変える変更もここで一度止まるので、意図した変更かを必ず確認できる
+    // (316px の根拠は .claude/rules/ui-components.md: 300 + 8 + 8)。
     expect(source).toContain(
-      'className="hidden w-[360px] shrink-0 lg:flex lg:flex-col lg:gap-3"',
+      'className="hidden w-[316px] shrink-0 lg:flex lg:flex-col lg:gap-3"',
     );
   });
 

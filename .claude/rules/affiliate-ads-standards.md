@@ -288,12 +288,22 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
     同じ予約名の `file_download` は自前パラメータごと正常に届いている)。
   - **過去に報告された「CTR 0.079%」等は affiliate の click を AdSense の impression で割った無意味な値**。
     採用してはならない (`evidence-based-judgment.md`)。
-  - **下の「週次改善」(imp>500 で降格) は、改名後の実測が取れるまで発火させない**。
+  - **✅ 確認済 (2026-08-02 実測)**: snapshot `.claude/state/ads/ga4-affiliate-2026-08-02.json` で
+    `affiliate_impression` **3,400 imp / clicks 5 / CTR 0.147%**、`unsetVerticalRatio: 0`、
+    `hasVerticalBreakdown: true`、dimension は `ad_id` / `affiliate_vertical` / `link_position` の
+    3 種が引けた。**canonical 10 vertical すべてに実データがある**。
+    → **dimension はパラメータ名に紐づき、イベント改名では再登録が要らない**ことが実測で確定した。
+    詳細は `affiliate-improvement/reference/improvement-log.md` の `AFF-IMPRESSION-RENAME-01`。
+  - **窓の読み方**: `affiliate_impression` は改名日 (2026-07-28) 以降にしか存在しない。
+    28 日窓で取っても実質 6 日分なので、**28 日平均として読まない**。水準の評価は 2026-08-25 以降。
+  - **下の「週次改善」(imp>500 で降格) は、CTR の分母が 4 週分たまるまで発火させない**。
     当面 priority は確定EPC 主導。
-  - **確認待ち**: デプロイ 24-48h 後に `fetch-affiliate-ga4.cjs 7` で `affiliate_impression` が
-    0 件でなく `affiliate_vertical` 別に割れること。dimension はパラメータ名に紐づくため
-    再登録不要と考えているが**未検証**。
-  - dimension 側は `affiliate_vertical` 等 6 個が **2026-07-06 登録済**。**未登録は `ad_id` のみ**。
+  - dimension 側は `affiliate_vertical` 等 6 個が **2026-07-06 登録済**、`ad_id` が **2026-07-28 登録済**で、
+    いずれも上記実測で引けることを確認した。**未取得は `variant_id` / `experiment_id`**
+    (`hasVariantBreakdown: false`) で、クリエイティブ A/B の判定にはまだ使えない。
+  - **`other` が 61.4% (2,089/3,400)** を占めるが、これは計測の欠陥ではなく
+    `affiliateCategory ?? "other"` のフォールバック (§12 の 5 コンポーネント) が返す値で、
+    「vertical を解決できなかったページ」を忠実に表す。写像カバレッジの課題として `AFF-CATEGORY-MAP-01` が扱う。
 - **週次改善**: imp>500 かつ CTR が vertical 中央値の 1/2 未満 → priority 1 バンド降格 (次点繰り上げ)。
   比較は experiment registry (weight 50/50) で。**週次 1 vertical 1 変更まで** (配信急変防止)。effect 判定は
   evidence-based (improvement-triage)。

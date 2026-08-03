@@ -5,7 +5,7 @@
 
 ## レイアウト・フォント・角丸（2026-06〜 / 正典: `docs/01_技術設計/04_デザインシステム.md`）
 
-- **横幅は `PageShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない。正確な幅と rail 寸法は `PageShell.tsx` を正典とする。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（reading zone + flex 密着）を使う。
+- **横幅は `PageShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない。正確な幅と rail 寸法は `PageShell.tsx` を正典とする。**寸法は doboku-note に合わせている（2026-08-03）**: コンテナ 1280px / lg+ 左右 40px（`lg:px-10`）/ gap 40px（`gap-10`）/ 右レール **316px**。316 は `300 + 8 + 8` で、300×250 の固定サイズ広告が `SidebarPromoBanner` の `p-2` 内に等倍で収まる幅として決まっている。**レール幅を変えるときは広告カードの padding も同時に見ること**。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（reading zone + flex 密着）を使う。
 - **PC 常設左サイドバーは廃止**。ナビはヘッダー（カテゴリは**メガメニュー**）に集約し、モバイルは `MobileNavDrawer`（Sheet）。
 - **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0`）**。カードやパネルへの `rounded-xl`/`rounded-2xl` の手動付与は禁止し、外枠は `rounded-none` とする。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。`ArticleShell` の `.reading-zone` は薄グレー地を維持するが、角丸と影は通常カード（`rounded-none`・`shadow-sm`）に揃える。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。
@@ -24,7 +24,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
                   lg:max-h-[calc(100vh-5.5rem)] lg:overflow-hidden lg:pr-1">
 
 // ✅ flex の右レールは自然フロー（内部スクロールなし）
-<aside className="hidden w-[360px] shrink-0 lg:flex lg:flex-col lg:gap-3">
+<aside className="hidden w-[316px] shrink-0 lg:flex lg:flex-col lg:gap-3">
 
 // ❌ sticky grid aside で max-h なしは禁止 (フッターが見えなくなる)
 <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20 lg:pr-1">
@@ -84,7 +84,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 | 対象 | 使うべきブレイクポイント | 理由 |
 |---|---|---|
-| ページレイアウト（2カラム/1カラム、右レール表示） | `xl:` (ビューポート 1280px) | `PageShell` の右レール（360px）は `xl:` で出現 |
+| ページレイアウト（2カラム/1カラム、右レール表示） | `xl:` (ビューポート 1280px) | `PageShell` の右レール（316px）は `xl:` で出現 |
 | テキスト・ボタンのサイズ調整 | `sm:` / `md:` (ビューポート) | デバイスサイズで決まる |
 | ダッシュボードカードグリッド | `@sm:` / `@md:` / `@lg:` (コンテナクエリ) | 親コンテナ幅が可変（右レール有無で本文カラム幅が変動）のため |
 
