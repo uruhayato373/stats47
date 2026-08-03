@@ -20,7 +20,7 @@ name: 📝 Blog Generate Daily (Claude Code生成 + 公開)
 #   - 壊れた metric の記事は書かない (blog-topic-gate。分類軸の絞り忘れ等を生成前に弾く)
 #   - quality-gate の blocker が 1 つでも残れば公開しない。**ゲートは緩めない**
 #   - OAuth token 未登録、対象あり生成0件、critic未通過はすべて hard fail
-#   - 初期 LIMIT は 1。成功実測後に増やす。入力は 1..3 に制限
+#   - LIMIT 3 (入力上限) / timeout 120 分 / max-turns 300 (実測 1 本 ≈ 10 分・turn 100 に対し 3 本分)
 #   - Claude が変更できるのは当日 target の原稿ディレクトリだけ
 #   - Base Action は commit SHA 固定、MCP/Web、project hooks、full output を無効化
 #   - dry_run: LLM を呼ばず接地・ゲート・prompt 長だけ出す (課金ゼロ)
@@ -40,9 +40,9 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "生成件数 (1..3、既定1。成功実測後に増やす)"
+        description: "生成件数 (1..3、既定3)。1 本 ≈ 10 分・turn 100"
         required: false
-        default: "1"
+        default: "3"
       dry_run:
         description: "true: LLM を呼ばず接地とゲートだけ実行する"
         required: false
@@ -63,7 +63,7 @@ concurrency:
 
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  LIMIT: ${{ inputs.limit || '1' }}
+  LIMIT: ${{ inputs.limit || '3' }}
   DRY_RUN: ${{ inputs.dry_run || 'false' }}
   KEEP_DRAFT: ${{ inputs.keep_draft || 'false' }}
 
@@ -187,7 +187,7 @@ jobs:
           claude_args: |
             --model sonnet
             --effort high
-            --max-turns 100
+            --max-turns 300
             --no-session-persistence
             --setting-sources project
             --permission-mode dontAsk

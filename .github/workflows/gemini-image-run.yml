@@ -132,15 +132,27 @@ jobs:
           retention-days: 7
           if-no-files-found: warn
 
+      # ★request は結果によらず必ず消費する (2026-08-03)。成功時しか消費しないと、失敗 run の
+      #   request が develop に残って **同内容の再 push が paths フィルタで発火しなくなる**
+      #   (data-refresh で実際に起きた: 2026-07-31 の失敗 run が request を 3 日間残した)。
       - name: 🧹 Consume request file (push イベント時のみ・commit-back)
-        if: github.event_name == 'push'
+        if: ${{ always() && github.event_name == 'push' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git rm -q data/gemini-image-requests.json
+          git rm -q --ignore-unmatch data/gemini-image-requests.json
+          if git diff --cached --quiet; then
+            echo "commit する変更なし"
+            exit 0
+          fi
           git commit -q -m "chore(gemini): consume image request [skip ci]"
-          # 他 workflow の push と競合しても落ちないよう rebase してから push (最大3回)
+          git stash push --include-untracked --quiet || true
           for _ in 1 2 3; do
-            if git push origin develop; then break; fi
-            git pull --rebase origin develop
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ request を消費した"
+              exit 0
+            fi
+            sleep 5
           done
+          echo "::error::request の消費に失敗した (同内容の再 push が発火しなくなる)"
+          exit 1
