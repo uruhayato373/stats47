@@ -179,6 +179,32 @@ test('the allowlist gate test is sensitive to losing core.quotepath=false', () =
 });
 
 /**
+ * 件数を上げた判断を実測で検証できるよう、両 routine は run ごとのトークン実績を残す。
+ * 失敗 run こそ知りたい (利用枠に当たったか) ので always()、
+ * 計測が本体の成否を左右してはいけないので continue-on-error。
+ */
+test('both routines record token usage without gating the run', () => {
+  for (const { workflow, expected } of [
+    { workflow: '.github/workflows/ai-content-generate-daily.yml', expected: 'ai-content' },
+    { workflow: '.github/workflows/blog-generate-daily.yml', expected: 'blog' },
+  ]) {
+    const doc = YAML.parse(read(workflow));
+    const step = doc.jobs.generate.steps.find((s) => s.name === '📊 Record token usage');
+    assert.ok(step, `${workflow}: トークン記録 step が無い`);
+    assert.match(String(step.if ?? ''), /always\(\)/, `${workflow}: 失敗 run で記録されない`);
+    assert.equal(step['continue-on-error'], true, `${workflow}: 計測が本体を落とす`);
+    assert.match(step.run, /record-claude-usage\.mjs/, `${workflow}: 記録スクリプトを呼んでいない`);
+    assert.match(
+      step.run,
+      new RegExp(`--workflow ${expected}\\b`),
+      `${workflow}: workflow 名が ${expected} でない (CSV で区別できない)`,
+    );
+    // 失敗 run では verify の count が無い。0 に落として記録自体は残す
+    assert.match(step.run, /steps\.verify\.outputs\.count \|\| '0'/, `${workflow}: items が解決できない`);
+  }
+});
+
+/**
  * request file が無い push (= request を削除する commit) で本体を走らせてはならない。
  * push イベントに inputs は無いので、workflow_dispatch 用の分岐に落ちると
  * metric="" (全 2,295 件)・dry_run="" (≠true = 実 push) となり、
