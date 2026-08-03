@@ -26,6 +26,7 @@ note コーパス全体 (公開済み + ドラフト) の **editorial メタの�
 | `index.ts` | 集約入口 + helper (`NOTE_ARTICLES` / `articlesByMagazine` 等) |
 | `validate-note-catalog.ts` | 決定的 lint (参照整合性)。error で exit 1 |
 | `generate-note-catalog.ts` | カタログ → `note-published-urls.json` 再生成 |
+| `assign-magazines-by-title.mjs` | 公開済み stats47-note (回収スタブ = key 不透明) の `magazine` をタイトル分類で一括割当 (dry-run 既定・`--apply` で書換)。誤 vertical / 未解決は null 保持で flag |
 | `bootstrap-from-indices.mjs` | 一回限りの移行 (既存インデックス → data/*.ts)。初版生成済・通常再実行しない |
 
 ## 使い方
@@ -41,13 +42,17 @@ npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts [--apply]
 
 1. `magazines.ts` にマガジンを定義 (無料キュレーション or 有料メンバーシップ)。
 2. 束ねたい記事の `data/<vertical>.ts` の `magazine` を該当キーに設定する。
+   stats47-note の一括割当は `assign-magazines-by-title.mjs`(タイトル分類・決定的)を使う
+   (公開スタブは key が不透明なためタイトルからカテゴリを導出する)。
 3. `validate` で整合 (キー実在・vertical 一致) を確認。
 4. note.com でマガジンを作成し URL が出たら `magazines.ts` の `noteUrl` に書き戻す
    (フッター注入 `inject-magazine-url.cjs` への接続は downstream 移行 = 次段)。
 
 - koumuin-* 系は初版で各 vertical マガジンに自動割当済。
-- stats47-note は `s47-fiscal` / `s47-climate` / `s47-population` / `s47-labor` を用意。
-  記事の `magazine` を設定して束ねる (初版は未割当 = null)。
+- stats47-note は e-Stat 17 カテゴリ + 行動者率クラスタ = 18 の `s47-*` マガジンに細分化済み
+  (`s47-fiscal` / `s47-health` / `s47-sports-culture` …)。`assign-magazines-by-title.mjs --apply`
+  で公開済み 159 件中 143 件を割当済み。残りは誤 vertical 16 件 (Claude Code/商品章の混入) +
+  未公開ドラフト。全体設計とフェーズは `docs/todo/05_機能バックログ.md` `[NOTE-MAGAZINE-REORG-01]`。
 
 ## 検証ルール (validate-note-catalog.ts)
 

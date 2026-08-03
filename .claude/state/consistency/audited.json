@@ -1,19 +1,9 @@
 {
-  "hash": "062dd13a0ff8dc6baedb22a408a23f27524209453fd82cf204f43676819cb4ff",
-  "audited_at": "2026-07-31T20:36:00",
+  "hash": "3082779b8a7a08b7bb931c3c9a06569e9355cd1bde58595670a85c1c3be74cb9",
+  "audited_at": "2026-08-03T09:57:00",
   "files": [
-    ".claude/agents/ga4-analyst.md",
-    ".claude/rules/analytics-event-standards.md",
-    ".claude/scripts/adsense/oauth-setup.js",
-    ".claude/scripts/google-admin/README.md",
-    ".claude/scripts/google-admin/__tests__/dimension-ledger.test.mjs",
-    ".claude/scripts/google-admin/__tests__/google-admin.test.mjs",
-    ".claude/scripts/google-admin/apply-allowlisted-settings.mjs",
-    ".claude/scripts/google-admin/audit-adsense.mjs",
-    ".claude/scripts/google-admin/audit-ga4-api.mjs",
-    ".claude/scripts/google-admin/audit-ga4.mjs",
-    ".claude/scripts/google-admin/cli.mjs",
-    ".claude/scripts/google-admin/probe-adsense.mjs",
-    ".claude/skills/analytics/fetch-adsense-data/SKILL.md"
+    ".claude/scripts/note/fetch-note-magazines.mjs",
+    ".claude/scripts/note/login-note-profile.mjs",
+    ".claude/scripts/note/probe-magazine-ui.mjs"
   ]
 }
