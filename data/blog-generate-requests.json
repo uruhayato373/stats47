@@ -1,7 +1,0 @@
-{
-  "limit": 1,
-  "dryRun": false,
-  "keepDraft": false,
-  "requestedAt": "2026-08-03T02:40:00Z",
-  "note": "許可リストの path quoting 修正 (#694) 後の end-to-end 再検証"
-}
