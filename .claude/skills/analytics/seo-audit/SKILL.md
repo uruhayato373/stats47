@@ -456,3 +456,19 @@ Phase 1以降へ自動的に進めない。
 - `.claude/state/gsc/LATEST.md` / `.claude/state/metrics/gsc/history.csv` — SEO カバレッジ指標の数値推移（旧 D1 `seo_tracking` の代替）
 - `docs/todo/04_改善バックログ.md` — SEO 改善施策の管理（pending → in_progress → done。旧 D1 `seo_actions` の代替）
 - `reference/site-navigation-graph.md` — `KAIYU-HUB-01`のサイト横断回遊グラフ・レコメンド実装詳細
+
+## page_components の責務分離監査 (area / theme)
+
+`/areas/*` は県軸・回遊面、`/themes/*` は 47 県横断の比較面。この責務が混ざると
+どちらのページも中途半端になる (判定基準: `docs/01_技術設計/03_情報設計.md`)。
+
+```bash
+node .claude/scripts/audit/page-components-audit.cjs
+```
+
+git TS SSOT (`apps/web/scripts/data/page-components/<pageType>/<pageKey>.json`) を読み、
+area / theme / area-category / city-category の配置を棚卸しして
+`reference/audits/YYYY-MM-DD-area-theme-audit.md` に出す。ネットワーク不要・数秒。
+
+**gate ではなく棚卸し**。「違反候補」は責務の混在を疑うシグナルであって自動確定ではなく、
+採否は情報設計の判断が要る。CI に入れず `/seo-audit --focus content` の一部として人が回す。

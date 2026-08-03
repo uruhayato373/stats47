@@ -433,27 +433,107 @@ function checkHookFiles(findings) {
 
 function checkOrphanScripts(findings) {
   const scripts = walk(path.join(ROOT, ".claude/scripts"), [".mjs", ".cjs", ".js", ".py", ".sh"]);
-  // 参照コーパス (basename がどこかに出現すれば参照ありとみなす)
-  const corpusDirs = [".claude/skills", ".claude/agents", ".claude/scripts", ".claude/hooks", ".github/workflows", "scripts", "docs"];
-  let corpus = "";
+  // 参照コーパス。**自分自身は除いて**数え、1 回でも出れば参照ありとする。
+  //
+  // ★2026-08-03 に 3 つの誤報原因を直した (63 警告の大半が false positive だった)。
+  //   1. package.json を見ていなかった → npm script 経由で CI から走るテストを orphan 扱い
+  //   2. ディレクトリ引数の実行が見えなかった (`node --test .claude/scripts/ads/__tests__/` や
+  //      `.../metrics/__tests__/*.test.mjs`)。basename 照合では一致しないので、
+  //      **親ディレクトリのパスが корпус に出るかも見る**
+  //   3. `出現回数 > 1` を要求していた。これは「自分の定義ファイルでの一致」を除くための
+  //      代用だったが、**1 箇所からだけ呼ばれる配線済みスクリプトを落としていた**
+  //      (例: post-angle-carousel.yml から 1 回、pr-quality-check から 1 回)。
+  //      自分自身をコーパスから除けば代用は不要で、正確に「他から参照されているか」を判定できる。
+  //   4. `.claude/rules/` がコーパスに無かった → rules に手順として書かれた運用ツールを orphan 扱い
+  const corpusDirs = [
+    ".claude/skills",
+    ".claude/agents",
+    ".claude/rules",
+    ".claude/prompts",
+    ".claude/scripts",
+    ".claude/hooks",
+    ".github/workflows",
+    "scripts",
+    "docs",
+    // CLAUDE.md / AGENTS.md はリポジトリ直下にあり、運用ツールの実行手順がここに書かれている
+    // (例: setup-memory-symlink.sh)。ディレクトリ走査だけだと拾えない。
+    ".",
+    // metric config の provenance.restore に「このデータの再取得コマンド」が書かれている
+    // (data-provenance-standards.md §2)。手動投入データの取得スクリプトはここからしか参照されない。
+    "packages/data-configs/src/metrics",
+  ];
+  let pkgScripts = "";
+  try {
+    pkgScripts = JSON.stringify(JSON.parse(readSafe(path.join(ROOT, "package.json"))).scripts ?? {});
+  } catch {
+    pkgScripts = "";
+  }
+  // 自己一致を除くため path → text で持つ (連結してしまうと自分の分を引けない)
+  const corpus = [];
   for (const d of corpusDirs) {
-    for (const f of walk(path.join(ROOT, d), [".md", ".mjs", ".cjs", ".js", ".py", ".sh", ".yml", ".yaml", ".json", ".ts"])) {
-      const st = fs.statSync(f);
+    const files =
+      d === "."
+        ? // 直下の .md だけ (再帰すると node_modules ごと読んでしまう)
+          fs
+            .readdirSync(ROOT, { withFileTypes: true })
+            .filter((e) => e.isFile() && e.name.endsWith(".md"))
+            .map((e) => path.join(ROOT, e.name))
+        : walk(path.join(ROOT, d), [".md", ".mjs", ".cjs", ".js", ".py", ".sh", ".yml", ".yaml", ".json", ".ts"]);
+    for (const f of files) {
+      let st;
+      try {
+        st = fs.statSync(f);
+      } catch {
+        continue;
+      }
       if (st.size > 600_000) continue; // 巨大ファイルはスキップ
-      corpus += readSafe(f) + "\n";
+      // ★docs/todo は参照元にしない (2026-08-03)。「この未使用スクリプトを消すか検討する」と
+      //   TODO に書いた瞬間に「参照あり」となって警告が消える = 何もしていないのに解決に見える。
+      //   TODO はそのスクリプトが**使われている**証拠ではない。
+      if (rel(f).startsWith("docs/todo/")) continue;
+      corpus.push({ file: f, text: readSafe(f) });
     }
   }
+  corpus.push({ file: path.join(ROOT, "package.json"), text: pkgScripts });
+
+  /** 自分自身のファイルを除いて needle が 1 回でも出現するか */
+  function referencedElsewhere(needle, selfFile) {
+    for (const entry of corpus) {
+      if (entry.file === selfFile) continue;
+      if (entry.text.includes(needle)) return true;
+    }
+    return false;
+  }
+
+  /**
+   * ディレクトリごと実行される形だけを拾う (`node --test <dir>/` / `<dir>/*.test.mjs`)。
+   * ★単に「ディレクトリ名が出現する」では駄目。docs がパスに言及しているだけで
+   *   配下全部が配線済みになり、警告が 0 件になる = 何も見ない checker になる
+   *   (2026-08-03 に一度そうしてしまい、63→0 で気づいた)。
+   *   直前に `--test` があるものだけを実行とみなす。
+   */
+  function runAsDirectory(dirRel, selfFile) {
+    for (const entry of corpus) {
+      if (entry.file === selfFile) continue;
+      let idx = 0;
+      while ((idx = entry.text.indexOf(`${dirRel}/`, idx)) !== -1) {
+        const before = entry.text.slice(Math.max(0, idx - 40), idx);
+        // ★このディレクトリ自身の実行に限る。`--test lib/__tests__/` は lib/ 直下の
+        //   スクリプトを実行しないので、続きに `/` が来る (= より深い階層) 場合は数えない。
+        //   これを見落とすと lib/ 直下の未参照スクリプトが検出されなくなる。
+        const after = entry.text.slice(idx + dirRel.length + 1).split(/[\s"']/, 1)[0] ?? "";
+        if (before.includes("--test") && !after.includes("/")) return true;
+        idx += dirRel.length;
+      }
+    }
+    return false;
+  }
+
   for (const s of scripts) {
     const base = path.basename(s);
-    // 自身の定義行以外で basename が出現するか (定義ファイルだけの一致を除くため出現回数 > 1 を要求)
-    let idx = 0,
-      count = 0;
-    while ((idx = corpus.indexOf(base, idx)) !== -1) {
-      count++;
-      idx += base.length;
-      if (count > 1) break;
-    }
-    if (count <= 1) {
+    const dirRel = rel(path.dirname(s));
+    const wired = referencedElsewhere(base, s) || runAsDirectory(dirRel, s);
+    if (!wired) {
       findings.push({
         level: "warn",
         code: "W1",

@@ -326,6 +326,16 @@ jobs:
           npm run validate:polarity --workspace=@stats47/data-configs
         continue-on-error: false
 
+      - name: 🔗 Survey Master Coverage Gate
+        run: |
+          # metric から解決される非合成 survey id が surveys.json (master) にすべて実在するか。
+          # 欠けると /survey/<id> が all.json 不在で 404 になる (孤児バケット)。
+          # スクリプト自身が「ビルド時 lint / CI 向け」と書きながら、どこにも配線されて
+          # いなかった (2026-08-03 の監査で発見)。ネットワーク不要・数秒で終わる。
+          # 規約: .claude/rules/survey-linkage-standards.md
+          npm run validate:survey-master --workspace=@stats47/data-configs
+        continue-on-error: false
+
       - name: 📚 Theme Catalog Gate
         run: |
           # テーマ指標×チャート統合カタログ (SSOT) の整合と生成物の鮮度を担保。

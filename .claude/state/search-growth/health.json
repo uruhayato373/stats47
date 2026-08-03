@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-07-26T14:08:33.008Z",
-  "week": "2026-W30",
+  "generatedAt": "2026-08-02T14:08:11.514Z",
+  "week": "2026-W31",
   "sources": {
     "gsc": {
       "status": "success",
       "freshness": "fresh",
-      "observedAt": "2026-07-26T00:00:00Z",
-      "count": 10916
+      "observedAt": "2026-08-02T00:00:00Z",
+      "count": 11252
     },
     "ga4": {
       "status": "success",
       "freshness": "fresh",
-      "observedAt": "2026-07-26T00:00:00Z",
-      "count": 8356
+      "observedAt": "2026-08-02T00:00:00Z",
+      "count": 9280
     },
     "psi": {
-      "status": "partial",
-      "freshness": "stale",
-      "observedAt": "2026-07-19T18:13:21.484Z",
+      "status": "success",
+      "freshness": "fresh",
+      "observedAt": "2026-08-01T18:20:15.112Z",
       "count": 228
     },
     "coverage": {
@@ -27,10 +27,10 @@
       "count": 5166
     },
     "inspection": {
-      "status": "partial",
-      "freshness": "stale",
-      "observedAt": "2026-07-23T00:00:00Z",
-      "count": 2711
+      "status": "success",
+      "freshness": "fresh",
+      "observedAt": "2026-07-31T00:00:00Z",
+      "count": 2655
     },
     "cloudflare": {
       "status": "partial",
@@ -63,5 +63,5 @@
       "count": 0
     }
   },
-  "totalObservations": 27379
+  "totalObservations": 28583
 }

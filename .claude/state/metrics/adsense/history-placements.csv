@@ -1,0 +1,7 @@
+week,code,platform,earnings,impressions,impressions_rpm,clicks,ctr,viewability,cost_per_click,ad_requests,ad_requests_coverage
+2026-W31,AUTO_ADS,Desktop,73.00,681,107.00,9,0.0132,0.8634,8.00,2734,0.5995
+2026-W31,AUTO_ADS,HighEndMobile,33.00,287,114.00,23,0.0801,0.7403,1.00,1207,0.8045
+2026-W31,AUTO_ADS,Tablet,3.00,27,106.00,1,0.0370,0.8889,3.00,49,1.0000
+2026-W31,MANUAL,Desktop,34.00,2640,13.00,0,0.0000,0.4894,0.00,9333,0.2888
+2026-W31,MANUAL,HighEndMobile,4.00,495,8.00,3,0.0061,0.2860,1.00,2037,0.2572
+2026-W31,MANUAL,Tablet,0.00,74,5.00,0,0.0000,0.3836,0.00,123,0.6260

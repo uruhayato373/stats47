@@ -20,7 +20,11 @@ name: 📝 Blog Generate Daily (Claude Code生成 + 公開)
 #   - 壊れた metric の記事は書かない (blog-topic-gate。分類軸の絞り忘れ等を生成前に弾く)
 #   - quality-gate の blocker が 1 つでも残れば公開しない。**ゲートは緩めない**
 #   - OAuth token 未登録、対象あり生成0件、critic未通過はすべて hard fail
-#   - 初期 LIMIT は 1。成功実測後に増やす。入力は 1..3 に制限
+#   - LIMIT 3 (入力上限) / timeout 120 分 / max-turns 300 (実測 1 本 ≈ 10 分・turn 100 に対し 3 本分)
+#     ★既定は 1 本/日。上限 3 はトークン予算だけで決まるが、既定は**記事の月産上限**で決まる。
+#     .claude/state/blog/seo-strategy.json の typeMix.perMonth は計 17-20 本/月、BLOG-SEO-PACE-01 も
+#     「月 15〜20 本の上限内」。3 本/日 = 月 84 本はこれを 4-5 倍超える (2026-08-03 に一度 3 を既定に
+#     してしまい、同日の週次計画で検知して 1 へ戻した)。既定を上げるときは型配分 SSOT を先に更新する。
 #   - Claude が変更できるのは当日 target の原稿ディレクトリだけ
 #   - Base Action は commit SHA 固定、MCP/Web、project hooks、full output を無効化
 #   - dry_run: LLM を呼ばず接地・ゲート・prompt 長だけ出す (課金ゼロ)
@@ -40,7 +44,7 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "生成件数 (1..3、既定1。成功実測後に増やす)"
+        description: "生成件数 (1..3、既定1)。1 本 ≈ 10 分・turn 100。既定は型配分の月産上限で決まる"
         required: false
         default: "1"
       dry_run:
@@ -187,7 +191,7 @@ jobs:
           claude_args: |
             --model sonnet
             --effort high
-            --max-turns 100
+            --max-turns 300
             --no-session-persistence
             --setting-sources project
             --permission-mode dontAsk
@@ -196,6 +200,26 @@ jobs:
             --disallowedTools "WebFetch,WebSearch,Bash(env *),Bash(printenv *),Read(.env*),Read(**/.env*)"
             --strict-mcp-config
             --mcp-config '{"mcpServers":{}}'
+
+      # ★失敗を診断可能にする (2026-08-02)。理由は ai-content-generate-daily.yml の同名 step と同じ。
+      #   show_full_output は false のままにし、切り分けに要る最小限だけを出す。
+      # ★verify 落ちでも出す (2026-08-03)。run 30774421511 は Claude が success した後に
+      #   verify が「critic の Agent 記録なし」で落ちたが、diagnose が failure 限定だったため
+      #   Issue に何の subagent が動いたかが残らなかった。Claude が実際に走った run では常に出す。
+      - name: 🩺 Summarize Claude execution
+        if: ${{ always() && steps.claude.outcome != 'skipped' }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
+          mkdir -p .local/ci
+          node .claude/scripts/lib/summarize-claude-execution.mjs "$FILE" > .local/ci/claude-diagnosis.txt 2>&1 || true
+          {
+            echo "### Claude 実行サマリ"
+            echo '```'
+            cat .local/ci/claude-diagnosis.txt
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: ✅ Verify target completeness, gates, and critic PASS
         id: verify
@@ -223,6 +247,10 @@ jobs:
                   and ((.input.prompt // "") | contains($target)))' \
                 "$CLAUDE_EXECUTION_FILE" >/dev/null; then
                 echo "::error::Agent 実行記録なし: ${AGENT_TYPE} / ${SLUG}"
+                # ★どの subagent までは動いたのかを失敗地点で出す。これが無いと
+                #   「呼ばれなかった」のか「prompt に対象名が無くて照合を外した」のかを
+                #   切り分けられない (2026-08-03 run 30774421511 で実際に詰まった)。
+                echo "観測された subagent: $(jq -r '[.[] | select(.type == \"assistant\") | .message.content[]? | select(.type == \"tool_use\" and .name == \"Agent\") | .input.subagent_type] | unique | join(\", \")' "$CLAUDE_EXECUTION_FILE" 2>/dev/null || echo '(取得不可)')"
                 exit 1
               fi
             done
@@ -255,7 +283,12 @@ jobs:
                 exit 1
                 ;;
             esac
-          done < <(git status --porcelain=v1 --untracked-files=all | cut -c4-)
+          # core.quotepath=false が要る: 既定 (true) だと git は非 ASCII を含むパスを
+          # ダブルクォートで包んで 8 進エスケープする ("docs/21_\343\203\226.../article.md")。
+          # 出力先が docs/21_ブログ記事原稿/ なので、既定のままでは許可パターンに一度も
+          # 一致せず、正しく生成・critic PASS した記事まで全件 reject される
+          # (2026-08-03 run 30776544300 で実際に発生。この gate は一度も通れていなかった)。
+          done < <(git -c core.quotepath=false status --porcelain=v1 --untracked-files=all | cut -c4-)
           echo "count=$GENERATED" >> "$GITHUB_OUTPUT"
           echo "✅ 対象 ${EXPECTED} 件すべて factual + quality + critic PASS"
 
@@ -307,7 +340,20 @@ jobs:
           git rm -q --ignore-unmatch data/blog-generate-requests.json || true
           if git diff --cached --quiet; then exit 0; fi
           git commit -q -m "chore(blog): consume blog-generate request [skip ci]"
-          git pull --rebase --quiet origin develop && git push origin HEAD:develop
+          # ★キュー再構築の step が tracked な state を書き換えるため作業ツリーが汚れる。
+          #   そのまま rebase すると "cannot pull with rebase: You have unstaged changes" で
+          #   落ち、request が消費されないまま develop に残る (2026-08-02 run 30769885097 で実測)。
+          #   残ると同内容の再 push が paths フィルタで発火しなくなる。消費に不要な差分なので退避する。
+          git stash push --include-untracked --quiet || true
+          for i in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ request を消費した"
+              exit 0
+            fi
+            echo "consume retry $i"; sleep 5
+          done
+          echo "::error::request の消費に失敗した (同内容の再 push が発火しなくなる)"
+          exit 1
 
       # 既定 token の push は blog-auto-publish の push トリガーを発火させないため明示 dispatch する。
       # run が生まれたことを確認してから成功とする (ai-content で滞留を実際に踏んだ)。
@@ -339,6 +385,40 @@ jobs:
             if [ -n "$NUMBER" ]; then gh issue close "$NUMBER" --reason completed; fi
           done
 
+      # ★1 件あたりのトークン実績を残す (2026-08-03)。
+      #   件数を 1→5 / 1→3 に引き上げたのに「1 件で何トークンか」を一度も測っていなかった。
+      #   execution log には usage が最初から書かれていて、診断 step も既にこのファイルを読んでいる。
+      #   捨てていただけなので append-only の履歴にする。
+      #   失敗 run こそ知りたい (利用枠に当たったか) ので always()。
+      #   計測が本体の成否を左右してはいけないので continue-on-error にする (無視ではなく可視化)。
+      - name: 📊 Record token usage
+        if: ${{ always() && steps.claude.outcome != 'skipped' }}
+        continue-on-error: true
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
+          node .claude/scripts/lib/record-claude-usage.mjs "$FILE" \
+            --workflow blog \
+            --run-id "${{ github.run_id }}" \
+            --limit "${LIMIT}" \
+            --items "${{ steps.verify.outputs.count || '0' }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/claude-usage || true
+          if git diff --cached --quiet; then echo "記録する変更なし"; exit 0; fi
+          git commit -q -m "chore(metrics): record Claude token usage [skip ci]"
+          git stash push --include-untracked --quiet || true
+          for _ in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ トークン実績を記録した"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::トークン実績の push に失敗した (計測のみ・本体には影響しない)"
+          exit 1
+
       - name: 🚨 Upsert failure issue
         if: ${{ failure() && env.DRY_RUN != 'true' }}
         env:
@@ -346,10 +426,20 @@ jobs:
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           TITLE="🚨 Blog generation routine failed"
+          DIAG="(診断なし: Claude step まで到達していないか、execution log を読めなかった)"
+          if [ -s .local/ci/claude-diagnosis.txt ]; then DIAG=$(cat .local/ci/claude-diagnosis.txt); fi
           BODY="日次ブログ生成が失敗しました。対象あり生成0件、認証、factual/quality gate、critic、push/dispatchのいずれかです。
 
           Run: ${RUN_URL}
           Target count: ${{ steps.prepare.outputs.count || 'unknown' }}
+
+          <details><summary>Claude 実行の失敗診断</summary>
+
+          \`\`\`
+          ${DIAG}
+          \`\`\`
+
+          </details>
 
           成功するまでgreen扱いにはなりません。"
           NUMBER=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')

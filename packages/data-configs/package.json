@@ -56,7 +56,8 @@
     "check:open-data-links": "tsx scripts/check-open-data-links.ts",
     "test": "vitest",
     "type-check": "tsc --noEmit",
-    "validate:polarity": "tsx scripts/validate-polarity.ts"
+    "validate:polarity": "tsx scripts/validate-polarity.ts",
+    "validate:survey-master": "tsx scripts/ssds/validate-survey-master-coverage.ts"
   },
   "dependencies": {
     "@stats47/types": "*"
