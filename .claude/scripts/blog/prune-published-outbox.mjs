@@ -31,6 +31,13 @@ import { readFileSync, readdirSync, existsSync, statSync, rmSync } from "node:fs
 import { join, resolve } from "node:path";
 import { execFileSync } from "node:child_process";
 
+// prune (消す) と publish (出す) で同じ判定を使う。ズレると「消されないが出もしない」記事が生まれる
+import {
+  fetchR2Article as fetchR2ArticleShared,
+  getPublished,
+  normalizeBody,
+} from "./lib/outbox-r2.mjs";
+
 const PROJECT_ROOT = resolve(import.meta.dirname, "../../..");
 const OUTBOX_REL = "docs/21_ブログ記事原稿";
 const OUTBOX = join(PROJECT_ROOT, OUTBOX_REL);
@@ -39,33 +46,7 @@ const APPLY = process.argv.includes("--apply");
 const CHECK = process.argv.includes("--check"); // 検出のみ・削除しない・取り残しがあれば exit 1 (deploy/publish ガード用)
 const CONCURRENCY = 6;
 
-/** frontmatter の published を読む。true/false/null(不明) */
-function getPublished(articlePath) {
-  try {
-    const txt = readFileSync(articlePath, "utf8");
-    const m = txt.match(/^published:\s*(true|false)/m);
-    return m ? m[1] === "true" : null;
-  } catch {
-    return null;
-  }
-}
-
-/** R2 (正典) の article.md 本文を返す。未掲載 / 取得失敗は null */
-async function fetchR2Article(slug) {
-  const url = `${R2_BASE}/app/blog/${encodeURIComponent(slug)}/article.md`;
-  try {
-    const res = await fetch(url, { method: "GET", signal: AbortSignal.timeout(8000) });
-    if (res.status !== 200) return null;
-    return await res.text();
-  } catch {
-    return null;
-  }
-}
-
-/** 改行/末尾空白の差を無視して内容比較 (publish は cp -R で verbatim コピー = 一致するはず) */
-function normalizeBody(s) {
-  return String(s).replace(/\r\n/g, "\n").replace(/[ \t]+$/gm, "").trim();
-}
+const fetchR2Article = (slug) => fetchR2ArticleShared(slug, R2_BASE);
 
 /** R2 に指定キーが存在するか (GET・200 のみ真) */
 async function existsInR2(slug, file) {
