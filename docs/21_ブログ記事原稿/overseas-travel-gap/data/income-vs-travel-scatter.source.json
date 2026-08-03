@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "overseas-travel-annual-participation-rate-15plus",
+  "pair": "per-taxpayer-taxable-income",
+  "pearsonR": 0.8823340495182658,
+  "partialRPopulation": 0.7611486685986119,
+  "unit": "％ × 千円",
+  "label": "海外旅行の年間行動者率 と 課税対象所得 の関係",
+  "source": "r2:app/correlation/by-ranking-key/overseas-travel-annual-participation-rate-15plus.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug overseas-travel-gap --base overseas-travel-annual-participation-rate-15plus --pair per-taxpayer-taxable-income --data-name income-vs-travel-scatter"
+}
