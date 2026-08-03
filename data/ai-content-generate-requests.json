@@ -1,6 +1,0 @@
-{
-  "limit": 1,
-  "dryRun": false,
-  "requestedAt": "2026-08-02T22:45:00Z",
-  "reason": "CLAUDE_CODE_OAUTH_TOKEN 差し替え後の検証。401 が解消したか、生成が publish まで通るかを実測する"
-}
