@@ -72,3 +72,70 @@ agent 用詳細ログ。施策一覧 (簡易表) は `docs/todo/04_改善バッ�
   - **実測 (2026-07-03)**: `.claude/state/ads/ga4-affiliate-2026-06-28.json` = `dimensions: []`・`hasCategoryBreakdown: false` → GA4 custom dimension (`affiliate_category` / `link_position`) が**依然未登録**で ranking ページ帰属の実測不能
   - 総計 (28 日): ad_impression 8,637 / affiliate_click 11 / CTR 0.13% (ページ・枠の内訳なし)
   - **次アクション**: 人間が GA4 管理画面でイベントスコープ custom dimension 2 件を登録 → 翌週 `affiliate-ga4-weekly.yml` 実行で内訳確認 → ranking impression 発生を判定
+
+---
+
+## AFF-IMPRESSION-RENAME-01 `ad_impression` → `affiliate_impression` 改名後の計測確認
+
+- **デプロイ日**: 2026-07-28 (イベント改名 + `AdImpressionTracker` の発火順バグ修正を同時投入)
+- **想定効果**: 収益への直接効果は想定しない。**計測の回復**が目的。
+  改名前の自前 impression は **実測 0 件**で、AdSense 連携が自動生成する同名 `ad_impression`
+  (直近 7 日 3,346 件・`adSourceName` が全件 AdSense で総数と完全一致) と区別できず、
+  **アフィリエイト CTR の分母が存在しなかった** (`.claude/rules/analytics-event-standards.md` §2)。
+- **検証コマンド**:
+  ```bash
+  node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 要 GHA 実行 or ローカル鍵
+  # 生成物: .claude/state/ads/ga4-affiliate-<date>.json
+  ```
+- **実測 (snapshot `.claude/state/ads/ga4-affiliate-2026-08-02.json` / generatedAt 2026-08-02T14:28:55Z)**:
+
+  | 項目 | 値 |
+  |---|---|
+  | `eventNames.impression` | `affiliate_impression` (`measurementEpoch: affiliate-impression-v1`) |
+  | impressions / clicks / CTR | **3,400** / 5 / 0.147% |
+  | `unsetVerticalImpressions` / `unsetVerticalRatio` | **0 / 0** (`(not set)` に潰れていない) |
+  | `hasVerticalBreakdown` / `hasCategoryBreakdown` | **true** / true |
+  | 取得できた dimension | `ad_id` / `affiliate_vertical` / `link_position` (行数 133) |
+  | `measurementGate.status` | **ready** (`affiliate-operations-latest.json`) |
+
+  vertical 別内訳 — **canonical 10 軸すべてに実データがある**:
+
+  | vertical | imp | clicks |
+  |---|---:|---:|
+  | (other) | 2,089 | 4 |
+  | economy | 633 | 1 |
+  | population | 230 | 0 |
+  | health | 99 | 0 |
+  | furusato | 80 | 0 |
+  | mobility | 60 | 0 |
+  | education | 56 | 0 |
+  | housing | 50 | 0 |
+  | labor | 44 | 0 |
+  | energy | 41 | 0 |
+  | travel | 18 | 0 |
+
+  **窓の読み方**: snapshot の窓は名目 28 日 (2026-07-06〜08-02) だが、`affiliate_impression` は
+  **2026-07-28 の改名以降にしか存在しない**。したがって 3,400 imp は実質 6 日以内の蓄積で、
+  日次では約 600 imp。28 日平均として読まない。
+
+- **判定**: **完了**。行の完了条件「0 件でなく vertical 別に取得できるか確認する」を満たし、
+  再監査の分岐 (「0 件または `(not set)` の場合」) は発火しない。effect ラベルは付けない
+  (収益効果ではなく計測回復の施策のため)。
+- **副次的に解消したこと**:
+  - 2026-06-28 snapshot の `dimensions: []` / `hasCategoryBreakdown: false` から、
+    3 dimension すべてが引ける状態になった。AFF-03 が「GA4 custom dimension 未登録で
+    ranking ページ帰属の実測不能」としてブロックされていた前提が解消した。
+  - `.claude/rules/affiliate-ads-standards.md` §6 の「dimension はパラメータ名に紐づくため
+    イベント改名でも再登録不要と考えているが**未検証**」を**実測で検証済**にした (再登録は不要だった)。
+- **未確定 / 残る論点**:
+  - **`other` が 61.4% (2,089/3,400) を占める。** これは計測の欠陥ではなく、
+    `affiliateCategory ?? "other"` のフォールバック (`BannerAd` / `AffiliateAdSlot` /
+    `AffiliateTextAdList` / `AreaBannerAd` の計 5 箇所) が返す値で、
+    「**vertical を解決できなかったページで表示された**」ことを忠実に表している。
+    `other` は `AffiliateVertical` の 10 軸に含まれない。
+    → 写像カバレッジの問題として `AFF-CATEGORY-MAP-01` が扱う。本項目の範囲外。
+  - `hasVariantBreakdown: false`。`variant_id` / `experiment_id` は今回の dimension に含まれず、
+    クリエイティブ A/B (`/manage-affiliate-experiment`) の判定にはまだ使えない。
+  - **CTR 0.147% は分母が 6 日分**なので、水準の評価には窓を伸ばした再取得が要る。
+    改名日 (2026-07-28) より前に窓を伸ばすと 0 件が混ざるため、判定は 2026-08-25 以降に行う
+    (`AFF-A8-REGISTER-01` / `AFF-BLOG-TEXTLINK-01` の due と整合)。
