@@ -1,5 +1,7 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-08-03T11:02:37",
-  "files": []
+  "hash": "bb45c03f94348af26d832cd2f1cebcf9fe9f89bdabb870cbf4732635f0bdc76f",
+  "audited_at": "2026-08-03T11:14:29",
+  "files": [
+    ".claude/scripts/note/note-magazine.mjs"
+  ]
 }
