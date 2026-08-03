@@ -352,3 +352,35 @@ test('CI prompts preserve author/critic separation and prohibit external writes'
     assert.match(source, /WebFetch \/ WebSearch \/ MCP/);
   }
 });
+
+// blog-auto-publish の reconcile は「未公開」だけでなく「改稿版 (既 live の brushup 済み)」も
+// 拾わなければならない。2026-08-03 まで all.json 未掲載だけを見ており、pruner が内容差分で
+// 正しく保持する一方で publish が永久に選ばないため、改稿版が outbox に滞留していた。
+// ブログ是正ループの出力は全てこの経路を通る。
+test('blog auto-publish reconciles revised articles, not just unpublished ones', () => {
+  const wf = fs.readFileSync(path.join(ROOT, '.github/workflows/blog-auto-publish.yml'), 'utf8');
+
+  assert.match(
+    wf,
+    /select-republish-slugs\.mjs/,
+    'reconcile が共有セレクタを使っていない',
+  );
+  assert.doesNotMatch(
+    wf,
+    /!live\.has\(/,
+    '「all.json 未掲載のみ」の旧判定が残っている (改稿版を拾えない)',
+  );
+
+  // セレクタと pruner は同じ判定モジュールを使うこと。片方だけズレると
+  // 「消されないが出もしない」記事が生まれる。
+  for (const rel of [
+    '.claude/scripts/blog/select-republish-slugs.mjs',
+    '.claude/scripts/blog/prune-published-outbox.mjs',
+  ]) {
+    assert.match(
+      fs.readFileSync(path.join(ROOT, rel), 'utf8'),
+      /lib\/outbox-r2\.mjs/,
+      `${rel} が共有判定モジュールを使っていない`,
+    );
+  }
+});
