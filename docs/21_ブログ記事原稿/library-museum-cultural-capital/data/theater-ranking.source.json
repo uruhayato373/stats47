@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "theater-music-hall",
+  "year": "2021",
+  "unit": "施設",
+  "label": "劇場・音楽堂等数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/theater-music-hall/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug library-museum-cultural-capital --keys theater-music-hall --data-name theater-ranking",
+  "fetchedAt": "2026-08-03T08:41:21.598Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

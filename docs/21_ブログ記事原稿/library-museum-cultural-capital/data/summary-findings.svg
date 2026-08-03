@@ -1,4 +1,4 @@
-<!-- data-source: summary-findings.json | generated: 2026-08-03T08:35:35.121Z -->
+<!-- data-source: summary-findings.json | generated: 2026-08-03T08:42:16.911Z -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 422" width="960" height="422" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
   <style>
     .svg-bg{fill:#ffffff}
@@ -39,5 +39,5 @@
   <circle cx="58" cy="354" r="18" fill="#dc2626"/>
   <text x="58" y="360" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
   <text x="90" y="349.6" font-size="18" font-weight="bold" class="svg-title"><tspan x="90" dy="0">劇場・音楽堂は大都市圏に偏在</tspan></text>
-  <text x="90" y="371.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">図書館とは逆に人口の多い地域へ集約される</tspan></text>
+  <text x="90" y="371.6" font-size="16" class="svg-axis"><tspan x="90" dy="0">東京132施設に対し徳島・鳥取は13施設で約10倍差</tspan></text>
 </svg>
