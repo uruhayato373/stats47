@@ -1,0 +1,7 @@
+{
+  "limit": 1,
+  "dryRun": false,
+  "keepDraft": false,
+  "requestedAt": "2026-08-03T01:20:00Z",
+  "reason": "ブログ日次生成の end-to-end 検証。ai-content は run 30775103091 で通ったので同じ workflow 構造のブログ側を実測する"
+}
