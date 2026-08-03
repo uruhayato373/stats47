@@ -1,9 +1,8 @@
 {
-  "hash": "3082779b8a7a08b7bb931c3c9a06569e9355cd1bde58595670a85c1c3be74cb9",
-  "audited_at": "2026-08-03T09:57:00",
+  "hash": "9a479077872323206f5b229e9506ad32d74b0835537c26c48f64b57817e56c54",
+  "audited_at": "2026-08-03T10:33:00",
   "files": [
-    ".claude/scripts/note/fetch-note-magazines.mjs",
-    ".claude/scripts/note/login-note-profile.mjs",
-    ".claude/scripts/note/probe-magazine-ui.mjs"
+    ".claude/scripts/note/fetch-magazine-members.mjs",
+    ".claude/scripts/note/probe-magazine-create.mjs"
   ]
 }
