@@ -199,8 +199,11 @@ jobs:
 
       # ★失敗を診断可能にする (2026-08-02)。理由は ai-content-generate-daily.yml の同名 step と同じ。
       #   show_full_output は false のままにし、切り分けに要る最小限だけを出す。
-      - name: 🩺 Diagnose Claude failure
-        if: ${{ always() && steps.claude.outcome == 'failure' }}
+      # ★verify 落ちでも出す (2026-08-03)。run 30774421511 は Claude が success した後に
+      #   verify が「critic の Agent 記録なし」で落ちたが、diagnose が failure 限定だったため
+      #   Issue に何の subagent が動いたかが残らなかった。Claude が実際に走った run では常に出す。
+      - name: 🩺 Summarize Claude execution
+        if: ${{ always() && steps.claude.outcome != 'skipped' }}
         env:
           CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
         run: |
@@ -208,7 +211,7 @@ jobs:
           mkdir -p .local/ci
           node .claude/scripts/lib/summarize-claude-execution.mjs "$FILE" > .local/ci/claude-diagnosis.txt 2>&1 || true
           {
-            echo "### Claude 実行の失敗診断"
+            echo "### Claude 実行サマリ"
             echo '```'
             cat .local/ci/claude-diagnosis.txt
             echo '```'
@@ -240,6 +243,10 @@ jobs:
                   and ((.input.prompt // "") | contains($target)))' \
                 "$CLAUDE_EXECUTION_FILE" >/dev/null; then
                 echo "::error::Agent 実行記録なし: ${AGENT_TYPE} / ${SLUG}"
+                # ★どの subagent までは動いたのかを失敗地点で出す。これが無いと
+                #   「呼ばれなかった」のか「prompt に対象名が無くて照合を外した」のかを
+                #   切り分けられない (2026-08-03 run 30774421511 で実際に詰まった)。
+                echo "観測された subagent: $(jq -r '[.[] | select(.type == \"assistant\") | .message.content[]? | select(.type == \"tool_use\" and .name == \"Agent\") | .input.subagent_type] | unique | join(\", \")' "$CLAUDE_EXECUTION_FILE" 2>/dev/null || echo '(取得不可)')"
                 exit 1
               fi
             done
