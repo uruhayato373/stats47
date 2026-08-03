@@ -1,0 +1,135 @@
+/**
+ * note-operator: マガジン作成 CLI (dry-run 既定 + --commit gate)
+ *
+ * catalog (magazines.ts = intent の SSOT) と note.com の差分から、
+ * 「作成すべきマガジン」を算出し、承認 (--commit) 時のみ note.com に実作成する。
+ * ★既定は dry-run (書き込みなし)。--commit で初めて note.com に書き込む。
+ * ★account assert (urlname==stats47) を通してからしか書き込まない。
+ * ★既に noteUrl を持つマガジン (note.com 実在) は絶対に作り直さない。
+ *
+ * Usage:
+ *   node .claude/scripts/note/note-magazine.mjs plan
+ *       未作成 (noteUrl null) かつ member>0 のマガジンを一覧 (dry-run)
+ *   node .claude/scripts/note/note-magazine.mjs create --key s47-sports-culture
+ *       作成内容を提示 (dry-run・書き込みなし)
+ *   node .claude/scripts/note/note-magazine.mjs create --key s47-sports-culture --commit
+ *       note.com に実作成 → 新 URL を magazines.ts の noteUrl へ書き戻す
+ */
+import { execFileSync } from "node:child_process";
+import { readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { launchContext, assertAccount } from "./lib/note-session.mjs";
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
+const MAGAZINES_TS = join(ROOT, ".claude/scripts/note/catalog/magazines.ts");
+const NEW_URL = "https://note.com/magazines/new";
+const NAME_MAX = 30;
+
+const args = process.argv.slice(2);
+const cmd = args[0];
+const keyArg = (() => { const i = args.indexOf("--key"); return i >= 0 ? args[i + 1] : null; })();
+const COMMIT = args.includes("--commit");
+
+function getCatalog() {
+  const json = execFileSync("npx", ["tsx", join(ROOT, ".claude/scripts/note/catalog/dump-magazines-json.ts")], {
+    cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "inherit"],
+  });
+  return JSON.parse(json);
+}
+
+function pending(catalog) {
+  // 未作成 (noteUrl null) かつ 公開済みメンバー>0 を作成候補に
+  return catalog.filter((m) => !m.noteUrl && m.publishedMemberCount > 0).sort((a, b) => b.publishedMemberCount - a.publishedMemberCount);
+}
+
+function cmdPlan() {
+  const catalog = getCatalog();
+  const todo = pending(catalog);
+  const live = catalog.filter((m) => m.noteUrl);
+  console.log(`=== note マガジン作成プラン (dry-run) ===`);
+  console.log(`note.com 稼働: ${live.length} / 作成候補 (未作成・member>0): ${todo.length}\n`);
+  console.log("作成候補 (公開済みメンバー数 降順):");
+  for (const m of todo) {
+    const nameLen = [...m.name].length;
+    const warn = nameLen > NAME_MAX ? ` ⚠名前${nameLen}字>30` : "";
+    console.log(`  ${String(m.publishedMemberCount).padStart(3)}件 | ${m.isPaid ? "有料" : "無料"} | ${m.key}  「${m.name}」${warn}`);
+  }
+  console.log(`\n作成: node ${"note-magazine.mjs"} create --key <key> [--commit]`);
+}
+
+async function cmdCreate() {
+  if (!keyArg) { console.error("--key <magazineKey> が必要です"); process.exit(1); }
+  const catalog = getCatalog();
+  const m = catalog.find((x) => x.key === keyArg);
+  if (!m) { console.error(`マガジンキー "${keyArg}" が catalog に不在`); process.exit(1); }
+  if (m.noteUrl) { console.error(`✗ "${keyArg}" は既に note.com 実在 (${m.noteUrl})。作り直さない`); process.exit(1); }
+  const nameLen = [...m.name].length;
+  if (nameLen > NAME_MAX) { console.error(`✗ 名前が ${nameLen}字 > ${NAME_MAX}字上限。magazines.ts の name を短縮してください`); process.exit(1); }
+
+  console.log(`=== マガジン作成 ${COMMIT ? "(★COMMIT: note.com へ実書き込み)" : "(dry-run)"} ===`);
+  console.log(`  key:  ${m.key}`);
+  console.log(`  名前: ${m.name} (${nameLen}字)`);
+  console.log(`  説明: ${m.description}`);
+  console.log(`  価格: ${m.isPaid ? "有料" : "無料"}`);
+  console.log(`  対象記事: 公開済み ${m.publishedMemberCount} 件`);
+
+  if (!COMMIT) {
+    console.log(`\n(dry-run。実作成は --commit を付ける。作成後 noteUrl を magazines.ts へ書き戻す)`);
+    return;
+  }
+  if (m.isPaid) { console.error("\n✗ このCLIは無料マガジン専用 (有料は価格設定・審査が絡むため手動)。中断"); process.exit(1); }
+
+  const ctx = await launchContext({ headless: false });
+  try {
+    const acct = await assertAccount(ctx);
+    console.log(`  account assert OK: ${acct}`);
+    const page = ctx.pages()[0] ?? (await ctx.newPage());
+    await page.goto(NEW_URL, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(2500);
+    // 名前 (30字以内) / 説明 (400字以内)
+    await page.fill('input[placeholder*="30字以内"]', m.name);
+    await page.fill('textarea[placeholder*="400字以内"]', m.description);
+    // 無料 を選択
+    await page.click('button:has-text("無料")').catch(() => {});
+    await page.waitForTimeout(500);
+    // 作成 (submit)
+    await page.click('button:has-text("作成")');
+    // 新マガジンページ (/m/mXXXX) へのリダイレクトを待つ
+    await page.waitForURL(/\/m\/m[0-9a-f]+/, { timeout: 20000 }).catch(() => {});
+    await page.waitForTimeout(1500);
+    const finalUrl = page.url();
+    const mk = finalUrl.match(/\/m\/(m[0-9a-f]+)/);
+    if (!mk) { console.error(`✗ 作成後 URL が想定外: ${finalUrl}。手動確認してください`); process.exit(1); }
+    const noteUrl = `https://note.com/stats47/m/${mk[1]}`;
+    console.log(`\n✓ 作成成功: ${noteUrl}`);
+    // magazines.ts の該当エントリの noteUrl: null → 実URL へ書き戻す
+    writeBackNoteUrl(m.key, noteUrl);
+    console.log(`✓ magazines.ts の "${m.key}" に noteUrl を記録`);
+  } finally {
+    await ctx.close();
+  }
+}
+
+function writeBackNoteUrl(key, noteUrl) {
+  let src = readFileSync(MAGAZINES_TS, "utf8");
+  // key: "<key>" を含むエントリ内の noteUrl: null を実URLへ (エントリ境界は key 位置で切る)
+  const km = [...src.matchAll(/key:\s*"([^"]+)"/g)];
+  let out = "", cursor = 0, done = false;
+  for (let i = 0; i < km.length; i++) {
+    const segStart = km[i].index, segEnd = i + 1 < km.length ? km[i + 1].index : src.length;
+    let seg = src.slice(segStart, segEnd);
+    if (km[i][1] === key && !done) {
+      const ns = seg.replace(/noteUrl:\s*null/, `noteUrl: "${noteUrl}"`);
+      if (ns !== seg) { seg = ns; done = true; }
+    }
+    out += src.slice(cursor, segStart) + seg; cursor = segEnd;
+  }
+  out += src.slice(cursor);
+  if (!done) throw new Error(`magazines.ts に key "${key}" の noteUrl:null が見つからず書き戻せません`);
+  writeFileSync(MAGAZINES_TS, out);
+}
+
+if (cmd === "plan") cmdPlan();
+else if (cmd === "create") await cmdCreate();
+else { console.log("usage: note-magazine.mjs plan | create --key <key> [--commit]"); process.exit(1); }
