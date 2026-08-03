@@ -292,3 +292,55 @@ jobs:
               gh issue close "$NUMBER" --reason completed \
                 --comment ".claude/state が15MB以下へ復旧したため自動Closeします。"
             done
+
+      # 投稿台帳 (posts.json) は SSOT だが、IG cron の記録 step が落ちても run は success に
+      # なりうるため、投稿経路とは別にドリフトを検知する。この検知が無かったせいで
+      # 2026-05-18〜08-03 の 94 件が 2 ヶ月半気づかれず、主力チャネルの実績が計測不能だった。
+      - name: 📸 Check IG 投稿台帳ドリフト
+        id: igdrift
+        continue-on-error: true
+        run: |
+          if node .claude/scripts/instagram/record-posted.cjs --check > /tmp/ig-drift.txt 2>&1; then
+            echo "drift=0" >> "$GITHUB_OUTPUT"
+          else
+            echo "drift=1" >> "$GITHUB_OUTPUT"
+          fi
+          cat /tmp/ig-drift.txt
+
+      - name: 🚨 Create issue on IG ledger drift
+        if: ${{ steps.igdrift.outputs.drift == '1' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="[Consistency Alert] IG 投稿が投稿台帳に記録されていない"
+          EXISTING=$(gh issue list --label "auto-generated" --state open \
+            --search "IG 投稿が投稿台帳 in:title" --json number --jq '.[0].number // empty')
+          {
+            echo "\`ig-posted-log.jsonl\` にあって \`.claude/state/sns/posts.json\` に無い投稿があります。"
+            echo "台帳に無い投稿は \`/update-sns-metrics\` の対象外になり、リーチ・保存率が計測できません。"
+            echo ""
+            echo "対処: \`node .claude/scripts/instagram/record-posted.cjs --from-log\` で回収し、"
+            echo "\`post-instagram-scheduled.yml\` の記録 step が落ちていないか確認する。"
+            echo "正典: \`.claude/rules/sns-content-standards.md\` §3"
+            echo ""
+            echo '```'
+            cat /tmp/ig-drift.txt
+            echo '```'
+          } > /tmp/ig-issue.md
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/ig-issue.md
+          else
+            gh issue create --title "$TITLE" --label "auto-generated" --body-file /tmp/ig-issue.md
+          fi
+
+      - name: ✅ Close recovered IG ledger alert
+        if: ${{ steps.igdrift.outputs.drift == '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue list --label "auto-generated" --state open \
+            --search "\"IG 投稿が投稿台帳\" in:title" --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "IG 投稿台帳のドリフトが解消したため自動Closeします。"
+            done
