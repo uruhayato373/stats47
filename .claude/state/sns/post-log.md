@@ -3,34 +3,128 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**395 件** (最終更新: 2026-07-11)
+**489 件** (最終更新: 2026-08-03)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-08-03 | 📸 Instagram | ranking/nuclear-power-plant-count |  | [🔗](https://www.instagram.com/p/DbkVhEEm2Bn/) |
+| 2026-08-03 | 📸 Instagram | ranking/police-expenses-prefecture |  | [🔗](https://www.instagram.com/p/DbjqhrCGqL8/) |
+| 2026-08-02 | 📸 Instagram | ranking/unmarried-ratio-male-30-34 |  | [🔗](https://www.instagram.com/p/DbiTNiHG5cJ/) |
+| 2026-08-02 | 📸 Instagram | ranking/air-conditioner-consumption-quantity |  | [🔗](https://www.instagram.com/p/Dbhtzl9FQFq/) |
+| 2026-08-02 | 📸 Instagram | ranking/wind-power-plant-count-facility |  | [🔗](https://www.instagram.com/p/DbhFlCdIJWI/) |
+| 2026-08-01 | 📸 Instagram | ranking/physical-disability-rehabilitation-cases |  | [🔗](https://www.instagram.com/p/DbfuhnsICZ8/) |
+| 2026-08-01 | 📸 Instagram | ranking/other-grains-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbfIpzHoEFw/) |
+| 2026-08-01 | 📸 Instagram | ranking/nursery-teacher-annual-income |  | [🔗](https://www.instagram.com/p/DbehJyKEWzk/) |
+| 2026-07-31 | 📸 Instagram | ranking/cpi-change-rate-miscellaneous |  | [🔗](https://www.instagram.com/p/DbdOr6KILHJ/) |
+| 2026-07-31 | 📸 Instagram | ranking/other-prepared-food-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbcmAKZlkOA/) |
+| 2026-07-31 | 📸 Instagram | ranking/agricultural-land-conversion-area |  | [🔗](https://www.instagram.com/p/Dbb8s2GGqzT/) |
+| 2026-07-30 | 📸 Instagram | ranking/gloves-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dbao1QekVn7/) |
+| 2026-07-30 | 📸 Instagram | ranking/grade-separated-pedestrian-crossings-per-1000-km |  | [🔗](https://www.instagram.com/p/DbZ9iyUEbpk/) |
+| 2026-07-30 | 📸 Instagram | ranking/wooden-housing-ratio |  | [🔗](https://www.instagram.com/p/DbZXQL3EegH/) |
+| 2026-07-29 | 📸 Instagram | ranking/port-vehicle-ferry |  | [🔗](https://www.instagram.com/p/DbYFUQmFnqQ/) |
+| 2026-07-29 | 📸 Instagram | ranking/household-head-annual-income-per-household |  | [🔗](https://www.instagram.com/p/DbXaBOqG-sk/) |
+| 2026-07-29 | 📸 Instagram | ranking/public-rent-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbWya3Qlh-7/) |
+| 2026-07-28 | 📸 Instagram | ranking/psychiatric-hospital-bed-occupancy-rate |  | [🔗](https://www.instagram.com/p/DbVf8ltmpdj/) |
+| 2026-07-28 | 📸 Instagram | ranking/property-expenses-prefecture |  | [🔗](https://www.instagram.com/p/DbU0iFoGwX6/) |
+| 2026-07-28 | 📸 Instagram | ranking/flood-damage-general-assets |  | [🔗](https://www.instagram.com/p/DbUN6g8oDjD/) |
+| 2026-07-27 | 📸 Instagram | ranking/garden-plants-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbTDZKZluOJ/) |
+| 2026-07-27 | 📸 Instagram | ranking/gasoline-sales-volume |  | [🔗](https://www.instagram.com/p/DbSUyBdm6zx/) |
+| 2026-07-27 | 📸 Instagram | bar-chart-race/municipal-road-paving-rate |  | [🔗](https://www.instagram.com/reel/DbRpJJsAUse/) |
+| 2026-07-26 | 📸 Instagram | ranking/national-health-insurance-enrollees-per-1000 |  | [🔗](https://www.instagram.com/p/DbQSpnzlT01/) |
+| 2026-07-26 | 📸 Instagram | ranking/disaster-recovery-expenses-prefecture |  | [🔗](https://www.instagram.com/p/DbPtK4HnEnV/) |
+| 2026-07-26 | 📸 Instagram | bar-chart-race/urban-park-area-per-person |  | [🔗](https://www.instagram.com/reel/DbPEPaJDZbJ/) |
+| 2026-07-25 | 📸 Instagram | ranking/urban-parks-area |  | [🔗](https://www.instagram.com/p/DbNsfyNEQ4f/) |
+| 2026-07-25 | 📸 Instagram | ranking/disaster-recovery-project-expenses-prefecture |  | [🔗](https://www.instagram.com/p/DbNFwBVoM3U/) |
+| 2026-07-25 | 📸 Instagram | bar-chart-race/local-allocation-tax-ratio-pref-finance |  | [🔗](https://www.instagram.com/reel/DbMf8xPkfm0/) |
+| 2026-07-24 | 📸 Instagram | ranking/scallop-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbLLFa8FDO8/) |
+| 2026-07-24 | 📸 Instagram | ranking/other-mens-shirt-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbKhy7_lHZ2/) |
+| 2026-07-24 | 📸 Instagram | bar-chart-race/junior-college-count |  | [🔗](https://www.instagram.com/reel/DbJ6jQAlJ9z/) |
+| 2026-07-23 | 📸 Instagram | ranking/disaster-damage-amount-per-person |  | [🔗](https://www.instagram.com/p/DbInJX-kdMy/) |
+| 2026-07-23 | 📸 Instagram | ranking/sports-participation-rate-cycling |  | [🔗](https://www.instagram.com/p/DbH9abvIADk/) |
+| 2026-07-23 | 📸 Instagram | bar-chart-race/private-life-insurance-contracts-per-1000 |  | [🔗](https://www.instagram.com/reel/DbHWKMBFQYn/) |
+| 2026-07-22 | 📸 Instagram | ranking/boys-school-uniform-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbGCV1wG_BZ/) |
+| 2026-07-22 | 📸 Instagram | ranking/marine-fishery-aquaculture-output-value |  | [🔗](https://www.instagram.com/p/DbFYNTGm1m1/) |
+| 2026-07-22 | 📸 Instagram | bar-chart-race/number-of-simple-lodging-facilities |  | [🔗](https://www.instagram.com/reel/DbEwUK2nc3u/) |
+| 2026-07-21 | 📸 Instagram | ranking/other-ceremony-expense-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbDdQ1Vm-Px/) |
+| 2026-07-21 | 📸 Instagram | ranking/travel-participation-rate-domestic-tourism |  | [🔗](https://www.instagram.com/p/DbCzdWNks2r/) |
+| 2026-07-21 | 📸 Instagram | bar-chart-race/lowest-temperature |  | [🔗](https://www.instagram.com/reel/DbCL_IzDzf8/) |
+| 2026-07-20 | 📸 Instagram | ranking/other-vegetable-seaweed-processed-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbA7s1iG3On/) |
+| 2026-07-20 | 📸 Instagram | ranking/marine-fishery-catch |  | [🔗](https://www.instagram.com/p/DbAR1kwFtu7/) |
+| 2026-07-20 | 📸 Instagram | bar-chart-race/building-fire-count |  | [🔗](https://www.instagram.com/reel/Da_nSUJElVv/) |
+| 2026-07-19 | 📸 Instagram | ranking/religious-expense-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Da-PVRgFAkM/) |
+| 2026-07-19 | 📸 Instagram | ranking/marine-aquaculture-harvest |  | [🔗](https://www.instagram.com/p/Da9qHm5mx9e/) |
+| 2026-07-19 | 📸 Instagram | bar-chart-race/paid-nursing-home-residents-per-1000-65plus |  | [🔗](https://www.instagram.com/reel/Da9CC_wAe0f/) |
+| 2026-07-18 | 📸 Instagram | ranking/overseas-travel-annual-participation-rate-10plus |  | [🔗](https://www.instagram.com/p/Da7qHiLG9L9/) |
+| 2026-07-18 | 📸 Instagram | ranking/electricity-generation-capacity |  | [🔗](https://www.instagram.com/p/Da7COOjIMZt/) |
+| 2026-07-18 | 📸 Instagram | bar-chart-race/postal-savings-balance-per-capita |  | [🔗](https://www.instagram.com/reel/Da6dMikD5oQ/) |
+| 2026-07-17 | 📸 Instagram | ranking/overseas-travel-annual-participation-rate-15plus |  | [🔗](https://www.instagram.com/p/Da5H1FGlX4n/) |
+| 2026-07-17 | 📸 Instagram | ranking/tourism-resource-count |  | [🔗](https://www.instagram.com/p/Da4fXEvFWYc/) |
+| 2026-07-17 | 📸 Instagram | bar-chart-race/japanese-entries |  | [🔗](https://www.instagram.com/reel/Da35Hvwkl8b/) |
+| 2026-07-16 | 📸 Instagram | ranking/vegetable-seaweed-tsukudani-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Da2kfLCICWB/) |
+| 2026-07-16 | 📸 Instagram | ranking/port-cargo-total |  | [🔗](https://www.instagram.com/p/Da16VCoEfMV/) |
+| 2026-07-16 | 📸 Instagram | bar-chart-race/habitable-area-ratio |  | [🔗](https://www.instagram.com/reel/Da1UJnwgc1V/) |
+| 2026-07-15 | 📸 Instagram | ranking/maritime-import-export-cargo |  | [🔗](https://www.instagram.com/p/Daz_HUxGUkv/) |
+| 2026-07-15 | 📸 Instagram | ranking/total-overnight-guests-foreign |  | [🔗](https://www.instagram.com/p/DazUc2hG6Bo/) |
+| 2026-07-15 | 📸 Instagram | bar-chart-race/serious-crime-per-100k |  | [🔗](https://www.instagram.com/reel/DayurtyCTDN/) |
+| 2026-07-14 | 📸 Instagram | ranking/travel-participation-rate-overseas |  | [🔗](https://www.instagram.com/p/DaxZ6WPoG_e/) |
+| 2026-07-14 | 📸 Instagram | ranking/flood-affected-rivers |  | [🔗](https://www.instagram.com/p/Dawvjw3G6B2/) |
+| 2026-07-14 | 📸 Instagram | bar-chart-race/total-outpatients |  | [🔗](https://www.instagram.com/reel/DawJ5ZTgJQG/) |
+| 2026-07-13 | 📸 Instagram | ranking/ritual-goods-tombstone-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dau70GSlue-/) |
+| 2026-07-13 | 📸 Instagram | ranking/electricity-demand |  | [🔗](https://www.instagram.com/p/DauQRDFlm0x/) |
+| 2026-07-13 | 📸 Instagram | bar-chart-race/cpi-change-rate-total |  | [🔗](https://www.instagram.com/reel/DatlnMxFVOv/) |
+| 2026-07-12 | 📸 Instagram | ranking/other-dried-vegetables-seaweed-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DasOAwbFFeU/) |
+| 2026-07-12 | 📸 Instagram | ranking/total-overnight-guests |  | [🔗](https://www.instagram.com/p/DarpLOuEbav/) |
+| 2026-07-12 | 📸 Instagram | bar-chart-race/public-bath-count |  | [🔗](https://www.instagram.com/reel/DarA0tQlLSm/) |
 | 2026-07-11 | ▶️ YouTube | ranking/bcr-births-1995-2023 | 出生数はこの29年で4割減｜47都道府県ランキングの推移 1995→2023 | [🔗](https://www.youtube.com/watch?v=3TWSWlKDPbs) |
+| 2026-07-11 | 📸 Instagram | bar-chart-race/monthly-average-actual-working-hours-male-pre2019 |  | [🔗](https://www.instagram.com/reel/DaosHypDNVu/) |
+| 2026-07-10 | 📸 Instagram | bar-chart-race/theft-offenses-recognized |  | [🔗](https://www.instagram.com/reel/DamJrJeAZIx/) |
+| 2026-07-09 | 📸 Instagram | bar-chart-race/pharmacy-count |  | [🔗](https://www.instagram.com/reel/DajkmxXoDUC/) |
+| 2026-07-08 | 📸 Instagram | bar-chart-race/net-increase-rate-deposits-worker-households |  | [🔗](https://www.instagram.com/reel/Dag997LjDJh/) |
+| 2026-07-07 | 📸 Instagram | bar-chart-race/barber-beauty-salon-count |  | [🔗](https://www.instagram.com/reel/DaebzXWFXmh/) |
 | 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | なぜ静岡が年間降水量1位（3,754mm）なのか。  答えは地理にある。静岡は太平洋に面し、黒潮の暖湿流が直撃。梅雨前線… | [🔗](https://www.instagram.com/p/DZR6zYgFOgn/) |
 | 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | 「沖縄が一番雨が多い」と思っていませんか？  実際のデータを見ると、1位は静岡（3,754mm）で、沖縄は2位（3,06… | [🔗](https://www.instagram.com/p/DZR6zmJFNT9/) |
 | 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | 年間降水量の格差（3.7倍）の答えは、「気候帯×地形」。  太平洋側は黒潮・梅雨・台風が重なり雨量が増える。日本海側は冬… | [🔗](https://www.instagram.com/p/DZR6z41lPOX/) |
 | 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | 静岡の年間降水量、3,754mm。  最下位・宮城の1,028mmと比べると、その差3.7倍。 「同じ日本」とは思えない… | [🔗](https://www.instagram.com/p/DZR6ytvlela/) |
 | 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | 静岡に住んだら、年間3,754mmの雨と共に生きることになる。  東京の約2倍。宮城（1,028mm）の約3.7倍。 同… | [🔗](https://www.instagram.com/p/DZR6feSHJP0/) |
+| 2026-06-07 | 📸 Instagram | ranking/number-of-hotel-rooms |  | [🔗](https://www.instagram.com/p/DZRA2yJDOlQ/) |
+| 2026-06-06 | 📸 Instagram | ranking/suicide-rate-per-100k |  | [🔗](https://www.instagram.com/p/DZObL26FCe2/) |
+| 2026-06-05 | 📸 Instagram | ranking/night-soil-treatment-population-ratio |  | [🔗](https://www.instagram.com/p/DZL26PJAAtB/) |
+| 2026-06-04 | 📸 Instagram | ranking/annual-income-per-household |  | [🔗](https://www.instagram.com/p/DZJTLkgifHd/) |
+| 2026-06-03 | 📸 Instagram | ranking/per-capita-kenmin-shotoku-h27 |  | [🔗](https://www.instagram.com/p/DZGuYt3Fa8K/) |
+| 2026-06-02 | 📸 Instagram | bar-chart-race/traffic-accident-deaths-per-100k |  | [🔗](https://www.instagram.com/reel/DZEI6AJGEgM/) |
+| 2026-06-01 | 📸 Instagram | ranking/hobby-participation-rate-video-games |  | [🔗](https://www.instagram.com/p/DZBkOWZETXI/) |
+| 2026-05-31 | 📸 Instagram | ranking/hobby-participation-rate-reading |  | [🔗](https://www.instagram.com/p/DY-_Et2lBrr/) |
 | 2026-05-31 | 𝕏 X | ranking/per-capita-kenmin-shotoku-h27 | 1人当たり県民所得、東京521万円で全国1位。沖縄217万円、その差約2.4倍の地域格差。  1位 東京都 521万円 … | — |
+| 2026-05-30 | 📸 Instagram | ranking/hobby-participation-rate-photography |  | [🔗](https://www.instagram.com/p/DY8ZdbykarB/) |
 | 2026-05-30 | 𝕏 X | ranking/manufacturing-shipment-amount | 製造品出荷額、愛知58兆円で2位の3倍。沖縄0.5兆円、地域格差は100倍超。  1位 愛知県 58兆円 2位 静岡県 … | — |
+| 2026-05-29 | 📸 Instagram | ranking/hobby-participation-rate-manga |  | [🔗](https://www.instagram.com/p/DY51RmCgDqW/) |
 | 2026-05-29 | 𝕏 X | ranking/annual-sunshine-duration | 年間日照時間、高知2309時間で1位。山形1626時間と683時間差。沖縄が下位5に入る意外。  1位 高知県 2309… | — |
+| 2026-05-28 | 📸 Instagram | bar-chart-race/local-tax-ratio-pref-finance |  | [🔗](https://www.instagram.com/reel/DY3PcV5CDmZ/) |
 | 2026-05-28 | 𝕏 X | ranking/foreign-resident-count-per-100k | 人口10万人あたり外国人、東京は秋田の9倍。工業集積地が上位に並ぶ。  1位 東京都 3441人 2位 愛知県 3068… | — |
+| 2026-05-27 | 📸 Instagram | ranking/hobby-participation-rate-karaoke |  | [🔗](https://www.instagram.com/p/DY0rdIrDoyP/) |
 | 2026-05-27 | 𝕏 X | ranking/theft-offenses-recognized-per-1000 | 人口1000人あたり窃盗、大阪は長崎の約4倍。北関東が意外と多い。  1位 大阪府 6.65件 2位 茨城県 5.24件… | — |
 | 2026-05-26 | ▶️ YouTube | ranking/yoy-landscape-v2 | 東京一極集中はいつ始まった？｜47都道府県 人口前年度比1976-2024 | [🔗](https://www.youtube.com/watch?v=3O4v9iVgntE) |
+| 2026-05-26 | 📸 Instagram | ranking/hobby-participation-rate-gardening |  | [🔗](https://www.instagram.com/p/DYyGMkAiRXO/) |
 | 2026-05-26 | 𝕏 X | ranking/traffic-accident-deaths-per-100k | 人口10万人あたり交通事故死者、徳島は東京の5倍。地方の交通リスクの現実。  1位 徳島県 4.8人 2位 愛媛県 4.… | — |
 | 2026-05-25 | 📸 Instagram | port/cargo-total | 日本の港湾、14年で何が起きたのか🚢  ▼海上出入貨物量 トップは14年ずっと #名古屋港 だが貨物量は -15%（2… | [🔗](https://www.instagram.com/reel/DYwuJ_2EsBT/) |
+| 2026-05-25 | 📸 Instagram | ranking/hobby-participation-rate-cooking |  | [🔗](https://www.instagram.com/p/DYvh88xmrwP/) |
 | 2026-05-25 | 𝕏 X | ranking/library-count-per-million | 人口100万人あたり図書館数、山梨は神奈川の7倍。都会ほど図書館が少ない逆転現象。  1位 山梨県 65.8館 2位 島… | — |
 | 2026-05-24 | 📸 Instagram | highway-history/japan-58years | 日本の高速道路は58年で何キロまで広がったのか？  1962年の名神部分開通から2020年まで、毎年の新規開通区間を地図… | [🔗](https://www.instagram.com/reel/DYuApUviuyQ/) |
+| 2026-05-24 | 📸 Instagram | ranking/hobby-participation-rate-cinema |  | [🔗](https://www.instagram.com/p/DYs9AGtleJV/) |
 | 2026-05-24 | 𝕏 X | ranking/divorces-per-total-population | 沖縄の離婚率は富山の2倍。ずっと全国1位。  1位 沖縄県 2.10 2位 宮崎県 1.67 3位 大阪府 1.65  … | — |
+| 2026-05-23 | 📸 Instagram | bar-chart-race/criminal-arrest-rate |  | [🔗](https://www.instagram.com/reel/DYqXswLDqo8/) |
 | 2026-05-23 | ▶️ YouTube | station-passengers/station-passengers-47 | 都道府県別 鉄道駅ランキング｜全国8565駅 日本一忙しい駅は？ | [🔗](https://www.youtube.com/watch?v=wjLQCiuEeNI) |
 | 2026-05-23 | 𝕏 X | ranking/local-debt-current-ratio | 地方債の割合、静岡県が全国ワースト。収入の2倍超の借金。  1位 静岡県 208.5％ 2位 新潟県 205.1％ 3位… | [🔗](https://x.com/stats47jp373/status/2040195137754816611) |
+| 2026-05-22 | 📸 Instagram | ranking/hobby-participation-rate-camping |  | [🔗](https://www.instagram.com/p/DYnzRqojCCO/) |
 | 2026-05-22 | 𝕏 X | ranking/real-public-debt-service-ratio | 実質公債費比率、北海道18.9%。借金返済で財政を圧迫。  1位 北海道 18.9％ 2位 新潟県 18.2％ 3位 京… | [🔗](https://x.com/stats47jp373/status/2039900704975049133) |
+| 2026-05-21 | 📸 Instagram | ranking/real-disposable-income |  | [🔗](https://www.instagram.com/p/DYlOrAMkZ7N/) |
 | 2026-05-21 | 𝕏 X | ranking/real-balance-ratio | 実質収支比率、島根県7.5%で全国1位。黒字幅が最も大きい県。  1位 島根県 7.5％ 2位 東京都 7.1％ 3位 … | — |
 | 2026-05-21 | 𝕏 X | other/migration-flow-hyogo-2025 | 兵庫県は2025年、引っ越しの収支で2,102人を失った。  最も人が行き交う相手は隣の大阪府。なのに流入31,591＜… | [🔗](https://x.com/stats47jp373/status/2057416096224096350) |
+| 2026-05-20 | 📸 Instagram | ranking/disposable-income-worker-households |  | [🔗](https://www.instagram.com/p/DYip2SWmut7/) |
 | 2026-05-20 | 𝕏 X | ranking/personnel-expenditure-ratio-pref-finance | 人件費割合、三重県25.5%。東京都は17%。財政支出の4分の1が人件費の県がある。  1位 三重県 25.5％ 2位 … | — |
+| 2026-05-19 | 📸 Instagram | ranking/annual-sunshine-duration |  | [🔗](https://www.instagram.com/p/DYgE4KhAHQK/) |
 | 2026-05-19 | 𝕏 X | ranking/governor-salary-prefecture | 東京都知事の月給は全国最下位の73万円。1位神奈川の半分。  1位 神奈川県 145万円 2位 埼玉県 142万円 3位… | [🔗](https://x.com/stats47jp373/status/2036639208568398206) |
+| 2026-05-18 | 📸 Instagram | ranking/annual-precipitation-days |  | [🔗](https://www.instagram.com/p/DYdgBkpETsI/) |
 | 2026-05-18 | 𝕏 X | ranking/laspeyres-index-prefecture | ラスパイレス指数、国家公務員より高い県がある。  1位 静岡県 101.8 2位 愛知県 101.0 3位 三重県 10… | [🔗](https://x.com/stats47jp373/status/2040013944757338576) |
 | 2026-05-17 | 📸 Instagram | ranking/starting-salary-university | 大卒初任給 県別ランキング 2023年最新版📊  1位は秋田の26.77万円、47位鳥取と1.32倍格差。 秋田・山口… | [🔗](https://www.instagram.com/p/DYbFaRvE6ht/) |
 | 2026-05-17 | 𝕏 X | ranking/per-capita-welfare-expenditure-pref-municipal | 住民1人あたり民生費、沖縄県37万円。静岡県の1.7倍。  1位 沖縄県 371.4千円 2位 高知県 347.0千円 … | — |

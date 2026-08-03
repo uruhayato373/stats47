@@ -31,7 +31,8 @@ ogImage: /blog/unhealthy-period-gender-prefecture-gap/og.png
 ![不健康期間の男女差ランキング 上位5・下位5](data/unhealthy-period-gender-diff-ranking.svg)
 
 <source-link href="/ranking/healthy-life-expectancy-female">健康寿命（女性）ランキングをもっと見る</source-link>
-<source-link href="/ranking/healthy-life-expectancy-male">健康寿命（男性）ランキングをもっと見る</source-link>
+
+あわせて見る: [健康寿命（男性）ランキング](/ranking/healthy-life-expectancy-male)
 
 不健康期間の男女差（女性の不健康期間－男性の不健康期間）が最も大きいのは**1位[京都府](/areas/26000)の5.04年**で、2位滋賀県4.55年、3位東京都4.48年、4位広島県4.33年、5位山口県4.29年と続きます。全国平均は3.24年なので、京都府はほぼ1.6年分上振れしていることになります。京都府は健康寿命そのものでは女性が47位（最下位）である一方、平均寿命は88.25年（女性3位）と高水準にあるため、両者の差である不健康期間の男女差が全国最大に膨らんでいます。
 
