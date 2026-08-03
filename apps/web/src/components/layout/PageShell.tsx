@@ -31,8 +31,11 @@ interface PageShellProps {
  *
  * 2026-07-11: 1700px → 1280px に統一 (ArticleShell = blog/ranking 詳細と同一幅。
  * doboku-note スタイルのサイト全体固定幅)。
+ * 2026-08-03: lg+ の左右余白を 24px → 40px にし doboku-note と揃えた
+ * (同サイトも header 含め `max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10`)。
  */
-export const SHELL_WIDTH_CLASS = "mx-auto w-full max-w-[1280px] px-4 sm:px-6";
+export const SHELL_WIDTH_CLASS =
+  "mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-10";
 
 /**
  * 全ページ共通の単一レイアウト Shell。
@@ -44,9 +47,13 @@ export const SHELL_WIDTH_CLASS = "mx-auto w-full max-w-[1280px] px-4 sm:px-6";
  *
  * グリッド:
  * - レールなし     : 1280px 中央寄せ
- * - 右レールのみ   : [minmax(0,1fr) 360px]
+ * - 右レールのみ   : [minmax(0,1fr) 316px]
  * - 左レールのみ   : [280px minmax(0,1fr)]
- * - 右レール lg    : lg [minmax(0,1fr) 360px]
+ * - 右レール lg    : lg [minmax(0,1fr) 316px]
+ *
+ * 右レール 316px と gap 40px は ArticleShell と同値 (doboku-note 準拠)。
+ * 同じ `RightRailWidgets` を描画するため、両 Shell で幅を揃える。**316 = 300 + 8 + 8**
+ * (`SidebarPromoBanner` の `p-2` に 300×250 が等倍で収まる幅)。
  *
  * 通常は xl 未満で 1 カラム。`rightRailBreakpoint="lg"` の場合、右 rail は lg+ で表示する。
  *
@@ -67,11 +74,11 @@ export function PageShell({
 
   const gridClass =
     rightRailBreakpoint === "lg" && hasRight
-      ? "lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 lg:items-start"
+      ? "lg:grid lg:grid-cols-[minmax(0,1fr)_316px] lg:gap-10 lg:items-start"
       : showLeft
-        ? "xl:grid xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-8 xl:items-start"
+        ? "xl:grid xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10 xl:items-start"
         : hasRight
-          ? "xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8 xl:items-start"
+          ? "xl:grid xl:grid-cols-[minmax(0,1fr)_316px] xl:gap-10 xl:items-start"
           : "";
 
   // reading variant は本文カラムを可読幅に制限（レールが無い場合は中央寄せ）
