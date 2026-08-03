@@ -13,6 +13,7 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
   → article.md 生成 (docs/21 = ephemeral outbox) + generate-article-charts.ts
   → factual-check + quality-gate + blog-critic(review.md PASS)
   → published:true で develop push → blog-auto-publish.yml が R2 公開 + docs/21 ドラフトを自動削除
+     (公開対象の選定は `select-republish-slugs.mjs`。**新規記事だけでなく改稿版も対象**)
   → 公開後はライブ (stats47.jp/blog/<slug>) で確認 → /brushup-blog (R2 取得→是正) で反復
 ```
 
