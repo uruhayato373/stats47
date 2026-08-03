@@ -1,10 +1,9 @@
 {
-  "hash": "bf0592cb530dccea44beabe7e9f15da4ef64b53c68c9d0f24db9a2cdcdf1a18a",
-  "audited_at": "2026-08-03T07:16:55",
+  "hash": "3082779b8a7a08b7bb931c3c9a06569e9355cd1bde58595670a85c1c3be74cb9",
+  "audited_at": "2026-08-03T09:57:00",
   "files": [
-    ".claude/scripts/note/catalog/README.md",
-    ".claude/scripts/note/catalog/assign-magazines-by-title.mjs",
-    ".claude/scripts/note/catalog/data/stats47-note.ts",
-    ".claude/scripts/note/catalog/magazines.ts"
+    ".claude/scripts/note/fetch-note-magazines.mjs",
+    ".claude/scripts/note/login-note-profile.mjs",
+    ".claude/scripts/note/probe-magazine-ui.mjs"
   ]
 }
