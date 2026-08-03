@@ -249,6 +249,10 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
 永続 D1 は使わない)。
 
 - 書込口は `sns-posts-store.cjs` / `/mark-sns-posted` のみ。直接 JSON を手編集しない
+- **IG の cron 投稿は `.claude/scripts/instagram/record-posted.cjs` が記録する** (内部で store を呼ぶ)。
+  `ig-posted-log.jsonl` は同日多重投稿の防止だけが役割で **SSOT ではない**。両方を同じ commit で
+  更新すること — 台帳を落とすと投稿が `/update-sns-metrics` の対象外になり実績が計測できなくなる
+  (2026-05-18〜08-03 に 94 件がこの状態で滞留した。ドリフト検知は `record-posted.cjs --check`)
 - レコードは snake_case: `id / platform / post_type / domain / content_key / caption / post_url /
   quote_url / media_path / status / scheduled_at / posted_at / impressions / likes / reposts /
   replies / bookmarks / metrics_updated_at / template / metric_keys / ...`
@@ -301,7 +305,7 @@ https://stats47.jp/ranking/taxable-income-per-capita
 |---|---|---|---|---|
 | **X (量産)** | `post-x-batch` (候補選定→画像→執筆→lint→draft 登録) | quick-still (ranking-card) | `publish-x --from-queue` (ローカル) → `mark-sns-posted` | `update-sns-metrics` → `analyze-x-winning-patterns` |
 | **X (瞬発)** | `find-quote-rt` / `react-to-news` | (キャプション) | `publish-x` → `mark-sns-posted` | `update-sns-metrics` |
-| **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) | `render-sns-stills` | `post-instagram` (GHA cron) → `mark-sns-posted` | `update-sns-metrics` |
+| **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) | `render-sns-stills` | `post-instagram` (GHA cron) → `record-posted.cjs` | `update-sns-metrics` |
 | **buzz-map (X/IG 横断)** | curated catalog (`build-buzz-map-catalog.ts --next`・正典 `buzz-map-standards.md` §4-5) | `prepare-buzz-map-batch.ts` (dry-run 既定・landing contract+isPostable ゲート→R2→draft) / gallery `/buzz-map` | 既存 guarded flow (`publish-x` / IG cron — draft からの昇格は人間判断) | `buzz-map-attribution.mjs` (campaign 別) → score 還流 |
 
 - **buzz-map の deep-click 計測は要ユーザー操作 (GA4 custom dimension)**: `buzz-map-attribution.mjs` は
