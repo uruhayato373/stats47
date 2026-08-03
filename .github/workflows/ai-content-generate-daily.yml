@@ -249,7 +249,10 @@ jobs:
                 exit 1
                 ;;
             esac
-          done < <(git status --porcelain=v1 --untracked-files=all | cut -c4-)
+          # core.quotepath=false が要る (blog routine と同じ理由)。ここの許可パターンは
+          # 現状すべて ASCII なので既定でも一致するが、非 ASCII パスが 1 つ混ざった瞬間に
+          # 8 進エスケープされて全件 reject になる。両 routine で同じ形に揃えておく。
+          done < <(git -c core.quotepath=false status --porcelain=v1 --untracked-files=all | cut -c4-)
           echo "count=$GENERATED" >> "$GITHUB_OUTPUT"
           echo "✅ 対象 ${EXPECTED} 件すべて audit + critic PASS"
 

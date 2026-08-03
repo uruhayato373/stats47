@@ -279,7 +279,12 @@ jobs:
                 exit 1
                 ;;
             esac
-          done < <(git status --porcelain=v1 --untracked-files=all | cut -c4-)
+          # core.quotepath=false が要る: 既定 (true) だと git は非 ASCII を含むパスを
+          # ダブルクォートで包んで 8 進エスケープする ("docs/21_\343\203\226.../article.md")。
+          # 出力先が docs/21_ブログ記事原稿/ なので、既定のままでは許可パターンに一度も
+          # 一致せず、正しく生成・critic PASS した記事まで全件 reject される
+          # (2026-08-03 run 30776544300 で実際に発生。この gate は一度も通れていなかった)。
+          done < <(git -c core.quotepath=false status --porcelain=v1 --untracked-files=all | cut -c4-)
           echo "count=$GENERATED" >> "$GITHUB_OUTPUT"
           echo "✅ 対象 ${EXPECTED} 件すべて factual + quality + critic PASS"
 
