@@ -111,3 +111,18 @@ test('長文は truncate する', () => {
   assert.ok(summary.errorText.length < 800);
   assert.match(summary.errorText, /文字省略/);
 });
+
+test('成功 run に「エラー文が無い」という但し書きを出さない', () => {
+  const out = formatSummary(
+    summarizeClaudeExecution([
+      { type: 'result', subtype: 'success', is_error: false, num_turns: 41, duration_ms: 1, total_cost_usd: 2.8 },
+    ]),
+  );
+  assert.doesNotMatch(out, /show_full_output/, '正常な run を異常のように見せている');
+
+  // 失敗 run では従来どおり出す (助言を消してしまっていないこと)
+  const failed = formatSummary(
+    summarizeClaudeExecution([{ type: 'result', subtype: 'error', is_error: true, num_turns: 1 }]),
+  );
+  assert.match(failed, /show_full_output/);
+});

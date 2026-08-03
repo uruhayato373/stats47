@@ -49,6 +49,42 @@ function textOf(content) {
  * @param {unknown} entries execution log (message オブジェクトの配列)
  * @returns 切り分けに要る最小限のサマリ
  */
+const TOKEN_FIELDS = {
+  input: 'input_tokens',
+  output: 'output_tokens',
+  cacheWrite: 'cache_creation_input_tokens',
+  cacheRead: 'cache_read_input_tokens',
+};
+
+const int = (v) => (typeof v === 'number' && Number.isFinite(v) && v >= 0 ? Math.round(v) : 0);
+
+/**
+ * usage を 1 つ取り出す。result entry のものを最優先し、無ければ assistant メッセージの合計を使う。
+ *
+ * ★合計してはいけない: cacheRead は大幅に割引されるので input/output と足すと桁が壊れる
+ *   (実測でセッション全体の 98% が cacheRead だった)。4 つを別々に持つ。
+ */
+function collectTokens(list) {
+  const result = list.find((e) => e.type === 'result');
+  const direct = result?.usage;
+  if (direct && typeof direct === 'object') {
+    const out = {};
+    for (const [key, field] of Object.entries(TOKEN_FIELDS)) out[key] = int(direct[field]);
+    if (Object.values(out).some((v) => v > 0)) return { ...out, source: 'result' };
+  }
+  // fallback: assistant メッセージ単位の usage を合算する
+  const sum = { input: 0, output: 0, cacheWrite: 0, cacheRead: 0 };
+  let seen = 0;
+  for (const entry of list) {
+    const u = entry.message?.usage ?? entry.usage;
+    if (!u || typeof u !== 'object') continue;
+    seen += 1;
+    for (const [key, field] of Object.entries(TOKEN_FIELDS)) sum[key] += int(u[field]);
+  }
+  if (seen === 0) return { ...sum, source: null }; // 記録が無い。0 と区別できるよう source で示す
+  return { ...sum, source: 'messages' };
+}
+
 export function summarizeClaudeExecution(entries) {
   const list = Array.isArray(entries) ? entries.filter((e) => e && typeof e === 'object') : [];
   const byType = {};
@@ -99,6 +135,7 @@ export function summarizeClaudeExecution(entries) {
       typeof result?.permission_denials_count === 'number' ? result.permission_denials_count : null,
     toolUseCount,
     agentTypes: [...agentTypes].sort(),
+    tokens: collectTokens(list),
     entryCounts: byType,
     errorText: truncate(redact(rawError)),
     earlyAssistantText: truncate(redact(earlyAssistantText)),
@@ -118,10 +155,21 @@ export function formatSummary(summary) {
       `duration=${summary.durationMs}ms cost=$${summary.totalCostUsd} denials=${summary.permissionDenials}`,
   );
   lines.push(`tool_use=${summary.toolUseCount} 回 / agent=${summary.agentTypes.join(',') || 'なし'}`);
+  const t = summary.tokens;
+  if (t.source === null) {
+    lines.push('token: 記録なし (0 ではなく未取得)');
+  } else {
+    const n = (v) => v.toLocaleString('en-US');
+    lines.push(
+      `token: in=${n(t.input)} out=${n(t.output)} cache_write=${n(t.cacheWrite)} ` +
+        `cache_read=${n(t.cacheRead)} (${t.source})`,
+    );
+  }
   lines.push(`entry 種別: ${JSON.stringify(summary.entryCounts)}`);
   if (summary.errorText) lines.push(`\n[error]\n${summary.errorText}`);
   if (summary.earlyAssistantText) lines.push(`\n[早期 assistant 本文]\n${summary.earlyAssistantText}`);
-  if (!summary.errorText && !summary.earlyAssistantText) {
+  // 成功 run で「エラー文が無い」と言わない (正常な状態を異常のように見せない)
+  if (summary.isError && !summary.errorText && !summary.earlyAssistantText) {
     lines.push('\nエラー文が log に無い。切り分けには show_full_output: "true" での再実行が要る。');
   }
   // ここは推測を出さず観測事実だけを述べる (原因の断定は人が実測してから)
