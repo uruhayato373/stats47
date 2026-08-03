@@ -1,0 +1,2 @@
+date,workflow,run_id,limit,items,turns,duration_ms,cost_usd,input,output,cache_write,cache_read,token_source,is_error
+2026-08-03,ai-content,30846501974,5,0,46,935445,10.943402400000005,92,30853,360984,14734441,result,0
