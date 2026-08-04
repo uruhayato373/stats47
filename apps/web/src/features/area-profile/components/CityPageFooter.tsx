@@ -1,5 +1,4 @@
-import { FurusatoNozeiCard } from "@/features/ads";
-import { AreaBannerAd } from "@/features/ads/server";
+import { AreaBannerAd, FurusatoNozeiCard } from "@/features/ads/server";
 
 import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 

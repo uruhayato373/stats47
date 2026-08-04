@@ -32,7 +32,9 @@ permissions:
   contents: read
 
 concurrency:
-  group: rakuten-catalog
+  # R2 push は publish-affiliate-ads / sync-snapshots と同じ group で直列化する
+  # (書き先 prefix は app/rakuten/ 専有だが、R2 書込 workflow を跨いだ二重実行を避ける慣例に合わせる)
+  group: r2-write
   cancel-in-progress: false
 
 env:
@@ -62,8 +64,13 @@ jobs:
         run: npm ci
 
       - name: 🛒 Fetch → R2
+        env:
+          # 展開を env 経由にして、入力値がシェルに直接埋め込まれるのを避ける
+          INPUT_LIMIT: ${{ inputs.limit }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
         run: |
-          ARGS=""
-          if [ -n "${{ inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ inputs.limit }}"; fi
-          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
-          npx tsx apps/web/scripts/sync-rakuten-catalog.ts $ARGS
+          # 配列で組み立てる (単純な文字列連結は shellcheck SC2086 になる)
+          ARGS=()
+          if [ -n "$INPUT_LIMIT" ]; then ARGS+=(--limit "$INPUT_LIMIT"); fi
+          if [ "$INPUT_DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
+          npx tsx apps/web/scripts/sync-rakuten-catalog.ts "${ARGS[@]}"
