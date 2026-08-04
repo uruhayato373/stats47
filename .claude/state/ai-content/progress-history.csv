@@ -1,6 +1,6 @@
-date,scope,total,done,needsRegen,missing,incomplete,blocker
+date,scope,total,done,needsRegen,missing,incomplete,blocker,notEligible
 2026-07-30,all,2176,196,1980,223,1691,66
 2026-07-31,all,2176,208,1968,221,1682,65
 2026-08-01,all,2176,208,1968,221,1682,65
 2026-08-03,all,2176,208,1968,221,1682,65
-2026-08-04,all,2176,210,1966,221,1680,65
+2026-08-04,all,2176,215,1959,221,1673,65,2

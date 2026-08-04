@@ -184,6 +184,15 @@ jobs:
           node --test .claude/scripts/ads/__tests__/
         continue-on-error: false
 
+      - name: 🧮 AI Content Gate Guard
+        # ai-content の 2 つの決定的ゲートを検証する。
+        #   - number-audit  : 生成物の数値を実データと照合する (捏造検知)
+        #   - value-health  : 観測値が順位として成立するか (全県同値・県重複・47超)
+        # ネットワーク・R2 には触れない (実データ照合は audit-ai-content.mjs が実行時に行う)。
+        # 正典: .claude/rules/ranking-content-standards.md
+        run: node --test .claude/scripts/ai-content/__tests__/*.test.mjs
+        continue-on-error: false
+
       - name: 📈 AdSense Metrics Contract Guard
         # AdSense の job 契約 / ad unit inventory / unit history の突き合わせロジックと、
         # コード側 slot 定数 (constants.ts) の決定的パーサを検証する。

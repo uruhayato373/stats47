@@ -1,20 +1,25 @@
 {
-  "generatedAt": "2026-08-04T20:39:11.423Z",
+  "generatedAt": "2026-08-04T22:04:07.391Z",
   "gscSnapshot": "2026-W31",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2176,
-    "done": 210,
-    "needsRegen": 1966,
+    "done": 215,
+    "needsRegen": 1959,
     "needsByReason": {
-      "incomplete": 1680,
+      "incomplete": 1673,
       "missing": 221,
       "blocker": 65
     },
-    "doneImpressions": 28252,
-    "needsImpressions": 10657,
+    "notEligible": 2,
+    "notEligibleByCode": {
+      "no-variance": 2
+    },
+    "doneButUnhealthy": 2,
+    "doneImpressions": 28655,
+    "needsImpressions": 10237,
     "opusReviewTier": 30
   },
   "entries": [
@@ -52,7 +57,13 @@
       "blockers": [],
       "warns": [],
       "lastModified": "Fri, 03 Jul 2026 22:49:26 GMT",
-      "updatedAt": null
+      "updatedAt": null,
+      "dataBlockers": [
+        "duplicate-area",
+        "over-coverage"
+      ],
+      "dataReason": "同一県が複数行: 47 県 (例 13000×2, 27000×2, 14000×2) — 分類軸の絞り忘れ / 94 行 (都道府県は 47 しかない)",
+      "dataYear": "2025"
     },
     {
       "rankingKey": "elementary-school-children-count",
@@ -270,7 +281,10 @@
         "pref-count"
       ],
       "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
-      "updatedAt": "2026-07-03T05:06:50.919Z"
+      "updatedAt": "2026-07-03T05:06:50.919Z",
+      "dataWarns": [
+        "thin-coverage"
+      ]
     },
     {
       "rankingKey": "designated-difficult-disease",
@@ -601,7 +615,10 @@
         "pref-count"
       ],
       "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
-      "updatedAt": "2026-07-03T05:06:42.000Z"
+      "updatedAt": "2026-07-03T05:06:42.000Z",
+      "dataWarns": [
+        "thin-coverage"
+      ]
     },
     {
       "rankingKey": "bread-consumption-expenditure",
@@ -747,7 +764,10 @@
         "pref-count"
       ],
       "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
-      "updatedAt": "2026-07-03T05:07:03.817Z"
+      "updatedAt": "2026-07-03T05:07:03.817Z",
+      "dataWarns": [
+        "thin-coverage"
+      ]
     },
     {
       "rankingKey": "shumai-consumption-expenditure",
@@ -807,7 +827,10 @@
       "blockers": [],
       "warns": [],
       "lastModified": "Fri, 03 Jul 2026 22:49:25 GMT",
-      "updatedAt": null
+      "updatedAt": null,
+      "dataWarns": [
+        "thin-coverage"
+      ]
     },
     {
       "rankingKey": "nature-park-area",
@@ -833,7 +856,10 @@
         "pref-count"
       ],
       "lastModified": "Fri, 03 Jul 2026 22:49:26 GMT",
-      "updatedAt": null
+      "updatedAt": null,
+      "dataWarns": [
+        "thin-coverage"
+      ]
     },
     {
       "rankingKey": "paved-road-total-length",
@@ -989,7 +1015,10 @@
         "pref-count"
       ],
       "lastModified": "Thu, 16 Jul 2026 12:23:50 GMT",
-      "updatedAt": "2026-07-16T11:29:14.187Z"
+      "updatedAt": "2026-07-16T11:29:14.187Z",
+      "dataWarns": [
+        "thin-coverage"
+      ]
     },
     {
       "rankingKey": "single-person-household-ratio",
@@ -1108,15 +1137,15 @@
       "impressions": 83,
       "clicks": 0,
       "position": 2.18,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 04 Aug 2026 20:40:26 GMT",
+      "updatedAt": "2026-08-04T00:00:00.000Z"
     },
     {
       "rankingKey": "vacant-housing-rate",
@@ -1135,42 +1164,44 @@
       "impressions": 81,
       "clicks": 1,
       "position": 8.44,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Tue, 04 Aug 2026 20:40:26 GMT",
+      "updatedAt": "2026-08-04T00:00:00.000Z"
     },
     {
       "rankingKey": "bowling-alley-public",
       "impressions": 80,
       "clicks": 0,
       "position": 8.07,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 04 Aug 2026 20:40:26 GMT",
+      "updatedAt": "2026-08-04T09:30:00.000Z",
+      "dataBlockers": [
+        "no-variance"
+      ],
+      "dataReason": "全 47 県が同じ値 (0) — 順位が成立しない",
+      "dataYear": "2021"
     },
     {
       "rankingKey": "consumer-price-difference-index-overall",
       "impressions": 80,
       "clicks": 0,
       "position": 4.35,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Tue, 04 Aug 2026 20:40:26 GMT",
+      "updatedAt": "2026-08-04T12:00:00.000Z"
     },
     {
       "rankingKey": "wheat-flour-consumption-quantity",
@@ -1192,15 +1223,15 @@
       "impressions": 79,
       "clicks": 12,
       "position": 6.53,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 04 Aug 2026 20:40:26 GMT",
+      "updatedAt": "2026-08-04T00:00:00.000Z"
     },
     {
       "rankingKey": "fishery-species-catch-pollock",
@@ -1214,7 +1245,10 @@
         "pref-count"
       ],
       "lastModified": "Fri, 03 Jul 2026 22:49:26 GMT",
-      "updatedAt": null
+      "updatedAt": null,
+      "dataWarns": [
+        "thin-coverage"
+      ]
     },
     {
       "rankingKey": "starting-salary-university",
@@ -1859,7 +1893,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "freshwater-clam-consumption-expenditure",
@@ -1874,7 +1908,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "road-municipal-length",
@@ -1917,7 +1951,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "dining-out-consumption-expenditure",
@@ -1927,7 +1961,7 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "dried-shiitake-consumption-quantity",
@@ -1942,7 +1976,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "avg-salary-police-prefecture",
@@ -2031,6 +2065,9 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
@@ -2402,6 +2439,9 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
@@ -2942,6 +2982,9 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
@@ -3627,6 +3670,9 @@
         "paren-number",
         "missing-pref-commentary"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -3815,6 +3861,9 @@
         "paren-number",
         "paren-number"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -3925,6 +3974,9 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
@@ -4749,6 +4801,9 @@
       "blockers": [
         "missing-pref-commentary"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -4813,7 +4868,10 @@
         "pref-count"
       ],
       "lastModified": "Fri, 03 Jul 2026 22:49:26 GMT",
-      "updatedAt": null
+      "updatedAt": null,
+      "dataWarns": [
+        "thin-coverage"
+      ]
     },
     {
       "rankingKey": "flounder-consumption-quantity",
@@ -5714,6 +5772,9 @@
         "paren-number",
         "missing-pref-commentary"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -6075,6 +6136,9 @@
       "blockers": [
         "missing-pref-commentary"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -6097,12 +6161,16 @@
       "impressions": 10,
       "clicks": 2,
       "position": 4,
-      "status": "needs-regen",
-      "reason": "incomplete",
+      "status": "not-eligible",
+      "reason": "data:no-variance",
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "dataBlockers": [
+        "no-variance"
+      ],
+      "dataReason": "全 47 県が同じ値 (0) — 順位が成立しない",
+      "dataYear": "2019"
     },
     {
       "rankingKey": "kidney-failure-death-count",
@@ -6464,6 +6532,9 @@
         "paren-number",
         "missing-pref-commentary"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -6633,6 +6704,9 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
@@ -7282,6 +7356,9 @@
         "paren-number",
         "missing-pref-commentary"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -7731,12 +7808,16 @@
       "impressions": 7,
       "clicks": 0,
       "position": 1.43,
-      "status": "needs-regen",
-      "reason": "incomplete",
+      "status": "not-eligible",
+      "reason": "data:no-variance",
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "dataBlockers": [
+        "no-variance"
+      ],
+      "dataReason": "全 47 県が同じ値 (0) — 順位が成立しない",
+      "dataYear": "2022"
     },
     {
       "rankingKey": "air-conditioner-consumption-expenditure",
@@ -8537,6 +8618,9 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -9165,6 +9249,9 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
@@ -10939,6 +11026,9 @@
         "paren-number",
         "missing-pref-commentary"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -12611,6 +12701,9 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
@@ -15021,6 +15114,9 @@
         "paren-number",
         "missing-pref-commentary"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -16630,6 +16726,9 @@
         "paren-number",
         "missing-pref-commentary"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -16659,6 +16758,9 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
@@ -19438,6 +19540,9 @@
         "paren-number",
         "missing-pref-commentary"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -20005,6 +20110,9 @@
       "blockers": [
         "paren-number"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -20035,6 +20143,9 @@
         "paren-number",
         "missing-pref-commentary"
       ],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -20050,6 +20161,9 @@
         "faq-speculation",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
@@ -20093,6 +20207,9 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
@@ -22702,6 +22819,9 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
@@ -25848,6 +25968,9 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
+      ],
+      "dataWarns": [
+        "thin-coverage"
       ],
       "reviewTier": "sonnet"
     },
