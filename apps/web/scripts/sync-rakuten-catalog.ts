@@ -8,10 +8,12 @@
  *   `[]` に degrade して静かに消えるだけで気づけない。
  *   ここで全品目を 1 QPS 以下で取得して R2 に置き、ページは R2 だけを読む。
  *
- * 使い方:
- *   npx tsx apps/web/scripts/sync-rakuten-catalog.ts              # 全件 → R2
- *   npx tsx apps/web/scripts/sync-rakuten-catalog.ts --limit 3    # 動作確認 (先頭 3 件)
- *   npx tsx apps/web/scripts/sync-rakuten-catalog.ts --dry-run    # R2 に書かず件数だけ出す
+ * 使い方 (★`-r setup-cli.js` は必須。R2 server barrel と repositories が server-only を
+ * import するため、素の tsx 実行では throw する):
+ *   TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
+ *   $TSX apps/web/scripts/sync-rakuten-catalog.ts              # 全件 → R2
+ *   $TSX apps/web/scripts/sync-rakuten-catalog.ts --limit 3    # 動作確認 (先頭 3 件)
+ *   $TSX apps/web/scripts/sync-rakuten-catalog.ts --dry-run    # R2 に書かず件数だけ出す
  *
  * 必要な env: RAKUTEN_APP_ID / RAKUTEN_ACCESS_KEY / NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID
  *            + R2 書き込み認証 (CI は sync-snapshots と同じ secrets)
