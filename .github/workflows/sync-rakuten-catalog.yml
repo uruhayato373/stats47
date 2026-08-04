@@ -78,3 +78,10 @@ jobs:
           #   import しており、素の tsx 実行では throw する (sync-snapshots/run.sh と同じ規約)。
           npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
             apps/web/scripts/sync-rakuten-catalog.ts "${ARGS[@]}"
+
+      # ★ saveToR2 は .local/r2/ に書くだけ。実 R2 への反映は diff-push-r2 (S3 API) が行う
+      #   2 段構成 (sync-snapshots/run.sh と同じ)。この段が無いと「書込済」と表示されても
+      #   本番には何も反映されない。
+      - name: 🚀 Push → R2
+        if: ${{ inputs.dry_run != true }}
+        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/rakuten

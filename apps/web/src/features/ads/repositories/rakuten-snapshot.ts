@@ -36,9 +36,16 @@ export interface RakutenSnapshot {
   items: RakutenSnapshotItem[];
 }
 
-/** 品目 (例「納豆」) 単位の商品スナップショット。 */
-export const rakutenItemsKey = (term: string) =>
-  `app/rakuten/items/${encodeURIComponent(term)}.json`;
+/**
+ * 品目 (例「納豆」) 単位の商品スナップショット。
+ *
+ * ★キーは **encodeURIComponent しない**。R2 のキーは UTF-8 をそのまま持てる。
+ *   encode すると R2 上のキーが literal `%E3%82%...` になり、公開 URL
+ *   (`storage.stats47.jp/...`) から引くときに HTTP 側が decode するため
+ *   キーが一致せず 404 になる (= 目視・curl での検証手段を失う)。
+ *   品目語 459 件に `/ \ ? # % 空白` は 1 つも含まれないことを確認済み。
+ */
+export const rakutenItemsKey = (term: string) => `app/rakuten/items/${term}.json`;
 
 /** 都道府県コード (例「13000」) 単位のふるさと納税スナップショット。 */
 export const rakutenFurusatoKey = (prefCode: string) => `app/rakuten/furusato/${prefCode}.json`;
