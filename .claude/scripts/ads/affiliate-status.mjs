@@ -109,7 +109,17 @@ async function checkAsp(name, root, log) {
           // 一覧行スコープを優先する (ページ全体だと推薦リンク等の ID が混ざり超集合になり、
           // 「却下済みなのに ID が残って drift を見逃す」余地が生まれる)。行スコープで 1 件も
           // 取れないときだけページ全体へ fallback し、その旨をログへ出す。
-          const scopes = asp.rowSelector ? [`tr:has(${asp.rowSelector}) a[href]`, "a[href]"] : ["a[href]"];
+          // ★ `tr:has(<rowSelector>) a[href]` は ASP によっては 0 件になる (もしもの一覧は
+          //   td.promotion-name と促進リンクが同一 tr に無く、2026-08-04 実測で常に 0 件 →
+          //   ページ全体 fallback が働き、提携中 32 行に対し ID 35 件の超集合になっていた。
+          //   余分な 3 件は提携中と申請中の**両方**に出るページ共通リンクで、うち 2 件が
+          //   「台帳に無い実機の提携」として誤検出されていた)。config で一覧スコープを
+          //   直接指定できるようにし、指定があればそれを最優先する。
+          const scopes = [
+            ...(asp.listScopeSelector ? [asp.listScopeSelector] : []),
+            ...(asp.rowSelector ? [`tr:has(${asp.rowSelector}) a[href]`] : []),
+            "a[href]",
+          ];
           const re = new RegExp(asp.hrefIdPattern, "g");
           for (const scope of scopes) {
             const hrefs = await page

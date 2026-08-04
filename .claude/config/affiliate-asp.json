@@ -75,6 +75,8 @@
       "_hrefIdPatternNote": "promotion_id は画面テキストに出ず a[href] にのみ現れる (2026-07-28 実測: text.includes 照合が常に none になり誤ドリフト 4 件)。href から抽出する",
       "hrefIdPattern": "promotion_id=(\\d+)",
       "rowSelector": "td.promotion-name",
+      "listScopeSelector": "table a[href]",
+      "_listScopeNote": "★2026-08-04 実測で確定。promotion_id を拾うスコープ。`tr:has(td.promotion-name) a[href]` は 0 件になり (促進リンクが同一 tr に無い)、ページ全体 fallback が働いて超集合になっていた (提携中 32 行に対し ID 35 件 / 申請中 54 行に対し 57 件)。余分な 3 件 (7630 / 7556 / 170) は提携中・申請中の**両方**に出るページ共通リンクで、うち 7630・7556 が『台帳に無い実機の提携』として誤検出された。`table a[href]` は行数と完全一致する (32 / 54)。",
       "_listLimitNote": "既定ページサイズ10では一覧を読み切れない (2026-07-28 実測: applying 34件)。limit=100 を明示"
     },
     "afb": {
