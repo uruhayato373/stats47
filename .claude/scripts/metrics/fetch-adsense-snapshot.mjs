@@ -24,7 +24,8 @@
 
 import { google } from "googleapis";
 import { writeFileSync, mkdirSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { PROJECT_ROOT, parseWeekArg, toCsv } from "./lib/auth.mjs";
 import { resolvePeriods, addDays, expectedDates, assessDailyCoverage } from "./lib/periods.mjs";
 import {
@@ -96,45 +97,68 @@ function flatten(report) {
  * 個別ユニットの adCode 取得が失敗しても、そのユニットを落とさず slot_id を空にして続ける
  * (一覧そのものは価値があるため)。取得できなかった件数は manifest の limitation に残す。
  *
- * @returns {Promise<{rows: object[], slotIdMissingCount: number}>}
+ * ★1 つの ad client の失敗で inventory 全体を落とさない (2026-08-04 修正)。
+ * このアカウントは content 用 `ca-pub-*` のほかに AdSense for Search の
+ * `partner-pub-*` を持つ。後者は広告ユニットの概念を持たないため adunits.list が
+ * NOT_FOUND を返し、per-client の try/catch が無かったせいで **inventory が
+ * 一度も成功していなかった** (W30/W31 とも status=error・rowCount=0)。
+ * その結果 slot↔unit の突き合わせができず、「どの枠がいくら稼いでいるか」を
+ * コード側の slot 定数に接続できない状態が続いていた。
+ * 失敗した client は落とさず記録し、**全 client が失敗したときだけ throw** する
+ * (0 件を「ユニットが無い」と誤読させないため)。
+ *
+ * @returns {Promise<{rows: object[], slotIdMissingCount: number, skippedClients: string[]}>}
  */
-async function fetchAdUnitInventory(adsense, account) {
+export async function fetchAdUnitInventory(adsense, account) {
   const rows = [];
+  const skippedClients = [];
   let slotIdMissingCount = 0;
 
   const clientsRes = await adsense.accounts.adclients.list({ parent: account });
-  const adClients = clientsRes.data.adClients || [];
+  const adClients = (clientsRes.data.adClients || []).filter((c) => c.name);
 
   for (const client of adClients) {
-    if (!client.name) continue;
-    let pageToken;
-    do {
-      const res = await adsense.accounts.adclients.adunits.list({
-        parent: client.name,
-        pageSize: 100,
-        ...(pageToken ? { pageToken } : {}),
-      });
-      const units = res.data.adUnits || [];
-      for (const unit of units) {
-        let adCode = null;
-        if (unit.name) {
-          try {
-            const codeRes = await adsense.accounts.adclients.adunits.getAdcode({ name: unit.name });
-            adCode = codeRes.data.adCode ?? null;
-          } catch (e) {
-            // adCode 単体の失敗はユニット行を落とす理由にしない (slot_id を空にして続ける)
-            console.error(`[adsense-snapshot] getAdcode failed for ${unit.name}:`, e.message || e);
+    try {
+      let pageToken;
+      do {
+        const res = await adsense.accounts.adclients.adunits.list({
+          parent: client.name,
+          pageSize: 100,
+          ...(pageToken ? { pageToken } : {}),
+        });
+        const units = res.data.adUnits || [];
+        for (const unit of units) {
+          let adCode = null;
+          if (unit.name) {
+            try {
+              const codeRes = await adsense.accounts.adclients.adunits.getAdcode({ name: unit.name });
+              adCode = codeRes.data.adCode ?? null;
+            } catch (e) {
+              // adCode 単体の失敗はユニット行を落とす理由にしない (slot_id を空にして続ける)
+              console.error(`[adsense-snapshot] getAdcode failed for ${unit.name}:`, e.message || e);
+            }
           }
+          const row = adUnitInventoryRow(unit, adCode);
+          if (!row.slot_id) slotIdMissingCount++;
+          rows.push(row);
         }
-        const row = adUnitInventoryRow(unit, adCode);
-        if (!row.slot_id) slotIdMissingCount++;
-        rows.push(row);
-      }
-      pageToken = res.data.nextPageToken || undefined;
-    } while (pageToken);
+        pageToken = res.data.nextPageToken || undefined;
+      } while (pageToken);
+    } catch (e) {
+      // ad unit を持たない client (AdSense for Search の partner-pub-* 等) はここに来る。
+      const reason = e?.message || String(e);
+      console.error(`[adsense-snapshot] adunits.list skipped for ${client.name}: ${reason}`);
+      skippedClients.push(`${client.name}: ${reason.slice(0, 120)}`);
+    }
   }
 
-  return { rows, slotIdMissingCount };
+  if (adClients.length > 0 && skippedClients.length === adClients.length) {
+    throw new Error(
+      `全 ${adClients.length} 件の ad client で adunits.list に失敗した: ${skippedClients.join(" / ")}`,
+    );
+  }
+
+  return { rows, slotIdMissingCount, skippedClients };
 }
 
 /** job の取得期間を決定する (finalized7d 既定・pages は同じ後端の 30 日窓)。 */
@@ -232,10 +256,12 @@ async function main() {
     let invRows = [];
     let invError = null;
     let slotIdMissingCount = 0;
+    let skippedClients = [];
     try {
       const inv = await fetchAdUnitInventory(adsense, account);
       invRows = inv.rows;
       slotIdMissingCount = inv.slotIdMissingCount;
+      skippedClients = inv.skippedClients;
       writeFileSync(join(outDir, AD_UNITS_FILE), toCsv(invRows, AD_UNIT_INVENTORY_FIELDS));
     } catch (e) {
       invError = e.message || String(e);
@@ -251,6 +277,9 @@ async function main() {
       generatedAt,
       slotIdMissingCount,
       error: invError,
+      limitations: skippedClients.map(
+        (c) => `ad unit を列挙できなかった ad client (広告ユニットを持たない種別の可能性): ${c}`,
+      ),
     });
     summary.push(`${AD_UNITS_FILE}: ${invRows.length} rows (${invStatus})`);
   }
@@ -272,8 +301,15 @@ async function main() {
   if (okCount === 0) process.exit(1);
 }
 
-main().catch((e) => {
-  console.error("AdSense snapshot failed:", e.message || e);
-  if (e.errors) console.error(e.errors);
-  process.exit(1);
-});
+// CLI として起動されたときだけ実行する。test から fetchAdUnitInventory を import しても
+// API 認証を要求する main() が走らないようにするための entry guard。
+const invokedAsScript =
+  process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+
+if (invokedAsScript) {
+  main().catch((e) => {
+    console.error("AdSense snapshot failed:", e.message || e);
+    if (e.errors) console.error(e.errors);
+    process.exit(1);
+  });
+}
