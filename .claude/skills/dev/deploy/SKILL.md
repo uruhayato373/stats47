@@ -24,16 +24,45 @@ feature/* ──(直 merge)──▶ develop ──(PR + CI)──▶ main（デ
 | 能力 | ローカル | web / クラウド実行 |
 |---|---|---|
 | `gh` CLI | あり | **無い** |
+| `curl` で GitHub API | 可 | **不可** (★下記) |
 | `git push` 先 | 任意ブランチ | セッション指定ブランチに制限されることがある |
 | GitHub Actions 起動 (`gh workflow run` / dispatch) | 可 | **不可** (連携トークンに `actions:write` 無し → 403) |
 | R2 直接書き込み | 不可 (CI 専用) | 不可 (同左) |
 
 **判定**: `command -v gh` が無い / remote 環境 ⇒ **web モード**。
 
-**web モードの手順差分**:
-- PR 作成・マージ・CI 確認は **GitHub MCP ツール** (`mcp__github__create_pull_request` / `merge_pull_request` / `pull_request_read`) を使う (`gh` の代替)。
+### ★web モードで GitHub を触る唯一の経路は MCP ツール
+
+**`gh` が無いからといって `curl` に逃げない。** `curl -H "Authorization: bearer $GITHUB_TOKEN" https://api.github.com/...`
+は必ず `{"message":"GitHub access is not enabled for this session..."}` を返す (2026-08-04 実測)。
+**しかもこれは HTTP 200 で返るので `|| exit` 系のガードをすり抜ける**。background agent の中で
+叩くと出力が空ファイルになるだけで、失敗したことすら見えない (同日、監視 agent 4 本が
+何も返さないまま数十分無駄になった)。
+
+web モードでは下表の MCP ツールだけを使う。
+
+| やりたいこと | MCP ツール |
+|---|---|
+| PR 作成 / 更新 / マージ | `mcp__github__create_pull_request` / `update_pull_request` / `merge_pull_request` |
+| PR の CI 状態・レビュー確認 | `mcp__github__pull_request_read` |
+| workflow run の一覧・結論確認 | `mcp__github__actions_list` / `mcp__github__actions_get` |
+| job ログ | `mcp__github__get_job_logs` |
+
+- `actions_list` は応答が大きくトークン上限に当たることがある。その場合は結果がファイルに
+  保存されるので、`python3 -c "import json; ..."` で `run_number` / `head_sha` / `conclusion`
+  だけを抜く (全文を読まない)。
 - **workflow の dispatch は不可** (403)。記事・広告の R2 公開は下記「データ公開」のとおり **push トリガー**に委ねる（develop への push が公開を発火）。`gh workflow run` を案内するだけで終わらせない。
 - branch push が制限される場合は可能な範囲で実行し、不可なら明示してユーザーに依頼する。
+
+### ★CI が「失敗」に見えるが実は superseded (cancelled) のケース
+
+同じブランチへ後続 push が入ると concurrency group が古い run を **cancel** する。このとき
+全 job の conclusion が `cancelled` になり、通知や PR の見た目は **failure と区別がつかない**。
+2026-08-04 に PR #722 と #729 で 2 回誤読した。
+
+**判定手順**: `pull_request_read` / `actions_get` で **conclusion が `failure` か `cancelled` か**を見る。
+`cancelled` かつ同ブランチに自分の run より新しい run があれば superseded で、対処は不要 —
+**新しい run の結果を待つ**。ログを読みに行かない (job が始まってすらいない)。
 
 ## データ公開（コードデプロイとは別物・★見落とし注意）
 
@@ -210,6 +239,8 @@ PR URL を出力。CI が green になるまで次へ進まない。
 
 ### Step 5: CI 完了待ち & PR マージ
 
+**ローカル**:
+
 ```bash
 # CI 完了待ち (polling、最大 10 分)
 gh pr checks <PR_NUMBER> --watch || true
@@ -218,7 +249,13 @@ gh pr checks <PR_NUMBER> --watch || true
 gh pr merge <PR_NUMBER> --merge
 ```
 
-- マージ後 Cloudflare Pages が自動デプロイをトリガー
+**web / クラウド** (`gh` が無い。`curl` は使えない → 上記「実行環境の判定」):
+
+- CI 状態: `mcp__github__pull_request_read` (method `get_status`) を数分おきに呼ぶ。
+  `sleep` で待たない (前面 sleep は禁止・Monitor か次ターンで再確認する)。
+- `failure` を見たら **`cancelled` でないか**必ず確認する (superseded の判定は前掲)。
+- マージ: `mcp__github__merge_pull_request`。
+- マージ後 Cloudflare Pages が自動デプロイをトリガー。
 - マージできない場合 (CI 失敗 / conflict) → ユーザーに報告
 
 ### Step 6: 元のブランチに戻る & 後処理
@@ -237,7 +274,13 @@ git push origin --delete $CURRENT_BRANCH 2>/dev/null || true  # リモート削�
 - **D1 / R2 sync の実行有無**
 - develop, main それぞれの push 結果
 - PR URL とマージ時刻
-- Cloudflare デプロイ完了確認 (`gh run list --branch main --workflow "Deploy to Cloudflare Workers" --limit 1`)
+- Cloudflare デプロイ完了確認
+  - ローカル: `gh run list --branch main --workflow "Deploy to Cloudflare Workers" --limit 1`
+  - web / クラウド: `mcp__github__actions_list` (`list_workflow_runs` / `resource_id: deploy-workers.yml`) で
+    main の最新 run の `head_sha` が今マージした SHA か・`conclusion` が `success` かを確認
+- **post-deploy smoke の結果も確認する** (`post-deploy-smoke.yml`)。deploy success は
+  「Worker が起動した」までしか意味せず、route が notFound を返していても success になる。
+  smoke の代表 route (16 件) が緑で初めて「本番に出た」と言える
 
 ### Step 7.5: 本番 URL の実応答確認（★ranking 活性化 / URL 構造 / metric isActive 変更時は必須）
 
