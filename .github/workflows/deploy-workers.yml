@@ -170,6 +170,12 @@ jobs:
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
           CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
           CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+          # 楽天ウェブサービスの Access Key (楽天の画面では伏せ字表示 = 秘匿値)。
+          # 商品カード (RakutenItemsCard) とふるさと納税カードの動的表示に使う。
+          # 未設定だと searchRakutenItems が [] を返し、商品カードは fallback を持たないため
+          # **全ページで消える** (2026-08-04 に本番で 0 件だった実測。ふるさと納税は静的リンクへ
+          # degrade するため「一応出ている」ように見え、発覚が遅れた)。
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
         run: |
           echo "🔐 Setting secrets for production environment..."
 
@@ -216,6 +222,9 @@ jobs:
           # R2ストレージ認証情報を設定
           set_secret "CLOUDFLARE_R2_ACCESS_KEY_ID" "$CLOUDFLARE_R2_ACCESS_KEY_ID"
           set_secret "CLOUDFLARE_R2_SECRET_ACCESS_KEY" "$CLOUDFLARE_R2_SECRET_ACCESS_KEY"
+
+          # 楽天ウェブサービス Access Key を設定（商品カード / ふるさと納税カードの動的表示）
+          set_secret "RAKUTEN_APP_ID" "$RAKUTEN_APP_ID"
 
           echo "✅ Secrets configuration completed for production"
 
