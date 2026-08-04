@@ -1,24 +1,25 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-08-03T01:13:18.835Z
+- 生成: 2026-08-04T00:36:05.964Z
 - GSC snapshot: 2026-W31 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 
 ## サマリ (active ranking 全件 2176 件)
 
-- ✅ done: 208 件 (9.6% / impressions 計 28039)
-- ⏳ needs-regen: 1968 件 (impressions 計 10870)
-  - 内訳: incomplete 1682 / missing 221 / blocker 65
+- ✅ done: 209 件 (9.6% / impressions 計 28151)
+- ⏳ needs-regen: 1967 件 (impressions 計 10758)
+  - 内訳: incomplete 1681 / missing 221 / blocker 65
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **3.0 件/日** (2026-07-30 からの平均)
-- 残り 1968 件 → **完了見込み 約 656 日**
+- 消化ペース: **2.6 件/日** (2026-07-30 からの平均)
+- 残り 1967 件 → **完了見込み 約 757 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
 | R2 last-modified | key | impressions |
 |---|---|---|
+| Mon, 03 Aug 2026 01:14:32 GMT | shrimp-consumption-quantity | 112 |
 | Fri, 31 Jul 2026 02:10:16 GMT | water-supply-population | 144 |
 | Fri, 31 Jul 2026 02:10:16 GMT | white-bread-consumption-quantity | 104 |
 | Fri, 31 Jul 2026 02:10:15 GMT | rice-consumption-quantity | 141 |
@@ -33,13 +34,11 @@
 | Fri, 31 Jul 2026 01:48:35 GMT | treatment-rate-schizophrenia-inpatient | 147 |
 | Fri, 17 Jul 2026 01:18:13 GMT | new-hire-count | 158 |
 | Fri, 17 Jul 2026 01:18:13 GMT | university-graduates-job-ratio | 94 |
-| Fri, 17 Jul 2026 01:18:12 GMT | local-allocation-tax-prefecture | 449 |
 
 ## 次にやるべき上位20 (impressions 降順)
 
 | impressions | key | reason | review | blockers |
 |---|---|---|---|---|
-| 112 | shrimp-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 101 | wheat-flour-consumption-expenditure | incomplete | 🔴opus | missing-pref-commentary |
 | 83 | hobby-participation-rate-go | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 81 | new-rental-starts | incomplete | 🔴opus | missing-pref-commentary |
@@ -59,6 +58,7 @@
 | 63 | hamburger-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 62 | katsuobushi-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 62 | nurse-count | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
+| 62 | physical-therapist-annual-income | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 
 > 生成 (author) は常に **sonnet** (frontmatter 固定・コストゲート)。critic は既定 **sonnet**、
 > `review` 列が 🔴opus の上位30件 (高GSC流入) + tier-1 が REVISE した件だけ
