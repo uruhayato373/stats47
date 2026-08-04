@@ -12,6 +12,8 @@ const CHECKER = path.join(ROOT, ".claude/scripts/lib/check-workspace-contract.cj
  * @param packages  relative path → package.json の内容
  * @param options.testFilesIn  テストファイルを置くパッケージ (UNWIRED_TEST_SUITE 用)
  * @param options.registered   vitest.workspace.ts に登録するパッケージ。省略時は全件
+ * @param options.turbo        turbo.json の内容 (TURBO_MISSING_PASSTHROUGH_ENV 用)。
+ *                             省略時は turbo.json を作らない = 検査対象外
  */
 function fixture(packages, options = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-workspace-contract-"));
@@ -35,8 +37,22 @@ function fixture(packages, options = {}) {
     `export default [\n${registered.map((r) => `  '${r}/vitest.config.ts',`).join("\n")}\n];\n`,
   );
   fs.writeFileSync(path.join(root, "package-lock.json"), JSON.stringify({ lockfileVersion: 3, packages: lockPackages }));
+  if (options.turbo !== undefined) {
+    fs.writeFileSync(path.join(root, "turbo.json"), JSON.stringify(options.turbo));
+  }
   return { root, checker };
 }
+
+/** 実 turbo.json と同じ必須キー一式 (checker 側の定数と同じ並び)。 */
+const FULL_PASSTHROUGH = [
+  "NODE_EXTRA_CA_CERTS",
+  "HTTP_PROXY",
+  "HTTPS_PROXY",
+  "NO_PROXY",
+  "http_proxy",
+  "https_proxy",
+  "no_proxy",
+];
 
 function run(item) {
   const result = spawnSync(process.execPath, [item.checker, "--json"], { cwd: item.root, encoding: "utf8" });
@@ -155,4 +171,54 @@ test("vitest.workspace.ts が無ければ検出する", (t) => {
     result.output.findings.map((f) => f.code),
     ["MISSING_VITEST_WORKSPACE"],
   );
+});
+
+// --- TURBO_MISSING_PASSTHROUGH_ENV (2026-08-04 追加) ---
+// turbo 2.x の strict env mode が NODE_EXTRA_CA_CERTS を剥がすと、TLS 傍受プロキシ配下で
+// dev サーバーの HTTPS が全滅する (症状は「ネットワーク障害」に見えるので切り分けが長い)。
+// 全 PASS はゲートが何も見ていない状態と区別がつかないので、キーを 1 つずつ落として発火を固定する。
+
+test("必須 passThrough env が揃った turbo.json は受理する", (t) => {
+  const item = fixture(
+    { "packages/a": { name: "@stats47/a", main: "./src/index.ts" } },
+    { turbo: { globalPassThroughEnv: FULL_PASSTHROUGH, tasks: {} } },
+  );
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item);
+  assert.deepEqual(result.output.findings, []);
+  assert.equal(result.status, 0);
+});
+
+test("キーを 1 つでも落とすと検出する (キーごとに発火することを固定)", (t) => {
+  t.after(() => {});
+  for (const dropped of FULL_PASSTHROUGH) {
+    const item = fixture(
+      { "packages/a": { name: "@stats47/a", main: "./src/index.ts" } },
+      { turbo: { globalPassThroughEnv: FULL_PASSTHROUGH.filter((k) => k !== dropped), tasks: {} } },
+    );
+    const result = run(item);
+    const missing = result.output.findings.filter((f) => f.code === "TURBO_MISSING_PASSTHROUGH_ENV");
+    assert.equal(missing.length, 1, `${dropped} を落としたのに検出しなかった`);
+    assert.match(missing[0].message, new RegExp(dropped));
+    assert.equal(result.status, 1);
+    fs.rmSync(item.root, { recursive: true, force: true });
+  }
+});
+
+test("globalPassThroughEnv ごと消すと全キーを検出する", (t) => {
+  const item = fixture(
+    { "packages/a": { name: "@stats47/a", main: "./src/index.ts" } },
+    { turbo: { tasks: {} } },
+  );
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item);
+  const missing = result.output.findings.filter((f) => f.code === "TURBO_MISSING_PASSTHROUGH_ENV");
+  assert.equal(missing.length, FULL_PASSTHROUGH.length);
+});
+
+test("turbo.json が無いリポジトリは検査しない (turbo 不在は静かな失敗ではない)", (t) => {
+  const item = fixture({ "packages/a": { name: "@stats47/a", main: "./src/index.ts" } });
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item);
+  assert.deepEqual(result.output.findings, []);
 });

@@ -35,6 +35,13 @@ fail=0
 checked=0
 
 # sitemap.xml から「最初に出現する <prefix> URL」を 1 件取得 (データ変動に強い動的代表 URL)
+#
+# ★実測 (2026-08-04): /sitemap.xml は <sitemapindex> で、その <loc> は子 sitemap
+# (/sitemap/0.xml …) の URL しか持たない。よって pick は常に空 → 各行の
+# `|| echo <既知 URL>` にフォールバックしている (set -o pipefail のおかげで grep の
+# 非ゼロ終了が拾われ || が発火する)。壊れてはいないが「sitemap から拾う」は
+# 効いていないので、代表 URL は実質この下のハードコード。子 sitemap まで辿るのは
+# fetch が 8 本増えて遅くなるだけなので採らない。
 SITEMAP="$(curl -s --max-time 30 "${BASE_URL}/sitemap.xml" 2>/dev/null)"
 pick() { echo "$SITEMAP" | grep -o '<loc>[^<]*</loc>' | sed 's/<[^>]*>//g' | grep -E "$1" | head -1; }
 
@@ -54,6 +61,11 @@ URLS+=( "$(pick '/areas/[0-9]+$' || echo "${BASE_URL}/areas/13000")" )
 URLS+=( "$(pick '/areas/[0-9]+/cities/' || echo "${BASE_URL}/areas/14000/cities/14130")" )
 URLS+=( "$(pick '/blog/[a-z]' || echo "${BASE_URL}/blog/banana-consumption-quantity")" )
 URLS+=( "$(pick '/themes/[a-z]' || echo "${BASE_URL}/themes/aging-society")" )
+# /areas/<code>/<themeSlug> は sitemap に載らない (pick できない) ので直接指定する。
+# 47県 × 18テーマ = 846 ページを持つ独立した route テンプレートで、/areas/<code> とも
+# /themes/<slug> とも別コンポーネント構成 (2026-08-04 に PageShell + 左レールを新設した
+# のはこの route も含む)。代表 1 件が無いと、この面だけ丸ごと壊れても smoke が緑になる。
+URLS+=( "${BASE_URL}/areas/13000/population-dynamics" )
 
 # STRICT: 200 以外 (301/410 含む) を即 fail とする route。
 #   通常の URLS は 301/410 を「意図的な gone/redirect」として skip するが、その逃げ道のせいで

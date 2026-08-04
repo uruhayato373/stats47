@@ -2,6 +2,8 @@ import { cn } from "@stats47/components";
 
 import { AdSenseAd, type AdSlotConfig } from "@/lib/google-adsense";
 
+import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "../../constants/manual-ad-policy";
+
 import { AdSlotLabel } from "./AdSlotLabel";
 
 interface InContentAdSlotProps {
@@ -20,6 +22,9 @@ interface InContentAdSlotProps {
  *
  * 配置規約: ハブ / 一覧 / 記事面のセクション区切りに 1 枠まで（fluid はページ 1 枠）。
  * ファーストビュー内には置かない。
+ *
+ * **モバイルでは描画しない** (2026-08-04)。理由と実測は
+ * `../../constants/manual-ad-policy.ts` を参照。
  */
 export function InContentAdSlot({
   slot,
@@ -28,7 +33,7 @@ export function InContentAdSlot({
 }: InContentAdSlotProps) {
   if (!slot.slotId) return null;
   return (
-    <div className={cn("my-8", className)}>
+    <div className={cn(MANUAL_AD_DESKTOP_ONLY_CLASS, "my-8", className)}>
       {!hideLabel && <AdSlotLabel />}
       <AdSenseAd slotId={slot.slotId} format={slot.format} showLabel={false} />
     </div>

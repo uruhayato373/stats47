@@ -100,6 +100,56 @@ function registeredVitestWorkspaces() {
   return registered;
 }
 
+/**
+ * turbo が子プロセスへ必ず素通しすべき実行環境変数。
+ *
+ * ★turbo 2.x は既定が strict env mode で、宣言しない環境変数を子へ渡さない。
+ * `NODE_EXTRA_CA_CERTS` が落ちると、TLS を傍受するプロキシ配下 (Claude Code の
+ * エージェントプロキシ / 社内 i-FILTER) で Node の全 HTTPS が
+ * SELF_SIGNED_CERT_IN_CHAIN になり、dev サーバーが R2 を一切読めなくなる
+ * (2026-08-04 実測: `npm run dev:web` だけが壊れ、turbo を介さない
+ * `cd apps/web && npm run dev` は動いた)。症状が「ネットワーク障害」に見えるため
+ * 切り分けに時間がかかる = 静かな失敗。だから機械で塞ぐ。
+ *
+ * これらは「どこで動かすか」だけを決める変数で成果物を変えないため、
+ * passThrough は cache key に入らない (turbo の定義)。値がマシンごとに違っても
+ * task hash は不変。正典: .claude/rules/local-environment.md
+ */
+const REQUIRED_TURBO_PASSTHROUGH_ENV = [
+  "NODE_EXTRA_CA_CERTS",
+  "HTTP_PROXY",
+  "HTTPS_PROXY",
+  "NO_PROXY",
+  "http_proxy",
+  "https_proxy",
+  "no_proxy",
+];
+
+/**
+ * turbo.json の globalPassThroughEnv を検査する。
+ *
+ * turbo.json 自体が無い場合は検査しない。turbo が無ければ `turbo run` が丸ごと
+ * 失敗して即座に気づけるので、これは静かな失敗ではない (fixture も turbo.json を
+ * 持たない)。塞ぎたいのは「turbo.json はあるのにキーだけ消えた」ケース。
+ */
+function checkTurboPassThroughEnv(findings) {
+  const file = path.join(ROOT, "turbo.json");
+  if (!fs.existsSync(file)) return;
+  const turbo = readJson(file, findings);
+  if (!turbo) return;
+  const declared = new Set(
+    Array.isArray(turbo.globalPassThroughEnv) ? turbo.globalPassThroughEnv : [],
+  );
+  for (const key of REQUIRED_TURBO_PASSTHROUGH_ENV) {
+    if (declared.has(key)) continue;
+    findings.push({
+      code: "TURBO_MISSING_PASSTHROUGH_ENV",
+      file: "turbo.json",
+      message: `globalPassThroughEnv に ${key} が無い (turbo が子プロセスから剥がす → プロキシ配下で HTTPS が全滅する)`,
+    });
+  }
+}
+
 function main() {
   const findings = [];
   const directories = workspaceDirectories();
@@ -173,6 +223,8 @@ function main() {
       });
     }
   }
+
+  checkTurboPassThroughEnv(findings);
 
   findings.sort((a, b) => `${a.code}\0${a.file}\0${a.message}`.localeCompare(`${b.code}\0${b.file}\0${b.message}`));
   const byCode = Object.fromEntries([...new Set(findings.map((item) => item.code))].map((code) => [code, findings.filter((item) => item.code === code).length]));
