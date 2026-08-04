@@ -2,8 +2,10 @@ import type { AffiliateCategory } from "@/features/ads/constants/affiliate-categ
 
 import { type Article } from "../types";
 
-import { MDContent, type InlineAffiliateBanner } from "./md-content";
+import { MDContent } from "./md-content";
 import { MDXContent } from "./mdx-content";
+
+import type { InlineAffiliateBanner } from "../utils";
 
 interface ArticleRendererProps {
     article: Article;

@@ -24,8 +24,7 @@ import {
 } from "@/features/ads";
 import { TAG_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
 import { resolveAffiliateBanners, resolveAffiliateBannersByCategory, resolveAffiliateTextAdsByTagKeys } from "@/features/ads/server";
-import { pickInBodyAdFormat } from "@/features/blog/components/md-content";
-import { BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
+import { BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, pickInBodyAdFormat, type Article } from "@/features/blog";
 import {
     RelatedRankingsSection,
     listLatestArticles,

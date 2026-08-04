@@ -28,6 +28,13 @@ import type { AffiliateCategory } from "@/features/ads/constants/affiliate-categ
 import { AdSenseAd, BLOG_ARTICLE_INLINE } from "@/lib/google-adsense";
 
 import { buildHeadingSlug } from "../lib/heading-slug";
+// ★ A/B の共有定義は client 境界の外に置く (server component からも呼ぶため)。
+import {
+    IN_BODY_AD_EXPERIMENT_ID,
+    pickInBodyAdFormat,
+    type InBodyAdFormat,
+    type InlineAffiliateBanner,
+} from "../utils";
 
 import { preprocessCallouts } from "./md-preprocessor";
 import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
@@ -81,34 +88,6 @@ interface MDContentProps {
      * **記事末尾は format に関係なく常にバナー**。割当は slug のハッシュで決まる (記事ごとに固定)。
      */
     inBodyFormat?: InBodyAdFormat;
-}
-
-/** 本文に差し込むバナー 1 件 (services/resolve-affiliate-ad の ResolvedAffiliateBanner と同形)。 */
-export interface InlineAffiliateBanner {
-    id: string;
-    title: string;
-    href: string;
-    imageUrl: string;
-    trackingPixelUrl: string | null;
-    width: number;
-    height: number;
-    vertical: string | null;
-}
-
-export type InBodyAdFormat = "text" | "banner";
-
-/** 本文フォーマット A/B の実験 ID (GA4 experiment_id)。 */
-export const IN_BODY_AD_EXPERIMENT_ID = "blog-inbody-format";
-
-/**
- * slug から決定的に A/B を割り当てる。記事ごとに固定なので、同じ記事を再訪した読者に
- * 別フォーマットが出ることはない (計測が混ざらない)。
- */
-export function pickInBodyAdFormat(slug: string | undefined): InBodyAdFormat {
-    if (!slug) return "text";
-    let h = 0;
-    for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
-    return h % 2 === 0 ? "text" : "banner";
 }
 
 interface ComponentProps {

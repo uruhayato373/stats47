@@ -20,3 +20,9 @@ export { BlogAuthorProfileCard } from './components/BlogAuthorProfileCard';
 
 // ユーティリティ
 export { generateBlogMetadata } from './utils/generate-blog-metadata';
+export {
+  IN_BODY_AD_EXPERIMENT_ID,
+  pickInBodyAdFormat,
+  type InBodyAdFormat,
+  type InlineAffiliateBanner,
+} from './utils/in-body-ad-format';
