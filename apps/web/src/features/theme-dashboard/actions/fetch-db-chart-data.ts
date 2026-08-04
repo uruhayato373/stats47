@@ -8,6 +8,11 @@ import { fetchEstatData } from "@/components/stat-charts/server";
 import type { LineChartData, MixedChartData } from "@/components/stat-charts/types/visualization";
 
 import {
+  NATIONAL_AREA_CODE,
+  selectNationalSeries,
+} from "../lib/select-national-series";
+
+import {
   parseThemeDbChartComponentProps,
   type CompositionChartComponentProps,
   type CpiChartComponentProps,
@@ -61,7 +66,7 @@ export async function fetchDbChartDataAction(
   componentProps: Record<string, unknown>,
   prefCode: string
 ): Promise<ChartResult> {
-  const isNational = prefCode === "00000";
+  const isNational = prefCode === NATIONAL_AREA_CODE;
   const parsed = parseThemeDbChartComponentProps(componentType, componentProps);
   if (!parsed) return null;
 
@@ -131,7 +136,7 @@ async function fetchMixedData(
 }
 
 /**
- * 複数系列のデータを並列取得。全国の場合は全47都道府県の平均を算出。
+ * 複数系列のデータを並列取得。全国の場合は全国系列を取得する。
  */
 async function fetchAllSeries(
   paramsList: Array<Record<string, string>>,
@@ -141,7 +146,7 @@ async function fetchAllSeries(
   const results = await Promise.all(
     paramsList.map(async (params) => {
       if (isNational) {
-        return fetchAllAndAverage(params as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
+        return fetchNationalSeries(params as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
       }
       const result = await fetchEstatData(prefCode, params as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
       if ("error" in result) return null;
@@ -153,7 +158,13 @@ async function fetchAllSeries(
   return results as StatsSchema[][];
 }
 
-async function fetchAllAndAverage(
+/**
+ * 全国 (areaCode "00000") の系列を取得する。
+ *
+ * 「全国行を使うか 47 県平均へ落とすか」の判定は純粋関数 `selectNationalSeries` が持ち、
+ * ここは取得だけを担う (判定の不変量はユニットテストで固定する)。
+ */
+async function fetchNationalSeries(
   params: import("@stats47/estat-api/server").GetStatsDataParams,
 ): Promise<StatsSchema[] | null> {
   const { fetchFormattedStats } = await import("@stats47/estat-api/server");
@@ -162,41 +173,7 @@ async function fetchAllAndAverage(
   try {
     const storage = await getEstatCacheStorage();
     const allData = await fetchFormattedStats(params, storage);
-
-    const prefData = allData.filter((d) =>
-      /^(0[1-9]|[1-3][0-9]|4[0-7])000$/.test(d.areaCode)
-    );
-
-    const byYear = new Map<string, { values: number[]; yearName: string; metricKey: string; unit: string }>();
-    for (const d of prefData) {
-      const entry = byYear.get(d.yearCode);
-      if (entry) {
-        entry.values.push(d.value ?? 0);
-      } else {
-        byYear.set(d.yearCode, {
-          values: [d.value ?? 0],
-          yearName: d.yearName,
-          metricKey: d.metricKey,
-          unit: d.unit,
-        });
-      }
-    }
-
-    const averaged: StatsSchema[] = [];
-    for (const [yearCode, entry] of byYear) {
-      const avg = entry.values.reduce((a, b) => a + b, 0) / entry.values.length;
-      averaged.push({
-        areaCode: "00000",
-        areaName: "全国平均",
-        yearCode,
-        yearName: entry.yearName,
-        metricKey: entry.metricKey,
-        value: Math.round(avg * 100) / 100,
-        unit: entry.unit,
-      });
-    }
-
-    return averaged.length > 0 ? averaged : null;
+    return selectNationalSeries(allData);
   } catch {
     return null;
   }
@@ -210,7 +187,7 @@ async function fetchCompositionData(
   const segmentData = await Promise.all(
     props.segments.map(async (seg) => {
       if (isNational) {
-        return await fetchAllAndAverage({ statsDataId: props.statsDataId, cdCat01: seg.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
+        return await fetchNationalSeries({ statsDataId: props.statsDataId, cdCat01: seg.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
       }
       const result = await fetchEstatData(prefCode, { statsDataId: props.statsDataId, cdCat01: seg.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
       return "error" in result ? null : result.data;
@@ -222,7 +199,7 @@ async function fetchCompositionData(
   let totalData: StatsSchema[] | undefined;
   if (props.totalCode) {
     if (isNational) {
-      totalData = (await fetchAllAndAverage({ statsDataId: props.statsDataId, cdCat01: props.totalCode } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)) ?? undefined;
+      totalData = (await fetchNationalSeries({ statsDataId: props.statsDataId, cdCat01: props.totalCode } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)) ?? undefined;
     } else {
       const result = await fetchEstatData(prefCode, { statsDataId: props.statsDataId, cdCat01: props.totalCode } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
       totalData = "error" in result ? undefined : result.data;
@@ -258,7 +235,7 @@ async function fetchDonutData(
   const results = await Promise.all(
     props.categories.map(async (cat) => {
       const data = isNational
-        ? await fetchAllAndAverage({ statsDataId: props.statsDataId, cdCat01: cat.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)
+        ? await fetchNationalSeries({ statsDataId: props.statsDataId, cdCat01: cat.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)
         : await fetchSeriesDataForDonut({ statsDataId: props.statsDataId, cdCat01: cat.code }, prefCode);
       if (!data || data.length === 0) return null;
 

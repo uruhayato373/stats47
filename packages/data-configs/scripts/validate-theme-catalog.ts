@@ -18,6 +18,9 @@
  *   npx tsx packages/data-configs/scripts/validate-theme-catalog.ts
  *   npx tsx packages/data-configs/scripts/validate-theme-catalog.ts --strict
  */
+import { readdirSync, readFileSync } from "node:fs";
+import path from "node:path";
+
 import { METRICS_REGISTRY } from "../src/registry";
 import { listThemeCatalogs, CATALOG_COMPONENT_TYPES } from "../src/theme-catalog";
 
@@ -37,6 +40,95 @@ function tally(list: string[]): string {
   return Object.entries(counts)
     .map(([k, v]) => `${k}=${v}`)
     .join(" ");
+}
+
+/**
+ * page-components (theme) の estatParams 構造を検査する。
+ *
+ * ★カタログの内整合 (rankingKey の実在等) だけでは、実際にチャートが叩く
+ *   e-Stat リクエストの壊れ方を捕まえられない。statsDataId の桁違いや
+ *   系列数とラベル数の不一致は「チャートが空になる / 系列が無名になる」形で
+ *   本番に出るので、ビルド前に決定的に弾く。
+ */
+function validatePageComponentEstatParams(errors: string[]): number {
+  const dir = path.resolve(
+    __dirname,
+    "../../../apps/web/scripts/data/page-components/theme",
+  );
+  let checked = 0;
+  let files: string[];
+  try {
+    files = readdirSync(dir).filter((f) => f.endsWith(".json"));
+  } catch {
+    return 0; // 生成物が無い環境ではスキップ (カタログ検証自体は続行)
+  }
+
+  const isStatsDataId = (v: unknown) => typeof v === "string" && /^\d{10}$/.test(v);
+
+  for (const file of files) {
+    const theme = file.replace(/\.json$/, "");
+    const components = JSON.parse(
+      readFileSync(path.join(dir, file), "utf8"),
+    ) as Array<Record<string, unknown>>;
+
+    for (const comp of components) {
+      const key = String(comp.componentKey ?? comp.component_key ?? "(no-key)");
+      const type = String(comp.componentType ?? comp.component_type ?? "");
+      const props = (comp.componentProps ?? comp.component_props ?? {}) as Record<
+        string,
+        unknown
+      >;
+      const where = `${theme}/${key}`;
+
+      const paramGroups: Array<{ label: string; params: unknown }> = [
+        { label: "estatParams", params: props.estatParams },
+        { label: "columnParams", params: props.columnParams },
+        { label: "lineParams", params: props.lineParams },
+      ];
+
+      for (const { label, params } of paramGroups) {
+        if (params == null) continue;
+        const list = Array.isArray(params) ? params : [params];
+        for (const p of list) {
+          checked++;
+          const id = (p as Record<string, unknown>)?.statsDataId;
+          if (!isStatsDataId(id)) {
+            errors.push(
+              `[estat-params] ${where}: ${label} の statsDataId "${String(id)}" が 10 桁の数字でない`,
+            );
+          }
+        }
+      }
+
+      // statsDataId をトップレベルに持つ型 (composition / donut / cpi 等)
+      if (props.statsDataId != null && !isStatsDataId(props.statsDataId)) {
+        checked++;
+        errors.push(
+          `[estat-params] ${where}: statsDataId "${String(props.statsDataId)}" が 10 桁の数字でない`,
+        );
+      }
+
+      // 系列数とラベル数・色数の一致 (ずれると凡例が無名・色が既定へ落ちる)
+      const lengthPairs: Array<[string, unknown, string, unknown]> =
+        type === "mixed-chart"
+          ? [
+              ["columnParams", props.columnParams, "columnLabels", props.columnLabels],
+              ["lineParams", props.lineParams, "lineLabels", props.lineLabels],
+            ]
+          : [["estatParams", props.estatParams, "labels", props.labels]];
+
+      for (const [paramsName, params, labelsName, labels] of lengthPairs) {
+        if (!Array.isArray(params) || !Array.isArray(labels)) continue;
+        if (params.length !== labels.length) {
+          errors.push(
+            `[estat-params] ${where}: ${paramsName} (${params.length}) と ${labelsName} (${labels.length}) の要素数が不一致`,
+          );
+        }
+      }
+    }
+  }
+
+  return checked;
 }
 
 function main() {
@@ -121,8 +213,11 @@ function main() {
     }
   }
 
+  const estatParamsChecked = validatePageComponentEstatParams(errors);
+
   console.log(
-    `theme-catalog 検証: ${catalogs.length} themes / error ${errors.length} / warn ${warns.length}`,
+    `theme-catalog 検証: ${catalogs.length} themes / estatParams ${estatParamsChecked} 件 / ` +
+      `error ${errors.length} / warn ${warns.length}`,
   );
   if (warns.length > 0) {
     console.log("⚠️  warn 内訳:", tally(warns));

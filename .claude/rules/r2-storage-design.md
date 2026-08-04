@@ -56,6 +56,7 @@
 
 | ディレクトリ | 内容                                         | 理由                                 |
 | ------------ | -------------------------------------------- | ------------------------------------ |
+| `estat-api/` | e-Stat API レスポンスキャッシュ（`stats-data/{statsDataId}/{filters}.json` / `meta-info/{statsDataId}.json`）| **配信 snapshot ではなく再取得可能な API キャッシュ**。テーマ/area のライブチャートが読む。§「e-Stat API キャッシュ」参照 |
 | `gis/`       | 生 GIS ファイル・タイルセット（mlit-ksj 等） | web app の snapshot fetch 経路とは別 |
 | `ges/`       | Google Earth Studio 動画出力                 | URL なし、非 Web アプリデータ        |
 | `sns/`       | SNS サムネイル / 投稿用素材                  | Web アプリの fetch 対象外            |
@@ -91,6 +92,24 @@ objectはPUTしない。mtime・ローカルcache・`app/blog`等の広域prefix
 - generatorからwrangler等への直接apply
 - asset失敗を`continue-on-error` / `|| true`で隠す
 - 画像R2 writerで共通`concurrency: r2-write`を使わない
+
+## e-Stat API キャッシュ (`estat-api/`) — 復元可能・出典再現可能が要件 (★2026-08-04)
+
+テーマページ・area ページの**ライブチャート**が読む e-Stat レスポンスのキャッシュ。
+配信 snapshot (`app/`) ではなく、失っても e-Stat から再取得できる派生物。
+
+| 項目 | 仕様 |
+|---|---|
+| キー | `estat-api/stats-data/{statsDataId}/{filters}.json`（フィルタ無しは `default.json`）/ `estat-api/meta-info/{statsDataId}.json` |
+| 封筒 (v2) | `{ cachedAt, params, apiVersion, response }` — 正典 `packages/estat-api/src/stats-data/repositories/cache/envelope.ts` |
+| **復元性** | `params` に取得リクエスト全体を保存する。**キー文字列は一部パラメータしか反映しない**ので、これが無いと「どの条件で得たデータか」を後から確定できず再取得できない |
+| **出典** | `response` は e-Stat 生レスポンス丸ごと。`TABLE_INF` に統計表名・政府機関・調査年が自己記述されているため、この 1 ファイルから出典を再現できる（整形後だけを保存しない理由） |
+| 鮮度 | `CACHE_TTL_DAYS = 30`。超過・`cachedAt` 欠落は read 時に miss 扱い → 再取得・上書き。**統計表は年次更新されるので無期限キャッシュにしない** |
+| 保持 | TTL で自己更新するため GC 不要（`r2-retention.ts` の削除対象にしない） |
+| 書き込み経路 | `fetch-stats-data.ts`（await して保存、失敗は warn ログ）/ `warm-cache.ts`（`--refresh` で既存上書き） |
+
+**禁止**: 整形後 (`StatsSchema[]`) だけを保存する / `params` を省く / TTL 無しで書き込む /
+`app/` 配下にキャッシュを置く（配信 snapshot と混ざる）。
 
 ## R2 保持・削除ポリシー (★2026-07-27 新設)
 

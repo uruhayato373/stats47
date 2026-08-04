@@ -30,6 +30,8 @@ const LAYOUT_PAGES = [
   { name: "ホーム", path: "/" },
   { name: "カテゴリ", path: "/category/population" },
   { name: "都道府県詳細", path: "/areas/01000" },
+  // テーマページは client fetch のチャートを多数積むため崩れやすい (2026-08-04 の重なり不具合)
+  { name: "テーマ", path: "/themes/population-dynamics" },
 ];
 
 async function assertNoHorizontalScroll(page: import("@playwright/test").Page) {
