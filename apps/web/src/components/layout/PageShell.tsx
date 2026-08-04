@@ -16,6 +16,14 @@ interface PageShellProps {
   /** xl+ で左に表示するサイドレール（テーマナビ等）。省略すると左レールなし */
   leftRail?: ReactNode;
   /**
+   * xl 未満で左レールをどう扱うか。
+   * - `stack`（既定）: 本文の下に積む。関連リンク集など「読み終えた後で見る」もの向け
+   * - `hide`: 描画しない。**ページ内容を切り替えるナビ**はページ末尾に置くと操作対象より
+   *   後ろに来て意味を失うため、狭幅では非表示にし、代替 UI をページ側が本文上部に出す
+   *   （テーマページ = ヘッダーの `xl:hidden` セレクタ）
+   */
+  leftRailNarrowBehavior?: "stack" | "hide";
+  /**
    * 右 rail の表示開始幅。
    * - `xl`: 通常ページ。right rail は xl+ で表示
    * - `lg`: ブログ詳細など。right rail は lg+ で表示
@@ -66,6 +74,7 @@ export function PageShell({
   rightRail,
   leftRail,
   rightRailBreakpoint = "xl",
+  leftRailNarrowBehavior = "stack",
   className,
 }: PageShellProps) {
   const hasRight = !!rightRail;
@@ -103,7 +112,7 @@ export function PageShell({
           {/* xl 未満でレールを本文下に積み下ろす */}
           <div className={cn("mt-10 space-y-8", rightRailBreakpoint === "lg" ? "lg:hidden" : "xl:hidden")}>
             {hasRight && rightRail}
-            {showLeft && leftRail}
+            {showLeft && leftRailNarrowBehavior === "stack" && leftRail}
           </div>
         </>
       ) : (

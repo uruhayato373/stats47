@@ -11,33 +11,13 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
   "usage": "theme",
   "metrics": [
     {
-      "rankingKey": "population-growth-rate",
-      "shortLabel": "人口増減率",
+      "rankingKey": "total-population",
+      "shortLabel": "総人口",
       "role": "primary"
-    },
-    {
-      "rankingKey": "natural-increase-rate",
-      "shortLabel": "自然増減率",
-      "role": "primary"
-    },
-    {
-      "rankingKey": "crude-birth-rate",
-      "shortLabel": "粗出生率",
-      "role": "secondary"
     },
     {
       "rankingKey": "total-fertility-rate",
       "shortLabel": "合計特殊出生率",
-      "role": "secondary"
-    },
-    {
-      "rankingKey": "crude-death-rate",
-      "shortLabel": "死亡率",
-      "role": "secondary"
-    },
-    {
-      "rankingKey": "social-increase-rate",
-      "shortLabel": "社会増減率",
       "role": "secondary"
     },
     {
@@ -51,14 +31,34 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
-      "rankingKey": "young-population-ratio",
-      "shortLabel": "年少人口割合",
-      "role": "secondary"
+      "rankingKey": "population-growth-rate",
+      "shortLabel": "人口増減率",
+      "role": "context"
     },
     {
-      "rankingKey": "total-population",
-      "shortLabel": "総人口",
-      "role": "secondary"
+      "rankingKey": "natural-increase-rate",
+      "shortLabel": "自然増減率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "crude-birth-rate",
+      "shortLabel": "粗出生率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "crude-death-rate",
+      "shortLabel": "死亡率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "social-increase-rate",
+      "shortLabel": "社会増減率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "young-population-ratio",
+      "shortLabel": "年少人口割合",
+      "role": "context"
     },
     {
       "rankingKey": "population-density-per-km2-inhabitable-area",

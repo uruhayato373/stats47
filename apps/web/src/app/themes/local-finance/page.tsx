@@ -12,6 +12,7 @@ import {
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 import {
   ThemeIndicatorCatalogSection,
+  ThemeSideNav,
   ThemeSwitcher,
 } from "@/features/theme-dashboard/server";
 
@@ -65,9 +66,16 @@ export default async function LocalFinanceThemePage() {
   const initialFinanceFlow = await loadInitialFinanceFlow();
 
   return (
-    <PageShell>
-      {/* テーマ切替（bespoke ページのため ThemePageLayout を使わず個別配置。表示単位切替より前） */}
-      <ThemeSwitcher currentThemeKey="local-finance" />
+    <PageShell
+      leftRail={<ThemeSideNav currentThemeKey="local-finance" showRegion={false} />}
+      leftRailNarrowBehavior="hide"
+    >
+      {/* 狭幅のテーマ切替（bespoke ページのため ThemePageLayout を使わず個別配置）。
+          xl+ は左レールが担う。本ページは ThemePrefectureProvider を持たないので
+          左レールの地域ブロックは出さない (showRegion=false)。 */}
+      <div className="xl:hidden">
+        <ThemeSwitcher currentThemeKey="local-finance" />
+      </div>
       {/* 都道府県 / 市区町村 切替 */}
       <nav
         aria-label="表示単位切替"

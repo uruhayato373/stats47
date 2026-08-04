@@ -26,6 +26,25 @@ Related canon:
 - `.claude/rules/r2-storage-design.md`
 - `.claude/rules/data-storage.md`
 
+## Page Shell / Navigation
+
+`ThemePageLayout` owns the shell. Page components (`app/themes/[themeSlug]`, `app/areas/[areaCode]/[themeSlug]`,
+`app/themes/local-finance/cities`) render it directly and must **not** wrap it in another `PageShell`.
+
+```
+ThemePrefectureProvider          ← prefecture state (URL ?pref= sync)
+  └─ PageShell leftRail={ThemeSideNav} leftRailNarrowBehavior="hide"
+       └─ breadcrumb / toolbar / xl:hidden ThemeSwitcher / ThemeAreaHeader / dashboard
+```
+
+The provider must stay outside `PageShell` because `ThemeSideNav` holds the prefecture select and
+would otherwise read the default (no-op) context. Below `xl` the rail is hidden — a nav that switches
+the page content is useless when stacked after the content it controls — and the narrow-width
+equivalents are the `xl:hidden` `ThemeSwitcher` band and the `xl:hidden` `PrefectureSelect` in the
+header `actions`.
+
+`app/themes/local-finance` is bespoke (it has no provider) and passes `showRegion={false}`.
+
 ## Chart Type Decision
 
 | Need | Preferred chart |

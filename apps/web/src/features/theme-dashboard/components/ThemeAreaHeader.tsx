@@ -7,9 +7,11 @@ import { useThemePrefecture } from "./ThemePrefectureContext";
 
 /**
  * エリア連動のテーマ見出し。
- * 全国時は「{テーマ名}」、都道府県選択時は「{県名}の{テーマ名}」を H1 に表示し、
- * 右に都道府県セレクタ (PageHeader の actions スロット) を置く。
+ * 全国時は「{テーマ名}」、都道府県選択時は「{県名}の{テーマ名}」を H1 に表示する。
  * SSR では全国 (テーマ名) を描画し、選択時にクライアントで更新する。
+ *
+ * 都道府県セレクタは xl+ では左レール (ThemeSideNav) に集約したため、ここでは
+ * 狭幅 (xl 未満・左レール非表示) のときだけ actions スロットに出す。
  */
 export function ThemeAreaHeader({
   themeTitle,
@@ -24,7 +26,11 @@ export function ThemeAreaHeader({
     <PageHeader
       title={title}
       description={description}
-      actions={<PrefectureSelect />}
+      actions={
+        <div className="xl:hidden">
+          <PrefectureSelect />
+        </div>
+      }
     />
   );
 }

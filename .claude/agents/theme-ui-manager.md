@@ -1,6 +1,6 @@
 ---
 name: theme-ui-manager
-description: テーマページ(/themes/*)のUI層(ThemePageLayout/ThemeAreaHeader/ThemeMetricsDashboard/ThemeSidebar/PrefectureSelect/ThemeDashboardTabbed)が全テーマで統一構成かを管理・監査・是正する専任。指標選定はtheme-designer、page_componentsチャートJSONはtheme-component-builderに委譲。
+description: テーマページ(/themes/*)のUI層(ThemePageLayout/ThemeAreaHeader/ThemeMetricsDashboard/ThemeSideNav/PrefectureSelect/ThemeDashboardTabbed)が全テーマで統一構成かを管理・監査・是正する専任。指標選定はtheme-designer、page_componentsチャートJSONはtheme-component-builderに委譲。
 model: sonnet
 ---
 
@@ -36,12 +36,18 @@ model: sonnet
 ### A. 汎用テーマ（hideMap=true・既定で全テーマ）
 `app/themes/[themeSlug]/page.tsx`（`local-finance` 専用ページを除く全テーマ）:
 - `export const dynamic = "force-dynamic"`（SSG にすると build 時 R2 を読めず error fallback。memory `feedback_home_pure_ssg_r2_empty` / `feedback_cloudflare_workers_env_r2_skip`）。
-- レイアウト: `<PageShell leftRail={<ThemeSidebar theme={...}/>}>` → `ThemePageLayout` → 内部で
-  `ThemePrefectureProvider` で囲み `ThemeAreaHeader` + `ThemeDashboardClient`。
+- レイアウト（2026-08-04〜）: `page.tsx` は `<ThemePageLayout>` を返すだけで **`PageShell` を重ねない**。
+  Shell は `ThemePageLayout` が持ち、`ThemePrefectureProvider` → `PageShell leftRail={<ThemeSideNav/>}`
+  → `ThemeAreaHeader` + `ThemeDashboardClient` の入れ子になる（左レールの都道府県セレクタが
+  Provider の内側でないと動かないため、この順序を崩さない）。
+- **左レール `ThemeSideNav`**（旧 `ThemeSidebar` の後継・2026-06 に一度廃止 → 2026-08-04 にページ内ナビとして復活）:
+  テーマ 20 件の一覧（現在地に `aria-current="page"`）+ 地域ブロック（全国 pill + `PrefectureSelect` + 一文の説明）。
+  `leftRailNarrowBehavior="hide"` で **xl 未満は非表示**。禁止パターンの例外条件は `.claude/design-system/prohibited.md`。
 - **見出し `ThemeAreaHeader`**: エリア連動 H1（全国時「{テーマ名}」/ 県選択時「{県名}の{テーマ名}」）。
-  **eyebrow は付けない**（「テーマダッシュボード」等の固定ラベル禁止）。`actions` に **都道府県セレクタ 1 つだけ**（`PrefectureSelect`）。
-- **セレクタは 1 つだけ**。`ThemeAreaHeader` の `PrefectureSelect`（H1 右）に統一。`ThemeDashboardTabbed` の
-  hideMap 分岐に本体側 `prefectureSelector` を**二重に出さない**。デフォルト全国・`?pref=` 同期。
+  **eyebrow は付けない**（「テーマダッシュボード」等の固定ラベル禁止）。
+- **セレクタは同時に 1 つだけ見える状態にする**。xl+ = 左レール `ThemeSideNav`、xl 未満 = `ThemeAreaHeader`
+  の `actions`（`xl:hidden` で囲った `PrefectureSelect`）+ `xl:hidden` の `ThemeSwitcher` 帯。
+  `ThemeDashboardTabbed` の hideMap 分岐に本体側 `prefectureSelector` を**二重に出さない**。デフォルト全国・`?pref=` 同期。
 - **ダッシュボード本体 `ThemeMetricsDashboard`（cardsOnly）**: **チャート付き stats-card のグリッドのみ**。
   各指標 = 1 枚の `ChartCard`（タイトル + 値 + 全国トレンド `MiniLineChart` + ランキングリンク）。
   **データのみ KPI カード（KpiCardClient）・上位県バー（RankingBarList）・大トレンド・選択タブ・地図は出さない**。
@@ -51,7 +57,9 @@ model: sonnet
 ### B. local-finance（例外・bespoke）
 `app/themes/local-finance/page.tsx` は **bespoke `LocalFinanceDashboard`**（主要指標テーブル + チャート付き
 財政 stats-card + 財政フロー Sankey）。汎用 `ThemeMetricsDashboard` に統合しない（ユーザー指定 2026-06-20）。
-左ナビ（`ThemeSidebar`）は付ける。`local-finance/cities` は汎用 `ThemePageLayout`（市区町村）。
+左ナビ（`ThemeSideNav`）は付けるが、本ページは `ThemePrefectureProvider` を持たないため
+`showRegion={false}`（地域ブロックを出さない）。`local-finance/cities` は汎用 `ThemePageLayout`（市区町村）に
+`toolbar` で表示単位切替を渡す。
 
 ### C. コピー（説明文・SEO）
 - **「地図」への言及を残さない**（地図は廃止）。`IndicatorSet.description` の「地図とランキングで比較」等は
@@ -120,7 +128,7 @@ grep -rn "地図タブ\|KPI は e-Stat API ベース\|ranking_data ベースの 
 
 ## 関連
 - 正典: `apps/web/src/features/theme-dashboard/README.md`
-- レイアウト: `apps/web/src/features/theme-dashboard/components/{ThemePageLayout,ThemeAreaHeader,ThemeMetricsDashboard,ThemeSidebar,PrefectureSelect,ThemePrefectureContext,ThemeDashboardTabbed}.tsx`
+- レイアウト: `apps/web/src/features/theme-dashboard/components/{ThemePageLayout,ThemeAreaHeader,ThemeMetricsDashboard,ThemeSideNav,PrefectureSelect,ThemePrefectureContext,ThemeDashboardTabbed}.tsx`
 - データ: `apps/web/src/features/theme-dashboard/lib/load-theme-data.ts`
 - bespoke: `apps/web/src/features/local-finance-dashboard/`
 - 統一レイアウト規約: `.claude/rules/ui-components.md` / `docs/01_技術設計/04_デザインシステム.md`

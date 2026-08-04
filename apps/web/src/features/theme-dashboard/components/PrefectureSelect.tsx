@@ -1,6 +1,7 @@
 "use client";
 
 import { PREFECTURE_LIST_2DIGIT, to5DigitPrefCode } from "@stats47/area";
+import { cn } from "@stats47/components";
 import {
   Select,
   SelectContent,
@@ -19,14 +20,14 @@ const NATIONAL = "00000";
  * デフォルト「全国」。選択でその都道府県のデータに切り替わり、URL `?pref=` も同期される
  * (同期は ThemePrefectureContext 側)。value は 5桁コードに統一。
  */
-export function PrefectureSelect() {
+export function PrefectureSelect({ className }: { className?: string } = {}) {
   const { selectedPrefectureCode, setSelected } = useThemePrefecture();
   return (
     <Select
       value={selectedPrefectureCode ?? NATIONAL}
       onValueChange={(v) => setSelected(v === NATIONAL ? null : v)}
     >
-      <SelectTrigger className="w-36" aria-label="都道府県を選択">
+      <SelectTrigger className={cn("w-36", className)} aria-label="都道府県を選択">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
