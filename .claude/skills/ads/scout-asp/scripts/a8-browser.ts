@@ -89,6 +89,11 @@ const A8 = {
   keywordSearchUrl: (kw: string) => `${BASE}/program/search/keyword?keywords=${encodeURIComponent(kw)}`,
   autoContractUrl: `${BASE}/program/search/auto-contract`, // 即時提携 (審査なし)
   partneredListUrl: `${BASE}/program/list/partnered`, // 参加中 (承認済み)
+  // 参加中一覧のページ指定。既定ページサイズは 20 件なので 1 ページだけ読むと 21 件目以降を
+  // 取りこぼす (2026-08-04 実測: 参加中 158 件)。pageSize=100 で往復を減らし、承認日の降順に
+  // 並べて直近の承認を先頭ページに寄せる。
+  partneredListPageUrl: (pageNo: number, pageSize = 100) =>
+    `${BASE}/program/list/partnered?pageNo=${pageNo}&pageSize=${pageSize}&sortKey=APPROVED_DATE&sortOrder=DESC`,
   applyingListUrl: `${BASE}/program/list/applying`, // 申込中 (審査待ち)
   detailNotPartneredUrl: (pid: string) => `${BASE}/program/detail-not-partnered?programId=${pid}`,
   createLinkUrl: (pid: string) => `${BASE}/program/create-link?programId=${pid}`,
@@ -605,6 +610,53 @@ async function applyToProgram(page: Page, entry: any): Promise<"applied" | "skip
 }
 
 // ─── サブコマンド: check-approval ──────────────────
+/** 参加中一覧の巡回上限 (pageSize=100 なら 3,000 件相当)。無限ループの保険。 */
+const MAX_PARTNERED_PAGES = 30;
+
+/**
+ * 参加中 (承認済み) プログラムの programId 集合を**全ページ巡回**で取得する。
+ *
+ * 1 ページしか読まないと A8 の既定ページサイズ (20 件) を超えた承認を取りこぼす。
+ * 承認日の降順に並ぶので直近分は 1 ページ目に載るが、週次 cron が止まっている間に溜まった
+ * 承認は永久に applied のまま残る (降格はしないので誤昇格ではなく取りこぼしが累積する)。
+ *
+ * 打ち切りは**新規 ID が 1 件も増えなかったページ**とする。件数で判定すると、最終ページが
+ * ちょうど pageSize と同数だったときに 1 ページ余分に読むだけで済むが、逆に A8 が範囲外の
+ * pageNo で最終ページを返し続けた場合に止まらない。ID 集合の増加を見れば両方に耐える。
+ * (2026-08-04 実測: p1=100 件 / p2=+58 件 / p3=+0 で停止し計 158 件)
+ *
+ * @returns programId 集合。ログイン失効時は null (呼び元が session-expired を記録する)。
+ */
+async function collectPartneredProgramIds(
+  page: Page,
+  opts: { dumpFirstPage?: string } = {},
+): Promise<Set<string> | null> {
+  const ids = new Set<string>();
+  for (let pageNo = 1; pageNo <= MAX_PARTNERED_PAGES; pageNo++) {
+    await page.goto(A8.partneredListPageUrl(pageNo), { waitUntil: "domcontentloaded", timeout: 40000 });
+    await page.waitForTimeout(2500);
+    if (!(await isLoggedIn(page))) return null;
+    if (opts.dumpFirstPage && pageNo === 1) await dumpPage(page, opts.dumpFirstPage);
+    const before = ids.size;
+    // programId は href から取る (表示名より確実)。参加中一覧の programId リンクは
+    // detail-partnered / create-link のみで、一覧行以外から拾う超集合にはならない (2026-08-04 確認)。
+    const found = await page.$$eval("a[href*='programId=']", (as) =>
+      as.map((a) => (a.getAttribute("href")?.match(/programId=(s\d+)/) || [])[1]).filter(Boolean),
+    );
+    for (const id of found) ids.add(id as string);
+    console.log(`  page ${pageNo}: リンク ${found.length} 件 / ID 累計 ${ids.size} 件`);
+    if (ids.size === before) return ids; // 新規 0 = 最終ページを越えた (正常終了)
+    await page.waitForTimeout(1200);
+  }
+  // ここに来た = 上限まで新規が出続けた = **まだ続きがある**。黙って打ち切ると
+  // 「全部見た」と区別が付かず、取りこぼしが再び静かに累積する (今回直した不具合と同じ形)。
+  console.warn(
+    `⚠️ 参加中一覧が ${MAX_PARTNERED_PAGES} ページ上限に到達 (ID ${ids.size} 件)。` +
+      ` 続きが残っている可能性があるため、承認の取りこぼしを疑うこと (MAX_PARTNERED_PAGES を見直す)。`,
+  );
+  return ids;
+}
+
 async function cmdCheckApproval(page: Page): Promise<void> {
   let cat = loadCatalog();
   const applied = core.entriesByStatus(cat, "applied");
@@ -612,22 +664,20 @@ async function cmdCheckApproval(page: Page): Promise<void> {
     console.log("applied なし。");
     return;
   }
-  await page.goto(A8.partneredListUrl, { waitUntil: "domcontentloaded" });
-  await page.waitForTimeout(2500);
-  if (!(await isLoggedIn(page))) return recordSessionExpired("check-approval");
+  const partneredIds = await collectPartneredProgramIds(page, {
+    dumpFirstPage: IS_DRY_RUN ? "check-approval-dryrun" : undefined,
+  });
+  if (!partneredIds) return recordSessionExpired("check-approval");
 
   if (IS_DRY_RUN) {
-    await dumpPage(page, "check-approval-dryrun");
-    console.log(`🧪 dry-run: 参加中プログラム一覧をダンプ (applied ${applied.length} 件を照合予定)。`);
+    const hits = applied.filter((e: any) => partneredIds.has(e.programId));
+    console.log(
+      `🧪 dry-run: 参加中 ${partneredIds.size} 件を収集。applied ${applied.length} 件中 ${hits.length} 件が承認済み (昇格はしない)。`,
+    );
+    for (const e of hits) console.log(`   - ${e.programId} ${String(e.name || "").slice(0, 46)}`);
     return;
   }
 
-  // 参加中 (承認済み) プログラムの programId 集合を href から取得 (名前より確実)。
-  const partneredIds = new Set(
-    await page.$$eval("a[href*='programId=']", (as) =>
-      as.map((a) => (a.getAttribute("href")?.match(/programId=(s\d+)/) || [])[1]).filter(Boolean),
-    ),
-  );
   let approved = 0;
   for (const entry of applied) {
     cat = loadCatalog();
