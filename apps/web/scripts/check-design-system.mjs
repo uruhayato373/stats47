@@ -306,6 +306,113 @@ if (!articleCardBody?.includes("rounded-none border bg-card shadow-sm")) {
   });
 }
 
+// --- 固定高 div で「幅から高さが決まる」D3 チャートを包むのを禁止する ---
+//
+// ★packages/visualization の D3 チャートは `viewBox` + `h-auto w-full` で描画されるため、
+//   実際の高さは「コンテナ幅 × (viewBox 高 / viewBox 幅)」で決まり、親の CSS 高さを守れない。
+//   `<div className="h-[200px]">` で包むと SVG がはみ出して footer やその下の要素に重なる。
+//   実測 (2026-08-04 /themes/population-dynamics): 枠 200px に対し SVG 349px、重なり 154px。
+//   高さは CSS ではなく `height` prop (= viewBox のアスペクト比) で制御すること。
+//
+//   対象コンポーネントは packages/visualization を読んで導出する (手動リストはドリフトする)。
+//   `height="100%"` を持つものは親高さに追従できるので対象外。
+const VISUALIZATION_COMPONENTS_DIR = path.resolve(
+  cwd,
+  "../../packages/visualization/src/d3/components",
+);
+
+function listTsxFilesDeep(dir) {
+  const out = [];
+  let entries;
+  try {
+    entries = readdirSync(dir);
+  } catch {
+    return out;
+  }
+  for (const entry of entries) {
+    const full = path.join(dir, entry);
+    const stats = statSync(full);
+    if (stats.isDirectory()) out.push(...listTsxFilesDeep(full));
+    else if (full.endsWith(".tsx")) out.push(full);
+  }
+  return out;
+}
+
+/** 幅からしか高さが決まらない (= 親の固定高を守れない) チャート名の集合 */
+function collectAspectRatioChartNames() {
+  const names = new Set();
+  for (const file of listTsxFilesDeep(VISUALIZATION_COMPONENTS_DIR)) {
+    const text = readFileSync(file, "utf8");
+    const sizesByWidth = /className="(?:h-auto\s+w-full|w-full\s+h-auto)"/.test(text);
+    if (!sizesByWidth) continue;
+    if (/height="100%"/.test(text)) continue; // 親高さに追従できるので安全
+    for (const match of text.matchAll(/export function (\w+)/g)) names.add(match[1]);
+  }
+  return names;
+}
+
+/** `D3` 接頭辞の別名 export (D3LineChart 等) を吸収して照合する */
+function isAspectRatioChart(names, imported) {
+  return names.has(imported) || names.has(imported.replace(/^D3/, ""));
+}
+
+const aspectRatioCharts = collectAspectRatioChartNames();
+
+function checkFixedHeightChartWrapper(relativePath, names) {
+  if (names.size === 0) return [];
+  const text = readFileSync(path.join(cwd, relativePath), "utf8");
+  if (!text.includes("@stats47/visualization/d3")) return [];
+
+  // このファイル内でアスペクト比チャートを指すローカル識別子を集める
+  const locals = new Set();
+  for (const match of text.matchAll(
+    /import\s*\{([^}]*)\}\s*from\s*["']@stats47\/visualization\/d3[^"']*["']/g,
+  )) {
+    for (const part of match[1].split(",")) {
+      const [original, alias] = part.split(/\s+as\s+/).map((s) => s.trim());
+      if (!original) continue;
+      if (isAspectRatioChart(names, original)) locals.add(alias || original);
+    }
+  }
+  // next/dynamic 経由 (const D3MixedChart = dynamic(() => import("...").then((mod) => mod.MixedChart)))
+  for (const match of text.matchAll(
+    /const\s+(\w+)\s*=\s*dynamic\([\s\S]{0,300}?@stats47\/visualization\/d3[\s\S]{0,200}?mod\.(\w+)/g,
+  )) {
+    if (isAspectRatioChart(names, match[2])) locals.add(match[1]);
+  }
+  if (locals.size === 0) return [];
+
+  const lines = text.split(/\r?\n/);
+  const found = [];
+  lines.forEach((line, index) => {
+    const trimmed = line.trim();
+    // コメント行 (この規約自体を説明している行を含む) は対象外
+    if (trimmed.startsWith("//") || trimmed.startsWith("*") || trimmed.startsWith("/*")) return;
+    // min-h- は下限なので子の高さを縛らない (はみ出さない)。h- / max-h- は縛るので対象。
+    if (!/(?<!min-)h-\[\d+px\]/.test(line)) return;
+    // 固定高 div の直後にチャートが来るか (JSX の入れ子は数行以内)
+    const window = lines.slice(index, index + 6).join("\n");
+    for (const local of locals) {
+      if (!new RegExp(`<${local}\\b`).test(window)) continue;
+      found.push({
+        ruleId: "no-fixed-height-around-aspect-ratio-chart",
+        message: `${local} は viewBox + h-auto w-full で幅から高さが決まるため、固定高 div の高さを守れずはみ出す。CSS 高さではなく height prop で制御すること。`,
+        file: relativePath,
+        lineNumber: index + 1,
+        line: line.trim(),
+      });
+      break;
+    }
+  });
+  return found;
+}
+
+violations.push(
+  ...scanRoots
+    .flatMap((root) => listFiles(root))
+    .flatMap((file) => checkFixedHeightChartWrapper(file, aspectRatioCharts)),
+);
+
 if (violations.length > 0) {
   console.error("Design system check failed:");
   for (const violation of violations) {

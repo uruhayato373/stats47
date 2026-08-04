@@ -2,6 +2,7 @@ import { logger } from "@stats47/logger";
 import { R2Bucket } from "@stats47/r2-storage";
 
 import type { EstatStatsDataResponse, GetStatsDataParams } from '../../types';
+import { isStale } from './envelope';
 import { generateCacheKey } from './generate-cache-key';
 
 /**
@@ -25,6 +26,15 @@ export async function findStatsDataCache(
   try {
     const text = await data.text();
     const parsed = JSON.parse(text);
+
+    // ★鮮度上限を超えたキャッシュは miss 扱いにして再取得・上書きさせる。
+    //   統計表は年次更新されるため、無期限キャッシュだと新年度データが永久に反映されない。
+    //   cachedAt 欠落・不正も stale とする (v1 以前の壊れた封筒を通さない)。
+    if (isStale(parsed?.cachedAt)) {
+      logger.debug({ key, cachedAt: parsed?.cachedAt }, "R2統計データキャッシュ期限切れ");
+      return null;
+    }
+
     return parsed.response ?? null;
   } catch (error) {
     logger.error(

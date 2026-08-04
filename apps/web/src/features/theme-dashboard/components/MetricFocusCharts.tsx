@@ -60,8 +60,8 @@ export function MetricFocusCharts({
     if (!metricKey) return;
     let cancelled = false;
     startTransition(async () => {
-      const data = await fetchMetricTimeseriesAction(metricKey, areaCode);
-      if (!cancelled) setTimeseries(data);
+      const { points } = await fetchMetricTimeseriesAction(metricKey, areaCode);
+      if (!cancelled) setTimeseries(points);
     });
     return () => {
       cancelled = true;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import Link from "next/link";
 
@@ -13,7 +13,12 @@ import { ChartPanel } from "@/components/charts/ChartPanel";
 import { MiniLineChart } from "@/components/charts/MiniCharts";
 import type { PageComponent } from "@/components/stat-charts";
 
-import { ChartEmptyState } from "./ChartState";
+import {
+  fetchMetricTimeseriesAction,
+  type MetricTimeseriesResult,
+} from "../actions";
+
+import { ChartEmptyState, ChartLoading } from "./ChartState";
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
@@ -43,12 +48,19 @@ interface MetricKpi {
   metricKey: string;
   title: string;
   unit: string;
-  /** 都道府県選択時はその県の値、未選択時は全都道府県から算出した代表値 */
+  /** 都道府県選択時はその県の値、未選択時は全国値（取得できなければ 47 県平均） */
   value: number | null;
   rank: number | null;
   total: number;
-  /** 全国行の年次推移（MiniLineChart 用） */
+  /** 年次推移（MiniLineChart 用） */
   series: { year: number; value: number }[];
+  /**
+   * 全国表示で値・系列が 47 県の単純平均のとき true。
+   * 総人口のような実数系は全国値の 1/47 になるため「全国」と称してはならない。
+   */
+  isNationalAverage: boolean;
+  /** 全国値をまだ取得中 */
+  isLoading: boolean;
 }
 
 /** KPI 計算に十分な観測数（47 都道府県の大半が揃っている指標のみ採用） */
@@ -86,14 +98,61 @@ export function ThemeMetricsDashboard({
     : "全国";
   const areaCode = selectedPrefectureCode ?? "00000";
 
+  const kpiKeys = useMemo(
+    () =>
+      themeConfig.tabIndicators
+        .map((t) => t.rankingKey)
+        .filter(
+          (k) =>
+            indicatorDataMap[k] &&
+            indicatorDataMap[k].rankingValues.length >= MIN_VALUES_FOR_KPI,
+        ),
+    [themeConfig.tabIndicators, indicatorDataMap],
+  );
+
+  /**
+   * 全国表示のときだけ e-Stat の全国行 (00000) を取りに行く。
+   *
+   * ★R2 の ranking values は全国行を持たない (取り込み時に除外される) ため、
+   *   preload された値だけでは 47 県平均しか作れない。真の全国値は e-Stat 側にあり、
+   *   fetchMetricTimeseriesAction が「全国行があればそれ・無ければ平均」を申告付きで返す。
+   *   RSC 描画中の e-Stat 取得は Workers で失敗した実績があるので client から server action を叩く
+   *   (MetricFocusCharts と同じ経路)。
+   */
+  const [nationalByKey, setNationalByKey] = useState<Record<
+    string,
+    MetricTimeseriesResult
+  > | null>(null);
+
+  useEffect(() => {
+    if (selectedPrefectureCode || kpiKeys.length === 0) {
+      setNationalByKey(null);
+      return;
+    }
+    let cancelled = false;
+    setNationalByKey(null);
+    void Promise.all(
+      kpiKeys.map(async (key) => {
+        const result = await fetchMetricTimeseriesAction(key, "00000").catch(
+          () => null,
+        );
+        return [key, result] as const;
+      }),
+    ).then((entries) => {
+      if (cancelled) return;
+      const map: Record<string, MetricTimeseriesResult> = {};
+      for (const [key, result] of entries) {
+        if (result) map[key] = result;
+      }
+      setNationalByKey(map);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedPrefectureCode, kpiKeys]);
+
   const kpis = useMemo<MetricKpi[]>(() => {
-    const keys = themeConfig.tabIndicators
-      .map((t) => t.rankingKey)
-      .filter(
-        (k) =>
-          indicatorDataMap[k] &&
-          indicatorDataMap[k].rankingValues.length >= MIN_VALUES_FOR_KPI,
-      );
+    const keys = kpiKeys;
 
     return keys.map((key) => {
       const d = indicatorDataMap[key];
@@ -110,24 +169,43 @@ export function ThemeMetricsDashboard({
       const target = selectedPrefectureCode
         ? d.rankingValues.find((v) => v.areaCode === selectedPrefectureCode)
         : undefined;
-      const value = isNational
-        ? (d.nationalValue ?? nationalAverage)
-        : typeof target?.value === "number"
-          ? target.value
-          : null;
-      const rank = isNational ? null : (target?.rank ?? null);
+
+      if (!isNational) {
+        return {
+          metricKey: key,
+          title: d.rankingItem.title,
+          unit: d.rankingItem.unit ?? "",
+          value: typeof target?.value === "number" ? target.value : null,
+          rank: target?.rank ?? null,
+          total,
+          series: d.nationalSeries ?? [],
+          isNationalAverage: false,
+          isLoading: false,
+        };
+      }
+
+      // 全国表示: e-Stat の全国行が取れていればそれを使い、取れなければ 47 県平均と明示する
+      const national = nationalByKey?.[key];
+      const useNational = national?.source === "national" && national.points.length > 0;
+      const nationalSeries = useNational
+        ? national.points.map((p) => ({ year: Number(p.year.slice(0, 4)), value: p.value }))
+        : null;
 
       return {
         metricKey: key,
         title: d.rankingItem.title,
         unit: d.rankingItem.unit ?? "",
-        value,
-        rank,
+        value: useNational
+          ? national.points[national.points.length - 1].value
+          : (d.nationalValue ?? nationalAverage),
+        rank: null,
         total,
-        series: d.nationalSeries ?? [],
+        series: nationalSeries ?? d.nationalSeries ?? [],
+        isNationalAverage: !useNational,
+        isLoading: nationalByKey === null,
       };
     });
-  }, [themeConfig.tabIndicators, indicatorDataMap, selectedPrefectureCode]);
+  }, [kpiKeys, indicatorDataMap, selectedPrefectureCode, nationalByKey]);
 
   // cardsOnly: KPI スタットカードのみ。チャート・考察は描画しない
   const chartComponents = cardsOnly
@@ -174,14 +252,19 @@ export function ThemeMetricsDashboard({
             {kpis.map((k) => (
               <ChartCard
                 key={k.metricKey}
-                label={k.title}
+                // 47 県平均を「全国」と誤読させないため、平均のときだけラベルに明示する
+                label={k.isNationalAverage && !k.isLoading ? `${k.title}（全国平均）` : k.title}
                 value={
-                  k.value !== null
-                    ? `${k.value.toLocaleString("ja-JP", { maximumFractionDigits: 2 })}${k.unit ? ` ${k.unit}` : ""}`
-                    : "—"
+                  k.isLoading
+                    ? "…"
+                    : k.value !== null
+                      ? `${k.value.toLocaleString("ja-JP", { maximumFractionDigits: 2 })}${k.unit ? ` ${k.unit}` : ""}`
+                      : "—"
                 }
                 chart={
-                  k.series.length >= 2 ? (
+                  k.isLoading ? (
+                    <ChartLoading height={84} />
+                  ) : k.series.length >= 2 ? (
                     <MiniLineChart
                       points={k.series}
                       unit={k.unit}
