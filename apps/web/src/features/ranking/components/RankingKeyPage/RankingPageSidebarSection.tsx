@@ -3,11 +3,10 @@ import { Suspense } from "react";
 import { SurfaceCard } from "@/components/surface";
 
 import {
-  RakutenItemsCard,
   SidebarPromoBanner,
   selectPromoBannerIndexForRanking,
 } from "@/features/ads";
-import { AffiliateAdSlot } from "@/features/ads/server";
+import { AffiliateAdSlot, RakutenItemsCard } from "@/features/ads/server";
 import type { AreaType } from "@/features/area";
 
 import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";

@@ -3,7 +3,7 @@ import { ExternalLink } from "lucide-react";
 import { getSurfaceCardClassName } from "@/components/surface";
 
 import { buildFurusatoNozeiUrl, getFurusatoNozeiLink } from "../constants/furusato-nozei";
-import { searchFurusatoItems } from "../lib/rakuten-api";
+import { readRakutenFurusatoFromR2 } from "../repositories/rakuten-snapshot";
 
 import { AdImpressionTracker } from "./AdImpressionTracker";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
@@ -25,8 +25,10 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
   const affiliateId = process.env.NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID;
   const areaPageUrl = buildFurusatoNozeiUrl(link.rakutenAreaSlug, affiliateId);
 
-  // API で返礼品を取得（APIキー未設定時は空配列）。県の代表返礼品で高意図検索 (0件なら県名のみに fallback)。
-  const items = await searchFurusatoItems(link.prefName, 4, link.signatureKeyword);
+  // ★ R2 snapshot を読む (実行時に楽天 API を叩かない)。日次 cron が焼く。
+  //   絞り込み条件 (代表返礼品 → 0 件なら県名のみ) は取得側 sync-rakuten-catalog.ts が持つ。
+  //   正典: repositories/rakuten-snapshot.ts
+  const items = await readRakutenFurusatoFromR2(areaCode);
   // 県別 CTR 計測用 ad_id (ad_id custom dimension 経由で県別のふるさと納税成果を追える)。
   const furusatoAdId = `furusato-${link.rakutenAreaSlug}`;
 
@@ -65,30 +67,25 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
 
         <div className="grid grid-cols-2 gap-2">
           {items.map((item) => {
-            const imageUrl =
-              item.mediumImageUrls[0]?.imageUrl ??
-              item.smallImageUrls[0]?.imageUrl;
-            const linkUrl = item.affiliateUrl ?? item.itemUrl;
-
             return (
               <TrackedAffiliateLink
-                key={item.itemUrl}
-                href={linkUrl}
+                key={item.url}
+                href={item.url}
                 category="furusato"
                 adId={furusatoAdId}
-                label={item.itemName}
+                label={item.name}
                 position="sidebar-item"
                 className={getSurfaceCardClassName({
                   interactive: true,
                   className: "flex flex-col overflow-hidden p-0",
                 })}
               >
-                {imageUrl && (
+                {item.image && (
                   <div className="aspect-square bg-muted flex items-center justify-center overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={imageUrl}
-                      alt={item.itemName}
+                      src={item.image}
+                      alt={item.name}
                       className="object-contain w-full h-full"
                       loading="lazy"
                     />
@@ -96,10 +93,10 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
                 )}
                 <div className="p-2">
                   <p className="text-[11px] leading-tight line-clamp-2 text-foreground">
-                    {item.itemName}
+                    {item.name}
                   </p>
                   <p className="text-xs font-bold text-red-600 mt-1">
-                    {item.itemPrice.toLocaleString("ja-JP")}円
+                    {item.price.toLocaleString("ja-JP")}円
                   </p>
                   {item.reviewCount > 0 && (
                     <p className="text-[10px] text-muted-foreground/70 mt-0.5">

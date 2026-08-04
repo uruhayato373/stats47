@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  # ★手動再デプロイ (2026-08-04 追加)。コード変更なしで buildId を更新したいときに使う。
+  #   例: R2 snapshot を新規に満たした直後。ISR は buildId 単位でキャッシュされるため、
+  #   再デプロイしないと「データが無かった頃の HTML」が最大 24h 残る
+  #   (purge-cdn は CDN のみで ISR には効かない → .claude/rules/nextjs-ssg-preservation.md)。
+  workflow_dispatch:
 
 permissions:
   contents: write

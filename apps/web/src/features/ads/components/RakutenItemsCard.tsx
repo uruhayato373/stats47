@@ -3,7 +3,7 @@ import { ExternalLink } from "lucide-react";
 import { getSurfaceCardClassName } from "@/components/surface";
 
 import { detectProductKeyword } from "../constants/product-keywords";
-import { searchRakutenItems } from "../lib/rakuten-api";
+import { readRakutenItemsFromR2 } from "../repositories/rakuten-snapshot";
 
 import { AdImpressionTracker } from "./AdImpressionTracker";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
@@ -30,11 +30,10 @@ export async function RakutenItemsCard({
   const keyword = detectProductKeyword(sourceText);
   if (!keyword) return null;
 
-  const items = await searchRakutenItems({
-    keyword: keyword.searchTerm,
-    hits: 4,
-    sort: "-reviewCount",
-  });
+  // ★ R2 snapshot を読む (実行時に楽天 API を叩かない)。日次 cron が焼く。
+  //   理由: 楽天の Expected QPS=1 に対し、deploy 後の warm-cache が sitemap 全 URL を
+  //   叩くため 646 ページ分がバーストしていた。正典: repositories/rakuten-snapshot.ts
+  const items = await readRakutenItemsFromR2(keyword.searchTerm);
   if (items.length === 0) return null;
 
   // 品目別 CTR を ad_id custom dimension で追えるようにする。
@@ -72,46 +71,40 @@ export async function RakutenItemsCard({
       </p>
 
       <div className="grid grid-cols-2 gap-2">
-        {items.map((item) => {
-          const imageUrl =
-            item.mediumImageUrls[0]?.imageUrl ?? item.smallImageUrls[0]?.imageUrl;
-          const linkUrl = item.affiliateUrl ?? item.itemUrl;
-
-          return (
-            <TrackedAffiliateLink
-              key={item.itemUrl}
-              href={linkUrl}
-              category="economy"
-              adId={adId}
-              label={item.itemName}
-              position={`${position}-item`}
-              className={getSurfaceCardClassName({
-                interactive: true,
-                className: "flex flex-col overflow-hidden p-0",
-              })}
-            >
-              {imageUrl && (
-                <div className="flex aspect-square items-center justify-center overflow-hidden bg-muted">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={imageUrl}
-                    alt={item.itemName}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              )}
-              <div className="p-2">
-                <p className="line-clamp-2 text-[11px] leading-tight text-foreground">
-                  {item.itemName}
-                </p>
-                <p className="mt-1 text-[11px] font-bold text-green-600">
-                  {item.itemPrice.toLocaleString()}円
-                </p>
+        {items.map((item) => (
+          <TrackedAffiliateLink
+            key={item.url}
+            href={item.url}
+            category="economy"
+            adId={adId}
+            label={item.name}
+            position={`${position}-item`}
+            className={getSurfaceCardClassName({
+              interactive: true,
+              className: "flex flex-col overflow-hidden p-0",
+            })}
+          >
+            {item.image && (
+              <div className="flex aspect-square items-center justify-center overflow-hidden bg-muted">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
               </div>
-            </TrackedAffiliateLink>
-          );
-        })}
+            )}
+            <div className="p-2">
+              <p className="line-clamp-2 text-[11px] leading-tight text-foreground">
+                {item.name}
+              </p>
+              <p className="mt-1 text-[11px] font-bold text-green-600">
+                {item.price.toLocaleString()}円
+              </p>
+            </div>
+          </TrackedAffiliateLink>
+        ))}
       </div>
     </div>
     </AdImpressionTracker>

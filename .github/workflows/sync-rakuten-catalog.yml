@@ -1,0 +1,77 @@
+name: 🛒 Sync Rakuten Catalog → R2
+
+# 楽天市場の商品・返礼品カタログを R2 snapshot に焼く日次 cron。
+#
+# なぜ事前取得か (2026-08-04):
+#   楽天に申告した Expected QPS は 1。一方 deploy-workers.yml の warm-cache は sitemap の
+#   全 URL を順に叩くため、デプロイのたびに ISR が総入れ替えになり 646 ページ分の楽天
+#   呼び出しがバーストしていた。429 で弾かれてもカードは [] に degrade して静かに消える
+#   だけで気づけない。ここで 1 QPS 以下でまとめて取得し、ページは R2 だけを読む。
+#
+# これが CI で回せるのは、楽天アプリの Allowed IP を 0.0.0.0/0 にしたため
+# (GitHub Actions ランナーの送信元 IP は動的で個別登録できない)。
+# 正典: .claude/rules/affiliate-ads-standards.md §12
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "先頭 N 件だけ取得 (動作確認用。空なら全件)"
+        required: false
+        type: string
+      dry_run:
+        description: "R2 に書かず件数だけ出す"
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    # 毎日 JST 04:00 (UTC 19:00)。deploy や他の cron と重ならない時間帯。
+    - cron: "0 19 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  # R2 push は publish-affiliate-ads / sync-snapshots と同じ group で直列化する
+  # (書き先 prefix は app/rakuten/ 専有だが、R2 書込 workflow を跨いだ二重実行を避ける慣例に合わせる)
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+  RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    # 全件 (品目 459 + 都道府県 47) を 1.2 秒間隔で回すと約 12 分。余裕を持たせる。
+    timeout-minutes: 40
+    steps:
+      # action は SHA ピン留めが必須 (audit-workflow-policy.cjs --strict)。既存 workflow と同じ pin に揃える。
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: 📦 Install
+        run: npm ci
+
+      - name: 🛒 Fetch → R2
+        env:
+          # 展開を env 経由にして、入力値がシェルに直接埋め込まれるのを避ける
+          INPUT_LIMIT: ${{ inputs.limit }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          # 配列で組み立てる (単純な文字列連結は shellcheck SC2086 になる)
+          ARGS=()
+          if [ -n "$INPUT_LIMIT" ]; then ARGS+=(--limit "$INPUT_LIMIT"); fi
+          if [ "$INPUT_DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
+          npx tsx apps/web/scripts/sync-rakuten-catalog.ts "${ARGS[@]}"
