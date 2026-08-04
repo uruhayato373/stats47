@@ -623,11 +623,33 @@ async function cmdCheckApproval(page: Page): Promise<void> {
   }
 
   // 参加中 (承認済み) プログラムの programId 集合を href から取得 (名前より確実)。
-  const partneredIds = new Set(
-    await page.$$eval("a[href*='programId=']", (as) =>
+  // ★ 2026-08-04: **全ページ巡回**に修正。以前は L614 の goto 1 回分 (既定ページサイズ 20 件)
+  //   しか見ておらず、実機の参加中 158 件に対し 1/8 しか照合できていなかった。承認済みでも
+  //   2 ページ目以降にある案件は applied のまま滞留する (降格はしないので誤昇格の害は無いが、
+  //   **承認の取りこぼしが累積する**。実際に 20 件を手動回収した)。
+  //   一覧は sortKey=APPROVED_DATE&sortOrder=DESC なので直近承認は 1 ページ目に載るが、
+  //   週次 cron が止まっていた期間の承認は後方ページへ流れる。
+  //   実測 (2026-08-04): pageSize=100 で p1=100 / p2=+58 / p3=+0 → 計 158 件。
+  const partneredIds = new Set<string>();
+  for (let pageNo = 1; pageNo <= 30; pageNo++) {
+    await page.goto(
+      `${A8.partneredListUrl}?pageNo=${pageNo}&pageSize=100&sortKey=APPROVED_DATE&sortOrder=DESC`,
+      { waitUntil: "domcontentloaded", timeout: 40000 },
+    );
+    await page.waitForTimeout(2500);
+    const before = partneredIds.size;
+    // `$$eval` は Playwright の DOM 取得 API (selector 一致要素へコールバックを適用) であって
+    // JavaScript の `eval()` ではない。ページ由来の文字列をコードとして実行してはいない。
+    const ids = await page.$$eval("a[href*='programId=']", (as) =>
       as.map((a) => (a.getAttribute("href")?.match(/programId=(s\d+)/) || [])[1]).filter(Boolean),
-    ),
-  );
+    );
+    for (const id of ids) if (id) partneredIds.add(id);
+    console.log(`  参加中 p${pageNo}: ID 累計 ${partneredIds.size} 件 (+${partneredIds.size - before})`);
+    // 新規 ID が増えなくなったら最終ページ (cards.length ではなく増分で判定する —
+    // 同じ programId が 1 行に複数リンクとして出るため件数では最終ページを誤判定する)。
+    if (partneredIds.size === before) break;
+    await page.waitForTimeout(1200);
+  }
   let approved = 0;
   for (const entry of applied) {
     cat = loadCatalog();

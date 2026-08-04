@@ -31,7 +31,32 @@ import {
   SiteAttributionError,
 } from "./lib/asp-browser.mjs";
 
+import {
+  buildIdScopes,
+  checkIdRowParity,
+  detectPhantomIds,
+  isPlaceholderName,
+  parseAfbBlocks,
+  pickIds,
+  zipNamesWithIds,
+} from "./lib/affiliate-status-core.mjs";
+
 const CATALOG = join(repoRoot(), ".claude/state/ads/affiliate-catalog.json");
+
+/**
+ * 指定 ASP について、台帳が既に持っている「ID → name」を返す。
+ * zipNamesWithIds の index 対応が正しいかを検証する材料に使う。
+ */
+function knownNamesByAsp(aspName) {
+  const cat = JSON.parse(readFileSync(CATALOG, "utf8"));
+  const out = {};
+  for (const p of Object.values(cat.programs ?? {})) {
+    const e = p?.asps?.[aspName];
+    const id = e?.programId ?? e?.promotionId ?? e?.pid ?? null;
+    if (id && p?.name && !isPlaceholderName(p.name)) out[id] = p.name;
+  }
+  return out;
+}
 
 function parseArgs() {
   const a = process.argv.slice(2);
@@ -74,7 +99,12 @@ async function checkAsp(name, root, log) {
       siteId: null,
       partnered: { ids: new Set(), text: "" },
       applying: { ids: new Set(), text: "" },
+      /** 実機一覧から取れた ID → プログラム名。--write で台帳の name 補完に使う。 */
+      liveNames: {},
+      /** 一覧行数と ID 数の乖離 (超集合の検知)。key ごとに記録する。 */
+      parity: {},
     };
+    const liveNames = out.liveNames;
     for (const [key, path] of [
       ["partnered", asp.partneredPath],
       ["applying", asp.applyingPath],
@@ -115,24 +145,26 @@ async function checkAsp(name, root, log) {
           //   余分な 3 件は提携中と申請中の**両方**に出るページ共通リンクで、うち 2 件が
           //   「台帳に無い実機の提携」として誤検出されていた)。config で一覧スコープを
           //   直接指定できるようにし、指定があればそれを最優先する。
-          const scopes = [
-            ...(asp.listScopeSelector ? [asp.listScopeSelector] : []),
-            ...(asp.rowSelector ? [`tr:has(${asp.rowSelector}) a[href]`] : []),
-            "a[href]",
-          ];
-          const re = new RegExp(asp.hrefIdPattern, "g");
+          const scopes = buildIdScopes(asp);
           for (const scope of scopes) {
             const hrefs = await page
               .$$eval(scope, (as) => as.map((a) => a.getAttribute("href") ?? ""))
               .catch(() => []);
             const b = ids.size;
-            for (const h of hrefs) {
-              for (const m of h.matchAll(re)) if (m[1]) ids.add(m[1]);
-            }
+            for (const id of pickIds(hrefs, asp.hrefIdPattern)) ids.add(id);
             if (ids.size > b) {
               if (scope === "a[href]" && scopes.length > 1) log(`  (${name}/${key}: 行スコープで ID 0 件 → ページ全体から抽出 = 超集合の可能性)`);
               break;
             }
+          }
+        }
+        // ★ afb: 一覧は 【PID:N】カテゴリ / 企業名 / プロモーション名 / 報酬 の 4 行ブロック。
+        //   ID だけ拾うと **プロモーション名が落ちて** カタログの name が
+        //   「【PID:14065】 専門転職（その他）」になる (vertical 判定不能の原因・2026-08-04)。
+        //   ブロック解析して pid → プロモーション名 を集め、--write で name を補完する。
+        if (asp.listItemPattern) {
+          for (const blk of parseAfbBlocks(t, asp.listItemPattern)) {
+            if (blk.pid && blk.name) liveNames[blk.pid] = blk.name;
           }
         }
         // ★ 一覧の実件数も出す。ID を出さない ASP では ids.size が常に 0 になり、
@@ -143,6 +175,32 @@ async function checkAsp(name, root, log) {
           : null;
         const rows = rowCount === null ? "一覧の件数を取得できず" : `一覧 ${rowCount} 件`;
         log(`  ${name}/${key} p${pageNo}: ${rows} / ID 累計 ${ids.size} 件 (SID ${site.actualSiteId ?? "-"})`);
+        // ★ 行数と ID 数が食い違えばスコープが一覧行に限定できていない (超集合 or 取りこぼし)。
+        //   1 ページ目だけ見る (2 ページ目以降は ids が累積するので比較できない)。
+        if (pageNo === 1) {
+          const parity = checkIdRowParity(rowCount, ids.size);
+          if (parity) {
+            out.parity[key] = parity;
+            if (!parity.ok) {
+              log(`  ⚠ ${name}/${key}: 一覧 ${parity.rowCount} 行 に対し ID ${parity.idCount} 件 (差 ${parity.diff})`);
+              log(`     → listScopeSelector が一覧行に限定できていない可能性 (超集合)。config を確認`);
+            }
+          }
+        }
+        // ★ もしも: 名前セルと促進リンクが同じ <tr> に無いため行単位で組めない。
+        //   DOM 出現順の index で対応付け、既知名で検証が通ったときだけ採る (捏造防止)。
+        if (asp.rowSelector && asp.hrefIdPattern) {
+          const names = await page
+            .$$eval(asp.rowSelector, (els) => els.map((e) => (e.textContent ?? "").replace(/\s+/g, " ").trim()))
+            .catch(() => []);
+          const scoped = await page
+            .$$eval(asp.listScopeSelector ?? "a[href]", (as) => as.map((a) => a.getAttribute("href") ?? ""))
+            .catch(() => []);
+          const pageIds = pickIds(scoped, asp.hrefIdPattern);
+          const zipped = zipNamesWithIds(names, pageIds, knownNamesByAsp(name));
+          if (zipped) Object.assign(liveNames, zipped);
+          else if (names.length > 0) log(`  (${name}/${key}: 名前と ID の index 対応が検証できず名前補完をスキップ)`);
+        }
         // 追加 ID が出なかった (= 最終ページ超過 or 同一内容) なら打ち切る
         if (pageNo > 1 && ids.size === before) break;
         if (rowCount !== null && rowCount === 0) break;
@@ -188,6 +246,23 @@ async function main() {
       failed[name] =
         e instanceof SiteAttributionError ? `サイト帰属 NG: ${e.message}` : String(e.message).slice(0, 150);
       log(`  ⚠️ ${name}: 取得できず (${failed[name]}) → この ASP は判定不能として扱う`);
+    }
+  }
+
+  // ── 幻ガード: 提携中と申請中の**両方**に出る ID を live 集合から除外する。
+  //   1 案件が同時に「提携中」かつ「申請中」であることは論理的にありえないので、両方に
+  //   出る ID は一覧項目ではなくページ共通リンク (バナー・おすすめ枠等)。
+  //   2026-08-04 実測: もしもで promotion_id=7630 / 7556 / 170 の 3 件が該当し、
+  //   うち 2 件を「台帳に無い実機の提携」として誤検出、1 件は過去の --write で
+  //   実在しないエントリ (moshimo-170) として台帳へ混入していた。
+  for (const [aspName, res] of Object.entries(live)) {
+    const phantoms = detectPhantomIds([...res.partnered.ids], [...res.applying.ids]);
+    if (phantoms.length === 0) continue;
+    log(`  ⚠ ${aspName}: 提携中と申請中の両方に出る ID ${phantoms.length} 件を除外 (${phantoms.join(", ")})`);
+    log(`     → 一覧行ではなくページ共通リンク。listScopeSelector を確認すること`);
+    for (const id of phantoms) {
+      res.partnered.ids.delete(id);
+      res.applying.ids.delete(id);
     }
   }
 
@@ -250,6 +325,37 @@ async function main() {
       console.log(`\n→ 反映するなら --write を付けて再実行 (既定は read-only)`);
     }
   }
+  // ── 名前の補完 (正遷移の有無と独立)
+  //   afb は 4 行ブロックのプロモーション名、もしもは index 対応で検証済みの名前を使う。
+  //   台帳の name が null / 「【PID:N】カテゴリ」形式のものだけ埋める (既存の名前は壊さない)。
+  //   name が無いと vertical を判定できず、意図軸ハブに載せられない (2026-08-04 に 12 件滞留)。
+  const named = [];
+  for (const [key, p] of Object.entries(catalog.programs ?? {})) {
+    if (!isPlaceholderName(p.name)) continue;
+    for (const [aspName, entry] of Object.entries(p.asps ?? {})) {
+      const id = idOf(entry);
+      const got = id ? live[aspName]?.liveNames?.[id] : null;
+      if (!got || isPlaceholderName(got)) continue;
+      named.push({ program: key, from: p.name ?? null, to: got });
+      if (opts.write) p.name = got;
+      break;
+    }
+  }
+  if (named.length > 0) {
+    console.log(`\n名前を補完${opts.write ? "" : "できる"} ${named.length} 件:`);
+    for (const n of named.slice(0, 20)) console.log(`  - ${n.program}: ${n.to}`);
+    if (named.length > 20) console.log(`  … 他 ${named.length - 20} 件`);
+    if (opts.write) {
+      const at = new Date().toISOString();
+      catalog.updatedAt = at;
+      catalog.verifiedAt = at.slice(0, 10);
+      writeFileSync(CATALOG, JSON.stringify(catalog, null, 2) + "\n", "utf-8");
+      console.log(`→ --write により name を補完しました (vertical は名前を見て別途判定)`);
+    } else {
+      console.log(`→ 補完するなら --write を付けて再実行`);
+    }
+  }
+
   if (review.length > 0) {
     console.log(`\n報告のみ (書き込まない) ${review.length} 件:`);
     for (const r of review) console.log(`  - ${r.program} / ${r.asp} (${r.catalog}, id=${r.id}): ${r.kind}`);

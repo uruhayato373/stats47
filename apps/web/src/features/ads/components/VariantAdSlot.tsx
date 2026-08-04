@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { AdImpressionTracker } from "./AdImpressionTracker";
 import { BannerAd } from "./BannerAd";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
@@ -119,7 +120,21 @@ export function VariantAdSlot({ variants, category, position }: VariantAdSlotPro
   }
 
   // テキスト variant
+  // ★ 2026-08-04: impression 計装を追加。banner variant は BannerAd 経由で計測されるのに
+  //   text variant はクリックしか送っておらず、**A/B の CTR 比較が構造的に歪んでいた**
+  //   (banner 側だけ分母がある状態)。同日に NativeAffiliateRow / FurusatoNozeiCard /
+  //   RakutenItemsCard で見つかったのと同じバグクラス。
+  //   正典: .claude/rules/analytics-event-standards.md
   return (
+    <AdImpressionTracker
+      category={category}
+      label={chosen.title}
+      position={position}
+      adId={chosen.id}
+      experimentId={chosen.experimentId}
+      variantId={chosen.variantId}
+      creativeSize={chosen.creativeSize}
+    >
     <div style={minHeight ? { minHeight } : undefined} className="flex flex-col gap-1">
       <span className="self-start rounded bg-slate-200 px-1.5 py-0.5 text-xs font-bold text-slate-500">
         PR
@@ -138,5 +153,6 @@ export function VariantAdSlot({ variants, category, position }: VariantAdSlotPro
         {chosen.title}
       </TrackedAffiliateLink>
     </div>
+    </AdImpressionTracker>
   );
 }
