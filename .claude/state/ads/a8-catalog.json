@@ -831,7 +831,7 @@
       "a8mat": null,
       "vertical": "labor",
       "score": 0.6004950000000001,
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -846,6 +846,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:36:18.219Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.852Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ],
       "rewardYen": 12500,
@@ -8542,7 +8548,7 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.472685,
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -8553,6 +8559,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:37:49.003Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.857Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ],
       "rewardYen": 7407,
@@ -8591,7 +8603,7 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.44000000000000006,
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -8602,6 +8614,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:38:07.926Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.857Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ],
       "rewardYen": 15000,
@@ -8660,7 +8678,7 @@
       "a8mat": null,
       "vertical": "health",
       "score": 0.44000000000000006,
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -8671,6 +8689,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:38:35.725Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.857Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ],
       "rewardYen": 10000,
@@ -8825,7 +8849,7 @@
       "a8mat": null,
       "vertical": "health",
       "score": 0.43300000000000005,
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -8836,6 +8860,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:39:50.488Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ],
       "rewardYen": 6000,
@@ -8875,7 +8905,7 @@
       "a8mat": null,
       "vertical": "labor",
       "score": 0.42336000000000007,
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -8886,6 +8916,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:40:18.282Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ],
       "rewardYen": 8000,
@@ -8900,7 +8936,7 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.41999,
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -8911,6 +8947,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:40:27.684Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ],
       "rewardYen": 7000,
@@ -8997,7 +9039,7 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.4185000000000001,
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9008,6 +9050,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:40:37.004Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ],
       "rewardYen": 9000,
@@ -9120,7 +9168,7 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.3600000000000001,
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9131,6 +9179,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:42:01.131Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ],
       "rewardYen": 8000,
@@ -9166,7 +9220,7 @@
       "a8mat": null,
       "vertical": "population",
       "score": 0.3530000000000001,
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9177,6 +9231,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:42:19.612Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ],
       "rewardYen": 4000,
@@ -9191,7 +9251,7 @@
       "a8mat": null,
       "vertical": "health",
       "score": 0.3520000000000001,
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9202,6 +9262,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:42:28.825Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ],
       "rewardRatePct": 20,
@@ -9403,7 +9469,7 @@
       "epcYen": 218,
       "confirmRatePct": 13.33,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9414,6 +9480,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:36:55.632Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.857Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ]
     },
@@ -9478,7 +9550,7 @@
       "rewardYen": 15000,
       "epcYen": 102,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9489,6 +9561,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:37:20.521Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.857Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ]
     },
@@ -9504,7 +9582,7 @@
       "epcYen": 529,
       "confirmRatePct": 48.18,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9515,6 +9593,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:37:39.642Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.857Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ]
     },
@@ -9528,7 +9612,7 @@
       "score": 0.44000000000000006,
       "rewardYen": 35000,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9539,6 +9623,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:38:54.380Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ]
     },
@@ -9600,7 +9690,7 @@
       "score": 0.44000000000000006,
       "rewardYen": 15000,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9611,6 +9701,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:39:22.832Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ]
     },
@@ -9650,7 +9746,7 @@
       "epcYen": 91,
       "confirmRatePct": 59.16,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9661,6 +9757,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:40:09.042Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ]
     },
@@ -9752,7 +9854,7 @@
       "epcYen": 19,
       "confirmRatePct": 67.24,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9763,6 +9865,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:41:14.377Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ]
     },
@@ -9778,7 +9886,7 @@
       "epcYen": 43,
       "confirmRatePct": 60,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9789,6 +9897,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:41:42.566Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ]
     },
@@ -9802,7 +9916,7 @@
       "score": 0.43199999999999994,
       "rewardYen": 7300,
       "rewardType": "fixed",
-      "status": "applied",
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -9813,6 +9927,12 @@
           "from": "candidate",
           "to": "applied",
           "at": "2026-07-28T11:39:59.758Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-08-04T00:33:09.858Z",
+          "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
       ]
     },
@@ -10000,5 +10120,5 @@
       }
     }
   },
-  "updatedAt": "2026-08-01T22:00:29.587Z"
+  "updatedAt": "2026-08-04T00:33:09.858Z"
 }

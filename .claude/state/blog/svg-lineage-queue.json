@@ -1,15 +1,15 @@
 {
-  "total": 1045,
+  "total": 1049,
   "byStatus": {
-    "both": 916,
+    "both": 925,
     "jsonOnly": 0,
-    "neither": 129
+    "neither": 124
   },
   "byMethod": {
-    "manual": 44,
-    "done": 916,
-    "ssot-restore-new": 58,
-    "ssot-restore": 27
+    "manual": 43,
+    "done": 925,
+    "ssot-restore-new": 55,
+    "ssot-restore": 26
   },
   "entries": [
     {
@@ -1438,6 +1438,33 @@
       "slug": "dog-registration-prefecture-gap",
       "base": "dog-registration-count-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "base": "dual-income-household-ratio-vs-floor-area-per-dwelling-owner-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "base": "floor-area-per-dwelling-owner-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-floor-area-per-dwelling-owner",
+      "base": "dual-income-household-ratio--floor-area-per-dwelling-owner-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -4786,28 +4813,19 @@
       "slug": "library-museum-cultural-capital",
       "base": "museum-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "library-museum-cultural-capital",
-      "base": "library-vs-hobby-scatter",
-      "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
-    },
-    {
-      "slug": "library-museum-cultural-capital",
-      "base": "cultural-facility-stacked",
-      "chartType": "stacked",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "base": "theater-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "library-museum-cultural-capital",
@@ -6125,21 +6143,12 @@
     },
     {
       "slug": "overseas-travel-gap",
-      "base": "overseas-travel-gender",
-      "chartType": "unknown",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "manual"
-    },
-    {
-      "slug": "overseas-travel-gap",
       "base": "income-vs-travel-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "overseas-travel-gap",
@@ -8467,6 +8476,33 @@
       "slug": "tuna-consumption-quantity",
       "base": "tuna-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-annual-new-inpatients-general",
+      "base": "tuna-consumption-quantity-vs-annual-new-inpatients-general-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-annual-new-inpatients-general",
+      "base": "annual-new-inpatients-general-hospital-per-100k-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-annual-new-inpatients-general",
+      "base": "tuna-consumption-quantity--annual-new-inpatients-general-hospital-per-100k-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
