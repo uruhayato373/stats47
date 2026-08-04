@@ -30,6 +30,8 @@ on:
 
 permissions:
   contents: read
+  # 失敗を Issue で通知するため (cloudflare-usage-daily 等と同じ規約)
+  issues: write
 
 concurrency:
   # R2 push は publish-affiliate-ads / sync-snapshots と同じ group で直列化する
@@ -87,3 +89,51 @@ jobs:
       - name: 🚀 Push → R2
         if: ${{ inputs.dry_run != true }}
         run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/rakuten
+
+      # ★失敗を検知できるようにする。この cron が黙って死ぬと R2 が古いまま配信され続け、
+      #   楽天アプリの期限切れ (2027-03-07) / スコープ変更 / Allowed IP 変更に気づけない。
+      #   カードは [] に degrade して静かに消えるだけなので、通知が無いと発覚しない。
+      - name: 🚨 Open alert issue on failure
+        if: failure() && github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE="🛒 楽天カタログ同期が失敗しています"
+          BODY=$(cat <<EOF
+          日次 cron \`sync-rakuten-catalog.yml\` が失敗しました。
+
+          実行ログ: $RUN_URL
+
+          ## 放置した場合の影響
+          R2 (\`app/rakuten/\`) が更新されず、**古い商品・価格が配信され続けます**。
+          楽天カードは取得失敗時に静かに消える (fallback を持たない) ため、
+          サイトを見ても気づけません。
+
+          ## 確認順 (よくある原因)
+          1. 楽天アプリの **有効期限** (2027-03-07)
+          2. **API Access Scopes** の \`Rakuten Ichiba API\` チェック
+          3. **Allowed IP** が \`0.0.0.0/0\` のままか
+             (GitHub Actions の送信元 IP は動的なので特定 IP にすると全滅する)
+          4. \`RAKUTEN_APP_ID\` / \`RAKUTEN_ACCESS_KEY\` の GitHub Secrets
+
+          正典: \`.claude/rules/affiliate-ads-standards.md\` §12
+          EOF
+          )
+          EXISTING=$(gh issue list --state open --label rakuten-alert --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --label "rakuten-alert,auto-generated" --body "$BODY"
+          fi
+
+      - name: ✅ Close recovered alert
+        if: success() && github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label rakuten-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "楽天カタログ同期が復旧したため自動 Close します。"
+            done

@@ -27,6 +27,12 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
   `reverseCandidates` の `shared: true` は doboku-note と同一 A8 口座の共用案件で、EPC は口座横断の実績。
   stats47 単独の実力として扱わない。`suggestedRankingKeys` は候補であって適用ではない (ブランド適合は意味判断)。
 - **在庫整理・監査・dashboard** (`/affiliate-improvement`) — vertical カバレッジ / 在庫ゼロ軸 / サイズ逸脱 / 意図ミスマッチの検出と是正。ゼロ/手薄軸は `.claude/state/ads/inventory-latest.json` の `coverage` から読む (固定値を持たない)。
+- **楽天カタログ同期の所有** (`sync-rakuten-catalog.yml` 日次 cron) — 楽天の商品・返礼品を R2
+  (`app/rakuten/`) に焼く。**実行時に楽天 API を叩かない** (Expected QPS=1 に対し deploy 後の
+  warm-cache が sitemap 全 URL を叩くためバーストする)。失敗すると `rakuten-alert` ラベルの
+  Issue が起票される。**カードは取得失敗時に静かに消える**ので、サイトを見ても気づけない
+  — Issue が唯一の検知手段。原因の確認順は楽天アプリの有効期限 (2027-03-07) → Ichiba スコープ →
+  Allowed IP (`0.0.0.0/0` から変えない) → Secrets。正典: rules §12。
 - **規約 enforcement** — サイズ (`audit --check-size` + pre-commit) / vertical∈10軸 (export validation) / priority (意図適合) の遵守。legacy 一点物サイズの段階移行。
 - **計測ゲート・運用状態** — 集約 state `.claude/state/ads/affiliate-operations-latest.json` (`build-affiliate-operations-state.ts` が生成、週次 CI 自動更新) をアフィリエイト運用の現在地の入口にする。`measurementGate` (GA4 snapshot 鮮度 / custom dimension 有無) が blocked なら rules §6 の登録手順をユーザーに案内。freshness・coverage・推奨アクションはすべて決定的スクリプトが判定する (モデルは routing・期限計算をしない)。
 - **実験管理** (`/manage-affiliate-experiment`) — A/B の plan/start/observe/decide/close。registry (`.claude/state/ads/experiments.json`) に停止条件を事前固定し、判定 (collecting / ready-to-decide / inconclusive / invalid) はスクリプトに委ねる。**勝者の自動反映は禁止** (decide は人間へ提示まで)。

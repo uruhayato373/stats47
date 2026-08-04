@@ -52,6 +52,40 @@ export const rakutenFurusatoKey = (prefCode: string) => `app/rakuten/furusato/${
 
 const EMPTY: RakutenSnapshot = { generatedAt: new Date(0).toISOString(), items: [] };
 
+/** 取得スクリプトが焼く前の元データ (rakuten-api の RakutenItem と同形の必要部分)。 */
+interface RakutenApiItemLike {
+  itemName: string;
+  itemPrice: number;
+  itemUrl: string;
+  affiliateUrl?: string;
+  mediumImageUrls: { imageUrl: string }[];
+  smallImageUrls: { imageUrl: string }[];
+  reviewCount: number;
+  reviewAverage: number;
+}
+
+/**
+ * API レスポンスを snapshot 形へ削る。**取得スクリプトと配信で形がズレないよう
+ * ここを単一の実装とする** (sync 側に置くとテストできず、実際に落ちた)。
+ *
+ * url は **affiliateUrl を優先**する。itemUrl を使うとクリックが成果にならない。
+ */
+export function toSnapshotItems(items: RakutenApiItemLike[]): RakutenSnapshotItem[] {
+  return items.map((it) => ({
+    name: it.itemName,
+    url: it.affiliateUrl ?? it.itemUrl,
+    price: it.itemPrice,
+    image: it.mediumImageUrls[0]?.imageUrl ?? it.smallImageUrls[0]?.imageUrl ?? null,
+    reviewCount: it.reviewCount,
+    reviewAverage: it.reviewAverage,
+  }));
+}
+
+/** 47 都道府県コード ("01000".."47000")。取得スクリプトの対象列挙に使う。 */
+export function allPrefCodes(): string[] {
+  return Array.from({ length: 47 }, (_, i) => `${String(i + 1).padStart(2, "0")}000`);
+}
+
 /**
  * key ごとに reader を作る (品目数が多いので都度生成する)。
  * module-level キャッシュは持たない (r2-storage-design.md)。miss を恒久キャッシュしないため。

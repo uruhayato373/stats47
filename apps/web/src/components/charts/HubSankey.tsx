@@ -31,17 +31,30 @@ interface Props {
   footer?: string;
   /** 県名ラベル用の左右余白(viewBox 単位)。長いラベル時に拡張 */
   labelGutter?: number;
+  /**
+   * 外枠と SVG 内テキストの扱い。
+   * - `card`(既定): 自前のカード枠 + SVG 内に title/subtitle/footer を描く
+   * - `bare`: 枠なし・title/subtitle/footer を描かない。`ChartPanel` の
+   *   ヘッダー/フッターに委ねる場合に使う(見出しと出典の二重表示を避ける)
+   */
+  chrome?: "card" | "bare";
+  /**
+   * ノード列に使う viewBox 上の高さ。小さくすると縦横比が横長になる。
+   * 2 カラムに並べる場合は他チャートと縦横比を揃えるため小さくする。
+   */
+  usableHeight?: number;
 }
 
 const VIEW_W = 1000;
-const PAD_TOP = 70;
-const PAD_BOT = 44;
+/** card: SVG 内 title/subtitle の分だけ上を空ける。bare: 中央ノードのラベル 2 行分だけ */
+const PAD_TOP = { card: 70, bare: 40 } as const;
+const PAD_BOT = { card: 44, bare: 16 } as const;
 const NODE_W = 14;
 const FOCUS_W = 40;
 const FONT = 15;
 const NODE_GAP = 6;
 const LABEL_ADV = FONT + 3;
-const USABLE_H = 616;
+const DEFAULT_USABLE_H = 616;
 
 function ribbonPath(
   x0: number,
@@ -95,7 +108,11 @@ function buildHubModel(
   leftNodes: HubNode[],
   rightNodes: HubNode[],
   labelGutter: number,
+  chrome: "card" | "bare",
+  usableH: number,
 ): HubModel {
+  const padTop = PAD_TOP[chrome];
+  const padBot = PAD_BOT[chrome];
   const xLeftNode = labelGutter;
   const xRightNode = VIEW_W - labelGutter - NODE_W;
   const xFocusLeft = Math.round(VIEW_W / 2 - FOCUS_W / 2);
@@ -109,19 +126,19 @@ function buildHubModel(
     Math.max(colHeight(leftNodes, s), colHeight(rightNodes, s), maxTotal * s);
 
   let lo = 0;
-  let hi = USABLE_H / maxTotal;
+  let hi = usableH / maxTotal;
   for (let i = 0; i < 50; i++) {
     const mid = (lo + hi) / 2;
-    if (colMaxAt(mid) > USABLE_H) hi = mid;
+    if (colMaxAt(mid) > usableH) hi = mid;
     else lo = mid;
   }
   const scale = lo;
   const colMaxH = colMaxAt(scale);
-  const viewH = PAD_TOP + colMaxH + PAD_BOT;
+  const viewH = padTop + colMaxH + padBot;
 
   const layout = (nodes: HubNode[], xNode: number, isLeft: boolean): LaidNode[] => {
     const colH = colHeight(nodes, scale);
-    let y = PAD_TOP + (colMaxH - colH) / 2;
+    let y = padTop + (colMaxH - colH) / 2;
     return nodes.map((n) => {
       const h = n.value * scale;
       const laid: LaidNode = { ...n, y, h, xr: isLeft ? xNode + NODE_W : xNode };
@@ -133,7 +150,7 @@ function buildHubModel(
   const right = layout(rightNodes, xRightNode, false);
 
   const focusH = maxTotal * scale;
-  const focusTop = PAD_TOP + (colMaxH - focusH) / 2;
+  const focusTop = padTop + (colMaxH - focusH) / 2;
 
   // リボンは焦点辺に実数幅で積む(累積オフセットは reduce で持つ)
   const inStart = focusTop + (focusH - totalLeft * scale) / 2;
@@ -178,39 +195,50 @@ export function HubSankey({
   formatValue,
   footer,
   labelGutter = 152,
+  chrome = "card",
+  usableHeight = DEFAULT_USABLE_H,
 }: Props) {
   const model = useMemo(
-    () => buildHubModel(leftNodes, rightNodes, labelGutter),
-    [leftNodes, rightNodes, labelGutter],
+    () => buildHubModel(leftNodes, rightNodes, labelGutter, chrome, usableHeight),
+    [leftNodes, rightNodes, labelGutter, chrome, usableHeight],
   );
+  const bare = chrome === "bare";
 
   return (
-    <div className="w-full overflow-hidden rounded-none border bg-card">
+    <div
+      className={
+        bare ? "w-full" : "w-full overflow-hidden rounded-none border bg-card"
+      }
+    >
       <svg
         viewBox={`0 0 ${VIEW_W} ${model.viewH}`}
         className="h-auto w-full"
         role="img"
         aria-label={title}
       >
-        <text
-          x={VIEW_W / 2}
-          y={30}
-          textAnchor="middle"
-          fontSize={22}
-          fontWeight={700}
-          className="fill-slate-900 dark:fill-slate-100"
-        >
-          {title}
-        </text>
-        <text
-          x={VIEW_W / 2}
-          y={52}
-          textAnchor="middle"
-          fontSize={13}
-          className="fill-slate-500 dark:fill-slate-400"
-        >
-          {subtitle}
-        </text>
+        {!bare && (
+          <>
+            <text
+              x={VIEW_W / 2}
+              y={30}
+              textAnchor="middle"
+              fontSize={22}
+              fontWeight={700}
+              className="fill-slate-900 dark:fill-slate-100"
+            >
+              {title}
+            </text>
+            <text
+              x={VIEW_W / 2}
+              y={52}
+              textAnchor="middle"
+              fontSize={13}
+              className="fill-slate-500 dark:fill-slate-400"
+            >
+              {subtitle}
+            </text>
+          </>
+        )}
 
         {model.leftRibbons.map((d, i) => (
           <path key={`lr-${i}`} d={d} fill={leftColor} fillOpacity={0.4} />
@@ -298,7 +326,7 @@ export function HubSankey({
           </g>
         ))}
 
-        {footer && (
+        {footer && !bare && (
           <text
             x={VIEW_W / 2}
             y={model.viewH - 16}

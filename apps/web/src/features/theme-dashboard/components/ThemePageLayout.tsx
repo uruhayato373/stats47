@@ -1,3 +1,5 @@
+import { type ReactNode } from "react";
+
 import Link from "next/link";
 
 import {
@@ -9,6 +11,7 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
+import { PageShell } from "@/components/layout";
 import { THEME_HEROES } from "@/components/layout/page-heroes";
 import { loadPageComponents } from "@/components/stat-charts/server";
 import { prefetchThemeKpiData } from "@/components/stat-charts/services/prefetch-theme-kpi";
@@ -24,7 +27,10 @@ import { resolveAffiliateBanners, resolveAffiliateBannersByVertical } from "@/fe
 
 import { HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
 
-import { THEME_SECTION_REGISTRY } from "../config/theme-section-registry";
+import {
+  HALF_WIDTH_SECTIONS,
+  THEME_SECTION_REGISTRY,
+} from "../config/theme-section-registry";
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
@@ -36,6 +42,7 @@ import { ThemeHero } from "./ThemeHero";
 import { ThemeIndicatorCatalogSection } from "./ThemeIndicatorCatalogSection";
 import { ThemePrefectureProvider } from "./ThemePrefectureContext";
 import { ThemeRelatedArticles } from "./ThemeRelatedArticles";
+import { ThemeSideNav } from "./ThemeSideNav";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 import type { ThemePageData } from "../lib/load-theme-data";
@@ -46,15 +53,24 @@ interface Props {
   data: ThemePageData;
   /** エリアページ経由時の都道府県コード（5桁）と名称 */
   areaContext?: { areaCode: string; areaName: string };
+  /**
+   * パンくず直下に差し込むページ固有のコントロール
+   * （local-finance/cities の「都道府県 / 市区町村」切替など）。
+   */
+  toolbar?: ReactNode;
 }
 
 /**
  * テーマダッシュボードの共通レイアウト
  *
- * Breadcrumb + ヘッダー + ThemeDashboardClient を配置。
+ * `PageShell`（左レール = ThemeSideNav）+ Breadcrumb + ヘッダー + ThemeDashboardClient。
  * chart_definitions から DB 管理チャートを取得してクライアントに渡す。
+ *
+ * ★Shell を本コンポーネントが持つ理由: 左レールの都道府県セレクタが
+ * `ThemePrefectureProvider` の内側に無いと動かないため、Provider → PageShell(leftRail) の
+ * 入れ子をここで固定する。呼び出し側の page.tsx は PageShell を重ねない。
  */
-export async function ThemePageLayout({ theme, data, areaContext }: Props) {
+export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Props) {
   const pageCharts = await loadPageComponents("theme", theme.themeKey);
   const kpiDataByArea = await prefetchThemeKpiData(pageCharts);
   const breadcrumbData = generateThemeBreadcrumbStructuredData(theme);
@@ -80,6 +96,15 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
     <ThemePrefectureProvider
       initialAreaCode={areaContext?.areaCode ?? null}
       initialAreaName={areaContext?.areaName ?? null}
+    >
+    <PageShell
+      leftRail={
+        <ThemeSideNav
+          currentThemeKey={theme.themeKey}
+          areaContext={areaContext ? { areaCode: areaContext.areaCode } : undefined}
+        />
+      }
+      leftRailNarrowBehavior="hide"
     >
     <div className="text-foreground">
       <script
@@ -124,12 +149,16 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         </BreadcrumbList>
       </Breadcrumb>
 
-      {/* テーマ切替（旧常設左レール ThemeSidebar の代替。パンくず直後・H1/hero の前）。
+      {toolbar}
+
+      {/* 狭幅（xl 未満）のテーマ切替。xl+ は左レール ThemeSideNav が担うので隠す。
           areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
-      <ThemeSwitcher
-        currentThemeKey={theme.themeKey}
-        areaContext={areaContext ? { areaCode: areaContext.areaCode } : undefined}
-      />
+      <div className="xl:hidden">
+        <ThemeSwitcher
+          currentThemeKey={theme.themeKey}
+          areaContext={areaContext ? { areaCode: areaContext.areaCode } : undefined}
+        />
+      </div>
 
       {/* エリアページ経由時の視点バナー */}
       {areaContext && (
@@ -163,27 +192,51 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
       <InContentAdSlot slot={HUB_INCONTENT} />
 
       {/*
-        埋め込み GIS セクション (人口移動 Sankey / 高速道路タイムライン / 駅乗降 /
-        過疎×医療 / 日照地図)。定義は all-themes.ts の EMBEDDED_SECTIONS。
+        埋め込み section。定義は all-themes.ts の EMBEDDED_SECTIONS、実体は
+        THEME_SECTION_REGISTRY。半幅 (フロー 2 種 = 人口移動 / 通勤) は 2 カラム grid、
+        全幅 (高速道路タイムライン / 駅乗降 / 過疎×医療 / 日照地図) は 1 段ずつ。
         hideMap (地図タブ非表示) とは独立に描画する — カード主役レイアウトのまま
-        主題深掘りの GIS 可視化を復活 (2026-07-04)。
+        主題深掘りの可視化を出す (2026-07-04)。
+        registry に無いキーは描画できないので落とすが、typo が無言で消えないよう
+        all-themes.test.ts が「embeddedSections ⊆ registry」を固定している。
       */}
-      {theme.embeddedSections?.map((sectionKey) => {
-        const Section = THEME_SECTION_REGISTRY[sectionKey];
-        if (!Section) return null;
-        return (
-          <div key={sectionKey} className="mt-8">
-            <Section />
-          </div>
+      {(() => {
+        const keys = (theme.embeddedSections ?? []).filter(
+          (k) => THEME_SECTION_REGISTRY[k],
         );
-      })}
+        if (keys.length === 0) return null;
+        const halfCandidates = keys.filter((k) => HALF_WIDTH_SECTIONS.has(k));
+        // 半幅が 1 件だけだと 2 カラムの右半分が空くので全幅に戻す
+        const half = halfCandidates.length >= 2 ? halfCandidates : [];
+        const full = keys.filter((k) => !half.includes(k));
+        return (
+          <>
+            {half.length > 0 && (
+              <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
+                {half.map((key) => {
+                  const Section = THEME_SECTION_REGISTRY[key];
+                  return <Section key={key} />;
+                })}
+              </div>
+            )}
+            {full.map((key) => {
+              const Section = THEME_SECTION_REGISTRY[key];
+              return (
+                <div key={key} className="mt-8">
+                  <Section />
+                </div>
+              );
+            })}
+          </>
+        );
+      })()}
 
       {/* このテーマの全指標 (context 指標・選定根拠を含む完全一覧) */}
       <ThemeIndicatorCatalogSection themeKey={theme.themeKey} />
 
       {/*
         広告: ダッシュボード読了後・関連記事の前。生 AdSenseAd から slot 部品へ寄せ、
-        18 テーマ全ページでラベル表記と未発行時の非描画を揃える (2026-07-29)。
+        全テーマページでラベル表記と未発行時の非描画を揃える (2026-07-29)。
       */}
       <InContentAdSlot slot={THEMES_CONTENT} />
 
@@ -226,6 +279,7 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         <ThemeRelatedArticles tagKeys={theme.relatedArticleTagKeys} />
       )}
     </div>
+    </PageShell>
     </ThemePrefectureProvider>
   );
 }

@@ -28,3 +28,15 @@ export const THEME_SECTION_REGISTRY: Record<string, ComponentType> = {
   "depopulation-medical": ThemeDepopulationMedicalSection,
   "sunshine-map": ThemeSunshineMapSection,
 };
+
+/**
+ * 半幅 (lg 以上で 2 カラム) に並べてよい section。
+ *
+ * フロー 2 種は `ChartPanel` 化して他のテーマチャートと同じ縦横比に揃えたので、
+ * 同じ 2 カラム grid に載せる (2026-08-04)。地図系 (highway / station-passengers /
+ * depopulation-medical / sunshine-map) は全国地図が主役で半幅にすると読めないため全幅のまま。
+ */
+export const HALF_WIDTH_SECTIONS = new Set<string>([
+  "migration-flow",
+  "commute-flow",
+]);

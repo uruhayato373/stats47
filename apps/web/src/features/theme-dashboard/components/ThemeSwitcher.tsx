@@ -53,9 +53,14 @@ interface Props {
 /**
  * テーマ詳細ページ上部のコンパクトなテーマ切替コントロール。
  *
- * 旧 `ThemeSidebar`（常設左レール・23 テーマ縦並び）を廃止し、本文を全幅化した
- * 代替。`ThemePageLayout`（動的テーマ / 市区町村財政 / area 経由）で共有し、bespoke
- * な `/themes/local-finance` はページ上部に個別配置する。
+ * **xl 未満 (左レール非表示) 専用の狭幅代替**。xl 以上ではテーマ切替は左レール
+ * `ThemeSideNav` が担うので、呼び出し側が `xl:hidden` で包む
+ * (`ThemePageLayout` / bespoke な `/themes/local-finance`)。
+ *
+ * 経緯: 2026-06 に常設左レール `ThemeSidebar` を廃止して本コンポーネントが唯一の切替 UI に
+ * なったが、2026-08-04 に「ページ内容を切り替えるページ内ナビ」として左レールを復活させた
+ * (正典: `.claude/rules/ui-components.md` / `.claude/design-system/prohibited.md` の例外節)。
+ *
  * 遷移は `@stats47/components` の `Select` + `useRouter().push()`。現在値は props を正とし
  * ローカル state で二重管理しない。
  */
