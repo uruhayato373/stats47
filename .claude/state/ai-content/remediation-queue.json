@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-08-03T01:13:18.835Z",
+  "generatedAt": "2026-08-04T00:36:05.964Z",
   "gscSnapshot": "2026-W31",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2176,
-    "done": 208,
-    "needsRegen": 1968,
+    "done": 209,
+    "needsRegen": 1967,
     "needsByReason": {
-      "incomplete": 1682,
+      "incomplete": 1681,
       "missing": 221,
       "blocker": 65
     },
-    "doneImpressions": 28039,
-    "needsImpressions": 10870,
+    "doneImpressions": 28151,
+    "needsImpressions": 10758,
     "opusReviewTier": 30
   },
   "entries": [
@@ -866,15 +866,15 @@
       "impressions": 112,
       "clicks": 4,
       "position": 7.3,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "causal-insights",
+        "length-short"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Mon, 03 Aug 2026 01:14:32 GMT",
+      "updatedAt": "2026-08-03T00:30:00.000Z"
     },
     {
       "rankingKey": "soy-sauce-consumption-expenditure",
@@ -1802,7 +1802,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "wind-power-turbine-count",
