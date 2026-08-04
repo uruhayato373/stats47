@@ -23,7 +23,7 @@ import dotenv from "dotenv";
 import { saveToR2 } from "@stats47/r2-storage/server";
 
 import { RUNTIME_PRODUCT_KEYWORDS } from "../src/config/runtime-metric-summaries.generated";
-import { FURUSATO_NOZEI_LINKS } from "../src/features/ads/constants/furusato-nozei";
+import { getFurusatoNozeiLink } from "../src/features/ads/constants/furusato-nozei";
 import {
   FURUSATO_NOZEI_GENRE_ID,
   searchRakutenItems,
@@ -85,7 +85,12 @@ async function main() {
 
   const generatedAt = new Date().toISOString();
   const keywords = LIMIT > 0 ? RUNTIME_PRODUCT_KEYWORDS.slice(0, LIMIT) : RUNTIME_PRODUCT_KEYWORDS;
-  const prefs = LIMIT > 0 ? FURUSATO_NOZEI_LINKS.slice(0, LIMIT) : FURUSATO_NOZEI_LINKS;
+  // 県一覧は公開 API 経由で組み立てる (FURUSATO_NOZEI_LINKS は module 内定数で export されていない)。
+  // getFurusatoNozeiLink は signatureKeyword も付けて返すため、カード側と同じ絞り込み条件になる。
+  const allPrefs = Array.from({ length: 47 }, (_, i) =>
+    getFurusatoNozeiLink(`${String(i + 1).padStart(2, "0")}000`),
+  ).filter((l): l is NonNullable<typeof l> => l !== null);
+  const prefs = LIMIT > 0 ? allPrefs.slice(0, LIMIT) : allPrefs;
 
   console.log(`品目 ${keywords.length} / 都道府県 ${prefs.length}${DRY_RUN ? " (dry-run)" : ""}`);
   console.log(
