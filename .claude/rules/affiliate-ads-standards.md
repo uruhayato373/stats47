@@ -475,9 +475,18 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 > | env | `RAKUTEN_APP_ID` (Application ID=UUID) / `RAKUTEN_ACCESS_KEY` (Access Key=秘匿値) |
 > | 応答 | `Items` (大文字)。`formatVersion=2` で要素フラット。**画像は `string[]`** → `normalizeRakutenItems` が `{imageUrl}[]` に揃える |
 >
+> **★配信は R2 snapshot 経由。実行時に楽天 API を叩かない。**
+> 楽天の Expected QPS は **1** だが、`deploy-workers.yml` の warm-cache が sitemap の全 URL を
+> 順に叩くため、デプロイのたびに ISR が総入れ替えになり **646 ページ分の呼び出しがバースト**する。
+> 429 で弾かれてもカードは `[]` に degrade して静かに消えるだけで気づけない。
+> 日次 cron `sync-rakuten-catalog.yml` が 1 QPS 以下で全品目を取得し、
+> `app/rakuten/items/<品目>.json` / `app/rakuten/furusato/<県コード>.json` に焼く。
+> ページは `repositories/rakuten-snapshot.ts` の reader で R2 だけを読む
+> (鮮度は旧 ISR 24h と同等)。**コンポーネントから `searchRakutenItems` を直接呼ばないこと。**
+>
 > **★Allowed IP を `0.0.0.0/0` から変更しないこと。** 楽天アプリの Allowed IP は必須項目だが、
-> **Cloudflare Workers の送信元 IP は動的**で個別登録できない。特定 IP に戻すと本番の全ページで
-> 楽天カードが消える (403 `CLIENT_IP_NOT_ALLOWED`)。アクセス制御は accessKey が担う。
+> **GitHub Actions ランナーの送信元 IP は動的**で個別登録できない。特定 IP に戻すと cron が
+> 403 `CLIENT_IP_NOT_ALLOWED` で全滅し、R2 が更新されなくなる。アクセス制御は accessKey が担う。
 > **API Access Scopes の `Rakuten Ichiba API` チェックも必須** (外すと同様に全滅する)。
 > アプリの有効期限は **2027-03-07**。失効時も同じ症状になる。
 >

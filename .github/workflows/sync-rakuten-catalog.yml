@@ -1,0 +1,69 @@
+name: 🛒 Sync Rakuten Catalog → R2
+
+# 楽天市場の商品・返礼品カタログを R2 snapshot に焼く日次 cron。
+#
+# なぜ事前取得か (2026-08-04):
+#   楽天に申告した Expected QPS は 1。一方 deploy-workers.yml の warm-cache は sitemap の
+#   全 URL を順に叩くため、デプロイのたびに ISR が総入れ替えになり 646 ページ分の楽天
+#   呼び出しがバーストしていた。429 で弾かれてもカードは [] に degrade して静かに消える
+#   だけで気づけない。ここで 1 QPS 以下でまとめて取得し、ページは R2 だけを読む。
+#
+# これが CI で回せるのは、楽天アプリの Allowed IP を 0.0.0.0/0 にしたため
+# (GitHub Actions ランナーの送信元 IP は動的で個別登録できない)。
+# 正典: .claude/rules/affiliate-ads-standards.md §12
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "先頭 N 件だけ取得 (動作確認用。空なら全件)"
+        required: false
+        type: string
+      dry_run:
+        description: "R2 に書かず件数だけ出す"
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    # 毎日 JST 04:00 (UTC 19:00)。deploy や他の cron と重ならない時間帯。
+    - cron: "0 19 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rakuten-catalog
+  cancel-in-progress: false
+
+env:
+  RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+  RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    # 全件 (品目 459 + 都道府県 47) を 1.2 秒間隔で回すと約 12 分。余裕を持たせる。
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: 📦 Install
+        run: npm ci
+
+      - name: 🛒 Fetch → R2
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ inputs.limit }}"; fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          npx tsx apps/web/scripts/sync-rakuten-catalog.ts $ARGS
