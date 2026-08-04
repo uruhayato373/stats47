@@ -224,3 +224,47 @@ test("missing fixed directory, forbidden nested archive and malformed improvemen
   assert.ok(codes.has("DG015"));
   assert.ok(codes.has("DG049"));
 });
+
+// ── DG003: mirror (AGENTS.md) の同一性判定 ──────────────────────────
+// Windows の core.symlinks=false なチェックアウトでは git が symlink を
+// 「リンク先パス 1 行の通常ファイル」として展開する。これを誤検知すると
+// Windows から文書を触るたびに DG003 が上がり続ける (2026-08-04 実測)。
+
+test("materialized symlink (Windows checkout) is accepted as mirror", (t) => {
+  const { root, config } = fixture(t);
+  const mirror = path.join(root, "AGENTS.md");
+  fs.rmSync(mirror, { force: true });
+  fs.writeFileSync(mirror, "CLAUDE.md", "utf8"); // git が symlink を展開した形
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.equal(
+    report.errors.filter((item) => item.code === "DG003").length,
+    0,
+    "実体が canonical に解決するので同一とみなす",
+  );
+});
+
+test("drifted mirror copy is still rejected", (t) => {
+  const { root, config } = fixture(t);
+  const mirror = path.join(root, "AGENTS.md");
+  fs.rmSync(mirror, { force: true });
+  fs.writeFileSync(mirror, "shared instructions\nSTALE COPY\n", "utf8");
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.equal(
+    report.errors.filter((item) => item.code === "DG003").length,
+    1,
+    "本物のドリフトは従来どおり検出する",
+  );
+});
+
+test("mirror pointing somewhere other than canonical is rejected", (t) => {
+  const { root, config } = fixture(t);
+  const mirror = path.join(root, "AGENTS.md");
+  fs.rmSync(mirror, { force: true });
+  fs.writeFileSync(mirror, "docs/INDEX.md", "utf8"); // 解決するが canonical ではない
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.equal(
+    report.errors.filter((item) => item.code === "DG003").length,
+    1,
+    "canonical 以外を指すパスは通さない",
+  );
+});
