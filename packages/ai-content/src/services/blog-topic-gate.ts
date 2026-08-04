@@ -19,6 +19,14 @@
  * 2. **接地したデータそのもの** — 記事が引用する行を直接見る。県の重複・47 県から外れた件数・
  *    非有限値・全件同値を弾く。allowlist に載る前の新しい壊れ方はここで捕まる。
  *
+ * ## 正典側にも同じ検査がある (2026-08-04)
+ *
+ * shape-gate の `constant-value` / `zero-heavy` / `negative-count` が取り込み・週次監査・
+ * 全件走査で同じことを見る。ここは**記事が実際に引用する行**を見るので、正典が直る前でも
+ * 執筆を止められる (allowlist で降格された既知の壊れも 1. で弾く)。
+ * **判定を変えるときは shape-gate と合わせる。** 40 行未満の扱いだけ意図的に違う
+ * (ここは reject・ai-content 側は warn。理由は .claude/scripts/ai-content/lib/value-health.mjs)。
+ *
  * 正典: .claude/rules/metric-config-standards.md §分類軸は必ず 1 系列に絞る
  */
 

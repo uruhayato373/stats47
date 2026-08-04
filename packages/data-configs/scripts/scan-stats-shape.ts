@@ -30,6 +30,7 @@ import { writeFileSync } from "node:fs";
 import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly.js";
 import { listAllMetrics } from "../src/registry.js";
 import {
+  WARN_ONLY_CHECKS,
   classifyShape,
   summarizeShape,
   type ShapeCheck,
@@ -226,8 +227,9 @@ function emitAllowlist(withViolations: readonly ScanRow[]): void {
   const entries = withViolations
     .flatMap((r) => r.violations.map((v) => ({ key: r.key, v })))
     // coverage は縮小専用ラチェットで既定 warn なので allowlist に載せない
-    // (港湾・漁業のような正当な欠落を allowlist で埋め尽くさないため)
-    .filter(({ v }) => v.check !== "area-coverage")
+    // (港湾・漁業のような正当な欠落を allowlist で埋め尽くさないため)。
+    // WARN_ONLY_CHECKS も同様に何も fail させないので載せない (正典: shape-gate.ts)。
+    .filter(({ v }) => v.check !== "area-coverage" && !WARN_ONLY_CHECKS.includes(v.check))
     .sort((a, b) => b.v.severity - a.v.severity || a.key.localeCompare(b.key));
 
   const until = "2026-12-31";
