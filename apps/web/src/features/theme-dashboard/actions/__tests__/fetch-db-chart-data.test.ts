@@ -1,5 +1,6 @@
-import { fetchEstatData } from "@/components/stat-charts/server";
 import { describe, expect, it, vi, beforeEach } from "vitest";
+
+import { fetchEstatData } from "@/components/stat-charts/server";
 
 import { fetchDbChartDataAction } from "../fetch-db-chart-data";
 

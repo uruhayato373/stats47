@@ -119,18 +119,17 @@ export function ThemeMetricsDashboard({
    *   RSC 描画中の e-Stat 取得は Workers で失敗した実績があるので client から server action を叩く
    *   (MetricFocusCharts と同じ経路)。
    */
-  const [nationalByKey, setNationalByKey] = useState<Record<
-    string,
-    MetricTimeseriesResult
-  > | null>(null);
+  // 取得結果に「どの要求に対する結果か」を持たせ、描画時に照合する。
+  // effect 内で同期的に state を捨てないので、県切替時の古い結果もそのまま無視できる。
+  const nationalRequestId = selectedPrefectureCode ? "" : kpiKeys.join(",");
+  const [nationalFetch, setNationalFetch] = useState<{
+    requestId: string;
+    byKey: Record<string, MetricTimeseriesResult>;
+  } | null>(null);
 
   useEffect(() => {
-    if (selectedPrefectureCode || kpiKeys.length === 0) {
-      setNationalByKey(null);
-      return;
-    }
+    if (selectedPrefectureCode || kpiKeys.length === 0) return;
     let cancelled = false;
-    setNationalByKey(null);
     void Promise.all(
       kpiKeys.map(async (key) => {
         const result = await fetchMetricTimeseriesAction(key, "00000").catch(
@@ -140,16 +139,20 @@ export function ThemeMetricsDashboard({
       }),
     ).then((entries) => {
       if (cancelled) return;
-      const map: Record<string, MetricTimeseriesResult> = {};
+      const byKey: Record<string, MetricTimeseriesResult> = {};
       for (const [key, result] of entries) {
-        if (result) map[key] = result;
+        if (result) byKey[key] = result;
       }
-      setNationalByKey(map);
+      setNationalFetch({ requestId: nationalRequestId, byKey });
     });
     return () => {
       cancelled = true;
     };
-  }, [selectedPrefectureCode, kpiKeys]);
+  }, [selectedPrefectureCode, kpiKeys, nationalRequestId]);
+
+  /** 現在の要求に対応する結果のみ採用する (未取得・古い結果は null = ローディング) */
+  const nationalByKey =
+    nationalFetch?.requestId === nationalRequestId ? nationalFetch.byKey : null;
 
   const kpis = useMemo<MetricKpi[]>(() => {
     const keys = kpiKeys;
