@@ -22,6 +22,30 @@ function assertOrdered(source, labels) {
   }
 }
 
+// Bash の許可パターンは「末尾 * のプレフィックス一致」しか効かない。途中に * を置くと
+// 実コマンドに一致せず Bash が 1 つも通らない = routine が何も検証できないまま空振りする
+// (2026-08-03 に ai-content が 2 晩連続で denials 14・生成 0 件・$10.94 を消費した)。
+// workflow 側は成功/失敗が翌朝まで分からないので、ここで形だけ機械的に固定する。
+function extractAllowedBashPatterns(source) {
+  const line = source.split('\n').find((l) => l.includes('--allowedTools'));
+  assert.ok(line, '--allowedTools must be present');
+  return [...line.matchAll(/Bash\(([^)]*)\)/g)].map((m) => m[1]);
+}
+
+function assertBashAllowlistIsPrefixMatchable(source) {
+  const patterns = extractAllowedBashPatterns(source);
+  assert.ok(patterns.length > 0, 'routine must allow at least one Bash command');
+  for (const pattern of patterns) {
+    const wildcard = pattern.indexOf('*');
+    if (wildcard === -1) continue; // 引数なしの完全一致は有効
+    assert.equal(
+      wildcard,
+      pattern.length - 1,
+      `Bash allowlist pattern must end with * (mid-string * never matches): Bash(${pattern})`
+    );
+  }
+}
+
 function assertClaudeRoutine(source, promptFile) {
   assert.doesNotThrow(() => YAML.parse(source));
   assert.match(
@@ -37,6 +61,7 @@ function assertClaudeRoutine(source, promptFile) {
   assert.match(source, /"disableAllHooks": true/);
   assert.match(source, /--tools "Read,Write,Edit,Glob,Grep,Agent,Skill,Bash"/);
   assert.doesNotMatch(source, /Glob,Grep,Task,/);
+  assertBashAllowlistIsPrefixMatchable(source);
   assert.match(source, /--strict-mcp-config/);
   assert.match(source, /--mcp-config '\{"mcpServers":\{\}\}'/);
   assert.match(source, /steps\.claude\.outputs\.execution_file/);
