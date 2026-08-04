@@ -96,19 +96,18 @@ function MixedResultChart({ result }: { result: MixedResult }) {
     return <ChartEmptyState message="時系列データがありません" />;
   }
 
+  // ★高さは CSS ではなく height prop で決める。この SVG は viewBox + h-auto w-full で
+  //   「幅から高さが決まる」ため、親の固定高さ (h-[200px]) を守れず footer に重なる。
   return (
-    <>
-      <div className="h-[200px]">
-        <D3MixedChart
-          data={data.data as Array<Record<string, string | number | undefined>>}
-          categoryKey={data.xAxisKey}
-          columns={data.columns}
-          lines={data.lines}
-          leftUnit={data.leftUnit ?? ""}
-          rightUnit={data.rightUnit ?? ""}
-        />
-      </div>
-    </>
+    <D3MixedChart
+      data={data.data as Array<Record<string, string | number | undefined>>}
+      categoryKey={data.xAxisKey}
+      columns={data.columns}
+      lines={data.lines}
+      leftUnit={data.leftUnit ?? ""}
+      rightUnit={data.rightUnit ?? ""}
+      height={300}
+    />
   );
 }
 
@@ -124,9 +123,13 @@ function DonutResultChart({ result }: { result: DonutResult }) {
 
   return (
     <>
-      <div className="h-[200px]">
-        <DonutChart data={data.map((d) => ({ ...d }))} centerText={`${topPct}%`} />
-      </div>
+      {/* ★同上。DonutChart は正方形なので width/height で上限 200px に絞る */}
+      <DonutChart
+        data={data.map((d) => ({ ...d }))}
+        centerText={`${topPct}%`}
+        width={200}
+        height={200}
+      />
       <div className="mt-2 flex flex-wrap justify-center gap-x-3 gap-y-1">
         {data.slice(0, 5).map((d) => (
           <div key={d.name} className="flex items-center gap-1 text-[10px] text-muted-foreground">

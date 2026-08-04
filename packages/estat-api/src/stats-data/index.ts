@@ -15,7 +15,6 @@ export * from "./utils/build-dimension-maps";
 export * from "./utils/convert-to-stats-schema";
 export * from "./utils/extract-year-code";
 export * from "./utils/extract-years-from-stats";
-export * from "./utils/filter-prefecture-data";
 export * from "./utils/format-stats-data";
 export * from "./utils/format-table-info";
 export * from "./utils/format-values";
