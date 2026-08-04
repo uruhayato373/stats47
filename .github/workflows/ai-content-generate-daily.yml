@@ -146,6 +146,14 @@ jobs:
 
       # High-level claude-code-action は schedule event を正式対応対象にしていないため、
       # event 非依存の公式 Base Action を使う。main SHA と内包 Claude Code version を固定する。
+      #
+      # ★allowedTools の Bash パターンは「末尾 * のプレフィックス一致」しか効かない (2026-08-03)。
+      #   途中に * を置いた `... --file data/ai-content-staging/*.json` は実コマンドと一致せず、
+      #   その結果 Bash が 1 つも許可されない = author も critic も検証スクリプトを実行できない。
+      #   run 30762722415 / 30846501974 が 2 晩連続でこれ (denials 14・生成 0 件・$10.94 を消費)。
+      #   引数まで書かず末尾 * に畳み、実引数の妥当性は audit スクリプト自身に見せる。
+      #   blog-generate-daily.yml が同型で成功しているのはこの形だから。
+      #   機械ガード: .claude/scripts/lib/__tests__/content-generation-routine.test.cjs
       - name: ✍️ Generate and review AI content with Claude Code
         id: claude
         if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
@@ -168,7 +176,7 @@ jobs:
             --setting-sources project
             --permission-mode dontAsk
             --tools "Read,Write,Edit,Glob,Grep,Agent,Skill,Bash"
-            --allowedTools "Read,Write,Edit,Glob,Grep,Agent,Skill,Bash(node .claude/scripts/ai-content/audit-ai-content.mjs --file data/ai-content-staging/*.json)"
+            --allowedTools "Read,Write,Edit,Glob,Grep,Agent,Skill,Bash(node .claude/scripts/ai-content/audit-ai-content.mjs *)"
             --disallowedTools "WebFetch,WebSearch,Bash(env *),Bash(printenv *),Read(.env*),Read(**/.env*)"
             --strict-mcp-config
             --mcp-config '{"mcpServers":{}}'
