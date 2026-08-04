@@ -1,8 +1,7 @@
+import { POPULATION_DYNAMICS_SET, type IndicatorSet } from "@stats47/types";
 import { describe, it, expect } from "vitest";
 
 import { toThemeConfig } from "../to-theme-config";
-
-import type { IndicatorSet } from "@stats47/types";
 
 const makeIndicatorSet = (overrides: Partial<IndicatorSet> = {}): IndicatorSet => ({
   key: "test-theme",
@@ -64,5 +63,44 @@ describe("toThemeConfig", () => {
       "primary-key",
       "secondary-key",
     ]);
+  });
+});
+
+/**
+ * population-dynamics の指標カード枚数。
+ *
+ * ★2026-08-04 に 10 → 4 へ削減した。削減の理由は「下のチャートと同じ事実を二度見せない」
+ * ことで、カタログの role を context に落として実現している。role は生成物 (IndicatorSet) 経由で
+ * ここに効くため、カタログ編集や再生成の巻き戻しで黙って 10 枚に戻りうる。ここで枚数と
+ * 顔ぶれを固定する。増減させたいときはこのテストを意図的に更新すること。
+ */
+describe("population-dynamics の指標カード", () => {
+  it("role≠context は 4 指標 (総人口 / 出生率 / 転入超過 / 高齢化)", () => {
+    const config = toThemeConfig(POPULATION_DYNAMICS_SET);
+
+    expect(config.tabIndicators.map((t) => t.rankingKey)).toEqual([
+      "total-population",
+      "total-fertility-rate",
+      "moving-in-excess-rate",
+      "ratio-65-plus",
+    ]);
+  });
+
+  it("チャートと重複する 6 指標は context に落ちている", () => {
+    const config = toThemeConfig(POPULATION_DYNAMICS_SET);
+    const shown = new Set(config.tabIndicators.map((t) => t.rankingKey));
+
+    for (const key of [
+      "population-growth-rate",
+      "natural-increase-rate",
+      "crude-birth-rate",
+      "crude-death-rate",
+      "social-increase-rate",
+      "young-population-ratio",
+    ]) {
+      // 指標カードには出さないが、全指標セクションとランキングページには残す
+      expect(shown.has(key)).toBe(false);
+      expect(config.rankingKeys).toContain(key);
+    }
   });
 });

@@ -132,7 +132,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（実線 + 比較破線）。D3インタラクティブ |
 | `MiniBarChart` | `@/components/charts/MiniCharts` | カード内棒グラフ（正負値対応） |
 | `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |
-| `HubSankey` | `@/components/charts/HubSankey` | 財政フローSankey図 |
+| `HubSankey` | `@/components/charts/HubSankey` | 焦点 hub 型 Sankey（左ノード群 → 中央 → 右ノード群）。財政フロー / 人口移動フロー / 通勤フローで共有。`chrome`（`card`=自前カード枠 + SVG 内に title/subtitle/footer を描く / `bare`=枠と SVG 内テキストを持たず `ChartPanel` に委ねる）と `usableHeight`（ノード列の高さ = 縦横比。既定 616 は 1 カラム用、2 カラムは 340）で見た目を切り替える |
 
 #### カードフレームの役割分担（★重複と誤判定しないこと）
 

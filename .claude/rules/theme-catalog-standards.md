@@ -89,9 +89,14 @@ ThemeCatalog (SSOT, git TS)
 ### role
 | role | 意味 | 目安件数 | 基準 |
 |---|---|---|---|
-| `primary` | テーマのヘッドライン。`tabIndicators` の先頭タブ + stat-card として描画 | 1〜3 | 地域差大・時系列変化が劇的・検索需要高 |
+| `primary` | テーマのヘッドライン。`tabIndicators` の先頭 = `defaultRankingKey` | 1〜3 | 地域差大・時系列変化が劇的・検索需要高 |
 | `secondary` | primary を補完する関連データ | 3〜8 | 別の切り口・相関がある |
-| `context` | 背景情報。カードには出さずランキングページで閲覧 | 制限なし | マニアックだが調べたい人に価値 |
+| `context` | 背景情報。指標カードには出さず「全指標」セクションとランキングページで閲覧 | 制限なし | マニアックだが調べたい人に価値 |
+
+> **role≠context = ページ上部の指標カード (ChartCard) 1 枚**。旧「指標タブ (1 指標 1 タブ)」の
+> UI は廃止済みで、`tabIndicators` という名前だけが変換関数 (`to-theme-config.ts`) に残っている。
+> **枚数は下のチャートとの重複を避けて絞る** — 同じ事実をカードとチャートで二度見せない
+> (2026-08-04 に population-dynamics を 10 → 4 に削減した際の判断基準)。
 
 ### selection (選定根拠 — provenance)
 新規に追加する `primary`/`secondary` 指標は `selection` を記入する (validator warn で促す)。
@@ -156,7 +161,7 @@ ThemeCatalog (SSOT, git TS)
 
 | カタログ情報 | UI 描画先 | 実装 |
 |---|---|---|
-| `metrics` (role≠context) | 指標タブ (`tabIndicators`、1 指標 1 タブ) + KPI stat-card | `to-theme-config.ts` → `ThemeMetricsDashboard` |
+| `metrics` (role≠context) | ページ上部の指標カード (1 指標 = 1 枚の `ChartCard`。値 + 全国トレンド + ランキングリンク) | `to-theme-config.ts` の `tabIndicators` → `ThemeMetricsDashboard` |
 | `metrics` (全 role・context 含む) + `selection` | **「このテーマの全指標」セクション** (role 別・`/ranking/<key>` リンク・選定根拠注記) | `ThemeIndicatorCatalogSection.tsx` |
 | `charts.componentProps` | チャート本体 (line/mixed/composition/donut/cpi/pyramid) | `ThemeDbChartRenderer` |
 | `charts.sourceName` / `sourceLink` / `rankingLink` | チャートカード footer (出典 + 「ランキングを見る」) | `ChartFooter` (ThemeMetricsDashboard の ChartPanel footer) |
@@ -164,11 +169,13 @@ ThemeCatalog (SSOT, git TS)
 | `keywords` | `<meta>` / 構造化データ | theme utils |
 | `relatedArticleTagKeys` | 関連記事セクション + ネイティブアフィリ | `ThemeRelatedArticles` |
 | `rejectedCandidates` | UI 非表示 (再調査防止の記録のみ) | — |
-| (別途) EMBEDDED_SECTIONS | GIS 埋め込み (移動フロー/駅乗降/高速道路/過疎×医療/日照)。`hideMap` と独立に描画 | `THEME_SECTION_REGISTRY` |
+| (別途) EMBEDDED_SECTIONS | 埋め込み section。**半幅 2 カラム** = 人口移動フロー / 通勤フロー (ChartPanel 化・2026-08-04)、**全幅** = 駅乗降 / 高速道路 / 過疎×医療 / 日照。`hideMap` と独立に描画 | `THEME_SECTION_REGISTRY` + `HALF_WIDTH_SECTIONS` |
+| (別途) 左レール | テーマ一覧 + 地域選択 (`ThemeSideNav`)。xl 未満は非表示で `ThemeSwitcher` 帯が代替 | `ThemePageLayout` の `PageShell leftRail` |
 
-> `hideMap: true` (全テーマ既定) は地図タブ UI (コロプレス/指標タブ/年度セレクタ) を隠すだけ。
-> **page-components チャート・考察 (markdown)・GIS 埋め込み・全指標セクションは hideMap に関係なく描画する**
-> (2026-07-04 に `cardsOnly` を廃止し完全ダッシュボード化)。カタログ無しテーマ (climate / local-finance) は
+> `hideMap: true` (全テーマ既定) は地図タブ UI (コロプレス/年度セレクタ) を隠すだけ。
+> **page-components チャート・考察 (markdown)・埋め込み section・全指標セクションは hideMap に関係なく描画する**
+> (2026-07-04 に `cardsOnly` の付与をやめ完全ダッシュボード化。prop 自体は残存するので付けない)。
+> カタログ無しテーマ (climate / local-finance) は
 > IndicatorSet.metrics にフォールバック (selection なしで動く)。local-finance は bespoke ページ
 > (`app/themes/local-finance/page.tsx`) に全指標セクションを個別追加。
 

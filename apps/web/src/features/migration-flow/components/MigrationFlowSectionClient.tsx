@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 import dynamic from "next/dynamic";
 
@@ -12,8 +12,10 @@ import {
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
 
-import { PREFECTURES } from "../lib/prefectures";
+import { useFlowFocusPrefecture } from "@/features/theme-dashboard";
 
 import { MigrationSankey } from "./MigrationSankey";
 
@@ -29,93 +31,70 @@ interface Props {
   initialData?: MigrationFlowData;
 }
 
-const VALID_CODES = new Set(PREFECTURES.map((p) => p.code));
-
 export function MigrationFlowSectionClient({ initialData }: Props) {
-  const [prefCode, setPrefCode] = useState(initialData?.focusCode ?? "13");
-  const [mapVisible, setMapVisible] = useState(false);
-  const mapRef = useRef<HTMLDivElement>(null);
+  const { prefCode, isNationalFallback, options, setFocus } = useFlowFocusPrefecture(
+    initialData?.focusCode,
+  );
+  // アニメ地図 (16:9・重い) は既定で閉じる。開いた時点で初めてロードする。
+  // ★常時表示していた頃はこのパネルだけ他チャートの約 2 倍の高さになり、
+  //   2 カラムの相方 (通勤フロー) に大きな余白を作っていた (2026-08-04)。
+  const [mapOpen, setMapOpen] = useState(false);
 
-  // ?pref=NN をクライアントで読み取り初期焦点県に反映（useSearchParams 不使用で SSG 保全）。
-  useEffect(() => {
-    const param = new URLSearchParams(window.location.search).get("pref");
-    if (param && VALID_CODES.has(param)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setPrefCode(param);
-    }
-  }, []);
-
-  // アニメ地図（重い）はビューポート接近時に遅延ロード
-  useEffect(() => {
-    const el = mapRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          setMapVisible(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "250px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  const handleChange = (code: string) => {
-    setPrefCode(code);
-    const url = new URL(window.location.href);
-    url.searchParams.set("pref", code);
-    window.history.replaceState(null, "", url);
-  };
+  const focusName = options.find((p) => p.code === prefCode)?.name ?? "";
 
   return (
-    <section>
-      <h2 className="mb-3 text-xl font-bold text-foreground">
-        都道府県 人口移動フロー
-      </h2>
-      <p className="mb-3 text-sm text-muted-foreground">
-        焦点の都道府県と全国との「人の出入り」を可視化します。フロー図（Sankey）で県間の転入・転出の量を、
-        アニメ地図で移動の動きを示します。都道府県を選ぶと両方が連動します。
-      </p>
-
-      {/* 共有 焦点県セレクタ */}
-      <div className="mb-4 flex items-center gap-2">
-        <span className="text-sm text-muted-foreground">焦点の都道府県</span>
-        <Select value={prefCode} onValueChange={handleChange}>
-          <SelectTrigger className="w-40">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {PREFECTURES.map((p) => (
-              <SelectItem key={p.code} value={p.code}>
-                {p.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* フロー図（Sankey）— 軽量・即時描画（着地ページの主役） */}
-      <h3 className="mb-2 text-sm font-semibold text-foreground">
-        フロー図（Sankey）
-      </h3>
+    <ChartPanel
+      title="都道府県 人口移動フロー"
+      description="焦点の都道府県と全国との「人の出入り」。フロー図で県間の転入・転出の量を、アニメ地図で移動の動きを示します。"
+      action={
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          {isNationalFallback && (
+            <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
+              全国表示中 — 代表例: {focusName}
+            </span>
+          )}
+          <Select value={prefCode} onValueChange={setFocus}>
+            <SelectTrigger className="h-8 w-32 text-xs" aria-label="焦点の都道府県">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((p) => (
+                <SelectItem key={p.code} value={p.code}>
+                  {p.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      }
+      footer={
+        <ChartFooter
+          source="住民基本台帳人口移動報告"
+          rankingLink="/ranking/moving-in-excess-rate"
+          rankingLabel="ランキングを見る"
+        />
+      }
+    >
       <MigrationSankey code={prefCode} initialData={initialData} />
 
-      {/* アニメ地図 — 遅延ロード */}
-      <h3 className="mb-2 mt-8 text-sm font-semibold text-foreground">
-        アニメ地図
-      </h3>
-      <div ref={mapRef}>
-        {mapVisible ? (
-          <MigrationFlowPlayer prefCode={prefCode} showSelector={false} />
-        ) : (
-          <div
-            className="w-full rounded-md border bg-muted"
-            style={{ aspectRatio: "16 / 9" }}
-          />
-        )}
-      </div>
-    </section>
+      <details
+        className="mt-4 border-t border-border pt-3"
+        onToggle={(e) => setMapOpen((e.currentTarget as HTMLDetailsElement).open)}
+      >
+        <summary className="cursor-pointer text-xs font-semibold text-foreground">
+          アニメ地図で移動の動きを見る
+        </summary>
+        <div className="mt-3">
+          {mapOpen ? (
+            <MigrationFlowPlayer prefCode={prefCode} showSelector={false} />
+          ) : (
+            <div
+              className="w-full rounded-none border bg-muted"
+              style={{ aspectRatio: "16 / 9" }}
+            />
+          )}
+        </div>
+      </details>
+    </ChartPanel>
   );
 }
