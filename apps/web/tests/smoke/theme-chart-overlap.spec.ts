@@ -69,7 +69,13 @@ test.describe("テーマチャートがカード枠を守る", () => {
           if (!card || card === document.body) continue;
           const heading = card.querySelector("h3");
           if (!heading) continue;
-          const svgs = [...card.querySelectorAll("svg:not(.lucide)")];
+          // ★footer の中にある SVG は「チャートのはみ出し」ではないので必ず除く。
+          //   本番では AdSense 等が出典テキストのキーワードを href="#" のリンク + アイコン SVG に
+          //   置換することがあり (2026-08-04 実測: 出典「人口動態統計」の "統計" が置換)、
+          //   これを数えると常に footer 内 = 正の overlap になり誤検知する。
+          const svgs = [...card.querySelectorAll("svg:not(.lucide)")].filter(
+            (svg) => !footer.contains(svg),
+          );
           if (svgs.length === 0) continue;
 
           const footerTop = footer.getBoundingClientRect().top;
@@ -81,9 +87,10 @@ test.describe("テーマチャートがカード枠を守る", () => {
             title: heading.textContent?.trim().slice(0, 40) ?? "",
             overlapFooterPx: Math.round(maxSvgBottom - footerTop),
             spillCardPx: Math.round(maxSvgBottom - cardBottom),
-            shapeCount: card.querySelectorAll(
-              "svg:not(.lucide) path, svg:not(.lucide) rect, svg:not(.lucide) circle",
-            ).length,
+            shapeCount: svgs.reduce(
+              (n, svg) => n + svg.querySelectorAll("path, rect, circle").length,
+              0,
+            ),
           });
         }
         return out;

@@ -725,6 +725,13 @@
       ]
     },
     {
+      "name": "RAKUTEN_ACCESS_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "RAKUTEN_APP_ID",
       "visibility": "server",
       "contexts": [
