@@ -58,6 +58,34 @@ packages/database/.data/stats47.sqlite
 
 - **プロキシ制約**: 企業ネットワークで S3 API が HTTP 407/503 でブロックされる場合あり。`/push-r2` スキルが wrangler CLI フォールバックを案内する
 
+### ★turbo は環境変数を落とす — TLS 傍受プロキシ配下で dev が壊れる (2026-08-04)
+
+**turbo 2.x は既定が strict env mode** で、`turbo.json` に宣言しない環境変数を子プロセスへ渡さない
+(実測: `npm run dev:web` で起動した dev サーバーの env は 42 個だけ)。落ちるものの中に
+**`NODE_EXTRA_CA_CERTS`** が含まれるのが致命的で、**TLS を傍受するプロキシ配下**
+(Claude Code のエージェントプロキシ / 社内 i-FILTER) では Node が CA を信頼できず、
+**全 HTTPS が `SELF_SIGNED_CERT_IN_CHAIN` で落ちる**。症状は「dev サーバーが R2 を一切読めない」で、
+テーマページが 500、home の featured が空、`/ranking/*` が「見つかりません」になる。
+
+`turbo.json` の `globalPassThroughEnv` に `NODE_EXTRA_CA_CERTS` と proxy 変数 (HTTP(S)_PROXY /
+NO_PROXY の大小文字) を列挙して解決済み。**passThrough は cache key に入らない**ので、
+値がマシンごとに違っても turbo cache は効く (別の proxy/CA 値で task hash が不変であることを実測)。
+
+切り分け方 (同種の症状が出たとき):
+
+```bash
+# 1. dev サーバーの env に CA があるか (無ければ turbo が落としている)
+pid=$(ps -eo pid,cmd --no-headers | grep "[n]ext-server" | awk '{print $1}' | head -1)
+tr '\0' '\n' < /proc/$pid/environ | grep -c NODE_EXTRA_CA_CERTS
+# 2. 最小 env で fetch して cause を見る (SELF_SIGNED_CERT_IN_CHAIN なら CA 不足)
+env -i HOME=$HOME PATH=$PATH node -e "fetch('https://storage.stats47.jp/app/ranking/total-population/item.json').then(r=>console.log(r.status)).catch(e=>console.log(e.cause?.code))"
+# 3. 切り分けのため turbo を介さず起動する (これで直るなら turbo の env 剥がしが原因)
+cd apps/web && npm run dev
+```
+
+> `curl` や素の `node` が通るのに dev だけ落ちるのが特徴。**ネットワーク障害と誤診しないこと**
+> (シェルには `NODE_EXTRA_CA_CERTS` があるため手元の検証コマンドは全部通ってしまう)。
+
 ### ★会社 Windows PC では dev サーバーを起動しない (機械ゲートあり・2026-07-28)
 
 会社ネットワーク (兵庫県庁) は **i-FILTER (Digital Arts) が透過型 TLS 傍受**をしている。実測で確定した挙動:

@@ -12,6 +12,7 @@ import { useThemePrefecture } from "./ThemePrefectureContext";
  * (hero を持つテーマだけ ThemePageLayout がこちらを描画する)。
  *
  * 描画は共有 HeroBanner に委譲し、都道府県連動の H1 と PrefectureSelect (actions) だけを供給する。
+ * セレクタは xl+ では左レール (ThemeSideNav) に集約するため狭幅のみ表示する。
  */
 export function ThemeHero({
   themeTitle,
@@ -30,7 +31,11 @@ export function ThemeHero({
       tagline={hero.tagline ?? ""}
       imageSrc={hero.image.src}
       imageAlt={hero.imageAlt}
-      actions={<PrefectureSelect />}
+      actions={
+        <div className="xl:hidden">
+          <PrefectureSelect />
+        </div>
+      }
     />
   );
 }

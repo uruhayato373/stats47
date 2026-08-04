@@ -1,7 +1,5 @@
 import { notFound } from "next/navigation";
 
-import { PageShell } from "@/components/layout";
-
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 import {
   ThemePageLayout,
@@ -71,9 +69,7 @@ export default async function ThemeDynamicPage({ params }: PageProps) {
     throw new Error(`theme data unavailable: ${theme.themeKey}`);
   }
 
-  return (
-    <PageShell>
-      <ThemePageLayout theme={theme} data={data} />
-    </PageShell>
-  );
+  // PageShell は ThemePageLayout が持つ (左レール = ThemeSideNav を
+  // ThemePrefectureProvider の内側に置く必要があるため)。ここで重ねない。
+  return <ThemePageLayout theme={theme} data={data} />;
 }

@@ -48,24 +48,27 @@ export default async function LocalFinanceCityThemePage() {
     );
   }
 
+  // PageShell は ThemePageLayout が持つ。表示単位の切替はパンくず直下の toolbar に渡す。
   return (
-    <PageShell>
-      {/* 都道府県版へのナビゲーション */}
-      <nav
-        aria-label="表示単位切替"
-        className="mb-4 inline-flex rounded-full border border-border bg-card p-1 shadow-sm text-xs"
-      >
-        <Link
-          href="/themes/local-finance"
-          className="px-3 py-1 rounded-full text-muted-foreground hover:text-foreground transition-colors"
+    <ThemePageLayout
+      theme={theme}
+      data={data}
+      toolbar={
+        <nav
+          aria-label="表示単位切替"
+          className="mb-4 inline-flex rounded-full border border-border bg-card p-1 shadow-sm text-xs"
         >
-          都道府県
-        </Link>
-        <span className="px-3 py-1 rounded-full bg-primary text-primary-foreground font-medium">
-          市区町村
-        </span>
-      </nav>
-      <ThemePageLayout theme={theme} data={data} />
-    </PageShell>
+          <Link
+            href="/themes/local-finance"
+            className="px-3 py-1 rounded-full text-muted-foreground hover:text-foreground transition-colors"
+          >
+            都道府県
+          </Link>
+          <span className="px-3 py-1 rounded-full bg-primary text-primary-foreground font-medium">
+            市区町村
+          </span>
+        </nav>
+      }
+    />
   );
 }

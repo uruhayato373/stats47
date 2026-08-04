@@ -53,13 +53,13 @@ const AD_COMPONENTS = [
 
 /**
  * RailAdSlot を使ってよい app 配下のファイル。
- * RailAdSlot は右レール (360px) 前提の SurfaceCard 枠で、本文カラムに置くと枠だけレール幅で浮く。
+ * RailAdSlot は右レール (316px) 前提の SurfaceCard 枠で、本文カラムに置くと枠だけレール幅で浮く。
  * 追加するときは「そのファイルのどの要素が rail か」を 1 行コメントで添えること。
  */
 const RAIL_SLOT_ALLOWLIST = new Set([
   // home の左レール (aside)。lg 以上で 264px / xl で 280px のカラム。
   "apps/web/src/app/page.tsx",
-  // blog 詳細の ArticleShell 右レール (360px)。
+  // blog 詳細の ArticleShell 右レール (316px)。
   "apps/web/src/app/blog/[slug]/page.tsx",
 ]);
 
@@ -185,7 +185,7 @@ for (const abs of listFiles(APP_DIR, ".tsx")) {
   // 3. RailAdSlot は rail を持つファイルだけ
   if (/<RailAdSlot\b/.test(src) && !RAIL_SLOT_ALLOWLIST.has(rel)) {
     errors.push(
-      `${rel}\n   RailAdSlot を rail 以外で使っている。右レール (360px) 前提の枠なので本文カラムに\n` +
+      `${rel}\n   RailAdSlot を rail 以外で使っている。右レール (316px) 前提の枠なので本文カラムに\n` +
         "   置くと枠だけレール幅で浮く。本文末尾なら FooterAdSlot を使うこと。",
     );
   }

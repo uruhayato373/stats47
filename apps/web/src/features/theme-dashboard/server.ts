@@ -9,6 +9,7 @@ export { ThemeIndicatorCatalogSection } from "./components/ThemeIndicatorCatalog
 // Client Component（テーマ切替）。bespoke ページが barrel 経由で使うため再 export する
 // （app 層からの feature/components 直 import は no-restricted-imports で禁止）。
 export { ThemeSwitcher } from "./components/ThemeSwitcher";
+export { ThemeSideNav } from "./components/ThemeSideNav";
 
 // Server-only loader
 export { loadThemeData } from "./lib/load-theme-data";

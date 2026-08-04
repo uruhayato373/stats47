@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import {
   Select,
   SelectContent,
@@ -10,67 +8,61 @@ import {
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
 
-// barrel ではなく leaf から import（barrel は server-only な ThemeMigrationFlowSection を含むため）
-import { PREFECTURES } from "@/features/migration-flow/lib/prefectures";
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
+import { useFlowFocusPrefecture } from "@/features/theme-dashboard";
 
 import { CommuteSankey } from "./CommuteSankey";
 
 import type { CommuteFlowData } from "../lib/types";
-
 
 interface Props {
   /** SSG 時にサーバーが R2 から読んだ既定県データ */
   initialData?: CommuteFlowData;
 }
 
-const VALID_CODES = new Set(PREFECTURES.map((p) => p.code));
-
 export function CommuteFlowSectionClient({ initialData }: Props) {
-  const [prefCode, setPrefCode] = useState(initialData?.focusCode ?? "13");
+  const { prefCode, isNationalFallback, options, setFocus } = useFlowFocusPrefecture(
+    initialData?.focusCode,
+  );
 
-  // ?pref=NN をクライアントで読み取り初期焦点県に反映（useSearchParams 不使用で SSG 保全）。
-  useEffect(() => {
-    const param = new URLSearchParams(window.location.search).get("pref");
-    if (param && VALID_CODES.has(param)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setPrefCode(param);
-    }
-  }, []);
-
-  const handleChange = (code: string) => {
-    setPrefCode(code);
-    const url = new URL(window.location.href);
-    url.searchParams.set("pref", code);
-    window.history.replaceState(null, "", url);
-  };
+  const focusName = options.find((p) => p.code === prefCode)?.name ?? "";
 
   return (
-    <section>
-      <h2 className="mb-3 text-xl font-bold text-foreground">
-        都道府県 通勤フロー（昼夜間人口）
-      </h2>
-      <p className="mb-3 text-sm text-muted-foreground">
-        他県に住み焦点県へ通勤してくる人（流入）と、焦点県に住み他県へ通勤する人（流出）の
-        都道府県間フローを可視化します。流入が多い県は昼間人口が膨らみます。都道府県を選ぶと切り替わります。
-      </p>
-
-      <div className="mb-4 flex items-center gap-2">
-        <span className="text-sm text-muted-foreground">焦点の都道府県</span>
-        <Select value={prefCode} onValueChange={handleChange}>
-          <SelectTrigger className="w-40">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {PREFECTURES.map((p) => (
-              <SelectItem key={p.code} value={p.code}>
-                {p.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
+    <ChartPanel
+      title="都道府県 通勤フロー（昼夜間人口）"
+      description="他県に住み焦点県へ通勤してくる人（流入）と、焦点県から他県へ通勤する人（流出）。流入が多い県は昼間人口が膨らみます。"
+      action={
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          {isNationalFallback && (
+            <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
+              全国表示中 — 代表例: {focusName}
+            </span>
+          )}
+          <Select value={prefCode} onValueChange={setFocus}>
+            <SelectTrigger className="h-8 w-32 text-xs" aria-label="焦点の都道府県">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((p) => (
+                <SelectItem key={p.code} value={p.code}>
+                  {p.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      }
+      footer={
+        <ChartFooter
+          source="国勢調査 従業地・通学地集計"
+          rankingLink="/ranking/day-time-population-ratio"
+          rankingLabel="ランキングを見る"
+        />
+      }
+    >
       <CommuteSankey code={prefCode} initialData={initialData} />
-    </section>
+    </ChartPanel>
   );
 }

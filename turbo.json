@@ -1,5 +1,15 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "//": "globalPassThroughEnv: turbo 2.x は既定が strict env mode で、宣言しない環境変数を子プロセスへ渡さない。ここに挙げるのは『どこで動かすか』だけを決める実行環境の変数で、成果物を変えないため cache key にも入らない (passThrough の定義)。★NODE_EXTRA_CA_CERTS が落ちると、TLS を傍受するプロキシ配下 (Claude Code のエージェントプロキシ / 社内 i-FILTER) で Node の全 HTTPS が SELF_SIGNED_CERT_IN_CHAIN になり、dev サーバーが R2 を一切読めなくなる (2026-08-04 実測: npm run dev:web だけが壊れ、turbo を介さない cd apps/web && npm run dev は動いた)。",
+  "globalPassThroughEnv": [
+    "NODE_EXTRA_CA_CERTS",
+    "HTTP_PROXY",
+    "HTTPS_PROXY",
+    "NO_PROXY",
+    "http_proxy",
+    "https_proxy",
+    "no_proxy"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
