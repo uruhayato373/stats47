@@ -1,20 +1,33 @@
 /**
  * 楽天ウェブサービス API クライアント
  *
- * Step 1: ふるさと納税（楽天市場商品検索 API）
- * Step 2: 楽天トラベル（Simple Hotel Search API）— 将来実装
+ * ★2026-08-04: 新 Rakuten Developers ポータル (openapi.rakuten.co.jp) へ移行した。
+ *   実機プローブで確定した仕様 (公式ドキュメントだけでは読み切れなかった部分を含む):
+ *     - endpoint : https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701
+ *     - 認証     : applicationId (クエリ) + accessKey (**ヘッダ** `accessKey`) の **両方必須**
+ *                  ヘッダ名 `X-Access-Key` は認識されない (400 になる)
+ *     - 応答     : `Items` (大文字 I)。formatVersion=2 で要素はフラット ({Item:{}} ラップ無し)
+ *     - 画像     : **string[]** で返る。旧実装/コンポーネントが期待する {imageUrl}[] ではない
+ *     - IP 制限  : アプリに Allowed IP の登録が**必須項目**。未登録 IP からは 403 CLIENT_IP_NOT_ALLOWED
+ *
+ *   ★IP 制限について: **Cloudflare Workers の送信元 IP は動的**で個別登録できないため、
+ *     楽天アプリ側の Allowed IP を `0.0.0.0/0` (全許可) にして実行時呼び出しを成立させている
+ *     (2026-08-04 に CIDR 全許可が通ることを実機で確認)。
+ *     ここを特定 IP に戻すと**本番の全ページで楽天カードが消える**ので変更しないこと。
+ *     アクセス制御は accessKey (秘匿値) が担う。
+ *     正典: .claude/rules/affiliate-ads-standards.md §12
  */
 
-/** 楽天市場 商品検索 API のレスポンス型 */
+/** 楽天市場 商品検索 API のレスポンス型 (formatVersion=2 / 要素はフラット) */
 interface RakutenItemSearchResponse {
   count: number;
   page: number;
   pageCount: number;
   hits: number;
-  Items: RakutenItem[];
+  Items: unknown[];
 }
 
-interface RakutenItem {
+export interface RakutenItem {
   itemName: string;
   itemPrice: number;
   itemUrl: string;
@@ -88,43 +101,96 @@ interface SearchItemsParams {
   genreId?: string;
   hits?: number;
   sort?: string;
+  /** 既定 3 秒。ページ描画を止めないための上限で、超えたらカードを出さない。 */
+  timeoutMs?: number;
 }
+
+export const RAKUTEN_ITEM_SEARCH_ENDPOINT =
+  "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701";
 
 function getRakutenConfig() {
   const applicationId = process.env.RAKUTEN_APP_ID;
+  const accessKey = process.env.RAKUTEN_ACCESS_KEY;
   const affiliateId = process.env.NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID;
-  return { applicationId, affiliateId };
+  return { applicationId, accessKey, affiliateId };
+}
+
+/** 画像配列の要素。新 API は string[] を返すが、旧形式 ({imageUrl}) も受けられるようにする。 */
+type RawImage = string | { imageUrl?: string } | null | undefined;
+
+function toImageUrls(raw: unknown): { imageUrl: string }[] {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .map((v: RawImage) => (typeof v === "string" ? v : (v?.imageUrl ?? "")))
+    .filter((u): u is string => Boolean(u))
+    .map((imageUrl) => ({ imageUrl }));
 }
 
 /**
- * 楽天市場 商品検索 API を呼び出す
+ * API レスポンスを `RakutenItem[]` に正規化する。
+ *
+ * 吸収する差異 (どれも実機で観測 or 旧実装が前提としていた形):
+ *   - 配列キーが `Items` / `items` のどちらでも受ける
+ *   - 要素が `{Item:{...}}` でラップされていてもフラットでも受ける (formatVersion 差)
+ *   - 画像配列が `string[]` でも `{imageUrl}[]` でも `{imageUrl}[]` に揃える
+ *     (コンポーネントは `mediumImageUrls[0]?.imageUrl` を読むため、ここで形を守る)
  */
+export function normalizeRakutenItems(data: unknown): RakutenItem[] {
+  const root = (data ?? {}) as Record<string, unknown>;
+  const arr = (root.Items ?? root.items) as unknown;
+  if (!Array.isArray(arr)) return [];
+
+  return arr.map((entry) => {
+    const e = ((entry as Record<string, unknown>)?.Item ?? entry) as Record<string, unknown>;
+    return {
+      itemName: String(e.itemName ?? ""),
+      itemPrice: Number(e.itemPrice ?? 0),
+      itemUrl: String(e.itemUrl ?? ""),
+      affiliateUrl: e.affiliateUrl ? String(e.affiliateUrl) : undefined,
+      shopName: String(e.shopName ?? ""),
+      shopUrl: String(e.shopUrl ?? ""),
+      shopAffiliateUrl: e.shopAffiliateUrl ? String(e.shopAffiliateUrl) : undefined,
+      mediumImageUrls: toImageUrls(e.mediumImageUrls),
+      smallImageUrls: toImageUrls(e.smallImageUrls),
+      reviewCount: Number(e.reviewCount ?? 0),
+      reviewAverage: Number(e.reviewAverage ?? 0),
+      genreId: String(e.genreId ?? ""),
+    };
+  });
+}
+
+/** 楽天市場 商品検索 API を呼び出す。失敗は常に [] (カードを出さない) に倒す。 */
 export async function searchRakutenItems(
   params: SearchItemsParams,
 ): Promise<RakutenItem[]> {
-  const { applicationId, affiliateId } = getRakutenConfig();
-  if (!applicationId) return [];
+  const { applicationId, accessKey, affiliateId } = getRakutenConfig();
+  // 新 API は applicationId と accessKey の両方が必須。片方でも欠ければ呼ばない。
+  if (!applicationId || !accessKey) return [];
 
-  const url = new URL(
-    "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601",
-  );
+  const url = new URL(RAKUTEN_ITEM_SEARCH_ENDPOINT);
   url.searchParams.set("applicationId", applicationId);
   url.searchParams.set("format", "json");
+  // 要素をフラットにする (未指定だと {Item:{...}} ラップになり呼び出し側が壊れる)
+  url.searchParams.set("formatVersion", "2");
   url.searchParams.set("hits", String(params.hits ?? 4));
 
   if (params.keyword) url.searchParams.set("keyword", params.keyword);
   if (params.genreId) url.searchParams.set("genreId", params.genreId);
   if (params.sort) url.searchParams.set("sort", params.sort);
+  // アフィリエイト URL を得るために必須。無いと itemUrl だけになり成果にならない。
   if (affiliateId) url.searchParams.set("affiliateId", affiliateId);
 
   try {
     const res = await fetch(url.toString(), {
+      // accessKey は**ヘッダ**で渡す (クエリでも通るが、URL に載せるとログ・キャッシュキーに残る)
+      headers: { accessKey },
+      // ページ表示のたびに楽天を叩かない (Expected QPS=1 のため必須)。
       next: { revalidate: 86400 },
-      signal: AbortSignal.timeout(3000),
+      signal: AbortSignal.timeout(params.timeoutMs ?? 3000),
     });
     if (!res.ok) return [];
     const data: RakutenItemSearchResponse = await res.json();
-    return data.Items ?? [];
+    return normalizeRakutenItems(data);
   } catch {
     return [];
   }

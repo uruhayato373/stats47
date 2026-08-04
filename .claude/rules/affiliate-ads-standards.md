@@ -464,6 +464,26 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 | 直接配置台帳 | 記事本文の href 直書き | 記事と案件の 1:1 編集判断 | `affiliate-direct-placements-data.ts` |
 | 楽天動的 (API) | 文脈商品・返礼品 | 審査不要・在庫無限。食品/地域文脈 | `rakuten-api.ts` (env の App ID) |
 
+> **★楽天 API は新ポータル (openapi.rakuten.co.jp) 仕様 — 2026-08-04 に移行。**
+> 旧 `app.rakuten.co.jp/services/api/.../20220601` は新ポータル発行のキーを受け付けない
+> (`wrong_parameter`)。実機プローブで確定した要点:
+>
+> | 項目 | 値 |
+> |---|---|
+> | endpoint | `https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701` |
+> | 認証 | `applicationId` (クエリ) + `accessKey` (**ヘッダ**) の **両方必須**。`X-Access-Key` は不可 |
+> | env | `RAKUTEN_APP_ID` (Application ID=UUID) / `RAKUTEN_ACCESS_KEY` (Access Key=秘匿値) |
+> | 応答 | `Items` (大文字)。`formatVersion=2` で要素フラット。**画像は `string[]`** → `normalizeRakutenItems` が `{imageUrl}[]` に揃える |
+>
+> **★Allowed IP を `0.0.0.0/0` から変更しないこと。** 楽天アプリの Allowed IP は必須項目だが、
+> **Cloudflare Workers の送信元 IP は動的**で個別登録できない。特定 IP に戻すと本番の全ページで
+> 楽天カードが消える (403 `CLIENT_IP_NOT_ALLOWED`)。アクセス制御は accessKey が担う。
+> **API Access Scopes の `Rakuten Ichiba API` チェックも必須** (外すと同様に全滅する)。
+> アプリの有効期限は **2027-03-07**。失効時も同じ症状になる。
+>
+> 症状の見分け方: 商品カードは fallback を持たないため**消える**が、ふるさと納税カードは
+> 静的リンクへ degrade するので「出ている」ように見える。0 件の切り分けはこの非対称に注意する。
+
 **楽天動的カードの品目辞書はハードコードしない。** `constants/product-keywords.ts` が
 metric config (git TS SSOT) の title から機械導出する — 家計調査系 metric は
 「{品目}消費支出額」「{品目}消費量」という決まった形なので接尾辞を剥がせば品目が取れる。
