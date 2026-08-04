@@ -74,4 +74,7 @@ jobs:
           ARGS=()
           if [ -n "$INPUT_LIMIT" ]; then ARGS+=(--limit "$INPUT_LIMIT"); fi
           if [ "$INPUT_DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
-          npx tsx apps/web/scripts/sync-rakuten-catalog.ts "${ARGS[@]}"
+          # ★ -r setup-cli.js は必須。R2 の server barrel と repositories が server-only を
+          #   import しており、素の tsx 実行では throw する (sync-snapshots/run.sh と同じ規約)。
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
+            apps/web/scripts/sync-rakuten-catalog.ts "${ARGS[@]}"
