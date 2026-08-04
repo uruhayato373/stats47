@@ -75,6 +75,25 @@ npm run google-admin:audit-api
 | `affiliate_click` | `trackAffiliateClick` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-06)** | `affiliate-ads-standards.md §6` |
 | `affiliate_click` (ad_id のみ) | `trackAffiliateClick` | `ad_id` | **✅登録済 (2026-07-28)** — google-admin Playwright runner で `Affiliate ad ID` (scope=Event, param=`ad_id`) を実登録・reload 後に画面 verify (最終変更日 2026年7月28日)。集計反映は 24-48h・非遡及のため、API で `customEvent:ad_id` が引けるのは反映後 | `affiliate-ads-standards.md §6` |
 | `affiliate_impression` | `AdImpressionTracker` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-31 API確認)** — dimensionはparameter名に紐づき、イベント名改名後もlive定義に存在 | `affiliate-ads-standards.md §6` |
+
+> **★2026-08-04: impression 計装の欠落を是正した (分母の系統的欠測)。** それまで
+> `AdImpressionTracker` を通していたのは `BannerAd` と `AffiliateTextAdList` の 2 系統だけで、
+> **`NativeAffiliateRow` / `FurusatoNozeiCard` / `RakutenItemsCard` の 3 つはクリック
+> (`TrackedAffiliateLink`) だけを送り impression を送っていなかった**。native 枠は blog /
+> ranking / category / survey / tag / themes / home / compare / 市区町村とほぼ全ページ種別に
+> 出るため、**分子にクリックが入り分母に impression が入らない**状態で CTR が系統的に歪んでいた
+> (2026-08-02 の 28 日実測では impression 3,400 に対し native 枠の行が 1 つも存在しない)。
+> 3 コンポーネントを計装し、アフィリエイト広告を描画する全 9 コンポーネントが計測対象になった。
+>
+> 併せて **`affiliate_vertical` の汚染も是正した**。native 枠は `trackingCategory`
+> (例 `category-landweather` / `survey-<key>` / `home`) を計測 category に渡しており、
+> 10 軸外の値が `affiliate_vertical` に流れていた (実測で "other" バケットが imp の 61% を占有)。
+> 解決層 `ResolvedAffiliateBanner` に `vertical` を持たせ、描画側はこれを送る。ページ文脈は
+> `link_position` (例 `category-native`) が担うため情報は失われない。
+>
+> **この是正の前後で impression 数と CTR は不連続になる** (計装漏れが埋まるため impression は
+> 増え、CTR は下がる)。2026-08-04 より前の窓と比較しないこと。効果判定は是正後 2 週間の
+> 実測が揃ってから行う (`.claude/rules/evidence-based-judgment.md`)。
 | `cta_click` | `trackCtaClick` | `link_position` | ✅登録済 (2026-07-31 API確認) | buzz-map §7.3 / ファネル |
 | `cta_click` | `trackCtaClick` | `cta_id` / `content_id` / `target_type` / `target_key` | ⏳要登録 (2026-07-31 API確認) | buzz-map §7.3 / ファネル |
 | `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `experiment_id` | ✅登録済 (2026-07-31 API確認) | `apps/web/src/features/ranking/components/FeaturedRankings/README.md` |

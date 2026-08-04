@@ -30,6 +30,13 @@ export interface ResolvedAffiliateBanner {
   trackingPixelUrl: string | null;
   width: number;
   height: number;
+  /**
+   * 広告意図軸 (10 軸)。GA4 の `affiliate_vertical` に送るために解決層で確定させる。
+   * ★ 描画側で `trackingCategory` (例 "category-landweather") を vertical として送ると
+   *   10 軸外の値が dimension に流れ内訳が壊れる (実測で "other" バケットが 61% を占めていた)。
+   *   正典: .claude/rules/affiliate-ads-standards.md §0 / analytics-event-standards.md
+   */
+  vertical: AffiliateVertical | null;
 }
 
 /**
@@ -76,6 +83,8 @@ function toBanner(b: {
   trackingPixelUrl: string | null;
   width: number | null;
   height: number | null;
+  vertical?: AffiliateVertical | null;
+  categoryKey?: string | null;
 }): ResolvedAffiliateBanner | null {
   // imageUrl は必須。trackingPixelUrl は任意 (ValueCommerce 等は別ピクセルを持たない)。
   if (!b.imageUrl) return null;
@@ -87,6 +96,8 @@ function toBanner(b: {
     trackingPixelUrl: b.trackingPixelUrl ?? null,
     width: b.width ?? 300,
     height: b.height ?? 250,
+    // 解決は adVertical と同じ規約 (vertical 正・categoryKey フォールバック)。
+    vertical: b.vertical ?? (b.categoryKey ? CATEGORY_AFFILIATE_MAP[b.categoryKey] ?? null : null),
   };
 }
 

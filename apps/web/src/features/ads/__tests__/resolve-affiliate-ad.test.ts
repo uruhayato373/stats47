@@ -101,6 +101,9 @@ describe("resolveAffiliateBanners", () => {
       trackingPixelUrl: "https://example.com/pixel",
       width: 300,
       height: 250,
+      // 描画側が GA4 の affiliate_vertical に送るための意図軸。この広告は vertical 未設定
+      // なので categoryKey "laborwage" から CATEGORY_AFFILIATE_MAP 経由で labor に解決される。
+      vertical: "labor",
     });
   });
 

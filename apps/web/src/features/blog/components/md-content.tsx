@@ -28,6 +28,13 @@ import type { AffiliateCategory } from "@/features/ads/constants/affiliate-categ
 import { AdSenseAd, BLOG_ARTICLE_INLINE } from "@/lib/google-adsense";
 
 import { buildHeadingSlug } from "../lib/heading-slug";
+// ★ A/B の共有定義は client 境界の外に置く (server component からも呼ぶため)。
+import {
+    IN_BODY_AD_EXPERIMENT_ID,
+    pickInBodyAdFormat,
+    type InBodyAdFormat,
+    type InlineAffiliateBanner,
+} from "../utils";
 
 import { preprocessCallouts } from "./md-preprocessor";
 import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
@@ -71,6 +78,16 @@ interface MDContentProps {
     affiliateTextAds?: AffiliateTextAdData[];
     /** テキストリンクのテーマ色に使う vertical。 */
     affiliateVertical?: AffiliateCategory | null;
+    /**
+     * 本文・記事末尾に差し込む 300x250 バナー。記事の tagKeys から解決済みで、
+     * `<affiliate-banner index="N">` が順に 1 件ずつ消費する。
+     */
+    affiliateBanners?: InlineAffiliateBanner[];
+    /**
+     * 本文中の広告フォーマット (A/B)。`text` は従来のテキストリンク、`banner` は 300x250。
+     * **記事末尾は format に関係なく常にバナー**。割当は slug のハッシュで決まる (記事ごとに固定)。
+     */
+    inBodyFormat?: InBodyAdFormat;
 }
 
 interface ComponentProps {
@@ -83,6 +100,8 @@ function makeMdComponents(
     affiliateBannersByCategory?: Record<string, AffiliateBannerData>,
     affiliateTextAds?: AffiliateTextAdData[],
     affiliateVertical?: AffiliateCategory | null,
+    affiliateBanners?: InlineAffiliateBanner[],
+    inBodyFormat?: InBodyAdFormat,
 ): Record<string, React.ComponentType<ComponentProps>> {
     return {
         // 見出し・リンクの見た目は globals.css の .blog-news-article が持つ (Soft Editorial)。
@@ -303,12 +322,41 @@ function makeMdComponents(
                         ads={[ad]}
                         affiliateCategory={affiliateVertical ?? null}
                         position="article-inline"
+                        experimentId={IN_BODY_AD_EXPERIMENT_ID}
+                        variantId={inBodyFormat ?? "text"}
                     />
                 </div>
             );
         },
 
-        "affiliate-banner": ({ src, href, tracking, width, height, label, category }: ComponentProps & { src?: string; href?: string; tracking?: string; width?: string; height?: string; label?: string; category?: string }) => {
+        "affiliate-banner": ({ src, href, tracking, width, height, label, category, index, slot }: ComponentProps & { src?: string; href?: string; tracking?: string; width?: string; height?: string; label?: string; category?: string; index?: string; slot?: string }) => {
+            // index 指定 = 自動挿入されたバナー枠。解決済み配列から 1 件消費する。
+            // 在庫が index に足りなければ何も出さない (空枠を残さない)。
+            if (index != null) {
+                const i = Number(index);
+                const b = affiliateBanners?.[Number.isFinite(i) ? i : 0];
+                if (!b) return null;
+                return (
+                    <div className="my-8 not-prose">
+                        <BannerAd
+                            href={b.href}
+                            imageUrl={b.imageUrl}
+                            trackingPixelUrl={b.trackingPixelUrl}
+                            width={b.width}
+                            height={b.height}
+                            label={b.title}
+                            // ★ vertical を渡さないと BannerAd の既定 "other" が
+                            //   affiliate_vertical に流れ内訳が壊れる。
+                            category={b.vertical ?? affiliateVertical ?? "other"}
+                            position={slot === "end" ? "article-end" : "article-inline"}
+                            adId={b.id}
+                            creativeSize={`${b.width}x${b.height}`}
+                            experimentId={IN_BODY_AD_EXPERIMENT_ID}
+                            variantId={slot === "end" ? "end-banner" : (inBodyFormat ?? "text")}
+                        />
+                    </div>
+                );
+            }
             if (category && affiliateBannersByCategory?.[category]) {
                 const b = affiliateBannersByCategory[category];
                 return (
@@ -424,18 +472,32 @@ function injectAdSlots(md: string): string {
 }
 
 /**
- * 本文中にテキストリンク広告 `<affiliate-text index="N">` を自動挿入する。
+ * 本文中と記事末尾に広告枠を自動挿入する。
  *
- * 読了文脈に乗るのは本文中なので、画像バナー (`<affiliate-banner>`) だけでなく
- * テキストリンクも本文へ出す。手動で `<affiliate-text` を置いた記事は一切触らない。
+ * 読了文脈に乗るのは本文中なので、テキストリンクだけでなく画像バナーも本文へ出す。
+ * 手動で `<affiliate-text` / `<affiliate-banner` を置いた記事は一切触らない。
  *
- * 配置: h2 見出しの 2・4・6 番目の直前に最大 3 本 + 記事末尾に 1 本 = **最大 4 本**。
+ * 配置 (2026-08-04 改訂):
+ *   - 本文: h2 見出しの 2・4・6 番目の直前に最大 3 枠。**format が `text` ならテキスト、
+ *     `banner` なら 300x250 バナー**を出す (slug ハッシュで決まる A/B。experiment_id
+ *     `blog-inbody-format` で GA4 比較する)。
+ *   - 記事末尾: **format に関わらず常にバナー 1 枠** (読了直後は完読者で意図が強い)。
+ *
  * `injectAdSlots` が使う h2 (2 番目・中盤) と重ならないよう、衝突する位置は 1 つ後ろの h2 へずらす。
- * 在庫 (availableCount) を超えては挿入しない — 空枠を作らないため。
+ * 在庫を超えては挿入しない — 空枠を作らないため。
  */
-function injectAffiliateTextLinks(md: string, availableCount: number): string {
-    if (availableCount <= 0) return md;
-    if (md.includes("<affiliate-text")) return md; // 手動配置済みの記事は触らない
+function injectAffiliateUnits(
+    md: string,
+    opts: { textCount: number; bannerCount: number; format: InBodyAdFormat },
+): string {
+    const { textCount, bannerCount, format } = opts;
+    // 本文枠に使える在庫。banner 版は末尾バナー 1 本を残す。
+    const bodyStock = format === "banner" ? Math.max(0, bannerCount - 1) : textCount;
+    const hasEndBanner = bannerCount > 0;
+    if (bodyStock <= 0 && !hasEndBanner) return md;
+    // 手動配置済みの記事は触らない
+    if (md.includes("<affiliate-text") || md.includes("<affiliate-banner")) return md;
+    const availableCount = bodyStock;
 
     const lines = md.split("\n");
     const h2Indices: number[] = [];
@@ -467,14 +529,19 @@ function injectAffiliateTextLinks(md: string, availableCount: number): string {
 
     const result = [...lines];
     // 行番号のズレを防ぐため後ろから挿入する
+    const unit = (i: number) =>
+        format === "banner"
+            ? `<affiliate-banner index="${i}"></affiliate-banner>`
+            : `<affiliate-text index="${i}"></affiliate-text>`;
     let slot = targets.length - 1;
     for (const idx of [...targets].sort((a, b) => b - a)) {
-        result.splice(idx, 0, "", `<affiliate-text index="${slot}"></affiliate-text>`, "");
+        result.splice(idx, 0, "", unit(slot), "");
         slot--;
     }
-    // 末尾 1 本 (在庫が本文分より多いときだけ)
-    if (availableCount > targets.length) {
-        result.push("", `<affiliate-text index="${targets.length}"></affiliate-text>`, "");
+    // 記事末尾は常にバナー。本文が banner 版なら本文で使った分の次を消費する。
+    if (hasEndBanner) {
+        const endIndex = format === "banner" ? targets.length : 0;
+        result.push("", `<affiliate-banner index="${endIndex}" slot="end"></affiliate-banner>`, "");
     }
     return result.join("\n");
 }
@@ -486,14 +553,34 @@ export function MDContent({
     affiliateBannersByCategory,
     affiliateTextAds,
     affiliateVertical,
+    affiliateBanners,
+    inBodyFormat,
 }: MDContentProps) {
+    // 呼び出し元が渡さない場合も slug から決定的に割り当てる (記事ごとに固定)。
+    const format = inBodyFormat ?? pickInBodyAdFormat(slug);
     const mdComponents = useMemo(
-        () => makeMdComponents(slug, affiliateBannersByCategory, affiliateTextAds, affiliateVertical),
-        [slug, affiliateBannersByCategory, affiliateTextAds, affiliateVertical],
+        () =>
+            makeMdComponents(
+                slug,
+                affiliateBannersByCategory,
+                affiliateTextAds,
+                affiliateVertical,
+                affiliateBanners,
+                format,
+            ),
+        [slug, affiliateBannersByCategory, affiliateTextAds, affiliateVertical, affiliateBanners, format],
     );
     const processed = useMemo(
-        () => injectAffiliateTextLinks(injectAdSlots(preprocessCallouts(source, relatedArticleTitles)), affiliateTextAds?.length ?? 0),
-        [source, relatedArticleTitles, affiliateTextAds],
+        () =>
+            injectAffiliateUnits(
+                injectAdSlots(preprocessCallouts(source, relatedArticleTitles)),
+                {
+                    textCount: affiliateTextAds?.length ?? 0,
+                    bannerCount: affiliateBanners?.length ?? 0,
+                    format,
+                },
+            ),
+        [source, relatedArticleTitles, affiliateTextAds, affiliateBanners, format],
     );
     return (
         <article

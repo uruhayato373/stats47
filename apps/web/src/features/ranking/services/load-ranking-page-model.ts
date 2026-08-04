@@ -121,7 +121,9 @@ export async function loadRankingPageModel(rankingKey: string) {
   const affiliateTagKeys = (rankingItem.tags ?? []).map((tag) => tag.tagKey);
   const nativeBannersPromise =
     affiliateTagKeys.length > 0
-      ? resolveAffiliateBanners(affiliateTagKeys, 4, rankingKey).catch((error) => {
+      // ★ 2026-08-04: 4 → 5。先頭 4 件がネイティブ枠、5 件目を読了位置の 300x250 に回す
+      //   (RankingPageNativeAffiliateSection)。在庫が 4 件以下なら末尾バナーは出ない。
+      ? resolveAffiliateBanners(affiliateTagKeys, 5, rankingKey).catch((error) => {
           logger.error({ error }, "RankingKeyPage: native banners 取得失敗");
           return [];
         })

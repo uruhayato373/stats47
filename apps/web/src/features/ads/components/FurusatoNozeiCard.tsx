@@ -5,6 +5,7 @@ import { getSurfaceCardClassName } from "@/components/surface";
 import { buildFurusatoNozeiUrl, getFurusatoNozeiLink } from "../constants/furusato-nozei";
 import { searchFurusatoItems } from "../lib/rakuten-api";
 
+import { AdImpressionTracker } from "./AdImpressionTracker";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
 interface FurusatoNozeiCardProps {
@@ -29,9 +30,19 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
   // 県別 CTR 計測用 ad_id (ad_id custom dimension 経由で県別のふるさと納税成果を追える)。
   const furusatoAdId = `furusato-${link.rakutenAreaSlug}`;
 
+  // ★ 2026-08-04: impression 計装を追加 (それまでクリックのみ送信していた)。
+  //    カード内の返礼品は 1 つの adId (県別) を共有するので **カード単位で 1 impression**。
+  //    動的カードとフォールバックの両経路に付ける (片方だけだと県により欠測する)。
+
   // API 結果がある場合: 動的カード
   if (items.length > 0) {
     return (
+      <AdImpressionTracker
+        category="furusato"
+        label={`${link.prefName}の人気返礼品`}
+        position="sidebar"
+        adId={furusatoAdId}
+      >
       <div className="rounded-none border border-red-100 bg-red-50/50 p-4">
         <div className="mb-3 flex items-center justify-between">
           <span className="text-xs font-medium text-muted-foreground/70">PR</span>
@@ -101,11 +112,18 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
           })}
         </div>
       </div>
+      </AdImpressionTracker>
     );
   }
 
   // フォールバック: 従来の固定リンク
   return (
+    <AdImpressionTracker
+      category="furusato"
+      label={`${link.prefName}のふるさと納税`}
+      position="sidebar"
+      adId={furusatoAdId}
+    >
     <div className="rounded-none border border-red-100 bg-red-50/50 p-4">
       <div className="mb-2 flex items-center justify-between">
         <span className="text-xs font-medium text-muted-foreground/70">PR</span>
@@ -132,5 +150,6 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
         <ExternalLink size={16} className="shrink-0 text-red-400" />
       </TrackedAffiliateLink>
     </div>
+    </AdImpressionTracker>
   );
 }

@@ -68,11 +68,14 @@ export function RankingPageSidebarSection({
       {/* ランキング名が品目 (牛肉・うどん等) のとき楽天市場の商品を出す。品目でなければ描画しない。 */}
       <RakutenItemsCard sourceText={rankingName} position="ranking-sidebar" />
       <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
+      {/* ★ 2026-08-04: 右レールはバナーのみ。在庫のある vertical では 2 枚まで積む
+          (在庫が 1 件しか無ければ 1 枚、ゼロなら AdSense へフォールバック)。 */}
       <AffiliateAdSlot
         categoryKey={rankingItem.categoryKey ?? ""}
         position="sidebar"
         rankingKey={rankingKey}
         bannerOnly
+        bannerLimit={2}
       />
       <SurveyCard
         surveys={surveys.map((survey) => ({ id: survey.id, name: survey.name }))}

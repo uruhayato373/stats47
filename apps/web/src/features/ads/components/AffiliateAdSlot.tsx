@@ -26,6 +26,13 @@ interface AffiliateAdSlotProps {
   rankingKey?: string;
   /** 右レールを画像バナーだけに限定し、テキスト広告へフォールバックしない */
   bannerOnly?: boolean;
+  /**
+   * サイドバーに出すバナーの最大数 (既定 1)。在庫が無ければその分だけ減る。
+   * 同一 vertical で priority 降順に返るため、先頭ほど確定EPC が高い順に当たる。
+   */
+  bannerLimit?: number;
+  /** テキスト広告の最大数 (既定 2)。bannerOnly のときは使わない。 */
+  textLimit?: number;
 }
 
 function mapPositionToLocation(position: "sidebar" | "footer"): AffiliateLocationCode {
@@ -50,6 +57,8 @@ export async function AffiliateAdSlot({
   position = "sidebar",
   rankingKey,
   bannerOnly = false,
+  bannerLimit = 1,
+  textLimit = 2,
 }: AffiliateAdSlotProps) {
   const locationCode = mapPositionToLocation(position);
   const affiliateCategory = CATEGORY_AFFILIATE_MAP[categoryKey] ?? null;
@@ -74,24 +83,34 @@ export async function AffiliateAdSlot({
   }
 
   // 1. バナー優先 (sidebar のみ)。ranking の主要トラフィックに視認性の高い枠を出す。
+  //    ★ 2026-08-04: 上位 1 件の早期 return をやめ bannerLimit 件まで積む。
   if (position === "sidebar") {
-    const banners = await resolveAffiliateBannersByCategoryKey(categoryKey, 1, rankingKey);
-    const banner = banners[0];
-    if (banner) {
+    const banners = await resolveAffiliateBannersByCategoryKey(
+      categoryKey,
+      Math.max(1, bannerLimit),
+      rankingKey,
+    );
+    if (banners.length > 0) {
       return (
-        <SurfaceCard className="p-3">
-          <BannerAd
-            href={banner.href}
-            imageUrl={banner.imageUrl}
-            trackingPixelUrl={banner.trackingPixelUrl}
-            width={banner.width}
-            height={banner.height}
-            category={affiliateCategory ?? "other"}
-            label={banner.title}
-            position="ranking-sidebar"
-            adId={banner.id}
-          />
-        </SurfaceCard>
+        <>
+          {banners.map((banner) => (
+            <SurfaceCard key={banner.id} className="p-3">
+              <BannerAd
+                href={banner.href}
+                imageUrl={banner.imageUrl}
+                trackingPixelUrl={banner.trackingPixelUrl}
+                width={banner.width}
+                height={banner.height}
+                // vertical を優先 (categoryKey 由来の affiliateCategory は fallback)
+                category={banner.vertical ?? affiliateCategory ?? "other"}
+                label={banner.title}
+                position="ranking-sidebar"
+                adId={banner.id}
+                creativeSize={`${banner.width}x${banner.height}`}
+              />
+            </SurfaceCard>
+          ))}
+        </>
       );
     }
   }
@@ -101,7 +120,7 @@ export async function AffiliateAdSlot({
     const ads = await resolveAffiliateTextAds(
       categoryKey,
       locationCode,
-      2,
+      textLimit,
       rankingKey,
     );
     if (ads.length > 0) {

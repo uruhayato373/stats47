@@ -214,8 +214,21 @@ async function verifyApplied(page, asp, siteId, promoName, promoId = null) {
       return { ok: true, state, reason: "" };
     }
     // 名前照合の補助: promotion_id が href に出る (もしも実測)
-    if (promoId) {
-      const hrefs = await page.$$eval("a[href]", (as) => as.map((a) => a.getAttribute("href") ?? "")).catch(() => []);
+    // ★ スコープをページ全体にしない (2026-08-04 実機診断)。もしもの一覧ページには一覧行の
+    //   外にページ共通リンク 3 件 (promotion_id=7630 / 7556 / 170) があり、提携中・申請中の
+    //   **両方**に出る (= 論理的に一覧項目ではない)。ページ全体から拾うと、この 3 件のいずれかを
+    //   申請したとき、申請が成立していなくても「申請完了」と報告してしまう。申請は
+    //   outward-facing なので誤報の実害が大きい。
+    //   スコープは config の listScopeSelector (もしも: "table a[href]" — 一覧行と完全一致する
+    //   ことを実機で確認済み: 提携中 32 行 = ID 32 件 / 申請中 54 行 = ID 54 件) を使い、
+    //   **ページ全体へ fallback しない**。取れなければ href を根拠にしない (fail-closed) —
+    //   主判定は上の名前照合なので、確認できないときは「未完了の可能性」と報告するのが正しい。
+    //   同じ超集合バグが affiliate-status.mjs にもあり、そちらは同 config キーで是正済み。
+    //   (`$$eval` は上と同じく Playwright の DOM 取得 API で、JavaScript の `eval()` ではない。)
+    if (promoId && asp.listScopeSelector) {
+      const hrefs = await page
+        .$$eval(asp.listScopeSelector, (as) => as.map((a) => a.getAttribute("href") ?? ""))
+        .catch(() => []);
       if (hrefs.some((h) => new RegExp(`promotion_id=${promoId}(?![0-9])`).test(h))) {
         return { ok: true, state, reason: "" };
       }
