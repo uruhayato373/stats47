@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 617,
-    "nextId": 803
+    "count": 618,
+    "nextId": 804
   },
   "posts": [
     {
@@ -14495,6 +14495,18 @@
       "content_key": "prefectural-income-growth-rate-h23",
       "post_url": "https://www.instagram.com/p/DbmQKr1mEU6/",
       "posted_at": "2026-08-04T00:14:54Z"
+    },
+    {
+      "id": 803,
+      "status": "posted",
+      "created_at": "2026-08-04T05:46:19.989Z",
+      "updated_at": "2026-08-04T05:46:19.989Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "social-increase",
+      "post_url": "https://www.instagram.com/p/Dbm2GGnG1Jg/",
+      "posted_at": "2026-08-04T05:46:19Z"
     }
   ],
   "nextId": 580,
