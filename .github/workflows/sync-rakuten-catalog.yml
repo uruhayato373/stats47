@@ -51,11 +51,12 @@ jobs:
     # 全件 (品目 459 + 都道府県 47) を 1.2 秒間隔で回すと約 12 分。余裕を持たせる。
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v4
+      # action は SHA ピン留めが必須 (audit-workflow-policy.cjs --strict)。既存 workflow と同じ pin に揃える。
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: develop
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "20"
           cache: npm
