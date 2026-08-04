@@ -42,24 +42,42 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 - **反映 (公開) は develop への push で `publish-affiliate-ads.yml` が自動発火** (workflow_dispatch ではない)。ローカルからの R2 push は不可。
 - **手編集 JSON を SSOT にしない。** 必ず git TS を編集 → CI が R2 を生成。
 
-## 2. 利用プログラム表 (vertical → 提携状況 → 送客ページ)
+## 2. vertical → 送客ページの対応 (設計指針)
 
-| vertical | 主プログラム | 提携 | 主な送客ページ |
-|---|---|---|---|
-| `travel` (旅行・宿泊) | じゃらん / OZmall / TravelWest ✅ ・ **国内OTA (楽天トラベル/一休/Booking) 要提携** | 一部✅ | `/ranking/travel-participation-rate-overnight` (note #1 ファネル)・観光系 ranking・`/themes/tourism` |
-| `labor` (転職・年収) | STRATEGY CAREER / 就職エージェントneo / AI就労支援 / IT求人 ✅ | ✅ | 年収・所得・職業別 ranking・`/themes/{labor-wages,occupation-salary}` |
-| `housing` (住宅・引越し) | 不動産・住宅バナー / ビルドジョブ(施工管理) ✅ ・ **引越し比較 (引越し侍等) 要提携** | 一部✅ | `/areas`・住宅・地価・建設 ranking・`/themes/living-housing` |
-| `economy` (投資・保険・家計) | FP無料相談 / SBI証券 / 未来保険 / ConoHa ✅ | ✅ | 県民所得・貯蓄率・物価 ranking・`/themes/{consumer-prices,real-income}` |
-| `health` (健康・医療) | RIZAP / ClassPass / マカエンペラー / Repilates ✅ | ✅ | 医療・社会保障・健康 ranking・`/themes/{healthcare,aging-society}` |
-| `energy` (通信・エネルギー) | ahamo / SoftBank Air ✅ | ✅ | エネルギー・通信 ranking |
-| `population` (人口・子育て) | 汎用バナー ✅ | ✅ | 人口・世帯・子育て ranking・`/themes/population-dynamics` |
-| `furusato` (ふるさと納税) | イオン九州 ✅ ・ **さとふる/楽天ふるさと納税 要提携** | 一部✅ | `/areas`・財政・地域 ranking・`/themes/local-finance` |
-| `education` (通信教育・資格) | LEC東京リーガルマインド / AI Agent Camp ✅ ・ スタディサプリ等 要提携 | ✅ | 教育 ranking・`/themes/education-culture` |
-| `mobility` (自動車・交通) | 保険スクエアbang! (自動車保険一括見積) / ユーカーパック (車査定) ✅ | ✅ | 交通事故・交通安全 ranking・`/themes/{roads,railway,ports,safety}` |
+**本表は「その意図軸をどのページに当てるか」の設計指針であって、提携状況の台帳ではない。**
 
-- 提携状況 (提携済/申請中/要提携) の真実源は本表。`/register-affiliate-banner status` はこれを読む。
-- **在庫数・ゼロ/手薄軸は本表に書かない** (変動値)。必ず `.claude/state/ads/inventory-latest.json` の
-  `coverage.gapVerticals` / `thinVerticals` (または集約 state `affiliate-operations-latest.json`) から読む。
+| vertical | 商材の性格 | 主な送客ページ |
+|---|---|---|
+| `travel` (旅行・宿泊) | OTA・宿泊予約・現地体験 | `/ranking/travel-participation-rate-overnight` (note #1 ファネル)・観光系 ranking・`/themes/tourism` |
+| `labor` (転職・年収) | 転職エージェント・求人・フリーランス案件 | 年収・所得・職業別 ranking・`/themes/{labor-wages,occupation-salary}` |
+| `housing` (住宅・引越し) | 不動産・リフォーム・引越し・住宅ローン | `/areas`・住宅・地価・建設 ranking・`/themes/living-housing` |
+| `economy` (投資・保険・家計) | FP 相談・証券・保険・家計見直し | 県民所得・貯蓄率・物価 ranking・`/themes/{consumer-prices,real-income}` |
+| `health` (健康・医療) | フィットネス・健康食品・ボディケア | 医療・社会保障・健康 ranking・`/themes/{healthcare,aging-society}` |
+| `energy` (通信・エネルギー) | 回線・格安 SIM・電力ガス・蓄電池 | エネルギー・通信 ranking |
+| `population` (人口・子育て) | 子育て・育児用品・汎用 | 人口・世帯・子育て ranking・`/themes/population-dynamics` |
+| `furusato` (ふるさと納税) | 返礼品ポータル | `/areas`・財政・地域 ranking・`/themes/local-finance` |
+| `education` (通信教育・資格) | 資格講座・プログラミング/AI スクール・語学 | 教育 ranking・`/themes/education-culture` |
+| `mobility` (自動車・交通) | 自動車保険・車査定・交通 | 交通事故・交通安全 ranking・`/themes/{roads,railway,ports,safety}` |
+
+### 提携状況の真実源 (★2026-08-04 に一本化)
+
+**どの案件をどの ASP で提携済み / 申請中かの真実源は state ファイルであって、本表ではない。**
+
+| ASP | 真実源 | 更新手段 |
+|---|---|---|
+| もしも / afb | `.claude/state/ads/affiliate-catalog.json` | `affiliate-status.mjs --write` (実機照合) |
+| A8 | `.claude/state/ads/a8-catalog.json` | `a8-browser.ts check-approval` / `import-partnered` |
+
+以前は本表の「提携」列 (✅ / 一部✅ / 要提携) を真実源としていたが、実機照合で更新される
+state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-04 の照合で承認 37 件が判明した
+時点で、表は travel/furusato/housing を「要提携」のままにしていた)。人が手で維持する表は
+実機照合の頻度に追いつけないため、ステータスは state に一本化し表は設計指針に縮退させた。
+
+- `/register-affiliate-banner status` は上記 2 つの state を読む (本表は読まない)。
+- **在庫数・ゼロ/手薄軸も本表に書かない** (変動値)。`.claude/state/ads/inventory-latest.json` の
+  `coverage.gapVerticals` / `thinVerticals` (または集約 `affiliate-operations-latest.json`) から読む。
+- 本表に書くのは**変わりにくいもの**だけ (軸の意味・送客先ページ)。個別プログラム名は
+  入れ替わるため書かない。
 
 ## 3. フォーマット & サイズ規約 (canonical 4 種・lint enforced)
 
@@ -368,7 +386,10 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | 提携申請は既定 dry-run・実申請はオーナー承認 | `--commit` gate。Red Line 案件は `--commit` でも落とす |
 | 「一括提携申請へ」を絶対に押さない | ラベル完全一致 + 「一括」を含む候補を機械除外 |
 | もしもの申請はサイト select を read-back 確認してから押す | `selectSiteInForm` が不一致で abort |
-| 取得できなかった ASP を「提携なし」と混同しない | `affiliate-status` が判定不能として区別。**もしもは一覧に案件 ID が出ない**ので ID 抽出数は常に 0 になる。一覧の実件数を併記し「ID 0 件 = 提携ゼロ」と誤読させない (2026-07-28 に実際に誤読し、提携中 7 件・申請中 6 件を「0 件」と報告した) |
+| 取得できなかった ASP を「提携なし」と混同しない | `affiliate-status` が判定不能として区別。一覧の実件数を必ず併記し「ID 0 件 = 提携ゼロ」と誤読させない (2026-07-28 に実際に誤読し、提携中 7 件・申請中 6 件を「0 件」と報告した)。**もしもは画面テキストに ID が出ない**が `hrefIdPattern` + `listScopeSelector` で抽出でき、行数と一致する (2026-08-04 実測: 提携中 32 行 = ID 32 件)。**A8 は `affiliate-status` に抽出パターンが無く常に 0 件**なので、A8 の提携状態は `a8-catalog.json` 側 (`check-approval`) で見る |
+| 幻 ID を台帳へ書かない | `detectPhantomIds` が提携中∩申請中を自動除外し警告する。1 案件が同時に両方であることはありえないので、両方に出る ID は一覧行の外のページ共通リンク。2026-08-04 実測でもしもの `7630 / 7556 / 170` が該当し、うち 2 件が「台帳に無い実機の提携」と誤検出、1 件は過去の `--write` で実在しないエントリ (`moshimo-170`) として混入していた |
+| 一覧行数と ID 数の一致を毎回確かめる | `checkIdRowParity` が乖離時に警告。ズレは `listScopeSelector` が一覧行に限定できていない (超集合) か取りこぼしのサイン。修正前は提携中 32 行に対し ID 35 件だった |
+| 名前を推測で埋めない | `--write` の名前補完は afb = 4 行ブロックのプロモーション名 (`parseAfbBlocks`)、もしも = DOM 順 index 対応 (`zipNamesWithIds`) で、**既知名と照合が通ったときだけ**採用する。通らなければ補完せず報告に留める |
 | 申請の完了を文言で判定しない | もしもの申請は **2 段階** (申請ページ →`/apply/confirm` で確定)。確認ページにも「申請」の語が出るため文言判定では未完了を成功と誤報する。完了は**申請中または提携中一覧に当該案件が現れたか**だけを根拠にする (2026-07-28 に 4 件を誤報)。★もしもは**即時承認**があり申請中を経ず提携中へ直行する (同日 4 件実測) — 申請中一覧だけ見ると成功を unverified と誤報する |
 | ID 抽出は一覧行スコープに限定し、行数と一致することを確かめる | ページ全体の `a[href]` から拾うと**一覧行の外にあるページ共通リンクが混ざり超集合**になる。もしもは提携中・申請中の両ページに `promotion_id=7630 / 7556 / 170` の共通リンクがあり、2026-08-04 に提携中 32 行に対し ID 35 件を抽出、うち 2 件を「台帳に無い実機の提携」として**誤検出**した (両ページに同時に出る ID は論理的に一覧項目ではない、が発見の決め手)。config の `listScopeSelector` (もしも = `table a[href]`) で一覧スコープを明示し、ログの「一覧 N 件 / ID 累計 N 件」が**一致すること**を毎回確認する。afb は ID を `【PID:N】` の可視テキストから取るため本件は構造的に起きない |
 | 認証情報を env / config に置かない | 人間が手動ログイン → 永続プロファイル |

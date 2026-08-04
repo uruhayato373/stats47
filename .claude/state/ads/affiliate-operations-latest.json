@@ -1,15 +1,17 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-02T14:28:55.591Z",
+  "generatedAt": "2026-08-04T02:42:37.077Z",
   "inventorySnapshot": ".claude/state/ads/inventory-latest.json",
   "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-08-02.json",
   "freshness": {
-    "inventoryDays": 0,
-    "ga4Days": 0
+    "inventoryDays": 1,
+    "ga4Days": 1
   },
   "measurementGate": {
-    "status": "ready",
-    "reasons": []
+    "status": "blocked",
+    "reasons": [
+      "ga4-variant-dimension-missing"
+    ]
   },
   "publishGate": {
     "status": "ready",
@@ -25,13 +27,46 @@
     "missingDisclosure": []
   },
   "experiments": {
-    "active": [],
+    "active": [
+      {
+        "experimentId": "blog-inbody-format",
+        "kind": "code",
+        "targetLocation": null,
+        "startedAt": "2026-08-04",
+        "daysElapsed": 0,
+        "minSamplePerVariant": 500,
+        "minDurationDays": 14,
+        "maxDurationDays": 56,
+        "sampleReached": false,
+        "variants": [
+          {
+            "variantId": "text",
+            "impressions": 0,
+            "clicks": 0,
+            "ctr": null
+          },
+          {
+            "variantId": "banner",
+            "impressions": 0,
+            "clicks": 0,
+            "ctr": null
+          }
+        ],
+        "status": "collecting"
+      }
+    ],
     "readyToDecide": [],
     "invalid": [],
     "inconclusive": [],
     "closed": []
   },
-  "recommendedActions": [],
+  "recommendedActions": [
+    {
+      "id": "fix-measurement-gate",
+      "reason": "ga4-variant-dimension-missing",
+      "command": "gh workflow run affiliate-ga4-weekly.yml / GA4 custom dimension 登録 (rules §6)"
+    }
+  ],
   "ga4Totals": {
     "impressions": 3400,
     "clicks": 5,

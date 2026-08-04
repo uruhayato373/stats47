@@ -333,3 +333,73 @@ test("state validate: 壊れた state を検出 (blocked なのに reasons 空 /
   assert.ok(errors.some((e) => e.includes("reasons が空")));
   assert.ok(errors.some((e) => e.includes("freshness")));
 });
+
+// ─── kind: "code" のコード駆動 A/B (2026-08-04 新設) ────────────────
+//   variant の実体が広告エントリではなくコード側の分岐にある実験。
+//   配分は決定的ハッシュで weight を持たないため、SSOT variant 検査は構造的に通らない。
+//   registry の variantIds を正として扱えることを固定する。
+
+function codeRegistryEntry(overrides = {}) {
+  return {
+    experimentId: "blog-inbody-format",
+    kind: "code",
+    status: "collecting",
+    variantIds: ["text", "banner"],
+    startedAt: "2026-06-01", // NOW から 44 日経過
+    minSamplePerVariant: 500,
+    minDurationDays: 14,
+    maxDurationDays: 56,
+    ...overrides,
+  };
+}
+
+test("code 実験: SSOT に variant が無くても invalid にならない", () => {
+  const result = evaluateExperiments({
+    registry: [codeRegistryEntry()],
+    ads: [], // コード駆動なので affiliate-ads-data.ts に variant は存在しない
+    variantMetrics: [
+      { experimentId: "blog-inbody-format", variantId: "text", impressions: 900, clicks: 4, ctr: 0.0044 },
+      { experimentId: "blog-inbody-format", variantId: "banner", impressions: 800, clicks: 9, ctr: 0.011 },
+    ],
+    nowIso: NOW,
+  });
+  assert.equal(result.invalid.length, 0, "SSOT variant 検査を code 実験に適用してはいけない");
+  assert.equal(result.readyToDecide.length, 1);
+  assert.equal(result.readyToDecide[0].kind, "code");
+});
+
+test("code 実験: variantIds が 2 未満なら invalid", () => {
+  const result = evaluateExperiments({
+    registry: [codeRegistryEntry({ variantIds: ["text"] })],
+    ads: [],
+    variantMetrics: [],
+    nowIso: NOW,
+  });
+  assert.equal(result.invalid.length, 1);
+  assert.ok(result.invalid[0].reasons.some((r) => r.includes("registry-variants-insufficient")));
+});
+
+test("code 実験: sample 未到達なら collecting (期間だけでは決めない)", () => {
+  const result = evaluateExperiments({
+    registry: [codeRegistryEntry()],
+    ads: [],
+    variantMetrics: [
+      { experimentId: "blog-inbody-format", variantId: "text", impressions: 100, clicks: 1, ctr: 0.01 },
+      { experimentId: "blog-inbody-format", variantId: "banner", impressions: 90, clicks: 2, ctr: 0.022 },
+    ],
+    nowIso: NOW,
+  });
+  assert.equal(result.active.length, 1);
+  assert.equal(result.active[0].status, "collecting");
+});
+
+test("creative 実験は従来どおり SSOT variant を検査する (回帰防止)", () => {
+  const result = evaluateExperiments({
+    registry: [registryEntry()],
+    ads: [], // SSOT に variant が無い → invalid のまま
+    variantMetrics: [],
+    nowIso: NOW,
+  });
+  assert.equal(result.invalid.length, 1);
+  assert.ok(result.invalid[0].reasons.some((r) => r.includes("ssot-variants-insufficient")));
+});

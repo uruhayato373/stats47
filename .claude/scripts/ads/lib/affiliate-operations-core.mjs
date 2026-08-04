@@ -168,22 +168,35 @@ export function evaluateExperiments({ registry, ads, variantMetrics, nowIso }) {
     }
 
     const reasons = [];
-    const variants = ssotByExperiment.get(id) ?? [];
-    if (variants.length < 2) reasons.push(`ssot-variants-insufficient(${variants.length})`);
-    const variantIds = variants.map((v) => v.variantId ?? "(none)");
-    if (new Set(variantIds).size !== variantIds.length) reasons.push("variant-id-duplicate");
-    if (variantIds.includes("(none)")) reasons.push("variant-id-missing");
-    for (const v of variants) {
-      if (v.weight != null && !(Number(v.weight) > 0)) reasons.push(`weight-invalid(${v.variantId})`);
-      if (exp.targetLocation && v.locationCode !== exp.targetLocation) {
-        reasons.push(`target-location-mismatch(${v.variantId}:${v.locationCode})`);
+    // ★ kind: "code" (2026-08-04 新設) — variant の実体が広告エントリではなく**コード側の分岐**
+    //   にある実験 (例 blog-inbody-format: 本文にテキストを出すかバナーを出すか)。
+    //   配分は決定的ハッシュで行い weight を持たないため、SSOT (affiliate-ads-data.ts) の
+    //   variant 検査は**構造的に通らない**。registry の variantIds を正として扱う。
+    //   計測 (GA4 の experiment_id / variant_id) と期間・sample の検査は creative と同じ。
+    const isCode = exp.kind === "code";
+    let variantIds;
+    if (isCode) {
+      variantIds = exp.variantIds ?? [];
+      if (variantIds.length < 2) reasons.push(`registry-variants-insufficient(${variantIds.length})`);
+      if (new Set(variantIds).size !== variantIds.length) reasons.push("variant-id-duplicate");
+    } else {
+      const variants = ssotByExperiment.get(id) ?? [];
+      if (variants.length < 2) reasons.push(`ssot-variants-insufficient(${variants.length})`);
+      variantIds = variants.map((v) => v.variantId ?? "(none)");
+      if (new Set(variantIds).size !== variantIds.length) reasons.push("variant-id-duplicate");
+      if (variantIds.includes("(none)")) reasons.push("variant-id-missing");
+      for (const v of variants) {
+        if (v.weight != null && !(Number(v.weight) > 0)) reasons.push(`weight-invalid(${v.variantId})`);
+        if (exp.targetLocation && v.locationCode !== exp.targetLocation) {
+          reasons.push(`target-location-mismatch(${v.variantId}:${v.locationCode})`);
+        }
       }
-    }
-    if (exp.variantIds) {
-      const declared = new Set(exp.variantIds);
-      const actual = new Set(variantIds);
-      if (declared.size !== actual.size || [...declared].some((v) => !actual.has(v))) {
-        reasons.push("registry-ssot-variant-mismatch");
+      if (exp.variantIds) {
+        const declared = new Set(exp.variantIds);
+        const actual = new Set(variantIds);
+        if (declared.size !== actual.size || [...declared].some((v) => !actual.has(v))) {
+          reasons.push("registry-ssot-variant-mismatch");
+        }
       }
     }
     if (!exp.startedAt || daysBetween(exp.startedAt, nowIso) == null) reasons.push("started-at-invalid");
@@ -211,6 +224,7 @@ export function evaluateExperiments({ registry, ads, variantMetrics, nowIso }) {
 
     const summary = {
       experimentId: id,
+      kind: exp.kind ?? "creative",
       targetLocation: exp.targetLocation ?? null,
       startedAt: exp.startedAt,
       daysElapsed,

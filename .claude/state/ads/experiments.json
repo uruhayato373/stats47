@@ -1,5 +1,32 @@
 {
   "schemaVersion": 1,
-  "_comment": "クリエイティブ A/B 実験 registry (SSOT)。書込は /manage-affiliate-experiment のみ。variant 実体は apps/web/scripts/affiliate-ads-data.ts の experimentId/variantId/weight。判定は build-affiliate-operations-state.ts が決定的に行う (invalid/collecting/ready-to-decide/inconclusive/closed)。勝者の自動反映は禁止 — effect 判定は evidence-based-judgment.md + improvement-triage を通す。",
-  "experiments": []
+  "_comment": "A/B 実験 registry (SSOT)。書込は /manage-affiliate-experiment のみ。判定は build-affiliate-operations-state.ts が決定的に行う (invalid/collecting/ready-to-decide/inconclusive/closed)。勝者の自動反映は禁止 — effect 判定は evidence-based-judgment.md + improvement-triage を通す。",
+  "_kinds": {
+    "creative": "variant 実体 = apps/web/scripts/affiliate-ads-data.ts の experimentId/variantId/weight。client 加重ランダム + sticky。close は weight 引き上げ / 敗者 isActive:false",
+    "code": "variant 実体 = コード側の分岐 (どの広告でなく、どう出すか)。決定的ハッシュで配分し weight を持たないため SSOT variant 検査の対象外。close は勝ちフォーマットへ寄せるコード変更 PR"
+  },
+  "experiments": [
+    {
+      "experimentId": "blog-inbody-format",
+      "kind": "code",
+      "status": "collecting",
+      "surface": "blog-article-body",
+      "hypothesis": "ブログ本文の広告を 300x250 バナーにすると、テキストリンクより CTR が上がる",
+      "variantIds": ["text", "banner"],
+      "_variantNotes": {
+        "text": "本文 h2 の 2/4/6 番目直前にテキストリンク 3 本 (従来)",
+        "banner": "同じ位置に 300x250 バナー 3 枚",
+        "end-banner": "記事末尾のバナー。format に関わらず常設なので A/B の対象外 (variantIds に入れない参照系列)"
+      },
+      "assignment": "slug のハッシュで記事ごとに固定 (pickInBodyAdFormat)。公開 432 記事で text 219 / banner 213",
+      "implementation": "apps/web/src/features/blog/utils/in-body-ad-format.ts + components/md-content.tsx",
+      "measurement": "GA4 affiliate_impression / affiliate_click の experiment_id=blog-inbody-format, variant_id",
+      "startedAt": "2026-08-04",
+      "minSamplePerVariant": 500,
+      "minDurationDays": 14,
+      "maxDurationDays": 56,
+      "owner": "improvement-triage",
+      "notes": "★2026-08-04 に計装の断絶がある (未計装 4 コンポーネントの是正・vertical 汚染の是正・枠拡張を同時に実施)。この日より前の窓と比較しない。close は weight ではなくコード変更 PR で行う"
+    }
+  ]
 }

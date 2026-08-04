@@ -115,11 +115,20 @@ node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 直近 28 日。snapshot
 
 ### Step 3: CTR 集計 + 弱枠特定
 
-(category, position) ごとに `CTR = affiliate_click / ad_impression` を算出し、3 種の弱点を分類する:
+(category, position) ごとに `CTR = affiliate_click / affiliate_impression` を算出し、
+3 種の弱点を分類する。
+
+> **★ imp=0 を「在庫不足」と即断しない (2026-08-04 の教訓)。**
+> 広告を描画する 9 コンポーネントのうち 4 つが **クリックだけ送って impression を
+> 送っていなかった**ため、native 枠が impression 内訳に 1 つも現れない状態が続いた。
+> 「在庫はあるが imp=0」を見たら、**まず計装の有無を確認する**:
+> `npx vitest run --root apps/web src/features/ads/__tests__/impression-tracking-contract.test.ts`
+> (このテストが通っていれば計装漏れは無い = 在庫/配置の問題として扱ってよい)。
+> 計装が原因なのに在庫を積むと、表示されない在庫だけが増える。
 
 | 分類 | 条件 | 打ち手 |
 |---|---|---|
-| **impression ゼロ (機会損失)** | gapCategory / 在庫はあるが imp=0 | 在庫補充 (AFF-02) / 配置追加 (AFF-03) |
+| **impression ゼロ (機会損失)** | gapCategory / 在庫はあるが imp=0 **かつ計装は有る** | 在庫補充 (AFF-02) / 配置追加 (AFF-03) |
 | **低 CTR (click されない)** | imp ≥ baseline かつ CTR < 全体中央値 | マッチング修正 / CTA 文言 / 位置 (AFF-04) |
 | **高 CTR だが imp 少** | CTR 上位だが imp 少 | 同案件を高トラフィック枠へ拡大 |
 
@@ -138,6 +147,15 @@ target metric、deployed_at、関連PR、詳細 (仮説 / 検証コマンド / �
 `.claude/rules/evidence-based-judgment.md` の記入テンプレで書く。
 
 ### Step 5: 効果判定 (observe モードで before/after)
+
+> **★2026-08-04 に計測の断絶がある。この日をまたぐ before/after 比較をしない。**
+> 同日に (a) 未計装だった 4 コンポーネントへの impression 計装追加、(b) `affiliate_vertical`
+> の汚染是正 (10 軸外の値が "other" として imp の 61% を占めていた)、(c) 枠の拡張
+> (blog 本文 A/B・記事末尾・ranking/themes 末尾) を同時に入れた。
+> **impression は増え CTR は下がる**が、これは実態の悪化ではなく分母が埋まった結果。
+> 2026-08-04 より前の窓と数字を並べると誤った判定になる。
+> 併せて `ad_impression` → `affiliate_impression` の改名 (2026-07-28) もあるため、
+> **実質的に比較可能なのは 2026-08-04 以降どうし**だけ。
 
 施策デプロイから 1〜4 週後に GA4 を再取得し、impression / CTR の before/after を比較。
 実証チェックリストを通し、判定結果を `reference/improvement-log.md` に追記してから

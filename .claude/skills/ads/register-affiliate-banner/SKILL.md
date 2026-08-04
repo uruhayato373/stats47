@@ -30,8 +30,9 @@ co_agents: [devops-runner]
    - Output: `Vertical | 提携先候補 | 根拠 (想定 imp 機会 / 単価帯 / 送客ページ) | ASP`。
 4. ユーザーに **ASP (A8.net 等) で提携申請** を促して終了 (承認待ちは非同期)。**1 回 1 件**。
 
-候補プログラムの例 (国内旅行OTA / 自動車保険一括見積 / 引越し比較 / ふるさと納税 / 通信教育 等) と
-提携状況は rules §2 利用プログラム表を参照する。
+vertical の意味と送客ページは rules §2 を参照する。**提携済みかどうかは §2 ではなく
+state (`affiliate-catalog.json` / `a8-catalog.json`) を読む** — §2 の表は設計指針であって
+提携台帳ではない (2026-08-04 に一本化。表を真実源にしていた頃は実機と乖離していた)。
 
 ---
 
@@ -119,8 +120,21 @@ outward-facing なので push はユーザーに確認。反映後、対象 vert
 
 ## status — 提携状況の一覧
 
-`rules §2 利用プログラム表`の提携列 (提携済 / 申請中 / 要提携) を読み、vertical 別に一覧する。
-在庫ゼロ/手薄の vertical は `.claude/state/ads/inventory-latest.json` の `coverage` から読む (固定文を持たない)。
+**提携状況の真実源は state ファイル** (rules §2 の表ではない。2026-08-04 に一本化)。
+
+| ASP | 読む先 |
+|---|---|
+| もしも / afb | `.claude/state/ads/affiliate-catalog.json` の `programs[].asps[].status` |
+| A8 | `.claude/state/ads/a8-catalog.json` の `entries[].status` |
+
+vertical 別に `approved` / `applying` を集計して一覧する。**固定文を持たない** —
+数えるたびに実態が変わるため、必ず state を読んで数える。
+
+- 最終照合日は `affiliate-catalog.json` の `verifiedAt`。古ければ `/affiliate-operate status` を促す。
+- 在庫ゼロ/手薄の vertical は `.claude/state/ads/inventory-latest.json` の `coverage` から読む。
+- **提携済み = 配信中ではない**。配信 SSOT は `apps/web/scripts/affiliate-ads-data.ts` で、
+  もしも / afb は広告コード取得 (harvest) の経路が無いため提携済みでも未配信のことがある。
+  両者を混同して「提携したのに出ていない」と誤診しない。
 
 ---
 

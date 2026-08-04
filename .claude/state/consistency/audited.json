@@ -1,7 +1,17 @@
 {
-  "hash": "58589ac7c95317a415fc12eec0563fafdd906157298c215ac4959277a00c62c0",
-  "audited_at": "2026-08-04T00:44:37",
+  "hash": "86b733bcb618a9103cb9213540dad4b27403e3794eceab2a18d08cbaf855f65e",
+  "audited_at": "2026-08-04T02:43:59",
   "files": [
-    ".claude/scripts/ads/affiliate-apply.mjs"
+    ".claude/agents/affiliate-manager.md",
+    ".claude/agents/affiliate-operator.md",
+    ".claude/agents/asp-scout.md",
+    ".claude/rules/affiliate-ads-standards.md",
+    ".claude/scripts/ads/__tests__/affiliate-operations-core.test.mjs",
+    ".claude/scripts/ads/lib/affiliate-operations-core.mjs",
+    ".claude/skills/ads/affiliate-operate/SKILL.md",
+    ".claude/skills/ads/manage-affiliate-experiment/SKILL.md",
+    ".claude/skills/ads/register-affiliate-banner/SKILL.md",
+    ".claude/skills/ads/scout-asp/SKILL.md",
+    ".claude/skills/analytics/affiliate-improvement/SKILL.md"
   ]
 }
