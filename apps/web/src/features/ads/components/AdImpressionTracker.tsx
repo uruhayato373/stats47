@@ -12,6 +12,11 @@ interface AdImpressionTrackerProps {
   experimentId?: string;
   variantId?: string;
   creativeSize?: string;
+  /**
+   * ラッパー div に付けるクラス。grid/flex の子として挟む場合に、元の子要素が
+   * 持っていたレイアウト指定 (h-full 等) を引き継がせて見た目を変えないために使う。
+   */
+  className?: string;
   children: React.ReactNode;
 }
 
@@ -43,6 +48,7 @@ export function AdImpressionTracker({
   experimentId,
   variantId,
   creativeSize,
+  className,
   children,
 }: AdImpressionTrackerProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -105,5 +111,9 @@ export function AdImpressionTracker({
     };
   }, [category, label, position, adId, experimentId, variantId, creativeSize]);
 
-  return <div ref={ref}>{children}</div>;
+  return (
+    <div ref={ref} className={className}>
+      {children}
+    </div>
+  );
 }

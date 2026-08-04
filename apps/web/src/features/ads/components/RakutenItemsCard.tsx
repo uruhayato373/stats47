@@ -5,6 +5,7 @@ import { getSurfaceCardClassName } from "@/components/surface";
 import { detectProductKeyword } from "../constants/product-keywords";
 import { searchRakutenItems } from "../lib/rakuten-api";
 
+import { AdImpressionTracker } from "./AdImpressionTracker";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
 interface RakutenItemsCardProps {
@@ -40,7 +41,16 @@ export async function RakutenItemsCard({
   const adId = `rakuten-item-${keyword.term}`;
   const searchUrl = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword.searchTerm)}/`;
 
+  // ★ 2026-08-04: impression 計装を追加 (それまでクリックのみ送信していた)。
+  //    カード内の全アイテムが 1 つの adId を共有するので **カード単位で 1 impression**
+  //    とする (アイテム単位にすると同一 adId が 4 重に計上され CTR が 1/4 に歪む)。
   return (
+    <AdImpressionTracker
+      category="economy"
+      label={`${keyword.term}の人気商品`}
+      position={position}
+      adId={adId}
+    >
     <div className="rounded-none border border-green-100 bg-green-50/50 p-4">
       <div className="mb-3 flex items-center justify-between">
         <span className="text-xs font-medium text-muted-foreground/70">PR</span>
@@ -104,5 +114,6 @@ export async function RakutenItemsCard({
         })}
       </div>
     </div>
+    </AdImpressionTracker>
   );
 }
