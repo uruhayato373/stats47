@@ -30,8 +30,10 @@ import {
   type RakutenItem,
 } from "../src/features/ads/lib/rakuten-api";
 import {
+  allPrefCodes,
   rakutenFurusatoKey,
   rakutenItemsKey,
+  toSnapshotItems,
   type RakutenSnapshot,
   type RakutenSnapshotItem,
 } from "../src/features/ads/repositories/rakuten-snapshot";
@@ -54,17 +56,8 @@ const DRY_RUN = argv.includes("--dry-run");
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-function slim(items: RakutenItem[]): RakutenSnapshotItem[] {
-  return items.map((it) => ({
-    name: it.itemName,
-    // アフィリエイト URL があれば必ずそちらを使う (無いと成果にならない)
-    url: it.affiliateUrl ?? it.itemUrl,
-    price: it.itemPrice,
-    image: it.mediumImageUrls[0]?.imageUrl ?? it.smallImageUrls[0]?.imageUrl ?? null,
-    reviewCount: it.reviewCount,
-    reviewAverage: it.reviewAverage,
-  }));
-}
+// 削り込みは repositories 側 (toSnapshotItems) が単一実装。配信と形がズレないようにする。
+const slim = (items: RakutenItem[]): RakutenSnapshotItem[] => toSnapshotItems(items);
 
 async function put(key: string, items: RakutenSnapshotItem[], generatedAt: string) {
   if (DRY_RUN) return;
@@ -87,9 +80,9 @@ async function main() {
   const keywords = LIMIT > 0 ? RUNTIME_PRODUCT_KEYWORDS.slice(0, LIMIT) : RUNTIME_PRODUCT_KEYWORDS;
   // 県一覧は公開 API 経由で組み立てる (FURUSATO_NOZEI_LINKS は module 内定数で export されていない)。
   // getFurusatoNozeiLink は signatureKeyword も付けて返すため、カード側と同じ絞り込み条件になる。
-  const allPrefs = Array.from({ length: 47 }, (_, i) =>
-    getFurusatoNozeiLink(`${String(i + 1).padStart(2, "0")}000`),
-  ).filter((l): l is NonNullable<typeof l> => l !== null);
+  const allPrefs = allPrefCodes()
+    .map((code) => getFurusatoNozeiLink(code))
+    .filter((l): l is NonNullable<typeof l> => l !== null);
   const prefs = LIMIT > 0 ? allPrefs.slice(0, LIMIT) : allPrefs;
 
   console.log(`品目 ${keywords.length} / 都道府県 ${prefs.length}${DRY_RUN ? " (dry-run)" : ""}`);
@@ -120,30 +113,17 @@ async function main() {
 
   let emptyPrefs = 0;
   for (const [i, link] of prefs.entries()) {
-    // FurusatoNozeiCard と同じ絞り込み (代表返礼品 → 0 件なら県名のみ)
-    let got: RakutenItem[] = [];
-    if (link.signatureKeyword) {
-      got = await searchRakutenItems({
-        keyword: `${link.prefName} ${link.signatureKeyword}`,
-        genreId: FURUSATO_NOZEI_GENRE_ID,
-        hits: HITS_PER_QUERY,
-        sort: "-reviewCount",
-        timeoutMs: 15000,
-      });
-      queries++;
-      await sleep(REQUEST_INTERVAL_MS);
-    }
-    if (got.length === 0) {
-      got = await searchRakutenItems({
-        keyword: link.prefName,
-        genreId: FURUSATO_NOZEI_GENRE_ID,
-        hits: HITS_PER_QUERY,
-        sort: "-reviewCount",
-        timeoutMs: 15000,
-      });
-      queries++;
-      await sleep(REQUEST_INTERVAL_MS);
-    }
+    // ★絞り込み条件 (代表返礼品で高意図検索 → 0 件なら県名のみ) は
+    //   searchFurusatoItems が単一実装。ここで組み直すと二重管理になりドリフトする。
+    const got = await searchFurusatoItems(
+      link.prefName,
+      HITS_PER_QUERY,
+      link.signatureKeyword,
+      15000,
+    );
+    // 内部で最大 2 回問い合わせるため、QPS 1 を守るようその分待つ
+    queries += link.signatureKeyword ? 2 : 1;
+    await sleep(REQUEST_INTERVAL_MS * (link.signatureKeyword ? 2 : 1));
     if (got.length === 0) emptyPrefs++;
     if (got.some((x) => x.affiliateUrl)) withAffiliate++;
     await put(rakutenFurusatoKey(link.prefCode), slim(got), generatedAt);

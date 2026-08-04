@@ -205,6 +205,7 @@ export async function searchFurusatoItems(
   prefName: string,
   hits = 4,
   signatureKeyword?: string,
+  timeoutMs?: number,
 ): Promise<RakutenItem[]> {
   if (signatureKeyword) {
     const focused = await searchRakutenItems({
@@ -212,6 +213,7 @@ export async function searchFurusatoItems(
       genreId: FURUSATO_NOZEI_GENRE_ID,
       hits,
       sort: "-reviewCount",
+      timeoutMs,
     });
     if (focused.length > 0) return focused;
   }
@@ -220,5 +222,6 @@ export async function searchFurusatoItems(
     genreId: FURUSATO_NOZEI_GENRE_ID,
     hits,
     sort: "-reviewCount",
+    timeoutMs,
   });
 }
