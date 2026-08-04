@@ -10,7 +10,7 @@
     "unknown": "未確認 (調べていない。none と区別する)"
   },
   "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
-  "updatedAt": "2026-08-04T00:28:18.357Z",
+  "updatedAt": "2026-08-04T00:45:19.732Z",
   "verifiedAt": "2026-08-04",
   "programs": {
     "moshimo-7059": {
@@ -124,8 +124,8 @@
       }
     },
     "moshimo-7494": {
-      "name": null,
-      "vertical": null,
+      "name": "AI鬼管理｜Claude Code活用の業務自動化トレーニングの無料申込完了",
+      "vertical": "education",
       "asps": {
         "moshimo": {
           "promotionId": "7494",
@@ -145,8 +145,8 @@
       }
     },
     "moshimo-7462": {
-      "name": null,
-      "vertical": null,
+      "name": "FJORD BOOT CAMP｜プログラミングスクールの申込み完了",
+      "vertical": "education",
       "asps": {
         "moshimo": {
           "promotionId": "7462",
@@ -166,8 +166,8 @@
       }
     },
     "moshimo-6298": {
-      "name": null,
-      "vertical": null,
+      "name": "バイテック生成AI｜【高額報酬】話題の生成AIオンラインスクールの説明会参加・契約",
+      "vertical": "education",
       "asps": {
         "moshimo": {
           "promotionId": "6298",
@@ -187,8 +187,8 @@
       }
     },
     "moshimo-5537": {
-      "name": null,
-      "vertical": null,
+      "name": "転職エージェントナビ｜転職マッチングサービスの新規会員登録",
+      "vertical": "labor",
       "asps": {
         "moshimo": {
           "promotionId": "5537",
@@ -208,8 +208,8 @@
       }
     },
     "moshimo-5289": {
-      "name": null,
-      "vertical": null,
+      "name": "データサイエンスブートキャンプ｜データサイエンティストになるためのオンラインスクールの初回面談・入塾申し込み",
+      "vertical": "education",
       "asps": {
         "moshimo": {
           "promotionId": "5289",
@@ -229,8 +229,8 @@
       }
     },
     "moshimo-3694": {
-      "name": null,
-      "vertical": null,
+      "name": "キャリア人財育英協会（CRIA）｜労働トラブル相談士認定講座 資料請求・お申込み",
+      "vertical": "education",
       "asps": {
         "moshimo": {
           "promotionId": "3694",
@@ -250,7 +250,7 @@
       }
     },
     "moshimo-54": {
-      "name": null,
+      "name": "楽天市場の商品購入 / 楽天グループ株式会社",
       "vertical": null,
       "asps": {
         "moshimo": {
@@ -270,30 +270,9 @@
         }
       }
     },
-    "moshimo-170": {
-      "name": null,
-      "vertical": null,
-      "asps": {
-        "moshimo": {
-          "promotionId": "170",
-          "status": "approved",
-          "history": [
-            {
-              "at": "2026-07-28T11:29:06.305Z",
-              "status": "approved",
-              "note": "affiliate-status --write が実機一覧から取り込み"
-            },
-            {
-              "at": "2026-07-28",
-              "note": "ID はページ全体 href 抽出 (超集合の可能性・行スコープ不成立)。register 時に promotion 画面で実在確認する"
-            }
-          ]
-        }
-      }
-    },
     "moshimo-936": {
-      "name": null,
-      "vertical": null,
+      "name": "【CodeCamp（コードキャンプ）】現役エンジニアによるオンラインのプログラミング個別指導の新規申込 / コードキャンプ株式会社【もしもAF一部独占】",
+      "vertical": "education",
       "asps": {
         "moshimo": {
           "promotionId": "936",
@@ -313,8 +292,8 @@
       }
     },
     "moshimo-5857": {
-      "name": null,
-      "vertical": null,
+      "name": "Code Lesson｜独学でプロを目指すプログラミング学習サービスの無料・有料会員登録完了",
+      "vertical": "education",
       "asps": {
         "moshimo": {
           "promotionId": "5857",
@@ -334,8 +313,8 @@
       }
     },
     "moshimo-5816": {
-      "name": null,
-      "vertical": null,
+      "name": "忍者CODE｜未経験からプロを目指せるオンラインプログラミングスクールの新規各種申込",
+      "vertical": "education",
       "asps": {
         "moshimo": {
           "promotionId": "5816",
@@ -355,8 +334,8 @@
       }
     },
     "moshimo-5574": {
-      "name": null,
-      "vertical": null,
+      "name": "Tech Mentor｜プログラミング・Webデザイン・AIアプリ開発を学べるプログラミングスクールの資料請求・無料カウンセリング申込",
+      "vertical": "education",
       "asps": {
         "moshimo": {
           "promotionId": "5574",
@@ -376,8 +355,8 @@
       }
     },
     "moshimo-5190": {
-      "name": null,
-      "vertical": null,
+      "name": ".Pro（ドットプロ）｜非エンジニア向けリスキリング講座の無料カウンセリング予約",
+      "vertical": "education",
       "asps": {
         "moshimo": {
           "promotionId": "5190",
@@ -397,8 +376,8 @@
       }
     },
     "moshimo-1124": {
-      "name": null,
-      "vertical": null,
+      "name": "フリーランスITエンジニアの案件・求人情報サイト【ギークスジョブ】WEBエントリー",
+      "vertical": "labor",
       "asps": {
         "moshimo": {
           "promotionId": "1124",
@@ -419,7 +398,7 @@
     },
     "afb-14065": {
       "name": "【PID:14065】 専門転職（その他）",
-      "vertical": null,
+      "vertical": "labor",
       "asps": {
         "afb": {
           "pid": "14065",
@@ -456,7 +435,7 @@
     },
     "afb-15471": {
       "name": "【PID:15471】 学習教材",
-      "vertical": null,
+      "vertical": "education",
       "asps": {
         "afb": {
           "pid": "15471",
@@ -474,7 +453,7 @@
     },
     "afb-15708": {
       "name": "【PID:15708】 語学・留学",
-      "vertical": null,
+      "vertical": "education",
       "asps": {
         "afb": {
           "pid": "15708",
@@ -492,7 +471,7 @@
     },
     "afb-7763": {
       "name": "【PID:7763】 資格・通信講座",
-      "vertical": null,
+      "vertical": "education",
       "asps": {
         "afb": {
           "pid": "7763",
@@ -510,7 +489,7 @@
     },
     "afb-7721": {
       "name": "【PID:7721】 資格・通信講座",
-      "vertical": null,
+      "vertical": "education",
       "asps": {
         "afb": {
           "pid": "7721",
@@ -636,7 +615,7 @@
     },
     "afb-14033": {
       "name": "【PID:14033】 資格・通信講座",
-      "vertical": null,
+      "vertical": "education",
       "asps": {
         "afb": {
           "pid": "14033",
@@ -708,7 +687,7 @@
     },
     "afb-16421": {
       "name": "【PID:16421】 ボディケア",
-      "vertical": null,
+      "vertical": "health",
       "asps": {
         "afb": {
           "pid": "16421",
@@ -726,7 +705,7 @@
     },
     "afb-11096": {
       "name": "【PID:11096】 一般転職",
-      "vertical": null,
+      "vertical": "labor",
       "asps": {
         "afb": {
           "pid": "11096",
@@ -2569,7 +2548,8 @@
           ],
           "rewardYen": 23503
         }
-      }
+      },
+      "vertical": "energy"
     },
     "afb-14386": {
       "name": "＜ゲーム業界専門＞転職エージェント【Hiraku agent】",
@@ -2795,7 +2775,8 @@
           ],
           "rewardYen": 12691
         }
-      }
+      },
+      "vertical": "economy"
     },
     "afb-13735": {
       "name": "保険の無料相談サイト「ガーデン」",
@@ -2885,7 +2866,8 @@
           ],
           "rewardYen": 12100
         }
-      }
+      },
+      "vertical": "mobility"
     },
     "afb-16698": {
       "name": "中古車の自社ローン専門店【カーリバ】",
@@ -3043,7 +3025,8 @@
           ],
           "rewardYen": 10450
         }
-      }
+      },
+      "vertical": "health"
     },
     "afb-15199": {
       "name": "ゲーム業界の求人・転職・中途採用情報なら【ファミキャリ！】",
@@ -3082,7 +3065,8 @@
           ],
           "rewardYen": 10153
         }
-      }
+      },
+      "vertical": "housing"
     },
     "afb-13669": {
       "name": "妊婦さんのための医療保険相談「ガーデン」",
@@ -3121,7 +3105,8 @@
           ],
           "rewardYen": 10153
         }
-      }
+      },
+      "vertical": "labor"
     },
     "afb-6349": {
       "name": "国内最大級のリフォームの一括見積もりサイト【リショップナビ】",
@@ -3143,7 +3128,8 @@
           ],
           "rewardYen": 10153
         }
-      }
+      },
+      "vertical": "housing"
     },
     "afb-16732": {
       "name": "Dr.ピラティス 来店完了",
@@ -3284,7 +3270,8 @@
           ],
           "rewardYen": 8461
         }
-      }
+      },
+      "vertical": "economy"
     },
     "afb-15422": {
       "name": "投資のことならプロにお任せ！【投資のコンシェルジュ】",
@@ -3306,7 +3293,8 @@
           ],
           "rewardYen": 8461
         }
-      }
+      },
+      "vertical": "economy"
     },
     "afb-16236": {
       "name": "20代のキャリア悩みに特化した無料カウンセリングサービス【キャリコン】",
@@ -3413,7 +3401,8 @@
           ],
           "rewardYen": 6600
         }
-      }
+      },
+      "vertical": "education"
     },
     "afb-16588": {
       "name": "オンライン心療内科【mentoa（メントア）】",
@@ -3486,7 +3475,8 @@
           ],
           "rewardYen": 5922
         }
-      }
+      },
+      "vertical": "health"
     },
     "afb-14999": {
       "name": "経理・財務の経験者に選ばれる特化型エージェント【BEET-AGENT（ビートエージェント）】",
@@ -3542,7 +3532,8 @@
           ],
           "rewardYen": 5082
         }
-      }
+      },
+      "vertical": "health"
     },
     "afb-14348": {
       "name": "日本最大規模の美容師・理容師求人サイト【BeautyMirai（ビューティーミライ）】",
@@ -3564,7 +3555,8 @@
           ],
           "rewardYen": 5076
         }
-      }
+      },
+      "vertical": "labor"
     },
     "afb-15699": {
       "name": "IT・WEBエンジニア専門の就活支援サービス【ユニゾンキャリア就活】",
@@ -3688,7 +3680,8 @@
           ],
           "rewardYen": 3383
         }
-      }
+      },
+      "vertical": "travel"
     },
     "afb-16511": {
       "name": "水回りトラブル業界最安値に挑戦中！【水まわりドクター24】",
@@ -3727,7 +3720,8 @@
           ],
           "rewardYen": 3300
         }
-      }
+      },
+      "vertical": "energy"
     },
     "afb-14581": {
       "name": "今話題の60分500円の英会話スクール【One Coin English/ワンコイングリッシュ】",
@@ -3902,7 +3896,8 @@
           ],
           "rewardYen": 2537
         }
-      }
+      },
+      "vertical": "energy"
     },
     "afb-14040": {
       "name": "[スマートフォン専用]若手ハイエンド向け転職サイト『ASSIGN』",
@@ -4026,7 +4021,8 @@
           ],
           "rewardYen": 1650
         }
-      }
+      },
+      "vertical": "energy"
     },
     "afb-15977": {
       "name": "＜多汗症＞24時間予約受付可【東京オンラインクリニック】",
@@ -4133,7 +4129,8 @@
           ],
           "rewardYen": 1268
         }
-      }
+      },
+      "vertical": "travel"
     },
     "afb-10884": {
       "name": "ドローンのレンタルなら【DroSatsu!!ドロサツ】",
@@ -4211,7 +4208,8 @@
           ],
           "rewardYen": 1100
         }
-      }
+      },
+      "vertical": "travel"
     },
     "afb-15713": {
       "name": "学資保険一括資料請求比較【トモママ】",
