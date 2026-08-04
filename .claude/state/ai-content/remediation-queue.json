@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-08-04T00:36:05.964Z",
+  "generatedAt": "2026-08-04T20:39:11.423Z",
   "gscSnapshot": "2026-W31",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2176,
-    "done": 209,
-    "needsRegen": 1967,
+    "done": 210,
+    "needsRegen": 1966,
     "needsByReason": {
-      "incomplete": 1681,
+      "incomplete": 1680,
       "missing": 221,
       "blocker": 65
     },
-    "doneImpressions": 28151,
-    "needsImpressions": 10758,
+    "doneImpressions": 28252,
+    "needsImpressions": 10657,
     "opusReviewTier": 30
   },
   "entries": [
@@ -929,12 +929,15 @@
       "impressions": 101,
       "clicks": 3,
       "position": 6.52,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 04 Aug 2026 00:37:20 GMT",
+      "updatedAt": "2026-08-04T09:45:00.000Z"
     },
     {
       "rankingKey": "konbu-consumption-expenditure",
@@ -1817,7 +1820,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "mochi-consumption-quantity",
