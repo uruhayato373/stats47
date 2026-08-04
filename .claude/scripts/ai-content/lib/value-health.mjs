@@ -35,6 +35,14 @@
  * 恒久的にキューから消える。**誤検知を出すゲートは運用で無効化される**ので、
  * 確実に「順位が成立しない」と言えるものだけを blocker にする。
  *
+ * ## 正典側 (app/stats) にも同じ検査がある
+ *
+ * `packages/data-configs/src/shape-gate.ts` の `constant-value` / `zero-heavy` /
+ * `negative-count` (2026-08-04 追加) が取り込み・週次監査・全件走査の 3 層で同じことを見る。
+ * **判定を変えるときは両方を合わせる** (mjs から TS を import できないための重複実装。
+ * `build-ai-content-queue.mjs` の `fetchActiveRankingKeys` と同じ既存パターン)。
+ * 本ファイルは配信 (`app/ranking`) 側を見ており、正典側が直る前でも生成を止められる。
+ *
  * ## 呼び出し元
  *
  * `build-ai-content-queue.mjs` — キュー再構築時に values.json を見て、blocker のある key を
