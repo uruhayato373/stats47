@@ -410,6 +410,29 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 > 意図不一致の広告を最上位に置くこと (§5 の禁止事項) と実質同じになる。ハウス枠と
 > economy 固定 native に留める (economy は GSC 実測で検索意図の最多クラスタ)。
 
+### 枠の拡張 (2026-08-04・impression 最大化)
+
+計装の網羅 (analytics-event-standards.md) と同時に、**在庫を使い切る方向へ枠を増やした**。
+在庫は 260 件あるのに 28 日で impression が付いたのは 84 件だけで、同一 vertical × 枠が
+banner 上位 1 + text 上位 2 で頭打ちだったため。
+
+| ページ | 追加した枠 | 解決 |
+|---|---|---|
+| blog 本文 | **A/B**: `text` 版はテキスト 3 本 (従来通り) / `banner` 版は 300x250 を 3 枚。slug ハッシュで記事ごとに固定 (実測 432 記事で 219/213)。GA4 は `experiment_id=blog-inbody-format` / `variant_id=text\|banner` | tagKeys → vertical で 6 件解決し用途別に切り出す |
+| blog 記事末尾 | **常に 300x250 バナー 1 枚** (`variant_id=end-banner`)。完読者は意図が強いため A/B の対象外 | 同上 |
+| blog 右レール | 300x250 を最大 2 枚。**右レールはバナーのみ**でテキストは本文 inline に寄せる方針は不変 | 同上 (本文で使った分より後ろを回し重複回避) |
+| ranking 右レール | 1 → **2 枚** (`AffiliateAdSlot bannerLimit`) | categoryKey → vertical |
+| ranking 記事下 | ネイティブ 4 件の直後に **300x250 を 1 枚** (`position=ranking-end`) | tagKeys → vertical で 5 件解決し 5 件目を使う |
+| themes 末尾 | **300x250 を 1 枚** (`position=theme-end`) | relatedArticleTagKeys → 無ければ THEME_AFFILIATE_MAP |
+
+**在庫が足りなければ枠は描画しない** (空枠を作らない)。ranking / themes の末尾バナーは
+「解決 5 件目」なので在庫 4 件以下の vertical では出ず、ネイティブ枠との重複も起きない。
+
+> **viewability 閾値 (50% × 1 秒) は変更しない。** 緩めれば impression は増えるが、
+> それは実態の改善ではなく指標の水増しで、過去の窓と比較できなくなる
+> (`.claude/rules/evidence-based-judgment.md`)。impression を増やすのは
+> **計装の網羅と枠の追加だけ**で行う。
+
 ### 5 チャネルの役割分担 (混ぜない)
 
 | チャネル | 役割 | 使いどころ | SSOT |

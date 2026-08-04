@@ -16,13 +16,15 @@ import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { ArticleCard, RailCard, RailLinkItem, RailLinkList, SurfaceLinkCard } from "@/components/surface";
 
 import {
+    BannerAd,
     RailAdSlot,
     RakutenItemsCard,
     SidebarPromoBanner,
     selectPromoBannerIndexForRanking,
 } from "@/features/ads";
 import { TAG_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
-import { resolveAffiliateBannersByCategory, resolveAffiliateTextAdsByTagKeys } from "@/features/ads/server";
+import { resolveAffiliateBanners, resolveAffiliateBannersByCategory, resolveAffiliateTextAdsByTagKeys } from "@/features/ads/server";
+import { pickInBodyAdFormat } from "@/features/blog/components/md-content";
 import { BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     RelatedRankingsSection,
@@ -137,6 +139,16 @@ export default async function BlogPostPage({ params }: PageProps) {
         "sidebar-bottom",
         4,
     );
+    // ★ 2026-08-04: 本文 A/B (テキスト版 / バナー版) と記事末尾バナー、右レールのバナーに使う。
+    //   本文 3 + 末尾 1 + サイドバー 2 = 最大 6 件を 1 回で解決し、用途ごとに切り出す
+    //   (同一 vertical では priority 降順で返るため、先頭ほど確定EPC が高い順に当たる)。
+    const affiliateBannerPool = await resolveAffiliateBanners(tagKeys, 6);
+    const inBodyFormat = pickInBodyAdFormat(slug);
+    // banner 版は本文 3 + 末尾 1 = 4 件、text 版は末尾 1 件だけ本文側で消費する。
+    const bodyBannerCount = inBodyFormat === "banner" ? 4 : 1;
+    const articleBanners = affiliateBannerPool.slice(0, bodyBannerCount);
+    // 右レールは「バナーだけ」。本文で使った分より後ろを回して重複を避ける。
+    const sidebarBanners = affiliateBannerPool.slice(bodyBannerCount, bodyBannerCount + 2);
     const affiliateVertical = tagKeys.map((t) => TAG_AFFILIATE_MAP[t]).find(Boolean) ?? null;
     // relatedArticles は tagKeys 依存、articleTagsMap は relatedArticles 依存 (チェーン)
     const relatedArticles = await getRelatedArticles(tagKeys, slug);
@@ -192,6 +204,25 @@ export default async function BlogPostPage({ params }: PageProps) {
                 index={selectPromoBannerIndexForRanking()}
                 position="sidebar"
             />
+
+            {/* ★ 2026-08-04: 右レールに記事 vertical で解決した 300x250 を追加。
+                右レールは**バナーのみ**とし、テキストリンクは本文 inline に寄せる方針は不変。
+                在庫が無い vertical では空配列になり何も描画しない。 */}
+            {sidebarBanners.map((b) => (
+                <BannerAd
+                    key={b.id}
+                    href={b.href}
+                    imageUrl={b.imageUrl}
+                    trackingPixelUrl={b.trackingPixelUrl}
+                    width={b.width}
+                    height={b.height}
+                    label={b.title}
+                    category={b.vertical ?? affiliateVertical ?? "other"}
+                    position="blog-sidebar"
+                    adId={b.id}
+                    creativeSize={`${b.width}x${b.height}`}
+                />
+            ))}
 
             {/* 右レールの広告枠。RightRailWidgets と同じ slot 部品に寄せた (2026-07-29) */}
             <RailAdSlot slot={RANKING_PAGE_SIDEBAR} />
@@ -281,6 +312,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 affiliateBannersByCategory={affiliateBannersByCategory}
                                 affiliateTextAds={affiliateTextAds}
                                 affiliateVertical={affiliateVertical}
+                                affiliateBanners={articleBanners}
                             />
 
                             {/* SNSシェアボタン */}

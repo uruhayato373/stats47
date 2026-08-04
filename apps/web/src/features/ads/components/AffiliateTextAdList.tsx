@@ -14,6 +14,9 @@ interface AffiliateTextAdListProps {
   /** テーマカラー算出用。記事/ランキングの AffiliateCategory。 */
   affiliateCategory?: AffiliateCategory | null;
   position?: string;
+  /** A/B テスト用 (GA4 experiment_id / variant_id)。本文フォーマット比較などに使う。 */
+  experimentId?: string;
+  variantId?: string;
 }
 
 /**
@@ -26,6 +29,8 @@ export function AffiliateTextAdList({
   ads,
   affiliateCategory,
   position = "sidebar",
+  experimentId,
+  variantId,
 }: AffiliateTextAdListProps) {
   if (ads.length === 0) return null;
 
@@ -40,6 +45,8 @@ export function AffiliateTextAdList({
           label={ad.title}
           position={position}
           adId={ad.id}
+          experimentId={experimentId}
+          variantId={variantId}
         >
           <div
             className={`relative rounded-none border ${theme?.border ?? "border-border"} ${theme?.bg ?? "bg-muted/50"} p-4`}
@@ -53,6 +60,8 @@ export function AffiliateTextAdList({
               label={ad.title}
               position={position}
               adId={ad.id}
+              experimentId={experimentId}
+              variantId={variantId}
               className={getSurfaceCardClassName({
                 interactive: true,
                 className: "flex items-center justify-between gap-3 px-4 py-3",

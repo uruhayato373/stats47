@@ -14,6 +14,7 @@ import { loadPageComponents } from "@/components/stat-charts/server";
 import { prefetchThemeKpiData } from "@/components/stat-charts/services/prefetch-theme-kpi";
 
 import {
+  BannerAd,
   InContentAdSlot,
   NativeAffiliateRow,
   SidebarPromoBanner,
@@ -62,15 +63,18 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
   // D Phase 3: ネイティブアフィリエイト枠 (テーマ関連書籍/商品)
   // relatedArticleTagKeys で解決 → 空なら theme→vertical 写像 (THEME_AFFILIATE_MAP) でフォールバック。
   // これにより relatedArticleTagKeys 未設定のテーマでも意図一致広告が出る (在庫機会損失の解消)。
+  // ★ 2026-08-04: 4 → 5 に増やし、先頭 4 件をネイティブ枠、5 件目をページ末尾の 300x250 に回す。
   let nativeBanners = theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0
-    ? await resolveAffiliateBanners(theme.relatedArticleTagKeys, 4).catch(() => [])
+    ? await resolveAffiliateBanners(theme.relatedArticleTagKeys, 5).catch(() => [])
     : [];
   if (nativeBanners.length === 0) {
     const vertical = THEME_AFFILIATE_MAP[theme.themeKey];
     if (vertical) {
-      nativeBanners = await resolveAffiliateBannersByVertical(vertical, 4).catch(() => []);
+      nativeBanners = await resolveAffiliateBannersByVertical(vertical, 5).catch(() => []);
     }
   }
+  // 在庫が 4 件以下なら末尾バナーは出さない (ネイティブ枠と同じ広告の重複を避ける)。
+  const themeEndBanner = nativeBanners[4] ?? null;
 
   return (
     <ThemePrefectureProvider
@@ -193,9 +197,27 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         <div className="mt-8">
           <NativeAffiliateRow
             title={`${theme.title}の関連書籍・商品`}
-            banners={nativeBanners}
+            banners={nativeBanners.slice(0, 4)}
             position="theme-native"
             trackingCategory={`theme-${theme.themeKey}`}
+          />
+        </div>
+      )}
+
+      {/* ★ 2026-08-04: ページ末尾の 300x250 (theme→vertical で意図一致)。 */}
+      {themeEndBanner && (
+        <div className="mt-8 flex justify-center">
+          <BannerAd
+            href={themeEndBanner.href}
+            imageUrl={themeEndBanner.imageUrl}
+            trackingPixelUrl={themeEndBanner.trackingPixelUrl}
+            width={themeEndBanner.width}
+            height={themeEndBanner.height}
+            label={themeEndBanner.title}
+            category={themeEndBanner.vertical ?? "other"}
+            position="theme-end"
+            adId={themeEndBanner.id}
+            creativeSize={`${themeEndBanner.width}x${themeEndBanner.height}`}
           />
         </div>
       )}
