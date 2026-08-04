@@ -10,6 +10,9 @@ const FILTER_PARAM_KEYS = [
   'cdCat11', 'cdCat12', 'cdCat13', 'cdCat14', 'cdCat15',
 ] as const;
 
+/** 取得範囲を変えるパラメータ (指定時のみキーに含める) */
+const RANGE_PARAM_KEYS = ['limit', 'startRecord'] as const;
+
 /**
  * ファイル名として使用できない文字をサニタイズ
  */
@@ -35,6 +38,17 @@ export function generateCacheKey(params: GetStatsDataParams): string {
     const value = params[key];
     if (value) {
       filterParams.push([key, sanitizeFilename(value)]);
+    }
+  }
+
+  // ★取得範囲パラメータもキーに含める。同じ statsDataId・同じフィルタでも limit /
+  //   startPosition が違えば中身 (行数) が違うため、含めないと別物が同じキーを共有して
+  //   取りこぼしたデータをキャッシュヒットとして配ってしまう。
+  //   既存キャッシュを無効化しないよう、指定があるときだけキーに足す (未指定時は従来と同一)。
+  for (const key of RANGE_PARAM_KEYS) {
+    const value = params[key];
+    if (value !== undefined) {
+      filterParams.push([key, sanitizeFilename(String(value))]);
     }
   }
 

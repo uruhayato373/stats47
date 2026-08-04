@@ -52,12 +52,16 @@ describe('saveStatsDataCache', () => {
       "table-title": 'sanitized-test title',
     });
 
-    // ボディの検証 (エンベロープ)
+    // ボディの検証 (エンベロープ v2)
     const parsedBody = JSON.parse(body as string);
     expect(parsedBody).toMatchObject({
       response: data,
       cachedAt: expect.any(String),
+      apiVersion: '3.0',
     });
+    // ★params を必ず含める。キー文字列は一部パラメータしか反映しないので、
+    //   これが無いと「どの条件で取得したデータか」を後から確定できず再取得できない
+    expect(parsedBody.params).toEqual(params);
   });
 
   it('タイトルがない場合もエラーにならず保存する', async () => {

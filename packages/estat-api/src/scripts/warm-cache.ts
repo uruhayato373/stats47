@@ -7,7 +7,7 @@
  * cdArea なしで取得するため、1エントリで全47都道府県をカバーする。
  *
  * Usage:
- *   npx tsx packages/estat-api/src/scripts/warm-cache.ts [--dry-run] [--concurrency N]
+ *   npx tsx packages/estat-api/src/scripts/warm-cache.ts [--dry-run] [--refresh] [--concurrency N]
  */
 
 import { config as dotenvConfig } from "dotenv";
@@ -30,12 +30,15 @@ const DB_PATH = path.resolve(
 function parseArgs() {
   const argv = process.argv.slice(2);
   let dryRun = false;
+  let refresh = false;
   let concurrency = 3;
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--dry-run") dryRun = true;
+    // 既存キャッシュを skip せず上書きする。統計表の年次更新を手動で取り込む唯一の手段。
+    if (argv[i] === "--refresh") refresh = true;
     if (argv[i] === "--concurrency" && argv[i + 1]) concurrency = Number(argv[++i]);
   }
-  return { dryRun, concurrency };
+  return { dryRun, refresh, concurrency };
 }
 
 function getApiConfig() {
@@ -122,18 +125,20 @@ async function runWithConcurrency<T>(
 }
 
 async function main() {
-  const { dryRun, concurrency } = parseArgs();
+  const { dryRun, refresh, concurrency } = parseArgs();
   const params = extractUniqueParams();
 
   console.log(`=== e-Stat Cache Warm-up ===`);
   console.log(`Unique param sets: ${params.length}`);
   console.log(`Concurrency: ${concurrency}`);
   console.log(`Dry run: ${dryRun}`);
+  console.log(`Refresh (overwrite existing): ${refresh}`);
   console.log();
 
   // dotenv 読み込み後に動的 import（ESTAT_APP_ID 定数が process.env から読まれるため）
   const { fetchStatsDataFromApi } = await import("../stats-data/repositories/api/fetch-from-api");
   const { generateCacheKey } = await import("../stats-data/repositories/cache/generate-cache-key");
+  const { ESTAT_API_VERSION } = await import("../stats-data/repositories/cache/envelope");
 
   if (dryRun) {
     for (const p of params) {
@@ -157,27 +162,31 @@ async function main() {
     const label = `[${i + 1}/${params.length}] ${key}`;
 
     try {
-      // R2 キャッシュ確認
-      const checkRes = await undiciFetch(r2ObjectUrl(accountId, bucket, key), {
-        dispatcher,
-        headers: authHeaders,
-      });
-      if (checkRes.ok) {
-        console.log(`  CACHED  ${label}`);
-        cached++;
-        return;
-      }
-      if (checkRes.status !== 404) {
-        throw new Error(`R2 check failed: ${checkRes.status}`);
+      // R2 キャッシュ確認 (--refresh 指定時は既存でも上書きするので確認自体を飛ばす)
+      if (!refresh) {
+        const checkRes = await undiciFetch(r2ObjectUrl(accountId, bucket, key), {
+          dispatcher,
+          headers: authHeaders,
+        });
+        if (checkRes.ok) {
+          console.log(`  CACHED  ${label}`);
+          cached++;
+          return;
+        }
+        if (checkRes.status !== 404) {
+          throw new Error(`R2 check failed: ${checkRes.status}`);
+        }
       }
 
       // e-Stat API から取得
       console.log(`  FETCH   ${label}`);
       const data = await fetchStatsDataFromApi(p);
 
-      // R2 に保存
+      // R2 に保存 (envelope v2: 取得条件 params を含める。形は save-cache.ts と同一)
       const envelope = {
         cachedAt: new Date().toISOString(),
+        params: p,
+        apiVersion: ESTAT_API_VERSION,
         response: data,
       };
       const putRes = await undiciFetch(r2ObjectUrl(accountId, bucket, key), {
