@@ -29,7 +29,12 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
 - **在庫整理・監査・dashboard** (`/affiliate-improvement`) — vertical カバレッジ / 在庫ゼロ軸 / サイズ逸脱 / 意図ミスマッチの検出と是正。ゼロ/手薄軸は `.claude/state/ads/inventory-latest.json` の `coverage` から読む (固定値を持たない)。
 - **規約 enforcement** — サイズ (`audit --check-size` + pre-commit) / vertical∈10軸 (export validation) / priority (意図適合) の遵守。legacy 一点物サイズの段階移行。
 - **計測ゲート・運用状態** — 集約 state `.claude/state/ads/affiliate-operations-latest.json` (`build-affiliate-operations-state.ts` が生成、週次 CI 自動更新) をアフィリエイト運用の現在地の入口にする。`measurementGate` (GA4 snapshot 鮮度 / custom dimension 有無) が blocked なら rules §6 の登録手順をユーザーに案内。freshness・coverage・推奨アクションはすべて決定的スクリプトが判定する (モデルは routing・期限計算をしない)。
-- **実験管理** (`/manage-affiliate-experiment`) — クリエイティブ A/B の plan/start/observe/decide/close。registry (`.claude/state/ads/experiments.json`) に停止条件を事前固定し、判定 (collecting / ready-to-decide / inconclusive / invalid) はスクリプトに委ねる。**勝者の自動反映は禁止** (decide は人間へ提示まで)。
+- **実験管理** (`/manage-affiliate-experiment`) — A/B の plan/start/observe/decide/close。registry (`.claude/state/ads/experiments.json`) に停止条件を事前固定し、判定 (collecting / ready-to-decide / inconclusive / invalid) はスクリプトに委ねる。**勝者の自動反映は禁止** (decide は人間へ提示まで)。
+  - `kind: "creative"` — variant 実体は `affiliate-ads-data.ts` (weight)。**本 agent が排他 writer**。
+  - `kind: "code"` — variant 実体は**コード側の分岐** (どう出すか。例 `blog-inbody-format`)。
+    **実装は web 側の担当** (本 agent は実装しない)。本 agent は registry への登録と停止条件の管理、
+    判定結果の提示までを持つ。効果判定 (effect/*) は `improvement-triage`。
+    close は weight ではなく**コード変更 PR** で行うので、SSOT をいじろうとしないこと。
 - **SSOT vertical 移行** — Step A (infra: 解決を vertical 化・完了) → **Step B (本番確認後: 全広告に真の vertical を付与し複製を削除、74→約40件)** を段取る。
 - **publish 段取り** — develop push で `publish-affiliate-ads.yml` を発火させる手順管理 (実行可否はユーザー確認)。
 - **A8 自動 scout の SSOT 追記 (排他 writer)** — `asp-scout` が harvest した案件を SSOT に登録する終端を単一所有する。`append-affiliate-ads.ts --apply` (tsc/audit/export/compliance の 4 ゲート) で `affiliate-ads-data.ts` に追記 → `a8-catalog.json` の該当 entry を registered に昇格 → 両ファイルを同一 commit で develop に push (outward-facing・実行前に確認)。ブラウザ操作 (scout/apply/harvest) には踏み込まない (`asp-scout` の領域)。正典: `.claude/rules/affiliate-ads-standards.md` §10。

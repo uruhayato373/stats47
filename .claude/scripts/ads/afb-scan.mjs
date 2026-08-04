@@ -40,6 +40,7 @@ import {
   SiteAttributionError,
 } from "./lib/asp-browser.mjs";
 // vertical 別の抽出語は moshimo-scan と共有する (ASP ごとに書くとドリフトするため 1 箇所)。
+import { parseAfbBlocks } from "./lib/affiliate-status-core.mjs";
 import { VERTICAL_KEYWORDS, buildVerticalFilter } from "./lib/asp-vertical-keywords.mjs";
 
 /**
@@ -80,25 +81,14 @@ function parseArgs() {
 
 // 抽出フィルタは buildVerticalFilter (共有) を使う。
 
-/** 【PID:N】ブロック単位で解析する (行 grep だと 4 行構造を取りこぼす)。 */
-function parseBlocks(body, pattern) {
-  const lines = body.split("\n").map((l) => l.trim());
-  const re = new RegExp(pattern);
-  const out = [];
-  for (let i = 0; i < lines.length; i++) {
-    const m = lines[i].match(re);
-    if (!m) continue;
-    const blk = lines.slice(i, i + 7);
-    out.push({
-      pid: m[1],
-      category: (m[2] || "").trim(),
-      advertiser: blk[1] || "",
-      name: blk[2] || "",
-      reward: (blk.find((l) => /円（税込）|％（税込）/.test(l)) || "").replace(/\s+/g, " ").trim(),
-    });
-  }
-  return out;
-}
+/**
+ * 【PID:N】ブロック単位で解析する (行 grep だと 4 行構造を取りこぼす)。
+ * ★ 2026-08-04: 実装を lib/affiliate-status-core.mjs へ移し affiliate-status.mjs と共有した
+ *   (同じ一覧を別実装で読むと、片方だけプロモーション名を取りこぼす — 実際に status 側が
+ *   ID しか取らず台帳の name が「【PID:N】カテゴリ名」になっていた)。テストは
+ *   __tests__/affiliate-status-core.test.mjs。
+ */
+const parseBlocks = parseAfbBlocks;
 
 async function main() {
   const opts = parseArgs();

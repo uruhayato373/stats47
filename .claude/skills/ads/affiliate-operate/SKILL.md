@@ -44,8 +44,22 @@ node .claude/scripts/ads/affiliate-status.mjs
 
 - 各 ASP の提携中 / 申請中一覧を読み、`affiliate-catalog.json` の `status` と比較してドリフトを出す。
 - **取得できなかった ASP は「判定不能」として区別される。** これを「提携なし」と読み替えない。
-- 反映するときだけ `--write` を付ける (既定は read-only)。
+  **A8 は抽出パターンが無く常に ID 0 件**になる (A8 の提携状態は `/scout-asp check-approval` で見る)。
+- 反映するときだけ `--write` を付ける (既定は read-only)。`--write` は正遷移の反映に加えて
+  **name の補完**も行う (placeholder のみ上書き。既存の名前は壊さない)。
 - ログ: `.local/affiliate-status/status.log`
+
+**出力で必ず確認すること (2026-08-04 の事故を受けて機械化済み)**
+
+| ログ | 意味 | 対応 |
+|---|---|---|
+| `一覧 N 件 / ID 累計 N 件` が**一致** | スコープが一覧行に限定できている | 正常 |
+| `⚠ 一覧 N 行 に対し ID M 件 (差 X)` | 超集合 or 取りこぼし | `affiliate-asp.json` の `listScopeSelector` を実機で調べ直す |
+| `⚠ 提携中と申請中の両方に出る ID N 件を除外` | ページ共通リンクが混入している | 除外は自動。頻発するならスコープ設定が誤っている |
+| `名前と ID の index 対応が検証できず…` | 既知名と照合が通らなかった | 名前補完はスキップされる (捏造しない)。順序ズレを疑う |
+
+`⚠` が出た状態の `--write` は**幻や誤った名前を台帳に焼き込むおそれがある**ので、
+スコープを直してから反映する。
 
 ### 2. scan — afb の未提携案件を掘る
 
@@ -81,8 +95,13 @@ node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154 --commit
   1 段目で止めると成立しない。
 - **完了判定は文言ではなく実測**。申請中一覧に当該案件が現れて初めて `applied` と記録する。
   現れなければ `unverified` として dump を残す (2026-07-28 に文言判定で 4 件を誤報した)。
+- **もしもは即時承認があり、申請中を経ず提携中へ直行する**。申請中一覧だけを見ると
+  成立した申請を `unverified` と誤報するので、**提携中一覧も確認する** (2026-07-28 に 4 件実測)。
+- 完了確認の href 照合は `listScopeSelector` の一覧行スコープで行う (175763c61)。
+  ページ全体から拾うと、ページ共通リンク (`promotion_id=7630 / 7556 / 170`) と同じ番号の案件を
+  申請したとき、成立していなくても「申請完了」と誤報する。
 - 申請が確認できた案件は台帳 `affiliate-catalog.json` に **エントリが無ければ作って**記録する
-  (`status: applying` + `history`)。台帳は空が初期状態なので、既存エントリの更新だけだと何も残らない。
+  (`status: applying` + `history`)。
 - A8 の申請は本 skill の対象外 → `/scout-asp` (別の週次上限ガード付き)。
 
 ### 4. ASP 間比較 → 運用先を 1 つに寄せる
@@ -118,14 +137,19 @@ A8 は `scout → apply → check-approval → harvest → register → 公開` 
 |---|---|---|
 | 案件探索 | `scout` | ✅ `moshimo-scan` / `afb-scan` |
 | 申請 | `apply --id` | ✅ `affiliate-apply --commit` |
-| **承認の追跡** | `check-approval` (週次で applied→approved) | ❌ **無い**。申請中のまま誰も見ない |
+| **承認の追跡** | `check-approval` (週次で applied→approved) | ✅ `affiliate-status --write` (実機照合で applying→approved。名前も補完する) |
 | **広告コード取得** | `harvest` | ❌ **無い**。SSOT に登録できない |
 | SSOT 追記 | `append-affiliate-ads` | ❌ 上記が無いので到達しない |
 | 定期実行 | 週次 cron | ❌ 手動のみ |
 
-当面は `status` を定期的に回して申請中→提携中の変化を人が見つけ、広告コードは
-`/register-affiliate-banner` の `register` モード (HTML 貼付) で登録する。
-自動化するなら A8 の `check-approval` / `harvest` と同じ形をもしも用に作る。
+- **承認追跡は 2026-08-04 に埋まった**。`affiliate-status --write` が正遷移を反映するので、
+  もしも / afb の承認が申請中のまま放置されることは無くなった (同日の照合で承認 17 件を反映)。
+- **残る断絶は「広告コード取得」**。承認されても広告コードを取れないため SSOT に登録できず、
+  配信に到達しない。当面は `/register-affiliate-banner` の `register` モード (HTML 貼付) で
+  1 件ずつ登録する。自動化するなら A8 の `harvest` と同じ形をもしも / afb 用に作る。
+- ただし**登録を増やせば収益が増えるとは限らない**。同一 vertical × 枠は banner 上位 1 +
+  text 上位 2 しか表示されず、在庫 260 件に対し 28 日で impression が付いたのは 84 件だけ
+  (2026-08-04 実測)。harvest を作る前に、計装が揃った状態の実測で在庫が制約かを確かめる。
 
 ## サイト帰属エラーが出たとき
 

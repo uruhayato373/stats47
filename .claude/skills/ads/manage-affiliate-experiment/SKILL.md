@@ -9,7 +9,22 @@ co_agents: [improvement-triage, ga4-analyst]
 配分・計測の技術仕様は `reference/creative-ab-testing.md` (AFF-05 framework、実装済) を参照。
 
 - **実験 registry (SSOT)**: `.claude/state/ads/experiments.json` — 書込はこの skill のみ
-- **variant 実体**: `apps/web/scripts/affiliate-ads-data.ts` の `experimentId` / `variantId` / `weight`
+- **variant 実体**: 下記 2 種類 (`kind` で区別する)
+
+### 実験の 2 種類 (★2026-08-04 に `kind: "code"` を新設)
+
+| kind | variant の実体 | 配分 | 決着のしかた |
+|---|---|---|---|
+| `creative` (従来) | `affiliate-ads-data.ts` の `experimentId`/`variantId`/`weight` | client 加重ランダム + sticky | SSOT の weight 引き上げ / 敗者 `isActive:false` |
+| **`code`** (新設) | **コード側の分岐** (どの広告を出すかでなく**どう出すか**) | **決定的ハッシュ** (例 slug) | **コード変更 PR**。weight を触っても変わらない |
+
+`code` 実験は「本文にテキストを出すか 300x250 を出すか」のように**配置・フォーマットを比べる**もので、
+広告エントリの差し替えでは表現できない。registry には**必ず登録する** — 登録しないと
+`build-affiliate-operations-state.ts` の集約に現れず、稼働中の実験が誰にも見えなくなる
+(実際 `blog-inbody-format` は 2026-08-04 の稼働開始時に未登録だった)。
+
+`code` 実験で **weight の変更・`isActive:false` による敗者停止はできない**。close は
+「勝ったフォーマットに寄せるコード変更 PR」で行い、registry には結果だけ記録する。
 - **判定 (決定的)**: `build-affiliate-operations-state.ts` が invalid / collecting / ready-to-decide /
   inconclusive / closed を評価 (`lib/affiliate-operations-core.mjs`)。**モデルは期限計算・sample 到達判定をしない**
 - **禁止**: 勝者の自動反映。effect/* 付与 (improvement-triage の排他領域)。develop push / R2 publish の自動実行
@@ -65,7 +80,10 @@ co_agents: [improvement-triage, ga4-analyst]
 
 ### close — 実験を終了する
 
-1. ユーザー決定に従い SSOT を変更 (勝者の weight 引き上げ / 敗者 `isActive: false`)。
+1. ユーザー決定に従い実体を変更する。**kind で手段が違う**:
+   - `creative`: SSOT (`affiliate-ads-data.ts`) の weight 引き上げ / 敗者 `isActive: false`
+   - `code`: **勝ったフォーマットに寄せるコード変更 PR** (割当関数を撤去するか片方に固定する)。
+     weight も `isActive` も効かないので、SSOT をいじろうとしないこと
 2. registry の該当エントリを `"status": "closed"`, `"winnerVariantId": "<id>"`, `"closedAt": "YYYY-MM-DD"` に更新。
 3. `build-affiliate-operations-state.ts` 再実行で `experiments.closed` に移ることを確認。
 

@@ -35,7 +35,14 @@ A8.net の高単価案件を **scout → 申請 → コード取得 → SSOT 登
 | `import-partnered` | A8 で既に提携中の全プログラムを全ページ巡回 → catalog に approved で取り込む (申請不要で harvest 直行。既存資産の活用) |
 | `scout` | A8 検索 → scoreAndRank → catalog に candidate upsert (`a8-browser.ts scout`) |
 | `apply` | candidate 上位を週次上限内で自動申請 → applied (`check-a8-apply-budget` が上限強制) |
+| `check-approval` | 参加中一覧を**全ページ**走査し applied → approved へ昇格。降格はしない |
 | `harvest` | approved の広告コード取得 → parse → harvested / pending-vertical |
+
+> **★2026-08-04 修正**: `check-approval` は以前 参加中一覧の **1 ページ目 (20 件) しか
+> 読んでいなかった**。実機の参加中は 158 件あり、承認済みでも 2 ページ目以降にある案件は
+> `applied` のまま滞留していた (手動走査で 20 件を回収した)。一覧は `APPROVED_DATE` の
+> 降順なので直近承認は 1 ページ目に載るが、**週次 cron が止まっていた期間の承認は後方へ流れる**。
+> 現在は `import-partnered` と同じく `pageSize=100` で全ページを辿る。
 
 ### サブコマンドのフラグ (2026-07-28 追加)
 
@@ -64,7 +71,7 @@ A8.net の高単価案件を **scout → 申請 → コード取得 → SSOT 登
 ```
 (1) scout        a8-browser.ts scout            → candidate
 (2) apply        check-a8-apply-budget → a8-browser.ts apply  → applied (審査待ち含む)
-(3) check        a8-browser.ts check-approval   → approved (applied 全件を毎週再走査)
+(3) check        a8-browser.ts check-approval   → approved (参加中一覧を全ページ走査し applied 全件を照合)
 (4) harvest      a8-browser.ts harvest          → harvested / pending-vertical
 (5) register     append-affiliate-ads.ts --apply (tsc/audit/export/compliance の 4 ゲート) → registered
 (6) commit/push  affiliate-manager が develop へ push → publish-affiliate-ads.yml 発火 → R2 公開

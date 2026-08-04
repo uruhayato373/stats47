@@ -486,7 +486,9 @@ function injectAdSlots(md: string): string {
  * `injectAdSlots` が使う h2 (2 番目・中盤) と重ならないよう、衝突する位置は 1 つ後ろの h2 へずらす。
  * 在庫を超えては挿入しない — 空枠を作らないため。
  */
-function injectAffiliateUnits(
+// export はユニットテスト用 (inject-affiliate-units.test.ts)。本文への広告挿入は
+// 位置計算・衝突回避・在庫不足時の抑制が絡み、目視では退行を検知できないため。
+export function injectAffiliateUnits(
     md: string,
     opts: { textCount: number; bannerCount: number; format: InBodyAdFormat },
 ): string {
