@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import { useThemePrefecture } from "@/features/theme-dashboard/client";
+import { PREFECTURE_LIST_2DIGIT } from "@stats47/area";
 
-import { PREFECTURES } from "./prefectures";
+import { useThemePrefecture } from "../components/ThemePrefectureContext";
 
 /**
  * フロー図 (人口移動 / 通勤) の焦点県を決める共有フック。
@@ -21,12 +21,17 @@ import { PREFECTURES } from "./prefectures";
  * - パネル内で焦点県だけを変えられる。この手動選択は URL `?flow=NN` に載せ、
  *   `?pref=` とは名前空間を分ける
  * - 手動選択はページの都道府県が変わった時点で破棄する (ページ選択が上位)
+ *
+ * ★配置: フローは migration-flow / commute-flow の 2 feature にまたがるが、この hook の関心は
+ * 「テーマページの県選択 → フロー焦点県の橋渡し」なので theme-dashboard に置く。
+ * 両 feature は `@/features/theme-dashboard` (client barrel) 経由で使う
+ * (feature 跨ぎの deep import を作らない)。
  */
 
-const VALID_CODES = new Set(PREFECTURES.map((p) => p.code));
+const VALID_CODES = new Set(PREFECTURE_LIST_2DIGIT.map((p) => p.code));
 
 /** フローに「全国」が無いときの代表県 (SSR の initialData と揃える) */
-export const DEFAULT_FOCUS = "13";
+export const DEFAULT_FLOW_FOCUS = "13";
 
 export interface ManualFocus {
   /** この手動選択が結び付いているページ側の県 (2 桁 / 全国は null) */
@@ -56,7 +61,9 @@ export function resolveFlowFocus(
   const prefCode =
     activeManual ??
     contextCode ??
-    (initialFocusCode && isValid(initialFocusCode) ? initialFocusCode : DEFAULT_FOCUS);
+    (initialFocusCode && isValid(initialFocusCode)
+      ? initialFocusCode
+      : DEFAULT_FLOW_FOCUS);
   return { prefCode, isNationalFallback: !contextCode && !activeManual };
 }
 
@@ -65,7 +72,7 @@ export interface FlowFocusPrefecture {
   prefCode: string;
   /** 「全国」選択中で代表県にフォールバックしている */
   isNationalFallback: boolean;
-  options: typeof PREFECTURES;
+  options: typeof PREFECTURE_LIST_2DIGIT;
   setFocus: (code: string) => void;
 }
 
@@ -106,5 +113,10 @@ export function useFlowFocusPrefecture(
     [contextCode],
   );
 
-  return { prefCode, isNationalFallback, options: PREFECTURES, setFocus };
+  return {
+    prefCode,
+    isNationalFallback,
+    options: PREFECTURE_LIST_2DIGIT,
+    setFocus,
+  };
 }

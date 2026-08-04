@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
-  DEFAULT_FOCUS,
+  DEFAULT_FLOW_FOCUS,
   resolveFlowFocus,
   toFlowCode,
 } from "../useFlowFocusPrefecture";
@@ -32,7 +32,7 @@ describe("toFlowCode", () => {
 describe("resolveFlowFocus", () => {
   it("全国 (context なし) では代表県にフォールバックし、それを申告する", () => {
     expect(resolveFlowFocus(null, null, undefined)).toEqual({
-      prefCode: DEFAULT_FOCUS,
+      prefCode: DEFAULT_FLOW_FOCUS,
       isNationalFallback: true,
     });
   });
@@ -45,7 +45,7 @@ describe("resolveFlowFocus", () => {
   });
 
   it("不正な初期県は無視して代表県に落とす", () => {
-    expect(resolveFlowFocus(null, null, "99").prefCode).toBe(DEFAULT_FOCUS);
+    expect(resolveFlowFocus(null, null, "99").prefCode).toBe(DEFAULT_FLOW_FOCUS);
   });
 
   it("ページで県を選んでいればフローはそれに追従する (今回の主バグ)", () => {
@@ -78,7 +78,7 @@ describe("resolveFlowFocus", () => {
 
   it("ページ県から全国に戻すと手動選択も失効する", () => {
     expect(resolveFlowFocus(null, { boundTo: "27", code: "13" }, undefined)).toEqual({
-      prefCode: DEFAULT_FOCUS,
+      prefCode: DEFAULT_FLOW_FOCUS,
       isNationalFallback: true,
     });
   });

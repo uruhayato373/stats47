@@ -7,7 +7,7 @@
 > - **角丸はサイト全体で 0**（`--radius:0`）。下記 `rounded-lg`/`rounded-md` 等は**すべて 0 に解決**される。
 >   手動の `rounded-xl`/`rounded-2xl` は禁止。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。
 > - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。
-> - **横幅は `PageShell`（`@/components/layout`）経由**で統一（1700px / 右レール 360px）。
+> - **横幅は `PageShell`（`@/components/layout`）経由**で統一（1280px / 右レール 316px / lg+ 左右 40px）。
 
 ---
 
@@ -15,12 +15,14 @@
 
 ```
 ページ全体         : bg-background min-h-screen
-ページコンテンツ   : <PageShell>...</PageShell>（@/components/layout、1700px・px-4 sm:px-6・py-8）
-2/3カラム          : <PageShell rightRail={...} leftRail={...}>（右360px / 左TOC280px）
+ページコンテンツ   : <PageShell>...</PageShell>（@/components/layout、1280px・px-4 sm:px-6 lg:px-10・py-8）
+2/3カラム          : <PageShell rightRail={...}> または <PageShell leftRail={...}>（右316px / 左280px・併用不可）
 セクション間隔     : space-y-8 〜 space-y-10
 仕切り線           : border-t border-border
 ```
-（PC 常設左サイドバーは 2026-06 廃止。ナビはヘッダー＋モバイルドロワー）
+（PC 常設の**サイト全体ナビ**サイドバーは 2026-06 廃止。ナビはヘッダー＋モバイルドロワー。
+例外: **そのページの内容を切り替えるページ内ナビ**は `leftRail` に置いてよい
+= テーマページの `ThemeSideNav`。条件は `.claude/design-system/prohibited.md` の例外節）
 
 ## テキスト
 
@@ -64,7 +66,7 @@ Alert（全種）      : flex items-start gap-3 p-4 border rounded-lg（border-l
 ナビ（Default）     : text-muted-foreground hover:bg-accent/60 transition-colors
 パンくずリスト      : text-sm + text-muted-foreground / 現在ページ text-foreground font-medium
 ```
-（PC 常設左サイドバーは 2026-06 廃止）
+（PC 常設のサイト全体ナビサイドバーは 2026-06 廃止。ページ内ナビの `leftRail` は例外）
 
 ## シャドウ（4段階のみ）
 

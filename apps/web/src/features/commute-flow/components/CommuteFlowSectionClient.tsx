@@ -11,8 +11,7 @@ import {
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 
-// barrel ではなく leaf から import（barrel は server-only な ThemeMigrationFlowSection を含むため）
-import { useFlowFocusPrefecture } from "@/features/migration-flow/lib/useFlowFocusPrefecture";
+import { useFlowFocusPrefecture } from "@/features/theme-dashboard";
 
 import { CommuteSankey } from "./CommuteSankey";
 

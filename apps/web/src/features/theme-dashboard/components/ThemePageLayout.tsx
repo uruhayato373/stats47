@@ -192,21 +192,25 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
       <InContentAdSlot slot={HUB_INCONTENT} />
 
       {/*
-        埋め込み GIS セクション (人口移動 Sankey / 高速道路タイムライン / 駅乗降 /
-        過疎×医療 / 日照地図)。定義は all-themes.ts の EMBEDDED_SECTIONS。
+        埋め込み section。定義は all-themes.ts の EMBEDDED_SECTIONS、実体は
+        THEME_SECTION_REGISTRY。半幅 (フロー 2 種 = 人口移動 / 通勤) は 2 カラム grid、
+        全幅 (高速道路タイムライン / 駅乗降 / 過疎×医療 / 日照地図) は 1 段ずつ。
         hideMap (地図タブ非表示) とは独立に描画する — カード主役レイアウトのまま
-        主題深掘りの GIS 可視化を復活 (2026-07-04)。
+        主題深掘りの可視化を出す (2026-07-04)。
+        registry に無いキーは描画できないので落とすが、typo が無言で消えないよう
+        all-themes.test.ts が「embeddedSections ⊆ registry」を固定している。
       */}
       {(() => {
         const keys = (theme.embeddedSections ?? []).filter(
           (k) => THEME_SECTION_REGISTRY[k],
         );
         if (keys.length === 0) return null;
-        const half = keys.filter((k) => HALF_WIDTH_SECTIONS.has(k));
-        const full = keys.filter((k) => !HALF_WIDTH_SECTIONS.has(k));
+        const halfCandidates = keys.filter((k) => HALF_WIDTH_SECTIONS.has(k));
+        // 半幅が 1 件だけだと 2 カラムの右半分が空くので全幅に戻す
+        const half = halfCandidates.length >= 2 ? halfCandidates : [];
+        const full = keys.filter((k) => !half.includes(k));
         return (
           <>
-            {/* 半幅 section (フロー 2 種) は他のテーマチャートと同じ 2 カラム grid に載せる */}
             {half.length > 0 && (
               <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
                 {half.map((key) => {
@@ -232,7 +236,7 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
 
       {/*
         広告: ダッシュボード読了後・関連記事の前。生 AdSenseAd から slot 部品へ寄せ、
-        18 テーマ全ページでラベル表記と未発行時の非描画を揃える (2026-07-29)。
+        全テーマページでラベル表記と未発行時の非描画を揃える (2026-07-29)。
       */}
       <InContentAdSlot slot={THEMES_CONTENT} />
 

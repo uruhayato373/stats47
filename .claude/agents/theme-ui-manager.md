@@ -41,18 +41,24 @@ model: sonnet
   → `ThemeAreaHeader` + `ThemeDashboardClient` の入れ子になる（左レールの都道府県セレクタが
   Provider の内側でないと動かないため、この順序を崩さない）。
 - **左レール `ThemeSideNav`**（旧 `ThemeSidebar` の後継・2026-06 に一度廃止 → 2026-08-04 にページ内ナビとして復活）:
-  テーマ 20 件の一覧（現在地に `aria-current="page"`）+ 地域ブロック（全国 pill + `PrefectureSelect` + 一文の説明）。
+  テーマ一覧 (ALL_THEMES = 22 件・現在地に `aria-current="page"`）+ 地域ブロック（全国 pill + `PrefectureSelect` + 一文の説明）。
   `leftRailNarrowBehavior="hide"` で **xl 未満は非表示**。禁止パターンの例外条件は `.claude/design-system/prohibited.md`。
 - **見出し `ThemeAreaHeader`**: エリア連動 H1（全国時「{テーマ名}」/ 県選択時「{県名}の{テーマ名}」）。
   **eyebrow は付けない**（「テーマダッシュボード」等の固定ラベル禁止）。
 - **セレクタは同時に 1 つだけ見える状態にする**。xl+ = 左レール `ThemeSideNav`、xl 未満 = `ThemeAreaHeader`
   の `actions`（`xl:hidden` で囲った `PrefectureSelect`）+ `xl:hidden` の `ThemeSwitcher` 帯。
   `ThemeDashboardTabbed` の hideMap 分岐に本体側 `prefectureSelector` を**二重に出さない**。デフォルト全国・`?pref=` 同期。
-- **ダッシュボード本体 `ThemeMetricsDashboard`（cardsOnly）**: **チャート付き stats-card のグリッドのみ**。
-  各指標 = 1 枚の `ChartCard`（タイトル + 値 + 全国トレンド `MiniLineChart` + ランキングリンク）。
+- **ダッシュボード本体 `ThemeMetricsDashboard`**: 指標カードのグリッド + page-components チャート +
+  考察 (markdown)。各指標 = 1 枚の `ChartCard`（タイトル + 値 + 全国トレンド `MiniLineChart` + ランキングリンク）。
   **データのみ KPI カード（KpiCardClient）・上位県バー（RankingBarList）・大トレンド・選択タブ・地図は出さない**。
+  **`cardsOnly` prop は付けない**（付けるとチャートと考察が消える。2026-07-04 に付与をやめた。prop 自体は残存）。
+  **指標カードの枚数は下のチャートとの重複を避けて絞る**（2026-08-04 に population-dynamics を 10 → 4）。
 - **データソースは R2 のみ**: `loadThemeData` → `readAllYearsRankingValuesFromR2`（`app/ranking/<key>/values.json`）。
   **e-Stat ライブ取得しない**（Workers ランタイムで失敗する）。全国行は無いので未選択時は県平均。
+- **埋め込み section**: `EMBEDDED_SECTIONS`（all-themes.ts）× `THEME_SECTION_REGISTRY`。フロー 2 種
+  （人口移動 / 通勤）は `HALF_WIDTH_SECTIONS` で **ChartPanel + 2 カラム**、地図系は全幅。
+  フローの焦点県はページの県選択に追従し、全国時は「全国表示中 — 代表例」バッジ + `?flow=` で個別指定
+  （正典: `features/theme-dashboard/lib/useFlowFocusPrefecture.ts`。`?pref=` はページ側 5 桁専用）。
 
 ### B. local-finance（例外・bespoke）
 `app/themes/local-finance/page.tsx` は **bespoke `LocalFinanceDashboard`**（主要指標テーブル + チャート付き

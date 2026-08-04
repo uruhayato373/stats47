@@ -15,7 +15,7 @@ import {
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 
-import { useFlowFocusPrefecture } from "../lib/useFlowFocusPrefecture";
+import { useFlowFocusPrefecture } from "@/features/theme-dashboard";
 
 import { MigrationSankey } from "./MigrationSankey";
 

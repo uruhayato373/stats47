@@ -28,7 +28,7 @@ interface Props {
  * テーマページの左レール（テーマ一覧 + 地域選択）。
  *
  * テーマ切替（旧: パンくず下の帯）と都道府県選択（旧: H1 右の小さな Select）を
- * 1 か所に集約し、20 テーマを一覧しながら回遊できるようにする。リストの文法は
+ * 1 か所に集約し、全テーマ (ALL_THEMES) を一覧しながら回遊できるようにする。リストの文法は
  * ホーム / ランキング一覧の `PortalCategoryGrid variant="sidebar"` に合わせる。
  *
  * xl 未満では `PageShell` が描画しない（`leftRailNarrowBehavior="hide"`）。狭幅の代替は
@@ -87,29 +87,25 @@ export function ThemeSideNav({
 function RegionBlock() {
   const { selectedAreaName, setSelected } = useThemePrefecture();
 
+  // 現在の選択は Select 自身が表示するので、同じ文字列を pill で二重に出さない。
+  // 県を選んでいるときだけ「全国に戻す」を添える (Select を開かずに戻せる導線)。
   return (
     <div className="mt-6">
       <SectionHeader title="地域" as="h2" />
-      <div className="flex items-center gap-2">
-        <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
-          {selectedAreaName ?? "全国"}
-        </span>
-        {selectedAreaName && (
-          <button
-            type="button"
-            onClick={() => setSelected(null)}
-            className="text-xs text-muted-foreground underline-offset-2 hover:text-primary hover:underline"
-          >
-            全国に戻す
-          </button>
-        )}
-      </div>
-      <div className="mt-2">
-        <PrefectureSelect className="w-full" />
-      </div>
-      <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
-        県を選ぶと、指標カード・チャート・人の流れがその県に切り替わります。
-      </p>
+      <PrefectureSelect className="w-full" />
+      {selectedAreaName ? (
+        <button
+          type="button"
+          onClick={() => setSelected(null)}
+          className="mt-2 text-[11px] text-muted-foreground underline-offset-2 hover:text-primary hover:underline"
+        >
+          全国に戻す
+        </button>
+      ) : (
+        <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
+          県を選ぶと、指標カード・チャート・人の流れがその県に切り替わります。
+        </p>
+      )}
     </div>
   );
 }
