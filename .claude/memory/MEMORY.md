@@ -64,6 +64,8 @@
 - [project_gsc_coverage_drilldown.md](project_gsc_coverage_drilldown.md) — GSC 6種別Coverage Drilldown CSVを週次で.claude/state/metrics/gsc/coverage-drilldown/に集約
 - [project_cloudflare_token_consolidated.md](project_cloudflare_token_consolidated.md) — Cloudflare API tokenは「stats47」1個に集約(D1/R2/Pages/Account Settings)
 - [feedback_github_actions_pr_creation.md](feedback_github_actions_pr_creation.md) — ActionsがPR作成するにはrepo permission設定必要(gh APIで設定可)
+- [feedback_cloud_github_api_mcp_only.md](feedback_cloud_github_api_mcp_only.md) — クラウドは`gh`無し。`curl`+$GITHUB_TOKENはHTTP 200で"GitHub access is not enabled"を返し無言失敗(background agentでは空ファイル)。GitHub操作は`mcp__github__*`のみ
+- [feedback_ci_cancelled_looks_like_failure.md](feedback_ci_cancelled_looks_like_failure.md) — 後続pushがconcurrencyで古いrunをcancel→全job cancelledでfailureと見分けがつかない。conclusionを見てsupersededなら新runを待つ(ログを読まない)
 - [project_competitor_riskmap_jp.md](project_competitor_riskmap_jp.md) — SNS直接競合@riskmap.jp(治安/災害/心霊系Reel、1本1-2万いいね)
 - [project_competitor_indicator_benchmark.md](project_competitor_indicator_benchmark.md) — Web競合指標数(2026-07-11): stats47 2,141本でtodo-ran/uub超え「数の劣後」解消。ボトルネックは需要+CTR(41%が12週ゼロ表示)。e-Stat全展開は低ROI。需要ファースト
 - [feedback_sns_competitor_search.md](feedback_sns_competitor_search.md) — SNS競合検索は統計/ランキングだけでなくテーマ別名乗り(リスク/格差/ご当地)も併走

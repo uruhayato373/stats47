@@ -24,6 +24,7 @@ import { SurfaceLinkCard, SurfaceSection } from "@/components/surface";
 import { BannerAd } from "@/features/ads";
 import { AffiliateTextAdList } from "@/features/ads/components/AffiliateTextAdList";
 import type { AffiliateCategory } from "@/features/ads/constants/affiliate-category";
+import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "@/features/ads/constants/manual-ad-policy";
 
 import { AdSenseAd, BLOG_ARTICLE_INLINE } from "@/lib/google-adsense";
 
@@ -266,8 +267,10 @@ function makeMdComponents(
             </div>
         ),
 
+        // モバイルでは手置き枠を描画しない (2026-08-04)。
+        // 理由と実測は features/ads/constants/manual-ad-policy.ts を参照。
         "ad-slot": () => (
-            <div className="my-8 not-prose">
+            <div className={`${MANUAL_AD_DESKTOP_ONLY_CLASS} my-8 not-prose`}>
                 <AdSenseAd
                     format={BLOG_ARTICLE_INLINE.format}
                     slotId={BLOG_ARTICLE_INLINE.slotId}
