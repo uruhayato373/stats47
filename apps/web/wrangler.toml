@@ -1,7 +1,10 @@
+"$schema" = "./node_modules/wrangler/config-schema.json"
 name = "stats47-dev"
 main = ".open-next/worker.js"
-compatibility_date = "2025-05-05"
-compatibility_flags = ["nodejs_compat_v2"]
+compatibility_date = "2026-08-04"
+# node:sqlite は Workers では非機能 stub で、Node 20 上の Wrangler bundler が解決できない。
+# Runtime / CI を Node 22+ へ移行するまで明示的に無効化する。
+compatibility_flags = ["nodejs_compat", "disable_nodejs_sqlite_module"]
 
 [assets]
 directory = ".open-next/assets"
@@ -13,7 +16,7 @@ NEXT_PUBLIC_ENV = "development"
 
 # 完全DBレス (doc 12): 本番アプリは D1 を一切 query しない。
 # vestigial だった [[d1_databases]] STATS47_STATIC_DB binding は削除済 (2026-06)。
-# 型は packages/database/src/schema/*.ts (型ソース) で保持、ランタイム src からの参照は cloudflare.d.ts の型宣言のみ。
+# DB schema の型ソースは packages/database/src/schema/*.ts にのみ保持する。
 
 # デフォルトR2ストレージ（ローカル開発用）
 [[r2_buckets]]
@@ -76,12 +79,8 @@ NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED = "true"
 # Amazon アソシエイト
 NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG = "stats47-22"
 
-# Phase 8 (2026-04-29): production の D1 binding を削除。
-# apps/web の全 D1 read は R2 snapshot に移行済み (Phase 0-7、PR #149/#163/#167-175)。
+# production / local とも D1 binding は持たない。apps/web の read は R2 snapshot のみ。
 # CI gate (.github/workflows/pr-quality-check.yml の D1 Import Gate) で再発を防ぐ。
-# ローカル開発用の binding (上の [[d1_databases]]) は残置 (バッチ実行に必要)。
-# ロールバック: この diff を revert + redeploy で 1 commit 復元可。
-# Phase 10 で D1 解約予定 (Time Travel ロールバック窓 30 日後)。
 
 [[env.production.r2_buckets]]
 binding = "STATS47_BUCKET"

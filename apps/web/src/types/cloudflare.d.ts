@@ -1,12 +1,12 @@
 // src/types/cloudflare.d.ts
 
-import type { D1Database, R2Bucket } from "@cloudflare/workers-types";
+import type { AnalyticsEngineDataset, R2Bucket } from "@cloudflare/workers-types";
 
 declare module "@opennextjs/cloudflare" {
   export interface CloudflareEnv {
-    STATS47_STATIC_DB: D1Database;
     STATS47_BUCKET: R2Bucket;
-    // 他のバインディングがあれば追加
+    NEXT_INC_CACHE_R2_BUCKET: R2Bucket;
+    ANALYTICS?: AnalyticsEngineDataset;
   }
 
   export interface CloudflareContext {
@@ -22,4 +22,3 @@ declare module "@opennextjs/cloudflare" {
   export function getCloudflareContext(options?: { async?: boolean }): CloudflareContext;
   export function getCloudflareContext(options: { async: true }): Promise<CloudflareContext>;
 }
-
