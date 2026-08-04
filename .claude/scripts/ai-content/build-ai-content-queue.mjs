@@ -21,7 +21,16 @@
  *   - blocker      : ある が auditRow で blocker>0 (旧プロンプト由来の括弧数値等) → needs-regen
  *   - incomplete   : 4フィールドのいずれか欠落 (auditRow が missing-insights / missing-pref-commentary 等で blocker) → needs-regen
  *   - done         : ある かつ auditRow.ok (blocker 0)
- *   - no-data      : build-input 不能 (観測値 values.json が R2 に無い) は別途検出されるが、ここでは ai-content 有無で分類
+ *   - not-eligible : **観測値そのものが順位として成立しない** (全県同値 / 県重複 / 47超 / 0行)。
+ *                    生成しても読者価値が無いので `--next` に出さない (下記)
+ *
+ * 接地データの健全性 (2026-08-04 追加):
+ *   auditRow は **生成物しか見ない**。「そもそも論じるに足るデータか」は誰も見ておらず、
+ *   全 47 県が 0 の `bowling-alley-public` に FAQ 5 問 + 県別解説 47 件が生成・公開された。
+ *   → values.json も取得して `checkValueHealth` (lib/value-health.mjs) に通す。
+ *   **生成時ではなくここで落とすのが要点**: 生成時に弾くと needs-regen のまま翌日また上位に
+ *   並び、毎日 1 枠を食い潰す (livelock)。
+ *   done でも接地が不健全な key は `dataBlockers` を付けて可視化する (公開済みの是正対象)。
  *
  * 出力:
  *   .claude/state/ai-content/remediation-queue.json  (機械可読・per-key status + impressions + reason + checkedAt)
@@ -42,6 +51,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { auditRow } from "./audit-ai-content.mjs";
+import { checkValueHealth, latestPartition } from "./lib/value-health.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..", "..", "..");
@@ -106,6 +116,28 @@ async function fetchAiContent(key) {
 }
 
 /**
+ * 観測値 (values.json) の最新年を取得して健全性を判定する。
+ *
+ * 取得できないときは **null を返して判定をスキップする** (fail-open)。R2 の一時障害で
+ * 全件 not-eligible にすると、その日の生成が丸ごと止まる。「見られなかった」と
+ * 「壊れている」は区別する。
+ */
+async function fetchValueHealth(key) {
+  const url = `${R2_PUBLIC}/app/ranking/${encodeURIComponent(key)}/values.json?cb=${Date.now()}`;
+  try {
+    const res = await fetch(url);
+    if (res.status === 404) {
+      return { checked: true, yearCode: null, health: { ok: false, blockers: [{ code: "no-values", message: "values.json が R2 に無い" }], warns: [] } };
+    }
+    if (!res.ok) return null;
+    const { yearCode, rows } = latestPartition(await res.json());
+    return { checked: true, yearCode, health: checkValueHealth(rows) };
+  } catch {
+    return null;
+  }
+}
+
+/**
  * R2 の ranking_items snapshot から active な rankingKey を全件取得する。
  *
  * `readActiveRankingKeysFromR2` (TS) と同じ真実源・同じ条件 (areaType 一致 + isActive) を
@@ -120,6 +152,30 @@ async function fetchActiveRankingKeys(areaType = "prefecture") {
   return items
     .filter((it) => it.areaType === areaType && it.isActive)
     .map((it) => it.rankingKey);
+}
+
+/**
+ * 接地データの判定を entry に反映する。
+ *
+ * - needs-regen だった → `not-eligible` (生成対象から外す)
+ * - done だった        → done のまま `dataBlockers` を付ける (公開済みの是正対象として可視化)
+ *
+ * 判定できなかった (values 取得失敗) 場合は何もしない。
+ */
+function applyValueHealth(entry, valueHealth) {
+  if (!valueHealth?.checked) return entry;
+  const { health, yearCode } = valueHealth;
+  if (health.warns.length > 0) entry.dataWarns = health.warns.map((w) => w.code);
+  if (health.ok) return entry;
+  const codes = health.blockers.map((b) => b.code);
+  entry.dataBlockers = codes;
+  entry.dataReason = health.blockers.map((b) => b.message).join(" / ");
+  entry.dataYear = yearCode;
+  if (entry.status === "needs-regen") {
+    entry.status = "not-eligible";
+    entry.reason = `data:${codes.join(",")}`;
+  }
+  return entry;
 }
 
 function classify(key, gsc, fetched) {
@@ -180,7 +236,11 @@ async function buildQueue(scope = "gsc") {
   for (let i = 0; i < keys.length; i += CONCURRENCY) {
     const batch = keys.slice(i, i + CONCURRENCY);
     const results = await Promise.all(
-      batch.map(async (k) => classify(k, gscOf(k), await fetchAiContent(k))),
+      batch.map(async (k) => {
+        // ai-content (生成物) と values (接地データ) を同時に取る。直列にすると倍の時間がかかる。
+        const [content, valueHealth] = await Promise.all([fetchAiContent(k), fetchValueHealth(k)]);
+        return applyValueHealth(classify(k, gscOf(k), content), valueHealth);
+      }),
     );
     entries.push(...results);
   }
@@ -188,6 +248,8 @@ async function buildQueue(scope = "gsc") {
 
   const done = entries.filter((e) => e.status === "done");
   const needs = entries.filter((e) => e.status === "needs-regen");
+  const notEligible = entries.filter((e) => e.status === "not-eligible");
+  const doneUnhealthy = done.filter((e) => e.dataBlockers?.length);
   const byReason = needs.reduce((acc, e) => ((acc[e.reason] = (acc[e.reason] ?? 0) + 1), acc), {});
 
   // 2段 critic の tier 割り当て (機械化): GSC 流入上位 N 件の needs-regen を tier-2 (opus critic)、
@@ -212,6 +274,14 @@ async function buildQueue(scope = "gsc") {
       done: done.length,
       needsRegen: needs.length,
       needsByReason: byReason,
+      // 観測値が順位として成立しない = 生成対象にしない (lib/value-health.mjs)
+      notEligible: notEligible.length,
+      notEligibleByCode: notEligible.reduce(
+        (acc, e) => ((e.dataBlockers ?? []).forEach((c) => (acc[c] = (acc[c] ?? 0) + 1)), acc),
+        {},
+      ),
+      // 既に公開済みだが接地が不健全 = 是正対象 (削除 or metric 修正の判断が要る)
+      doneButUnhealthy: doneUnhealthy.length,
       doneImpressions: done.reduce((s, e) => s + e.impressions, 0),
       needsImpressions: needs.reduce((s, e) => s + e.impressions, 0),
       opusReviewTier: needs.filter((e) => e.reviewTier === "opus").length,
@@ -233,7 +303,8 @@ async function buildQueue(scope = "gsc") {
  * ペースは「同一 scope の最古行との done 差 ÷ 経過日数」。行が 1 本だけならペースは null。
  */
 function appendHistory(queue) {
-  const header = "date,scope,total,done,needsRegen,missing,incomplete,blocker";
+  // notEligible は 2026-08-04 追加。**末尾に足す**ので既存行 (7 列) の索引はずれない。
+  const header = "date,scope,total,done,needsRegen,missing,incomplete,blocker,notEligible";
   const s = queue.summary;
   const r = s.needsByReason ?? {};
   const missing = Object.entries(r)
@@ -241,11 +312,16 @@ function appendHistory(queue) {
     .reduce((acc, [, v]) => acc + v, 0);
   const date = queue.generatedAt.slice(0, 10);
   const scope = queue.scopeKind ?? "gsc";
-  const row = [date, scope, s.total, s.done, s.needsRegen, missing, r.incomplete ?? 0, r.blocker ?? 0].join(",");
+  const row = [date, scope, s.total, s.done, s.needsRegen, missing, r.incomplete ?? 0, r.blocker ?? 0, s.notEligible ?? 0].join(",");
 
   let rows = [];
   if (existsSync(HISTORY_CSV)) {
-    rows = readFileSync(HISTORY_CSV, "utf8").trim().split("\n").filter((l) => l && l !== header);
+    // 列を増やしたときに **旧ヘッダ行がデータ行として残らない**よう、`date,` 始まりを全て落とす
+    // (`l !== header` だけだと新ヘッダとしか一致せず、旧ヘッダが 1 行のゴミとして混ざる)
+    rows = readFileSync(HISTORY_CSV, "utf8")
+      .trim()
+      .split("\n")
+      .filter((l) => l && !l.startsWith("date,"));
   }
   rows = rows.filter((l) => {
     const c = l.split(",");
@@ -280,6 +356,10 @@ function writeLatestMd(queue, progress = null) {
     .filter((e) => e.status === "done" && e.lastModified)
     .sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified))
     .slice(0, 15);
+  const notEligible = queue.entries.filter((e) => e.status === "not-eligible");
+  const doneUnhealthy = queue.entries.filter(
+    (e) => e.status === "done" && e.dataBlockers?.length,
+  );
   const lines = [
     `# ranking ai-content 是正キュー (LATEST)`,
     ``,
@@ -292,7 +372,37 @@ function writeLatestMd(queue, progress = null) {
     `- ✅ done: ${s.done} 件 (${((s.done / Math.max(1, s.total)) * 100).toFixed(1)}% / impressions 計 ${s.doneImpressions})`,
     `- ⏳ needs-regen: ${s.needsRegen} 件 (impressions 計 ${s.needsImpressions})`,
     `  - 内訳: ${Object.entries(s.needsByReason).map(([k, v]) => `${k} ${v}`).join(" / ") || "—"}`,
+    `- 🚫 not-eligible: ${s.notEligible ?? 0} 件 — 観測値が順位として成立しないので生成しない`,
+    ...((s.notEligible ?? 0) > 0
+      ? [`  - 内訳: ${Object.entries(s.notEligibleByCode ?? {}).map(([k, v]) => `${k} ${v}`).join(" / ")}`]
+      : []),
     ``,
+    ...(notEligible.length > 0
+      ? [
+          `## 生成しない (接地データが不成立)`,
+          ``,
+          `\`--next\` から除外している。metric 側の是正 (軸の絞り込み) か isActive の見直しが要る。`,
+          ``,
+          `| key | year | 理由 |`,
+          `|---|---|---|`,
+          ...notEligible.map((e) => `| ${e.rankingKey} | ${e.dataYear ?? "-"} | ${e.dataReason} |`),
+          ``,
+        ]
+      : []),
+    ...(doneUnhealthy.length > 0
+      ? [
+          `## ⚠️ 公開済みだが接地データが不成立 (${doneUnhealthy.length} 件)`,
+          ``,
+          `既に ai-content が R2 にある。読者価値が無いので削除か metric 是正の判断が要る。`,
+          ``,
+          `| key | year | impressions | 理由 |`,
+          `|---|---|---|---|`,
+          ...doneUnhealthy.map(
+            (e) => `| ${e.rankingKey} | ${e.dataYear ?? "-"} | ${e.impressions} | ${e.dataReason} |`,
+          ),
+          ``,
+        ]
+      : []),
     ...(progress
       ? [
           `## 進捗 (progress-history.csv より)`,
@@ -363,8 +473,11 @@ async function main() {
     const s = queue.summary;
     process.stdout.write(
       `=== ranking ai-content 是正キュー (GSC ${queue.gscSnapshot}) ===\n` +
-        `総 ${s.total} / ✅done ${s.done} / ⏳needs-regen ${s.needsRegen}\n` +
+        `総 ${s.total} / ✅done ${s.done} / ⏳needs-regen ${s.needsRegen} / 🚫not-eligible ${s.notEligible ?? 0}\n` +
         `needs 内訳: ${Object.entries(s.needsByReason).map(([k, v]) => `${k} ${v}`).join(" / ") || "—"}\n` +
+        ((s.doneButUnhealthy ?? 0) > 0
+          ? `⚠️ 公開済みだが接地データが不成立: ${s.doneButUnhealthy} 件 (LATEST.md 参照)\n`
+          : "") +
         `→ ${QUEUE_JSON}\n→ ${LATEST_MD}\n`,
     );
   }

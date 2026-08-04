@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-03T20:44:02.264Z",
+  "generatedAt": "2026-08-04T20:51:06.212Z",
   "gscWeek": "2026-W31",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
@@ -54,23 +54,23 @@
       "priority": 1
     },
     {
-      "topicKey": "corr-annual-new-inpatients-general-hospital-per-100k--tuna-consumption-quantity",
+      "topicKey": "corr-national-medical-expense-per-person--tuna-consumption-quantity",
       "archetype": "B",
       "metricKeys": [
         "tuna-consumption-quantity",
-        "annual-new-inpatients-general-hospital-per-100k"
+        "national-medical-expense-per-person"
       ],
-      "label": "まぐろ消費量 × 一般病院年間新入院患者数 (r=-0.66)",
+      "label": "まぐろ消費量 × 1人当たりの国民医療費 (r=-0.66)",
       "source": "correlation",
       "scores": {
         "queryGap": 0.8387020165680907,
         "seasonality": 0.3,
-        "surprise": 0.658,
+        "surprise": 0.656,
         "competitionGap": 0.8
       },
       "evidence": {
-        "pearsonR": -0.658,
-        "partialRPopulation": -0.618,
+        "pearsonR": -0.656,
+        "partialRPopulation": -0.619,
         "populationConfounded": false,
         "crossCategory": true,
         "categories": [
@@ -80,10 +80,10 @@
         "gscImp": 627,
         "rankingUrls": [
           "/ranking/tuna-consumption-quantity",
-          "/ranking/annual-new-inpatients-general-hospital-per-100k"
+          "/ranking/national-medical-expense-per-person"
         ]
       },
-      "suggestedTitle": "まぐろが多い県は一般病院年間新入院患者が少ない?",
+      "suggestedTitle": "まぐろが多い県は1人当たりの国民医療費が少ない?",
       "combinedScore": 0.66,
       "lane": "must-write",
       "status": "pending",

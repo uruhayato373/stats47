@@ -89,11 +89,44 @@ GSC 表示のあるランキングは全キーの ~40% で、imp の大半は He
 node .claude/scripts/ai-content/audit-ai-content.mjs <rankingKey>            # R2 から取得して照合
 node .claude/scripts/ai-content/audit-ai-content.mjs --file <path.json>      # 生成直後の staging
 node .claude/scripts/ai-content/audit-ai-content.mjs <key> --no-number-check # オフライン (テキスト規則のみ)
-node --test .claude/scripts/ai-content/__tests__/number-audit.test.mjs       # ゲート自体のテスト
+node --test .claude/scripts/ai-content/__tests__/*.test.mjs                  # ゲート自体のテスト
 ```
 
 values.json が取得できない場合は照合をスキップする (fail-open) が、**スキップしたことを出力に明示する**
 (合格と誤読させない)。
+
+### 接地データの健全性ゲート (★生成物ではなく素材を見る・2026-08-04 実装)
+
+上の照合は **生成物しか見ない**。「そもそも論じるに足るデータか」を誰も見ていなかったため、
+**全 47 県が 0** の `bowling-alley-public` (公共ボウリング場数) に FAQ 5 問 + 県別解説 47 件が
+生成され公開された。テキスト自体は「全47都道府県において0施設となっており、突出して多い都道府県は
+ありません」と正直に書いており捏造ではない。**嘘は無いが読者価値も無い**ページを 1 枠使って作った
+ことが問題で、thin content のリスクでもある。
+
+判定は `.claude/scripts/ai-content/lib/value-health.mjs` の `checkValueHealth` (純関数・テスト付き)。
+
+| 検査 | tier | 理由 |
+|---|---|---|
+| `no-variance` 全県が同じ値 | **blocker** | 「1 位はどこか」に答えられない = 順位が存在しない |
+| `duplicate-area` 同一県が複数行 | **blocker** | 分類軸の絞り忘れ。どの行が正か決められない |
+| `over-coverage` 47 行超 | **blocker** | 都道府県は 47 しかない |
+| `no-rows` / `no-finite-value` | **blocker** | 素材が無い |
+| `thin-coverage` 40 行未満 | warn のみ | 港湾・漁港系は内陸県が対象外で 39 件前後が正常 (実測 34 件) |
+
+**弾く場所はキュー選定時 (`build-ai-content-queue.mjs`) であって生成時ではない。** 生成時に弾くと
+その key は needs-regen のまま翌日また上位に並び、毎日 1 枠を食い潰す (livelock)。キュー側で
+`not-eligible` にすることで `--next` から恒久的に外れ、backlog の件数も正直になる。
+done でも接地が不健全な key は `dataBlockers` を付けて LATEST.md に出す (公開済みの是正対象)。
+
+**ブログ側の `checkGroundedRows` (`packages/ai-content/src/services/blog-topic-gate.ts`) との差は意図的**。
+blocker の 4 検査は同じ判断だが、40 行未満をブログは reject・ai-content は warn に留める。問うている
+ことが違うため — ブログは「この 1 本の記事を書けるか」(全国の傾向を論じる散文には県の網羅が要る)、
+ai-content は「この ranking ページに解説を付けられるか」(ページは対象 N 県のために存在しており、
+11 県しかない指標でもその 11 県の解説は成立する)。詳細は value-health.mjs の冒頭コメント。
+
+**初回実測 (2026-08-04・active 2,176 件)**: not-eligible 2 (`gini-coefficient-disposable-income` /
+`unemployment-measures-project-expenses-prefecture`) + 公開済みだが不成立 2
+(`convenience-store-count-commercial` imp 1580 / `bowling-alley-public` imp 80)。
 
 ## 生成パイプライン (完全DBレス)
 
@@ -317,8 +350,10 @@ node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 40 
 ## 関連
 
 - 戦略・KPI: `docs/00_プロジェクト管理/03_マーケティング戦略.md`（T1〜T4・SEO品質レバー）
-- ai-content 是正キュー: memory `project_ai_content_remediation_queue` / `.claude/scripts/ranking/build-ai-content-queue.mjs`
-- 決定的ゲート: `.claude/scripts/ranking/audit-ai-content.mjs`
+- ai-content 是正キュー: memory `project_ai_content_remediation_queue` / `.claude/scripts/ai-content/build-ai-content-queue.mjs`
+- 決定的ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs` (生成物) /
+  `.claude/scripts/ai-content/lib/value-health.mjs` (接地データ)。テストは
+  `.claude/scripts/ai-content/__tests__/*.test.mjs`、CI 配線は `pr-quality-check.yml` の AI Content Gate Guard
 - 生成 0 件ゲート: `packages/ai-content/src/services/generation-outcome.ts` (`src/services/__tests__/` にテスト)
 - セッション側の入口: skill `/generate-ai-content` (agent: `ranking-content-author`) / prompt 取得: `build-input.ts --prompt-only`
 - 公開: `.github/workflows/publish-ai-content.yml` (自動化インベントリ参照)
