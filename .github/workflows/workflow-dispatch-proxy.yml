@@ -136,10 +136,11 @@ jobs:
             exit 1
           fi
 
-          echo "skip=false" >> "$GITHUB_OUTPUT"
-          echo "workflow=$WORKFLOW" >> "$GITHUB_OUTPUT"
-          echo "ref=$REF" >> "$GITHUB_OUTPUT"
           {
+            echo "skip=false"
+            echo "workflow=$WORKFLOW"
+            echo "ref=$REF"
+            # inputs は JSON なので heredoc 形式で渡す (1 行に収まらない・引用符を含む)
             echo "inputs<<__EOF__"
             echo "$INPUTS"
             echo "__EOF__"
