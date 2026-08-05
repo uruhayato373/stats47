@@ -46,6 +46,10 @@ declare -a TASKS=(
   "item-metadata-refresh|packages/ranking/src/scripts/refresh-item-metadata.ts --apply"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
   "ranking-items|packages/ranking/src/scripts/generate-ranking-items.ts"
+  # ★calculated-stats は ranking-values より前に置くこと。計算型 metric の正典
+  #   app/stats/<key>/values.json を作る producer で、ranking-values はそれを配信用に
+  #   射影するだけだから (逆順だと計算型が 1 年前のまま配信される)。
+  "calculated-stats|packages/ranking/src/scripts/generate-calculated-stats.ts"
   "ranking-values|packages/ranking/src/scripts/generate-ranking-values.ts"
   "ranking-normalized-values|packages/ranking/src/scripts/generate-ranking-normalized-values.ts"
   "item-seo-refresh|packages/ranking/src/scripts/refresh-item-seo.ts --apply"

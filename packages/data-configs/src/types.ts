@@ -271,6 +271,24 @@ export interface NormalizationOption {
   decimalPlaces: number;
 }
 
+/**
+ * 分子・分母・結果それぞれの期間基準。
+ *
+ * ★金額の単位 (円/千円) が同じでも **期間が違えば足し引きできない**。実例:
+ * `disposable-income-after-rent` は月額の可処分所得から**年額**の民営家賃を引いており、
+ * 控除額が 12 倍過大だった (2026-08-05 発見・1 位が山形→東京に入れ替わる規模)。
+ * e-Stat のメタは期間を明示しない (`@unit` はどちらも「円」) ため機械では判別できず、
+ * **config に人が宣言する以外に検出手段が無い**。
+ *
+ * 換算は `result` を基準に決まる (月額結果に年額の項が来たら ÷12)。
+ * 金額スケール (千円→万円 = 10^k) は別軸で、そちらは `MONEY-UNIT-SCALE-01` が扱う。
+ */
+export interface PeriodAlignment {
+  numerator: "monthly" | "annual";
+  denominator: "monthly" | "annual";
+  result: "monthly" | "annual";
+}
+
 export interface CalculationOptions {
   isCalculated: boolean;
   isPairRelationship?: boolean;
@@ -278,6 +296,16 @@ export interface CalculationOptions {
   /** legacy: 計算式 (旧フォーマット) */
   formula?: string;
   description?: string;
+  /**
+   * 分子・分母の期間基準。`type:"subtraction"` は宣言必須
+   * (lint `[calc-period]`)。比は期間が約分されるので任意。
+   */
+  periodAlign?: PeriodAlignment;
+  /**
+   * 計算結果に掛ける定数。率を % にする `100` が主用途。
+   * 期間換算 (`periodAlign`) とは独立に適用する。
+   */
+  scaleFactor?: number;
   /** legacy: 分子/分母 (複数 naming convention あり) */
   type?: string;
   calculationType?: string;

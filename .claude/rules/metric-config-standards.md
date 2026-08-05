@@ -302,6 +302,72 @@ cdCat03 以降が落ちて多系列が混入し、`source`/`note` が param に�
 分子・分母キーがそろって初めて機能する。型だけ立てても
 `calculate-ranking-values.ts` の `if (!calculation.type) return []` で**必ず空になる**。
 
+## 計算型 metric (`fetcherKey:"calculated"`) — 生成工程と期間の宣言 (★2026-08-05 新設)
+
+分子・分母から計算して作る metric。現在 3 件 (`disposable-income-after-rent` /
+`real-disposable-income` / `engel-coefficient`)。
+
+### 生成は sync-snapshots の `calculated-stats` task が行う
+
+**2026-08-05 まで、計算結果を `app/stats/<key>/values.json` に書く工程はどこにも無かった。**
+`page-data-batch` は `kind:"external"` を skip し、`generate-ranking-values` は app/stats を
+app/ranking へ射影するだけ。`calculateRankingValues` はランタイム用で R2 に書かない。結果、
+配信値は単発スクリプトの産物で分子・分母の更新に追従せず、同じ扱いの 3 件が 1 年 / 1 年 /
+18 年とバラバラだった。
+
+| 層 | 実装 |
+|---|---|
+| 導出の純関数 (generator と監査が共有) | `packages/ranking/src/scripts/lib/calculated-stats-core.ts` |
+| 期間換算・丸めの resolver | `packages/ranking/src/utils/period-align.ts` |
+| CLI | `packages/ranking/src/scripts/generate-calculated-stats.ts` |
+| task 配線 | `run.sh` の TASKS。**`ranking-items` の後・`ranking-values` の前** (producer が先) |
+| 監査 | `audit-ranking-data-integrity.ts` の検査 (m) |
+
+行の形・rank 規則 (value 降順・同値同順位・null は rank:null)・ソート順は
+`page-data-batch` と揃える。**0 行・依存欠落・非有限値は書かずに exit 1** (空で R2 の既存
+データを上書きしない)。
+
+### 期間 (`periodAlign`) は宣言しないと機械では分からない
+
+金額の単位が同じ「円」でも、**月額と年額は足し引きできない**。
+`disposable-income-after-rent` は月額の可処分所得から**年額**の民営家賃を引いており、
+控除額が 12 倍過大だった (1 位が山形→東京に入れ替わり 46/47 県の順位が動く規模)。
+
+e-Stat のメタは期間を明示しない (`@unit` は両方「円」、`TABLE_INF` にも記載なし)。
+桁で判定するしかない — 可処分所得 2024 全国 522,569 円は月額、同じ家計調査年次表の消費支出
+2024 全国 3,602,915 円は年額。**したがって config の宣言が唯一の情報源**で、
+`MONEY-UNIT-SCALE-01` が扱う 10^k のスケール軸では原理的に拾えない。
+
+```ts
+periodAlign: { numerator: "monthly", denominator: "annual", result: "monthly" }
+```
+
+換算は `result` 基準 (月額の結果に年額の項が来たら ÷12)。比では約分されるので
+`type:"subtraction"` のみ必須 (lint `[calc-period]` が error)。
+
+### `scaleFactor` と丸め桁も宣言する
+
+率を % にする ×100 は `calculation.scaleFactor: 100`。丸めは `display.decimalPlaces`
+(lint `[calc-display]` が必須化)。どちらも**配信値そのものを変える**ので既定に頼らない。
+丸めは half-up (`Math.round`)。既存 `round1` と同方式で、engel の公開済み 846 行を
+全行一致で再現できることを実測済み。
+
+### 宣言はレシピに乗る = 監査が自動追従する
+
+`buildOps` が `fetcherKey:"calculated"` のとき `ops.calc`
+(type / 分子 / 分母 / periodAlign / scaleFactor / decimalPlaces) を焼く。したがって
+**宣言を変えると configHash が変わり、検査 (k) が「R2 が stale」と検出する**。
+検査 (m) は別軸で「分子・分母から作れるはずの年を作れているか」を見る (期待年は
+generator と同じ `expectedCalculatedYears` で導出するので、監査が赤なら generator を
+回せば必ず解消する)。
+
+| NG | OK |
+|---|---|
+| 単発スクリプトで app/stats を手動生成する | `calculated-stats` task で再生成 |
+| subtraction で `periodAlign` を省く | 必ず宣言 (lint が error) |
+| ×100 を生成器にハードコードする | `scaleFactor: 100` を config に宣言 |
+| 計算型でない metric にも `ops.calc` を広げる | calculated fetcher のみ (2,000 件超の一斉 drift を避ける) |
+
 ## isActive:true ≠ 本番公開（多段依存・★再発防止 2026-06-03）
 
 `MetricConfig.isActive` を `true` にしただけでは ranking は **本番公開されない**。本番アプリは R2 snapshot と

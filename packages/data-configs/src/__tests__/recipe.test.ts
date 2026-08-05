@@ -167,6 +167,100 @@ describe("buildRecipe — external / mlit", () => {
   });
 });
 
+describe("buildRecipe — 計算型 (calc op)", () => {
+  const calculated = (calculation: MetricConfig["calculation"], display?: MetricConfig["display"]) =>
+    metric(
+      { kind: "external", fetcherKey: "calculated", config: {} },
+      { calculation, ...(display ? { display } : {}) },
+    );
+
+  it("計算の宣言を ops.calc に載せ、derived になる", () => {
+    const r = buildRecipe(
+      calculated(
+        {
+          isCalculated: true,
+          type: "subtraction",
+          numeratorKey: "income",
+          denominatorKey: "rent",
+          periodAlign: { numerator: "monthly", denominator: "annual", result: "monthly" },
+        },
+        { decimalPlaces: 0 },
+      ),
+    );
+    expect(r.ops?.calc).toEqual({
+      type: "subtraction",
+      numeratorKey: "income",
+      denominatorKey: "rent",
+      periodAlign: { numerator: "monthly", denominator: "annual", result: "monthly" },
+      decimalPlaces: 0,
+    });
+    expect(r.derived).toBe(true);
+  });
+
+  it("★期間換算を変えると configHash が変わる (R2 の stale を監査が検出できる)", () => {
+    const base = {
+      isCalculated: true,
+      type: "subtraction",
+      numeratorKey: "income",
+      denominatorKey: "rent",
+    } as const;
+    const wrong = buildRecipe(calculated({ ...base })).configHash;
+    const fixed = buildRecipe(
+      calculated({
+        ...base,
+        periodAlign: { numerator: "monthly", denominator: "annual", result: "monthly" },
+      }),
+    ).configHash;
+    expect(fixed).not.toBe(wrong);
+  });
+
+  it("★scaleFactor と丸め桁も hash に効く (どちらも配信値を変えるため)", () => {
+    const base = { isCalculated: true, type: "ratio", numeratorKey: "a", denominatorKey: "b" } as const;
+    const plain = buildRecipe(calculated({ ...base })).configHash;
+    expect(buildRecipe(calculated({ ...base, scaleFactor: 100 })).configHash).not.toBe(plain);
+    expect(buildRecipe(calculated({ ...base }, { decimalPlaces: 1 })).configHash).not.toBe(plain);
+  });
+
+  it("計算型でない metric の calculation は calc を作らない (2000 件超の一斉 drift を避ける)", () => {
+    const r = buildRecipe(
+      metric(
+        { kind: "estat", statsDataId: "0000010112", cdCat01: "L3130" },
+        {
+          calculation: {
+            isCalculated: false,
+            normalizationOptions: [
+              { type: "per_population", label: "人口10万人あたり", unit: "円/10万人", scaleFactor: 100000, decimalPlaces: 1 },
+            ],
+          },
+        },
+      ),
+    );
+    expect(r.ops?.calc).toBeUndefined();
+  });
+
+  it("実行できない計算種別は焼かない (未知 type / 分子欠落)", () => {
+    expect(
+      buildRecipe(calculated({ isCalculated: true, type: "unknown-op", numeratorKey: "a" })).ops?.calc,
+    ).toBeUndefined();
+    expect(
+      buildRecipe(calculated({ isCalculated: true, type: "ratio" })).ops?.calc,
+    ).toBeUndefined();
+  });
+
+  it("round-trip で calc が失われない", () => {
+    const r = buildRecipe(
+      calculated({
+        isCalculated: true,
+        type: "ratio",
+        numeratorKey: "a",
+        denominatorKey: "b",
+        scaleFactor: 100,
+      }),
+    );
+    expect(parseRecipe(JSON.parse(JSON.stringify(r)))?.ops?.calc).toEqual(r.ops?.calc);
+  });
+});
+
 describe("configHash — 決定性とドリフト検知", () => {
   const base = metric({ kind: "estat", statsDataId: "0003456573", cdCat03: "02" });
 

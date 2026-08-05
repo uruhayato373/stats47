@@ -35,6 +35,10 @@ export const engelCoefficient: MetricConfig = {
   "calculation": {
     "isCalculated": true,
     "type": "ratio",
+    // 分子・分母とも同一表 (家計調査 家計収支編) の年額なので期間は約分される。
+    // ％ にするための ×100 は生成器が scaleFactor として適用する
+    // (2026-07-09 までは単発スクリプトが暗黙に掛けていた)。
+    "scaleFactor": 100,
     "numeratorKey": "food-expenditure-total",
     "denominatorKey": "consumption-expenditure-total",
   },

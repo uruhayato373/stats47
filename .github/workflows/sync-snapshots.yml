@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       only:
-        description: '対象 task (空=全 task)。正典は run.sh の TASKS 配列 (.claude/skills/db/sync-snapshots/run.sh)。例: ranking-items / ranking-values / ranking-normalized-values / master / page-components / blog / area-profile'
+        description: '対象 task (空=全 task)。正典は run.sh の TASKS 配列 (.claude/skills/db/sync-snapshots/run.sh)。例: ranking-items / calculated-stats / ranking-values / ranking-normalized-values / master / page-components / blog / area-profile'
         required: false
         default: ''
       dry_run:

@@ -6,6 +6,7 @@ import { listRankingValues } from "../repositories/ranking-value";
 import type { AreaType } from "@stats47/types";
 import type { RankingItem, RankingValue } from "../types";
 import { computeCalculatedValues } from "../utils/compute-calculated-values";
+import { periodScales } from "../utils/period-align";
 import { rankByValue } from "../utils/rank-by-value";
 
 /**
@@ -126,6 +127,12 @@ async function calculateRatio(
 
         unit: rankingItem.unit,
         keyBy: "areaCode",
+        // 正典 (app/stats) を書く generate-calculated-stats.ts と同じ式にする。
+        // 揃えないとオンデマンド計算だけが定数倍ズレた値を返す。
+        ...periodScales(calculation?.periodAlign),
+        ...(typeof calculation?.scaleFactor === "number"
+          ? { scaleFactor: calculation.scaleFactor }
+          : {}),
     });
     return rankByValue(computed) as RankingValue[];
 }
@@ -164,6 +171,11 @@ async function calculateSubtraction(
 
         unit: rankingItem.unit,
         keyBy: "areaCode",
+        // 月額 − 年額 を防ぐ。正典側と同じ resolver を通す。
+        ...periodScales(calculation?.periodAlign),
+        ...(typeof calculation?.scaleFactor === "number"
+          ? { scaleFactor: calculation.scaleFactor }
+          : {}),
     });
     return rankByValue(computed) as RankingValue[];
 }

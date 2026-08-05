@@ -66,6 +66,7 @@ import {
   classifyValueSuspicion,
   findExpectedEmpty,
   getMetricConfig,
+  listAllMetrics,
   parseRecipe,
   summarizeShape,
   type MetricRecipe,
@@ -76,6 +77,7 @@ import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominen
 
 import surveysMaster from "../data/surveys.json";
 
+import { expectedCalculatedYears } from "./lib/calculated-stats-core";
 import { checkFixtureGates, type FixtureViolation } from "./lib/normalized-fixtures";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
@@ -146,6 +148,19 @@ interface ValuesJson {
 interface StatsValuesJson {
   meta?: { rowCount?: number; recipe?: unknown };
   rows?: unknown[];
+}
+
+/**
+ * app/stats の行から年集合を取り出す ((m) の入力)。
+ * `rows` は形状検査へ渡すため意図的に `unknown[]` のままなので、ここで narrow する。
+ */
+function yearCodesOf(rows: unknown[] | undefined): Set<string> {
+  const out = new Set<string>();
+  for (const r of rows ?? []) {
+    const y = (r as { yearCode?: unknown }).yearCode;
+    if (typeof y === "string" || typeof y === "number") out.add(String(y));
+  }
+  return out;
 }
 
 /**
@@ -227,6 +242,29 @@ interface RecipeChecks {
   drift: Array<{ key: string; baked: string; current: string; diff: string }>;
   /** config が registry に無い (公開だけ残っている) */
   configMissing: string[];
+  ok: boolean;
+}
+
+/**
+ * (m) 計算型 metric (`fetcherKey:"calculated"`) の年カバレッジ。
+ *
+ * 「分子・分母から作れるはずの年」を作れているかを見る。**分子・分母が更新されても
+ * 計算結果が追従しない**という stale を検出する検査で、他のどの検査も拾えない:
+ * 形は正しく (j 通過)、行もあり (i 通過)、レシピも一致しうる (k 通過) のに、年が
+ * 足りないだけだからである。2026-08-05 まで生成工程自体が存在せず、同じ扱いの 3 件が
+ * 1 年 / 1 年 / 18 年とバラバラだったのを検知できなかった。
+ *
+ * 期待年は generator と**同じ関数** (`expectedCalculatedYears`) で導出する。
+ * 監査が「足りない」と言ったら generator を回せば必ず解消する関係を保つ。
+ *
+ * 対象は 3 件で実装直後から green にできるため、ラチェットではなく**即違反**。
+ */
+interface CalculatedChecks {
+  checked: number;
+  /** 期待年集合と実際が食い違う (= 再生成が要る) */
+  staleYears: Array<{ key: string; expected: number; actual: number; missing: string[] }>;
+  /** 分子・分母の app/stats が読めない (退役・未投入) */
+  depsMissing: Array<{ key: string; dep: string }>;
   ok: boolean;
 }
 
@@ -333,6 +371,7 @@ interface AuditReport {
   shape: ShapeChecks;
   recipe: RecipeChecks;
   valueVerification: ValueVerificationChecks;
+  calculated: CalculatedChecks;
   ok: boolean;
 }
 
@@ -532,6 +571,11 @@ async function main() {
   // (k) レシピ整合の集計器
   const recipe: RecipeChecks = { checked: 0, unbaked: [], drift: [], configMissing: [], ok: true };
 
+  // (m) 計算型 metric の年カバレッジの集計器
+  const calculated: CalculatedChecks = { checked: 0, staleYears: [], depsMissing: [], ok: true };
+  /** (m) の post-pass 用。mapPool 中に年集合だけ拾う (行は捨てるのでメモリは無視できる) */
+  const statsYearSets = new Map<string, Set<string>>();
+
   // (l) 値分布の検証状態の集計器
   const valueVerification: ValueVerificationChecks = {
     checked: 0,
@@ -577,6 +621,8 @@ async function main() {
       stats.checked++;
       const rowCount = statsRes.body?.meta?.rowCount ?? statsRes.body?.rows?.length ?? 0;
       statsRowCounts[key] = rowCount;
+      // (m) の入力。ここで拾えば追加の fetch が要らない
+      statsYearSets.set(key, yearCodesOf(statsRes.body?.rows));
       if (rowCount === 0) {
         if (findExpectedEmpty(key, "prefecture", auditNow)) stats.emptyAllowed.push(key);
         else stats.empty.push(key);
@@ -753,6 +799,50 @@ async function main() {
     normalized.stale.length === 0 &&
     normalized.fixtureViolations.length === 0;
 
+  // --- (m) 計算型 metric の年カバレッジ (post-pass) ----------------------------
+  // 分子・分母の年集合が必要なので mapPool の後に判定する。年集合は上で収集済み。
+  // 依存が active 集合の外 (inactive の分母など) にある場合だけ個別 fetch する。
+  for (const config of listAllMetrics().filter(
+    (c) => c.source.kind === "external" && c.source.fetcherKey === "calculated" && c.isActive,
+  )) {
+    const calc = config.calculation;
+    const numeratorKey = calc?.numeratorKey ?? calc?.numeratorRankingKey ?? calc?.numerator;
+    const denominatorKey = calc?.denominatorKey ?? calc?.denominatorRankingKey ?? calc?.denominator;
+    if (!numeratorKey || !denominatorKey) {
+      calculated.depsMissing.push({ key: config.key, dep: "(分子/分母キー未設定)" });
+      continue;
+    }
+    calculated.checked++;
+
+    const yearsOf = async (depKey: string): Promise<Set<string> | null> => {
+      const cached = statsYearSets.get(depKey);
+      if (cached) return cached;
+      const res = await fetchJson<StatsValuesJson>(`app/stats/${depKey}/values.json`);
+      if (res.status !== 200 || !res.body?.rows) return null;
+      const set = yearCodesOf(res.body.rows);
+      statsYearSets.set(depKey, set);
+      return set;
+    };
+
+    const [numYears, denYears] = await Promise.all([yearsOf(numeratorKey), yearsOf(denominatorKey)]);
+    if (!numYears) calculated.depsMissing.push({ key: config.key, dep: numeratorKey });
+    if (!denYears) calculated.depsMissing.push({ key: config.key, dep: denominatorKey });
+    if (!numYears || !denYears) continue;
+
+    const expected = expectedCalculatedYears(config, numYears, denYears);
+    const actual = statsYearSets.get(config.key) ?? new Set<string>();
+    const missing = expected.filter((y) => !actual.has(y));
+    if (missing.length > 0 || expected.length !== actual.size) {
+      calculated.staleYears.push({
+        key: config.key,
+        expected: expected.length,
+        actual: actual.size,
+        missing: missing.slice(0, 8),
+      });
+    }
+  }
+  calculated.ok = calculated.staleYears.length === 0 && calculated.depsMissing.length === 0;
+
   // --- (d) home featured ---
   const homeRes = await fetchJson<{ count: number }>("app/home/featured.json");
   const homeCount = homeRes.body?.count ?? 0;
@@ -820,6 +910,7 @@ async function main() {
     shape,
     recipe,
     valueVerification,
+    calculated,
     ok:
       itemMissing.length === 0 &&
       valuesMissing.length === 0 &&
@@ -829,7 +920,8 @@ async function main() {
       stats.ok &&
       shape.ok &&
       recipe.ok &&
-      valueVerification.ok,
+      valueVerification.ok &&
+      calculated.ok,
   };
 
   // ---- レポート出力 ----
@@ -985,6 +1077,26 @@ async function main() {
   }
   if (vv.unverified.length > 0 || vv.profileViolated.length > 0) {
     console.log(`  → 是正: /verify-value-distribution で中身を確認し verified-value-profiles.ts へ追記`);
+  }
+
+  console.log(`\n## (m) 計算型 metric の年カバレッジ (分子・分母から作れるはずの年)`);
+  console.log(`  検査: ${calculated.checked} 件`);
+  console.log(`  ★年が足りない (再生成が要る): ${calculated.staleYears.length} 件`);
+  for (const s of calculated.staleYears) {
+    console.log(
+      `      ${s.key}: 期待 ${s.expected} 年 / 実際 ${s.actual} 年` +
+        (s.missing.length > 0 ? ` (欠落: ${s.missing.join(",")}…)` : ""),
+    );
+  }
+  if (calculated.depsMissing.length > 0) {
+    console.log(`  依存の観測値が読めない: ${calculated.depsMissing.length} 件`);
+    for (const d of calculated.depsMissing) console.log(`      ${d.key} ← ${d.dep}`);
+  }
+  if (!calculated.ok) {
+    console.log(
+      `  → 是正: npx tsx packages/ranking/src/scripts/generate-calculated-stats.ts` +
+        ` (sync-snapshots の calculated-stats task。data-refresh 経由で回る)`,
+    );
   }
 
   console.log(`\n## 総合判定: ${report.ok ? "✓ OK" : "✗ 違反あり"}`);
