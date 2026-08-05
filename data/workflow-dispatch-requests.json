@@ -1,0 +1,7 @@
+{
+  "workflow": "sync-snapshots.yml",
+  "inputs": { "only": "page-components" },
+  "ref": "main",
+  "reason": "再投入。前回 (06:54) の dispatch は r2-write concurrency の pending 中に後続 run へ差し替えられて cancelled になり、1 度も実行されなかった。R2 app/page-components は 08-02 のまま (削除したはずの labor-wages-minimum-wage-trend が live に残存)",
+  "requestedAt": "2026-08-05T07:45:00Z"
+}
