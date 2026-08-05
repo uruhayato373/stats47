@@ -14,8 +14,11 @@ export const realDisposableIncome: MetricConfig = {
   "entities": [
     "prefecture",
   ],
+  // 分子 disposable-income-worker-households を 1975-2024 へ広げたのに合わせる。
+  // 起点 2013 は分母 consumer-price-difference-index-overall の下限 (R2 実測 2013-2024) で、
+  // 比が成立するのは両者が重なる年だけ。上限を 2024 に留めるのは分子と同じ理由 (seoTitle の実数)。
   "years": {
-    "from": 2024,
+    "from": 2013,
     "to": 2024,
   },
   "yearFormat": "fiscal",
