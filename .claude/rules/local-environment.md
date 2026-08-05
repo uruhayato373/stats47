@@ -116,6 +116,30 @@ cd apps/web && npm run dev
 (`packages/estat-api/src/core/client/http-client.ts` / `packages/ranking/src/scripts/audit-ranking-data-integrity.ts` の実装)。
 `R2_PUBLIC_FETCH_URL` を使う読み取りスクリプトはこの経路で動く。
 
+### ★Windows で clone した直後は `core.symlinks` を有効にする (2026-08-05)
+
+git for Windows の既定は `core.symlinks=false` で、**symlink がリンク先パスだけを中身に持つ
+通常ファイルとして checkout される**。このリポジトリは 2 つの symlink を持つ:
+
+| ファイル | リンク先 | 壊れると何が起きるか |
+|---|---|---|
+| `AGENTS.md` | `CLAUDE.md` | `npm run docs:check` が **DG003 error** になり、`docs/` に触る commit が pre-commit で全部止まる |
+| `.claude/design-system/SSOT.md` | `docs/01_技術設計/04_デザインシステム.md` | デザイン SSOT の参照が切れる |
+
+```bash
+git config core.symlinks true
+rm AGENTS.md .claude/design-system/SSOT.md
+git checkout -- AGENTS.md .claude/design-system/SSOT.md
+```
+
+- **`AGENTS.md` を CLAUDE.md のコピーに置き換えて回避しない**。Codex と Claude の指示 SSOT
+  一本化が壊れ、2 ファイルがドリフトする。
+- symlink 作成には Developer Mode か管理者権限が要ると説明されることがあるが、この PC では
+  **既定のまま Node の `fs.symlinkSync` で作成できた**。まず上記を試すこと。
+- **Git Bash の `ln -s` で可否を判定しない**。MSYS の既定はコピーを作るため `[ -L ]` が false
+  になり、「symlink 不可」と誤診する (2026-08-05 に実際に誤診した)。判定するなら
+  `node -e 'require("fs").symlinkSync(...)'` を使う。
+
 ## dev サーバー起動 ★ルート `npm run dev` を使わない
 
 **Web サイトの動作確認は必ず web 単体で起動する。ルート `npm run dev`（= `turbo run dev`）を使わない。**
