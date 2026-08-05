@@ -36,8 +36,8 @@ import {
 } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { listLatestArticles } from "@/features/blog/server";
-import { PortalCategoryGrid } from "@/features/home-portal";
 import { findCategoryByKey } from "@/features/category/server";
+import { PortalCategoryGrid } from "@/features/home-portal";
 import {
   FeaturedRankingCard,
   CategoryRankingTable,

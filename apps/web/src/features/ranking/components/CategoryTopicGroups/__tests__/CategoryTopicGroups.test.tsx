@@ -2,6 +2,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import { CategoryTopicGroups } from "../CategoryTopicGroups";
+
 import type { CategoryTopicListItem } from "../types";
 
 /**

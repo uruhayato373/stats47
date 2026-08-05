@@ -57,9 +57,7 @@ describe("PageShell — leftRail", () => {
    * `hide` でも積み下ろしコンテナ自体は描かれるので、その境界クラスを固定する。
    */
   it("積み下ろし境界がレール本体と同じ lg になっている", () => {
-    const { container } = render(
-      <PageShell leftRail={LEFT}>{MAIN}</PageShell>,
-    );
+    render(<PageShell leftRail={LEFT}>{MAIN}</PageShell>);
     const stacked = screen.getAllByLabelText("left-rail")[1].parentElement;
     expect(stacked).toHaveClass("lg:hidden");
     expect(stacked).not.toHaveClass("xl:hidden");

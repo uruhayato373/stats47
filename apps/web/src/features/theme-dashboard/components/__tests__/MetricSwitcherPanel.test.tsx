@@ -1,7 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import type { MetricKpi } from "../metric-kpi";
 
 /**
  * MetricSwitcherPanel の契約。
@@ -34,6 +33,8 @@ vi.mock(
 );
 
 import { MetricSwitcherPanel } from "../MetricSwitcherPanel";
+
+import type { MetricKpi } from "../metric-kpi";
 
 const kpi = (metricKey: string, over: Partial<MetricKpi> = {}): MetricKpi => ({
   metricKey,
@@ -183,6 +184,84 @@ describe("MetricSwitcherPanel — 県選択時の比較系列", () => {
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
     const areas = fetchMock.mock.calls.map((c) => c[1]).sort();
     expect(areas).toEqual(["00000", "13000"]);
+  });
+});
+
+describe("MetricSwitcherPanel — チャートが空になる指標への退避", () => {
+  /**
+   * 国土数値情報など e-Stat パラメータを持たない external 種は、県を選ぶと
+   * その県の系列が空で返る。旧実装は即「推移データがありません」にしていたが、
+   * 全国系列があるならそれを描いた方が水準の文脈が残る。
+   */
+  it("県系列が空でも全国系列があればそれを描く", async () => {
+    fetchMock.mockImplementation((_key: string, area: string) =>
+      Promise.resolve(
+        area === "00000"
+          ? { points: points([10, 11, 12]), source: "national" }
+          : { points: [], source: "none" },
+      ),
+    );
+    renderPanel({ selectedPrefectureCode: "13000", areaName: "東京都" });
+
+    await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
+    const { lines } = readChartData();
+    expect(lines).toHaveLength(1);
+    expect(lines[0].name).toBe("全国");
+  });
+
+  it("県系列も全国系列も空なら空状態を出す", async () => {
+    fetchMock.mockResolvedValue({ points: [], source: "none" });
+    renderPanel({ selectedPrefectureCode: "13000", areaName: "東京都" });
+    await waitFor(() =>
+      expect(screen.getByText(/推移データがありません/)).toBeInTheDocument(),
+    );
+  });
+});
+
+describe("MetricSwitcherPanel — 指数系は全国比較線を出さない", () => {
+  /**
+   * 「全国=100」の地域差指数は全国が定義上どの年も 100。比較線を引くと
+   * 情報ゼロの水平線が縦軸を占有し、県の変化が読みにくくなる。
+   */
+  it("unit が「(全国=100)」なら県選択時も比較破線を描かない", async () => {
+    fetchMock.mockImplementation((_key: string, area: string) =>
+      Promise.resolve(
+        area === "00000"
+          ? { points: points([100, 100, 100]), source: "national" }
+          : { points: points([98, 99, 101]), source: "area" },
+      ),
+    );
+    render(
+      <MetricSwitcherPanel
+        metrics={[kpi("cpi", { unit: "(全国=100)" })]}
+        tabLabels={{ cpi: "総合" }}
+        selectedPrefectureCode="13000"
+        areaName="東京都"
+      />,
+    );
+    await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
+    const { lines } = readChartData();
+    expect(lines).toHaveLength(1);
+    expect(lines[0].name).toBe("東京都");
+  });
+
+  it("通常の単位なら比較破線を描く (抑制が効きすぎていない)", async () => {
+    fetchMock.mockImplementation((_key: string, area: string) =>
+      Promise.resolve(
+        area === "00000"
+          ? { points: points([10, 11, 12]), source: "national" }
+          : { points: points([1, 2, 3]), source: "area" },
+      ),
+    );
+    render(
+      <MetricSwitcherPanel
+        metrics={[kpi("wage", { unit: "円" })]}
+        tabLabels={{ wage: "賃金" }}
+        selectedPrefectureCode="13000"
+        areaName="東京都"
+      />,
+    );
+    await waitFor(() => expect(readChartData().lines).toHaveLength(2));
   });
 });
 

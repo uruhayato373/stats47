@@ -10,6 +10,7 @@ import { MapPin } from "lucide-react";
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import type { LineChartData } from "@/components/stat-charts/types/visualization";
+
 import { trackNavClick } from "@/lib/analytics/events";
 
 import {
@@ -62,6 +63,17 @@ function nationalSeriesName(result: MetricTimeseriesResult | undefined): string 
 }
 
 /**
+ * 全国比較の破線を出しても意味がない指標か。
+ *
+ * 消費者物価の地域差指数のような「全国=100」の指数は、定義上どの年も全国が 100 なので
+ * 比較線が情報ゼロの水平線になり、むしろ縦軸を潰して県の変化を読みにくくする。
+ * 該当: consumer-prices の全指標 / laspeyres-index-prefecture など。
+ */
+function isNationalBaselineIndex(unit: string): boolean {
+  return unit.includes("全国=100") || unit.includes("全国＝100");
+}
+
+/**
  * GA4 レポート風の「KPI タイル切替チャート」。
  *
  * タイル群がタブになっていて、選んだ指標だけを下の大型折れ線に描く。
@@ -88,13 +100,16 @@ export function MetricSwitcherPanel({
     return preferred?.metricKey ?? metrics[0]?.metricKey ?? "";
   });
 
-  // 指標が入れ替わって選択中キーが消えた場合だけ先頭へ戻す
-  useEffect(() => {
-    if (metrics.length === 0) return;
-    if (!metrics.some((m) => m.metricKey === selectedKey)) {
-      setSelectedKey(metrics[0].metricKey);
-    }
-  }, [metrics, selectedKey]);
+  /**
+   * 実際に描画するキー。指標が入れ替わって選択中キーが消えたときは先頭に倒す。
+   *
+   * effect の中で setState して直すと連鎖レンダーになる
+   * (react-hooks/set-state-in-effect)。state は「ユーザーが選んだもの」だけを持ち、
+   * 現在の metrics で有効かどうかは描画時に導出する。
+   */
+  const effectiveKey = metrics.some((m) => m.metricKey === selectedKey)
+    ? selectedKey
+    : (metrics[0]?.metricKey ?? "");
 
   /**
    * `${metricKey}:${areaCode}` をキーにした取得済み系列。
@@ -106,24 +121,27 @@ export function MetricSwitcherPanel({
     Record<string, MetricTimeseriesResult>
   >({});
 
-  const selected = metrics.find((m) => m.metricKey === selectedKey);
+  const selected = metrics.find((m) => m.metricKey === effectiveKey);
 
   // 選択中の指標について、必要な系列 (自地域 + 全国) のうち未取得のものだけ取る
   useEffect(() => {
-    if (!selectedKey) return;
+    if (!effectiveKey) return;
     const wanted = selectedPrefectureCode
       ? [areaCode, NATIONAL_CODE]
       : [NATIONAL_CODE];
-    const missing = wanted.filter((code) => !(cacheKey(selectedKey, code) in seriesCache));
+    const missing = wanted.filter(
+      (code) => !(cacheKey(effectiveKey, code) in seriesCache),
+    );
     if (missing.length === 0) return;
 
     let cancelled = false;
     void Promise.all(
       missing.map(async (code) => {
-        const result = await fetchMetricTimeseriesAction(selectedKey, code).catch(
-          () => null,
-        );
-        return [cacheKey(selectedKey, code), result] as const;
+        const result = await fetchMetricTimeseriesAction(
+          effectiveKey,
+          code,
+        ).catch(() => null);
+        return [cacheKey(effectiveKey, code), result] as const;
       }),
     ).then((entries) => {
       if (cancelled) return;
@@ -138,10 +156,10 @@ export function MetricSwitcherPanel({
     return () => {
       cancelled = true;
     };
-  }, [selectedKey, areaCode, selectedPrefectureCode, seriesCache]);
+  }, [effectiveKey, areaCode, selectedPrefectureCode, seriesCache]);
 
-  const primaryResult = seriesCache[cacheKey(selectedKey, areaCode)];
-  const nationalResult = seriesCache[cacheKey(selectedKey, NATIONAL_CODE)];
+  const primaryResult = seriesCache[cacheKey(effectiveKey, areaCode)];
+  const nationalResult = seriesCache[cacheKey(effectiveKey, NATIONAL_CODE)];
   const isLoadingSeries = !primaryResult;
 
   const chartData: LineChartData | null = useMemo(() => {
@@ -158,18 +176,23 @@ export function MetricSwitcherPanel({
 
     const lines: LineChartData["lines"] = [];
 
-    if (selectedPrefectureCode) {
-      const area = primaryResult;
-      if (!area || area.points.length === 0) return null;
-      for (const p of area.points) put(p.yearName, "value", p.value);
+    const areaPoints = primaryResult?.points ?? [];
+
+    if (selectedPrefectureCode && areaPoints.length > 0) {
+      for (const p of areaPoints) put(p.yearName, "value", p.value);
       lines.push({
         dataKey: "value",
         name: areaName,
         color: "hsl(var(--primary))",
       });
 
-      // 全国は比較系列。破線 + 点なしで主系列と混ざらないようにする
-      if (nationalResult && nationalResult.points.length > 0) {
+      // 全国は比較系列。破線 + 点なしで主系列と混ざらないようにする。
+      // ただし「全国=100」の指数は全国が常に 100 の水平線になるので出さない。
+      if (
+        nationalResult &&
+        nationalResult.points.length > 0 &&
+        !isNationalBaselineIndex(unit)
+      ) {
         for (const p of nationalResult.points) put(p.yearName, "national", p.value);
         lines.push({
           dataKey: "national",
@@ -180,7 +203,12 @@ export function MetricSwitcherPanel({
         });
       }
     } else {
-      // 全国表示。action が空 (計算型指標) のときだけ R2 の 47 県平均へ退避する
+      // 全国表示、または県を選んでいてもその県の系列が取れない指標。
+      //
+      // 後者は国土数値情報など e-Stat パラメータを持たない external 種で起きる
+      // (action が resolveEstatParams で null になり空を返す)。全国系列があるなら
+      // それを描く — 「何も出ない」より水準の文脈が残る方が読者の役に立つ。
+      // 全国系列も空なら (計算型指標) R2 の 47 県平均へ退避する。
       const points = nationalResult?.points ?? [];
       if (points.length > 0) {
         for (const p of points) put(p.yearName, "value", p.value);
@@ -226,7 +254,7 @@ export function MetricSwitcherPanel({
   };
 
   return (
-    <Tabs value={selectedKey} onValueChange={handleSelect}>
+    <Tabs value={effectiveKey} onValueChange={handleSelect}>
       <div className="mb-3">
         <ScrollableRow className="snap-x snap-mandatory">
           <TabsList className="inline-flex h-auto w-max gap-2 bg-transparent p-0">
@@ -271,9 +299,12 @@ export function MetricSwitcherPanel({
         icon={<MapPin className="h-4 w-4 shrink-0 text-primary" />}
         titleClassName="text-base"
         description={
-          selectedPrefectureCode
-            ? `${areaName}の推移（破線は全国）`
-            : `${areaName}の推移`
+          // 比較線は指標によって出ない (指数系・県系列なし) ので、実際に描いた系列から書く
+          chartData && chartData.lines.length > 1
+            ? `${chartData.lines[0].name}の推移（破線は${chartData.lines[1].name}）`
+            : chartData
+              ? `${chartData.lines[0].name}の推移`
+              : `${areaName}の推移`
         }
         footer={
           <ChartFooter
