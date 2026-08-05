@@ -9,6 +9,7 @@ import {
 import type { AreaType } from "@stats47/types";
 import { err, ok, type Result } from "@stats47/types";
 
+import { GONE_RANKING_KEYS } from "../../config/gone-ranking-keys";
 import { KNOWN_RANKING_KEYS } from "../../config/known-ranking-keys";
 import type { FeaturedRankingItem, RankingItem } from "../../types/ranking-item";
 import type { RankingItemWithTags } from "../../types/ranking-item-with-tags";
@@ -42,6 +43,34 @@ function warnMissingR2Snapshot(bindings: Record<string, unknown>, message: strin
 
 function isNextProductionBuild(): boolean {
   return process.env.NEXT_PHASE === "phase-production-build";
+}
+
+/**
+ * 退役キーを一覧から落とす。**R2 snapshot より GONE_RANKING_KEYS を優先する**。
+ *
+ * ## なぜ R2 を信用しないか
+ *
+ * 退役は「config `isActive:false` → KNOWN 再生成 → GONE 登録 → デプロイ」で確定するが、
+ * R2 snapshot を作る `sync-snapshots.yml` の `sync` job は **`ref: main` を checkout する**
+ * (配信データは「デプロイ済みコードの姿」であるべき、という意図的な設計)。つまり
+ * **config が main に乗るまで R2 から退役キーを落とせない**。順序は必ずこうなる:
+ *
+ *   1. デプロイ (middleware が 410 を返し始める)
+ *   2. R2 再生成 (一覧からリンクが消える)
+ *
+ * この 1→2 の間、**一覧は 410 になったページへリンクし続ける**。R2 だけを信用する限り
+ * この窓は退役のたびに構造的に生まれ、消せない (2026-07-24 にタグリンク 1,988 本が
+ * 410 を指していた事故と同じクラス)。
+ *
+ * middleware の 410 判定はコード (GONE_RANKING_KEYS) を見ているので、**リンク生成側も
+ * 同じコードを見れば窓はゼロになる**。デプロイは原子的なので、410 化とリンク消滅が同時に起きる。
+ * R2 が後から追いついても結果は変わらない (冪等)。
+ *
+ * この定数は `KNOWN_RANKING_KEYS` と対で `@stats47/ranking/config` に置いてある。
+ * GONE ∩ KNOWN = ∅ は `ranking-key-consistency.test.ts` が CI で恒久検証する。
+ */
+function excludeGone<T extends { rankingKey: string }>(items: T[]): T[] {
+  return items.filter((it) => !GONE_RANKING_KEYS.has(it.rankingKey));
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -97,7 +126,7 @@ export async function readFeaturedRankingItemsFromR2(
       );
       return ok([]);
     }
-    return ok(snapshot.items.slice(0, limit));
+    return ok(excludeGone(snapshot.items).slice(0, limit));
   } catch (error) {
     logger.error({ error }, "readFeaturedRankingItemsFromR2: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
@@ -118,7 +147,7 @@ export async function readRankingItemsByCategoryFromR2(
       );
       return ok([]);
     }
-    return ok(snapshot.items);
+    return ok(excludeGone(snapshot.items));
   } catch (error) {
     logger.error({ error, categoryKey }, "readRankingItemsByCategoryFromR2: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
@@ -207,6 +236,7 @@ export async function listRankingItemsWithTagsFromR2(options?: {
       );
       const item = snapshot?.item;
       if (!item) continue;
+      if (GONE_RANKING_KEYS.has(item.rankingKey)) continue;
       if (options?.areaType && item.areaType !== options.areaType) continue;
       if (options?.isActive != null && item.isActive !== options.isActive) {
         continue;
@@ -310,7 +340,7 @@ export async function readRankingItemsBySurveyFromR2(
       );
       return ok([]);
     }
-    return ok(snapshot.items);
+    return ok(excludeGone(snapshot.items));
   } catch (error) {
     logger.error({ error, surveyId }, "readRankingItemsBySurveyFromR2: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
@@ -341,7 +371,7 @@ export async function readActiveRankingKeysFromR2(
       );
       return ok([]);
     }
-    const rows = snapshot.items
+    const rows = excludeGone(snapshot.items)
       .filter((it) => it.areaType === areaType && it.isActive)
       .map((it) => ({ rankingKey: it.rankingKey, areaType: it.areaType }));
     return ok(rows);
@@ -374,7 +404,7 @@ export async function readActiveKeysForSitemapFromR2(): Promise<
       );
       return ok([]);
     }
-    const rows = snapshot.items
+    const rows = excludeGone(snapshot.items)
       .filter((it) => it.isActive)
       .map((it) => ({
         rankingKey: it.rankingKey,
@@ -402,7 +432,8 @@ export async function readLatestYearForAreaTypeFromR2(
       return ok(null);
     }
     let max: string | null = null;
-    for (const it of snapshot.items) {
+    // 退役キーが最新年を押し上げると、どの現役ランキングにも無い年が既定選択になる
+    for (const it of excludeGone(snapshot.items)) {
       if (it.areaType !== areaType) continue;
       const yc = it.latestYear?.yearCode;
       if (yc && (max === null || yc > max)) max = yc;
@@ -429,7 +460,7 @@ export async function readRankingItemsByAreaTypeFromR2(
       );
       return ok([]);
     }
-    const matched = snapshot.items.filter((it) => {
+    const matched = excludeGone(snapshot.items).filter((it) => {
       if (it.areaType !== areaType || !it.isActive) return false;
       if (options?.dataSourceId && it.dataSourceId !== options.dataSourceId)
         return false;
@@ -467,7 +498,7 @@ export async function readRankingItemsByGroupKeyFromR2(
       );
       return ok([]);
     }
-    const matched = snapshot.items
+    const matched = excludeGone(snapshot.items)
       .filter(
         (it) =>
           it.isActive && it.groupKey === groupKey && it.areaType === areaType,
@@ -507,7 +538,7 @@ export async function readRankingItemsByTagFromR2(
       );
       return err(new Error(`No ranking items found for tagKey: ${tagKey}`));
     }
-    const matched = snapshot.items
+    const matched = excludeGone(snapshot.items)
       .filter(
         (it) =>
           it.isActive && (it.tags ?? []).some((t) => t.tagKey === tagKey),
@@ -553,7 +584,7 @@ export async function readFirstKeyByTagFromR2(
       );
       return err(new Error(`First ranking key not found for tagKey: ${tagKey}`));
     }
-    const matched = snapshot.items
+    const matched = excludeGone(snapshot.items)
       .filter(
         (it) =>
           it.isActive &&

@@ -51,7 +51,9 @@ const ROOT = findRepoRoot();
 
 const SOURCES = {
   knownRankingKeys: "packages/ranking/src/config/known-ranking-keys.ts",
-  goneRankingKeys: "apps/web/src/config/gone-ranking-keys.ts",
+  // KNOWN と対で packages/ranking 側が実体 (apps/web の同名ファイルは re-export の殻)。
+  // 殻を指すと readQuotedSet が 0 件を返し、lint が「退役キーへのリンク」を全部見逃す。
+  goneRankingKeys: "packages/ranking/src/config/gone-ranking-keys.ts",
   goneBlogSlugs: "apps/web/src/config/gone-blog-slugs.ts",
   blogRedirects: "apps/web/src/config/blog-redirects.ts",
   categoryKeys: "packages/data-configs/src/types.ts",
