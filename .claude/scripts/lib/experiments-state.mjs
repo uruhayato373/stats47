@@ -13,6 +13,7 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
+import { pathToFileURL } from "node:url";
 
 const STATE_PATH = ".claude/state/experiments.json";
 
@@ -192,7 +193,7 @@ async function cli() {
   throw new Error(`不明なコマンド: ${cmd}`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   cli().catch((e) => {
     console.error("Error:", e.message);
     process.exit(1);

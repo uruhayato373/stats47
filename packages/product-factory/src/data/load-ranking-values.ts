@@ -6,6 +6,7 @@
  * CLI: `npx tsx src/data/load-ranking-values.ts <rankingKey>`
  */
 import { PREFECTURE_CODES5, toCode5 } from "./prefectures";
+import { pathToFileURL } from "node:url";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 
@@ -55,7 +56,7 @@ export async function fetchRankingValues(rankingKey: string): Promise<FetchedVal
   };
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const key = process.argv[2];
   if (!key) {
     console.error("usage: load-ranking-values.ts <rankingKey>");

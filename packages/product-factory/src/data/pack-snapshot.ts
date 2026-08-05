@@ -14,7 +14,7 @@
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve, dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { PREFECTURE_CODES5 } from "./prefectures";
 import type { Dataset, PrefectureDatum } from "./dataset";
 import type { SourceRow } from "./sources";
@@ -219,7 +219,7 @@ export function loadPackSnapshotDatasets(packId: string): { title: string; datas
 }
 
 // ---- CLI ----
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const argv = process.argv.slice(2);
   const all = argv.includes("--all");
   const idIdx = argv.indexOf("--id");

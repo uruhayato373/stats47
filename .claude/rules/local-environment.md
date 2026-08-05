@@ -116,6 +116,37 @@ cd apps/web && npm run dev
 (`packages/estat-api/src/core/client/http-client.ts` / `packages/ranking/src/scripts/audit-ranking-data-integrity.ts` の実装)。
 `R2_PUBLIC_FETCH_URL` を使う読み取りスクリプトはこの経路で動く。
 
+### ★Windows では `next build` が完走しない (2026-08-05)
+
+`npm run build --workspace apps/web` は `/themes/[themeSlug]/opengraph-image` の prerender で
+必ず落ちる。原因は vendored な `next/dist/compiled/@vercel/og/index.node.js` が
+
+```js
+fileURLToPath(join(import.meta.url, "../noto-sans-v27-latin-regular.ttf"))
+```
+
+と **`path.join` を `file://` URL 文字列に適用**していること。Windows では区切りが `\` になり
+`file:\C:\...` となって `TypeError: Invalid URL` で落ちる (下記「file:// URL を文字列連結しない」と同じバグ)。
+
+- リポジトリ側では直せない (`node_modules` 内の vendored コード)。**Linux の CI build が権威**。
+- ローカルの検証は `npm run type-check --workspace apps/web` と対象 test で行う。
+- **`npm run build | tail` の終了コードを成功判定に使わない**。`tail` の exit code が返るため
+  build の失敗が隠れる (2026-08-05 に実際に「exit 0」と誤報した)。判定は出力本文を読む。
+
+### ★`file://` URL を文字列連結しない (2026-08-05)
+
+`` `file://${process.argv[1]}` `` は Windows で必ず不一致になる。Node は `argv[1]` を絶対パスへ
+解決するが Windows では `C:\path\x.mjs` の形で、`import.meta.url` の `file:///C:/path/x.mjs` と
+一致しない。ESM のエントリポイント判定に使うと **main() が呼ばれないまま exit 0 で終わる**
+(失敗ではなく無言の no-op)。Linux では一致するため CI では露見しない。
+
+```js
+import { pathToFileURL } from "node:url";
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
+```
+
+機械チェック: `npm run check:file-url-guard` (pre-commit + `pr-quality-check.yml`)。
+
 ### ★Windows で clone した直後は `core.symlinks` を有効にする (2026-08-05)
 
 git for Windows の既定は `core.symlinks=false` で、**symlink がリンク先パスだけを中身に持つ

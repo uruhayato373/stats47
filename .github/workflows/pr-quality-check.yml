@@ -91,6 +91,15 @@ jobs:
           npm run test:image-pipeline
         continue-on-error: false
 
+      - name: 🔗 File URL Guard
+        # file:// URL の文字列連結を禁止する。Windows で必ず不一致になり、
+        # ESM のエントリポイント判定なら main() が呼ばれないまま exit 0 で終わる
+        # (2026-08-05 に MCP サーバー 1 本と CLI 13 本が実際にこの状態だった)。
+        run: |
+          npm run check:file-url-guard
+          node --test .claude/scripts/lib/__tests__/check-file-url-guard.test.cjs
+        continue-on-error: false
+
       - name: 📝 ESLint Check
         run: npm run lint
         continue-on-error: false # Lintエラーで失敗させる

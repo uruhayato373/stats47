@@ -18,6 +18,7 @@
  * ほぼ API のエラー文であり、記事本文や観測値ではないため。逆に生成が進んだ後の本文は出さない。
  */
 
+import { pathToFileURL } from "node:url";
 const MAX_TEXT = 600;
 const EARLY_TURN_LIMIT = 2;
 
@@ -179,7 +180,7 @@ export function formatSummary(summary) {
   return lines.join('\n');
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const { readFileSync } = await import('node:fs');
   const path = process.argv[2];
   if (!path) {

@@ -18,7 +18,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
@@ -200,7 +200,7 @@ async function main() {
   else console.log(`\n--apply で ${path.relative(ROOT, OUT_DIR)} に書き出します`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((e) => {
     console.error(e.stack || e.message || e);
     process.exit(1);

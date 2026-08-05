@@ -23,6 +23,7 @@ import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { resolvePeriods, DATA_DELAY_DAYS } from "../metrics/lib/periods.mjs";
 import { assessDailyCoverage } from "../metrics/lib/periods.mjs";
+import { pathToFileURL } from "node:url";
 
 const REPO_ROOT = process.cwd();
 const KEY_CANDIDATES = [
@@ -650,7 +651,7 @@ export function formatNsmSection(metrics) {
 }
 
 // CLI 直接実行時
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const mode = process.argv.includes("--json") ? "json" : "markdown";
   const week = process.argv.find((a) => /^\d{4}-W\d{2}$/.test(a)) ?? null;
   const metrics = await fetchWeeklyNsmMetrics({ week });

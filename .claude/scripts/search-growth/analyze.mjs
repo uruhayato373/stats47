@@ -8,6 +8,7 @@ import { buildCandidates, DEFAULT_CONFIG } from "./lib/scoring.mjs";
 import { carryOverStatuses } from "./lib/triage.mjs";
 import { PROJECT_ROOT } from "./lib/sources.mjs";
 import { PATHS, readJson, writeJson, currentIsoWeek } from "./lib/state.mjs";
+import { pathToFileURL } from "node:url";
 
 export function analyze({ observations, pastEffects = {}, prevCandidates = [], now = new Date().toISOString() }) {
   const built = buildCandidates(observations, { config: DEFAULT_CONFIG, pastEffects, now });
@@ -42,4 +43,4 @@ function main() {
   console.log(`[analyze] wrote ${PATHS.candidates.replace(PROJECT_ROOT + "/", "")}`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
