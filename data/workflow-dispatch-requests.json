@@ -1,0 +1,7 @@
+{
+  "workflow": "sync-snapshots.yml",
+  "inputs": { "only": "ranking-items" },
+  "ref": "develop",
+  "reason": "PR #734 マージで main に periodAlign 是正が乗ったので、item.json の seoTitle を旧誤値 (1位山形県 545,206円) から再生成する",
+  "requestedAt": "2026-08-05T21:15:00Z"
+}
