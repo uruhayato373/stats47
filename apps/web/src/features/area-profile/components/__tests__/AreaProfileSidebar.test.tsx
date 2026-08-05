@@ -1,8 +1,9 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
-import type { StrengthWeaknessItem } from "../../types";
 import { AreaProfileSidebar } from "../AreaProfileSidebar";
+
+import type { StrengthWeaknessItem } from "../../types";
 
 /**
  * 右レールの DOM 上限契約。
