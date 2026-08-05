@@ -18,6 +18,13 @@ db-manager から snapshot 系を切り出した。 永続 DB への write は�
     `app/stats/<metric>/values.json` から決定的変換する。**`ranking-items` task の後に実行必須**
     (2026-07-27 に Phase 6 以降 2 ヶ月間 writer 不在化していた事故の恒久対策。
     `.claude/rules/metric-config-standards.md`「isActive:true ≠ 本番公開」参照)
+  - **`fetcherKey:"calculated"` の metric は `app/stats/<key>/values.json` 自体を
+    `generate-calculated-stats.ts` (`calculated-stats` task) が作る producer である。**
+    `ranking-items` の後・`ranking-values` の**前**に置く (逆順だと計算型が旧値のまま射影される)。
+    この task の直後だけ `diff-push-r2 --prefix app/stats` を挟むこと —
+    reader はローカルミラーを読まない (remote が唯一の真実源) ため、末尾の一括 push では
+    後続の `ranking-values` が remote の旧値を読む。順序と期間換算の規約は
+    `.claude/rules/metric-config-standards.md`「計算型 metric」を正典とする
 - → `apps/remotion/public/<feature>/*.json` (動画用 static JSON、 `/export-d1-to-remotion-static`)
 - 相関分析 (`/recompute-correlations`: R2 観測値からエフェメラル計算 → R2)
 - ブログ記事 article.md → R2 同期 (`/sync-articles` の派生フェーズ、 push は委譲)

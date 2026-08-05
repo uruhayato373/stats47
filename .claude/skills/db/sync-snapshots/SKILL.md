@@ -40,8 +40,11 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 | item-metadata-refresh (**master の直前**) | `packages/ranking/src/scripts/refresh-item-metadata.ts --apply` | `app/ranking/{key}/item.json` の title/subtitle/annotation(note)/categoryKey を git TS config から patch。master の category 再グループ化に反映させるため master の前に実行 | — |
 | master (per-URL + surveys + categories) | `packages/ranking/src/scripts/export-master-snapshots.ts` | `app/home/featured.json` / `app/category/{key}/items.json` / `app/ranking/{key}/item.json` / `app/survey/{id}/items.json` / `app/survey/all.json` | ~13MB |
 | **ranking-items** (master の直後) | `packages/ranking/src/scripts/generate-ranking-items.ts` | `app/ranking-items/all.json` / `app/ranking/{key}/item.json` — config(isActive:true) の全 metric を再生成。新規 metric 公開時に必須 | — |
-| **ranking-values** (ranking-items の**後**) | `packages/ranking/src/scripts/generate-ranking-values.ts` | `app/ranking/{key}/values.json` — 正典 `app/stats/{metric}/values.json` から配信用に決定的変換 (rank は正典値を引き継ぐ)。実描画値・OGP・blog がこれを読む。★2026-07-27 に復活 (Phase 6 で writer が 2 ヶ月間不在化していた事故の恒久対策) | ~2,116 files |
+| **calculated-stats** (ranking-items の後・ranking-values の**前**) | `packages/ranking/src/scripts/generate-calculated-stats.ts` | `app/stats/{metric}/values.json` — `fetcherKey:"calculated"` の metric (家賃控除後可処分所得 / 実質可処分所得 / エンゲル係数) を分子・分母から計算して**正典**を書く producer。ranking-values はこれを配信用に射影するだけなので、逆順だと計算型が 1 年前のまま配信される。**この task の直後だけ `diff-push-r2 --prefix app/stats` を挟む** — reader はローカルミラーを読まない (remote が唯一の真実源) ため、末尾の一括 push では後続が旧値を読む。★2026-08-05 新設 (計算結果を書く工程がどのパイプラインにも無く、月額から年額を引いた誤値が配信されていた事故の恒久対策) | 3 files |
+| **ranking-values** (calculated-stats の**後**) | `packages/ranking/src/scripts/generate-ranking-values.ts` | `app/ranking/{key}/values.json` — 正典 `app/stats/{metric}/values.json` から配信用に決定的変換 (rank は正典値を引き継ぐ)。実描画値・OGP・blog がこれを読む。★2026-07-27 に復活 (Phase 6 で writer が 2 ヶ月間不在化していた事故の恒久対策) | ~2,116 files |
 | **ranking-normalized-values** (ranking-values の後) | `packages/ranking/src/scripts/generate-ranking-normalized-values.ts` | `app/ranking/{key}/values-per-population.json` / `values-per-area.json` / `national-trend.json` — 正規化値と全国時系列。計算は runtime と同じ `services/normalize-core.ts` に委譲。push 前に fixture 値域ゲート (`scripts/lib/normalized-fixtures.ts`) を通し、違反時は exit≠0 で R2 push しない。★2026-07-29 新設 (Phase 6 で writer が消え、per-area が 100 倍過大のまま 2 ヶ月配信された事故の恒久対策) | ~4,800 files |
+| migration-flow | `apps/web/scripts/export-migration-flow-r2.ts` | `app/migration-flow/**` — 人口移動フロー (県間 O-D + 市区町村) の per-prefecture 派生。入力は R2 観測値 `app/stats/population-migration-inter-prefecture/migration-flow-{year}.json` | — |
+| finance-flow | `apps/web/scripts/generate-finance-flow.ts` | `app/finance-flow/**` — 財政フロー Sankey 用の per-prefecture 派生。R2 観測値 (歳入金額 / 歳出総額 / 目的別歳出比率) から 47 県 × 最新共通年度で生成 | — |
 | item-seo-refresh (master の直後) | `packages/ranking/src/scripts/refresh-item-seo.ts --apply` | `app/ranking/{key}/item.json` の seoTitle/seoDescription を git TS config から patch (Q-DESIGN R0)。master が materialize した item.json を上書き | — |
 | remotion-static | `apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all` | `apps/remotion/public/<feature>/*.json` (R2 push 対象外) | — |
 | area-profile | `packages/area-profile/src/scripts/export-snapshot.ts` | `app/areas/{areaCode}/profile.json` | ~4MB (47 files) |
@@ -101,6 +104,7 @@ bash .claude/skills/db/sync-snapshots/run.sh --dry-run
 | トリガー | 必要 snapshot |
 |---|---|
 | `/page-data-batch` 完了 | master + ai-content + ranking-values |
+| **計算型 metric の分子・分母を更新** (例 `disposable-income-worker-households`) | **calculated-stats → ranking-values** (この順)。分子だけ更新しても計算型の正典 `app/stats/{計算型key}` は追従しないため。`data-refresh.yml` は run.sh をフル実行するので自動で入る |
 | `/sync-metrics-cache` 完了 (新規 metric 追加後) | master + ranking-values |
 | `/sync-articles` 完了 | blog |
 | AI コンテンツ生成完了 | ai-content |

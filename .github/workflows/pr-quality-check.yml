@@ -91,6 +91,14 @@ jobs:
           npm run test:image-pipeline
         continue-on-error: false
 
+      - name: 🔁 Sync-Snapshots Task Drift
+        # run.sh の TASKS と SKILL.md の task 表を 1:1 に保つ。run.sh に task を足しても
+        # 動くので CI は緑のままだが、「その task が存在すること」と「実行順」を人と agent が
+        # 読む面だけが欠落する (2026-08-05 に calculated-stats で実際に起き、既存の
+        # migration-flow / finance-flow も未文書のまま残っていた)。
+        run: node .claude/scripts/lib/check-sync-snapshots-tasks.cjs
+        continue-on-error: false
+
       - name: 🔗 File URL Guard
         # file:// URL の文字列連結を禁止する。Windows で必ず不一致になり、
         # ESM のエントリポイント判定なら main() が呼ばれないまま exit 0 で終わる

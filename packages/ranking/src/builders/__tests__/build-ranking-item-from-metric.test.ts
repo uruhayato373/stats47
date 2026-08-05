@@ -165,4 +165,37 @@ describe("buildRankingItemFromMetric", () => {
     expect(item.createdAt).toBe(NOW);
     expect(item.updatedAt).toBe(NOW);
   });
+
+  // ★焼き忘れガード (2026-08-05)。calculation の宣言は item.json に焼かれて初めて
+  // runtime の計算に効く。CalculationOptions にフィールドを足して buildCalculation の
+  // spread を忘れると、型は通り値も NaN にならず「静かに換算されない」— 月額から年額を
+  // 引いた誤値が 47 県すべてに出た事故と同じ壊れ方になる。宣言 → item.json の経路を固定する。
+  it("calculation の periodAlign / scaleFactor を item.json に焼き込む", () => {
+    const config: MetricConfig = {
+      ...baseConfig,
+      calculation: {
+        isCalculated: true,
+        type: "subtraction",
+        numeratorKey: "disposable-income-worker-households",
+        denominatorKey: "private-rent-consumption-expenditure",
+        periodAlign: { numerator: "monthly", denominator: "annual", result: "monthly" },
+        scaleFactor: 100,
+      },
+    };
+    const item = buildRankingItemFromMetric(config, { values: null, now: NOW });
+
+    expect(item.calculation?.periodAlign).toEqual({
+      numerator: "monthly",
+      denominator: "annual",
+      result: "monthly",
+    });
+    expect(item.calculation?.scaleFactor).toBe(100);
+  });
+
+  it("periodAlign / scaleFactor 未宣言の metric には両フィールドを付けない", () => {
+    // 既定値を勝手に焼くと「宣言していない」と「monthly 指定」が区別できなくなる。
+    const item = buildRankingItemFromMetric(baseConfig, { values: null, now: NOW });
+    expect(item.calculation).not.toHaveProperty("periodAlign");
+    expect(item.calculation).not.toHaveProperty("scaleFactor");
+  });
 });
