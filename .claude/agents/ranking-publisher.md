@@ -46,6 +46,11 @@ ranking の middleware は `isGone` のみ 410、未登録キー（KNOWN にも 
                                        (config + R2 app/stats → app/ranking/<key>/item.json + all.json)
                                        CI: gh workflow run sync-snapshots.yml -f only=ranking-items
                                        ※ R2 書き込みは CI / S3 creds 必須 (assertR2WriteAllowed)
+1.5 計算型 metric の正典生成         → packages/ranking/src/scripts/generate-calculated-stats.ts
+                                       (fetcherKey:"calculated" のみ。分子・分母 → app/stats/<key>/values.json)
+                                       CI: gh workflow run sync-snapshots.yml -f only=calculated-stats
+                                       ★Step 2 の前。ranking-values はこれを射影するだけなので、
+                                       逆順だと計算型が旧値のまま配信される
 2. ranking values 再生成            → packages/ranking/src/scripts/generate-ranking-values.ts
                                        (正典 app/stats/<metric>/values.json → 配信用 app/ranking/<key>/values.json)
                                        CI: gh workflow run sync-snapshots.yml -f only=ranking-values
