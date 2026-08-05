@@ -11,6 +11,7 @@
  * URL 削除 / production write。これらは tool として存在しない。
  */
 import { createInterface } from "node:readline";
+import { pathToFileURL } from "node:url";
 import { TOOLS, callTool } from "../lib/service.mjs";
 
 const PROTOCOL_VERSION = "2025-06-18";
@@ -96,4 +97,7 @@ function main() {
 
 // テストから import できるよう export しつつ、直接起動時のみ stdin を読む
 export { handle, listTools, toInputSchema };
-if (import.meta.url === `file://${process.argv[1]}`) main();
+// 文字列連結で file:// URL を組み立てない。Windows のドライブレター (file:///C:/...) と
+// 相対パス起動 (.mcp.json は相対パスを渡す) の双方で一致しなくなり、main() が呼ばれず
+// stdin を読まないまま即 exit する (= MCP handshake が成立しない)。
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
