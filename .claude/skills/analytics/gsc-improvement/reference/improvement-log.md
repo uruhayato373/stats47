@@ -13,6 +13,22 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **想定効果は必ず根拠を併記**（過去事例 / Google 公式ガイド / 計算式）
 - **実測値は取得コマンドへのリンク併記**
 
+## [RANKING-GONE-RESTORE-01] 誤410からの復帰 → effect/none 確定 (2026-08-05)
+
+- **施策**: 2026-07-03 に誤 GONE 化していた 56 ranking を復帰 (commit `4381f530e` 3 件 + `7fa49a4fc` 53 件)。
+  想定効果: 410 で失われた imp の回復。
+- **実測 (2026-08-05)**:
+  - **56 キー全件が W27〜W31 の 5 週すべてで GSC impressions 0**。
+    取得: `for sha in 7fa49a4fc 4381f530e; do git show $sha -- apps/web/src/config/gone-ranking-keys.ts | grep -E '^-  "' | sed 's/^-  "//; s/",$//'; done | sort -u > /tmp/restored.txt`
+    → `awk -F',' 'NR==FNR{k[$1];next} FNR>1{n=split($1,p,"/ranking/"); if(n<2)next; key=p[2]; sub(/[?#].*/,"",key); sub(/\/$/,"",key); if(key in k){c+=$2; imp+=$3; u++}} END{print u+0, c+0, imp+0}' /tmp/restored.txt snapshots/<週>/pages.csv`
+  - **打ち切りではない**: W31 の `pages.csv` は 2,814 行・imp 最小値 1 = imp≥1 のページを全件収録。「上位 N 件から漏れた」ではなく **imp が実際に 0**。
+  - **ページは健全**: `curl -A Googlebot https://stats47.jp/ranking/{births,marriages,ratio-65-plus}` → 全件 **200** + 正しいタイトル (2026-08-05)。`sitemap-ranking-keys.ts` にも掲載済み。
+- **判定**: **effect/none**。復帰から 4 週以上経っても imp が 1 も戻っていない。ページ側・sitemap 側に欠陥は無く、
+  410 で deindex された URL の再収録が進んでいないことが残る説明。
+- **次の一手**: URL Inspection API で 56 キーの `coverageState` を確定する (現行の日次サンプル 500 URL に 1 件も含まれていない)。
+  未収録なら sitemap 再送信で再収録を促す (Indexing API は通常ページ対象外 — 下記 INDEXING-AUTO-01)。
+  → `RANKING-REINDEX-01` (期日 2026-08-19) として起票。
+
 ## [TRIAGE-2026-07-03] 期日到達施策の effect/* 確定 (improvement-triage)
 
 期日到達済み施策をバックログ (`docs/todo/04_改善バックログ.md`) と同期して判定確定。実測ソースは各行に併記。
