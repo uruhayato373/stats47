@@ -1,7 +1,0 @@
-{
-  "workflow": "sync-snapshots.yml",
-  "inputs": { "only": "master" },
-  "ref": "main",
-  "reason": "ranking-items で item.json が isActive:false になったので、category/survey/home の一覧を再グループ化して退役 3 キーを落とす (survey-linkage-standards の ranking-items → master 順)",
-  "requestedAt": "2026-08-05T02:35:00Z"
-}
