@@ -1,7 +1,0 @@
-{
-  "workflow": "sync-snapshots.yml",
-  "inputs": { "only": "ranking-items" },
-  "ref": "develop",
-  "reason": "退役 3 metric (bowling-alley-public / gini-coefficient-disposable-income / unemployment-measures-project-expenses-prefecture) を R2 の ranking-items から落とす。デプロイ前に必須 (先にデプロイすると category 一覧から 410 へのリンクが生まれる)",
-  "requestedAt": "2026-08-05T01:06:16Z"
-}
