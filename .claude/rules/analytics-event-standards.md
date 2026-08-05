@@ -180,6 +180,12 @@ npm run google-admin:audit-api
 > 遷移先は `nav_href` (`/areas/<5桁code>`)。`trackNavClick` の呼び出し元は `AreaSearch` /
 > `AreaSelectionPanels` (`apps/web/src/features/area-profile/`)。
 >
+> **nav_surface の値追加 (2026-08-05)**: category ページ左のカテゴリナビに
+> `category_sidebar` を追加した (既存 `nav_surface` dimension の**値追加**・新 dimension なし)。
+> home の左ペインと同じ `PortalCategoryGrid` を別配置で使うため、既定の `home_category` の
+> ままだと **home の click と混ざって導線別の内訳が取れなくなる**。`TrackedPortalCategoryLink`
+> に `surface` prop を足し、home 側は未指定で挙動不変。値は `trackNavClick` の union で縛る。
+>
 > **nav_surface の値追加 (2026-07-23)**: ポータル型 home の発見セクションに
 > `home_category` / `home_use_case` / `home_area` / `home_blog` を追加した
 > (既存 `nav_surface` dimension の**値追加**・新 dimension なし)。home → カテゴリ/テーマ/都道府県/

@@ -70,6 +70,21 @@ if [ -n "$STAGED_DOCS" ]; then
   fi
 fi
 
+# 2.1b file:// URL の文字列連結ガード
+# `file://${process.argv[1]}` は Windows で必ず不一致になり、ESM のエントリポイント
+# 判定なら main() が呼ばれないまま exit 0 で終わる (失敗ではなく無言の no-op)。
+STAGED_JS=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
+  '^(\.claude/scripts/|apps/|packages/|scripts/).*\.(js|cjs|mjs|ts|tsx|mts|cts)$' || true)
+if [ -n "$STAGED_JS" ]; then
+  echo -e "${GREEN}🔗 file:// URL ガード...${NC}"
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-file-url-guard.cjs"; then
+    echo -e "${RED}❌ file:// URL を文字列連結しています。pathToFileURL / new URL を使ってください。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  else
+    echo -e "${GREEN}✅ file:// URL ガード成功${NC}"
+  fi
+fi
+
 # 2.1.1 画像生成差分/publish policy ガード
 # workflow / planner / manifest / publisher の変更時だけ、CI と同じ fail-closed policy を先行実行する。
 STAGED_IMAGE_PIPELINE=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
@@ -427,6 +442,23 @@ if [ -n "$STAGED_METRICS" ]; then
   fi
 else
   echo -e "${GREEN}✅ metric config の変更なし${NC}"
+fi
+
+# 6.5b topic カタログ (カテゴリ内グループ分類 SSOT) の整合
+#      (packages/data-configs/src/topics/README.md)。カタログ TS が staged のとき発火。
+STAGED_TOPICS=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/topics/.+[.]ts$" || true)
+
+if [ -n "$STAGED_TOPICS" ]; then
+  echo -e "${GREEN}topic カタログ整合チェック...${NC}"
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/validate-topic-catalog.ts > /tmp/validate-topics.log 2>&1); then
+    echo -e "${GREEN}OK topic カタログ整合チェック成功${NC}"
+    grep -E "warn 内訳" /tmp/validate-topics.log || true
+  else
+    echo -e "${RED}NG topic カタログに整合 error があります。${NC}"
+    grep -E "^   " /tmp/validate-topics.log | head -10 || true
+    echo -e "${YELLOW}規約: packages/data-configs/src/topics/README.md / 確認: npm run validate:topics --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
 fi
 
 # 6.6 theme-catalog (指標×チャート SSOT) の整合 + 生成物鮮度チェック

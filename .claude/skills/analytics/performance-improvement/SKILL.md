@@ -131,16 +131,22 @@ Chrome DevTools MCP のモバイル再現条件を固定する。
 - rail内単一`nav`の873 childrenが再発しない
 - LCP・CLS・desktop/mobile配置に回帰がない
 
-### 4. `PERF-STATIC-CACHE-01` — hashed static assetのブラウザ再検証を止める
+### 4. `PERF-STATIC-CACHE-01` — hashed static assetのブラウザ再検証を止める (2026-08-05 実装済)
 
-現状の `/_next/static/*` はhash付きでも `Cache-Control: public, max-age=0, must-revalidate` で、CSSが304再検証される。Cloudflare公式の [Cache Response Rules](https://developers.cloudflare.com/cache/how-to/cache-response-rules/) と Cloudflare Traceを使う。
+**Cloudflare Cache Response Rule は使わない。** `apps/web/public/_headers` で解決済み。
 
-1. Cloudflare MCPで既存Cache Rules / Cache Response Rulesを読取し、競合と適用順を確認する。
-2. Cloudflare Traceで代表CSS URLに現在どのruleがmatchするか確認する。
-3. 対象式を `http.host eq "stats47.jp" and starts_with(http.request.uri.path, "/_next/static/")` に限定し、browser向け `max-age=31536000, immutable` の候補を作る。
-4. HTML、RSC、API、`/tiles/*`、非hash assetへ広げない。
-5. **外部設定変更前に停止し、式・変更内容・rollbackをユーザーへ提示して承認を得る。**
-6. 承認後はCloudflare Trace、`curl -I`、Chrome repeat navigationでheaderと再検証消失を確認する。
+`public/` は OpenNext が `.open-next/assets/` 直下へ複製し (`@opennextjs/aws` の
+`createAssets.js`: `public/* => *`)、`wrangler.toml` の `[assets] directory` がそこを指す。
+Cloudflare 公式 ([Workers static assets headers](https://developers.cloudflare.com/workers/static-assets/headers/)、
+アクセス 2026-08-05) が fingerprinted asset への `_headers` 利用を推奨している。
+ダッシュボード操作が要らず、rollback が git に残り、テストで範囲を固定できる。
+
+- 対象は `/_next/static/*` の 1 行だけ。**ハッシュを持たない URL へ広げない**
+  (デプロイしても最大 1 年ぶん古い資産が配信される)。範囲は
+  `apps/web/src/__tests__/static-assets-headers.test.ts` が固定する。
+- `_headers` は Worker が生成するレスポンス (HTML / RSC / API) には適用されない。
+- デプロイ後の確認: `curl -I https://stats47.jp/_next/static/css/<hash>.css` で
+  `max-age=31536000, immutable` になり、Chrome の repeat navigation で 304 が消えること。
 
 ### 5. `PERF-WORKER-P99-01` — Workersの遅いrouteを特定する
 
@@ -221,7 +227,7 @@ SSOT:
 3. PERF-AREA-DOM-01
 4. A11Y-AREA-CONTRAST-01
 5. PERF-WORKER-P99-01（Cloudflare read-only調査後、根拠があるrouteだけ修正）
-6. PERF-STATIC-CACHE-01（設定案とCloudflare Traceまで）
+6. PERF-STATIC-CACHE-01（実装済。public/_headers。Cloudflare Rule は作らない）
 
 各IDごとに、変更前のChrome trace/Network/DOM値を取り、外科的に実装し、対象テスト、type-check、同条件のChrome再計測を行ってください。rankingのベース地図・TileSwitcher・モバイルh1直後の配置は維持してください。画像最適化や広告削除は今回のtraceでLCP改善見込みが0ms、または既存バックログと重複するため追加しないでください。
 

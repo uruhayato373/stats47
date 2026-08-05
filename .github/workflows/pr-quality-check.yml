@@ -91,6 +91,15 @@ jobs:
           npm run test:image-pipeline
         continue-on-error: false
 
+      - name: 🔗 File URL Guard
+        # file:// URL の文字列連結を禁止する。Windows で必ず不一致になり、
+        # ESM のエントリポイント判定なら main() が呼ばれないまま exit 0 で終わる
+        # (2026-08-05 に MCP サーバー 1 本と CLI 13 本が実際にこの状態だった)。
+        run: |
+          npm run check:file-url-guard
+          node --test .claude/scripts/lib/__tests__/check-file-url-guard.test.cjs
+        continue-on-error: false
+
       - name: 📝 ESLint Check
         run: npm run lint
         continue-on-error: false # Lintエラーで失敗させる
@@ -199,6 +208,13 @@ jobs:
         # ネットワーク・AdSense API には触れない (実データ取得は週次 workflow が担当)。
         # 正典: .claude/scripts/metrics/lib/adsense-report-contract.mjs
         run: npm run metrics:test
+        continue-on-error: false
+
+      - name: 📐 PSI Collector Contract Guard
+        # PSI batch に保存する DOM 規模 (dom_size) の抽出が Lighthouse の 2 形式で成立し、
+        # 欠測を 0 と誤らないことを検証する。PSI API には触れない (実計測は日次 workflow)。
+        # 正典: .claude/scripts/psi/fetch-psi-audit.mjs
+        run: npm run psi:test
         continue-on-error: false
 
       - name: 🔐 Google Admin Allowlist Guard
@@ -353,6 +369,14 @@ jobs:
           # 規約: .claude/rules/theme-catalog-standards.md
           npm run validate:catalog --workspace=@stats47/data-configs
           npm run generate:catalog --workspace=@stats47/data-configs -- --check
+        continue-on-error: false
+
+      - name: 🗂️ Topic Catalog Gate
+        run: |
+          # カテゴリ内グループ分類 (SSOT) の整合を担保。存在しない metric key への
+          # overrides、予約語 other の再定義、不正な正規表現を弾く。
+          # 規約: packages/data-configs/src/topics/README.md
+          npm run validate:topics --workspace=@stats47/data-configs
         continue-on-error: false
 
       - name: 🗾 Area Databook Gate

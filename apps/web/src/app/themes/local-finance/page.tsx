@@ -71,9 +71,10 @@ export default async function LocalFinanceThemePage() {
       leftRailNarrowBehavior="hide"
     >
       {/* 狭幅のテーマ切替（bespoke ページのため ThemePageLayout を使わず個別配置）。
-          xl+ は左レールが担う。本ページは ThemePrefectureProvider を持たないので
-          左レールの地域ブロックは出さない (showRegion=false)。 */}
-      <div className="xl:hidden">
+          lg+ は左レールが担う。本ページは ThemePrefectureProvider を持たないので
+          左レールの地域ブロックは出さない (showRegion=false)。
+          ★境界は PageShell の左レール (hidden lg:block) と必ず一致させること。 */}
+      <div className="lg:hidden">
         <ThemeSwitcher currentThemeKey="local-finance" />
       </div>
       {/* 都道府県 / 市区町村 切替 */}

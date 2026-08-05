@@ -12,6 +12,7 @@ import { NORMALIZE_SOURCES, ALL_SOURCES, PROJECT_ROOT } from "./lib/sources.mjs"
 import { validateObservation } from "./lib/contracts.mjs";
 import { redactString } from "./lib/redaction.mjs";
 import { PATHS, writeJson, currentIsoWeek } from "./lib/state.mjs";
+import { pathToFileURL } from "node:url";
 
 export function normalizeAll({ now = new Date().toISOString(), root = PROJECT_ROOT, sources: defs = ALL_SOURCES } = {}) {
   const observations = [];
@@ -62,4 +63,4 @@ function main() {
   console.log(`[normalize] wrote ${PATHS.latest.replace(PROJECT_ROOT + "/", "")}`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

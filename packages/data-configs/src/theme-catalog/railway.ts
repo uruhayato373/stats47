@@ -10,7 +10,7 @@ export const RAILWAY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "railway-passengers",
       "shortLabel": "鉄道駅乗降客数",
-      "role": "primary"
+      "role": "secondary"
     },
     {
       "rankingKey": "jr-passenger-transport",

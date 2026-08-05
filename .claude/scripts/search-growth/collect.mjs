@@ -14,6 +14,7 @@ import { spawnSync } from "node:child_process";
 import { ALL_SOURCES, NORMALIZE_SOURCES, PROJECT_ROOT, liveCommandFor } from "./lib/sources.mjs";
 import { PATHS, writeJson, ensureDir, getArg, hasFlag, currentIsoWeek } from "./lib/state.mjs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 function secretPresent(name) {
   // 値は読まない。存在有無だけ。
@@ -100,4 +101,4 @@ async function main() {
   if (summary.failed > 0) process.exitCode = 1;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

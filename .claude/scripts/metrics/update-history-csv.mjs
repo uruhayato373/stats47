@@ -52,6 +52,7 @@ import {
   resolveUnitMatch,
 } from "./lib/adsense-report-contract.mjs";
 import { loadCodeAdSlots } from "./lib/code-ad-slots.mjs";
+import { pathToFileURL } from "node:url";
 
 const SNAPSHOT_DIRS = {
   gsc: ".claude/skills/analytics/gsc-improvement/reference/snapshots",
@@ -589,4 +590,4 @@ function main() {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

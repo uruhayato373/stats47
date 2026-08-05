@@ -22,6 +22,18 @@ export interface LineSeriesConfig {
   dataKey: string;
   name: string;
   color: string;
+  /**
+   * 線を破線にする SVG の stroke-dasharray（例 `"6,4"`）。省略時は実線。
+   *
+   * 用途は「主系列と比較系列を線種で区別する」こと。色だけで区別すると
+   * 系列数が増えたときに識別できず、色覚特性によっては差が伝わらない。
+   */
+  strokeDasharray?: string;
+  /**
+   * データ点の丸を描かない。比較系列（背景として薄く添える線）で、
+   * 主系列の点と混ざって読みづらくなるのを避けるために使う。
+   */
+  hidePoints?: boolean;
 }
 
 /** D3 LineChart Props */

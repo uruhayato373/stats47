@@ -28,7 +28,7 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     {
       "rankingKey": "crude-birth-rate",
       "shortLabel": "粗出生率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "average-age-of-first-marriage-wife",
@@ -53,7 +53,7 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     {
       "rankingKey": "dependent-population-index",
       "shortLabel": "従属人口指数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "household-ratio-with-65plus",

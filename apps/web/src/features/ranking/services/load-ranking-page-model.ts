@@ -1,7 +1,6 @@
 import "server-only";
 
 import { readRankingAiContentFromR2 } from "@stats47/ai-content/server";
-import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import { getRankingTitle, type RankingValue } from "@stats47/ranking";
 import {
   readAllYearsRankingValuesFromR2,
@@ -58,13 +57,10 @@ export async function loadRankingPageModel(rankingKey: string) {
       return [] as RankingValue[];
     });
 
-  const topologyPromise =
-    process.env.NEXT_PHASE === "phase-production-build"
-      ? Promise.resolve(null)
-      : fetchPrefectureTopology().catch((error) => {
-          logger.error({ error }, "RankingKeyPage: topology 取得失敗");
-          return null;
-        });
+  // 都道府県 TopoJSON はここで取得しない。1,015,004 bytes が RSC payload へ直列化され、
+  // ranking HTML 1,232,628 bytes の約 82% を占めていた (2026-08-05 実測)。地図は
+  // next/dynamic の ssr:false でサーバー描画されないため hydration まで使われず、
+  // 純粋な無駄だった。RankingMapChartClient が /prefecture.topojson を client fetch する。
 
   const aiContentPromise = readRankingAiContentFromR2(rankingKey, AREA_TYPE).catch(
     (error) => {
@@ -131,7 +127,6 @@ export async function loadRankingPageModel(rankingKey: string) {
 
   const [
     allYearsValues,
-    topology,
     aiContent,
     nationalTrend,
     cityRankingItem,
@@ -141,7 +136,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     nativeBanners,
   ] = await Promise.all([
     allYearsValuesPromise,
-    topologyPromise,
     aiContentPromise,
     nationalTrendPromise,
     cityRankingItemPromise,
@@ -185,7 +179,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     selectedYear,
     rankingValues,
     nationalAverageSeries,
-    topology,
     aiContent,
     nationalTrend,
     cityRankingItem,

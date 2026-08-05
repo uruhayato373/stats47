@@ -6,6 +6,7 @@ export {
   readActiveKeysForSitemapFromR2,
   readActiveRankingKeysFromR2,
   readCategorySourceSurveysFromR2,
+  readCategoryTopicsFromR2,
   readFeaturedRankingItemsFromR2,
   readFirstKeyByTagFromR2,
   readLatestYearForAreaTypeFromR2,

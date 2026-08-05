@@ -23,17 +23,17 @@ export const ROADS_SET: IndicatorSet = {
     {
       "rankingKey": "road-total-length",
       "shortLabel": "道路実延長",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "road-national-route-length",
       "shortLabel": "一般国道延長",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "road-prefectural-route-length",
       "shortLabel": "主要地方道延長",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "road-municipal-length",

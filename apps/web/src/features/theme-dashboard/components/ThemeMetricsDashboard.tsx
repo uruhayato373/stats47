@@ -1,26 +1,20 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import Link from "next/link";
 
 import { lookupArea } from "@stats47/area";
 import { ArrowRight, MapPin } from "lucide-react";
 
-import { ChartCard } from "@/components/charts/ChartCard";
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
-import { MiniLineChart } from "@/components/charts/MiniCharts";
 import type { PageComponent } from "@/components/stat-charts";
 
-import {
-  fetchMetricTimeseriesAction,
-  type MetricTimeseriesResult,
-} from "../actions";
-
-import { ChartEmptyState, ChartLoading } from "./ChartState";
+import { MetricSwitcherPanel } from "./MetricSwitcherPanel";
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 
+import type { MetricKpi } from "./metric-kpi";
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
 
 interface Props {
@@ -42,25 +36,6 @@ interface Props {
    * (markdown-section) を出さない。hideMap のカードのみビュー用。
    */
   cardsOnly?: boolean;
-}
-
-interface MetricKpi {
-  metricKey: string;
-  title: string;
-  unit: string;
-  /** 都道府県選択時はその県の値、未選択時は全国値（取得できなければ 47 県平均） */
-  value: number | null;
-  rank: number | null;
-  total: number;
-  /** 年次推移（MiniLineChart 用） */
-  series: { year: number; value: number }[];
-  /**
-   * 全国表示で値・系列が 47 県の単純平均のとき true。
-   * 総人口のような実数系は全国値の 1/47 になるため「全国」と称してはならない。
-   */
-  isNationalAverage: boolean;
-  /** 全国値をまだ取得中 */
-  isLoading: boolean;
 }
 
 /** KPI 計算に十分な観測数（47 都道府県の大半が揃っている指標のみ採用） */
@@ -110,50 +85,6 @@ export function ThemeMetricsDashboard({
     [themeConfig.tabIndicators, indicatorDataMap],
   );
 
-  /**
-   * 全国表示のときだけ e-Stat の全国行 (00000) を取りに行く。
-   *
-   * ★R2 の ranking values は全国行を持たない (取り込み時に除外される) ため、
-   *   preload された値だけでは 47 県平均しか作れない。真の全国値は e-Stat 側にあり、
-   *   fetchMetricTimeseriesAction が「全国行があればそれ・無ければ平均」を申告付きで返す。
-   *   RSC 描画中の e-Stat 取得は Workers で失敗した実績があるので client から server action を叩く
-   *   (MetricFocusCharts と同じ経路)。
-   */
-  // 取得結果に「どの要求に対する結果か」を持たせ、描画時に照合する。
-  // effect 内で同期的に state を捨てないので、県切替時の古い結果もそのまま無視できる。
-  const nationalRequestId = selectedPrefectureCode ? "" : kpiKeys.join(",");
-  const [nationalFetch, setNationalFetch] = useState<{
-    requestId: string;
-    byKey: Record<string, MetricTimeseriesResult>;
-  } | null>(null);
-
-  useEffect(() => {
-    if (selectedPrefectureCode || kpiKeys.length === 0) return;
-    let cancelled = false;
-    void Promise.all(
-      kpiKeys.map(async (key) => {
-        const result = await fetchMetricTimeseriesAction(key, "00000").catch(
-          () => null,
-        );
-        return [key, result] as const;
-      }),
-    ).then((entries) => {
-      if (cancelled) return;
-      const byKey: Record<string, MetricTimeseriesResult> = {};
-      for (const [key, result] of entries) {
-        if (result) byKey[key] = result;
-      }
-      setNationalFetch({ requestId: nationalRequestId, byKey });
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [selectedPrefectureCode, kpiKeys, nationalRequestId]);
-
-  /** 現在の要求に対応する結果のみ採用する (未取得・古い結果は null = ローディング) */
-  const nationalByKey =
-    nationalFetch?.requestId === nationalRequestId ? nationalFetch.byKey : null;
-
   const kpis = useMemo<MetricKpi[]>(() => {
     const keys = kpiKeys;
 
@@ -187,28 +118,23 @@ export function ThemeMetricsDashboard({
         };
       }
 
-      // 全国表示: e-Stat の全国行が取れていればそれを使い、取れなければ 47 県平均と明示する
-      const national = nationalByKey?.[key];
-      const useNational = national?.source === "national" && national.points.length > 0;
-      const nationalSeries = useNational
-        ? national.points.map((p) => ({ year: Number(p.year.slice(0, 4)), value: p.value }))
-        : null;
-
+      // 全国表示: タイルは R2 由来の 47 県平均を即座に出す (「平均」と明示する)。
+      // 真の全国値は MetricSwitcherPanel が選択中の 1 指標だけを取りに行き、
+      // チャートの凡例で「全国」/「全国平均」を出し分ける。ここで全指標ぶんを
+      // 先読みすると初期表示が遅くなるだけなので取りに行かない。
       return {
         metricKey: key,
         title: d.rankingItem.title,
         unit: d.rankingItem.unit ?? "",
-        value: useNational
-          ? national.points[national.points.length - 1].value
-          : (d.nationalValue ?? nationalAverage),
+        value: d.nationalValue ?? nationalAverage,
         rank: null,
         total,
-        series: nationalSeries ?? d.nationalSeries ?? [],
-        isNationalAverage: !useNational,
-        isLoading: nationalByKey === null,
+        series: d.nationalSeries ?? [],
+        isNationalAverage: true,
+        isLoading: false,
       };
     });
-  }, [kpiKeys, indicatorDataMap, selectedPrefectureCode, nationalByKey]);
+  }, [kpiKeys, indicatorDataMap, selectedPrefectureCode]);
 
   // cardsOnly: KPI スタットカードのみ。チャート・考察は描画しない
   const chartComponents = cardsOnly
@@ -249,45 +175,18 @@ export function ThemeMetricsDashboard({
               </span>
             )}
           </div>
-          {/* チャート付き stats-card のみ: 各指標を 1 枚の ChartCard(値 + 全国トレンド) で表示。
-             データのみ KPI カード・上位県バー・大トレンドの重複は廃止 (2026-06-20)。 */}
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {kpis.map((k) => (
-              <ChartCard
-                key={k.metricKey}
-                // 47 県平均を「全国」と誤読させないため、平均のときだけラベルに明示する
-                label={k.isNationalAverage && !k.isLoading ? `${k.title}（全国平均）` : k.title}
-                value={
-                  k.isLoading
-                    ? "…"
-                    : k.value !== null
-                      ? `${k.value.toLocaleString("ja-JP", { maximumFractionDigits: 2 })}${k.unit ? ` ${k.unit}` : ""}`
-                      : "—"
-                }
-                chart={
-                  k.isLoading ? (
-                    <ChartLoading height={84} />
-                  ) : k.series.length >= 2 ? (
-                    <MiniLineChart
-                      points={k.series}
-                      unit={k.unit}
-                      seriesName={k.title}
-                    />
-                  ) : (
-                    <ChartEmptyState message="推移データなし" height={84} />
-                  )
-                }
-                footer={
-                  <Link
-                    href={`/ranking/${k.metricKey}`}
-                    className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
-                  >
-                    ランキングを見る <ArrowRight className="h-3 w-3" />
-                  </Link>
-                }
-              />
-            ))}
-          </div>
+          {/* KPI タイル切替。タイル自体がタブで、下の 1 枚に選択指標を描く。
+              カードとチャートで同じ事実を二度描かない構成 (2026-08-05 に全テーマ展開。
+              旧 ChartCard グリッドはミニチャートと下段チャートが重複していたので廃止)。 */}
+          <MetricSwitcherPanel
+            metrics={kpis}
+            tabLabels={Object.fromEntries(
+              themeConfig.tabIndicators.map((t) => [t.rankingKey, t.tabLabel]),
+            )}
+            selectedPrefectureCode={selectedPrefectureCode}
+            areaName={areaName}
+            defaultMetricKey={themeConfig.defaultRankingKey}
+          />
         </div>
       )}
 

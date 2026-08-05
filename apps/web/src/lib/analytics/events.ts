@@ -153,6 +153,9 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * - `areas_search` / `areas_list` / `areas_map`: /areas の県選択導線（検索 / 一覧 / 地図）
  * - `home_category` / `home_use_case` / `home_area` / `home_blog`:
  *   home ポータルの発見セクション（カテゴリ / 知りたいこと / 都道府県 / ブログ）
+ * - `theme_kpi_switcher`: テーマページの KPI タイル切替（`MetricSwitcherPanel`）。
+ *   `nav_label` に rankingKey が入るので、どの指標が見られているかを追える
+ * - `category_sidebar`: category ページ左のカテゴリナビ（home と同じリストの別配置）
  *
  * いずれも既存 GA4 custom dimension `nav_surface` の値追加であり、新しい dimension は増やさない
  * (`.claude/rules/analytics-event-standards.md` §2)。
@@ -169,7 +172,9 @@ export function trackNavClick(params: {
     | "home_category"
     | "home_use_case"
     | "home_area"
-    | "home_blog";
+    | "home_blog"
+    | "theme_kpi_switcher"
+    | "category_sidebar";
 }): void {
   sendEvent("nav_click", {
     event_category: "navigation",

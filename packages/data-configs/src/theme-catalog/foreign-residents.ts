@@ -127,35 +127,7 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
       "section": "国籍別",
       "sortOrder": 0
     },
-    {
-      "componentKey": "theme-foreign-tourism-trend",
-      "componentType": "line-chart",
-      "title": "外国人宿泊者数の推移",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010107",
-            "cdCat01": "G7102"
-          }
-        ],
-        "labels": [
-          "外国人宿泊者数"
-        ],
-        "seriesColors": [
-          "#f59e0b"
-        ]
-      },
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "rankingLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "観光",
-      "sortOrder": 0
-    }
-  ],
+],
   "keywords": [
     "外国人",
     "在留外国人",

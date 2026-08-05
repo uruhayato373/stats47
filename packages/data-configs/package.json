@@ -15,6 +15,11 @@
       "import": "./src/registry.ts",
       "require": "./src/registry.ts"
     },
+    "./topics": {
+      "types": "./src/topics/index.ts",
+      "import": "./src/topics/index.ts",
+      "require": "./src/topics/index.ts"
+    },
     "./categories": {
       "types": "./src/categories.ts",
       "import": "./src/categories.ts",
@@ -47,6 +52,7 @@
     "validate:config": "tsx scripts/validate-metric-config.ts",
     "generate:catalog": "tsx scripts/generate-theme-catalog.ts",
     "validate:catalog": "tsx scripts/validate-theme-catalog.ts",
+    "validate:topics": "tsx scripts/validate-topic-catalog.ts",
     "generate:area-databook": "tsx scripts/generate-area-databook.ts",
     "generate:editorial-index": "tsx scripts/generate-editorial-index.ts",
     "validate:area-databook": "tsx scripts/validate-area-databook.ts",

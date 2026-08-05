@@ -20,6 +20,7 @@ import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } fr
 import { dirname } from 'node:path';
 
 import { summarizeClaudeExecution } from './summarize-claude-execution.mjs';
+import { pathToFileURL } from "node:url";
 
 export const CSV_HEADER =
   'date,workflow,run_id,limit,items,turns,duration_ms,cost_usd,input,output,cache_write,cache_read,token_source,is_error';
@@ -81,7 +82,7 @@ function arg(name, fallback = '') {
   return i !== -1 && process.argv[i + 1] ? process.argv[i + 1] : fallback;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const execFile = process.argv[2];
   const out = arg('--out', '.claude/state/metrics/claude-usage/history.csv');
   if (!execFile) {

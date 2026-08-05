@@ -116,35 +116,7 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
       "section": "男女格差",
       "sortOrder": 0
     },
-    {
-      "componentKey": "labor-wages-minimum-wage-trend",
-      "componentType": "line-chart",
-      "title": "最低賃金の推移",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010106",
-            "cdCat01": "F6501"
-          }
-        ],
-        "labels": [
-          "最低賃金"
-        ],
-        "seriesColors": [
-          "#f59e0b"
-        ]
-      },
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "rankingLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "賃金",
-      "sortOrder": 0
-    },
-    {
+{
       "componentKey": "labor-wages-job-ratio-vs-unemployment",
       "componentType": "line-chart",
       "title": "有効求人倍率と完全失業率の推移",

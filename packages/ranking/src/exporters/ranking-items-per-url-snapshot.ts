@@ -6,7 +6,24 @@ import {
   generateRankingThumbnailMapSvg,
 } from "@stats47/visualization/server";
 
+import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
+import {
+  CATEGORY_TOPIC_CATALOGS,
+  OTHER_TOPIC_KEY,
+  OTHER_TOPIC_LABEL,
+  resolveTopicKey,
+  toTopicResolutionInput,
+  type CategoryTopicCatalog,
+} from "@stats47/data-configs/topics";
+
 import surveysMaster from "../data/surveys.json";
+
+/** categoryKey は string なので、レジストリ側の Partial<Record<CategoryKey, …>> を安全に引く */
+function lookupTopicCatalog(categoryKey: string) {
+  return (CATEGORY_TOPIC_CATALOGS as Record<string, CategoryTopicCatalog | undefined>)[
+    categoryKey
+  ];
+}
 import { KNOWN_RANKING_KEYS } from "../config/known-ranking-keys";
 import { compareByRepresentativeThenRecency } from "../lib/ranking-order";
 import { bakeHomeFeaturedItem, resolveHomeFeaturedItems } from "./home-featured";
@@ -228,6 +245,23 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
       })
       .sort(compareByRepresentativeThenRecency);
 
+    // カテゴリ内グループ (topic) の解決。カタログ未登録カテゴリでは焼かない
+    // (UI は topics マニフェストの有無で平坦一覧へ縮退する)。
+    // 同じ metric が additionalCategories 経由で複数カテゴリに出るため、
+    // topic は item 単体ではなく **category 文脈ごと**に解決する。
+    const topicCatalog = lookupTopicCatalog(categoryKey);
+    const topicKeyByRankingKey = new Map<string, string>();
+    const usedTopicKeys = new Set<string>();
+    if (topicCatalog) {
+      for (const r of matched) {
+        const config = METRICS_REGISTRY[r.rankingKey];
+        if (!config) continue; // registry に無い (退役直後等) は分類しない
+        const topicKey = resolveTopicKey(toTopicResolutionInput(config), topicCatalog);
+        topicKeyByRankingKey.set(r.rankingKey, topicKey);
+        usedTopicKeys.add(topicKey);
+      }
+    }
+
     const categoryItems: CategoryRankingItemWithAreaType[] = matched.map((r) => ({
       rankingKey: r.rankingKey,
       areaType: r.areaType,
@@ -242,7 +276,21 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
       groupKey: r.groupKey ?? null,
       hook: r.hook ?? null,
       top1: r.latestTop ?? null,
+      ...(topicCatalog ? { topicKey: topicKeyByRankingKey.get(r.rankingKey) ?? null } : {}),
     }));
+
+    // 表示順マニフェスト。1 件以上該当した topic だけをカタログ順に並べ、
+    // 受け皿 (other) は該当があれば末尾に付ける。
+    const topics = topicCatalog
+      ? [
+          ...topicCatalog.topics
+            .filter((topic) => usedTopicKeys.has(topic.key))
+            .map((topic) => ({ key: topic.key, label: topic.label })),
+          ...(usedTopicKeys.has(OTHER_TOPIC_KEY)
+            ? [{ key: OTHER_TOPIC_KEY, label: OTHER_TOPIC_LABEL }]
+            : []),
+        ]
+      : undefined;
 
     const sourceSurveyCounts = new Map<string, number>();
     for (const it of matched) {
@@ -261,6 +309,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
       count: categoryItems.length,
       items: categoryItems,
       sourceSurveys,
+      ...(topics ? { topics } : {}),
     });
     uploads.push(
       saveToR2(categoryItemsKeyPath(categoryKey), body, {

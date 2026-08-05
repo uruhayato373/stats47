@@ -20,17 +20,17 @@ export const ROADS_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "road-total-length",
       "shortLabel": "道路実延長",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "road-national-route-length",
       "shortLabel": "一般国道延長",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "road-prefectural-route-length",
       "shortLabel": "主要地方道延長",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "road-municipal-length",
@@ -93,63 +93,7 @@ export const ROADS_CATALOG: ThemeCatalog = {
       "section": null,
       "sortOrder": 10
     },
-    {
-      "componentKey": "roads-density-trend",
-      "componentType": "line-chart",
-      "title": "可住地面積当たり道路延長（道路密度）の推移",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010208",
-            "cdCat01": "#H06401"
-          }
-        ],
-        "labels": [
-          "道路密度"
-        ],
-        "seriesColors": [
-          "#06b6d4"
-        ]
-      },
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/road-length-per-km2",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 20
-    },
-    {
-      "componentKey": "roads-traffic-trend",
-      "componentType": "line-chart",
-      "title": "道路平均交通量の推移",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010208",
-            "cdCat01": "#H06413"
-          }
-        ],
-        "labels": [
-          "平均交通量"
-        ],
-        "seriesColors": [
-          "#f59e0b"
-        ]
-      },
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/average-road-traffic-volume",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 30
-    }
-  ],
+],
   "keywords": [
     "道路",
     "高速道路",

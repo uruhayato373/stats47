@@ -8,7 +8,10 @@
  * DBレス移行 (67168f54) が残した config→item.json 写像の follow-up を完成させる。
  *
  * - per-key item.json: cachedFindRankingItem / readRankingItemFromR2 が読む正本
- * - all.json: readActiveRankingKeysFromR2 (generateStaticParams / sitemap / 410判定) が読む集約
+ * - all.json: readActiveRankingKeysFromR2 (generateStaticParams / sitemap) が読む集約
+ *
+ * 退役 (410) キーの扱いは 2 つで非対称にしてある (理由は main() のコメント):
+ * all.json からは除外し、per-key item.json は書き続ける。
  *
  * R2 書き込みは assertR2WriteAllowed で CI / クラウド専用 (ローカルは --dry-run / ガード停止)。
  *
@@ -31,8 +34,12 @@ import {
   buildRankingItemFromMetric,
   type ValuesContext,
 } from "../builders/build-ranking-item-from-metric";
+import { GONE_RANKING_KEYS } from "../config/gone-ranking-keys";
 import { deriveFeaturedTop } from "../exporters/home-featured";
 import { RANKING_ITEMS_SNAPSHOT_KEY, rankingItemKeyPath } from "../types/snapshot";
+// 順位規則の正典 (値の降順・同値は同順位)。script 間 import だが main() は invokedDirectly で
+// ガードされているので副作用は無い。二重実装を避けるためこちらを再利用する。
+import { deriveRanks } from "./generate-ranking-values";
 
 import type { RankingItem } from "../types/ranking-item";
 
@@ -88,6 +95,15 @@ async function loadValuesContext(config: MetricConfig): Promise<ValuesContext | 
         value: r.value,
         rank: r.rank ?? null,
       }));
+
+    // 手動投入 metric (fetcherKey:"manual") は page-data-batch を通らないため app/stats の行が
+    // rank を持たない。deriveFeaturedTop は rank!=null の行しか使わないので、そのままだと
+    // 全行が捨てられ latestTop=null になり、一覧カードの「1 位」が空欄になる
+    // (2026-08-05 実測: ambulance-hospital-arrival-time / pachinko-shop-density-per-10k)。
+    // 配信側 generate-ranking-values は同じ問題を deriveRanks で既に解決しているので、
+    // 順位規則を二重実装せずそれを再利用する (条件も buildPartitions と揃える)。
+    if (latestRows.every((r) => r.rank == null)) deriveRanks(latestRows);
+
     const latestTop = deriveFeaturedTop(latestRows);
 
     return { yearCodes: years, latestTop };
@@ -155,16 +171,45 @@ async function main() {
   });
   console.log(`✅ item.json: ${written} 件 ${args.dryRun ? "(dry-run)" : "push"}`);
 
-  // all.json (集約) は常に全件で書く
-  const allBody = JSON.stringify({ generatedAt: now, count: items.length, items });
+  // all.json (集約) は --only 指定時も常に全件で書く。ただし退役 (410) キーは載せない。
+  //
+  // なぜ all.json だけ落として item.json は残すのか (非対称にしている理由):
+  //   all.json は generateStaticParams / sitemap / 一覧リーダーの入力なので、410 を返す
+  //   キーが載っていると「middleware は 410 / 一覧はリンクを出す」不整合の余地が残る。
+  //   リーダー側にも excludeGone があるが、在庫の側からも消して二重にする。
+  //   一方 item.json を書くのをやめると、退役の瞬間に isActive:true のまま R2 に取り残され、
+  //   item.json を列挙する listRankingItemsWithTagsFromR2 が excludeGone を失った途端に
+  //   復活する (stale な true が生き残る)。書き続けて isActive:false を真実に保つ方が安全。
+  //
+  // 410 判定自体は GONE_RANKING_KEYS (コード) が middleware で行うので、ここから消しても
+  // 404 に落ちない。
+  const goneInInventory = items.filter((it) => GONE_RANKING_KEYS.has(it.rankingKey));
+  const inventory = items.filter((it) => !GONE_RANKING_KEYS.has(it.rankingKey));
+
+  // GONE かつ isActive:true は config の矛盾 (410 を返すのに公開扱い)。除外で見えなくなる
+  // 前に必ず出す。config を isActive:false にするか GONE_RANKING_KEYS から外すのが是正。
+  const contradictory = goneInInventory.filter((it) => it.isActive);
+  if (contradictory.length > 0) {
+    console.warn(
+      `⚠️  GONE なのに isActive:true が ${contradictory.length} 件: ${contradictory
+        .map((it) => it.rankingKey)
+        .join(", ")}`,
+    );
+  }
+
+  const allBody = JSON.stringify({
+    generatedAt: now,
+    count: inventory.length,
+    items: inventory,
+  });
   if (!args.dryRun) {
     await saveToR2(RANKING_ITEMS_SNAPSHOT_KEY, allBody, {
       contentType: "application/json; charset=utf-8",
     });
   }
-  const active = items.filter((it) => it.isActive).length;
+  const active = inventory.filter((it) => it.isActive).length;
   console.log(
-    `✅ all.json: items=${items.length} active=${active} bytes=${allBody.length} ${args.dryRun ? "(dry-run)" : "push"}`,
+    `✅ all.json: items=${inventory.length} active=${active} gone除外=${goneInInventory.length} bytes=${allBody.length} ${args.dryRun ? "(dry-run)" : "push"}`,
   );
 }
 

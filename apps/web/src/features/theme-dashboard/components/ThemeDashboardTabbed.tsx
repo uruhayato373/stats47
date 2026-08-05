@@ -258,7 +258,7 @@ export function ThemeDashboardTabbed({
   // page-components チャート + 考察のフル幅ダッシュボードを描画する。
   // 都道府県セレクタは同時に 1 つだけ見える状態にする (2026-08-04):
   // xl 以上 = 左レール ThemeSideNav の地域ブロック / xl 未満 = ThemeAreaHeader の
-  // PageHeader actions (xl:hidden)。本体側 prefectureSelector はここでは出さない。
+  // PageHeader actions (lg:hidden)。本体側 prefectureSelector はここでは出さない。
   // 選択エリアは H1 に反映される。
   if (themeConfig.hideMap) {
     return (

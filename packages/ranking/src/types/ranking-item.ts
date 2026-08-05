@@ -404,6 +404,16 @@ export interface CategoryRankingItem {
    * 導出するのに使う。旧 items.json 後方互換のため optional (欠損時は economy へ縮退)。
    */
   categoryKey?: string | null;
+  /**
+   * カテゴリ内グループ分類 (topic) のキー。category ページが一覧をまとまりで束ねるのに使う。
+   *
+   * **category 文脈に依存する**値なので item.json 側には持たせない (同じ metric が
+   * additionalCategories 経由で複数カテゴリに出るため)。カタログ未登録カテゴリでは
+   * 焼かれない。旧 items.json 後方互換のため optional (欠損時は UI が平坦一覧へ縮退)。
+   *
+   * SSOT: `packages/data-configs/src/topics/`
+   */
+  topicKey?: string | null;
 }
 
 /**

@@ -6,6 +6,7 @@
  *   node .claude/scripts/search-growth/report.mjs [--limit N] [--json]
  */
 import { PATHS, readJson, getArg, hasFlag } from "./lib/state.mjs";
+import { pathToFileURL } from "node:url";
 
 const BLOCKER_TYPES = new Set(["server-risk", "indexability-conflict", "soft-404-risk", "canonical-drift"]);
 const OPPORTUNITY_TYPES = new Set(["ctr-opportunity", "striking-distance", "query-gap"]);
@@ -68,4 +69,4 @@ function main() {
   console.log(out.join("\n"));
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
