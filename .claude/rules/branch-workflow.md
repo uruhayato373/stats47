@@ -37,6 +37,18 @@ develop→main の PR を開く / 既に開いていると、その commit を h
 (`git log --oneline -1 origin/develop`)。**後続の実コミットを push すれば CI が発火する**。
 空コミットで済ませず、その時点で残っている本来の作業 (規約の追記・是正など) を載せるとよい。
 
+#### ★commit 件名にトークンを書かない (2026-08-05 に実際に踏んだ)
+
+GitHub は **commit メッセージ内のどこにあっても** skip トークン (`[skip ci]` / `[ci skip]` /
+`[no ci]` / `***NO_CI***`) を拾う。件名の一部として引用したつもりでも run は作られない。
+
+上の罠を文書化する commit の件名にトークンを引用した結果、**その commit 自身が CI を止め**、
+PR の check が 0 件のままになった。**判定は ref の HEAD commit に対して行われるので、
+PR を close→reopen しても同じ HEAD が読まれて発火しない** — 「reopen すれば直る」は効かない。
+
+トークンに言及するときは件名を避け、本文でもバッククォートではなく `skip-ci` のような
+別表記にする (バッククォートは GitHub のスキャナに対して無力)。
+
 ## ルール
 
 - **feature/***: 機能ブランチ。develop から分岐し、ローカルで `git merge --no-ff feature/<name>` で develop に取り込む。マージ後は削除。PR は不要 (作っても良い、ただし CI は走らない)
