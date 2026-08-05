@@ -59,6 +59,23 @@ export interface RecipeOps {
   areaAxis?: { axis: EstatAxis; scheme: "seq-pref" | "name" };
   /** 家計調査の県庁所在市 → 都道府県 写像 */
   areaRemap?: "kakei-capital-city";
+  /**
+   * 他 metric から計算して作る値 (`fetcherKey:"calculated"`)。
+   *
+   * ★ここに入れる理由: 期間換算 (`periodAlign`) や `scaleFactor` を変えると**配信される
+   * 数値そのものが変わる**のに、`buildOps` が source しか見ていなかったので configHash が
+   * 動かず、監査 (検査 k) が R2 の stale を検出できなかった。演算の一部としてレシピに
+   * 載せることで、宣言を直せば自動的に「再生成が要る」と検出される。
+   */
+  calc?: {
+    type: "ratio" | "per_capita" | "subtraction";
+    numeratorKey: string;
+    denominatorKey?: string;
+    periodAlign?: { numerator: string; denominator: string; result: string };
+    scaleFactor?: number;
+    /** 書き込み時の丸め桁 (値が変わるのでレシピに含める) */
+    decimalPlaces?: number;
+  };
 }
 
 export type EstatAxis = "cat01" | "cat02" | "cat03" | "cat04" | "cat05";
@@ -210,6 +227,13 @@ function stripUndefined<T extends object>(obj: T): T {
   return out as T;
 }
 
+type CalcType = NonNullable<RecipeOps["calc"]>["type"];
+
+/** 命名ゆれを含む自由文字列 → 実行できる計算種別。未知は undefined (= calc を焼かない) */
+function asCalcType(raw: unknown): CalcType | undefined {
+  return raw === "ratio" || raw === "per_capita" || raw === "subtraction" ? raw : undefined;
+}
+
 function buildOps(config: MetricConfig): RecipeOps | undefined {
   const s = config.source;
   const ops: RecipeOps = {};
@@ -241,6 +265,32 @@ function buildOps(config: MetricConfig): RecipeOps | undefined {
     // 家計調査は県庁所在市の値を都道府県へ写す (page-data-batch の remapKakeiAreas)。
     // 単発クエリの生値とは違うので必ずレシピに残す。
     ops.areaRemap = "kakei-capital-city";
+  }
+
+  // 計算型 (fetcherKey:"calculated") — 分子・分母から作る値。
+  // ★対象を calculated fetcher に絞るのは、estat metric の `calculation` が
+  //   ランタイム正規化 (per_population 等) の設定であって app/stats の値を作らないため。
+  //   全 metric に広げると 2,000 件超の configHash が一斉に動き、drift の意味が消える。
+  if (s.kind === "external" && s.fetcherKey === "calculated") {
+    const c = config.calculation;
+    const type = asCalcType(c?.type ?? c?.calculationType);
+    const numeratorKey = c?.numeratorKey ?? c?.numeratorRankingKey ?? c?.numerator;
+    if (c && type && numeratorKey) {
+      ops.calc = stripUndefined({
+        type,
+        numeratorKey,
+        denominatorKey: c.denominatorKey ?? c.denominatorRankingKey ?? c.denominator,
+        periodAlign: c.periodAlign
+          ? {
+              numerator: c.periodAlign.numerator,
+              denominator: c.periodAlign.denominator,
+              result: c.periodAlign.result,
+            }
+          : undefined,
+        scaleFactor: c.scaleFactor,
+        decimalPlaces: config.display?.decimalPlaces,
+      });
+    }
   }
 
   return Object.keys(ops).length > 0 ? ops : undefined;
@@ -360,6 +410,30 @@ function parseOps(value: unknown): RecipeOps | undefined {
   }
 
   if (value.areaRemap === "kakei-capital-city") ops.areaRemap = "kakei-capital-city";
+
+  if (isRecord(value.calc)) {
+    const type = asCalcType(value.calc.type);
+    const numeratorKey = optString(value.calc.numeratorKey);
+    if (type && numeratorKey) {
+      const pa = isRecord(value.calc.periodAlign) ? value.calc.periodAlign : undefined;
+      ops.calc = stripUndefined({
+        type,
+        numeratorKey,
+        denominatorKey: optString(value.calc.denominatorKey),
+        periodAlign:
+          pa && optString(pa.numerator) && optString(pa.denominator) && optString(pa.result)
+            ? {
+                numerator: pa.numerator as string,
+                denominator: pa.denominator as string,
+                result: pa.result as string,
+              }
+            : undefined,
+        scaleFactor: typeof value.calc.scaleFactor === "number" ? value.calc.scaleFactor : undefined,
+        decimalPlaces:
+          typeof value.calc.decimalPlaces === "number" ? value.calc.decimalPlaces : undefined,
+      });
+    }
+  }
 
   return Object.keys(ops).length > 0 ? ops : undefined;
 }

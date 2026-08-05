@@ -158,6 +158,17 @@ export interface CalculationConfig {
   denominatorKey?: string;
   /** 計算式（custom計算用） */
   formula?: string;
+  /**
+   * 分子・分母の期間基準 (monthly / annual)。
+   * 月額と年額を混ぜた引き算を防ぐ。正典は data-configs の `PeriodAlignment`。
+   */
+  periodAlign?: {
+    numerator: "monthly" | "annual";
+    denominator: "monthly" | "annual";
+    result: "monthly" | "annual";
+  };
+  /** 計算結果に掛ける定数 (率を % にする 100 が主用途) */
+  scaleFactor?: number;
   /** 表示時に選択可能な正規化オプション (オンデマンド計算用) */
   normalizationOptions?: NormalizationOption[];
 }

@@ -22,6 +22,15 @@ export interface ComputeOptions {
    * 例: 1000 → 人口千人あたり, 100 → パーセント
    */
   scaleFactor?: number;
+  /**
+   * 分子・分母それぞれに掛ける係数（デフォルト: 1）。
+   *
+   * 期間基準の違い（月額 ↔ 年額）を揃えるために使う。単位が同じ「円」でも期間が違えば
+   * 足し引きできないため、`periodScales()` が config の宣言から決定的に導出した値を渡す。
+   * 比では約分されるので実質は subtraction 用。
+   */
+  numeratorScale?: number;
+  denominatorScale?: number;
 }
 
 /**
@@ -40,6 +49,8 @@ export function computeCalculatedValues(
   const result: StatsSchema[] = [];
   const keyBy = options.keyBy ?? "yearCode_areaCode";
   const scaleFactor = options.scaleFactor ?? 1;
+  const numeratorScale = options.numeratorScale ?? 1;
+  const denominatorScale = options.denominatorScale ?? 1;
 
   // 分母データをキーにしたMapに変換（高速検索用）
   const denominatorMap = new Map<string, RankingValue>();
@@ -57,13 +68,17 @@ export function computeCalculatedValues(
 
     if (num.value === null || den.value === null) continue;
 
+    // 期間換算を先に掛けてから演算する (月額 − 年額/12 のように基準を揃える)
+    const numValue = num.value * numeratorScale;
+    const denValue = den.value * denominatorScale;
+
     let calculatedValue: number;
     if (options.type === "subtraction") {
-      calculatedValue = (num.value - den.value) * scaleFactor;
+      calculatedValue = (numValue - denValue) * scaleFactor;
     } else {
       // ratio / per_capita: 分母0はスキップ
-      if (den.value === 0) continue;
-      calculatedValue = (num.value / den.value) * scaleFactor;
+      if (denValue === 0) continue;
+      calculatedValue = (numValue / denValue) * scaleFactor;
     }
 
     const { rank: _rank, ...baseData } = num;

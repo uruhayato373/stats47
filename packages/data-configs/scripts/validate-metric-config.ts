@@ -289,6 +289,30 @@ function main() {
         errors.push(`[calc-ref] ${key}: 参照先 metric "${ref}" が registry に実在しない`);
       }
     }
+
+    // [calc-period] / [calc-display] 計算型 metric (fetcherKey:"calculated") の宣言必須項目。
+    //
+    // ★期間 (月額 / 年額) は e-Stat のメタに無く、単位もどちらも「円」なので**機械では
+    //   判別できない**。宣言が無いまま引き算すると 12 倍ズレた値が配信される
+    //   (disposable-income-after-rent の実害。2026-08-05)。比は期間が約分されるので不要。
+    // ★丸め桁は配信値そのものを決める。既定に頼ると生成器の実装差で値が動く。
+    const isCalculatedFetcher =
+      src?.kind === "external" && (src as { fetcherKey?: string }).fetcherKey === "calculated";
+    if (isCalculatedFetcher) {
+      const calcType = (calc?.type ?? calc?.calculationType) as string | undefined;
+      if (calcType === "subtraction" && !calc?.periodAlign) {
+        errors.push(
+          `[calc-period] ${key}: subtraction は calculation.periodAlign の宣言が必須` +
+            ` (月額と年額を引き算する事故を防ぐ)`,
+        );
+      }
+      const display = cfg.display as { decimalPlaces?: unknown } | undefined;
+      if (typeof display?.decimalPlaces !== "number") {
+        errors.push(
+          `[calc-display] ${key}: 計算型は display.decimalPlaces が必須 (丸め桁が配信値を決めるため)`,
+        );
+      }
+    }
   }
 
   // error: 重複 title (正規化後同名) に区別子(subtitle)が無い

@@ -184,6 +184,10 @@ function buildCalculation(config: MetricConfig): CalculationConfig | null {
     ...(type ? { type } : {}),
     ...(numeratorKey ? { numeratorKey } : {}),
     ...(denominatorKey ? { denominatorKey } : {}),
+    // ★期間換算とスケールも焼く。焼かないとランタイムの on-demand 計算だけが
+    //   換算なしの生値を返し、正典 (app/stats) と食い違う。
+    ...(c?.periodAlign ? { periodAlign: c.periodAlign } : {}),
+    ...(typeof c?.scaleFactor === "number" ? { scaleFactor: c.scaleFactor } : {}),
     // ★`formula` (自由文字列) は焼かない。repo 全体で読むコードが 1 つも無く、
     //   実行と結びついていないため実装と乖離しうる。正確で実行可能な表現は
     //   sourceConfig.recipe が持つ (tabCombination / axisRatio / axisSum)。
