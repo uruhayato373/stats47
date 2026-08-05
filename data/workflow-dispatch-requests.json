@@ -1,7 +1,0 @@
-{
-  "workflow": "sync-snapshots.yml",
-  "inputs": { "only": "page-components" },
-  "ref": "develop",
-  "reason": "PR #733 の ports 重複チャート削除を R2 へ反映する",
-  "requestedAt": "2026-08-05T09:36:00Z"
-}
