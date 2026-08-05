@@ -30,12 +30,18 @@ import { writeFileSync } from "node:fs";
 import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly.js";
 import { listAllMetrics } from "../src/registry.js";
 import {
+  WARN_ONLY_CHECKS,
   classifyShape,
   summarizeShape,
   type ShapeCheck,
   type ShapeRow,
   type ShapeViolation,
 } from "../src/shape-gate.js";
+import {
+  classifyValueSuspicion,
+  type ValueVerificationResult,
+} from "../src/value-verification.js";
+import { VERIFIED_VALUE_PROFILES } from "../src/verified-value-profiles.js";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 
@@ -47,6 +53,8 @@ interface Args {
   metrics?: Set<string>;
   /** allowlist を無視して素の判定を出す (allowlist 生成時に使う) */
   ignoreAllowlist: boolean;
+  /** 値分布の未検証キューを JSON で出す (検証 agent の入力) */
+  verificationQueue: boolean;
 }
 
 function parseArgs(): Args {
@@ -56,6 +64,7 @@ function parseArgs(): Args {
     failOnError: false,
     concurrency: 25,
     ignoreAllowlist: false,
+    verificationQueue: false,
   };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -64,6 +73,7 @@ function parseArgs(): Args {
       out.emitAllowlist = true;
       out.ignoreAllowlist = true; // 生成時は既存 allowlist に影響されない素の判定を使う
     } else if (a === "--fail-on-error") out.failOnError = true;
+    else if (a === "--verification-queue") out.verificationQueue = true;
     else if (a === "--ignore-allowlist") out.ignoreAllowlist = true;
     else if (a === "--concurrency") out.concurrency = Number(argv[++i]);
     else if (a === "--metric") {
@@ -116,6 +126,8 @@ interface ScanRow {
   key: string;
   status: "ok" | "missing" | "unreachable" | "empty";
   violations: ShapeViolation[];
+  /** 値分布の検証状態 (検証済みプロファイル方式)。status !== "ok" なら undefined */
+  verification?: ValueVerificationResult;
 }
 
 async function main(): Promise<void> {
@@ -127,7 +139,8 @@ async function main(): Promise<void> {
     .filter((c) => c.entities?.includes("prefecture") ?? true)
     .filter((c) => !args.metrics || args.metrics.has(c.key));
 
-  if (!args.emitAllowlist) {
+  // 機械可読の出口 (--emit-allowlist / --verification-queue) では人間向けヘッダを出さない
+  if (!args.emitAllowlist && !args.verificationQueue) {
     console.log(`# app/stats 形状スキャン (${now.toISOString()})`);
     console.log(`R2 base: ${R2_BASE}`);
     console.log(`対象: ${configs.length} 件 (isActive かつ prefecture)\n`);
@@ -142,15 +155,18 @@ async function main(): Promise<void> {
     // 0 件は expected-empty.ts の担当。形状ゲートは二重に鳴らさない。
     if (statsRows.length === 0) return { key: config.key, status: "empty", violations: [] };
 
+    const summary = summarizeShape(statsRows);
     const violations = classifyShape({
       key: config.key,
       entity: "prefecture",
-      summary: summarizeShape(statsRows),
+      summary,
       unit: config.unit,
       now,
       allowlist: args.ignoreAllowlist ? [] : EXPECTED_SHAPE_ANOMALY,
     });
-    return { key: config.key, status: "ok", violations };
+    // 同じ summary を再利用するので追加 fetch は無い
+    const verification = classifyValueSuspicion(config.key, summary, VERIFIED_VALUE_PROFILES);
+    return { key: config.key, status: "ok", violations, verification };
   });
 
   const withViolations = rows.filter((r) => r.violations.length > 0);
@@ -158,13 +174,15 @@ async function main(): Promise<void> {
 
   if (args.emitAllowlist) {
     emitAllowlist(withViolations);
+  } else if (args.verificationQueue) {
+    emitVerificationQueue(rows);
   } else {
     report(rows, withViolations, errors);
   }
 
   if (args.json) {
     writeFileSync(args.json, JSON.stringify({ generatedAt: now.toISOString(), rows }, null, 2));
-    if (!args.emitAllowlist) console.log(`\n書き出し: ${args.json}`);
+    if (!args.emitAllowlist && !args.verificationQueue) console.log(`\n書き出し: ${args.json}`);
   }
 
   if (args.failOnError && errors.length > 0) process.exit(1);
@@ -226,8 +244,9 @@ function emitAllowlist(withViolations: readonly ScanRow[]): void {
   const entries = withViolations
     .flatMap((r) => r.violations.map((v) => ({ key: r.key, v })))
     // coverage は縮小専用ラチェットで既定 warn なので allowlist に載せない
-    // (港湾・漁業のような正当な欠落を allowlist で埋め尽くさないため)
-    .filter(({ v }) => v.check !== "area-coverage")
+    // (港湾・漁業のような正当な欠落を allowlist で埋め尽くさないため)。
+    // WARN_ONLY_CHECKS も同様に何も fail させないので載せない (正典: shape-gate.ts)。
+    .filter(({ v }) => v.check !== "area-coverage" && !WARN_ONLY_CHECKS.includes(v.check))
     .sort((a, b) => b.v.severity - a.v.severity || a.key.localeCompare(b.key));
 
   const until = "2026-12-31";
@@ -259,3 +278,43 @@ main().catch((e) => {
   console.error(e);
   process.exit(1);
 });
+
+/**
+ * 値分布の未検証キューを JSON で出す (検証 agent の入力)。
+ *
+ * verified を出さないのが要点 — 出すと「緑の一覧」を見て安心してしまう。
+ * ここに出るのは**これから中身を確かめるべきもの**だけ。
+ */
+function emitVerificationQueue(rows: readonly ScanRow[]): void {
+  const of = (s: ValueVerificationResult["status"]) =>
+    rows
+      .map((r) => r.verification)
+      .filter((v): v is ValueVerificationResult => v?.status === s)
+      .map((v) => ({
+        key: v.key,
+        suspicions: v.suspicions,
+        observed: v.observed,
+        reasons: v.reasons,
+      }));
+
+  const unverified = of("unverified");
+  const violated = of("profile-violated");
+  console.log(
+    JSON.stringify(
+      {
+        generatedAt: new Date().toISOString(),
+        summary: {
+          scanned: rows.filter((r) => r.status === "ok").length,
+          verified: rows.filter((r) => r.verification?.status === "verified").length,
+          unverified: unverified.length,
+          profileViolated: violated.length,
+        },
+        // 予測を破ったもの = 検証が古くなった。未検証より先に見る
+        profileViolated: violated,
+        unverified,
+      },
+      null,
+      2,
+    ),
+  );
+}

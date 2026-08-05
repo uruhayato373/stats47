@@ -21,16 +21,6 @@ export const MANUFACTURING_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
-      "rankingKey": "manufacturing-sales-private",
-      "shortLabel": "製造品売上高",
-      "role": "context"
-    },
-    {
-      "rankingKey": "manufacturing-net-value-added-private",
-      "shortLabel": "純付加価値額",
-      "role": "context"
-    },
-    {
       "rankingKey": "manufacturing-establishments",
       "shortLabel": "事業所数",
       "role": "secondary"
@@ -54,11 +44,6 @@ export const MANUFACTURING_SET: IndicatorSet = {
       "rankingKey": "manufacturing-shipment-amount-per-establishment",
       "shortLabel": "出荷額/所",
       "role": "secondary"
-    },
-    {
-      "rankingKey": "industrial-land-price",
-      "shortLabel": "工業地価格",
-      "role": "context"
     },
     {
       "rankingKey": "industrial-land-price-change-rate",

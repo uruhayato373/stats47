@@ -14,6 +14,7 @@ PR は **develop → main の 1 段階のみ**。feature/* → develop は直 me
 
 - **ローカル**: `gh` あり・任意ブランチ push 可・`gh workflow run` で dispatch 可。
 - **Claude Code on the web / クラウド**: `gh` 無し・push 先制限あり・**連携トークンに `actions:write` が無く workflow dispatch 不可 (403)**。PR 操作は GitHub MCP ツールで行う。**R2 公開 (記事・広告) は workflow_dispatch ではなく push トリガーに委ねる** (`blog-auto-publish.yml` / `publish-affiliate-ads.yml` は develop への該当ファイル push で自動発火)。
+  **dispatch でしか起動できない workflow は `workflow-dispatch-proxy.yml` で代理実行する** — `data/workflow-dispatch-requests.json` を develop に push すると CI が `gh workflow run` する (CI 内の `GITHUB_TOKEN` は `actions:write` を持てる)。allowlist 制で、request は成否によらず自動消費される。★`requestedAt` を毎回更新すること (paths フィルタは diff で判定するので同内容の再 push は発火しない)。
 - 詳細・判定表・データ公開経路は `.claude/skills/dev/deploy/SKILL.md` の「実行環境の判定」「データ公開」を参照。
 
 > **データ公開は develop 経由**: `blog-auto-publish.yml` / `publish-affiliate-ads.yml` / `publish-blog.yml` は **develop を checkout** する。feature を main へ直接 squash しただけだと記事/広告が develop に乗らず公開されない。記事を含むデプロイは必ず develop を経由させる (feature → develop で公開発火 → develop → main の PR でコードデプロイ)。

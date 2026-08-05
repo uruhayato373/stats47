@@ -1,16 +1,17 @@
 {
   "mcpServers": {
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/"
-    },
     "cloudflare-observability": {
-      "type": "sse",
-      "url": "https://observability.mcp.cloudflare.com/sse"
+      "type": "http",
+      "url": "https://observability.mcp.cloudflare.com/mcp"
     },
     "cloudflare-graphql": {
-      "type": "sse",
-      "url": "https://graphql.mcp.cloudflare.com/sse"
+      "type": "http",
+      "url": "https://graphql.mcp.cloudflare.com/mcp"
+    },
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
     },
     "seo-observability": {
       "type": "stdio",

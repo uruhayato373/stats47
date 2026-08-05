@@ -22,6 +22,11 @@
 *.txt text eol=lf
 *.env* text eol=lf
 
+# Cloudflare Workers Static Assets の設定ファイル (拡張子なし)。
+# CRLF になると各ヘッダ値の末尾に CR が残るため LF を強制する。
+_headers text eol=lf
+_redirects text eol=lf
+
 # バイナリファイル
 *.png binary
 *.jpg binary

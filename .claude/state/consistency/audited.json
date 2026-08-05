@@ -1,8 +1,5 @@
 {
-  "hash": "c1021ec3e906e3dc21c1bfd1549dd193d794cb44ca4f75f8ff6c8c8d86c7a9fa",
-  "audited_at": "2026-08-04T08:04:57",
-  "files": [
-    ".claude/agents/affiliate-manager.md",
-    ".claude/scripts/lib/audit-workflow-policy.cjs"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-08-05T01:38:38",
+  "files": []
 }

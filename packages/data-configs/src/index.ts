@@ -11,7 +11,10 @@ export {
   type ExpectedEmptyEntry,
 } from "./expected-empty";
 export {
+  COUNT_UNITS,
   PREFECTURE_COUNT,
+  VALUE_CHECKS,
+  WARN_ONLY_CHECKS,
   classifyShape,
   findExpectedShapeAnomaly,
   hasShapeError,
@@ -22,8 +25,24 @@ export {
   type ShapeRow,
   type ShapeSummary,
   type ShapeViolation,
+  type YearValueStats,
 } from "./shape-gate";
-export { EXPECTED_SHAPE_ANOMALY, MAX_KNOWN_BROKEN } from "./expected-shape-anomaly";
+export {
+  EXPECTED_SHAPE_ANOMALY,
+  MAX_KNOWN_BROKEN,
+  MAX_KNOWN_BROKEN_VALUE,
+} from "./expected-shape-anomaly";
+export {
+  VERIFIED_VALUE_PROFILES,
+  type VerifiedValueProfile,
+} from "./verified-value-profiles";
+export {
+  THIN_SUSPICION_THRESHOLD,
+  ZERO_SUSPICION_THRESHOLD,
+  classifyValueSuspicion,
+  type ValueSuspicion,
+  type ValueVerificationResult,
+} from "./value-verification";
 export {
   PREFECTURES,
   isAggregateAreaName,

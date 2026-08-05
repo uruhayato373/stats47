@@ -1,13 +1,13 @@
 {
-  "total": 1049,
+  "total": 1052,
   "byStatus": {
-    "both": 925,
+    "both": 928,
     "jsonOnly": 0,
     "neither": 124
   },
   "byMethod": {
     "manual": 43,
-    "done": 925,
+    "done": 928,
     "ssot-restore-new": 55,
     "ssot-restore": 26
   },
@@ -8502,6 +8502,33 @@
     {
       "slug": "tuna-consumption-quantity-vs-annual-new-inpatients-general",
       "base": "tuna-consumption-quantity--annual-new-inpatients-general-hospital-per-100k-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-national-medical-expense-per",
+      "base": "tuna-consumption-quantity-vs-national-medical-expense-per-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-national-medical-expense-per",
+      "base": "national-medical-expense-per-person-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "tuna-consumption-quantity-vs-national-medical-expense-per",
+      "base": "tuna-consumption-quantity--national-medical-expense-per-person-scatter",
       "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,

@@ -102,10 +102,84 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 判定はすべて `packages/data-configs/src/shape-gate.ts` の**同じ純関数**。
 両端で同一定義にすることで「書き込み時に通ったものが監査で落ちる」食い違いを防ぐ。
 
+**器の形** (行の数・県の数・単位との整合):
+
 - `duplicate-area-year` 同一 (県, 年) が 2 行以上 → **error**
 - `raw-truncated` `RESULT_INF.TOTAL_NUMBER > TO_NUMBER` → **error**
 - `percent-out-of-range` unit が `%` で最大値 > 1000 → **error** (100-1000 は warn)
 - `area-coverage` 47 県未満 → **warn**。以前 47 だった年が減ったときだけ error
+
+**値の分布** (★2026-08-04 追加。器の形が完璧でも中身が壊れている場合を捕まえる):
+
+- `constant-value` ある年の全県が同じ値 → **最新年なら error** / 過去年のみなら warn
+- `zero-heavy` 最新年のゼロ率 ≥ 90% → **warn**
+- `negative-count` 個数を数える unit (`COUNT_UNITS`) に負値 → **warn**
+
+### 値の分布を見る理由 (★2026-08-04)
+
+`bowling-alley-public` (公共ボウリング場数) は 47 行 1 系列で**器の形は完璧なまま、全 47 県の値が 0**
+だった。順位が存在しないので ranking として成立しないが、取り込み・週次監査・走査のどれも素通りし、
+AI コンテンツ生成 (FAQ 5 問 + 県別解説 47 件) まで進んで公開された。`summarizeShape` は
+valueMin/valueMax を既に計算していて `min === max` は 1 行で判定できたのに、誰も見ていなかった。
+
+**判定は年ごとに行う。** bowling-alley-public は全年通算だと distinct=2 (2008-18 に値 1 の県が数件ある)
+で、**グローバル min/max 比較ではすり抜ける**。最新年だけを error にするのは、過去年の欠陥は既に
+配信済みで書き込みを止めても直らないが、最新年なら次の取り込みで直せるから。
+値が 1 件しか無い年は判定しない (比べる相手がいないので「全部同じ」が自明に成立するだけ)。
+
+**閾値は実測から決めた** (active 2,176 件の全走査):
+
+| 検査 | 該当 | 判断 |
+|---|---|---|
+| latest 年の全県同値 | 3 件 = 既知の欠陥と完全一致・誤検知 0 | error |
+| ゼロ率 ≥90% | 2 件 (46/47・41/44 でどちらも要調査) | warn |
+| ゼロ率 50-90% | 16 件 — 地熱発電所・原発・植物園など**正当が優勢** | 検知しない |
+| 個数 unit の負値 | 1 件 (既知の壊れ) | warn |
+
+ゼロ率 50-90% を弾かないのは「原発がある県は数県だけ」のような正当なデータが多数派だから
+(誤検知を出すゲートは運用で無効化される)。負値も ％/‰/℃/円/人 は増減率・収支・気温で正当に
+ありうるので `COUNT_UNITS` (店/施設/件/か所/館/校/園/台/隻/戸/棟…) に限る。
+
+**allowlist のラチェットは形状側と別枠** (`MAX_KNOWN_BROKEN_VALUE`)。同じ枠にすると
+「既存を是正して空いた枠に新しい壊れ方を入れる」ができてしまう。常に warn の 2 種
+(`WARN_ONLY_CHECKS`) は何も fail させないので allowlist に載せない (`area-coverage` と同じ理由)。
+
+### 検証済みプロファイル方式 (★2026-08-05・二層 SSOT)
+
+上の閾値は「確実に壊れている」ものだけを拾うので、**判断が割れる帯を捨てていた**
+(ゼロ率 50-90% の 16 件など)。そこを埋めるのがこの方式で、**広く疑い、agent が中身を
+確かめたものだけ通す**。
+
+**機械だけでは分離できないことを実測で確認している。** 「経年でゼロ率が急増したものだけ拾えば
+agent 検証なしで壊れだけ取れる」を試して失敗した — 壊れているものほどずっと壊れているので
+変化が出ず (bowling-alley-public の前年比 +0.02)、年が 1 つしかなく比較不能なものが 8 件あり、
+その中に確定バグ (gini) が入っていた。分離に必要な情報は**指標が何を数えているかという意味の側**
+にしかない。
+
+| SSOT | 意味 | 形 | ラチェット |
+|---|---|---|---|
+| `expected-shape-anomaly.ts` | **壊れ**を期限つきで許可 | 生成物 (`--emit-allowlist`) | 件数の**縮小**専用 |
+| `verified-value-profiles.ts` | **正当**と検証済み | agent が根拠つきで手書き | 未検証件数の**縮小**専用 |
+
+疑い (`value-verification.ts`・監査層専用・取り込みは止めない):
+
+- `zero-suspicion` 最新年ゼロ率 ≥ **0.3** / `thin-suspicion` 最新年 < **40 行** /
+  `negative-suspicion` 負値あり (**unit を問わない**)
+- 判定 4 状態: `clean` / `verified` / `unverified` / **`profile-violated`**
+
+**検証は boolean でなく「予測」で書く。** `verified: true` だと中身を見ずに一括承認でき、
+緑の板と実際の検証が区別できない。`zeroShareMax: 0.9` のような予測なら中身を見ないと数字が
+書けず、以後ずっと機械が照合し、データが変われば `profile-violated` で自動的に戻ってくる
+(`observedSeverity` の悪化検知と同じ発想)。台帳 lint が evidence・出典 URL・検証日・
+予測の存在・定型文の使い回し (同一 evidence 6 件以上) を強制する。
+
+**未検証はラチェット**で管理する (`.claude/state/ranking/integrity-audit.json` の
+`valueVerification`)。76 件が一斉に赤くなるゲートは無視されるので、baseline に固定して
+**増えたときだけ失敗**。`profile-violated` は即失敗 (検証が古くなった証拠)。
+
+初回キャンペーン (2026-08-05・active 2,173 件): 疑い 76 → **検証済み 63 / 未検証 10**。
+残 10 件は根拠を得られなかった分で、**0 を偽装せず baseline に残している**。
+運用は skill `/verify-value-distribution` (owner: data-ingester / 調査は estat-researcher)。
 
 **coverage を既定 warn にしているのは誤検知を避けるため。** `port-cargo-total` の欠落 8 県は
 内陸 8 県と完全一致しており、素朴な「47 県必須」は `port-*` / `fishery-*` 系 15 件を誤検知する。

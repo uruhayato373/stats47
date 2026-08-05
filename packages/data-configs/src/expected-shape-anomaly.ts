@@ -42,7 +42,21 @@ import type { ExpectedShapeAnomalyEntry } from "./shape-gate";
 
 export const MAX_KNOWN_BROKEN = 15;
 
+/**
+ * 値の分布検査 (`VALUE_CHECKS`) 側の上限 (縮小専用ラチェット・2026-08-04 新設)。
+ *
+ * 器の形を見る既存 4 検査とは**別枠**にする。同じ枠に混ぜると「既存分を是正して空いた枠に
+ * 新しい壊れ方を入れる」ができてしまい、ラチェットが意味を失う。
+ *
+ * 2026-08-04 に登録した 3 件 (`constant-value` = 最新年の全 47 県が同値) は
+ * **2026-08-05 に該当 metric を退役 (isActive:false + GONE) して解消したので 0 に下げた**。
+ * 値分布の欠陥は allowlist で緑にするのではなく、metric を直すか退役させる方が筋が良い
+ * (順位が成立しないページを公開し続ける理由が無い)。
+ */
+export const MAX_KNOWN_BROKEN_VALUE = 0;
+
 export const EXPECTED_SHAPE_ANOMALY: readonly ExpectedShapeAnomalyEntry[] = [
+  // --- 器の形の検査 (2026-07-30 導入時の既知分) -----------------------------
   {
     key: "employment-insurance-daily-receipt-rate",
     check: "percent-out-of-range",

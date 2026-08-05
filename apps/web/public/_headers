@@ -1,0 +1,18 @@
+# Cloudflare Workers Static Assets のヘッダ設定
+# 正典: https://developers.cloudflare.com/workers/static-assets/headers/ (アクセス 2026-08-05)
+#
+# public/ は OpenNext が .open-next/assets/ 直下へ複製する
+# (@opennextjs/aws createAssets.js: `public/* => *`)。wrangler.toml の
+# [assets] directory がそこを指すため、このファイルが資産配信のヘッダ規則になる。
+#
+# なぜ要るか: /_next/static/* は Next.js が内容ハッシュでファイル名を決めるので、
+# 同じ URL の中身が変わることはない。にもかかわらず既定は
+# `public, max-age=0, must-revalidate` で、2026-08-05 時点でも 115,135 bytes の CSS
+# (/_next/static/css/41d7b5e2cb6a9f4d.css) がナビゲーションのたびに 304 再検証されていた。
+#
+# 適用範囲の注意:
+# - Worker が生成するレスポンス (HTML / RSC / API) にはこの設定は適用されない
+# - /tiles/* や非ハッシュ資産へ広げない。ハッシュを持たない URL を immutable にすると
+#   デプロイしても古い資産が最大 1 年配信され続ける
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable

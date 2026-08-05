@@ -143,8 +143,8 @@ jobs:
             exit 1
           fi
 
-          if ! grep -q "nodejs_compat_v2" wrangler.toml; then
-            echo "Warning: nodejs_compat_v2 flag not found in wrangler.toml. require() calls will fail at runtime."
+          if ! grep -q '"nodejs_compat"' wrangler.toml; then
+            echo "Warning: nodejs_compat flag not found in wrangler.toml. Node.js built-in imports will fail at runtime."
           fi
 
           # ビルドサイズの確認（警告のみ）
