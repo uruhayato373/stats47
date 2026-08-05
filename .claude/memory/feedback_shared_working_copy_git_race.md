@@ -46,4 +46,18 @@ metadata:
 
 **★worktree 分離でも「相手の未コミット source」は漏れてくる (2026-07-29・per-area 100倍バグ修正時):** worktree は `.git`/HEAD/index を分離するが、**npm workspace の symlink は本体 checkout の絶対パスを指したまま**なので、`@stats47/*` の import は**本体側の作業ツリー**に解決される。実際 worktree で `npm run type-check --workspace apps/web` が `home-portal` の型エラーで落ち、原因は**別セッションが本体で `packages/data-configs/src/{index,home-portal}.ts` を編集中**だったこと (私の変更とは無関係)。`ls -l /Users/minamidaisuke/stats47/node_modules/@stats47/data-configs` → `../../packages/data-configs` = **本体側**。**How to apply**: worktree で検証が謎の失敗をしたら、まず `git -C /Users/minamidaisuke/stats47 status --porcelain -- packages/` で相手の WIP を疑う。隔離するには worktree 内に `node_modules/@stats47/<pkg> → <worktree>/packages/<pkg>` の symlink を張る (自分のツリーを検証できる)。**もう 1 点**: worktree の `node_modules` は実質空 (`.vite` のみ) で、依存は上位ディレクトリ探索で解決されるが、**`typeRoots: ["../../node_modules/@types"]` のような相対パス指定とアセット実ファイルパスは解決できない** (pre-commit の型チェック・image-pipeline テストが `ENOENT` で落ちる)。本体 `node_modules` の全エントリを worktree に symlink すれば pre-commit 全項目が通る (`@stats47` だけは自分向きを維持)。gitignore 配下なのでリポジトリには影響しない。
 
+**★自分が起動した subagent も「相手」になる (2026-08-05・Due 超過解消時):** これまでの記録は全て
+「別の Claude セッション / Codex」との競合だったが、**Agent tool で自分が並列起動した subagent**でも同じことが起きる。
+背景で `theme-portfolio-manager` が `packages/data-configs/src/theme-catalog/manufacturing.ts` を編集している最中に、
+私が無関係な docs 変更を `git add -A && git commit` → **agent の未完成 WIP が「blog SEO 2件のDue再設定」という
+無関係なコミットメッセージで develop に push された** (commit `b0cf9c2be`)。agent 自身は commit/push を一切していない。
+内容は結果的に正しかった (`entities:["city"]` = 県値が構造的に無い 3 metric のカタログ除外・validate:catalog error 0・
+R2 404 を実測確認) が、**レビュー前の他者の成果物を公開した**という点で process 違反。
+**How to apply:** ① background agent を 1 体でも走らせている間は `git add -A` / `git add .` / `commit -a` を使わない
+(既存ルールの適用範囲を subagent にも広げる)。② commit 前に `git status --short` で**自分が触っていないパスが無いか**確認する
+— 特に agent に渡した scope のファイル (今回なら `packages/data-configs/src/theme-catalog/`)。
+③ 混入したら push 前なら `git reset --soft HEAD~1` + 明示パス add で分離。**push 済みなら共有ブランチの履歴を書き換えない**
+(オーナーが同じ develop に push していた) — 内容を検証し、事実を報告して次の commit で記録を正す。
+④ そもそも「agent の成果物は agent 完了後にレビューしてから自分で commit する」を既定にする。
+
 関連: [[project_env_local_ci_consolidation]] [[project_dbless_migration_2026_05_29]] [[project_blog_publish_cloud_first]] [[project_blog_mass_rewrite_lessons]] [[feedback_sync_snapshots_checks_out_main]]
