@@ -144,6 +144,43 @@ valueMin/valueMax を既に計算していて `min === max` は 1 行で判定�
 「既存を是正して空いた枠に新しい壊れ方を入れる」ができてしまう。常に warn の 2 種
 (`WARN_ONLY_CHECKS`) は何も fail させないので allowlist に載せない (`area-coverage` と同じ理由)。
 
+### 検証済みプロファイル方式 (★2026-08-05・二層 SSOT)
+
+上の閾値は「確実に壊れている」ものだけを拾うので、**判断が割れる帯を捨てていた**
+(ゼロ率 50-90% の 16 件など)。そこを埋めるのがこの方式で、**広く疑い、agent が中身を
+確かめたものだけ通す**。
+
+**機械だけでは分離できないことを実測で確認している。** 「経年でゼロ率が急増したものだけ拾えば
+agent 検証なしで壊れだけ取れる」を試して失敗した — 壊れているものほどずっと壊れているので
+変化が出ず (bowling-alley-public の前年比 +0.02)、年が 1 つしかなく比較不能なものが 8 件あり、
+その中に確定バグ (gini) が入っていた。分離に必要な情報は**指標が何を数えているかという意味の側**
+にしかない。
+
+| SSOT | 意味 | 形 | ラチェット |
+|---|---|---|---|
+| `expected-shape-anomaly.ts` | **壊れ**を期限つきで許可 | 生成物 (`--emit-allowlist`) | 件数の**縮小**専用 |
+| `verified-value-profiles.ts` | **正当**と検証済み | agent が根拠つきで手書き | 未検証件数の**縮小**専用 |
+
+疑い (`value-verification.ts`・監査層専用・取り込みは止めない):
+
+- `zero-suspicion` 最新年ゼロ率 ≥ **0.3** / `thin-suspicion` 最新年 < **40 行** /
+  `negative-suspicion` 負値あり (**unit を問わない**)
+- 判定 4 状態: `clean` / `verified` / `unverified` / **`profile-violated`**
+
+**検証は boolean でなく「予測」で書く。** `verified: true` だと中身を見ずに一括承認でき、
+緑の板と実際の検証が区別できない。`zeroShareMax: 0.9` のような予測なら中身を見ないと数字が
+書けず、以後ずっと機械が照合し、データが変われば `profile-violated` で自動的に戻ってくる
+(`observedSeverity` の悪化検知と同じ発想)。台帳 lint が evidence・出典 URL・検証日・
+予測の存在・定型文の使い回し (同一 evidence 6 件以上) を強制する。
+
+**未検証はラチェット**で管理する (`.claude/state/ranking/integrity-audit.json` の
+`valueVerification`)。76 件が一斉に赤くなるゲートは無視されるので、baseline に固定して
+**増えたときだけ失敗**。`profile-violated` は即失敗 (検証が古くなった証拠)。
+
+初回キャンペーン (2026-08-05・active 2,173 件): 疑い 76 → **検証済み 63 / 未検証 10**。
+残 10 件は根拠を得られなかった分で、**0 を偽装せず baseline に残している**。
+運用は skill `/verify-value-distribution` (owner: data-ingester / 調査は estat-researcher)。
+
 **coverage を既定 warn にしているのは誤検知を避けるため。** `port-cargo-total` の欠落 8 県は
 内陸 8 県と完全一致しており、素朴な「47 県必須」は `port-*` / `fishery-*` 系 15 件を誤検知する。
 誤検知を出すゲートは運用で無効化されるので、確実に欠陥と言えるものだけを error にする。

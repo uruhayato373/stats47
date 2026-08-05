@@ -48,49 +48,14 @@ export const MAX_KNOWN_BROKEN = 15;
  * 器の形を見る既存 4 検査とは**別枠**にする。同じ枠に混ぜると「既存分を是正して空いた枠に
  * 新しい壊れ方を入れる」ができてしまい、ラチェットが意味を失う。
  *
- * 現在の 3 件は 2026-08-04 に active 2,176 件を全走査して確定した既知分
- * (`constant-value` = 最新年の全 47 県が同値)。是正したらこの定数も下げる。
+ * 2026-08-04 に登録した 3 件 (`constant-value` = 最新年の全 47 県が同値) は
+ * **2026-08-05 に該当 metric を退役 (isActive:false + GONE) して解消したので 0 に下げた**。
+ * 値分布の欠陥は allowlist で緑にするのではなく、metric を直すか退役させる方が筋が良い
+ * (順位が成立しないページを公開し続ける理由が無い)。
  */
-export const MAX_KNOWN_BROKEN_VALUE = 3;
+export const MAX_KNOWN_BROKEN_VALUE = 0;
 
 export const EXPECTED_SHAPE_ANOMALY: readonly ExpectedShapeAnomalyEntry[] = [
-  // --- 値の分布検査 (2026-08-04 追加・VALUE_CHECKS ファミリー) ---------------
-  // いずれも「最新年の全 47 県が同じ値 0」で順位が成立しない。ゲート追加前から
-  // 配信されており、是正 (config 修正 or isActive 見直し) はオーナー判断のため
-  // 期限つきで許可する。放置防止は docs/todo/01_未整理タスク.md の記録と until。
-  {
-    key: "gini-coefficient-disposable-income",
-    check: "constant-value",
-    disposition: "known-broken",
-    observedSeverity: 1,
-    reason:
-      "2026-08-04 実測: 等価可処分所得ジニ係数 (2019) の全 47 県が 0。ジニ係数は定義上 0 に " +
-      "なりえないので cdCat / tab の選択誤りで別系列を取っている。config 是正 + 再取り込みが要る",
-    issue: "docs/todo/01_未整理タスク.md (2026-08-04)",
-    until: "2026-12-31",
-  },
-  {
-    key: "bowling-alley-public",
-    check: "constant-value",
-    disposition: "known-broken",
-    observedSeverity: 1,
-    reason:
-      "2026-08-04 実測: 公共ボウリング場数 (2021) の全 47 県が 0。最良の年 (2015) でも値 1 の県が " +
-      "2 つだけで順位が成立しない。データは正しく実態が 0 なので config 是正ではなく isActive の見直し対象",
-    issue: "docs/todo/01_未整理タスク.md (2026-08-04)",
-    until: "2026-12-31",
-  },
-  {
-    key: "unemployment-measures-project-expenses-prefecture",
-    check: "constant-value",
-    disposition: "known-broken",
-    observedSeverity: 1,
-    reason:
-      "2026-08-04 実測: 失業対策事業費 (2022) の全 47 県が 0。2007-2013 と 2022 が全件 0 で、" +
-      "失業対策事業は 1996 年に廃止済み。実態が 0 なので isActive の見直し対象",
-    issue: "docs/todo/01_未整理タスク.md (2026-08-04)",
-    until: "2026-12-31",
-  },
   // --- 器の形の検査 (2026-07-30 導入時の既知分) -----------------------------
   {
     key: "employment-insurance-daily-receipt-rate",

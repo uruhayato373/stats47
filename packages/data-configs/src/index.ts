@@ -33,6 +33,17 @@ export {
   MAX_KNOWN_BROKEN_VALUE,
 } from "./expected-shape-anomaly";
 export {
+  VERIFIED_VALUE_PROFILES,
+  type VerifiedValueProfile,
+} from "./verified-value-profiles";
+export {
+  THIN_SUSPICION_THRESHOLD,
+  ZERO_SUSPICION_THRESHOLD,
+  classifyValueSuspicion,
+  type ValueSuspicion,
+  type ValueVerificationResult,
+} from "./value-verification";
+export {
   PREFECTURES,
   isAggregateAreaName,
   lookupPrefectureCode,
