@@ -134,9 +134,10 @@ export default async function SurveyPage({ params }: PageProps) {
   // ★ 2026-07-28: 旧実装は tag を ['economy','population','labor'] に固定しており、
   //   調査の主題 (農林業センサス / 学校基本調査 等) と広告が一切連動していなかった。
   //   この調査に属するランキングの categoryKey 最頻値から vertical を導出する。
+  // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕
   const nativeBanners = await resolveAffiliateBannersByVertical(
     dominantVertical(rankingItems),
-    4
+    8
   ).catch(() => []);
   const editorial = getSurveyEditorialContent(surveyKey);
 
@@ -370,15 +371,11 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* ネイティブアフィリエイト */}
+      {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない (見出しは PR ラベル付き 1 段のみ) */}
       {nativeBanners.length > 0 && (
         <section className="mb-12">
-          <SectionHeader
-            number={String(sectionNumber++)}
-            title="関連書籍・データブック"
-          />
           <NativeAffiliateRow
-            title={`${survey.name}に関連する書籍`}
+            title={`${survey.name}の関連サービス`}
             banners={nativeBanners}
             position="survey-native"
             trackingCategory={`survey-${surveyKey}`}

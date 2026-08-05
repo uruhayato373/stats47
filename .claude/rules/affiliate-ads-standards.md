@@ -98,6 +98,17 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 > 本文インラインも locationCode は `sidebar-bottom` を再利用する — 新しい値を作ると在庫が
 > 本文用とサイドバー用に分断され、どちらも埋まらなくなるため。区別は GA4 の `link_position` で行う。
 
+> **★縦長 (height > width) は native / 本文の横並び枠に出さない (2026-08-06)**: banner 解決が
+> locationCode を見ない結果、`sidebar-sticky` 登録のスカイスクレイパー (120×600) が本文の
+> `NativeAffiliateRow` (4:3 枠) に流入し極細の縦帯に潰れていた。描画側が
+> `isLandscapeBanner` (`resolve-affiliate-ad.ts`) で除外する (repository は blog レール等と共有
+> するため触らない)。**縦長の唯一の受け皿は `SidebarStickyBannerAd`** (home 左レール・lg+ のみ・
+> sticky なし) = `sidebar-sticky` locationCode を読む唯一の消費者。native の呼び出し元は除外分を
+> 見込んで解決 limit を 8 にする (native 4 + 末尾 300×250 1 を横長だけで埋める余裕)。
+> **`NativeAffiliateRow` は外枠カード一括を持たず「PR」ラベル + 1 段見出し** — 呼び出し元に
+> `SectionHeader` を重ねない (二重見出し禁止)。見出しに「書籍・商品」等、実在庫に無い語を使わない
+> (「◯◯の関連サービス」に統一。2026-08-06 に home「関連書籍・サービス」の指摘で全 7 ページ是正)。
+
 **legacy 一点物** (grandfathering・新規禁止・段階移行): `160×600` / `120×600` / `165×120` / `320×250` / `336×280` / `300×300`
 → 再取得時に 300×250 か text へ寄せる。`KNOWN_LEGACY_SIZES` (audit script) で許容中。**新規はこれらも不可** (canonical のみ)。
 
@@ -413,15 +424,18 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 | ページ種別 | アフィリ枠 | 解決キー |
 |---|---|---|
-| blog | 本文 banner / 本文 text (自動挿入 最大4) / サイドバー text / 楽天ふるさと納税 / 楽天商品 / ハウス枠×2 | tagKeys → vertical、タイトル → 県・品目 |
-| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天ふるさと納税 (1位県) / 楽天商品 | categoryKey → vertical + tagKeys、1位県、ランキング名 → 品目 |
+| blog | 本文 banner / 本文 text (自動挿入 最大4) / サイドバー text / 楽天商品 / ハウス枠×2 | tagKeys → vertical、ランキング名 → 品目 |
+| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天商品 | categoryKey → vertical + tagKeys、ランキング名 → 品目 |
 | category / tag | native ≤4 / ハウス枠 | `CATEGORY_FALLBACK_TAGS` / tagKey |
 | survey | native ≤4 | 所属ランキングの categoryKey 最頻値 → vertical |
-| themes | ハウス枠 / native ≤4 | relatedArticleTagKeys → 無ければ `THEME_AFFILIATE_MAP` |
-| areas 県 | 楽天ふるさと納税 / ハウス枠 / `AreaBannerAd` | areaCode / `area-sidebar` |
+| themes | native ≤4 / theme-end 300×250 | relatedArticleTagKeys → 無ければ `THEME_AFFILIATE_MAP` (本文中央ハウス枠は 2026-08-06 撤去。bespoke の themes/local-finance は InContent×2 のみで native なし) |
+| areas 県 | ハウス枠 / `AreaBannerAd` | `area-sidebar` |
 | areas 市区町村 | `AreaBannerAd` / 楽天ふるさと納税 | `area-sidebar` / 親県コード |
-| home | ハウス枠 / native ≤4 (economy 固定) | 無し (vertical 解決の手掛かりが無いページ) |
+| home | ハウス枠 / native ≤4 (economy 固定) / **sidebar-sticky (縦長の受け皿・左レール lg+)** | 無し (vertical 解決の手掛かりが無いページ)・`sidebar-sticky` |
 | compare | native ≤4 | categoryKey → vertical |
+
+> 上表は 2026-08-06 にコード実態と突合して是正した (旧版は blog/ranking/areas 県に
+> ふるさと納税を過剰記載。`FurusatoNozeiCard` の実使用は市区町村ページのみ)。
 
 > **2026-07-28 に埋めたギャップ** (すべて既存コンポーネントの再利用): 写像なし 6 category の追加
 > (unmapped 7,866 → 783 imp) / survey の tag ハードコード撤廃 / areas 県ページの `AreaBannerAd`

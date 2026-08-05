@@ -79,7 +79,8 @@ export default async function TagArticlesPage({ params }: PageProps) {
     const tag = decodeTagKey(tagKey);
     const [articles, nativeBanners] = await Promise.all([
         listArticleSummariesByTagKey(tag, 50),
-        resolveAffiliateBanners([tag], 4).catch(() => []),
+        // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕
+        resolveAffiliateBanners([tag], 8).catch(() => []),
     ]);
 
     if (articles.length === 0) {
@@ -144,7 +145,7 @@ export default async function TagArticlesPage({ params }: PageProps) {
             {nativeBanners.length > 0 && (
                 <div className="mt-10">
                     <NativeAffiliateRow
-                        title={`「${tag}」関連の書籍・商品`}
+                        title={`「${tag}」の関連サービス`}
                         banners={nativeBanners}
                         position="tag-native"
                         trackingCategory={`tag-${tagKey}`}

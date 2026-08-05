@@ -167,7 +167,8 @@ export default async function CategoryPage({ params }: PageProps) {
         .then((r) => (isOk(r) ? r.data : []))
         .catch(() => []),
       fallbackTags.length > 0
-        ? resolveAffiliateBanners(fallbackTags, 4).catch(() => [])
+        ? // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕
+          resolveAffiliateBanners(fallbackTags, 8).catch(() => [])
         : Promise.resolve([]),
     ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
@@ -385,12 +386,11 @@ export default async function CategoryPage({ params }: PageProps) {
         {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
         <InContentAdSlot slot={HUB_INCONTENT} />
 
-        {/* ネイティブアフィリエイト */}
+        {/* ネイティブアフィリエイト。見出しは PR ラベル付き 1 段のみ (二重見出し禁止) */}
         {nativeBanners.length > 0 && (
           <section className="mb-12">
-            <SectionHeader title="このカテゴリで読む" />
             <NativeAffiliateRow
-              title={`${category.categoryName}の関連書籍・商品`}
+              title={`${category.categoryName}の関連サービス`}
               banners={nativeBanners}
               position="category-native"
               trackingCategory={`category-${categoryKey}`}

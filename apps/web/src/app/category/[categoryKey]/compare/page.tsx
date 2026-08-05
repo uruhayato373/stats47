@@ -134,9 +134,10 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
         : [];
 
     const currentCategory = categories.find((c) => c.categoryKey === categoryKey);
+    // limit 8 = 縦長を描画側で除外しても 4 件残すための余裕
     const compareNativeBanners = await resolveAffiliateBannersByCategoryKey(
         categoryKey,
-        4,
+        8,
     ).catch(() => []);
 
     return (
@@ -185,7 +186,7 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
             {compareNativeBanners.length > 0 && (
                 <div className="mt-8">
                     <NativeAffiliateRow
-                        title={`${currentCategory?.categoryName ?? "この分野"}に関連するサービス`}
+                        title={`${currentCategory?.categoryName ?? "この分野"}の関連サービス`}
                         banners={compareNativeBanners}
                         position="compare-native"
                         trackingCategory={`compare-${categoryKey}`}

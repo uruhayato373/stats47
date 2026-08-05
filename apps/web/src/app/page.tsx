@@ -16,7 +16,10 @@ import {
   RailAdSlot,
   SidebarPromoBanner,
 } from '@/features/ads';
-import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
+import {
+  resolveAffiliateBannersByVertical,
+  SidebarStickyBannerAd,
+} from '@/features/ads/server';
 import { listLatestArticles } from '@/features/blog/server';
 import {
   PortalAreaEntry,
@@ -113,9 +116,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   const latestArticles = await listLatestArticles(8).catch(() => []);
   const prefectureOverviewSvg = generatePrefectureOverviewSvg();
+  // limit 8 = 縦長 (sidebar-sticky 在庫) を描画側で除外しても 4 件残すための余裕
   const homeNativeBanners = await resolveAffiliateBannersByVertical(
     'economy',
-    4
+    8
   ).catch(() => []);
 
   return (
@@ -149,6 +153,10 @@ export default async function HomePage() {
                 vertical 解決の手掛かりが無いページなのでハウス枠 (vertical 非依存) を置く。 */}
             <div className="mt-4">
               <SidebarPromoBanner index={0} />
+            </div>
+            {/* 縦長 (スカイスクレイパー) の受け皿。lg+ のみ・sticky なし (構造テストが assert)。 */}
+            <div className="mt-4">
+              <SidebarStickyBannerAd position="home-left-rail" />
             </div>
           </aside>
 
@@ -243,17 +251,15 @@ export default async function HomePage() {
               </section>
             </div>
 
-            {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。 */}
+            {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。
+                見出しは NativeAffiliateRow の PR ラベル付き 1 段のみ (SectionHeader との二重見出し禁止)。 */}
             {homeNativeBanners.length > 0 && (
-              <section>
-                <SectionHeader title="関連書籍・サービス" />
-                <NativeAffiliateRow
-                  title="暮らしとお金のデータをもっと活かす"
-                  banners={homeNativeBanners}
-                  position="home-native"
-                  trackingCategory="home"
-                />
-              </section>
+              <NativeAffiliateRow
+                title="暮らしとお金の関連サービス"
+                banners={homeNativeBanners}
+                position="home-native"
+                trackingCategory="home"
+              />
             )}
           </div>
         </div>
