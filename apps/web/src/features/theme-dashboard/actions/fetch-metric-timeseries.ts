@@ -45,19 +45,27 @@ export async function fetchMetricTimeseriesAction(
   const rankingItem = result.data;
   const { sourceConfig, calculation } = rankingItem;
 
-  // 計算型は全年度 timeseries 取得未対応 (Phase 3.5 で個別対応)
-  if (calculation?.isCalculated) {
-    return EMPTY_RESULT;
-  }
-
   // ★sourceConfig を丸ごと spread しない (cdCat03/04/05・cdTab の欠落と非クエリキー混入を防ぐ)
   const params = resolveEstatParams(sourceConfig);
-  if (!params) return EMPTY_RESULT;
+
+  /**
+   * e-Stat の単発クエリでは正しい値を得られない metric。取り込み済みの正典
+   * `app/stats/<key>/values.json` から読む。3 通りある:
+   *
+   * - **計算型** … 比・差の結果は e-Stat に存在しない。分子の statsDataId を叩くと
+   *   変換前の生値が出てしまうので、絶対に e-Stat を叩かない
+   * - **宣言演算 (derived)** … tab 線形結合 / 軸合算 / 率 / 県庁所在市写像は再現不能
+   * - **params なし** … 国土数値情報・手動投入など external 種は e-Stat にクエリ自体が無い
+   *
+   * 最後の 1 つは 2026-08-05 まで即 EMPTY を返しており、R2 に複数年あるのに
+   * チャートが空になっていた (ラスパイレス指数 14 年・鉄道駅乗降客数 5 年)。
+   * 「e-Stat を叩けないなら諦める」ではなく「正典から読む」が正しい。
+   */
+  const useCanonicalR2 =
+    calculation?.isCalculated === true || !params || isDerivedSource(sourceConfig);
 
   try {
-    // 宣言演算 (tab 線形結合 / 軸合算 / 率 / 県庁所在市写像) を伴う metric は
-    // e-Stat 単発クエリで再現できないので、取り込み済みの正典 R2 から読む。
-    const rawData: TimeseriesSourceRow[] = isDerivedSource(sourceConfig)
+    const rawData: TimeseriesSourceRow[] = useCanonicalR2
       ? ((await readStatsValues(rankingKey, "prefecture"))?.rows ?? [])
       : await fetchFormattedStats(params as GetStatsDataParams, await getEstatCacheStorage());
     if (!rawData || rawData.length === 0) return EMPTY_RESULT;

@@ -216,6 +216,31 @@ describe("MetricSwitcherPanel — チャートが空になる指標への退避"
       expect(screen.getByText(/推移データがありません/)).toBeInTheDocument(),
     );
   });
+
+  /**
+   * 単年しか調査されていない指標 (鉄道駅数=2024年のみ 等) は、データが欠けているのでは
+   * なく推移そのものが存在しない。取得失敗と同じ文面にすると読者が区別できない。
+   */
+  it("単年しかない指標は「単年データ」と理由を書く (取得失敗と区別する)", async () => {
+    fetchMock.mockResolvedValue({ points: points([42]), source: "national" });
+    renderPanel();
+
+    await waitFor(() =>
+      expect(screen.getByText(/2020年の単年データのため/)).toBeInTheDocument(),
+    );
+    // 汎用文言に潰していないこと
+    expect(screen.queryByText("推移データがありません")).toBeNull();
+    // チャート枠は出さない
+    expect(screen.queryByTestId("line-chart")).toBeNull();
+  });
+
+  it("単年のときは見出しも「推移」と言わない", async () => {
+    fetchMock.mockResolvedValue({ points: points([42]), source: "national" });
+    renderPanel();
+    await waitFor(() =>
+      expect(screen.getByText(/2020年時点の値/)).toBeInTheDocument(),
+    );
+  });
 });
 
 describe("MetricSwitcherPanel — 指数系は全国比較線を出さない", () => {
