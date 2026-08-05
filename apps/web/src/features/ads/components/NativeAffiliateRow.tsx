@@ -57,7 +57,7 @@ export function NativeAffiliateRow({
   return (
     <section>
       <div className="mb-2 flex items-baseline gap-2">
-        <span className="text-xs font-medium text-muted-foreground/70">PR</span>
+        <span className="text-xs font-medium text-muted-foreground">PR</span>
         <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
         {moreHref && (
           <a
