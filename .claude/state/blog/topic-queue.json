@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-04T20:51:06.212Z",
+  "generatedAt": "2026-08-05T20:44:37.651Z",
   "gscWeek": "2026-W31",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
@@ -3825,33 +3825,6 @@
       "priority": 130
     },
     {
-      "topicKey": "gap-bowling-alley-public",
-      "archetype": "A",
-      "metricKeys": [
-        "bowling-alley-public"
-      ],
-      "label": "ボウリング場数（公共）",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5720776700644431,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 80,
-        "gscClicks": 0,
-        "gscPosition": 8.07,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/bowling-alley-public"
-      },
-      "suggestedTitle": "ボウリング場が多い県はどこ",
-      "combinedScore": 0.3,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 131
-    },
-    {
       "topicKey": "gap-fishery-species-catch-pollock",
       "archetype": "A",
       "metricKeys": [
@@ -3876,7 +3849,7 @@
       "combinedScore": 0.299,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 132
+      "priority": 131
     },
     {
       "topicKey": "gap-starting-salary-university",
@@ -3903,7 +3876,7 @@
       "combinedScore": 0.299,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 133
+      "priority": 132
     },
     {
       "topicKey": "gap-tennis-court-public",
@@ -3928,6 +3901,33 @@
       },
       "suggestedTitle": "テニスコートが多い県はどこ",
       "combinedScore": 0.299,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 133
+    },
+    {
+      "topicKey": "gap-hobby-participation-rate-reading",
+      "archetype": "A",
+      "metricKeys": [
+        "hobby-participation-rate-reading"
+      ],
+      "label": "趣味としての読書の行動者率",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.5654847735136855,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 76,
+        "gscClicks": 3,
+        "gscPosition": 5.09,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/hobby-participation-rate-reading"
+      },
+      "suggestedTitle": "趣味としての読書の行動者が多い県はどこ",
+      "combinedScore": 0.298,
       "lane": "opportunity",
       "status": "pending",
       "priority": 134

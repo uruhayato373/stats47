@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "fish-pickled-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "魚介の漬物消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/fish-pickled-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug avg-height-high-school-2nd-male-vs-fish-pickled-consumption --keys fish-pickled-consumption-expenditure --data-name fish-pickled-consumption-expenditure-prefecture-rankings",
+  "fetchedAt": "2026-08-05T20:44:44.672Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

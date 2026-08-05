@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "avg-height-high-school-2nd-male",
+  "pair": "fish-pickled-consumption-expenditure",
+  "pearsonR": 0.6807852466256342,
+  "partialRPopulation": 0.6760393597408911,
+  "unit": "cm × 円",
+  "label": "平均身長 と 魚介の漬物消費支出額 の関係",
+  "source": "r2:app/correlation/by-ranking-key/avg-height-high-school-2nd-male.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug avg-height-high-school-2nd-male-vs-fish-pickled-consumption --base avg-height-high-school-2nd-male --pair fish-pickled-consumption-expenditure --data-name avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure"
+}
