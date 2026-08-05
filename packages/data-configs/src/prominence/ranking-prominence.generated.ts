@@ -112,7 +112,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "laborwage",
     "categoryName": "労働・賃金",
-    "count": 111,
+    "count": 110,
     "representatives": [
       {
         "rankingKey": "designer-annual-income",
@@ -135,14 +135,14 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "労働費が最も多い県は？"
       },
       {
-        "rankingKey": "unemployment-measures-project-expenses-prefecture",
-        "title": "失業対策事業費",
-        "hook": "失業対策事業費が最も多い県は？"
-      },
-      {
         "rankingKey": "cook-annual-income",
         "title": "飲食物調理従事者の平均年収",
         "hook": "飲食物調理従事者の平均年収が最も高い県は？"
+      },
+      {
+        "rankingKey": "taxi-driver-annual-income",
+        "title": "タクシー運転者の平均年収",
+        "hook": "タクシー運転者の平均年収が最も高い県は？"
       }
     ]
   },
@@ -260,7 +260,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "economy",
     "categoryName": "企業・家計・経済",
-    "count": 817,
+    "count": 816,
     "representatives": [
       {
         "rankingKey": "grilled-eel-consumption-expenditure",
@@ -408,7 +408,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "educationsports",
     "categoryName": "教育・文化・スポーツ",
-    "count": 258,
+    "count": 257,
     "representatives": [
       {
         "rankingKey": "school-teacher-annual-income",
@@ -731,8 +731,8 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "software-engineer-annual-income",
   "disabled-employment-rate",
   "labor-expenses-prefecture",
-  "unemployment-measures-project-expenses-prefecture",
   "cook-annual-income",
+  "taxi-driver-annual-income",
   "fishery-workers",
   "marine-fishery-aquaculture-output-value",
   "fishery-species-catch-mackerel",
