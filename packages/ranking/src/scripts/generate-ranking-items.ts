@@ -37,6 +37,9 @@ import {
 import { GONE_RANKING_KEYS } from "../config/gone-ranking-keys";
 import { deriveFeaturedTop } from "../exporters/home-featured";
 import { RANKING_ITEMS_SNAPSHOT_KEY, rankingItemKeyPath } from "../types/snapshot";
+// 順位規則の正典 (値の降順・同値は同順位)。script 間 import だが main() は invokedDirectly で
+// ガードされているので副作用は無い。二重実装を避けるためこちらを再利用する。
+import { deriveRanks } from "./generate-ranking-values";
 
 import type { RankingItem } from "../types/ranking-item";
 
@@ -92,6 +95,15 @@ async function loadValuesContext(config: MetricConfig): Promise<ValuesContext | 
         value: r.value,
         rank: r.rank ?? null,
       }));
+
+    // 手動投入 metric (fetcherKey:"manual") は page-data-batch を通らないため app/stats の行が
+    // rank を持たない。deriveFeaturedTop は rank!=null の行しか使わないので、そのままだと
+    // 全行が捨てられ latestTop=null になり、一覧カードの「1 位」が空欄になる
+    // (2026-08-05 実測: ambulance-hospital-arrival-time / pachinko-shop-density-per-10k)。
+    // 配信側 generate-ranking-values は同じ問題を deriveRanks で既に解決しているので、
+    // 順位規則を二重実装せずそれを再利用する (条件も buildPartitions と揃える)。
+    if (latestRows.every((r) => r.rank == null)) deriveRanks(latestRows);
+
     const latestTop = deriveFeaturedTop(latestRows);
 
     return { yearCodes: years, latestTop };
