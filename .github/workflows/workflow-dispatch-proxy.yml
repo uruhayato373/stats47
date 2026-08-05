@@ -1,0 +1,212 @@
+name: Workflow Dispatch Proxy
+
+# クラウドセッションから workflow_dispatch を代理実行する。
+#
+# ## なぜ要るか (2026-08-05 実測)
+#
+# Claude Code on the web のセッションは **GitHub App のインストールトークン**で動いており、
+# `actions: write` を持たない。workflow_dispatch を直接叩くと 403 で落ちる:
+#
+#   POST /repos/uruhayato373/stats47/actions/workflows/sync-snapshots.yml/dispatches
+#   → 403 Resource not accessible by integration
+#
+# App の権限セットはアプリ発行元 (Anthropic) が定義するので、リポジトリ側から追加できない。
+# 一方 **develop への push はできる**。そして CI 内から `GITHUB_TOKEN` +
+# `permissions: actions: write` で `gh workflow run` する経路は
+# `ai-content-generate-daily.yml` が毎晩実証している (run の出現を確認する hard gate 付き)。
+#
+# この 2 つを合成したのが本 workflow。request JSON を develop に push すれば、
+# **workflow_dispatch でしか起動できない workflow をクラウドから起動できる**。
+#
+# ## 使い方 (クラウドセッション)
+#
+#   data/workflow-dispatch-requests.json を作って develop へ commit + push:
+#   {
+#     "workflow": "sync-snapshots.yml",
+#     "inputs": { "only": "ranking-items" },
+#     "ref": "develop",
+#     "reason": "退役 metric を R2 から落とす",
+#     "requestedAt": "2026-08-05T01:00:00Z"
+#   }
+#
+# ★`requestedAt` は再投入のたびに更新する。paths フィルタは diff で判定するので、
+#   同じ内容を書き直しても発火しない (data-refresh で過去に踏んだ罠)。
+#
+# request は成否によらず CI が消費 (git rm + commit-back) する。残すと同内容の再 push が
+# 発火しなくなるため。
+#
+# ## 安全設計
+#
+# - **allowlist**: 起動できる workflow を明示列挙する。develop へ push できる人は workflow
+#   自体を編集できるので権限昇格の防止にはならないが、typo を弾き、何が代理起動されうるかを
+#   1 箇所で監査できるようにする
+# - **ref は develop / main のみ**
+# - inputs は文字列としてそのまま渡す (dispatch 先が型を持たないため)
+# - `${{ }}` の値はすべて env 経由で渡す (式インジェクション対策)
+
+on:
+  push:
+    branches: [develop]
+    paths: ['data/workflow-dispatch-requests.json']
+  workflow_dispatch:
+    inputs:
+      workflow:
+        description: '起動する workflow ファイル名 (例: sync-snapshots.yml)'
+        required: true
+      inputs_json:
+        description: 'dispatch 先へ渡す inputs の JSON (例: {"only":"ranking-items"})'
+        required: false
+        default: '{}'
+      ref:
+        description: 'dispatch 先の ref (develop | main)'
+        required: false
+        default: 'develop'
+
+permissions:
+  contents: write # request の消費 commit-back
+  actions: write # gh workflow run (これが無いと 403。クラウドの App トークンに欠けているのもこれ)
+
+concurrency:
+  group: workflow-dispatch-proxy
+  cancel-in-progress: false
+
+jobs:
+  proxy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: 🧭 Resolve request
+        id: resolve
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_WORKFLOW: ${{ inputs.workflow }}
+          INPUT_INPUTS_JSON: ${{ inputs.inputs_json }}
+          INPUT_REF: ${{ inputs.ref }}
+        run: |
+          set -euo pipefail
+          REQ=data/workflow-dispatch-requests.json
+
+          if [ "$EVENT_NAME" = "push" ]; then
+            if [ ! -f "$REQ" ]; then
+              # request を消費した commit-back 自身の push。何もしない
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              echo "request file が無い push (消費 commit) のため何もしない"
+              exit 0
+            fi
+            WORKFLOW=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.workflow??''))")
+            INPUTS=$(node -e "const r=require('./$REQ');process.stdout.write(JSON.stringify(r.inputs??{}))")
+            REF=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.ref??'develop'))")
+            REASON=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.reason??''))")
+          else
+            WORKFLOW="$INPUT_WORKFLOW"
+            INPUTS="$INPUT_INPUTS_JSON"
+            REF="${INPUT_REF:-develop}"
+            REASON="manual dispatch"
+          fi
+
+          # --- allowlist: 代理起動を許す workflow を明示する ---------------------------
+          # 実需が出たら 1 行足す。ここに無いものは typo か想定外の呼び出し。
+          case "$WORKFLOW" in
+            sync-snapshots.yml|\
+            fetch-metrics-weekly.yml|\
+            purge-cdn.yml|\
+            generate-ogp-images.yml|\
+            publish-blog.yml|\
+            regenerate-blog-svgs.yml|\
+            gsc-auto-resubmit-daily.yml|\
+            r2-maintenance.yml) ;;
+            *)
+              echo "::error::allowlist 外の workflow: '${WORKFLOW}' — .github/workflows/workflow-dispatch-proxy.yml の case に追加するか、名前を確認する"
+              exit 1
+              ;;
+          esac
+
+          case "$REF" in
+            develop|main) ;;
+            *) echo "::error::ref は develop / main のみ (指定: '${REF}')"; exit 1 ;;
+          esac
+
+          if ! echo "$INPUTS" | node -e "JSON.parse(require('node:fs').readFileSync(0,'utf8'))" 2>/dev/null; then
+            echo "::error::inputs が JSON として不正: ${INPUTS}"
+            exit 1
+          fi
+
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          echo "workflow=$WORKFLOW" >> "$GITHUB_OUTPUT"
+          echo "ref=$REF" >> "$GITHUB_OUTPUT"
+          {
+            echo "inputs<<__EOF__"
+            echo "$INPUTS"
+            echo "__EOF__"
+          } >> "$GITHUB_OUTPUT"
+          echo "解決: ${WORKFLOW} (ref=${REF}) inputs=${INPUTS} — ${REASON}"
+
+      - name: 🚀 Dispatch and verify the run appeared
+        if: ${{ steps.resolve.outputs.skip != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_WORKFLOW: ${{ steps.resolve.outputs.workflow }}
+          TARGET_REF: ${{ steps.resolve.outputs.ref }}
+          TARGET_INPUTS: ${{ steps.resolve.outputs.inputs }}
+        run: |
+          set -euo pipefail
+
+          # inputs を -f k=v の配列へ (値に空白が入っても壊れないよう配列で組む)
+          ARGS=()
+          while IFS= read -r pair; do
+            [ -n "$pair" ] && ARGS+=("-f" "$pair")
+          done < <(echo "$TARGET_INPUTS" | jq -r 'to_entries[] | "\(.key)=\(.value)"')
+
+          LATEST_BEFORE=$(gh run list --workflow "$TARGET_WORKFLOW" --limit 1 \
+            --json databaseId --jq '.[0].databaseId // 0')
+
+          gh workflow run "$TARGET_WORKFLOW" --ref "$TARGET_REF" "${ARGS[@]+"${ARGS[@]}"}"
+
+          # dispatch は非同期。「起動した」と言い切らず run の出現を実測する
+          # (ai-content-generate-daily.yml と同じ hard gate)
+          for _ in $(seq 1 12); do
+            sleep 5
+            LATEST_AFTER=$(gh run list --workflow "$TARGET_WORKFLOW" --limit 1 \
+              --json databaseId --jq '.[0].databaseId // 0')
+            if [ "$LATEST_AFTER" != "$LATEST_BEFORE" ]; then
+              URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${LATEST_AFTER}"
+              echo "✅ ${TARGET_WORKFLOW} を起動 (run ${LATEST_AFTER})"
+              {
+                echo "### 代理起動: \`${TARGET_WORKFLOW}\`"
+                echo ""
+                echo "- ref: \`${TARGET_REF}\`"
+                echo "- inputs: \`${TARGET_INPUTS}\`"
+                echo "- run: ${URL}"
+              } >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+          done
+          echo "::error::${TARGET_WORKFLOW} の run を確認できなかった (dispatch が届いていない)"
+          exit 1
+
+      - name: 🧹 Consume request file (push イベント時のみ・commit-back)
+        # 成否によらず消費する。残すと同内容の再 push が paths フィルタに掛からず発火しない。
+        if: ${{ always() && github.event_name == 'push' && steps.resolve.outputs.skip != 'true' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q --ignore-unmatch data/workflow-dispatch-requests.json
+          if git diff --cached --quiet; then echo "commit する変更なし"; exit 0; fi
+          git commit -q -m "chore(ci): consume workflow-dispatch request [skip ci]"
+          # 汚れた作業ツリーで rebase が落ちる実障害の対策 (data-refresh と同じ)
+          git stash push --include-untracked --quiet || true
+          for _ in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ request を消費した"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::request の消費に失敗した (同内容の再 push が発火しなくなる)"
+          exit 1

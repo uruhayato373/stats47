@@ -26,7 +26,8 @@ feature/* ──(直 merge)──▶ develop ──(PR + CI)──▶ main（デ
 | `gh` CLI | あり | **無い** |
 | `curl` で GitHub API | 可 | **不可** (★下記) |
 | `git push` 先 | 任意ブランチ | セッション指定ブランチに制限されることがある |
-| GitHub Actions 起動 (`gh workflow run` / dispatch) | 可 | **不可** (連携トークンに `actions:write` 無し → 403) |
+| GitHub Actions 起動 (`gh workflow run` / dispatch) | 可 | **直接は不可** (連携トークンに `actions:write` 無し → 403) → **proxy 経由で可** |
+| dispatch-only workflow の代理起動 | 可 | **可** — `data/workflow-dispatch-requests.json` を develop に push (`workflow-dispatch-proxy.yml`) |
 | R2 直接書き込み | 不可 (CI 専用) | 不可 (同左) |
 
 **判定**: `command -v gh` が無い / remote 環境 ⇒ **web モード**。
@@ -51,7 +52,15 @@ web モードでは下表の MCP ツールだけを使う。
 - `actions_list` は応答が大きくトークン上限に当たることがある。その場合は結果がファイルに
   保存されるので、`python3 -c "import json; ..."` で `run_number` / `head_sha` / `conclusion`
   だけを抜く (全文を読まない)。
-- **workflow の dispatch は不可** (403)。記事・広告の R2 公開は下記「データ公開」のとおり **push トリガー**に委ねる（develop への push が公開を発火）。`gh workflow run` を案内するだけで終わらせない。
+- **workflow の直接 dispatch は不可** (403)。代わりに 2 経路ある: ①記事・広告の R2 公開は下記「データ公開」のとおり
+  **push トリガー**（develop への push が公開を発火）。②それ以外の dispatch-only workflow は
+  **`workflow-dispatch-proxy.yml`** で代理起動する:
+  ```jsonc
+  // data/workflow-dispatch-requests.json を develop に commit + push
+  { "workflow": "sync-snapshots.yml", "inputs": { "only": "ranking-items" },
+    "ref": "develop", "reason": "...", "requestedAt": "<ISO・毎回更新>" }
+  ```
+  proxy の run が対象 run の URL を step summary に出す。`gh workflow run` を案内するだけで終わらせない。
 - branch push が制限される場合は可能な範囲で実行し、不可なら明示してユーザーに依頼する。
 
 ### ★CI が「失敗」に見えるが実は superseded (cancelled) のケース
