@@ -1,0 +1,7 @@
+{
+  "workflow": "sync-snapshots.yml",
+  "inputs": { "only": "page-components" },
+  "ref": "main",
+  "reason": "テーマカタログの編成変更 (タイル role 再割当 + 重複チャート 10 本削除) を R2 app/page-components へ反映する。PR #732 マージ済み",
+  "requestedAt": "2026-08-05T06:54:35Z"
+}
