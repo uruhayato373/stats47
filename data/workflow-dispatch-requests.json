@@ -1,0 +1,7 @@
+{
+  "workflow": "purge-cdn.yml",
+  "inputs": {},
+  "ref": "main",
+  "reason": "退役 metric の旧カード (失業対策事業費) が CDN エッジに残っている報告への対応。ゾーン全体 purge_everything で site HTML も落とす",
+  "requestedAt": "2026-08-05T05:15:40Z"
+}
