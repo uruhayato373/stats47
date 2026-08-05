@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { RailCard, RailLinkItem, RailLinkList } from "@/components/surface";
 
@@ -11,39 +11,14 @@ import { trackRailClick } from "@/lib/analytics/events";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
+import type { SidebarRankingItem } from "./select-sidebar-items";
+
 
 
 const MAX_COLLAPSED_ITEMS = 7;
-const MAX_EXPANDED_ITEMS = 20;
-
-/** サイドバーに必要な最小限のランキング項目型 */
-interface SidebarRankingItem {
-    rankingKey: string;
-    areaType: string;
-    title: string;
-    subtitle?: string | null;
-    demographicAttr?: string | null;
-    normalizationBasis?: string | null;
-    groupKey?: string | null;
-    /** 最新年の「1 位」(items.json の top1)。mini 表示用。欠損時は text-first に縮退 */
-    top1?: { rank?: number; areaName: string; value: string | null } | null;
-    /** 値の単位 (top1 の値に付す)。 */
-    unit?: string;
-}
-
-/** 文字列の簡易ハッシュ（安定ソート用） */
-function hashString(s: string): number {
-    let h = 0;
-    for (let i = 0; i < s.length; i++) {
-        const c = s.charCodeAt(i);
-        h = (h << 5) - h + c;
-        h |= 0;
-    }
-    return h;
-}
 
 interface RankingSidebarClientProps {
-    /** ランキング項目リスト */
+    /** 選別済みのランキング項目リスト (Container が selectSidebarItems で最大 20 件に絞る) */
     items: SidebarRankingItem[];
     /** 現在表示中のランキングキー */
     rankingKey: string;
@@ -61,80 +36,9 @@ interface RankingSidebarClientProps {
     categoryLinkPrefix?: string;
 }
 
-/**
- * 現在ページと同グループを除外し、各グループから代表1件のみ表示。
- * 同タイトル優先・安定ソートで関連アイテムを選別する。
- * 同グループのアイテムは RelatedGroupCard で表示するため、ここでは重複を避ける。
- */
-function selectSidebarItems(
-    items: SidebarRankingItem[],
-    rankingKey: string,
-    areaType: string,
-    max: number
-): SidebarRankingItem[] {
-    const currentItem = items.find(
-        (i) => i.rankingKey === rankingKey && i.areaType === areaType
-    );
-    const currentGroupKey = currentItem?.groupKey;
-
-    // 現在ページ自身と、同グループのアイテムを除外
-    const filtered = items.filter((i) => {
-        if (i.rankingKey === rankingKey && i.areaType === areaType) return false;
-        if (currentGroupKey && i.groupKey === currentGroupKey) return false;
-        return true;
-    });
-
-    // 各グループから代表1件のみ残す（groupKey がないものはそのまま）
-    // 代表 = ranking_key が groupKey と一致するもの（総数）
-    // 代表がカテゴリ内に存在しない場合はグループごと非表示（別カテゴリに総数がある）
-    const groupMap = new Map<string, SidebarRankingItem>();
-    const rest: SidebarRankingItem[] = [];
-    for (const i of filtered) {
-        if (!i.groupKey) {
-            rest.push(i);
-            continue;
-        }
-        const existing = groupMap.get(i.groupKey);
-        if (!existing) {
-            groupMap.set(i.groupKey, i);
-        } else {
-            const iIsRepresentative = i.rankingKey === i.groupKey;
-            const existingIsRepresentative = existing.rankingKey === existing.groupKey;
-            if (iIsRepresentative && !existingIsRepresentative) {
-                groupMap.set(i.groupKey, i);
-            } else if (!existingIsRepresentative && !iIsRepresentative && !i.normalizationBasis && existing.normalizationBasis) {
-                groupMap.set(i.groupKey, i);
-            }
-        }
-    }
-    // 代表（normalizationBasis なし）のみ表示。非代表しかない場合は除外
-    for (const [, item] of groupMap) {
-        if (!item.normalizationBasis || item.rankingKey === item.groupKey) {
-            rest.push(item);
-        }
-    }
-
-    const currentTitle = currentItem?.title;
-    const sameTitle = currentTitle
-        ? rest.filter((i) => i.title === currentTitle)
-        : [];
-    const otherTitle = currentTitle
-        ? rest.filter((i) => i.title !== currentTitle)
-        : rest;
-
-    const seed = `${rankingKey}-${areaType}`;
-    const sortByHash = (a: SidebarRankingItem, b: SidebarRankingItem) =>
-        hashString(seed + a.rankingKey) - hashString(seed + b.rankingKey);
-    sameTitle.sort(sortByHash);
-    otherTitle.sort(sortByHash);
-
-    return [...sameTitle, ...otherTitle].slice(0, max);
-}
-
 export function RankingSidebarClient({
     items,
     rankingKey,
-    areaType,
     categoryName,
     categoryIcon,
     categoryKey,
@@ -144,10 +48,8 @@ export function RankingSidebarClient({
     const [isExpanded, setIsExpanded] = useState(false);
     const effectiveExpanded = isDesktop || isExpanded;
 
-    const others = useMemo(
-        () => selectSidebarItems(items, rankingKey, areaType, MAX_EXPANDED_ITEMS),
-        [items, rankingKey, areaType]
-    );
+    // 選別は Container (server) が済ませている。ここは表示件数の開閉だけを持つ
+    const others = items;
 
     const displayOthers = effectiveExpanded
         ? others

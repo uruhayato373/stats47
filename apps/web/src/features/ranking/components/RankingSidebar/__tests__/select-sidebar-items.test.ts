@@ -1,58 +1,25 @@
 import { describe, expect, it } from "vitest";
 
-import type { RankingItem } from "@stats47/ranking";
+import {
+  MAX_SIDEBAR_ITEMS,
+  selectSidebarItems,
+  type SidebarRankingItem,
+} from "../select-sidebar-items";
 
-// selectSidebarItems is not exported, so we test via the module internals
-// For now, import the client module and extract the function
-// Since selectSidebarItems is a private function in RankingSidebarClient,
-// we'll test its behavior indirectly by testing the hash stability
+/**
+ * 2026-08-05 まで、このテストは selectSidebarItems のロジックをテスト内へ複製していた。
+ * 複製版は group 代表選別と normalizationBasis 除外を持たず、実装と乖離したまま
+ * 常に緑になっていた。ここでは実関数だけを検証する。
+ */
 
-/** 文字列の簡易ハッシュ（RankingSidebarClient と同じ実装） */
-function hashString(s: string): number {
-  let h = 0;
-  for (let i = 0; i < s.length; i++) {
-    const c = s.charCodeAt(i);
-    h = (h << 5) - h + c;
-    h |= 0;
-  }
-  return h;
-}
-
-/** selectSidebarItems のロジックを再現 */
-function selectSidebarItems(
-  items: Pick<RankingItem, "rankingKey" | "areaType" | "title">[],
-  rankingKey: string,
-  areaType: string,
-  max: number,
-) {
-  const currentItem = items.find(
-    (i) => i.rankingKey === rankingKey && i.areaType === areaType
-  );
-  const rest = items.filter(
-    (i) => !(i.rankingKey === rankingKey && i.areaType === areaType)
-  );
-
-  const currentTitle = currentItem?.title;
-  const sameTitle = currentTitle
-    ? rest.filter((i) => i.title === currentTitle)
-    : [];
-  const otherTitle = currentTitle
-    ? rest.filter((i) => i.title !== currentTitle)
-    : rest;
-
-  const seed = `${rankingKey}-${areaType}`;
-  const sortByHash = (a: { rankingKey: string }, b: { rankingKey: string }) =>
-    hashString(seed + a.rankingKey) - hashString(seed + b.rankingKey);
-  sameTitle.sort(sortByHash);
-  otherTitle.sort(sortByHash);
-
-  return [...sameTitle, ...otherTitle].slice(0, max);
-}
-
-const makeItem = (key: string, title = "テスト") => ({
+const makeItem = (
+  key: string,
+  overrides: Partial<SidebarRankingItem> = {},
+): SidebarRankingItem => ({
   rankingKey: key,
-  areaType: "prefecture" as const,
-  title,
+  areaType: "prefecture",
+  title: "テスト",
+  ...overrides,
 });
 
 describe("selectSidebarItems", () => {
@@ -68,27 +35,70 @@ describe("selectSidebarItems", () => {
     expect(result).toHaveLength(7);
   });
 
+  it("既定の上限は Client の展開表示件数と同じ 20 件", () => {
+    const items = Array.from({ length: 137 }, (_, i) => makeItem(`item-${i}`));
+    const result = selectSidebarItems(items, "item-0", "prefecture");
+    expect(MAX_SIDEBAR_ITEMS).toBe(20);
+    expect(result).toHaveLength(MAX_SIDEBAR_ITEMS);
+  });
+
   it("同じ入力で同じ順序を返す（安定ソート）", () => {
     const items = [makeItem("x"), makeItem("y"), makeItem("z"), makeItem("w")];
     const result1 = selectSidebarItems(items, "x", "prefecture", 10);
     const result2 = selectSidebarItems(items, "x", "prefecture", 10);
     expect(result1.map((i) => i.rankingKey)).toEqual(
-      result2.map((i) => i.rankingKey)
+      result2.map((i) => i.rankingKey),
     );
   });
 
   it("同タイトルのアイテムを優先する", () => {
     const items = [
-      makeItem("current", "人口"),
-      makeItem("same-title", "人口"),
-      makeItem("other", "経済"),
+      makeItem("current", { title: "人口" }),
+      makeItem("same-title", { title: "人口" }),
+      makeItem("other", { title: "経済" }),
     ];
     const result = selectSidebarItems(items, "current", "prefecture", 10);
     expect(result[0].rankingKey).toBe("same-title");
   });
 
   it("空配列でも安全に動作する", () => {
-    const result = selectSidebarItems([], "any", "prefecture", 10);
+    expect(selectSidebarItems([], "any", "prefecture", 10)).toEqual([]);
+  });
+
+  // ここから下は複製版テストに存在せず、実装だけが持っていた挙動
+
+  it("現在ページと同じ group のアイテムを除外する（RelatedGroupCard と重複させない）", () => {
+    const items = [
+      makeItem("pop-total", { groupKey: "pop-total" }),
+      makeItem("pop-total-male", { groupKey: "pop-total" }),
+      makeItem("other", { groupKey: null }),
+    ];
+    const result = selectSidebarItems(items, "pop-total", "prefecture", 10);
+    expect(result.map((i) => i.rankingKey)).toEqual(["other"]);
+  });
+
+  it("group からは代表 (rankingKey === groupKey) を 1 件だけ残す", () => {
+    const items = [
+      makeItem("current"),
+      makeItem("income-per-capita", {
+        groupKey: "income",
+        normalizationBasis: "per_capita",
+      }),
+      makeItem("income", { groupKey: "income" }),
+    ];
+    const result = selectSidebarItems(items, "current", "prefecture", 10);
+    expect(result.map((i) => i.rankingKey)).toEqual(["income"]);
+  });
+
+  it("代表が居ない group は丸ごと落とす（総数は別カテゴリにある）", () => {
+    const items = [
+      makeItem("current"),
+      makeItem("income-per-capita", {
+        groupKey: "income",
+        normalizationBasis: "per_capita",
+      }),
+    ];
+    const result = selectSidebarItems(items, "current", "prefecture", 10);
     expect(result).toEqual([]);
   });
 });

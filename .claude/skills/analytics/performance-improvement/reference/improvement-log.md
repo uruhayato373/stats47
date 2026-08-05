@@ -209,3 +209,80 @@ _Appended by improvement-triage 2026-07-03_
 - ranking mapの削除・背景tile停止: 2026-08-02の失敗を固定した既存契約に反し、今回の実測もpreload不整合を示している。
 
 - **判定**: 実装前。対象6件を `effect/pending` ではなく `pending` として改善バックログへ登録する。
+
+---
+
+### [MCP-PERF-2026-08-05-IMPL] 上記監査の実装 (Step 1-4 + STATIC-CACHE)
+
+- **実装日**: 2026-08-05 (デプロイ前)
+- **環境**: 会社 Windows PC。dev サーバーは hook で機械ブロックされるため、検証は
+  unit test / type-check / build と**デプロイ後の本番実測**で行う。Chrome DevTools MCP と
+  Cloudflare MCP は本セッションに未ロード (`.mcp.json` 修正前に起動したため) で、
+  after の trace 取得はデプロイ後の別セッションに残す。
+
+#### 変更内容と機械的検証
+
+| ID | 変更 | 追加した決定的契約 |
+|---|---|---|
+| `PERF-RANKING-LCP-02` | `RankingPageHeadAssets.tsx`: 先頭タイルのみ `media` を外し全 viewport で preload (fetchPriority=high 維持)、2〜4 枚目は desktop 限定のまま。`layout.tsx` の cartocdn preconnect×1 + dns-prefetch×4 を削除 | `ranking-tile-preload-contract.test.tsx` (4): renderToStaticMarkup で実 HTML を検査。**mutation テスト実施** — media を全枚へ戻すと `discovers the LCP tile on every viewport` が落ちることを実測確認 |
+| `PERF-RANKING-PAYLOAD-01` (sidebar) | `selectSidebarItems` / `hashString` / `SidebarRankingItem` を `select-sidebar-items.ts` へ pure module 化。Container (server) が 20 件へ選別してから Client へ渡す | `select-sidebar-items.test.ts` (9): テスト内複製を廃止し実関数を import。複製版が持っていなかった group 代表選別・normalizationBasis 除外・代表不在 group の除外を追加検証 |
+| `PERF-AREA-DOM-01` | `AreaProfileSidebar.tsx`: `SIDEBAR_ITEM_LIMIT = 12` で slice。見出しの件数は総数のまま | `AreaProfileSidebar.test.tsx` (4): 40 件渡して描画リンク 24 (12+12)、見出しは総数、0 件でカード非描画 |
+| `A11Y-AREA-CONTRAST-01` | `GenderPairedKpiGrid.tsx`: `text-[#3b82f6]`/`text-[#ec4899]` → `text-blue-700 dark:text-blue-400` / `text-pink-700 dark:text-pink-400`。「男性 / 女性」の可視ラベルを追加 | `GenderPairedKpiGrid.test.tsx` (4): 生 hex 不使用、light/dark 両クラス、非色識別、値と順位の維持 |
+| `PERF-STATIC-CACHE-01` | **Cloudflare Rule ではなく `apps/web/public/_headers` で解決**（下記） | `static-assets-headers.test.ts` (3): 対象が `/_next/static/*` の 1 行だけであること、splat 1 個以内 |
+
+- 検証: `npm run type-check --workspace apps/web` pass /
+  `npx vitest run --root apps/web src/features/ranking src/features/area-profile src/features/area-databook`
+  **28 files 165 tests pass** (回帰なし)。
+
+#### contrast の実測値 (単色では light/dark を両立できない)
+
+`--card` は light `0 0% 100%` / dark `217 33% 17%`。WCAG 相対輝度で計算した contrast:
+
+| 色 | 白地 | dark --card | 判定 |
+|---|---:|---:|---|
+| `#3b82f6` (旧・男) | 3.68 | 4.03 | light 不足 (監査値 3.67 と一致) |
+| `#ec4899` (旧・女) | 3.53 | 4.20 | light 不足 (監査値 3.52 と一致) |
+| blue-700 `#1d4ed8` | **6.70** | 2.21 | light 専用 |
+| pink-700 `#be185d` | **6.04** | 2.45 | light 専用 |
+| blue-400 `#60a5fa` | 2.54 | **5.83** | dark 専用 |
+| pink-400 `#f472b6` | 2.65 | **5.60** | dark 専用 |
+
+濃色は dark 地で 2 前後まで落ちるため、単色置換では要件を満たせない。light/dark で明度を分けた。
+reading-zone の dark (`220 6% 12%`) でも blue-400 6.56 / pink-400 6.30 で満たす。
+
+#### `PERF-STATIC-CACHE-01` を Cloudflare Rule ではなく `_headers` にした理由
+
+before 実測 (2026-08-05・監査と同じ資産):
+
+```
+GET https://stats47.jp/_next/static/css/41d7b5e2cb6a9f4d.css
+Cache-Control: public, max-age=0, must-revalidate
+CF-Cache-Status: HIT
+```
+
+Cloudflare 公式 ([Workers static assets headers](https://developers.cloudflare.com/workers/static-assets/headers/)、
+アクセス 2026-08-05) は、assets ディレクトリ直下の `_headers` で
+「fingerprinted assets により強いブラウザキャッシュを設定する」ことを推奨し、
+`/static/* Cache-Control: public, max-age=31556952, immutable` を例示している。
+
+`public/` が assets 直下へ複製されることは実装で確認した
+(`@opennextjs/aws` の `createAssets.js`: `public/* => *`、`fs.cpSync(appPublicPath, outputPath)`)。
+`wrangler.toml` の `[assets] directory = ".open-next/assets"` がその出力を指す。
+
+これにより**ダッシュボード操作なしで in-repo・レビュー可能・テスト付き・revert 可能**に解決できる。
+Cache Response Rule は同じ効果を外部設定として持つため、rollback が git に残らない。
+
+- 未検証: `_headers` が実際に適用されるかは**デプロイ後に本番で確認する**。公式仕様と
+  複製経路は確認済みだが、この環境でビルド成果物を実機検証していない。
+  併せて「Worker が生成するレスポンスには適用されない」という制約があるため、
+  `/_next/static/*` が assets 層から配信されていることも同時に確認する。
+
+#### 未実施 (このセッションでは進められないもの)
+
+| ID | 状態 |
+|---|---|
+| `PERF-RANKING-PAYLOAD-01` (TopoJSON 1.9MB の削減) | 未着手。sidebar 分のみ実装。別段階 |
+| `PERF-WORKER-P99-01` | **未着手**。Cloudflare MCP がこのセッションに未ロードのため read-only 調査ができない。推測でコードを変更しない |
+
+- **判定**: `effect/pending`。デプロイ前のため before/after の比較なし。
+  デプロイ後に LCP (PSI)・ranking HTML byte・`/areas/13000` DOM・static asset のヘッダを実測して判定する。
