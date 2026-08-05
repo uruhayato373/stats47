@@ -286,3 +286,32 @@ Cache Response Rule は同じ効果を外部設定として持つため、rollba
 
 - **判定**: `effect/pending`。デプロイ前のため before/after の比較なし。
   デプロイ後に LCP (PSI)・ranking HTML byte・`/areas/13000` DOM・static asset のヘッダを実測して判定する。
+
+#### デプロイ後の本番実測 (2026-08-05・PR #731 merge 02:02:54Z / deploy success)
+
+| 対象 | 実測 | 判定 |
+|---|---|---|
+| `/_next/static/css/*.css` の `Cache-Control` | **`public, max-age=31536000, immutable`** (before: `public, max-age=0, must-revalidate`) | ✅ 完了条件達成 |
+| ranking 先頭タイル preload | `/tiles/light_all/5/28/12@2x.png` が **`fetchpriority=high` かつ `media` なし**、残り 3 枚は `media="(min-width: 1024px)"` | ✅ 発見機構は達成 |
+| area rail の `nav` あたり `/ranking/` リンク数 | **12 / 12 / 12 / 12** (4 nav = 上位・下位 × desktop・mobile) | ✅ 上限は達成 |
+| area の男女 KPI | 生 hex 消滅、`text-blue-700` + `dark:text-blue-400` を確認、「男性 / 女性」ラベルあり | ✅ 実装は達成 |
+| ranking HTML (非圧縮) | 1,232,628 bytes (audit before 1,287,062) = **約 4% 減** | ⚠️ 50% 目標には遠い。残りは TopoJSON |
+
+**PSI の before baseline は取得済み** (`.claude/state/metrics/psi/psi-batch-2026-08-04T18-46-50.json`、
+デプロイ前日 18:34-18:39 UTC):
+
+| URL (mobile) | LCP | Perf | A11y |
+|---|---:|---:|---:|
+| `/ranking/total-population` | **9,347ms** | 42 | 95 |
+| `/areas/13000` | **5,092ms** | 47 | 97 |
+
+日次 PSI cron (JST 02:00) が after を自動取得するため、LCP と accessibility スコアの
+判定に手動実行は要らない。**この環境から PSI API へは到達できない** (`http=000`、
+社内プロキシ)。Chrome DevTools MCP も未ロード、ブラウザペインは stats47.jp を
+ポリシーでブロックするため、**Chrome の DOM ノード数 (audit の 9,101) は再測定できていない**。
+
+- **計測ギャップ**: PSI batch は `LCP_ms / TBT_ms / CLS / FCP_ms / TTI_ms / SI_ms / TTFB_ms`
+  しか保存せず **`dom-size` を持たない**。`PERF-AREA-DOM-01` の完了条件「DOM 9,101 から
+  70% 以上削減」は、現状どの自動パイプラインでも検証できない。rail の上限 (12/nav) は
+  本番で確認済みなので実装は効いているが、DOM 総数の裏取りには collector への
+  `dom-size` 追加か Chrome 実測が要る。

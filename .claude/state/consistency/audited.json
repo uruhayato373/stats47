@@ -1,21 +1,7 @@
 {
-  "hash": "33af1e950917725f36241e2068b45952807c3e9bc3d28b6bb2cc255405bac58f",
-  "audited_at": "2026-08-05T02:02:41",
+  "hash": "53477b5244030f18d1e62483d91e8afae9c59163711f155612a1f7f5bdcbadb0",
+  "audited_at": "2026-08-05T02:13:40",
   "files": [
-    ".claude/rules/local-environment.md",
-    ".claude/scripts/blog/fix-broken-internal-links.mjs",
-    ".claude/scripts/blog/fix-source-link-placement.mjs",
-    ".claude/scripts/lib/__tests__/check-file-url-guard.test.cjs",
-    ".claude/scripts/lib/check-file-url-guard.cjs",
-    ".claude/scripts/lib/experiments-state.mjs",
-    ".claude/scripts/lib/metrics-reader.mjs",
-    ".claude/scripts/lib/record-claude-usage.mjs",
-    ".claude/scripts/lib/summarize-claude-execution.mjs",
-    ".claude/scripts/metrics/update-history-csv.mjs",
-    ".claude/scripts/search-growth/analyze.mjs",
-    ".claude/scripts/search-growth/collect.mjs",
-    ".claude/scripts/search-growth/normalize.mjs",
-    ".claude/scripts/search-growth/report.mjs",
-    ".claude/skills/analytics/performance-improvement/SKILL.md"
+    ".claude/skills/analytics/performance-improvement/reference/improvement-log.md"
   ]
 }
