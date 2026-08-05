@@ -53,6 +53,18 @@ const cacheKey = (metricKey: string, areaCode: string) =>
   `${metricKey}:${areaCode}`;
 
 /**
+ * チャート領域に何を出すか。
+ *
+ * 「描けない」を 1 つの `null` にまとめると、読者には全部「推移データがありません」に
+ * 見えてしまう。だが単年しか調査されていない指標 (鉄道駅数=2024年のみ 等) は
+ * データが欠けているのではなく**そもそも推移が存在しない**ので、そう書いた方が正しい。
+ */
+type ChartState =
+  | { kind: "chart"; data: LineChartData }
+  | { kind: "single-year"; yearName: string }
+  | { kind: "none" };
+
+/**
  * 全国系列の凡例名。
  *
  * ★47 県平均を「全国」と称してはならない (総人口のような実数系は全国値の 1/47 になる)。
@@ -71,6 +83,29 @@ function nationalSeriesName(result: MetricTimeseriesResult | undefined): string 
  */
 function isNationalBaselineIndex(unit: string): boolean {
   return unit.includes("全国=100") || unit.includes("全国＝100");
+}
+
+/** チャート見出しの説明文。実際に描いた系列から書く (比較線は指標によって出ない) */
+function describePanel(state: ChartState, areaName: string): string {
+  if (state.kind === "single-year") return `${state.yearName}時点の値`;
+  if (state.kind === "none") return `${areaName}の推移`;
+  const [primary, comparison] = state.data.lines;
+  return comparison
+    ? `${primary.name}の推移（破線は${comparison.name}）`
+    : `${primary.name}の推移`;
+}
+
+/**
+ * チャートを描けないときの文面。
+ *
+ * 「データがありません」で済ませると、読者には取得失敗との区別が付かない。
+ * 単年しか調査されていない指標はそう明示して、タイルの値・順位と
+ * ランキング導線の方に目を向けてもらう。
+ */
+function emptyMessage(state: ChartState): string {
+  return state.kind === "single-year"
+    ? `${state.yearName}の単年データのため、推移グラフはありません`
+    : "推移データがありません";
 }
 
 /**
@@ -162,8 +197,8 @@ export function MetricSwitcherPanel({
   const nationalResult = seriesCache[cacheKey(effectiveKey, NATIONAL_CODE)];
   const isLoadingSeries = !primaryResult;
 
-  const chartData: LineChartData | null = useMemo(() => {
-    if (!selected) return null;
+  const chartState: ChartState = useMemo(() => {
+    if (!selected) return { kind: "none" };
 
     const unit = selected.unit;
     /** 年ラベル → 行。2 系列を年で突き合わせる */
@@ -225,15 +260,19 @@ export function MetricSwitcherPanel({
           color: "hsl(var(--primary))",
         });
       } else {
-        return null;
+        return { kind: "none" };
       }
     }
 
     const data = [...rows.values()].sort((a, b) =>
       String(a.year).localeCompare(String(b.year)),
     );
-    if (data.length < 2) return null;
-    return { xAxisKey: "year", data, lines, unit };
+    // 1 点では折れ線にならない。ただし「無い」ではなく「単年だけ」と言い分ける
+    if (data.length === 1) {
+      return { kind: "single-year", yearName: String(data[0].year) };
+    }
+    if (data.length === 0) return { kind: "none" };
+    return { kind: "chart", data: { xAxisKey: "year", data, lines, unit } };
   }, [
     selected,
     selectedPrefectureCode,
@@ -298,14 +337,7 @@ export function MetricSwitcherPanel({
         title={selected.title}
         icon={<MapPin className="h-4 w-4 shrink-0 text-primary" />}
         titleClassName="text-base"
-        description={
-          // 比較線は指標によって出ない (指数系・県系列なし) ので、実際に描いた系列から書く
-          chartData && chartData.lines.length > 1
-            ? `${chartData.lines[0].name}の推移（破線は${chartData.lines[1].name}）`
-            : chartData
-              ? `${chartData.lines[0].name}の推移`
-              : `${areaName}の推移`
-        }
+        description={describePanel(chartState, areaName)}
         footer={
           <ChartFooter
             rankingLink={`/ranking/${selected.metricKey}`}
@@ -315,10 +347,10 @@ export function MetricSwitcherPanel({
       >
         {isLoadingSeries ? (
           <ChartLoading height={250} />
-        ) : chartData ? (
-          <LineChartClient chartData={chartData} />
+        ) : chartState.kind === "chart" ? (
+          <LineChartClient chartData={chartState.data} />
         ) : (
-          <ChartEmptyState message="推移データがありません" height={250} />
+          <ChartEmptyState message={emptyMessage(chartState)} height={250} />
         )}
       </ChartPanel>
     </Tabs>

@@ -63,6 +63,7 @@
     "test": "vitest",
     "type-check": "tsc --noEmit",
     "validate:polarity": "tsx scripts/validate-polarity.ts",
+    "audit:money-unit-scale": "tsx scripts/audit-money-unit-scale.ts",
     "validate:survey-master": "tsx scripts/ssds/validate-survey-master-coverage.ts"
   },
   "dependencies": {

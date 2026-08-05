@@ -87,62 +87,6 @@ export const PORTS_CATALOG: ThemeCatalog = {
       "dataSource": "ranking",
       "section": null,
       "sortOrder": 10
-    },
-    {
-      "componentKey": "ports-container-trend",
-      "componentType": "line-chart",
-      "title": "コンテナ取扱個数の推移",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0003130688",
-            "cdCat01": "100"
-          }
-        ],
-        "labels": [
-          "コンテナ個数"
-        ],
-        "seriesColors": [
-          "#06b6d4"
-        ]
-      },
-      "sourceName": "港湾統計",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/port-container-count",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 20
-    },
-    {
-      "componentKey": "ports-passengers-trend",
-      "componentType": "line-chart",
-      "title": "港湾旅客数の推移",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0003130737",
-            "cdCat01": "100"
-          }
-        ],
-        "labels": [
-          "港湾旅客数"
-        ],
-        "seriesColors": [
-          "#22c55e"
-        ]
-      },
-      "sourceName": "港湾統計",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/port-passengers-total",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 30
     }
   ],
   "keywords": [

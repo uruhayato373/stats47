@@ -35,6 +35,29 @@ name: Workflow Dispatch Proxy
 # request は成否によらず CI が消費 (git rm + commit-back) する。残すと同内容の再 push が
 # 発火しなくなるため。
 #
+# ## ★この proxy が保証しないこと (2026-08-05 に実際に踏んだ)
+#
+# 下の verify は **run object が作られたこと**しか確かめない。「作られた」は「実行された」より
+# 弱い主張で、次の経路で作業が黙って消える:
+#
+#   1. dispatch → run が作られる (verify は緑)
+#   2. その run が concurrency group の pending 待ちに入る
+#   3. 同じ group に別の run が来ると、GitHub は pending の 1 本を **cancelled** にする
+#      (`cancel-in-progress: false` でも、pending に保持されるのは 1 本だけ)
+#   4. request は既に消費済みなので誰も再試行しない
+#
+# 実例: `sync-snapshots.yml` (group `r2-write`) の page-components 反映が jobs 0 件のまま
+# cancelled になり、R2 が 3 日前のまま残った。proxy の run は緑だった。
+#
+# **「dispatch した」で終わりにせず、依頼側が成果物そのものを実測すること。** 上の例なら
+# R2 オブジェクトの `last-modified` か中身を見る。proxy の run が緑なことを根拠にしない。
+#
+# ## ★consume commit は `[skip ci]` を持つ
+#
+# これが develop の HEAD になった状態だと、**その commit を head に持つ PR に check が
+# 1 つも付かない** (CI が走らないので status は pending のまま)。dispatch 直後に PR を
+# 開く / 既存 PR がある場合は、後続の実コミットで CI を発火させる必要がある。
+#
 # ## 安全設計
 #
 # - **allowlist**: 起動できる workflow を明示列挙する。develop へ push できる人は workflow

@@ -2,7 +2,7 @@
 title: アフィリエイト Playwright 継続運用・安全化実装仕様
 type: implementation-spec
 date: 2026-07-28
-updated: 2026-07-30
+updated: 2026-08-04
 status: in-progress
 related_backlog: ASP-CONTINUITY-01
 tags: [affiliate, Playwright, automation, operations, safety, measurement]
@@ -76,7 +76,7 @@ Claude Code と Playwright で継続運用するための実装仕様である�
 | もしも / afb は apply 後の承認追跡・harvest が未実装       | `/affiliate-operate`                                   | `ASP-CONTINUITY-01` の主対象              |
 | GA4 operations state が旧データでも `ready`                | `.claude/state/ads/affiliate-operations-latest.json`   | event schema gate が必要                  |
 | 直接配置 2 件に PR 表記不足                                | `.claude/state/ads/compliance-latest.json`             | 公開前 fail gate が必要                   |
-| A8 `check-approval` は提携中一覧の先頭ページだけを読む     | `a8-browser.ts`                                        | 全ページ走査が必要                        |
+| A8 `check-approval` の全ページ走査は実装済 (2026-08-04)    | `a8-browser.ts` `collectPartneredProgramIds`           | 残りは上限到達の `partial` 表現 (§8.1)    |
 | cron は各失敗を echo 後に継続して握り潰す                  | `scout-asp-weekly.sh`                                  | partial / failed を exit と health に反映 |
 | append の失敗復元が `git checkout --`                      | `append-affiliate-ads.ts`                              | 既存未コミット変更を消し得る              |
 | 広告スクリプト純粋コアのテストは 120 件成功                | `node --test .claude/scripts/ads/__tests__/*.test.mjs` | browser adapter と cron の test が不足    |
@@ -395,8 +395,11 @@ eligible impressions
 
 ### 8.1 A8
 
-- `check-approval` を `import-partnered` と同じく全ページ走査へ変更する。
+- ~~`check-approval` を全ページ走査へ変更する。~~ 実装済 (2026-08-04・`collectPartneredProgramIds`)。
+  打ち切りは `import-partnered` の件数判定 (`< 20` で break) ではなく**新規 ID が増えなかったページ**とした。
+  A8 が範囲外 `pageNo` で最終ページを返し続けた場合に件数判定は停止しないため。
 - ページ上限は config 化し、上限到達は `partial/max-pages` とする。
+  (現状は `MAX_PARTNERED_PAGES = 30` のハードコードで、上限到達時は警告ログのみ。呼出側へ `partial` を返していない)
 - session expired を exit 0 の成功にしない。`auth-required` を呼出側へ返す。
 - 既存 status を維持し、正の一致がある applied だけ approved へ進める。
 - `dumpPage` の raw HTML 保存を廃止または sanitize する。

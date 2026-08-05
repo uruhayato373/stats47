@@ -15,8 +15,17 @@ export const disposableIncomeWorkerHouseholds: MetricConfig = {
   "entities": [
     "prefecture",
   ],
+  // e-Stat 実測 (2026-08-05): 0000010112 × L3130 は 1975-2025 の 51 年が連続で存在する
+  // (東京都で確認・単位は全年 円)。2024 単年に絞っていたのは取り込み側の設定で、
+  // データ側の制約ではなかった。この 1 年しか無いことが real-disposable-income /
+  // disposable-income-after-rent (どちらも本指標を分子に持つ計算型) の推移チャートが
+  // 空になる根因だった。
+  //
+  // 上限を 2025 ではなく 2024 に留めるのは、最新年が動くと下の seoTitle /
+  // seoDescription の実数 (1位東京都 637,958円 = 2024年値) が古くなるため。
+  // 2025 への更新は SEO 文面の更新とセットで別途行う。
   "years": {
-    "from": 2024,
+    "from": 1975,
     "to": 2024,
   },
   "yearFormat": "fiscal",

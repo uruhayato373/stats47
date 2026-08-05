@@ -44,6 +44,31 @@ function readText(file) {
   }
 }
 
+/**
+ * git が symlink を通常ファイルとして展開したもの (materialized symlink) かを判定する。
+ *
+ * Windows の `core.symlinks=false` なチェックアウトでは、git は mode 120000 の entry を
+ * 「リンク先の相対パス 1 行だけを含む通常ファイル」として書き出す。`lstat` は symlink と
+ * 認識しないため素朴に内容比較すると必ず不一致になり、リポジトリ側は正しいのに
+ * DG003 が上がり続ける (実測: AGENTS.md が "CLAUDE.md" の 9 バイトファイルになる)。
+ *
+ * 本物のドリフト (mirror が canonical の古い複製になっている等) は引き続き検出したいので、
+ * **「改行を含まない短い文字列」かつ「そこから解決した実体が canonical と同一」** の
+ * 両方を満たすときだけ symlink とみなす。中身が実際の文書なら 1 つ目の条件で落ちる。
+ */
+function isMaterializedSymlink(mirrorAbs, canonicalAbs) {
+  const target = readText(mirrorAbs).trim();
+  // 空・複数行・長すぎるものはパスではなく文書とみなす (PATH_MAX 相当で足切り)。
+  if (!target || target.length > 260 || /[\r\n]/.test(target)) return false;
+  try {
+    const resolved = path.resolve(path.dirname(mirrorAbs), target);
+    if (!fs.existsSync(resolved)) return false;
+    return fs.realpathSync(resolved) === fs.realpathSync(canonicalAbs);
+  } catch {
+    return false;
+  }
+}
+
 function loadConfig(root = DEFAULT_ROOT, configPath = DEFAULT_CONFIG) {
   const absolute = path.resolve(root, configPath);
   const parsed = JSON.parse(fs.readFileSync(absolute, "utf8"));
@@ -229,7 +254,7 @@ function inspectRepository({
       if (fs.lstatSync(mirror).isSymbolicLink()) {
         same = fs.realpathSync(mirror) === fs.realpathSync(canonical);
       } else {
-        same = readText(mirror) === readText(canonical);
+        same = readText(mirror) === readText(canonical) || isMaterializedSymlink(mirror, canonical);
       }
     } catch {
       same = false;
