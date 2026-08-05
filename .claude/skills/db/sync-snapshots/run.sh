@@ -84,6 +84,10 @@ run_task() {
   fi
 }
 
+push_allowed() {
+  [ "$CI" = "true" ] || [ "$GITHUB_ACTIONS" = "true" ] || [ "$ALLOW_LOCAL_R2_WRITE" = "1" ]
+}
+
 FAILED=()
 MATCHED=0
 for task in "${TASKS[@]}"; do
@@ -97,6 +101,25 @@ for task in "${TASKS[@]}"; do
 
   if ! run_task "$label" "$script"; then
     FAILED+=("$label")
+    continue
+  fi
+
+  # ★calculated-stats だけは書いた直後に push する (2026-08-05 実測で必要と判明)。
+  #
+  # 各 task は .local/r2 に書き、push は末尾に 1 回 — が原則だが、**reader は
+  # ローカルミラーを読まない** (fetch.ts: 「ローカル FS ミラー読み取りは廃止。remote が
+  # 唯一の真実源」。R2_PUBLIC_FETCH_URL があれば公開 URL へ直行する)。
+  # したがって後続の ranking-values が calculated-stats の出力を読むには、間に push が要る。
+  # 初回はこれが無く、app/stats は 18 年に更新されたのに app/ranking は 1 年のまま
+  # 旧値 (山形 545,206) を配信していた。
+  # page-data-batch → 即 push → run.sh という data-refresh の構造と同じ理由。
+  # diff-push は差分のみなので、末尾の全体 push と二重になっても無害。
+  if [ "$label" = "calculated-stats" ] && [ "$DRY_RUN" = "0" ] && push_allowed; then
+    echo "── calculated-stats の出力を先に push (後続 ranking-values が remote から読むため) ──"
+    if ! npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats; then
+      echo "❌ calculated-stats の中間 push に失敗"
+      FAILED+=("calculated-stats-push")
+    fi
   fi
 done
 
