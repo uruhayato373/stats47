@@ -1,7 +1,0 @@
-{
-  "workflow": "sync-snapshots.yml",
-  "inputs": { "only": "ranking-values" },
-  "ref": "develop",
-  "reason": "計算型 3 件の app/stats (18/12/18年) を配信 app/ranking へ射影する",
-  "requestedAt": "2026-08-05T13:35:00Z"
-}
