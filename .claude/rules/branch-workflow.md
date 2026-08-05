@@ -19,6 +19,24 @@ PR は **develop → main の 1 段階のみ**。feature/* → develop は直 me
 
 > **データ公開は develop 経由**: `blog-auto-publish.yml` / `publish-affiliate-ads.yml` / `publish-blog.yml` は **develop を checkout** する。feature を main へ直接 squash しただけだと記事/広告が develop に乗らず公開されない。記事を含むデプロイは必ず develop を経由させる (feature → develop で公開発火 → develop → main の PR でコードデプロイ)。
 
+### ★`[skip ci]` の commit-back がヘッドになると PR に check が 1 つも付かない
+
+CI が develop へ書き戻す commit は `[skip ci]` を持つ。**それが develop の HEAD になった状態で
+develop→main の PR を開く / 既に開いていると、その commit を head に持つ PR に check が
+1 つも付かず、status は pending のまま永久に止まる** (workflow が走らないので「まだ実行中」と
+区別が付かない)。
+
+実際に踏んだ経路は 2 つあり、どちらも「data 系の作業をしてから PR を出す」流れで起きる:
+
+| commit-back の出所 | いつ HEAD になるか |
+|---|---|
+| `workflow-dispatch-proxy.yml` の request 消費 | proxy で sync-snapshots 等を代理起動した直後 (PR #733) |
+| `blog-auto-publish.yml` の docs/21 outbox 掃除 | 記事を公開した直後 (PR #734) |
+
+**対処**: PR 作成後に `get_check_runs` が 0 件なら、まず develop の HEAD が `[skip ci]` かを疑う
+(`git log --oneline -1 origin/develop`)。**後続の実コミットを push すれば CI が発火する**。
+空コミットで済ませず、その時点で残っている本来の作業 (規約の追記・是正など) を載せるとよい。
+
 ## ルール
 
 - **feature/***: 機能ブランチ。develop から分岐し、ローカルで `git merge --no-ff feature/<name>` で develop に取り込む。マージ後は削除。PR は不要 (作っても良い、ただし CI は走らない)
