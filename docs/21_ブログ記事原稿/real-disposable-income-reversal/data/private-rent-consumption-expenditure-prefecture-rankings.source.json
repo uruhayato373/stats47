@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "private-rent-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "民営家賃消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/private-rent-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug real-disposable-income-reversal --keys private-rent-consumption-expenditure --data-name private-rent-consumption-expenditure-prefecture-rankings",
+  "fetchedAt": "2026-08-05T13:34:42.454Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
