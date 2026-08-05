@@ -26,6 +26,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 | `/page-data-batch` | TS-config registry を walk → e-Stat → R2 直行 |
 | `/sync-metrics-cache` | TS-config → metrics ビルドキャッシュ差分 sync |
 | `/verify-d1-integrity` | FK / 47 県カバレッジ / migration_flow net 一致 |
+| `/verify-value-distribution` | 疑わしい値分布 (ゼロ過多・県数不足・負値) を一次情報で検証し profile に記録 |
 
 ## 担当外
 
@@ -54,6 +55,9 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - ローカル D1 `metrics` テーブル (sync-metrics-cache 時のみ write)
 - `apps/web/scripts/seed-*` — seed スクリプト (read)
 - `.claude/state/estat-city-*` — estat-researcher の出力を read
+- `packages/data-configs/src/verified-value-profiles.ts` (**単一 writer**) — 値分布の検証台帳。
+  根拠は estat-researcher に調べさせてよいが、**書き込むのは本 agent だけ**
+  (複数 agent が書くと予測の一貫性が崩れ、台帳が「誰かが緑にした」状態になる)
 
 ## File Boundary (並行衝突回避)
 
@@ -61,6 +65,8 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - 同 D1 への ingester / db-schema-manager 同時起動 NG (task-router で排他制御)
 - R2 への並列 write は metric 単位で並行可 (`/page-data-batch --concurrency N`)
 - 並行起動可能 agent: estat-researcher (read-only)、 snapshot-exporter (D1 read のみ、write は `.local/r2/app/`)
+- `verified-value-profiles.ts` への並列 write は禁止 (単一 writer)。判断が付かない metric は
+  **profile を書かず unverified のまま残す** — 推測で埋めると検証方式そのものが無意味になる
 
 ## 過去のインシデント
 

@@ -60,8 +60,10 @@ import * as path from "node:path";
 
 import {
   EXPECTED_SHAPE_ANOMALY,
+  VERIFIED_VALUE_PROFILES,
   buildRecipe,
   classifyShape,
+  classifyValueSuspicion,
   findExpectedEmpty,
   getMetricConfig,
   parseRecipe,
@@ -181,6 +183,27 @@ interface ShapeChecks {
 }
 
 /**
+ * (l) 値分布の検証状態。
+ *
+ * shape-gate は「確実に壊れている」ものだけを error にするので、判断が割れる帯
+ * (ゼロ率 50-90% など) を検知しないまま捨てていた。ここは逆に**広く疑い、
+ * agent が根拠つきで検証したものだけ通す** (`VERIFIED_VALUE_PROFILES`)。
+ *
+ * 未検証を即失敗にすると 70 件超が一斉に赤くなり「赤いのが常態」になるので、
+ * **増えたときだけ失敗**させる (unbaked と同じ縮小専用ラチェット)。
+ * 一方 profile-violated は「検証時の予測をデータが破った」= 検証が古くなった証拠なので即失敗。
+ */
+interface ValueVerificationChecks {
+  checked: number;
+  verified: number;
+  /** 検証プロファイルが無い / 疑いを cover していない */
+  unverified: Array<{ key: string; suspicions: string[]; reasons: string[] }>;
+  /** 検証時の予測を破った = 再検証が要る */
+  profileViolated: Array<{ key: string; reasons: string[] }>;
+  ok: boolean;
+}
+
+/**
  * (k) レシピ整合の検査結果。
  *
  * 「この値は**現在の config** で作れるか」を見る。値の隣に焼かれた
@@ -282,6 +305,7 @@ interface CountSnapshot {
   statsRowCounts: Record<string, number>;
   /** (k) の縮小専用ラチェット用。レシピ未焼き込みの残数 */
   recipeUnbaked?: number;
+  valueUnverified?: number;
 }
 
 interface AuditReport {
@@ -308,6 +332,7 @@ interface AuditReport {
   stats: StatsChecks;
   shape: ShapeChecks;
   recipe: RecipeChecks;
+  valueVerification: ValueVerificationChecks;
   ok: boolean;
 }
 
@@ -438,6 +463,8 @@ function loadPreviousSnapshot(jsonOutPath: string | undefined): CountSnapshot | 
       statsRowCounts: prev.stats?.rowCounts ?? {},
       // 前回レポートに recipe が無い (本検査の導入前) なら undefined = ラチェット無効
       recipeUnbaked: prev.recipe?.unbaked?.length,
+      // 前回レポートに valueVerification が無い (本検査の導入前) なら undefined = ラチェット無効
+      valueUnverified: prev.valueVerification?.unverified?.length,
     };
   } catch {
     return null;
@@ -463,8 +490,21 @@ async function main() {
     console.error(`✗ app/ranking-items/all.json 取得失敗 (status ${allRes.status})`);
     process.exit(1);
   }
-  const activeItems = allRes.body.items.filter((i) => i.isActive !== false);
+  // R2 の all.json は sync-snapshots が回るまで**退役を反映しない**。config を isActive:false に
+  // した直後に監査が赤くなると「退役するたび週次が赤い」= 無視される状態になるので、
+  // **config 側でも active なものだけ**を対象にする。config が publish 可否の SSOT で、
+  // R2 は次の再生成で追いつく (config に無いキーは念のため対象に残す = 取りこぼさない)。
+  const r2Active = allRes.body.items.filter((i) => i.isActive !== false);
+  const retiredInConfig = r2Active.filter((i) => getMetricConfig(i.rankingKey)?.isActive === false);
+  const activeItems = r2Active.filter((i) => getMetricConfig(i.rankingKey)?.isActive !== false);
   console.log(`対象キー: ${activeItems.length} 件 (全 ${allRes.body.items.length} 件中 active)`);
+  if (retiredInConfig.length > 0) {
+    console.log(
+      `  ※ config で退役済みだが R2 未反映のため除外: ${retiredInConfig.length} 件 ` +
+        `(${retiredInConfig.map((i) => i.rankingKey).slice(0, 5).join(", ")}) — ` +
+        `sync-snapshots で R2 を再生成すると消える`,
+    );
+  }
 
   // --- (a)(b)(c): per-key item.json / values.json ---
   const itemMissing: string[] = [];
@@ -491,6 +531,15 @@ async function main() {
 
   // (k) レシピ整合の集計器
   const recipe: RecipeChecks = { checked: 0, unbaked: [], drift: [], configMissing: [], ok: true };
+
+  // (l) 値分布の検証状態の集計器
+  const valueVerification: ValueVerificationChecks = {
+    checked: 0,
+    verified: 0,
+    unverified: [],
+    profileViolated: [],
+    ok: true,
+  };
 
   // (f)(g)(h) 正規化系の集計器
   const normalized: NormalizedChecks = {
@@ -563,10 +612,11 @@ async function main() {
         const config = recipeConfig;
         if (config) {
           shape.checked++;
+          const shapeSummary = summarizeShape((statsRes.body?.rows ?? []) as ShapeRow[]);
           const violations = classifyShape({
             key,
             entity: "prefecture",
-            summary: summarizeShape((statsRes.body?.rows ?? []) as ShapeRow[]),
+            summary: shapeSummary,
             unit: config.unit,
             now: auditNow,
             allowlist: EXPECTED_SHAPE_ANOMALY,
@@ -575,6 +625,20 @@ async function main() {
             shape.byCheck[v.check] = (shape.byCheck[v.check] ?? 0) + 1;
             if (v.isError) shape.violations.push({ key, check: v.check, message: v.message });
             else shape.allowedCount++;
+          }
+
+          // --- (l) 値分布の検証状態 (同じ summary を使うので追加コスト 0) ---
+          valueVerification.checked++;
+          const verdict = classifyValueSuspicion(key, shapeSummary, VERIFIED_VALUE_PROFILES);
+          if (verdict.status === "verified") valueVerification.verified++;
+          else if (verdict.status === "unverified") {
+            valueVerification.unverified.push({
+              key,
+              suspicions: verdict.suspicions,
+              reasons: verdict.reasons,
+            });
+          } else if (verdict.status === "profile-violated") {
+            valueVerification.profileViolated.push({ key, reasons: verdict.reasons });
           }
         }
       }
@@ -726,6 +790,14 @@ async function main() {
   const unbakedGrew = prevUnbaked !== undefined && recipe.unbaked.length > prevUnbaked;
   recipe.ok = recipe.drift.length === 0 && recipe.configMissing.length === 0 && !unbakedGrew;
 
+  // (l) 判定。profile-violated は即違反 (検証時の予測をデータが破った = 検証が古い)。
+  // unverified は**増えたときだけ**違反 (既存の未検証分は消化キューとして残るのが正常で、
+  // 即失敗にすると恒久的に赤くなり無視される)。
+  const prevUnverified = previous?.valueUnverified;
+  const unverifiedGrew =
+    prevUnverified !== undefined && valueVerification.unverified.length > prevUnverified;
+  valueVerification.ok = valueVerification.profileViolated.length === 0 && !unverifiedGrew;
+
   const report: AuditReport = {
     generatedAt: new Date().toISOString(),
     r2Base: R2_BASE,
@@ -747,6 +819,7 @@ async function main() {
     stats: { ...stats, rowCounts: statsRowCounts },
     shape,
     recipe,
+    valueVerification,
     ok:
       itemMissing.length === 0 &&
       valuesMissing.length === 0 &&
@@ -755,7 +828,8 @@ async function main() {
       normalized.ok &&
       stats.ok &&
       shape.ok &&
-      recipe.ok,
+      recipe.ok &&
+      valueVerification.ok,
   };
 
   // ---- レポート出力 ----
@@ -889,6 +963,28 @@ async function main() {
       `  → 是正: config を直したあと R2 を再生成する ` +
         `(page-data-batch --metric <keys> → diff-push-r2 --prefix app/stats)`,
     );
+  }
+
+  const vv = report.valueVerification;
+  console.log(`\n## (l) 値分布の検証 (疑わしいものは検証済みだけ通す)`);
+  console.log(`  検査: ${vv.checked} 件 / ✅検証済み: ${vv.verified} 件`);
+  console.log(
+    `  未検証 (消化キュー): ${vv.unverified.length} 件` +
+      (prevUnverified !== undefined ? ` (前回 ${prevUnverified})` : " (前回なし=ラチェット無効)"),
+  );
+  if (unverifiedGrew) {
+    console.log(`      ★増加している。新しい metric が疑わしい値分布で入った可能性`);
+  }
+  for (const u of vv.unverified.slice(0, 15)) {
+    console.log(`      ${u.key} [${u.suspicions.join(",")}] ${u.reasons[0] ?? ""}`);
+  }
+  if (vv.unverified.length > 15) console.log(`      … 他 ${vv.unverified.length - 15} 件`);
+  console.log(`  ★予測を破った (再検証が要る): ${vv.profileViolated.length} 件`);
+  for (const v of vv.profileViolated.slice(0, 10)) {
+    console.log(`      ${v.key}: ${v.reasons.join(" / ")}`);
+  }
+  if (vv.unverified.length > 0 || vv.profileViolated.length > 0) {
+    console.log(`  → 是正: /verify-value-distribution で中身を確認し verified-value-profiles.ts へ追記`);
   }
 
   console.log(`\n## 総合判定: ${report.ok ? "✓ OK" : "✗ 違反あり"}`);

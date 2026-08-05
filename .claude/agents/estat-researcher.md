@@ -23,6 +23,7 @@ e-Stat API (政府統計) と MLIT データプラットフォーム の統計�
 | `/search-estat` | e-Stat API 統計表検索 |
 | `/inspect-estat-meta` | メタデータ構造 (cdCat01 等) の確認 |
 | `/fetch-estat-data` | ランキング形式データ取得 |
+| `/verify-value-distribution` (co) | 疑わしい値分布の**根拠調査**。統計表のメタ・調査対象範囲・標本設計を確認して「そのゼロ / 欠落 / 負値が実態か」の材料を返す。**profile への write は data-ingester に委譲** (metric 登録と同じ 2 段構成) |
 | `/search-mlit-dpf` | MLIT データプラットフォーム探索 |
 
 ## 担当外

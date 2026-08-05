@@ -56,5 +56,5 @@ export const bowlingAlleyPublic: MetricConfig = {
   },
   "seoTitle": "ボウリング場数（公共）ランキング都道府県【2021年】｜1位沖縄県（0施設）",
   "seoDescription": "2021年のボウリング場数（公共）の都道府県別ランキング。1位沖縄県（0施設）、最下位沖縄県（0施設）で地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };
