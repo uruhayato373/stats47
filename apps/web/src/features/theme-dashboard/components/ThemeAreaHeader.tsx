@@ -27,7 +27,9 @@ export function ThemeAreaHeader({
       title={title}
       description={description}
       actions={
-        <div className="xl:hidden">
+        // 境界は PageShell の左レール (hidden lg:block) と一致させる。
+        // ずれると左レールと二重に地域セレクタが出る。
+        <div className="lg:hidden">
           <PrefectureSelect />
         </div>
       }

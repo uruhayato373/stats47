@@ -34,13 +34,13 @@ Related canon:
 ```
 ThemePrefectureProvider          ← prefecture state (URL ?pref= sync)
   └─ PageShell leftRail={ThemeSideNav} leftRailNarrowBehavior="hide"
-       └─ breadcrumb / toolbar / xl:hidden ThemeSwitcher / ThemeAreaHeader / dashboard
+       └─ breadcrumb / toolbar / lg:hidden ThemeSwitcher / ThemeAreaHeader / dashboard
 ```
 
 The provider must stay outside `PageShell` because `ThemeSideNav` holds the prefecture select and
 would otherwise read the default (no-op) context. Below `xl` the rail is hidden — a nav that switches
 the page content is useless when stacked after the content it controls — and the narrow-width
-equivalents are the `xl:hidden` `ThemeSwitcher` band and the `xl:hidden` `PrefectureSelect` in the
+equivalents are the `lg:hidden` `ThemeSwitcher` band and the `lg:hidden` `PrefectureSelect` in the
 header `actions`.
 
 `app/themes/local-finance` is bespoke (it has no provider) and passes `showRegion={false}`.

@@ -31,8 +31,8 @@ interface Props {
  * 1 か所に集約し、全テーマ (ALL_THEMES) を一覧しながら回遊できるようにする。リストの文法は
  * ホーム / ランキング一覧の `PortalCategoryGrid variant="sidebar"` に合わせる。
  *
- * xl 未満では `PageShell` が描画しない（`leftRailNarrowBehavior="hide"`）。狭幅の代替は
- * ヘッダーの `xl:hidden` セレクタ 2 つ（テーマ = ThemeSwitcher / 地域 = PrefectureSelect）で、
+ * lg 未満では `PageShell` が描画しない（`leftRailNarrowBehavior="hide"`）。狭幅の代替は
+ * ヘッダーの `lg:hidden` セレクタ 2 つ（テーマ = ThemeSwitcher / 地域 = PrefectureSelect）で、
  * ページ内容を切り替えるナビが操作対象より後ろに回らないようにしている。
  */
 export function ThemeSideNav({

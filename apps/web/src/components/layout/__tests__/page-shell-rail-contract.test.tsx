@@ -19,11 +19,11 @@ const RIGHT = <aside aria-label="right-rail">right</aside>;
 describe("PageShell — leftRail", () => {
   it("既定 (stack): 狭幅用の積み下ろし領域にも leftRail を描く", () => {
     render(<PageShell leftRail={LEFT}>{MAIN}</PageShell>);
-    // グリッド内 (xl+) と積み下ろし (xl 未満) の 2 か所
+    // グリッド内 (lg+) と積み下ろし (lg 未満) の 2 か所
     expect(screen.getAllByLabelText("left-rail")).toHaveLength(2);
   });
 
-  it('hide: 積み下ろし領域に leftRail を描かない (xl+ のみ)', () => {
+  it("hide: 積み下ろし領域に leftRail を描かない (lg+ のみ)", () => {
     render(
       <PageShell leftRail={LEFT} leftRailNarrowBehavior="hide">
         {MAIN}
@@ -31,8 +31,38 @@ describe("PageShell — leftRail", () => {
     );
     const rails = screen.getAllByLabelText("left-rail");
     expect(rails).toHaveLength(1);
-    // 残る 1 つは xl+ でのみ表示されるグリッド側
-    expect(rails[0].parentElement).toHaveClass("hidden", "xl:block");
+    // 残る 1 つは lg+ でのみ表示されるグリッド側
+    expect(rails[0].parentElement).toHaveClass("hidden", "lg:block");
+  });
+
+  /**
+   * ★左レールの表示開始幅は home / ランキング一覧の本文内 aside (lg) と一致させる。
+   * ここが xl のままだと「同じウィンドウ幅で home には出るがテーマには出ない」という
+   * 食い違いになる (2026-08-05 にオーナー指摘で是正)。
+   */
+  it("左レールは lg から出す (home の本文内 aside と同じ境界)", () => {
+    const { container } = render(
+      <PageShell leftRail={LEFT} leftRailNarrowBehavior="hide">
+        {MAIN}
+      </PageShell>,
+    );
+    const grid = container.querySelector(".lg\\:grid");
+    expect(grid).not.toBeNull();
+    // xl 始まりのグリッドに戻っていないこと (戻ると 1024-1280px で消える)
+    expect(container.querySelector(".xl\\:grid")).toBeNull();
+  });
+
+  /**
+   * 狭幅の積み下ろし境界がレール本体とずれると、両方出る幅 / どちらも出ない幅ができる。
+   * `hide` でも積み下ろしコンテナ自体は描かれるので、その境界クラスを固定する。
+   */
+  it("積み下ろし境界がレール本体と同じ lg になっている", () => {
+    const { container } = render(
+      <PageShell leftRail={LEFT}>{MAIN}</PageShell>,
+    );
+    const stacked = screen.getAllByLabelText("left-rail")[1].parentElement;
+    expect(stacked).toHaveClass("lg:hidden");
+    expect(stacked).not.toHaveClass("xl:hidden");
   });
 
   it("leftRail と rightRail を同時に渡すと右が勝ち、左は描かれない", () => {

@@ -151,9 +151,11 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
 
       {toolbar}
 
-      {/* 狭幅（xl 未満）のテーマ切替。xl+ は左レール ThemeSideNav が担うので隠す。
+      {/* 狭幅（lg 未満）のテーマ切替。lg+ は左レール ThemeSideNav が担うので隠す。
+          ★境界は PageShell の左レール (hidden lg:block) と必ず一致させること。
+          ずれると両方出る幅ができる (2026-08-05 に xl/lg のずれを是正)。
           areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
-      <div className="xl:hidden">
+      <div className="lg:hidden">
         <ThemeSwitcher
           currentThemeKey={theme.themeKey}
           areaContext={areaContext ? { areaCode: areaContext.areaCode } : undefined}

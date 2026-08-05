@@ -32,7 +32,9 @@ export function ThemeHero({
       imageSrc={hero.image.src}
       imageAlt={hero.imageAlt}
       actions={
-        <div className="xl:hidden">
+        // 境界は PageShell の左レール (hidden lg:block) と一致させる。
+        // ずれると左レールと二重に地域セレクタが出る。
+        <div className="lg:hidden">
           <PrefectureSelect />
         </div>
       }

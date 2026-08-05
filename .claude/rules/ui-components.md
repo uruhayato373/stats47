@@ -9,7 +9,8 @@
 - **サイト全体ナビの PC 常設左サイドバーは廃止**。グローバルナビはヘッダー（カテゴリは**メガメニュー**）に集約し、モバイルは `MobileNavDrawer`（Sheet）。
   - **例外: ページ内ナビの左レール（2026-08-04）**。「そのページの表示内容を切り替えるナビ」は `PageShell` の `leftRail` に置いてよい。該当は**テーマページの `ThemeSideNav`**（`/themes/*`・`/areas/*/[themeSlug]`。テーマ一覧 (ALL_THEMES = 22 件) + 地域選択）。ホーム / `/ranking` が本文内 `aside` に `PortalCategoryGrid variant="sidebar"` を置くのと同役割で、リストの見た目もそれに揃える（`min-h-9` / `text-[13px]` / `ChevronRight`）。
   - 左レールは `PageShell` 実装上**右レールと併用できない**（`showLeft = hasLeft && !hasRight`）。テーマページは元々右レールなしなので成立する。
-  - **xl 未満は `leftRailNarrowBehavior="hide"` で隠し、代替セレクタを本文上部に出す**（既定の `stack` は本文の下に積む挙動で、ページ内容を切り替えるナビがそこに来ると操作対象より後ろになり意味を失う）。テーマページの代替は `xl:hidden` の `ThemeSwitcher`（テーマ）とヘッダー actions の `PrefectureSelect`（地域）。
+  - **左レールは `lg`(1024px) から出す**。home / `/ranking` の本文内 `aside`（`lg:grid-cols-[264px_…]`）と同じ境界に揃えてある。★**2026-08-05 是正**: 左レールだけ `xl`(1280px) だったため「同じウィンドウ幅で home には左サイドバーが出るのにテーマページには出ない」という食い違いが起きていた。列幅・gap も home に合わせる（lg で 264px/gap-6、xl で 280px/gap-10）。機械ゲート = `page-shell-rail-contract.test.tsx`（`xl:grid` に戻ると落ちる）。
+  - **lg 未満は `leftRailNarrowBehavior="hide"` で隠し、代替セレクタを本文上部に出す**（既定の `stack` は本文の下に積む挙動で、ページ内容を切り替えるナビがそこに来ると操作対象より後ろになり意味を失う）。テーマページの代替は `lg:hidden` の `ThemeSwitcher`（テーマ）と `PrefectureSelect`（地域・`ThemeAreaHeader` / `ThemeHero` の actions）。★**代替 UI 側の境界もレール本体と必ず一致させる**。ずれると両方出る幅（または両方消える幅）ができる。
   - 左レールが `ThemePrefectureProvider` のような context を使う場合、**Provider の内側に leftRail を置く**（`ThemePageLayout` が Provider → `PageShell` の入れ子を持ち、呼び出し側の page.tsx は `PageShell` を重ねない）。
 - **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0`）**。カードやパネルへの `rounded-xl`/`rounded-2xl` の手動付与は禁止し、外枠は `rounded-none` とする。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。`ArticleShell` の `.reading-zone` は薄グレー地を維持するが、角丸と影は通常カード（`rounded-none`・`shadow-sm`）に揃える。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。
