@@ -54,6 +54,17 @@ if ! node "$GUARD_ROOT/.claude/scripts/lib/check-r2-route-ssg.cjs"; then
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
 
+# 2.2 sync-snapshots の task ドリフト (2026-08-05 の calculated-stats 書き忘れの再発防止)
+# run.sh に task を足しても動くので CI は緑のまま、task の存在と実行順を人と agent が
+# 読む面 (SKILL.md の task 表) だけが欠落する。両者を 1:1 に保つ。
+if git diff --cached --name-only | grep -q "^.claude/skills/db/sync-snapshots/"; then
+  echo -e "${GREEN}🔁 sync-snapshots task ドリフト...${NC}"
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-sync-snapshots-tasks.cjs"; then
+    echo -e "${RED}❌ run.sh の TASKS と SKILL.md の task 表がずれています。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
 # 2.1a ドキュメントガバナンス
 # 文書の固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOT、
 # 削除・移動後の参照悪化を、文書関連差分があるcommitだけ検査する。
