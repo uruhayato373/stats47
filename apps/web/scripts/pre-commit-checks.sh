@@ -444,6 +444,23 @@ else
   echo -e "${GREEN}✅ metric config の変更なし${NC}"
 fi
 
+# 6.5b topic カタログ (カテゴリ内グループ分類 SSOT) の整合
+#      (packages/data-configs/src/topics/README.md)。カタログ TS が staged のとき発火。
+STAGED_TOPICS=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/topics/.+[.]ts$" || true)
+
+if [ -n "$STAGED_TOPICS" ]; then
+  echo -e "${GREEN}topic カタログ整合チェック...${NC}"
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/validate-topic-catalog.ts > /tmp/validate-topics.log 2>&1); then
+    echo -e "${GREEN}OK topic カタログ整合チェック成功${NC}"
+    grep -E "warn 内訳" /tmp/validate-topics.log || true
+  else
+    echo -e "${RED}NG topic カタログに整合 error があります。${NC}"
+    grep -E "^   " /tmp/validate-topics.log | head -10 || true
+    echo -e "${YELLOW}規約: packages/data-configs/src/topics/README.md / 確認: npm run validate:topics --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
 # 6.6 theme-catalog (指標×チャート SSOT) の整合 + 生成物鮮度チェック
 #     (.claude/rules/theme-catalog-standards.md)。カタログ TS または生成物が staged のとき発火。
 STAGED_CATALOG=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/theme-catalog/.+\.ts$|^packages/types/src/indicator-sets/.+\.ts$|^apps/web/scripts/data/page-components/theme/.+\.json$" || true)

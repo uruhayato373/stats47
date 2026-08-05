@@ -371,6 +371,14 @@ jobs:
           npm run generate:catalog --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
+      - name: 🗂️ Topic Catalog Gate
+        run: |
+          # カテゴリ内グループ分類 (SSOT) の整合を担保。存在しない metric key への
+          # overrides、予約語 other の再定義、不正な正規表現を弾く。
+          # 規約: packages/data-configs/src/topics/README.md
+          npm run validate:topics --workspace=@stats47/data-configs
+        continue-on-error: false
+
       - name: 🗾 Area Databook Gate
         run: |
           # area ページ「県データブック」カタログ (SSOT) の整合と生成物の鮮度を担保。
