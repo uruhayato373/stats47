@@ -1,0 +1,7 @@
+{
+  "workflow": "sync-snapshots.yml",
+  "inputs": { "only": "ranking-items" },
+  "ref": "main",
+  "reason": "退役 3 metric (gini / bowling / unemployment-measures) を R2 の item.json / category items.json から落とす。config は d2822a1ef で main に反映済み",
+  "requestedAt": "2026-08-05T02:12:00Z"
+}
