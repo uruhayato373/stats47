@@ -23,7 +23,7 @@ import {
 } from "@/features/ads";
 import { THEME_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
 import { resolveAffiliateBanners, resolveAffiliateBannersByVertical } from "@/features/ads/server";
-import { isLandscapeBanner } from "@/features/ads/services/resolve-affiliate-ad";
+import { isLandscapeBanner } from "@/features/ads/services/banner-geometry";
 
 import { HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
 

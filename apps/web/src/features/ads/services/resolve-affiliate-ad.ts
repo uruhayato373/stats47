@@ -40,17 +40,6 @@ export interface ResolvedAffiliateBanner {
 }
 
 /**
- * 横長 (または正方形) クリエイティブか。native 行や本文の横並び枠は 4:3 前提のため、
- * 縦長 (スカイスクレイパー 120x600 / 160x600) が混ざると極細の縦帯に潰れる。
- * 縦長の受け皿は locationCode "sidebar-sticky" のサイドバースロットのみ
- * (.claude/rules/affiliate-ads-standards.md §3)。banner 解決は locationCode を見ない
- * 設計 (同 §1 の非対称) なので、本文系の描画側がこれで除外する。
- */
-export function isLandscapeBanner(b: Pick<ResolvedAffiliateBanner, "width" | "height">): boolean {
-  return b.height <= b.width;
-}
-
-/**
  * A/B テスト (AFF-05) の variant 候補。client (VariantAdSlot) が加重ランダムで1つ選ぶ。
  * banner は imageUrl あり、text は imageUrl=null。
  */

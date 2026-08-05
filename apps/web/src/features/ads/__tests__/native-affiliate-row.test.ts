@@ -17,7 +17,7 @@ import { resolve } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { isLandscapeBanner } from "../services/resolve-affiliate-ad";
+import { isLandscapeBanner } from "../services/banner-geometry";
 
 const COMPONENTS_DIR = resolve(import.meta.dirname, "../components");
 
@@ -34,7 +34,7 @@ describe("isLandscapeBanner", () => {
   it("横長・正方形は残す (300x250 / 320x100 / 300x300)", () => {
     expect(isLandscapeBanner({ width: 300, height: 250 })).toBe(true);
     expect(isLandscapeBanner({ width: 320, height: 100 })).toBe(true);
-    // 300x300 (legacy スクエア) は 4:3 枠で許容範囲に収まるので除外しない
+    // 300x300 (grandfathering 中の旧スクエア在庫) は 4:3 枠で許容範囲に収まるので除外しない
     expect(isLandscapeBanner({ width: 300, height: 300 })).toBe(true);
   });
 });

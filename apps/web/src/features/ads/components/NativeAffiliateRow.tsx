@@ -4,10 +4,8 @@ import { getSurfaceCardClassName } from "@/components/surface";
 
 import { AdImpressionTracker } from "@/features/ads/components/AdImpressionTracker";
 import { TrackedAffiliateLink } from "@/features/ads/components/tracked-affiliate-link";
-import {
-  isLandscapeBanner,
-  type ResolvedAffiliateBanner,
-} from "@/features/ads/services/resolve-affiliate-ad";
+import { isLandscapeBanner } from "@/features/ads/services/banner-geometry";
+import type { ResolvedAffiliateBanner } from "@/features/ads/services/resolve-affiliate-ad";
 
 interface NativeAffiliateRowProps {
   /** セクションタイトル。省略時は "関連サービス" */

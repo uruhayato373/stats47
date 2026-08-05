@@ -1,8 +1,6 @@
 import { BannerAd, NativeAffiliateRow } from "@/features/ads";
-import {
-  isLandscapeBanner,
-  type ResolvedAffiliateBanner,
-} from "@/features/ads/services/resolve-affiliate-ad";
+import { isLandscapeBanner } from "@/features/ads/services/banner-geometry";
+import type { ResolvedAffiliateBanner } from "@/features/ads/services/resolve-affiliate-ad";
 
 interface RankingPageNativeAffiliateSectionProps {
   banners: ResolvedAffiliateBanner[];
