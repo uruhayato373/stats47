@@ -91,6 +91,12 @@ export interface CategorySourceSurvey {
   itemCount: number;
 }
 
+/** カテゴリ内グループ (topic) の表示順マニフェスト 1 件分 */
+export interface CategoryTopic {
+  key: string;
+  label: string;
+}
+
 interface CategoryItemsSnapshot {
   generatedAt: string;
   categoryKey: string;
@@ -98,6 +104,12 @@ interface CategoryItemsSnapshot {
   items: (CategoryRankingItem & { areaType: string })[];
   /** 2026-07-14 追加。旧 snapshot には無い (その場合ページは出典調査カードを出さない) */
   sourceSurveys?: CategorySourceSurvey[];
+  /**
+   * 2026-08-05 追加。カテゴリ内グループの表示順マニフェスト。
+   * 1 件以上該当した topic だけがカタログ順に並び、`other` は該当があれば末尾に付く。
+   * 旧 snapshot / カタログ未登録カテゴリには無い (その場合ページは平坦一覧へ縮退)。
+   */
+  topics?: CategoryTopic[];
 }
 
 interface RankingItemSnapshot {
@@ -169,6 +181,24 @@ export async function readCategorySourceSurveysFromR2(
     return ok(snapshot?.sourceSurveys ?? []);
   } catch (error) {
     logger.error({ error, categoryKey }, "readCategorySourceSurveysFromR2: failed");
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+/**
+ * カテゴリ内グループの表示順マニフェストを読む。
+ * 旧 snapshot / カタログ未登録カテゴリは空配列 → 呼び元は平坦一覧へ縮退する。
+ */
+export async function readCategoryTopicsFromR2(
+  categoryKey: string,
+): Promise<Result<CategoryTopic[], Error>> {
+  try {
+    const snapshot = await fetchFromR2AsJson<CategoryItemsSnapshot>(
+      categoryItemsKeyPath(categoryKey),
+    );
+    return ok(snapshot?.topics ?? []);
+  } catch (error) {
+    logger.error({ error, categoryKey }, "readCategoryTopicsFromR2: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
   }
 }

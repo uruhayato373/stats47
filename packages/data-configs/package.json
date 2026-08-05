@@ -15,6 +15,11 @@
       "import": "./src/registry.ts",
       "require": "./src/registry.ts"
     },
+    "./topics": {
+      "types": "./src/topics/index.ts",
+      "import": "./src/topics/index.ts",
+      "require": "./src/topics/index.ts"
+    },
     "./categories": {
       "types": "./src/categories.ts",
       "import": "./src/categories.ts",
