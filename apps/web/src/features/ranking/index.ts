@@ -30,6 +30,8 @@ export {
 export type { FeaturedRankingCardModel } from "./utils/resolve-featured-ranking-card";
 export { CategoryRankingTable } from "./components/CategoryRankingList";
 export type { CategoryRankingListItem } from "./components/CategoryRankingList";
+export { CategoryTopicGroups } from "./components/CategoryTopicGroups";
+export type { CategoryTopicListItem } from "./components/CategoryTopicGroups";
 export {
     RankingHeaderPanel,
     RankingHeaderControls,

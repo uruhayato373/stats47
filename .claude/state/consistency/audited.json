@@ -1,9 +1,7 @@
 {
-  "hash": "a18f2ba50e6b2d052ced8303ae503617a40d750ed19c1a2552d16bc8dcad4edc",
-  "audited_at": "2026-08-05T03:58:25",
+  "hash": "7ca40c36e16371468944daaef812dfe5b6386f6ca7304bf8b725606c8b6fbe9f",
+  "audited_at": "2026-08-05T06:13:06",
   "files": [
-    ".claude/scripts/psi/__tests__/extract-dom-size.test.mjs",
-    ".claude/scripts/psi/fetch-psi-audit.mjs",
-    ".claude/skills/analytics/performance-improvement/reference/improvement-log.md"
+    ".claude/rules/analytics-event-standards.md"
   ]
 }

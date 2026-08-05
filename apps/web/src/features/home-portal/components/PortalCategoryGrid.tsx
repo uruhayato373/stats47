@@ -7,14 +7,22 @@ import { ChevronRight } from "lucide-react";
 
 import { TrackedPortalCategoryLink } from "./TrackedPortalCategoryLink";
 
+type NavSurface = React.ComponentProps<typeof TrackedPortalCategoryLink>["surface"];
+
 /**
  * 17カテゴリを一画面で見渡す高密度リスト。
  * `sidebar` はホームの左ペイン用、`grid` は通常の2列一覧用。
  */
 export function PortalCategoryGrid({
   variant = "grid",
+  activeCategoryKey,
+  surface,
 }: {
   variant?: "grid" | "sidebar";
+  /** 現在地。一致する行を aria-current + 強調で示す (home は未指定で挙動不変) */
+  activeCategoryKey?: string;
+  /** GA4 nav_surface。未指定なら TrackedPortalCategoryLink の既定 (home_category) */
+  surface?: NavSurface;
 }) {
   return (
     <div
@@ -28,11 +36,17 @@ export function PortalCategoryGrid({
           key={category.categoryKey}
           href={`/category/${category.categoryKey}`}
           label={category.categoryName}
+          surface={surface}
+          aria-current={
+            category.categoryKey === activeCategoryKey ? "page" : undefined
+          }
           className={cn(
             "group flex items-center border-b border-border transition-colors hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
             variant === "sidebar"
               ? "min-h-9 gap-2 px-2 py-1.5"
               : "min-h-12 gap-3 px-1 py-2.5",
+            category.categoryKey === activeCategoryKey &&
+              "bg-accent shadow-[inset_3px_0_0_hsl(var(--primary))]",
           )}
         >
           <span

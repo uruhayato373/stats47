@@ -13,6 +13,7 @@ import { getCategoryDescription } from "@stats47/data-configs/categories";
 import { RANKING_PROMINENCE_CATEGORIES } from "@stats47/data-configs/ranking-prominence";
 import {
   readCategorySourceSurveysFromR2,
+  readCategoryTopicsFromR2,
   readRankingValuesFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
@@ -35,13 +36,16 @@ import {
 } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { listLatestArticles } from "@/features/blog/server";
+import { PortalCategoryGrid } from "@/features/home-portal";
 import { findCategoryByKey } from "@/features/category/server";
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
+  CategoryTopicGroups,
   SurveyCard,
   isCaveatNote,
   type CategoryRankingListItem,
+  type CategoryTopicListItem,
 } from "@/features/ranking";
 import {
   buildFeaturedRankingCardModel,
@@ -148,13 +152,18 @@ export default async function CategoryPage({ params }: PageProps) {
 
   const fallbackTags = CATEGORY_FALLBACK_TAGS[categoryKey] ?? [];
 
-  const [rankingResult, latestArticles, sourceSurveys, nativeBanners] =
+  const [rankingResult, latestArticles, sourceSurveys, categoryTopics, nativeBanners] =
     await Promise.all([
       readRankingItemsByCategory(categoryKey),
       listLatestArticles(4).catch(() => []),
       // このカテゴリの active item の出典調査 (焼き込みサマリ)。全調査リストを出さない
       // (旧実装は readSurveysFromR2 = 全 74 調査を無関係に表示していた。2026-07-14 是正)
       readCategorySourceSurveysFromR2(categoryKey)
+        .then((r) => (isOk(r) ? r.data : []))
+        .catch(() => []),
+      // カテゴリ内グループの表示順マニフェスト。旧 snapshot / カタログ未登録カテゴリは
+      // 空配列 → 下の分岐で従来の平坦テーブルへ縮退する
+      readCategoryTopicsFromR2(categoryKey)
         .then((r) => (isOk(r) ? r.data : []))
         .catch(() => []),
       fallbackTags.length > 0
@@ -181,6 +190,17 @@ export default async function CategoryPage({ params }: PageProps) {
       normalizationBasis: item.normalizationBasis,
     };
   });
+
+  // グループ表示用データ。topicKey は R2 items.json に焼き込まれた値をそのまま使う
+  // (分類の SSOT は packages/data-configs/src/topics/)。
+  const topicItems: CategoryTopicListItem[] = rankingItems.map((item) => ({
+    rankingKey: item.rankingKey,
+    title: item.title,
+    subtitle: item.subtitle && !isCaveatNote(item.subtitle) ? item.subtitle : null,
+    unit: item.unit,
+    topicKey: item.topicKey ?? null,
+    top1: item.top1 ?? null,
+  }));
 
   // 注目ランキング。選定は索引 (/ranking) と同じ掲載価値スコアの生成物を唯一の根拠にする。
   // 旧実装は metric config の `isFeatured` を見ていたが、2,295 件中 8 件しか設定されておらず、
@@ -320,7 +340,20 @@ export default async function CategoryPage({ params }: PageProps) {
       )}
 
       {/* メインコンテンツ */}
-      <div className="min-w-0">
+      {/* 左のカテゴリナビは home と同じ「本文内 aside + 自前 grid」方式。
+          PageShell は左右レールを併用できない (showLeft = hasLeft && !hasRight で
+          契約テストが「右が勝つ」を固定) ため、右レール (広告・出典調査) を保ったまま
+          3 カラムにするにはこの形しかない。 */}
+      <div className="lg:grid lg:grid-cols-[228px_minmax(0,1fr)] lg:items-start lg:gap-6">
+        <aside className="mb-8 lg:sticky lg:top-20 lg:mb-0">
+          <SectionHeader title="カテゴリ" />
+          <PortalCategoryGrid
+            variant="sidebar"
+            activeCategoryKey={categoryKey}
+            surface="category_sidebar"
+          />
+        </aside>
+        <div className="min-w-0">
         {/* 注目ランキング */}
         {featuredItems.length > 0 && (
           <section className="mb-12">
@@ -342,7 +375,11 @@ export default async function CategoryPage({ params }: PageProps) {
         {/* 全件テーブル */}
         <section className="mb-12">
           <SectionHeader title={`全${rankingItems.length}件のランキング`} />
-          <CategoryRankingTable items={allItems} />
+          {categoryTopics.length > 0 ? (
+            <CategoryTopicGroups topics={categoryTopics} items={topicItems} />
+          ) : (
+            <CategoryRankingTable items={allItems} />
+          )}
         </section>
 
         {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
@@ -400,6 +437,7 @@ export default async function CategoryPage({ params }: PageProps) {
 
         {/* コンテンツ末尾の全幅フッター広告 */}
         <FooterAdSlot />
+        </div>
       </div>
     </PageShell>
   );
