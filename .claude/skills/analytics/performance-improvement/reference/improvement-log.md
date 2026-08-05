@@ -310,11 +310,17 @@ Cache Response Rule は同じ効果を外部設定として持つため、rollba
 社内プロキシ)。Chrome DevTools MCP も未ロード、ブラウザペインは stats47.jp を
 ポリシーでブロックするため、**Chrome の DOM ノード数 (audit の 9,101) は再測定できていない**。
 
-- **計測ギャップ**: PSI batch は `LCP_ms / TBT_ms / CLS / FCP_ms / TTI_ms / SI_ms / TTFB_ms`
-  しか保存せず **`dom-size` を持たない**。`PERF-AREA-DOM-01` の完了条件「DOM 9,101 から
-  70% 以上削減」は、現状どの自動パイプラインでも検証できない。rail の上限 (12/nav) は
-  本番で確認済みなので実装は効いているが、DOM 総数の裏取りには collector への
-  `dom-size` 追加か Chrome 実測が要る。
+- **計測ギャップ (2026-08-05 に collector 側を修正済み)**: PSI batch は
+  `LCP_ms / TBT_ms / CLS / FCP_ms / TTI_ms / SI_ms / TTFB_ms` しか保存せず
+  **`dom-size` を持たなかった**。`PERF-AREA-DOM-01` の完了条件「DOM 9,101 から
+  70% 以上削減」を、どの自動パイプラインでも検証できない状態だった。
+  `fetch-psi-audit.mjs` に `dom_size` (`total_elements` / `max_depth` /
+  `max_child_elements`) を追加した (下記)。
+
+  **ただし before は PSI に無い**。2026-08-04 の batch はこの変更より前なので
+  `dom_size` を持たない。比較は「Chrome DevTools DOMSize 9,101 (2026-08-05 デプロイ前)」
+  対「Lighthouse dom-size (2026-08-06 以降の cron)」になる。同じ指標だが収集経路が
+  違う点は明示して読む。期待する削減幅 (70%) はツール差より十分大きい。
 
 ---
 
@@ -393,3 +399,39 @@ hydration まで一度も使われない純粋な無駄だった。
 
 - **判定**: `effect/pending`。デプロイ後に ranking HTML の実測で判定する
   (目標: 1,232,628 bytes から 50% 以上減。理論値は約 82% 減)。
+
+---
+
+### [PSI-DOMSIZE-01] PSI collector に DOM 規模を保存する
+
+- **実装日**: 2026-08-05
+- **目的**: `PERF-AREA-DOM-01` の完了条件を自動で裏取りできるようにする。
+
+`fetch-psi-audit.mjs` の summary に `dom_size` を追加した。
+
+```json
+"dom_size": { "total_elements": 9101, "max_depth": 18, "max_child_elements": 873 }
+```
+
+`max_child_elements` も取るのは、「単一 nav に子要素 873 個」のような一箇所に集中した
+肥大が総数だけでは見えないため (まさに area rail がその形だった)。
+
+- **locale 耐性**: 総数は locale 非依存の `numericValue` を第一候補にする。depth / child は
+  `statistic` の英語表記に依存するので、将来 PSI に locale を渡すようになったら null へ
+  縮退する (誤った数値を返すよりよい)。現在 `fetchPsi` は locale を渡していない。
+- **Lighthouse のバージョン差**: `value` が素の数値と `{type:"numeric", value}` の
+  両方がありうるので両対応。テストで両形式を固定した。
+
+#### 副次的に見つけて直したもの
+
+`fetch-psi-audit.mjs` は **`main()` を無条件に呼んでいた**。テストが `extractDomSize` を
+import しただけで 38 URL の PSI 計測が走り、`.claude/state/metrics/psi/` に batch ファイルを
+書き出した (実際に発生・削除済み)。今日の `file://` 修正と同じ `pathToFileURL` ベースの
+エントリポイント判定を追加した。
+
+両方向を実測で確認: import では走らない (テスト 1,865ms → 122ms、batch ファイル増えず) /
+直接起動では走る (batch ファイルが 5 → 6 に増えることを確認、生成物は削除済み)。
+
+- **未検証**: この環境から PSI API へ到達できない (`http=000`) ため、**実レスポンスでの
+  `dom_size` 取得は確認できていない**。Lighthouse の 2 形式に対する単体テストは通っている。
+  実データは 2026-08-06 の日次 cron が最初に出す。

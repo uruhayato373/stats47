@@ -45,6 +45,7 @@
     "metrics:check-period-contract": "node .claude/scripts/metrics/check-period-contract.mjs",
     "metrics:adsense-diagnostics": "node .claude/scripts/metrics/adsense-diagnostics-run.mjs",
     "metrics:test": "node --test .claude/scripts/metrics/__tests__/*.test.mjs",
+    "psi:test": "node --test .claude/scripts/psi/__tests__/*.test.mjs",
     "effect-verdict": "node .claude/scripts/lib/effect-verdict/cli.mjs",
     "effect-verdict:test": "node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs .claude/scripts/lib/__tests__/write-past-effects.test.mjs",
     "metrics:check-adsense-units": "node .claude/scripts/metrics/check-adsense-unit-mapping.mjs",

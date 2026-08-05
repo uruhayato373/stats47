@@ -16,7 +16,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const DEFAULT_URL_FILE = join(PROJECT_ROOT, ".claude/config/psi-urls.txt");
@@ -101,6 +101,45 @@ function extractLayoutShiftContributors(audits) {
   });
 }
 
+/**
+ * Lighthouse の `dom-size` から DOM 規模を取り出す。
+ *
+ * 2026-08-05 の性能改修 (PERF-AREA-DOM-01) で、完了条件が「DOM 9,101 から 70% 削減」
+ * だったにもかかわらず **どの自動パイプラインもこの値を保存していなかった**。
+ * PSI は毎回 dom-size を計算しているので、保存するだけで以後は cron で裏取りできる。
+ *
+ * `max_child_elements` も取る。単一 nav に子要素が 873 個ある、といった
+ * 「一箇所に集中した肥大」は total だけでは見えないため。
+ *
+ * 総数は locale 非依存の `numericValue` を第一候補にする。depth / child は
+ * `statistic` の英語表記に依存するので、将来 PSI に locale を渡すようになったら
+ * null へ縮退する (誤った数値を返すよりよい)。現在 fetchPsi は locale を渡していない。
+ */
+export function extractDomSize(audits) {
+  const audit = audits?.["dom-size"];
+  if (!audit) return null;
+
+  // value は Lighthouse のバージョンで数値と {type:"numeric", value} の両方がありうる
+  const toNumber = (value) => {
+    if (typeof value === "number") return value;
+    if (value && typeof value.value === "number") return value.value;
+    return null;
+  };
+  const items = audit.details?.items || [];
+  const byStatistic = (keyword) => {
+    const item = items.find((i) =>
+      String(i?.statistic || "").toLowerCase().includes(keyword),
+    );
+    return item ? toNumber(item.value) : null;
+  };
+
+  return {
+    total_elements: toNumber(audit.numericValue) ?? byStatistic("total dom"),
+    max_depth: byStatistic("depth"),
+    max_child_elements: byStatistic("child"),
+  };
+}
+
 function extractSummary(data, url, strategy) {
   const lighthouse = data.lighthouseResult || {};
   const categories = lighthouse.categories || {};
@@ -143,6 +182,7 @@ function extractSummary(data, url, strategy) {
       FCP: field("FIRST_CONTENTFUL_PAINT_MS"),
       TTFB: field("EXPERIMENTAL_TIME_TO_FIRST_BYTE"),
     },
+    dom_size: extractDomSize(audits),
     lcp_element: extractLcpElement(audits),
     cls_contributors: extractLayoutShiftContributors(audits),
     analysis_utc: lighthouse.fetchTime || null,
@@ -193,8 +233,14 @@ async function main() {
   console.log(`成功: ${summaries.filter((s) => !s.error).length} / ${summaries.length}`);
 }
 
-main().catch((e) => {
-  console.error("Fatal:", e.message);
-  if (e.stack) console.error(e.stack);
-  process.exit(1);
-});
+// 直接起動したときだけ実行する。無条件に main() を呼ぶと、テストが
+// extractDomSize を import しただけで 38 URL の PSI 計測が走り batch ファイルまで
+// 書き出される (2026-08-05 に実際に起きた)。file:// URL は文字列連結で作らない
+// (Windows で必ず不一致になる。check-file-url-guard.cjs を参照)。
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((e) => {
+    console.error("Fatal:", e.message);
+    if (e.stack) console.error(e.stack);
+    process.exit(1);
+  });
+}
