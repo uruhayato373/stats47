@@ -18,7 +18,6 @@ import {
 } from "@/features/ranking";
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
-import type { TopoJSONTopology } from "@stats47/types";
 
 /**
  * lg 未満: 非アクティブなタブ内容を隠す (タブ切替として振る舞う)
@@ -32,7 +31,6 @@ interface RankingVisualizationSectionProps {
     activeRankingItem: RankingItem;
     rankingValues: RankingValue[];
     areaType: AreaType;
-    topology?: TopoJSONTopology | null;
     headerActions?: ReactNode;
     cardFooter?: ReactNode;
     isPending?: boolean;
@@ -43,7 +41,6 @@ export function RankingVisualizationSection({
     activeRankingItem,
     rankingValues,
     areaType,
-    topology,
     headerActions,
     cardFooter,
     isPending = false,
@@ -82,7 +79,6 @@ export function RankingVisualizationSection({
                         rankingItem={activeRankingItem}
                         rankingValues={rankingValues}
                         areaType={areaType}
-                        topology={topology ?? null}
                         headerActions={headerActions}
                         cardFooter={cardFooter}
                     />

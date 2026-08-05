@@ -315,3 +315,81 @@ Cache Response Rule は同じ効果を外部設定として持つため、rollba
   70% 以上削減」は、現状どの自動パイプラインでも検証できない。rail の上限 (12/nav) は
   本番で確認済みなので実装は効いているが、DOM 総数の裏取りには collector への
   `dom-size` 追加か Chrome 実測が要る。
+
+---
+
+### [MCP-PERF-2026-08-05-TOPOJSON] `PERF-RANKING-PAYLOAD-01` — topology を RSC payload から外す
+
+- **実装日**: 2026-08-05 (デプロイ前)
+
+#### 当初案 (TopoJSON 簡略化) を採らなかった理由
+
+runbook は「TopoJSON を 150KB 以下へ簡略化」としていたが、**maxZoom と両立しない**ことが
+実測で分かったため配信経路の変更に切り替えた。
+
+`presimplify → simplify → filter(退化リング除去) → 再 quantize` で実測した候補:
+
+| weight | quant | サイズ | 47県 | 点数 |
+|---|---|---:|:---:|---:|
+| 1e-4 | 10,000 | 151KB | ✓ | 32,793 |
+| 3e-4 | 10,000 | **130KB** | ✓ | 30,190 |
+| 3e-4 | 100,000 | 209KB | ✓ | 48,569 |
+| 1e-3 | 100,000 | 191KB | ✓ | 46,745 |
+
+**150KB 以下を満たすのは quantization 10,000 の系統だけ**だった。ranking の地図は
+Leaflet で `JAPAN_MAX_ZOOM = 14`。z14 の 1px は 7.8m (緯度 35 度) なので:
+
+| quantization | 座標分解能 | z14 での誤差 |
+|---|---:|---:|
+| 10,000 | 283 m | **36 px** |
+| 100,000 | 28 m | 3.6 px |
+| 現行 (≈32,202) | 88 m | 11 px |
+
+simplify weight も面積ベースで、3e-4 は 3.0 km² (一辺 2.5km ≈ z14 で 314px) の三角形を
+落とす。**130KB 候補は z14 で県境が海岸線から 300px 以上ずれる**。既定ズーム 5 では
+分からないが、ユーザーがズームすれば破綻する。
+runbook の試算値 (weight 0.0003 / quant 100,000 → 94,438 bytes) も**再現しなかった**
+(実測 214,285 bytes)。150KB という目標値自体が maxZoom 14 を考慮していなかった。
+
+#### 採った方法
+
+topology を RSC payload へ載せるのをやめ、クライアントが同一 origin の静的アセット
+`/prefecture.topojson` (`apps/web/public/`、1,015,004 bytes) を fetch する。
+**簡略化は行わないので地図の精度は一切落ちない。**
+
+決め手は「地図はサーバーで描画されない」こと。`LeafletChoroplethMap` は
+`next/dynamic` の `ssr:false` で読み込まれるため、RSC payload に載せた 1MB は
+hydration まで一度も使われない純粋な無駄だった。
+
+| 実測 (2026-08-05) | 値 |
+|---|---|
+| ranking HTML (非圧縮) | 1,232,628 bytes。`arcs` / `transform` / `N03_007`×47 を含む |
+| R2 の topology 実体 (`gis/mlit/20240101/prefecture.topojson`) | 1,015,004 bytes = HTML の約 82% |
+| `/prefecture.topojson` の配信 | 同一 origin・`CF-Cache-Status: HIT`・`max-age=0, must-revalidate` (2 回目以降は 304) |
+
+**クライアントから R2 を直接 fetch する案は棄却**した。R2 公開 URL は `Cache-Control` を
+返さず `cf-cache-status: DYNAMIC`、`Content-Encoding` も無しで 1MB を毎回素で返す。
+`packages/visualization` の `prefecture-topology.generated.json` (865KB) を同梱する案も
+棄却 — あれはサムネイル用の別データで、staleness 検査が thumbnail pipeline に紐づいている
+(SSOT を混ぜない)。
+
+#### 変更
+
+- `load-ranking-page-model.ts`: `fetchPrefectureTopology` の呼び出しと `topology` 返却を削除。
+  build phase 用の `NEXT_PHASE` 分岐も不要になった (サーバーが topology を触らないため)
+- prop チェーン 3 段 (`RankingPageClientShell` → `RankingKeyPageClient` →
+  `RankingVisualizationSection`) から `topology` を削除
+- `RankingMapChartClient`: `/prefecture.topojson` を `useEffect` + `fetch` で取得。
+  取得中は Skeleton、失敗確定時のみ `MapFallback` (取得中に「読み込めませんでした」を出さない)
+- 契約テスト 3 本を `ranking-map-performance-contract.test.ts` に追加。
+  **mutation 検証済**: `topology=` を shell に戻す / `fetchPrefectureTopology` を import し直すと
+  該当 2 本が落ちることを実測
+
+#### theme-dashboard は対象外 (確認済み)
+
+同型の直列化点が `ThemePageLayout.tsx` にあるが、`all-themes.ts` の記述どおり
+**全テーマが `hideMap`** で、`load-theme-data.ts` は hideMap のとき topology を fetch しない。
+現状 theme ページは topology を載せていないため、変更不要。
+
+- **判定**: `effect/pending`。デプロイ後に ranking HTML の実測で判定する
+  (目標: 1,232,628 bytes から 50% 以上減。理論値は約 82% 減)。

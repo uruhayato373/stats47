@@ -32,7 +32,6 @@ export function RankingPageClientShell({
       nationalAverageSeries={model.nationalAverageSeries}
       areaType={model.areaType}
       selectedYear={model.selectedYear}
-      topology={model.topology}
       cityRankingItem={model.cityRankingItem?.isActive ? model.cityRankingItem : undefined}
       surveyName={model.surveyName ?? undefined}
       groupMembers={model.groupMembers}

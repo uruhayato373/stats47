@@ -36,7 +36,6 @@ import { RankingVisualizationSection } from "./RankingVisualizationSection";
 import { useRankingPageState } from "./useRankingPageState";
 
 import type { NationalAveragePoint } from "../../lib/build-national-average-series";
-import type { TopoJSONTopology } from "@stats47/types";
 
 // useBreakpoint removed from layout-gating (replaced with CSS classes for CLS fix)
 
@@ -48,7 +47,6 @@ interface RankingKeyPageClientProps {
     nationalAverageSeries: NationalAveragePoint[];
     areaType?: AreaType;
     selectedYear?: string;
-    topology?: TopoJSONTopology | null;
     sections?: RankingPageSections;
     /** 都道府県コード（市区町村ランキング時のフィルタ用） */
     parentAreaCode?: string;
@@ -71,7 +69,6 @@ export function RankingKeyPageClient({
     nationalAverageSeries: initialNationalAverageSeries,
     areaType = "prefecture",
     selectedYear,
-    topology,
     sections = {},
     parentAreaCode,
     cityRankingItem,
@@ -251,7 +248,6 @@ export function RankingKeyPageClient({
                         activeRankingItem={activeRankingItem}
                         rankingValues={rankingValues}
                         areaType={currentAreaType}
-                        topology={topology}
                         headerActions={headerActions}
                         cardFooter={cardFooter}
                         isPending={isPending}
