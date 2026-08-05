@@ -17,10 +17,13 @@ import {
   fetchMetricTimeseriesAction,
   type MetricTimeseriesResult,
 } from "../actions";
+import { KPI_SWITCHER_THEMES } from "../config/kpi-switcher-themes";
 
 import { ChartEmptyState, ChartLoading } from "./ChartState";
+import { MetricSwitcherPanel } from "./MetricSwitcherPanel";
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 
+import type { MetricKpi } from "./metric-kpi";
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
 
 interface Props {
@@ -42,25 +45,6 @@ interface Props {
    * (markdown-section) を出さない。hideMap のカードのみビュー用。
    */
   cardsOnly?: boolean;
-}
-
-interface MetricKpi {
-  metricKey: string;
-  title: string;
-  unit: string;
-  /** 都道府県選択時はその県の値、未選択時は全国値（取得できなければ 47 県平均） */
-  value: number | null;
-  rank: number | null;
-  total: number;
-  /** 年次推移（MiniLineChart 用） */
-  series: { year: number; value: number }[];
-  /**
-   * 全国表示で値・系列が 47 県の単純平均のとき true。
-   * 総人口のような実数系は全国値の 1/47 になるため「全国」と称してはならない。
-   */
-  isNationalAverage: boolean;
-  /** 全国値をまだ取得中 */
-  isLoading: boolean;
 }
 
 /** KPI 計算に十分な観測数（47 都道府県の大半が揃っている指標のみ採用） */
@@ -111,7 +95,16 @@ export function ThemeMetricsDashboard({
   );
 
   /**
+   * KPI タイル切替 UI (MetricSwitcherPanel) を使うテーマか。
+   * パイロット中の一時フラグで、判定の正典は config/kpi-switcher-themes.ts。
+   */
+  const isSwitcherTheme = KPI_SWITCHER_THEMES.has(themeConfig.themeKey);
+
+  /**
    * 全国表示のときだけ e-Stat の全国行 (00000) を取りに行く。
+   *
+   * ★switcher テーマでは走らせない。Panel が選択中の 1 指標だけを遅延取得するので、
+   *   ここで全 kpiKeys を一括取得すると同じデータを二重に取りに行くことになる。
    *
    * ★R2 の ranking values は全国行を持たない (取り込み時に除外される) ため、
    *   preload された値だけでは 47 県平均しか作れない。真の全国値は e-Stat 側にあり、
@@ -127,8 +120,12 @@ export function ThemeMetricsDashboard({
     byKey: Record<string, MetricTimeseriesResult>;
   } | null>(null);
 
+  /** 一括取得を実行する条件。false のとき「未取得」はローディングではなく「取りに行かない」 */
+  const bulkNationalFetchEnabled =
+    !selectedPrefectureCode && !isSwitcherTheme && kpiKeys.length > 0;
+
   useEffect(() => {
-    if (selectedPrefectureCode || kpiKeys.length === 0) return;
+    if (!bulkNationalFetchEnabled) return;
     let cancelled = false;
     void Promise.all(
       kpiKeys.map(async (key) => {
@@ -148,7 +145,7 @@ export function ThemeMetricsDashboard({
     return () => {
       cancelled = true;
     };
-  }, [selectedPrefectureCode, kpiKeys, nationalRequestId]);
+  }, [bulkNationalFetchEnabled, kpiKeys, nationalRequestId]);
 
   /** 現在の要求に対応する結果のみ採用する (未取得・古い結果は null = ローディング) */
   const nationalByKey =
@@ -205,10 +202,17 @@ export function ThemeMetricsDashboard({
         total,
         series: nationalSeries ?? d.nationalSeries ?? [],
         isNationalAverage: !useNational,
-        isLoading: nationalByKey === null,
+        // 一括取得を回さないテーマでは「未取得 = 取りに行かない」なので待たせない
+        isLoading: bulkNationalFetchEnabled && nationalByKey === null,
       };
     });
-  }, [kpiKeys, indicatorDataMap, selectedPrefectureCode, nationalByKey]);
+  }, [
+    kpiKeys,
+    indicatorDataMap,
+    selectedPrefectureCode,
+    nationalByKey,
+    bulkNationalFetchEnabled,
+  ]);
 
   // cardsOnly: KPI スタットカードのみ。チャート・考察は描画しない
   const chartComponents = cardsOnly
@@ -249,8 +253,21 @@ export function ThemeMetricsDashboard({
               </span>
             )}
           </div>
-          {/* チャート付き stats-card のみ: 各指標を 1 枚の ChartCard(値 + 全国トレンド) で表示。
-             データのみ KPI カード・上位県バー・大トレンドの重複は廃止 (2026-06-20)。 */}
+          {/* KPI タイル切替 (パイロット)。タイル自体がタブで、下の 1 枚に選択指標を描く。
+              カードとチャートで同じ事実を二度描かない構成 (config/kpi-switcher-themes.ts)。 */}
+          {isSwitcherTheme ? (
+            <MetricSwitcherPanel
+              metrics={kpis}
+              tabLabels={Object.fromEntries(
+                themeConfig.tabIndicators.map((t) => [t.rankingKey, t.tabLabel]),
+              )}
+              selectedPrefectureCode={selectedPrefectureCode}
+              areaName={areaName}
+              defaultMetricKey={themeConfig.defaultRankingKey}
+            />
+          ) : (
+          /* チャート付き stats-card のみ: 各指標を 1 枚の ChartCard(値 + 全国トレンド) で表示。
+             データのみ KPI カード・上位県バー・大トレンドの重複は廃止 (2026-06-20)。 */
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {kpis.map((k) => (
               <ChartCard
@@ -288,6 +305,7 @@ export function ThemeMetricsDashboard({
               />
             ))}
           </div>
+          )}
         </div>
       )}
 

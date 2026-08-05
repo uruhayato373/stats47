@@ -1,0 +1,295 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+
+import dynamic from "next/dynamic";
+
+import { Tabs, TabsList, TabsTrigger } from "@stats47/components/atoms/ui/tabs";
+import { MapPin } from "lucide-react";
+
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+import type { LineChartData } from "@/components/stat-charts/types/visualization";
+import { trackNavClick } from "@/lib/analytics/events";
+
+import {
+  fetchMetricTimeseriesAction,
+  type MetricTimeseriesResult,
+} from "../actions";
+
+import { ChartEmptyState, ChartLoading } from "./ChartState";
+import { ScrollableRow } from "./ScrollableRow";
+
+import type { MetricKpi } from "./metric-kpi";
+
+const LineChartClient = dynamic(
+  () =>
+    import(
+      "@/components/stat-charts/components/charts/LineChart/LineChartClient"
+    ).then((mod) => mod.LineChartClient),
+  { ssr: false, loading: () => <ChartLoading height={250} /> },
+);
+
+const NATIONAL_CODE = "00000";
+/** 比較系列 (全国) の線種。主系列と色だけで区別しないための破線 */
+const COMPARISON_DASH = "6,4";
+
+interface MetricSwitcherPanelProps {
+  /** ThemeMetricsDashboard が導出した KPI 群 (タイルの中身) */
+  metrics: MetricKpi[];
+  /** rankingKey → 短ラベル (tabIndicators の tabLabel)。無ければ title を使う */
+  tabLabels: Record<string, string>;
+  /** 選択中の都道府県コード (null = 全国) */
+  selectedPrefectureCode: string | null;
+  /** 表示名 ("全国" or 県名) */
+  areaName: string;
+  /** 初期選択する指標。metrics に含まれなければ先頭を使う */
+  defaultMetricKey?: string;
+}
+
+/** 系列キャッシュのキー。指標×地域で一意にする */
+const cacheKey = (metricKey: string, areaCode: string) =>
+  `${metricKey}:${areaCode}`;
+
+/**
+ * 全国系列の凡例名。
+ *
+ * ★47 県平均を「全国」と称してはならない (総人口のような実数系は全国値の 1/47 になる)。
+ * 判定は action が返す source 申告に従う。正典は aggregate-metric-timeseries.ts。
+ */
+function nationalSeriesName(result: MetricTimeseriesResult | undefined): string {
+  return result?.source === "national" ? "全国" : "全国平均";
+}
+
+/**
+ * GA4 レポート風の「KPI タイル切替チャート」。
+ *
+ * タイル群がタブになっていて、選んだ指標だけを下の大型折れ線に描く。
+ *
+ * 旧 KPI カードグリッドとの違いと、そうしている理由:
+ * - タイルにミニチャートを置かない。トレンドは下の大型チャートが担うので、
+ *   同じ事実を 2 か所に描かない (theme-catalog-standards.md の重複禁止を構造で守る)
+ * - 全指標の全国系列を一括取得せず、選択された指標だけを遅延取得する。
+ *   タイルの値・順位は indicatorDataMap 由来で即座に出るので初期表示は速い
+ * - 県選択時は「実線=その県 / 破線=全国」を重ねる。旧カードは県別トレンドを
+ *   出せていなかった (nationalSeries しか持っていなかった)
+ */
+export function MetricSwitcherPanel({
+  metrics,
+  tabLabels,
+  selectedPrefectureCode,
+  areaName,
+  defaultMetricKey,
+}: MetricSwitcherPanelProps) {
+  const areaCode = selectedPrefectureCode ?? NATIONAL_CODE;
+
+  const [selectedKey, setSelectedKey] = useState(() => {
+    const preferred = metrics.find((m) => m.metricKey === defaultMetricKey);
+    return preferred?.metricKey ?? metrics[0]?.metricKey ?? "";
+  });
+
+  // 指標が入れ替わって選択中キーが消えた場合だけ先頭へ戻す
+  useEffect(() => {
+    if (metrics.length === 0) return;
+    if (!metrics.some((m) => m.metricKey === selectedKey)) {
+      setSelectedKey(metrics[0].metricKey);
+    }
+  }, [metrics, selectedKey]);
+
+  /**
+   * `${metricKey}:${areaCode}` をキーにした取得済み系列。
+   *
+   * キー付きなので県切替やタイル往復での競合を requestId 照合なしに扱える
+   * (古い応答が届いても自分のキーに書き込むだけで、描画は現在のキーを引く)。
+   */
+  const [seriesCache, setSeriesCache] = useState<
+    Record<string, MetricTimeseriesResult>
+  >({});
+
+  const selected = metrics.find((m) => m.metricKey === selectedKey);
+
+  // 選択中の指標について、必要な系列 (自地域 + 全国) のうち未取得のものだけ取る
+  useEffect(() => {
+    if (!selectedKey) return;
+    const wanted = selectedPrefectureCode
+      ? [areaCode, NATIONAL_CODE]
+      : [NATIONAL_CODE];
+    const missing = wanted.filter((code) => !(cacheKey(selectedKey, code) in seriesCache));
+    if (missing.length === 0) return;
+
+    let cancelled = false;
+    void Promise.all(
+      missing.map(async (code) => {
+        const result = await fetchMetricTimeseriesAction(selectedKey, code).catch(
+          () => null,
+        );
+        return [cacheKey(selectedKey, code), result] as const;
+      }),
+    ).then((entries) => {
+      if (cancelled) return;
+      setSeriesCache((prev) => {
+        const next = { ...prev };
+        for (const [key, result] of entries) {
+          if (result) next[key] = result;
+        }
+        return next;
+      });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedKey, areaCode, selectedPrefectureCode, seriesCache]);
+
+  const primaryResult = seriesCache[cacheKey(selectedKey, areaCode)];
+  const nationalResult = seriesCache[cacheKey(selectedKey, NATIONAL_CODE)];
+  const isLoadingSeries = !primaryResult;
+
+  const chartData: LineChartData | null = useMemo(() => {
+    if (!selected) return null;
+
+    const unit = selected.unit;
+    /** 年ラベル → 行。2 系列を年で突き合わせる */
+    const rows = new Map<string, Record<string, string | number>>();
+    const put = (year: string, key: string, value: number) => {
+      const row = rows.get(year) ?? { year };
+      row[key] = value;
+      rows.set(year, row);
+    };
+
+    const lines: LineChartData["lines"] = [];
+
+    if (selectedPrefectureCode) {
+      const area = primaryResult;
+      if (!area || area.points.length === 0) return null;
+      for (const p of area.points) put(p.yearName, "value", p.value);
+      lines.push({
+        dataKey: "value",
+        name: areaName,
+        color: "hsl(var(--primary))",
+      });
+
+      // 全国は比較系列。破線 + 点なしで主系列と混ざらないようにする
+      if (nationalResult && nationalResult.points.length > 0) {
+        for (const p of nationalResult.points) put(p.yearName, "national", p.value);
+        lines.push({
+          dataKey: "national",
+          name: nationalSeriesName(nationalResult),
+          color: "hsl(var(--muted-foreground))",
+          strokeDasharray: COMPARISON_DASH,
+          hidePoints: true,
+        });
+      }
+    } else {
+      // 全国表示。action が空 (計算型指標) のときだけ R2 の 47 県平均へ退避する
+      const points = nationalResult?.points ?? [];
+      if (points.length > 0) {
+        for (const p of points) put(p.yearName, "value", p.value);
+        lines.push({
+          dataKey: "value",
+          name: nationalSeriesName(nationalResult),
+          color: "hsl(var(--primary))",
+        });
+      } else if (selected.series.length > 0) {
+        for (const p of selected.series) put(String(p.year), "value", p.value);
+        lines.push({
+          dataKey: "value",
+          name: "全国平均",
+          color: "hsl(var(--primary))",
+        });
+      } else {
+        return null;
+      }
+    }
+
+    const data = [...rows.values()].sort((a, b) =>
+      String(a.year).localeCompare(String(b.year)),
+    );
+    if (data.length < 2) return null;
+    return { xAxisKey: "year", data, lines, unit };
+  }, [
+    selected,
+    selectedPrefectureCode,
+    primaryResult,
+    nationalResult,
+    areaName,
+  ]);
+
+  if (metrics.length === 0 || !selected) return null;
+
+  const handleSelect = (key: string) => {
+    setSelectedKey(key);
+    trackNavClick({
+      label: key,
+      href: `/ranking/${key}`,
+      surface: "theme_kpi_switcher",
+    });
+  };
+
+  return (
+    <Tabs value={selectedKey} onValueChange={handleSelect}>
+      <div className="mb-3">
+        <ScrollableRow className="snap-x snap-mandatory">
+          <TabsList className="inline-flex h-auto w-max gap-2 bg-transparent p-0">
+            {metrics.map((m) => {
+              const label = tabLabels[m.metricKey] ?? m.title;
+              return (
+                <TabsTrigger
+                  key={m.metricKey}
+                  value={m.metricKey}
+                  className="snap-start flex h-auto w-[9.5rem] shrink-0 flex-col items-start gap-1 rounded-none border border-border border-b-2 bg-card px-3 py-2 text-left data-[state=active]:border-primary/40 data-[state=active]:border-b-primary data-[state=active]:bg-card data-[state=active]:shadow-none"
+                >
+                  <span className="w-full truncate text-[11px] text-muted-foreground">
+                    {/* 47 県平均を「全国」と誤読させない */}
+                    {m.isNationalAverage && !m.isLoading ? `${label}（平均）` : label}
+                  </span>
+                  <span className="w-full truncate text-base font-bold tabular-nums text-foreground">
+                    {m.value !== null
+                      ? m.value.toLocaleString("ja-JP", {
+                          maximumFractionDigits: 2,
+                        })
+                      : "—"}
+                    {m.unit ? (
+                      <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
+                        {m.unit}
+                      </span>
+                    ) : null}
+                  </span>
+                  {m.rank !== null ? (
+                    <span className="text-[10px] tabular-nums text-muted-foreground">
+                      {m.rank}位 / {m.total}
+                    </span>
+                  ) : null}
+                </TabsTrigger>
+              );
+            })}
+          </TabsList>
+        </ScrollableRow>
+      </div>
+
+      <ChartPanel
+        title={selected.title}
+        icon={<MapPin className="h-4 w-4 shrink-0 text-primary" />}
+        titleClassName="text-base"
+        description={
+          selectedPrefectureCode
+            ? `${areaName}の推移（破線は全国）`
+            : `${areaName}の推移`
+        }
+        footer={
+          <ChartFooter
+            rankingLink={`/ranking/${selected.metricKey}`}
+            rankingLabel="ランキングを見る"
+          />
+        }
+      >
+        {isLoadingSeries ? (
+          <ChartLoading height={250} />
+        ) : chartData ? (
+          <LineChartClient chartData={chartData} />
+        ) : (
+          <ChartEmptyState message="推移データがありません" height={250} />
+        )}
+      </ChartPanel>
+    </Tabs>
+  );
+}

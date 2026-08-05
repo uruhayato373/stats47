@@ -30,6 +30,10 @@ export interface LineChartData {
     dataKey: string;
     name: string;
     color: string;
+    /** 破線にする stroke-dasharray（例 `"6,4"`）。比較系列を線種で区別する用 */
+    strokeDasharray?: string;
+    /** データ点の丸を描かない。比較系列で主系列の点と混ざるのを避ける */
+    hidePoints?: boolean;
   }>;
   /** 単位（任意） */
   unit?: string;

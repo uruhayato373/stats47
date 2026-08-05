@@ -126,6 +126,8 @@ export function LineChart({
         .attr("stroke-width", 1.5)
         .attr("stroke-linecap", "round")
         .attr("stroke-linejoin", "round")
+        // 破線指定が無ければ属性自体を付けない (null で D3 が属性を削除する)
+        .attr("stroke-dasharray", s.strokeDasharray ?? null)
         .attr("d", pathLine);
     });
 
@@ -171,6 +173,8 @@ export function LineChart({
     // データポイント（静的表示用）
     const pointRadius = 3;
     seriesToDraw.forEach((s) => {
+      // 比較系列は点を描かない (主系列の点と混ざって読みづらくなるため)
+      if (s.hidePoints) return;
       const filtered = data.filter((d) => d[s.dataKey] != null);
       svg
         .append("g")
