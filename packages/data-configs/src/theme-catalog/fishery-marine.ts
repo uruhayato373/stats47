@@ -15,12 +15,12 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "marine-fishery-catch",
       "shortLabel": "海面漁獲量",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "inland-fishery-catch",
       "shortLabel": "内水面漁獲量",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "fishing-port-count",
@@ -40,12 +40,12 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "marine-aquaculture-harvest",
       "shortLabel": "海面養殖",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "inland-aquaculture-harvest",
       "shortLabel": "内水面養殖",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "marine-fishery-aquaculture-output-value",
@@ -55,7 +55,7 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "marine-fishery-output-value",
       "shortLabel": "海面漁業産出額",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "fishery-output-value",
@@ -70,22 +70,22 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "fishery-species-catch-scallop",
       "shortLabel": "ホタテガイ",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "fishery-species-catch-japanese-squid",
       "shortLabel": "スルメイカ",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "fishery-species-catch-tuna",
       "shortLabel": "マグロ類",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "fishery-species-catch-bonito",
       "shortLabel": "カツオ",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "fishery-species-catch-mackerel",

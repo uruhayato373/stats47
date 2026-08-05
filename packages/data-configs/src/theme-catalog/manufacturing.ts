@@ -40,7 +40,7 @@ export const MANUFACTURING_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "manufacturing-shipment-amount-per-establishment",
       "shortLabel": "出荷額/所",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "industrial-land-price-change-rate",

@@ -15,12 +15,12 @@ export const PORTS_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "port-cargo-export",
       "shortLabel": "輸出貨物量",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "port-cargo-import",
       "shortLabel": "輸入貨物量",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "port-container-count",
@@ -40,7 +40,7 @@ export const PORTS_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "port-ships-tonnage",
       "shortLabel": "入港船舶総トン数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "port-passengers-total",
@@ -50,7 +50,7 @@ export const PORTS_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "passenger-ship-transport",
       "shortLabel": "旅客船輸送人員",
-      "role": "secondary"
+      "role": "context"
     }
   ],
   "charts": [

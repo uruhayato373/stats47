@@ -25,7 +25,7 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "crude-birth-rate",
       "shortLabel": "粗出生率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "average-age-of-first-marriage-wife",
@@ -50,7 +50,7 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "dependent-population-index",
       "shortLabel": "従属人口指数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "household-ratio-with-65plus",
@@ -497,35 +497,7 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "section": "暮らし・年金",
       "sortOrder": 40
     },
-    {
-      "componentKey": "theme-as-aging-index-trend",
-      "componentType": "line-chart",
-      "title": "老年化指数の全国推移",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A03404"
-          }
-        ],
-        "labels": [
-          "老年化指数"
-        ],
-        "seriesColors": [
-          "#ef4444"
-        ]
-      },
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "rankingLink": "/ranking/aging-index",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 50
-    },
-    {
+{
       "componentKey": "theme-as-youth-old-dep-index",
       "componentType": "line-chart",
       "title": "年少人口指数と老年人口指数の推移",

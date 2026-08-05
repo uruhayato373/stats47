@@ -121,35 +121,7 @@ export const TOURISM_CATALOG: ThemeCatalog = {
       "section": "旅行・交通",
       "sortOrder": 0
     },
-    {
-      "componentKey": "theme-tourism-room-utilization-trend",
-      "componentType": "line-chart",
-      "title": "客室稼働率の推移（全国平均）",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010207",
-            "cdCat01": "#G04308"
-          }
-        ],
-        "labels": [
-          "客室稼働率"
-        ],
-        "seriesColors": [
-          "#3b82f6"
-        ]
-      },
-      "sourceName": "観光庁 宿泊旅行統計調査",
-      "sourceLink": null,
-      "rankingLink": "/ranking/room-utilization-rate",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 100
-    },
-    {
+{
       "componentKey": "theme-tourism-hotel-supply-trend",
       "componentType": "line-chart",
       "title": "宿泊施設数と客室数の推移",

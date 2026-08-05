@@ -23,12 +23,12 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "criminal-recognition-count",
       "shortLabel": "認知件数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "violent-crime-per-100k",
       "shortLabel": "粗暴犯",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "criminal-arrest-rate",
@@ -53,7 +53,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "juvenile-criminal-arrest-person-per-population",
       "shortLabel": "少年犯罪率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "drug-enforcement-arrest-count-per-population",
@@ -88,7 +88,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "traffic-accident-casualties-elderly-65plus",
       "shortLabel": "高齢者事故",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "building-fire-count-per-100-thousand-people",
@@ -98,7 +98,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "fire-deaths-per-100k",
       "shortLabel": "火災死者",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "fire-damage-casualties-per-population",
@@ -108,7 +108,7 @@ export const SAFETY_SET: IndicatorSet = {
     {
       "rankingKey": "annual-emergency-dispatches-per-1000",
       "shortLabel": "救急出動",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "disaster-damage-amount-per-person",

@@ -223,35 +223,7 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "section": null,
       "sortOrder": 40
     },
-    {
-      "componentKey": "theme-lm-active-job-opening-trend",
-      "componentType": "line-chart",
-      "title": "有効求人倍率の推移",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010206",
-            "cdCat01": "#F03103"
-          }
-        ],
-        "labels": [
-          "有効求人倍率"
-        ],
-        "seriesColors": [
-          "#22c55e"
-        ]
-      },
-      "sourceName": "総務省 社会・人口統計体系（労働）",
-      "sourceLink": null,
-      "rankingLink": "/ranking/active-job-opening-ratio",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 50
-    }
-  ],
+],
   "keywords": [
     "離職率",
     "転職率",

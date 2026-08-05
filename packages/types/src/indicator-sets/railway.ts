@@ -13,7 +13,7 @@ export const RAILWAY_SET: IndicatorSet = {
     {
       "rankingKey": "railway-passengers",
       "shortLabel": "鉄道駅乗降客数",
-      "role": "primary"
+      "role": "secondary"
     },
     {
       "rankingKey": "jr-passenger-transport",

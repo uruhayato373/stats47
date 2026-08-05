@@ -330,35 +330,7 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "section": null,
       "sortOrder": 120
     },
-    {
-      "componentKey": "lh-pop-density-trend",
-      "componentType": "line-chart",
-      "title": "可住地人口密度の推移",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A01202"
-          }
-        ],
-        "labels": [
-          "可住地人口密度"
-        ],
-        "seriesColors": [
-          "#8b5cf6"
-        ]
-      },
-      "sourceName": "国勢調査",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/population-density-per-km2-inhabitable-area",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 130
-    },
-    {
+{
       "componentKey": "lh-household-structure-trend",
       "componentType": "line-chart",
       "title": "単独世帯・核家族世帯割合の推移",
