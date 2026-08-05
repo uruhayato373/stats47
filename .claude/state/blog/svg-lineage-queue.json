@@ -1,13 +1,13 @@
 {
-  "total": 1052,
+  "total": 1056,
   "byStatus": {
-    "both": 928,
+    "both": 932,
     "jsonOnly": 0,
     "neither": 124
   },
   "byMethod": {
     "manual": 43,
-    "done": 928,
+    "done": 932,
     "ssot-restore-new": 55,
     "ssot-restore": 26
   },
@@ -259,6 +259,33 @@
       "slug": "avg-height-high-school-2nd-male",
       "base": "avg-height-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "base": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "base": "fish-pickled-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
+      "base": "avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -6899,6 +6926,15 @@
     },
     {
       "slug": "real-disposable-income-reversal",
+      "base": "per-capita-prefectural-income-h27-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "real-disposable-income-reversal",
       "base": "disposable-income-after-rent-prefecture-rankings",
       "chartType": "ranking",
       "hasJson": true,
@@ -6908,7 +6944,7 @@
     },
     {
       "slug": "real-disposable-income-reversal",
-      "base": "real-disposable-income-reversal-prefecture-rankings",
+      "base": "real-disposable-income-prefecture-rankings",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
