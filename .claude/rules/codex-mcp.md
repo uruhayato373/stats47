@@ -9,7 +9,7 @@ Claude Code から **MCP 経由で OpenAI Codex を呼ぶ**ときの実行規約
 > |---|---|---|---|
 > | **①** | **Claude Code → MCP (`mcp__codex__codex`)** | Claude のツールコールとして同期実行 | **本ルール** |
 > | ② | standalone Codex (VSCode 拡張 / `codex` TUI) | 独立プロセス。`AGENTS.md` (=`CLAUDE.md` symlink) を読む | 同時起動禁止 or worktree 分離 (CLAUDE.md「並行エージェント」節) |
-> | ③ | 「Codex セッション (OpenAI 画像)」 | オーナーが Codex 側で画像生成する手作業 | `area-databook-standards.md` §5 ほか。MCP とは無関係 |
+> | ③ | Codex built-in imagegen | Codex CLI/IDEで直接、または①経由で画像生成 | blog は `/generate-blog-images`。area は `area-databook-standards.md` §5 |
 
 ---
 
@@ -61,7 +61,23 @@ url: https://chatgpt.com/backend-api/codex/responses
 | `mcp__codex__codex-reply` | 既存セッションの継続 | `threadId` + `prompt` | 同上 |
 
 - 続きを投げるときは**必ず `threadId` を渡す** (新規 `codex` を呼ぶと文脈がゼロから始まる)。
-- `model` 未指定なら Codex 側の既定モデル。指定するなら `gpt-5.2-codex` 等。
+- `model` 未指定なら Codex 側の既定モデル。repo固有evalなしに固定modelへ上書きしない。
+
+### 画像生成 (`/generate-blog-images`)
+
+ブログ背景は `.claude/skills/blog/generate-blog-images/SKILL.md` を唯一の入口とする。
+Claude Codeが生成要求JSONを組み立て直さず、
+`npm run blog-images:codex -- request --slug <slug>` の `mcp.arguments` をそのまま使う。
+
+1. `mcp__codex__codex` を `sandbox: read-only` / `approval-policy: never` / repo root `cwd` で呼ぶ。
+2. Codexは組み込み `$imagegen` で1枚だけ生成し、repoを編集せず生成画像pathとprompt hashを返す。
+3. Claude側が `npm run blog-images:codex -- ingest ...` で1200×630 JPEGへ正規化してgit assetへ取り込む。
+4. `npm run check:blog-images` と画像pipeline testを通す。
+
+意味仕様とpromptのSSOTは `apps/web/scripts/data/blog-codex-background-catalog.ts`、
+exact bytesのSSOTは `apps/web/scripts/lib/assets/blog-codex-backgrounds/*.jpg`。
+MCP prompt、自由入力prompt、生成済み画像をskill/ruleへ複製しない。Codex MCPが使えない場合に
+Geminiへ暗黙fallbackしない。R2 push / deployはCodexへ委譲しない。
 
 ## 3. パラメータ規律 (★これが git 混入を防ぐ主装置)
 

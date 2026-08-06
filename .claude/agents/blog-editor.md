@@ -85,7 +85,12 @@ DB (articles テーブル)           ← サイトに反映
 このエージェントが扱う画像の方式割当（OGP 画像の正典は `.claude/rules/ogp-image-standards.md`）:
 
 - **ブログ OGP / リンクカード** → 事前生成した静的画像を R2 配信（`generate-blog-thumbnails-cloud.ts` が Satori/Sharp で合成 → `app/blog/<slug>/ogp/ogp.png` 等）。ランタイム `opengraph-image.tsx` は Cloudflare Workers で 500 になるため使わない（`ogp-image-standards.md` §3/§5）
-- **記事別 AI 背景（実装済・2026-07-12）** → `generate-blog-thumbnails-cloud.ts --ai-background`。Gemini が**文字なしの背景だけ**を生成し、タイトル/ブランドは Satori/Sharp が合成。系統・motif は**決定的カタログ**（`apps/web/scripts/data/blog-ogp-visual-catalog.ts`）で選び、改善は**カタログ/スタイルのみ（個別プロンプト禁止）**。カタログ/スタイル SSOT 維持は `image-prompt-curator`、生成実行が blog-editor。詳細 `ogp-image-standards.md` §5
+- **記事別 AI 背景（Codex新規標準）** → `/generate-blog-images`。Codex built-in imagegenが
+  **文字なし・単一モチーフ**の背景だけを生成し、タイトル/ブランドはSatori/Sharpが合成する。
+  意味仕様は `blog-codex-background-catalog.ts`、exact bytesはgit JPEGがSSOT。Claude Codeからは
+  Codex MCPをread-onlyで呼び、決定的ingest後にgeneratorへ渡す。未移行記事の既存Gemini背景は
+  legacy fallbackとして再利用する。カタログ/スタイルSSOT維持は `image-prompt-curator`、
+  最終bundle生成がblog-editor。詳細 `ogp-image-standards.md` §5
 - **固定 OGP（凝ったビジュアル）** → Remotion (`apps/remotion/src/features/ogp/BlogOgp*.tsx`)。手順は同ディレクトリ `README.md`
 - **ブログ記事の hero 画像・装飾素材** → `/image-prompt`（テンプレ一覧 `.claude/skills/image-prompt/reference/catalog.md`）→ 外部 AI 画像生成
 - **記事内チャート** → `/generate-article-charts`（Remotion ベース）

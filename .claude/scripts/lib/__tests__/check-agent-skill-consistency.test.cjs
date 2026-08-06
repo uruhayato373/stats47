@@ -27,6 +27,16 @@ function run(root) {
   });
 }
 
+function linkCodexBlogImageSkill(root) {
+  const link = path.join(root, ".agents/skills/generate-blog-images");
+  fs.mkdirSync(path.dirname(link), { recursive: true });
+  fs.symlinkSync(
+    path.join(root, ".claude/skills/blog/generate-blog-images"),
+    link,
+    "dir"
+  );
+}
+
 const VALID_AGENT = `---
 name: worker
 description: bounded executor
@@ -202,4 +212,63 @@ primary_agent: worker
   t.after(() => fs.rmSync(root, { recursive: true }));
   const result = run(root);
   assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
+test("accepts the Claude Code to Codex MCP blog image contract", (t) => {
+  const root = fixture({
+    ".mcp.json": JSON.stringify({
+      mcpServers: {
+        codex: {
+          type: "stdio",
+          command: "codex",
+          args: ["mcp-server"],
+        },
+      },
+    }),
+    ".claude/agents/worker.md": VALID_AGENT,
+    ".claude/skills/blog/generate-blog-images/SKILL.md": `---
+name: generate-blog-images
+description: generate blog images through Codex MCP
+primary_agent: worker
+---
+
+Call mcp__codex__codex with output from:
+npm run blog-images:codex -- request --slug example
+    npm run blog-images:codex -- ingest --slug example
+`,
+  });
+  linkCodexBlogImageSkill(root);
+  t.after(() => fs.rmSync(root, { recursive: true }));
+  const result = run(root);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
+test("rejects a drifted Codex MCP command", (t) => {
+  const root = fixture({
+    ".mcp.json": JSON.stringify({
+      mcpServers: {
+        codex: {
+          type: "stdio",
+          command: "codex",
+          args: ["mcp"],
+        },
+      },
+    }),
+    ".claude/agents/worker.md": VALID_AGENT,
+    ".claude/skills/blog/generate-blog-images/SKILL.md": `---
+name: generate-blog-images
+description: generate blog images through Codex MCP
+primary_agent: worker
+---
+
+Call mcp__codex__codex with output from:
+npm run blog-images:codex -- request --slug example
+    npm run blog-images:codex -- ingest --slug example
+`,
+  });
+  linkCodexBlogImageSkill(root);
+  t.after(() => fs.rmSync(root, { recursive: true }));
+  const result = run(root);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /\[E10\].*mcp-server/);
 });
