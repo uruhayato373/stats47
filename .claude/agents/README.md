@@ -102,7 +102,7 @@
 | `site-ux-manager` 🆕 | サイト横断 UI/IA の統一・監査・是正 (ヘッダー/ナビ IA・モバイルドロワー・ホーム・ブログ/タグ一覧カード・共通 shell・リンクカード taxonomy・右レール構成・UX 計装配線)。ページ内部は各 page manager、GA4 台帳は ga4-analyst に委譲。site-content-layout ベンチマーク駆動 | 2026-07-20 新設 |
 | `chart-component-builder` | shadcn UI + D3.js チャートコンポーネント実装・カタログ管理 (chart-component-standards.md が SSoT)。静的 SVG の chart-author とは別物 (React/D3 実装専任) | 既存 (2026-07-03 Tier 表へ追記・棚卸し漏れ是正) |
 | `ui-reviewer` | melta-ui 準拠 + UI panel review | 既存 |
-| `image-prompt-curator` 🆕 | OGP / note 表紙 / SNS 静止素材プロンプト生成 + 画像資産の棚卸し・ギャラリー監査 (`/audit-ogp-images`) | sns-renderer + note-manager 分離 |
+| `image-prompt-curator` 🆕 | 画像prompt SSOT + Codex MCPブログ背景生成 (`/generate-blog-images`) + 画像資産監査 (`/audit-ogp-images`) | sns-renderer + note-manager 分離 |
 
 ## Tier 7: Code Quality / DevOps (4 体)
 

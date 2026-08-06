@@ -142,6 +142,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | 文書作成・整理・陳腐化監査 | `.claude/skills/management/maintain-docs/SKILL.md` (`/maintain-docs`) |
 | エージェントチーム構成 (Tier 0/1/2) | `.claude/agents/README.md` |
 | 画像プロンプトカタログ (43 種) | `.claude/skills/image-prompt/reference/catalog.md` |
+| ブログ背景のCodex画像生成 | `.claude/skills/blog/generate-blog-images/SKILL.md` (`/generate-blog-images`) |
 
 ### GitHub Issues 運用 (主要ラベル)
 

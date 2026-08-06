@@ -15,18 +15,30 @@
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
-import dotenv from 'dotenv';
 
 import {
   createS3ImageObjectStoreFromEnv,
   type ImageObjectStore,
 } from '@stats47/r2-storage/image-pipeline';
+import dotenv from 'dotenv';
 
+import {
+  BLOG_CODEX_BACKGROUND_BY_SLUG,
+} from './data/blog-codex-background-catalog';
 import {
   BLOG_AI_BACKGROUND_NORMALIZER_SOURCES,
   BLOG_IMAGE_GENERATOR_SPEC,
   blogRendererSources,
 } from './data/image-generator-registry';
+import {
+  computeAiBackgroundCacheFingerprint,
+  createAiBackgroundCache,
+  readPublishedBackgroundState,
+  resolveCachedAiBackground,
+  type AiBackgroundCache,
+} from './lib/blog-ai-background-cache';
+import { normalizeAiBackgroundBuffer } from './lib/blog-ai-background-normalizer';
+import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
 import {
   BLOG_IMAGE_PUBLISH_PLAN,
   BLOG_IMAGE_STAGE_ROOT,
@@ -40,17 +52,10 @@ import {
   type BlogImageMetadata,
 } from './lib/blog-image-generation';
 import {
-  computeAiBackgroundCacheFingerprint,
-  createAiBackgroundCache,
-  readPublishedBackgroundState,
-  resolveCachedAiBackground,
-  type AiBackgroundCache,
-} from './lib/blog-ai-background-cache';
-import { normalizeAiBackgroundBuffer } from './lib/blog-ai-background-normalizer';
-import {
   calculateRendererHash,
   createImageGenerationPublishPlan,
   selectChangedImageBatch,
+  sha256,
   type ImageGenerationPlan,
   type ImageGenerationStatus,
 } from './lib/image-generation-manifest';
@@ -87,9 +92,10 @@ interface AiDescriptor {
 }
 
 interface ResolvedAiBackground {
-  location: 'published' | 'cache';
-  cacheFingerprint: string;
+  location: 'published' | 'cache' | 'codex';
+  cacheFingerprint: string | null;
   metadata: BlogBackgroundMetadata & { source: 'ai' };
+  buffer?: Buffer;
 }
 
 interface PreparedBlogImage {
@@ -237,12 +243,31 @@ function makeAiMetadata(
 
 async function loadAiBackground(options: {
   item: PreparedBlogImage;
-  store: ImageObjectStore;
+  store: ImageObjectStore | null;
   cache: AiBackgroundCache;
 }): Promise<Buffer> {
   const background = options.item.background;
   if (!background) {
     throw new Error(`${options.item.slug}: AI背景referenceがありません`);
+  }
+  if (background.location === 'codex') {
+    if (
+      !background.buffer ||
+      sha256(background.buffer) !== background.metadata.sha256
+    ) {
+      throw new Error(
+        `${options.item.slug}: Codex背景assetのSHAがplan確定後に不整合になりました`
+      );
+    }
+    return background.buffer;
+  }
+  if (!options.store) {
+    throw new Error(`${options.item.slug}: AI背景のR2検証資格情報がありません`);
+  }
+  if (!background.cacheFingerprint) {
+    throw new Error(
+      `${options.item.slug}: AI背景cache fingerprintがありません`
+    );
   }
   if (background.location === 'cache') {
     const cached = await options.cache.read(background.cacheFingerprint);
@@ -304,10 +329,17 @@ function assetFiles(
 async function main(): Promise<void> {
   const options = parseArgs();
   const store = createS3ImageObjectStoreFromEnv();
-  if (!store) {
+  const isCodexPilot =
+    Boolean(options.outDir) &&
+    Boolean(options.slugs) &&
+    options.slugs!.every(
+      (slug) => BLOG_CODEX_BACKGROUND_BY_SLUG[slug] !== undefined
+    );
+  if (!store && !isCodexPilot) {
     throw new Error(
       'blog画像の既存背景検証にはR2 S3資格情報が必要です。' +
-        '公開custom domainのHEAD metadataへはfallbackしません'
+        '公開custom domainのHEAD metadataへはfallbackしません。' +
+        '例外は --out-dir + Codex catalog登録済みの明示slugだけです'
     );
   }
   const planPath = join(PROJECT_ROOT, BLOG_IMAGE_PUBLISH_PLAN);
@@ -380,21 +412,68 @@ async function main(): Promise<void> {
           ? { ogpVisualType: options.visualTypeOverride }
           : {}),
       });
-      const prompt = buildOgpPrompt({ ...visual, title: data.title });
-      const ai: AiDescriptor = {
-        prompt,
-        promptHash: computePromptHash({ ...visual, title: data.title }),
-        legacyPromptHash: computeLegacyPromptHashV1({
-          ...visual,
-          title: data.title,
-        }),
-        model: OGP_MODEL,
-        promptVersion: OGP_PROMPT_VERSION,
-        visualType: visual.visualType,
-        motif: visual.motif,
-      };
+      const codexSource = await resolveCodexBackgroundSource(
+        PROJECT_ROOT,
+        slug
+      );
+      const ai: AiDescriptor = codexSource
+        ? {
+            prompt: codexSource.prompt,
+            promptHash: codexSource.promptHash,
+            legacyPromptHash: null,
+            model: codexSource.model,
+            promptVersion: codexSource.promptVersion,
+            visualType: visual.visualType,
+            motif: codexSource.motif,
+          }
+        : {
+            prompt: buildOgpPrompt({ ...visual, title: data.title }),
+            promptHash: computePromptHash({ ...visual, title: data.title }),
+            legacyPromptHash: computeLegacyPromptHashV1({
+              ...visual,
+              title: data.title,
+            }),
+            model: OGP_MODEL,
+            promptVersion: OGP_PROMPT_VERSION,
+            visualType: visual.visualType,
+            motif: visual.motif,
+          };
+      if (codexSource) {
+        const background: ResolvedAiBackground = {
+          location: 'codex',
+          cacheFingerprint: null,
+          metadata: makeAiMetadata(ai, codexSource.sha256),
+          buffer: codexSource.buffer,
+        };
+        const plan = createBlogImagePlan({
+          slug,
+          data,
+          background: {
+            source: 'ai',
+            promptHash: background.metadata.promptHash,
+            sha256: background.metadata.sha256,
+          },
+          rendererHash: baseRendererHash,
+        });
+        const status = await inspector.inspect(plan);
+        if (status.reason === 'probe-error') {
+          throw new Error(`${slug}: R2 freshness probe に失敗しました`);
+        }
+        return {
+          slug,
+          data,
+          ai,
+          plan,
+          status,
+          background,
+          needsAiGeneration: false,
+        };
+      }
+      if (!store) {
+        throw new Error(`${slug}: 既存AI背景のR2検証資格情報がありません`);
+      }
       const cacheFingerprint = computeAiBackgroundCacheFingerprint({
-        prompt,
+        prompt: ai.prompt,
         promptHash: ai.promptHash,
         model: ai.model,
         promptVersion: ai.promptVersion,
