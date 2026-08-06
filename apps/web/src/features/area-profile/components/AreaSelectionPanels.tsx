@@ -1,6 +1,5 @@
 'use client';
 
-import { cn } from '@stats47/components';
 import {
   Tabs,
   TabsContent,
@@ -15,9 +14,6 @@ import { useAreaDirectoryRegion } from './AreaDirectoryRegionContext';
 import { AreaTileMap } from './AreaTileMap';
 
 import type { AreaDirectoryData, AreaTile } from '../utils';
-
-const FOCUS_RING =
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2';
 
 type AreaSurface = 'areas_map' | 'areas_list';
 
@@ -37,7 +33,7 @@ interface AreaSelectionPanelsProps extends AreaDirectoryData {
  * `/areas` の選択パネル（レスポンシブ・計測の合流点）。
  *
  * - デスクトップ（lg 以上）: 「軽量タイル地図 + 地方別ディレクトリ」の 2 ペイン。
- *   xl 以上の地方フィルタは PageShell の左レール `AreaDirectoryRegionNav` が担う。
+ *   PageShell のレール表示幅では `AreaDirectoryRegionNav` が地方フィルタを担う。
  * - モバイル / タブレット（lg 未満）: 既定タブ「一覧から探す」+ 任意タブ「地図から探す」。
  *
  * デスクトップペインは lg 未満でも DOM に存在（display:none）するため、全 47 県リンクは
@@ -50,7 +46,7 @@ export function AreaSelectionPanels({
   gridRows,
   className,
 }: AreaSelectionPanelsProps) {
-  const { activeRegionCode, setActiveRegionCode } = useAreaDirectoryRegion();
+  const { activeRegionCode } = useAreaDirectoryRegion();
 
   const legend = regionGroups.map((r) => ({
     regionCode: r.regionCode,
@@ -61,11 +57,6 @@ export function AreaSelectionPanels({
     track('areas_map', `/areas/${tile.prefCode}`, tile.prefName);
   const onListSelect = (prefCode: string, prefName: string) =>
     track('areas_list', `/areas/${prefCode}`, prefName);
-
-  const filters = [
-    { code: 'all', name: 'すべて' },
-    ...regionGroups.map((r) => ({ code: r.regionCode, name: r.regionName })),
-  ];
 
   return (
     <div className={className}>
@@ -79,33 +70,6 @@ export function AreaSelectionPanels({
           onSelect={onMapSelect}
         />
         <div>
-          {/* lg〜xl は左レールがまだ出ないため、同じ地方フィルタを本文側に残す。 */}
-          <div
-            role="group"
-            aria-label="地方で絞り込む"
-            className="mb-4 flex flex-wrap gap-1.5 xl:hidden"
-          >
-            {filters.map((filter) => {
-              const active = activeRegionCode === filter.code;
-              return (
-                <button
-                  key={filter.code}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => setActiveRegionCode(filter.code)}
-                  className={cn(
-                    'min-h-9 rounded-none border px-3 text-sm transition-colors',
-                    active
-                      ? 'border-primary bg-primary text-primary-foreground'
-                      : 'border-border bg-card text-foreground hover:bg-muted',
-                    FOCUS_RING
-                  )}
-                >
-                  {filter.name}
-                </button>
-              );
-            })}
-          </div>
           <AreaDirectoryList
             regionGroups={regionGroups}
             activeRegionCode={activeRegionCode}

@@ -20,7 +20,7 @@ interface Props {
 
 /**
  * `/areas` の左レール。本文内にあった地方フィルタを、カテゴリ・テーマと同じ
- * ページ内ナビの文法へ揃える。xl 未満では PageShell が隠し、本文の全県一覧を使う。
+ * ページ内ナビの文法へ揃える。レール未表示幅では本文の全県一覧を使う。
  */
 export function AreaDirectoryRegionNav({ regions }: Props) {
   const { activeRegionCode, setActiveRegionCode } = useAreaDirectoryRegion();
