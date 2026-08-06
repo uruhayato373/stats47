@@ -425,7 +425,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | ページ種別 | アフィリ枠 | 解決キー |
 |---|---|---|
 | blog | 本文 banner / 本文 text (自動挿入 最大4) / サイドバー text / 楽天商品 / ハウス枠×2 | tagKeys → vertical、ランキング名 → 品目 |
-| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天商品 | categoryKey → vertical + tagKeys、ランキング名 → 品目 |
+| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天商品 | **categoryKey → vertical** (tagKeys 優先・空なら categoryKey)、ランキング名 → 品目 |
 | category / tag | native ≤4 / ハウス枠 | `CATEGORY_FALLBACK_TAGS` / tagKey |
 | survey | native ≤4 | 所属ランキングの categoryKey 最頻値 → vertical |
 | themes | native ≤4 / theme-end 300×250 | relatedArticleTagKeys → 無ければ `THEME_AFFILIATE_MAP` (本文中央ハウス枠は 2026-08-06 撤去。bespoke の themes/local-finance は InContent×2 のみで native なし) |
@@ -436,6 +436,16 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 > 上表は 2026-08-06 にコード実態と突合して是正した (旧版は blog/ranking/areas 県に
 > ふるさと納税を過剰記載。`FurusatoNozeiCard` の実使用は市区町村ページのみ)。
+
+> **★`RankingItem.tags` は空である前提で設計する (2026-08-06 実測)**: tags の SSOT である
+> `MetricConfig.tags` は 2026-06-03 に型へ追加されて以来 **2,295 config すべてで未記入**で、
+> ranking の native 枠は一度も描画されていなかった。型・builder・描画は揃っているのに
+> 供給だけが無い「宣言されているが誰も書かない SSOT」で、型検査でも lint でも見えず、
+> 本番 item.json を実測して初めて判明した。**tagKeys 単独で解決を打ち切らず、必ず
+> categoryKey → vertical へフォールバックする** (全 ranking item が categoryKey を持ち
+> `CATEGORY_AFFILIATE_MAP` が 17 軸すべてを写像するため、在庫がある限り枠が埋まる)。
+> ゲート: `features/ranking/__tests__/native-affiliate-resolution-contract.test.ts`。
+> tags を将来 SSOT として使うなら、まず**書き手**を用意すること。
 
 > **2026-07-28 に埋めたギャップ** (すべて既存コンポーネントの再利用): 写像なし 6 category の追加
 > (unmapped 7,866 → 783 imp) / survey の tag ハードコード撤廃 / areas 県ページの `AreaBannerAd`
