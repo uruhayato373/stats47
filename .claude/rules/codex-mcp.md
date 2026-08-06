@@ -27,6 +27,32 @@ codex login status         # → "Logged in using ChatGPT" なら準備完了
   未インストールのマシンでは MCP 接続が失敗するだけで、他のツールには影響しない。
 - 認証は `~/.codex/auth.json`。**このファイルを読まない・コピーしない・ログに出さない。**
 
+### ★会社 Windows PC (兵庫県庁ネットワーク) では実行できない (2026-08-06 実測)
+
+MCP 接続とツールのロードは成功するが、**実行すると 503 で失敗する**。CLI (0.146.1) も
+`codex login status` も正常で、原因はネットワーク側。
+
+```
+unexpected status 503 Service Unavailable: <HTML>…<TITLE>警告</TITLE>…,
+url: https://chatgpt.com/backend-api/codex/responses
+```
+
+返ってきたのは **i-FILTER (Digital Arts) のブロックページ**で、TLS エラーではなく
+**フィルタのポリシー拒否ページ**が返っている (`SELF_SIGNED_CERT_IN_CHAIN` の CA 不足系とは別)。
+
+- **`.mcp.json` の `command` を `.cmd` のフルパスに書き換えても直らない。** コマンド解決が
+  原因なら MCP サーバーの接続自体が失敗する。ツールがロードできている時点でその線は消える。
+- **[仮説・未検証] codex CLI がプロキシを使わず直接外に出ているために遮断されている可能性がある。**
+  同日の probe では **codex の 503 をどちらの経路でも再現できていない** — `curl` を
+  `HTTPS_PROXY` 経由にすると `407 Proxy Authentication Required`、`--noproxy '*'` の直結だと
+  schannel の TLS 傍受エラーで、いずれも 503 ブロックページにならなかった。
+  `local-environment.md` は「直接の外向き通信はポリシー遮断 / 明示 CONNECT が唯一の正規の出口」と
+  記録しているので、**プロキシ経由なら通る可能性は否定できていない**。
+  検証するなら codex がプロキシを使っているかを確認する (reqwest は既定で `HTTPS_PROXY` を見るが、
+  MCP サーバーへの環境変数の継承と `NO_PROXY` の効き方は未確認)。
+- 現状は会社 PC からの実行不可として扱い、**別ネットワーク (自宅 Mac 等) へ回す**。
+  上の仮説が実証されたらこの節を書き換える。
+
 ## 2. ツール
 
 | ツール | 用途 | 主な入力 | 返り値 |
