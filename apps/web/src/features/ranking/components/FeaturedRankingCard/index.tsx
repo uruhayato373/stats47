@@ -27,21 +27,29 @@ export function FeaturedRankingCard({
       href={`/ranking/${rankingKey}`}
       className={`${PORTAL_CARD_ASPECT_CLASS} group flex flex-col overflow-hidden p-3`}
     >
-      <span className="line-clamp-2 text-sm font-semibold leading-snug transition-colors group-hover:text-primary">
+      {/* hook を常に2行分の高さで確保し、下の flex-1 地図領域を全カードで同じ高さに揃える
+          (1行/2行のタイトル差で地図の大きさがバラつくのを防ぐ)。 */}
+      <span className="relative z-10 line-clamp-2 min-h-[2.4rem] text-sm font-semibold leading-snug transition-colors group-hover:text-primary">
         {model.hook}
       </span>
       <div className="relative mt-1 min-h-0 flex-1">
+        {/* 地図を拡大して右下へ寄せる。テキストが左上に集まるため、地図の重心を
+            右下に移すと構図が釣り合い、はみ出しはカードの overflow-hidden がクリップする。 */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 translate-x-[8%] translate-y-[10%] [&>svg]:h-full [&>svg]:w-full"
+          className="pointer-events-none absolute inset-0 [transform-origin:center] [transform:scale(1.3)_translate(6%,14%)] [&>svg]:h-full [&>svg]:w-full"
           dangerouslySetInnerHTML={{ __html: model.mapSvg }}
         />
         <div className="absolute left-0 top-1 z-10 bg-background/90 pr-2">
-          <p className="text-[10px] leading-none text-muted-foreground">
-            {model.top.rank ?? 1}位
-          </p>
-          <p className="mt-1 text-sm font-semibold leading-none text-foreground">
-            {model.top.areaName}
+          {/* 「N位」と都道府県名は改行せず baseline 揃えで1行に置く
+              (フォントサイズは各自そのまま)。左上をコンパクトにして地図に余白を譲る。 */}
+          <p className="flex items-baseline gap-1 leading-none">
+            <span className="text-[10px] text-muted-foreground">
+              {model.top.rank ?? 1}位
+            </span>
+            <span className="text-sm font-semibold text-foreground">
+              {model.top.areaName}
+            </span>
           </p>
           <p className="mt-1 font-mono text-base font-bold leading-none tabular-nums text-primary">
             {model.top.value}
