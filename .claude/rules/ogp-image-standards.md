@@ -222,7 +222,7 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
 ### 画像生成 AI: ブログ OGP の記事別背景 (実装済・正典)
 
 **新規の blog OGP 背景は Codex built-in imagegen で「主役 1 つ・文字なし」を生成し、タイトル・ブランドは
-既存 Satori/Sharp が合成する** (2026-08-07)。既存の Gemini 背景・cache は壊さず legacy fallback として残す。
+既存 Satori/Sharp が合成する** (2026-08-07)。既存の Gemini 背景・cache は壊さず移行中fallbackとして残す。
 旧 doc `23_ブログOGP生成AIパイプライン仕様.md` (docs/02\_実装計画・削除)
 の恒久運用スペックを本節に統合 (doc は削除・git 履歴に残る)。
 
@@ -235,7 +235,7 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
   `apps/web/scripts/manage-blog-codex-backgrounds.ts`。Claude Codeは `.mcp.json` の
   `codex mcp-server` をread-onlyで呼び、Codexの組み込み `$imagegen` (`gpt-image-2`) にだけ生成を担当させる。
   model / promptVersionはasset定義へ固定し、既存v1 assetのprovenanceを新規versionで上書きしない。
-- **legacy Gemini のコード SSOT (既存背景再利用 / 未移行記事 fallback)**:
+- **既存 Gemini のコード SSOT (既存背景再利用 / 未移行記事 fallback)**:
   `apps/web/scripts/data/blog-ogp-visual-catalog.ts`
   — 6 系統 (map / people / economy / industry / timeline / comparison) × motif・固定スタイル `OGP_STYLE_PREFIX`
   (light / editorial / flat / 落ち着いた藍・**文字/数字/ロゴ/実顔/精密な地図境界を禁止**・左 1/3 をタイトル安全域として空ける)・
@@ -249,21 +249,21 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
   `normalizeAiBackground` と同じ 1200×630 契約を検証 →
   `buildElement(backgroundImage)` で合成 → R2。最終画像は
   `thumbnail-{light,dark}.webp` / `ogp/ogp.png`、source artifact は `ogp/background.jpg`。
-  生成 metadata は `ogp/generation.json` の共通 manifest へ統合する。legacy 未移行記事だけは従来どおり
+  生成 metadata は `ogp/generation.json` の共通 manifest へ統合する。未移行記事だけは従来どおり
   Gemini (`gemini-2.5-flash-image`) が背景 1 枚 →
   `normalizeAiBackground` (`blog-thumbnail-render.ts`)
   で 1200×630 cover + dark 処理 + 左タイトルスクリム (**satori 互換の JPEG**。webp は satori が解析不能で不可) →
   同じ exact plan 経路へ入る。
 - **改善は共通カタログ/スタイルのみ**: Codex 背景は `BLOG_CODEX_BACKGROUND_BY_SLUG` の subject/detail と
   共通 prompt builder を直し、imagegen で再生成して同名 JPEG を更新する。1 枚へ複数概念・地図・グラフを
-  詰め込まない。legacy Gemini は `OGP_STYLE_PREFIX` / `OGP_VISUAL_CATALOG` を直す。
+  詰め込まない。既存 Gemini は `OGP_STYLE_PREFIX` / `OGP_VISUAL_CATALOG` を直す。
 - **費用・安全弁**: Codex built-in imagegenはAPI key / Gemini課金を使わないがCodex利用枠を消費する。
-  1 request = 1画像に固定し、暗黙再試行やprovider fallbackを行わない。legacy Gemini は ~$0.039/枚。
+  1 request = 1画像に固定し、暗黙再試行やprovider fallbackを行わない。既存 Gemini は ~$0.039/枚。
   背景 fingerprint は promptHash + 正規化済み背景SHA、
   最終合成fingerprintは背景SHA + overlay入力 + rendererHash。rendererだけ変わった場合は既存背景を
   再利用しGeminiを呼ばない。必要件数の推定費用が`--budget-usd`を超える場合やキー無しは、
   一部生成/ブランド背景fallbackをせず開始前に失敗する。
-- **AI成果cache（legacy Gemini の再課金防止）**: APIへ渡すprompt全文 / promptHash / model / promptVersion /
+- **AI成果cache（既存 Gemini の再課金防止）**: APIへ渡すprompt全文 / promptHash / model / promptVersion /
   正規化renderer hash / 1200×630 JPEG出力契約をSHA-256 fingerprint化し、
   `staging/image-cache/blog-ai-background/v1/<fingerprint>.jpg`へ`If-None-Match: *`でimmutable保存する。
   metadataは`stats47-cache-kind=blog-ai-background` / `stats47-cache-fingerprint` /
@@ -281,7 +281,7 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
   HEAD headerを参照せず、R2 S3 `ImageObjectStore.get`が返すbody / metadata / ETagで検証する。
   共通manifestはmanifest SHA、背景はmanifest asset SHA + object SHA + MIME + byte size +
   manifest ownerが一致した場合だけ再利用する。S3資格情報がない実行は公開URLへfallbackせずfail-closedする。
-- **legacy クライアント**: `apps/web/scripts/lib/gemini-image-client.ts` — `x-goog-api-key`・30s timeout・
+- **既存 Gemini クライアント**: `apps/web/scripts/lib/gemini-image-client.ts` — `x-goog-api-key`・30s timeout・
   429/5xx/timeout/network のみ指数バックオフ再試行・4xx 非再試行・**API キー/レスポンス本文をログ/エラーに出さない**。
   `GEMINI_API_KEY` は `.env.local` から自己ロード (値非表示、CI では no-op)。
 - **生成コマンド**:
@@ -300,7 +300,7 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
   # Codex catalog 登録済み slug の exact plan 生成 (R2 creds のある CI / セッション)
   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --slug a,b
 
-  # legacy Gemini の純粋監査 (API を呼ばない・生成予定/最大費用のみ)
+  # 既存 Gemini の純粋監査 (API を呼ばない・生成予定/最大費用のみ)
   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --limit N
   # ローカル目視 (R2 非書込・gallery /assets「ブログ OGP パイロット (local)」タブで確認)
   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --slug a,b --out-dir .local/ogp-pilot
@@ -321,8 +321,12 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
 - **役割分担**: catalog / Codex MCP生成 / git JPEG ingest / 品質監査 = `image-prompt-curator`
   (`/generate-blog-images`)、最終bundle生成・記事公開連動 = `blog-editor`、
   effect 判定 = `improvement-triage`。R2 push は共通exact plan publisher。
-- **展開状況**: legacy Gemini の高流入 top100 = 本番 live (2026-07-12・GSC imp 上位)。
-  Codex 単一モチーフは `/blog` 1ページ目の新着24記事 (23背景) をローカル検証済み (2026-08-07、未deploy)。
+- **既存 Gemini fallbackの削除条件**: 公開中の全slugがCodex catalog + git JPEGへ移行し、
+  R2の全`ogp/generation.json`でGemini背景が0件になった時点で、Gemini client / cache /
+  request workflowを同一リリースで削除する。
+- **展開状況**: 既存 Gemini の高流入 top100 = 本番 live (2026-07-12・GSC imp 上位)。
+  Codex 単一モチーフは `/blog` 1ページ目の新着24記事 (23背景) をR2公開済み
+  (2026-08-07、コードは本リリース対象)。
   残り記事は従来のブランド背景 (`ogp-bg-brand-{light,dark}.jpg`) のまま。効果 (SNS カード・回遊) 観測後に段階展開。
   **ranking / areas / note の AI 背景は未実装 (Phase 2)**。外部 AI (Midjourney 等) 用プロンプトは
   `image-prompt` skill の catalog 43 種。
