@@ -1,42 +1,47 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from 'react';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-import { Tabs, TabsList, TabsTrigger } from "@stats47/components/atoms/ui/tabs";
-import { MapPin } from "lucide-react";
+// 型サブパスから読む。registry (index) を値 import すると 20 テーマ分のカタログが
+// client bundle に載る (types.ts は型 import しか持たないので何も引き連れない)
+import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
+import { Check, MapPin } from 'lucide-react';
 
-import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
-import type { LineChartData } from "@/components/stat-charts/types/visualization";
+import { ChartFooter } from '@/components/charts/ChartFooter';
+import { getChartColor } from '@/components/charts/ChartPalette';
+import { ChartPanel } from '@/components/charts/ChartPanel';
+import type { LineChartData } from '@/components/stat-charts/types/visualization';
 
-import { trackNavClick } from "@/lib/analytics/events";
+import { trackNavClick } from '@/lib/analytics/events';
 
 import {
   fetchMetricTimeseriesAction,
   type MetricTimeseriesResult,
-} from "../actions";
+} from '../actions';
 
-import { ChartEmptyState, ChartLoading } from "./ChartState";
-import { ScrollableRow } from "./ScrollableRow";
+import { ChartEmptyState, ChartLoading } from './ChartState';
+import { ScrollableRow } from './ScrollableRow';
 
-import type { MetricKpi } from "./metric-kpi";
+import type { MetricKpi } from './metric-kpi';
 
 const LineChartClient = dynamic(
   () =>
-    import(
-      "@/components/stat-charts/components/charts/LineChart/LineChartClient"
-    ).then((mod) => mod.LineChartClient),
-  { ssr: false, loading: () => <ChartLoading height={250} /> },
+    import('@/components/stat-charts/components/charts/LineChart/LineChartClient').then(
+      (mod) => mod.LineChartClient
+    ),
+  { ssr: false, loading: () => <ChartLoading height={250} /> }
 );
 
-const NATIONAL_CODE = "00000";
+const NATIONAL_CODE = '00000';
 /** 比較系列 (全国) の線種。主系列と色だけで区別しないための破線 */
-const COMPARISON_DASH = "6,4";
+const COMPARISON_DASH = '6,4';
 
 interface MetricSwitcherPanelProps {
-  /** ThemeMetricsDashboard が導出した KPI 群 (タイルの中身) */
+  /** カード見出し (グループ名。未指定ならデフォルトの主要指標見出し) */
+  title?: string;
+  /** このカードに並べる KPI 群 (タイルの中身・表示順) */
   metrics: MetricKpi[];
   /** rankingKey → 短ラベル (tabIndicators の tabLabel)。無ければ title を使う */
   tabLabels: Record<string, string>;
@@ -44,8 +49,8 @@ interface MetricSwitcherPanelProps {
   selectedPrefectureCode: string | null;
   /** 表示名 ("全国" or 県名) */
   areaName: string;
-  /** 初期選択する指標。metrics に含まれなければ先頭を使う */
-  defaultMetricKey?: string;
+  /** 初期チェックする指標。metrics に無いキーは無視し、全滅したら先頭 1 件に倒す */
+  defaultCheckedKeys?: string[];
 }
 
 /** 系列キャッシュのキー。指標×地域で一意にする */
@@ -60,9 +65,9 @@ const cacheKey = (metricKey: string, areaCode: string) =>
  * データが欠けているのではなく**そもそも推移が存在しない**ので、そう書いた方が正しい。
  */
 type ChartState =
-  | { kind: "chart"; data: LineChartData }
-  | { kind: "single-year"; yearName: string }
-  | { kind: "none" };
+  | { kind: 'chart'; data: LineChartData; hasComparison: boolean }
+  | { kind: 'single-year'; yearName: string }
+  | { kind: 'none' };
 
 /**
  * 全国系列の凡例名。
@@ -70,8 +75,10 @@ type ChartState =
  * ★47 県平均を「全国」と称してはならない (総人口のような実数系は全国値の 1/47 になる)。
  * 判定は action が返す source 申告に従う。正典は aggregate-metric-timeseries.ts。
  */
-function nationalSeriesName(result: MetricTimeseriesResult | undefined): string {
-  return result?.source === "national" ? "全国" : "全国平均";
+function nationalSeriesName(
+  result: MetricTimeseriesResult | undefined
+): string {
+  return result?.source === 'national' ? '全国' : '全国平均';
 }
 
 /**
@@ -82,17 +89,58 @@ function nationalSeriesName(result: MetricTimeseriesResult | undefined): string 
  * 該当: consumer-prices の全指標 / laspeyres-index-prefecture など。
  */
 function isNationalBaselineIndex(unit: string): boolean {
-  return unit.includes("全国=100") || unit.includes("全国＝100");
+  return unit.includes('全国=100') || unit.includes('全国＝100');
+}
+
+/**
+ * チェックされた指標の単位から左右 Y 軸を割り当てる。
+ *
+ * 軸は 2 本しかないので単位も 2 種まで (3 種以上はカタログ validator が定義時に弾く)。
+ * 割当は「表示順に出てきた 1 個目の単位 = 左、2 個目 = 右」で決定的に決まる。
+ *
+ * ★判定材料は **チェック中の指標だけ**。グループ全体で見てしまうと、右軸の指標を 1 本だけ
+ * 残したときに左軸が空のまま目盛りだけ残り読めなくなる。単位が 1 種に絞られたら
+ * その系列は左軸 = 単軸表示に戻すのが読者にとって自然。
+ */
+function assignAxes(checked: MetricKpi[]): {
+  axisOf: Map<string, 'left' | 'right'>;
+  leftUnit: string;
+  rightUnit?: string;
+} {
+  /** 軸を分ける判定キー。`%` と `％` を別物にしない (正典は normalizeUnitForAxis) */
+  const keyOf = (m: MetricKpi) => normalizeUnitForAxis(m.unit);
+  const units: string[] = [];
+  const labels = new Map<string, string>();
+  for (const m of checked) {
+    const key = keyOf(m);
+    if (!units.includes(key)) {
+      units.push(key);
+      // 軸頭には config の表記をそのまま出す (正規化は比較のためだけ)
+      labels.set(key, m.unit);
+    }
+  }
+  const axisOf = new Map<string, 'left' | 'right'>();
+  for (const m of checked) {
+    axisOf.set(m.metricKey, keyOf(m) === units[1] ? 'right' : 'left');
+  }
+  return {
+    axisOf,
+    leftUnit: units[0] ? (labels.get(units[0]) ?? '') : '',
+    rightUnit: units[1] ? labels.get(units[1]) : undefined,
+  };
 }
 
 /** チャート見出しの説明文。実際に描いた系列から書く (比較線は指標によって出ない) */
 function describePanel(state: ChartState, areaName: string): string {
-  if (state.kind === "single-year") return `${state.yearName}時点の値`;
-  if (state.kind === "none") return `${areaName}の推移`;
-  const [primary, comparison] = state.data.lines;
-  return comparison
-    ? `${primary.name}の推移（破線は${comparison.name}）`
-    : `${primary.name}の推移`;
+  if (state.kind === 'single-year') return `${state.yearName}時点の値`;
+  if (state.kind === 'none') return `${areaName}の推移`;
+  const lines = state.data.lines;
+  if (state.hasComparison) {
+    const [primary, comparison] = lines;
+    return `${primary.name}の推移（破線は${comparison.name}）`;
+  }
+  if (lines.length === 1) return `${lines[0].name}の推移`;
+  return `${areaName}の推移（${lines.length}指標）`;
 }
 
 /**
@@ -103,81 +151,104 @@ function describePanel(state: ChartState, areaName: string): string {
  * ランキング導線の方に目を向けてもらう。
  */
 function emptyMessage(state: ChartState): string {
-  return state.kind === "single-year"
+  return state.kind === 'single-year'
     ? `${state.yearName}の単年データのため、推移グラフはありません`
-    : "推移データがありません";
+    : '推移データがありません';
 }
 
 /**
- * GA4 レポート風の「KPI タイル切替チャート」。
+ * 指標カード 1 枚 — 値付きタイル群 (横スクロール) + チェックで重ねる折れ線。
  *
- * タイル群がタブになっていて、選んだ指標だけを下の大型折れ線に描く。
+ * GA4 のスコアカードと GSC のチェックボックス折れ線の良いとこ取り。1 グループ = 1 枚で、
+ * 1 ページに複数枚が並ぶ (編成は ThemeCatalog.metricGroups が SSOT)。
  *
- * 旧 KPI カードグリッドとの違いと、そうしている理由:
- * - タイルにミニチャートを置かない。トレンドは下の大型チャートが担うので、
- *   同じ事実を 2 か所に描かない (theme-catalog-standards.md の重複禁止を構造で守る)
- * - 全指標の全国系列を一括取得せず、選択された指標だけを遅延取得する。
- *   タイルの値・順位は indicatorDataMap 由来で即座に出るので初期表示は速い
- * - 県選択時は「実線=その県 / 破線=全国」を重ねる。旧カードは県別トレンドを
- *   出せていなかった (nationalSeries しか持っていなかった)
+ * 設計上の約束と理由:
+ * - タイルにミニチャートを置かない。トレンドは下の折れ線が担うので、同じ事実を
+ *   2 か所に描かない (theme-catalog-standards.md の重複禁止を構造で守る)
+ * - チェックされた指標だけを遅延取得する。タイルの値・順位は indicatorDataMap 由来で
+ *   即座に出るので初期表示は速い
+ * - 単位が 2 種のときは左右 Y 軸に分ける。1 種なら従来どおり単軸
+ * - 県選択かつチェック 1 本のときだけ「実線=その県 / 破線=全国」を重ねる。
+ *   2 本以上のときは破線を出さない (系列が増えすぎて読めなくなる)
  */
 export function MetricSwitcherPanel({
+  title,
   metrics,
   tabLabels,
   selectedPrefectureCode,
   areaName,
-  defaultMetricKey,
+  defaultCheckedKeys,
 }: MetricSwitcherPanelProps) {
   const areaCode = selectedPrefectureCode ?? NATIONAL_CODE;
 
-  const [selectedKey, setSelectedKey] = useState(() => {
-    const preferred = metrics.find((m) => m.metricKey === defaultMetricKey);
-    return preferred?.metricKey ?? metrics[0]?.metricKey ?? "";
+  const [checkedKeys, setCheckedKeys] = useState<string[]>(() => {
+    const known = new Set(metrics.map((m) => m.metricKey));
+    const initial = (defaultCheckedKeys ?? []).filter((k) => known.has(k));
+    return initial.length > 0
+      ? initial
+      : metrics[0]
+        ? [metrics[0].metricKey]
+        : [];
   });
 
   /**
-   * 実際に描画するキー。指標が入れ替わって選択中キーが消えたときは先頭に倒す。
+   * 実際に描画する指標。指標が入れ替わってチェック中キーが消えたときは先頭に倒す。
    *
    * effect の中で setState して直すと連鎖レンダーになる
    * (react-hooks/set-state-in-effect)。state は「ユーザーが選んだもの」だけを持ち、
    * 現在の metrics で有効かどうかは描画時に導出する。
+   * 並び順は metrics 定義順に正規化する (チェックした順ではなく編成順で読ませる)。
    */
-  const effectiveKey = metrics.some((m) => m.metricKey === selectedKey)
-    ? selectedKey
-    : (metrics[0]?.metricKey ?? "");
+  const checkedMetrics = useMemo(() => {
+    const set = new Set(checkedKeys);
+    const kept = metrics.filter((m) => set.has(m.metricKey));
+    return kept.length > 0 ? kept : metrics.slice(0, 1);
+  }, [checkedKeys, metrics]);
+
+  /** 系列色。グループ内の定義順で固定 = 他をチェックしても自分の色は変わらない */
+  const colorOf = useMemo(() => {
+    const map = new Map<string, string>();
+    metrics.forEach((m, i) => map.set(m.metricKey, getChartColor(i)));
+    return map;
+  }, [metrics]);
 
   /**
    * `${metricKey}:${areaCode}` をキーにした取得済み系列。
    *
-   * キー付きなので県切替やタイル往復での競合を requestId 照合なしに扱える
+   * キー付きなので県切替やチェック往復での競合を requestId 照合なしに扱える
    * (古い応答が届いても自分のキーに書き込むだけで、描画は現在のキーを引く)。
    */
   const [seriesCache, setSeriesCache] = useState<
     Record<string, MetricTimeseriesResult>
   >({});
 
-  const selected = metrics.find((m) => m.metricKey === effectiveKey);
+  const checkedKeysKey = checkedMetrics.map((m) => m.metricKey).join(',');
 
-  // 選択中の指標について、必要な系列 (自地域 + 全国) のうち未取得のものだけ取る
+  // チェック中の指標について、必要な系列 (自地域 + 全国) のうち未取得のものだけ取る。
+  // 県選択時に全国も取るのは比較破線のためだけではない: 県系列を持たない指標
+  // (国土数値情報など) の描画フォールバックに要る。
   useEffect(() => {
-    if (!effectiveKey) return;
+    const keys = checkedKeysKey ? checkedKeysKey.split(',') : [];
+    if (keys.length === 0) return;
     const wanted = selectedPrefectureCode
       ? [areaCode, NATIONAL_CODE]
       : [NATIONAL_CODE];
-    const missing = wanted.filter(
-      (code) => !(cacheKey(effectiveKey, code) in seriesCache),
-    );
+    const missing: Array<[string, string]> = [];
+    for (const key of keys) {
+      for (const code of wanted) {
+        if (!(cacheKey(key, code) in seriesCache)) missing.push([key, code]);
+      }
+    }
     if (missing.length === 0) return;
 
     let cancelled = false;
     void Promise.all(
-      missing.map(async (code) => {
-        const result = await fetchMetricTimeseriesAction(
-          effectiveKey,
-          code,
-        ).catch(() => null);
-        return [cacheKey(effectiveKey, code), result] as const;
-      }),
+      missing.map(async ([key, code]) => {
+        const result = await fetchMetricTimeseriesAction(key, code).catch(
+          () => null
+        );
+        return [cacheKey(key, code), result] as const;
+      })
     ).then((entries) => {
       if (cancelled) return;
       setSeriesCache((prev) => {
@@ -191,130 +262,261 @@ export function MetricSwitcherPanel({
     return () => {
       cancelled = true;
     };
-  }, [effectiveKey, areaCode, selectedPrefectureCode, seriesCache]);
+  }, [checkedKeysKey, areaCode, selectedPrefectureCode, seriesCache]);
 
-  const primaryResult = seriesCache[cacheKey(effectiveKey, areaCode)];
-  const nationalResult = seriesCache[cacheKey(effectiveKey, NATIONAL_CODE)];
-  const isLoadingSeries = !primaryResult;
+  // 1 本でも描ければ描く。全滅のときだけローディング (取得は指標ごとに独立)
+  const isLoadingSeries = checkedMetrics.every(
+    (m) => !seriesCache[cacheKey(m.metricKey, areaCode)]
+  );
 
   const chartState: ChartState = useMemo(() => {
-    if (!selected) return { kind: "none" };
+    if (checkedMetrics.length === 0) return { kind: 'none' };
 
-    const unit = selected.unit;
-    /** 年ラベル → 行。2 系列を年で突き合わせる */
+    const { axisOf, leftUnit, rightUnit } = assignAxes(checkedMetrics);
+
+    /**
+     * 系列を年で突き合わせる。
+     *
+     * ★突合キーは **4 桁の年コード** で、表示ラベル (yearName) ではない。
+     * 指標によって「2020年」と「2020年度」が混在していて、ラベルで突き合わせると
+     * 同じ年が別カテゴリになり、x 軸に "2020年2020年度" と重なって出たうえ
+     * 系列同士が半目盛りずれる (2026-08-06 に labor-wages の 最低賃金(年度) ×
+     * 大卒初任給(年) で実際に出た)。
+     *
+     * 目盛りに出せるラベルは 1 年 1 つなので、**編成順で先に来た系列の表記**を採る。
+     * 年度と暦年を重ねること自体の限界 (対象期間が厳密には一致しない) は残るので、
+     * 期間の基準が違う指標を同じグループに入れるかはカタログ側の判断。
+     */
     const rows = new Map<string, Record<string, string | number>>();
-    const put = (year: string, key: string, value: number) => {
-      const row = rows.get(year) ?? { year };
+    const labelOfYear = new Map<string, string>();
+    const put = (year: string, yearName: string, key: string, value: number) => {
+      const yk = year.slice(0, 4);
+      if (!labelOfYear.has(yk)) labelOfYear.set(yk, yearName);
+      const row = rows.get(yk) ?? {};
       row[key] = value;
-      rows.set(year, row);
+      rows.set(yk, row);
     };
 
-    const lines: LineChartData["lines"] = [];
+    const lines: LineChartData['lines'] = [];
+    const single = checkedMetrics.length === 1 ? checkedMetrics[0] : null;
+    let maxPoints = 0;
+    let loneYear = '';
 
-    const areaPoints = primaryResult?.points ?? [];
+    for (const metric of checkedMetrics) {
+      const key = metric.metricKey;
+      const label = tabLabels[key] ?? metric.title;
+      const areaResult = seriesCache[cacheKey(key, areaCode)];
+      const nationalResult = seriesCache[cacheKey(key, NATIONAL_CODE)];
+      const areaPoints = areaResult?.points ?? [];
 
-    if (selectedPrefectureCode && areaPoints.length > 0) {
-      for (const p of areaPoints) put(p.yearName, "value", p.value);
+      /** この系列の実データと凡例名。県系列が空なら全国 → R2 47 県平均へ退避する */
+      let points: { year: string; yearName: string; value: number }[] = [];
+      let name = label;
+
+      if (selectedPrefectureCode && areaPoints.length > 0) {
+        points = areaPoints;
+        // 1 本だけのときは従来どおり「地域名」を凡例にする (破線の全国と対になる)。
+        // 複数本のときは地域が共通なので指標名で区別する (地域は見出し側が言う)。
+        name = single ? areaName : label;
+      } else {
+        // 全国表示、または県を選んでいてもその県の系列が取れない指標。
+        // 後者は国土数値情報など e-Stat パラメータを持たない external 種で起きる
+        // (action が resolveEstatParams で null になり空を返す)。
+        const nationalPoints = nationalResult?.points ?? [];
+        if (nationalPoints.length > 0) {
+          points = nationalPoints;
+          name = single ? nationalSeriesName(nationalResult) : label;
+        } else if (metric.series.length > 0) {
+          points = metric.series.map((p) => ({
+            year: String(p.year),
+            yearName: String(p.year),
+            value: p.value,
+          }));
+          // 47 県平均を「全国」と称さない (実数系は全国値の 1/47 になる)
+          name = single ? '全国平均' : `${label}（平均）`;
+        }
+      }
+
+      if (points.length === 0) continue;
+      for (const p of points) put(p.year, p.yearName, key, p.value);
+      if (points.length > maxPoints) maxPoints = points.length;
+      if (points.length === 1) loneYear = points[0].yearName;
+
       lines.push({
-        dataKey: "value",
-        name: areaName,
-        color: "hsl(var(--primary))",
+        dataKey: key,
+        name,
+        color: colorOf.get(key) ?? getChartColor(0),
+        yAxis: axisOf.get(key) ?? 'left',
       });
+    }
 
-      // 全国は比較系列。破線 + 点なしで主系列と混ざらないようにする。
-      // ただし「全国=100」の指数は全国が常に 100 の水平線になるので出さない。
+    if (lines.length === 0) return { kind: 'none' };
+
+    // 全国比較の破線。チェック 1 本 + 県選択のときだけ出す。
+    // 2 本以上に足すと系列が倍になって読めない (GSC も比較線は出さない)。
+    // 「全国=100」の指数は全国が常に 100 の水平線になるので出さない。
+    let hasComparison = false;
+    if (single && selectedPrefectureCode) {
+      const areaResult = seriesCache[cacheKey(single.metricKey, areaCode)];
+      const nationalResult =
+        seriesCache[cacheKey(single.metricKey, NATIONAL_CODE)];
       if (
+        (areaResult?.points.length ?? 0) > 0 &&
         nationalResult &&
         nationalResult.points.length > 0 &&
-        !isNationalBaselineIndex(unit)
+        !isNationalBaselineIndex(single.unit)
       ) {
-        for (const p of nationalResult.points) put(p.yearName, "national", p.value);
+        for (const p of nationalResult.points)
+          put(p.year, p.yearName, 'national', p.value);
         lines.push({
-          dataKey: "national",
+          dataKey: 'national',
           name: nationalSeriesName(nationalResult),
-          color: "hsl(var(--muted-foreground))",
+          color: 'hsl(var(--muted-foreground))',
           strokeDasharray: COMPARISON_DASH,
           hidePoints: true,
+          yAxis: 'left',
         });
-      }
-    } else {
-      // 全国表示、または県を選んでいてもその県の系列が取れない指標。
-      //
-      // 後者は国土数値情報など e-Stat パラメータを持たない external 種で起きる
-      // (action が resolveEstatParams で null になり空を返す)。全国系列があるなら
-      // それを描く — 「何も出ない」より水準の文脈が残る方が読者の役に立つ。
-      // 全国系列も空なら (計算型指標) R2 の 47 県平均へ退避する。
-      const points = nationalResult?.points ?? [];
-      if (points.length > 0) {
-        for (const p of points) put(p.yearName, "value", p.value);
-        lines.push({
-          dataKey: "value",
-          name: nationalSeriesName(nationalResult),
-          color: "hsl(var(--primary))",
-        });
-      } else if (selected.series.length > 0) {
-        for (const p of selected.series) put(String(p.year), "value", p.value);
-        lines.push({
-          dataKey: "value",
-          name: "全国平均",
-          color: "hsl(var(--primary))",
-        });
-      } else {
-        return { kind: "none" };
+        hasComparison = true;
+        if (nationalResult.points.length > maxPoints) {
+          maxPoints = nationalResult.points.length;
+        }
       }
     }
 
-    const data = [...rows.values()].sort((a, b) =>
-      String(a.year).localeCompare(String(b.year)),
-    );
+    // 4 桁年キーで昇順に並べ、x カテゴリには表示ラベルを載せる
+    const data = [...rows.entries()]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([yk, row]) => ({ ...row, year: labelOfYear.get(yk) ?? yk }));
     // 1 点では折れ線にならない。ただし「無い」ではなく「単年だけ」と言い分ける
-    if (data.length === 1) {
-      return { kind: "single-year", yearName: String(data[0].year) };
-    }
-    if (data.length === 0) return { kind: "none" };
-    return { kind: "chart", data: { xAxisKey: "year", data, lines, unit } };
+    if (maxPoints === 1) return { kind: 'single-year', yearName: loneYear };
+    if (data.length === 0) return { kind: 'none' };
+    return {
+      kind: 'chart',
+      hasComparison,
+      data: {
+        xAxisKey: 'year',
+        data,
+        lines,
+        unit: leftUnit,
+        rightUnit,
+      },
+    };
   }, [
-    selected,
+    checkedMetrics,
     selectedPrefectureCode,
-    primaryResult,
-    nationalResult,
+    seriesCache,
+    areaCode,
     areaName,
+    tabLabels,
+    colorOf,
   ]);
 
-  if (metrics.length === 0 || !selected) return null;
+  if (metrics.length === 0) return null;
 
-  const handleSelect = (key: string) => {
-    setSelectedKey(key);
-    trackNavClick({
-      label: key,
-      href: `/ranking/${key}`,
-      surface: "theme_kpi_switcher",
+  const toggle = (key: string, next: boolean) => {
+    // 最後の 1 本は外せない。0 本になるとチャートが消え、
+    // 「壊れた」のか「自分で消した」のか読者に判別できなくなる。
+    if (!next && checkedMetrics.length <= 1) return;
+    setCheckedKeys((prev) => {
+      const set = new Set(
+        prev.length > 0 ? prev : checkedMetrics.map((m) => m.metricKey)
+      );
+      if (next) set.add(key);
+      else set.delete(key);
+      return metrics.map((m) => m.metricKey).filter((k) => set.has(k));
     });
+    // OFF は「見るのをやめた」だけで関心の表明ではないので送らない
+    if (next) {
+      trackNavClick({
+        label: key,
+        href: `/ranking/${key}`,
+        surface: 'theme_kpi_switcher',
+      });
+    }
   };
 
+  const checkedSet = new Set(checkedMetrics.map((m) => m.metricKey));
+  const isLastChecked = checkedMetrics.length <= 1;
+  /** フッターのランキング導線。複数チェック時は先頭 (= 編成順で最初) を代表にする */
+  const representative = checkedMetrics[0] ?? metrics[0];
+
   return (
-    <Tabs value={effectiveKey} onValueChange={handleSelect}>
-      <div className="mb-3">
+    <ChartPanel
+      title={title ?? representative?.title ?? ''}
+      icon={<MapPin className="h-4 w-4 shrink-0 text-primary" />}
+      titleClassName="text-base"
+      description={describePanel(chartState, areaName)}
+      footer={
+        representative ? (
+          <ChartFooter
+            rankingLink={`/ranking/${representative.metricKey}`}
+            rankingLabel="ランキングを見る"
+          />
+        ) : undefined
+      }
+    >
+      <div className="mb-4">
         <ScrollableRow className="snap-x snap-mandatory">
-          <TabsList className="inline-flex h-auto w-max gap-2 bg-transparent p-0">
+          <div className="inline-flex w-max gap-2">
             {metrics.map((m) => {
               const label = tabLabels[m.metricKey] ?? m.title;
+              const checked = checkedSet.has(m.metricKey);
+              const lockedOn = checked && isLastChecked;
+              const color = colorOf.get(m.metricKey) ?? getChartColor(0);
               return (
-                <TabsTrigger
+                /* タイル全体で 1 つのチェックボックス。
+                     Radix の Checkbox (button) を <label> で包むと、ラベル経由の
+                     activation と直接クリックが二重に発火しうる。入れ子にせず
+                     button 自体を role="checkbox" にして 1 コントロールに保つ。 */
+                <button
                   key={m.metricKey}
-                  value={m.metricKey}
-                  className="snap-start flex h-auto w-[9.5rem] shrink-0 flex-col items-start gap-1 rounded-none border border-border border-b-2 bg-card px-3 py-2 text-left data-[state=active]:border-primary/40 data-[state=active]:border-b-primary data-[state=active]:bg-card data-[state=active]:shadow-none"
+                  type="button"
+                  role="checkbox"
+                  aria-checked={checked}
+                  aria-label={`${label}をグラフに表示`}
+                  aria-disabled={lockedOn || undefined}
+                  onClick={() => toggle(m.metricKey, !checked)}
+                  title={
+                    lockedOn
+                      ? '最後の 1 指標は外せません（別の指標を選ぶと外せます）'
+                      : // タイル幅に収まらないラベルを hover で読めるようにする
+                        label
+                  }
+                  className={`snap-start flex w-[9.5rem] shrink-0 flex-col items-start gap-1 rounded-none border border-border border-b-2 bg-card px-3 py-2 text-left ${
+                    checked
+                      ? 'border-primary/40'
+                      : 'border-b-border hover:border-primary/30'
+                  } ${lockedOn ? 'cursor-default' : 'cursor-pointer'}`}
+                  style={checked ? { borderBottomColor: color } : undefined}
                 >
-                  <span className="w-full truncate text-[11px] text-muted-foreground">
-                    {/* 47 県平均を「全国」と誤読させない */}
-                    {m.isNationalAverage && !m.isLoading ? `${label}（平均）` : label}
+                  <span className="flex w-full items-center gap-1.5">
+                    {/* チェック状態と系列色を 1 つの箱で示す (色ドットを別に置かない) */}
+                    <span
+                      aria-hidden
+                      className="flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-sm border"
+                      style={
+                        checked
+                          ? { backgroundColor: color, borderColor: color }
+                          : undefined
+                      }
+                    >
+                      {checked ? (
+                        <Check className="h-3 w-3 text-primary-foreground" />
+                      ) : null}
+                    </span>
+                    <span className="truncate text-[11px] text-muted-foreground">
+                      {/* 47 県平均を「全国」と誤読させない */}
+                      {m.isNationalAverage && !m.isLoading
+                        ? `${label}（平均）`
+                        : label}
+                    </span>
                   </span>
                   <span className="w-full truncate text-base font-bold tabular-nums text-foreground">
                     {m.value !== null
-                      ? m.value.toLocaleString("ja-JP", {
+                      ? m.value.toLocaleString('ja-JP', {
                           maximumFractionDigits: 2,
                         })
-                      : "—"}
+                      : '—'}
                     {m.unit ? (
                       <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
                         {m.unit}
@@ -326,33 +528,19 @@ export function MetricSwitcherPanel({
                       {m.rank}位 / {m.total}
                     </span>
                   ) : null}
-                </TabsTrigger>
+                </button>
               );
             })}
-          </TabsList>
+          </div>
         </ScrollableRow>
       </div>
-
-      <ChartPanel
-        title={selected.title}
-        icon={<MapPin className="h-4 w-4 shrink-0 text-primary" />}
-        titleClassName="text-base"
-        description={describePanel(chartState, areaName)}
-        footer={
-          <ChartFooter
-            rankingLink={`/ranking/${selected.metricKey}`}
-            rankingLabel="ランキングを見る"
-          />
-        }
-      >
-        {isLoadingSeries ? (
-          <ChartLoading height={250} />
-        ) : chartState.kind === "chart" ? (
-          <LineChartClient chartData={chartState.data} />
-        ) : (
-          <ChartEmptyState message={emptyMessage(chartState)} height={250} />
-        )}
-      </ChartPanel>
-    </Tabs>
+      {isLoadingSeries ? (
+        <ChartLoading height={250} />
+      ) : chartState.kind === 'chart' ? (
+        <LineChartClient chartData={chartState.data} />
+      ) : (
+        <ChartEmptyState message={emptyMessage(chartState)} height={250} />
+      )}
+    </ChartPanel>
   );
 }

@@ -5,14 +5,17 @@
  *
  * error (exit 1 / CI・pre-commit をブロック):
  *   - metrics.rankingKey / relatedRankingKeys が METRICS_REGISTRY / metrics に不在
+ *   - metrics.rankingKey が isActive:false (/ranking/<key> が 410 か空ページになる)
  *   - componentType が union 外 (TS でもブロックされるが runtime backstop)
- *   - componentKey 重複 (テーマ内 + 全テーマ横断)
- *   - primary 指標がどのチャートにも panelTab にも現れない
- *   - chart.section が panelTabs.label に不在 (null は許容)
- *   - sortOrder 重複 (テーマ内)
- *   - panelTabs.rankingKeys ⊄ metrics
+ *   - componentKey 重複 (テーマ内)
+ *   - rankingLink の参照先が不在 or isActive:false
+ *   - page-components の estatParams 構造 (statsDataId 桁 / 系列数とラベル数)
+ *   - metricGroups: key/title 重複・rankingKeys ⊄ metrics・defaultCheckedKeys 不整合・単位 3 種以上
  * warn (exit 0 / 表示のみ, --strict で error):
- *   - primary/secondary の selection 未記入
+ *   - primary/secondary の selection 未記入 / componentKey の横断共有 / sortOrder 重複
+ *   - primary 指標がチャート未使用 / metricGroups の未所属・過大
+ *
+ * ★旧 panelTabs (廃止済み概念) の検査は存在しない。指標カードの編成は metricGroups が担う。
  *
  * 使い方:
  *   npx tsx packages/data-configs/scripts/validate-theme-catalog.ts
@@ -20,9 +23,11 @@
  */
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 import { METRICS_REGISTRY } from "../src/registry";
-import { listThemeCatalogs, CATALOG_COMPONENT_TYPES } from "../src/theme-catalog";
+import { normalizeUnitForAxis } from "../src/theme-catalog/types";
+import { listThemeCatalogs, CATALOG_COMPONENT_TYPES, type ThemeCatalog } from "../src/theme-catalog";
 
 const STRICT = process.argv.includes("--strict");
 const VALID_TYPES = new Set<string>(CATALOG_COMPONENT_TYPES);
@@ -131,6 +136,95 @@ function validatePageComponentEstatParams(errors: string[]): number {
   return checked;
 }
 
+/**
+ * metricGroups (指標カードの編成) の整合を検査する。
+ *
+ * ★単位 2 種までを error にする理由: カードのチャートは Y 軸が左右 2 本しかない
+ *   (LineChart の yAxis: "left" | "right")。3 種目の単位が来ると軸が足りず、
+ *   どれかの系列が桁違いのスケールに潰れる。単位文字列の正規化 (「円」と「千円」を
+ *   同一視する等) は**しない** — 誤って結合する方が、定義時に弾かれるより危険。
+ */
+export function validateMetricGroups(
+  c: ThemeCatalog,
+  metricKeys: Set<string>,
+  errors: string[],
+  warns: string[],
+): void {
+  const groups = c.metricGroups;
+  if (!groups || groups.length === 0) return;
+
+  const seenGroupKeys = new Set<string>();
+  const seenTitles = new Set<string>();
+  const assigned = new Set<string>();
+
+  for (const g of groups) {
+    if (seenGroupKeys.has(g.key)) {
+      errors.push(`[group-dup-key] ${c.key}: metricGroup key "${g.key}" がテーマ内で重複`);
+    }
+    seenGroupKeys.add(g.key);
+    if (seenTitles.has(g.title)) {
+      errors.push(`[group-dup-title] ${c.key}: metricGroup title "${g.title}" がテーマ内で重複`);
+    }
+    seenTitles.add(g.title);
+
+    if (g.rankingKeys.length === 0) {
+      errors.push(`[group-empty] ${c.key}/${g.key}: rankingKeys が空`);
+    }
+
+    // rankingKeys ⊆ metrics
+    for (const k of g.rankingKeys) {
+      if (!metricKeys.has(k)) {
+        errors.push(`[group-key] ${c.key}/${g.key}: rankingKey "${k}" が metrics に不在`);
+      }
+      assigned.add(k);
+    }
+
+    // defaultCheckedKeys ⊆ rankingKeys かつ 1 件以上 (空だとカードが系列ゼロで開く)
+    if (g.defaultCheckedKeys.length === 0) {
+      errors.push(`[group-default] ${c.key}/${g.key}: defaultCheckedKeys が空 (初期表示する系列が無い)`);
+    }
+    const inGroup = new Set(g.rankingKeys);
+    for (const k of g.defaultCheckedKeys) {
+      if (!inGroup.has(k)) {
+        errors.push(`[group-default] ${c.key}/${g.key}: defaultCheckedKeys "${k}" が rankingKeys に不在`);
+      }
+    }
+
+    // 単位は 2 種まで (Y 軸が左右 2 本)。
+    // 判定は UI の軸割当と同じ normalizeUnitForAxis を通す (% と ％ を別物にしない)
+    const units = new Set(
+      g.rankingKeys
+        .map((k) => METRICS_REGISTRY[k]?.unit)
+        .filter((u): u is string => typeof u === "string" && u.length > 0)
+        .map(normalizeUnitForAxis),
+    );
+    if (units.size > 2) {
+      errors.push(
+        `[group-units] ${c.key}/${g.key}: 単位が ${units.size} 種 (${[...units].join(" / ")}) — ` +
+          `Y 軸は左右 2 本までなので 2 種以内に分割する`,
+      );
+    }
+
+    if (g.defaultCheckedKeys.length > 3) {
+      warns.push(
+        `[group-default-many] ${c.key}/${g.key}: defaultCheckedKeys が ${g.defaultCheckedKeys.length} 件 — ` +
+          `初期表示で同数の時系列取得が走る (3 件以内が目安)`,
+      );
+    }
+    if (g.rankingKeys.length > 8) {
+      warns.push(`[group-large] ${c.key}/${g.key}: 系列候補が ${g.rankingKeys.length} 件 — カードの分割を検討`);
+    }
+  }
+
+  // 非 context 指標の未所属 (グループを定義したなら主要指標は必ずどれかのカードに出す)
+  for (const m of c.metrics) {
+    if (m.role === "context") continue;
+    if (!assigned.has(m.rankingKey)) {
+      warns.push(`[group-orphan] ${c.key}: ${m.role} 指標 "${m.rankingKey}" がどの metricGroup にも未所属`);
+    }
+  }
+}
+
 function main() {
   const catalogs = listThemeCatalogs();
   const errors: string[] = [];
@@ -211,6 +305,9 @@ function main() {
         warns.push(`[primary-orphan] ${c.key}: primary 指標 "${m.rankingKey}" がチャート未使用 (card 描画)`);
       }
     }
+
+    // metricGroups (指標カードの編成)。省略時は UI が「非 context を 1 グループ」に倒すので検査不要。
+    validateMetricGroups(c, metricKeys, errors, warns);
   }
 
   const estatParamsChecked = validatePageComponentEstatParams(errors);
@@ -240,4 +337,9 @@ function main() {
   process.exit(0);
 }
 
-main();
+// CLI として起動されたときだけ実行する。
+// test から validateMetricGroups を import しただけで main() が走ると
+// process.exit(0) でテストランナーごと落ちる (2026-08-06 に踏んだ)。
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
+}

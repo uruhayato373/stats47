@@ -34,9 +34,16 @@ export interface LineChartData {
     strokeDasharray?: string;
     /** データ点の丸を描かない。比較系列で主系列の点と混ざるのを避ける */
     hidePoints?: boolean;
+    /**
+     * この系列を載せる Y 軸。省略時は "left"（＝従来どおり単一軸）。
+     * 単位の異なる指標を 1 チャートに重ねるときだけ "right" を指定する。
+     */
+    yAxis?: "left" | "right";
   }>;
-  /** 単位（任意） */
+  /** 単位（左Y軸。任意） */
   unit?: string;
+  /** 右Y軸の単位。`lines[].yAxis === "right"` の系列があるときだけ意味を持つ */
+  rightUnit?: string;
 }
 
 /** 棒+折れ線ミックスチャート用データ（2軸） */

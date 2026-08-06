@@ -92,6 +92,11 @@ export interface ThemeIndicatorData {
 /** Server → Client に渡す props */
 export interface ThemeDashboardClientProps {
   themeConfig: ThemeConfig;
+  /**
+   * 指標カードの編成 (ThemeCatalog.metricGroups)。server component が
+   * THEME_CATALOGS から直読みして渡す。未定義テーマは 1 グループにフォールバック。
+   */
+  metricGroups?: import("@stats47/data-configs/theme-catalog").CatalogMetricGroup[];
   /** 全指標のプリロード済みデータ（rankingKey → data） */
   indicatorDataMap: Record<string, ThemeIndicatorData>;
   /** TopoJSON */

@@ -16,10 +16,16 @@ import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 
 import type { MetricKpi } from "./metric-kpi";
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
+import type { CatalogMetricGroup } from "@stats47/data-configs/theme-catalog";
 
 interface Props {
   /** テーマ設定 */
   themeConfig: ThemeConfig;
+  /**
+   * 指標カードの編成 (ThemeCatalog.metricGroups)。未定義なら
+   * 「非 context 指標を 1 グループ」にフォールバックする。
+   */
+  metricGroups?: CatalogMetricGroup[];
   /** 全指標のプリロード済みデータ（rankingKey → data） */
   indicatorDataMap: Record<string, ThemeIndicatorData>;
   /** DB 管理チャート（page_components） */
@@ -62,6 +68,7 @@ const NON_CHART_TYPES = new Set(["kpi-card", "markdown-section"]);
  */
 export function ThemeMetricsDashboard({
   themeConfig,
+  metricGroups,
   indicatorDataMap,
   pageCharts,
   selectedPrefectureCode,
@@ -136,6 +143,58 @@ export function ThemeMetricsDashboard({
     });
   }, [kpiKeys, indicatorDataMap, selectedPrefectureCode]);
 
+  const tabLabels = useMemo(
+    () =>
+      Object.fromEntries(
+        themeConfig.tabIndicators.map((t) => [t.rankingKey, t.tabLabel]),
+      ),
+    [themeConfig.tabIndicators],
+  );
+
+  /**
+   * 指標カードの編成。カタログの metricGroups を KPI 群に射影する。
+   *
+   * KPI 側は観測数の足りない指標 (MIN_VALUES_FOR_KPI 未満) を落としているので、
+   * グループのキーはここで生存キーに絞り込む。全滅したグループはカードごと出さない
+   * (空のカードを置くと「壊れている」と読める)。
+   *
+   * metricGroups 未定義のテーマ (カタログ未登録のものを含む) は
+   * 全 KPI を 1 グループにまとめる = 従来の 1 パネル構成と同じ。
+   */
+  const panels = useMemo(() => {
+    if (!metricGroups || metricGroups.length === 0) {
+      return kpis.length > 0
+        ? [
+            {
+              key: "default",
+              // 見出しは section の h2 が既に言っているので重ねない。
+              // パネル側が代表指標のタイトルに倒す (= 従来の 1 パネル構成と同じ)
+              title: undefined as string | undefined,
+              metrics: kpis,
+              defaultCheckedKeys: [themeConfig.defaultRankingKey],
+            },
+          ]
+        : [];
+    }
+    const byKey = new Map(kpis.map((k) => [k.metricKey, k]));
+    return metricGroups
+      .map((group) => {
+        const groupMetrics = group.rankingKeys
+          .map((key) => byKey.get(key))
+          .filter((m): m is MetricKpi => m !== undefined);
+        const alive = new Set(groupMetrics.map((m) => m.metricKey));
+        return {
+          key: group.key,
+          title: group.title as string | undefined,
+          metrics: groupMetrics,
+          defaultCheckedKeys: group.defaultCheckedKeys.filter((k) =>
+            alive.has(k),
+          ),
+        };
+      })
+      .filter((panel) => panel.metrics.length > 0);
+  }, [metricGroups, kpis, themeConfig.defaultRankingKey]);
+
   // cardsOnly: KPI スタットカードのみ。チャート・考察は描画しない
   const chartComponents = cardsOnly
     ? []
@@ -145,7 +204,7 @@ export function ThemeMetricsDashboard({
     : (pageCharts ?? []).filter((c) => c.componentType === "markdown-section");
 
   if (
-    kpis.length === 0 &&
+    panels.length === 0 &&
     chartComponents.length === 0 &&
     markdownComponents.length === 0
   ) {
@@ -175,18 +234,23 @@ export function ThemeMetricsDashboard({
               </span>
             )}
           </div>
-          {/* KPI タイル切替。タイル自体がタブで、下の 1 枚に選択指標を描く。
+          {/* 指標カード。タイルのチェックで系列を重ね、下の 1 枚に描く。
               カードとチャートで同じ事実を二度描かない構成 (2026-08-05 に全テーマ展開。
-              旧 ChartCard グリッドはミニチャートと下段チャートが重複していたので廃止)。 */}
-          <MetricSwitcherPanel
-            metrics={kpis}
-            tabLabels={Object.fromEntries(
-              themeConfig.tabIndicators.map((t) => [t.rankingKey, t.tabLabel]),
-            )}
-            selectedPrefectureCode={selectedPrefectureCode}
-            areaName={areaName}
-            defaultMetricKey={themeConfig.defaultRankingKey}
-          />
+              旧 ChartCard グリッドはミニチャートと下段チャートが重複していたので廃止)。
+              グループ定義があれば 1 グループ = 1 枚で並べる (2026-08-06)。 */}
+          <div className="space-y-6">
+            {panels.map((panel) => (
+              <MetricSwitcherPanel
+                key={panel.key}
+                title={panel.title}
+                metrics={panel.metrics}
+                tabLabels={tabLabels}
+                selectedPrefectureCode={selectedPrefectureCode}
+                areaName={areaName}
+                defaultCheckedKeys={panel.defaultCheckedKeys}
+              />
+            ))}
+          </div>
         </div>
       )}
 

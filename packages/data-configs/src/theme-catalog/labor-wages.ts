@@ -295,6 +295,33 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
       "sortOrder": 40
     }
   ],
+  // 指標カードの編成 (1 カード = 1 つの問い)。単位が 2 種のカードは左右 Y 軸に分かれる
+  metricGroups: [
+    {
+      key: "wage-level",
+      title: "賃金の水準",
+      // 最低賃金 (円/時) と初任給・年収 (千円) は桁が違うので左右軸に分かれる
+      rankingKeys: [
+        "minimum-wage-by-region",
+        "starting-salary-university",
+        "nurse-salary",
+      ],
+      defaultCheckedKeys: ["minimum-wage-by-region", "starting-salary-university"],
+    },
+    {
+      key: "labor-market",
+      title: "労働市場の需給",
+      // 有効求人倍率 (倍) と失業率 (％) は逆相関で、2 軸で重ねると関係が読める
+      rankingKeys: ["active-job-opening-ratio", "unemployment-rate"],
+      defaultCheckedKeys: ["active-job-opening-ratio", "unemployment-rate"],
+    },
+    {
+      key: "work-style",
+      title: "働き方と格差",
+      rankingKeys: ["gender-wage-gap", "telework-rate"],
+      defaultCheckedKeys: ["gender-wage-gap", "telework-rate"],
+    },
+  ],
   "keywords": [
     "最低賃金",
     "初任給",

@@ -98,6 +98,53 @@ export interface CatalogChart {
   sortOrder: number;
 }
 
+/**
+ * 指標カード 1 枚の編成 (2026-08-06 新設)。
+ *
+ * テーマページの「主要指標」パネルは 1 カード = 1 グループで描画され、カード内の
+ * タイルをチェックすると系列がチャートに重なる (GSC のクリック数/表示回数と同じ形)。
+ * 1 ページに複数カードが並ぶ。
+ *
+ * ★このフィールドは **codegen を通らない**。generator (transform.ts) は metrics/charts
+ *   しか読まないので、ここを足しても生成物 (indicator-sets / page-components) は byte 不変。
+ *   app 側は server component が THEME_CATALOGS を直読みする
+ *   (前例: apps/web/src/features/theme-dashboard/components/ThemeIndicatorCatalogSection.tsx)。
+ *   IndicatorSet は compare / Remotion と共有する型なので、theme 固有の UI 都合を持ち込まない。
+ *
+ * ★未定義のテーマ (カタログ未登録を含む) は UI 側が「非 context 指標を 1 グループ」へ
+ *   フォールバックするので、全テーマに書く必要はない。
+ */
+export interface CatalogMetricGroup {
+  /** kebab-case。テーマ内で一意 (React key・計測ラベルに使う) */
+  key: string;
+  /** カード見出し (例 "賃金水準と格差") */
+  title: string;
+  /** カード内のタイル順。metrics の rankingKey の部分集合 */
+  rankingKeys: string[];
+  /**
+   * 初期チェック (= 初期描画される系列)。rankingKeys の部分集合で 1 件以上。
+   * ここに入れた分だけ mount 時に時系列を取りに行くので 3 件以内が目安 (validator warn)。
+   */
+  defaultCheckedKeys: string[];
+}
+
+/**
+ * 単位を「同じ Y 軸に載せてよいか」の判定キーへ正規化する。
+ *
+ * 揃えるのは**全角・半角などの互換文字だけ** (NFKC)。metric config には `%` と `％` が
+ * 混在していて (gender-wage-gap が `%`、unemployment-rate が `％`)、素の文字列比較だと
+ * 同じパーセントが 2 軸に分かれ、無関係なスケールで並ぶ嘘のグラフになる。
+ *
+ * ★意味的な正規化はしない。`円` と `千円` は桁が 1000 倍違うので別軸が正しく、
+ *   まとめると誤読を生む (誤結合の方が危険)。
+ *
+ * validator (定義時の単位数チェック) と UI (実際の軸割当) が同じ判定を使うために
+ * ここ 1 か所に置く。
+ */
+export function normalizeUnitForAxis(unit: string): string {
+  return unit.normalize("NFKC").trim();
+}
+
 /** テーマ 1 件の統合カタログ (指標選定 + チャート割当 + 選定根拠)。 */
 export interface ThemeCatalog {
   key: string;
@@ -109,6 +156,11 @@ export interface ThemeCatalog {
   metrics: CatalogMetric[];
   /** チャート定義 (page-components に生成) */
   charts: CatalogChart[];
+  /**
+   * 指標カードの編成 (省略時は UI が「非 context 指標を 1 グループ」にフォールバック)。
+   * 1 グループ内の相異なる単位は 2 種まで (チャートの Y 軸が左右 2 本のため。validator error)。
+   */
+  metricGroups?: CatalogMetricGroup[];
   /** SEO キーワード */
   keywords?: string[];
   /** 関連記事のタグキー */

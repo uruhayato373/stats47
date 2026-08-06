@@ -34,6 +34,17 @@ export interface LineSeriesConfig {
    * 主系列の点と混ざって読みづらくなるのを避けるために使う。
    */
   hidePoints?: boolean;
+  /**
+   * この系列を左右どちらの Y 軸に載せるか。省略時は "left"（＝従来どおり単一軸）。
+   *
+   * 単位の異なる指標を 1 つのチャートに重ねるために使う（GSC がクリック数と表示回数を
+   * 別スケールで重ねるのと同じ形）。右軸系列が 1 本も無ければ右軸は描かないので、
+   * 既存の単軸チャートは指定しない限り一切挙動が変わらない。
+   *
+   * 軸は左右 2 本しかないため、単位は 1 チャートあたり 2 種までしか載せられない。
+   * この制約は SSOT 側 (ThemeCatalog.metricGroups) の validator が定義時に強制する。
+   */
+  yAxis?: "left" | "right";
 }
 
 /** D3 LineChart Props */
@@ -51,6 +62,11 @@ export interface D3LineChartProps extends BaseD3ChartProps, MarginProps {
   yAxisFormatter?: (value: number) => string;
   /** ツールチップのフォーマット関数 */
   tooltipFormatter?: (value: number) => string;
-  /** Y軸の固定ドメイン（指定時は自動スケーリングを上書き） */
+  /** 左Y軸の固定ドメイン（指定時は自動スケーリングを上書き）。右軸には適用しない */
   yDomain?: [number, number];
+  /**
+   * 右Y軸の単位ラベル。`series[].yAxis === "right"` の系列がある場合に軸頭へ表示する。
+   * 左軸の単位は既存の `unit` が担う。
+   */
+  rightUnit?: string;
 }

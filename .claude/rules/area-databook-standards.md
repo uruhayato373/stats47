@@ -35,7 +35,7 @@
 | 型 | `packages/data-configs/src/area-databook/types.ts` | `AreaDatabookTemplate` / `DatabookSection` / `DatabookBlock` / `AreaEditorial` 等 |
 | **生成物** (手編集禁止) | `apps/web/scripts/data/page-components/area/<code>.json` | chart ブロックのみを PageComponent 行に codegen (47 県同一・byte 一致) |
 | **派生** (焼き込み) | R2 `app/areas/<code>/databook.json` | ranked-kpi の値+全国順位+全国平均+年次、農業 top10。exporter が R2 values.json から生成 |
-| 特産品イラスト | R2 `app/areas/<code>/specialty/<slug>.webp` | **Codex MCP セッション (OpenAI 画像) で生成** (2026-07-18 に Gemini から変更)。欠損時はイニシャル代替タイルに degrade |
+| 特産品イラスト | R2 `app/areas/<code>/specialty/<slug>.webp` | **Codex セッション (OpenAI 画像) で生成** (2026-07-18 に Gemini から変更・§5)。欠損時はイニシャル代替タイルに degrade |
 
 ```
 AREA_DATABOOK_TEMPLATE (SSOT, git TS)
@@ -109,8 +109,9 @@ area-databook-snapshot.ts ── R2 values.json (rank 済) ──▶ R2 app/area
 | `slug` | kebab-case・県内一意 (R2 イラスト asset キー) |
 | `symbols.sourceUrl` / `accessedAt` | 県公式ページで裏取り・出典必須 |
 
-**特産品イラスト**は品目 slug 確定後に **Codex MCP セッション (OpenAI 画像 API)** で生成する
-(2026-07-18 に Gemini から変更)。文字なし・イラスト調・共通スタイルで R2
+**特産品イラスト**は品目 slug 確定後に **Codex セッション (OpenAI 画像 API)** で生成する
+(2026-07-18 に Gemini から変更)。★これはオーナーが Codex 側で画像を作る手作業で、
+Claude Code の codex MCP (`.claude/rules/codex-mcp.md`) とは別経路。文字なし・イラスト調・共通スタイルで R2
 `app/areas/<code>/specialty/<slug>.webp` に配置。未生成の間は SpecialtyList がイニシャル代替タイルに degrade する。
 
 農業 top10 は editorial ではなく **e-Stat 生産農業所得統計から exporter で機械取得** (PDF は照合用のみ)。
@@ -172,7 +173,7 @@ area-databook-snapshot.ts ── R2 values.json (rank 済) ──▶ R2 app/area
 | 新チャート 2 種 + カタログ更新 | `chart-component-builder` |
 | databook.json exporter | `snapshot-exporter` |
 | R2 push / 公開 | `r2-publisher` / CI |
-| 特産品イラスト生成 | **Codex MCP セッション (OpenAI 画像)** — `area-curator` が slug 確定後に依頼 |
+| 特産品イラスト生成 | **Codex セッション (OpenAI 画像)** — `area-curator` が slug 確定後に依頼 (codex MCP とは別経路・§5) |
 
 ---
 

@@ -17,6 +17,11 @@
       "type": "stdio",
       "command": "node",
       "args": [".claude/scripts/search-growth/mcp/server.mjs"]
+    },
+    "codex": {
+      "type": "stdio",
+      "command": "codex",
+      "args": ["mcp-server"]
     }
   }
 }

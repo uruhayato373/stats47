@@ -9,11 +9,26 @@ import { describe, expect, it, vi } from "vitest";
  * 同じ事実を二度描いていたため廃止した。ここで固定したいのは:
  *  (a) どのテーマでも切替パネルになる (テーマ別の分岐を復活させない)
  *  (b) 旧グリッドの一括全国 fetch を復活させない (初期表示が遅くなる)
+ *  (c) metricGroups があればグループ数ぶんのカードに分かれ、無ければ 1 枚に倒す
+ *      (2026-08-06。カタログ未登録のテーマを壊さないためのフォールバック)
  */
 
 vi.mock("../MetricSwitcherPanel", () => ({
-  MetricSwitcherPanel: ({ metrics }: { metrics: { metricKey: string }[] }) => (
-    <div data-testid="switcher-panel" data-keys={metrics.map((m) => m.metricKey).join(",")} />
+  MetricSwitcherPanel: ({
+    metrics,
+    title,
+    defaultCheckedKeys,
+  }: {
+    metrics: { metricKey: string }[];
+    title?: string;
+    defaultCheckedKeys?: string[];
+  }) => (
+    <div
+      data-testid="switcher-panel"
+      data-keys={metrics.map((m) => m.metricKey).join(",")}
+      data-title={title ?? ""}
+      data-default={(defaultCheckedKeys ?? []).join(",")}
+    />
   ),
 }));
 vi.mock("../ThemeDbChartRenderer", () => ({
@@ -32,10 +47,10 @@ import type { ThemeConfig, ThemeIndicatorData } from "../../types";
 const METRIC_KEY = "wage";
 
 /** KPI に採用されるには MIN_VALUES_FOR_KPI (=10) 以上の観測が要る */
-const indicatorDataMap: Record<string, ThemeIndicatorData> = {
-  [METRIC_KEY]: {
-    rankingItem: { title: "賃金", unit: "円" },
-    rankingValues: Array.from({ length: 12 }, (_, i) => ({
+function indicatorData(title: string, unit: string, valueCount = 12): ThemeIndicatorData {
+  return {
+    rankingItem: { title, unit },
+    rankingValues: Array.from({ length: valueCount }, (_, i) => ({
       areaCode: String(i + 1).padStart(5, "0"),
       value: 100 + i,
       rank: i + 1,
@@ -44,26 +59,42 @@ const indicatorDataMap: Record<string, ThemeIndicatorData> = {
       { year: 2020, value: 1 },
       { year: 2021, value: 2 },
     ],
-  } as unknown as ThemeIndicatorData,
+  } as unknown as ThemeIndicatorData;
+}
+
+const indicatorDataMap: Record<string, ThemeIndicatorData> = {
+  [METRIC_KEY]: indicatorData("賃金", "円"),
+  ratio: indicatorData("有効求人辺率", "倍"),
+  telework: indicatorData("テレワーク率", "％"),
+  /** 観測 3 件 = MIN_VALUES_FOR_KPI 未満なので KPI に採用されない */
+  thin: indicatorData("観測不足", "円", 3),
 };
 
-function themeConfig(themeKey: string): ThemeConfig {
+function themeConfig(themeKey: string, keys: string[] = [METRIC_KEY]): ThemeConfig {
   return {
     themeKey,
-    tabIndicators: [{ rankingKey: METRIC_KEY, tabLabel: "賃金" }],
-    defaultRankingKey: METRIC_KEY,
+    tabIndicators: keys.map((k) => ({ rankingKey: k, tabLabel: k })),
+    defaultRankingKey: keys[0],
   } as unknown as ThemeConfig;
 }
 
-function renderDashboard(themeKey: string) {
+function renderDashboard(
+  themeKey: string,
+  over: Partial<React.ComponentProps<typeof ThemeMetricsDashboard>> = {},
+) {
   return render(
     <ThemeMetricsDashboard
       themeConfig={themeConfig(themeKey)}
       indicatorDataMap={indicatorDataMap}
       selectedPrefectureCode={null}
       mapless
+      {...over}
     />,
   );
+}
+
+function panels() {
+  return screen.getAllByTestId("switcher-panel");
 }
 
 describe("ThemeMetricsDashboard — KPI の描画", () => {
@@ -91,5 +122,94 @@ describe("ThemeMetricsDashboard — KPI の描画", () => {
   it("タイルには tabIndicators 由来の指標が渡る", () => {
     renderDashboard("labor-wages");
     expect(screen.getByTestId("switcher-panel")).toHaveAttribute("data-keys", METRIC_KEY);
+  });
+});
+
+describe("ThemeMetricsDashboard — 指標カードの編成 (metricGroups)", () => {
+  const THREE = [METRIC_KEY, "ratio", "telework"];
+
+  it("metricGroups があればグループ数ぶんのカードに分かれる", () => {
+    render(
+      <ThemeMetricsDashboard
+        themeConfig={themeConfig("labor-wages", THREE)}
+        metricGroups={[
+          { key: "level", title: "賃金の水準", rankingKeys: [METRIC_KEY], defaultCheckedKeys: [METRIC_KEY] },
+          {
+            key: "market",
+            title: "労働市場",
+            rankingKeys: ["ratio", "telework"],
+            defaultCheckedKeys: ["ratio", "telework"],
+          },
+        ]}
+        indicatorDataMap={indicatorDataMap}
+        selectedPrefectureCode={null}
+        mapless
+      />,
+    );
+    const found = panels();
+    expect(found).toHaveLength(2);
+    expect(found[0]).toHaveAttribute("data-title", "賃金の水準");
+    expect(found[0]).toHaveAttribute("data-keys", METRIC_KEY);
+    expect(found[1]).toHaveAttribute("data-title", "労働市場");
+    expect(found[1]).toHaveAttribute("data-keys", "ratio,telework");
+    expect(found[1]).toHaveAttribute("data-default", "ratio,telework");
+  });
+
+  it("metricGroups 未定義なら全 KPI を 1 枚に倒す (カタログ未登録テーマを壊さない)", () => {
+    render(
+      <ThemeMetricsDashboard
+        themeConfig={themeConfig("climate", THREE)}
+        indicatorDataMap={indicatorDataMap}
+        selectedPrefectureCode={null}
+        mapless
+      />,
+    );
+    const found = panels();
+    expect(found).toHaveLength(1);
+    expect(found[0]).toHaveAttribute("data-keys", THREE.join(","));
+    // 見出しは section の h2 が言うのでパネル側には渡さない
+    expect(found[0]).toHaveAttribute("data-title", "");
+    expect(found[0]).toHaveAttribute("data-default", METRIC_KEY);
+  });
+
+  it("観測不足で KPI から落ちたキーはグループからも除き、初期チェックを生存キーに絞る", () => {
+    render(
+      <ThemeMetricsDashboard
+        themeConfig={themeConfig("labor-wages", [METRIC_KEY, "thin"])}
+        metricGroups={[
+          {
+            key: "level",
+            title: "賃金の水準",
+            rankingKeys: [METRIC_KEY, "thin"],
+            defaultCheckedKeys: [METRIC_KEY, "thin"],
+          },
+        ]}
+        indicatorDataMap={indicatorDataMap}
+        selectedPrefectureCode={null}
+        mapless
+      />,
+    );
+    const found = panels();
+    expect(found).toHaveLength(1);
+    expect(found[0]).toHaveAttribute("data-keys", METRIC_KEY);
+    expect(found[0]).toHaveAttribute("data-default", METRIC_KEY);
+  });
+
+  it("グループの指標が全滅したらそのカードは描かない (空カードを置かない)", () => {
+    render(
+      <ThemeMetricsDashboard
+        themeConfig={themeConfig("labor-wages", [METRIC_KEY, "thin"])}
+        metricGroups={[
+          { key: "level", title: "賃金の水準", rankingKeys: [METRIC_KEY], defaultCheckedKeys: [METRIC_KEY] },
+          { key: "dead", title: "観測不足のみ", rankingKeys: ["thin"], defaultCheckedKeys: ["thin"] },
+        ]}
+        indicatorDataMap={indicatorDataMap}
+        selectedPrefectureCode={null}
+        mapless
+      />,
+    );
+    const found = panels();
+    expect(found).toHaveLength(1);
+    expect(found[0]).toHaveAttribute("data-title", "賃金の水準");
   });
 });

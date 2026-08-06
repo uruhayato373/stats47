@@ -10,6 +10,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+import { THEME_CATALOGS } from "@stats47/data-configs/theme-catalog";
 
 import { PageShell } from "@/components/layout";
 import { THEME_HEROES } from "@/components/layout/page-heroes";
@@ -186,6 +187,7 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
 
       <ThemeDashboardClient
         themeConfig={theme}
+        metricGroups={THEME_CATALOGS[theme.themeKey]?.metricGroups}
         indicatorDataMap={data.indicatorDataMap}
         topology={data.topology}
         pageCharts={pageCharts}

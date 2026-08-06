@@ -133,6 +133,30 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
       "sortOrder": 110
     }
   ],
+  // 指標カードの編成。円 (可処分所得) と 千円 (実収入・県民所得) は桁が 1000 倍違うので
+  // 同じ軸に載せると片方が潰れる → 左右 Y 軸に分かれる
+  metricGroups: [
+    {
+      key: "income-level",
+      title: "収入の水準",
+      rankingKeys: [
+        "actual-income-worker-households-per-month",
+        "disposable-income-worker-households",
+        "per-capita-prefectural-income-h27",
+      ],
+      defaultCheckedKeys: [
+        "actual-income-worker-households-per-month",
+        "disposable-income-worker-households",
+      ],
+    },
+    {
+      key: "real-terms",
+      title: "物価・家賃を織り込んだ手残り",
+      // どちらも円なので単軸。名目 → 物価調整 → 家賃控除の並びで読ませる
+      rankingKeys: ["real-disposable-income", "disposable-income-after-rent"],
+      defaultCheckedKeys: ["real-disposable-income", "disposable-income-after-rent"],
+    },
+  ],
   "keywords": [
     "実質年収",
     "実質購買力",
