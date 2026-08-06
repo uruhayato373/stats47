@@ -9,9 +9,10 @@
 
 目的の県へ一操作で移動できることを主目的とし、入口の優先順位を「検索 → 一覧 → 地図」とする。
 
-- routeはServer Componentを維持し、`Breadcrumbs`、`PageHeader`、`AreaDirectory`を構成する。
+- routeはServer Componentを維持し、`PageShell`の左レール、`Breadcrumbs`、`PageHeader`、`AreaDirectory`を構成する。
+- xl以上は地方フィルタを`AreaDirectoryRegionNav`として左レールに置き、末尾広告を本文カラム幅に収める。lg〜xlは本文内のコンパクトな地方フィルタ、lg未満は全県一覧を代替導線とする。
 - `AreaSearch`は県名のsuffix省略検索、候補表示、キーボード操作、直接遷移を担うClient Component。
-- desktopは`AreaSelectionPanels`で軽量タイル地図と地方別一覧を2ペイン表示する。
+- desktopは`AreaSelectionPanels`で軽量タイル地図と地方別一覧を2ペイン表示し、左レールの地方選択を一覧へ反映する。
 - mobile/tabletは一覧を既定タブとし、地図は利用者が切り替えたときに表示する。
 - `AreaTileMap`はD3やcanvasを使わず、通常の県リンクをCSS Gridへ配置する。初期HTMLに47県リンクを残す。
 - `AreaDirectoryList`は地方別のsemantic listを描画し、各リンクの操作領域を44px以上にする。
@@ -39,11 +40,11 @@
 
 既存`nav_click`を使用し、新しいイベントやcustom dimensionを増やさない。
 
-| 導線 | `nav_surface` |
-|---|---|
+| 導線 | `nav_surface`  |
+| ---- | -------------- |
 | 検索 | `areas_search` |
-| 一覧 | `areas_list` |
-| 地図 | `areas_map` |
+| 一覧 | `areas_list`   |
+| 地図 | `areas_map`    |
 
 県名は`nav_label`、遷移先は`nav_href`へ送る。計測失敗で遷移を止めない。登録状態の正典は
 `.claude/rules/analytics-event-standards.md`。
