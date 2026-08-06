@@ -111,8 +111,8 @@ export interface CatalogChart {
  *   (前例: apps/web/src/features/theme-dashboard/components/ThemeIndicatorCatalogSection.tsx)。
  *   IndicatorSet は compare / Remotion と共有する型なので、theme 固有の UI 都合を持ち込まない。
  *
- * ★未定義のテーマ (legacy 含む) は UI 側が「非 context 指標を 1 グループ」にフォールバック
- *   するので、全テーマに書く必要はない。
+ * ★未定義のテーマ (カタログ未登録を含む) は UI 側が「非 context 指標を 1 グループ」へ
+ *   フォールバックするので、全テーマに書く必要はない。
  */
 export interface CatalogMetricGroup {
   /** kebab-case。テーマ内で一意 (React key・計測ラベルに使う) */

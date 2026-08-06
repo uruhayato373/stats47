@@ -158,7 +158,7 @@ export function ThemeMetricsDashboard({
    * グループのキーはここで生存キーに絞り込む。全滅したグループはカードごと出さない
    * (空のカードを置くと「壊れている」と読める)。
    *
-   * metricGroups 未定義のテーマ (カタログ未登録の legacy 含む) は
+   * metricGroups 未定義のテーマ (カタログ未登録のものを含む) は
    * 全 KPI を 1 グループにまとめる = 従来の 1 パネル構成と同じ。
    */
   const panels = useMemo(() => {

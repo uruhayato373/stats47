@@ -10,7 +10,7 @@ import { describe, expect, it, vi } from "vitest";
  *  (a) どのテーマでも切替パネルになる (テーマ別の分岐を復活させない)
  *  (b) 旧グリッドの一括全国 fetch を復活させない (初期表示が遅くなる)
  *  (c) metricGroups があればグループ数ぶんのカードに分かれ、無ければ 1 枚に倒す
- *      (2026-08-06。カタログ未登録の legacy テーマを壊さないためのフォールバック)
+ *      (2026-08-06。カタログ未登録のテーマを壊さないためのフォールバック)
  */
 
 vi.mock("../MetricSwitcherPanel", () => ({
@@ -155,7 +155,7 @@ describe("ThemeMetricsDashboard — 指標カードの編成 (metricGroups)", ()
     expect(found[1]).toHaveAttribute("data-default", "ratio,telework");
   });
 
-  it("metricGroups 未定義なら全 KPI を 1 枚に倒す (legacy テーマを壊さない)", () => {
+  it("metricGroups 未定義なら全 KPI を 1 枚に倒す (カタログ未登録テーマを壊さない)", () => {
     render(
       <ThemeMetricsDashboard
         themeConfig={themeConfig("climate", THREE)}

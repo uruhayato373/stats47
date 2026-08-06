@@ -135,7 +135,7 @@ describe("validateMetricGroups — warn", () => {
     expect(warns.some((w) => w.startsWith("[group-default-many]"))).toBe(true);
   });
 
-  it("metricGroups 未定義なら何も言わない (legacy テーマを壊さない)", () => {
+  it("metricGroups 未定義なら何も言わない (カタログ未登録テーマを壊さない)", () => {
     const { errors, warns } = run(catalog(undefined, [YEN, PERCENT]));
     expect(errors).toEqual([]);
     expect(warns).toEqual([]);
