@@ -154,6 +154,7 @@ Issues は「PR で close される機能改修・バグ」と「機械生成ア
 - `psi-alert` — PSI 日次計測の閾値違反 (`psi-audit-daily.yml`)
 - `ogp-alert` — OGP/カード/note 画像の生成漏れが自動修復後も残存 (`ogp-image-audit-weekly.yml`)
 - `link-alert` — サイト内リンクのリンク切れ (ブログ本文 + ページ側コンポーネント生成) (`internal-link-audit-weekly.yml`)
+- `coverage-alert` — GSC カバレッジ是正キューの週次再構築が失敗 (`fetch-metrics-weekly.yml`)
 
 過去の移行履歴:
 - `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05) → `docs/02_実装計画/{feature-backlog,indicator-backlog}.md` (2026-06-07 統合)
