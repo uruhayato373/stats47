@@ -9,14 +9,10 @@
  * Windows では `next build` が vendored @vercel/og の path.join バグで完走しないため、
  * ビルド成果物そのものを手元で作れない。その代替検証がこのテスト。
  */
+import { CATEGORY_KEYS } from "@stats47/data-configs";
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 
-import {
-  SITEMAP_BLOG_ENTRIES,
-  SITEMAP_SURVEY_IDS,
-  SITEMAP_TAG_ENTRIES,
-} from "@/config/sitemap-blog-entries";
-import { CATEGORY_KEYS } from "@stats47/data-configs";
+import { SITEMAP_BLOG_ENTRIES, SITEMAP_SURVEY_IDS, SITEMAP_TAG_ENTRIES } from "@/config/sitemap-blog-entries";
 
 import sitemap from "../sitemap";
 
