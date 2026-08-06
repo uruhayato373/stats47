@@ -1,0 +1,81 @@
+/**
+ * sitemap のビルド時フォールバック回帰テスト。
+ *
+ * 守る不変条件: **R2 が空を返しても sitemap の各 segment が空にならないこと**。
+ *
+ * 背景 (2026-08-06): sitemap は generateSitemaps() を持つためビルド時に prerender されるが、
+ * ビルド環境には R2 到達手段が無く reader が「成功した空」(`ok([])`) を返していた。
+ * 結果、公開 422 記事 / survey 73 / category 17 / tag 59 が **1 件も提出されていなかった**
+ * (本番実測: sitemap/4.xml は /blog のみ、5.xml と 7.xml は 0 件)。
+ * 型検査でも lint でも見えず、本番 sitemap を数えて初めて判明した種類の欠陥なので、
+ * 「R2 が空のとき」を明示的に再現して守る。
+ */
+import { CATEGORY_KEYS } from "@stats47/data-configs";
+import { ok } from "@stats47/types";
+import { describe, it, expect, vi } from "vitest";
+
+import { SITEMAP_BLOG_ENTRIES, SITEMAP_SURVEY_IDS, SITEMAP_TAG_ENTRIES } from "@/config/sitemap-blog-entries";
+
+import sitemap from "../sitemap";
+
+// R2 reader をすべて「成功した空」にする = ビルド時と同じ状態を再現する
+// (vi.mock は vitest が巻き上げるため import より後に書いても効く)
+vi.mock("@stats47/category/server", () => ({
+  readCategoriesFromR2: vi.fn(async () => ok([])),
+}));
+vi.mock("@stats47/ranking/server", () => ({
+  readActiveKeysForSitemapFromR2: vi.fn(async () => ok([])),
+  readSurveysFromR2: vi.fn(async () => ok([])),
+}));
+vi.mock("@/features/blog/server", () => ({
+  listLatestArticles: vi.fn(async () => []),
+  listAllTagsWithCount: vi.fn(async () => []),
+}));
+
+/** SEGMENTS の並び順 (sitemap.ts の定義と一致させる。順序変更は URL 変更なので固定) */
+const SEGMENT_ID = { blog: 4, categories: 5, surveys: 6, tags: 7 } as const;
+
+describe("sitemap ビルド時フォールバック (R2 が空でも空にしない)", () => {
+  it("blog: 公開記事が全件出る (/blog + 記事)", async () => {
+    const entries = await sitemap({ id: SEGMENT_ID.blog });
+    expect(SITEMAP_BLOG_ENTRIES.length).toBeGreaterThan(0);
+    expect(entries).toHaveLength(SITEMAP_BLOG_ENTRIES.length + 1);
+    expect(entries.some((e) => e.url.endsWith("/blog"))).toBe(true);
+    expect(entries.filter((e) => e.url.includes("/blog/")).length).toBe(
+      SITEMAP_BLOG_ENTRIES.length,
+    );
+  });
+
+  it("categories: 17 軸が出る", async () => {
+    const entries = await sitemap({ id: SEGMENT_ID.categories });
+    expect(entries).toHaveLength(CATEGORY_KEYS.length);
+    expect(entries.every((e) => e.url.includes("/category/"))).toBe(true);
+  });
+
+  it("surveys: 配信されている調査が全件出る (/survey + 各調査)", async () => {
+    const entries = await sitemap({ id: SEGMENT_ID.surveys });
+    expect(SITEMAP_SURVEY_IDS.length).toBeGreaterThan(0);
+    expect(entries).toHaveLength(SITEMAP_SURVEY_IDS.length + 1);
+  });
+
+  it("tags: 記事 5 本以上のタグが出る", async () => {
+    const entries = await sitemap({ id: SEGMENT_ID.tags });
+    expect(SITEMAP_TAG_ENTRIES.length).toBeGreaterThan(0);
+    expect(entries).toHaveLength(SITEMAP_TAG_ENTRIES.length);
+    expect(entries.every((e) => e.url.includes("/tag/"))).toBe(true);
+  });
+
+  it("reader が throw しても空にしない (getter 内フォールバックが効かない経路)", async () => {
+    const { readCategoriesFromR2 } = await import("@stats47/category/server");
+    vi.mocked(readCategoriesFromR2).mockRejectedValueOnce(new Error("R2 unreachable"));
+    const entries = await sitemap({ id: SEGMENT_ID.categories });
+    expect(entries).toHaveLength(CATEGORY_KEYS.length);
+  });
+
+  it("survey は git master ではなく R2 の配信実態を使う (本番 404 を提出しない)", () => {
+    // surveys.json (master) にあるが配信されていない id。提出すると 404 を増やす。
+    // 実測 2026-08-06: livestock-statistics=orphan(item無し) / population-projection=item全てinactive。
+    expect(SITEMAP_SURVEY_IDS).not.toContain("livestock-statistics");
+    expect(SITEMAP_SURVEY_IDS).not.toContain("population-projection");
+  });
+});
