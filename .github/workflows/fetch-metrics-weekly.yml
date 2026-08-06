@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  issues: write # カバレッジキュー再構築の失敗を [Coverage Alert] Issue で通知する
 
 concurrency:
   group: fetch-metrics-weekly
@@ -156,6 +157,42 @@ jobs:
         continue-on-error: true
         run: node .claude/scripts/blog/measure-gsc-impact.mjs --min-weeks 2
 
+      # GSC カバレッジ是正キューを本番 HTTP 実測で再構築する
+      # (正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md)。
+      #
+      # export (GSC UI) は Google ログイン済み Playwright profile が要りローカル限定だが、
+      # **commit 済み drilldown CSV への再実測は認証不要**なのでここで回せる。これにより
+      # 「直した URL が実際に 200/410 になったか」が毎週 verdict に反映される。
+      # 2026-06-16 のキューが 7 週間放置され、古い優先度で作業しかけた再発防止。
+      #
+      # 失敗は握り潰さない (continue-on-error だが outcome を拾って Issue を起票する)。
+      # ★step 単位で時間を区切る。probe は並列 12・1 件 12s timeout・上限 2,500 件なので、
+      #   全件がタイムアウトする最悪ケースで約 41 分かかり job の timeout-minutes: 30 を食い潰す
+      #   (= GSC/GA4/AdSense の週次計測ごと道連れになる)。実測 2,456 件は正常時 2 分程度。
+      #   超過したら step が失敗し、下の Raise coverage queue alert が Issue を起票する。
+      - name: 🗺 Rebuild GSC coverage queue (本番 HTTP 実測)
+        id: coverage_queue
+        continue-on-error: true
+        timeout-minutes: 12
+        run: node .claude/scripts/gsc/build-coverage-queue.mjs
+
+      - name: 📄 Summarize coverage queue
+        if: always()
+        run: |
+          {
+            echo ""
+            echo "## GSC カバレッジ是正キュー"
+            if [ "${{ steps.coverage_queue.outcome }}" != "success" ]; then
+              echo ""
+              echo "⚠️ 再構築に失敗しました (outcome=${{ steps.coverage_queue.outcome }})。"
+            elif [ -f .claude/state/gsc/LATEST.md ]; then
+              sed -n '/## 是正キュー/,/^## /p' .claude/state/gsc/LATEST.md | head -20
+            else
+              echo ""
+              echo "LATEST.md がありません。"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
       # 効果判定ループ (.claude/rules/evidence-based-judgment.md §閾値エンジン経由の確定)。
       # 順序は snapshot fetch → digest → measure → verdict → past-effects writer で固定する
       # (逆だと verdict が前週データを読む)。
@@ -239,6 +276,9 @@ jobs:
           # 是正ループの自動再構築物
           git add .claude/state/blog/remediation-queue.json 2>/dev/null || true
           git add .claude/state/blog/topic-queue.json 2>/dev/null || true
+          # GSC カバレッジ是正キュー (再実測で verdict が最新化される)
+          git add .claude/state/gsc 2>/dev/null || true
+          git add .claude/state/metrics/gsc/coverage-drilldown 2>/dev/null || true
           git add .claude/skills/analytics/gsc-improvement/reference/improvement-log.md 2>/dev/null || true
           # 効果判定ループの成果物 (verdict JSON + 抑制台帳 + 新規 improvement-log)
           git add .claude/state/effect-verdict 2>/dev/null || true
@@ -260,3 +300,55 @@ jobs:
       # 保たれ、partial を green success として隠さない。
       - name: 🧪 Period contract gate (finalized7d/coverage)
         run: npm run metrics:check-period-contract -- ${{ steps.week.outputs.week }} --strict
+
+      # ── カバレッジキュー失敗の通知 ────────────────────────────────
+      # continue-on-error で週次計測本体は止めないが、失敗を green に隠さない。
+      # 同一タイトルの open issue があれば編集して重複起票を避ける
+      # (internal-link-audit-weekly / ogp-image-audit-weekly と同じ作法)。
+      - name: 🚨 Raise coverage queue alert
+        if: always() && steps.coverage_queue.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="[Coverage Alert] GSC カバレッジ是正キューの再構築に失敗"
+          {
+            echo "週次 \`fetch-metrics-weekly\` の \`build-coverage-queue.mjs\` が失敗しました。"
+            echo ""
+            echo "- outcome: \`${{ steps.coverage_queue.outcome }}\`"
+            echo "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo ""
+            echo "## 影響"
+            echo ""
+            echo "是正キュー (\`.claude/state/gsc/coverage-remediation-queue.json\`) が最新化されません。"
+            echo "古い verdict のまま作業すると誤った優先度で動きます"
+            echo "(2026-08-06 に 7 週間前のキューで \`fix-5xx\` 誤検知を掴んだ実例あり)。"
+            echo ""
+            echo "## 再現"
+            echo ""
+            echo '```bash'
+            echo "node .claude/scripts/gsc/build-coverage-queue.mjs"
+            echo '```'
+            echo ""
+            echo "よくある原因: drilldown ディレクトリが無い (要 export + ingest) / 本番 HTTP 実測の失敗。"
+            echo "正典: \`.claude/skills/analytics/gsc-coverage-remediation/SKILL.md\`"
+          } > /tmp/coverage-issue.md
+
+          gh label create coverage-alert --description "GSC カバレッジ是正ループの異常" --color "b60205" --force 2>/dev/null || true
+
+          EXISTING=$(gh issue list --state open --label coverage-alert --search "\"[Coverage Alert]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/coverage-issue.md
+          else
+            gh issue create --title "$TITLE" --label "coverage-alert,auto-generated" --body-file /tmp/coverage-issue.md
+          fi
+
+      - name: ✅ Close recovered coverage alert
+        if: always() && steps.coverage_queue.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label coverage-alert --limit 50 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "週次再構築が成功したため自動クローズ (run ${{ github.run_id }})。"
+            done

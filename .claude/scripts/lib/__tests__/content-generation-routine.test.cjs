@@ -313,44 +313,74 @@ test('every request-driven workflow consumes its request even when the run fails
 });
 
 /**
- * 日次件数は「1 件あたりの実測コスト × 件数」が job timeout と turn 予算に収まる必要がある。
- * 足りないと生成が途中で切れ、verify が「対象あり・生成物なし」で落ちて 1 日分が丸ごと無駄になる。
- * 件数だけ上げて予算を据え置く変更をここで止める。
- * 実測値の出どころ (2026-08-03 の green run):
- *   ai-content run 30775103091 … Claude step 28分36秒 / 1 件
- *   blog       run 30777677268 … Claude step  9分29秒 / 1 件
+ * 件数は「固定費 + 1 件あたりの実測コスト × 件数」が job timeout と turn 予算に収まる必要がある。
+ * 足りないと生成が途中で切れ、verify が「対象あり・生成物なし」で落ちてその回が丸ごと無駄になる。
+ *
+ * ★1 次式にした理由 (2026-08-06 改訂)。旧モデルは「29 分 × 件数」の比例だったが、これは
+ * limit 1 の run だけを見て固定費を 1 件分に押し込んでいた。history.csv に 2 点そろった今、
+ *   ai-content limit 1 → 24.0 分 / 34 turn、limit 5 → 58.0 分 / 48 turn
+ * から限界コスト 8.5 分・3.5 turn、固定費 15.5 分・30.5 turn と分解できる。比例モデルのままだと
+ * 10 件で 295 分と見積もって実際の約 100 分を 3 倍過大評価し、予算があるのに増やせなくなる。
+ * n=2 の外挿なので、下の係数は実測より一律に厚く取ってある。
+ *
+ * ★何件に対して検査するか
+ * **ワークフローを編集せずに到達できる最大件数**で見る。ai-content は boost 設定
+ * (.claude/config/content-generation-boost.json) を develop に push するだけで
+ * MAX_LIMIT まで上げられるので、不在中に上げられても予算内であることを保証する必要がある。
+ * blog にはその遠隔ノブが無く、かつ **limit>1 の実測が 1 件も無い**ので、
+ * 測っていない領域の予算を発明せず既定件数で見る (下の boost 非対象テストで非対称を固定する)。
  */
+// CJS からは .mjs を require できない (Node 20)。定数はソースから読む。
+// 逆に「値がずれたら気づけない」ので、読めなければ即失敗させる。
+const MAX_LIMIT = Number(
+  read('.claude/scripts/lib/content-generation-boost.mjs').match(/export const MAX_LIMIT = (\d+);/)?.[1],
+);
+assert.ok(MAX_LIMIT > 0, 'content-generation-boost.mjs から MAX_LIMIT を読めない');
+
 const ROUTINE_BUDGETS = [
   {
     workflow: '.github/workflows/ai-content-generate-daily.yml',
-    minutesPerItem: 29,
-    turnsPerItem: 60,
+    // limit は gate の --default-limit が SSOT (env は gate の出力を受ける)
+    limitPattern: /--default-limit (\d+)/,
+    checkAt: MAX_LIMIT, // boost で遠隔から上げられる上限
+    fixedMinutes: 25,
+    minutesPerItem: 12,
+    fixedTurns: 40,
+    turnsPerItem: 8,
     overheadMinutes: 5, // npm ci + キュー再構築 + push + dispatch
   },
   {
     workflow: '.github/workflows/blog-generate-daily.yml',
-    minutesPerItem: 10,
+    limitPattern: /LIMIT: \$\{\{ inputs\.limit \|\| '(\d+)' \}\}/,
+    checkAt: null, // 既定件数で見る (limit>1 の実測が無い)
+    fixedMinutes: 10,
+    minutesPerItem: 35,
+    fixedTurns: 40,
     turnsPerItem: 100,
     overheadMinutes: 5,
   },
 ];
 
 test('daily limits stay inside the job timeout and turn budget', () => {
-  for (const { workflow, minutesPerItem, turnsPerItem, overheadMinutes } of ROUTINE_BUDGETS) {
+  for (const budget of ROUTINE_BUDGETS) {
+    const { workflow, limitPattern, checkAt, overheadMinutes } = budget;
     const source = read(workflow);
-    const limit = Number(source.match(/LIMIT: \$\{\{ inputs\.limit \|\| '(\d+)' \}\}/)?.[1]);
-    const timeout = Number(source.match(/timeout-minutes: (\d+)/)?.[1]);
+    const defaultLimit = Number(source.match(limitPattern)?.[1]);
+    // gate job (timeout-minutes: 5) と取り違えないよう、生成 job の最大値を取る
+    const timeout = Math.max(...[...source.matchAll(/timeout-minutes: (\d+)/g)].map((m) => Number(m[1])));
     const turns = Number(source.match(/--max-turns (\d+)/)?.[1]);
-    assert.ok(limit && timeout && turns, `${workflow}: limit/timeout/max-turns が読めない`);
+    assert.ok(defaultLimit && timeout && turns, `${workflow}: limit/timeout/max-turns が読めない`);
 
-    const neededMinutes = limit * minutesPerItem + overheadMinutes;
+    const limit = checkAt ?? defaultLimit;
+    const neededMinutes = budget.fixedMinutes + limit * budget.minutesPerItem + overheadMinutes;
     assert.ok(
       timeout >= neededMinutes,
       `${workflow}: limit ${limit} 件には ${neededMinutes} 分要るが timeout は ${timeout} 分`,
     );
+    const neededTurns = budget.fixedTurns + limit * budget.turnsPerItem;
     assert.ok(
-      turns >= limit * turnsPerItem,
-      `${workflow}: limit ${limit} 件には turn ${limit * turnsPerItem} 要るが max-turns は ${turns}`,
+      turns >= neededTurns,
+      `${workflow}: limit ${limit} 件には turn ${neededTurns} 要るが max-turns は ${turns}`,
     );
 
     // schedule / push は inputs 空で fallback、workflow_dispatch は input の default を使う。
@@ -360,8 +390,94 @@ test('daily limits stay inside the job timeout and turn budget', () => {
     );
     assert.equal(
       dispatchDefault,
-      limit,
-      `${workflow}: workflow_dispatch の既定 (${dispatchDefault}) が fallback (${limit}) と食い違う`,
+      defaultLimit,
+      `${workflow}: workflow_dispatch の既定 (${dispatchDefault}) が fallback (${defaultLimit}) と食い違う`,
+    );
+  }
+});
+
+/**
+ * boost の配線。ここが崩れると「期間外なのに追加スロットで Claude が動く」か
+ * 「設定を書いても何も起きない」のどちらかになり、どちらも不在中に気づけない。
+ */
+test('ai-content gates every schedule through the boost resolver', () => {
+  const doc = YAML.parse(read('.github/workflows/ai-content-generate-daily.yml'));
+
+  const gate = doc.jobs.gate;
+  assert.ok(gate, 'gate job が無い');
+  assert.match(
+    gate.steps.map((s) => s.run ?? '').join('\n'),
+    /content-generation-boost\.mjs/,
+    'gate が boost resolver を呼んでいない',
+  );
+
+  // 生成 job は gate の判定に従う。ここが外れると追加スロットが常に Claude を呼ぶ。
+  assert.deepEqual(doc.jobs.generate.needs, 'gate');
+  assert.match(String(doc.jobs.generate.if ?? ''), /needs\.gate\.outputs\.run == 'true'/);
+  assert.match(String(doc.jobs.generate.env.LIMIT), /needs\.gate\.outputs\.limit/);
+  assert.match(String(doc.jobs.generate.env.DRY_RUN), /needs\.gate\.outputs\.dry_run/);
+});
+
+test('boost の追加スロットは workflow に宣言済みの cron だけを指す', () => {
+  const configPath = path.join(ROOT, '.claude/config/content-generation-boost.json');
+  if (!fs.existsSync(configPath)) return; // 設定なし = boost なしが通常状態
+
+  // schema の検証は content-generation-boost.test.mjs が持つ。ここは配線だけを見る。
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  const doc = YAML.parse(read('.github/workflows/ai-content-generate-daily.yml'));
+  const declared = doc.on.schedule.map((s) => s.cron);
+
+  const baseline = read('.github/workflows/ai-content-generate-daily.yml').match(
+    /--baseline-cron "([^"]+)"/,
+  )?.[1];
+  assert.ok(declared.includes(baseline), `baseline cron "${baseline}" が on.schedule に無い`);
+
+  for (const cron of config.aiContent.extraCrons) {
+    assert.ok(declared.includes(cron), `extraCrons の "${cron}" が on.schedule に無く永久に発火しない`);
+    assert.notEqual(cron, baseline, `extraCrons に baseline (${cron}) を入れない`);
+  }
+});
+
+test('blog は boost の対象外のまま (月産上限は型配分 SSOT が決める)', () => {
+  const configPath = path.join(ROOT, '.claude/config/content-generation-boost.json');
+  if (!fs.existsSync(configPath)) return;
+  const raw = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  assert.equal(raw.blog, undefined, 'blog のノブを足すなら seo-strategy.json の typeMix を先に改訂する');
+
+  const blog = YAML.parse(read('.github/workflows/blog-generate-daily.yml'));
+  assert.equal(blog.jobs.gate, undefined, 'blog に gate を足すなら本テストの前提を見直す');
+});
+
+/**
+ * 2 つの routine は同じ Max 枠を使うので、実時間で重なると枠を奪い合う。
+ * boost 期間中は ai-content が 1 日 4 枠を占めるため、blog の枠が衝突しやすい。
+ */
+test('blog の実行枠が ai-content のどの枠とも実時間で重ならない', () => {
+  const aiDoc = YAML.parse(read('.github/workflows/ai-content-generate-daily.yml'));
+  const blogDoc = YAML.parse(read('.github/workflows/blog-generate-daily.yml'));
+  const DAY = 24 * 60;
+  // 予算モデルの上限所要 (ai-content は boost 上限、blog は既定件数)
+  const aiMinutes = 25 + MAX_LIMIT * 12 + 5;
+  const blogMinutes = 10 + 1 * 35 + 5;
+
+  const startOf = (cron) => {
+    const [minute, hour] = cron.split(/\s+/);
+    assert.match(hour, /^\d+$/, `時刻が固定でない cron は判定できない: ${cron}`);
+    return Number(hour) * 60 + Number(minute);
+  };
+  const overlaps = (aStart, aLen, bStart, bLen) => {
+    for (const shift of [-DAY, 0, DAY]) {
+      if (aStart + shift < bStart + bLen && bStart < aStart + shift + aLen) return true;
+    }
+    return false;
+  };
+
+  const blogStart = startOf(blogDoc.on.schedule[0].cron);
+  for (const { cron } of aiDoc.on.schedule) {
+    assert.equal(
+      overlaps(startOf(cron), aiMinutes, blogStart, blogMinutes),
+      false,
+      `ai-content (${cron}) と blog (${blogDoc.on.schedule[0].cron}) が実時間で重なる`,
     );
   }
 });

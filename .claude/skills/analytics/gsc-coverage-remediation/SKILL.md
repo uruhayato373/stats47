@@ -159,6 +159,19 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 | TODO 真実源 | `docs/todo/04_改善バックログ.md` `COVERAGE-LOOP-01` | improvement-triage |
 
 ## cadence (週次)
+
+**自動 (CI)**: `fetch-metrics-weekly.yml` (日曜 20:00 JST) が **Phase 2 のキュー再構築を毎週回す**
+(`build-coverage-queue.mjs` → `.claude/state/gsc/` を develop へ commit-back)。
+本番 HTTP 実測は認証不要なので、新しい export が無くても **verdict は毎週最新化される**
+(直した URL が 200/410 になったかが自動で反映される)。失敗時は `[Coverage Alert]` Issue
+(`coverage-alert,auto-generated`) を起票し、次回成功で自動クローズする。
+step には `timeout-minutes: 12` を置き、probe が長引いても週次計測本体を道連れにしない。
+
+**手動 (ローカル)**: **Phase 1 の export だけは CI で回せない**。GSC UI export は
+Google ログイン済み Playwright profile を要求し、GitHub Actions に持ち込めないため
+(A8 / note / KDP 系と同じ制約)。月次を目安にオーナーがローカルで
+`export-coverage-playwright.mjs` → `ingest-gsc-export.py` を実行して drilldown を更新する。
+
 - `/weekly-review` 前にユーザーが export (10分) → 本スキルで取り込み・是正。
 - 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態=observe-after-fix 観測) が毎日稼働。`gsc-auto-resubmit-daily.yml` は 2026-07-23 退役 (Indexing API 送信しない)。
   本スキルの週次手動アームは「UI export でしか取れない総件数・未把握URL」を補う (API は自サイト視点のみ)。

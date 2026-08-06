@@ -33,6 +33,37 @@
   極端に小さい行がその候補）
 - 失敗 run も記録する。利用枠に当たったかを見たいのは主にそちら
 
+## 期間限定 boost を掛ける / 止める
+
+不在週など対話利用がゼロになる期間だけ ai-content の件数と回数を上げられる。
+Max の週次枠は繰り越されないので、使わなければ捨てるだけになる。
+
+**操作口は `.claude/config/content-generation-boost.json` の 1 ファイルだけ**で、
+develop へ push すれば次のスケジュール実行から効く。cloud セッションは
+`actions:write` を持たず workflow_dispatch できない (403) ので、この経路にしてある。
+
+| したいこと | 操作 |
+|---|---|
+| 件数を変える | `aiContent.limit` を 1..10 で書き換える (baseline の枠にも効く) |
+| 回数を減らす | `aiContent.extraCrons` から cron を削る。空配列なら追加実行なし |
+| 今すぐ止める | `until` を過去の日時にする、またはファイルごと削除する |
+| 延長する | `until` を延ばす |
+
+放置しても `until` を過ぎれば自動で baseline に戻る。**戻し忘れが事故にならない**ことが
+この設計の目的なので、期限を外して恒久化しない (恒久的に増やすなら workflow の
+`--default-limit` を上げ、予算ガードを通す)。
+
+### 使用量が多いかをどう判断するか
+
+**枠の消費率は測れない** (上の注意書きのとおり `cost_usd` は換算値)。観測できるのは:
+
+- 各 run が `history.csv` に 1 行 commit する `items` と `is_error`
+- gate job が run ごとに job summary へ出す「boost 開始以降 N 回 / M 件 / 失敗 K 回」
+
+判断材料は**失敗の増え方**。枠に当たった run は成果ゼロのまま枠を消費するので、
+直近 2 回が連続失敗したら gate が追加スロットを止め baseline へ戻す
+(`maxConsecutiveFailures`)。成功が 1 回入れば自動で復帰する。
+
 ## 関連
 
 - 診断: `.claude/scripts/lib/summarize-claude-execution.mjs`（同じ execution log から失敗理由を出す）
