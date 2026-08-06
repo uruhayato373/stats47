@@ -114,30 +114,56 @@ const saveQueue = (q) => {
 };
 
 // ── --mark-* モード ────────────────────────────────────────────
+// SKILL の runbook は verify-intent の終着点を `resolved-by-design` と定めているが、
+// 以前は done / in-progress しか表現できず「死亡が正」を done (=直した) と混同していた。
+// --mark-by-design を足し、併せて @file で一括指定できるようにした (1 件ずつ 19 回叩かない)。
 const markIP = getArg("--mark-in-progress", null);
 const markDone = getArg("--mark-done", null);
-if (markIP || markDone) {
+const markDesign = getArg("--mark-by-design", null);
+if (markIP || markDone || markDesign) {
   const q = loadQueue();
   if (!q) {
     console.error("[err] queue が無い。先に build を実行: node build-coverage-queue.mjs");
     process.exit(1);
   }
-  const url = markIP || markDone;
-  const e = q.queue.find((x) => x.url === url);
-  if (!e) {
-    console.error(`[err] queue に無い URL: ${url}`);
+  const spec = markIP || markDone || markDesign;
+  // "@path" なら 1 行 1 URL のファイルとして読む (URL にカンマが入りうるので分割はしない)
+  const urls = spec.startsWith("@")
+    ? fs.readFileSync(spec.slice(1), "utf8").split(/\r?\n/).map((s) => s.trim()).filter(Boolean)
+    : [spec];
+  const note = getArg("--note", null);
+  const waveId = getArg("--wave-id", null);
+  const missing = [];
+  let changed = 0;
+  for (const url of urls) {
+    const e = q.queue.find((x) => x.url === url);
+    if (!e) {
+      missing.push(url);
+      continue;
+    }
+    if (markIP) {
+      e.status = "in-progress";
+    } else if (markDone) {
+      e.status = "done";
+      e.resolved_at = TODAY;
+      if (waveId) e.wave_id = waveId;
+    } else {
+      e.status = "resolved-by-design";
+      e.resolved_at = TODAY;
+      if (waveId) e.wave_id = waveId;
+    }
+    if (note) e.note = note;
+    changed += 1;
+  }
+  // 1 件でも queue に無ければ止める (存在しない URL を黙って無視すると「片付けた」と誤認する)
+  if (missing.length) {
+    console.error(`[err] queue に無い URL が ${missing.length} 件あります:`);
+    missing.slice(0, 5).forEach((u) => console.error(`   ${u}`));
     process.exit(1);
   }
-  if (markIP) {
-    e.status = "in-progress";
-  } else {
-    e.status = "done";
-    e.resolved_at = TODAY;
-    const waveId = getArg("--wave-id", null);
-    if (waveId) e.wave_id = waveId;
-  }
   saveQueue(q);
-  console.log(`[ok] ${url} → ${e.status}${e.wave_id ? ` (wave ${e.wave_id})` : ""}`);
+  const state = markIP ? "in-progress" : markDone ? "done" : "resolved-by-design";
+  console.log(`[ok] ${changed} 件 → ${state}${waveId ? ` (wave ${waveId})` : ""}`);
   process.exit(0);
 }
 

@@ -1495,14 +1495,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/blog/cc-estat-12-industry-treemap",
@@ -2567,14 +2567,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://storage.stats47.jp/app/home/previews/ranking.avif",
@@ -3239,14 +3239,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/14000/population",
@@ -16071,14 +16071,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/27215/local-economy",
@@ -16615,14 +16615,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/47213/labor-wages",
@@ -17207,14 +17207,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/30366/tourism",
@@ -17479,14 +17479,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/01513/local-finance",
@@ -18231,14 +18231,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/01668/manufacturing",
@@ -18919,14 +18919,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/01513/safety",
@@ -19127,14 +19127,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/01391/population-dynamics",
@@ -19271,14 +19271,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/08211/safety",
@@ -21063,14 +21063,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/01334/education-culture",
@@ -25671,14 +25671,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/01218/healthcare",
@@ -25927,14 +25927,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/tag/魚食文化",
@@ -25975,14 +25975,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/40343/manufacturing",
@@ -26039,14 +26039,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/30424/healthcare",
@@ -26487,14 +26487,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/20521/labor-wages",
@@ -27735,14 +27735,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "https://stats47.jp/areas/43404/local-economy",
@@ -32071,14 +32071,14 @@
       "current_http": 404,
       "verdict": "still-404",
       "action": "verify-intent",
-      "status": "pending",
+      "status": "resolved-by-design",
       "first_seen": "2026-06-16",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "旧URL/内部パス/合成survey id(ssds-src:*)/旧ビルド資産。発生源は isLinkableSurveyId 等で塞ぎ済みで、404 のままが正。"
     },
     {
       "url": "http://stats47.jp/blog/fiscal-strength-ranking",
@@ -32839,14 +32839,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/areas/10000/fishery-marine",
@@ -32871,14 +32871,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb121202",
@@ -32887,14 +32887,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/child-height-regional-gap",
@@ -32903,14 +32903,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/miso-consumption-quantity-prefecture-gap",
@@ -32919,14 +32919,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb092009",
@@ -32935,14 +32935,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb021105",
@@ -32951,14 +32951,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-d-md17",
@@ -32967,14 +32967,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb051208",
@@ -32983,14 +32983,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb102001",
@@ -32999,14 +32999,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/blog/gender-wage-gap-ranking",
@@ -33031,14 +33031,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb072001",
@@ -33047,14 +33047,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-la03",
@@ -33063,14 +33063,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/agricultural-production-value",
@@ -33079,14 +33079,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-d-md12",
@@ -33095,14 +33095,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/instant-noodles-expenditure",
@@ -33111,14 +33111,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/avg-height-middle-school-2nd-male",
@@ -33127,14 +33127,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/real-public-debt-service-ratio-city",
@@ -33159,14 +33159,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb110005",
@@ -33175,14 +33175,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb122001",
@@ -33191,14 +33191,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb103005",
@@ -33207,14 +33207,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb061008",
@@ -33223,14 +33223,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/population-density",
@@ -33239,14 +33239,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-d-md18",
@@ -33255,14 +33255,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-f-snow-days",
@@ -33271,14 +33271,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb054001",
@@ -33287,14 +33287,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/rice-expenditure",
@@ -33303,14 +33303,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/total-overnight-guests-foreign-china",
@@ -33319,14 +33319,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/consumer-price-regional-difference-index",
@@ -33335,14 +33335,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/blog/population-decline-regional-gap",
@@ -33367,14 +33367,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-d-md13",
@@ -33383,14 +33383,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb072010",
@@ -33399,14 +33399,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb054008",
@@ -33415,14 +33415,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/ssdse-c-lb051206",
@@ -33431,14 +33431,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/fiscal-self-reliance-ratio",
@@ -33447,14 +33447,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/current-balance-ratio-city",
@@ -33511,14 +33511,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/areas/24000/labor-mobility",
@@ -33607,14 +33607,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/blog/population-density-land-use-structure",
@@ -33639,14 +33639,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/commerce-sales-amount",
@@ -33655,14 +33655,14 @@
       "current_http": 200,
       "verdict": "live-soft404",
       "action": "content-check",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-08-06",
       "last_checked": "2026-08-06",
-      "resolved_at": null,
-      "wave_id": null,
+      "resolved_at": "2026-08-06",
+      "wave_id": "2026-08-06-coverage",
       "content_verdict": null,
       "content_signal": null,
-      "note": ""
+      "note": "config なし + KNOWN 未登録 + R2 データなしの死にキー。GONE_RANKING_KEYS に追加し middleware 410 で短絡 (COVERAGE-SOFT404-01)。"
     },
     {
       "url": "https://stats47.jp/ranking/university-advancement",
