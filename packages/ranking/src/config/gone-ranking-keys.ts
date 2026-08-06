@@ -30,8 +30,54 @@
  *   bowling-alley-public = 公共ボウリング場が最良年 (2015) でも値 1 の県が 2 つだけ
  *   unemployment-measures-project-expenses-prefecture = 失業対策事業は 1996 年廃止で 2007 年以降全年 0
  *   config isActive:false + KNOWN 再生成 (2176→2173) とセットで実施）
+ * 更新日: 2026-08-06（COVERAGE-SOFT404-01。GSC が soft404 判定した空 ranking 39 件を退役。
+ *   いずれも (a) metric config が存在しない (b) KNOWN_RANKING_KEYS 未登録 (c) R2 values.json も無い、の
+ *   3 条件をすべて満たす死にキーで、本番は HTTP 200 + 「ランキングが見つかりません」の soft404 を返していた。
+ *   middleware 410 で page 到達前に短絡する。
+ *   ★2026-06-16 の同種作業で 56 件の誤検知 (KNOWN 登録済 + isActive + R2 実データありを GONE 化) が
+ *     発生したため、今回は上記 3 条件を機械検証してから追加した (要注意 0 件)。
+ *   entities:["city"] の isActive 4 件 (real-public-debt-service-ratio-city 等) は別問題として除外した）
  */
 export const GONE_RANKING_KEYS = new Set([
+  "ssdse-c-lb072003",
+  "ssdse-c-lb080011",
+  "ssdse-c-lb121202",
+  "child-height-regional-gap",
+  "miso-consumption-quantity-prefecture-gap",
+  "ssdse-c-lb092009",
+  "ssdse-c-lb021105",
+  "ssdse-d-md17",
+  "ssdse-c-lb051208",
+  "ssdse-c-lb102001",
+  "ssdse-c-lb110003",
+  "ssdse-c-lb072001",
+  "ssdse-c-la03",
+  "agricultural-production-value",
+  "ssdse-d-md12",
+  "instant-noodles-expenditure",
+  "avg-height-middle-school-2nd-male",
+  "ssdse-c-lb054005",
+  "ssdse-c-lb110005",
+  "ssdse-c-lb122001",
+  "ssdse-c-lb103005",
+  "ssdse-c-lb061008",
+  "population-density",
+  "ssdse-d-md18",
+  "ssdse-f-snow-days",
+  "ssdse-c-lb054001",
+  "rice-expenditure",
+  "total-overnight-guests-foreign-china",
+  "consumer-price-regional-difference-index",
+  "ssdse-c-lb051203",
+  "ssdse-d-md13",
+  "ssdse-c-lb072010",
+  "ssdse-c-lb054008",
+  "ssdse-c-lb051206",
+  "fiscal-self-reliance-ratio",
+  "total-overnight-guests-foreign-korea",
+  "ssdse-c-lb061001",
+  "education-cost-per-student",
+  "commerce-sales-amount",
   "actual-road-length",
   "age-adjusted-death-rate-female-h27-per-1000",
   "age-adjusted-death-rate-female-s60-per-1000",
