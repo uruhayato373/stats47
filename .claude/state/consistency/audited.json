@@ -1,7 +1,12 @@
 {
-  "hash": "7ca40c36e16371468944daaef812dfe5b6386f6ca7304bf8b725606c8b6fbe9f",
-  "audited_at": "2026-08-05T06:13:06",
+  "hash": "9561cd9765b9b0383a17802e1ae3ef4f3c3266ac8538f161117e1ba76f9ebb59",
+  "audited_at": "2026-08-06T04:10:47",
   "files": [
-    ".claude/rules/analytics-event-standards.md"
+    ".claude/rules/codex-mcp.md",
+    ".claude/rules/local-environment.md",
+    ".claude/scripts/google-admin/browser-context.mjs",
+    ".claude/scripts/gsc/build-coverage-queue.mjs",
+    ".claude/scripts/gsc/export-coverage-playwright.mjs",
+    ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md"
   ]
 }

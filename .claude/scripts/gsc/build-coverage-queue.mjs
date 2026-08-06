@@ -180,15 +180,38 @@ function readDrilldowns() {
 }
 
 // ── 本番 HTTP 実測 (Googlebot UA, redirect manual, 並列) ─────────
+// 社内プロキシ配下では Node の素の fetch が TLS 傍受で落ち、全 URL が status 0 (=recheck) になる。
+// HTTPS_PROXY があれば明示 CONNECT する (前例: packages/ranking/src/scripts/audit-ranking-data-integrity.ts)。
+// CI / 社外では dispatcher を作らず従来どおり。
+// 2026-08-06 実測: これが無いと 2,456 件中 2,375 件が recheck に落ち分類が成立しなかった。
+let cachedDispatcher;
+async function getProxyDispatcher() {
+  if (cachedDispatcher !== undefined) return cachedDispatcher;
+  const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+  if (!proxyUrl) {
+    cachedDispatcher = null;
+    return null;
+  }
+  try {
+    const { ProxyAgent } = await import("undici");
+    cachedDispatcher = new ProxyAgent(proxyUrl);
+  } catch {
+    cachedDispatcher = null;
+  }
+  return cachedDispatcher;
+}
+
 async function probe(url) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), 12000);
   try {
+    const dispatcher = await getProxyDispatcher();
     const res = await fetch(url, {
       method: "GET",
       headers: { "User-Agent": GOOGLEBOT_UA },
       redirect: "manual",
       signal: ctrl.signal,
+      ...(dispatcher ? { dispatcher } : {}),
     });
     return res.status;
   } catch {

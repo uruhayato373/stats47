@@ -10,6 +10,7 @@
  */
 
 import { readCategoriesFromR2 } from "@stats47/category/server";
+import { CATEGORY_KEYS } from "@stats47/data-configs";
 import {
   readActiveKeysForSitemapFromR2,
   readSurveysFromR2,
@@ -27,6 +28,11 @@ import { themeHref } from "@/features/theme-dashboard/config/theme-urls";
 import { UrlPolicy } from "@/lib/url-policy";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
+import {
+  SITEMAP_BLOG_ENTRIES,
+  SITEMAP_SURVEY_IDS,
+  SITEMAP_TAG_ENTRIES,
+} from "@/config/sitemap-blog-entries";
 
 import type { MetadataRoute } from "next";
 
@@ -151,28 +157,47 @@ async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
     });
 }
 
+/**
+ * ★ビルド時フォールバックが要る理由 (2026-08-06):
+ * sitemap は generateSitemaps() を持つためビルド時に prerender される。ビルド環境には R2 到達手段が
+ * 無く、blog / categories / surveys / tags の reader は「成功した空」(`ok([])`) を返すので、
+ * 空の sitemap がそのまま焼かれていた (実測: blog 422 記事が 1 件も提出されていなかった)。
+ * ranking だけが KNOWN_RANKING_KEYS という git 定数を返していたため唯一埋まっていた。
+ * ここでは R2 が取れれば R2 を、空なら git 定数を使う (runtime は鮮度、build は網羅を優先)。
+ * git 定数の鮮度は `generate-sitemap-blog-entries.ts --check` が守る。
+ */
 async function getBlogPages(): Promise<MetadataRoute.Sitemap> {
   const rows = await listLatestArticles(10000).catch(() => []);
 
   const redirected = new Set(Object.keys(BLOG_SLUG_REDIRECTS));
+  const live = rows
+    .filter((row) => row.publishedAt && !redirected.has(row.slug))
+    .map((row) => ({ slug: row.slug, lastModified: row.publishedAt as string }));
+  const entries =
+    live.length > 0
+      ? live
+      : SITEMAP_BLOG_ENTRIES.filter((e) => !redirected.has(e.slug));
+
   return [
     { url: `${BASE_URL}/blog`, changeFrequency: "daily", priority: 0.8 },
-    ...rows
-      .filter((row) => row.publishedAt && !redirected.has(row.slug))
-      .map((row) => ({
-        url: `${BASE_URL}/blog/${row.slug}`,
-        lastModified: row.publishedAt ? new Date(row.publishedAt) : undefined,
-        changeFrequency: "monthly" as const,
-        priority: 0.7,
-      })),
+    ...entries.map((e) => ({
+      url: `${BASE_URL}/blog/${e.slug}`,
+      lastModified: e.lastModified ? new Date(e.lastModified) : undefined,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
   ];
 }
 
 async function getCategoryPages(): Promise<MetadataRoute.Sitemap> {
   const result = await readCategoriesFromR2();
-  if (!isOk(result)) return [];
-  return result.data.map((c) => ({
-    url: `${BASE_URL}/category/${c.categoryKey}`,
+  // ビルド時は R2 が空になるため git TS の 17 軸へフォールバックする (上の docstring 参照)
+  const keys =
+    isOk(result) && result.data.length > 0
+      ? result.data.map((c) => c.categoryKey)
+      : [...CATEGORY_KEYS];
+  return keys.map((categoryKey) => ({
+    url: `${BASE_URL}/category/${categoryKey}`,
     changeFrequency: "weekly",
     priority: 0.5,
   }));
@@ -180,13 +205,17 @@ async function getCategoryPages(): Promise<MetadataRoute.Sitemap> {
 
 async function getSurveyPages(): Promise<MetadataRoute.Sitemap> {
   const result = await readSurveysFromR2();
-  if (!isOk(result)) {
-    return [{ url: `${BASE_URL}/survey`, changeFrequency: "weekly", priority: 0.6 }];
-  }
+  // ビルド時は R2 が空になるため生成済み定数へフォールバックする (上の docstring 参照)。
+  // git の surveys.json (master) は使わない — 配信されていない id が混ざり本番 404 になるため
+  // (実測 2026-08-06: master 75 件のうち livestock-statistics / population-projection が 404)。
+  const ids =
+    isOk(result) && result.data.length > 0
+      ? result.data.map((s) => s.id)
+      : [...SITEMAP_SURVEY_IDS];
   return [
     { url: `${BASE_URL}/survey`, changeFrequency: "weekly", priority: 0.6 },
-    ...result.data.map((s) => ({
-      url: `${BASE_URL}/survey/${s.id}`,
+    ...ids.map((id) => ({
+      url: `${BASE_URL}/survey/${id}`,
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),
@@ -230,6 +259,16 @@ function getCityPages(): MetadataRoute.Sitemap {
   return entries;
 }
 
+/** ビルド時 (R2 不達) 用の tag フォールバック。git 定数から組む (上の docstring 参照)。 */
+function tagPagesFromGit(): MetadataRoute.Sitemap {
+  return SITEMAP_TAG_ENTRIES.map((t) => ({
+    url: `${BASE_URL}/tag/${t.tagKey}`,
+    lastModified: t.lastModified ? new Date(t.lastModified) : undefined,
+    changeFrequency: "weekly" as const,
+    priority: 0.4,
+  }));
+}
+
 async function getTagPages(): Promise<MetadataRoute.Sitemap> {
   let tagMeta: Awaited<ReturnType<typeof listAllTagsWithCount>>;
   try {
@@ -237,14 +276,14 @@ async function getTagPages(): Promise<MetadataRoute.Sitemap> {
   } catch (error) {
     // eslint-disable-next-line no-console -- sitemap.ts は logger 未設定、ビルド失敗の真因観測のため console を使用
     console.error("[sitemap/getTagPages] listAllTagsWithCount failed", { error });
-    return [];
+    return tagPagesFromGit();
   }
   // 旧クエリで count >= 5 を要求していたため踏襲
   const eligible = tagMeta.filter((t) => t.count >= 5);
   if (eligible.length === 0) {
     // eslint-disable-next-line no-console -- sitemap.ts は logger 未設定、空 0 検出のため console を使用
     console.warn("[sitemap/getTagPages] no eligible tags (count>=5)", { totalTags: tagMeta.length });
-    return [];
+    return tagPagesFromGit();
   }
 
   let articlesAll: Awaited<ReturnType<typeof listLatestArticles>>;
@@ -253,7 +292,7 @@ async function getTagPages(): Promise<MetadataRoute.Sitemap> {
   } catch (error) {
     // eslint-disable-next-line no-console -- sitemap.ts は logger 未設定、ビルド失敗の真因観測のため console を使用
     console.error("[sitemap/getTagPages] listLatestArticles failed", { error });
-    return [];
+    return tagPagesFromGit();
   }
   // 各 tag の最新 publishedAt を slug→tags リレーション無しで安価に解決するため、
   // 全 article から tagKey 別の max(publishedAt) を組み立てる。
@@ -320,8 +359,54 @@ export default async function sitemap({
       case "cities":
         return getCityPages();
     }
-  } catch {
-    // ビルド時に D1 が利用できない場合は空配列で fallback（ISR で再生成）
-    return [];
+  } catch (error) {
+    // 例外時も「空の sitemap」を焼かない。getter 内のフォールバックは
+    // 「R2 が空を返した」場合しか効かないため、throw された場合はここで git 定数へ落とす
+    // (空を返すと 2026-08-06 に見つけた欠陥 — 公開 422 記事が 1 件も提出されない — が別経路で再発する)。
+    // eslint-disable-next-line no-console -- sitemap.ts は logger 未設定、真因観測のため console を使用
+    console.error("[sitemap] segment generation failed, falling back to git constants", {
+      segment,
+      error,
+    });
+    switch (segment) {
+      case "static":
+        return STATIC_PAGES;
+      case "themes":
+        return THEME_PAGES;
+      case "areas":
+        return AREA_PAGES;
+      case "cities":
+        return getCityPages();
+      case "blog":
+        return [
+          { url: `${BASE_URL}/blog`, changeFrequency: "daily", priority: 0.8 },
+          ...SITEMAP_BLOG_ENTRIES.map((e) => ({
+            url: `${BASE_URL}/blog/${e.slug}`,
+            lastModified: e.lastModified ? new Date(e.lastModified) : undefined,
+            changeFrequency: "monthly" as const,
+            priority: 0.7,
+          })),
+        ];
+      case "categories":
+        return [...CATEGORY_KEYS].map((categoryKey) => ({
+          url: `${BASE_URL}/category/${categoryKey}`,
+          changeFrequency: "weekly" as const,
+          priority: 0.5,
+        }));
+      case "surveys":
+        return [
+          { url: `${BASE_URL}/survey`, changeFrequency: "weekly", priority: 0.6 },
+          ...SITEMAP_SURVEY_IDS.map((id2) => ({
+            url: `${BASE_URL}/survey/${id2}`,
+            changeFrequency: "monthly" as const,
+            priority: 0.5,
+          })),
+        ];
+      case "tags":
+        return tagPagesFromGit();
+      // ranking は reader 側が KNOWN_RANKING_KEYS を返すため、ここに来たら素直に空
+      case "ranking":
+        return [];
+    }
   }
 }

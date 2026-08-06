@@ -6,7 +6,11 @@
  *   (通常 Chrome / X / A8 / note 等の profile を使わない)。
  * - page 1 枚・context 1 つ。lock `.local/locks/google-admin.lock` で同時実行を拒否する。
  * - 未ログイン / MFA / CAPTCHA は突破しない (呼び元が headed でユーザーに依頼して待つ)。
- * - download は cancel。cookie/localStorage/token を export しない。
+ * - download は既定で cancel。cookie/localStorage/token を export しない。
+ *   例外は read-only の公式 export UI のみで、呼び元が `launchAdminContext({ acceptDownloads: true })`
+ *   と明示的に opt-in したときだけ有効になる (既定は false のまま = 設定変更 runner の契約は不変)。
+ *   現在の唯一の利用者は `.claude/scripts/gsc/export-coverage-playwright.mjs`
+ *   (GSC カバレッジは公式 API が無く UI export しか経路がない。README「操作別の正典と実行場所」)。
  * - finally で context.close() (persistent context は browser も閉じる)。
  *   runner 自身が起動した PID / lock / tab のみ片付ける (通常 Chrome を一括 kill しない)。
  */
@@ -61,8 +65,15 @@ export function releaseLock() {
   }
 }
 
-/** 専用 profile の persistent context を 1 つ起動する。 */
-export async function launchAdminContext() {
+/**
+ * 専用 profile の persistent context を 1 つ起動する。
+ *
+ * @param {{ acceptDownloads?: boolean }} [options]
+ *   acceptDownloads: 既定 false (download を cancel する契約)。read-only の公式 export UI を
+ *   使う呼び元だけが true を渡す。true のとき download の自動 cancel も外れるため、
+ *   呼び元は保存先と対象ファイルを自分で限定すること。
+ */
+export async function launchAdminContext({ acceptDownloads = false } = {}) {
   fs.mkdirSync(PROFILE_DIR, { recursive: true });
   const context = await chromium.launchPersistentContext(PROFILE_DIR, {
     channel: "chrome",
@@ -70,7 +81,7 @@ export async function launchAdminContext() {
     locale: "ja-JP",
     timezoneId: "Asia/Tokyo",
     viewport: { width: 1440, height: 1000 },
-    acceptDownloads: false,
+    acceptDownloads,
     // Google はサインイン画面で automation 検知を行い「安全でないブラウザ」として拒否する。
     // 実 Chrome channel + AutomationControlled 抑制でログイン済み session の利用を可能にする。
     // それでもサインイン自体が拒否される場合は `cli.mjs login` (CDP 非接続の素の Chrome) で
@@ -78,10 +89,14 @@ export async function launchAdminContext() {
     args: ["--disable-blink-features=AutomationControlled", "--no-first-run", "--no-default-browser-check"],
     ignoreDefaultArgs: ["--enable-automation"],
   });
-  // download は受け付けない
-  context.on("page", (p) => p.on("download", (d) => d.cancel().catch(() => {})));
+  // download は既定で受け付けない (opt-in したときだけ呼び元に委ねる)
+  if (!acceptDownloads) {
+    context.on("page", (p) => p.on("download", (d) => d.cancel().catch(() => {})));
+  }
   const page = context.pages()[0] ?? (await context.newPage());
-  page.on("download", (d) => d.cancel().catch(() => {}));
+  if (!acceptDownloads) {
+    page.on("download", (d) => d.cancel().catch(() => {}));
+  }
   return { context, page };
 }
 

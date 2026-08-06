@@ -133,6 +133,32 @@ fileURLToPath(join(import.meta.url, "../noto-sans-v27-latin-regular.ttf"))
 - **`npm run build | tail` の終了コードを成功判定に使わない**。`tail` の exit code が返るため
   build の失敗が隠れる (2026-08-05 に実際に「exit 0」と誤報した)。判定は出力本文を読む。
 
+### ★`npm run type-check` は Windows で「走らずに落ちる」(2026-08-06)
+
+ルートと `packages/estat-api` の `type-check` スクリプトは
+`NODE_OPTIONS="--max-old-space-size=4096" tsc --noEmit` という **POSIX の env 前置**を使う。
+npm は Windows でスクリプトを `cmd.exe /d /s /c` 経由で実行するため、これは
+
+```
+'NODE_OPTIONS' は、内部コマンドまたは外部コマンド、
+操作可能なプログラムまたはバッチ ファイルとして認識されていません。
+```
+
+で即座に失敗する。**型エラーが 0 でも exit 1 になり、逆に「走った」と誤認しやすい**
+(2026-08-06 に実際に「turbo type-check exit 0」と誤報告した。見ていたのは背景タスクの
+ラッパーの終了コードで、turbo は一度も起動していなかった)。
+
+Windows での代替:
+
+```bash
+NODE_OPTIONS="--max-old-space-size=4096" npx turbo run type-check --continue
+cd packages/estat-api && NODE_OPTIONS="--max-old-space-size=4096" npx tsc --noEmit
+```
+
+Git Bash から `npx turbo` / `npx tsc` を直接呼べば env 前置が効く (npm を挟まないため)。
+`--continue` を付けないと最初の失敗で残りが検査されない。
+**判定は必ず出力本文の `error TS` 件数で行う** (`| tail` や `| grep` の終了コードを見ない)。
+
 ### ★`file://` URL を文字列連結しない (2026-08-05)
 
 `` `file://${process.argv[1]}` `` は Windows で必ず不一致になる。Node は `argv[1]` を絶対パスへ

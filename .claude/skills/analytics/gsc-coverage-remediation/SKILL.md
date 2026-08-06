@@ -80,9 +80,18 @@ sitemap 掲載・内部リンク・canonical を整えた上で `url-inspection-
 
 ### Phase 1 — 取り込み (ingest)
 ```bash
+# (任意) UI export を Playwright で自動化する。カバレッジは公式 API が無く UI export しか経路がない。
+# 初回だけ headed Chrome で人間が Google にログインする (認証情報はスクリプトが扱わない)。
+node .claude/scripts/gsc/export-coverage-playwright.mjs --probe   # 初回: DOM 構造を確認
+node .claude/scripts/gsc/export-coverage-playwright.mjs           # ~/Downloads へ zip を保存
+
 python3 .claude/scripts/gsc/ingest-gsc-export.py        # ~/Downloads の GSC zip を自動検出・正規化
 # 週を明示する場合: --week 2026-W25 / 日付指定: --date 2026-06-16
 ```
+
+> **GSC UI export は 1 カテゴリ 1,000 行が上限**。404 / redirect / robots が 1,000 ちょうどで
+> 頭打ちになるのはこのためで、取り込み漏れではない (手動 export でも同じ)。
+> 総件数は `category-totals.json` 側で正しく取れる。
 - cp932 ファイル名を復元し、カテゴリ判定して `coverage-drilldown/<週>/<category>-drilldown.csv` に保存。
 - **生 drilldown は `-drilldown.csv`** (auto-resubmit は拾わない)。集計は `category-totals.json`、推移は `coverage-trend.csv`。
 
@@ -158,5 +167,10 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 - 運用正典: 本 SKILL（2026-07-12 に旧 GSC カバレッジ是正計画を統合。旧版は Git 履歴）
 - 同型: `.claude/rules/blog-remediation-loop.md` (ブログ品質是正ループ)
 - 実測判定: `.claude/rules/evidence-based-judgment.md`
-- export 手順: `.claude/skills/analytics/gsc-improvement/reference/USER_EXPORT_GUIDE.md`
+- export 手順 (手動): `.claude/skills/analytics/gsc-improvement/reference/USER_EXPORT_GUIDE.md`
+- export 自動化 (Playwright): `.claude/scripts/gsc/export-coverage-playwright.mjs`
+  — カバレッジは公式 API が無く UI export しか経路がないため
+  (google-admin README「公式 API がないものだけローカル headed Playwright に残す」に該当)。
+  初回のみ人間が Google にログインする。保存名は消費側 `ingest-gsc-export.py` の
+  `is_gsc_zip()` が拾える形に揃える。遮断ページは fail-closed で停止する
 - agent: `gsc-analyst` (実行) / `improvement-triage` (status 更新)

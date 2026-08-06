@@ -410,6 +410,11 @@ jobs:
           # HTTP 200 +「記事が見つかりません」で固着する。middleware で 410 に短絡するため
           # 未公開集合が R2 の実態とズレていないかを検査する (再公開の取り残しも拾う)。
           (cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts --check)
+          # sitemap はビルド時 prerender され、その時点で R2 に到達できない。
+          # blog / tag / survey はこの git 定数が無いと「空の sitemap」が焼かれる
+          # (2026-08-06 実測: 公開 422 記事が 1 件も提出されず sitemap/4.xml は /blog のみだった)。
+          # 記事公開で R2 が変わるとこの定数は陳腐化するので PR で鮮度を弾く。
+          (cd apps/web && npx tsx scripts/generate-sitemap-blog-entries.ts --check)
           # Header / home ポータル / 楽天商品カードが使うカテゴリ件数・代表ランキング・
           # 品目語の生成物。ずれると表示が実データと食い違う。生成物を挟む理由は
           # 「共通 Header 経由で METRICS_REGISTRY が全 route の bundle に入るのを防ぐ」
