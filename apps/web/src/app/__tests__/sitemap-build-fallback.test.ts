@@ -65,6 +65,16 @@ describe("sitemap ビルド時フォールバック (R2 が空でも空にしな
     expect(entries.every((e) => e.url.includes("/tag/"))).toBe(true);
   });
 
+  it("tag の URL は percent-encode されている (canonical と一致させる)", async () => {
+    const entries = await sitemap({ id: SEGMENT_ID.tags });
+    const jaTag = SITEMAP_TAG_ENTRIES.find((t) => /[^ -~]/.test(t.tagKey));
+    expect(jaTag, "非 ASCII のタグが 1 件も無いと検査にならない").toBeDefined();
+    const expected = `https://stats47.jp/tag/${encodeURIComponent(jaTag!.tagKey)}`;
+    expect(entries.some((e) => e.url === expected)).toBe(true);
+    // 生の日本語が loc に混ざっていないこと (ページの canonical は encode 形)
+    expect(entries.every((e) => !/[^ -~]/.test(e.url))).toBe(true);
+  });
+
   it("reader が throw しても空にしない (getter 内フォールバックが効かない経路)", async () => {
     const { readCategoriesFromR2 } = await import("@stats47/category/server");
     vi.mocked(readCategoriesFromR2).mockRejectedValueOnce(new Error("R2 unreachable"));

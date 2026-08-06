@@ -259,10 +259,19 @@ function getCityPages(): MetadataRoute.Sitemap {
   return entries;
 }
 
+/**
+ * tag の URL は **必ず percent-encode する**。tagKey は日本語なので、生のまま出すと
+ * sitemap の loc (`/tag/家計調査`) とページの canonical (`/tag/%E5%AE%B6%E8%A8%88%E8%AA%BF%E6%9F%BB`)
+ * が食い違う。middleware も `encodeURIComponent(jaKey)` で揃えている。
+ */
+function tagUrl(tagKey: string): string {
+  return `${BASE_URL}/tag/${encodeURIComponent(tagKey)}`;
+}
+
 /** ビルド時 (R2 不達) 用の tag フォールバック。git 定数から組む (上の docstring 参照)。 */
 function tagPagesFromGit(): MetadataRoute.Sitemap {
   return SITEMAP_TAG_ENTRIES.map((t) => ({
-    url: `${BASE_URL}/tag/${t.tagKey}`,
+    url: tagUrl(t.tagKey),
     lastModified: t.lastModified ? new Date(t.lastModified) : undefined,
     changeFrequency: "weekly" as const,
     priority: 0.4,
@@ -315,7 +324,7 @@ async function getTagPages(): Promise<MetadataRoute.Sitemap> {
   }
 
   return eligible.map((row) => ({
-    url: `${BASE_URL}/tag/${row.tagKey}`,
+    url: tagUrl(row.tagKey),
     lastModified: latestByTag.get(row.tagKey)
       ? new Date(latestByTag.get(row.tagKey) as string)
       : undefined,
