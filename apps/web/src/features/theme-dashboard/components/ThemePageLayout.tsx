@@ -20,10 +20,10 @@ import {
   BannerAd,
   InContentAdSlot,
   NativeAffiliateRow,
-  SidebarPromoBanner,
 } from "@/features/ads";
 import { THEME_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
 import { resolveAffiliateBanners, resolveAffiliateBannersByVertical } from "@/features/ads/server";
+import { isLandscapeBanner } from "@/features/ads/services/banner-geometry";
 
 import { HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
 
@@ -76,19 +76,22 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
   const breadcrumbData = generateThemeBreadcrumbStructuredData(theme);
   const pageData = generateThemePageStructuredData(theme);
 
-  // D Phase 3: ネイティブアフィリエイト枠 (テーマ関連書籍/商品)
+  // D Phase 3: ネイティブアフィリエイト枠 (テーマの関連サービス)
   // relatedArticleTagKeys で解決 → 空なら theme→vertical 写像 (THEME_AFFILIATE_MAP) でフォールバック。
   // これにより relatedArticleTagKeys 未設定のテーマでも意図一致広告が出る (在庫機会損失の解消)。
   // ★ 2026-08-04: 4 → 5 に増やし、先頭 4 件をネイティブ枠、5 件目をページ末尾の 300x250 に回す。
+  // ★ 2026-08-06: 5 → 8。縦長 (スカイスクレイパー) は本文枠に出さない (isLandscapeBanner で
+  //   除外。受け皿は sidebar-sticky スロット)。除外後も native 4 + 末尾 1 が埋まる余裕を持たせる。
   let nativeBanners = theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0
-    ? await resolveAffiliateBanners(theme.relatedArticleTagKeys, 5).catch(() => [])
+    ? await resolveAffiliateBanners(theme.relatedArticleTagKeys, 8).catch(() => [])
     : [];
   if (nativeBanners.length === 0) {
     const vertical = THEME_AFFILIATE_MAP[theme.themeKey];
     if (vertical) {
-      nativeBanners = await resolveAffiliateBannersByVertical(vertical, 5).catch(() => []);
+      nativeBanners = await resolveAffiliateBannersByVertical(vertical, 8).catch(() => []);
     }
   }
+  nativeBanners = nativeBanners.filter(isLandscapeBanner);
   // 在庫が 4 件以下なら末尾バナーは出さない (ネイティブ枠と同じ広告の重複を避ける)。
   const themeEndBanner = nativeBanners[4] ?? null;
 
@@ -242,16 +245,13 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
       */}
       <InContentAdSlot slot={THEMES_CONTENT} />
 
-      {/* 高単価アフィリエイトバナー (AdSense と並行) */}
-      <div className="mt-8 flex justify-center">
-        <SidebarPromoBanner index={0} position="theme-banner" />
-      </div>
-
-      {/* ネイティブアフィリエイト枠 (D Phase 3) */}
+      {/* ネイティブアフィリエイト枠 (D Phase 3)。
+          旧・本文中央の SidebarPromoBanner は撤去 (316px レール前提の部品を本文幅で使う誤用。
+          native 行 + theme-end 300x250 で枠は充足する。2026-08-06)。 */}
       {nativeBanners.length > 0 && (
         <div className="mt-8">
           <NativeAffiliateRow
-            title={`${theme.title}の関連書籍・商品`}
+            title={`${theme.title}の関連サービス`}
             banners={nativeBanners.slice(0, 4)}
             position="theme-native"
             trackingCategory={`theme-${theme.themeKey}`}

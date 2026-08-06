@@ -119,7 +119,9 @@ export async function loadRankingPageModel(rankingKey: string) {
     affiliateTagKeys.length > 0
       // ★ 2026-08-04: 4 → 5。先頭 4 件がネイティブ枠、5 件目を読了位置の 300x250 に回す
       //   (RankingPageNativeAffiliateSection)。在庫が 4 件以下なら末尾バナーは出ない。
-      ? resolveAffiliateBanners(affiliateTagKeys, 5, rankingKey).catch((error) => {
+      // ★ 2026-08-06: 5 → 8。縦長 (スカイスクレイパー) を描画側で除外するようになったため、
+      //   除外後も native 4 + 末尾 1 が埋まる余裕を持たせる。
+      ? resolveAffiliateBanners(affiliateTagKeys, 8, rankingKey).catch((error) => {
           logger.error({ error }, "RankingKeyPage: native banners 取得失敗");
           return [];
         })
