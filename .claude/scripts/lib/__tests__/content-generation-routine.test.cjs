@@ -66,7 +66,8 @@ function assertClaudeRoutine(source, promptFile) {
   assert.match(source, /--mcp-config '\{"mcpServers":\{\}\}'/);
   assert.match(source, /steps\.claude\.outputs\.execution_file/);
   assert.match(source, /\.input\.subagent_type == \$agent/);
-  assert.match(source, /対象あり・生成物なし|対象あり・article\.mdなし/);
+  // verify は staging(生成物) の有無を検査する (partial-publish 化で文言は理由コードへ変更)。
+  assert.match(source, /no-staging|no-article/);
   assert.match(source, /steps\.verify\.outputs\.count != '0'/);
 }
 
@@ -81,7 +82,8 @@ test('AI-content routine invokes Claude before deterministic verification and pu
     'Dispatch publish-ai-content',
   ]);
   assert.match(source, /audit-ai-content\.mjs --file/);
-  assert.match(source, /critic PASS manifest/);
+  // critic の PASS manifest を検査する (partial-publish 化で理由コード critic-not-pass に変更)。
+  assert.match(source, /critic-not-pass/);
 });
 
 test('blog routine invokes Claude before deterministic verification and publish', () => {
@@ -524,4 +526,39 @@ test('blog auto-publish reconciles revised articles, not just unpublished ones',
       `${rel} が共有判定モジュールを使っていない`,
     );
   }
+});
+
+// ★partial-publish の再発防止 (2026-08-07)。1 件でも失敗すると全件 publish しない
+// オールオアナッシングで ai-content ループが停滞していた (08-05 は 4/5 生成したのに 0 件公開)。
+// verify は「通過分だけ publish・失敗は drop して次回へ・公開 0 件のときだけ赤」に固定する。
+test('both routines publish the passing subset instead of all-or-nothing', () => {
+  const routines = [
+    { workflow: '.github/workflows/ai-content-generate-daily.yml', drop: 'rm -f' },
+    { workflow: '.github/workflows/blog-generate-daily.yml', drop: 'rm -rf' },
+  ];
+  for (const { workflow, drop } of routines) {
+    const verify = YAML.parse(read(workflow)).jobs.generate.steps.find((s) => s.id === 'verify');
+    assert.ok(verify, `${workflow} must have a verify step`);
+    const run = verify.run;
+    // 旧オールオアナッシング (GENERATED != EXPECTED で全件 fail) が復活していないこと
+    assert.doesNotMatch(
+      run,
+      /-ne "\$EXPECTED"/,
+      `${workflow}: 全件一致を要求する all-or-nothing が復活している`,
+    );
+    // 公開対象 0 件のときだけ run を赤くする (silent-green も防ぐ)
+    assert.match(run, /"\$GENERATED" -eq 0/, `${workflow}: 0 件成功のときだけ fail にすること`);
+    // 失敗アイテムは outbox から drop して publish させない
+    assert.ok(run.includes(drop), `${workflow}: 失敗アイテムを drop していない (${drop})`);
+  }
+});
+
+// 連続失敗キーを隔離して doomed key が毎回バッチを食い潰すのを防ぐ (ai-content のみ)。
+test('ai-content quarantines keys that keep failing critic', () => {
+  const verify = YAML.parse(read('.github/workflows/ai-content-generate-daily.yml'))
+    .jobs.generate.steps.find((s) => s.id === 'verify').run;
+  assert.match(verify, /record-generation-outcome\.mjs/, '失敗を quarantine state に記録していない');
+  const queue = read('.claude/scripts/ai-content/build-ai-content-queue.mjs');
+  assert.match(queue, /quarantinedKeys/, 'キューが quarantine を参照していない');
+  assert.match(queue, /!quarantined\.has\(e\.rankingKey\)/, '--next が quarantine を除外していない');
 });

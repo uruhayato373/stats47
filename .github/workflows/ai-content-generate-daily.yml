@@ -247,11 +247,22 @@ jobs:
             echo "::error::Claude execution log が無く、author / critic 実行を証明できません"
             exit 1
           fi
+          # ★partial-publish (2026-08-07): 1 件でも落ちると全件を publish しない
+          #   オールオアナッシングを廃止し、通過分だけ publish する。失敗キーは staging を
+          #   drop して次回へ繰り越し、連続失敗は record-generation-outcome.mjs が quarantine
+          #   へ積む (build-ai-content-queue.mjs が --next から外す)。公開対象 0 件のときだけ
+          #   run を赤くする (silent-green 防止)。★per-item 失敗で step を殺さないよう、
+          #   fallible command は必ず if で受ける (set -e 下でも継続する)。
           GENERATED=0
+          PASSED=""
+          FAILED=""
+          FAIL_REASON="none"
           while IFS= read -r KEY; do
             [ -z "$KEY" ] && continue
             CONTENT="data/ai-content-staging/${KEY}.json"
             REVIEW=".local/ci/ai-content-reviews/${KEY}.json"
+            KEY_OK=1
+            KEY_WHY=""
             for AGENT_TYPE in ranking-content-author ranking-content-critic; do
               if ! jq -e --arg agent "$AGENT_TYPE" --arg target "$KEY" \
                 'any(.[] | select(.type == "assistant") | .message.content[]?;
@@ -259,29 +270,49 @@ jobs:
                   and .input.subagent_type == $agent
                   and ((.input.prompt // "") | contains($target)))' \
                 "$CLAUDE_EXECUTION_FILE" >/dev/null; then
-                echo "::error::Agent 実行記録なし: ${AGENT_TYPE} / ${KEY}"
-                # ★どの subagent までは動いたのかを失敗地点で出す。これが無いと
-                #   「呼ばれなかった」のか「prompt に対象名が無くて照合を外した」のかを
-                #   切り分けられない (2026-08-03 run 30774421511 で実際に詰まった)。
+                KEY_OK=0; KEY_WHY="agent-record-missing:${AGENT_TYPE}"
+                # どの subagent まで動いたかを残す (呼ばれなかったのか prompt 照合を外したのかの切り分け)。
                 echo "観測された subagent: $(jq -r '[.[] | select(.type == \"assistant\") | .message.content[]? | select(.type == \"tool_use\" and .name == \"Agent\") | .input.subagent_type] | unique | join(\", \")' "$CLAUDE_EXECUTION_FILE" 2>/dev/null || echo '(取得不可)')"
-                exit 1
+                break
               fi
             done
-            if [ ! -s "$CONTENT" ]; then
-              echo "::error::対象あり・生成物なし: ${KEY}"
-              exit 1
+            if [ "$KEY_OK" = 1 ] && [ ! -s "$CONTENT" ]; then
+              KEY_OK=0; KEY_WHY="no-staging"
             fi
-            node .claude/scripts/ai-content/audit-ai-content.mjs --file "$CONTENT"
-            if [ ! -s "$REVIEW" ] || [ "$(jq -r '.verdict // empty' "$REVIEW")" != "PASS" ] \
-              || [ "$(jq -r '.rankingKey // empty' "$REVIEW")" != "$KEY" ]; then
-              echo "::error::critic PASS manifest が無いか不正: ${KEY}"
-              exit 1
+            if [ "$KEY_OK" = 1 ]; then
+              if ! node .claude/scripts/ai-content/audit-ai-content.mjs --file "$CONTENT"; then
+                KEY_OK=0; KEY_WHY="audit-blocker"
+              fi
             fi
-            GENERATED=$((GENERATED + 1))
+            if [ "$KEY_OK" = 1 ]; then
+              if [ ! -s "$REVIEW" ] || [ "$(jq -r '.verdict // empty' "$REVIEW")" != "PASS" ] \
+                || [ "$(jq -r '.rankingKey // empty' "$REVIEW")" != "$KEY" ]; then
+                KEY_OK=0; KEY_WHY="critic-not-pass"
+              fi
+            fi
+            if [ "$KEY_OK" = 1 ]; then
+              PASSED="$PASSED $KEY"
+              GENERATED=$((GENERATED + 1))
+            else
+              echo "::warning::生成失敗のため drop (次回へ繰り越し): ${KEY} (${KEY_WHY})"
+              FAILED="$FAILED $KEY"
+              FAIL_REASON="$KEY_WHY"
+              rm -f "$CONTENT"
+            fi
           done < .local/ci/ai-content-targets.txt
-          if [ "$GENERATED" -ne "$EXPECTED" ]; then
-            echo "::error::対象 ${EXPECTED} 件に対して検証済み生成 ${GENERATED} 件"
+          # quarantine 状態を更新 (連続失敗キーを次回 --next から外す)。更新失敗は非致命。
+          node .claude/scripts/ai-content/record-generation-outcome.mjs \
+            --state .claude/state/ai-content/generation-failures.json \
+            --passed "$(echo "$PASSED" | tr ' ' ',')" \
+            --failed "$(echo "$FAILED" | tr ' ' ',')" \
+            --reason "$FAIL_REASON" \
+            --date "$(date -u +%F)" || echo "::warning::quarantine 状態の更新に失敗 (非致命)"
+          if [ "$GENERATED" -eq 0 ]; then
+            echo "::error::対象 ${EXPECTED} 件すべて生成/critic に失敗 (公開対象 0 件)"
             exit 1
+          fi
+          if [ -n "${FAILED// /}" ]; then
+            echo "::warning::部分成功: ${GENERATED}/${EXPECTED} 件を公開・失敗は次回へ繰り越し:${FAILED}"
           fi
           while IFS= read -r FILE; do
             case "$FILE" in
@@ -296,7 +327,7 @@ jobs:
           # 8 進エスケープされて全件 reject になる。両 routine で同じ形に揃えておく。
           done < <(git -c core.quotepath=false status --porcelain=v1 --untracked-files=all | cut -c4-)
           echo "count=$GENERATED" >> "$GITHUB_OUTPUT"
-          echo "✅ 対象 ${EXPECTED} 件すべて audit + critic PASS"
+          echo "✅ 公開対象 ${GENERATED}/${EXPECTED} 件 (audit + critic PASS)"
 
       - name: 📈 Rebuild queue (progress) and commit
         id: commit

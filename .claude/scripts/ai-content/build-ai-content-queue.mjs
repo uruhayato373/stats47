@@ -52,6 +52,7 @@ import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { auditRow } from "./audit-ai-content.mjs";
 import { checkValueHealth, latestPartition } from "./lib/value-health.mjs";
+import { loadFailureState, quarantinedKeys } from "./record-generation-outcome.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..", "..", "..");
@@ -61,6 +62,16 @@ const STATE_DIR = join(ROOT, ".claude/state/ai-content");
 const QUEUE_JSON = join(STATE_DIR, "remediation-queue.json");
 const LATEST_MD = join(STATE_DIR, "LATEST.md");
 const HISTORY_CSV = join(STATE_DIR, "progress-history.csv");
+const FAILURES_JSON = join(STATE_DIR, "generation-failures.json");
+
+/**
+ * critic に繰り返し落ちた常習キー集合。verify (partial-publish) が失敗を記録し、
+ * ここで `--next` の自動ピックから外す。放置すると doomed key が毎回バッチの 1 枠と
+ * 生成コストを食い潰す (2026-08-07)。SSOT: record-generation-outcome.mjs。
+ */
+function loadQuarantinedKeys() {
+  return quarantinedKeys(loadFailureState(FAILURES_JSON));
+}
 const RANKING_ITEMS_URL = `${R2_PUBLIC}/app/ranking-items/all.json`;
 const CONCURRENCY = 16;
 
@@ -360,6 +371,8 @@ function writeLatestMd(queue, progress = null) {
   const doneUnhealthy = queue.entries.filter(
     (e) => e.status === "done" && e.dataBlockers?.length,
   );
+  const failureState = loadFailureState(FAILURES_JSON);
+  const quarantined = quarantinedKeys(failureState);
   const lines = [
     `# ranking ai-content 是正キュー (LATEST)`,
     ``,
@@ -386,6 +399,22 @@ function writeLatestMd(queue, progress = null) {
           `| key | year | 理由 |`,
           `|---|---|---|`,
           ...notEligible.map((e) => `| ${e.rankingKey} | ${e.dataYear ?? "-"} | ${e.dataReason} |`),
+          ``,
+        ]
+      : []),
+    ...(quarantined.size > 0
+      ? [
+          `## 🚧 quarantine — critic 常習不合格で自動生成を停止中 (${quarantined.size} 件)`,
+          ``,
+          `\`--next\` から除外している。生成しても critic を通らないため。opus critic での再挑戦か、`,
+          `プロンプト/データ側の是正が要る (直って PASS すれば自動で解除)。`,
+          ``,
+          `| key | 連続失敗 | 直近理由 | 最終失敗日 |`,
+          `|---|---|---|---|`,
+          ...[...quarantined].map((k) => {
+            const v = failureState.keys[k] ?? {};
+            return `| ${k} | ${v.failCount ?? "?"} | ${v.lastReason ?? "-"} | ${v.lastFailedAt ?? "-"} |`;
+          }),
           ``,
         ]
       : []),
@@ -457,12 +486,21 @@ async function main() {
   const queue = noBuild ? loadQueue() : await buildQueue(scope);
 
   if (nextN != null) {
-    const next = queue.entries.filter((e) => e.status === "needs-regen").slice(0, nextN);
+    // critic に繰り返し落ちる常習キーは自動ピックから外す (毎回バッチを道連れにするのを防ぐ)。
+    const quarantined = loadQuarantinedKeys();
+    const eligible = queue.entries.filter(
+      (e) => e.status === "needs-regen" && !quarantined.has(e.rankingKey),
+    );
+    const next = eligible.slice(0, nextN);
     if (asJson) {
       process.stdout.write(JSON.stringify(next, null, 2) + "\n");
     } else {
       for (const e of next) process.stdout.write(`${e.rankingKey}\n`);
-      process.stderr.write(`\n[next ${nextN}] needs-regen ${queue.summary.needsRegen} 件中 上位 ${next.length} (impressions ${next[0]?.impressions ?? 0}〜${next[next.length - 1]?.impressions ?? 0})\n`);
+      process.stderr.write(
+        `\n[next ${nextN}] needs-regen ${queue.summary.needsRegen} 件` +
+          (quarantined.size ? ` (quarantine ${quarantined.size} 件除外)` : "") +
+          ` 中 上位 ${next.length} (impressions ${next[0]?.impressions ?? 0}〜${next[next.length - 1]?.impressions ?? 0})\n`,
+      );
     }
     return;
   }
