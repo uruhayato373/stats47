@@ -12,7 +12,10 @@ import {
 import { isOk } from "@stats47/types";
 import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
-import { resolveAffiliateBanners } from "@/features/ads/server";
+import {
+  resolveAffiliateBanners,
+  resolveAffiliateBannersByCategoryKey,
+} from "@/features/ads/server";
 import { findCategoryByKey } from "@/features/category/server";
 import {
   generateRankingBreadcrumbStructuredData,
@@ -114,18 +117,34 @@ export async function loadRankingPageModel(rankingKey: string) {
         .catch(() => null)
     : Promise.resolve(null);
 
+  // ネイティブ枠のバナー解決。
+  // ★ 2026-08-04: 4 → 5。先頭 4 件がネイティブ枠、5 件目を読了位置の 300x250 に回す
+  //   (RankingPageNativeAffiliateSection)。在庫が 4 件以下なら末尾バナーは出ない。
+  // ★ 2026-08-06: 5 → 8。縦長 (スカイスクレイパー) を描画側で除外するようになったため、
+  //   除外後も native 4 + 末尾 1 が埋まる余裕を持たせる。
+  // ★ 2026-08-06: **categoryKey フォールバックを追加**。tagKeys 単独では ranking の
+  //   native 枠が一度も描画されていなかった — `RankingItem.tags` の SSOT である
+  //   `MetricConfig.tags` が 2026-06-03 の型追加以来 2,295 config すべてで未記入で、
+  //   常に空配列だったため。規約 §12 は ranking の解決キーを「categoryKey → vertical
+  //   + tagKeys」と定めており、実装が tagKeys しか見ていないのがドリフトだった。
+  //   themes が relatedArticleTagKeys → THEME_AFFILIATE_MAP でフォールバックするのと同型。
   const affiliateTagKeys = (rankingItem.tags ?? []).map((tag) => tag.tagKey);
-  const nativeBannersPromise =
-    affiliateTagKeys.length > 0
-      // ★ 2026-08-04: 4 → 5。先頭 4 件がネイティブ枠、5 件目を読了位置の 300x250 に回す
-      //   (RankingPageNativeAffiliateSection)。在庫が 4 件以下なら末尾バナーは出ない。
-      // ★ 2026-08-06: 5 → 8。縦長 (スカイスクレイパー) を描画側で除外するようになったため、
-      //   除外後も native 4 + 末尾 1 が埋まる余裕を持たせる。
-      ? resolveAffiliateBanners(affiliateTagKeys, 8, rankingKey).catch((error) => {
-          logger.error({ error }, "RankingKeyPage: native banners 取得失敗");
-          return [];
-        })
-      : Promise.resolve([]);
+  const categoryKeyForAds = rankingItem.categoryKey;
+  const nativeBannersPromise = (async () => {
+    try {
+      if (affiliateTagKeys.length > 0) {
+        const byTags = await resolveAffiliateBanners(affiliateTagKeys, 8, rankingKey);
+        if (byTags.length > 0) return byTags;
+      }
+      if (categoryKeyForAds) {
+        return await resolveAffiliateBannersByCategoryKey(categoryKeyForAds, 8, rankingKey);
+      }
+      return [];
+    } catch (error) {
+      logger.error({ error }, "RankingKeyPage: native banners 取得失敗");
+      return [];
+    }
+  })();
 
   const [
     allYearsValues,
