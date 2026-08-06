@@ -10,8 +10,12 @@
  *   ranking だけが `KNOWN_RANKING_KEYS` という git 定数を返していたので唯一埋まっていた
  *   (実測: 本番 sitemap/3.xml = 2,173 件 = SITEMAP_RANKING_KEYS と一致、
  *    sitemap/4.xml = 1 件 (/blog のみ)、5.xml = 0、6.xml = 1、7.xml = 0)。
- *   本ファイルは blog / tags に同じ git 定数方式を与えて sitemap を埋める。
- *   categories と surveys は既存の git ソース (CATEGORY_KEYS / surveys.json) を直接使うため生成不要。
+ *   本ファイルは blog / tags / surveys に同じ git 定数方式を与えて sitemap を埋める。
+ *   categories だけは git TS の CATEGORY_KEYS (17 軸) をそのまま使うため生成対象外。
+ *   surveys は git の surveys.json ではなく **R2 の配信実態**から生成する
+ *   (master には本番 404 の id が混ざるため。SITEMAP_SURVEY_IDS の項を参照)。
+ *
+ * ★生成物は環境をまたいで再現できること。ソートに localeCompare を使わない (byCodeUnit)。
  *
  * 使い方: `cd apps/web && npx tsx scripts/generate-sitemap-blog-entries.ts`
  *         `--check` でファイルを書かず、コミット済み内容と R2 の実態が一致するかだけ検証する
@@ -43,6 +47,15 @@ interface TagMeta {
 }
 
 const DATE_LINE = /^ \* 最終生成日: .*$/m;
+
+/**
+ * ロケール非依存の文字列比較 (UTF-16 コードユニット順)。
+ * `localeCompare` は実行環境のロケールで結果が変わるため使わない。
+ * tagKey は日本語なので Windows (ja) と CI (Linux) で並び順が食い違い、
+ * 件数が同じでも生成物が一致せず --check が落ちる (2026-08-06 に CI で発生)。
+ * 生成物は環境をまたいで再現できなければならない。
+ */
+const byCodeUnit = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
 
 function buildContent(
   blog: { slug: string; lastModified: string | null }[],
@@ -142,7 +155,7 @@ async function run() {
 
   const blog = published
     .map((a) => ({ slug: a.slug, lastModified: a.publishedAt ?? null }))
-    .sort((x, y) => x.slug.localeCompare(y.slug));
+    .sort((x, y) => byCodeUnit(x.slug, y.slug));
 
   // タグ別の最新 publishedAt (sitemap の lastmod に使う)
   const latestByTag = new Map<string, string>();
@@ -158,7 +171,7 @@ async function run() {
   const tags = tagMeta
     .filter((t) => typeof t.tagKey === "string" && t.articleCount >= TAG_MIN_ARTICLES)
     .map((t) => ({ tagKey: t.tagKey, lastModified: latestByTag.get(t.tagKey) ?? null }))
-    .sort((x, y) => x.tagKey.localeCompare(y.tagKey));
+    .sort((x, y) => byCodeUnit(x.tagKey, y.tagKey));
 
   // survey は R2 の配信実態を真実源にする (git master には本番 404 の id が混ざる)
   const surveyUrl = `${R2_PUBLIC}/app/survey/all.json`;
