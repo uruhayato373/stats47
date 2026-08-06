@@ -156,6 +156,37 @@ outbox は**フラットな `<rankingKey>.json`** でなければならない (w
   **ゲートを緩めて通すことは絶対にしない** (品質ではなく実行時間で払う)。落ち率はモデルを変えたら
   必ず実測する (10 件パイロット → blocker 内訳を確認 → 落ち率が高ければプロンプト側を直す)。
 
+### ★2026-08-07: バッチは partial-publish (1 件の失敗で全件を止めない)
+
+日次 CI のバッチ verify は **オールオアナッシングにしない**。以前は対象 N 件のうち 1 件でも
+audit / critic に落ちると `GENERATED != EXPECTED` で run 全体を fail させ、後続の publish
+dispatch が skip され、**通過していた N-1 件も公開されずに捨てられていた** (2026-08-05 に
+5 件中 4 件が PASS したのに 0 件公開・生成 $86 が無駄。`manufacturing-industry-added-value`
+が 47 県 commentary の定型重複で critic を通らず毎回バッチを道連れにしていた)。
+
+正典の verify セマンティクス (`ai-content-generate-daily.yml` / `blog-generate-daily.yml`):
+
+- **通過分だけ publish する**。失敗キーは outbox (`data/ai-content-staging/<key>.json` /
+  `docs/21_ブログ記事原稿/<slug>/`) を drop して次回生成へ繰り越す。
+- **公開対象 0 件のときだけ run を赤くする** (silent-green 防止)。Claude execution log が
+  無い = author/critic が動いていない場合も赤。
+- 失敗は `::warning::` で残し、run は緑のまま publish へ進む。
+- per-item の gate 失敗で step を殺さないよう、fallible command は必ず `if` で受ける
+  (`set -e` 下でも継続)。
+
+**quarantine (ai-content のみ)**: 連続で critic に落ちる常習キーは自動生成を止める。
+verify が `.claude/scripts/ai-content/record-generation-outcome.mjs` で失敗回数を
+`.claude/state/ai-content/generation-failures.json` に積み、**3 回連続で失敗したキーを
+`build-ai-content-queue.mjs --next` が除外**する (doomed key が毎回バッチの 1 枠と生成
+コストを食い潰すのを防ぐ)。除外したキーは LATEST.md の「🚧 quarantine」節に理由付きで
+可視化し (黙って消さない)、一度でも PASS すればカウントを消して自動で復帰する。opus critic
+での再挑戦やプロンプト/データ是正が要る。blog は新規記事で同じ slug を再ピックしないため
+quarantine は持たない。
+
+再発防止テスト: `.claude/scripts/lib/__tests__/content-generation-routine.test.cjs`
+(両 workflow が all-or-nothing に戻っていないこと) / `.claude/scripts/ai-content/__tests__/generation-outcome.test.mjs`
+(quarantine の積み上げ・PASS でのリセット)。
+
 ### ★2026-08-02: Claude Code OAuth の日次 CI へ統合 (Gemini テキスト経路は撤去)
 
 Gemini テキスト経路

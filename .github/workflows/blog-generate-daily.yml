@@ -236,12 +236,19 @@ jobs:
             echo "::error::Claude execution log が無く、author / critic 実行を証明できません"
             exit 1
           fi
+          # ★partial-publish (2026-08-07): 1 件でも落ちると全件を publish しない
+          #   オールオアナッシングを廃止。通過分だけ publish し、失敗記事は outbox (docs/21)
+          #   を drop して次回生成へ回す。公開対象 0 件のときだけ run を赤くする (silent-green
+          #   防止)。fallible command は if で受け、per-item 失敗で step を殺さない。
           GENERATED=0
+          FAILED=""
           while IFS= read -r SLUG; do
             [ -z "$SLUG" ] && continue
             DIR="docs/21_ブログ記事原稿/${SLUG}"
             ARTICLE="${DIR}/article.md"
             REVIEW="${DIR}/review.md"
+            SLUG_OK=1
+            SLUG_WHY=""
             for AGENT_TYPE in article-writer blog-critic; do
               if ! jq -e --arg agent "$AGENT_TYPE" --arg target "$SLUG" \
                 'any(.[] | select(.type == "assistant") | .message.content[]?;
@@ -249,34 +256,55 @@ jobs:
                   and .input.subagent_type == $agent
                   and ((.input.prompt // "") | contains($target)))' \
                 "$CLAUDE_EXECUTION_FILE" >/dev/null; then
-                echo "::error::Agent 実行記録なし: ${AGENT_TYPE} / ${SLUG}"
-                # ★どの subagent までは動いたのかを失敗地点で出す。これが無いと
-                #   「呼ばれなかった」のか「prompt に対象名が無くて照合を外した」のかを
-                #   切り分けられない (2026-08-03 run 30774421511 で実際に詰まった)。
+                SLUG_OK=0; SLUG_WHY="agent-record-missing:${AGENT_TYPE}"
+                # どの subagent まで動いたかを残す (呼ばれなかったのか prompt 照合を外したのかの切り分け)。
                 echo "観測された subagent: $(jq -r '[.[] | select(.type == \"assistant\") | .message.content[]? | select(.type == \"tool_use\" and .name == \"Agent\") | .input.subagent_type] | unique | join(\", \")' "$CLAUDE_EXECUTION_FILE" 2>/dev/null || echo '(取得不可)')"
-                exit 1
+                break
               fi
             done
-            if [ ! -s "$ARTICLE" ]; then
-              echo "::error::対象あり・article.mdなし: ${SLUG}"
-              exit 1
+            if [ "$SLUG_OK" = 1 ] && [ ! -s "$ARTICLE" ]; then
+              SLUG_OK=0; SLUG_WHY="no-article"
             fi
-            if [ ! -s "$REVIEW" ] || [ "$(wc -c < "$REVIEW" | tr -d ' ')" -lt 200 ] \
-              || ! grep -Eq '^verdict:[[:space:]]*PASS[[:space:]]*$' "$REVIEW"; then
-              echo "::error::critic PASS review が無いか不正: ${SLUG}"
-              exit 1
+            if [ "$SLUG_OK" = 1 ]; then
+              if [ ! -s "$REVIEW" ] || [ "$(wc -c < "$REVIEW" | tr -d ' ')" -lt 200 ] \
+                || ! grep -Eq '^verdict:[[:space:]]*PASS[[:space:]]*$' "$REVIEW"; then
+                SLUG_OK=0; SLUG_WHY="critic-not-pass"
+              fi
             fi
-            node .claude/scripts/lib/article-factual-check.mjs "$ARTICLE" "${DIR}/data"
-            node .claude/scripts/blog/quality-gate.mjs "$ARTICLE"
-            NODE_OPTIONS='--conditions react-server' \
-              npx tsx packages/ai-content/src/scripts/generate-blog-article.ts --ingest "$SLUG" \
-              | tee "/tmp/blog-ingest-${SLUG}.log"
-            grep -q 'published: true' "$ARTICLE"
-            GENERATED=$((GENERATED + 1))
+            if [ "$SLUG_OK" = 1 ]; then
+              if ! node .claude/scripts/lib/article-factual-check.mjs "$ARTICLE" "${DIR}/data"; then
+                SLUG_OK=0; SLUG_WHY="factual"
+              fi
+            fi
+            if [ "$SLUG_OK" = 1 ]; then
+              if ! node .claude/scripts/blog/quality-gate.mjs "$ARTICLE"; then
+                SLUG_OK=0; SLUG_WHY="quality-gate"
+              fi
+            fi
+            if [ "$SLUG_OK" = 1 ]; then
+              if ! NODE_OPTIONS='--conditions react-server' \
+                npx tsx packages/ai-content/src/scripts/generate-blog-article.ts --ingest "$SLUG" \
+                | tee "/tmp/blog-ingest-${SLUG}.log"; then
+                SLUG_OK=0; SLUG_WHY="ingest"
+              fi
+            fi
+            if [ "$SLUG_OK" = 1 ] && ! grep -q 'published: true' "$ARTICLE"; then
+              SLUG_OK=0; SLUG_WHY="not-published"
+            fi
+            if [ "$SLUG_OK" = 1 ]; then
+              GENERATED=$((GENERATED + 1))
+            else
+              echo "::warning::記事生成失敗のため drop (次回へ繰り越し): ${SLUG} (${SLUG_WHY})"
+              FAILED="$FAILED $SLUG"
+              rm -rf "$DIR"
+            fi
           done < .local/ci/blog-targets.txt
-          if [ "$GENERATED" -ne "$EXPECTED" ]; then
-            echo "::error::対象 ${EXPECTED} 件に対して検証済み生成 ${GENERATED} 件"
+          if [ "$GENERATED" -eq 0 ]; then
+            echo "::error::対象 ${EXPECTED} 件すべて生成/critic に失敗 (公開対象 0 件)"
             exit 1
+          fi
+          if [ -n "${FAILED// /}" ]; then
+            echo "::warning::部分成功: ${GENERATED}/${EXPECTED} 件を公開・失敗は次回へ繰り越し:${FAILED}"
           fi
           while IFS= read -r FILE; do
             case "$FILE" in
@@ -293,7 +321,7 @@ jobs:
           # (2026-08-03 run 30776544300 で実際に発生。この gate は一度も通れていなかった)。
           done < <(git -c core.quotepath=false status --porcelain=v1 --untracked-files=all | cut -c4-)
           echo "count=$GENERATED" >> "$GITHUB_OUTPUT"
-          echo "✅ 対象 ${EXPECTED} 件すべて factual + quality + critic PASS"
+          echo "✅ 公開対象 ${GENERATED}/${EXPECTED} 件 (factual + quality + critic PASS)"
 
       - name: 📤 Commit outbox and push
         id: commit

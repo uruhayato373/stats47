@@ -18,7 +18,8 @@ co_agents: [x-strategist, blog-editor, note-manager, sns-renderer]
 - ブランド素材・プロフィール画像
 
 **担当外（別ルート）**:
-- 記事別 OGP（動的タイトル差し込み） → Satori `apps/web/src/app/**/opengraph-image.tsx`（種別カタログ・棚卸しは `.claude/rules/ogp-image-standards.md`）
+- ブログ記事別 OGP / 一覧サムネ背景 → `/generate-blog-images`（Codex imagegen + git JPEG + Satori/Sharp）
+- その他の動的タイトル差し込み OGP → Satori（種別カタログ・棚卸しは `.claude/rules/ogp-image-standards.md`）
 - OGP / カバー / リンクカード画像の目視確認・棚卸し → `/audit-ogp-images`（`.claude/scripts/ogp/build-image-gallery.mjs`）
 
 ## 引数
@@ -119,7 +120,9 @@ use-case に応じて以下の推奨パスを出力する:
 
 - **エージェント連携**: `blog-editor`, `note-manager`, `x-strategist` から呼ばれることを想定。各エージェントは catalog から自分の用途に合う ID を選んで呼び出す
 - **イテレーション前提**: ユーザーは複数 ID を試して感触を掴む。`--list` で一覧、`--id` で試作、という流れを推奨
-- **OGP には使わない**: 記事別 OGP に静的画像を使うと 119 記事分の再生成コストが破綻する。OGP が必要なら Satori / Remotion の担当範囲であることを明確にユーザーに伝える
+- **ブログOGP背景には使わない**: 本skillの外部AI向け自由promptを記事別背景へ流用しない。
+  ブログは `/generate-blog-images` のslug catalogとCodex MCP経路、その他のOGPはSatori /
+  Remotionの担当範囲であることを伝える
 
 ## 参照
 

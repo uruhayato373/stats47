@@ -17,6 +17,7 @@
  *   [E7] agent/skill に過剰検証を誘発する禁止 prompt が無いか
  *   [E8] subagent 委譲 skill が共通契約を参照し、同時起動上限 3 以下か
  *   [E9] agent/skill frontmatter に YAML として危険な plain scalar が無いか
+ *   [E10] Claude Code → Codex MCP と blog画像skillの入口がSSOTどおりか
  *   [W1] .claude/scripts/** のスクリプトがどこからも参照されていない (orphan)
  *   [W2] 非 dead の SKILL.md が参照する packages/**|apps/** の scripts が存在しない (dead-skill 検知)
  *
@@ -231,9 +232,12 @@ function checkSkillPromptContracts(findings, scope) {
         msg: "SKILL.md が500行を超えている。詳細をreferenceへ分離する",
       });
     }
+    const hasPrimaryAgent =
+      /^primary_agent:\s*\S+/m.test(fm) ||
+      /^\s+primary_agent:\s*["']?\S+/m.test(fm);
     if (
       rel(sf) !== ".claude/skills/management/task-router/SKILL.md" &&
-      !/^primary_agent:\s*\S+/m.test(fm)
+      !hasPrimaryAgent
     ) {
       findings.push({
         level: "error",
@@ -318,8 +322,21 @@ function checkSkillAgentLinks(findings, scope) {
     const agents = new Set();
     const pa = fm.match(/^primary_agent:\s*(.+)$/m);
     if (pa) pa[1].split(/[,\s]+/).forEach((a) => a && agents.add(a.trim()));
+    const metadataPa = fm.match(/^\s+primary_agent:\s*(.+)$/m);
+    if (metadataPa) {
+      metadataPa[1]
+        .split(/[,\s]+/)
+        .forEach((a) => a && agents.add(a.trim()));
+    }
     const co = fm.match(/^co_agents:\s*\[([^\]]*)\]/m);
     if (co) co[1].split(",").forEach((a) => a.trim() && agents.add(a.trim()));
+    const metadataCo = fm.match(/^\s+co_agents:\s*(.+)$/m);
+    if (metadataCo) {
+      metadataCo[1]
+        .replace(/[\[\]'"]/g, "")
+        .split(",")
+        .forEach((a) => a.trim() && agents.add(a.trim()));
+    }
     for (const a of agents) {
       const name = a.replace(/['"]/g, "");
       if (!name || name === "[]") continue;
@@ -428,6 +445,74 @@ function checkHookFiles(findings) {
         }
       }
     }
+  }
+}
+
+function checkCodexMcpContract(findings, scope) {
+  const mcpRel = ".mcp.json";
+  const ruleRel = ".claude/rules/codex-mcp.md";
+  const skillRel = ".claude/skills/blog/generate-blog-images/SKILL.md";
+  const codexSkillRel = ".agents/skills/generate-blog-images";
+  const relevant = [mcpRel, ruleRel, skillRel, codexSkillRel];
+  if (scope && !relevant.some((file) => scope.has(file))) return;
+
+  const mcpPath = path.join(ROOT, mcpRel);
+  if (!fs.existsSync(mcpPath)) return;
+  let config;
+  try {
+    config = JSON.parse(readSafe(mcpPath));
+  } catch {
+    findings.push({
+      level: "error",
+      code: "E10",
+      file: mcpRel,
+      msg: "JSON parse 失敗",
+    });
+    return;
+  }
+
+  const codex = config?.mcpServers?.codex;
+  if (
+    codex?.type !== "stdio" ||
+    codex?.command !== "codex" ||
+    !Array.isArray(codex?.args) ||
+    codex.args.length !== 1 ||
+    codex.args[0] !== "mcp-server"
+  ) {
+    findings.push({
+      level: "error",
+      code: "E10",
+      file: mcpRel,
+      msg: 'codex MCPは type=stdio / command=codex / args=["mcp-server"] に固定する',
+    });
+  }
+
+  const skill = readSafe(path.join(ROOT, skillRel));
+  if (
+    !skill ||
+    !skill.includes("mcp__codex__codex") ||
+    !skill.includes("npm run blog-images:codex -- request") ||
+    !skill.includes("npm run blog-images:codex -- ingest")
+  ) {
+    findings.push({
+      level: "error",
+      code: "E10",
+      file: skillRel,
+      msg: "Codex MCP request/ingestのskill入口が無い、またはSSOTコマンド参照が欠けている",
+    });
+  }
+
+  try {
+    const expected = fs.realpathSync(path.dirname(path.join(ROOT, skillRel)));
+    const actual = fs.realpathSync(path.join(ROOT, codexSkillRel));
+    if (actual !== expected) throw new Error("target mismatch");
+  } catch {
+    findings.push({
+      level: "error",
+      code: "E10",
+      file: codexSkillRel,
+      msg: "Codex repo skillはClaude skill物理SSOTへのsymlinkにする",
+    });
   }
 }
 
@@ -563,8 +648,10 @@ function relevantChangedFiles() {
     if (
       /^\.claude\/(agents|skills|scripts|hooks)\//.test(real) ||
       /^\.claude\/(rules|output-styles)\//.test(real) ||
+      /^\.agents\/skills\//.test(real) ||
       /SKILL\.md$/.test(real) ||
       real === ".claude/settings.json" ||
+      real === ".mcp.json" ||
       real === "CLAUDE.md"
     ) {
       files.push(real);
@@ -608,6 +695,7 @@ function runChecks({ orphan, scope }) {
   if (!scope || scope.has(".claude/settings.json") || scope.has(".claude/settings.local.json")) {
     checkHookFiles(findings);
   }
+  checkCodexMcpContract(findings, scope);
   if (orphan) checkOrphanScripts(findings);
   return findings;
 }

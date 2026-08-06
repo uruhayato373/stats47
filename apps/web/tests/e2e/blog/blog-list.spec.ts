@@ -92,7 +92,7 @@ test.describe("ブログ一覧ページ", () => {
     }
   });
 
-  test("記事カードは重複サムネイルに依存せず内容を読める", async ({ page }) => {
+  test("記事カードは記事別サムネイルと本文情報を表示する", async ({ page }) => {
     const articleCard = page
       .locator("a[href^='/blog/']")
       .filter({ has: page.locator("h2") })
@@ -100,6 +100,22 @@ test.describe("ブログ一覧ページ", () => {
 
     await expect(articleCard).toBeVisible({ timeout: 10_000 });
     await expect(articleCard.locator("h2")).not.toBeEmpty();
-    await expect(articleCard.locator("img")).toHaveCount(0);
+    const thumbnail = articleCard.locator("img");
+    await expect(thumbnail).toHaveCount(1);
+    await expect(thumbnail).toHaveAttribute("alt", "");
+    await expect(thumbnail).toHaveAttribute(
+      "src",
+      /https:\/\/storage\.stats47\.jp\/app\/blog\/[^/]+\/thumbnail-(light|dark)\.webp/,
+    );
+    await expect
+      .poll(() =>
+        thumbnail.evaluate(
+          (image) =>
+            image instanceof HTMLImageElement &&
+            image.complete &&
+            image.naturalWidth > 0,
+        ),
+      )
+      .toBe(true);
   });
 });

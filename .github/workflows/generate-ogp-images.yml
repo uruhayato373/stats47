@@ -27,6 +27,10 @@ on:
         description: '1回の件数上限 (安全上限500、残りは再実行)'
         required: false
         default: '500'
+      slugs:
+        description: 'blogのみ: 対象slugのカンマ区切り (空なら全公開記事)'
+        required: false
+        default: ''
       apply:
         description: 'R2 へ push する (false=生成のみ)'
         required: false
@@ -76,6 +80,9 @@ jobs:
           FLAGS=(--max-generate 500)
           if [ -n "${{ github.event.inputs.limit }}" ]; then FLAGS+=(--limit "${{ github.event.inputs.limit }}"); fi
           if [ "$TYPE" = "blog" ]; then
+            if [ -n "${{ github.event.inputs.slugs }}" ]; then
+              FLAGS+=(--slug "${{ github.event.inputs.slugs }}")
+            fi
             echo "Running: generate-blog-thumbnails-cloud.ts ${FLAGS[*]}"
             npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts "${FLAGS[@]}"
           else
@@ -92,14 +99,16 @@ jobs:
           node -e '
             const fs = require("node:fs");
             const plan = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+            const scopedSlugs = process.argv[2].split(",").filter(Boolean);
             const lines = [
               "### Image publish plan",
               `- generator: ${plan.generator}`,
               `- changed bundles: ${plan.items.length}`,
+              `- scope: ${scopedSlugs.length ? `${scopedSlugs.length} explicit slugs` : "all published entities"}`,
               `- plan: ${process.argv[1]}`,
             ];
             fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\\n") + "\\n");
-          ' "$PLAN"
+          ' "$PLAN" "${{ github.event.inputs.slugs }}"
 
       - name: ☁️ Publish exact image set to R2
         if: github.event.inputs.apply == 'true'

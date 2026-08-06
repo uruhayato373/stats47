@@ -19,14 +19,16 @@ import {
 } from 'node:fs';
 import { join } from 'node:path';
 
+import { createS3ImageObjectStoreFromEnv } from '@stats47/r2-storage/image-pipeline';
 import { config as loadEnv } from 'dotenv';
 
-import { createS3ImageObjectStoreFromEnv } from '@stats47/r2-storage/image-pipeline';
 
+import { OGP_MODEL, OGP_PROMPT_VERSION } from './data/blog-ogp-visual-catalog';
 import {
   BLOG_IMAGE_GENERATOR_SPEC,
   blogRendererSources,
 } from './data/image-generator-registry';
+import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
 import {
   BLOG_IMAGE_PUBLISH_PLAN,
   BLOG_IMAGE_STAGE_ROOT,
@@ -40,6 +42,12 @@ import {
   type BlogImageMetadata,
 } from './lib/blog-image-generation';
 import {
+  computeLegacyPromptHashV1,
+  computePromptHash,
+  parseOgpVisualFrontmatter,
+  resolveOgpVisual,
+} from './lib/blog-ogp-visual';
+import {
   deriveOgpFromFrontmatter,
   parseFrontmatter,
 } from './lib/blog-thumbnail-render';
@@ -52,13 +60,6 @@ import {
   type ImageGenerationStatus,
 } from './lib/image-generation-manifest';
 import { createImageGenerationInspector } from './lib/image-generation-r2-inspector';
-import {
-  computeLegacyPromptHashV1,
-  computePromptHash,
-  parseOgpVisualFrontmatter,
-  resolveOgpVisual,
-} from './lib/blog-ogp-visual';
-import { OGP_MODEL, OGP_PROMPT_VERSION } from './data/blog-ogp-visual-catalog';
 
 const PUBLIC_URL =
   process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
@@ -251,6 +252,27 @@ async function readReusableAiBackground(options: {
   title: string;
 }): Promise<ReusableAiBackground | null> {
   const keys = blogImageKeys(options.slug);
+  const visual = resolveOgpVisual(
+    parseOgpVisualFrontmatter(options.markdown)
+  );
+  const codexSource = await resolveCodexBackgroundSource(
+    PROJECT_ROOT,
+    options.slug
+  );
+  if (codexSource) {
+    return {
+      buffer: codexSource.buffer,
+      metadata: {
+        source: 'ai',
+        promptHash: codexSource.promptHash,
+        sha256: codexSource.sha256,
+        model: codexSource.model,
+        promptVersion: codexSource.promptVersion,
+        visualType: visual.visualType,
+        motif: codexSource.motif,
+      },
+    };
+  }
   let background: Record<string, unknown> | null = null;
   let declaredAssetSha: string | null = null;
   let backgroundSource: 'common' | 'legacy' | null = null;
@@ -303,7 +325,6 @@ async function readReusableAiBackground(options: {
       `${options.slug}: AI背景SHAが共通manifestのasset契約と一致しません`
     );
   }
-  const visual = resolveOgpVisual(parseOgpVisualFrontmatter(options.markdown));
   const promptArgs = { ...visual, title: options.title };
   const promptHash = computePromptHash(promptArgs);
   const legacyPromptHash = computeLegacyPromptHashV1(promptArgs);
