@@ -33,7 +33,10 @@ name: 📝 Blog Generate Daily (Claude Code生成 + 公開)
 
 on:
   schedule:
-    - cron: "30 19 * * *" # JST 04:30 (UTC 19:30)。ai-content (JST 03:00) と重ならせない
+    # JST 23:00 (UTC 14:00)。ai-content は JST 03:00 / 08:00 / 13:00 / 18:00 (boost 期間中は 4 枠)
+    # に走り、10 件バッチだと 1 回あたり約 100 分かかる。旧 JST 04:30 のままだと 03:00 の回と
+    # 実時間で重なり、同じ Max 枠を奪い合う。どの枠とも重ならない 23:00 へ寄せる。
+    - cron: "0 14 * * *"
   # push トリガー (cloud 用): develop に data/blog-generate-requests.json を commit/push すると
   # 実行し、消費した request を git rm で commit-back する。cloud セッションは actions:write が
   # 無く workflow_dispatch できない (403) ため。data-refresh.yml / gemini-image-run.yml と同じ方式。

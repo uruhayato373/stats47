@@ -1,0 +1,23 @@
+{
+  "_1_なにこれ": "日次生成 routine の期間限定 boost。ai-content-generate-daily.yml の gate job が読む。",
+  "_2_止めたい": "until を過去の日時にするか、このファイルを削除して develop へ push する。次のスケジュール実行から baseline に戻る。",
+  "_3_件数を変えたい": "aiContent.limit を書き換えて develop へ push する。1..10。全スロット (baseline 含む) に効く。",
+  "_4_回数を変えたい": "aiContent.extraCrons から cron を削る。空配列にすると追加実行は無くなり baseline の件数だけ増える。",
+  "_5_使用量の見かた": "各 run の実績は .claude/state/metrics/claude-usage/history.csv に 1 行ずつ commit される。gate は run ごとに『boost 開始以降 N 回 / M 件 / 失敗 K 回』を job summary に出す。枠の消費率は測れないので、判断材料は失敗の増加。",
+  "_6_勝手に止まる条件": "直近 maxConsecutiveFailures 回が連続失敗なら追加スロットを止め、baseline も既定件数へ戻る (枠に当たった後の空回りを防ぐ)。成功が 1 回入れば自動で復帰する。",
+
+  "reason": "8/9 19:00 の週次リセット後、8/14 まで不在で対話利用がほぼゼロになる。Max の週次枠は繰り越されず捨てるだけなので、余剰を ai-content の全件完成 (残り約 1,959 件・通常ペースで完了見込み 516 日) に充てる。",
+  "from": "2026-08-09T19:00:00+09:00",
+  "until": "2026-08-13T23:59:59+09:00",
+
+  "aiContent": {
+    "limit": 10,
+    "extraCrons": ["0 23 * * *", "0 4 * * *", "0 9 * * *"]
+  },
+
+  "maxConsecutiveFailures": 2,
+
+  "_7_件数の根拠": "history.csv 実測 (limit 1 → 24 分/$15.87、limit 5 → 58 分/$30.80) から 1 件 ≈ 8.5 分・1 回の固定費 ≈ 15 分。10 件で約 100 分なので 5 時間枠に収まり job timeout 240 分にも余裕がある。1 件あたりで見ると 1 件×4 回 ($15.9) より 10 件×1 回 ($4.9) が 3 倍効率が良いので、回数ではなくバッチを大きくしている。",
+  "_8_ブログを増やさない理由": "blog の既定 1 本/日はトークンではなく記事の月産上限で決まっている (.claude/state/blog/seo-strategy.json の typeMix.perMonth = 計 17-20 本/月)。増やすなら型配分 SSOT の改訂が先で、boost の対象にしない。",
+  "_9_extraCrons_の意味": "UTC 表記。0 23 = JST 08:00 / 0 4 = JST 13:00 / 0 9 = JST 18:00。baseline の 0 18 (JST 03:00) と合わせて 5 時間間隔。workflow の on.schedule に宣言済みの cron しか発火しないので、ここに無い値を書いても何も起きない。"
+}

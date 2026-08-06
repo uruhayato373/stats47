@@ -14,11 +14,27 @@ name: 🤖 AI Content Daily (Claude Code生成 + 公開)
 # 品質は「賢いモデル」ではなく「決定的ゲート + critic」で担保する。ゲートは緩めない
 # (正典: .claude/rules/ranking-content-standards.md §実データ照合 / §生成パイプライン)。
 #
+# ★件数とスケジュール (2026-08-06 改訂)
+#   baseline は JST 03:00 の 1 回・5 件。**期間限定の boost** を
+#   `.claude/config/content-generation-boost.json` で上乗せできる (無ければ baseline のまま)。
+#   期間中は件数が上がり、5 時間間隔の追加スロット (JST 08:00 / 13:00 / 18:00) も動く。
+#   判定は gate job (`.claude/scripts/lib/content-generation-boost.mjs`) が行う。
+#
+#   なぜ「小さいバッチを何度も」ではないか: history.csv 実測で limit 1 → 24 分/$15.87、
+#   limit 5 → 58 分/$30.80。**1 回あたりの固定費が約 15 分/$12** (起動時に CLAUDE.md と
+#   rules を読む分) あるので、1 件×4 回 は 1 件 $15.9・10 件×1 回 は $4.9 と 3 倍違う。
+#   正しい形は「5 時間枠ごとに 1 回、その枠に入るだけ大きなバッチ」。
+#
+#   boost は `until` で自動失効し、不在中でも放置して元に戻る。件数・回数は設定ファイルを
+#   develop へ push するだけで次回実行から変わる (cloud は dispatch できないためこの経路)。
+#
 # ★安全装置
-#   - LIMIT 5 / timeout 240 分 / max-turns 300 (実測 1 件 ≈ 29 分・turn 60 に対し 5 件分)。
-#     入力は 1..10 に制限する。**LIMIT を上げるときは timeout と max-turns も比例させる**
-#     (足りないと途中で切れ、verify が「対象あり・生成物なし」で落ちて 1 日分が無駄になる)。
-#     律速は job timeout ではなく Pro / Max の利用枠なので、10 まで一気に上げず実測して刻む
+#   - 件数は全経路で 1..10。timeout 240 分 / max-turns 300 は**上限 10 件が完走できる**
+#     予算にしてある (足りないと途中で切れ、verify が「対象あり・生成物なし」で落ちて
+#     その回が丸ごと無駄になる)。予算の機械ガードは content-generation-routine.test.cjs
+#   - 直近 2 回が連続失敗なら追加スロットを止め baseline へ戻す (枠に当たった後の空回り防止)
+#   - boost 設定が壊れているときは baseline を通し、追加スロットだけ失敗させる
+#     (add-on の設定ミスで中核ループを止めない / 1 日 3 回赤くなるので見逃さない)
 #   - OAuth token 未登録、対象あり生成0件、audit/critic未通過はすべて hard fail
 #   - Claude が変更できるのは target の outbox と gitignore 済み review manifest だけ
 #   - Base Action は commit SHA 固定、MCP/Web、project hooks、full output を無効化
@@ -27,7 +43,12 @@ name: 🤖 AI Content Daily (Claude Code生成 + 公開)
 
 on:
   schedule:
-    - cron: "0 18 * * *" # JST 03:00 (UTC 18:00)
+    - cron: "0 18 * * *" # JST 03:00 — baseline (常時)
+    # 以下は boost 期間中だけ動く追加スロット。5 時間間隔で並べてある。
+    # 期間外は gate job が run=false を返して即終了する (Claude を呼ばない)。
+    - cron: "0 23 * * *" # JST 08:00 — boost
+    - cron: "0 4 * * *" # JST 13:00 — boost
+    - cron: "0 9 * * *" # JST 18:00 — boost
   # push トリガー (cloud 用): develop に data/ai-content-generate-requests.json を commit/push
   # すると実行し、消費した request を git rm で commit-back する。cloud セッションは
   # actions:write が無く workflow_dispatch できない (403) ため。data-refresh.yml と同じ方式。
@@ -38,7 +59,7 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "生成件数 (1..10、既定5)。1 件 ≈ 29 分・turn 60。増やすなら timeout と max-turns も比例させる"
+        description: "生成件数 (1..10、既定5)。実測 1 件 ≈ 8.5 分 + 1 回の固定費 15 分。手動指定は boost より優先される"
         required: false
         default: "5"
       dry_run:
@@ -55,15 +76,50 @@ concurrency:
   group: ai-content-generate
   cancel-in-progress: false
 
-env:
-  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  LIMIT: ${{ inputs.limit || '5' }}
-  DRY_RUN: ${{ inputs.dry_run || 'false' }}
-
 jobs:
+  # 走るかどうかと件数だけを決める軽量 job。追加スロットが boost 期間外に発火したときは
+  # ここで run=false を返し、generate ごと skip して Claude を呼ばない。
+  # 別 job に切ったのは、単一 job だと後続 12 step すべてに if: を付ける必要があり、
+  # 付け忘れが「skip したはずなのに Claude が動く」になるため。
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      run: ${{ steps.decide.outputs.run }}
+      limit: ${{ steps.decide.outputs.limit }}
+      dry_run: ${{ steps.decide.outputs.dry_run }}
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      # 件数の決定順: push request > workflow_dispatch input > boost 設定 > baseline 5。
+      # 設定が壊れているときは baseline を通し追加スロットだけ exit 1 で赤くする。
+      - name: 🧭 Resolve schedule and limit
+        id: decide
+        run: |
+          node .claude/scripts/lib/content-generation-boost.mjs \
+            --workflow ai-content \
+            --event "${{ github.event_name }}" \
+            --cron "${{ github.event.schedule }}" \
+            --baseline-cron "0 18 * * *" \
+            --default-limit 5 \
+            --request-default-limit 1 \
+            --request data/ai-content-generate-requests.json \
+            --input-limit "${{ inputs.limit }}" \
+            --input-dry-run "${{ inputs.dry_run }}"
+
   generate:
+    needs: gate
+    if: ${{ needs.gate.outputs.run == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 240
+    env:
+      R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+      LIMIT: ${{ needs.gate.outputs.limit }}
+      DRY_RUN: ${{ needs.gate.outputs.dry_run }}
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -79,31 +135,6 @@ jobs:
 
       - name: 📦 Install dependencies
         run: npm ci
-
-      # push トリガー時は request file を、それ以外は workflow_dispatch の inputs を使う。
-      # GITHUB_ENV に書くので、後続 step の if: env.DRY_RUN も解決される。
-      - name: 🧭 Resolve inputs
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-        run: |
-          REQ=data/ai-content-generate-requests.json
-          if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
-            LIMIT=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.limit??1))")
-            DRY_RUN=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
-            {
-              echo "LIMIT=$LIMIT"
-              echo "DRY_RUN=$DRY_RUN"
-            } >> "$GITHUB_ENV"
-            echo "request 解決: limit=$LIMIT dry_run=$DRY_RUN"
-          fi
-          if ! [[ "${LIMIT}" =~ ^[0-9]+$ ]] || [ "${LIMIT}" -lt 1 ] || [ "${LIMIT}" -gt 10 ]; then
-            echo "::error::LIMIT は 1..10 の整数が必須: ${LIMIT}"
-            exit 1
-          fi
-          if [ "${DRY_RUN}" != "true" ] && [ "${DRY_RUN}" != "false" ]; then
-            echo "::error::DRY_RUN は true / false が必須: ${DRY_RUN}"
-            exit 1
-          fi
 
       - name: 📊 Rebuild queue, pick targets, and prepare prompts
         id: pick
