@@ -36,7 +36,10 @@
 - **観測値・派生を永続 DB に入れない** (R2 のまま。Phase 6 肥大=解約の再発防止)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。移行は完了済（正典: `docs/01_技術設計/02_データアーキテクチャ.md`）
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
 - **デプロイは溜めて1回・勝手にしない**: UI/ロジックの反復ごとに本番デプロイしない（develop→main PR + CI + Cloudflare deploy が毎回 6-8分×2 走りコスト/時間の無駄）。**localhost (`npm run dev:web`) で確認し、まとまりで1回だけデプロイ**。デプロイは (a) ユーザーが明示的に求めたとき、(b) 本番でしか再現しない問題の検証時（例: Cloudflare Workers ランタイム固有の R2/env 問題）のみ。本番反映は outward-facing なので、明示指示が無ければ**実行前に確認する** → `.claude/rules/branch-workflow.md`
-- **並行エージェント (Codex 等) と SSOT を共有する**: このファイル `CLAUDE.md` が指示の単一ソース。**`AGENTS.md` は `CLAUDE.md` への symlink**（OpenAI Codex は `AGENTS.md` を読む）なので、Codex も Claude も同じ規約 (`.claude/rules/`) に従う。プロジェクト固有の恒常事実は **`.claude/memory/MEMORY.md`**（git 共有）を読む。**⚠️ git 競合注意**: Codex と Claude が同一作業ツリーで同時編集すると commit 混在・WIP 混入・型/lock 不整合が起きる（実例: 2026-06-21 に Codex の zod schema 型エラー + package-lock 未更新で CI 2回 fail）。同時に走らせない、または git worktree を分ける。検知補助: `.claude/hooks/session-guard.js`（Claude セッション間のみ）。詳細: memory `feedback_shared_working_copy_git_race`
+- **並行エージェント (Codex 等) と SSOT を共有する**: このファイル `CLAUDE.md` が指示の単一ソース。**`AGENTS.md` は `CLAUDE.md` への symlink**（OpenAI Codex は `AGENTS.md` を読む）なので、Codex も Claude も同じ規約 (`.claude/rules/`) に従う。プロジェクト固有の恒常事実は **`.claude/memory/MEMORY.md`**（git 共有）を読む。**Codex を使う経路は 2 つあり、規律が違う**:
+  - **① Claude Code から MCP 経由** (`mcp__codex__codex`) — Claude のツールコールとして**同期実行**されるため HEAD/index の奪い合いは構造的に起きない。既定は `sandbox:"read-only"`。規約は **`.claude/rules/codex-mcp.md`**
+  - **② standalone Codex** (VSCode 拡張 / `codex` TUI) — 独立プロセス。**⚠️ git 競合注意**: 同一作業ツリーで同時編集すると commit 混在・WIP 混入・型/lock 不整合が起きる（実例: 2026-06-21 に Codex の zod schema 型エラー + package-lock 未更新で CI 2回 fail）。同時に走らせない、または git worktree を分ける
+  - どちらの経路でも `git add -A` 厳禁・取り込み後は `npm run type-check` (全パッケージ)。検知補助: `.claude/hooks/session-guard.js`（Claude セッション間のみ）。詳細: memory `feedback_shared_working_copy_git_race`
 
 ## 作業の節目で記録する
 
@@ -98,6 +101,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド |
 | `model-prompting.md` | Claude Opus 5 / Sonnet 5 / Fable 5 の task capsule・effort・委譲設計 |
 | `agent-output-contract.md` | Agent tool 起動時の prompt 設計 |
+| `codex-mcp.md` | Claude Code から codex MCP を呼ぶとき (セカンドオピニオン・レビュー・実装委譲) |
 | `critic-review-protocol.md` | critic 系 agent のレビュー共通プロトコル (新 critic 作成・review 実行時) |
 | `browser-use-cleanup.md` | browser-use を使うスキル |
 
