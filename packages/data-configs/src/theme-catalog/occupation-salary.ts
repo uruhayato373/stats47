@@ -393,6 +393,62 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
       "sortOrder": 0
     }
   ],
+  // 職種別年収は全て万円なので単軸。職種の系統ごとにカードを分けて比較しやすくする
+  metricGroups: [
+    {
+      key: "medical-care",
+      title: "医療・介護",
+      rankingKeys: [
+        "doctor-annual-income",
+        "nurse-annual-income",
+        "pharmacist-annual-income",
+        "care-worker-annual-income",
+      ],
+      defaultCheckedKeys: [
+        "doctor-annual-income",
+        "nurse-annual-income",
+        "care-worker-annual-income",
+      ],
+    },
+    {
+      key: "education-childcare",
+      title: "教育・保育",
+      rankingKeys: [
+        "school-teacher-annual-income",
+        "nursery-teacher-annual-income",
+      ],
+      defaultCheckedKeys: [
+        "school-teacher-annual-income",
+        "nursery-teacher-annual-income",
+      ],
+    },
+    {
+      key: "it-management",
+      title: "IT・管理職",
+      rankingKeys: [
+        "system-consultant-annual-income",
+        "software-engineer-annual-income",
+        "manager-annual-income",
+      ],
+      defaultCheckedKeys: [
+        "system-consultant-annual-income",
+        "software-engineer-annual-income",
+        "manager-annual-income",
+      ],
+    },
+    {
+      key: "transport",
+      title: "運輸",
+      rankingKeys: [
+        "truck-driver-annual-income",
+        "taxi-driver-annual-income",
+      ],
+      defaultCheckedKeys: [
+        "truck-driver-annual-income",
+        "taxi-driver-annual-income",
+      ],
+    },
+  ],
   "keywords": [
     "職業別年収",
     "職種別年収",

@@ -180,6 +180,13 @@ npm run google-admin:audit-api
 > 遷移先は `nav_href` (`/areas/<5桁code>`)。`trackNavClick` の呼び出し元は `AreaSearch` /
 > `AreaSelectionPanels` (`apps/web/src/features/area-profile/`)。
 >
+> **theme_kpi_switcher の送信条件変更 (2026-08-06)**: テーマページの指標カードを
+> 単一選択 (タブ) から複数チェックへ変えた。`nav_click` は**チェック ON のときだけ**送る
+> (OFF は関心の表明ではなく、送ると ON/OFF が相殺されて「どの指標が見られたか」が読めない)。
+> 既存 dimension の値追加ですらない (surface 値は不変) が、**同一セッション内の送信回数が
+> 増える** — 1 カードで複数指標をチェックできるようになったため。2026-08-06 前後で
+> `theme_kpi_switcher` の件数を単純比較しないこと。
+
 > **nav_surface の値追加 (2026-08-05)**: category ページ左のカテゴリナビに
 > `category_sidebar` を追加した (既存 `nav_surface` dimension の**値追加**・新 dimension なし)。
 > home の左ペインと同じ `PortalCategoryGrid` を別配置で使うため、既定の `home_category` の

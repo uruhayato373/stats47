@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@stats47/components";
-import { schemeTableau10, select, scalePoint, scaleLinear, line, axisBottom, axisLeft, pointer } from "d3";
+import { schemeTableau10, select, scalePoint, scaleLinear, line, axisBottom, axisLeft, axisRight, pointer } from "d3";
 import { useEffect, useRef } from "react";
 import {
   computeChartLayout,
@@ -47,15 +47,28 @@ export function LineChart({
   yAxisFormatter = compactAxisFormat,
   tooltipFormatter = defaultFormat,
   yDomain: yDomainProp,
+  rightUnit,
 }: D3LineChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const { showStackedTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 
   const marginsByRatio = computeMarginsByRatio(width, height, CHART_STYLES.margin.timeSeries);
 
+  /**
+   * 右軸を描くか。**描画とマージンで同じ判定を使う** —
+   * 別々に導出すると「マージンは広げていないのに軸は描く」状態が起きて
+   * 目盛ラベルが viewBox の外に出て切れる。
+   */
+  const hasRightAxis = !!seriesConfig?.some((s) => s.yAxis === "right");
+  const RIGHT_AXIS_MARGIN = 48;
+
   const layout = computeChartLayout(width, height, {
     marginTop: propsMarginTop ?? marginsByRatio.marginTop,
-    marginRight: propsMarginRight ?? marginsByRatio.marginRight,
+    marginRight:
+      propsMarginRight ??
+      (hasRightAxis
+        ? Math.max(marginsByRatio.marginRight, RIGHT_AXIS_MARGIN)
+        : marginsByRatio.marginRight),
     marginBottom: propsMarginBottom ?? marginsByRatio.marginBottom,
     marginLeft: propsMarginLeft ?? marginsByRatio.marginLeft,
   });
@@ -93,31 +106,47 @@ export function LineChart({
       .range([marginLeft, width - marginRight]);
 
     const isMulti = !!(seriesConfig && seriesConfig.length > 0);
-    const valueKeys = isMulti
-      ? seriesConfig.map((s) => s.dataKey)
-      : [valueKey];
-    const allValues = data.flatMap((d) =>
-      valueKeys
-        .map((k) => d[k])
-        .filter((v): v is number => typeof v === "number")
-    );
-    const yMin = allValues.length ? Math.min(...allValues) : 0;
-    const yMax = allValues.length ? Math.max(...allValues) : 0;
-    const computedDomain: [number, number] = [Math.min(0, yMin), yMax];
-    const y = scaleLinear()
-      .domain(yDomainProp ?? computedDomain)
-      .nice()
-      .range([height - marginBottom, marginTop]);
-
     const seriesToDraw = isMulti
       ? seriesConfig!
       : [{ dataKey: valueKey, name: valueKey, color: colors[0] ?? "#888" }];
+
+    // 軸ごとにドメインを分ける。右軸系列が 1 本も無ければ右軸は作らない
+    // (= yAxis 未指定の既存チャートは従来と完全に同じ経路を通る)。
+    const rightSeries = seriesToDraw.filter((s) => s.yAxis === "right");
+    const leftSeries = seriesToDraw.filter((s) => s.yAxis !== "right");
+
+    const domainOf = (keys: string[]): [number, number] => {
+      const values = data.flatMap((d) =>
+        keys.map((k) => d[k]).filter((v): v is number => typeof v === "number"),
+      );
+      const min = values.length ? Math.min(...values) : 0;
+      const max = values.length ? Math.max(...values) : 0;
+      return [Math.min(0, min), max];
+    };
+
+    const y = scaleLinear()
+      .domain(yDomainProp ?? domainOf(leftSeries.map((s) => s.dataKey)))
+      .nice()
+      .range([height - marginBottom, marginTop]);
+
+    // yDomainProp は左軸専用 (右軸は常に自動スケール)
+    const yRight = hasRightAxis
+      ? scaleLinear()
+          .domain(domainOf(rightSeries.map((s) => s.dataKey)))
+          .nice()
+          .range([height - marginBottom, marginTop])
+      : null;
+
+    /** 系列が載る軸のスケール。右軸が無い場合は常に左。 */
+    const scaleFor = (s: { yAxis?: "left" | "right" }) =>
+      s.yAxis === "right" && yRight ? yRight : y;
 
     const lineFn = line<TimeSeriesDataNode>().x((d) => x(String(d[categoryKey])) ?? 0);
 
     seriesToDraw.forEach((s) => {
       const filtered = data.filter((d) => d[s.dataKey] != null);
-      const pathLine = lineFn.y((d) => y(Number(d[s.dataKey])));
+      const scale = scaleFor(s);
+      const pathLine = lineFn.y((d) => scale(Number(d[s.dataKey])));
       svg
         .append("path")
         .datum(filtered)
@@ -170,19 +199,65 @@ export function LineChart({
       )
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dx", "-4"));
 
+    // --- 右Y軸 (右軸系列があるときだけ) ---
+    if (yRight) {
+      const rightAxisColor = rightSeries[0]?.color ?? "currentColor";
+      svg
+        .append("g")
+        .attr("transform", `translate(${width - marginRight},0)`)
+        .call(
+          axisRight(yRight)
+            .ticks(innerHeight / 40)
+            .tickFormat((v) => yAxisFormatter(Number(v))),
+        )
+        .call((g) => g.selectAll(".domain").remove())
+        // 右軸は grid 線を引かない (左軸の grid と重なって読みづらくなる)
+        .call((g) => g.selectAll(".tick line").remove())
+        .call((g) =>
+          g
+            .selectAll(".tick text")
+            .attr("font-size", baseFontSize)
+            .attr("fill", rightAxisColor)
+            .attr("dx", "4"),
+        );
+
+      // 軸頭の単位ラベル。左右で単位が違うことを読み手に示す
+      if (rightUnit) {
+        svg
+          .append("text")
+          .attr("x", width - marginRight)
+          .attr("y", marginTop - 8)
+          .attr("text-anchor", "end")
+          .attr("font-size", baseFontSize)
+          .attr("fill", rightAxisColor)
+          .text(rightUnit);
+      }
+      if (unit) {
+        svg
+          .append("text")
+          .attr("x", marginLeft)
+          .attr("y", marginTop - 8)
+          .attr("text-anchor", "start")
+          .attr("font-size", baseFontSize)
+          .attr("fill", leftSeries[0]?.color ?? "currentColor")
+          .text(unit);
+      }
+    }
+
     // データポイント（静的表示用）
     const pointRadius = 3;
     seriesToDraw.forEach((s) => {
       // 比較系列は点を描かない (主系列の点と混ざって読みづらくなるため)
       if (s.hidePoints) return;
       const filtered = data.filter((d) => d[s.dataKey] != null);
+      const scale = scaleFor(s);
       svg
         .append("g")
         .selectAll("circle")
         .data(filtered)
         .join("circle")
         .attr("cx", (d) => x(String(d[categoryKey])) ?? 0)
-        .attr("cy", (d) => y(Number(d[s.dataKey])))
+        .attr("cy", (d) => scale(Number(d[s.dataKey])))
         .attr("r", pointRadius)
         .attr("fill", s.color);
     });
@@ -251,20 +326,26 @@ export function LineChart({
           .attr("cx", closestX)
           .attr("cy", (s) => {
             const v = closestData[s.dataKey];
-            return v != null ? y(Number(v)) : -100;
+            return v != null ? scaleFor(s)(Number(v)) : -100;
           })
           .attr("opacity", (s) => (closestData[s.dataKey] != null ? 1 : 0));
 
-        // スタックツールチップ
+        // スタックツールチップ。
+        // 2 軸のときは系列ごとに単位が違うので、共通 unit ではなく系列名に単位を併記する
+        // (共通 unit を出すと右軸系列に左軸の単位が付いて誤読させる)。
         const label =
           (closestData.label as string) ?? closestCat;
-        const items = seriesToDraw.map((s) => ({
-          name: s.name,
-          value: closestData[s.dataKey] != null ? Number(closestData[s.dataKey]) : null,
-          color: s.color,
-        }));
+        const items = seriesToDraw.map((s) => {
+          const seriesUnit = s.yAxis === "right" ? rightUnit : unit;
+          return {
+            name: yRight && seriesUnit ? `${s.name} (${seriesUnit})` : s.name,
+            value: closestData[s.dataKey] != null ? Number(closestData[s.dataKey]) : null,
+            color: s.color,
+          };
+        });
         showStackedTooltip(event, label, items, {
-          unit,
+          // 2 軸のときは系列名側に単位を出したので、共通 unit は付けない
+          unit: yRight ? "" : unit,
           formatter: tooltipFormatter,
         });
       })
@@ -292,10 +373,13 @@ export function LineChart({
     innerWidth,
     colors,
     unit,
+    rightUnit,
+    yAxisFormatter,
     tooltipFormatter,
     showStackedTooltip,
     hideTooltip,
     yDomainProp,
+    hasRightAxis,
   ]);
 
   return (

@@ -77,6 +77,7 @@ const PopulationScatterSection = dynamic(
  */
 export function ThemeDashboardTabbed({
   themeConfig,
+  metricGroups,
   indicatorDataMap,
   topology,
   pageCharts,
@@ -245,6 +246,7 @@ export function ThemeDashboardTabbed({
   const metricsDashboardSection = (
     <ThemeMetricsDashboard
       themeConfig={themeConfig}
+      metricGroups={metricGroups}
       indicatorDataMap={indicatorDataMap}
       pageCharts={pageCharts}
       selectedPrefectureCode={selectedPrefectureCode}

@@ -9,7 +9,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
  *  (a) 全指標を一括取得しない (旧カードグリッドの一括 fetch を置き換えたのが目的)
  *  (b) 一度取った系列を取り直さない
  *  (c) 47 県平均を「全国」と称さない (2026-08-04 の不具合の回帰テスト)
- *  (d) 県選択時は全国を破線の比較系列として重ねる
+ *  (d) 県選択かつ 1 本のときだけ全国を破線の比較系列として重ねる
+ *  (e) 単位が 2 種なら左右 Y 軸に分ける (2026-08-06 の複数チェック化)
+ *  (f) 最後の 1 本は外せない (系列ゼロの空カードを作らせない)
  */
 
 const { fetchMock } = vi.hoisted(() => ({ fetchMock: vi.fn() }));
@@ -52,18 +54,20 @@ const kpi = (metricKey: string, over: Partial<MetricKpi> = {}): MetricKpi => ({
 const METRICS = [kpi("wage"), kpi("unemployment"), kpi("job-ratio")];
 const LABELS = { wage: "賃金", unemployment: "失業率", "job-ratio": "有効求人倍率" };
 
-/** Radix の TabsTrigger は mousedown で値が変わる (click だけでは発火しない) */
-function selectTile(label: RegExp) {
-  const tab = screen.getByRole("tab", { name: label });
-  fireEvent.mouseDown(tab);
-  fireEvent.click(tab);
+/** タイルはタイル全体が 1 つの role="checkbox" */
+function tile(label: RegExp) {
+  return screen.getByRole("checkbox", { name: label });
 }
 
-/** 現在どの指標が選択されているかは、フッターのランキング導線で観測する */
-function selectedRankingHref() {
-  return screen
-    .getByRole("link", { name: /ランキングを見る/ })
-    .getAttribute("href");
+function toggleTile(label: RegExp) {
+  fireEvent.click(tile(label));
+}
+
+/** チェック中の指標は「チャートに載っている系列」で観測する */
+function chartedKeys(): string[] {
+  return readChartData()
+    .lines.map((l: { dataKey: string }) => l.dataKey)
+    .filter((k: string) => k !== "national");
 }
 
 const points = (values: number[]) =>
@@ -98,7 +102,7 @@ beforeEach(() => {
 });
 
 describe("MetricSwitcherPanel — 取得の契約", () => {
-  it("初期表示で取りに行くのは選択中の 1 指標だけ (全指標を一括取得しない)", async () => {
+  it("初期表示で取りに行くのは初期チェック分だけ (全指標を一括取得しない)", async () => {
     renderPanel();
     await waitFor(() => expect(fetchMock).toHaveBeenCalled());
     expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -109,24 +113,194 @@ describe("MetricSwitcherPanel — 取得の契約", () => {
     expect(requested).not.toContain("job-ratio");
   });
 
-  it("タイル選択でその指標だけ追加取得し、戻ると再取得しない (キャッシュ)", async () => {
+  it("defaultCheckedKeys のぶんだけ初期取得する (指定した 2 本)", async () => {
+    renderPanel({ defaultCheckedKeys: ["unemployment", "job-ratio"] });
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    const requested = fetchMock.mock.calls.map((c) => c[0]).sort();
+    expect(requested).toEqual(["job-ratio", "unemployment"]);
+    // 未チェックの wage は取りに行かない
+    expect(requested).not.toContain("wage");
+  });
+
+  it("metrics に無い defaultCheckedKeys は無視し、全滅したら先頭 1 件に倒す", async () => {
+    renderPanel({ defaultCheckedKeys: ["not-in-this-group"] });
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    expect(fetchMock).toHaveBeenCalledWith("wage", "00000");
+  });
+
+  it("チェック追加はその指標だけ差分取得し、外して戻しても再取得しない (キャッシュ)", async () => {
     renderPanel();
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
 
-    selectTile(/失業率/);
+    toggleTile(/失業率/);
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
     expect(fetchMock).toHaveBeenLastCalledWith("unemployment", "00000");
-    expect(selectedRankingHref()).toBe("/ranking/unemployment");
+    await waitFor(() => expect(chartedKeys()).toEqual(["wage", "unemployment"]));
 
-    // 最初のタイルへ戻す。選択が戻ったことを導線で確かめた上で、呼び出しが増えていないこと
-    selectTile(/賃金/);
-    await waitFor(() => expect(selectedRankingHref()).toBe("/ranking/wage"));
+    // 外して戻す → 呼び出しは増えない
+    toggleTile(/失業率/);
+    await waitFor(() => expect(chartedKeys()).toEqual(["wage"]));
+    toggleTile(/失業率/);
+    await waitFor(() => expect(chartedKeys()).toEqual(["wage", "unemployment"]));
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
-  it("defaultMetricKey を初期選択にする", async () => {
-    renderPanel({ defaultMetricKey: "job-ratio" });
-    await waitFor(() => expect(fetchMock).toHaveBeenCalledWith("job-ratio", "00000"));
+  it("系列の並びはチェックした順ではなく metrics の定義順", async () => {
+    renderPanel({ defaultCheckedKeys: ["job-ratio"] });
+    await waitFor(() => expect(chartedKeys()).toEqual(["job-ratio"]));
+    toggleTile(/賃金/);
+    // 後からチェックした wage が定義順で先に来る
+    await waitFor(() => expect(chartedKeys()).toEqual(["wage", "job-ratio"]));
+  });
+});
+
+describe("MetricSwitcherPanel — 最後の 1 本は外せない", () => {
+  /**
+   * 「系列ゼロにしない」は 2 段で守られている:
+   *   (1) toggle の早期 return (押しても state を変えない)
+   *   (2) checkedMetrics の導出フォールバック (空なら先頭 1 件に倒す)
+   * (2) があるので (1) を外しても系列は消えない。下の描画テストは (2) を見ており、
+   * (1) の存在は「ロック済みと読者に分かるか」= 下の affordance テストが見る。
+   */
+  it("1 本だけのときタイルはロック済みと分かる (aria-disabled + 理由)", async () => {
+    renderPanel();
+    await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
+    expect(tile(/賃金/)).toHaveAttribute("aria-disabled", "true");
+    expect(tile(/賃金/)).toHaveAttribute("title", expect.stringContaining("外せません"));
+    // 未チェックのタイルはロックされない
+    expect(tile(/失業率/)).not.toHaveAttribute("aria-disabled");
+  });
+
+  it("2 本あるときはどちらもロック表示にならない (ロックが効きすぎていない)", async () => {
+    renderPanel({ defaultCheckedKeys: ["wage", "unemployment"] });
+    await waitFor(() => expect(chartedKeys()).toEqual(["wage", "unemployment"]));
+    expect(tile(/賃金/)).not.toHaveAttribute("aria-disabled");
+    expect(tile(/失業率/)).not.toHaveAttribute("aria-disabled");
+  });
+
+  it("1 本だけのときチェックを外しても系列は消えない", async () => {
+    renderPanel();
+    await waitFor(() => expect(chartedKeys()).toEqual(["wage"]));
+    toggleTile(/賃金/);
+    await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
+    expect(chartedKeys()).toEqual(["wage"]);
+    expect(tile(/賃金/)).toHaveAttribute("aria-checked", "true");
+  });
+
+  it("2 本あるときは片方を外せる (ロックが効きすぎていない)", async () => {
+    renderPanel({ defaultCheckedKeys: ["wage", "unemployment"] });
+    await waitFor(() => expect(chartedKeys()).toEqual(["wage", "unemployment"]));
+    toggleTile(/賃金/);
+    await waitFor(() => expect(chartedKeys()).toEqual(["unemployment"]));
+  });
+});
+
+describe("MetricSwitcherPanel — 2 軸 (単位が混在するグループ)", () => {
+  it("単位 2 種なら 2 本目の単位を右軸に回し rightUnit を渡す", async () => {
+    render(
+      <MetricSwitcherPanel
+        metrics={[kpi("wage", { unit: "円" }), kpi("ratio", { unit: "倍" })]}
+        tabLabels={{ wage: "賃金", ratio: "有効求人倍率" }}
+        selectedPrefectureCode={null}
+        areaName="全国"
+        defaultCheckedKeys={["wage", "ratio"]}
+      />,
+    );
+    await waitFor(() => expect(readChartData().lines).toHaveLength(2));
+    const data = readChartData();
+    expect(data.unit).toBe("円");
+    expect(data.rightUnit).toBe("倍");
+    expect(data.lines[0].yAxis).toBe("left");
+    expect(data.lines[1].yAxis).toBe("right");
+  });
+
+  it("単位が 1 種なら右軸を作らない (単軸のまま)", async () => {
+    renderPanel({ defaultCheckedKeys: ["wage", "unemployment"] });
+    await waitFor(() => expect(readChartData().lines).toHaveLength(2));
+    const data = readChartData();
+    expect(data.rightUnit).toBeUndefined();
+    expect(data.lines.every((l: { yAxis: string }) => l.yAxis === "left")).toBe(true);
+  });
+
+  it("`%` と `％` は同じ単位として 1 軸に載せる (全半角で軸を割らない)", async () => {
+    render(
+      <MetricSwitcherPanel
+        metrics={[kpi("gap", { unit: "%" }), kpi("unemp", { unit: "％" })]}
+        tabLabels={{ gap: "男女賃金格差", unemp: "失業率" }}
+        selectedPrefectureCode={null}
+        areaName="全国"
+        defaultCheckedKeys={["gap", "unemp"]}
+      />,
+    );
+    await waitFor(() => expect(readChartData().lines).toHaveLength(2));
+    const data = readChartData();
+    expect(data.rightUnit).toBeUndefined();
+    expect(data.lines.every((l: { yAxis: string }) => l.yAxis === "left")).toBe(true);
+  });
+
+  it("右軸の指標だけを残したら左軸に戻す (目盛りだけの空軸を残さない)", async () => {
+    render(
+      <MetricSwitcherPanel
+        metrics={[kpi("wage", { unit: "円" }), kpi("ratio", { unit: "倍" })]}
+        tabLabels={{ wage: "賃金", ratio: "有効求人倍率" }}
+        selectedPrefectureCode={null}
+        areaName="全国"
+        defaultCheckedKeys={["wage", "ratio"]}
+      />,
+    );
+    await waitFor(() => expect(readChartData().lines).toHaveLength(2));
+    toggleTile(/賃金/);
+    await waitFor(() => expect(readChartData().lines).toHaveLength(1));
+    const data = readChartData();
+    expect(data.unit).toBe("倍");
+    expect(data.rightUnit).toBeUndefined();
+    expect(data.lines[0].yAxis).toBe("left");
+  });
+});
+
+describe("MetricSwitcherPanel — 年表記が違う指標の突合", () => {
+  /**
+   * 指標によって yearName が「2020年」と「2020年度」で割れている。
+   * ラベルで突き合わせると同じ年が別カテゴリになり、x 軸に "2020年2020年度" と
+   * 重なって出たうえ 2 系列が半目盛りずれる (2026-08-06 に labor-wages で実際に出た)。
+   * 突合キーは 4 桁の年コードでなければならない。
+   */
+  const fiscal = (y: number) => ({ year: `${y}`, yearName: `${y}年度`, value: y - 2000 });
+  const calendar = (y: number) => ({ year: `${y}`, yearName: `${y}年`, value: (y - 2000) * 10 });
+
+  beforeEach(() => {
+    fetchMock.mockImplementation((key: string) =>
+      Promise.resolve({
+        points:
+          key === "wage"
+            ? [fiscal(2020), fiscal(2021), fiscal(2022)]
+            : [calendar(2020), calendar(2021), calendar(2022)],
+        source: "national",
+      }),
+    );
+  });
+
+  it("同じ年は 1 行に統合する (年表記の違いで行が倍にならない)", async () => {
+    renderPanel({ defaultCheckedKeys: ["wage", "unemployment"] });
+    await waitFor(() => expect(readChartData().lines).toHaveLength(2));
+    const rows = readChartData().data;
+    expect(rows).toHaveLength(3);
+    // 各行が両系列の値を持つ = 同じ x 位置に載っている
+    for (const row of rows) {
+      expect(typeof row.wage).toBe("number");
+      expect(typeof row.unemployment).toBe("number");
+    }
+  });
+
+  it("x 軸ラベルは編成順で先に来た系列の表記に揃える", async () => {
+    renderPanel({ defaultCheckedKeys: ["wage", "unemployment"] });
+    await waitFor(() => expect(readChartData().lines).toHaveLength(2));
+    // metrics の定義順は wage が先 = 年度表記
+    expect(readChartData().data.map((r: { year: string }) => r.year)).toEqual([
+      "2020年度",
+      "2021年度",
+      "2022年度",
+    ]);
   });
 });
 
@@ -157,17 +331,39 @@ describe("MetricSwitcherPanel — 平均を「全国」と称さない", () => {
     await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
     expect(readChartData().lines[0].name).toBe("全国平均");
   });
+
+  it("複数チェック時も R2 平均の系列は「（平均）」と明示する", async () => {
+    fetchMock.mockResolvedValue({ points: [], source: "none" });
+    render(
+      <MetricSwitcherPanel
+        metrics={[
+          kpi("a", { series: [{ year: 2020, value: 5 }, { year: 2021, value: 6 }] }),
+          kpi("b", { series: [{ year: 2020, value: 7 }, { year: 2021, value: 8 }] }),
+        ]}
+        tabLabels={{ a: "指標A", b: "指標B" }}
+        selectedPrefectureCode={null}
+        areaName="全国"
+        defaultCheckedKeys={["a", "b"]}
+      />,
+    );
+    await waitFor(() => expect(readChartData().lines).toHaveLength(2));
+    expect(readChartData().lines.map((l: { name: string }) => l.name)).toEqual([
+      "指標A（平均）",
+      "指標B（平均）",
+    ]);
+  });
 });
 
 describe("MetricSwitcherPanel — 県選択時の比較系列", () => {
-  it("実線=県 / 破線=全国 の 2 系列になり、比較系列は点を描かない", async () => {
-    fetchMock.mockImplementation((_key: string, area: string) =>
-      Promise.resolve(
-        area === "00000"
-          ? { points: points([10, 11, 12]), source: "national" }
-          : { points: points([1, 2, 3]), source: "area" },
-      ),
+  const prefAndNational = (_key: string, area: string) =>
+    Promise.resolve(
+      area === "00000"
+        ? { points: points([10, 11, 12]), source: "national" }
+        : { points: points([1, 2, 3]), source: "area" },
     );
+
+  it("1 本のときは 実線=県 / 破線=全国 の 2 系列になり、比較系列は点を描かない", async () => {
+    fetchMock.mockImplementation(prefAndNational);
     renderPanel({ selectedPrefectureCode: "13000", areaName: "東京都" });
 
     await waitFor(() => expect(readChartData().lines).toHaveLength(2));
@@ -177,6 +373,26 @@ describe("MetricSwitcherPanel — 県選択時の比較系列", () => {
     expect(comparison.name).toBe("全国");
     expect(comparison.strokeDasharray).toBe("6,4");
     expect(comparison.hidePoints).toBe(true);
+  });
+
+  it("2 本以上チェックしたら比較破線は出さない (系列過密を避ける)", async () => {
+    fetchMock.mockImplementation(prefAndNational);
+    renderPanel({
+      selectedPrefectureCode: "13000",
+      areaName: "東京都",
+      defaultCheckedKeys: ["wage", "unemployment"],
+    });
+    await waitFor(() => expect(readChartData().lines).toHaveLength(2));
+    const lines = readChartData().lines;
+    expect(lines.map((l: { dataKey: string }) => l.dataKey)).toEqual([
+      "wage",
+      "unemployment",
+    ]);
+    expect(lines.some((l: { strokeDasharray?: string }) => l.strokeDasharray)).toBe(
+      false,
+    );
+    // 凡例は地域名ではなく指標名 (地域は見出しが言う)
+    expect(lines.map((l: { name: string }) => l.name)).toEqual(["賃金", "失業率"]);
   });
 
   it("県選択時は自地域と全国の 2 本を取りに行く", async () => {
@@ -290,22 +506,43 @@ describe("MetricSwitcherPanel — 指数系は全国比較線を出さない", (
   });
 });
 
-describe("MetricSwitcherPanel — 回遊と計測", () => {
-  it("選択中指標のランキングへの導線を出す", async () => {
-    renderPanel();
-    await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
-    const link = screen.getByRole("link", { name: /ランキングを見る/ });
-    expect(link).toHaveAttribute("href", "/ranking/wage");
+describe("MetricSwitcherPanel — カード見出しと回遊と計測", () => {
+  it("title を渡すとカード見出しになる (グループ名)", async () => {
+    renderPanel({ title: "賃金の水準" });
+    await waitFor(() => expect(screen.getByText("賃金の水準")).toBeInTheDocument());
   });
 
-  it("タイルクリックで nav_click を theme_kpi_switcher surface として送る", async () => {
+  it("title 未指定なら代表指標のタイトルに倒す (従来の 1 パネル構成と同じ)", async () => {
     renderPanel();
-    selectTile(/失業率/);
+    await waitFor(() =>
+      expect(screen.getByText("wage タイトル")).toBeInTheDocument(),
+    );
+  });
+
+  it("代表指標 (編成順の先頭) のランキングへの導線を出す", async () => {
+    renderPanel({ defaultCheckedKeys: ["unemployment", "job-ratio"] });
+    await waitFor(() => expect(screen.getByTestId("line-chart")).toBeInTheDocument());
+    const link = screen.getByRole("link", { name: /ランキングを見る/ });
+    expect(link).toHaveAttribute("href", "/ranking/unemployment");
+  });
+
+  it("チェック ON で nav_click を theme_kpi_switcher surface として送る", async () => {
+    renderPanel();
+    toggleTile(/失業率/);
     await waitFor(() => expect(trackNavClickMock).toHaveBeenCalled());
     expect(trackNavClickMock).toHaveBeenCalledWith({
       label: "unemployment",
       href: "/ranking/unemployment",
       surface: "theme_kpi_switcher",
     });
+  });
+
+  it("チェック OFF では nav_click を送らない (関心の表明ではない)", async () => {
+    renderPanel({ defaultCheckedKeys: ["wage", "unemployment"] });
+    await waitFor(() => expect(chartedKeys()).toEqual(["wage", "unemployment"]));
+    trackNavClickMock.mockReset();
+    toggleTile(/失業率/);
+    await waitFor(() => expect(chartedKeys()).toEqual(["wage"]));
+    expect(trackNavClickMock).not.toHaveBeenCalled();
   });
 });

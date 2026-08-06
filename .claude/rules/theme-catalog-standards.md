@@ -116,6 +116,65 @@ ThemeCatalog (SSOT, git TS)
 
 ---
 
+## 4.5 指標カードの編成 (`metricGroups`) — 2026-08-06 新設
+
+テーマページ上部の「主要指標」は **1 グループ = 1 カード**で描く。カード内は値付きタイルの
+横スクロール列で、**タイルのチェックで折れ線に系列が重なる** (GA4 のスコアカードと GSC の
+チェックボックス折れ線の良いとこ取り)。1 ページに複数カードが縦に並ぶ。
+
+```ts
+metricGroups: [
+  {
+    key: "labor-market",            // kebab・テーマ内一意 (React key / 計測ラベル)
+    title: "労働市場の需給",         // カード見出し
+    rankingKeys: ["active-job-opening-ratio", "unemployment-rate"],  // ⊆ metrics・タイル順
+    defaultCheckedKeys: ["active-job-opening-ratio", "unemployment-rate"], // ⊆ rankingKeys・1 件以上
+  },
+]
+```
+
+### 編成の指針
+
+- **1 グループ = 1 つの問いに答える束**にする。「賃金の水準」「労働市場の需給」のように、
+  カードの見出しだけで何を比べているか分かる単位で切る。指標の多いテーマ
+  (occupation-salary 39 件) は職種の系統でカードを分ける。
+- **単位は 1 グループ 2 種まで** (Y 軸が左右 2 本しかないため。3 種以上は validator error)。
+  単位が違う指標を同居させるのはむしろ推奨で、`有効求人倍率 (倍)` × `失業率 (％)` のような
+  逆相関は 2 軸で重ねて初めて関係が読める。
+- **`defaultCheckedKeys` は 3 件以内**が目安 (4 件以上は warn)。mount 時にその数だけ
+  時系列を取りに行くので、初期表示のコストに直結する。**そのカードで最初に見せたい対比**を選ぶ。
+- **全ての非 context 指標をどれかのグループに入れる** (未所属は `[group-orphan]` warn)。
+
+### 実行時の振る舞い (UI 側の約束)
+
+| 状況 | 描画 |
+|---|---|
+| 単位 1 種 | 単軸 (従来と同じ) |
+| 単位 2 種 | 表示順で 1 個目の単位 = 左軸、2 個目 = 右軸。軸頭に単位ラベル |
+| 右軸の指標だけを残した | 左軸に戻る (目盛りだけの空軸を残さない) |
+| 県選択 + チェック 1 本 | 実線 = その県 / 破線 = 全国 (従来どおり) |
+| 県選択 + チェック 2 本以上 | 破線は出さない (系列が倍になって読めなくなる) |
+| 最後の 1 本 | 外せない (`aria-disabled` + 理由。系列ゼロの空カードを作らない) |
+| 年表記が違う指標を同居 | **4 桁の年コードで突き合わせる** (ラベルではない)。x 軸ラベルは編成順で先に来た系列の表記 |
+
+- **`%` と `％` は同じ単位**として 1 軸に載せる (正規化は `normalizeUnitForAxis`。
+  全角半角の互換文字だけを畳み、`円` と `千円` は畳まない)。validator と UI が同じ関数を使う。
+- **年 (暦年) と年度を同じカードに入れると、x 軸ラベルはどちらか一方の表記になる**。
+  突合は年コードなので系列はずれないが、対象期間は厳密には一致しない。混ぜるかは編成側の判断
+  (labor-wages の `最低賃金`(年度) × `大卒初任給`(年) は許容している)。
+- 系列色はグループ内の定義順で固定 (`getChartColor(index)`)。他をチェックしても色は変わらない。
+- KPI 採用の観測数に足りない指標 (`MIN_VALUES_FOR_KPI` 未満) はグループから自動で外れ、
+  `defaultCheckedKeys` も生存キーに絞られる。全滅したグループはカードごと描かない。
+
+### codegen を通らない
+
+`metricGroups` は **generator (transform.ts) が読まない**。追加しても生成物
+(`indicator-sets/<theme>.ts` / `page-components/theme/<theme>.json`) は byte 不変で、
+app 側は server component が `THEME_CATALOGS` を直読みする。IndicatorSet は compare /
+Remotion と共有する型なので、theme 固有の UI 都合を持ち込まない。
+
+---
+
 ## 5. validator (`npm run validate:catalog`)
 
 決定的 lint `packages/data-configs/scripts/validate-theme-catalog.ts`。pre-commit + CI に配線済み。
@@ -123,8 +182,10 @@ ThemeCatalog (SSOT, git TS)
 | レベル | 検査 |
 |---|---|
 | **error** | metrics.rankingKey / relatedRankingKeys が METRICS_REGISTRY・metrics に不在 / componentType union 外 / componentKey **テーマ内**重複 |
+| **error (metricGroups)** | `[group-key]` rankingKeys が metrics に不在 / `[group-dup-key]`・`[group-dup-title]` テーマ内重複 / `[group-empty]` rankingKeys が空 / `[group-default]` defaultCheckedKeys が空 or rankingKeys 外 / **`[group-units]` グループ内の相異なる単位が 3 種以上** (Y 軸は左右 2 本しかない) |
 | **error (鮮度)** | `generate:catalog --check` — 生成物と SSOT の diff (手編集・生成忘れの両方向) |
 | **warn** (`--strict` で error) | selection 未記入 / componentKey **横断**共有 (複数ページ再利用は設計上許容) / primary がチャート未使用 (metrics[] の stat-card で描画) / sortOrder 重複 (描画は配列順で安定) |
+| **warn (metricGroups)** | `[group-default-many]` 初期チェック 4 件以上 (mount 時にその数だけ時系列を取りに行く) / `[group-large]` 系列候補 9 件以上 / `[group-orphan]` 非 context 指標がどのグループにも未所属 |
 
 ---
 
@@ -161,7 +222,8 @@ ThemeCatalog (SSOT, git TS)
 
 | カタログ情報 | UI 描画先 | 実装 |
 |---|---|---|
-| `metrics` (role≠context) | ページ上部の指標カード (1 指標 = 1 枚の `ChartCard`。値 + 全国トレンド + ランキングリンク) | `to-theme-config.ts` の `tabIndicators` → `ThemeMetricsDashboard` |
+| `metrics` (role≠context) | ページ上部の指標カード群のタイル (値 + 順位)。**チェックすると下の折れ線に系列が重なる** | `to-theme-config.ts` の `tabIndicators` → `ThemeMetricsDashboard` → `MetricSwitcherPanel` |
+| **`metricGroups`** | **1 グループ = 指標カード 1 枚**。1 ページに複数枚が縦に並ぶ。省略時は非 context 指標を 1 枚に倒す | `ThemePageLayout` が `THEME_CATALOGS` を直読み → `ThemeDashboardClient` → `ThemeMetricsDashboard` |
 | `metrics` (全 role・context 含む) + `selection` | **「このテーマの全指標」セクション** (role 別・`/ranking/<key>` リンク・選定根拠注記) | `ThemeIndicatorCatalogSection.tsx` |
 | `charts.componentProps` | チャート本体 (line/mixed/composition/donut/cpi/pyramid) | `ThemeDbChartRenderer` |
 | `charts.sourceName` / `sourceLink` / `rankingLink` | チャートカード footer (出典 + 「ランキングを見る」) | `ChartFooter` (ThemeMetricsDashboard の ChartPanel footer) |

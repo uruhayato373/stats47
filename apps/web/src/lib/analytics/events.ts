@@ -153,8 +153,11 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * - `areas_search` / `areas_list` / `areas_map`: /areas の県選択導線（検索 / 一覧 / 地図）
  * - `home_category` / `home_use_case` / `home_area` / `home_blog`:
  *   home ポータルの発見セクション（カテゴリ / 知りたいこと / 都道府県 / ブログ）
- * - `theme_kpi_switcher`: テーマページの KPI タイル切替（`MetricSwitcherPanel`）。
- *   `nav_label` に rankingKey が入るので、どの指標が見られているかを追える
+ * - `theme_kpi_switcher`: テーマページの指標カードのタイル（`MetricSwitcherPanel`）。
+ *   `nav_label` に rankingKey が入るので、どの指標が見られているかを追える。
+ *   ★2026-08-06 の複数チェック化以降、送るのは**チェック ON のときだけ**。
+ *   OFF は「見るのをやめた」だけで関心の表明ではないため、送ると ON/OFF が
+ *   相殺されて「どの指標が見られたか」が読めなくなる
  * - `category_sidebar`: category ページ左のカテゴリナビ（home と同じリストの別配置）
  *
  * いずれも既存 GA4 custom dimension `nav_surface` の値追加であり、新しい dimension は増やさない
