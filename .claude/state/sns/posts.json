@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 624,
-    "nextId": 810
+    "count": 625,
+    "nextId": 811
   },
   "posts": [
     {
@@ -14579,6 +14579,18 @@
       "content_key": "wakame-consumption-quantity",
       "post_url": "https://www.instagram.com/p/Dbr_8JLnJKo/",
       "posted_at": "2026-08-06T05:48:33Z"
+    },
+    {
+      "id": 810,
+      "status": "posted",
+      "created_at": "2026-08-06T12:10:32.563Z",
+      "updated_at": "2026-08-06T12:10:32.563Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "total-assessed-land-area-ratio-field",
+      "post_url": "https://www.instagram.com/p/Dbsrp0xmyY7/",
+      "posted_at": "2026-08-06T12:10:32Z"
     }
   ],
   "nextId": 580,
