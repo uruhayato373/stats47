@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 628,
-    "nextId": 814
+    "count": 629,
+    "nextId": 815
   },
   "posts": [
     {
@@ -14627,6 +14627,18 @@
       "content_key": "female-part-time-hourly-wage",
       "post_url": "https://www.instagram.com/p/DbvIqXDFCjv/",
       "posted_at": "2026-08-07T11:02:29Z"
+    },
+    {
+      "id": 814,
+      "status": "posted",
+      "created_at": "2026-08-07T23:42:15.049Z",
+      "updated_at": "2026-08-07T23:42:15.049Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "clam-consumption-quantity",
+      "post_url": "https://www.instagram.com/p/DbwfnGrEWgZ/",
+      "posted_at": "2026-08-07T23:42:15Z"
     }
   ],
   "nextId": 580,
