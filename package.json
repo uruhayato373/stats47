@@ -86,7 +86,7 @@
     "packages/*"
   ],
   "overrides": {
-    "next": "15.1.7",
+    "next": "15.5.23",
     "jsdom": "25.0.1"
   },
   "packageManager": "npm@10.8.2",
