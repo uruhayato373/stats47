@@ -4,14 +4,11 @@ import path from 'node:path';
 
 import { isPostable } from '../../../../.claude/scripts/sns/lib/buzz-map-router-core.mjs';
 // UTM は正典 sns-utm.cjs に一本化 (CP5)。gallery からも同じ util で組む。
-import { createRequire } from 'node:module';
+import snsUtm from '../../../../.claude/scripts/lib/sns-utm.cjs';
 
 import { projectRoot, R2_BASE } from './project-root';
 
-const require = createRequire(import.meta.url);
-const snsUtm = require(
-  path.join(projectRoot(), '.claude/scripts/lib/sns-utm.cjs')
-) as {
+const typedSnsUtm = snsUtm as unknown as {
   buildUtmForDomain: (p: {
     domain: string;
     domainParams: Record<string, string>;
@@ -273,7 +270,7 @@ export async function registerBuzzMapDraft(
   // UTM + attribution（x=direct 本文リンク / instagram=profile 間接導線）。
   // primaryUrl が無い候補は UTM を付けない (canonical 不明)。
   const utmUrl = entry.primaryUrl
-    ? snsUtm.buildUtmForDomain({
+    ? typedSnsUtm.buildUtmForDomain({
         domain: 'buzz-map',
         domainParams: { ideaId: idea.id },
         canonicalUrl: entry.primaryUrl,
