@@ -9,3 +9,4 @@ date,workflow,run_id,limit,items,turns,duration_ms,cost_usd,input,output,cache_w
 2026-08-07,blog,31189841013,1,0,1,691,0,0,0,0,0,messages,1
 2026-08-07,ai-content,31209217572,5,0,1,1051,0,0,0,0,0,messages,1
 2026-08-08,blog,31262186307,1,0,1,1600,0,0,0,0,0,messages,1
+2026-08-08,ai-content,31272342424,5,0,1,672,0,0,0,0,0,messages,1
