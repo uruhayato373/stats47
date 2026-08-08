@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 631,
-    "nextId": 817
+    "count": 632,
+    "nextId": 818
   },
   "posts": [
     {
@@ -14663,6 +14663,18 @@
       "content_key": "lipstick-consumption-expenditure",
       "post_url": "https://www.instagram.com/p/DbxraEHoDTm/",
       "posted_at": "2026-08-08T10:44:36Z"
+    },
+    {
+      "id": 817,
+      "status": "posted",
+      "created_at": "2026-08-08T23:38:10.985Z",
+      "updated_at": "2026-08-08T23:38:10.985Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "municipal-general-administration-staff",
+      "post_url": "https://www.instagram.com/p/DbzD8KlICRK/",
+      "posted_at": "2026-08-08T23:38:10Z"
     }
   ],
   "nextId": 580,
