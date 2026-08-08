@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 630,
-    "nextId": 816
+    "count": 631,
+    "nextId": 817
   },
   "posts": [
     {
@@ -14651,6 +14651,18 @@
       "content_key": "new-graduate-scheduled-salary-university-male",
       "post_url": "https://www.instagram.com/p/Dbw-Wr6li7c/",
       "posted_at": "2026-08-08T04:10:53Z"
+    },
+    {
+      "id": 816,
+      "status": "posted",
+      "created_at": "2026-08-08T10:44:36.233Z",
+      "updated_at": "2026-08-08T10:44:36.233Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "lipstick-consumption-expenditure",
+      "post_url": "https://www.instagram.com/p/DbxraEHoDTm/",
+      "posted_at": "2026-08-08T10:44:36Z"
     }
   ],
   "nextId": 580,
