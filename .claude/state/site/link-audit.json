@@ -1,17 +1,83 @@
 {
-  "generatedAt": "2026-08-01T20:20:17.535Z",
+  "generatedAt": "2026-08-08T19:33:38.832Z",
   "origin": "https://stats47.jp",
   "mode": "per-route:10",
   "pagesCrawled": 91,
-  "pagesKnown": 4505,
-  "uniqueTargets": 2856,
+  "pagesKnown": 4483,
+  "uniqueTargets": 3005,
   "statusCount": {
-    "200": 2846,
-    "301": 10
+    "200": 2994,
+    "301": 10,
+    "410": 1
   },
-  "brokenCount": 0,
-  "brokenByRoute": {},
-  "broken": [],
+  "brokenCount": 6,
+  "brokenByRoute": {
+    "/ranking/[k]": 5,
+    "/correlation?x=avg-savings-rate-worker-households&amp;y=bank-deposit-balance-per-person": 1
+  },
+  "broken": [
+    {
+      "target": "/ranking/real-balance-ratio-city",
+      "status": 200,
+      "kind": "soft-404",
+      "title": "ランキングが見つかりません | 統計で見る都道府県",
+      "refCount": 2,
+      "from": [
+        "/ranking/total-assessed-land-area-ratio",
+        "/category/administrativefinancial"
+      ]
+    },
+    {
+      "target": "/correlation?x=avg-savings-rate-worker-households&amp;y=bank-deposit-balance-per-person",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/blog/savings-rate-gap"
+      ]
+    },
+    {
+      "target": "/ranking/current-balance-ratio-city",
+      "status": 200,
+      "kind": "soft-404",
+      "title": "ランキングが見つかりません | 統計で見る都道府県",
+      "refCount": 1,
+      "from": [
+        "/category/administrativefinancial"
+      ]
+    },
+    {
+      "target": "/ranking/fiscal-strength-index",
+      "status": 200,
+      "kind": "soft-404",
+      "title": "ランキングが見つかりません | 統計で見る都道府県",
+      "refCount": 1,
+      "from": [
+        "/category/administrativefinancial"
+      ]
+    },
+    {
+      "target": "/ranking/future-burden-ratio-city",
+      "status": 200,
+      "kind": "soft-404",
+      "title": "ランキングが見つかりません | 統計で見る都道府県",
+      "refCount": 1,
+      "from": [
+        "/category/administrativefinancial"
+      ]
+    },
+    {
+      "target": "/ranking/real-public-debt-service-ratio-city",
+      "status": 200,
+      "kind": "soft-404",
+      "title": "ランキングが見つかりません | 統計で見る都道府県",
+      "refCount": 1,
+      "from": [
+        "/category/administrativefinancial"
+      ]
+    }
+  ],
   "redirectToBroken": [],
   "unreachablePages": []
 }
