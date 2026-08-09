@@ -1,383 +1,390 @@
 {
-  "generatedAt": "2026-08-02T12:54:49.469Z",
-  "gscWeek": "2026-W31",
+  "generatedAt": "2026-08-09T12:25:15.642Z",
+  "gscWeek": "2026-W32",
   "inputs": {
-    "pages": 2813,
-    "rankingKeys": 2205,
-    "articleTags": 430,
+    "pages": 2872,
+    "rankingKeys": 2202,
+    "articleTags": 434,
     "articleTagsSource": "r2"
   },
   "demand": {
     "byType": {
       "blog": {
-        "imp": 86301,
-        "clicks": 1733,
-        "pages": 654
+        "imp": 89698,
+        "clicks": 1782,
+        "pages": 700
       },
       "ranking": {
-        "imp": 39003,
-        "clicks": 1558,
-        "pages": 1169
+        "imp": 38971,
+        "clicks": 1561,
+        "pages": 1166
       },
       "home": {
-        "imp": 539,
+        "imp": 537,
         "clicks": 46,
         "pages": 1
       },
       "other": {
-        "imp": 117,
-        "clicks": 5,
+        "imp": 103,
+        "clicks": 6,
         "pages": 5
       },
-      "areas": {
-        "imp": 7475,
-        "clicks": 97,
-        "pages": 889
-      },
-      "category": {
-        "imp": 682,
-        "clicks": 4,
-        "pages": 13
-      },
       "themes": {
-        "imp": 505,
-        "clicks": 11,
+        "imp": 604,
+        "clicks": 14,
         "pages": 22
       },
       "survey": {
-        "imp": 1282,
-        "clicks": 9,
-        "pages": 53
+        "imp": 1170,
+        "clicks": 13,
+        "pages": 55
+      },
+      "areas": {
+        "imp": 8475,
+        "clicks": 109,
+        "pages": 896
+      },
+      "category": {
+        "imp": 425,
+        "clicks": 5,
+        "pages": 14
       },
       "tag": {
-        "imp": 9,
+        "imp": 29,
         "clicks": 0,
-        "pages": 7
+        "pages": 13
       }
     },
     "byVertical": {
       "economy": {
-        "imp": 88713,
-        "clicks": 2272,
-        "pages": 1103
+        "imp": 93160,
+        "clicks": 2336,
+        "pages": 1142
       },
       "population": {
-        "imp": 8588,
-        "clicks": 306,
-        "pages": 158
+        "imp": 8264,
+        "clicks": 315,
+        "pages": 160
       },
       "education": {
-        "imp": 8751,
-        "clicks": 304,
-        "pages": 163
+        "imp": 9649,
+        "clicks": 340,
+        "pages": 166
       },
       "mobility": {
-        "imp": 4562,
-        "clicks": 106,
-        "pages": 81
+        "imp": 4295,
+        "clicks": 100,
+        "pages": 79
       },
       "health": {
-        "imp": 10415,
-        "clicks": 254,
-        "pages": 146
-      },
-      "furusato": {
-        "imp": 13249,
-        "clicks": 220,
-        "pages": 1017
+        "imp": 10849,
+        "clicks": 237,
+        "pages": 145
       },
       "energy": {
-        "imp": 2019,
-        "clicks": 38,
-        "pages": 27
+        "imp": 2058,
+        "clicks": 39,
+        "pages": 28
+      },
+      "furusato": {
+        "imp": 13233,
+        "clicks": 216,
+        "pages": 1022
       },
       "labor": {
-        "imp": 3601,
-        "clicks": 83,
-        "pages": 151
+        "imp": 3663,
+        "clicks": 87,
+        "pages": 162
       },
       "housing": {
-        "imp": 1862,
+        "imp": 1686,
         "clicks": 38,
-        "pages": 62
+        "pages": 59
       },
       "travel": {
-        "imp": 773,
+        "imp": 737,
         "clicks": 8,
-        "pages": 36
+        "pages": 33
       }
     },
     "byTypeVertical": [
       {
         "type": "blog",
         "vertical": "economy",
-        "imp": 66331,
-        "clicks": 1264,
-        "pages": 470
+        "imp": 71300,
+        "clicks": 1337,
+        "pages": 505
       },
       {
         "type": "ranking",
         "vertical": "economy",
-        "imp": 20554,
-        "clicks": 995,
-        "pages": 572
+        "imp": 20441,
+        "clicks": 982,
+        "pages": 574
       },
       {
         "type": "areas",
         "vertical": "furusato",
-        "imp": 7475,
-        "clicks": 97,
-        "pages": 889
+        "imp": 8475,
+        "clicks": 109,
+        "pages": 896
       },
       {
         "type": "blog",
         "vertical": "health",
-        "imp": 7472,
-        "clicks": 126,
-        "pages": 34
+        "imp": 7736,
+        "clicks": 110,
+        "pages": 35
       },
       {
         "type": "ranking",
         "vertical": "education",
-        "imp": 6497,
-        "clicks": 164,
-        "pages": 147
+        "imp": 7287,
+        "clicks": 191,
+        "pages": 150
       },
       {
         "type": "blog",
         "vertical": "population",
-        "imp": 5735,
-        "clicks": 230,
+        "imp": 5394,
+        "clicks": 225,
         "pages": 61
-      },
-      {
-        "type": "blog",
-        "vertical": "furusato",
-        "imp": 3135,
-        "clicks": 53,
-        "pages": 34
       },
       {
         "type": "ranking",
         "vertical": "health",
-        "imp": 2885,
-        "clicks": 127,
-        "pages": 110
+        "imp": 3031,
+        "clicks": 125,
+        "pages": 107
+      },
+      {
+        "type": "blog",
+        "vertical": "furusato",
+        "imp": 2675,
+        "clicks": 54,
+        "pages": 33
       },
       {
         "type": "blog",
         "vertical": "mobility",
-        "imp": 2669,
-        "clicks": 55,
+        "imp": 2500,
+        "clicks": 47,
         "pages": 12
-      },
-      {
-        "type": "ranking",
-        "vertical": "furusato",
-        "imp": 2595,
-        "clicks": 70,
-        "pages": 90
       },
       {
         "type": "blog",
         "vertical": "education",
-        "imp": 2252,
-        "clicks": 140,
+        "imp": 2360,
+        "clicks": 149,
         "pages": 15
       },
       {
         "type": "ranking",
-        "vertical": "mobility",
-        "imp": 1848,
-        "clicks": 47,
-        "pages": 63
+        "vertical": "furusato",
+        "imp": 2024,
+        "clicks": 53,
+        "pages": 89
       },
       {
         "type": "blog",
         "vertical": "labor",
-        "imp": 1581,
-        "clicks": 36,
-        "pages": 49
+        "imp": 1854,
+        "clicks": 38,
+        "pages": 56
       },
       {
         "type": "ranking",
-        "vertical": "housing",
-        "imp": 1543,
-        "clicks": 30,
-        "pages": 51
+        "vertical": "mobility",
+        "imp": 1750,
+        "clicks": 50,
+        "pages": 61
       },
       {
         "type": "blog",
         "vertical": "energy",
-        "imp": 1416,
-        "clicks": 24,
+        "imp": 1488,
+        "clicks": 25,
         "pages": 9
       },
       {
         "type": "ranking",
+        "vertical": "housing",
+        "imp": 1381,
+        "clicks": 28,
+        "pages": 48
+      },
+      {
+        "type": "ranking",
         "vertical": "population",
-        "imp": 1314,
-        "clicks": 64,
+        "imp": 1359,
+        "clicks": 71,
         "pages": 43
       },
       {
         "type": "survey",
         "vertical": "economy",
-        "imp": 1282,
-        "clicks": 9,
-        "pages": 53
+        "imp": 1170,
+        "clicks": 13,
+        "pages": 55
       },
       {
         "type": "survey",
         "vertical": "population",
-        "imp": 1282,
-        "clicks": 9,
-        "pages": 53
+        "imp": 1170,
+        "clicks": 13,
+        "pages": 55
       },
       {
         "type": "survey",
         "vertical": "labor",
-        "imp": 1282,
-        "clicks": 9,
-        "pages": 53
+        "imp": 1170,
+        "clicks": 13,
+        "pages": 55
       },
       {
         "type": "ranking",
         "vertical": "labor",
-        "imp": 718,
-        "clicks": 38,
-        "pages": 45
+        "imp": 613,
+        "clicks": 36,
+        "pages": 47
+      },
+      {
+        "type": "ranking",
+        "vertical": "travel",
+        "imp": 473,
+        "clicks": 7,
+        "pages": 25
       },
       {
         "type": "ranking",
         "vertical": "energy",
-        "imp": 525,
+        "imp": 463,
         "clicks": 13,
-        "pages": 16
-      },
-      {
-        "type": "category",
-        "vertical": "economy",
-        "imp": 490,
-        "clicks": 3,
-        "pages": 3
-      },
-      {
-        "type": "ranking",
-        "vertical": "travel",
-        "imp": 441,
-        "clicks": 7,
-        "pages": 28
-      },
-      {
-        "type": "blog",
-        "vertical": "travel",
-        "imp": 315,
-        "clicks": 1,
-        "pages": 6
+        "pages": 17
       },
       {
         "type": "themes",
         "vertical": "population",
-        "imp": 257,
-        "clicks": 3,
+        "imp": 341,
+        "clicks": 6,
         "pages": 1
+      },
+      {
+        "type": "blog",
+        "vertical": "travel",
+        "imp": 244,
+        "clicks": 1,
+        "pages": 6
       },
       {
         "type": "blog",
         "vertical": "housing",
         "imp": 219,
-        "clicks": 6,
+        "clicks": 7,
         "pages": 8
       },
       {
         "type": "category",
-        "vertical": "housing",
-        "imp": 94,
-        "clicks": 0,
-        "pages": 2
+        "vertical": "economy",
+        "imp": 187,
+        "clicks": 3,
+        "pages": 3
       },
       {
         "type": "category",
         "vertical": "energy",
-        "imp": 78,
+        "imp": 107,
+        "clicks": 1,
+        "pages": 2
+      },
+      {
+        "type": "category",
+        "vertical": "housing",
+        "imp": 82,
         "clicks": 1,
         "pages": 2
       },
       {
         "type": "themes",
         "vertical": "health",
-        "imp": 58,
-        "clicks": 1,
+        "imp": 78,
+        "clicks": 2,
         "pages": 2
       },
       {
         "type": "themes",
         "vertical": "economy",
-        "imp": 56,
+        "imp": 62,
         "clicks": 1,
         "pages": 5
       },
       {
         "type": "themes",
         "vertical": "mobility",
-        "imp": 42,
-        "clicks": 4,
+        "imp": 39,
+        "clicks": 3,
         "pages": 4
       },
       {
         "type": "themes",
         "vertical": "furusato",
-        "imp": 35,
+        "imp": 34,
         "clicks": 0,
         "pages": 2
-      },
-      {
-        "type": "themes",
-        "vertical": "travel",
-        "imp": 15,
-        "clicks": 0,
-        "pages": 1
-      },
-      {
-        "type": "themes",
-        "vertical": "labor",
-        "imp": 14,
-        "clicks": 0,
-        "pages": 3
       },
       {
         "type": "category",
         "vertical": "furusato",
-        "imp": 9,
+        "imp": 25,
         "clicks": 0,
         "pages": 2
       },
       {
         "type": "themes",
-        "vertical": "housing",
-        "imp": 6,
-        "clicks": 2,
+        "vertical": "labor",
+        "imp": 18,
+        "clicks": 0,
+        "pages": 3
+      },
+      {
+        "type": "themes",
+        "vertical": "travel",
+        "imp": 14,
+        "clicks": 0,
         "pages": 1
       },
       {
         "type": "category",
         "vertical": "labor",
-        "imp": 6,
+        "imp": 8,
         "clicks": 0,
         "pages": 1
       },
       {
         "type": "category",
         "vertical": "mobility",
-        "imp": 3,
+        "imp": 6,
         "clicks": 0,
         "pages": 2
       },
       {
         "type": "category",
         "vertical": "travel",
-        "imp": 2,
+        "imp": 6,
+        "clicks": 0,
+        "pages": 1
+      },
+      {
+        "type": "themes",
+        "vertical": "housing",
+        "imp": 4,
+        "clicks": 2,
+        "pages": 1
+      },
+      {
+        "type": "category",
+        "vertical": "health",
+        "imp": 4,
         "clicks": 0,
         "pages": 1
       },
@@ -431,8 +438,8 @@
   "gaps": [
     {
       "vertical": "economy",
-      "imp": 88713,
-      "clicks": 2272,
+      "imp": 93160,
+      "clicks": 2336,
       "inventory": 27,
       "banner": 16,
       "text": 11,
@@ -440,8 +447,8 @@
     },
     {
       "vertical": "furusato",
-      "imp": 13249,
-      "clicks": 220,
+      "imp": 13233,
+      "clicks": 216,
       "inventory": 7,
       "banner": 4,
       "text": 3,
@@ -449,8 +456,8 @@
     },
     {
       "vertical": "health",
-      "imp": 10415,
-      "clicks": 254,
+      "imp": 10849,
+      "clicks": 237,
       "inventory": 14,
       "banner": 9,
       "text": 5,
@@ -458,8 +465,8 @@
     },
     {
       "vertical": "education",
-      "imp": 8751,
-      "clicks": 304,
+      "imp": 9649,
+      "clicks": 340,
       "inventory": 25,
       "banner": 12,
       "text": 13,
@@ -467,8 +474,8 @@
     },
     {
       "vertical": "population",
-      "imp": 8588,
-      "clicks": 306,
+      "imp": 8264,
+      "clicks": 315,
       "inventory": 18,
       "banner": 10,
       "text": 8,
@@ -476,8 +483,8 @@
     },
     {
       "vertical": "mobility",
-      "imp": 4562,
-      "clicks": 106,
+      "imp": 4295,
+      "clicks": 100,
       "inventory": 13,
       "banner": 6,
       "text": 7,
@@ -485,8 +492,8 @@
     },
     {
       "vertical": "labor",
-      "imp": 3601,
-      "clicks": 83,
+      "imp": 3663,
+      "clicks": 87,
       "inventory": 50,
       "banner": 25,
       "text": 25,
@@ -494,8 +501,8 @@
     },
     {
       "vertical": "energy",
-      "imp": 2019,
-      "clicks": 38,
+      "imp": 2058,
+      "clicks": 39,
       "inventory": 29,
       "banner": 14,
       "text": 15,
@@ -503,7 +510,7 @@
     },
     {
       "vertical": "housing",
-      "imp": 1862,
+      "imp": 1686,
       "clicks": 38,
       "inventory": 26,
       "banner": 13,
@@ -512,7 +519,7 @@
     },
     {
       "vertical": "travel",
-      "imp": 773,
+      "imp": 737,
       "clicks": 8,
       "inventory": 51,
       "banner": 29,
@@ -521,19 +528,29 @@
     }
   ],
   "unmapped": {
-    "totalImp": 832,
+    "totalImp": 897,
     "byReason": [
       {
         "reason": "no-slot:home",
-        "imp": 539,
+        "imp": 537,
         "pages": 1,
         "examples": [
           "https://stats47.jp/"
         ]
       },
       {
+        "reason": "ranking-key-unknown",
+        "imp": 149,
+        "pages": 5,
+        "examples": [
+          "bowling-alley-public",
+          "https://stats47.jp/ranking",
+          "patient-receiving-rate-by-disease"
+        ]
+      },
+      {
         "reason": "no-slot:other",
-        "imp": 117,
+        "imp": 103,
         "pages": 5,
         "examples": [
           "https://stats47.jp/about",
@@ -542,39 +559,61 @@
         ]
       },
       {
-        "reason": "ranking-key-unknown",
-        "imp": 83,
-        "pages": 4,
-        "examples": [
-          "https://stats47.jp/ranking",
-          "patient-receiving-rate-by-disease",
-          "patient-receiving-rate-by-age"
-        ]
-      },
-      {
         "reason": "article-unknown",
-        "imp": 64,
-        "pages": 3,
+        "imp": 67,
+        "pages": 6,
         "examples": [
           "https://stats47.jp/blog",
           "https://stats47.jp/blog?page=4",
-          "https://stats47.jp/blog?page=13"
+          "https://stats47.jp/blog?page=18"
         ]
       },
       {
         "reason": "theme-unmapped:null",
-        "imp": 15,
+        "imp": 8,
         "pages": 1,
         "examples": [
           "https://stats47.jp/themes"
         ]
       },
       {
+        "reason": "tag-unmapped:%E7%8C%9B%E6%9A%91%E6%97%A5",
+        "imp": 6,
+        "pages": 1,
+        "examples": [
+          "%E7%8C%9B%E6%9A%91%E6%97%A5"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
+        "imp": 4,
+        "pages": 1,
+        "examples": [
+          "%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E8%8C%A8%E5%9F%8E%E7%9C%8C",
+        "imp": 4,
+        "pages": 1,
+        "examples": [
+          "%E8%8C%A8%E5%9F%8E%E7%9C%8C"
+        ]
+      },
+      {
         "reason": "theme-unmapped:climate",
-        "imp": 5,
+        "imp": 4,
         "pages": 1,
         "examples": [
           "climate"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E7%B4%85%E8%8C%B6",
+        "imp": 3,
+        "pages": 1,
+        "examples": [
+          "%E7%B4%85%E8%8C%B6"
         ]
       },
       {
@@ -586,11 +625,19 @@
         ]
       },
       {
-        "reason": "tag-unmapped:local-allocation-tax",
+        "reason": "tag-unmapped:%E6%A0%BC%E5%B7%AE",
         "imp": 2,
         "pages": 1,
         "examples": [
-          "local-allocation-tax"
+          "%E6%A0%BC%E5%B7%AE"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E8%A1%8C%E5%8B%95%E8%80%85%E7%8E%87",
+        "imp": 2,
+        "pages": 1,
+        "examples": [
+          "%E8%A1%8C%E5%8B%95%E8%80%85%E7%8E%87"
         ]
       },
       {
@@ -602,19 +649,35 @@
         ]
       },
       {
-        "reason": "tag-unmapped:%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
+        "reason": "tag-unmapped:%E5%81%A5%E5%BA%B7",
         "imp": 1,
         "pages": 1,
         "examples": [
-          "%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA"
+          "%E5%81%A5%E5%BA%B7"
         ]
       },
       {
-        "reason": "tag-unmapped:commerce",
+        "reason": "tag-unmapped:%E6%89%80%E5%BE%97",
         "imp": 1,
         "pages": 1,
         "examples": [
-          "commerce"
+          "%E6%89%80%E5%BE%97"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E6%9E%9C%E7%89%A9%E6%B6%88%E8%B2%BB",
+        "imp": 1,
+        "pages": 1,
+        "examples": [
+          "%E6%9E%9C%E7%89%A9%E6%B6%88%E8%B2%BB"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E7%97%85%E9%99%A2",
+        "imp": 1,
+        "pages": 1,
+        "examples": [
+          "%E7%97%85%E9%99%A2"
         ]
       },
       {
@@ -624,14 +687,6 @@
         "examples": [
           "dual-income-households"
         ]
-      },
-      {
-        "reason": "tag-unmapped:waste-disposal-sites",
-        "imp": 1,
-        "pages": 1,
-        "examples": [
-          "waste-disposal-sites"
-        ]
       }
     ],
     "top": [
@@ -639,7 +694,7 @@
         "url": "https://stats47.jp/",
         "type": "home",
         "key": null,
-        "imp": 539,
+        "imp": 537,
         "clicks": 46,
         "reason": "no-slot:home"
       },
@@ -647,15 +702,23 @@
         "url": "https://stats47.jp/about",
         "type": "other",
         "key": null,
-        "imp": 72,
-        "clicks": 5,
+        "imp": 67,
+        "clicks": 6,
         "reason": "no-slot:other"
+      },
+      {
+        "url": "https://stats47.jp/ranking/bowling-alley-public",
+        "type": "ranking",
+        "key": "bowling-alley-public",
+        "imp": 63,
+        "clicks": 1,
+        "reason": "ranking-key-unknown"
       },
       {
         "url": "https://stats47.jp/ranking",
         "type": "ranking",
         "key": null,
-        "imp": 65,
+        "imp": 53,
         "clicks": 2,
         "reason": "ranking-key-unknown"
       },
@@ -663,7 +726,7 @@
         "url": "https://stats47.jp/blog",
         "type": "blog",
         "key": null,
-        "imp": 54,
+        "imp": 49,
         "clicks": 0,
         "reason": "article-unknown"
       },
@@ -671,7 +734,31 @@
         "url": "https://stats47.jp/terms",
         "type": "other",
         "key": null,
-        "imp": 32,
+        "imp": 24,
+        "clicks": 0,
+        "reason": "no-slot:other"
+      },
+      {
+        "url": "https://stats47.jp/ranking/patient-receiving-rate-by-disease",
+        "type": "ranking",
+        "key": "patient-receiving-rate-by-disease",
+        "imp": 17,
+        "clicks": 0,
+        "reason": "ranking-key-unknown"
+      },
+      {
+        "url": "https://stats47.jp/ranking/patient-receiving-rate-by-age",
+        "type": "ranking",
+        "key": "patient-receiving-rate-by-age",
+        "imp": 11,
+        "clicks": 2,
+        "reason": "ranking-key-unknown"
+      },
+      {
+        "url": "https://stats47.jp/privacy",
+        "type": "other",
+        "key": null,
+        "imp": 8,
         "clicks": 0,
         "reason": "no-slot:other"
       },
@@ -679,25 +766,9 @@
         "url": "https://stats47.jp/themes",
         "type": "themes",
         "key": null,
-        "imp": 15,
+        "imp": 8,
         "clicks": 0,
         "reason": "theme-unmapped:null"
-      },
-      {
-        "url": "https://stats47.jp/ranking/patient-receiving-rate-by-disease",
-        "type": "ranking",
-        "key": "patient-receiving-rate-by-disease",
-        "imp": 14,
-        "clicks": 0,
-        "reason": "ranking-key-unknown"
-      },
-      {
-        "url": "https://stats47.jp/privacy",
-        "type": "other",
-        "key": null,
-        "imp": 9,
-        "clicks": 0,
-        "reason": "no-slot:other"
       },
       {
         "url": "https://stats47.jp/blog?page=4",
@@ -708,20 +779,52 @@
         "reason": "article-unknown"
       },
       {
+        "url": "https://stats47.jp/tag/%E7%8C%9B%E6%9A%91%E6%97%A5",
+        "type": "tag",
+        "key": "%E7%8C%9B%E6%9A%91%E6%97%A5",
+        "imp": 6,
+        "clicks": 0,
+        "reason": "tag-unmapped:%E7%8C%9B%E6%9A%91%E6%97%A5"
+      },
+      {
+        "url": "https://stats47.jp/ranking/gini-coefficient-disposable-income",
+        "type": "ranking",
+        "key": "gini-coefficient-disposable-income",
+        "imp": 5,
+        "clicks": 0,
+        "reason": "ranking-key-unknown"
+      },
+      {
+        "url": "https://stats47.jp/blog?page=18",
+        "type": "blog",
+        "key": null,
+        "imp": 4,
+        "clicks": 0,
+        "reason": "article-unknown"
+      },
+      {
+        "url": "https://stats47.jp/tag/%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
+        "type": "tag",
+        "key": "%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
+        "imp": 4,
+        "clicks": 0,
+        "reason": "tag-unmapped:%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA"
+      },
+      {
+        "url": "https://stats47.jp/tag/%E8%8C%A8%E5%9F%8E%E7%9C%8C",
+        "type": "tag",
+        "key": "%E8%8C%A8%E5%9F%8E%E7%9C%8C",
+        "imp": 4,
+        "clicks": 0,
+        "reason": "tag-unmapped:%E8%8C%A8%E5%9F%8E%E7%9C%8C"
+      },
+      {
         "url": "https://stats47.jp/themes/climate",
         "type": "themes",
         "key": "climate",
-        "imp": 5,
+        "imp": 4,
         "clicks": 0,
         "reason": "theme-unmapped:climate"
-      },
-      {
-        "url": "https://stats47.jp/ranking/patient-receiving-rate-by-age",
-        "type": "ranking",
-        "key": "patient-receiving-rate-by-age",
-        "imp": 3,
-        "clicks": 1,
-        "reason": "ranking-key-unknown"
       },
       {
         "url": "https://stats47.jp/blog?page=13",
@@ -730,6 +833,22 @@
         "imp": 3,
         "clicks": 0,
         "reason": "article-unknown"
+      },
+      {
+        "url": "https://stats47.jp/blog?page=17",
+        "type": "blog",
+        "key": null,
+        "imp": 3,
+        "clicks": 0,
+        "reason": "article-unknown"
+      },
+      {
+        "url": "https://stats47.jp/tag/%E7%B4%85%E8%8C%B6",
+        "type": "tag",
+        "key": "%E7%B4%85%E8%8C%B6",
+        "imp": 3,
+        "clicks": 0,
+        "reason": "tag-unmapped:%E7%B4%85%E8%8C%B6"
       },
       {
         "url": "https://stats47.jp/gis-cross/migration-flow?pref=24&utm_source=x&utm_medium=social&utm_campaign=mf47&utm_content=mie",
@@ -756,20 +875,28 @@
         "reason": "tag-unmapped:%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E6%A0%BC%E5%B7%AE"
       },
       {
-        "url": "https://stats47.jp/tag/local-allocation-tax",
+        "url": "https://stats47.jp/tag/%E6%A0%BC%E5%B7%AE",
         "type": "tag",
-        "key": "local-allocation-tax",
+        "key": "%E6%A0%BC%E5%B7%AE",
         "imp": 2,
         "clicks": 0,
-        "reason": "tag-unmapped:local-allocation-tax"
+        "reason": "tag-unmapped:%E6%A0%BC%E5%B7%AE"
       },
       {
-        "url": "https://stats47.jp/ranking/inpatient-rate-by-bedtype",
-        "type": "ranking",
-        "key": "inpatient-rate-by-bedtype",
+        "url": "https://stats47.jp/tag/%E8%A1%8C%E5%8B%95%E8%80%85%E7%8E%87",
+        "type": "tag",
+        "key": "%E8%A1%8C%E5%8B%95%E8%80%85%E7%8E%87",
+        "imp": 2,
+        "clicks": 0,
+        "reason": "tag-unmapped:%E8%A1%8C%E5%8B%95%E8%80%85%E7%8E%87"
+      },
+      {
+        "url": "https://stats47.jp/blog?page=14",
+        "type": "blog",
+        "key": null,
         "imp": 1,
         "clicks": 0,
-        "reason": "ranking-key-unknown"
+        "reason": "article-unknown"
       },
       {
         "url": "https://stats47.jp/tag/%E3%82%A8%E3%83%B3%E3%82%B2%E3%83%AB%E4%BF%82%E6%95%B0",
@@ -780,36 +907,28 @@
         "reason": "tag-unmapped:%E3%82%A8%E3%83%B3%E3%82%B2%E3%83%AB%E4%BF%82%E6%95%B0"
       },
       {
-        "url": "https://stats47.jp/tag/%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
+        "url": "https://stats47.jp/tag/%E5%81%A5%E5%BA%B7",
         "type": "tag",
-        "key": "%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
+        "key": "%E5%81%A5%E5%BA%B7",
         "imp": 1,
         "clicks": 0,
-        "reason": "tag-unmapped:%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA"
+        "reason": "tag-unmapped:%E5%81%A5%E5%BA%B7"
       },
       {
-        "url": "https://stats47.jp/tag/commerce",
+        "url": "https://stats47.jp/tag/%E6%89%80%E5%BE%97",
         "type": "tag",
-        "key": "commerce",
+        "key": "%E6%89%80%E5%BE%97",
         "imp": 1,
         "clicks": 0,
-        "reason": "tag-unmapped:commerce"
+        "reason": "tag-unmapped:%E6%89%80%E5%BE%97"
       },
       {
-        "url": "https://stats47.jp/tag/dual-income-households",
+        "url": "https://stats47.jp/tag/%E6%9E%9C%E7%89%A9%E6%B6%88%E8%B2%BB",
         "type": "tag",
-        "key": "dual-income-households",
+        "key": "%E6%9E%9C%E7%89%A9%E6%B6%88%E8%B2%BB",
         "imp": 1,
         "clicks": 0,
-        "reason": "tag-unmapped:dual-income-households"
-      },
-      {
-        "url": "https://stats47.jp/tag/waste-disposal-sites",
-        "type": "tag",
-        "key": "waste-disposal-sites",
-        "imp": 1,
-        "clicks": 0,
-        "reason": "tag-unmapped:waste-disposal-sites"
+        "reason": "tag-unmapped:%E6%9E%9C%E7%89%A9%E6%B6%88%E8%B2%BB"
       }
     ]
   },
@@ -971,7 +1090,7 @@
       "programId": "s00000026609001",
       "name": "不動産担保ローンの審査は無料で最短即日！丸の内AMS（エーエムエス）",
       "vertical": "housing",
-      "status": "applied",
+      "status": "approved",
       "confirmedEpc": 254.9,
       "rewardYen": 3000,
       "shared": false,
@@ -1068,15 +1187,15 @@
           ]
         },
         {
-          "key": "bowling-alley-public",
-          "title": "ボウリング場数（公共）",
+          "key": "hair-coloring-consumption-expenditure",
+          "title": "ヘアカラーリング剤消費支出額",
           "matched": [
             "リング"
           ]
         },
         {
-          "key": "hair-coloring-consumption-expenditure",
-          "title": "ヘアカラーリング剤消費支出額",
+          "key": "rental-car-consumption-expenditure",
+          "title": "レンタカー・カーシェアリング料金消費支出額",
           "matched": [
             "リング"
           ]
@@ -1178,13 +1297,6 @@
       "registered": false,
       "suggestedRankingKeys": [
         {
-          "key": "bowling-alley-public",
-          "title": "ボウリング場数（公共）",
-          "matched": [
-            "リング"
-          ]
-        },
-        {
           "key": "hair-coloring-consumption-expenditure",
           "title": "ヘアカラーリング剤消費支出額",
           "matched": [
@@ -1194,6 +1306,13 @@
         {
           "key": "rental-car-consumption-expenditure",
           "title": "レンタカー・カーシェアリング料金消費支出額",
+          "matched": [
+            "リング"
+          ]
+        },
+        {
+          "key": "sports-participation-rate-bowling",
+          "title": "ボウリングの行動者率",
           "matched": [
             "リング"
           ]
