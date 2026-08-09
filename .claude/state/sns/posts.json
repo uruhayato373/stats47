@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 632,
-    "nextId": 818
+    "count": 633,
+    "nextId": 819
   },
   "posts": [
     {
@@ -14675,6 +14675,18 @@
       "content_key": "municipal-general-administration-staff",
       "post_url": "https://www.instagram.com/p/DbzD8KlICRK/",
       "posted_at": "2026-08-08T23:38:10Z"
+    },
+    {
+      "id": 818,
+      "status": "posted",
+      "created_at": "2026-08-09T04:17:30.151Z",
+      "updated_at": "2026-08-09T04:17:30.151Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "average-weight-primary-school-fifth-grade-female",
+      "post_url": "https://www.instagram.com/p/Dbzj5_pDsce/",
+      "posted_at": "2026-08-09T04:17:30Z"
     }
   ],
   "nextId": 580,
