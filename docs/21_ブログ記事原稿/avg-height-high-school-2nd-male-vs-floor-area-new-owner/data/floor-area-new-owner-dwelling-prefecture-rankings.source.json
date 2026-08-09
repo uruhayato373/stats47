@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "floor-area-new-owner-dwelling",
+  "year": "2024",
+  "unit": "ｍ2",
+  "label": "着工新設持ち家住宅の床面積",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/floor-area-new-owner-dwelling/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug avg-height-high-school-2nd-male-vs-floor-area-new-owner --keys floor-area-new-owner-dwelling --data-name floor-area-new-owner-dwelling-prefecture-rankings",
+  "fetchedAt": "2026-08-09T14:36:19.715Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

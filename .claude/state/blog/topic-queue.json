@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T11:23:24.258Z",
+  "generatedAt": "2026-08-09T14:36:12.556Z",
   "gscWeek": "2026-W32",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
