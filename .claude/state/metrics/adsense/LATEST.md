@@ -1,34 +1,34 @@
-# AdSense Latest — 2026-W31
+# AdSense Latest — 2026-W32
 
 ## 確定7日 KPI (finalized7d・前週比は直前の重複しない7日)
 
 | Metric | 確定7日 | 前週比 |
 |---|---|---|
-| Earnings | 146.00 ▲ |  (+13.2%) |
-| Page Views | 4054 ▲ |  (+6.2%) |
-| Page RPM | 36.000 ▲ | |
-| Impressions | 4204 ▲ |  (+3.3%) |
-| 公式 Imp RPM | ¥35.00 | |
-| Clicks | 36 ▲ |  (+24.1%) |
-| CTR | 0.86% · | |
+| Earnings | 130.00 ▼ |  (-11.0%) |
+| Page Views | 4469 ▲ |  (+10.2%) |
+| Page RPM | 29.000 ▼ | |
+| Impressions | 4152 ▼ |  (-1.2%) |
+| 公式 Imp RPM | ¥31.00 | |
+| Clicks | 34 ▼ |  (-5.6%) |
+| CTR | 0.82% · | |
 | 公式 CPC | ¥4.00 | |
-| Viewability | 54.3% ▼ | |
-| Ad Requests | 15483 | |
-| Coverage | 38.5% | |
+| Viewability | 51.7% ▼ | |
+| Ad Requests | 16508 | |
+| Coverage | 36.1% | |
 
 ## 収益分解
 
-- Impression density (imp/PV): **1.037** (前週 1.066)
-- Viewable imp / PV: **0.563**
-- 公式 Imp RPM: ¥35.00 / 公式 CPC: ¥4.00
+- Impression density (imp/PV): **0.929** (前週 1.037)
+- Viewable imp / PV: **0.481**
+- 公式 Imp RPM: ¥31.00 / 公式 CPC: ¥4.00
 
 ## デバイス別（確定7日 / 前週比）
 
 | Platform | RPM | Viewability | 公式CPC | 収益/click(legacy) | imp/PV | Earnings |
 |---|---|---|---|---|---|---|
-| Desktop | ¥38.00 ▲ | 56.6% ▼ | ¥12.00 | ¥11.78 | 1.195 | ¥106.00 (+20.5%) |
-| Mobile | ¥30.00 ▲ | 44.2% ▼ -7.0pp | ¥1.00 | ¥1.42 | 0.635 | ¥37.00 (-2.6%) |
-| Tablet | ¥73.00 ▲ | 52.0% ▼ -10.7pp | ¥3.00 | ¥3.00 | 2.244 | ¥3.00 (0.0%) |
+| Desktop | ¥33.00 ▼ | 55.0% ▼ | ¥21.00 | ¥21.40 | 1.010 | ¥107.00 (+0.9%) |
+| Mobile | ¥18.00 ▼ | 39.9% ▼ -4.3pp | ¥1.00 | ¥0.72 | 0.700 | ¥21.00 (-43.2%) |
+| Tablet | ¥40.00 ▼ | 30.0% ▼ -22.0pp | ¥0.00 | ¥0.00 | 1.000 | ¥2.00 (-33.3%) |
 
 履歴: [`history.csv`](./history.csv) / [`history-devices.csv`](./history-devices.csv) (デバイス別) / [`history-units.csv`](./history-units.csv) (ユニット別) / [`history-formats.csv`](./history-formats.csv) (フォーマット別) / [`history-placements.csv`](./history-placements.csv) (配置別) / [`history-bid-types.csv`](./history-bid-types.csv) (入札型別)
 

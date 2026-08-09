@@ -1,0 +1,383 @@
+{
+  "week_id": "2026-W32",
+  "year": 2026,
+  "week": 32,
+  "generated_at": "2026-08-09T11:22:32.455Z",
+  "schemaVersion": 2,
+  "weekId": "2026-W32",
+  "anchor": "2026-08-09",
+  "ranges": {
+    "weekId": "2026-W32",
+    "anchor": "2026-08-09",
+    "delayDays": {
+      "gsc": 3,
+      "ga4": 1,
+      "adsense": 1
+    },
+    "ga4": {
+      "this": {
+        "start": "2026-08-02",
+        "end": "2026-08-08"
+      },
+      "prev": {
+        "start": "2026-07-26",
+        "end": "2026-08-01"
+      },
+      "finalized7d": {
+        "periodStart": "2026-08-02",
+        "periodEnd": "2026-08-08",
+        "windowDays": 7
+      },
+      "previous7d": {
+        "periodStart": "2026-07-26",
+        "periodEnd": "2026-08-01",
+        "windowDays": 7
+      }
+    },
+    "gsc": {
+      "this": {
+        "start": "2026-07-31",
+        "end": "2026-08-06"
+      },
+      "prev": {
+        "start": "2026-07-24",
+        "end": "2026-07-30"
+      },
+      "finalized7d": {
+        "periodStart": "2026-07-31",
+        "periodEnd": "2026-08-06",
+        "windowDays": 7
+      },
+      "previous7d": {
+        "periodStart": "2026-07-24",
+        "periodEnd": "2026-07-30",
+        "windowDays": 7
+      }
+    }
+  },
+  "finalized7d": {
+    "gsc": {
+      "periodStart": "2026-07-31",
+      "periodEnd": "2026-08-06",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:32.455Z",
+      "source": "gsc",
+      "limitations": [
+        "取得遅延 3 日 (anchor=2026-08-09)"
+      ],
+      "kpis": {
+        "clicks": 866,
+        "impressions": 25293,
+        "ctr": 0.03423872217609615,
+        "position": 8.116514450638515
+      },
+      "coverage": {
+        "status": "complete",
+        "missingDates": [],
+        "presentCount": 7,
+        "expectedCount": 7
+      },
+      "status": "complete",
+      "insufficientReason": null
+    },
+    "ga4": {
+      "periodStart": "2026-08-02",
+      "periodEnd": "2026-08-08",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:32.455Z",
+      "source": "ga4",
+      "limitations": [
+        "取得遅延 1 日 (anchor=2026-08-09)",
+        "KPI は country=Japan clean slice。raw は pollution 監視専用"
+      ],
+      "kpis": {
+        "activeUsers": 2141,
+        "sessions": 2512,
+        "engagedSessions": 1545
+      },
+      "pollution": {
+        "rawSessions": 4698,
+        "jpSessions": 2512,
+        "pollutedSessions": 2186,
+        "pollutedPct": 46.5
+      }
+    }
+  },
+  "previous7d": {
+    "gsc": {
+      "periodStart": "2026-07-24",
+      "periodEnd": "2026-07-30",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:32.455Z",
+      "source": "gsc",
+      "limitations": [
+        "取得遅延 3 日 (anchor=2026-08-09)"
+      ],
+      "kpis": {
+        "clicks": 912,
+        "impressions": 26816,
+        "ctr": 0.03400954653937947,
+        "position": 8.123098150357995
+      },
+      "coverage": {
+        "status": "complete",
+        "missingDates": [],
+        "presentCount": 7,
+        "expectedCount": 7
+      },
+      "status": "complete"
+    },
+    "ga4": {
+      "periodStart": "2026-07-26",
+      "periodEnd": "2026-08-01",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:32.455Z",
+      "source": "ga4",
+      "limitations": [
+        "取得遅延 1 日 (anchor=2026-08-09)",
+        "KPI は country=Japan clean slice。raw は pollution 監視専用"
+      ],
+      "kpis": {
+        "activeUsers": 2068,
+        "sessions": 2506,
+        "engagedSessions": 1700
+      }
+    }
+  },
+  "ga4": {
+    "channels": [
+      {
+        "channel": "Organic Search",
+        "thisUsers": 1709,
+        "prevUsers": 1765,
+        "userDelta": -56,
+        "userDeltaPct": -3.1728045325779037,
+        "thisSessions": 2009,
+        "prevSessions": 2146,
+        "thisEngagedSessions": 1346,
+        "prevEngagedSessions": 1495,
+        "thisEngagementRate": 0.6699850671976108
+      },
+      {
+        "channel": "Unassigned",
+        "thisUsers": 145,
+        "prevUsers": 24,
+        "userDelta": 121,
+        "userDeltaPct": 504.1666666666667,
+        "thisSessions": 158,
+        "prevSessions": 28,
+        "thisEngagedSessions": 3,
+        "prevEngagedSessions": 11,
+        "thisEngagementRate": 0.0189873417721519
+      },
+      {
+        "channel": "Direct",
+        "thisUsers": 140,
+        "prevUsers": 118,
+        "userDelta": 22,
+        "userDeltaPct": 18.64406779661017,
+        "thisSessions": 170,
+        "prevSessions": 140,
+        "thisEngagedSessions": 99,
+        "prevEngagedSessions": 75,
+        "thisEngagementRate": 0.5823529411764706
+      },
+      {
+        "channel": "Referral",
+        "thisUsers": 92,
+        "prevUsers": 118,
+        "userDelta": -26,
+        "userDeltaPct": -22.033898305084744,
+        "thisSessions": 105,
+        "prevSessions": 135,
+        "thisEngagedSessions": 73,
+        "prevEngagedSessions": 93,
+        "thisEngagementRate": 0.6952380952380952
+      },
+      {
+        "channel": "AI Assistant",
+        "thisUsers": 44,
+        "prevUsers": 35,
+        "userDelta": 9,
+        "userDeltaPct": 25.71428571428571,
+        "thisSessions": 56,
+        "prevSessions": 46,
+        "thisEngagedSessions": 23,
+        "prevEngagedSessions": 19,
+        "thisEngagementRate": 0.4107142857142857
+      },
+      {
+        "channel": "Cross-network",
+        "thisUsers": 7,
+        "prevUsers": 0,
+        "userDelta": 7,
+        "userDeltaPct": null,
+        "thisSessions": 7,
+        "prevSessions": 0,
+        "thisEngagedSessions": 0,
+        "prevEngagedSessions": 0,
+        "thisEngagementRate": 0
+      },
+      {
+        "channel": "Organic Social",
+        "thisUsers": 4,
+        "prevUsers": 8,
+        "userDelta": -4,
+        "userDeltaPct": -50,
+        "thisSessions": 7,
+        "prevSessions": 11,
+        "thisEngagedSessions": 1,
+        "prevEngagedSessions": 7,
+        "thisEngagementRate": 0.14285714285714285
+      }
+    ],
+    "total": {
+      "thisUsers": 2141,
+      "prevUsers": 2068,
+      "thisSessions": 2512,
+      "prevSessions": 2506,
+      "thisEngagedSessions": 1545,
+      "prevEngagedSessions": 1700,
+      "userDelta": 73,
+      "userDeltaPct": 3.5299806576402317,
+      "engagedSessionDelta": -155,
+      "engagedSessionDeltaPct": -9.117647058823529
+    },
+    "organic": {
+      "channel": "Organic Search",
+      "thisUsers": 1709,
+      "prevUsers": 1765,
+      "userDelta": -56,
+      "userDeltaPct": -3.1728045325779037,
+      "thisSessions": 2009,
+      "prevSessions": 2146,
+      "thisEngagedSessions": 1346,
+      "prevEngagedSessions": 1495,
+      "thisEngagementRate": 0.6699850671976108
+    },
+    "pollution": {
+      "rawSessions": 4698,
+      "jpSessions": 2512,
+      "pollutedSessions": 2186,
+      "pollutedPct": 46.5
+    },
+    "slice": "country=Japan (clean)"
+  },
+  "gsc": {
+    "coverage": {
+      "finalized7d": {
+        "status": "complete",
+        "missingDates": [],
+        "presentCount": 7,
+        "expectedCount": 7
+      },
+      "previous7d": {
+        "status": "complete",
+        "missingDates": [],
+        "presentCount": 7,
+        "expectedCount": 7
+      }
+    },
+    "kpiComplete": true,
+    "insufficientReason": null,
+    "total": {
+      "thisClicks": 866,
+      "prevClicks": 912,
+      "clickDelta": -46,
+      "clickDeltaPct": -5.0438596491228065,
+      "thisImpressions": 25293,
+      "prevImpressions": 26816,
+      "impressionDelta": -1523,
+      "thisCtr": 0.03423872217609615,
+      "prevCtr": 0.03400954653937947,
+      "thisPosition": 8.116514450638515,
+      "prevPosition": 8.123098150357995
+    },
+    "topQueries": [
+      {
+        "query": "うどん 消費量 ランキング",
+        "clicks": 12,
+        "impressions": 47,
+        "ctr": 0.2553191489361702,
+        "position": 3.574468085106383
+      },
+      {
+        "query": "子育てしやすい県ランキング",
+        "clicks": 12,
+        "impressions": 34,
+        "ctr": 0.35294117647058826,
+        "position": 2.3823529411764706
+      },
+      {
+        "query": "stats47",
+        "clicks": 11,
+        "impressions": 12,
+        "ctr": 0.9166666666666666,
+        "position": 1
+      },
+      {
+        "query": "うどん消費量ランキング",
+        "clicks": 11,
+        "impressions": 66,
+        "ctr": 0.16666666666666666,
+        "position": 3.484848484848485
+      },
+      {
+        "query": "うどん消費量 都道府県",
+        "clicks": 3,
+        "impressions": 15,
+        "ctr": 0.2,
+        "position": 3.2666666666666666
+      },
+      {
+        "query": "うどん消費量ランキング 最新",
+        "clicks": 3,
+        "impressions": 4,
+        "ctr": 0.75,
+        "position": 2
+      },
+      {
+        "query": "うなぎ 消費量 都道府県",
+        "clicks": 3,
+        "impressions": 8,
+        "ctr": 0.375,
+        "position": 4.875
+      },
+      {
+        "query": "カツオ 漁獲量 ランキング",
+        "clicks": 3,
+        "impressions": 49,
+        "ctr": 0.061224489795918366,
+        "position": 5.244897959183674
+      },
+      {
+        "query": "コンビニ店舗数 都 道府県",
+        "clicks": 3,
+        "impressions": 40,
+        "ctr": 0.075,
+        "position": 6.575
+      },
+      {
+        "query": "図書館 蔵書数 ランキング",
+        "clicks": 3,
+        "impressions": 30,
+        "ctr": 0.1,
+        "position": 7.2
+      }
+    ]
+  },
+  "psi": {
+    "skipped": true,
+    "reason": "PSI_API_KEY 未設定"
+  },
+  "notes": [
+    "週次期間契約: KPI/WoW は finalized7d (GSC 2026-07-31〜2026-08-06 / GA4 2026-08-02〜2026-08-08) と直前の重複しない previous7d のみ",
+    "GA4 は country=Japan clean slice (raw は pollution 監視専用)",
+    "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計・Japan-only)",
+    "NSM 定義: docs/00_プロジェクト管理/02_収益化戦略.md"
+  ]
+}
