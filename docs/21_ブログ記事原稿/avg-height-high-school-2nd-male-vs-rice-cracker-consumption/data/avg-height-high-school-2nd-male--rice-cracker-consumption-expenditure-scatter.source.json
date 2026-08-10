@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "avg-height-high-school-2nd-male",
+  "pair": "rice-cracker-consumption-expenditure",
+  "pearsonR": 0.6631989588776819,
+  "partialRPopulation": 0.6530124285788065,
+  "unit": "cm × 円",
+  "label": "平均身長 と せんべい消費支出額 の関係",
+  "source": "r2:app/correlation/by-ranking-key/avg-height-high-school-2nd-male.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug avg-height-high-school-2nd-male-vs-rice-cracker-consumption --base avg-height-high-school-2nd-male --pair rice-cracker-consumption-expenditure --data-name avg-height-high-school-2nd-male--rice-cracker-consumption-expenditure"
+}
