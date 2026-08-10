@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-08-09T21:33:09.504Z",
+  "generatedAt": "2026-08-10T14:02:27.055Z",
   "gscSnapshot": "2026-W32",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2173,
-    "done": 214,
-    "needsRegen": 1959,
+    "done": 224,
+    "needsRegen": 1949,
     "needsByReason": {
-      "missing": 221,
-      "incomplete": 1673,
+      "missing": 218,
+      "incomplete": 1666,
       "blocker": 65
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 1,
-    "doneImpressions": 28756,
-    "needsImpressions": 10058,
+    "doneImpressions": 29588,
+    "needsImpressions": 9226,
     "opusReviewTier": 30
   },
   "entries": [
@@ -823,10 +823,15 @@
       "impressions": 105,
       "clicks": 3,
       "position": 8.54,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Sun, 09 Aug 2026 21:34:33 GMT",
+      "updatedAt": "2026-08-09T00:20:00.000Z"
     },
     {
       "rankingKey": "vacant-housing-rate",
@@ -958,10 +963,15 @@
       "impressions": 97,
       "clicks": 11,
       "position": 5.93,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [
+        "causal-insights",
+        "pref-len"
+      ],
+      "lastModified": "Sun, 09 Aug 2026 21:34:33 GMT",
+      "updatedAt": "2026-08-09T00:00:00.000Z"
     },
     {
       "rankingKey": "coffee-shop-consumption-expenditure",
@@ -983,15 +993,12 @@
       "impressions": 87,
       "clicks": 7,
       "position": 6.36,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 09 Aug 2026 21:34:33 GMT",
+      "updatedAt": "2026-08-09T18:50:00.000Z"
     },
     {
       "rankingKey": "paved-road-total-length",
@@ -1010,12 +1017,12 @@
       "impressions": 85,
       "clicks": 7,
       "position": 6.54,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 09 Aug 2026 21:34:33 GMT",
+      "updatedAt": "2026-08-09T00:00:00.000Z"
     },
     {
       "rankingKey": "single-person-household-ratio",
@@ -1036,15 +1043,12 @@
       "impressions": 83,
       "clicks": 9,
       "position": 5.65,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 09 Aug 2026 21:34:33 GMT",
+      "updatedAt": "2026-08-09T00:00:00.000Z"
     },
     {
       "rankingKey": "hobby-participation-rate-go",
@@ -1078,16 +1082,12 @@
       "impressions": 81,
       "clicks": 6,
       "position": 6.05,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "faq-speculation",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 09 Aug 2026 21:34:33 GMT",
+      "updatedAt": "2026-08-09T00:00:00.000Z"
     },
     {
       "rankingKey": "retail-store-count-alt",
@@ -1106,14 +1106,14 @@
       "impressions": 80,
       "clicks": 2,
       "position": 8.5,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Sun, 09 Aug 2026 21:34:33 GMT",
+      "updatedAt": "2026-08-09T00:00:00.000Z"
     },
     {
       "rankingKey": "konbu-consumption-expenditure",
@@ -1156,14 +1156,12 @@
       "impressions": 77,
       "clicks": 1,
       "position": 4.75,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 09 Aug 2026 21:34:34 GMT",
+      "updatedAt": "2026-08-09T00:00:00.000Z"
     },
     {
       "rankingKey": "garbage-total-output",
@@ -1247,10 +1245,14 @@
       "impressions": 71,
       "clicks": 8,
       "position": 5.72,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [
+        "causal-insights"
+      ],
+      "lastModified": "Sun, 09 Aug 2026 21:34:34 GMT",
+      "updatedAt": "2026-08-09T12:00:00.000Z"
     },
     {
       "rankingKey": "wine-consumption-quantity",
@@ -1281,15 +1283,12 @@
       "impressions": 66,
       "clicks": 2,
       "position": 6.03,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 09 Aug 2026 21:34:33 GMT",
+      "updatedAt": "2026-08-09T20:12:01.000Z"
     },
     {
       "rankingKey": "port-count",
@@ -1870,7 +1869,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "pickled-plum-consumption-expenditure",
@@ -1892,7 +1891,7 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "wind-power-turbine-count",
@@ -1907,7 +1906,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "katsuobushi-consumption-expenditure",
@@ -1922,7 +1921,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "mochi-consumption-quantity",
@@ -1946,7 +1945,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "treatment-rate-diabetes-outpatient",
@@ -1960,7 +1959,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "doctor-annual-income",
@@ -1975,7 +1974,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "flood-affected-rivers",
@@ -1990,7 +1989,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "hydroelectric-power-plant-count",
@@ -2002,7 +2001,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "midwife-count",
@@ -2016,7 +2015,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "mineral-water-consumption-expenditure",
