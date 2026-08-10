@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 635,
-    "nextId": 821
+    "count": 636,
+    "nextId": 822
   },
   "posts": [
     {
@@ -14711,6 +14711,18 @@
       "content_key": "physical-disability-rehabilitation-facility-residents-per-100k",
       "post_url": "https://www.instagram.com/p/Db1pDRJmnk6/",
       "posted_at": "2026-08-09T23:40:57Z"
+    },
+    {
+      "id": 821,
+      "status": "posted",
+      "created_at": "2026-08-10T04:37:40.083Z",
+      "updated_at": "2026-08-10T04:37:40.083Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "regular-cash-salary-female-pre2019",
+      "post_url": "https://www.instagram.com/p/Db2LAa_oF-T/",
+      "posted_at": "2026-08-10T04:37:40Z"
     }
   ],
   "nextId": 580,
