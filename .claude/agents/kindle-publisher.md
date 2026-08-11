@@ -35,6 +35,12 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
 - 生成（`products:kindle:generate`）・書き下ろし比率の確認（30% 規定）・台帳（`products:kindle:report` →
   `.claude/state/products/kindle-status.json`）。
 - 書き下ろし章（freshFile）の配線と、企画の manuscript 昇格（需要ファースト＝1 冊ずつ）。
+- **生成物の検証（`products:kindle:verify-epub`）を生成のたびに実行する**。EPUB は `.local` にしか
+  無く CI で検証できないため、これは**公開前のローカルゲート**であり自動では走らない。
+  2 層 = ① `epubcheck`（仕様適合）② レイアウト不変量（`scripts/verify-epub.mts`）。
+  ★**①だけでは足りない**: 3 症状（表紙が描画されない / 途中ページが出ない / 改ページ不適切）が
+  出ていた当時、epubcheck は全 32 冊で 0 error 0 warning だった（素の `<img>` 表紙は構文として
+  妥当で、壊れるのはレイアウトだけ）。正典: `coconala-product-standards.md` §8。
 - 出品前チェック（各書籍 `.local/.../READINESS.md`）の整備とオーナーへの受け渡し。
 
 ## 委譲
