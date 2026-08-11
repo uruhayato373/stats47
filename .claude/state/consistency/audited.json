@@ -1,23 +1,5 @@
 {
-  "hash": "2962a207893d6e504b48282ab619e0a74fe5920029d329e701c6750e4c707800",
-  "audited_at": "2026-08-11T22:44:29",
-  "files": [
-    ".claude/agents/data-ingester.md",
-    ".claude/agents/kindle-publisher.md",
-    ".claude/rules/blog-data-schema.md",
-    ".claude/rules/blog-svg-chart-standards.md",
-    ".claude/rules/coconala-product-standards.md",
-    ".claude/rules/unit-semantics-standards.md",
-    ".claude/scripts/ai-content/lib/number-audit.mjs",
-    ".claude/scripts/blog/regenerate-tile-maps.ts",
-    ".claude/scripts/lib/__tests__/article-factual-check.detection.test.mjs",
-    ".claude/scripts/lib/__tests__/map-value-match.test.mjs",
-    ".claude/scripts/lib/__tests__/svg-lint.tile-grid.test.mjs",
-    ".claude/scripts/lib/article-factual-check.mjs",
-    ".claude/scripts/lib/map-value-match.mjs",
-    ".claude/scripts/lib/svg-lint.mjs",
-    ".claude/scripts/lib/unit-semantics.mjs",
-    ".claude/skills/db/audit-units/SKILL.md",
-    "CLAUDE.md"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-08-11T23:34:01",
+  "files": []
 }
