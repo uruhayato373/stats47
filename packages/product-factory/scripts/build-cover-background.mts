@@ -144,6 +144,17 @@ async function main(): Promise<void> {
   const sea = SEA_PRESETS[seaKey];
   if (!sea) throw new Error(`未知の地: ${seaKey} (${Object.keys(SEA_PRESETS).join("/")})`);
   const scheme = arg("scheme");
+  // 強調する県 (2桁コードのカンマ区切り)。未指定なら全県を通常表示。
+  const highlightArg = arg("highlight");
+  const highlight = highlightArg
+    ? new Set(
+        highlightArg.split(",").map((s) => {
+          const c = s.trim().padStart(2, "0");
+          if (!/^(0[1-9]|[1-3]\d|4[0-7])$/.test(c)) throw new Error(`不正な県コード: ${s}`);
+          return c;
+        }),
+      )
+    : null;
   const tMin = Number(arg("t-min") ?? 0.18);
   const ramp = resolveRamp(scheme, tMin);
   const { rows, year, unit } = await fetchValues(metric, arg("year"));
@@ -164,12 +175,19 @@ async function main(): Promise<void> {
 
   const paths = geo.shapes
     .map((s) => {
-      const v = byCode.get(s.code5.slice(0, 2));
+      const pref2 = s.code5.slice(0, 2);
+      const v = byCode.get(pref2);
       const t = v === undefined ? null : (v - min) / (max - min || 1);
       const fill = t === null ? "#12233c" : ramp(t);
       const d = ringsToPath(s, scale, scale, ox, oy);
       if (!d) return "";
-      return `<path d="${d}" fill="${fill}" stroke="#071426" stroke-width="1.2" stroke-linejoin="round"/>`;
+      // --highlight: 指定県だけを残し他を沈める。地域別データブック (北海道 / 東北 / …) は
+      // 同じ指標だと 8 冊の表紙が **同一バイト**になり読者が区別できない
+      // (2026-08-12 に check-asset-policy の DUPLICATE_IMAGE が検出)。
+      // 指標を書名と無関係に散らすのではなく、書名どおり「その地域」を強調する。
+      const dim = highlight && !highlight.has(pref2);
+      const opacity = dim ? ' opacity="0.16"' : "";
+      return `<path d="${d}" fill="${fill}" stroke="#071426" stroke-width="1.2" stroke-linejoin="round"${opacity}/>`;
     })
     .filter(Boolean)
     .join("\n");
