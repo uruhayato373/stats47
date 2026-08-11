@@ -44,8 +44,8 @@ develop へ push すれば次のスケジュール実行から効く。cloud セ
 
 | したいこと | 操作 |
 |---|---|
-| 件数を変える | `aiContent.limit` を 1..10 で書き換える (baseline の枠にも効く) |
-| 回数を減らす | `aiContent.extraCrons` から cron を削る。空配列なら追加実行なし |
+| 件数を変える | `aiContent.limit` を書き換える (上限 MAX_LIMIT = 5・baseline の枠にも効く) |
+| 回数を**増減**する | `aiContent.extraCrons` を足し引きする。**産出を増やすときはここ** (件数を増やすと 1 件あたりが悪化する) |
 | 今すぐ止める | `until` を過去の日時にする、またはファイルごと削除する |
 | 延長する | `until` を延ばす |
 

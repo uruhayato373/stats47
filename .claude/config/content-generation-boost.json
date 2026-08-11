@@ -1,7 +1,7 @@
 {
   "_1_なにこれ": "日次生成 routine の期間限定 boost。ai-content-generate-daily.yml の gate job が読む。",
   "_2_止めたい": "until を過去の日時にするか、このファイルを削除して develop へ push する。次のスケジュール実行から baseline に戻る。",
-  "_3_件数を変えたい": "aiContent.limit を書き換えて develop へ push する。1..10。全スロット (baseline 含む) に効く。",
+  "_3_件数を変えたい": "aiContent.limit を書き換えて develop へ push する。上限は MAX_LIMIT = 5 (content-generation-boost.mjs)。全スロット (baseline 含む) に効く。産出を増やすときは件数ではなく extraCrons を増やす (_7 参照)。",
   "_4_回数を変えたい": "aiContent.extraCrons から cron を削る。空配列にすると追加実行は無くなり baseline の件数だけ増える。",
   "_5_使用量の見かた": "各 run の実績は .claude/state/metrics/claude-usage/history.csv に 1 行ずつ commit される。gate は run ごとに『boost 開始以降 N 回 / M 件 / 失敗 K 回』を job summary に出す。枠の消費率は測れないので、判断材料は失敗の増加。",
   "_6_勝手に止まる条件": "直近 maxConsecutiveFailures 回が連続失敗なら追加スロットを止め、baseline も既定件数へ戻る (枠に当たった後の空回りを防ぐ)。成功が 1 回入れば自動で復帰する。",
