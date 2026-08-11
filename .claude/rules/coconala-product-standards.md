@@ -130,7 +130,7 @@ Kindle Previewer で「表紙が描画されない / 途中ページが表示さ
 | **表紙は SVG ラップ**（`viewBox` + `preserveAspectRatio="xMidYMid meet"`）。素の `<img>` 禁止 | 幅にも高さにも収まり 1 ページに収まる。電子書籍の全面表紙の標準パターン |
 | cover item に **`properties="svg"`** | EPUB3 要件。漏れると epubcheck error |
 | cover.xhtml に **style.css をリンクしない** | `body{margin:0 5%}` が効くと表紙が中央からずれる |
-| OPF に **legacy `<meta name="cover">`** | Kindle 系がサムネイル識別に使う |
+| OPF に **legacy `<meta name="cover">`** | Kindle 系がサムネイル識別に使う。削除条件: `properties="cover-image"` だけで Previewer / KDP が表紙を認識することを実機確認できたとき (期限は設けない) |
 | nav に **landmarks**（cover / toc / bodymatter）+ **目次を spine に入れる** | 読書開始位置と目次ページの識別（KDP 推奨） |
 | CSS に `page-break-after:avoid`（見出し）/ `figure img{max-height}` / `orphans:widows` | 見出しの孤立と図のページ跨ぎを止める |
 | 扉と奥付は `.colophon{page-break-before:always}` で 2 ページに分ける | 1 ページに詰め込むと書籍の体裁にならない |

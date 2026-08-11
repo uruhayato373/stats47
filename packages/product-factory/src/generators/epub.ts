@@ -186,7 +186,8 @@ function opf(input: EpubInput): string {
     manifest.push(`<item id="${id}" href="images/${img.fileName}" media-type="image/png"/>`);
   }
   const desc = input.description ? `<dc:description>${xmlEscape(input.description)}</dc:description>` : "";
-  // EPUB3 の properties="cover-image" に加えて legacy meta も置く。
+  // EPUB3 の properties="cover-image" に加えて legacy meta も置く (削除条件: KDP / Kindle Previewer が
+  // properties="cover-image" だけで表紙サムネイルを認識することを実機確認できたとき。期限は設けない)。
   // Kindle 系は後者を見て表紙サムネイルを決めることがある。
   const coverMeta = input.coverPng ? `<meta name="cover" content="cover-image"/>` : "";
   return `<?xml version="1.0" encoding="UTF-8"?>
