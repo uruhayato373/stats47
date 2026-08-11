@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-08-11T03:38:25.582Z",
+  "generatedAt": "2026-08-11T20:42:43.533Z",
   "gscSnapshot": "2026-W32",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2173,
-    "done": 234,
-    "needsRegen": 1939,
+    "done": 244,
+    "needsRegen": 1929,
     "needsByReason": {
-      "incomplete": 1658,
-      "missing": 217,
+      "incomplete": 1649,
+      "missing": 216,
       "blocker": 64
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 1,
-    "doneImpressions": 30195,
-    "needsImpressions": 8619,
+    "doneImpressions": 30700,
+    "needsImpressions": 8114,
     "opusReviewTier": 30
   },
   "entries": [
@@ -1567,30 +1567,26 @@
       "impressions": 56,
       "clicks": 0,
       "position": 1.82,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Tue, 11 Aug 2026 03:39:38 GMT",
+      "updatedAt": "2026-08-11T00:00:00.000Z"
     },
     {
       "rankingKey": "chinese-noodles-consumption-expenditure",
       "impressions": 55,
       "clicks": 4,
       "position": 6.71,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "faq-speculation",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 11 Aug 2026 03:39:38 GMT",
+      "updatedAt": "2026-08-11T00:00:00.000Z"
     },
     {
       "rankingKey": "chocolate-snack-consumption-expenditure",
@@ -1650,14 +1646,14 @@
       "impressions": 52,
       "clicks": 1,
       "position": 5.81,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 11 Aug 2026 03:39:38 GMT",
+      "updatedAt": "2026-08-11T00:00:00.000Z"
     },
     {
       "rankingKey": "eggplant-consumption-expenditure",
@@ -1688,24 +1684,31 @@
       "impressions": 51,
       "clicks": 6,
       "position": 10.33,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [
+        "causal-insights",
+        "length-short",
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Tue, 11 Aug 2026 03:39:38 GMT",
+      "updatedAt": "2026-08-11T00:00:00.000Z"
     },
     {
       "rankingKey": "aquarium-count",
       "impressions": 50,
       "clicks": 2,
       "position": 6.22,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 11 Aug 2026 03:39:38 GMT",
+      "updatedAt": "2026-08-10T00:00:00.000Z"
     },
     {
       "rankingKey": "avg-salary-police-prefecture",
@@ -1726,15 +1729,14 @@
       "impressions": 49,
       "clicks": 3,
       "position": 6.1,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "causal-insights"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 11 Aug 2026 03:39:38 GMT",
+      "updatedAt": "2026-08-11T00:00:00.000Z"
     },
     {
       "rankingKey": "fishery-species-catch-pacific-saury",
@@ -1758,15 +1760,16 @@
       "impressions": 49,
       "clicks": 15,
       "position": 3.49,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 11 Aug 2026 03:39:38 GMT",
+      "updatedAt": "2026-08-11T00:00:00.000Z"
     },
     {
       "rankingKey": "katsuobushi-consumption-quantity",
@@ -1809,44 +1812,42 @@
       "impressions": 48,
       "clicks": 1,
       "position": 6.96,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 11 Aug 2026 03:39:38 GMT",
+      "updatedAt": "2026-08-11T00:00:00.000Z"
     },
     {
       "rankingKey": "miscellaneous-school-students",
       "impressions": 48,
       "clicks": 1,
       "position": 9.77,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 11 Aug 2026 03:39:38 GMT",
+      "updatedAt": "2026-08-11T00:00:00.000Z"
     },
     {
       "rankingKey": "fishery-workers",
       "impressions": 47,
       "clicks": 3,
       "position": 6.36,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Tue, 11 Aug 2026 03:39:38 GMT",
+      "updatedAt": "2026-08-11T00:00:00.000Z"
     },
     {
       "rankingKey": "hobby-participation-rate-cinema",
@@ -2236,7 +2237,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "tempura-fry-consumption-expenditure",
@@ -2251,7 +2252,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "drinking-out-consumption-expenditure",
@@ -2266,7 +2267,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "fish-paste-consumption-expenditure",
@@ -2281,7 +2282,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "general-hospital-bed-count",
@@ -2293,7 +2294,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "hobby-participation-rate-instrument",
@@ -2308,7 +2309,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "new-condo-starts",
@@ -2323,7 +2324,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "lotus-root-consumption-quantity",
@@ -2338,7 +2339,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "physicians-in-medical-facilities",
@@ -2351,7 +2352,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "standard-price-change-rate-commercial",
@@ -2366,7 +2367,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "university-graduates-job-ratio",
