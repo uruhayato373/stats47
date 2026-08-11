@@ -48,6 +48,18 @@ type LonLat = readonly [number, number];
 const here = dirname(fileURLToPath(import.meta.url)); // packages/product-factory/src/maps
 const TOPO_PATH = resolve(here, "../../../..", "apps/remotion/public/prefecture.topojson");
 
+/**
+ * Mercator の x/y は **同じ単位** (ラジアン) でなければ縦横比が壊れる。
+ *
+ * 2026-08-12 まで x に経度を「度」のまま使い、y だけ ln(tan(...)) のラジアン系だったため、
+ * 日本が横に約 57 倍 (= 180/π) 引き伸ばされ、**商品の地図がアスペクト比 0.079 の
+ * 平たい帯**になっていた (正しくは約 1.18)。既存テストは「点が枠内にあるか」しか見ておらず
+ * 素通りしていた。x を必ずラジアンに直す。
+ */
+function mercatorX(lonDeg: number): number {
+  return (lonDeg * Math.PI) / 180;
+}
+
 function mercatorY(latDeg: number): number {
   const lat = (latDeg * Math.PI) / 180;
   return Math.log(Math.tan(Math.PI / 4 + lat / 2));
@@ -97,7 +109,7 @@ export function loadPrefectureGeometry(targetWidth = 1000, clip?: ClipBox): Pref
     const lonLatRings = exteriorRings(feat.geometry);
     const kept = clip ? lonLatRings.filter((ring) => ringInClip(ring, clip)) : lonLatRings;
     if (kept.length === 0) continue;
-    const rings = kept.map((ring) => ring.map(([lon, lat]) => [lon, mercatorY(lat)] as LonLat));
+    const rings = kept.map((ring) => ring.map(([lon, lat]) => [mercatorX(lon), mercatorY(lat)] as LonLat));
     for (const ring of rings) {
       for (const [x, y] of ring) {
         if (x < minX) minX = x;

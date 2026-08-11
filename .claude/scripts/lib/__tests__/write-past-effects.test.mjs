@@ -21,6 +21,10 @@ import {
 import { parseBacklog, overdueDays } from "../scan-pending-improvements.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
+// ★fixture の deployed_at を書いた日に時刻を固定する。
+//   実時刻を使うと「deployed 2026-07-28 = まだ 2 日」が日が経つと 15 日になり、
+//   書いた日を過ぎた瞬間に必ず落ちる時限テストになる (2026-08-12 に実際に落ちた)。
+const FIXED_TODAY = "2026-07-30T00:00:00Z";
 const SCAN = path.join(PROJECT_ROOT, ".claude/scripts/lib/scan-pending-improvements.mjs");
 const MATRIX = path.join(PROJECT_ROOT, ".claude/scripts/lib/triage-matrix.mjs");
 const WRITER = path.join(PROJECT_ROOT, ".claude/scripts/lib/write-past-effects.mjs");
@@ -78,7 +82,7 @@ test("--overdue-days N は deployed_at を持つ行だけを残す", () => {
   withFixture(({ backlog }) => {
     const out = execFileSync("node", [SCAN, "--overdue-days", "14", "--status", "pending"], {
       encoding: "utf-8",
-      env: { ...process.env, IMPROVEMENT_BACKLOG_PATH: backlog },
+      env: { ...process.env, IMPROVEMENT_BACKLOG_PATH: backlog, IMPROVEMENT_TODAY: FIXED_TODAY },
     });
     const ids = JSON.parse(out).map((e) => e.section_id);
     assert.deepEqual(ids, ["FIX-OVERDUE-01"], "2 日しか経っていない行は落ちる");
@@ -89,7 +93,7 @@ test("triage-matrix の超過バケットが 0 以外になる (フィールド�
   withFixture(({ backlog }) => {
     const out = execFileSync("node", [MATRIX, "--format", "matrix"], {
       encoding: "utf-8",
-      env: { ...process.env, IMPROVEMENT_BACKLOG_PATH: backlog },
+      env: { ...process.env, IMPROVEMENT_BACKLOG_PATH: backlog, IMPROVEMENT_TODAY: FIXED_TODAY },
     });
     // | 1 | 今週 | 来週 | 来来週 | 超過 | 未定 |
     const row = out.split("\n").find((l) => /^\| 1 \|/.test(l));

@@ -177,7 +177,11 @@ function walkAndIndex(node, idx, source, currentLabel, currentUnit) {
           rank: extractRank(item),
           value: extractValue(item),
           unit: extractUnit(item) || currentUnit || null,
-          label: currentLabel,
+          // ★item 自身の label を優先する。flat 配列
+          //   `[{areaName,value,label,unit}]` (§1 の統一 schema) では currentLabel が空になり、
+          //   label 空 → mentionsForeignMetric が「未知指標」と判定して**全 claim を skip**していた
+          //   (2026-08-12 実測。値検出力ゼロの一因)。
+          label: (typeof item.label === "string" && item.label) || currentLabel,
           source,
         });
       }
@@ -552,11 +556,39 @@ const METRIC_PHRASE_RE =
  * 結び付かないときだけ skip する。「1位の神奈川県は1,780円」のように指標名を伴わない
  * 通常の文は従来どおり照合する (検出力を落とさない)。
  */
+/**
+ * 分母つき指標を示す修飾子 (「人口10万人あたり」「1人当たり」「1世帯当たり」…)。
+ *
+ * ★分母の情報は `unit` ではなく **label / subtitle** が持つ (2026-08-12 に実装を確認)。
+ *   metric config は `title: 糖尿病による死亡者数` / `subtitle: 人口10万人当たり` / `unit: 人` と
+ *   3 つに分けており、blog の data json も `label: 人口10万人あたり外国人数` / `unit: 人` と同じ形。
+ *   unit に分母を足すと「人口10万人当たり … 20.6人（人口10万対）」と二重表示になるので、
+ *   **unit は素のままが正しい**。判定は label 側で行う。
+ */
+const DENOMINATOR_QUALIFIER_RE =
+  /(人口\s*\d+\s*万?\s*人?\s*(?:あたり|当たり|対)|人口千対|[1１一]\s*人\s*(?:あたり|当たり)|[1１一]\s*世帯\s*(?:あたり|当たり)|[1１一]\s*件\s*(?:あたり|当たり)|per\s*capita)/;
+
+function hasDenominatorQualifier(s) {
+  return typeof s === "string" && DENOMINATOR_QUALIFIER_RE.test(s);
+}
+
 function mentionsForeignMetric(lead, knownLabels) {
   const phrases = lead.match(METRIC_PHRASE_RE);
   if (!phrases || phrases.length === 0) return false;
   const phrase = phrases[phrases.length - 1]; // claim に最も近い語
-  return !knownLabels.some((label) => label.includes(phrase) || phrase.includes(label));
+  // ★分母の有無が違う指標は「別の量」なので結び付けない (2026-08-12)。
+  //
+  //   data label「人口10万人あたり公害苦情受理件数」に本文の「公害苦情受理件数」は
+  //   部分文字列として含まれるため、素の includes だけだと**実数と人口当たりを同一視**して
+  //   比較してしまう。実測ではこれが誤検出の主因で、本文 12,811件 (実数) と
+  //   data 41.3件 (人口10万対) を「310 倍の乖離」と報告していた。本文は誤っていない。
+  //
+  //   修飾子が **両方にある / 両方に無い** ときだけ同じ指標とみなす。
+  const phraseHasDenom = hasDenominatorQualifier(lead);
+  return !knownLabels.some((label) => {
+    if (!(label.includes(phrase) || phrase.includes(label))) return false;
+    return hasDenominatorQualifier(label) === phraseHasDenom;
+  });
 }
 
 export function checkValueClaims(content, gt) {
@@ -566,21 +598,52 @@ export function checkValueClaims(content, gt) {
   const prefPattern = PREF_NAMES.join("|");
   const knownLabels = collectKnownLabels(gt);
 
-  // {pref}(都府県)?{≤20 文字, 句点なし}{複合数値}{単位実体}
-  // 単位実体は明示的なもののみ (裸の数値・位・年を除外)
-  // 単位実体: エネルギー単位 (MWh 等) を bare 単位より先に置き leftmost で取りこぼさない
+  // ★抽出は「県名を先に全部拾い、そのあと数値を独立に走査して直前の県に紐づける」方式にする。
+  //   旧実装は `(県名)…(数値)(単位)` を 1 つの正規表現で取っていたため、
+  //   「東京都の**1人**当たり県民所得は5,204,000円」で先に「1人」を claim として消費し、
+  //   lastIndex が進んだ結果 **本命の 5,204,000円 が一度も抽出されない**
+  //   (2026-08-12 にコード実読で確定。誤り 4 件中 1 件しか検出できていなかった)。
+  //   県名と数値を別々に走査すれば、この「アンカー消費」バグは構造的に起きない。
+  const UNIT_TAIL = `(MWh|kWh|GWh|kW|MW|Wh|円|人|世帯|戸|床|件|台|校|時間|ha|㎡|kg|%|％|社|店)`;
+  const prefRe = new RegExp(`(${prefPattern})(?:都|府|県)?`, "gi");
   // ★複合数値: 「4万5,897」「1億2,000万」のようにスケールを跨ぐ表記を 1 グループで取る
-  //   (旧実装は末尾の「5,897」だけを拾い、誤検出と検出漏れの両方を生んでいた)
-  const claimRe = new RegExp(
-    `(${prefPattern})(?:都|府|県)?[^、。\\n]{0,20}?` +
-      `((?:[\\d,]+(?:\\.\\d+)?\\s*(?:百万|兆|億|万|千)?)+)\\s*` +
-      `(MWh|kWh|GWh|kW|MW|Wh|円|人|世帯|戸|床|件|台|校|時間|ha|㎡|kg|%|％|社|店)`,
+  const numRe = new RegExp(
+    `((?:[\\d,]+(?:\\.\\d+)?\\s*(?:百万|兆|億|万|千)?)+)\\s*${UNIT_TAIL}`,
     "gi",
   );
 
+  /** 県名の出現位置 (数値をどの県に紐づけるかの手がかり)。 */
+  const prefHits = [];
+  for (const pm of body.matchAll(prefRe)) {
+    prefHits.push({ name: pm[1], end: pm.index + pm[0].length });
+  }
+  if (prefHits.length === 0) return warnings;
+
+  /** 県名と数値がこの距離以内なら「その県の主張」とみなす (旧実装の {0,20} と同じ意図)。 */
+  const PREF_PROXIMITY = 20;
+
   const seen = new Set();
-  let m;
-  while ((m = claimRe.exec(body)) !== null) {
+  for (const nm of body.matchAll(numRe)) {
+    // 直前で最も近い県名に紐づける。離れすぎていれば係り受け不明として捨てる
+    let anchor = null;
+    for (const p of prefHits) {
+      if (p.end <= nm.index && nm.index - p.end <= PREF_PROXIMITY) {
+        if (!anchor || p.end > anchor.end) anchor = p;
+      }
+    }
+    if (!anchor) continue;
+    // 県名から数値までに句点・改行があれば別の文 → 紐づけない
+    const between = body.slice(anchor.end, nm.index);
+    if (/[。\n]/.test(between)) continue;
+
+    // 旧実装の m[0] 相当 (県名 〜 単位まで) を組み立てる。以降の判定はこれを使う
+    const m = {
+      0: body.slice(anchor.end - anchor.name.length, nm.index + nm[0].length),
+      1: anchor.name,
+      2: nm[1],
+      3: nm[2],
+      index: anchor.end - anchor.name.length,
+    };
     const pref = m[1];
     const numeralRaw = m[2].trim();
     const unitTail = m[3];
@@ -591,11 +654,20 @@ export function checkValueClaims(content, gt) {
     // claim 周辺 (matched span + 直前 24 字 + 直後 16 字) に derived/per-capita マーカーがあれば skip。
     const valLead = body.slice(Math.max(0, m.index - 24), m.index);
     const valTrail = body.slice(m.index + m[0].length, m.index + m[0].length + 16);
-    if (
-      PER_CAPITA_SKIP.test(m[0]) || PER_CAPITA_SKIP.test(valLead) ||
-      DERIVED_VALUE_SKIP.test(m[0]) || DERIVED_VALUE_SKIP.test(valLead) ||
-      DERIVED_VALUE_SKIP.test(valTrail)
-    ) continue;
+
+    // ★「当たり」等が **指標名の一部** の場合は派生値ではない。
+    //   `1人当たり県民所得` `1世帯当たり貯蓄額` のような指標名は gt の label に実在するので、
+    //   マッチ内に既知 label があれば skip 理由から外す。これをしないと per-capita 系の
+    //   指標がまるごと照合対象から消える (2026-08-12 実測: 誤り 4 件中 3 件がこれで見逃されていた)。
+    const namesKnownMetric = [...knownLabels].some(
+      (label) => label.length >= 3 && m[0].includes(label),
+    );
+    const derivedHere =
+      PER_CAPITA_SKIP.test(valLead) ||
+      DERIVED_VALUE_SKIP.test(valLead) ||
+      DERIVED_VALUE_SKIP.test(valTrail) ||
+      (!namesKnownMetric && (PER_CAPITA_SKIP.test(m[0]) || DERIVED_VALUE_SKIP.test(m[0])));
+    if (derivedHere) continue;
 
     // この記事に ground truth が無い別指標を語っている箇所は照合できない → skip。
     // 窓は固定長ではなく **文単位** にする: 「A でも1位(10,098円)、7位の B も2位(9,799円)」のような
@@ -650,13 +722,17 @@ export function checkValueClaims(content, gt) {
     });
     if (matched) continue;
 
-    // 最近傍との乖離が 3 倍以上なら gross mismatch として WARN
+    // ★最近傍との乖離で WARN。旧実装は 3 倍以上しか見ておらず、**1.9 倍の誤りが無言で通っていた**
+    //   (2026-08-12 実測: 5,204,000 に対する 9,999,000 は 1.92 倍で素通り)。
+    //   一致判定 (±5%) を外れた時点で「data と違う」ので、そこを境にする。
+    //   閾値を上げ直すのではなく、誤検知が出るなら skip 条件側を精密にするのが筋。
+    const MISMATCH_RATIO = 1.05;
     let grossest = null;
     for (const f of comparable) {
       const base = factBaseValue(f);
       if (base === null || base === 0) continue;
       const r = claimBase > base ? claimBase / base : base / claimBase;
-      if (r >= 3 && (grossest === null || r > grossest.r)) {
+      if (r >= MISMATCH_RATIO && (grossest === null || r > grossest.r)) {
         grossest = { r, f };
       }
     }

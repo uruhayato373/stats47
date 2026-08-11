@@ -415,6 +415,25 @@ else
   echo -e "${GREEN}✅ ブログ記事の変更なし${NC}"
 fi
 
+# 6.45 単位セマンティクスの鏡ドリフト検査 (2026-08-12 追加 / .claude/rules/unit-semantics-standards.md)
+# 正典 packages/data-configs/src/unit/unit-semantics.ts から
+# .claude/scripts/lib/unit-semantics.mjs を自動生成している (.claude/scripts/** は素の node 実行で
+# TS を import できない)。手写しの二重実装はドリフトする — それが単位解釈 44 箇所の独立実装を生み、
+# 「千円 SSOT × 円 本文」の桁ずれ誤検出を招いた。どちらかだけの変更を止める。
+STAGED_UNIT=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^(packages/data-configs/src/unit/|\.claude/scripts/lib/unit-semantics\.mjs)" || true)
+
+if [ -n "$STAGED_UNIT" ]; then
+  echo -e "${GREEN}📏 単位セマンティクスの鏡チェック...${NC}"
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/generate-unit-semantics-mirror.ts --check > /tmp/unit-mirror.log 2>&1); then
+    echo -e "${GREEN}✅ 鏡は正典と一致${NC}"
+  else
+    cat /tmp/unit-mirror.log
+    echo -e "${RED}❌ 単位セマンティクスの鏡が正典とずれています${NC}"
+    echo -e "${YELLOW}💡 再生成: npx tsx packages/data-configs/scripts/generate-unit-semantics-mirror.ts${NC}"
+    exit 1
+  fi
+fi
+
 # 6.5 metric config の year 正規化チェック (2026-05-29 追加 / .claude/rules/estat-api.md「年の正規化」)
 echo -e "${GREEN}📅 metric years 正規化チェック...${NC}"
 STAGED_METRICS=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/metrics/.+\.ts$" | grep -v "index.ts" || true)

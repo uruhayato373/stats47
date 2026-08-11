@@ -25,6 +25,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { generateScatterSvg } from '../../../packages/svg-builder/src/charts/scatter.ts';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
+import { stripProvenance, withProvenance } from '../lib/svg-provenance.mjs';
 import {
   lintScatterData,
   lintScatterParity,
@@ -39,6 +40,9 @@ const PROJECT_ROOT = path.resolve(
 );
 const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
 const STAGE = path.join(PROJECT_ROOT, '.local/r2/app/blog');
+
+// provenance の扱いは lib に一本化 (テスト付き: __tests__/svg-provenance.test.mjs)。
+// ここに書き写すと二重実装になり、片方だけ直る事故を生む。
 const args = process.argv.slice(2);
 const PROBE_ONLY = args.includes('--probe-only');
 const REQUIRE_CANONICAL = args.includes('--require-canonical');
@@ -900,7 +904,16 @@ async function main() {
         return rec;
       }
       rec.newSize = viewBoxOf(newSvg);
-      if (oldSvg === newSvg && !repair && !sourceRepair) {
+      // ★比較は provenance コメントを外して行う (2026-08-12)。
+      //
+      //   `generate-article-charts.ts` は冒頭に
+      //   `<!-- data-source: <json> | generated: <ISO日時> -->` を埋める。日時は実行のたびに
+      //   変わるので、生バイト比較だと**内容が同一でも必ず「不一致」**になる。実測では
+      //   公開 78 枚のうち provenance 付き 9 枚だけが恒久的に rerender 判定になっており、
+      //   その 9 枚を上書きすると provenance が消えて劣化する (この gate は日次 cron に
+      //   配線されているので、放置すると毎日 9 枚を劣化させ続ける)。
+      //   gate の役目は「点や軸が変わったか」= 内容ドリフトの検出なので、metadata は外す。
+      if (stripProvenance(oldSvg) === stripProvenance(newSvg) && !repair && !sourceRepair) {
         rec.result = 'already-canonical';
         return rec;
       }
@@ -913,8 +926,12 @@ async function main() {
         const dir = path.join(STAGE, t.slug, 'data');
         fs.mkdirSync(dir, { recursive: true });
         rec.keys = [];
-        if (oldSvg !== newSvg) {
-          fs.writeFileSync(path.join(dir, `${t.base}.svg`), newSvg);
+        if (stripProvenance(oldSvg) !== stripProvenance(newSvg)) {
+          // provenance は落とさない (元にあれば引き継ぐ)。gate の比較対象からは外してある。
+          fs.writeFileSync(
+            path.join(dir, `${t.base}.svg`),
+            withProvenance(newSvg, oldSvg, `${t.base}.json`)
+          );
           rec.keys.push(`app/blog/${t.slug}/data/${t.base}.svg`);
         }
         if (repair) {

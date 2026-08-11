@@ -16,9 +16,13 @@ export const perCapitaPrefecturalIncomeH27: MetricConfig = {
   "entities": [
     "prefecture",
   ],
+  // 2026-08-12: 2020 のみだったため、ブログ per-capita-income-gap が引用する 2021年度に
+  // SSOT の裏付けが無い状態だった (記事「東京 5,214千円 / 2021年度」に対し R2 は 2020年度の
+  // 5,204千円しか持たない)。e-Stat は全年度を返し `years` は絞り込みなので、上端を伸ばしても
+  // 上流に 2021 が無ければ何も増えない (推測で値を作らない)。
   "years": {
     "from": 2020,
-    "to": 2020,
+    "to": 2021,
   },
   "yearFormat": "fiscal",
   "visualization": {

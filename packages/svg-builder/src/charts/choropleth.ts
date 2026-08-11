@@ -695,7 +695,12 @@ export function generateChoroplethSvg(
             `      <stop offset="${Math.round(s.t * 100)}%" stop-color="#${toHex(s.r)}${toHex(s.g)}${toHex(s.b)}"/>`,
         )
         .join("\n");
-  const barRight = LEGEND_X + LEGEND_BAR_W;
+  // 右端ラベル ("高い" 等) はバーの右に左揃えで置くので、その幅だけ凡例全体を左へ寄せる。
+  // 寄せないと CJK 2 文字 (font-size 11 で約 22px) がキャンバス W=720 の外へ出る
+  // (2026-08-11 実測: x=704 開始で 6px はみ出し、右端が切れて読めなかった)。
+  // ラベルは legendLabels でカスタムでき長さが変わるため、固定マージンではなく実測幅で寄せる。
+  const legendX = LEGEND_X - Math.ceil(textUnits(legendLabels[1]) * 11) - 2;
+  const barRight = legendX + LEGEND_BAR_W;
 
   // 目盛りラベルの衝突回避。単位が長い指標（"百万円" 等）で最小・中間・最大が
   // 重なって読めなくなる（実測: 5,802,432百万円 の 3 ラベルが完全に重なった）。
@@ -723,12 +728,12 @@ export function generateChoroplethSvg(
     `      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.7"/>`,
     `    </filter>`,
     `  </defs>`,
-    `  <text x="${LEGEND_X - 6}" y="${LEGEND_Y + 8}" font-family="${FONT_FAMILY}" font-size="11" fill="${CHROME_COLOR}" text-anchor="end">${esc(legendLabels[0])}</text>`,
-    `  <rect x="${LEGEND_X}" y="${LEGEND_Y}" width="${LEGEND_BAR_W}" height="${LEGEND_BAR_H}" rx="2" fill="url(#choropleth-lg)"/>`,
+    `  <text x="${legendX - 6}" y="${LEGEND_Y + 8}" font-family="${FONT_FAMILY}" font-size="11" fill="${CHROME_COLOR}" text-anchor="end">${esc(legendLabels[0])}</text>`,
+    `  <rect x="${legendX}" y="${LEGEND_Y}" width="${LEGEND_BAR_W}" height="${LEGEND_BAR_H}" rx="2" fill="url(#choropleth-lg)"/>`,
     `  <text x="${barRight + 6}" y="${LEGEND_Y + 8}" font-family="${FONT_FAMILY}" font-size="11" fill="${CHROME_COLOR}">${esc(legendLabels[1])}</text>`,
-    `  <text x="${LEGEND_X}" y="${LEGEND_Y + 24}" font-family="${FONT_FAMILY}" font-size="${tickFont}" fill="${CHROME_COLOR}">${loStr}${esc(unit)}</text>`,
+    `  <text x="${legendX}" y="${LEGEND_Y + 24}" font-family="${FONT_FAMILY}" font-size="${tickFont}" fill="${CHROME_COLOR}">${loStr}${esc(unit)}</text>`,
     showMid
-      ? `  <text x="${LEGEND_X + LEGEND_BAR_W / 2}" y="${LEGEND_Y + 24}" font-family="${FONT_FAMILY}" font-size="${tickFont}" fill="${CHROME_COLOR}" text-anchor="middle">${midStr}${esc(unit)}</text>`
+      ? `  <text x="${legendX + LEGEND_BAR_W / 2}" y="${LEGEND_Y + 24}" font-family="${FONT_FAMILY}" font-size="${tickFont}" fill="${CHROME_COLOR}" text-anchor="middle">${midStr}${esc(unit)}</text>`
       : "",
     `  <text x="${barRight}" y="${LEGEND_Y + 24}" font-family="${FONT_FAMILY}" font-size="${tickFont}" fill="${CHROME_COLOR}" text-anchor="end">${hiStr}${esc(unit)}</text>`,
   ].filter(Boolean);

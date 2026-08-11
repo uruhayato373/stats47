@@ -117,6 +117,48 @@ npm run test:run   --workspace=@stats47/product-factory
 
 - **SSOT = `packages/product-factory/src/channels/kindle/book-catalog.ts`**（`KINDLE_BOOKS`）。4 シリーズ = S1 論点読み物 / S2 テーマ別データブック / S3 地域別 / S4 ランキング大全。本文素材の SSOT は **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。生成物 `.local/kindle-books/<id>/v1/book.epub` は派生物（git 管理外・手編集を正典にしない）。
 - **主エンジンは EPUB3 リフロー型**（`src/generators/epub.ts`・jszip）。図表は章内ブロック画像として SVG→PNG 化して同梱（sharp・density 288）。カバーは satori→sharp で 1600×2560 自動生成。**KDP は電子で PDF を実質受け付けない**ため EPUB を採る（PDF 生成器 `databook-pdf.ts` は目次・画像・チャート非対応でそもそも書籍に不向き）。
+
+#### EPUB 構造の不変量（2026-08-12 確定・`__tests__/epub.test.ts` が固定）
+
+Kindle Previewer で「表紙が描画されない / 途中ページが表示されない / 改ページが不適切」の
+3 症状が出た。原因は**表紙が素の `<img>`** で、`max-width:100%` の幅合わせだと 1600×2560 の
+高さがページを超え、表紙が複数ページに割れて以降の境界をすべて汚していたこと。
+**epubcheck は 0 error のまま通る**（構文は妥当・レイアウトだけ壊れる）ので、構造テストで守る。
+
+| 不変量 | 理由 |
+|---|---|
+| **表紙は SVG ラップ**（`viewBox` + `preserveAspectRatio="xMidYMid meet"`）。素の `<img>` 禁止 | 幅にも高さにも収まり 1 ページに収まる。電子書籍の全面表紙の標準パターン |
+| cover item に **`properties="svg"`** | EPUB3 要件。漏れると epubcheck error |
+| cover.xhtml に **style.css をリンクしない** | `body{margin:0 5%}` が効くと表紙が中央からずれる |
+| OPF に **legacy `<meta name="cover">`** | Kindle 系がサムネイル識別に使う |
+| nav に **landmarks**（cover / toc / bodymatter）+ **目次を spine に入れる** | 読書開始位置と目次ページの識別（KDP 推奨） |
+| CSS に `page-break-after:avoid`（見出し）/ `figure img{max-height}` / `orphans:widows` | 見出しの孤立と図のページ跨ぎを止める |
+| 扉と奥付は `.colophon{page-break-before:always}` で 2 ページに分ける | 1 ページに詰め込むと書籍の体裁にならない |
+
+#### 検証は 2 層 (2026-08-12 配線)
+
+```bash
+npm run products:kindle:verify-epub  --workspace=@stats47/product-factory            # 全 32 冊
+npm run products:kindle:verify-epub  --workspace=@stats47/product-factory -- --book K-S1-01
+```
+
+| 層 | 何を見るか | 実装 |
+|---|---|---|
+| ① 仕様適合 | KDP の受理条件 | 外部の `epubcheck` (無ければスキップし、**その旨を出力する**) |
+| ② レイアウト不変量 | 上表の 6 項目を**生成物**に対して | `scripts/verify-epub.mts` |
+
+**②が要る理由は実測で確定している** — 3 症状が出ていた当時、epubcheck は
+**全 32 冊で 0 error 0 warning** だった。素の `<img>` 表紙は構文として妥当で、
+壊れるのはレイアウトだけなので仕様適合検査では原理的に捕まらない。
+検証器自体も、修正前の cover.xhtml を復元した EPUB で **3 error が発火すること**を実測済み。
+
+生成器側のユニットテスト (`src/generators/__tests__/epub.test.ts`) と同じ不変量を、
+こちらは**ビルド済み .epub に対して**見る (生成器を通さず手で置いた EPUB も検査できる)。
+
+- **カバー背景の SSOT**: `src/channels/kindle/assets/cover-backgrounds/<bookId>.jpg`（git 管理・
+  1600×2560 JPEG・**文字を含まない**）。生成は **Codex MCP の built-in imagegen**（`.claude/rules/codex-mcp.md`）で、
+  タイトル・著者は satori が**実テキストとして重ねる**。生成 AI に日本語や数字を焼き込ませない家ルールは
+  ブログ OGP と同一（`.claude/rules/ogp-image-standards.md` §5）。背景が無い書籍はシリーズ基調色の無地に degrade する。
 - **著作権規律（`data-provenance-standards.md` / pdf-book-survey と同一）**: 参照書籍からは論点・見せ方の型のみ。文言・図案・写真・編集構成は複製しない。数値は e-Stat / R2 の自社データのみ。自ブログの再利用は自己著作物。**ただし KDP の「Web で無料入手可能なコンテンツ」規定に備え、各書籍は再構成 + 30% 以上の書き下ろし（はじめに / おわりに / 章横断の合成分析）を必須**とし、validator が `newContentNote` 非空 + manuscript 以降の fresh 章 1 つ以上を強制する。KU（KDP Select 独占）登録は当面見送り（販売のみ・¥500-1,000）。
 - **CLI**: `products:kindle:{plan,validate,generate,report,kdp-listings}`（`generate --id K-S1-01`）。生成は `.local` への書き出しのみ。
 - **需要ファースト**: 一括生成せず 1 冊ずつ manuscript へ昇格 → 生成 → 人間が KDP 公開 → 4 週実測（KENP/販売数）→ 良ければ横展開。パイロット = **K-S1-01『実質手取りの地図』**（血肉 = 家計・所得系ブログ 9 本 + 書き下ろし）。書き下ろしの最終仕上げは `article-writer` → `blog-critic` の既存品質ゲートを通す。

@@ -160,6 +160,15 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
   変更assetをPUT+HEAD検証し、最後にmanifestをETag CAS (`If-Match` / `If-None-Match`)で更新する。
   commit失敗時は同lock内で旧asset/manifestへrollbackし、古いplanの再実行もremote SHA差で拒否する。
   stable URLはmutableなので`Cache-Control: max-age=0, must-revalidate`とする。
+  **★実態はそうなっていない (2026-08-12 実測)**: `storage.stats47.jp` は
+  `cache-control: max-age=14400` / `cf-cache-status: HIT` を返す。push スクリプトはどれも
+  `CacheControl` を設定していないので、これは **Cloudflare 側の設定** (custom domain の
+  Cache Rule か既定値)。したがって **R2 を更新しても公開 URL には最大 4 時間反映されない**。
+  切り分けは公開 URL ではなく **S3 API で実体を読む** (`GetObjectCommand` の `LastModified` と
+  中身) — 公開 URL が古くても push 失敗とは限らない (`age` / `cf-cache-status` / `last-modified`
+  を見れば判る)。即時反映は `purge-cache.ts --files <keys>` (要 `CLOUDFLARE_API_TOKEN` +
+  `CLOUDFLARE_ZONE_ID`。ローカル `.env.local` には無く CI かオーナー環境で実行する)。
+  方針どおりにするには Cloudflare 側の設定変更が要る (outward-facing なので単独で変えない)。
 - batch上限超過は暗黙clampせず失敗する。明示`--limit`はchanged集合へ適用するため、反映済みが
   次回currentになれば後続batchへ進む。旧manifest/manifest無しの初回移行は安全なhashがないため
   stale扱いし、件数制限付きで一度だけ移行する。

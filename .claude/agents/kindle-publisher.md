@@ -18,7 +18,10 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
   長文の書き下ろしは **`src/channels/kindle/manuscripts/<id>/*.md` (freshFile)**。生成物
   `.local/kindle-books/`（**git 管理外・公開 R2 へ置かない**）。永続/リモート D1 は持たない。
 - **主エンジンは EPUB3 リフロー型**。PDF は使わない（KDP 電子は PDF 実質不可・`databook-pdf.ts` は書籍に不向き）。
-  図表は SVG→PNG で章内ブロック画像として同梱。カバーは satori→sharp（1600×2560）。
+  図表は SVG→PNG で章内ブロック画像として同梱。カバーは satori→sharp（1600×2560）で、
+  **背景は Codex MCP imagegen が作る文字なし JPEG**（`assets/cover-backgrounds/<id>.jpg`・git 管理）、
+  タイトルは satori が実テキストで重ねる。**表紙は SVG ラップ必須**（素の `<img>` はページを跨いで割れる）。
+  EPUB 構造の不変量と背景の SSOT は `coconala-product-standards.md` §8、機械検査は `__tests__/epub.test.ts`。
 - **著作権 + KDP 規律**: 参照書籍からは論点・型のみ（文言/図案/編集構成を複製しない・`data-provenance-standards.md`）。
   数値は e-Stat/R2 の自社データ。自ブログ再利用は自己著作物。**再構成 + 30% 以上の書き下ろしが必須**
   （`generate` が比率を実測・未達は警告＝出品前提を満たさない）。KU（KDP Select 独占）登録は当面見送り。

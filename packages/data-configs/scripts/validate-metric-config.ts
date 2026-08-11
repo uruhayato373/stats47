@@ -27,6 +27,7 @@ import { COLOR_SCHEME_CATALOG, isKnownColorScheme } from "@stats47/types";
 
 import { CATEGORY_KEYS } from "../src/types";
 import { METRICS_REGISTRY } from "../src/registry";
+import { parseUnit } from "../src/unit/unit-semantics";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const METRICS_DIR = resolve(__dirname, "../src/metrics");
@@ -190,6 +191,36 @@ function main() {
   for (const r of rows) {
     if (r.unit === null || r.unit.trim() === "" || r.unit.trim() === "‐" || r.unit.trim() === "-") {
       errors.push(`[unit] ${r.file}: unit が空/プレースホルダ ("${r.unit}")`);
+    }
+  }
+
+  // [unit-vocab] warn: 単位セマンティクス (unit-semantics.ts) が解釈できない unit を可視化。
+  //
+  // ★解釈できない単位は換算 (千円↔円 等) が null になり、値照合が比較を諦める。
+  //   つまり「監査が素通りする指標」がここに出る。語彙に足すべきものと、
+  //   単位表記そのものを直すべきものを見分けて対応する (推測で語彙を増やすと誤換算が生まれる)。
+  //   正典: .claude/rules/unit-semantics-standards.md
+  {
+    const unknownByUnit = new Map<string, string[]>();
+    for (const r of rows) {
+      if (!r.unit || r.unit.trim() === "") continue;
+      if (parseUnit(r.unit).dimension !== null) continue;
+      const list = unknownByUnit.get(r.unit) ?? [];
+      list.push(r.key ?? r.file);
+      unknownByUnit.set(r.unit, list);
+    }
+    const interpretable = rows.length - [...unknownByUnit.values()].reduce((n, v) => n + v.length, 0);
+    if (unknownByUnit.size > 0) {
+      const sorted = [...unknownByUnit.entries()].sort((a, b) => b[1].length - a[1].length);
+      warns.push(
+        `[unit-vocab] 解釈できない unit ${sorted.length} 種 / ${rows.length - interpretable} 件 ` +
+          `(解釈率 ${((interpretable / rows.length) * 100).toFixed(1)}%): ` +
+          sorted
+            .slice(0, 10)
+            .map(([u, keys]) => `"${u}"×${keys.length}`)
+            .join(", ") +
+          (sorted.length > 10 ? ` …他 ${sorted.length - 10} 種` : ""),
+      );
     }
   }
 

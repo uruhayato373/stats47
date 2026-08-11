@@ -674,7 +674,56 @@ export function lintTileGridQuality(filename, svgContent, jsonData) {
         ' 上位 3 県のみを「1. 県名」の形で出す。svg-builder で再生成する'
     );
   }
+
+  // 8. テキストがキャンバス内に収まるか
+  //    2026-08-11 実測: 凡例の右端ラベル「高い」が x=704 から左揃えで置かれ、CJK 2 文字
+  //    (font-size 11 で約 22px) がキャンバス 720 を 6px はみ出して切れていた。
+  //    不変量 1-7 はどれもこれを検出できなかった (寸法・背景・配色・凡例の"位置"しか見ない)。
+  //    文字が切れて読めないのは明確な欠陥なので error にする。
+  for (const overflow of findTextOverflows(svg, CW)) {
+    errors.push(
+      `テキスト "${overflow.text}" がキャンバス右端をはみ出す (右端 ${overflow.right}px > ${CW}px) — ` +
+        '切れて読めなくなる。svg-builder 側でラベル幅ぶん内側に寄せて再生成する'
+    );
+  }
   return { errors, warnings };
+}
+
+/**
+ * SVG 内の `<text>` のうち、キャンバス幅をはみ出すものを返す。
+ *
+ * 文字幅は svg-builder の `textUnits` と同じヒューリスティック (半角 0.55em / 全角 1.0em) で
+ * 推定する。グリフの実測ではないので、**わずかな超過では発火させない** (許容 2px)。
+ * 目的は「ラベルがまるごと切れる」級の欠陥を捕まえることで、1px の精度ではない。
+ *
+ * @param {string} svg - SVG 文字列
+ * @param {number} canvasWidth - viewBox の幅
+ * @returns {Array<{ text: string, right: number }>}
+ */
+export function findTextOverflows(svg, canvasWidth) {
+  const TOLERANCE_PX = 2;
+  const out = [];
+  for (const m of String(svg).matchAll(/<text\s([^>]*)>([^<]*)<\/text>/g)) {
+    const attrs = m[1];
+    const label = m[2];
+    if (!label.trim()) continue;
+    const x = parseFloat((/\bx="([\d.-]+)"/.exec(attrs) || [])[1] ?? 'NaN');
+    if (!Number.isFinite(x)) continue;
+    const size = parseFloat((/font-size="([\d.]+)"/.exec(attrs) || [])[1] ?? '11');
+    const anchor = (/text-anchor="(end|middle|start)"/.exec(attrs) || [])[1] ?? 'start';
+    // 半角 0.55em / 全角 1.0em (svg-builder の textUnits と同一)
+    const widthEm = [...label].reduce(
+      (w, ch) => w + (/[ -~｡-ﾟ]/.test(ch) ? 0.55 : 1.0),
+      0
+    );
+    const width = widthEm * size;
+    const right =
+      anchor === 'end' ? x : anchor === 'middle' ? x + width / 2 : x + width;
+    if (right > canvasWidth + TOLERANCE_PX) {
+      out.push({ text: label, right: Math.round(right) });
+    }
+  }
+  return out;
 }
 
 /**

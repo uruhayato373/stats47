@@ -30,6 +30,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { generateChoroplethSvg } from "../../../packages/svg-builder/src/charts/index.ts";
 import { toShortColorScheme } from "../../../packages/types/src/color-scheme.ts";
+import { matchRate, parseMapDisplay } from "../lib/map-value-match.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -85,16 +86,8 @@ async function pMap<T, R>(items: T[], fn: (x: T) => Promise<R>, c: number): Prom
   return out;
 }
 
-/** 既存地図SVGの表示値(照合用): name -> "値+単位文字列"。区切りは全角／半角コロン両対応。 */
-function parseMapDisplay(svg: string): Map<string, string> {
-  const m = new Map<string, string>();
-  for (const t of [...svg.matchAll(/<title>([^<]*)<\/title>/g)].map((x) => x[1])) {
-    const mt = t.match(/^(.+?)\s*[:：]\s*(.+)$/);
-    if (!mt) continue;
-    m.set(mt[1].trim(), mt[2].trim());
-  }
-  return m;
-}
+// 照合の純粋関数は lib に切り出してテストで固定してある
+// (`.claude/scripts/lib/map-value-match.mjs` + `__tests__/`)。
 
 /** SSOT: ranking values.json の各年 partition */
 async function ssotPartitions(key: string) {
@@ -126,29 +119,6 @@ async function ssotPartitions(key: string) {
     colorScheme,
     isReversed,
   }));
-}
-
-/** SSOT値が既存地図の表示値と一致する割合(0..1)。絶対0.15 or 相対2% を一致とみなす。
- *  地図 title は「468万人」「207.3万kl」「43.6千戸」等の日本語短縮単位を含むため実値化して比較する。 */
-const JP_UNIT_MULT: Record<string, number> = { 千: 1e3, 万: 1e4, 億: 1e8, 兆: 1e12, 京: 1e16 };
-function matchRate(
-  ssotVals: Array<{ areaName: string; value: number }>,
-  display: Map<string, string>,
-): number {
-  let ok = 0;
-  let n = 0;
-  for (const v of ssotVals) {
-    const disp = display.get(v.areaName) ?? display.get(v.areaName.replace(/[都道府県]$/, ""));
-    if (!disp) continue;
-    n++;
-    // 数値 + 直後の日本語短縮単位(千/万/億/兆/京)を解析して実値化する
-    const m = disp.replace(/,/g, "").match(/(-?[\d.]+)\s*(京|兆|億|万|千)?/);
-    if (!m) continue;
-    const dval = parseFloat(m[1]) * (JP_UNIT_MULT[m[2] ?? ""] ?? 1);
-    // 短縮表記の丸め誤差を許容し相対2%で比較（生値同士・スケール短縮の両方を吸収）
-    if (Math.abs(v.value - dval) <= Math.max(0.15, Math.abs(v.value) * 0.02)) ok++;
-  }
-  return n >= 5 ? ok / n : 0;
 }
 
 async function main() {
@@ -197,7 +167,7 @@ async function main() {
           continue;
         }
         for (const p of parts) {
-          const rate = matchRate(p.values, display);
+          const rate = matchRate(p.values, display, p.unit);
           if (!best || rate > best.rate) best = { key, ...p, rate };
         }
       }

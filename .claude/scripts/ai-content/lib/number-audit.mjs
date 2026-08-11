@@ -45,8 +45,13 @@
  *
  * 正典: .claude/rules/ranking-content-standards.md §コンテンツ仕様「品質フロア」
  */
+import { scalePrefixMultiplier, unitScaleMultiplier } from "../../lib/unit-semantics.mjs";
 
 /** 数量詞 → 倍率 (本文中の「746.0万人」等を実数へ直すため) */
+/**
+ * @deprecated 単位の解釈は `.claude/scripts/lib/unit-semantics.mjs` が正典。
+ *   自前のスケール表を各所に置いたことが 44 箇所の独立実装を生んだ原因なので参照しない。
+ */
 const SCALE_SUFFIX = { 千: 1e3, 万: 1e4, 億: 1e8, 兆: 1e12 };
 
 /** 照合対象の下限。これ未満は順位・構成比・倍率と区別できないため対象外 */
@@ -82,13 +87,9 @@ function toHalfWidth(text) {
  */
 export function unitMultiplier(unit) {
   if (!unit) return 1;
-  if (unit.includes("兆")) return 1e12;
-  if (unit.includes("十億")) return 1e9;
-  if (unit.includes("百万")) return 1e6;
-  if (unit.includes("億")) return 1e8;
-  if (unit.includes("万")) return 1e4;
-  if (unit.includes("千")) return 1e3;
-  return 1;
+  // 解釈は正典へ委譲。解釈できない単位は 1 とみなす (ここは「倍率を掛けない」が正しい既定で、
+  // 換算の可否を問う conversionFactor とは役割が違う)。
+  return unitScaleMultiplier(unit) ?? 1;
 }
 
 /**
@@ -132,7 +133,7 @@ export function extractNumericClaims(text) {
       start: m.index,
       end: m.index + m[0].length,
       text: m[0].trim(),
-      value: base * (SCALE_SUFFIX[suffix] ?? 1),
+      value: base * (scalePrefixMultiplier(suffix) ?? 1),
       hasSuffix: Boolean(suffix),
       after,
       // 概数表現 (約 / およそ / ほぼ) が直前にあるか

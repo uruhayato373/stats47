@@ -94,6 +94,20 @@ describe("lintTileGridQuality — 不変量ごとに 1 つだけ壊す", () => {
       mutate: (s) => s.replace('<text x="20" y="60">', '<text x="20" y="40">高い順</text><text x="20" y="60">'),
       expect: /旧デザインの見出し/,
     },
+    {
+      // 2026-08-11 の実測欠陥そのもの: 凡例の右端ラベルが x=704 から左揃えで
+      // CJK 2 文字 (font-size 11 ≈ 22px) → 右端 726px > 720px で切れていた。
+      name: "★#8 右端ラベルがキャンバスをはみ出す (実測欠陥の再現)",
+      mutate: (s) =>
+        s.replace("</svg>", '<text x="704" font-size="11">高い</text></svg>'),
+      expect: /キャンバス右端をはみ出す/,
+    },
+    {
+      name: "★#8 タイル内の値ラベルがはみ出す (凡例以外の text でも発火する)",
+      mutate: (s) =>
+        s.replace("</svg>", '<text x="690" y="300" font-size="12">12,345千円</text></svg>'),
+      expect: /キャンバス右端をはみ出す/,
+    },
   ];
 
   for (const c of cases) {
@@ -105,6 +119,38 @@ describe("lintTileGridQuality — 不変量ごとに 1 つだけ壊す", () => {
       );
     });
   }
+
+  // ★誤検知しないことも同じ強さで固定する。誤検知を出すゲートは運用で無効化される。
+  describe("#8 はみ出し検査は正当なテキストで発火しない", () => {
+    const cases = [
+      {
+        name: "end 揃えの目盛りラベル (右端 = x なので収まる)",
+        add: '<text x="698" y="684" font-size="10" text-anchor="end">31.8％</text>',
+      },
+      {
+        name: "middle 揃えの中間ラベル",
+        add: '<text x="600" y="684" font-size="10" text-anchor="middle">28.5％</text>',
+      },
+      {
+        name: "右端ラベルを内側に寄せた現行の形 (右端 702px)",
+        add: '<text x="680" font-size="11">高い</text>',
+      },
+      {
+        name: "1px の超過は許容する (グリフ実測ではないため)",
+        add: '<text x="709" y="300" font-size="11">あ</text>',
+      },
+    ];
+    for (const c of cases) {
+      it(c.name, () => {
+        const r = run(goodSvg().replace("</svg>", `${c.add}</svg>`));
+        assert.deepEqual(
+          r.errors.filter((e) => /はみ出す/.test(e)),
+          [],
+          `誤検知した。実際: ${JSON.stringify(r.errors)}`,
+        );
+      });
+    }
+  });
 
   it("★#6 上位 3 県のリストが無い (warning — 旧デザインの疑い)", () => {
     const r = run(goodSvg().replace(/<text x="20"[^>]*>\d\. [^<]*<\/text>/g, ""));

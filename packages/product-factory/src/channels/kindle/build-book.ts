@@ -3,7 +3,7 @@
  * 章素材 (fresh=書き下ろし / blog=R2 記事) を集め、扉・本文・出典/免責を XHTML 化して EPUB を書き出す。
  * 生成先は .local/kindle-books/<id>/v1/ (git 管理外・KDP へのアップロードは人間工程)。
  */
-import { mkdirSync, writeFileSync, readFileSync } from "node:fs";
+import { mkdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
 import { resolve, join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { KindleBook, BookChapter } from "./types";
@@ -66,17 +66,27 @@ export interface BuildBookResult {
   readonly freshRatioOk: boolean;
 }
 
-/** 扉 (title page) の XHTML。 */
+/**
+ * 扉 (title page) の XHTML。
+ * 書名だけの扉と、奥付 (本書について) を **2 ページに分ける** (`.colophon` が改ページ)。
+ * 1 ページに詰め込むと書籍の体裁にならず、Previewer でも扉が本文の一部に見える。
+ * 見た目の指定は style.css の `.titlepage` / `.colophon` に置く (inline style を増やさない)。
+ */
 function titlePage(book: KindleBook): string {
-  const sub = book.subtitle ? `<p style="font-size:1.1em;color:#555;">${escapeText(book.subtitle)}</p>` : "";
-  return `<h1>${escapeText(book.title)}</h1>
+  const sub = book.subtitle
+    ? `<p class="subtitle">${escapeText(book.subtitle)}</p>`
+    : "";
+  return `<div class="titlepage">
+<h1>${escapeText(book.title)}</h1>
 ${sub}
-<p style="margin-top:2em;">${escapeText(book.author)}</p>
-<hr/>
+<p class="author">${escapeText(book.author)}</p>
+</div>
+<div class="colophon">
 <h2>本書について</h2>
 <p>${escapeText(book.concept)}</p>
 <p>${escapeText(book.newContentNote)}</p>
-<aside class="callout"><p class="callout-label">データについて</p><p>本書の数値はすべて e-Stat（政府統計の総合窓口）等で公開されている一次統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。</p></aside>`;
+<aside class="callout"><p class="callout-label">データについて</p><p>本書の数値はすべて e-Stat（政府統計の総合窓口）等で公開されている一次統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。</p></aside>
+</div>`;
 }
 
 /** 出典・免責ページの XHTML。 */
@@ -269,7 +279,15 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
   let coverPng: Buffer | undefined;
   if (!opts.skipCover) {
     try {
-      coverPng = await buildCoverPng({ title: book.title, subtitle: book.subtitle, series: book.series, author: book.author });
+      // 書籍ごとのカバー背景 (git 管理・文字なし 1600×2560 JPEG)。無ければシリーズ基調色の無地。
+      const bgPath = join(PF_ROOT, "src/channels/kindle/assets/cover-backgrounds", `${book.id}.jpg`);
+      coverPng = await buildCoverPng({
+        title: book.title,
+        subtitle: book.subtitle,
+        series: book.series,
+        author: book.author,
+        backgroundJpeg: existsSync(bgPath) ? readFileSync(bgPath) : undefined,
+      });
       writeFileSync(join(outDir, "cover.png"), coverPng);
     } catch (e) {
       // カバー失敗は EPUB 生成を止めない (KDP の Cover Creator で作れる)。
