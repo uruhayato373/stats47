@@ -108,6 +108,32 @@ export function summarizeClaudeExecution(entries) {
     }
   }
 
+  // 起動したが結果が返っていない Agent を数える。
+  //
+  // ★これが CI 特有の最頻の失敗形 (2026-08-09 の ai-content run 31342281865)。
+  // Agent tool の既定は background なので、`run_in_background: false` を付けずに複数起動して
+  // 「完了通知を待ちます」とターンを終えると、CI には次のターンが無いのでそこで run が終わる。
+  // Claude 自身は is_error=false で正常終了するため、成果 0 件の理由が log から読み取りにくい。
+  // tool_use に対応する tool_result が無い = 未完了、という決定可能な形で名指しする。
+  const agentUses = new Map(); // tool_use_id → subagent_type
+  const resolvedIds = new Set();
+  for (const entry of list) {
+    const content = entry.message?.content;
+    if (!Array.isArray(content)) continue;
+    for (const part of content) {
+      if (!part || typeof part !== 'object') continue;
+      if (part.type === 'tool_use' && part.name === 'Agent' && typeof part.id === 'string') {
+        agentUses.set(part.id, part.input?.subagent_type ?? 'unknown');
+      } else if (part.type === 'tool_result' && typeof part.tool_use_id === 'string') {
+        resolvedIds.add(part.tool_use_id);
+      }
+    }
+  }
+  const unfinishedAgents = [...agentUses]
+    .filter(([id]) => !resolvedIds.has(id))
+    .map(([, subagentType]) => subagentType)
+    .sort();
+
   const result = list.find((entry) => entry.type === 'result') ?? null;
   const numTurns = typeof result?.num_turns === 'number' ? result.num_turns : null;
 
@@ -136,6 +162,7 @@ export function summarizeClaudeExecution(entries) {
       typeof result?.permission_denials_count === 'number' ? result.permission_denials_count : null,
     toolUseCount,
     agentTypes: [...agentTypes].sort(),
+    unfinishedAgents,
     tokens: collectTokens(list),
     entryCounts: byType,
     errorText: truncate(redact(rawError)),
@@ -172,6 +199,20 @@ export function formatSummary(summary) {
   // 成功 run で「エラー文が無い」と言わない (正常な状態を異常のように見せない)
   if (summary.isError && !summary.errorText && !summary.earlyAssistantText) {
     lines.push('\nエラー文が log に無い。切り分けには show_full_output: "true" での再実行が要る。');
+  }
+  // 未完了 agent は is_error に関係なく報告する。この形の失敗は Claude 自身が
+  // 正常終了 (is_error=false) するので、is_error で条件を絞ると一番見たいときに出ない。
+  if (summary.unfinishedAgents.length > 0) {
+    const counts = {};
+    for (const t of summary.unfinishedAgents) counts[t] = (counts[t] ?? 0) + 1;
+    lines.push(
+      `\n[未完了 agent] ${summary.unfinishedAgents.length} 件が結果を返さないまま終了: ` +
+        `${JSON.stringify(counts)}`,
+    );
+    lines.push(
+      'Agent tool の既定は background。CI には次のターンが無いので、' +
+        '`run_in_background: false` を付けずに起動して完了を待つとそこで run が終わる。',
+    );
   }
   // ここは推測を出さず観測事実だけを述べる (原因の断定は人が実測してから)
   if (summary.isError && summary.toolUseCount === 0) {

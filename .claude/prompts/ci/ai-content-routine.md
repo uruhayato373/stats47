@@ -12,6 +12,14 @@ BEHAVIOR CONTRACT:
 - gate を緩めたり、監査結果を推測したりしない。
 - 数値は target ごとの prebuilt prompt にある観測値だけを使う。
 
+Agent の起動規約 (外すと成果が 0 件になる):
+
+- Agent tool は必ず `run_in_background: false` で起動する。**既定は background** なので、
+  省略すると「起動しただけ」でターンが終わる。「foreground で」と読み替えて省略しない。
+- 未完了の agent を残したままターンを終えない。CI に次のターンは無いので、
+  「完了通知を待つ」と述べて終えた時点で run ごと終了し、その key は 0 件になる。
+- 同時に起動する author は 1 件だけ。次の key はその key の critic が PASS してから着手する。
+
 実行手順:
 
 1. `.local/ci/ai-content-targets.txt` を読み、空なら変更せず終了する。

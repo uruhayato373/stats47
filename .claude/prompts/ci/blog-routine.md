@@ -12,6 +12,13 @@ BEHAVIOR CONTRACT:
 - ground truth にない数値を書かず、gate を緩めない。
 - author と critic を同じコンテキストで兼任しない。
 
+Agent の起動規約 (外すと成果が 0 件になる):
+
+- Agent tool は必ず `run_in_background: false` で起動する。**既定は background** なので、
+  省略すると「起動しただけ」でターンが終わる。「foreground で」と読み替えて省略しない。
+- 未完了の agent を残したままターンを終えない。CI に次のターンは無いので、
+  「完了通知を待つ」と述べて終えた時点で run ごと終了し、その slug は 0 件になる。
+
 実行手順:
 
 1. `.local/ci/blog-targets.txt` を読み、空なら変更せず終了する。
