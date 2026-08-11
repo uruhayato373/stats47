@@ -440,6 +440,14 @@
       ]
     },
     {
+      "name": "IMPROVEMENT_TODAY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "overdue 判定の「今日」を固定する (fixture 検証用)。未指定なら実時刻。秘匿値ではない"
+    },
+    {
       "name": "INSTAGRAM_ACCESS_TOKEN",
       "visibility": "secret",
       "contexts": [
