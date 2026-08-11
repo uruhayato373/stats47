@@ -1,14 +1,14 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-08-11T03:38:25.582Z
+- 生成: 2026-08-11T20:42:43.533Z
 - GSC snapshot: 2026-W32 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 
 ## サマリ (active ranking 全件 2173 件)
 
-- ✅ done: 234 件 (10.8% / impressions 計 30195)
-- ⏳ needs-regen: 1939 件 (impressions 計 8619)
-  - 内訳: incomplete 1658 / missing 217 / blocker 64
+- ✅ done: 244 件 (11.2% / impressions 計 30700)
+- ⏳ needs-regen: 1929 件 (impressions 計 8114)
+  - 内訳: incomplete 1649 / missing 216 / blocker 64
 - 🚫 not-eligible: 0 件 — 観測値が順位として成立しないので生成しない
 
 ## ⚠️ 公開済みだが接地データが不成立 (1 件)
@@ -21,43 +21,33 @@
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **3.2 件/日** (2026-07-30 からの平均)
-- 残り 1939 件 → **完了見込み 約 613 日**
+- 消化ペース: **4.0 件/日** (2026-07-30 からの平均)
+- 残り 1929 件 → **完了見込み 約 483 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
 | R2 last-modified | key | impressions |
 |---|---|---|
+| Tue, 11 Aug 2026 03:39:38 GMT | treatment-rate-osteoporosis-outpatient | 56 |
+| Tue, 11 Aug 2026 03:39:38 GMT | chinese-noodles-consumption-expenditure | 55 |
+| Tue, 11 Aug 2026 03:39:38 GMT | sports-participation-rate-tennis | 52 |
+| Tue, 11 Aug 2026 03:39:38 GMT | vaccination-recipients-disease | 51 |
+| Tue, 11 Aug 2026 03:39:38 GMT | aquarium-count | 50 |
+| Tue, 11 Aug 2026 03:39:38 GMT | commute-by-bicycle | 49 |
+| Tue, 11 Aug 2026 03:39:38 GMT | freshwater-clam-consumption-expenditure | 49 |
+| Tue, 11 Aug 2026 03:39:38 GMT | manufacturing-shipment-amount-per-establishment | 48 |
+| Tue, 11 Aug 2026 03:39:38 GMT | miscellaneous-school-students | 48 |
+| Tue, 11 Aug 2026 03:39:38 GMT | fishery-workers | 47 |
 | Mon, 10 Aug 2026 14:03:52 GMT | treatment-rate-mood-disorder-outpatient | 66 |
 | Mon, 10 Aug 2026 14:03:52 GMT | railway-station-count | 60 |
 | Mon, 10 Aug 2026 14:03:51 GMT | port-count | 66 |
 | Mon, 10 Aug 2026 14:03:51 GMT | public-enterprise-accounting-staff | 64 |
 | Mon, 10 Aug 2026 14:03:51 GMT | physical-therapist-annual-income | 61 |
-| Mon, 10 Aug 2026 14:03:51 GMT | flavor-seasoning-consumption-expenditure | 59 |
-| Mon, 10 Aug 2026 14:03:51 GMT | nurse-count | 59 |
-| Mon, 10 Aug 2026 14:03:51 GMT | hobby-participation-rate-reading | 58 |
-| Mon, 10 Aug 2026 14:03:51 GMT | croquette-consumption-expenditure | 57 |
-| Mon, 10 Aug 2026 14:03:51 GMT | major-lake-area | 57 |
-| Sun, 09 Aug 2026 21:34:34 GMT | tennis-court-public | 77 |
-| Sun, 09 Aug 2026 21:34:34 GMT | tobacco-consumption-expenditure | 71 |
-| Sun, 09 Aug 2026 21:34:33 GMT | pachinko-shop-density-per-10k | 105 |
-| Sun, 09 Aug 2026 21:34:33 GMT | dining-out-consumption-expenditure | 97 |
-| Sun, 09 Aug 2026 21:34:33 GMT | manufacturing-industry-added-value | 87 |
 
 ## 次にやるべき上位20 (impressions 降順)
 
 | impressions | key | reason | review | blockers |
 |---|---|---|---|---|
-| 56 | treatment-rate-osteoporosis-outpatient | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
-| 55 | chinese-noodles-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,faq-speculation,paren-number,missing-pref-commentary |
-| 52 | sports-participation-rate-tennis | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
-| 51 | vaccination-recipients-disease | missing | 🔴opus | - |
-| 50 | aquarium-count | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
-| 49 | commute-by-bicycle | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 49 | freshwater-clam-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 48 | manufacturing-shipment-amount-per-establishment | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 48 | miscellaneous-school-students | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
-| 47 | fishery-workers | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 47 | other-mushroom-consumption-quantity | incomplete | 🔴opus | paren-number,missing-pref-commentary |
 | 47 | voluntary-car-insurance-rate-vehicle | missing | 🔴opus | - |
 | 46 | wind-power-turbine-count | incomplete | 🔴opus | paren-number,faq-speculation,paren-number,missing-pref-commentary |
@@ -68,6 +58,16 @@
 | 44 | flood-affected-rivers | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 44 | hydroelectric-power-plant-count | incomplete | 🔴opus | missing-pref-commentary |
 | 44 | midwife-count | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
+| 44 | mineral-water-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 44 | national-pension-payment-rate | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 43 | black-tea-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 43 | whitebait-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 42 | final-disposal-site-remaining-capacity | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 42 | physical-disability-certificates-issued | incomplete | 🔴opus | paren-number,missing-pref-commentary |
+| 42 | shochu-consumption-quantity | incomplete | 🔴opus | missing-pref-commentary |
+| 41 | dried-shiitake-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 41 | elementary-school-teachers | missing | 🔴opus | - |
+| 41 | middle-school-students-1-per | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 
 > 生成 (author) は常に **sonnet** (frontmatter 固定・コストゲート)。critic は既定 **sonnet**、
 > `review` 列が 🔴opus の上位30件 (高GSC流入) + tier-1 が REVISE した件だけ
