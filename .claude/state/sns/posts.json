@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 625,
-    "nextId": 811
+    "count": 637,
+    "nextId": 823
   },
   "posts": [
     {
@@ -14591,6 +14591,150 @@
       "content_key": "total-assessed-land-area-ratio-field",
       "post_url": "https://www.instagram.com/p/Dbsrp0xmyY7/",
       "posted_at": "2026-08-06T12:10:32Z"
+    },
+    {
+      "id": 811,
+      "status": "posted",
+      "created_at": "2026-08-07T01:43:23.678Z",
+      "updated_at": "2026-08-07T01:43:23.678Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "shochu-consumption-expenditure",
+      "post_url": "https://www.instagram.com/p/DbuIrKUkQHo/",
+      "posted_at": "2026-08-07T01:43:23Z"
+    },
+    {
+      "id": 812,
+      "status": "posted",
+      "created_at": "2026-08-07T04:54:27.211Z",
+      "updated_at": "2026-08-07T04:54:27.211Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "craft-materials-consumption-expenditure",
+      "post_url": "https://www.instagram.com/p/DbueiyCljni/",
+      "posted_at": "2026-08-07T04:54:27Z"
+    },
+    {
+      "id": 813,
+      "status": "posted",
+      "created_at": "2026-08-07T11:02:29.617Z",
+      "updated_at": "2026-08-07T11:02:29.617Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "female-part-time-hourly-wage",
+      "post_url": "https://www.instagram.com/p/DbvIqXDFCjv/",
+      "posted_at": "2026-08-07T11:02:29Z"
+    },
+    {
+      "id": 814,
+      "status": "posted",
+      "created_at": "2026-08-07T23:42:15.049Z",
+      "updated_at": "2026-08-07T23:42:15.049Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "clam-consumption-quantity",
+      "post_url": "https://www.instagram.com/p/DbwfnGrEWgZ/",
+      "posted_at": "2026-08-07T23:42:15Z"
+    },
+    {
+      "id": 815,
+      "status": "posted",
+      "created_at": "2026-08-08T04:10:53.898Z",
+      "updated_at": "2026-08-08T04:10:53.898Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "new-graduate-scheduled-salary-university-male",
+      "post_url": "https://www.instagram.com/p/Dbw-Wr6li7c/",
+      "posted_at": "2026-08-08T04:10:53Z"
+    },
+    {
+      "id": 816,
+      "status": "posted",
+      "created_at": "2026-08-08T10:44:36.233Z",
+      "updated_at": "2026-08-08T10:44:36.233Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "lipstick-consumption-expenditure",
+      "post_url": "https://www.instagram.com/p/DbxraEHoDTm/",
+      "posted_at": "2026-08-08T10:44:36Z"
+    },
+    {
+      "id": 817,
+      "status": "posted",
+      "created_at": "2026-08-08T23:38:10.985Z",
+      "updated_at": "2026-08-08T23:38:10.985Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "municipal-general-administration-staff",
+      "post_url": "https://www.instagram.com/p/DbzD8KlICRK/",
+      "posted_at": "2026-08-08T23:38:10Z"
+    },
+    {
+      "id": 818,
+      "status": "posted",
+      "created_at": "2026-08-09T04:17:30.151Z",
+      "updated_at": "2026-08-09T04:17:30.151Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "average-weight-primary-school-fifth-grade-female",
+      "post_url": "https://www.instagram.com/p/Dbzj5_pDsce/",
+      "posted_at": "2026-08-09T04:17:30Z"
+    },
+    {
+      "id": 819,
+      "status": "posted",
+      "created_at": "2026-08-09T10:46:18.540Z",
+      "updated_at": "2026-08-09T10:46:18.540Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "air-fare-consumption-expenditure",
+      "post_url": "https://www.instagram.com/p/Db0QZqLFuzc/",
+      "posted_at": "2026-08-09T10:46:18Z"
+    },
+    {
+      "id": 820,
+      "status": "posted",
+      "created_at": "2026-08-09T23:40:57.823Z",
+      "updated_at": "2026-08-09T23:40:57.823Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "physical-disability-rehabilitation-facility-residents-per-100k",
+      "post_url": "https://www.instagram.com/p/Db1pDRJmnk6/",
+      "posted_at": "2026-08-09T23:40:57Z"
+    },
+    {
+      "id": 821,
+      "status": "posted",
+      "created_at": "2026-08-10T04:37:40.083Z",
+      "updated_at": "2026-08-10T04:37:40.083Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "regular-cash-salary-female-pre2019",
+      "post_url": "https://www.instagram.com/p/Db2LAa_oF-T/",
+      "posted_at": "2026-08-10T04:37:40Z"
+    },
+    {
+      "id": 822,
+      "status": "posted",
+      "created_at": "2026-08-10T11:16:47.595Z",
+      "updated_at": "2026-08-10T11:16:47.595Z",
+      "platform": "instagram",
+      "post_type": "original",
+      "domain": "ranking",
+      "content_key": "sheets-consumption-expenditure",
+      "post_url": "https://www.instagram.com/p/Db24rrIoBMw/",
+      "posted_at": "2026-08-10T11:16:47Z"
     }
   ],
   "nextId": 580,
