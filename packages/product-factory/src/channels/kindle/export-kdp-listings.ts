@@ -55,12 +55,24 @@ interface KdpListing {
   publishedAt: string | null;
 }
 
-/** KDP 内容紹介 (description) を concept から組む。 */
-function buildDescription(concept: string, newContentNote: string): string {
+/**
+ * KDP 内容紹介 (description) を組む。**読者が Amazon の商品ページで読む文章**。
+ *
+ * ★内部メモを流し込まない (2026-08-12 実測で 11 冊が該当)
+ *   もとは concept + newContentNote をそのまま連結していたため、商品ページに
+ *   「ココナラ商品 P-02 へ誘導するファネル」「(上位5+下位5・格差・全国平均)」という
+ *   社内の言葉が出る状態だった。`newContentNote` は KDP の 30% 規定を説明する**内部の記録**で、
+ *   読者に向けた文章ではないので紹介文には使わない。
+ *   混入は `__tests__/export-kdp-listings.test.ts` が機械的に弾く。
+ */
+function buildDescription(concept: string): string {
   return (
     `${concept}\n\n` +
-    `本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n` +
-    `${newContentNote}`
+    `【本書の構成】\n` +
+    `指標ごとに、上位5県と下位5県を左右に並べた図を添えています。両端を並べることで、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わります。図のあとには、なぜその分布になるのかを産業構造・地理・人口規模から読み解く解説を置きました。\n\n` +
+    `【データについて】\n` +
+    `本書の数値は、すべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて整理したものです。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。統計の定義や調査年によって数値の解釈が変わる場合があります。\n\n` +
+    `データは基準年を固定した買い切りの内容です。最新の数値や、本書で扱いきれなかった指標は、姉妹サイト stats47.jp（統計で見る都道府県）で無料でご覧いただけます。`
   );
 }
 
@@ -94,7 +106,7 @@ function main(): void {
       subtitle: b.subtitle ?? null,
       author: b.author,
       language: "ja",
-      description: buildDescription(b.concept, b.newContentNote),
+      description: buildDescription(b.concept),
       keywords: [...b.keywords].slice(0, 7),
       categories: prev?.categories ?? [], // 人手確定を保持
       categoriesVerified: prev?.categoriesVerified ?? false, // 未照合を既定にする (勝手に確定扱いしない)

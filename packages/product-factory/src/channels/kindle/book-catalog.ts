@@ -295,7 +295,7 @@ const S2_BOOKS: readonly KindleBook[] = S2_THEMES.map((t) => ({
   id: `K-S2-${t.suffix}`,
   series: "S2-theme-databook" as const,
   title: `データで見る47都道府県 ${t.label}`,
-  concept: `${t.label}テーマの主要ランキングを表とグラフのダイジェストで読む書籍版。詳細な全指標データ (Excel/PowerPoint) はココナラ商品 ${t.pack} へ誘導するファネル。`,
+  concept: `${t.label}に関わる主要な統計を、県ごとの上位・下位が一目で分かる図とともに読み解くデータブック。指標ごとに「なぜその分布になるのか」を産業構造や地理から解説します。`,
   author: AUTHOR,
   chapters: [
     // 書き下ろし章 (manuscripts/<id>/*.md)。無い書籍はインラインの導入へ degrade する。
@@ -416,7 +416,7 @@ const S4_BOOKS: readonly KindleBook[] = [
     series: "S4-ranking-compendium",
     title: "47都道府県ランキング大全 — 意外な1位・最下位",
     concept:
-      "全2,200超指標から「意外な1位・最下位」を厳選した横断ランキング集。競合 (とどラン書籍版) が先行する最激戦ゾーンのため、S1-S3 の実測が良好な場合のみ着手する。",
+      "分野をまたいで集めた統計のなかから、思わず人に話したくなる「意外な1位・最下位」を選び抜いた一冊。人口の多い県が上位に来るとはかぎらない指標を並べ、その理由を産業や地理から読み解きます。",
     author: AUTHOR,
     chapters: [
       {
