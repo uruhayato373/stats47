@@ -9,6 +9,36 @@
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/**
+ * ★実測した id / name で入れる (2026-08-12 の --probe で確定)。
+ *
+ * 日本語版 KDP の入稿フォームは `<label>` が空で、`id="data-title"` /
+ * `name="data[title]"` で要素を識別する。ラベル文字列で探す実装は**1 つも一致しない**。
+ * ここを第一手段にし、`fillByLabel` は DOM が変わったときの保険として後ろに置く。
+ */
+async function fillById(page, id, value) {
+  if (value === undefined || value === null || value === "") return true; // 空は入れない (成功扱い)
+  for (const sel of [`#${id}`, `[name="${idToName(id)}"]`]) {
+    try {
+      const loc = page.locator(sel).first();
+      if (await loc.count()) {
+        await loc.scrollIntoViewIfNeeded().catch(() => {});
+        await loc.fill(String(value), { timeout: 8000 });
+        return true;
+      }
+    } catch {}
+  }
+  return false;
+}
+
+/** `data-title-pronunciation` → `data[title_pronunciation]` (KDP の name 規約)。 */
+function idToName(id) {
+  const rest = id.replace(/^data-/, "").replace(/-/g, "_");
+  // 著者は入れ子: data[primary_author][first_name]
+  const m = /^primary_author_(.+)$/.exec(rest);
+  return m ? `data[primary_author][${m[1]}]` : `data[${rest}]`;
+}
+
 /** label テキストで input/textarea を探して値を入れる。見つからなければ false。 */
 async function fillByLabel(page, labelRe, value) {
   try {
@@ -47,28 +77,43 @@ export async function fillKdpDetails(page, lst, { tag = "[kdp]" } = {}) {
   const warnings = [];
   const need = (ok, what) => { if (ok) log.push(`${tag} ✓ ${what}`); else warnings.push(`${what} を充填できず (DOM 変更の可能性・--probe で確認)`); };
 
-  need(await fillByLabel(page, /Book Title|タイトル|Title/i, lst.title), "タイトル");
-  if (lst.subtitle) need(await fillByLabel(page, /Subtitle|サブタイトル/i, lst.subtitle), "サブタイトル");
-  // 著者 (Primary Author) — 名/姓で分かれる場合あり。単一欄を優先。
-  const authorOk =
-    (await fillByLabel(page, /Primary Author|著者|Author.*Last|姓/i, lst.author)) ||
-    (await fillByLabel(page, /First name|名/i, lst.author));
-  need(authorOk, "著者名");
-  // 内容紹介 (Description) — リッチテキスト or textarea
-  let descOk = await fillByLabel(page, /Description|内容紹介|説明/i, lst.description);
-  if (!descOk) {
-    try {
-      const rt = page.locator('[contenteditable="true"]').first();
-      if (await rt.count()) { await rt.click(); await rt.fill(lst.description); descOk = true; }
-    } catch {}
+  // ★日本語フォームはフリガナ・ローマ字も必須。SSOT は packages/product-factory の kdp-reading.ts。
+  need((await fillById(page, "data-title", lst.title)) || (await fillByLabel(page, /Book Title|タイトル|Title/i, lst.title)), "タイトル");
+  need(await fillById(page, "data-title-pronunciation", lst.titleKana), "タイトルのフリガナ");
+  need(await fillById(page, "data-title-romanized", lst.titleRomaji), "タイトルのローマ字");
+  if (lst.subtitle) {
+    need((await fillById(page, "data-subtitle", lst.subtitle)) || (await fillByLabel(page, /Subtitle|サブタイトル/i, lst.subtitle)), "サブタイトル");
+    need(await fillById(page, "data-subtitle-pronunciation", lst.subtitleKana), "サブタイトルのフリガナ");
+    need(await fillById(page, "data-subtitle-romanized", lst.subtitleRomaji), "サブタイトルのローマ字");
   }
+  // 著者は姓・名が別欄 (屋号なので姓に入れて名は空)。
+  need(await fillById(page, "data-primary-author-last-name", lst.authorLastName ?? lst.author), "著者の姓");
+  need(await fillById(page, "data-primary-author-first-name", lst.authorFirstName ?? ""), "著者の名");
+  need(await fillById(page, "data-primary-author-pronunciation", lst.authorKana), "著者のフリガナ");
+  need(await fillById(page, "data-primary-author-name-romanized", lst.authorRomaji), "著者のローマ字");
+  // 内容紹介 (Description)
+  // ★KDP は CKEditor (iframe.cke_wysiwyg_frame) を使う (2026-08-12 実測)。
+  //   hidden の data[description] に直接書くと React/CKEditor の状態と同期せず保存されないので、
+  //   **iframe の本文へ実際に打ち込む**。
+  let descOk = false;
+  try {
+    const fr = page.frameLocator("iframe.cke_wysiwyg_frame").first();
+    const body = fr.locator("body").first();
+    if (await body.count()) {
+      await body.click({ timeout: 8000 });
+      await page.keyboard.press("Control+A").catch(() => {});
+      await page.keyboard.press("Meta+A").catch(() => {});
+      await body.type(lst.description, { delay: 0, timeout: 60000 });
+      descOk = true;
+    }
+  } catch {}
+  if (!descOk) descOk = await fillByLabel(page, /Description|内容紹介|説明/i, lst.description);
   need(descOk, "内容紹介");
-  // キーワード (最大7・個別欄が7つ並ぶことが多い)
+
+  // キーワード — 実測で data-keywords-0 … data-keywords-6 の 7 欄が並ぶ。
   let kwFilled = 0;
   for (let i = 0; i < lst.keywords.length && i < 7; i++) {
-    const ok =
-      (await fillByLabel(page, new RegExp(`Keyword.*${i + 1}|キーワード.*${i + 1}`, "i"), lst.keywords[i]));
-    if (ok) kwFilled++;
+    if (await fillById(page, `data-keywords-${i}`, lst.keywords[i])) kwFilled++;
   }
   if (kwFilled >= Math.min(3, lst.keywords.length)) log.push(`${tag} ✓ キーワード ${kwFilled}/${lst.keywords.length}`);
   else warnings.push(`キーワード欄を特定できず (${kwFilled} 件のみ・--probe で確認)`);

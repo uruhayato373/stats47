@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { KINDLE_BOOKS } from "./book-catalog";
+import { KDP_AUTHOR, KDP_READINGS } from "./kdp-reading";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const OUT = join(REPO_ROOT, ".claude/config/kdp-listings.json");
@@ -21,6 +22,17 @@ interface KdpListing {
   title: string;
   subtitle: string | null;
   author: string;
+  /** 著者の姓 (KDP は姓・名を分けて持つ)。 */
+  authorLastName: string;
+  /** 著者の名 (屋号なので空)。 */
+  authorFirstName: string;
+  authorKana: string;
+  authorRomaji: string;
+  /** ★日本語 KDP が要求するフリガナ / ローマ字 (kdp-reading.ts が SSOT)。 */
+  titleKana: string;
+  titleRomaji: string;
+  subtitleKana: string | null;
+  subtitleRomaji: string | null;
   language: "ja";
   description: string;
   keywords: string[];
@@ -105,6 +117,14 @@ function main(): void {
       title: b.title,
       subtitle: b.subtitle ?? null,
       author: b.author,
+      authorLastName: KDP_AUTHOR.lastName,
+      authorFirstName: KDP_AUTHOR.firstName,
+      authorKana: KDP_AUTHOR.kana,
+      authorRomaji: KDP_AUTHOR.romaji,
+      titleKana: KDP_READINGS[b.id]?.titleKana ?? "",
+      titleRomaji: KDP_READINGS[b.id]?.titleRomaji ?? "",
+      subtitleKana: KDP_READINGS[b.id]?.subtitleKana ?? null,
+      subtitleRomaji: KDP_READINGS[b.id]?.subtitleRomaji ?? null,
       language: "ja",
       description: buildDescription(b.concept),
       keywords: [...b.keywords].slice(0, 7),

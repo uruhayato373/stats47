@@ -25,6 +25,13 @@ interface Listing {
   readonly keywords: readonly string[];
   readonly priceYen: number;
   readonly epubPath: string;
+  readonly titleKana: string;
+  readonly titleRomaji: string;
+  readonly subtitle: string | null;
+  readonly subtitleKana: string | null;
+  readonly subtitleRomaji: string | null;
+  readonly authorLastName: string;
+  readonly authorKana: string;
 }
 
 function load(): Listing[] {
@@ -70,6 +77,31 @@ describe("kdp-listings — ★読者が読む文章に社内の言葉を出さ�
 
   it("紹介文が短すぎない (商品ページとして成立する長さ)", () => {
     const bad = rows.filter((r) => r.description.replace(/\s/g, "").length < 200).map((r) => r.id);
+    expect(bad).toEqual([]);
+  });
+
+  // ★日本語 KDP はフリガナ / ローマ字を要求する (2026-08-12 に実フォームを probe して判明)。
+  //   空のまま出品フォームへ流すと入稿できない。SSOT は kdp-reading.ts。
+  it("★全書籍にタイトルのフリガナとローマ字がある", () => {
+    const bad = rows.filter((r) => !r.titleKana?.trim() || !r.titleRomaji?.trim()).map((r) => r.id);
+    expect(bad).toEqual([]);
+  });
+
+  it("★サブタイトルを持つ書籍はその読みもある", () => {
+    const bad = rows
+      .filter((r) => r.subtitle && (!r.subtitleKana?.trim() || !r.subtitleRomaji?.trim()))
+      .map((r) => r.id);
+    expect(bad).toEqual([]);
+  });
+
+  it("フリガナは全角カタカナ (と空白) だけで書く", () => {
+    // 漢字やひらがなが混ざっているとフリガナとして機能しない。
+    const bad = rows.filter((r) => !/^[ァ-ヴー\s]+$/.test(r.titleKana)).map((r) => r.id);
+    expect(bad).toEqual([]);
+  });
+
+  it("著者は姓に入れて名を空にする (屋号のため)", () => {
+    const bad = rows.filter((r) => r.authorLastName !== "stats47" || !r.authorKana?.trim()).map((r) => r.id);
     expect(bad).toEqual([]);
   });
 });
