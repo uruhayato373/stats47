@@ -64,8 +64,11 @@ async function main(): Promise<void> {
 
   const measured: Measured[] = [];
   for (const b of KINDLE_BOOKS) {
-    // 表紙は判定に関係しないので作らない (実行時間を無駄にしない)
-    const r = await buildBook(b, { skipCover: true });
+    // ★表紙を飛ばしてはならない (2026-08-12 に実際に踏んだ)。
+    //   buildBook は EPUB を書き出すので、skipCover で回すと**出荷する EPUB が表紙なしに
+    //   上書きされる**。Kindle Previewer が「W14016: Cover not specified」を出して発覚した。
+    //   計測のためのスクリプトが成果物を劣化させては本末転倒なので、必ず完全な本を作る。
+    const r = await buildBook(b);
     const base = {
       id: b.id,
       totalBody: r.freshChars + r.blogChars,
