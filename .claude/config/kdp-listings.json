@@ -1,5 +1,5 @@
 {
-  "_note": "KDP (kdp.amazon.com) 出品内容の機械可読 SSOT (stats47 専用)。kdp-operator (Playwright) が読む。ログイン・税務/銀行情報の入力は人間工程 (自動化しない)。実公開 (--commit) はオーナー承認時のみ。categories/status/asin/kuEnrolled は upsert 保持。書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS、EPUB は .local/kindle-books/<id>/v1/book.epub (git 管理外)。",
+  "_note": "KDP (★kdp.amazon.co.jp) 出品内容の機械可読 SSOT (stats47 専用)。kdp-operator (Playwright) が読む。ログイン・税務/銀行情報の入力は人間工程 (自動化しない)。実公開 (--commit) はオーナー承認時のみ。categories/status/asin/kuEnrolled は upsert 保持。書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS、EPUB は .local/kindle-books/<id>/v1/book.epub (git 管理外)。",
   "listings": {
     "K-S1-01": {
       "id": "K-S1-01",

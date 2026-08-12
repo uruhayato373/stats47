@@ -1,5 +1,5 @@
 /**
- * kdp-session.mjs — Amazon KDP (kdp.amazon.com) Playwright 自動操作の共有セッション基盤 (stats47)
+ * kdp-session.mjs — Amazon KDP (kdp.amazon.co.jp) Playwright 自動操作の共有セッション基盤 (stats47)
  * ---------------------------------------------------------------------------
  * coconala-operator (.claude/scripts/coconala/lib/coconala-session.mjs) と同じ設計を KDP へ移植。
  * 永続プロファイル + ログイン gate + account assert 方式。
@@ -99,7 +99,11 @@ export async function launchContext({ headless = false } = {}) {
 // ★日本語 UI を使う。フォームのセレクタ (kdp-form.mjs) が「タイトル」「著者名」など
 //   日本語ラベルで要素を探すため、en_US で開くと 1 つも一致しない (2026-08-12 に発覚)。
 //   marketplace は kdp-account.json のとおり amazon.co.jp。
-const BOOKSHELF_URL = "https://kdp.amazon.com/ja_JP/bookshelf";
+// ★ドメインは **kdp.amazon.co.jp**。.com のサインインでは同じメールアドレスでも
+//   「We cannot find an account with that email address」になる (2026-08-12 実測)。
+//   Amazon のアカウントは .com と .co.jp で別の登録になっており、この口座は .co.jp 側。
+//   doboku-note の KDP 自動化も .co.jp を使って実際に出版できている。
+const BOOKSHELF_URL = "https://kdp.amazon.co.jp/ja_JP/bookshelf";
 
 async function gotoResilient(page, url, { tries = 2, timeout = 45000 } = {}) {
   for (let i = 0; i < tries; i++) {
@@ -126,28 +130,40 @@ export async function waitForLogin(page, { waitMinutes = 8, tag = "[login]" } = 
   const deadline = Date.now() + waitMinutes * 60_000;
   let warned = false;
   let lastNudge = Date.now();
+  /**
+   * 現在の画面状態を読む。
+   *
+   * ★遷移中に落ちてはならない (2026-08-12 実測)。ログイン中は人がボタンを押すたびに
+   *   ページが遷移し、その最中に page.evaluate を呼ぶと実行コンテキストが壊れて例外になる。
+   *   もとはこれを捕まえておらず、**人がログインを始めた瞬間にスクリプトが落ちて**いた。
+   *   遷移は待機中のあたりまえの状態なので、読めなければ「まだ待つ」として次の周回に回す。
+   */
+  const readState = async () => {
+    try {
+      return await page.evaluate(() => {
+          const url = location.href;
+          const onSignin = /\/ap\/signin|signin|\/ap\/mfa/.test(url) || /Sign-In|ログイン/.test(document.title || "");
+          const bodyText = document.body?.innerText || "";
+          const onShelf =
+            /kdp\.amazon\.(?:com|co\.jp)\/.+\/bookshelf/.test(url) &&
+            (/Bookshelf|本棚|Create|新しい|Kindle eBook/.test(bodyText) ||
+              !!document.querySelector('[data-test-id], [id*="bookshelf"], a[href*="/title-setup/"]'));
+          return { url, onSignin, onShelf };
+      });
+    } catch {
+      return null;
+    }
+  };
+
   while (Date.now() < deadline) {
-    const state = await page.evaluate(() => {
-      const url = location.href;
-      const onSignin = /\/ap\/signin|signin|\/ap\/mfa/.test(url) || /Sign-In|ログイン/.test(document.title || "");
-      const bodyText = document.body?.innerText || "";
-      const onShelf =
-        /kdp\.amazon\.com\/.+\/bookshelf/.test(url) &&
-        (/Bookshelf|本棚|Create|新しい|Kindle eBook/.test(bodyText) ||
-          !!document.querySelector('[data-test-id], [id*="bookshelf"], a[href*="/title-setup/"]'));
-      return { url, onSignin, onShelf };
-    });
-    if (!state.onSignin && state.onShelf) return { ok: true };
+    const state = await readState();
+    // 遷移中で読めなかった = まだ待つ。ここで落とさない。
+    if (state && !state.onSignin && state.onShelf) return { ok: true };
     if (!warned) {
       console.log(`${tag} 未ログイン。開いた Chrome で stats47 の Amazon/KDP アカウントにログイン (2FA 含む) してください (最大 ${waitMinutes} 分待機)…`);
       warned = true;
     }
     await sleep(3000);
-    // ★サインイン画面にいる間は絶対に遷移させない (2026-08-12 実測で発覚)。
-    //   もとは 3 秒ごとに本棚 URL へ goto しており、**人がメールアドレスを打っている最中に
-    //   ページごと飛ばしていた**。「入力が途中でリセットされる」という症状の正体がこれ。
-    //   人のログインを待つのが目的なのだから、待っている画面を奪ってはならない。
-    //   サインインでも本棚でもない場所 (エラーページ等) に落ちたときだけ、30 秒に 1 回だけ戻す。
     // ★ここで遷移してよいのは「ページが無い」ときだけ。ログインのどの段階にいるかを
     //   URL から当てにいくと必ず取りこぼす (実測: amazon.co.jp のトップに一時的に
     //   落ちる場面があり、そこで遷移すると認証フローが切れる)。

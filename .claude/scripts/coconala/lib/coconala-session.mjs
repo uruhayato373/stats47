@@ -197,17 +197,34 @@ export async function waitForLogin(page, { waitMinutes = 6, tag = '[login]' } = 
   const deadline = Date.now() + waitMinutes * 60_000;
   let warned = false;
   let lastNudge = Date.now();
+  /**
+   * 現在の画面状態を読む。
+   *
+   * ★遷移中に落ちてはならない (2026-08-12 に KDP 側で実測)。ログイン中は人がボタンを押すたびに
+   *   ページが遷移し、その最中に page.evaluate を呼ぶと実行コンテキストが壊れて例外になる。
+   *   捕まえていないと**人がログインを始めた瞬間にスクリプトが落ちる**。
+   *   遷移は待機中のあたりまえの状態なので、読めなければ「まだ待つ」として次の周回に回す。
+   */
+  const readState = async () => {
+    try {
+      return await page.evaluate(() => {
+        const url = location.href;
+        const bodyText = document.body?.innerText || '';
+        const onLogin = /\/login|\/signup/.test(url) || /ログイン|会員登録/.test(document.title || '');
+        const signedIn =
+          /マイページ|出品管理|取引管理|お知らせ|ログアウト/.test(bodyText) ||
+          !!document.querySelector('[href*="/mypage"], [href*="/logout"], [data-testid*="user"], img[alt*="プロフィール"]');
+        return { url, onLogin, signedIn };
+      });
+    } catch {
+      return null;
+    }
+  };
+
   while (Date.now() < deadline) {
-    const state = await page.evaluate(() => {
-      const url = location.href;
-      const bodyText = document.body?.innerText || '';
-      const onLogin = /\/login|\/signup/.test(url) || /ログイン|会員登録/.test(document.title || '');
-      const signedIn =
-        /マイページ|出品管理|取引管理|お知らせ|ログアウト/.test(bodyText) ||
-        !!document.querySelector('[href*="/mypage"], [href*="/logout"], [data-testid*="user"], img[alt*="プロフィール"]');
-      return { url, onLogin, signedIn };
-    });
-    if (!state.onLogin && state.signedIn) return { ok: true };
+    const state = await readState();
+    // 遷移中で読めなかった = まだ待つ。ここで落とさない。
+    if (state && !state.onLogin && state.signedIn) return { ok: true };
     if (!warned) {
       console.log(`${tag} 未ログイン。開いた Chrome で stats47 のココナラアカウントにログインしてください (最大 ${waitMinutes} 分待機)…`);
       warned = true;

@@ -54,7 +54,7 @@ try {
   if (!acc.ok) { console.error("ABORT:", acc.reason); await ctx.close(); process.exit(2); }
 
   // 新規 Kindle 本の作成ページへ (KDP の入口 URL)。
-  await page.goto("https://kdp.amazon.com/ja_JP/title-setup/kindle/new/details", { waitUntil: "domcontentloaded", timeout: 60000 }).catch(() => {});
+  await page.goto("https://kdp.amazon.co.jp/ja_JP/title-setup/kindle/new/details", { waitUntil: "domcontentloaded", timeout: 60000 }).catch(() => {});
   try { await page.waitForLoadState("networkidle", { timeout: 20000 }); } catch {}
   await sleep(3000);
 

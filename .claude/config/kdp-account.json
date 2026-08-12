@@ -3,5 +3,5 @@
   "accountName": "",
   "marketplace": "amazon.co.jp",
   "publishedAt": null,
-  "_note": "Amazon KDP (kdp.amazon.com) 出品アカウントの機械可読 SSOT (stats47 専用)。★account assert (誤アカウント操作の防止) は accountEmail か accountName を KDP のアカウントメニュー表示と照合する。どちらも未設定の間は「ログイン済み」のみ確認 = 誤アカウント防止が弱いので、初回ログイン後に必ず記入する。ログイン認証・2FA・税務情報 (Tax interview)・銀行口座の入力は人間工程 (エージェントは行わない)。ログイン済みプロファイルは .local/playwright-kdp-profile。出品内容と公開状態の SoT は .claude/config/kdp-listings.json、書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS、規約は .claude/rules/coconala-product-standards.md §8。"
+  "_note": "Amazon KDP (★kdp.amazon.co.jp — .com ではない) 出品アカウントの機械可読 SSOT (stats47 専用)。この口座は Amazon.co.jp 側の登録で、.com のサインインでは同じメールでも「アカウントが見つからない」になる (2026-08-12 実測)。★account assert (誤アカウント操作の防止) は accountEmail か accountName を KDP のアカウントメニュー表示と照合する。どちらも未設定の間は「ログイン済み」のみ確認 = 誤アカウント防止が弱いので、初回ログイン後に必ず記入する。ログイン認証・2FA・税務情報 (Tax interview)・銀行口座の入力は人間工程 (エージェントは行わない)。ログイン済みプロファイルは .local/playwright-kdp-profile。出品内容と公開状態の SoT は .claude/config/kdp-listings.json、書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS、規約は .claude/rules/coconala-product-standards.md §8。"
 }
