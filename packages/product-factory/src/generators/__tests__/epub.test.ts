@@ -178,3 +178,39 @@ describe("buildEpub — 組版 CSS", () => {
     expect(css).toMatch(/\.colophon\{[^}]*page-break-before:always/);
   });
 });
+
+describe("style.css — ★背景を指定せずに文字色を暗く指定しない", () => {
+  // ★2026-08-12 実測: 「出典と免責」ページを暗い背景で描画したら、`color:#444` を当てていた
+  //   本文がほぼ読めなかった。読者は端末側でテーマを選ぶので、**背景を仮定した文字色**は
+  //   その仮定が外れた瞬間に沈む。色を足さなくても字の大きさで十分に区別が付く。
+  //   背景を自分で持つ箱 (callout) の中は、前景と背景が対で決まるので対象外。
+  it("背景のない要素に暗い文字色を当てていない", async () => {
+    const { zip } = await build(baseInput());
+    const css = await text(zip, "style.css");
+    // 背景を自分で持つセレクタを集める。その子孫は前景と背景が対で決まるので対象外
+    // (callout の中は明るい箱なので、文字色を**外すと**読めなくなる)。
+    const withBackground: string[] = [];
+    for (const rule of css.split("}")) {
+      const [sel, body] = rule.split("{");
+      if (body && /background/i.test(body)) withBackground.push(sel.trim());
+    }
+
+    const offenders: string[] = [];
+    for (const rule of css.split("}")) {
+      const [selRaw, body] = rule.split("{");
+      if (!body) continue;
+      const sel = selRaw.trim();
+      if (!/(^|;)\s*color\s*:\s*#[0-9a-f]{3,6}/i.test(body)) continue;
+      if (/background/i.test(body)) continue;
+      if (withBackground.some((bg) => bg !== "" && sel.startsWith(bg))) continue;
+      offenders.push(`${sel}{${body.trim()}}`);
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it("罫線は currentColor で本文色に追従する", async () => {
+    // #333 固定だと暗いテーマで見えなくなる。
+    const { zip } = await build(baseInput());
+    expect(await text(zip, "style.css")).toContain("border-bottom:2px solid currentColor");
+  });
+});

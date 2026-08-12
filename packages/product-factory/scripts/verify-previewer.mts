@@ -72,7 +72,14 @@ interface Result {
   readonly failure?: string;
 }
 
-function convert(id: string, epub: string): Result {
+/**
+ * ★このゲートは単発だと当てにならない (2026-08-12 実測)。
+ *   同じ 32 冊を続けて 2 回回したら 1 回目は 2 冊が失敗し、2 回目は 0 件だった。
+ *   原因は Previewer の GUI を開いたまま CLI 変換を走らせていたこと (同じアプリなので競合する)。
+ *   「失敗」を鵜呑みにすると直す必要のないものを直しにいくので、**1 回だけ再試行**して
+ *   再現したものだけを不合格とする。再試行で通った場合はその旨を出す (黙って緑にしない)。
+ */
+function convertOnce(id: string, epub: string): Result {
   const out = mkdtempSync(join(tmpdir(), `kpv-${id}-`));
   try {
     execFileSync(PREVIEWER, [epub, "-convert", "-output", out, "-locale", "en"], {
@@ -108,12 +115,29 @@ function convert(id: string, epub: string): Result {
   }
 }
 
+function convert(id: string, epub: string): Result & { flaky?: boolean } {
+  const first = convertOnce(id, epub);
+  if (first.ok) return first;
+  const second = convertOnce(id, epub);
+  return second.ok ? { ...second, flaky: true } : second;
+}
+
 function main(): void {
   assertKnownFlags();
   if (!existsSync(PREVIEWER)) {
     console.error(`Kindle Previewer 3 が見つからない: ${PREVIEWER}\nmacOS に Kindle Previewer 3 を入れてから実行する。`);
     process.exit(2);
   }
+  // GUI が開いていると CLI 変換と競合して偽の失敗が出る。黙って回さず先に伝える。
+  // ★実行ファイルのパスで判定する。アプリ名だけで `pgrep -f` すると、**この検査を呼んでいる
+  //   シェル自身のコマンドラインに名前が入っているだけで一致**して誤警告になる (2026-08-12 実測)。
+  try {
+    const running = execFileSync("/usr/bin/pgrep", ["-f", "Kindle Previewer 3\\.app/Contents/MacOS/"], { stdio: "pipe" }).toString().trim();
+    if (running) console.log("⚠️ Kindle Previewer が起動しています。CLI 変換と競合して偽の失敗が出ることがあります。\n");
+  } catch {
+    /* 起動していなければ pgrep は非ゼロで終わる。正常 */
+  }
+
   const only = arg("book");
   const books = KINDLE_BOOKS.filter((b) => (only ? b.id === only : true));
 
@@ -133,6 +157,7 @@ function main(): void {
     console.log(
       `${mark}${r.id.padEnd(9)} ${r.status} / error ${r.errors} / quality ${r.quality} / Enhanced Typesetting: ${r.typesetting}`,
     );
+    if (r.flaky) console.log("      (1 回目は失敗・再試行で成功。Previewer の競合の可能性)");
     if (r.failure) console.log(`      変換失敗: ${r.failure}`);
     for (const n of r.notices) console.log(`      ${n}`);
   }

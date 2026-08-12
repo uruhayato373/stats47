@@ -55,7 +55,7 @@ function xmlEscape(s: string): string {
 }
 
 const CSS = `body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;line-height:1.8;margin:0 5%;}
-h1{font-size:1.5em;margin:1.4em 0 0.8em;line-height:1.4;border-bottom:2px solid #333;padding-bottom:0.3em;}
+h1{font-size:1.5em;margin:1.4em 0 0.8em;line-height:1.4;border-bottom:2px solid currentColor;padding-bottom:0.3em;}
 h2{font-size:1.25em;margin:1.6em 0 0.6em;line-height:1.5;}
 h3{font-size:1.1em;margin:1.2em 0 0.5em;}
 /* 見出しがページ末尾に孤立するのを防ぐ (直後の本文と必ず同じページに置く)。 */
@@ -68,7 +68,7 @@ figure img{max-width:100%;max-height:88vh;height:auto;object-fit:contain;}
 /* 扉: 中央寄せの独立ページ。h1 の下線は書名には不要。 */
 .titlepage{text-align:center;padding-top:16%;}
 .titlepage h1{border-bottom:none;font-size:1.7em;padding-bottom:0;margin-bottom:0.6em;}
-.titlepage .subtitle{font-size:1.05em;color:#555;margin:0.4em 0;}
+.titlepage .subtitle{font-size:1.05em;margin:0.4em 0;}
 .titlepage .author{margin-top:3em;font-size:1.05em;}
 /* 奥付 (本書について) は扉と同じ XHTML 内で必ず改ページして始める。 */
 .colophon{page-break-before:always;}
@@ -78,7 +78,7 @@ aside.callout{border:1px solid #bbb;background:#f6f6f6;border-radius:4px;padding
 aside.callout .callout-label{font-weight:bold;margin:0 0 0.3em;font-size:0.9em;color:#444;}
 aside.callout p{margin:0.3em 0;font-size:0.95em;}
 .sources h2{font-size:1.1em;}
-.sources p{font-size:0.85em;color:#444;margin:0.4em 0;}`;
+.sources p{font-size:0.85em;margin:0.4em 0;}`;
 
 /** 単一 XHTML ドキュメントを組む。 */
 function xhtmlDoc(title: string, bodyInner: string): string {
