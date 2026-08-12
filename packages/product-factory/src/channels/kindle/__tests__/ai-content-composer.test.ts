@@ -98,16 +98,30 @@ describe("judgeField — 整合する文は採用する", () => {
 });
 
 describe("extractRegionBlock — S3 の地方ブロック抽出", () => {
-  const md = "## 北海道・東北\n東北は消費量が多い傾向。\n\n## 関東\n関東は中位に集中。";
+  const md = "## 北海道・東北\n青森県は消費量が多い傾向。\n\n## 関東\n東京都は中位に集中。";
 
-  it("該当ブロックだけを返す", () => {
-    expect(extractRegionBlock(md, "北海道・東北")).toBe("東北は消費量が多い傾向。");
-    expect(extractRegionBlock(md, "関東")).toBe("関東は中位に集中。");
+  it("★節の中で言及されている県名で選ぶ (見出し語に頼らない)", () => {
+    // ai-content の見出しは固定の地方区分ではなく内容ベースの自由文なので、
+    // 見出し照合だと「北海道・東北」が「北海道・北東北」に一致せず取りこぼす。
+    expect(extractRegionBlock(md, ["青森県"])).toBe("青森県は消費量が多い傾向。");
+    expect(extractRegionBlock(md, ["東京都"])).toBe("東京都は中位に集中。");
+  });
+
+  it("★内容ベースの見出しでも県名で拾える (実際の ai-content の形)", () => {
+    const real =
+      "## 上位帯：九州と沖縄に集中する高温地域\n沖縄県が突出しています。\n\n## 下位帯：冷涼地の北海道・北東北\n北海道は最下位です。";
+    expect(extractRegionBlock(real, ["沖縄県"])).toBe("沖縄県が突出しています。");
+    expect(extractRegionBlock(real, ["北海道"])).toBe("北海道は最下位です。");
+  });
+
+  it("県/府/都/道 を落とした表記でも照合する", () => {
+    expect(extractRegionBlock("## 傾向\n青森は寒冷です。", ["青森県"])).toBe("青森は寒冷です。");
   });
 
   it("見つからなければ undefined (でっち上げない)", () => {
-    expect(extractRegionBlock(md, "沖縄")).toBeUndefined();
-    expect(extractRegionBlock(undefined, "関東")).toBeUndefined();
+    expect(extractRegionBlock(md, ["沖縄県"])).toBeUndefined();
+    expect(extractRegionBlock(undefined, ["東京都"])).toBeUndefined();
+    expect(extractRegionBlock(md, [])).toBeUndefined();
   });
 });
 
@@ -127,7 +141,7 @@ describe("composeChapterBody", () => {
     rankingKey: "x",
     yearCode: "2024",
     insights: "## 格差\n1位と最下位で2倍以上の開きがあります。",
-    regionalAnalysis: "## 北海道・東北\n東北は上位が多い。\n\n## 関東\n関東は中位。",
+    regionalAnalysis: "## 北海道・東北\n福島県は上位です。\n\n## 関東\n東京都は中位。",
     faq: [
       { question: "第1位の都道府県はどこですか？", answer: "福島県です。" },
       { question: "なぜ差が生まれるのですか？", answer: "食習慣の違いが背景にあります。" },
@@ -148,11 +162,17 @@ describe("composeChapterBody", () => {
   });
 
   it("★S3 (地域) は該当ブロックと地域の県だけを採る — 全冊同一本文の再発防止", () => {
-    const r = composeChapterBody({ ai, gate: GATE, regionCodes: ["07000"], regionBlockLabel: "北海道・東北" });
+    const r = composeChapterBody({
+      ai,
+      gate: GATE,
+      regionCodes: ["07000"],
+      regionNames: ["福島県"],
+      regionBlockLabel: "北海道・東北",
+    });
     expect(r.used).toContain("regionalAnalysis(block)");
     expect(r.used).toContain("prefectureCommentary(region)");
-    expect(r.md).toContain("東北は上位が多い");
-    expect(r.md).not.toContain("関東は中位"); // 他ブロックは混ざらない
+    expect(r.md).toContain("福島県は上位です");
+    expect(r.md).not.toContain("東京都は中位"); // 他ブロックは混ざらない
     expect(r.md).toContain("福島県");
     expect(r.md).not.toContain("東京都"); // 地域外の県は出さない
   });

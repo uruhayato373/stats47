@@ -136,6 +136,8 @@ export async function buildRankingSection(rankingKey: string, opts: RankingSecti
     gate: { values: ranked, unit, yearCode: fetched.year },
     regionCodes: opts.highlightCodes,
     regionBlockLabel: opts.regionBlockLabel,
+    // 節の選定は県名で行う (ai-content の見出しは固定の地方区分ではないため)。
+    regionNames: (opts.highlightCodes ?? []).map((c) => nameOf(c)),
     faqLimit: opts.faqLimit,
   });
 

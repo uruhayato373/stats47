@@ -163,8 +163,10 @@ export interface ComposeInput {
   readonly gate: FieldGateInput;
   /** S3 地域別: この地域の県コード (prefectureCommentary の抽出に使う)。 */
   readonly regionCodes?: readonly string[];
-  /** S3 地域別: regionalAnalysis から抜き出す地方ブロックの見出し語。 */
+  /** S3 地域別: regionalAnalysis から抜き出す地方ブロックの見出し語 (補助。主判定は県名)。 */
   readonly regionBlockLabel?: string;
+  /** S3 地域別: その地域の県名。regionalAnalysis の節を選ぶ主判定に使う。 */
+  readonly regionNames?: readonly string[];
   /** 採用する FAQ の最大数。 */
   readonly faqLimit?: number;
 }
@@ -178,15 +180,38 @@ export interface ComposeResult {
 }
 
 /**
- * `## 見出し` 区切りの markdown から、指定ラベルを含む節だけを抜き出す。
- * S3 で「北海道・東北」ブロックだけを採るのに使う。見つからなければ undefined。
+ * `## 見出し` 区切りの markdown から、その地域に関係する節だけを抜き出す。
+ *
+ * ★見出し語でマッチさせない (2026-08-12 実測で設計を修正)。
+ *   regionalAnalysis の見出しは固定の地方区分ではなく**内容ベースの自由な文**だった
+ *   (例「上位帯：九州と沖縄に集中する高温地域」「下位帯：冷涼地の北海道・北東北」)。
+ *   「北海道・東北」で照合すると「北海道・北東北」に一致せず、四国のように
+ *   そもそも該当見出しが無い指標も多い。**節の中で言及されている県名**で判定する。
+ *
+ * @param regionNames その地域の県名 (「青森県」等)。県/府/都/道 を落とした形でも照合する。
  */
-export function extractRegionBlock(md: string | undefined, label: string | undefined): string | undefined {
-  if (!md || !label) return undefined;
+export function extractRegionBlock(
+  md: string | undefined,
+  regionNames: readonly string[] | undefined,
+  label?: string,
+): string | undefined {
+  if (!md || !regionNames || regionNames.length === 0) return undefined;
+  const short = regionNames.map((n) => n.replace(/[都府県]$/, ""));
   const blocks = md.split(/^##\s+/m).filter((b) => b.trim().length > 0);
-  const hit = blocks.find((b) => b.split("\n")[0].includes(label));
-  if (!hit) return undefined;
-  const body = hit.split("\n").slice(1).join("\n").trim();
+  const hits = blocks.filter((b) => {
+    // 見出し行にラベルが入っていれば当然採る。無ければ本文の県名で判定する。
+    if (label && b.split("\n")[0].includes(label)) return true;
+    return short.some((n) => b.includes(n));
+  });
+  if (hits.length === 0) return undefined;
+  const body = hits
+    .map((h) => {
+      const lines = h.split("\n");
+      // 見出しは書籍側で付け直すので落とす。
+      return lines.slice(1).join("\n").trim();
+    })
+    .filter((s) => s.length > 0)
+    .join("\n\n");
   return body.length > 0 ? body : undefined;
 }
 
@@ -224,9 +249,9 @@ export function composeChapterBody(input: ComposeInput): ComposeResult {
   }
 
   // 地方ブロック別の傾向 — S3 は該当ブロックだけ、S2/S4 は全文。
-  if (input.regionBlockLabel) {
-    const block = extractRegionBlock(ai.regionalAnalysis, input.regionBlockLabel);
-    take("regionalAnalysis(block)", block, `${input.regionBlockLabel}の傾向`);
+  if (input.regionNames && input.regionNames.length > 0) {
+    const block = extractRegionBlock(ai.regionalAnalysis, input.regionNames, input.regionBlockLabel);
+    take("regionalAnalysis(block)", block, `${input.regionBlockLabel ?? "この地域"}の傾向`);
   } else if (ai.regionalAnalysis) {
     const v = judgeField(ai.regionalAnalysis, input.gate);
     if (v.ok && v.text) {
