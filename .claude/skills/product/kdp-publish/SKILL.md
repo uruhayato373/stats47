@@ -25,7 +25,14 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit      # 公開 (�
 - **実行はローカルのみ** (ログイン済みプロファイル `.local/playwright-kdp-profile` があるマシン)。初回は headed で
   **stats47 の Amazon/KDP アカウント**に人間が手動ログイン (2FA 含む)。エージェントは認証を代行しない。
 - **税務情報 (Tax interview)・銀行口座の入力は人間工程**。これらが未完了だと KDP は公開させない。
-- **account assert**: `kdp-account.json` の `accountEmail`/`accountName` が KDP 表示と一致してから操作。別アカウントは中断。
+- **account assert**: 別アカウントでの誤操作を防ぐ。★**KDP はメールを本棚に出さず、アカウントページは 2FA を
+  再要求する**ため (2026-08-12 実測)、`knownAsin` (この口座で公開済みの本の ASIN) で同一性を確認する。
+  照合できなければ中断し、素通しにはしない。
+- **個人情報は git 管理外**: このリポジトリは **public**。`accountEmail` / `knownAsin` は
+  `.local/kdp-account.local.json` (gitignore 済) に置く。`readAccount()` が公開側の
+  `.claude/config/kdp-account.json` に上書きとして重ねる。
+- **ドメインは `kdp.amazon.co.jp`**: `.com` のサインインでは同じメールでも「アカウントが見つからない」になる
+  (Amazon のアカウントは .com と .co.jp で別登録)。UI も `ja_JP` — フォームのセレクタが日本語ラベルのため。
 - **実公開 (`--commit`) はオーナー承認を要する** — outward-facing・取り下げに時間がかかる。既定の下書き検証まではエージェントが進めてよい。
 - **KDP フォームは React SPA で DOM が変わりやすい**。初回は必ず `--probe` で構造を dump し、`kdp-form.mjs` の
   label セレクタが合うか確認する (coconala の `discover-categories` 相当)。

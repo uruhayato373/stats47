@@ -8,8 +8,10 @@
  *   - ログイン認証はエージェントが行わない。初回のみ人間が headed Chrome で **stats47 の Amazon/KDP
  *     アカウント** に手動ログインし、永続プロファイル (.local/playwright-kdp-profile) に保持する。
  *   - 税務情報 (Tax interview)・銀行口座・支払情報の入力は **人間工程**。この基盤は一切触らない。
- *   - account assert: kdp-account.json の accountEmail (or accountName) が KDP のアカウントメニューに
- *     現れることを確認してから操作する。別アカウントは中断。
+ *   - account assert: 別アカウントでの誤操作を防ぐ。**KDP はメールを本棚に出さず、アカウント
+ *     ページは 2FA を再要求する**ため (2026-08-12 実測)、この口座で公開済みの本の ASIN
+ *     (knownAsin) で同一性を確認する。個人情報は git 管理外の .local/kdp-account.local.json
+ *     に置く (このリポジトリは public)。照合できないときは中断し、素通しにはしない。
  *   - draft-first: 既定は「下書き保存 (Save as Draft)」。実公開 (Publish) は呼び出し側の --commit +
  *     オーナー承認時のみ。KDP 公開は outward-facing・取り下げに時間がかかるため特に慎重に。
  *
@@ -36,13 +38,26 @@ const PROXY = process.env.HTTPS_PROXY || process.env.HTTP_PROXY || "";
 
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/** kdp-account.json を読む (無ければ空)。 */
+/**
+ * kdp-account.json を読む (無ければ空)。
+ *
+ * ★メールアドレスは git 管理外に置く (2026-08-12)
+ *   このリポジトリは **public** なので、`.claude/config/kdp-account.json` に
+ *   accountEmail を書くと公開される。誤アカウント防止の assert には実際の文字列が要るため、
+ *   `.local/kdp-account.local.json` (gitignore 済) を**上書きとして重ねる**。
+ *   共有してよい設定 (marketplace 等) は従来どおり config 側に置く。
+ */
+export const ACCOUNT_LOCAL_PATH = join(ROOT, ".local/kdp-account.local.json");
+
 export function readAccount() {
-  try {
-    return JSON.parse(readFileSync(ACCOUNT_PATH, "utf8"));
-  } catch {
-    return {};
-  }
+  const read = (p) => {
+    try {
+      return JSON.parse(readFileSync(p, "utf8"));
+    } catch {
+      return {};
+    }
+  };
+  return { ...read(ACCOUNT_PATH), ...read(ACCOUNT_LOCAL_PATH) };
 }
 
 /** kdp-listings.json を読む → { listings }。 */
@@ -211,7 +226,29 @@ export async function assertAccount(page, { tag = "[account]" } = {}) {
     console.log(`${tag} OK: KDP アカウント (${email || name}) を確認`);
     return { ok: true };
   }
-  return { ok: false, reason: `期待 KDP アカウント (${email || name}) を確認できない (別アカウントの疑い・アカウントメニュー DOM 変更の可能性)` };
+
+  // ★メールで照合できないときの代替 (2026-08-12 実測)
+  //   KDP はメールアドレスを本棚に出さない。「アカウント」リンクを踏むと
+  //   `/ap/mfa` へ飛んで **2FA を再要求される** ので、エージェントは辿れない (人間工程)。
+  //   そこで「この口座にしか無い本」で照合する。knownAsin は .local/kdp-account.local.json に
+  //   置く (public リポジトリに ASIN を晒さないため)。**照合を諦めて素通しにはしない**。
+  const knownAsin = (acct.knownAsin || "").trim();
+  if (knownAsin) {
+    const onShelf = await page.evaluate((a) => document.body?.innerText?.includes(a) ?? false, knownAsin);
+    if (onShelf) {
+      console.log(`${tag} OK: 既知の本 (ASIN ${knownAsin}) が本棚にあるため同一口座と確認`);
+      return { ok: true };
+    }
+    return { ok: false, reason: `既知の本 (ASIN ${knownAsin}) が本棚に無い — 別アカウントの疑い` };
+  }
+
+  return {
+    ok: false,
+    reason:
+      `期待 KDP アカウント (${email || name}) を確認できない。` +
+      `KDP はメールを本棚に出さず、アカウントページは 2FA を再要求するため照合できない。` +
+      `.local/kdp-account.local.json に knownAsin (この口座で公開済みの本の ASIN) を記入すると照合できる`,
+  };
 }
 
 export function shotPath(name) {
