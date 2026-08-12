@@ -144,6 +144,9 @@ async function main(): Promise<void> {
     if (!existsSync(dir)) continue;
 
     const { series, missing } = await buildTruth(await collectMetricKeys(book));
+    // ★本文に出うる単位は、その書籍の指標の SSOT 単位そのもの。固定リストにすると
+    //   「人泊」「人口千対」のような分母つき単位を落として誤検出を出す (2026-08-12 実測 36 件)。
+    const claimUnits = [...new Set(series.map((s) => s.unit).filter((u): u is string => !!u))];
     const findings: Finding[] = [];
     let checked = 0;
     let kanjiLeft = 0;
@@ -156,7 +159,7 @@ async function main(): Promise<void> {
         for (const c of extractKanjiClaims(line)) {
           if (c.unit === "円" || c.unit === "位" || c.unit === "倍" || c.unit === "％") kanjiLeft++;
         }
-        for (const claim of extractFactClaims(line)) {
+        for (const claim of extractFactClaims(line, claimUnits)) {
           checked++;
           const v = verifyClaim(claim, series);
           if (v.kind !== "mismatch") continue;

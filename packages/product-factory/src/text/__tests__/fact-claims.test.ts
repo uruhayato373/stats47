@@ -192,3 +192,56 @@ describe("unitScale — SSOT と本文の単位を揃える", () => {
     expect(verifyClaim(c, truth).kind).toBe("unknown-pref");
   });
 });
+
+describe("extractFactClaims — ★分母つき単位・符号・語彙的用法 (2026-08-12 実測の誤検出)", () => {
+  // 36 件の「不一致」がすべて監査側の誤検出だった。原稿は正しかった。
+  const UNITS = ["人口千対", "人泊", "千円", "‰", "人"];
+
+  it("分母が数値の後ろに付く形を切り詰めない", () => {
+    const [c] = extractFactClaims("秋田県は通院者率が496人口千対で全国1位です。", UNITS);
+    expect(c.unit).toBe("人口千対");
+    expect(c.value).toBe(496);
+  });
+
+  it("「人泊」を「人」に切り詰めない", () => {
+    // 先頭の主張は「1位」なので、値で目的の主張を選ぶ
+    const c = extractFactClaims("1位の東京都は47,432,720人泊です。", UNITS).find((x) => x.value === 47432720);
+    expect(c?.unit).toBe("人泊");
+  });
+
+  it("分母が数値の前にある語順でも単位として拾う", () => {
+    const [c] = extractFactClaims("東京都が人口千人あたり5.36人です。", UNITS);
+    expect(c.unit).toBe("人口千対");
+  });
+
+  it("同じ文の前半にある分母を候補として引き継ぐ", () => {
+    const cs = extractFactClaims("沖縄県が人口千人あたり8.55人、秋田県は3.95人です。", UNITS);
+    const akita = cs.find((c) => c.pref === "秋田");
+    expect(akita?.altUnits).toContain("人口千対");
+  });
+
+  it("「マイナス18.7‰」を負値として読む", () => {
+    const [c] = extractFactClaims("秋田県はマイナス18.7‰です。", UNITS);
+    expect(c.value).toBe(-18.7);
+  });
+
+  it("「4,687人の転出超過」は負値の候補を持つ", () => {
+    const [c] = extractFactClaims("福島県は4,687人の転出超過となっています。", UNITS);
+    expect(c.altValues).toContain(-4687);
+  });
+
+  it("★全国平均は県の主張として拾わない", () => {
+    // 「…沖縄の県が下位に並びます。全国平均は328千円で」の 328 が沖縄県の値にされていた
+    const cs = extractFactClaims("東北・九州・沖縄の県が下位です。全国平均は328千円で。", UNITS);
+    expect(cs.some((c) => c.value === 328)).toBe(false);
+  });
+
+  it("★概数・語彙的用法は数値の主張として拾わない", () => {
+    expect(extractFactClaims("秋田県は支える側1人あたり1人近くを支えています。", UNITS)).toEqual([]);
+  });
+
+  it("★通常の主張は従来どおり拾う (緩めすぎていないこと)", () => {
+    const [c] = extractFactClaims("東京都は623,317円です。", UNITS);
+    expect(c).toMatchObject({ pref: "東京", value: 623317, unit: "円" });
+  });
+});

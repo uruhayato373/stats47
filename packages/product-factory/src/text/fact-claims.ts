@@ -40,6 +40,18 @@ export interface FactClaim {
   readonly value: number;
   /** 単位 (円 / 人 / ％ / 倍 / 位 など)。 */
   readonly unit: string;
+  /**
+   * 文脈から読み取れる代替の単位 (分母つき表記)。**どれか 1 つで一致すれば可**とする。
+   * 「人口千人あたり8.55人 … 最下位の秋田県は3.95人」のように分母が文の前半にしか
+   * 現れない書き方があり、後半の数値を素の「人」に決め打つと誤検出になる。
+   * 決められないものを弾かない (誤検知を出すゲートは運用で無効化される)。
+   */
+  readonly altUnits?: readonly string[];
+  /**
+   * 文脈から読み取れる代替の値。負値を語で表す書き方 (「4,687人の転出超過」) を拾う。
+   * SSOT は -4,687 で持つので、符号を落としたまま比べると正しい本文が不一致になる。
+   */
+  readonly altValues?: readonly number[];
   /** 原文の該当箇所。 */
   readonly raw: string;
   /** 行内の位置 (報告用)。 */
@@ -54,18 +66,81 @@ export interface FactClaim {
 const PROXIMITY = 16;
 
 /**
+ * 本文で数値に付く単位。**長いものを先に並べる** (正規表現の交替は最左最長ではなく先勝ち)。
+ *
+ * ★分母つき単位を切り詰めてはならない (2026-08-12 実測)
+ *   「秋田県は通院者率が496人口千対で全国1位」を `人` で切ると単位が「人」になり、
+ *   SSOT が「人口千対」で持つ通院者率とは単位が揃わないため比較対象から外れる。
+ *   残った素の「人」の指標 (糖尿病死亡者数など) と比べられて、**正しい本文が不一致**になった
+ *   (K-S2-01 / K-S2-03 / K-S3-02 で計 36 件。すべて誤検出)。
+ *   分母は単位の一部であって省略できない — 正典: `.claude/rules/unit-semantics-standards.md` §4。
+ */
+const BASE_CLAIM_UNITS = ["円", "人", "％", "%", "位", "件", "世帯"] as const;
+
+/**
+ * 単位の交替パターンを作る。**長い順**に並べ、正規表現の先勝ちで最長一致にする。
+ *
+ * 呼び出し側 (`audit-book-facts`) はその書籍が扱う指標の SSOT 単位を渡す。
+ * 固定リストを持たないのは、単位の語彙が e-Stat 由来で 130 種以上あり、手で並べると
+ * 必ず取りこぼすため — 実際に「人泊」「人口千対」を落として誤検出を出した。
+ * **本文に出うる単位は、その書籍の指標の単位そのもの**なので、そこから作るのが確実。
+ */
+function unitPattern(extra: readonly string[] = []): string {
+  const all = [...new Set([...extra, ...BASE_CLAIM_UNITS].map((u) => u.trim()).filter(Boolean))];
+  all.sort((a, b) => b.length - a.length);
+  return all.map((u) => u.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+}
+
+/**
+ * 数値の**前**に置かれた分母表現 → SSOT の単位表記。
+ *
+ * ★語順が 2 通りある (2026-08-12 実測)
+ *   「496人口千対」  … 分母が数値の後ろ (単位として直接付く)
+ *   「人口千人あたり5.36人」… 分母が数値の前 (読み物としてはこちらが自然)
+ *   後者を素の「人」として扱うと、SSOT が「人口千対」で持つ婚姻率・粗出生率と単位が揃わず
+ *   比較対象から外れ、残った素の「人」の指標と比べられて**正しい本文が不一致**になる。
+ *   分母は単位の一部 — 正典: `.claude/rules/unit-semantics-standards.md` §4。
+ */
+const LEADING_DENOMINATORS: ReadonlyArray<readonly [RegExp, string]> = [
+  [/人口(?:千|1,?000)人?(?:あたり|当たり|当り|対)$/, "人口千対"],
+  [/人口(?:10万|100,?000)人?(?:あたり|当たり|当り|対)$/, "人口10万対"],
+];
+
+/** 数値の直前 (最大 12 文字) に分母表現があればその SSOT 単位を返す。 */
+function leadingDenominator(body: string, numStart: number): string | null {
+  const head = body.slice(Math.max(0, numStart - 12), numStart);
+  for (const [re, unit] of LEADING_DENOMINATORS) if (re.test(head)) return unit;
+  return null;
+}
+
+/** 同じ文の中に分母表現があれば、その単位を候補として返す (直前でなくてよい)。 */
+function sentenceDenominators(body: string, numStart: number): string[] {
+  const start = Math.max(
+    body.lastIndexOf("。", numStart - 1) + 1,
+    body.lastIndexOf("\n", numStart - 1) + 1,
+  );
+  const scope = body.slice(start, numStart);
+  const out: string[] = [];
+  for (const [re, unit] of LEADING_DENOMINATORS) {
+    // 文中のどこかに現れればよいので末尾アンカーを外して探す
+    if (new RegExp(re.source.replace(/\$$/, "")).test(scope)) out.push(unit);
+  }
+  return out;
+}
+
+/**
  * 1 行から「県 + 値」の主張を取り出す。
  *
  * 県名の**直後**に数値がある場合だけを採る (「東京都は623,317円」)。
  * 逆順 (「623,317円の東京都」) は係り受けが曖昧で誤判定を生みやすいので採らない
  * — 検出漏れは許容し、誤検出を出さないことを優先する。
  */
-export function extractFactClaims(line: string): FactClaim[] {
+export function extractFactClaims(line: string, units: readonly string[] = []): FactClaim[] {
   const out: FactClaim[] = [];
   const body = String(line);
   const prefRe = new RegExp(`(${PREFECTURES.join("|")})[都道府県]?`, "g");
   // 負値 (地価変動率など) も取りこぼさない
-  const numRe = /(-?[0-9][0-9,]*(?:\.[0-9]+)?)\s*(円|人|％|%|位|件|世帯)/g;
+  const numRe = new RegExp(`(-?[0-9][0-9,]*(?:\\.[0-9]+)?)\\s*(${unitPattern(units)})`, "g");
 
   const prefs: Array<{ name: string; start: number; end: number }> = [];
   for (const m of body.matchAll(prefRe)) {
@@ -75,9 +150,26 @@ export function extractFactClaims(line: string): FactClaim[] {
   if (prefs.length === 0) return out;
 
   for (const m of body.matchAll(numRe)) {
-    const value = parseFloat(m[1].replace(/,/g, ""));
+    let value = parseFloat(m[1].replace(/,/g, ""));
     if (!Number.isFinite(value)) continue;
     const numEnd = m.index + m[0].length;
+
+    // ★全国平均は県の主張ではない。直前に県名が並んでいても係り受けは「全国平均」にある
+    //   (実測: 「東北・九州・沖縄の県が下位に並びます。全国平均は328千円で」の 328 が
+    //   沖縄県の値として拾われ、正しい本文が不一致になった)。
+    if (/(?:全国平均|全国では|全国は|全国の平均)(?:は|が|で)?$/.test(body.slice(Math.max(0, m.index - 8), m.index))) continue;
+
+    // ★語彙的用法は数値の主張ではない (「1人あたり」「1世帯当たり」)。
+    //   拾うと素の「人」の指標と比べられて誤検出になる (2026-08-12 実測)。
+    //   概数・程度を表す語が続く場合も数値の主張ではない (「1人近く」「3割ほど」)。
+    if (/^(?:あたり|当たり|当り|近く|程度|ほど|前後|余り|あまり|ずつ)/.test(body.slice(numEnd))) continue;
+
+    // ★「マイナス18.7‰」「4,687人の転出超過」は負値を語で表す。符号を落として比べると
+    //   SSOT の -18.7 と一致せず、正しい本文が不一致になる。
+    const before = body.slice(Math.max(0, m.index - 5), m.index);
+    if (/(?:マイナス|▲|△)$/.test(before)) value = -value;
+    const after = body.slice(numEnd, numEnd + 8);
+    const negWord = /(?:転出超過|減少|減|マイナス)/.test(after);
 
     // ★日本語で最も多いのは「1位は大分県の308.8GJ」のように**数値が県の前**に来る語順。
     //   後方の県を見ないと「3位」が直前の別の県に付いてしまう (2026-08-12 に大量の誤検出)。
@@ -87,8 +179,10 @@ export function extractFactClaims(line: string): FactClaim[] {
     const following = prefs.find(
       (p) => p.start >= numEnd && p.start - numEnd <= 3 && /^[はがので]*$/.test(body.slice(numEnd, p.start)),
     );
+    const lead = leadingDenominator(body, m.index);
+    const alts = sentenceDenominators(body, m.index);
     if (following) {
-      out.push({ pref: following.name, value, unit: m[2], raw: m[0], index: m.index });
+      out.push({ pref: following.name, value, unit: lead ?? m[2], altUnits: alts, altValues: negWord ? [-value] : undefined, raw: m[0], index: m.index });
       continue;
     }
 
@@ -100,7 +194,7 @@ export function extractFactClaims(line: string): FactClaim[] {
       }
     }
     if (!best) continue;
-    out.push({ pref: best.name, value, unit: m[2], raw: m[0], index: m.index });
+    out.push({ pref: best.name, value, unit: lead ?? m[2], altUnits: alts, altValues: negWord ? [-value] : undefined, raw: m[0], index: m.index });
   }
   return out;
 }
@@ -167,11 +261,18 @@ export function verifyClaim(claim: FactClaim, truth: readonly TruthSeries[]): Cl
     const raw = t.byPref.get(claim.pref);
     if (raw === undefined) continue;
     // SSOT の単位 (千円等) を本文の単位 (円) に揃える。揃えられない組は比較しない。
-    const scale = unitScale(t.unit, claim.unit);
+    // 候補単位 (分母つき表記) のいずれかで揃えば、その解釈で比べる。
+    let scale: number | null = null;
+    for (const u of [claim.unit, ...(claim.altUnits ?? [])]) {
+      const f = unitScale(t.unit, u);
+      if (f !== null) { scale = f; break; }
+    }
     if (scale === null) continue;
     const actual = raw * scale;
     sawPref = true;
-    if (Math.abs(actual - claim.value) <= Math.max(1, Math.abs(actual) * TOLERANCE)) {
+    const near = (v: number): boolean =>
+      Math.abs(actual - v) <= Math.max(1, Math.abs(actual) * TOLERANCE);
+    if ([claim.value, ...(claim.altValues ?? [])].some(near)) {
       return { kind: "match", metric: t.metric, year: t.year };
     }
     const diff = Math.abs(actual - claim.value) / Math.max(1, Math.abs(actual));
@@ -180,6 +281,11 @@ export function verifyClaim(claim: FactClaim, truth: readonly TruthSeries[]): Cl
       nearest = { metric: t.metric, year: t.year, actual };
     }
   }
+  // ★値だけの照合 (単位を無視してその県のどこかに同じ値があるか) は**採らない**。
+  //   一度実装して実測したところ、誤値を 3 件注入して検出できたのは 1 件だけだった
+  //   (2 倍・5% ずらしが、同じ県の別指標に偶然一致して通ってしまう)。
+  //   単位の曖昧さは本文側で解消する — 「3.95人」ではなく「3.95人（人口千対）」と書けば
+  //   読者にとっても正確になる。ゲートを緩めて曖昧な本文を通す方向には倒さない。
   if (!sawPref) return { kind: "unknown-pref" };
   return { kind: "mismatch", nearest };
 }
