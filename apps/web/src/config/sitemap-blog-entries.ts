@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-08-06
- * 件数: blog 422 / tag 59 / survey 73
+ * 最終生成日: 2026-08-12
+ * 件数: blog 425 / tag 59 / survey 73
  */
 
 export interface SitemapBlogEntry {
@@ -39,6 +39,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "automotive-industry-transformation-map", lastModified: "2026-06-07" },
   { slug: "avg-height-high-school-2nd-male", lastModified: "2026-06-21" },
   { slug: "avg-height-high-school-2nd-male-vs-fish-pickled-consumption", lastModified: "2026-08-05" },
+  { slug: "avg-height-high-school-2nd-male-vs-floor-area-new-owner", lastModified: "2026-08-09" },
+  { slug: "avg-height-high-school-2nd-male-vs-rice-cracker-consumption", lastModified: "2026-08-10" },
   { slug: "banana-consumption-quantity", lastModified: "2026-06-21" },
   { slug: "bank-deposit-balance-shikoku-anomaly", lastModified: "2026-05-29" },
   { slug: "barber-beauty-salon-regional-gap", lastModified: "2026-03-09" },
@@ -331,6 +333,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "prefecture-salary-remote-gap", lastModified: "2026-06-02" },
   { slug: "price-index-high-low-prefecture", lastModified: "2026-06-07" },
   { slug: "professor-income-prefecture-gap", lastModified: "2026-05-31" },
+  { slug: "psychiatric-bed-count-vs-elementary-school-count", lastModified: "2026-08-11" },
   { slug: "public-phone-count", lastModified: "2026-06-14" },
   { slug: "public-phone-count-gap", lastModified: "2026-06-07" },
   { slug: "public-phone-prefecture-vanishing", lastModified: "2026-03-29" },
@@ -464,7 +467,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "出生率", lastModified: "2026-06-08" },
   { tagKey: "労働", lastModified: "2026-06-15" },
   { tagKey: "北海道", lastModified: "2026-07-10" },
-  { tagKey: "医療", lastModified: "2026-08-03" },
+  { tagKey: "医療", lastModified: "2026-08-11" },
   { tagKey: "地名", lastModified: "2026-07-17" },
   { tagKey: "地域差", lastModified: "2026-07-10" },
   { tagKey: "地域格差", lastModified: "2026-07-12" },
@@ -476,7 +479,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "市区町村", lastModified: "2026-07-16" },
   { tagKey: "年収", lastModified: "2026-07-20" },
   { tagKey: "所得格差", lastModified: "2026-07-19" },
-  { tagKey: "教育", lastModified: "2026-07-16" },
+  { tagKey: "教育", lastModified: "2026-08-11" },
   { tagKey: "教育格差", lastModified: "2026-07-10" },
   { tagKey: "教育費", lastModified: "2026-07-26" },
   { tagKey: "東北", lastModified: "2026-07-12" },
@@ -489,7 +492,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "環境", lastModified: "2026-06-21" },
   { tagKey: "生活費", lastModified: "2026-07-11" },
   { tagKey: "産業構造", lastModified: "2026-06-02" },
-  { tagKey: "社会保障", lastModified: "2026-07-16" },
+  { tagKey: "社会保障", lastModified: "2026-08-11" },
   { tagKey: "納豆", lastModified: "2026-07-19" },
   { tagKey: "経済", lastModified: "2026-06-21" },
   { tagKey: "製造業", lastModified: "2026-07-16" },
