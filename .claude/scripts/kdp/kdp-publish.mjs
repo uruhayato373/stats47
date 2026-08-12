@@ -13,10 +13,9 @@
  * ★KU (KDP Select 独占) 登録は kdp-listings.json の kuEnrolled=false を尊重 (当面 未登録=販売のみ)。
  */
 import { writeFileSync } from "node:fs";
-import { join } from "node:path";
 import {
   launchContext, waitForLogin, assertAccount, readListings, writeBackListing,
-  resolveAsset, shotPath, sleep, ROOT,
+  resolveAsset, shotPath, sleep,
 } from "./lib/kdp-session.mjs";
 
 const argv = process.argv.slice(2);
@@ -75,7 +74,9 @@ try {
         labels: q("label").map((l) => (l.textContent || "").trim().slice(0, 50)).filter(Boolean).slice(0, 60),
       };
     });
-    const out = join(ROOT, ".local/kdp-debug", `probe-${ID}.json`);
+    // ★出力先は shotPath() 経由で取る (mkdir を内包している)。
+    //   素の join だと .local/kdp-debug 未作成のときに ENOENT で落ちる (2026-08-12 実測)。
+    const out = shotPath(`probe-${ID}.json`);
     writeFileSync(out, JSON.stringify(structure, null, 2));
     await page.screenshot({ path: shotPath(`probe-${ID}.png`), fullPage: true }).catch(() => {});
     console.log(`[probe] フォーム構造を dump: ${out} / スクショ: .local/kdp-debug/probe-${ID}.png`);
