@@ -20,6 +20,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { METRICS_REGISTRY } from "@stats47/data-configs";
 import { KINDLE_BOOKS } from "../src/channels/kindle/book-catalog";
 import {
   extractFactClaims,
@@ -129,6 +130,18 @@ async function collectMetricKeys(book: (typeof KINDLE_BOOKS)[number]): Promise<s
   return [...keys];
 }
 
+/** 全角括弧・空白の揺れを畳んで、本文と指標名を突き合わせられるようにする。 */
+function norm(t: string): string {
+  return t.replace(/[（）]/g, (c) => (c === "（" ? "(" : ")")).replace(/\s+/g, "");
+}
+
+/** 指標の照合用タイトル (短すぎるものは誤マッチするので使わない)。 */
+function titleOf(key: string): string {
+  const t = (METRICS_REGISTRY as Record<string, { title?: string } | undefined>)[key]?.title ?? "";
+  const n = norm(t);
+  return n.length >= 5 ? n : "";
+}
+
 async function main(): Promise<void> {
   assertKnownFlags();
   const only = arg("book");
@@ -159,6 +172,10 @@ async function main(): Promise<void> {
         for (const c of extractKanjiClaims(line)) {
           if (c.unit === "円" || c.unit === "位" || c.unit === "倍" || c.unit === "％") kanjiLeft++;
         }
+        // ★行が指標名を明示していても、その指標に限定してはならない (2026-08-12 実測)。
+        //   1 行が複数の指標に触れるのが普通で、限定すると「高齢者割合は…東京都は66.8％」の
+        //   66.8 (生産年齢人口割合) が高齢者割合と比べられて不一致になる。
+        //   限定を入れた結果、誤検出が K-S2-01 で 1→22 件、K-S2-05 で 9→23 件に増えた。
         for (const claim of extractFactClaims(line, claimUnits)) {
           checked++;
           const v = verifyClaim(claim, series);

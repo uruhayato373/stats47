@@ -101,29 +101,46 @@ function unitPattern(extra: readonly string[] = []): string {
  *   比較対象から外れ、残った素の「人」の指標と比べられて**正しい本文が不一致**になる。
  *   分母は単位の一部 — 正典: `.claude/rules/unit-semantics-standards.md` §4。
  */
-const LEADING_DENOMINATORS: ReadonlyArray<readonly [RegExp, string]> = [
-  [/人口(?:千|1,?000)人?(?:あたり|当たり|当り|対)$/, "人口千対"],
-  [/人口(?:10万|100,?000)人?(?:あたり|当たり|当り|対)$/, "人口10万対"],
+const LEADING_DENOMINATORS: ReadonlyArray<readonly [RegExp, string, RegExp]> = [
+  // [文中の表現, 既定の単位表記, その分母を持つ SSOT 単位を見分ける正規表現]
+  [/人口(?:千|1,?000)人?(?:あたり|当たり|当り|対)$/, "人口千対", /千対|1,?000人/],
+  [/人口(?:10万|100,?000)人?(?:あたり|当たり|当り|対)$/, "人口10万対", /10万|100,?000人/],
 ];
 
+/**
+ * 分母つき単位の表記は SSOT 側でも揺れる (「人口10万対」「人（人口10万対）」)。
+ * 既定表記だけを候補にすると換算できず、**正しい本文が不一致**になる
+ * (実測: 受療率の SSOT 単位が「人（人口10万対）」で、既定の「人口10万対」と揃わなかった)。
+ * その書籍の単位のうち同じ分母を持つものを候補に加え、表記ゆれに依存しないようにする。
+ */
+function denominatorUnits(head: string, units: readonly string[]): string[] {
+  const out: string[] = [];
+  for (const [re, fallback, ssotRe] of LEADING_DENOMINATORS) {
+    if (!re.test(head)) continue;
+    const hits = units.filter((u) => ssotRe.test(u));
+    out.push(...(hits.length > 0 ? hits : [fallback]));
+  }
+  return out;
+}
+
 /** 数値の直前 (最大 12 文字) に分母表現があればその SSOT 単位を返す。 */
-function leadingDenominator(body: string, numStart: number): string | null {
-  const head = body.slice(Math.max(0, numStart - 12), numStart);
-  for (const [re, unit] of LEADING_DENOMINATORS) if (re.test(head)) return unit;
-  return null;
+function leadingDenominator(body: string, numStart: number, units: readonly string[]): string | null {
+  return denominatorUnits(body.slice(Math.max(0, numStart - 12), numStart), units)[0] ?? null;
 }
 
 /** 同じ文の中に分母表現があれば、その単位を候補として返す (直前でなくてよい)。 */
-function sentenceDenominators(body: string, numStart: number): string[] {
+function sentenceDenominators(body: string, numStart: number, units: readonly string[]): string[] {
   const start = Math.max(
     body.lastIndexOf("。", numStart - 1) + 1,
     body.lastIndexOf("\n", numStart - 1) + 1,
   );
   const scope = body.slice(start, numStart);
   const out: string[] = [];
-  for (const [re, unit] of LEADING_DENOMINATORS) {
+  for (const [re, fallback, ssotRe] of LEADING_DENOMINATORS) {
     // 文中のどこかに現れればよいので末尾アンカーを外して探す
-    if (new RegExp(re.source.replace(/\$$/, "")).test(scope)) out.push(unit);
+    if (!new RegExp(re.source.replace(/\$$/, "")).test(scope)) continue;
+    const hits = units.filter((u) => ssotRe.test(u));
+    out.push(...(hits.length > 0 ? hits : [fallback]));
   }
   return out;
 }
@@ -164,6 +181,11 @@ export function extractFactClaims(line: string, units: readonly string[] = []): 
     //   概数・程度を表す語が続く場合も数値の主張ではない (「1人近く」「3割ほど」)。
     if (/^(?:あたり|当たり|当り|近く|程度|ほど|前後|余り|あまり|ずつ)/.test(body.slice(numEnd))) continue;
 
+    // ★差 (2 県の開き) は県の値ではない。直前に県名があっても係り受けは「差」にある
+    //   (実測: 「沖縄県の24.4℃から北海道の10.5℃まで、14℃近い開き」の 14℃ が北海道の値にされた)。
+    if (/^(?:近い|を?超える差|以上の(?:開き|差)|の(?:開き|差)|も(?:の)?(?:開き|差))/.test(body.slice(numEnd))) continue;
+    if (/(?:その差は|差は|開きは|差が|開きが)$/.test(body.slice(Math.max(0, m.index - 6), m.index))) continue;
+
     // ★「マイナス18.7‰」「4,687人の転出超過」は負値を語で表す。符号を落として比べると
     //   SSOT の -18.7 と一致せず、正しい本文が不一致になる。
     const before = body.slice(Math.max(0, m.index - 5), m.index);
@@ -179,8 +201,8 @@ export function extractFactClaims(line: string, units: readonly string[] = []): 
     const following = prefs.find(
       (p) => p.start >= numEnd && p.start - numEnd <= 3 && /^[はがので]*$/.test(body.slice(numEnd, p.start)),
     );
-    const lead = leadingDenominator(body, m.index);
-    const alts = sentenceDenominators(body, m.index);
+    const lead = leadingDenominator(body, m.index, units);
+    const alts = sentenceDenominators(body, m.index, units);
     if (following) {
       out.push({ pref: following.name, value, unit: lead ?? m[2], altUnits: alts, altValues: negWord ? [-value] : undefined, raw: m[0], index: m.index });
       continue;
