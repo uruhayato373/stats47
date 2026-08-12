@@ -8,7 +8,7 @@ import { validateDataset } from "../src/validators/dataset-validator";
 import { SAMPLE_DATASET } from "../src/fixtures/sample-dataset";
 import { rankingBarSpec, classifyChoropleth } from "../src/charts/chart-spec";
 import { renderLicenseText } from "../src/licenses/license-text";
-import { loadPrefectureGeometry } from "../src/maps/prefecture-geometry";
+import { JAPAN_CLIP, loadPrefectureGeometry } from "../src/maps/prefecture-geometry";
 import { LICENSE_IDS } from "../src/catalog/licenses";
 
 describe("prefectures master", () => {
@@ -126,5 +126,41 @@ describe("prefecture geometry", () => {
         }
       }
     }
+  });
+
+  // ★2026-08-12: 上のテストは「点が枠内にあるか」しか見ておらず、投影が壊れていても通っていた。
+  //   経度を「度」・緯度を Mercator の対数 (ラジアン系) で混ぜていたため x が 180/π 倍に伸び、
+  //   商品の日本地図がアスペクト比 0.079 の平たい帯になっていた (正しくは約 1.12)。
+  //   形が日本に見えるかは縦横比でしか機械判定できないので、ここで固定する。
+  it("本土+沖縄の縦横比が実際の日本と一致する (投影の単位ずれを防ぐ)", () => {
+    const geo = loadPrefectureGeometry(1000, JAPAN_CLIP);
+    const aspect = geo.height / geo.width;
+    // 経度 122-146 / 緯度 23-46 の Mercator 比は約 1.18。実データの端は少し内側なので幅を持たせる。
+    expect(aspect).toBeGreaterThan(1.0);
+    expect(aspect).toBeLessThan(1.35);
+  });
+
+  it("北海道が九州より北にあり、沖縄が最南にある (南北の向きが反転していない)", () => {
+    const geo = loadPrefectureGeometry(1000, JAPAN_CLIP);
+    const midY = (code5: string): number => {
+      const s = geo.shapes.find((x) => x.code5 === code5);
+      if (!s) throw new Error(`${code5} が無い`);
+      const ys = s.rings.flat().map((p) => p.y);
+      return ys.reduce((a, b) => a + b, 0) / ys.length;
+    };
+    // y は画面座標 (下が大きい)
+    expect(midY("01000")).toBeLessThan(midY("40000")); // 北海道 < 福岡
+    expect(midY("47000")).toBeGreaterThan(midY("40000")); // 沖縄 > 福岡
+  });
+
+  it("東京が福岡より東にある (東西の向きが反転していない)", () => {
+    const geo = loadPrefectureGeometry(1000, JAPAN_CLIP);
+    const midX = (code5: string): number => {
+      const s = geo.shapes.find((x) => x.code5 === code5);
+      if (!s) throw new Error(`${code5} が無い`);
+      const xs = s.rings.flat().map((p) => p.x);
+      return xs.reduce((a, b) => a + b, 0) / xs.length;
+    };
+    expect(midX("13000")).toBeGreaterThan(midX("40000"));
   });
 });

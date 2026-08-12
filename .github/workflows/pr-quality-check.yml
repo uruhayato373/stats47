@@ -350,6 +350,16 @@ jobs:
           npm run build:registry --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
+      - name: 📏 Unit Semantics Mirror Gate
+        run: |
+          # 単位の解釈は packages/data-configs/src/unit/unit-semantics.ts が正典で、
+          # .claude/scripts/lib/unit-semantics.mjs はそこからの自動生成 (素の node 実行用)。
+          # 手写しの二重実装はドリフトする — それが単位解釈 44 箇所の独立実装を生み、
+          # 「千円 SSOT × 円 本文」の桁ずれ誤検出を招いた (2026-08-12)。鏡の陳腐化を止める。
+          # 規約: .claude/rules/unit-semantics-standards.md
+          npx tsx packages/data-configs/scripts/generate-unit-semantics-mirror.ts --check
+        continue-on-error: false
+
       - name: 🎨 Colorscheme Policy Gate
         run: |
           # コロプレス配色の決定規則と極性 SSOT を担保。

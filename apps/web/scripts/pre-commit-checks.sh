@@ -96,6 +96,33 @@ if [ -n "$STAGED_JS" ]; then
   fi
 fi
 
+# 2.0.1 CI の Static Gates と同じ 3 ゲートを先行実行する (2026-08-12 追加)
+#
+# ★なぜ足したか: この 3 つは CI (Static Gates) にだけあって pre-commit に無く、
+#   ローカルで pre-commit を全部通したのに CI で 3 回連続で落ちた
+#   (DUPLICATE_IMAGE → ENV_UNREGISTERED → UNBOUNDED_LEGACY)。
+#   1 往復あたり CI が十数分かかるので、合計 3.7 秒 (実測 0.7 + 1.4 + 1.6) をここで払う方が安い。
+#   いずれも baseline 方式で既存違反は素通りし、新規混入だけを止める。
+#   ★root は GUARD_ROOT を使う (PROJECT_ROOT はこのブロックより後で定義されるので空になり、
+#     存在しないパスを叩いて 3 つとも「失敗」になる)。
+STAGED_ANY=$(git diff --cached --name-only --diff-filter=ACM || true)
+if [ -n "$STAGED_ANY" ]; then
+  echo -e "${GREEN}🔐 環境変数レジストリ・資産ポリシー・保守負債ガード...${NC}"
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-env-registry.cjs"; then
+    echo -e "${RED}❌ 未登録の環境変数があります。.claude/config/env-registry.json に登録してください。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-asset-policy.cjs" --baseline; then
+    echo -e "${RED}❌ 画像資産ポリシー違反 (重複画像・寸法・容量など)。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-maintenance-debt.cjs" --baseline; then
+    # ★判定は行単位。legacy / deprecated と同じ行に削除条件を書く (別行だと素通りしない)
+    echo -e "${RED}❌ 無根拠な TODO/legacy/deprecated。削除条件を legacy と同じ行に書いてください。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
 # 2.1.1 画像生成差分/publish policy ガード
 # workflow / planner / manifest / publisher の変更時だけ、CI と同じ fail-closed policy を先行実行する。
 STAGED_IMAGE_PIPELINE=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
@@ -413,6 +440,25 @@ if [ -n "$STAGED_ARTICLES" ]; then
   fi
 else
   echo -e "${GREEN}✅ ブログ記事の変更なし${NC}"
+fi
+
+# 6.45 単位セマンティクスの鏡ドリフト検査 (2026-08-12 追加 / .claude/rules/unit-semantics-standards.md)
+# 正典 packages/data-configs/src/unit/unit-semantics.ts から
+# .claude/scripts/lib/unit-semantics.mjs を自動生成している (.claude/scripts/** は素の node 実行で
+# TS を import できない)。手写しの二重実装はドリフトする — それが単位解釈 44 箇所の独立実装を生み、
+# 「千円 SSOT × 円 本文」の桁ずれ誤検出を招いた。どちらかだけの変更を止める。
+STAGED_UNIT=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^(packages/data-configs/src/unit/|\.claude/scripts/lib/unit-semantics\.mjs)" || true)
+
+if [ -n "$STAGED_UNIT" ]; then
+  echo -e "${GREEN}📏 単位セマンティクスの鏡チェック...${NC}"
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/generate-unit-semantics-mirror.ts --check > /tmp/unit-mirror.log 2>&1); then
+    echo -e "${GREEN}✅ 鏡は正典と一致${NC}"
+  else
+    cat /tmp/unit-mirror.log
+    echo -e "${RED}❌ 単位セマンティクスの鏡が正典とずれています${NC}"
+    echo -e "${YELLOW}💡 再生成: npx tsx packages/data-configs/scripts/generate-unit-semantics-mirror.ts${NC}"
+    exit 1
+  fi
 fi
 
 # 6.5 metric config の year 正規化チェック (2026-05-29 追加 / .claude/rules/estat-api.md「年の正規化」)

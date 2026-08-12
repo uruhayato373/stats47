@@ -126,3 +126,66 @@ test('成功 run に「エラー文が無い」という但し書きを出さな
   );
   assert.match(failed, /show_full_output/);
 });
+
+/**
+ * CI 特有の最頻の失敗形: Agent を background で起動したままターンを終える。
+ *
+ * 2026-08-09 の ai-content run 31342281865 が実例。10 件の author を一括起動して
+ * 「完了通知を待ちます」と終えた結果、9 件が未完のまま run が終了し 0 件公開になった。
+ * このとき Claude 自身は is_error=false で「成功」しているので、is_error だけを見ていると
+ * 原因が読み取れない。tool_use に対応する tool_result の欠落で決定的に名指しする。
+ */
+const agentUse = (id, subagentType) => ({
+  type: 'assistant',
+  message: { content: [{ type: 'tool_use', id, name: 'Agent', input: { subagent_type: subagentType } }] },
+});
+const agentResult = (id) => ({
+  type: 'user',
+  message: { content: [{ type: 'tool_result', tool_use_id: id, content: 'done' }] },
+});
+
+test('結果が返っていない Agent を未完了として数える', () => {
+  const summary = summarizeClaudeExecution([
+    agentUse('a1', 'ranking-content-author'),
+    agentUse('a2', 'ranking-content-author'),
+    agentUse('c1', 'ranking-content-critic'),
+    agentResult('a1'),
+    { type: 'result', subtype: 'success', is_error: false, num_turns: 42 },
+  ]);
+  assert.deepEqual(summary.unfinishedAgents, ['ranking-content-author', 'ranking-content-critic']);
+});
+
+test('全部 tool_result が返っていれば未完了ゼロ (誤検知しない)', () => {
+  const summary = summarizeClaudeExecution([
+    agentUse('a1', 'article-writer'),
+    agentResult('a1'),
+    agentUse('c1', 'blog-critic'),
+    agentResult('c1'),
+    { type: 'result', subtype: 'success', is_error: false, num_turns: 30 },
+  ]);
+  assert.deepEqual(summary.unfinishedAgents, []);
+});
+
+test('★is_error=false でも未完了 agent を報告する (この形は Claude 側が「成功」する)', () => {
+  const out = formatSummary(
+    summarizeClaudeExecution([
+      agentUse('a1', 'ranking-content-author'),
+      agentUse('a2', 'ranking-content-author'),
+      { type: 'result', subtype: 'success', is_error: false, num_turns: 42, duration_ms: 1, total_cost_usd: 1 },
+    ]),
+  );
+  assert.match(out, /未完了 agent/);
+  assert.match(out, /2 件/);
+  assert.match(out, /run_in_background: false/);
+});
+
+test('未完了が無い run に未完了の但し書きを出さない', () => {
+  const out = formatSummary(
+    summarizeClaudeExecution([
+      agentUse('a1', 'article-writer'),
+      agentResult('a1'),
+      { type: 'result', subtype: 'success', is_error: false, num_turns: 30, duration_ms: 1, total_cost_usd: 1 },
+    ]),
+  );
+  assert.doesNotMatch(out, /未完了 agent/);
+});

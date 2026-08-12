@@ -831,7 +831,7 @@
       "a8mat": null,
       "vertical": "labor",
       "score": 0.6004950000000001,
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -852,12 +852,23 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.852Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:22.805Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
       ],
       "rewardYen": 12500,
       "epcYen": 161,
       "confirmRatePct": 53.33,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 20,
+      "_ce": 85.8613,
+      "selectedForRegister": true,
+      "priority": 20
     },
     "s00000000018021": {
       "programId": "s00000000018021",
@@ -8488,7 +8499,7 @@
       "lastError": {
         "step": "harvest",
         "error": "session-expired",
-        "at": "2026-08-01T22:00:29.551Z"
+        "at": "2026-08-08T22:00:54.079Z"
       }
     },
     "s00000019877001": {
@@ -8570,7 +8581,9 @@
       "rewardYen": 7407,
       "epcYen": 167,
       "confirmRatePct": 35.27,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 20,
+      "_ce": 58.9009
     },
     "s00000027372001": {
       "programId": "s00000027372001",
@@ -8623,7 +8636,9 @@
         }
       ],
       "rewardYen": 15000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000025687001": {
       "programId": "s00000025687001",
@@ -8678,7 +8693,7 @@
       "a8mat": null,
       "vertical": "health",
       "score": 0.44000000000000006,
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -8695,10 +8710,21 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.857Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:31.544Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
       ],
       "rewardYen": 10000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000026977002": {
       "programId": "s00000026977002",
@@ -8849,7 +8875,7 @@
       "a8mat": null,
       "vertical": "health",
       "score": 0.43300000000000005,
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -8866,12 +8892,23 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:37.228Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
       ],
       "rewardYen": 6000,
       "epcYen": 6,
       "confirmRatePct": 100,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 6,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000021923002": {
       "programId": "s00000021923002",
@@ -8905,7 +8942,7 @@
       "a8mat": null,
       "vertical": "labor",
       "score": 0.42336000000000007,
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -8922,12 +8959,23 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:45.776Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
       ],
       "rewardYen": 8000,
       "epcYen": 54,
       "confirmRatePct": 24.24,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 13.089599999999999,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000011875008": {
       "programId": "s00000011875008",
@@ -8957,7 +9005,9 @@
       ],
       "rewardYen": 7000,
       "confirmRatePct": 66.66,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000007033001": {
       "programId": "s00000007033001",
@@ -9060,7 +9110,9 @@
       ],
       "rewardYen": 9000,
       "epcYen": 37,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000020563001": {
       "programId": "s00000020563001",
@@ -9188,7 +9240,9 @@
         }
       ],
       "rewardYen": 8000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000008714006": {
       "programId": "s00000008714006",
@@ -9220,7 +9274,7 @@
       "a8mat": null,
       "vertical": "population",
       "score": 0.3530000000000001,
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -9237,12 +9291,23 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:51.282Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
       ],
       "rewardYen": 4000,
       "epcYen": 6,
       "confirmRatePct": 100,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 6,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000024621001": {
       "programId": "s00000024621001",
@@ -9251,7 +9316,7 @@
       "a8mat": null,
       "vertical": "health",
       "score": 0.3520000000000001,
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -9268,12 +9333,23 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:54.091Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
       ],
       "rewardRatePct": 20,
       "epcYen": 4,
       "confirmRatePct": 100,
-      "rewardType": "rate"
+      "rewardType": "rate",
+      "_priority": 10,
+      "_ce": 4,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000024144001": {
       "programId": "s00000024144001",
@@ -9469,7 +9545,7 @@
       "epcYen": 218,
       "confirmRatePct": 13.33,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -9486,8 +9562,19 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.857Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:25.792Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 29.0594,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000019724003": {
       "programId": "s00000019724003",
@@ -9568,7 +9655,9 @@
           "at": "2026-08-04T00:33:09.857Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000026609001": {
       "programId": "s00000026609001",
@@ -9582,7 +9671,7 @@
       "epcYen": 529,
       "confirmRatePct": 48.18,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -9599,8 +9688,19 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.857Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:28.745Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
-      ]
+      ],
+      "_priority": 40,
+      "_ce": 254.8722,
+      "selectedForRegister": true,
+      "priority": 40
     },
     "s00000020603004": {
       "programId": "s00000020603004",
@@ -9630,7 +9730,9 @@
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000024144004": {
       "programId": "s00000024144004",
@@ -9690,7 +9792,7 @@
       "score": 0.44000000000000006,
       "rewardYen": 15000,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -9707,8 +9809,19 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:34.333Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000026543001": {
       "programId": "s00000026543001",
@@ -9746,7 +9859,7 @@
       "epcYen": 91,
       "confirmRatePct": 59.16,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -9763,8 +9876,19 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:42.884Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
-      ]
+      ],
+      "_priority": 20,
+      "_ce": 53.8356,
+      "selectedForRegister": true,
+      "priority": 20
     },
     "s00000022375001": {
       "programId": "s00000022375001",
@@ -9854,7 +9978,7 @@
       "epcYen": 19,
       "confirmRatePct": 67.24,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -9871,8 +9995,19 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:48.547Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 12.7756,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000014546010": {
       "programId": "s00000014546010",
@@ -9904,7 +10039,9 @@
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 25.8
     },
     "s00000027240002": {
       "programId": "s00000027240002",
@@ -9916,7 +10053,7 @@
       "score": 0.43199999999999994,
       "rewardYen": 7300,
       "rewardType": "fixed",
-      "status": "approved",
+      "status": "error",
       "history": [
         {
           "from": null,
@@ -9933,8 +10070,19 @@
           "to": "approved",
           "at": "2026-08-04T00:33:09.858Z",
           "note": "affiliate-status 相当の実機照合 (参加中一覧 全ページ走査) で確認。本番 check-approval は 1 ページ目のみ読むため取りこぼしていた分"
+        },
+        {
+          "from": "approved",
+          "to": "error",
+          "at": "2026-08-08T22:00:40.032Z",
+          "step": "harvest",
+          "error": "no-ad-code"
         }
-      ]
+      ],
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10
     },
     "s00000014771001": {
       "programId": "s00000014771001",
@@ -10120,5 +10268,5 @@
       }
     }
   },
-  "updatedAt": "2026-08-04T00:33:09.858Z"
+  "updatedAt": "2026-08-08T22:00:54.092Z"
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "week": "2026-W32",
-  "decidedAt": "2026-08-03T04:33:29.456Z",
+  "decidedAt": "2026-08-09T11:23:20.612Z",
   "thresholdsVersion": "1.0.0",
   "thresholdsPath": ".claude/scripts/lib/effect-verdict/thresholds.mjs",
   "note": "閾値エンジンによる effect ラベルの確定記録。ガード hit は effect/pending に留まる。backlog の status 反映は improvement-triage が行う (本 CLI は書かない)。",
@@ -12,7 +12,7 @@
     },
     "byGuard": {
       "insufficient-target": 12,
-      "insufficient-sample": 3,
+      "insufficient-sample": 2,
       "confounded": 5
     }
   },
@@ -30,7 +30,7 @@
         },
         {
           "code": "insufficient-sample",
-          "detail": "相対変化 2.2% < sample.minRelativeDelta 5.0%"
+          "detail": "相対変化 1.1% < sample.minRelativeDelta 5.0%"
         }
       ],
       "before": {
@@ -38,11 +38,11 @@
         "impressions": 7141
       },
       "after": {
-        "value": 91,
-        "impressions": 9502
+        "value": 90,
+        "impressions": 9284
       },
-      "delta": 2,
-      "relativeDelta": 0.022472,
+      "delta": 1,
+      "relativeDelta": 0.011236,
       "target": null,
       "attainment": null,
       "boundaries": {
@@ -52,14 +52,14 @@
       },
       "window": {
         "beforeWeek": "2026-W20",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 10,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 11,
         "minWeeks": 2
       },
       "sources": [
         {
-          "name": "gsc:snapshots/2026-W31/pages.csv",
-          "observedAt": "2026-08-02",
+          "name": "gsc:snapshots/2026-W32/pages.csv",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],
@@ -100,11 +100,11 @@
         "impressions": 11300
       },
       "after": {
-        "value": 165,
-        "impressions": 17513
+        "value": 181,
+        "impressions": 16992
       },
-      "delta": 38,
-      "relativeDelta": 0.299213,
+      "delta": 54,
+      "relativeDelta": 0.425197,
       "target": null,
       "attainment": null,
       "boundaries": {
@@ -114,14 +114,14 @@
       },
       "window": {
         "beforeWeek": "2026-W21",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 9,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 10,
         "minWeeks": 2
       },
       "sources": [
         {
-          "name": "gsc:snapshots/2026-W31/pages.csv",
-          "observedAt": "2026-08-02",
+          "name": "gsc:snapshots/2026-W32/pages.csv",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],
@@ -205,11 +205,11 @@
         "impressions": 1258
       },
       "after": {
-        "value": 10,
-        "impressions": 3440
+        "value": 9,
+        "impressions": 3080
       },
-      "delta": 3,
-      "relativeDelta": 0.428571,
+      "delta": 2,
+      "relativeDelta": 0.285714,
       "target": null,
       "attainment": null,
       "boundaries": {
@@ -219,14 +219,14 @@
       },
       "window": {
         "beforeWeek": "2026-W21",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 9,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 10,
         "minWeeks": 2
       },
       "sources": [
         {
-          "name": "gsc:snapshots/2026-W31/pages.csv",
-          "observedAt": "2026-08-02",
+          "name": "gsc:snapshots/2026-W32/pages.csv",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],
@@ -248,16 +248,12 @@
       "domainId": "gsc-blog-wave",
       "subjectId": "BLOG-WAVE-2026-06-07-manual",
       "label": "effect/pending",
-      "reason": "ガード insufficient-target, insufficient-sample により判定不能",
+      "reason": "ガード insufficient-target により判定不能",
       "thresholdsVersion": "1.0.0",
       "guards": [
         {
           "code": "insufficient-target",
           "detail": "想定効果値 (target delta) が機械可読な形で登録されていない"
-        },
-        {
-          "code": "insufficient-sample",
-          "detail": "after imp 99 < sample.minImpressionsAfter 100"
         }
       ],
       "before": {
@@ -265,10 +261,10 @@
         "impressions": 207
       },
       "after": {
-        "value": 3,
-        "impressions": 99
+        "value": 2,
+        "impressions": 127
       },
-      "delta": 3,
+      "delta": 2,
       "relativeDelta": null,
       "target": null,
       "attainment": null,
@@ -279,14 +275,14 @@
       },
       "window": {
         "beforeWeek": "2026-W22",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 8,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 9,
         "minWeeks": 2
       },
       "sources": [
         {
-          "name": "gsc:snapshots/2026-W31/pages.csv",
-          "observedAt": "2026-08-02",
+          "name": "gsc:snapshots/2026-W32/pages.csv",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],
@@ -320,11 +316,11 @@
         "impressions": 2614
       },
       "after": {
-        "value": 241,
-        "impressions": 8067
+        "value": 253,
+        "impressions": 8152
       },
-      "delta": 172,
-      "relativeDelta": 2.492754,
+      "delta": 184,
+      "relativeDelta": 2.666667,
       "target": null,
       "attainment": null,
       "boundaries": {
@@ -334,14 +330,14 @@
       },
       "window": {
         "beforeWeek": "2026-W22",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 8,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 9,
         "minWeeks": 2
       },
       "sources": [
         {
-          "name": "gsc:snapshots/2026-W31/pages.csv",
-          "observedAt": "2026-08-02",
+          "name": "gsc:snapshots/2026-W32/pages.csv",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],
@@ -375,11 +371,11 @@
         "impressions": 889
       },
       "after": {
-        "value": 100,
-        "impressions": 3792
+        "value": 87,
+        "impressions": 3604
       },
-      "delta": 74,
-      "relativeDelta": 2.846154,
+      "delta": 61,
+      "relativeDelta": 2.346154,
       "target": null,
       "attainment": null,
       "boundaries": {
@@ -389,14 +385,14 @@
       },
       "window": {
         "beforeWeek": "2026-W22",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 8,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 9,
         "minWeeks": 2
       },
       "sources": [
         {
-          "name": "gsc:snapshots/2026-W31/pages.csv",
-          "observedAt": "2026-08-02",
+          "name": "gsc:snapshots/2026-W32/pages.csv",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],
@@ -434,10 +430,10 @@
         "impressions": 37
       },
       "after": {
-        "value": 12,
-        "impressions": 431
+        "value": 11,
+        "impressions": 460
       },
-      "delta": 12,
+      "delta": 11,
       "relativeDelta": null,
       "target": null,
       "attainment": null,
@@ -448,14 +444,14 @@
       },
       "window": {
         "beforeWeek": "2026-W23",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 7,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 8,
         "minWeeks": 2
       },
       "sources": [
         {
-          "name": "gsc:snapshots/2026-W31/pages.csv",
-          "observedAt": "2026-08-02",
+          "name": "gsc:snapshots/2026-W32/pages.csv",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],
@@ -496,11 +492,11 @@
         "impressions": 2100
       },
       "after": {
-        "value": 146,
-        "impressions": 4204
+        "value": 130,
+        "impressions": 4152
       },
-      "delta": 27,
-      "relativeDelta": 0.226891,
+      "delta": 11,
+      "relativeDelta": 0.092437,
       "target": null,
       "attainment": null,
       "boundaries": {
@@ -510,14 +506,14 @@
       },
       "window": {
         "beforeWeek": "2026-W23",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 7,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 8,
         "minWeeks": 2
       },
       "sources": [
         {
           "name": "adsense:state/metrics/adsense/history.csv",
-          "observedAt": "2026-08-02",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],
@@ -556,11 +552,11 @@
         "impressions": 1856
       },
       "after": {
-        "value": 146,
-        "impressions": 4204
+        "value": 130,
+        "impressions": 4152
       },
-      "delta": 7,
-      "relativeDelta": 0.05036,
+      "delta": -9,
+      "relativeDelta": -0.064748,
       "target": null,
       "attainment": null,
       "boundaries": {
@@ -570,14 +566,14 @@
       },
       "window": {
         "beforeWeek": "2026-W26",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 4,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 5,
         "minWeeks": 2
       },
       "sources": [
         {
           "name": "adsense:state/metrics/adsense/history.csv",
-          "observedAt": "2026-08-02",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],
@@ -615,11 +611,11 @@
         "impressions": 1856
       },
       "after": {
-        "value": 146,
-        "impressions": 4204
+        "value": 130,
+        "impressions": 4152
       },
-      "delta": 7,
-      "relativeDelta": 0.05036,
+      "delta": -9,
+      "relativeDelta": -0.064748,
       "target": null,
       "attainment": null,
       "boundaries": {
@@ -629,14 +625,14 @@
       },
       "window": {
         "beforeWeek": "2026-W26",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 4,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 5,
         "minWeeks": 2
       },
       "sources": [
         {
           "name": "adsense:state/metrics/adsense/history.csv",
-          "observedAt": "2026-08-02",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],
@@ -674,11 +670,11 @@
         "impressions": 1856
       },
       "after": {
-        "value": 146,
-        "impressions": 4204
+        "value": 130,
+        "impressions": 4152
       },
-      "delta": 7,
-      "relativeDelta": 0.05036,
+      "delta": -9,
+      "relativeDelta": -0.064748,
       "target": null,
       "attainment": null,
       "boundaries": {
@@ -688,14 +684,14 @@
       },
       "window": {
         "beforeWeek": "2026-W26",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 4,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 5,
         "minWeeks": 2
       },
       "sources": [
         {
           "name": "adsense:state/metrics/adsense/history.csv",
-          "observedAt": "2026-08-02",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],
@@ -733,11 +729,11 @@
         "impressions": 1856
       },
       "after": {
-        "value": 146,
-        "impressions": 4204
+        "value": 130,
+        "impressions": 4152
       },
-      "delta": 7,
-      "relativeDelta": 0.05036,
+      "delta": -9,
+      "relativeDelta": -0.064748,
       "target": null,
       "attainment": null,
       "boundaries": {
@@ -747,14 +743,14 @@
       },
       "window": {
         "beforeWeek": "2026-W26",
-        "afterWeek": "2026-W31",
-        "elapsedWeeks": 4,
+        "afterWeek": "2026-W32",
+        "elapsedWeeks": 5,
         "minWeeks": 2
       },
       "sources": [
         {
           "name": "adsense:state/metrics/adsense/history.csv",
-          "observedAt": "2026-08-02",
+          "observedAt": "2026-08-09",
           "freshness": "fresh"
         }
       ],

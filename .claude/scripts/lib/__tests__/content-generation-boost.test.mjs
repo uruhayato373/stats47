@@ -28,7 +28,7 @@ function config(overrides = {}) {
       reason: '不在週の余剰枠を ai-content の全件完成に充てるため',
       from: '2026-08-09T19:00:00+09:00',
       until: '2026-08-13T23:59:59+09:00',
-      aiContent: { limit: 10, extraCrons: [EXTRA_CRON, '0 4 * * *', '0 9 * * *'] },
+      aiContent: { limit: 3, extraCrons: [EXTRA_CRON, '0 4 * * *', '0 9 * * *'] },
       ...overrides,
     }),
   );
@@ -73,14 +73,14 @@ test('設定が無ければ baseline がそのまま走る (通常状態)', () =
 test('期間中は baseline の件数も boost 値になる', () => {
   const d = scheduled({ config: config(), nowMs: DURING });
   assert.equal(d.run, true);
-  assert.equal(d.limit, 10);
+  assert.equal(d.limit, 3, '既定 5 のままなら boost 値が効いていない');
   assert.equal(d.boostActive, true);
 });
 
 test('期間中は追加スロットが走る', () => {
   const d = scheduled({ config: config(), nowMs: DURING, cron: EXTRA_CRON });
   assert.equal(d.run, true);
-  assert.equal(d.limit, 10);
+  assert.equal(d.limit, 3);
 });
 
 test('期間前は追加スロットが走らず baseline は既定件数', () => {
@@ -99,15 +99,15 @@ test('until を過ぎたら誰も触らなくても自動で失効する', () =>
 });
 
 test('extraCrons に無い cron は期間中でも走らない (cloud から回数を減らせる)', () => {
-  const reduced = config({ aiContent: { limit: 10, extraCrons: ['0 9 * * *'] } });
+  const reduced = config({ aiContent: { limit: 3, extraCrons: ['0 9 * * *'] } });
   assert.equal(scheduled({ config: reduced, nowMs: DURING, cron: EXTRA_CRON }).run, false);
   assert.equal(scheduled({ config: reduced, nowMs: DURING, cron: '0 9 * * *' }).run, true);
 });
 
-test('extraCrons を空にすると baseline の件数だけが増える', () => {
-  const c = config({ aiContent: { limit: 8, extraCrons: [] } });
+test('extraCrons を空にすると baseline の件数だけが変わる', () => {
+  const c = config({ aiContent: { limit: 4, extraCrons: [] } });
   assert.equal(scheduled({ config: c, nowMs: DURING, cron: EXTRA_CRON }).run, false);
-  assert.equal(scheduled({ config: c, nowMs: DURING }).limit, 8);
+  assert.equal(scheduled({ config: c, nowMs: DURING }).limit, 4);
 });
 
 test('isWithinWindow は境界を含む', () => {

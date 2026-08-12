@@ -1,13 +1,13 @@
 {
-  "total": 1056,
+  "total": 1062,
   "byStatus": {
-    "both": 932,
+    "both": 938,
     "jsonOnly": 0,
     "neither": 124
   },
   "byMethod": {
     "manual": 43,
-    "done": 932,
+    "done": 938,
     "ssot-restore-new": 55,
     "ssot-restore": 26
   },
@@ -285,6 +285,60 @@
     {
       "slug": "avg-height-high-school-2nd-male-vs-fish-pickled-consumption",
       "base": "avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
+      "base": "avg-height-high-school-2nd-male-vs-floor-area-new-owner-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
+      "base": "floor-area-new-owner-dwelling-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-floor-area-new-owner",
+      "base": "avg-height-high-school-2nd-male--floor-area-new-owner-dwelling-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
+      "base": "avg-height-high-school-2nd-male-vs-rice-cracker-consumption-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
+      "base": "rice-cracker-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "avg-height-high-school-2nd-male-vs-rice-cracker-consumption",
+      "base": "avg-height-high-school-2nd-male--rice-cracker-consumption-expenditure-scatter",
       "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,

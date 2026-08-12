@@ -56,6 +56,23 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 
 3 種が混在することで `article-factual-check.mjs` の `walkAndIndex()` が label/unit を完全 index 化できず、value mismatch detector が実装不能になっている (2026-05-27 検出力テスト: rank 系 100% / value 系 0%)。
 
+> **★2026-08-12 更新: value 系の検出力を回復した。** 上の「0%」は schema 混在だけが原因ではなく、
+> `checkValueClaims` の **4 欠陥の複合**だった (コード実読で確定):
+> ①県名アンカーの消費 —「東京都の**1人**当たり県民所得は5,204,000円」で先に「1人」を claim として
+> 食い、lastIndex が進んで**本命の数値が一度も抽出されない** ②派生スキップの誤爆 — 指標名に含まれる
+> 「当たり」で per-capita 系が全滅 ③閾値が 3 倍 — 1.9 倍の誤りが無言で通る ④flat 配列の
+> `item.label` 未索引 — label 空 → 未知指標として全 claim を skip。
+>
+> 修正後の実測は **誤り 5 件中 5 件検出・誤検出 0** (修正前は 4 件中 1 件)。
+> 抽出は「県名を先に全部拾い、数値を独立に走査して直前の県へ紐づける」方式に変えたので、
+> ①のアンカー消費は構造的に起きない。検出力は
+> `__tests__/article-factual-check.detection.test.mjs` が固定する
+> (既存の `value.test.mjs` は全ケースが「警告 0 件 = 正」で**欠陥を保護していた**)。
+>
+> 残る課題は schema ではなく**分母つき単位の表記**。`per-100k` 系の指標なのに `unit` が「件」「人」と
+> 素で書かれた data が 88 件中 12 件あり、実数と人口当たりの値が同次元で比較されて誤検出になる。
+> 正典: `.claude/rules/unit-semantics-standards.md` §4。
+
 **Phase B での migration**: `.claude/scripts/blog/migrate-data-schema.mjs` で flat / nested / timeseries → 統一 schema に一括変換。
 
 ## 1.5 ランキングチャートのデータ系譜 + カード型 (2026-06-20 確定) ★
@@ -187,7 +204,16 @@ SVG の byte 一致を要求し、既知の復元対象7件は ranking / e-Stat 
 
 `.claude/scripts/blog/regenerate-tile-maps.ts`（dry-run=staging `.local/regen-tilemaps` + gallery `/tmp/tilemap-gallery.html`、R2 push しない）。記事の `/ranking/<key>` 候補 × 各年の SSOT 値を**既存地図の表示値と照合**し metric+年を確定（一致率≥0.8）。確証できた地図のみ SSOT から再生成、**確証できない地図は flag**（個別に metric→key 特定が要る。捏造しない）。R2 反映は別途 `diff-push-r2`（ローカルは `push-r2-wrangler.ts app/blog --apply`、stage dir は事前にクリーンにする）。
 
-照合は地図 title の日本語短縮単位（万/千/億/兆）を実値化して相対2%で判定する（`468万人` ↔ SSOT `4679280` を同値とみなす）。記事リンクの key が AI 生成の命名ゆれで実在 key とズレている場合（例 `health-life-expectancy-male` ↔ 実在 `healthy-life-expectancy-male`、`activity-rate` ↔ `annual-participation-rate`）は、**`--mapping <json>`**（`{"<slug>/<base>": "<correctKey>"}`）を渡すと triage をスキップし correctKey の SSOT で照合・再生成する。correctKey は `app/ranking/<key>/values.json` が 200 で実在し、かつ照合一致したものだけ staging に出る（値が合わなければ flag = 記事本文と地図のズレ防止）。
+照合は地図 title の日本語短縮単位（万/千/億/兆）を実値化して相対2%で判定する（`468万人` ↔ SSOT `4679280` を同値とみなす）。
+
+> **★「千/万」がスケール接頭辞か単位の一部かは SSOT の unit でしか判別できない**（2026-08-11 実測）。
+> `unit="人"` に対する表示 `468万人` の「万」はスケール短縮（×1e4 して比較する）だが、
+> `unit="千円"` に対する `13,326千円` の「千」は**単位そのもの**で倍率 1。後者を ×1000 すると
+> 全県が外れて一致率 0% になり、**値が完全一致しているのに「SSOT照合 失敗」**になる
+> （savings-map で発覚。単位が千円/万円系の指標がすべて再生成不能だった）。判定は
+> 「SSOT の unit がその短縮単位で始まるか」で行う。照合の純粋関数は
+> `.claude/scripts/lib/map-value-match.mjs`（`parseDisplayValue` / `matchRate` / `parseMapDisplay`）に
+> 切り出し、`__tests__/map-value-match.test.mjs` が両方向を固定している。記事リンクの key が AI 生成の命名ゆれで実在 key とズレている場合（例 `health-life-expectancy-male` ↔ 実在 `healthy-life-expectancy-male`、`activity-rate` ↔ `annual-participation-rate`）は、**`--mapping <json>`**（`{"<slug>/<base>": "<correctKey>"}`）を渡すと triage をスキップし correctKey の SSOT で照合・再生成する。correctKey は `app/ranking/<key>/values.json` が 200 で実在し、かつ照合一致したものだけ staging に出る（値が合わなければ flag = 記事本文と地図のズレ防止）。
 
 旧地図SVGが県別 `<title>` 値を持たない古い形式（自動照合が空振りする）の場合は、mapping 値を `{"key":"<correctKey>","year":"<year>"}` 形式にすると、その年の SSOT で照合ゲートをスキップして生成する。**この trusted モードは年と記事本文の数値を事前に人/agent が突合していることが前提**（捏造防止）。生成された `source.json` には `verifiedMatchRate: 0` と `trusted`（記事本文照合済みの旨）が記録され、自動照合を通っていないことが追跡できる。`source.json` は観測値ではないため factual-check / quality-gate / チャート生成の対象外（§1.5）。
 

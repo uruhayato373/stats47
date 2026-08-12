@@ -139,6 +139,29 @@ jobs:
           fi
           echo "✓ 増えていません (縮小専用ラチェット OK)"
 
+      # 値ラチェット (縮小専用): 本文の数値が data と食い違う記事が増えたら失敗させる。
+      #
+      # 2026-08-12 に値照合の誤検出 (実数 ↔ 人口当たりの取り違え) を潰し、公開 426 記事で 0 件に
+      # なった。以後の増加は本物の食い違いなので止める。0 件が「検証器が動いていない」ことと
+      # 区別できるよう、実データへの誤値注入で 2 倍 / 1.5 倍 / 100 倍が発火することを実測済み。
+      # 正典: .claude/rules/unit-semantics-standards.md
+      - name: 🔒 Value ratchet (本文と data の数値食い違いが増えていないか)
+        run: |
+          Q=".claude/state/blog/remediation-queue.json"
+          test -f "$Q" || { echo "queue が無い (rebuild 失敗) → スキップ"; exit 0; }
+          COUNT='const q=require(process.argv[1]);const n=q.summary&&q.summary.valueMismatchArticles;if(typeof n!=="number"){console.error("summary.valueMismatchArticles が無い — スキーマ変更?");process.exit(2)}console.log(n)'
+          NEW=$(node -e "$COUNT" "$PWD/$Q") || { echo "::error::queue のスキーマが想定と違います (ラチェットが空振りするので失敗させます)"; exit 1; }
+          if ! git show "HEAD:$Q" > /tmp/value-prev.json 2>/dev/null; then
+            echo "前回の queue が無い (初回) → baseline を記録するだけ: valueMismatch=$NEW"; exit 0
+          fi
+          OLD=$(node -e "$COUNT" /tmp/value-prev.json) || { echo "前回 queue に集計が無い (配線前) → 比較をスキップ"; exit 0; }
+          echo "数値の食い違い (記事数): 前回 $OLD → 今回 $NEW"
+          if [ "$NEW" -gt "$OLD" ]; then
+            echo "::error::本文と data の数値が食い違う記事が $OLD → $NEW に増えました。どちらが正しいかを SSOT で確かめてから直すこと (壊れた data に本文を合わせない)。確認: node .claude/scripts/blog/quality-gate.mjs <slug> / 正典: .claude/rules/unit-semantics-standards.md"
+            exit 1
+          fi
+          echo "✓ 増えていません (縮小専用ラチェット OK)"
+
       # 出典ラチェット (縮小専用): 「存在するが再取得できない source.json」が増えたら失敗させる。
       # 系譜ラチェットと同じ理由でここ (Issue の後・commit の前) に置く。
       - name: 🔒 Provenance ratchet (再取得できない出典が増えていないか)

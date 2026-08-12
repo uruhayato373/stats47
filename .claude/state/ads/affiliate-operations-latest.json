@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-04T02:42:37.077Z",
+  "generatedAt": "2026-08-09T13:50:15.001Z",
   "inventorySnapshot": ".claude/state/ads/inventory-latest.json",
-  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-08-02.json",
+  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-08-09.json",
   "freshness": {
-    "inventoryDays": 1,
-    "ga4Days": 1
+    "inventoryDays": 0,
+    "ga4Days": 0
   },
   "measurementGate": {
     "status": "blocked",
@@ -33,7 +33,7 @@
         "kind": "code",
         "targetLocation": null,
         "startedAt": "2026-08-04",
-        "daysElapsed": 0,
+        "daysElapsed": 5,
         "minSamplePerVariant": 500,
         "minDurationDays": 14,
         "maxDurationDays": 56,
@@ -68,8 +68,8 @@
     }
   ],
   "ga4Totals": {
-    "impressions": 3400,
-    "clicks": 5,
-    "ctr": 0.0014705882352941176
+    "impressions": 7699,
+    "clicks": 6,
+    "ctr": 0.0007793219898688141
   }
 }

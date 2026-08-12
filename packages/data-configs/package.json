@@ -40,6 +40,11 @@
       "import": "./src/theme-catalog/types.ts",
       "require": "./src/theme-catalog/types.ts"
     },
+    "./unit": {
+      "types": "./src/unit/unit-semantics.ts",
+      "import": "./src/unit/unit-semantics.ts",
+      "require": "./src/unit/unit-semantics.ts"
+    },
     "./prominence": {
       "types": "./src/prominence/index.ts",
       "import": "./src/prominence/index.ts",

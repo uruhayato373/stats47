@@ -1,23 +1,23 @@
 {
   "_1_なにこれ": "日次生成 routine の期間限定 boost。ai-content-generate-daily.yml の gate job が読む。",
   "_2_止めたい": "until を過去の日時にするか、このファイルを削除して develop へ push する。次のスケジュール実行から baseline に戻る。",
-  "_3_件数を変えたい": "aiContent.limit を書き換えて develop へ push する。1..10。全スロット (baseline 含む) に効く。",
+  "_3_件数を変えたい": "aiContent.limit を書き換えて develop へ push する。上限は MAX_LIMIT = 5 (content-generation-boost.mjs)。全スロット (baseline 含む) に効く。産出を増やすときは件数ではなく extraCrons を増やす (_7 参照)。",
   "_4_回数を変えたい": "aiContent.extraCrons から cron を削る。空配列にすると追加実行は無くなり baseline の件数だけ増える。",
   "_5_使用量の見かた": "各 run の実績は .claude/state/metrics/claude-usage/history.csv に 1 行ずつ commit される。gate は run ごとに『boost 開始以降 N 回 / M 件 / 失敗 K 回』を job summary に出す。枠の消費率は測れないので、判断材料は失敗の増加。",
   "_6_勝手に止まる条件": "直近 maxConsecutiveFailures 回が連続失敗なら追加スロットを止め、baseline も既定件数へ戻る (枠に当たった後の空回りを防ぐ)。成功が 1 回入れば自動で復帰する。",
 
-  "reason": "8/9 19:00 の週次リセット後、8/14 まで不在で対話利用がほぼゼロになる。Max の週次枠は繰り越されず捨てるだけなので、余剰を ai-content の全件完成 (残り約 1,959 件・通常ペースで完了見込み 516 日) に充てる。",
+  "reason": "【2026-08-11 に前倒しで終了】8/9 の週次リセット後の余剰枠を ai-content の全件完成へ充てる目的で 8/13 まで limit 10 × 4 スロットにしていたが、実測で 10 件バッチが割に合わないと分かったため打ち切った (下の _7 参照)。",
   "from": "2026-08-09T19:00:00+09:00",
-  "until": "2026-08-13T23:59:59+09:00",
+  "until": "2026-08-11T00:00:00+09:00",
 
   "aiContent": {
-    "limit": 10,
+    "limit": 5,
     "extraCrons": ["0 23 * * *", "0 4 * * *", "0 9 * * *"]
   },
 
   "maxConsecutiveFailures": 2,
 
-  "_7_件数の根拠": "history.csv 実測 (limit 1 → 24 分/$15.87、limit 5 → 58 分/$30.80) から 1 件 ≈ 8.5 分・1 回の固定費 ≈ 15 分。10 件で約 100 分なので 5 時間枠に収まり job timeout 240 分にも余裕がある。1 件あたりで見ると 1 件×4 回 ($15.9) より 10 件×1 回 ($4.9) が 3 倍効率が良いので、回数ではなくバッチを大きくしている。",
+  "_7_件数の根拠": "★limit は 5 から上げない (2026-08-11 実測で確定)。1 件あたり: limit 1 = 24 分/$15.87、limit 5 = 11.6 分/$6.16、limit 10 = 16.9〜21.3 分/$11〜12。バッチを大きくするほど時間も費用も悪化する — 1 つの orchestrator コンテキストで直列処理するので後半ほど文脈が膨らむ。旧版はここに「1 件 ≈ 8.5 分」「10 件で約 100 分」「10 件×1 回が 3 倍効率が良い」と書いていたが、8.5 分は limit 5 の実測から出した値で 10 件へ外挿すると崩れ、実測は 213 分まで伸びて job timeout 240 分に届き 4 スロット中 2 つが 0 件で打ち切られた。増やしたいときは limit ではなく extraCrons のスロット数を増やす。",
   "_8_ブログを増やさない理由": "blog の既定 1 本/日はトークンではなく記事の月産上限で決まっている (.claude/state/blog/seo-strategy.json の typeMix.perMonth = 計 17-20 本/月)。増やすなら型配分 SSOT の改訂が先で、boost の対象にしない。",
   "_9_extraCrons_の意味": "UTC 表記。0 23 = JST 08:00 / 0 4 = JST 13:00 / 0 9 = JST 18:00。baseline の 0 18 (JST 03:00) と合わせて 5 時間間隔。workflow の on.schedule に宣言済みの cron しか発火しないので、ここに無い値を書いても何も起きない。"
 }

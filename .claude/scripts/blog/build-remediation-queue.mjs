@@ -131,6 +131,15 @@ function summarize(queue) {
     } else if (e.status === "in-progress") s.inProgress++;
     else if (e.status === "done") s.done++;
   }
+  // 本文の数値が data と食い違う記事数 (2026-08-12 追加)。
+  //
+  // ★日次 cron の縮小専用ラチェットの入力にする。値照合は誤検出 (実数 ↔ 人口当たりの
+  //   取り違え) を潰して公開 426 記事で 0 件になったので、以後は「増えたら本物」として扱える。
+  //   艦隊監査をもう一度回さずに済むよう、既にここで読んでいる audit の flags から数える。
+  //   正典: `.claude/rules/unit-semantics-standards.md`
+  s.valueMismatchArticles = queue.filter((e) =>
+    (e.quality?.flags ?? []).some((f) => typeof f === "string" && f.includes("VALUE_MISMATCH")),
+  ).length;
   return s;
 }
 

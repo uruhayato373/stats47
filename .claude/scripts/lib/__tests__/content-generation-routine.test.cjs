@@ -318,12 +318,21 @@ test('every request-driven workflow consumes its request even when the run fails
  * 件数は「固定費 + 1 件あたりの実測コスト × 件数」が job timeout と turn 予算に収まる必要がある。
  * 足りないと生成が途中で切れ、verify が「対象あり・生成物なし」で落ちてその回が丸ごと無駄になる。
  *
- * ★1 次式にした理由 (2026-08-06 改訂)。旧モデルは「29 分 × 件数」の比例だったが、これは
- * limit 1 の run だけを見て固定費を 1 件分に押し込んでいた。history.csv に 2 点そろった今、
- *   ai-content limit 1 → 24.0 分 / 34 turn、limit 5 → 58.0 分 / 48 turn
- * から限界コスト 8.5 分・3.5 turn、固定費 15.5 分・30.5 turn と分解できる。比例モデルのままだと
- * 10 件で 295 分と見積もって実際の約 100 分を 3 倍過大評価し、予算があるのに増やせなくなる。
- * n=2 の外挿なので、下の係数は実測より一律に厚く取ってある。
+ * ★1 次式にした理由 (2026-08-06)。旧モデルは「29 分 × 件数」の比例で、limit 1 の run だけを見て
+ * 固定費を 1 件分に押し込んでいた。固定費 (CLAUDE.md と rules の読み込み) と限界コストを分ければ
+ * 件数を増やす判断ができる。
+ *
+ * ★係数は外挿せず観測された最悪レートで引く (2026-08-11 改訂)。limit 1/5 の 2 点から
+ * 「1 件 8.5 分」と外挿して 12 分/件を置いた結果、limit 10 を 150 分と見積もって 240 分の
+ * timeout を通してしまった。実測は 169 分と 213 分で、さらに 2 回 timeout に達している
+ * (所要はバッチサイズに対して超線形で、1 次外挿は必ず下振れする)。**測っていない件数の
+ * 所要を発明しない**。小さい limit では過大評価になるが、過大評価はガードを厳しくする方向。
+ *
+ * ★係数だけでは足りないので安全率を掛ける。history.csv に載るのは **完走した run だけ**
+ * (timeout で打ち切られた job は記録ステップに到達しない)。つまり係数は「完走できた回」に
+ * 当てはめた値で、同じ件数で完走できなかった回は最初から標本に入っていない。この生存者
+ * バイアスの分を安全率で埋める。実際、係数を実測から引き直しただけでは limit 10 の見積もりが
+ * ちょうど timeout と同値になり、**このガードは limit 10 を弾けないままだった**。
  *
  * ★何件に対して検査するか
  * **ワークフローを編集せずに到達できる最大件数**で見る。ai-content は boost 設定
@@ -339,6 +348,13 @@ const MAX_LIMIT = Number(
 );
 assert.ok(MAX_LIMIT > 0, 'content-generation-boost.mjs から MAX_LIMIT を読めない');
 
+/**
+ * 見積もりに掛ける安全率。上の docblock のとおり、係数は完走した run にしか当てはめられない
+ * (生存者バイアス)。実測の最悪完走が timeout の 89% を使っていたので、等号で通る見積もりは
+ * 「安全」とみなさない。
+ */
+const MODEL_SAFETY_FACTOR = 1.25;
+
 const ROUTINE_BUDGETS = [
   {
     workflow: '.github/workflows/ai-content-generate-daily.yml',
@@ -346,7 +362,11 @@ const ROUTINE_BUDGETS = [
     limitPattern: /--default-limit (\d+)/,
     checkAt: MAX_LIMIT, // boost で遠隔から上げられる上限
     fixedMinutes: 25,
-    minutesPerItem: 12,
+    // ★12 → 21 (2026-08-11)。旧値は limit 1/5 の実測から線形に外挿した推定で、limit 10 を
+    // 150 分と見積もって 240 分の timeout を通してしまった。実測は 169・213 分と 240 分超え 2 回。
+    // 所要はバッチサイズに対して超線形なので、線形モデルは**観測された最悪レート**で引く。
+    // 小さい limit では過大評価になるが、過大評価はガードを厳しくする方向なので安全。
+    minutesPerItem: 21,
     fixedTurns: 40,
     turnsPerItem: 8,
     overheadMinutes: 5, // npm ci + キュー再構築 + push + dispatch
@@ -375,9 +395,10 @@ test('daily limits stay inside the job timeout and turn budget', () => {
 
     const limit = checkAt ?? defaultLimit;
     const neededMinutes = budget.fixedMinutes + limit * budget.minutesPerItem + overheadMinutes;
+    const budgetedMinutes = Math.ceil(neededMinutes * MODEL_SAFETY_FACTOR);
     assert.ok(
-      timeout >= neededMinutes,
-      `${workflow}: limit ${limit} 件には ${neededMinutes} 分要るが timeout は ${timeout} 分`,
+      timeout >= budgetedMinutes,
+      `${workflow}: limit ${limit} 件には ${neededMinutes} 分 (安全率込み ${budgetedMinutes} 分) 要るが timeout は ${timeout} 分`,
     );
     const neededTurns = budget.fixedTurns + limit * budget.turnsPerItem;
     assert.ok(
@@ -458,9 +479,26 @@ test('blog の実行枠が ai-content のどの枠とも実時間で重ならな
   const aiDoc = YAML.parse(read('.github/workflows/ai-content-generate-daily.yml'));
   const blogDoc = YAML.parse(read('.github/workflows/blog-generate-daily.yml'));
   const DAY = 24 * 60;
-  // 予算モデルの上限所要 (ai-content は boost 上限、blog は既定件数)
-  const aiMinutes = 25 + MAX_LIMIT * 12 + 5;
-  const blogMinutes = 10 + 1 * 35 + 5;
+  // 予算モデルの上限所要。★係数をここに書き写さない — 書き写した結果、上の予算モデルを
+  // 実測で直しても重なり判定だけ旧係数 (12 分/件) のまま取り残されていた (2026-08-11)。
+  const budgetOf = (workflow) => {
+    const b = ROUTINE_BUDGETS.find((x) => x.workflow.includes(workflow));
+    assert.ok(b, `${workflow} の予算モデルが無い`);
+    return b;
+  };
+  const minutesFor = (workflow, limit) => {
+    const b = budgetOf(workflow);
+    return b.fixedMinutes + limit * b.minutesPerItem + b.overheadMinutes;
+  };
+  // 件数も workflow から読む。書き写すと件数を変えたときに重なり判定だけ古い前提で通る。
+  const limitOf = (workflow) => {
+    const b = budgetOf(workflow);
+    const n = Number(read(b.workflow).match(b.limitPattern)?.[1]);
+    assert.ok(n > 0, `${workflow}: 既定件数が読めない`);
+    return b.checkAt ?? n;
+  };
+  const aiMinutes = minutesFor('ai-content', limitOf('ai-content'));
+  const blogMinutes = minutesFor('blog', limitOf('blog'));
 
   const startOf = (cron) => {
     const [minute, hour] = cron.split(/\s+/);
@@ -494,6 +532,29 @@ test('CI prompts preserve author/critic separation and prohibit external writes'
     assert.match(source, /R2、GitHub、git commit \/ push、Issue、Secretsへのアクセス/);
     assert.match(source, /WebFetch \/ WebSearch \/ MCP/);
   }
+});
+
+// 「foreground で起動」だけでは足りない。Agent tool の既定は background なので、
+// パラメータ名を書かないと省略され、起動しただけでターンが終わって成果 0 件になる
+// (2026-08-09 の ai-content run 31342281865: 10 author を一括起動して「完了通知を待つ」と終了)。
+// 散文の言い換えでは同じ取り違えが起きるので、パラメータ名そのものを prompt に固定する。
+test('CI prompts name run_in_background: false and forbid ending the turn with unfinished agents', () => {
+  for (const prompt of [
+    '.claude/prompts/ci/ai-content-routine.md',
+    '.claude/prompts/ci/blog-routine.md',
+  ]) {
+    const source = read(prompt);
+    assert.match(source, /run_in_background: false/, `${prompt}: 既定 background を打ち消す指定が無い`);
+    assert.match(source, /未完了の agent を残したままターンを終えない/, `${prompt}: ターン終了の禁止が無い`);
+  }
+});
+
+// 診断側でも同じ失敗を名指しできること。prompt を破られたときに
+// 「なぜ 0 件だったのか」が log から即分かる状態を保つ (是正の入口)。
+test('the execution summarizer names unfinished background agents', () => {
+  const source = read('.claude/scripts/lib/summarize-claude-execution.mjs');
+  assert.match(source, /unfinishedAgents/);
+  assert.match(source, /run_in_background: false/);
 });
 
 // blog-auto-publish の reconcile は「未公開」だけでなく「改稿版 (既 live の brushup 済み)」も

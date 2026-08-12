@@ -52,6 +52,24 @@ const BACKLOG_REL = "docs/todo/04_改善バックログ.md";
 const BACKLOG_PATH =
   process.env.IMPROVEMENT_BACKLOG_PATH || path.join(PROJECT_ROOT, BACKLOG_REL);
 
+/**
+ * 「今日」を差し替える (fixture 検証用。既定は実時刻)。
+ *
+ * ★2026-08-12: overdue 判定のテストが実時刻を使っていたため、fixture に書いた
+ *   「deployed 2026-07-28 = まだ 2 日」が日が経つと 15 日になり、**書いた日を過ぎると
+ *   必ず落ちる時限テスト**になっていた (実際に落ちた)。テストを緩めるのではなく
+ *   時刻を注入可能にして固定する (14 日境界の検査そのものは残す)。
+ */
+export function resolveToday() {
+  const raw = process.env.IMPROVEMENT_TODAY;
+  if (!raw) return new Date();
+  const d = new Date(raw);
+  if (Number.isNaN(d.getTime())) {
+    throw new Error(`IMPROVEMENT_TODAY が日付として解釈できません: ${raw}`);
+  }
+  return d;
+}
+
 const args = process.argv.slice(2);
 function getArg(flag) {
   const i = args.indexOf(flag);
@@ -165,7 +183,7 @@ function formatMarkdown(entries) {
 }
 
 function main() {
-  const allEntries = parseBacklog();
+  const allEntries = parseBacklog(BACKLOG_PATH, resolveToday());
   const filtered = sortByTier(applyFilters(allEntries));
   if (FORMAT === "markdown") {
     process.stdout.write(formatMarkdown(filtered));
