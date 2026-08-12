@@ -209,9 +209,12 @@ describe("extractFactClaims — ★分母つき単位・符号・語彙的用法
     expect(c?.unit).toBe("人泊");
   });
 
-  it("分母が数値の前にある語順でも単位として拾う", () => {
+  it("分母が数値の前にある語順は**候補として足す** (単位は置き換えない)", () => {
+    // ★置き換えてはならない。分母をタイトル側に持つ指標
+    //   (「歯科技工士率（人口10万対）」/ unit="人") と単位が揃わなくなる (2026-08-12 実測)。
     const [c] = extractFactClaims("東京都が人口千人あたり5.36人です。", UNITS);
-    expect(c.unit).toBe("人口千対");
+    expect(c.unit).toBe("人");
+    expect(c.altUnits).toContain("人口千対");
   });
 
   it("同じ文の前半にある分母を候補として引き継ぐ", () => {

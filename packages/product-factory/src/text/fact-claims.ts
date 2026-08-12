@@ -103,8 +103,8 @@ function unitPattern(extra: readonly string[] = []): string {
  */
 const LEADING_DENOMINATORS: ReadonlyArray<readonly [RegExp, string, RegExp]> = [
   // [文中の表現, 既定の単位表記, その分母を持つ SSOT 単位を見分ける正規表現]
-  [/人口(?:千|1,?000)人?(?:あたり|当たり|当り|対)$/, "人口千対", /千対|1,?000人/],
-  [/人口(?:10万|100,?000)人?(?:あたり|当たり|当り|対)$/, "人口10万対", /10万|100,?000人/],
+  [/(?:千|1,?000)人?(?:あたり|当たり|当り|対)$/, "人口千対", /千対|1,?000人/],
+  [/(?:10万|100,?000)人?(?:あたり|当たり|当り|対)$/, "人口10万対", /10万|100,?000人/],
 ];
 
 /**
@@ -201,10 +201,14 @@ export function extractFactClaims(line: string, units: readonly string[] = []): 
     const following = prefs.find(
       (p) => p.start >= numEnd && p.start - numEnd <= 3 && /^[はがので]*$/.test(body.slice(numEnd, p.start)),
     );
+    // ★分母つき表記は単位を**置き換えず候補に足す**。置き換えると、分母をタイトル側に持つ
+    //   指標 (「歯科技工士率（人口10万対）」/ unit="人") と単位が揃わなくなる (2026-08-12 実測)。
+    //   どちらの解釈でも照合し、一致すれば通す。
     const lead = leadingDenominator(body, m.index, units);
     const alts = sentenceDenominators(body, m.index, units);
+    const allAlts = [...new Set([...(lead ? [lead] : []), ...alts])];
     if (following) {
-      out.push({ pref: following.name, value, unit: lead ?? m[2], altUnits: alts, altValues: negWord ? [-value] : undefined, raw: m[0], index: m.index });
+      out.push({ pref: following.name, value, unit: m[2], altUnits: allAlts, altValues: negWord ? [-value] : undefined, raw: m[0], index: m.index });
       continue;
     }
 
@@ -216,7 +220,7 @@ export function extractFactClaims(line: string, units: readonly string[] = []): 
       }
     }
     if (!best) continue;
-    out.push({ pref: best.name, value, unit: lead ?? m[2], altUnits: alts, altValues: negWord ? [-value] : undefined, raw: m[0], index: m.index });
+    out.push({ pref: best.name, value, unit: m[2], altUnits: allAlts, altValues: negWord ? [-value] : undefined, raw: m[0], index: m.index });
   }
   return out;
 }
@@ -252,6 +256,11 @@ export type ClaimVerdict =
   | { readonly kind: "match"; readonly metric: string; readonly year: string }
   | { readonly kind: "mismatch"; readonly nearest: { metric: string; year: string; actual: number } | null }
   | { readonly kind: "unknown-pref" };
+
+/** 分母を持つ単位かどうか (「人（人口10万対）」「被保険者千対」)。 */
+const DENOMINATOR_MARKER = /千対|10万対|千人|10万人|当たり|あたり/;
+/** 分母を省いて書かれやすい基底単位。 */
+const BASE_UNITS = new Set(["人", "円", "件", "世帯"]);
 
 /** 相対誤差の許容 (本文は丸めて書かれる)。 */
 const TOLERANCE = 0.02;
@@ -303,6 +312,9 @@ export function verifyClaim(claim: FactClaim, truth: readonly TruthSeries[]): Cl
       nearest = { metric: t.metric, year: t.year, actual };
     }
   }
+  // ★「素の単位の主張を分母つき指標とも比べる」緩和も実測して撤回した。
+  //   誤値 4 件を注入して検出できたのは 1 件だけだった (10倍・半分の誤りが、分母つき指標の
+  //   どれかに偶然一致する)。分母が本文から落ちている箇所は**本文側に補記**して解決する。
   // ★値だけの照合 (単位を無視してその県のどこかに同じ値があるか) は**採らない**。
   //   一度実装して実測したところ、誤値を 3 件注入して検出できたのは 1 件だけだった
   //   (2 倍・5% ずらしが、同じ県の別指標に偶然一致して通ってしまう)。
