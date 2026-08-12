@@ -118,6 +118,40 @@ npm run test:run   --workspace=@stats47/product-factory
 - **SSOT = `packages/product-factory/src/channels/kindle/book-catalog.ts`**（`KINDLE_BOOKS`）。4 シリーズ = S1 論点読み物 / S2 テーマ別データブック / S3 地域別 / S4 ランキング大全。本文素材の SSOT は **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。生成物 `.local/kindle-books/<id>/v1/book.epub` は派生物（git 管理外・手編集を正典にしない）。
 - **主エンジンは EPUB3 リフロー型**（`src/generators/epub.ts`・jszip）。図表は章内ブロック画像として SVG→PNG 化して同梱（sharp・density 288）。カバーは satori→sharp で 1600×2560 自動生成。**KDP は電子で PDF を実質受け付けない**ため EPUB を採る（PDF 生成器 `databook-pdf.ts` は目次・画像・チャート非対応でそもそも書籍に不向き）。
 
+#### 章の中身の作り方（2026-08-12 確定・S2/S3/S4 の 20 冊）
+
+出品前の中身実測で、S2×11 / S3×8 / S4×1 の 20 冊が **1 章 = 定型 1 文 (144〜200 字) + 図**
+しかなく、総字数 4,313〜6,001 字だった。S1 の 12 冊 (1 章 2,000〜3,500 字) と同じ値段で
+売れる状態ではない。根は 2 つ:
+
+1. **定型文テンプレが本文のすべて**だった（`ranking-databook.ts` の「1位は◯◯で△△、
+   最下位は…」1 文）。「差は約 1.0 倍」という無意味文も混入していた
+2. **S3 の 8 冊と S4-01 が実質同じ本**だった。全冊が同じ pack の**先頭 24 件**を章にしており、
+   差分は地域内最上位県の 1 文だけ（表紙が同一バイトだったのと同根）
+
+| 層 | SSOT / 実装 | 役割 |
+|---|---|---|
+| 章本文 | `src/channels/kindle/ai-content-composer.ts` | R2 `app/ranking/<key>/ai-content.json` の insights / regionalAnalysis / FAQ / 県別解説を**フィールド単位の数値ゲートを通してから**合成する。1 章 150 字 → 1,000〜1,600 字 |
+| 載せる指標 | `src/channels/kindle/book-ranking-keys.ts` (git TS) | 書籍ごとに 30 キー。選定理由をキーごとにコメントで残す。「先頭 24 件」は廃止 |
+| 選定の実行 | `scripts/select-book-keys.mts` | 地域固有性・意外性でスコアリングして候補を出す。**欠陥 unit・`isActive:false` を除外** |
+| 書き下ろし | `src/channels/kindle/manuscripts/<id>/*.md` | S2/S4 は 7 本、S3 は 7 本。ブリーフは `scripts/build-fresh-briefs.mts` が実データを焼いて生成 |
+| 検証 | `scripts/verify-fresh.mts` | ファイル数・スタブでないこと・漢数字・である調・煽り語・SSOT との数値整合 |
+
+**書籍に載せてはいけない指標**（`select-book-keys.mts` が除外し、
+`__tests__/book-ranking-keys.test.ts` が固定する）:
+
+- **単位の欠陥が既知のもの** — `MONEY-UNIT-SCALE-01`（賃金構造基本統計 `0003445758` /
+  個人企業経済調査 `0003421679` は e-Stat の値が千円なのに config の unit が万円）。実測で
+  「バス運転者の平均年収 1位 神奈川県 5,017万円」が原稿に入っていた。サイト表示なら是正で
+  済むが、**書籍は出したら取り下げられない**ので config が直るまで載せない
+- **`isActive:false`** — `/ranking/<key>` が 410 か空ページになり読者が確かめに行けない。
+  非公開の理由自体がデータの欠陥であることが多い（実測 2 件はどちらも接地データの欠陥）
+
+**書き下ろし 30% の判定は `products:kindle:generate` が書籍単位で行う**（比率の権威）。
+`verify-fresh` の字数判定は「章として成立するか」（900 字）に絞る — 目安字数は 30% 比率からの
+推定値にすぎず、実測 fresh は必要量の 2.2 倍あったので、そこで 7 字差を落とすと本来の要件から
+外れた数字を守らせることになる。
+
 #### EPUB 構造の不変量（2026-08-12 確定・`__tests__/epub.test.ts` が固定）
 
 Kindle Previewer で「表紙が描画されない / 途中ページが表示されない / 改ページが不適切」の
