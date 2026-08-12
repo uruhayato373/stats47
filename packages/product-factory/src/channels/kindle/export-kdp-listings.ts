@@ -26,6 +26,22 @@ interface KdpListing {
   keywords: string[];
   /** KDP ブラウズカテゴリ (最大3・人手で確定・upsert 保持)。 */
   categories: string[];
+  /**
+   * categories を KDP の picker の**実表記と突き合わせたか**。
+   *
+   * ★候補を投入しただけの状態と、オーナーが picker で確定した状態を区別する
+   *   (2026-08-12 追加)。これが無いと未照合の候補が「確定済み」に見え、実在しない
+   *   カテゴリ名のまま出品しようとして気づけない。picker は表記が変わるので、
+   *   初回 `kdp-publish --probe` の dump と突き合わせて true にする。
+   */
+  categoriesVerified: boolean;
+  /**
+   * 出品を止めている理由 (status="blocked-thin" 等)。
+   *
+   * ★理由が消えると「なぜ止めたか」が分からなくなり、次の人が status だけ戻して
+   *   出品しかねない (2026-08-12 に本文量の床で 20 冊を止めた)。upsert 保持する。
+   */
+  blockReason?: string;
   priceYen: number;
   /** 70 | 35。¥250-1,250 は 70% 可。 */
   royaltyPlan: 70 | 35;
@@ -33,7 +49,8 @@ interface KdpListing {
   kuEnrolled: boolean;
   epubPath: string;
   coverPath: string;
-  status: "draft" | "listed";
+  /** `blocked-thin` = 本文量の床に届かず出品を止めている (blockReason に理由)。 */
+  status: "draft" | "listed" | "blocked-thin";
   asin: string | null;
   publishedAt: string | null;
 }
@@ -80,6 +97,8 @@ function main(): void {
       description: buildDescription(b.concept, b.newContentNote),
       keywords: [...b.keywords].slice(0, 7),
       categories: prev?.categories ?? [], // 人手確定を保持
+      categoriesVerified: prev?.categoriesVerified ?? false, // 未照合を既定にする (勝手に確定扱いしない)
+      ...(prev?.blockReason ? { blockReason: prev.blockReason } : {}), // 停止理由を保持
       priceYen: b.priceYen,
       royaltyPlan: b.priceYen >= 250 && b.priceYen <= 1250 ? 70 : 35,
       kuEnrolled: prev?.kuEnrolled ?? false,

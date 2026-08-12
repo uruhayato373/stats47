@@ -21,6 +21,21 @@ export const KINDLE_OUT_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/kindle-books")
 /** KDP の Web 無料公開コンテンツ規定に備えた書き下ろし比率の下限 (この未満は警告)。 */
 const FRESH_RATIO_MIN = 0.3;
 
+/**
+ * 本文の絶対量の床 (2026-08-12 追加)。
+ *
+ * ★比率ゲートだけでは「本になっていない本」を素通りさせる。実測: S2/S3/S4 の 20 冊は
+ *   総字数 4,313〜5,725 字・1 章あたり 144〜191 字 (定型 1 文 + 図) なのに、
+ *   書き下ろし比率 32.9% で ✅ を出していた。比率は分母が小さいほど満たしやすいので、
+ *   絶対量を見ないと「1 章 150 字 × 30 章」が合格する。
+ *
+ * 閾値は実測の分離幅から取った (誤検知を出さないため間を広く空ける):
+ *   総字数     … 実書籍 23,419〜43,596 / 薄い本 4,313〜5,725 → 20,000
+ *   1章あたり  … 実書籍 1,952〜2,906   / 薄い本 144〜191     → 800
+ */
+const BOOK_CHARS_MIN = 20_000;
+const CHAPTER_CHARS_MIN = 800;
+
 /** fresh 章の本文を解決する (freshFile 優先・無ければ freshText)。 */
 function resolveFreshText(ch: BookChapter): string {
   if (ch.freshFile) {
@@ -64,6 +79,12 @@ export interface BuildBookResult {
   readonly freshRatio: number;
   /** KDP の Web 無料公開コンテンツ規定の目安 (30%) を満たすか。 */
   readonly freshRatioOk: boolean;
+  /** 本文の総字数 (fresh + blog)。 */
+  readonly totalChars: number;
+  /** 1 章あたりの平均字数。 */
+  readonly charsPerChapter: number;
+  /** 本文の絶対量が書籍として成立するか (比率とは別の床)。 */
+  readonly volumeOk: boolean;
 }
 
 /**
@@ -298,6 +319,9 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
   const totalBody = freshChars + blogChars;
   const freshRatio = totalBody > 0 ? freshChars / totalBody : 0;
   const freshRatioOk = freshRatio >= FRESH_RATIO_MIN;
+  // 比率とは別に絶対量を見る (比率は分母が小さいほど満たしやすい)。
+  const charsPerChapter = chapters.length > 0 ? Math.round(totalBody / chapters.length) : 0;
+  const volumeOk = totalBody >= BOOK_CHARS_MIN && charsPerChapter >= CHAPTER_CHARS_MIN;
 
   const epubPath = join(outDir, "book.epub");
   await buildEpub(
@@ -357,6 +381,9 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
     blogChars,
     freshRatio,
     freshRatioOk,
+    totalChars: totalBody,
+    charsPerChapter,
+    volumeOk,
   };
 }
 
