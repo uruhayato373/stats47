@@ -60,8 +60,19 @@ async function factLine(key: string): Promise<string | null> {
   const avg = rows.reduce((s, r) => s + r.value, 0) / rows.length;
   const unit = cfg?.unit ?? "";
   const title = cfg?.subtitle ? `${cfg.title}（${cfg.subtitle}）` : (cfg?.title ?? key);
-  const top3 = rows.slice(0, 3).map((r, i) => `${i + 1}位 ${r.name} ${fmt(r.value)}${unit}`).join(" / ");
-  const bot3 = rows.slice(-3).map((r, i) => `${rows.length - 2 + i}位 ${r.name} ${fmt(r.value)}${unit}`).join(" / ");
+  // ★順位は**同値同順位** (競争順位) で振る。配列の添字で振ってはならない。
+  //   実測 (2026-08-12): 就業者比率で青森県と福岡県がどちらも 95.4 の同値なのに、添字だと
+  //   45位 / 46位 に分かれ、ブリーフを忠実に写した原稿が SSOT 照合で不一致になった。
+  //   サイト側の `assignRanks` も同値同順位なので、そちらに合わせる (二重基準を作らない)。
+  const ranks: number[] = [];
+  for (let i = 0; i < rows.length; i++) {
+    ranks.push(i > 0 && rows[i].value === rows[i - 1].value ? ranks[i - 1] : i + 1);
+  }
+  const top3 = rows.slice(0, 3).map((r, i) => `${ranks[i]}位 ${r.name} ${fmt(r.value)}${unit}`).join(" / ");
+  const bot3 = rows
+    .slice(-3)
+    .map((r, i) => `${ranks[rows.length - 3 + i]}位 ${r.name} ${fmt(r.value)}${unit}`)
+    .join(" / ");
   return `- **${title}**（${f.year}年）: ${top3} … ${bot3} / 全国平均 ${fmt(avg)}${unit}`;
 }
 
