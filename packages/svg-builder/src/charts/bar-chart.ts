@@ -204,8 +204,11 @@ function renderColumnsLayout(
   const leftCol = renderCardColumn(topItems, COL_L_X, leftTheme, highLabel, toBarW, unit, precision);
   const rightCol = renderCardColumn(bottomItems, COL_R_X, rightTheme, lowLabel, toBarW, unit, precision);
 
+  // ★区切りの空白はタイトル側 (大きいフォント) に置く。tspan の中に入れると 14px 幅の
+  //   空きしか取れず、「第3次産業就業者比率2020年」のように指標名と年が詰まって読める
+  //   (2026-08-12 に書籍のページを実際に描画して発覚)。
   const titleText = subtitle
-    ? `${title}<tspan font-size="14" font-weight="normal" class="svg-tick">　${subtitle}</tspan>`
+    ? `${title}　<tspan font-size="14" font-weight="normal" class="svg-tick">${subtitle}</tspan>`
     : title;
 
   const sourceSvg = source
