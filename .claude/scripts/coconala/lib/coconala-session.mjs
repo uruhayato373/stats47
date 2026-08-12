@@ -196,6 +196,7 @@ export async function waitForLogin(page, { waitMinutes = 6, tag = '[login]' } = 
   } catch {}
   const deadline = Date.now() + waitMinutes * 60_000;
   let warned = false;
+  let lastNudge = Date.now();
   while (Date.now() < deadline) {
     const state = await page.evaluate(() => {
       const url = location.href;
@@ -212,7 +213,15 @@ export async function waitForLogin(page, { waitMinutes = 6, tag = '[login]' } = 
       warned = true;
     }
     await sleep(3000);
-    if (/\/login|\/signup/.test(page.url())) {
+    // ★ログイン画面にいる間は絶対に遷移させない (2026-08-12 に KDP 側で実測して発覚)。
+    //   もとは 3 秒ごとにログイン確認 URL へ goto しており、**人がメールアドレスを打っている
+    //   最中にページごと飛ばしていた**。人のログインを待つのが目的なのだから、
+    //   待っている画面を奪ってはならない。関係ない場所に落ちたときだけ 30 秒に 1 回戻す。
+    const url = page.url();
+    const onAuth = /\/login|\/signup|\/auth|verify/.test(url);
+    const onSite = /coconala\.com/.test(url);
+    if (!onAuth && !onSite && Date.now() - lastNudge > 30_000) {
+      lastNudge = Date.now();
       await gotoResilient(page, LOGIN_CHECK_URL, { tries: 1 });
     }
   }

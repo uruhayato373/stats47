@@ -122,6 +122,7 @@ export async function waitForLogin(page, { waitMinutes = 8, tag = "[login]" } = 
   } catch {}
   const deadline = Date.now() + waitMinutes * 60_000;
   let warned = false;
+  let lastNudge = Date.now();
   while (Date.now() < deadline) {
     const state = await page.evaluate(() => {
       const url = location.href;
@@ -139,7 +140,18 @@ export async function waitForLogin(page, { waitMinutes = 8, tag = "[login]" } = 
       warned = true;
     }
     await sleep(3000);
-    if (/signin|\/ap\//.test(page.url())) await gotoResilient(page, BOOKSHELF_URL, { tries: 1 });
+    // ★サインイン画面にいる間は絶対に遷移させない (2026-08-12 実測で発覚)。
+    //   もとは 3 秒ごとに本棚 URL へ goto しており、**人がメールアドレスを打っている最中に
+    //   ページごと飛ばしていた**。「入力が途中でリセットされる」という症状の正体がこれ。
+    //   人のログインを待つのが目的なのだから、待っている画面を奪ってはならない。
+    //   サインインでも本棚でもない場所 (エラーページ等) に落ちたときだけ、30 秒に 1 回だけ戻す。
+    const url = page.url();
+    const onAuth = /signin|\/ap\/|\/mfa|challenge/.test(url);
+    const onKdp = /kdp\.amazon\./.test(url);
+    if (!onAuth && !onKdp && Date.now() - lastNudge > 30_000) {
+      lastNudge = Date.now();
+      await gotoResilient(page, BOOKSHELF_URL, { tries: 1 });
+    }
   }
   return { ok: false, reason: `ログイン待機がタイムアウト (${waitMinutes}分)` };
 }
