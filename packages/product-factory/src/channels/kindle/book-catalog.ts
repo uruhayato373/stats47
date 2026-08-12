@@ -17,6 +17,11 @@ import type { KindleBook, BookChapter } from "./types";
 import { PACK_RANKING_KEYS } from "../../catalog/pack-rankingkeys.generated";
 import { BOOK_RANKING_KEYS } from "./book-ranking-keys";
 
+/** 書き下ろし章の配置先 (S1 と同じ manuscripts/<bookId>/)。 */
+const S2_M = (suffix: string): string => `src/channels/kindle/manuscripts/K-S2-${suffix}`;
+const S3_M = (suffix: string): string => `src/channels/kindle/manuscripts/K-S3-${suffix}`;
+const S4_M = "src/channels/kindle/manuscripts/K-S4-01";
+
 const AUTHOR = "stats47";
 
 /** パイロット K-S1-01 の書き下ろし章 (manuscripts/K-S1-01/*.md・article-writer 起草 → blog-critic レビュー)。 */
@@ -293,13 +298,19 @@ const S2_BOOKS: readonly KindleBook[] = S2_THEMES.map((t) => ({
   concept: `${t.label}テーマの主要ランキングを表とグラフのダイジェストで読む書籍版。詳細な全指標データ (Excel/PowerPoint) はココナラ商品 ${t.pack} へ誘導するファネル。`,
   author: AUTHOR,
   chapters: [
-    { title: "はじめに", source: "fresh" as const, freshText: s2IntroMd(t.label, t.pack) },
+    // 書き下ろし章 (manuscripts/<id>/*.md)。無い書籍はインラインの導入へ degrade する。
+    { title: "はじめに", source: "fresh" as const, freshFile: `${S2_M(t.suffix)}/00-intro.md`, freshText: s2IntroMd(t.label, t.pack) },
+    { title: "第1章 この分野の統計の読み方", source: "fresh" as const, freshFile: `${S2_M(t.suffix)}/10-how-to-read.md` },
+    { title: "前半の指標群をつなぐ", source: "fresh" as const, freshFile: `${S2_M(t.suffix)}/20-bridge-a.md` },
     {
       title: `${t.label}の主要ランキング`,
       source: "ranking" as const,
       // 章に載せるキーは書籍ごとの SSOT で確定させる (pack 全件の先頭 24 件ではない)。
       rankingKeys: BOOK_RANKING_KEYS[`K-S2-${t.suffix}`] ?? PACK_RANKING_KEYS[t.pack] ?? [],
     },
+    { title: "後半の指標群をつなぐ", source: "fresh" as const, freshFile: `${S2_M(t.suffix)}/30-bridge-b.md` },
+    { title: "章横断の合成分析", source: "fresh" as const, freshFile: `${S2_M(t.suffix)}/50-cross-analysis.md` },
+    { title: "終章", source: "fresh" as const, freshFile: `${S2_M(t.suffix)}/90-synthesis.md` },
   ],
   priceYen: 500 as const,
   newContentNote: `テーマ解説・図表の見方・出典補章 (書き下ろし) + e-Stat 観測値から生成した主要ランキング (上位5+下位5・格差・全国平均)。全指標データは ${t.pack} で提供 (書籍は読む用ダイジェスト)。`,
@@ -373,7 +384,8 @@ const S3_BOOKS: readonly KindleBook[] = S3_REGIONS.map((r) => ({
   concept: `${r.label}の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。`,
   author: AUTHOR,
   chapters: [
-    { title: "はじめに", source: "fresh" as const, freshText: s3IntroMd(r.label) },
+    { title: "はじめに", source: "fresh" as const, freshFile: `${S3_M(r.suffix)}/00-intro.md`, freshText: s3IntroMd(r.label) },
+    { title: "第1章 地域データの読み方", source: "fresh" as const, freshFile: `${S3_M(r.suffix)}/10-how-to-read.md` },
     {
       title: `${r.label}の県は全国でどこに位置するか`,
       source: "ranking" as const,
@@ -383,6 +395,9 @@ const S3_BOOKS: readonly KindleBook[] = S3_REGIONS.map((r) => ({
       highlightCodes: S3_REGION_CODES[r.suffix] ?? [],
       regionBlockLabel: S3_REGION_BLOCK_LABEL[r.suffix],
     },
+    { title: "県別プロフィール（前半）", source: "fresh" as const, freshFile: `${S3_M(r.suffix)}/20-profile-a.md` },
+    { title: "県別プロフィール（後半）", source: "fresh" as const, freshFile: `${S3_M(r.suffix)}/30-profile-b.md` },
+    { title: "終章", source: "fresh" as const, freshFile: `${S3_M(r.suffix)}/90-synthesis.md` },
   ],
   priceYen: 500 as const,
   newContentNote: `地域の概説・図表の見方・出典補章 (書き下ろし) + e-Stat 観測値から生成した幅広い分野のランキング (全国 上位5+下位5・格差・全国平均・地域内最上位県)。`,
@@ -404,6 +419,7 @@ const S4_BOOKS: readonly KindleBook[] = [
       {
         title: "はじめに",
         source: "fresh",
+        freshFile: `${S4_M}/00-intro.md`,
         freshText: `# はじめに — 47都道府県の「意外な1位・最下位」を数字で
 
 日本には47の都道府県があり、それぞれに個性があります。本書は、人口や経済から、暮らし、産業、余暇まで、幅広い分野の統計を横断し、都道府県ごとの「もっとも高い県」と「もっとも低い県」を、上位五県・下位五県のランキングとして一望できる一冊です。
@@ -418,6 +434,11 @@ const S4_BOOKS: readonly KindleBook[] = [
         // 「意外な1位」— 1 位が人口規模の大きい県でない × 格差が大きいキーを選ぶ。
         rankingKeys: BOOK_RANKING_KEYS["K-S4-01"] ?? PACK_RANKING_KEYS["P-12"] ?? [],
       },
+      { title: "第1章 この分野の統計の読み方", source: "fresh", freshFile: `${S4_M}/10-how-to-read.md` },
+      { title: "前半の指標群をつなぐ", source: "fresh", freshFile: `${S4_M}/20-bridge-a.md` },
+      { title: "後半の指標群をつなぐ", source: "fresh", freshFile: `${S4_M}/30-bridge-b.md` },
+      { title: "章横断の合成分析", source: "fresh", freshFile: `${S4_M}/50-cross-analysis.md` },
+      { title: "終章", source: "fresh", freshFile: `${S4_M}/90-synthesis.md` },
     ],
     priceYen: 1000,
     newContentNote: "分野横断の導入・図表の見方・出典補章 (書き下ろし) + e-Stat 観測値から生成した幅広い分野のランキング (上位5+下位5・格差・全国平均)。競合との差別化は網羅性と一次データからの機械再現性に置く。",
