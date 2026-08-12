@@ -24,7 +24,8 @@ primary_agent: data-ingester
 
 ```bash
 npx tsx packages/data-configs/scripts/generate-unit-semantics-mirror.ts --check
-cd packages/data-configs && npx vitest run src/unit   # 正典 28 + パリティ 4
+(cd packages/data-configs && npx vitest run src/unit)   # 正典 28 + パリティ 4。★subshell にする
+                                                        #   (cd が漏れると後続の手順が別ディレクトリで走り「失敗」に見える)
 ```
 
 `--check` が失敗したら**先に再生成する** (`--check` を外して実行)。鏡が古いまま他の監査を回すと、
