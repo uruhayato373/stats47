@@ -55,9 +55,21 @@ const TARGETS: Readonly<Record<string, number>> = {
   "90-synthesis.md": 5500,
   "20-profile-a.md": 2500,
   "30-profile-b.md": 2500,
+  "40-inside-gap.md": 3000,
+  "50-national-position.md": 2800,
+  "60-regional-view.md": 4000,
 };
 /** S3 の synthesis は S2 より短い (ブリーフの表と一致させる)。 */
 const S3_SYNTHESIS = 3500;
+
+/**
+ * 「章として成立しているか」の床。
+ *
+ * 元の症状 (2026-08-12 実測) は **1 章 = 定型 1 文 144〜200 字**だった。読み物になっている
+ * 章の実測下限は 1,592 字なので、その半分強を床にして回帰だけを確実に止める。
+ * 目安字数との差は warn (比率 30% の判定は generate が書籍単位で行う)。
+ */
+const STUB_FLOOR = 900;
 
 const HYPE = ["ワースト", "衝撃", "激減", "急増", "最悪", "驚愕", "ヤバい"];
 /** である調の copula 文末 (ですます調への統一を検査)。 */
@@ -112,7 +124,7 @@ async function verifyBook(bookId: string): Promise<Finding[]> {
   }
   const files = readdirSync(dir).filter((f) => f.endsWith(".md")).sort();
   const isRegion = bookId.startsWith("K-S3-");
-  const expected = isRegion ? 5 : 6;
+  const expected = isRegion ? 7 : 7;
   if (files.length < expected) {
     out.push({ file: bookId, level: "error", msg: `ファイル ${files.length}/${expected} 本 (不足)` });
   }
@@ -123,13 +135,22 @@ async function verifyBook(bookId: string): Promise<Finding[]> {
     const raw = readFileSync(join(dir, f), "utf8");
     const chars = raw.replace(/\s/g, "").length;
     const target = f === "90-synthesis.md" && isRegion ? S3_SYNTHESIS : TARGETS[f];
-    if (target) {
-      // ★目安は**書き下ろし比率 30% を満たすための下限**であって上限ではない。
-      //   超過は比率を良くするだけなので咎めない (実測で 2〜3 倍書かれたが中身は実質的な
-      //   分析だった)。極端な超過だけ水増しの疑いとして warn に出す。
+    // ★字数の判定はここでは「スタブでないこと」だけを見る (2026-08-12 に設計を直した)。
+    //
+    //   当初は「目安の 80% 未満は error」にしていたが、目安そのものが**書き下ろし比率 30% を
+    //   満たすための推定値**で、実測すると fresh は必要量の 2.2 倍書かれていた
+    //   (K-S3-02: 必要 13,184 字に対し実測 28,855 字)。その状態で 4,793 字を「4,800 字に
+    //   7 字足りない」と落とすのは、比率という本来の要件から外れた数字を守らせているだけになる。
+    //
+    //   **比率 30% の判定は `products:kindle:generate` が書籍単位で行う**のでそちらが権威。
+    //   ここは 1 章が読み物として成立しているか (定型 1 文の章に戻っていないか) を見る。
+    //   元の症状がまさに「1 章 = 144〜200 字」だったので、その回帰は確実に止まる。
+    if (chars < STUB_FLOOR) {
+      out.push({ file: `${bookId}/${f}`, level: "error", msg: `${chars}字 — 章として成立しない (床 ${STUB_FLOOR}字)` });
+    } else if (target) {
       const lo = Math.round(target * 0.8);
       const hi = Math.round(target * 3);
-      if (chars < lo) out.push({ file: `${bookId}/${f}`, level: "error", msg: `${chars}字 < 目安 ${target} の 80% (${lo})` });
+      if (chars < lo) out.push({ file: `${bookId}/${f}`, level: "warn", msg: `${chars}字 < 目安 ${target} の 80% (${lo})` });
       else if (chars > hi) out.push({ file: `${bookId}/${f}`, level: "warn", msg: `${chars}字 > 目安 ${target} の 3 倍 — 水増しでないか確認` });
     }
 
