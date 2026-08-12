@@ -86,7 +86,15 @@ const BASE_CLAIM_UNITS = ["円", "人", "％", "%", "位", "件", "世帯"] as c
  * **本文に出うる単位は、その書籍の指標の単位そのもの**なので、そこから作るのが確実。
  */
 function unitPattern(extra: readonly string[] = []): string {
-  const all = [...new Set([...extra, ...BASE_CLAIM_UNITS].map((u) => u.trim()).filter(Boolean))];
+  // ★括弧の全角半角は揃えない。SSOT の単位は「人（人口10万対）」(全角) だが、本文は
+  //   「38人(人口10万対)」(半角) と書かれる。片方だけを候補にすると拾えず、分母つき指標の
+  //   主張が素の「人」として扱われて誤検出になる (2026-08-12 実測: K-S3-07 で 11 件)。
+  const variants = [...extra, ...BASE_CLAIM_UNITS].flatMap((u) => [
+    u,
+    u.replace(/（/g, "(").replace(/）/g, ")"),
+    u.replace(/\(/g, "（").replace(/\)/g, "）"),
+  ]);
+  const all = [...new Set(variants.map((u) => u.trim()).filter(Boolean))];
   all.sort((a, b) => b.length - a.length);
   return all.map((u) => u.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
 }

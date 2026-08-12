@@ -152,6 +152,24 @@ npm run test:run   --workspace=@stats47/product-factory
 推定値にすぎず、実測 fresh は必要量の 2.2 倍あったので、そこで 7 字差を落とすと本来の要件から
 外れた数字を守らせることになる。
 
+#### 出品可否は実測で決める（`verify-publishable.mts`）
+
+出品停止（`blocked-thin`）は人手で書き込むと、**是正しても誰も戻さない / 中身を直さずに
+status だけ戻せる**の両方が起きる。実際 `blockReason` に是正前の実測値
+（「本文 4,568 字 / 1章 152 字」）が残ったままだった。
+
+```bash
+npx tsx packages/product-factory/scripts/verify-publishable.mts          # 実測して表示
+npx tsx packages/product-factory/scripts/verify-publishable.mts --apply  # listings も更新
+```
+
+全書籍をビルドし、`build-book.ts` の `volumeOk`（総 20,000字 / 1章 800字）と
+`freshRatioOk`（KDP の 30%）で判定して `.claude/config/kdp-listings.json` の
+`status` / `blockReason` を書き換える。**閾値をここに再定義しない**（build-book が正典）。
+`listed`（公開済み）は巻き戻さない — 公開状態は KDP 側が真実源。
+
+**このスクリプトは実公開しない。** KDP へのアップロードはオーナー工程（§8 の KDP 出品自動化）。
+
 #### EPUB 構造の不変量（2026-08-12 確定・`__tests__/epub.test.ts` が固定）
 
 Kindle Previewer で「表紙が描画されない / 途中ページが表示されない / 改ページが不適切」の

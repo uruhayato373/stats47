@@ -382,13 +382,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,568 字 / 1章 152 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-01/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-01/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -412,13 +411,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,659 字 / 1章 155 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-02/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-02/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -442,13 +440,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,640 字 / 1章 155 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-03/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-03/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -472,13 +469,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,589 字 / 1章 153 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-04/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-04/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -502,13 +498,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,512 字 / 1章 150 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-05/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-05/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -532,13 +527,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,313 字 / 1章 144 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-06/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-06/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -562,13 +556,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,700 字 / 1章 157 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-07/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-07/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -592,13 +585,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,830 字 / 1章 161 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-08/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-08/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -622,13 +614,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,656 字 / 1章 155 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-09/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-09/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -652,13 +643,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,620 字 / 1章 154 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-10/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-10/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -682,13 +672,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,563 字 / 1章 152 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-11/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-11/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -712,13 +701,12 @@
         "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 5,656 字 / 1章 189 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-01/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S3-01/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -742,13 +730,12 @@
         "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 5,619 字 / 1章 187 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-02/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S3-02/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -772,13 +759,12 @@
         "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 5,615 字 / 1章 187 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-03/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S3-03/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -802,13 +788,12 @@
         "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 5,612 字 / 1章 187 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-04/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S3-04/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -832,13 +817,12 @@
         "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 5,626 字 / 1章 188 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-05/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S3-05/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -862,13 +846,12 @@
         "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 5,621 字 / 1章 187 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-06/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S3-06/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -892,13 +875,12 @@
         "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 5,627 字 / 1章 188 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-07/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S3-07/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -922,13 +904,12 @@
         "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 5,725 字 / 1章 191 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-08/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S3-08/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     },
@@ -952,13 +933,12 @@
         "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
       ],
       "categoriesVerified": false,
-      "blockReason": "本文 4,491 字 / 1章 150 字 — 定型1文+図の羅列で書籍として薄い (床: 総20,000字・1章800字)",
       "priceYen": 1000,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S4-01/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S4-01/v1/cover.png",
-      "status": "blocked-thin",
+      "status": "draft",
       "asin": null,
       "publishedAt": null
     }
