@@ -178,8 +178,35 @@ npm run products:kindle:verify-epub  --workspace=@stats47/product-factory -- --b
 床に届かない書籍は `kdp-listings.json` の `status: "blocked-thin"` + `blockReason` で出品を止める
 (理由が消えると次の人が status だけ戻して出品しかねないので upsert 保持する)。
 
-**S1 の 12 冊は合格・S2/S3/S4 の 20 冊は不合格**。20 冊を出すには章あたりの散文を書き足すか、
-「1 指標 1 章」の構成自体をやめて論点単位に束ね直す必要がある。
+**S1 の 12 冊は合格・S2/S3/S4 の 20 冊は不合格**だった。以下の章コンポーザで是正した。
+
+#### 章コンポーザ — ranking 章の本文は ai-content から組む (2026-08-12 新設)
+
+R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済みの解説
+(insights 400〜700字 / regionalAnalysis 700〜1,000字 / faq / 県別解説 47県) を持つ。
+これを書籍本文へ再利用し、**1 章 150 字 → 1,000〜1,600 字**にした。
+
+| 層 | 実装 |
+|---|---|
+| 取得・合成・フィールド判定 | `src/channels/kindle/ai-content-composer.ts` |
+| 書籍別のキー選定 SSOT | `src/channels/kindle/book-ranking-keys.ts` (生成: `scripts/select-book-keys.mts`) |
+| 書き下ろしの執筆ブリーフ | `scripts/build-fresh-briefs.mts` (実データ 30 指標を焼き込む) |
+| 書き下ろしの検証 | `scripts/verify-fresh.mts` |
+
+**捏造を通さない設計**: 採用前に `.claude/scripts/ai-content/lib/number-audit.mjs` を
+**import して** ai-content 側とまったく同じ判定で数値を突合する (書籍側に別実装を作らない =
+「サイトでは通るが書籍では落ちる」二重基準を作らない)。判定は**フィールド単位**で、
+落ちたものだけ理由付きで捨てる (キーごと捨てると使える解説まで失う)。
+
+**禁止**:
+
+| NG | OK |
+|---|---|
+| pack の全キーを渡して先頭 N 件を章にする | `book-ranking-keys.ts` で書籍ごとに確定させる |
+| S3 8 冊が同じキー・同じ本文になる | 地域の県が上位/下位に偏る指標を選び、本文も県名で地域抽出する |
+| ai-content の見出し語で地方ブロックを照合する | **節の中の県名**で判定 (見出しは内容ベースの自由文で固定区分ではない) |
+| 書き下ろし章を `freshText` でインライン持ちする | `manuscripts/<id>/*.md` を `freshFile` で参照 (S1 と同じ) |
+| ヘルパー定数を使用箇所より後ろに置く | 前に置く (`const` は巻き上げされず生成が落ちる) |
 
 - **需要ファースト**: 一括生成せず 1 冊ずつ manuscript へ昇格 → 生成 → 人間が KDP 公開 → 4 週実測（KENP/販売数）→ 良ければ横展開。パイロット = **K-S1-01『実質手取りの地図』**（血肉 = 家計・所得系ブログ 9 本 + 書き下ろし）。書き下ろしの最終仕上げは `article-writer` → `blog-critic` の既存品質ゲートを通す。
 
