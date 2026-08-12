@@ -217,10 +217,13 @@ export async function waitForLogin(page, { waitMinutes = 6, tag = '[login]' } = 
     //   もとは 3 秒ごとにログイン確認 URL へ goto しており、**人がメールアドレスを打っている
     //   最中にページごと飛ばしていた**。人のログインを待つのが目的なのだから、
     //   待っている画面を奪ってはならない。関係ない場所に落ちたときだけ 30 秒に 1 回戻す。
+    // ★ここで遷移してよいのは「ページが無い」ときだけ。ログインのどの段階にいるかを
+    //   URL から当てにいくと必ず取りこぼす (実測: amazon.co.jp のトップに一時的に
+    //   落ちる場面があり、そこで遷移すると認証フローが切れる)。
+    //   **画面を持っているのは人**なので、白紙とエラーページ以外は触らない。
     const url = page.url();
-    const onAuth = /\/login|\/signup|\/auth|verify/.test(url);
-    const onSite = /coconala\.com/.test(url);
-    if (!onAuth && !onSite && Date.now() - lastNudge > 30_000) {
+    const blank = !url || url === "about:blank" || /^chrome-error:/.test(url);
+    if (blank && Date.now() - lastNudge > 30_000) {
       lastNudge = Date.now();
       await gotoResilient(page, LOGIN_CHECK_URL, { tries: 1 });
     }

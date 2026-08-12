@@ -96,7 +96,10 @@ export async function launchContext({ headless = false } = {}) {
   });
 }
 
-const BOOKSHELF_URL = "https://kdp.amazon.com/en_US/bookshelf";
+// ★日本語 UI を使う。フォームのセレクタ (kdp-form.mjs) が「タイトル」「著者名」など
+//   日本語ラベルで要素を探すため、en_US で開くと 1 つも一致しない (2026-08-12 に発覚)。
+//   marketplace は kdp-account.json のとおり amazon.co.jp。
+const BOOKSHELF_URL = "https://kdp.amazon.com/ja_JP/bookshelf";
 
 async function gotoResilient(page, url, { tries = 2, timeout = 45000 } = {}) {
   for (let i = 0; i < tries; i++) {
@@ -145,10 +148,13 @@ export async function waitForLogin(page, { waitMinutes = 8, tag = "[login]" } = 
     //   ページごと飛ばしていた**。「入力が途中でリセットされる」という症状の正体がこれ。
     //   人のログインを待つのが目的なのだから、待っている画面を奪ってはならない。
     //   サインインでも本棚でもない場所 (エラーページ等) に落ちたときだけ、30 秒に 1 回だけ戻す。
+    // ★ここで遷移してよいのは「ページが無い」ときだけ。ログインのどの段階にいるかを
+    //   URL から当てにいくと必ず取りこぼす (実測: amazon.co.jp のトップに一時的に
+    //   落ちる場面があり、そこで遷移すると認証フローが切れる)。
+    //   **画面を持っているのは人**なので、白紙とエラーページ以外は触らない。
     const url = page.url();
-    const onAuth = /signin|\/ap\/|\/mfa|challenge/.test(url);
-    const onKdp = /kdp\.amazon\./.test(url);
-    if (!onAuth && !onKdp && Date.now() - lastNudge > 30_000) {
+    const blank = !url || url === "about:blank" || /^chrome-error:/.test(url);
+    if (blank && Date.now() - lastNudge > 30_000) {
       lastNudge = Date.now();
       await gotoResilient(page, BOOKSHELF_URL, { tries: 1 });
     }
