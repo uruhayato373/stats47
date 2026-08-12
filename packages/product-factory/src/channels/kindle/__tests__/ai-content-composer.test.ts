@@ -193,3 +193,36 @@ describe("composeChapterBody", () => {
     expect(r.md).toBe("");
   });
 });
+
+describe("judgeField — ★スケール接頭辞が単位の一部かは SSOT の unit で決める", () => {
+  // 実測 (2026-08-12): 「労働費は45,596,934千円」の千を ×1000 と読むと 455 億になり、
+  // **値が完全に一致しているのに不合格**になっていた。同じ誤りは地図照合でも起きており、
+  // 結論は「SSOT の unit がその短縮単位で始まるかで判定する」(unit-semantics-standards.md §4)。
+  const values = [
+    { areaName: "東京都", areaCode: "13000", value: 45596934, rank: 1 },
+    { areaName: "和歌山県", areaCode: "30000", value: 1083021, rank: 46 },
+  ];
+
+  it("単位が千円なら、千は単位の一部として扱い通す", () => {
+    expect(judgeField("労働費は東京都が45,596,934千円で1位です。", { values, units: ["千円"] }).ok).toBe(true);
+    expect(judgeField("和歌山県は1,083,021千円で46位でした。", { values, units: ["千円"] }).ok).toBe(true);
+  });
+
+  it("★接頭辞を外しても範囲外なら弾く (桁違いの捏造は通さない)", () => {
+    const v = judgeField("東京都は999,999,999千円でした。", { values, units: ["千円"] });
+    expect(v.ok).toBe(false);
+    expect(v.reason).toMatch(/範囲外/);
+  });
+
+  it("★単位に千円が無ければ従来どおり弾く (無条件の緩和にしない)", () => {
+    const v = judgeField("東京都は45,596,934千円でした。", { values, units: ["人"] });
+    expect(v.ok).toBe(false);
+  });
+
+  it("単位を渡さなければ従来どおり厳しく弾く (緩和は unit を根拠にしたときだけ)", () => {
+    // 緩和の根拠は SSOT の unit なので、それが無ければ緩和しない。
+    // 呼び出し側 (composer は metric の unit、verify-fresh は書籍の単位集合) が必ず渡すため、
+    // 実運用でこの経路には入らない。「単位を調べずに緩める」を構造的に不可能にするための挙動。
+    expect(judgeField("東京都は45,596,934千円でした。", { values }).ok).toBe(false);
+  });
+});

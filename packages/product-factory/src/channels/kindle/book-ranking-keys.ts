@@ -69,12 +69,10 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "commuter-ratio-from-other-municipalities", // 他市区町村からの通勤者比率 — 本文 1731字 / [insights,regionalAnalysis,faq]
     "elderly-general-worker-old-population-ratio-pre2019", // 高齢一般労働者割合 — 本文 1724字 / [insights,regionalAnalysis,faq]
     "monthly-average-actual-working-hours-female-pre2019", // 月間平均実労働時間数 — 本文 1721字 / [insights,regionalAnalysis,faq]
-    "bus-driver-annual-income", // バス運転者の平均年収 — 本文 1697字 / [insights,regionalAnalysis,faq]
     "monthly-average-actual-working-hours-male-pre2019", // 月間平均実労働時間数 — 本文 1687字 / [insights,regionalAnalysis,faq]
     "monthly-average-actual-working-hours-female", // 月間平均実労働時間数 — 本文 1675字 / [insights,regionalAnalysis,faq]
     "employed-people-ratio-secondary", // 第2次産業就業者比率 — 本文 1659字 / [insights,regionalAnalysis,faq]
     "tertiary-industry-employees-per-establishment", // 第3次産業従業者数 — 本文 1649字 / [insights,regionalAnalysis,faq]
-    "designer-annual-income", // デザイナーの平均年収 — 本文 1645字 / [insights,regionalAnalysis,faq]
     "employment-mobility-rate", // 就業異動率 — 本文 1644字 / [insights,regionalAnalysis,faq]
     "in-prefecture-employed-people-ratio", // 県内就業者比率 — 本文 1639字 / [insights,regionalAnalysis,faq]
     "side-job-rate", // 副業率 — 本文 1621字 / [insights,regionalAnalysis,faq]
@@ -163,7 +161,6 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "dental-technician-rate", // 歯科技工士率（人口10万対） — 本文 1942字 / [insights,regionalAnalysis,faq]
     "nursing-welfare-facility-count-per-100k-65plus", // 介護老人福祉施設数 — 本文 1939字 / [insights,regionalAnalysis,faq]
     "dental-checkup-persons", // 歯科健診受診延人員 — 本文 1917字 / [insights,regionalAnalysis,faq]
-    "doctor-annual-income", // 医師の平均年収 — 本文 1894字 / [insights,regionalAnalysis,faq]
     "social-welfare-expenditure-ratio-pref-finance", // 社会福祉費割合 — 本文 1882字 / [insights,regionalAnalysis,faq]
     "psychiatric-outpatients-per-fulltime-physician-per-day", // 精神科病院外来患者数 — 本文 1881字 / [insights,regionalAnalysis,faq]
     "psychiatric-inpatients-per-nurse-per-day", // 精神科病院在院患者数 — 本文 1874字 / [insights,regionalAnalysis,faq]
@@ -299,7 +296,6 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "private-life-insurance-contracts", // 民間生命保険保有契約件数 — 本文 1749字 / [insights,regionalAnalysis,faq]
     "avg-savings-rate-worker-households", // 平均貯蓄率 — 本文 1748字 / [insights,regionalAnalysis,faq]
     "fish-catch", // 漁獲量 — 本文 1742字 / [insights,regionalAnalysis,faq]
-    "gini-coefficient-disposable-income", // 等価可処分所得ジニ係数 — 本文 1741字 / [insights,regionalAnalysis,faq]
     "marine-fishery-catch", // 海面漁業漁獲量 — 本文 1729字 / [insights,regionalAnalysis,faq]
     "per-capita-inhabitant-tax-pref-municipal", // 住民税 — 本文 1729字 / [insights,regionalAnalysis,faq]
     "agricultural-income-ratio", // 農業所得割合 — 本文 1723字 / [insights,regionalAnalysis,faq]
@@ -620,7 +616,6 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "horse-mackerel-consumption-quantity", // あじ消費量 — 本文 1383字 / 地域特徴度 0.71
     "other-topical-medicine-consumption-expenditure", // 他の外用薬消費支出額 — 本文 1683字 / 地域特徴度 0.65
     "per-capita-inhabitant-tax-pref-municipal", // 住民税 — 本文 1729字 / 地域特徴度 0.64
-    "bowling-alley-public", // ボウリング場数（公共） — 本文 727字 / 地域特徴度 0.85
     "nuclear-power-plant-count", // 原子力発電所数 — 本文 824字 / 地域特徴度 0.83
     "specialized-school-count-per-100k", // 専修学校数 — 本文 1964字 / 地域特徴度 0.58
     "futon-consumption-expenditure", // 布団消費支出額 — 本文 1678字 / 地域特徴度 0.64

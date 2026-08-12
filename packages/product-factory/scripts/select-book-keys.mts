@@ -50,6 +50,33 @@ export interface KeyProbe {
   readonly reason?: string;
 }
 
+/**
+ * 書籍に載せてはいけない metric (単位の欠陥が既知のもの)。
+ *
+ * ★`MONEY-UNIT-SCALE-01` — 賃金構造基本統計 (0003445758) と個人企業経済調査 (0003421679) は
+ *   e-Stat の値が千円なのに config の unit が万円で、そのまま書くと 10 倍の数値になる
+ *   (実測: バス運転者の平均年収が「5,017万円」として原稿に入っていた)。
+ *   サイト側は backlog で是正予定だが、**直るまで書籍には載せない** (誤った数値の出版は
+ *   取り下げが効かない)。config が直ったらこの除外を外す。
+ */
+const DEFECTIVE_STATS_DATA_IDS = new Set(["0003445758", "0003421679"]);
+
+/**
+ * `isActive:false` の指標は書籍に載せない。
+ * サイト側で `/ranking/<key>` が 410 か空ページになる (= 読者が確かめに行けない) うえ、
+ * 非公開の理由自体がデータの欠陥であることが多い (実測: `bowling-alley-public` は全 47 県が 0、
+ * `gini-coefficient-disposable-income` は接地データの健全性ゲートで not-eligible)。
+ */
+function isInactive(rankingKey: string): boolean {
+  return (METRICS_REGISTRY as Record<string, any>)[rankingKey]?.isActive === false;
+}
+
+function hasKnownUnitDefect(rankingKey: string): boolean {
+  const m = (METRICS_REGISTRY as Record<string, any>)[rankingKey];
+  const sid = m?.source?.statsDataId ?? m?.source?.config?.statsDataId;
+  return sid ? DEFECTIVE_STATS_DATA_IDS.has(String(sid)) : false;
+}
+
 /** 人口規模が大きく「1位になりがち」な県 (意外性のスコアリング用)。 */
 const BIG_PREFS = new Set(["13000", "27000", "14000", "23000", "11000", "12000"]);
 
@@ -197,8 +224,10 @@ async function main(): Promise<void> {
     // "a"〜"b" に偏るため等間隔サンプリングにする (probe はキー単位でキャッシュされる)。
     const sample = strideSample(keys, Number(arg("sample") ?? 400));
     const probes = await probeAll(sample, concurrency);
-    // 本文が組めないキーは候補から外す (章が薄いまま出しても意味がない)。
-    const pool = probes.filter((p) => p.composedChars >= 600);
+    // 本文が組めないキーと、単位の欠陥が既知のキーを候補から外す。
+    const pool = probes.filter(
+      (p) => p.composedChars >= 600 && !hasKnownUnitDefect(p.rankingKey) && !isInactive(p.rankingKey),
+    );
 
     // ★書籍種別で並べ方を変える。
     //   S2 = テーマ pack なのでどれも主題に沿う → 本文が厚い順

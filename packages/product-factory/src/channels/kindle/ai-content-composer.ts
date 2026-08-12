@@ -106,6 +106,42 @@ export interface FieldGateInput {
   readonly values: readonly ValueRow[];
   readonly unit?: string;
   readonly yearCode?: string;
+  /**
+   * 複数指標をまとめて 1 つの文脈にするとき (書籍単位の検証) に、その集合に現れる単位。
+   * `unit` 単独では表せないので別に受ける。§「スケール接頭辞の判定」で使う。
+   */
+  readonly units?: readonly string[];
+}
+
+/**
+ * 「千 / 万」がスケール接頭辞か単位の一部かを SSOT の unit で判定する。
+ *
+ * ★これが要る理由 (2026-08-12 実測)
+ *   本文の「労働費は45,596,934千円」の 千 を ×1000 と読むと 455 億になり、実データ
+ *   (最大 45,596,934) の範囲外として弾かれる。**値は完全に一致しているのに不合格**になる。
+ *   同じ誤りは地図照合でも起きており (`map-value-match.mjs`)、そこでの結論は
+ *   「SSOT の unit がその短縮単位で始まるかで判定する」だった。ここでも同じ規則を使う。
+ *   正典: `.claude/rules/unit-semantics-standards.md` §4。
+ *
+ * 単位が分からないときは判定できないので、**弾かない** (誤検知を出すゲートは運用で無効化される)。
+ * 桁違いの捏造を止める本来の役目は、接頭辞を伴わない数値に対しては変わらず効く。
+ */
+function scaleSuffixesFromUnits(gate: FieldGateInput): ReadonlySet<string> {
+  const out = new Set<string>();
+  const units = [gate.unit, ...(gate.units ?? [])].filter((u): u is string => !!u);
+  for (const u of units) {
+    const head = u.trim()[0];
+    if (head && "千万億兆".includes(head)) out.add(head);
+  }
+  return out;
+}
+
+/** 桁区切りを外して数値にする (「45,596,934」→ 45596934)。 */
+function baseOf(raw: string): number | null {
+  const m = /^([\d,]+(?:\.\d+)?)/.exec(raw.trim());
+  if (!m) return null;
+  const n = Number(m[1].replace(/,/g, ""));
+  return Number.isFinite(n) ? n : null;
 }
 
 export interface FieldVerdict {
@@ -146,7 +182,16 @@ export function judgeField(raw: string | undefined, gate: FieldGateInput): Field
   if (!ctx) return { ok: true, text };
 
   // ★変換後のテキストで照合する (漢数字のままだと数値として抽出されず素通りする)。
-  const bad = findOutOfRangeNumbers(text, ctx);
+  // スケール接頭辞が単位の一部でありうる場合 (千円 / 万円)、接頭辞を外した値が範囲に収まるなら
+  // 判定できないものとして落とす (上記 scaleSuffixesFromUnits の説明を参照)。
+  const suffixes = scaleSuffixesFromUnits(gate);
+  const bad = findOutOfRangeNumbers(text, ctx).filter((b: { raw: string }) => {
+    const last = b.raw.trim().slice(-1);
+    if (!suffixes.has(last)) return true;
+    const base = baseOf(b.raw);
+    // 上限だけを見る (number-audit と同じ。下限判定は差分表現で誤検知しか生まない)。
+    return base === null || base > ctx.max * 1.05;
+  });
   if (bad.length > 0) {
     return { ok: false, reason: `実データの範囲外の数値 ${bad.length} 件 (例: ${bad[0].raw})` };
   }

@@ -69,10 +69,17 @@ interface Finding {
   readonly msg: string;
 }
 
-async function buildGate(bookId: string): Promise<{ values: ValueRow[]; unit?: string }> {
+async function buildGate(bookId: string): Promise<{ values: ValueRow[]; units: string[] }> {
   // その書籍が載せる全指標の観測値をまとめて 1 つの文脈にする。
-  // 単位が混ざるので unit は渡さない (スケール換算はせず、値の範囲だけで判定する)。
+  // 単位が混ざるので unit(単数)は渡さないが、**単位の集合**は渡す —
+  // 「45,596,934千円」の千がスケール接頭辞か単位の一部かは SSOT の unit でしか判別できず、
+  // 渡さないと千円建ての指標がすべて誤検知になる (正典: unit-semantics-standards.md §4)。
   const keys = BOOK_RANKING_KEYS[bookId] ?? [];
+  const units = new Set<string>();
+  for (const k of keys) {
+    const u = (METRICS_REGISTRY as Record<string, any>)[k]?.unit;
+    if (typeof u === "string" && u.trim() !== "") units.add(u);
+  }
   const values: ValueRow[] = [];
   for (let i = 0; i < keys.length; i += 8) {
     const batch = keys.slice(i, i + 8);
@@ -94,7 +101,7 @@ async function buildGate(bookId: string): Promise<{ values: ValueRow[]; unit?: s
     );
     for (const rows of got) values.push(...rows);
   }
-  return { values };
+  return { values, units: [...units] };
 }
 
 async function verifyBook(bookId: string): Promise<Finding[]> {
@@ -117,10 +124,13 @@ async function verifyBook(bookId: string): Promise<Finding[]> {
     const chars = raw.replace(/\s/g, "").length;
     const target = f === "90-synthesis.md" && isRegion ? S3_SYNTHESIS : TARGETS[f];
     if (target) {
+      // ★目安は**書き下ろし比率 30% を満たすための下限**であって上限ではない。
+      //   超過は比率を良くするだけなので咎めない (実測で 2〜3 倍書かれたが中身は実質的な
+      //   分析だった)。極端な超過だけ水増しの疑いとして warn に出す。
       const lo = Math.round(target * 0.8);
-      const hi = Math.round(target * 1.2);
+      const hi = Math.round(target * 3);
       if (chars < lo) out.push({ file: `${bookId}/${f}`, level: "error", msg: `${chars}字 < 目安 ${target} の 80% (${lo})` });
-      else if (chars > hi) out.push({ file: `${bookId}/${f}`, level: "warn", msg: `${chars}字 > 目安 ${target} の 120% (${hi})` });
+      else if (chars > hi) out.push({ file: `${bookId}/${f}`, level: "warn", msg: `${chars}字 > 目安 ${target} の 3 倍 — 水増しでないか確認` });
     }
 
     const kanji = extractKanjiClaims(raw).filter((c) => ["円", "位", "倍", "％"].includes(c.unit));
