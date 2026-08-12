@@ -1,7 +1,0 @@
-{
-  "metric": "per-capita-prefectural-income-h27",
-  "since": "",
-  "dryRun": false,
-  "requestedAt": "2026-08-12T08:30:00Z",
-  "reason": "years を 2020→2021 に拡張。ブログ per-capita-income-gap が 2021年度 (東京 5,214千円・全国平均 333万円・山形 -0.1%) を引用しているが SSOT は 2020年度しか持たず裏付けが無い。e-Stat が 2021 を返さなければ何も増えない (推測で値を作らない)。"
-}
