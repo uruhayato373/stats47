@@ -47,6 +47,11 @@ export interface BookChapter {
   readonly rankingKeys?: readonly string[];
   /** source="ranking" (S3 地域別) で、この地域の県を考察で強調する。 */
   readonly highlightRegionLabel?: string;
+  /**
+   * ai-content の regionalAnalysis から抜き出す地方ブロックの見出し語。
+   * S3 で「その地域の段落」だけを章に載せるのに使う (全冊同一本文の再発防止)。
+   */
+  readonly regionBlockLabel?: string;
   /** highlightRegionLabel の対象県コード (5桁)。 */
   readonly highlightCodes?: readonly string[];
   /** source="fresh" の書き下ろし本文 (markdown・短文をインライン指定する場合)。 */

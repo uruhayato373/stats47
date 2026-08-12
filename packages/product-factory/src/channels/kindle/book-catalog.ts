@@ -15,6 +15,7 @@
  */
 import type { KindleBook, BookChapter } from "./types";
 import { PACK_RANKING_KEYS } from "../../catalog/pack-rankingkeys.generated";
+import { BOOK_RANKING_KEYS } from "./book-ranking-keys";
 
 const AUTHOR = "stats47";
 
@@ -296,7 +297,8 @@ const S2_BOOKS: readonly KindleBook[] = S2_THEMES.map((t) => ({
     {
       title: `${t.label}の主要ランキング`,
       source: "ranking" as const,
-      rankingKeys: PACK_RANKING_KEYS[t.pack] ?? [],
+      // 章に載せるキーは書籍ごとの SSOT で確定させる (pack 全件の先頭 24 件ではない)。
+      rankingKeys: BOOK_RANKING_KEYS[`K-S2-${t.suffix}`] ?? PACK_RANKING_KEYS[t.pack] ?? [],
     },
   ],
   priceYen: 500 as const,
@@ -319,7 +321,8 @@ const S3_REGIONS: readonly { readonly suffix: string; readonly label: string }[]
 ];
 
 /** 8 地方ブロックの構成県 (5桁コード)。 */
-const S3_REGION_CODES: Readonly<Record<string, readonly string[]>> = {
+/** S3 地域別の県コード (選定スクリプトも参照するので export する)。 */
+export const S3_REGION_CODES: Readonly<Record<string, readonly string[]>> = {
   "01": ["01000"], // 北海道
   "02": ["02000", "03000", "04000", "05000", "06000", "07000"], // 東北
   "03": ["08000", "09000", "10000", "11000", "12000", "13000", "14000"], // 関東
@@ -328,6 +331,21 @@ const S3_REGION_CODES: Readonly<Record<string, readonly string[]>> = {
   "06": ["31000", "32000", "33000", "34000", "35000"], // 中国
   "07": ["36000", "37000", "38000", "39000"], // 四国
   "08": ["40000", "41000", "42000", "43000", "44000", "45000", "46000", "47000"], // 九州・沖縄
+};
+
+/**
+ * ai-content の regionalAnalysis が使う地方ブロック見出し。
+ * S3 の章で「該当ブロックの段落」だけを抜き出すのに使う (見出し語が一致しないと抽出できない)。
+ */
+const S3_REGION_BLOCK_LABEL: Readonly<Record<string, string>> = {
+  "01": "北海道",
+  "02": "北海道・東北",
+  "03": "関東",
+  "04": "中部",
+  "05": "近畿",
+  "06": "中国",
+  "07": "四国",
+  "08": "九州",
 };
 
 function s3IntroMd(label: string): string {
@@ -359,9 +377,11 @@ const S3_BOOKS: readonly KindleBook[] = S3_REGIONS.map((r) => ({
     {
       title: `${r.label}の県は全国でどこに位置するか`,
       source: "ranking" as const,
-      rankingKeys: PACK_RANKING_KEYS["P-12"] ?? [],
+      // 地域ごとに**その地域が特徴的な指標**を選ぶ (全冊同一本文の再発防止)。
+      rankingKeys: BOOK_RANKING_KEYS[`K-S3-${r.suffix}`] ?? PACK_RANKING_KEYS["P-12"] ?? [],
       highlightRegionLabel: r.label,
       highlightCodes: S3_REGION_CODES[r.suffix] ?? [],
+      regionBlockLabel: S3_REGION_BLOCK_LABEL[r.suffix],
     },
   ],
   priceYen: 500 as const,
@@ -395,7 +415,8 @@ const S4_BOOKS: readonly KindleBook[] = [
       {
         title: "分野を横断した都道府県ランキング",
         source: "ranking",
-        rankingKeys: PACK_RANKING_KEYS["P-12"] ?? [],
+        // 「意外な1位」— 1 位が人口規模の大きい県でない × 格差が大きいキーを選ぶ。
+        rankingKeys: BOOK_RANKING_KEYS["K-S4-01"] ?? PACK_RANKING_KEYS["P-12"] ?? [],
       },
     ],
     priceYen: 1000,

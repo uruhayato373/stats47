@@ -239,6 +239,7 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
       const sections = await buildRankingSections(ch.rankingKeys, limit, {
         highlightRegionLabel: ch.highlightRegionLabel,
         highlightCodes: ch.highlightCodes,
+        regionBlockLabel: ch.regionBlockLabel,
       });
       // 導入 (章見出し + リード)
       chapters.push({
