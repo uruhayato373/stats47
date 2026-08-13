@@ -12,6 +12,7 @@ const WORKFLOWS = [
   "data-refresh.yml",
   "provenance-audit-weekly.yml",
   "internal-link-audit-weekly.yml",
+  "workflow-health-daily.yml",
 ];
 
 test("domain alert は固定タイトルでupsertし、正常復帰時に自動Closeする", () => {

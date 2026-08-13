@@ -1,0 +1,127 @@
+name: 🩺 Workflow Health (cron 横断)
+
+# ★なぜ要るか (2026-08-13)
+#   この repo のアラートは workflow ごとに自前で Issue を立てる設計なので、
+#   **アラート自身が壊れると誰も気づけない**。sync-rakuten-catalog は
+#   `rakuten-alert` ラベル未登録で gh issue create が落ち続け、日次同期が
+#   9 日間死んでいたことを 9 日間誰も知らなかった。
+#   ここは個々のアラートに依存せず、Actions の run 履歴だけを見て
+#   「連続失敗している cron」を洗い出す。どの cron が死んでも捕まる。
+#
+# ★判定 (決定的・正典は .claude/scripts/lib/workflow-health-core.mjs)
+#   - 対象: .github/workflows/*.yml のうち on.schedule を持つもの
+#   - 直近の schedule run を新しい順に見て、連続失敗 2 回以上で unhealthy
+#   - cancelled は実行時間で区別する (長時間 = job timeout = 失敗 /
+#     短時間 = 後続 push の concurrency 打ち消し = 無視)
+#   - run 取得に失敗した workflow は「健全」とみなさず赤にする
+
+on:
+  schedule:
+    # JST 09:00 (UTC 00:00)。日次 cron (JST 03:00-08:00 台) が出そろった後に見る
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+    inputs:
+      min_streak:
+        description: "何回連続失敗で赤にするか (既定 2)"
+        required: false
+        default: "2"
+
+permissions:
+  contents: write
+  issues: write
+  actions: read
+
+concurrency:
+  group: workflow-health
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 20.x
+
+      - name: 🩺 監査
+        id: audit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MIN_STREAK: ${{ inputs.min_streak || '2' }}
+        run: |
+          set -o pipefail
+          # 監査自体の失敗 (unhealthy あり / 取得失敗) はここでは殺さず、
+          # 下の step で Issue にしてから run を赤くする
+          if node .claude/scripts/ci/audit-workflow-health.mjs \
+            --min-streak "$MIN_STREAK" | tee /tmp/workflow-health.txt; then
+            echo "healthy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "healthy=false" >> "$GITHUB_OUTPUT"
+          fi
+          { echo '### cron ヘルスチェック'; echo '```'; cat /tmp/workflow-health.txt; echo '```'; } \
+            >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 💾 state を commit-back
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/ci || true
+          if git diff --cached --quiet; then echo "変更なし"; exit 0; fi
+          git commit -q -m "chore(ci): workflow health snapshot [skip ci]"
+          for _ in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then exit 0; fi
+            sleep 5
+          done
+          echo "::warning::state の push に失敗した (監査結果自体は job summary にある)"
+
+      - name: 🚨 連続失敗を Issue にする
+        if: steps.audit.outputs.healthy == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE="🩺 連続失敗している cron がある"
+          # heredoc は YAML ブロックスカラーとインデントが噛み合わないので body はファイルで組む
+          {
+            echo "個々の workflow のアラートに依存しない横断チェックで、連続失敗している cron を検出しました。"
+            echo
+            echo "実行ログ: ${RUN_URL}"
+            echo
+            echo '```'
+            cat /tmp/workflow-health.txt
+            echo '```'
+            echo
+            echo "## 見かた"
+            echo "- **連続失敗 N 回** は直近の schedule run を新しい順に数えたもの (短時間の cancelled は無視)"
+            echo "- **最終成功から N 日** が大きいほど、その間ずっと配信データや生成物が更新されていない"
+            echo "- その workflow 自身のアラートが飛んでいないなら、そのアラートも壊れている可能性がある"
+            echo "  (ラベル未登録・permissions 不足など。正典: .claude/rules/docs-vs-issues.md)"
+            echo
+            echo "正典: .claude/scripts/lib/workflow-health-core.mjs"
+          } > /tmp/health-issue.md
+          # ラベルが無いと gh issue create が "could not add label" で落ち、通知が飛ばない
+          gh label create ci-health-alert --description "連続失敗している cron" --color "b60205" --force 2>/dev/null || true
+          EXISTING=$(gh issue list --state open --label ci-health-alert --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/health-issue.md
+          else
+            gh issue create --title "$TITLE" --label "ci-health-alert,auto-generated" --body-file /tmp/health-issue.md
+          fi
+          echo "::error::連続失敗している cron がある (上記 Issue を参照)"
+          exit 1
+
+      - name: ✅ 復旧したら Issue を閉じる
+        if: steps.audit.outputs.healthy == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label ci-health-alert --limit 100 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "連続失敗している cron が無くなったため自動 Close します。"
+            done
