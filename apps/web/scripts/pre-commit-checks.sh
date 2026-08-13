@@ -33,6 +33,27 @@ else
   echo -e "${GREEN}✅ apps/web の .ts/.tsx 変更なし、型チェック skip${NC}"
 fi
 
+# 1.5 scripts 配下の型チェック
+#     ★上の block は apps/web/tsconfig.json を使うが、そこは include が src だけで
+#       exclude に scripts/**/* を持つため **scripts 配下を一切見ない**。
+#       sync-rakuten-catalog.ts の import 漏れが 9 日間見つからなかったのがこれ
+#       (2026-08-13 是正)。対象ディレクトリの正典は package.json の type-check:scripts。
+echo -e "${GREEN}📐 scripts の型チェック...${NC}"
+REPO_ROOT_FOR_SCRIPTS="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+STAGED_SCRIPT_TSFILES=$(git diff --cached --name-only --diff-filter=ACM \
+  | grep -E '(^|/)scripts/.*\.(ts|mts|tsx)$' || true)
+if [ -n "$STAGED_SCRIPT_TSFILES" ]; then
+  if ! (cd "$REPO_ROOT_FOR_SCRIPTS" && npm run type-check:scripts > /dev/null 2>&1); then
+    echo -e "${RED}❌ scripts の型エラーが検出されました。${NC}"
+    echo -e "${YELLOW}💡 詳細を確認: npm run type-check:scripts${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  else
+    echo -e "${GREEN}✅ scripts 型チェック成功${NC}"
+  fi
+else
+  echo -e "${GREEN}✅ scripts の .ts 変更なし、型チェック skip${NC}"
+fi
+
 # 2. デザインシステムガード
 echo -e "${GREEN}🎨 デザインシステムチェック...${NC}"
 if ! (cd "$WEB_DIR" && npm run design-system:check > /dev/null 2>&1); then

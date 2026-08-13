@@ -105,12 +105,22 @@ const count = await fetchCount();
 スクリプト (OGP 生成・page-components export・楽天カタログ同期など) が入っているので、
 型エラーが本番の cron 実行まで一切見えない。
 
-- 網は `apps/web/scripts/tsconfig.json` (glob で全件)。`npm run type-check` から
-  `type-check:scripts` として呼ばれ、CI の type-check job が実行する。
+- **`scripts` ディレクトリを新設したら専用 tsconfig を作り `type-check:scripts` に足す。**
+  現在の対象: `apps/web/scripts` / `packages/database/scripts` / `packages/ranking/scripts` /
+  `packages/product-factory/scripts` / `apps/remotion/scripts` /
+  `.claude/skills/ads/scout-asp/scripts`。`src/**/*` に含まれる `packages/*/src/scripts` は
+  親 tsconfig が既に覆っているので不要。
+- 呼び口は `npm run type-check:scripts`。root の `type-check` (CI の type-check job) と
+  pre-commit の両方から呼ばれる。**pre-commit の既存 TypeScript ブロックは
+  `apps/web/tsconfig.json` を使うので scripts を見ない** — 別ブロックが要る。
 - `apps/web/scripts/tsconfig.ogp.json` は image pipeline gate を単体で速く回すための
   **手書き allowlist** で、網ではない。新しいスクリプトを足しても追記は不要。
-- 契約は `.claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs` が固定する
-  (include が glob であること・root の type-check から呼ばれること)。
+- 契約は `.claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs` が固定する。
+  ファイルシステムから `scripts` ディレクトリを列挙して**全件の被覆を要求する**ので、
+  新しいディレクトリは配線するまでテストが落ちる。免除は理由付きで `KNOWN_UNCOVERED` に
+  書き、件数は縮小専用。
+- 未被覆として残しているのは `.claude/scripts` のみ (TS 41 ファイル・error 71 件。
+  素 JS の `lib/*.mjs` core を import する設計なので型付け方針から要る)。
 
 実例 (2026-08-04〜08-13): `sync-rakuten-catalog.ts` の import 漏れ
 (`searchFurusatoItems`) が 9 日間検出されず、日次同期が毎日 11 分走ってから
