@@ -1,0 +1,31 @@
+{
+  // apps/web/scripts 配下**全部**の型検査。
+  //
+  // ★なぜ要るか (2026-08-13)。apps/web/tsconfig.json は exclude に "scripts/**/*" を持ち、
+  //   include も "src/**/*" だけなので、CI が毎日動かすスクリプト群は型検査を一度も通って
+  //   いなかった。実際 sync-rakuten-catalog.ts の import 漏れ (searchFurusatoItems) が
+  //   9 日間検出されず、日次の楽天同期が毎日 11 分走ってから ReferenceError で全損していた。
+  //   tsc なら TS2304 で即座に出る類のミス。
+  //
+  // ★tsconfig.ogp.json との違い: あちらは image pipeline gate が単体で速く回すための
+  //   **手書き allowlist**。手書きゆえに新しいスクリプトが載らず、今回の抜けもそれ。
+  //   こちらは取りこぼしを作らない網なので glob で全部を見る。
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "noEmit": true
+  },
+  // ★next-env.d.ts と src を含める必要がある。scripts だけを include すると、依存として
+  //   引かれる src/ が Next の型拡張なしで検査され、`fetch(..., { next: {...} })` 等が
+  //   偽陽性 (TS2769) になる。src 自体の検査は ../tsconfig.json と重複するが、
+  //   重複して困るのは実行時間だけで、取りこぼしより安い。
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../src/**/*.ts",
+    "../src/**/*.tsx",
+    "../next-env.d.ts"
+  ],
+  "exclude": ["node_modules", "../.next", "../.local"]
+}

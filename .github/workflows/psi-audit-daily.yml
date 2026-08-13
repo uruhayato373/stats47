@@ -147,6 +147,9 @@ jobs:
             cat /tmp/psi-report/candidates.md >> "$BODY_FILE"
           fi
 
+          # ラベルが無いと gh issue create が "could not add label" で落ち、**アラート自体が飛ばない**
+          # (2026-08-12 に rakuten-alert 未登録で実際に発生し、9 日間の同期停止を誰も知らなかった)。
+          gh label create psi-alert --description "PSI 日次計測の閾値違反" --color "b60205" --force 2>/dev/null || true
           EXISTING=$(gh issue list --state open --label psi-alert --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
             echo "Existing open issue #$EXISTING — replacing with latest measurement"

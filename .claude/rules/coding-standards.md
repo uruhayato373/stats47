@@ -98,6 +98,24 @@ const count = await fetchCount();
 - `LIMIT` を常に指定（一覧取得時）
 - インデックスが効くカラムで WHERE
 
+## CI が動かすスクリプトも型検査に載せる
+
+`apps/web/tsconfig.json` は `include` が `src/**/*` だけで `exclude` に `scripts/**/*` を持つため、
+**`apps/web/scripts/` 配下は素のままでは型検査されない**。ここには日次 cron が動かす
+スクリプト (OGP 生成・page-components export・楽天カタログ同期など) が入っているので、
+型エラーが本番の cron 実行まで一切見えない。
+
+- 網は `apps/web/scripts/tsconfig.json` (glob で全件)。`npm run type-check` から
+  `type-check:scripts` として呼ばれ、CI の type-check job が実行する。
+- `apps/web/scripts/tsconfig.ogp.json` は image pipeline gate を単体で速く回すための
+  **手書き allowlist** で、網ではない。新しいスクリプトを足しても追記は不要。
+- 契約は `.claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs` が固定する
+  (include が glob であること・root の type-check から呼ばれること)。
+
+実例 (2026-08-04〜08-13): `sync-rakuten-catalog.ts` の import 漏れ
+(`searchFurusatoItems`) が 9 日間検出されず、日次同期が毎日 11 分走ってから
+`ReferenceError` で全損していた。tsc なら `TS2304` で即座に出るミス。
+
 ## テスト
 
 ### AAA パターン
