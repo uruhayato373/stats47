@@ -79,8 +79,8 @@ export const ROADS_CATALOG: ThemeCatalog = {
           "高速道路延長"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#ef4444"
+          "population",
+          "danger"
         ]
       },
       "sourceName": "社会・人口統計体系",

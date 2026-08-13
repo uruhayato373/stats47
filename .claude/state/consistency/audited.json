@@ -1,5 +1,11 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-08-11T23:34:01",
-  "files": []
+  "hash": "313ce8a61e03d7c80f86d5603c1a458d322361957ac70cd5b1598c62f9a2c2ea",
+  "audited_at": "2026-08-13T08:40:24",
+  "files": [
+    ".claude/rules/theme-catalog-standards.md",
+    ".claude/scripts/audit/theme-chart-dependencies.generated.json",
+    ".claude/scripts/audit/theme-chart-live-audit.mjs",
+    ".claude/scripts/lib/__tests__/check-web-estat-imports.test.cjs",
+    ".claude/scripts/lib/check-web-estat-imports.cjs"
+  ]
 }

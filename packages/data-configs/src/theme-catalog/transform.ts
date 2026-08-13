@@ -7,6 +7,7 @@
  */
 import type { IndicatorSet } from "@stats47/types";
 
+import { resolveComponentPropsColors } from "./chart-color-role";
 import type { CatalogChart, ThemeCatalog } from "./types";
 
 /** theme key → IndicatorSet の export const 名 (例: "aging-society" → "AGING_SOCIETY_SET")。 */
@@ -62,7 +63,8 @@ function chartToPageComponent(chart: CatalogChart): Record<string, unknown> {
     componentKey: chart.componentKey,
     componentType: chart.componentType,
     title: chart.title,
-    componentProps: chart.componentProps,
+    // catalog (SSOT) は色 role を持ち、生成物は解決済み hex を持つ (WP5)。色キー文脈のみ解決。
+    componentProps: resolveComponentPropsColors(chart.componentProps),
     sourceName: chart.sourceName ?? null,
     sourceLink: chart.sourceLink ?? null,
     rankingLink: chart.rankingLink ?? null,

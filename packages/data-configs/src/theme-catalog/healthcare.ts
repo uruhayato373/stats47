@@ -94,8 +94,8 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
           "病院数"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#22c55e"
+          "population",
+          "improve"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -123,7 +123,7 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
           "1人当たり医療費"
         ],
         "seriesColors": [
-          "#ef4444"
+          "danger"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -156,8 +156,8 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
           "健診受診率"
         ],
         "seriesColors": [
-          "#ef4444",
-          "#22c55e"
+          "danger",
+          "improve"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -297,27 +297,27 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
           {
             "code": "#I06102",
             "label": "悪性新生物（がん）",
-            "color": "#ef4444"
+            "color": "danger"
           },
           {
             "code": "#I06105",
             "label": "心疾患",
-            "color": "#3b82f6"
+            "color": "population"
           },
           {
             "code": "#I06106",
             "label": "脳血管疾患",
-            "color": "#f59e0b"
+            "color": "count"
           },
           {
             "code": "#I06103",
             "label": "糖尿病",
-            "color": "#22c55e"
+            "color": "improve"
           },
           {
             "code": "#I06104",
             "label": "高血圧性疾患",
-            "color": "#8b5cf6"
+            "color": "special"
           }
         ]
       },
@@ -346,7 +346,7 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
           "糖尿病死亡率"
         ],
         "seriesColors": [
-          "#22c55e"
+          "improve"
         ]
       },
       "sourceName": "総務省統計局 社会・人口統計体系",

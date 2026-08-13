@@ -54,8 +54,8 @@ export const RAILWAY_CATALOG: ThemeCatalog = {
           "民鉄"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#f59e0b"
+          "population",
+          "count"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -83,7 +83,7 @@ export const RAILWAY_CATALOG: ThemeCatalog = {
           "JR貨物発送量"
         ],
         "seriesColors": [
-          "#8b5cf6"
+          "special"
         ]
       },
       "sourceName": "社会・人口統計体系",
