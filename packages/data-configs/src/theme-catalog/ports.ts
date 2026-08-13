@@ -74,8 +74,8 @@ export const PORTS_CATALOG: ThemeCatalog = {
           "輸入"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#f59e0b"
+          "population",
+          "count"
         ]
       },
       "sourceName": "港湾統計",

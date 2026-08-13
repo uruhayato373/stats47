@@ -229,9 +229,9 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
           "介護職員"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#22c55e",
-          "#f59e0b"
+          "population",
+          "improve",
+          "count"
         ]
       },
       "sourceName": "厚生労働省「賃金構造基本統計調査」",
@@ -264,8 +264,8 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
           "SE"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#8b5cf6"
+          "population",
+          "special"
         ]
       },
       "sourceName": "厚生労働省「賃金構造基本統計調査」",
@@ -298,8 +298,8 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
           "大学教授"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#ef4444"
+          "population",
+          "danger"
         ]
       },
       "sourceName": "厚生労働省「賃金構造基本統計調査」",
@@ -337,9 +337,9 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
           "大工"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#f59e0b",
-          "#6b7280"
+          "population",
+          "count",
+          "neutral"
         ]
       },
       "sourceName": "厚生労働省「賃金構造基本統計調査」",
@@ -377,9 +377,9 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
           "警備員"
         ],
         "seriesColors": [
-          "#f59e0b",
-          "#8b5cf6",
-          "#6b7280"
+          "count",
+          "special",
+          "neutral"
         ]
       },
       "sourceName": "厚生労働省「賃金構造基本統計調査」",

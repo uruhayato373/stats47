@@ -79,8 +79,8 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
           "外国人数"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#f59e0b"
+          "population",
+          "count"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -113,8 +113,8 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
           "韓国・朝鮮"
         ],
         "seriesColors": [
-          "#ef4444",
-          "#3b82f6"
+          "danger",
+          "population"
         ]
       },
       "sourceName": "社会・人口統計体系",

@@ -74,8 +74,8 @@ export const MANUFACTURING_CATALOG: ThemeCatalog = {
           "従業者数"
         ],
         "seriesColors": [
-          "#f59e0b",
-          "#8b5cf6"
+          "count",
+          "special"
         ]
       },
       "relatedRankingKeys": [
@@ -108,8 +108,8 @@ export const MANUFACTURING_CATALOG: ThemeCatalog = {
           "付加価値額"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#22c55e"
+          "population",
+          "improve"
         ]
       },
       "relatedRankingKeys": [
@@ -142,8 +142,8 @@ export const MANUFACTURING_CATALOG: ThemeCatalog = {
           "事業所1あたり出荷額"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#ef4444"
+          "population",
+          "danger"
         ]
       },
       "relatedRankingKeys": [
