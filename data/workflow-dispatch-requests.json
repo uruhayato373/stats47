@@ -1,7 +1,0 @@
-{
-  "workflow": "workflow-health-daily.yml",
-  "ref": "main",
-  "inputs": {},
-  "reason": "新設した cron 横断ヘルスチェックの初回実行。60 本ある scheduled workflow のうち手作業で履歴を見たのは 3 本だけなので、他に静かに死んでいる cron が無いかを機械で洗い出す",
-  "requestedAt": "2026-08-13T04:00:00Z"
-}
