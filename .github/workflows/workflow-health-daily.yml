@@ -1,4 +1,4 @@
-name: 🩺 Workflow Health (cron 横断)
+name: 🩺 Health Check (cron 横断 + 配信データ鮮度)
 
 # ★なぜ要るか (2026-08-13)
 #   この repo のアラートは workflow ごとに自前で Issue を立てる設計なので、
@@ -66,6 +66,20 @@ jobs:
           { echo '### cron ヘルスチェック'; echo '```'; cat /tmp/workflow-health.txt; echo '```'; } \
             >> "$GITHUB_STEP_SUMMARY"
 
+      - name: 📅 配信データの鮮度
+        id: freshness
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: |
+          set -o pipefail
+          if node .claude/scripts/ci/audit-r2-freshness.mjs | tee /tmp/r2-freshness.txt; then
+            echo "fresh=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "fresh=false" >> "$GITHUB_OUTPUT"
+          fi
+          { echo '### 配信データの鮮度'; echo '```'; cat /tmp/r2-freshness.txt; echo '```'; } \
+            >> "$GITHUB_STEP_SUMMARY"
+
       - name: 💾 state を commit-back
         run: |
           git config user.name "github-actions[bot]"
@@ -80,15 +94,15 @@ jobs:
           echo "::warning::state の push に失敗した (監査結果自体は job summary にある)"
 
       - name: 🚨 連続失敗を Issue にする
-        if: steps.audit.outputs.healthy == 'false'
+        if: steps.audit.outputs.healthy == 'false' || steps.freshness.outputs.fresh == 'false'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          TITLE="🩺 連続失敗している cron がある"
+          TITLE="🩺 cron / 配信データに異常がある"
           # heredoc は YAML ブロックスカラーとインデントが噛み合わないので body はファイルで組む
           {
-            echo "個々の workflow のアラートに依存しない横断チェックで、連続失敗している cron を検出しました。"
+            echo "個々の workflow のアラートに依存しない横断チェックで異常を検出しました。"
             echo
             echo "実行ログ: ${RUN_URL}"
             echo
@@ -96,13 +110,18 @@ jobs:
             cat /tmp/workflow-health.txt
             echo '```'
             echo
+            echo '```'
+            cat /tmp/r2-freshness.txt
+            echo '```'
+            echo
             echo "## 見かた"
             echo "- **連続失敗 N 回** は直近の schedule run を新しい順に数えたもの (短時間の cancelled は無視)"
             echo "- **最終成功から N 日** が大きいほど、その間ずっと配信データや生成物が更新されていない"
+            echo "- **鮮度** はジョブの成否と独立。緑でも 0 件書いていれば古いままになる"
             echo "- その workflow 自身のアラートが飛んでいないなら、そのアラートも壊れている可能性がある"
             echo "  (ラベル未登録・permissions 不足など。正典: .claude/rules/docs-vs-issues.md)"
             echo
-            echo "正典: .claude/scripts/lib/workflow-health-core.mjs"
+            echo "正典: .claude/scripts/lib/{workflow-health-core,r2-freshness-core}.mjs"
           } > /tmp/health-issue.md
           # ラベルが無いと gh issue create が "could not add label" で落ち、通知が飛ばない
           gh label create ci-health-alert --description "連続失敗している cron" --color "b60205" --force 2>/dev/null || true
@@ -112,16 +131,16 @@ jobs:
           else
             gh issue create --title "$TITLE" --label "ci-health-alert,auto-generated" --body-file /tmp/health-issue.md
           fi
-          echo "::error::連続失敗している cron がある (上記 Issue を参照)"
+          echo "::error::cron / 配信データに異常がある (上記 Issue を参照)"
           exit 1
 
       - name: ✅ 復旧したら Issue を閉じる
-        if: steps.audit.outputs.healthy == 'true'
+        if: steps.audit.outputs.healthy == 'true' && steps.freshness.outputs.fresh == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh issue list --state open --label ci-health-alert --limit 100 --json number --jq '.[].number' |
             while read -r NUMBER; do
               gh issue close "$NUMBER" --reason completed \
-                --comment "連続失敗している cron が無くなったため自動 Close します。"
+                --comment "cron の連続失敗と配信データの陳腐化が解消したため自動 Close します。"
             done

@@ -188,3 +188,30 @@ test('実在の workflow で scheduled 判定が妥当な件数になる', async
     assert.ok(scheduled.includes(known), `${known} が scheduled から漏れている`);
   }
 });
+
+// ── workflow の配線 ──────────────────────────────────────────────────────────
+
+// core とテストがあっても workflow から呼ばれていなければ 1 度も走らない。
+// (今回の事故の一般形: 「作ったが配線していない」)
+test('日次 workflow が両方の監査を呼び、片方でも赤なら Issue を立てる', async () => {
+  const fs = await import('node:fs');
+  const path = await import('node:path');
+  const { fileURLToPath } = await import('node:url');
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
+  const source = fs.readFileSync(path.join(root, '.github/workflows/workflow-health-daily.yml'), 'utf8');
+
+  assert.match(source, /audit-workflow-health\.mjs/, 'cron 監査を呼んでいない');
+  assert.match(source, /audit-r2-freshness\.mjs/, '鮮度監査を呼んでいない');
+  // どちらか一方でも異常なら Issue (&& にすると片方の異常を見逃す)
+  assert.match(
+    source,
+    /healthy == 'false' \|\| steps\.freshness\.outputs\.fresh == 'false'/,
+    'Issue の条件が OR でない = 片方の異常を見逃す',
+  );
+  // 復旧 close は両方 healthy のときだけ (|| にすると異常が残っていても閉じる)
+  assert.match(
+    source,
+    /healthy == 'true' && steps\.freshness\.outputs\.fresh == 'true'/,
+    'close の条件が AND でない = 異常が残っていても Issue を閉じる',
+  );
+});
