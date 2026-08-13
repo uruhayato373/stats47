@@ -49,7 +49,13 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit      # 公開 (�
 1. **前提 (人間)**: KDP アカウントの Tax interview + 銀行口座が完了していること。未完了なら公開は不可。
 2. **初回セットアップ**: `login.mjs` (人間が手動ログイン) → `capture-account.mjs --write` で account assert を厳格化。
 3. **SoT 生成**: `products:kindle:kdp-listings --apply` で `kdp-listings.json` を最新化 (title/description/keywords/
-   price/epubPath)。カテゴリ (`categories`) は KDP のブラウズ階層が複雑なため人手で詰める (upsert 保持)。
+   price/epubPath)。**カテゴリ・DRM・AI 開示・フリガナは git TS が SSOT** で機械生成する
+   (`kdp-{category,publishing-policy,reading}.ts`)。カテゴリは必須項目で、未選択だと
+   ウィザードが 1 歩も進まないため「人手で詰める」運用は成立しない。
+   `status` / `asin` / `draftId` だけが upsert 保持。
+4. **フローの実体は `lib/kdp-flow.mjs`** (verifyDraft / ensureDraft / publishDraft)。
+   通常運用はバッチ (`kdp-batch.mjs --phase draft|verify|publish`) — 1 つのブラウザで全冊を
+   冪等に処理し、公開は read-back 検証 (verify) を通過した本だけ。単発調査は `kdp-publish.mjs --id`。
 4. **★初回の構造確認**: `kdp-publish --id <id> --probe` でフォーム構造を `.local/kdp-debug/probe-<id>.json` に
    dump し、KDP の React SPA のセレクタが `kdp-form.mjs` の label 正規表現と合うか確認する (合わなければ調整)。
 5. **下書き検証**: `kdp-publish --id <id>` (--commit なし) → `.local/kdp-debug/details-<id>.png` と未充填 warnings を
@@ -61,7 +67,8 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit      # 公開 (�
 
 - **偽成功を報告しない**: 未充填フィールド・公開の未確定があれば「出版した」と言わない (下書きに留める)。
 - **KDP DOM ドリフト**: React SPA でセレクタが変わりやすい。うまく充填できないときは `--probe` で構造を
-  取り直し `kdp-form.mjs` を調整する (coconala の discover-categories と同じ運用)。
+  取り直し `kdp-form.mjs` を調整する。日本語版フォームの実仕様は
+  `.claude/rules/coconala-product-standards.md` §KDP 入稿フォームの実仕様 が正典。
 - **規約リスク**: KDP 利用規約上、出品者自身のブラウザ自動化の明示禁止は未確認だが bot 検知リスクは残る。
   自動操作は低頻度 (出品時・価格改定時) に限る。
 

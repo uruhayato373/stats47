@@ -1,5 +1,5 @@
 {
-  "_note": "KDP (kdp.amazon.com) 出品内容の機械可読 SSOT (stats47 専用)。kdp-operator (Playwright) が読む。ログイン・税務/銀行情報の入力は人間工程 (自動化しない)。実公開 (--commit) はオーナー承認時のみ。categories/status/asin/kuEnrolled は upsert 保持。書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS、EPUB は .local/kindle-books/<id>/v1/book.epub (git 管理外)。",
+  "_note": "KDP (kdp.amazon.com) 出品内容の機械可読 SSOT (stats47 専用)。kdp-operator (Playwright) が読む。ログイン・税務/銀行情報の入力は人間工程 (自動化しない)。実公開 (--commit) はオーナー承認時のみ。status/asin/kuEnrolled は upsert 保持 (カテゴリは kdp-category.ts が SSOT で毎回生成)。書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS、EPUB は .local/kindle-books/<id>/v1/book.epub (git 管理外)。",
   "listings": {
     "K-S1-01": {
       "id": "K-S1-01",
@@ -25,20 +25,46 @@
         "県民性",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > ビジネス・経済 > 経済学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "個人ファイナンス",
+          "place": "家計管理"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-01/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-01/v1/cover.png",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null
+      "coverPath": ".local/kindle-books/K-S1-01/v1/cover.jpg",
+      "draftId": "A1D19U5YVCZV0O",
+      "status": "listed",
+      "asin": "B0HF17SQ9N",
+      "publishedAt": "2026-08-13"
     },
     "K-S1-02": {
       "id": "K-S1-02",
@@ -63,20 +89,46 @@
         "消費量",
         "雑学"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 暮らし・健康・子育て > 料理・グルメ",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "暮らし・健康・子育て",
+          "sub": "グルメ",
+          "place": "グルメ一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-02/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-02/v1/cover.png",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null
+      "coverPath": ".local/kindle-books/K-S1-02/v1/cover.jpg",
+      "draftId": "AVO8838RAAG8U",
+      "status": "listed",
+      "asin": "B0HF1N51T8",
+      "publishedAt": "2026-08-13"
     },
     "K-S1-03": {
       "id": "K-S1-03",
@@ -101,20 +153,46 @@
         "東京一極集中",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 社会・政治 > 社会学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "経済学",
+          "place": "都市・地域"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-03/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-03/v1/cover.png",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null
+      "coverPath": ".local/kindle-books/K-S1-03/v1/cover.jpg",
+      "draftId": "A25RYVT5IC2UMM",
+      "status": "listed",
+      "asin": "B0HDYKVX6F",
+      "publishedAt": "2026-08-13"
     },
     "K-S1-04": {
       "id": "K-S1-04",
@@ -139,20 +217,46 @@
         "自殺率",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 暮らし・健康・子育て > 健康・医療",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "医学・薬学",
+          "sub": "医学一般",
+          "place": "衛生・公衆衛生学"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-04/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-04/v1/cover.png",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null
+      "coverPath": ".local/kindle-books/K-S1-04/v1/cover.jpg",
+      "draftId": "A3NKJO61F4PFTI",
+      "status": "listed",
+      "asin": "B0HF1C5QZ6",
+      "publishedAt": "2026-08-13"
     },
     "K-S1-05": {
       "id": "K-S1-05",
@@ -177,20 +281,46 @@
         "子育て",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 暮らし・健康・子育て > 妊娠・出産・子育て",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "人文・思想",
+          "sub": "教育学",
+          "place": "参考図書・白書"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-05/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-05/v1/cover.png",
-      "status": "draft",
+      "coverPath": ".local/kindle-books/K-S1-05/v1/cover.jpg",
+      "draftId": "A35OGN7O5LSWPY",
+      "status": "listed",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": "2026-08-13"
     },
     "K-S1-06": {
       "id": "K-S1-06",
@@ -215,20 +345,46 @@
         "将来負担",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 社会・政治 > 政治",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "経済学",
+          "place": "財政学"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-06/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-06/v1/cover.png",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null
+      "coverPath": ".local/kindle-books/K-S1-06/v1/cover.jpg",
+      "draftId": "A3NI2STP0CJ20O",
+      "status": "listed",
+      "asin": "B0HF1XFXBY",
+      "publishedAt": "2026-08-13"
     },
     "K-S1-07": {
       "id": "K-S1-07",
@@ -253,20 +409,46 @@
         "旅行",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > ビジネス・経済 > 産業研究",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "産業研究",
+          "place": "ホテル"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-07/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-07/v1/cover.png",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null
+      "coverPath": ".local/kindle-books/K-S1-07/v1/cover.jpg",
+      "draftId": "A1MX39POA70MGT",
+      "status": "listed",
+      "asin": "B0HDYG6DLX",
+      "publishedAt": "2026-08-13"
     },
     "K-S1-08": {
       "id": "K-S1-08",
@@ -291,20 +473,46 @@
         "インフラ",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 科学・テクノロジー > 工学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "科学・テクノロジー",
+          "sub": "エネルギー",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-08/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-08/v1/cover.png",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null
+      "coverPath": ".local/kindle-books/K-S1-08/v1/cover.jpg",
+      "draftId": "A1VVCMM09NW06F",
+      "status": "listed",
+      "asin": "B0HDYLY7WM",
+      "publishedAt": "2026-08-13"
     },
     "K-S1-09": {
       "id": "K-S1-09",
@@ -329,20 +537,46 @@
         "農業",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > ビジネス・経済 > 産業研究",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "産業研究",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 800,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-09/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-09/v1/cover.png",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null
+      "coverPath": ".local/kindle-books/K-S1-09/v1/cover.jpg",
+      "draftId": "A7VASEPR22DVW",
+      "status": "listed",
+      "asin": "B0HDYB4CBV",
+      "publishedAt": "2026-08-13"
     },
     "K-S1-10": {
       "id": "K-S1-10",
@@ -367,20 +601,46 @@
         "環境",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 社会・政治 > 社会学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "科学・テクノロジー",
+          "sub": "地球科学・エコロジー",
+          "place": "環境問題"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-10/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-10/v1/cover.png",
-      "status": "draft",
-      "asin": null,
-      "publishedAt": null
+      "coverPath": ".local/kindle-books/K-S1-10/v1/cover.jpg",
+      "draftId": "A2QV2ULXW8GXID",
+      "status": "listed",
+      "asin": "B0HDZ45H6C",
+      "publishedAt": "2026-08-13"
     },
     "K-S1-11": {
       "id": "K-S1-11",
@@ -405,17 +665,42 @@
         "余暇",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 社会・政治 > 社会学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "産業研究",
+          "place": "公園・レクリエーション管理"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-11/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-11/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S1-11/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -443,17 +728,42 @@
         "ICT",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > コンピュータ・IT > インターネット・Web開発",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "コンピュータ・IT",
+          "sub": "一般・入門書",
+          "place": "白書・用語辞典・参考書"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-12/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S1-12/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S1-12/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -480,17 +790,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 社会・政治 > 社会学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "経済学",
+          "place": "都市・地域"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-01/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-01/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S2-01/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -517,17 +852,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > ビジネス・経済 > 就職・転職",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "キャリア",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-02/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-02/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S2-02/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -554,17 +914,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > ビジネス・経済 > 産業研究",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "産業研究",
+          "place": "ホテル"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-03/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-03/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S2-03/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -591,17 +976,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 社会・政治 > 政治",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "経済学",
+          "place": "財政学"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-04/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-04/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S2-04/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -628,17 +1038,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 暮らし・健康・子育て > 健康・医療",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "医学・薬学",
+          "sub": "医学一般",
+          "place": "衛生・公衆衛生学"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-05/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-05/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S2-05/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -665,17 +1100,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 暮らし・健康・子育て > 妊娠・出産・子育て",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "人文・思想",
+          "sub": "教育学",
+          "place": "参考図書・白書"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-06/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-06/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S2-06/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -702,17 +1162,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 暮らし・健康・子育て > 住まい・インテリア",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "暮らし・健康・子育て",
+          "sub": "家事・生活の知識",
+          "place": "生活の知恵"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-07/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-07/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S2-07/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -739,17 +1224,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > ビジネス・経済 > マーケティング・セールス",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "産業研究",
+          "place": "小売"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-08/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-08/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S2-08/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -776,17 +1286,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > ビジネス・経済 > 産業研究",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "産業研究",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-09/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-09/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S2-09/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -813,17 +1348,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 社会・政治 > 社会学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "災害"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-10/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-10/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S2-10/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -850,17 +1410,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > ビジネス・経済 > 経済学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "個人ファイナンス",
+          "place": "家計管理"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-11/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S2-11/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S2-11/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -887,17 +1472,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究",
-        "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-01/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-01/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S3-01/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -924,17 +1534,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究",
-        "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-02/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-02/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S3-02/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -961,17 +1596,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究",
-        "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-03/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-03/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S3-03/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -998,17 +1658,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究",
-        "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-04/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-04/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S3-04/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -1035,17 +1720,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究",
-        "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-05/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-05/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S3-05/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -1072,17 +1782,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究",
-        "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-06/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-06/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S3-06/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -1109,17 +1844,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究",
-        "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-07/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-07/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S3-07/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -1146,17 +1906,42 @@
         "データブック",
         "統計"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究",
-        "Kindleストア > Kindle本 > 旅行ガイド・マップ > 国内旅行"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "参考図書・白書",
+          "place": "一般"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 500,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-08/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S3-08/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S3-08/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null
@@ -1183,17 +1968,42 @@
         "統計",
         "日本一"
       ],
-      "categories": [
-        "Kindleストア > Kindle本 > ビジネス・経済 > 統計学",
-        "Kindleストア > Kindle本 > 社会・政治 > 社会学",
-        "Kindleストア > Kindle本 > 人文・思想 > 地理・地域研究"
+      "categoryPaths": [
+        {
+          "top": "社会・政治",
+          "sub": "社会学",
+          "place": "参考図書・白書"
+        },
+        {
+          "top": "歴史・地理",
+          "sub": "地理・地域研究",
+          "place": "地域研究"
+        },
+        {
+          "top": "ビジネス・経済",
+          "sub": "経済学",
+          "place": "統計"
+        }
       ],
-      "categoriesVerified": false,
+      "applyDrm": true,
+      "aiDisclosure": {
+        "used": true,
+        "text": "作品全体 (広範な編集あり)",
+        "images": "1 つまたはいくつかの AI 生成画像 (最小限の編集あり、または編集なし)",
+        "translations": "なし",
+        "textTools": [
+          "Claude",
+          "Gemini"
+        ],
+        "imageTools": [
+          "gpt-image-2"
+        ]
+      },
       "priceYen": 1000,
       "royaltyPlan": 70,
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S4-01/v1/book.epub",
-      "coverPath": ".local/kindle-books/K-S4-01/v1/cover.png",
+      "coverPath": ".local/kindle-books/K-S4-01/v1/cover.jpg",
       "status": "draft",
       "asin": null,
       "publishedAt": null

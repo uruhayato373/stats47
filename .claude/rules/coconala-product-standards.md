@@ -273,7 +273,49 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 - **draft-first + `--commit` gate + オーナー承認**: 既定は「下書き保存」。**実公開（`--commit`）は outward-facing・取り下げに時間がかかるため、オーナー明示承認時のみ**。未充填フィールド・公開未確定時は「公開した」と報告しない。
 - **KDP フォームは React SPA で DOM が変わりやすい**。初回は必ず `kdp-publish --probe` で構造を `.local/kdp-debug/` に dump し、`kdp-form.mjs` の label セレクタが合うか確認する（coconala の `discover-categories` 相当）。実機での初回調整が前提。
 - **KU（KDP Select 独占）は既定 未登録**（`kuEnrolled:false`・販売のみ）。判断はオーナー。**規約リスク**: 出品者自身のブラウザ自動化の明示禁止は未確認だが bot 検知リスクは残るため低頻度（出品時・価格改定時）に限る。
-- 実装: agent `kdp-operator` / skill `/kdp-publish` / `.claude/scripts/kdp/`（`{login,capture-account,kdp-publish}.mjs` + `lib/kdp-{session,form}.mjs`）。書籍生成・カタログは `kindle-publisher` に委譲。
+#### KDP 入稿フォームの実仕様 (2026-08-12 に実機で確定)
+
+移植元 (doboku-note) の英語版フォーム前提の実装は**日本語版でほぼ動かなかった**。実測で分かった要点:
+
+| 箇所 | 実仕様 | 取り違えるとどうなるか |
+|---|---|---|
+| ドメイン | `kdp.amazon.co.jp/ja_JP` | `.com` は別アカウント扱いで「アカウントが見つかりません」 |
+| 入力欄の識別 | `<label>` が空。`id="data-title"` / `name="data[title]"` で名指し | ラベル検索は 1 つも一致しない |
+| フリガナ・ローマ字 | タイトル / サブタイトル / 著者に必須 (英語版に無い欄) | 未入力で先へ進めない |
+| 内容紹介 | CKEditor。`setData` で `<p>` を組んで入れる | キー入力だと空段落が `&nbsp;` になり「不可視文字」で拒否 |
+| カテゴリ | 3 段の select で絞り込み → **掲載場所のチェック**で 1 枠 | select だけでは「0 個選択済み」のまま 1 枠も入らない |
+| カテゴリのボタン | 成人向けラジオを選ぶまで `disabled` | 押せずウィザードが 1 歩も進まない |
+| 出版権利のラジオ | `name="data-is-public-domain"` (他と命名規則が違う) | `data[...]-radio` で探すと 0 件 |
+| モーダル内のボタン | Amazon AUI。**Playwright の実クリックのみ有効** | `evaluate` の `.click()` は静かに無反応 |
+| select | React 制御 (`react-aui-N`)。`selectOption` を使う | `value` 代入 + `change` は state を変えない |
+| 表紙 | **JPEG / TIFF のみ**。先に「作成済みの表紙をアップロード」を選ぶ | PNG は黙って拒否され「表紙がアップロードされていません」のまま |
+| 価格 | 12 か国ぶん並ぶ。`…[JP][price_vat_inclusive]` を名指し | ラベル検索だと別の国の欄に入る |
+| ステップ移動 | 自動で進まない。「保存して続行」→ URL の変化を read-back | 押しただけを成功とすると、埋まっていない状態で先へ進んだと誤報する |
+| 表紙欄の出現 | 原稿の処理が終わってから描画される。出るまで待つ | 新規作成の 1 回目だけ空振りし、やり直すと通るので原因が見えない |
+| AI 開示の確認 | `div[role="checkbox"]` + `aria-checked` (素の checkbox は存在しない) | `input[type=checkbox]` を探すと 0 件で、永久に「入らない」 |
+| 同じ確認欄が 2 つ | AI 申告用と再アップロード用。**両方**入れる | 片方だけで「チェックした」と思い、同じエラーで止まり続ける |
+| 確認チェックの順序 | **カバーを入れたあと**に押す | アップロードのたびに未チェックへ戻るので、先に押すと無効化される |
+| アコーディオン | 開いていたら押さない (押すと閉じる) | やり直し実行で質問票が消え、入力できなくなる |
+
+**判定は必ず read-back で行う**。「押せた / setInputFiles できた」を成功条件にすると、
+実際には 1 件も入っていないのに ✓ が並ぶ (カテゴリで実際にそうなり、3 枠 ✓ と報告しながら
+1 枠も保存されていなかった)。カテゴリは「選択済み件数が期待どおり増えたか」、
+表紙は「未アップロード表示が消えたか」で判定する。
+
+**KDP には本の作成数制限がある (2026-08-13 実測)**。未公開 (下書き + レビュー中) タイトルが
+約 10 冊に達すると「本の作成数制限を超えました」モーダルが出て、新規下書きの保存が
+一切できなくなる。**公開直後 (レビュー中) も枠を食う**ので、公開しても即座には空かない。
+32 冊は「10 冊作成 → verify → 公開 → 審査完了 (最大 72h) を待つ → 次の 10 冊」の
+パイプラインで数日かけて出す。`goToNextKdpStep` がこのモーダルを名指しで検出し
+(`limitHit`)、バッチは連続失敗ブレーカで残りを焼かずに止まる。**制限の回避は試みない**
+(bot 検知・アカウント停止のリスク)。
+
+**下書きは使い回す**。`draftId` を listings に控えて既存を開く。毎回 `new/details` から作ると
+同じ本の空下書きが増え、公開済みの本に対して実行すれば重複出品になる (実装中に 9 件たまった)。
+掃除は `.claude/scripts/kdp/kdp-drafts.mjs`
+(`--prune` で対象表示 / `--prune --apply` で削除。SSOT の draftId は消さない)。
+
+- 実装: agent `kdp-operator` / skill `/kdp-publish` / `.claude/scripts/kdp/`（`{login,capture-account,kdp-publish,kdp-batch,kdp-drafts}.mjs` + `lib/kdp-{session,form,flow}.mjs`。フローの単一実装は `lib/kdp-flow.mjs`、多冊数は `kdp-batch.mjs --phase draft|verify|publish|status`、作成数制限の再開は launchd `scripts/scheduled/kdp-resume-daily.sh`）。出品内容の SSOT は `.claude/config/kdp-listings.json`、カテゴリは `packages/product-factory/src/channels/kindle/kdp-category.ts`、DRM と AI 開示は同 `kdp-publishing-policy.ts`、フリガナ・ローマ字は同 `kdp-reading.ts`。書籍生成・カタログは `kindle-publisher` に委譲。
 
 役割分担（追加分）:
 

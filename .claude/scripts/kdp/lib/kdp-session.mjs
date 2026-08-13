@@ -20,6 +20,7 @@
  * ---------------------------------------------------------------------------
  */
 import { chromium } from "playwright";
+import { execFileSync } from "node:child_process";
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -76,6 +77,24 @@ export function readListings() {
 }
 
 /** 該当 book を status:'listed' + asin + publishedAt に書き戻す (KINDLE_BOOKS TS は触らない)。 */
+/**
+ * 下書き ID を listings に控える。
+ *
+ * ★これが無いと毎回 `new/details` から作ることになり、同じ本の下書きが増え続ける
+ *   (実際に 1 冊の試行で 5 件の空下書きができた)。出品済みの本に対して実行すれば重複出品になる。
+ */
+export function writeBackDraftId(id, draftId) {
+  try {
+    const j = JSON.parse(readFileSync(LISTINGS_PATH, "utf8"));
+    if (!j.listings || !j.listings[id]) return false;
+    j.listings[id].draftId = draftId;
+    writeFileSync(LISTINGS_PATH, JSON.stringify(j, null, 2) + "\n");
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function writeBackListing(id, asin, today) {
   try {
     const j = JSON.parse(readFileSync(LISTINGS_PATH, "utf8"));
@@ -99,7 +118,30 @@ export function resolveAsset(relPath) {
 }
 
 /** 永続プロファイルで Chrome を起動。 */
+/**
+ * ★プロファイル排他 (2026-08-13 の事故から)。
+ *   バッチ実行中に診断用の単発を起動したところ、同一永続プロファイルを奪い合って
+ *   **実行中のバッチのブラウザごと落ちた** (以降 20 冊が Target closed で全滅)。
+ *   Chromium の SingletonLock は「後から来た方が失敗する」とは限らないので、
+ *   起動前に既存プロセスを自分で検査して止める。
+ */
+function assertProfileFree() {
+  try {
+    const out = execFileSync("/bin/ps", ["-Axo", "command"], { encoding: "utf8" });
+    if (out.split("\n").some((l) => l.includes("playwright-kdp-profile") && !l.includes("grep"))) {
+      throw new Error(
+        "KDP プロファイルを使う Chromium が既に動いている。並行実行はバッチを壊すので、" +
+          "先に既存プロセスを終了させること (pkill -f playwright-kdp-profile)",
+      );
+    }
+  } catch (e) {
+    if (e instanceof Error && /既に動いている/.test(e.message)) throw e;
+    // ps 自体の失敗は素通し (検査不能でブロックはしない)
+  }
+}
+
 export async function launchContext({ headless = false } = {}) {
+  assertProfileFree();
   mkdirSync(PROFILE, { recursive: true });
   return chromium.launchPersistentContext(PROFILE, {
     headless,
@@ -234,12 +276,28 @@ export async function assertAccount(page, { tag = "[account]" } = {}) {
   //   置く (public リポジトリに ASIN を晒さないため)。**照合を諦めて素通しにはしない**。
   const knownAsin = (acct.knownAsin || "").trim();
   if (knownAsin) {
-    const onShelf = await page.evaluate((a) => document.body?.innerText?.includes(a) ?? false, knownAsin);
+    let onShelf = await page.evaluate((a) => document.body?.innerText?.includes(a) ?? false, knownAsin);
+    if (!onShelf) {
+      // ★1 ページ目に無い ≠ 別アカウント (2026-08-13 実測)。下書きを 10 冊作ったら既知の本が
+      //   1 ページ目から押し出され、assert が誤って ABORT した。**本棚の検索**で照合し直す。
+      try {
+        const box = page.locator('input[type="search"], input[placeholder*="検索"], #podbookshelf-search-input').first();
+        if (await box.count()) {
+          await box.fill(knownAsin, { timeout: 10000 });
+          await box.press("Enter").catch(() => {});
+          await sleep(8000);
+          onShelf = await page.evaluate((a) => document.body?.innerText?.includes(a) ?? false, knownAsin);
+        }
+      } catch {}
+    }
     if (onShelf) {
       console.log(`${tag} OK: 既知の本 (ASIN ${knownAsin}) が本棚にあるため同一口座と確認`);
+      // 検索状態を残すと以降の本棚読取りが絞られたままになるので戻す。
+      await gotoResilient(page, BOOKSHELF_URL);
+      await sleep(3000);
       return { ok: true };
     }
-    return { ok: false, reason: `既知の本 (ASIN ${knownAsin}) が本棚に無い — 別アカウントの疑い` };
+    return { ok: false, reason: `既知の本 (ASIN ${knownAsin}) が本棚 (検索含む) に無い — 別アカウントの疑い` };
   }
 
   return {

@@ -12,6 +12,7 @@ import { mdToXhtml } from "./md-to-xhtml";
 import { buildCoverPng } from "./cover";
 import { buildRankingSections } from "./ranking-databook";
 import { buildEpub, type EpubChapterDoc, type EpubImage } from "../../generators/epub";
+import sharp from "sharp";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 /** product-factory ルート (freshFile のパス解決基点)。 */
@@ -321,6 +322,14 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
         backgroundJpeg: existsSync(bgPath) ? readFileSync(bgPath) : undefined,
       });
       writeFileSync(join(outDir, "cover.png"), coverPng);
+      // ★KDP の表紙アップロードは **JPEG / TIFF しか受け付けない** (`accept=".tiff,.tif,.jpeg,.jpg"`)。
+      //   PNG を渡しても file input が黙って拒否し、KDP 側は「表紙がアップロードされていません」の
+      //   ままになる (2026-08-12 に実際に 9 件の下書きがそうなった)。EPUB には PNG を埋め、
+      //   出品用に JPEG も並べて出す。
+      writeFileSync(
+        join(outDir, "cover.jpg"),
+        await sharp(coverPng).jpeg({ quality: 92, chromaSubsampling: "4:4:4" }).toBuffer(),
+      );
     } catch (e) {
       // カバー失敗は EPUB 生成を止めない (KDP の Cover Creator で作れる)。
       console.warn(`  ⚠ カバー生成に失敗 (続行): ${e instanceof Error ? e.message : String(e)}`);

@@ -83,6 +83,28 @@ export function lintSvgContent(content, filename) {
     errors.push('missing width or height attribute');
   }
 
+  // --- XML コメントの違法性 (ERROR) ---
+  // `<img src="*.svg">` はブラウザが SVG を厳格 XML として解析するため、コメント内の
+  // 違法パターンが 1 つでもあると全体がパースエラーになり broken image になる。
+  // XML コメントは本文に "--" を含めず、末尾を "-" で終えられない (`--->` を作る)。
+  // 実測 (2026-08-13): 相関 scatter 7 枚が、先頭 provenance コメントに焼かれたファイル名の
+  // "--" (2 ranking key の連結子) で不正 XML になり全 <img> が描画されていなかった。
+  // provenance 生成側は buildProvenanceLine が XML 安全化するが (svg-provenance.mjs)、
+  // 生成器を通らない経路・手書き SVG も公開前にここで止める (両側で守る)。
+  // 判定は「コメント本文に -- を含む or 末尾が -」だけ。妥当な XML コメントはこの 2 つを
+  // 決して満たさないため誤検知はゼロ (valid な SVG を弾かない)。
+  for (const m of c.matchAll(/<!--([\s\S]*?)-->/g)) {
+    const commentBody = m[1];
+    if (commentBody.includes('--') || commentBody.endsWith('-')) {
+      const snippet = m[0].trim().slice(0, 60);
+      errors.push(
+        `XML コメントが不正: "${snippet}..." — コメント本文に "--" を含む/末尾が "-" だと` +
+          ` <img> で SVG が厳格 XML 解析され broken image になる (相関 scatter のファイル名 "--" が典型)`
+      );
+      break; // 1 件出れば十分 (同じ原因で複数出るため)
+    }
+  }
+
   // --- テンプレート未解決の描画 (ERROR) ---
   // 生成器がテンプレートリテラルに undefined/null/NaN/[object Object] を埋めると、
   // そのまま文字として SVG に焼き込まれる。実際に本番の 1 枚で凡例が "undefined" に

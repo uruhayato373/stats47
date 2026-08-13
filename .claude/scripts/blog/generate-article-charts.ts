@@ -43,6 +43,7 @@ import {
   extractInlineSvgs,
 } from '../lib/svg-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
+import { buildProvenanceLine } from '../lib/svg-provenance.mjs';
 // Layer 1 共有ライブラリ (SSoT)。CLI 内インライン生成を廃し svg-builder に一本化。
 // tsx 実行のため TS ソースを直接 import する (このスクリプトは tsx で起動する)。
 import {
@@ -712,7 +713,9 @@ for (const { file, type, parsed } of jsonMeta) {
   // factual cross-check (article-factual-check.mjs) が SVG 値の出所を trace するために使用。
   // agent 手書きの inline SVG (article.md 内) には provenance がないので、
   // chart 系のチェッカーは「provenance 付き SVG = generator 経由で data から作られた」と信頼可能。
-  const provenance = `<!-- data-source: ${file} | generated: ${new Date().toISOString()} -->\n`;
+  // 相関 scatter 等 file 名に "--" を含むものは buildProvenanceLine が XML 安全化する
+  // (生 "--" を XML コメントに入れると <img> 描画で broken image になる)。
+  const provenance = buildProvenanceLine(file);
   fs.writeFileSync(svgPath, provenance + svg, 'utf8');
   // 徹底ルール (§1.7): SVG を書いたら必ず source.json もセット出力 (1画像=1設定ファイル)。
   writeChartSourceIfMissing(

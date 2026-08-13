@@ -2,7 +2,7 @@
  * KDP 出品内容 SSOT (.claude/config/kdp-listings.json) を KINDLE_BOOKS から生成する。
  * coconala-listings.json と同じ役割: ブラウザ自動化 (kdp-operator) が読む出品内容 (title/description/
  * keywords/price/epubPath 等) と公開状態 (status/asin) の一元 SoT。既存エントリの status/asin/
- * publishedAt/categories は保持 (upsert・人手で詰めた KDP カテゴリを毎回上書きしない)。
+ * publishedAt は保持 (upsert)。カテゴリは kdp-category.ts が SSOT なので毎回生成する。
  *
  * CLI: npm run products:kindle:kdp-listings --workspace=@stats47/product-factory [-- --apply]
  * 既定は dry-run (差分表示のみ)。--apply で書き込む。
@@ -12,6 +12,8 @@ import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { KINDLE_BOOKS } from "./book-catalog";
 import { KDP_AUTHOR, KDP_READINGS } from "./kdp-reading";
+import { kdpCategoriesFor } from "./kdp-category";
+import { KDP_AI_DISCLOSURE, KDP_APPLY_DRM } from "./kdp-publishing-policy";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const OUT = join(REPO_ROOT, ".claude/config/kdp-listings.json");
@@ -36,17 +38,31 @@ interface KdpListing {
   language: "ja";
   description: string;
   keywords: string[];
-  /** KDP ブラウズカテゴリ (最大3・人手で確定・upsert 保持)。 */
-  categories: string[];
   /**
-   * categories を KDP の picker の**実表記と突き合わせたか**。
+   * KDP の掲載場所 (最大 3 枠)。SSOT は `kdp-category.ts`。
    *
-   * ★候補を投入しただけの状態と、オーナーが picker で確定した状態を区別する
-   *   (2026-08-12 追加)。これが無いと未照合の候補が「確定済み」に見え、実在しない
-   *   カテゴリ名のまま出品しようとして気づけない。picker は表記が変わるので、
-   *   初回 `kdp-publish --probe` の dump と突き合わせて true にする。
+   * ★文字列 1 本 (`Kindleストア > … > 統計学`) をやめた (2026-08-12)
+   *   実モーダルを採取したところ、KDP は段階式のドロップダウンで、
+   *   もとの SSOT が持っていた「統計学」という掲載場所は**存在しなかった**。
+   *   実在する分類だけを持つため `{top, leaf}` の形にし、
+   *   `validate` が採取済みツリー (`.local/kdp-debug/category-tree.json`) と突き合わせる。
+   *
+   * ★人手保持をやめた理由
+   *   カテゴリは必須項目で、未選択だとウィザードが 1 歩も進まない。
+   *   「カテゴリだけ人手」という切り分けは成立しないので SSOT から機械生成する。
    */
-  categoriesVerified: boolean;
+  categoryPaths: { top: string; sub: string; place: string }[];
+  /** DRM を適用するか (出版後に変更不可。SSOT は kdp-publishing-policy.ts)。 */
+  applyDrm: boolean;
+  /** 生成 AI の使用開示。**Amazon への申告**なので事実をそのまま出す。 */
+  aiDisclosure: {
+    used: boolean;
+    text: string;
+    images: string;
+    translations: string;
+    textTools: string[];
+    imageTools: string[];
+  };
   /**
    * 出品を止めている理由 (status="blocked-thin" 等)。
    *
@@ -63,6 +79,13 @@ interface KdpListing {
   coverPath: string;
   /** `blocked-thin` = 本文量の床に届かず出品を止めている (blockReason に理由)。 */
   status: "draft" | "listed" | "blocked-thin";
+  /**
+   * KDP 上の下書き ID (title-setup/kindle/<ここ>/details)。
+   *
+   * ★upsert 保持が必須。消えると次回 `new/details` から作り直すことになり、
+   *   同じ本の空下書きが増える (実際に 1 冊の試行で 5 件できた)。
+   */
+  draftId?: string;
   asin: string | null;
   publishedAt: string | null;
 }
@@ -106,7 +129,8 @@ function main(): void {
   for (const b of KINDLE_BOOKS) {
     if (b.status !== "generated" && b.status !== "published") continue;
     const epubPath = join(BOOKS_ROOT, b.id, "v1", "book.epub");
-    const coverPath = join(BOOKS_ROOT, b.id, "v1", "cover.png");
+    // ★KDP は JPEG/TIFF しか受け付けないので出品に使うのは cover.jpg (cover.png は EPUB 用)。
+    const coverPath = join(BOOKS_ROOT, b.id, "v1", "cover.jpg");
     if (!existsSync(epubPath)) {
       missingEpub += 1;
       continue;
@@ -128,14 +152,20 @@ function main(): void {
       language: "ja",
       description: buildDescription(b.concept),
       keywords: [...b.keywords].slice(0, 7),
-      categories: prev?.categories ?? [], // 人手確定を保持
-      categoriesVerified: prev?.categoriesVerified ?? false, // 未照合を既定にする (勝手に確定扱いしない)
+      categoryPaths: kdpCategoriesFor(b.id).map((c) => ({ ...c })), // SSOT から生成 (実在検査つき)
+      applyDrm: KDP_APPLY_DRM,
+      aiDisclosure: {
+        ...KDP_AI_DISCLOSURE,
+        textTools: [...KDP_AI_DISCLOSURE.textTools],
+        imageTools: [...KDP_AI_DISCLOSURE.imageTools],
+      },
       ...(prev?.blockReason ? { blockReason: prev.blockReason } : {}), // 停止理由を保持
       priceYen: b.priceYen,
       royaltyPlan: b.priceYen >= 250 && b.priceYen <= 1250 ? 70 : 35,
       kuEnrolled: prev?.kuEnrolled ?? false,
       epubPath: `.local/kindle-books/${b.id}/v1/book.epub`,
-      coverPath: `.local/kindle-books/${b.id}/v1/cover.png`,
+      coverPath: `.local/kindle-books/${b.id}/v1/cover.jpg`,
+      ...(prev?.draftId ? { draftId: prev.draftId } : {}), // 下書き ID を保持
       status: prev?.status ?? "draft",
       asin: prev?.asin ?? null,
       publishedAt: prev?.publishedAt ?? null,
@@ -148,7 +178,7 @@ function main(): void {
     _note:
       "KDP (kdp.amazon.com) 出品内容の機械可読 SSOT (stats47 専用)。kdp-operator (Playwright) が読む。" +
       "ログイン・税務/銀行情報の入力は人間工程 (自動化しない)。実公開 (--commit) はオーナー承認時のみ。" +
-      "categories/status/asin/kuEnrolled は upsert 保持。書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS、" +
+      "status/asin/kuEnrolled は upsert 保持 (カテゴリは kdp-category.ts が SSOT で毎回生成)。書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS、" +
       "EPUB は .local/kindle-books/<id>/v1/book.epub (git 管理外)。",
     listings,
   };
