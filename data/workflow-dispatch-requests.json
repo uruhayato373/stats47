@@ -1,0 +1,7 @@
+{
+  "workflow": "sync-rakuten-catalog.yml",
+  "ref": "main",
+  "inputs": {},
+  "reason": "2026-08-04 から 9 日間 ReferenceError で全損していた日次同期の復旧確認。import 漏れを直した #762 が main に入ったので、R2 の generatedAt が実際に更新されるかを実測する",
+  "requestedAt": "2026-08-13T03:44:00Z"
+}
