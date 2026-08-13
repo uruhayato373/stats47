@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "retail-store-count",
+  "pair": "nurses-per-100k-population",
+  "pearsonR": 0.9872648896113041,
+  "partialRPopulation": 0.7049796433680529,
+  "unit": "店 × 人",
+  "label": "小売店数 と 人口10万対看護師数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/retail-store-count.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug retail-store-count-vs-nurses-per-100k-population --base retail-store-count --pair nurses-per-100k-population --data-name retail-store-count--nurses-per-100k-population"
+}
