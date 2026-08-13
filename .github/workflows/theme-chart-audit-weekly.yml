@@ -101,6 +101,9 @@ jobs:
             echo "規約: \`.claude/rules/theme-catalog-standards.md\`"
           } > /tmp/theme-chart-issue.md
 
+          # ラベルが無いと gh issue create が "could not add label" で落ち、**アラート自体が飛ばない**
+          # (2026-08-12 に rakuten-alert 未登録で実際に発生し、9 日間の同期停止を誰も知らなかった)。
+          gh label create theme-alert --description "テーマチャートの e-Stat 取得失敗" --color "b60205" --force 2>/dev/null || true
           EXISTING=$(gh issue list --label theme-alert --state open --json number --jq '.[0].number')
           if [ -n "$EXISTING" ]; then
             gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/theme-chart-issue.md

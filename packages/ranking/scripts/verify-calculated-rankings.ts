@@ -68,11 +68,19 @@ async function main() {
     const servedByArea = new Map(servedValues.map((v) => [v.areaCode, v]));
     let rankDiff = 0;
     let valueDiff = 0;
+    let nullValues = 0;
     let sampleRatio = 1;
     for (const c of computed) {
       const s = servedByArea.get(c.areaCode);
       if (!s) continue;
       if (c.rank !== s.rank) rankDiff++;
+      // ★null は比較から外して数える。JS の `null - x` は null を 0 に強制するので、
+      //   そのまま計算すると差分が常に 100% になり、さらに `s.value / null` が
+      //   Infinity になって「×Infinity 倍ずれ」という無意味な報告が出る。
+      if (c.value === null) {
+        nullValues++;
+        continue;
+      }
       const denom = Math.max(Math.abs(s.value), 1e-9);
       if (Math.abs(c.value - s.value) / denom > REL_TOL) {
         valueDiff++;
@@ -87,6 +95,10 @@ async function main() {
       rankOk++;
       if (valueDiff > 0) {
         valueScaled.push(`${key} (${type}): rank 一致, value 全 ${valueDiff} 件が定数倍ずれ (×${sampleRatio.toFixed(2)} = snapshot 側 display スケール)`);
+      }
+      if (nullValues > 0) {
+        // 計算側が値を出せなかった県。黙って落とすと「一致」に見えるので必ず出す。
+        valueScaled.push(`${key} (${type}): computed value が null の県 ${nullValues} 件 (比較不能)`);
       }
     }
   }

@@ -1,14 +1,14 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-08-11T20:42:43.533Z
+- 生成: 2026-08-12T21:20:36.236Z
 - GSC snapshot: 2026-W32 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 
 ## サマリ (active ranking 全件 2173 件)
 
-- ✅ done: 244 件 (11.2% / impressions 計 30700)
-- ⏳ needs-regen: 1929 件 (impressions 計 8114)
-  - 内訳: incomplete 1649 / missing 216 / blocker 64
+- ✅ done: 249 件 (11.5% / impressions 計 30930)
+- ⏳ needs-regen: 1924 件 (impressions 計 7884)
+  - 内訳: incomplete 1645 / missing 215 / blocker 64
 - 🚫 not-eligible: 0 件 — 観測値が順位として成立しないので生成しない
 
 ## ⚠️ 公開済みだが接地データが不成立 (1 件)
@@ -21,13 +21,18 @@
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **4.0 件/日** (2026-07-30 からの平均)
-- 残り 1929 件 → **完了見込み 約 483 日**
+- 消化ペース: **4.1 件/日** (2026-07-30 からの平均)
+- 残り 1924 件 → **完了見込み 約 472 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
 | R2 last-modified | key | impressions |
 |---|---|---|
+| Tue, 11 Aug 2026 20:44:09 GMT | other-mushroom-consumption-quantity | 47 |
+| Tue, 11 Aug 2026 20:44:09 GMT | voluntary-car-insurance-rate-vehicle | 47 |
+| Tue, 11 Aug 2026 20:44:09 GMT | wind-power-turbine-count | 46 |
+| Tue, 11 Aug 2026 20:44:09 GMT | katsuobushi-consumption-expenditure | 45 |
+| Tue, 11 Aug 2026 20:44:09 GMT | total-overnight-guests | 45 |
 | Tue, 11 Aug 2026 03:39:38 GMT | treatment-rate-osteoporosis-outpatient | 56 |
 | Tue, 11 Aug 2026 03:39:38 GMT | chinese-noodles-consumption-expenditure | 55 |
 | Tue, 11 Aug 2026 03:39:38 GMT | sports-participation-rate-tennis | 52 |
@@ -38,21 +43,11 @@
 | Tue, 11 Aug 2026 03:39:38 GMT | manufacturing-shipment-amount-per-establishment | 48 |
 | Tue, 11 Aug 2026 03:39:38 GMT | miscellaneous-school-students | 48 |
 | Tue, 11 Aug 2026 03:39:38 GMT | fishery-workers | 47 |
-| Mon, 10 Aug 2026 14:03:52 GMT | treatment-rate-mood-disorder-outpatient | 66 |
-| Mon, 10 Aug 2026 14:03:52 GMT | railway-station-count | 60 |
-| Mon, 10 Aug 2026 14:03:51 GMT | port-count | 66 |
-| Mon, 10 Aug 2026 14:03:51 GMT | public-enterprise-accounting-staff | 64 |
-| Mon, 10 Aug 2026 14:03:51 GMT | physical-therapist-annual-income | 61 |
 
 ## 次にやるべき上位20 (impressions 降順)
 
 | impressions | key | reason | review | blockers |
 |---|---|---|---|---|
-| 47 | other-mushroom-consumption-quantity | incomplete | 🔴opus | paren-number,missing-pref-commentary |
-| 47 | voluntary-car-insurance-rate-vehicle | missing | 🔴opus | - |
-| 46 | wind-power-turbine-count | incomplete | 🔴opus | paren-number,faq-speculation,paren-number,missing-pref-commentary |
-| 45 | katsuobushi-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 45 | total-overnight-guests | incomplete | 🔴opus | missing-pref-commentary |
 | 45 | treatment-rate-diabetes-outpatient | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
 | 44 | doctor-annual-income | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 44 | flood-affected-rivers | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
@@ -68,6 +63,11 @@
 | 41 | dried-shiitake-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 41 | elementary-school-teachers | missing | 🔴opus | - |
 | 41 | middle-school-students-1-per | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 40 | other-cosmetics-consumption-expenditure | incomplete | 🔴opus | paren-number,missing-pref-commentary |
+| 40 | tempura-fry-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 39 | drinking-out-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 39 | fish-paste-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 39 | general-hospital-bed-count | incomplete | 🔴opus | missing-pref-commentary |
 
 > 生成 (author) は常に **sonnet** (frontmatter 固定・コストゲート)。critic は既定 **sonnet**、
 > `review` 列が 🔴opus の上位30件 (高GSC流入) + tier-1 が REVISE した件だけ

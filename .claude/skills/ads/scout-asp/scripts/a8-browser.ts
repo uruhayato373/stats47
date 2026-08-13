@@ -412,7 +412,13 @@ async function cmdScout(
   // 在庫ゼロの軸を埋めるとき、score (単価×EPC) は低いが需要が大きい案件を通すための経路。
   // **この run で実際に A8 から収集できた案件しか昇格できない** (存在しない ID は中止)。
   if (opts.promote?.length) {
-    const pool = new Map((belowThreshold ?? []).map((p: any) => [p.programId, p]));
+    // core は素 JS (.mjs) なので戻り値が any。ここで使う形だけを宣言する。
+    // `new Map(any[].map(...))` は tuple に推論されず Map<unknown, unknown> になり、
+    // p.score / p.name が型エラーになる (2026-08-13 に型検査を有効化して発覚)。
+    type ScoredProgram = { programId: string; score: number; name: string; vertical?: string };
+    const pool = new Map<string, ScoredProgram>(
+      ((belowThreshold ?? []) as ScoredProgram[]).map((p) => [p.programId, p]),
+    );
     const missing = opts.promote.filter((id) => !pool.has(id));
     if (missing.length) {
       console.error(`❌ --promote の ID が今回の収集結果 (閾値未満) に無い: ${missing.join(", ")}`);

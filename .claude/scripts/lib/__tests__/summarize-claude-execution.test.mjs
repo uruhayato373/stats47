@@ -189,3 +189,27 @@ test('未完了が無い run に未完了の但し書きを出さない', () => 
   );
   assert.doesNotMatch(out, /未完了 agent/);
 });
+
+// 成功 run の result.result は Claude の最終メッセージであって error ではない。
+// Issue #761 では critic が PASS しなかっただけの run で、Claude の最後の一言が
+// [error] として載り「何かが例外を投げた」と読めてしまった。
+test('成功 run の最終メッセージを [error] と名乗らない', () => {
+  const out = formatSummary(
+    summarizeClaudeExecution([
+      { type: 'result', subtype: 'success', is_error: false, num_turns: 12, result: '後で。' },
+    ]),
+  );
+  assert.ok(!out.includes('[error]'), `成功 run に [error] が出ている:\n${out}`);
+  assert.match(out, /\[最終メッセージ\]/);
+  assert.match(out, /後で。/);
+});
+
+test('失敗 run では従来どおり [error] で出す', () => {
+  const out = formatSummary(
+    summarizeClaudeExecution([
+      { type: 'result', subtype: 'error', is_error: true, num_turns: 1, result: 'Credit balance is too low' },
+    ]),
+  );
+  assert.match(out, /\[error\]/);
+  assert.match(out, /Credit balance is too low/);
+});

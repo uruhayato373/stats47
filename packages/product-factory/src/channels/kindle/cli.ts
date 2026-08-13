@@ -89,6 +89,16 @@ async function runGenerate(): Promise<number> {
     } else {
       console.log(`     ⚠️ 書き下ろし比率 ${pct}% (< 30%) — KDP 出品前に書き下ろし章を増やしてください (fresh ${r.freshChars} / blog ${r.blogChars})`);
     }
+    // ★比率とは別に絶対量を出す。比率は分母が小さいほど満たしやすいので、
+    //   「1 章 150 字 × 30 章」でも 30% を超えてしまう (2026-08-12 に 20 冊が該当)。
+    if (r.volumeOk) {
+      console.log(`     本文量 ${r.totalChars.toLocaleString()} 字 / 1章 ${r.charsPerChapter} 字 ✅`);
+    } else {
+      console.log(
+        `     ⛔ 本文量 ${r.totalChars.toLocaleString()} 字 / 1章 ${r.charsPerChapter} 字 — 書籍として薄すぎます` +
+          ` (床: 総 20,000 字・1章 800 字)。定型 1 文 + 図の羅列は KDP の品質規定に触れるため出品しないでください`,
+      );
+    }
   }
   return 0;
 }

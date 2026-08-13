@@ -1,0 +1,8 @@
+{
+  // 書籍生成まわりの運用スクリプト (.mts) の型検査。親 tsconfig は include が src/tests だけ。
+  // 契約: .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs
+  "extends": "../tsconfig.json",
+  "compilerOptions": { "noEmit": true, "declaration": false, "composite": false },
+  "include": ["**/*.ts", "**/*.mts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
