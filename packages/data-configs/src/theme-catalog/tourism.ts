@@ -79,8 +79,8 @@ export const TOURISM_CATALOG: ThemeCatalog = {
           "外国人宿泊者数"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#f59e0b"
+          "population",
+          "count"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -108,7 +108,7 @@ export const TOURISM_CATALOG: ThemeCatalog = {
           "航空旅客"
         ],
         "seriesColors": [
-          "#0ea5e9"
+          "series-7"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -141,8 +141,8 @@ export const TOURISM_CATALOG: ThemeCatalog = {
           "客室数"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#f59e0b"
+          "population",
+          "count"
         ]
       },
       "sourceName": "総務省 社会・人口統計体系",

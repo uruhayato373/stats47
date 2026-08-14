@@ -76,8 +76,14 @@ ThemeCatalog (SSOT, git TS)
 | 年齢構造 (男女×年齢階級) | `pyramid-chart` | 人口ピラミッド (非チャート扱いで個別描画) |
 | 考察・解説テキスト | `markdown-section` | 末尾フル幅の文章 (指標非紐付き・relatedRankingKeys 不要) |
 
-- **色は必ず指定する** (ページ間統一。adapter デフォルトに頼らない)。予約色: 男=`#3b82f6` / 女=`#ec4899`。
-  推奨: 危険/死者=`#ef4444` / 件数=`#f59e0b` / 改善率=`#22c55e` / 中立=`#6b7280` / 特殊=`#8b5cf6` / 人口=`#3b82f6`。
+- **色は必ず「意味 role」で指定する** (ページ間統一・生 hex 禁止。2026-08-13 の WP5 で 179 生色を role 化)。
+  色キー (`seriesColors` / `lineColors` / `columnColors` / `colors` / `palette` / `color` / `fill` / `stroke`) には
+  role 名を書く: 人口=`population` / 男=`male` / 女=`female` / 危険・死者=`danger` / 件数=`count` /
+  改善=`improve` / 中立=`neutral` / 特殊=`special` / 多系列の追加色=`series-1`〜`series-12`。
+  role→hex の正典は `packages/data-configs/src/theme-catalog/chart-color-role.ts`。生成器
+  (`transform.chartToPageComponent`) が page-components 出力時に role→hex へ解決するので app 側 renderer は
+  現状どおり hex を読む。生 hex を色キーに書くと validator `[raw-color]` が error にする
+  (choropleth の連続・発散配色は別系統で `color-scheme-policy.ts` が正典・role 対象外)。
 - **9 種以外のチャート表現が要るとき**は theme renderer 側 (`ThemeDbChartRenderer` /
   `ThemeDbChartComponentProps`) に型と描画を追加してから (chart-component-builder / theme-ui-manager)、
   `CATALOG_COMPONENT_TYPES` にも足す。カタログはあくまで既存の theme componentType の割当。

@@ -94,8 +94,8 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
           "持ち家率"
         ],
         "seriesColors": [
-          "#ef4444",
-          "#3b82f6"
+          "danger",
+          "population"
         ]
       },
       "sourceName": "住宅・土地統計調査",
@@ -128,8 +128,8 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
           "高齢夫婦世帯率"
         ],
         "seriesColors": [
-          "#8b5cf6",
-          "#f59e0b"
+          "special",
+          "count"
         ]
       },
       "sourceName": "国勢調査 / 国民生活基礎調査",
@@ -282,8 +282,8 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
           "借家"
         ],
         "seriesColors": [
-          "#06b6d4",
-          "#f59e0b"
+          "series-6",
+          "count"
         ]
       },
       "sourceName": "住宅・土地統計調査",
@@ -316,8 +316,8 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
           "離婚件数"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#ef4444"
+          "population",
+          "danger"
         ]
       },
       "sourceName": "人口動態調査",
@@ -350,8 +350,8 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
           "核家族世帯割合"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#ef4444"
+          "population",
+          "danger"
         ]
       },
       "sourceName": "総務省「国勢調査」",

@@ -202,8 +202,8 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "経常収支比率"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#06b6d4"
+          "population",
+          "series-6"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -226,17 +226,17 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           {
             "code": "#D0210101",
             "label": "地方税",
-            "color": "#3b82f6"
+            "color": "population"
           },
           {
             "code": "#D0210201",
             "label": "地方交付税",
-            "color": "#06b6d4"
+            "color": "series-6"
           },
           {
             "code": "#D0210301",
             "label": "国庫支出金",
-            "color": "#8b5cf6"
+            "color": "special"
           }
         ]
       },
@@ -260,22 +260,22 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           {
             "code": "#D0320101",
             "label": "人件費",
-            "color": "#ef4444"
+            "color": "danger"
           },
           {
             "code": "#D0310301",
             "label": "民生費",
-            "color": "#ec4899"
+            "color": "female"
           },
           {
             "code": "#D0311501",
             "label": "教育費",
-            "color": "#3b82f6"
+            "color": "population"
           },
           {
             "code": "#D0311201",
             "label": "土木費",
-            "color": "#f97316"
+            "color": "series-12"
           }
         ]
       },
@@ -309,8 +309,8 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "納税義務者1人当たり課税所得"
         ],
         "seriesColors": [
-          "#06b6d4",
-          "#8b5cf6"
+          "series-6",
+          "special"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -343,8 +343,8 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "将来負担比率"
         ],
         "seriesColors": [
-          "#ef4444",
-          "#f59e0b"
+          "danger",
+          "count"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -382,9 +382,9 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "国庫支出金割合"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#06b6d4",
-          "#8b5cf6"
+          "population",
+          "series-6",
+          "special"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -412,7 +412,7 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "1人当たり歳出"
         ],
         "seriesColors": [
-          "#3b82f6"
+          "population"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -440,7 +440,7 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "納税義務者割合"
         ],
         "seriesColors": [
-          "#22c55e"
+          "improve"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -478,9 +478,9 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "投資的経費割合"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#ef4444",
-          "#22c55e"
+          "population",
+          "danger",
+          "improve"
         ]
       },
       "sourceName": "総務省「地方財政状況調査」",

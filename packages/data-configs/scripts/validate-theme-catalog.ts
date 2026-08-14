@@ -28,6 +28,8 @@ import { pathToFileURL } from "node:url";
 import { METRICS_REGISTRY } from "../src/registry";
 import { normalizeUnitForAxis } from "../src/theme-catalog/types";
 import { listThemeCatalogs, CATALOG_COMPONENT_TYPES, type ThemeCatalog } from "../src/theme-catalog";
+import { validateChartProps } from "../src/theme-catalog/stat-series-ref";
+import { collectColorFieldViolations } from "../src/theme-catalog/chart-color-role";
 
 const STRICT = process.argv.includes("--strict");
 const VALID_TYPES = new Set<string>(CATALOG_COMPONENT_TYPES);
@@ -257,6 +259,31 @@ function main() {
     for (const ch of c.charts) {
       if (!VALID_TYPES.has(ch.componentType)) {
         errors.push(`[component-type] ${c.key}/${ch.componentKey}: 無効な componentType "${ch.componentType}"`);
+      }
+      // componentProps の形を chart 種別ごとに検証 (WP1)。従来は union membership しか
+      // 見ておらず、必須フィールド欠落の壊れた chart を素通りさせていた。
+      for (const msg of validateChartProps(
+        ch.componentType,
+        (ch.componentProps ?? {}) as Record<string, unknown>,
+      )) {
+        errors.push(`[chart-props] ${c.key}/${ch.componentKey}: ${msg}`);
+      }
+      // 色は role で持ち生成器が hex へ解決する (WP5)。色キー文脈に role でない値
+      // (生 hex/hsl/rgb = raw-color / typo 等の未知 role = unknown-role) が残っていたら error。
+      // ★resolveComponentPropsColors は未知値を素通しするため、ここで弾かないと壊れた色文字列が
+      //   生成物に焼き込まれる (2026-08-13 concurrent review 指摘)。
+      const colorViolations = collectColorFieldViolations(ch.componentProps);
+      const rawHex = [...new Set(colorViolations.filter((v) => v.kind === "raw-color").map((v) => v.value))];
+      const unknownRoles = [...new Set(colorViolations.filter((v) => v.kind === "unknown-role").map((v) => v.value))];
+      if (rawHex.length > 0) {
+        errors.push(
+          `[raw-color] ${c.key}/${ch.componentKey}: 色キーに生色 ${rawHex.join(", ")} — color role に置換する (chart-color-role.ts)`,
+        );
+      }
+      if (unknownRoles.length > 0) {
+        errors.push(
+          `[color-role] ${c.key}/${ch.componentKey}: 色キーに未知の role ${unknownRoles.join(", ")} — CHART_COLOR_ROLES から選ぶ`,
+        );
       }
       // componentKey 重複 (テーマ内)
       if (seenComponentKeys.has(ch.componentKey)) {

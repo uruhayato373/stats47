@@ -149,8 +149,8 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
           "海面漁獲量"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#06b6d4"
+          "population",
+          "series-6"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -189,10 +189,10 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
         "leftUnit": "トン",
         "rightUnit": "トン",
         "columnColors": [
-          "#06b6d4"
+          "series-6"
         ],
         "lineColors": [
-          "#22c55e"
+          "improve"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -225,8 +225,8 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
           "海面漁業産出額（長期）"
         ],
         "seriesColors": [
-          "#f59e0b",
-          "#6b7280"
+          "count",
+          "neutral"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -259,8 +259,8 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
           "漁業就業者数"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#8b5cf6"
+          "population",
+          "special"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -284,62 +284,62 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
           {
             "code": "0980",
             "label": "ホタテガイ",
-            "color": "#3b82f6"
+            "color": "population"
           },
           {
             "code": "1040",
             "label": "スルメイカ",
-            "color": "#06b6d4"
+            "color": "series-6"
           },
           {
             "code": "0120",
             "label": "マグロ類",
-            "color": "#8b5cf6"
+            "color": "special"
           },
           {
             "code": "0250",
             "label": "カツオ",
-            "color": "#f59e0b"
+            "color": "count"
           },
           {
             "code": "0410",
             "label": "サバ類",
-            "color": "#ef4444"
+            "color": "danger"
           },
           {
             "code": "0420",
             "label": "サンマ",
-            "color": "#22c55e"
+            "color": "improve"
           },
           {
             "code": "0430",
             "label": "ブリ類",
-            "color": "#eab308"
+            "color": "series-11"
           },
           {
             "code": "0330",
             "label": "イワシ類",
-            "color": "#14b8a6"
+            "color": "series-8"
           },
           {
             "code": "0490",
             "label": "スケトウダラ",
-            "color": "#a855f7"
+            "color": "series-10"
           },
           {
             "code": "1130",
             "label": "コンブ類",
-            "color": "#84cc16"
+            "color": "series-9"
           },
           {
             "code": "0880",
             "label": "ズワイガニ",
-            "color": "#f97316"
+            "color": "series-12"
           },
           {
             "code": "0660",
             "label": "タイ類",
-            "color": "#ec4899"
+            "color": "female"
           }
         ]
       },
@@ -383,10 +383,10 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
           "スルメイカ"
         ],
         "seriesColors": [
-          "#14b8a6",
-          "#22c55e",
-          "#3b82f6",
-          "#06b6d4"
+          "series-8",
+          "improve",
+          "population",
+          "series-6"
         ]
       },
       "sourceName": "海面漁業生産統計調査",

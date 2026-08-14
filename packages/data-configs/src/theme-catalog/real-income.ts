@@ -89,9 +89,9 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
           "食料"
         ],
         "seriesColors": [
-          "#6b7280",
-          "#ef4444",
-          "#f59e0b"
+          "neutral",
+          "danger",
+          "count"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -119,7 +119,7 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
           "実収入（月額）"
         ],
         "seriesColors": [
-          "#3b82f6"
+          "population"
         ]
       },
       "sourceName": "総務省 家計調査",

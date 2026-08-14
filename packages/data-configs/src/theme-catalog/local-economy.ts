@@ -49,17 +49,17 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
           {
             "code": "#F01201",
             "label": "第1次産業",
-            "color": "#22c55e"
+            "color": "improve"
           },
           {
             "code": "#F01202",
             "label": "第2次産業",
-            "color": "#3b82f6"
+            "color": "population"
           },
           {
             "code": "#F01203",
             "label": "第3次産業",
-            "color": "#f97316"
+            "color": "series-12"
           }
         ],
         "topN": 3
@@ -94,8 +94,8 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
           "最低賃金"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#f59e0b"
+          "population",
+          "count"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -134,10 +134,10 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
         "leftUnit": "倍",
         "rightUnit": "%",
         "columnColors": [
-          "#3b82f6"
+          "population"
         ],
         "lineColors": [
-          "#ef4444"
+          "danger"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -293,7 +293,7 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
           "事業所数"
         ],
         "seriesColors": [
-          "#3b82f6"
+          "population"
         ]
       },
       "sourceName": "総務省・経済産業省「経済センサス」",

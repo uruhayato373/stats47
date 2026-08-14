@@ -59,9 +59,9 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
           "高等学校"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#22c55e",
-          "#f59e0b"
+          "population",
+          "improve",
+          "count"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -94,8 +94,8 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
           "公民館"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#f59e0b"
+          "population",
+          "count"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -123,7 +123,7 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
           "大学・大学院卒の割合"
         ],
         "seriesColors": [
-          "#3b82f6"
+          "population"
         ]
       },
       "sourceName": "総務省 社会・人口統計体系（学校基本調査）",
@@ -151,7 +151,7 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
           "県内大学進学率"
         ],
         "seriesColors": [
-          "#ef4444"
+          "danger"
         ]
       },
       "sourceName": "総務省 社会・人口統計体系（学校基本調査）",
@@ -174,27 +174,27 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
           {
             "code": "E2101",
             "label": "小学校",
-            "color": "#3b82f6"
+            "color": "population"
           },
           {
             "code": "E3101",
             "label": "中学校",
-            "color": "#ef4444"
+            "color": "danger"
           },
           {
             "code": "E4101",
             "label": "高等学校",
-            "color": "#22c55e"
+            "color": "improve"
           },
           {
             "code": "E6101",
             "label": "短期大学",
-            "color": "#f59e0b"
+            "color": "count"
           },
           {
             "code": "E6102",
             "label": "大学",
-            "color": "#8b5cf6"
+            "color": "special"
           }
         ],
         "topN": 5

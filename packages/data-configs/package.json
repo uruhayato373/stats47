@@ -41,9 +41,9 @@
       "require": "./src/theme-catalog/types.ts"
     },
     "./unit": {
-      "types": "./src/unit/unit-semantics.ts",
-      "import": "./src/unit/unit-semantics.ts",
-      "require": "./src/unit/unit-semantics.ts"
+      "types": "./src/unit/index.ts",
+      "import": "./src/unit/index.ts",
+      "require": "./src/unit/index.ts"
     },
     "./prominence": {
       "types": "./src/prominence/index.ts",

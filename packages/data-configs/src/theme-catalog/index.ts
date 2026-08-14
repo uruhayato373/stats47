@@ -29,6 +29,10 @@ import { SAFETY_CATALOG } from "./safety";
 import { TOURISM_CATALOG } from "./tourism";
 
 export * from "./types";
+export * from "./population-pyramid-deps";
+export * from "./chart-color-role";
+export * from "./stat-series-ref";
+export * from "./chart-dependencies";
 
 /** カタログ駆動テーマの登録簿 (key → catalog)。 */
 export const THEME_CATALOGS: Record<string, ThemeCatalog> = {
