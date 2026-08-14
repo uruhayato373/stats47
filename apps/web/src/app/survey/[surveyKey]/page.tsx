@@ -371,11 +371,10 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない (見出しは PR ラベル付き 1 段のみ) */}
+      {/* ネイティブアフィリエイト。広告枠に本文セクションの採番を与えない。 */}
       {nativeBanners.length > 0 && (
         <section className="mb-12">
           <NativeAffiliateRow
-            title={`${survey.name}の関連サービス`}
             banners={nativeBanners}
             position="survey-native"
             trackingCategory={`survey-${surveyKey}`}

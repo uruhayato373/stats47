@@ -61,7 +61,6 @@ export function RankingPageClientShell({
         nativeAffiliate: (
           <RankingPageNativeAffiliateSection
             banners={model.nativeBanners}
-            categoryName={model.category?.categoryName}
             categoryKey={model.rankingItem.categoryKey}
           />
         ),

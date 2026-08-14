@@ -145,7 +145,6 @@ export default async function TagArticlesPage({ params }: PageProps) {
             {nativeBanners.length > 0 && (
                 <div className="mt-10">
                     <NativeAffiliateRow
-                        title={`「${tag}」の関連サービス`}
                         banners={nativeBanners}
                         position="tag-native"
                         trackingCategory={`tag-${tagKey}`}

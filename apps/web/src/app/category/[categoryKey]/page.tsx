@@ -386,11 +386,10 @@ export default async function CategoryPage({ params }: PageProps) {
         {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
         <InContentAdSlot slot={HUB_INCONTENT} />
 
-        {/* ネイティブアフィリエイト。見出しは PR ラベル付き 1 段のみ (二重見出し禁止) */}
+        {/* ネイティブアフィリエイト。可視要素はバナー画像のみ。 */}
         {nativeBanners.length > 0 && (
           <section className="mb-12">
             <NativeAffiliateRow
-              title={`${category.categoryName}の関連サービス`}
               banners={nativeBanners}
               position="category-native"
               trackingCategory={`category-${categoryKey}`}

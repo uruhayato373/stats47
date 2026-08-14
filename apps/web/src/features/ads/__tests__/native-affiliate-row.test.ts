@@ -3,14 +3,12 @@
  *
  * 背景 (2026-08-06): locationCode "sidebar-sticky" 登録のスカイスクレイパー (120x600) が、
  * それを読む描画コードが存在しない + banner 解決が locationCode を見ない (§1 の非対称) の
- * 合わせ技で本文の native 横並び枠に流入し、aspect-[4/3] + object-contain の枠で
- * 極細の縦帯に潰れて home に表示されていた。加えて (a) 呼び出し元 SectionHeader との
- * 二重見出し、(b) 「関連書籍・商品」等の実在庫に無い語、(c) PR 表記の欠落があった。
+ * 合わせ技で本文の native 横並び枠に流入し、home に表示されていた。
  *
  * 規約 (affiliate-ads-standards.md §3):
  *   - 縦長 (height > width) は native / 本文枠に出さない — isLandscapeBanner で描画側除外
  *   - 縦長の唯一の受け皿は SidebarStickyBannerAd ("sidebar-sticky" reader の唯一の消費者)
- *   - NativeAffiliateRow は外枠カード一括なし・「PR」ラベル付き 1 段見出し
+ *   - NativeAffiliateRow の可視要素はリンク付きバナー画像だけ
  */
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -48,14 +46,23 @@ describe("NativeAffiliateRow の構造契約", () => {
     expect(src).toContain(".filter(isLandscapeBanner)");
   });
 
-  it("PR ラベルを表示する (景表法・他のアフィリ枠と統一)", () => {
-    expect(src).toContain(">PR<");
+  it("PR・見出し・商品名・もっと見る導線を表示しない", () => {
+    expect(src).not.toContain(">PR<");
+    expect(src).not.toContain("<h3");
+    expect(src).not.toContain("<p");
+    expect(src).not.toContain("moreHref");
   });
 
-  it("外枠カードで 4 件を一括りにしない (SurfaceCard 直使用の禁止)", () => {
-    // 個別カードは getSurfaceCardClassName (リンク自身がカードになる) を使う。
-    // <SurfaceCard> での外枠一括が復活したらこの契約に違反する。
+  it("カード装飾や固定アスペクト枠を使わず、バナーの原寸比を保つ", () => {
     expect(src).not.toContain("<SurfaceCard");
+    expect(src).not.toContain("getSurfaceCardClassName");
+    expect(src).not.toContain("aspect-[4/3]");
+    expect(src).not.toContain("rounded-md");
+    expect(src).not.toContain("bg-muted");
+    expect(src).not.toContain("group-hover");
+    expect(src).toContain("width={b.width}");
+    expect(src).toContain("height={b.height}");
+    expect(src).toContain('className="block h-auto w-full"');
   });
 });
 
