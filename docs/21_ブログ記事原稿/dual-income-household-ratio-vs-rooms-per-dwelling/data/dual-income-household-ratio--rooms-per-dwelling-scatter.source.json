@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "dual-income-household-ratio",
+  "pair": "rooms-per-dwelling",
+  "pearsonR": 0.8780744867238199,
+  "partialRPopulation": 0.795411811974626,
+  "unit": "％ × 室",
+  "label": "共働き世帯割合 と 居住室数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/dual-income-household-ratio.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug dual-income-household-ratio-vs-rooms-per-dwelling --base dual-income-household-ratio --pair rooms-per-dwelling --data-name dual-income-household-ratio--rooms-per-dwelling"
+}
