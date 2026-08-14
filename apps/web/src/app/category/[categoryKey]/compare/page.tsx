@@ -186,7 +186,6 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
             {compareNativeBanners.length > 0 && (
                 <div className="mt-8">
                     <NativeAffiliateRow
-                        title={`${currentCategory?.categoryName ?? "この分野"}の関連サービス`}
                         banners={compareNativeBanners}
                         position="compare-native"
                         trackingCategory={`compare-${categoryKey}`}

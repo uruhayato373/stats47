@@ -100,14 +100,14 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 
 > **★縦長 (height > width) は native / 本文の横並び枠に出さない (2026-08-06)**: banner 解決が
 > locationCode を見ない結果、`sidebar-sticky` 登録のスカイスクレイパー (120×600) が本文の
-> `NativeAffiliateRow` (4:3 枠) に流入し極細の縦帯に潰れていた。描画側が
+> 当時の `NativeAffiliateRow` (4:3 枠) に流入し極細の縦帯に潰れていた。描画側が
 > `isLandscapeBanner` (`resolve-affiliate-ad.ts`) で除外する (repository は blog レール等と共有
 > するため触らない)。**縦長の唯一の受け皿は `SidebarStickyBannerAd`** (home 左レール・lg+ のみ・
 > sticky なし) = `sidebar-sticky` locationCode を読む唯一の消費者。native の呼び出し元は除外分を
 > 見込んで解決 limit を 8 にする (native 4 + 末尾 300×250 1 を横長だけで埋める余裕)。
-> **`NativeAffiliateRow` は外枠カード一括を持たず「PR」ラベル + 1 段見出し** — 呼び出し元に
-> `SectionHeader` を重ねない (二重見出し禁止)。見出しに「書籍・商品」等、実在庫に無い語を使わない
-> (「◯◯の関連サービス」に統一。2026-08-06 に home「関連書籍・サービス」の指摘で全 7 ページ是正)。
+> **`NativeAffiliateRow` の可視要素はリンク付きバナー画像だけ** — PR ラベル、見出し、商品・サービス名、
+> 「もっと見る」導線、Surface/Card 装飾、固定アスペクト枠を追加しない。ASP 提供バナーの縦横比を保って
+> そのまま表示する (2026-08-14 に home の冗長な広告見出しとカード表現の指摘で全 7 ページを統一)。
 
 **legacy 一点物** (grandfathering・新規禁止・段階移行): `160×600` / `120×600` / `165×120` / `320×250` / `336×280` / `300×300`
 → 再取得時に 300×250 か text へ寄せる。`KNOWN_LEGACY_SIZES` (audit script) で許容中。**新規はこれらも不可** (canonical のみ)。

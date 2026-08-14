@@ -4,13 +4,11 @@ import type { ResolvedAffiliateBanner } from "@/features/ads/services/resolve-af
 
 interface RankingPageNativeAffiliateSectionProps {
   banners: ResolvedAffiliateBanner[];
-  categoryName?: string | null;
   categoryKey?: string | null;
 }
 
 export function RankingPageNativeAffiliateSection({
   banners,
-  categoryName,
   categoryKey,
 }: RankingPageNativeAffiliateSectionProps) {
   // 縦長 (スカイスクレイパー) は本文枠に出さない。native の 4 件も末尾の 300x250 枠も
@@ -25,7 +23,6 @@ export function RankingPageNativeAffiliateSection({
   return (
     <>
       <NativeAffiliateRow
-        title={`${categoryName ?? "このランキング"}の関連サービス`}
         banners={usable.slice(0, 4)}
         position="ranking-native"
         trackingCategory={`ranking-${categoryKey ?? "general"}`}

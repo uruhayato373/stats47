@@ -251,11 +251,9 @@ export default async function HomePage() {
               </section>
             </div>
 
-            {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。
-                見出しは NativeAffiliateRow の PR ラベル付き 1 段のみ (SectionHeader との二重見出し禁止)。 */}
+            {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。 */}
             {homeNativeBanners.length > 0 && (
               <NativeAffiliateRow
-                title="暮らしとお金の関連サービス"
                 banners={homeNativeBanners}
                 position="home-native"
                 trackingCategory="home"
