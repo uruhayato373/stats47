@@ -40,6 +40,7 @@ env:
   # exporter の R2 観測値読み取りは公開 URL 経由 (認証不要・SSD 非依存)
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
+  WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
 
 jobs:
   sync:
@@ -115,6 +116,10 @@ jobs:
           if [ -z "$ONLY" ] || [ "$ONLY" = "affiliate-ads" ]; then
             npx tsx apps/web/scripts/verify-affiliate-ads-snapshot.ts
           fi
+
+      - name: 🧹 Purge Workers Cache after snapshot sync
+        if: inputs.dry_run != 'true'
+        run: npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --all
 
   # ranking-items を R2 に push した後、git 側の派生キー (known / sitemap) を再生成して
   # develop に反映し PR を開く。これが無いと新規 metric の item.json は R2 にあっても

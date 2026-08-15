@@ -5,6 +5,8 @@
  *   /api/themes/population-dynamics/yoy-total-population.json
  *     → app/themes/population-dynamics/yoy-total-population.json
  */
+import { LONG_LIVED_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
+
 const R2_BASE = "https://storage.stats47.jp/app/themes";
 
 export const revalidate = 86400;
@@ -19,20 +21,20 @@ export async function GET(
   const { theme, file } = await params;
 
   if (!VALID_THEME.test(theme) || !VALID_FILE.test(file)) {
-    return new Response("invalid path", { status: 400 });
+    return new Response("invalid path", { status: 400, headers: NO_STORE_CACHE_HEADERS });
   }
 
   const res = await fetch(`${R2_BASE}/${theme}/${file}`, {
     cache: "force-cache",
   });
   if (!res.ok) {
-    return new Response("not found", { status: 404 });
+    return new Response("not found", { status: 404, headers: NO_STORE_CACHE_HEADERS });
   }
 
   return new Response(res.body, {
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "cache-control": "public, max-age=86400, s-maxage=604800",
+      ...LONG_LIVED_DATA_CACHE_HEADERS,
     },
   });
 }

@@ -14,6 +14,7 @@
 | `CLOUDFLARE_R2_BUCKET_NAME` | バケット名（省略時: `stats47`）                                                |
 | `CLOUDFLARE_API_TOKEN`      | CDN キャッシュパージ専用（`purge-cache.ts` のみ）                              |
 | `CLOUDFLARE_ZONE_ID`        | CDN キャッシュパージ専用（`purge-cache.ts` のみ）                              |
+| `WORKER_CACHE_PURGE_SECRET` | Workers Cache 内部パージ API の Bearer 認証                                    |
 
 ## スクリプト一覧
 
@@ -111,7 +112,23 @@ npx tsx packages/r2-storage/src/scripts/purge-cache-r2.ts
 npx tsx packages/r2-storage/src/scripts/purge-cache.ts              # 全体
 npx tsx packages/r2-storage/src/scripts/purge-cache.ts --prefix app/ranking
 npx tsx packages/r2-storage/src/scripts/purge-cache.ts --files app/ranking/key/values.json
+
+# Workers Cache（同一entrypointのassetを含む）を全体パージ
+npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --all
+
+# Workers Cacheの公開data APIだけをパージ
+npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --data
+
+# 公開ページの path tag だけをパージ（query variant も同時に無効化）
+npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --urls \
+  https://stats47.jp/blog/example \
+  https://stats47.jp/blog
 ```
+
+zone CDN と Workers Cache は別のキャッシュであり、`purge-cache.ts` だけでは Workers Cache は
+消えない。R2 snapshot を公開する Workflow は、R2 反映成功後に
+`purge-worker-cache.ts` を実行する。URL 指定は最大100件ずつ自動分割し、異なる origin、
+認証不足、Worker 側の purge 失敗は hard fail する。
 
 ## スナップショット一括更新
 

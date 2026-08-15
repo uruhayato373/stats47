@@ -852,6 +852,14 @@
       ]
     },
     {
+      "name": "WORKER_CACHE_PURGE_SECRET",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
       "name": "XXX",
       "visibility": "server",
       "contexts": [

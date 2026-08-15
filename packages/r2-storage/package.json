@@ -29,6 +29,7 @@
   "scripts": {
     "type-check": "tsc --noEmit",
     "purge-cache": "tsx src/scripts/purge-cache.ts",
+    "purge-worker-cache": "tsx src/scripts/purge-worker-cache.ts",
     "audit:incremental-cache": "tsx src/scripts/audit-incremental-cache.ts",
     "db:pull": "tsx src/scripts/db-r2-sync.ts pull",
     "db:push": "tsx src/scripts/db-r2-sync.ts push"

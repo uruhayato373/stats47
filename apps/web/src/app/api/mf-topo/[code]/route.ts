@@ -6,6 +6,8 @@
  *   /api/mf-topo/prefecture → 県境 topojson
  *   /api/mf-topo/28         → 兵庫県の市区町村境界 topojson
  */
+import { LONG_LIVED_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
+
 const R2_BASE = "https://storage.stats47.jp/gis/mlit/20240101";
 
 export const revalidate = 86400;
@@ -24,18 +26,18 @@ export async function GET(
         : null;
 
   if (!url) {
-    return new Response("invalid code", { status: 400 });
+    return new Response("invalid code", { status: 400, headers: NO_STORE_CACHE_HEADERS });
   }
 
   const res = await fetch(url, { cache: "force-cache" });
   if (!res.ok) {
-    return new Response("topojson not found", { status: 404 });
+    return new Response("topojson not found", { status: 404, headers: NO_STORE_CACHE_HEADERS });
   }
 
   return new Response(res.body, {
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "cache-control": "public, max-age=86400, s-maxage=604800",
+      ...LONG_LIVED_DATA_CACHE_HEADERS,
     },
   });
 }

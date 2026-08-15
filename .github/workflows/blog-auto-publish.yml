@@ -54,6 +54,7 @@ env:
   # 公開後の CDN ピンポイントパージ用 (purge-cache.ts --urls)
   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
   CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
+  WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
 
 jobs:
   auto-publish:
@@ -186,6 +187,7 @@ jobs:
           URLS+=(https://stats47.jp/blog https://stats47.jp/ https://stats47.jp/sitemap.xml)
           echo "purge: ${URLS[*]}"
           npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls "${URLS[@]}"
+          npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --urls "${URLS[@]}"
 
       # docs/21 は ephemeral outbox: 公開に成功した slug のドラフトを R2 反映後に削除し、
       # commit-back する。これで docs/21 は常に空 (未公開ドラフトのみ) に保たれ、R2(正典)と
