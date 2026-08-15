@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-08-12T21:20:36.236Z",
+  "generatedAt": "2026-08-15T20:51:27.813Z",
   "gscSnapshot": "2026-W32",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2173,
-    "done": 249,
-    "needsRegen": 1924,
+    "done": 254,
+    "needsRegen": 1919,
     "needsByReason": {
-      "incomplete": 1645,
+      "incomplete": 1640,
       "missing": 215,
       "blocker": 64
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 1,
-    "doneImpressions": 30930,
-    "needsImpressions": 7884,
+    "doneImpressions": 31151,
+    "needsImpressions": 7663,
     "opusReviewTier": 30
   },
   "entries": [
@@ -1958,70 +1958,65 @@
       "impressions": 45,
       "clicks": 4,
       "position": 7.64,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-short"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Wed, 12 Aug 2026 21:21:55 GMT",
+      "updatedAt": "2026-08-12T00:00:00.000Z"
     },
     {
       "rankingKey": "doctor-annual-income",
       "impressions": 44,
       "clicks": 1,
       "position": 9.84,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Wed, 12 Aug 2026 21:21:55 GMT",
+      "updatedAt": "2026-08-12T00:00:00.000Z"
     },
     {
       "rankingKey": "flood-affected-rivers",
       "impressions": 44,
       "clicks": 1,
       "position": 9.41,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Wed, 12 Aug 2026 21:21:55 GMT",
+      "updatedAt": "2026-08-12T00:00:00.000Z"
     },
     {
       "rankingKey": "hydroelectric-power-plant-count",
       "impressions": 44,
       "clicks": 0,
       "position": 6.11,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Wed, 12 Aug 2026 21:21:55 GMT",
+      "updatedAt": "2026-08-12T00:00:00.000Z"
     },
     {
       "rankingKey": "midwife-count",
       "impressions": 44,
       "clicks": 0,
       "position": 6.91,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "causal-insights",
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Wed, 12 Aug 2026 21:21:55 GMT",
+      "updatedAt": "2026-08-12T00:00:00.000Z"
     },
     {
       "rankingKey": "mineral-water-consumption-expenditure",
@@ -2496,7 +2491,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "consumer-price-difference-index-utilities",
@@ -2510,7 +2505,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "geothermal-power-plant-count",
@@ -2522,7 +2517,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "high-school-teacher-annual-income",
@@ -2537,7 +2532,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "pharmaceutical-sales-count",
@@ -2552,7 +2547,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "retail-establishments-by-prefecture",
