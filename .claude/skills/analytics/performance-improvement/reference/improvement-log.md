@@ -450,7 +450,10 @@ import しただけで 38 URL の PSI 計測が走り、`.claude/state/metrics/p
 
 #### 実装
 
-1. `wrangler.toml` のproductionだけ `[cache] enabled = true`。開発は無効。
+1. default entrypointはproductionを含め `[cache] enabled = false` にし、
+   `worker-cache-gateway.ts` がRSC・Authorization・preview/session cookie・非安全methodを判定する。
+   共有可能なGET/HEADだけを `ctx.exports.CachedApp` へ渡し、productionの内部entrypointだけ
+   Workers Cacheを有効化する。
 2. `cache-policy.ts` をCache-Control / Vary / Cache-TagのSSOTにし、middlewareから適用。
    browserは`max-age=0, must-revalidate`、edgeは`Cloudflare-CDN-Cache-Control`で24時間保持し、
    7日SWRと1日stale-if-errorを有効化する。`s-maxage`はCloudflare上でSWRを無効化するため使わない。
@@ -482,6 +485,12 @@ import しただけで 38 URL の PSI 計測が走り、`.claude/state/metrics/p
   その後の既存SSGはGoogle Fontsのconnect timeout / ECONNRESETとR2読込遅延により、blog/tag/sitemapの
   複数routeが180秒×3回timeoutして終了コード1。新routeのbundle・型エラーではないが、full buildは
   未完了として扱う（検索index生成の副作用は元へ戻した）。
+- 2026-08-15の初回デプロイ後、通常HTML/APIは`MISS → HIT`を確認した一方、Worker実行前に
+  default entrypointのcache lookupが行われるため、middlewareだけではRSC・Authorizationを
+  bypassできず通常HTMLが`HIT`することを本番probeで検出した。Cloudflare公式gateway patternへ
+  修正し、default cache無効 + `CachedApp`だけ有効へ変更。OpenNext full build（静的1344ページ）と
+  Wrangler 4.123.0 / Node 22のproduction dry-run bundleに成功し、bundleのnamed exportと
+  `ctx.exports.CachedApp`を確認した。修正版の本番HTTP再検証を完了条件として残す。
 
 #### デプロイ後の停止条件・判定手順
 

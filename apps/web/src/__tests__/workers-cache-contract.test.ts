@@ -21,11 +21,28 @@ function findRouteFiles(directory: string): string[] {
 describe("Cloudflare Workers Cache configuration", () => {
   const wrangler = readFileSync(resolve(WEB_ROOT, "wrangler.toml"), "utf8");
 
-  it("developmentでは無効、productionでは有効にする", () => {
+  it("gatewayは常時実行し、安全な内部entrypointだけproductionで有効にする", () => {
+    expect(wrangler).toContain('main = "src/worker-cache-gateway.ts"');
     expect(wrangler).toMatch(/\[cache\]\s+enabled = false/);
-    expect(wrangler).toMatch(/\[env\.production\.cache\]\s+enabled = true/);
+    expect(wrangler).toMatch(/\[env\.production\.cache\][\s\S]*?enabled = false/);
+    expect(wrangler).toMatch(
+      /\[env\.production\.exports\.CachedApp\.cache\][\s\S]*?enabled = true/,
+    );
     // 既定のversion分離を維持し、deployで旧HTMLを自動無効化する。
     expect(wrangler).not.toContain("cross_version_cache = true");
+  });
+
+  it("gatewayがRSC・認証系をOpenNextへ直送し、安全なrequestだけCachedAppへ渡す", () => {
+    const gateway = readFileSync(resolve(WEB_ROOT, "src/worker-cache-gateway.ts"), "utf8");
+    const openNextProxy = readFileSync(
+      resolve(WEB_ROOT, "src/open-next-worker-proxy.js"),
+      "utf8",
+    );
+    expect(gateway).toContain("shouldBypassPageCache(request)");
+    expect(gateway).toContain("openNextWorker.fetch(request, env, ctx)");
+    expect(gateway).toContain("ctx.exports.CachedApp");
+    expect(gateway).toContain('from "./open-next-worker-proxy.js"');
+    expect(openNextProxy).toContain('from "../.open-next/worker.js"');
   });
 
   it("Workers Cache対応版のWranglerとworkers typesを固定する", () => {
