@@ -7,6 +7,8 @@
  *   /api/flow/finance/13        → app/finance-flow/13.json
  *   /api/flow/migration-muni/13 → app/migration-flow/municipalities/13.json（粒子地図用）
  */
+import { LONG_LIVED_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
+
 const R2_BASE = "https://storage.stats47.jp";
 
 /** feature → R2 key（許可リスト） */
@@ -26,18 +28,18 @@ export async function GET(
   const { feature, code } = await params;
   const build = KEY_BUILDERS[feature];
   if (!build || !/^\d{2}$/.test(code)) {
-    return new Response("invalid feature/code", { status: 400 });
+    return new Response("invalid feature/code", { status: 400, headers: NO_STORE_CACHE_HEADERS });
   }
 
   const res = await fetch(`${R2_BASE}/${build(code)}`, { cache: "force-cache" });
   if (!res.ok) {
-    return new Response("flow data not found", { status: 404 });
+    return new Response("flow data not found", { status: 404, headers: NO_STORE_CACHE_HEADERS });
   }
 
   return new Response(res.body, {
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "cache-control": "public, max-age=86400, s-maxage=604800",
+      ...LONG_LIVED_DATA_CACHE_HEADERS,
     },
   });
 }

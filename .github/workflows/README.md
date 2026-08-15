@@ -36,9 +36,10 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 
 | Secret                    | 用途                                                                                                                                                            | 形式                                                      |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `CLOUDFLARE_API_TOKEN`    | Cloudflareデプロイ認証                                                                                                                                          | 40文字の英数字（Workers Scripts、D1、R2の編集権限が必要） |
-| `AUTH_SECRET`             | NextAuth認証シークレット                                                                                                                                        | 32文字以上のランダム文字列                                |
-| `CLAUDE_CODE_OAUTH_TOKEN` | `ai-content-generate-daily.yml` / `blog-generate-daily.yml` の Claude Code 認証。ローカルで `claude setup-token` を実行して発行し、Repository Secret に登録する | OAuth token。Variable やログへ出さない                    |
+| `CLOUDFLARE_API_TOKEN`       | Cloudflareデプロイ認証                                                                                                                                          | 40文字の英数字（Workers Scripts、D1、R2の編集権限が必要） |
+| `AUTH_SECRET`                | NextAuth認証シークレット                                                                                                                                        | 32文字以上のランダム文字列                                |
+| `WORKER_CACHE_PURGE_SECRET`  | R2公開後にWorkers Cacheを全体/tag purgeする内部APIのBearer認証。deploy時に同名Worker secretへ同期する                                                           | `openssl rand -hex 32`。Variable やログへ出さない         |
+| `CLAUDE_CODE_OAUTH_TOKEN`    | `ai-content-generate-daily.yml` / `blog-generate-daily.yml` の Claude Code 認証。ローカルで `claude setup-token` を実行して発行し、Repository Secret に登録する | OAuth token。Variable やログへ出さない                    |
 
 ### Repository Variables
 

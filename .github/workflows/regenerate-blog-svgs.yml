@@ -61,6 +61,7 @@ env:
   CLOUDFLARE_R2_BUCKET_NAME: stats47
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
+  WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
 
 jobs:
   regenerate:
@@ -181,6 +182,10 @@ jobs:
           if [ "${#ARGS[@]}" -gt 0 ]; then
             npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts "${ARGS[@]}"
           fi
+
+      - name: 🧹 Purge Workers data cache (本番時のみ)
+        if: ${{ github.event.inputs.dry_run == 'false' }}
+        run: npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --data
 
       - name: 📝 Summary
         run: |

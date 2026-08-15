@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-08-14
- * 件数: blog 426 / tag 59 / survey 73
+ * 最終生成日: 2026-08-15
+ * 件数: blog 427 / tag 60 / survey 73
  */
 
 export interface SitemapBlogEntry {
@@ -116,6 +116,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "dog-registration-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "dual-income-childcare-dilemma", lastModified: "2026-03-29" },
   { slug: "dual-income-household-ratio-vs-floor-area-per-dwelling-owner", lastModified: "2026-08-03" },
+  { slug: "dual-income-household-ratio-vs-rooms-per-dwelling", lastModified: "2026-08-14" },
   { slug: "dual-income-reversal", lastModified: "2026-03-09" },
   { slug: "earthquake-insurance-prefecture-gap", lastModified: "2026-05-16" },
   { slug: "education-cost-per-child", lastModified: "2026-03-09" },
@@ -462,9 +463,10 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "インフラ", lastModified: "2026-06-14" },
   { tagKey: "エンゲル係数", lastModified: "2026-07-11" },
   { tagKey: "テレワーク", lastModified: "2026-06-02" },
-  { tagKey: "人口", lastModified: "2026-07-16" },
+  { tagKey: "人口", lastModified: "2026-08-14" },
   { tagKey: "人口減少", lastModified: "2026-07-16" },
-  { tagKey: "住宅", lastModified: "2026-07-16" },
+  { tagKey: "住宅", lastModified: "2026-08-14" },
+  { tagKey: "共働き", lastModified: "2026-08-14" },
   { tagKey: "出生率", lastModified: "2026-06-08" },
   { tagKey: "労働", lastModified: "2026-06-15" },
   { tagKey: "北海道", lastModified: "2026-07-10" },

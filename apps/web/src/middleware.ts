@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 
+import { resolvePageCacheHeaders } from "@/lib/cache-policy";
 import { UrlPolicy } from "@/lib/url-policy";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
@@ -492,16 +493,16 @@ export default function middleware(req: NextRequest) {
     request: { headers: requestHeaders },
   });
 
-  // Phase 9 P2-B (2026-04-26): Vary ヘッダ最小化
-  // Next.js は RSC 用に `Vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch,
-  // Next-Router-Segment-Prefetch` を全レスポンスに付与する。
-  // Google は `Vary: Accept-Encoding` 以外を無視する仕様だが、Cloudflare 等の CDN は
-  // Vary ヘッダごとにキャッシュ variant を保持するため、不要な Vary はキャッシュ効率を悪化させる。
-  // RSC navigation は req に `RSC: 1` ヘッダが付くのでその場合のみ Next.js デフォルトを尊重し、
-  // 通常リクエスト（Googlebot / 初回 HTML 取得）は Accept-Encoding のみに固定する。
-  const isRscRequest = req.headers.get("RSC") === "1";
-  if (!isRscRequest) {
-    response.headers.set("Vary", "Accept-Encoding");
+  // Workers Cache は path/query を主キーとし、RSC ヘッダーは既定キーに含まれない。
+  // HTML だけを共有キャッシュし、RSC / 認証・preview / 非安全メソッドは no-store にする。
+  const cacheHeaders = resolvePageCacheHeaders(req, pathname);
+  response.headers.set("Cache-Control", cacheHeaders.cacheControl);
+  response.headers.set("Vary", cacheHeaders.vary);
+  if (cacheHeaders.cloudflareCdnCacheControl) {
+    response.headers.set("Cloudflare-CDN-Cache-Control", cacheHeaders.cloudflareCdnCacheControl);
+  }
+  if (cacheHeaders.cacheTag) {
+    response.headers.set("Cache-Tag", cacheHeaders.cacheTag);
   }
 
   return response;

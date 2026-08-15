@@ -9,6 +9,8 @@
  */
 import { fetchFromR2AsString } from "@stats47/r2-storage/server";
 
+import { LONG_LIVED_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
+
 export const revalidate = 86400;
 
 export async function GET(
@@ -19,18 +21,18 @@ export async function GET(
   const path = slug.join("/");
 
   if (!/^[\w-]+(?:\/[\w-]+)*$/.test(path)) {
-    return new Response("invalid path", { status: 400 });
+    return new Response("invalid path", { status: 400, headers: NO_STORE_CACHE_HEADERS });
   }
 
   const body = await fetchFromR2AsString(`app/station-passengers/${path}.json`);
   if (!body) {
-    return new Response("not found", { status: 404 });
+    return new Response("not found", { status: 404, headers: NO_STORE_CACHE_HEADERS });
   }
 
   return new Response(body, {
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "cache-control": "public, max-age=86400, s-maxage=604800",
+      ...LONG_LIVED_DATA_CACHE_HEADERS,
     },
   });
 }
