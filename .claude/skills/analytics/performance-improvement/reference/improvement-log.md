@@ -435,3 +435,76 @@ import しただけで 38 URL の PSI 計測が走り、`.claude/state/metrics/p
 - **未検証**: この環境から PSI API へ到達できない (`http=000`) ため、**実レスポンスでの
   `dom_size` 取得は確認できていない**。Lighthouse の 2 形式に対する単体テストは通っている。
   実データは 2026-08-06 の日次 cron が最初に出す。
+
+---
+
+### [PERF-WORKERS-CACHE-01] Workers Cache + RSC分離 + 公開時パージ
+
+- **実装日**: 2026-08-14
+- **対象**: `https://stats47.jp` のHTMLと公開data API
+- **before**: mobile Slow 4G / CPU 4x のhomeで LCP 1,290ms、TTFB 924ms、CLS 0。
+  Chrome DocumentLatency の推定FCP/LCP改善余地は約822ms。レスポンスは
+  `s-maxage=86400` を返すが `CF-Cache-Status` / `Age` が無く、毎回Workerを通る。
+- **重要な境界**: 通常HTMLとRSCは同一URLだが、Workers Cacheの既定keyは
+  `RSC` / `Next-Router-State-Tree` 等を含まない。単純な有効化はHTML/RSCの誤配信を起こす。
+
+#### 実装
+
+1. default entrypointはproductionを含め `[cache] enabled = false` にし、
+   `worker-cache-gateway.ts` がRSC・Authorization・preview/session cookie・非安全methodを判定する。
+   共有可能なGET/HEADだけを `ctx.exports.CachedApp` へ渡し、productionの内部entrypointだけ
+   Workers Cacheを有効化する。
+2. `cache-policy.ts` をCache-Control / Vary / Cache-TagのSSOTにし、middlewareから適用。
+   browserは`max-age=0, must-revalidate`、edgeは`Cloudflare-CDN-Cache-Control`で24時間保持し、
+   7日SWRと1日stale-if-errorを有効化する。`s-maxage`はCloudflare上でSWRを無効化するため使わない。
+   通常GET/HEAD HTMLだけを共有し、RSC、Authorization、preview/session cookie、非安全methodは
+   `private, no-store` にする。解析cookieは表示を変えないため共有可能。
+3. HTMLへ共通tag `stats47-html` とpath tag、全公開data APIへ`stats47-data`を付与。
+   全APIの失敗応答は明示的にno-storeとし、Workers Cacheの既定heuristic cacheを防ぐ。
+   path tagはquery variantをまとめて無効化する。
+4. `/api/internal/worker-cache/purge` を追加。SHA-256後のtiming-safe Bearer比較、同一origin、
+   最大100 URL、no-store、Cloudflare runtime不在時fail closedを契約化。`--all`は
+   `purgeEverything`、個別URL/dataはtag purgeを使う。
+5. `purge-worker-cache.ts` を追加。Workers Cacheはzone purgeで消えないため、R2公開Workflow
+   9本からR2反映成功後にexact URL、data tagまたはentrypoint全体をpurgeする。API失敗は公開Workflowをhard fail。
+6. Wranglerを4.123.0、deploy jobをNode 22へ更新。GitHub Repository Secret
+   `WORKER_CACHE_PURGE_SECRET` を生成・登録し、deploy時に同名Worker secretへ同期する。
+
+#### 機械検証
+
+- cache policy 19件、purge route 9件、purge client 7件、Wrangler/Workflow契約12件、
+  全APIのno-store契約8件。
+- web全単体テスト914件、web / r2-storage type-check、lint（既存`img`警告2件のみ）、
+  workflow policy audit（61 workflows / 0 findings）、docs check、`git diff --check`。
+- Wrangler 4.123.0でproduction configからruntime/env型を生成し、`[env.production.cache]`を含む
+  設定のparseに成功。
+- middleware統合テストで通常HTMLのtag付与とRSCのno-store/tag無しを実request objectで確認。
+  localhostの実HTTPはbase branch既存の欠落`src/lib/next-devtools-stub.ts`によりhomeが500となるため、
+  response end-to-endの完了条件には使わずデプロイ後確認へ残した。
+- R2資格情報を読み込んだOpenNext buildでwebpack compile（39.2秒）と型検査までは通過。
+  その後の既存SSGはGoogle Fontsのconnect timeout / ECONNRESETとR2読込遅延により、blog/tag/sitemapの
+  複数routeが180秒×3回timeoutして終了コード1。新routeのbundle・型エラーではないが、full buildは
+  未完了として扱う（検索index生成の副作用は元へ戻した）。
+- 2026-08-15の初回デプロイ後、通常HTML/APIは`MISS → HIT`を確認した一方、Worker実行前に
+  default entrypointのcache lookupが行われるため、middlewareだけではRSC・Authorizationを
+  bypassできず通常HTMLが`HIT`することを本番probeで検出した。Cloudflare公式gateway patternへ
+  修正し、default cache無効 + `CachedApp`だけ有効へ変更。OpenNext full build（静的1344ページ）と
+  Wrangler 4.123.0 / Node 22のproduction dry-run bundleに成功し、bundleのnamed exportと
+  `ctx.exports.CachedApp`を確認した。修正版の本番HTTP再検証を完了条件として残す。
+
+#### デプロイ後の停止条件・判定手順
+
+1. 通常HTMLを同一coloで2回取得し、2回目がWorkers Cache HITかつwarm TTFBがbefore 924msより改善。
+2. 同じURLへRSC header付きで取得し、`text/x-component` + `private, no-store`。HTMLと混ざらない。
+3. blog exact URL公開とsnapshot全更新を各1回実走し、purge直後に新内容が返る。
+4. 日次PSI 7点でLCP/TTFB回帰が無いことを確認後、`effect/full|partial|none`を判定する。
+
+#### 今回有効化しないCloudflare設定
+
+- **Speed Brain**: Workerを呼ぶページには適用されない。
+- **Smart Placement**: DBレスでR2は分散配置され、単一origin近傍へ寄せる根拠がない。
+- **Early Hints**: trace上のrender-blocking CSS推定LCP savingsが0ms。
+- **広域Cache Everything rule**: RSCヘッダーをkeyに含めず誤配信するため、Worker側の明示境界を採用。
+- **observability sampling変更**: 非sample requestのtrace overheadは無く、p99原因未特定で変更する根拠がない。
+
+- **判定**: `in-progress`。実装・secret登録済、デプロイと本番after計測が残る。

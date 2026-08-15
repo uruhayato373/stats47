@@ -48,6 +48,7 @@ env:
   R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
   CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
   CLOUDFLARE_R2_BUCKET_NAME: stats47
+  WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
 
 jobs:
   sync:
@@ -89,6 +90,10 @@ jobs:
       - name: 🚀 Push → R2
         if: ${{ inputs.dry_run != true }}
         run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/rakuten
+
+      - name: 🧹 Purge Workers Cache
+        if: ${{ inputs.dry_run != true }}
+        run: npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --all
 
       # ★失敗を検知できるようにする。この cron が黙って死ぬと R2 が古いまま配信され続け、
       #   楽天アプリの期限切れ (2027-03-07) / スコープ変更 / Allowed IP 変更に気づけない。

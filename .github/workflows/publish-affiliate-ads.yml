@@ -36,6 +36,7 @@ env:
   # 反映後の全ゾーンパージ用 (バナーは全ページに埋め込まれるため)
   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
   CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
+  WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
 
 jobs:
   publish-affiliate-ads:
@@ -60,8 +61,10 @@ jobs:
       - name: 💴 Export affiliate-ads snapshot + push to R2
         run: bash .claude/skills/db/sync-snapshots/run.sh --only affiliate-ads
 
-      - name: 🧹 Purge CDN (全ゾーン — バナーは全ページ埋め込みのため)
-        run: npx tsx packages/r2-storage/src/scripts/purge-cache.ts
+      - name: 🧹 Purge CDN + Workers Cache (バナーは全ページ埋め込みのため)
+        run: |
+          npx tsx packages/r2-storage/src/scripts/purge-cache.ts
+          npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --all
 
       - name: ✅ Verify published affiliate-ads post-condition
         # CDN purge後の公開URLをgit TS SSOTとsemantic compare。不一致なら公開成功とみなさない。
