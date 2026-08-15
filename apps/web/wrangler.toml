@@ -1,6 +1,6 @@
 "$schema" = "./node_modules/wrangler/config-schema.json"
 name = "stats47-dev"
-main = ".open-next/worker.js"
+main = "src/worker-cache-gateway.ts"
 compatibility_date = "2026-08-04"
 # node:sqlite はアプリで使わない。依存パッケージからの誤った runtime 解決を防ぐため無効化する。
 compatibility_flags = ["nodejs_compat", "disable_nodejs_sqlite_module"]
@@ -58,6 +58,14 @@ head_sampling_rate = 1
 name = "stats47"
 
 [env.production.cache]
+# default entrypoint は認証・RSC 判定を行う gateway なので、必ず Worker を実行する。
+enabled = false
+
+[env.production.exports.CachedApp]
+type = "worker"
+
+[env.production.exports.CachedApp.cache]
+# gateway が共有可能と判定した GET / HEAD だけを内部 entrypoint でキャッシュする。
 enabled = true
 
 [env.production.vars]
