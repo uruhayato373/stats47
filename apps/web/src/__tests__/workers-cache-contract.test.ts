@@ -77,6 +77,9 @@ describe("Workers Cache invalidation wiring", () => {
     const workflow = readProjectFile(".github/workflows/deploy-workers.yml");
     expect(workflow).toContain('set_secret "WORKER_CACHE_PURGE_SECRET"');
     expect(workflow).toContain('if [ -z "$WORKER_CACHE_PURGE_SECRET" ]');
+    expect(workflow).toContain('main = "src/worker-cache-gateway.ts"');
+    expect(workflow).toContain('from "../.open-next/worker.js"');
+    expect(workflow).not.toContain('main = ".open-next/worker.js"');
   });
 });
 

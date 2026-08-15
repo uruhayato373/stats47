@@ -139,8 +139,14 @@ jobs:
           done
 
           # wrangler.toml設定の確認
-          if ! grep -q 'main = ".open-next/worker.js"' wrangler.toml; then
+          if ! grep -q 'main = "src/worker-cache-gateway.ts"' wrangler.toml; then
             echo "Error: main entry point not configured correctly in wrangler.toml"
+            exit 1
+          fi
+
+          # gateway は生成済みOpenNext workerをproxy経由でbundleする。
+          if ! grep -q 'from "../.open-next/worker.js"' src/open-next-worker-proxy.js; then
+            echo "Error: OpenNext worker proxy is not wired to the generated worker"
             exit 1
           fi
 
