@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "public-assistance-housing-beneficiaries-per-1000",
+  "year": "2023",
+  "unit": "人",
+  "label": "生活保護住宅扶助人員",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/public-assistance-housing-beneficiaries-per-1000/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug dual-income-household-ratio-vs-public-assistance-housing --keys public-assistance-housing-beneficiaries-per-1000 --data-name public-assistance-housing-beneficiaries-per-1000-prefecture-rankings",
+  "fetchedAt": "2026-08-15T14:23:51.839Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

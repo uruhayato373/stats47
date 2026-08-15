@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-14T14:53:30.906Z",
+  "generatedAt": "2026-08-15T14:23:45.368Z",
   "gscWeek": "2026-W32",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
@@ -54,6 +54,42 @@
       "priority": 1
     },
     {
+      "topicKey": "corr-dual-income-household-ratio--public-assistance-housing-beneficiaries-per-1000",
+      "archetype": "B",
+      "metricKeys": [
+        "dual-income-household-ratio",
+        "public-assistance-housing-beneficiaries-per-1000"
+      ],
+      "label": "共働き世帯割合 × 生活保護住宅扶助人員 (r=-0.85)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.819183683115972,
+        "seasonality": 0.3,
+        "surprise": 0.85,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": -0.85,
+        "partialRPopulation": -0.815,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "population",
+          "construction"
+        ],
+        "gscImp": 665,
+        "rankingUrls": [
+          "/ranking/dual-income-household-ratio",
+          "/ranking/public-assistance-housing-beneficiaries-per-1000"
+        ]
+      },
+      "suggestedTitle": "共働き世帯が多い県は生活保護住宅扶助人員が少ない?",
+      "combinedScore": 0.692,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 2
+    },
+    {
       "topicKey": "corr-national-medical-expense-per-person--tuna-consumption-quantity",
       "archetype": "B",
       "metricKeys": [
@@ -85,42 +121,6 @@
       },
       "suggestedTitle": "まぐろが多い県は1人当たりの国民医療費が少ない?",
       "combinedScore": 0.647,
-      "lane": "must-write",
-      "status": "pending",
-      "priority": 2
-    },
-    {
-      "topicKey": "corr-dual-income-household-ratio--rooms-per-dwelling",
-      "archetype": "B",
-      "metricKeys": [
-        "dual-income-household-ratio",
-        "rooms-per-dwelling"
-      ],
-      "label": "共働き世帯割合 × 居住室数 (r=0.88)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.819183683115972,
-        "seasonality": 0,
-        "surprise": 0.878,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": 0.878,
-        "partialRPopulation": 0.795,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "population",
-          "construction"
-        ],
-        "gscImp": 665,
-        "rankingUrls": [
-          "/ranking/dual-income-household-ratio",
-          "/ranking/rooms-per-dwelling"
-        ]
-      },
-      "suggestedTitle": "共働き世帯が多い県は居住室も多い?",
-      "combinedScore": 0.622,
       "lane": "must-write",
       "status": "pending",
       "priority": 3
