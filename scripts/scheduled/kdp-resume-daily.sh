@@ -6,10 +6,16 @@
 #   新規下書きを作れない。審査 (最大 72h) が終わって枠が空いたタイミングは人が張り付けないので、
 #   定期に試行して空いていれば次のバッチを進める。制限中は名指しエラーで即終了する (無害)。
 #
+# ★★ 2026-08-16 以降このジョブは launchd に登録されていない (KDP 出品は手動のみ) ★★
+#   plist を ~/Library/LaunchAgents/ から削除済み。**再登録にはオーナーの新しい明示指示が要る**。
+#   正典: .claude/rules/coconala-product-standards.md §8「実公開を cron / launchd で無人実行しない」
+#   再開する場合: launchctl bootstrap gui/$UID ~/Library/LaunchAgents/com.stats47.kdp-resume-daily.plist
+#   (repo の scripts/scheduled/com.stats47.kdp-resume-daily.plist をコピーしてから)
+#
 # ★公開 (--commit) を含む
-#   オーナーが 2026-08-13 に「32 冊すべてを公開までやり切る」と明示指示済み。
+#   2026-08-13 のオーナー指示「32 冊すべてを公開までやり切る」を根拠に publish まで自動化していたが、
+#   8/16 に手動のみへ方針変更した。この行を無人実行に戻すときは規約 §8 を先に読むこと。
 #   対象は kdp-listings.json の status != listed の書籍だけで、それ以外には触れない。
-#   止めたいとき: launchctl bootout gui/$UID/com.stats47.kdp-resume-daily
 #
 # 安全弁 (スクリプト側): account assert (knownAsin) / verify ゲート (read-back 全項目 PASS のみ公開) /
 #   連続失敗ブレーカ / プロファイル排他 (他の Chromium が使用中なら起動自体を拒否)

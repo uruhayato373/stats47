@@ -319,8 +319,8 @@
       "coverPath": ".local/kindle-books/K-S1-05/v1/cover.jpg",
       "draftId": "A35OGN7O5LSWPY",
       "status": "listed",
-      "asin": null,
-      "publishedAt": "2026-08-13"
+      "asin": "B0HF356WR9",
+      "publishedAt": "2026-08-16"
     },
     "K-S1-06": {
       "id": "K-S1-06",
@@ -766,7 +766,8 @@
       "coverPath": ".local/kindle-books/K-S1-12/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "draftId": "AMH6ZZXN3T35Y"
     },
     "K-S2-01": {
       "id": "K-S2-01",
@@ -828,7 +829,8 @@
       "coverPath": ".local/kindle-books/K-S2-01/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "draftId": "A2UWQYBWVB2439"
     },
     "K-S2-02": {
       "id": "K-S2-02",
