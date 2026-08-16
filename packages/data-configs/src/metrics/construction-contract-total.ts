@@ -52,5 +52,5 @@ export const constructionContractTotal: MetricConfig = {
   },
   "seoTitle": "建設工事請負契約額（合計）ランキング都道府県【2023年】｜1位東京都（1,847,072百万円）",
   "seoDescription": "2023年の建設工事請負契約額（合計）の都道府県別ランキング。1位東京都（1,847,072百万円）、最下位鳥取県（124,808百万円）で14.8倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

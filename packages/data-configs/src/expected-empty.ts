@@ -57,6 +57,33 @@ export const EXPECTED_EMPTY: readonly ExpectedEmptyEntry[] = [
   // ★このエントリを消してよいのは **R2 再生成後**。消すと監査 (i) が赤くなる。
   //   再生成すれば rowCount>0 になり classifyEmptyOutcome が stale-allowlist で
   //   「削除してください」と教えてくれる。
+
+  // 2026-08-16: SSDS の指標コードがカタログから消滅した 2 件。
+  //
+  // 実測: statsDataId 0000010205 の cat01 は現在 59 コードで、config が指定する
+  //   #E0910101 (幼稚園) / #E0910102 (保育所) は 1 件も存在しない。getStatsData も
+  //   STATUS:1「該当データはありません」を返す (同表の実在コード #E0110104 は 1392 行を
+  //   正常返却するので、statsDataId 自体と API 疎通には問題がない)。
+  //   名称に「普及」を含むコードも 59 件中 0 件で、`#E091xxxx` という命名帯自体が
+  //   現行カタログに無い (残っているのは `#E09211` など桁数の異なる別体系)。
+  //
+  // 既存の配信データ (1,664 / 1,615 行) は生きているのでページは正常に見える。
+  // 代替コードが見つかっていないため退役はせず、期限付きで 0 件を許容する。
+  // 期限までに SSDS の改番履歴を追って代替を特定するか、見つからなければ退役へ切り替える。
+  {
+    key: "kindergarten-education-diffusion-rate",
+    reason:
+      "SSDS 0000010205 の cat01 から #E0910101 が消滅 (現行 59 コードに該当なし・getStatsData が STATUS:1)。同表の他コードは正常取得できるため表の廃止ではなく指標コードの改廃",
+    issue: "docs/todo/06_指標バックログ.md#SSDS-EDU-DIFFUSION-CODE-01",
+    until: "2026-11-30",
+  },
+  {
+    key: "nursery-education-diffusion-rate",
+    reason:
+      "SSDS 0000010205 の cat01 から #E0910102 が消滅 (同上)。`#E091xxxx` の命名帯自体が現行カタログに存在しない",
+    issue: "docs/todo/06_指標バックログ.md#SSDS-EDU-DIFFUSION-CODE-01",
+    until: "2026-11-30",
+  },
 ];
 
 /** key (+entity) に対して**有効な** allowlist エントリを返す。期限切れは null */

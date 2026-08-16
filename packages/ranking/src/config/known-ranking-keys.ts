@@ -15,8 +15,8 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-08-05
- * 件数: 2173
+ * 最終生成日: 2026-08-16
+ * 件数: 2164
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -300,15 +300,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "complainant-rate-per-1000",
   "comprehensive-park-count",
   "compulsory-education-school-count-per-100k-6-14",
-  "construction-contract-disaster-recovery",
-  "construction-contract-housing",
-  "construction-contract-port-airport",
-  "construction-contract-river",
-  "construction-contract-road",
-  "construction-contract-sewerage",
-  "construction-contract-total",
   "construction-industry-count",
-  "construction-projects-total",
   "consumer-price-difference-index-clothing-footwear",
   "consumer-price-difference-index-culture-recreation",
   "consumer-price-difference-index-education",
@@ -1227,7 +1219,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "newspaper-consumption-expenditure",
   "nhk-fee-consumption-expenditure",
   "night-soil-treatment-population-ratio",
-  "noise-regulation-rate",
   "non-agricultural-income-ratio",
   "non-car-vehicle-insurance-consumption-expenditure",
   "non-car-vehicle-maintenance-consumption-expenditure",

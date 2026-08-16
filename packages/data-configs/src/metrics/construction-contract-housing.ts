@@ -52,5 +52,5 @@ export const constructionContractHousing: MetricConfig = {
   },
   "seoTitle": "住宅・宿舎工事請負契約額ランキング都道府県【2023年】｜1位東京都（101,407百万円）",
   "seoDescription": "2023年の住宅・宿舎工事請負契約額の都道府県別ランキング。1位東京都（101,407百万円）、最下位山口県（734百万円）で138.2倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

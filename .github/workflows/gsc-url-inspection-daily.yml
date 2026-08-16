@@ -23,10 +23,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90  # 500 URL × ~7s = 60 分、安全マージン込み
     steps:
-      - name: 🧰 Checkout main
+      - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: main
+          ref: develop
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
@@ -72,8 +72,9 @@ jobs:
             # --autostash: 選択 add (state dir のみ) の後に working tree に残る未ステージの
             # 変更 (npm ci 等の副作用) が rebase を止める事象 (2026-07-18 run 29622319874) を回避する。
             # commit 済みの snapshot と resubmit 側は互いに素なので rebase は常にクリーン。
-            git pull --rebase --autostash origin main
-            git push origin main
+            git pull --rebase --autostash origin develop
+            # 投稿/計測 state は develop へ commit-back する (main 直推しは branch-workflow 違反。2026-08-16 是正)
+            git push origin develop
           fi
 
       - name: 💬 Comment summary on parent issue #115

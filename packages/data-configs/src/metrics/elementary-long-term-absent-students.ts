@@ -15,7 +15,6 @@ export const elementaryLongTermAbsentStudents: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city"
   ],
   "years": "all",
   "yearFormat": "fiscal",

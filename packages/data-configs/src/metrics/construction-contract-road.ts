@@ -52,5 +52,5 @@ export const constructionContractRoad: MetricConfig = {
   },
   "seoTitle": "道路工事請負契約額ランキング都道府県【2023年】｜1位北海道（413,133百万円）",
   "seoDescription": "2023年の道路工事請負契約額の都道府県別ランキング。1位北海道（413,133百万円）、最下位香川県（44,825百万円）で9.2倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

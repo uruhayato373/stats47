@@ -8,11 +8,21 @@ name: 🗾 Migration-flow Weekly Deep Dive
 #
 # 関連:
 # - docs/01_技術設計/06_自動化インベントリ.md / .claude/rules/sns-content-standards.md
+#
+# ★★ 2026-08-16: schedule を停止した (オーナー判断) ★★
+#   2026-05-25 から 12 回連続で失敗していた。原因は「📱 Post to Instagram + X」step が読む
+#   .claude/skills/sns/post-instagram/post-instagram.ts:86-88 が `.local/r2/sns/...` という
+#   **gitignored なローカル成果物**を existsSync で要求すること (.gitignore:140)。
+#   この workflow は checkout しかせず R2 から media を取る step が無いので、clean checkout の
+#   CI では構造的に必ず失敗する。県名だけが週ローテーションで変わり同一エラーを繰り返していた。
+#
+#   投稿を再開する場合は、成功している post-instagram-scheduled.yml と同じ経路
+#   (公開 R2 URL https://storage.stats47.jp を IG Graph API に URL のまま渡す) へ寄せるか、
+#   post step の前に R2 から pull する step を足すこと。**未修正のままなので dispatch でも
+#   Post step は失敗する** (schedule を止めたのは無言の連続失敗を止めるため)。
 
 on:
-  schedule:
-    # 毎週月曜 12:00 JST = 03:00 UTC
-    - cron: "0 3 * * 1"
+  # schedule は 2026-08-16 に削除 (上記)。再開は設計欠陥の修正とセットで。
   workflow_dispatch:
     inputs:
       pref_code:
@@ -36,10 +46,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: 🧰 Checkout main
+      - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: main
+          ref: develop
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
@@ -117,5 +127,8 @@ jobs:
             echo "No changes"
           else
             git commit -m "chore(sns): migration-flow weekly ${{ steps.pick.outputs.slug }} [skip ci]"
-            git push origin main
+            # 投稿台帳は develop へ commit-back する (main 直推しは branch-workflow 違反・
+            # 投稿のたびに main/develop が分岐する。main へは次の PR で乗る。2026-08-16 是正)
+            git pull --rebase --autostash origin develop
+            git push origin develop
           fi

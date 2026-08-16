@@ -52,5 +52,5 @@ export const constructionContractSewerage: MetricConfig = {
   },
   "seoTitle": "下水道工事請負契約額ランキング都道府県【2023年】｜1位大阪府（202,583百万円）",
   "seoDescription": "2023年の下水道工事請負契約額の都道府県別ランキング。1位大阪府（202,583百万円）、最下位徳島県（2,312百万円）で87.6倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

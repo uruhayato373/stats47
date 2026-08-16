@@ -14,7 +14,6 @@ export const kindergartenTeachers: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city"
   ],
   "years": "all",
   "yearFormat": "fiscal",

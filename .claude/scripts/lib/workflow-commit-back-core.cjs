@@ -41,6 +41,32 @@ function findPushWithoutPull(runScript) {
   return violations;
 }
 
+/**
+ * workflow が `git push origin main` していないかを見る。
+ *
+ * 2026-08-16 是正: SNS 系 cron 4 本 (migration-flow ×3 + post-instagram-scheduled) が
+ * `ref: main` を checkout して投稿台帳を main へ直接 push しており、post-instagram は
+ * 1 日 3 回走るため**投稿のたびに main/develop が分岐**していた。手動同期が要る運用は続かない。
+ *
+ * branch-workflow.md の規約は「main に入るものは必ず develop を先に通す」で、main へ乗る
+ * 唯一の経路は develop→main の PR。cron の commit-back は develop 宛にする。
+ */
+function findPushToMain(runScript) {
+  if (typeof runScript !== "string" || !runScript.includes("git push")) {
+    return [];
+  }
+  const violations = [];
+  runScript.split("\n").forEach((line, index) => {
+    const stripped = line.replace(/^\s*#.*$/, "");
+    const push = stripped.match(/\bgit\s+push\s+origin\s+(\S+)/);
+    if (!push || /--dry-run/.test(stripped)) return;
+    if (push[1] === "main") {
+      violations.push({ line: index + 1, ref: push[1], text: line.trim() });
+    }
+  });
+  return violations;
+}
+
 /** workflow 全体 (parse 済み) を走査して push-without-pull を集める。 */
 function auditWorkflowPushes(workflow) {
   const out = [];
@@ -119,8 +145,25 @@ function auditRatchetCommitContract(workflow) {
   return problems;
 }
 
+/** workflow 全体を走査して main への直接 push を集める。 */
+function auditWorkflowMainPushes(workflow) {
+  const out = [];
+  const jobs = (workflow && workflow.jobs) || {};
+  for (const [jobName, job] of Object.entries(jobs)) {
+    for (const step of (job && job.steps) || []) {
+      if (!step || typeof step.run !== "string") continue;
+      for (const v of findPushToMain(step.run)) {
+        out.push({ job: jobName, step: step.name || "(unnamed)", ...v });
+      }
+    }
+  }
+  return out;
+}
+
 module.exports = {
   findPushWithoutPull,
+  findPushToMain,
   auditWorkflowPushes,
+  auditWorkflowMainPushes,
   auditRatchetCommitContract,
 };

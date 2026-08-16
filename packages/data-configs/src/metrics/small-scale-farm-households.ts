@@ -15,7 +15,6 @@ export const smallScaleFarmHouseholds: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city"
   ],
   "years": "all",
   "yearFormat": "fiscal",

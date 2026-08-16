@@ -14,7 +14,6 @@ export const juniorHighSchoolClasses: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city"
   ],
   "years": "all",
   "yearFormat": "fiscal",

@@ -14,7 +14,6 @@ export const earmarkedTaxLocal: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city"
   ],
   "years": "all",
   "yearFormat": "fiscal",

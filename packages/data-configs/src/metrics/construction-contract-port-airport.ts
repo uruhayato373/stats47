@@ -52,5 +52,5 @@ export const constructionContractPortAirport: MetricConfig = {
   },
   "seoTitle": "港湾・空港工事請負契約額ランキング都道府県【2023年】｜1位東京都（158,539百万円）",
   "seoDescription": "2023年の港湾・空港工事請負契約額の都道府県別ランキング。1位東京都（158,539百万円）、最下位奈良県（0百万円）で地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

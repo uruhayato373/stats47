@@ -8,7 +8,9 @@ const yaml = require('js-yaml');
 
 const {
   findPushWithoutPull,
+  findPushToMain,
   auditWorkflowPushes,
+  auditWorkflowMainPushes,
   auditRatchetCommitContract,
 } = require('../workflow-commit-back-core.cjs');
 
@@ -53,6 +55,21 @@ test('ラチェットを持つ workflow は commit を止めず、赤は verdict
   assert.deepEqual(problems, [], `\n${problems.join('\n')}`);
 });
 
+test('どの workflow も main へ直接 push しない (main へは PR 経由のみ)', () => {
+  const offenders = [];
+  for (const { file, doc } of loadWorkflows()) {
+    for (const v of auditWorkflowMainPushes(doc)) {
+      offenders.push(`${file}: ${v.step} — ${v.text}`);
+    }
+  }
+  assert.deepEqual(
+    offenders,
+    [],
+    `cron が main へ直接 push すると投稿/更新のたびに main/develop が分岐する ` +
+      `(branch-workflow.md「main に入るものは必ず develop を先に通す」):\n${offenders.join('\n')}`
+  );
+});
+
 test('blog-remediation-daily がラチェット 3 種と verdict を保持している', () => {
   const doc = yaml.load(
     fs.readFileSync(path.join(WORKFLOW_DIR, 'blog-remediation-daily.yml'), 'utf8')
@@ -80,6 +97,22 @@ test('[mutation] --autostash 付きの pull も pull として認める', () => 
 
 test('[mutation] --dry-run の push は対象外', () => {
   assert.equal(findPushWithoutPull('git push origin develop --dry-run\n').length, 0);
+});
+
+test('[mutation] main への push を検出する (2026-08-16 に SNS cron 4 本で実在した形)', () => {
+  const bad = 'git commit -m "chore(sns): mark posted"\ngit push origin main\n';
+  const found = findPushToMain(bad);
+  assert.equal(found.length, 1);
+  assert.equal(found[0].ref, 'main');
+});
+
+test('[mutation] develop への push は main 検査に引っかからない', () => {
+  const good = 'git pull --rebase origin develop\ngit push origin develop\n';
+  assert.equal(findPushToMain(good).length, 0);
+});
+
+test('[mutation] コメントアウトされた main push は検出しない', () => {
+  assert.equal(findPushToMain('# git push origin main\n').length, 0);
 });
 
 test('[mutation] コメント行の pull は pull と認めない', () => {

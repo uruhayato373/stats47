@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "tatami-per-dwelling-owner",
+  "year": "2023",
+  "unit": "畳",
+  "label": "持ち家住宅の居住室の畳数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/tatami-per-dwelling-owner/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug dual-income-household-ratio-vs-tatami-per-dwelling-owner --keys tatami-per-dwelling-owner --data-name tatami-per-dwelling-owner-prefecture-rankings",
+  "fetchedAt": "2026-08-16T14:24:07.396Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

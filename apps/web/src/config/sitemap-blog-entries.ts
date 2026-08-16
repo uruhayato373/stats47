@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-08-15
- * 件数: blog 428 / tag 60 / survey 73
+ * 最終生成日: 2026-08-16
+ * 件数: blog 429 / tag 60 / survey 73
  */
 
 export interface SitemapBlogEntry {
@@ -118,6 +118,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "dual-income-household-ratio-vs-floor-area-per-dwelling-owner", lastModified: "2026-08-03" },
   { slug: "dual-income-household-ratio-vs-public-assistance-housing", lastModified: "2026-08-15" },
   { slug: "dual-income-household-ratio-vs-rooms-per-dwelling", lastModified: "2026-08-14" },
+  { slug: "dual-income-household-ratio-vs-tatami-per-dwelling-owner", lastModified: "2026-08-16" },
   { slug: "dual-income-reversal", lastModified: "2026-03-09" },
   { slug: "earthquake-insurance-prefecture-gap", lastModified: "2026-05-16" },
   { slug: "education-cost-per-child", lastModified: "2026-03-09" },

@@ -113,6 +113,16 @@ jobs:
         run: |
           npm run check:file-url-guard
           node --test .claude/scripts/lib/__tests__/check-file-url-guard.test.cjs
+
+      - name: 📁 import.meta.dirname Guard
+        # .ts は tsx が CJS 解決するため import.meta.dirname は undefined になる
+        # (repo の package.json はどれも "type": "module" を持たない)。フォールバック無しで
+        # 書くと path.resolve が ERR_INVALID_ARG_TYPE で落ちる。2026-08-16 に
+        # purge-worker-cache.ts がこれで blog-auto-publish と楽天同期の
+        # Workers Cache purge を失敗させていた。
+        run: |
+          npm run check:import-meta-dirname
+          node --test .claude/scripts/lib/__tests__/check-import-meta-dirname-guard.test.cjs
         continue-on-error: false
 
       - name: 📝 ESLint Check

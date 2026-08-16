@@ -14,7 +14,6 @@ export const ordinaryTaxLocal: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city"
   ],
   "years": "all",
   "yearFormat": "fiscal",

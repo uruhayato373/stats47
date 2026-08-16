@@ -52,5 +52,5 @@ export const constructionContractRiver: MetricConfig = {
   },
   "seoTitle": "河川工事請負契約額ランキング都道府県【2023年】｜1位北海道（91,329百万円）",
   "seoDescription": "2023年の河川工事請負契約額の都道府県別ランキング。1位北海道（91,329百万円）、最下位沖縄県（2,846百万円）で32.1倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

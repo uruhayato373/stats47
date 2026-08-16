@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "dual-income-household-ratio",
+  "pair": "tatami-per-dwelling-owner",
+  "pearsonR": 0.8434101800321504,
+  "partialRPopulation": 0.7750258191579016,
+  "unit": "％ × 畳",
+  "label": "共働き世帯割合 と 持ち家住宅の居住室の畳数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/dual-income-household-ratio.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug dual-income-household-ratio-vs-tatami-per-dwelling-owner --base dual-income-household-ratio --pair tatami-per-dwelling-owner --data-name dual-income-household-ratio--tatami-per-dwelling-owner"
+}

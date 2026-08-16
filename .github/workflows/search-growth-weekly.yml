@@ -43,6 +43,14 @@ jobs:
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "20"
+          cache: "npm"
+
+      # ★2026-08-16 追加: 依存を入れずに node --test していたため、依存を import する
+      # テストが 1 本増えた時点で落ちるようになった (8/9 から 2 回連続失敗)。
+      # 実際 W32 で追加された metrics/__tests__/adsense-inventory.test.mjs が googleapis を
+      # import し、node_modules 不在でファイルごと読み込み失敗していた。
+      - name: 📦 Install dependencies
+        run: npm ci
 
       # stale artifact guard: fetch-metrics-weekly が失敗/未実行のまま
       # workflow_run・cron で発火した場合、古い snapshot から candidate を黙って再構築しない。

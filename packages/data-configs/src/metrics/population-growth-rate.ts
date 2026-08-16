@@ -14,7 +14,6 @@ export const populationGrowthRate: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city",
   ],
   "years": {
     "years": [

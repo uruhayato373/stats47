@@ -117,6 +117,21 @@ if [ -n "$STAGED_JS" ]; then
   fi
 fi
 
+# 2.1c import.meta.dirname ガード
+# .ts は tsx が CJS 解決するため import.meta.dirname は undefined になる
+# (repo の package.json はどれも "type": "module" を持たない)。フォールバック無しだと
+# path.resolve が ERR_INVALID_ARG_TYPE で落ちる。2026-08-16 に purge-worker-cache.ts が
+# これで blog-auto-publish と楽天同期の Workers Cache purge を失敗させていた。
+if [ -n "$STAGED_JS" ]; then
+  echo -e "${GREEN}📁 import.meta.dirname ガード...${NC}"
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-import-meta-dirname-guard.cjs"; then
+    echo -e "${RED}❌ bare な import.meta.dirname です。'import.meta.dirname ?? __dirname' と書いてください。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  else
+    echo -e "${GREEN}✅ import.meta.dirname ガード成功${NC}"
+  fi
+fi
+
 # 2.0.1 CI の Static Gates と同じ 3 ゲートを先行実行する (2026-08-12 追加)
 #
 # ★なぜ足したか: この 3 つは CI (Static Gates) にだけあって pre-commit に無く、

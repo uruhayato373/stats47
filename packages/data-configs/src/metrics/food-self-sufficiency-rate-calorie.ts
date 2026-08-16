@@ -14,7 +14,6 @@ export const foodSelfSufficiencyRateCalorie: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city"
   ],
   "years": "all",
   "yearFormat": "fiscal",

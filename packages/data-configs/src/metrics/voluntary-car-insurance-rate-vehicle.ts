@@ -15,7 +15,6 @@ export const voluntaryCarInsuranceRateVehicle: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city"
   ],
   "years": "all",
   "yearFormat": "fiscal",
