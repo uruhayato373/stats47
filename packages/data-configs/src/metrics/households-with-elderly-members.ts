@@ -14,7 +14,6 @@ export const householdsWithElderlyMembers: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city"
   ],
   "years": "all",
   "yearFormat": "fiscal",

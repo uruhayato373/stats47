@@ -35,5 +35,5 @@ export const noiseRegulationRate: MetricConfig = {
   },
   "seoTitle": "騒音規制法地域指定率ランキング都道府県【2016年】｜1位鹿児島県（100％）",
   "seoDescription": "2016年の騒音規制法地域指定率の都道府県別ランキング。1位鹿児島県（100％）、最下位青森県（20％）で5.0倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

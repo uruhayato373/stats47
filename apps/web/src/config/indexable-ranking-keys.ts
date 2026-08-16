@@ -13,6 +13,12 @@
  * 閾値: Impressions ≥ 1（過去 28 日）
  *
  * 再生成: node .claude/scripts/gsc/build-indexable-ranking-keys.cjs
+ *   ★2026-08-16 時点でこのスクリプトは実在しない (docstring だけが残っている)。
+ *   そのため退役キーの除去は手動で行った。再生成が要るときはスクリプトから作り直すこと。
+ *
+ * 更新日: 2026-08-16 — e-Stat 側で統計表が廃止された noise-regulation-rate を除去。
+ *   残すと「INDEXABLE なのに GONE (410)」になり ranking-key-consistency.test.ts の
+ *   検査 [C][D] が落ちる (実際に落ちて気づいた)。
  */
 export const INDEXABLE_RANKING_KEYS = new Set<string>([
   "actual-income-worker-households-per-month",
@@ -181,7 +187,6 @@ export const INDEXABLE_RANKING_KEYS = new Set<string>([
   "necktie-consumption-quantity",
   "neighborhood-park-count",
   "newspaper-consumption-expenditure",
-  "noise-regulation-rate",
   "nuclear-power-plant-count",
   "number-of-hotel-rooms",
   "nurses-per-100k-population",

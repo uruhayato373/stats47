@@ -37,8 +37,30 @@
  *   ★2026-06-16 の同種作業で 56 件の誤検知 (KNOWN 登録済 + isActive + R2 実データありを GONE 化) が
  *     発生したため、今回は上記 3 条件を機械検証してから追加した (要注意 0 件)。
  *   entities:["city"] の isActive 4 件 (real-public-debt-service-ratio-city 等) は別問題として除外した）
+ * 更新日: 2026-08-16（e-Stat の統計表そのものが廃止された 9 件を退役。data-refresh が 8/5 に
+ *   STATUS=300「データは存在しません」で落ちていた発生源で、後継表の有無を e-Stat カタログ全件
+ *   走査で確認したうえでの判断:
+ *   construction-contract-* 8 件 (旧 statsDataId 0003458635 / 建設工事受注動態統計調査) =
+ *     2021 年の統計不正を受けた調査再設計で「都道府県 × 工事種類」の軸が消滅した。現行カタログの
+ *     統計コード 00600130 配下 4 系統 (公共工事着工 / 民間土木工事着工 / 建設工事施工 /
+ *     大手 50 社) をメタまで実測したが、いずれも当該軸を持たない (大手 50 社は都道府県軸自体なし)。
+ *   noise-regulation-rate (旧 0003368792 / 騒音規制法施行状況調査) = 調査自体が e-Stat カタログから
+ *     消滅。searchWord「騒音規制法施行状況調査」「騒音・振動規制法」で 0 件、「騒音」386 件を
+ *     走査しても該当なし。
+ *   代替候補 (建設は「元請完成工事高」= 業種別 × 都道府県別の別軸) は概念が変わるため
+ *   docs/todo/06_指標バックログ.md へ記録し、採否は別途判断する）
  */
 export const GONE_RANKING_KEYS = new Set([
+  // 2026-08-16 退役 (e-Stat 側で統計表が廃止・後継なし)
+  "construction-contract-total",
+  "construction-contract-housing",
+  "construction-contract-road",
+  "construction-contract-river",
+  "construction-contract-sewerage",
+  "construction-contract-port-airport",
+  "construction-contract-disaster-recovery",
+  "construction-projects-total",
+  "noise-regulation-rate",
   "ssdse-c-lb072003",
   "ssdse-c-lb080011",
   "ssdse-c-lb121202",

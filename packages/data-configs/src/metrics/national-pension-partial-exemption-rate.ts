@@ -14,7 +14,6 @@ export const nationalPensionPartialExemptionRate: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city"
   ],
   "years": "all",
   "yearFormat": "fiscal",

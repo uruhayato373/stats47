@@ -51,5 +51,5 @@ export const constructionProjectsTotal: MetricConfig = {
   },
   "seoTitle": "建設工事件数（合計）ランキング都道府県【2023年】｜1位北海道（16,266件）",
   "seoDescription": "2023年の建設工事件数（合計）の都道府県別ランキング。1位北海道（16,266件）、最下位奈良県（1,258件）で12.9倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

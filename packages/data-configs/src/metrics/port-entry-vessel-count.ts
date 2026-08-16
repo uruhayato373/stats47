@@ -17,8 +17,8 @@ export const portEntryVesselCount: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2018,
-    "to": 2018,
+    "from": 2003,
+    "to": 2003,
   },
   "yearFormat": "fiscal",
   "visualization": {

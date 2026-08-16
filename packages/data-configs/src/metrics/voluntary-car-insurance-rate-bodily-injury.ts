@@ -15,7 +15,6 @@ export const voluntaryCarInsuranceRateBodilyInjury: MetricConfig = {
   },
   "entities": [
     "prefecture",
-    "city"
   ],
   "years": "all",
   "yearFormat": "fiscal",

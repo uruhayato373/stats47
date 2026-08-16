@@ -324,7 +324,6 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "fire-department-water-count-per-100-thousand-people", // 消防水利数 — 本文 1836字 / [insights,regionalAnalysis,faq]
     "renovation-rate", // リフォーム工事実施率 — 本文 1832字 / [insights,regionalAnalysis,faq]
     "criminal-recognition-count", // 刑法犯認知件数 — 本文 1827字 / [insights,regionalAnalysis,faq]
-    "construction-contract-disaster-recovery", // 災害復旧工事請負契約額 — 本文 1824字 / [insights,regionalAnalysis,faq]
     "room-aircon-ownership-multi-person-households-per-1000", // ルームエアコン所有数量 — 本文 1824字 / [insights,regionalAnalysis,faq]
     "final-energy-consumption-per-capita", // 1人当たり最終エネルギー消費量 — 本文 1806字 / [insights,regionalAnalysis,faq]
     "city-gas-meter-count", // 都市ガスメーター取付数 — 本文 1797字 / [insights,regionalAnalysis,faq]

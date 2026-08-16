@@ -52,5 +52,5 @@ export const constructionContractDisasterRecovery: MetricConfig = {
   },
   "seoTitle": "災害復旧工事請負契約額ランキング都道府県【2023年】｜1位福島県（95,969百万円）",
   "seoDescription": "2023年の災害復旧工事請負契約額の都道府県別ランキング。1位福島県（95,969百万円）、最下位香川県（1,058百万円）で90.7倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };
