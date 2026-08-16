@@ -181,7 +181,7 @@ jobs:
       - name: ✍️ Write and review articles with Claude Code
         id: claude
         if: ${{ env.DRY_RUN != 'true' && steps.prepare.outputs.count != '0' }}
-        uses: anthropics/claude-code-base-action@e257d767763882223c40b615cbbe0d26ca75a981 # Claude Code v2.1.220 (base-action main 2026-08-02)
+        uses: anthropics/claude-code-base-action@e5758aabe98b80fec1bcbd4a51fe2e1f8935dfc3 # Claude Code v2.1.220 (base-action main 2026-08-02)
         env:
           NODE_VERSION: "20.x"
         with:
