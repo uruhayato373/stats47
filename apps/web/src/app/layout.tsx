@@ -39,7 +39,10 @@ import { CookieConsentBanner } from "@/lib/analytics/components/CookieConsentBan
 import { PageViewTracker } from "@/lib/analytics/components/PageViewTracker";
 import { GoogleAnalytics } from "@/lib/analytics/GoogleAnalytics";
 import { getRequiredBaseUrl } from "@/lib/env";
-import { AdSenseScript } from "@/lib/google-adsense";
+import {
+  ADSENSE_DISPLAY_ENABLED,
+  AdSenseScript,
+} from "@/lib/google-adsense";
 import { generateRootMetadata } from "@/lib/metadata/root-metadata";
 import { TopLoaderWrapper } from "@/lib/next-top-loader/TopLoaderWrapper";
 import { generateWebSiteStructuredDataScripts } from "@/lib/structured-data/scripts";
@@ -99,13 +102,17 @@ export default function RootLayout({
           href="https://storage.stats47.jp"
           crossOrigin="anonymous"
         />
-        {/* Google AdSense への preconnect（広告スクリプトの TLS/DNS 事前確立） */}
-        <link
-          rel="preconnect"
-          href="https://pagead2.googlesyndication.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        {ADSENSE_DISPLAY_ENABLED && (
+          <>
+            {/* Google AdSense への preconnect（広告スクリプトの TLS/DNS 事前確立） */}
+            <link
+              rel="preconnect"
+              href="https://pagead2.googlesyndication.com"
+              crossOrigin="anonymous"
+            />
+            <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+          </>
+        )}
       </head>
       <body
         className="antialiased"
@@ -126,8 +133,8 @@ export default function RootLayout({
         />
         {/* Google Analytics 4 スクリプト */}
         <GoogleAnalytics />
-        {/* Google AdSense スクリプト */}
-        <AdSenseScript />
+        {/* Google AdSense スクリプト（全体停止時はclient component自体を生成しない） */}
+        {ADSENSE_DISPLAY_ENABLED && <AdSenseScript />}
         {/* A8.net リンクマネージャー（通常リンクをアフィリエイトリンクに自動変換） */}
         <A8LinkManager />
         {/* ページビュートラッカー（ルート変更を検知して自動トラッキング） */}

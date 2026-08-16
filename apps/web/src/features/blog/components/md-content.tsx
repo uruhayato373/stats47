@@ -26,7 +26,11 @@ import { AffiliateTextAdList } from "@/features/ads/components/AffiliateTextAdLi
 import type { AffiliateCategory } from "@/features/ads/constants/affiliate-category";
 import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "@/features/ads/constants/manual-ad-policy";
 
-import { AdSenseAd, BLOG_ARTICLE_INLINE } from "@/lib/google-adsense";
+import {
+    ADSENSE_DISPLAY_ENABLED,
+    AdSenseAd,
+    BLOG_ARTICLE_INLINE,
+} from "@/lib/google-adsense";
 
 import { buildHeadingSlug } from "../lib/heading-slug";
 // ★ A/B の共有定義は client 境界の外に置く (server component からも呼ぶため)。
@@ -269,15 +273,16 @@ function makeMdComponents(
 
         // モバイルでは手置き枠を描画しない (2026-08-04)。
         // 理由と実測は features/ads/constants/manual-ad-policy.ts を参照。
-        "ad-slot": () => (
-            <div className={`${MANUAL_AD_DESKTOP_ONLY_CLASS} my-8 not-prose`}>
-                <AdSenseAd
-                    format={BLOG_ARTICLE_INLINE.format}
-                    slotId={BLOG_ARTICLE_INLINE.slotId}
-                    showLabel={false}
-                />
-            </div>
-        ),
+        "ad-slot": () =>
+            ADSENSE_DISPLAY_ENABLED ? (
+                <div className={`${MANUAL_AD_DESKTOP_ONLY_CLASS} my-8 not-prose`}>
+                    <AdSenseAd
+                        format={BLOG_ARTICLE_INLINE.format}
+                        slotId={BLOG_ARTICLE_INLINE.slotId}
+                        showLabel={false}
+                    />
+                </div>
+            ) : null,
 
         "data-source": ({ url, label, year, note }: ComponentProps & { url?: string; label?: string; year?: string; note?: string }) => (
             <span className="-mt-1 mb-6 flex justify-end not-prose">
@@ -600,7 +605,7 @@ export function MDContent({
                 {processed}
             </ReactMarkdown>
             {/* 広告: 記事末尾。手動 <ad-slot> 未設置記事のみ（injectAdSlots の中盤 2 枠に加えて末尾 1 枠）。 */}
-            {!source.includes("<ad-slot") && (
+            {ADSENSE_DISPLAY_ENABLED && !source.includes("<ad-slot") && (
                 <div className="my-8 not-prose">
                     <AdSenseAd
                         format={BLOG_ARTICLE_INLINE.format}

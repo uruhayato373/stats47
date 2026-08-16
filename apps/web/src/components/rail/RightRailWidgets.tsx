@@ -6,7 +6,11 @@ import {
   selectPromoBannerIndexForRanking,
 } from "@/features/ads";
 
-import { RANKING_PAGE_SIDEBAR, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
+import {
+  ADSENSE_DISPLAY_ENABLED,
+  RANKING_PAGE_SIDEBAR,
+  RANKING_SIDEBAR_TOP,
+} from "@/lib/google-adsense";
 
 interface RightRailWidgetsProps {
   /** 上部に挿入する追加 widget (関連ランキング・関連記事など) */
@@ -48,7 +52,8 @@ export async function RightRailWidgets({
   promoBannerIndex = selectPromoBannerIndexForRanking(),
 }: RightRailWidgetsProps) {
   const hasContent = !!topWidgets || !!midWidgets || !!bottomWidgets;
-  const hasPromoOrAds = showPromoBanner || showTopAd || showBottomAd;
+  const hasAdsense = ADSENSE_DISPLAY_ENABLED && (showTopAd || showBottomAd);
+  const hasPromoOrAds = showPromoBanner || hasAdsense;
 
   return (
     <div className="flex flex-col gap-3">
@@ -65,9 +70,13 @@ export async function RightRailWidgets({
       {/* PR は ASP 登録済みの画像バナーだけを表示する */}
       {showPromoBanner && <SidebarPromoBanner index={promoBannerIndex} />}
 
-      {/* AdSense（収益枠は維持・最下部）。RailAdSlot に統一 */}
-      {showTopAd && <RailAdSlot slot={RANKING_SIDEBAR_TOP} />}
-      {showBottomAd && <RailAdSlot slot={RANKING_PAGE_SIDEBAR} />}
+      {/* AdSense（一時停止中は枠・余白とも生成しない）。RailAdSlot に統一 */}
+      {ADSENSE_DISPLAY_ENABLED && showTopAd && (
+        <RailAdSlot slot={RANKING_SIDEBAR_TOP} />
+      )}
+      {ADSENSE_DISPLAY_ENABLED && showBottomAd && (
+        <RailAdSlot slot={RANKING_PAGE_SIDEBAR} />
+      )}
     </div>
   );
 }

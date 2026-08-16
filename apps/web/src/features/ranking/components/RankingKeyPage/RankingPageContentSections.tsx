@@ -10,6 +10,7 @@ import {
 } from "@/features/ranking";
 
 import {
+    ADSENSE_DISPLAY_ENABLED,
     AdSenseAd,
     RANKING_PAGE_FOOTER,
     RANKING_INCONTENT_MOBILE,
@@ -81,12 +82,14 @@ export function RankingPageContentSections({
 
             {sections.insights}
 
-            <div className="lg:hidden">
-                <AdSenseAd
-                    format={RANKING_INCONTENT_MOBILE.format}
-                    slotId={RANKING_INCONTENT_MOBILE.slotId}
-                />
-            </div>
+            {ADSENSE_DISPLAY_ENABLED && (
+                <div className="lg:hidden">
+                    <AdSenseAd
+                        format={RANKING_INCONTENT_MOBILE.format}
+                        slotId={RANKING_INCONTENT_MOBILE.slotId}
+                    />
+                </div>
+            )}
 
             {sections.faq}
             {sections.regionalAnalysis}
@@ -106,10 +109,12 @@ export function RankingPageContentSections({
 
             {sections.funnelCta}
 
-            <AdSenseAd
-                format={RANKING_PAGE_FOOTER.format}
-                slotId={RANKING_PAGE_FOOTER.slotId}
-            />
+            {ADSENSE_DISPLAY_ENABLED && (
+                <AdSenseAd
+                    format={RANKING_PAGE_FOOTER.format}
+                    slotId={RANKING_PAGE_FOOTER.slotId}
+                />
+            )}
 
             {sections.nativeAffiliate}
             {sections.relatedRankings}

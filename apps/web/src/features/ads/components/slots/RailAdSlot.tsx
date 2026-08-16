@@ -1,6 +1,10 @@
 import { SurfaceCard } from "@/components/surface";
 
-import { AdSenseAd, type AdSlotConfig } from "@/lib/google-adsense";
+import {
+  ADSENSE_DISPLAY_ENABLED,
+  AdSenseAd,
+  type AdSlotConfig,
+} from "@/lib/google-adsense";
 
 interface RailAdSlotProps {
   /** 表示するスロット定数（slotId が空文字なら描画しない） */
@@ -19,7 +23,7 @@ interface RailAdSlotProps {
  * (`.claude/rules/ui-components.md` の寸法メモ)。
  */
 export function RailAdSlot({ slot }: RailAdSlotProps) {
-  if (!slot.slotId) return null;
+  if (!ADSENSE_DISPLAY_ENABLED || !slot.slotId) return null;
   return (
     <SurfaceCard className="p-0">
       <div className="border-b border-border px-4 py-3">

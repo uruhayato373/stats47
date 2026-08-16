@@ -29,7 +29,10 @@ import {
 } from '@/features/home-portal';
 import { FeaturedRankings } from '@/features/ranking/featured.server';
 
-import { RAIL_RECT } from '@/lib/google-adsense';
+import {
+  ADSENSE_DISPLAY_ENABLED,
+  RAIL_RECT,
+} from '@/lib/google-adsense';
 
 /**
  * 動的レンダリング（ランタイム SSR）を強制する。
@@ -146,9 +149,11 @@ export default async function HomePage() {
               }
             />
             <PortalCategoryGrid variant="sidebar" />
-            <div className="mt-6">
-              <RailAdSlot slot={RAIL_RECT} />
-            </div>
+            {ADSENSE_DISPLAY_ENABLED && (
+              <div className="mt-6">
+                <RailAdSlot slot={RAIL_RECT} />
+              </div>
+            )}
             {/* ★ 2026-07-28: home はアフィリエイト枠がゼロで AdSense のみだった。
                 vertical 解決の手掛かりが無いページなのでハウス枠 (vertical 非依存) を置く。 */}
             <div className="mt-4">

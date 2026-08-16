@@ -1,6 +1,10 @@
 import { AreaBannerAd, FurusatoNozeiCard } from "@/features/ads/server";
 
-import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+import {
+  ADSENSE_DISPLAY_ENABLED,
+  AdSenseAd,
+  CONTENT_FOOTER,
+} from "@/lib/google-adsense";
 
 import { CitiesNavCard } from "./CitiesNavCard";
 
@@ -24,10 +28,11 @@ export function CityPageFooter({
       />
       <AreaBannerAd />
       <FurusatoNozeiCard areaCode={areaCode} />
-      <div className="mt-8">
-        <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
-      </div>
+      {ADSENSE_DISPLAY_ENABLED && (
+        <div className="mt-8">
+          <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
+        </div>
+      )}
     </>
   );
 }
-

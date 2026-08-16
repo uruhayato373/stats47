@@ -1,6 +1,7 @@
 import { SurfaceCard } from "@/components/surface";
 
 import {
+  ADSENSE_DISPLAY_ENABLED,
   RANKING_PAGE_FOOTER,
   RANKING_PAGE_TABLE_SIDE,
 } from "@/lib/google-adsense";
@@ -135,6 +136,8 @@ export async function AffiliateAdSlot({
   }
 
   // 3. AdSense フォールバック
+  if (!ADSENSE_DISPLAY_ENABLED) return null;
+
   const adSlot =
     position === "footer" ? RANKING_PAGE_FOOTER : RANKING_PAGE_TABLE_SIDE;
 

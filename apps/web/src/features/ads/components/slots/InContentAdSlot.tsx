@@ -1,6 +1,10 @@
 import { cn } from "@stats47/components";
 
-import { AdSenseAd, type AdSlotConfig } from "@/lib/google-adsense";
+import {
+  ADSENSE_DISPLAY_ENABLED,
+  AdSenseAd,
+  type AdSlotConfig,
+} from "@/lib/google-adsense";
 
 import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "../../constants/manual-ad-policy";
 
@@ -31,7 +35,7 @@ export function InContentAdSlot({
   hideLabel = false,
   className,
 }: InContentAdSlotProps) {
-  if (!slot.slotId) return null;
+  if (!ADSENSE_DISPLAY_ENABLED || !slot.slotId) return null;
   return (
     <div className={cn(MANUAL_AD_DESKTOP_ONLY_CLASS, "my-8", className)}>
       {!hideLabel && <AdSlotLabel />}

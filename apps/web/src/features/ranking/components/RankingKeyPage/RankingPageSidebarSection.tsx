@@ -9,7 +9,11 @@ import {
 import { AffiliateAdSlot, RakutenItemsCard } from "@/features/ads/server";
 import type { AreaType } from "@/features/area";
 
-import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
+import {
+  ADSENSE_DISPLAY_ENABLED,
+  AdSenseAd,
+  RANKING_SIDEBAR_TOP,
+} from "@/lib/google-adsense";
 
 import { RankingItemsSidebar } from "../RankingSidebar";
 import { PortStatisticsMapCard } from "../RankingSidebar/PortStatisticsMapCard";
@@ -57,12 +61,14 @@ export function RankingPageSidebarSection({
         areaType={areaType}
         categoryKey={rankingItem.categoryKey}
       />
-      <SurfaceCard className="p-3">
-        <AdSenseAd
-          format={RANKING_SIDEBAR_TOP.format}
-          slotId={RANKING_SIDEBAR_TOP.slotId}
-        />
-      </SurfaceCard>
+      {ADSENSE_DISPLAY_ENABLED && (
+        <SurfaceCard className="p-3">
+          <AdSenseAd
+            format={RANKING_SIDEBAR_TOP.format}
+            slotId={RANKING_SIDEBAR_TOP.slotId}
+          />
+        </SurfaceCard>
+      )}
       <SidebarPromoBanner index={selectPromoBannerIndexForRanking(rankingKey)} />
       {/* ランキング名が品目 (牛肉・うどん等) のとき楽天市場の商品を出す。品目でなければ描画しない。 */}
       <RakutenItemsCard sourceText={rankingName} position="ranking-sidebar" />
