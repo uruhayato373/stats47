@@ -293,6 +293,9 @@ jobs:
           fi
 
           git commit -m "chore(metrics): weekly snapshot ${{ steps.week.outputs.week }} + remediation queue/effect [skip ci]"
+          # pull は前段の step にもあるが、そこから API 取得を挟むのでこの間に develop が進みうる。
+          # push の直前で取り直さないと (fetch first) で落ちて週次メトリクスが commit されない (2026-08-16 是正)。
+          git pull --rebase --autostash origin develop
           git push origin develop
 
       # 期間契約 gate（weekly-cycle-contract）: commit の後に走らせ、GSC/GA4 summary の missing/partial・

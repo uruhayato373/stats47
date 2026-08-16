@@ -68,6 +68,8 @@ jobs:
           git add .claude/state/sns/posts.json .claude/state/metrics/sns/instagram-publish-log.csv 2>/dev/null || true
           git diff --staged --quiet && echo "no changes" && exit 0
           git commit -m "chore(sns): mark angle-post posted (id=${{ inputs.post_id || 'auto' }}, key=${{ inputs.content_key }})"
+          # pull せずに push すると develop が進んだ瞬間に (fetch first) で落ちる (2026-08-16 是正)
+          git pull --rebase origin develop
           git push origin develop
 
       - name: 📊 Summary
