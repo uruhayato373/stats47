@@ -9,6 +9,27 @@
  * ブログ本文には factual-check があるが**書籍の書き下ろし章には検証手段が無かった**。
  *
  * ★判定は「**その県の**その値が、書籍が扱う指標のどれかに存在するか」。
+ *
+ * ★このゲートの上限 (2026-08-12 実測・過信しないこと)
+ *   1 冊が 30 指標 × 複数年を扱うので、ある県の値を 10 倍・半分にしても**別指標の値に
+ *   偶然一致する**ことがある。ミューテーション実測では、K-S2-01 で 3/3 検出できた一方
+ *   K-S2-05 では 3 件中 1 件しか検出できなかった。捏造を全部止める道具ではない。
+ *   確実に止まるのは「どの指標のどの年にも無い値」で、桁が大きく外れるほど検出率は上がる。
+ *   意味の妥当性 (その指標をその文脈で語ってよいか) は人が読むしかない。
+ *
+ * ★守備範囲外: 著者が計算した派生値
+ *   「自殺者の45.5%が65歳以上を占める」「輸送用機器が愛知県の出荷額の47.4%を占める」
+ *   「一事業所当たりでは山口県が3,821百万円」のような構成比・平均は、SSOT の指標として
+ *   存在しないので必ず「不一致」に出る。**これは誤検出であって原稿の誤りではない**。
+ *   派生値の正しさは計算元の 2 数と式を人が見るしかない。
+ *
+ * ★S1 (ブログ再構成) の指摘は信頼できない — truth 集合が不完全だから
+ *   S1 は章がブログ記事なので、`collectMetricKeys` が記事本文の `/ranking/` リンクからしか
+ *   指標を集められない。実測で読み込めた指標は **5〜24 件** (S2/S3 は 28〜30 件) で、
+ *   本文が語る数値の多くが truth に無い。県だけは他の指標で見つかるので `unknown-pref` に
+ *   ならず、**「不一致」として出てしまう**。S1 の 8 冊 39 件はこの不完全さと派生値の混在で、
+ *   原稿の誤りとは限らない。S1 を監査に載せるには truth 集合を広げる改修が要る
+ *   (`docs/todo/05_機能バックログ.md` の KINDLE-AUDIT-S1-01)。
  *   値だけの照合は数千件の集合に対してほぼ必ず当たってしまい無意味
  *   (実測: 545,000 が静岡 552,182 に、176,000 が東京の家賃 175,694 に誤一致)。
  *
@@ -20,6 +41,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { METRICS_REGISTRY } from "@stats47/data-configs";
 import { KINDLE_BOOKS } from "../src/channels/kindle/book-catalog";
 import {
   extractFactClaims,
@@ -131,6 +153,18 @@ async function collectMetricKeys(book: (typeof KINDLE_BOOKS)[number]): Promise<s
   return [...keys];
 }
 
+/** 全角括弧・空白の揺れを畳んで、本文と指標名を突き合わせられるようにする。 */
+function norm(t: string): string {
+  return t.replace(/[（）]/g, (c) => (c === "（" ? "(" : ")")).replace(/\s+/g, "");
+}
+
+/** 指標の照合用タイトル (短すぎるものは誤マッチするので使わない)。 */
+function titleOf(key: string): string {
+  const t = (METRICS_REGISTRY as Record<string, { title?: string } | undefined>)[key]?.title ?? "";
+  const n = norm(t);
+  return n.length >= 5 ? n : "";
+}
+
 async function main(): Promise<void> {
   assertKnownFlags();
   const only = arg("book");
@@ -146,6 +180,9 @@ async function main(): Promise<void> {
     if (!existsSync(dir)) continue;
 
     const { series, missing } = await buildTruth(await collectMetricKeys(book));
+    // ★本文に出うる単位は、その書籍の指標の SSOT 単位そのもの。固定リストにすると
+    //   「人泊」「人口千対」のような分母つき単位を落として誤検出を出す (2026-08-12 実測 36 件)。
+    const claimUnits = [...new Set(series.map((s) => s.unit).filter((u): u is string => !!u))];
     const findings: Finding[] = [];
     let checked = 0;
     let kanjiLeft = 0;
@@ -158,7 +195,11 @@ async function main(): Promise<void> {
         for (const c of extractKanjiClaims(line)) {
           if (c.unit === "円" || c.unit === "位" || c.unit === "倍" || c.unit === "％") kanjiLeft++;
         }
-        for (const claim of extractFactClaims(line)) {
+        // ★行が指標名を明示していても、その指標に限定してはならない (2026-08-12 実測)。
+        //   1 行が複数の指標に触れるのが普通で、限定すると「高齢者割合は…東京都は66.8％」の
+        //   66.8 (生産年齢人口割合) が高齢者割合と比べられて不一致になる。
+        //   限定を入れた結果、誤検出が K-S2-01 で 1→22 件、K-S2-05 で 9→23 件に増えた。
+        for (const claim of extractFactClaims(line, claimUnits)) {
           checked++;
           const v = verifyClaim(claim, series);
           if (v.kind !== "mismatch") continue;

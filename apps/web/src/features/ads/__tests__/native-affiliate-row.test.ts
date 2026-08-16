@@ -69,6 +69,11 @@ describe("NativeAffiliateRow の構造契約", () => {
 describe("SidebarStickyBannerAd の契約", () => {
   const src = readComponent("SidebarStickyBannerAd.tsx");
 
+  it("可視要素にPR見出しを足さず、バナー画像だけを表示する", () => {
+    expect(src).toContain("<BannerAd");
+    expect(src).not.toContain(">PR<");
+  });
+
   it('sidebar-sticky locationCode を読む (縦長の唯一の受け皿)', () => {
     expect(src).toContain('"sidebar-sticky"');
   });

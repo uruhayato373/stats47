@@ -1,6 +1,7 @@
 import { SurfaceCard } from "@/components/surface";
 
 import {
+  ADSENSE_DISPLAY_ENABLED,
   RANKING_PAGE_FOOTER,
   RANKING_PAGE_TABLE_SIDE,
 } from "@/lib/google-adsense";
@@ -94,21 +95,20 @@ export async function AffiliateAdSlot({
       return (
         <>
           {banners.map((banner) => (
-            <SurfaceCard key={banner.id} className="p-3">
-              <BannerAd
-                href={banner.href}
-                imageUrl={banner.imageUrl}
-                trackingPixelUrl={banner.trackingPixelUrl}
-                width={banner.width}
-                height={banner.height}
-                // vertical を優先 (categoryKey 由来の affiliateCategory は fallback)
-                category={banner.vertical ?? affiliateCategory ?? "other"}
-                label={banner.title}
-                position="ranking-sidebar"
-                adId={banner.id}
-                creativeSize={`${banner.width}x${banner.height}`}
-              />
-            </SurfaceCard>
+            <BannerAd
+              key={banner.id}
+              href={banner.href}
+              imageUrl={banner.imageUrl}
+              trackingPixelUrl={banner.trackingPixelUrl}
+              width={banner.width}
+              height={banner.height}
+              // vertical を優先 (categoryKey 由来の affiliateCategory は fallback)
+              category={banner.vertical ?? affiliateCategory ?? "other"}
+              label={banner.title}
+              position="ranking-sidebar"
+              adId={banner.id}
+              creativeSize={`${banner.width}x${banner.height}`}
+            />
           ))}
         </>
       );
@@ -135,6 +135,8 @@ export async function AffiliateAdSlot({
   }
 
   // 3. AdSense フォールバック
+  if (!ADSENSE_DISPLAY_ENABLED) return null;
+
   const adSlot =
     position === "footer" ? RANKING_PAGE_FOOTER : RANKING_PAGE_TABLE_SIDE;
 

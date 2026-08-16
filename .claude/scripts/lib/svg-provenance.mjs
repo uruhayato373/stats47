@@ -17,6 +17,32 @@
 /** 冒頭の provenance コメント 1 行 (末尾の改行を含む)。 */
 export const PROVENANCE_RE = /^<!--\s*data-source:[^>]*-->\n?/;
 
+/**
+ * XML コメント (`<!-- ... -->`) は内容に "--" を含められない (パースエラー)。
+ * 相関 scatter の data ファイル名は 2 つの ranking key を "--" で連結するため
+ * (例: `a-key--b-key-scatter.json`)、そのまま埋めると SVG が不正 XML になり
+ * ブラウザが `<img>` で描画できない (broken image)。data-source の値は後段で
+ * データとして読み戻さない (PROVENANCE_RE で丸ごと strip する) ので、隣接ハイフンを
+ * 空白で割って可読性を保ちつつ "--" を消す。※コメント本文だけに適用すること
+ * (行全体に掛けると終端 `-->` の "--" まで壊す)。
+ */
+export function sanitizeForXmlComment(text) {
+  return String(text).replace(/-{2,}/g, (run) => run.split("").join(" "));
+}
+
+/** 冒頭に付ける provenance コメント 1 行 (末尾改行込み・XML 安全) を組み立てる。 */
+export function buildProvenanceLine(dataFile, now = new Date()) {
+  return `<!-- data-source: ${sanitizeForXmlComment(dataFile)} | generated: ${now.toISOString()} -->\n`;
+}
+
+/** 既存の provenance 行を、終端 `-->` を保ったまま本文だけ XML 安全化する。 */
+export function sanitizeProvenanceLine(line) {
+  return line.replace(
+    /^(<!--)([\s\S]*?)(-->)/,
+    (_, open, body, close) => open + sanitizeForXmlComment(body) + close,
+  );
+}
+
 /** 内容比較のために provenance を外す。行が無ければそのまま返す。 */
 export function stripProvenance(svg) {
   return typeof svg === "string" ? svg.replace(PROVENANCE_RE, "") : svg;
@@ -35,6 +61,7 @@ export function sameSvgContent(a, b) {
 export function withProvenance(newSvg, oldSvg, dataFile, now = new Date()) {
   if (PROVENANCE_RE.test(newSvg)) return newSvg;
   const inherited = typeof oldSvg === "string" ? oldSvg.match(PROVENANCE_RE)?.[0] : undefined;
-  const line = inherited ?? `<!-- data-source: ${dataFile} | generated: ${now.toISOString()} -->\n`;
+  // 引き継ぎ・新規どちらも XML 安全化する ("--" を含む旧コメントを再導入しない)。
+  const line = inherited ? sanitizeProvenanceLine(inherited) : buildProvenanceLine(dataFile, now);
   return line + newSvg;
 }

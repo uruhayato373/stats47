@@ -289,10 +289,10 @@ export default function PrivacyPage() {
           <LegalSection number="5" title="広告配信について">
             <div className="space-y-4">
               <p className={TEXT_STYLE}>
-                当サービスは、第三者配信の広告サービス（Google
-                AdSense）を利用しています。
-                広告配信プロバイダーは、ユーザーが当サービスや他のウェブサイトにアクセスした際の情報に基づいて、
-                適切な広告を配信する場合があります。
+                現在、当サービスでは第三者配信の広告サービス（Google
+                AdSense）による広告表示と関連スクリプトを一時停止しています。
+                将来再開する場合、広告配信プロバイダーは、ユーザーが当サービスや他のウェブサイトにアクセスした際の情報に基づいて、
+                適切な広告を配信することがあります。
               </p>
               <div>
                 <h3 className="text-sm font-semibold mb-3 md:text-base">
@@ -329,8 +329,8 @@ export default function PrivacyPage() {
                 </ul>
               </div>
               <p className={TEXT_STYLE}>
-                広告配信プロバイダーは、Cookieを使用して、ユーザーが過去にアクセスしたウェブサイトの情報に基づいて広告を配信します。
-                ユーザーは、上記のオプトアウトページから、パーソナライズド広告の配信を停止することができます。
+                Google AdSenseを再開した場合、広告配信プロバイダーはCookieを使用して、ユーザーが過去にアクセスしたウェブサイトの情報に基づいて広告を配信することがあります。
+                ユーザーは、上記のオプトアウトページから、パーソナライズド広告を停止できます。
               </p>
               <div>
                 <h3 className="text-sm font-semibold mb-3 md:text-base">

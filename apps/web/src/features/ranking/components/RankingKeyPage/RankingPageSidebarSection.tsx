@@ -9,7 +9,11 @@ import {
 import { AffiliateAdSlot, RakutenItemsCard } from "@/features/ads/server";
 import type { AreaType } from "@/features/area";
 
-import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
+import {
+  ADSENSE_DISPLAY_ENABLED,
+  AdSenseAd,
+  RANKING_SIDEBAR_TOP,
+} from "@/lib/google-adsense";
 
 import { RankingItemsSidebar } from "../RankingSidebar";
 import { PortStatisticsMapCard } from "../RankingSidebar/PortStatisticsMapCard";
@@ -47,35 +51,41 @@ export function RankingPageSidebarSection({
   surveyRelatedItems,
   rankingName,
 }: RankingPageSidebarSectionProps) {
+  const contextualAffiliateBanners = (
+    <AffiliateAdSlot
+      categoryKey={rankingItem.categoryKey ?? ""}
+      position="sidebar"
+      rankingKey={rankingKey}
+      bannerOnly
+      bannerLimit={2}
+    />
+  );
+
   return (
     <Suspense fallback={<RankingPageSidebarSkeleton />}>
-      {/* P0-2 (2026-07-20): レール先頭は「関連ランキング」(回遊優先)。
-          AdSense はスロット2 (依然 above-the-fold) に留め RPM リスクを最小化する。
-          full 版 (両広告を最下部) は RPM 実測が無いため不採用。 */}
+      {/* レール先頭は「関連ランキング」(回遊優先)。広告はその直後に置く。 */}
       <RankingItemsSidebar
         rankingKey={rankingKey}
         areaType={areaType}
         categoryKey={rankingItem.categoryKey}
       />
-      <SurfaceCard className="p-3">
-        <AdSenseAd
-          format={RANKING_SIDEBAR_TOP.format}
-          slotId={RANKING_SIDEBAR_TOP.slotId}
-        />
-      </SurfaceCard>
+      {/* AdSense停止中は、空いた上段へ既存の文脈一致バナーを移す。
+          枠数は最大2のまま、表示位置だけを上げてviewable impressionを増やす。 */}
+      {!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
+      {ADSENSE_DISPLAY_ENABLED && (
+        <SurfaceCard className="p-3">
+          <AdSenseAd
+            format={RANKING_SIDEBAR_TOP.format}
+            slotId={RANKING_SIDEBAR_TOP.slotId}
+          />
+        </SurfaceCard>
+      )}
       <SidebarPromoBanner index={selectPromoBannerIndexForRanking(rankingKey)} />
       {/* ランキング名が品目 (牛肉・うどん等) のとき楽天市場の商品を出す。品目でなければ描画しない。 */}
       <RakutenItemsCard sourceText={rankingName} position="ranking-sidebar" />
       <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
-      {/* ★ 2026-08-04: 右レールはバナーのみ。在庫のある vertical では 2 枚まで積む
-          (在庫が 1 件しか無ければ 1 枚、ゼロなら AdSense へフォールバック)。 */}
-      <AffiliateAdSlot
-        categoryKey={rankingItem.categoryKey ?? ""}
-        position="sidebar"
-        rankingKey={rankingKey}
-        bannerOnly
-        bannerLimit={2}
-      />
+      {/* AdSense再開時は従来位置へ戻し、同一バナーを二重描画しない。 */}
+      {ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
       <SurveyCard
         surveys={surveys.map((survey) => ({ id: survey.id, name: survey.name }))}
         relatedItems={surveyRelatedItems}

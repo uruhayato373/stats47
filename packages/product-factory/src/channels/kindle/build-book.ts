@@ -12,6 +12,7 @@ import { mdToXhtml } from "./md-to-xhtml";
 import { buildCoverPng } from "./cover";
 import { buildRankingSections } from "./ranking-databook";
 import { buildEpub, type EpubChapterDoc, type EpubImage } from "../../generators/epub";
+import sharp from "sharp";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 /** product-factory ルート (freshFile のパス解決基点)。 */
@@ -141,7 +142,17 @@ function figureGuideMd(): string {
 
 中位の県や、自分の県が正確に何位なのかを知りたいときは、姉妹サイト stats47.jp で四十七県すべての順位と数値を確認することができます。図に添えた数字は、本文で触れた基準年の実データです。
 
-図をながめて落差の大きさを感じ取り、本文でその背景を読む——この順番で読み進めると、それぞれの県の事情が立体的に見えてくるはずです。数字は、その県に暮らす人々の生活の一面を映した鏡でもあります。単なる順位の上下としてではなく、その裏側にある暮らしや歴史を想像しながら読んでいただければ幸いです。`;
+図をながめて落差の大きさを感じ取り、本文でその背景を読む——この順番で読み進めると、それぞれの県の事情が立体的に見えてくるはずです。数字は、その県に暮らす人々の生活の一面を映した鏡でもあります。単なる順位の上下としてではなく、その裏側にある暮らしや歴史を想像しながら読んでいただければ幸いです。
+
+## 本文に出てくる「相関」の読み方
+
+本文では、二つの指標がどれくらい連動しているかを示すために「相関」という言葉と、r という記号を使っています。読み飛ばしても本筋は追えますが、意味を知っておくと本文の見通しがよくなります。
+
+r は −1 から +1 までの数で、二つの指標の連動の強さを表します。r が +1 に近いほど「片方が高い県はもう片方も高い」、−1 に近いほど「片方が高い県はもう片方が低い」という関係が強く、0 に近ければ関係はほとんど見られません。目安としては、絶対値が 0.7 を超えていれば強い連動、0.4 前後なら緩やかな連動と読んでいただければ十分です。
+
+「偏相関」という言葉も出てきます。これは、人口や面積といった影響の大きい要素をいったん脇に置いたうえで、二つの指標の連動がどれだけ残るかを見たものです。たとえば二つの指標が両方とも「人口が多い県ほど大きくなる」性質を持っていると、実際には直接の関係がなくても数字の上では連動して見えてしまいます。偏相関は、その見かけの連動を差し引いた値だと考えてください。人口の影響を除いても連動が残るなら、その二つには人口とは別の結びつきがあることになります。
+
+ひとつだけ、読むときに気をつけていただきたいことがあります。**連動していることと、片方がもう片方の原因であることは別です**。二つの指標が一緒に動いていても、その裏に共通の第三の事情が隠れていることは珍しくありません。本書では、連動が見られた場合でも「〜が原因で」とは書かず、「〜と関係している可能性があります」という書き方をしています。`;
 }
 
 /** 出典章を持たない書籍に自動付与する標準の「出典と再現について」本文 (markdown)。 */
@@ -239,6 +250,7 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
       const sections = await buildRankingSections(ch.rankingKeys, limit, {
         highlightRegionLabel: ch.highlightRegionLabel,
         highlightCodes: ch.highlightCodes,
+        regionBlockLabel: ch.regionBlockLabel,
       });
       // 導入 (章見出し + リード)
       chapters.push({
@@ -310,6 +322,14 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
         backgroundJpeg: existsSync(bgPath) ? readFileSync(bgPath) : undefined,
       });
       writeFileSync(join(outDir, "cover.png"), coverPng);
+      // ★KDP の表紙アップロードは **JPEG / TIFF しか受け付けない** (`accept=".tiff,.tif,.jpeg,.jpg"`)。
+      //   PNG を渡しても file input が黙って拒否し、KDP 側は「表紙がアップロードされていません」の
+      //   ままになる (2026-08-12 に実際に 9 件の下書きがそうなった)。EPUB には PNG を埋め、
+      //   出品用に JPEG も並べて出す。
+      writeFileSync(
+        join(outDir, "cover.jpg"),
+        await sharp(coverPng).jpeg({ quality: 92, chromaSubsampling: "4:4:4" }).toBuffer(),
+      );
     } catch (e) {
       // カバー失敗は EPUB 生成を止めない (KDP の Cover Creator で作れる)。
       console.warn(`  ⚠ カバー生成に失敗 (続行): ${e instanceof Error ? e.message : String(e)}`);

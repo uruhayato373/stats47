@@ -1,63 +1,19 @@
 {
-  "auditedAt": "2026-08-08T20:29:44.909Z",
-  "total": 130,
+  "auditedAt": "2026-08-15T20:22:47.785Z",
+  "distinctExpected": 192,
+  "audited": 192,
+  "partial": false,
+  "coverageOk": true,
   "errorCount": 0,
   "warnCount": 3,
   "results": [
     {
       "theme": "aging-society",
-      "componentKey": "birth-rate-aging-rate-trend",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A05202"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "aging-society",
-      "componentKey": "birth-rate-aging-rate-trend",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A03503"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "aging-society",
-      "componentKey": "marriage-divorce-rate-trend",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A06601"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "aging-society",
-      "componentKey": "marriage-divorce-rate-trend",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A06602"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "aging-society",
-      "componentKey": "natural-social-increase-trend",
+      "componentKey": "theme-age-composition",
+      "componentType": "composition-chart",
       "params": {
         "statsDataId": "0000010101",
-        "cdCat01": "A4101"
+        "cdCat01": "A1101"
       },
       "status": "ok",
       "rows": 200,
@@ -66,10 +22,11 @@
     },
     {
       "theme": "aging-society",
-      "componentKey": "natural-social-increase-trend",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
       "params": {
         "statsDataId": "0000010101",
-        "cdCat01": "A4200"
+        "cdCat01": "A120101"
       },
       "status": "ok",
       "rows": 200,
@@ -78,22 +35,401 @@
     },
     {
       "theme": "aging-society",
-      "componentKey": "theme-late-elderly-medical-expense-trend",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
       "params": {
-        "statsDataId": "0000010210",
-        "cdCat01": "#J05208"
+        "statsDataId": "0000010101",
+        "cdCat01": "A120102"
       },
       "status": "ok",
       "rows": 200,
       "hasNational": true,
-      "tableTitle": "Ｊ　福祉・社会保障"
+      "tableTitle": "Ａ　人口・世帯"
     },
     {
       "theme": "aging-society",
-      "componentKey": "birth-death-rate-trend",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
       "params": {
         "statsDataId": "0000010101",
-        "cdCat01": "A4201"
+        "cdCat01": "A120201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120202"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120301"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120302"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120401"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120402"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120501"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120502"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120601"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120602"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120701"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120702"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120801"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120802"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120901"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A120902"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121001"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121002"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121102"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121202"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121301"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121302"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121401"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121402"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121501"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121502"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121601"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
+      "params": {
+        "statsDataId": "0000010101",
+        "cdCat01": "A121602"
       },
       "status": "ok",
       "rows": 200,
@@ -103,6 +439,7 @@
     {
       "theme": "aging-society",
       "componentKey": "theme-age-composition",
+      "componentType": "composition-chart",
       "params": {
         "statsDataId": "0000010101",
         "cdCat01": "A1301"
@@ -115,6 +452,7 @@
     {
       "theme": "aging-society",
       "componentKey": "theme-age-composition",
+      "componentType": "composition-chart",
       "params": {
         "statsDataId": "0000010101",
         "cdCat01": "A1302"
@@ -127,6 +465,7 @@
     {
       "theme": "aging-society",
       "componentKey": "theme-age-composition",
+      "componentType": "composition-chart",
       "params": {
         "statsDataId": "0000010101",
         "cdCat01": "A1303"
@@ -138,10 +477,11 @@
     },
     {
       "theme": "aging-society",
-      "componentKey": "theme-age-composition",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
       "params": {
         "statsDataId": "0000010101",
-        "cdCat01": "A1101"
+        "cdCat01": "A141801"
       },
       "status": "ok",
       "rows": 200,
@@ -150,346 +490,11 @@
     },
     {
       "theme": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart",
       "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A06301"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A06304"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A06302"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "aging-society",
-      "componentKey": "theme-pension-benefit-trend",
-      "params": {
-        "statsDataId": "0000010110",
-        "cdCat01": "J5104"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｊ　福祉・社会保障"
-    },
-    {
-      "theme": "aging-society",
-      "componentKey": "theme-volunteer-participation-trend",
-      "params": {
-        "statsDataId": "0000010207",
-        "cdCat01": "#G04101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｇ　文化・スポーツ"
-    },
-    {
-      "theme": "aging-society",
-      "componentKey": "theme-as-youth-old-dep-index",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A03401"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "aging-society",
-      "componentKey": "theme-as-youth-old-dep-index",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A03402"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "consumer-prices",
-      "componentKey": "theme-cpi-living-cost",
-      "params": {
-        "statsDataId": "0000010212",
-        "cdCat01": "#L04416"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｌ　家計"
-    },
-    {
-      "theme": "consumer-prices",
-      "componentKey": "theme-cpi-living-cost",
-      "params": {
-        "statsDataId": "0000010212",
-        "cdCat01": "#L04417"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｌ　家計"
-    },
-    {
-      "theme": "consumer-prices",
-      "componentKey": "theme-cpi-living-cost",
-      "params": {
-        "statsDataId": "0000010212",
-        "cdCat01": "#L04418"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｌ　家計"
-    },
-    {
-      "theme": "education-culture",
-      "componentKey": "theme-edu-school-trend",
-      "params": {
-        "statsDataId": "0000010205",
-        "cdCat01": "#E0110201"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｅ　教育"
-    },
-    {
-      "theme": "education-culture",
-      "componentKey": "theme-edu-school-trend",
-      "params": {
-        "statsDataId": "0000010205",
-        "cdCat01": "#E0110202"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｅ　教育"
-    },
-    {
-      "theme": "education-culture",
-      "componentKey": "theme-edu-school-trend",
-      "params": {
-        "statsDataId": "0000010205",
-        "cdCat01": "#E0110203"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｅ　教育"
-    },
-    {
-      "theme": "education-culture",
-      "componentKey": "theme-edu-culture-trend",
-      "params": {
-        "statsDataId": "0000010207",
-        "cdCat01": "#G01104"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｇ　文化・スポーツ"
-    },
-    {
-      "theme": "education-culture",
-      "componentKey": "theme-edu-culture-trend",
-      "params": {
-        "statsDataId": "0000010207",
-        "cdCat01": "#G01101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｇ　文化・スポーツ"
-    },
-    {
-      "theme": "education-culture",
-      "componentKey": "theme-edu-university-enrollment-trend",
-      "params": {
-        "statsDataId": "0000010205",
-        "cdCat01": "#E09504"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｅ　教育"
-    },
-    {
-      "theme": "education-culture",
-      "componentKey": "theme-edu-in-pref-university-trend",
-      "params": {
-        "statsDataId": "0000010205",
-        "cdCat01": "#E0940302"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｅ　教育"
-    },
-    {
-      "theme": "fishery-marine",
-      "componentKey": "theme-fishery-catch-trend",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C3121"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "fishery-marine",
-      "componentKey": "theme-fishery-catch-trend",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C312101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "fishery-marine",
-      "componentKey": "theme-fishery-aquaculture-mix",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C312201"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "fishery-marine",
-      "componentKey": "theme-fishery-aquaculture-mix",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C312202"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "fishery-marine",
-      "componentKey": "theme-fishery-output-trend",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C31201"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "fishery-marine",
-      "componentKey": "theme-fishery-output-trend",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C312001"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "fishery-marine",
-      "componentKey": "theme-fishery-half-century",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C3125"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "fishery-marine",
-      "componentKey": "theme-fishery-species-trend",
-      "params": {
-        "statsDataId": "0003238633",
-        "cdCat01": "0330"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
-    },
-    {
-      "theme": "fishery-marine",
-      "componentKey": "theme-fishery-species-trend",
-      "params": {
-        "statsDataId": "0003238633",
-        "cdCat01": "0420"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
-    },
-    {
-      "theme": "fishery-marine",
-      "componentKey": "theme-fishery-species-trend",
-      "params": {
-        "statsDataId": "0003238633",
-        "cdCat01": "0980"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
-    },
-    {
-      "theme": "fishery-marine",
-      "componentKey": "theme-fishery-species-trend",
-      "params": {
-        "statsDataId": "0003238633",
-        "cdCat01": "1040"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
-    },
-    {
-      "theme": "foreign-residents",
-      "componentKey": "theme-foreign-total-trend",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A01601"
+        "statsDataId": "0000010101",
+        "cdCat01": "A141802"
       },
       "status": "ok",
       "rows": 200,
@@ -499,6 +504,7 @@
     {
       "theme": "foreign-residents",
       "componentKey": "theme-foreign-total-trend",
+      "componentType": "line-chart",
       "params": {
         "statsDataId": "0000010101",
         "cdCat01": "A1700"
@@ -509,250 +515,12 @@
       "tableTitle": "Ａ　人口・世帯"
     },
     {
-      "theme": "foreign-residents",
-      "componentKey": "theme-foreign-nationality-trend",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A0160102"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "foreign-residents",
-      "componentKey": "theme-foreign-nationality-trend",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A0160101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "healthcare",
-      "componentKey": "theme-health-supply-trend",
-      "params": {
-        "statsDataId": "0000010209",
-        "cdCat01": "#I0920101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｉ　健康・医療"
-    },
-    {
-      "theme": "healthcare",
-      "componentKey": "theme-health-supply-trend",
-      "params": {
-        "statsDataId": "0000010209",
-        "cdCat01": "#I0910103"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｉ　健康・医療"
-    },
-    {
-      "theme": "healthcare",
-      "componentKey": "theme-health-expense-trend",
-      "params": {
-        "statsDataId": "0000010209",
-        "cdCat01": "#I15106"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｉ　健康・医療"
-    },
-    {
-      "theme": "healthcare",
-      "componentKey": "theme-health-lifestyle-trend",
-      "params": {
-        "statsDataId": "0000010209",
-        "cdCat01": "#I06101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｉ　健康・医療"
-    },
-    {
-      "theme": "healthcare",
-      "componentKey": "theme-health-lifestyle-trend",
-      "params": {
-        "statsDataId": "0000010209",
-        "cdCat01": "#I13102"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｉ　健康・医療"
-    },
-    {
-      "theme": "healthcare",
-      "componentKey": "theme-health-diabetes-trend",
-      "params": {
-        "statsDataId": "0000010209",
-        "cdCat01": "#I06103"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｉ　健康・医療"
-    },
-    {
-      "theme": "labor-mobility",
-      "componentKey": "labor-mobility-turnover-vs-jobchange",
-      "params": {
-        "statsDataId": "0000010206",
-        "cdCat01": "#F04102"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｆ　労働"
-    },
-    {
-      "theme": "labor-mobility",
-      "componentKey": "labor-mobility-turnover-vs-jobchange",
-      "params": {
-        "statsDataId": "0000010206",
-        "cdCat01": "#F04101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｆ　労働"
-    },
-    {
-      "theme": "labor-mobility",
-      "componentKey": "theme-lm-employment-mobility-trend",
-      "params": {
-        "statsDataId": "0000010206",
-        "cdCat01": "#F04104"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｆ　労働"
-    },
-    {
-      "theme": "labor-wages",
-      "componentKey": "labor-wages-gender-gap",
-      "params": {
-        "statsDataId": "0003426933"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": false,
-      "tableTitle": "令和２年以降 一般_都道府県別_年齢階級別DB"
-    },
-    {
-      "theme": "labor-wages",
-      "componentKey": "labor-wages-job-ratio-vs-unemployment",
-      "params": {
-        "statsDataId": "0000010206",
-        "cdCat01": "#F03103"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｆ　労働"
-    },
-    {
-      "theme": "labor-wages",
-      "componentKey": "labor-wages-job-ratio-vs-unemployment",
-      "params": {
-        "statsDataId": "0000010206",
-        "cdCat01": "#F01301"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｆ　労働"
-    },
-    {
-      "theme": "labor-wages",
-      "componentKey": "theme-lw-employment-rate-trend",
-      "params": {
-        "statsDataId": "0000010206",
-        "cdCat01": "#F03101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｆ　労働"
-    },
-    {
-      "theme": "living-housing",
-      "componentKey": "vacancy-ownership-rate-trend",
-      "params": {
-        "statsDataId": "0000010208",
-        "cdCat01": "#H01405"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｈ　居住"
-    },
-    {
-      "theme": "living-housing",
-      "componentKey": "vacancy-ownership-rate-trend",
-      "params": {
-        "statsDataId": "0000010208",
-        "cdCat01": "#H01301"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｈ　居住"
-    },
-    {
-      "theme": "living-housing",
-      "componentKey": "unmarried-elderly-couple-trend",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A0411001"
-      },
-      "status": "ok",
-      "rows": 96,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "living-housing",
-      "componentKey": "lh-dwelling-floor-area-trend",
-      "params": {
-        "statsDataId": "0000010208",
-        "cdCat01": "#H0210301"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｈ　居住"
-    },
-    {
-      "theme": "living-housing",
-      "componentKey": "lh-dwelling-floor-area-trend",
-      "params": {
-        "statsDataId": "0000010208",
-        "cdCat01": "#H0210302"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｈ　居住"
-    },
-    {
-      "theme": "living-housing",
-      "componentKey": "lh-marriage-divorce-trend",
+      "theme": "aging-society",
+      "componentKey": "natural-social-increase-trend",
+      "componentType": "line-chart",
       "params": {
         "statsDataId": "0000010101",
-        "cdCat01": "A9101"
+        "cdCat01": "A4101"
       },
       "status": "ok",
       "rows": 200,
@@ -760,11 +528,12 @@
       "tableTitle": "Ａ　人口・世帯"
     },
     {
-      "theme": "living-housing",
-      "componentKey": "lh-marriage-divorce-trend",
+      "theme": "aging-society",
+      "componentKey": "natural-social-increase-trend",
+      "componentType": "line-chart",
       "params": {
         "statsDataId": "0000010101",
-        "cdCat01": "A9201"
+        "cdCat01": "A4200"
       },
       "status": "ok",
       "rows": 200,
@@ -772,500 +541,22 @@
       "tableTitle": "Ａ　人口・世帯"
     },
     {
-      "theme": "living-housing",
-      "componentKey": "lh-household-structure-trend",
+      "theme": "aging-society",
+      "componentKey": "birth-death-rate-trend",
+      "componentType": "line-chart",
       "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A06205"
+        "statsDataId": "0000010101",
+        "cdCat01": "A4201"
       },
       "status": "ok",
       "rows": 200,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "living-housing",
-      "componentKey": "lh-household-structure-trend",
-      "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A06202"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ａ　人口・世帯"
-    },
-    {
-      "theme": "local-economy",
-      "componentKey": "theme-economy-income-wage",
-      "params": {
-        "statsDataId": "0000010112",
-        "cdCat01": "L3130"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｌ　家計"
-    },
-    {
-      "theme": "local-economy",
-      "componentKey": "theme-economy-income-wage",
-      "params": {
-        "statsDataId": "0000010106",
-        "cdCat01": "F6501"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｆ　労働"
-    },
-    {
-      "theme": "local-economy",
-      "componentKey": "theme-le-establishments-trend",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C2107"
-      },
-      "status": "ok",
-      "rows": 96,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "kpi-lf-fiscal-strength",
-      "params": {
-        "statsDataId": "0000010104",
-        "cdCat01": "D2101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "kpi-lf-current-balance",
-      "params": {
-        "statsDataId": "0000010104",
-        "cdCat01": "D2103"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "kpi-lf-debt-service",
-      "params": {
-        "statsDataId": "0000010104",
-        "cdCat01": "D2111"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "kpi-lf-future-burden",
-      "params": {
-        "statsDataId": "0000010104",
-        "cdCat01": "D2112"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-revenue-composition",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D0210101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-revenue-composition",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D0210201"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-revenue-composition",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D0210301"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D0320101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D0310301"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D0311501"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D0311201"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-income-tax-trend",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D0220103"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-income-tax-trend",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D02206"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-per-capita-expense-trend",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D0330103"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-taxpayer-ratio-trend",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D02207"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-expense-nature-trend",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D0320201"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "local-finance",
-      "componentKey": "theme-lf-expense-nature-trend",
-      "params": {
-        "statsDataId": "0000010204",
-        "cdCat01": "#D0140201"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｄ　行政基盤"
-    },
-    {
-      "theme": "manufacturing",
-      "componentKey": "manufacturing-establishments-employees-trend",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C3403"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "manufacturing",
-      "componentKey": "manufacturing-establishments-employees-trend",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C3404"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "manufacturing",
-      "componentKey": "manufacturing-shipment-value-trend",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C3401"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "manufacturing",
-      "componentKey": "manufacturing-shipment-value-trend",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C3402"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "manufacturing",
-      "componentKey": "theme-manufacturing-labor-productivity",
-      "params": {
-        "statsDataId": "0000010203",
-        "cdCat01": "#C04401"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "manufacturing",
-      "componentKey": "theme-manufacturing-labor-productivity",
-      "params": {
-        "statsDataId": "0000010203",
-        "cdCat01": "#C04404"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-medical-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1121"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-medical-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1133"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-medical-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1361"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-it-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-it-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1104"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-edu-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1192"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-edu-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1196"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-transport-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1614"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-transport-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1612"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-transport-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1661"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-service-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1391"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-service-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1381"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
-    },
-    {
-      "theme": "occupation-salary",
-      "componentKey": "theme-occ-service-trend",
-      "params": {
-        "statsDataId": "0003445758",
-        "cdCat02": "1453"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
     {
       "theme": "population-dynamics",
       "componentKey": "theme-pop-migration-trend",
+      "componentType": "line-chart",
       "params": {
         "statsDataId": "0000010101",
         "cdCat01": "A5103"
@@ -1278,6 +569,7 @@
     {
       "theme": "population-dynamics",
       "componentKey": "theme-pop-migration-trend",
+      "componentType": "line-chart",
       "params": {
         "statsDataId": "0000010101",
         "cdCat01": "A5104"
@@ -1288,11 +580,12 @@
       "tableTitle": "Ａ　人口・世帯"
     },
     {
-      "theme": "population-dynamics",
-      "componentKey": "theme-pd-aging-young-crossover",
+      "theme": "living-housing",
+      "componentKey": "lh-marriage-divorce-trend",
+      "componentType": "line-chart",
       "params": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A03501"
+        "statsDataId": "0000010101",
+        "cdCat01": "A9101"
       },
       "status": "ok",
       "rows": 200,
@@ -1300,32 +593,191 @@
       "tableTitle": "Ａ　人口・世帯"
     },
     {
-      "theme": "ports",
-      "componentKey": "ports-cargo-trend",
+      "theme": "living-housing",
+      "componentKey": "lh-marriage-divorce-trend",
+      "componentType": "line-chart",
       "params": {
-        "statsDataId": "0003130738",
-        "cdCat01": "110"
+        "statsDataId": "0000010101",
+        "cdCat01": "A9201"
       },
       "status": "ok",
       "rows": 200,
-      "hasNational": false,
-      "tableTitle": "第１部　入港船舶・船舶乗降人員及び海上出入貨物総括表 第３表　海上出入貨物表　（１）トン数総数表 都道府県"
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
     },
     {
-      "theme": "ports",
-      "componentKey": "ports-cargo-trend",
+      "theme": "local-economy",
+      "componentKey": "theme-le-establishments-trend",
+      "componentType": "line-chart",
       "params": {
-        "statsDataId": "0003130738",
-        "cdCat01": "120"
+        "statsDataId": "0000010103",
+        "cdCat01": "C2107"
+      },
+      "status": "ok",
+      "rows": 96,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-output-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C312001"
       },
       "status": "ok",
       "rows": 200,
-      "hasNational": false,
-      "tableTitle": "第１部　入港船舶・船舶乗降人員及び海上出入貨物総括表 第３表　海上出入貨物表　（１）トン数総数表 都道府県"
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-output-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C31201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-catch-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3121"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-catch-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C312101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-aquaculture-mix",
+      "componentType": "mixed-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C312201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-aquaculture-mix",
+      "componentType": "mixed-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C312202"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-half-century",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3125"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "manufacturing",
+      "componentKey": "manufacturing-shipment-value-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3401"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "manufacturing",
+      "componentKey": "manufacturing-shipment-value-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3402"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "manufacturing",
+      "componentKey": "manufacturing-establishments-employees-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3403"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "manufacturing",
+      "componentKey": "manufacturing-establishments-employees-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3404"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "railway",
+      "componentKey": "railway-freight-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3702"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
     },
     {
       "theme": "railway",
       "componentKey": "railway-passenger-trend",
+      "componentType": "line-chart",
       "params": {
         "statsDataId": "0000010103",
         "cdCat01": "C3704"
@@ -1338,6 +790,7 @@
     {
       "theme": "railway",
       "componentKey": "railway-passenger-trend",
+      "componentType": "line-chart",
       "params": {
         "statsDataId": "0000010103",
         "cdCat01": "C3705"
@@ -1348,188 +801,9 @@
       "tableTitle": "Ｃ　経済基盤"
     },
     {
-      "theme": "railway",
-      "componentKey": "railway-freight-trend",
-      "params": {
-        "statsDataId": "0000010103",
-        "cdCat01": "C3702"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｃ　経済基盤"
-    },
-    {
-      "theme": "real-income",
-      "componentKey": "real-income-cpi-breakdown",
-      "params": {
-        "statsDataId": "0000010212",
-        "cdCat01": "#L04414"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｌ　家計"
-    },
-    {
-      "theme": "real-income",
-      "componentKey": "theme-real-income-actual-vs-disposable",
-      "params": {
-        "statsDataId": "0000010212",
-        "cdCat01": "#L01201"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｌ　家計"
-    },
-    {
-      "theme": "roads",
-      "componentKey": "roads-length-trend",
-      "params": {
-        "statsDataId": "0000010108",
-        "cdCat01": "H711001"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｈ　居住"
-    },
-    {
-      "theme": "roads",
-      "componentKey": "roads-length-trend",
-      "params": {
-        "statsDataId": "0000010108",
-        "cdCat01": "H7113"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｈ　居住"
-    },
-    {
-      "theme": "safety",
-      "componentKey": "crime-count-arrest-rate-trend",
-      "params": {
-        "statsDataId": "0000010211",
-        "cdCat01": "#K06101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｋ　安全"
-    },
-    {
-      "theme": "safety",
-      "componentKey": "crime-count-arrest-rate-trend",
-      "params": {
-        "statsDataId": "0000010211",
-        "cdCat01": "#K06201"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｋ　安全"
-    },
-    {
-      "theme": "safety",
-      "componentKey": "traffic-accident-deaths-trend",
-      "params": {
-        "statsDataId": "0000010111",
-        "cdCat01": "K3101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｋ　安全"
-    },
-    {
-      "theme": "safety",
-      "componentKey": "traffic-accident-deaths-trend",
-      "params": {
-        "statsDataId": "0000010111",
-        "cdCat01": "K3104"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｋ　安全"
-    },
-    {
-      "theme": "safety",
-      "componentKey": "fire-emergency-trend",
-      "params": {
-        "statsDataId": "0000010211",
-        "cdCat01": "#K02101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｋ　安全"
-    },
-    {
-      "theme": "safety",
-      "componentKey": "fire-emergency-trend",
-      "params": {
-        "statsDataId": "0000010209",
-        "cdCat01": "#I11201"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｉ　健康・医療"
-    },
-    {
-      "theme": "safety",
-      "componentKey": "suicide-accident-death-trend",
-      "params": {
-        "statsDataId": "0000010209",
-        "cdCat01": "#I06201"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｉ　健康・医療"
-    },
-    {
-      "theme": "safety",
-      "componentKey": "suicide-accident-death-trend",
-      "params": {
-        "statsDataId": "0000010211",
-        "cdCat01": "#K08101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｋ　安全"
-    },
-    {
-      "theme": "tourism",
-      "componentKey": "theme-tourism-stay-trend",
-      "params": {
-        "statsDataId": "0000010107",
-        "cdCat01": "G7101"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｇ　文化・スポーツ"
-    },
-    {
-      "theme": "tourism",
-      "componentKey": "theme-tourism-stay-trend",
-      "params": {
-        "statsDataId": "0000010107",
-        "cdCat01": "G7102"
-      },
-      "status": "ok",
-      "rows": 200,
-      "hasNational": true,
-      "tableTitle": "Ｇ　文化・スポーツ"
-    },
-    {
       "theme": "tourism",
       "componentKey": "theme-tourism-transport-trend",
+      "componentType": "line-chart",
       "params": {
         "statsDataId": "0000010103",
         "cdCat01": "C3706"
@@ -1542,6 +816,7 @@
     {
       "theme": "tourism",
       "componentKey": "theme-tourism-hotel-supply-trend",
+      "componentType": "line-chart",
       "params": {
         "statsDataId": "0000010103",
         "cdCat01": "C3803"
@@ -1554,6 +829,7 @@
     {
       "theme": "tourism",
       "componentKey": "theme-tourism-hotel-supply-trend",
+      "componentType": "line-chart",
       "params": {
         "statsDataId": "0000010103",
         "cdCat01": "C3804"
@@ -1562,6 +838,1668 @@
       "rows": 200,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "kpi-lf-fiscal-strength",
+      "componentType": "kpi-card",
+      "params": {
+        "statsDataId": "0000010104",
+        "cdCat01": "D2101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "kpi-lf-current-balance",
+      "componentType": "kpi-card",
+      "params": {
+        "statsDataId": "0000010104",
+        "cdCat01": "D2103"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "kpi-lf-debt-service",
+      "componentType": "kpi-card",
+      "params": {
+        "statsDataId": "0000010104",
+        "cdCat01": "D2111"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "kpi-lf-future-burden",
+      "componentType": "kpi-card",
+      "params": {
+        "statsDataId": "0000010104",
+        "cdCat01": "D2112"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-school-type-breakdown",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010105",
+        "cdCat01": "E2101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｅ　教育"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-school-type-breakdown",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010105",
+        "cdCat01": "E3101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｅ　教育"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-school-type-breakdown",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010105",
+        "cdCat01": "E4101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｅ　教育"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-school-type-breakdown",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010105",
+        "cdCat01": "E6101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｅ　教育"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-school-type-breakdown",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010105",
+        "cdCat01": "E6102"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｅ　教育"
+    },
+    {
+      "theme": "local-economy",
+      "componentKey": "theme-economy-income-wage",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010106",
+        "cdCat01": "F6501"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｆ　労働"
+    },
+    {
+      "theme": "tourism",
+      "componentKey": "theme-tourism-stay-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010107",
+        "cdCat01": "G7101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｇ　文化・スポーツ"
+    },
+    {
+      "theme": "tourism",
+      "componentKey": "theme-tourism-stay-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010107",
+        "cdCat01": "G7102"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｇ　文化・スポーツ"
+    },
+    {
+      "theme": "roads",
+      "componentKey": "roads-length-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010108",
+        "cdCat01": "H711001"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｈ　居住"
+    },
+    {
+      "theme": "roads",
+      "componentKey": "roads-length-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010108",
+        "cdCat01": "H7113"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｈ　居住"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-pension-benefit-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010110",
+        "cdCat01": "J5104"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｊ　福祉・社会保障"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "safety-fire-casualties-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010111",
+        "cdCat01": "K2110"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "safety-fire-casualties-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010111",
+        "cdCat01": "K2111"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "traffic-accident-deaths-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010111",
+        "cdCat01": "K3101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "traffic-accident-deaths-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010111",
+        "cdCat01": "K3104"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "safety-crime-types-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010111",
+        "cdCat01": "K420101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "safety-crime-types-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010111",
+        "cdCat01": "K420102"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "safety-crime-types-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010111",
+        "cdCat01": "K420103"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "safety-crime-types-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010111",
+        "cdCat01": "K420104"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "safety-crime-types-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010111",
+        "cdCat01": "K420105"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "local-economy",
+      "componentKey": "theme-economy-income-wage",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010112",
+        "cdCat01": "L3130"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｌ　家計"
+    },
+    {
+      "theme": "foreign-residents",
+      "componentKey": "theme-foreign-total-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A01601"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "foreign-residents",
+      "componentKey": "theme-foreign-nationality-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A0160101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "foreign-residents",
+      "componentKey": "theme-foreign-nationality-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A0160102"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-as-youth-old-dep-index",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A03401"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-as-youth-old-dep-index",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A03402"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "population-dynamics",
+      "componentKey": "theme-pd-aging-young-crossover",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A03501"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "birth-rate-aging-rate-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A03503"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "living-housing",
+      "componentKey": "unmarried-elderly-couple-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A0411001"
+      },
+      "status": "ok",
+      "rows": 96,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "birth-rate-aging-rate-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A05202"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "living-housing",
+      "componentKey": "lh-household-structure-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A06202"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "living-housing",
+      "componentKey": "lh-household-structure-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A06205"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "cmp-pop-elderly-household",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A06301"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "cmp-pop-elderly-household",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A06302"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "cmp-pop-elderly-household",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A06304"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "marriage-divorce-rate-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A06601"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "marriage-divorce-rate-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010201",
+        "cdCat01": "#A06602"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ａ　人口・世帯"
+    },
+    {
+      "theme": "manufacturing",
+      "componentKey": "theme-manufacturing-labor-productivity",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010203",
+        "cdCat01": "#C04401"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "manufacturing",
+      "componentKey": "theme-manufacturing-labor-productivity",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010203",
+        "cdCat01": "#C04404"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｃ　経済基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-expense-nature-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D0140201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-revenue-composition",
+      "componentType": "composition-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D0210101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-revenue-composition",
+      "componentType": "composition-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D0210201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-revenue-composition",
+      "componentType": "composition-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D0210301"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-income-tax-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D0220103"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-income-tax-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D02206"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-taxpayer-ratio-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D02207"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-expense-composition",
+      "componentType": "composition-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D0310301"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-expense-composition",
+      "componentType": "composition-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D0311201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-expense-composition",
+      "componentType": "composition-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D0311501"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-expense-composition",
+      "componentType": "composition-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D0320101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-expense-nature-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D0320201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "local-finance",
+      "componentKey": "theme-lf-per-capita-expense-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010204",
+        "cdCat01": "#D0330103"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｄ　行政基盤"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-school-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010205",
+        "cdCat01": "#E0110201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｅ　教育"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-school-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010205",
+        "cdCat01": "#E0110202"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｅ　教育"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-school-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010205",
+        "cdCat01": "#E0110203"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｅ　教育"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-in-pref-university-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010205",
+        "cdCat01": "#E0940302"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｅ　教育"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-university-enrollment-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010205",
+        "cdCat01": "#E09504"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｅ　教育"
+    },
+    {
+      "theme": "local-economy",
+      "componentKey": "theme-industry-structure",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010206",
+        "cdCat01": "#F01201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｆ　労働"
+    },
+    {
+      "theme": "local-economy",
+      "componentKey": "theme-industry-structure",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010206",
+        "cdCat01": "#F01202"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｆ　労働"
+    },
+    {
+      "theme": "local-economy",
+      "componentKey": "theme-industry-structure",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010206",
+        "cdCat01": "#F01203"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｆ　労働"
+    },
+    {
+      "theme": "labor-wages",
+      "componentKey": "labor-wages-job-ratio-vs-unemployment",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010206",
+        "cdCat01": "#F01301"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｆ　労働"
+    },
+    {
+      "theme": "labor-wages",
+      "componentKey": "theme-lw-employment-rate-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010206",
+        "cdCat01": "#F03101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｆ　労働"
+    },
+    {
+      "theme": "labor-wages",
+      "componentKey": "labor-wages-job-ratio-vs-unemployment",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010206",
+        "cdCat01": "#F03103"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｆ　労働"
+    },
+    {
+      "theme": "labor-mobility",
+      "componentKey": "labor-mobility-turnover-vs-jobchange",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010206",
+        "cdCat01": "#F04101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｆ　労働"
+    },
+    {
+      "theme": "labor-mobility",
+      "componentKey": "labor-mobility-turnover-vs-jobchange",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010206",
+        "cdCat01": "#F04102"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｆ　労働"
+    },
+    {
+      "theme": "labor-mobility",
+      "componentKey": "theme-lm-employment-mobility-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010206",
+        "cdCat01": "#F04104"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｆ　労働"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-culture-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010207",
+        "cdCat01": "#G01101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｇ　文化・スポーツ"
+    },
+    {
+      "theme": "education-culture",
+      "componentKey": "theme-edu-culture-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010207",
+        "cdCat01": "#G01104"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｇ　文化・スポーツ"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-volunteer-participation-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010207",
+        "cdCat01": "#G04101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｇ　文化・スポーツ"
+    },
+    {
+      "theme": "living-housing",
+      "componentKey": "vacancy-ownership-rate-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010208",
+        "cdCat01": "#H01301"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｈ　居住"
+    },
+    {
+      "theme": "living-housing",
+      "componentKey": "vacancy-ownership-rate-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010208",
+        "cdCat01": "#H01405"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｈ　居住"
+    },
+    {
+      "theme": "living-housing",
+      "componentKey": "lh-dwelling-floor-area-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010208",
+        "cdCat01": "#H0210301"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｈ　居住"
+    },
+    {
+      "theme": "living-housing",
+      "componentKey": "lh-dwelling-floor-area-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010208",
+        "cdCat01": "#H0210302"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｈ　居住"
+    },
+    {
+      "theme": "healthcare",
+      "componentKey": "theme-health-lifestyle-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I06101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "healthcare",
+      "componentKey": "theme-health-death-causes-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I06102"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "healthcare",
+      "componentKey": "theme-health-death-causes-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I06103"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "healthcare",
+      "componentKey": "theme-health-death-causes-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I06104"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "healthcare",
+      "componentKey": "theme-health-death-causes-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I06105"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "healthcare",
+      "componentKey": "theme-health-death-causes-donut",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I06106"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "suicide-accident-death-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I06201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "healthcare",
+      "componentKey": "theme-health-supply-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I0910103"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "healthcare",
+      "componentKey": "theme-health-supply-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I0920101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "fire-emergency-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I11201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "healthcare",
+      "componentKey": "theme-health-lifestyle-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I13102"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "healthcare",
+      "componentKey": "theme-health-expense-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010209",
+        "cdCat01": "#I15106"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｉ　健康・医療"
+    },
+    {
+      "theme": "aging-society",
+      "componentKey": "theme-late-elderly-medical-expense-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010210",
+        "cdCat01": "#J05208"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｊ　福祉・社会保障"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "fire-emergency-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010211",
+        "cdCat01": "#K02101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "crime-count-arrest-rate-trend",
+      "componentType": "mixed-chart",
+      "params": {
+        "statsDataId": "0000010211",
+        "cdCat01": "#K06101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "crime-count-arrest-rate-trend",
+      "componentType": "mixed-chart",
+      "params": {
+        "statsDataId": "0000010211",
+        "cdCat01": "#K06201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "safety",
+      "componentKey": "suicide-accident-death-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010211",
+        "cdCat01": "#K08101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｋ　安全"
+    },
+    {
+      "theme": "real-income",
+      "componentKey": "theme-real-income-actual-vs-disposable",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010212",
+        "cdCat01": "#L01201"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｌ　家計"
+    },
+    {
+      "theme": "real-income",
+      "componentKey": "real-income-cpi-breakdown",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010212",
+        "cdCat01": "#L04414"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｌ　家計"
+    },
+    {
+      "theme": "consumer-prices",
+      "componentKey": "theme-cpi-living-cost",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010212",
+        "cdCat01": "#L04416"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｌ　家計"
+    },
+    {
+      "theme": "consumer-prices",
+      "componentKey": "theme-cpi-living-cost",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010212",
+        "cdCat01": "#L04417"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｌ　家計"
+    },
+    {
+      "theme": "consumer-prices",
+      "componentKey": "theme-cpi-living-cost",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0000010212",
+        "cdCat01": "#L04418"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "Ｌ　家計"
+    },
+    {
+      "theme": "ports",
+      "componentKey": "ports-cargo-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003130738",
+        "cdCat01": "110"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": false,
+      "tableTitle": "第１部　入港船舶・船舶乗降人員及び海上出入貨物総括表 第３表　海上出入貨物表　（１）トン数総数表 都道府県"
+    },
+    {
+      "theme": "ports",
+      "componentKey": "ports-cargo-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003130738",
+        "cdCat01": "120"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": false,
+      "tableTitle": "第１部　入港船舶・船舶乗降人員及び海上出入貨物総括表 第３表　海上出入貨物表　（１）トン数総数表 都道府県"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "0120"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "0250"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "0330"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "0410"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "0420"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "0430"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "0490"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "0660"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "0880"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "0980"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "1040"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart",
+      "params": {
+        "statsDataId": "0003238633",
+        "cdCat01": "1130"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
+    },
+    {
+      "theme": "labor-wages",
+      "componentKey": "labor-wages-gender-gap",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003426933"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": false,
+      "tableTitle": "令和２年以降 一般_都道府県別_年齢階級別DB"
+    },
+    {
+      "theme": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile",
+      "params": {
+        "statsDataId": "0003441258"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "地域別価格差 10大費目別消費者物価地域差指数 （全国平均＝100）－全国，地方，都道府県，都道府県庁所在市及び政令指定都市（2013年～）"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-it-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1101"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-it-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1104"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-medical-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1121"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-medical-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1133"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-edu-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1192"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-edu-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1196"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-medical-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1361"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-service-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1381"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-service-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1391"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-service-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1453"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-transport-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1612"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-transport-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1614"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
+    },
+    {
+      "theme": "occupation-salary",
+      "componentKey": "theme-occ-transport-trend",
+      "componentType": "line-chart",
+      "params": {
+        "statsDataId": "0003445758",
+        "cdCat02": "1661"
+      },
+      "status": "ok",
+      "rows": 200,
+      "hasNational": true,
+      "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     }
   ]
 }

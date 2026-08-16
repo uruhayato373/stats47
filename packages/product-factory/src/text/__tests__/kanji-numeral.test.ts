@@ -95,3 +95,25 @@ describe("parseKanjiNumeral — 桁を並べた表記", () => {
     expect(parseKanjiNumeral("五")).toBe(5);
   });
 });
+
+describe("extractKanjiClaims — 算用数字に続くスケール文字は漢数字ではない", () => {
+  // ★2026-08-12: 「5兆8021億円」の「億」を漢数字主張として数えていた。
+  //   算用数字に付く桁の表記なので、算用数字への統一という規約に反していない。
+  //   実測で書籍の「漢数字残 33 件」は**全てこれ**で、章コンポーザでは
+  //   使える解説 (regionalAnalysis / faq) を丸ごと捨てていた。
+  const yenUnits = (t: string) =>
+    extractKanjiClaims(t).filter((c) => ["円", "位", "倍", "％"].includes(c.unit));
+
+  it("★算用数字 + 億/万/兆 は検出しない (正しく書かれた本文)", () => {
+    expect(yenUnits("愛知県は5兆8021億円で最大です。")).toHaveLength(0);
+    expect(yenUnits("約1.39億人泊にのぼりました。")).toHaveLength(0);
+    expect(yenUnits("東京都は約4,743万人泊でした。")).toHaveLength(0);
+    expect(yenUnits("１２３億円")).toHaveLength(0); // 全角数字も同じ
+  });
+
+  it("★本物の漢数字は従来どおり検出する (検出力を落としていない)", () => {
+    expect(yenUnits("一位は愛知県でした。").length).toBeGreaterThan(0);
+    expect(yenUnits("八十七円でした。").length).toBeGreaterThan(0);
+    expect(yenUnits("三兆円規模です。").length).toBeGreaterThan(0);
+  });
+});

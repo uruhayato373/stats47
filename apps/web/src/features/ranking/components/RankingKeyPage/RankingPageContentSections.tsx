@@ -10,6 +10,7 @@ import {
 } from "@/features/ranking";
 
 import {
+    ADSENSE_DISPLAY_ENABLED,
     AdSenseAd,
     RANKING_PAGE_FOOTER,
     RANKING_INCONTENT_MOBILE,
@@ -25,6 +26,8 @@ export interface RankingPageSections {
     faq?: ReactNode;
     /** 統計→公務員AI ファネル CTA — 出典カードの直後・footer 広告の前に表示 */
     funnelCta?: ReactNode;
+    /** AdSense停止中に本文中段へ出す文脈一致バナー（画像のみ） */
+    inContentAffiliate?: ReactNode;
     /** ネイティブアフィリエイト枠 (D Phase 2) — AI考察カードの直前に表示 */
     nativeAffiliate?: ReactNode;
     /** 同カテゴリ関連ランキング grid (内部リンク密度↑、GSC indexation 改善) */
@@ -81,12 +84,16 @@ export function RankingPageContentSections({
 
             {sections.insights}
 
-            <div className="lg:hidden">
-                <AdSenseAd
-                    format={RANKING_INCONTENT_MOBILE.format}
-                    slotId={RANKING_INCONTENT_MOBILE.slotId}
-                />
-            </div>
+            {!ADSENSE_DISPLAY_ENABLED && sections.inContentAffiliate}
+
+            {ADSENSE_DISPLAY_ENABLED && (
+                <div className="lg:hidden">
+                    <AdSenseAd
+                        format={RANKING_INCONTENT_MOBILE.format}
+                        slotId={RANKING_INCONTENT_MOBILE.slotId}
+                    />
+                </div>
+            )}
 
             {sections.faq}
             {sections.regionalAnalysis}
@@ -106,10 +113,12 @@ export function RankingPageContentSections({
 
             {sections.funnelCta}
 
-            <AdSenseAd
-                format={RANKING_PAGE_FOOTER.format}
-                slotId={RANKING_PAGE_FOOTER.slotId}
-            />
+            {ADSENSE_DISPLAY_ENABLED && (
+                <AdSenseAd
+                    format={RANKING_PAGE_FOOTER.format}
+                    slotId={RANKING_PAGE_FOOTER.slotId}
+                />
+            )}
 
             {sections.nativeAffiliate}
             {sections.relatedRankings}

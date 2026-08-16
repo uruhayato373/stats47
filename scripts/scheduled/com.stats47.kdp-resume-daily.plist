@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  KDP 32 冊出版の再開ジョブ (毎日 08:30 / 14:30 / 20:30 JST・ローカル Mac 限定)。
+
+  KDP の「本の作成数制限」(未公開 ≈10 冊で新規作成不可) が審査完了で空いたタイミングを
+  拾って次のバッチ (draft → verify → publish) を進める。制限中は即終了する (無害)。
+  全 32 冊が listed になったら何もしなくなるので、その時点でアンインストールしてよい。
+
+  インストール:
+    cp scripts/scheduled/com.stats47.kdp-resume-daily.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.stats47.kdp-resume-daily.plist
+  アンインストール (即時停止):
+    launchctl unload ~/Library/LaunchAgents/com.stats47.kdp-resume-daily.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.stats47.kdp-resume-daily</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/minamidaisuke/stats47/scripts/scheduled/kdp-resume-daily.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Hour</key>
+            <integer>8</integer>
+            <key>Minute</key>
+            <integer>30</integer>
+        </dict>
+        <dict>
+            <key>Hour</key>
+            <integer>14</integer>
+            <key>Minute</key>
+            <integer>30</integer>
+        </dict>
+        <dict>
+            <key>Hour</key>
+            <integer>20</integer>
+            <key>Minute</key>
+            <integer>30</integer>
+        </dict>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/minamidaisuke/stats47</string>
+    <key>StandardOutPath</key>
+    <string>/Users/minamidaisuke/stats47/.local/kdp-debug/launchd-resume.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/minamidaisuke/stats47/.local/kdp-debug/launchd-resume.err</string>
+</dict>
+</plist>

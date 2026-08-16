@@ -115,6 +115,8 @@ jobs:
             exit 0
           fi
           git commit -m "chore(ranking): weekly data integrity audit $(date -u +%Y-%m-%d) [skip ci]"
+          # pull せずに push すると develop が進んだ瞬間に (fetch first) で落ちる (2026-08-16 是正)
+          git pull --rebase origin develop
           git push origin develop
 
       - name: 🚨 Open issue on integrity violations

@@ -35,9 +35,6 @@ export async function SidebarStickyBannerAd({
 
   return (
     <div className="hidden lg:block">
-      <div className="mb-1">
-        <span className="text-xs font-medium text-muted-foreground">PR</span>
-      </div>
       <BannerAd
         href={banner.htmlContent}
         imageUrl={banner.imageUrl}

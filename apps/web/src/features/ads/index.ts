@@ -8,6 +8,7 @@ export { BannerAd } from "./components/BannerAd";
 export { OperatorProfileCard } from "./components/OperatorProfileCard";
 export { SidebarPromoBanner } from "./components/SidebarPromoBanner";
 export { NativeAffiliateRow } from "./components/NativeAffiliateRow";
+export { isLandscapeBanner } from "./services/banner-geometry";
 
 // 標準広告スロット部品（エディトリアル文法の統一枠）
 export {

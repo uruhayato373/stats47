@@ -26,7 +26,11 @@ import {
     classifyRankingSubtitle,
 } from "@/features/ranking";
 
-import { AdSenseAd, RANKING_PAGE_TABLE_SIDE } from "@/lib/google-adsense";
+import {
+    ADSENSE_DISPLAY_ENABLED,
+    AdSenseAd,
+    RANKING_PAGE_TABLE_SIDE,
+} from "@/lib/google-adsense";
 
 import { NationalTrendCard } from "../NationalTrendCard/NationalTrendCard";
 
@@ -209,12 +213,14 @@ export function RankingKeyPageClient({
     const rail = sections.sidebar ? (
         <>
             {sections.sidebar}
-            <div className="hidden lg:block">
-                <AdSenseAd
-                    format={RANKING_PAGE_TABLE_SIDE.format}
-                    slotId={RANKING_PAGE_TABLE_SIDE.slotId}
-                />
-            </div>
+            {ADSENSE_DISPLAY_ENABLED && (
+                <div className="hidden lg:block">
+                    <AdSenseAd
+                        format={RANKING_PAGE_TABLE_SIDE.format}
+                        slotId={RANKING_PAGE_TABLE_SIDE.slotId}
+                    />
+                </div>
+            )}
         </>
     ) : undefined;
 

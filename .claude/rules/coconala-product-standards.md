@@ -118,6 +118,58 @@ npm run test:run   --workspace=@stats47/product-factory
 - **SSOT = `packages/product-factory/src/channels/kindle/book-catalog.ts`**（`KINDLE_BOOKS`）。4 シリーズ = S1 論点読み物 / S2 テーマ別データブック / S3 地域別 / S4 ランキング大全。本文素材の SSOT は **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。生成物 `.local/kindle-books/<id>/v1/book.epub` は派生物（git 管理外・手編集を正典にしない）。
 - **主エンジンは EPUB3 リフロー型**（`src/generators/epub.ts`・jszip）。図表は章内ブロック画像として SVG→PNG 化して同梱（sharp・density 288）。カバーは satori→sharp で 1600×2560 自動生成。**KDP は電子で PDF を実質受け付けない**ため EPUB を採る（PDF 生成器 `databook-pdf.ts` は目次・画像・チャート非対応でそもそも書籍に不向き）。
 
+#### 章の中身の作り方（2026-08-12 確定・S2/S3/S4 の 20 冊）
+
+出品前の中身実測で、S2×11 / S3×8 / S4×1 の 20 冊が **1 章 = 定型 1 文 (144〜200 字) + 図**
+しかなく、総字数 4,313〜6,001 字だった。S1 の 12 冊 (1 章 2,000〜3,500 字) と同じ値段で
+売れる状態ではない。根は 2 つ:
+
+1. **定型文テンプレが本文のすべて**だった（`ranking-databook.ts` の「1位は◯◯で△△、
+   最下位は…」1 文）。「差は約 1.0 倍」という無意味文も混入していた
+2. **S3 の 8 冊と S4-01 が実質同じ本**だった。全冊が同じ pack の**先頭 24 件**を章にしており、
+   差分は地域内最上位県の 1 文だけ（表紙が同一バイトだったのと同根）
+
+| 層 | SSOT / 実装 | 役割 |
+|---|---|---|
+| 章本文 | `src/channels/kindle/ai-content-composer.ts` | R2 `app/ranking/<key>/ai-content.json` の insights / regionalAnalysis / FAQ / 県別解説を**フィールド単位の数値ゲートを通してから**合成する。1 章 150 字 → 1,000〜1,600 字 |
+| 載せる指標 | `src/channels/kindle/book-ranking-keys.ts` (git TS) | 書籍ごとに 30 キー。選定理由をキーごとにコメントで残す。「先頭 24 件」は廃止 |
+| 選定の実行 | `scripts/select-book-keys.mts` | 地域固有性・意外性でスコアリングして候補を出す。**欠陥 unit・`isActive:false` を除外** |
+| 書き下ろし | `src/channels/kindle/manuscripts/<id>/*.md` | S2/S4 は 7 本、S3 は 7 本。ブリーフは `scripts/build-fresh-briefs.mts` が実データを焼いて生成 |
+| 検証 | `scripts/verify-fresh.mts` | ファイル数・スタブでないこと・漢数字・である調・煽り語・SSOT との数値整合 |
+
+**書籍に載せてはいけない指標**（`select-book-keys.mts` が除外し、
+`__tests__/book-ranking-keys.test.ts` が固定する）:
+
+- **単位の欠陥が既知のもの** — `MONEY-UNIT-SCALE-01`（賃金構造基本統計 `0003445758` /
+  個人企業経済調査 `0003421679` は e-Stat の値が千円なのに config の unit が万円）。実測で
+  「バス運転者の平均年収 1位 神奈川県 5,017万円」が原稿に入っていた。サイト表示なら是正で
+  済むが、**書籍は出したら取り下げられない**ので config が直るまで載せない
+- **`isActive:false`** — `/ranking/<key>` が 410 か空ページになり読者が確かめに行けない。
+  非公開の理由自体がデータの欠陥であることが多い（実測 2 件はどちらも接地データの欠陥）
+
+**書き下ろし 30% の判定は `products:kindle:generate` が書籍単位で行う**（比率の権威）。
+`verify-fresh` の字数判定は「章として成立するか」（900 字）に絞る — 目安字数は 30% 比率からの
+推定値にすぎず、実測 fresh は必要量の 2.2 倍あったので、そこで 7 字差を落とすと本来の要件から
+外れた数字を守らせることになる。
+
+#### 出品可否は実測で決める（`verify-publishable.mts`）
+
+出品停止（`blocked-thin`）は人手で書き込むと、**是正しても誰も戻さない / 中身を直さずに
+status だけ戻せる**の両方が起きる。実際 `blockReason` に是正前の実測値
+（「本文 4,568 字 / 1章 152 字」）が残ったままだった。
+
+```bash
+npx tsx packages/product-factory/scripts/verify-publishable.mts          # 実測して表示
+npx tsx packages/product-factory/scripts/verify-publishable.mts --apply  # listings も更新
+```
+
+全書籍をビルドし、`build-book.ts` の `volumeOk`（総 20,000字 / 1章 800字）と
+`freshRatioOk`（KDP の 30%）で判定して `.claude/config/kdp-listings.json` の
+`status` / `blockReason` を書き換える。**閾値をここに再定義しない**（build-book が正典）。
+`listed`（公開済み）は巻き戻さない — 公開状態は KDP 側が真実源。
+
+**このスクリプトは実公開しない。** KDP へのアップロードはオーナー工程（§8 の KDP 出品自動化）。
+
 #### EPUB 構造の不変量（2026-08-12 確定・`__tests__/epub.test.ts` が固定）
 
 Kindle Previewer で「表紙が描画されない / 途中ページが表示されない / 改ページが不適切」の
@@ -178,8 +230,35 @@ npm run products:kindle:verify-epub  --workspace=@stats47/product-factory -- --b
 床に届かない書籍は `kdp-listings.json` の `status: "blocked-thin"` + `blockReason` で出品を止める
 (理由が消えると次の人が status だけ戻して出品しかねないので upsert 保持する)。
 
-**S1 の 12 冊は合格・S2/S3/S4 の 20 冊は不合格**。20 冊を出すには章あたりの散文を書き足すか、
-「1 指標 1 章」の構成自体をやめて論点単位に束ね直す必要がある。
+**S1 の 12 冊は合格・S2/S3/S4 の 20 冊は不合格**だった。以下の章コンポーザで是正した。
+
+#### 章コンポーザ — ranking 章の本文は ai-content から組む (2026-08-12 新設)
+
+R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済みの解説
+(insights 400〜700字 / regionalAnalysis 700〜1,000字 / faq / 県別解説 47県) を持つ。
+これを書籍本文へ再利用し、**1 章 150 字 → 1,000〜1,600 字**にした。
+
+| 層 | 実装 |
+|---|---|
+| 取得・合成・フィールド判定 | `src/channels/kindle/ai-content-composer.ts` |
+| 書籍別のキー選定 SSOT | `src/channels/kindle/book-ranking-keys.ts` (生成: `scripts/select-book-keys.mts`) |
+| 書き下ろしの執筆ブリーフ | `scripts/build-fresh-briefs.mts` (実データ 30 指標を焼き込む) |
+| 書き下ろしの検証 | `scripts/verify-fresh.mts` |
+
+**捏造を通さない設計**: 採用前に `.claude/scripts/ai-content/lib/number-audit.mjs` を
+**import して** ai-content 側とまったく同じ判定で数値を突合する (書籍側に別実装を作らない =
+「サイトでは通るが書籍では落ちる」二重基準を作らない)。判定は**フィールド単位**で、
+落ちたものだけ理由付きで捨てる (キーごと捨てると使える解説まで失う)。
+
+**禁止**:
+
+| NG | OK |
+|---|---|
+| pack の全キーを渡して先頭 N 件を章にする | `book-ranking-keys.ts` で書籍ごとに確定させる |
+| S3 8 冊が同じキー・同じ本文になる | 地域の県が上位/下位に偏る指標を選び、本文も県名で地域抽出する |
+| ai-content の見出し語で地方ブロックを照合する | **節の中の県名**で判定 (見出しは内容ベースの自由文で固定区分ではない) |
+| 書き下ろし章を `freshText` でインライン持ちする | `manuscripts/<id>/*.md` を `freshFile` で参照 (S1 と同じ) |
+| ヘルパー定数を使用箇所より後ろに置く | 前に置く (`const` は巻き上げされず生成が落ちる) |
 
 - **需要ファースト**: 一括生成せず 1 冊ずつ manuscript へ昇格 → 生成 → 人間が KDP 公開 → 4 週実測（KENP/販売数）→ 良ければ横展開。パイロット = **K-S1-01『実質手取りの地図』**（血肉 = 家計・所得系ブログ 9 本 + 書き下ろし）。書き下ろしの最終仕上げは `article-writer` → `blog-critic` の既存品質ゲートを通す。
 
@@ -194,7 +273,49 @@ npm run products:kindle:verify-epub  --workspace=@stats47/product-factory -- --b
 - **draft-first + `--commit` gate + オーナー承認**: 既定は「下書き保存」。**実公開（`--commit`）は outward-facing・取り下げに時間がかかるため、オーナー明示承認時のみ**。未充填フィールド・公開未確定時は「公開した」と報告しない。
 - **KDP フォームは React SPA で DOM が変わりやすい**。初回は必ず `kdp-publish --probe` で構造を `.local/kdp-debug/` に dump し、`kdp-form.mjs` の label セレクタが合うか確認する（coconala の `discover-categories` 相当）。実機での初回調整が前提。
 - **KU（KDP Select 独占）は既定 未登録**（`kuEnrolled:false`・販売のみ）。判断はオーナー。**規約リスク**: 出品者自身のブラウザ自動化の明示禁止は未確認だが bot 検知リスクは残るため低頻度（出品時・価格改定時）に限る。
-- 実装: agent `kdp-operator` / skill `/kdp-publish` / `.claude/scripts/kdp/`（`{login,capture-account,kdp-publish}.mjs` + `lib/kdp-{session,form}.mjs`）。書籍生成・カタログは `kindle-publisher` に委譲。
+#### KDP 入稿フォームの実仕様 (2026-08-12 に実機で確定)
+
+移植元 (doboku-note) の英語版フォーム前提の実装は**日本語版でほぼ動かなかった**。実測で分かった要点:
+
+| 箇所 | 実仕様 | 取り違えるとどうなるか |
+|---|---|---|
+| ドメイン | `kdp.amazon.co.jp/ja_JP` | `.com` は別アカウント扱いで「アカウントが見つかりません」 |
+| 入力欄の識別 | `<label>` が空。`id="data-title"` / `name="data[title]"` で名指し | ラベル検索は 1 つも一致しない |
+| フリガナ・ローマ字 | タイトル / サブタイトル / 著者に必須 (英語版に無い欄) | 未入力で先へ進めない |
+| 内容紹介 | CKEditor。`setData` で `<p>` を組んで入れる | キー入力だと空段落が `&nbsp;` になり「不可視文字」で拒否 |
+| カテゴリ | 3 段の select で絞り込み → **掲載場所のチェック**で 1 枠 | select だけでは「0 個選択済み」のまま 1 枠も入らない |
+| カテゴリのボタン | 成人向けラジオを選ぶまで `disabled` | 押せずウィザードが 1 歩も進まない |
+| 出版権利のラジオ | `name="data-is-public-domain"` (他と命名規則が違う) | `data[...]-radio` で探すと 0 件 |
+| モーダル内のボタン | Amazon AUI。**Playwright の実クリックのみ有効** | `evaluate` の `.click()` は静かに無反応 |
+| select | React 制御 (`react-aui-N`)。`selectOption` を使う | `value` 代入 + `change` は state を変えない |
+| 表紙 | **JPEG / TIFF のみ**。先に「作成済みの表紙をアップロード」を選ぶ | PNG は黙って拒否され「表紙がアップロードされていません」のまま |
+| 価格 | 12 か国ぶん並ぶ。`…[JP][price_vat_inclusive]` を名指し | ラベル検索だと別の国の欄に入る |
+| ステップ移動 | 自動で進まない。「保存して続行」→ URL の変化を read-back | 押しただけを成功とすると、埋まっていない状態で先へ進んだと誤報する |
+| 表紙欄の出現 | 原稿の処理が終わってから描画される。出るまで待つ | 新規作成の 1 回目だけ空振りし、やり直すと通るので原因が見えない |
+| AI 開示の確認 | `div[role="checkbox"]` + `aria-checked` (素の checkbox は存在しない) | `input[type=checkbox]` を探すと 0 件で、永久に「入らない」 |
+| 同じ確認欄が 2 つ | AI 申告用と再アップロード用。**両方**入れる | 片方だけで「チェックした」と思い、同じエラーで止まり続ける |
+| 確認チェックの順序 | **カバーを入れたあと**に押す | アップロードのたびに未チェックへ戻るので、先に押すと無効化される |
+| アコーディオン | 開いていたら押さない (押すと閉じる) | やり直し実行で質問票が消え、入力できなくなる |
+
+**判定は必ず read-back で行う**。「押せた / setInputFiles できた」を成功条件にすると、
+実際には 1 件も入っていないのに ✓ が並ぶ (カテゴリで実際にそうなり、3 枠 ✓ と報告しながら
+1 枠も保存されていなかった)。カテゴリは「選択済み件数が期待どおり増えたか」、
+表紙は「未アップロード表示が消えたか」で判定する。
+
+**KDP には本の作成数制限がある (2026-08-13 実測)**。未公開 (下書き + レビュー中) タイトルが
+約 10 冊に達すると「本の作成数制限を超えました」モーダルが出て、新規下書きの保存が
+一切できなくなる。**公開直後 (レビュー中) も枠を食う**ので、公開しても即座には空かない。
+32 冊は「10 冊作成 → verify → 公開 → 審査完了 (最大 72h) を待つ → 次の 10 冊」の
+パイプラインで数日かけて出す。`goToNextKdpStep` がこのモーダルを名指しで検出し
+(`limitHit`)、バッチは連続失敗ブレーカで残りを焼かずに止まる。**制限の回避は試みない**
+(bot 検知・アカウント停止のリスク)。
+
+**下書きは使い回す**。`draftId` を listings に控えて既存を開く。毎回 `new/details` から作ると
+同じ本の空下書きが増え、公開済みの本に対して実行すれば重複出品になる (実装中に 9 件たまった)。
+掃除は `.claude/scripts/kdp/kdp-drafts.mjs`
+(`--prune` で対象表示 / `--prune --apply` で削除。SSOT の draftId は消さない)。
+
+- 実装: agent `kdp-operator` / skill `/kdp-publish` / `.claude/scripts/kdp/`（`{login,capture-account,kdp-publish,kdp-batch,kdp-drafts}.mjs` + `lib/kdp-{session,form,flow}.mjs`。フローの単一実装は `lib/kdp-flow.mjs`、多冊数は `kdp-batch.mjs --phase draft|verify|publish|status`、作成数制限の再開は launchd `scripts/scheduled/kdp-resume-daily.sh`）。出品内容の SSOT は `.claude/config/kdp-listings.json`、カテゴリは `packages/product-factory/src/channels/kindle/kdp-category.ts`、DRM と AI 開示は同 `kdp-publishing-policy.ts`、フリガナ・ローマ字は同 `kdp-reading.ts`。書籍生成・カタログは `kindle-publisher` に委譲。
 
 役割分担（追加分）:
 

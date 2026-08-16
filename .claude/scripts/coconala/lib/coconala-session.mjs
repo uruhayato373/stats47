@@ -196,23 +196,52 @@ export async function waitForLogin(page, { waitMinutes = 6, tag = '[login]' } = 
   } catch {}
   const deadline = Date.now() + waitMinutes * 60_000;
   let warned = false;
+  let lastNudge = Date.now();
+  /**
+   * 現在の画面状態を読む。
+   *
+   * ★遷移中に落ちてはならない (2026-08-12 に KDP 側で実測)。ログイン中は人がボタンを押すたびに
+   *   ページが遷移し、その最中に page.evaluate を呼ぶと実行コンテキストが壊れて例外になる。
+   *   捕まえていないと**人がログインを始めた瞬間にスクリプトが落ちる**。
+   *   遷移は待機中のあたりまえの状態なので、読めなければ「まだ待つ」として次の周回に回す。
+   */
+  const readState = async () => {
+    try {
+      return await page.evaluate(() => {
+        const url = location.href;
+        const bodyText = document.body?.innerText || '';
+        const onLogin = /\/login|\/signup/.test(url) || /ログイン|会員登録/.test(document.title || '');
+        const signedIn =
+          /マイページ|出品管理|取引管理|お知らせ|ログアウト/.test(bodyText) ||
+          !!document.querySelector('[href*="/mypage"], [href*="/logout"], [data-testid*="user"], img[alt*="プロフィール"]');
+        return { url, onLogin, signedIn };
+      });
+    } catch {
+      return null;
+    }
+  };
+
   while (Date.now() < deadline) {
-    const state = await page.evaluate(() => {
-      const url = location.href;
-      const bodyText = document.body?.innerText || '';
-      const onLogin = /\/login|\/signup/.test(url) || /ログイン|会員登録/.test(document.title || '');
-      const signedIn =
-        /マイページ|出品管理|取引管理|お知らせ|ログアウト/.test(bodyText) ||
-        !!document.querySelector('[href*="/mypage"], [href*="/logout"], [data-testid*="user"], img[alt*="プロフィール"]');
-      return { url, onLogin, signedIn };
-    });
-    if (!state.onLogin && state.signedIn) return { ok: true };
+    const state = await readState();
+    // 遷移中で読めなかった = まだ待つ。ここで落とさない。
+    if (state && !state.onLogin && state.signedIn) return { ok: true };
     if (!warned) {
       console.log(`${tag} 未ログイン。開いた Chrome で stats47 のココナラアカウントにログインしてください (最大 ${waitMinutes} 分待機)…`);
       warned = true;
     }
     await sleep(3000);
-    if (/\/login|\/signup/.test(page.url())) {
+    // ★ログイン画面にいる間は絶対に遷移させない (2026-08-12 に KDP 側で実測して発覚)。
+    //   もとは 3 秒ごとにログイン確認 URL へ goto しており、**人がメールアドレスを打っている
+    //   最中にページごと飛ばしていた**。人のログインを待つのが目的なのだから、
+    //   待っている画面を奪ってはならない。関係ない場所に落ちたときだけ 30 秒に 1 回戻す。
+    // ★ここで遷移してよいのは「ページが無い」ときだけ。ログインのどの段階にいるかを
+    //   URL から当てにいくと必ず取りこぼす (実測: amazon.co.jp のトップに一時的に
+    //   落ちる場面があり、そこで遷移すると認証フローが切れる)。
+    //   **画面を持っているのは人**なので、白紙とエラーページ以外は触らない。
+    const url = page.url();
+    const blank = !url || url === "about:blank" || /^chrome-error:/.test(url);
+    if (blank && Date.now() - lastNudge > 30_000) {
+      lastNudge = Date.now();
       await gotoResilient(page, LOGIN_CHECK_URL, { tries: 1 });
     }
   }

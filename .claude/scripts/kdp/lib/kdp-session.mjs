@@ -1,5 +1,5 @@
 /**
- * kdp-session.mjs — Amazon KDP (kdp.amazon.com) Playwright 自動操作の共有セッション基盤 (stats47)
+ * kdp-session.mjs — Amazon KDP (kdp.amazon.co.jp) Playwright 自動操作の共有セッション基盤 (stats47)
  * ---------------------------------------------------------------------------
  * coconala-operator (.claude/scripts/coconala/lib/coconala-session.mjs) と同じ設計を KDP へ移植。
  * 永続プロファイル + ログイン gate + account assert 方式。
@@ -8,8 +8,10 @@
  *   - ログイン認証はエージェントが行わない。初回のみ人間が headed Chrome で **stats47 の Amazon/KDP
  *     アカウント** に手動ログインし、永続プロファイル (.local/playwright-kdp-profile) に保持する。
  *   - 税務情報 (Tax interview)・銀行口座・支払情報の入力は **人間工程**。この基盤は一切触らない。
- *   - account assert: kdp-account.json の accountEmail (or accountName) が KDP のアカウントメニューに
- *     現れることを確認してから操作する。別アカウントは中断。
+ *   - account assert: 別アカウントでの誤操作を防ぐ。**KDP はメールを本棚に出さず、アカウント
+ *     ページは 2FA を再要求する**ため (2026-08-12 実測)、この口座で公開済みの本の ASIN
+ *     (knownAsin) で同一性を確認する。個人情報は git 管理外の .local/kdp-account.local.json
+ *     に置く (このリポジトリは public)。照合できないときは中断し、素通しにはしない。
  *   - draft-first: 既定は「下書き保存 (Save as Draft)」。実公開 (Publish) は呼び出し側の --commit +
  *     オーナー承認時のみ。KDP 公開は outward-facing・取り下げに時間がかかるため特に慎重に。
  *
@@ -18,6 +20,7 @@
  * ---------------------------------------------------------------------------
  */
 import { chromium } from "playwright";
+import { execFileSync } from "node:child_process";
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -36,13 +39,26 @@ const PROXY = process.env.HTTPS_PROXY || process.env.HTTP_PROXY || "";
 
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/** kdp-account.json を読む (無ければ空)。 */
+/**
+ * kdp-account.json を読む (無ければ空)。
+ *
+ * ★メールアドレスは git 管理外に置く (2026-08-12)
+ *   このリポジトリは **public** なので、`.claude/config/kdp-account.json` に
+ *   accountEmail を書くと公開される。誤アカウント防止の assert には実際の文字列が要るため、
+ *   `.local/kdp-account.local.json` (gitignore 済) を**上書きとして重ねる**。
+ *   共有してよい設定 (marketplace 等) は従来どおり config 側に置く。
+ */
+export const ACCOUNT_LOCAL_PATH = join(ROOT, ".local/kdp-account.local.json");
+
 export function readAccount() {
-  try {
-    return JSON.parse(readFileSync(ACCOUNT_PATH, "utf8"));
-  } catch {
-    return {};
-  }
+  const read = (p) => {
+    try {
+      return JSON.parse(readFileSync(p, "utf8"));
+    } catch {
+      return {};
+    }
+  };
+  return { ...read(ACCOUNT_PATH), ...read(ACCOUNT_LOCAL_PATH) };
 }
 
 /** kdp-listings.json を読む → { listings }。 */
@@ -61,6 +77,24 @@ export function readListings() {
 }
 
 /** 該当 book を status:'listed' + asin + publishedAt に書き戻す (KINDLE_BOOKS TS は触らない)。 */
+/**
+ * 下書き ID を listings に控える。
+ *
+ * ★これが無いと毎回 `new/details` から作ることになり、同じ本の下書きが増え続ける
+ *   (実際に 1 冊の試行で 5 件の空下書きができた)。出品済みの本に対して実行すれば重複出品になる。
+ */
+export function writeBackDraftId(id, draftId) {
+  try {
+    const j = JSON.parse(readFileSync(LISTINGS_PATH, "utf8"));
+    if (!j.listings || !j.listings[id]) return false;
+    j.listings[id].draftId = draftId;
+    writeFileSync(LISTINGS_PATH, JSON.stringify(j, null, 2) + "\n");
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function writeBackListing(id, asin, today) {
   try {
     const j = JSON.parse(readFileSync(LISTINGS_PATH, "utf8"));
@@ -84,7 +118,30 @@ export function resolveAsset(relPath) {
 }
 
 /** 永続プロファイルで Chrome を起動。 */
+/**
+ * ★プロファイル排他 (2026-08-13 の事故から)。
+ *   バッチ実行中に診断用の単発を起動したところ、同一永続プロファイルを奪い合って
+ *   **実行中のバッチのブラウザごと落ちた** (以降 20 冊が Target closed で全滅)。
+ *   Chromium の SingletonLock は「後から来た方が失敗する」とは限らないので、
+ *   起動前に既存プロセスを自分で検査して止める。
+ */
+function assertProfileFree() {
+  try {
+    const out = execFileSync("/bin/ps", ["-Axo", "command"], { encoding: "utf8" });
+    if (out.split("\n").some((l) => l.includes("playwright-kdp-profile") && !l.includes("grep"))) {
+      throw new Error(
+        "KDP プロファイルを使う Chromium が既に動いている。並行実行はバッチを壊すので、" +
+          "先に既存プロセスを終了させること (pkill -f playwright-kdp-profile)",
+      );
+    }
+  } catch (e) {
+    if (e instanceof Error && /既に動いている/.test(e.message)) throw e;
+    // ps 自体の失敗は素通し (検査不能でブロックはしない)
+  }
+}
+
 export async function launchContext({ headless = false } = {}) {
+  assertProfileFree();
   mkdirSync(PROFILE, { recursive: true });
   return chromium.launchPersistentContext(PROFILE, {
     headless,
@@ -96,7 +153,14 @@ export async function launchContext({ headless = false } = {}) {
   });
 }
 
-const BOOKSHELF_URL = "https://kdp.amazon.com/en_US/bookshelf";
+// ★日本語 UI を使う。フォームのセレクタ (kdp-form.mjs) が「タイトル」「著者名」など
+//   日本語ラベルで要素を探すため、en_US で開くと 1 つも一致しない (2026-08-12 に発覚)。
+//   marketplace は kdp-account.json のとおり amazon.co.jp。
+// ★ドメインは **kdp.amazon.co.jp**。.com のサインインでは同じメールアドレスでも
+//   「We cannot find an account with that email address」になる (2026-08-12 実測)。
+//   Amazon のアカウントは .com と .co.jp で別の登録になっており、この口座は .co.jp 側。
+//   doboku-note の KDP 自動化も .co.jp を使って実際に出版できている。
+const BOOKSHELF_URL = "https://kdp.amazon.co.jp/ja_JP/bookshelf";
 
 async function gotoResilient(page, url, { tries = 2, timeout = 45000 } = {}) {
   for (let i = 0; i < tries; i++) {
@@ -122,24 +186,51 @@ export async function waitForLogin(page, { waitMinutes = 8, tag = "[login]" } = 
   } catch {}
   const deadline = Date.now() + waitMinutes * 60_000;
   let warned = false;
+  let lastNudge = Date.now();
+  /**
+   * 現在の画面状態を読む。
+   *
+   * ★遷移中に落ちてはならない (2026-08-12 実測)。ログイン中は人がボタンを押すたびに
+   *   ページが遷移し、その最中に page.evaluate を呼ぶと実行コンテキストが壊れて例外になる。
+   *   もとはこれを捕まえておらず、**人がログインを始めた瞬間にスクリプトが落ちて**いた。
+   *   遷移は待機中のあたりまえの状態なので、読めなければ「まだ待つ」として次の周回に回す。
+   */
+  const readState = async () => {
+    try {
+      return await page.evaluate(() => {
+          const url = location.href;
+          const onSignin = /\/ap\/signin|signin|\/ap\/mfa/.test(url) || /Sign-In|ログイン/.test(document.title || "");
+          const bodyText = document.body?.innerText || "";
+          const onShelf =
+            /kdp\.amazon\.(?:com|co\.jp)\/.+\/bookshelf/.test(url) &&
+            (/Bookshelf|本棚|Create|新しい|Kindle eBook/.test(bodyText) ||
+              !!document.querySelector('[data-test-id], [id*="bookshelf"], a[href*="/title-setup/"]'));
+          return { url, onSignin, onShelf };
+      });
+    } catch {
+      return null;
+    }
+  };
+
   while (Date.now() < deadline) {
-    const state = await page.evaluate(() => {
-      const url = location.href;
-      const onSignin = /\/ap\/signin|signin|\/ap\/mfa/.test(url) || /Sign-In|ログイン/.test(document.title || "");
-      const bodyText = document.body?.innerText || "";
-      const onShelf =
-        /kdp\.amazon\.com\/.+\/bookshelf/.test(url) &&
-        (/Bookshelf|本棚|Create|新しい|Kindle eBook/.test(bodyText) ||
-          !!document.querySelector('[data-test-id], [id*="bookshelf"], a[href*="/title-setup/"]'));
-      return { url, onSignin, onShelf };
-    });
-    if (!state.onSignin && state.onShelf) return { ok: true };
+    const state = await readState();
+    // 遷移中で読めなかった = まだ待つ。ここで落とさない。
+    if (state && !state.onSignin && state.onShelf) return { ok: true };
     if (!warned) {
       console.log(`${tag} 未ログイン。開いた Chrome で stats47 の Amazon/KDP アカウントにログイン (2FA 含む) してください (最大 ${waitMinutes} 分待機)…`);
       warned = true;
     }
     await sleep(3000);
-    if (/signin|\/ap\//.test(page.url())) await gotoResilient(page, BOOKSHELF_URL, { tries: 1 });
+    // ★ここで遷移してよいのは「ページが無い」ときだけ。ログインのどの段階にいるかを
+    //   URL から当てにいくと必ず取りこぼす (実測: amazon.co.jp のトップに一時的に
+    //   落ちる場面があり、そこで遷移すると認証フローが切れる)。
+    //   **画面を持っているのは人**なので、白紙とエラーページ以外は触らない。
+    const url = page.url();
+    const blank = !url || url === "about:blank" || /^chrome-error:/.test(url);
+    if (blank && Date.now() - lastNudge > 30_000) {
+      lastNudge = Date.now();
+      await gotoResilient(page, BOOKSHELF_URL, { tries: 1 });
+    }
   }
   return { ok: false, reason: `ログイン待機がタイムアウト (${waitMinutes}分)` };
 }
@@ -177,7 +268,45 @@ export async function assertAccount(page, { tag = "[account]" } = {}) {
     console.log(`${tag} OK: KDP アカウント (${email || name}) を確認`);
     return { ok: true };
   }
-  return { ok: false, reason: `期待 KDP アカウント (${email || name}) を確認できない (別アカウントの疑い・アカウントメニュー DOM 変更の可能性)` };
+
+  // ★メールで照合できないときの代替 (2026-08-12 実測)
+  //   KDP はメールアドレスを本棚に出さない。「アカウント」リンクを踏むと
+  //   `/ap/mfa` へ飛んで **2FA を再要求される** ので、エージェントは辿れない (人間工程)。
+  //   そこで「この口座にしか無い本」で照合する。knownAsin は .local/kdp-account.local.json に
+  //   置く (public リポジトリに ASIN を晒さないため)。**照合を諦めて素通しにはしない**。
+  const knownAsin = (acct.knownAsin || "").trim();
+  if (knownAsin) {
+    let onShelf = await page.evaluate((a) => document.body?.innerText?.includes(a) ?? false, knownAsin);
+    if (!onShelf) {
+      // ★1 ページ目に無い ≠ 別アカウント (2026-08-13 実測)。下書きを 10 冊作ったら既知の本が
+      //   1 ページ目から押し出され、assert が誤って ABORT した。**本棚の検索**で照合し直す。
+      try {
+        const box = page.locator('input[type="search"], input[placeholder*="検索"], #podbookshelf-search-input').first();
+        if (await box.count()) {
+          await box.fill(knownAsin, { timeout: 10000 });
+          await box.press("Enter").catch(() => {});
+          await sleep(8000);
+          onShelf = await page.evaluate((a) => document.body?.innerText?.includes(a) ?? false, knownAsin);
+        }
+      } catch {}
+    }
+    if (onShelf) {
+      console.log(`${tag} OK: 既知の本 (ASIN ${knownAsin}) が本棚にあるため同一口座と確認`);
+      // 検索状態を残すと以降の本棚読取りが絞られたままになるので戻す。
+      await gotoResilient(page, BOOKSHELF_URL);
+      await sleep(3000);
+      return { ok: true };
+    }
+    return { ok: false, reason: `既知の本 (ASIN ${knownAsin}) が本棚 (検索含む) に無い — 別アカウントの疑い` };
+  }
+
+  return {
+    ok: false,
+    reason:
+      `期待 KDP アカウント (${email || name}) を確認できない。` +
+      `KDP はメールを本棚に出さず、アカウントページは 2FA を再要求するため照合できない。` +
+      `.local/kdp-account.local.json に knownAsin (この口座で公開済みの本の ASIN) を記入すると照合できる`,
+  };
 }
 
 export function shotPath(name) {

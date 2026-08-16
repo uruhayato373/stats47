@@ -1,14 +1,14 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-08-12T21:20:36.236Z
+- 生成: 2026-08-15T20:51:27.813Z
 - GSC snapshot: 2026-W32 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 
 ## サマリ (active ranking 全件 2173 件)
 
-- ✅ done: 249 件 (11.5% / impressions 計 30930)
-- ⏳ needs-regen: 1924 件 (impressions 計 7884)
-  - 内訳: incomplete 1645 / missing 215 / blocker 64
+- ✅ done: 254 件 (11.7% / impressions 計 31151)
+- ⏳ needs-regen: 1919 件 (impressions 計 7663)
+  - 内訳: incomplete 1640 / missing 215 / blocker 64
 - 🚫 not-eligible: 0 件 — 観測値が順位として成立しないので生成しない
 
 ## ⚠️ 公開済みだが接地データが不成立 (1 件)
@@ -21,13 +21,18 @@
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **4.1 件/日** (2026-07-30 からの平均)
-- 残り 1924 件 → **完了見込み 約 472 日**
+- 消化ペース: **3.6 件/日** (2026-07-30 からの平均)
+- 残り 1919 件 → **完了見込み 約 530 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
 | R2 last-modified | key | impressions |
 |---|---|---|
+| Wed, 12 Aug 2026 21:21:55 GMT | treatment-rate-diabetes-outpatient | 45 |
+| Wed, 12 Aug 2026 21:21:55 GMT | doctor-annual-income | 44 |
+| Wed, 12 Aug 2026 21:21:55 GMT | flood-affected-rivers | 44 |
+| Wed, 12 Aug 2026 21:21:55 GMT | hydroelectric-power-plant-count | 44 |
+| Wed, 12 Aug 2026 21:21:55 GMT | midwife-count | 44 |
 | Tue, 11 Aug 2026 20:44:09 GMT | other-mushroom-consumption-quantity | 47 |
 | Tue, 11 Aug 2026 20:44:09 GMT | voluntary-car-insurance-rate-vehicle | 47 |
 | Tue, 11 Aug 2026 20:44:09 GMT | wind-power-turbine-count | 46 |
@@ -38,21 +43,11 @@
 | Tue, 11 Aug 2026 03:39:38 GMT | sports-participation-rate-tennis | 52 |
 | Tue, 11 Aug 2026 03:39:38 GMT | vaccination-recipients-disease | 51 |
 | Tue, 11 Aug 2026 03:39:38 GMT | aquarium-count | 50 |
-| Tue, 11 Aug 2026 03:39:38 GMT | commute-by-bicycle | 49 |
-| Tue, 11 Aug 2026 03:39:38 GMT | freshwater-clam-consumption-expenditure | 49 |
-| Tue, 11 Aug 2026 03:39:38 GMT | manufacturing-shipment-amount-per-establishment | 48 |
-| Tue, 11 Aug 2026 03:39:38 GMT | miscellaneous-school-students | 48 |
-| Tue, 11 Aug 2026 03:39:38 GMT | fishery-workers | 47 |
 
 ## 次にやるべき上位20 (impressions 降順)
 
 | impressions | key | reason | review | blockers |
 |---|---|---|---|---|
-| 45 | treatment-rate-diabetes-outpatient | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
-| 44 | doctor-annual-income | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 44 | flood-affected-rivers | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 44 | hydroelectric-power-plant-count | incomplete | 🔴opus | missing-pref-commentary |
-| 44 | midwife-count | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
 | 44 | mineral-water-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 44 | national-pension-payment-rate | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 43 | black-tea-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
@@ -68,6 +63,11 @@
 | 39 | drinking-out-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 39 | fish-paste-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 39 | general-hospital-bed-count | incomplete | 🔴opus | missing-pref-commentary |
+| 39 | hobby-participation-rate-instrument | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 39 | new-condo-starts | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 38 | lotus-root-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 38 | physicians-in-medical-facilities | incomplete | 🔴opus | paren-number,missing-pref-commentary |
+| 38 | standard-price-change-rate-commercial | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 
 > 生成 (author) は常に **sonnet** (frontmatter 固定・コストゲート)。critic は既定 **sonnet**、
 > `review` 列が 🔴opus の上位30件 (高GSC流入) + tier-1 が REVISE した件だけ

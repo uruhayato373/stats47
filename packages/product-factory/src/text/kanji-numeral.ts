@@ -217,6 +217,18 @@ export function extractKanjiClaims(text: string): KanjiClaim[] {
     const raw = m[0];
     const value = parseKanjiNumeral(raw);
     if (value === null) continue;
+    // ★算用数字に続くスケール文字は漢数字ではない (2026-08-12)。
+    //   「5兆8021億円」「約1.39億人泊」「約4,743万人泊」の 億 / 万 は
+    //   算用数字に付く桁の表記で、算用数字への統一という規約に反していない。
+    //   これを漢数字主張として数えると、正しく書かれた本文が「漢数字残」に化ける
+    //   (実測: 書籍 33 件の大半がこれで、章コンポーザでは使える解説を丸ごと捨てていた)。
+    const prev = body.slice(Math.max(0, m.index - 1), m.index);
+    if (/^[0-9０-９,，.．]$/.test(prev)) continue;
+    // ★数詞を含まない「位取りだけの語」は単位語であって漢数字主張ではない (2026-08-12)。
+    //   「千円や万円という金額」「本書では百万円単位で表記されます」の 千 / 万 / 百万 は
+    //   単位の名前で、算用数字への統一という規約に反していない。
+    //   「三千円」「八十七円」のように数詞 (〇〜九) を含む形は従来どおり検出する。
+    if (!/[〇零一二三四五六七八九]/.test(raw)) continue;
     // 直後の単位 (円/人/位/倍/％ 等) を 4 文字まで見る
     const after = body.slice(m.index + raw.length, m.index + raw.length + 4);
     const unit = /^(円|人|位|倍|％|%|年|万円|千円|ポイント)/.exec(after)?.[1] ?? "";

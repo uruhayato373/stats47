@@ -121,6 +121,10 @@ jobs:
       # 公開時ゲートと prune の安全装置で増えないはずなので、増えたら未知の経路がある。
       # R2 取得失敗時は queue が更新されず diff ゼロになるので誤検知しない。
       - name: 🔒 Lineage ratchet (元データ消失が増えていないか)
+        id: lineage_ratchet
+        # continue-on-error は「見逃す」ためではなく、後段の commit を走らせるため。
+        # job の赤は最終の Ratchet verdict step が outcome を見て付け直す。
+        continue-on-error: true
         run: |
           Q=".claude/state/blog/svg-lineage-queue.json"
           test -f "$Q" || { echo "queue が無い (rebuild 失敗) → スキップ"; exit 0; }
@@ -146,6 +150,8 @@ jobs:
       # 区別できるよう、実データへの誤値注入で 2 倍 / 1.5 倍 / 100 倍が発火することを実測済み。
       # 正典: .claude/rules/unit-semantics-standards.md
       - name: 🔒 Value ratchet (本文と data の数値食い違いが増えていないか)
+        id: value_ratchet
+        continue-on-error: true # 理由は lineage_ratchet と同じ
         run: |
           Q=".claude/state/blog/remediation-queue.json"
           test -f "$Q" || { echo "queue が無い (rebuild 失敗) → スキップ"; exit 0; }
@@ -163,8 +169,9 @@ jobs:
           echo "✓ 増えていません (縮小専用ラチェット OK)"
 
       # 出典ラチェット (縮小専用): 「存在するが再取得できない source.json」が増えたら失敗させる。
-      # 系譜ラチェットと同じ理由でここ (Issue の後・commit の前) に置く。
       - name: 🔒 Provenance ratchet (再取得できない出典が増えていないか)
+        id: provenance_ratchet
+        continue-on-error: true # 理由は lineage_ratchet と同じ
         run: |
           Q=".claude/state/blog/chart-provenance-queue.json"
           test -f "$Q" || { echo "queue が無い (audit 失敗) → スキップ"; exit 0; }
@@ -181,18 +188,48 @@ jobs:
           fi
           echo "✓ 増えていません (縮小専用ラチェット OK)"
 
+      # ★2026-08-16 是正: ここは以前 3 つの queue を一括 add していたため、
+      # provenance ラチェット 1 つが赤いだけで **是正キューと outbox prune まで 17 日間
+      # commit されなかった** (キューが stale 化し、日次ループ全体が実質停止した)。
+      #
+      # ラチェットが commit の前に居るのは正しい — 欠陥が増えた queue をそのまま commit すると
+      # それが次回の基準になり、ラチェットが自分で自分を無効化する。
+      # 誤りは「1 つの赤で全部を止めた」ことなので、**queue ごとに「自分を baseline にする
+      # ラチェット」だけを見る**ようにした。どのラチェットの baseline でもない outbox は常に反映する。
       - name: 📤 Commit refreshed queue + outbox prune to develop
+        if: always()
+        env:
+          LINEAGE_OUTCOME: ${{ steps.lineage_ratchet.outcome }}
+          VALUE_OUTCOME: ${{ steps.value_ratchet.outcome }}
+          PROVENANCE_OUTCOME: ${{ steps.provenance_ratchet.outcome }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/blog/remediation-queue.json
-          # SVG データ系譜キュー (build-lineage-queue.mjs の出力)。commit しないと
-          # 「元データ喪失が溜まっているか」が追跡できず、cron に配線した意味が無くなる。
-          git add .claude/state/blog/svg-lineage-queue.json .claude/state/blog/svg-lineage-LATEST.md
-          # 出典 (source.json) の再取得可能性。同じ理由で commit しないとラチェットの baseline が育たない。
-          git add .claude/state/blog/chart-provenance-queue.json .claude/state/blog/chart-provenance-LATEST.md
-          # prune-published-outbox の git rm 結果 (公開済みドラフト削除) もステージ
+
+          # add しなかったファイルを作業ツリーに残すと後続の pull --rebase が dirty で落ちるので、
+          # 据え置くと決めた queue は checkout で元に戻す。
+          stage_or_restore() {
+            local outcome="$1" label="$2"; shift 2
+            if [ "$outcome" = "success" ]; then
+              git add "$@"
+            else
+              echo "::warning::${label} ラチェットが赤なので $* の baseline を据え置きます (欠陥が増えた状態を次回の基準にしないため)"
+              git checkout -- "$@" 2>/dev/null || true
+            fi
+          }
+
+          # prune-published-outbox の git rm 結果。ラチェットの baseline ではないので常に反映する。
           git add -A "docs/21_ブログ記事原稿/"
+
+          # remediation-queue.json は value ラチェットの baseline (summary.valueMismatchArticles)
+          stage_or_restore "$VALUE_OUTCOME" "value" .claude/state/blog/remediation-queue.json
+          # svg-lineage-queue.json は lineage ラチェットの baseline (byStatus.neither)
+          stage_or_restore "$LINEAGE_OUTCOME" "lineage" \
+            .claude/state/blog/svg-lineage-queue.json .claude/state/blog/svg-lineage-LATEST.md
+          # chart-provenance-queue.json は provenance ラチェットの baseline (defectCount)
+          stage_or_restore "$PROVENANCE_OUTCOME" "provenance" \
+            .claude/state/blog/chart-provenance-queue.json .claude/state/blog/chart-provenance-LATEST.md
+
           if git diff --cached --quiet; then
             echo "No queue / outbox change to commit"
             exit 0
@@ -201,6 +238,26 @@ jobs:
           git commit -m "chore(blog): daily maintenance — queue refresh + outbox prune [skip ci]"
           git pull --rebase origin develop
           git push origin develop
+
+      # ラチェットを continue-on-error にした分の赤をここで付け直す。これが無いと
+      # 欠陥が増えても job が緑になり、ラチェットが通知の役割を失う (commit を通すために
+      # 検査を無効化した、という最悪の形になる)。
+      - name: 🚦 Ratchet verdict (ラチェットの赤を job に反映する)
+        if: always()
+        env:
+          LINEAGE_OUTCOME: ${{ steps.lineage_ratchet.outcome }}
+          VALUE_OUTCOME: ${{ steps.value_ratchet.outcome }}
+          PROVENANCE_OUTCOME: ${{ steps.provenance_ratchet.outcome }}
+        run: |
+          failed=""
+          [ "$LINEAGE_OUTCOME" = "failure" ] && failed="$failed lineage"
+          [ "$VALUE_OUTCOME" = "failure" ] && failed="$failed value"
+          [ "$PROVENANCE_OUTCOME" = "failure" ] && failed="$failed provenance"
+          if [ -n "$failed" ]; then
+            echo "::error::ラチェット失敗:$failed — 該当 queue の baseline だけを据え置きました。他の queue と docs/21 outbox は反映済みなので日次ループは回っています。詳細は .claude/state/blog/*-LATEST.md"
+            exit 1
+          fi
+          echo "✓ ラチェット 3 種すべて OK"
 
       # 公開R2の全散布図を data JSON から再生成し、SVGと完全一致することを要求する。
       # さらに過去に破損した7件は ranking/e-Stat/観光庁原表から点集合を再計算して
