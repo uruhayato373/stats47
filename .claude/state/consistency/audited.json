@@ -1,12 +1,5 @@
 {
-  "hash": "ca21cfbf2461b396e8ca7aecb3ce6d53362d3618e404117eb4fd05822d5c0f8d",
-  "audited_at": "2026-08-16T04:30:14",
-  "files": [
-    ".claude/scripts/lib/__tests__/workflow-commit-back.test.cjs",
-    ".claude/scripts/lib/workflow-commit-back-core.cjs",
-    ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W33.json",
-    ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/index.json",
-    ".claude/skills/management/weekly-review/reference/reviews/2026-W32.md",
-    ".claude/skills/management/weekly-review/reference/reviews/2026-W33.md"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-08-16T05:47:44",
+  "files": []
 }

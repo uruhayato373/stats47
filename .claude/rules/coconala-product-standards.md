@@ -271,6 +271,14 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 - **account assert 必須**: `.claude/config/kdp-account.json` の `accountEmail`/`accountName` が KDP のアカウント表示に一致することを確認してから操作。別アカウントは即中断。
 - **出品内容 SoT = `.claude/config/kdp-listings.json`**（`products:kindle:kdp-listings --apply` で KINDLE_BOOKS から生成。title/description/keywords/price/epubPath。カテゴリは人手で `categories` に記入・upsert 保持）。
 - **draft-first + `--commit` gate + オーナー承認**: 既定は「下書き保存」。**実公開（`--commit`）は outward-facing・取り下げに時間がかかるため、オーナー明示承認時のみ**。未充填フィールド・公開未確定時は「公開した」と報告しない。
+- **★実公開を cron / launchd で無人実行しない（2026-08-16 オーナー判断で確定）**。
+  2026-08-13 に `com.stats47.kdp-resume-daily`（毎日 8:30/14:30）が `--phase draft` に続けて
+  `--phase publish --commit` を回し、残り 22 冊を無人で公開まで進める構成になっていた。
+  当時のオーナー指示（「32 冊すべてを公開までやり切る」）を根拠にしていたが、8/16 に
+  **KDP 出品は手動のみ**へ方針変更した。plist は `~/Library/LaunchAgents/` から削除済みで、
+  launchctl にも未登録。**「一度承認を得たから以後ずっと無人で公開してよい」とはしない**
+  （承認は都度・1 冊ずつ）。スクリプト `scripts/scheduled/kdp-resume-daily.sh` と repo 内 plist は
+  再開できるよう残してあるが、**再登録するにはオーナーの新しい明示指示が要る**。
 - **KDP フォームは React SPA で DOM が変わりやすい**。初回は必ず `kdp-publish --probe` で構造を `.local/kdp-debug/` に dump し、`kdp-form.mjs` の label セレクタが合うか確認する（coconala の `discover-categories` 相当）。実機での初回調整が前提。
 - **KU（KDP Select 独占）は既定 未登録**（`kuEnrolled:false`・販売のみ）。判断はオーナー。**規約リスク**: 出品者自身のブラウザ自動化の明示禁止は未確認だが bot 検知リスクは残るため低頻度（出品時・価格改定時）に限る。
 #### KDP 入稿フォームの実仕様 (2026-08-12 に実機で確定)
