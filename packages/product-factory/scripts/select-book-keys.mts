@@ -198,7 +198,9 @@ function keysOf(bookId: string): string[] {
   const b = KINDLE_BOOKS.find((x) => x.id === bookId);
   if (!b) return [];
   const set = new Set<string>();
-  for (const ch of b.chapters as Array<{ rankingKeys?: readonly string[] }>) {
+  // BookChapter は `readonly rankingKeys?: readonly string[]` を持つのでキャスト不要。
+  // mutable 配列型への as は readonly を外せず TS2352 になる (2026-08-16 是正)。
+  for (const ch of b.chapters) {
     for (const k of ch.rankingKeys ?? []) set.add(k);
   }
   return [...set];
