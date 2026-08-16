@@ -12,7 +12,12 @@ import { config } from "dotenv";
 import { pathToFileURL } from "node:url";
 import path from "node:path";
 
-config({ path: path.resolve(import.meta.dirname, "..", "..", "..", "..", ".env.local") });
+// ★`import.meta.dirname` 単独は使わない。r2-storage は package.json に "type": "module" が無く
+// tsx が CJS として実行するため undefined になり、path.resolve が ERR_INVALID_ARG_TYPE で落ちる
+// (2026-08-16: blog-auto-publish と楽天同期の Purge Workers Cache が実際にこれで失敗した)。
+// repo の他 8 箇所と同じく __dirname へフォールバックする。
+const HERE = import.meta.dirname ?? __dirname;
+config({ path: path.resolve(HERE, "..", "..", "..", "..", ".env.local") });
 
 const DEFAULT_PURGE_URL = "https://stats47.jp/api/internal/worker-cache/purge";
 const MAX_URLS_PER_REQUEST = 100;
