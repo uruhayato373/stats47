@@ -194,7 +194,18 @@ export function formatSummary(summary) {
     );
   }
   lines.push(`entry 種別: ${JSON.stringify(summary.entryCounts)}`);
-  if (summary.errorText) lines.push(`\n[error]\n${summary.errorText}`);
+  // ★[error] を名乗れるのは is_error=true のときだけ (2026-08-13)。
+  //   rawError は result.error が無ければ result.result にフォールバックし、それは
+  //   **成功 run では Claude の最終メッセージ**。見出しを [error] 固定にしていたため、
+  //   critic が PASS しなかっただけの run (is_error=false) で Claude の最後の一言が
+  //   エラー文として Issue に載り、原因の切り分けを誤らせた (Issue #761)。
+  if (summary.errorText) {
+    lines.push(
+      summary.isError
+        ? `\n[error]\n${summary.errorText}`
+        : `\n[最終メッセージ] ※エラーではない (is_error=false)\n${summary.errorText}`,
+    );
+  }
   if (summary.earlyAssistantText) lines.push(`\n[早期 assistant 本文]\n${summary.earlyAssistantText}`);
   // 成功 run で「エラー文が無い」と言わない (正常な状態を異常のように見せない)
   if (summary.isError && !summary.errorText && !summary.earlyAssistantText) {

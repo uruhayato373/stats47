@@ -25,6 +25,7 @@ env:
   R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
   CLOUDFLARE_R2_BUCKET_NAME: stats47
+  WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
 
 jobs:
   ingest:
@@ -59,3 +60,7 @@ jobs:
         if: inputs.dry_run != 'true'
         run: |
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/commute-flow
+
+      - name: 🧹 Purge Workers Cache
+        if: inputs.dry_run != 'true'
+        run: npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --all

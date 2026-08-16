@@ -64,8 +64,8 @@ export const SHELL_WIDTH_CLASS =
  * - 右レール lg    : lg [minmax(0,1fr) 316px]
  *
  * 右レール 316px と gap 40px は ArticleShell と同値 (doboku-note 準拠)。
- * 同じ `RightRailWidgets` を描画するため、両 Shell で幅を揃える。**316 = 300 + 8 + 8**
- * (`SidebarPromoBanner` の `p-2` に 300×250 が等倍で収まる幅)。
+ * 同じ `RightRailWidgets` を描画するため、両 Shell で幅を揃える。300×250 の
+ * `SidebarPromoBanner` は Card で囲まず、このレール内に等倍で表示する。
  *
  * 通常は xl 未満で 1 カラム。`rightRailBreakpoint="lg"` の場合、右 rail は lg+ で表示する。
  *

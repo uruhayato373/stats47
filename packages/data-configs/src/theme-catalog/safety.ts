@@ -160,10 +160,10 @@ export const SAFETY_CATALOG: ThemeCatalog = {
         "leftUnit": "件/千人",
         "rightUnit": "%",
         "columnColors": [
-          "#f59e0b"
+          "count"
         ],
         "lineColors": [
-          "#22c55e"
+          "improve"
         ]
       },
       "sourceName": "犯罪統計",
@@ -196,8 +196,8 @@ export const SAFETY_CATALOG: ThemeCatalog = {
           "負傷者数"
         ],
         "seriesColors": [
-          "#f59e0b",
-          "#ef4444"
+          "count",
+          "danger"
         ]
       },
       "sourceName": "交通事故統計",
@@ -230,8 +230,8 @@ export const SAFETY_CATALOG: ThemeCatalog = {
           "救急出動(千人当たり)"
         ],
         "seriesColors": [
-          "#f59e0b",
-          "#22c55e"
+          "count",
+          "improve"
         ]
       },
       "sourceName": "消防統計",
@@ -264,8 +264,8 @@ export const SAFETY_CATALOG: ThemeCatalog = {
           "不慮の事故死亡率"
         ],
         "seriesColors": [
-          "#8b5cf6",
-          "#6b7280"
+          "special",
+          "neutral"
         ]
       },
       "sourceName": "人口動態統計",
@@ -289,27 +289,27 @@ export const SAFETY_CATALOG: ThemeCatalog = {
           {
             "code": "K420103",
             "label": "窃盗犯",
-            "color": "#3b82f6"
+            "color": "population"
           },
           {
             "code": "K420102",
             "label": "粗暴犯",
-            "color": "#f59e0b"
+            "color": "count"
           },
           {
             "code": "K420104",
             "label": "知能犯",
-            "color": "#8b5cf6"
+            "color": "special"
           },
           {
             "code": "K420105",
             "label": "風俗犯",
-            "color": "#06b6d4"
+            "color": "series-6"
           },
           {
             "code": "K420101",
             "label": "凶悪犯",
-            "color": "#ef4444"
+            "color": "danger"
           }
         ]
       },
@@ -334,12 +334,12 @@ export const SAFETY_CATALOG: ThemeCatalog = {
           {
             "code": "K2111",
             "label": "火災負傷者",
-            "color": "#f59e0b"
+            "color": "count"
           },
           {
             "code": "K2110",
             "label": "火災死亡者",
-            "color": "#ef4444"
+            "color": "danger"
           }
         ]
       },

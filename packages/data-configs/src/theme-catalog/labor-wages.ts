@@ -103,7 +103,7 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
           "男女賃金格差"
         ],
         "seriesColors": [
-          "#ec4899"
+          "female"
         ]
       },
       "sourceName": "賃金構造基本統計調査",
@@ -136,8 +136,8 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
           "完全失業率"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#ef4444"
+          "population",
+          "danger"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -281,7 +281,7 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
           "就業率"
         ],
         "seriesColors": [
-          "#3b82f6"
+          "population"
         ]
       },
       "sourceName": "総務省 社会・人口統計体系（労働）",

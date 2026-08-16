@@ -7,6 +7,15 @@
 
 import type { AdFormat } from "./types";
 
+/**
+ * AdSense表示の全体スイッチ。
+ *
+ * 2026-08-16のオーナー判断で一時停止。falseの間は環境変数がtrueでも、
+ * script / preconnect / Auto ads / 手動枠 / AdSense fallbackを一切描画しない。
+ * 再開時は効果測定を完了してから、この1箇所だけをtrueへ戻す。
+ */
+export const ADSENSE_DISPLAY_ENABLED: boolean = false;
+
 export interface AdSlotConfig {
   /** 広告スロットID（AdSense 管理画面で発行）。空文字 = 未発行プレースホルダ（slot 部品は描画しない） */
   slotId: string;

@@ -115,9 +115,9 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
           "光熱・水道"
         ],
         "seriesColors": [
-          "#f59e0b",
-          "#ef4444",
-          "#3b82f6"
+          "count",
+          "danger",
+          "population"
         ]
       },
       "sourceName": "社会・人口統計体系",

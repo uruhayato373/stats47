@@ -142,7 +142,9 @@ jobs:
             publish-blog.yml|\
             regenerate-blog-svgs.yml|\
             gsc-auto-resubmit-daily.yml|\
-            r2-maintenance.yml) ;;
+            r2-maintenance.yml|\
+            sync-rakuten-catalog.yml|\
+            workflow-health-daily.yml) ;;
             *)
               echo "::error::allowlist 外の workflow: '${WORKFLOW}' — .github/workflows/workflow-dispatch-proxy.yml の case に追加するか、名前を確認する"
               exit 1

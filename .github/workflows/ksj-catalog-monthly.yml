@@ -136,6 +136,9 @@ jobs:
           plan: \`~/.claude/plans/stateless-stargazing-teapot.md\`
           EOF
 
+          # ラベルが無いと gh issue create が "could not add label" で落ち、**アラート自体が飛ばない**
+          # (2026-08-12 に rakuten-alert 未登録で実際に発生し、9 日間の同期停止を誰も知らなかった)。
+          gh label create ksj-catalog --description "国土数値情報カタログの更新検知" --color "0e8a16" --force 2>/dev/null || true
           # 既存の未 close issue があれば コメントで追記
           EXISTING=$(gh issue list --state open --label ksj-catalog --search "\"[KSJ Catalog Update]\" in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then

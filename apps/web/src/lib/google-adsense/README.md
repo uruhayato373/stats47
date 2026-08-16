@@ -2,6 +2,11 @@
 
 Google AdSense広告を表示するための技術ユーティリティ。設定は apps/web 内に集約し、packages には置かない。
 
+> **現在の運用状態（2026-08-16）**: `constants.ts` の
+> `ADSENSE_DISPLAY_ENABLED` を `false` に固定し、スクリプト、Auto ads、手動枠、
+> AdSense fallback、広告用の空カード・予約高を全ページで停止中。環境変数が `true` でも表示しない。
+> 再開判断後はこのスイッチだけを変更し、環境変数による本番制御へ戻す。
+
 ## 概要
 
 このライブラリは以下の機能を提供します：
@@ -83,7 +88,7 @@ import { AdSenseAd } from "@/lib/google-adsense";
 
 ## 環境変数
 
-以下の環境変数が必要です：
+AdSense再開時は以下の環境変数が必要です：
 
 ```env
 NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID=ca-pub-xxxxxxxxxxxxx
@@ -100,6 +105,7 @@ NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED=true
 
 ## 注意事項
 
+- 全体スイッチが `false` の間は、開発用プレースホルダーを含めて何も描画しない
 - 開発環境（`NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED=false`）ではプレースホルダーを表示
 - 遅延ロード（Intersection Observer）により、パフォーマンスへの影響を最小化
 - AdBlock で広告がブロックされた場合は何も表示しない

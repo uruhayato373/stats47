@@ -53,6 +53,7 @@ env:
   MAX_PUBLISH: "40"
   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
   CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
+  WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
 
 jobs:
   publish:
@@ -140,6 +141,7 @@ jobs:
           for KEY in $PUBLISHED; do URLS+=("https://stats47.jp/ranking/$KEY"); done
           echo "purge: ${URLS[*]}"
           npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls "${URLS[@]}" || true
+          npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --urls "${URLS[@]}"
 
       - name: 🧹 Remove published files from outbox (ephemeral)
         if: ${{ env.PUBLISHED != '' && success() }}

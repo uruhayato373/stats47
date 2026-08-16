@@ -100,14 +100,16 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 
 > **★縦長 (height > width) は native / 本文の横並び枠に出さない (2026-08-06)**: banner 解決が
 > locationCode を見ない結果、`sidebar-sticky` 登録のスカイスクレイパー (120×600) が本文の
-> `NativeAffiliateRow` (4:3 枠) に流入し極細の縦帯に潰れていた。描画側が
+> 当時の `NativeAffiliateRow` (4:3 枠) に流入し極細の縦帯に潰れていた。描画側が
 > `isLandscapeBanner` (`resolve-affiliate-ad.ts`) で除外する (repository は blog レール等と共有
 > するため触らない)。**縦長の唯一の受け皿は `SidebarStickyBannerAd`** (home 左レール・lg+ のみ・
 > sticky なし) = `sidebar-sticky` locationCode を読む唯一の消費者。native の呼び出し元は除外分を
 > 見込んで解決 limit を 8 にする (native 4 + 末尾 300×250 1 を横長だけで埋める余裕)。
-> **`NativeAffiliateRow` は外枠カード一括を持たず「PR」ラベル + 1 段見出し** — 呼び出し元に
-> `SectionHeader` を重ねない (二重見出し禁止)。見出しに「書籍・商品」等、実在庫に無い語を使わない
-> (「◯◯の関連サービス」に統一。2026-08-06 に home「関連書籍・サービス」の指摘で全 7 ページ是正)。
+> **画像バナー枠の可視要素はリンク付きバナー画像だけ** — `NativeAffiliateRow`、
+> `SidebarPromoBanner`、`AffiliateAdSlot` の banner 分岐、本文中の `BannerAd` に PR ラベル、見出し、
+> 商品・サービス名、「もっと見る」導線、Surface/Card 装飾、固定アスペクト枠を追加しない。
+> ASP 提供バナーの縦横比を保ってそのまま表示する (2026-08-14 に native 全 7 ページ、
+> 2026-08-16 に固定/文脈バナーへ適用)。
 
 **legacy 一点物** (grandfathering・新規禁止・段階移行): `160×600` / `120×600` / `165×120` / `320×250` / `336×280` / `300×300`
 → 再取得時に 300×250 か text へ寄せる。`KNOWN_LEGACY_SIZES` (audit script) で許容中。**新規はこれらも不可** (canonical のみ)。
@@ -125,7 +127,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 | ranking / category | `categoryKey` → vertical の banner (priority 上位) → text → AdSense fallback |
 | blog | 記事 `tags` → vertical の banner/text。**テキストリンクは本文だけに自動挿入** (`<affiliate-text>`・h2 の 2/4/6 番目直前 + 末尾 = 最大 4 本)。右レールは画像バナーのみ |
 | theme | `relatedArticleTagKeys` → vertical、空なら `THEME_AFFILIATE_MAP[themeKey]` → vertical (フォールバック) |
-| area | `locationCode="area-sidebar"` の banner |
+| area | `locationCode="area-sidebar"` の banner。AdSense停止中の県本文枠は地域意図として `furusato` vertical |
 
 - **desktop の右レールに置く PR は画像バナー (`BannerAd`) のみ**。独自テキスト promo card、`FurusatoNozeiCard`、
   `AffiliateTextAdList` は右レールへ置かない。banner 在庫が無い場合は AdSense へフォールバックし、テキスト広告は
@@ -330,9 +332,9 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
   - dimension 側は `affiliate_vertical` 等 6 個が **2026-07-06 登録済**、`ad_id` が **2026-07-28 登録済**で、
     いずれも上記実測で引けることを確認した。**未取得は `variant_id` / `experiment_id`**
     (`hasVariantBreakdown: false`) で、クリエイティブ A/B の判定にはまだ使えない。
-  - **`other` が 61.4% (2,089/3,400)** を占めるが、これは計測の欠陥ではなく
-    `affiliateCategory ?? "other"` のフォールバック (§12 の 5 コンポーネント) が返す値で、
-    「vertical を解決できなかったページ」を忠実に表す。写像カバレッジの課題として `AFF-CATEGORY-MAP-01` が扱う。
+  - **`other` を未写像ページ数として扱わない**。固定ハウスバナーなど vertical 非依存の枠も
+    `other` を意図的に送るため、未写像と固定枠の合成値である。写像漏れは `other` の比率から推測せず、
+    `.claude/state/ads/placement-map-latest.json` の `unmapped.byReason` と ad_id / position 内訳で判定する。
 - **週次改善**: imp>500 かつ CTR が vertical 中央値の 1/2 未満 → priority 1 バンド降格 (次点繰り上げ)。
   比較は experiment registry (weight 50/50) で。**週次 1 vertical 1 変更まで** (配信急変防止)。effect 判定は
   evidence-based (improvement-triage)。
@@ -425,11 +427,11 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | ページ種別 | アフィリ枠 | 解決キー |
 |---|---|---|
 | blog | 本文 banner / 本文 text (自動挿入 最大4) / サイドバー text / 楽天商品 / ハウス枠×2 | tagKeys → vertical、ランキング名 → 品目 |
-| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天商品 | **categoryKey → vertical** (tagKeys 優先・空なら categoryKey)、ランキング名 → 品目 |
+| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天商品。AdSense停止中は本文中段 banner 1 + 右レール banner ≤2 を上段へ移設 | **categoryKey → vertical** (tagKeys 優先・空なら categoryKey)、ランキング名 → 品目 |
 | category / tag | native ≤4 / ハウス枠 | `CATEGORY_FALLBACK_TAGS` / tagKey |
 | survey | native ≤4 | 所属ランキングの categoryKey 最頻値 → vertical |
 | themes | native ≤4 / theme-end 300×250 | relatedArticleTagKeys → 無ければ `THEME_AFFILIATE_MAP` (本文中央ハウス枠は 2026-08-06 撤去。bespoke の themes/local-finance は InContent×2 のみで native なし) |
-| areas 県 | ハウス枠 / `AreaBannerAd` | `area-sidebar` |
+| areas 県 | ハウス枠 / `AreaBannerAd`。AdSense停止中は本文中段 banner 1 | `area-sidebar` / 本文は `furusato` vertical |
 | areas 市区町村 | `AreaBannerAd` / 楽天ふるさと納税 | `area-sidebar` / 親県コード |
 | home | ハウス枠 / native ≤4 (economy 固定) / **sidebar-sticky (縦長の受け皿・左レール lg+)** | 無し (vertical 解決の手掛かりが無いページ)・`sidebar-sticky` |
 | compare | native ≤4 | categoryKey → vertical |
@@ -469,6 +471,9 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 | ranking 右レール | 1 → **2 枚** (`AffiliateAdSlot bannerLimit`) | categoryKey → vertical |
 | ranking 記事下 | ネイティブ 4 件の直後に **300x250 を 1 枚** (`position=ranking-end`) | tagKeys → vertical で 5 件解決し 5 件目を使う |
 | themes 末尾 | **300x250 を 1 枚** (`position=theme-end`) | relatedArticleTagKeys → 無ければ THEME_AFFILIATE_MAP |
+| ranking 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=ranking-incontent`)。既存 native 解決結果の先頭を使い、読了枠からは除外して本文内重複を防ぐ | tagKeys → 無ければ categoryKey → vertical |
+| ranking 右レール (AdSense停止中) | 従来の最大2枚を、停止した上段 AdSense 枠へ**移設**。枚数は増やさず初期 viewability を改善する | categoryKey → vertical |
+| areas 県 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=area-content`)。在庫が無ければ空枠を作らない | `furusato` vertical |
 
 **在庫が足りなければ枠は描画しない** (空枠を作らない)。ranking / themes の末尾バナーは
 「解決 5 件目」なので在庫 4 件以下の vertical では出ず、ネイティブ枠との重複も起きない。
@@ -477,6 +482,10 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 > それは実態の改善ではなく指標の水増しで、過去の窓と比較できなくなる
 > (`.claude/rules/evidence-based-judgment.md`)。impression を増やすのは
 > **計装の網羅と枠の追加だけ**で行う。
+
+> **AdSense再開時の rollback**: `ADSENSE_DISPLAY_ENABLED=true` で従来の AdSense 枠を戻し、
+> ranking 右レールの文脈バナーも従来の下段位置へ戻す。ranking 本文中段へ回した先頭バナーは
+> 読了枠の解決結果へ戻し、同一バナーを欠落・二重表示させない。
 
 ### 5 チャネルの役割分担 (混ぜない)
 

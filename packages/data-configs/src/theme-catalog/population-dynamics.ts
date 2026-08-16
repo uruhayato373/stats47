@@ -125,8 +125,8 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
           "死亡率"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#ef4444"
+          "population",
+          "danger"
         ]
       },
       "sourceName": "人口動態統計",
@@ -159,8 +159,8 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
           "死亡数"
         ],
         "seriesColors": [
-          "#22c55e",
-          "#6b7280"
+          "improve",
+          "neutral"
         ]
       },
       "sourceName": "人口統計",
@@ -183,17 +183,17 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
           {
             "code": "A1301",
             "label": "年少人口(0〜14歳)",
-            "color": "#22c55e"
+            "color": "improve"
           },
           {
             "code": "A1302",
             "label": "生産年齢人口(15〜64歳)",
-            "color": "#3b82f6"
+            "color": "population"
           },
           {
             "code": "A1303",
             "label": "老年人口(65歳以上)",
-            "color": "#f59e0b"
+            "color": "count"
           }
         ],
         "totalCode": "A1101"
@@ -243,8 +243,8 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
           "転出者数"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#f59e0b"
+          "population",
+          "count"
         ]
       },
       "sourceName": "社会・人口統計体系（2019年時点までのデータ。natural-increase-rate等の2024年値と同一年ではない点に注意）",
@@ -393,8 +393,8 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
           "年少人口割合（15歳未満）"
         ],
         "seriesColors": [
-          "#ef4444",
-          "#3b82f6"
+          "danger",
+          "population"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -433,10 +433,10 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
         "leftUnit": "人",
         "rightUnit": "%",
         "columnColors": [
-          "#6b7280"
+          "neutral"
         ],
         "lineColors": [
-          "#ef4444"
+          "danger"
         ]
       },
       "sourceName": "社会・人口統計体系",

@@ -4,15 +4,15 @@ import type { ResolvedAffiliateBanner } from "@/features/ads/services/resolve-af
 
 interface RankingPageNativeAffiliateSectionProps {
   banners: ResolvedAffiliateBanner[];
-  categoryName?: string | null;
   categoryKey?: string | null;
 }
 
 export function RankingPageNativeAffiliateSection({
   banners,
-  categoryName,
   categoryKey,
 }: RankingPageNativeAffiliateSectionProps) {
+  // AdSense 停止中は、呼び出し元が本文中段へ回した最優先の1件を除いて渡す。
+  // ここでは残りを読了位置へ回し、同じ本文内で同一バナーを重複表示しない。
   // 縦長 (スカイスクレイパー) は本文枠に出さない。native の 4 件も末尾の 300x250 枠も
   // 横長前提のため、先に除外してから配分する (受け皿は sidebar-sticky スロット)。
   const usable = banners.filter(isLandscapeBanner);
@@ -25,7 +25,6 @@ export function RankingPageNativeAffiliateSection({
   return (
     <>
       <NativeAffiliateRow
-        title={`${categoryName ?? "このランキング"}の関連サービス`}
         banners={usable.slice(0, 4)}
         position="ranking-native"
         trackingCategory={`ranking-${categoryKey ?? "general"}`}

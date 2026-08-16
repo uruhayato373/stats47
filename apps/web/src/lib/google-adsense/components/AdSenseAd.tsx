@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { logger } from "@/lib/logger";
 
+import { ADSENSE_DISPLAY_ENABLED } from "../constants";
 import { AdSlotProps } from "../types";
 
 import {
@@ -49,7 +50,9 @@ export function AdSenseAd({
 
   // 環境変数から設定を取得
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID;
-  const isEnabled = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED === "true";
+  const isEnabled =
+    ADSENSE_DISPLAY_ENABLED &&
+    process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED === "true";
 
   // 遅延ロードの実装
   useEffect(() => {
@@ -115,7 +118,12 @@ export function AdSenseAd({
     }
   }, [isEnabled, clientId, isVisible, slotId]);
 
-  // 開発環境またはAdSenseが無効な場合はプレースホルダーを表示
+  // 全体停止中はプレースホルダーや予約高も含めて何も表示しない。
+  if (!ADSENSE_DISPLAY_ENABLED) {
+    return null;
+  }
+
+  // 全体表示を再開した状態で、環境変数が無効ならプレースホルダーを表示する。
   if (!isEnabled) {
     return <AdSensePlaceholder format={format} className={className} />;
   }

@@ -6,6 +6,8 @@ import {
   getRankingDownloadSeries,
 } from "@stats47/ranking/server";
 
+import { DOWNLOAD_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
+
 /**
  * ランキングデータ ダウンロード API
  *
@@ -14,7 +16,7 @@ import {
  * R2 観測値からオンザフライで CSV / JSON を生成して stream する (完全DBレス・事前 bake なし)。
  * 全 metric を事前生成すると 1GB 超 / 2 万ファイル超の R2 肥大化になるため、都度生成に統一
  * (Phase 6 で削除した事前 bake exporter を復活させない方針、2026-06-01)。
- * Cloudflare CDN は `Cache-Control: s-maxage` で結果をエッジキャッシュする。
+ * Cloudflare Workers Cache は `Cloudflare-CDN-Cache-Control` で結果をedgeキャッシュする。
  *
  * パラメータは全て whitelist 検証で path injection を防ぐ。
  *
@@ -75,19 +77,19 @@ export async function GET(
   if (!isFormat(formatParam)) {
     return NextResponse.json(
       { error: "Invalid format. Expected csv or json." },
-      { status: 400 },
+      { status: 400, headers: NO_STORE_CACHE_HEADERS },
     );
   }
   if (!(ALLOWED_BASES as Set<string>).has(basisParam)) {
     return NextResponse.json(
       { error: "Invalid basis." },
-      { status: 400 },
+      { status: 400, headers: NO_STORE_CACHE_HEADERS },
     );
   }
   if (!isEncoding(encodingParam)) {
     return NextResponse.json(
       { error: "Invalid encoding." },
-      { status: 400 },
+      { status: 400, headers: NO_STORE_CACHE_HEADERS },
     );
   }
 
@@ -99,7 +101,7 @@ export async function GET(
   if (series.length === 0) {
     return NextResponse.json(
       { error: "No data for this ranking/basis." },
-      { status: 404 },
+      { status: 404, headers: NO_STORE_CACHE_HEADERS },
     );
   }
 
@@ -143,8 +145,8 @@ export async function GET(
     headers: {
       "Content-Type": contentType,
       "Content-Disposition": buildContentDisposition(filename),
-      // オンザフライ生成だが結果は決定的なので CDN に長めにキャッシュさせる
-      "Cache-Control": "public, max-age=86400, s-maxage=2592000",
+      // オンザフライ生成だが結果は決定的なので edge に長めにキャッシュさせる
+      ...DOWNLOAD_DATA_CACHE_HEADERS,
     },
   });
 }

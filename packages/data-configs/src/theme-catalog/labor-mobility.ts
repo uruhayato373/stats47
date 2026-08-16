@@ -69,8 +69,8 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
           "転職率"
         ],
         "seriesColors": [
-          "#ef4444",
-          "#22c55e"
+          "danger",
+          "improve"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -210,7 +210,7 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
           "就業異動率"
         ],
         "seriesColors": [
-          "#ef4444"
+          "danger"
         ]
       },
       "sourceName": "総務省 社会・人口統計体系（労働）",

@@ -1,6 +1,8 @@
-import { describe, expect, test } from "vitest";
+import { NextRequest, NextResponse } from "next/server";
 
-import { isValidPrefCode } from "../middleware";
+import { afterAll, beforeAll, describe, expect, test } from "vitest";
+
+import middleware, { isValidPrefCode } from "../middleware";
 
 describe("isValidPrefCode", () => {
   test("01000 から 47000 までの有効な都道府県コードを true と判定する", () => {
@@ -28,5 +30,42 @@ describe("isValidPrefCode", () => {
     expect(isValidPrefCode("100000")).toBe(false);
     expect(isValidPrefCode("abcde")).toBe(false);
     expect(isValidPrefCode("01a00")).toBe(false);
+  });
+});
+
+describe("middleware Workers Cache headers", () => {
+  const originalNext = NextResponse.next;
+
+  beforeAll(() => {
+    NextResponse.next = () => new NextResponse();
+  });
+
+  afterAll(() => {
+    NextResponse.next = originalNext;
+  });
+
+  function request(headers?: HeadersInit): NextRequest {
+    const nextRequest = new NextRequest("https://stats47.jp/", { headers });
+    Object.defineProperty(nextRequest, "nextUrl", {
+      value: new URL(nextRequest.url),
+    });
+    return nextRequest;
+  }
+
+  test("通常HTMLには共有cache tagを付ける", () => {
+    const response = middleware(request());
+
+    expect(response.headers.get("Cache-Control")).toBe("public, max-age=0, must-revalidate");
+    expect(response.headers.get("Cloudflare-CDN-Cache-Control")).toContain("max-age=86400");
+    expect(response.headers.get("Cache-Tag")).toBe("stats47-html,stats47-path:%2F");
+  });
+
+  test("RSC requestはno-storeかつcache tag無しにする", () => {
+    const response = middleware(request({ RSC: "1", "Next-Router-State-Tree": "[]" }));
+
+    expect(response.headers.get("Cache-Control")).toBe("private, no-store");
+    expect(response.headers.get("Cloudflare-CDN-Cache-Control")).toBeNull();
+    expect(response.headers.get("Cache-Tag")).toBeNull();
+    expect(response.headers.get("Vary")).toContain("Next-Router-State-Tree");
   });
 });

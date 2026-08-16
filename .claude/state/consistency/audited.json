@@ -1,21 +1,11 @@
 {
-  "hash": "409a5615f46f1f723959a465a79f4b2b7737af92189b2f89733f4df6d9b3b33d",
-  "audited_at": "2026-08-13T02:21:45",
+  "hash": "313ce8a61e03d7c80f86d5603c1a458d322361957ac70cd5b1598c62f9a2c2ea",
+  "audited_at": "2026-08-13T08:40:24",
   "files": [
-    ".claude/agents/kdp-operator.md",
-    ".claude/rules/blog-svg-chart-standards.md",
-    ".claude/rules/coconala-product-standards.md",
-    ".claude/scripts/blog/generate-article-charts.ts",
-    ".claude/scripts/kdp/kdp-batch.mjs",
-    ".claude/scripts/kdp/kdp-drafts.mjs",
-    ".claude/scripts/kdp/kdp-publish.mjs",
-    ".claude/scripts/kdp/lib/kdp-flow.mjs",
-    ".claude/scripts/kdp/lib/kdp-form.mjs",
-    ".claude/scripts/kdp/lib/kdp-session.mjs",
-    ".claude/scripts/lib/__tests__/svg-lint.xml-comment.test.mjs",
-    ".claude/scripts/lib/__tests__/svg-provenance.test.mjs",
-    ".claude/scripts/lib/svg-lint.mjs",
-    ".claude/scripts/lib/svg-provenance.mjs",
-    ".claude/skills/product/kdp-publish/SKILL.md"
+    ".claude/rules/theme-catalog-standards.md",
+    ".claude/scripts/audit/theme-chart-dependencies.generated.json",
+    ".claude/scripts/audit/theme-chart-live-audit.mjs",
+    ".claude/scripts/lib/__tests__/check-web-estat-imports.test.cjs",
+    ".claude/scripts/lib/check-web-estat-imports.cjs"
   ]
 }

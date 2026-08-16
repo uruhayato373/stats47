@@ -1,6 +1,10 @@
 import { cn } from "@stats47/components";
 
-import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+import {
+  ADSENSE_DISPLAY_ENABLED,
+  AdSenseAd,
+  CONTENT_FOOTER,
+} from "@/lib/google-adsense";
 
 import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "../../constants/manual-ad-policy";
 
@@ -25,7 +29,7 @@ export function FooterAdSlot({
   hideLabel = false,
   className,
 }: FooterAdSlotProps) {
-  if (!CONTENT_FOOTER.slotId) return null;
+  if (!ADSENSE_DISPLAY_ENABLED || !CONTENT_FOOTER.slotId) return null;
   return (
     <div className={cn(MANUAL_AD_DESKTOP_ONLY_CLASS, "mt-12", className)}>
       {!hideLabel && <AdSlotLabel />}

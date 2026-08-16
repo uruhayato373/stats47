@@ -226,6 +226,11 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
     "count": 73,
     "representatives": [
       {
+        "rankingKey": "convenience-store-count-commercial",
+        "title": "コンビニエンスストア店舗数",
+        "hook": "コンビニエンスストア店舗数が最も多い県は？"
+      },
+      {
         "rankingKey": "retail-store-count",
         "title": "小売店数",
         "hook": "小売店数が最も多い県は？"
@@ -239,11 +244,6 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "rankingKey": "standard-price-change-rate-commercial",
         "title": "標準価格対前年平均変動率",
         "hook": "標準価格対前年平均変動率が最も高い県は？"
-      },
-      {
-        "rankingKey": "convenience-store-count-commercial",
-        "title": "コンビニエンスストア店舗数",
-        "hook": "コンビニエンスストア店舗数が最も多い県は？"
       },
       {
         "rankingKey": "manufacturing-establishment-site-area",
@@ -691,17 +691,17 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "order": 6
   },
   {
+    "rankingKey": "convenience-store-count-commercial",
+    "title": "コンビニエンスストア店舗数",
+    "hook": "コンビニエンスストア店舗数が最も多い県は？",
+    "categoryKey": "commercial",
+    "order": 7
+  },
+  {
     "rankingKey": "school-teacher-annual-income",
     "title": "小中学校教員の平均年収",
     "hook": "小中学校教員の平均年収が最も高い県は？",
     "categoryKey": "educationsports",
-    "order": 7
-  },
-  {
-    "rankingKey": "retail-store-count",
-    "title": "小売店数",
-    "hook": "小売店数が最も多い県は？",
-    "categoryKey": "commercial",
     "order": 8
   }
 ];
@@ -745,10 +745,10 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "industrial-land-price-change-rate",
   "manufacturing-net-value-added-private",
   "manufacturing-sales-private",
+  "convenience-store-count-commercial",
   "retail-store-count",
   "barber-beauty-salon-count",
   "standard-price-change-rate-commercial",
-  "convenience-store-count-commercial",
   "manufacturing-establishment-site-area",
   "pachinko-shop-density-per-10k",
   "grilled-eel-consumption-expenditure",

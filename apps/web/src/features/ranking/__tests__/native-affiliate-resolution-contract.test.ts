@@ -30,6 +30,14 @@ const MODEL_SRC = readFileSync(
   resolve(import.meta.dirname, "../services/load-ranking-page-model.ts"),
   "utf8",
 );
+const SHELL_SRC = readFileSync(
+  resolve(import.meta.dirname, "../components/RankingKeyPage/RankingPageClientShell.tsx"),
+  "utf8",
+);
+const CONTENT_SRC = readFileSync(
+  resolve(import.meta.dirname, "../components/RankingKeyPage/RankingPageContentSections.tsx"),
+  "utf8",
+);
 
 describe("ranking native アフィリエイトの解決契約", () => {
   it("categoryKey フォールバックを持つ (tags は全 config 未記入のため必須)", () => {
@@ -46,5 +54,14 @@ describe("ranking native アフィリエイトの解決契約", () => {
     // 「tags があるが在庫が無い」ケースでも枠を落とさない。length チェックだけでなく
     // 解決結果の空判定でフォールバックすることを要求する。
     expect(MODEL_SRC).toMatch(/byTags\.length\s*>\s*0/);
+  });
+
+  it("AdSense停止中は先頭の横長バナー1件を本文中段へ配線し、末尾で重複させない", () => {
+    expect(SHELL_SRC).toContain("model.nativeBanners.filter(isLandscapeBanner)");
+    expect(SHELL_SRC).toContain('position="ranking-incontent"');
+    expect(SHELL_SRC).toMatch(
+      /ADSENSE_DISPLAY_ENABLED\s*\?\s*affiliateBanners\s*:\s*affiliateBanners\.slice\(1\)/,
+    );
+    expect(CONTENT_SRC).toContain("!ADSENSE_DISPLAY_ENABLED && sections.inContentAffiliate");
   });
 });

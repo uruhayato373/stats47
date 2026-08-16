@@ -130,10 +130,12 @@ async function buildTruth(metricKeys: string[]): Promise<{ series: TruthSeries[]
 /** その書籍が扱う指標キーを集める (ranking 章の指定 + blog 章の記事が張るリンク)。 */
 async function collectMetricKeys(book: (typeof KINDLE_BOOKS)[number]): Promise<string[]> {
   const keys = new Set<string>();
-  for (const ch of book.chapters as Array<{ rankingKeys?: string[]; blogSlug?: string }>) {
+  // ★キャストしない。BookChapter は元々 blogSlug / rankingKeys を持っており、
+  //   手書きの型 (string[]) は本物 (readonly string[]) と食い違って TS2352 になる。
+  for (const ch of book.chapters) {
     for (const k of ch.rankingKeys ?? []) keys.add(k);
   }
-  const slugs = (book.chapters as Array<{ blogSlug?: string }>)
+  const slugs = book.chapters
     .map((c) => c.blogSlug)
     .filter((s): s is string => Boolean(s));
   await Promise.all(

@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { readRankingValuesFromR2, readRankingItemFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
+import { NO_STORE_CACHE_HEADERS, PUBLIC_DATA_CACHE_HEADERS } from "@/lib/cache-policy";
+
 /**
  * ランキングデータ配信 API（md-content.tsx の ranking-table タグ向け）
  *
@@ -28,14 +30,14 @@ export async function GET(
 
     const valuesResult = await readRankingValuesFromR2(rankingKey, "prefecture", yearCode);
     if (!isOk(valuesResult) || valuesResult.data.length === 0) {
-      return NextResponse.json([], { status: 200 });
+      return NextResponse.json([], { status: 200, headers: NO_STORE_CACHE_HEADERS });
     }
 
     const data = valuesResult.data.map((v) => ({ name: v.areaName, value: v.value }));
     return NextResponse.json(data, {
-      headers: { "Cache-Control": "public, max-age=3600, s-maxage=86400" },
+      headers: PUBLIC_DATA_CACHE_HEADERS,
     });
   } catch {
-    return NextResponse.json([], { status: 200 });
+    return NextResponse.json([], { status: 200, headers: NO_STORE_CACHE_HEADERS });
   }
 }

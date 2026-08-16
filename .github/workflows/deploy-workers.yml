@@ -28,7 +28,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
+          # Workers Cache対応のWrangler 4.123+ は Node.js 22+ が必須。
+          node-version: "22"
           cache: "npm"
 
       - name: Install dependencies
@@ -138,8 +139,14 @@ jobs:
           done
 
           # wrangler.toml設定の確認
-          if ! grep -q 'main = ".open-next/worker.js"' wrangler.toml; then
+          if ! grep -q 'main = "src/worker-cache-gateway.ts"' wrangler.toml; then
             echo "Error: main entry point not configured correctly in wrangler.toml"
+            exit 1
+          fi
+
+          # gateway は生成済みOpenNext workerをproxy経由でbundleする。
+          if ! grep -q 'from "../.open-next/worker.js"' src/open-next-worker-proxy.js; then
+            echo "Error: OpenNext worker proxy is not wired to the generated worker"
             exit 1
           fi
 
@@ -173,6 +180,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
           CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
           CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
           # 楽天ウェブサービス (新 Rakuten Developers ポータル) の認証ペア。**両方必須**。
@@ -186,6 +194,11 @@ jobs:
           RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
         run: |
           echo "🔐 Setting secrets for production environment..."
+
+          if [ -z "$WORKER_CACHE_PURGE_SECRET" ]; then
+            echo "❌ WORKER_CACHE_PURGE_SECRET is required for safe R2 publication"
+            exit 1
+          fi
 
           # シークレット設定用のヘルパー関数
           set_secret() {
@@ -220,6 +233,9 @@ jobs:
 
           # AUTH_SECRETを設定（GitHub Secretsから取得）
           set_secret "AUTH_SECRET" "$AUTH_SECRET"
+
+          # R2 snapshot 公開後に Workers Cache を即時無効化する内部APIの認証secret
+          set_secret "WORKER_CACHE_PURGE_SECRET" "$WORKER_CACHE_PURGE_SECRET"
 
           # CLOUDFLARE_ACCOUNT_IDを設定（R2ストレージアクセス用）
           set_secret "CLOUDFLARE_ACCOUNT_ID" "$CLOUDFLARE_ACCOUNT_ID"

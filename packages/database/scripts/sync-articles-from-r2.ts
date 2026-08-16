@@ -41,7 +41,10 @@ interface Frontmatter {
   seoTitle?: string;
   description?: string;
   tags?: string[];
-  publishedAt?: string;
+  // ★string だけではない。yaml.load はクォート無しの日付 (publishedAt: 2026-08-13) を
+  //   Date に変換するので、実際の値は string | Date。型を string に狭めていたため
+  //   下の `instanceof Date` 分岐が「到達しないコード」に見えていた (実行時には通る)。
+  publishedAt?: string | Date;
   published?: boolean;
   [key: string]: unknown;
 }

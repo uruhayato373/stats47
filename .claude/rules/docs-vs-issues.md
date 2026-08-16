@@ -77,6 +77,16 @@ skill、agent、prompt、READMEへ複製しない。
 | OGP/カード/note 画像の生成漏れ (自動修復後も残存) | `ogp-alert,auto-generated` | `.github/workflows/ogp-image-audit-weekly.yml` |
 | サイト内リンクのリンク切れ (soft 404 / 410 含む。ブログ本文 + ページ側コンポーネント生成リンク) | `link-alert,auto-generated` | `.github/workflows/internal-link-audit-weekly.yml` |
 | 文書の鮮度超過・構造ドリフト | `auto-generated` | `.github/workflows/agent-consistency-weekly.yml` |
+| **連続失敗している cron + 配信データの陳腐化 (横断)** | `ci-health-alert,auto-generated` | `.github/workflows/workflow-health-daily.yml` |
+| 楽天カタログ同期の失敗 | `rakuten-alert,auto-generated` | `.github/workflows/sync-rakuten-catalog.yml` |
+| ランキングデータ整合性の異常 | `ranking-alert,auto-generated` | `.github/workflows/ranking-integrity-audit-weekly.yml` |
+| 出典・再現性 lint の error | `provenance-alert,auto-generated` | `.github/workflows/provenance-audit-weekly.yml` |
+| テーマチャートの e-Stat 取得失敗 | `theme-alert,auto-generated` | `.github/workflows/theme-chart-audit-weekly.yml` |
+| e-Stat → R2 更新の失敗 | `data-refresh-alert,auto-generated` | `.github/workflows/data-refresh.yml` |
+| GSC カバレッジ是正キューの異常 | `coverage-alert,auto-generated` | `.github/workflows/fetch-metrics-weekly.yml` |
+| 国土数値情報カタログの更新検知 | `ksj-catalog,auto-generated` | `.github/workflows/ksj-catalog-monthly.yml` |
+
+**アラート workflow は自分のラベルを同じ step で ensure する** (`gh label create <name> --force 2>/dev/null || true` → `gh issue create`)。ラベルが未登録だと `gh issue create` が `could not add label` で落ち、**通知が 1 度も飛ばない**。2026-08-12 に `rakuten-alert` 未登録でこれが起き、楽天同期が 9 日間死んでいたことを誰も知らなかった (ログの最終行も真因ではなくラベルエラーになり原因を隠す)。機械検査は `.claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs` が workflow を glob で走査して行う。
 
 ### 判定フロー
 

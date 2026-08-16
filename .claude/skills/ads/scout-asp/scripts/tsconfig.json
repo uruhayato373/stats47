@@ -1,0 +1,19 @@
+{
+  // A8 ブラウザ操作スクリプトの型検査。近くに package tsconfig が無いので base を直接 extends する。
+  // core (.mjs) は素 JS なので checkJs は off、node API を使うので types: node が要る。
+  // 契約: .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs
+  "extends": "../../../../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "skipLibCheck": true,
+    "lib": ["es2023", "dom"],
+    "target": "es2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowJs": true,
+    "checkJs": false,
+    "types": ["node"]
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}

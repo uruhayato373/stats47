@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { NO_STORE_CACHE_HEADERS, PUBLIC_DATA_CACHE_HEADERS } from "@/lib/cache-policy";
+
 const isDev = process.env.NODE_ENV === "development";
 
 /**
@@ -19,7 +21,10 @@ export async function GET(
   const key = toBlogDataKey(segments);
 
   if (!key) {
-    return NextResponse.json({ error: "不正なパスです" }, { status: 400 });
+    return NextResponse.json(
+      { error: "不正なパスです" },
+      { status: 400, headers: NO_STORE_CACHE_HEADERS },
+    );
   }
 
   try {
@@ -30,7 +35,7 @@ export async function GET(
   } catch {
     return NextResponse.json(
       { error: "ファイルが見つかりません" },
-      { status: 404 }
+      { status: 404, headers: NO_STORE_CACHE_HEADERS },
     );
   }
 }
@@ -62,7 +67,7 @@ async function readFromLocal(key: string): Promise<NextResponse> {
   if (!fs.existsSync(filePath)) {
     return NextResponse.json(
       { error: "ファイルが見つかりません" },
-      { status: 404 }
+      { status: 404, headers: NO_STORE_CACHE_HEADERS },
     );
   }
 
@@ -91,15 +96,12 @@ async function readFromR2(key: string): Promise<NextResponse> {
     if (!data) {
       return NextResponse.json(
         { error: "ファイルが見つかりません" },
-        { status: 404 }
+        { status: 404, headers: NO_STORE_CACHE_HEADERS },
       );
     }
 
     return new NextResponse(data, {
-      headers: {
-        "Content-Type": contentType,
-        "Cache-Control": "public, max-age=3600, s-maxage=86400",
-      },
+      headers: { "Content-Type": contentType, ...PUBLIC_DATA_CACHE_HEADERS },
     });
   }
 
@@ -109,11 +111,11 @@ async function readFromR2(key: string): Promise<NextResponse> {
   if (!data) {
     return NextResponse.json(
       { error: "ファイルが見つかりません" },
-      { status: 404 }
+      { status: 404, headers: NO_STORE_CACHE_HEADERS },
     );
   }
 
   return NextResponse.json(data, {
-    headers: { "Cache-Control": "public, max-age=3600, s-maxage=86400" },
+    headers: PUBLIC_DATA_CACHE_HEADERS,
   });
 }

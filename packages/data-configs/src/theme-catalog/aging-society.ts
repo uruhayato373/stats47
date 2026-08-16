@@ -79,8 +79,8 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "高齢化率"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#ef4444"
+          "population",
+          "danger"
         ]
       },
       "sourceName": "人口動態統計 / 国勢調査",
@@ -113,8 +113,8 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "離婚率"
         ],
         "seriesColors": [
-          "#8b5cf6",
-          "#f97316"
+          "special",
+          "series-12"
         ]
       },
       "sourceName": "人口動態統計",
@@ -147,8 +147,8 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "死亡数"
         ],
         "seriesColors": [
-          "#22c55e",
-          "#6b7280"
+          "improve",
+          "neutral"
         ]
       },
       "sourceName": "人口統計",
@@ -176,7 +176,7 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "後期高齢者医療費"
         ],
         "seriesColors": [
-          "#ef4444"
+          "danger"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -209,8 +209,8 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "死亡率"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#ef4444"
+          "population",
+          "danger"
         ]
       },
       "sourceName": "人口動態統計",
@@ -233,17 +233,17 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           {
             "code": "A1301",
             "label": "年少人口(0〜14歳)",
-            "color": "#22c55e"
+            "color": "improve"
           },
           {
             "code": "A1302",
             "label": "生産年齢人口(15〜64歳)",
-            "color": "#3b82f6"
+            "color": "population"
           },
           {
             "code": "A1303",
             "label": "老年人口(65歳以上)",
-            "color": "#f59e0b"
+            "color": "count"
           }
         ],
         "totalCode": "A1101"
@@ -420,7 +420,7 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "厚生年金受給総額"
         ],
         "seriesColors": [
-          "#0ea5e9"
+          "series-7"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -484,7 +484,7 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "ボランティア参加率"
         ],
         "seriesColors": [
-          "#22c55e"
+          "improve"
         ]
       },
       "sourceName": "社会・人口統計体系",
@@ -517,8 +517,8 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "老年人口指数"
         ],
         "seriesColors": [
-          "#3b82f6",
-          "#ef4444"
+          "population",
+          "danger"
         ]
       },
       "sourceName": "社会・人口統計体系",

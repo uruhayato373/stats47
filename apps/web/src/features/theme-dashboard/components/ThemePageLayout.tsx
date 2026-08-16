@@ -253,7 +253,6 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
       {nativeBanners.length > 0 && (
         <div className="mt-8">
           <NativeAffiliateRow
-            title={`${theme.title}の関連サービス`}
             banners={nativeBanners.slice(0, 4)}
             position="theme-native"
             trackingCategory={`theme-${theme.themeKey}`}

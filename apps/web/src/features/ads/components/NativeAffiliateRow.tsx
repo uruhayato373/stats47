@@ -1,17 +1,11 @@
 import Image from "next/image";
 
-import { getSurfaceCardClassName } from "@/components/surface";
-
 import { AdImpressionTracker } from "@/features/ads/components/AdImpressionTracker";
 import { TrackedAffiliateLink } from "@/features/ads/components/tracked-affiliate-link";
 import { isLandscapeBanner } from "@/features/ads/services/banner-geometry";
 import type { ResolvedAffiliateBanner } from "@/features/ads/services/resolve-affiliate-ad";
 
 interface NativeAffiliateRowProps {
-  /** セクションタイトル。省略時は "関連サービス" */
-  title?: string;
-  /** 右上の "もっと見る" リンク */
-  moreHref?: string;
   /** バナー配列。縦長を除いた先頭 4 件を描画し、0 件なら null を返す */
   banners: ResolvedAffiliateBanner[];
   /** AffiliateLink の position 追跡用 */
@@ -21,15 +15,13 @@ interface NativeAffiliateRowProps {
 }
 
 /**
- * ネイティブアフィリエイト枠。個別カードのグリッドで表示する (外枠カードで一括りにしない)。
+ * ネイティブアフィリエイト枠。リンク付きバナー画像だけをグリッド表示する。
  *
- * ★ 2026-08-06: 外側 SurfaceCard + カード内ヘッダを廃止し、PR ラベル付きの 1 段見出しに変更。
- *   旧構造は (a) 呼び出し元の SectionHeader と二重見出しになる、(b) カード入れ子になる、
- *   (c) 見出しが「関連書籍・商品」等で実在庫 (書籍ゼロ) と乖離する、という指摘を受けた。
- *   PR ラベルは AffiliateTextAdList と同スタイル (景表法配慮・全アフィリ枠で統一)。
+ * ★ 2026-08-14: PR ラベル・見出し・商品名・もっと見る導線・カード装飾を廃止した。
+ *   ASP 提供バナーの意匠をそのまま表示し、サイト側の可視テキストや装飾を重ねない。
  *
- * ★ 縦長 (height > width) クリエイティブはここで除外する。aspect-[4/3] + object-contain の
- *   枠にスカイスクレイパー (120x600) が入ると極細の縦帯に潰れるため。縦長の受け皿は
+ * ★ 縦長 (height > width) クリエイティブはここで除外する。本文の横並びグリッドに
+ *   スカイスクレイパー (120x600) が入ると行が過度に高くなるため。縦長の受け皿は
  *   sidebar-sticky スロット (SidebarStickyBannerAd)。呼び出し元は除外分を見込んで
  *   解決 limit を 8 程度にする (正典: .claude/rules/affiliate-ads-standards.md §3)。
  *
@@ -44,8 +36,6 @@ interface NativeAffiliateRowProps {
  *   ページ文脈は `position` (例 "category-native") が担うため情報は失われない。
  */
 export function NativeAffiliateRow({
-  title = "関連サービス",
-  moreHref,
   banners,
   position = "native-row",
   trackingCategory = "native-affiliate",
@@ -55,68 +45,46 @@ export function NativeAffiliateRow({
   if (visible.length === 0) return null;
 
   return (
-    <section>
-      <div className="mb-2 flex items-baseline gap-2">
-        <span className="text-xs font-medium text-muted-foreground">PR</span>
-        <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
-        {moreHref && (
-          <a
-            href={moreHref}
-            className="ml-auto shrink-0 text-xs text-muted-foreground hover:text-foreground"
-          >
-            もっと見る ›
-          </a>
-        )}
-      </div>
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-        {visible.map((b) => (
-          <AdImpressionTracker
-            key={b.href + b.imageUrl}
+    <div className="grid grid-cols-2 items-start gap-2 md:grid-cols-4">
+      {visible.map((b) => (
+        <AdImpressionTracker
+          key={b.href + b.imageUrl}
+          category={b.vertical ?? trackingCategory}
+          label={b.title}
+          position={position}
+          adId={b.id}
+          creativeSize={`${b.width}x${b.height}`}
+        >
+          <TrackedAffiliateLink
+            href={b.href}
             category={b.vertical ?? trackingCategory}
             label={b.title}
             position={position}
             adId={b.id}
-            creativeSize={`${b.width}x${b.height}`}
-            className="h-full"
+            className="relative block"
           >
-            <TrackedAffiliateLink
-              href={b.href}
-              category={b.vertical ?? trackingCategory}
-              label={b.title}
-              position={position}
-              adId={b.id}
-              className={getSurfaceCardClassName({
-                interactive: true,
-                className: "group flex h-full flex-col gap-2 p-2",
-              })}
-            >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-muted">
-                <Image
-                  src={b.imageUrl}
-                  alt={b.title}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-contain transition-transform group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
-                {b.trackingPixelUrl && (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img
-                    src={b.trackingPixelUrl}
-                    alt=""
-                    width={1}
-                    height={1}
-                    className="absolute h-px w-px opacity-0"
-                  />
-                )}
-              </div>
-              <p className="line-clamp-2 text-xs font-medium leading-snug text-foreground">
-                {b.title}
-              </p>
-            </TrackedAffiliateLink>
-          </AdImpressionTracker>
-        ))}
-      </div>
-    </section>
+            <Image
+              src={b.imageUrl}
+              alt={b.title}
+              width={b.width}
+              height={b.height}
+              sizes="(max-width: 767px) 50vw, 25vw"
+              className="block h-auto w-full"
+              loading="lazy"
+            />
+            {b.trackingPixelUrl && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={b.trackingPixelUrl}
+                alt=""
+                width={1}
+                height={1}
+                className="absolute left-0 top-0 h-px w-px opacity-0"
+              />
+            )}
+          </TrackedAffiliateLink>
+        </AdImpressionTracker>
+      ))}
+    </div>
   );
 }

@@ -26,6 +26,7 @@ import { RUNTIME_PRODUCT_KEYWORDS } from "../src/config/runtime-metric-summaries
 import { getFurusatoNozeiLink } from "../src/features/ads/constants/furusato-nozei";
 import {
   FURUSATO_NOZEI_GENRE_ID,
+  searchFurusatoItems,
   searchRakutenItems,
   type RakutenItem,
 } from "../src/features/ads/lib/rakuten-api";
@@ -62,7 +63,7 @@ const slim = (items: RakutenItem[]): RakutenSnapshotItem[] => toSnapshotItems(it
 async function put(key: string, items: RakutenSnapshotItem[], generatedAt: string) {
   if (DRY_RUN) return;
   const payload: RakutenSnapshot = { generatedAt, items };
-  await saveToR2(key, JSON.stringify(payload), "application/json");
+  await saveToR2(key, JSON.stringify(payload), { contentType: "application/json" });
 }
 
 async function main() {

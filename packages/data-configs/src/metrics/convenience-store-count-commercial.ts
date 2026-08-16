@@ -19,8 +19,8 @@ export const convenienceStoreCountCommercial: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2025,
-    "to": 2025,
+    "from": 2022,
+    "to": 2024,
   },
   "yearFormat": "fiscal",
   "visualization": {
