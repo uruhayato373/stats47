@@ -829,7 +829,8 @@
       "coverPath": ".local/kindle-books/K-S2-01/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "draftId": "A2UWQYBWVB2439"
     },
     "K-S2-02": {
       "id": "K-S2-02",
