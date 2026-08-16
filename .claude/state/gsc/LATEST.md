@@ -1,4 +1,4 @@
-# GSC カバレッジ是正 — 2026-W32 (2026-08-09)
+# GSC カバレッジ是正 — 2026-W32 (2026-08-16)
 
 > SSOT: `.claude/state/gsc/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`
 

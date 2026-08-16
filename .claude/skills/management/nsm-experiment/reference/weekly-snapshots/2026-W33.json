@@ -2,7 +2,7 @@
   "week_id": "2026-W33",
   "year": 2026,
   "week": 33,
-  "generated_at": "2026-08-16T04:05:55.353Z",
+  "generated_at": "2026-08-16T11:13:24.370Z",
   "schemaVersion": 2,
   "weekId": "2026-W33",
   "anchor": "2026-08-16",
@@ -61,7 +61,7 @@
       "periodEnd": "2026-08-13",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-08-16T04:05:55.353Z",
+      "generatedAt": "2026-08-16T11:13:24.370Z",
       "source": "gsc",
       "limitations": [
         "取得遅延 3 日 (anchor=2026-08-16)"
@@ -86,22 +86,22 @@
       "periodEnd": "2026-08-15",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-08-16T04:05:55.353Z",
+      "generatedAt": "2026-08-16T11:13:24.370Z",
       "source": "ga4",
       "limitations": [
         "取得遅延 1 日 (anchor=2026-08-16)",
         "KPI は country=Japan clean slice。raw は pollution 監視専用"
       ],
       "kpis": {
-        "activeUsers": 2083,
-        "sessions": 2407,
-        "engagedSessions": 1371
+        "activeUsers": 1925,
+        "sessions": 2244,
+        "engagedSessions": 1616
       },
       "pollution": {
-        "rawSessions": 2613,
-        "jpSessions": 2407,
-        "pollutedSessions": 206,
-        "pollutedPct": 7.9
+        "rawSessions": 2630,
+        "jpSessions": 2244,
+        "pollutedSessions": 386,
+        "pollutedPct": 14.7
       }
     }
   },
@@ -111,7 +111,7 @@
       "periodEnd": "2026-08-06",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-08-16T04:05:55.353Z",
+      "generatedAt": "2026-08-16T11:13:24.370Z",
       "source": "gsc",
       "limitations": [
         "取得遅延 3 日 (anchor=2026-08-16)"
@@ -135,7 +135,7 @@
       "periodEnd": "2026-08-08",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-08-16T04:05:55.353Z",
+      "generatedAt": "2026-08-16T11:13:24.370Z",
       "source": "ga4",
       "limitations": [
         "取得遅延 1 日 (anchor=2026-08-16)",
@@ -152,63 +152,51 @@
     "channels": [
       {
         "channel": "Organic Search",
-        "thisUsers": 1688,
+        "thisUsers": 1714,
         "prevUsers": 1728,
-        "userDelta": -40,
-        "userDeltaPct": -2.314814814814815,
-        "thisSessions": 1939,
+        "userDelta": -14,
+        "userDeltaPct": -0.8101851851851851,
+        "thisSessions": 1976,
         "prevSessions": 2038,
-        "thisEngagedSessions": 1219,
+        "thisEngagedSessions": 1437,
         "prevEngagedSessions": 1489,
-        "thisEngagementRate": 0.62867457452295
-      },
-      {
-        "channel": "Unassigned",
-        "thisUsers": 188,
-        "prevUsers": 5,
-        "userDelta": 183,
-        "userDeltaPct": 3660,
-        "thisSessions": 206,
-        "prevSessions": 9,
-        "thisEngagedSessions": 0,
-        "prevEngagedSessions": 3,
-        "thisEngagementRate": 0
+        "thisEngagementRate": 0.7272267206477733
       },
       {
         "channel": "Direct",
-        "thisUsers": 93,
+        "thisUsers": 95,
         "prevUsers": 139,
-        "userDelta": -46,
-        "userDeltaPct": -33.093525179856115,
-        "thisSessions": 122,
+        "userDelta": -44,
+        "userDeltaPct": -31.654676258992804,
+        "thisSessions": 124,
         "prevSessions": 169,
-        "thisEngagedSessions": 68,
+        "thisEngagedSessions": 79,
         "prevEngagedSessions": 105,
-        "thisEngagementRate": 0.5573770491803278
+        "thisEngagementRate": 0.6370967741935484
       },
       {
         "channel": "Referral",
-        "thisUsers": 84,
+        "thisUsers": 86,
         "prevUsers": 93,
-        "userDelta": -9,
-        "userDeltaPct": -9.67741935483871,
-        "thisSessions": 106,
+        "userDelta": -7,
+        "userDeltaPct": -7.526881720430108,
+        "thisSessions": 108,
         "prevSessions": 106,
-        "thisEngagedSessions": 69,
+        "thisEngagedSessions": 81,
         "prevEngagedSessions": 85,
-        "thisEngagementRate": 0.6509433962264151
+        "thisEngagementRate": 0.75
       },
       {
         "channel": "AI Assistant",
-        "thisUsers": 26,
+        "thisUsers": 27,
         "prevUsers": 44,
-        "userDelta": -18,
-        "userDeltaPct": -40.909090909090914,
-        "thisSessions": 30,
+        "userDelta": -17,
+        "userDeltaPct": -38.63636363636363,
+        "thisSessions": 32,
         "prevSessions": 56,
-        "thisEngagedSessions": 13,
+        "thisEngagedSessions": 17,
         "prevEngagedSessions": 29,
-        "thisEngagementRate": 0.43333333333333335
+        "thisEngagementRate": 0.53125
       },
       {
         "channel": "Organic Social",
@@ -223,47 +211,47 @@
         "thisEngagementRate": 0.6666666666666666
       },
       {
-        "channel": "Cross-network",
-        "thisUsers": 1,
-        "prevUsers": 0,
-        "userDelta": 1,
-        "userDeltaPct": null,
+        "channel": "Unassigned",
+        "thisUsers": 0,
+        "prevUsers": 5,
+        "userDelta": -5,
+        "userDeltaPct": -100,
         "thisSessions": 1,
-        "prevSessions": 0,
+        "prevSessions": 9,
         "thisEngagedSessions": 0,
-        "prevEngagedSessions": 0,
+        "prevEngagedSessions": 3,
         "thisEngagementRate": 0
       }
     ],
     "total": {
-      "thisUsers": 2083,
+      "thisUsers": 1925,
       "prevUsers": 2013,
-      "thisSessions": 2407,
+      "thisSessions": 2244,
       "prevSessions": 2385,
-      "thisEngagedSessions": 1371,
+      "thisEngagedSessions": 1616,
       "prevEngagedSessions": 1714,
-      "userDelta": 70,
-      "userDeltaPct": 3.4773969200198707,
-      "engagedSessionDelta": -343,
-      "engagedSessionDeltaPct": -20.01166861143524
+      "userDelta": -88,
+      "userDeltaPct": -4.371584699453552,
+      "engagedSessionDelta": -98,
+      "engagedSessionDeltaPct": -5.717619603267211
     },
     "organic": {
       "channel": "Organic Search",
-      "thisUsers": 1688,
+      "thisUsers": 1714,
       "prevUsers": 1728,
-      "userDelta": -40,
-      "userDeltaPct": -2.314814814814815,
-      "thisSessions": 1939,
+      "userDelta": -14,
+      "userDeltaPct": -0.8101851851851851,
+      "thisSessions": 1976,
       "prevSessions": 2038,
-      "thisEngagedSessions": 1219,
+      "thisEngagedSessions": 1437,
       "prevEngagedSessions": 1489,
-      "thisEngagementRate": 0.62867457452295
+      "thisEngagementRate": 0.7272267206477733
     },
     "pollution": {
-      "rawSessions": 2613,
-      "jpSessions": 2407,
-      "pollutedSessions": 206,
-      "pollutedPct": 7.9
+      "rawSessions": 2630,
+      "jpSessions": 2244,
+      "pollutedSessions": 386,
+      "pollutedPct": 14.7
     },
     "slice": "country=Japan (clean)"
   },
