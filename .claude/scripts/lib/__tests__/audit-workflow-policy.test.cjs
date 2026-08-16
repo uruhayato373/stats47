@@ -126,6 +126,109 @@ jobs:
   assert.equal(result.output.findings, 0);
 });
 
+/**
+ * SCRIPT_RUN_WITHOUT_INSTALL 用。auditor は実ファイルを走査して「依存を持つスクリプト」を
+ * 求めるので、workflow だけでなくスクリプト実体も一時 repo に置く必要がある。
+ */
+function runWithScripts(source, files, args = []) {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-install-gate-'));
+  const auditor = path.join(root, '.claude/scripts/lib/audit-workflow-policy.cjs');
+  const workflow = path.join(root, '.github/workflows/test.yml');
+  fs.mkdirSync(path.dirname(auditor), { recursive: true });
+  fs.mkdirSync(path.dirname(workflow), { recursive: true });
+  fs.copyFileSync(AUDITOR, auditor);
+  fs.writeFileSync(workflow, source);
+  for (const [rel, content] of Object.entries(files)) {
+    const abs = path.join(root, rel);
+    fs.mkdirSync(path.dirname(abs), { recursive: true });
+    fs.writeFileSync(abs, content);
+  }
+  const result = spawnSync(process.execPath, [auditor, '--json', ...args], {
+    cwd: root,
+    encoding: 'utf8',
+    env: { ...process.env, NODE_PATH: path.join(ROOT, 'node_modules') },
+  });
+  fs.rmSync(root, { recursive: true, force: true });
+  const parsed = JSON.parse(result.stdout);
+  const details = (parsed.details || []).filter(
+    (d) => d.code === 'SCRIPT_RUN_WITHOUT_INSTALL'
+  );
+  return { ...result, output: parsed, installFindings: details };
+}
+
+const WF_HEADER = `name: t
+on: { workflow_dispatch: {} }
+permissions: { contents: read }
+jobs:
+  j:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+`;
+
+test('[mutation] 相対 import の 1 段先に外部依存があると npm ci 欠落を検出する', () => {
+  // 2026-08-16 の実障害の形: entry は node: と相対 import しか持たないが、
+  // 1 段先が googleapis を import する。浅い走査では捕まらない。
+  const { installFindings } = runWithScripts(
+    WF_HEADER +
+      `      - run: node .claude/scripts/metrics/__tests__/x.test.mjs\n`,
+    {
+      '.claude/scripts/metrics/__tests__/x.test.mjs':
+        'import test from "node:test";\nimport { f } from "../fetch.mjs";\n',
+      '.claude/scripts/metrics/fetch.mjs': 'import { google } from "googleapis";\nexport const f = 1;\n',
+    }
+  );
+  assert.equal(installFindings.length, 1, '再帰的に依存を辿って検出する');
+  assert.match(installFindings[0].message, /npm ci が無い/);
+});
+
+test('[mutation] glob 指定でも展開して検出する (実障害は node --test <glob> だった)', () => {
+  const { installFindings } = runWithScripts(
+    WF_HEADER +
+      `      - run: node --test .claude/scripts/metrics/__tests__/*.test.mjs\n`,
+    {
+      '.claude/scripts/metrics/__tests__/a.test.mjs': 'import { google } from "googleapis";\n',
+    }
+  );
+  assert.equal(installFindings.length, 1, 'glob を展開しないと空振りする');
+});
+
+test('npm ci があれば検出しない', () => {
+  const { installFindings } = runWithScripts(
+    WF_HEADER +
+      `      - run: npm ci\n` +
+      `      - run: node .claude/scripts/x.mjs\n`,
+    { '.claude/scripts/x.mjs': 'import { google } from "googleapis";\n' }
+  );
+  assert.deepEqual(installFindings, []);
+});
+
+test('依存の無いスクリプト (node: と相対のみ) は install 不要とみなす', () => {
+  const { installFindings } = runWithScripts(
+    WF_HEADER + `      - run: node .claude/scripts/y.mjs\n`,
+    {
+      '.claude/scripts/y.mjs': 'import fs from "node:fs";\nimport { z } from "./z.mjs";\n',
+      '.claude/scripts/z.mjs': 'import path from "node:path";\nexport const z = 1;\n',
+    }
+  );
+  assert.deepEqual(installFindings, [], '実在 13 workflow を誤検知しないための条件');
+});
+
+test('heredoc / echo 内の手順書きは「実行」とみなさない', () => {
+  // Issue 本文に `npx tsx <path>` と書いてあるだけの workflow を誤検知しないこと。
+  // 実装時に internal-link-audit-weekly / ksj-catalog-monthly の 2 本で実際に踏んだ。
+  const { installFindings } = runWithScripts(
+    WF_HEADER +
+      `      - run: |\n` +
+      `          cat <<'EOF' > /tmp/body.md\n` +
+      `          npx tsx .claude/scripts/dep.ts --apply\n` +
+      `          EOF\n` +
+      `          echo "手順: node .claude/scripts/dep.ts"\n`,
+    { '.claude/scripts/dep.ts': 'import { google } from "googleapis";\n' }
+  );
+  assert.deepEqual(installFindings, []);
+});
+
 test('blog画像のdirect applyを拒否し、audit-onlyはpublisher不要', () => {
   const bad = run(`
 name: blog image

@@ -72,6 +72,106 @@ function collectSaveToR2Scripts() {
   return out;
 }
 
+/**
+ * 「node_modules が無いと動かない repo スクリプト」の集合を返す。
+ *
+ * 2026-08-16 の実障害: search-growth-weekly.yml は npm ci を持たないまま
+ * `node --test .claude/scripts/metrics/__tests__/*.test.mjs` を走らせていた。8/2 までは
+ * 対象テストが依存を持たなかったので通っていたが、W32 で追加された adsense-inventory.test.mjs が
+ * **相対 import の 1 段先** (fetch-adsense-snapshot.mjs) で googleapis を import していたため、
+ * 8/9 からファイル読み込みごと失敗するようになった (location: test.mjs:1:1)。
+ *
+ * ★ 浅い走査では捕まらない。entry 自身は `node:` と相対 import しか持たないので、
+ *   **相対 import を再帰的に辿って**外部依存に到達するかを見る必要がある。
+ */
+let nodeModulesDependentScriptsCache = null;
+function collectScriptsNeedingNodeModules() {
+  if (nodeModulesDependentScriptsCache) return nodeModulesDependentScriptsCache;
+  const roots = [
+    path.join(ROOT, '.claude/scripts'),
+    path.join(ROOT, 'apps/web/scripts'),
+    path.join(ROOT, 'packages'),
+    path.join(ROOT, 'scripts'),
+  ];
+  const files = [];
+  const walk = (dir, depth = 0) => {
+    if (depth > 7) return;
+    let entries;
+    try {
+      entries = fs.readdirSync(dir, { withFileTypes: true });
+    } catch {
+      return;
+    }
+    for (const e of entries) {
+      if (e.name === 'node_modules' || e.name.startsWith('.')) continue;
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) walk(full, depth + 1);
+      else if (/\.(ts|mts|cts|mjs|cjs|js)$/.test(e.name)) files.push(full);
+    }
+  };
+  for (const r of roots) walk(r);
+
+  const readImports = (absolute) => {
+    let src;
+    try {
+      src = fs.readFileSync(absolute, 'utf8');
+    } catch {
+      return null;
+    }
+    const specs = [];
+    for (const m of src.matchAll(/(?:from|import)\s+["']([^"']+)["']/g)) specs.push(m[1]);
+    for (const m of src.matchAll(/\brequire\(\s*["']([^"']+)["']\s*\)/g)) specs.push(m[1]);
+    return specs;
+  };
+
+  /** 相対 import を解決して実ファイルを返す (拡張子省略・index も試す) */
+  const resolveRelative = (fromFile, spec) => {
+    const base = path.resolve(path.dirname(fromFile), spec);
+    const candidates = [
+      base,
+      // .js/.mjs 指定で実体が .ts のケース (tsx / ESM の慣習)
+      base.replace(/\.js$/, '.ts'),
+      base.replace(/\.mjs$/, '.mts'),
+      ...['.ts', '.mts', '.cts', '.mjs', '.cjs', '.js'].map((ext) => base + ext),
+      ...['.ts', '.mts', '.mjs', '.cjs', '.js'].map((ext) => path.join(base, 'index' + ext)),
+    ];
+    for (const c of candidates) {
+      try {
+        if (fs.statSync(c).isFile()) return c;
+      } catch {
+        /* next */
+      }
+    }
+    return null;
+  };
+
+  /** 外部依存 (非 node: ・非相対) に到達するか。相対 import を再帰的に辿る */
+  const needsInstall = (absolute, seen = new Set()) => {
+    if (seen.has(absolute)) return false;
+    seen.add(absolute);
+    const specs = readImports(absolute);
+    if (!specs) return false;
+    for (const spec of specs) {
+      if (spec.startsWith('node:')) continue;
+      if (spec.startsWith('.') || spec.startsWith('/')) {
+        const next = resolveRelative(absolute, spec);
+        if (next && needsInstall(next, seen)) return true;
+        continue;
+      }
+      // bare specifier = node_modules 依存 (workspace パッケージも npm ci が要る)
+      return true;
+    }
+    return false;
+  };
+
+  const out = [];
+  for (const f of files) {
+    if (needsInstall(f)) out.push(path.relative(ROOT, f).split(path.sep).join('/'));
+  }
+  nodeModulesDependentScriptsCache = out;
+  return out;
+}
+
 function auditFile(file) {
   const relative = path.relative(ROOT, file).split(path.sep).join('/');
   const findings = [];
@@ -421,6 +521,87 @@ function auditFile(file) {
           code: 'R2_WRITE_WITHOUT_PUSH',
           file: relative,
           message: `job ${jobId}: saveToR2 を使うスクリプトを実行しているが push 段 (diff-push-r2 等) が無い。.local/r2 に書くだけで本番に届かない`,
+        });
+      }
+    }
+  }
+
+  // SCRIPT_RUN_WITHOUT_INSTALL: node_modules 依存を持つ repo スクリプトを実行するのに
+  // 同じ job へ npm ci / npm install が無い。
+  //
+  // 2026-08-16 の実障害: search-growth-weekly が install 無しで node --test を回しており、
+  // W32 で追加されたテストが相対 import の 1 段先で googleapis を要求した瞬間に死んだ
+  // (8/9・8/16 の 2 週連続失敗。8/2 までは対象テストに依存が無く通っていた)。
+  // 「依存の無いスクリプトを install 無しで走らせている」状態は、依存を持つファイルが
+  // 1 本増えた瞬間に静かに壊れる時限式なので、実行対象の依存を静的に見て要求する。
+  const INSTALL_NEEDING_SCRIPTS = collectScriptsNeedingNodeModules();
+  if (INSTALL_NEEDING_SCRIPTS.length > 0) {
+    for (const [jobId, job] of Object.entries(jobs)) {
+      if (!job || typeof job !== 'object' || !Array.isArray(job.steps)) continue;
+      // ★ 「実行」と「文字列としての言及」を区別する。区別しないと、Issue 本文の
+      //   「反映手順」に `npx tsx <path>` と書いてあるだけの workflow を誤検知する
+      //   (実装時に internal-link-audit-weekly / ksj-catalog-monthly の 2 本で実際に踏んだ)。
+      //   誤検知を出すゲートは運用で無効化されるので、確実に実行と言える形だけを見る。
+      const stripComments = (text) => {
+        const out = [];
+        let heredoc = null;
+        for (const line of text.split('\n')) {
+          if (heredoc) {
+            // heredoc 本文 (Issue body 等) は実行されないので落とす
+            if (line.trim() === heredoc) heredoc = null;
+            continue;
+          }
+          if (/^\s*#/.test(line)) continue;
+          const open = line.match(/<<-?\s*['"]?([A-Za-z_][A-Za-z0-9_]*)['"]?/);
+          if (open) heredoc = open[1];
+          // echo で囲まれた行も手順書きなので実行とみなさない
+          if (/^\s*echo\b/.test(line)) continue;
+          out.push(line);
+        }
+        return out.join('\n');
+      };
+      const runs = job.steps
+        .map((s) => (typeof s?.run === 'string' ? stripComments(s.run) : ''))
+        .join('\n');
+      if (!runs) continue;
+      // インタプリタの引数位置に現れたパス表現を集める。
+      // ★ glob をそのまま文字列比較すると素通りする: 実障害の search-growth-weekly は
+      //   `node --test .claude/scripts/metrics/__tests__/*.test.mjs` と書いており、
+      //   具体的なファイル名は run に現れない。展開して突き合わせないと検査が空振りする。
+      const executedPatterns = [];
+      for (const m of runs.matchAll(
+        /(?:^|[;&|]|\)\s)\s*(?:npx\s+(?:--\S+\s+)*)?(?:node|tsx|ts-node)\s+([^\n]*)/gm
+      )) {
+        for (const token of m[1].split(/\s+/)) {
+          if (!token || token.startsWith('-')) continue;
+          if (/[./]/.test(token)) executedPatterns.push(token.replace(/^["']|["']$/g, ''));
+        }
+      }
+      const matchesPattern = (rel, pattern) => {
+        if (!pattern.includes('*')) return rel === pattern || rel.endsWith('/' + pattern);
+        const re = new RegExp(
+          '^' +
+            pattern
+              .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+              .replace(/\*\*/g, ' ')
+              .replace(/\*/g, '[^/]*')
+              .replace(/ /g, '.*') +
+            '$'
+        );
+        return re.test(rel);
+      };
+      const executed = INSTALL_NEEDING_SCRIPTS.filter((rel) =>
+        executedPatterns.some((p) => matchesPattern(rel, p))
+      );
+      if (executed.length === 0) continue;
+      const hasInstall = /\bnpm\s+(ci|install)\b/.test(runs);
+      if (!hasInstall) {
+        findings.push({
+          code: 'SCRIPT_RUN_WITHOUT_INSTALL',
+          file: relative,
+          message:
+            `job ${jobId}: node_modules 依存を持つスクリプトを実行しているが npm ci が無い ` +
+            `(${executed.slice(0, 3).join(', ')}${executed.length > 3 ? ` 他 ${executed.length - 3} 件` : ''})`,
         });
       }
     }
