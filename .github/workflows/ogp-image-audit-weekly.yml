@@ -111,6 +111,9 @@ jobs:
             exit 0
           fi
           git commit -m "chore(ogp): weekly image audit inventory $(date -u +%Y-%m-%d) [skip ci]"
+          # ★2026-08-16 是正: pull せずに push していたため、develop が 1 コミットでも進んでいると
+          # `! [rejected] (fetch first)` で必ず落ちていた (2 週連続・inventory が commit されない)。
+          git pull --rebase origin develop
           git push origin develop
 
       - name: 🚨 Open issue on unresolved image drift

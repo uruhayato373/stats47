@@ -62,5 +62,7 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "docs(sns): weekly report $(date -u +%Y-%m-%d) [skip ci]"
+            # pull せずに push すると develop が進んだ瞬間に (fetch first) で落ちる (2026-08-16 是正)
+            git pull --rebase origin develop
             git push origin develop
           fi
