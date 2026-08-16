@@ -139,3 +139,44 @@ agent 用詳細ログ。施策一覧 (簡易表) は `docs/todo/04_改善バッ�
   - **CTR 0.147% は分母が 6 日分**なので、水準の評価には窓を伸ばした再取得が要る。
     改名日 (2026-07-28) より前に窓を伸ばすと 0 件が混ざるため、判定は 2026-08-25 以降に行う
     (`AFF-A8-REGISTER-01` / `AFF-BLOG-TEXTLINK-01` の due と整合)。
+
+---
+
+## AFF-IMPRESSION-ROUTING-01 AdSense停止枠への既存在庫配線
+
+- **判断日**: 2026-08-16
+- **デプロイ日**: 未デプロイ
+- **目的**: AdSense停止後の空き位置を使い、無関係な案件や新規在庫を増やさず、文脈一致バナーの
+  viewable impression を増やす。50%以上を1秒という計測閾値は変更しない。
+- **事前証拠**:
+  - 在庫: `.claude/state/ads/inventory-latest.json` (generated 2026-08-09) は active **260**、
+    unique advertisers **160**、10 verticalすべて banner/text在庫あり、gap/thin verticalともに0。
+    したがってボトルネックは在庫不足ではなく配置と到達率。
+  - affiliate: `ga4-affiliate-2026-08-02.json` **3,400 imp** →
+    `ga4-affiliate-2026-08-09.json` **7,699 imp**。計測epochは2026-07-28開始で両28日窓に
+    失効分がまだ無いため、差分 **4,299 imp** を追加週の近似値として使う。
+  - site: `.claude/state/metrics/ga4/LATEST.md` の finalized 2026-08-02〜08-08 は **6,055 PV**。
+    基準値は **4,299 / 6,055 = 0.710 affiliate_impression/PV**。期間境界が完全一致する
+    日次rawではないため近似 baseline と明記し、効果判定はデプロイ後の同一期間定義で取り直す。
+  - 2026-08-09 position内訳は sidebar 2,852、article-inline 1,780、ranking-sidebar 1,163に対し、
+    area-sidebar 69、ranking-end 45。ranking/areaの本文・上段レールに到達余地がある。
+- **実装内容**:
+  - ranking本文: 解決済み横長バナー先頭1件を停止中の本文中段へ移し、末尾配列から除外して重複防止
+    (`position=ranking-incontent`)。AdSense再開時は元の末尾配列へ戻す。
+  - ranking右レール: 最大2件という既存上限を維持し、停止中だけ旧AdSense上段位置へ移す。
+  - area県ページ: `furusato` verticalを1件解決し、停止中の本文枠へ表示
+    (`position=area-content`)。在庫ゼロ/取得失敗なら空枠なし。
+  - 固定・文脈バナーのSurface/Cardを外し、PR見出し・説明なしのASPバナー画像だけに統一。
+- **想定効果**: 増加幅は未確定。主指標 `affiliate_impression/PV` が baseline 0.710を上回るかを検証する。
+  収益効果はCTR/CV/確定成果が揃うまで主張しない。
+- **検証手順 (デプロイ後14日)**:
+  1. `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 7` を前後の重複しないfinalized 7日で実行する。
+  2. 同じ日付範囲のGA4 pageviewsで `affiliate_impression/PV` を計算する。
+  3. `ranking-incontent` / `ranking-sidebar` / `area-content` のimpression・click・CTRを確認する。
+  4. page type別 engagement rateとASPの発生/確定成果を併記する。CTRやengagementが悪化した場合は
+     枠追加を続けず、position単位で撤去/移設する。
+- **判定**: `effect/pending`。デプロイ前のため効果未判定。`variant_id` / `experiment_id` dimension欠落は
+  position別集計を妨げないが、クリエイティブA/B判定は引き続き行わない。
+- **訂正**: 過去ログの「`other`=vertical未解決ページ」という解釈は過大。最新ad_id/position内訳では
+  fixed house bannerも意図的に`other`を送るため合成値である。`AFF-CATEGORY-MAP-01`は前提不成立として
+  改善バックログから削除し、今後の写像漏れはplacement-mapの`unmapped.byReason`で判定する。

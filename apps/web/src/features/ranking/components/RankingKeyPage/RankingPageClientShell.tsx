@@ -1,3 +1,8 @@
+import { BannerAd } from "@/features/ads";
+import { isLandscapeBanner } from "@/features/ads/services/banner-geometry";
+
+import { ADSENSE_DISPLAY_ENABLED } from "@/lib/google-adsense";
+
 import { shouldShowFunnelCta } from "../../funnel/funnel-cta-config";
 import { RankingFunnelCta } from "../../funnel/RankingFunnelCta";
 
@@ -12,7 +17,6 @@ import { RankingPageNativeAffiliateSection } from "./RankingPageNativeAffiliateS
 import { RankingPageRelatedRankingsSection } from "./RankingPageRelatedRankingsSection";
 import { RankingPageSidebarSection } from "./RankingPageSidebarSection";
 
-
 import type { RankingPageModel } from "../../services/load-ranking-page-model";
 
 interface RankingPageClientShellProps {
@@ -24,6 +28,9 @@ export function RankingPageClientShell({
   rankingKey,
   model,
 }: RankingPageClientShellProps) {
+  const affiliateBanners = model.nativeBanners.filter(isLandscapeBanner);
+  const inContentAffiliateBanner = affiliateBanners[0] ?? null;
+
   return (
     <RankingKeyPageClient
       rankingKey={rankingKey}
@@ -58,9 +65,29 @@ export function RankingPageClientShell({
         funnelCta: shouldShowFunnelCta(model.rankingItem.categoryKey) ? (
           <RankingFunnelCta rankingKey={rankingKey} />
         ) : null,
+        inContentAffiliate: inContentAffiliateBanner ? (
+          <div className="flex justify-center">
+            <BannerAd
+              href={inContentAffiliateBanner.href}
+              imageUrl={inContentAffiliateBanner.imageUrl}
+              trackingPixelUrl={inContentAffiliateBanner.trackingPixelUrl}
+              width={inContentAffiliateBanner.width}
+              height={inContentAffiliateBanner.height}
+              label={inContentAffiliateBanner.title}
+              category={inContentAffiliateBanner.vertical ?? "other"}
+              position="ranking-incontent"
+              adId={inContentAffiliateBanner.id}
+              creativeSize={`${inContentAffiliateBanner.width}x${inContentAffiliateBanner.height}`}
+            />
+          </div>
+        ) : null,
         nativeAffiliate: (
           <RankingPageNativeAffiliateSection
-            banners={model.nativeBanners}
+            banners={
+              ADSENSE_DISPLAY_ENABLED
+                ? affiliateBanners
+                : affiliateBanners.slice(1)
+            }
             categoryKey={model.rankingItem.categoryKey}
           />
         ),

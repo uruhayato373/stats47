@@ -26,7 +26,29 @@ describe("right rail banner contract", () => {
 
     expect(rankingRail).toContain("<SidebarPromoBanner");
     expect(rankingRail).toContain("bannerOnly");
+    expect(rankingRail).toContain(
+      "!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners",
+    );
+    expect(
+      rankingRail.indexOf("!ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners"),
+    ).toBeLessThan(rankingRail.indexOf("<SidebarPromoBanner"));
     expect(rankingRail).not.toContain("FurusatoNozeiCard");
+  });
+
+  it("image affiliate placements do not add PR copy or card chrome", () => {
+    const fixedBanner = source("apps/web/src/features/ads/components/SidebarPromoBanner.tsx");
+    const affiliateSlot = source("apps/web/src/features/ads/components/AffiliateAdSlot.tsx");
+    const bannerBranchStart = affiliateSlot.indexOf("banners.map");
+    const bannerBranchEnd = affiliateSlot.indexOf("// 2. テキスト広告");
+    const bannerBranch = affiliateSlot.slice(bannerBranchStart, bannerBranchEnd);
+
+    expect(fixedBanner).toContain("<BannerAd");
+    expect(fixedBanner).not.toContain("<SurfaceCard");
+    expect(fixedBanner).not.toContain(">PR<");
+    expect(bannerBranchStart).toBeGreaterThan(-1);
+    expect(bannerBranchEnd).toBeGreaterThan(bannerBranchStart);
+    expect(bannerBranch).toContain("<BannerAd");
+    expect(bannerBranch).not.toContain("<SurfaceCard");
   });
 
   it("blog right rails contain image promo banners but no text affiliate cards", () => {

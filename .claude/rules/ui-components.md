@@ -5,7 +5,7 @@
 
 ## レイアウト・フォント・角丸（2026-06〜 / 正典: `docs/01_技術設計/04_デザインシステム.md`）
 
-- **横幅は `PageShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない。正確な幅と rail 寸法は `PageShell.tsx` を正典とする。**寸法は doboku-note に合わせている（2026-08-03）**: コンテナ 1280px / lg+ 左右 40px（`lg:px-10`）/ gap 40px（`gap-10`）/ 右レール **316px**。316 は `300 + 8 + 8` で、300×250 の固定サイズ広告が `SidebarPromoBanner` の `p-2` 内に等倍で収まる幅として決まっている。**レール幅を変えるときは広告カードの padding も同時に見ること**。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（reading zone + flex 密着）を使う。
+- **横幅は `PageShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない。正確な幅と rail 寸法は `PageShell.tsx` を正典とする。**寸法は doboku-note に合わせている（2026-08-03）**: コンテナ 1280px / lg+ 左右 40px（`lg:px-10`）/ gap 40px（`gap-10`）/ 右レール **316px**。300×250 の `SidebarPromoBanner` は Card で囲まず、レール内に等倍で表示する。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（reading zone + flex 密着）を使う。
 - **サイト全体ナビの PC 常設左サイドバーは廃止**。グローバルナビはヘッダー（カテゴリは**メガメニュー**）に集約し、モバイルは `MobileNavDrawer`（Sheet）。
   - **例外: ページ内ナビの左レール（2026-08-04）**。「そのページの表示内容を切り替えるナビ」は `PageShell` の `leftRail` に置いてよい。該当は**テーマページの `ThemeSideNav`**（`/themes/*`・`/areas/*/[themeSlug]`。テーマ一覧 (ALL_THEMES = 22 件) + 地域選択）。ホーム / `/ranking` が本文内 `aside` に `PortalCategoryGrid variant="sidebar"` を置くのと同役割で、リストの見た目もそれに揃える（`min-h-9` / `text-[13px]` / `ChevronRight`）。
   - 左レールは `PageShell` 実装上**右レールと併用できない**（`showLeft = hasLeft && !hasRight`）。テーマページは元々右レールなしなので成立する。

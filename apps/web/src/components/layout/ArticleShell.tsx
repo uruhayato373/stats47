@@ -20,9 +20,8 @@ interface ArticleShellProps {
  * doboku-note の Soft Editorial レイアウトを移植したもの。
  *
  * 寸法は doboku-note に合わせている (2026-08-03)。1280px コンテナ / lg+ 左右 40px /
- * gap 40px / 右レール 316px。**316 = 300 + 8 + 8** で、300×250 の固定サイズ広告が
- * `SidebarPromoBanner` の `p-2` 内に等倍で収まる幅として決まっている。
- * レール幅を変えるときは広告カードの padding も同時に見ること。
+ * gap 40px / 右レール 316px。300×250 の `SidebarPromoBanner` は Card で囲まず、
+ * このレール内に等倍で表示する。
  *
  * PageShell (1280px grid・2026-07-11 に 1700px から統一) との違い:
  * - `.reading-zone` トークン（薄グレー地・--radius: 0）を全幅で敷く

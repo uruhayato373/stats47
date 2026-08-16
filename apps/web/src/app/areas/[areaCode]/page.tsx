@@ -14,8 +14,16 @@ import { isOk } from "@stats47/types";
 import { PageShell } from "@/components/layout";
 import { RightRailWidgets } from "@/components/rail";
 
-import { FooterAdSlot, InContentAdSlot } from "@/features/ads";
-import { AreaBannerAd } from "@/features/ads/server";
+import {
+    BannerAd,
+    FooterAdSlot,
+    InContentAdSlot,
+    isLandscapeBanner,
+} from "@/features/ads";
+import {
+    AreaBannerAd,
+    resolveAffiliateBannersByVertical,
+} from "@/features/ads/server";
 import { AreaDatabookSection } from "@/features/area-databook";
 import {
     AreaProfilePageClient,
@@ -32,12 +40,12 @@ import {
 import { getAreaProfileAction } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
-
-import { HUB_INCONTENT } from "@/lib/google-adsense";
-
+import {
+    ADSENSE_DISPLAY_ENABLED,
+    HUB_INCONTENT,
+} from "@/lib/google-adsense";
 
 import type { Metadata } from "next";
-
 
 /**
  * オンデマンド ISR（24時間）。
@@ -89,9 +97,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function AreaProfilePage({ params }: PageProps) {
     const { areaCode } = await params;
     // profile と categories は独立 (互いに依存しない) ため並列取得する。
-    const [profile, categoriesResult] = await Promise.all([
+    const [profile, categoriesResult, areaContentBanners] = await Promise.all([
         getAreaProfileAction(areaCode),
         listCategories(),
+        resolveAffiliateBannersByVertical("furusato", 8).catch(() => []),
     ]);
 
     if (!profile) {
@@ -99,6 +108,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
     }
 
     const categories = isOk(categoriesResult) ? categoriesResult.data : [];
+    const areaContentBanner = areaContentBanners.find(isLandscapeBanner) ?? null;
 
     const [structuredData, breadcrumbStructuredData] = await Promise.all([
         Promise.resolve(generateAreaProfileStructuredData({ profile })),
@@ -165,8 +175,26 @@ export default async function AreaProfilePage({ params }: PageProps) {
                         areaName={profile.areaName}
                     />
 
-                    {/* 広告①: チャート読了後（記事内・fluid。slotId 未発行の間は非表示） */}
-                    <InContentAdSlot slot={HUB_INCONTENT} />
+                    {/* チャート読了後。AdSense停止中は地域意図に合うバナーだけを表示する。 */}
+                    {ADSENSE_DISPLAY_ENABLED && (
+                        <InContentAdSlot slot={HUB_INCONTENT} />
+                    )}
+                    {!ADSENSE_DISPLAY_ENABLED && areaContentBanner && (
+                        <div className="flex justify-center">
+                            <BannerAd
+                                href={areaContentBanner.href}
+                                imageUrl={areaContentBanner.imageUrl}
+                                trackingPixelUrl={areaContentBanner.trackingPixelUrl}
+                                width={areaContentBanner.width}
+                                height={areaContentBanner.height}
+                                category={areaContentBanner.vertical ?? "furusato"}
+                                label={areaContentBanner.title}
+                                position="area-content"
+                                adId={areaContentBanner.id}
+                                creativeSize={`${areaContentBanner.width}x${areaContentBanner.height}`}
+                            />
+                        </div>
+                    )}
 
                     {/* カテゴリナビゲーション */}
                     <CategoryNavGrid
