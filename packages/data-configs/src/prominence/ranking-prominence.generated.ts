@@ -297,7 +297,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "construction",
     "categoryName": "住宅・土地・建設",
-    "count": 76,
+    "count": 68,
     "representatives": [
       {
         "rankingKey": "floor-area-new-owner-dwelling",
@@ -482,7 +482,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "safetyenvironment",
     "categoryName": "司法・安全・環境",
-    "count": 106,
+    "count": 105,
     "representatives": [
       {
         "rankingKey": "fire-department-pump-car-count-per-100-thousand-people",
