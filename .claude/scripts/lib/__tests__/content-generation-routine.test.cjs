@@ -7,7 +7,9 @@ const test = require('node:test');
 const YAML = require('yaml');
 
 const ROOT = path.resolve(__dirname, '..', '..', '..', '..');
-const ACTION_SHA = 'e257d767763882223c40b615cbbe0d26ca75a981';
+// workflow がピンしている commit SHA と一致していること。dependabot が action を上げるときは
+// この定数も同じ差分で更新する (片方だけ動くと CI が落ちる = ピンが外れていないことの検査になる)。
+const ACTION_SHA = 'e5758aabe98b80fec1bcbd4a51fe2e1f8935dfc3';
 
 function read(relativePath) {
   return fs.readFileSync(path.join(ROOT, relativePath), 'utf8');
