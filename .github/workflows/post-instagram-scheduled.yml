@@ -31,10 +31,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: 🧰 Checkout main
+      - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: main
+          ref: develop
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
@@ -89,7 +89,10 @@ jobs:
           git config user.name "GitHub Actions"
           git add .claude/state/ig-posted-log.jsonl .claude/state/sns/posts.json
           git commit -m "chore(ig): mark ${{ steps.post.outputs.content_key }} as posted [skip ci]"
-          git push origin main
+          # 投稿台帳は develop へ commit-back する (main 直推しは branch-workflow 違反・
+          # 投稿のたびに main/develop が分岐する。main へは次の PR で乗る。2026-08-16 是正)
+          git pull --rebase --autostash origin develop
+          git push origin develop
 
       - name: 💬 Comment posting result on issue #127
         if: success() && steps.post.outputs.permalink != ''
