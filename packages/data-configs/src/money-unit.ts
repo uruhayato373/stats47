@@ -95,6 +95,64 @@ export function checkMoneyUnitScale(params: {
 }
 
 /**
+ * 原単位の値を `config.unit` の単位へ換算する。
+ *
+ * `scale` は `EstatSource.valueScale` (未宣言なら 1 = 換算しない)。欠測 (null) は欠測のまま
+ * — 0 を捏造しない。
+ *
+ * ## 浮動小数の後始末をここでやる理由
+ *
+ * `4153.9 * 0.1` は 2 進では `415.39000000000004` になる。そのまま R2 へ書くと配信 JSON に
+ * 桁の詰まった数が並び、以後の照合 (blog の factual-check / ai-content の number-audit) が
+ * 表示上の丸めと突き合わせるたびに誤差を吸収する羽目になる。倍率は `10^k` に限っているので、
+ * 有効桁を 15 桁へ丸めれば元の精度を落とさずに 2 進の残差だけを消せる。
+ */
+export function applyValueScale(value: number | null, scale: number | undefined): number | null {
+  if (value === null) return null;
+  if (typeof scale !== "number" || !Number.isFinite(scale) || scale === 1) return value;
+  const scaled = value * scale;
+  if (!Number.isFinite(scaled)) return null;
+  // 整数はそのまま (toPrecision(15) は 16 桁以上の整数を丸めてしまう)
+  return Number.isInteger(scaled) ? scaled : Number(scaled.toPrecision(15));
+}
+
+/**
+ * pin されている軸の単位から、この metric の原単位を 1 つに決める。
+ *
+ * ## なぜ tab だけでは足りないか (2026-08-17 実測)
+ *
+ * e-Stat は `@unit` を tab 軸に置くとは限らない。**社会・人口統計体系** (`0000010xxx`) は
+ * tab が「観測値」1 値で単位を持たず、単位は **cat01 (指標)** 側にある:
+ *
+ *   tab(観測値)   n=1  units=[]
+ *   cat01(Ｃ 経済基盤) n=43 units=[％, 千円, 人, 万円, …]
+ *
+ * これらの config は `cdCat01: "#C0410101"` のように**指標コードを 1 つに pin している**ので、
+ * そのコードの `@unit` を引けば原単位が確定する。tab しか見ていなかったため、金額 metric
+ * 347 件中 293 件が「判定不能」に落ちていた (実測。widening 後は 17 件)。
+ *
+ * ## 決められないときは決めない
+ *
+ * pin されたコードが複数の異なる単位を持つ場合 (`ambiguous`) は、どれがその metric の値の
+ * 単位か決定できない。片方を選ばず ambiguous を返す — 推測で選ぶと誤ったスケール宣言を
+ * 招き、値が 10^k ずれる元の不具合を作り直すことになる。
+ *
+ * @param units pin された各軸のコードが持つ単位 (無ければ null/undefined)
+ */
+export function resolvePinnedSourceUnit(
+  units: ReadonlyArray<string | null | undefined>,
+): { kind: "ok"; unit: string } | { kind: "ambiguous"; units: string[] } | { kind: "none" } {
+  const known = units
+    .filter((u): u is string => typeof u === "string" && u.trim() !== "")
+    .map((u) => u.trim());
+  if (known.length === 0) return { kind: "none" };
+  const distinct = [...new Set(known)];
+  return distinct.length === 1
+    ? { kind: "ok", unit: distinct[0] }
+    : { kind: "ambiguous", units: distinct };
+}
+
+/**
  * 線形結合する tab がすべて同じ単位かを見る。
  *
  * 千円と十人は足せない。単位が混ざる結合は、係数が正しくても意味のない数になる。

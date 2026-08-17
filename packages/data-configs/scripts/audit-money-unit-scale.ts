@@ -32,6 +32,7 @@ import {
   checkCombinationUnitsAgree,
   checkMoneyUnitScale,
   moneyUnitExponent,
+  resolvePinnedSourceUnit,
   type MoneyUnitVerdict,
 } from "../src/money-unit.js";
 import { METRICS_REGISTRY } from "../src/registry.js";
@@ -148,6 +149,35 @@ function tabUnitMap(meta: MetaDump): Map<string, string | null> {
 }
 
 /**
+ * config が pin できる分類軸と、その pin を書く config フィールド。
+ *
+ * tab は別経路 (tabCombination の単位一致検査を持つ) なのでここには含めない。
+ */
+const CATEGORY_AXES = [
+  ["cat01", "cdCat01"],
+  ["cat02", "cdCat02"],
+  ["cat03", "cdCat03"],
+  ["cat04", "cdCat04"],
+  ["cat05", "cdCat05"],
+] as const;
+
+/** pin された分類コードが持つ単位を集める (単位を持たない pin は null) */
+function pinnedCategoryUnits(
+  source: Record<string, unknown>,
+  meta: MetaDump,
+): Array<string | null> {
+  const out: Array<string | null> = [];
+  for (const [axis, field] of CATEGORY_AXES) {
+    const code = source[field];
+    if (typeof code !== "string" || code === "") continue;
+    const dim = meta.dimensions?.find((d) => d.id === axis);
+    const v = dim?.sampleValues?.find((x) => String(x.code) === code);
+    out.push(v?.unit ?? null);
+  }
+  return out;
+}
+
+/**
  * config が宣言している変換倍率。
  * `tabCombination` の factor は単位を変えないので数えない (千円を 12 倍しても千円)。
  */
@@ -182,10 +212,6 @@ function evaluate(config: MetricConfig, meta: MetaDump | null): Row | null {
   if (!meta || meta.error) {
     return { ...base, sourceUnits: [], verdict: { kind: "skip", reason: "meta-missing" } };
   }
-  if (tabs.length === 0) {
-    // tab を指定しない表は単一 tab か、tab 軸を持たない。どの系列の単位か決められない
-    return { ...base, sourceUnits: [], verdict: { kind: "skip", reason: "no-tab-pinned" } };
-  }
 
   const map = tabUnitMap(meta);
   const sourceUnits = tabs.map((t) => map.get(t) ?? null);
@@ -195,7 +221,26 @@ function evaluate(config: MetricConfig, meta: MetaDump | null): Row | null {
     return { ...base, sourceUnits, verdict: { kind: "combination-unit-mismatch", units: agree.units } };
   }
 
-  const sourceUnit = sourceUnits.find((u) => u != null) ?? null;
+  // tab から原単位が取れないときは pin 済みの分類コードを見る。社会・人口統計体系は
+  // tab が「観測値」1 値で単位を持たず、単位は cat01 (指標) 側にある (resolvePinnedSourceUnit 参照)。
+  let sourceUnit = sourceUnits.find((u) => u != null) ?? null;
+  if (sourceUnit == null) {
+    const pinned = resolvePinnedSourceUnit(pinnedCategoryUnits(s as unknown as Record<string, unknown>, meta));
+    if (pinned.kind === "ambiguous") {
+      // どの軸の単位がこの値の単位か決められない。片方を選ばない
+      return { ...base, sourceUnits, verdict: { kind: "skip", reason: "pinned-unit-ambiguous" } };
+    }
+    if (pinned.kind === "none") {
+      return {
+        ...base,
+        sourceUnits,
+        // tab も分類も単位を宣言していない表。メタからは決めようがない
+        verdict: { kind: "skip", reason: tabs.length === 0 ? "no-unit-on-pinned-axes" : "no-source-unit" },
+      };
+    }
+    sourceUnit = pinned.unit;
+  }
+
   const v: MoneyUnitVerdict = checkMoneyUnitScale({
     sourceUnit,
     configUnit: config.unit,
