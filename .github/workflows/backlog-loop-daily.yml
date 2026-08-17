@@ -169,8 +169,13 @@ jobs:
       - name: ✅ Verify removals against the ledger
         id: verify
         if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
+        # ★式は env に置き、run: の中はシェル変数だけを参照する (data-refresh.yml が手本)。
+        #   run: へ直接展開すると式インジェクションの類型になる。ID は pick step で
+        #   /^[A-Z0-9]+(-[A-Z0-9]+)+$/ に照合済みだが、形を house pattern に揃えておく。
         env:
           CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+          BASE_SHA: ${{ steps.pick.outputs.base }}
+          QUEUED_IDS: ${{ steps.pick.outputs.ids }}
         run: |
           set -euo pipefail
           if [ ! -s "$CLAUDE_EXECUTION_FILE" ]; then
@@ -178,9 +183,9 @@ jobs:
             exit 1
           fi
           node .claude/scripts/backlog-loop/verify-backlog-run.mjs \
-            --base "${{ steps.pick.outputs.base }}" \
-            --queued "${{ steps.pick.outputs.ids }}"
-          CLOSED=$(git -c core.quotepath=false diff --stat "${{ steps.pick.outputs.base }}" -- docs/todo | wc -l)
+            --base "$BASE_SHA" \
+            --queued "$QUEUED_IDS"
+          CLOSED=$(git -c core.quotepath=false diff --stat "$BASE_SHA" -- docs/todo | wc -l)
           echo "closed=$CLOSED" >> "$GITHUB_OUTPUT"
 
       # ★push する前にリポジトリ側のゲートを通す。バックログ処理は checker / test / 実装に
@@ -200,20 +205,23 @@ jobs:
       - name: 📦 Commit and push
         id: commit
         if: ${{ env.DRY_RUN != 'true' }}
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          TARGET_COUNT: ${{ steps.pick.outputs.count }}
         run: |
           set -euo pipefail
-          if [ "${{ github.event_name }}" = "push" ]; then
+          if [ "$EVENT_NAME" = "push" ]; then
             git rm -q --ignore-unmatch data/backlog-loop-requests.json || true
           fi
           git add -- docs/todo .claude/state/backlog-loop .claude/scripts .claude/rules \
             .claude/skills .claude/agents packages apps || true
           if git diff --cached --quiet; then
-            echo "変更なし (処理対象 ${{ steps.pick.outputs.count }} 件・すべて skipped か failed)"
+            echo "変更なし (処理対象 ${TARGET_COUNT} 件・すべて skipped か failed)"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -q -m "chore(backlog): daily backlog loop (対象 ${{ steps.pick.outputs.count }} 件)"
+          git commit -q -m "chore(backlog): daily backlog loop (対象 ${TARGET_COUNT} 件)"
           for i in 1 2 3; do
             if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
               echo "✅ pushed"
@@ -229,13 +237,15 @@ jobs:
         continue-on-error: true
         env:
           CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+          RUN_ID: ${{ github.run_id }}
+          TARGET_COUNT: ${{ steps.pick.outputs.count || '0' }}
         run: |
           FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
           node .claude/scripts/lib/record-claude-usage.mjs "$FILE" \
             --workflow backlog-loop \
-            --run-id "${{ github.run_id }}" \
+            --run-id "$RUN_ID" \
             --limit "${LIMIT}" \
-            --items "${{ steps.pick.outputs.count || '0' }}"
+            --items "$TARGET_COUNT"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .claude/state/metrics/claude-usage || true
@@ -257,6 +267,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          QUEUED_IDS: ${{ steps.pick.outputs.ids || 'unknown' }}
         run: |
           TITLE="🚨 Backlog loop failed"
           DIAG="(診断なし: Claude step まで到達していないか、execution log を読めなかった)"
@@ -265,7 +276,7 @@ jobs:
           リポジトリゲート、push のいずれかです。
 
           Run: ${RUN_URL}
-          Target: ${{ steps.pick.outputs.ids || 'unknown' }}
+          Target: ${QUEUED_IDS}
 
           <details><summary>Claude 実行の診断</summary>
 
@@ -291,11 +302,15 @@ jobs:
 
       - name: 📝 Summary
         if: always()
+        env:
+          TARGET_COUNT: ${{ steps.pick.outputs.count || '0' }}
+          QUEUED_IDS: ${{ steps.pick.outputs.ids || 'なし' }}
+          VERIFY_OUTCOME: ${{ steps.verify.outcome || 'skipped' }}
         run: |
           {
             echo "### backlog-loop"
-            echo "- 対象: ${{ steps.pick.outputs.count || '0' }} 件 (${{ steps.pick.outputs.ids || 'なし' }})"
-            echo "- verify: ${{ steps.verify.outcome || 'skipped' }}"
+            echo "- 対象: ${TARGET_COUNT} 件 (${QUEUED_IDS})"
+            echo "- verify: ${VERIFY_OUTCOME}"
           } >> "$GITHUB_STEP_SUMMARY"
 
       # request は結果によらず必ず消費する。失敗した run が残すと、同内容の再 push では
