@@ -1,0 +1,7 @@
+{
+  "workflow": "sync-snapshots.yml",
+  "inputs": { "only": "" },
+  "ref": "develop",
+  "reason": "run 32002676960 が ranking-values / ranking-normalized-values で失敗し、成功した 2,244 件を含む全 snapshot が push されずに捨てられた (run.sh が push の前に exit 1 していた)。原因の 9 metric は再取り込み済みで app/stats へ push 済み。run.sh も push を失敗判定より前に移した。全 task を再実行して app/ranking を当日に更新する。",
+  "requestedAt": "2026-08-17T07:55:00Z"
+}

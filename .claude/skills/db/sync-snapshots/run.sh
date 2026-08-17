@@ -136,9 +136,23 @@ echo ""
 echo "════════════════════════════════════════"
 if [ ${#FAILED[@]} -ne 0 ]; then
   echo "❌ 失敗: ${FAILED[*]}"
-  exit 1
+  echo "   → 成功した task の出力は下の push で反映してから exit 1 する (下記の理由)"
 fi
 
+# ★1 task の失敗で「全 task の成果」を捨てない (2026-08-17 の障害対策)
+#
+# 以前はここで `exit 1` していたため、**失敗が 1 件でもあると末尾の push に到達せず、
+# 成功した task が .local/r2 に書いた成果物がまるごと捨てられていた**。runner は破棄されるので
+# 復旧手段も無い。
+#
+# 実害: `ranking-values` は 2,244 件を書き切った**後**の検証 (観測値 0 件の未登録キー) で
+# exit 1 していた。生成は全件成功しているのに push されず、`app/ranking/<key>/values.json` は
+# 2026-08-11 から 6 日間 site-wide で凍結していた (原因の 9 metric は R2 の年が config.years と
+# 食い違う古い取り込み。再取り込みで解消)。
+#
+# 方針は ranking-content-standards.md §2026-08-07 と同じ「オールオアナッシングにしない」:
+# 通過分は反映し、run は赤のままにする (Issue も従来どおり起票される)。
+# 各 exporter はファイル単位で完結した内容を書くので、部分反映で壊れた JSON は生まれない。
 if [ "$DRY_RUN" = "0" ]; then
   # R2 書き込みは CI / クラウド専用。ローカル実行では生成のみ行い push はスキップする
   # (snapshot は .local/r2 に出力済)。緊急時のみ ALLOW_LOCAL_R2_WRITE=1 で上書き可能。
@@ -146,7 +160,7 @@ if [ "$DRY_RUN" = "0" ]; then
     echo ""
     echo "════ R2 push ════"
     if npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts; then
-      echo "✅ 全 snapshot を R2 に push 完了"
+      echo "✅ snapshot を R2 に push 完了"
     else
       echo "❌ R2 push 失敗"
       exit 1
@@ -159,4 +173,11 @@ if [ "$DRY_RUN" = "0" ]; then
   fi
 else
   echo "✅ 全 snapshot export 完了（dry-run のため R2 push はスキップ）"
+fi
+
+# 失敗した task があれば run は赤にする (push の後に判定するのが上記の要点)
+if [ ${#FAILED[@]} -ne 0 ]; then
+  echo ""
+  echo "❌ 失敗した task: ${FAILED[*]}"
+  exit 1
 fi
