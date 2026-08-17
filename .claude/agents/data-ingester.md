@@ -45,7 +45,12 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - `.claude/rules/unit-semantics-standards.md` — **単位 (円/千円/％/人口10万対/月額年額) の解釈・換算の正典を所有する**。
   自前のスケール表を書かず `packages/data-configs/src/unit/` を使う (`.claude/scripts/lib/unit-semantics.mjs` は
   自動生成の鏡・直接編集禁止)。`validate:config` の `[unit-vocab]` warn に出た未解釈 unit は、
-  語彙に足すか単位表記を直すかを判断する (推測で語彙を増やすと誤換算が生まれる)。横断監査は `/audit-units`
+  語彙に足すか単位表記を直すかを判断する (推測で語彙を増やすと誤換算が生まれる)。横断監査は `/audit-units`。
+  **金額 metric は §2.5 の `valueScale` を宣言する** — e-Stat は倍率を単位文字列に埋め込むので、
+  宣言しないと `unit:"万円"` のまま千円値が配信される (2026-08-05 に年収 39 件が 10 倍過大だった)。
+  棚卸しは `npx tsx packages/data-configs/scripts/audit-money-unit-scale.ts` (不一致 0 を保つ)。
+  **config を直したら再取り込みまでやる** — 宣言だけ変えても R2 は古いまま
+  (`audit-reingest-queue.ts` が `stale-delivery` として追う)
 - `.claude/rules/data-provenance-standards.md` — **非 e-Stat (手動/PDF/xlsx/HTML) 投入時は provenance 9点セット必須**。`fetcherKey:"manual"` は config.source.config.provenance に {pdfUrl/url, accessedAt, extraction, verification, restore} を記録 (欠落は `validate:config` の `[provenance]` error)。手本 `ambulance-hospital-arrival-time.ts`。出典なし (config 空) 投入は禁止
 - `.claude/rules/r2-storage-design.md` — `app/stats/` namespace 設計
 - `.claude/rules/branch-workflow.md` — DB 変更後フロー (R2 経由本番反映)

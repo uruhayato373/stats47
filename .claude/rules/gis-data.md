@@ -39,13 +39,56 @@ R2 gis/mlit-ksj/{dataId}/{version}/  →  本番アプリ / Remotion が fetch (
 ## 新規データセット追加手順 (★手動 SQLite INSERT は禁止)
 
 1. `datasets.ts` の `GIS_DATASETS` にエントリ追加 (メタ + ranking 定義)
-2. `registry.ts` の `KSJ_CODE_CONFIG` に技術設定 (downloadUrlPattern 等) 追加
+2. `registry.ts` の `KSJ_CODE_CONFIG` に技術設定 (downloadUrlPattern 等) 追加。
+   **属性に県が入っているデータセットは `prefectureSource` を宣言する** (下記 §県の帰属)
 3. `npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts` で SQLite を git TS から再 seed
 4. `npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts <dataId>` で download→変換→R2
-5. R2 push が要る場合は `r2-publisher` に委譲
+5. ranking 対象なら `generate-ksj-stats-values.ts` で観測値を作る (下記 §県別集計)
+6. R2 push が要る場合は `r2-publisher` に委譲
 
 > ranking 定義 (`rankingConfig`) は datasets.ts に統合済 (旧 `seed-from-registry.ts` の RANKINGS 配列は廃止)。
 > ranking 対象は `isRankingTarget: true` + `rankingConfig[]` を持たせる。年は 4 桁 (`yearCode`、estat-api.md 準拠)。
+
+## 県の帰属 — 属性 → 空間結合 → 距離上限つき許容 (★2026-08-17 新設)
+
+正典: `packages/gis/src/mlit-ksj/prefecture-assign.ts` (純関数・テスト 29 件)。
+**この経路以外で県を決めてはならない。**
+
+| 段 | 手段 | 備考 |
+|---|---|---|
+| 1 | 属性 (`registry.ts` の `prefectureSource`) | 住所 / 県名 / 2 桁県コード / 5 桁市区町村コードのいずれかを**明示宣言**する |
+| 2 | 県ポリゴンへの空間結合 | 属性が無い / 欠測の feature だけ |
+| 3 | 距離上限つき最近傍 (既定 5km・`method:"coastline"`) | 海岸線・埋立地のずれ専用。件数は必ず出力に出す |
+| — | **どれでも決まらなければ `null`** | 推測で別の県へ計上しない |
+
+**なぜここまで書くか (2026-08-17 の実害)**: 旧 `register-ksj-rankings.ts` の `findNearestPref` が
+**最寄りの県庁所在地**で県を決めていた。距離は行政境界と無関係なので、原子炉の無い京都府に 8 基
+(高浜 4 + 大飯 4)、八丈島 (東京都) の地熱が神奈川県、秋田・福島が 0 になっていた。同 script は削除済み。
+
+宣言の落とし穴も実測で判明している:
+
+- `C09_006` は県名に見えるが**政令市では市名が入る** (「北九州市」等)。2,931 件中 1,631 件が
+  解決不能になったので `C09_003` (市区町村コード) を使う
+- `P12_001` は資源 ID だが 5 桁。市区町村コードとして読むと**別の県に化ける**
+- 住所判定は県名接頭 **かつ** 市/区/町/村/郡 を要求する (「北海道電力株式会社」を住所と読まないため)
+
+## 県別集計 → `app/stats` (完全DBレス)
+
+`packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts` が
+datasets.ts + R2 の KSJ topojson から `app/stats/<key>/values.json` を決定的に作る。
+SQLite を経由しない。集計の純関数は `ksj-stats-core.ts` (テスト 10 件)。
+
+```bash
+npx tsx packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts \
+  --metric <keys> [--compare] [--coastline-km 5]
+```
+
+- **未解決が 1 件でもあれば書かずに終了する** (推測で別の県へ計上しない)
+- 「1 レコード = 1 施設」でないデータセットは `datasets.ts` の `dedupeByProperties` で畳む。
+  P03 は**号機ごと**に 1 レコードなので `unit:"か所"` と一致しない (原発 68 → 21 施設)。
+  P12 は同じ資源を点/線/面の 3 系統で持つので資源 ID で畳む
+- **畳むキーは名前だけにしない**。青森の東通原発は東北電力と東京電力の 2 か所が同名で別住所にあり、
+  名前だけだと 1 か所に潰れる。属性が空の feature は畳まず 1 件として数える
 
 ## DBレス integrity (やってはいけないこと)
 
@@ -56,12 +99,17 @@ R2 gis/mlit-ksj/{dataId}/{version}/  →  本番アプリ / Remotion が fetch (
 | build state (r2_version 等) を git TS に焼き込む | pipeline 実行で SQLite に再生成 |
 | 本番アプリから gis_datasets を query | R2 `gis/mlit-ksj/...` を fetch |
 | 手編集の生成表を真実源にする | 登録一覧は `datasets.ts` (git TS) が真実源 (旧 doc 04/generate-docs は 2026-07-12 廃止) |
+| **座標から最寄りの県庁所在地で県を決める** | `prefecture-assign.ts` の 3 段 (決まらなければ null) |
+| **全プロパティを走査して「それらしい値」を県コードに使う** | `registry.ts` の `prefectureSource` で明示宣言 |
+| **metric config も R2 データも無い ranking を datasets.ts に残す** | 実体が無ければ `isRankingTarget:false` か定義削除 (soft 404 になる) |
 
 ## 検証
 
 ```bash
 # datasets.ts の構造 + 件数 (SQLite 不要)
 npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run
+# 県帰属・県別集計の純関数 (39 件)
+npx vitest run packages/gis/src/mlit-ksj/__tests__/
 # 型
 npx tsc --noEmit -p packages/gis/tsconfig.json
 ```
@@ -77,9 +125,13 @@ npx tsc --noEmit -p packages/gis/tsconfig.json
 
 ## 関連
 
-- 型: `packages/gis/src/mlit-ksj/types.ts` (`KsjCategory`/`KsjGeometryType`/`KsjCoverage`/`KsjLicense`)
+- 型: `packages/gis/src/mlit-ksj/types.ts` (`KsjCategory`/`KsjGeometryType`/`KsjCoverage`/`KsjLicense`/`PrefectureSource`)
 - メタ SSOT: `packages/gis/src/mlit-ksj/datasets.ts`
-- 技術設定: `packages/gis/src/mlit-ksj/registry.ts`
+- 技術設定: `packages/gis/src/mlit-ksj/registry.ts` (`prefectureSource` を含む)
+- **県の帰属 (純関数)**: `packages/gis/src/mlit-ksj/prefecture-assign.ts`
+- **県別集計 (純関数)**: `packages/gis/src/mlit-ksj/ksj-stats-core.ts`
+- **観測値生成**: `packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts`
+- テスト: `packages/gis/src/mlit-ksj/__tests__/{prefecture-assign,ksj-stats-core}.test.ts` (39 件)
 - seed: `packages/gis/src/mlit-ksj/scripts/{seed-from-registry,seed-ksj-catalog}.ts`
 - pipeline: `packages/gis/src/mlit-ksj/scripts/run-pipeline.ts`
 - スキル: `.claude/skills/db/fetch-mlit-ksj/SKILL.md`
