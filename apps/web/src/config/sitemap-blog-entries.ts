@@ -6,7 +6,7 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-08-16
+ * 最終生成日: 2026-08-17
  * 件数: blog 429 / tag 60 / survey 73
  */
 
@@ -536,7 +536,6 @@ export const SITEMAP_SURVEY_IDS: readonly string[] = [
   "commercial-dynamics-survey",
   "commercial-statistics",
   "comprehensive-living-conditions-survey",
-  "construction-orders-statistics",
   "construction-work-statistics",
   "cpi-annual",
   "crop-statistics",
@@ -560,6 +559,7 @@ export const SITEMAP_SURVEY_IDS: readonly string[] = [
   "job-placement-statistics",
   "kakei-chousa",
   "labor-market-annual",
+  "livestock-statistics",
   "local-education-expense-survey",
   "local-finance",
   "local-gov-staffing-survey",

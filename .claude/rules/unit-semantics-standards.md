@@ -234,6 +234,11 @@ blog の data json も同じ形で、`label: 人口10万人あたり外国人数
   lint `validate-metric-config.ts` の `[value-scale]`
 - 期間 (月額↔年額): `packages/ranking/src/utils/period-align.ts` / `metric-config-standards.md` の `periodAlign`
 - 値照合: `.claude/scripts/lib/article-factual-check.mjs` (ブログ) /
-  `packages/product-factory/src/text/fact-claims.ts` (書籍) / `.claude/scripts/lib/map-value-match.mjs` (地図)
+  `packages/product-factory/src/text/fact-claims.ts` (書籍) / `.claude/scripts/lib/map-value-match.mjs` (地図) /
+  **`packages/data-configs/src/seo-meta-facts.ts` (seoTitle・seoDescription)**
+- **桁の接頭辞 (「5,090億円」の「億」) を読む実装は `scalePrefixMultiplier` +
+  `isScalePrefixPartOfUnit` を呼ぶ**。地図 (`map-value-match.mjs`) と SEO
+  (`seo-meta-facts.ts`) が同じ 2 関数を使う。判別できない接頭辞は倍率を掛けず
+  **値の照合を見送る** (誤検知を出すゲートは運用で無効化されるため)
 - 数値の書き方 (本文側の規約): `.claude/rules/blog-quality-standards.md`「数値の書き方」
 - 実証ベース判定: `.claude/rules/evidence-based-judgment.md`
