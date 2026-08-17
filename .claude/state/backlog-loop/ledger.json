@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-17T13:25:55.958Z",
+  "updatedAt": "2026-08-17T13:28:15.948Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -307,6 +307,42 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-17T13:25:55.958Z"
+    },
+    "SCRIPT-ORPHAN-TRIAGE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T13:28:15.948Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "完了条件の第2枝「残るものが『なぜ残すか』を添えて記録されている」を満たした。実測は 20 本ではなく 29 本で、全件を (a) 役目終了 6 / (b) 生きた backlog に紐づく 13 / (c) 用途不明 10 に分類し理由を記録。restore-*-from-svg は名前に反して逆復元せず SSOT 再生成の照合にのみ SVG を使う (規約適合) ことをコード実読で確認。残る削除可否はオーナー判断なので SCRIPT-ORPHAN-DELETE-01 (blocked-owner-decision) へ切り出した。",
+          "failReason": null,
+          "followUps": [
+            "SCRIPT-ORPHAN-DELETE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T13:28:15.948Z"
     }
   }
 }
