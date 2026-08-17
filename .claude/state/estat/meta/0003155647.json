@@ -1,0 +1,529 @@
+{
+  "statsDataId": "0003155647",
+  "title": "水害被害 ２．都道府県別・市区町村別被害　 都道府県別水害被害（表－2）",
+  "dimensions": [
+    {
+      "id": "tab",
+      "name": "表章項目",
+      "valueCount": 3,
+      "sampleValues": [
+        {
+          "code": "0010",
+          "name": "延数",
+          "unit": "延数"
+        },
+        {
+          "code": "0090",
+          "name": "死傷者数",
+          "unit": "人"
+        },
+        {
+          "code": "0130",
+          "name": "被害額",
+          "unit": "百万円"
+        }
+      ]
+    },
+    {
+      "id": "cat01",
+      "name": "都道府県別水害被害",
+      "valueCount": 31,
+      "sampleValues": [
+        {
+          "code": "100",
+          "name": "死傷者数_計",
+          "unit": null
+        },
+        {
+          "code": "200",
+          "name": "死傷者数_死者",
+          "unit": null
+        },
+        {
+          "code": "300",
+          "name": "死傷者数_行方不明",
+          "unit": null
+        },
+        {
+          "code": "400",
+          "name": "死傷者数_負傷者",
+          "unit": null
+        },
+        {
+          "code": "500",
+          "name": "水系・沿岸数_一般資産等",
+          "unit": null
+        },
+        {
+          "code": "600",
+          "name": "水系・沿岸数_公共土木施設",
+          "unit": null
+        },
+        {
+          "code": "700",
+          "name": "水系・沿岸数_公益事業等",
+          "unit": null
+        },
+        {
+          "code": "800",
+          "name": "河川・海岸数_一般資産等",
+          "unit": null
+        },
+        {
+          "code": "900",
+          "name": "河川・海岸数_公共土木施設",
+          "unit": null
+        },
+        {
+          "code": "1000",
+          "name": "河川・海岸数_公益事業等",
+          "unit": null
+        },
+        {
+          "code": "1100",
+          "name": "市区町村数_一般資産等",
+          "unit": null
+        },
+        {
+          "code": "1200",
+          "name": "市区町村数_公共土木施設",
+          "unit": null
+        },
+        {
+          "code": "1300",
+          "name": "市区町村数_公益事業等",
+          "unit": null
+        },
+        {
+          "code": "1400",
+          "name": "被害額合計",
+          "unit": null
+        },
+        {
+          "code": "1500",
+          "name": "一般資産等被害額_計",
+          "unit": null
+        },
+        {
+          "code": "1600",
+          "name": "一般資産等被害額_一般資産",
+          "unit": null
+        },
+        {
+          "code": "1700",
+          "name": "一般資産等被害額_営業停止",
+          "unit": null
+        },
+        {
+          "code": "1800",
+          "name": "一般資産等被害額_農作物",
+          "unit": null
+        },
+        {
+          "code": "1900",
+          "name": "公共土木施設被害額_計",
+          "unit": null
+        },
+        {
+          "code": "2000",
+          "name": "公共土木施設被害額_河川",
+          "unit": null
+        },
+        {
+          "code": "2100",
+          "name": "公共土木施設被害額_海岸・港湾",
+          "unit": null
+        },
+        {
+          "code": "2200",
+          "name": "公共土木施設被害額_砂防",
+          "unit": null
+        },
+        {
+          "code": "2300",
+          "name": "公共土木施設被害額_地すべり",
+          "unit": null
+        },
+        {
+          "code": "2400",
+          "name": "公共土木施設被害額_急傾斜地",
+          "unit": null
+        },
+        {
+          "code": "2500",
+          "name": "公共土木施設被害額_道路",
+          "unit": null
+        },
+        {
+          "code": "2600",
+          "name": "公共土木施設被害額_橋梁",
+          "unit": null
+        },
+        {
+          "code": "2700",
+          "name": "公共土木施設被害額_下水道",
+          "unit": null
+        },
+        {
+          "code": "2800",
+          "name": "公共土木施設被害額_公園・都市施設",
+          "unit": null
+        },
+        {
+          "code": "2900",
+          "name": "公益事業等被害額_計",
+          "unit": null
+        },
+        {
+          "code": "3000",
+          "name": "公益事業等被害額_物的被害額",
+          "unit": null
+        },
+        {
+          "code": "3100",
+          "name": "公益事業等被害額_営業停止損失額",
+          "unit": null
+        }
+      ]
+    },
+    {
+      "id": "area",
+      "name": "都道府県",
+      "valueCount": 56,
+      "sampleValues": [
+        {
+          "code": "00000",
+          "name": "全国",
+          "unit": null
+        },
+        {
+          "code": "01000",
+          "name": "北海道",
+          "unit": null
+        },
+        {
+          "code": "50100",
+          "name": "東北地方",
+          "unit": null
+        },
+        {
+          "code": "02000",
+          "name": "青森県",
+          "unit": null
+        },
+        {
+          "code": "03000",
+          "name": "岩手県",
+          "unit": null
+        },
+        {
+          "code": "04000",
+          "name": "宮城県",
+          "unit": null
+        },
+        {
+          "code": "05000",
+          "name": "秋田県",
+          "unit": null
+        },
+        {
+          "code": "06000",
+          "name": "山形県",
+          "unit": null
+        },
+        {
+          "code": "07000",
+          "name": "福島県",
+          "unit": null
+        },
+        {
+          "code": "50200",
+          "name": "関東地方",
+          "unit": null
+        },
+        {
+          "code": "08000",
+          "name": "茨城県",
+          "unit": null
+        },
+        {
+          "code": "09000",
+          "name": "栃木県",
+          "unit": null
+        },
+        {
+          "code": "10000",
+          "name": "群馬県",
+          "unit": null
+        },
+        {
+          "code": "11000",
+          "name": "埼玉県",
+          "unit": null
+        },
+        {
+          "code": "12000",
+          "name": "千葉県",
+          "unit": null
+        },
+        {
+          "code": "13000",
+          "name": "東京都",
+          "unit": null
+        },
+        {
+          "code": "14000",
+          "name": "神奈川県",
+          "unit": null
+        },
+        {
+          "code": "50300",
+          "name": "北陸地方",
+          "unit": null
+        },
+        {
+          "code": "15000",
+          "name": "新潟県",
+          "unit": null
+        },
+        {
+          "code": "16000",
+          "name": "富山県",
+          "unit": null
+        },
+        {
+          "code": "17000",
+          "name": "石川県",
+          "unit": null
+        },
+        {
+          "code": "18000",
+          "name": "福井県",
+          "unit": null
+        },
+        {
+          "code": "50400",
+          "name": "中部地方",
+          "unit": null
+        },
+        {
+          "code": "19000",
+          "name": "山梨県",
+          "unit": null
+        },
+        {
+          "code": "20000",
+          "name": "長野県",
+          "unit": null
+        },
+        {
+          "code": "21000",
+          "name": "岐阜県",
+          "unit": null
+        },
+        {
+          "code": "22000",
+          "name": "静岡県",
+          "unit": null
+        },
+        {
+          "code": "23000",
+          "name": "愛知県",
+          "unit": null
+        },
+        {
+          "code": "24000",
+          "name": "三重県",
+          "unit": null
+        },
+        {
+          "code": "50500",
+          "name": "近畿地方",
+          "unit": null
+        },
+        {
+          "code": "25000",
+          "name": "滋賀県",
+          "unit": null
+        },
+        {
+          "code": "26000",
+          "name": "京都府",
+          "unit": null
+        },
+        {
+          "code": "27000",
+          "name": "大阪府",
+          "unit": null
+        },
+        {
+          "code": "28000",
+          "name": "兵庫県",
+          "unit": null
+        },
+        {
+          "code": "29000",
+          "name": "奈良県",
+          "unit": null
+        },
+        {
+          "code": "30000",
+          "name": "和歌山県",
+          "unit": null
+        },
+        {
+          "code": "50600",
+          "name": "中国地方",
+          "unit": null
+        },
+        {
+          "code": "31000",
+          "name": "鳥取県",
+          "unit": null
+        },
+        {
+          "code": "32000",
+          "name": "島根県",
+          "unit": null
+        },
+        {
+          "code": "33000",
+          "name": "岡山県",
+          "unit": null
+        },
+        {
+          "code": "34000",
+          "name": "広島県",
+          "unit": null
+        },
+        {
+          "code": "35000",
+          "name": "山口県",
+          "unit": null
+        },
+        {
+          "code": "50700",
+          "name": "四国地方",
+          "unit": null
+        },
+        {
+          "code": "36000",
+          "name": "徳島県",
+          "unit": null
+        },
+        {
+          "code": "37000",
+          "name": "香川県",
+          "unit": null
+        },
+        {
+          "code": "38000",
+          "name": "愛媛県",
+          "unit": null
+        },
+        {
+          "code": "39000",
+          "name": "高知県",
+          "unit": null
+        },
+        {
+          "code": "50800",
+          "name": "九州地方",
+          "unit": null
+        },
+        {
+          "code": "40000",
+          "name": "福岡県",
+          "unit": null
+        },
+        {
+          "code": "41000",
+          "name": "佐賀県",
+          "unit": null
+        },
+        {
+          "code": "42000",
+          "name": "長崎県",
+          "unit": null
+        },
+        {
+          "code": "43000",
+          "name": "熊本県",
+          "unit": null
+        },
+        {
+          "code": "44000",
+          "name": "大分県",
+          "unit": null
+        },
+        {
+          "code": "45000",
+          "name": "宮崎県",
+          "unit": null
+        },
+        {
+          "code": "46000",
+          "name": "鹿児島県",
+          "unit": null
+        },
+        {
+          "code": "47000",
+          "name": "沖縄県",
+          "unit": null
+        }
+      ]
+    },
+    {
+      "id": "time",
+      "name": "時間軸(年次)",
+      "valueCount": 9,
+      "sampleValues": [
+        {
+          "code": "2014000000",
+          "name": "2014年",
+          "unit": null
+        },
+        {
+          "code": "2013000000",
+          "name": "2013年",
+          "unit": null
+        },
+        {
+          "code": "2012000000",
+          "name": "2012年",
+          "unit": null
+        },
+        {
+          "code": "2011000000",
+          "name": "2011年",
+          "unit": null
+        },
+        {
+          "code": "2010000000",
+          "name": "2010年",
+          "unit": null
+        },
+        {
+          "code": "2009000000",
+          "name": "2009年",
+          "unit": null
+        },
+        {
+          "code": "2008000000",
+          "name": "2008年",
+          "unit": null
+        },
+        {
+          "code": "2007000000",
+          "name": "2007年",
+          "unit": null
+        },
+        {
+          "code": "2006000000",
+          "name": "2006年",
+          "unit": null
+        }
+      ]
+    }
+  ]
+}

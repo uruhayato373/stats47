@@ -9,6 +9,9 @@ export const soleProprietorOperatingProfit: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003421679",
+    // e-Stat 原単位 千円 → config unit 万円 の換算 (MONEY-UNIT-SCALE-01)。
+    // 宣言しないと 千円 の値に 万円 のラベルが付いたまま配信される。
+    "valueScale": 0.1,
     "cdTab": "260",
     "cdCat01": "0",
     "displayName": "個人企業経済調査",

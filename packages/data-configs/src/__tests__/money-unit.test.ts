@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  applyValueScale,
   checkCombinationUnitsAgree,
   checkMoneyUnitScale,
   moneyUnitExponent,
@@ -138,6 +139,42 @@ describe("checkCombinationUnitsAgree", () => {
     expect(checkCombinationUnitsAgree(["千円"]).kind).toBe("skip");
     expect(checkCombinationUnitsAgree([null, "千円"]).kind).toBe("skip");
     expect(checkCombinationUnitsAgree([]).kind).toBe("skip");
+  });
+});
+
+describe("applyValueScale", () => {
+  it("未宣言・1 なら値を変えない (既存 2,000 件超に影響を出さない)", () => {
+    expect(applyValueScale(1234, undefined)).toBe(1234);
+    expect(applyValueScale(1234, 1)).toBe(1234);
+  });
+
+  it("欠測は欠測のまま — 0 を捏造しない", () => {
+    expect(applyValueScale(null, 0.1)).toBeNull();
+    expect(applyValueScale(null, undefined)).toBeNull();
+  });
+
+  it("千円 → 万円 (実際の欠陥 cook-annual-income の値)", () => {
+    // 4153.9 * 0.1 は 2 進で 415.39000000000004 になる。有効桁で丸めて残差だけ落とす
+    expect(applyValueScale(4153.9, 0.1)).toBe(415.39);
+  });
+
+  it("百万円 → 円 (実際の欠陥 book-magazine-retail-annual-sales の値)", () => {
+    expect(applyValueScale(509046, 1_000_000)).toBe(509_046_000_000);
+  });
+
+  it("整数は精度を落とさずそのまま返す (16 桁以上でも丸めない)", () => {
+    expect(applyValueScale(1_234_567_890_123_456, 1_000_000)).toBe(
+      1_234_567_890_123_456 * 1_000_000,
+    );
+  });
+
+  it("0 は 0 のまま (0 円の県を消さない)", () => {
+    expect(applyValueScale(0, 0.1)).toBe(0);
+  });
+
+  it("不正な scale は無視する (壊れた宣言で値を化けさせない)", () => {
+    expect(applyValueScale(100, Number.NaN)).toBe(100);
+    expect(applyValueScale(100, Number.POSITIVE_INFINITY)).toBe(100);
   });
 });
 

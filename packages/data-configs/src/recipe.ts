@@ -55,6 +55,13 @@ export interface RecipeOps {
   axisRatio?: { axis: EstatAxis; numeratorCodes: readonly string[]; denominatorCodes: readonly string[] };
   /** 年計のみ採用 (月次・四半期を同じ表に持つ統計用) */
   timeScope?: "annual";
+  /**
+   * 金額単位族の換算倍率 (原単位 → config.unit)。`10^k` のみ。
+   *
+   * `tabCombination.factor` と違い**配信される値そのものを変える**ので必ずレシピに載せる。
+   * 宣言を直せば configHash が動き、監査 (検査 k) が「R2 が stale」と自動検出する。
+   */
+  valueScale?: number;
   /** 地域が area 軸ではなく cat 軸に入っている表の写像 */
   areaAxis?: { axis: EstatAxis; scheme: "seq-pref" | "name" };
   /** 家計調査の県庁所在市 → 都道府県 写像 */
@@ -258,6 +265,10 @@ function buildOps(config: MetricConfig): RecipeOps | undefined {
       };
     }
     if (s.timeScope) ops.timeScope = s.timeScope;
+    // 1 は「換算しない」= 未宣言と同じなので載せない (既存 2,000 件超の configHash を動かさない)
+    if (typeof s.valueScale === "number" && Number.isFinite(s.valueScale) && s.valueScale !== 1) {
+      ops.valueScale = s.valueScale;
+    }
     if (s.areaAxis) ops.areaAxis = { axis: s.areaAxis.axis, scheme: s.areaAxis.scheme };
   }
 
@@ -400,6 +411,10 @@ function parseOps(value: unknown): RecipeOps | undefined {
   }
 
   if (value.timeScope === "annual") ops.timeScope = "annual";
+
+  if (typeof value.valueScale === "number" && Number.isFinite(value.valueScale) && value.valueScale !== 1) {
+    ops.valueScale = value.valueScale;
+  }
 
   if (isRecord(value.areaAxis)) {
     const axis = parseAxis(value.areaAxis.axis);

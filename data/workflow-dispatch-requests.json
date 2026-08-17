@@ -1,7 +1,7 @@
 {
   "workflow": "sync-snapshots.yml",
-  "inputs": { "only": "master" },
+  "inputs": { "only": "correlation" },
   "ref": "develop",
-  "reason": "KSJ 県帰属の是正で 10 指標の観測値が変わった (ダム・湖沼・火力・水力・風力・バイオマス・道の駅・漁港・空港・鉄道駅)。app/stats と app/ranking/<key>/{values,item,正規化,national-trend}.json + all.json は反映済みだが、app/category/<key>/items.json は item.json を読んで焼き直すので古いまま。対象カテゴリは infrastructure / landweather / energy / tourism / agriculture。",
-  "requestedAt": "2026-08-17T06:15:00Z"
+  "reason": "KSJ 県帰属の是正で 10 指標 (ダム・湖沼・火力・水力・風力・バイオマス・道の駅・漁港・空港・鉄道駅) の観測値が 06:00 に変わった。直前の correlation 再計算は 05:36 なので、この 10 指標を含むペアが古い値のまま残っている。correlation は app/stats を入力に全ペアを再計算するのでこの 1 回で揃う。",
+  "requestedAt": "2026-08-17T06:30:00Z"
 }

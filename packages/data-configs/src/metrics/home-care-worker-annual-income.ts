@@ -9,6 +9,9 @@ export const homeCareWorkerAnnualIncome: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003445758",
+    // e-Stat 原単位 千円 → config unit 万円 の換算 (MONEY-UNIT-SCALE-01)。
+    // 宣言しないと 千円 の値に 万円 のラベルが付いたまま配信される。
+    "valueScale": 0.1,
     "tabCombination": [
       { "cdTab": "08", "factor": 12 },
       { "cdTab": "12", "factor": 1 },

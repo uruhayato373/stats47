@@ -129,6 +129,25 @@ export interface EstatSource {
    * cdTime で絞らないのは R2 キャッシュの分断を避けるため (`.claude/rules/estat-api.md`)。
    */
   timeScope?: "annual";
+  /**
+   * **金額単位族の換算専用**。e-Stat の原単位 (`@unit`) から `config.unit` へ直すための倍率。
+   * `10^k` 以外を書かない。
+   *
+   * e-Stat は倍率を単位文字列に埋め込む (`千円` / `百万円`)。取り込みは値を変換せず
+   * `unit` は config の文字列を貼るだけなので、宣言が無いと config が「万円」でも値は
+   * 千円のまま配信される。2026-08-05 に職業別平均年収 39 件がこの状態で 10 倍過大だった
+   * (東京の調理従事者が 4,153.9「万円」)。
+   *
+   * 期待値は `10^(原単位の指数 - config.unit の指数)`。千円 → 万円 なら `0.1`、
+   * 百万円 → 円 なら `1000000`。整合しているかは
+   * `packages/data-configs/scripts/audit-money-unit-scale.ts` が全数監査する。
+   *
+   * ★`tabCombination` の `factor` とは別物。あちらは系列の線形結合の係数で**単位を変えない**
+   * (千円を 12 倍しても千円)。混同すると二重に掛かる。
+   *
+   * 正典: `.claude/rules/unit-semantics-standards.md` / `packages/data-configs/src/money-unit.ts`
+   */
+  valueScale?: number;
   /** 表示用 source 名 (UI ラベル) */
   displayName?: string;
   /** 出典 URL (UI リンク) */

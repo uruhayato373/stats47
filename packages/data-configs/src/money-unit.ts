@@ -95,6 +95,28 @@ export function checkMoneyUnitScale(params: {
 }
 
 /**
+ * 原単位の値を `config.unit` の単位へ換算する。
+ *
+ * `scale` は `EstatSource.valueScale` (未宣言なら 1 = 換算しない)。欠測 (null) は欠測のまま
+ * — 0 を捏造しない。
+ *
+ * ## 浮動小数の後始末をここでやる理由
+ *
+ * `4153.9 * 0.1` は 2 進では `415.39000000000004` になる。そのまま R2 へ書くと配信 JSON に
+ * 桁の詰まった数が並び、以後の照合 (blog の factual-check / ai-content の number-audit) が
+ * 表示上の丸めと突き合わせるたびに誤差を吸収する羽目になる。倍率は `10^k` に限っているので、
+ * 有効桁を 15 桁へ丸めれば元の精度を落とさずに 2 進の残差だけを消せる。
+ */
+export function applyValueScale(value: number | null, scale: number | undefined): number | null {
+  if (value === null) return null;
+  if (typeof scale !== "number" || !Number.isFinite(scale) || scale === 1) return value;
+  const scaled = value * scale;
+  if (!Number.isFinite(scaled)) return null;
+  // 整数はそのまま (toPrecision(15) は 16 桁以上の整数を丸めてしまう)
+  return Number.isInteger(scaled) ? scaled : Number(scaled.toPrecision(15));
+}
+
+/**
  * pin されている軸の単位から、この metric の原単位を 1 つに決める。
  *
  * ## なぜ tab だけでは足りないか (2026-08-17 実測)
