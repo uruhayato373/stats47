@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-17T13:28:15.948Z",
+  "updatedAt": "2026-08-17T16:58:48.887Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -343,6 +343,62 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-17T13:28:15.948Z"
+    },
+    "ASP-CONTINUITY-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": "docs/todo/05_機能バックログ.md",
+      "title": "もしも・afbの承認追跡と広告コード取得",
+      "attempts": [
+        {
+          "at": "2026-08-17T16:58:36.850Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "6段階の多フェーズ実装(plan hash/journal/profile lock/オーナー承認後のPlaywright走査/harvest/register候補生成)。完了条件はdry-run縦断+cron health実測で、CIの1runで扱う規模ではない。impl-largeとしてfableへ委譲対象、この日次runでは着手しない",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "DATA-REFRESH-ZEROGATE-ALLORNOTHING-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": "docs/todo/05_機能バックログ.md",
+      "title": "ゼロ件ゲートが成功2,148件のR2 pushを巻き添えにする",
+      "attempts": [
+        {
+          "at": "2026-08-17T16:58:48.887Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "実測確認: fail10件のうちconstruction-contract-*7件+construction-projects-total+noise-regulation-rateは既に2026-08-16にisActive:false化済(残るのはvoter-turnout-house-proportinalのみ実質未解決)。kindergarten/nursery-education-diffusion-rateはEXPECTED_EMPTYに既登録済(until 2026-11-30, issue SSDS-EDU-DIFFUSION-CODE-",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }
