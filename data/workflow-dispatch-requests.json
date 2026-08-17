@@ -1,0 +1,8 @@
+{
+  "workflow": "purge-cdn.yml",
+  "inputs": { "prefix": "" },
+  "ref": "develop",
+  "reason": "婚姻率ページの <title> が Cloudflare エッジで stale。R2 (generatedAt 20:25:21) と Worker origin (?cb= バイパスで新 title・cf-cache-status MISS) はどちらも正しく、エッジだけが 20:27 に旧レンダを再キャッシュしている (age 1649・cf-cache-status HIT)。sync-snapshots の purge ステップは purge-worker-cache.ts で Workers Cache しか消さず、ゾーンのエッジには効かない。",
+  "acknowledgedMainLag": "purge-cdn が main から実行するのは packages/r2-storage/src/scripts/purge-cache.ts だけで、乖離している apps/web/scripts/pre-commit-checks.sh は読まない (コンテンツ生成を伴わない純粋なキャッシュパージ)。",
+  "requestedAt": "2026-08-17T21:00:00Z"
+}
