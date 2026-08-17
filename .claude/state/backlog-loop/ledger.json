@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-17T11:45:47.017Z",
+  "updatedAt": "2026-08-17T12:57:40.899Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -69,6 +69,172 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-17T11:45:47.017Z"
+    },
+    "IND-DATA-CORRUPTION-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T12:55:23.614Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts",
+              "npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new"
+            ],
+            "pass": true
+          },
+          "evidence": "R2 実測 (2022年・人口千対) で seoTitle/seoDescription を書き直した。婚姻率 1位東京都5.36/最下位秋田県2.63/2.0倍、離婚率 1位沖縄県2.10/最下位富山県1.06/2.0倍。audit で 2 key とも不一致リストから消え baseline 102→100。本番反映 (item.json 再生成) は残 100 件と同じ工程なので SEO-META-FACTUAL-GATE-01 へ統合。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T12:55:23.614Z"
+    },
+    "SEARCH-OBSERVABILITY-RELEASE-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T12:55:40.561Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "mcp seo-observability search_growth_status (live callTool)",
+              "cat .claude/state/search-growth/health.json",
+              "cat .claude/skills/analytics/adsense-improvement/reference/snapshots/2026-W33/manifest.json",
+              "grep -rn 'gh issue create' .github/workflows/search-growth-weekly.yml"
+            ],
+            "pass": true
+          },
+          "evidence": "完了条件 5 点を実測。(1) period metadata: 全 job に periodKind/Start/End/windowDays/isFinalized (finalized7d・pages のみ rolling30d)。(2) privacy: pages は rowCount 0 + status privacy-threshold + 明示 limitation。(3) missing/zero/stale: health.json が status×freshness で success/fresh・partial/stale・m",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T12:55:40.561Z"
+    },
+    "MAINTENANCE-DEBT-PAYDOWN-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T12:55:40.630Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -n ratchet-check .github/workflows/pr-quality-check.yml",
+              "cat .claude/memory/feedback_debt_baseline_shrink_only.md"
+            ],
+            "pass": true
+          },
+          "evidence": "タスクではなく恒久方針で、既に 2 つの SSOT に入っている。CI (pr-quality-check.yml L316-317) が --baseline + --ratchet-check を全 PR で実行し origin/main 比の増加を拒否。memory feedback_debt_baseline_shrink_only.md が同じ制約 (吸収不可・実修正かルール修正のみ) と適用手順を持つ。docs-vs-issues の「恒久判断は既存SSOTへ統合」に従い TODO から除去。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T12:55:40.630Z"
+    },
+    "MONEY-UNIT-SCALE-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T12:55:52.716Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/data-configs/scripts/audit-money-unit-scale.ts",
+              "npx vitest run packages/data-configs/src/__tests__/money-unit.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "固有の成果は達成済み。audit は スケール不一致 0 / 結合単位不一致 0、R2 の cook-annual-income 東京 = 415.39 万円 (再取得前は 4153.9)、money-unit.test.ts 27 件 green、恒久知識は unit-semantics-standards.md §2.5 にある。残る「seoTitle がデータと整合」は SEO baseline 100 件のうち金額系が含まれる部分集合なので、受入条件を持つ SEO-META-FACTUAL-GATE-01 へ統合 (運用ガイド「同じ成果を指す親子",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T12:55:52.716Z"
+    },
+    "GOOGLE-ADMIN-AUTOMATION-01": {
+      "class": "needs-owner",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T12:57:40.899Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "機械側の完了条件は実測で達成 (google-admin:test 33 pass / metrics:test 76 pass / docs:check exit 0 / schedule は audit のみ / mutation は environment: google-admin-production)。残るのは AdSense OAuth token 復旧・GitHub Environment 作成・GA4 admin credential 登録で全てオーナー工程。status を in-progress → blocked-owner-ap",
+          "failReason": "needs-owner",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }
