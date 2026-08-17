@@ -1,7 +1,0 @@
-{
-  "workflow": "sync-snapshots.yml",
-  "inputs": { "only": "ranking-items" },
-  "ref": "develop",
-  "reason": "婚姻率・離婚率の seoTitle 是正を item.json へ反映する。config は 2026-08-17 に R2 実測から書き直したが、本番の <title> は app/ranking/<key>/item.json 由来なので再生成しないと「離婚率 2024年・東京5.7」という存在しない値を配信し続ける (実データは 2022 年・1位 沖縄 2.10)。併せて患者調査 2 件の退役も item に乗る。",
-  "requestedAt": "2026-08-17T13:52:00Z"
-}
