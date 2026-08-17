@@ -1,0 +1,7 @@
+{
+  "workflow": "sync-snapshots.yml",
+  "inputs": { "only": "correlation" },
+  "ref": "develop",
+  "reason": "KSJ 県帰属の是正で原発・地熱の観測値が変わったので相関を再計算する。2 指標の per-key snapshot は誤り (京都府を 8 基でプロット) だったので削除済みだが、他キー側の snapshot に残るペアは古いまま。correlation は R2 の app/stats を入力に全ペアを再計算するので、この 1 回で全体が揃う。",
+  "requestedAt": "2026-08-17T05:35:00Z"
+}
