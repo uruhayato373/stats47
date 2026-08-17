@@ -19,9 +19,10 @@
  *   npx tsx packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts \
  *     --metric nuclear-power-plant-count,geothermal-power-plant-count
  *
- *   --metric <keys>  対象を限定する (未指定なら datasets.ts の ranking 対象すべて)
- *   --out <dir>      出力先 (既定 .local/r2)
- *   --compare        現在の配信値との差分を表示する (R2 公開 URL を読む)
+ *   --metric <keys>      対象を限定する (未指定なら datasets.ts の ranking 対象すべて)
+ *   --out <dir>          出力先 (既定 .local/r2)
+ *   --compare            現在の配信値との差分を表示する (R2 公開 URL を読む)
+ *   --coastline-km <km>  海岸線・埋立地のずれの許容距離 (既定 5)。0 で無効
  *
  * 県を決められない feature が 1 件でもあれば **書かずに終了する**。推測で別の県へ
  * 計上しない (旧実装の失敗がまさにそれだった)。
@@ -44,6 +45,7 @@ import {
   type KsjPointFeature,
 } from "../ksj-stats-core";
 import {
+  DEFAULT_COASTLINE_TOLERANCE_KM,
   PREF_NAME_BY_CODE,
   createPrefectureLocator,
   type PrefectureLocator,
@@ -68,10 +70,12 @@ function parseArgs(argv: readonly string[]) {
     const i = argv.indexOf(name);
     return i >= 0 ? argv[i + 1] : undefined;
   };
+  const tol = get("--coastline-km");
   return {
     metrics: get("--metric")?.split(",").map((s) => s.trim()).filter(Boolean),
     outDir: get("--out") ?? ".local/r2",
     compare: argv.includes("--compare"),
+    coastlineToleranceKm: tol !== undefined ? Number(tol) : DEFAULT_COASTLINE_TOLERANCE_KM,
   };
 }
 
@@ -238,10 +242,13 @@ async function main(): Promise<void> {
       source,
       locator: getLocator(),
       dedupeBy: t.dedupeByProperties,
+      coastlineToleranceKm: args.coastlineToleranceKm,
     });
 
     console.log(
-      `  feature ${features.length} 件 → 属性 ${result.resolvedByAttribute} / 空間結合 ${result.resolvedByPolygon} / 未解決 ${result.unresolved.length}` +
+      `  feature ${features.length} 件 → 属性 ${result.resolvedByAttribute} / 空間結合 ${result.resolvedByPolygon}` +
+        (result.resolvedByCoastline > 0 ? ` / 海岸線許容 ${result.resolvedByCoastline}` : "") +
+        ` / 未解決 ${result.unresolved.length}` +
         (t.dedupeByProperties ? ` / 重複排除 ${result.deduped}` : ""),
     );
 
