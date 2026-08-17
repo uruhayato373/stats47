@@ -523,6 +523,28 @@ if [ -n "$STAGED_METRICS" ]; then
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
 
+  # SEO 文字列の事実照合 (docs/todo/05_機能バックログ.md SEO-META-FACTUAL-GATE-01)
+  #
+  # seoTitle / seoDescription は <title> と <meta name="description"> としてそのまま
+  # 配信される。実データと突合していなかったため 5.2% が 1 位県・値・倍率・年を
+  # 取り違えていた (2026-08-17 全数走査)。
+  #
+  # ★staged 分だけを見る。全 2,008 件だと R2 を 2,000 回読むので pre-commit には重い
+  #   (全数走査は CI の SEO Meta Factual Gate が担う)。R2 を読めない環境では黙って
+  #   判定不能になるので、ここでは落とさず警告に留める (CI が権威)。
+  SEO_KEYS=$(echo "$STAGED_METRICS" | sed 's|.*/||;s|\.ts$||' | paste -sd, -)
+  if [ -n "$SEO_KEYS" ]; then
+    if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --only "$SEO_KEYS" > /tmp/seo-meta-facts.log 2>&1); then
+      if grep -qE "不一致のある metric : 0" /tmp/seo-meta-facts.log; then
+        echo -e "${GREEN}✅ SEO 文字列の事実照合 成功${NC}"
+      else
+        echo -e "${YELLOW}⚠️  seoTitle/seoDescription が実データと食い違います${NC}"
+        grep -E "^    \[" /tmp/seo-meta-facts.log | head -10 || true
+        echo -e "${YELLOW}💡 確認: npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --only <key>${NC}"
+      fi
+    fi
+  fi
+
   # 配色の決定規則 + 極性 SSOT (.claude/rules/blog-svg-chart-standards.md §3)
   if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/validate-polarity.ts > /tmp/validate-polarity.log 2>&1); then
     echo -e "${GREEN}✅ 配色・極性チェック成功${NC}"

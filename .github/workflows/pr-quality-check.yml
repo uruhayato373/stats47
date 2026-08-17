@@ -395,6 +395,18 @@ jobs:
           npm run validate:polarity --workspace=@stats47/data-configs
         continue-on-error: false
 
+      - name: 📰 SEO Meta Factual Gate
+        run: |
+          # seoTitle / seoDescription はランキングページの <title> と
+          # <meta name="description"> としてそのまま配信される。実データと突合されて
+          # いなかったため、2026-08-17 の全数走査で公開 2,008 件の 5.2% (105 件) が
+          # 1 位県・値・倍率・年のいずれかを取り違えていた。
+          # 既存違反は baseline に固定し、新規混入だけを止める (縮小専用ラチェット)。
+          # R2 の公開 URL を読むだけ (認証不要・書き込みなし)。
+          # 規約: docs/todo/05_機能バックログ.md SEO-META-FACTUAL-GATE-01
+          npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new
+        continue-on-error: false
+
       - name: 🔗 Survey Master Coverage Gate
         run: |
           # metric から解決される非合成 survey id が surveys.json (master) にすべて実在するか。
