@@ -62,6 +62,10 @@
 - high を既定、routine coordination は medium、失敗コストが高い最難関だけ xhigh を候補にする。
 - 長時間runは checkpoint ごとに事実、変更、未完了、次の一手を repo の正典へ記録する。
   作業時間や進捗率を根拠なく推定しない。
+- **CI の無人ルーチンでは run 本体に使わない。** base-action の `--model` は run 全体に効くため、
+  難物だけ上位モデルにしたい場合は run 本体を sonnet にして Agent tool で `model: fable` の
+  subagent へ委譲する (`backlog-loop` がこの形。正典 `.claude/rules/backlog-loop.md`)。
+  agent frontmatter の許可値は `check-agent-skill-consistency.cjs` の `allowedModels` が固定する。
 
 ## 委譲
 

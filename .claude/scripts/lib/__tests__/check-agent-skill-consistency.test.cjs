@@ -272,3 +272,33 @@ npm run blog-images:codex -- request --slug example
   assert.equal(result.status, 1);
   assert.match(result.stdout, /\[E10\].*mcp-server/);
 });
+
+test("accepts fable as an agent model but still rejects unknown models", (t) => {
+  // fable は 2026-08-17 に backlog-loop の escalation 先として許可した。
+  // 許可値が野放図に広がらないよう、未知の値は落ちることを同時に固定する。
+  const root = fixture({
+    ".claude/agents/hard.md": VALID_AGENT.replace("model: sonnet", "model: fable"),
+    ".claude/skills/work/SKILL.md": `---
+name: work
+description: do bounded work
+primary_agent: hard
+---
+`,
+  });
+  t.after(() => fs.rmSync(root, { recursive: true }));
+  assert.equal(run(root).status, 0, "fable を許可していない");
+
+  const bad = fixture({
+    ".claude/agents/hard.md": VALID_AGENT.replace("model: sonnet", "model: gpt-9"),
+    ".claude/skills/work/SKILL.md": `---
+name: work
+description: do bounded work
+primary_agent: hard
+---
+`,
+  });
+  t.after(() => fs.rmSync(bad, { recursive: true }));
+  const result = run(bad);
+  assert.notEqual(result.status, 0, "未知のモデルを通してはいけない");
+  assert.match(result.stdout + result.stderr, /gpt-9/);
+});

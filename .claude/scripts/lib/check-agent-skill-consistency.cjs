@@ -160,7 +160,10 @@ function checkAgentPromptContracts(findings, scope) {
     (f) => path.basename(f) !== "README.md"
   );
   if (scope) agentFiles = agentFiles.filter((f) => scope.has(rel(f)));
-  const allowedModels = new Set(["haiku", "sonnet", "opus", "inherit"]);
+  // model-prompting.md が扱うモデル + inherit。fable は 2026-08-17 に backlog-loop の
+  // escalation 先として追加した (CI の run 本体は sonnet 固定なので、上位モデルは
+  // Agent tool の委譲でのみ使う)。ここを増やすときは model-prompting.md 側にも設計指針を書く。
+  const allowedModels = new Set(["haiku", "sonnet", "opus", "fable", "inherit"]);
 
   for (const af of agentFiles) {
     const text = readSafe(af);
