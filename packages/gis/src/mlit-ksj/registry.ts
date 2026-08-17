@@ -26,6 +26,8 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
     geojsonDirInZip: "",
     propertyMap: {},
     simplifyOptions: { quantize: 100000, simplifyQuantile: 0.01 },
+    // W09_002 は 5 桁市区町村コード (湖沼の所在地)。
+    prefectureSource: { kind: "muniCode", field: "W09_002" },
   }],
   ["W01", {
     dataId: "W01",
@@ -33,6 +35,8 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
     geojsonDirInZip: "UTF-8/",
     propertyMap: {},
     simplifyOptions: { quantize: 1000000, simplifyQuantile: 0 },
+    // W01_013 は「青森県青森市大字駒込」形式の所在地。
+    prefectureSource: { kind: "address", field: "W01_013" },
   }],
   ["W05", {
     dataId: "W05",
@@ -245,6 +249,8 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
     geojsonDirInZip: "",
     propertyMap: {},
     simplifyOptions: { quantize: 1000000, simplifyQuantile: 0 },
+    // P35_003 は県名そのもの (「北海道」)。
+    prefectureSource: { kind: "prefName", field: "P35_003" },
   }],
   ["P12", {
     dataId: "P12",
@@ -252,6 +258,8 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
     geojsonDirInZip: "",
     propertyMap: {},
     simplifyOptions: { quantize: 1000000, simplifyQuantile: 0 },
+    // P12_003 は 2 桁県コード。P12_001 は資源 ID で 5 桁だが県とは無関係なので使わない。
+    prefectureSource: { kind: "prefCode", field: "P12_003" },
   }],
   ["P13", {
     dataId: "P13",
@@ -308,6 +316,9 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
     geojsonDirInZip: "",
     propertyMap: {},
     simplifyOptions: { quantize: 1000000, simplifyQuantile: 0 },
+    // C09_003 は 5 桁市区町村コード。C09_006 は県名に見えるが**政令市では市名が入る**
+    // (「北九州市」等) ので使えない — 実測で 2931 件中 1631 件が県名として解決できなかった。
+    prefectureSource: { kind: "muniCode", field: "C09_003" },
   }],
   ["mesh1000r6", {
     dataId: "mesh1000r6",

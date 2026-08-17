@@ -190,6 +190,19 @@ function pointInRing(lon: number, lat: number, ring: Ring): boolean {
 export interface PrefectureLocator {
   /** 点を含む県コードを返す。どの県にも入らなければ null */
   locate(lon: number, lat: number): string | null;
+  /**
+   * どのポリゴンにも入らない点を、`maxKm` 以内で最も近い県へ寄せる。
+   *
+   * 海岸線・埋立地・港湾は、施設点が海岸ポリゴンのわずか外に落ちることがある
+   * (実測: 鉄道駅 10,235 件のうち 2 件、漁港・空港は構造的に岸壁上にある)。
+   * これは**座標そのものの精度の問題**なので、**距離の上限を切って**寄せる。
+   *
+   * 旧 `findNearestPref` との違いは上限があること。あちらは最寄りの県庁所在地へ
+   * 無制限に寄せていたので、京都市の方が福井市より近いというだけで高浜原発が
+   * 京都府になった。ここは既定 5km で、県境を跨ぐ誤りが起きる距離ではない。
+   * 上限を超えたら null を返す (推測しない)。
+   */
+  locateNearby(lon: number, lat: number, maxKm: number): string | null;
 }
 
 /**
@@ -244,47 +257,88 @@ export function createPrefectureLocator(
     );
   }
 
+  const locate = (lon: number, lat: number): string | null => {
+    if (!Number.isFinite(lon) || !Number.isFinite(lat)) return null;
+    for (const p of polygons) {
+      const [minX, minY, maxX, maxY] = p.bbox;
+      if (lon < minX || lon > maxX || lat < minY || lat > maxY) continue;
+      if (!pointInRing(lon, lat, p.rings[0])) continue;
+      let inHole = false;
+      for (let h = 1; h < p.rings.length; h++) {
+        if (pointInRing(lon, lat, p.rings[h])) {
+          inHole = true;
+          break;
+        }
+      }
+      if (!inHole) return p.prefCode;
+    }
+    return null;
+  };
+
   return {
-    locate(lon: number, lat: number): string | null {
-      if (!Number.isFinite(lon) || !Number.isFinite(lat)) return null;
+    locate,
+    locateNearby(lon: number, lat: number, maxKm: number): string | null {
+      const inside = locate(lon, lat);
+      if (inside) return inside;
+      if (!Number.isFinite(lon) || !Number.isFinite(lat) || !(maxKm > 0)) return null;
+      // 日本の緯度では経度 1 度 ≈ 91km、緯度 1 度 ≈ 111km。bbox の粗い絞り込みに使う
+      const degLat = maxKm / 111;
+      const degLon = maxKm / 91;
+      let best: { prefCode: string; km: number } | null = null;
       for (const p of polygons) {
         const [minX, minY, maxX, maxY] = p.bbox;
-        if (lon < minX || lon > maxX || lat < minY || lat > maxY) continue;
-        if (!pointInRing(lon, lat, p.rings[0])) continue;
-        let inHole = false;
-        for (let h = 1; h < p.rings.length; h++) {
-          if (pointInRing(lon, lat, p.rings[h])) {
-            inHole = true;
-            break;
+        if (
+          lon < minX - degLon ||
+          lon > maxX + degLon ||
+          lat < minY - degLat ||
+          lat > maxY + degLat
+        ) {
+          continue;
+        }
+        for (const ring of p.rings) {
+          for (const [x, y] of ring) {
+            const dx = (x - lon) * 91;
+            const dy = (y - lat) * 111;
+            const km = Math.sqrt(dx * dx + dy * dy);
+            if (km <= maxKm && (!best || km < best.km)) {
+              best = { prefCode: p.prefCode, km };
+            }
           }
         }
-        if (!inHole) return p.prefCode;
       }
-      return null;
+      return best?.prefCode ?? null;
     },
   };
 }
 
 // ─── 解決 ──────────────────────────────────────────────────────
 
-export type PrefectureAssignMethod = "attribute" | "polygon";
+export type PrefectureAssignMethod = "attribute" | "polygon" | "coastline";
 
 export interface PrefectureAssignment {
   readonly prefCode: string;
   readonly method: PrefectureAssignMethod;
 }
 
+/** 海岸線・埋立地のずれを吸収する既定の許容距離 (km) */
+export const DEFAULT_COASTLINE_TOLERANCE_KM = 5;
+
 /**
- * feature を都道府県へ帰属させる。属性 → 空間結合の順で試し、
- * どちらでも決まらなければ null (推測しない)。
+ * feature を都道府県へ帰属させる。属性 → 空間結合 → 海岸線許容 の順で試し、
+ * どれでも決まらなければ null (推測しない)。
+ *
+ * `coastlineToleranceKm` を渡すと、どのポリゴンにも入らない点をその距離以内の県へ
+ * 寄せる (`method: "coastline"` で返るので呼び出し側が件数を表に出せる)。既定は 0 =
+ * 無効。港湾・空港・海沿いの駅を扱うときだけ明示的に有効化する。
  */
 export function resolvePrefecture(args: {
   readonly properties?: Readonly<Record<string, unknown>> | null;
   readonly source?: PrefectureSource | null;
   readonly coord?: readonly [number, number] | null;
   readonly locator?: PrefectureLocator | null;
+  readonly coastlineToleranceKm?: number;
 }): PrefectureAssignment | null {
-  const { properties, source, coord, locator } = args;
+  const { properties, source, coord, locator, coastlineToleranceKm = 0 } = args;
   if (source) {
     const code = prefCodeFromSource(properties, source);
     if (code) return { prefCode: code, method: "attribute" };
@@ -292,6 +346,10 @@ export function resolvePrefecture(args: {
   if (locator && coord) {
     const code = locator.locate(coord[0], coord[1]);
     if (code) return { prefCode: code, method: "polygon" };
+    if (coastlineToleranceKm > 0) {
+      const near = locator.locateNearby(coord[0], coord[1], coastlineToleranceKm);
+      if (near) return { prefCode: near, method: "coastline" };
+    }
   }
   return null;
 }

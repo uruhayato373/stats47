@@ -122,7 +122,10 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
       { rankingKey: "nuclear-power-plant-count", rankingName: "原子力発電所数", unit: "か所", categoryKey: "energy", filenamePattern: "NuclearPowerPlant", yearCode: "2013", description: "国土数値情報に登録されている原子力発電所の都道府県別数", dedupeByProperties: ["P03_0002", "P03_0003"] },
       { rankingKey: "thermal-power-plant-count", rankingName: "火力発電所数", unit: "か所", categoryKey: "energy", filenamePattern: "ThermalPowerPlant.topojson", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
       { rankingKey: "hydroelectric-power-plant-count", rankingName: "水力発電所数", unit: "か所", categoryKey: "energy", filenamePattern: "GeneralHydroelectric", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
-      { rankingKey: "photovoltaic-power-plant-count", rankingName: "太陽光発電施設数", unit: "か所", categoryKey: "energy", filenamePattern: "Photovoltaic", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
+      // photovoltaic-power-plant-count は 2026-08-17 に外した。metric config も R2 データも
+      // 無く /ranking/photovoltaic-power-plant-count は soft 404 を返していた。作るなら
+      // metric config の新設から。データ自体は P03 に 10,654 レコードある
+      // (ただし施設名が空のものが多く、名前 + 住所での重複排除は 9,808 件までしか畳めない)。
       { rankingKey: "wind-power-plant-count-facility", rankingName: "風力発電施設数(施設ベース)", unit: "か所", categoryKey: "energy", filenamePattern: "WindPowerPlant", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
       { rankingKey: "geothermal-power-plant-count", rankingName: "地熱発電施設数", unit: "か所", categoryKey: "energy", filenamePattern: "Geothermal", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
       { rankingKey: "biomass-power-station-count", rankingName: "バイオマス発電施設数", unit: "か所", categoryKey: "energy", filenamePattern: "Biomass", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
@@ -134,7 +137,10 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   {
     dataId: "P12", name: "観光資源", category: "facility", geometryType: "point", coverage: "national", license: "non-commercial",
     stats47Category: "tourism", isRankingTarget: true, latestVersion: "14",
-    rankingConfig: [{ rankingKey: "tourism-resource-count", rankingName: "観光資源数", unit: "件", categoryKey: "tourism", yearCode: "2014", description: "国土数値情報に登録されている観光資源の都道府県別数" }],
+    // P12 は同じ観光資源を点 (P12a 17,258) / 線 (P12b 85) / 面 (P12c 1,797) の 3 系統で
+    // 持つ。例: 小笠原の「南島」は P12a と P12c の両方に P12_001=10034 で入っている。
+    // 全ファイルを数えると重複するので、資源 ID で畳んで実際の資源数にする。
+    rankingConfig: [{ rankingKey: "tourism-resource-count", rankingName: "観光資源数", unit: "件", categoryKey: "tourism", yearCode: "2014", description: "国土数値情報に登録されている観光資源の都道府県別数", dedupeByProperties: ["P12_001"] }],
   },
   { dataId: "P13", name: "都市公園", category: "facility", geometryType: "polygon", coverage: "prefecture", license: "non-commercial", stats47Category: "infrastructure", isRankingTarget: false },
   { dataId: "P14", name: "福祉施設", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "socialsecurity", isRankingTarget: false },
@@ -165,11 +171,11 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
     stats47Category: "infrastructure", isRankingTarget: true, latestVersion: "24",
     rankingConfig: [{ rankingKey: "railway-station-count", rankingName: "鉄道駅数", unit: "駅", categoryKey: "infrastructure", filenamePattern: "Station", yearCode: "2024", description: "国土数値情報に登録されている鉄道駅の都道府県別数" }],
   },
-  {
-    dataId: "N06", name: "高速道路時系列", category: "transport", geometryType: "line", coverage: "national", license: "cc-by-4.0-partial",
-    stats47Category: "infrastructure", isRankingTarget: true, latestVersion: "20",
-    rankingConfig: [{ rankingKey: "expressway-junction-count", rankingName: "高速道路IC・JCT数", unit: "か所", categoryKey: "infrastructure", filenamePattern: "Joint", yearCode: "2020", description: "国土数値情報に登録されている高速道路のIC・JCTの都道府県別数" }],
-  },
+  // ranking 定義を外した (2026-08-17)。`expressway-junction-count` は metric config も
+  // R2 データも存在せず、/ranking/expressway-junction-count は soft 404 を返していた
+  // (HTTP 200 + 「ランキングが見つかりません」)。実現しなかった計画が SSOT に残っていた
+  // 状態なので、実態に合わせて落とす。作るなら metric config の新設から始める。
+  { dataId: "N06", name: "高速道路時系列", category: "transport", geometryType: "line", coverage: "national", license: "cc-by-4.0-partial", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "20" },
   { dataId: "N07", name: "バスルート", category: "transport", geometryType: "line", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false },
   { dataId: "S12", name: "駅別乗降客数", category: "transport", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false },
 
