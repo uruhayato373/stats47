@@ -167,3 +167,58 @@ describe("checkSeoFacts — 発火するケース (すべて実際に見つか�
     expect(f.map((x) => x.kind)).toEqual(["rank-area-mismatch"]);
   });
 });
+
+/**
+ * 桁の接頭辞 (億 / 万 / 千) — `valueScale` で 円 に直した金額が巨大になり、
+ * SEO 文字列に「5,090億円」と書けないと <title> が読めなくなるため 2026-08-17 に追加。
+ * スケール表は自前で持たず `unit/unit-semantics.ts` の正典を呼ぶ。
+ */
+describe("桁の接頭辞", () => {
+  const MONEY = {
+    year: "2006",
+    top: { areaName: "東京都", value: 509_046_000_000 },
+    bottom: { areaName: "鳥取県", value: 8_960_000_000 },
+  };
+
+  it("億 を倍率として読む (書籍・雑誌小売業の実文面)", () => {
+    const c = extractSeoClaims(
+      "1位東京都（5,090億円）、最下位鳥取県（89.6億円）で56.8倍の格差。",
+      "円",
+    );
+    expect(c.ranks.map((r) => r.value)).toEqual([509_000_000_000, 8_960_000_000]);
+    expect(checkSeoFacts({ claims: c, truth: MONEY })).toEqual([]);
+  });
+
+  it("万 を倍率として読む (災害被害額の最下位)", () => {
+    const c = extractSeoClaims("最下位東京都（2,800万円）", "円");
+    expect(c.ranks[0].value).toBe(28_000_000);
+  });
+
+  it("接頭辞が付いていても誤った値なら発火する (感度)", () => {
+    const c = extractSeoClaims("1位東京都（4,000億円）", "円");
+    expect(checkSeoFacts({ claims: c, truth: MONEY }).map((f) => f.kind)).toEqual([
+      "rank-value-mismatch",
+    ]);
+  });
+
+  it("unit が 千円 なら「千」を単位の一部として扱い ×1000 しない", () => {
+    // 2026-08-12 に地図照合が「13,326千円」を ×1000 して全県不一致にした事故と同型
+    const c = extractSeoClaims("1位東京都（13,326千円）", "千円");
+    expect(c.ranks[0].value).toBe(13_326);
+  });
+
+  it("unit が 円 なら「千」はスケール接頭辞として ×1000 する", () => {
+    const c = extractSeoClaims("1位東京都（13,326千円）", "円");
+    expect(c.ranks[0].value).toBe(13_326_000);
+  });
+
+  it("接頭辞が無い従来の文面は挙動が変わらない", () => {
+    const c = extractSeoClaims("1位福島県（25,226ｈａ）、最下位東京都（956ｈａ）", "ha");
+    expect(c.ranks.map((r) => r.value)).toEqual([25226, 956]);
+    expect(checkSeoFacts({ claims: c, truth: TRUTH })).toEqual([]);
+  });
+
+  it("倍率には接頭辞を読まない (無次元量)", () => {
+    expect(extractSeoClaims("56.8倍の格差", "円").ratio).toBe(56.8);
+  });
+});
