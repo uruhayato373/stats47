@@ -117,6 +117,24 @@ if [ -n "$STAGED_JS" ]; then
   fi
 fi
 
+# 2.1b-2 dispatch request の main 反映順ガード
+# sync-snapshots の sync job は `ref: main` を checkout する。develop で config を直しただけの
+# 状態で dispatch すると **main の古い config で再生成され、しかも成功する** (R2 の
+# generatedAt も更新されるので失敗に見えない)。2026-08-17 に婚姻率・離婚率の seoTitle で
+# 実際に踏み、2026-07-14 と同じ事故を繰り返した。正典: .claude/skills/db/sync-snapshots/SKILL.md
+STAGED_DISPATCH=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
+  '^data/workflow-dispatch-requests\.json$' || true)
+if [ -n "$STAGED_DISPATCH" ]; then
+  echo -e "${GREEN}🚦 dispatch request の main 反映順...${NC}"
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-dispatch-freshness.cjs"; then
+    echo -e "${RED}❌ main 未反映のまま main pinned な workflow へ dispatch しようとしています。${NC}"
+    echo -e "${YELLOW}💡 先に develop→main をデプロイする / 読まないと確信できるなら request に acknowledgedMainLag を書く${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  else
+    echo -e "${GREEN}✅ dispatch request の main 反映順チェック成功${NC}"
+  fi
+fi
+
 # 2.1c import.meta.dirname ガード
 # .ts は tsx が CJS 解決するため import.meta.dirname は undefined になる
 # (repo の package.json はどれも "type": "module" を持たない)。フォールバック無しだと

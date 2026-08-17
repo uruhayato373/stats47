@@ -25,6 +25,15 @@ co_agents: [article-writer, theme-designer, note-manager]
 > 失敗にも見えない)。builder は `METRICS_REGISTRY` を直接読むため、**snapshot に載せたい変更は
 > それが config でも exporter でも先に main へ入れる**。順序は必ず
 > **develop→main のデプロイ → dispatch → 本番 `<title>` を Googlebot UA で実測**。
+>
+> **★この順序は機械が守る (2026-08-17 配線)**。`data/workflow-dispatch-requests.json` を
+> commit するとき、pre-commit の `check-dispatch-freshness.cjs` が
+> ①dispatch 先が `ref: main` を checkout するか ②`origin/main...origin/develop` に
+> 生成の入力になりうるパス (`packages/**` / `apps/*/scripts/**` / このスキルの `run.sh`) の
+> 差分があるか を見て、両方成立したら **commit を止める**。
+> 読まないと確信できる場合だけ request に `"acknowledgedMainLag": "<理由>"` を書いて上書きする
+> (理由は 10 文字以上を要求 — チェックを黙らせるだけの記入を防ぐ)。
+> 上の文章だけでは 2026-07-14 と 2026-08-17 の 2 回とも防げなかったので、判定を機械へ移した。
 
 ## R2 キーパス構造
 

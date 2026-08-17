@@ -1,7 +1,0 @@
-{
-  "workflow": "sync-snapshots.yml",
-  "inputs": { "only": "ranking-items" },
-  "ref": "develop",
-  "reason": "seoTitle 是正を item.json へ反映する (再投入)。前回 20:02 の dispatch は main に config が載る前だったため、sync job (ref: main 固定) が旧 config で再生成し「離婚率 2024年・東京5.7」のままだった。PR #798 で main に載ったので投げ直す。",
-  "requestedAt": "2026-08-17T20:25:00Z"
-}
