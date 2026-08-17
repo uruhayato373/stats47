@@ -36,26 +36,68 @@ console.log(
 
 // R2 item.json の存在を並列確認（CONCURRENCY=30）
 const CONCURRENCY = 30;
-async function checkExists(key: string): Promise<boolean> {
-  try {
-    const res = await fetch(`${R2_PUBLIC}/app/ranking/${key}/item.json`, { method: "HEAD" });
-    return res.ok;
-  } catch {
-    return false;
+/** ネットワーク由来の失敗をリトライする回数 (404 はリトライしない — 答えが出ているため) */
+const HEAD_ATTEMPTS = 3;
+
+type Presence = "present" | "absent" | "undetermined";
+
+/**
+ * R2 に item.json があるか。
+ *
+ * **「判定できなかった」を「無い」に倒してはならない。** ここが KNOWN / SITEMAP の
+ * 真実源で、キーが落ちると middleware が 404 を返し sitemap からも消える =
+ * **生きているページの削除**になる。2026-08-17 に実際に起きた:
+ * `bath-soap-consumption-expenditure` は R2 も本番ページも 200 のまま KNOWN から外れ、
+ * その差分が commit されていた (原因は HEAD 1 回・例外を全部 false に倒す実装)。
+ *
+ * 404 は答えなので即 absent。それ以外 (例外 / 5xx / 429) はリトライし、
+ * 尽きたら **undetermined** を返して呼び出し側に中断させる。
+ */
+async function checkExists(key: string): Promise<Presence> {
+  const url = `${R2_PUBLIC}/app/ranking/${key}/item.json`;
+  for (let attempt = 1; attempt <= HEAD_ATTEMPTS; attempt += 1) {
+    try {
+      const res = await fetch(url, { method: "HEAD" });
+      if (res.ok) return "present";
+      if (res.status === 404) return "absent";
+      // 5xx / 429 等は一時的な可能性があるのでリトライ対象
+    } catch {
+      // ネットワーク断も同様
+    }
+    if (attempt < HEAD_ATTEMPTS) {
+      await new Promise((r) => setTimeout(r, 300 * attempt));
+    }
   }
+  return "undetermined";
 }
 
 async function run() {
   const keys: string[] = [];
+  const undetermined: string[] = [];
   for (let i = 0; i < activeMetrics.length; i += CONCURRENCY) {
     const batch = activeMetrics.slice(i, i + CONCURRENCY);
-    const results = await Promise.all(batch.map(async (k) => ({ k, ok: await checkExists(k) })));
-    for (const { k, ok } of results) {
-      if (ok) keys.push(k);
+    const results = await Promise.all(
+      batch.map(async (k) => ({ k, presence: await checkExists(k) })),
+    );
+    for (const { k, presence } of results) {
+      if (presence === "present") keys.push(k);
+      else if (presence === "undetermined") undetermined.push(k);
     }
     process.stdout.write(`\r  ${Math.min(i + CONCURRENCY, activeMetrics.length)}/${activeMetrics.length}`);
   }
   console.log();
+
+  // 1 件でも判定不能が残ったら書かない。部分的な結果で上書きすると、
+  // 判定できなかったキーが黙って KNOWN から消える (= 本番 404)。
+  if (undetermined.length > 0) {
+    console.error(
+      `[generate-known-ranking-keys] ❌ ${undetermined.length} 件が判定不能のため書き込みを中止する\n` +
+        `  R2 への HEAD が ${HEAD_ATTEMPTS} 回とも失敗した (404 ではない = 一時障害の可能性)。\n` +
+        `  そのまま書くと生きているページが KNOWN から消えて 404 になる。\n` +
+        `  例: ${undetermined.slice(0, 10).join(", ")}`,
+    );
+    process.exit(1);
+  }
 
   keys.sort();
 

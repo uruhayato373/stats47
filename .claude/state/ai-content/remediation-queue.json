@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-08-16T21:17:35.181Z",
+  "generatedAt": "2026-08-17T20:25:31.033Z",
   "gscSnapshot": "2026-W33",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
-    "total": 2173,
+    "total": 2164,
     "done": 259,
-    "needsRegen": 1914,
+    "needsRegen": 1905,
     "needsByReason": {
-      "missing": 215,
-      "incomplete": 1635,
-      "blocker": 64
+      "missing": 223,
+      "incomplete": 1621,
+      "blocker": 61
     },
     "notEligible": 0,
     "notEligibleByCode": {},
-    "doneButUnhealthy": 1,
-    "doneImpressions": 34881,
-    "needsImpressions": 7948,
+    "doneButUnhealthy": 0,
+    "doneImpressions": 34667,
+    "needsImpressions": 8119,
     "opusReviewTier": 30
   },
   "entries": [
@@ -43,13 +43,7 @@
       "blockers": [],
       "warns": [],
       "lastModified": "Fri, 03 Jul 2026 22:49:26 GMT",
-      "updatedAt": null,
-      "dataBlockers": [
-        "duplicate-area",
-        "over-coverage"
-      ],
-      "dataReason": "同一県が複数行: 47 県 (例 13000×2, 27000×2, 14000×2) — 分類軸の絞り忘れ / 94 行 (都道府県は 47 しかない)",
-      "dataYear": "2025"
+      "updatedAt": null
     },
     {
       "rankingKey": "natto-consumption-expenditure",
@@ -473,12 +467,10 @@
       "impressions": 199,
       "clicks": 1,
       "position": 8.59,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "warns": [],
-      "lastModified": "Fri, 03 Jul 2026 22:49:28 GMT",
-      "updatedAt": null
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "treatment-rate-mental-disorder-inpatient",
@@ -620,12 +612,10 @@
       "impressions": 152,
       "clicks": 1,
       "position": 8.64,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "warns": [],
-      "lastModified": "Fri, 17 Jul 2026 01:18:12 GMT",
-      "updatedAt": "2026-07-16T20:19:08.178667Z"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "annual-sunshine-duration",
@@ -793,14 +783,10 @@
       "impressions": 111,
       "clicks": 0,
       "position": 7.42,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "warns": [
-        "pref-len"
-      ],
-      "lastModified": "Mon, 10 Aug 2026 14:03:52 GMT",
-      "updatedAt": "2026-08-10T11:45:00.000Z"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "real-disposable-income",
@@ -1022,10 +1008,14 @@
       "impressions": 93,
       "clicks": 5,
       "position": 10.57,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [
+        "length-short"
+      ],
+      "lastModified": "Sun, 16 Aug 2026 21:18:42 GMT",
+      "updatedAt": "2026-08-16T01:00:00.000Z"
     },
     {
       "rankingKey": "retail-sales-amount-by-prefecture",
@@ -1123,10 +1113,14 @@
       "impressions": 85,
       "clicks": 0,
       "position": 54.02,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [
+        "causal-insights"
+      ],
+      "lastModified": "Sun, 16 Aug 2026 21:18:42 GMT",
+      "updatedAt": "2026-08-16T01:00:00.000Z"
     },
     {
       "rankingKey": "per-capita-fixed-asset-tax-pref-municipal",
@@ -1211,12 +1205,10 @@
       "impressions": 76,
       "clicks": 0,
       "position": 7.47,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "warns": [],
-      "lastModified": "Fri, 03 Jul 2026 22:49:26 GMT",
-      "updatedAt": null
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "sports-spectating-consumption-expenditure",
@@ -1470,10 +1462,14 @@
       "impressions": 63,
       "clicks": 0,
       "position": 6.94,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [
+        "pref-len"
+      ],
+      "lastModified": "Sun, 16 Aug 2026 21:18:42 GMT",
+      "updatedAt": "2026-08-16T03:00:00.000Z"
     },
     {
       "rankingKey": "flavor-seasoning-consumption-expenditure",
@@ -1536,10 +1532,15 @@
       "impressions": 61,
       "clicks": 0,
       "position": 71.95,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Sun, 16 Aug 2026 21:18:42 GMT",
+      "updatedAt": "2026-08-16T02:00:00.000Z"
     },
     {
       "rankingKey": "fishery-species-catch-scallop",
@@ -1632,12 +1633,14 @@
       "impressions": 59,
       "clicks": 2,
       "position": 8.41,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Sun, 16 Aug 2026 21:18:42 GMT",
+      "updatedAt": "2026-08-16T02:00:00.000Z"
     },
     {
       "rankingKey": "vaccination-recipients-disease",
@@ -1860,11 +1863,8 @@
       "clicks": 0,
       "position": 6.4,
       "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ],
+      "reason": "missing",
+      "blockers": [],
       "reviewTier": "opus"
     },
     {
@@ -1903,10 +1903,8 @@
       "clicks": 4,
       "position": 6.08,
       "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
-      ],
+      "reason": "missing",
+      "blockers": [],
       "reviewTier": "opus"
     },
     {
@@ -2408,12 +2406,10 @@
       "impressions": 37,
       "clicks": 0,
       "position": 5.97,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "warns": [],
-      "lastModified": "Wed, 12 Aug 2026 21:21:55 GMT",
-      "updatedAt": "2026-08-12T00:00:00.000Z"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "pneumonia-death-count",
@@ -3014,12 +3010,8 @@
       "clicks": 1,
       "position": 7.7,
       "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
+      "reason": "missing",
+      "blockers": [],
       "reviewTier": "sonnet"
     },
     {
@@ -3464,18 +3456,6 @@
       "reviewTier": "sonnet"
     },
     {
-      "rankingKey": "construction-contract-total",
-      "impressions": 21,
-      "clicks": 0,
-      "position": 6.62,
-      "status": "needs-regen",
-      "reason": "blocker",
-      "blockers": [
-        "paren-number"
-      ],
-      "reviewTier": "sonnet"
-    },
-    {
       "rankingKey": "fishery-workers-coastal-offshore",
       "impressions": 21,
       "clicks": 0,
@@ -3483,6 +3463,9 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -4030,12 +4013,8 @@
       "clicks": 1,
       "position": 6.11,
       "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
+      "reason": "missing",
+      "blockers": [],
       "reviewTier": "sonnet"
     },
     {
@@ -4225,21 +4204,6 @@
       "rankingKey": "child-welfare-facility-count-per-100k",
       "impressions": 16,
       "clicks": 3,
-      "position": 5.94,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "sonnet"
-    },
-    {
-      "rankingKey": "construction-projects-total",
-      "impressions": 16,
-      "clicks": 0,
       "position": 5.94,
       "status": "needs-regen",
       "reason": "incomplete",
@@ -6269,6 +6233,9 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -7934,10 +7901,8 @@
       "clicks": 2,
       "position": 5.5,
       "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
-      ],
+      "reason": "missing",
+      "blockers": [],
       "reviewTier": "sonnet"
     },
     {
@@ -8290,11 +8255,8 @@
       "clicks": 0,
       "position": 4,
       "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ],
+      "reason": "missing",
+      "blockers": [],
       "reviewTier": "sonnet"
     },
     {
@@ -9291,7 +9253,10 @@
       "blockers": [],
       "warns": [],
       "lastModified": "Thu, 16 Jul 2026 12:23:50 GMT",
-      "updatedAt": "2026-07-16T11:30:20.613Z"
+      "updatedAt": "2026-07-16T11:30:20.613Z",
+      "dataWarns": [
+        "thin-coverage"
+      ]
     },
     {
       "rankingKey": "garden-plants-consumption-expenditure",
@@ -10216,6 +10181,9 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -10224,11 +10192,8 @@
       "clicks": 0,
       "position": 9.33,
       "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ],
+      "reason": "missing",
+      "blockers": [],
       "reviewTier": "sonnet"
     },
     {
@@ -10239,6 +10204,9 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -11422,21 +11390,6 @@
       "reviewTier": "sonnet"
     },
     {
-      "rankingKey": "construction-contract-river",
-      "impressions": 2,
-      "clicks": 0,
-      "position": 7.5,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "sonnet"
-    },
-    {
       "rankingKey": "consumer-price-difference-index-overall-excl-rent",
       "impressions": 2,
       "clicks": 0,
@@ -12006,18 +11959,6 @@
         "missing-insights",
         "paren-number",
         "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "sonnet"
-    },
-    {
-      "rankingKey": "noise-regulation-rate",
-      "impressions": 2,
-      "clicks": 0,
-      "position": 4,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
         "missing-pref-commentary"
       ],
       "reviewTier": "sonnet"
@@ -13239,33 +13180,6 @@
       "reviewTier": "sonnet"
     },
     {
-      "rankingKey": "construction-contract-port-airport",
-      "impressions": 1,
-      "clicks": 0,
-      "position": 2,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "sonnet"
-    },
-    {
-      "rankingKey": "construction-contract-road",
-      "impressions": 1,
-      "clicks": 0,
-      "position": 5,
-      "status": "needs-regen",
-      "reason": "blocker",
-      "blockers": [
-        "paren-number"
-      ],
-      "reviewTier": "sonnet"
-    },
-    {
       "rankingKey": "cooking-appliance-consumption-quantity",
       "impressions": 1,
       "clicks": 0,
@@ -13697,6 +13611,9 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -15031,6 +14948,9 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {
@@ -17834,48 +17754,6 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
-      ],
-      "reviewTier": "sonnet"
-    },
-    {
-      "rankingKey": "construction-contract-disaster-recovery",
-      "impressions": 0,
-      "clicks": 0,
-      "position": 0,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "sonnet"
-    },
-    {
-      "rankingKey": "construction-contract-housing",
-      "impressions": 0,
-      "clicks": 0,
-      "position": 0,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "sonnet"
-    },
-    {
-      "rankingKey": "construction-contract-sewerage",
-      "impressions": 0,
-      "clicks": 0,
-      "position": 0,
-      "status": "needs-regen",
-      "reason": "blocker",
-      "blockers": [
-        "paren-number"
       ],
       "reviewTier": "sonnet"
     },
@@ -26954,6 +26832,9 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "sonnet"
     },
     {

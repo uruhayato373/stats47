@@ -179,3 +179,46 @@ test('実データでキューが組める (0 件なら配線が壊れている)
     assert.notEqual(p.status, 'in-progress');
   }
 });
+
+test('status が pending でも本文がローカル端末依存なら needsOwner へ回る', () => {
+  const entries = [
+    entry('LOCAL-01', { status: 'pending', tier: '1' }, {
+      body: '- **前提**: 永続プロファイル `.local/playwright-a8-profile` に保持する。',
+    }),
+    entry('OK-01', { status: 'pending', tier: '1' }, {
+      body: '- **完了条件**: デプロイ後に本番 URL を Googlebot UA で実測する',
+    }),
+  ];
+  const { picked, needsOwner } = buildQueue({
+    entries,
+    ledger: emptyL(),
+    quarantined: new Set(),
+    policy: POLICY,
+    limit: 5,
+  });
+
+  assert.deepEqual(picked.map((p) => p.id), ['OK-01'], 'ローカル依存が拾われている');
+
+  const row = needsOwner.find((r) => r.id === 'LOCAL-01');
+  assert.ok(row, 'ローカル依存が needsOwner に出ない (握り潰されている)');
+  // 握り潰さず、何が引っかかったかを人に見せる
+  assert.deepEqual(row.localRuntimeSignals, ['playwright-profile']);
+  assert.match(row.reason, /blocked-local-runtime/);
+});
+
+test('既に blocked-* の場合は status 側の理由が優先される (二重報告しない)', () => {
+  const entries = [
+    entry('BOTH-01', { status: 'blocked-local-runtime', tier: '1' }, {
+      body: '- **前提**: 永続プロファイルが要る',
+    }),
+  ];
+  const { needsOwner } = buildQueue({
+    entries,
+    ledger: emptyL(),
+    quarantined: new Set(),
+    policy: POLICY,
+    limit: 5,
+  });
+  assert.equal(needsOwner.length, 1);
+  assert.match(needsOwner[0].reason, /owner\/外部待ち/);
+});

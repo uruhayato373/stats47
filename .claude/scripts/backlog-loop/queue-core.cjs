@@ -27,6 +27,8 @@ const EXTERNAL_BLOCKED = /^(blocked-|pending-(source-release|decision|browser-re
 /** 進行中は触らない (人 or 別 run が作業中) */
 const IN_PROGRESS = 'in-progress';
 
+const { localRuntimeSignals, localRuntimeReason } = require('./local-runtime-core.cjs');
+
 /**
  * status から機械的に決まる class を返す。決まらなければ null (モデルが分類する)。
  */
@@ -52,6 +54,18 @@ function eligibility(entry, { ledger, quarantined }) {
   const pre = preClassify(entry);
   if (pre === 'needs-owner') {
     return { eligible: false, reason: `owner/外部待ち (${status})`, class: 'needs-owner' };
+  }
+  // status が pending のままでも、本文がローカル端末依存を名指ししていれば CI では閉じられない。
+  // 拾わせると 3 回失敗 → quarantine で日次枠を燃やすだけなので、ここで needs-owner へ回す
+  // (ASP-CONTINUITY-01 / PERF-LOCAL-NAV-01 で実際に踏んだ。判定の根拠は local-runtime-core.cjs)。
+  const localSignals = localRuntimeSignals(entry.body);
+  if (localSignals.length > 0) {
+    return {
+      eligible: false,
+      reason: localRuntimeReason(localSignals),
+      class: 'needs-owner',
+      localRuntimeSignals: localSignals.map((s) => s.name),
+    };
   }
   if (quarantined.has(id)) {
     const q = ledger.items?.[id]?.quarantine;
@@ -139,6 +153,7 @@ function buildQueue({ entries, ledger, quarantined, policy, limit }) {
     const verdict = eligibility(entry, { ledger, quarantined });
     if (!verdict.eligible) {
       const row = { id: entry.id, title: entry.title, reason: verdict.reason, sourceFile: entry.sourceFile };
+      if (verdict.localRuntimeSignals) row.localRuntimeSignals = verdict.localRuntimeSignals;
       if (verdict.class === 'needs-owner') needsOwner.push(row);
       else skipped.push(row);
       continue;
