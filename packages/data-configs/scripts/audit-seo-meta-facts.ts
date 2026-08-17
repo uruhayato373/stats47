@@ -119,7 +119,9 @@ async function main(): Promise<void> {
         const config = queue.shift();
         if (!config) return;
         const text = `${config.seoTitle ?? ""} ${config.seoDescription ?? ""}`;
-        const claims = extractSeoClaims(text);
+        // unit を渡すのは「千」がスケール接頭辞か単位そのものかを判別させるため
+        // (`unit="千円"` の「13,326千円」を ×1000 しない)。
+        const claims = extractSeoClaims(text, config.unit);
         if (claims.ranks.length === 0 && claims.ratio === null && claims.years.length === 0) {
           noClaim++;
           continue;

@@ -36,6 +36,8 @@
  * 正典: `docs/todo/05_機能バックログ.md` の `SEO-META-FACTUAL-GATE-01`
  */
 
+import { isScalePrefixPartOfUnit, scalePrefixMultiplier } from "./unit/unit-semantics";
+
 /** 順位の主張 1 件 */
 export interface RankClaim {
   readonly role: "top" | "bottom";
@@ -74,6 +76,26 @@ function toNumber(raw: string): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
+/**
+ * 数値に添えられた桁の接頭辞 (`5,090億円` の「億」) を倍率に直す。
+ *
+ * **自前のスケール表を持たない** — 正典は `unit/unit-semantics.ts`
+ * (`.claude/rules/unit-semantics-standards.md` §3 の禁止事項)。
+ *
+ * 「千」がスケール接頭辞か単位そのものかは SSOT の unit でしか判別できない。
+ * `unit="千円"` に対する「13,326千円」を ×1000 すると全件不一致になる
+ * (2026-08-12 に地図照合で実際に起きた)。判別できない場合は倍率を掛けず
+ * `null` を返し、**呼び出し側に値の照合を諦めさせる** (誤検知を出すより見送る)。
+ */
+function scaleMultiplier(prefix: string | undefined, ssotUnit: string | null | undefined): number | null {
+  if (!prefix) return 1;
+  if (isScalePrefixPartOfUnit(prefix, ssotUnit)) return 1;
+  return scalePrefixMultiplier(prefix);
+}
+
+/** SCALE_PREFIX の語彙 (長い順)。正典の表に無い接頭辞は拾わない */
+const SCALE_TOKEN = "兆|千億|百億|十億|億|千万|百万|十万|万|千|百|十";
+
 /** 「北海道」と「北海」を同一視する (表記ゆれで誤検知しない) */
 function normalizeAreaName(name: string): string {
   return name.trim().replace(/[都道府県]$/, "");
@@ -95,24 +117,27 @@ function near(a: number, b: number, tol: number): boolean {
  */
 const AREA_NAME = /[一-鿿]{1,4}[都道府県]/;
 
-export function extractSeoClaims(text: string): SeoClaims {
+export function extractSeoClaims(text: string, ssotUnit?: string | null): SeoClaims {
   const s = String(text ?? "");
   const ranks: RankClaim[] = [];
   for (const m of s.matchAll(
     new RegExp(
-      `(1位|最下位)\\s*(?:は|が|の)?\\s*(${AREA_NAME.source})\\s*[（(]?\\s*([\\d,]+(?:\\.\\d+)?)?`,
+      `(1位|最下位)\\s*(?:は|が|の)?\\s*(${AREA_NAME.source})\\s*[（(]?\\s*([\\d,]+(?:\\.\\d+)?)?\\s*(${SCALE_TOKEN})?`,
       "g",
     ),
   )) {
     // 「47都道府県」等の総称は県ではない (数字は文字クラス外なので「都道府県」だけが残る)
     if (m[2] === "都道府県") continue;
+    const base = m[3] ? toNumber(m[3]) : null;
+    const mult = base === null ? null : scaleMultiplier(m[4], ssotUnit);
     ranks.push({
       role: m[1] === "1位" ? "top" : "bottom",
       areaName: m[2],
-      value: m[3] ? toNumber(m[3]) : null,
+      value: base === null || mult === null ? null : base * mult,
       raw: m[0].trim(),
     });
   }
+  // 倍率には桁の接頭辞を付けない (「1741.3倍」)。単位を持たない無次元量なので接頭辞を読まない
   const ratioMatch = s.match(/([\d,]+(?:\.\d+)?)\s*倍/);
   const years = [...new Set([...s.matchAll(/(\d{4})\s*年/g)].map((m) => Number(m[1])))];
   return {
