@@ -29,17 +29,29 @@ const ALLOWED_PATH_PATTERNS = [
   /^\.claude\/state\/backlog-loop\//,
   /^\.claude\/scripts\//,
   /^\.claude\/rules\//,
+  /^\.claude\/skills\//,
+  /^\.claude\/agents\//,
   /^\.claude\/config\//,
-  /^\.github\/workflows\//,
   /^packages\//,
   /^apps\//,
 ];
 
-/** 絶対に触らせないパス (許可パターンに一致しても弾く) */
+/**
+ * 絶対に触らせないパス (許可パターンに一致しても弾く)。
+ *
+ * ★`.github/` と routing policy を禁止に置くのは「ループが自分の権限と予算を広げられない」
+ * ようにするため。workflow を書き換えられると allowedTools・許可パス・timeout・モデルを
+ * 自分で緩められてしまい、ここでの全ての制約が意味を失う。policy も同じで、model と
+ * maxAttempts の SSOT なので自己昇格の口になる。どちらも人間の PR でだけ変える。
+ * workflow を直す種類のバックログ (式インジェクション是正など) はこの制約で failed になるが、
+ * それが正しい — 配信経路の workflow を無人で書き換えない。
+ */
 const FORBIDDEN_PATH_PATTERNS = [
   /^docs\/todo\/04_/, // improvement-triage の排他 write
   /^\.claude\/memory\//, // knowledge-curator の排他 write
   /^\.claude\/skills\/learned\//, // 同上
+  /^\.github\//, // ループが自分の権限を広げられないようにする
+  /^\.claude\/config\/backlog-routing-policy\.json$/, // 自分の model / 試行上限を上げさせない
   /^\.env/,
   /(^|\/)\.env/,
 ];

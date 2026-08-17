@@ -147,6 +147,26 @@ test('★排他 writer 契約のパスは弾く (04 / memory / learned)', () => 
   for (const v of r.violations) assert.match(v.reason, /禁止パス/);
 });
 
+test('★ループが自分の権限・予算を広げるパスは弾く (workflow / routing policy)', () => {
+  // ここを通すと allowedTools・許可パス・timeout・model を自分で緩められてしまい、
+  // 他の全ての制約が意味を失う。skills / agents は通してよい (learned だけ別途禁止)。
+  const r = verifyChangedPaths([
+    '.github/workflows/backlog-loop-daily.yml',
+    '.github/scripts/whatever.sh',
+    '.claude/config/backlog-routing-policy.json',
+  ]);
+  assert.equal(r.ok, false);
+  assert.equal(r.violations.length, 3);
+  for (const v of r.violations) assert.match(v.reason, /禁止パス/);
+
+  const allowed = verifyChangedPaths([
+    '.claude/config/psi-urls.txt', // routing policy 以外の config は通す
+    '.claude/skills/management/process-backlog/SKILL.md',
+    '.claude/agents/backlog-processor.md',
+  ]);
+  assert.equal(allowed.ok, true, JSON.stringify(allowed.violations));
+});
+
 test('★秘密ファイルと許可外パスは弾く', () => {
   const r = verifyChangedPaths(['.env.local', 'apps/web/.env', 'README.md', 'some/random/file.txt']);
   assert.equal(r.ok, false);

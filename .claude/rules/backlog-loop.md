@@ -96,8 +96,29 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 | `.env` 等の秘密 | 同上 + workflow の `disallowedTools` |
 | owner 待ちの自動処理 | `preClassify` が needs-owner へ固定 |
 | deploy / 本番 R2 push / force push | workflow の allowedTools に含めない |
+| **ループが自分の権限・予算を広げる** (`.github/` / routing policy への write) | verify の `FORBIDDEN_PATH_PATTERNS`。workflow を書き換えられると allowedTools・許可パス・timeout・モデルを自分で緩められ、他の全ての制約が意味を失う |
 | 暴走 (1 run で大量処理) | `policy.limits.maxItemsPerRun` |
 | 同じ案件の無限リトライ | quarantine (連続失敗 `quarantineThreshold` 回で除外・成功で即復帰) |
+| 検証前の push | workflow が verify → リポジトリゲート → push の順で、途中で落ちたら 1 バイトも push しない |
+
+---
+
+## 4.5 CI 日次ループ (`backlog-loop-daily.yml`)
+
+無人で回る本体。`.claude/prompts/ci/backlog-loop-routine.md` を sonnet に渡し、
+**verify → リポジトリゲート → push** の順で進む。どこかで落ちたら push しない
+(作業は次回へ繰り越す)。契約は `__tests__/backlog-loop-routine.test.cjs` が静的に固定し、
+各 assertion が自分の変異で発火することを実測してある。
+
+| 項目 | 値 | 理由 |
+|---|---|---|
+| 枠 | `30 16 * * *` (JST 01:30) | blog (14:00 UTC) と ai-content (18:00 UTC) は同じ Max 枠を共有するので実時間で重ねない |
+| 件数 | 2 (timeout 60 分) | 予算式 `(固定 15 + 件数 × 15) × 1.25 ≤ timeout`。**件数より枠で増やす** (ai-content が limit 10 で timeout に当たり 0 件になった実測がある) |
+| run 本体のモデル | sonnet 固定 | base-action の `--model` は run 全体に効く。難物だけ Agent tool で `model: fable` へ委譲する |
+| draft-pr class | この run では着手しない | `impl-large` / `indicator-expansion` は `skipped` で記録 (quarantine を増やさない) |
+
+cloud セッションは `actions:write` が無く dispatch できないため、
+`data/backlog-loop-requests.json` を develop へ push する経路も持つ (request は成否によらず消費する)。
 
 ---
 
