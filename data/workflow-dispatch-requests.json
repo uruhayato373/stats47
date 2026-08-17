@@ -1,0 +1,7 @@
+{
+  "workflow": "sync-snapshots.yml",
+  "inputs": { "only": "master" },
+  "ref": "develop",
+  "reason": "KSJ 県帰属の是正で原発・地熱の値が変わったが、app/category/energy/items.json と app/ranking-items/all.json が 2026-08-12 のまま。category ページが原発の 1 位を福島県 13か所 と出し続けている。あわせて退役済み 9 キー (construction-contract-* / noise-regulation-rate) が all.json に残っているのも解消する。ローカル実行は 2169 metric の R2 read で 10 分たっても進まなかったため CI へ回す。",
+  "requestedAt": "2026-08-17T05:20:00Z"
+}
