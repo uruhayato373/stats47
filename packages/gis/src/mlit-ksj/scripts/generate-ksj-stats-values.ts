@@ -60,6 +60,7 @@ interface Target {
   readonly yearCode: string;
   readonly filename?: string;
   readonly filenamePattern?: string;
+  readonly dedupeByProperties?: readonly string[];
 }
 
 function parseArgs(argv: readonly string[]) {
@@ -88,6 +89,7 @@ function collectTargets(only?: readonly string[]): Target[] {
         yearCode: rc.yearCode,
         filename: rc.filename,
         filenamePattern: rc.filenamePattern,
+        dedupeByProperties: rc.dedupeByProperties,
       });
     }
   }
@@ -232,10 +234,15 @@ async function main(): Promise<void> {
     }
 
     // 属性の宣言があってもポリゴンは常に渡す (欠測行だけ空間結合で埋める)
-    const result = countByPrefecture(features, { source, locator: getLocator() });
+    const result = countByPrefecture(features, {
+      source,
+      locator: getLocator(),
+      dedupeBy: t.dedupeByProperties,
+    });
 
     console.log(
-      `  feature ${features.length} 件 → 属性 ${result.resolvedByAttribute} / 空間結合 ${result.resolvedByPolygon} / 未解決 ${result.unresolved.length}`,
+      `  feature ${features.length} 件 → 属性 ${result.resolvedByAttribute} / 空間結合 ${result.resolvedByPolygon} / 未解決 ${result.unresolved.length}` +
+        (t.dedupeByProperties ? ` / 重複排除 ${result.deduped}` : ""),
     );
 
     if (result.unresolved.length > 0) {

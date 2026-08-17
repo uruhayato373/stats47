@@ -10,6 +10,12 @@ const feature = (addr: string | null, coord: [number, number] | null = null) => 
   coord,
 });
 
+/** P03 相当: 施設名 + 住所で身元が決まり、号機ごとに 1 レコード */
+const unit = (name: string, addr: string) => ({
+  properties: { name, addr },
+  coord: null,
+});
+
 describe("countByPrefecture", () => {
   it("47 県すべてを 0 で初期化してから数える", () => {
     const r = countByPrefecture([feature("福井県敦賀市神明町")], {
@@ -49,6 +55,60 @@ describe("countByPrefecture", () => {
     expect(r.resolvedByAttribute).toBe(1);
     expect(r.resolvedByPolygon).toBe(1);
     expect(r.unresolved).toHaveLength(1);
+  });
+});
+
+describe("countByPrefecture / 重複排除 (号機 → 施設)", () => {
+  const DEDUPE = ["name", "addr"] as const;
+
+  it("同じ施設の号機は 1 か所に畳む", () => {
+    const r = countByPrefecture(
+      [
+        unit("高浜原子力発電所", "福井県大飯郡高浜町田ノ浦1"),
+        unit("高浜原子力発電所", "福井県大飯郡高浜町田ノ浦1"),
+        unit("高浜原子力発電所", "福井県大飯郡高浜町田ノ浦1"),
+        unit("高浜原子力発電所", "福井県大飯郡高浜町田ノ浦1"),
+      ],
+      { source: ADDRESS_SOURCE, dedupeBy: DEDUPE },
+    );
+    expect(r.countsByPref.get("18")).toBe(1);
+    expect(r.deduped).toBe(3);
+  });
+
+  it("同名でも住所が違えば別施設として数える (青森の東通は 2 か所)", () => {
+    const r = countByPrefecture(
+      [
+        unit("東通原子力発電所", "青森県下北郡東通村大字白糠字前坂下34-4"),
+        unit("東通原子力発電所", "青森県下北郡東通村大字小田野沢"),
+      ],
+      { source: ADDRESS_SOURCE, dedupeBy: DEDUPE },
+    );
+    expect(r.countsByPref.get("02")).toBe(2);
+    expect(r.deduped).toBe(0);
+  });
+
+  it("身元を決められない feature は畳まず 1 件として数える (過少計上を作らない)", () => {
+    const r = countByPrefecture(
+      [
+        { properties: { name: "", addr: "福井県敦賀市神明町" }, coord: null },
+        { properties: { name: "", addr: "福井県敦賀市神明町" }, coord: null },
+      ],
+      { source: ADDRESS_SOURCE, dedupeBy: DEDUPE },
+    );
+    expect(r.countsByPref.get("18")).toBe(2);
+    expect(r.deduped).toBe(0);
+  });
+
+  it("dedupeBy 未指定なら feature 数をそのまま数える", () => {
+    const r = countByPrefecture(
+      [
+        unit("高浜原子力発電所", "福井県大飯郡高浜町田ノ浦1"),
+        unit("高浜原子力発電所", "福井県大飯郡高浜町田ノ浦1"),
+      ],
+      { source: ADDRESS_SOURCE },
+    );
+    expect(r.countsByPref.get("18")).toBe(2);
+    expect(r.deduped).toBe(0);
   });
 });
 

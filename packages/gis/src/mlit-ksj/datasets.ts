@@ -38,6 +38,21 @@ export interface GisDatasetRankingConfig {
   /** 4 桁年 (estat-api.md の year 正規化に準拠) */
   yearCode: string;
   description?: string;
+  /**
+   * 「1 件」を数える単位を feature ではなく、この属性群の組で決める (県内で重複排除)。
+   *
+   * KSJ には 1 施設が複数 feature に分かれるデータセットがある。P03 発電施設は
+   * **号機ごとに 1 レコード**で、原発は 68 レコード = 21 施設。`unit: "か所"` に
+   * 対して feature を数えると 3 倍以上に膨らみ、福井県が「15 か所」になってしまう
+   * (実際の発電所は高浜・大飯・美浜・敦賀の 4 か所)。
+   *
+   * **施設名だけでは足りない**。青森県の東通原子力発電所は東北電力と東京電力の
+   * 2 か所が同名で別住所にあり、名前だけで畳むと 1 か所に潰れる。名前 + 住所で持つ。
+   *
+   * 属性のいずれかが空の feature は畳まず 1 件として数える (身元を確認できないものを
+   * まとめると黙って過少計上になるため)。省略時は feature 数をそのまま数える。
+   */
+  dedupeByProperties?: readonly string[];
 }
 
 export interface GisDatasetMeta {
@@ -103,13 +118,14 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
     dataId: "P03", name: "発電施設", category: "facility", geometryType: "point", coverage: "national", license: "non-commercial",
     stats47Category: "energy", isRankingTarget: true, latestVersion: "13",
     rankingConfig: [
-      { rankingKey: "nuclear-power-plant-count", rankingName: "原子力発電所数", unit: "か所", categoryKey: "energy", filenamePattern: "NuclearPowerPlant", yearCode: "2013", description: "国土数値情報に登録されている原子力発電所の都道府県別数" },
-      { rankingKey: "thermal-power-plant-count", rankingName: "火力発電所数", unit: "か所", categoryKey: "energy", filenamePattern: "ThermalPowerPlant.topojson", yearCode: "2013" },
-      { rankingKey: "hydroelectric-power-plant-count", rankingName: "水力発電所数", unit: "か所", categoryKey: "energy", filenamePattern: "GeneralHydroelectric", yearCode: "2013" },
-      { rankingKey: "photovoltaic-power-plant-count", rankingName: "太陽光発電施設数", unit: "か所", categoryKey: "energy", filenamePattern: "Photovoltaic", yearCode: "2013" },
-      { rankingKey: "wind-power-plant-count-facility", rankingName: "風力発電施設数(施設ベース)", unit: "か所", categoryKey: "energy", filenamePattern: "WindPowerPlant", yearCode: "2013" },
-      { rankingKey: "geothermal-power-plant-count", rankingName: "地熱発電施設数", unit: "か所", categoryKey: "energy", filenamePattern: "Geothermal", yearCode: "2013" },
-      { rankingKey: "biomass-power-station-count", rankingName: "バイオマス発電施設数", unit: "か所", categoryKey: "energy", filenamePattern: "Biomass", yearCode: "2013" },
+      // P03 は号機ごとに 1 レコードなので、施設名 + 住所で畳んで「か所」にする
+      { rankingKey: "nuclear-power-plant-count", rankingName: "原子力発電所数", unit: "か所", categoryKey: "energy", filenamePattern: "NuclearPowerPlant", yearCode: "2013", description: "国土数値情報に登録されている原子力発電所の都道府県別数", dedupeByProperties: ["P03_0002", "P03_0003"] },
+      { rankingKey: "thermal-power-plant-count", rankingName: "火力発電所数", unit: "か所", categoryKey: "energy", filenamePattern: "ThermalPowerPlant.topojson", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
+      { rankingKey: "hydroelectric-power-plant-count", rankingName: "水力発電所数", unit: "か所", categoryKey: "energy", filenamePattern: "GeneralHydroelectric", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
+      { rankingKey: "photovoltaic-power-plant-count", rankingName: "太陽光発電施設数", unit: "か所", categoryKey: "energy", filenamePattern: "Photovoltaic", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
+      { rankingKey: "wind-power-plant-count-facility", rankingName: "風力発電施設数(施設ベース)", unit: "か所", categoryKey: "energy", filenamePattern: "WindPowerPlant", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
+      { rankingKey: "geothermal-power-plant-count", rankingName: "地熱発電施設数", unit: "か所", categoryKey: "energy", filenamePattern: "Geothermal", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
+      { rankingKey: "biomass-power-station-count", rankingName: "バイオマス発電施設数", unit: "か所", categoryKey: "energy", filenamePattern: "Biomass", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
     ],
   },
   { dataId: "P04", name: "医療機関", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "socialsecurity", isRankingTarget: false },
