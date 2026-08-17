@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-17T13:21:10.052Z",
+  "updatedAt": "2026-08-17T13:25:55.958Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -272,6 +272,41 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-17T13:21:10.052Z"
+    },
+    "RANKING-DUPLICATE-PATIENT-SURVEY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T13:25:55.958Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run apps/web/src/config/__tests__/ranking-key-consistency.test.ts",
+              "npx vitest run apps/web/src/__tests__/middleware.test.ts apps/web/src/config/__tests__/internal-link-lint-keysets.test.ts",
+              "npx tsc --noEmit -p packages/ranking/tsconfig.json"
+            ],
+            "pass": true
+          },
+          "evidence": "完了条件「1 本だけ isActive」は config 上すでに満たされていた (inpatient-rate-per-100k のみ true) が、本番は両方 200 で実タイトルを返し重複コンテンツのままだった (R2 item.json が残存。isActive:false ≠ 本番非公開)。制約の 410 連動として GONE_RANKING_KEYS に 2 件追加。consistency test 11 件・middleware 6 件・keysets 5 件・tsc すべて green。410 の実効はデプロイ後。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T13:25:55.958Z"
     }
   }
 }
