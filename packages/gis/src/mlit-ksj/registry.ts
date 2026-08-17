@@ -236,6 +236,8 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
     geojsonDirInZip: "",
     propertyMap: {},
     simplifyOptions: { quantize: 1000000, simplifyQuantile: 0 },
+    // P03_0003 は「福井県大飯郡高浜町田ノ浦1」形式の住所。全 10 レイヤで欠落なし。
+    prefectureSource: { kind: "address", field: "P03_0003" },
   }],
   ["P35", {
     dataId: "P35",

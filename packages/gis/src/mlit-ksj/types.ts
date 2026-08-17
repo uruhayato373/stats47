@@ -2,6 +2,8 @@
  * 国土数値情報（MLIT KSJ）データセット型定義
  */
 
+import type { PrefectureSource } from "./prefecture-assign";
+
 export type KsjGeometryType = "point" | "line" | "polygon" | "mesh" | "mixed";
 export type KsjCoverage = "national" | "prefecture" | "mesh" | "region";
 export type KsjLicense =
@@ -39,6 +41,18 @@ export interface KsjCodeConfig {
   propertyMap: Record<string, string>;
   /** 簡略化パラメータ。省略時は geometryType から派生 */
   simplifyOptions?: KsjSimplifyOptions;
+  /**
+   * feature を都道府県へ帰属させるとき、どの属性を見るか。
+   *
+   * KSJ の多くは住所・県名・行政区域コードを持つので、一次資料の答えをそのまま使える。
+   * 宣言が無いデータセットは県ポリゴンへの空間結合にフォールバックする。
+   *
+   * **全プロパティの走査はしない** — 実データに罠がある (P12 観光資源の `P12_001` は
+   * 資源 ID だが 5 桁なので、市区町村コードとして読むと別の県に化ける)。
+   *
+   * 正典: `prefecture-assign.ts`
+   */
+  prefectureSource?: PrefectureSource;
 }
 
 /**
