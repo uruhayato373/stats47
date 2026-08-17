@@ -92,6 +92,13 @@ jobs:
         run: npm run test:content-routines
         continue-on-error: false
 
+      - name: 🗂️ Backlog Loop Contract Gate
+        # バックログの行削除は「機械 gate を通した証拠が ledger にあること」が必要条件。
+        # 宣言だけの完了・排他 writer (04 / memory / learned) への write・
+        # blocked-owner の自動処理を、パーサ / キュー / 台帳 / verify の 4 層で不能にする。
+        run: npm run test:backlog-loop
+        continue-on-error: false
+
       - name: 🖼️ Image Generation Pipeline Contract Gate
         # planner/manifest/exact publisher/renderer hash と workflow policy の契約を
         # ネットワークや本番R2に依存せず検証する。公開R2の鮮度監査は週次・post-deploy が担当する。

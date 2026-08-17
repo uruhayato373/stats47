@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-17",
+  "updatedBy": "initial",
+  "_doc": "class → 使うモデル・effort・試行上限・委譲形態の SSOT。backlog-loop が読む。数値はここだけに置き、スクリプト側にリテラルを書かない (書けば SSOT が二重化する)。週次の update-routing-policy.mjs が実測ガードを通ったときだけ書き換える。正典: .claude/rules/backlog-loop.md",
+  "classes": {
+    "mechanical-gate": {
+      "model": "sonnet",
+      "effort": "high",
+      "maxAttempts": 2,
+      "delegate": "inline",
+      "apply": "direct-push",
+      "_doc": "checker/lint/テストを足して再発防止し閉じる。red-green 証拠が gate"
+    },
+    "test-fix": {
+      "model": "sonnet",
+      "effort": "high",
+      "maxAttempts": 2,
+      "delegate": "inline",
+      "apply": "direct-push",
+      "_doc": "再現テストを先に red にしてから直す"
+    },
+    "misconception-close": {
+      "model": "sonnet",
+      "effort": "high",
+      "maxAttempts": 1,
+      "delegate": "inline",
+      "apply": "direct-push",
+      "_doc": "勘違い。再現手順の実行ログ + コード読解の理由説明の 2 証拠が揃ったときだけ削除"
+    },
+    "impl-small": {
+      "model": "sonnet",
+      "effort": "high",
+      "maxAttempts": 2,
+      "delegate": "inline",
+      "apply": "direct-push"
+    },
+    "impl-large": {
+      "model": "fable",
+      "effort": "high",
+      "maxAttempts": 1,
+      "delegate": "agent:backlog-solver-hard",
+      "apply": "draft-pr",
+      "_doc": "run 本体は sonnet なので Agent tool の model override で fable subagent に委譲する"
+    },
+    "inbox-triage": {
+      "model": "sonnet",
+      "effort": "medium",
+      "maxAttempts": 1,
+      "delegate": "inline",
+      "apply": "direct-push",
+      "_doc": "01 受信箱の 1 行を種別確定して該当バックログへ転記する"
+    },
+    "indicator-expansion": {
+      "model": "sonnet",
+      "effort": "high",
+      "maxAttempts": 1,
+      "delegate": "agent:backlog-solver-hard",
+      "apply": "draft-pr",
+      "_doc": "06 由来。e-Stat 実在検証 → config 生成 → validate green まで。投入は data-ingester へ委譲"
+    },
+    "stale": {
+      "model": "none",
+      "effort": "none",
+      "maxAttempts": 1,
+      "delegate": "deterministic",
+      "apply": "direct-push",
+      "_doc": "運用ガイドの削除条件に機械的に該当。モデルを使わない"
+    },
+    "needs-owner": {
+      "model": "none",
+      "effort": "none",
+      "maxAttempts": 0,
+      "delegate": "none",
+      "apply": "surface-only",
+      "_doc": "blocked-owner-* 等。削除も status 変更も不可。週次 Issue へ出すだけ"
+    }
+  },
+  "escalation": ["sonnet", "fable", "needs-owner"],
+  "guards": {
+    "minSamples": 8,
+    "windowDays": 28,
+    "demoteIfSuccessRate": 0.85,
+    "promoteIfSuccessRate": 0.5,
+    "_doc": "標本が minSamples 未満なら policy を変えない (effect-verdict の『判定不能は pending に留める』と同じ思想)。成功率が demote 以上なら 1 段安いモデルへ、promote 未満なら 1 段上へ"
+  },
+  "limits": {
+    "itemsPerRun": 2,
+    "maxItemsPerRun": 6,
+    "quarantineThreshold": 3,
+    "_doc": "itemsPerRun は日次の既定。実測で伸ばす。quarantineThreshold は連続失敗で queue から外す回数 (PASS で即復帰)"
+  }
+}

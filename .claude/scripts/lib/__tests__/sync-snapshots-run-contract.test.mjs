@@ -118,16 +118,19 @@ test("--dry-run では R2 push を呼ばない", () => {
 });
 
 test("sync job の timeout は末尾 push を含む実測所要時間を上回る", () => {
-  // 2026-08-17 実測 (run 32006827498): 生成 30 分 + push 21 分 (14,033 件 / 11.2 files/s) = 約 52 分。
-  // 45 分だと push が 9,416/14,033 で cancel され、書けた snapshot の 1/3 が届かないまま破棄される。
-  // run.sh 側の「失敗しても push する」修正では、この打ち切られ方は救えない。
+  // 2026-08-17 実測 (完走した run 32020891418): 生成 33m07s + push 24m44s
+  // (14,033 件 / 9.45 files/s) = sync job 全体 58m01s。
+  // 45 分だと push が 9,416/14,033 で cancel され (run 32006827498)、書けた snapshot の
+  // 1/3 が届かないまま破棄される。run.sh 側の「失敗しても push する」修正では、
+  // push 自体が殺されるのでこの打ち切られ方は救えない。
+  // 床を 90 にしてあるのは 58 分に安全率を掛けても収まるため (58 × 1.25 = 72.5)。
   const yml = fs.readFileSync(path.join(ROOT, ".github/workflows/sync-snapshots.yml"), "utf8");
   const syncJob = yml.split(/^  sync-ranking-keys:/m)[0].split(/^  sync:/m)[1] ?? "";
   const m = syncJob.match(/^\s*timeout-minutes:\s*(\d+)/m);
   assert.ok(m, "sync job の timeout-minutes が読めない");
   assert.ok(
     Number(m[1]) >= 90,
-    `sync job の timeout-minutes=${m[1]} は実測 52 分に対して余裕が無い (90 分以上にすること)`,
+    `sync job の timeout-minutes=${m[1]} は実測 58 分に対して余裕が無い (90 分以上にすること)`,
   );
 });
 
