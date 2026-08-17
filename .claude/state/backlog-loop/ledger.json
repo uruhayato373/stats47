@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-17T12:57:40.899Z",
+  "updatedAt": "2026-08-17T13:28:15.948Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -235,6 +235,114 @@
       },
       "reclassifiedFrom": [],
       "completedAt": null
+    },
+    "DATA-REFRESH-HEALTH-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T13:21:10.052Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "mcp github get_job_logs run=30979118359 job=92219544863",
+              "mcp github issue_read #670",
+              "grep -nE 'name:|if:' .github/workflows/data-refresh.yml"
+            ],
+            "pass": true
+          },
+          "evidence": "原因を実測で特定した。「単発の外部要因」ではない。2026-08-05 は page-data-batch が ok=2148 で取り込み成功しながら、末尾のゼロ件ゲート (empty 37 件) で exit 1 し、Push observations to R2 step が always() を持たないため skip され 2,148 件が push されていない。2026-07-05 は別原因 (correlation の JS ヒープ OOM 4,051MB・heap 8GB へ引き上げ済)。是正は DATA-REFRESH-ZEROGATE-",
+          "failReason": null,
+          "followUps": [
+            "DATA-REFRESH-ZEROGATE-ALLORNOTHING-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T13:21:10.052Z"
+    },
+    "RANKING-DUPLICATE-PATIENT-SURVEY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T13:25:55.958Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run apps/web/src/config/__tests__/ranking-key-consistency.test.ts",
+              "npx vitest run apps/web/src/__tests__/middleware.test.ts apps/web/src/config/__tests__/internal-link-lint-keysets.test.ts",
+              "npx tsc --noEmit -p packages/ranking/tsconfig.json"
+            ],
+            "pass": true
+          },
+          "evidence": "完了条件「1 本だけ isActive」は config 上すでに満たされていた (inpatient-rate-per-100k のみ true) が、本番は両方 200 で実タイトルを返し重複コンテンツのままだった (R2 item.json が残存。isActive:false ≠ 本番非公開)。制約の 410 連動として GONE_RANKING_KEYS に 2 件追加。consistency test 11 件・middleware 6 件・keysets 5 件・tsc すべて green。410 の実効はデプロイ後。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T13:25:55.958Z"
+    },
+    "SCRIPT-ORPHAN-TRIAGE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T13:28:15.948Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "完了条件の第2枝「残るものが『なぜ残すか』を添えて記録されている」を満たした。実測は 20 本ではなく 29 本で、全件を (a) 役目終了 6 / (b) 生きた backlog に紐づく 13 / (c) 用途不明 10 に分類し理由を記録。restore-*-from-svg は名前に反して逆復元せず SSOT 再生成の照合にのみ SVG を使う (規約適合) ことをコード実読で確認。残る削除可否はオーナー判断なので SCRIPT-ORPHAN-DELETE-01 (blocked-owner-decision) へ切り出した。",
+          "failReason": null,
+          "followUps": [
+            "SCRIPT-ORPHAN-DELETE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T13:28:15.948Z"
     }
   }
 }

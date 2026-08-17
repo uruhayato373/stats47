@@ -49,6 +49,11 @@
  *     走査しても該当なし。
  *   代替候補 (建設は「元請完成工事高」= 業種別 × 都道府県別の別軸) は概念が変わるため
  *   docs/todo/06_指標バックログ.md へ記録し、採否は別途判断する）
+ * 更新日: 2026-08-17（RANKING-DUPLICATE-PATIENT-SURVEY-01。患者調査 0004026104/0004026105 系の
+ *   patient-receiving-rate-by-age / patient-receiving-rate-by-disease を退役。どちらも総数を指すため
+ *   inpatient-rate-per-100k と同一値 (2023 高知 1,785 / 神奈川 665) で重複コンテンツだった。
+ *   config は既に isActive:false だが R2 item.json が残っており本番は 200 で実タイトルを返していた
+ *   (isActive:false ≠ 本番非公開)。生存キーは inpatient-rate-per-100k）
  */
 export const GONE_RANKING_KEYS = new Set([
   // 2026-08-16 退役 (e-Stat 側で統計表が廃止・後継なし)
@@ -61,6 +66,8 @@ export const GONE_RANKING_KEYS = new Set([
   "construction-contract-disaster-recovery",
   "construction-projects-total",
   "noise-regulation-rate",
+  "patient-receiving-rate-by-age",
+  "patient-receiving-rate-by-disease",
   "ssdse-c-lb072003",
   "ssdse-c-lb080011",
   "ssdse-c-lb121202",
