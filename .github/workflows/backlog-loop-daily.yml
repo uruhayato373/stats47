@@ -1,0 +1,320 @@
+name: 🗂️ Backlog Loop Daily (バックログ処理 + 行削除)
+
+# docs/todo のバックログを日次で消化するループ。
+#
+#   1. 05 / 01 / 06 をパースしてキューを再構築し、上位 N 件を選ぶ
+#   2. Claude Code Base Action (OAuth / sonnet) が分類して処理し、gate を実行して台帳へ記録する
+#   3. 「行削除 ⇔ ledger の gate.pass=true」を決定的に突合する (verify-backlog-run.mjs)
+#   4. リポジトリの静的ゲートを通してから develop へ push する
+#
+# ★このループの核心は「宣言だけの完了を構造的に不能にする」こと。
+#   バックログの行が消えているのに ledger に gate 証拠が無ければ verify が run ごと落とす。
+#   モデルが「直しました」と言うだけでは行を消せない。
+#
+# ★触れる範囲は verify-core.cjs の許可/禁止パスが持つ (SSOT はコード側で、ここに複製しない)。
+#   特に `.github/` と routing policy は禁止にしてある — 触れると allowedTools・timeout・
+#   モデル・許可パスを自分で緩められてしまい、ここでの制約が全部意味を失うため。
+#   workflow 是正が要るバックログはこの制約で失敗するが、それが正しい (無人で配信経路を書き換えない)。
+#
+# ★件数と枠 (2026-08-17 新設時点)
+#   limit 2 / timeout 60 分。1 件あたりの実測がまだ無いので ai-content の実績
+#   (固定費 15 分 + 1 件 12 分) を暫定的に当てている。予算式は
+#   (15 + 2 × 15) × 1.25 = 56 ≤ 60。実測が取れたら見直す。**件数で増やす前にスロットで増やす**
+#   (ai-content が limit 10 で timeout に当たって 0 件になった実測がある)。
+#   枠は JST 01:30 = 16:30 UTC。blog (14:00 UTC + 120 分) の後、ai-content (18:00 UTC) の前。
+#   3 つは同じ Pro / Max の利用枠を共有するので実時間で重ねない。
+#
+# ★impl-large / indicator-expansion はこの run では着手しない (draft PR が要る)。
+#   prompt が skipped として記録する。skipped は quarantine を増やさないので、
+#   繰り返しても罰されず、attempts が増える分だけキューの後ろへ下がる。
+
+on:
+  schedule:
+    - cron: "30 16 * * *" # JST 01:30
+  # push トリガー (cloud 用): cloud セッションは actions:write が無く dispatch できない (403)。
+  # data/backlog-loop-requests.json を develop へ commit すると実行し、request を消費する。
+  #   { "limit": 2 }
+  push:
+    branches: [develop]
+    paths: ["data/backlog-loop-requests.json"]
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "処理件数 (既定 2)"
+        required: false
+        default: "2"
+      dry_run:
+        description: "true: LLM を呼ばずキューだけ出す"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: backlog-loop
+  cancel-in-progress: false
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      LIMIT: ${{ inputs.limit || '2' }}
+      DRY_RUN: ${{ inputs.dry_run || 'false' }}
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 2
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # verify の基準になる SHA をここで確定する。Claude が触る前の状態と突合するため、
+      # 必ず生成の前に取る (後で取ると自分の変更を基準にしてしまい何も検出できない)。
+      - name: 📊 Build queue and pick targets
+        id: pick
+        run: |
+          set -euo pipefail
+          mkdir -p .local/ci
+          echo "base=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          if [ -s data/backlog-loop-requests.json ]; then
+            REQ_LIMIT=$(node -e 'const r=require("./data/backlog-loop-requests.json");process.stdout.write(String(r.limit??""))' || true)
+            if [ -n "$REQ_LIMIT" ]; then LIMIT="$REQ_LIMIT"; fi
+          fi
+          node .claude/scripts/backlog-loop/build-backlog-queue.mjs --limit "${LIMIT}" --json \
+            > .local/ci/backlog-queue.json
+          IDS=$(node -e '
+            const q = require("./.local/ci/backlog-queue.json");
+            const ids = (q.picked ?? []).map((p) => p.id);
+            for (const id of ids) {
+              if (!/^[A-Z0-9]+(?:-[A-Z0-9]+)+$/.test(id)) throw new Error("不正な ID: " + id);
+            }
+            process.stdout.write(ids.join(","));
+          ')
+          COUNT=$(node -e 'const q=require("./.local/ci/backlog-queue.json");process.stdout.write(String((q.picked??[]).length))')
+          echo "ids=$IDS" >> "$GITHUB_OUTPUT"
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "対象 ${COUNT} 件: ${IDS:-なし}"
+
+      - name: 🔐 Require Claude Code OAuth token
+        if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          if [ -z "${CLAUDE_CODE_OAUTH_TOKEN}" ]; then
+            echo "::error::CLAUDE_CODE_OAUTH_TOKEN が未登録です。claude setup-token で発行し Repository Secret へ登録してください"
+            exit 1
+          fi
+
+      # ★run 本体は sonnet 固定。base-action の --model は run 全体に効くので、難物だけ
+      #   上位モデルにしたい場合は Agent tool で model: fable の subagent へ委譲する
+      #   (正典: .claude/rules/model-prompting.md / .claude/rules/backlog-loop.md)。
+      # ★Bash の許可パターンは「末尾 * のプレフィックス一致」しか効かない。途中に * を置くと
+      #   実コマンドに一致せず Bash が 1 つも通らない = gate を 1 つも実行できないまま空振りする
+      #   (ai-content が 2 晩連続でこれを踏んだ)。引数まで書かず末尾 * に畳む。
+      - name: 🛠️ Process backlog entries with Claude Code
+        id: claude
+        if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
+        uses: anthropics/claude-code-base-action@e5758aabe98b80fec1bcbd4a51fe2e1f8935dfc3 # Claude Code v2.1.220 (base-action main 2026-08-02)
+        env:
+          NODE_VERSION: "20.x"
+        with:
+          prompt_file: .claude/prompts/ci/backlog-loop-routine.md
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          show_full_output: "false"
+          settings: |
+            {
+              "disableAllHooks": true
+            }
+          claude_args: |
+            --model sonnet
+            --effort high
+            --max-turns 300
+            --no-session-persistence
+            --setting-sources project
+            --permission-mode dontAsk
+            --tools "Read,Write,Edit,Glob,Grep,Agent,Skill,Bash"
+            --allowedTools "Read,Write,Edit,Glob,Grep,Agent,Skill,Bash(node .claude/scripts/backlog-loop/record-backlog-outcome.mjs *),Bash(node --test *),Bash(npx vitest run *),Bash(npm run *),Bash(node .claude/scripts/*),Bash(npx tsx *)"
+            --disallowedTools "WebFetch,WebSearch,Bash(git push*),Bash(gh *),Bash(env *),Bash(printenv *),Read(.env*),Read(**/.env*)"
+            --strict-mcp-config
+            --mcp-config '{"mcpServers":{}}'
+
+      - name: 🩺 Summarize Claude execution
+        if: ${{ always() && steps.claude.outcome != 'skipped' }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
+          mkdir -p .local/ci
+          node .claude/scripts/lib/summarize-claude-execution.mjs "$FILE" > .local/ci/claude-diagnosis.txt 2>&1 || true
+          {
+            echo "### Claude 実行サマリ"
+            echo '```'
+            cat .local/ci/claude-diagnosis.txt
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # ★verify がこのループの安全装置そのもの。行削除の裏付け・許可外パス・削除し忘れを
+      #   まとめて突合する。ここが通らなければ 1 バイトも push しない。
+      - name: ✅ Verify removals against the ledger
+        id: verify
+        if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          set -euo pipefail
+          if [ ! -s "$CLAUDE_EXECUTION_FILE" ]; then
+            echo "::error::Claude execution log が無く、処理の実行を証明できません"
+            exit 1
+          fi
+          node .claude/scripts/backlog-loop/verify-backlog-run.mjs \
+            --base "${{ steps.pick.outputs.base }}" \
+            --queued "${{ steps.pick.outputs.ids }}"
+          CLOSED=$(git -c core.quotepath=false diff --stat "${{ steps.pick.outputs.base }}" -- docs/todo | wc -l)
+          echo "closed=$CLOSED" >> "$GITHUB_OUTPUT"
+
+      # ★push する前にリポジトリ側のゲートを通す。バックログ処理は checker / test / 実装に
+      #   触るので、壊れたものを develop に積むと develop→main の PR まで気づけない。
+      #   ここで落ちたら push しない (作業は次回へ繰り越す)。
+      - name: 🧪 Run repository gates before pushing
+        if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
+        run: |
+          set -euo pipefail
+          npm run docs:check
+          npm run test:backlog-loop
+          node .claude/scripts/lib/check-agent-skill-consistency.cjs
+          node .claude/scripts/lib/check-checker-wiring.cjs --baseline
+          node .claude/scripts/lib/check-repo-hygiene.cjs --baseline
+          npm run type-check
+
+      - name: 📦 Commit and push
+        id: commit
+        if: ${{ env.DRY_RUN != 'true' }}
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "push" ]; then
+            git rm -q --ignore-unmatch data/backlog-loop-requests.json || true
+          fi
+          git add -- docs/todo .claude/state/backlog-loop .claude/scripts .claude/rules \
+            .claude/skills .claude/agents packages apps || true
+          if git diff --cached --quiet; then
+            echo "変更なし (処理対象 ${{ steps.pick.outputs.count }} 件・すべて skipped か failed)"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "chore(backlog): daily backlog loop (対象 ${{ steps.pick.outputs.count }} 件)"
+          for i in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ pushed"
+              exit 0
+            fi
+            echo "push retry $i"; sleep 5
+          done
+          echo "::error::develop への push に 3 回失敗した"
+          exit 1
+
+      - name: 📊 Record token usage
+        if: ${{ always() && steps.claude.outcome != 'skipped' }}
+        continue-on-error: true
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
+          node .claude/scripts/lib/record-claude-usage.mjs "$FILE" \
+            --workflow backlog-loop \
+            --run-id "${{ github.run_id }}" \
+            --limit "${LIMIT}" \
+            --items "${{ steps.pick.outputs.count || '0' }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/claude-usage || true
+          if git diff --cached --quiet; then echo "記録する変更なし"; exit 0; fi
+          git commit -q -m "chore(metrics): record Claude token usage [skip ci]"
+          git stash push --include-untracked --quiet || true
+          for _ in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ トークン実績を記録した"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::トークン実績の push に失敗した (計測のみ・本体には影響しない)"
+          exit 1
+
+      - name: 🚨 Upsert failure issue
+        if: ${{ failure() && env.DRY_RUN != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE="🚨 Backlog loop failed"
+          DIAG="(診断なし: Claude step まで到達していないか、execution log を読めなかった)"
+          if [ -s .local/ci/claude-diagnosis.txt ]; then DIAG=$(cat .local/ci/claude-diagnosis.txt); fi
+          BODY="日次バックログ処理が失敗しました。verify (行削除の裏付け / 許可外パス)、
+          リポジトリゲート、push のいずれかです。
+
+          Run: ${RUN_URL}
+          Target: ${{ steps.pick.outputs.ids || 'unknown' }}
+
+          <details><summary>Claude 実行の診断</summary>
+
+          \`\`\`
+          ${DIAG}
+          \`\`\`
+
+          </details>"
+          NUMBER=$(gh issue list --search "$TITLE in:title" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$NUMBER" ]; then
+            gh issue edit "$NUMBER" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY" --label auto-generated
+          fi
+
+      - name: 🧹 Close resolved issue
+        if: ${{ success() && env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          NUMBER=$(gh issue list --search "🚨 Backlog loop failed in:title" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$NUMBER" ]; then gh issue close "$NUMBER" --reason completed; fi
+
+      - name: 📝 Summary
+        if: always()
+        run: |
+          {
+            echo "### backlog-loop"
+            echo "- 対象: ${{ steps.pick.outputs.count || '0' }} 件 (${{ steps.pick.outputs.ids || 'なし' }})"
+            echo "- verify: ${{ steps.verify.outcome || 'skipped' }}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # request は結果によらず必ず消費する。失敗した run が残すと、同内容の再 push では
+      # paths フィルタに diff が出ず再実行できなくなる (ai-content / blog と同じ理由)。
+      - name: 🧹 Consume request (未消費なら)
+        if: ${{ always() && github.event_name == 'push' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q --ignore-unmatch data/backlog-loop-requests.json || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -q -m "chore(backlog): consume loop request [skip ci]"
+          git stash push --include-untracked --quiet || true
+          for i in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ request を消費した"
+              exit 0
+            fi
+            echo "consume retry $i"; sleep 5
+          done
+          echo "::error::request の消費に失敗した (同内容の再 push が発火しなくなる)"
+          exit 1

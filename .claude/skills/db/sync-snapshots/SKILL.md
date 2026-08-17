@@ -99,16 +99,26 @@ CI 配線は `npm run test:workflow-commit-back`。
 ### timeout は 120 分 (★2026-08-17 変更・45 分では完走しない)
 
 同じ「成果を落とす」型がもう 1 つあった。sync job は `timeout-minutes: 45` だったが、
-フル run の実測は **生成 30 分 + 末尾 push 21 分 = 約 52 分**で、構造的に完走できなかった。
+フル run はそれより長くかかるので**構造的に完走できなかった**。
 run 32006827498 では push が `Progress: 9,416 / 14,033 (errors: 0)` で cancel され、
 **書けた snapshot の 1/3 が届かないまま** runner ごと破棄されている
 (検証・purge step と `sync-ranking-keys` job も丸ごと skip)。
 **この打ち切られ方は上の run.sh 修正では救えない** — push 自体が殺されるため。
 
+**所要時間 (完走した run 32020891418 の実測・2026-08-17)**:
+
+| 区間 | 実測 |
+|---|---|
+| 生成 (全 task) | **33m07s** |
+| 末尾 push | **24m44s** (14,033 件 = 9.45 files/s) |
+| sync job 全体 | **58m01s** |
+
+打ち切られた run から外挿していた旧値 (生成 30 分 + push 21 分 = 52 分 / 11.2 files/s) より
+実際は遅い。**見積りは完走 run のこの値を使う。**
+
 **「差分 push」という名前だが CI ではフル push になる。** manifest (`.local/r2-manifest/`) は
-runner ローカルなので毎回空 (`マニフェスト記録済み: 0`) で、アップロード対象は常に全件
-(14,033 件・実測 11.2 files/s)。所要時間を見積もるときはこれを前提にする。
-manifest を持ち越して push 件数を減らす案は未着手 (`SYNC-SNAPSHOTS-ALLORNOTHING-01`)。
+runner ローカルなので毎回空 (`マニフェスト記録済み: 0`) で、アップロード対象は常に全件になる。
+manifest を持ち越して push 件数を減らす案は未着手 (`SYNC-SNAPSHOTS-MANIFEST-CARRY-01`)。
 
 ## 使い方 (ローカル = 生成のみ / push は CI)
 

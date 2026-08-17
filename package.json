@@ -39,6 +39,7 @@
     "state:snapshots:prune": "node .claude/scripts/lib/prune-state-snapshots.mjs",
     "test:alert-lifecycle": "node --test .claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs .claude/scripts/lib/__tests__/prune-state-snapshots.test.mjs",
     "test:workflow-commit-back": "node --test .claude/scripts/lib/__tests__/workflow-commit-back.test.cjs .claude/scripts/lib/__tests__/sync-snapshots-run-contract.test.mjs",
+    "test:backlog-loop": "node --test .claude/scripts/backlog-loop/__tests__/parse-backlog-core.test.cjs .claude/scripts/backlog-loop/__tests__/ledger-core.test.cjs .claude/scripts/backlog-loop/__tests__/queue-core.test.cjs .claude/scripts/backlog-loop/__tests__/verify-core.test.cjs .claude/scripts/backlog-loop/__tests__/backlog-loop-routine.test.cjs",
     "cloudflare-usage:fetch": "node .claude/scripts/cloudflare/fetch-usage.mjs",
     "cloudflare-usage:digest": "node .claude/scripts/cloudflare/update-digest.mjs",
     "cloudflare-usage:check": "node .claude/scripts/cloudflare/threshold-check.mjs",
