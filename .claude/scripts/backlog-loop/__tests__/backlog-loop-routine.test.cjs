@@ -73,6 +73,28 @@ test('★Bash 許可パターンはすべて末尾 * (途中 * は実コマン�
   }
 });
 
+// ACTIONS-EXPRESSION-INJECTION-01 が追っている負債と同じ形を、新しい workflow が
+// 持ち込めないようにする。`run:` の本文へ ${{ }} を直接展開すると、その値に
+// シェルのメタ文字が混ざった瞬間に任意コード実行になる。値は env に置き、
+// 本文はシェル変数だけを参照する (data-refresh.yml が手本)。
+// 既存 13 箇所の是正は別途 (この検査は本 workflow に閉じている)。
+test('★run: の本文に ${{ }} を展開しない (式インジェクションの類型を持ち込まない)', () => {
+  const lines = read(WORKFLOW).split('\n');
+  const offenders = [];
+  let inRun = false;
+  for (const [i, line] of lines.entries()) {
+    if (/^\s*run:\s*\|/.test(line)) {
+      inRun = true;
+      continue;
+    }
+    // 次の step / 同階層のキーに当たったら run 本文は終わり
+    if (inRun && /^\s{6}- name:/.test(line)) inRun = false;
+    if (inRun && /^\s{8}(env|if|uses|with|id|continue-on-error):/.test(line)) inRun = false;
+    if (inRun && line.includes('${{')) offenders.push(`L${i + 1}: ${line.trim()}`);
+  }
+  assert.deepEqual(offenders, [], `run: 本文の式展開は env へ移す:\n${offenders.join('\n')}`);
+});
+
 test('★Claude に外部反映の手段を渡さない (push / gh / secret 読み)', () => {
   const source = read(WORKFLOW);
   const line = source.split('\n').find((l) => l.includes('--disallowedTools'));
