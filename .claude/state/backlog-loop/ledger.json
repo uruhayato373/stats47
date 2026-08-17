@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-17T11:18:16.368Z",
+  "items": {
+    "RANKING-ITEM-CITY-ONLY-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T11:18:16.368Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run packages/ranking/src/config/__tests__/ranking-key-entities.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "前提が誤り。city/port 専用 29 件 (city 19) は KNOWN/SITEMAP/INDEXABLE のいずれにも無く /ranking ページを持たない。reader は KNOWN のみ列挙 (read-ranking-items-snapshot.ts:308)、KNOWN 生成側も prefecture で絞る (generate-known-ranking-keys.ts:31) ため generator の filter は 3 経路で一貫しており不整合ではない。R2 の item.json は消費者ゼロの孤児で、報告された",
+          "failReason": null
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T11:18:16.368Z"
+    }
+  }
+}
