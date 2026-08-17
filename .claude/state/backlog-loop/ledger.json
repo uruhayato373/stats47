@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-17T11:18:16.368Z",
+  "updatedAt": "2026-08-17T11:45:47.017Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -33,6 +33,42 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-17T11:18:16.368Z"
+    },
+    "SYNC-SNAPSHOTS-ALLORNOTHING-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T11:45:47.017Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run 32020891418 (sync job conclusion=success)",
+              "R2 サンプル 40 件の generatedAt 再取得"
+            ],
+            "pass": true
+          },
+          "evidence": "run 32020891418 完走 (58m01s)。push が Progress: 14033/14033 (errors 0) まで到達し「snapshot を R2 に push 完了」。Verify (page-components 117/117・affiliate-ads 260) と Purge も success、sync-ranking-keys も起動 (前回は skip)。R2 サンプル 40 件の generatedAt が 40/40 とも 2026-08-17 で、stale だった 18 件が解消。",
+          "failReason": null,
+          "followUps": [
+            "SYNC-SNAPSHOTS-MANIFEST-CARRY-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T11:45:47.017Z"
     }
   }
 }

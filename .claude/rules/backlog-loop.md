@@ -132,7 +132,8 @@ node .claude/scripts/backlog-loop/build-backlog-queue.mjs --json   # agent 用
 # 1 件処理したら記録する (completed は gate 証拠が必須)
 node .claude/scripts/backlog-loop/record-backlog-outcome.mjs \
   --id <ID> --class <class> --outcome completed --model sonnet \
-  --gate-commands "npm run type-check,npm test" --gate-pass --evidence "..."
+  --gate-commands "npm run type-check,npm test" --gate-pass --evidence "..." \
+  [--follow-ups <残件の新ID>]
 
 # 最後に必ず通す
 node .claude/scripts/backlog-loop/verify-backlog-run.mjs --base <開始時HEAD> --queued <ID,...>
@@ -140,6 +141,11 @@ node .claude/scripts/backlog-loop/verify-backlog-run.mjs --base <開始時HEAD> 
 # テスト
 node --test .claude/scripts/backlog-loop/__tests__/*.test.cjs
 ```
+
+**閉じた結果として小さい残件が出たら `--follow-ups <新ID>` で名指しする。** verify はエントリの
+新規追加を既定で落とす (仕事の捏造を止めるため) が、ここで名指しした ID だけは通す。名指しは
+**gate を通した completed attempt** にしか効かず、今回の処理対象 (`--queued`) 外のエントリが
+宣言したものは流用できない。残件を闇に葬るのも、巨大なエントリのまま残すのも避けるための逃げ道。
 
 quarantine されたエントリを戻すには、原因を潰したうえで 1 度 `completed` を記録する
 (`failCount` が 0 に戻り次の run から queue に復帰する)。理由は ledger の

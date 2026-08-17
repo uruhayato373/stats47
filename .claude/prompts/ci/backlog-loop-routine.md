@@ -51,6 +51,10 @@ node .claude/scripts/backlog-loop/record-backlog-outcome.mjs \
 
 `completed` は `--gate-commands` と `--gate-pass` の両方が必須。CLI が無ければ exit 1 で弾く。
 
+閉じた結果として**小さい残件が出た場合だけ** `--follow-ups <新ID>` で名指しし、その ID の
+エントリをバックログへ追加してよい。名指ししていない新規追加は verify が落とす (仕事の捏造防止)。
+残件が無いなら追加しない。
+
 ### 4. completed のものだけ行を消す
 
 行番号で消す (文字列一致は同じ語を含む別エントリを壊す)。エントリの見出し行から次の

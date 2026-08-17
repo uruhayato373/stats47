@@ -108,7 +108,7 @@ test('gate を通したのに削除し忘れたら落ちる (次の run が同�
   assert.equal(r.findings[0].kind, 'gate-passed-but-not-removed');
 });
 
-test('エントリの新規追加は落ちる (backlog-loop は追加しない)', () => {
+test('宣言していないエントリの新規追加は落ちる (仕事の捏造を止める)', () => {
   const r = verifyRemovals({
     files: [{ sourceFile: FILE, before: doc(['A-01']), after: doc(['A-01', 'NEW-01']) }],
     ledger: normalizeLedger(emptyLedger()).ledger,
@@ -116,6 +116,58 @@ test('エントリの新規追加は落ちる (backlog-loop は追加しない)'
   });
   assert.equal(r.ok, false);
   assert.equal(r.findings[0].kind, 'unexpected-addition');
+});
+
+// 「1 件閉じたら小さい残件が 1 件出る」は正常な流れ。一切許さないと残件を闇に葬るか
+// 巨大エントリのまま残すことになるので、**閉じたエントリが名指しした分だけ**通す。
+test('★閉じたエントリが --follow-ups で名指しした残件は追加できる', () => {
+  const ledger = ledgerWith([
+    {
+      id: 'A-01',
+      class: 'impl-small',
+      outcome: 'completed',
+      gate: { commands: ['npm test'], pass: true },
+      followUps: ['A-01-RESIDUAL'],
+    },
+  ]);
+  const r = verifyRemovals({
+    files: [{ sourceFile: FILE, before: doc(['A-01', 'B-02']), after: doc(['B-02', 'A-01-RESIDUAL']) }],
+    ledger,
+    queuedIds: ['A-01'],
+  });
+  assert.equal(r.ok, true, JSON.stringify(r.findings));
+});
+
+test('★名指しは gate を通した completed にしか効かない (失敗した attempt では追加できない)', () => {
+  const ledger = ledgerWith([
+    { id: 'A-01', class: 'impl-small', outcome: 'failed', followUps: ['A-01-RESIDUAL'] },
+  ]);
+  const r = verifyRemovals({
+    files: [{ sourceFile: FILE, before: doc(['A-01']), after: doc(['A-01', 'A-01-RESIDUAL']) }],
+    ledger,
+    queuedIds: ['A-01'],
+  });
+  assert.equal(r.ok, false);
+  assert.ok(r.findings.some((f) => f.kind === 'unexpected-addition' && f.id === 'A-01-RESIDUAL'));
+});
+
+test('★別のエントリが名指しした残件を流用できない (queued 外の宣言は効かない)', () => {
+  const ledger = ledgerWith([
+    {
+      id: 'Z-99',
+      class: 'impl-small',
+      outcome: 'completed',
+      gate: { commands: ['npm test'], pass: true },
+      followUps: ['A-01-RESIDUAL'],
+    },
+  ]);
+  const r = verifyRemovals({
+    files: [{ sourceFile: FILE, before: doc(['A-01']), after: doc(['A-01', 'A-01-RESIDUAL']) }],
+    ledger,
+    queuedIds: ['A-01'], // Z-99 は今回の処理対象ではない
+  });
+  assert.equal(r.ok, false);
+  assert.ok(r.findings.some((f) => f.kind === 'unexpected-addition'));
 });
 
 test('本文の書き換えだけなら削除とみなさない (書式変更を誤検出しない)', () => {

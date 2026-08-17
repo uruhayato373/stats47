@@ -81,6 +81,7 @@ function normalizeLedger(raw) {
  * @param {{commands: string[], pass: boolean}} [attempt.gate]
  * @param {string} [attempt.evidence] ≤280 字の要約
  * @param {string} [attempt.failReason]
+ * @param {string[]} [attempt.followUps] この完了から切り出した残件の ID (verify が追加を許す根拠)
  * @param {number} quarantineThreshold policy の limits.quarantineThreshold
  * @returns {{ledger: object, item: object, quarantined: boolean}}
  */
@@ -124,6 +125,9 @@ function recordAttempt(ledger, attempt, quarantineThreshold) {
     gate: attempt.gate ?? null,
     evidence: typeof attempt.evidence === 'string' ? attempt.evidence.slice(0, 280) : null,
     failReason: attempt.failReason ?? null,
+    // 1 件閉じると小さい残件が 1 件出る、は正常な流れ。ここで名指ししたものだけ
+    // verify がバックログへの新規追加として許す (無条件に許すと仕事の捏造ができる)。
+    followUps: Array.isArray(attempt.followUps) ? attempt.followUps.filter(Boolean) : [],
   };
 
   // quarantine: 連続失敗でのみ増え、成功で消える
@@ -185,6 +189,23 @@ function hasPassingGate(ledger, id) {
   return item.attempts.some((a) => a.outcome === 'completed' && a.gate && a.gate.pass === true);
 }
 
+/**
+ * 「gate を通した completed attempt が名指しした follow-up」の集合。
+ * verify が新規追加を許す唯一の根拠で、閉じたエントリ自身の記録にしか現れない。
+ */
+function declaredFollowUps(ledger, ids = null) {
+  const scope = ids ? new Set(ids) : null;
+  const out = new Set();
+  for (const [id, item] of Object.entries(ledger.items ?? {})) {
+    if (scope && !scope.has(id)) continue;
+    for (const a of item.attempts ?? []) {
+      if (a.outcome !== 'completed' || !a.gate || a.gate.pass !== true) continue;
+      for (const f of a.followUps ?? []) out.add(f);
+    }
+  }
+  return out;
+}
+
 /** class×model の実測を集計する (学習の入力) */
 function summarizeByClassModel(ledger, { since = null } = {}) {
   const acc = new Map();
@@ -216,5 +237,6 @@ module.exports = {
   recordAttempt,
   quarantinedIds,
   hasPassingGate,
+  declaredFollowUps,
   summarizeByClassModel,
 };

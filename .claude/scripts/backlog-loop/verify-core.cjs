@@ -19,7 +19,7 @@
  */
 
 const { parseHeadingEntries } = require('./parse-backlog-core.cjs');
-const { hasPassingGate } = require('./ledger-core.cjs');
+const { hasPassingGate, declaredFollowUps } = require('./ledger-core.cjs');
 
 /** ループが触ってよいパス。ここに無いものを触ったら commit させない */
 const ALLOWED_PATH_PATTERNS = [
@@ -79,6 +79,10 @@ function diffEntryIds(beforeText, afterText, sourceFile) {
 function verifyRemovals({ files, ledger, queuedIds = null }) {
   const findings = [];
   const queued = queuedIds ? new Set(queuedIds) : null;
+  // 「1 件閉じたら小さい残件が 1 件出る」は正常な流れなので、閉じたエントリが台帳で
+  // 名指しした follow-up だけ追加を許す。無条件に許すとモデルが仕事を捏造できるし、
+  // 一切許さないと今度は残件を闇に葬るか巨大エントリのまま残すことになる。
+  const allowedAdditions = declaredFollowUps(ledger, queuedIds);
 
   for (const f of files) {
     const { removed, added } = diffEntryIds(f.before, f.after, f.sourceFile);
@@ -104,11 +108,12 @@ function verifyRemovals({ files, ledger, queuedIds = null }) {
     }
 
     for (const id of added) {
+      if (allowedAdditions.has(id)) continue; // 閉じたエントリが --follow-ups で名指しした残件
       findings.push({
         kind: 'unexpected-addition',
         id,
         sourceFile: f.sourceFile,
-        detail: `${id} が追加された (backlog-loop はエントリを新規追加しない)`,
+        detail: `${id} が追加された (残件として切り出すなら閉じたエントリの --follow-ups で名指しする)`,
       });
     }
 

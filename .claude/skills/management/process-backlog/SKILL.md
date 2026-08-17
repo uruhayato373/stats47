@@ -58,6 +58,9 @@ node .claude/scripts/backlog-loop/record-backlog-outcome.mjs \
 `completed` は `--gate-commands` と `--gate-pass` の両方が必須で、CLI が無ければ exit 1 で弾く。
 未達なら `--outcome failed --fail-reason "..."`、再現できなかったら `--outcome deferred`。
 
+閉じた結果として小さい残件が出たら `--follow-ups <新ID>` で名指しする。verify はエントリの
+新規追加を既定で落とすが、名指しした ID だけは通す (正典 `.claude/rules/backlog-loop.md`)。
+
 ### 5. gate を通ったものだけ行削除する
 
 行番号ベースで消す (文字列一致で消すと同じ語を含む別エントリを壊す)。

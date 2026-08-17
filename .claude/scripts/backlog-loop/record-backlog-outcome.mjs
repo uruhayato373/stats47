@@ -93,6 +93,10 @@ export function main() {
       gate: gateCommands.length > 0 ? { commands: gateCommands, pass: gatePass } : null,
       evidence: getArg('--evidence'),
       failReason: getArg('--fail-reason'),
+      followUps: (getArg('--follow-ups', '') ?? '')
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean),
       sourceFile: getArg('--source-file'),
       title: getArg('--title'),
     },
