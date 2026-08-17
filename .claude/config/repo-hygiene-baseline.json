@@ -21,12 +21,17 @@
     {
       "code": "LARGE_FILE",
       "file": ".claude/state/gsc/coverage-remediation-queue.json",
-      "message": "1748703 bytes exceeds 1048576 bytes"
+      "message": "1190073 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",
       "file": ".claude/state/metrics/gsc/resubmit-history.json",
-      "message": "2065645 bytes exceeds 1048576 bytes"
+      "message": "2284524 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": ".claude/state/search-growth/candidates.json",
+      "message": "1184790 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",
@@ -176,7 +181,7 @@
     {
       "code": "LARGE_FILE",
       "file": "apps/web/public/search-index.json",
-      "message": "1348156 bytes exceeds 1048576 bytes"
+      "message": "1896763 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",
@@ -196,7 +201,7 @@
     {
       "code": "LARGE_FILE",
       "file": "package-lock.json",
-      "message": "1104211 bytes exceeds 1048576 bytes"
+      "message": "1198537 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",
@@ -206,11 +211,6 @@
     {
       "code": "LARGE_FILE",
       "file": "packages/gis/data/geoshape/prefecture.topojson",
-      "message": "1917623 bytes exceeds 1048576 bytes"
-    },
-    {
-      "code": "LARGE_FILE",
-      "file": "packages/visualization/src/d3/__tests__/fixtures/jp-prefectures.json",
       "message": "1917623 bytes exceeds 1048576 bytes"
     }
   ]

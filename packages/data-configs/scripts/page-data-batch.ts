@@ -41,6 +41,7 @@ import {
   type AreaAxisMember,
 } from "../src/area-axis.js";
 import { classifyEmptyOutcome } from "../src/expected-empty.js";
+import { applyValueScale } from "../src/money-unit.js";
 import { fillMissingTimeFromSurveyDate } from "../src/estat-time.js";
 import {
   combineLinear,
@@ -779,9 +780,18 @@ function buildMeta(config: MetricConfig, rows: ShapedRow[]): WrittenStatsMeta {
   };
 }
 
+/**
+ * config が宣言している単位換算倍率 (金額族専用・`10^k`)。
+ * 未宣言 / estat 以外は 1 = 換算しない。判定は `audit-money-unit-scale.ts` が全数監査する。
+ */
+function valueScaleOf(config: MetricConfig): number | undefined {
+  return config.source.kind === "estat" ? config.source.valueScale : undefined;
+}
+
 /** 取得 raw values → StatsValues 構造 (prefecture)。areaName/unit/yearName/rank を付与し本番投入可能形に。 */
 function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
   const masters = loadAreaMasters();
+  const scale = valueScaleOf(config);
   const rows: ShapedRow[] = values
     .filter((v) => isPrefCode5(v["@area"]) && inYearRange(v["@time"].slice(0, 4), config))
     .map((v) => {
@@ -791,7 +801,7 @@ function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
         areaName: masters.pref.get(v["@area"]) ?? "",
         yearCode,
         yearName: yearNameOf(yearCode, config),
-        value: parseEstatValue(v.$),
+        value: applyValueScale(parseEstatValue(v.$), scale),
         unit: config.unit,
         rank: null as number | null,
       };
@@ -808,6 +818,7 @@ function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
 /** 取得 raw values → StatsValues 構造 (city)。areaName(市区町村マスタ join)/unit/yearName/rank を付与。 */
 function shapeForCity(config: MetricConfig, values: EstatValue[]) {
   const masters = loadAreaMasters();
+  const scale = valueScaleOf(config);
   const rows: ShapedRow[] = values
     .filter((v) => isCityCode5(v["@area"]) && inYearRange(v["@time"].slice(0, 4), config))
     .map((v) => {
@@ -817,7 +828,7 @@ function shapeForCity(config: MetricConfig, values: EstatValue[]) {
         areaName: masters.city.get(v["@area"]) ?? "",
         yearCode,
         yearName: yearNameOf(yearCode, config),
-        value: parseEstatValue(v.$),
+        value: applyValueScale(parseEstatValue(v.$), scale),
         unit: config.unit,
         rank: null as number | null,
         prefectureCode: v["@area"].slice(0, 2),

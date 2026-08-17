@@ -1,15 +1,15 @@
 {
-  "total": 1062,
+  "total": 1077,
   "byStatus": {
-    "both": 938,
+    "both": 971,
     "jsonOnly": 0,
-    "neither": 124
+    "neither": 106
   },
   "byMethod": {
     "manual": 43,
-    "done": 938,
-    "ssot-restore-new": 55,
-    "ssot-restore": 26
+    "done": 971,
+    "ssot-restore": 26,
+    "ssot-restore-new": 37
   },
   "entries": [
     {
@@ -79,10 +79,10 @@
       "slug": "aging-solo-living-crisis",
       "base": "aging-solo-vs-nursing-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "aging-solo-living-crisis",
@@ -1552,6 +1552,87 @@
       "restoreMethod": "done"
     },
     {
+      "slug": "dual-income-household-ratio-vs-public-assistance-housing",
+      "base": "dual-income-household-ratio-vs-public-assistance-housing-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-public-assistance-housing",
+      "base": "public-assistance-housing-beneficiaries-per-1000-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-public-assistance-housing",
+      "base": "dual-income-household-ratio--public-assistance-housing-beneficiaries-per-1000-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-rooms-per-dwelling",
+      "base": "dual-income-household-ratio-vs-rooms-per-dwelling-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-rooms-per-dwelling",
+      "base": "rooms-per-dwelling-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-rooms-per-dwelling",
+      "base": "dual-income-household-ratio--rooms-per-dwelling-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-tatami-per-dwelling-owner",
+      "base": "dual-income-household-ratio-vs-tatami-per-dwelling-owner-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-tatami-per-dwelling-owner",
+      "base": "tatami-per-dwelling-owner-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-household-ratio-vs-tatami-per-dwelling-owner",
+      "base": "dual-income-household-ratio--tatami-per-dwelling-owner-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
       "slug": "dual-income-reversal",
       "base": "actual-income-ranking",
       "chartType": "ranking",
@@ -1609,10 +1690,10 @@
       "slug": "earthquake-insurance-prefecture-gap",
       "base": "insurance-damage-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "earthquake-insurance-prefecture-gap",
@@ -1681,10 +1762,10 @@
       "slug": "education-expenses-gap",
       "base": "elem-vs-junior-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "education-expenses-gap",
@@ -1852,10 +1933,10 @@
       "slug": "energy-consumption-structure-shift",
       "base": "energy-price-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "energy-consumption-structure-shift",
@@ -2113,10 +2194,10 @@
       "slug": "fertility-rate-prefecture-gap",
       "base": "marriage-fertility-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "firefighting-capacity-gap",
@@ -2194,10 +2275,10 @@
       "slug": "fiscal-health-50years-trend",
       "base": "fiscal-grants-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "fiscal-self-reliance-gap",
@@ -2365,10 +2446,10 @@
       "slug": "food-spending-pattern",
       "base": "rice-vs-bread-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "food-spending-pattern",
@@ -3148,10 +3229,10 @@
       "slug": "health-life-expectancy-structure",
       "base": "health-doctors-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "health-life-expectancy-structure",
@@ -4975,10 +5056,10 @@
       "slug": "local-government-debt-burden",
       "base": "debt-vs-future-burden-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "local-tax-regional-gap",
@@ -5200,10 +5281,10 @@
       "slug": "manufacturing-labor-productivity-pref",
       "base": "shipment-productivity-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "manufacturing-labor-productivity-pref",
@@ -5902,10 +5983,10 @@
       "slug": "noodle-consumption-prefecture-character",
       "base": "udon-ramen-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "noodle-consumption-prefecture-character",
@@ -5992,10 +6073,10 @@
       "slug": "nursing-care-shortage-2040",
       "base": "aging-vs-welfare-expenditure-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "nursing-care-shortage-2040",
@@ -6190,10 +6271,10 @@
       "slug": "overnight-guests-inbound-recovery",
       "base": "foreign-concentration-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "overnight-guests-inbound-recovery",
@@ -6730,10 +6811,10 @@
       "slug": "prefectural-debt-future-burden",
       "base": "aging-vs-debt-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "prefectural-height-male-female-gap",
@@ -6874,6 +6955,33 @@
       "slug": "professor-income-prefecture-gap",
       "base": "professor-income-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-elementary-school-count",
+      "base": "psychiatric-bed-count-vs-elementary-school-count-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-elementary-school-count",
+      "base": "elementary-school-count-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-elementary-school-count",
+      "base": "psychiatric-bed-count--elementary-school-count-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -7114,6 +7222,33 @@
       "restoreMethod": "done"
     },
     {
+      "slug": "retail-store-count-vs-nurses-per-100k-population",
+      "base": "retail-store-count-vs-nurses-per-100k-population-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "retail-store-count-vs-nurses-per-100k-population",
+      "base": "nurses-per-100k-population-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "retail-store-count-vs-nurses-per-100k-population",
+      "base": "retail-store-count--nurses-per-100k-population-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
       "slug": "rice-consumption-quantity-ranking",
       "base": "rice-consumption-quantity-ranking",
       "chartType": "ranking",
@@ -7324,19 +7459,19 @@
       "slug": "savings-balance-gap",
       "base": "savings-vs-consumption-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "savings-balance-gap",
       "base": "income-vs-savings-rate-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "savings-balance-gap",
@@ -8179,10 +8314,10 @@
       "slug": "telework-rate-tokyo-gap",
       "base": "telework-ict-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "telework-rate-tokyo-gap",
@@ -8809,10 +8944,10 @@
       "slug": "unmarried-rate-40years-crisis",
       "base": "unmarried-tfr-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "unmarried-rate-40years-crisis",

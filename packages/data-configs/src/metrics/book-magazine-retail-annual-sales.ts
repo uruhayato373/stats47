@@ -9,6 +9,9 @@ export const bookMagazineRetailAnnualSales: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0000010107",
+    // e-Stat 原単位 百万円 → config unit 円 の換算 (MONEY-UNIT-SCALE-01)。
+    // 宣言しないと 百万円 の値に 円 のラベルが付いたまま配信される。
+    "valueScale": 1000000,
     "cdCat01": "G5109",
     "displayName": "社会・人口統計体系",
     "url": "https://www.stat.go.jp/data/ssds/index.htm",
@@ -60,7 +63,7 @@ export const bookMagazineRetailAnnualSales: MetricConfig = {
     ],
   },
   "groupKey": "book-magazine-retail-annual-sales",
-  "seoTitle": "書籍・雑誌小売業年間商品販売額ランキング都道府県【2006年】｜1位東京都（509,046円）",
-  "seoDescription": "2006年の書籍・雑誌小売業年間商品販売額の都道府県別ランキング。1位東京都（509,046円）、最下位鳥取県（8,960円）で56.8倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "書籍・雑誌小売業年間商品販売額ランキング都道府県【2006年】｜1位東京都（5,090億円）",
+  "seoDescription": "2006年の書籍・雑誌小売業年間商品販売額の都道府県別ランキング。1位東京都（5,090億円）、最下位鳥取県（89.6億円）で56.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

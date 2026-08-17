@@ -26,6 +26,7 @@ import { fileURLToPath } from "node:url";
 import { COLOR_SCHEME_CATALOG, isKnownColorScheme } from "@stats47/types";
 
 import { CATEGORY_KEYS } from "../src/types";
+import { moneyUnitExponent } from "../src/money-unit";
 import { METRICS_REGISTRY } from "../src/registry";
 import { parseUnit } from "../src/unit/unit-semantics";
 
@@ -45,6 +46,13 @@ function strField(text: string, key: string): string | null {
 function boolField(text: string, key: string): boolean | null {
   const m = text.match(new RegExp(`\\b${key}\\s*:\\s*(true|false)`));
   return m ? m[1] === "true" : null;
+}
+
+function numField(text: string, key: string): number | null {
+  const m = text.match(new RegExp(`(?:"${key}"|\\b${key})\\s*:\\s*(-?[0-9.eE+]+)`));
+  if (!m) return null;
+  const n = Number(m[1]);
+  return Number.isFinite(n) ? n : null;
 }
 
 /** データ注釈 (※系) かどうかを文面から判定する (UI の isCaveatNote と同基準)。 */
@@ -71,6 +79,7 @@ interface Row {
   statsDataId: string | null;
   isActive: boolean | null;
   colorScheme: string | null;
+  valueScale: number | null;
 }
 
 /**
@@ -124,6 +133,7 @@ function main() {
       statsDataId: strField(text, "statsDataId"),
       isActive: boolField(text, "isActive"),
       colorScheme: strField(text, "colorScheme"),
+      valueScale: numField(text, "valueScale"),
     });
   }
 
@@ -191,6 +201,26 @@ function main() {
   for (const r of rows) {
     if (r.unit === null || r.unit.trim() === "" || r.unit.trim() === "‐" || r.unit.trim() === "-") {
       errors.push(`[unit] ${r.file}: unit が空/プレースホルダ ("${r.unit}")`);
+    }
+  }
+
+  // error: valueScale の誤用
+  //
+  // valueScale は**金額単位族の換算専用**で `10^k` 以外を書かない (types.ts)。
+  // 率や人数に付けると配信値が黙って何倍かになり、shape-gate の値域検査も
+  // 「その単位ならありうる値」として通してしまう。宣言できる形を狭く固定しておく。
+  // 正典: .claude/rules/unit-semantics-standards.md / packages/data-configs/src/money-unit.ts
+  for (const r of rows) {
+    if (r.valueScale === null) continue;
+    if (moneyUnitExponent(r.unit) === null) {
+      errors.push(
+        `[value-scale] ${r.file}: valueScale は金額単位族専用 (unit="${r.unit}" は族外)`,
+      );
+      continue;
+    }
+    const exp = Math.log10(r.valueScale);
+    if (!(r.valueScale > 0) || Math.abs(exp - Math.round(exp)) > 1e-9) {
+      errors.push(`[value-scale] ${r.file}: valueScale は 10^k のみ (${r.valueScale})`);
     }
   }
 

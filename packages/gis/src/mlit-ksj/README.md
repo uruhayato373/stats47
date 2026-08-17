@@ -84,6 +84,8 @@ packages/gis/src/mlit-ksj/
 ├── downloader.ts      # zip ダウンロード・GeoJSON/Shapefile 抽出
 ├── converter.ts       # GeoJSON → TopoJSON 変換（簡略化含む）
 ├── pipeline.ts        # オーケストレーター
+├── prefecture-assign.ts # ★feature → 都道府県の帰属 (属性 → 空間結合。推測しない)
+├── ksj-stats-core.ts  # 県別集計 → app/stats payload の純関数
 ├── index.ts           # Public API エクスポート
 ├── adapters/
 │   └── fetch-ksj-from-local.ts  # ローカル R2 から TopoJSON 読み込み
@@ -92,8 +94,13 @@ packages/gis/src/mlit-ksj/
     ├── list-datasets.ts         # gis_datasets (使い捨て SQLite) 一覧 CLI (status 集計付き)
     ├── seed-from-registry.ts    # ★datasets.ts (git TS SSOT) → 使い捨て SQLite を決定的に UPSERT 再構築
     ├── seed-ksj-catalog.ts      # 候補 126 件 (ksj-catalog.json) を status='available' で SQLite に投入
-    └── register-ksj-rankings.ts # is_ranking_target=1 (SQLite) から metrics/stats を生成
+    └── generate-ksj-stats-values.ts # ★KSJ topojson → app/stats/<key>/values.json (配信の正典)
 ```
+
+> **`register-ksj-rankings.ts` は 2026-08-17 に削除した。** 使い捨て SQLite にしか書かないため
+> 配信に届かず、しかも県の帰属を最寄りの県庁所在地で決めていて系統的に取り違えていた
+> (原子炉の無い京都府に 8 基、八丈島の地熱が神奈川県、秋田・福島が 0)。
+> 後継は `generate-ksj-stats-values.ts` で、SQLite を経由せず `app/stats` を直接作る。
 
 > SQLite (`packages/database/.data/stats47.sqlite`) は git TS から再生成可能な**使い捨てビルドキャッシュ**で
 > SSOT ではない。永続/リモート D1 ではない。SSOT は **datasets.ts (メタ) + registry.ts (技術設定) + R2 (配信)**。

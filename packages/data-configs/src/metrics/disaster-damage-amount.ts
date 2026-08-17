@@ -9,6 +9,9 @@ export const disasterDamageAmount: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0000010111",
+    // e-Stat 原単位 百万円 → config unit 円 の換算 (MONEY-UNIT-SCALE-01)。
+    // 宣言しないと 百万円 の値に 円 のラベルが付いたまま配信される。
+    "valueScale": 1000000,
     "cdCat01": "K5112",
     "displayName": "社会・人口統計体系",
     "url": "https://www.stat.go.jp/data/ssds/index.htm",
@@ -89,7 +92,7 @@ export const disasterDamageAmount: MetricConfig = {
     ],
   },
   "groupKey": "disaster-damage-amount",
-  "seoTitle": "災害被害額ランキング都道府県【2023年】｜1位秋田県（48,757円）",
-  "seoDescription": "2023年の災害被害額の都道府県別ランキング。1位秋田県（48,757円）、最下位東京都（28円）で1741.3倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "災害被害額ランキング都道府県【2023年】｜1位秋田県（487.6億円）",
+  "seoDescription": "2023年の災害被害額の都道府県別ランキング。1位秋田県（487.6億円）、最下位東京都（2,800万円）で1741.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  applyValueScale,
   checkCombinationUnitsAgree,
   checkMoneyUnitScale,
   moneyUnitExponent,
+  resolvePinnedSourceUnit,
 } from "../money-unit";
 
 /**
@@ -137,5 +139,84 @@ describe("checkCombinationUnitsAgree", () => {
     expect(checkCombinationUnitsAgree(["千円"]).kind).toBe("skip");
     expect(checkCombinationUnitsAgree([null, "千円"]).kind).toBe("skip");
     expect(checkCombinationUnitsAgree([]).kind).toBe("skip");
+  });
+});
+
+describe("applyValueScale", () => {
+  it("未宣言・1 なら値を変えない (既存 2,000 件超に影響を出さない)", () => {
+    expect(applyValueScale(1234, undefined)).toBe(1234);
+    expect(applyValueScale(1234, 1)).toBe(1234);
+  });
+
+  it("欠測は欠測のまま — 0 を捏造しない", () => {
+    expect(applyValueScale(null, 0.1)).toBeNull();
+    expect(applyValueScale(null, undefined)).toBeNull();
+  });
+
+  it("千円 → 万円 (実際の欠陥 cook-annual-income の値)", () => {
+    // 4153.9 * 0.1 は 2 進で 415.39000000000004 になる。有効桁で丸めて残差だけ落とす
+    expect(applyValueScale(4153.9, 0.1)).toBe(415.39);
+  });
+
+  it("百万円 → 円 (実際の欠陥 book-magazine-retail-annual-sales の値)", () => {
+    expect(applyValueScale(509046, 1_000_000)).toBe(509_046_000_000);
+  });
+
+  it("整数は精度を落とさずそのまま返す (16 桁以上でも丸めない)", () => {
+    expect(applyValueScale(1_234_567_890_123_456, 1_000_000)).toBe(
+      1_234_567_890_123_456 * 1_000_000,
+    );
+  });
+
+  it("0 は 0 のまま (0 円の県を消さない)", () => {
+    expect(applyValueScale(0, 0.1)).toBe(0);
+  });
+
+  it("不正な scale は無視する (壊れた宣言で値を化けさせない)", () => {
+    expect(applyValueScale(100, Number.NaN)).toBe(100);
+    expect(applyValueScale(100, Number.POSITIVE_INFINITY)).toBe(100);
+  });
+});
+
+describe("resolvePinnedSourceUnit", () => {
+  it("pin された軸が 1 つだけ単位を持つなら確定する (社会・人口統計体系の実形)", () => {
+    // tab(観測値) は単位を持たず cat01(指標) だけが持つ。cat01 を 1 コードに pin してあるので確定する
+    expect(resolvePinnedSourceUnit([null, "千円"])).toEqual({ kind: "ok", unit: "千円" });
+  });
+
+  it("同じ単位が複数の軸から取れても確定する", () => {
+    expect(resolvePinnedSourceUnit(["百万円", "百万円"])).toEqual({
+      kind: "ok",
+      unit: "百万円",
+    });
+  });
+
+  it("前後の空白を無視する (e-Stat の @unit は空白を含むことがある)", () => {
+    expect(resolvePinnedSourceUnit([" 千円 "])).toEqual({ kind: "ok", unit: "千円" });
+  });
+
+  it("異なる単位が混ざるときは決めない — 推測で選ぶと 10^k ズレを作り直す", () => {
+    expect(resolvePinnedSourceUnit(["千円", "％"])).toEqual({
+      kind: "ambiguous",
+      units: ["千円", "％"],
+    });
+  });
+
+  it("どの軸も単位を宣言していなければ none (取れなかったことを整合に混ぜない)", () => {
+    expect(resolvePinnedSourceUnit([]).kind).toBe("none");
+    expect(resolvePinnedSourceUnit([null, undefined, ""]).kind).toBe("none");
+  });
+
+  it("解決した単位はそのまま checkMoneyUnitScale の入力になる (実際の欠陥 2 件を再現)", () => {
+    // 0000010107 書籍・雑誌小売業年間商品販売額: 原単位 百万円 に対し config は 円
+    const resolved = resolvePinnedSourceUnit([null, "百万円"]);
+    expect(resolved.kind).toBe("ok");
+    const v = checkMoneyUnitScale({
+      sourceUnit: resolved.kind === "ok" ? resolved.unit : null,
+      configUnit: "円",
+      declaredScale: 1,
+    });
+    expect(v.kind).toBe("mismatch");
+    if (v.kind === "mismatch") expect(v.expectedScale).toBe(1_000_000);
   });
 });
