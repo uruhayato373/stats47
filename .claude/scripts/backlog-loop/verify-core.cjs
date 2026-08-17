@@ -26,7 +26,11 @@ const ALLOWED_PATH_PATTERNS = [
   /^docs\/todo\/05_/,
   /^docs\/todo\/06_/,
   /^docs\/todo\/01_/,
-  /^\.claude\/state\/backlog-loop\//,
+  // state 全体を許す。バックログを 1 件閉じると、その領域の state (SEO baseline・
+  // 整合性 audit・是正キュー等) が同じ作業の成果物として動くため。危険なものは
+  // FORBIDDEN 側 (memory / learned / routing policy) が個別に弾く — `.claude/config/` を
+  // 許しつつ routing policy だけ禁止しているのと同じ形。
+  /^\.claude\/state\//,
   /^\.claude\/scripts\//,
   /^\.claude\/rules\//,
   /^\.claude\/skills\//,

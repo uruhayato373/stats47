@@ -7,6 +7,7 @@
 
 import { extractPrefectureCode } from "@stats47/area";
 
+import { assertPrefectureCode } from "../../utils/prefecture-code";
 import type { GeoshapeOptions } from "../types/geoshape-options";
 
 /** 外部 API のベース URL（geoshape.ex.nii.ac.jp） */
@@ -54,10 +55,13 @@ export function buildGeoshapePathSegment({
     return `${GEOSHAPE_VERSION}/${cityFileName}`;
   }
 
-  const prefCode2Digit = extractPrefectureCode(prefCode);
-  if (!prefCode2Digit) {
-    throw new Error(`Invalid prefCode for Geoshape URL: "${prefCode}"`);
-  }
+  // extractPrefectureCode は substring(0, 2) を返すだけで書式を見ない (area 側の仕様。
+  // 5 桁の市区町村コードから切り出す用途では正しいのであちらは変えない)。
+  // ここは外部 API の URL と R2 key の両方になるので、補間する直前に 2 桁の数字を要求する。
+  const prefCode2Digit = assertPrefectureCode(
+    extractPrefectureCode(prefCode),
+    "buildGeoshapePathSegment",
+  );
   const suffix =
     wardMode === "merged" ? PREF_CITY_MERGED_SUFFIX : PREF_CITY_SPLIT_SUFFIX;
   return `${GEOSHAPE_VERSION}/${prefCode2Digit}/${prefCode2Digit}${suffix}`;

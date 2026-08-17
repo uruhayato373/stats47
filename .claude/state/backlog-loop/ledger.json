@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-17T11:45:47.017Z",
+  "updatedAt": "2026-08-17T16:58:48.887Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -69,6 +69,336 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-17T11:45:47.017Z"
+    },
+    "IND-DATA-CORRUPTION-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T12:55:23.614Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts",
+              "npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new"
+            ],
+            "pass": true
+          },
+          "evidence": "R2 実測 (2022年・人口千対) で seoTitle/seoDescription を書き直した。婚姻率 1位東京都5.36/最下位秋田県2.63/2.0倍、離婚率 1位沖縄県2.10/最下位富山県1.06/2.0倍。audit で 2 key とも不一致リストから消え baseline 102→100。本番反映 (item.json 再生成) は残 100 件と同じ工程なので SEO-META-FACTUAL-GATE-01 へ統合。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T12:55:23.614Z"
+    },
+    "SEARCH-OBSERVABILITY-RELEASE-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T12:55:40.561Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "mcp seo-observability search_growth_status (live callTool)",
+              "cat .claude/state/search-growth/health.json",
+              "cat .claude/skills/analytics/adsense-improvement/reference/snapshots/2026-W33/manifest.json",
+              "grep -rn 'gh issue create' .github/workflows/search-growth-weekly.yml"
+            ],
+            "pass": true
+          },
+          "evidence": "完了条件 5 点を実測。(1) period metadata: 全 job に periodKind/Start/End/windowDays/isFinalized (finalized7d・pages のみ rolling30d)。(2) privacy: pages は rowCount 0 + status privacy-threshold + 明示 limitation。(3) missing/zero/stale: health.json が status×freshness で success/fresh・partial/stale・m",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T12:55:40.561Z"
+    },
+    "MAINTENANCE-DEBT-PAYDOWN-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T12:55:40.630Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -n ratchet-check .github/workflows/pr-quality-check.yml",
+              "cat .claude/memory/feedback_debt_baseline_shrink_only.md"
+            ],
+            "pass": true
+          },
+          "evidence": "タスクではなく恒久方針で、既に 2 つの SSOT に入っている。CI (pr-quality-check.yml L316-317) が --baseline + --ratchet-check を全 PR で実行し origin/main 比の増加を拒否。memory feedback_debt_baseline_shrink_only.md が同じ制約 (吸収不可・実修正かルール修正のみ) と適用手順を持つ。docs-vs-issues の「恒久判断は既存SSOTへ統合」に従い TODO から除去。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T12:55:40.630Z"
+    },
+    "MONEY-UNIT-SCALE-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T12:55:52.716Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/data-configs/scripts/audit-money-unit-scale.ts",
+              "npx vitest run packages/data-configs/src/__tests__/money-unit.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "固有の成果は達成済み。audit は スケール不一致 0 / 結合単位不一致 0、R2 の cook-annual-income 東京 = 415.39 万円 (再取得前は 4153.9)、money-unit.test.ts 27 件 green、恒久知識は unit-semantics-standards.md §2.5 にある。残る「seoTitle がデータと整合」は SEO baseline 100 件のうち金額系が含まれる部分集合なので、受入条件を持つ SEO-META-FACTUAL-GATE-01 へ統合 (運用ガイド「同じ成果を指す親子",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T12:55:52.716Z"
+    },
+    "GOOGLE-ADMIN-AUTOMATION-01": {
+      "class": "needs-owner",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T12:57:40.899Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "機械側の完了条件は実測で達成 (google-admin:test 33 pass / metrics:test 76 pass / docs:check exit 0 / schedule は audit のみ / mutation は environment: google-admin-production)。残るのは AdSense OAuth token 復旧・GitHub Environment 作成・GA4 admin credential 登録で全てオーナー工程。status を in-progress → blocked-owner-ap",
+          "failReason": "needs-owner",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "DATA-REFRESH-HEALTH-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T13:21:10.052Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "mcp github get_job_logs run=30979118359 job=92219544863",
+              "mcp github issue_read #670",
+              "grep -nE 'name:|if:' .github/workflows/data-refresh.yml"
+            ],
+            "pass": true
+          },
+          "evidence": "原因を実測で特定した。「単発の外部要因」ではない。2026-08-05 は page-data-batch が ok=2148 で取り込み成功しながら、末尾のゼロ件ゲート (empty 37 件) で exit 1 し、Push observations to R2 step が always() を持たないため skip され 2,148 件が push されていない。2026-07-05 は別原因 (correlation の JS ヒープ OOM 4,051MB・heap 8GB へ引き上げ済)。是正は DATA-REFRESH-ZEROGATE-",
+          "failReason": null,
+          "followUps": [
+            "DATA-REFRESH-ZEROGATE-ALLORNOTHING-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T13:21:10.052Z"
+    },
+    "RANKING-DUPLICATE-PATIENT-SURVEY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T13:25:55.958Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run apps/web/src/config/__tests__/ranking-key-consistency.test.ts",
+              "npx vitest run apps/web/src/__tests__/middleware.test.ts apps/web/src/config/__tests__/internal-link-lint-keysets.test.ts",
+              "npx tsc --noEmit -p packages/ranking/tsconfig.json"
+            ],
+            "pass": true
+          },
+          "evidence": "完了条件「1 本だけ isActive」は config 上すでに満たされていた (inpatient-rate-per-100k のみ true) が、本番は両方 200 で実タイトルを返し重複コンテンツのままだった (R2 item.json が残存。isActive:false ≠ 本番非公開)。制約の 410 連動として GONE_RANKING_KEYS に 2 件追加。consistency test 11 件・middleware 6 件・keysets 5 件・tsc すべて green。410 の実効はデプロイ後。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T13:25:55.958Z"
+    },
+    "SCRIPT-ORPHAN-TRIAGE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T13:28:15.948Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "完了条件の第2枝「残るものが『なぜ残すか』を添えて記録されている」を満たした。実測は 20 本ではなく 29 本で、全件を (a) 役目終了 6 / (b) 生きた backlog に紐づく 13 / (c) 用途不明 10 に分類し理由を記録。restore-*-from-svg は名前に反して逆復元せず SSOT 再生成の照合にのみ SVG を使う (規約適合) ことをコード実読で確認。残る削除可否はオーナー判断なので SCRIPT-ORPHAN-DELETE-01 (blocked-owner-decision) へ切り出した。",
+          "failReason": null,
+          "followUps": [
+            "SCRIPT-ORPHAN-DELETE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T13:28:15.948Z"
+    },
+    "ASP-CONTINUITY-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": "docs/todo/05_機能バックログ.md",
+      "title": "もしも・afbの承認追跡と広告コード取得",
+      "attempts": [
+        {
+          "at": "2026-08-17T16:58:36.850Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "6段階の多フェーズ実装(plan hash/journal/profile lock/オーナー承認後のPlaywright走査/harvest/register候補生成)。完了条件はdry-run縦断+cron health実測で、CIの1runで扱う規模ではない。impl-largeとしてfableへ委譲対象、この日次runでは着手しない",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "DATA-REFRESH-ZEROGATE-ALLORNOTHING-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": "docs/todo/05_機能バックログ.md",
+      "title": "ゼロ件ゲートが成功2,148件のR2 pushを巻き添えにする",
+      "attempts": [
+        {
+          "at": "2026-08-17T16:58:48.887Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "実測確認: fail10件のうちconstruction-contract-*7件+construction-projects-total+noise-regulation-rateは既に2026-08-16にisActive:false化済(残るのはvoter-turnout-house-proportinalのみ実質未解決)。kindergarten/nursery-education-diffusion-rateはEXPECTED_EMPTYに既登録済(until 2026-11-30, issue SSDS-EDU-DIFFUSION-CODE-",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-16T14:24:00.103Z",
+  "generatedAt": "2026-08-17T14:29:15.778Z",
   "gscWeek": "2026-W33",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
@@ -7,7 +7,7 @@
     "pending": 139,
     "inProgress": 2,
     "done": 1,
-    "mustWritePending": 19,
+    "mustWritePending": 20,
     "byArchetype": {
       "B": 47,
       "D2": 22,
@@ -17,6 +17,42 @@
     }
   },
   "queue": [
+    {
+      "topicKey": "corr-convenience-store-count-commercial--ratio-of-general-households-to-national",
+      "archetype": "B",
+      "metricKeys": [
+        "convenience-store-count-commercial",
+        "ratio-of-general-households-to-national"
+      ],
+      "label": "コンビニエンスストア店舗数 × 全国一般世帯に占める一般世帯割合 (r=0.99)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.930416147880663,
+        "seasonality": 0,
+        "surprise": 0.992,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": 0.992,
+        "partialRPopulation": 0.615,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "commercial",
+          "population"
+        ],
+        "gscImp": 2392,
+        "rankingUrls": [
+          "/ranking/convenience-store-count-commercial",
+          "/ranking/ratio-of-general-households-to-national"
+        ]
+      },
+      "suggestedTitle": "コンビニエンスストア店舗が多い県は全国一般世帯に占める一般世帯も多い?",
+      "combinedScore": 0.684,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 1
+    },
     {
       "topicKey": "corr-dual-income-household-ratio--floor-area-per-dwelling-owner",
       "archetype": "B",
@@ -51,7 +87,7 @@
       "combinedScore": 0.683,
       "lane": "must-write",
       "status": "pending",
-      "priority": 1
+      "priority": 2
     },
     {
       "topicKey": "corr-dual-income-household-ratio--tatami-per-dwelling-owner",
@@ -87,7 +123,7 @@
       "combinedScore": 0.671,
       "lane": "must-write",
       "status": "pending",
-      "priority": 2
+      "priority": 3
     },
     {
       "topicKey": "corr-national-medical-expense-per-person--tuna-consumption-quantity",
@@ -123,7 +159,7 @@
       "combinedScore": 0.634,
       "lane": "must-write",
       "status": "pending",
-      "priority": 3
+      "priority": 4
     },
     {
       "topicKey": "corr-bread-consumption-expenditure--site-area-per-dwelling",
@@ -159,7 +195,7 @@
       "combinedScore": 0.617,
       "lane": "must-write",
       "status": "pending",
-      "priority": 4
+      "priority": 5
     },
     {
       "topicKey": "corr-bread-consumption-expenditure--high-school-advancement-rate",
@@ -195,7 +231,7 @@
       "combinedScore": 0.614,
       "lane": "must-write",
       "status": "pending",
-      "priority": 5
+      "priority": 6
     },
     {
       "topicKey": "corr-psychiatric-bed-count--standard-fiscal-demand-municipality",
@@ -231,7 +267,7 @@
       "combinedScore": 0.607,
       "lane": "must-write",
       "status": "pending",
-      "priority": 6
+      "priority": 7
     },
     {
       "topicKey": "corr-neighborhood-park-count--psychiatric-bed-count",
@@ -267,7 +303,7 @@
       "combinedScore": 0.605,
       "lane": "must-write",
       "status": "pending",
-      "priority": 7
+      "priority": 8
     },
     {
       "topicKey": "corr-local-allocation-tax-prefecture--total-area-excluding-northern-territories-and-takeshima",
@@ -303,7 +339,7 @@
       "combinedScore": 0.584,
       "lane": "must-write",
       "status": "pending",
-      "priority": 8
+      "priority": 9
     },
     {
       "topicKey": "corr-local-allocation-tax-prefecture--total-area-including-northern-territories-and-takeshima",
@@ -339,7 +375,7 @@
       "combinedScore": 0.584,
       "lane": "must-write",
       "status": "pending",
-      "priority": 9
+      "priority": 10
     },
     {
       "topicKey": "corr-beef-consumption-quantity--municipal-road-paving-rate",
@@ -375,7 +411,7 @@
       "combinedScore": 0.562,
       "lane": "must-write",
       "status": "pending",
-      "priority": 10
+      "priority": 11
     },
     {
       "topicKey": "corr-sex-ratio-total--tuna-consumption-quantity",
@@ -411,7 +447,7 @@
       "combinedScore": 0.561,
       "lane": "must-write",
       "status": "pending",
-      "priority": 11
+      "priority": 12
     },
     {
       "topicKey": "corr-beef-consumption-quantity--unmarried-ratio-male-45-49",
@@ -447,7 +483,7 @@
       "combinedScore": 0.56,
       "lane": "must-write",
       "status": "pending",
-      "priority": 12
+      "priority": 13
     },
     {
       "topicKey": "corr-average-weight-primary-school-fifth-grade-male--tissue-paper-consumption-expenditure",
@@ -483,7 +519,7 @@
       "combinedScore": 0.534,
       "lane": "must-write",
       "status": "pending",
-      "priority": 13
+      "priority": 14
     },
     {
       "topicKey": "gap-soba-udon-dining-consumption-expenditure",
@@ -510,7 +546,7 @@
       "combinedScore": 0.444,
       "lane": "must-write",
       "status": "pending",
-      "priority": 14
+      "priority": 15
     },
     {
       "topicKey": "gap-grilled-eel-consumption-expenditure",
@@ -537,7 +573,7 @@
       "combinedScore": 0.432,
       "lane": "must-write",
       "status": "pending",
-      "priority": 15
+      "priority": 16
     },
     {
       "topicKey": "gap-convenience-store-count-commercial",
@@ -564,7 +600,7 @@
       "combinedScore": 0.426,
       "lane": "must-write",
       "status": "pending",
-      "priority": 16
+      "priority": 17
     },
     {
       "topicKey": "gap-tissue-paper-consumption-expenditure",
@@ -591,7 +627,7 @@
       "combinedScore": 0.361,
       "lane": "must-write",
       "status": "pending",
-      "priority": 17
+      "priority": 18
     },
     {
       "topicKey": "gap-designated-difficult-disease",
@@ -618,7 +654,7 @@
       "combinedScore": 0.358,
       "lane": "must-write",
       "status": "pending",
-      "priority": 18
+      "priority": 19
     },
     {
       "topicKey": "gap-abortion-rate",
@@ -645,7 +681,7 @@
       "combinedScore": 0.34,
       "lane": "must-write",
       "status": "pending",
-      "priority": 19
+      "priority": 20
     },
     {
       "topicKey": "corr-disaster-relief-expenses-prefecture--peach-consumption-quantity",
@@ -681,7 +717,7 @@
       "combinedScore": 0.783,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 20
+      "priority": 21
     },
     {
       "topicKey": "corr-bank-personal-deposit--school-teacher-annual-income",
@@ -717,7 +753,7 @@
       "combinedScore": 0.637,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 21
+      "priority": 22
     },
     {
       "topicKey": "corr-resident-foreigner-north-america--school-teacher-annual-income",
@@ -753,7 +789,7 @@
       "combinedScore": 0.637,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 22
+      "priority": 23
     },
     {
       "topicKey": "corr-high-school-education-cost-fulltime-per-student--pachinko-shop-density-per-10k",
@@ -789,7 +825,7 @@
       "combinedScore": 0.603,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 23
+      "priority": 24
     },
     {
       "topicKey": "corr-local-tax-prefecture--railway-passengers",
@@ -825,7 +861,7 @@
       "combinedScore": 0.581,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 24
+      "priority": 25
     },
     {
       "topicKey": "corr-post-office-count--swimming-pool-public",
@@ -861,7 +897,7 @@
       "combinedScore": 0.58,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 25
+      "priority": 26
     },
     {
       "topicKey": "corr-main-household-ratio-main-earner-employee-commute-90min--shumai-consumption-expenditure",
@@ -897,43 +933,43 @@
       "combinedScore": 0.58,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 26
+      "priority": 27
     },
     {
-      "topicKey": "corr-construction-contract-total--swimming-pool-public",
+      "topicKey": "corr-smoke-emission-facility-count--swimming-pool-public",
       "archetype": "B",
       "metricKeys": [
         "swimming-pool-public",
-        "construction-contract-total"
+        "smoke-emission-facility-count"
       ],
-      "label": "水泳プール数（公共） × 建設工事請負契約額（合計） (r=0.92)",
+      "label": "水泳プール数（公共） × ばい煙発生施設数 (r=0.92)",
       "source": "correlation",
       "scores": {
         "queryGap": 0.6734146876726588,
         "seasonality": 0,
-        "surprise": 0.919,
+        "surprise": 0.916,
         "competitionGap": 0.8
       },
       "evidence": {
-        "pearsonR": 0.919,
-        "partialRPopulation": 0.799,
+        "pearsonR": 0.916,
+        "partialRPopulation": 0.792,
         "populationConfounded": false,
         "crossCategory": true,
         "categories": [
           "educationsports",
-          "construction"
+          "safetyenvironment"
         ],
         "gscImp": 278,
         "rankingUrls": [
           "/ranking/swimming-pool-public",
-          "/ranking/construction-contract-total"
+          "/ranking/smoke-emission-facility-count"
         ]
       },
-      "suggestedTitle": "水泳プールが多い県は建設工事請負契約も多い?",
+      "suggestedTitle": "水泳プールが多い県はばい煙発生施設も多い?",
       "combinedScore": 0.579,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 27
+      "priority": 28
     },
     {
       "topicKey": "corr-average-road-traffic-volume--road-length-per-km2",
@@ -969,7 +1005,7 @@
       "combinedScore": 0.571,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 28
+      "priority": 29
     },
     {
       "topicKey": "corr-convenience-store-sales-monthly--ratio-of-general-households-to-national",
@@ -1005,7 +1041,7 @@
       "combinedScore": 0.569,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 29
+      "priority": 30
     },
     {
       "topicKey": "corr-residential-building-starts--road-length-per-km2",
@@ -1041,7 +1077,43 @@
       "combinedScore": 0.564,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 30
+      "priority": 31
+    },
+    {
+      "topicKey": "corr-forest-road-length--roadside-station-count",
+      "archetype": "B",
+      "metricKeys": [
+        "roadside-station-count",
+        "forest-road-length"
+      ],
+      "label": "道の駅数 × 林道延長 (r=0.91)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.6336051409223581,
+        "seasonality": 0,
+        "surprise": 0.911,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": 0.911,
+        "partialRPopulation": 0.911,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "tourism",
+          "infrastructure"
+        ],
+        "gscImp": 199,
+        "rankingUrls": [
+          "/ranking/roadside-station-count",
+          "/ranking/forest-road-length"
+        ]
+      },
+      "suggestedTitle": "道の駅が多い県は林道延長も多い?",
+      "combinedScore": 0.564,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 32
     },
     {
       "topicKey": "corr-densely-inhabited-district-population-ratio--gasoline-consumption-quantity",
@@ -1077,7 +1149,7 @@
       "combinedScore": 0.561,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 31
+      "priority": 33
     },
     {
       "topicKey": "corr-densely-inhabited-district-population-density--gasoline-consumption-quantity",
@@ -1113,43 +1185,7 @@
       "combinedScore": 0.557,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 32
-    },
-    {
-      "topicKey": "corr-forest-road-length--roadside-station-count",
-      "archetype": "B",
-      "metricKeys": [
-        "roadside-station-count",
-        "forest-road-length"
-      ],
-      "label": "道の駅数 × 林道延長 (r=0.84)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.6336051409223581,
-        "seasonality": 0,
-        "surprise": 0.835,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": 0.835,
-        "partialRPopulation": 0.84,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "tourism",
-          "infrastructure"
-        ],
-        "gscImp": 199,
-        "rankingUrls": [
-          "/ranking/roadside-station-count",
-          "/ranking/forest-road-length"
-        ]
-      },
-      "suggestedTitle": "道の駅が多い県は林道延長も多い?",
-      "combinedScore": 0.549,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 33
+      "priority": 34
     },
     {
       "topicKey": "corr-sewage-treatment-coverage-rate--sewerage-penetration-rate-2012on",
@@ -1185,7 +1221,7 @@
       "combinedScore": 0.547,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 34
+      "priority": 35
     },
     {
       "topicKey": "corr-agriculture-forestry-fisheries-expenses-prefecture--road-general-prefectural-length",
@@ -1221,7 +1257,7 @@
       "combinedScore": 0.544,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 35
+      "priority": 36
     },
     {
       "topicKey": "corr-road-general-prefectural-length--total-assessed-land-area",
@@ -1257,7 +1293,7 @@
       "combinedScore": 0.543,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 36
+      "priority": 37
     },
     {
       "topicKey": "corr-campsite-public--paved-road-main-length",
@@ -1293,7 +1329,7 @@
       "combinedScore": 0.542,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 37
+      "priority": 38
     },
     {
       "topicKey": "corr-campsite-public--road-expressway-length",
@@ -1327,42 +1363,6 @@
       },
       "suggestedTitle": "キャンプ場が多い県は道路実延長も多い?",
       "combinedScore": 0.541,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 38
-    },
-    {
-      "topicKey": "corr-golf-course-public--roadside-station-count",
-      "archetype": "B",
-      "metricKeys": [
-        "roadside-station-count",
-        "golf-course-public"
-      ],
-      "label": "道の駅数 × ゴルフ場数（公共） (r=0.79)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.6336051409223581,
-        "seasonality": 0,
-        "surprise": 0.792,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": 0.792,
-        "partialRPopulation": 0.834,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "tourism",
-          "educationsports"
-        ],
-        "gscImp": 199,
-        "rankingUrls": [
-          "/ranking/roadside-station-count",
-          "/ranking/golf-course-public"
-        ]
-      },
-      "suggestedTitle": "道の駅が多い県はゴルフ場も多い?",
-      "combinedScore": 0.54,
       "lane": "opportunity",
       "status": "pending",
       "priority": 39
@@ -1744,6 +1744,42 @@
       "priority": 50
     },
     {
+      "topicKey": "corr-airport-count--general-project-investment-agriculture-forestry-fisheries",
+      "archetype": "B",
+      "metricKeys": [
+        "airport-count",
+        "general-project-investment-agriculture-forestry-fisheries"
+      ],
+      "label": "空港数 × 一般事業投資額 (r=0.72)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.6015704812642485,
+        "seasonality": 0,
+        "surprise": 0.72,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": 0.72,
+        "partialRPopulation": 0.727,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "infrastructure",
+          "administrativefinancial"
+        ],
+        "gscImp": 152,
+        "rankingUrls": [
+          "/ranking/airport-count",
+          "/ranking/general-project-investment-agriculture-forestry-fisheries"
+        ]
+      },
+      "suggestedTitle": "空港が多い県は一般事業投資も多い?",
+      "combinedScore": 0.515,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 51
+    },
+    {
       "topicKey": "corr-standard-price-change-rate-commercial--vacant-housing-rate",
       "archetype": "B",
       "metricKeys": [
@@ -1777,7 +1813,7 @@
       "combinedScore": 0.515,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 51
+      "priority": 52
     },
     {
       "topicKey": "corr-consumption-expenditure-multi-person-households-per-month--per-capita-social-welfare-expenditure-pref-municipal",
@@ -1813,7 +1849,7 @@
       "combinedScore": 0.513,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 52
+      "priority": 53
     },
     {
       "topicKey": "corr-dependent-population-index--vacant-housing-rate",
@@ -1849,7 +1885,43 @@
       "combinedScore": 0.51,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 53
+      "priority": 54
+    },
+    {
+      "topicKey": "corr-airport-count--physical-disability-rehabilitation-facility-residents",
+      "archetype": "B",
+      "metricKeys": [
+        "airport-count",
+        "physical-disability-rehabilitation-facility-residents"
+      ],
+      "label": "空港数 × 身体障害者更生援護施設在所者数 (r=0.67)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.6015704812642485,
+        "seasonality": 0,
+        "surprise": 0.674,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": 0.674,
+        "partialRPopulation": 0.659,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "infrastructure",
+          "socialsecurity"
+        ],
+        "gscImp": 152,
+        "rankingUrls": [
+          "/ranking/airport-count",
+          "/ranking/physical-disability-rehabilitation-facility-residents"
+        ]
+      },
+      "suggestedTitle": "空港が多い県は身体障害者更生援護施設在所者も多い?",
+      "combinedScore": 0.505,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 55
     },
     {
       "topicKey": "migration-14000",
@@ -1872,78 +1944,6 @@
       },
       "suggestedTitle": "神奈川県の人はどこへ移住する",
       "combinedScore": 0.505,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 54
-    },
-    {
-      "topicKey": "corr-airport-count--annual-minimum-relative-humidity",
-      "archetype": "B",
-      "metricKeys": [
-        "airport-count",
-        "annual-minimum-relative-humidity"
-      ],
-      "label": "空港数 × 年間最小相対湿度 (r=0.67)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.6015704812642485,
-        "seasonality": 0,
-        "surprise": 0.669,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": 0.669,
-        "partialRPopulation": 0.68,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "infrastructure",
-          "landweather"
-        ],
-        "gscImp": 152,
-        "rankingUrls": [
-          "/ranking/airport-count",
-          "/ranking/annual-minimum-relative-humidity"
-        ]
-      },
-      "suggestedTitle": "空港が多い県は年間最小相対湿度も多い?",
-      "combinedScore": 0.504,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 55
-    },
-    {
-      "topicKey": "corr-airport-count--public-elementary-school-pool-installation-rate",
-      "archetype": "B",
-      "metricKeys": [
-        "airport-count",
-        "public-elementary-school-pool-installation-rate"
-      ],
-      "label": "空港数 × 公立小学校プール設置率 (r=-0.65)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.6015704812642485,
-        "seasonality": 0,
-        "surprise": 0.652,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": -0.652,
-        "partialRPopulation": -0.687,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "infrastructure",
-          "educationsports"
-        ],
-        "gscImp": 152,
-        "rankingUrls": [
-          "/ranking/airport-count",
-          "/ranking/public-elementary-school-pool-installation-rate"
-        ]
-      },
-      "suggestedTitle": "空港が多い県は公立小学校プール設置が少ない?",
-      "combinedScore": 0.501,
       "lane": "opportunity",
       "status": "pending",
       "priority": 56

@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-08-17
- * 件数: blog 429 / tag 60 / survey 73
+ * 件数: blog 430 / tag 60 / survey 73
  */
 
 export interface SitemapBlogEntry {
@@ -54,6 +54,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "bonito-catch-zero-prefectures-gap", lastModified: "2026-06-13" },
   { slug: "bonito-vs-oyster-fish-map", lastModified: "2026-07-10" },
   { slug: "brazilian-resident-population-prefecture-gap", lastModified: "2026-06-13" },
+  { slug: "bread-consumption-expenditure-vs-site-area-per-dwelling", lastModified: "2026-08-17" },
   { slug: "bread-vs-rice-expenditure", lastModified: "2026-07-10" },
   { slug: "butter-vs-margarine-expenditure", lastModified: "2026-07-10" },
   { slug: "candy-expenditure-ranking", lastModified: "2026-07-10" },
