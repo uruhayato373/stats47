@@ -81,6 +81,8 @@ jobs:
         # cron が「確実にループし続ける」ための契約。2026-08-16 に 2 つの停止事故を踏んだ:
         # pull せずに push して (fetch first) で毎回落ちる型 (11 workflow) と、
         # ラチェット 1 つの赤で無関係な queue まで commit されない型 (是正ループが 17 日停止)。
+        # sync-snapshots は同じ「成果を落とす」型を 2 つ抱えていた (2026-08-17):
+        # 1 task の失敗で末尾 push に到達しない型と、timeout で push が途中打ち切られる型。
         run: npm run test:workflow-commit-back
         continue-on-error: false
 

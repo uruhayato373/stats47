@@ -91,6 +91,25 @@ gh run watch                                                        # 進捗確�
 **検証ゲート自体は緩めない。** 捨てられていたのは push であって、欠測を見逃してよいという話ではない。
 `❌ 失敗した task:` が出たら必ず原因を潰す。
 
+契約は `.claude/scripts/lib/__tests__/sync-snapshots-run-contract.test.mjs` が機械で固定する
+(PATH 先頭に fake `npx` を置いて `run.sh` の制御フローだけを走らせる。旧ロジックを注入すると
+push が呼ばれないことも assert するので「何も見ていないのに緑」にはならない)。
+CI 配線は `npm run test:workflow-commit-back`。
+
+### timeout は 120 分 (★2026-08-17 変更・45 分では完走しない)
+
+同じ「成果を落とす」型がもう 1 つあった。sync job は `timeout-minutes: 45` だったが、
+フル run の実測は **生成 30 分 + 末尾 push 21 分 = 約 52 分**で、構造的に完走できなかった。
+run 32006827498 では push が `Progress: 9,416 / 14,033 (errors: 0)` で cancel され、
+**書けた snapshot の 1/3 が届かないまま** runner ごと破棄されている
+(検証・purge step と `sync-ranking-keys` job も丸ごと skip)。
+**この打ち切られ方は上の run.sh 修正では救えない** — push 自体が殺されるため。
+
+**「差分 push」という名前だが CI ではフル push になる。** manifest (`.local/r2-manifest/`) は
+runner ローカルなので毎回空 (`マニフェスト記録済み: 0`) で、アップロード対象は常に全件
+(14,033 件・実測 11.2 files/s)。所要時間を見積もるときはこれを前提にする。
+manifest を持ち越して push 件数を減らす案は未着手 (`SYNC-SNAPSHOTS-ALLORNOTHING-01`)。
+
 ## 使い方 (ローカル = 生成のみ / push は CI)
 
 ### 通常実行 (全 snapshot を順次生成。push は CI 環境でのみ自動実行)
