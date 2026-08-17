@@ -4,6 +4,7 @@ import {
   checkCombinationUnitsAgree,
   checkMoneyUnitScale,
   moneyUnitExponent,
+  resolvePinnedSourceUnit,
 } from "../money-unit";
 
 /**
@@ -137,5 +138,48 @@ describe("checkCombinationUnitsAgree", () => {
     expect(checkCombinationUnitsAgree(["千円"]).kind).toBe("skip");
     expect(checkCombinationUnitsAgree([null, "千円"]).kind).toBe("skip");
     expect(checkCombinationUnitsAgree([]).kind).toBe("skip");
+  });
+});
+
+describe("resolvePinnedSourceUnit", () => {
+  it("pin された軸が 1 つだけ単位を持つなら確定する (社会・人口統計体系の実形)", () => {
+    // tab(観測値) は単位を持たず cat01(指標) だけが持つ。cat01 を 1 コードに pin してあるので確定する
+    expect(resolvePinnedSourceUnit([null, "千円"])).toEqual({ kind: "ok", unit: "千円" });
+  });
+
+  it("同じ単位が複数の軸から取れても確定する", () => {
+    expect(resolvePinnedSourceUnit(["百万円", "百万円"])).toEqual({
+      kind: "ok",
+      unit: "百万円",
+    });
+  });
+
+  it("前後の空白を無視する (e-Stat の @unit は空白を含むことがある)", () => {
+    expect(resolvePinnedSourceUnit([" 千円 "])).toEqual({ kind: "ok", unit: "千円" });
+  });
+
+  it("異なる単位が混ざるときは決めない — 推測で選ぶと 10^k ズレを作り直す", () => {
+    expect(resolvePinnedSourceUnit(["千円", "％"])).toEqual({
+      kind: "ambiguous",
+      units: ["千円", "％"],
+    });
+  });
+
+  it("どの軸も単位を宣言していなければ none (取れなかったことを整合に混ぜない)", () => {
+    expect(resolvePinnedSourceUnit([]).kind).toBe("none");
+    expect(resolvePinnedSourceUnit([null, undefined, ""]).kind).toBe("none");
+  });
+
+  it("解決した単位はそのまま checkMoneyUnitScale の入力になる (実際の欠陥 2 件を再現)", () => {
+    // 0000010107 書籍・雑誌小売業年間商品販売額: 原単位 百万円 に対し config は 円
+    const resolved = resolvePinnedSourceUnit([null, "百万円"]);
+    expect(resolved.kind).toBe("ok");
+    const v = checkMoneyUnitScale({
+      sourceUnit: resolved.kind === "ok" ? resolved.unit : null,
+      configUnit: "円",
+      declaredScale: 1,
+    });
+    expect(v.kind).toBe("mismatch");
+    if (v.kind === "mismatch") expect(v.expectedScale).toBe(1_000_000);
   });
 });
