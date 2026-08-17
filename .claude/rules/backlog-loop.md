@@ -20,7 +20,7 @@
 | **真実源 (処理対象)** | `docs/todo/{05,06,01}` | 何を処理するか。完了は**行削除** |
 | **routing policy** | `.claude/config/backlog-routing-policy.json` | class → model / effort / maxAttempts / 委譲 / 反映方法。数値はここだけ |
 | **ledger (証拠と学習の原資)** | `.claude/state/backlog-loop/ledger.json` | 1 件 1 レコード upsert。**完了して行を消した後も証拠が残る** |
-| 純関数 | `.claude/scripts/backlog-loop/{parse-backlog,queue,ledger,verify}-core.cjs` | I/O を持たない。テストが実ファイルに依存しない |
+| 純関数 | `.claude/scripts/backlog-loop/{parse-backlog,queue,ledger,verify,local-runtime}-core.cjs` | I/O を持たない。テストが実ファイルに依存しない |
 | CLI | 同ディレクトリの `*.mjs` | queue 生成 / outcome 記録 / verify |
 
 **04_改善バックログは対象外**。`improvement-triage` の排他 write で、effect 判定は
@@ -95,6 +95,7 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 | 04 / memory / learned への write | verify の `FORBIDDEN_PATH_PATTERNS` |
 | `.env` 等の秘密 | 同上 + workflow の `disallowedTools` |
 | owner 待ちの自動処理 | `preClassify` が needs-owner へ固定 |
+| **status の書き忘れで CI に閉じられない案件を拾う** | `local-runtime-core.cjs` が本文から**ローカル端末依存**を検出して needs-owner へ回す。詳細は §4.6 |
 | deploy / 本番 R2 push / force push | workflow の allowedTools に含めない |
 | **ループが自分の権限・予算を広げる** (`.github/` / routing policy への write) | verify の `FORBIDDEN_PATH_PATTERNS`。workflow を書き換えられると allowedTools・許可パス・timeout・モデルを自分で緩められ、他の全ての制約が意味を失う |
 | 暴走 (1 run で大量処理) | `policy.limits.maxItemsPerRun` |
@@ -119,6 +120,42 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 
 cloud セッションは `actions:write` が無く dispatch できないため、
 `data/backlog-loop-requests.json` を develop へ push する経路も持つ (request は成否によらず消費する)。
+
+---
+
+## 4.6 ローカル端末依存の検出 (status の書き忘れを機械で拾う)
+
+`status` は人が手で書くので**書き忘れる**。書き忘れると loop がそのエントリを拾い、
+**3 回失敗して quarantine するだけ**で終わる (CI 3 run + 日次枠 3 日分の損失)。
+2026-08-17 に 2 件実際に起きた — `ASP-CONTINUITY-01` (A8 の永続 Playwright プロファイル) と
+`PERF-LOCAL-NAV-01` (同一端末の before/after 実測)。どちらも要件は本文に書いてあった。
+
+`local-runtime-core.cjs` が本文を見て、`status` が `pending` でも
+**ローカル端末依存を名指ししていれば needs-owner へ回す**。人が見て ①status を
+`blocked-local-runtime` に直す ②CI で閉じられる部分を切り出す のどちらかを選ぶ。
+
+### 何を見て、何を見ないか (実測で決めた)
+
+| シグナル | 採否 | 実測 (56 エントリ) |
+|---|---|---|
+| Playwright 永続プロファイル / browser-use / 手動ログイン / 同一端末 / launchd | **採用** | 既知 2 件に発火・非 blocked 集団の誤検知 0 |
+| `.github/` への言及 | **却下** | 非 blocked 6 件に発火。大半は「検証コマンドが `.github/scripts` にある」文脈で作業自体は packages 内 |
+| 「デプロイ」「本番反映」 | **却下** | 完了条件に「デプロイ後に実測」と書いてあるだけのエントリを巻き込む |
+| 「オーナー判断/承認」 | **却下** | blocked 集団への recall が 15 件中 2 件・非 blocked にも発火 |
+
+**owner 承認待ちと `.github/` 禁止パスはこの検出器の担当外。** 文面から機械的に判別できないと
+実測で分かったものを「一応入れておく」と、誤検知を出すゲートになって運用で無効化される
+(`unit-semantics-standards.md` §5)。**この検出器はローカル端末依存だけを保証する** —
+それ以外の外部要因は依然として人が `status` に書く。
+
+### ゲート自体の検証
+
+`__tests__/local-runtime-core.test.cjs` が両方向を固定する。①既知 2 インシデントで発火 ②却下した
+シグナル (`.github/` / デプロイ / オーナー承認) では発火しない。パターンを 1 つ潰すと①が、
+却下シグナルを足すと②が落ちることを実測済み。
+
+> **テストファイルは glob で拾う** (`npm run test:backlog-loop`)。以前はファイル名を
+> 列挙していたため、**新しいテストを足しても走らなかった** (この検出器を追加したときに実際に踏んだ)。
 
 ---
 
