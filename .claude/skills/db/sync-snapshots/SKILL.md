@@ -17,6 +17,14 @@ co_agents: [article-writer, theme-designer, note-manager]
 > デプロイ済みコードで snapshot を作る設計)。**exporter を変更した場合、develop へ push しただけでは
 > dispatch に反映されない** — develop→main のデプロイ後に dispatch すること (2026-07-14 に merge 前
 > dispatch で旧コードが黙って走る事故が実発生。`--ref develop` は workflow 定義の選択であり checkout には効かない)。
+>
+> **★「exporter」だけの話ではない。`packages/data-configs` の config も同じ**
+> (2026-08-17 に再発)。婚姻率・離婚率の `seoTitle` を develop で是正した状態で
+> `--only ranking-items` を dispatch したところ、**main の古い config で item.json が再生成され**、
+> 本番の `<title>` は「離婚率 2024年・東京5.7」のまま変わらなかった (regenerate 自体は成功するので
+> 失敗にも見えない)。builder は `METRICS_REGISTRY` を直接読むため、**snapshot に載せたい変更は
+> それが config でも exporter でも先に main へ入れる**。順序は必ず
+> **develop→main のデプロイ → dispatch → 本番 `<title>` を Googlebot UA で実測**。
 
 ## R2 キーパス構造
 

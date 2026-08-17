@@ -6,6 +6,7 @@
  */
 
 import type { DesignatedCityWardMode } from "../../geoshape/types/geoshape-options";
+import { assertPrefectureCode } from "../../utils/prefecture-code";
 
 /** MLIT データバージョン（日付） */
 export const MLIT_VERSION = "20240101";
@@ -55,6 +56,9 @@ export function buildMlitR2Path(options: MlitR2PathOptions): string {
   if (!prefCode) {
     throw new Error("prefCode is required for type=city");
   }
+  // 補間する直前に書式を検証する。ここは R2 key とローカルのファイルパスの両方になるので、
+  // 2 桁の数字以外を通すとパストラバーサルの経路になる (CODEQL-JS-BACKLOG-01)。
+  const safePrefCode = assertPrefectureCode(prefCode, "buildMlitR2Path");
   const suffix = wardMode === "merged" ? "_city_dc" : "_city";
-  return `${R2_MLIT_PREFIX}${MLIT_VERSION}/${prefCode}/${prefCode}${suffix}.topojson`;
+  return `${R2_MLIT_PREFIX}${MLIT_VERSION}/${safePrefCode}/${safePrefCode}${suffix}.topojson`;
 }
