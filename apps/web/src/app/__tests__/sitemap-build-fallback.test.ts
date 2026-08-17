@@ -82,10 +82,22 @@ describe("sitemap ビルド時フォールバック (R2 が空でも空にしな
     expect(entries).toHaveLength(CATEGORY_KEYS.length);
   });
 
-  it("survey は git master ではなく R2 の配信実態を使う (本番 404 を提出しない)", () => {
-    // surveys.json (master) にあるが配信されていない id。提出すると 404 を増やす。
-    // 実測 2026-08-06: livestock-statistics=orphan(item無し) / population-projection=item全てinactive。
-    expect(SITEMAP_SURVEY_IDS).not.toContain("livestock-statistics");
-    expect(SITEMAP_SURVEY_IDS).not.toContain("population-projection");
+  it("survey id は本番 404 にならない形をしている (合成 id / 表記ゆれを提出しない)", () => {
+    // ★個別 id をここに固定しない (2026-08-17 改訂)。
+    //   旧版は「実測 2026-08-06: livestock-statistics は orphan」として id を直書きしていたが、
+    //   dairy-cattle-count の配信が直って livestock-statistics が正当に配信対象へ入った途端に落ちた。
+    //   どの調査が配信されるかは metric の isActive と観測値の有無で日々動くので、
+    //   スナップショットを assert すると「データを直すとテストが落ちる」状態になる。
+    //
+    //   「git master のコピーではなく R2 の配信実態から導出されている」ことは
+    //   Static Gates の generate-sitemap-blog-entries --check が毎 PR 実測する。
+    //   ここは offline で検証できる構造 (= 404 になる形をしていないか) だけを見る。
+    expect(SITEMAP_SURVEY_IDS.length).toBeGreaterThan(0);
+    // 合成 id (`ssds-src:世界農林業センサス` / `src:*`) はマスタに実在せず /survey/<id> が 404 になる
+    // (2026-07-24 に約 231 ランキングページが実際に 404 リンクを張っていた)
+    expect(SITEMAP_SURVEY_IDS.filter((id) => /^(?:ssds-)?src:/.test(id))).toEqual([]);
+    // surveys.json の id 規約は kebab-case ASCII。日本語や大文字が混ざるのは合成 id の兆候
+    expect(SITEMAP_SURVEY_IDS.filter((id) => !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id))).toEqual([]);
+    expect(new Set(SITEMAP_SURVEY_IDS).size).toBe(SITEMAP_SURVEY_IDS.length);
   });
 });
