@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-17T12:57:40.899Z",
+  "updatedAt": "2026-08-17T13:21:10.052Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -235,6 +235,43 @@
       },
       "reclassifiedFrom": [],
       "completedAt": null
+    },
+    "DATA-REFRESH-HEALTH-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-17T13:21:10.052Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "mcp github get_job_logs run=30979118359 job=92219544863",
+              "mcp github issue_read #670",
+              "grep -nE 'name:|if:' .github/workflows/data-refresh.yml"
+            ],
+            "pass": true
+          },
+          "evidence": "原因を実測で特定した。「単発の外部要因」ではない。2026-08-05 は page-data-batch が ok=2148 で取り込み成功しながら、末尾のゼロ件ゲート (empty 37 件) で exit 1 し、Push observations to R2 step が always() を持たないため skip され 2,148 件が push されていない。2026-07-05 は別原因 (correlation の JS ヒープ OOM 4,051MB・heap 8GB へ引き上げ済)。是正は DATA-REFRESH-ZEROGATE-",
+          "failReason": null,
+          "followUps": [
+            "DATA-REFRESH-ZEROGATE-ALLORNOTHING-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-17T13:21:10.052Z"
     }
   }
 }
