@@ -72,6 +72,35 @@ packages/data-configs/src/unit/unit-semantics.ts   ← 正典 (ここだけ編�
 
 ---
 
+## 2.5 取り込み時の換算は `valueScale` で宣言する (金額族専用・2026-08-17)
+
+e-Stat は**倍率を単位文字列に埋め込む** (`千円` / `百万円`)。取り込みは値を変換せず `unit` は
+config の文字列を貼るだけなので、**宣言が無いと config が「万円」でも値は千円のまま配信される**。
+2026-08-05 に職業別平均年収 39 件がこの状態で 10 倍過大だった (東京の調理従事者が 4,153.9「万円」)。
+
+```ts
+// packages/data-configs/src/metrics/cook-annual-income.ts
+source: { kind: "estat", statsDataId: "0003445758", valueScale: 0.1, /* 千円 → 万円 */ … }
+```
+
+| 決めごと | 内容 |
+|---|---|
+| 書ける値 | `10^k` のみ。期待値は `10^(原単位の指数 − config.unit の指数)` |
+| 適用箇所 | `page-data-batch.ts` の `shapeForPrefecture` / `shapeForCity` (`applyValueScale`) |
+| 欠測 | `null` のまま。0 を捏造しない |
+| 浮動小数 | `4153.9 * 0.1` は 2 進で `415.39000000000004`。有効桁 15 で丸めて残差だけ落とす (整数は丸めない) |
+| レシピ | `buildOps` が `ops.valueScale` に載せる → **configHash が変わり監査 (検査 k) が R2 の stale を追跡**する |
+| `valueScale: 1` | 未宣言と同義なのでレシピに**載せない** (既存 2,000 件超の configHash を一斉に動かさない) |
+
+**`tabCombination` の `factor` とは別物。** あちらは系列の線形結合の係数で**単位を変えない**
+(千円を 12 倍しても千円)。混同すると二重に掛かる。
+
+判定と全数監査は `packages/data-configs/src/money-unit.ts` (純関数・テスト 27 件) と
+`packages/data-configs/scripts/audit-money-unit-scale.ts`。原単位は tab 軸から読むが、
+**社会・人口統計体系 (`0000010xxx`) は tab が 1 値で単位を持たず cat01 (指標) 側にある**ので、
+pin 済み分類コードの `@unit` も見る (`resolvePinnedSourceUnit`)。pin から複数の異なる単位が
+取れたら `ambiguous` として**選ばない**。
+
 ## 3. 禁止事項
 
 | NG | OK |
@@ -81,6 +110,9 @@ packages/data-configs/src/unit/unit-semantics.ts   ← 正典 (ここだけ編�
 | 鏡 (`.claude/scripts/lib/unit-semantics.mjs`) を直接編集 | 正典を編集して再生成 |
 | 「千」を無条件にスケール接頭辞とみなす | `isScalePrefixPartOfUnit(prefix, ssotUnit)` で判定 |
 | 検証器を作って「全 PASS」で満足する | 誤値を注入して**発火することを実測**する (§5) |
+| **金額族以外の unit に `valueScale` を付ける** | 金額族のみ。lint `[value-scale]` が error で弾く (§2.5) |
+| **`valueScale` に `10^k` 以外を書く** | 同上。率や人数に付けると配信値が黙って何倍かになる |
+| **config を直しただけで再取り込みを省く** | 宣言を変えたら再取り込みまでやる (`audit-reingest-queue.ts` が `stale-delivery` で追う) |
 
 ### 例外として残している自前実装
 
@@ -195,7 +227,11 @@ blog の data json も同じ形で、`label: 人口10万人あたり外国人数
 
 - 正典: `packages/data-configs/src/unit/unit-semantics.ts` / 鏡: `.claude/scripts/lib/unit-semantics.mjs`
 - 生成器: `packages/data-configs/scripts/generate-unit-semantics-mirror.ts`
-- 金額族の先行実装 (吸収済み): `packages/data-configs/src/money-unit.ts` / `audit-money-unit-scale.ts`
+- **金額族の換算 (§2.5)**: 判定 `packages/data-configs/src/money-unit.ts`
+  (`checkMoneyUnitScale` / `resolvePinnedSourceUnit` / `applyValueScale`) /
+  全数監査 `packages/data-configs/scripts/audit-money-unit-scale.ts` /
+  型 `EstatSource.valueScale` / レシピ `recipe.ts` の `ops.valueScale` /
+  lint `validate-metric-config.ts` の `[value-scale]`
 - 期間 (月額↔年額): `packages/ranking/src/utils/period-align.ts` / `metric-config-standards.md` の `periodAlign`
 - 値照合: `.claude/scripts/lib/article-factual-check.mjs` (ブログ) /
   `packages/product-factory/src/text/fact-claims.ts` (書籍) / `.claude/scripts/lib/map-value-match.mjs` (地図)

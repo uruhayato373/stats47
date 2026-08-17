@@ -75,6 +75,22 @@ gh run watch                                                        # 進捗確�
 どうしてもローカルから push する場合のみ `ALLOW_LOCAL_R2_WRITE=1` を付与 (非推奨)。
 方針: `.claude/rules/local-environment.md` / `.claude/rules/r2-storage-design.md`。
 
+### 1 task が失敗しても成功分は push する (★2026-08-17 変更)
+
+以前は失敗が 1 件でもあると**末尾の push に到達せず、成功した task の成果物ごと捨てられていた**。
+生成物は runner の `.local/r2` にあり runner は破棄されるので復旧手段も無い。
+
+実害: `ranking-values` は **2,244 件を書き切った後**の検証 (観測値 0 件の未登録キー) で exit 1 して
+おり、生成は全件成功しているのに 1 バイトも push されず `app/ranking/<key>/values.json` が
+**2026-08-11 から 6 日間 site-wide で凍結**していた (`total-population` まで巻き添え)。
+
+現在は **push → 失敗判定** の順。run は赤のまま (`[Data Refresh Alert]` Issue も従来どおり起票)
+なので失敗の signal は失われない。方針は `ranking-content-standards.md` §2026-08-07 の
+「バッチはオールオアナッシングにしない」と同じ。
+
+**検証ゲート自体は緩めない。** 捨てられていたのは push であって、欠測を見逃してよいという話ではない。
+`❌ 失敗した task:` が出たら必ず原因を潰す。
+
 ## 使い方 (ローカル = 生成のみ / push は CI)
 
 ### 通常実行 (全 snapshot を順次生成。push は CI 環境でのみ自動実行)
