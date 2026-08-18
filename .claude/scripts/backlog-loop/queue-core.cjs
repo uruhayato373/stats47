@@ -19,25 +19,29 @@
  * I/O を持たない。テスト: `__tests__/queue-core.test.cjs`
  */
 
-/** 人間の判断待ちを表す status (自動処理の対象外) */
-const OWNER_BLOCKED = /^blocked-owner/;
-/** 外部要因待ち。owner 判断ではないが自動では動かせない */
-const EXTERNAL_BLOCKED = /^(blocked-|pending-(source-release|decision|browser-reproduction))/;
+/**
+ * 自動処理の対象外を表す executor (v3-unified タグ語彙。正典 `.claude/rules/todo-standards.md`)。
+ * `対話`=方針判断がユーザーと要る / `ユーザー`=手作業・ログイン・実測 /
+ * `windows`・`別環境`=CI に無いローカル環境が要る。
+ */
+const NEEDS_OWNER_EXECUTORS = new Set(['対話', 'ユーザー', 'windows', '別環境']);
 
-/** 進行中は触らない (人 or 別 run が作業中) */
-const IN_PROGRESS = 'in-progress';
+/** tier の実行優先順 (backlog-lib の TIER_ORDER と同義。🟣 hold は eligibility で弾く) */
+const TIER_RANK = { high: 0, mid: 1, low: 2, hold: 9 };
 
 const { localRuntimeSignals, localRuntimeReason } = require('./local-runtime-core.cjs');
 
 /**
- * status から機械的に決まる class を返す。決まらなければ null (モデルが分類する)。
+ * タグ宣言から機械的に決まる class を返す。決まらなければ null (モデルが分類する)。
+ *
+ * 旧形式は status 文字列 (blocked-owner-* 等) をヒューリスティックに読んでいたが、
+ * v3-unified では [実行:X] と 🟣 tier が**宣言**なので判定が単純になる。
+ * 毎回モデルに「これは人間待ちですね」と言わせない理由は従来どおり
+ * (トークンの無駄 + モデルが勝手に owner 判断を進める余地を残さない)。
  */
 function preClassify(entry) {
-  const status = String(entry?.fields?.status ?? '').trim();
-  if (!status) return null;
-  if (OWNER_BLOCKED.test(status)) return 'needs-owner';
-  if (EXTERNAL_BLOCKED.test(status)) return 'needs-owner';
-  if (status === 'deferred') return null; // deferred は trigger 判定が要る → モデルへ
+  if (entry?.tier === 'hold') return 'needs-owner'; // 🟣 = 意思決定が未了
+  if (entry?.executor && NEEDS_OWNER_EXECUTORS.has(entry.executor)) return 'needs-owner';
   return null;
 }
 
@@ -46,26 +50,37 @@ function preClassify(entry) {
  */
 function eligibility(entry, { ledger, quarantined }) {
   const id = entry.id;
-  const status = String(entry?.fields?.status ?? '').trim();
 
-  if (status === IN_PROGRESS) {
-    return { eligible: false, reason: 'in-progress (人または別 run が作業中)' };
+  if (entry.wip) {
+    return { eligible: false, reason: '[進行中] (人または別 run が作業中)' };
   }
   const pre = preClassify(entry);
   if (pre === 'needs-owner') {
-    return { eligible: false, reason: `owner/外部待ち (${status})`, class: 'needs-owner' };
+    const why =
+      entry.tier === 'hold'
+        ? '🟣 判断待ち (意思決定が未了)'
+        : `実行:${entry.executor} (自動処理の対象外)`;
+    return { eligible: false, reason: why, class: 'needs-owner' };
   }
-  // status が pending のままでも、本文がローカル端末依存を名指ししていれば CI では閉じられない。
+  if (!id) {
+    // ledger は ID で結び付けるので、ID の無いカードは処理できない (分類待ちとして surface)
+    return { eligible: false, reason: 'ID なし (todo-curator が採番するまで処理対象外)' };
+  }
+  // executor 未宣言のカードは、本文がローカル端末依存を名指ししていれば CI では閉じられない。
   // 拾わせると 3 回失敗 → quarantine で日次枠を燃やすだけなので、ここで needs-owner へ回す
   // (ASP-CONTINUITY-01 / PERF-LOCAL-NAV-01 で実際に踏んだ。判定の根拠は local-runtime-core.cjs)。
-  const localSignals = localRuntimeSignals(entry.body);
-  if (localSignals.length > 0) {
-    return {
-      eligible: false,
-      reason: localRuntimeReason(localSignals),
-      class: 'needs-owner',
-      localRuntimeSignals: localSignals.map((s) => s.name),
-    };
+  // **[実行:sweep|機械] の明示宣言があれば backstop を通さない** — 宣言は人間の判断で、
+  // 本文に「Playwright」等の語が引用されているだけのカードを恒久に弾かない override になる。
+  if (!entry.executor) {
+    const localSignals = localRuntimeSignals(entry.body);
+    if (localSignals.length > 0) {
+      return {
+        eligible: false,
+        reason: localRuntimeReason(localSignals),
+        class: 'needs-owner',
+        localRuntimeSignals: localSignals.map((s) => s.name),
+      };
+    }
   }
   if (quarantined.has(id)) {
     const q = ledger.items?.[id]?.quarantine;
@@ -80,13 +95,13 @@ function eligibility(entry, { ledger, quarantined }) {
 /**
  * 優先度スコア。小さいほど先。
  *
- * tier を第一基準にするのは 00_運用ガイド の P0>P1>P2>P3 に従うため。同 tier 内では
+ * tier を第一基準にするのは todo-standards.md の 🔴>🟡>🟢 に従うため。同 tier 内では
  * **試行回数が少ないものを先**にする (何度も失敗しているものが枠を占有し続けるのを防ぐ)。
  */
 function priorityOf(entry, ledger) {
-  const tier = Number.parseInt(String(entry?.fields?.tier ?? '9'), 10);
+  const tier = TIER_RANK[entry?.tier] ?? 9;
   const attempts = ledger.items?.[entry.id]?.attempts?.length ?? 0;
-  return { tier: Number.isFinite(tier) ? tier : 9, attempts };
+  return { tier, attempts };
 }
 
 /**
@@ -133,7 +148,7 @@ function escalate(policy, className, ledger, id) {
  * キューを組む。
  *
  * @param {object} params
- * @param {Array} params.entries parse-backlog-core の見出し型エントリ
+ * @param {Array} params.entries parse-backlog-core のカード (backlog-lib v3-unified)
  * @param {object} params.ledger normalizeLedger 済み
  * @param {Set<string>} params.quarantined
  * @param {object} params.policy backlog-routing-policy.json
@@ -182,8 +197,10 @@ function buildQueue({ entries, ledger, quarantined, policy, limit }) {
       sourceFile: entry.sourceFile,
       startLine: entry.startLine,
       endLine: entry.endLine,
-      status: entry.fields.status ?? null,
-      tier: entry.fields.tier ?? null,
+      tier: entry.tier ?? null,
+      kind: entry.kind ?? null,
+      executor: entry.executor ?? null,
+      verify: entry.verify ?? null,
       knownClass: known,
       attempts: ledger.items?.[entry.id]?.attempts?.length ?? 0,
       route,

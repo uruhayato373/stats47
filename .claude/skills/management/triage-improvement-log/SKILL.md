@@ -6,7 +6,7 @@ primary_agent: improvement-triage
 
 # triage-improvement-log
 
-`.claude/todo/04_改善バックログ.md` の pending / in-progress 施策を、**Tier × 期日カテゴリ** のマトリクスで一望し、人間が「次にどれを潰すか」を判定するための UX レイヤースキル。
+`.claude/todo/improvements.md` の pending / in-progress 施策を、**Tier × 期日カテゴリ** のマトリクスで一望し、人間が「次にどれを潰すか」を判定するための UX レイヤースキル。
 
 `triage-matrix.mjs` (原始抽出) の上に、weekly triage 用の表示モード (markdown / csv / matrix) と自動アクション提案を追加する。
 
@@ -73,8 +73,8 @@ Tier × 期日カテゴリの集計マトリクス。
 
 ### 自動アクション提案
 
-- **EXP-005** (gsc, tier 1, deployed 2026-04-20, 28d): 期限切れ警告: 検証コマンド実行 or due 延長 → .claude/todo/04_改善バックログ.md#exp-005
-- **T2-CLEAN-03** (ga4, tier 2, due 2026-05-10): effect 判定実施を本週内に → .claude/todo/04_改善バックログ.md#t2-clean-03
+- **EXP-005** (gsc, tier 1, deployed 2026-04-20, 28d): 期限切れ警告: 検証コマンド実行 or due 延長 → .claude/todo/improvements.md#exp-005
+- **T2-CLEAN-03** (ga4, tier 2, due 2026-05-10): effect 判定実施を本週内に → .claude/todo/improvements.md#t2-clean-03
 ```
 
 期日カテゴリ判定 (今日基準):
@@ -119,13 +119,13 @@ node .claude/scripts/lib/triage-matrix.mjs --format markdown
 
 - `.claude/scripts/lib/triage-matrix.mjs` — 本スキルの実装
 - `.github/workflows/improvement-log-reminder-weekly.yml` — 週次 triage Issue 起票 (本スキルの主要呼び出し元)
-- `.claude/todo/04_改善バックログ.md` — 改善バックログ全体 (TODO 真実源)
+- `.claude/todo/improvements.md` — 改善バックログ全体 (TODO 真実源)
 - `.claude/rules/docs-vs-issues.md` — 改善施策の置き場所
 - `.claude/rules/evidence-based-judgment.md` — effect 判定の実証ベース原則
 
 ## 制約・注意
 
-- 本スキルは `.claude/todo/04_改善バックログ.md` を直接書き換えない (read-only)
+- 本スキルは `.claude/todo/improvements.md` を直接書き換えない (read-only)
 - 集計対象は triage-matrix.mjs の対象と同じ (status: pending | in-progress)
 - TEMPLATE section (`-XXX` で終わる ID 等) は自動除外
 - マトリクスの集計は今日 (UTC) を基準。timezone shift は意図的に行わない

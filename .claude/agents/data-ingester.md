@@ -105,7 +105,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
   本番は `KNOWN_RANKING_KEYS` / R2 `app/ranking-items/all.json` 等の派生リストと整合して初めて 200 を返す
   (middleware は `isGone || !isKnown` で 410)。公開は config 起点の多段再生成 (generate-ranking-items 配線 +
   known 再生成 + sitemap/indexable + 再デプロイ + purge + 本番実測) が必要。手順: memory
-  `project_ranking_publish_pipeline_gap` / `.claude/todo/05_機能バックログ.md`。activate 量産時はここまでをセットで計画すること
+  `project_ranking_publish_pipeline_gap` / `.claude/todo/backlog.md`。activate 量産時はここまでをセットで計画すること
 - **観測値投入だけでは配信されない (2026-07-27)**: `app/stats/<metric>/values.json` に観測値を投入しても、
   配信用の `app/ranking/<key>/values.json` (実描画値・OGP・blog が読む) が別途 `generate-ranking-values.ts`
   (sync-snapshots の `ranking-values` task、`ranking-items` の後) で生成されないと空ページ配信になる。

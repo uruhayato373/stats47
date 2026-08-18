@@ -504,7 +504,7 @@ awk -F',' 'NR>1 && $1 ~ /\/blog\// && $3 >= 200 && ($4+0) < 0.02 && ($4+0) > 0 {
 2. 必要なら本文も編集 ([!NOTE] callout 追加、内部リンク強化)
 3. `bash .claude/skills/db/sync-snapshots/run.sh --only blog` で R2 push
    （`export-blog-snapshot.ts` が article.md frontmatter を直接読んで `app/blog/all.json` を生成 = 完全DBレス。D1 articles テーブルは廃止済）
-4. 改善バックログ `.claude/todo/04_改善バックログ.md` に BLOG-CTR-NN として記録
+4. 改善バックログ `.claude/todo/improvements.md` に BLOG-CTR-NN として記録
 5. feature ブランチで commit → develop merge → PR develop → main → CI green → merge → Cloudflare Pages 自動 deploy
 
 ## 実証データ (2026-05-23 ベース)
@@ -703,5 +703,5 @@ node .claude/scripts/blog/audit-published-blog.mjs
 - 勝ち要因分析スキル: `.claude/skills/blog/analyze-winning-patterns/SKILL.md`
 - 親方針: `docs/00_プロジェクト管理/03_マーケティング戦略.md`「成長レバー > SEO品質」
 - 実測判定ルール: `.claude/rules/evidence-based-judgment.md`
-- 改善バックログ: `.claude/todo/04_改善バックログ.md` (BLOG-CTR-03 / BLOG-CTR-04)
+- 改善バックログ: `.claude/todo/improvements.md` (BLOG-CTR-03 / BLOG-CTR-04)
 - 既存スキル: `.claude/skills/blog/brushup-blog/SKILL.md` (`--target queue` が是正の実行エンジン)

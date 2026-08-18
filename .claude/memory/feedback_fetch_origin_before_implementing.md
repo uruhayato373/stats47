@@ -14,7 +14,7 @@ metadata:
 **How to apply**: 実装系タスク（特に改善バックログ/収益化戦略の施策）に着手する前に必ず:
 1. `git fetch origin main develop`
 2. `git rev-list --count HEAD..origin/main`（>0 ならローカルが古い → 先に ff 同期）
-3. 着手予定の施策が `.claude/todo/04_改善バックログ.md`（origin/develop 版）と `git log origin/develop -S "<施策ID/キーワード>"` に既存でないか検索
+3. 着手予定の施策が `.claude/todo/improvements.md`（origin/develop 版）と `git log origin/develop -S "<施策ID/キーワード>"` に既存でないか検索
 4. 触る予定のファイルが既に origin で変更済みでないか `git show origin/develop:<path>` で確認
 
 **Why**: stale ローカル + 並行セッションの組合せで「既デプロイ済みの作業を重複実装→破棄」が起きる。fetch + diff を 1 分かけるだけで丸ごと回避できる。関連: [[feedback_shared_working_copy_git_race]]（2 セッションが同一 working copy を共有する別ケース）。

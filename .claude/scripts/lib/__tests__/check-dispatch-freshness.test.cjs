@@ -75,7 +75,7 @@ test('state / docs だけの乖離では鳴らない (実測の通常状態)', (
       '.claude/state/ai-content/queue.json',
       '.claude/state/ai-content/LATEST.md',
       '.claude/state/metrics/claude-usage/history.csv',
-      '.claude/todo/05_機能バックログ.md',
+      '.claude/todo/backlog.md',
       '.github/workflows/sync-snapshots.yml',
     ],
   });
@@ -125,7 +125,7 @@ test('isRelevantPath: 生成入力とそれ以外を分ける', () => {
     assert.equal(isRelevantPath(p), true, `${p} が入力扱いされない`);
   }
   for (const p of [
-    '.claude/todo/05_機能バックログ.md',
+    '.claude/todo/backlog.md',
     '.claude/state/ai-content/queue.json',
     '.github/workflows/sync-snapshots.yml',
     'data/workflow-dispatch-requests.json',

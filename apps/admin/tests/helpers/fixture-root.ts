@@ -29,6 +29,10 @@ const REAL_PARSE_CORE = path.resolve(
   __dirname,
   "../../../../.claude/scripts/backlog-loop/parse-backlog-core.cjs",
 );
+const REAL_BACKLOG_LIB = path.resolve(
+  __dirname,
+  "../../../../.claude/scripts/lib/backlog-lib.cjs",
+);
 
 export interface SeedPost {
   id: number;
@@ -124,6 +128,7 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
     const coreDir = path.join(root, ".claude/scripts/backlog-loop");
     fs.mkdirSync(coreDir, { recursive: true });
     fs.copyFileSync(REAL_PARSE_CORE, path.join(coreDir, "parse-backlog-core.cjs"));
+    fs.copyFileSync(REAL_BACKLOG_LIB, path.join(libDir, "backlog-lib.cjs"));
   }
 
   // 8) 任意のファイル (state など。パスは root 相対)

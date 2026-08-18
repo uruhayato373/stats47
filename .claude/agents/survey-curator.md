@@ -22,7 +22,7 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 > - `ranking-ui-manager`: SurveyCard・/survey ページ等の UI 層。
 > - `gsc-analyst` / `ga4-analyst`: 計測 snapshot の取得 (既存 cron)。本 agent は read のみ
 >   (page filter query 等の追加取得は analyst へ依頼を発行)。
-> - `improvement-triage`: `.claude/todo/04_改善バックログ.md` の**排他 writer**。本 agent は改善候補を
+> - `improvement-triage`: `.claude/todo/improvements.md` の**排他 writer**。本 agent は改善候補を
 >   §引き渡し形式で渡すだけで、バックログに直接書かない。
 
 ## OUTPUT FORMAT (必須・冒頭固定)
@@ -101,7 +101,7 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 - portfolio/experiments の手編集 (builder スクリプト経由のみ) / 推測値の保存
 - surveys.json / survey-editorial.ts への GSC・GA4 等の変動値の書き込み
 - 75 survey の一括 AI 長文化 / 根拠 (evidenceRefs + 56d 実測) なしの merge/retire 判定
-- `.claude/todo/04_改善バックログ.md` への直接書き込み (improvement-triage 専有)
+- `.claude/todo/improvements.md` への直接書き込み (improvement-triage 専有)
 - R2 push / deploy (CI・r2-publisher・ranking-publisher へ委譲)
 
 ## File Boundary
@@ -112,7 +112,7 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
   `.claude/state/surveys/*` (builder スクリプト経由) /
   `.claude/skills/survey/manage-survey-portfolio/reference/**` (運用設計・reviews・audits) / 自分の監査レポート出力
 - **読み取り専用**: builder / exporter / UI コード / GSC・GA4 snapshot (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) /
-  `.claude/todo/04_改善バックログ.md` (変更が必要なら main セッションか担当 agent に返す)
+  `.claude/todo/improvements.md` (変更が必要なら main セッションか担当 agent に返す)
 
 ## 検証コマンド
 

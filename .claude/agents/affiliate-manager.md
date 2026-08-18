@@ -81,4 +81,4 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
 - 配信: `apps/web/src/features/ads/`
 - 実装規約: `.claude/rules/affiliate-ads-standards.md` / 戦略: `docs/00_プロジェクト管理/02_収益化戦略.md` §3-6
 - ASP継続運用: `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` /
-  `.claude/todo/05_機能バックログ.md` の `ASP-CONTINUITY-01`
+  `.claude/todo/backlog.md` の `ASP-CONTINUITY-01`

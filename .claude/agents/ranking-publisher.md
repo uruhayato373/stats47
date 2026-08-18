@@ -94,7 +94,7 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 - `.claude/rules/metric-config-standards.md` —「isActive:true ≠ 本番公開」多段依存
 - `.claude/rules/branch-workflow.md` — develop→main、デプロイ規律、実行環境差分（cloud は workflow dispatch 不可）
 - `.claude/rules/r2-storage-design.md` / `.claude/rules/data-sqlite-ssot.md` — R2 namespace / 完全DBレス
-- `.claude/todo/05_機能バックログ.md` —「122 metric の本番公開」手順
+- `.claude/todo/backlog.md` —「122 metric の本番公開」手順
 - memory `project_ranking_publish_pipeline_gap`
 
 ## 触る files

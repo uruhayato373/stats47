@@ -15,7 +15,7 @@
 | 型・列挙値 | `types.ts` |
 | 構造検証 | `packages/data-configs/scripts/validate-prefecture-statistics-catalog.ts` |
 | 到達性検証 | `packages/data-configs/scripts/check-prefecture-statistics-links.ts` |
-| 未採用の指標候補 | `.claude/todo/06_指標バックログ.md` |
+| 未採用の指標候補 | `.claude/todo/backlog.md` |
 | 採用済みテーマ構成 | `packages/data-configs/src/theme-catalog/*.ts` |
 | 観測値 | R2 snapshot |
 
@@ -90,7 +90,7 @@ npm run type-check --workspace @stats47/data-configs
    分母、対象年齢、名目・実質、実数・率が違う指標は統合しない。
 4. `existing` / `near-duplicate` / `candidate` / `local-only`へ分類する。
 5. `candidate`は一次データで統計表ID、分類コード、47県可否、直近年、
-   既存重複を検証してから`.claude/todo/06_指標バックログ.md`へ追加する。
+   既存重複を検証してから`.claude/todo/backlog.md`へ追加する。
 
 需要スコアの初期値:
 

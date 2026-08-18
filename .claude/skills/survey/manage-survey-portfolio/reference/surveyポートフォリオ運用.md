@@ -104,7 +104,7 @@ apps/web/src/features/survey/survey-editorial.ts     ← 編集本文 SSOT (cont
 .claude/state/surveys/experiments.json               ← 改善実験台帳 (baseline / 期日 / verdict)
   ↑ 書き込み: survey-curator が builder スクリプト経由でのみ
 .claude/skills/survey/manage-survey-portfolio/reference/  ← 運用設計 (本書) + reviews/ + audits/ (日付付き証跡)
-.claude/todo/04_改善バックログ.md                       ← 書き込みは improvement-triage のみ (不変)
+.claude/todo/improvements.md                       ← 書き込みは improvement-triage のみ (不変)
 ```
 
 - 計測値 (GSC/GA4) は **snapshot への参照 (`gscSnapshotRef` 等) + 集計値のコピー**を portfolio.json に

@@ -20,4 +20,4 @@ metadata:
 
 **★限界（次の磨き込み）**: (1) **P-02〜P-13 は未接続=共通デモデータ**（日本人人口2024）。実指標接続が出品の律速（各パックに datasets を定義→data-ingester で接続→status 昇格）。(2) **note チャネル凍結中**（PACKS_MIGRATION で tsconfig/vitest exclude・未公開のため実害なし。1パック=1記事の再設計が残タスク）。(3) **Office 実機未検証**（環境に PowerPoint/Excel が無く OOXML 構造検証のみ。オーナーが Windows でまとめて検証する方針）。(3) 地図は概略海岸線・沖縄インセット未実装。docx/web は未対応スキップ。
 
-**構造化（2026-07-18 作成済）**: 正典 rule `.claude/rules/coconala-product-standards.md` / skill `/build-coconala-product`（`.claude/skills/product/`）/ agent `coconala-product-manager`（README Tier5 登録）。恒久 workflow(CI) は未作成（生成は手動 CLI）。**出品はオーナーの人間工程**（禁止事項・アカウント操作）。戦略（`docs/02_実装計画/01`）は「1商品ずつ需要実測」。残作業は `.claude/todo/05_機能バックログ.md#COCONALA-PRODUCT-FACTORY-01`。
+**構造化（2026-07-18 作成済）**: 正典 rule `.claude/rules/coconala-product-standards.md` / skill `/build-coconala-product`（`.claude/skills/product/`）/ agent `coconala-product-manager`（README Tier5 登録）。恒久 workflow(CI) は未作成（生成は手動 CLI）。**出品はオーナーの人間工程**（禁止事項・アカウント操作）。戦略（`docs/02_実装計画/01`）は「1商品ずつ需要実測」。残作業は `.claude/todo/backlog.md#COCONALA-PRODUCT-FACTORY-01`。

@@ -8,7 +8,7 @@ tags: [theme-catalog, metrics, charts, editorial-workflow]
 # テーマ指標×チャート改善の実行契約
 
 テーマレビューで採択された指標・チャート改善を `ThemeCatalog` へ反映する際のエージェント向け
-実行契約。進捗と優先度は `.claude/todo/05_機能バックログ.md` の
+実行契約。進捗と優先度は `.claude/todo/backlog.md` の
 `THEME-CATALOG-QUALITY-01`、カタログの恒久規約は
 `.claude/rules/theme-catalog-standards.md` を正典とする。
 
@@ -30,7 +30,7 @@ Theme brief
 - 調査・提案は `theme-researcher`、採択後のカタログ設計は `theme-designer` が担当する。
 - チャートpropsは `theme-component-builder`、新しい描画型は `chart-component-builder` に渡す。
 - `theme-portfolio-manager` は実測評価と実験台帳を持ち、カタログやUIを直接実装しない。
-- 新規metric候補は `.claude/todo/06_指標バックログ.md` へ分離し、未検証IDを投入しない。
+- 新規metric候補は `.claude/todo/backlog.md` へ分離し、未検証IDを投入しない。
 
 ## Theme brief
 

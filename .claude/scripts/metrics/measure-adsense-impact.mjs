@@ -20,7 +20,7 @@
  *
  * 使い方:
  *   node .claude/scripts/metrics/measure-adsense-impact.mjs
- *     → .claude/todo/04_改善バックログ.md の metric=adsense 施策のうち deploy 日を持つものを自動計測
+ *     → .claude/todo/improvements.md の metric=adsense 施策のうち deploy 日を持つものを自動計測
  *   node .claude/scripts/metrics/measure-adsense-impact.mjs --all
  *     → 判定済み（effect/none 等）も含めて再計測
  *   node .claude/scripts/metrics/measure-adsense-impact.mjs --deployed 2026-07-03 --label ANCHOR-01
@@ -29,7 +29,7 @@
  *   --upsert-log      … improvement-log に閾値エンジンの判定セクションを upsert する
  *
  * 入力:
- *   - .claude/todo/04_改善バックログ.md              （施策 → deploy 日）
+ *   - .claude/todo/improvements.md              （施策 → deploy 日）
  *   - .claude/state/metrics/adsense/history.csv         （週次アカウント）
  *   - .claude/state/metrics/adsense/history-devices.csv （週次デバイス別）
  * 出力: 標準出力（+ `--out` / `--upsert-log` 指定時のみファイル）
@@ -53,7 +53,7 @@ import { upsertSection } from "../lib/effect-verdict/section-upsert.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PROJECT_ROOT = join(__dirname, "..", "..", "..");
-const BACKLOG = join(PROJECT_ROOT, ".claude/todo/04_改善バックログ.md");
+const BACKLOG = join(PROJECT_ROOT, ".claude/todo/improvements.md");
 const HISTORY = join(PROJECT_ROOT, ".claude/state/metrics/adsense/history.csv");
 const DEVICE_HISTORY = join(PROJECT_ROOT, ".claude/state/metrics/adsense/history-devices.csv");
 const LOG_PATH = join(

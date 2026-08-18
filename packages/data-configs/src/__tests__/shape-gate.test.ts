@@ -460,7 +460,7 @@ describe("classifyShape — 全県が同じ値 (constant-value)", () => {
         disposition: "known-broken",
         observedSeverity: 1,
         reason: "実態が 0 で isActive 見直し対象",
-        issue: ".claude/todo/01_未整理タスク.md",
+        issue: ".claude/todo/backlog.md",
         until: "2026-10-31", // NOW_OUT (2026-12-01) より前 = 期限切れを試せる
       },
     ];

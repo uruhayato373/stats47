@@ -541,7 +541,7 @@ if [ -n "$STAGED_METRICS" ]; then
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
 
-  # SEO 文字列の事実照合 (.claude/todo/05_機能バックログ.md SEO-META-FACTUAL-GATE-01)
+  # SEO 文字列の事実照合 (.claude/todo/backlog.md SEO-META-FACTUAL-GATE-01)
   #
   # seoTitle / seoDescription は <title> と <meta name="description"> としてそのまま
   # 配信される。実データと突合していなかったため 5.2% が 1 位県・値・倍率・年を

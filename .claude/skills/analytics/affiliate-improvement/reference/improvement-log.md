@@ -1,6 +1,6 @@
 # affiliate-improvement 詳細ログ (agent 用・append-only)
 
-agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/04_改善バックログ.md`。
+agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.md`。
 記入は `.claude/rules/evidence-based-judgment.md` のテンプレに従う (想定値の根拠・検証コマンド・実測を必須)。
 
 ---

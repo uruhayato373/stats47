@@ -31,7 +31,7 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ## [TRIAGE-2026-07-03] 期日到達施策の effect/* 確定 (improvement-triage)
 
-期日到達済み施策をバックログ (`.claude/todo/04_改善バックログ.md`) と同期して判定確定。実測ソースは各行に併記。
+期日到達済み施策をバックログ (`.claude/todo/improvements.md`) と同期して判定確定。実測ソースは各行に併記。
 
 - **BLOG-WAVE-2026-05-25-auto → effect/none 確定**: 実測 W21→W26 clicks 127→94 (-33) / imp -787 / CTR 1.12%→0.89% (下記 §BLOG-WAVE-2026-05-25-auto の 2026-06-28 自動計測)。同期間サイト全体 clicks +75% (1,110→1,947, `.claude/state/metrics/gsc/history.csv`) の中で対象 53 記事のみ減 = 想定リフト (+131 clicks/週) 未達。**[仮説]** title reframe が既得 query との整合を崩した (下落上位: temperature-extremes -31 / price-index -22 / child-height -10 clicks)。**検証コマンド**: 対象 slug を W22/W26 の `snapshots/*/queries.csv` で query 別 diff。**検証期日**: 2026-07-12 (weekly-review)
 - **BLOG-WAVE-2026-05-29-auto → effect/none 確定**: 実測 W21→W26 clicks 7→5 (-2) / imp 1,258→881 (-377)。position 4 記事全て悪化 (+0.5〜+1.7)。サイト全体 +75% 成長下で横ばい以下

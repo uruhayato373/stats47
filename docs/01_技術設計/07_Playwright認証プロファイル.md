@@ -146,4 +146,4 @@ profile の漏洩は account takeover 相当として扱う。
 2. password / token を必要に応じて rotate する。
 3. repository history と artifact への混入を確認する。
 4. 原因が path、log、screenshot、artifact のどこかを特定する。
-5. 再発防止を `.claude/todo/04_改善バックログ.md` または `bug` Issue へ記録する。
+5. 再発防止を `.claude/todo/improvements.md` または `bug` Issue へ記録する。

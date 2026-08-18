@@ -35,5 +35,5 @@ raw key と 0% = 計算値。分子 raw key は実在。分母(人口/面積)で
 → `estat-researcher`→`data-ingester` で取り込み後 backfill 再走。
 
 ---
-正典: `.claude/rules/blog-data-schema.md §1.7`。別件データバグ(marriages/divorces)は `.claude/todo/06_指標バックログ.md §D`。
+正典: `.claude/rules/blog-data-schema.md §1.7`。別件データバグ(marriages/divorces)は `.claude/todo/backlog.md §D`。
 ツール: `backfill-source.mjs`(自動照合) / `resolve-scatter-axes.mjs`(軸明示+scale) / `build-lineage-queue.mjs`(再棚卸し)。

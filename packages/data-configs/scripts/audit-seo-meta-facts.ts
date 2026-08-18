@@ -223,7 +223,7 @@ async function main(): Promise<void> {
       BASELINE,
       JSON.stringify(
         {
-          note: "seoTitle/seoDescription が実データと食い違う metric。縮小専用。正典: .claude/todo/05_機能バックログ.md SEO-META-FACTUAL-GATE-01",
+          note: "seoTitle/seoDescription が実データと食い違う metric。縮小専用。正典: .claude/todo/backlog.md SEO-META-FACTUAL-GATE-01",
           updatedAt: new Date().toISOString().slice(0, 10),
           keys: violatingKeys,
         },

@@ -50,11 +50,11 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 - `.claude/state/metrics/gsc/` — GSC 週次 history (CRUD)
 - `.claude/skills/analytics/gsc-improvement/reference/snapshots/` — 週次 snapshot CSV (CRUD)
 - `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` — agent 用詳細層 (CRUD)
-- `.claude/todo/04_改善バックログ.md` — read only (improvement-triage が排他 write)
+- `.claude/todo/improvements.md` — read only (improvement-triage が排他 write)
 
 ## File Boundary (並行衝突回避)
 
-- `.claude/todo/04_改善バックログ.md` への write 一切なし (improvement-triage 経由)
+- `.claude/todo/improvements.md` への write 一切なし (improvement-triage 経由)
 - `.claude/state/metrics/gsc/` への write は本 agent が排他
 - 並行起動可能 agent: ga4-analyst / performance-auditor / adsense-analyst (state は別)、 trend-scout (gsc state を read)、 improvement-triage (本 agent の state を read)
 - 並行起動 NG: 同期間 fetch-gsc-data の gsc-analyst 2 体同時 (API rate-limit + ファイル競合)

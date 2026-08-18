@@ -231,7 +231,7 @@ curl "https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?appId=<APP_ID>&stat
 
 ## 関連
 
-- 実装計画（本カタログの実行側）: `.claude/todo/05_機能バックログ.md` [KAKEI-EXPANSION]（追記予定）
+- 実装計画（本カタログの実行側）: `.claude/todo/backlog.md` [KAKEI-EXPANSION]（追記予定）
 - ブログの型: `.claude/rules/blog-quality-standards.md` §記事アーキタイプ（D2型）
 - topic-queue: `.claude/state/blog/topic-queue.json`
 - metric 規約: `.claude/rules/metric-config-standards.md` / e-Stat 規約: `.claude/rules/estat-api.md`

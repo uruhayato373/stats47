@@ -2,7 +2,7 @@
 
 <task>
   <goal>`.local/ci/backlog-queue.json` の `picked[]` を 1 件ずつ分類して処理し、機械ゲートを通したものだけバックログから行削除する</goal>
-  <scope>.claude/todo の 05 / 01 / 06 と、各エントリの完了条件が指す実装・テスト・checker。それ以外は触らない</scope>
+  <scope>.claude/todo/backlog.md と、各カードの完了条件が指す実装・テスト・checker。それ以外は触らない</scope>
   <sources>`.claude/rules/backlog-loop.md` (class 定義と gate 表の正典) / `.local/ci/backlog-queue.json` / 各エントリ本文</sources>
   <done_when>picked の各 ID について record-backlog-outcome を 1 回実行し、completed にしたものは該当行が消えている</done_when>
   <authorization>ローカルのファイル編集とテスト実行まで。commit / push / deploy / R2 push / gh コマンドは実行しない (CI 側の step が行う)</authorization>
@@ -18,7 +18,7 @@ BEHAVIOR CONTRACT (命令):
 
 ### 1. 分類する
 
-エントリ本文を読み、`.claude/rules/backlog-loop.md` の class 表から 1 つ選ぶ。
+カード本文を読み、`.claude/rules/backlog-loop.md` の class 表から 1 つ選ぶ。カードのタグ行に `[検証:cmd]` があれば、それが完了 gate の第一候補。
 `route._pendingClassification` が true なら自分で決める。既知 class があっても、読んで違うと
 判断したら再分類してよい (台帳が `reclassifiedFrom` に履歴を残し、学習の材料になる)。
 
@@ -64,12 +64,12 @@ node .claude/scripts/backlog-loop/record-backlog-outcome.mjs \
 
 | 対象 | 理由 |
 |---|---|
-| `.claude/todo/04_改善バックログ.md` | improvement-triage の排他 write |
+| `.claude/todo/improvements.md` | improvement-triage の排他 write |
 | `.claude/memory/` / `.claude/skills/learned/` | knowledge-curator の排他 write |
 | `.github/` | ループが自分の権限・timeout・モデルを広げる口になる |
 | `.claude/config/backlog-routing-policy.json` | 自分の model / 試行上限を上げる口になる |
 | `.claude/state/backlog-loop/ledger.json` の直接編集 | 証拠の捏造。CLI 経由のみ |
-| `status: blocked-*` のエントリ | オーナー判断待ち |
+| 🟣 判断待ち・`[実行:対話/ユーザー/windows/別環境]`・`[進行中]` のカード | オーナー判断待ち or 作業中 (queue が弾くが、直接触るのも禁止) |
 | git commit / push / deploy / R2 push | CI の step が行う。ここでは実行しない |
 
 CI の verify がこれらを機械的に突合する。破ると run ごと落ちるので、迷ったら触らない。

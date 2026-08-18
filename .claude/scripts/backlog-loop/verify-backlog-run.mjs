@@ -6,7 +6,7 @@
  *
  * 検査:
  *   1. バックログから消えた ID に gate.pass=true の裏付けがあるか (無ければ fail)
- *   2. 変更パスが許可リスト内か (04 / memory / learned / .env は禁止)
+ *   2. 変更パスが許可リスト内か (improvements / memory / learned / .env は禁止)
  *
  * `--base` は run 開始時点の ref (CI では処理前の HEAD)。そこからの差分で before を得る。
  * 判定は git diff の行ではなく **パーサで得た ID 集合の差**で行う (書式変更を削除と誤認しない)。
@@ -28,7 +28,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../..');
 const LEDGER_PATH = path.join(ROOT, '.claude/state/backlog-loop/ledger.json');
 
-const TRACKED = ['.claude/todo/05_機能バックログ.md', '.claude/todo/06_指標バックログ.md'];
+const TRACKED = ['.claude/todo/backlog.md'];
 
 function getArg(flag, fallback = null) {
   const i = process.argv.indexOf(flag);

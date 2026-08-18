@@ -33,7 +33,7 @@
  * I/O は持たない (呼び出し側が R2 から観測値を渡す)。
  * テスト: `src/__tests__/seo-meta-facts.test.ts`
  *
- * 正典: `.claude/todo/05_機能バックログ.md` の `SEO-META-FACTUAL-GATE-01`
+ * 正典: `.claude/todo/backlog.md` の `SEO-META-FACTUAL-GATE-01`
  */
 
 import { isScalePrefixPartOfUnit, scalePrefixMultiplier } from "./unit/unit-semantics";

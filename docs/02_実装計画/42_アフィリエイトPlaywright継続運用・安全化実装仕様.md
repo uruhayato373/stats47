@@ -16,7 +16,7 @@ tags: [affiliate, Playwright, automation, operations, safety, measurement]
 Claude Code と Playwright で継続運用するための実装仕様である。
 
 未完了タスクの status / tier / 期日は
-`.claude/todo/05_機能バックログ.md` の `ASP-CONTINUITY-01` を真実源とする。本書は実装方法と受入条件を扱い、
+`.claude/todo/backlog.md` の `ASP-CONTINUITY-01` を真実源とする。本書は実装方法と受入条件を扱い、
 提携状態・広告在庫・成果値の現在値を正典化しない。
 
 運用上の正典は既存の配置を維持する。
@@ -30,7 +30,7 @@ Claude Code と Playwright で継続運用するための実装仕様である�
 | A8 状態機械            | `.claude/state/ads/a8-catalog.json`                                              |
 | 3 ASP 横断台帳         | `.claude/state/ads/affiliate-catalog.json`                                       |
 | 配信時の広告データ     | git TS → R2 snapshot                                                             |
-| 未完了状態             | `.claude/todo/05_機能バックログ.md` `ASP-CONTINUITY-01`                             |
+| 未完了状態             | `.claude/todo/backlog.md` `ASP-CONTINUITY-01`                             |
 
 `a8-catalog.json` と `affiliate-catalog.json` は用途が異なるためマージしない。必要な横断表示は、
 両方を入力にした read-only の派生 view で作る。
@@ -685,7 +685,7 @@ Phase 0 で再確認し、既存機能と重複する場合は新規ファイル
 
 ### Phase 0 — read-only 監査（完了 2026-07-29）
 
-監査結果は本節と `.claude/todo/05_機能バックログ.md` の `ASP-CONTINUITY-01` へ統合済み。
+監査結果は本節と `.claude/todo/backlog.md` の `ASP-CONTINUITY-01` へ統合済み。
 判定は `ready`、pure core test は 120/120 pass。
 
 外部ブラウザを起動せず、コードと state だけを調べる。

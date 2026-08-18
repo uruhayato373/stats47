@@ -7,7 +7,7 @@ created: 2026-05-20
 updated: 2026-05-20
 status: backlog
 tags: [content-plan, note-correlation, gis-cross]
-parent: .claude/todo/05_機能バックログ.md#gis-cross-content-backlog
+parent: .claude/todo/backlog.md#gis-cross-content-backlog
 ---
 
 # 掛け合わせ相関記事 note企画 (型B)

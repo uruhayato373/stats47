@@ -27,7 +27,7 @@ test("無根拠TODOとD1 runtime復活を検出する", (t) => {
   assert.ok(codes.includes("UNTRACKED_DEBT")); assert.ok(codes.includes("D1_RUNTIME_RETURN"));
 });
 test("小文字の todo (識別子/DOM id/パス) は debt として検出しない", (t) => {
-  const root = fixture('const todo = tiles.filter(Boolean);\npage.locator("section#todo");\n// see ../../todo/03_今週の計画.md\n');
+  const root = fixture('const todo = tiles.filter(Boolean);\npage.locator("section#todo");\n// see ../../todo/weekly.md\n');
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const result = run(root); assert.equal(result.status, 0, result.stdout + result.stderr);
 });

@@ -190,7 +190,7 @@ tags: [theme-catalog, climate, weather, normals, sunshine, precipitation, snow, 
 6. 2021年の日照方式変更日と影響対象地点を公式資料で確定
 7. 快晴日数・雪日数の観測方式、coverage、0、欠測、対象外を区別
 8. G02-2022の属性、単位、欠測コード、1991〜2020年平年値を`fetch-g02-sunshine.cjs`とR2 metaで照合
-9. 平年気温・平年降水・平年日照を47県比較可能な新規metric候補として`.claude/todo/06_指標バックログ.md`へ記録
+9. 平年気温・平年降水・平年日照を47県比較可能な新規metric候補として`.claude/todo/backlog.md`へ記録
 10. PR-0の監査結果を本レビューへ追記し、採用・保留を確定する
 
 ### PR-1: legacyからThemeCatalogへ移行

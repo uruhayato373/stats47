@@ -10,7 +10,7 @@
     "types": ["node"]
   },
   "include": ["src/**/*", "tests/**/*"],
-  "_note_packs_migration": "2026-07-23: 174→14 パック縮約に伴い、note チャネル (src/channels/note) は旧 A-01〜L-07 前提のまま。未公開のため一時除外し、pack 由来 (1パック=1記事) への再設計は別タスク (.claude/todo/05_機能バックログ.md)。",
+  "_note_packs_migration": "2026-07-23: 174→14 パック縮約に伴い、note チャネル (src/channels/note) は旧 A-01〜L-07 前提のまま。未公開のため一時除外し、pack 由来 (1パック=1記事) への再設計は別タスク (.claude/todo/backlog.md)。",
   "exclude": [
     "node_modules",
     "dist",

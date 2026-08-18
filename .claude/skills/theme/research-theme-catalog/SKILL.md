@@ -78,7 +78,7 @@ synthesize せず終わる事故が続いたため (2026-07-04)、**サブ agent
 # (a) 既登録かの一次チェック (登録済みなら投入不要)
 grep -c '"<candidate-key>":' packages/data-configs/src/registry.ts
 # (b) 既知 Gap は backlog に statsDataId 付きで documented なことがある (再利用可)
-grep -iE "<theme 関連語>" .claude/todo/06_指標バックログ.md
+grep -iE "<theme 関連語>" .claude/todo/backlog.md
 ```
 
 - 登録済み (`✅登録済`) → そのまま採用候補
@@ -89,7 +89,7 @@ grep -iE "<theme 関連語>" .claude/todo/06_指標バックログ.md
 
 ## Stage 3: 統合・提案
 
-`.claude/todo/06_指標バックログ.md` の7列候補表へ、実在確認に合格した候補だけを追加する。フォーマットは
+`.claude/todo/backlog.md` の7列候補表へ、実在確認に合格した候補だけを追加する。フォーマットは
 `.claude/agents/theme-researcher.md` の「提案の出力先フォーマット」に従う。不採用・unknown・重複候補は追加しない。
 
 ## ★ 呼び元の受け入れ検証 (捏造を機械的に弾く・書き込み前に必須)
@@ -107,7 +107,7 @@ theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一
 ## 完了後の引き継ぎ (このスキルの外)
 
 ```
-提案 (06_指標バックログ.md)
+提案 (backlog.md)
   → 人間レビューで採否決定
   → theme-designer が採択分を catalog TS 化 (packages/data-configs/src/theme-catalog/<theme>.ts)
      + THEME_CATALOGS 登録 + npm run generate:catalog + validate:catalog

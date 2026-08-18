@@ -7,7 +7,7 @@ tags: [theme, information-architecture, taxonomy, seo, migration]
 
 # テーマ分類再編成方針
 
-> 実装状況と優先度は `.claude/todo/05_機能バックログ.md` の
+> 実装状況と優先度は `.claude/todo/backlog.md` の
 > `THEME-TAXONOMY-REORGANIZE-01` を正典とする。本書は `theme-portfolio-manager` が
 > 判定・URL影響評価・実装引き渡し時に読む詳細基準であり、進捗台帳として使用しない。
 

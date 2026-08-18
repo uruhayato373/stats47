@@ -19,7 +19,7 @@ schema・判定規律の正典: `.claude/state/themes/README.md`。
 | 定義・比較時の注意カードを実装する | `reference/theme-guidance-implementation.md` |
 | keep/split/merge/parent-hub判定やURL移行を設計する | `reference/theme-taxonomy-reorganization.md` |
 
-進捗と優先度は `.claude/todo/05_機能バックログ.md` を正典とし、reference文書へstatusを重複記録しない。
+進捗と優先度は `.claude/todo/backlog.md` を正典とし、reference文書へstatusを重複記録しない。
 
 ## モード
 
@@ -94,6 +94,6 @@ node --test .claude/scripts/themes/__tests__/                 # validator 自体
 ## 禁止
 
 - R2 push / deploy / production 変更 (このスキルは state と docs だけを書く)
-- `.claude/todo/04_改善バックログ.md` への直接書き込み (improvement-triage へ引き渡す)
+- `.claude/todo/improvements.md` への直接書き込み (improvement-triage へ引き渡す)
 - ThemeCatalog / 生成物 TS/JSON の編集 (theme-designer / generate:catalog の領分)
 - 推測値の保存 (取れない値は insufficient-data / not-instrumented)

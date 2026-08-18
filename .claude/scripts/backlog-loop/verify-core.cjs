@@ -23,9 +23,7 @@ const { hasPassingGate, declaredFollowUps } = require('./ledger-core.cjs');
 
 /** ループが触ってよいパス。ここに無いものを触ったら commit させない */
 const ALLOWED_PATH_PATTERNS = [
-  /^\.claude\/todo\/05_/,
-  /^\.claude\/todo\/06_/,
-  /^\.claude\/todo\/01_/,
+  /^\.claude\/todo\/backlog\.md$/,
   // state 全体を許す。バックログを 1 件閉じると、その領域の state (SEO baseline・
   // 整合性 audit・是正キュー等) が同じ作業の成果物として動くため。危険なものは
   // FORBIDDEN 側 (memory / learned / routing policy) が個別に弾く — `.claude/config/` を
@@ -51,7 +49,7 @@ const ALLOWED_PATH_PATTERNS = [
  * それが正しい — 配信経路の workflow を無人で書き換えない。
  */
 const FORBIDDEN_PATH_PATTERNS = [
-  /^\.claude\/todo\/04_/, // improvement-triage の排他 write
+  /^\.claude\/todo\/improvements\.md$/, // improvement-triage の排他 write
   /^\.claude\/memory\//, // knowledge-curator の排他 write
   /^\.claude\/skills\/learned\//, // 同上
   /^\.github\//, // ループが自分の権限を広げられないようにする
@@ -64,8 +62,15 @@ const FORBIDDEN_PATH_PATTERNS = [
  * before/after のバックログ本文から、削除された ID と追加された ID を出す。
  */
 function diffEntryIds(beforeText, afterText, sourceFile) {
-  const before = new Set(parseHeadingEntries(beforeText, sourceFile).entries.map((e) => e.id));
-  const after = new Set(parseHeadingEntries(afterText, sourceFile).entries.map((e) => e.id));
+  // ID の無いカード (分類待ち) は ledger と結び付かないので差分の対象にしない
+  const ids = (text) =>
+    new Set(
+      parseHeadingEntries(text, sourceFile)
+        .entries.map((e) => e.id)
+        .filter(Boolean),
+    );
+  const before = ids(beforeText);
+  const after = ids(afterText);
   const removed = [...before].filter((id) => !after.has(id));
   const added = [...after].filter((id) => !before.has(id));
   return { removed, added };
@@ -122,7 +127,9 @@ function verifyRemovals({ files, ledger, queuedIds = null }) {
     }
 
     // gate は通ったのに行が残っている = 削除し忘れ (次の run が同じものを再処理してしまう)
-    const afterIds = new Set(parseHeadingEntries(f.after, f.sourceFile).entries.map((e) => e.id));
+    const afterIds = new Set(
+      parseHeadingEntries(f.after, f.sourceFile).entries.map((e) => e.id).filter(Boolean),
+    );
     for (const id of queued ?? []) {
       if (afterIds.has(id) && hasPassingGate(ledger, id)) {
         findings.push({

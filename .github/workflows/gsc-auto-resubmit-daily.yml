@@ -20,7 +20,7 @@ name: 🔁 GSC Auto-resubmit (RETIRED — Indexing API compliance)
 # この file は git 履歴保持のために残す。GitHub 上での直接 disable は行わない (repository
 # file 変更のみ)。手動 dispatch しても送信は起きない (下記 stub が退役通知を出して終わる)。
 #
-# 関連: .claude/todo/04_改善バックログ.md [INDEXING-AUTO-01]
+# 関連: .claude/todo/improvements.md [INDEXING-AUTO-01]
 #       .claude/skills/analytics/gsc-coverage-remediation/SKILL.md
 #       docs/01_技術設計/06_自動化インベントリ.md
 

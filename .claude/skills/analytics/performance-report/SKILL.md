@@ -100,7 +100,7 @@ co_agents: [gsc-analyst]
 
 週次数値は `.claude/state/metrics/psi/`、詳細な施策履歴は
 `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` を使う。
-未完了の改善だけを `.claude/todo/04_改善バックログ.md` へID・対象ページ・実行手順・budget・完了条件付きで統合し、
+未完了の改善だけを `.claude/todo/improvements.md` へID・対象ページ・実行手順・budget・完了条件付きで統合し、
 レポート全文は保存しない。
 
 書き出し後にパスを報告。CWV 改善ログ・同週 weekly-review は「関連リンク」に相対パスで参照。

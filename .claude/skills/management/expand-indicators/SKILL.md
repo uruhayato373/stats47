@@ -1,7 +1,7 @@
 ---
 name: expand-indicators
 description: |
-  .claude/todo/06_指標バックログ.md の検証済み候補を、git TS config → e-Stat → R2 の
+  .claude/todo/backlog.md の検証済み候補を、git TS config → e-Stat → R2 の
   完全DBレス経路で少数ずつ追加する。Use when user says "指標追加", "indicator 拡充",
   "/expand-indicators".
 argument-hint: "--target <N> [--priority high|medium] [--dry-run]"
@@ -10,7 +10,7 @@ primary_agent: data-ingester
 
 # expand-indicators — 検証済み指標の追加
 
-`.claude/todo/06_指標バックログ.md` の表から候補を選び、一次統計を再確認してから
+`.claude/todo/backlog.md` の表から候補を選び、一次統計を再確認してから
 `packages/data-configs/src/metrics/*.ts` に追加する。観測値の経路は
 **git TS config → e-Stat → R2**。永続・リモート D1 は使わない。
 
@@ -39,7 +39,7 @@ primary_agent: data-ingester
 
 ```bash
 node .claude/scripts/management/parse-backlog.cjs \
-  --backlog .claude/todo/06_指標バックログ.md \
+  --backlog .claude/todo/backlog.md \
   --priority high \
   --status pending \
   --limit 10
@@ -89,10 +89,10 @@ npx tsx packages/data-configs/scripts/page-data-batch.ts --metric <key> --dry-ru
 
 ### 6. TODOを閉じる
 
-- config・R2・公開確認まで完了した候補行は `.claude/todo/06_指標バックログ.md` から削除する。
+- config・R2・公開確認まで完了した候補行は `.claude/todo/backlog.md` から削除する。
 - 取得不能、重複、価値不足が確定した候補も削除する。理由はGit差分または必要に応じて
   失敗履歴はGitに委ね、再開可能な未完了手順だけをTODOへ残す。
-- 効果測定が必要な公開施策だけ `.claude/todo/04_改善バックログ.md` に追加する。
+- 効果測定が必要な公開施策だけ `.claude/todo/improvements.md` に追加する。
   単なる投入履歴は追加しない。
 - frontmatter の件数と `updated` を更新する。
 
@@ -112,11 +112,11 @@ npx tsx packages/data-configs/scripts/page-data-batch.ts --metric <key> --dry-ru
 - config追加数、見送り数と理由
 - 実行した検証と結果
 - R2・公開・デプロイの実行有無
-- `06_指標バックログ.md` の残件数
+- `backlog.md` の残件数
 
 ## 関連
 
-- 候補: [`.claude/todo/06_指標バックログ.md`](../../../../.claude/todo/06_指標バックログ.md)
+- 候補: [`.claude/todo/backlog.md`](../../../../.claude/todo/backlog.md)
 - パーサ: [`.claude/scripts/management/parse-backlog.cjs`](../../../scripts/management/parse-backlog.cjs)
 - 観測値投入: [`/page-data-batch`](../../db/page-data-batch/SKILL.md)
 - 公開: [`/publish-ranking`](../../db/publish-ranking/SKILL.md)

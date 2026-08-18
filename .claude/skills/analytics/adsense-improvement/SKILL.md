@@ -1,10 +1,10 @@
 ---
 name: adsense-improvement
-description: Google AdSense の広告収益・RPM・CTR・ビューアビリティを .claude/todo/04_改善バックログ.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "AdSense改善", "広告収益改善", "RPM改善", "AdSense記録".
+description: Google AdSense の広告収益・RPM・CTR・ビューアビリティを .claude/todo/improvements.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "AdSense改善", "広告収益改善", "RPM改善", "AdSense記録".
 primary_agent: adsense-analyst
 ---
 
-AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Active View）を snapshot と詳細ログで時系列追跡し、active 施策だけを `.claude/todo/04_改善バックログ.md` で管理するスキル。
+AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Active View）を snapshot と詳細ログで時系列追跡し、active 施策だけを `.claude/todo/improvements.md` で管理するスキル。
 
 広告配置・フォーマット変更・コンテンツ追加の効果は 1〜4 週間で現れる。履歴と根拠は append-only の詳細ログ、次に行うことは active-only のTODOへ分離する。
 
@@ -14,17 +14,17 @@ AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Act
 |---|---|---|
 | 生メトリクス CSV | git: `reference/snapshots/YYYY-Www/` | immutable、diff 比較、オフライン可 |
 | 目標しきい値設定 | git: `reference/budgets.json` | プロジェクト設定 |
-| 施策（1施策1行、人間向け要約） | `.claude/todo/04_改善バックログ.md` | active 施策を優先度・期日で絞り込み可能 |
+| 施策（1施策1行、人間向け要約） | `.claude/todo/improvements.md` | active 施策を優先度・期日で絞り込み可能 |
 | 詳細ログ（agent 用、検証コマンド・仮説） | `reference/improvement-log.md` | append-only、agent が深掘り参照 |
 | 週次推移サマリ | `.claude/state/metrics/adsense/LATEST.md` / `history.csv` | GitHub Actions が自動更新 |
 | **広告ユニット別推移** | `.claude/state/metrics/adsense/history-units.csv` | ユニット単位の最適化を効果測定するための時系列。`match_status` (matched / legacy-name-matched / unmanaged / orphan) で突き合わせ可否を明示する。legacy-name-matched は後方互換で、削除条件は `adsense-report-contract.mjs` の match_status 定義を参照 |
 | **AdSense ユニット inventory** | `reference/snapshots/YYYY-Www/ad-units.csv` | `unit_id` (= レポートの `AD_UNIT_ID`) と `slot_id` (adCode の `data-ad-slot`) の対応。コード側 `constants.ts` との突き合わせキー |
 
-→ **責務分離**: `.claude/todo/04_改善バックログ.md` はactive一覧、agent 用詳細は `.claude/skills/analytics/adsense-improvement/reference/improvement-log.md`。
+→ **責務分離**: `.claude/todo/improvements.md` はactive一覧、agent 用詳細は `.claude/skills/analytics/adsense-improvement/reference/improvement-log.md`。
 
 ## TODO行の契約
 
-`.claude/todo/04_改善バックログ.md` の6列
+`.claude/todo/improvements.md` の6列
 `ID | タイトル | Status | Due | Owner | Metric` を使う。baseline、deployed_at、
 検証コマンド、判定根拠は `reference/improvement-log.md` に置き、TODOへ複製しない。
 
@@ -55,7 +55,7 @@ AdSense メトリクス取得の優先順:
 ```
 以下を並列に実行して要約:
 1. reference/snapshots/ 配下の最新 YYYY-Www ディレクトリの CSV を Read
-2. .claude/todo/04_改善バックログ.md の6列表から active 行を抽出
+2. .claude/todo/improvements.md の6列表から active 行を抽出
 3. reference/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
 4. .claude/state/metrics/adsense/LATEST.md を Read し週次推移を取得
 
@@ -94,7 +94,7 @@ AdSense メトリクス取得の優先順:
    - 前月同時期（同日数分）と比較
 
 6. 進行中施策の効果判定（最重要）:
-   .claude/todo/04_改善バックログ.md のAdSense対象行を抽出。
+   .claude/todo/improvements.md のAdSense対象行を抽出。
    各施策に対して:
    - 経過日数 = observe 実行日 - deployed_at
    - 実測 delta = 最新値 - デプロイ時点の値（前週 snapshot から読む）
@@ -123,7 +123,7 @@ AdSense メトリクス取得の優先順:
    - ポリシーチェック（配置・ラベリング・Auto ads との矛盾）
    - verification_command（copy-pasteable な fetch-adsense-data / API 呼び出し）
 
-2. .claude/todo/04_改善バックログ.md の該当Tierの表に1行だけ追加:
+2. .claude/todo/improvements.md の該当Tierの表に1行だけ追加:
 
    ```markdown
    | ADSENSE-NN | <次アクションを含む短い要約> | pending | YYYY-MM-DD | <owner> | adsense |
@@ -138,7 +138,7 @@ AdSense メトリクス取得の優先順:
 #### mode = next
 
 ```
-1. .claude/todo/04_改善バックログ.md のactive行と、reference/improvement-log.md の過去判定から派生候補を抽出
+1. .claude/todo/improvements.md のactive行と、reference/improvement-log.md の過去判定から派生候補を抽出
 2. reference/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
 3. 最新 snapshot の「次のアクション」候補も合わせる
 
@@ -155,7 +155,7 @@ AdSense 特有の改善パターン:
 
 ### Step 3: 共通ルール
 
-- **.claude/todo/04_改善バックログ.md は active-only** — 未完了施策の追加・status 更新に限定する。effect 確定後は詳細を improvement-log に残し、行を削除する
+- **.claude/todo/improvements.md は active-only** — 未完了施策の追加・status 更新に限定する。effect 確定後は詳細を improvement-log に残し、行を削除する
 - **snapshots/YYYY-Www/ も append-only** — 過去の CSV は改変しない
 - **日付は絶対日付** — 「今週」「先週」は使わない
 - **数値はソース明示** — "snapshots/2026-W17/overview.csv" のような相対パス
@@ -163,7 +163,7 @@ AdSense 特有の改善パターン:
 - **想定効果値はデプロイ前に書く** — 後付けバイアス防止
 - **ポリシー遵守の確認は必須** — 配置変更時は AdSense ポリシーに抵触しないこと
 - **週次 /weekly-review から observe モードが自動呼び出し** される想定
-- **責務を分離する** — `.claude/todo/04_改善バックログ.md` はactive一覧、reference/improvement-log.md は判定履歴
+- **責務を分離する** — `.claude/todo/improvements.md` はactive一覧、reference/improvement-log.md は判定履歴
 
 ## 参照パターン
 
@@ -205,7 +205,7 @@ cat .claude/skills/analytics/adsense-improvement/reference/improvement-log.md
 
 ## 前提
 
-- `.claude/todo/04_改善バックログ.md` が存在すること（施策 ID は `ADSENSE-*` または `AFF-*`）
+- `.claude/todo/improvements.md` が存在すること（施策 ID は `ADSENSE-*` または `AFF-*`）
 - `reference/budgets.json` / `reference/snapshots/` / `reference/improvement-log.md` 初期化済
 - AdSense Management API の OAuth 設定済。**CI 専任** — `GOOGLE_ADSENSE_CLIENT_ID` /
   `GOOGLE_ADSENSE_ACCOUNT_ID` は GitHub Repository Variables、

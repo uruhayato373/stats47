@@ -21,15 +21,15 @@ const {
 const { emptyLedger, normalizeLedger, recordAttempt } = require('../ledger-core.cjs');
 
 const AT = '2026-08-17T00:00:00.000Z';
-const FILE = '.claude/todo/05_機能バックログ.md';
+const FILE = '.claude/todo/backlog.md';
 
 const doc = (ids) =>
   [
     '# バックログ',
     '',
-    '## P1 今月',
+    '## 🔴 高',
     '',
-    ...ids.flatMap((id) => [`### [${id}] ${id} のタイトル`, '', '- **status**: pending', '']),
+    ...ids.flatMap((id) => [`### [${id}] ${id} のタイトル`, 'タグ: [起票:2026-08-01]', '']),
   ].join('\n');
 
 const ledgerWith = (specs) => {
@@ -178,15 +178,25 @@ test('★別のエントリが名指しした残件を流用できない (queued
 
 test('本文の書き換えだけなら削除とみなさない (書式変更を誤検出しない)', () => {
   const before = doc(['A-01']);
-  const after = before.replace('- **status**: pending', '- **status**: pending\n- **次**: 追記した');
+  const after = before.replace('タグ: [起票:2026-08-01]', 'タグ: [起票:2026-08-01]\n\n- **次**: 追記した');
   const { removed, added } = diffEntryIds(before, after, FILE);
   assert.deepEqual(removed, []);
   assert.deepEqual(added, []);
 });
 
+test('ID の無いカード (分類待ち) は削除/追加の差分に数えない', () => {
+  // 分類待ちカードは ledger と結び付かない。ID 差分に null が混ざると
+  // 「null が消えた/増えた」という偽の finding になる。
+  const before = doc(['A-01']) + '\n### タグ待ちのカード\n\n本文。\n';
+  const after = doc(['A-01']);
+  const { removed, added } = diffEntryIds(before, after, FILE);
+  assert.deepEqual(removed, [], 'ID 無しカードの削除は差分にしない');
+  assert.deepEqual(added, []);
+});
+
 test('触ってよいパスだけを許す', () => {
   const ok = verifyChangedPaths([
-    '.claude/todo/05_機能バックログ.md',
+    '.claude/todo/backlog.md',
     '.claude/state/backlog-loop/ledger.json',
     '.claude/scripts/lib/check-foo.cjs',
     'packages/data-configs/src/foo.ts',
@@ -205,9 +215,9 @@ test('★backlog-loop 以外の state も許す (閉じた案件の成果物が�
   assert.equal(ok.ok, true, JSON.stringify(ok.violations));
 });
 
-test('★排他 writer 契約のパスは弾く (04 / memory / learned)', () => {
+test('★排他 writer 契約のパスは弾く (improvements / memory / learned)', () => {
   const r = verifyChangedPaths([
-    '.claude/todo/04_改善バックログ.md',
+    '.claude/todo/improvements.md',
     '.claude/memory/feedback_something.md',
     '.claude/skills/learned/pattern.md',
   ]);
@@ -245,20 +255,20 @@ test('★秘密ファイルと許可外パスは弾く', () => {
   assert.ok(paths.includes('README.md'), '許可リストに無いものは通さない');
 });
 
-// ── パス契約が移設に追従しているか (2026-08-18 の docs/todo → .claude/todo 移設で追加) ──
+// ── パス契約が移設に追従しているか (docs/todo → .claude/todo 移設 / v3-unified 統合で追加) ──
 
-test('★04 改善バックログは「禁止パス」として弾く (improvement-triage の排他 write)', () => {
-  // reason まで固定するのが要点。移設で regex を直し忘れると、04 は ALLOWED の
+test('★improvements は「禁止パス」として弾く (improvement-triage の排他 write)', () => {
+  // reason まで固定するのが要点。改名で regex を直し忘れると、improvements は ALLOWED の
   // どれにも当たらず「許可パス外」で落ちる — fail はするので気づけるが、
   // 「排他 writer 契約を守っている」という契約が「たまたま許可リストに無い」に
-  // すり替わる。ここが緩むと 04 を許可リストに足した瞬間に無音で書けてしまう。
-  const r = verifyChangedPaths(['.claude/todo/04_改善バックログ.md']);
+  // すり替わる。ここが緩むと improvements を許可リストに足した瞬間に無音で書けてしまう。
+  const r = verifyChangedPaths(['.claude/todo/improvements.md']);
   assert.equal(r.ok, false);
   assert.equal(r.violations.length, 1);
   assert.match(r.violations[0].reason, /禁止パス/, '「許可パス外」ではなく「禁止パス」で弾くこと');
 });
 
-test('★todo 系の path pattern が実在ファイルに当たる (移設で更新し忘れた regex を検出)', () => {
+test('★todo 系の path pattern が実在ファイルに当たる (改名で更新し忘れた regex を検出)', () => {
   // 「どのファイルにも当たらない regex」は、静かに無効化された安全装置と同じ。
   // 将来また台帳を移したときに更新漏れを red にするための生存性テスト。
   const fs = require('node:fs');
@@ -268,21 +278,14 @@ test('★todo 系の path pattern が実在ファイルに当たる (移設で�
   const todoPatterns = [...ALLOWED_PATH_PATTERNS, ...FORBIDDEN_PATH_PATTERNS].filter((re) =>
     /todo/.test(re.source),
   );
-  assert.equal(todoPatterns.length, 4, 'ALLOWED 3 (01/05/06) + FORBIDDEN 1 (04)');
+  assert.equal(todoPatterns.length, 2, 'ALLOWED 1 (backlog) + FORBIDDEN 1 (improvements)');
 
-  // regex の literal prefix (^ と正規表現エスケープを外したもの) を実パスとして解決する
-  const dirs = new Set();
   for (const re of todoPatterns) {
-    // regex の literal prefix を実パスに戻す: エスケープ用の \ を落とし、先頭の ^ を外す
+    // regex の literal (エスケープ用の \ を落とし、^ と $ を外したもの) を実パスとして解決する
     const unescaped = re.source.split('\\').join('');
-    const literal = unescaped.startsWith('^') ? unescaped.slice(1) : unescaped;
-    const dir = path.dirname(literal); // 例 .claude/todo/05_ → .claude/todo
-    dirs.add(dir);
-    const prefix = path.basename(literal); // 例 05_
-    const abs = path.join(ROOT, dir);
-    assert.ok(fs.existsSync(abs), `${dir} が存在しない = regex が実体を指していない`);
-    const hit = fs.readdirSync(abs).filter((f) => f.startsWith(prefix));
-    assert.ok(hit.length > 0, `${dir}/${prefix}* に該当ファイルが無い = 移設で更新し損ねた regex`);
+    const literal = unescaped.replace(/^\^/, '').replace(/\$$/, '');
+    const abs = path.join(ROOT, literal);
+    assert.ok(fs.existsSync(abs), `${literal} が存在しない = regex が実体を指していない`);
+    assert.ok(re.test(literal), `regex が自分の literal に一致しない: ${re.source}`);
   }
-  assert.equal(dirs.size, 1, 'todo 系 regex が複数ディレクトリに散らばっていない');
 });

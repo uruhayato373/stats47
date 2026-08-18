@@ -16,8 +16,8 @@ tags: [search-growth, weekly, gsc, ga4, measurement]
 - 集計・履歴・LATEST描画: `.claude/scripts/metrics/lib/weekly-summary.mjs`
 - candidate・承認操作: `.claude/scripts/search-growth/lib/triage.mjs`
 - 運用入口: `../SKILL.md`
-- 未完了のCI/live確認: `.claude/todo/05_機能バックログ.md` の `SEARCH-OBSERVABILITY-RELEASE-01`
-- 改善サイクルの効果状態: `.claude/todo/04_改善バックログ.md#SEARCH-GROWTH-CYCLE-01`
+- 未完了のCI/live確認: `.claude/todo/backlog.md` の `SEARCH-OBSERVABILITY-RELEASE-01`
+- 改善サイクルの効果状態: `.claude/todo/improvements.md#SEARCH-GROWTH-CYCLE-01`
 
 本書は期間と承認の恒常契約だけを持ち、週ごとの数値や進捗を複製しない。
 
@@ -93,7 +93,7 @@ weekly-review単独依頼時にweekly-planを勝手に実行しない。
 - CTR候補はpage×query、現在のtitle/content、過去の`effect/none` / `effect/adverse`を確認する。
 - サイト横断の大量title rewriteを行わない。
 - 新規記事は実query需要があるものを優先し、元rankingのimpressionsを別テーマの記事需要へ流用しない。
-- 一般候補は人間承認後にだけ`.claude/todo/04_改善バックログ.md`へ追加する。
+- 一般候補は人間承認後にだけ`.claude/todo/improvements.md`へ追加する。
 - 承認lifecycleはcandidate再構築で巻き戻さない。
 
 ## 6. 効果判定

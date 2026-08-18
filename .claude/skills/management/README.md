@@ -78,7 +78,7 @@
 - メトリクスツリー
 - 計測方法と `/weekly-plan` への統合提案
 
-**保存先**: 定義は `docs/00_プロジェクト管理/02_収益化戦略.md`、未完了策は `.claude/todo/04_改善バックログ.md`
+**保存先**: 定義は `docs/00_プロジェクト管理/02_収益化戦略.md`、未完了策は `.claude/todo/improvements.md`
 
 ### `/growth-loops`
 
@@ -105,7 +105,7 @@
 - 30-60-90日ロードマップ
 - 計測指標
 
-**保存先**: 採択内容は既存戦略、未完了実験は `.claude/todo/04_改善バックログ.md`
+**保存先**: 採択内容は既存戦略、未完了実験は `.claude/todo/improvements.md`
 
 ### `/monetization-strategy`
 
@@ -137,7 +137,7 @@
 - `/weekly-review`: 5観点のsnapshot / scriptを同一セッションで並列収集し、計画との差分を分析
 - `/weekly-plan`: 5観点の決定的データ収集 → 戦略分析 → 批判的レビュー → 計画出力
 
-**保存先**: 計画は `.claude/todo/03_今週の計画.md`（毎週上書き）、レビューは `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`（agent用履歴）
+**保存先**: 計画は `.claude/todo/weekly.md`（毎週上書き）、レビューは `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`（agent用履歴）
 
 ### `/critical-review`
 
@@ -180,8 +180,8 @@ npm run docs:check
 
 | スキル | 出力先 | frontmatter type |
 |---|---|---|
-| `/monthly-plan` | `.claude/todo/02_今月の重点.md` | `monthly-plan` |
-| `/weekly-plan` | `.claude/todo/03_今週の計画.md` | `weekly-plan` |
+| `/monthly-plan` | `.claude/todo/monthly.md` | `monthly-plan` |
+| `/weekly-plan` | `.claude/todo/weekly.md` | `weekly-plan` |
 | `/weekly-review` | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | `weekly-review` |
 | `/critical-review` | 対象SSOT + `.claude/todo/` | 全文はセッション出力 |
 | `/north-star-metric` | `02_収益化戦略.md` + 改善バックログ | 週次値はsnapshot |

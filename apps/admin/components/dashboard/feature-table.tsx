@@ -17,13 +17,16 @@ function hasError(v: unknown): v is { error: string } {
   return !!v && typeof v === "object" && "error" in (v as Record<string, unknown>);
 }
 
-const SECTION_ORDER: Record<string, number> = { 今実装: 0, "将来・保留": 1, DROP: 2 };
+const SECTION_ORDER: Record<string, number> = {
+  "🔴 高": 0,
+  "🟡 中": 1,
+  "🟢 低": 2,
+  "🟣 判断待ち": 3,
+};
 
 function featureSort(a: FeatureRow, b: FeatureRow): number {
   const s = (SECTION_ORDER[a.section] ?? 9) - (SECTION_ORDER[b.section] ?? 9);
   if (s) return s;
-  const t = (parseInt(a.tier, 10) || 9) - (parseInt(b.tier, 10) || 9);
-  if (t) return t;
   return a.id.localeCompare(b.id);
 }
 
@@ -78,8 +81,8 @@ export function FeatureTable({ featureBacklog }: { featureBacklog: Wrapped<{ row
                 ID
               </th>
               <th className="border-b border-console-border px-1.5 py-1 text-left font-medium">タイトル</th>
-              <th className="border-b border-console-border px-1.5 py-1 text-left font-medium">tier</th>
-              <th className="border-b border-console-border px-1.5 py-1 text-left font-medium">status</th>
+              <th className="border-b border-console-border px-1.5 py-1 text-left font-medium">種類</th>
+              <th className="border-b border-console-border px-1.5 py-1 text-left font-medium">実行</th>
               <th className="whitespace-nowrap border-b border-console-border px-1.5 py-1 text-left font-medium">
                 created
               </th>

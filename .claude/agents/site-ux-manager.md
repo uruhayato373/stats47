@@ -95,7 +95,7 @@ model: sonnet
 - `.claude/rules/analytics-event-standards.md`（計装台帳・登録状況）
 - `.claude/rules/ogp-image-standards.md` / `.claude/rules/nextjs-ssg-preservation.md`
 - `.claude/rules/evidence-based-judgment.md`（効果判定・計測撹乱の回避）
-- active TODO: `.claude/todo/04_改善バックログ.md` / `.claude/todo/05_機能バックログ.md`
+- active TODO: `.claude/todo/improvements.md` / `.claude/todo/backlog.md`
 
 ## 担当外
 

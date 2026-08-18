@@ -1,6 +1,6 @@
 # Cloudflare コスト改善ログ (agent 用詳細)
 
-一覧・status の真実源は `.claude/todo/04_改善バックログ.md`。ここは検証コマンド・仮説・期日の詳細ログ。
+一覧・status の真実源は `.claude/todo/improvements.md`。ここは検証コマンド・仮説・期日の詳細ログ。
 記入テンプレ: `.claude/rules/evidence-based-judgment.md` §改善ログ記入テンプレ。
 
 `### 判定` セクションは `.claude/scripts/lib/effect-verdict/` の閾値エンジンが upsert する。

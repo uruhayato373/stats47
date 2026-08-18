@@ -65,13 +65,10 @@
       "07_Playwright認証プロファイル.md"
     ],
     ".claude/todo": [
-      "00_運用ガイド.md",
-      "01_未整理タスク.md",
-      "02_今月の重点.md",
-      "03_今週の計画.md",
-      "04_改善バックログ.md",
-      "05_機能バックログ.md",
-      "06_指標バックログ.md"
+      "backlog.md",
+      "improvements.md",
+      "monthly.md",
+      "weekly.md"
     ]
   },
   "governedDirectories": [
@@ -137,11 +134,11 @@
   ],
   "freshness": [
     {
-      "file": ".claude/todo/02_今月の重点.md",
+      "file": ".claude/todo/monthly.md",
       "maxAgeDays": 45
     },
     {
-      "file": ".claude/todo/03_今週の計画.md",
+      "file": ".claude/todo/weekly.md",
       "maxAgeDays": 14
     },
     {
@@ -169,12 +166,11 @@
     "requiredRelatedBacklog": true
   },
   "todo": {
-    "monthFile": ".claude/todo/02_今月の重点.md",
-    "weekFile": ".claude/todo/03_今週の計画.md",
+    "monthFile": ".claude/todo/monthly.md",
+    "weekFile": ".claude/todo/weekly.md",
     "files": [
-      ".claude/todo/04_改善バックログ.md",
-      ".claude/todo/05_機能バックログ.md",
-      ".claude/todo/06_指標バックログ.md"
+      ".claude/todo/improvements.md",
+      ".claude/todo/backlog.md"
     ],
     "idPattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)+$",
     "allowedImprovementStatuses": [

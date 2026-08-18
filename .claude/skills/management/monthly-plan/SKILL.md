@@ -10,7 +10,7 @@ primary_agent: strategy-advisor
 
 - **週次の収集を再実行しない。** 5 並列の重いコンテキスト収集は `/weekly-plan` が毎週やっている。月次はその**成果物（週次レビュー 4 本 + 各バックログ）を集約**するだけ。トークン消費を抑え、月 1 回でも予算を圧迫しない。
 - **重点は 1-2 テーマに絞る（必須制約）。** 予算が有限なので「全部やる」計画は禁止。今月確実に前進させる 1-2 テーマを選び、**それ以外は「今月やらない」と明示**する。
-- **真実源は既存のまま。** 改善施策は `04_改善バックログ.md`、機能は `05_機能バックログ.md`、指標は `06_指標バックログ.md` が SSOT。月次計画はそこから**今月分を抜き出した優先順位ビュー**であり、TODO の実体を二重管理しない。
+- **真実源は既存のまま。** 改善施策は `improvements.md`、機能・指標は `backlog.md` が SSOT。月次計画はそこから**今月分を抜き出した優先順位ビュー**であり、TODO の実体を二重管理しない。
 - **月次 → 週次の接続。** `/weekly-plan` は「今月の重点テーマ」を読んで、毎週の Must をそのテーマの分割タスクから優先的に選ぶ（Phase 1 Agent D で参照）。
 
 ## 引数
@@ -35,18 +35,18 @@ primary_agent: strategy-advisor
 
 2. **現在の週次計画**（今週の未消化を見る）
    ```bash
-   grep -E "^- \[ \]" .claude/todo/03_今週の計画.md 2>/dev/null || true
+   grep -E "^- \[ \]" .claude/todo/weekly.md 2>/dev/null || true
    ```
 
 3. **3 つのバックログから今月着手すべき pending を抽出**（真実源・実体はここ）
    ```bash
    # 改善施策: Tier 1/2 の pending / in-progress / effect-pending（due が今月のもの優先）
-   grep -E "pending|in-progress|effect/pending" .claude/todo/04_改善バックログ.md | head -30
+   grep -E "pending|in-progress|effect/pending" .claude/todo/improvements.md | head -30
    # 機能・自動化: P0-P2 の active 項目
-   sed -n '/^## P0 /,/^## P3 /p' .claude/todo/05_機能バックログ.md | \
+   sed -n '/^## 🔴 /,/^## 🟣 /p' .claude/todo/backlog.md | \
      grep -E "^## |^### |status.*(pending|in-progress|blocked)"
    # 指標拡充
-   head -40 .claude/todo/06_指標バックログ.md
+   head -40 .claude/todo/backlog.md
    ```
 
 4. **実装計画上の現在地**
@@ -64,14 +64,14 @@ primary_agent: strategy-advisor
 
 6. **現在の月次計画**（月替わり時は上書き前に達成状況を読む）
    ```bash
-   cat .claude/todo/02_今月の重点.md 2>/dev/null
+   cat .claude/todo/monthly.md 2>/dev/null
    ```
 
 7. **TODO インボックスの triage**（セッション中に捕捉した未整理 TODO を振り分ける）
    ```bash
-   cat .claude/todo/01_未整理タスク.md
+   cat .claude/todo/backlog.md
    ```
-   → 表の各行を適切なバックログへ振り分ける（改善→`04_改善バックログ.md` / 機能→`05_機能バックログ.md` / 指標→`06_指標バックログ.md` / コンテンツ→各 backlog / バグ→Issues）。
+   → 分類待ちカードへタグを付ける（改善施策だけ improvement-triage 経由で `improvements.md` へ / PR で閉じるバグ→Issues）。
    → 振り分けた行は受信箱から削除する。整理済み履歴を受信箱へ残さない。**今月の重点テーマ候補**にも受信箱由来の項目を含めて検討する。
 
 ### Phase 2: 重点テーマの選定（1-2 テーマに絞る・予算制約）
@@ -101,7 +101,7 @@ primary_agent: strategy-advisor
 
 ### Phase 5: 出力
 
-Write tool で `.claude/todo/02_今月の重点.md` を上書きする。frontmatter 必須。作成後にパスを報告する。
+Write tool で `.claude/todo/monthly.md` を上書きする。frontmatter 必須。作成後にパスを報告する。
 
 ## 出力フォーマット（ファイル本文）
 
@@ -150,7 +150,7 @@ tags: []
   - <サブタスク> [S/M/L] — 成功基準 / 使用スキル `/xxx`（→ 週: W-nn）
   - ...
 - **依存・ブロッカー**: <ユーザー操作待ち等>
-- **真実源リンク**: `04_改善バックログ.md#<id>` 等
+- **真実源リンク**: `improvements.md#<id>` 等
 
 ### 重点2: <テーマ名>（任意）
 （同上）
@@ -170,29 +170,28 @@ tags: []
 
 ## 関連ドキュメント
 - 収益化戦略: `../00_プロジェクト管理/02_収益化戦略.md`
-- 改善バックログ: `04_改善バックログ.md`
-- 機能バックログ: `05_機能バックログ.md`
-- 指標バックログ: `06_指標バックログ.md`
+- 改善バックログ: `improvements.md`
+- バックログ (機能・自動化・指標): `backlog.md`
 - 実装計画 INDEX: `../02_実装計画/00_INDEX.md`
 ```
 
 ## 運用ルール
 
 - **毎月初（第 1 週の月曜など）に 1 回実行**する想定。`/monthly-plan` だけで完結。
-- 月内の進捗は **週次計画 `/weekly-plan` が分割消化**する。週次は `.claude/todo/02_今月の重点.md` の `focus_themes` を読む。
+- 月内の進捗は **週次計画 `/weekly-plan` が分割消化**する。週次は `.claude/todo/monthly.md` の `focus_themes` を読む。
 - **タスクの実体（status / due）は各バックログが真実源。** 月次計画は選定理由と配分だけを持ち、進捗は週次計画とバックログで扱う。
 - 月末の振り返りは独立スキルを作らず、**翌月の `/monthly-plan` の Phase 1-2 + 「前月の振り返り」セクション**で吸収する（軽量維持のため。重い振り返りが必要なら `/weekly-review` の月末回で代替）。
 - 月次計画は蓄積せず毎月上書きする。前月結果は週次レビューと git 履歴に残す。
 
 ## 保存先
 
-- 本スキル出力: `.claude/todo/02_今月の重点.md`（frontmatter `type: monthly-plan`, `month: YYYY-MM`, `focus_themes: [...]`）
+- 本スキル出力: `.claude/todo/monthly.md`（frontmatter `type: monthly-plan`, `month: YYYY-MM`, `focus_themes: [...]`）
 - 週次が参照: `/weekly-plan` Phase 1 Agent D / Phase 2
 
 ## 参照
 
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — 収益レーン・意思決定ゲート（重点選定の最上位基準）
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
-- `.claude/todo/04_改善バックログ.md` / `05_機能バックログ.md` / `06_指標バックログ.md` — TODO 真実源
+- `.claude/todo/improvements.md` / `backlog.md` — TODO 真実源
 - `.claude/skills/management/weekly-plan/SKILL.md` — 月次を分割消化する週次レイヤー
 - `.claude/rules/docs-vs-issues.md` — docs/ 配下に置く根拠
