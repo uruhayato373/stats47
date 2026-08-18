@@ -4,6 +4,13 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { projectRoot } from "./project-root";
+import {
+  cached,
+  mdTableAfter,
+  TTL,
+  wrap,
+  type Wrapped as StateWrapped,
+} from "./state-io";
 
 /**
  * プロジェクト現況ダッシュボードの collector 集 (読み取り専用)。
@@ -14,14 +21,16 @@ import { projectRoot } from "./project-root";
 
 const TITLE_TRUNC = 200;
 
-type Wrapped<T> = T | { error: string };
+// ★汎用パーサ・wrap・TTL キャッシュは state-io.ts に集約した (2026-08-18)。
+//   ページが増えるたびに各モジュールが再実装すると、失敗の畳み方が揃わず
+//   1 セクションの読み取り失敗が画面全体を落とすようになる。
+type Wrapped<T> = StateWrapped<T>;
 
-// ─── 汎用パーサ ──────────────────────────────────────
+/** dashboard は絶対パスを受け取る collector なので、state-io の相対版を絶対版に薄く包む */
 function readJson(fp: string): unknown {
   return JSON.parse(fs.readFileSync(fp, "utf8"));
 }
 
-/** ヘッダ行付き csv → オブジェクト配列 (数値セルは Number 化)。 */
 function readCsv(fp: string): Array<Record<string, string | number>> {
   const lines = fs.readFileSync(fp, "utf8").trim().split(/\r?\n/);
   const header = lines[0].split(",");
@@ -34,44 +43,6 @@ function readCsv(fp: string): Array<Record<string, string | number>> {
     });
     return row;
   });
-}
-
-/** markdown の見出し regex 以降で最初に現れる pipe テーブルを行配列で返す。 */
-function mdTableAfter(
-  md: string,
-  headingRe: RegExp,
-): { header: string[]; rows: string[][] } | null {
-  const lines = md.split(/\r?\n/);
-  const start = lines.findIndex((l) => headingRe.test(l));
-  if (start < 0) return null;
-  const rows: string[][] = [];
-  let inTable = false;
-  for (let i = start + 1; i < lines.length; i++) {
-    const l = lines[i];
-    if (/^\|/.test(l)) {
-      inTable = true;
-      // ★`l.replace(/-/g, "-")` を挟んでいたが `-` を `-` に置換する no-op で、
-      //   判定結果は素の `l` と常に同一 (CodeQL js/identity-replacement が指摘)。
-      //   全角ダッシュ (—–−) の正規化を意図していた可能性はあるが、それは挙動を変える
-      //   別の判断なので推測で実装しない。ここでは死んだ置換だけを外す。
-      if (/^\|[\s:-]+\|/.test(l)) continue; // 区切り行
-      const cells = l
-        .split("|")
-        .slice(1, -1)
-        .map((c) => c.replace(/\*\*/g, "").trim());
-      rows.push(cells);
-    } else if (inTable) break;
-  }
-  if (rows.length < 2) return null;
-  return { header: rows[0], rows: rows.slice(1) };
-}
-
-function wrap<T>(fn: () => T): Wrapped<T> {
-  try {
-    return fn();
-  } catch (e) {
-    return { error: (e as Error).message };
-  }
 }
 
 // ─── 進捗キュー ──────────────────────────────────────
@@ -455,17 +426,6 @@ export function collectDashboard(root: string): DashboardData {
   };
 }
 
-interface DashCache {
-  at: number;
-  data: DashboardData;
-}
-const g = globalThis as unknown as { __galleryDashCache?: DashCache | null };
-const DASH_TTL_MS = 60 * 1000;
-
 export function dashboardSummary(): DashboardData {
-  const cached = g.__galleryDashCache;
-  if (cached && Date.now() - cached.at < DASH_TTL_MS) return cached.data;
-  const data = collectDashboard(projectRoot());
-  g.__galleryDashCache = { at: Date.now(), data };
-  return data;
+  return cached("dashboard", TTL.daily, () => collectDashboard(projectRoot()));
 }
