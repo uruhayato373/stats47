@@ -311,7 +311,7 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
 
   # 既存 Gemini の純粋監査 (API を呼ばない・生成予定/最大費用のみ)
   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --limit N
-  # ローカル目視 (R2 非書込・gallery /assets「ブログ OGP パイロット (local)」タブで確認)
+  # ローカル目視 (R2 非書込・admin /assets「ブログ OGP パイロット (local)」タブで確認)
   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --slug a,b --out-dir .local/ogp-pilot
   # 本番反映 (R2 push)
   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --slug <slugs>
@@ -359,7 +359,7 @@ OGP・カード・note カバーとは別の種別で、**ページ本文の先�
 | 改善                           | プロンプトは `page-heroes.ts` の `HeroImageAsset.prompt` を直す (記事ごとの自由入力プロンプトは持たせない = OGP と同じ方針)                                                                             |
 
 **監査・ギャラリー・agent 所有は現時点で意図的に未整備** (hero は実質 1 枚のため過剰投資を避ける、`最小SSOT整備` 判断)。
-hero が数枚に増えたら: (a) gallery `/assets` に「ページ hero」タブ追加 (`ASSET_TABS` + collector)、
+hero が数枚に増えたら: (a) admin `/assets` に「ページ hero」タブ追加 (`ASSET_TABS` + collector)、
 (b) `/audit-ogp-images` に欠落検知を配線、(c) `image-prompt-curator` の守備範囲に page hero を追加、を行う。
 それまでは page-heroes.ts の git TS SSOT + プロベナンスで管理する (欠落検知は type-check + 手動確認)。
 
@@ -391,7 +391,7 @@ hero が数枚に増えたら: (a) gallery `/assets` に「ページ hero」タ�
 - **ブログ OGP AI 背景 (§5)**: カタログ SSOT `apps/web/scripts/data/blog-ogp-visual-catalog.ts` / 解決・hash
   `apps/web/scripts/lib/blog-ogp-visual.ts` / Gemini クライアント `apps/web/scripts/lib/gemini-image-client.ts` /
   合成 `apps/web/scripts/lib/blog-thumbnail-render.ts` (`normalizeAiBackground`) / 生成 `apps/web/scripts/generate-blog-thumbnails-cloud.ts`
-  (`--ai-background`) / 目視 `npm run gallery` → /assets「ブログ OGP パイロット (local)」タブ
+  (`--ai-background`) / 目視 `npm run admin` → /assets「ブログ OGP パイロット (local)」タブ
 - **ページ hero (§5.6)**: SSOT `apps/web/src/components/layout/page-heroes.ts` (`THEME_HEROES` / `CATEGORY_HEROES` + プロベナンス) /
   描画 `apps/web/src/components/layout/HeroBanner.tsx` / テーマ差し替え `features/theme-dashboard/components/ThemeHero.tsx`
 - 画像プロンプト: `.claude/skills/image-prompt/SKILL.md` / `reference/catalog.md`

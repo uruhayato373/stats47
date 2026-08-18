@@ -38,7 +38,7 @@ Office・データ商品の生成基盤は `.claude/rules/coconala-product-stand
 | SNS | posts.json + metrics snapshots | 無料需要テスト |
 | 地図・チャート | buzz-map / chart / Remotion | 表紙、図解、動画、教材 |
 | Office商品 | `packages/product-factory/` | PPTX/XLSX/PDF/CSV商品 |
-| gallery | `apps/gallery` | ローカル横断管理画面 |
+| gallery | `apps/admin` | ローカル横断管理画面 |
 | 実験 | `.claude/state/experiments.json` | 仮説と判定履歴 |
 
 ### 1.2 既存方針との関係
@@ -643,7 +643,7 @@ Verdict: PASS | REVISE | BLOCK | ESCALATE-HUMAN.
 
 ## 10. gallery統合
 
-`apps/gallery`に`/products`を追加する。ココナラ専用画面ではなく全channelのportfolio consoleとする。
+`apps/admin`に`/products`を追加する。ココナラ専用画面ではなく全channelのportfolio consoleとする。
 
 ### 10.1 view
 

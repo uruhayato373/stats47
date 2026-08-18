@@ -51,7 +51,7 @@ PR #650 の high 3 件を止めたのは前者。`security-scan.yml` は同じ P
 **台帳を読んでも本当のゲートには辿り着けない。**
 
 **関連する構造的な穴**: `lint` script を持つ workspace は **`apps/web` だけ**。
-eslint 設定ファイルは `apps/gallery` にもあるが lint script が無く `turbo run lint` で走らない。
+eslint 設定ファイルは `apps/admin` にもあるが lint script が無く `turbo run lint` で走らない。
 `packages/**` は設定も script も無い。今回 ReDoS が入った `packages/data-configs/` も対象外なので、
 `eslint-plugin-regexp` 等を足してもこの穴を埋めない限り同じ場所は守れない。
 

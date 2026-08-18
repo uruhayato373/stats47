@@ -110,7 +110,7 @@ cd apps/web && npm run dev
 
 **機械ゲート**: `.claude/hooks/pre-bash-safety.js` の `WINDOWS_BLOCKED_PATTERNS` が
 `process.platform === "win32"` のときだけ `npm/pnpm/yarn/bun run dev*` `next dev` `turbo run dev` を deny する
-(Mac/Linux では素通し)。`npm run build` `npm run gallery` 等は誤検知しないことをテスト済み。
+(Mac/Linux では素通し)。`npm run build` `npm run admin` 等は誤検知しないことをテスト済み。
 
 **例外**: 素の tsx スクリプトは `HTTPS_PROXY` を継承していれば ProxyAgent 経由で R2 に到達できる
 (`packages/estat-api/src/core/client/http-client.ts` / `packages/ranking/src/scripts/audit-ranking-data-integrity.ts` の実装)。
@@ -228,9 +228,9 @@ cd apps/remotion && npx tsc --noEmit
 #         + ブログSVGカタログ(/svg) + プロジェクト現況(/dashboard メトリクス/進捗キュー/改善バックログTODO/STP戦略・読み取り専用ミラー)。
 #         起動後にブラウザで http://127.0.0.1:4747/（file:// で直接開かない）。
 # 常駐プロセスなので run_in_background + Ready polling で起動する。skill: /sns-gallery
-# 実装は独立 Next.js アプリ apps/gallery (localhost 専用・127.0.0.1 bind 固定・PORT= で上書き可)。
+# 実装は独立 Next.js アプリ apps/admin (localhost 専用・127.0.0.1 bind 固定・PORT= で上書き可)。
 # 旧 node:http 実装 (.claude/scripts/gallery/) と sns:gallery alias は 2026-07-16 に廃止。
-npm run gallery
+npm run admin
 ```
 
 > 旧 `npm run backup:d1 --env production`（リモート D1 → R2 バックアップ）は **リモート D1 廃止により不要**。

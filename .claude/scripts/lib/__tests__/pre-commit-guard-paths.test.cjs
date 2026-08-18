@@ -9,8 +9,8 @@
  *   **ファイルを rename すると grep が何にもマッチしなくなり、対応するゲートが
  *   無言で無効化される**。commit は緑のまま通り、壊れたのは検査の側なので誰も気づけない。
  *
- *   実例: image-pipeline policy ゲートは `apps/gallery/lib/server/(actions|buzz-map-actions).ts`
- *   を trigger に持つ。apps/gallery → apps/admin の改名でこれが死ぬところだった。
+ *   実例: image-pipeline policy ゲートは `apps/admin/lib/server/(actions|buzz-map-actions).ts`
+ *   を trigger に持つ。apps/admin → apps/admin の改名でこれが死ぬところだった。
  *   同種のゲートは他にも 9 本ある (docs governance / dispatch freshness / unit semantics 等)。
  *
  *   `image-pipeline-source-policy.test.ts` は実ファイルを読むので**ファイル移動自体**は

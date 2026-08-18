@@ -22,7 +22,7 @@ co_agents: [x-strategist, instagram-strategist, gis-curator]
 
 > **★バッチ量産の既定経路 (2026-07-17〜)**: 単発の下記工程に加え、**`npx tsx .claude/scripts/sns/prepare-buzz-map-batch.ts`**
 > (dry-run 既定・`--apply` で spec→render→R2→caption→**landing contract + isPostable ゲート通過分のみ** posts.json draft)
-> が選定〜draft を一括処理する。管理画面は **gallery `/buzz-map`** (`npm run gallery` → 127.0.0.1:4747/buzz-map —
+> が選定〜draft を一括処理する。管理画面は **gallery `/buzz-map`** (`npm run admin` → 127.0.0.1:4747/buzz-map —
 > catalog 横断表示 + landing 再判定/レンダ/R2 push/draft 登録の分離 job)。ゲート仕様の正典 = `buzz-map-standards.md` §5。
 
 | step | 内容 | 出力 |

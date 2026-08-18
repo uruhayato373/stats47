@@ -6,7 +6,7 @@
  *
  * 消費側:
  *  - .claude/scripts/blog/build-svg-gallery-tabbed.mjs (静的 HTML)
- *  - apps/gallery/lib/server/collectors.ts             (統合メディアコンソール・Next.js)
+ *  - apps/admin/lib/server/collectors.ts             (統合メディアコンソール・Next.js)
  *
  * 正典: .claude/rules/blog-svg-chart-standards.md (§4 alias 表 / §5 標準 viewBox)
  */
