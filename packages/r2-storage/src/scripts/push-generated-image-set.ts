@@ -10,7 +10,7 @@
 
 import { createHash, randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { isAbsolute, relative, resolve } from 'node:path';
 
 import { config } from 'dotenv';
 import sharp from 'sharp';
@@ -247,8 +247,9 @@ function fingerprintForManifest(manifest: ImageManifest): string {
 
 function localPathFor(stageRoot: string, key: string): string {
   const absolute = resolve(stageRoot, key);
-  const prefix = `${resolve(stageRoot)}/`;
-  if (!absolute.startsWith(prefix))
+  // ★上の stageRoot 検査と同じ理由で relative() を使う (区切り文字直書きは Windows で常に不一致)
+  const rel = relative(resolve(stageRoot), absolute);
+  if (rel === '' || rel.startsWith('..') || isAbsolute(rel))
     throw new Error(`R2 key が staging 外を指しています: ${key}`);
   return absolute;
 }
@@ -634,11 +635,12 @@ export async function publishGeneratedImageSet(options: {
 }): Promise<{ bundles: number; assets: number }> {
   const plan = readPublishPlan(options.planPath);
   const stageRoot = resolve(options.projectRoot, plan.stageRoot);
-  const allowedStagePrefix = `${resolve(
-    options.projectRoot,
-    '.local/image-staging'
-  )}/`;
-  if (!stageRoot.startsWith(allowedStagePrefix)) {
+  // ★区切り文字を直書きした前方一致にしない (2026-08-18)。`${dir}/` を付けて startsWith すると
+  //   Windows では resolve() が `\` を返すため常に不一致になり、正当な stage まで弾く
+  //   (この環境で 19 テストが赤だった)。relative() の包含判定は区切り文字に依存しない。
+  const allowedStageRoot = resolve(options.projectRoot, '.local/image-staging');
+  const stageRel = relative(allowedStageRoot, stageRoot);
+  if (stageRel === '' || stageRel.startsWith('..') || isAbsolute(stageRel)) {
     throw new Error(
       `publish plan の stageRoot が許可範囲外です: ${plan.stageRoot}`
     );

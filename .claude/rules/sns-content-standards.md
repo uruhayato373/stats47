@@ -308,7 +308,7 @@ https://stats47.jp/ranking/taxable-income-per-capita
 | **X (量産)** | `post-x-batch` (候補選定→画像→執筆→lint→draft 登録) | quick-still (ranking-card) | `publish-x --from-queue` (ローカル) → `mark-sns-posted` | `update-sns-metrics` → `analyze-x-winning-patterns` |
 | **X (瞬発)** | `find-quote-rt` / `react-to-news` | (キャプション) | `publish-x` → `mark-sns-posted` | `update-sns-metrics` |
 | **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) | `render-sns-stills` | `post-instagram` (GHA cron) → `record-posted.cjs` | `update-sns-metrics` |
-| **buzz-map (X/IG 横断)** | curated catalog (`build-buzz-map-catalog.ts --next`・正典 `buzz-map-standards.md` §4-5) | `prepare-buzz-map-batch.ts` (dry-run 既定・landing contract+isPostable ゲート→R2→draft) / gallery `/buzz-map` | 既存 guarded flow (`publish-x` / IG cron — draft からの昇格は人間判断) | `buzz-map-attribution.mjs` (campaign 別) → score 還流 |
+| **buzz-map (X/IG 横断)** | curated catalog (`build-buzz-map-catalog.ts --next`・正典 `buzz-map-standards.md` §4-5) | `prepare-buzz-map-batch.ts` (dry-run 既定・landing contract+isPostable ゲート→R2→draft) / admin `/buzz-map` | 既存 guarded flow (`publish-x` / IG cron — draft からの昇格は人間判断) | `buzz-map-attribution.mjs` (campaign 別) → score 還流 |
 
 - **buzz-map の deep-click 計測は要ユーザー操作 (GA4 custom dimension)**: `buzz-map-attribution.mjs` は
   session KPI (landing session / engagement / SNS CTR は attribution=direct のみ) を campaign 別に取得するが、
@@ -326,17 +326,17 @@ https://stats47.jp/ranking/taxable-income-per-capita
 
 ---
 
-## 5.5 統合メディアコンソール (`/sns-gallery`) と R2 素材保持ポリシー
+## 5.5 統合メディアコンソール (`/admin-console`) と R2 素材保持ポリシー
 
 素材の目視確認 (動画再生)・caption 微調整・投稿/予約・メトリクス閲覧は
-**ローカル統合メディアコンソール** (`npm run gallery` → http://127.0.0.1:4747/) で行える
-(skill `.claude/skills/sns/sns-gallery/SKILL.md`、実装 `apps/gallery/` — 独立 Next.js App Router アプリ、
+**ローカル統合メディアコンソール** (`npm run admin` → http://127.0.0.1:4747/) で行える
+(skill `.claude/skills/ops/admin-console/SKILL.md`、実装 `apps/admin/` — 独立 Next.js App Router アプリ、
 localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装から完全移管、`sns:gallery` alias 廃止)。
 SNS 投稿は `/sns` セクション、OGP/リンクカード/note カバー・
 記事内画像/動画 master は `/assets`、ブログ SVG カタログは `/svg`、**プロジェクト現況 (メトリクス・進捗キュー・
 改善バックログ TODO・STP 戦略) は `/dashboard`** で横断閲覧する
 (画像資産の列挙 collector は CI 静的ギャラリー `build-image-gallery.mjs` と `.claude/scripts/lib/gallery-collectors.mjs` を共用。
-現況 collector は `apps/gallery/lib/server/dashboard.ts`、state/md を読み取り専用ミラーでライブ読み)。
+現況 collector は `apps/admin/lib/server/dashboard.ts`、state/md を読み取り専用ミラーでライブ読み)。
 
 - **ギャラリー経由の投稿も台帳規約は同一**: posts.json への書込は `sns-posts-store.cjs` 経由のみ
   (server も同経路)。§1 の頻度リミットは残枠バッジ + ガードで enforce される

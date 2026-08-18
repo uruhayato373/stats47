@@ -9,9 +9,9 @@
       "autoPort": false
     },
     {
-      "name": "gallery",
+      "name": "admin",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "gallery"],
+      "runtimeArgs": ["run", "admin"],
       "port": 4747,
       "autoPort": false
     }
