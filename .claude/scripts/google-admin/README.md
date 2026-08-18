@@ -2,7 +2,7 @@
 
 GA4、Google Search Console（GSC）、AdSense の監査・設定変更について、
 API、GitHub Actions、ローカル Playwright、人間操作の境界を定義する。
-実装進捗は `.claude/todo/05_機能バックログ.md` の
+実装進捗は `.claude/todo/backlog.md` の
 `GOOGLE-ADMIN-AUTOMATION-01`、認証ブラウザの一般規則は
 `docs/01_技術設計/07_Playwright認証プロファイル.md` を参照する。
 
@@ -59,7 +59,7 @@ OAuth scope、必要ロールまで公式リファレンスとローカル `goog
 | 責務 | 正典 |
 |---|---|
 | 本runbook、実行境界、移行手順 | 本README |
-| active status / 次 / 完了条件 | `.claude/todo/05_機能バックログ.md` |
+| active status / 次 / 完了条件 | `.claude/todo/backlog.md` |
 | allowlist / denylist / plan token / dimension plan | `apply-allowlisted-settings.mjs` |
 | GA4 API inventory / custom dimension apply | `audit-ga4-api.mjs` |
 | GSC inventory | `audit-gsc.mjs` |

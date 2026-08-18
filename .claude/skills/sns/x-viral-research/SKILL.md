@@ -145,7 +145,7 @@ tags: [competitor, sns]
 - <buzz-map カタログ / X template への反映候補。§2-10 承認ゲート経由と明記>
 ```
 
-採択した未完了策だけを `.claude/todo/04_改善バックログ.md` へID付きで追加する。
+採択した未完了策だけを `.claude/todo/improvements.md` へID付きで追加する。
 
 ### Phase 5: カタログへの反映 (★人間承認ゲート)
 

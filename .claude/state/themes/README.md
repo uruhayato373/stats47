@@ -138,7 +138,7 @@
 4. `baseline` の無い実験は登録不可 (効果測定不能な実験を作らない)。
 5. verdict 確定時は `result` と `evidenceRefs` (実測 snapshot への参照) が必須。
 6. effect/* の**バックログ status への反映は improvement-triage に依頼する** (本 state は判定材料と
-   実験履歴の台帳であり、`.claude/todo/04_改善バックログ.md` へは書かない)。
+   実験履歴の台帳であり、`.claude/todo/improvements.md` へは書かない)。
 
 ## 禁止事項
 
@@ -148,4 +148,4 @@
 | ThemeCatalog に GSC/GA4 等の変動値を書く | 変動値は本 state のみ。カタログは定義のみ |
 | 推測値・代替値を measured として保存 | 取れない値は insufficient-data / not-instrumented |
 | 根拠 (evidenceRefs/56日測定) なしの merge/retire | validator が error で弾く |
-| `.claude/todo/04_改善バックログ.md` へ直接書く | improvement-triage へ引き渡す |
+| `.claude/todo/improvements.md` へ直接書く | improvement-triage へ引き渡す |

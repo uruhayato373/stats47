@@ -7,7 +7,7 @@ co_agents: [backlog-solver-hard]
 
 # process-backlog
 
-`.claude/todo/05_機能バックログ.md` / `06_指標バックログ.md` のエントリを分類して処理し、
+`.claude/todo/backlog.md` / `backlog.md` のエントリを分類して処理し、
 **機械ゲートを通ったものだけ**を行削除する。CI 日次ループ (Phase 1) と同じ手順を
 セッション内で回す入口。
 
@@ -79,7 +79,7 @@ verify が落ちたら**行を戻す**。gate 未実行のまま削除しよう�
 
 - ゲートを実行せずに `--gate-pass` を付ける (verify が突合して落とす)
 - `.claude/state/backlog-loop/ledger.json` を直接編集する (証拠の捏造)
-- `.claude/todo/04_改善バックログ.md` を触る (improvement-triage の排他 write)
+- `.claude/todo/improvements.md` を触る (improvement-triage の排他 write)
 - `blocked-owner-*` エントリの status 変更・削除
 - deploy / 本番 R2 push (人間の明示承認が要る)
 - `git add -A` (明示パスのみ)
@@ -89,4 +89,4 @@ verify が落ちたら**行を戻す**。gate 未実行のまま削除しよう�
 - 正典: `.claude/rules/backlog-loop.md`
 - agent: `.claude/agents/backlog-processor.md` / `.claude/agents/backlog-solver-hard.md`
 - policy: `.claude/config/backlog-routing-policy.json`
-- TODO 作成契約: `.claude/rules/docs-vs-issues.md` / `.claude/todo/00_運用ガイド.md`
+- TODO 作成契約: `.claude/rules/docs-vs-issues.md` / `.claude/rules/todo-standards.md`

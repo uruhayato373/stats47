@@ -1,6 +1,6 @@
 ---
 name: affiliate-improvement
-description: アフィリエイト広告の impression / click / CTR を GA4 (affiliate_impression / affiliate_click) と在庫棚卸しで分析し、弱い枠を特定して改善施策を .claude/todo/04_改善バックログ.md に記録するループ。在庫の管理画面 (単体 HTML) を開く機能も持つ。Use when user says "アフィリエイト改善", "アフィリエイト分析", "imp/click 増やす", "広告クリック改善", "アフィリエイト管理画面", "管理画面を開いて", "アフィリエイト一覧見せて", "在庫見せて".
+description: アフィリエイト広告の impression / click / CTR を GA4 (affiliate_impression / affiliate_click) と在庫棚卸しで分析し、弱い枠を特定して改善施策を .claude/todo/improvements.md に記録するループ。在庫の管理画面 (単体 HTML) を開く機能も持つ。Use when user says "アフィリエイト改善", "アフィリエイト分析", "imp/click 増やす", "広告クリック改善", "アフィリエイト管理画面", "管理画面を開いて", "アフィリエイト一覧見せて", "在庫見せて".
 primary_agent: affiliate-manager
 co_agents: [improvement-triage, adsense-analyst]
 ---
@@ -19,7 +19,7 @@ co_agents: [improvement-triage, adsense-analyst]
 
 | 層 | 場所 | 用途 |
 |---|---|---|
-| 施策一覧 | `.claude/todo/04_改善バックログ.md` | AFF-NN 行の追加・status 更新 |
+| 施策一覧 | `.claude/todo/improvements.md` | AFF-NN 行の追加・status 更新 |
 | agent 用詳細 | `.claude/skills/analytics/affiliate-improvement/reference/improvement-log.md` | 検証コマンド・仮説・実測値・GA4 クエリ結果 |
 | **集約状態 (機械・★入口)** | `.claude/state/ads/affiliate-operations-latest.json` | 計測ゲート・freshness・coverage・直接配置・実験・推奨アクションの現在地 (`build-affiliate-operations-state.ts` が生成、週次 CI 自動更新) |
 | 在庫 snapshot (機械) | `.claude/state/ads/inventory-*.json` | audit script が生成、ループの入力 |
@@ -136,7 +136,7 @@ baseline / 中央値は実測から決め、根拠を improvement-log に書く 
 
 ### Step 4: 施策の記録 (action モード)
 
-`.claude/todo/04_改善バックログ.md` の該当Tierの6列表に1行を追加する:
+`.claude/todo/improvements.md` の該当Tierの6列表に1行を追加する:
 
 ```markdown
 | AFF-NN | <次アクションを含む短い要約> | pending | YYYY-MM-DD | <owner> | affiliate |
@@ -159,7 +159,7 @@ target metric、deployed_at、関連PR、詳細 (仮説 / 検証コマンド / �
 
 施策デプロイから 1〜4 週後に GA4 を再取得し、impression / CTR の before/after を比較。
 実証チェックリストを通し、判定結果を `reference/improvement-log.md` に追記してから
-`.claude/todo/04_改善バックログ.md` の該当行を削除する。是正が必要なら別IDを追加する。
+`.claude/todo/improvements.md` の該当行を削除する。是正が必要なら別IDを追加する。
 TODOのwriteは排他的 writer の `improvement-triage` に委譲してもよい。
 
 ## 在庫追加・配置変更の実行委譲
@@ -175,7 +175,7 @@ TODOのwriteは排他的 writer の `improvement-triage` に委譲してもよ�
 | ファイル | 役割 |
 |---|---|
 | `.claude/scripts/ads/audit-affiliate-inventory.ts` | 在庫棚卸し (決定的) |
-| `.claude/todo/04_改善バックログ.md` | 人間向けactive施策一覧 (AFF-NN) |
+| `.claude/todo/improvements.md` | 人間向けactive施策一覧 (AFF-NN) |
 | `reference/improvement-log.md` | agent 用詳細ログ |
 | `apps/web/scripts/affiliate-ads-data.ts` | 在庫 SSOT |
 | `apps/web/src/lib/analytics/events.ts` | GA4 計測イベント定義 |

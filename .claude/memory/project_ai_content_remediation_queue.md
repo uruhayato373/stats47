@@ -42,7 +42,7 @@ ranking 詳細ページの AI コンテンツ (insights=考察 / regionalAnalysi
 効果 (CTR/順位) は GSC で数週間後に実測が要る (未実証、`evidence-based-judgment.md`)。
 
 進捗 2026-06-21: 111件 本番反映 (バッチ1=複合11 + バッチ2-6=GSC流入優先、最大30並列)。queue done 130 / needs-regen 794。
-★build-input.ts の `meta.input.allPrefectures` が canonical R2 値と不一致のキーあり (road-national-route-length: 北海道 7361.6≠正6815.9)。agent は R2 `app/ranking/<key>/values.json` を SSOT 採用して回避済だが、build-input.ts の allPrefectures 算出は要調査。正典: `.claude/todo/05_機能バックログ.md`
+★build-input.ts の `meta.input.allPrefectures` が canonical R2 値と不一致のキーあり (road-national-route-length: 北海道 7361.6≠正6815.9)。agent は R2 `app/ranking/<key>/values.json` を SSOT 採用して回避済だが、build-input.ts の allPrefectures 算出は要調査。正典: `.claude/todo/backlog.md`
 `[AICONTENT-DBLESS-REBUILD]`。担当 `ranking-content-author` / `ranking-content-critic`。
 
 関連: [[feedback_evidence_based_judgment]] [[project_ranking_publish_pipeline_gap]] [[feedback_shared_working_copy_git_race]]

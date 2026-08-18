@@ -153,7 +153,7 @@ workflow にも配線されておらず、R2 ライフサイクルルールも�
 | 削減後 (2026-07-27 01:56 実測) | 11.2 GB / 42,664 オブジェクト |
 | 検証 | 削除後に本番 5 ページ (`/`, `/ranking/annual-sunshine-duration`, `/areas/13000`, `/blog/real-disposable-income-reversal`, `/category/landweather`) を Googlebot UA で 200 実測確認 |
 
-削減後もアカウント合計は無料枠 10 GB を超過している (残課題は `.claude/todo/04_改善バックログ.md`
+削減後もアカウント合計は無料枠 10 GB を超過している (残課題は `.claude/todo/improvements.md`
 `[R2-STORAGE-01]` を参照)。今後の再発防止は `r2-isr-gc.yml` の自動 GC (デプロイ連動) が担う。
 
 ## 動画関連の特殊ルール

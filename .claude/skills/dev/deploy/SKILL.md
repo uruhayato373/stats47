@@ -307,7 +307,7 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 # CDN キャッシュ疑いは ?cb=$(date +%s) を付けてオリジン Worker の応答を直接確認
 ```
 
-不一致なら未完（例: ranking を `isActive:true` にしても `KNOWN_RANKING_KEYS` / R2 `all.json` 未反映だと middleware の `isGone || !isKnown` で 410 のまま）。ranking 公開の多段依存は memory `project_ranking_publish_pipeline_gap` / `.claude/todo/05_機能バックログ.md`「122 metric (完全データ) の本番公開」参照。
+不一致なら未完（例: ranking を `isActive:true` にしても `KNOWN_RANKING_KEYS` / R2 `all.json` 未反映だと middleware の `isGone || !isKnown` で 410 のまま）。ranking 公開の多段依存は memory `project_ranking_publish_pipeline_gap` / `.claude/todo/backlog.md`「122 metric (完全データ) の本番公開」参照。
 
 ### Step 8: Cloudflare Purge 自動実行の判定
 

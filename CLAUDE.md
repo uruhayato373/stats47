@@ -60,16 +60,16 @@
 | 完了前検証 | `/verification-loop` (ビルド + 型チェック) |
 | バグ修正の教訓 | `/knowledge` |
 | 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
-| **改善施策の TODO 真実源** (status / tier / 期日) | `.claude/todo/04_改善バックログ.md` |
+| **改善施策の TODO 真実源** (status / tier / 期日) | `.claude/todo/improvements.md` |
 | 改善施策デプロイ (agent 用詳細) | `.claude/skills/analytics/{gsc,ga4,adsense,affiliate,sns-metrics,cloudflare-cost,performance}-improvement/reference/improvement-log.md` |
-| **月次の重点 1-2 テーマ** (今月どこに張るか・Pro 予算配分) | `.claude/todo/02_今月の重点.md` (`/monthly-plan` で月初上書き。週次が分割消化) |
-| 週次計画進捗 | `.claude/todo/03_今週の計画.md` の TODO チェックボックスを Edit |
+| **月次の重点 1-2 テーマ** (今月どこに張るか・Pro 予算配分) | `.claude/todo/monthly.md` (`/monthly-plan` で月初上書き。週次が分割消化) |
+| 週次計画進捗 | `.claude/todo/weekly.md` の TODO チェックボックスを Edit |
 | 週次振り返り | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` |
-| 批判的レビュー / 事前検死 | 全文はセッション内で提示。未完了策を `.claude/todo/{04_改善,05_機能,06_指標バックログ}.md`、恒久判断を既存SSOTへ直接反映 |
-| **セッション残タスク** | 未完了は `.claude/todo/{04_改善バックログ,05_機能バックログ,06_指標バックログ}.md` へ直接反映。未分類のみ `.claude/todo/01_未整理タスク.md`（一時ハンドオフ文書は作らない） |
-| 未分類の思いつき TODO | `.claude/todo/01_未整理タスク.md` に 1 行 append (triage で各バックログへ → `.claude/todo/00_運用ガイド.md`) |
+| 批判的レビュー / 事前検死 | 全文はセッション内で提示。未完了策を `.claude/todo/{improvements,backlog}.md`、恒久判断を既存SSOTへ直接反映 |
+| **セッション残タスク** | `.claude/todo/backlog.md` へカード起票 (改善施策のみ improvements.md = improvement-triage 経由。一時ハンドオフ文書は作らない) |
+| 未分類の思いつき TODO | `.claude/todo/backlog.md` へカード起票 (迷ったら 🟡・タグは後から todo-curator が付与 → `.claude/rules/todo-standards.md`) |
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |
-| 未着手の機能・自動化バックログ | `.claude/todo/05_機能バックログ.md`（指標拡充候補は `.claude/todo/06_指標バックログ.md`） |
+| 未着手の機能・自動化・指標拡充バックログ | `.claude/todo/backlog.md`（tier 見出し + タグ行のカード形式） |
 | 非自明な API 仕様・制約 | `/knowledge` (問題・原因・対策の 3 項目) |
 | プロジェクト固有の恒常事実 | auto memory → 正典は **repo 内 `.claude/memory/`**（git で複数 PC・クラウドと共有）。Claude Code のグローバルパス `~/.claude/projects/<hash>/memory/` は `.claude/memory/` への symlink。**新しいマシンで clone した直後に `bash .claude/scripts/setup-memory-symlink.sh` を 1 回実行**して symlink を張る |
 
@@ -115,7 +115,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | ターゲット・ペルソナ | `docs/00_プロジェクト管理/04_ターゲットペルソナ.md` |
 | 実装計画 INDEX / 現在地 | `docs/02_実装計画/00_INDEX.md` |
 | **収益化戦略 (収益モデル・チャネル・広告配置の SSOT)** ★収益関連の判断時必読 | `docs/00_プロジェクト管理/02_収益化戦略.md` |
-| 改善バックログ (TODO 真実源) | `.claude/todo/04_改善バックログ.md` ★施策追加時必読 |
+| 改善バックログ (TODO 真実源) | `.claude/todo/improvements.md` ★施策追加時必読 |
 | システム構成・技術スタック・モノレポ構造 | `docs/01_技術設計/01_システムアーキテクチャ.md` |
 | **データアーキテクチャ (完全DBレス・正典)** ★データ保存先判定時必読 | `docs/01_技術設計/02_データアーキテクチャ.md` |
 | ドメイン境界 | `docs/01_技術設計/01_システムアーキテクチャ.md` |
@@ -162,4 +162,4 @@ Issues は「PR で close される機能改修・バグ」と「機械生成ア
 - `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05) → `docs/02_実装計画/{feature-backlog,indicator-backlog}.md` (2026-06-07 統合)
 - レビュー保存ディレクトリは 2026-07-30 に廃止。批判的レビュー / pre-mortem は未完了策を `.claude/todo/`、恒久判断を既存SSOT、再生成可能な履歴をskill referenceへ直接反映する
 - `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` 系ラベル (2026-05 廃止) → `.claude/todo/` / `.claude/skills/management/weekly-review/reference/reviews/` / 各strategy・rules・skill reference
-- `docs/05_改善ログ/` (2026-06 廃止) → `.claude/todo/04_改善バックログ.md` (pending 移行) + `.claude/skills/analytics/*/reference/improvement-log.md` (詳細ログ)
+- `docs/05_改善ログ/` (2026-06 廃止) → `.claude/todo/improvements.md` (pending 移行) + `.claude/skills/analytics/*/reference/improvement-log.md` (詳細ログ)

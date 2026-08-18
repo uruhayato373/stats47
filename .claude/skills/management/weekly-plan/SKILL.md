@@ -98,7 +98,7 @@ primary_agent: strategy-advisor
   → `.claude/state/metrics/gsc/history.csv`はローリング28日系列（列名`*_rolling28d`・機会発見用）。
     週次ゲートは`history-finalized7d.csv`と`LATEST.md`上段の確定7日KPIを使う
     （`.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md`）
-  → 未完了 SEO 施策: `.claude/todo/04_改善バックログ.md`（status != done の行）
+  → 未完了 SEO 施策: `.claude/todo/improvements.md`（status != done の行）
   → トレンド（改善中 / 悪化中 / 横ばい）を判定し計画に反映
 
 出力形式: 「直近のパフォーマンス概況」「成長/停滞の兆候」
@@ -109,19 +109,19 @@ primary_agent: strategy-advisor
 
 ```
 調査項目:
-- **今月の月次計画（重点テーマ）**: `.claude/todo/02_今月の重点.md` の frontmatter `focus_themes` と「構成タスク」を Read
+- **今月の月次計画（重点テーマ）**: `.claude/todo/monthly.md` の frontmatter `focus_themes` と「構成タスク」を Read
   ```bash
-  cat .claude/todo/02_今月の重点.md 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
+  cat .claude/todo/monthly.md 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
   ```
   → 今週の Must は**今月の重点テーマの構成タスクから優先的に選ぶ**。重点外のタスクを Must に入れる場合は理由を明記。月次計画が無い場合は `/monthly-plan` 実行を提案。
 - docs/02_実装計画/00_INDEX.md の現在地と、`.claude/todo/04`〜`06` の未完了タスク
-- 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ .claude/todo/05_機能バックログ.md の section ごとの `tier:` で優先度判定
+- 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ .claude/todo/backlog.md の tier 見出し (🔴🟡🟢🟣) で優先度判定
 
-- 改善バックログ pending 一覧（**真実源**: `.claude/todo/04_改善バックログ.md`）
+- 改善バックログ pending 一覧（**真実源**: `.claude/todo/improvements.md`）
   ```bash
   # Tier 1/2 の pending / in-progress を表示
   grep -E "^\| (AFF|INDEXING|SEO|BLOG|ADSENSE|GA4|PSI|CWV|P0|Q-|CTR|CONTENT|AICONTENT)" \
-    .claude/todo/04_改善バックログ.md
+    .claude/todo/improvements.md
   ```
   → Tier 1 は Must 優先、Tier 2 は Should 候補として計画に組み込む
   → due が今週以内のエントリを最優先
@@ -135,7 +135,7 @@ primary_agent: strategy-advisor
   ```
   → weekly-reviewで証拠確認・人間承認（`npm run search-growth:approve -- --candidate <ID>`で機械記録。
     週2件・全active WIP≤5をCLIが機械強制）された`status=approved`の候補だけを対象にする。
-    未承認候補を`.claude/todo/04_改善バックログ.md`へ自動追加しない。
+    未承認候補を`.claude/todo/improvements.md`へ自動追加しない。
   → 採用は最大1〜2件（technical/blockerとacquisition/contentを原則各1件）。全active施策のWIPは5以下。
   → CTR候補はpage×query・現行title/content・past effectを確認し、一括title書換えを計画しない。
   → 効果判定日は`npm run search-growth:measure -- --candidate <ID>`（14/28/56日）。
@@ -174,16 +174,16 @@ primary_agent: strategy-advisor
     仕組み: `.claude/skills/blog/plan-article-queue/SKILL.md`。
 
 - レビュー由来の未完了策
-  `.claude/todo/{04_改善バックログ,05_機能バックログ}.md` のIDを確認し、同じ原因の重複タスクを統合
+  `.claude/todo/{improvements,backlog}.md` のIDを確認し、同じ原因の重複タスクを統合
 
 - 前週のレビュー + 現在計画の残タスク自動抽出
-  cat .claude/todo/03_今週の計画.md 2>/dev/null
+  cat .claude/todo/weekly.md 2>/dev/null
   ls -t .claude/skills/management/weekly-review/reference/reviews/*.md 2>/dev/null | head -1
   → 上書き前の current-week と前週レビューを取得
   → 計画 vs 実績の差分と「来週への申し送り」を抽出
   → **前週計画の `- [ ] xxx` (未チェック) を抽出** し、Phase 3 の「前週からの持ち越し」セクションに自動転載:
     ```bash
-    grep -E "^- \[ \]" .claude/todo/03_今週の計画.md 2>/dev/null || true
+    grep -E "^- \[ \]" .claude/todo/weekly.md 2>/dev/null || true
     ```
   → 持ち越しが 3 件以上なら Phase 4 で「工数見積もりが楽観的すぎないか」を厳しく検証
 
@@ -263,7 +263,7 @@ Phase 3 の提案を以下の3つの視点で攻撃する:
    - 「自動化」「リファクタ」が手段の目的化になっていないか
 
 2. **「先週と同じ失敗を繰り返してないか？」**
-   - 上書き前の `.claude/todo/03_今週の計画.md` と前週レビューを照合
+   - 上書き前の `.claude/todo/weekly.md` と前週レビューを照合
    - 毎週 Must に入りながら未達のタスクは、分割するか優先度を上げる
    - 工数見積もりが楽観的でないか
 
@@ -275,7 +275,7 @@ Phase 3 の提案を以下の3つの視点で攻撃する:
 
 ### Phase 5: 出力
 
-Write tool で `.claude/todo/03_今週の計画.md` を上書きする。frontmatter を必ず含めること。
+Write tool で `.claude/todo/weekly.md` を上書きする。frontmatter を必ず含めること。
 
 ```yaml
 ---
@@ -311,8 +311,8 @@ tags: []
 <!-- skill referenceの前週レビュー「来週への申し送り」から引用 -->
 
 ## 今月の重点（月次計画より）
-<!-- `02_今月の重点.md` の focus_themes を参照。今週の Must はこの重点から優先選択する。 -->
-- **重点テーマ**: <テーマ1> / <テーマ2>（→ `02_今月の重点.md`）
+<!-- `monthly.md` の focus_themes を参照。今週の Must はこの重点から優先選択する。 -->
+- **重点テーマ**: <テーマ1> / <テーマ2>（→ `monthly.md`）
 - **今週この重点で進めること**: <構成タスクのうち今週分>
 
 ## 前週の振り返り (W-1)
@@ -345,8 +345,8 @@ tags: []
 
 ## 改善ログ pending (今週着手対象)
 
-<!-- .claude/todo/04_改善バックログ.md から今週着手する Tier 1/2 エントリを転載。
-     真実源は 04_改善バックログ.md、当週ビューは週次計画。 -->
+<!-- .claude/todo/improvements.md から今週着手する Tier 1/2 エントリを転載。
+     真実源は improvements.md、当週ビューは週次計画。 -->
 | Tier | Metric | ID | Status | Due | Owner |
 |---|---|---|---|---|---|
 | 1 | gsc | T0-DECAY-01 | in-progress | 2026-06-14 | claude |
@@ -389,7 +389,7 @@ tags: []
 
 ## 保存先
 
-- 本スキル出力: `.claude/todo/03_今週の計画.md`
+- 本スキル出力: `.claude/todo/weekly.md`
 - ペアの週次レビュー: `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`
 - Phase 4 では `.claude/todo/` のレビュー由来項目と対象SSOTのGit履歴を参照する
 
@@ -398,7 +398,7 @@ tags: []
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM・収益レーン・意思決定ゲート
 - `gh issue list --state open --label enhancement` — 未解決の機能改善 Issue（残存ラベル）
-- `.claude/todo/03_今週の計画.md` / `.claude/skills/management/weekly-review/reference/reviews/` — 現在計画と過去レビュー
+- `.claude/todo/weekly.md` / `.claude/skills/management/weekly-review/reference/reviews/` — 現在計画と過去レビュー
 - 投稿台帳 `.claude/state/sns/posts.json`（`sns-posts-store.cjs` 経由）+ `.claude/skills/analytics/sns-metrics-improvement/snapshots/` — SNS コンテンツ状況・メトリクス
 - `.claude/skills/management/critical-review/SKILL.md` — 批判的レビューの精神
 - `.claude/skills/blog/discover-trends/SKILL.md` — フルトレンドスキャン（Track E で不足時に提案、`--source all` で全 6 ソース統合）

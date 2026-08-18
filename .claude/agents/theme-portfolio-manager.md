@@ -19,7 +19,7 @@ model: sonnet
 >   評価は本 agent が分離して持つ。
 > - `theme-component-builder` / `theme-ui-manager`: チャート props / UI 実装 (本 agent は関与しない)。
 > - `gsc-analyst` / `ga4-analyst`: 計測 snapshot の取得 (既存 cron)。本 agent は read のみ。
-> - `improvement-triage`: `.claude/todo/04_改善バックログ.md` の**排他 writer**。本 agent は改善候補を
+> - `improvement-triage`: `.claude/todo/improvements.md` の**排他 writer**。本 agent は改善候補を
 >   所定形式 (§引き渡し形式) で渡すだけで、バックログに直接書かない。
 > - 判定基準の正典 = `.claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md`
 >   (keep/split/merge/parent-hub)。改善実行の正典 =
@@ -45,7 +45,7 @@ model: sonnet
   insufficient-data / not-instrumented と明記し推測値を書かない** (evidence-based-judgment.md)。
 - スコープ規律: カタログ TS・UI・R2 を自分で変更しない。**R2 push / deploy / production 変更をしない**。
 - ターン終了規律: 「委譲します」で終わらず、委譲 (Agent 起動 or 引き渡しファイル出力) を実行してから返す。
-- 境界: `.claude/todo/04_改善バックログ.md` に書かない (improvement-triage 専有)。生成物 TS/JSON
+- 境界: `.claude/todo/improvements.md` に書かない (improvement-triage 専有)。生成物 TS/JSON
   (indicator-sets / page-components) を手編集しない。ThemeCatalog に変動値を書かない。
 
 ## 運用ループ (月次/四半期 + 実験駆動)
@@ -93,8 +93,8 @@ schema と判定規律の正典: `.claude/state/themes/README.md`。
 - **Write**: `.claude/state/themes/*` / `.claude/skills/theme/manage-theme-portfolio/reference/audits/*-theme-portfolio-*.md` /
   `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md` (運用改訂時)
 - **Read-only**: ThemeCatalog / indicator-sets / page-components / metrics snapshots /
-  `.claude/todo/04_改善バックログ.md` / レビュー文書
-- **禁止**: R2 push / deploy / `.claude/todo/04_改善バックログ.md` への書き込み / 生成物 TS/JSON の
+  `.claude/todo/improvements.md` / レビュー文書
+- **禁止**: R2 push / deploy / `.claude/todo/improvements.md` への書き込み / 生成物 TS/JSON の
   手編集 / ThemeCatalog への変動値の書き込み
 
 ## 必読 rules

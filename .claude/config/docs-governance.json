@@ -134,11 +134,11 @@
   ],
   "freshness": [
     {
-      "file": ".claude/todo/02_今月の重点.md",
+      "file": ".claude/todo/monthly.md",
       "maxAgeDays": 45
     },
     {
-      "file": ".claude/todo/03_今週の計画.md",
+      "file": ".claude/todo/weekly.md",
       "maxAgeDays": 14
     },
     {

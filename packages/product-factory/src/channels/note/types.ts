@@ -2,7 +2,7 @@
  * note 商品展開ファクトリー — 型定義 (SSOT)
  *
  * 恒久仕様: .claude/rules/coconala-product-standards.md §9
- * 現在は旧174商品向けの legacy 実装。削除条件: .claude/todo/05_機能バックログ.md の
+ * 現在は旧174商品向けの legacy 実装。削除条件: .claude/todo/backlog.md の
  * COCONALA-PRODUCT-FACTORY-01 完了時に14パック由来の型へ置換する。
  *
  * 完全DBレス: mapping・article-plan・生成コードは git TS が SSOT。

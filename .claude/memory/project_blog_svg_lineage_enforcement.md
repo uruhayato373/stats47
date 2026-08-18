@@ -31,6 +31,6 @@ metadata:
 
 **アスペクト比統一 + 再発防止ゲート完成(2026-06-21)**: カタログ別 viewBox 幅が分裂(ranking 49%/scatter 46%等)していた。原因=旧SVGの非正規サイズ残存(svg-builder生成器は固定: bar columns960×404・scatter960×624・line680×420・tile600×700・findings960)。是正: `rerender-ranking-columns.mts`(99枚)・`rerender-scatter-canonical.mts`(8枚)が既存検証済みjsonから再描画(値不変)。**再発防止**: `svg-lint.mjs` に `lintSvgSize`+`classifyChartTypeFromName` 追加→`quality-gate.mjs`(pre-commit+publish-blog.yml=新規/校正両方)と`audit-chart-quality.mjs`に配線。全6カタログ blocker(SIZE_ENFORCED)。both全件S3で正規幅実証(ranking222/scatter33/line2)。標準§6・chart-author.md更新。**★R2反映はS3 API(diff-push-r2)が確実。push-r2-wrangler(wrangler put)は「Upload complete」表示でも永続化しないflaky挙動あり→必ずS3 GETで検証**(scatter統一時5/8が黙って未永続化、S3 PutObjectで確実反映)。
 
-副産物バグ: **marriages/divorces の SSOT値が誤り**(divorcesキーに婚姻率の値・marriagesキーは~0.5異常、cdCat01取違え疑い、live /ranking/ に誤データ)。証拠+検証cmd+再取込手順=`.claude/todo/06_指標バックログ.md §D`。
+副産物バグ: **marriages/divorces の SSOT値が誤り**(divorcesキーに婚姻率の値・marriagesキーは~0.5異常、cdCat01取違え疑い、live /ranking/ に誤データ)。証拠+検証cmd+再取込手順=`.claude/todo/backlog.md §D`。
 
-正典: `.claude/rules/blog-data-schema.md §1.5/1.6/1.7`。担当 = `chart-author` agent(データ系譜の整備・復元責務)。並行別件: 米/パン metric config(`rice-/bread-consumption-expenditure`、develop、次デプロイ後 data-refresh で取り込み→地図化、未取り込み指標は `.claude/todo/06_指標バックログ.md`)。
+正典: `.claude/rules/blog-data-schema.md §1.5/1.6/1.7`。担当 = `chart-author` agent(データ系譜の整備・復元責務)。並行別件: 米/パン metric config(`rice-/bread-consumption-expenditure`、develop、次デプロイ後 data-refresh で取り込み→地図化、未取り込み指標は `.claude/todo/backlog.md`)。

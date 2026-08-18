@@ -34,7 +34,7 @@
         "実装スキル: /discover-trends (launchd 07:23 既存) → /plan-blog-trends → /draft-from-trend → gh pr create",
         "下書き品質 < quality_score 70 は warning 表示のみ、close は人手 GATE 1",
         "ラベル `trend-auto` は事前 `gh label create trend-auto --color 00CED1 --description \"トレンド記事自動生成 PR\"` で作成済",
-        "関連 plan: .claude/todo/04_改善バックログ.md Phase 3",
+        "関連 plan: .claude/todo/improvements.md Phase 3",
         "停止するときは RemoteTrigger({action: 'update', trigger_id: 'trig_01RaPLqZrP4i7wAnCzQjifWJ', body: {enabled: false}})",
         "詳細確認: https://claude.ai/code/routines/trig_01RaPLqZrP4i7wAnCzQjifWJ"
       ]
@@ -56,7 +56,7 @@
         "実装: PSI Alert Issue 抽出 → suggest-cwv-candidates.mjs (--format json) → Edit ツール直編集 → gh pr create",
         "scope: LCP / dynamic import のみ (CLS/FCP は次フェーズ)",
         "ラベル `cwv-auto` は既存 (FFD700)",
-        "関連 plan: .claude/todo/04_改善バックログ.md Sprint 5",
+        "関連 plan: .claude/todo/improvements.md Sprint 5",
         "停止するときは RemoteTrigger({action: 'update', trigger_id: 'trig_01J26XQsDbdBM3ggTQ8gcBta', body: {enabled: false}})",
         "詳細確認: https://claude.ai/code/routines/trig_01J26XQsDbdBM3ggTQ8gcBta",
         "ローカル開発用に .claude/scripts/psi/generate-cwv-pr.mjs (ANTHROPIC_API_KEY 必要) は残存 — 通常使用は Routine 経由"

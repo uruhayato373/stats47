@@ -52,7 +52,7 @@ npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts [--apply]
 - stats47-note は e-Stat 17 カテゴリ + 行動者率クラスタ = 18 の `s47-*` マガジンに細分化済み
   (`s47-fiscal` / `s47-health` / `s47-sports-culture` …)。`assign-magazines-by-title.mjs --apply`
   で公開済み 159 件中 143 件を割当済み。残りは誤 vertical 16 件 (Claude Code/商品章の混入) +
-  未公開ドラフト。全体設計とフェーズは `.claude/todo/05_機能バックログ.md` `[NOTE-MAGAZINE-REORG-01]`。
+  未公開ドラフト。全体設計とフェーズは `.claude/todo/backlog.md` `[NOTE-MAGAZINE-REORG-01]`。
 
 ## 検証ルール (validate-note-catalog.ts)
 

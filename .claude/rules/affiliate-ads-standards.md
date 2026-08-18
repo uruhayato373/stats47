@@ -579,4 +579,4 @@ metric config (git TS SSOT) の title から機械導出する — 家計調査�
 - skill: `/register-affiliate-banner` / `/affiliate-improvement` / `/audit-affiliate-compliance` / `/manage-affiliate-experiment` / `/affiliate-operate` (§11)
 - 戦略: `docs/00_プロジェクト管理/02_収益化戦略.md` §3-6 / 実装規約: 本書 §0-6・§12
 - ASP継続運用の実装状況: `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` /
-  `.claude/todo/05_機能バックログ.md` の `ASP-CONTINUITY-01`
+  `.claude/todo/backlog.md` の `ASP-CONTINUITY-01`

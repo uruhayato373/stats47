@@ -234,5 +234,5 @@ npm run google-admin:audit-api
 - コード SSOT: `apps/web/src/lib/analytics/events.ts`
 - 実証判定: `.claude/rules/evidence-based-judgment.md`
 - ドメイン別: `.claude/rules/affiliate-ads-standards.md §6`（affiliate）/ `apps/web/src/features/ranking/components/FeaturedRankings/README.md`（home-featured）/ `.claude/rules/buzz-map-standards.md`（cta/buzz-map）
-- UI 施策の効果判定: `.claude/todo/05_機能バックログ.md` `[UI-CONSOLIDATION-RESIDUAL]`
+- UI 施策の効果判定: `.claude/todo/backlog.md` `[UI-CONSOLIDATION-RESIDUAL]`
 - agent: `.claude/agents/ga4-analyst.md`

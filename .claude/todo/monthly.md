@@ -87,8 +87,8 @@ viewability が -15pp 落ちている。つまり**露出を増やしても収�
 
 - **依存・ブロッカー**: Pro/Max 利用枠。日次ループが枠を食う量が未知のため、W32 の実測前に件数を追加で上げない。
 
-- **真実源リンク**: `05_機能バックログ.md#CONTENT-ROUTINE-LIVE-VERIFY-01` / `#AICONTENT-DBLESS-REBUILD` /
-  `04_改善バックログ.md`（`BLOG-SEO-PACE-01`）/ `.claude/state/metrics/claude-usage/`
+- **真実源リンク**: `backlog.md#CONTENT-ROUTINE-LIVE-VERIFY-01` / `#AICONTENT-DBLESS-REBUILD` /
+  `improvements.md`（`BLOG-SEO-PACE-01`）/ `.claude/state/metrics/claude-usage/`
 
 ### 重点2: 公開中の誤値・欠測を解消する
 
@@ -114,8 +114,8 @@ viewability が -15pp 落ちている。つまり**露出を増やしても収�
 
 - **依存・ブロッカー**: R2 write と本番反映はユーザー承認が要る。誤値の推測補正は禁止（計算補正だけで直さない）。
 
-- **真実源リンク**: `06_指標バックログ.md`（`IND-DATA-CORRUPTION-01`）/
-  `04_改善バックログ.md`（`DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01` / `R2-STORAGE-01`）
+- **真実源リンク**: `backlog.md`（`IND-DATA-CORRUPTION-01`）/
+  `improvements.md`（`DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01` / `R2-STORAGE-01`）
 
 ## 今月やらないこと（予算のため意図的に見送る）
 
@@ -164,8 +164,8 @@ viewability が -15pp 落ちている。つまり**露出を増やしても収�
 ## 関連ドキュメント
 
 - 収益化戦略: [../00_プロジェクト管理/02_収益化戦略.md](../00_プロジェクト管理/02_収益化戦略.md)
-- 今週: [03_今週の計画](03_今週の計画.md)
-- 改善: [04_改善バックログ](04_改善バックログ.md)
-- 機能: [05_機能バックログ](05_機能バックログ.md)
-- 指標: [06_指標バックログ](06_指標バックログ.md)
+- 今週: [週間計画](weekly.md)
+- 改善: [改善バックログ](improvements.md)
+- 機能: [バックログ](backlog.md)
+- 指標: [指標カード (バックログ内)](backlog.md)
 - 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/2026-W31.md`

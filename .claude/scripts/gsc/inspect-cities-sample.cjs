@@ -11,7 +11,7 @@
  *   集計サマリ (PASS/FAIL/coverageState 別)
  *
  * Phase 1 (cities-revival) の Indexed 率検証用。
- * .claude/todo/05_機能バックログ.md の CITY-PAGES-REVIVAL 成功条件に対応。
+ * .claude/todo/backlog.md の CITY-PAGES-REVIVAL 成功条件に対応。
  */
 
 "use strict";

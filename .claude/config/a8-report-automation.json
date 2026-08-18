@@ -10,7 +10,7 @@
     "mediaId": "a25050375786",
     "_accountNote": "doboku-note と同一口座（mediaId 不変）。2026-07-27 実機確認: A8 の管理画面に **サイト切替は存在しない**。メディアID=口座で、ヘッダーの「サイト名」は口座の代表サイトが常に表示されるだけ。したがって assert すべきは『正しい口座か』（mediaId）であり、対象サイトの分離はレポート単位で行う。",
     "_isolationNote": "レポートごとに siteScope が異なる（doboku-note 側 2026-07-27 実機確認・stats47 も同一口座のため同じ制約）:\n  site-rows    = サイト列があり targetSite の行だけ採れば **完全に分離できる**（/report/site のみ）。対象サイト実績の真実源。\n  account-wide = 口座横断でサイト分離不能（program/detail・period/*）。programIdMap の allowlist で対象サイト分を抽出し、site-rows と突合して混入を検算する（allowlist 合計が対象サイト行を超えたら混入の疑い）。\n代替案の検討結果（doboku-note 側で確認済み）: /report/program/detail は category フィルタのみでサイト列なし。/report/material の「素材ID」は 001/003/999 の3桁で a8mat の第4トークンとは別物のため素材による分離も不可。",
-    "_periodNote": "**期間は URL クエリでは制御できない**（start_date/end_date を付けても無視され既定期間が返る＝doboku-note 側 2026-07-27 実測）。画面のフォーム（input name=start / end・月レンジと日レンジの2組）を操作する必要がある。現状の取得は A8 の既定期間（年初〜当月の累計）。実際の期間は CSV のファイル名に入る（例 site_202601-202607_20260727105756.csv）ので manifest に記録する。月次分解は .claude/todo/05_機能バックログ.md 等の後続タスク。",
+    "_periodNote": "**期間は URL クエリでは制御できない**（start_date/end_date を付けても無視され既定期間が返る＝doboku-note 側 2026-07-27 実測）。画面のフォーム（input name=start / end・月レンジと日レンジの2組）を操作する必要がある。現状の取得は A8 の既定期間（年初〜当月の累計）。実際の期間は CSV のファイル名に入る（例 site_202601-202607_20260727105756.csv）ので manifest に記録する。月次分解は .claude/todo/backlog.md 等の後続タスク。",
     "reports": {
       "site-summary": {
         "label": "サイト別",

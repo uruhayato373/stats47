@@ -159,7 +159,7 @@
    effect/* を確定できない** (insufficient-data とする)。sessions・内部遷移が僅少の場合も同様。
 6. verdict 確定時は `observations` と `evidenceRefs` (実測 snapshot への参照) が必須。
 7. effect/* の**バックログ status への反映は improvement-triage に依頼する** (本 state は判定材料と
-   実験履歴の台帳であり、`.claude/todo/04_改善バックログ.md` へは書かない)。
+   実験履歴の台帳であり、`.claude/todo/improvements.md` へは書かない)。
 
 ## 禁止事項
 
@@ -170,6 +170,6 @@
 | 推測値・代替値を measured として保存 | 取れない値は insufficient-data / not-instrumented |
 | 根拠 (evidenceRefs/56日測定) なしの merge/retire | validator が error で弾く |
 | 期間重複 snapshot の合算・非開示 query の推測補完 | 非重複窓のみ合算・開示分のみ記録 |
-| `.claude/todo/04_改善バックログ.md` へ直接書く | improvement-triage へ引き渡す |
+| `.claude/todo/improvements.md` へ直接書く | improvement-triage へ引き渡す |
 | 紐付けの別ロジックで itemCount を数える | audit-survey-linkage の実測値を転記 |
 | 未公開 (inactive-only) を stale (r2-drift) と混同して sync/公開を要求 | active/total の区別で判定 (2026-07-14 教訓)。焼き込みの実測突合は `audit-survey-linkage.ts --compare-r2` |

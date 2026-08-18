@@ -56,7 +56,7 @@ const KNOWN_UNCOVERED = {
     "agent / CI 用スクリプト 41 ファイル。2026-08-13 に計測したところ、compiler option を " +
     "調整しても error 71 件 (TS7006 implicit any 39 / TS2339 21 ほか) 残る。lib/*.mjs の " +
     "素 JS core を import する設計なので型付けの方針決めから要る。backlog: " +
-    ".claude/todo/05_機能バックログ.md の SCRIPTS-TYPECHECK-01",
+    ".claude/todo/backlog.md の SCRIPTS-TYPECHECK-01",
 };
 
 /** include の glob がそのディレクトリを覆うか (使われている書式だけを解釈する) */

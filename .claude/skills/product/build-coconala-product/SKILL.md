@@ -68,4 +68,4 @@ npm run products:report --workspace=@stats47/product-factory   # .claude/state/p
 - モジュール: `packages/product-factory/README.md`
 - agent: `.claude/agents/coconala-product-manager.md`
 - note・KDP・Brain・ココナラ横断の商品ポートフォリオ、需要ゲート、共通content bundleを扱う場合:
-  `reference/multi-channel-content-product-factory.md`（進捗SSOTは`.claude/todo/05_機能バックログ.md`）
+  `reference/multi-channel-content-product-factory.md`（進捗SSOTは`.claude/todo/backlog.md`）
