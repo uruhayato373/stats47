@@ -15,7 +15,7 @@ const { verifyRemovals, verifyChangedPaths, diffEntryIds } = require('../verify-
 const { emptyLedger, normalizeLedger, recordAttempt } = require('../ledger-core.cjs');
 
 const AT = '2026-08-17T00:00:00.000Z';
-const FILE = 'docs/todo/05_機能バックログ.md';
+const FILE = '.claude/todo/05_機能バックログ.md';
 
 const doc = (ids) =>
   [
@@ -180,7 +180,7 @@ test('本文の書き換えだけなら削除とみなさない (書式変更を
 
 test('触ってよいパスだけを許す', () => {
   const ok = verifyChangedPaths([
-    'docs/todo/05_機能バックログ.md',
+    '.claude/todo/05_機能バックログ.md',
     '.claude/state/backlog-loop/ledger.json',
     '.claude/scripts/lib/check-foo.cjs',
     'packages/data-configs/src/foo.ts',
@@ -201,7 +201,7 @@ test('★backlog-loop 以外の state も許す (閉じた案件の成果物が�
 
 test('★排他 writer 契約のパスは弾く (04 / memory / learned)', () => {
   const r = verifyChangedPaths([
-    'docs/todo/04_改善バックログ.md',
+    '.claude/todo/04_改善バックログ.md',
     '.claude/memory/feedback_something.md',
     '.claude/skills/learned/pattern.md',
   ]);

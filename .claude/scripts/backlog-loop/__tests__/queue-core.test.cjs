@@ -25,7 +25,7 @@ const entry = (id, fields, extra = {}) => ({
   id,
   title: `${id} のタイトル`,
   section: 'P1 今月',
-  sourceFile: 'docs/todo/05_機能バックログ.md',
+  sourceFile: '.claude/todo/05_機能バックログ.md',
   startLine: 1,
   endLine: 5,
   fields,
@@ -161,7 +161,7 @@ test('policy の全 class が model/effort/maxAttempts/delegate/apply を持つ'
 
 test('実データでキューが組める (0 件なら配線が壊れている)', () => {
   const { parseHeadingEntries } = require('../parse-backlog-core.cjs');
-  const file = path.join(ROOT, 'docs/todo/05_機能バックログ.md');
+  const file = path.join(ROOT, '.claude/todo/05_機能バックログ.md');
   const { entries } = parseHeadingEntries(fs.readFileSync(file, 'utf8'), file);
   const { picked, needsOwner, skipped } = buildQueue({
     entries,

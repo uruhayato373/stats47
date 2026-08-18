@@ -10,7 +10,7 @@
  *
  * 入力:
  *   - .claude/state/metrics/{psi,gsc,ga4,adsense}/history.csv
- *   - docs/todo/04_改善バックログ.md の status: pending|in-progress を抽出（pending 施策一覧）
+ *   - .claude/todo/04_改善バックログ.md の status: pending|in-progress を抽出（pending 施策一覧）
  *   - gh issue list --label auto-generated (残存アラート Issue 集計)
  */
 

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * docs/todo のバックログを機械可読な JSON へ変換する純関数。
+ * .claude/todo のバックログを機械可読な JSON へ変換する純関数。
  *
  * ## なぜ新設するか
  *

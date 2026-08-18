@@ -105,7 +105,7 @@ switch (cmd) {
       writeJson(PATHS.candidates, { ...doc, candidates });
       console.log(`[approve] ✓ ${approved.id} (week=${approved.approvedWeek})`);
       console.log(`次: 実装 → 14/28/56 日で npm run search-growth:measure -- --candidate ${approved.id}`);
-      console.log("承認済み施策は docs/todo/04_改善バックログ.md へ手動で記録する (自動追加しない)");
+      console.log("承認済み施策は .claude/todo/04_改善バックログ.md へ手動で記録する (自動追加しない)");
     } catch (e) {
       console.error(`[approve] ✗ ${e.message}`);
       process.exit(1);

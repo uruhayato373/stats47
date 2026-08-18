@@ -45,15 +45,15 @@ function fixture(t) {
     requiredReferences: [],
     topLevel: {
       allowedFiles: ["docs/INDEX.md"],
-      allowedDirectories: ["docs/00", "docs/01", "docs/02", "docs/todo"],
+      allowedDirectories: ["docs/00", "docs/01", "docs/02", ".claude/todo"],
     },
     fixedDirectories: {
       "docs/00": ["01_project.md"],
       "docs/01": ["01_architecture.md"],
-      "docs/todo": ["04_improvements.md", "05_features.md", "06_indicators.md"],
+      ".claude/todo": ["04_improvements.md", "05_features.md", "06_indicators.md"],
     },
-    governedDirectories: ["docs/00", "docs/01", "docs/02", "docs/todo"],
-    flatDirectories: ["docs/00", "docs/01", "docs/02", "docs/todo"],
+    governedDirectories: ["docs/00", "docs/01", "docs/02", ".claude/todo"],
+    flatDirectories: ["docs/00", "docs/01", "docs/02", ".claude/todo"],
     frontmatter: {
       requiredFields: ["title", "type", "status", "updated"],
       allowedStatuses: ["active", "adopted", "draft", "in-progress"],
@@ -76,9 +76,9 @@ function fixture(t) {
     },
     todo: {
       files: [
-        "docs/todo/04_improvements.md",
-        "docs/todo/05_features.md",
-        "docs/todo/06_indicators.md",
+        ".claude/todo/04_improvements.md",
+        ".claude/todo/05_features.md",
+        ".claude/todo/06_indicators.md",
       ],
       idPattern: "^[A-Z0-9]+(?:-[A-Z0-9]+)+$",
       allowedImprovementStatuses: ["pending", "in-progress", "effect/pending"],
@@ -97,14 +97,14 @@ function fixture(t) {
     type: "technical-design",
     status: "adopted",
   }));
-  write(root, "docs/todo/04_improvements.md", markdown({
+  write(root, ".claude/todo/04_improvements.md", markdown({
     title: "Improvements",
     type: "improvement-backlog",
     body: `| ID | タイトル | Status | Due | Owner | Metric |
 |---|---|---|---|---|---|
 | DOCS-IMPROVE-01 | Improve docs | pending | 2026-08-30 | claude | docs |`,
   }));
-  write(root, "docs/todo/05_features.md", markdown({
+  write(root, ".claude/todo/05_features.md", markdown({
     title: "Features",
     type: "feature-backlog",
     body: `### [DOCS-FEATURE-01] Checker
@@ -114,7 +114,7 @@ function fixture(t) {
 - **次**: checkerを実装する。
 - **完了条件**: testが通る。`,
   }));
-  write(root, "docs/todo/06_indicators.md", markdown({
+  write(root, ".claude/todo/06_indicators.md", markdown({
     title: "Indicators",
     type: "indicator-backlog",
     body: `### [DOCS-INDICATOR-01] Indicator
@@ -170,7 +170,7 @@ test("fixed directory growth, missing frontmatter and inactive docs fail", (t) =
 
 test("duplicate TODO ids and missing action are rejected", (t) => {
   const { root, config } = fixture(t);
-  write(root, "docs/todo/06_indicators.md", markdown({
+  write(root, ".claude/todo/06_indicators.md", markdown({
     title: "Indicators",
     type: "indicator-backlog",
     body: `### [DOCS-FEATURE-01] Duplicate
@@ -211,7 +211,7 @@ test("missing fixed directory, forbidden nested archive and malformed improvemen
   config.topLevel.allowedDirectories.push("docs/content");
   config.contentRootsExcludedFromGovernedNaming.push("docs/content");
   write(root, "docs/content/archive/result.json", "{}\n");
-  write(root, "docs/todo/04_improvements.md", markdown({
+  write(root, ".claude/todo/04_improvements.md", markdown({
     title: "Improvements",
     type: "improvement-backlog",
     body: `| ID | タイトル | Status | Due | Owner | Metric |

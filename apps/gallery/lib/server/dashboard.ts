@@ -280,10 +280,10 @@ export function readGscCoverage(root: string) {
   });
 }
 
-// ─── TODO 表 (docs/todo/04_改善バックログ.md — 6 列 pipe テーブル) ──
+// ─── TODO 表 (.claude/todo/04_改善バックログ.md — 6 列 pipe テーブル) ──
 export function parseBacklogMd(root: string) {
   return wrap(() => {
-    const md = fs.readFileSync(path.join(root, "docs/todo/04_改善バックログ.md"), "utf8");
+    const md = fs.readFileSync(path.join(root, ".claude/todo/04_改善バックログ.md"), "utf8");
     const lines = md.split(/\r?\n/);
     let tier: string | null = null;
     const rows: Array<{
@@ -324,7 +324,7 @@ export function parseBacklogMd(root: string) {
   });
 }
 
-// ─── TODO 表 (docs/todo/05_機能バックログ.md) ──
+// ─── TODO 表 (.claude/todo/05_機能バックログ.md) ──
 interface FeatureBacklogRow {
   section: string;
   id: string;
@@ -336,7 +336,7 @@ interface FeatureBacklogRow {
 
 export function parseFeatureBacklogMd(root: string) {
   return wrap(() => {
-    const md = fs.readFileSync(path.join(root, "docs/todo/05_機能バックログ.md"), "utf8");
+    const md = fs.readFileSync(path.join(root, ".claude/todo/05_機能バックログ.md"), "utf8");
     const lines = md.split(/\r?\n/);
     let section: string | null = null;
     let cur: FeatureBacklogRow | null = null;
@@ -414,7 +414,7 @@ export function parseStrategyDocs(root: string) {
       sources: [
         mkPath,
         "docs/00_プロジェクト管理/04_ターゲットペルソナ.md",
-        "docs/todo/04_改善バックログ.md",
+        ".claude/todo/04_改善バックログ.md",
       ],
     };
   });

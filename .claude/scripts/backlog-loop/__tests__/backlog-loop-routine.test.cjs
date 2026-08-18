@@ -186,7 +186,7 @@ test('★request は結果によらず消費する (再 push が発火しなく�
 test('★prompt が排他 writer と自己昇格の境界を明示している', () => {
   const prompt = read('.claude/prompts/ci/backlog-loop-routine.md');
   for (const forbidden of [
-    'docs/todo/04_改善バックログ.md',
+    '.claude/todo/04_改善バックログ.md',
     '.claude/memory/',
     '.claude/skills/learned/',
     '.github/',

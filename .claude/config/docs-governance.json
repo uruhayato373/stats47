@@ -45,8 +45,7 @@
       "docs/30_note記事企画",
       "docs/31_note記事原稿",
       "docs/assets",
-      "docs/books",
-      "docs/todo"
+      "docs/books"
     ]
   },
   "fixedDirectories": {
@@ -65,7 +64,7 @@
       "06_自動化インベントリ.md",
       "07_Playwright認証プロファイル.md"
     ],
-    "docs/todo": [
+    ".claude/todo": [
       "00_運用ガイド.md",
       "01_未整理タスク.md",
       "02_今月の重点.md",
@@ -79,13 +78,13 @@
     "docs/00_プロジェクト管理",
     "docs/01_技術設計",
     "docs/02_実装計画",
-    "docs/todo"
+    ".claude/todo"
   ],
   "flatDirectories": [
     "docs/00_プロジェクト管理",
     "docs/01_技術設計",
     "docs/02_実装計画",
-    "docs/todo"
+    ".claude/todo"
   ],
   "frontmatter": {
     "requiredFields": [
@@ -138,15 +137,15 @@
   ],
   "freshness": [
     {
-      "file": "docs/todo/02_今月の重点.md",
+      "file": ".claude/todo/02_今月の重点.md",
       "maxAgeDays": 45
     },
     {
-      "file": "docs/todo/03_今週の計画.md",
+      "file": ".claude/todo/03_今週の計画.md",
       "maxAgeDays": 14
     },
     {
-      "pathPrefix": "docs/todo/",
+      "pathPrefix": ".claude/todo/",
       "maxAgeDays": 90
     },
     {
@@ -170,10 +169,12 @@
     "requiredRelatedBacklog": true
   },
   "todo": {
+    "monthFile": ".claude/todo/02_今月の重点.md",
+    "weekFile": ".claude/todo/03_今週の計画.md",
     "files": [
-      "docs/todo/04_改善バックログ.md",
-      "docs/todo/05_機能バックログ.md",
-      "docs/todo/06_指標バックログ.md"
+      ".claude/todo/04_改善バックログ.md",
+      ".claude/todo/05_機能バックログ.md",
+      ".claude/todo/06_指標バックログ.md"
     ],
     "idPattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)+$",
     "allowedImprovementStatuses": [

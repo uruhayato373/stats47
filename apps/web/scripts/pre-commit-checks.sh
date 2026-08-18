@@ -90,7 +90,7 @@ fi
 # 文書の固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOT、
 # 削除・移動後の参照悪化を、文書関連差分があるcommitだけ検査する。
 STAGED_DOCS=$(git diff --cached --name-only --diff-filter=ACMRD | grep -E \
-  '^(docs/|CLAUDE\.md$|AGENTS\.md$|\.claude/(config/docs-governance\.json|rules/docs-vs-issues\.md|skills/management/maintain-docs/|scripts/lib/check-docs-(governance|links)\.cjs|scripts/lib/__tests__/check-docs-(governance|links)\.test\.cjs)|package\.json$)' || true)
+  '^(docs/|\.claude/todo/|CLAUDE\.md$|AGENTS\.md$|\.claude/(config/docs-governance\.json|rules/docs-vs-issues\.md|skills/management/maintain-docs/|scripts/lib/check-docs-(governance|links)\.cjs|scripts/lib/__tests__/check-docs-(governance|links)\.test\.cjs)|package\.json$)' || true)
 if [ -n "$STAGED_DOCS" ]; then
   echo -e "${GREEN}📚 ドキュメントガバナンスチェック...${NC}"
   if ! (cd "$GUARD_ROOT" && npm run docs:check); then
@@ -541,7 +541,7 @@ if [ -n "$STAGED_METRICS" ]; then
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
 
-  # SEO 文字列の事実照合 (docs/todo/05_機能バックログ.md SEO-META-FACTUAL-GATE-01)
+  # SEO 文字列の事実照合 (.claude/todo/05_機能バックログ.md SEO-META-FACTUAL-GATE-01)
   #
   # seoTitle / seoDescription は <title> と <meta name="description"> としてそのまま
   # 配信される。実データと突合していなかったため 5.2% が 1 位県・値・倍率・年を
