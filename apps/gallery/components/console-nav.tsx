@@ -20,7 +20,10 @@ const NAV_GROUPS: readonly NavGroup[] = [
   },
   {
     title: "運用",
-    items: [{ href: "/dashboard", label: "プロジェクト現況" }],
+    items: [
+      { href: "/dashboard", label: "プロジェクト現況" },
+      { href: "/todo", label: "TODO" },
+    ],
   },
 ];
 

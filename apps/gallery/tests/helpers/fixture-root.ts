@@ -25,6 +25,10 @@ const REAL_STORE = path.resolve(
   __dirname,
   "../../../../.claude/scripts/lib/sns-posts-store.cjs",
 );
+const REAL_PARSE_CORE = path.resolve(
+  __dirname,
+  "../../../../.claude/scripts/backlog-loop/parse-backlog-core.cjs",
+);
 
 export interface SeedPost {
   id: number;
@@ -52,6 +56,8 @@ export interface FixtureOptions {
   galleryState?: Record<string, unknown>;
   /** .local/r2/sns 配下に作る相対パス (ダミーファイルを touch) */
   localSnsFiles?: string[];
+  /** .claude/todo 配下に作る { ファイル名: 内容 }。指定時は parse-backlog-core.cjs も実物をコピーする */
+  todoFiles?: Record<string, string>;
 }
 
 /** os.tmpdir() 配下に隔離 root を作り、必要なファイルを配置して絶対パスを返す。 */
@@ -103,6 +109,19 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
     const abs = path.join(root, ".local/r2/sns", rel);
     fs.mkdirSync(path.dirname(abs), { recursive: true });
     fs.writeFileSync(abs, "dummy");
+  }
+
+  // 7) TODO 台帳 (.claude/todo) と実物パーサ
+  if (opts.todoFiles) {
+    const todoDir = path.join(root, ".claude/todo");
+    fs.mkdirSync(todoDir, { recursive: true });
+    for (const [name, body] of Object.entries(opts.todoFiles)) {
+      fs.writeFileSync(path.join(todoDir, name), body);
+    }
+    // ★パーサは実物をコピーする。テスト用に別実装を置くと「テストは通るが本番は違う解釈」になる
+    const coreDir = path.join(root, ".claude/scripts/backlog-loop");
+    fs.mkdirSync(coreDir, { recursive: true });
+    fs.copyFileSync(REAL_PARSE_CORE, path.join(coreDir, "parse-backlog-core.cjs"));
   }
 
   return root;
