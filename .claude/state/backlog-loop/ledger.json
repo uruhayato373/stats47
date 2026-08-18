@@ -347,7 +347,7 @@
     "ASP-CONTINUITY-01": {
       "class": "impl-large",
       "status": "open",
-      "sourceFile": "docs/todo/05_機能バックログ.md",
+      "sourceFile": ".claude/todo/05_機能バックログ.md",
       "title": "もしも・afbの承認追跡と広告コード取得",
       "attempts": [
         {
@@ -375,7 +375,7 @@
     "DATA-REFRESH-ZEROGATE-ALLORNOTHING-01": {
       "class": "impl-large",
       "status": "open",
-      "sourceFile": "docs/todo/05_機能バックログ.md",
+      "sourceFile": ".claude/todo/05_機能バックログ.md",
       "title": "ゼロ件ゲートが成功2,148件のR2 pushを巻き添えにする",
       "attempts": [
         {

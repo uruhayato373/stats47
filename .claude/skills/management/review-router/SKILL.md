@@ -73,9 +73,9 @@ primary_agent: strategy-advisor
 | スキル | 対象 | 周期 | 出力先 |
 |---|---|---|---|
 | `/weekly-review` | プロジェクト進捗 | 毎週 | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` |
-| `/weekly-plan` | 来週の計画 | 毎週 | `docs/todo/03_今週の計画.md` |
-| `/pre-mortem` | プロジェクトリスク + 対策 | 四半期 | 未完了策を `docs/todo/` |
-| `/seo-audit` | SEO 総合監査 | 月次 | 未完了策を `docs/todo/04_改善バックログ.md` |
+| `/weekly-plan` | 来週の計画 | 毎週 | `.claude/todo/03_今週の計画.md` |
+| `/pre-mortem` | プロジェクトリスク + 対策 | 四半期 | 未完了策を `.claude/todo/` |
+| `/seo-audit` | SEO 総合監査 | 月次 | 未完了策を `.claude/todo/04_改善バックログ.md` |
 
 ### 随時レビュー
 
@@ -97,5 +97,5 @@ primary_agent: strategy-advisor
 
 ### 過去分の参照
 
-戦略の変遷はGit、定期レポートは各skill reference、未完了策は `docs/todo/` を参照する。
+戦略の変遷はGit、定期レポートは各skill reference、未完了策は `.claude/todo/` を参照する。
 詳細は [`../../rules/docs-vs-issues.md`](../../rules/docs-vs-issues.md)。

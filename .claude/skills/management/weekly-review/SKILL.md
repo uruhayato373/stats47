@@ -32,7 +32,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 | 性能・流入 | GSC / GA4の確定7日summary、AdSense / SNSの最新snapshot |
 | 検索成長 | `npm run search-growth:status`、`npm run search-growth:next -- --limit 10` |
 | NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |
-| 計画差分 | `docs/todo/03_今週の計画.md` |
+| 計画差分 | `.claude/todo/03_今週の計画.md` |
 
 各snapshotの期間、取得日、freshnessを保持する。行が無い場合を推測の0へ変換せず、
 `not-measured` / `not-instrumented` / `insufficient-data`を区別する。
@@ -70,7 +70,7 @@ GSC/GA4は次の用途を混在させない。
 - 参照したsnapshot / backlog ID / file
 
 恒久的な失敗知見だけを`/knowledge`へ渡す。改善施策statusの更新は`improvement-triage`へ渡す。
-`docs/todo/03_今週の計画.md`はレビュー中に書き換えない。
+`.claude/todo/03_今週の計画.md`はレビュー中に書き換えない。
 
 ## Phase 4: 次週計画
 
@@ -82,7 +82,7 @@ GSC/GA4は次の用途を混在させない。
 - review fileのweek、snapshot期間、参照pathが一致する。
 - KPIはfinalized7d、候補はrolling28dという用途が明記されている。
 - 実測の無い数値・効果・完了を記録していない。
-- search-growth候補は最大3件で、未承認候補を`docs/todo/04_改善バックログ.md`へ自動追加していない。
+- search-growth候補は最大3件で、未承認候補を`.claude/todo/04_改善バックログ.md`へ自動追加していない。
 - current-weekの未完了項目を申し送りへ反映している。
 - 保存先が`reference/reviews/YYYY-Www.md`である。
 

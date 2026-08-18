@@ -1,5 +1,5 @@
 {
-  "note": "candidate の confidence を抑制する過去施策の effect/none・effect/adverse 台帳。improvement-triage が docs/todo/04_改善バックログ.md の effect/none|adverse エントリから維持する。key は URL の pathKey (例 /blog/<slug>) または `<type>::<pathKey>`。value は \"none\" | \"adverse\"。",
-  "source": "docs/todo/04_改善バックログ.md / gsc-improvement/reference/improvement-log.md の effect ラベル",
+  "note": "candidate の confidence を抑制する過去施策の effect/none・effect/adverse 台帳。improvement-triage が .claude/todo/04_改善バックログ.md の effect/none|adverse エントリから維持する。key は URL の pathKey (例 /blog/<slug>) または `<type>::<pathKey>`。value は \"none\" | \"adverse\"。",
+  "source": ".claude/todo/04_改善バックログ.md / gsc-improvement/reference/improvement-log.md の effect ラベル",
   "urls": {}
 }

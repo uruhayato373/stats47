@@ -9,7 +9,7 @@ tags: [回遊, 内部リンク, recommendation, blog, ranking, theme, area, GA4]
 # サイト回遊グラフ・レコメンド基盤仕様
 
 > 進捗・優先順位のSSOTは
-> `docs/todo/05_機能バックログ.md#KAIYU-HUB-01`。
+> `.claude/todo/05_機能バックログ.md#KAIYU-HUB-01`。
 > 本文書は`seo-audit --focus content`と実装担当が読む詳細参照であり、進捗状態を重複管理しない。
 
 ## 0. 決定

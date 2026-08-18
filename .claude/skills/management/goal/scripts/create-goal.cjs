@@ -15,7 +15,7 @@
  *     --baseline-value "Mobile LCP 平均 10,500ms / Performance 平均 49" \
  *     --baseline-date "2026-05-09" \
  *     --hypothesis-pool "A1: Cookie banner SSR 化,B1: AdSense chunk 分離,B5: 広告密度削減" \
- *     --related-docs "改善バックログ: docs/todo/04_改善バックログ.md"
+ *     --related-docs "改善バックログ: .claude/todo/04_改善バックログ.md"
  */
 
 "use strict";

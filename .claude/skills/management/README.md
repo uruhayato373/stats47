@@ -78,7 +78,7 @@
 - メトリクスツリー
 - 計測方法と `/weekly-plan` への統合提案
 
-**保存先**: 定義は `docs/00_プロジェクト管理/02_収益化戦略.md`、未完了策は `docs/todo/04_改善バックログ.md`
+**保存先**: 定義は `docs/00_プロジェクト管理/02_収益化戦略.md`、未完了策は `.claude/todo/04_改善バックログ.md`
 
 ### `/growth-loops`
 
@@ -105,7 +105,7 @@
 - 30-60-90日ロードマップ
 - 計測指標
 
-**保存先**: 採択内容は既存戦略、未完了実験は `docs/todo/04_改善バックログ.md`
+**保存先**: 採択内容は既存戦略、未完了実験は `.claude/todo/04_改善バックログ.md`
 
 ### `/monetization-strategy`
 
@@ -128,7 +128,7 @@
 - 低コスト検証実験の設計
 - 実装ロードマップ
 
-**保存先**: 決定事項は `docs/00_プロジェクト管理/02_収益化戦略.md`、未完了策は `docs/todo/`
+**保存先**: 決定事項は `docs/00_プロジェクト管理/02_収益化戦略.md`、未完了策は `.claude/todo/`
 
 ### `/weekly-plan`, `/weekly-review`
 
@@ -137,7 +137,7 @@
 - `/weekly-review`: 5観点のsnapshot / scriptを同一セッションで並列収集し、計画との差分を分析
 - `/weekly-plan`: 5観点の決定的データ収集 → 戦略分析 → 批判的レビュー → 計画出力
 
-**保存先**: 計画は `docs/todo/03_今週の計画.md`（毎週上書き）、レビューは `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`（agent用履歴）
+**保存先**: 計画は `.claude/todo/03_今週の計画.md`（毎週上書き）、レビューは `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`（agent用履歴）
 
 ### `/critical-review`
 
@@ -147,7 +147,7 @@
 /critical-review <対象>  # ファイルパス / スキル名 / PR 番号 等
 ```
 
-**保存先**: 恒久判断は対象SSOT、未完了策は `docs/todo/`
+**保存先**: 恒久判断は対象SSOT、未完了策は `.claude/todo/`
 
 ### `/knowledge`
 
@@ -176,16 +176,16 @@ npm run docs:check
 
 ## 出力先早見表
 
-現在計画は `docs/todo/`、戦略判断は既存SSOT、agent用履歴はskill referenceへ分離する。
+現在計画は `.claude/todo/`、戦略判断は既存SSOT、agent用履歴はskill referenceへ分離する。
 
 | スキル | 出力先 | frontmatter type |
 |---|---|---|
-| `/monthly-plan` | `docs/todo/02_今月の重点.md` | `monthly-plan` |
-| `/weekly-plan` | `docs/todo/03_今週の計画.md` | `weekly-plan` |
+| `/monthly-plan` | `.claude/todo/02_今月の重点.md` | `monthly-plan` |
+| `/weekly-plan` | `.claude/todo/03_今週の計画.md` | `weekly-plan` |
 | `/weekly-review` | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | `weekly-review` |
-| `/critical-review` | 対象SSOT + `docs/todo/` | 全文はセッション出力 |
+| `/critical-review` | 対象SSOT + `.claude/todo/` | 全文はセッション出力 |
 | `/north-star-metric` | `02_収益化戦略.md` + 改善バックログ | 週次値はsnapshot |
 | `/growth-loops` | 戦略SSOT + 改善バックログ | 全文はセッション出力 |
-| `/monetization-strategy` | `02_収益化戦略.md` + `docs/todo/` | 全文はセッション出力 |
-| `/pre-mortem` | `docs/todo/` | 採択した未完了策のみ |
+| `/monetization-strategy` | `02_収益化戦略.md` + `.claude/todo/` | 全文はセッション出力 |
+| `/pre-mortem` | `.claude/todo/` | 採択した未完了策のみ |
 | `/performance-report` | PSI state + improvement log + 改善バックログ | 定期値とTODOを分離 |

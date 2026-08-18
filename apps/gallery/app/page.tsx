@@ -19,7 +19,7 @@ const SECTIONS = [
   {
     href: "/dashboard",
     title: "プロジェクト現況",
-    desc: "メトリクス・進捗キュー・改善バックログ TODO・STP 戦略 (読み取り専用)", // docs/todo/ ミラー
+    desc: "メトリクス・進捗キュー・改善バックログ TODO・STP 戦略 (読み取り専用)", // .claude/todo/ ミラー
   },
 ] as const;
 

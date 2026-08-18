@@ -23,9 +23,9 @@ const { hasPassingGate, declaredFollowUps } = require('./ledger-core.cjs');
 
 /** ループが触ってよいパス。ここに無いものを触ったら commit させない */
 const ALLOWED_PATH_PATTERNS = [
-  /^docs\/todo\/05_/,
-  /^docs\/todo\/06_/,
-  /^docs\/todo\/01_/,
+  /^\.claude\/todo\/05_/,
+  /^\.claude\/todo\/06_/,
+  /^\.claude\/todo\/01_/,
   // state 全体を許す。バックログを 1 件閉じると、その領域の state (SEO baseline・
   // 整合性 audit・是正キュー等) が同じ作業の成果物として動くため。危険なものは
   // FORBIDDEN 側 (memory / learned / routing policy) が個別に弾く — `.claude/config/` を
@@ -51,7 +51,7 @@ const ALLOWED_PATH_PATTERNS = [
  * それが正しい — 配信経路の workflow を無人で書き換えない。
  */
 const FORBIDDEN_PATH_PATTERNS = [
-  /^docs\/todo\/04_/, // improvement-triage の排他 write
+  /^\.claude\/todo\/04_/, // improvement-triage の排他 write
   /^\.claude\/memory\//, // knowledge-curator の排他 write
   /^\.claude\/skills\/learned\//, // 同上
   /^\.github\//, // ループが自分の権限を広げられないようにする

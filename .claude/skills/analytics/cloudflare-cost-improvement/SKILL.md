@@ -1,10 +1,10 @@
 ---
 name: cloudflare-cost-improvement
-description: Cloudflare Workers / D1 / R2 の月次コストと主要メトリクス（D1 rows read、Workers CPU ms、storage、月額課金）を docs/todo/04_改善バックログ.md で追跡し、budget 超過検知・施策と効果を記録する。Use when user says "Cloudflare コスト確認", "D1 使用量", "Workers CPU 使用量", "請求書チェック", or when analyzing Cloudflare invoices / cost anomalies.
+description: Cloudflare Workers / D1 / R2 の月次コストと主要メトリクス（D1 rows read、Workers CPU ms、storage、月額課金）を .claude/todo/04_改善バックログ.md で追跡し、budget 超過検知・施策と効果を記録する。Use when user says "Cloudflare コスト確認", "D1 使用量", "Workers CPU 使用量", "請求書チェック", or when analyzing Cloudflare invoices / cost anomalies.
 primary_agent: performance-auditor
 ---
 
-Cloudflare の月次コスト・リソース使用量を snapshot と詳細ログで時系列追跡し、active 施策だけを `docs/todo/04_改善バックログ.md` で管理するスキル。
+Cloudflare の月次コスト・リソース使用量を snapshot と詳細ログで時系列追跡し、active 施策だけを `.claude/todo/04_改善バックログ.md` で管理するスキル。
 
 Cloudflare の請求は月次（前月 15 日〜当月 14 日集計、翌 15 日請求）。施策効果の測定は「デプロイから 14 日以上経過した観測値」で判定する。
 
@@ -16,16 +16,16 @@ Cloudflare の請求は月次（前月 15 日〜当月 14 日集計、翌 15 日
 | 日次 usage snapshot（自動） | git: `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}` | `.github/workflows/cloudflare-usage-daily.yml` が日次 02:30 JST 自動更新 |
 | budget しきい値（月次） | git: `reference/budgets.json` | 月次レビュー用 |
 | budget しきい値（日次） | git: `reference/budgets-daily.json` | 日次自動アラート用、cloudflare-usage-daily.yml が参照 |
-| 施策（1施策1行、人間向け要約） | `docs/todo/04_改善バックログ.md` | active 施策を優先度・期日で絞り込み可能 |
+| 施策（1施策1行、人間向け要約） | `.claude/todo/04_改善バックログ.md` | active 施策を優先度・期日で絞り込み可能 |
 | 詳細ログ（agent 用、検証コマンド・仮説） | `reference/improvement-log.md` | append-only、agent が深掘り参照 |
 | 月次スナップショット（要約） | `reference/monthly-snapshots/YYYY-MM.md` | `.claude/scripts/cloudflare/monthly-snapshot.mjs` が自動書き出し |
 | 日次アラート（自動起票） | GitHub Issues ラベル `cloudflare-alert,auto-generated` タイトル `[Cloudflare Alert] ...` | 閾値違反時のみ起票・解決後 close で運用 |
 
-→ **責務分離**: `docs/todo/04_改善バックログ.md` はactive一覧、agent 用詳細は `.claude/skills/analytics/cloudflare-cost-improvement/reference/improvement-log.md`。日次アラートのみ Issues に残す（PSI/Cloudflare daily アラート方針）。
+→ **責務分離**: `.claude/todo/04_改善バックログ.md` はactive一覧、agent 用詳細は `.claude/skills/analytics/cloudflare-cost-improvement/reference/improvement-log.md`。日次アラートのみ Issues に残す（PSI/Cloudflare daily アラート方針）。
 
 ## TODO行の契約
 
-`docs/todo/04_改善バックログ.md` の6列
+`.claude/todo/04_改善バックログ.md` の6列
 `ID | タイトル | Status | Due | Owner | Metric` を使う。baseline、deployed_at、
 検証コマンド、判定根拠は `reference/improvement-log.md` に置き、TODOへ複製しない。
 
@@ -59,7 +59,7 @@ Cloudflare メトリクス取得の優先順:
 ```
 以下を並列に実行して要約:
 1. reference/weekly-snapshots/ 配下の最新 YYYY-Www.json を Read
-2. docs/todo/04_改善バックログ.md の6列表から active 行を抽出
+2. .claude/todo/04_改善バックログ.md の6列表から active 行を抽出
 3. reference/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
 4. .claude/state/metrics/cloudflare/LATEST.md を Read し日次推移を取得
 
@@ -92,7 +92,7 @@ Cloudflare メトリクス取得の優先順:
    - .claude/state/metrics/cloudflare/history.csv から取得しても可
 
 5. 進行中施策の効果判定（最重要）:
-   docs/todo/04_改善バックログ.md のCloudflare対象行を抽出。
+   .claude/todo/04_改善バックログ.md のCloudflare対象行を抽出。
    各施策に対して:
    - 経過日数 = observe 実行日 - deployed_at
    - 実測 delta = 最新値 - デプロイ時点の値（前月 snapshot から読む）
@@ -119,7 +119,7 @@ Cloudflare メトリクス取得の優先順:
    - 変更内容サマリ / 変更ファイル
    - verification_command（copy-pasteable な GraphQL query / curl）
 
-2. docs/todo/04_改善バックログ.md の該当Tierの表に1行だけ追加:
+2. .claude/todo/04_改善バックログ.md の該当Tierの表に1行だけ追加:
 
    ```markdown
    | CF-NN | <次アクションを含む短い要約> | pending | YYYY-MM-DD | <owner> | cloudflare-cost |
@@ -134,7 +134,7 @@ Cloudflare メトリクス取得の優先順:
 #### mode = next
 
 ```
-1. docs/todo/04_改善バックログ.md のactive行と、reference/improvement-log.md の過去判定から派生候補を抽出
+1. .claude/todo/04_改善バックログ.md のactive行と、reference/improvement-log.md の過去判定から派生候補を抽出
 2. reference/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
 3. 最新 snapshot の「次のアクション」候補も合わせる
 
@@ -157,21 +157,21 @@ Cloudflare メトリクス取得の優先順:
    - metrics 表
    - budget 判定
    - 前月比（前月の `reference/monthly-snapshots/YYYY-MM.md` を Read して比較）
-   - 進行中施策の status 一覧（docs/todo/04_改善バックログ.md から抽出）
+   - 進行中施策の status 一覧（.claude/todo/04_改善バックログ.md から抽出）
 6. Step 2-observe-5 と同じ施策効果判定を実行
 7. 合計額・超過指標をユーザーに報告
 ```
 
 ### Step 3: 共通ルール
 
-- **docs/todo/04_改善バックログ.md は active-only** — 未完了施策の追加・status 更新に限定する。effect 確定後は詳細を improvement-log に残し、行を削除する
+- **.claude/todo/04_改善バックログ.md は active-only** — 未完了施策の追加・status 更新に限定する。effect 確定後は詳細を improvement-log に残し、行を削除する
 - **weekly-snapshots/*.json も append-only** — 過去の JSON は改変しない
 - **日付は絶対日付** — 「今月」「先月」は使わない
 - **数値はソース明示** — "invoice IN-62466340" or "GraphQL API at 2026-04-21 JST"
 - **施策は 1 PR 1 ID** — 複数目的の PR は分割
 - **想定効果値はデプロイ前に書く** — 後付けバイアス防止
 - **月次請求到着時は必ず invoice モード実行** — この記録を起点に効果判定
-- **責務を分離する** — `docs/todo/04_改善バックログ.md` はactive一覧、reference/improvement-log.md は判定履歴
+- **責務を分離する** — `.claude/todo/04_改善バックログ.md` はactive一覧、reference/improvement-log.md は判定履歴
 
 ## 参照パターン
 
@@ -232,5 +232,5 @@ gh issue list --label cloudflare-alert --state open
 
 - `.mcp.json` に `cloudflare-observability` と `cloudflare-graphql` 登録済
 - Cloudflare アカウントへのブラウザログイン済（OAuth 認可用）
-- `docs/todo/04_改善バックログ.md` が存在すること（施策 ID は `CF-*` 等）
+- `.claude/todo/04_改善バックログ.md` が存在すること（施策 ID は `CF-*` 等）
 - `reference/budgets.json` / `reference/weekly-snapshots/` 初期化済

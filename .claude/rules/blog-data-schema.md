@@ -318,7 +318,7 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | 場所                                                | 内容                                                                  |
 | --------------------------------------------------- | --------------------------------------------------------------------- |
-| `docs/todo/04_改善バックログ.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (旧ID: <BLOG-CTR-*>)`               |
+| `.claude/todo/04_改善バックログ.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (旧ID: <BLOG-CTR-*>)`               |
 | section frontmatter                                 | `wave_id`, `legacy_section_ids`, `predecessor_wave`, `successor_wave` |
 | `.claude/state/blog/auto-brushup-history.json`      | 各 entry に `wave_id` フィールド (2026-05-27 migration 済)            |
 | commit message                                      | 必須ではない (過去 commit の履歴改変を避けるため)                     |
@@ -351,10 +351,10 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | Docs                                                                    | 内容                                               | 更新トリガ                     |
 | ----------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------ |
-| `docs/todo/04_改善バックログ.md`                                        | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
-| `docs/todo/03_今週の計画.md`                                            | 現在の週次 TODO                                    | 週次 (月曜・上書き)            |
+| `.claude/todo/04_改善バックログ.md`                                        | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
+| `.claude/todo/03_今週の計画.md`                                            | 現在の週次 TODO                                    | 週次 (月曜・上書き)            |
 | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | agent用週次振り返り                                | 週次 (日曜)                    |
-| `docs/todo/05_機能バックログ.md`                                        | 大規模 session の未完了機能・自動化を直接追記      | session 終了時                 |
+| `.claude/todo/05_機能バックログ.md`                                        | 大規模 session の未完了機能・自動化を直接追記      | session 終了時                 |
 
 ### Memory (auto memory)
 

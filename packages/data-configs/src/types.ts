@@ -36,7 +36,7 @@ export interface EstatSource {
   /**
    * 第4カテゴリ軸 (4軸以上のテーブル用。例 就業構造基本調査のフリーランス本業/副業別 × 本業所得)。
    * ★軸を 1 つでも絞り忘れると、同じ県が複数行になり rank が通し番号化して配信データが壊れる
-   * (2026-07-30 に 15 metric で実害。正典: docs/todo/05_機能バックログ.md RANKING-VALUES-PARTITION-INTEGRITY-01)。
+   * (2026-07-30 に 15 metric で実害。正典: .claude/todo/05_機能バックログ.md RANKING-VALUES-PARTITION-INTEGRITY-01)。
    */
   cdCat04?: string;
   /**

@@ -118,7 +118,7 @@ registered: いいえ (提案のみ。experiments.json への登録は人間承�
   将来推計を実績線と同じ表現で追加しない / R2 push・deploy・本番変更を行わない / 本監査ファイル以外の
   state (`portfolio.json`・`experiments.json`) をこのターンでは変更しない (実験登録は承認後に別途)。
 - **R2/本番非接触の確認**: 本監査は read-only (R2 fetch のみ、GET)。ThemeCatalog・生成物・
-  `docs/todo/04_改善バックログ.md`・`.claude/state/themes/*.json` への書き込みは行っていない。
+  `.claude/todo/04_改善バックログ.md`・`.claude/state/themes/*.json` への書き込みは行っていない。
 - **実装は人間承認後**: レビュー文書 (`reference/reviews/2026-07-11-theme-population-dynamics.md`) の
   「採用決定: ユーザー承認待ち」が現行状態。本監査もこれを変更しない。承認後は
   ① `theme-designer` が PR-1 を実装 → ② `theme-portfolio-manager` が `build-theme-portfolio.ts`

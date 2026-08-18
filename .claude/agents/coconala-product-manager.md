@@ -45,7 +45,7 @@ model: sonnet
 ## File Boundary
 
 - 触ってよい: `packages/product-factory/`、`.claude/state/products/`、`.local/coconala-products/`（生成先）、
-  `docs/todo/`（バックログ）。
+  `.claude/todo/`（バックログ）。
 - 触らない: 公開 R2、永続 D1、本番 web、他ドメインの SSOT。commit/push/deploy は明示指示があるときだけ。
 
 ## 関連

@@ -23,10 +23,11 @@
 | agent | role | 派生元 |
 |---|---|---|
 | `strategy-advisor` | 週次 PDCA・NSM・批判的 review (knowledge / triage は分離) | 既存縮退 |
-| `backlog-processor` 🆕 | `docs/todo/{05,06,01}` を分類して処理し、**機械ゲートを通ったものだけ**行削除する消化ループの主体。証拠は `.claude/state/backlog-loop/ledger.json` に残り、gate 無しの削除は verify が exit 1 で止める。04 は触らない (improvement-triage の排他 write)。正典 `.claude/rules/backlog-loop.md`、skill `/process-backlog` | 2026-08-17 新設 |
+| `backlog-processor` 🆕 | `.claude/todo/{05,06,01}` を分類して処理し、**機械ゲートを通ったものだけ**行削除する消化ループの主体。証拠は `.claude/state/backlog-loop/ledger.json` に残り、gate 無しの削除は verify が exit 1 で止める。04 は触らない (improvement-triage の排他 write)。正典 `.claude/rules/backlog-loop.md`、skill `/process-backlog` | 2026-08-17 新設 |
 | `backlog-solver-hard` 🆕 | backlog-loop の難物 (impl-large / indicator-expansion / sonnet が失敗した案件) を **1 起動 1 件**で解く。CI の run 本体は sonnet 固定なので、上位モデル (fable) は本 agent への委譲でのみ使う | 2026-08-17 新設 |
+| `todo-curator` 🆕 | `.claude/todo` の台帳を**整える** (消化ではない)。01 受信箱の triage、期限超過・鮮度切れの棚卸し提案、`00_運用ガイド.md` の整合維持、台帳外に散った TODO の回収。**行削除はしない** (gate 証拠付きの backlog-loop CI が専権)、04 も触らない | 2026-08-18 新設 |
 | `knowledge-curator` 🆕 | 失敗・学びの記録 + auto memory 整理 | strategy-advisor 分離 |
-| `improvement-triage` 🆕 | 改善バックログ整理 + status 更新 (`docs/todo/04_改善バックログ.md` 排他 append) | strategy-advisor 分離 |
+| `improvement-triage` 🆕 | 改善バックログ整理 + status 更新 (`.claude/todo/04_改善バックログ.md` 排他 append) | strategy-advisor 分離 |
 | `blog-seo-strategist` 🆕 | ブログSEO拡充戦略の戦略ハブ (施策 done/todo 台帳 + 型配分 + 四半期再学習)。真実源 `.claude/state/blog/seo-strategy.json`。実行は trend-scout(記事)/ranking-expander(ランキング)/gsc-analyst(KPI)/improvement-triage(effect) に委譲。戦略全文は本 agent §戦略コンテキスト (旧 docs/02 doc 15 を統合し SSOT を .claude に一本化) | 2026-07-12 新設 |
 | `theme-portfolio-manager` 🆕 | テーマ群 (22) のポートフォリオ管理ハブ (blog-seo-strategist のテーマ版)。テーマ別 GSC/GA4/データ品質を評価し keep/improve/merge/split/rename/retire を実測根拠つきで判定、実験 baseline/効果測定を台帳管理。真実源 `.claude/state/themes/{portfolio,experiments}.json` (validator: `.claude/scripts/themes/validate-theme-state.mjs`)。実行は theme-researcher(調査)/theme-designer(カタログ設計)/improvement-triage(effect ラベル・排他 writer) に委譲。判定基準の正典 = `.claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md`、運用設計 = `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md` | 2026-07-13 新設 |
 
@@ -123,14 +124,14 @@
 | `article-writer × 最大3` + `chart-author` | `.local/r2/app/blog/<slug>/` を slug 単位排他、chart-author は `docs/21_ブログ記事原稿/<slug>/` を読むのみ |
 | `data-ingester` → `snapshot-exporter` → `r2-publisher` | git TS / API → `.local/r2/app/` → R2 push の一方向。同ranking_keyは逐次 |
 | `x-strategist` + `instagram-strategist` | API / state / metrics サブディレクトリが完全分離 |
-| `gsc-analyst` + `improvement-triage` | gsc-analyst → `.claude/state/metrics/gsc/` write、triage → `docs/todo/04_改善バックログ.md` 排他 append |
+| `gsc-analyst` + `improvement-triage` | gsc-analyst → `.claude/state/metrics/gsc/` write、triage → `.claude/todo/04_改善バックログ.md` 排他 append |
 | `code-reviewer` + 必要な専門reviewer 1体 | 同じdiffの重複reviewはせず、UIまたはtest設計がscopeにある時だけ追加 |
 | `ranking-ui-manager` + `ranking-publisher` | `features/ranking/**` (UI) vs `config/*-ranking-keys.ts` + 公開 scripts (publish) で非重複 |
 | `ranking-content-author` + `ranking-content-critic` | author=`app/ranking/<key>/ai-content.json` write (key単位) vs critic=read-only。非衝突 |
 
 **禁則**:
 - 同じworking treeで複数writerを並行起動しない。並行writerが必要ならfile boundaryに加えてworktreeを分ける
-- `docs/todo/04_改善バックログ.md` への書き込みは `improvement-triage` のみ。analyst 系は `.claude/state/` にしか書かない
+- `.claude/todo/04_改善バックログ.md` への書き込みは `improvement-triage` のみ。analyst 系は `.claude/state/` にしか書かない
 
 ## チーム連携パターン (新体制版)
 
@@ -152,7 +153,7 @@
 
 ## 移行ステータス
 
-**Phase 1-5 完了 (2026-05-28)**: 新 18 agent 追加 → 既存 8 agent 縮退記述 → 136 SKILL.md に `primary_agent` frontmatter 付与 (task-router のみ意図的 skip) → 縮退 agent への primary 参照 28 件を精査し責務に応じて 4 件移動・24 件維持 (Session B) → 並行運用検証 (Session 5-1/5-2/5-3) 実施済。L3-1 統合は Cluster 1 (blog-review) + Cluster 7 (brushup-blog) のみ実装、Cluster 2/3/4/5/6 は KEEP-SKIP 判定 (各 Cluster の責務分離が既に適切なため、形式統合より現状維持が CLAUDE.md 行動原則「シンプル最優先」に整合)。判定詳細: `docs/todo/04_改善バックログ.md` AGENT-L3-CONSOLIDATE-01。
+**Phase 1-5 完了 (2026-05-28)**: 新 18 agent 追加 → 既存 8 agent 縮退記述 → 136 SKILL.md に `primary_agent` frontmatter 付与 (task-router のみ意図的 skip) → 縮退 agent への primary 参照 28 件を精査し責務に応じて 4 件移動・24 件維持 (Session B) → 並行運用検証 (Session 5-1/5-2/5-3) 実施済。L3-1 統合は Cluster 1 (blog-review) + Cluster 7 (brushup-blog) のみ実装、Cluster 2/3/4/5/6 は KEEP-SKIP 判定 (各 Cluster の責務分離が既に適切なため、形式統合より現状維持が CLAUDE.md 行動原則「シンプル最優先」に整合)。判定詳細: `.claude/todo/04_改善バックログ.md` AGENT-L3-CONSOLIDATE-01。
 
 | 旧 agent | 状態 | 移行先 |
 |---|---|---|

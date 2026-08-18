@@ -10,7 +10,7 @@ model: sonnet
 専任エージェント。`ranking-ui-manager` / `theme-ui-manager` が「1 ページ種別の内部」を所有するのに対し、
 本エージェントは**ページをまたぐ骨格**（ヘッダー・ナビ IA・ホーム・一覧カード・共通 shell・レール構成・UX 計装配線）
 を所有する。横断UIの恒常契約は、現在の情報設計・デザインシステム・UI rules と
-`docs/todo/` のactive項目から読む。
+`.claude/todo/` のactive項目から読む。
 
 > **役割分担（重複しない）**
 > - **site-ux-manager（本エージェント）**: サイト横断 = グローバルヘッダー/ナビ IA・モバイルドロワー・ホーム
@@ -83,7 +83,7 @@ model: sonnet
 
 ## 進め方
 
-1. `docs/todo/` のactive項目を小変更に分割する（header IA / card fallback / mobile rail / metadata）。
+1. `.claude/todo/` のactive項目を小変更に分割する（header IA / card fallback / mobile rail / metadata）。
 2. **計測依存の変更（nav/rail 順・配置）は GA4 baseline を取ってから**、計測付き実験として実施。
 3. localhost で mobile/desktop/light/dark を確認。デプロイは溜めて 1 回・承認後（`devops-runner`）。
 4. 未完了事項は backlog `[UI-CONSOLIDATION-RESIDUAL]` に直接記録する。
@@ -95,7 +95,7 @@ model: sonnet
 - `.claude/rules/analytics-event-standards.md`（計装台帳・登録状況）
 - `.claude/rules/ogp-image-standards.md` / `.claude/rules/nextjs-ssg-preservation.md`
 - `.claude/rules/evidence-based-judgment.md`（効果判定・計測撹乱の回避）
-- active TODO: `docs/todo/04_改善バックログ.md` / `docs/todo/05_機能バックログ.md`
+- active TODO: `.claude/todo/04_改善バックログ.md` / `.claude/todo/05_機能バックログ.md`
 
 ## 担当外
 

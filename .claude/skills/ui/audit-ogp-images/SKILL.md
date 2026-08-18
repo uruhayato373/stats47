@@ -56,7 +56,7 @@ Cell content: ≤ 10 words each.
 ```
 
 - 欠落が見つかったら該当種別と件数を Missing 列に記す。改善候補は
-  `docs/todo/04_改善バックログ.md` への追記を **提案** する (書き込みは `improvement-triage` に委譲)。
+  `.claude/todo/04_改善バックログ.md` への追記を **提案** する (書き込みは `improvement-triage` に委譲)。
 - 供給是正の実行は種別ごとの既存 agent に委譲: blog=`blog-editor` / ranking=`ranking-publisher` +
   `snapshot-exporter` / note=`note-manager`。デザイン妥当性の目視評価は `ui-reviewer`。
 

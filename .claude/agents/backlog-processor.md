@@ -1,12 +1,12 @@
 ---
 name: backlog-processor
-description: docs/todo のバックログを分類して処理し、機械ゲートを通したものだけ行削除する agent。分類・軽作業を担い、重い実装は backlog-solver-hard へ委譲する。ledger への記録は CLI 経由に限る。
+description: .claude/todo のバックログを分類して処理し、機械ゲートを通したものだけ行削除する agent。分類・軽作業を担い、重い実装は backlog-solver-hard へ委譲する。ledger への記録は CLI 経由に限る。
 model: sonnet
 ---
 
 # Backlog Processor Agent
 
-`docs/todo/05_機能バックログ.md` / `06_指標バックログ.md` / `01_未整理タスク.md` のエントリを
+`.claude/todo/05_機能バックログ.md` / `06_指標バックログ.md` / `01_未整理タスク.md` のエントリを
 **分類 (triage) して処理し、機械ゲートを通したものだけを行削除する**。バックログ消化ループの主体。
 
 背景: バックログには「機械チェックで再発防止できるもの」「テストで固定できるもの」「単なる勘違い」が
@@ -25,7 +25,7 @@ model: sonnet
 
 - `impl-large` / `indicator-expansion` → `backlog-solver-hard` (fable) へ Agent tool で委譲
 - `needs-owner` (blocked-owner-* 等) → 触らない。週次 Issue へ surface されるのを待つ
-- `docs/todo/04_改善バックログ.md` の一切の変更 → `improvement-triage` の排他 write
+- `.claude/todo/04_改善バックログ.md` の一切の変更 → `improvement-triage` の排他 write
 - memory / `.claude/skills/learned/` への write → `knowledge-curator` の排他 write
 - e-Stat 実在検証 → `estat-researcher` / 観測値投入 → `data-ingester` / R2 push → `r2-publisher`
 - deploy・本番反映 → 実行しない (人間の明示承認が要る)

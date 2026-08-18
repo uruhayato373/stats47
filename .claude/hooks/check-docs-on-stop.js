@@ -13,7 +13,7 @@ const path = require("node:path");
 
 const projectDir = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..");
 const relevant =
-  /^(?:docs\/|CLAUDE\.md$|AGENTS\.md$|\.claude\/(?:config\/docs-governance\.json|rules\/docs-vs-issues\.md|skills\/management\/maintain-docs\/|scripts\/lib\/check-docs-(?:governance|links)\.cjs|hooks\/check-docs-on-stop\.js))/;
+  /^(?:docs\/|\.claude\/todo\/|CLAUDE\.md$|AGENTS\.md$|\.claude\/(?:config\/docs-governance\.json|rules\/docs-vs-issues\.md|skills\/management\/maintain-docs\/|scripts\/lib\/check-docs-(?:governance|links)\.cjs|hooks\/check-docs-on-stop\.js))/;
 
 function input() {
   try {

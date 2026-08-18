@@ -12,7 +12,7 @@
  *   fiscal-strength-index, real-balance-ratio-city, current-balance-ratio-city,
  *   real-public-debt-service-ratio-city, future-burden-ratio-city, per-taxpayer-taxable-income
  *
- * docs/todo/05_機能バックログ.md #292+
+ * .claude/todo/05_機能バックログ.md #292+
  */
 
 "use strict";

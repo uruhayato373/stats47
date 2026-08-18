@@ -44,7 +44,7 @@
  *   node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 10  # 既存キューJSONから --next だけ
  *
  * 関連: audit-ai-content.mjs (auditRow) / build-input.ts / generate-parallel.ts /
- *       docs/todo/05_機能バックログ.md [AICONTENT-DBLESS-REBUILD]
+ *       .claude/todo/05_機能バックログ.md [AICONTENT-DBLESS-REBUILD]
  */
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";

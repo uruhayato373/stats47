@@ -14,7 +14,7 @@ test.describe("/dashboard プロジェクト現況", () => {
     await page.waitForLoadState("networkidle");
     await expect(page.getByRole("heading", { name: "プロジェクト現況" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "メトリクス (週次)" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "TODO — 改善バックログ" })).toBeVisible(); // docs/todo/ ミラーの表題
+    await expect(page.getByRole("heading", { name: "TODO — 改善バックログ" })).toBeVisible(); // .claude/todo/ ミラーの表題
   });
 
   test("改善バックログの Tier filter で行数が変わる", async ({ page }) => {

@@ -1,6 +1,6 @@
 name: 🗂️ Backlog Loop Daily (バックログ処理 + 行削除)
 
-# docs/todo のバックログを日次で消化するループ。
+# .claude/todo のバックログを日次で消化するループ。
 #
 #   1. 05 / 01 / 06 をパースしてキューを再構築し、上位 N 件を選ぶ
 #   2. Claude Code Base Action (OAuth / sonnet) が分類して処理し、gate を実行して台帳へ記録する
@@ -185,7 +185,7 @@ jobs:
           node .claude/scripts/backlog-loop/verify-backlog-run.mjs \
             --base "$BASE_SHA" \
             --queued "$QUEUED_IDS"
-          CLOSED=$(git -c core.quotepath=false diff --stat "$BASE_SHA" -- docs/todo | wc -l)
+          CLOSED=$(git -c core.quotepath=false diff --stat "$BASE_SHA" -- .claude/todo | wc -l)
           echo "closed=$CLOSED" >> "$GITHUB_OUTPUT"
 
       # ★push する前にリポジトリ側のゲートを通す。バックログ処理は checker / test / 実装に
@@ -213,7 +213,7 @@ jobs:
           if [ "$EVENT_NAME" = "push" ]; then
             git rm -q --ignore-unmatch data/backlog-loop-requests.json || true
           fi
-          git add -- docs/todo .claude/state/backlog-loop .claude/scripts .claude/rules \
+          git add -- .claude/todo .claude/state/backlog-loop .claude/scripts .claude/rules \
             .claude/skills .claude/agents packages apps || true
           if git diff --cached --quiet; then
             echo "変更なし (処理対象 ${TARGET_COUNT} 件・すべて skipped か failed)"

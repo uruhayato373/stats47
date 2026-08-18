@@ -424,8 +424,10 @@ function inspectRepository({
     }
   }
 
-  const monthFile = "docs/todo/02_今月の重点.md";
-  const weekFile = "docs/todo/03_今週の計画.md";
+  // ★パスは config から読む (2026-08-18)。ここを直書きにすると TODO の配置を変えたとき
+  //   DG031/032 だけが無音で死ぬ (他は全て config 駆動なので移設に追従してしまう)。
+  const monthFile = config.todo.monthFile;
+  const weekFile = config.todo.weekFile;
   const expectedMonth = now.slice(0, 7);
   const expectedWeek = isoWeek(now);
   const actualMonth = frontmatters.get(monthFile)?.values.month;

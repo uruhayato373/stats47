@@ -28,7 +28,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../..');
 const LEDGER_PATH = path.join(ROOT, '.claude/state/backlog-loop/ledger.json');
 
-const TRACKED = ['docs/todo/05_機能バックログ.md', 'docs/todo/06_指標バックログ.md'];
+const TRACKED = ['.claude/todo/05_機能バックログ.md', '.claude/todo/06_指標バックログ.md'];
 
 function getArg(flag, fallback = null) {
   const i = process.argv.indexOf(flag);

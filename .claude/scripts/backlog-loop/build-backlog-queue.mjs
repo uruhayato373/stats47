@@ -29,8 +29,8 @@ const LEDGER_PATH = path.join(ROOT, '.claude/state/backlog-loop/ledger.json');
 
 /** 見出し型を持つ真実源。01 は表形式なので Phase 2 で別経路にする */
 const SOURCES = {
-  '05': 'docs/todo/05_機能バックログ.md',
-  '06': 'docs/todo/06_指標バックログ.md',
+  '05': '.claude/todo/05_機能バックログ.md',
+  '06': '.claude/todo/06_指標バックログ.md',
 };
 
 function getArg(flag, fallback = null) {

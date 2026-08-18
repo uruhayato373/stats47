@@ -12,15 +12,15 @@ tags: [実装計画]
 **このプロジェクトの戦略と領域別実行計画の一覧。** 連番ファイルのみのフラット構成
 （サブディレクトリ・アーカイブは持たない。完了・superseded した記録は git 履歴に残す）。
 
-> **TODO (バックログ・受信箱) は 2026-07-11 に `docs/todo/` へ移設した。**
-> 「次に何をやるか」は `docs/todo/00_運用ガイド.md` から辿る。ここには戦略・実行計画の文書だけを置く。
+> **TODO (バックログ・受信箱) は 2026-07-11 に `.claude/todo/` へ移設した。**
+> 「次に何をやるか」は `.claude/todo/00_運用ガイド.md` から辿る。ここには戦略・実行計画の文書だけを置く。
 
 ## まず最初に読むファイル
 
 | 知りたいこと                                                         | ファイル                                         |
 | -------------------------------------------------------------------- | ------------------------------------------------ |
 | **何を収益の軸にするか**（収益モデル・チャネル・広告配置の唯一の真実源） | `docs/00_プロジェクト管理/02_収益化戦略.md` ★収益判断時必読 |
-| **次に着手すべき施策はどれか**                                       | `docs/todo/`（inbox + 改善/機能/指標バックログ） |
+| **次に着手すべき施策はどれか**                                       | `.claude/todo/`（inbox + 改善/機能/指標バックログ） |
 
 ## 🟢 領域別の実行計画（active）
 
@@ -32,12 +32,12 @@ tags: [実装計画]
 
 ## 関連（このフォルダ外の正典）
 
-- **TODO 真実源**: `docs/todo/`（改善 / 機能 / 指標バックログ + inbox）
+- **TODO 真実源**: `.claude/todo/`（改善 / 機能 / 指標バックログ + inbox）
 - 収益化戦略（NSM・収益レーン・配置判断・ゲート）: `docs/00_プロジェクト管理/02_収益化戦略.md`
-- セッション残タスク: `docs/todo/` の該当バックログへ直接反映
+- セッション残タスク: `.claude/todo/` の該当バックログへ直接反映
 - データ層アーキテクチャ（完全DBレス・正典）: `docs/01_技術設計/02_データアーキテクチャ.md`
 - デザインシステム（統一レイアウトを含む）: `docs/01_技術設計/04_デザインシステム.md`
 - theme-dashboard feature README: `apps/web/src/features/theme-dashboard/README.md`
-- 現在計画: `docs/todo/{02_今月の重点,03_今週の計画}.md` / agent用週次レビュー: `.claude/skills/management/weekly-review/reference/reviews/`
-- レビュー由来の未完了策: `docs/todo/` / 定期レポート履歴: 各skillの `reference/`
+- 現在計画: `.claude/todo/{02_今月の重点,03_今週の計画}.md` / agent用週次レビュー: `.claude/skills/management/weekly-review/reference/reviews/`
+- レビュー由来の未完了策: `.claude/todo/` / 定期レポート履歴: 各skillの `reference/`
 - 白書チャート逆引き inventory（ドーマント・skill 専用に移設）: `.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/`

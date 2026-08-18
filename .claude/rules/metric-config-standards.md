@@ -378,7 +378,7 @@ generator と同じ `expectedCalculatedYears` で導出するので、監査が�
 ranking は異なる）。いずれにせよ **200 にはならない**ので、`GONE_RANKING_KEYS` から外すだけでなく下記を整合させる必要がある。
 
 公開には config(isActive) を起点に以下を整合再生成する（依存順・詳細手順は memory
-`project_ranking_publish_pipeline_gap` / `docs/todo/05_機能バックログ.md`「122 metric の本番公開」）:
+`project_ranking_publish_pipeline_gap` / `.claude/todo/05_機能バックログ.md`「122 metric の本番公開」）:
 
 1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` 再生成（`packages/ranking/src/scripts/generate-ranking-items.ts`。CI: `sync-snapshots.yml` の `ranking-items` task で配線済み）
 2. R2 `app/ranking/<key>/values.json` 再生成（`packages/ranking/src/scripts/generate-ranking-values.ts`。正典 `app/stats/<metric>/values.json` から配信用に決定的変換。CI: `sync-snapshots.yml` の `ranking-values` task、**必ず ranking-items の後**に実行する。実描画値・OGP・blog がこれを読むため、未生成だと stale 配信 or 空ページになる。2026-07-27 の復旧以降は `audit-ranking-data-integrity.ts` と週次workflowで欠落を検査する）

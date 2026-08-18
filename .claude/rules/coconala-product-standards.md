@@ -345,7 +345,7 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 `.claude/scripts/note/catalog/` の git TS を SSOT とし、mapping で結合する。
 
 > **現在の状態**: note チャネルは旧174商品を前提とする legacy 実装。削除条件は
-> `docs/todo/05_機能バックログ.md` の `COCONALA-PRODUCT-FACTORY-01` 完了。現在はTypeScriptとVitestの
+> `.claude/todo/05_機能バックログ.md` の `COCONALA-PRODUCT-FACTORY-01` 完了。現在はTypeScriptとVitestの
 > 対象から一時除外している。P-01〜P-14 の14パックへ移行し、coverage・重複・添付検証を更新して
 > exclude を解除するまでは `products:note:*` を実運用しない。残工程は
 > 同backlog IDを正典とする。

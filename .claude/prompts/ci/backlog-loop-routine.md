@@ -2,7 +2,7 @@
 
 <task>
   <goal>`.local/ci/backlog-queue.json` の `picked[]` を 1 件ずつ分類して処理し、機械ゲートを通したものだけバックログから行削除する</goal>
-  <scope>docs/todo の 05 / 01 / 06 と、各エントリの完了条件が指す実装・テスト・checker。それ以外は触らない</scope>
+  <scope>.claude/todo の 05 / 01 / 06 と、各エントリの完了条件が指す実装・テスト・checker。それ以外は触らない</scope>
   <sources>`.claude/rules/backlog-loop.md` (class 定義と gate 表の正典) / `.local/ci/backlog-queue.json` / 各エントリ本文</sources>
   <done_when>picked の各 ID について record-backlog-outcome を 1 回実行し、completed にしたものは該当行が消えている</done_when>
   <authorization>ローカルのファイル編集とテスト実行まで。commit / push / deploy / R2 push / gh コマンドは実行しない (CI 側の step が行う)</authorization>
@@ -64,7 +64,7 @@ node .claude/scripts/backlog-loop/record-backlog-outcome.mjs \
 
 | 対象 | 理由 |
 |---|---|
-| `docs/todo/04_改善バックログ.md` | improvement-triage の排他 write |
+| `.claude/todo/04_改善バックログ.md` | improvement-triage の排他 write |
 | `.claude/memory/` / `.claude/skills/learned/` | knowledge-curator の排他 write |
 | `.github/` | ループが自分の権限・timeout・モデルを広げる口になる |
 | `.claude/config/backlog-routing-policy.json` | 自分の model / 試行上限を上げる口になる |

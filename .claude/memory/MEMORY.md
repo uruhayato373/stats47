@@ -10,7 +10,7 @@
 - [feedback_workflow_arg_vector_quoted.md](feedback_workflow_arg_vector_quoted.md) — CI workflowの可変引数列はbash配列("${ARGS[@]}")。文字列連結は1トークン化(2026-07-14に6workflow regression)。ガード=ARG_VECTOR_QUOTED
 - [project_estat_expansion_pipeline_2026_07.md](project_estat_expansion_pipeline_2026_07.md) — e-Stat全展開(2026-07-11): 生候補17万metric=不可能。本命=SSDS未使用cdCat01列挙。DBレス発見パイプライン。APP_IDはCI専任→専用ブランチpushトリガー。需要ファースト
 - [project_youtube_mass_experiment_2026_07.md](project_youtube_mass_experiment_2026_07.md) — YouTube量産実験(2026-07-11〜)。familyアカウントで月1上限撤廃(ペース1日1本)。ガード緩和=youtube-experiment.json(削除で月1復帰)、重複/pauseガード維持。CI投稿経路実証(GitHub Release→develop-push→GOOGLE_OAUTH)。BCRはapp/stats(全年)読む
-- [project_docs_reorg_todo_handoffs.md](project_docs_reorg_todo_handoffs.md) — TODO真実源=docs/todo/{inbox,01_改善,02_機能,03_指標バックログ}.md。2026-07-22に一時ハンドオフ文書廃止。完了文書はarchive禁止・git rm
+- [project_docs_reorg_todo_handoffs.md](project_docs_reorg_todo_handoffs.md) — TODO真実源=.claude/todo/{inbox,01_改善,02_機能,03_指標バックログ}.md。2026-07-22に一時ハンドオフ文書廃止。完了文書はarchive禁止・git rm
 - [project_kakei_expansion_pipeline_gotchas.md](project_kakei_expansion_pipeline_gotchas.md) — 家計調査拡充(2026-07-10)の罠: kakei @area=県庁所在市コード→NN000写像 / master exportはNODE_ENV=production必須 / saveToR2はローカルstagingのみ→diff-push-r2
 - [project_sns_gallery_and_ig_cron_fix.md](project_sns_gallery_and_ig_cron_fix.md) — 統合メディアコンソール(`npm run gallery`→localhost:4747、実装=apps/gallery Next.js)。/sns・/assets・/svg・/dashboard。★IG自動投稿の約1ヶ月空振りcronバグ修正(週ファイル自動選択)。R2動画は投稿後30日削除。正典sns-content-standards.md §5.5
 - [project_survey_linkage_ssot.md](project_survey_linkage_ssot.md) — ranking↔調査紐付けSSOT再設計(2026-07-06,PR#535)。/survey空prerenderをforce-dynamicで解消。item.jsonにsurveyIds焼き込み。orphan調査8件削除(83→75)。管理=survey-curator+/audit-survey-linkage

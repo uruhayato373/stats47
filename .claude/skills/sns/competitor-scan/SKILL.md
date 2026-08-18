@@ -46,7 +46,7 @@ stats47 の SNS 競合を**テーマ別の名乗りで巡回**し、フォロワ
 3. **前回スキャンとの差分**: `reference/reports/*.md` の最新とフォロワー増減・新規競合をdiff
 4. **stats47 への示唆**: 取りこぼしている題材・フォーマット・名乗り軸を 3-5 個 (煽り追随ではなく信頼性×網羅性で差別化できる切り口)
 5. **レポート出力**: `.claude/skills/sns/competitor-scan/reference/reports/YYYY-MM-DD.md`
-6. **TODO化**: 採択した未完了策だけを `docs/todo/04_改善バックログ.md` へID付きで追加
+6. **TODO化**: 採択した未完了策だけを `.claude/todo/04_改善バックログ.md` へID付きで追加
 
 ## 出力フォーマット
 

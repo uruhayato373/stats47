@@ -263,7 +263,7 @@ function renderMarkdown(results) {
     }
     lines.push("");
     lines.push("### 改善提案ポインタ");
-    lines.push("- LCP/CLS 過去施策: `docs/todo/04_改善バックログ.md`");
+    lines.push("- LCP/CLS 過去施策: `.claude/todo/04_改善バックログ.md`");
     lines.push(
       "- 詳細ログ: `.claude/skills/analytics/performance-improvement/reference/improvement-log.md`"
     );

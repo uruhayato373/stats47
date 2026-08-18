@@ -1,6 +1,6 @@
 # docs ディレクトリ INDEX
 
-> **方針**: 人間が判断する現在計画・バックログは `docs/`、agent用履歴は skill reference、機械観測値は `.claude/state/` に置く。レビュー全文は蓄積せず、未完了策を `docs/todo/`、恒久判断を既存SSOTへ直接反映する。GitHub Issues は (a) PR で close される `enhancement`/`bug`、(b) `auto-generated`の機械アラートのみ残す。詳細: [`../.claude/rules/docs-vs-issues.md`](../.claude/rules/docs-vs-issues.md)
+> **方針**: 人間が判断する現在計画・バックログは `docs/`、agent用履歴は skill reference、機械観測値は `.claude/state/` に置く。レビュー全文は蓄積せず、未完了策を `.claude/todo/`、恒久判断を既存SSOTへ直接反映する。GitHub Issues は (a) PR で close される `enhancement`/`bug`、(b) `auto-generated`の機械アラートのみ残す。詳細: [`../.claude/rules/docs-vs-issues.md`](../.claude/rules/docs-vs-issues.md)
 >
 > **2026-07-22 更新**: TODO とセッション残タスクは `todo/` に集約。一時ハンドオフ文書は廃止した。完了・消化済みドキュメントはアーカイブせず削除し、記録は git 履歴に委ねる。
 >
@@ -63,8 +63,8 @@
 
 | 対象                                               | 置き場所                                     | 例                                                       |
 | -------------------------------------------------- | -------------------------------------------- | -------------------------------------------------------- |
-| やること (未着手タスク・受信箱)                    | `docs/todo/`                                 | 改善施策、機能、指標拡充、思いつき                       |
-| セッション残タスク                                 | `docs/todo/`                                 | 未完了事項を該当バックログへ直接反映                     |
+| やること (未着手タスク・受信箱)                    | `.claude/todo/`                                 | 改善施策、機能、指標拡充、思いつき                       |
+| セッション残タスク                                 | `.claude/todo/`                                 | 未完了事項を該当バックログへ直接反映                     |
 | 人間が意思決定に使う恒久文書                       | `docs/` 各分類                               | プロジェクト定義、現在計画、戦略・要件                   |
 | 人間が編集する原稿・企画                           | `docs/`                                      | note 原稿・note 企画・ブログ下書き                       |
 | エージェントが深掘りする詳細ログ・スナップショット | `.claude/skills/<skill>/reference/`          | GSC/GA4 週次 snapshot CSV、improvement-log.md (agent 用) |
@@ -118,7 +118,7 @@ Issues: PR で close
 - `todo/` に `00`〜`06` の固定7ファイル以外を追加する (`todo/00_運用ガイド.md`)
 - 日付サフィックス付きファイル (`*-YYYY-MM-DD.md`) を `00_/` `01_/` `02_/` の上書き型ディレクトリに置く
 - `archive/` ディレクトリを作る (削除して git 履歴に委ねる)
-- weekly / review / improvement 系スキルから一般的な改善候補を `gh issue create` する（未完了策は `docs/todo/` へ）
+- weekly / review / improvement 系スキルから一般的な改善候補を `gh issue create` する（未完了策は `.claude/todo/` へ）
 
 ## frontmatter 規約
 

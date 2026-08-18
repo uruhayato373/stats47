@@ -20,8 +20,8 @@ const {
 } = require('../parse-backlog-core.cjs');
 
 const ROOT = path.resolve(__dirname, '../../../..');
-const FEATURE = path.join(ROOT, 'docs/todo/05_機能バックログ.md');
-const INBOX = path.join(ROOT, 'docs/todo/01_未整理タスク.md');
+const FEATURE = path.join(ROOT, '.claude/todo/05_機能バックログ.md');
+const INBOX = path.join(ROOT, '.claude/todo/01_未整理タスク.md');
 
 const SAMPLE = [
   '# バックログ',

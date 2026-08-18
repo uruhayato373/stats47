@@ -7,4 +7,4 @@ CDN purge → 本ファイル削除 (commit-back) まで自動実行する。
 
 - **正典は R2**。このディレクトリは常に空が正常 (blog の docs/21 と同じ ephemeral outbox)
 - ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs` (blocker 1件でも R2 に到達しない)
-- 生成手順: `docs/todo/05_機能バックログ.md` [AICONTENT-DBLESS-REBUILD] の再開手順参照
+- 生成手順: `.claude/todo/05_機能バックログ.md` [AICONTENT-DBLESS-REBUILD] の再開手順参照
