@@ -58,6 +58,8 @@ export interface FixtureOptions {
   localSnsFiles?: string[];
   /** .claude/todo 配下に作る { ファイル名: 内容 }。指定時は parse-backlog-core.cjs も実物をコピーする */
   todoFiles?: Record<string, string>;
+  /** repo root 相対パス → 内容。`.claude/state/**` などを任意に撒く */
+  stateFiles?: Record<string, string>;
 }
 
 /** os.tmpdir() 配下に隔離 root を作り、必要なファイルを配置して絶対パスを返す。 */
@@ -122,6 +124,13 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
     const coreDir = path.join(root, ".claude/scripts/backlog-loop");
     fs.mkdirSync(coreDir, { recursive: true });
     fs.copyFileSync(REAL_PARSE_CORE, path.join(coreDir, "parse-backlog-core.cjs"));
+  }
+
+  // 8) 任意のファイル (state など。パスは root 相対)
+  for (const [rel, body] of Object.entries(opts.stateFiles ?? {})) {
+    const abs = path.join(root, rel);
+    fs.mkdirSync(path.dirname(abs), { recursive: true });
+    fs.writeFileSync(abs, body);
   }
 
   return root;

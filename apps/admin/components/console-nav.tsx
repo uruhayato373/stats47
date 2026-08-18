@@ -19,9 +19,18 @@ const NAV_GROUPS: readonly NavGroup[] = [
     ],
   },
   {
-    title: "運用",
+    title: "収益",
+    items: [
+      { href: "/revenue", label: "収益 (AdSense)" },
+      { href: "/ads", label: "アフィリエイト運用" },
+    ],
+  },
+  {
+    title: "品質・運用",
     items: [
       { href: "/dashboard", label: "プロジェクト現況" },
+      { href: "/quality", label: "品質" },
+      { href: "/ops", label: "CI・台帳" },
       { href: "/todo", label: "TODO" },
     ],
   },
@@ -35,7 +44,7 @@ export function ConsoleSidebar() {
           stats47
         </span>
         <span className="block text-xs text-console-muted">
-          統合メディアコンソール
+          管理コンソール
         </span>
         <span className="mt-1 block text-[11px] text-console-muted/70">
           local · :4747

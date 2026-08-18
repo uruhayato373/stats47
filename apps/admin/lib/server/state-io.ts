@@ -111,10 +111,14 @@ const g = globalThis as unknown as { __adminCache?: Map<string, CacheEntry> };
 
 export function cached<T>(key: string, ttlMs: number, fn: () => T): T {
   if (!g.__adminCache) g.__adminCache = new Map();
-  const hit = g.__adminCache.get(key);
+  // ★キーに projectRoot を混ぜる。本番は root が 1 つなので実害は無いが、root を
+  //   差し替えて読む場合 (テストの fixture) に前の root の結果を返してしまう。
+  //   「同じ入力なら同じ結果」を root 込みで成り立たせる。
+  const scoped = `${projectRoot()}::${key}`;
+  const hit = g.__adminCache.get(scoped);
   if (hit && Date.now() - hit.at < ttlMs) return hit.data as T;
   const data = fn();
-  g.__adminCache.set(key, { at: Date.now(), data });
+  g.__adminCache.set(scoped, { at: Date.now(), data });
   return data;
 }
 

@@ -6,8 +6,8 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "stats47 統合メディアコンソール",
-  description: "SNS 投稿・画像資産・SVG カタログ・プロジェクト現況の横断管理",
+  title: "stats47 管理コンソール",
+  description: "SNS・画像資産・収益・品質・CI/台帳・TODO の横断管理 (ローカル専用)",
 };
 
 /**

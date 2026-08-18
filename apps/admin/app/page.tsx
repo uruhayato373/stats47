@@ -7,6 +7,11 @@ const SECTIONS = [
     desc: "投稿・予約・caption・メトリクス (X / IG / note)",
   },
   {
+    href: "/buzz-map",
+    title: "バズ地図",
+    desc: "日本地図 × 統計カードの企画キューと素材生成",
+  },
+  {
     href: "/assets",
     title: "画像資産",
     desc: "OGP・リンクカード・note カバー・記事内画像/動画の閲覧と欠落チェック",
@@ -17,9 +22,34 @@ const SECTIONS = [
     desc: "ブログ SVG チャートをカタログ別に横断閲覧",
   },
   {
+    href: "/revenue",
+    title: "収益 (AdSense)",
+    desc: "週次収益・RPM・内訳。実測は AdSense のみで他チャネルは未計測と明示する",
+  },
+  {
+    href: "/ads",
+    title: "アフィリエイト運用",
+    desc: "計測/公開ゲート・在庫 260・GA4 実測・compliance・提携カタログ",
+  },
+  {
     href: "/dashboard",
     title: "プロジェクト現況",
-    desc: "メトリクス・進捗キュー・改善バックログ TODO・STP 戦略 (読み取り専用)", // .claude/todo/ ミラー
+    desc: "メトリクス・進捗キュー・改善バックログ TODO・STP 戦略 (読み取り専用)",
+  },
+  {
+    href: "/quality",
+    title: "品質",
+    desc: "是正キュー・SVG 系譜・出典・整合性など 8 監査の残欠陥と鮮度",
+  },
+  {
+    href: "/ops",
+    title: "CI・台帳",
+    desc: "workflow 健全性・R2 鮮度・Claude 利用量・agents/skills/memory 一覧",
+  },
+  {
+    href: "/todo",
+    title: "TODO",
+    desc: ".claude/todo の台帳 (受信箱・機能バックログ) を俯瞰",
   },
 ] as const;
 
@@ -28,10 +58,10 @@ export default function HomePage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-xl font-bold text-console-fg">
-          統合メディアコンソール
+          管理コンソール
         </h1>
         <p className="mt-1 text-sm text-console-muted">
-          ローカル専用 (127.0.0.1)。SNS 素材・画像資産・SVG・現況を 1 画面で横断管理する。
+          ローカル専用 (127.0.0.1)。制作・収益・品質・運用を 1 画面で横断管理する。書き込みは SNS の投稿/予約とバズ地図の素材生成だけで、他は読み取り専用。
         </p>
       </div>
 

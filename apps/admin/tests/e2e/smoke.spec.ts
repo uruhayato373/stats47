@@ -8,11 +8,17 @@ import { expect, test, type Page } from "@playwright/test";
  */
 
 const PAGES = [
-  { path: "/", heading: "統合メディアコンソール" },
+  { path: "/", heading: "管理コンソール" },
   { path: "/sns", heading: "SNS 投稿ギャラリー" },
+  { path: "/buzz-map", heading: null },
   { path: "/assets", heading: null },
   { path: "/svg", heading: null },
+  { path: "/revenue", heading: "収益 (AdSense)" },
+  { path: "/ads", heading: "アフィリエイト運用" },
   { path: "/dashboard", heading: "プロジェクト現況" },
+  { path: "/quality", heading: "品質" },
+  { path: "/ops", heading: "CI・台帳" },
+  { path: "/todo", heading: "TODO" },
 ] as const;
 
 function collectPageErrors(page: Page) {
@@ -54,7 +60,7 @@ test.describe("smoke: 5画面の疎通", () => {
 
   test("共通ナビで相互遷移できる", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: "統合メディアコンソール" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "管理コンソール" })).toBeVisible();
 
     const nav = page.locator("header nav");
 
