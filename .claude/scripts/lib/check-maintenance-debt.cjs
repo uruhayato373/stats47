@@ -44,11 +44,49 @@ function loadBaselineV2() {
   return null; // v1 (行番号キー) / 破損 → 移行が必要
 }
 
+// Markdown 見出し (# 〜 ######) を「同レベル以下の次の見出しまで」で 1 ブロックとして扱う。
+// `.claude/todo/backlog.md` の `### [ID] タイトル` カードのように、ブロック本文の後半に
+// まとめて書かれた停止条件 (例: 「- **停止条件**:」) を、ブロック冒頭寄りの個別行が
+// 参照できないのは checker 側の見落としだった (2026-08-19、CROSS-PAGE-DATA-SSOT-01 の
+// WP6/WP7 サブ項目が該当)。バックログ固有のカード書式には依存せず、Markdown の見出し構造
+// だけで汎用的にブロックを決める。
+function findEnclosingSection(lines, lineIndex) {
+  let start = -1;
+  let level = 0;
+  for (let i = lineIndex; i >= 0; i--) {
+    const m = lines[i].match(/^(#{1,6})\s/);
+    if (m) { start = i; level = m[1].length; break; }
+  }
+  if (start === -1) return null; // 見出しより前 (ファイル冒頭等) はブロック外
+  let end = lines.length;
+  for (let i = start + 1; i < lines.length; i++) {
+    const m = lines[i].match(/^(#{1,6})\s/);
+    if (m && m[1].length <= level) { end = i; break; }
+  }
+  return { start, end }; // [start, end) — 0-based, end は次見出し行 (exclusive)
+}
+// ブロック単位の条件は、ブロック内の偶発的な単語一致 (無関係な文脈での「期限」「互換」等) で
+// 誤って見逃さないよう、`.claude/rules/todo-standards.md` のカード正式フィールド (太字ラベル行)
+// だけを条件として認める。緩い全文一致にすると、大きなカードでは無関係な箇所の一致で
+// 本来 unbounded な行まで除外してしまう (2026-08-19 実測: CROSS-PAGE-DATA-SSOT-01 で
+// R2 schema 変更に関する「期限」が離れた箇所の legacy 言及を誤って除外していた)。
+const BLOCK_CONDITION_FIELD_RE = /^\s*-?\s*\*\*(?:停止条件|完了条件|削除条件|期限)\*\*\s*[:：]/;
+function sectionHasCondition(lines, lineIndex) {
+  const section = findEnclosingSection(lines, lineIndex);
+  if (!section) return false;
+  for (let i = section.start; i < section.end; i++) {
+    if (BLOCK_CONDITION_FIELD_RE.test(lines[i])) return true;
+  }
+  return false;
+}
+
 function inspect(file) {
   const results = [];
   const relative = rel(file);
   const isTest = /(?:^|\/)(?:__tests__|tests?|fixtures?)(?:\/|$)|\.(?:spec|test)\.[cm]?[jt]sx?$/.test(relative);
-  fs.readFileSync(file, "utf8").split(/\r?\n/).forEach((line, index) => {
+  const isMarkdown = /\.mdx?$/i.test(relative);
+  const lines = fs.readFileSync(file, "utf8").split(/\r?\n/);
+  lines.forEach((line, index) => {
     const number = index + 1;
     // debt markerはコメントで宣言する。コード内のmessage/UI文言/正規表現に現れる
     // "TODO" はタスクではないため、コード系ファイルはコメント部分だけを検査する。
@@ -71,9 +109,12 @@ function inspect(file) {
     // "TODO-" プレフィックスの sentinel 値を使い、コード/文書がその規約に言及する (startsWith("TODO-") /
     // TODO でない / TODO プレースホルダ / TODO resourceId)。これらは実タスクの debt マーカーではなくデータ値の
     // 言及なので誤検知。catalogStatus / VerificationStatus 等の domain 用語除外 (下の legacy 側) と同方針。
+    // `docs/todo/` は 2026-06-07 に `.claude/todo/` へ統合され現存しないパス (docs-vs-issues.md 移行履歴)。
+    // 「active TODO: .claude/todo/backlog.md」のような正規の参照行が誤検知していたため両方を除外する
+    // (2026-08-19)。
     if (
       debt &&
-      !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|docs\/todo\/|remove(?:d)?\s+(?:when|after|by)|期限|削除条件)/i.test(line) &&
+      !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|(?:docs|\.claude)\/todo\/|remove(?:d)?\s+(?:when|after|by)|期限|削除条件)/i.test(line) &&
       !/(?:["']TODO-|TODO-["']|startsWith\(["']TODO|TODO ?プレースホルダ|TODO ?placeholder|TODO ?でない|TODO resourceId|resourceId.*TODO)/.test(line)
       && !/TODO(?:\s*(?:ID|行|契約|定義|一覧|真実源|へ|から|を|の|完了|具体化|管理)|[）)])/u.test(line)
     )
@@ -105,7 +146,11 @@ function inspect(file) {
         // `'legacy'` / `"legacy"` は状態名リテラル (`"deprecated"` を除外しているのと同じ enum 値扱い)。
         // `legacy` と `current`/`manifest` が近接する行は image pipeline の manifest 形式名としての用法
         // (例: 「初回manifest移行だけは legacyを安全にcurrent扱いできない」) で廃止予定コードではない。
-        !/catalogStatus|LEGACY_SETS|IndicatorSet|indicator-sets|ThemeCatalog|THEME_CATALOGS|legacy ?テーマ|legacy ?catalog|legacy\/別経路|legacy ?\(未登録\)|未登録 ?\(legacy\)|\(legacy\) ?テーマ|カタログ駆動|legacy 2\b|"deprecated"|deprecated source|VerificationStatus|VERIFICATION_STATUSES|['"]legacy['"]|legacy[^\n]{0,20}(?:current|manifest)|(?:current|manifest)[^\n]{0,20}legacy/i.test(line))
+        !/catalogStatus|LEGACY_SETS|IndicatorSet|indicator-sets|ThemeCatalog|THEME_CATALOGS|legacy ?テーマ|legacy ?catalog|legacy\/別経路|legacy ?\(未登録\)|未登録 ?\(legacy\)|\(legacy\) ?テーマ|カタログ駆動|legacy 2\b|"deprecated"|deprecated source|VerificationStatus|VERIFICATION_STATUSES|['"]legacy['"]|legacy[^\n]{0,20}(?:current|manifest)|(?:current|manifest)[^\n]{0,20}legacy/i.test(line) &&
+        // ブロック単位の除外 (2026-08-19): 同一行に条件が無くても、Markdown の同一見出しブロック
+        // (backlog.md の `### [ID]` カード等) の他行にまとめて期限・削除条件・停止条件が
+        // 書かれていれば、そのブロック内の個別行は unbounded ではない。
+        !(isMarkdown && sectionHasCondition(lines, index)))
       results.push(finding("UNBOUNDED_LEGACY", file, number, `${legacy[1]} に期限・削除条件がない`, line));
 
     if (!isTest && !relative.startsWith(".github/workflows/") && !relative.endsWith("CLAUDE.md") && !relative.endsWith("AGENTS.md") &&

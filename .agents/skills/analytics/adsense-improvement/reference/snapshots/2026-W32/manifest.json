@@ -1,0 +1,361 @@
+{
+  "schemaVersion": 2,
+  "week": "2026-W32",
+  "anchor": "2026-08-09",
+  "generatedAt": "2026-08-09T11:22:19.954Z",
+  "jobs": {
+    "overview": {
+      "schemaVersion": 2,
+      "source": "adsense-management-api-v2",
+      "periodKind": "finalized7d",
+      "periodStart": "2026-08-02",
+      "periodEnd": "2026-08-08",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:19.954Z",
+      "currencyCode": "JPY",
+      "timeZone": "unknown",
+      "dimensions": [],
+      "metrics": [
+        "ESTIMATED_EARNINGS",
+        "PAGE_VIEWS",
+        "PAGE_VIEWS_RPM",
+        "IMPRESSIONS",
+        "IMPRESSIONS_RPM",
+        "CLICKS",
+        "IMPRESSIONS_CTR",
+        "COST_PER_CLICK",
+        "ACTIVE_VIEW_VIEWABILITY",
+        "AD_REQUESTS",
+        "AD_REQUESTS_COVERAGE"
+      ],
+      "rowCount": 1,
+      "status": "complete",
+      "limitations": [
+        "timeZone を API response から取得できず unknown",
+        "ESTIMATED_EARNINGS は推定値 (月次確定まで変動しうる)"
+      ]
+    },
+    "daily": {
+      "schemaVersion": 2,
+      "source": "adsense-management-api-v2",
+      "periodKind": "finalized7d",
+      "periodStart": "2026-08-02",
+      "periodEnd": "2026-08-08",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:19.954Z",
+      "currencyCode": "JPY",
+      "timeZone": "unknown",
+      "dimensions": [
+        "DATE"
+      ],
+      "metrics": [
+        "ESTIMATED_EARNINGS",
+        "PAGE_VIEWS",
+        "PAGE_VIEWS_RPM",
+        "IMPRESSIONS",
+        "IMPRESSIONS_RPM",
+        "CLICKS",
+        "IMPRESSIONS_CTR",
+        "COST_PER_CLICK",
+        "ACTIVE_VIEW_VIEWABILITY",
+        "AD_REQUESTS",
+        "AD_REQUESTS_COVERAGE"
+      ],
+      "rowCount": 7,
+      "status": "complete",
+      "limitations": [
+        "timeZone を API response から取得できず unknown",
+        "ESTIMATED_EARNINGS は推定値 (月次確定まで変動しうる)"
+      ]
+    },
+    "devices": {
+      "schemaVersion": 2,
+      "source": "adsense-management-api-v2",
+      "periodKind": "finalized7d",
+      "periodStart": "2026-08-02",
+      "periodEnd": "2026-08-08",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:19.954Z",
+      "currencyCode": "JPY",
+      "timeZone": "unknown",
+      "dimensions": [
+        "PLATFORM_TYPE_CODE",
+        "PLATFORM_TYPE_NAME"
+      ],
+      "metrics": [
+        "ESTIMATED_EARNINGS",
+        "PAGE_VIEWS",
+        "PAGE_VIEWS_RPM",
+        "IMPRESSIONS",
+        "IMPRESSIONS_RPM",
+        "CLICKS",
+        "IMPRESSIONS_CTR",
+        "COST_PER_CLICK",
+        "ACTIVE_VIEW_VIEWABILITY",
+        "AD_REQUESTS",
+        "AD_REQUESTS_COVERAGE"
+      ],
+      "rowCount": 3,
+      "status": "complete",
+      "limitations": [
+        "timeZone を API response から取得できず unknown",
+        "ESTIMATED_EARNINGS は推定値 (月次確定まで変動しうる)"
+      ]
+    },
+    "units": {
+      "schemaVersion": 2,
+      "source": "adsense-management-api-v2",
+      "periodKind": "finalized7d",
+      "periodStart": "2026-08-02",
+      "periodEnd": "2026-08-08",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:19.954Z",
+      "currencyCode": "JPY",
+      "timeZone": "unknown",
+      "dimensions": [
+        "AD_UNIT_ID",
+        "AD_UNIT_NAME"
+      ],
+      "metrics": [
+        "ESTIMATED_EARNINGS",
+        "IMPRESSIONS",
+        "IMPRESSIONS_RPM",
+        "CLICKS",
+        "IMPRESSIONS_CTR",
+        "COST_PER_CLICK",
+        "ACTIVE_VIEW_VIEWABILITY",
+        "AD_REQUESTS",
+        "AD_REQUESTS_COVERAGE"
+      ],
+      "rowCount": 7,
+      "status": "complete",
+      "limitations": [
+        "timeZone を API response から取得できず unknown",
+        "ESTIMATED_EARNINGS は推定値 (月次確定まで変動しうる)"
+      ]
+    },
+    "formats-platforms": {
+      "schemaVersion": 2,
+      "source": "adsense-management-api-v2",
+      "periodKind": "finalized7d",
+      "periodStart": "2026-08-02",
+      "periodEnd": "2026-08-08",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:19.954Z",
+      "currencyCode": "JPY",
+      "timeZone": "unknown",
+      "dimensions": [
+        "AD_FORMAT_CODE",
+        "PLATFORM_TYPE_CODE"
+      ],
+      "metrics": [
+        "ESTIMATED_EARNINGS",
+        "IMPRESSIONS",
+        "IMPRESSIONS_RPM",
+        "CLICKS",
+        "IMPRESSIONS_CTR",
+        "COST_PER_CLICK",
+        "ACTIVE_VIEW_VIEWABILITY",
+        "AD_REQUESTS",
+        "AD_REQUESTS_COVERAGE"
+      ],
+      "rowCount": 15,
+      "status": "complete",
+      "limitations": [
+        "timeZone を API response から取得できず unknown",
+        "ESTIMATED_EARNINGS は推定値 (月次確定まで変動しうる)"
+      ]
+    },
+    "placements-platforms": {
+      "schemaVersion": 2,
+      "source": "adsense-management-api-v2",
+      "periodKind": "finalized7d",
+      "periodStart": "2026-08-02",
+      "periodEnd": "2026-08-08",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:19.954Z",
+      "currencyCode": "JPY",
+      "timeZone": "unknown",
+      "dimensions": [
+        "AD_PLACEMENT_CODE",
+        "PLATFORM_TYPE_CODE"
+      ],
+      "metrics": [
+        "ESTIMATED_EARNINGS",
+        "IMPRESSIONS",
+        "IMPRESSIONS_RPM",
+        "CLICKS",
+        "IMPRESSIONS_CTR",
+        "COST_PER_CLICK",
+        "ACTIVE_VIEW_VIEWABILITY",
+        "AD_REQUESTS",
+        "AD_REQUESTS_COVERAGE"
+      ],
+      "rowCount": 6,
+      "status": "complete",
+      "limitations": [
+        "timeZone を API response から取得できず unknown",
+        "ESTIMATED_EARNINGS は推定値 (月次確定まで変動しうる)"
+      ]
+    },
+    "bid-types-platforms": {
+      "schemaVersion": 2,
+      "source": "adsense-management-api-v2",
+      "periodKind": "finalized7d",
+      "periodStart": "2026-08-02",
+      "periodEnd": "2026-08-08",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:19.954Z",
+      "currencyCode": "JPY",
+      "timeZone": "unknown",
+      "dimensions": [
+        "BID_TYPE_CODE",
+        "PLATFORM_TYPE_CODE"
+      ],
+      "metrics": [
+        "ESTIMATED_EARNINGS",
+        "IMPRESSIONS",
+        "IMPRESSIONS_RPM",
+        "CLICKS",
+        "IMPRESSIONS_CTR",
+        "COST_PER_CLICK",
+        "ACTIVE_VIEW_VIEWABILITY",
+        "AD_REQUESTS",
+        "AD_REQUESTS_COVERAGE"
+      ],
+      "rowCount": 6,
+      "status": "complete",
+      "limitations": [
+        "timeZone を API response から取得できず unknown",
+        "ESTIMATED_EARNINGS は推定値 (月次確定まで変動しうる)"
+      ]
+    },
+    "traffic-sources": {
+      "schemaVersion": 2,
+      "source": "adsense-management-api-v2",
+      "periodKind": "finalized7d",
+      "periodStart": "2026-08-02",
+      "periodEnd": "2026-08-08",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:19.954Z",
+      "currencyCode": "JPY",
+      "timeZone": "unknown",
+      "dimensions": [
+        "TRAFFIC_SOURCE_CODE"
+      ],
+      "metrics": [
+        "ESTIMATED_EARNINGS",
+        "IMPRESSIONS",
+        "IMPRESSIONS_RPM",
+        "CLICKS",
+        "IMPRESSIONS_CTR",
+        "COST_PER_CLICK",
+        "ACTIVE_VIEW_VIEWABILITY",
+        "AD_REQUESTS",
+        "AD_REQUESTS_COVERAGE"
+      ],
+      "rowCount": 7,
+      "status": "complete",
+      "limitations": [
+        "timeZone を API response から取得できず unknown",
+        "ESTIMATED_EARNINGS は推定値 (月次確定まで変動しうる)"
+      ]
+    },
+    "countries": {
+      "schemaVersion": 2,
+      "source": "adsense-management-api-v2",
+      "periodKind": "finalized7d",
+      "periodStart": "2026-08-02",
+      "periodEnd": "2026-08-08",
+      "windowDays": 7,
+      "isFinalized": true,
+      "generatedAt": "2026-08-09T11:22:19.954Z",
+      "currencyCode": "JPY",
+      "timeZone": "unknown",
+      "dimensions": [
+        "COUNTRY_CODE"
+      ],
+      "metrics": [
+        "ESTIMATED_EARNINGS",
+        "IMPRESSIONS",
+        "IMPRESSIONS_RPM",
+        "CLICKS",
+        "IMPRESSIONS_CTR",
+        "COST_PER_CLICK",
+        "ACTIVE_VIEW_VIEWABILITY",
+        "AD_REQUESTS",
+        "AD_REQUESTS_COVERAGE"
+      ],
+      "rowCount": 19,
+      "status": "complete",
+      "limitations": [
+        "timeZone を API response から取得できず unknown",
+        "ESTIMATED_EARNINGS は推定値 (月次確定まで変動しうる)"
+      ]
+    },
+    "pages": {
+      "schemaVersion": 2,
+      "source": "adsense-management-api-v2",
+      "periodKind": "rolling30d",
+      "periodStart": "2026-07-10",
+      "periodEnd": "2026-08-08",
+      "windowDays": 30,
+      "isFinalized": false,
+      "generatedAt": "2026-08-09T11:22:19.954Z",
+      "currencyCode": "JPY",
+      "timeZone": "unknown",
+      "dimensions": [
+        "PAGE_URL"
+      ],
+      "metrics": [
+        "ESTIMATED_EARNINGS",
+        "PAGE_VIEWS",
+        "PAGE_VIEWS_RPM",
+        "IMPRESSIONS",
+        "IMPRESSIONS_RPM",
+        "CLICKS",
+        "IMPRESSIONS_CTR",
+        "COST_PER_CLICK",
+        "ACTIVE_VIEW_VIEWABILITY",
+        "AD_REQUESTS",
+        "AD_REQUESTS_COVERAGE"
+      ],
+      "rowCount": 0,
+      "status": "privacy-threshold",
+      "limitations": [
+        "timeZone を API response から取得できず unknown",
+        "PAGE_URL はプライバシー閾値未満のため 0 行 (エラーではない・ページ別収益を捏造しない)",
+        "pages のみ 30 日窓 (7 日窓は全ページ閾値未満・ADSENSE-PAGES-DATA-01)",
+        "ESTIMATED_EARNINGS は推定値 (月次確定まで変動しうる)"
+      ]
+    },
+    "ad-units": {
+      "schemaVersion": 2,
+      "source": "adsense-management-api-v2",
+      "kind": "inventory",
+      "generatedAt": "2026-08-09T11:22:19.954Z",
+      "fields": [
+        "unit_id",
+        "display_name",
+        "state",
+        "type",
+        "size",
+        "slot_id"
+      ],
+      "rowCount": 20,
+      "status": "complete",
+      "limitations": [
+        "ad unit を列挙できなかった ad client (広告ユニットを持たない種別の可能性): accounts/pub-7995274743017484/adclients/partner-pub-7995274743017484: Couldn't find the ad client with name 'accounts/pub-7995274743017484/adclients/partner-pub-7995274743017484'.",
+        "slot_id を adCode から抽出できなかったユニット: 7 件 (推測で埋めていない)"
+      ]
+    }
+  }
+}

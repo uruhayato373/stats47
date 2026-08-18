@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "generated_at": "2026-08-16T11:13:25.056Z",
+  "weeks": [
+    {
+      "week_id": "2026-W16",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W16.json",
+      "generated_at": "2026-04-17T11:15:12.204Z"
+    },
+    {
+      "week_id": "2026-W17",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W17.json",
+      "generated_at": "2026-04-26T02:18:04.837Z"
+    },
+    {
+      "week_id": "2026-W19",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W19.json",
+      "generated_at": "2026-05-09T23:03:20.148Z"
+    },
+    {
+      "week_id": "2026-W20",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W20.json",
+      "generated_at": "2026-05-17T11:26:17.551Z"
+    },
+    {
+      "week_id": "2026-W21",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W21.json",
+      "generated_at": "2026-05-24T11:28:58.252Z"
+    },
+    {
+      "week_id": "2026-W22",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W22.json",
+      "generated_at": "2026-05-31T11:32:33.485Z"
+    },
+    {
+      "week_id": "2026-W23",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W23.json",
+      "generated_at": "2026-06-07T11:39:11.459Z"
+    },
+    {
+      "week_id": "2026-W24",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W24.json",
+      "generated_at": "2026-06-14T11:42:34.977Z"
+    },
+    {
+      "week_id": "2026-W25",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W25.json",
+      "generated_at": "2026-06-21T11:54:37.237Z"
+    },
+    {
+      "week_id": "2026-W26",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W26.json",
+      "generated_at": "2026-06-28T11:33:59.308Z"
+    },
+    {
+      "week_id": "2026-W27",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W27.json",
+      "generated_at": "2026-07-05T11:31:42.738Z"
+    },
+    {
+      "week_id": "2026-W28",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W28.json",
+      "generated_at": "2026-07-12T11:52:31.470Z"
+    },
+    {
+      "week_id": "2026-W29",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W29.json",
+      "generated_at": "2026-07-19T11:49:59.448Z"
+    },
+    {
+      "week_id": "2026-W30",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W30.json",
+      "generated_at": "2026-07-30T21:21:58.206Z"
+    },
+    {
+      "week_id": "2026-W31",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W31.json",
+      "generated_at": "2026-08-02T11:56:23.061Z"
+    },
+    {
+      "week_id": "2026-W32",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W32.json",
+      "generated_at": "2026-08-09T11:22:33.193Z"
+    },
+    {
+      "week_id": "2026-W33",
+      "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W33.json",
+      "generated_at": "2026-08-16T11:13:25.049Z"
+    }
+  ]
+}

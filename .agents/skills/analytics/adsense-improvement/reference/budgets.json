@@ -1,0 +1,43 @@
+{
+  "description": "AdSense 週次メトリクスの目標しきい値。observe モードで判定に使う。金額は JPY ベース。",
+  "updated_at": "2026-04-21",
+  "currency": "JPY",
+  "thresholds": {
+    "earnings_weekly": {
+      "target": 1000,
+      "warning_threshold": 500,
+      "error_threshold": 100,
+      "direction": "higher_is_better",
+      "unit": "JPY",
+      "note": "週次収益下限。目標は月次 ¥4,000 ~"
+    },
+    "page_rpm": {
+      "target": 100,
+      "warning_threshold": 50,
+      "error_threshold": 20,
+      "direction": "higher_is_better",
+      "unit": "JPY",
+      "note": "Page RPM = Earnings / PageViews * 1000"
+    },
+    "ctr_percent": {
+      "target": 1.0,
+      "warning_threshold": 0.5,
+      "error_threshold": 0.2,
+      "direction": "higher_is_better",
+      "note": "AdSense CTR。高すぎると誤クリック疑いでポリシー違反"
+    },
+    "impressions_weekly": {
+      "target": 10000,
+      "warning_threshold": 5000,
+      "error_threshold": 2000,
+      "direction": "higher_is_better"
+    },
+    "active_view_viewability_percent": {
+      "target": 70,
+      "warning_threshold": 50,
+      "error_threshold": 30,
+      "direction": "higher_is_better",
+      "note": "50% 以上ユーザーに 1 秒以上見えた広告の割合"
+    }
+  }
+}

@@ -1,0 +1,539 @@
+---
+name: knowledge
+description: 過去の失敗と学びを参照・追記する。バグ解決時や設計判断の教訓記録に使用. DB・デプロイ・API連携の作業開始時に関連エントリを確認する背景知識.
+user-invocable: false
+primary_agent: knowledge-curator
+co_agents: [strategy-advisor]
+---
+
+> Historical reference. Current skill entrypoint: `../SKILL.md`.
+
+過去の失敗と学びを参照・追記する。
+
+## 使い方
+
+- **参照**: 以下のナレッジから、現在の作業に関連するパターンがないか確認する
+- **追記**: バグ解決や設計判断の教訓があれば、このファイル末尾に以下の形式で追記する
+
+```markdown
+---
+
+## タイトル（簡潔に）
+
+**問題**: 何が起きたか
+**原因**: なぜ起きたか
+**対策**: どうすれば防げるか
+```
+
+---
+
+## tsconfig パスエイリアス
+
+**問題**: `paths` を設定しても `@/*` が解決されない。
+
+**原因**: `baseUrl` が未設定。`paths` は `baseUrl` からの相対パスで解決される。
+
+**対策**: `baseUrl: "."` と `paths: {"@/*": ["./src/*"]}` をセットで設定する。`apps/web/tsconfig.json` のパターンを参照。
+
+---
+
+## drizzle-kit generate のスナップショット衝突
+
+**問題**: `drizzle-kit generate` で `prevId collision` エラー。
+
+**原因**: 手動作成したスナップショットの `prevId` が自分自身を指していた（`0005_snapshot.json` の `prevId` が `0005` の `id` と同一）。
+
+**対策**: `drizzle/meta/*_snapshot.json` の `prevId` が前のスナップショットの `id` を正しく指しているか確認する。
+
+---
+
+## drizzle-kit push / generate の対話プロンプト
+
+**問題**: `drizzle-kit push` や `drizzle-kit generate` がカラム削除・リネーム時に対話プロンプトを出し、非対話環境（CI、Claude Code）で止まる。
+
+**対策**: 手動でマイグレーション SQL を作成し、`better-sqlite3` で直接適用する。`packages/database/drizzle/0007_articles_refactor.sql` が実例。
+
+---
+
+## seed のローカルディレクトリ統一（解決済み）
+
+**経緯**: ローカル `.local/r2/seed/` と R2 の `seeds/` で名称が不一致だった。`npm run r2:upload` でアップロードすると R2 に `seed/` キーで保存されてしまい混在した。
+
+**解決**: ローカルディレクトリを `.local/r2/seeds/` に統一。`sync-download.ts` の DEFAULT_PREFIXES も `"seeds"` に変更。現在は `r2:upload` でも `seed:push` でもどちらも R2 の `seeds/` に正しくアップロードされる。
+
+---
+
+## 企業プロキシと R2 S3 API
+
+**問題**: `@aws-sdk/client-s3` 経由の R2 アクセスが HTTP 407/503 で失敗する。
+
+**対策**: `npx wrangler r2 object put/get` で個別操作する。`/push-r2` スキルがフォールバック手順を提供。タイミングによって S3 API が通ることもある。
+
+---
+
+## MDX frontmatter の YAML クォート不正
+
+**問題**: ブログ記事の frontmatter で `title: "...「鉤括弧」..."` のように YAML 二重引用符内に別の二重引用符を含めると、YAML パーサーが途中で文字列終端と解釈して `Unexpected scalar at node end` エラーになる。
+
+**原因**: YAML の二重引用符文字列内では `"` をエスケープ (`\"`) しないと構文エラーになる。`compileMDX({ parseFrontmatter: true })` が記事コンテンツの frontmatter を再パースする際に発生。
+
+**対策**: frontmatter の値に `"` を含める場合は `\"` にエスケープするか、シングルクォート `'...'` で囲む。または値にコロン・引用符を含まない場合はクォートなしで記述する。`/write-blog-article` の品質チェックリストに追加済み。
+
+---
+
+## Bash で cd するとローカルデータのパスが解決できなくなる
+
+**問題**: `cd packages/svg-builder` 等でサブディレクトリに移動した後、`.local/r2/blog/<slug>/data/` や `.local/d1/` への相対パスが解決できず「No such file or directory」になる。
+
+**原因**: `.local/` はプロジェクトルート直下にあるため、サブディレクトリから相対パスで参照できない。Bash の作業ディレクトリは `cd` 後も維持される。
+
+**対策**: Bash コマンドで `cd` を使わない。型チェック等は `npx tsc --noEmit -p apps/web/tsconfig.json` のようにプロジェクトルートから実行する。やむを得ず `cd` する場合は同一コマンド内で `cd /c/Users/m004195/stats47 &&` で戻す。
+
+---
+
+## マイグレーションファイルのジャーナル外管理による不整合
+
+**問題**: `drizzle/` に手動で SQL ファイルを追加し、`meta/_journal.json` に登録せずに運用した結果、ジャーナルは 7 件（0000〜0006）だが実ファイルは 20 本（0000〜0020）に乖離。削除済みテーブルの CREATE/DROP も混在し、新環境構築時に適用順序が不明になった。
+
+**原因**: `drizzle-kit generate` の対話プロンプト回避のため、手書き SQL を `drizzle/` に直接配置した。ジャーナルはスナップショット 0006 で止まったまま、実際の DB スキーマだけが進んだ。
+
+**対策**: (1) `drizzle/` には `drizzle-kit generate` の生成物のみ配置する（手動 SQL は `better-sqlite3` で直接適用）。(2) マイグレーションが 10 本を超えたら `/reset-migrations` でリセットする。(3) 詳細は `packages/database/README.md` の「マイグレーション運用ルール」を参照。
+
+---
+
+## 定数→DB 移行時のデータ消失
+
+**問題**: アフィリエイトバナーを定数（`AFFILIATE_BANNERS`）から DB 管理に移行した際、定数を削除したが DB への INSERT を行わず、7件のバナーデータが消失した。
+
+**原因**: 移行コミットでスキーマ変更とコード変更のみ実施し、既存データの移行（INSERT 文やシードデータ生成）を忘れた。
+
+**対策**: 定数→DB 移行時は以下を必ず実施する: (1) 既存の定数データを INSERT 文に変換してローカル D1 に投入 (2) `--dry-run` 等で行数を確認 (3) 定数の削除は INSERT 確認後に行う。
+
+---
+
+## ranking_items / ranking_data のフォーマット不一致で本番 404・地図グレー表示
+
+**問題**: 職種別年収ランキング 40 件が本番で 404（`findRankingItem` の Zod パースエラー）。さらにコロプレス地図が全都道府県グレー表示（TopoJSON の `prefCode` とマッチしない）。過去にも家計調査系 675 件で同じ 404 が発生。
+
+**原因（2パターン）**:
+1. `latest_year` が `["2023"]`（配列）や `"2024000000"`（生コード）で保存。Zod は `{"yearCode":"...","yearName":"..."}` オブジェクトを期待。
+2. `ranking_data.area_code` が `"01"`（2桁）で保存。TopoJSON は `"01000"`（5桁）でマッチング。
+
+**根本原因**: `packages/database/scripts/populate-occupation-income.ts` が正規パイプライン（`packages/ranking/src/repositories/`）を経由せず独自に INSERT し、フォーマット規約を満たさなかった。
+
+**対策**:
+1. `latest_year` は `{"yearCode":"2023","yearName":"2023年度"}` 形式で保存（配列・文字列禁止）
+2. `available_years` は `[{"yearCode":"2023","yearName":"2023年度"},...]` 形式で保存
+3. `ranking_data.area_code` は都道府県なら `"01000"`〜`"47000"` の5桁で保存（2桁禁止）
+4. 独自 populate スクリプト作成時は `populate-port-rankings.ts` をリファレンスとし、上記フォーマットに準拠する
+5. 修正済み: `populate-occupation-income.ts`, `populate-port-rankings.ts` (歴史的記録: 旧 `/register-ranking` SKILL.md も併せて修正していたが、Phase 6.7 で skill 自体を削除し `/page-data-batch` + `/sync-metrics-cache` + TS-config に置換)
+
+---
+
+## OpenNext R2 ISR キャッシュの正しいキー構造
+
+**[廃止] ISR は 2026-03 に廃止済み（全ページ SSR 化）。このナレッジは歴史的記録として残す。**
+
+**問題**: R2 の ISR キャッシュを手動パージする際、キー構造が不明だった。
+
+**原因**: OpenNext の R2 キャッシュキーは `{prefix}/{buildId}/{sha256(pageKey)}.{cacheType}` 形式。
+
+**対策**: ISR 廃止により不要。D1 は 0.1ms で応答するため SSR で十分な性能。ISR を使うとビルド時に D1 が利用できない CI 環境でエラー状態がキャッシュされる問題があった。
+
+---
+
+## 国土数値情報 C02 港湾座標の重複
+
+**問題**: 国土数値情報 C02（港湾データ）由来の座標に6組12港の重複があり、地図上で異なる港が同じ位置に表示された。重複ペア: 宮古/大船渡、福井/敦賀、神戸/姫路、三隅/西郷、長浜/新居浜、中城湾/運天。
+
+**原因**: 元データの品質問題。同一都道府県内の複数港に同じ座標が割り当てられていた。
+
+**対策**: (1) MLIT サイバーポート（cyport）API のバース施設座標の平均値で修正。cyport に無い港は Web 調査で補完。修正スクリプト: `packages/database/scripts/import-cyport-ports.ts`。(2) 港湾データ投入・更新時は `SELECT ... FROM ports a JOIN ports b ON a.latitude = b.latitude AND a.longitude = b.longitude AND a.port_code < b.port_code` で重複座標チェックを行う。
+
+---
+
+## X 予約投稿の正しいフロー（browser-use 自動化）
+
+**問題**: browser-use で X の予約投稿ダイアログの「予約投稿ポスト」ボタンをクリックしても予約が登録されない。ダイアログは閉じるが「予約済み」タブは空のまま。
+
+**原因**: 「予約投稿ポスト」ボタンはダイアログ内で直接予約を完了するボタンではない。正しいフローは「確認する」→ コンポーザに戻る（予約日時がセットされた状態）→「予約設定」ボタンをクリック。
+
+**対策**: X 予約投稿の正しい手順:
+1. コンポーザでテキスト入力 + 画像アップロード
+2. 「ポストを予約」（カレンダーアイコン）をクリック → ダイアログ表示
+3. select 要素で日時を設定
+4. **「確認する」をクリック** → ダイアログが閉じ、コンポーザに「YYYY年M月D日(曜)の午前/午後H:MMに送信されます」が表示される
+5. **「予約設定」ボタンをクリック** → 予約完了（「予約済み」タブに表示される）
+
+**注意**: `/publish-x` SKILL.md の記述は不正確（「確認する」はクリック不要と書いてあるが、実際はクリック必須）。SKILL.md の更新が必要。
+
+---
+
+## OAuth client は Testing publish だと refresh token が 7 日で失効する（教訓・YouTube 撤退で運用終了）
+
+**問題**: OAuth 連携で `invalid_grant: Token has been expired or revoked` が複数回再発していた。
+
+**根本原因**: Google Cloud Console の OAuth client が **Testing publishing status** だと refresh token が **7 日で auto-expire** する Google 仕様。「定期的に失効する」と誤認し再認証で対症療法していた。実際は **Production publish で 6 ヶ月有効**になる。
+
+**教訓（恒常的に有効）**: OAuth 連携を増やすときは client を必ず "In production" に publish する。再び 7 日サイクルで失効する場合は publishing status が「テスト」に戻っていないか確認する（scope 変更で Testing に戻ることがある）。
+
+> 注: YouTube 連携は 2026-05 に完全撤退済み（PR #376）。当時の youtube OAuth runbook / 監視 workflow / `youtube/oauth-*` スクリプトは撤去済みのため本項からは削除した。現存する OAuth 連携は AdSense（`.claude/scripts/adsense/oauth-setup.js`）。
+
+---
+
+## OGP 画像 URL と noindex 漏れによる「クロール済み - インデックス未登録」1,453 件
+
+**問題**: GSC で「クロール済み - インデックス未登録」が 1,453 ページ繰り返し発生。主原因は (1) Next.js の opengraph-image.tsx が自動生成する `/areas/*/opengraph-image` URL が robots.txt で Disallow されておらず Google が全てクロール、(2) 市区町村ページ `cities/[cityCode]/page.tsx` に `robots: "noindex, follow"` が未設定（子ページには設定済み）。
+
+**原因**: (1) robots.ts 作成時に Next.js File Convention の自動生成ルート（opengraph-image 等）を考慮しなかった。(2) 子ページの noindex を親ページに適用する確認を怠った。
+
+**対策**: (1) robots.ts に `"/*/opengraph-image"` を全 userAgent の Disallow に追加。(2) 市区町村ページに `robots: "noindex, follow"` を追加。(3) 新規ページ作成時は `coding-standards.md` のインデックス制御チェックリストを実行。(4) `/seo-audit` に「2-7. インデックス制御チェック」を追加。
+
+---
+
+## GA4 の「既知の bot 除外」は常時オンで UI トグル無し
+
+**問題**: `/themes/population-dynamics` で PV/user = 70.5（他 /themes/* は 25 以下）、avg session 4,169 秒（≈69 分）という異常値を検知。「GA4 管理画面で『既知の bot トラフィックを除外』を有効化」と案内しようとしたが、実際には UI にそのようなトグルは存在しない。UA（旧 Google アナリティクス）の「ボットとスパイダーをすべて除外」チェックボックスは GA4 では撤廃された。
+
+**原因**: GA4 の既知 bot フィルタは IAB/ABC International Spiders and Bots List を常時参照して **自動除外する仕様**。ユーザーが手動でオン/オフを切り替える設計ではない。したがって「GA4 で bot フィルタを有効化してもらう」提案は無効。IAB リスト未登録のクローラー（独自 scraper / headless Chrome / Playwright 等）は GA4 既定では検知されない。
+
+**対策**: bot 疑いの異常値を GA4 側で除外したい場合、以下を検討する:
+1. **内部トラフィック除外フィルタ**（管理 → データストリーム → タグ設定 → 内部トラフィックを定義 → データフィルタで有効化）: 自オフィス IP を除外
+2. **Cloudflare Bot Analytics**: Cloudflare ダッシュボード → Security → Bots で該当ページの bot スコア / UA を確認。GA4 より粒度が細かい
+3. **middleware レベルでの 410**: Cloudflare `cf.botManagement.score`（enterprise）or User-Agent 文字列判定（無料）で不要 bot を弾く
+4. ユーザーに案内する際は「GA4 UI の bot フィルタ有効化」ではなく上記を提示する
+
+---
+
+## GA4 の Script strategy を lazyOnload にすると PV が約 1/10 に収縮する
+
+**問題**: 2026-03-27 の perf 最適化コミット `c17ac68d` で `GoogleAnalytics.tsx` の `<Script strategy>` を `afterInteractive` → `lazyOnload` に変更した結果、3/28 以降 GA4 の PV が前日比 1/10 に急落。GSC clicks は健全だったため計測断絶。3 週間気付かず。
+
+**原因**: `lazyOnload` は window load + idle 後に発火するため、ファーストビューで離脱するユーザーや /ranking/* 等の重いページでは gtag.js 自体が読み込まれない。`PageViewTracker` の `window.gtag?.(...)` が no-op で終わり、SPA の `send_page_view: false` 運用と相まって PV が消失する。
+
+**対策**:
+1. **GA タグだけは `afterInteractive` 必須**（perf 最適化対象から除外）。他の重いライブラリ (lucide-react / D3 / KaTeX 等) は dynamic import で良い
+2. **確認 (手動・自動ゲート未実装)**: `GoogleAnalytics.tsx` の `<Script strategy>` に `lazyOnload`/`worker` が混入していないか目視確認する (GA タグは `afterInteractive` 必須)
+3. デプロイ後の週次レビューで GSC clicks vs GA4 sessions の比率を見る (10 倍以上開いたら計測異常)
+
+---
+
+## SKILL.md からセクションを削除すると静かに機能が消える
+
+**問題**: 2026-04-04 の commit `5b8afc87` (エージェント再編 refactor) で `update-sns-metrics/SKILL.md` から Instagram / TikTok セクション + `--platform` 引数定義が一括削除された結果、4/10 以降の週次取得が YouTube のみに縮退。reference スクリプト本体は残っており、SKILL.md だけが要件を失った。誰も気付かないまま 2 週間データ欠損。
+
+**原因**: SKILL.md はエージェント実行のソース・オブ・トゥルース。本文セクションがなくなると Sonnet/Opus は「対象外」と解釈し reference スクリプトを呼ばなくなる。refactor で章を切り詰めるとき、SKILL.md の責務範囲を縮めていないか確認する仕組みが無かった。
+
+**対策**:
+1. **確認 (手動・自動ゲート未実装)**: 重要 SKILL.md の大幅編集時は必須見出し (対象プラットフォーム / 引数定義など) が揃っているかレビューで確認する
+2. SKILL.md の大幅編集 (refactor / 章削除) を伴う commit はレビュー時に「機能が消えていないか」を必ず確認
+3. 機能が消える可能性のある変更は、関連 reference ファイルへのリンク切れも検証
+
+---
+
+## GA4 の既知 bot フィルタは IAB リスト依存で独自スクレイパーを捕まえない
+
+**問題**: 2026-04 W16 で `/themes/population-dynamics` PV 141 / users 2 / avgDur 4,169s (≈69分) を検出。GA4 標準の「既知の bot 除外」を有効化したかったが、UI にトグル自体が存在しない (UA から GA4 で撤廃)。GA4 は IAB/ABC International Spiders and Bots List 登録の bot のみ常時自動除外で、独自 scraper / Playwright / headless Chrome / 個人 uptime checker は捕まえられない。
+
+**原因**: GA4 の「ボットフィルタリング」は仕様変更で UI から消え、IAB リスト常時参照のみ。リスト未登録 bot は GA4 KPI を歪め続ける (avgDur, engagementRate, top-page ranking)。
+
+**対策**:
+1. **確認 (手動・自動ゲート未実装)**: 週次 snapshot 取得後、`pv/user >= 20` または `avgDur >= 600s` の行を bot 疑いとして隔離し、KPI 集計から差し引く
+2. 隔離行は KPI 集計から差し引いた値を併記する (overview avgDur 136s も population-dynamics 1 行除けば実質 84s 付近)
+3. 確定 bot は (a) GA4 内部トラフィック除外フィルタに追加 (b) Cloudflare Dashboard → Security Events で UA 確認後 middleware で 403 化 — のいずれかで対処
+4. 「GA4 で bot フィルタを ON にする」案内は誤情報なので使わない
+
+---
+
+## X API Basic プラン (10K credit/月) は週次 fetch-x-data で枯渇する
+
+**問題**: 2026-04 後半に `/fetch-x-data` 実行で `CreditsDepleted` エラー。月初リセットまで API live 取得不可。
+
+**原因**: X API v2 Basic プランは 10,000 credit/月。`/fetch-x-data` のツイート取得 + メトリクス取得は 1 回あたり数百 credit を消費し、週次運用で月内に枯渇する。
+
+**対策**:
+1. **頻度を月 1 回に絞る**: 週次で必要な指標は `/update-sns-metrics` (browser-use ベース、API 不要) で取り、`/fetch-x-data` (API ベース) は月初の deeper analysis のみに限定
+2. **`/update-sns-metrics` と `/fetch-x-data` の役割を混同しない**: 前者はメトリクス時系列スナップショット、後者は API でしか取れない詳細ツイート分析。前者は X API クレジットに影響しない
+3. プラン変更検討時の比較: Basic Premium $200/月 (1M credit) は本プロジェクト規模では過剰。月次 fetch のままで十分
+
+---
+
+## note 記事 cover SVG で大きな数字テキストがリード文と重なる
+
+**問題**: B/C/D シリーズ note 記事の cover SVG (1280×670) で `font-size="180"` の big number を `y="250"` 前後に置くと、上の `y="110"` リード文と完全に重なる。8 ファイル一斉に同じレイアウト崩れを起こした。
+
+**原因**: SVG の `<text y="...">` は baseline 位置。CJK グリフは em-box ほぼ全体（baseline から上に `font-size × 0.88` まで）を埋める。font-size 180 のテキストは baseline が y=250 なら top が y=110 となり、同じ y=110 のリード文 (font 32) のベースラインに完全にかぶる。Latin 用の 70% cap-height 感覚で見積もると間違える。
+
+**対策**:
+1. **検証スクリプトを必ず通す**: cover SVG 生成・修正後は `node .claude/scripts/note/check-cover-overlap.cjs <svg>` で全 `<text>` 要素の bbox 重なりを自動検出する（`<g transform="translate()">` 追跡対応、4px 以下の接触は許容）。失敗時は exit 1。
+2. **geometry 規則**: CJK の `<text y=Y font-size=F>` は y 範囲 `[Y - 0.88F, Y + 0.12F]` を占有する。font 180 を中央に置く場合は上の要素との間に最低 30px の余白を確保し、下の要素は `y >= Y + 0.12F + 6` に置く。
+3. **font-size 180 は避ける**: cover で大きな数字を強調したい場合 font-size 130 までが安全（y=250 baseline で top y=136、上に y=110 リード文 font 32 があれば 22px gap）。
+4. SKILL.md の cover SVG テンプレ記述には font 180 の例を載せない（誤コピー防止）。
+
+---
+
+## GSC 「クロール済み - インデックス未登録」は sitemap から除外しただけでは減らない
+
+**問題**: 2026-04 に `INDEXABLE_AREA_CATEGORIES` を 13 → 2 に削減して sitemap から 517 URL（47 × 11）を除外したが、GSC の「クロール済み - インデックス未登録」は期待ほど減らなかった（W15 2,339 → W16 2,415、+76）。
+
+**原因**: Google のインデックスは **sitemap から消したというシグナルだけでは除去トリガーにならない**。既にインデックスに入っている URL は、Googlebot が該当 URL を再クロールして 404 / 410 / noindex を受領することで初めて除去候補になる。sitemap は「新規 URL の発見」の案内であり、既存 URL の削除指示ではない。
+
+**対策**: インデックス残骸の systematically な除去には **middleware で明示的に 410 Gone を返す**のが最も強いシグナル。404 でも除去されるが 410 の方が早い。2026-04-18 の Fix 7（`/themes/<unknown>` 410）/ Fix 8（`/areas/{pref}/<non-indexable-sub>` 410）がこの対応例。観測は `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` の T0-THEME-01 / T0-AREA-SUB-01 を参照。
+
+---
+
+## X 予約投稿が即時投稿になる事故（publish-x.ts セレクタ失敗）
+
+**問題**: 2026-04-18 Sprint 1 Day 2-5 の X 予約投稿を `publish-x.ts` で実行したところ、4 件全てが **即時投稿** されてしまった。予約日時設定（2026-04-20 21:00 / 21 12:30 / 22 12:00 / 23 19:30）は全く反映されず、実行時刻 20:40 に 4 連投された。X プロファイルの predicted 通知スパム発生、Sprint 1 の UTM 日別効果測定が崩壊。
+
+**原因**: `publish-x.ts` の予約モード検出セレクタ `[data-testid="tweetButton"] span span:text-is("予約設定")` が X UI 側の変更で一致しなくなり、切替検出に失敗。しかし当時のコードは「検出失敗でも投稿は継続」する fail-dangerous 設計で、即時投稿ボタン相当の `tweetButton` を force click していた。ログには `✅ 予約投稿完了` と出るが実態は即時投稿。
+
+**対策**:
+1. **fail-safe 化**（2026-04-18 実装）: 予約モード検出失敗時は `Escape` キーでコンポーザを閉じて投稿中止。即時投稿を絶対に発火させない。`saveScreenshot` で `.local/playwright-x-debug/` に失敗時スクショを自動保存。
+2. **複数セレクタで OR 検出**: `:has-text("予約設定")` / `:has-text("Schedule")` / `span:text-is(...)` の 4 パターンで検出、どれか 1 つ一致すれば OK。8 秒ポーリング。
+3. **`--dry-run` モード追加**: 実投稿せず予約モード到達のみ確認。初回 or セレクタ更新後は必ず `--dry-run` で事前検証する運用に変更。SKILL.md に明記。
+4. **汎用原則**: ブラウザ自動化スキルで「失敗時の挙動」をデフォルトで危険側（投稿実行）に振らない。失敗 = 中止が基本。送信系操作には明示的な成功条件（セレクタ / URL / ログ）を定義する。
+5. **運用面の追加**: DB update (`sns_posts.status=posted`) も dry-run 時はスキップ。publish 成功と DB 記録の乖離を防ぐ。
+
+**関連ファイル**:
+- `.claude/skills/sns/publish-x/publish-x.ts` L220-260（fail-safe 予約モード検出）
+- `.claude/skills/sns/publish-x/SKILL.md`（初回 `--dry-run` 必須手順）
+- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` T3-SNS-01 Day 2-5 の投稿実時刻記録
+
+---
+
+## Indexing API は `siteOwner` 権限必須（`siteFullUser` では 403）
+
+**問題**: Google Search Console でサービスアカウントを「フルユーザー」として追加しても、Indexing API (`urlNotifications.getMetadata` / `publish`) が `403 PERMISSION_DENIED: Failed to verify the URL ownership` を返す。
+
+**原因**: Indexing API は公式に「Owner-level access」を要求する（[公式ドキュメント](https://developers.google.com/search/apis/indexing-api/v3/prereqs)）。GSC の UI では「フルユーザー」「所有者」の 2 種類を選べるが、Indexing API が受け入れるのは「所有者」のみ。公式エラーメッセージが "URL ownership" という表現で紛らわしい。
+
+**対策**:
+- GSC の「設定 → ユーザーと権限」で該当 SA の行を **削除 → 再度追加（所有者として）**
+- 昇格直後 5 分〜1 日は反映待ちの場合あり
+- 疎通確認コマンド:
+  ```js
+  const sites = await sc.sites.list();  // permissionLevel が siteOwner になっていること
+  await indexing.urlNotifications.publish({
+    requestBody: { url: 'https://example.com/', type: 'URL_UPDATED' }
+  });  // 200 が返れば疎通 OK
+  ```
+
+**関連**:
+- Issue #45（stats47 の調査記録）
+- `.claude/skills/analytics/indexing-api-submit/SKILL.md`
+
+---
+
+## 「HTML 削減 = LCP 改善」は成り立たない — LCP 要素の特定が先
+
+**問題**: ランキング詳細 (`/ranking/[key]`) とテーマダッシュボード (`/themes/*`) で mobile LCP が 12 秒前後。`curl | wc -c` で本番 HTML が 1.2MB、99% が TopoJSON (`arcs` データ) だった → 「HTML を削減すれば LCP が改善するはず」と判断し、topology を Server Component fetch → Client Component prop から Server Action 経由 client fetch に変更（PR #75 / #86）。
+
+**結果（EXP-002 ADVERSE、2026-04-25）**:
+- HTML: 1,233KB → 206KB（**-83% 達成**）
+- LCP (mobile): 12,526ms → **20,326ms（+62% 悪化）**
+- PR #96 で revert
+
+**原因**: LCP 要素は**地図（Leaflet でレンダリング）**だった。topology 有無で地図描画タイミングが変わる:
+- Before (SSR prop): HTML に topology が埋め込まれている → JS hydrate 直後に Leaflet が即描画 → LCP ≈ JS load + hydrate + Leaflet init
+- After (client fetch): topology が HTML に無い → JS hydrate 後に Server Action 呼び出し → topology 取得 → Leaflet 描画 → LCP ≈ JS load + hydrate + network round-trip + Leaflet init
+
+mobile の throttled 環境では HTML 削減のメリット（~数百 ms）より追加 network call のペナルティ（2-5 秒）の方が大きい。
+
+**教訓**:
+1. **LCP 改善は LCP 要素を先に特定**してから対策を打つ。Chrome DevTools Performance / PSI の `largest-contentful-paint` audit で LCP 候補要素を確認する
+2. **HTML サイズ削減は「LCP 要素が HTML に含まれている」場合のみ効く**。動的に描画される要素（地図 / チャート / 遅延画像）が LCP 候補なら、HTML 削減は無関係または逆効果になりうる
+3. **小さな HTML + 遅い描画 < 大きな HTML + 早い描画** の場合がある
+4. **推測で変更しない**。EXP として計測前後を比較できる形で実施する
+
+**対策が必要な場合のアプローチ**:
+- LCP 要素が動的な地図/チャート → SSR されるテキスト要素（タイトル + 1位情報等）を page 上部の大きなフォントで配置し、LCP 候補を差し替える
+- 外部 API 依存の要素 → `<link rel="preload">` や DNS prefetch で RTT を短縮
+- JS 重い → bundle 分析 + dynamic import 見直し（これは HTML 削減と独立して効く）
+
+**関連**:
+- Issue #74, PR #75 (ranking 誤った LCP 改善), #86 (themes 同じ誤り), **#96 revert**
+- EXP-002 (`.claude/state/experiments.json`、ADVERSE close)
+
+
+---
+
+## Instagram Graph API 新フローの制約（2026-04-25）
+
+**問題**: Meta アプリで「Instagram でメッセージとコンテンツを管理」ユースケースを選ぶと便利そうに見えるが、`business_discovery` で他アカウント（競合分析等）を覗けない。また Content Publishing は即時投稿のみで予約不可。これらを後から気づくと設計のやり直しが発生する。
+
+**原因**: 2024 年以降 Instagram API は 2 系統に分かれた。
+- **新**: Instagram Login 直結（FB ページ不要、自アカウント自動投稿・メトリクス OK、**`business_discovery` 不可**）
+- **旧**: Facebook Login + Instagram Graph API（FB ページ必須、`business_discovery` で他ビジネスアカウント閲覧可能）
+
+さらに Content Publishing は両系統とも**即時投稿限定**。Meta Business Suite UI のみが予約 UI を提供する。
+
+**対策**:
+1. 用途に応じてアプリのユースケースを選ぶ。自アカウント運用だけなら新フローで十分、他アカウント分析が必要なら旧フローを**追加**で有効化
+2. 予約投稿は `schedule` スキル + cron で `post-instagram` を定時起動する設計にする。Content Publishing の予約機能を期待しない
+3. 長期トークンは 60 日失効。`node .claude/scripts/instagram/refresh-token.cjs` を月 1 回実行して更新（24h 以上経過した token のみ refresh 可）
+4. トークン発行には **FB ページ / Instagram プロアカウント / Instagram テスター承諾 / アプリ開発者ロール**の 4 つが同一 FB ユーザーに紐付いている必要あり。1 つでもズレると「開発者の役割が不十分です」エラーで連携不可
+
+**関連**:
+- `.claude/agents/instagram-strategist.md`
+- `.env.local` の `INSTAGRAM_ACCESS_TOKEN` / `INSTAGRAM_BUSINESS_ACCOUNT_ID`
+- memory: `project_instagram_graph_api_setup.md`
+
+
+---
+
+## middleware 仕様変更が post-deploy smoke test を破壊する cascade（2026-04-26）
+
+**問題**: Phase 9 で middleware が `/areas/{prefCode}/{non-indexable-cat}` を 410 化したところ、`scripts/smoke-test.ts` が `/areas/01000/landweather` を 200 期待していたためデプロイ後 4 回連続失敗。`Post-Deploy Smoke Test` workflow が壊れていることに気付くまでに時間がかかった。
+
+**原因**: middleware で URL の挙動を変える施策（410/301/redirect）を打つとき、本番ヘルスチェック (`scripts/smoke-test.ts`) のテストケースとの整合性をチェックする手順がデプロイフローに無い。smoke test は `expectedStatus: 200` をハードコードしており、middleware の挙動変更を反映するのを忘れる。
+
+**対策**:
+1. middleware を変更する PR では **必ず** `scripts/smoke-test.ts` の差分も同 PR に含める（影響範囲チェック）
+2. 新しい 410 ケースを追加するなら、smoke test に `expectedStatus: 410` のケースを追加して 410 化が回帰しないことも検証
+3. Phase 9 のような大改修時は `git grep -l "expectedStatus.*200" scripts/` で smoke test 系ファイルを洗い出してから着手
+
+**関連**:
+- PR #121 (Phase 9 deploy)
+- PR #125 (smoke-test cascade fix)
+- `.github/workflows/post-deploy-smoke.yml`
+
+
+---
+
+## Next.js generateSitemaps は /sitemap.xml index を自動生成しない（2026-04-26）
+
+**問題**: Next.js 15 の `generateSitemaps()` API を使うと sitemap が複数に分割され `/sitemap/<id>.xml` で配信されるが、**`/sitemap.xml` という index ファイルは自動生成されない**。robots.txt は `/sitemap.xml` を指しているため、何もしないと Google が index を見つけられず Phase 9 P2-C の sitemap 分割の効果が出ない。
+
+**原因**: 公式ドキュメントには明記されていないが、`generateSitemaps` の実装は個別の sitemap ファイルだけを生成する。Next.js の build manifest を見ると `/sitemap/[__metadata_id__]` は dynamic route として登録されるが `/sitemap.xml` 静的 route は無い。
+
+**対策**: `app/sitemap.xml/route.ts` という Route Handler を別途作成して sitemap index XML (`<sitemapindex>`) を返す。`app/sitemap.ts` (generateSitemaps) と URL は競合しない（前者は `/sitemap.xml`、後者は `/sitemap/<id>.xml` に分かれる）。
+
+```typescript
+// app/sitemap.xml/route.ts
+const SEGMENT_COUNT = 8;
+export async function GET() {
+  const items = Array.from({ length: SEGMENT_COUNT }, (_, id) =>
+    `  <sitemap><loc>${BASE_URL}/sitemap/${id}.xml</loc></sitemap>`
+  ).join("\n");
+  return new NextResponse(
+    `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${items}\n</sitemapindex>`,
+    { headers: { "Content-Type": "application/xml; charset=utf-8" } }
+  );
+}
+```
+
+`SEGMENT_COUNT` は `app/sitemap.ts` の `SEGMENTS` 配列 length と必ず一致させる。
+
+**関連**:
+- `apps/web/src/app/sitemap.ts` (generateSitemaps)
+- `apps/web/src/app/sitemap.xml/route.ts` (index)
+- PR #121 (Phase 9 P2-C)
+
+
+---
+
+## Instagram 投稿パイプラインのギャップ — caption 事前準備が必須（2026-04-26）
+
+**問題**: 「IG にメディア投稿しよう」と思っても、`/post-instagram <key>` が即座に動くケースは少ない。実行直前に caption / 動画 / 静止画のいずれかが欠けていてエラー停止することが多い。
+
+**原因**: ranking と bar-chart-race で IG メディア生成パイプラインが**分離**しており、それぞれ別スキルでの事前生成が必要:
+- **bar-chart-race**: `/bar-chart-race <key> --step captions` でキャプション生成（Claude prompt-based、CLI バッチ不可なので 1 件ずつ起動）→ `/bar-chart-race <key> --step render --platform instagram` で reel.mp4 生成
+- **ranking**: `instagram/caption.json` を別スキルで事前作成 → `apps/remotion/scripts/pipeline/render-sns-all.ts --key <key> --stills-only` で stills 生成
+- **両方とも**: 完成後に `/push-r2` で R2 にアップロードしないと `post-instagram.ts` が public URL を引けず container 作成に失敗
+
+**対策**:
+1. IG 投稿前に必ずファイル存在チェックを走らせる:
+   ```bash
+   # bar-chart-race の場合
+   for key in <keys>; do
+     [ -f .local/r2/sns/bar-chart-race/$key/instagram/reel.mp4 ] && \
+     [ -f .local/r2/sns/bar-chart-race/$key/instagram/caption.txt ] && \
+     echo "✅ $key" || echo "❌ $key"
+   done
+   ```
+2. R2 にあれば `curl -o` でローカルに pull する（render より速い）:
+   ```bash
+   curl "https://storage.stats47.jp/sns/bar-chart-race/<key>/instagram/caption.txt" -o .local/r2/sns/bar-chart-race/<key>/instagram/caption.txt
+   ```
+3. 「7 件投稿したい」が「実は 3 件しか ready」というギャップは設計レベルで起きうる。事前に rendering catalog (`/bar-chart-race --step render --dry-run`) と caption の R2 存在を両方チェックする運用にする
+
+**関連**:
+- `.claude/skills/sns/bar-chart-race/SKILL.md` (旧 generate/render/post-bar-chart-race-captions を統合)
+- `apps/remotion/scripts/pipeline/render-bar-chart-race.ts`
+- `apps/remotion/scripts/pipeline/render-sns-all.ts`
+- W18 Plan #127 のコメント (実例)
+
+
+---
+
+## Instagram 予約投稿の API 制約と代替手段の ROI（2026-04-26）
+
+**問題**: 「IG に N 件予約投稿したい」と言われたとき、Instagram Graph API には `scheduled_publish_time` パラメータが**存在しない**ため、API だけでは予約不可。代替実装は重い割に、少量の投稿には ROI が合わない。
+
+**原因**: Meta は IG Content Publishing API を**即時投稿のみ**に制限している。Facebook Page 用 Graph API には `published=false` + `scheduled_publish_time` があるが、IG 用には実装されていない（2026-04 時点）。予約 UI は Meta Business Suite UI のみが提供。
+
+**対策（代替手段の選定基準）**:
+| 代替手段 | 実装コスト | 信頼性 | 適切な投稿頻度 |
+|---|---|---|---|
+| **手動 trigger**（毎朝 `/post-instagram <key>` 実行） | ゼロ | 高（API 即時投稿） | **週 7 件以下** |
+| **launchd plist**（mac のみ、PC 起動必須） | 30-60 分 | Mac 起動依存 | 週 7 件以上、固定 mac 使用時 |
+| **GitHub Actions cron**（クラウド） | 60-90 分 + post-instagram の CI 対応 | 高 | 週 14 件以上 |
+| **Meta Business Suite UI** (browser-use) | 2-3 時間 (UI 解析) | 中（MBS UI 不安定） | あまり推奨しない |
+
+**推奨**: **週 7 件以下なら手動 trigger 一択**。30 秒/日 × 7 日 = 3.5 分/週で済むし、API の安定性を享受できる。
+
+**ROI が破綻する典型例**: 「全自動で予約投稿したい」要望に対して GitHub Actions を組むと、post-instagram の CI 対応 (caption / media を R2 から fetch する改修) で +1-2 時間追加発生。1-2 時間の自動化投資が回収できるのは**月 30 投稿以上**運用するケースのみ。
+
+**関連**:
+- memory: `project_instagram_graph_api_setup.md` (API 仕様詳細)
+- W18 Plan #127 のコメント (実際にスコープ縮小した事例)
+
+---
+
+## e-Stat backfill の DELETE+INSERT で他ソース由来年度が喪失する
+
+**問題**: 2026-05-27、`marriages-per-total-population` / `divorces-per-total-population` を e-Stat から backfill したところ、D1 の年度が 50年 → 48年に減少。2023, 2024 の最新年度データが消えた。
+
+**原因**: `backfill-stats-prefecture.cjs` の実装が **DELETE all + INSERT** 方式だったため。e-Stat SSDS (`statsDataId=0000010201`) は 2022 年までしか公開していないが、D1 の元データは別ソース (おそらく厚労省人口動態の月次集計を直接取り込み or 別 statsDataId) から来た 2023/2024 を含んでいた。DELETE+INSERT で他ソース由来の年度を巻き添えに消した。
+
+**対策**:
+1. **新規バックフィルは UPSERT 方式** で書く (歴史的記録: Phase 6 以前は D1 stats_prefecture へ `INSERT ON CONFLICT(metric_key, area_code, year_code) DO UPDATE`)
+   - 他ソース由来の年度を保全できる
+   - Phase 6/7 以降は R2 (`app/stats/<metric>/values.json`) が観測値 SSOT のため、UPSERT は `/page-data-batch` 内で実施 (merge ロジック)
+2. **DELETE が必要な場合は、対象 metric の年度別データソースを事前確認**
+   - Phase 5 以前: `SELECT DISTINCT year_code, source_id FROM stats_prefecture WHERE metric_key = ?`
+   - Phase 6/7 以降: R2 `app/stats/<metric>/values.json` を fetch → rows から DISTINCT yearCode を抽出
+   - source_id がバラバラなら DELETE は危険
+3. **リカバリ手順**: R2 (`app/stats/<metric>/values.json` または旧 `app/ranking/<key>/values.json`) には観測値が残っている。新規 ingestion は `/page-data-batch --metric <key>` で再投入
+4. **year_code 形式の正規化忘れに注意**: e-Stat は YYYYMM00 形式 ("1975100000")、R2 stats は YYYY 形式 ("1975")。混在すると重複行を作る。`/page-data-batch` 内で `SUBSTR(year_code, 1, 4)` 正規化する
+
+**関連**:
+- `.claude/scripts/estat/backfill-stats-prefecture.cjs` (要 UPSERT 化リファクタ)
+- `.claude/scripts/estat/restore-from-r2-cache.cjs` (UPSERT 実例)
+- `docs/01_技術設計/06_自動化インベントリ.md` 手動運用ツールセクション
+- memory: `project_estat_backfill_lessons.md` (本件 + e-Stat 全年度取得規約)
+
+---
+
+## ブログ SVG データ系譜消失（209枚/34%）— 不変条件の後付けが生む grandfathered 負債
+
+**問題**: ブログ SVG 612 枚中 209 枚（34%）が元データ（`data/<name>.json` + `.source.json`）を失い「絵だけ」になり、再生成も出典追跡も不能になった。特に**派生（合成スコア・構成比・男女差・PPP調整）/ 非SSOT（家計調査の品目別・per-nationality）チャート 21 枚は永久損失**（元データが無いと、絵から値を読むのは捏造になり禁止のため復元不能）。
+
+**原因**:
+1. チャート生成が**記事ごとの散在インライン生成スクリプト**（+ `article.md` 内インライン `<svg>`）で行われ、各自が独自命名・出力。**「1画像=1データ+1出典」の不変条件が無かった**。
+2. 生成器が `source.json` を自動出力せず、`quality-gate` も 3 点セットを検査しなかった → データ永続化が「保証」でなく「偶然」。
+3. **チャートデータが git 上に住処を持たなかった**（`article.md` は git SSOT だが `data/*.json` は R2 派生物扱い）。生成時に書かれない / basename ドリフト / インライン生成器がメモリ内計算で SVG のみ吐出、で復元元が消えても git 履歴に残らない。
+4. **最深（体系）**: ガバナンス（不変条件・ゲート・ツール）が**後付け（2026-06-20）**で導入され、それ以前の生成物が全て grandfathered 負債化＝「**先に出荷し後でガバナンス**」。
+
+**対策**:
+1. **生成時ゲートで新規再発を停止（実装済）**: `quality-gate.mjs` が各 `data/*.svg` に `.json` + `.source.json` が揃わないと **blocker**（2026-06-20 昇格）。生成器 `generate-article-charts.ts` が SVG とセットで `source.json` を必ず出力（`writeChartSourceIfMissing`）。`build-lineage-queue.mjs` が系譜状態の真実源。
+2. **過去負債は既存ツールで計画消化**: `restore-{ranking,scatter,findings}-from-svg.mjs`（旧SVG表示値で指標を**特定**→SSOT を相対2%照合 ≥0.95→**SSOTから再生成**。絵から逆復元しない＝捏造防止）。手法 SSOT: `.claude/state/blog/neither-restore-method.md`（rank誤抽出・スケール差・派生・命名ドリフトの落とし穴も網羅）。所有: `chart-author` agent。
+3. **派生/非SSOT チャートは元データ永続が必須**（合成スコア等は失うと復元不能）。
+4. **教訓（横断パターン）**: component スパゲッティと同根＝**コードベースの進化速度 > ガードレールの整備速度**。対策は「ガバナンスを足す」でなく **①不変条件を機械ゲートで早期に固定する ②溜まった負債を既存ツールで計画消化する**。「作る前に既存（ツール・ゲート・ルール）を確認する」を徹底（本件でも復元ツールは既存だった）。
+
+**関連**:
+- `.claude/rules/blog-data-schema.md` §1.5/1.6/1.7（3点セット・復元キュー・再発防止の正典）
+- `.claude/scripts/blog/quality-gate.mjs`（系譜 gate L350-360）/ `generate-article-charts.ts`（source.json 自動出力）
+- `.claude/state/blog/{svg-lineage-queue.json,neither-restore-method.md}`
+- `docs/01_技術設計/04_デザインシステム.md` と `.claude/todo/backlog.md` の `UI-CONSOLIDATION-RESIDUAL`

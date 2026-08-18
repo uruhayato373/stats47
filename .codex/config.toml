@@ -1,0 +1,23 @@
+[mcp_servers.chrome-devtools]
+command = "npx"
+args = [
+    "-y",
+    "chrome-devtools-mcp@latest",
+]
+
+[mcp_servers.cloudflare-graphql]
+url = "https://graphql.mcp.cloudflare.com/mcp"
+
+[mcp_servers.cloudflare-observability]
+url = "https://observability.mcp.cloudflare.com/mcp"
+
+[mcp_servers.seo-observability]
+command = "node"
+args = [".claude/scripts/search-growth/mcp/server.mjs"]
+
+[mcp_servers.shadcn]
+command = "npx"
+args = [
+    "shadcn@latest",
+    "mcp",
+]

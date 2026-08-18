@@ -60,6 +60,26 @@ test("SHA-256完全同一の重複画像を検出する", async (t) => {
   assert.ok(codes.includes("DUPLICATE_IMAGE"));
 });
 
+test("symlinkによる意図的な参照は重複として検出しない", async (t) => {
+  const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const png = await sharp({ create: { width: 8, height: 8, channels: 3, background: "purple" } }).png().toBuffer();
+  fs.writeFileSync(path.join(f.root, "apps/web/public/real.png"), png);
+  fs.symlinkSync("real.png", path.join(f.root, "apps/web/public/mirror.png"));
+  const codes = JSON.parse(run(f).stdout).newFindings.map((x) => x.code);
+  assert.ok(!codes.includes("DUPLICATE_IMAGE"));
+});
+
+test("symlinkが混在しても本物の重複は引き続き検出する", async (t) => {
+  const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const png = await sharp({ create: { width: 8, height: 8, channels: 3, background: "orange" } }).png().toBuffer();
+  fs.writeFileSync(path.join(f.root, "apps/web/public/real.png"), png);
+  fs.writeFileSync(path.join(f.root, "apps/web/public/copy.png"), png);
+  fs.symlinkSync("real.png", path.join(f.root, "apps/web/public/mirror.png"));
+  const findings = JSON.parse(run(f).stdout).newFindings.filter((x) => x.code === "DUPLICATE_IMAGE");
+  assert.equal(findings.length, 1, JSON.stringify(findings));
+  assert.notEqual(findings[0].file, "apps/web/public/mirror.png");
+});
+
 test("未参照画像はwarningでblockしない", async (t) => {
   const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
   fs.mkdirSync(path.join(f.root, "docs/assets"), { recursive: true });
