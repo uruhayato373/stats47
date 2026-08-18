@@ -11,7 +11,13 @@
 const assert = require('node:assert/strict');
 const test = require('node:test');
 
-const { verifyRemovals, verifyChangedPaths, diffEntryIds } = require('../verify-core.cjs');
+const {
+  verifyRemovals,
+  verifyChangedPaths,
+  diffEntryIds,
+  ALLOWED_PATH_PATTERNS,
+  FORBIDDEN_PATH_PATTERNS,
+} = require('../verify-core.cjs');
 const { emptyLedger, normalizeLedger, recordAttempt } = require('../ledger-core.cjs');
 
 const AT = '2026-08-17T00:00:00.000Z';
@@ -237,4 +243,46 @@ test('★秘密ファイルと許可外パスは弾く', () => {
   assert.ok(paths.includes('.env.local'));
   assert.ok(paths.includes('apps/web/.env'));
   assert.ok(paths.includes('README.md'), '許可リストに無いものは通さない');
+});
+
+// ── パス契約が移設に追従しているか (2026-08-18 の docs/todo → .claude/todo 移設で追加) ──
+
+test('★04 改善バックログは「禁止パス」として弾く (improvement-triage の排他 write)', () => {
+  // reason まで固定するのが要点。移設で regex を直し忘れると、04 は ALLOWED の
+  // どれにも当たらず「許可パス外」で落ちる — fail はするので気づけるが、
+  // 「排他 writer 契約を守っている」という契約が「たまたま許可リストに無い」に
+  // すり替わる。ここが緩むと 04 を許可リストに足した瞬間に無音で書けてしまう。
+  const r = verifyChangedPaths(['.claude/todo/04_改善バックログ.md']);
+  assert.equal(r.ok, false);
+  assert.equal(r.violations.length, 1);
+  assert.match(r.violations[0].reason, /禁止パス/, '「許可パス外」ではなく「禁止パス」で弾くこと');
+});
+
+test('★todo 系の path pattern が実在ファイルに当たる (移設で更新し忘れた regex を検出)', () => {
+  // 「どのファイルにも当たらない regex」は、静かに無効化された安全装置と同じ。
+  // 将来また台帳を移したときに更新漏れを red にするための生存性テスト。
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const ROOT = path.resolve(__dirname, '..', '..', '..', '..');
+
+  const todoPatterns = [...ALLOWED_PATH_PATTERNS, ...FORBIDDEN_PATH_PATTERNS].filter((re) =>
+    /todo/.test(re.source),
+  );
+  assert.equal(todoPatterns.length, 4, 'ALLOWED 3 (01/05/06) + FORBIDDEN 1 (04)');
+
+  // regex の literal prefix (^ と正規表現エスケープを外したもの) を実パスとして解決する
+  const dirs = new Set();
+  for (const re of todoPatterns) {
+    // regex の literal prefix を実パスに戻す: エスケープ用の \ を落とし、先頭の ^ を外す
+    const unescaped = re.source.split('\\').join('');
+    const literal = unescaped.startsWith('^') ? unescaped.slice(1) : unescaped;
+    const dir = path.dirname(literal); // 例 .claude/todo/05_ → .claude/todo
+    dirs.add(dir);
+    const prefix = path.basename(literal); // 例 05_
+    const abs = path.join(ROOT, dir);
+    assert.ok(fs.existsSync(abs), `${dir} が存在しない = regex が実体を指していない`);
+    const hit = fs.readdirSync(abs).filter((f) => f.startsWith(prefix));
+    assert.ok(hit.length > 0, `${dir}/${prefix}* に該当ファイルが無い = 移設で更新し損ねた regex`);
+  }
+  assert.equal(dirs.size, 1, 'todo 系 regex が複数ディレクトリに散らばっていない');
 });
