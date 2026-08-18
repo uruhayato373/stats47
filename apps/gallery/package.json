@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 127.0.0.1 -p ${PORT:-4747}",
+    "dev": "node scripts/run-next.mjs dev",
     "build": "next build",
-    "start": "next start -H 127.0.0.1 -p ${PORT:-4747}",
+    "start": "node scripts/run-next.mjs start",
     "type-check": "tsc --noEmit --skipLibCheck",
     "test": "vitest run",
     "test:e2e": "playwright test"
