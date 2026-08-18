@@ -6,8 +6,8 @@ import "server-only";
  * これらは ESM・__dirname 非依存の純関数で、CI 静的ギャラリー (build-image-gallery.mjs /
  * build-svg-gallery-tabbed.mjs) と共用のため削除・変更禁止。
  *
- * apps/gallery/lib/server から monorepo root は 4 階層上 ("../../../.."):
- *   apps/gallery/lib/server/collectors.ts → apps → gallery → lib → server の逆で
+ * apps/admin/lib/server から monorepo root は 4 階層上 ("../../../.."):
+ *   apps/admin/lib/server/collectors.ts → apps → gallery → lib → server の逆で
  *   ../ ×4 で monorepo root。そこから .claude/scripts/lib/*.mjs を参照する。
  *
  * まず相対静的 import を試す (ambient .d.ts で型付け)。webpack が .mjs 取り込みで失敗する

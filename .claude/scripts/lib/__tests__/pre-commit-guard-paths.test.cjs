@@ -162,14 +162,14 @@ test('image-pipeline ゲートの trigger に管理画面の publisher が含ま
 // ── ゲート自体の検証 (全 PASS が「何も見ていない」と区別できるように) ──────
 
 test('[mutation] 存在しないパスを trigger に混ぜると検出する', () => {
-  const shell = fs.readFileSync(SHELL, 'utf8').replace(
-    'apps/gallery/lib/server/',
-    'apps/nowhere/lib/server/',
-  );
-  const missing = collectGuardPaths(shell).filter(
-    (p) => !(p in ALLOWED_ABSENT) && !fs.existsSync(path.join(ROOT, p)),
-  );
-  assert.ok(missing.length > 0, '不在パスを見逃した = このテストは無意味');
+  // ★shell の文字列を置換する形で変異させない。抽出パスは入れ子の交替から組み立てるので
+  //   原文に連続して現れず、置換が no-op になって「検出できた」と誤って緑になる
+  //   (2026-08-18 に実際に踏んだ)。合成 regex を同じ抽出経路へ通して判定する。
+  const synthetic = '^apps/nowhere/lib/server/(actions|buzz-map-actions)\\.ts$';
+  const paths = concretePaths(expandAlternations(synthetic));
+  assert.equal(paths.length, 2, '交替が展開されていない');
+  const missing = paths.filter((p) => !fs.existsSync(path.join(ROOT, p)));
+  assert.equal(missing.length, 2, '不在パスを見逃した = このテストは無意味');
 });
 
 test('[mutation] 交替 (a|b) の片側だけが壊れても検出する', () => {

@@ -3,7 +3,7 @@ import path from "node:path";
 import { defineConfig } from "vitest/config";
 
 /**
- * apps/gallery の unit + route integration テスト設定。
+ * apps/admin の unit + route integration テスト設定。
  * - node 環境 (Route Handler / server module は Web 標準 API のみ使う)。
  * - server-only / next/server は vitest.shims.ts で代替 (dev server 不要でテスト)。
  * - `@` は gallery ルート (tsconfig の `@/*` → `./*` と一致)。

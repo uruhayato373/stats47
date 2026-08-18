@@ -2,7 +2,7 @@
  * Ambient 型宣言: 共有 collector (.claude/scripts/lib/*.mjs) の必要 export のみ型付け。
  * これらは ESM・__dirname 非依存の純関数で、削除禁止 (CI 静的ギャラリーと共用)。
  *
- * import 側 (collectors.ts) は projectRoot 相対 (apps/gallery/lib/server → root は "../../../..")
+ * import 側 (collectors.ts) は projectRoot 相対 (apps/admin/lib/server → root は "../../../..")
  * の 4 階層上を参照する。パスは相対 import と一致させる。
  */
 

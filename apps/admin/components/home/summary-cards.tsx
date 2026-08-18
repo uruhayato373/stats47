@@ -35,7 +35,7 @@ export function SummaryCards() {
       .catch((e: unknown) => {
         const message =
           e instanceof ApiError
-            ? `サマリ取得失敗: ${e.message}。npm run dev --workspace=apps/gallery を起動してください`
+            ? `サマリ取得失敗: ${e.message}。npm run dev --workspace=apps/admin を起動してください`
             : e instanceof Error
               ? e.message
               : String(e);

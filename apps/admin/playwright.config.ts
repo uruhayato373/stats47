@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 /**
- * Playwright 設定 (apps/gallery E2E 専用)。
+ * Playwright 設定 (apps/admin E2E 専用)。
  * apps/web/playwright.config.ts を参考に、gallery 専用ポート (47470) で dev server を起動する。
  *
  * @see https://playwright.dev/docs/test-configuration

@@ -28,6 +28,6 @@ export default defineWorkspace([
   'packages/visualization/vitest.config.ts',
 
   // --- apps ---
-  'apps/gallery/vitest.config.ts',
+  'apps/admin/vitest.config.ts',
   'apps/web/vitest.config.ts',
 ]);

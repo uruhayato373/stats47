@@ -1,4 +1,4 @@
-# apps/gallery — 統合メディアコンソール (localhost 専用)
+# apps/admin — 統合メディアコンソール (localhost 専用)
 
 stats47 のローカル統合メディアコンソール。SNS 投稿/予約・画像資産の欠落チェック/再生成・
 ブログ SVG カタログ・プロジェクト現況を 1 画面で横断管理する。
@@ -9,8 +9,8 @@ stats47 のローカル統合メディアコンソール。SNS 投稿/予約・�
 ## 起動
 
 ```bash
-npm run gallery              # http://127.0.0.1:4747/ (root から。Ctrl-C で停止)
-PORT=5000 npm run gallery    # ポート上書き
+npm run admin              # http://127.0.0.1:4747/ (root から。Ctrl-C で停止)
+PORT=5000 npm run admin    # ポート上書き
 ```
 
 - **bind は 127.0.0.1 固定** (`next dev -H 127.0.0.1`)。0.0.0.0 / LAN に公開しない。
@@ -67,8 +67,8 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 ## 検証
 
 ```bash
-npm run type-check --workspace=apps/gallery
-npm run test --workspace=apps/gallery        # Vitest unit + integration (実 SSOT に触れない fixture 方式)
-npm run build --workspace=apps/gallery
-cd apps/gallery && npx playwright test       # E2E (dev server を PORT=47470 で自動起動、破壊的操作は mock)
+npm run type-check --workspace=apps/admin
+npm run test --workspace=apps/admin        # Vitest unit + integration (実 SSOT に触れない fixture 方式)
+npm run build --workspace=apps/admin
+cd apps/admin && npx playwright test       # E2E (dev server を PORT=47470 で自動起動、破壊的操作は mock)
 ```

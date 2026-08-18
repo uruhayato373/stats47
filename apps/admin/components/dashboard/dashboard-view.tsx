@@ -41,7 +41,7 @@ export function DashboardView() {
       .catch((e: unknown) => {
         const message =
           e instanceof ApiError
-            ? `取得失敗: ${e.message}。npm run gallery を起動してください`
+            ? `取得失敗: ${e.message}。npm run admin を起動してください`
             : e instanceof Error
               ? e.message
               : String(e);

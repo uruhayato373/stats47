@@ -37,7 +37,7 @@ export async function apiGet<T>(path: string): Promise<T> {
   try {
     res = await fetch(path);
   } catch {
-    throw new ApiError("サーバーに接続できません。npm run dev --workspace=apps/gallery を起動してください", 0);
+    throw new ApiError("サーバーに接続できません。npm run dev --workspace=apps/admin を起動してください", 0);
   }
   const body = await parseJson(res);
   if (!res.ok) throw new ApiError(errorMessage(body, res.status), res.status);
@@ -58,7 +58,7 @@ export async function apiSend<T>(
       body: body !== undefined ? JSON.stringify(body) : undefined,
     });
   } catch {
-    throw new ApiError("サーバーに接続できません。npm run dev --workspace=apps/gallery を起動してください", 0);
+    throw new ApiError("サーバーに接続できません。npm run dev --workspace=apps/admin を起動してください", 0);
   }
   const parsed = await parseJson(res);
   if (!res.ok) throw new ApiError(errorMessage(parsed, res.status), res.status);

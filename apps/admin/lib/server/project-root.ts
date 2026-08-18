@@ -6,7 +6,7 @@ import path from "node:path";
 /**
  * モノレポルートの解決 (旧 server.mjs の PROJECT_ROOT = path.resolve(__dirname, "../../..") 相当)。
  *
- * apps/gallery は monorepo の 2 階層下 (apps/gallery/) なので、既定は cwd から `../..`。
+ * apps/admin は monorepo の 2 階層下 (apps/admin/) なので、既定は cwd から `../..`。
  * STATS47_PROJECT_ROOT が指定されていれば優先する (Next.js の cwd が変わっても効くように)。
  * <root>/package.json の name === "stats47-monorepo" を検証し、違えば throw (誤ったルートで
  * .claude/state を破壊しないため)。結果はモジュール変数にキャッシュ。
