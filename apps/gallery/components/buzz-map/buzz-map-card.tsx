@@ -9,12 +9,12 @@ import { MediaPreview } from "@/components/media-preview";
 import type { BuzzMapEntryDTO } from "@/lib/contracts/types";
 
 const READINESS_BADGE: Record<string, string> = {
-  live: "border-green-500/50 bg-green-500/10 text-green-400",
-  ready: "border-green-500/50 bg-green-500/10 text-green-400",
-  "review-passed": "border-green-500/50 bg-green-500/10 text-green-400",
-  "needs-content": "border-amber-500/50 bg-amber-500/10 text-amber-400",
-  "publish-pending": "border-amber-500/50 bg-amber-500/10 text-amber-400",
-  blocked: "border-red-500/50 bg-red-500/10 text-red-400",
+  live: "border-green-500/50 bg-green-500/10 text-console-good",
+  ready: "border-green-500/50 bg-green-500/10 text-console-good",
+  "review-passed": "border-green-500/50 bg-green-500/10 text-console-good",
+  "needs-content": "border-amber-500/50 bg-amber-500/10 text-console-warn",
+  "publish-pending": "border-amber-500/50 bg-amber-500/10 text-console-warn",
+  blocked: "border-red-500/50 bg-red-500/10 text-console-bad",
 };
 
 function readinessBadgeClass(r: string | undefined) {
@@ -127,10 +127,10 @@ export function BuzzMapCard({
             className={cn(
               "text-[10px]",
               entry.commercialUse === "allowed"
-                ? "border-green-500/50 text-green-400"
+                ? "border-green-500/50 text-console-good"
                 : entry.commercialUse === "blocked"
-                  ? "border-red-500/50 text-red-400"
-                  : "border-amber-500/50 text-amber-400",
+                  ? "border-red-500/50 text-console-bad"
+                  : "border-amber-500/50 text-console-warn",
             )}
           >
             license: {entry.commercialUse || "-"}
@@ -141,7 +141,7 @@ export function BuzzMapCard({
               className={cn(
                 "text-[10px]",
                 entry.sensitivity === "high"
-                  ? "border-red-500/50 text-red-400"
+                  ? "border-red-500/50 text-console-bad"
                   : "border-console-border text-console-muted",
               )}
             >
@@ -153,8 +153,8 @@ export function BuzzMapCard({
             className={cn(
               "text-[10px]",
               entry.eligible
-                ? "border-green-500/50 text-green-400"
-                : "border-red-500/50 text-red-400",
+                ? "border-green-500/50 text-console-good"
+                : "border-red-500/50 text-console-bad",
             )}
           >
             {entry.eligible ? "eligible" : "not-eligible"}
@@ -162,7 +162,7 @@ export function BuzzMapCard({
         </div>
 
         {entry.gateReasons && entry.gateReasons.length > 0 ? (
-          <div className="rounded-md bg-red-950/40 px-2 py-1 text-[11px] text-red-300">
+          <div className="rounded-md bg-console-bad/10 px-2 py-1 text-[11px] text-console-bad">
             {entry.gateReasons.join(" / ")}
           </div>
         ) : null}
@@ -351,7 +351,7 @@ export function BuzzMapCard({
           </Button>
         </div>
 
-        {error ? <p className="text-[11px] text-red-400">{error}</p> : null}
+        {error ? <p className="text-[11px] text-console-bad">{error}</p> : null}
       </div>
     </div>
   );

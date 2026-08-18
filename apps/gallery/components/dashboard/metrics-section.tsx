@@ -76,7 +76,7 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
           value={`${(Number(last.ctr) * 100).toFixed(2)}%`}
           label="GSC CTR"
           sparkValues={g.map((r) => Number(r.ctr))}
-          sparkColor="#4ade80"
+          sparkColor="rgb(var(--console-good))"
         />,
       );
       cards.push(
@@ -85,7 +85,7 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
           value={String(last.position)}
           label="GSC 平均掲載順位"
           sparkValues={g.map((r) => Number(r.position))}
-          sparkColor="#fbbf24"
+          sparkColor="rgb(var(--console-warn))"
         />,
       );
     } else {
@@ -123,7 +123,7 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
           label={`AdSense/週 (${last.week})`}
           sub={`RPM ¥${last.rpm}`}
           sparkValues={ad.map((r) => Number(r.earnings))}
-          sparkColor="#4ade80"
+          sparkColor="rgb(var(--console-good))"
         />,
       );
     }
@@ -152,7 +152,7 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
   }
 
   if (cards.length === 0) {
-    return <p className="text-sm text-red-400">メトリクスの取得に失敗</p>;
+    return <p className="text-sm text-console-bad">メトリクスの取得に失敗</p>;
   }
 
   return <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">{cards}</div>;

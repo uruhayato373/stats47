@@ -72,9 +72,9 @@ export function QueuesSection(d: QueuesData) {
       >
         <ProgressBar
           parts={[
-            { n: s.done, color: "#4ade80" },
-            { n: s.inProgress, color: "#38bdf8" },
-            { n: s.pending, color: "#475569" },
+            { n: s.done, color: "rgb(var(--console-good))" },
+            { n: s.inProgress, color: "rgb(var(--console-info))" },
+            { n: s.pending, color: "rgb(var(--console-neutral))" },
           ]}
         />
         <div className="text-[12px] text-console-muted">
@@ -120,8 +120,8 @@ export function QueuesSection(d: QueuesData) {
       <QueueCard key="ai-content" title="🤖 ランキング ai-content" fresh={(d.aiContent.generatedAt ?? "").slice(0, 10)}>
         <ProgressBar
           parts={[
-            { n: s.done, color: "#4ade80" },
-            { n: s.needsRegen, color: "#475569" },
+            { n: s.done, color: "rgb(var(--console-good))" },
+            { n: s.needsRegen, color: "rgb(var(--console-neutral))" },
           ]}
         />
         <div className="text-[12px] text-console-muted">
@@ -171,7 +171,7 @@ export function QueuesSection(d: QueuesData) {
         {arch.length > 0 ? (
           <div className="mt-1.5 flex flex-wrap gap-1.5">
             {arch.map(([k, v]) => (
-              <span key={k} className="rounded-full border border-sky-400 px-2 py-0.5 text-[10px] text-sky-400">
+              <span key={k} className="rounded-full border border-sky-400 px-2 py-0.5 text-[10px] text-console-info">
                 {k}: {v}
               </span>
             ))}
@@ -225,7 +225,7 @@ export function QueuesSection(d: QueuesData) {
           </div>
         ) : null}
         {warnEmpty ? (
-          <div className="mt-1.5 text-[12px] text-amber-400">⚠ 予約/draft が 0 — X 量産 (/post-x-batch) 未稼働</div>
+          <div className="mt-1.5 text-[12px] text-console-warn">⚠ 予約/draft が 0 — X 量産 (/post-x-batch) 未稼働</div>
         ) : null}
       </QueueCard>,
     );
@@ -274,7 +274,7 @@ export function QueuesSection(d: QueuesData) {
   }
 
   if (cards.length === 0) {
-    return <p className="text-sm text-red-400">進捗データの取得に失敗</p>;
+    return <p className="text-sm text-console-bad">進捗データの取得に失敗</p>;
   }
 
   return <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{cards}</div>;

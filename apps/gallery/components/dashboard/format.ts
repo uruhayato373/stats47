@@ -43,17 +43,19 @@ export function wow<T extends Record<string, unknown>>(rows: T[] | undefined, ke
   return { pct, up: pct >= 0 };
 }
 
+// ★色はテーマ追従トークンで持つ (Tailwind の *-400 は暗地専用の淡さで、
+//   ライト地では白に溶ける)。ダーク時の実値は従来の *-400 と同じ hex。
 const STATUS_BADGE_CLASS: Record<string, string> = {
-  "effect/full": "text-emerald-400 border-emerald-400",
-  "effect/partial": "text-teal-400 border-teal-400",
-  "effect/none": "text-red-400 border-red-400",
-  "effect/adverse": "text-red-400 border-red-400",
-  "effect/pending": "text-sky-400 border-sky-400",
+  "effect/full": "text-console-good border-console-good",
+  "effect/partial": "text-console-info border-console-info",
+  "effect/none": "text-console-bad border-console-bad",
+  "effect/adverse": "text-console-bad border-console-bad",
+  "effect/pending": "text-console-info border-console-info",
   "effect/n-a": "text-console-muted border-console-border",
-  pending: "text-amber-400 border-amber-400",
-  done: "text-emerald-400 border-emerald-400",
-  "in-progress": "text-sky-400 border-sky-400",
-  proposed: "text-amber-400 border-amber-400",
+  pending: "text-console-warn border-console-warn",
+  done: "text-console-good border-console-good",
+  "in-progress": "text-console-info border-console-info",
+  proposed: "text-console-warn border-console-warn",
 };
 
 export function statusBadgeClass(status: string): string {

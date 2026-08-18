@@ -21,7 +21,7 @@ export function ErrorState({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-wrap items-center gap-3 text-sm text-red-400", className)}>
+    <div className={cn("flex flex-wrap items-center gap-3 text-sm text-console-bad", className)}>
       <span>{message}</span>
       {onRetry ? (
         <button

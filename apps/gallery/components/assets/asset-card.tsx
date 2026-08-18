@@ -96,11 +96,11 @@ export function AssetCard({
           </a>
         ) : null}
         {checkState === "missing" ? (
-          <span className="rounded bg-red-900/60 px-1.5 py-0.5 text-[10px] text-red-200">
+          <span className="rounded bg-console-bad/15 px-1.5 py-0.5 text-[10px] text-console-bad">
             ✗ 欠落
           </span>
         ) : checkState === "ok" ? (
-          <span className="rounded bg-green-900/60 px-1.5 py-0.5 text-[10px] text-green-200">
+          <span className="rounded bg-console-good/15 px-1.5 py-0.5 text-[10px] text-console-good">
             ✓
           </span>
         ) : null}

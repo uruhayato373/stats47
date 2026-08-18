@@ -14,7 +14,7 @@ export interface StrategyData {
 /** 旧 dashboard.html renderStrategy() の移植。STP ポジショニング・ターゲティング判定・提言反映状況。 */
 export function StrategySection({ strategy }: { strategy: Wrapped<StrategyData> }) {
   if (hasError(strategy)) {
-    return <p className="text-sm text-red-400">取得失敗: {strategy.error}</p>;
+    return <p className="text-sm text-console-bad">取得失敗: {strategy.error}</p>;
   }
 
   return (

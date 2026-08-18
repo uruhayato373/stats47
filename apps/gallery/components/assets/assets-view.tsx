@@ -310,10 +310,10 @@ function RegenerateDialog({
           placeholder="key1,key2 (空欄=全件)"
           className="mt-2 w-full rounded-md border border-console-border bg-console-bg px-2 py-1.5 text-sm text-console-fg placeholder:text-console-muted focus:border-console-accent focus:outline-none"
         />
-        <p className="mt-3 rounded-md border border-yellow-600/40 bg-yellow-900/20 px-3 py-2 text-xs text-yellow-200">
+        <p className="mt-3 rounded-md border border-console-warn/40 bg-console-warn/10 px-3 py-2 text-xs text-console-warn">
           再生成ジョブを起動します。生成 → R2 に push まで実行します。よろしいですか?
         </p>
-        {error ? <p className="mt-2 text-xs text-red-400">{error}</p> : null}
+        {error ? <p className="mt-2 text-xs text-console-bad">{error}</p> : null}
         <div className="mt-4 flex justify-end gap-2">
           <button
             type="button"

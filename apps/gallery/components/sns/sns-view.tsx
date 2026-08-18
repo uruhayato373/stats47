@@ -161,7 +161,7 @@ export function SnsView() {
                     className={cn(
                       "rounded-md border px-2 py-0.5 text-[11px]",
                       over
-                        ? "border-red-500/60 font-semibold text-red-400"
+                        ? "border-red-500/60 font-semibold text-console-bad"
                         : "border-console-border text-console-muted",
                     )}
                   >
@@ -194,7 +194,7 @@ export function SnsView() {
       </div>
 
       {consistencyCount > 0 ? (
-        <div className="rounded-md bg-amber-950/60 px-4 py-2 text-xs text-amber-200">
+        <div className="rounded-md bg-console-warn/15 px-4 py-2 text-xs text-console-warn">
           ⚠ IG 予約の不整合: schedule JSON のみ {consistency?.onlyInJson.length} 件 /
           posts.json のみ {consistency?.onlyInPosts.length} 件 — /api/ig-consistency
           で詳細

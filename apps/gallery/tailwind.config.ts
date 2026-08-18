@@ -10,13 +10,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // ★値は globals.css の CSS 変数を参照する (hex 直書きに戻さない)。
+        // 直書きだと light/dark の切替が効かず、チャンネル形式 + <alpha-value> で
+        // ないと bg-console-bg/95 のような透過指定が壊れる。
         console: {
-          bg: "#0b0f14",
-          card: "#121a23",
-          border: "#1f2b38",
-          fg: "#e5eef7",
-          muted: "#8aa0b5",
-          accent: "#4ba3ff",
+          bg: "rgb(var(--console-bg) / <alpha-value>)",
+          card: "rgb(var(--console-card) / <alpha-value>)",
+          border: "rgb(var(--console-border) / <alpha-value>)",
+          fg: "rgb(var(--console-fg) / <alpha-value>)",
+          muted: "rgb(var(--console-muted) / <alpha-value>)",
+          accent: "rgb(var(--console-accent) / <alpha-value>)",
+          good: "rgb(var(--console-good) / <alpha-value>)",
+          warn: "rgb(var(--console-warn) / <alpha-value>)",
+          info: "rgb(var(--console-info) / <alpha-value>)",
+          bad: "rgb(var(--console-bad) / <alpha-value>)",
+          neutral: "rgb(var(--console-neutral) / <alpha-value>)",
         },
         // shadcn トークン (@stats47/components の Button/Badge/Card/Dialog 用)。
         // 値は globals.css の CSS 変数 (console パレットへマッピング済み) を参照する。

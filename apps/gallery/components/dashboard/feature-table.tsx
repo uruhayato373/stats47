@@ -45,7 +45,7 @@ export function FeatureTable({ featureBacklog }: { featureBacklog: Wrapped<{ row
   );
 
   if (hasError(featureBacklog)) {
-    return <p className="text-sm text-red-400">取得失敗: {featureBacklog.error}</p>;
+    return <p className="text-sm text-console-bad">取得失敗: {featureBacklog.error}</p>;
   }
 
   return (

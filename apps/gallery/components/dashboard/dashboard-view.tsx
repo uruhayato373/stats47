@@ -62,7 +62,7 @@ export function DashboardView() {
           {loading ? (
             "読込中…"
           ) : error ? (
-            <span className="text-red-400">{error}</span>
+            <span className="text-console-bad">{error}</span>
           ) : data ? (
             `state/md ライブ読みの読み取り専用ミラー (60秒キャッシュ)。取得: ${data.generatedAt.replace("T", " ").slice(0, 19)} — 再読込で更新`
           ) : null}

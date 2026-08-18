@@ -44,7 +44,7 @@ function OwnerBadge({ owner }: { owner: string }) {
     );
   }
   return (
-    <span className="rounded-full border border-amber-400 px-2 py-0.5 text-[10px] text-amber-400">👤 {s}</span>
+    <span className="rounded-full border border-amber-400 px-2 py-0.5 text-[10px] text-console-warn">👤 {s}</span>
   );
 }
 
@@ -68,7 +68,7 @@ export function BacklogTable({ backlog }: { backlog: Wrapped<{ rows?: BacklogRow
   );
 
   if (hasError(backlog)) {
-    return <p className="text-sm text-red-400">取得失敗: {backlog.error}</p>;
+    return <p className="text-sm text-console-bad">取得失敗: {backlog.error}</p>;
   }
 
   return (
@@ -150,7 +150,7 @@ export function BacklogTable({ backlog }: { backlog: Wrapped<{ rows?: BacklogRow
                       {r.status}
                     </span>
                   </td>
-                  <td className={`whitespace-nowrap px-1.5 py-1 ${overdue ? "text-red-400" : ""}`}>
+                  <td className={`whitespace-nowrap px-1.5 py-1 ${overdue ? "text-console-bad" : ""}`}>
                     {r.due}
                     {overdue ? " ⚠" : ""}
                   </td>

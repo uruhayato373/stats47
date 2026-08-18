@@ -22,8 +22,8 @@ type ExtraItem = Record<string, unknown> & {
 type GalleryItem = PostDTO | ExtraItem;
 
 const STATUS_BADGE_CLASS: Record<string, string> = {
-  posted: "border-green-500/50 bg-green-500/10 text-green-400",
-  scheduled: "border-amber-500/50 bg-amber-500/10 text-amber-400",
+  posted: "border-green-500/50 bg-green-500/10 text-console-good",
+  scheduled: "border-amber-500/50 bg-amber-500/10 text-console-warn",
   draft: "border-console-accent/50 bg-console-accent/10 text-console-accent",
 };
 
@@ -338,7 +338,7 @@ function EditableBody({
         </div>
       ) : null}
 
-      {error ? <p className="text-[11px] text-red-400">{error}</p> : null}
+      {error ? <p className="text-[11px] text-console-bad">{error}</p> : null}
     </div>
   );
 }
@@ -382,7 +382,7 @@ function UnregisteredBody({
       >
         draft 登録
       </Button>
-      {error ? <p className="text-[11px] text-red-400">{error}</p> : null}
+      {error ? <p className="text-[11px] text-console-bad">{error}</p> : null}
     </div>
   );
 }

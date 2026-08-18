@@ -55,7 +55,7 @@ export function MediaPreview({
       )}
     >
       {showVariantTag ? (
-        <span className="absolute left-1.5 top-1.5 z-10 rounded bg-black/60 px-1.5 py-0.5 text-[9px] text-console-fg">
+        <span className="absolute left-1.5 top-1.5 z-10 rounded bg-black/60 px-1.5 py-0.5 text-[9px] text-white">
           {variant}
         </span>
       ) : null}
@@ -83,7 +83,7 @@ export function MediaPreview({
         />
       )}
       {current ? (
-        <span className="absolute right-1.5 top-1.5 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-console-muted">
+        <span className="absolute right-1.5 top-1.5 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-white/70">
           {current.source}
         </span>
       ) : null}

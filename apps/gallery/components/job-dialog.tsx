@@ -34,8 +34,8 @@ const STATUS_LABEL: Record<JobStatus, string> = {
 
 const STATUS_BADGE_CLASS: Record<JobStatus, string> = {
   running: "bg-console-accent/20 text-console-accent",
-  success: "bg-green-500/20 text-green-400",
-  failed: "bg-red-500/20 text-red-400",
+  success: "bg-green-500/20 text-console-good",
+  failed: "bg-red-500/20 text-console-bad",
 };
 
 /**
@@ -115,7 +115,7 @@ export function JobDialog({
         </DialogHeader>
 
         {error ? (
-          <p className="text-sm text-red-400">{error}</p>
+          <p className="text-sm text-console-bad">{error}</p>
         ) : (
           <pre
             ref={logRef}

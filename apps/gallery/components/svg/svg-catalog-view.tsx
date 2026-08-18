@@ -185,11 +185,11 @@ function SvgGrid({ items }: { items: SvgChartDTO[] }) {
               className="block h-auto w-full"
             />
           </div>
-          <figcaption className="mt-1.5 break-all text-[11px] text-slate-700">
+          <figcaption className="mt-1.5 break-all text-[11px] text-console-fg">
             <code>
               {item.slug}/{item.file}
             </code>{" "}
-            <span className="text-slate-500">{item.viewBox || "?"}</span>{" "}
+            <span className="text-console-muted">{item.viewBox || "?"}</span>{" "}
             {!item.hasViewBox ? (
               <Badge variant="destructive" className="ml-1 px-1.5 py-0 text-[10px]">
                 no viewBox
