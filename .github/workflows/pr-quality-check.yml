@@ -166,7 +166,7 @@ jobs:
       - name: 🚧 Web e-Stat Import Boundary Guard
         # 本番 apps/web の e-Stat 直呼び (値 import) を shrink-only ratchet で監視。
         # 新規の直呼びを弾く (最終形は 0 = 全ページ R2 snapshot 読み)。
-        # 正典: .claude/todo/05_機能バックログ.md の CROSS-PAGE-DATA-SSOT-01 (WP2)
+        # 正典: .claude/todo/backlog.md の CROSS-PAGE-DATA-SSOT-01 (WP2)
         run: |
           node --test .claude/scripts/lib/__tests__/check-web-estat-imports.test.cjs
           node .claude/scripts/lib/check-web-estat-imports.cjs
@@ -412,7 +412,7 @@ jobs:
           # 1 位県・値・倍率・年のいずれかを取り違えていた。
           # 既存違反は baseline に固定し、新規混入だけを止める (縮小専用ラチェット)。
           # R2 の公開 URL を読むだけ (認証不要・書き込みなし)。
-          # 規約: .claude/todo/05_機能バックログ.md SEO-META-FACTUAL-GATE-01
+          # 規約: .claude/todo/backlog.md SEO-META-FACTUAL-GATE-01
           npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new
         continue-on-error: false
 
@@ -440,7 +440,7 @@ jobs:
           # テーマ chart の期待 e-Stat 依存集合 (pyramid 34・composition/donut 展開含む) の正典は
           # collectThemeDataDependenciesWithProvenance (TS)。素の node で走る live 監査が読む
           # JSON 鏡が正典と乖離する (= 監査が古い/不完全な集合を見る) のを両方向で検知する。
-          # 正典: .claude/todo/05_機能バックログ.md の CROSS-PAGE-DATA-SSOT-01 (WP4)
+          # 正典: .claude/todo/backlog.md の CROSS-PAGE-DATA-SSOT-01 (WP4)
           npx tsx packages/data-configs/scripts/generate-theme-dependency-mirror.ts --check
         continue-on-error: false
 

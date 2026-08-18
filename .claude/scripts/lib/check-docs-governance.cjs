@@ -19,6 +19,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const backlogLib = require("./backlog-lib.cjs");
 
 const DEFAULT_ROOT =
   process.env.DOCS_GOVERNANCE_ROOT ||
@@ -502,39 +503,67 @@ function inspectRepository({
     }
   }
 
+  // カード型バックログ (v3-unified)。構文・語彙の正典は .claude/rules/todo-standards.md、
+  // パーサは backlog-lib.cjs が唯一の実装 (admin / backlog-loop と同じものを使う)。
+  // パースは寛容・リントは厳格: 未知タグキーや語彙外の値はここで error にする。
+  // 分類待ち (タグ・実行・種類の欠落) は**ファイル単位の集計 warning** に畳む —
+  // カードごとに warning を出すと移行直後に数十行が並び、週次 --fail-on-warn の
+  // 信号 (Due 超過等) が埋もれるため。
   for (const todoFile of config.todo.files.slice(1)) {
     const text = readText(path.join(root, todoFile));
-    const heading = /^### \[([A-Z0-9-]+)\][^\n]*$/gm;
-    const matches = [...text.matchAll(heading)];
-    for (let index = 0; index < matches.length; index += 1) {
-      const id = matches[index][1];
-      const start = matches[index].index + matches[index][0].length;
-      const end = matches[index + 1]?.index ?? text.length;
-      const section = text.slice(start, end);
-      todoDefinitions.push({ id, file: todoFile });
-      if (!new RegExp(config.todo.idPattern).test(id)) {
-        add("error", "DG050", todoFile, `TODO ID形式が不正: ${id}`);
+    const cards = backlogLib.parseBacklog(text);
+
+    for (const orphan of backlogLib.findOrphanHeadings(text)) {
+      add(
+        "error",
+        "DG055",
+        todoFile,
+        `tierセクション外の見出しはカードにならない (L${orphan.line}: ${orphan.title})`,
+      );
+    }
+
+    let untagged = 0;
+    let noExecutor = 0;
+    let noKind = 0;
+    let noId = 0;
+    for (const card of cards) {
+      if (card.id) {
+        todoDefinitions.push({ id: card.id, file: todoFile });
+        if (!new RegExp(config.todo.idPattern).test(card.id)) {
+          add("error", "DG050", todoFile, `TODO ID形式が不正: ${card.id}`);
+        }
+      } else {
+        noId += 1;
       }
-      const status = section.match(/^- \*\*status\*\*:\s*(.+)$/mi)?.[1]?.trim();
-      if (!status) {
-        add("error", "DG055", todoFile, `${id}にstatusがない`);
-        continue;
+      const label = card.id ?? `L${card.line} ${card.title}`;
+      for (const unknown of card.unknownKeys) {
+        add("error", "DG056", todoFile, `${label}のタグキーが語彙外: [${unknown.raw}]`);
       }
-      if (config.frontmatter.inactiveStatuses.some((value) => status.includes(value))) {
-        add("error", "DG056", todoFile, `${id}は完了・廃止状態(${status})のため削除対象`);
+      if (card.executor && !backlogLib.EXECUTORS.includes(card.executor)) {
+        add("error", "DG057", todoFile, `${label}の実行が語彙外: ${card.executor}`);
       }
-      const hasAction =
-        /^- \*\*(?:次|実行順|調査順|trigger|残り)\*\*:/mi.test(section);
-      if (!hasAction) {
-        add("error", "DG057", todoFile, `${id}に次の行動・実行順・triggerがない`);
+      if (card.kind && !backlogLib.KINDS.includes(card.kind)) {
+        add("error", "DG057", todoFile, `${label}の種類が語彙外: ${card.kind}`);
       }
-      const exemptFromCompletion = /^(?:deferred|blocked)/.test(status);
-      if (!exemptFromCompletion && !/^- \*\*完了条件\*\*:/mi.test(section)) {
-        add("warning", "DG058", todoFile, `${id}に完了条件がない`);
+      for (const category of card.unknownCategories) {
+        add("error", "DG057", todoFile, `${label}のカテゴリが語彙外: ${category}`);
       }
-      if (!/^- \*\*owner\*\*:/mi.test(section)) {
-        add("warning", "DG059", todoFile, `${id}にownerがない`);
-      }
+      if (!card.hasTagLine) untagged += 1;
+      else if (!card.executor) noExecutor += 1;
+      if (!card.kind) noKind += 1;
+    }
+
+    const pending = untagged + noExecutor;
+    if (pending > 0 || noId > 0) {
+      add(
+        "warning",
+        "DG058",
+        todoFile,
+        `分類待ち ${pending} 件 (タグ行なし ${untagged} / 実行なし ${noExecutor} / ID なし ${noId}) — todo-curator が漸次付与する`,
+      );
+    }
+    if (noKind > 0) {
+      add("warning", "DG059", todoFile, `種類なし ${noKind} 件 / 全 ${cards.length} カード`);
     }
   }
 

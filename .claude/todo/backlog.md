@@ -1,36 +1,29 @@
 ---
-title: 機能・自動化バックログ
+title: バックログ (タスクマスタ)
 type: backlog
-category: feature
-created: 2026-05-16
-updated: 2026-08-05
 status: active
-tags: [backlog, feature, automation]
+updated: 2026-08-18
 ---
 
-# 機能・自動化バックログ
+# バックログ (タスクマスタ)
 
-未完了の機能、バグ、自動化、外部反映待ちだけを置く。完了・撤退・superseded・詳細な作業プロンプトは削除し、Git履歴または各agent/skillの正典を参照する。
+> **役割**: 優先度・時期を問わず「未完了タスクの全量」を保持するマスタ。カード構文・タグ語彙の
+> 正典は `.claude/rules/todo-standards.md` (doboku-note と統一の v3-unified スキーマ)。
+> **完了したカードはセクションごと削除する** (記録は git 履歴。完了サマリを本ファイルに書かない)。
+> stats47 では backlog-loop (CI 日次) が処理するため **ID (`### [ID] タイトル`) を必ず付ける**。
+> 行削除は gate 証拠が ledger に要る (`.claude/rules/backlog-loop.md`)。
 
-## P0 緊急
+各カードは `### [ID] タスク名` の直下に `タグ:` 行を置く (機械読取り):
 
-### [GIT-HISTORY-SECRET-PURGE-01] Git履歴のAPIキーを扱う方針決定
+```
+タグ: [カテゴリ] [種類:X] [実行:X] [検証:cmd] [起票:YYYY-MM-DD] [期日:YYYY-MM-DD] [進行中]
+```
 
-- **tier**: 0
-- **status**: blocked-owner-decision
-- **created**: 2026-07-11
-- **owner**: uruhayato373
-- **次**: 対象キーが失効・rotation済みかを確認し、秘密検査で現行treeに残存がないことを確定する。
-- **trigger**: 履歴書換えを実施する場合は、全clone・fork・open branchへの影響を合意し、専用maintenance windowを取る。
-- **禁止**: owner承認なしにfilter-repo、force push、branch削除を行わない。
-
-## P1 今月
+## 🔴 高 — 今月中に着手したい
 
 ### [KNOWN-KEYS-TRANSIENT-DELETE-01] KNOWN/SITEMAP 生成器の一時障害が生きたページを消す
+タグ: [起票:2026-08-17]
 
-- **tier**: 1
-- **status**: pending
-- **created**: 2026-08-17
 - **owner**: Claude Code
 - **済 (発生源の修正)**: `apps/web/scripts/generate-known-ranking-keys.ts` の `checkExists` が
   **HEAD 1 回・例外も非 ok もすべて `false`** に倒していた。2,164 件を並列 30 で叩くため、
@@ -57,10 +50,8 @@ tags: [backlog, feature, automation]
   `apps/web/scripts/generate-known-ranking-keys.ts`
 
 ### [ASP-CONTINUITY-01] もしも・afbの承認追跡と広告コード取得
+タグ: [実行:ユーザー] [起票:2026-07-28]
 
-- **tier**: 1
-- **status**: blocked-owner-approval
-- **created**: 2026-07-28
 - **owner**: uruhayato373 (実行順 3 の走査承認と Playwright プロファイルがオーナー環境にある)
 - **★backlog-loop では閉じられない** (2026-08-17): 実行順 3 が「オーナー承認後に走査」で、
   かつ ASP の Playwright は `.local/playwright-{a8,coconala}-profile` の永続プロファイル
@@ -79,10 +70,8 @@ tags: [backlog, feature, automation]
 - **正典**: `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` / `.claude/rules/affiliate-ads-standards.md`
 
 ### [PERF-LOCAL-NAV-01] localhost共通ページ遷移の高速化
+タグ: [実行:windows] [起票:2026-07-29]
 
-- **tier**: 1
-- **status**: blocked-local-runtime
-- **created**: 2026-07-29
 - **owner**: uruhayato373 (計測はオーナー端末でしかできない)
 - **★backlog-loop では閉じられない** (2026-08-17): 完了条件が「**同一端末**・同一 route で
   before/after を記録」で、対象も localhost の遷移。CI は毎回新しいランナーなので同一端末の
@@ -94,10 +83,8 @@ tags: [backlog, feature, automation]
 - **完了条件**: 同一端末・同一routeでbefore/afterを記録し、対象遷移の共通ボトルネックを除去する。対象testとweb type-checkを通し、UI差分0を確認する。
 
 ### [IMAGE-DELTA-PUBLISH-01] 生成画像の変更検知とexact R2反映
+タグ: [起票:2026-07-27]
 
-- **tier**: 1
-- **status**: pending
-- **created**: 2026-07-27
 - **owner**: Claude Code
 - **根拠**: 作業ツリーに未commit実装があり、全件再生成・prefix pushを廃止する途中。
 - **次**: 現在差分を再監査し、無関係なdirty fileを混ぜず、manifest fingerprint・asset hash・plan TTL・ETag CAS・lock競合・no-change空planを対象testで閉じる。
@@ -106,20 +93,16 @@ tags: [backlog, feature, automation]
 - **正典**: `.claude/rules/ogp-image-standards.md` / `.claude/rules/r2-storage-design.md`
 
 ### [RELEASE-PENDING-ADS-01] 広告関連の未反映差分を一回のreleaseへまとめる
+タグ: [実行:ユーザー] [起票:2026-07-28]
 
-- **tier**: 1
-- **status**: blocked-owner-approval
-- **created**: 2026-07-28
 - **owner**: uruhayato373
 - **次**: PR #646とdevelop上の広告関連差分が現在も未反映かをremoteで再確認し、対象commit、CI、設定値、rollbackをpreflightする。
 - **完了条件**: ユーザーの明示承認後に1回だけdeployし、affiliate表示、PR表記、AdSense、主要routeをsmoke確認する。
 - **禁止**: この項目の存在をdeploy承認と解釈しない。
 
 ### [CROSS-PAGE-DATA-SSOT-01] テーマ・ランキング・ブログのデータ／単位／配色SSOT統合
+タグ: [進行中] [起票:2026-08-13]
 
-- **tier**: 1
-- **status**: in-progress
-- **created**: 2026-08-13
 - **owner**: Claude Code
 - **trigger**: Claude CodeへこのIDを指定したTask Capsuleを渡し、WP0から順番に実装する。
 - **目的**: テーマ、ランキング、ブログのチャートを、同じ `MetricConfig → 取得・変換 → R2 snapshot`
@@ -307,10 +290,8 @@ tags: [backlog, feature, automation]
   `packages/data-configs/src/unit/` / `packages/data-configs/src/color-scheme-policy.ts`
 
 ### [QUALITY-GATE-COVERAGE-01] CI・テスト・監査の実効網羅性強化
+タグ: [起票:2026-08-13]
 
-- **tier**: 1
-- **status**: pending
-- **created**: 2026-08-13
 - **owner**: Claude Code
 - **trigger**: `CROSS-PAGE-DATA-SSOT-01`のcore契約を壊さず、Claude CodeへこのIDを指定してQG0から順に実装する。
   QG0、QG2、QG4、QG7はデータ移行と独立して先行できる。QG1、QG3、QG6の最終受入は同項目のWP6後に行う。
@@ -520,13 +501,9 @@ tags: [backlog, feature, automation]
   `CROSS-PAGE-DATA-SSOT-01` / `MONEY-UNIT-SCALE-01` / `RANKING-VALUES-PARTITION-INTEGRITY-01` /
   `PUBLIC-DATA-CONTRACT-AUDIT-01` / `MAINTENANCE-DEBT-PAYDOWN-01`
 
-
-
 ### [RANKING-VALUES-PARTITION-INTEGRITY-01] 分類軸の絞り忘れによる配信データ汚染の是正
+タグ: [進行中] [起票:2026-07-30]
 
-- **tier**: 1
-- **status**: in-progress
-- **created**: 2026-07-30
 - **owner**: Claude Code
 - **発見経緯**: ai-content の実データ照合ゲート (`audit-ai-content.mjs`、2026-07-30) が検出したのは
   ai-content の誤りではなく**配信データ側の欠陥**だった。当初 15 件と見積もったが、全件走査で 209 件と判明。
@@ -640,20 +617,16 @@ tags: [backlog, feature, automation]
   `.claude/rules/ranking-content-standards.md` §実データ照合
 
 ### [AICONTENT-DBLESS-REBUILD] ranking ai-content生成の完走
+タグ: [進行中] [起票:2026-06-01]
 
-- **tier**: 1
-- **status**: in-progress
-- **created**: 2026-06-01
 - **owner**: Claude Code
 - **次**: `CONTENT-ROUTINE-LIVE-VERIFY-01` の1件実走後、成功率と利用枠を実測しながら小バッチ件数を決める。
 - **完了条件**: 全active rankingを処理し、欠測・矛盾・未検証生成を0にする。R2 pushとCDN反映は別承認。
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
 ### [PUBLIC-DATA-CONTRACT-AUDIT-01] blog / ranking / theme の配信データ契約を全量検証する
+タグ: [起票:2026-08-03]
 
-- **tier**: 1
-- **status**: pending
-- **created**: 2026-08-03
 - **owner**: Claude Code
 - **監査時点の証拠**:
   - ranking は公開中の既知 2,176 件で `item` / `values` が全件 HTTP 200、年の対応も一致した。ただし直近の data refresh は対象 14 件中 12 件の更新に留まり、`convenience-store-count-commercial` は0行、`employment-insurance-daily-receipt-rate` はshape gateで既存値を温存した。全2,295 metricの定期更新完走を示す証拠ではない。
@@ -670,10 +643,8 @@ tags: [backlog, feature, automation]
 - **正典**: `.github/workflows/ranking-integrity-audit-weekly.yml` / `.github/workflows/blog-remediation-daily.yml` / `apps/web/src/features/theme-dashboard/lib/load-theme-data.ts`
 
 ### [CONTENT-ROUTINE-LIVE-VERIFY-01] AI-content / blog のClaude Code日次生成を初回実走する
+タグ: [実行:ユーザー] [起票:2026-08-02]
 
-- **tier**: 1
-- **status**: blocked-runtime
-- **created**: 2026-08-02
 - **owner**: human / Claude Code
 - **現況**: `CLAUDE_CODE_OAUTH_TOKEN`のRepository Secret登録後も、AI-content / blogの`limit=1`実走はどちらも即時`is_error: true`となり生成0件。secret未登録ではなく、認証・モデル・利用枠・runner実行のいずれかを切り分ける段階。
 - **次**: token本文を出さずに終了code、stderr分類、Claude Code version、選択model、quota/auth判定をartifactへ残す。根因を修正後、AI-contentとblogを`limit=1`で各1回dispatchする。
@@ -682,10 +653,8 @@ tags: [backlog, feature, automation]
 - **正典**: `.github/workflows/ai-content-generate-daily.yml` / `.github/workflows/blog-generate-daily.yml`
 
 ### [BLOG-SVG-LINEAGE-RESTORE-01] ブログSVG系譜キューの継続消化
+タグ: [進行中] [起票:2026-07-22]
 
-- **tier**: 1
-- **status**: in-progress
-- **created**: 2026-07-22
 - **owner**: Claude Code
 - **現況**: 公開419記事の本文は全件取得できたが、本文参照asset 1,047件のうち `pork-consumption-expenditure/data/pork-expenditure-ranking.svg` が404。既存SVG起点の監査では、ファイル自体が無い参照を検知できない。
 - **次**: 欠落SVGを既存JSON/sourceから再生成する。その後、remediation queueのmust-fixを小バッチで処理し、全`article.md`の参照から期待asset集合を生成する監査へ拡張する。R2由来、算式、年、metric keyを復元できない図は推測で再生成しない。
@@ -693,20 +662,16 @@ tags: [backlog, feature, automation]
 - **正典**: `.claude/rules/blog-data-schema.md`
 
 ### [AREAS-DIRECTORY-UX-01] `/areas` 実装済み変更の最終確認
+タグ: [実行:ユーザー] [起票:2026-07-23]
 
-- **tier**: 1
-- **status**: blocked-release-approval
-- **created**: 2026-07-23
 - **owner**: Claude Code
 - **残り**: 390/768/1024/1280/1440pxのlight/dark、keyboard、44px target、cookie banner、console/hydrationを確認する。
 - **完了条件**: visual変更が必要なら対象test・type-check・design-system checkを再実行し、ユーザー承認後のreleaseで `/areas` をsmoke確認する。
 - **正典**: `apps/web/src/features/area-profile/README.md`
 
 ### [GOOGLE-ADMIN-AUTOMATION-01] Google管理操作のAPI/UI境界整理とCI化
+タグ: [実行:ユーザー] [起票:2026-07-30]
 
-- **tier**: 1
-- **status**: blocked-owner-approval
-- **created**: 2026-07-30
 - **owner**: uruhayato373 (残りは credential 登録と Environment 承認のオーナー工程)
 - **機械側は達成済**（2026-08-17 実測）: `google-admin:test` 33 件 pass / `metrics:test` 76 件 pass /
   `docs:check` exit 0。schedule は audit のみ（`0 20 * * 0`）、mutation job は
@@ -720,10 +685,8 @@ tags: [backlog, feature, automation]
 - **正典**: `.claude/scripts/google-admin/README.md`
 
 ### [SEO-META-FACTUAL-GATE-01] metric config の SEO 文字列が実データと照合されていない
+タグ: [進行中] [起票:2026-08-03]
 
-- **tier**: 1
-- **status**: in-progress
-- **created**: 2026-08-03
 - **owner**: Claude Code
 - **発見経緯**: `IND-DATA-CORRUPTION-01` の照合（W32）で、婚姻率・離婚率の誤りが**観測値ではなく
   `seoTitle` / `seoDescription`** にあると判明した。離婚率の説明文「沖縄は2015年の6.1から急落」の
@@ -778,13 +741,89 @@ tags: [backlog, feature, automation]
   一括再生成しない（同じ穴を作り直すことになる）。実データを見ずに「もっともらしい」数値へ
   書き換えない。**config を直しただけで「本番の誤値を消した」と report しない**。
 
-## P2 次
+### [KSJ-PREF-ASSIGN-01] KSJ 由来ランキングの県帰属を全 13 指標で是正する
+タグ: [起票:2026-08-17]
+
+- **owner**: claude
+- **問題**: 旧 `register-ksj-rankings.ts` の `findNearestPref` が施設座標から**最寄りの県庁所在地**で
+  県を決めていた。距離は行政境界と無関係なので県境・離島で系統的に取り違える。本番実測 (2026-08-17):
+  原子炉の無い**京都府に 8 基** (高浜 4 + 大飯 4 が福井県から流出)、八丈島 (東京都) の地熱が**神奈川県**、
+  秋田県 (澄川・上の岱) と福島県 (柳津西山) が **0**。旧アルゴリズムを実データ座標で再現し、
+  配信値と完全一致することを確認済み。
+- **済 (12 指標が本番反映まで完了)**: 帰属の共有モジュール
+  (`packages/gis/src/mlit-ksj/prefecture-assign.ts`、属性 → 空間結合 → 距離上限つき海岸線許容 (既定 5km)、
+  決められなければ null で推測しない) + `generate-ksj-stats-values.ts`。`findNearestPref` を含む旧
+  script は削除。あわせて `unit: "か所"` に対して号機を数えていた問題も是正した (施設名 + 住所で
+  重複排除。原発 68 レコード → 21 施設 / 地熱 19 → 17)。12 指標すべて**未解決 0**で再生成し、
+  R2 は app/stats → app/ranking (values / item / 正規化 / national-trend) + `app/ranking-items/all.json`
+  まで反映済み。誤りを引き継いでいた ai-content 12 件と相関 snapshot は削除して再生成待ちにした
+  (退避 = `.local/{ai-content-removed,correlation-removed,ksj-aicontent-backup}/`)。
+  `datasets.ts` からは実体の無い 2 ranking (`expressway-junction-count` / `photovoltaic-power-plant-count`。
+  metric config も R2 データも無く soft 404 だった) を落とした。
+- **是正後の主な値** (すべて生成データで実測・seoTitle/Description も更新済み):
+  ダム 1位北海道190 / 湖沼 1位北海道107 / 火力 1位神奈川15 / 水力 1位長野54 /
+  風力 1位北海道55 / バイオマス 1位北海道33 / 道の駅 1位北海道122 (最下位 東京1) /
+  漁港 1位北海道290・2位長崎288 (0 は内陸 8 県ちょうど) / 空港 1位北海道15・2位沖縄13 (0 は 10 県) /
+  鉄道駅 1位東京892 (最下位 沖縄19)。
+- **残り**: `tourism-resource-count` (観光資源数) の**定義を決める**。P12 は同じ資源を点/線/面の
+  3 系統で持つため資源 ID (`P12_001`) で畳んで 17,254 件になるが、県別の偏りが説明できない
+  (新潟県 1,913 に対し愛知県 4)。原因は**種別 (`P12_005`) を持つのが 488 件だけ**で、残り 16,766 件が
+  「‐」のプレースホルダであること。このまま出すと意味を成さないランキングになるので**公開を保留中**
+  (`.local/r2` の values.json も生成しない)。「何を観光資源として数えるか」を決めてから再開する。
+- **住所が欠けるレイヤに注意**: P03 でも水力 6 / 太陽光 843 / 風力 4 件は住所が空で、空間結合に
+  落ちる。太陽光は施設名だけで畳むと 9,808 → 3,253 に潰れるので、重複排除は必ず名前 + 住所で行う。
+- **禁止**: 全プロパティを走査して「それらしい値」を県コードに使わない。P12 観光資源の `P12_001` は
+  資源 ID だが 5 桁で、市区町村コードとして読むと別の県に化ける。C09 の `C09_006` は県名に見えるが
+  政令市では市名が入る (実測 2931 件中 1631 件が解決不能) ので `C09_003` (市区町村コード) を使う。
+- **完了条件**: 13 指標すべてが属性または空間結合で解決され、未解決 0 で再生成・公開されている。
+- **正典**: `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/prefecture-assign.ts`
+
+### [DATA-REFRESH-ZEROGATE-ALLORNOTHING-01] ゼロ件ゲートが成功 2,148 件の R2 push を巻き添えにする
+タグ: [起票:2026-08-17]
+
+- **owner**: data-ingester
+- **実測 (run 30979118359 / 2026-08-05 schedule のログ)**: `page-data-batch` は
+  **ok=2148 / fail=10 / empty=37** で取り込み自体は成功している。落ちているのは最後の
+  ゼロ件ゲート `[fatal] 観測値が 0 件の metric が 37 件あります` による **exit 1** で、
+  `data-refresh.yml` の `☁️ Push observations to R2` は `if:` に `always()` を持たないため
+  **skip される**。つまり **正常に取り込んだ 2,148 件が一度も R2 へ push されない**。
+  月次 cron が 2 回連続でこの形なので「e-Stat → R2 の更新が止まっている」は事実。
+- **これは `SYNC-SNAPSHOTS-ALLORNOTHING-01` と同型**: 1 件の失敗で全件を捨てる。
+  あちらは verify 側を partial-publish に直して解決した。
+- **push しても壊れない根拠**: `page-data-batch` は空を返した metric について
+  「★既存 N 行が消失するため書き込みを中止 (データ破壊防止)」で**ローカルにも書かない**。
+  したがって `.local` に残るのは取り込みに成功した正しい値だけで、push しても
+  壊れたデータは配信されない。
+- **empty 37 件の内訳**（この 37 件を仕分けるのが本体の作業）: `gpp-*` 6 /
+  `fishery-*`・`fishing-*` 6 / `voluntary-car-insurance-rate-*` 3 /
+  `sixth-industry-agriculture-*` 2 / `national-pension-*-exemption-rate` 2 /
+  `kindergarten-*` 2 / `nursery-education-diffusion-rate` ほか。うち
+  `kindergarten-education-diffusion-rate` / `nursery-education-diffusion-rate` は
+  `SSDS-EDU-DIFFUSION-CODE-01` が既に追っているコード改廃。
+- **fail 10 件**: `construction-contract-*` 7 / `construction-projects-total` /
+  `noise-regulation-rate` / `voter-turnout-house-proportional` (fetch failed)。
+- **次**: (1) empty 37 件を「実在の欠陥」と「`expected-empty.ts` 登録漏れ」に仕分ける。
+  (2) 仕分けと並行して、ゼロ件ゲートを exit 1 のままにするか、成功分の push を
+  通してからゲートで落とすかを決める (partial-publish 化)。**(2) は `.github/` を触るので
+  人間の PR が要る** (`ACTIONS-EXPRESSION-INJECTION-01` と同じ制約)。
+- **完了条件**: schedule run が 2 回連続 success、または empty 37 件が仕分け済で
+  fatal が出ず、R2 の `app/stats` が当月分に更新されていることを実測できる。
+- **注意**: 2026-07-05 の失敗は**別原因** (sync-snapshots の correlation task が JS ヒープ
+  OOM 4,051MB。heap は 8GB へ引き上げ済)。同じ「連続失敗」でも原因が違うので混同しない。
+  また 2026-08-16 dispatch / 2026-08-17 push でも失敗しており、schedule 以外でも再現する。
+
+### [SOURCE-TEXT-LINK-INJECTION-01] 出典テキストがクライアント側でアフィリエイトリンクに置換される
+タグ: [種類:不具合] [起票:2026-08-04]
+
+**出典テキストがクライアント側でアフィリエイトリンクに置換されている**。チャート footer の「出典: 人口動態統計」の「統計」だけが `href="#"` のリンク + アイコンになる (SSR HTML には無く hydration 後に出現)。出典の信頼性を損なううえリンク先が機能しない。本文 markdown でも「人口」「旅行ガイド、旅行記」が同様に置換される。AdSense 等の第三者スクリプトによる関連検索リンク注入が疑わしい。出典まわりだけでも除外できないか要調査
+
+根拠・再現条件: 本番 /themes/population-dynamics の hydration 後 DOM。証跡 = post-deploy smoke run 30876315662 の error-context.md (aria: `link "統計" /url: "#"`)
+
+## 🟡 中 — 2〜3ヶ月以内
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
+タグ: [起票:2026-08-17]
 
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-08-17
 - **owner**: Claude Code
 - **症状 (2026-08-17 実測)**: `sync-snapshots --only ranking-items` 完走後も
   `/ranking/marriages-per-total-population` の `<title>` が旧値 (2014年・東京 6.49) のままだった。
@@ -829,34 +868,9 @@ tags: [backlog, feature, automation]
   恒久配線はオーナー承認を経てから。Cloudflare の設定変更も outward-facing。
 - 関連: `.claude/skills/db/sync-snapshots/SKILL.md` / `packages/r2-storage/src/scripts/{purge-worker-cache,purge-cache}.ts`
 
-### [DISPATCH-FRESHNESS-PRECISION-01] main 反映順チェックの入力パス判定を workflow ごとに絞る
-
-- **tier**: 3
-- **status**: pending
-- **created**: 2026-08-17
-- **owner**: Claude Code
-- **前提**: `check-dispatch-freshness.cjs` (2026-08-17 新設) は「main pinned な workflow へ
-  dispatch するとき `origin/main...origin/develop` に生成の入力になりうるパスの差分があれば止める」。
-  入力パスは `packages/**` / `apps/*/scripts/**` / sync-snapshots の `run.sh` を**広く**取っている。
-  transitive import を追い切れず取りこぼすくらいなら広く取る、という判断 (取りこぼしは
-  「安全だ」と嘘をつく方向の誤りなので避けた)。
-- **課題**: `apps/web/scripts/` には生成器 (`export-*.ts`) と開発ツール (`pre-commit-checks.sh`) が
-  同居するため、後者の変更だけでも発火する。実際 `purge-cdn.yml` の dispatch で
-  `pre-commit-checks.sh` を理由に止まり、`acknowledgedMainLag` で上書きした
-  (purge-cdn が main から動かすのは `purge-cache.ts` だけ)。**上書きが常態化するとチェックが形骸化する**。
-- **次**: workflow ファイルから **その job が実際に実行するスクリプト** (`npx tsx <path>` /
-  `bash <path>`) を機械抽出し、そのスクリプトが属するパッケージだけを入力パスにする。
-  抽出できなかった workflow は現行の広い判定へフォールバックする (安全側)。
-- **完了条件**: `purge-cdn.yml` の dispatch が `acknowledgedMainLag` なしで通り、
-  かつ 2026-08-17 の事故検体 (sync-snapshots × data-configs 差分) では従来どおり止まる。
-  両方向をテストで固定する。
-- 関連: `.claude/scripts/lib/check-dispatch-freshness.cjs` / `.claude/skills/db/sync-snapshots/SKILL.md`
-
 ### [SITEMAP-BLOG-ENTRIES-DRIFT-01] ブログ公開で sitemap-blog-entries が更新されない
+タグ: [起票:2026-08-17]
 
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-08-17
 - **owner**: Claude Code
 - **問題**: `apps/web/src/config/sitemap-blog-entries.ts` を**再生成する経路が
   `sync-snapshots.yml` (手動 dispatch のみ) の `sync-ranking-keys` job にしかない**。
@@ -877,11 +891,570 @@ tags: [backlog, feature, automation]
   `generate-sitemap-blog-entries.ts --check` が通ることを実測する。
 - **禁止**: `--check` を PR ゲートから外して回避しない (sitemap 欠落が見えなくなる)。
 
-### [SCRIPT-ORPHAN-DELETE-01] 役目が終わった orphan スクリプト 6 本の削除可否
+### [TILEMAP-LINEAGE-01] タイルマップ 9 枚が SSOT からも data JSON からも再生成できない
+タグ: [起票:2026-08-03]
 
-- **tier**: 3
-- **status**: blocked-owner-decision
-- **created**: 2026-08-17
+- **owner**: `chart-author`
+- **問題**: 公開済みタイルマップ 123 枚のうち 9 枚が現行の 720×720 デザインに移行できていない。内訳は (a) `data/*.json` が R2 に無い 7 枚 = 元データ消失 (`alcohol-prefecture-map/alcohol-consumption-map` / `childcare-friendly-prefecture-ranking/tile-grid-score` / `food-consumption-prefecture-battle/ramen-gyoza-tilemap` / `international-cooperation-volunteer-map/volunteer-rate-map` / `per-capita-income-gap/income-map` / `purchasing-power-adjusted/income-map` / `waiting-children-progress/waiting-children-map`)、(b) 年が確定できない 2 枚 (`fiscal-health-50years-trend/fiscal-map` / `fiscal-self-reliance-gap/fiscal-strength-map`)。
+- **次**: (a) 元データ消失 7 枚 → SSOT から復元する。(b) 年不確定 2 枚 → 人が年を決めてから固定する。
+- **(a) の手順**: `.claude/rules/blog-data-schema.md` §1.7 の restoreMethod に従い SSOT から復元する。SVG の絵から値を逆復元しない。SSOT に該当年が無ければ e-Stat から取り込んで SSOT を伸ばす (`data-ingester`)。届かない図は記事から外すか SSOT にある図に差し替える。
+- **(b) の手順**: 両記事の本文は 2022年度 を論じているのに地図は 1988年 (live) を表示しており、再生成すると 1989年 に振れる (SSOT 照合が両年で同程度に一致するため)。どの年の地図が記事の主張に対応するかを人が決めてから `--mapping` で固定する。**確定するまで push しない**。
+- **完了条件**: 123 枚すべてが `lintTileGridQuality` + `lintSvgSize` を error 0 で通る。
+
+### [DATA-PATIENT-SURVEY-01] 患者調査 (0004026104) の取り込みが0件で3ページが更新不能
+タグ: [起票:2026-07-29]
+
+- **owner**: `data-ingester` (座標の実在検証は `estat-researcher`)
+- **問題**: `inpatient-rate-per-100k` / `outpatient-rate-per-100k` / `patient-receiving-rate-by-age` の正典 `app/stats/<key>/values.json` が rowCount 0 (generatedAt 2026-07-05)。observationが無く values/normalized writer の対象外になるため配信データを更新できない。3件とも isActive かつ sitemap 掲載済で、2026-05-22 の凍結値が現行値のように見え、`?norm=per_area` は 100 倍のまま。3件が `statsDataId` と `cdCat01` まで完全に同一座標を指しており、少なくとも2件は cdCat01 が誤りと考えられる。
+- **次**: `estat-researcher` で 0004026104 の cdCat01 一覧と各コードの意味を確認し、3 metric へ正しいコードを割り当てる。座標が正しいのに0件なら、その統計表が都道府県別の値を持たない可能性を検討する。
+- **完了条件**: 3件の `app/stats/<key>/values.json` が rowCount > 0 になり、sync-snapshots 後に `audit-ranking-data-integrity` の実在欠落と絶対鮮度違反が0件になること。
+- **機械検知**: 週次 `ranking-integrity-audit-weekly.yml` が実在と絶対鮮度でこの3件を検出し `ranking-alert` を起票するため、放置しても埋もれない。
+
+### [RELATED-RANKINGS-TAGS-01] ブログ関連ランキングが常時非表示
+タグ: [起票:2026-07-24]
+
+- **owner**: Claude Code
+- **問題**: metric configの`tags`が全件空で、`RelatedRankingsSection`が必ず0件。tagごとに約5MBの`all.json`を読む設計も非効率。
+- **次**: category/themeからの決定的tag導出と、高流入metricへの人手tagのどちらを採るか決める。同時に全tagを1 fetchでfilterする。
+- **完了条件**: 関連性のある候補だけが描画され、0件時の不要fetchがなく、R2モノリス読込回数が1以下。
+
+### [LOCAL-FINANCE-CHART-HOVER-01] local-financeチャートのhover再現
+タグ: [実行:ユーザー] [起票:2026-06-19]
+
+- **owner**: Claude Code
+- **次**: 実ブラウザの `/themes/local-finance` でpointer event、overlay rect、CSS clipping、z-index、hydrationをDevToolsで切り分ける。
+- **完了条件**: 原因を再現testへ固定し、見た目を変えずtooltip操作を回復する。
+
+### [COCONALA-PRODUCT-FACTORY-01] 14テーマパックの商品化
+タグ: [起票:2026-07-18]
+
+- **owner**: Claude Code
+- **次**: Office実機検証を1商品ずつ行い、P-14に家計・消費の代表datasetを接続する。note channelは14パックから決定的に導出し、旧174商品前提を除去する。
+- **完了条件**: catalog、dataset、Office成果物、validatorが一致し、最初の1商品を出品判断できる。出品操作はユーザーが行う。
+- **正典**: `.claude/rules/coconala-product-standards.md` / `.claude/skills/product/build-coconala-product/`
+
+### [THEME-PORTFOLIO-REMAINDER-01] テーマ分類・カタログ・注意カードの残工程
+タグ: [起票:2026-07-04]
+
+- **owner**: Claude Code
+- **統合元**: `THEME-TAXONOMY-REORGANIZE-01` / `THEME-CATALOG-QUALITY-01` / `THEME-GUIDANCE-CARDS-01` / chart expansion。
+- **次**: 22テーマreviewの結果から、まず欠測・重複・定義誤認だけを修正する。分類再編は重複matrixと移行影響が確定するまで実装しない。
+- **完了条件**: catalog validator、選定provenance、guidance型が一致し、UI変更はテーマ単位の小さな差分で検証する。
+- **正典**: `.claude/skills/theme/manage-theme-portfolio/reference/theme-improvement-execution.md` / `theme-taxonomy-reorganization.md` / `theme-guidance-implementation.md`
+
+### [KAIYU-HUB-01] 回遊面ハブ化のread-only監査
+タグ: [起票:2026-07-09]
+
+- **owner**: Claude Code
+- **次**: blog/ranking/theme/area/surveyの既存リンクをread-onlyでグラフ化し、壊れ・重複・noindex/410を除外したpilot候補を1 placementだけ選ぶ。
+- **完了条件**: reason code、dedupe、GA4 impression/click/continue契約とbefore baselineを定義する。監査結果の確認前にUI実装しない。
+- **正典**: `.claude/skills/analytics/seo-audit/reference/site-navigation-graph.md`
+
+### [NOTE-CIRCULATION-CTA-01] note回遊とCTAのcatalog駆動化
+タグ: [起票:2026-07-18]
+
+- **owner**: Claude Code
+- **trigger**: note既存記事の流入・クリックを確認し、上位1シリーズだけをpilotできること。
+- **完了条件**: 記事、マガジン、stats47 CTAの対応をcatalogから決定的に生成し、全記事一括変更しない。
+
+### [NOTE-MAGAZINE-REORG-01] note既存投稿のマガジン再編成 + 新規投稿の増産
+タグ: [実行:windows] [起票:2026-08-03]
+
+- **owner**: Claude Code
+- **方針**: ココナラ商品カタログと同型 (git TS カタログ = SSOT)。ただし公開済み stats47-note 159 件は回収スタブ (key = note ID・不透明・`r2Body:false`) で、カテゴリはタイトルからしか導出できない点がココナラと異なる。
+- **済 (Phase 1)**: `magazines.ts` を e-Stat 17 カテゴリ + 行動者率クラスタ = 18 マガジンに細分化。`assign-magazines-by-title.mjs` (タイトル分類・決定的) で公開済み 159 件中 143 件 (90%) を `s47-*` マガジンへ割当。validator pass・派生インデックス再生成済。
+- **残り**:
+  1. **note-operator 自動化を新設** (coconala-operator 相当・Playwright)。マガジン作成 + 記事割当を note.com へ反映する。**note ログインは人手** (初回・所有者アカウント)、実反映は draft-first + 承認境界。まず 1 マガジン (件数最多 = `s47-sports-culture`) で実証してから横展開。
+     - 実装済: `.claude/scripts/note/login-note-profile.mjs` (永続プロファイル `.local/playwright-note-profile` への対話ログイン + account assert `.claude/config/note-account.json`)。
+     - 実装済: `.claude/scripts/note/probe-magazine-ui.mjs` / `fetch-note-magazines.mjs` (read-only。既存マガジンを API 取得)。
+     - **★probe で判明した実態 (2026-08-03)**: note.com には既に**有料マガジン3つ**が稼働中 — 公務員×Claude Code (¥1,980・key m512ad7023815) / e-Stat×Claude Code (¥1,480・m1b836e4c8dce) / D3.js配色完全ガイド (¥500・mfe0fab2606eb) + デフォルト「あとで読む」。**ランキング系マガジンはまだ note.com に無い**。
+     - **済 (Track A・照合取り込み)**: 既存3マガジンの noteUrl + isPaid を magazines.ts に反映。product-d3-colors 新設 + D3 全6章を帰属 (第2-6章=stats47-note / 配色理論=koumuin-gis)。validator error 0。
+     - **済 (membership 検証)**: `fetch-magazine-members.mjs` で各マガジンの note.com 実所属を取得・突合。結果: product-d3-colors 6=6 一致 / koumuin-claude-code note.com 37 vs catalog 35 (note.com が2件多い・マガジンが vertical 跨ぎ) / **koumuin-estat note.com 1 vs catalog 14 = 13件未追加 (Track B で追加)**。30 warn (有料マガジンに無料記事) は note.com buy-once モデルの実態と確認 (catalog は正しい)。
+     - **flow 判明 (create-probe)**: マガジン作成/管理は `/notes` ダッシュボード。記事の「…」→ マガジンに追加、上部「マガジン ▾」で絞り込み。`/magazine/new` は 404。作成入口は追加モーダル内 or 専用ページ (要 click probe)。
+     - **済 (Track B・operator 実装)**: `lib/note-session.mjs` (account assert) + `note-magazine.mjs` CLI (`plan` / `create --key --commit`)。作成フォームは `https://note.com/magazines/new` (名前≤30字 + 説明≤400字 + 無料/有料 + 作成)。dry-run で作成候補15件 (14 s47 + koumuin-gis・全て名前30字以内) を算出済み。無料マガジン専用 (有料は手動)、既存 noteUrl 持ちは作り直さない、`--commit` gate + account assert。
+     - **済 (Track B・マガジン作成)**: `note-magazine.mjs create-all --commit` で s47-* 14 + koumuin-gis = **15マガジンを note.com に実作成完了** (pilot 検証後に一括)。全 noteUrl を magazines.ts へ書き戻し。note.com マガジン総数 19 (今回15 + 既存4) を実測確認。catalog 18中15稼働・残3 (ict/international/energy) は記事0で受け皿。auto mode は「全て自動化」の明示指示で outbound write を許可。
+     - **済 (Track B・記事割当 = add-article)**: `note-magazine.mjs add-articles --commit` で **合計156記事をマガジンへ投入完了** (s47-sports-culture 74本 / 自治体財政 14本 / koumuin-estat +13本 等・成功率100%)。API は `POST /api/v1/our/magazines/{magKey}/notes` body `{note_id, note_key}` (両方必須) + header `X-Requested-With: XMLHttpRequest` (CSRF 不要)。note_id は creator contents API (`kind=note`) の key→id マップから解決。既存メンバーは skip する冪等実装。**マガジン再編成 + 記事投入は note.com 上で完全稼働**。
+  1b. **残 (整理・任意)**: (a) note.com 上の別URL重複投稿3件 (災害SNS/苦情/FAQ) の削除判断 = オーナー領域。(b) 未公開ドラフト22件のカテゴリ手当て or 整理。(c) s47-ict/international/energy (記事0) は新規投稿が付いたら create + add。(d) 新規投稿の増産 (`sns-content-standards.md` の note 頻度上限は 2026-08-03 撤廃済)。
+  1c. **下書き37本の新規投稿 (browser-use・進行中) ★resume ポイント**:
+     - **方針**: 「投稿できるものは全て投稿・上限なし」(2026-08-03 オーナー判断)。対象 = 完成済み下書き37本 (stats47-note 28 + koumuin-claude-code 9)。product-sales 55 は凍結チャネルで対象外。
+     - **前提**: 投稿は **browser-use + Chrome Profile 5** (note.com/stats47 ログイン済・アカウントゲート合格確認済)。実行環境 = オーナーのローカル Mac。`export PATH="$HOME/.browser-use-env/bin:$PATH"`。
+     - **済 (pilot 1本・実公開)**: `a-maximum-temperature` → https://note.com/stats47/n/n91e96edf3950 (HTTP 200・図3枚正配置・s47-climate へ束ね済)。
+     - **修正済バグ2件** (commit 73bbe8939 等): ① `prepare-article.cjs` の画像 regex が `images/` を取りこぼす → `(?:\.\/)?images/`。② `ins_img` が目次(TOC)同名見出しに誤マッチ → `publish-new-note.sh` が投稿前に目次を折りたたむ。
+     - **パイプライン (1本ごと)**: `node .claude/scripts/note/prepare-article.cjs <slug>` → `build-body.cjs <slug>` → `bash .claude/scripts/note/restore-from-r2.sh <slug>` → `node generate-note-covers.mjs --slug <slug>`(koumuin は `generate-koumuin-covers.cjs`) → `node generate-note-hashtags.mjs --slug <slug>` → `bash .claude/scripts/note/publish-new-note.sh <slug> <vertical> --publish` → live 確認 (`curl -sI note.com/stats47/n/<id>`) → catalog を published+noteUrl+magazine に更新 → `note-magazine.mjs add-articles --key <mag> --commit` で束ね。
+     - **残 36本** (resume): catalog で `status:"draft"` の stats47-note 27 + koumuin-claude-code 9。`npx tsx -e 'import {NOTE_ARTICLES} from "./.claude/scripts/note/catalog/index.ts"; console.log(NOTE_ARTICLES.filter(a=>a.status==="draft"&&a.r2Body!==false&&a.vertical!=="product-sales").map(a=>a.vertical+"/"+a.key).join("\n"))'` で残スラッグを列挙。1本 ~5分・実 Chrome 占有・Bash 10分上限で1回2本程度。resume 可 (published は skip)。
+     - **注意**: `koumuin-shigoto-kouritsuka-ai`/`pinned-intro` は vertical/性質が特殊 → 個別判断。誤配置の旧ドラフト `ndd6577272515` は削除確認ボタンが取れず残存 → note.com で手動削除。browser-use は毎回 daemon kill + editor.note.com タブ close (`browser-use-cleanup.md`)。
+  2. **誤 vertical 16 件の再評価 (済/残)**: D3配色の章5件は実在有料マガジン (¥500) の中身 → 帰属済。Claude Code 記事は koumuin 有料マガジンの member (membership 検証で確認)。note.com 上の別URL重複投稿3件 (災害SNS/苦情/FAQ) は削除判断 = オーナー領域 (残)。
+  3. **未解決 22 件 (未公開ドラフトの英語キー)** をカテゴリ手当て or ドラフト整理。
+  4. **新規投稿の増産**: カテゴリマガジンを受け皿に増やす。`sns-content-standards.md` の note 頻度上限 (月1-2本) の見直しが要る (別判断)。
+- **完了条件**: 公開済み記事が note.com 上でマガジンに束ねられ、新規投稿が catalog のカテゴリマガジンに自動で割り当たること。記事一括変更しない (1 マガジンずつ実証)。
+- **停止条件 / 承認境界**: note.com への実反映 (マガジン作成・記事割当・新規公開) は outward-facing。人手ログイン + オーナー承認を経てから。SSOT は catalog git TS、note.com は反映先。
+- **なぜ blocked-local-runtime か (2026-08-17)**: 残る主工程 (1c の下書き36本投稿) が
+  **browser-use + Chrome Profile 5 をオーナーのローカル Mac で占有する**ため、CI からは
+  原理的に閉じられない。status が `pending` のままだと日次ループが拾って 3 回失敗し
+  quarantine するだけになる (`ASP-CONTINUITY-01` で実際に踏んだ)。
+  **catalog だけで閉じられる残り (1b の (b) 未公開ドラフト22件の整理 / 3. 未解決22件のカテゴリ手当て) は
+  ローカル不要**なので、着手するときは別 ID へ切り出してループに戻す。
+- 関連: [NOTE-CIRCULATION-CTA-01] (回遊/CTA の catalog 駆動)・`.claude/scripts/note/catalog/README.md`・`.claude/rules/sns-content-standards.md` §note
+
+### [BUZZ-MAP-FOLLOWUP-01] buzz-map投稿とdeep-click計測
+タグ: [起票:2026-07-18]
+
+- **owner**: Claude Code
+- **次**: 公開済みlandingとのexact matchを満たす素材だけを対象に、投稿→landing→deep clickを一つのUTM契約で測る。
+- **完了条件**: attribution欠損、重複投稿、landing不一致をgateで停止する。
+
+### [MIGRATION-FLOW-PHASE23-01] 人口移動 月次/年次 workflowの生成ステップ未実装
+タグ: [起票:2026-08-01]
+
+- **owner**: Claude Code
+- **次**: `migration-flow-monthly.yml` のPhase 3 (highlight抽出・render) と `migration-flow-annual.yml` のPhase 2 (e-Stat取得・47県render・caption・staging copy) を実装し、実装できたcronだけscheduleへ戻す。
+- **完了条件**: 生成ステップが `.local/r2/sns/migration-flow` を実際に作り、手動dispatchでR2 pushとIG投稿まで通ることをdry-runで確認したうえで `on.schedule` を復活させる。復活時は `docs/01_技術設計/06_自動化インベントリ.md` のschedule表へ戻す。
+- **停止条件**: 生成が未実装のままscheduleを戻さない (毎月の確定failureに戻るため)。
+
+### [RANKING-AICONTENT-UI-UNIFY-HELD] ranking考察セクション統合の保留差分
+タグ: [実行:ユーザー] [起票:2026-06-21]
+
+- **owner**: Claude Code
+- **次**: 現在の`page.tsx`と2コンポーネントに差分が残るかを再監査し、他セッション変更と混在していれば実装し直さず分離する。
+- **完了条件**: UI変更を続ける価値がある場合だけvisual回帰込みで単独PR化し、不要なら差分を安全に廃棄する判断をユーザーへ返す。
+
+### [KAKEI-EXPANSION-02] 家計調査2025 refreshと残品目
+タグ: [実行:ユーザー] [起票:2026-07-10]
+
+- **owner**: Claude Code
+- **trigger**: e-Statで2025年年報の公表を確認できること。
+- **次**: 既存697 metricの年次更新を先に行い、需要確認済みの中分類だけを第2弾へ追加する。
+- **完了条件**: 既存metricの年次更新を検証し、需要確認済みの追加候補だけが小バッチの投入判断に到達する。
+- **正典**: `.claude/skills/blog/draft-from-trend/reference/kakei-topic-catalog.md`
+
+### [BACKLOG-LOOP-PHASE23-01] バックログ処理ループの学習 (Phase 2) と指標バックログ取り込み (Phase 3)
+タグ: [起票:2026-08-17]
+
+- **owner**: Claude Code
+- **前提**: Phase 0 (分類・台帳・gate 突合) と Phase 1 (日次 CI `backlog-loop-daily.yml`) は
+  実装・マージ済み (PR #789)。実案件 2 件が実際にループを通っている
+  (`RANKING-ITEM-CITY-ONLY-01` = misconception-close / `SYNC-SNAPSHOTS-ALLORNOTHING-01` = impl-small)。
+  **schedule は default branch の workflow しか発火しない**ので、main に載るまで日次ループは動かない。
+- **次**: 下の 1 → 2 → 3 の順で進める。
+  1. **初回 3〜5 run を観測する。** 見るのは「宣言だけの削除 0」「許可外 diff 0」「分類の妥当性」。
+     これを満たすまで件数 (`LIMIT`) を上げない
+  2. **Phase 2 = routing policy の自動学習。** `update-routing-policy.mjs` + 週次 workflow。
+     ledger と `.claude/state/metrics/claude-usage/history.csv` の実測から class×model の成功率を出し、
+     `guards` (minSamples 8 / windowDays 28 / 昇降格しきい値) を通ったときだけ policy を書き換える。
+     実測が足りなければ**変更しない** (effect-verdict の「判定不能は pending に留める」と同じ思想)
+  3. **Phase 3 = 06 指標バックログの取り込み。** `indicator-expansion` class を足し、
+     estat 実在検証 → config 生成 → `validate:config` / `validate:years` を draft PR で通す
+- **完了条件**: policy 更新が minSamples ガードを通って 1 回成立し、その diff と
+  `.claude/state/metrics/prompt-evals/` の出力が残っている。
+- **禁止**: 実測が揃う前に件数を上げない (ai-content が limit 10 で timeout に当たり 0 件になった前例)。
+  escalation の梯子に opus を入れない (sonnet → fable → 人間)。
+  **リポジトリ全体の agent frontmatter `model:` を自動変更しない** — 実測を添えた提案 PR までで人間が承認する。
+  ループに `.github/` と routing policy を触らせない (verify の禁止パスを緩めない)。
+- **正典**: `.claude/rules/backlog-loop.md` / skill `/process-backlog` /
+  agent `backlog-processor`・`backlog-solver-hard`
+
+### [ACTIONS-EXPRESSION-INJECTION-01] workflow の式インジェクション残 13 件
+タグ: [実行:ユーザー] [起票:2026-07-30]
+
+- **owner**: uruhayato373 (人間の PR でのみ着手できる)
+- **★backlog-loop では閉じられない** (2026-08-17): 対象が `.github/` だけで、ループの verify は
+  そこを**禁止パス**にしている（workflow を書き換えられると allowedTools・許可パス・timeout・
+  モデルを自分で緩められるため）。status を pending のままにするとループが毎回 pick して
+  `class-needs-pr` で skip し、枠だけを消費する。人間の PR で 3-4 本ずつ進める。
+- **背景**: `${{ inputs.x }}` を `run:` の中へ直接展開している箇所が 13 件残っている。dispatch できる者が任意コードを実行できる類型。private repo で dispatch 権限者は push もできるため実効的な権限昇格ではないが、衛生上の負債。
+- **★この負債は現在 CodeQL に検出されていない** (2026-07-30 実測): `.github/workflows/security-scan.yml` の init は `languages: javascript,typescript` で、**workflow ファイル自体は走査対象外** (走査には `languages: actions` が要る)。PR #655 で出た CodeQL 3 件はこれとは無関係で、`.claude/scripts/` の `execSync(テンプレート文字列)` = `js/command-line-injection` だった (同 PR で argv 形式へ是正済)。**「CodeQL が出たら workflow の式インジェクション」と早合点しない** — 2 度誤診した。
+- **対象**: `blog-auto-publish` / `blog-remediation-daily` / `fetch-metrics-weekly` / `improvement-log-reminder-weekly` (2) / `migration-flow-weekly` (2) / `publish-ai-content` / `sns-weekly-report` (2) / `sync-snapshots` (3)
+- **次**: 各 step に `env:` ブロックを足し、`run:` はシェル変数だけを参照する形へ書き換える (`data-refresh.yml` が手本)。併せて `languages` に `actions` を足すか判断する (足すと 13 件が一斉に critical で出るため、書き換えを先に済ませる)
+- **完了条件**: 上記走査で 0 件、かつ actionlint exit=0
+- **制約**: 1 PR で全 workflow を書き換えない (デプロイ経路の workflow が多く、壊すと配信が止まる)。3-4 本ずつに分け、変更した workflow は実際に 1 回発火させて確認する
+
+### [CHART-LINEAGE-RESIDUAL-01] 元データ喪失の図表 残り11枚 (SSOT側の欠落が律速)
+タグ: [起票:2026-08-12]
+
+- **owner**: Claude Code
+- **背景**: 公開散布図 102 枚のうち 24 枚が元データ (`<base>.json` / `.source.json`) を失い、
+  gate の検証対象外だった (gate は「78/78 正準」と報告するが 24 枚を見ていない = 死角)。
+  2026-08-12 に SSOT から **19 枚を復元** (33 軸を SSOT 照合・一致率 80% 未満 0 件・R2 反映済)。
+  残り 5 枚は**指標を同定できない / SSOT に値が無い**ため、捏造せず flag した。
+  ★ SVG のピクセル座標から値を逆算して data json にするのは禁止 (`blog-data-schema.md` §1.7)。
+- **残り 5 枚と律速**:
+  | slug/base | 律速 |
+  |---|---|
+  | `international-cooperation-volunteer-map/{travel,foreign-pop}-vs-volunteer-scatter` | 「国際協力ボランティア率」に該当する metric が SSOT に**存在しない**。e-Stat 側の表を特定して投入する必要がある |
+  | `per-capita-income-gap/income-vs-industry-scatter` | Y 軸「1人当たり県民所得」の現行基準が `isActive:false` / 値未投入。`data/data-refresh-requests.json` で 2021 年度取り込みを要求済 (2026-08-12) |
+  | `purchasing-power-adjusted/income-vs-price-scatter` | 同上 (X 軸が同じ指標) |
+  | `foreign-residents-diversity-map/manufacturing-vs-foreign-scatter` | X 軸「製造品出荷額 1人当たり」の**算出式と年次を特定できない** (最有力候補でも一致率 67-72%) |
+- **次**: ① 県民所得の取り込み結果を確認し 2 枚を復元 ② 国際協力ボランティア率の e-Stat 表を
+  `estat-researcher` で特定 ③ 製造業の算出式は記事本文の記述から再構成できるか確認する
+- **完了条件**: `chartType === "scatter" && status !== "both"` の非正準が 0 枚
+  (測定: S3 実体を読む。公開 URL は `max-age=14400` で最大 4 時間古い)
+- **禁止**: 一致率が足りないまま「だいたい合っている」で復元しない。復元できないなら記事から図を外す
+
+- **タイルマップ側の残り 6 枚** (2026-08-12 実測。公開 120 枚中、元データを持つ 22 枚は
+  現行 svg-builder で再生成し R2 反映済 = 正準 114/120):
+  | slug/base | 現状 | 律速 |
+  |---|---|---|
+  | `per-capita-income-gap/income-map` | 600×665 | 県民所得の現行基準が SSOT 未投入 (散布図と同じ) |
+  | `purchasing-power-adjusted/income-map` | 600×700 | 同上 |
+  | `international-cooperation-volunteer-map/volunteer-rate-map` | 600×700 | 「国際協力ボランティア率」が SSOT に存在しない (散布図と同じ) |
+  | `alcohol-prefecture-map/alcohol-consumption-map` | 600×690 | 指標・年次の同定が要る |
+  | `food-consumption-prefecture-battle/ramen-gyoza-tilemap` | 960×520 | 2 指標の対比図。同定が要る |
+  | `waiting-children-progress/waiting-children-map` | 600×690 | 指標・年次の同定が要る |
+- **散布図とタイルマップで律速が重なる**: `per-capita-income-gap` / `purchasing-power-adjusted` /
+  `international-cooperation-volunteer-map` の 3 記事は両方の図が同じ SSOT 欠落で止まっている。
+  **指標を投入すれば 2 種類まとめて解ける**ので、この 3 記事を先に片付ける
+
+### [SYNC-SNAPSHOTS-MANIFEST-CARRY-01] sync-snapshots の「差分 push」が CI では毎回フル push になる
+タグ: [起票:2026-08-17]
+
+- **owner**: `r2-publisher`
+- **問題**: `diff-push-r2` は manifest (`.local/r2-manifest/`) と突合して差分だけ送る設計だが、
+  manifest は runner ローカルなので CI では毎回空 (`マニフェスト記録済み: 0`)。結果
+  **アップロード対象が常に全件**になる。run 32020891418 の実測で **14,033 件 / 24m44s**
+  (9.45 files/s)、生成 33m07s と合わせて sync job は 58 分かかる。timeout 45 分では
+  構造的に完走できず push が途中で打ち切られていた (是正済・timeout 120 分)。
+- **次**: manifest を `actions/cache` で run 間に持ち越すか、R2 の ETag / SHA と突合して
+  差分を出す。どちらを採るかは、cache の失効時に全件送りへ安全に degrade できるかで決める。
+- **完了条件**: 連続 2 回の run で、2 回目の「アップロード対象」が全件でないことを実測する。
+- **禁止**: push を速くするために検証や purge を削らない。差分判定を誤って
+  **送るべきものを skip する**方が、全件送るより実害が大きい (stale 配信は 6 日間気づかれなかった)。
+
+### [SCRIPTS-TYPECHECK-01] `.claude/scripts` を型検査に載せる
+タグ: [起票:2026-08-13]
+
+- **owner**: uruhayato373
+- **背景**: 2026-08-13 に `scripts` ディレクトリ全件を型検査へ載せた際、`.claude/scripts` だけ
+  免除として残した。TS 41 ファイル、compiler option を調整しても error 71 件
+  (TS7006 implicit any 39 / TS2339 21 ほか)。素 JS の `lib/*.mjs` core を import する設計なので、
+  型付けの方針 (JSDoc で型を付ける / `.d.ts` を置く / core を TS 化する) を決めるところから要る。
+- **次**: 方針を 1 つ選び、まず 1 ドメイン (例 `ads`) で実証する。
+- **完了条件**: `.claude/scripts/tsconfig.json` が `type-check:scripts` に載り、
+  `scripts-type-check-coverage.test.cjs` の `KNOWN_UNCOVERED` が空になる。
+- **正典**: `.claude/rules/coding-standards.md`「CI が動かすスクリプトも型検査に載せる」
+
+### [GINI-ALT-SOURCE-01] 等価可処分所得ジニ係数の代替出典
+
+- **owner**: estat-researcher
+- **source**: 2026-08-05 の値分布検証 (退役した `gini-coefficient-disposable-income` の後継)
+- **背景**: SSDS 0000010112 の `L7501` は **e-Stat 自身が全 48 エリア・全年 "0" を返す**
+  (getStatsData で実測確認済み)。整数丸めで配信されておりジニ係数を取得できない。
+  config の軸選択は正しく cdCat 是正では直らないため、metric を退役 (isActive:false + GONE) した。
+- **次**: 全国家計構造調査 (旧・全国消費実態調査) の都道府県別ジニ係数表を e-Stat で探し、
+  小数が保持されている統計表があるか確認する。無ければ厚労省「所得再分配調査」も当たる。
+- **完了条件**: 47 県 × 小数値を持つ統計表の statsDataId と cdCat を確定し、上の候補表へ移す。
+- **禁止**: 整数丸めされた系列を「ジニ係数」として再投入しない (全県 0 に戻るだけ)。
+
+### [CLIMATE-SOURCE-01] 気候変動・猛暑・熱中症の都道府県比較
+
+- **owner**: open-data-curator
+- **source**: GitHub #538 / #640
+- **次**: 気象庁「日本の気候変動2025」素材集、地点別猛暑日、消防庁の都道府県別熱中症救急搬送を一次資料で確認し、47県比較できる1指標へ絞る。
+- **完了条件**: 定義、代表地点の採用規則、分母、年次、一次URLを確定し、既存の最高気温系metricとの非重複を確認して上の候補表へ移す。
+- **禁止**: 新聞記事・紙面転記値を観測値のSSOTにしない。
+
+### [MINIMUM-WAGE-2026-01] 2026年度地域別最低賃金
+
+- **owner**: open-data-curator
+- **source**: GitHub #652
+- **trigger**: 厚生労働省または各地方最低賃金審議会が2026年度の47都道府県別実額を正式公表したとき。
+- **次**: 目安額ではなく正式決定額の一次資料を確認し、既存 `minimum-wage-by-region` の年次追加として扱う。
+- **完了条件**: 47県の正式額・発効日・前年差を一次資料で照合し、既存keyのR2観測値を更新する。
+- **禁止**: 中央審議会の目安額や新聞表を正式額として公開しない。
+
+### [PREF-OFFICIAL-STATS-01] 47都道府県の公式統計入口から需要を抽出
+
+- **owner**: open-data-curator
+- **正典**: `packages/data-configs/src/prefecture-statistics-catalog/README.md`
+- **次**: 各県ポータルを1巡し、複数県で反復する指標だけを、定義、単位、粒度、年次、一次出典付きで上の表へ追加する。
+- **完了条件**: 47県を確認し、既存metricとの非重複と全国比較可能性を検証する。
+
+### [SSDS-EDU-DIFFUSION-CODE-01] 教育普及度 2 指標の代替コード特定 (または退役)
+タグ: [起票:2026-08-16]
+
+- **owner**: estat-researcher
+- **trigger**: `expected-empty.ts` の期限 **2026-11-30** まで。期限を過ぎると allowlist が失効し
+  data-refresh が再び 0 件ゲートで落ちる。
+- **事実 (実測)**: `kindergarten-education-diffusion-rate` / `nursery-education-diffusion-rate` が
+  参照する SSDS 0000010205 の cat01 から `#E0910101` / `#E0910102` が消滅した。現行 59 コードに
+  該当なし・名称に「普及」を含むコードも 0 件・`#E091xxxx` の命名帯自体が現行カタログに無い。
+  同表の実在コード (`#E0110104`) は 1392 行を正常返却するので、表の廃止ではなく指標コードの改廃。
+- **次**: SSDS の指標コード改番履歴を追い、同義の後継コードがあれば config の cdCat01 を差し替える。
+  無ければ退役 (isActive:false + GONE + KNOWN/SITEMAP/INDEXABLE 再生成) へ切り替える。
+- **完了条件**: 代替コードで 47 県ぶんの値が取れることを dry-run で実測するか、退役の連動を
+  完了して `expected-empty.ts` から 2 エントリを削除する。
+- **注意**: 既存の配信データ (1,664 / 1,615 行) は生きているのでページは正常に見える。
+  「表示が正常＝データが更新されている」ではない。
+
+### [CONSTRUCTION-ORDER-ALT-01] 建設工事受注データの代替出典を採るか判断する
+タグ: [起票:2026-08-16]
+
+- **owner**: theme-designer
+- **背景**: 2026-08-16 に `construction-contract-*` 8 件 + `noise-regulation-rate` を退役した
+  (e-Stat 側で統計表が廃止・後継なし。詳細は `gone-ranking-keys.ts` の 2026-08-16 エントリ)。
+- **代替候補**: 「元請完成工事高」(業種別 × 都道府県別、statsDataId `0003126332` 2011-/`0003126364` -2010)。
+  ただし旧指標の「工事種類別 (住宅/道路/河川/下水道/港湾空港/災害復旧)」とは**軸が違う**
+  (契約業者の業種分類)。既存 `prime-contractor-completed-construction` (SSDS 0000010103) と
+  概念が重複する可能性もある。
+- **次**: 重複の有無を確認し、採るなら指標名・subtitle で「業種別」であることを明示して投入する。
+  採らないならこの項目を削除する。
+- **完了条件**: 採否を決め、採る場合は 47 県ぶんの取得を dry-run で実測する。
+
+### [INDICATOR-CANDIDATES-01] 指標候補キュー (P1/P2 検証済み)
+タグ: [実行:対話] [起票:2026-05-19]
+
+一次統計の実在、都道府県粒度、既存 metric との非重複を確認した候補だけを残す。
+需要未確認の大量候補、取得失敗、重複は削除済みで、再調査は Git 履歴から行う。
+`parse-backlog.cjs` が次の表を読む。`high` は既存テーマの欠測または需要が明確、`medium` は鮮度・特殊軸・導入先の追加判断が必要。
+
+| priority | candidate_slug | category | suggested_theme | estat_stats_data_id | rationale | status |
+|---|---|---|---|---|---|---|
+| high | outpatient-consultation-rate-total | socialsecurity | healthcare | 0004026105 | 患者調査2023 cat01=1,cat03=4。既存テーマに全傷病の外来受療率がない | pending |
+| high | inpatient-consultation-rate-total | socialsecurity | healthcare | 0004026105 | 患者調査2023 cat01=1,cat03=1。外来と対で医療アクセスを比較できる | pending |
+| high | ambulance-dispatch-count | safetyenvironment | healthcare | 0000010111 | SSDS K1210、47県。救急搬送の基礎指標 | pending |
+| high | infant-mortality-rate | socialsecurity | healthcare | 0003411730 | 人口動態統計2024、47県。既存healthcareの結果指標を補う | pending |
+| high | average-household-members | population | population-dynamics | 0003414255 | 国勢調査2020 cdTab=1390、47県。人口動態テーマの世帯構造を補う | pending |
+| high | working-age-population-ratio | population | population-dynamics | 0000010201 | SSDS #A03502、2024。年齢構造の基礎比率 | pending |
+| high | juvenile-offenders-count | safetyenvironment | safety | 0000010111 | SSDS K4204、2023、47県。千人比は別calculated metricで扱う | pending |
+| high | average-job-tenure | laborwage | labor-wages | 0003426933 | 賃金構造基本統計 cat04=01,cat03=01、47県 | pending |
+| high | nursing-home-count | socialsecurity | aging-society | 0000010210 | SSDS #J022011、2023、既存4指標と非重複 | pending |
+| high | paid-nursing-home-count | socialsecurity | aging-society | 0000010210 | SSDS #J02204、2023、47県 | pending |
+| high | life-time-use-series | laborwage | living-housing | 0000010113 | SSDS生活時間。sleep/housework/mealsのcdCat01確定後に個別keyへ分割する | pending |
+| medium | beef-cattle-count | agriculture | local-economy | 0004041846 | 畜産統計2024。都道府県がcat01=1013-1059に入るためarea読替が必要 | pending |
+| medium | pig-count | agriculture | local-economy | 0004041860 | 畜産統計2024。通常area軸ではなくcat01読替が必要 | pending |
+| medium | household-head-average-age | economy | consumer-prices | 0003348239 | 家計調査2024、県庁所在市52件。都道府県値と誤認しない表示設計が必要 | pending |
+| medium | fishery-species-catch-salmon | agriculture | fishery-marine | 0003425253 | さけ・ます類、2019、cat01=100-150。鮮度を明示する | pending |
+| medium | fishery-species-harvest-nori | agriculture | fishery-marine | 0003425258 | のり類養殖収獲量、2019。既存魚種テーマの欠測 | pending |
+| medium | fishery-species-harvest-oyster | agriculture | fishery-marine | 0003425257 | かき類養殖収獲量、2019。既存魚種テーマの欠測 | pending |
+| medium | housing-seismic-retrofit-count | construction | safety | 0004025509 | 住宅土地統計2023 cat03=15。「耐震化率」ではなく改修実施戸数として扱う | pending |
+
+**投入手順** (完了した行は削除する):
+
+1. `parse-backlog.cjs` で候補を選ぶ。
+2. e-Statメタと代表値を再確認し、`metric-config-standards.md` と `data-provenance-standards.md` に従ってconfigを作る。
+3. config validation、R2 snapshot生成、ranking item、KNOWN/sitemapの順で整合を取る。
+4. 本番反映はユーザー承認後にまとめて1回行い、HTTP 200、年、単位、代表値を実測する。
+5. 完了した行は削除する。
+
+### [CPI-NATIONAL-EMPTY-STATE-01] テーマページで全国選択時に cpi-profile / cpi-heatmap が無言で消える
+タグ: [種類:改善] [起票:2026-08-04]
+
+テーマページで全国を選ぶと cpi-profile / cpi-heatmap が無言で消える。CPI 地域差指数表は全国行を持たず `prefCode=00000` で 0 件 → null 返却。「全国平均=100 の指数なので全国は表示しない」旨の案内を出すか、全国選択時はカード自体を隠すか要判断
+
+根拠・再現条件: `/themes/consumer-prices` を全国表示。`fetch-db-chart-data.ts` の `fetchCpiProfileData` / `fetchCpiHeatmapData` は `isNational` を受け取らず cdArea=00000 をそのまま渡す
+
+### [NATIONAL-AVG-FALLBACK-LABEL-01] 全国行を持たない 5 チャートの 47 県平均フォールバックが無表記
+タグ: [種類:改善] [起票:2026-08-04]
+
+全国行を持たない 5 チャートは 47 県平均へフォールバックする (labor-wages 1 / ports 4)。KPI は「（全国平均）」と明示するがチャート本体は無表記。凡例か注記で出すか要判断
+
+根拠・再現条件: `node .claude/scripts/audit/theme-chart-live-audit.mjs` の `[no-national]` warn
+
+### [THEME-KPI-DECIMAL-PRECISION-01] KPI カードの小数丸めで合計特殊出生率 1.15 が 1.2 になる
+タグ: [種類:不具合] [起票:2026-08-04]
+
+KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の全国値 **1.15 が「1.2」** と出る。0.05 の差でも出生率では意味が変わる。指標の unit / 桁数に応じた表示桁の解決が要る (`.claude/rules/blog-svg-chart-standards.md` の `resolveValuePrecision` と同じ考え方)
+
+根拠・再現条件: localhost `/themes/population-dynamics` の KPI「合計特殊出生率 1.2 （人）」。R2 `app/stats/total-fertility-rate` の全国値は 1.15
+
+### [ESLINT-FEATURE-DEEP-IMPORT-01] features/*/components で no-restricted-imports が実質無効
+タグ: [種類:改善] [起票:2026-08-04]
+
+**eslint の `no-restricted-imports` が features/*/components 配下で実質無効**。`eslint.config.mjs:67` が `@/features/*/lib/*` 等の deep import を禁止しているが、同 174-221 の「ドメイン内Barrel強制」ブロックが `src/features/*/components/**` に対しルールを丸ごと上書きするため、**component ファイルからは他 feature の内部実装を自由に deep import できてしまう**。今回 1 件是正したが、他にも同型が残っている可能性。上書きブロックに元の patterns をマージすべきか要判断 (影響が全 feature に及ぶので別タスク)
+
+根拠・再現条件: `eslint.config.mjs` の 61-79 と 174-221 を読む。実例: `CommuteFlowSectionClient.tsx` が `@/features/migration-flow/lib/useFlowFocusPrefecture` を import しても lint が通っていた (2026-08-04 是正済)
+
+### [SMOKE-OGIMAGE-RETRY-01] post-deploy smoke が og:image の単発タイムアウトで赤くなる
+タグ: [種類:改善] [起票:2026-08-04]
+
+**post-deploy smoke が単発で赤くなることがある**。本番相手に 5 回連続実行して 1 回だけ `1/16 failed` になり、直後の 3 回は 16/16 緑。og:image の実 fetch (`--max-time 20`) がタイムアウトしたか cold start の 5xx が疑わしいが特定できていない。デプロイの gate なので、単発の揺れで赤くなると gate 自体が信用されなくなる。ページ本体と同じく og:image チェックにも短い再試行を入れるか要判断 (chart-provenance は最大 3 回再試行の前例あり)
+
+根拠・再現条件: `bash .github/scripts/smoke-test-routes.sh https://stats47.jp` を 5 回。1 回だけ失敗、再現せず
+
+### [MIGRATION-FLOW-WEEKLY-REOPEN-01] migration-flow-weekly の週次 IG 投稿が停止したまま (設計欠陥未修正)
+タグ: [種類:改善] [起票:2026-08-16]
+
+**migration-flow-weekly の schedule を停止したまま (投稿の設計欠陥は未修正)**。`post-instagram.ts:86-88` が gitignored な `.local/r2/sns/<slug>/instagram` を existsSync で要求するため、clean checkout の CI では構造的に必ず失敗する (2026-05-25 から 12 回連続失敗)。8/16 に schedule を削除して無言の失敗を止めたが、**週次の県ローテーション IG 投稿そのものが止まったまま**。再開するなら post-instagram-scheduled.yml と同じ「公開 R2 URL を IG Graph API に渡す」経路へ寄せるか、post step 前に R2 から pull する step を足す
+
+根拠・再現条件: `.github/workflows/migration-flow-weekly.yml` (冒頭コメントに経緯)。成功している手本 = `.claude/scripts/instagram/post-from-schedule.cjs` の `PUBLIC_R2_BASE` 経由
+
+### [MUSEUM-COUNT-AXIS-01] 博物館系 3 指標が類似施設を除外して実在県を 0 にしている
+タグ: [種類:不具合] [起票:2026-08-05]
+
+**博物館系 3 指標が「類似施設」を除外して実在県を 0 にしている**。`botanical-garden-count` は登録+相当の 10 館のみ集計だが同調査の博物館類似施設に植物園が 107 館・33 県ある。`zoo-count` は 35 館のみで類似施設の動物園 59 館・26 県を除外 (大分等が 0 表示)、`aquarium-count` は 38 館のみで類似施設 46 館・28 県を除外。cdCat の集計軸を見直すか、指標名を「登録博物館のみ」に改めるかの判断が要る
+
+根拠・再現条件: e-Stat 0003348811。値分布の検証キャンペーンで検出。未検証キューに残置
+
+### [HEALTH-CHECKUP-RATE-RETIRE-01] health-checkup-rate-lifestyle-diseases が 2017 年以降 全国値 0%
+タグ: [種類:不具合] [起票:2026-08-05]
+
+**`health-checkup-rate-lifestyle-diseases` は全国値も 2017 年以降 0.0%**。1997 年と 2008 年に定義・実施主体が変わり、いまの系列は保健所実施分のみ = 実際の受診率と別軸。ランキングとして意味を成していないので、代替出典 (特定健診の法定報告等) への差し替えか退役かの判断が要る
+
+根拠・再現条件: e-Stat 0000010209。未検証キューに残置
+
+### [PORT-PASSENGERS-MISSING-COASTAL-01] port-passengers-total から沿岸 13 県が消えている
+タグ: [種類:不具合] [起票:2026-08-05]
+
+**`port-passengers-total` から沿岸 13 県が消えている**。欠落 21 県のうち新潟・千葉・宮城・熊本等 13 県は沿岸県。新潟は 2009-19 年に約 300 万人を計上していたが 2020 年以降消失し、2021 年は 6 行しかない。他の港湾系 (39 行) と件数が違う理由が説明できず、集計軸か調査対象の変更を疑う
+
+根拠・再現条件: e-Stat 0003130737。R2 `app/stats/port-passengers-total/values.json` の年別行数を確認。未検証キューに残置
+
+## 🟢 低 — 時期未定・条件付き (trigger は本文に)
+
+### [DISPATCH-FRESHNESS-PRECISION-01] main 反映順チェックの入力パス判定を workflow ごとに絞る
+タグ: [起票:2026-08-17]
+
+- **owner**: Claude Code
+- **前提**: `check-dispatch-freshness.cjs` (2026-08-17 新設) は「main pinned な workflow へ
+  dispatch するとき `origin/main...origin/develop` に生成の入力になりうるパスの差分があれば止める」。
+  入力パスは `packages/**` / `apps/*/scripts/**` / sync-snapshots の `run.sh` を**広く**取っている。
+  transitive import を追い切れず取りこぼすくらいなら広く取る、という判断 (取りこぼしは
+  「安全だ」と嘘をつく方向の誤りなので避けた)。
+- **課題**: `apps/web/scripts/` には生成器 (`export-*.ts`) と開発ツール (`pre-commit-checks.sh`) が
+  同居するため、後者の変更だけでも発火する。実際 `purge-cdn.yml` の dispatch で
+  `pre-commit-checks.sh` を理由に止まり、`acknowledgedMainLag` で上書きした
+  (purge-cdn が main から動かすのは `purge-cache.ts` だけ)。**上書きが常態化するとチェックが形骸化する**。
+- **次**: workflow ファイルから **その job が実際に実行するスクリプト** (`npx tsx <path>` /
+  `bash <path>`) を機械抽出し、そのスクリプトが属するパッケージだけを入力パスにする。
+  抽出できなかった workflow は現行の広い判定へフォールバックする (安全側)。
+- **完了条件**: `purge-cdn.yml` の dispatch が `acknowledgedMainLag` なしで通り、
+  かつ 2026-08-17 の事故検体 (sync-snapshots × data-configs 差分) では従来どおり止まる。
+  両方向をテストで固定する。
+- 関連: `.claude/scripts/lib/check-dispatch-freshness.cjs` / `.claude/skills/db/sync-snapshots/SKILL.md`
+
+### [CI-SMOKE-TIMEOUT-01] post-deploy smoke testのtimeout修正をmainへ反映
+タグ: [実行:ユーザー] [起票:2026-07-29]
+
+- **owner**: Claude Code
+- **問題**: `post-deploy-smoke.yml` の `timeout-minutes` を実測ベースで5→12へ修正済 (`a2e31cdcd`)。ただし `workflow_run` はデフォルトブランチ側の workflow ファイルを使うため、developに置いただけでは発効しない。実測は smoke 3分20秒 + warm-cache 約2分30秒 = 約5分50秒で予算5分を恒常的に超過し、2026-07-28/29と2回連続 cancelled。`warm-cache.sh` は常に exit 0 なので job を fail させず、成功した検証結果ごと cancelled 扱いになりデプロイ後検証が機能していなかった。
+- **次**: 次のまとまった develop→main デプロイに同梱する。この項目のために単独デプロイはしない。
+- **完了条件**: main の `post-deploy-smoke.yml` が `timeout-minutes: 12` になり、次回デプロイの smoke test が cancelled でなく success で終わること。
+
+### [BUILD-PERF-PHASE34] CI cacheと型検査重複の実験
+タグ: [起票:2026-07-12]
+
+- **owner**: Claude Code
+- **trigger**: 1本のPRで現行build jobの壁時間とcache sizeを測れるとき。
+- **停止条件**: restore/save込みで短縮しない、cacheが過大、または検査を弱める場合は採用しない。
+
+### [AREA-DATABOOK-REMAINDER] 県データブックの小粒残件
+タグ: [起票:2026-07-19]
+
+- **owner**: Claude Code
+- **trigger**: 既存47県版の利用実測で、欠損セクションが回遊または検索の阻害要因と確認できたとき。
+
+### [MULTICHANNEL-CONTENT-PRODUCT-01] 商品チャネル横断化
+タグ: [起票:2026-07-18]
+
+- **owner**: Claude Code
+- **trigger**: ココナラまたはnoteの単一商品で実売、粗利、supportMinutesを測定できた後。
+- **正典**: `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md`
+
+### [CITY-PAGES-REVIVAL] 市区町村ページ復活
+タグ: [起票:2026-07-04]
+
+- **owner**: Claude Code
+- **trigger**: 都道府県ページで検索・回遊の需要を実証し、city snapshot欠損とthin-content基準を解消した後。
+
+### [GIS-CROSS-CONTENT-BACKLOG] 統計×GISコンテンツ
+タグ: [起票:2026-07-04]
+
+- **owner**: Claude Code
+- **trigger**: 既存GIS素材と検索需要が一致する単一pilotを選べたとき。
+
+### [CHART-DARKMODE-BATCH-01] 既存ブログSVGのdark mode対応
+タグ: [起票:2026-05-28]
+
+- **owner**: Claude Code
+- **trigger**: chart auditでdark mode欠損が主要品質問題として再浮上し、CTR施策より優先すると判断したとき。
+
+### [AUTO-ALERT-CLOSE-01] 古い自動アラートIssueの整理
+タグ: [起票:2026-05-16]
+
+- **owner**: Claude Code
+- **trigger**: open alertが運用判断を阻害する件数まで再蓄積したとき。
+- **制約**: 同種alertが直近3日継続中ならcloseしない。dry-runを先に行う。
+
+### [CLOUDFLARE-INVOICE-01] 請求書PDFと予測値の突合
+タグ: [起票:2026-05-16]
+
+- **owner**: Claude Code
+- **trigger**: 手動精算漏れが再発するか、請求額が継続して予測から10%以上ずれるとき。
+
+### [CODEQL-JS-BACKLOG-01] CodeQL JS/TS の既存 alert 9 件
+タグ: [起票:2026-07-30]
+
+- **owner**: Claude Code
+- **背景**: 2026-07-30 に `security-scan.yml` へ SARIF ダンプを配線して初めて中身が見えた (それまでは件数だけが見え、Security タブと code-scanning API はどちらも一部セッションから 403 で読めなかった)。ブランチ全体で当初 12 件。同日に 3 件を是正 (`js/incomplete-html-attribute-sanitization` × 2 = EPUB を壊す実バグ、`js/identity-replacement` × 1 = 死んだ置換)。残り 9 件が本項目。**CodeQL は required check ではないので merge はブロックしない** (`mergeable_state: unstable`)。
+- **★9 件すべてこの PR の差分外** (`main` と同一)。CodeQL が一部を「新規」と報告するのは自身の注記どおり "changes were too large" による誤帰属。件数は `node .github/scripts/dump-codeql-sarif.mjs sarif-results` が Security Scan job の summary に出す
+
+| severity | rule | file:line | 評価 |
+|---|---|---|---|
+| 9.1 × 4 | `js/request-forgery` | `packages/gis/src/geoshape/adapters/{fetch-topology-from-r2.ts:59,geoshape-api-client.ts:22}` / `packages/gis/src/mlit/adapters/fetch-mlit-from-r2.ts:56` / `packages/r2-storage/src/lib/operations/fetch.ts:61` | 未評価。R2 key / dataId を URL に組む経路。key の形を検証 (`/^[a-z0-9/_.-]+$/` 等) して塞げる見込み |
+| 7.5 × 4 | `js/path-injection` | `packages/gis/src/geoshape/services/geoshape-service.ts:54,55,81,82` | 未評価。areaCode 由来のパス結合と思われる。コード形式の検証で塞げる見込み |
+| 6.3 | `js/shell-command-injection-from-environment` | `apps/admin/lib/server/jobs.ts:68` | **実危険度は低い**。gallery は localhost 専用 (127.0.0.1 固定)。taint 源は `process.env.STATS47_PROJECT_ROOT` で、これを設定できる者はすでにローカルでコードを実行できる。`regenerate()` は `kind` をホワイトリスト・`keys` を `/^[a-z0-9,_-]+$/` で検証済み |
+
+#### 是正済 (2026-08-17・9 件中 7 件)
+
+`prefCode` の書式検証 (`/^\d{2}$/`) を **補間する直前の 2 箇所**に置いた。`request-forgery` 3 件と
+`path-injection` 4 件はどちらもこの経路を指しており同時に塞がる。
+
+| 置いた場所 | 直前の状態 |
+|---|---|
+| `packages/gis/src/mlit/utils/mlit-r2-path.ts` | **一切検証せず** R2 key とローカルのファイルパスへ補間していた = **唯一の実バグ** |
+| `packages/gis/src/geoshape/utils/geoshape-url-builder.ts` | `extractPrefectureCode` (= `substring(0,2)` のみ) の戻り値を無検証で補間 |
+
+検証器は `packages/gis/src/utils/prefecture-code.ts` (`isValidPrefectureCode` / `assertPrefectureCode`)。
+**`packages/area` の `extractPrefectureCode` は変えていない** — 5 桁の市区町村コードから県コードを
+切り出す用途では現在の挙動が正しく、厳格化すると area 全体に波及するため。
+
+テストは `packages/gis/src/{utils,mlit/utils}/__tests__/` に新規作成 (mlit にはテストが 1 本も
+無かった)。正常系のパスが**変わらない**ことと、不正値で throw することの両方を固定した。
+gis 123 件 + `apps/web` type-check green。両呼び出し元 (`geoshape-service.ts` の
+`tryReadLocalMlitFile` / `fetchMlitTopologyFromR2`) はどちらも try/catch で geoshape へ
+フォールバックするので、throw で表示が壊れる経路は無い。
+
+- **残り 2 件**: `packages/r2-storage/src/lib/operations/fetch.ts:61` は同ファイル L21 の
+  `isSafeR2Key` が L89 で**先に**効いており多層防御済み (CodeQL が sanitizer を認識していない)。
+  コードを変えず dismiss するか、CodeQL が追える `new URL(key, base)` 形へ書き換えるかの判断が要る。
+  `apps/admin/lib/server/jobs.ts:68` は `sh -c "A && test -f plan && B"` の argv 化
+  (`startJobSteps(kind, steps)` を足し `test -f` を `fs.existsSync` へ移す)。単体テスト先行。
+- **次**: SARIF ダンプで 7 件が消えたことを実測する。その後に残り 2 件を判断する
+- **完了条件**: SARIF ダンプの表で該当行が消える。gallery の regenerate が実際に 1 回成功する (画像生成が走るので `--max-generate` を小さくして確認)
+- **制約**: gallery は動いている開発ツール。E2E 検証には実際の画像生成が走るため、step runner は単体テストで先に検証してから配線する。**severity の数値を推測で書かない** — SARIF ダンプの実測値だけを使う (このセッションで request-forgery を medium、html-attribute を新規 medium 2 件と 2 度誤認した)
+
+### [SSDS-DEMAND-BATCH-01] SSDS未使用項目の需要ファースト展開
+
+- **owner**: ranking-expander
+- **trigger**: GSC、記事企画、テーマ欠測のいずれかで具体的な検索需要が確認できたとき。
+- **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
+
+### [THEME-SIDENAV-MOBILE-DOM-01] ThemeSideNav が xl 未満でも DOM に残り転送量を食う
+タグ: [種類:改善] [起票:2026-08-04]
+
+テーマ左レール (`ThemeSideNav`) は xl 未満で `display:none` のまま DOM に残る (PageShell の `hidden xl:block`)。表示はされないがモバイルでもテーマ 22 リンクが HTML に含まれる。既存の右レールと同じ挙動なので緊急ではないが、テーマページは全 22 ページで効くため転送量を測って判断したい
+
+根拠・再現条件: `/themes/population-dynamics` を 375px で DOM 検査 (`nav[aria-label="テーマと地域"]` の rect width = 0 だがリンク 22 件が存在)
+
+### [VALUE-DISTRIBUTION-UNVERIFIED-01] 値分布の未検証 2 件 (幼稚園費・鉄道投資) の裏取り
+タグ: [種類:改善] [起票:2026-08-05]
+
+**値分布の未検証 2 件は根拠を得られず保留**。`kindergarten-expenses-prefecture` は全国計=47県合計で欠損は無いが、非ゼロ 15 県 (長野 116 億等) が県立園費なのか私学助成なのか特定できず 0 の性質が不明。`general-project-investment-railway` は非ゼロ 25 府県が整備新幹線等と対応するものの静岡・広島・沖縄の 0 を裏付ける一次情報が未確認。推測で profile を書かず unverified のまま baseline に残している
+
+根拠・再現条件: `.claude/state/ranking/integrity-audit.json` の valueVerification.unverified。skill `/verify-value-distribution` で消化
+
+## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [GIT-HISTORY-SECRET-PURGE-01] Git履歴のAPIキーを扱う方針決定
+タグ: [実行:対話] [起票:2026-07-11]
+
+- **owner**: uruhayato373
+- **次**: 対象キーが失効・rotation済みかを確認し、秘密検査で現行treeに残存がないことを確定する。
+- **trigger**: 履歴書換えを実施する場合は、全clone・fork・open branchへの影響を合意し、専用maintenance windowを取る。
+- **禁止**: owner承認なしにfilter-repo、force push、branch削除を行わない。
+
+### [SCRIPT-ORPHAN-DELETE-01] 役目が終わった orphan スクリプト 6 本の削除可否
+タグ: [実行:対話] [起票:2026-08-17]
+
 - **owner**: uruhayato373 (削除可否はオーナー判断)
 - **前提**: `SCRIPT-ORPHAN-TRIAGE-01` で orphan **29 本すべてを分類し、残す理由を記録した**
   (下記「orphan 29 本の分類」)。残るのは (a) 群 6 本の削除可否だけ。
@@ -929,444 +1502,16 @@ DOM が変わりやすく、実機 probe なしでは実装を直せない (`kdp
 warning のまま**理由付きで残す**のが正しい形で、これが本エントリの成果物。
 - **完了条件**: orphan 警告が 0 になるか、残るものが「なぜ残すか」を添えて記録されている。
 
-### [TILEMAP-LINEAGE-01] タイルマップ 9 枚が SSOT からも data JSON からも再生成できない
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-08-03
-- **owner**: `chart-author`
-- **問題**: 公開済みタイルマップ 123 枚のうち 9 枚が現行の 720×720 デザインに移行できていない。内訳は (a) `data/*.json` が R2 に無い 7 枚 = 元データ消失 (`alcohol-prefecture-map/alcohol-consumption-map` / `childcare-friendly-prefecture-ranking/tile-grid-score` / `food-consumption-prefecture-battle/ramen-gyoza-tilemap` / `international-cooperation-volunteer-map/volunteer-rate-map` / `per-capita-income-gap/income-map` / `purchasing-power-adjusted/income-map` / `waiting-children-progress/waiting-children-map`)、(b) 年が確定できない 2 枚 (`fiscal-health-50years-trend/fiscal-map` / `fiscal-self-reliance-gap/fiscal-strength-map`)。
-- **次**: (a) 元データ消失 7 枚 → SSOT から復元する。(b) 年不確定 2 枚 → 人が年を決めてから固定する。
-- **(a) の手順**: `.claude/rules/blog-data-schema.md` §1.7 の restoreMethod に従い SSOT から復元する。SVG の絵から値を逆復元しない。SSOT に該当年が無ければ e-Stat から取り込んで SSOT を伸ばす (`data-ingester`)。届かない図は記事から外すか SSOT にある図に差し替える。
-- **(b) の手順**: 両記事の本文は 2022年度 を論じているのに地図は 1988年 (live) を表示しており、再生成すると 1989年 に振れる (SSOT 照合が両年で同程度に一致するため)。どの年の地図が記事の主張に対応するかを人が決めてから `--mapping` で固定する。**確定するまで push しない**。
-- **完了条件**: 123 枚すべてが `lintTileGridQuality` + `lintSvgSize` を error 0 で通る。
-
-### [DATA-PATIENT-SURVEY-01] 患者調査 (0004026104) の取り込みが0件で3ページが更新不能
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-07-29
-- **owner**: `data-ingester` (座標の実在検証は `estat-researcher`)
-- **問題**: `inpatient-rate-per-100k` / `outpatient-rate-per-100k` / `patient-receiving-rate-by-age` の正典 `app/stats/<key>/values.json` が rowCount 0 (generatedAt 2026-07-05)。observationが無く values/normalized writer の対象外になるため配信データを更新できない。3件とも isActive かつ sitemap 掲載済で、2026-05-22 の凍結値が現行値のように見え、`?norm=per_area` は 100 倍のまま。3件が `statsDataId` と `cdCat01` まで完全に同一座標を指しており、少なくとも2件は cdCat01 が誤りと考えられる。
-- **次**: `estat-researcher` で 0004026104 の cdCat01 一覧と各コードの意味を確認し、3 metric へ正しいコードを割り当てる。座標が正しいのに0件なら、その統計表が都道府県別の値を持たない可能性を検討する。
-- **完了条件**: 3件の `app/stats/<key>/values.json` が rowCount > 0 になり、sync-snapshots 後に `audit-ranking-data-integrity` の実在欠落と絶対鮮度違反が0件になること。
-- **機械検知**: 週次 `ranking-integrity-audit-weekly.yml` が実在と絶対鮮度でこの3件を検出し `ranking-alert` を起票するため、放置しても埋もれない。
-
-### [CI-SMOKE-TIMEOUT-01] post-deploy smoke testのtimeout修正をmainへ反映
-
-- **tier**: 3
-- **status**: blocked-main-merge
-- **created**: 2026-07-29
-- **owner**: Claude Code
-- **問題**: `post-deploy-smoke.yml` の `timeout-minutes` を実測ベースで5→12へ修正済 (`a2e31cdcd`)。ただし `workflow_run` はデフォルトブランチ側の workflow ファイルを使うため、developに置いただけでは発効しない。実測は smoke 3分20秒 + warm-cache 約2分30秒 = 約5分50秒で予算5分を恒常的に超過し、2026-07-28/29と2回連続 cancelled。`warm-cache.sh` は常に exit 0 なので job を fail させず、成功した検証結果ごと cancelled 扱いになりデプロイ後検証が機能していなかった。
-- **次**: 次のまとまった develop→main デプロイに同梱する。この項目のために単独デプロイはしない。
-- **完了条件**: main の `post-deploy-smoke.yml` が `timeout-minutes: 12` になり、次回デプロイの smoke test が cancelled でなく success で終わること。
-
-### [RELATED-RANKINGS-TAGS-01] ブログ関連ランキングが常時非表示
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-07-24
-- **owner**: Claude Code
-- **問題**: metric configの`tags`が全件空で、`RelatedRankingsSection`が必ず0件。tagごとに約5MBの`all.json`を読む設計も非効率。
-- **次**: category/themeからの決定的tag導出と、高流入metricへの人手tagのどちらを採るか決める。同時に全tagを1 fetchでfilterする。
-- **完了条件**: 関連性のある候補だけが描画され、0件時の不要fetchがなく、R2モノリス読込回数が1以下。
-
-### [LOCAL-FINANCE-CHART-HOVER-01] local-financeチャートのhover再現
-
-- **tier**: 2
-- **status**: pending-browser-reproduction
-- **created**: 2026-06-19
-- **owner**: Claude Code
-- **次**: 実ブラウザの `/themes/local-finance` でpointer event、overlay rect、CSS clipping、z-index、hydrationをDevToolsで切り分ける。
-- **完了条件**: 原因を再現testへ固定し、見た目を変えずtooltip操作を回復する。
-
-### [COCONALA-PRODUCT-FACTORY-01] 14テーマパックの商品化
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-07-18
-- **owner**: Claude Code
-- **次**: Office実機検証を1商品ずつ行い、P-14に家計・消費の代表datasetを接続する。note channelは14パックから決定的に導出し、旧174商品前提を除去する。
-- **完了条件**: catalog、dataset、Office成果物、validatorが一致し、最初の1商品を出品判断できる。出品操作はユーザーが行う。
-- **正典**: `.claude/rules/coconala-product-standards.md` / `.claude/skills/product/build-coconala-product/`
-
-### [THEME-PORTFOLIO-REMAINDER-01] テーマ分類・カタログ・注意カードの残工程
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-07-04
-- **owner**: Claude Code
-- **統合元**: `THEME-TAXONOMY-REORGANIZE-01` / `THEME-CATALOG-QUALITY-01` / `THEME-GUIDANCE-CARDS-01` / chart expansion。
-- **次**: 22テーマreviewの結果から、まず欠測・重複・定義誤認だけを修正する。分類再編は重複matrixと移行影響が確定するまで実装しない。
-- **完了条件**: catalog validator、選定provenance、guidance型が一致し、UI変更はテーマ単位の小さな差分で検証する。
-- **正典**: `.claude/skills/theme/manage-theme-portfolio/reference/theme-improvement-execution.md` / `theme-taxonomy-reorganization.md` / `theme-guidance-implementation.md`
-
-### [KAIYU-HUB-01] 回遊面ハブ化のread-only監査
-
-- **tier**: 2
-- **status**: ready-for-phase-0
-- **created**: 2026-07-09
-- **owner**: Claude Code
-- **次**: blog/ranking/theme/area/surveyの既存リンクをread-onlyでグラフ化し、壊れ・重複・noindex/410を除外したpilot候補を1 placementだけ選ぶ。
-- **完了条件**: reason code、dedupe、GA4 impression/click/continue契約とbefore baselineを定義する。監査結果の確認前にUI実装しない。
-- **正典**: `.claude/skills/analytics/seo-audit/reference/site-navigation-graph.md`
-
-### [NOTE-CIRCULATION-CTA-01] note回遊とCTAのcatalog駆動化
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-07-18
-- **owner**: Claude Code
-- **trigger**: note既存記事の流入・クリックを確認し、上位1シリーズだけをpilotできること。
-- **完了条件**: 記事、マガジン、stats47 CTAの対応をcatalogから決定的に生成し、全記事一括変更しない。
-
-### [NOTE-MAGAZINE-REORG-01] note既存投稿のマガジン再編成 + 新規投稿の増産
-
-- **tier**: 2
-- **status**: blocked-local-runtime
-- **created**: 2026-08-03
-- **owner**: Claude Code
-- **方針**: ココナラ商品カタログと同型 (git TS カタログ = SSOT)。ただし公開済み stats47-note 159 件は回収スタブ (key = note ID・不透明・`r2Body:false`) で、カテゴリはタイトルからしか導出できない点がココナラと異なる。
-- **済 (Phase 1)**: `magazines.ts` を e-Stat 17 カテゴリ + 行動者率クラスタ = 18 マガジンに細分化。`assign-magazines-by-title.mjs` (タイトル分類・決定的) で公開済み 159 件中 143 件 (90%) を `s47-*` マガジンへ割当。validator pass・派生インデックス再生成済。
-- **残り**:
-  1. **note-operator 自動化を新設** (coconala-operator 相当・Playwright)。マガジン作成 + 記事割当を note.com へ反映する。**note ログインは人手** (初回・所有者アカウント)、実反映は draft-first + 承認境界。まず 1 マガジン (件数最多 = `s47-sports-culture`) で実証してから横展開。
-     - 実装済: `.claude/scripts/note/login-note-profile.mjs` (永続プロファイル `.local/playwright-note-profile` への対話ログイン + account assert `.claude/config/note-account.json`)。
-     - 実装済: `.claude/scripts/note/probe-magazine-ui.mjs` / `fetch-note-magazines.mjs` (read-only。既存マガジンを API 取得)。
-     - **★probe で判明した実態 (2026-08-03)**: note.com には既に**有料マガジン3つ**が稼働中 — 公務員×Claude Code (¥1,980・key m512ad7023815) / e-Stat×Claude Code (¥1,480・m1b836e4c8dce) / D3.js配色完全ガイド (¥500・mfe0fab2606eb) + デフォルト「あとで読む」。**ランキング系マガジンはまだ note.com に無い**。
-     - **済 (Track A・照合取り込み)**: 既存3マガジンの noteUrl + isPaid を magazines.ts に反映。product-d3-colors 新設 + D3 全6章を帰属 (第2-6章=stats47-note / 配色理論=koumuin-gis)。validator error 0。
-     - **済 (membership 検証)**: `fetch-magazine-members.mjs` で各マガジンの note.com 実所属を取得・突合。結果: product-d3-colors 6=6 一致 / koumuin-claude-code note.com 37 vs catalog 35 (note.com が2件多い・マガジンが vertical 跨ぎ) / **koumuin-estat note.com 1 vs catalog 14 = 13件未追加 (Track B で追加)**。30 warn (有料マガジンに無料記事) は note.com buy-once モデルの実態と確認 (catalog は正しい)。
-     - **flow 判明 (create-probe)**: マガジン作成/管理は `/notes` ダッシュボード。記事の「…」→ マガジンに追加、上部「マガジン ▾」で絞り込み。`/magazine/new` は 404。作成入口は追加モーダル内 or 専用ページ (要 click probe)。
-     - **済 (Track B・operator 実装)**: `lib/note-session.mjs` (account assert) + `note-magazine.mjs` CLI (`plan` / `create --key --commit`)。作成フォームは `https://note.com/magazines/new` (名前≤30字 + 説明≤400字 + 無料/有料 + 作成)。dry-run で作成候補15件 (14 s47 + koumuin-gis・全て名前30字以内) を算出済み。無料マガジン専用 (有料は手動)、既存 noteUrl 持ちは作り直さない、`--commit` gate + account assert。
-     - **済 (Track B・マガジン作成)**: `note-magazine.mjs create-all --commit` で s47-* 14 + koumuin-gis = **15マガジンを note.com に実作成完了** (pilot 検証後に一括)。全 noteUrl を magazines.ts へ書き戻し。note.com マガジン総数 19 (今回15 + 既存4) を実測確認。catalog 18中15稼働・残3 (ict/international/energy) は記事0で受け皿。auto mode は「全て自動化」の明示指示で outbound write を許可。
-     - **済 (Track B・記事割当 = add-article)**: `note-magazine.mjs add-articles --commit` で **合計156記事をマガジンへ投入完了** (s47-sports-culture 74本 / 自治体財政 14本 / koumuin-estat +13本 等・成功率100%)。API は `POST /api/v1/our/magazines/{magKey}/notes` body `{note_id, note_key}` (両方必須) + header `X-Requested-With: XMLHttpRequest` (CSRF 不要)。note_id は creator contents API (`kind=note`) の key→id マップから解決。既存メンバーは skip する冪等実装。**マガジン再編成 + 記事投入は note.com 上で完全稼働**。
-  1b. **残 (整理・任意)**: (a) note.com 上の別URL重複投稿3件 (災害SNS/苦情/FAQ) の削除判断 = オーナー領域。(b) 未公開ドラフト22件のカテゴリ手当て or 整理。(c) s47-ict/international/energy (記事0) は新規投稿が付いたら create + add。(d) 新規投稿の増産 (`sns-content-standards.md` の note 頻度上限は 2026-08-03 撤廃済)。
-  1c. **下書き37本の新規投稿 (browser-use・進行中) ★resume ポイント**:
-     - **方針**: 「投稿できるものは全て投稿・上限なし」(2026-08-03 オーナー判断)。対象 = 完成済み下書き37本 (stats47-note 28 + koumuin-claude-code 9)。product-sales 55 は凍結チャネルで対象外。
-     - **前提**: 投稿は **browser-use + Chrome Profile 5** (note.com/stats47 ログイン済・アカウントゲート合格確認済)。実行環境 = オーナーのローカル Mac。`export PATH="$HOME/.browser-use-env/bin:$PATH"`。
-     - **済 (pilot 1本・実公開)**: `a-maximum-temperature` → https://note.com/stats47/n/n91e96edf3950 (HTTP 200・図3枚正配置・s47-climate へ束ね済)。
-     - **修正済バグ2件** (commit 73bbe8939 等): ① `prepare-article.cjs` の画像 regex が `images/` を取りこぼす → `(?:\.\/)?images/`。② `ins_img` が目次(TOC)同名見出しに誤マッチ → `publish-new-note.sh` が投稿前に目次を折りたたむ。
-     - **パイプライン (1本ごと)**: `node .claude/scripts/note/prepare-article.cjs <slug>` → `build-body.cjs <slug>` → `bash .claude/scripts/note/restore-from-r2.sh <slug>` → `node generate-note-covers.mjs --slug <slug>`(koumuin は `generate-koumuin-covers.cjs`) → `node generate-note-hashtags.mjs --slug <slug>` → `bash .claude/scripts/note/publish-new-note.sh <slug> <vertical> --publish` → live 確認 (`curl -sI note.com/stats47/n/<id>`) → catalog を published+noteUrl+magazine に更新 → `note-magazine.mjs add-articles --key <mag> --commit` で束ね。
-     - **残 36本** (resume): catalog で `status:"draft"` の stats47-note 27 + koumuin-claude-code 9。`npx tsx -e 'import {NOTE_ARTICLES} from "./.claude/scripts/note/catalog/index.ts"; console.log(NOTE_ARTICLES.filter(a=>a.status==="draft"&&a.r2Body!==false&&a.vertical!=="product-sales").map(a=>a.vertical+"/"+a.key).join("\n"))'` で残スラッグを列挙。1本 ~5分・実 Chrome 占有・Bash 10分上限で1回2本程度。resume 可 (published は skip)。
-     - **注意**: `koumuin-shigoto-kouritsuka-ai`/`pinned-intro` は vertical/性質が特殊 → 個別判断。誤配置の旧ドラフト `ndd6577272515` は削除確認ボタンが取れず残存 → note.com で手動削除。browser-use は毎回 daemon kill + editor.note.com タブ close (`browser-use-cleanup.md`)。
-  2. **誤 vertical 16 件の再評価 (済/残)**: D3配色の章5件は実在有料マガジン (¥500) の中身 → 帰属済。Claude Code 記事は koumuin 有料マガジンの member (membership 検証で確認)。note.com 上の別URL重複投稿3件 (災害SNS/苦情/FAQ) は削除判断 = オーナー領域 (残)。
-  3. **未解決 22 件 (未公開ドラフトの英語キー)** をカテゴリ手当て or ドラフト整理。
-  4. **新規投稿の増産**: カテゴリマガジンを受け皿に増やす。`sns-content-standards.md` の note 頻度上限 (月1-2本) の見直しが要る (別判断)。
-- **完了条件**: 公開済み記事が note.com 上でマガジンに束ねられ、新規投稿が catalog のカテゴリマガジンに自動で割り当たること。記事一括変更しない (1 マガジンずつ実証)。
-- **停止条件 / 承認境界**: note.com への実反映 (マガジン作成・記事割当・新規公開) は outward-facing。人手ログイン + オーナー承認を経てから。SSOT は catalog git TS、note.com は反映先。
-- **なぜ blocked-local-runtime か (2026-08-17)**: 残る主工程 (1c の下書き36本投稿) が
-  **browser-use + Chrome Profile 5 をオーナーのローカル Mac で占有する**ため、CI からは
-  原理的に閉じられない。status が `pending` のままだと日次ループが拾って 3 回失敗し
-  quarantine するだけになる (`ASP-CONTINUITY-01` で実際に踏んだ)。
-  **catalog だけで閉じられる残り (1b の (b) 未公開ドラフト22件の整理 / 3. 未解決22件のカテゴリ手当て) は
-  ローカル不要**なので、着手するときは別 ID へ切り出してループに戻す。
-- 関連: [NOTE-CIRCULATION-CTA-01] (回遊/CTA の catalog 駆動)・`.claude/scripts/note/catalog/README.md`・`.claude/rules/sns-content-standards.md` §note
-
-### [BUZZ-MAP-FOLLOWUP-01] buzz-map投稿とdeep-click計測
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-07-18
-- **owner**: Claude Code
-- **次**: 公開済みlandingとのexact matchを満たす素材だけを対象に、投稿→landing→deep clickを一つのUTM契約で測る。
-- **完了条件**: attribution欠損、重複投稿、landing不一致をgateで停止する。
-
-### [MIGRATION-FLOW-PHASE23-01] 人口移動 月次/年次 workflowの生成ステップ未実装
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-08-01
-- **owner**: Claude Code
-- **次**: `migration-flow-monthly.yml` のPhase 3 (highlight抽出・render) と `migration-flow-annual.yml` のPhase 2 (e-Stat取得・47県render・caption・staging copy) を実装し、実装できたcronだけscheduleへ戻す。
-- **完了条件**: 生成ステップが `.local/r2/sns/migration-flow` を実際に作り、手動dispatchでR2 pushとIG投稿まで通ることをdry-runで確認したうえで `on.schedule` を復活させる。復活時は `docs/01_技術設計/06_自動化インベントリ.md` のschedule表へ戻す。
-- **停止条件**: 生成が未実装のままscheduleを戻さない (毎月の確定failureに戻るため)。
-
-### [RANKING-AICONTENT-UI-UNIFY-HELD] ranking考察セクション統合の保留差分
-
-- **tier**: 2
-- **status**: blocked-working-tree-audit
-- **created**: 2026-06-21
-- **owner**: Claude Code
-- **次**: 現在の`page.tsx`と2コンポーネントに差分が残るかを再監査し、他セッション変更と混在していれば実装し直さず分離する。
-- **完了条件**: UI変更を続ける価値がある場合だけvisual回帰込みで単独PR化し、不要なら差分を安全に廃棄する判断をユーザーへ返す。
-
 ### [T2-RANKING-NORM-SSG-01] ranking正規化派生のURL方針
+タグ: [実行:対話] [起票:2026-05-25]
 
-- **tier**: 2
-- **status**: pending-decision
-- **created**: 2026-05-25
 - **owner**: Claude Code
 - **次**: queryを別URLへ昇格する案、別rankingKey化、canonical吸収の3案を、検索需要とsnapshot容量で比較する。
 - **完了条件**: URL policy、canonical、sitemap、既存queryの扱いを先に決め、実装案を混在させない。
 
-### [KAKEI-EXPANSION-02] 家計調査2025 refreshと残品目
-
-- **tier**: 2
-- **status**: pending-source-release
-- **created**: 2026-07-10
-- **owner**: Claude Code
-- **trigger**: e-Statで2025年年報の公表を確認できること。
-- **次**: 既存697 metricの年次更新を先に行い、需要確認済みの中分類だけを第2弾へ追加する。
-- **完了条件**: 既存metricの年次更新を検証し、需要確認済みの追加候補だけが小バッチの投入判断に到達する。
-- **正典**: `.claude/skills/blog/draft-from-trend/reference/kakei-topic-catalog.md`
-
-### [BACKLOG-LOOP-PHASE23-01] バックログ処理ループの学習 (Phase 2) と指標バックログ取り込み (Phase 3)
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-08-17
-- **owner**: Claude Code
-- **前提**: Phase 0 (分類・台帳・gate 突合) と Phase 1 (日次 CI `backlog-loop-daily.yml`) は
-  実装・マージ済み (PR #789)。実案件 2 件が実際にループを通っている
-  (`RANKING-ITEM-CITY-ONLY-01` = misconception-close / `SYNC-SNAPSHOTS-ALLORNOTHING-01` = impl-small)。
-  **schedule は default branch の workflow しか発火しない**ので、main に載るまで日次ループは動かない。
-- **次**: 下の 1 → 2 → 3 の順で進める。
-  1. **初回 3〜5 run を観測する。** 見るのは「宣言だけの削除 0」「許可外 diff 0」「分類の妥当性」。
-     これを満たすまで件数 (`LIMIT`) を上げない
-  2. **Phase 2 = routing policy の自動学習。** `update-routing-policy.mjs` + 週次 workflow。
-     ledger と `.claude/state/metrics/claude-usage/history.csv` の実測から class×model の成功率を出し、
-     `guards` (minSamples 8 / windowDays 28 / 昇降格しきい値) を通ったときだけ policy を書き換える。
-     実測が足りなければ**変更しない** (effect-verdict の「判定不能は pending に留める」と同じ思想)
-  3. **Phase 3 = 06 指標バックログの取り込み。** `indicator-expansion` class を足し、
-     estat 実在検証 → config 生成 → `validate:config` / `validate:years` を draft PR で通す
-- **完了条件**: policy 更新が minSamples ガードを通って 1 回成立し、その diff と
-  `.claude/state/metrics/prompt-evals/` の出力が残っている。
-- **禁止**: 実測が揃う前に件数を上げない (ai-content が limit 10 で timeout に当たり 0 件になった前例)。
-  escalation の梯子に opus を入れない (sonnet → fable → 人間)。
-  **リポジトリ全体の agent frontmatter `model:` を自動変更しない** — 実測を添えた提案 PR までで人間が承認する。
-  ループに `.github/` と routing policy を触らせない (verify の禁止パスを緩めない)。
-- **正典**: `.claude/rules/backlog-loop.md` / skill `/process-backlog` /
-  agent `backlog-processor`・`backlog-solver-hard`
-
-## P3 条件付き保留
-
-### [BUILD-PERF-PHASE34] CI cacheと型検査重複の実験
-
-- **tier**: 3
-- **status**: deferred
-- **created**: 2026-07-12
-- **owner**: Claude Code
-- **trigger**: 1本のPRで現行build jobの壁時間とcache sizeを測れるとき。
-- **停止条件**: restore/save込みで短縮しない、cacheが過大、または検査を弱める場合は採用しない。
-
-### [AREA-DATABOOK-REMAINDER] 県データブックの小粒残件
-
-- **tier**: 3
-- **status**: deferred
-- **created**: 2026-07-19
-- **owner**: Claude Code
-- **trigger**: 既存47県版の利用実測で、欠損セクションが回遊または検索の阻害要因と確認できたとき。
-
-### [MULTICHANNEL-CONTENT-PRODUCT-01] 商品チャネル横断化
-
-- **tier**: 3
-- **status**: deferred
-- **created**: 2026-07-18
-- **owner**: Claude Code
-- **trigger**: ココナラまたはnoteの単一商品で実売、粗利、supportMinutesを測定できた後。
-- **正典**: `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md`
-
-### [CITY-PAGES-REVIVAL] 市区町村ページ復活
-
-- **tier**: 3
-- **status**: deferred
-- **created**: 2026-07-04
-- **owner**: Claude Code
-- **trigger**: 都道府県ページで検索・回遊の需要を実証し、city snapshot欠損とthin-content基準を解消した後。
-
-### [GIS-CROSS-CONTENT-BACKLOG] 統計×GISコンテンツ
-
-- **tier**: 3
-- **status**: deferred
-- **created**: 2026-07-04
-- **owner**: Claude Code
-- **trigger**: 既存GIS素材と検索需要が一致する単一pilotを選べたとき。
-
-### [CHART-DARKMODE-BATCH-01] 既存ブログSVGのdark mode対応
-
-- **tier**: 3
-- **status**: deferred
-- **created**: 2026-05-28
-- **owner**: Claude Code
-- **trigger**: chart auditでdark mode欠損が主要品質問題として再浮上し、CTR施策より優先すると判断したとき。
-
-### [AUTO-ALERT-CLOSE-01] 古い自動アラートIssueの整理
-
-- **tier**: 3
-- **status**: deferred
-- **created**: 2026-05-16
-- **owner**: Claude Code
-- **trigger**: open alertが運用判断を阻害する件数まで再蓄積したとき。
-- **制約**: 同種alertが直近3日継続中ならcloseしない。dry-runを先に行う。
-
-### [CLOUDFLARE-INVOICE-01] 請求書PDFと予測値の突合
-
-- **tier**: 3
-- **status**: deferred
-- **created**: 2026-05-16
-- **owner**: Claude Code
-- **trigger**: 手動精算漏れが再発するか、請求額が継続して予測から10%以上ずれるとき。
-
-### [CODEQL-JS-BACKLOG-01] CodeQL JS/TS の既存 alert 9 件
-
-- **tier**: 3
-- **status**: pending
-- **created**: 2026-07-30
-- **owner**: Claude Code
-- **背景**: 2026-07-30 に `security-scan.yml` へ SARIF ダンプを配線して初めて中身が見えた (それまでは件数だけが見え、Security タブと code-scanning API はどちらも一部セッションから 403 で読めなかった)。ブランチ全体で当初 12 件。同日に 3 件を是正 (`js/incomplete-html-attribute-sanitization` × 2 = EPUB を壊す実バグ、`js/identity-replacement` × 1 = 死んだ置換)。残り 9 件が本項目。**CodeQL は required check ではないので merge はブロックしない** (`mergeable_state: unstable`)。
-- **★9 件すべてこの PR の差分外** (`main` と同一)。CodeQL が一部を「新規」と報告するのは自身の注記どおり "changes were too large" による誤帰属。件数は `node .github/scripts/dump-codeql-sarif.mjs sarif-results` が Security Scan job の summary に出す
-
-| severity | rule | file:line | 評価 |
-|---|---|---|---|
-| 9.1 × 4 | `js/request-forgery` | `packages/gis/src/geoshape/adapters/{fetch-topology-from-r2.ts:59,geoshape-api-client.ts:22}` / `packages/gis/src/mlit/adapters/fetch-mlit-from-r2.ts:56` / `packages/r2-storage/src/lib/operations/fetch.ts:61` | 未評価。R2 key / dataId を URL に組む経路。key の形を検証 (`/^[a-z0-9/_.-]+$/` 等) して塞げる見込み |
-| 7.5 × 4 | `js/path-injection` | `packages/gis/src/geoshape/services/geoshape-service.ts:54,55,81,82` | 未評価。areaCode 由来のパス結合と思われる。コード形式の検証で塞げる見込み |
-| 6.3 | `js/shell-command-injection-from-environment` | `apps/admin/lib/server/jobs.ts:68` | **実危険度は低い**。gallery は localhost 専用 (127.0.0.1 固定)。taint 源は `process.env.STATS47_PROJECT_ROOT` で、これを設定できる者はすでにローカルでコードを実行できる。`regenerate()` は `kind` をホワイトリスト・`keys` を `/^[a-z0-9,_-]+$/` で検証済み |
-
-#### 是正済 (2026-08-17・9 件中 7 件)
-
-`prefCode` の書式検証 (`/^\d{2}$/`) を **補間する直前の 2 箇所**に置いた。`request-forgery` 3 件と
-`path-injection` 4 件はどちらもこの経路を指しており同時に塞がる。
-
-| 置いた場所 | 直前の状態 |
-|---|---|
-| `packages/gis/src/mlit/utils/mlit-r2-path.ts` | **一切検証せず** R2 key とローカルのファイルパスへ補間していた = **唯一の実バグ** |
-| `packages/gis/src/geoshape/utils/geoshape-url-builder.ts` | `extractPrefectureCode` (= `substring(0,2)` のみ) の戻り値を無検証で補間 |
-
-検証器は `packages/gis/src/utils/prefecture-code.ts` (`isValidPrefectureCode` / `assertPrefectureCode`)。
-**`packages/area` の `extractPrefectureCode` は変えていない** — 5 桁の市区町村コードから県コードを
-切り出す用途では現在の挙動が正しく、厳格化すると area 全体に波及するため。
-
-テストは `packages/gis/src/{utils,mlit/utils}/__tests__/` に新規作成 (mlit にはテストが 1 本も
-無かった)。正常系のパスが**変わらない**ことと、不正値で throw することの両方を固定した。
-gis 123 件 + `apps/web` type-check green。両呼び出し元 (`geoshape-service.ts` の
-`tryReadLocalMlitFile` / `fetchMlitTopologyFromR2`) はどちらも try/catch で geoshape へ
-フォールバックするので、throw で表示が壊れる経路は無い。
-
-- **残り 2 件**: `packages/r2-storage/src/lib/operations/fetch.ts:61` は同ファイル L21 の
-  `isSafeR2Key` が L89 で**先に**効いており多層防御済み (CodeQL が sanitizer を認識していない)。
-  コードを変えず dismiss するか、CodeQL が追える `new URL(key, base)` 形へ書き換えるかの判断が要る。
-  `apps/admin/lib/server/jobs.ts:68` は `sh -c "A && test -f plan && B"` の argv 化
-  (`startJobSteps(kind, steps)` を足し `test -f` を `fs.existsSync` へ移す)。単体テスト先行。
-- **次**: SARIF ダンプで 7 件が消えたことを実測する。その後に残り 2 件を判断する
-- **完了条件**: SARIF ダンプの表で該当行が消える。gallery の regenerate が実際に 1 回成功する (画像生成が走るので `--max-generate` を小さくして確認)
-- **制約**: gallery は動いている開発ツール。E2E 検証には実際の画像生成が走るため、step runner は単体テストで先に検証してから配線する。**severity の数値を推測で書かない** — SARIF ダンプの実測値だけを使う (このセッションで request-forgery を medium、html-attribute を新規 medium 2 件と 2 度誤認した)
-
-### [ACTIONS-EXPRESSION-INJECTION-01] workflow の式インジェクション残 13 件
-
-- **tier**: 2
-- **status**: blocked-human-pr
-- **created**: 2026-07-30
-- **owner**: uruhayato373 (人間の PR でのみ着手できる)
-- **★backlog-loop では閉じられない** (2026-08-17): 対象が `.github/` だけで、ループの verify は
-  そこを**禁止パス**にしている（workflow を書き換えられると allowedTools・許可パス・timeout・
-  モデルを自分で緩められるため）。status を pending のままにするとループが毎回 pick して
-  `class-needs-pr` で skip し、枠だけを消費する。人間の PR で 3-4 本ずつ進める。
-- **背景**: `${{ inputs.x }}` を `run:` の中へ直接展開している箇所が 13 件残っている。dispatch できる者が任意コードを実行できる類型。private repo で dispatch 権限者は push もできるため実効的な権限昇格ではないが、衛生上の負債。
-- **★この負債は現在 CodeQL に検出されていない** (2026-07-30 実測): `.github/workflows/security-scan.yml` の init は `languages: javascript,typescript` で、**workflow ファイル自体は走査対象外** (走査には `languages: actions` が要る)。PR #655 で出た CodeQL 3 件はこれとは無関係で、`.claude/scripts/` の `execSync(テンプレート文字列)` = `js/command-line-injection` だった (同 PR で argv 形式へ是正済)。**「CodeQL が出たら workflow の式インジェクション」と早合点しない** — 2 度誤診した。
-- **対象**: `blog-auto-publish` / `blog-remediation-daily` / `fetch-metrics-weekly` / `improvement-log-reminder-weekly` (2) / `migration-flow-weekly` (2) / `publish-ai-content` / `sns-weekly-report` (2) / `sync-snapshots` (3)
-- **次**: 各 step に `env:` ブロックを足し、`run:` はシェル変数だけを参照する形へ書き換える (`data-refresh.yml` が手本)。併せて `languages` に `actions` を足すか判断する (足すと 13 件が一斉に critical で出るため、書き換えを先に済ませる)
-- **完了条件**: 上記走査で 0 件、かつ actionlint exit=0
-- **制約**: 1 PR で全 workflow を書き換えない (デプロイ経路の workflow が多く、壊すと配信が止まる)。3-4 本ずつに分け、変更した workflow は実際に 1 回発火させて確認する
-
-### [CHART-LINEAGE-RESIDUAL-01] 元データ喪失の図表 残り11枚 (SSOT側の欠落が律速)
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-08-12
-- **owner**: Claude Code
-- **背景**: 公開散布図 102 枚のうち 24 枚が元データ (`<base>.json` / `.source.json`) を失い、
-  gate の検証対象外だった (gate は「78/78 正準」と報告するが 24 枚を見ていない = 死角)。
-  2026-08-12 に SSOT から **19 枚を復元** (33 軸を SSOT 照合・一致率 80% 未満 0 件・R2 反映済)。
-  残り 5 枚は**指標を同定できない / SSOT に値が無い**ため、捏造せず flag した。
-  ★ SVG のピクセル座標から値を逆算して data json にするのは禁止 (`blog-data-schema.md` §1.7)。
-- **残り 5 枚と律速**:
-  | slug/base | 律速 |
-  |---|---|
-  | `international-cooperation-volunteer-map/{travel,foreign-pop}-vs-volunteer-scatter` | 「国際協力ボランティア率」に該当する metric が SSOT に**存在しない**。e-Stat 側の表を特定して投入する必要がある |
-  | `per-capita-income-gap/income-vs-industry-scatter` | Y 軸「1人当たり県民所得」の現行基準が `isActive:false` / 値未投入。`data/data-refresh-requests.json` で 2021 年度取り込みを要求済 (2026-08-12) |
-  | `purchasing-power-adjusted/income-vs-price-scatter` | 同上 (X 軸が同じ指標) |
-  | `foreign-residents-diversity-map/manufacturing-vs-foreign-scatter` | X 軸「製造品出荷額 1人当たり」の**算出式と年次を特定できない** (最有力候補でも一致率 67-72%) |
-- **次**: ① 県民所得の取り込み結果を確認し 2 枚を復元 ② 国際協力ボランティア率の e-Stat 表を
-  `estat-researcher` で特定 ③ 製造業の算出式は記事本文の記述から再構成できるか確認する
-- **完了条件**: `chartType === "scatter" && status !== "both"` の非正準が 0 枚
-  (測定: S3 実体を読む。公開 URL は `max-age=14400` で最大 4 時間古い)
-- **禁止**: 一致率が足りないまま「だいたい合っている」で復元しない。復元できないなら記事から図を外す
-
-- **タイルマップ側の残り 6 枚** (2026-08-12 実測。公開 120 枚中、元データを持つ 22 枚は
-  現行 svg-builder で再生成し R2 反映済 = 正準 114/120):
-  | slug/base | 現状 | 律速 |
-  |---|---|---|
-  | `per-capita-income-gap/income-map` | 600×665 | 県民所得の現行基準が SSOT 未投入 (散布図と同じ) |
-  | `purchasing-power-adjusted/income-map` | 600×700 | 同上 |
-  | `international-cooperation-volunteer-map/volunteer-rate-map` | 600×700 | 「国際協力ボランティア率」が SSOT に存在しない (散布図と同じ) |
-  | `alcohol-prefecture-map/alcohol-consumption-map` | 600×690 | 指標・年次の同定が要る |
-  | `food-consumption-prefecture-battle/ramen-gyoza-tilemap` | 960×520 | 2 指標の対比図。同定が要る |
-  | `waiting-children-progress/waiting-children-map` | 600×690 | 指標・年次の同定が要る |
-- **散布図とタイルマップで律速が重なる**: `per-capita-income-gap` / `purchasing-power-adjusted` /
-  `international-cooperation-volunteer-map` の 3 記事は両方の図が同じ SSOT 欠落で止まっている。
-  **指標を投入すれば 2 種類まとめて解ける**ので、この 3 記事を先に片付ける
-
-### [KSJ-PREF-ASSIGN-01] KSJ 由来ランキングの県帰属を全 13 指標で是正する
-
-- **tier**: 1
-- **status**: pending
-- **created**: 2026-08-17
-- **owner**: claude
-- **問題**: 旧 `register-ksj-rankings.ts` の `findNearestPref` が施設座標から**最寄りの県庁所在地**で
-  県を決めていた。距離は行政境界と無関係なので県境・離島で系統的に取り違える。本番実測 (2026-08-17):
-  原子炉の無い**京都府に 8 基** (高浜 4 + 大飯 4 が福井県から流出)、八丈島 (東京都) の地熱が**神奈川県**、
-  秋田県 (澄川・上の岱) と福島県 (柳津西山) が **0**。旧アルゴリズムを実データ座標で再現し、
-  配信値と完全一致することを確認済み。
-- **済 (12 指標が本番反映まで完了)**: 帰属の共有モジュール
-  (`packages/gis/src/mlit-ksj/prefecture-assign.ts`、属性 → 空間結合 → 距離上限つき海岸線許容 (既定 5km)、
-  決められなければ null で推測しない) + `generate-ksj-stats-values.ts`。`findNearestPref` を含む旧
-  script は削除。あわせて `unit: "か所"` に対して号機を数えていた問題も是正した (施設名 + 住所で
-  重複排除。原発 68 レコード → 21 施設 / 地熱 19 → 17)。12 指標すべて**未解決 0**で再生成し、
-  R2 は app/stats → app/ranking (values / item / 正規化 / national-trend) + `app/ranking-items/all.json`
-  まで反映済み。誤りを引き継いでいた ai-content 12 件と相関 snapshot は削除して再生成待ちにした
-  (退避 = `.local/{ai-content-removed,correlation-removed,ksj-aicontent-backup}/`)。
-  `datasets.ts` からは実体の無い 2 ranking (`expressway-junction-count` / `photovoltaic-power-plant-count`。
-  metric config も R2 データも無く soft 404 だった) を落とした。
-- **是正後の主な値** (すべて生成データで実測・seoTitle/Description も更新済み):
-  ダム 1位北海道190 / 湖沼 1位北海道107 / 火力 1位神奈川15 / 水力 1位長野54 /
-  風力 1位北海道55 / バイオマス 1位北海道33 / 道の駅 1位北海道122 (最下位 東京1) /
-  漁港 1位北海道290・2位長崎288 (0 は内陸 8 県ちょうど) / 空港 1位北海道15・2位沖縄13 (0 は 10 県) /
-  鉄道駅 1位東京892 (最下位 沖縄19)。
-- **残り**: `tourism-resource-count` (観光資源数) の**定義を決める**。P12 は同じ資源を点/線/面の
-  3 系統で持つため資源 ID (`P12_001`) で畳んで 17,254 件になるが、県別の偏りが説明できない
-  (新潟県 1,913 に対し愛知県 4)。原因は**種別 (`P12_005`) を持つのが 488 件だけ**で、残り 16,766 件が
-  「‐」のプレースホルダであること。このまま出すと意味を成さないランキングになるので**公開を保留中**
-  (`.local/r2` の values.json も生成しない)。「何を観光資源として数えるか」を決めてから再開する。
-- **住所が欠けるレイヤに注意**: P03 でも水力 6 / 太陽光 843 / 風力 4 件は住所が空で、空間結合に
-  落ちる。太陽光は施設名だけで畳むと 9,808 → 3,253 に潰れるので、重複排除は必ず名前 + 住所で行う。
-- **禁止**: 全プロパティを走査して「それらしい値」を県コードに使わない。P12 観光資源の `P12_001` は
-  資源 ID だが 5 桁で、市区町村コードとして読むと別の県に化ける。C09 の `C09_006` は県名に見えるが
-  政令市では市名が入る (実測 2931 件中 1631 件が解決不能) ので `C09_003` (市区町村コード) を使う。
-- **完了条件**: 13 指標すべてが属性または空間結合で解決され、未解決 0 で再生成・公開されている。
-- **正典**: `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/prefecture-assign.ts`
-
-### [SYNC-SNAPSHOTS-MANIFEST-CARRY-01] sync-snapshots の「差分 push」が CI では毎回フル push になる
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-08-17
-- **owner**: `r2-publisher`
-- **問題**: `diff-push-r2` は manifest (`.local/r2-manifest/`) と突合して差分だけ送る設計だが、
-  manifest は runner ローカルなので CI では毎回空 (`マニフェスト記録済み: 0`)。結果
-  **アップロード対象が常に全件**になる。run 32020891418 の実測で **14,033 件 / 24m44s**
-  (9.45 files/s)、生成 33m07s と合わせて sync job は 58 分かかる。timeout 45 分では
-  構造的に完走できず push が途中で打ち切られていた (是正済・timeout 120 分)。
-- **次**: manifest を `actions/cache` で run 間に持ち越すか、R2 の ETag / SHA と突合して
-  差分を出す。どちらを採るかは、cache の失効時に全件送りへ安全に degrade できるかで決める。
-- **完了条件**: 連続 2 回の run で、2 回目の「アップロード対象」が全件でないことを実測する。
-- **禁止**: push を速くするために検証や purge を削らない。差分判定を誤って
-  **送るべきものを skip する**方が、全件送るより実害が大きい (stale 配信は 6 日間気づかれなかった)。
-
 ### [MIGRATION-FLOW-IG-01] migration-flow の IG 投稿が 3 か月止まっている
+タグ: [実行:対話] [起票:2026-08-13]
 
-- **tier**: 1
-- **status**: blocked-owner-decision
-- **created**: 2026-08-13
 - **owner**: uruhayato373 (継続可否の判断)
 - **問題**: `migration-flow-weekly.yml` の Instagram 投稿ステップが **12 回連続失敗** (約 3 か月・1 本も投稿されていない)。
   `❌ ディレクトリが存在しません: .local/r2/sns/migration-flow/okayama/instagram`。
@@ -1381,54 +1526,9 @@ gis 123 件 + `apps/web` type-check green。両呼び出し元 (`geoshape-servic
 - **完了条件**: workflow が緑になる、または schedule が外れて横断ヘルスチェックの対象から消える。
 - **正典**: `.claude/rules/sns-content-standards.md` §5.5 (R2 素材保持ポリシー)
 
-### [DATA-REFRESH-ZEROGATE-ALLORNOTHING-01] ゼロ件ゲートが成功 2,148 件の R2 push を巻き添えにする
+### [KDP-PUBLISH-REMAINING-01] KDP 残り 22 冊を出すか出版をやめるかの方針決定
+タグ: [種類:意思決定] [実行:対話] [起票:2026-08-16]
 
-- **tier**: 1
-- **status**: pending
-- **created**: 2026-08-17
-- **owner**: data-ingester
-- **実測 (run 30979118359 / 2026-08-05 schedule のログ)**: `page-data-batch` は
-  **ok=2148 / fail=10 / empty=37** で取り込み自体は成功している。落ちているのは最後の
-  ゼロ件ゲート `[fatal] 観測値が 0 件の metric が 37 件あります` による **exit 1** で、
-  `data-refresh.yml` の `☁️ Push observations to R2` は `if:` に `always()` を持たないため
-  **skip される**。つまり **正常に取り込んだ 2,148 件が一度も R2 へ push されない**。
-  月次 cron が 2 回連続でこの形なので「e-Stat → R2 の更新が止まっている」は事実。
-- **これは `SYNC-SNAPSHOTS-ALLORNOTHING-01` と同型**: 1 件の失敗で全件を捨てる。
-  あちらは verify 側を partial-publish に直して解決した。
-- **push しても壊れない根拠**: `page-data-batch` は空を返した metric について
-  「★既存 N 行が消失するため書き込みを中止 (データ破壊防止)」で**ローカルにも書かない**。
-  したがって `.local` に残るのは取り込みに成功した正しい値だけで、push しても
-  壊れたデータは配信されない。
-- **empty 37 件の内訳**（この 37 件を仕分けるのが本体の作業）: `gpp-*` 6 /
-  `fishery-*`・`fishing-*` 6 / `voluntary-car-insurance-rate-*` 3 /
-  `sixth-industry-agriculture-*` 2 / `national-pension-*-exemption-rate` 2 /
-  `kindergarten-*` 2 / `nursery-education-diffusion-rate` ほか。うち
-  `kindergarten-education-diffusion-rate` / `nursery-education-diffusion-rate` は
-  `SSDS-EDU-DIFFUSION-CODE-01` が既に追っているコード改廃。
-- **fail 10 件**: `construction-contract-*` 7 / `construction-projects-total` /
-  `noise-regulation-rate` / `voter-turnout-house-proportional` (fetch failed)。
-- **次**: (1) empty 37 件を「実在の欠陥」と「`expected-empty.ts` 登録漏れ」に仕分ける。
-  (2) 仕分けと並行して、ゼロ件ゲートを exit 1 のままにするか、成功分の push を
-  通してからゲートで落とすかを決める (partial-publish 化)。**(2) は `.github/` を触るので
-  人間の PR が要る** (`ACTIONS-EXPRESSION-INJECTION-01` と同じ制約)。
-- **完了条件**: schedule run が 2 回連続 success、または empty 37 件が仕分け済で
-  fatal が出ず、R2 の `app/stats` が当月分に更新されていることを実測できる。
-- **注意**: 2026-07-05 の失敗は**別原因** (sync-snapshots の correlation task が JS ヒープ
-  OOM 4,051MB。heap は 8GB へ引き上げ済)。同じ「連続失敗」でも原因が違うので混同しない。
-  また 2026-08-16 dispatch / 2026-08-17 push でも失敗しており、schedule 以外でも再現する。
+**KDP 残り 22 冊の出版が手動待ちになった**。日次 cron (`com.stats47.kdp-resume-daily`) を停止し KDP 出品は手動のみへ確定したため (規約 `.claude/rules/coconala-product-standards.md` §8)、`status != listed` の 22 冊は誰かが `/kdp-publish` を回さない限り進まない。1 冊ずつ承認して出すか、出版自体をやめるかの方針が要る
 
-### [SCRIPTS-TYPECHECK-01] `.claude/scripts` を型検査に載せる
-
-- **tier**: 2
-- **status**: pending
-- **created**: 2026-08-13
-- **owner**: uruhayato373
-- **背景**: 2026-08-13 に `scripts` ディレクトリ全件を型検査へ載せた際、`.claude/scripts` だけ
-  免除として残した。TS 41 ファイル、compiler option を調整しても error 71 件
-  (TS7006 implicit any 39 / TS2339 21 ほか)。素 JS の `lib/*.mjs` core を import する設計なので、
-  型付けの方針 (JSDoc で型を付ける / `.d.ts` を置く / core を TS 化する) を決めるところから要る。
-- **次**: 方針を 1 つ選び、まず 1 ドメイン (例 `ads`) で実証する。
-- **完了条件**: `.claude/scripts/tsconfig.json` が `type-check:scripts` に載り、
-  `scripts-type-check-coverage.test.cjs` の `KNOWN_UNCOVERED` が空になる。
-- **正典**: `.claude/rules/coding-standards.md`「CI が動かすスクリプトも型検査に載せる」
-
+根拠・再現条件: `.claude/config/kdp-listings.json` の status。skill `/kdp-publish`・agent `kdp-operator`。KDP は未公開 10 冊前後で作成数制限に当たるため一度に全部は出せない

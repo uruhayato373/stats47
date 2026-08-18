@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * .claude/todo/04_改善バックログ.md のマークダウンテーブルを走査し、
+ * .claude/todo/improvements.md のマークダウンテーブルを走査し、
  * status: pending|in-progress|effect/pending な active 施策を抽出する。
  *
  * weekly-plan の自動候補抽出と、triage-matrix.mjs の両方で利用する。
@@ -20,7 +20,7 @@
  *   [
  *     {
  *       metric: "gsc",
- *       file: ".claude/todo/04_改善バックログ.md",
+ *       file: ".claude/todo/improvements.md",
  *       section_id: "BLOG-CTR-02",
  *       title: "SEO タイトル改修 ...",
  *       status: "pending",
@@ -30,7 +30,7 @@
  *       deployed_at: "2026-06-01",   // タイトルから抽出した deploy 日 (無ければ null)
  *       overdue_days: 59,            // deployed_at からの経過日数 (無ければ null)
  *       owner: "claude",
- *       deep_link: ".claude/todo/04_改善バックログ.md"
+ *       deep_link: ".claude/todo/improvements.md"
  *     }
  *   ]
  *
@@ -48,7 +48,7 @@ import { extractDeployDate } from "./effect-verdict/engine.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const BACKLOG_REL = ".claude/todo/04_改善バックログ.md";
+const BACKLOG_REL = ".claude/todo/improvements.md";
 const BACKLOG_PATH =
   process.env.IMPROVEMENT_BACKLOG_PATH || path.join(PROJECT_ROOT, BACKLOG_REL);
 
@@ -100,7 +100,7 @@ export function overdueDays(deployedAt, today = new Date()) {
 }
 
 /**
- * 04_改善バックログ.md のマークダウンテーブルを行パースして施策一覧を返す。
+ * improvements.md のマークダウンテーブルを行パースして施策一覧を返す。
  * write-past-effects.mjs も同じパーサを再利用する (行の解釈を二重実装しない)。
  * @param {string} [backlogPath]
  * @param {Date} [today] overdue_days の基準日 (テストで固定する)

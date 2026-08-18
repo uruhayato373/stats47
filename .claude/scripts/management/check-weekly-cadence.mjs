@@ -2,7 +2,7 @@
 // 週次レビュー / 週次計画の cadence 欠落を検知する (実行漏れガード)。
 //
 // 背景: 週次メトリクス収集 (fetch-metrics-weekly.yml) は自動で回るが、レビュー文書
-// (skill reference/reviews/YYYY-Www.md) と現在計画 (.claude/todo/03_今週の計画.md) は人間/agent が
+// (skill reference/reviews/YYYY-Www.md) と現在計画 (.claude/todo/weekly.md) は人間/agent が
 // /weekly-review・/weekly-plan で手動生成する。cadence が途切れても誰も気づかず、
 // 2026-W26〜W28 のレビューが 3 週連続で欠落した。本スクリプトはその穴を機械検知する。
 //
@@ -24,7 +24,7 @@ const REVIEW_DIR = resolve(
   PROJECT_ROOT,
   ".claude/skills/management/weekly-review/reference/reviews",
 );
-const PLAN_FILE = resolve(PROJECT_ROOT, ".claude/todo/03_今週の計画.md");
+const PLAN_FILE = resolve(PROJECT_ROOT, ".claude/todo/weekly.md");
 const WINDOW = 10; // 遡って検査する週数 (これより古い穴は追わない)
 
 const jsonMode = process.argv.includes("--json");
@@ -103,7 +103,7 @@ if (missingReviews.length) {
 if (missingPlans.length) {
   bodyLines.push(`### ⚠️ 未作成の週次計画 (${missingPlans.length}週)`);
   for (const w of missingPlans) {
-    bodyLines.push(`- [ ] \`.claude/todo/03_今週の計画.md\` — \`/weekly-plan ${w}\``);
+    bodyLines.push(`- [ ] \`.claude/todo/weekly.md\` — \`/weekly-plan ${w}\``);
   }
   bodyLines.push("");
 }
