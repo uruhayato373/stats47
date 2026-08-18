@@ -223,7 +223,7 @@ npm run docs:check:all # テスト + 鮮度 + orphan候補
 npx tsc --noEmit -p apps/web/tsconfig.json
 cd apps/remotion && npx tsc --noEmit
 
-# 統合メディア管理コンソール（ローカル専用・依存ゼロ・127.0.0.1:4747）
+# 統合メディア管理コンソール（ローカル専用・Next.js 15・127.0.0.1:4747）
 # 1画面で: SNS素材(/sns 動画再生→投稿/予約/caption/メトリクス) + 画像資産(/assets OGP/カード/note/動画・欠落チェック/再生成)
 #         + ブログSVGカタログ(/svg) + プロジェクト現況(/dashboard メトリクス/進捗キュー/改善バックログTODO/STP戦略・読み取り専用ミラー)。
 #         起動後にブラウザで http://127.0.0.1:4747/（file:// で直接開かない）。
