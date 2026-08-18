@@ -251,10 +251,10 @@ export function readGscCoverage(root: string) {
   });
 }
 
-// ─── TODO 表 (.claude/todo/04_改善バックログ.md — 6 列 pipe テーブル) ──
+// ─── TODO 表 (.claude/todo/improvements.md — 6 列 pipe テーブル) ──
 export function parseBacklogMd(root: string) {
   return wrap(() => {
-    const md = fs.readFileSync(path.join(root, ".claude/todo/04_改善バックログ.md"), "utf8");
+    const md = fs.readFileSync(path.join(root, ".claude/todo/improvements.md"), "utf8");
     const lines = md.split(/\r?\n/);
     let tier: string | null = null;
     const rows: Array<{
@@ -295,7 +295,7 @@ export function parseBacklogMd(root: string) {
   });
 }
 
-// ─── TODO 表 (.claude/todo/05_機能バックログ.md) ──
+// ─── バックログ (.claude/todo/backlog.md — v3-unified カード) ──
 interface FeatureBacklogRow {
   section: string;
   id: string;
@@ -305,53 +305,42 @@ interface FeatureBacklogRow {
   created: string;
 }
 
+const TIER_LABELS: Record<string, string> = {
+  high: "🔴 高",
+  mid: "🟡 中",
+  low: "🟢 低",
+  hold: "🟣 判断待ち",
+};
+
 export function parseFeatureBacklogMd(root: string) {
   return wrap(() => {
-    const md = fs.readFileSync(path.join(root, ".claude/todo/05_機能バックログ.md"), "utf8");
-    const lines = md.split(/\r?\n/);
-    let section: string | null = null;
-    let cur: FeatureBacklogRow | null = null;
-    const rows: FeatureBacklogRow[] = [];
-    for (const l of lines) {
-      const h2 = l.match(/^## (.+)/);
-      if (h2) {
-        const t = h2[1];
-        section = /^P0\b/.test(t)
-          ? "P0 緊急"
-          : /^P1\b/.test(t)
-            ? "P1 今月"
-            : /^P2\b/.test(t)
-              ? "P2 次"
-              : /^P3\b/.test(t)
-                ? "P3 条件付き保留"
-                : null;
-        cur = null;
-        continue;
-      }
-      const h3 = l.match(/^### (.+)/);
-      if (h3) {
-        if (!section) {
-          cur = null;
-          continue;
-        }
-        const raw = h3[1];
-        const idM = raw.match(/^\[([^\]]+)\]\s*(.*)$/);
-        const hashM = raw.match(/^(#\d+)\s+(.*)$/);
-        const id = idM ? idM[1] : hashM ? hashM[1] : "";
-        let title = (idM ? idM[2] : hashM ? hashM[2] : raw).trim();
-        if (title.length > TITLE_TRUNC) title = `${title.slice(0, TITLE_TRUNC)}…`;
-        cur = { section, id, title, tier: "", status: "", created: "" };
-        rows.push(cur);
-        continue;
-      }
-      if (!cur) continue;
-      const b = l.match(/^- \*\*(tier|status|created)\*\*:\s*(.+)$/);
-      if (b && !cur[b[1] as "tier" | "status" | "created"]) {
-        let v = b[2].replace(/\*\*/g, "").trim();
-        if (v.length > 80) v = `${v.slice(0, 80)}…`;
-        cur[b[1] as "tier" | "status" | "created"] = v;
-      }
-    }
+    // パーサは backlog-lib (v3-unified の単一実装) を共有する。eval("require") は
+    // webpack の静的解析を避けるための既存パターン (todo.ts / posts-store.ts と同じ)
+    const nativeRequire = eval("require") as NodeRequire;
+    const lib = nativeRequire(path.join(root, ".claude/scripts/lib/backlog-lib.cjs")) as {
+      parseBacklog: (text: string) => Array<{
+        id: string | null;
+        title: string;
+        tier: string;
+        kind: string | null;
+        executor: string | null;
+        wip: boolean;
+        filed: string | null;
+      }>;
+    };
+    const md = fs.readFileSync(path.join(root, ".claude/todo/backlog.md"), "utf8");
+    const rows: FeatureBacklogRow[] = lib.parseBacklog(md).map((c) => {
+      let title = c.title;
+      if (title.length > TITLE_TRUNC) title = `${title.slice(0, TITLE_TRUNC)}…`;
+      return {
+        section: TIER_LABELS[c.tier] ?? c.tier,
+        id: c.id ?? "",
+        title,
+        tier: c.kind ?? "",
+        status: c.wip ? "進行中" : (c.executor ?? "分類待ち"),
+        created: c.filed ?? "",
+      };
+    });
     const bySection: Record<string, number> = {};
     for (const r of rows) bySection[r.section] = (bySection[r.section] || 0) + 1;
     const updated = md.match(/^updated: ([\d-]+)/m)?.[1] ?? null;
@@ -385,7 +374,7 @@ export function parseStrategyDocs(root: string) {
       sources: [
         mkPath,
         "docs/00_プロジェクト管理/04_ターゲットペルソナ.md",
-        ".claude/todo/04_改善バックログ.md",
+        ".claude/todo/improvements.md",
       ],
     };
   });
