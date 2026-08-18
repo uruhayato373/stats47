@@ -821,6 +821,16 @@ updated: 2026-08-18
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [BACKLOG-LOOP-V3-VERIFY-01] v3-unified 移行後の backlog-loop 日次 run が green か確認する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-08-18] [期日:2026-08-21]
+
+- **背景**: 2026-08-18 に TODO を v3-unified カード構文へ移行した (queue パリティは移行時に
+  実測一致: picked 同一・needsOwner 16+意図的2・wip 5)。無人 CI (JST 01:30) が新形式で
+  実走して green になることは翌日の run でしか確認できない。
+- **次**: `gh run list --workflow backlog-loop-daily.yml --limit 1` で移行後最初の run を確認し、
+  green なら本カードを削除する。red なら verify / queue の出力を読み、原因を新カードに起票する。
+- **完了条件**: 移行後の日次 run が 1 回 green (行削除があった場合は verify も通過)。
+
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
 タグ: [起票:2026-08-17]
 
