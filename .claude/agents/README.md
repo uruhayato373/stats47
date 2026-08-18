@@ -25,6 +25,7 @@
 | `strategy-advisor` | 週次 PDCA・NSM・批判的 review (knowledge / triage は分離) | 既存縮退 |
 | `backlog-processor` 🆕 | `.claude/todo/{05,06,01}` を分類して処理し、**機械ゲートを通ったものだけ**行削除する消化ループの主体。証拠は `.claude/state/backlog-loop/ledger.json` に残り、gate 無しの削除は verify が exit 1 で止める。04 は触らない (improvement-triage の排他 write)。正典 `.claude/rules/backlog-loop.md`、skill `/process-backlog` | 2026-08-17 新設 |
 | `backlog-solver-hard` 🆕 | backlog-loop の難物 (impl-large / indicator-expansion / sonnet が失敗した案件) を **1 起動 1 件**で解く。CI の run 本体は sonnet 固定なので、上位モデル (fable) は本 agent への委譲でのみ使う | 2026-08-17 新設 |
+| `todo-curator` 🆕 | `.claude/todo` の台帳を**整える** (消化ではない)。01 受信箱の triage、期限超過・鮮度切れの棚卸し提案、`00_運用ガイド.md` の整合維持、台帳外に散った TODO の回収。**行削除はしない** (gate 証拠付きの backlog-loop CI が専権)、04 も触らない | 2026-08-18 新設 |
 | `knowledge-curator` 🆕 | 失敗・学びの記録 + auto memory 整理 | strategy-advisor 分離 |
 | `improvement-triage` 🆕 | 改善バックログ整理 + status 更新 (`.claude/todo/04_改善バックログ.md` 排他 append) | strategy-advisor 分離 |
 | `blog-seo-strategist` 🆕 | ブログSEO拡充戦略の戦略ハブ (施策 done/todo 台帳 + 型配分 + 四半期再学習)。真実源 `.claude/state/blog/seo-strategy.json`。実行は trend-scout(記事)/ranking-expander(ランキング)/gsc-analyst(KPI)/improvement-triage(effect) に委譲。戦略全文は本 agent §戦略コンテキスト (旧 docs/02 doc 15 を統合し SSOT を .claude に一本化) | 2026-07-12 新設 |
