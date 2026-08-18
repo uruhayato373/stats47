@@ -74,14 +74,14 @@ export const EXPECTED_EMPTY: readonly ExpectedEmptyEntry[] = [
     key: "kindergarten-education-diffusion-rate",
     reason:
       "SSDS 0000010205 の cat01 から #E0910101 が消滅 (現行 59 コードに該当なし・getStatsData が STATUS:1)。同表の他コードは正常取得できるため表の廃止ではなく指標コードの改廃",
-    issue: "docs/todo/06_指標バックログ.md#SSDS-EDU-DIFFUSION-CODE-01",
+    issue: ".claude/todo/06_指標バックログ.md#SSDS-EDU-DIFFUSION-CODE-01",
     until: "2026-11-30",
   },
   {
     key: "nursery-education-diffusion-rate",
     reason:
       "SSDS 0000010205 の cat01 から #E0910102 が消滅 (同上)。`#E091xxxx` の命名帯自体が現行カタログに存在しない",
-    issue: "docs/todo/06_指標バックログ.md#SSDS-EDU-DIFFUSION-CODE-01",
+    issue: ".claude/todo/06_指標バックログ.md#SSDS-EDU-DIFFUSION-CODE-01",
     until: "2026-11-30",
   },
 ];

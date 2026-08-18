@@ -10,7 +10,7 @@ tags: [収益化, note, KDP, Brain, ココナラ, コンテンツ販売, AI, pro
 # マルチチャネル・コンテンツ商品ファクトリー仕様
 
 > 進捗・優先順位のSSOTは
-> `docs/todo/05_機能バックログ.md#MULTICHANNEL-CONTENT-PRODUCT-01`。
+> `.claude/todo/05_機能バックログ.md#MULTICHANNEL-CONTENT-PRODUCT-01`。
 > 本文書はClaude Code／商品管理エージェント向けの詳細な実装・運用参照資料であり、進捗状態を重複管理しない。
 
 ## 0. 決定
@@ -523,8 +523,8 @@ Excel/PPT: 作業を即時短縮
 | catalog status | `.claude/state/products/catalog-status.json`（生成） |
 | 販売実績 | `.claude/state/products/sales-ledger.json`（既存拡張） |
 | 実験 | `.claude/state/experiments.json`参照、product experiment state |
-| 月次判断 | 未完了策は `docs/todo/05_機能バックログ.md`、実測履歴はproduct state |
-| TODO | `docs/todo/05_機能バックログ.md` |
+| 月次判断 | 未完了策は `.claude/todo/05_機能バックログ.md`、実測履歴はproduct state |
+| TODO | `.claude/todo/05_機能バックログ.md` |
 
 永続D1を追加しない。売上APIが公式に提供され、利用条件を確認できるまで管理画面scrapingを実装しない。
 
@@ -900,6 +900,6 @@ Phase 0 task:
 3. 本仕様の提案path・型・agentが既存機能と重複する箇所を表にする。
 4. 各channelについて公式規約URL、確認日、未確認事項をregistry案にする。ログインやscrapingはしない。
 5. Phase 1の最小変更ファイル、migration不要/必要、test、受入条件を確定する。
-6. 未完了事項だけを `docs/todo/05_機能バックログ.md` の該当IDへ具体化する。
+6. 未完了事項だけを `.claude/todo/05_機能バックログ.md` の該当IDへ具体化する。
 7. コードは変更しない。Phase 1開始可否を ready / blocked と根拠付きで判定する。
 ```

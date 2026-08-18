@@ -1,6 +1,6 @@
 # バックログ自動処理ループ (backlog-loop) 標準
 
-`docs/todo/` のバックログを自動で消化し、完了エントリを削除し、失敗から学習して
+`.claude/todo/` のバックログを自動で消化し、完了エントリを削除し、失敗から学習して
 モデル割当まで自己調整するループの**単一ソース (SSOT)**。class 定義・completion gate・
 安全境界はここが正典で、agent / skill / workflow は参照のみ。
 
@@ -17,7 +17,7 @@
 
 | データ | 置き場 | 役割 |
 |---|---|---|
-| **真実源 (処理対象)** | `docs/todo/{05,06,01}` | 何を処理するか。完了は**行削除** |
+| **真実源 (処理対象)** | `.claude/todo/{05,06,01}` | 何を処理するか。完了は**行削除** |
 | **routing policy** | `.claude/config/backlog-routing-policy.json` | class → model / effort / maxAttempts / 委譲 / 反映方法。数値はここだけ |
 | **ledger (証拠と学習の原資)** | `.claude/state/backlog-loop/ledger.json` | 1 件 1 レコード upsert。**完了して行を消した後も証拠が残る** |
 | 純関数 | `.claude/scripts/backlog-loop/{parse-backlog,queue,ledger,verify,local-runtime}-core.cjs` | I/O を持たない。テストが実ファイルに依存しない |
@@ -208,7 +208,7 @@ quarantine されたエントリを戻すには、原因を潰したうえで 1 
 - 純関数とテスト: `.claude/scripts/backlog-loop/`
 - policy: `.claude/config/backlog-routing-policy.json`
 - TODO 作成契約 (行削除・status 語彙): `.claude/rules/docs-vs-issues.md`
-- 運用ガイド (P0-P3・削除条件): `docs/todo/00_運用ガイド.md`
+- 運用ガイド (P0-P3・削除条件): `.claude/todo/00_運用ガイド.md`
 - 実証ベース判定: `.claude/rules/evidence-based-judgment.md`
 - 無人 Claude ループの安全契約 (複製元): `.github/workflows/ai-content-generate-daily.yml` /
   `.claude/scripts/lib/__tests__/content-generation-routine.test.cjs`

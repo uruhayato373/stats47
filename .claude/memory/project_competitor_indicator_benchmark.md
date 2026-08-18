@@ -28,4 +28,4 @@ Web 競合 上位 2 社の保有指標数と stats47 の実態。
   2. 需要ギャップ展開 — GSC で「検索されているのに専用ランキングが無い」トピックだけ e-Stat 展開（全部ではなく需要が数字で確認できた分だけ）。
   3. ゼロ表示 877 本の診断 — not-indexed（活性化可能）か no-demand（受容）かを sample で切り分け。
 - 競合 todo-ran は 10 年超の被リンク蓄積で勝つ点は不変 → 量でなく差別化軸（市区町村×動画 / 相関 / public API）+ 既存資産の CTR/需要活用で攻める。
-- 関連: `docs/todo/04_改善バックログ.md#RANKING-CTR-01` / [[project_ranking_publish_pipeline_gap]] / [[feedback_backlog_ranking_key_audit]]
+- 関連: `.claude/todo/04_改善バックログ.md#RANKING-CTR-01` / [[project_ranking_publish_pipeline_gap]] / [[feedback_backlog_ranking_key_audit]]

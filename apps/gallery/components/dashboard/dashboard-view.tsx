@@ -110,10 +110,10 @@ export function DashboardView() {
 
           <section id="todo">
             <h2 className="mb-1 border-b border-console-border pb-1.5 text-sm font-semibold text-console-fg">
-              TODO — 改善バックログ{/* docs/todo/04_改善バックログ.md ミラー */}
+              TODO — 改善バックログ{/* .claude/todo/04_改善バックログ.md ミラー */}
             </h2>
             <p className="mb-3 text-xs text-console-muted">
-              真実源: <code className="rounded bg-console-card px-1">docs/todo/04_改善バックログ.md</code>{" "}
+              真実源: <code className="rounded bg-console-card px-1">.claude/todo/04_改善バックログ.md</code>{" "}
               (このテーブルは読み取り専用ミラー。編集は md 側で)
             </p>
             <BacklogTable backlog={data.backlog} />
@@ -124,7 +124,7 @@ export function DashboardView() {
               機能バックログ
             </h2>
             <p className="mb-3 text-xs text-console-muted">
-              真実源: <code className="rounded bg-console-card px-1">docs/todo/05_機能バックログ.md</code>{" "}
+              真実源: <code className="rounded bg-console-card px-1">.claude/todo/05_機能バックログ.md</code>{" "}
               (読み取り専用ミラー。編集は md 側で)
             </p>
             <FeatureTable featureBacklog={data.featureBacklog} />

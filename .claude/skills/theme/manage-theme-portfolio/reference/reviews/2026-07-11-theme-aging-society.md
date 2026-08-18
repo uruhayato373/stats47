@@ -138,7 +138,7 @@ tags: [theme-catalog, aging, metrics, charts]
 
 ### PR-2: 新規データと将来推計（別承認）
 
-1. 75歳以上人口比率を `docs/todo/06_指標バックログ.md`で調査
+1. 75歳以上人口比率を `.claude/todo/06_指標バックログ.md`で調査
 2. MetricConfig、47都道府県観測値、R2 snapshotを実装
 3. 実績と推計を区別するchart props/UIを別PRで設計
 4. 実測・推計の出典と境界年を明示

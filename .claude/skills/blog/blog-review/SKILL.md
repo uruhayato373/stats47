@@ -71,7 +71,7 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 3. 記事本文・チャート説明・データ出典を確認する
 4. 上記の構造・観点に従いレビューを作成する
 5. レビュー全文はセッション内で提示し、別ファイルには保存しない。横断的な未完了施策だけを
-   `docs/todo/04_改善バックログ.md` へID付きで統合する。
+   `.claude/todo/04_改善バックログ.md` へID付きで統合する。
 5b. **★公開ゲート用 `review.md` は必ず書き出す**: `docs/21_ブログ記事原稿/{slug}/review.md` に下記を Write。
    `quality-gate.mjs` は `published:true` の記事でこの `review.md` (verdict: PASS・実体200字以上) が
    無いと公開を blocker で止める (自己採点公開の防止)。**記事本文 (article.md) は編集しない**。

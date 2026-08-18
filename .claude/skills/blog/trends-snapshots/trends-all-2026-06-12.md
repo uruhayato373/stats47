@@ -122,7 +122,7 @@
 - **データ状況（★☆☆）**: active metric に **結核・麻疹・感染症の罹患/発生データが無い**（`vaccination-recipients-disease`＝HPVワクチン定期接種者数のみ存在）。
 - **データ補完の道筋**: `/search-estat "結核 登録者"` / `"感染症 発生動向"`（厚労省 感染症発生動向調査・結核登録者情報調査は県別あり）。
 - **記事の切り口（案）**: 「"昔の病気"結核が再増加する県はどこか｜都市集中と高齢化で読み解く地域差」。
-- **次のアクション**: `/search-estat` で県別 statsDataId を確認 → あれば `/fetch-estat-data`。無ければ将来の指標拡充 backlog（`docs/todo/06_指標バックログ.md`）へ。
+- **次のアクション**: `/search-estat` で県別 statsDataId を確認 → あれば `/fetch-estat-data`。無ければ将来の指標拡充 backlog（`.claude/todo/06_指標バックログ.md`）へ。
 
 ---
 

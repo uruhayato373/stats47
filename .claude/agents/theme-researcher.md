@@ -32,11 +32,11 @@ model: sonnet
 - テーマに載せるべき指標候補を **白書 (NotebookLM) / Web / 競合ダッシュボード / GSC 検索需要** から発見
 - 各候補に **推奨チャート (componentType)** と **選定根拠 (provenance)** を付与
 - 候補の **e-Stat 実在検証を estat-researcher に委譲**し、実装可能性を確認
-- 実在確認に合格した提案を `docs/todo/06_指標バックログ.md` の7列候補表へ1行追加
+- 実在確認に合格した提案を `.claude/todo/06_指標バックログ.md` の7列候補表へ1行追加
 
 ## File Boundary (read-only 原則)
 
-- **書き込み可**: `docs/todo/06_指標バックログ.md` (検証済み候補行の追加) と
+- **書き込み可**: `.claude/todo/06_指標バックログ.md` (検証済み候補行の追加) と
   NotebookLM 台帳 `.claude/skills/theme/research-theme-catalog/reference/notebooks.md` (ノートブック追加時) のみ
 - **書き込み禁止**: カタログ TS (`packages/data-configs/src/theme-catalog/`)・IndicatorSet・page-components JSON・
   metric config。これらは採択後に theme-designer / theme-component-builder / data-ingester が編集する

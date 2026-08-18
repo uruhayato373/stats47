@@ -7,7 +7,7 @@ tags: [theme-catalog, definitions, caveats, ui]
 
 # テーマ定義・注意事項カード仕様
 
-> 実装状況と優先度は `docs/todo/05_機能バックログ.md` の
+> 実装状況と優先度は `.claude/todo/05_機能バックログ.md` の
 > `THEME-GUIDANCE-CARDS-01` を正典とする。本書はエージェントが実装時に読む詳細仕様であり、
 > 進捗台帳として使用しない。
 

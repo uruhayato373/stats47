@@ -22,7 +22,7 @@ name: 📤 AI Content Publish (develop → R2)
 #   - **workflow からの push (ai-content-generate-daily.yml の commit-back) → 発火しない**。
 #     GitHub Actions は既定の GITHUB_TOKEN による push で後続 workflow を起動しない仕様のため。
 #     日次 cron 側は actions: write を持ち、本 workflow を明示 dispatch している
-# 正典: .claude/rules/ranking-content-standards.md §生成パイプライン / docs/todo/05_機能バックログ.md [AICONTENT-DBLESS-REBUILD]
+# 正典: .claude/rules/ranking-content-standards.md §生成パイプライン / .claude/todo/05_機能バックログ.md [AICONTENT-DBLESS-REBUILD]
 
 on:
   workflow_dispatch:

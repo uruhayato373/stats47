@@ -3,7 +3,7 @@
  *
  * 旧174商品向けの記事プラン（移行対象）。恒久仕様は
  * .claude/rules/coconala-product-standards.md §9。削除条件:
- * docs/todo/05_機能バックログ.md の COCONALA-PRODUCT-FACTORY-01 完了時に14パック由来へ置換する。
+ * .claude/todo/05_機能バックログ.md の COCONALA-PRODUCT-FACTORY-01 完了時に14パック由来へ置換する。
  * - variant (K ライセンス / empty・sample 版) を記事本文で乱立させず canonical 記事へ集約する。
  * - memberProductIds は全体で 174 商品を「漏れなく・重複なく」覆う (coverage validator が保証)。
  * - disposition は product-note-mapping.ts が (family, 記事) から決定的に導出する。

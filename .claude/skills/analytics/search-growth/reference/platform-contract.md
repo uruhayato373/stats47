@@ -17,9 +17,9 @@ tags: [search-growth, gsc, ga4, crux, psi, cloudflare, mcp]
 - Observationの機械契約: `.claude/scripts/search-growth/lib/contracts.mjs`
 - scoreとcandidate生成: `.claude/scripts/search-growth/lib/scoring.mjs`
 - 週次期間・承認契約: `weekly-cycle-contract.md`
-- 実装状況・未完了作業: `docs/todo/05_機能バックログ.md`の
+- 実装状況・未完了作業: `.claude/todo/05_機能バックログ.md`の
   `SEARCH-OBSERVABILITY-RELEASE-01`
-- 改善施策と効果判定: `docs/todo/04_改善バックログ.md`
+- 改善施策と効果判定: `.claude/todo/04_改善バックログ.md`
 
 本書に進捗や一時handoffを持たせない。実装履歴はgit、未完了作業はTODOへ置く。
 

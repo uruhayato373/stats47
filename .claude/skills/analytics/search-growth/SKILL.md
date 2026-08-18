@@ -8,7 +8,7 @@ primary_agent: gsc-analyst
 
 GSC だけを見る運用をやめ、**検索露出・クリック・インデックス・流入後行動・実ユーザー性能・サーバー状態を
 一つの証拠チェーン**で診断する。基盤・安全境界は`reference/platform-contract.md`、期間・承認・
-14/28/56日判定は`reference/weekly-cycle-contract.md`を正典とする。進捗は`docs/todo/`だけで管理する。
+14/28/56日判定は`reference/weekly-cycle-contract.md`を正典とする。進捗は`.claude/todo/`だけで管理する。
 
 ```
 既存 snapshot (GSC/GA4/PSI/coverage/inspection/cloudflare) + live collector (sitemap/crux/http/lighthouse)
@@ -71,7 +71,7 @@ write は tool として存在しない**。詳細は`reference/platform-contrac
 ## 効果判定 (evidence-based-judgment 必読)
 
 candidate を実装 → 14/28/56 日で `measure` の suggestedVerification に従い再計測。**自動 issue は PSI/Cloudflare
-閾値 alert のみ**。一般候補は人間承認後に `docs/todo/04_改善バックログ.md` へ追加する。CTR 候補は過去の
+閾値 alert のみ**。一般候補は人間承認後に `.claude/todo/04_改善バックログ.md` へ追加する。CTR 候補は過去の
 title rewrite の effect/none を踏まえ confidence を抑制済 — CTR だけを根拠に大量 rewrite しない。
 
 ## 専門 runbook (統合入口から参照)
@@ -105,5 +105,5 @@ observe-after-fix (sitemap/内部リンク/canonical/content 修正 + URL Inspec
 
 - `reference/platform-contract.md` — source、Observation、candidate、MCP、安全・準拠境界
 - `reference/weekly-cycle-contract.md` — finalized7d / rolling28d、triage、WIP、14/28/56日判定
-- `docs/todo/05_機能バックログ.md` — 実装・live検証の残作業
-- `docs/todo/04_改善バックログ.md` — 採択施策と効果判定
+- `.claude/todo/05_機能バックログ.md` — 実装・live検証の残作業
+- `.claude/todo/04_改善バックログ.md` — 採択施策と効果判定

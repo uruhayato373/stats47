@@ -39,7 +39,7 @@ CVR / 集客 / 継続性を検証する最小ロット。無料 3 本で集客 �
 | 4 | 09 | assembly-question-points | 無料 | W2 | 議会事務局ペルソナへの送客、#05 への布石 |
 | 5 | 05 | assembly-answer-prompts | 有料 ¥1,200 | W3 | 議会事務局ペルソナへの本命課金記事 |
 
-MVP 5 本公開後、`/fetch-note-metrics` で CVR と PV を測定し、未完了の次アクションだけを `docs/todo/04_改善バックログ.md` にID付きで記録する。
+MVP 5 本公開後、`/fetch-note-metrics` で CVR と PV を測定し、未完了の次アクションだけを `.claude/todo/04_改善バックログ.md` にID付きで記録する。
 
 ### Series A (Week 4-26、MVP 合格時のみ展開)
 
@@ -166,7 +166,7 @@ node .claude/scripts/note/aggregate-koumuin-metrics.cjs \
   --tag koumuin-claude-code
 ```
 
-集計履歴は `/fetch-note-metrics` のreferenceへ保存し、未完了の次アクションだけを `docs/todo/04_改善バックログ.md` に記録する。
+集計履歴は `/fetch-note-metrics` のreferenceへ保存し、未完了の次アクションだけを `.claude/todo/04_改善バックログ.md` に記録する。
 
 ## 5. 撤退条件
 
@@ -180,7 +180,7 @@ node .claude/scripts/note/aggregate-koumuin-metrics.cjs \
 | Week 26 (M6) | 月収益 < ¥50,000 | note 単体撤退、講演 / 法人研修パイプラインへ転換 |
 | 任意の時点 | 「stats47 本業の KPI が落ちている」と週次レビューで判定 | note を週 5 本 → 週 3 本に減速 |
 
-撤退判定は本書の条件と実測を突合し、「続行 / 縮小 / 撤退」を明示する。続行時の未完了策だけを `docs/todo/04_改善バックログ.md` に残し、撤退・完了履歴はGitに委ねる。
+撤退判定は本書の条件と実測を突合し、「続行 / 縮小 / 撤退」を明示する。続行時の未完了策だけを `.claude/todo/04_改善バックログ.md` に残し、撤退・完了履歴はGitに委ねる。
 
 ## 6. X 連携方針
 
@@ -262,6 +262,6 @@ node .claude/scripts/note/aggregate-koumuin-metrics.cjs \
 - SNS キャプション: `docs/31_note記事原稿/koumuin-claude-code/<NN>-<slug>/captions.md` (本戦略策定と同時に全 30 本作成)
 - 撮影ガイド: `docs/31_note記事原稿/koumuin-claude-code/<NN>-<slug>/screenshot-guide.md`
 - 画像: `docs/31_note記事原稿/koumuin-claude-code/<NN>-<slug>/images/*.svg`
-- 月次判定: `/fetch-note-metrics` のreference履歴 + `docs/todo/04_改善バックログ.md` (M1 / M3 / M6)
+- 月次判定: `/fetch-note-metrics` のreference履歴 + `.claude/todo/04_改善バックログ.md` (M1 / M3 / M6)
 - 既存スキル: `.claude/skills/note/{publish-note,write-note-section,design-note-structure,edit-note-draft}/`
 - メトリクス: `.claude/state/metrics/note/` (`/fetch-note-metrics` で更新)

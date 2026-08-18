@@ -1,5 +1,5 @@
 {
   "note": "AdSense candidate の confidence を抑制する過去施策の effect/none・effect/adverse 台帳。key は adsense-diagnostics の candidate id `<rule>::<key>` (例 device-regression::Desktop)。value は \"none\" | \"adverse\"。",
-  "source": "docs/todo/04_改善バックログ.md の effect ラベル (writer: .claude/scripts/lib/write-past-effects.mjs)",
+  "source": ".claude/todo/04_改善バックログ.md の effect ラベル (writer: .claude/scripts/lib/write-past-effects.mjs)",
   "candidates": {}
 }

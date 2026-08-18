@@ -61,4 +61,4 @@ metadata:
 - 計測 `measure-expansion-impact.mjs`(公開4週後GSC流入→キュー反映→build再実行でcategoryTraffic更新)
 
 ## 次: 公開サイクル (最後に1デプロイ)
-develop の ~39本 + main の 7本を **一括投入(e-Stat→R2 values.json)→ generate-ranking-items(item.json)→ KNOWN/SITEMAP再生成 → 最後に1デプロイ → 本番200実測**。ingestは data-refresh(main checkout・--metric単一)なので、1デプロイ実現には develop読みの push-trigger投入workflow が要る(未実装)。GSC実測は公開4週後。関連: [[project_competitor_indicator_benchmark]] / docs/todo/06_指標バックログ.md
+develop の ~39本 + main の 7本を **一括投入(e-Stat→R2 values.json)→ generate-ranking-items(item.json)→ KNOWN/SITEMAP再生成 → 最後に1デプロイ → 本番200実測**。ingestは data-refresh(main checkout・--metric単一)なので、1デプロイ実現には develop読みの push-trigger投入workflow が要る(未実装)。GSC実測は公開4週後。関連: [[project_competitor_indicator_benchmark]] / .claude/todo/06_指標バックログ.md

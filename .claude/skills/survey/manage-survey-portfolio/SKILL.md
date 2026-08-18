@@ -103,7 +103,7 @@ npx vitest run apps/web/src/features/survey/survey-editorial.test.ts --root apps
 ## 禁止
 
 - R2 push / deploy / production 変更 (このスキルは state と reference だけを書く)
-- `docs/todo/04_改善バックログ.md` への直接書き込み (improvement-triage へ引き渡す)
+- `.claude/todo/04_改善バックログ.md` への直接書き込み (improvement-triage へ引き渡す)
 - portfolio/experiments の手編集 (builder スクリプト経由のみ)
 - 紐付けの別ロジック実装 (itemCount は audit-survey-linkage の実測値を転記)
 - 75 survey の一括 AI 長文化 / 未分類の受け皿となる擬似 survey の新設

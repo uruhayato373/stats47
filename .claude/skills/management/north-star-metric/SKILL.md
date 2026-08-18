@@ -73,7 +73,7 @@ stats47 はコンテンツメディアとして主に **Attention ゲーム** �
 - SNS 指標（時系列）: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` 経由）
 ```
 
-現在の週次計画（`docs/todo/03_今週の計画.md`）から追跡中の KPI を確認する。
+現在の週次計画（`.claude/todo/03_今週の計画.md`）から追跡中の KPI を確認する。
 
 ### Step 3: NSM 候補の検討
 
@@ -163,7 +163,7 @@ NSM を駆動する 3-5 の Input Metrics を定義する。各 Input Metric は
 ### Step 6: SSOTとTODOへ反映する
 
 NSM定義・Input Metrics・意思決定ゲートは `docs/00_プロジェクト管理/02_収益化戦略.md` へ直接反映する。
-未完了の計測・改善だけを `docs/todo/04_改善バックログ.md` へ具体化する。レビュー全文は保存しない。
+未完了の計測・改善だけを `.claude/todo/04_改善バックログ.md` へ具体化する。レビュー全文は保存しない。
 週次snapshotは `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/{YYYY-Www}.json` を継続使用する。
 
 ### Step 7: 変遷を確認する

@@ -14,7 +14,7 @@ primary_agent: knowledge-curator
 
 1. `.claude/rules/docs-vs-issues.md` を最後まで読む。
 2. 変更前に `npm run docs:report` を実行し、現状のerror・warningを把握する。
-3. 新規作成要求でも、既存SSOT、`docs/todo/`、コード近傍README、skill/rule、
+3. 新規作成要求でも、既存SSOT、`.claude/todo/`、コード近傍README、skill/rule、
    state/referenceの順に統合先を探す。
 4. レビュー・監査は全文を保存せず、恒久判断を既存SSOT、未完了策をTODOへ反映する。
 5. 完了・撤退・superseded文書は参照元を更新して削除する。archiveは作らない。

@@ -6,7 +6,7 @@ stats47 の地図・チャート・公的統計から、ココナラ向け Offic
 - 恒久仕様: `.claude/rules/coconala-product-standards.md`
 - 商品カタログ SSOT: `src/catalog/products/packs.ts`（P-01〜P-14 の14テーマパック）
 - 旧商品案の由来: Git履歴上の旧 A-01〜L-07。現行の由来情報は `packs.ts` の `sourceIds`
-- 残タスク: `docs/todo/05_機能バックログ.md`
+- 残タスク: `.claude/todo/05_機能バックログ.md`
 
 商品定義・テンプレート・生成コードは git TS、観測値は既存 R2 が SSOT。生成した Office、
 PDF、画像、EPUB は `.local/` 配下の派生物であり、git や公開 R2 へ保存しない。

@@ -137,7 +137,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 ### Phase 6 — 記録 (真実源を更新)
 - 完了した URL を done に: `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> --wave-id 2026-MM-DD-coverage`
 - `improvement-log.md` の `[COVERAGE-LOOP-01]` に「何をやったか」(送信件数・content-check 結果・fix-5xx PR) を追記。
-- 改善バックログ `docs/todo/04_改善バックログ.md` の `COVERAGE-LOOP-01` 行の status / 期日を更新 (improvement-triage)。
+- 改善バックログ `.claude/todo/04_改善バックログ.md` の `COVERAGE-LOOP-01` 行の status / 期日を更新 (improvement-triage)。
 - **effect/* を付ける前に実証チェックリスト** (`evidence-based-judgment.md`): 送信した URL が次週 indexed 化したかを
   URL Inspection / totals-history で確認してからでないと effect/full を付けない。
 
@@ -156,7 +156,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 | 取り込み済 drilldown | `.claude/state/metrics/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
 | observe-after-fix 対象 | `.claude/state/metrics/gsc/coverage-drilldown/<週>/coverage-live-observe-urls.csv` | build が書く / url-inspection で観測 |
 | agent 用詳細ログ | `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |
-| TODO 真実源 | `docs/todo/04_改善バックログ.md` `COVERAGE-LOOP-01` | improvement-triage |
+| TODO 真実源 | `.claude/todo/04_改善バックログ.md` `COVERAGE-LOOP-01` | improvement-triage |
 
 ## cadence (週次)
 

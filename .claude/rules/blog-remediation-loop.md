@@ -58,7 +58,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs
 | 品質棚卸し (入力) | `audit-published-blog.mjs` → `/tmp/published-blog-audit.json` | builder が fresh 取得 |
 | GSC 流入 (入力) | `.claude/skills/analytics/gsc-improvement/reference/snapshots/<週>/pages.csv` | builder が読む |
 | brushup 履歴 (wave_id) | `.claude/state/blog/auto-brushup-history.json` | done シード + dedup |
-| wave 人間向け (effect) | `docs/todo/04_改善バックログ.md` の `## [BLOG-WAVE-<wave_id>]` | brushup deploy 時に追記 / weekly-review が判定 |
+| wave 人間向け (effect) | `.claude/todo/04_改善バックログ.md` の `## [BLOG-WAVE-<wave_id>]` | brushup deploy 時に追記 / weekly-review が判定 |
 | 品質基準 (正典) | `.claude/rules/blog-quality-standards.md` | article-writer・blog-critic・quality-gate |
 | 内部リンク実在の live 監査 | `.claude/state/blog/internal-link-audit.json` (`internal-link-audit-weekly.yml`) | 日曜 04:00 JST。壊れは `link-alert` Issue + オフライン分は audit-published-blog 経由でキューにも流れる |
 
@@ -118,7 +118,7 @@ CI で Claude を動かさず (APIコストゼロ)、リライト本体は人間
   で週次計測本体は止めない。
 - **`measure-gsc-impact.mjs` の wave_id 駆動**: `auto-brushup-history.json` の wave_id を真実源に
   **due (是正から `--min-weeks` 以上経過) に達した各 wave** の before/after を週次 GSC で自動 diff。
-  `docs/todo/04_改善バックログ.md` の `## [BLOG-WAVE-<wave_id>]` を upsert (冪等)。delta を提示するだけで
+  `.claude/todo/04_改善バックログ.md` の `## [BLOG-WAVE-<wave_id>]` を upsert (冪等)。delta を提示するだけで
   status は `effect/pending` 据え置き — **effect/full|partial の確定は weekly-review (人間) が 2-4 週連続観測で**
   行う (evidence-based-judgment.md 準拠)。
   - before 週 = wave 週直前の利用可能 snapshot 週、after 週 = 最新週。ISO 週は `isoWeekOf` で算出。
