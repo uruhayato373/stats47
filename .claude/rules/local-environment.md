@@ -223,13 +223,19 @@ npm run docs:check:all # テスト + 鮮度 + orphan候補
 npx tsc --noEmit -p apps/web/tsconfig.json
 cd apps/remotion && npx tsc --noEmit
 
-# 統合メディア管理コンソール（ローカル専用・Next.js 15・127.0.0.1:4747）
-# 1画面で: SNS素材(/sns 動画再生→投稿/予約/caption/メトリクス) + 画像資産(/assets OGP/カード/note/動画・欠落チェック/再生成)
-#         + ブログSVGカタログ(/svg) + プロジェクト現況(/dashboard メトリクス/進捗キュー/改善バックログTODO/STP戦略・読み取り専用ミラー)。
-#         起動後にブラウザで http://127.0.0.1:4747/（file:// で直接開かない）。
-# 常駐プロセスなので run_in_background + Ready polling で起動する。skill: /sns-gallery
+# 管理コンソール（ローカル専用・Next.js 15・127.0.0.1:4747）
+# 10 画面:
+#   制作・投稿 : /sns (動画再生→投稿/予約/caption/メトリクス) ・ /buzz-map (企画キューと素材生成)
+#   資産       : /assets (OGP/カード/note/動画・欠落チェック/再生成) ・ /svg (ブログSVGカタログ)
+#   収益       : /revenue (AdSense 週次・内訳。他チャネルは未計測と明示) ・ /ads (アフィリ運用ゲート/在庫/GA4/compliance)
+#   品質・運用 : /dashboard (メトリクス・進捗キュー・STP戦略) ・ /quality (8監査の残欠陥と鮮度)
+#                /ops (workflow健全性・R2鮮度・Claude利用量・agents/skills/memory台帳) ・ /todo (.claude/todo 台帳)
+# 書き込みは /sns の投稿予約と /buzz-map の素材生成だけで、他はすべて読み取り専用。
+#   起動後にブラウザで http://127.0.0.1:4747/（file:// で直接開かない）。
+# 常駐プロセスなので run_in_background + Ready polling で起動する。skill: /admin-console
 # 実装は独立 Next.js アプリ apps/admin (localhost 専用・127.0.0.1 bind 固定・PORT= で上書き可)。
 # 旧 node:http 実装 (.claude/scripts/gallery/) と sns:gallery alias は 2026-07-16 に廃止。
+# apps/gallery からの改名は 2026-08-18 (中身が画像ギャラリーでなく運営全体の管理画面になったため)。
 npm run admin
 ```
 

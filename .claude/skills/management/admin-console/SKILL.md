@@ -74,7 +74,7 @@ PORT=5000 npm run admin    # ポート変更
 
 ## 関連
 
-- 実装: `apps/admin/` (Next.js App Router。app/=5画面+API、lib/server/=ドメイン層、README に構成・ガード詳細)
+- 実装: `apps/admin/` (Next.js App Router。app/=10画面+API、lib/server/=ドメイン層、README に構成・ガード詳細)
 - 共有 collector: `.claude/scripts/lib/gallery-collectors.mjs` / SVG 分類: `.claude/scripts/lib/svg-classify.mjs`
 - CI 静的ギャラリー (collector 共用): `.claude/scripts/ogp/build-image-gallery.mjs` (`--audit` 週次ゲート)
 - 台帳ストア: `.claude/scripts/lib/sns-posts-store.cjs`
