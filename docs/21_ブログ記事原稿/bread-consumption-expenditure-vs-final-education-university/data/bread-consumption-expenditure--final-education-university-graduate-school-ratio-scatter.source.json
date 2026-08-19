@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "bread-consumption-expenditure",
+  "pair": "final-education-university-graduate-school-ratio",
+  "pearsonR": 0.6859491517576447,
+  "partialRPopulation": 0.6060869376316391,
+  "unit": "円 × ％",
+  "label": "パン消費支出額 と 最終学歴が大学・大学院卒の者の割合 の関係",
+  "source": "r2:app/correlation/by-ranking-key/bread-consumption-expenditure.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug bread-consumption-expenditure-vs-final-education-university --base bread-consumption-expenditure --pair final-education-university-graduate-school-ratio --data-name bread-consumption-expenditure--final-education-university-graduate-school-ratio"
+}
