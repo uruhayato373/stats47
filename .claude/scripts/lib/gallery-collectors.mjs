@@ -293,7 +293,7 @@ export async function buildTab(tab, opts) {
       if (limit) slugs = slugs.slice(0, limit);
       return {
         source: "r2-static",
-        aspect: "16:9",
+        aspect: "1.91:1",
         r2KeyPattern: `app/blog/<slug>/thumbnail-{light,dark}.webp`,
         entries: slugs.map((s) => ({
           key: s,

@@ -13,6 +13,9 @@
 const R2_PUBLIC_URL =
   process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
 
+/** ブログ OGP / サイト内サムネイルの共通表示比率。生成契約は 1200×630。 */
+export const BLOG_THUMBNAIL_ASPECT_CLASS = "aspect-[1200/630]";
+
 /** R2 キー (先頭スラッシュ無し) から静的 OGP 画像の絶対 URL を作る。 */
 export function ogpImageUrl(r2Key: string): string {
   return `${R2_PUBLIC_URL}/${r2Key}`;
