@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import Link from "next/link";
 
 import { lookupArea } from "@stats47/area";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
@@ -32,11 +32,6 @@ interface Props {
   pageCharts?: PageComponent[];
   /** 選択中の都道府県コード（null = 全国） */
   selectedPrefectureCode: string | null;
-  /**
-   * 地図なしレイアウト時に true を渡す。
-   * 県未選択時の「地図で都道府県を選択すると…」ヒントを非表示にする。
-   */
-  mapless?: boolean;
   /**
    * true のとき KPI スタットカードのみ描画し、時系列チャート・考察
    * (markdown-section) を出さない。hideMap のカードのみビュー用。
@@ -72,7 +67,6 @@ export function ThemeMetricsDashboard({
   indicatorDataMap,
   pageCharts,
   selectedPrefectureCode,
-  mapless,
   cardsOnly,
 }: Props) {
   const areaName = selectedPrefectureCode
@@ -212,33 +206,26 @@ export function ThemeMetricsDashboard({
   }
 
   return (
-    <section className="space-y-6">
+    <section className="@container space-y-4">
       {/* KPI カード（areas スタイル） */}
       {kpis.length > 0 && (
         <div>
-          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-primary" />
-              <h2 className="text-lg font-bold">{areaName}の主要指標</h2>
-            </div>
-            {selectedPrefectureCode ? (
+          <h2 className="sr-only">{areaName}の主要指標</h2>
+          {selectedPrefectureCode && (
+            <div className="mb-2 flex justify-end">
               <Link
                 href={`/areas/${selectedPrefectureCode}`}
                 className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
               >
                 {areaName}のプロフィール <ArrowRight className="h-3 w-3" />
               </Link>
-            ) : mapless ? null : (
-              <span className="text-xs text-muted-foreground">
-                地図で都道府県を選択すると順位を表示
-              </span>
-            )}
-          </div>
+            </div>
+          )}
           {/* 指標カード。タイルのチェックで系列を重ね、下の 1 枚に描く。
               カードとチャートで同じ事実を二度描かない構成 (2026-08-05 に全テーマ展開。
               旧 ChartCard グリッドはミニチャートと下段チャートが重複していたので廃止)。
               グループ定義があれば 1 グループ = 1 枚で並べる (2026-08-06)。 */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {panels.map((panel) => (
               <MetricSwitcherPanel
                 key={panel.key}
@@ -256,7 +243,7 @@ export function ThemeMetricsDashboard({
 
       {/* 時系列チャート */}
       {chartComponents.length > 0 && (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 @md:grid-cols-2">
           {chartComponents.map((chart) => (
             <ChartPanel
               key={chart.componentKey}

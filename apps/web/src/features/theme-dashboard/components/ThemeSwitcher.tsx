@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
+import { cn } from "@stats47/components";
 import {
   Select,
   SelectContent,
@@ -48,6 +49,8 @@ interface Props {
   currentThemeKey: string;
   /** エリアページ経由時の都道府県コード（5桁）。指定時は都道府県文脈を維持する。 */
   areaContext?: { areaCode: string };
+  /** 狭幅ツールバー内で使う、短いラベル + 全幅 Select の表示。 */
+  compact?: boolean;
 }
 
 /**
@@ -64,14 +67,20 @@ interface Props {
  * 遷移は `@stats47/components` の `Select` + `useRouter().push()`。現在値は props を正とし
  * ローカル state で二重管理しない。
  */
-export function ThemeSwitcher({ currentThemeKey, areaContext }: Props) {
+export function ThemeSwitcher({ currentThemeKey, areaContext, compact = false }: Props) {
   const router = useRouter();
   const options = buildThemeSwitcherOptions(areaContext);
 
   return (
-    <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-border pb-3 text-sm">
-      <span className="shrink-0 text-xs font-medium text-muted-foreground">
-        テーマを切り替える
+    <div
+      className={cn(
+        compact
+          ? "min-w-0"
+          : "mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-border pb-3 text-sm",
+      )}
+    >
+      <span className="block shrink-0 text-xs font-medium text-muted-foreground">
+        {compact ? "テーマ" : "テーマを切り替える"}
       </span>
       <Select
         value={currentThemeKey}
@@ -81,7 +90,10 @@ export function ThemeSwitcher({ currentThemeKey, areaContext }: Props) {
           if (next) router.push(next.href);
         }}
       >
-        <SelectTrigger className="w-full sm:w-64" aria-label="テーマを切り替える">
+        <SelectTrigger
+          className={compact ? "mt-1 w-full" : "w-full sm:w-64"}
+          aria-label="テーマを切り替える"
+        >
           <SelectValue />
         </SelectTrigger>
         <SelectContent>

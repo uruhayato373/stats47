@@ -41,6 +41,7 @@ import { ThemeAreaHeader } from "./ThemeAreaHeader";
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
 import { ThemeHero } from "./ThemeHero";
 import { ThemeIndicatorCatalogSection } from "./ThemeIndicatorCatalogSection";
+import { PrefectureSelect } from "./PrefectureSelect";
 import { ThemePrefectureProvider } from "./ThemePrefectureContext";
 import { ThemeRelatedArticles } from "./ThemeRelatedArticles";
 import { ThemeSideNav } from "./ThemeSideNav";
@@ -155,15 +156,24 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
 
       {toolbar}
 
-      {/* 狭幅（lg 未満）のテーマ切替。lg+ は左レール ThemeSideNav が担うので隠す。
+      {/* 狭幅（lg 未満）のテーマ・地域切替。lg+ は左レール ThemeSideNav が担うので隠す。
           ★境界は PageShell の左レール (hidden lg:block) と必ず一致させること。
           ずれると両方出る幅ができる (2026-08-05 に xl/lg のずれを是正)。
           areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
-      <div className="lg:hidden">
+      <div
+        role="group"
+        aria-label="テーマと地域"
+        className="mb-4 grid grid-cols-1 gap-2 border-y border-border py-3 sm:grid-cols-2 lg:hidden"
+      >
         <ThemeSwitcher
           currentThemeKey={theme.themeKey}
           areaContext={areaContext ? { areaCode: areaContext.areaCode } : undefined}
+          compact
         />
+        <div className="min-w-0">
+          <span className="block text-xs font-medium text-muted-foreground">地域</span>
+          <PrefectureSelect className="mt-1 w-full" />
+        </div>
       </div>
 
       {/* エリアページ経由時の視点バナー */}
@@ -177,7 +187,7 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
         </div>
       )}
 
-      {/* エリア連動の H1 + 都道府県セレクタ（全国デフォルト・client-side、SSG 不変）。
+      {/* エリア連動の H1（全国デフォルト・client-side、SSG 不変）。
           hero 画像を持つテーマ (THEME_HEROES) は画像付きの ThemeHero に差し替える。 */}
       {THEME_HEROES[theme.themeKey] ? (
         <ThemeHero themeTitle={theme.title} hero={THEME_HEROES[theme.themeKey]} />

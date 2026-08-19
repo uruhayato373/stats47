@@ -242,7 +242,7 @@ export function ThemeDashboardTabbed({
 
   // フル幅ダッシュボード (KPI カード + 時系列チャート + 考察) — areas スタイル。
   // cardsOnly は付けない: hideMap テーマでも page-components チャート + 考察を出す
-  // = カタログ情報の完全ダッシュボード化 (2026-07-04)。mapless は地図ヒント抑制のため維持。
+  // = カタログ情報の完全ダッシュボード化 (2026-07-04)。
   const metricsDashboardSection = (
     <ThemeMetricsDashboard
       themeConfig={themeConfig}
@@ -250,7 +250,6 @@ export function ThemeDashboardTabbed({
       indicatorDataMap={indicatorDataMap}
       pageCharts={pageCharts}
       selectedPrefectureCode={selectedPrefectureCode}
-      mapless={themeConfig.hideMap}
     />
   );
 

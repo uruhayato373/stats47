@@ -450,12 +450,13 @@ describe("MetricSwitcherPanel — チャートが空になる指標への退避"
     expect(screen.queryByTestId("line-chart")).toBeNull();
   });
 
-  it("単年のときは見出しも「推移」と言わない", async () => {
+  it("単年のときも重複するカード説明を追加しない", async () => {
     fetchMock.mockResolvedValue({ points: points([42]), source: "national" });
     renderPanel();
     await waitFor(() =>
-      expect(screen.getByText(/2020年時点の値/)).toBeInTheDocument(),
+      expect(screen.getByText(/2020年の単年データのため/)).toBeInTheDocument(),
     );
+    expect(screen.queryByText("2020年時点の値")).toBeNull();
   });
 });
 
@@ -512,11 +513,11 @@ describe("MetricSwitcherPanel — カード見出しと回遊と計測", () => {
     await waitFor(() => expect(screen.getByText("賃金の水準")).toBeInTheDocument());
   });
 
-  it("title 未指定なら代表指標のタイトルに倒す (従来の 1 パネル構成と同じ)", async () => {
+  it("title 未指定なら代表指標の見出しを読み上げ用だけに残す", async () => {
     renderPanel();
-    await waitFor(() =>
-      expect(screen.getByText("wage タイトル")).toBeInTheDocument(),
-    );
+    await waitFor(() => {
+      expect(screen.getByRole("heading", { name: "wage タイトル" })).toHaveClass("sr-only");
+    });
   });
 
   it("代表指標 (編成順の先頭) のランキングへの導線を出す", async () => {

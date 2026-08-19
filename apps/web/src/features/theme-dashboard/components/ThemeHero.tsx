@@ -3,7 +3,6 @@
 import { HeroBanner } from "@/components/layout";
 import type { PageHeroDef } from "@/components/layout/page-heroes";
 
-import { PrefectureSelect } from "./PrefectureSelect";
 import { useThemePrefecture } from "./ThemePrefectureContext";
 
 
@@ -11,8 +10,8 @@ import { useThemePrefecture } from "./ThemePrefectureContext";
  * hero 画像付きのテーマ見出し。ThemeAreaHeader の drop-in 差し替え
  * (hero を持つテーマだけ ThemePageLayout がこちらを描画する)。
  *
- * 描画は共有 HeroBanner に委譲し、都道府県連動の H1 と PrefectureSelect (actions) だけを供給する。
- * セレクタは xl+ では左レール (ThemeSideNav) に集約するため狭幅のみ表示する。
+ * 描画は共有 HeroBanner に委譲し、都道府県連動の H1 を供給する。
+ * 地域切替は lg+ の左レール、lg 未満のパンくず直下ツールバーに集約する。
  */
 export function ThemeHero({
   themeTitle,
@@ -31,13 +30,6 @@ export function ThemeHero({
       tagline={hero.tagline ?? ""}
       imageSrc={hero.image.src}
       imageAlt={hero.imageAlt}
-      actions={
-        // 境界は PageShell の左レール (hidden lg:block) と一致させる。
-        // ずれると左レールと二重に地域セレクタが出る。
-        <div className="lg:hidden">
-          <PrefectureSelect />
-        </div>
-      }
     />
   );
 }

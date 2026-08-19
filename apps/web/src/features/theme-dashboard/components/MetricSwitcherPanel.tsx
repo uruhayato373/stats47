@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 // 型サブパスから読む。registry (index) を値 import すると 20 テーマ分のカタログが
 // client bundle に載る (types.ts は型 import しか持たないので何も引き連れない)
 import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
-import { Check, MapPin } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { getChartColor } from '@/components/charts/ChartPalette';
@@ -39,7 +39,7 @@ const NATIONAL_CODE = '00000';
 const COMPARISON_DASH = '6,4';
 
 interface MetricSwitcherPanelProps {
-  /** カード見出し (グループ名。未指定ならデフォルトの主要指標見出し) */
+  /** カード見出し (複数指標を束ねるグループ名。未指定なら見出しを表示しない) */
   title?: string;
   /** このカードに並べる KPI 群 (タイルの中身・表示順) */
   metrics: MetricKpi[];
@@ -128,19 +128,6 @@ function assignAxes(checked: MetricKpi[]): {
     leftUnit: units[0] ? (labels.get(units[0]) ?? '') : '',
     rightUnit: units[1] ? labels.get(units[1]) : undefined,
   };
-}
-
-/** チャート見出しの説明文。実際に描いた系列から書く (比較線は指標によって出ない) */
-function describePanel(state: ChartState, areaName: string): string {
-  if (state.kind === 'single-year') return `${state.yearName}時点の値`;
-  if (state.kind === 'none') return `${areaName}の推移`;
-  const lines = state.data.lines;
-  if (state.hasComparison) {
-    const [primary, comparison] = lines;
-    return `${primary.name}の推移（破線は${comparison.name}）`;
-  }
-  if (lines.length === 1) return `${lines[0].name}の推移`;
-  return `${areaName}の推移（${lines.length}指標）`;
 }
 
 /**
@@ -442,10 +429,8 @@ export function MetricSwitcherPanel({
 
   return (
     <ChartPanel
-      title={title ?? representative?.title ?? ''}
-      icon={<MapPin className="h-4 w-4 shrink-0 text-primary" />}
+      title={title}
       titleClassName="text-base"
-      description={describePanel(chartState, areaName)}
       footer={
         representative ? (
           <ChartFooter
@@ -455,7 +440,10 @@ export function MetricSwitcherPanel({
         ) : undefined
       }
     >
-      <div className="mb-4">
+      {!title && representative ? (
+        <h3 className="sr-only">{representative.title}</h3>
+      ) : null}
+      <div className="mb-3">
         <ScrollableRow className="snap-x snap-mandatory">
           <div className="inline-flex w-max gap-2">
             {metrics.map((m) => {
@@ -482,10 +470,10 @@ export function MetricSwitcherPanel({
                       : // タイル幅に収まらないラベルを hover で読めるようにする
                         label
                   }
-                  className={`snap-start flex w-[9.5rem] shrink-0 flex-col items-start gap-1 rounded-none border border-border border-b-2 bg-card px-3 py-2 text-left ${
+                  className={`snap-start flex w-36 shrink-0 flex-col items-start gap-1 rounded-none border-0 border-b-2 bg-transparent px-3 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
                     checked
-                      ? 'border-primary/40'
-                      : 'border-b-border hover:border-primary/30'
+                      ? 'bg-accent/40'
+                      : 'border-b-border hover:bg-accent/30'
                   } ${lockedOn ? 'cursor-default' : 'cursor-pointer'}`}
                   style={checked ? { borderBottomColor: color } : undefined}
                 >

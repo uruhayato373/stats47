@@ -66,6 +66,12 @@ describe("ThemeSwitcher", () => {
     expect(screen.getByLabelText("テーマを切り替える")).toBeInTheDocument();
   });
 
+  it("compact 表示では短いラベルを使う", () => {
+    render(<ThemeSwitcher currentThemeKey="population-dynamics" compact />);
+    expect(screen.getByText("テーマ")).toBeInTheDocument();
+    expect(screen.queryByText("テーマを切り替える")).toBeNull();
+  });
+
   it("現在のテーマがセレクターの現在値として表示される", () => {
     const current = ALL_THEMES.find((t) => t.themeKey === "tourism")!;
     render(<ThemeSwitcher currentThemeKey="tourism" />);

@@ -87,7 +87,6 @@ function renderDashboard(
       themeConfig={themeConfig(themeKey)}
       indicatorDataMap={indicatorDataMap}
       selectedPrefectureCode={null}
-      mapless
       {...over}
     />,
   );
@@ -119,6 +118,11 @@ describe("ThemeMetricsDashboard — KPI の描画", () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
+  it("主要指標の重複見出しは読み上げ用だけに残す", () => {
+    renderDashboard("education-culture");
+    expect(screen.getByRole("heading", { name: "全国の主要指標" })).toHaveClass("sr-only");
+  });
+
   it("タイルには tabIndicators 由来の指標が渡る", () => {
     renderDashboard("labor-wages");
     expect(screen.getByTestId("switcher-panel")).toHaveAttribute("data-keys", METRIC_KEY);
@@ -143,7 +147,6 @@ describe("ThemeMetricsDashboard — 指標カードの編成 (metricGroups)", ()
         ]}
         indicatorDataMap={indicatorDataMap}
         selectedPrefectureCode={null}
-        mapless
       />,
     );
     const found = panels();
@@ -161,7 +164,6 @@ describe("ThemeMetricsDashboard — 指標カードの編成 (metricGroups)", ()
         themeConfig={themeConfig("climate", THREE)}
         indicatorDataMap={indicatorDataMap}
         selectedPrefectureCode={null}
-        mapless
       />,
     );
     const found = panels();
@@ -186,7 +188,6 @@ describe("ThemeMetricsDashboard — 指標カードの編成 (metricGroups)", ()
         ]}
         indicatorDataMap={indicatorDataMap}
         selectedPrefectureCode={null}
-        mapless
       />,
     );
     const found = panels();
@@ -205,7 +206,6 @@ describe("ThemeMetricsDashboard — 指標カードの編成 (metricGroups)", ()
         ]}
         indicatorDataMap={indicatorDataMap}
         selectedPrefectureCode={null}
-        mapless
       />,
     );
     const found = panels();
