@@ -194,6 +194,8 @@ jobs:
       # ドリフトしない。[skip ci] で自己再発火を防止、pull --rebase で他 push との race を吸収。
       - name: 🧹 Remove published drafts from docs/21 (ephemeral outbox)
         if: ${{ steps.detect.outputs.slugs != '' && success() }}
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
         run: |
           REMOVED=""
           for SLUG in $PUBLISHED; do
@@ -201,12 +203,23 @@ jobs:
               git rm -r -q "docs/21_ブログ記事原稿/$SLUG" && REMOVED="$REMOVED $SLUG"
             fi
           done
+          # ★sitemap のコミット済み snapshot を公開実態に追随させる (2026-08-20 配線)。
+          #   これが無いと `pr-quality-check.yml` の Known Tag Keys Gate が
+          #   「sitemap-blog-entries がコミット済みの内容と一致しません」で落ち、
+          #   記事を公開するたびに人手で再生成する運用になっていた
+          #   (実測: 08-15 / 08-16 / 08-17 ×2 / 08-21 と繰り返し発生)。
+          #   R2 の app/blog/all.json を読むだけの決定的生成なので副作用はない。
+          if (cd apps/web && NODE_OPTIONS='--conditions react-server' npx tsx scripts/generate-sitemap-blog-entries.ts); then
+            git add apps/web/src/config/sitemap-blog-entries.ts || true
+          else
+            echo "::warning::sitemap-blog-entries の再生成に失敗 (公開自体は成功。次の sync-snapshots で追随する)"
+          fi
           if git diff --cached --quiet; then
             echo "削除対象なし (docs/21 に公開済みドラフトの取り残しなし)"; exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -q -m "chore(blog): remove published drafts from docs/21 outbox [skip ci] -${REMOVED}"
+          git commit -q -m "chore(blog): outbox 掃除 + sitemap snapshot 追随 [skip ci] -${REMOVED}"
           # 他 workflow の push と競合しても落ちないよう rebase してから push (最大3回)
           for i in 1 2 3; do
             if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
