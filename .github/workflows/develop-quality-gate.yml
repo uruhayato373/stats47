@@ -21,7 +21,12 @@ name: 🚦 Develop Quality Gate
 #   ものは `pr-quality-check.yml` 側に置く (このゲートが重くなると develop への
 #   push が詰まり、結局 --no-verify を誘発して元の木阿弥になる)。
 #
-# ★cron の commit-back は `[skip ci]` を持つので発火しない (意図どおり)。
+# ★cron の commit-back はほぼすべて `[skip ci]` を持つので発火しない。
+#   2026-08-20 時点の例外は `gsc-url-inspection-daily.yml` の 1 本だけで、これは
+#   `.claude/state/metrics/gsc/url-inspection/` の CSV/MD しか触らないため緑で通る。
+#   **`paths-ignore` で state を除外しない**: 3 ゲートは変更差分ではなくリポジトリ全体を
+#   走査するので、除外するとその run 分の検査が丸ごと消えて穴になる (state の .json/.md も
+#   maintenance-debt の走査対象)。1 日 1 回の余分な run より穴のほうが高くつく。
 # ─────────────────────────────────────────────────────────────────────────────
 
 on:
@@ -59,7 +64,8 @@ jobs:
         run: npm ci
 
       - name: 📝 ESLint Check
-        # pr-quality-check.yml と同一コマンド。実測 7 秒 (lint task を持つのは web のみ)。
+        # pr-quality-check.yml と同一コマンド。lint 自体はローカル実測 7 秒
+        # (lint task を持つのは web のみ)。job 全体の時間は npm ci が支配的で未実測。
         run: npm run lint
         continue-on-error: false
 

@@ -81,7 +81,9 @@ git push origin develop
 ## develop への push も高速ゲートを通る (★2026-08-20 新設)
 
 **「develop は完全に無検査」ではなくなった。** `develop-quality-gate.yml` が push ごとに
-ESLint / env registry / maintenance debt の 3 つだけを走らせる (実測 7 秒〜1 分)。
+ESLint / env registry / maintenance debt の 3 つだけを走らせる。
+**ゲート本体はローカル実測で 7 秒**だが、job 全体は `npm ci` が支配的で未実測
+(初回 run で確認する)。
 
 なぜ足したか (実測): それ以前の develop は無検査だったため、pre-commit を通っていない変更が
 そのまま着地し、**壊れは「次に develop をマージする人」が払う**構造になっていた。
@@ -93,7 +95,10 @@ maintenance debt 1 件が origin/develop に入ったまま残っており (comm
 - **ここに重い検査を足さない。** 「決定的か」「1 分以内か」を満たさないものは
   `pr-quality-check.yml` 側に置く。develop への push が詰まると `--no-verify` を誘発し、
   ゲートを足した意味が消える。
-- cron の commit-back は `[skip ci]` を持つので発火しない (意図どおり)。
+- cron の commit-back はほぼすべて `[skip ci]` を持つので発火しない (実測: 23 本中 22 本)。
+  例外は `gsc-url-inspection-daily.yml` の 1 本だけで、state の CSV/MD しか触らないため緑で通る。
+- **`paths-ignore` で state を除外しない。** 3 ゲートは変更差分ではなく**リポジトリ全体**を
+  走査するので、除外するとその run 分の検査が丸ごと消えて穴になる。
 
 ### commit 前に blocker を一度に洗い出す
 
