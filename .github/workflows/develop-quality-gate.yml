@@ -64,9 +64,17 @@ jobs:
         run: npm ci
 
       - name: 📝 ESLint Check
-        # pr-quality-check.yml と同一コマンド。lint 自体はローカル実測 7 秒
-        # (lint task を持つのは web のみ)。job 全体の時間は npm ci が支配的で未実測。
-        run: npm run lint
+        # ★`npm run lint` (= turbo → `next lint`) を使わない。
+        #   `next lint` はパッケージマネージャを**外部プロセスとして起動**して registry を引く。
+        #   GitHub runner には yarn 1.22.22 が素で入っているため検出を誤り、
+        #   `Failed to get registry from "yarn"` で落ちる (2026-08-20 の初回 run で実測)。
+        #   ローカルは corepack が「このプロジェクトは npm」と拒否するため再現しない。
+        #   eslint を直接呼べば同じ設定・同じルールで、外部プロセスに依存しない
+        #   (pre-commit の staged lint と同じ方式)。`next lint` 自体も Next 15 で非推奨。
+        #   `--max-warnings` は付けない: 既存の warning 2 件 (no-img-element) で
+        #   develop が常に赤になり、ゲートが運用で無視されるようになる。error のみで判定する。
+        run: npx eslint src
+        working-directory: apps/web
         continue-on-error: false
 
       - name: 🔐 Environment Registry Guard
