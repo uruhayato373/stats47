@@ -1,0 +1,865 @@
+{
+  "probe": "WP6 expansion — unknown-no-audit-entry の値レベル照合",
+  "verifiedAt": "2026-08-20",
+  "note": "live-audit にエントリが無い metric (どのチャートからも参照されない) を候補へ昇格し、実 e-Stat fetch + buildJapanSeriesRows で採否を判定した。行の存在ではなく有効年の有無で判定している。",
+  "summary": {
+    "total": 142,
+    "verified-official": 71,
+    "verified-unsupported": 71,
+    "fetch-error": 0
+  },
+  "verified": [
+    {
+      "themeKey": "aging-society",
+      "metricKey": "aging-index",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='指数' / e-Stat unit='‐' (year=1975)"
+    },
+    {
+      "themeKey": "aging-society",
+      "metricKey": "total-fertility-rate",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='（人）' / e-Stat unit='‐' (year=1980)"
+    },
+    {
+      "themeKey": "aging-society",
+      "metricKey": "average-age-of-first-marriage-wife",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=29.7歳"
+    },
+    {
+      "themeKey": "aging-society",
+      "metricKey": "population-growth-rate",
+      "verdict": "verified-official",
+      "detail": "rows=4 range=2021..2024 latest=-4.4‰"
+    },
+    {
+      "themeKey": "aging-society",
+      "metricKey": "natural-increase-rate",
+      "verdict": "verified-official",
+      "detail": "rows=4 range=2021..2024 latest=-7.2‰"
+    },
+    {
+      "themeKey": "aging-society",
+      "metricKey": "social-increase-rate",
+      "verdict": "verified-official",
+      "detail": "rows=2 range=2018..2019 latest=1.7‰"
+    },
+    {
+      "themeKey": "aging-society",
+      "metricKey": "dependent-population-index",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='指数' / e-Stat unit='‐' (year=1975)"
+    },
+    {
+      "themeKey": "consumer-prices",
+      "metricKey": "consumer-price-difference-index-overall-excl-rent",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='（全国=100）' / e-Stat unit='‐' (year=2013)"
+    },
+    {
+      "themeKey": "consumer-prices",
+      "metricKey": "consumer-price-difference-index-education",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='（全国=100）' / e-Stat unit='‐' (year=2013)"
+    },
+    {
+      "themeKey": "consumer-prices",
+      "metricKey": "consumer-price-difference-index-culture-recreation",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='（全国=100）' / e-Stat unit='‐' (year=2013)"
+    },
+    {
+      "themeKey": "consumer-prices",
+      "metricKey": "consumer-price-difference-index-transport-communication",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='（全国=100）' / e-Stat unit='‐' (year=2013)"
+    },
+    {
+      "themeKey": "consumer-prices",
+      "metricKey": "consumer-price-difference-index-healthcare",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='（全国=100）' / e-Stat unit='‐' (year=2013)"
+    },
+    {
+      "themeKey": "consumer-prices",
+      "metricKey": "consumer-price-difference-index-clothing-footwear",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='（全国=100）' / e-Stat unit='‐' (year=2013)"
+    },
+    {
+      "themeKey": "consumer-prices",
+      "metricKey": "consumer-price-difference-index-furniture-household",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='（全国=100）' / e-Stat unit='‐' (year=2013)"
+    },
+    {
+      "themeKey": "consumer-prices",
+      "metricKey": "consumer-price-difference-index-miscellaneous",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='（全国=100）' / e-Stat unit='‐' (year=2013)"
+    },
+    {
+      "themeKey": "fishery-marine",
+      "metricKey": "inland-fishery-catch",
+      "verdict": "verified-official",
+      "detail": "rows=24 range=2000..2023 latest=21567トン"
+    },
+    {
+      "themeKey": "fishery-marine",
+      "metricKey": "aquaculture-harvest",
+      "verdict": "verified-official",
+      "detail": "rows=24 range=2000..2023 latest=881850トン"
+    },
+    {
+      "themeKey": "fishery-marine",
+      "metricKey": "fishery-output-value",
+      "verdict": "verified-official",
+      "detail": "rows=42 range=1975..2016 latest=1471604百万円"
+    },
+    {
+      "themeKey": "foreign-residents",
+      "metricKey": "resident-foreigner-population",
+      "verdict": "verified-official",
+      "detail": "rows=13 range=2012..2024 latest=3768977人"
+    },
+    {
+      "themeKey": "foreign-residents",
+      "metricKey": "foreign-resident-count-china",
+      "verdict": "verified-official",
+      "detail": "rows=9 range=1980..2020 latest=667475人"
+    },
+    {
+      "themeKey": "foreign-residents",
+      "metricKey": "foreign-resident-count-korea",
+      "verdict": "verified-official",
+      "detail": "rows=9 range=1980..2020 latest=374593人"
+    },
+    {
+      "themeKey": "foreign-residents",
+      "metricKey": "foreign-resident-count-usa-per-100k",
+      "verdict": "verified-official",
+      "detail": "rows=9 range=1980..2020 latest=38人"
+    },
+    {
+      "themeKey": "foreign-residents",
+      "metricKey": "foreign-resident-count-usa",
+      "verdict": "verified-official",
+      "detail": "rows=9 range=1980..2020 latest=47875人"
+    },
+    {
+      "themeKey": "healthcare",
+      "metricKey": "nurses-in-medical-facilities-per-100k",
+      "verdict": "verified-official",
+      "detail": "rows=28 range=1975..2022 latest=991.4人"
+    },
+    {
+      "themeKey": "healthcare",
+      "metricKey": "general-hospital-bed-count-per-100k",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=995.8床"
+    },
+    {
+      "themeKey": "healthcare",
+      "metricKey": "pharmacy-count-per-100k",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=50.5所"
+    },
+    {
+      "themeKey": "healthcare",
+      "metricKey": "general-hospital-avg-length-of-stay",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=22日"
+    },
+    {
+      "themeKey": "healthcare",
+      "metricKey": "general-hospital-bed-occupancy-rate",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=74.4％"
+    },
+    {
+      "themeKey": "healthcare",
+      "metricKey": "psychiatric-hospital-count-per-100k",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=0.9施設"
+    },
+    {
+      "themeKey": "healthcare",
+      "metricKey": "treatment-rate-mood-disorder-outpatient",
+      "verdict": "verified-unsupported",
+      "detail": "00000 (全国) 行が1件もない"
+    },
+    {
+      "themeKey": "labor-mobility",
+      "metricKey": "telework-rate",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='％' / e-Stat unit='人' (year=2022)"
+    },
+    {
+      "themeKey": "labor-mobility",
+      "metricKey": "side-job-rate",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='％' / e-Stat unit='人' (year=2022)"
+    },
+    {
+      "themeKey": "labor-mobility",
+      "metricKey": "monthly-average-actual-working-hours-male",
+      "verdict": "verified-official",
+      "detail": "rows=5 range=2020..2024 latest=175時間"
+    },
+    {
+      "themeKey": "labor-wages",
+      "metricKey": "starting-salary-university",
+      "verdict": "verified-official",
+      "detail": "rows=4 range=2020..2023 latest=224.4千円"
+    },
+    {
+      "themeKey": "labor-wages",
+      "metricKey": "starting-salary-highschool",
+      "verdict": "verified-official",
+      "detail": "rows=4 range=2020..2023 latest=224.4千円"
+    },
+    {
+      "themeKey": "labor-wages",
+      "metricKey": "scheduled-salary-male",
+      "verdict": "verified-official",
+      "detail": "rows=5 range=2020..2024 latest=363.1千円"
+    },
+    {
+      "themeKey": "labor-wages",
+      "metricKey": "nurse-salary",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='千円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "labor-wages",
+      "metricKey": "gender-wage-gap",
+      "verdict": "verified-unsupported",
+      "detail": "00000 (全国) 行が1件もない"
+    },
+    {
+      "themeKey": "labor-wages",
+      "metricKey": "male-part-time-hourly-wage",
+      "verdict": "verified-official",
+      "detail": "rows=5 range=2020..2024 latest=1699円"
+    },
+    {
+      "themeKey": "labor-wages",
+      "metricKey": "female-part-time-hourly-wage",
+      "verdict": "verified-official",
+      "detail": "rows=5 range=2020..2024 latest=1387円"
+    },
+    {
+      "themeKey": "labor-wages",
+      "metricKey": "employed-people-ratio",
+      "verdict": "verified-official",
+      "detail": "rows=5 range=2000..2020 latest=96.2％"
+    },
+    {
+      "themeKey": "labor-wages",
+      "metricKey": "telework-rate",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='％' / e-Stat unit='人' (year=2022)"
+    },
+    {
+      "themeKey": "labor-wages",
+      "metricKey": "side-job-rate",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='％' / e-Stat unit='人' (year=2022)"
+    },
+    {
+      "themeKey": "labor-wages",
+      "metricKey": "monthly-average-actual-working-hours-male",
+      "verdict": "verified-official",
+      "detail": "rows=5 range=2020..2024 latest=175時間"
+    },
+    {
+      "themeKey": "living-housing",
+      "metricKey": "housing-floor-area",
+      "verdict": "verified-unsupported",
+      "detail": "00000 (全国) 行が1件もない"
+    },
+    {
+      "themeKey": "living-housing",
+      "metricKey": "households",
+      "verdict": "verified-official",
+      "detail": "rows=10 range=1975..2020 latest=55830154世帯"
+    },
+    {
+      "themeKey": "living-housing",
+      "metricKey": "population-density-per-km2-inhabitable-area",
+      "verdict": "verified-official",
+      "detail": "rows=50 range=1975..2024 latest=1006.9人"
+    },
+    {
+      "themeKey": "living-housing",
+      "metricKey": "habitable-area-ratio",
+      "verdict": "verified-official",
+      "detail": "rows=50 range=1975..2024 latest=33％"
+    },
+    {
+      "themeKey": "living-housing",
+      "metricKey": "densely-inhabited-district-population-density",
+      "verdict": "verified-official",
+      "detail": "rows=5 range=2000..2020 latest=6662.9人"
+    },
+    {
+      "themeKey": "local-economy",
+      "metricKey": "per-capita-prefectural-income-h27",
+      "verdict": "verified-official",
+      "detail": "rows=10 range=2012..2021 latest=3330千円"
+    },
+    {
+      "themeKey": "local-finance",
+      "metricKey": "real-balance-ratio",
+      "verdict": "verified-official",
+      "detail": "rows=48 range=1975..2022 latest=3.1％"
+    },
+    {
+      "themeKey": "local-finance",
+      "metricKey": "self-financing-ratio",
+      "verdict": "verified-official",
+      "detail": "rows=48 range=1975..2022 latest=55.9％"
+    },
+    {
+      "themeKey": "manufacturing",
+      "metricKey": "manufacturing-establishment-site-area",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2024 latest=1482080千ｍ2"
+    },
+    {
+      "themeKey": "manufacturing",
+      "metricKey": "industrial-land-price-change-rate",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1976..2024 latest=3.4%"
+    },
+    {
+      "themeKey": "manufacturing",
+      "metricKey": "industrial-water-usage",
+      "verdict": "verified-official",
+      "detail": "rows=41 range=1975..2015 latest=155557400ｍ3／日"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "doctor-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "nurse-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "pharmacist-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "care-worker-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "nursery-teacher-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "midwife-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "practical-nurse-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "dental-hygienist-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "dietitian-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "physical-therapist-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "public-health-nurse-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "nursing-assistant-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "care-manager-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "home-care-worker-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "system-consultant-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "software-engineer-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "accountant-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "designer-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "researcher-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "school-teacher-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "university-professor-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "associate-professor-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "high-school-teacher-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "kindergarten-teacher-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "truck-driver-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "taxi-driver-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "bus-driver-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "carpenter-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "electrician-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "architect-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "manager-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "cook-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "barber-beautician-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "security-guard-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "sales-clerk-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "cleaning-worker-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "pilot-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "auto-mechanic-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "occupation-salary",
+      "metricKey": "dentist-annual-income",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='万円' / e-Stat unit='歳' (year=2022)"
+    },
+    {
+      "themeKey": "population-dynamics",
+      "metricKey": "total-fertility-rate",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='（人）' / e-Stat unit='‐' (year=1980)"
+    },
+    {
+      "themeKey": "population-dynamics",
+      "metricKey": "moving-in-excess-rate",
+      "verdict": "verified-unsupported",
+      "detail": "no valid year rows (all placeholder/non-finite)"
+    },
+    {
+      "themeKey": "population-dynamics",
+      "metricKey": "population-growth-rate",
+      "verdict": "verified-official",
+      "detail": "rows=4 range=2021..2024 latest=-4.4‰"
+    },
+    {
+      "themeKey": "population-dynamics",
+      "metricKey": "natural-increase-rate",
+      "verdict": "verified-official",
+      "detail": "rows=4 range=2021..2024 latest=-7.2‰"
+    },
+    {
+      "themeKey": "population-dynamics",
+      "metricKey": "crude-death-rate",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='人口千対' / e-Stat unit='‐' (year=1975)"
+    },
+    {
+      "themeKey": "population-dynamics",
+      "metricKey": "social-increase-rate",
+      "verdict": "verified-official",
+      "detail": "rows=2 range=2018..2019 latest=1.7‰"
+    },
+    {
+      "themeKey": "population-dynamics",
+      "metricKey": "population-density-per-km2-inhabitable-area",
+      "verdict": "verified-official",
+      "detail": "rows=50 range=1975..2024 latest=1006.9人"
+    },
+    {
+      "themeKey": "population-dynamics",
+      "metricKey": "day-time-population-ratio",
+      "verdict": "verified-official",
+      "detail": "rows=5 range=2000..2020 latest=100％"
+    },
+    {
+      "themeKey": "ports",
+      "metricKey": "port-cargo-total",
+      "verdict": "verified-unsupported",
+      "detail": "00000 (全国) 行が1件もない"
+    },
+    {
+      "themeKey": "ports",
+      "metricKey": "port-cargo-export",
+      "verdict": "verified-unsupported",
+      "detail": "00000 (全国) 行が1件もない"
+    },
+    {
+      "themeKey": "ports",
+      "metricKey": "port-cargo-import",
+      "verdict": "verified-unsupported",
+      "detail": "00000 (全国) 行が1件もない"
+    },
+    {
+      "themeKey": "ports",
+      "metricKey": "port-container-count",
+      "verdict": "verified-unsupported",
+      "detail": "00000 (全国) 行が1件もない"
+    },
+    {
+      "themeKey": "ports",
+      "metricKey": "maritime-import-export-cargo",
+      "verdict": "verified-official",
+      "detail": "rows=19 range=2005..2023 latest=2497714313トン"
+    },
+    {
+      "themeKey": "ports",
+      "metricKey": "port-inbound-ships",
+      "verdict": "verified-unsupported",
+      "detail": "00000 (全国) 行が1件もない"
+    },
+    {
+      "themeKey": "ports",
+      "metricKey": "port-ships-tonnage",
+      "verdict": "verified-unsupported",
+      "detail": "00000 (全国) 行が1件もない"
+    },
+    {
+      "themeKey": "ports",
+      "metricKey": "port-passengers-total",
+      "verdict": "verified-unsupported",
+      "detail": "00000 (全国) 行が1件もない"
+    },
+    {
+      "themeKey": "ports",
+      "metricKey": "passenger-ship-transport",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=57634.1千人"
+    },
+    {
+      "themeKey": "real-income",
+      "metricKey": "per-capita-prefectural-income-h27",
+      "verdict": "verified-official",
+      "detail": "rows=10 range=2012..2021 latest=3330千円"
+    },
+    {
+      "themeKey": "real-income",
+      "metricKey": "annual-income-per-household",
+      "verdict": "verified-official",
+      "detail": "rows=1 range=2019..2019 latest=5578千円"
+    },
+    {
+      "themeKey": "real-income",
+      "metricKey": "consumer-price-difference-index-overall-excl-rent",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='（全国=100）' / e-Stat unit='‐' (year=2013)"
+    },
+    {
+      "themeKey": "real-income",
+      "metricKey": "private-rental-housing-rent-per-3-3m2",
+      "verdict": "verified-unsupported",
+      "detail": "no valid year rows (all placeholder/non-finite)"
+    },
+    {
+      "themeKey": "roads",
+      "metricKey": "road-total-length",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=1221849.5km"
+    },
+    {
+      "themeKey": "roads",
+      "metricKey": "road-national-route-length",
+      "verdict": "verified-official",
+      "detail": "rows=19 range=2005..2023 latest=56158km"
+    },
+    {
+      "themeKey": "roads",
+      "metricKey": "road-prefectural-route-length",
+      "verdict": "verified-official",
+      "detail": "rows=19 range=2005..2023 latest=57903.7km"
+    },
+    {
+      "themeKey": "roads",
+      "metricKey": "road-municipal-length",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=1035760.3km"
+    },
+    {
+      "themeKey": "roads",
+      "metricKey": "road-length-per-km2",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=3.28km"
+    },
+    {
+      "themeKey": "roads",
+      "metricKey": "main-road-paving-rate",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=97.7％"
+    },
+    {
+      "themeKey": "roads",
+      "metricKey": "average-road-traffic-volume",
+      "verdict": "verified-official",
+      "detail": "rows=4 range=2005..2020 latest=5731台/12h"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "criminal-recognition-count",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=703351件"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "theft-offenses-recognized-per-1000",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=3.89件"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "theft-criminal-arrest-rate",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=32.5％"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "juvenile-criminal-arrest-person-per-population",
+      "verdict": "verified-official",
+      "detail": "rows=28 range=1975..2023 latest=2.83人"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "drug-enforcement-arrest-count-per-population",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=6.6件"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "traffic-accident-deaths-per-100k",
+      "verdict": "verified-official",
+      "detail": "rows=50 range=1975..2024 latest=2.2人"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "traffic-accident-count-per-population",
+      "verdict": "verified-official",
+      "detail": "rows=50 range=1975..2024 latest=235件"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "traffic-accident-deaths-per-100-accidents",
+      "verdict": "verified-official",
+      "detail": "rows=50 range=1975..2024 latest=0.92人"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "traffic-accident-injuries-per-100k",
+      "verdict": "verified-official",
+      "detail": "rows=50 range=1975..2024 latest=278.2人"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "traffic-accident-casualties-elderly-65plus",
+      "verdict": "verified-official",
+      "detail": "rows=39 range=1986..2024 latest=57387人"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "fire-damage-casualties-per-population",
+      "verdict": "verified-official",
+      "detail": "rows=49 range=1975..2023 latest=5.62人"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "disaster-damage-amount-per-person",
+      "verdict": "verified-official",
+      "detail": "rows=39 range=1985..2023 latest=3988円"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "suicide-rate-per-100k",
+      "verdict": "verified-unsupported",
+      "detail": "単位不一致: config.unit='人口10万対' / e-Stat unit='‐' (year=2009)"
+    },
+    {
+      "themeKey": "safety",
+      "metricKey": "police-officer-count-per-population",
+      "verdict": "verified-official",
+      "detail": "rows=50 range=1975..2024 latest=2.1人"
+    },
+    {
+      "themeKey": "tourism",
+      "metricKey": "room-utilization-rate",
+      "verdict": "verified-official",
+      "detail": "rows=16 range=2009..2024 latest=69.4％"
+    },
+    {
+      "themeKey": "tourism",
+      "metricKey": "travel-participation-rate-domestic-tourism",
+      "verdict": "verified-official",
+      "detail": "rows=1 range=2021..2021 latest=49.5％"
+    },
+    {
+      "themeKey": "tourism",
+      "metricKey": "travel-participation-rate-overseas",
+      "verdict": "verified-official",
+      "detail": "rows=1 range=2021..2021 latest=49.5％"
+    },
+    {
+      "themeKey": "tourism",
+      "metricKey": "travel-participation-rate-overnight",
+      "verdict": "verified-official",
+      "detail": "rows=1 range=2021..2021 latest=49.5％"
+    },
+    {
+      "themeKey": "tourism",
+      "metricKey": "travel-participation-rate-day-trip",
+      "verdict": "verified-official",
+      "detail": "rows=1 range=2021..2021 latest=49.5％"
+    },
+    {
+      "themeKey": "tourism",
+      "metricKey": "number-of-simple-lodging-facilities",
+      "verdict": "verified-official",
+      "detail": "rows=27 range=1997..2023 latest=41909施設"
+    }
+  ]
+}
