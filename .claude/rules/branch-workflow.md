@@ -104,8 +104,8 @@ git push origin develop
 
 **「develop は完全に無検査」ではなくなった。** `develop-quality-gate.yml` が push ごとに
 ESLint / env registry / maintenance debt の 3 つだけを走らせる。
-**ゲート本体はローカル実測で 7 秒**だが、job 全体は `npm ci` が支配的で未実測
-(初回 run で確認する)。
+**job 全体は実測 104 秒** (2026-08-20 の初回成功 run 32361789100)。
+大半は `npm ci` で、3 ゲート本体は数秒に収まる。
 
 なぜ足したか (実測): それ以前の develop は無検査だったため、pre-commit を通っていない変更が
 そのまま着地し、**壊れは「次に develop をマージする人」が払う**構造になっていた。

@@ -20,8 +20,8 @@ maintenance debt 1 件が origin/develop に入ったまま残り、マージ担
 **How to apply (現在の姿):**
 
 - develop への push で `develop-quality-gate.yml` が 3 ゲート
-  (ESLint / env registry / maintenance debt) を走らせる。ゲート本体はローカル実測 7 秒、
-  job 全体は npm ci が支配的で未実測。
+  (ESLint / env registry / maintenance debt) を走らせる。job 全体は実測 104 秒
+  (大半は npm ci)。
   **ここに重い検査を足さない** — push が詰まると `--no-verify` を誘発して元に戻る。
 - commit 前に `npm run preflight` で同じ 3 つを**並列**実行できる (実測 2.7〜11.6 秒)。
   pre-commit は直列 all-or-nothing で 2 分超なので、blocker を 1 つずつ潰すと

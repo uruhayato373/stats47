@@ -13,7 +13,7 @@ name: 🚦 Develop Quality Gate
 #   しかも「自分が壊したのか継承したのか」の切り分けが毎回必要になる。
 #
 # ★設計方針: フル suite (pre-commit 相当・2 分超) を再実装しない。
-#   develop の着地点で「決定的・高速・pre-commit と同一コマンド」の 3 ゲートだけを
+#   develop の着地点で「決定的・高速」な 3 ゲートだけを
 #   走らせ、壊れが次のマージ担当に回るのを止める。深い検査は従来どおり
 #   develop→main の PR (`pr-quality-check.yml`) が担う。
 #
