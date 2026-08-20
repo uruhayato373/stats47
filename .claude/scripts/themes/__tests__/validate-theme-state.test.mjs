@@ -115,7 +115,7 @@ test("retire-candidate は measured-low 両輪 (GSC+GA4 56d) + 根拠 2 で成�
     portfolio: { schemaVersion: 1, themes: [
       theme({
         lifecycleStatus: "retire-candidate",
-        evidenceRefs: ["docs/todo/04_改善バックログ.md", "56d 実測: imp 23 / pv 12 (measured-low)"],
+        evidenceRefs: [".claude/todo/improvements.md", "56d 実測: imp 23 / pv 12 (measured-low)"],
         metrics: {
           gsc: { status: "measured-low", windowDays: 56, clicks: 0, impressions: 23 },
           ga4: { status: "measured-low", windowDays: 56, pageViews: 12 },

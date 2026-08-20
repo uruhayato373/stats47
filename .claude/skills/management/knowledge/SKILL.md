@@ -31,7 +31,7 @@ rg -n "<error|component|service>" .claude/memory .claude/skills/management/knowl
 ## 追記
 
 再利用価値がある恒久知見だけを`.claude/memory/<slug>.md`へ保存し、`MEMORY.md`へ1行追加する。
-一時的な作業状況や未完了TODOはmemoryへ置かず、`docs/todo/`の該当backlogへ記録する。
+一時的な作業状況や未完了TODOはmemoryへ置かず、`.claude/todo/`の該当backlogへ記録する。
 
 ```markdown
 ---

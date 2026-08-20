@@ -38,7 +38,7 @@ model: sonnet
 - `~/.claude/projects/-Users-minamidaisuke-stats47/memory/*.md` — auto memory (CRUD、排他)
 - `~/.claude/projects/-Users-minamidaisuke-stats47/memory/MEMORY.md` — memory index (CRUD、排他)
 - `.claude/skills/learned/*.md` — 学習済みパターン (CRUD)
-- `docs/todo/04_改善バックログ.md` — read only (status 更新は triage に委譲)
+- `.claude/todo/improvements.md` — read only (status 更新は triage に委譲)
 
 ## File Boundary (並行衝突回避)
 

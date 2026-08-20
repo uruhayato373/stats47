@@ -86,7 +86,7 @@ cd apps/web && npm run dev
 > `curl` や素の `node` が通るのに dev だけ落ちるのが特徴。**ネットワーク障害と誤診しないこと**
 > (シェルには `NODE_EXTRA_CA_CERTS` があるため手元の検証コマンドは全部通ってしまう)。
 
-### ★会社 Windows PC では dev サーバーを起動しない (機械ゲートあり・2026-07-28)
+### ★会社 Windows PC の dev は Windows R2 gateway を使う (2026-08-19)
 
 会社ネットワーク (兵庫県庁) は **i-FILTER (Digital Arts) が透過型 TLS 傍受**をしている。実測で確定した挙動:
 
@@ -95,24 +95,25 @@ cd apps/web && npm run dev
 | curl (Windows 証明書ストアを信頼) | 200 |
 | Node の素の fetch | `SELF_SIGNED_CERT_IN_CHAIN` (Node は Windows ストアを見ない) |
 | Node + 社内 CA を `NODE_EXTRA_CA_CERTS` に設定 | **HTTP 503 のブロックページ** (CA 信頼だけでは通らない = 直接の外向き通信自体がポリシーで遮断) |
-| Node + `HTTPS_PROXY` の明示 CONNECT (undici ProxyAgent) | 200 (これが唯一の正規の出口) |
+| Node + `HTTPS_PROXY` の明示 CONNECT (undici ProxyAgent) | 200 |
+| PowerShell/.NET + Windows 既定 credentials・証明書ストア | 200 |
 
 `storage.stats47.jp` の証明書は `CN=CARGO-CA, DC=hyogo, DC=local` に差し替えられている (Cloudflare 本来の証明書ではない)。
 
-**dev サーバーを使わない理由**: stats47 はほぼ全ページが R2 依存で、R2 が読めない dev は確認手段にならない
-(home featured が空・ranking がチャート無しになる)。Next.js dev の RSC は global fetch を独自ラッパに
-差し替えており undici の per-call `dispatcher` が落ちるため、回避には配信コード (`packages/r2-storage`) への
-環境依存コード混入か preload での `setGlobalDispatcher` が要る。**どちらも負債になるため採らない。**
+Next.js dev の RSC は global fetch を独自ラッパに差し替えるため、undici の per-call `dispatcher` では
+安定して回避できない。Windows では `apps/web/scripts/dev-server.ts` が loopback の読み取り専用 gateway
+(`scripts/r2-dev-gateway.ps1`) を自動起動し、dev 子プロセスだけの `R2_PUBLIC_FETCH_URL` と
+`NEXT_PUBLIC_R2_PUBLIC_URL` を `http://127.0.0.1:4777` に差し替える。配信コードと本番設定は変更しない。
 
-**検証は CI (workflow dispatch) と本番 URL の実測で行う** — 実際、2026-07-27〜28 の大規模作業
-(values writer 復活・整合性監査新設・YouTube 撤退・R2 9.44GB 削減・featured 障害復旧) は
-すべて dev サーバー無しで完結した。
+gateway は Windows の既定 proxy credentials と証明書ストアを使う。接続先は固定の HTTPS upstream、
+listen は `127.0.0.1`、method は `GET` / `HEAD`、R2 key は path traversal を拒否する。
+**TLS 検証を無効化しない。** `npm run dev:web` または `npm run dev --workspace=apps/web` で自動的に有効になる。
+一時的に従来経路へ戻す場合だけ `R2_DEV_GATEWAY=0` を指定する。Windows 以外では gateway を起動しない。
 
-**機械ゲート**: `.claude/hooks/pre-bash-safety.js` の `WINDOWS_BLOCKED_PATTERNS` が
-`process.platform === "win32"` のときだけ `npm/pnpm/yarn/bun run dev*` `next dev` `turbo run dev` を deny する
-(Mac/Linux では素通し)。`npm run build` `npm run gallery` 等は誤検知しないことをテスト済み。
+Next.js 自身による SWC lockfile patch の外向き fetch は引き続き `SELF_SIGNED_CERT_IN_CHAIN` を警告する場合がある。
+`✓ Ready` の後にページが 200 で表示できるなら非致命であり、R2 データ・画像の取得には影響しない。
 
-**例外**: 素の tsx スクリプトは `HTTPS_PROXY` を継承していれば ProxyAgent 経由で R2 に到達できる
+**補足**: 素の tsx スクリプトは `HTTPS_PROXY` を継承していれば ProxyAgent 経由で R2 に到達できる
 (`packages/estat-api/src/core/client/http-client.ts` / `packages/ranking/src/scripts/audit-ranking-data-integrity.ts` の実装)。
 `R2_PUBLIC_FETCH_URL` を使う読み取りスクリプトはこの経路で動く。
 
@@ -223,14 +224,20 @@ npm run docs:check:all # テスト + 鮮度 + orphan候補
 npx tsc --noEmit -p apps/web/tsconfig.json
 cd apps/remotion && npx tsc --noEmit
 
-# 統合メディア管理コンソール（ローカル専用・依存ゼロ・127.0.0.1:4747）
-# 1画面で: SNS素材(/sns 動画再生→投稿/予約/caption/メトリクス) + 画像資産(/assets OGP/カード/note/動画・欠落チェック/再生成)
-#         + ブログSVGカタログ(/svg) + プロジェクト現況(/dashboard メトリクス/進捗キュー/改善バックログTODO/STP戦略・読み取り専用ミラー)。
-#         起動後にブラウザで http://127.0.0.1:4747/（file:// で直接開かない）。
-# 常駐プロセスなので run_in_background + Ready polling で起動する。skill: /sns-gallery
-# 実装は独立 Next.js アプリ apps/gallery (localhost 専用・127.0.0.1 bind 固定・PORT= で上書き可)。
+# 管理コンソール（ローカル専用・Next.js 15・127.0.0.1:4747）
+# 10 画面:
+#   制作・投稿 : /sns (動画再生→投稿/予約/caption/メトリクス) ・ /buzz-map (企画キューと素材生成)
+#   資産       : /assets (OGP/カード/note/動画・欠落チェック/再生成) ・ /svg (ブログSVGカタログ)
+#   収益       : /revenue (AdSense 週次・内訳。他チャネルは未計測と明示) ・ /ads (アフィリ運用ゲート/在庫/GA4/compliance)
+#   品質・運用 : /dashboard (メトリクス・進捗キュー・STP戦略) ・ /quality (8監査の残欠陥と鮮度)
+#                /ops (workflow健全性・R2鮮度・Claude利用量・agents/skills/memory台帳) ・ /todo (.claude/todo 台帳)
+# 書き込みは /sns の投稿予約と /buzz-map の素材生成だけで、他はすべて読み取り専用。
+#   起動後にブラウザで http://127.0.0.1:4747/（file:// で直接開かない）。
+# 常駐プロセスなので run_in_background + Ready polling で起動する。skill: /admin-console
+# 実装は独立 Next.js アプリ apps/admin (localhost 専用・127.0.0.1 bind 固定・PORT= で上書き可)。
 # 旧 node:http 実装 (.claude/scripts/gallery/) と sns:gallery alias は 2026-07-16 に廃止。
-npm run gallery
+# apps/gallery からの改名は 2026-08-18 (中身が画像ギャラリーでなく運営全体の管理画面になったため)。
+npm run admin
 ```
 
 > 旧 `npm run backup:d1 --env production`（リモート D1 → R2 バックアップ）は **リモート D1 廃止により不要**。

@@ -9,7 +9,7 @@ metadata:
 
 ココナラ 174 商品 ([[project_coconala_product_factory]]) を note 向けに展開する channel。**新規 `packages/product-factory/src/channels/note/`**。2026-07-18 に **N0(監査)→N1(mapping/series/validator)→N2(生成基盤+fixture3)→N3(全55記事一括生成)→N4-N5(promote基盤+全55をdraft staging)** を実装 (オーナー選択「N0〜N3全部」→「全55をdraftで一括staging」)。**note.com公開・R2 push・commit は一切していない (N6-N7=人間承認後・月1-2本・ローカルbrowser-use)**。
 
-**正典**: `packages/product-factory/src/channels/note/` + `packages/product-factory/README.md`。横断チャネルの需要・商品化gateは `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md`、進捗は `docs/todo/05_機能バックログ.md`。
+**正典**: `packages/product-factory/src/channels/note/` + `packages/product-factory/README.md`。横断チャネルの需要・商品化gateは `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md`、進捗は `.claude/todo/backlog.md`。
 
 **SSOT (完全DBレス)**: `article-plan.ts` の **55 canonical 記事**が git TS SSOT で 174 商品を漏れなく重複なく束ねる。`product-note-mapping.ts` が 174 mapping を (family, 記事) から**決定的に導出** (手書き174エントリを持たない)。disposition 規則: license→catalog-only / entry・service→free-lead / 単独member有料記事→standalone-paid / 他→bundle-member。実測 = bundle-member135/standalone-paid7/free-lead22/catalog-only10、access=paid49/free6。11シリーズ (仕様§4の9 + license-guide/free-samples)。
 

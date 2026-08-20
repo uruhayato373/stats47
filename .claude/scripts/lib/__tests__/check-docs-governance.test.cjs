@@ -45,15 +45,15 @@ function fixture(t) {
     requiredReferences: [],
     topLevel: {
       allowedFiles: ["docs/INDEX.md"],
-      allowedDirectories: ["docs/00", "docs/01", "docs/02", "docs/todo"],
+      allowedDirectories: ["docs/00", "docs/01", "docs/02", ".claude/todo"],
     },
     fixedDirectories: {
       "docs/00": ["01_project.md"],
       "docs/01": ["01_architecture.md"],
-      "docs/todo": ["04_improvements.md", "05_features.md", "06_indicators.md"],
+      ".claude/todo": ["backlog.md", "improvements.md"],
     },
-    governedDirectories: ["docs/00", "docs/01", "docs/02", "docs/todo"],
-    flatDirectories: ["docs/00", "docs/01", "docs/02", "docs/todo"],
+    governedDirectories: ["docs/00", "docs/01", "docs/02", ".claude/todo"],
+    flatDirectories: ["docs/00", "docs/01", "docs/02", ".claude/todo"],
     frontmatter: {
       requiredFields: ["title", "type", "status", "updated"],
       allowedStatuses: ["active", "adopted", "draft", "in-progress"],
@@ -75,11 +75,7 @@ function fixture(t) {
       requiredRelatedBacklog: true,
     },
     todo: {
-      files: [
-        "docs/todo/04_improvements.md",
-        "docs/todo/05_features.md",
-        "docs/todo/06_indicators.md",
-      ],
+      files: [".claude/todo/improvements.md", ".claude/todo/backlog.md"],
       idPattern: "^[A-Z0-9]+(?:-[A-Z0-9]+)+$",
       allowedImprovementStatuses: ["pending", "in-progress", "effect/pending"],
     },
@@ -97,30 +93,30 @@ function fixture(t) {
     type: "technical-design",
     status: "adopted",
   }));
-  write(root, "docs/todo/04_improvements.md", markdown({
+  write(root, ".claude/todo/improvements.md", markdown({
     title: "Improvements",
     type: "improvement-backlog",
     body: `| ID | タイトル | Status | Due | Owner | Metric |
 |---|---|---|---|---|---|
 | DOCS-IMPROVE-01 | Improve docs | pending | 2026-08-30 | claude | docs |`,
   }));
-  write(root, "docs/todo/05_features.md", markdown({
-    title: "Features",
-    type: "feature-backlog",
-    body: `### [DOCS-FEATURE-01] Checker
+  // v3-unified カード構文 (backlog-lib)。全カードにタグを付けると warning ゼロで通る
+  write(root, ".claude/todo/backlog.md", markdown({
+    title: "Backlog",
+    type: "backlog",
+    body: `## 🔴 高
 
-- **status**: in-progress
-- **owner**: claude
+### [DOCS-FEATURE-01] Checker
+タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [起票:2026-07-01]
+
 - **次**: checkerを実装する。
-- **完了条件**: testが通る。`,
-  }));
-  write(root, "docs/todo/06_indicators.md", markdown({
-    title: "Indicators",
-    type: "indicator-backlog",
-    body: `### [DOCS-INDICATOR-01] Indicator
+- **完了条件**: testが通る。
 
-- **status**: deferred
-- **owner**: claude
+## 🟢 低
+
+### [DOCS-INDICATOR-01] Indicator
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-07-01]
+
 - **trigger**: 必要になったとき。`,
   }));
   write(root, "docs/02/00_INDEX.md", markdown({
@@ -168,20 +164,29 @@ test("fixed directory growth, missing frontmatter and inactive docs fail", (t) =
   assert.ok(codes.has("DG022"));
 });
 
-test("duplicate TODO ids and missing action are rejected", (t) => {
+test("duplicate ids / out-of-vocab tags / orphan headings / unknown keys are rejected", (t) => {
   const { root, config } = fixture(t);
-  write(root, "docs/todo/06_indicators.md", markdown({
-    title: "Indicators",
-    type: "indicator-backlog",
-    body: `### [DOCS-FEATURE-01] Duplicate
+  write(root, ".claude/todo/backlog.md", markdown({
+    title: "Backlog",
+    type: "backlog",
+    body: `### [ORPHAN-CARD-01] tierセクション外 (カードにならない)
 
-- **status**: pending
-- **owner**: claude`,
+## 🔴 高
+
+### [DOCS-IMPROVE-01] improvements 側と重複する ID
+タグ: [収益化] [種類:謎の種類] [実行:sweep]
+
+### [DOCS-FEATURE-01] Checker
+タグ: [エージェント・SSOT] [謎キー:値] [実行:ふしぎ]
+
+- **次**: checkerを実装する。`,
   }));
   const report = inspectRepository({ root, config, now: "2026-07-30" });
   const codes = new Set(report.errors.map((item) => item.code));
-  assert.ok(codes.has("DG057"));
-  assert.ok(codes.has("DG060"));
+  assert.ok(codes.has("DG055"), "orphan 見出し");
+  assert.ok(codes.has("DG056"), "未知タグキー");
+  assert.ok(codes.has("DG057"), "語彙外の 種類/実行");
+  assert.ok(codes.has("DG060"), "TODO ID 重複");
 });
 
 test("--fix target regenerates only the implementation plan block", (t) => {
@@ -211,7 +216,7 @@ test("missing fixed directory, forbidden nested archive and malformed improvemen
   config.topLevel.allowedDirectories.push("docs/content");
   config.contentRootsExcludedFromGovernedNaming.push("docs/content");
   write(root, "docs/content/archive/result.json", "{}\n");
-  write(root, "docs/todo/04_improvements.md", markdown({
+  write(root, ".claude/todo/improvements.md", markdown({
     title: "Improvements",
     type: "improvement-backlog",
     body: `| ID | タイトル | Status | Due | Owner | Metric |

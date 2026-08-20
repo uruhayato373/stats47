@@ -135,7 +135,15 @@ jobs:
         continue-on-error: false
 
       - name: 📝 ESLint Check
-        run: npm run lint
+        # ★`npm run lint` (= turbo → `next lint`) を使わない。
+        #   `next lint` はパッケージマネージャを外部プロセスとして起動して registry を引くため、
+        #   GitHub runner に素で入っている yarn 1.22.22 を誤検出し
+        #   `Failed to get registry from "yarn"` で落ちる (2026-08-20 に develop ゲートで実測)。
+        #   ローカルは corepack が「このプロジェクトは npm」と拒否するため再現しない。
+        #   eslint を直接呼べば同じ設定・同じルールで外部プロセスに依存しない。
+        #   `--max-warnings` は付けない (既存 warning 2 件で常時赤になり無視されるゲートになる)。
+        run: npx eslint src
+        working-directory: apps/web
         continue-on-error: false # Lintエラーで失敗させる
 
       - name: 🎨 Design System Check
@@ -166,7 +174,7 @@ jobs:
       - name: 🚧 Web e-Stat Import Boundary Guard
         # 本番 apps/web の e-Stat 直呼び (値 import) を shrink-only ratchet で監視。
         # 新規の直呼びを弾く (最終形は 0 = 全ページ R2 snapshot 読み)。
-        # 正典: docs/todo/05_機能バックログ.md の CROSS-PAGE-DATA-SSOT-01 (WP2)
+        # 正典: .claude/todo/backlog.md の CROSS-PAGE-DATA-SSOT-01 (WP2)
         run: |
           node --test .claude/scripts/lib/__tests__/check-web-estat-imports.test.cjs
           node .claude/scripts/lib/check-web-estat-imports.cjs
@@ -315,6 +323,20 @@ jobs:
         run: |
           node .claude/scripts/lib/check-maintenance-debt.cjs --baseline
           node .claude/scripts/lib/check-maintenance-debt.cjs --ratchet-check
+          node --test .claude/scripts/lib/__tests__/check-maintenance-debt.test.cjs
+        continue-on-error: false
+
+      - name: 🚦 Preflight Aggregator Contract
+        # `npm run preflight` が「ゲートが落ちても exit 0」に退行しないことを固定する。
+        # 常に 0 を返す preflight は「ゲートが無い」より悪い (通ったと誤認させる)。
+        run: node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs
+        continue-on-error: false
+
+      - name: 🛑 Commit Message Skip-Token Guard
+        # commit メッセージの CI skip トークンを弾く commit-msg フックの検出力を固定する。
+        # 同じ事故が 2026-08-05 と 2026-08-20 に発生 (どちらもトークンを話題にする commit)。
+        # run が 1 本も作られないため「成功」と区別がつかないのが最も危険。
+        run: node --test .claude/scripts/lib/__tests__/check-commit-message.test.cjs
         continue-on-error: false
 
       - name: 🔢 Value Formatting Guard
@@ -412,7 +434,7 @@ jobs:
           # 1 位県・値・倍率・年のいずれかを取り違えていた。
           # 既存違反は baseline に固定し、新規混入だけを止める (縮小専用ラチェット)。
           # R2 の公開 URL を読むだけ (認証不要・書き込みなし)。
-          # 規約: docs/todo/05_機能バックログ.md SEO-META-FACTUAL-GATE-01
+          # 規約: .claude/todo/backlog.md SEO-META-FACTUAL-GATE-01
           npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new
         continue-on-error: false
 
@@ -440,7 +462,7 @@ jobs:
           # テーマ chart の期待 e-Stat 依存集合 (pyramid 34・composition/donut 展開含む) の正典は
           # collectThemeDataDependenciesWithProvenance (TS)。素の node で走る live 監査が読む
           # JSON 鏡が正典と乖離する (= 監査が古い/不完全な集合を見る) のを両方向で検知する。
-          # 正典: docs/todo/05_機能バックログ.md の CROSS-PAGE-DATA-SSOT-01 (WP4)
+          # 正典: .claude/todo/backlog.md の CROSS-PAGE-DATA-SSOT-01 (WP4)
           npx tsx packages/data-configs/scripts/generate-theme-dependency-mirror.ts --check
         continue-on-error: false
 

@@ -17,7 +17,7 @@ model: sonnet
 > - `trend-scout` + `article-writer` + `blog-editor`: §4 記事生産の実行。真実源 = `.claude/state/blog/topic-queue.json`。
 > - `ranking-expander`: §5 ランキング拡充の実行。真実源 = `.claude/state/estat/expansion-queue.json`。
 > - `gsc-analyst`: KPI 実測 (週次 clicks / index 率) の取得。
-> - `improvement-triage`: `docs/todo/04_改善バックログ.md` の effect/status ラベル (**書込は triage のみ**・本 agent は read)。
+> - `improvement-triage`: `.claude/todo/improvements.md` の effect/status ラベル (**書込は triage のみ**・本 agent は read)。
 
 ## OUTPUT FORMAT (必須・冒頭固定)
 
@@ -36,14 +36,14 @@ model: sonnet
 - 結論先行 (最初の一文で done/todo の要点)。即行動 (確定済み事実の再導出をしない)。
 - 進捗の実証 (deployed/effect はバックログ・GSC・queue のツール結果と突合。未検証は「実測待ち・期日つき」と明言)。捏造進捗は最悪の失敗。
 - スコープ規律 (要求以上に型を増やさない・記事を自分で書かない)。ターン終了規律 (「これから委譲します」で終わらない・委譲を実行してから返す)。
-- 境界 (`docs/todo/04_改善バックログ.md` に書かない = improvement-triage の専有。デプロイは devops-runner/ranking-publisher に委譲し確認を要する)。
+- 境界 (`.claude/todo/improvements.md` に書かない = improvement-triage の専有。デプロイは devops-runner/ranking-publisher に委譲し確認を要する)。
 
 ## 戦略ループ (四半期 PDCA + 週次消化)
 
 真実源: `.claude/state/blog/seo-strategy.json` (施策台帳 + 型配分 + KPI 目標 + 次アクション)。
 
 1. **状態リコンサイル (read-only)**: seo-strategy.json を読み、各施策 ID の effect/status を
-   `docs/todo/04_改善バックログ.md` から、消化状況を topic-queue.json / expansion-queue.json から、
+   `.claude/todo/improvements.md` から、消化状況を topic-queue.json / expansion-queue.json から、
    KPI を `.claude/state/metrics/gsc/LATEST.md` から突合して台帳を更新する (effect ラベル自体は書き換えない)。
 2. **週次消化の払い出し**: `/plan-article-queue` (topic-queue の must-write 上位) を起点に、今月の型配分
    (下記) に沿って `trend-scout` → `article-writer` に記事生産を委譲。ランキング拡充が必要なら `ranking-expander` に委譲。
@@ -137,7 +137,7 @@ queue の done へ記録し、`/analyze-winning-patterns` の型別実測で四�
 - `.claude/state/blog/seo-strategy.json` — **本 agent の構造化 SSOT** (施策 done/todo + typeMix + KPI 目標 + midTermTodos)。CRUD
 - 本ファイル `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト — 戦略の全文 SSOT (旧 doc 15)。四半期改訂時に編集
 - `.claude/state/blog/topic-queue.json` / `.claude/state/estat/expansion-queue.json` — read only (委譲先の消化状況)
-- `docs/todo/04_改善バックログ.md` — **read only** (effect/status の突合。書込は improvement-triage のみ)
+- `.claude/todo/improvements.md` — **read only** (effect/status の突合。書込は improvement-triage のみ)
 - `.claude/state/metrics/gsc/LATEST.md` / `.claude/state/blog/winning-patterns.json` — read only (KPI・再学習根拠)
 
 ## File Boundary (並行衝突回避)

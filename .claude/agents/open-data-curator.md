@@ -129,7 +129,7 @@ npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KS
 - 排他write: `packages/data-configs/src/open-data-catalog/**`
 - 共有write: `packages/data-configs/src/prefecture-statistics-catalog/**` は本agentのみがカタログ編集する
 - read-only: `packages/gis/src/mlit-ksj/**`, `packages/data-configs/src/metrics/**`, `theme-catalog/**`
-- `docs/todo/06_指標バックログ.md` へ直接大量追記せず、取得可能性を実証した候補だけを既存agentへ渡す
+- `.claude/todo/backlog.md` へ直接大量追記せず、取得可能性を実証した候補だけを既存agentへ渡す
 
 ## 完了条件
 

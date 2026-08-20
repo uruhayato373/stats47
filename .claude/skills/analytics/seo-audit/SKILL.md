@@ -235,7 +235,7 @@ stats47 の主力は 1,800+ 件のランキングページ。以下を重点チ�
 
 ### Phase 4: 出力
 
-監査全文はセッション内で提示する。未完了の改善だけを `docs/todo/04_改善バックログ.md` へ
+監査全文はセッション内で提示する。未完了の改善だけを `.claude/todo/improvements.md` へ
 ID・優先度・対象URL・実行手順・停止条件・計測方法・完了条件付きで統合する。再現可能な機械結果は
 `.claude/state/`、比較用のagent履歴は本skillの `reference/` に置く。
 
@@ -382,7 +382,7 @@ focus: "all | technical | content | keywords | programmatic"
 
 ## 前回レポートとの比較
 
-`docs/todo/04_改善バックログ.md` とGSCのhistory/improvement logを読み:
+`.claude/todo/improvements.md` とGSCのhistory/improvement logを読み:
 - 前回アクションのstatusを確認
 - 主要指標の推移を比較
 - 未完了のP0/P1は同じIDを更新し、重複行を作らない
@@ -398,7 +398,7 @@ focus: "all | technical | content | keywords | programmatic"
 cat .claude/state/gsc/LATEST.md                                  # 最新サマリ
 cat .claude/state/metrics/gsc/history.csv | tail -10             # 時系列（直近10件）
 # 未完了の SEO 施策（改善バックログ。旧 seo_actions の代替）
-grep -nE "status:\s*(pending|in.progress)" docs/todo/04_改善バックログ.md
+grep -nE "status:\s*(pending|in.progress)" .claude/todo/improvements.md
 ```
 
 ### レポート出力時
@@ -406,7 +406,7 @@ grep -nE "status:\s*(pending|in.progress)" docs/todo/04_改善バックログ.md
 - 改善バックログの未完了施策（status != done）をアクションリストに反映（重複登録しない）
 
 ### 新規施策の登録
-監査で新たに発見した改善施策は `docs/todo/04_改善バックログ.md` に追記する（`improvement-triage` が status を管理する唯一の writer）。frontmatter/簡易表の行として tier・期日・target_metric を記録する（規約: `.claude/rules/docs-vs-issues.md`）。
+監査で新たに発見した改善施策は `.claude/todo/improvements.md` に追記する（`improvement-triage` が status を管理する唯一の writer）。frontmatter/簡易表の行として tier・期日・target_metric を記録する（規約: `.claude/rules/docs-vs-issues.md`）。
 
 ## トーンと姿勢
 
@@ -423,7 +423,7 @@ grep -nE "status:\s*(pending|in.progress)" docs/todo/04_改善バックログ.md
 
 ## サイト回遊グラフのルーティング
 
-`docs/todo/05_機能バックログ.md`の`KAIYU-HUB-01`を監査・実装するときは、
+`.claude/todo/backlog.md`の`KAIYU-HUB-01`を監査・実装するときは、
 `reference/site-navigation-graph.md`を必ず読む。進捗と優先順位はTODO、node/edge、score、placement、
 GA4 event、段階実装、受入条件はreferenceを正典とする。Phase 0は`--focus content`のread-only監査として実行し、
 Phase 1以降へ自動的に進めない。
@@ -454,7 +454,7 @@ Phase 1以降へ自動的に進めない。
 - `apps/web/src/middleware.ts` — リダイレクト設定
 - `apps/web/tests/e2e/seo/` — SEO 関連 E2E テスト
 - `.claude/state/gsc/LATEST.md` / `.claude/state/metrics/gsc/history.csv` — SEO カバレッジ指標の数値推移（旧 D1 `seo_tracking` の代替）
-- `docs/todo/04_改善バックログ.md` — SEO 改善施策の管理（pending → in_progress → done。旧 D1 `seo_actions` の代替）
+- `.claude/todo/improvements.md` — SEO 改善施策の管理（pending → in_progress → done。旧 D1 `seo_actions` の代替）
 - `reference/site-navigation-graph.md` — `KAIYU-HUB-01`のサイト横断回遊グラフ・レコメンド実装詳細
 
 ## page_components の責務分離監査 (area / theme)

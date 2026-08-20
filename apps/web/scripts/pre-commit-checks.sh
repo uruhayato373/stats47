@@ -90,7 +90,7 @@ fi
 # 文書の固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOT、
 # 削除・移動後の参照悪化を、文書関連差分があるcommitだけ検査する。
 STAGED_DOCS=$(git diff --cached --name-only --diff-filter=ACMRD | grep -E \
-  '^(docs/|CLAUDE\.md$|AGENTS\.md$|\.claude/(config/docs-governance\.json|rules/docs-vs-issues\.md|skills/management/maintain-docs/|scripts/lib/check-docs-(governance|links)\.cjs|scripts/lib/__tests__/check-docs-(governance|links)\.test\.cjs)|package\.json$)' || true)
+  '^(docs/|\.claude/todo/|CLAUDE\.md$|AGENTS\.md$|\.claude/(config/docs-governance\.json|rules/docs-vs-issues\.md|skills/management/maintain-docs/|scripts/lib/check-docs-(governance|links)\.cjs|scripts/lib/__tests__/check-docs-(governance|links)\.test\.cjs)|package\.json$)' || true)
 if [ -n "$STAGED_DOCS" ]; then
   echo -e "${GREEN}📚 ドキュメントガバナンスチェック...${NC}"
   if ! (cd "$GUARD_ROOT" && npm run docs:check); then
@@ -180,7 +180,7 @@ fi
 # 2.1.1 画像生成差分/publish policy ガード
 # workflow / planner / manifest / publisher の変更時だけ、CI と同じ fail-closed policy を先行実行する。
 STAGED_IMAGE_PIPELINE=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
-  '^(\.github/workflows/.*\.ya?ml|\.claude/scripts/(lib/(audit-workflow-policy\.cjs|__tests__/audit-workflow-policy\.test\.cjs)|sns/(prepare-buzz-map-batch\.ts|lib/buzz-map-batch-core\.mjs))|apps/gallery/lib/server/(actions|buzz-map-actions)\.ts|apps/web/scripts/(generate-(ogp-images|blog-thumbnails(-cloud)?|category-images)\.ts|manage-blog-codex-backgrounds\.ts|data/(image-generator-registry|blog-(ogp-visual|codex-background)-catalog)\.ts|lib/(image-generation-manifest|image-generation-r2-inspector|blog-image-generation|blog-image-render|blog-ogp-visual|blog-thumbnail-render|blog-codex-background-workflow|ranking-(ogp-fallback|thumbnail)-render|satori-image-render|gemini-image-client)\.ts|lib/__tests__/(image-generation-manifest|image-pipeline-source-policy|blog-ogp-visual|blog-codex-background-catalog|gemini-image-client)\.test\.ts|lib/assets/(ogp-bg-brand-(dark|light)\.jpg|blog-codex-backgrounds/.*\.jpg))|packages/(r2-storage/src/(image-pipeline\.ts|scripts/(push-(generated-image-set|exact-r2-assets(-core)?)\.ts|__tests__/push-(generated-image-set|exact-r2-assets)\.test\.ts))|types/src/(image-generation-manifest\.ts|index\.ts))|package\.json)$' || true)
+  '^(\.github/workflows/.*\.ya?ml|\.claude/scripts/(lib/(audit-workflow-policy\.cjs|__tests__/audit-workflow-policy\.test\.cjs)|sns/(prepare-buzz-map-batch\.ts|lib/buzz-map-batch-core\.mjs))|apps/admin/lib/server/(actions|buzz-map-actions)\.ts|apps/web/scripts/(generate-(ogp-images|blog-thumbnails(-cloud)?|category-images)\.ts|manage-blog-codex-backgrounds\.ts|data/(image-generator-registry|blog-(ogp-visual|codex-background)-catalog)\.ts|lib/(image-generation-manifest|image-generation-r2-inspector|blog-image-generation|blog-image-render|blog-ogp-visual|blog-thumbnail-render|blog-codex-background-workflow|ranking-(ogp-fallback|thumbnail)-render|satori-image-render|gemini-image-client)\.ts|lib/__tests__/(image-generation-manifest|image-pipeline-source-policy|blog-ogp-visual|blog-codex-background-catalog|gemini-image-client)\.test\.ts|lib/assets/(ogp-bg-brand-(dark|light)\.jpg|blog-codex-backgrounds/.*\.jpg))|packages/(r2-storage/src/(image-pipeline\.ts|scripts/(push-(generated-image-set|exact-r2-assets(-core)?)\.ts|__tests__/push-(generated-image-set|exact-r2-assets)\.test\.ts))|types/src/(image-generation-manifest\.ts|index\.ts))|package\.json)$' || true)
 if [ -n "$STAGED_IMAGE_PIPELINE" ]; then
   echo -e "${GREEN}🖼️  画像生成 pipeline policy チェック...${NC}"
   if ! node "$GUARD_ROOT/.claude/scripts/lib/audit-workflow-policy.cjs" --strict; then
@@ -541,7 +541,7 @@ if [ -n "$STAGED_METRICS" ]; then
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
 
-  # SEO 文字列の事実照合 (docs/todo/05_機能バックログ.md SEO-META-FACTUAL-GATE-01)
+  # SEO 文字列の事実照合 (.claude/todo/backlog.md SEO-META-FACTUAL-GATE-01)
   #
   # seoTitle / seoDescription は <title> と <meta name="description"> としてそのまま
   # 配信される。実データと突合していなかったため 5.2% が 1 位県・値・倍率・年を

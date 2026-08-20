@@ -1,0 +1,224 @@
+{
+  "week_id": "2026-W26",
+  "year": 2026,
+  "week": 26,
+  "generated_at": "2026-06-28T11:33:59.308Z",
+  "ranges": {
+    "ga4": {
+      "this": {
+        "start": "2026-06-21",
+        "end": "2026-06-27"
+      },
+      "prev": {
+        "start": "2026-06-14",
+        "end": "2026-06-20"
+      }
+    },
+    "gsc": {
+      "this": {
+        "start": "2026-06-19",
+        "end": "2026-06-25"
+      },
+      "prev": {
+        "start": "2026-06-12",
+        "end": "2026-06-18"
+      }
+    }
+  },
+  "ga4": {
+    "channels": [
+      {
+        "channel": "Organic Search",
+        "thisUsers": 1273,
+        "prevUsers": 1397,
+        "userDelta": -124,
+        "userDeltaPct": -8.876163206871867,
+        "thisSessions": 1454,
+        "prevSessions": 1633,
+        "thisEngagedSessions": 897,
+        "prevEngagedSessions": 1045,
+        "thisEngagementRate": 0.6169188445667125
+      },
+      {
+        "channel": "Direct",
+        "thisUsers": 281,
+        "prevUsers": 311,
+        "userDelta": -30,
+        "userDeltaPct": -9.646302250803858,
+        "thisSessions": 308,
+        "prevSessions": 341,
+        "thisEngagedSessions": 61,
+        "prevEngagedSessions": 84,
+        "thisEngagementRate": 0.19805194805194806
+      },
+      {
+        "channel": "Referral",
+        "thisUsers": 101,
+        "prevUsers": 160,
+        "userDelta": -59,
+        "userDeltaPct": -36.875,
+        "thisSessions": 121,
+        "prevSessions": 178,
+        "thisEngagedSessions": 73,
+        "prevEngagedSessions": 109,
+        "thisEngagementRate": 0.6033057851239669
+      },
+      {
+        "channel": "AI Assistant",
+        "thisUsers": 75,
+        "prevUsers": 88,
+        "userDelta": -13,
+        "userDeltaPct": -14.772727272727273,
+        "thisSessions": 100,
+        "prevSessions": 122,
+        "thisEngagedSessions": 39,
+        "prevEngagedSessions": 53,
+        "thisEngagementRate": 0.39
+      },
+      {
+        "channel": "Unassigned",
+        "thisUsers": 18,
+        "prevUsers": 64,
+        "userDelta": -46,
+        "userDeltaPct": -71.875,
+        "thisSessions": 21,
+        "prevSessions": 70,
+        "thisEngagedSessions": 14,
+        "prevEngagedSessions": 17,
+        "thisEngagementRate": 0.6666666666666666
+      },
+      {
+        "channel": "Organic Social",
+        "thisUsers": 8,
+        "prevUsers": 12,
+        "userDelta": -4,
+        "userDeltaPct": -33.33333333333333,
+        "thisSessions": 15,
+        "prevSessions": 13,
+        "thisEngagedSessions": 9,
+        "prevEngagedSessions": 5,
+        "thisEngagementRate": 0.6
+      }
+    ],
+    "total": {
+      "thisUsers": 1756,
+      "prevUsers": 2032,
+      "thisSessions": 2019,
+      "prevSessions": 2357,
+      "thisEngagedSessions": 1093,
+      "prevEngagedSessions": 1313,
+      "userDelta": -276,
+      "userDeltaPct": -13.582677165354331,
+      "engagedSessionDelta": -220,
+      "engagedSessionDeltaPct": -16.755521706016754
+    },
+    "organic": {
+      "channel": "Organic Search",
+      "thisUsers": 1273,
+      "prevUsers": 1397,
+      "userDelta": -124,
+      "userDeltaPct": -8.876163206871867,
+      "thisSessions": 1454,
+      "prevSessions": 1633,
+      "thisEngagedSessions": 897,
+      "prevEngagedSessions": 1045,
+      "thisEngagementRate": 0.6169188445667125
+    }
+  },
+  "gsc": {
+    "total": {
+      "thisClicks": 580,
+      "prevClicks": 514,
+      "clickDelta": 66,
+      "clickDeltaPct": 12.840466926070038,
+      "thisImpressions": 29029,
+      "prevImpressions": 16100,
+      "impressionDelta": 12929,
+      "thisCtr": 0.01998001998001998,
+      "prevCtr": 0.03192546583850932,
+      "thisPosition": 8.668951737917254,
+      "prevPosition": 9.884782608695652
+    },
+    "topQueries": [
+      {
+        "query": "うどん消費量ランキング",
+        "clicks": 4,
+        "impressions": 60,
+        "ctr": 0.06666666666666667,
+        "position": 3.9166666666666665
+      },
+      {
+        "query": "マヨネーズ消費量 都道府県",
+        "clicks": 4,
+        "impressions": 26,
+        "ctr": 0.15384615384615385,
+        "position": 6.038461538461538
+      },
+      {
+        "query": "空き家率が最も高いのは 徳島県とどこ",
+        "clicks": 4,
+        "impressions": 1941,
+        "ctr": 0.0020607934054611026,
+        "position": 9.575991756826378
+      },
+      {
+        "query": "納豆消費量 ランキング 最新",
+        "clicks": 4,
+        "impressions": 26,
+        "ctr": 0.15384615384615385,
+        "position": 6.461538461538462
+      },
+      {
+        "query": "カツオ 水揚げ ランキング",
+        "clicks": 3,
+        "impressions": 22,
+        "ctr": 0.13636363636363635,
+        "position": 4.409090909090909
+      },
+      {
+        "query": "ソース消費量 都道府県",
+        "clicks": 3,
+        "impressions": 7,
+        "ctr": 0.42857142857142855,
+        "position": 5.428571428571429
+      },
+      {
+        "query": "マヨネーズ 消費量 都道府県",
+        "clicks": 3,
+        "impressions": 15,
+        "ctr": 0.2,
+        "position": 7.333333333333333
+      },
+      {
+        "query": "子育てしやすい県ランキング",
+        "clicks": 3,
+        "impressions": 31,
+        "ctr": 0.0967741935483871,
+        "position": 7.387096774193548
+      },
+      {
+        "query": "納豆 消費 量 ランキング 2026",
+        "clicks": 3,
+        "impressions": 10,
+        "ctr": 0.3,
+        "position": 2
+      },
+      {
+        "query": "うどん 消費量 ランキング",
+        "clicks": 2,
+        "impressions": 39,
+        "ctr": 0.05128205128205128,
+        "position": 3.948717948717949
+      }
+    ]
+  },
+  "psi": {
+    "skipped": true,
+    "reason": "PSI_API_KEY 未設定"
+  },
+  "notes": [
+    "GSC データは 3 日遅延のため、直近期間は 2026-06-19 〜 2026-06-25 を採用",
+    "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
+    "NSM 定義: docs/00_プロジェクト管理/02_収益化戦略.md"
+  ]
+}

@@ -56,7 +56,7 @@ ai-content の生成パイプラインは完全DBレス移行（commit `7569bd5c
 
 > **残課題（backlog `[AICONTENT-DBLESS-REBUILD]`）**: (a) 実際の大量生成 run（サンドボックス外/CI）、
 > (b) staging → R2 push の `sync-snapshots` タスク配線、(c) 既存 complete 49 件も旧プロンプト由来 blocker
-> （例 annual-clear-days は括弧数値 blocker 3 件）を持つため再生成対象。詳細: `docs/todo/05_機能バックログ.md`。
+> （例 annual-clear-days は括弧数値 blocker 3 件）を持つため再生成対象。詳細: `.claude/todo/backlog.md`。
 
 ## 担当スキル
 

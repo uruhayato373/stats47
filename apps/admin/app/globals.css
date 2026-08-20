@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── テーマトークン ──
+   既定はライト。ダークは `.dark` の 1 経路だけで表現する
+   (Tailwind の darkMode: ["class"] と揃える)。
+   layout.tsx の head inline script が「保存値 or 既定ライト」を描画前に解決して
+   .dark を付けるため、prefers-color-scheme のメディアクエリは持たない
+   (同じパレットを 2 箇所に書くとドリフトするため)。
+
+   ★console-* は空白区切りの RGB チャンネルで持つ。hex や rgb() 関数形にすると
+     Tailwind の alpha modifier (bg-console-bg/95 等・実測 25 箇所) が効かなくなる。
+   色を足すときは :root と .dark の両方に同じキーを足すこと。 */
+:root {
+  color-scheme: light;
+  --console-bg: 244 246 250;
+  --console-card: 255 255 255;
+  --console-border: 211 218 230;
+  --console-fg: 17 26 43;
+  --console-muted: 109 122 146;
+  --console-accent: 31 111 208;
+  /* ステータス色。ライト地で読める濃さにする (ダーク用の淡い緑/黄をそのまま
+     使うと白地でコントラストが落ちる)。
+     2026-08-18 に実測して選定 (ページ地 #f4f6fa / カード地 #fff に対するコントラスト):
+       good  green-700 4.64 / 5.02   (green-600 は 3.05 で AA 未達)
+       warn  amber-700 4.64 / 5.02
+       info  sky-700   5.48 / 5.93   (sky-600 は 3.79 で AA 未達)
+       bad   red-700   5.98 / 6.47   (red-600 は 4.46 で僅かに未達)
+     neutral は進捗バーの塗り (図形) にしか使わないので AA 対象外。 */
+  --console-good: 21 128 61;
+  --console-warn: 180 83 9;
+  --console-info: 3 105 161;
+  --console-bad: 185 28 28;
+  --console-neutral: 148 163 184;
+
+  /* shadcn トークン (@stats47/components の Button/Badge/Card/Dialog が参照)。
+     console パレットに合わせ、同等 primitive の再実装を避ける。 */
+  --background: 220 37% 97%;
+  --foreground: 219 43% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 219 43% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 219 43% 12%;
+  --primary: 213 74% 47%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 25% 93%;
+  --secondary-foreground: 219 43% 12%;
+  --muted: 220 25% 93%;
+  --muted-foreground: 220 15% 50%;
+  --accent: 220 25% 93%;
+  --accent-foreground: 219 43% 12%;
+  --destructive: 0 72% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 218 25% 86%;
+  --input: 218 25% 86%;
+  --ring: 213 74% 47%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --console-bg: 11 15 20;
+  --console-card: 18 26 35;
+  --console-border: 31 43 56;
+  --console-fg: 229 238 247;
+  --console-muted: 138 160 181;
+  --console-accent: 75 163 255;
+  --console-good: 74 222 128;
+  --console-warn: 251 191 36;
+  --console-info: 56 189 248;
+  --console-bad: 248 113 113;
+  --console-neutral: 71 85 105;
+
+  --background: 205 33% 5%;
+  --foreground: 205 33% 94%;
+  --card: 205 28% 9%;
+  --card-foreground: 205 33% 94%;
+  --popover: 205 28% 9%;
+  --popover-foreground: 205 33% 94%;
+  --primary: 207 100% 63%;
+  --primary-foreground: 205 33% 5%;
+  --secondary: 205 24% 15%;
+  --secondary-foreground: 205 33% 94%;
+  --muted: 205 24% 15%;
+  --muted-foreground: 202 15% 60%;
+  --accent: 205 24% 15%;
+  --accent-foreground: 205 33% 94%;
+  --destructive: 0 72% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 205 24% 15%;
+  --input: 205 24% 15%;
+  --ring: 207 100% 63%;
+}
+
+body {
+  background: rgb(var(--console-bg));
+  color: rgb(var(--console-fg));
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

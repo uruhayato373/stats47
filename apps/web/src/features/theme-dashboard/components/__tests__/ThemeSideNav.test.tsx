@@ -67,11 +67,12 @@ describe("ThemeSideNav — テーマ一覧", () => {
 });
 
 describe("ThemeSideNav — 地域ブロック", () => {
-  it("既定では地域セレクタを出し、未選択時は「全国」を現在値にする", () => {
+  it("既定では地域セレクタを出し、未選択時は「47都道府県」を現在値にする ('全国' ではない)", () => {
     renderWithProvider(<ThemeSideNav currentThemeKey="population-dynamics" />);
-    expect(screen.getByLabelText("都道府県を選択")).toHaveTextContent("全国");
-    // 全国のときは「全国に戻す」を出さない (押しても変化しないボタンを置かない)
-    expect(screen.queryByRole("button", { name: "全国に戻す" })).toBeNull();
+    expect(screen.getByLabelText("都道府県を選択")).toHaveTextContent("47都道府県");
+    expect(screen.getByLabelText("都道府県を選択")).not.toHaveTextContent("全国");
+    // 47都道府県のときは「47都道府県に戻す」を出さない (押しても変化しないボタンを置かない)
+    expect(screen.queryByRole("button", { name: "47都道府県に戻す" })).toBeNull();
   });
 
   it("showRegion=false で地域ブロックを出さない (Provider が無い bespoke ページ用)", () => {
@@ -86,7 +87,7 @@ describe("ThemeSideNav — 地域ブロック", () => {
     ).toBeGreaterThan(0);
   });
 
-  it("県を選ぶと現在値が県名になり「全国に戻す」が出る", async () => {
+  it("県を選ぶと現在値が県名になり「47都道府県に戻す」が出る", async () => {
     renderWithProvider(<ThemeSideNav currentThemeKey="population-dynamics" />);
 
     fireEvent.click(screen.getByLabelText("都道府県を選択"));
@@ -95,6 +96,6 @@ describe("ThemeSideNav — 地域ブロック", () => {
     await waitFor(() => {
       expect(screen.getByLabelText("都道府県を選択")).toHaveTextContent("大阪府");
     });
-    expect(screen.getByRole("button", { name: "全国に戻す" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "47都道府県に戻す" })).toBeInTheDocument();
   });
 });

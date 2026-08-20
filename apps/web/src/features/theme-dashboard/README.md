@@ -34,16 +34,34 @@ Related canon:
 ```
 ThemePrefectureProvider          ← prefecture state (URL ?pref= sync)
   └─ PageShell leftRail={ThemeSideNav} leftRailNarrowBehavior="hide"
-       └─ breadcrumb / toolbar / lg:hidden ThemeSwitcher / ThemeAreaHeader / dashboard
+       └─ breadcrumb / compact ThemeSwitcher + PrefectureSelect toolbar / ThemeAreaHeader / dashboard
 ```
 
 The provider must stay outside `PageShell` because `ThemeSideNav` holds the prefecture select and
 would otherwise read the default (no-op) context. Below `xl` the rail is hidden — a nav that switches
-the page content is useless when stacked after the content it controls — and the narrow-width
-equivalents are the `lg:hidden` `ThemeSwitcher` band and the `lg:hidden` `PrefectureSelect` in the
-header `actions`.
+the page content is useless when stacked after the content it controls. The content column therefore
+owns one compact toolbar directly below the breadcrumb. It combines `ThemeSwitcher` and
+`PrefectureSelect`; do not reintroduce separate switcher bands or duplicate header actions.
 
 `app/themes/local-finance` is bespoke (it has no provider) and passes `showRegion={false}`.
+
+## Geography Scope Contract
+
+Theme Dashboard is a 47-prefecture comparison surface. Its default state is `prefecture-set`, not a
+Japanese national observation.
+
+- Default UI label: `47都道府県`.
+- A selected prefecture uses `?pref=<5桁都道府県コード>` and exposes that prefecture's value, rank, and trend.
+- `00000` is an e-Stat national area code. It must not also represent the theme UI's no-selection state.
+- The arithmetic mean of 47 prefectures is never a Japanese national value. After a prefecture is selected,
+  it may be shown only as an explicitly labeled `都道府県平均` comparison baseline.
+- A chart that requires a prefecture stays unavailable until a prefecture is selected. Missing data is not
+  converted to zero and is not silently replaced with a representative prefecture.
+- True national observations belong to `/japan/*` and a separate reader/data contract. World comparisons
+  belong to `/world/*`; they are not added to the prefecture context.
+
+The migration is specified in
+`docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md`.
 
 ## Chart Type Decision
 
@@ -65,4 +83,4 @@ Production reflection should go through CI / snapshot workflows. Local R2 writes
 
 ## Backlog
 
-Implementation backlog lives in `docs/todo/05_機能バックログ.md`. Keep this README for architecture and local feature conventions only.
+Implementation backlog lives in `.claude/todo/backlog.md`. Keep this README for architecture and local feature conventions only.

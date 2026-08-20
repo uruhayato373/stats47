@@ -1,0 +1,224 @@
+{
+  "week_id": "2026-W24",
+  "year": 2026,
+  "week": 24,
+  "generated_at": "2026-06-14T11:42:34.976Z",
+  "ranges": {
+    "ga4": {
+      "this": {
+        "start": "2026-06-07",
+        "end": "2026-06-13"
+      },
+      "prev": {
+        "start": "2026-05-31",
+        "end": "2026-06-06"
+      }
+    },
+    "gsc": {
+      "this": {
+        "start": "2026-06-05",
+        "end": "2026-06-11"
+      },
+      "prev": {
+        "start": "2026-05-29",
+        "end": "2026-06-04"
+      }
+    }
+  },
+  "ga4": {
+    "channels": [
+      {
+        "channel": "Organic Search",
+        "thisUsers": 1350,
+        "prevUsers": 1113,
+        "userDelta": 237,
+        "userDeltaPct": 21.293800539083556,
+        "thisSessions": 1609,
+        "prevSessions": 1321,
+        "thisEngagedSessions": 1103,
+        "prevEngagedSessions": 915,
+        "thisEngagementRate": 0.6855189558732132
+      },
+      {
+        "channel": "Direct",
+        "thisUsers": 338,
+        "prevUsers": 653,
+        "userDelta": -315,
+        "userDeltaPct": -48.23889739663094,
+        "thisSessions": 368,
+        "prevSessions": 682,
+        "thisEngagedSessions": 83,
+        "prevEngagedSessions": 100,
+        "thisEngagementRate": 0.22554347826086957
+      },
+      {
+        "channel": "Referral",
+        "thisUsers": 251,
+        "prevUsers": 135,
+        "userDelta": 116,
+        "userDeltaPct": 85.92592592592592,
+        "thisSessions": 283,
+        "prevSessions": 187,
+        "thisEngagedSessions": 171,
+        "prevEngagedSessions": 114,
+        "thisEngagementRate": 0.6042402826855123
+      },
+      {
+        "channel": "Organic Social",
+        "thisUsers": 124,
+        "prevUsers": 11,
+        "userDelta": 113,
+        "userDeltaPct": 1027.2727272727273,
+        "thisSessions": 130,
+        "prevSessions": 15,
+        "thisEngagedSessions": 59,
+        "prevEngagedSessions": 8,
+        "thisEngagementRate": 0.45384615384615384
+      },
+      {
+        "channel": "AI Assistant",
+        "thisUsers": 46,
+        "prevUsers": 0,
+        "userDelta": 46,
+        "userDeltaPct": null,
+        "thisSessions": 58,
+        "prevSessions": 0,
+        "thisEngagedSessions": 25,
+        "prevEngagedSessions": 0,
+        "thisEngagementRate": 0.43103448275862066
+      },
+      {
+        "channel": "Unassigned",
+        "thisUsers": 29,
+        "prevUsers": 62,
+        "userDelta": -33,
+        "userDeltaPct": -53.2258064516129,
+        "thisSessions": 32,
+        "prevSessions": 68,
+        "thisEngagedSessions": 12,
+        "prevEngagedSessions": 30,
+        "thisEngagementRate": 0.375
+      }
+    ],
+    "total": {
+      "thisUsers": 2138,
+      "prevUsers": 1974,
+      "thisSessions": 2480,
+      "prevSessions": 2273,
+      "thisEngagedSessions": 1453,
+      "prevEngagedSessions": 1167,
+      "userDelta": 164,
+      "userDeltaPct": 8.308004052684904,
+      "engagedSessionDelta": 286,
+      "engagedSessionDeltaPct": 24.507283633247642
+    },
+    "organic": {
+      "channel": "Organic Search",
+      "thisUsers": 1350,
+      "prevUsers": 1113,
+      "userDelta": 237,
+      "userDeltaPct": 21.293800539083556,
+      "thisSessions": 1609,
+      "prevSessions": 1321,
+      "thisEngagedSessions": 1103,
+      "prevEngagedSessions": 915,
+      "thisEngagementRate": 0.6855189558732132
+    }
+  },
+  "gsc": {
+    "total": {
+      "thisClicks": 491,
+      "prevClicks": 345,
+      "clickDelta": 146,
+      "clickDeltaPct": 42.31884057971014,
+      "thisImpressions": 14841,
+      "prevImpressions": 12876,
+      "impressionDelta": 1965,
+      "thisCtr": 0.033084023987601914,
+      "prevCtr": 0.02679403541472507,
+      "thisPosition": 9.62253217438178,
+      "prevPosition": 8.803976390183287
+    },
+    "topQueries": [
+      {
+        "query": "家計調査、豚肉の支出額1位の県は？",
+        "clicks": 9,
+        "impressions": 74,
+        "ctr": 0.12162162162162163,
+        "position": 3.5
+      },
+      {
+        "query": "うどん消費量ランキング",
+        "clicks": 6,
+        "impressions": 138,
+        "ctr": 0.043478260869565216,
+        "position": 6.4855072463768115
+      },
+      {
+        "query": "家計調査、豚肉の支出額1位の県は",
+        "clicks": 5,
+        "impressions": 38,
+        "ctr": 0.13157894736842105,
+        "position": 3.473684210526316
+      },
+      {
+        "query": "生活費 ランキング 都 道府県",
+        "clicks": 3,
+        "impressions": 15,
+        "ctr": 0.2,
+        "position": 6.466666666666667
+      },
+      {
+        "query": "うどん 消費量 ランキング",
+        "clicks": 2,
+        "impressions": 55,
+        "ctr": 0.03636363636363636,
+        "position": 6.836363636363636
+      },
+      {
+        "query": "半導体 都道府県 ランキング",
+        "clicks": 2,
+        "impressions": 7,
+        "ctr": 0.2857142857142857,
+        "position": 2.571428571428571
+      },
+      {
+        "query": "2050年 都 道府県 人口ランキング",
+        "clicks": 1,
+        "impressions": 14,
+        "ctr": 0.07142857142857142,
+        "position": 10.5
+      },
+      {
+        "query": "stats47",
+        "clicks": 1,
+        "impressions": 3,
+        "ctr": 0.3333333333333333,
+        "position": 1
+      },
+      {
+        "query": "うどん 消費量 都道府県",
+        "clicks": 1,
+        "impressions": 22,
+        "ctr": 0.045454545454545456,
+        "position": 6.2272727272727275
+      },
+      {
+        "query": "うどん消費量",
+        "clicks": 1,
+        "impressions": 39,
+        "ctr": 0.02564102564102564,
+        "position": 9.102564102564102
+      }
+    ]
+  },
+  "psi": {
+    "skipped": true,
+    "reason": "PSI_API_KEY 未設定"
+  },
+  "notes": [
+    "GSC データは 3 日遅延のため、直近期間は 2026-06-05 〜 2026-06-11 を採用",
+    "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
+    "NSM 定義: docs/00_プロジェクト管理/02_収益化戦略.md"
+  ]
+}

@@ -39,6 +39,6 @@ export const patientReceivingRateByAge: MetricConfig = {
   // 2026-07-30: areaAxis 是正で 47 県そろったが、入院受療率 (inpatient-rate-per-100k) と同一表・同一 pin で値が完全一致するため 非公開にする。
   // 未公開 (KNOWN_RANKING_KEYS 外) だったため失う流入は無い。
   // 独自の内訳 (65歳以上 / 主要傷病 / 一般病床 等) を pin して別 metric として
-  // 再定義するなら title・SEO も含めて仕様から起こす → docs/todo/06_指標バックログ.md
+  // 再定義するなら title・SEO も含めて仕様から起こす → .claude/todo/backlog.md
   "isActive": false,
 };

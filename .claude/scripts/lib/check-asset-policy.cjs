@@ -154,7 +154,7 @@ async function collect() {
     const buf = fs.readFileSync(file);
     const hash = crypto.createHash("sha256").update(buf).digest("hex");
     if (!hashGroups.has(hash)) hashGroups.set(hash, []);
-    hashGroups.get(hash).push(rel(file));
+    hashGroups.get(hash).push({ path: rel(file), isSymlink: fs.lstatSync(file).isSymbolicLink() });
     try {
       const meta = await sharp(buf).metadata();
       if (!meta.width || !meta.height) add(findings, "INVALID_DIMENSIONS", file, "pixel寸法を取得できない");
@@ -167,16 +167,21 @@ async function collect() {
     if (buf.length > limit) add(findings, "OVERSIZED_PUBLIC_ASSET", file, `${buf.length} bytes > ${limit} bytes`);
   }
   // SHA-256 完全同一 (2枚以上) を重複として報告。message にグループ (代表 + 他) を含める。
-  // 例外: docs/31 (note.com 原稿) の記事同梱画像は、note.com が記事ごとに画像実体の
+  // 例外1: docs/31 (note.com 原稿) の記事同梱画像は、note.com が記事ごとに画像実体の
   // アップロードを要求し相対参照 (images/xxx.png) で 1 枚を共有できないため、同一バイトでも
   // 各記事に実体が必要。共有可能な public / docs/21 の重複だけを debt として検出する。
+  // 例外2: symlink は実体を持たない参照 (git blob は数十バイトのパス文字列のみ)。
+  // AGENTS.md → CLAUDE.md と同じ意図的な単一ソース参照であり、複製ではないため対象外。
   const isNoteEmbeddedAsset = (relPath) => relPath.startsWith("docs/31_note記事原稿/");
   for (const group of hashGroups.values()) {
     if (group.length < 2) continue;
-    const sorted = [...group].sort();
-    for (const dup of sorted.slice(1)) {
+    const sorted = [...group].sort((a, b) => a.path.localeCompare(b.path));
+    const canonical = sorted.find((entry) => !entry.isSymlink) ?? sorted[0];
+    for (const entry of sorted) {
+      if (entry === canonical || entry.isSymlink) continue;
+      const dup = entry.path;
       if (isNoteEmbeddedAsset(dup)) continue;
-      findings.push({ code: "DUPLICATE_IMAGE", file: dup, message: `same bytes as ${sorted[0]}` });
+      findings.push({ code: "DUPLICATE_IMAGE", file: dup, message: `same bytes as ${canonical.path}` });
     }
   }
 

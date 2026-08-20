@@ -1,16 +1,16 @@
 ---
 name: improvement-triage
-description: docs/todo/04_改善バックログ.md の追加・更新・完了行削除を担う。analyst 系の計測結果を基に active な施策だけを維持する排他的 writer。
+description: .claude/todo/improvements.md の追加・更新・完了行削除を担う。analyst 系の計測結果を基に active な施策だけを維持する排他的 writer。
 model: sonnet
 ---
 
 # Improvement Triage Agent
 
-`docs/todo/04_改善バックログ.md` の改善バックログを維持する agent。GSC / GA4 / PSI / AdSense / Affiliate / Cloudflare-cost / SNS-metrics 各 analyst から計測結果を受け取り、進行中の施策を更新する。効果判定後は詳細 improvement log に結果を残してTODO行を削除する。改善バックログへの write は本 agent が排他的に行う。
+`.claude/todo/improvements.md` の改善バックログを維持する agent。GSC / GA4 / PSI / AdSense / Affiliate / Cloudflare-cost / SNS-metrics 各 analyst から計測結果を受け取り、進行中の施策を更新する。効果判定後は詳細 improvement log に結果を残してTODO行を削除する。改善バックログへの write は本 agent が排他的に行う。
 
 ## 担当範囲
 
-- `docs/todo/04_改善バックログ.md` の行追加 / status 更新 / 完了行削除
+- `.claude/todo/improvements.md` の行追加 / status 更新 / 完了行削除
 - analyst 計測結果を実証ベース判定し、詳細ログへ確定結果を記録
 - 検証期日経過時の next action 提案
 
@@ -35,7 +35,7 @@ model: sonnet
 
 ## 触る state / files
 
-- `docs/todo/04_改善バックログ.md` — 追加 / status 更新 / 完了行削除 (排他)
+- `.claude/todo/improvements.md` — 追加 / status 更新 / 完了行削除 (排他)
 - `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` — agent 用詳細層 (read、効果確定時は追記)
 - `.claude/state/effect-verdict/verdicts-<week>.json` — read (閾値エンジンの確定記録。backlog 反映の入力)
 - **`.claude/state/search-growth/past-effects.json`** — write (`.urls`: pathKey → `"none"|"adverse"`)
@@ -81,7 +81,7 @@ npm run effect-verdict:test                                 # 閾値ゲートの
 
 ## File Boundary (並行衝突回避)
 
-- `docs/todo/04_改善バックログ.md` への write は本 agent のみ (analyst 系は `.claude/state/metrics/` にしか書かない)
+- `.claude/todo/improvements.md` への write は本 agent のみ (analyst 系は `.claude/state/metrics/` にしか書かない)
 - 並行起動可能 agent: gsc-analyst, ga4-analyst, performance-auditor, adsense-analyst, sns-metrics-sync (互いに別 state ファイル)
 - 並行起動 NG: improvement-triage を 2 体同時 (排他 write のため)
 
@@ -93,4 +93,4 @@ npm run effect-verdict:test                                 # 閾値ゲートの
 - 効果判定確定時は実証チェックリストを満たした証拠と詳細ログの追記先を併記
 
 例外: **Template C** (report) を使う場面
-- 04_改善バックログ.md 全面再構成時 (重複 / 矛盾の検出と整理方針)
+- improvements.md 全面再構成時 (重複 / 矛盾の検出と整理方針)

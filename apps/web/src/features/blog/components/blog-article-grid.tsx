@@ -3,7 +3,10 @@ import { ArrowRight } from 'lucide-react';
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
 import { SurfaceLinkCard } from '@/components/surface/SurfaceCard';
 
-import { ogpImageUrl } from '@/lib/metadata/ogp-image';
+import {
+  BLOG_THUMBNAIL_ASPECT_CLASS,
+  ogpImageUrl,
+} from '@/lib/metadata/ogp-image';
 
 import type { Article } from '../types';
 
@@ -46,7 +49,9 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
               href={`/blog/${article.slug}`}
               className="group flex min-h-80 flex-col overflow-hidden p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <div className="relative aspect-[1200/630] w-full overflow-hidden border-b border-border bg-muted">
+              <div
+                className={`relative ${BLOG_THUMBNAIL_ASPECT_CLASS} w-full overflow-hidden border-b border-border bg-muted`}
+              >
                 <ThemeAwareImage
                   lightSrc={ogpImageUrl(
                     `app/blog/${article.slug}/thumbnail-light.webp`

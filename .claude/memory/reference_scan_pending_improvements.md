@@ -7,7 +7,7 @@ metadata:
   originSessionId: dfcc7188-5af9-45c9-a74d-624210d4acd3
 ---
 
-`.claude/scripts/lib/scan-pending-improvements.mjs` は **`docs/todo/04_改善バックログ.md` の
+`.claude/scripts/lib/scan-pending-improvements.mjs` は **`.claude/todo/improvements.md` の
 マークダウンテーブル**を走査し、`status: pending | in-progress | effect/pending` の行を Tier 順に
 抽出する CLI ツール。旧 `docs/05_改善ログ/*.md` 走査版は廃止済 (2026-06-06 のバックログ統合)。
 
@@ -50,7 +50,7 @@ node .claude/scripts/lib/scan-pending-improvements.mjs
 
 ## 関連
 
-- バックログ: `docs/todo/04_改善バックログ.md`
+- バックログ: `.claude/todo/improvements.md`
 - 可視化: `.claude/scripts/lib/triage-matrix.mjs` (`--format matrix|csv`)
 - 台帳 writer: `.claude/scripts/lib/write-past-effects.mjs` (同じ `parseBacklog` を使う)
 - triage workflow: `.github/workflows/improvement-log-reminder-weekly.yml` (日曜 22:00 JST)

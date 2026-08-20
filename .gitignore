@@ -193,3 +193,6 @@ packages/database/seed/d1-seed.sql
 
 # 市販書籍のローカル参照スキャン (著作権物・118MB。area-databook の設計参照専用でrepoに入れない)
 docs/books/
+# 同上: 日本国勢図会のスキャン 13 件・244MB。
+# このリポジトリは public なので commit すると著作権物を公開配信することになる。
+/books/

@@ -38,6 +38,13 @@ const CONTENT_SRC = readFileSync(
   resolve(import.meta.dirname, "../components/RankingKeyPage/RankingPageContentSections.tsx"),
   "utf8",
 );
+const AFFILIATE_SECTION_SRC = readFileSync(
+  resolve(
+    import.meta.dirname,
+    "../components/RankingKeyPage/RankingPageNativeAffiliateSection.tsx",
+  ),
+  "utf8",
+);
 
 describe("ranking native アフィリエイトの解決契約", () => {
   it("categoryKey フォールバックを持つ (tags は全 config 未記入のため必須)", () => {
@@ -63,5 +70,12 @@ describe("ranking native アフィリエイトの解決契約", () => {
       /ADSENSE_DISPLAY_ENABLED\s*\?\s*affiliateBanners\s*:\s*affiliateBanners\.slice\(1\)/,
     );
     expect(CONTENT_SRC).toContain("!ADSENSE_DISPLAY_ENABLED && sections.inContentAffiliate");
+  });
+
+  it("読了位置は3列の単一ブロックにし、独立した5件目を置かない", () => {
+    expect(AFFILIATE_SECTION_SRC).toContain('variant="three-up"');
+    expect(AFFILIATE_SECTION_SRC).not.toContain('position="ranking-end"');
+    expect(AFFILIATE_SECTION_SRC).not.toContain("<BannerAd");
+    expect(AFFILIATE_SECTION_SRC).not.toContain("usable[4]");
   });
 });

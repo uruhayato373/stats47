@@ -1,0 +1,94 @@
+name: 🚦 Develop Quality Gate
+
+# ─────────────────────────────────────────────────────────────────────────────
+# develop への push を検査する高速ゲート (2026-08-20 新設)。
+#
+# ★なぜ要るか (2026-08-20 の実測):
+#   `pr-quality-check.yml` のトリガーは `pull_request: branches: [main]` だけなので、
+#   **develop への push は一切検査されていなかった**。その結果、pre-commit を通って
+#   いない変更がそのまま develop に着地し、壊れは「次に develop をマージする人」が
+#   払う構造になっていた。実測では origin/develop の
+#   `MetricFocusCharts.tsx:63` が react-hooks/set-state-in-effect 違反を含んだまま
+#   入っており (commit 621131d6c)、マージ担当が 3 サイクル・十数分を検査待ちに使った。
+#   しかも「自分が壊したのか継承したのか」の切り分けが毎回必要になる。
+#
+# ★設計方針: フル suite (pre-commit 相当・2 分超) を再実装しない。
+#   develop の着地点で「決定的・高速」な 3 ゲートだけを
+#   走らせ、壊れが次のマージ担当に回るのを止める。深い検査は従来どおり
+#   develop→main の PR (`pr-quality-check.yml`) が担う。
+#
+#   ここに新しい検査を足すときは「決定的か」「1 分以内か」を満たすこと。満たさない
+#   ものは `pr-quality-check.yml` 側に置く (このゲートが重くなると develop への
+#   push が詰まり、結局 --no-verify を誘発して元の木阿弥になる)。
+#
+# ★cron の commit-back はほぼすべて `[skip ci]` を持つので発火しない。
+#   2026-08-20 時点の例外は `gsc-url-inspection-daily.yml` の 1 本だけで、これは
+#   `.claude/state/metrics/gsc/url-inspection/` の CSV/MD しか触らないため緑で通る。
+#   **`paths-ignore` で state を除外しない**: 実測すると 3 ゲートはいずれも `.claude/state` を
+#   読まない (maintenance-debt は `state` を EXCLUDED に持ち、env-registry の roots にも無く、
+#   eslint は apps/web/src のみ) ので除外しても今は安全。それでも足さないのは、将来 state を
+#   読むゲートを足したときに除外が黙って穴になるから。1 日 1 回の余分な run のほうが安い。
+# ─────────────────────────────────────────────────────────────────────────────
+
+on:
+  push:
+    branches:
+      - develop
+
+# 同一ブランチの連続 push は最新のみ検査する (古い run は cancel)。
+concurrency:
+  group: develop-quality-gate
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  fast-gates:
+    name: Fast Gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # maintenance-debt の --ratchet-check が origin/main と比較する
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📝 ESLint Check
+        # ★`npm run lint` (= turbo → `next lint`) を使わない。
+        #   `next lint` はパッケージマネージャを**外部プロセスとして起動**して registry を引く。
+        #   GitHub runner には yarn 1.22.22 が素で入っているため検出を誤り、
+        #   `Failed to get registry from "yarn"` で落ちる (2026-08-20 の初回 run で実測)。
+        #   ローカルは corepack が「このプロジェクトは npm」と拒否するため再現しない。
+        #   eslint を直接呼べば同じ設定・同じルールで、外部プロセスに依存しない
+        #   (pre-commit の staged lint と同じ方式)。`next lint` 自体も Next 15 で非推奨。
+        #   `--max-warnings` は付けない: 既存の warning 2 件 (no-img-element) で
+        #   develop が常に赤になり、ゲートが運用で無視されるようになる。error のみで判定する。
+        run: npx eslint src
+        working-directory: apps/web
+        continue-on-error: false
+
+      - name: 🔐 Environment Registry Guard
+        # 値は読まず、コード/workflow が参照する env 名と公開区分だけを検査する。
+        # 2026-08-20 は Windows 版 dev サーバ由来の 4 変数 (PWSH_PATH / R2_DEV_GATEWAY*)
+        # が未登録のまま develop に着地していた。
+        run: node .claude/scripts/lib/check-env-registry.cjs
+        continue-on-error: false
+
+      - name: 🧭 Maintenance Debt Regression Guard
+        # 無根拠 TODO/FIXME/HACK、削除条件のない legacy、永続 D1 runtime 復活の新規増加を止める。
+        # ratchet-check: baseline は縮小専用 (origin/main 比で増えたら手編集/すり替えとして拒否)。
+        run: |
+          node .claude/scripts/lib/check-maintenance-debt.cjs --baseline
+          node .claude/scripts/lib/check-maintenance-debt.cjs --ratchet-check
+        continue-on-error: false

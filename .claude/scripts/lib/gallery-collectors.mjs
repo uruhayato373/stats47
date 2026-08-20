@@ -7,7 +7,7 @@
  *
  * 消費側:
  *  - .claude/scripts/ogp/build-image-gallery.mjs  (CI 週次ゲート・静的 HTML)
- *  - apps/gallery/lib/server/collectors.ts        (統合メディアコンソール・Next.js ランタイム)
+ *  - apps/admin/lib/server/collectors.ts        (統合メディアコンソール・Next.js ランタイム)
  *
  * 純関数のみ。CLI/出力/exit code は各消費側が持つ (このファイルは列挙だけを担う)。
  * 正典: .claude/rules/ogp-image-standards.md / .claude/rules/r2-storage-design.md
@@ -293,7 +293,7 @@ export async function buildTab(tab, opts) {
       if (limit) slugs = slugs.slice(0, limit);
       return {
         source: "r2-static",
-        aspect: "16:9",
+        aspect: "1.91:1",
         r2KeyPattern: `app/blog/<slug>/thumbnail-{light,dark}.webp`,
         entries: slugs.map((s) => ({
           key: s,

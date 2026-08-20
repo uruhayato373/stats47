@@ -3,7 +3,7 @@
  * backlog-loop のキューを組んで stdout へ JSON を出す CLI。
  *
  * 使い方:
- *   node .claude/scripts/backlog-loop/build-backlog-queue.mjs [--limit N] [--json] [--source 05,01,06]
+ *   node .claude/scripts/backlog-loop/build-backlog-queue.mjs [--limit N] [--json]
  *
  * 純関数は queue-core.cjs / parse-backlog-core.cjs / ledger-core.cjs にあり、
  * ここは I/O (ファイル読み込みと出力整形) だけを持つ。
@@ -27,10 +27,9 @@ const ROOT = path.resolve(HERE, '../../..');
 const POLICY_PATH = path.join(ROOT, '.claude/config/backlog-routing-policy.json');
 const LEDGER_PATH = path.join(ROOT, '.claude/state/backlog-loop/ledger.json');
 
-/** 見出し型を持つ真実源。01 は表形式なので Phase 2 で別経路にする */
+/** カード型バックログの真実源 (v3-unified で 1 ファイルに統合) */
 const SOURCES = {
-  '05': 'docs/todo/05_機能バックログ.md',
-  '06': 'docs/todo/06_指標バックログ.md',
+  backlog: '.claude/todo/backlog.md',
 };
 
 function getArg(flag, fallback = null) {
@@ -60,7 +59,7 @@ export function main() {
     console.error(`⚠️  ledger を読めなかったので空から再構築した: ${LEDGER_PATH}`);
   }
 
-  const wanted = (getArg('--source', '05') ?? '05').split(',').map((s) => s.trim());
+  const wanted = (getArg('--source', 'backlog') ?? 'backlog').split(',').map((s) => s.trim());
   const entries = [];
   for (const key of wanted) {
     const rel = SOURCES[key];

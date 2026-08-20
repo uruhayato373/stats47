@@ -18,7 +18,7 @@
  * 3. `MAX_KNOWN_BROKEN` のラチェット (下記)。是正のたびにこの定数を下げる。増やす変更は
  *    テストが落ちるので、新しい壊れ方を allowlist に足して誤魔化すことができない。
  *
- * 正典: `.claude/rules/metric-config-standards.md` / 追跡: `docs/todo/05_機能バックログ.md`
+ * 正典: `.claude/rules/metric-config-standards.md` / 追跡: `.claude/todo/backlog.md`
  * の `[RANKING-VALUES-PARTITION-INTEGRITY-01]`
  */
 import type { ExpectedShapeAnomalyEntry } from "./shape-gate";

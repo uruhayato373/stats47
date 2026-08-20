@@ -1,0 +1,212 @@
+{
+  "week_id": "2026-W22",
+  "year": 2026,
+  "week": 22,
+  "generated_at": "2026-05-31T11:32:33.485Z",
+  "ranges": {
+    "ga4": {
+      "this": {
+        "start": "2026-05-24",
+        "end": "2026-05-30"
+      },
+      "prev": {
+        "start": "2026-05-17",
+        "end": "2026-05-23"
+      }
+    },
+    "gsc": {
+      "this": {
+        "start": "2026-05-22",
+        "end": "2026-05-28"
+      },
+      "prev": {
+        "start": "2026-05-15",
+        "end": "2026-05-21"
+      }
+    }
+  },
+  "ga4": {
+    "channels": [
+      {
+        "channel": "Organic Search",
+        "thisUsers": 1042,
+        "prevUsers": 999,
+        "userDelta": 43,
+        "userDeltaPct": 4.3043043043043046,
+        "thisSessions": 1248,
+        "prevSessions": 1152,
+        "thisEngagedSessions": 829,
+        "prevEngagedSessions": 785,
+        "thisEngagementRate": 0.6642628205128205
+      },
+      {
+        "channel": "Direct",
+        "thisUsers": 420,
+        "prevUsers": 488,
+        "userDelta": -68,
+        "userDeltaPct": -13.934426229508196,
+        "thisSessions": 461,
+        "prevSessions": 519,
+        "thisEngagedSessions": 77,
+        "prevEngagedSessions": 60,
+        "thisEngagementRate": 0.16702819956616052
+      },
+      {
+        "channel": "Referral",
+        "thisUsers": 131,
+        "prevUsers": 110,
+        "userDelta": 21,
+        "userDeltaPct": 19.090909090909093,
+        "thisSessions": 175,
+        "prevSessions": 140,
+        "thisEngagedSessions": 114,
+        "prevEngagedSessions": 94,
+        "thisEngagementRate": 0.6514285714285715
+      },
+      {
+        "channel": "Organic Social",
+        "thisUsers": 95,
+        "prevUsers": 99,
+        "userDelta": -4,
+        "userDeltaPct": -4.040404040404041,
+        "thisSessions": 106,
+        "prevSessions": 110,
+        "thisEngagedSessions": 58,
+        "prevEngagedSessions": 71,
+        "thisEngagementRate": 0.5471698113207547
+      },
+      {
+        "channel": "Unassigned",
+        "thisUsers": 59,
+        "prevUsers": 45,
+        "userDelta": 14,
+        "userDeltaPct": 31.11111111111111,
+        "thisSessions": 69,
+        "prevSessions": 46,
+        "thisEngagedSessions": 37,
+        "prevEngagedSessions": 28,
+        "thisEngagementRate": 0.5362318840579711
+      }
+    ],
+    "total": {
+      "thisUsers": 1747,
+      "prevUsers": 1741,
+      "thisSessions": 2059,
+      "prevSessions": 1967,
+      "thisEngagedSessions": 1115,
+      "prevEngagedSessions": 1038,
+      "userDelta": 6,
+      "userDeltaPct": 0.34462952326249285,
+      "engagedSessionDelta": 77,
+      "engagedSessionDeltaPct": 7.418111753371869
+    },
+    "organic": {
+      "channel": "Organic Search",
+      "thisUsers": 1042,
+      "prevUsers": 999,
+      "userDelta": 43,
+      "userDeltaPct": 4.3043043043043046,
+      "thisSessions": 1248,
+      "prevSessions": 1152,
+      "thisEngagedSessions": 829,
+      "prevEngagedSessions": 785,
+      "thisEngagementRate": 0.6642628205128205
+    }
+  },
+  "gsc": {
+    "total": {
+      "thisClicks": 372,
+      "prevClicks": 440,
+      "clickDelta": -68,
+      "clickDeltaPct": -15.454545454545453,
+      "thisImpressions": 12096,
+      "prevImpressions": 14561,
+      "impressionDelta": -2465,
+      "thisCtr": 0.030753968253968252,
+      "prevCtr": 0.03021770482796511,
+      "thisPosition": 8.767774470899472,
+      "prevPosition": 8.146693221619394
+    },
+    "topQueries": [
+      {
+        "query": "中学校 生徒 数 ランキング 2026",
+        "clicks": 4,
+        "impressions": 9,
+        "ctr": 0.4444444444444444,
+        "position": 2.2222222222222223
+      },
+      {
+        "query": "納豆 消費 量 ランキング 2026",
+        "clicks": 3,
+        "impressions": 15,
+        "ctr": 0.2,
+        "position": 3.2
+      },
+      {
+        "query": "健康寿命 都 道府県 ランキング 2026",
+        "clicks": 2,
+        "impressions": 48,
+        "ctr": 0.041666666666666664,
+        "position": 4.75
+      },
+      {
+        "query": "鶏肉消費量 ランキング",
+        "clicks": 2,
+        "impressions": 19,
+        "ctr": 0.10526315789473684,
+        "position": 6.473684210526316
+      },
+      {
+        "query": "パスタ消費量 都道府県",
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 3
+      },
+      {
+        "query": "ブリ 生産量 ランキング 日本",
+        "clicks": 1,
+        "impressions": 3,
+        "ctr": 0.3333333333333333,
+        "position": 10.333333333333334
+      },
+      {
+        "query": "寿司 消費 量 ランキング 2026",
+        "clicks": 1,
+        "impressions": 13,
+        "ctr": 0.07692307692307693,
+        "position": 9.384615384615385
+      },
+      {
+        "query": "小学校 児童数 ランキング",
+        "clicks": 1,
+        "impressions": 7,
+        "ctr": 0.14285714285714285,
+        "position": 8.571428571428571
+      },
+      {
+        "query": "日本 冬 暖かい 県 ランキング",
+        "clicks": 1,
+        "impressions": 1,
+        "ctr": 1,
+        "position": 55
+      },
+      {
+        "query": "昆布消費量ランキング 2025",
+        "clicks": 1,
+        "impressions": 8,
+        "ctr": 0.125,
+        "position": 9.5
+      }
+    ]
+  },
+  "psi": {
+    "skipped": true,
+    "reason": "PSI_API_KEY 未設定"
+  },
+  "notes": [
+    "GSC データは 3 日遅延のため、直近期間は 2026-05-22 〜 2026-05-28 を採用",
+    "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
+    "NSM 定義: docs/00_プロジェクト管理/02_収益化戦略.md"
+  ]
+}

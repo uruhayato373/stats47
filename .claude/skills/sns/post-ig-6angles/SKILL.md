@@ -419,4 +419,4 @@ jq '[.posts[] | select(.platform=="instagram" and .angle!=null)]' \
 
 - `.claude/agents/instagram-strategist.md` — 戦略レイヤー（参照元）
 - `.claude/skills/sns/post-x-batch/SKILL.md` — X 版の量産スキル（角度×カテゴリ相性は rules §2-8 で共用）
-- `docs/todo/04_改善バックログ.md` — SNS-IG-01（Instagram リーチ拡大施策）
+- `.claude/todo/improvements.md` — SNS-IG-01（Instagram リーチ拡大施策）

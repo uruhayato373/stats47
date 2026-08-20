@@ -14,7 +14,7 @@ import { describe, it, expect, beforeAll, afterAll } from "vitest";
 
 import { SITEMAP_BLOG_ENTRIES, SITEMAP_SURVEY_IDS, SITEMAP_TAG_ENTRIES } from "@/config/sitemap-blog-entries";
 
-import sitemap from "../sitemap";
+import sitemap, { generateSitemaps } from "../sitemap";
 
 const SEGMENT_ID = { blog: 4, categories: 5, surveys: 6, tags: 7 } as const;
 
@@ -56,11 +56,23 @@ describe("sitemap: NEXT_PHASE=phase-production-build (実 reader)", () => {
   });
 
   it("全 segment の合計がビルド前の実測 (4,177) を上回る", async () => {
+    // ハードコードした segment 数だと新規 segment 追加時に無言でテスト対象から漏れる
+    // (GEO-SCOPE-SEPARATION-01 WP5 で japan segment を追加した際に発見)。
+    // generateSitemaps() を単一ソースにして総数を動的に導出する。
+    const segmentIds = await generateSitemaps();
     let total = 0;
-    for (let id = 0; id < 9; id += 1) {
+    for (const { id } of segmentIds) {
       total += (await sitemap({ id })).length;
     }
     // 2026-08-06 の本番実測は 4,177 URL。欠落 4 segment を埋めた分だけ増える。
     expect(total).toBeGreaterThan(4177);
+  });
+
+  it("japan segment がビルド時も pilot テーマを出す (R2 非依存の git constant)", async () => {
+    const segmentIds = await generateSitemaps();
+    const japanId = segmentIds.length - 1; // WP5: 末尾に追記 (既存 id を変えない)
+    const entries = await sitemap({ id: japanId });
+    expect(entries.some((e) => e.url.endsWith("/japan"))).toBe(true);
+    expect(entries.some((e) => e.url.endsWith("/japan/education-culture"))).toBe(true);
   });
 });

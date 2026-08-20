@@ -12,7 +12,7 @@ W21-W26 にかけての SEO 向上 × TODO 一元化 × 自動化拡張プラン
 **Why**: pending 施策が 8 件以上滞留し、TODO が 4 箇所 (週次計画 / improvement-log / docs/50_Issues / 記事内 TODO 記号) に散在していたため、判定期日が来ても次アクションが流れない状態を解消する必要があった。
 
 **How to apply**:
-- 現行の TODO 真実源は **`docs/todo/04_改善バックログ.md`**。metric 別の agent 用詳細は `.claude/skills/analytics/*/reference/improvement-log.md`
+- 現行の TODO 真実源は **`.claude/todo/improvements.md`**。metric 別の agent 用詳細は `.claude/skills/analytics/*/reference/improvement-log.md`
 - 旧 SEO TODO 統合計画は完了後に削除済み。必要な履歴は Git 履歴で参照する
 - 元 plan ファイル: `~/.claude/plans/docs-gsc-ga4-seo-todo-g-rosy-hamming.md` (更新時は両方同期)
 

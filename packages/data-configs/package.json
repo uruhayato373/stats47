@@ -54,6 +54,11 @@
       "types": "./src/prominence/ranking-prominence.generated.ts",
       "import": "./src/prominence/ranking-prominence.generated.ts",
       "require": "./src/prominence/ranking-prominence.generated.ts"
+    },
+    "./geo-scope": {
+      "types": "./src/geo-scope/index.ts",
+      "import": "./src/geo-scope/index.ts",
+      "require": "./src/geo-scope/index.ts"
     }
   },
   "scripts": {

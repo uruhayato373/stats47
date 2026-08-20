@@ -160,10 +160,60 @@ function auditWorkflowMainPushes(workflow) {
   return out;
 }
 
+/**
+ * PR の存在判定に `gh pr view <branch>` を使っている箇所を検出する。
+ *
+ * `gh pr view` は CLOSED / MERGED の PR も拾って exit 0 を返すため、
+ * 「既存 PR が無ければ作る」の分岐に使うと、一度 PR を閉じた時点で恒久的に
+ * 「既存あり」と誤判定し、PR が二度と作られなくなる。workflow は success の
+ * ままなので気づけない (silent green)。
+ *
+ * 実在した退行: sync-snapshots が CLOSED な #544 を拾い続け、
+ * chore/ranking-keys-sync が force-push されるだけで本番へ一度も届かなかった
+ * (2026-08-18 検知)。正しい形は
+ * `gh pr list --head "$B" --state open --json number --jq 'length'`。
+ *
+ * 読み取り目的の `gh pr view` (変数への代入など) は対象外で、
+ * 条件分岐に使っている行だけを違反とする。
+ */
+function findStalePrExistenceGuard(runScript) {
+  if (typeof runScript !== "string" || !runScript.includes("gh pr view")) {
+    return [];
+  }
+  const violations = [];
+  runScript.split("\n").forEach((line, index) => {
+    if (/^\s*#/.test(line)) return;
+    if (!/\bgh\s+pr\s+view\b/.test(line)) return;
+    const conditional =
+      /(^|\s)(if|elif)\s/.test(line) ||
+      /!\s*gh\s+pr\s+view/.test(line) ||
+      /&&|\|\|/.test(line);
+    if (!conditional) return;
+    violations.push({ line: index + 1, text: line.trim() });
+  });
+  return violations;
+}
+
+function auditWorkflowPrGuards(workflow) {
+  const out = [];
+  const jobs = (workflow && workflow.jobs) || {};
+  for (const [jobName, job] of Object.entries(jobs)) {
+    for (const step of (job && job.steps) || []) {
+      if (!step || typeof step.run !== "string") continue;
+      for (const v of findStalePrExistenceGuard(step.run)) {
+        out.push({ job: jobName, step: step.name || "(unnamed)", ...v });
+      }
+    }
+  }
+  return out;
+}
+
 module.exports = {
   findPushWithoutPull,
   findPushToMain,
   auditWorkflowPushes,
   auditWorkflowMainPushes,
   auditRatchetCommitContract,
+  findStalePrExistenceGuard,
+  auditWorkflowPrGuards,
 };

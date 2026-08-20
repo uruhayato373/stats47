@@ -1,13 +1,13 @@
 {
-  "total": 1077,
+  "total": 1080,
   "byStatus": {
-    "both": 971,
+    "both": 974,
     "jsonOnly": 0,
     "neither": 106
   },
   "byMethod": {
     "manual": 43,
-    "done": 971,
+    "done": 974,
     "ssot-restore": 26,
     "ssot-restore-new": 37
   },
@@ -547,6 +547,33 @@
       "slug": "brazilian-resident-population-prefecture-gap",
       "base": "brazilian-resident-population-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-site-area-per-dwelling",
+      "base": "bread-consumption-expenditure-vs-site-area-per-dwelling-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-site-area-per-dwelling",
+      "base": "site-area-per-dwelling-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-site-area-per-dwelling",
+      "base": "bread-consumption-expenditure--site-area-per-dwelling-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",

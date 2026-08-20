@@ -22,7 +22,7 @@ synthesize せず終わる。resume しても再度 spawn してループ。
 1. main が対象テーマの既載指標 (`packages/data-configs/src/theme-catalog/<theme>.ts`) と backlog の Gap 分析を読み、gap 候補概念を列挙。
 2. 既登録grep、e-Stat API、一次資料WebFetchを同一セッションで並列実行し、statsDataId+cdCat01を解決する。
 3. 解決できない候補は`unknown`として不採用記録へ送り、採用候補へ混ぜない。tool回数を証拠にしない。
-4. 合格分だけを `docs/todo/06_指標バックログ.md` の7列候補表へ追記する。
+4. 合格分だけを `.claude/todo/backlog.md` の7列候補表へ追記する。
 5. 進捗は同ファイル冒頭の「進捗トラッカー」で 済/残 を管理。採用は theme-designer が catalog TS 化 → data-ingester 投入。
 
 正典: `.claude/agents/theme-researcher.md` の「★実証ゲート」/ `.claude/skills/theme/research-theme-catalog/SKILL.md` の

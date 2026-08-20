@@ -18,8 +18,9 @@ interface ThemeAwareImageProps extends Omit<ImageProps, "src"> {
  * suppressHydrationWarning で hydration mismatch 警告を抑制。
  * Cloudflare Workers では /_next/image が利用不可のため unoptimized で直接配信。
  *
- * CLS 防止: このコンポーネントを fill で使う場合は必ず aspect-ratio ロック済みの
- * `relative` コンテナ内に配置すること (例: `<div className="relative aspect-[16/9]">`).
+ * CLS 防止: このコンポーネントを fill で使う場合は必ず実画像の生成契約と同じ
+ * aspect-ratio でロックした `relative` コンテナ内に配置すること
+ * (ブログは 1200×630、ranking カードは 640×360)。
  * `sizes` prop も呼び出し元で必ず指定することで不要な帯域を削減できる。
  */
 export function ThemeAwareImage({

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T14:29:15.778Z",
+  "generatedAt": "2026-08-19T14:36:11.689Z",
   "gscWeek": "2026-W33",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
@@ -162,42 +162,6 @@
       "priority": 4
     },
     {
-      "topicKey": "corr-bread-consumption-expenditure--site-area-per-dwelling",
-      "archetype": "B",
-      "metricKeys": [
-        "bread-consumption-expenditure",
-        "site-area-per-dwelling"
-      ],
-      "label": "パン消費支出額 × 住宅の敷地面積 (r=-0.70)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.6909269417435702,
-        "seasonality": 0.3,
-        "surprise": 0.701,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": -0.701,
-        "partialRPopulation": -0.622,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "economy",
-          "construction"
-        ],
-        "gscImp": 322,
-        "rankingUrls": [
-          "/ranking/bread-consumption-expenditure",
-          "/ranking/site-area-per-dwelling"
-        ]
-      },
-      "suggestedTitle": "パンが多い県は住宅の敷地面積が少ない?",
-      "combinedScore": 0.617,
-      "lane": "must-write",
-      "status": "pending",
-      "priority": 5
-    },
-    {
       "topicKey": "corr-bread-consumption-expenditure--high-school-advancement-rate",
       "archetype": "B",
       "metricKeys": [
@@ -228,6 +192,42 @@
         ]
       },
       "suggestedTitle": "パンが多い県は高等学校卒業者の進学も多い?",
+      "combinedScore": 0.614,
+      "lane": "must-write",
+      "status": "pending",
+      "priority": 5
+    },
+    {
+      "topicKey": "corr-bread-consumption-expenditure--final-education-university-graduate-school-ratio",
+      "archetype": "B",
+      "metricKeys": [
+        "bread-consumption-expenditure",
+        "final-education-university-graduate-school-ratio"
+      ],
+      "label": "パン消費支出額 × 最終学歴が大学・大学院卒の者の割合 (r=0.69)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.6909269417435702,
+        "seasonality": 0.3,
+        "surprise": 0.686,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": 0.686,
+        "partialRPopulation": 0.606,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "economy",
+          "educationsports"
+        ],
+        "gscImp": 322,
+        "rankingUrls": [
+          "/ranking/bread-consumption-expenditure",
+          "/ranking/final-education-university-graduate-school-ratio"
+        ]
+      },
+      "suggestedTitle": "パンが多い県は最終学歴が大学も多い?",
       "combinedScore": 0.614,
       "lane": "must-write",
       "status": "pending",

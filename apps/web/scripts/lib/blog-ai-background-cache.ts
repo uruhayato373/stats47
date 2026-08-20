@@ -10,7 +10,7 @@ import {
   unlinkSync,
   writeFileSync,
 } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { dirname, isAbsolute, relative, resolve } from 'node:path';
 
 import type { ImageObjectStore } from '@stats47/r2-storage/image-pipeline';
 import sharp from 'sharp';
@@ -153,7 +153,10 @@ function localCachePath(projectRoot: string, fingerprint: string): string {
   validateFingerprint(fingerprint);
   const root = resolve(projectRoot, CACHE_LOCAL_ROOT);
   const path = resolve(root, `${fingerprint}.jpg`);
-  if (!path.startsWith(`${root}/`)) {
+  // ★区切り文字を直書きした前方一致にしない。Windows では resolve() が `\` を返すため
+  //   常に不一致になり、正当な cache path まで弾く (2026-08-18 に 3 テストが赤だった)。
+  const rel = relative(root, path);
+  if (rel === '' || rel.startsWith('..') || isAbsolute(rel)) {
     throw new Error('AI背景local cache pathが許可範囲外です');
   }
   return path;

@@ -1,5 +1,5 @@
 name: 🔁 Improvement Log Triage (weekly)
-# 2026-06-06: docs/05_改善ログ/ 廃止により無効化。TODO 真実源は docs/todo/04_改善バックログ.md に移行。
+# 2026-06-06: docs/05_改善ログ/ 廃止により無効化。TODO 真実源は .claude/todo/improvements.md に移行。
 
 on:
   workflow_dispatch: # schedule は削除 (手動実行のみ残置)

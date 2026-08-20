@@ -12,6 +12,8 @@ const {
   auditWorkflowPushes,
   auditWorkflowMainPushes,
   auditRatchetCommitContract,
+  findStalePrExistenceGuard,
+  auditWorkflowPrGuards,
 } = require('../workflow-commit-back-core.cjs');
 
 const ROOT = path.resolve(__dirname, '..', '..', '..', '..');
@@ -194,4 +196,57 @@ test('[mutation] verdict が一部のラチェットしか見ていないと発�
   };
   const kinds = auditRatchetCommitContract(doc).map((p) => p.kind);
   assert.ok(kinds.includes('missing-verdict'));
+});
+
+// ── PR 存在判定 (gh pr view は CLOSED も拾う) ──────────────────────────────
+
+test('PR の存在判定に gh pr view を使わない (CLOSED を拾って PR が二度と作られない)', () => {
+  const offenders = [];
+  for (const { file, doc } of loadWorkflows()) {
+    for (const v of auditWorkflowPrGuards(doc)) {
+      offenders.push(`${file}: ${v.step} — ${v.text}`);
+    }
+  }
+  assert.deepEqual(
+    offenders,
+    [],
+    `gh pr view は CLOSED / MERGED も exit 0 で拾うため存在判定に使えない。\n` +
+      `gh pr list --head "$B" --state open --json number --jq 'length' を使う:\n` +
+      offenders.join('\n'),
+  );
+});
+
+// ── ゲート自体の検証 ──────────────────────────────────────────────────────
+
+test('[mutation] 旧バグ形 (if ! gh pr view) を検出する — 2026-08-18 に sync-snapshots で実在した形', () => {
+  const run = [
+    'BRANCH="chore/ranking-keys-sync"',
+    'git push -f origin "$BRANCH"',
+    'if ! gh pr view "$BRANCH" --json number >/dev/null 2>&1; then',
+    '  gh pr create --base main --head "$BRANCH" --title t --body b || true',
+    'fi',
+  ].join('\n');
+  const found = findStalePrExistenceGuard(run);
+  assert.equal(found.length, 1);
+  assert.equal(found[0].line, 3);
+});
+
+test('[mutation] 修正形 (gh pr list --state open) は違反にしない', () => {
+  const run = [
+    'OPEN_PRS=$(gh pr list --head "$BRANCH" --state open --json number --jq \'length\')',
+    'if [ "$OPEN_PRS" -eq 0 ]; then',
+    '  gh pr create --base main --head "$BRANCH" --title t --body b || true',
+    'fi',
+  ].join('\n');
+  assert.deepEqual(findStalePrExistenceGuard(run), []);
+});
+
+test('[mutation] コメント内の gh pr view は検出しない', () => {
+  const run = '          # ★gh pr view "$BRANCH" は CLOSED も拾うので使わない';
+  assert.deepEqual(findStalePrExistenceGuard(run), []);
+});
+
+test('[mutation] 読み取り目的の gh pr view (代入) は検出しない', () => {
+  const run = 'NUM=$(gh pr view "$BRANCH" --json number -q .number)';
+  assert.deepEqual(findStalePrExistenceGuard(run), []);
 });

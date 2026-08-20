@@ -89,24 +89,27 @@ describe('PortalAreaEntry', () => {
 });
 
 describe('PortalBlogCard', () => {
-  it('画像に依存せずタイトルと要約を表示する', () => {
+  it('1200×630のサムネイルとタイトルを表示する', () => {
     const { container } = render(
       <PortalBlogCard
         slug="population-change"
         title="人口が増えている都道府県は？"
-        description="47都道府県の人口増減率を比較します。"
       />
     );
 
-    expect(
-      screen.getByRole('link', { name: /人口が増えている都道府県/ })
-    ).toHaveAttribute('href', '/blog/population-change');
-    expect(
-      screen.getByRole('link', { name: /人口が増えている都道府県/ })
-    ).toHaveClass('aspect-[1.47/1]');
-    expect(
-      screen.getByText('47都道府県の人口増減率を比較します。')
-    ).toBeInTheDocument();
-    expect(container.querySelector('img')).not.toBeInTheDocument();
+    const link = screen.getByRole('link', {
+      name: /人口が増えている都道府県/,
+    });
+    const image = container.querySelector('img');
+
+    expect(link).toHaveAttribute('href', '/blog/population-change');
+    expect(link).toHaveClass('aspect-[1.47/1]');
+    expect(image).toHaveAttribute(
+      'src',
+      'https://storage.stats47.jp/app/blog/population-change/thumbnail-light.webp'
+    );
+    expect(image).toHaveAttribute('alt', '');
+    expect(image?.parentElement).toHaveClass('aspect-[1200/630]');
+    expect(screen.getByText('人口が増えている都道府県は？')).toBeVisible();
   });
 });

@@ -1,0 +1,86 @@
+---
+name: post-note-ranking
+description: R2ランキング観測値からnote Aシリーズの記事、chart-data、provenance、画像をslug単位で生成する。Use when user says "noteランキング記事", "Aシリーズ生成", "note量産".
+disable-model-invocation: true
+primary_agent: note-manager
+---
+
+# post-note-ranking
+
+1つのranking keyからnote Aシリーズのローカル原稿一式を生成する。公開・R2同期・pushは別工程。
+記事templateとRemotion commandの詳細は`reference/runbook.md`の該当Phaseだけを読む。
+
+## 引数
+
+- `rankingKey`（必須）
+- `year`（省略時はR2 valuesの最新年）
+
+## 出力
+
+```text
+docs/31_note記事原稿/a-<rankingKey>/
+├── draft.md
+├── chart-data.json
+├── data-provenance.json
+├── tags.txt
+└── images/
+    ├── cover-1280x670.png
+    ├── choropleth-map-1080x1080.png
+    ├── chart-x-1200x630.png
+    └── boxplot-1200x630.png
+```
+
+## Phase 1: R2入力を固定する
+
+次のpublic snapshotを取得し、HTTP statusとschemaを確認する。
+
+- `https://storage.stats47.jp/app/ranking/<rankingKey>/item.json`
+- `https://storage.stats47.jp/app/stats/<rankingKey>/values.json`
+- 関連候補: `app/ranking-items/all.json` / `app/blog/all.json`
+
+指定年の都道府県行だけを使い、順位、平均、標準偏差、偏差値、上位/下位倍率を決定的に計算する。
+47県未満、値欠落、ゼロ除算、年不一致があれば原稿生成を止める。
+
+## Phase 2: 再生成可能な入力を保存する
+
+`chart-data.json`へrankingKey、year、取得時刻、計算済みsummary、全都道府県rowを保存する。
+`data-provenance.json`へR2 source key、restore command、生成chart一覧を保存する。
+値をSVGや本文から逆算しない。
+
+詳細schemaは`reference/runbook.md`の「Phase 1.5」と「data-provenance.json」を参照する。
+
+## Phase 3: 記事を書く
+
+`reference/runbook.md`の「Phase 2: 記事テキスト生成」をtemplateとして使う。
+
+- 導入は1位・最下位・差の意外性から始める。
+- 数値、順位、県名は`chart-data.json`だけから取る。
+- 上位/下位の背景説明には一次資料を使い、推測を事実として書かない。
+- 相関や因果を観測値だけから主張しない。
+- `/ranking/<key>`と関連記事への素URLを置き、UTMを付けない。
+- Markdown table、見出し絵文字、括弧内への数値詰め込みを避ける。
+
+`tags.txt`は1行1tag、最大99件。
+
+## Phase 4: 画像を生成する
+
+`reference/runbook.md`の「Phase 3: 画像生成」にある既存Remotion compositionを使い、
+`chart-data.json`から4枚を生成する。新しいrendererや一時SSOTを作らない。
+画像生成を依頼されていない場合は省略できるが、chatで未生成と明示する。
+
+## Gate
+
+- draftの全数値・順位が`chart-data.json`と一致する。
+- `data-provenance.json`のrankingKey/year/source/chart一覧が実ファイルと一致する。
+- 生成対象ならPNG 4枚がdecodeでき、期待寸法である。
+- stats47 linkが`/rankings/`でなく`/ranking/`を使う。
+- R2 sync、commit、push、note公開をローカル生成の完了に含めない。
+
+## 公開への引き渡し
+
+ユーザーがR2同期または公開も明示した場合だけ`reference/runbook.md`の
+「生成後: R2同期」を読み、`.Codex/rules/branch-workflow.md`の承認境界に従う。
+
+## Output Contract
+
+chatは`Slug | Files | Data evidence | Gates | Not published`の1表のみ。

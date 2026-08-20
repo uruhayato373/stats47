@@ -13,7 +13,7 @@ doc/memory に偽の主張を書いた」ドリフトが起きた教訓に基づ
 > - **天井 (意味・モデル判断)**: 機械では捕まらない統合バグ (今回の #1) を、消費側の前提を読んで確認する。
 >
 > このスキルは Stop hook (`.claude/hooks/check-consistency-on-stop.js`) からの差し戻しで起動することを想定する。
-> 関連: `.claude/scripts/lib/check-agent-skill-consistency.cjs` / `docs/todo/04_改善バックログ.md`
+> 関連: `.claude/scripts/lib/check-agent-skill-consistency.cjs` / `.claude/todo/improvements.md`
 
 ## 実行手順
 
@@ -46,7 +46,7 @@ error はすべて潰す。warn (orphan) は意図的なら無視可 (新規追�
    - 担当 agent doc の「担当スキル」表 (`.claude/agents/*.md`)
    - cadence (`/weekly-review` `/weekly-plan` が拾うか)
    - index (`docs/*/00_INDEX.md`)、記録先ルール (`.claude/rules/data-storage.md`)
-   - 真実源 (改善バックログ `docs/todo/04_改善バックログ.md`)
+   - 真実源 (改善バックログ `.claude/todo/improvements.md`)
 5. **規約準拠**: Task Capsule / OUTPUT FORMAT (`model-prompting.md` / `agent-output-contract.md`)、
    SSG 保全 (`nextjs-ssg-preservation.md`)、R2 書き込み CI 限定 (`r2-storage-design.md`) 等に触れていないか。
 

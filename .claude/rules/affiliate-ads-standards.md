@@ -59,6 +59,38 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 | `education` (通信教育・資格) | 資格講座・プログラミング/AI スクール・語学 | 教育 ranking・`/themes/education-culture` |
 | `mobility` (自動車・交通) | 自動車保険・車査定・交通 | 交通事故・交通安全 ranking・`/themes/{roads,railway,ports,safety}` |
 
+### 案件選定の二層契約（報酬単価だけで決めない）
+
+`vertical` は「何に関心があるか」を表すが、「読者が今どこまで行動する準備があるか」は表さない。
+案件選定では vertical に加えて、ASP が示す成果条件を次の二層へ分類する。
+
+| レーン | 行動の例 | 配置条件 |
+|---|---|---|
+| `discovery` | フォーム不要の閲覧・ダウンロード、アプリ導入、無料登録・無料体験 | 比較中でも実行でき、文脈一致する一導線だけ。theme / category / 一覧へ枠を追加しない |
+| `decision` | 資料請求、見積もり、相談予約・面談、購入・契約 | `targetRankingKeys` または直接配置で対象ページを限定できること |
+
+行動負担は次の5段階で記録する。これは単価帯ではなく、成果条件を満たすために読者が渡す情報・時間・金銭の段階である。
+
+| tier | 成果条件の目安 |
+|---|---|
+| `F0` | クリックまたは外部ページ閲覧だけ |
+| `F1` | 個人情報なしのダウンロード・診断完了 |
+| `F2` | アプリ導入、無料登録・無料体験（基本情報まで） |
+| `F3` | 資料請求・見積もり・予約（連絡先提供または営業連絡あり） |
+| `F4` | 面談完了・購入・契約・支払い |
+
+- 「無料」という語だけで `F0`〜`F2` にしない。電話、面談、審査、支払いがあれば実態に合わせて上げる。
+- 成果条件、確認元、確認日が無い案件は `unknown` とし、`discovery` へ自動採用しない。
+- 生の報酬額は採否の単独根拠にしない。確定EPC、確定率、文脈一致、行動負担を併記する。
+- `discovery` と `decision` を同じ重み付き点数へ潰さない。別キューとして比較し、各レーンの実測で判断する。
+- 主指標は `confirmedRevenueYen / viewableImpressions * 1000`。ASP成果を広告・実験へ結べない場合は
+  `unknown` とし、0円や負けへ変換しない。
+- 勝者の自動公開、priority 自動変更、新規提携申請は行わない。候補提示までを機械化し、人間承認を残す。
+
+型付き offer catalog、広告との program 参照、成果 join、管理画面、週次改善の実装契約は
+`.claude/todo/backlog.md` の `AFF-INTENT-FRICTION-PORTFOLIO-01` に置く。実装完了までは本節を
+人間・agent の判定規約として使い、案件名から行動負担を推測して state を書き換えない。
+
 ### 提携状況の真実源 (★2026-08-04 に一本化)
 
 **どの案件をどの ASP で提携済み / 申請中かの真実源は state ファイルであって、本表ではない。**
@@ -579,4 +611,4 @@ metric config (git TS SSOT) の title から機械導出する — 家計調査�
 - skill: `/register-affiliate-banner` / `/affiliate-improvement` / `/audit-affiliate-compliance` / `/manage-affiliate-experiment` / `/affiliate-operate` (§11)
 - 戦略: `docs/00_プロジェクト管理/02_収益化戦略.md` §3-6 / 実装規約: 本書 §0-6・§12
 - ASP継続運用の実装状況: `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` /
-  `docs/todo/05_機能バックログ.md` の `ASP-CONTINUITY-01`
+  `.claude/todo/backlog.md` の `ASP-CONTINUITY-01`

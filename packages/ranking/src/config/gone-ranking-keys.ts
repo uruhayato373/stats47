@@ -26,7 +26,7 @@
  *   いずれも最新年の全 47 県が同じ値 0 で、1 位が決まらないため ranking ページとして成立しない:
  *   gini-coefficient-disposable-income = e-Stat 0000010112 が全エリア・全年 "0" を返す (SSDS の
  *     整数丸め配信でジニ係数を取得できない。config の軸選択は正しく、cdCat 是正では直らないことを
- *     getStatsData で実測確認済み)。代替出典は docs/todo/06_指標バックログ.md に記録
+ *     getStatsData で実測確認済み)。代替出典は .claude/todo/backlog.md に記録
  *   bowling-alley-public = 公共ボウリング場が最良年 (2015) でも値 1 の県が 2 つだけ
  *   unemployment-measures-project-expenses-prefecture = 失業対策事業は 1996 年廃止で 2007 年以降全年 0
  *   config isActive:false + KNOWN 再生成 (2176→2173) とセットで実施）
@@ -48,7 +48,7 @@
  *     消滅。searchWord「騒音規制法施行状況調査」「騒音・振動規制法」で 0 件、「騒音」386 件を
  *     走査しても該当なし。
  *   代替候補 (建設は「元請完成工事高」= 業種別 × 都道府県別の別軸) は概念が変わるため
- *   docs/todo/06_指標バックログ.md へ記録し、採否は別途判断する）
+ *   .claude/todo/backlog.md へ記録し、採否は別途判断する）
  * 更新日: 2026-08-17（RANKING-DUPLICATE-PATIENT-SURVEY-01。患者調査 0004026104/0004026105 系の
  *   patient-receiving-rate-by-age / patient-receiving-rate-by-disease を退役。どちらも総数を指すため
  *   inpatient-rate-per-100k と同一値 (2023 高知 1,785 / 神奈川 665) で重複コンテンツだった。

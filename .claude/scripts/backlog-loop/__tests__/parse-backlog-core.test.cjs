@@ -1,11 +1,14 @@
 'use strict';
 
 /**
- * バックログパーサの契約。
+ * バックログパーサ (backlog-loop adapter) の契約。
  *
- * ここが壊れると backlog-loop は「完了したつもりで別のエントリを消す」か
- * 「エントリを取りこぼして永久に処理しない」のどちらかをやる。実データ相手の
+ * ここが壊れると backlog-loop は「完了したつもりで別のカードを消す」か
+ * 「カードを取りこぼして永久に処理しない」のどちらかをやる。実データ相手の
  * 件数だけでなく、**削除が対象 1 件にしか効かないこと**を両方向で固定する。
+ *
+ * カード構文そのもののテストは `.claude/scripts/lib/__tests__/backlog-lib.test.cjs`
+ * (単一実装)。ここは adapter (sourceFile 付与・表・行削除) を見る。
  */
 
 const assert = require('node:assert/strict');
@@ -20,47 +23,47 @@ const {
 } = require('../parse-backlog-core.cjs');
 
 const ROOT = path.resolve(__dirname, '../../../..');
-const FEATURE = path.join(ROOT, 'docs/todo/05_機能バックログ.md');
-const INBOX = path.join(ROOT, 'docs/todo/01_未整理タスク.md');
+const BACKLOG = path.join(ROOT, '.claude/todo/backlog.md');
 
 const SAMPLE = [
   '# バックログ',
   '',
-  '## P1 今月',
+  '## 🔴 高',
   '',
   '### [ALPHA-01] 一つ目',
+  'タグ: [実行:sweep] [起票:2026-08-01]',
   '',
-  '- **status**: pending',
-  '- **tier**: 1',
   '- **次**: 何かする',
   '',
   '### [BETA-02] 二つ目',
+  'タグ: [進行中]',
   '',
-  '- **status**: in-progress',
   '- **次**: 別のことをする',
   '',
-  '## P2 あとで',
+  '## 🟢 低',
   '',
   '### [GAMMA-03] 三つ目',
   '',
-  '- **status**: deferred',
+  '本文だけがある。',
   '',
 ].join('\n');
 
-test('見出し型エントリを ID・セクション・フィールド・行範囲つきで拾う', () => {
+test('カードを ID・tier・タグ・行範囲つきで拾う', () => {
   const { entries } = parseHeadingEntries(SAMPLE, 'sample.md');
   assert.deepEqual(
     entries.map((e) => e.id),
     ['ALPHA-01', 'BETA-02', 'GAMMA-03'],
   );
   const alpha = entries[0];
-  assert.equal(alpha.section, 'P1 今月');
-  assert.equal(alpha.fields.status, 'pending');
-  assert.equal(alpha.fields.tier, '1');
-  assert.equal(alpha.fields['次'], '何かする');
+  assert.equal(alpha.tier, 'high');
+  assert.equal(alpha.section, 'high'); // 旧 API 互換の別名
+  assert.equal(alpha.executor, 'sweep');
+  assert.equal(alpha.filed, '2026-08-01');
+  assert.equal(alpha.sourceFile, 'sample.md');
   // 末尾の空行を含めない (削除しても段落の区切りが壊れないように)
   assert.equal(SAMPLE.split('\n')[alpha.endLine - 1].trim(), '- **次**: 何かする');
-  assert.equal(entries[2].section, 'P2 あとで');
+  assert.equal(entries[1].wip, true);
+  assert.equal(entries[2].tier, 'low');
 });
 
 test('削除は対象 1 件にしか効かない (行番号で消す・文字列一致で消さない)', () => {
@@ -74,17 +77,17 @@ test('削除は対象 1 件にしか効かない (行番号で消す・文字列
   );
   assert.ok(!after.includes('BETA-02'));
   // 見出し構造は残る
-  assert.ok(after.includes('## P1 今月') && after.includes('## P2 あとで'));
+  assert.ok(after.includes('## 🔴 高') && after.includes('## 🟢 低'));
 });
 
 test('削除範囲が空なら元テキストとバイト一致する (往復で壊さない)', () => {
   assert.equal(removeLineRanges(SAMPLE, []), SAMPLE);
-  const real = fs.readFileSync(FEATURE, 'utf8');
+  const real = fs.readFileSync(BACKLOG, 'utf8');
   assert.equal(removeLineRanges(real, []), real);
 });
 
 test('表の途中に空行があっても行を取りこぼさない', () => {
-  // 実データ (01_未整理タスク.md) が実際にこの形をしている。空行で header を捨てる実装だと
+  // 実データ (旧 01_未整理タスク.md) が実際にこの形をしていた。空行で header を捨てる実装だと
   // 後続行が「新しい表のヘッダ」に化けて 1 行まるごと消えた。
   const withGap = [
     '| 日付 | 内容 |',
@@ -115,16 +118,18 @@ test('ヘッダが再掲されたら別の表として数える', () => {
 });
 
 test('実データを解析できる (件数が 0 に落ちたら配線が壊れている)', () => {
-  const { entries } = parseHeadingEntries(fs.readFileSync(FEATURE, 'utf8'), FEATURE);
-  assert.ok(entries.length >= 20, `05 のエントリが少なすぎる: ${entries.length}`);
-  // ID は docs-governance の idPattern に適合していること
+  const text = fs.readFileSync(BACKLOG, 'utf8');
+  const { entries } = parseHeadingEntries(text, BACKLOG);
+  assert.ok(entries.length >= 20, `backlog のカードが少なすぎる: ${entries.length}`);
+  // ID を持つカードは docs-governance の idPattern に適合していること
   for (const e of entries) {
-    assert.match(e.id, /^[A-Z0-9]+(?:-[A-Z0-9]+)+$/, `不正な ID: ${e.id}`);
+    if (e.id) assert.match(e.id, /^[A-Z0-9]+(?:-[A-Z0-9]+)+$/, `不正な ID: ${e.id}`);
   }
-  // status はほぼ全件が持つ (DG055 が必須化している)
-  const withStatus = entries.filter((e) => e.fields.status).length;
-  assert.ok(withStatus >= entries.length - 1, `status 欠落が多すぎる: ${entries.length - withStatus}`);
+  // stats47 の backlog は backlog-loop の対象なので ID がほぼ全件に要る
+  const withId = entries.filter((e) => e.id).length;
+  assert.ok(withId >= entries.length - 3, `ID 欠落が多すぎる: ${entries.length - withId}`);
 
-  const { rows } = parseTableRows(fs.readFileSync(INBOX, 'utf8'), INBOX);
-  assert.ok(rows.length >= 5, `01 の行が少なすぎる: ${rows.length}`);
+  // 指標候補テーブル (旧 06) はカード本文として温存され、表として読める
+  const { rows } = parseTableRows(text, BACKLOG);
+  assert.ok(rows.length >= 5, `候補テーブルの行が少なすぎる: ${rows.length}`);
 });

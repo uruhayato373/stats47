@@ -575,10 +575,10 @@ function checkOrphanScripts(findings) {
         continue;
       }
       if (st.size > 600_000) continue; // 巨大ファイルはスキップ
-      // ★docs/todo は参照元にしない (2026-08-03)。「この未使用スクリプトを消すか検討する」と
+      // ★.claude/todo は参照元にしない (2026-08-03)。「この未使用スクリプトを消すか検討する」と
       //   TODO に書いた瞬間に「参照あり」となって警告が消える = 何もしていないのに解決に見える。
       //   TODO はそのスクリプトが**使われている**証拠ではない。
-      if (rel(f).startsWith("docs/todo/")) continue;
+      if (rel(f).startsWith(".claude/todo/")) continue;
       corpus.push({ file: f, text: readSafe(f) });
     }
   }

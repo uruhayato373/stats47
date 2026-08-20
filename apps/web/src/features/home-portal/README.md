@@ -9,7 +9,7 @@
 | -------------------- | --------------------------------------------------------------------- |
 | ページ構造・表示件数 | `apps/web/src/app/page.tsx`                                           |
 | 利用意図と表示順     | `packages/data-configs/src/home-portal.ts`                            |
-| UI・レイアウト       | `docs/01_技術設計/04_デザインシステム.md`                         |
+| UI・レイアウト       | `docs/01_技術設計/04_デザインシステム.md`                             |
 | 情報設計             | `docs/01_技術設計/03_情報設計.md`                                     |
 | GA4イベント          | `.claude/rules/analytics-event-standards.md`                          |
 | 注目ランキング       | `apps/web/src/features/ranking/components/FeaturedRankings/README.md` |
@@ -23,6 +23,8 @@
 - mobileはランキング・ブログ・利用意図を先に、カテゴリを後に表示する
 - ランキング、ブログ、利用意図は共通`HorizontalCardCarousel`を使う
 - カード比率は`PORTAL_CARD_ASPECT_CLASS`を使う
+- `PORTAL_CARD_ASPECT_CLASS`は外枠の比率。ブログカードの画像枠は
+  `.claude/rules/ogp-image-standards.md`の1200×630を使い、16:9へクロップしない
 - 注目ランキングは決定的に生成した地理地図と1位情報の単一形式とする
 - `FeaturedRankings`とブログsnapshotをR2から読むため、`/`は`force-dynamic`を維持する
 

@@ -64,15 +64,15 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 |---|---|
 | プロジェクト戦略・要件・ペルソナ | `docs/00_プロジェクト管理/` (4 ファイル固定) |
 | 技術設計・アーキテクチャ | `docs/01_技術設計/` |
-| 現在の月次・週次計画 | `docs/todo/{02_今月の重点,03_今週の計画}.md` |
+| 現在の月次・週次計画 | `.claude/todo/{monthly,weekly}.md` |
 | agent用週次レビュー | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` |
 | 週次メトリクス | `.claude/state/metrics/`（既存history/LATESTを読む） |
-| 批判的レビュー・事前検死・監査の未完了策 | `docs/todo/` の該当バックログ。全文は保存せず、恒久判断は既存SSOTへ直接統合 |
-| 改善施策の一覧・TODO | `docs/todo/04_改善バックログ.md` |
-| 未分類の思いつき TODO (受信箱) | `docs/todo/01_未整理タスク.md` |
-| セッション残タスク | `docs/todo/` の適切なバックログへ直接反映（一時ハンドオフ文書は作らない） |
+| 批判的レビュー・事前検死・監査の未完了策 | `.claude/todo/` の該当バックログ。全文は保存せず、恒久判断は既存SSOTへ直接統合 |
+| 改善施策の一覧・TODO | `.claude/todo/improvements.md` |
+| 未分類の思いつき TODO (受信箱) | `.claude/todo/backlog.md` |
+| セッション残タスク | `.claude/todo/` の適切なバックログへ直接反映（一時ハンドオフ文書は作らない） |
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |
-| 未着手の機能・自動化 backlog | `docs/todo/05_機能バックログ.md`（指標拡充候補は `docs/todo/06_指標バックログ.md`） |
+| 未着手の機能・自動化・指標拡充 backlog | `.claude/todo/backlog.md` |
 
 詳細: [`docs-vs-issues.md`](./docs-vs-issues.md)
 
@@ -89,7 +89,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | GSC カバレッジ是正キュー (404/soft404/5xx の A/B 分類・状態保持) | `.claude/state/gsc/{coverage-remediation-queue.json,LATEST.md,coverage-totals-history.csv}`（`build-coverage-queue.mjs` が生成。生 export は `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`。正典 `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`、skill `/gsc-coverage-remediation`） |
 | 整合性監査マーカー (agent/skill/script ドリフトの監査済み記録) | `.claude/state/consistency/audited.json`（`check-agent-skill-consistency.cjs --mark-audited` が記録。Stop hook `check-consistency-on-stop.js` がこのハッシュと現在の変更を比較してゲート判定。skill `/audit-consistency`） |
 | PSI 日次計測（19 URL × mobile/desktop） | `.claude/state/metrics/psi/psi-batch-*.json`（最新1件を保持。長期履歴は `history.csv`、過去の生JSONはGit履歴から復元。GitHub Actions 日次 JST 02:00、閾値違反時 `[PSI Alert]` Issues 起票）/ URL リスト: `.claude/config/psi-urls.txt` / 閾値: `.claude/skills/analytics/performance-improvement/budgets.json` |
-| Cloudflare 月次 snapshot JSON + budget 閾値・要約 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（施策一覧は `docs/todo/04_改善バックログ.md`） |
+| Cloudflare 月次 snapshot JSON + budget 閾値・要約 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（施策一覧は `.claude/todo/improvements.md`） |
 | GSC URL Inspection 日次詳細 | `.claude/state/metrics/gsc/url-inspection/YYYY-MM-DD.csv`（最新7件を保持。長期集計は同ディレクトリの `history.csv`） |
 | Cloudflare 日次 usage（D1/Workers/R2） | `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（生JSONは最新30件を保持。GitHub Actions 日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issues 起票）/ 閾値: `.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json` |
 | **SNS 投稿台帳 (投稿履歴の SSOT)** | `.claude/state/sns/posts.json`（書き込み: `.claude/scripts/lib/sns-posts-store.cjs` / `/mark-sns-posted` / IG cron は `.claude/scripts/instagram/record-posted.cjs`（内部で store を呼ぶ）。全 SNS 自動化スクリプトはこのストア経由。`ig-posted-log.jsonl` は二重投稿防止用で SSOT ではない。完全DBレス・永続 D1 なし） |
@@ -114,7 +114,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
   ├─ アプリが読む Authored エンティティ (設定 / 運用)  → git TS が SSOT → 生成スクリプトで R2 JSON
   │      （詳細・判定は 02_データアーキテクチャ.md「データ分類」/ data-sqlite-ssot.md）
   ├─ 観測値から計算できる集計 (Derived)              → エフェメラル計算 → R2 (永続しない)
-  ├─ 現在の計画・未完了タスク                        → docs/todo/
+  ├─ 現在の計画・未完了タスク                        → .claude/todo/
   ├─ 恒久的な戦略・要件                             → docs/ の既存固定SSOT
   ├─ エージェントが参照する定期履歴・詳細ログ・state → .claude/
   └─ PR/Issue 連携が本質                            → GitHub Issues (enhancement/bug)
@@ -129,7 +129,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 | 場所 | 用途 |
 |---|---|
-| `docs/todo/04_改善バックログ.md` | 全施策の一覧 (簡易表)。**TODO 真実源**。status / Tier / 期日を管理 |
+| `.claude/todo/improvements.md` | 全施策の一覧 (簡易表)。**TODO 真実源**。status / Tier / 期日を管理 |
 | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` | agent 用詳細ログ。検証コマンド・仮説・URL inspection 結果など |
 
 ## 本原則の根拠

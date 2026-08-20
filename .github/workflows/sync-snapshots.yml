@@ -224,7 +224,14 @@ jobs:
           git push -f origin "$BRANCH"
           # 既存 PR があれば再利用、無ければ作成 (develop→main = 本番デプロイの最終ゲート)。
           # ★自動マージしない: 人間がまとめてデプロイ承認する (デプロイ規律)。
-          if ! gh pr view "$BRANCH" --json number >/dev/null 2>&1; then
+          #
+          # ★open な PR だけを数える (2026-08-18 是正)。`gh pr view "$BRANCH"` は
+          #   CLOSED / MERGED の PR も拾って exit 0 を返すため、過去に一度でも PR を
+          #   閉じた時点でこのガードが恒久的に「既存あり」と誤判定し、以後 PR が
+          #   二度と作られなくなる。実際 #544 (CLOSED) が居座り、branch だけ force-push
+          #   され続けて同期が本番へ一度も届いていなかった (workflow は success のまま)。
+          OPEN_PRS=$(gh pr list --head "$BRANCH" --state open --json number --jq 'length')
+          if [ "$OPEN_PRS" -eq 0 ]; then
             gh pr create --base main --head "$BRANCH" \
               --title "chore(ranking): 新規 ranking キーを KNOWN/SITEMAP に同期" \
               --body "sync-snapshots が R2 に push した item.json を KNOWN/SITEMAP に反映。新規 metric を本番公開 (200) + sitemap 掲載するための派生キー更新。**マージ = 本番デプロイ**なので、まとまったタイミングで承認してください。" \

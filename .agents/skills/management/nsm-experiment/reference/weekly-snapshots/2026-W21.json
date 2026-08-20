@@ -1,0 +1,212 @@
+{
+  "week_id": "2026-W21",
+  "year": 2026,
+  "week": 21,
+  "generated_at": "2026-05-24T11:28:58.251Z",
+  "ranges": {
+    "ga4": {
+      "this": {
+        "start": "2026-05-17",
+        "end": "2026-05-23"
+      },
+      "prev": {
+        "start": "2026-05-10",
+        "end": "2026-05-16"
+      }
+    },
+    "gsc": {
+      "this": {
+        "start": "2026-05-15",
+        "end": "2026-05-21"
+      },
+      "prev": {
+        "start": "2026-05-08",
+        "end": "2026-05-14"
+      }
+    }
+  },
+  "ga4": {
+    "channels": [
+      {
+        "channel": "Organic Search",
+        "thisUsers": 999,
+        "prevUsers": 667,
+        "userDelta": 332,
+        "userDeltaPct": 49.77511244377811,
+        "thisSessions": 1152,
+        "prevSessions": 759,
+        "thisEngagedSessions": 785,
+        "prevEngagedSessions": 537,
+        "thisEngagementRate": 0.6814236111111112
+      },
+      {
+        "channel": "Direct",
+        "thisUsers": 488,
+        "prevUsers": 300,
+        "userDelta": 188,
+        "userDeltaPct": 62.66666666666667,
+        "thisSessions": 519,
+        "prevSessions": 315,
+        "thisEngagedSessions": 60,
+        "prevEngagedSessions": 73,
+        "thisEngagementRate": 0.11560693641618497
+      },
+      {
+        "channel": "Referral",
+        "thisUsers": 110,
+        "prevUsers": 90,
+        "userDelta": 20,
+        "userDeltaPct": 22.22222222222222,
+        "thisSessions": 140,
+        "prevSessions": 110,
+        "thisEngagedSessions": 94,
+        "prevEngagedSessions": 75,
+        "thisEngagementRate": 0.6714285714285714
+      },
+      {
+        "channel": "Organic Social",
+        "thisUsers": 99,
+        "prevUsers": 11,
+        "userDelta": 88,
+        "userDeltaPct": 800,
+        "thisSessions": 110,
+        "prevSessions": 11,
+        "thisEngagedSessions": 71,
+        "prevEngagedSessions": 2,
+        "thisEngagementRate": 0.6454545454545455
+      },
+      {
+        "channel": "Unassigned",
+        "thisUsers": 45,
+        "prevUsers": 40,
+        "userDelta": 5,
+        "userDeltaPct": 12.5,
+        "thisSessions": 46,
+        "prevSessions": 40,
+        "thisEngagedSessions": 28,
+        "prevEngagedSessions": 26,
+        "thisEngagementRate": 0.6086956521739131
+      }
+    ],
+    "total": {
+      "thisUsers": 1741,
+      "prevUsers": 1108,
+      "thisSessions": 1967,
+      "prevSessions": 1235,
+      "thisEngagedSessions": 1038,
+      "prevEngagedSessions": 713,
+      "userDelta": 633,
+      "userDeltaPct": 57.12996389891697,
+      "engagedSessionDelta": 325,
+      "engagedSessionDeltaPct": 45.5820476858345
+    },
+    "organic": {
+      "channel": "Organic Search",
+      "thisUsers": 999,
+      "prevUsers": 667,
+      "userDelta": 332,
+      "userDeltaPct": 49.77511244377811,
+      "thisSessions": 1152,
+      "prevSessions": 759,
+      "thisEngagedSessions": 785,
+      "prevEngagedSessions": 537,
+      "thisEngagementRate": 0.6814236111111112
+    }
+  },
+  "gsc": {
+    "total": {
+      "thisClicks": 440,
+      "prevClicks": 277,
+      "clickDelta": 163,
+      "clickDeltaPct": 58.844765342960294,
+      "thisImpressions": 14561,
+      "prevImpressions": 10649,
+      "impressionDelta": 3912,
+      "thisCtr": 0.03021770482796511,
+      "prevCtr": 0.02601183209691051,
+      "thisPosition": 8.146693221619394,
+      "prevPosition": 8.610198140670486
+    },
+    "topQueries": [
+      {
+        "query": "一般病床の病床利用率が最も高い都道府県は？",
+        "clicks": 5,
+        "impressions": 57,
+        "ctr": 0.08771929824561403,
+        "position": 3.3157894736842106
+      },
+      {
+        "query": "健康寿命 都 道府県 ランキング 2026",
+        "clicks": 5,
+        "impressions": 24,
+        "ctr": 0.20833333333333334,
+        "position": 2.708333333333333
+      },
+      {
+        "query": "北海道にある公衆電話の数",
+        "clicks": 5,
+        "impressions": 237,
+        "ctr": 0.02109704641350211,
+        "position": 4.970464135021097
+      },
+      {
+        "query": "一般病床の病床利用率が最も高い都道府県",
+        "clicks": 4,
+        "impressions": 62,
+        "ctr": 0.06451612903225806,
+        "position": 3.629032258064516
+      },
+      {
+        "query": "北海道 公衆電話 数",
+        "clicks": 3,
+        "impressions": 64,
+        "ctr": 0.046875,
+        "position": 4.375
+      },
+      {
+        "query": "北海道 公衆電話の数",
+        "clicks": 3,
+        "impressions": 67,
+        "ctr": 0.04477611940298507,
+        "position": 4.104477611940299
+      },
+      {
+        "query": "北海道にある公衆電話の数は？",
+        "clicks": 3,
+        "impressions": 151,
+        "ctr": 0.019867549668874173,
+        "position": 4.496688741721854
+      },
+      {
+        "query": "北海道の公衆電話の数",
+        "clicks": 3,
+        "impressions": 101,
+        "ctr": 0.0297029702970297,
+        "position": 3.9306930693069306
+      },
+      {
+        "query": "北海道公衆電話の数",
+        "clicks": 3,
+        "impressions": 74,
+        "ctr": 0.04054054054054054,
+        "position": 4.027027027027027
+      },
+      {
+        "query": "北海道公衆電話数",
+        "clicks": 3,
+        "impressions": 60,
+        "ctr": 0.05,
+        "position": 3.816666666666667
+      }
+    ]
+  },
+  "psi": {
+    "skipped": true,
+    "reason": "PSI_API_KEY 未設定"
+  },
+  "notes": [
+    "GSC データは 3 日遅延のため、直近期間は 2026-05-15 〜 2026-05-21 を採用",
+    "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
+    "NSM 定義: docs/00_プロジェクト管理/02_収益化戦略.md"
+  ]
+}

@@ -65,7 +65,7 @@ function main() {
   }
   out.push("## 8. 判定対象 (14 / 28 / 56 日後)");
   out.push("  各候補の suggestedVerification に従い、実装後 14/28/56 日で再計測 (evidence-based-judgment)。");
-  out.push("  自動 issue は PSI/Cloudflare 閾値 alert のみ。一般候補は人間承認後に docs/todo/04_改善バックログ.md へ。");
+  out.push("  自動 issue は PSI/Cloudflare 閾値 alert のみ。一般候補は人間承認後に .claude/todo/improvements.md へ。");
   console.log(out.join("\n"));
 }
 

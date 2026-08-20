@@ -37,7 +37,7 @@ CVR / 集客 / 継続性を検証する最小ロット。無料 3 本で集客 �
 | 4 | 08 | benchmark-table-5min | 無料 | W2 | 議会答弁・議事用「他自治体比較」の需要を可視化 |
 | 5 | 04 | excel-download-and-parse | 有料 ¥300 | W3 | Excel 集計需要の本命課金記事 |
 
-MVP 5 本公開後、`/fetch-note-metrics` で CVR と PV を測定し、未完了の次アクションだけを `docs/todo/04_改善バックログ.md` にID付きで記録する。
+MVP 5 本公開後、`/fetch-note-metrics` で CVR と PV を測定し、未完了の次アクションだけを `.claude/todo/improvements.md` にID付きで記録する。
 
 ### Series A (Week 4-12、MVP 合格時のみ展開)
 
@@ -92,7 +92,7 @@ MVP 5 本公開後、`/fetch-note-metrics` で CVR と PV を測定し、未完�
 | Week 13 (M3) | 月収益 < ¥5,000 が 3 ヶ月連続 | 撤退、stats47 ブログ側に統合 |
 | Week 26 (M6) | 月収益 < ¥30,000 | 単体マガジン廃止、姉妹マガジンへの bundle 化 |
 
-撤退判定は本書の条件と実測を突合し、続行時の未完了策だけを `docs/todo/04_改善バックログ.md` に記録する。撤退・完了履歴はGitに委ねる。
+撤退判定は本書の条件と実測を突合し、続行時の未完了策だけを `.claude/todo/improvements.md` に記録する。撤退・完了履歴はGitに委ねる。
 
 ## 5. SNS 連携
 
@@ -123,6 +123,6 @@ MVP 5 本公開後、`/fetch-note-metrics` で CVR と PV を測定し、未完�
 - ドラフト本体: `docs/31_note記事原稿/koumuin-estat-claude-code/<NN>-<slug>/draft.md`
 - SNS キャプション: `docs/31_note記事原稿/koumuin-estat-claude-code/<NN>-<slug>/captions.md`
 - 画像: `docs/31_note記事原稿/koumuin-estat-claude-code/<NN>-<slug>/images/*.svg`
-- 月次判定: `/fetch-note-metrics` のreference履歴 + `docs/todo/04_改善バックログ.md` (M1 / M3 / M6)
+- 月次判定: `/fetch-note-metrics` のreference履歴 + `.claude/todo/improvements.md` (M1 / M3 / M6)
 - 既存 e-Stat スキル: `.claude/skills/estat/{search-estat,inspect-estat-meta,fetch-estat-data}/`
 - 既存 note スキル: `.claude/skills/note/{publish-note,write-note-section,design-note-structure}/`

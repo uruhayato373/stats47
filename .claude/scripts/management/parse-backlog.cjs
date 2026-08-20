@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * docs/todo/06_指標バックログ.md の Markdown 表を JSON 配列にパースする。
+ * .claude/todo/backlog.md の Markdown 表を JSON 配列にパースする。
  *
  * 用途:
  *   `/expand-indicators` から呼び出され、status='pending' AND priority IN (filter) を満たす
@@ -8,7 +8,7 @@
  *
  * Usage:
  *   node .claude/scripts/management/parse-backlog.cjs \
- *     --backlog docs/todo/06_指標バックログ.md \
+ *     --backlog .claude/todo/backlog.md \
  *     --priority high \
  *     --status pending \
  *     --limit 10
@@ -45,7 +45,7 @@ function getArg(flag, fallback) {
 
 const backlogPath = path.resolve(
   PROJECT_ROOT,
-  getArg("--backlog", "docs/todo/06_指標バックログ.md"),
+  getArg("--backlog", ".claude/todo/backlog.md"),
 );
 const priorityFilter = getArg("--priority", "all"); // high|medium|low|all
 const statusFilter = getArg("--status", "pending"); // pending|done|failed|all

@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "description": "Cloudflare Workers / D1 / R2 の月次使用量としきい値。2026-04-15 の請求書 IN-62466340（$26.62）を基準に設定。",
+  "source": "invoice IN-62466340 (Mar 15 – Apr 14, 2026), Workers Paid plan $5/mo",
+  "schema": {
+    "metric_key": "計測対象メトリクス",
+    "unit": "単位",
+    "free_tier_monthly": "Workers Paid 無料枠/月",
+    "warning_threshold": "警告しきい値（無料枠の N%）",
+    "error_threshold": "エラーしきい値（超過確定）",
+    "operator": "<= | >=",
+    "severity": "warning | error"
+  },
+  "budgets": [
+    {
+      "metric_key": "d1_rows_read",
+      "unit": "rows",
+      "free_tier_monthly": 25000000000,
+      "warning_threshold": 20000000000,
+      "error_threshold": 25000000000,
+      "operator": "<=",
+      "severity_warning": "warning",
+      "severity_error": "error",
+      "note": "Apr 2026 実績 39.5B（超過 14.5B = $14.53）。PR-A/B デプロイ後の目標は 10B 以下"
+    },
+    {
+      "metric_key": "d1_rows_written",
+      "unit": "rows",
+      "free_tier_monthly": 50000000,
+      "warning_threshold": 40000000,
+      "error_threshold": 50000000,
+      "operator": "<=",
+      "severity_warning": "warning",
+      "severity_error": "error",
+      "note": "Apr 2026 実績 ~0（書き込みはシード・投入時のみ）"
+    },
+    {
+      "metric_key": "d1_storage_gb",
+      "unit": "GB",
+      "free_tier_monthly": 5,
+      "warning_threshold": 4.5,
+      "error_threshold": 5,
+      "operator": "<=",
+      "severity_warning": "warning",
+      "severity_error": "error",
+      "note": "Apr 2026 実績 ~6GB（超過 1GB = $0.75）"
+    },
+    {
+      "metric_key": "workers_cpu_ms",
+      "unit": "CPU ms",
+      "free_tier_monthly": 30000000,
+      "warning_threshold": 25000000,
+      "error_threshold": 30000000,
+      "operator": "<=",
+      "severity_warning": "warning",
+      "severity_error": "error",
+      "note": "Apr 2026 実績 225M（超過 195M = $3.92）。PR-C デプロイ後の目標は 45M 以下"
+    },
+    {
+      "metric_key": "workers_requests",
+      "unit": "requests",
+      "free_tier_monthly": 10000000,
+      "warning_threshold": 8000000,
+      "error_threshold": 10000000,
+      "operator": "<=",
+      "severity_warning": "warning",
+      "severity_error": "error",
+      "note": "Standard requests (bundled は別カウント)"
+    },
+    {
+      "metric_key": "total_cost_usd_monthly",
+      "unit": "USD",
+      "free_tier_monthly": 5,
+      "warning_threshold": 10,
+      "error_threshold": 15,
+      "operator": "<=",
+      "severity_warning": "warning",
+      "severity_error": "error",
+      "note": "Workers Paid サブスク $5 + 従量分。PR デプロイ後の目標は $6-10"
+    }
+  ]
+}

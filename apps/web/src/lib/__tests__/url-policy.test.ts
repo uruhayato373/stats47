@@ -84,6 +84,23 @@ describe("UrlPolicy.ranking.shouldIncludeInSitemap", () => {
   });
 });
 
+describe("UrlPolicy.japan.isKnown (GEO-SCOPE-SEPARATION-01 WP5/WP6)", () => {
+  it("採用済みテーマ (education-culture) は known", () => {
+    expect(UrlPolicy.japan.isKnown("education-culture")).toBe(true);
+  });
+  it("/themes の known 集合をそのまま流用していない (値レベル検証で候補ゼロだったテーマは known にしない)", () => {
+    // occupation-salary / ports は /themes には存在するが、WP6 の値レベル検証で
+    // official 候補が 0 件だったため Japan catalog 未採用 (japan-catalog.ts のコメント参照)。
+    // /themes の known 集合をそのまま流用すると、日本全国データを持たないテーマ詳細が
+    // 200 を返しうる。
+    expect(UrlPolicy.japan.isKnown("occupation-salary")).toBe(false);
+    expect(UrlPolicy.japan.isKnown("ports")).toBe(false);
+  });
+  it("未登録スラッグは known でない", () => {
+    expect(UrlPolicy.japan.isKnown("not-a-real-theme")).toBe(false);
+  });
+});
+
 describe("isValidPrefCode", () => {
   it("01000〜47000 の末尾 000 のみ有効", () => {
     expect(isValidPrefCode("01000")).toBe(true);

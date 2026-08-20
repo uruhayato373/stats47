@@ -1,102 +1,53 @@
 'use strict';
 
 /**
- * docs/todo のバックログを機械可読な JSON へ変換する純関数。
+ * .claude/todo のバックログを機械可読な JSON へ変換する純関数。
  *
- * ## なぜ新設するか
+ * ## v3-unified への移行 (2026-08-18)
  *
- * 既存の `.claude/scripts/management/parse-backlog.cjs` は 06 の**表形式**専用で、
- * 05 と 06 の `### [ID] タイトル` + bullet 形式を読めない。backlog-loop は
- * 「どのエントリを・どの行から・どの行まで削除するか」を機械で確定させる必要があるため、
- * **行番号つき**で切り出せるパーサが要る (行番号が無いと完了時の削除が文字列置換になり、
- * 同じ語が本文に出ただけで別のエントリを壊す)。
+ * カード構文のパースは **`.claude/scripts/lib/backlog-lib.cjs` が唯一の実装**
+ * (doboku-note と統一のスキーマ。正典 `.claude/rules/todo-standards.md`)。
+ * ここは backlog-loop 向けの薄い adapter で、固有に持つのは:
+ *   - `sourceFile` の付与 (報告・verify 用)
+ *   - 表形式のパース (backlog.md 内の指標候補テーブル等。行単位の削除に使う)
+ *   - `removeLineRanges` (完了時の行番号削除)
  *
- * ## 設計上の約束
+ * ## 設計上の約束 (不変)
  *
  * - I/O を持たない (呼び出し側が読み込んだテキストを渡す)。テストが実ファイルに依存しない
- * - 解釈できない行は**捨てずに** raw として保持する。往復 (parse → render) でバイト一致することを
- *   テストが固定する。往復が壊れると「削除したつもりが別の行も消える」事故になる
- * - status / tier は正規化しない (docs-governance の語彙が SSOT。ここで別の語彙を作らない)
+ * - 削除は**行番号**で行う。文字列一致で消すと、同じ語が本文に出ただけで別のカードを壊す
+ *   (カードの startLine/endLine は backlog-lib が計算する)
  *
  * 正典: `.claude/rules/backlog-loop.md`
  */
 
-/** `### [ID] タイトル` — ID は docs-governance の idPattern と同じ形 */
-const ENTRY_HEADING = /^###\s+\[([A-Z0-9]+(?:-[A-Z0-9]+)+)\]\s*(.*)$/;
-/** `## P0 緊急` のようなセクション見出し */
-const SECTION_HEADING = /^##\s+(.+)$/;
-/** `- **status**: pending` */
-const FIELD_LINE = /^-\s+\*\*([^*]+)\*\*\s*[:：]\s*(.*)$/;
+const { parseBacklog } = require('../lib/backlog-lib.cjs');
 
 /**
- * 見出し型バックログ (05 / 06 の P0・P2 調査キュー) を解析する。
+ * バックログ (backlog.md) をカード配列として解析する。
+ *
+ * 返るエントリは backlog-lib のカード
+ * (id / tier / title / category / kind / executor / verify / filed / due / wip /
+ *  startLine / endLine / body / hasTagLine / unknownKeys ...) に `sourceFile` と
+ * `section` (tier の別名・旧 API 互換) を足したもの。
  *
  * @param {string} text ファイル全文
  * @param {string} sourceFile 報告用のパス
- * @returns {{entries: Array, lineCount: number}} entries は startLine/endLine が 1-indexed・両端含む
+ * @returns {{entries: Array, lineCount: number}} startLine/endLine は 1-indexed・両端含む
  */
 function parseHeadingEntries(text, sourceFile) {
-  const lines = String(text ?? '').split('\n');
-  const entries = [];
-  let current = null;
-  let section = null;
-
-  const close = (endLine) => {
-    if (!current) return;
-    // 末尾の空行はエントリに含めない (削除したとき段落の区切りが崩れないように)
-    let end = endLine;
-    while (end > current.startLine && lines[end - 1].trim() === '') end -= 1;
-    current.endLine = end;
-    current.body = lines.slice(current.startLine - 1, end).join('\n');
-    entries.push(current);
-    current = null;
-  };
-
-  for (let i = 0; i < lines.length; i += 1) {
-    const line = lines[i];
-    const lineNo = i + 1;
-
-    const heading = ENTRY_HEADING.exec(line);
-    if (heading) {
-      close(lineNo - 1);
-      current = {
-        id: heading[1],
-        title: heading[2].trim(),
-        section,
-        sourceFile,
-        startLine: lineNo,
-        endLine: lineNo,
-        fields: {},
-        body: '',
-      };
-      continue;
-    }
-
-    const sectionHeading = SECTION_HEADING.exec(line);
-    if (sectionHeading) {
-      close(lineNo - 1);
-      section = sectionHeading[1].trim();
-      continue;
-    }
-
-    if (current) {
-      const field = FIELD_LINE.exec(line);
-      // 同名フィールドは最初の 1 つを採る (本文中の再掲で上書きしない)
-      if (field && !(field[1] in current.fields)) {
-        current.fields[field[1]] = field[2].trim();
-      }
-    }
-  }
-  close(lines.length);
-
-  return { entries, lineCount: lines.length };
+  const entries = parseBacklog(text).map((card) => ({
+    ...card,
+    sourceFile,
+    section: card.tier,
+  }));
+  return { entries, lineCount: String(text ?? '').split('\n').length };
 }
 
 /**
- * 表形式バックログ (01 受信箱 / 06 の P1・P2 検証済み候補) を解析する。
+ * 表形式 (backlog.md 内の指標候補テーブル等) を解析する。
  *
- * 表は複数あってよく、ヘッダ行の列名で区別する。行の識別子は「ファイル + 表の通番 + 行の通番」で、
- * ID を持たない 01 でも ledger と結び付けられるようにする。
+ * 表は複数あってよく、ヘッダ行の列名で区別する。行の識別子は「ファイル + 表の通番 + 行の通番」。
  */
 function parseTableRows(text, sourceFile) {
   const lines = String(text ?? '').split('\n');
@@ -117,9 +68,9 @@ function parseTableRows(text, sourceFile) {
   for (let i = 0; i < lines.length; i += 1) {
     const line = lines[i];
     if (!line.trim().startsWith('|')) {
-      // ★空行では header を捨てない。実データ (01_未整理タスク.md) は表の途中に空行があり、
-      //   そこで header を落とすと後続の行が「新しい表のヘッダ」に化けて 1 行まるごと消える
-      //   (実測: 13 行のうち 1 行が拾えなかった)。空行以外の地の文で初めて表が終わったとみなす。
+      // ★空行では header を捨てない。表の途中に空行があるデータが実在し、
+      //   そこで header を落とすと後続の行が「新しい表のヘッダ」に化けて 1 行まるごと消える。
+      //   空行以外の地の文で初めて表が終わったとみなす。
       if (line.trim() !== '') header = null;
       continue;
     }
@@ -183,15 +134,8 @@ function removeLineRanges(text, ranges) {
   return lines.filter((_, idx) => !drop.has(idx + 1)).join('\n');
 }
 
-/** 見出し型エントリを元テキストから復元する (往復テスト用) */
-function renderHeadingEntry(entry) {
-  return entry.body;
-}
-
 module.exports = {
-  ENTRY_HEADING,
   parseHeadingEntries,
   parseTableRows,
   removeLineRanges,
-  renderHeadingEntry,
 };

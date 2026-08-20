@@ -6,13 +6,15 @@
 - [project_note_product_rollout.md](project_note_product_rollout.md) — note商品展開(product-factory/src/channels/note)。174商品を55記事へ束ね.local(git外)生成。SSOT=article-plan.ts。有料は<!-- paid:start -->境界。CLI=products:note:{plan/generate/validate/promote/report}。promote未実施。正典=`packages/product-factory/src/channels/note/`+`packages/product-factory/README.md`
 - [feedback_periodic_progress_reports.md](feedback_periodic_progress_reports.md) — 長時間のsubagent/workflow中は聞かれる前に約4-5分間隔で実測ベース進捗報告を自発的に(2026-07-17指摘)
 - [feedback_exit_code_not_via_pipe.md](feedback_exit_code_not_via_pipe.md) — 検証exit codeを`| tail`越しで測ると常に0(全PASS誤認)。直接実行orPIPESTATUS。全PASSなら1件壊して検証器を検証
+- [feedback_mutation_test_passes_wrongly.md](feedback_mutation_test_passes_wrongly.md) — ミューテーションでも「間違った理由で赤/緑」になる。probeが除外語彙に当たっていないか・赤の理由がクラッシュでないかを毎回読む
+- [feedback_develop_had_no_ci_gate.md](feedback_develop_had_no_ci_gate.md) — develop pushは長らく無検査で壊れが次のマージ担当に回っていた。2026-08-20にdevelop-quality-gate.yml + npm run preflightで是正
 - [feedback_debt_baseline_shrink_only.md](feedback_debt_baseline_shrink_only.md) — maintenance-debt baselineは縮小専用(2026-07-14)。CI --ratchet-checkが増加拒否。新規debtは実修正かルール修正のみ
 - [feedback_workflow_arg_vector_quoted.md](feedback_workflow_arg_vector_quoted.md) — CI workflowの可変引数列はbash配列("${ARGS[@]}")。文字列連結は1トークン化(2026-07-14に6workflow regression)。ガード=ARG_VECTOR_QUOTED
 - [project_estat_expansion_pipeline_2026_07.md](project_estat_expansion_pipeline_2026_07.md) — e-Stat全展開(2026-07-11): 生候補17万metric=不可能。本命=SSDS未使用cdCat01列挙。DBレス発見パイプライン。APP_IDはCI専任→専用ブランチpushトリガー。需要ファースト
 - [project_youtube_mass_experiment_2026_07.md](project_youtube_mass_experiment_2026_07.md) — YouTube量産実験(2026-07-11〜)。familyアカウントで月1上限撤廃(ペース1日1本)。ガード緩和=youtube-experiment.json(削除で月1復帰)、重複/pauseガード維持。CI投稿経路実証(GitHub Release→develop-push→GOOGLE_OAUTH)。BCRはapp/stats(全年)読む
-- [project_docs_reorg_todo_handoffs.md](project_docs_reorg_todo_handoffs.md) — TODO真実源=docs/todo/{inbox,01_改善,02_機能,03_指標バックログ}.md。2026-07-22に一時ハンドオフ文書廃止。完了文書はarchive禁止・git rm
+- [project_docs_reorg_todo_handoffs.md](project_docs_reorg_todo_handoffs.md) — TODO真実源=.claude/todo/{inbox,01_改善,02_機能,03_指標バックログ}.md。2026-07-22に一時ハンドオフ文書廃止。完了文書はarchive禁止・git rm
 - [project_kakei_expansion_pipeline_gotchas.md](project_kakei_expansion_pipeline_gotchas.md) — 家計調査拡充(2026-07-10)の罠: kakei @area=県庁所在市コード→NN000写像 / master exportはNODE_ENV=production必須 / saveToR2はローカルstagingのみ→diff-push-r2
-- [project_sns_gallery_and_ig_cron_fix.md](project_sns_gallery_and_ig_cron_fix.md) — 統合メディアコンソール(`npm run gallery`→localhost:4747、実装=apps/gallery Next.js)。/sns・/assets・/svg・/dashboard。★IG自動投稿の約1ヶ月空振りcronバグ修正(週ファイル自動選択)。R2動画は投稿後30日削除。正典sns-content-standards.md §5.5
+- [project_sns_gallery_and_ig_cron_fix.md](project_sns_gallery_and_ig_cron_fix.md) — 統合メディアコンソール(`npm run admin`→localhost:4747、実装=apps/admin Next.js)。/sns・/assets・/svg・/dashboard。★IG自動投稿の約1ヶ月空振りcronバグ修正(週ファイル自動選択)。R2動画は投稿後30日削除。正典sns-content-standards.md §5.5
 - [project_survey_linkage_ssot.md](project_survey_linkage_ssot.md) — ranking↔調査紐付けSSOT再設計(2026-07-06,PR#535)。/survey空prerenderをforce-dynamicで解消。item.jsonにsurveyIds焼き込み。orphan調査8件削除(83→75)。管理=survey-curator+/audit-survey-linkage
 - [project_blog_topic_queue_seo_expansion.md](project_blog_topic_queue_seo_expansion.md) — 新規ブログSEO拡充(2026-07-05)。「次に何を書くか」=topic-queue.json(build-topic-queue.mjs)。型8種に拡張(D2食品/F市区町村/G移動)。タイトル~17字・gap1要素。/plan-article-queue。戦略正典=docs/02_実装計画/15
 - [feedback_theme_indicator_research_pattern.md](feedback_theme_indicator_research_pattern.md) — テーマ指標調査は同一セッションで一次資料/e-Stat IDを解決。未解決候補は保存せず、tool回数を証拠にしない

@@ -20,6 +20,7 @@ import { GONE_BLOG_SLUGS } from "@/config/gone-blog-slugs";
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
 import { INDEXABLE_RANKING_KEYS } from "@/config/indexable-ranking-keys";
+import { KNOWN_JAPAN_SLUGS } from "@/config/known-japan-slugs";
 import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
 import { KNOWN_TAG_KEYS } from "@/config/known-tag-keys";
 import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
@@ -126,6 +127,14 @@ export const UrlPolicy = {
   },
   theme: {
     isKnown: (slug: string): boolean => KNOWN_THEME_SLUGS.has(slug),
+  },
+  /**
+   * `/japan/<slug>` — 日本全国値のみを扱う面 (GEO-SCOPE-SEPARATION-01)。
+   * `/themes/*` (47都道府県比較) とは別のデータ契約・別の known 集合を持つ。
+   * 混同しないよう `theme.isKnown` を流用せず独立の判定を持つ。
+   */
+  japan: {
+    isKnown: (slug: string): boolean => KNOWN_JAPAN_SLUGS.has(slug),
   },
   blog: {
     isGone: (slug: string): boolean => GONE_BLOG_SLUGS.has(slug),

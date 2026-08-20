@@ -9,7 +9,7 @@
  *   - 正常な 2 桁コードで**パスが変わらない** (是正が既存の呼び出しを壊していない)
  *   - 不正な値で throw する (検証が実際に効いている)
  *
- * 正典: `docs/todo/05_機能バックログ.md` の `CODEQL-JS-BACKLOG-01`
+ * 正典: `.claude/todo/backlog.md` の `CODEQL-JS-BACKLOG-01`
  */
 
 import { describe, expect, it } from "vitest";

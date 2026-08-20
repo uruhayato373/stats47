@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx tsx scripts/validate-env.ts && next dev --port 3000",
+    "dev": "npx tsx scripts/validate-env.ts && npx tsx scripts/dev-server.ts",
     "build": "npx tsx scripts/validate-env.ts && npx cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" next build",
     "build:production": "npx tsx scripts/validate-env.ts && npx cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" NODE_ENV=production NEXT_PUBLIC_ENV=production next build",
     "lint": "next lint",

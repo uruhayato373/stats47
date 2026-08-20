@@ -17,7 +17,7 @@ PSI、Chrome DevTools、Cloudflare Workers の実測値からボトルネック�
 | 生メトリクス CSV | `reference/snapshots/YYYY-MM-DD/metrics.csv` |
 | 目標しきい値設定 | `budgets.json` |
 | 改善施策ログ（append-only） | `reference/improvement-log.md` |
-| 未完了の施策 | `docs/todo/04_改善バックログ.md` |
+| 未完了の施策 | `.claude/todo/improvements.md` |
 | PSI Alert（自動起票） | GitHub Issues ラベル `psi-alert,auto-generated` |
 | 週次集約 | `.claude/state/metrics/psi/{history.csv,LATEST.md}` |
 | Cloudflare機械メトリクス | `.claude/state/metrics/cloudflare/` |
@@ -57,7 +57,7 @@ Chrome DevTools MCP のモバイル再現条件を固定する。
 ### 0. 作業前
 
 1. `git status --short --branch` で既存変更を確認する。勝手にpull・resetしない。
-2. `docs/todo/04_改善バックログ.md` の対象IDと本runbookを読む。
+2. `.claude/todo/improvements.md` の対象IDと本runbookを読む。
 3. `apps/web/wrangler.toml` のobservability設定を確認する。計測量・費用の根拠なしにsamplingを変更しない。
 4. 本番deploy、R2 write、Cloudflare Rules変更は実装・検証と分離する。ユーザー承認までは実行しない。
 
@@ -217,7 +217,7 @@ deploy直後の1回だけで `effect/full` にしない。変更を `effect/pend
 SSOT:
 - .claude/skills/analytics/performance-improvement/SKILL.md
 - .claude/skills/analytics/performance-improvement/reference/improvement-log.md の [MCP-PERF-2026-08-05]
-- docs/todo/04_改善バックログ.md
+- .claude/todo/improvements.md
 
 最初に /mcp を確認し、chrome-devtools と cloudflare-docs の接続、cloudflare-observability と cloudflare-graphql の認証状態を報告してください。後者が Needs authentication なら認証を案内し、Chrome/ローカルで進められる作業は止めないでください。
 

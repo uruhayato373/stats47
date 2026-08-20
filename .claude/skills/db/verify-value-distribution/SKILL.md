@@ -85,7 +85,7 @@ cat .claude/state/ranking/integrity-audit.json | jq '.valueVerification'
 | 状況 | 対応 |
 |---|---|
 | 軸の絞り忘れ・単位の誤り | config 是正 → `data/data-refresh-requests.json` で再取り込み (data-ingester) |
-| 出典そのものが取得不能 | 代替出典を `docs/todo/06_指標バックログ.md` へ。当面は退役 |
+| 出典そのものが取得不能 | 代替出典を `.claude/todo/backlog.md` へ。当面は退役 |
 | 実態が 0 で ranking にならない | `isActive: false` + GONE 登録 (手順は `ranking-key-consistency.test.ts` の「直し方」) |
 
 ### 6. 検証する

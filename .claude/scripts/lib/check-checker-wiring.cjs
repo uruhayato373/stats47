@@ -69,6 +69,11 @@ function candidates() {
     .sort();
 }
 
+/** `.husky/` 直下の拡張子なしファイル (= husky フック本体) か。 */
+function isHuskyHook(file) {
+  return rel(file).startsWith(".husky/") && path.extname(file) === "";
+}
+
 function corpusFiles() {
   const roots = [
     ".github", ".husky", ".claude/skills", ".claude/agents", ".claude/hooks",
@@ -77,7 +82,13 @@ function corpusFiles() {
   const files = roots.flatMap((root) => walk(path.join(ROOT, root)));
   const packageFiles = [path.join(ROOT, "package.json")];
   return [...files, ...packageFiles]
-    .filter((file) => CORPUS_EXTENSIONS.has(path.extname(file)))
+    // husky のフックは規約上**拡張子を持たない** (`.husky/pre-commit` / `.husky/commit-msg`)。
+    // 拡張子だけで絞ると `.husky` を root に挙げていても中身が 1 件も corpus に入らず、
+    // フック経由の配線が原理的に見えない (2026-08-20 に commit-msg フックへ直接配線した
+    // ガードが UNWIRED と誤判定されて発覚)。
+    // ★ここに具体的なチェッカー名を書かないこと。このファイル自身が corpus なので、
+    //   名前を書くと「コメントが配線」として自己参照で常に緑になる (同日に実際に踏んだ)。
+    .filter((file) => CORPUS_EXTENSIONS.has(path.extname(file)) || isHuskyHook(file))
     .filter((file) => rel(file) !== rel(BASELINE_PATH));
 }
 

@@ -54,6 +54,7 @@ import {
 
 import { HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
+import { BLOG_THUMBNAIL_ASPECT_CLASS } from "@/lib/metadata/ogp-image";
 
 import type { Metadata } from "next";
 
@@ -285,7 +286,9 @@ export default async function CategoryPage({ params }: PageProps) {
                 href={`/blog/${article.slug}`}
                 className="group block rounded-sm border border-border overflow-hidden hover:border-primary/50 transition-colors"
               >
-                <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden">
+                <div
+                  className={`relative ${BLOG_THUMBNAIL_ASPECT_CLASS} w-full bg-muted overflow-hidden`}
+                >
                   <ThemeAwareImage
                     lightSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-light.webp`}
                     darkSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-dark.webp`}

@@ -196,13 +196,13 @@ function sortObject(o) {
 
 const SG_NOTE =
   'candidate の confidence を抑制する過去施策の effect/none・effect/adverse 台帳。' +
-  'improvement-triage が docs/todo/04_改善バックログ.md の effect/none|adverse エントリから維持する。' +
+  'improvement-triage が .claude/todo/improvements.md の effect/none|adverse エントリから維持する。' +
   'key は URL の pathKey (例 /blog/<slug>) または `<type>::<pathKey>`。value は "none" | "adverse"。';
 const AD_NOTE =
   'AdSense candidate の confidence を抑制する過去施策の effect/none・effect/adverse 台帳。' +
   'key は adsense-diagnostics の candidate id `<rule>::<key>` (例 device-regression::Desktop)。' +
   'value は "none" | "adverse"。';
-const LEDGER_SOURCE = "docs/todo/04_改善バックログ.md の effect ラベル (writer: .claude/scripts/lib/write-past-effects.mjs)";
+const LEDGER_SOURCE = ".claude/todo/improvements.md の effect ラベル (writer: .claude/scripts/lib/write-past-effects.mjs)";
 
 function main() {
   const args = process.argv.slice(2);
@@ -236,7 +236,7 @@ function main() {
 
   const out = [];
   out.push("# past-effects 台帳 writer (effect/none|adverse → candidate 抑制)");
-  out.push(`# backlog: ${backlogPath ?? "docs/todo/04_改善バックログ.md"} / entries: ${entries.length}`);
+  out.push(`# backlog: ${backlogPath ?? ".claude/todo/improvements.md"} / entries: ${entries.length}`);
   out.push("");
   out.push(`search-growth: ${Object.keys(built.urls).length} key (prev ${Object.keys(sgPrev?.urls ?? {}).length})`);
   for (const [k, v] of Object.entries(built.urls)) out.push(`  ${v.padEnd(7)} ${k}`);

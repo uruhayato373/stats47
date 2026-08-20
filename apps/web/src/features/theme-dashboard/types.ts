@@ -5,6 +5,41 @@ import type { TopoJSONTopology } from "@stats47/types";
 // テーマダッシュボード固有の型
 // ============================================================================
 
+/**
+ * Theme Dashboard の地理スコープ状態 (GEO-SCOPE-SEPARATION-01 WP1)。
+ *
+ * `docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md` §3.1 が定義する
+ * `PrefectureView`。未選択は e-Stat の全国コード "00000" ではなく `prefecture-set`
+ * (47都道府県) として明示する。日本全国の統計は別 context (`/japan/*`) が持ち、
+ * このダッシュボードの型には混ぜない。
+ *
+ * ★段階移行: 既存 `ThemePrefectureContext` (`selectedPrefectureCode: string | null`) は
+ *   引き続き内部表現として残る。この型は新規consumerが「未選択=47都道府県」であることを
+ *   型で強制するための橋渡しで、`toPrefectureView` (同ファイル) が変換する。
+ */
+export type PrefectureView =
+  | { scope: "prefecture-set" }
+  | { scope: "prefecture"; prefectureCode: string; prefectureName: string };
+
+/** 未選択時の表示名。「全国」ではなく「47都道府県」と呼ぶ (情報設計 §地理スコープ)。 */
+export const PREFECTURE_SET_LABEL = "47都道府県";
+
+/**
+ * 既存の `selectedPrefectureCode: string | null` 表現から `PrefectureView` へ変換する。
+ * `null` を e-Stat の "00000" とは解釈しない (単に「未選択」を表す)。
+ */
+export function toPrefectureView(
+  selectedPrefectureCode: string | null,
+  selectedAreaName: string | null,
+): PrefectureView {
+  if (!selectedPrefectureCode) return { scope: "prefecture-set" };
+  return {
+    scope: "prefecture",
+    prefectureCode: selectedPrefectureCode,
+    prefectureName: selectedAreaName ?? "選択地域",
+  };
+}
+
 /** タブ型指標の設定 */
 export interface TabIndicatorConfig {
   /** ランキングキー */

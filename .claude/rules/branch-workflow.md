@@ -49,9 +49,31 @@ PR を close→reopen しても同じ HEAD が読まれて発火しない** — 
 トークンに言及するときは件名を避け、本文でもバッククォートではなく `skip-ci` のような
 別表記にする (バッククォートは GitHub のスキャナに対して無力)。
 
+**★2026-08-20 に同じ事故が 2 回目。機械で止めるようにした。**
+この節を**読んだ直後の** commit で件名にトークンを引用し、push した 6 commit に対して
+run が 0 件になった。2 回とも「トークンを話題にする commit」で起きており、
+**文章で注意を促すだけでは防げない**ことが実測で分かった。
+
+`.husky/commit-msg` → `.claude/scripts/lib/check-commit-message.cjs` が
+`[skip ci]` / `[ci skip]` / `[no ci]` / `[skip actions]` / `***NO_CI***` と
+その表記ゆれ (アンダースコア・ハイフン・大小文字) を拒否する。
+
+意図的に skip したいときは `--no-verify` ではなく本文に理由を宣言する:
+
+```
+ALLOW-SKIP-CI: 生成物のみで検査対象の変更が無いため
+```
+
+grep で追える監査可能な逃げ道で、うっかりでは書けない (理由が空だと通らない)。
+
+**cron の commit-back は壊れない。** フックは `$CI` が立っていれば素通りする。
+2026-08-20 時点では husky が依存に無く CI で `core.hooksPath` も設定されないため
+そもそも発火しないが (実測)、将来 husky を導入したときに
+`[skip ci]` を**正当に**使う cron を壊さないよう明示的に抜けている。
+
 ## ルール
 
-- **feature/***: 機能ブランチ。develop から分岐し、ローカルで `git merge --no-ff feature/<name>` で develop に取り込む。マージ後は削除。PR は不要 (作っても良い、ただし CI は走らない)
+- **feature/***: 機能ブランチ。develop から分岐し、ローカルで `git merge --no-ff feature/<name>` で develop に取り込む。マージ後は削除。PR は不要 (作っても良いが、feature ブランチへの push では CI は走らない)。**develop に push した時点で `develop-quality-gate.yml` の高速 3 ゲートが走る** (下記)
 - **develop**: 統合ブランチ。feature/* からの直 merge を受ける。`git push origin develop` で remote に反映。**develop 直接 commit は推奨されないが禁止ではない** (短い chore は許容)
 - **main**: 本番デプロイブランチ。**develop → main の PR 経由でのみ更新**。`gh pr create --base main --head develop` で CI (`.github/workflows/pr-quality-check.yml`) を発火 → green を確認してマージ → Cloudflare Pages 自動デプロイ
 - main への直接コミット / push / force push は禁止
@@ -74,9 +96,58 @@ git push origin develop
 
 ## なぜ PR を develop → main にだけ置くか
 
-- `pr-quality-check.yml` の trigger は `pull_request: branches: [main]` のため、CI は **main PR でしか発火しない**
-- feature/* → develop の PR は self-merge + CI 無し → 価値がない (オーバーヘッドだけ)
+- `pr-quality-check.yml` (フル suite) の trigger は `pull_request: branches: [main]` のため、**フル CI は main PR でしか発火しない**
+- feature/* → develop の PR は self-merge → PR 自体を作る価値がない (オーバーヘッドだけ)
 - develop → main の PR を「本番デプロイの最終ゲート」に集約することで、CI green + 履歴境界 + ロールバック単位の 3 つを 1 箇所で確保
+
+## develop への push も高速ゲートを通る (★2026-08-20 新設)
+
+**「develop は完全に無検査」ではなくなった。** `develop-quality-gate.yml` が push ごとに
+ESLint / env registry / maintenance debt の 3 つだけを走らせる。
+**job 全体は実測 104 秒** (2026-08-20 の初回成功 run 32361789100)。
+大半は `npm ci` で、3 ゲート本体は数秒に収まる。
+
+なぜ足したか (実測): それ以前の develop は無検査だったため、pre-commit を通っていない変更が
+そのまま着地し、**壊れは「次に develop をマージする人」が払う**構造になっていた。
+2026-08-20 のマージでは `MetricFocusCharts.tsx:63` の ESLint 違反・未登録 env 4 件・
+maintenance debt 1 件が origin/develop に入ったまま残っており (commit `621131d6c`)、
+マージ担当が 3 サイクル・十数分を検査待ちに費やした。しかもマージ中は
+「自分が壊したのか継承したのか」の切り分けが毎回必要になる。
+
+- **ここに重い検査を足さない。** 「決定的か」「1 分以内か」を満たさないものは
+  `pr-quality-check.yml` 側に置く。develop への push が詰まると `--no-verify` を誘発し、
+  ゲートを足した意味が消える。
+- cron の commit-back はほぼすべて `[skip ci]` を持つので発火しない (実測: 23 本中 22 本)。
+  例外は `gsc-url-inspection-daily.yml` の 1 本だけで、state の CSV/MD しか触らないため緑で通る。
+- **`paths-ignore` で state を除外しない。** 実測すると 3 ゲートはいずれも
+  `.claude/state` を読まない (maintenance-debt は `state` を EXCLUDED に持ち、env-registry の
+  roots にも無く、eslint は `apps/web/src` のみ) ので、**除外しても今は安全**。
+  それでも足さないのは、将来 state を読むゲートを足したときに**除外が黙って穴になる**から。
+  1 日 1 回の余分な run のほうが安い。
+
+### commit 前に blocker を一度に洗い出す
+
+pre-commit は直列 all-or-nothing で 2 分超かかるため、blocker を 1 つずつ潰すと
+1 個につき 1 サイクル待つことになる。同じ 3 ゲートを**並列**で先に回す:
+
+```bash
+npm run preflight
+```
+
+pre-commit の代替ではない (型・docs・画像 pipeline の深い検査は含まない)。
+**通っても commit が通る保証はしないが、ここで落ちれば確実に落ちる。**
+
+### マージ中にゲートが落ちたら「継承か自作か」を先に切り分ける
+
+develop をマージした直後の失敗は、自分の変更ではなく**取り込んだ側に元からあった**ことが多い。
+切り分けないと、他人のコードを自分のバグとして調べ続けることになる。
+
+```bash
+git show origin/develop:<落ちたファイル> | grep -n '<該当パターン>'
+```
+
+origin 側に既に違反があれば継承 (直して commit に含めてよい。ゲートは着地点で捕まえる設計)。
+無ければ自分のマージ解決かローカル変更が原因。
 
 ## デプロイ
 

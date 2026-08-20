@@ -18,7 +18,7 @@ metadata:
   自身は走査除外 (debt の引用・ルール定義はメタ言及であり負債ではない)。
 
 **How to apply**: ガードが新規 debt で落ちたら、選択肢は 2 つだけ —
-(a) **実修正**: 期限・削除条件を書く / TODO を `docs/todo/` バックログ化 / コードを直す、
+(a) **実修正**: 期限・削除条件を書く / TODO を `.claude/todo/` バックログ化 / コードを直す、
 (b) **ルール修正**: 誤検知ならパターンを精緻化して baseline を**減らす** (実例: theme の
 catalogStatus enum 値「legacy」除外で −32、2026-07-14)。baseline への吸収は選択肢に無い。
 関連: [[feedback-workflow-arg-vector-quoted]] (同日の ratchet 系教訓)。

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "high-school-advancement-rate",
+  "year": "2023",
+  "unit": "％",
+  "label": "高等学校卒業者の進学率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/high-school-advancement-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug bread-consumption-expenditure-vs-high-school-advancement --keys high-school-advancement-rate --data-name high-school-advancement-rate-prefecture-rankings",
+  "fetchedAt": "2026-08-18T14:35:07.086Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

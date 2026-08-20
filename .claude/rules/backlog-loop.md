@@ -1,11 +1,11 @@
 # バックログ自動処理ループ (backlog-loop) 標準
 
-`docs/todo/` のバックログを自動で消化し、完了エントリを削除し、失敗から学習して
+`.claude/todo/` のバックログを自動で消化し、完了エントリを削除し、失敗から学習して
 モデル割当まで自己調整するループの**単一ソース (SSOT)**。class 定義・completion gate・
 安全境界はここが正典で、agent / skill / workflow は参照のみ。
 
 > **背景 (2026-08-17 新設)**: バックログを消化する自動ループが無く、消化は人間が
-> `03_今週の計画.md` へ引き取る運用に依存していた (W33 の週次振り返り自身が
+> `weekly.md` へ引き取る運用に依存していた (W33 の週次振り返り自身が
 > 「Must に置けば進み、Should 以下だと進まない」と記録)。さらに 05 の 52 件には
 > 「機械チェックで再発防止できるもの」「テストで固定できるもの」「単なる勘違い」が混在し、
 > 対話セッションがそれらに手こずっていた。原因は実行力ではなく**トリアージと学習の欠落**なので、
@@ -17,13 +17,13 @@
 
 | データ | 置き場 | 役割 |
 |---|---|---|
-| **真実源 (処理対象)** | `docs/todo/{05,06,01}` | 何を処理するか。完了は**行削除** |
+| **真実源 (処理対象)** | `.claude/todo/backlog.md` (v3-unified カード。構文の正典 `todo-standards.md`) | 何を処理するか。完了は**行削除** |
 | **routing policy** | `.claude/config/backlog-routing-policy.json` | class → model / effort / maxAttempts / 委譲 / 反映方法。数値はここだけ |
 | **ledger (証拠と学習の原資)** | `.claude/state/backlog-loop/ledger.json` | 1 件 1 レコード upsert。**完了して行を消した後も証拠が残る** |
 | 純関数 | `.claude/scripts/backlog-loop/{parse-backlog,queue,ledger,verify,local-runtime}-core.cjs` | I/O を持たない。テストが実ファイルに依存しない |
 | CLI | 同ディレクトリの `*.mjs` | queue 生成 / outcome 記録 / verify |
 
-**04_改善バックログは対象外**。`improvement-triage` の排他 write で、effect 判定は
+**improvements (改善バックログ) は対象外**。`improvement-triage` の排他 write で、effect 判定は
 effect-verdict エンジンが持つ。backlog-loop は読み取りもしない (verify が禁止パスとして弾く)。
 
 ---
@@ -41,13 +41,14 @@ effect-verdict エンジンが持つ。backlog-loop は読み取りもしない 
 | `impl-small` | sonnet | エントリの `完了条件` コマンド green + diff が `scope` 内 | direct-push |
 | `impl-large` | **fable** (委譲) | エントリの完了条件。**1 run 1 attempt**、未達なら行は残す | draft-pr |
 | `indicator-expansion` | fable (委譲) | e-Stat 実在検証 → config → `validate:config` / `validate:years` green | draft-pr |
-| `inbox-triage` (01) | sonnet | 種別確定 + 該当バックログへの転記、または削除条件該当の確認 | direct-push |
-| `stale` | (機械) | `00_運用ガイド.md` の削除条件に機械的に該当 | direct-push |
-| `needs-owner` | — | **削除も status 変更も不可**。週次 Issue へ surface のみ | surface-only |
+| `inbox-triage` | sonnet | タグ・ID の無い分類待ちカードへ ID 採番 + タグ行付与、または削除条件該当の確認 | direct-push |
+| `stale` | (機械) | `todo-standards.md` の削除条件に機械的に該当 | direct-push |
+| `needs-owner` | — | **削除もタグ変更も不可**。週次 Issue へ surface のみ | surface-only |
 
-`blocked-owner-*` / `blocked-*` / `pending-decision` 等は `queue-core.cjs` の `preClassify` が
-**機械的に** `needs-owner` へ固定する。モデルに判定させない — 判定させると「owner 待ちを
-モデルが勝手に進める」余地が残る。
+🟣 判断待ちのカードと `[実行:対話/ユーザー/windows/別環境]` のカードは `queue-core.cjs` の
+`preClassify` が**機械的に** `needs-owner` へ固定する。モデルに判定させない — 判定させると
+「owner 待ちをモデルが勝手に進める」余地が残る。`[進行中]` のカードは触らない。
+`[検証:cmd]` があれば completion gate の第一候補として queue 出力に載る。
 
 ---
 
@@ -92,10 +93,10 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 | gate 証拠なしの行削除 | `verify-backlog-run.mjs` が exit 1 |
 | 処理対象外の ID を巻き込む削除 | 同上 (`removal-out-of-queue`) |
 | ledger の直接編集 | CLI 経由のみ (agent の禁止事項に明記)。直接編集は証拠の捏造 |
-| 04 / memory / learned への write | verify の `FORBIDDEN_PATH_PATTERNS` |
+| improvements / memory / learned への write | verify の `FORBIDDEN_PATH_PATTERNS` |
 | `.env` 等の秘密 | 同上 + workflow の `disallowedTools` |
 | owner 待ちの自動処理 | `preClassify` が needs-owner へ固定 |
-| **status の書き忘れで CI に閉じられない案件を拾う** | `local-runtime-core.cjs` が本文から**ローカル端末依存**を検出して needs-owner へ回す。詳細は §4.6 |
+| **実行タグの書き忘れで CI に閉じられない案件を拾う** | `local-runtime-core.cjs` が本文から**ローカル端末依存**を検出して needs-owner へ回す (明示の `[実行:sweep\|機械]` 宣言は override)。詳細は §4.6 |
 | deploy / 本番 R2 push / force push | workflow の allowedTools に含めない |
 | **ループが自分の権限・予算を広げる** (`.github/` / routing policy への write) | verify の `FORBIDDEN_PATH_PATTERNS`。workflow を書き換えられると allowedTools・許可パス・timeout・モデルを自分で緩められ、他の全ての制約が意味を失う |
 | 暴走 (1 run で大量処理) | `policy.limits.maxItemsPerRun` |
@@ -123,16 +124,17 @@ cloud セッションは `actions:write` が無く dispatch できないため�
 
 ---
 
-## 4.6 ローカル端末依存の検出 (status の書き忘れを機械で拾う)
+## 4.6 ローカル端末依存の検出 (実行タグの書き忘れを機械で拾う)
 
-`status` は人が手で書くので**書き忘れる**。書き忘れると loop がそのエントリを拾い、
+`[実行:]` タグは人が手で書くので**書き忘れる**。書き忘れると loop がそのカードを拾い、
 **3 回失敗して quarantine するだけ**で終わる (CI 3 run + 日次枠 3 日分の損失)。
-2026-08-17 に 2 件実際に起きた — `ASP-CONTINUITY-01` (A8 の永続 Playwright プロファイル) と
-`PERF-LOCAL-NAV-01` (同一端末の before/after 実測)。どちらも要件は本文に書いてあった。
+2026-08-17 に 2 件実際に起きた (旧 status 制時代) — `ASP-CONTINUITY-01` (A8 の永続 Playwright
+プロファイル) と `PERF-LOCAL-NAV-01` (同一端末の before/after 実測)。どちらも要件は本文に書いてあった。
 
-`local-runtime-core.cjs` が本文を見て、`status` が `pending` でも
-**ローカル端末依存を名指ししていれば needs-owner へ回す**。人が見て ①status を
-`blocked-local-runtime` に直す ②CI で閉じられる部分を切り出す のどちらかを選ぶ。
+`local-runtime-core.cjs` が本文を見て、実行タグが無くても
+**ローカル端末依存を名指ししていれば needs-owner へ回す**。人が見て ①`[実行:windows]` 等を
+タグに書く ②CI で閉じられる部分を切り出す のどちらかを選ぶ。**`[実行:sweep|機械]` の明示宣言が
+あるカードにはこの backstop を通さない** (宣言は人間の判断による override)。
 
 ### 何を見て、何を見ないか (実測で決めた)
 
@@ -146,7 +148,7 @@ cloud セッションは `actions:write` が無く dispatch できないため�
 **owner 承認待ちと `.github/` 禁止パスはこの検出器の担当外。** 文面から機械的に判別できないと
 実測で分かったものを「一応入れておく」と、誤検知を出すゲートになって運用で無効化される
 (`unit-semantics-standards.md` §5)。**この検出器はローカル端末依存だけを保証する** —
-それ以外の外部要因は依然として人が `status` に書く。
+それ以外の外部要因は依然として人が `[実行:]` タグに書く。
 
 ### ゲート自体の検証
 
@@ -197,7 +199,7 @@ quarantine されたエントリを戻すには、原因を潰したうえで 1 
 | 分類 + 軽作業 class の実処理・行削除 | `backlog-processor` (sonnet) |
 | impl-large / indicator-expansion / escalated | `backlog-solver-hard` (fable・1 起動 1 件) |
 | e-Stat 実在検証 / 観測値投入 / R2 push | `estat-researcher` / `data-ingester` / `r2-publisher` |
-| 04 改善バックログ・effect 判定 | `improvement-triage` (排他・本ループは触らない) |
+| improvements (改善バックログ)・effect 判定 | `improvement-triage` (排他・本ループは触らない) |
 | memory / learned への記録 | `knowledge-curator` (排他・本ループは Issue で候補を出すのみ) |
 | deploy | 人間の明示承認 |
 
@@ -207,8 +209,8 @@ quarantine されたエントリを戻すには、原因を潰したうえで 1 
 
 - 純関数とテスト: `.claude/scripts/backlog-loop/`
 - policy: `.claude/config/backlog-routing-policy.json`
-- TODO 作成契約 (行削除・status 語彙): `.claude/rules/docs-vs-issues.md`
-- 運用ガイド (P0-P3・削除条件): `docs/todo/00_運用ガイド.md`
+- カード構文・タグ語彙 (v3-unified の正典): `.claude/rules/todo-standards.md`
+- 文書ガバナンス (検査): `.claude/rules/docs-vs-issues.md`
 - 実証ベース判定: `.claude/rules/evidence-based-judgment.md`
 - 無人 Claude ループの安全契約 (複製元): `.github/workflows/ai-content-generate-daily.yml` /
   `.claude/scripts/lib/__tests__/content-generation-routine.test.cjs`

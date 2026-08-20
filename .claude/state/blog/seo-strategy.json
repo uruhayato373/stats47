@@ -2,12 +2,12 @@
   "updatedAt": "2026-07-12",
   "owner": "blog-seo-strategist",
   "strategyDoc": ".claude/agents/blog-seo-strategist.md#戦略コンテキスト",
-  "note": "ブログSEO拡充戦略の SSOT (構造化)。旧ブログ SEO 拡充計画を廃止し SSOT を .claude に一本化 (2026-07-12、旧版は Git 履歴)。戦略の全文は blog-seo-strategist.md §戦略コンテキスト、構造化値 (done/todo・typeMix・KPI・midTermTodos) は本ファイルが真実源。個別記事は topic-queue.json、個別ランキングは estat/expansion-queue.json、effect ラベルは docs/todo/04_改善バックログ.md (improvement-triage 所有) が真実源で、ここは束ねるオーケストレーション層 (effect は read で再導出)。",
+  "note": "ブログSEO拡充戦略の SSOT (構造化)。旧ブログ SEO 拡充計画を廃止し SSOT を .claude に一本化 (2026-07-12、旧版は Git 履歴)。戦略の全文は blog-seo-strategist.md §戦略コンテキスト、構造化値 (done/todo・typeMix・KPI・midTermTodos) は本ファイルが真実源。個別記事は topic-queue.json、個別ランキングは estat/expansion-queue.json、effect ラベルは .claude/todo/improvements.md (improvement-triage 所有) が真実源で、ここは束ねるオーケストレーション層 (effect は read で再導出)。",
   "delegatesTo": {
     "articleProduction": "trend-scout + article-writer + blog-editor (.claude/state/blog/topic-queue.json)",
     "rankingExpansion": "ranking-expander (.claude/state/estat/expansion-queue.json)",
     "kpiMeasurement": "gsc-analyst (.claude/state/metrics/gsc/LATEST.md)",
-    "effectLabels": "improvement-triage (docs/todo/04_改善バックログ.md — 書込は triage のみ)"
+    "effectLabels": "improvement-triage (.claude/todo/improvements.md — 書込は triage のみ)"
   },
   "quarterTarget": {
     "startedAt": "2026-07-05",
@@ -56,7 +56,7 @@
       "effect": "pending",
       "due": "2026-08-02",
       "owner": "blog-seo-strategist",
-      "backlogRef": "docs/todo/04_改善バックログ.md#BLOG-SEO-TYPES-01",
+      "backlogRef": ".claude/todo/improvements.md#BLOG-SEO-TYPES-01",
       "verify": "新型記事の4週後 clicks 中央値 vs 既存A型 (measure-gsc-impact)"
     },
     {
@@ -68,7 +68,7 @@
       "effect": "pending",
       "due": "2026-08-02",
       "owner": "trend-scout",
-      "backlogRef": "docs/todo/04_改善バックログ.md#BLOG-SEO-QUEUE-01",
+      "backlogRef": ".claude/todo/improvements.md#BLOG-SEO-QUEUE-01",
       "verify": "node .claude/scripts/blog/build-topic-queue.mjs --next 5"
     },
     {
@@ -80,7 +80,7 @@
       "effect": "pending",
       "due": "2026-08-02",
       "owner": "ranking-publisher",
-      "backlogRef": "docs/todo/04_改善バックログ.md#RANKING-KEYS-SYNC-01",
+      "backlogRef": ".claude/todo/improvements.md#RANKING-KEYS-SYNC-01",
       "verify": "GSC カバレッジで ranking インデックス数を4週後比較"
     },
     {
@@ -91,7 +91,7 @@
       "effect": null,
       "due": "2026-08-31",
       "owner": "blog-seo-strategist",
-      "backlogRef": "docs/todo/04_改善バックログ.md#BLOG-SEO-PACE-01",
+      "backlogRef": ".claude/todo/improvements.md#BLOG-SEO-PACE-01",
       "verify": "2026-08 月間公開本数 ≥15 かつ 新規記事4週後 clicks 中央値 ≥ 既存中央値",
       "nextAction": "週2セッション×2-3本を topic-queue must-write から払い出し (/plan-article-queue → trend-scout → article-writer)"
     }

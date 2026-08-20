@@ -2,25 +2,29 @@
 
 import { ArrowRight } from "lucide-react";
 
+import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import {
   PORTAL_CARD_ASPECT_CLASS,
   SurfaceLinkCard,
 } from "@/components/surface";
 
 import { trackNavClick } from "@/lib/analytics/events";
+import {
+  BLOG_THUMBNAIL_ASPECT_CLASS,
+  ogpImageUrl,
+} from "@/lib/metadata/ogp-image";
 
 interface PortalBlogCardProps {
   slug: string;
   title: string;
-  description?: string | null;
 }
 
 /**
- * 「統計を読み解く」の高密度 blog カード。タイトルと要約の full-card link。
+ * 「統計を読み解く」の画像付き blog カード。
+ * 1200×630のサムネイルを無裁断で表示し、下部に読みやすいタイトルを残す。
  * クリックで nav_click (surface=home_blog) を送る (analytics 失敗で遷移を止めない)。
- * OGP画像は外部共有用に維持し、home一覧は画像へ依存しない。
  */
-export function PortalBlogCard({ slug, title, description }: PortalBlogCardProps) {
+export function PortalBlogCard({ slug, title }: PortalBlogCardProps) {
   const href = `/blog/${slug}`;
   return (
     <SurfaceLinkCard
@@ -32,18 +36,27 @@ export function PortalBlogCard({ slug, title, description }: PortalBlogCardProps
           // analytics 失敗で遷移を止めない
         }
       }}
-      className={`${PORTAL_CARD_ASPECT_CLASS} group flex flex-col overflow-hidden p-3`}
+      className={`${PORTAL_CARD_ASPECT_CLASS} group flex flex-col overflow-hidden p-0`}
     >
-      <p className="line-clamp-2 text-sm font-semibold leading-snug group-hover:text-primary">
-        {title}
-      </p>
-      {description && (
-        <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
-          {description}
+      <div
+        className={`relative ${BLOG_THUMBNAIL_ASPECT_CLASS} w-full shrink-0 overflow-hidden border-b border-border bg-muted`}
+      >
+        <ThemeAwareImage
+          lightSrc={ogpImageUrl(
+            `app/blog/${slug}/thumbnail-light.webp`,
+          )}
+          darkSrc={ogpImageUrl(`app/blog/${slug}/thumbnail-dark.webp`)}
+          alt=""
+          fill
+          sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 640px) 50vw, 85vw"
+          className="object-contain transition-transform duration-200 group-hover:scale-[1.01]"
+        />
+      </div>
+      <div className="flex min-h-0 flex-1 items-center gap-2 px-2.5">
+        <p className="min-w-0 flex-1 truncate text-xs font-semibold group-hover:text-primary">
+          {title}
         </p>
-      )}
-      <div className="mt-auto flex justify-end pt-2">
-        <ArrowRight className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+        <ArrowRight className="size-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
       </div>
     </SurfaceLinkCard>
   );

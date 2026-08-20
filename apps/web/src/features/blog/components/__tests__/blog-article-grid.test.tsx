@@ -29,6 +29,9 @@ describe('BlogArticleGrid', () => {
       'https://storage.stats47.jp/app/blog/population-change/thumbnail-light.webp'
     );
     expect(container.querySelector('img')).toHaveAttribute('alt', '');
+    expect(container.querySelector('img')?.parentElement).toHaveClass(
+      'aspect-[1200/630]'
+    );
   });
 
   it('記事がない場合は空状態を表示する', () => {

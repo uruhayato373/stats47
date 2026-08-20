@@ -200,7 +200,6 @@ export default async function HomePage() {
                       key={article.slug}
                       slug={article.slug}
                       title={article.title}
-                      description={article.description}
                     />
                   ))}
                 </HorizontalCardCarousel>

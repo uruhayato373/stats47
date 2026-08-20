@@ -1,0 +1,42 @@
+{
+  "description": "GA4 週次メトリクスの目標しきい値。observe モードで判定に使う。",
+  "updated_at": "2026-04-21",
+  "thresholds": {
+    "active_users_weekly": {
+      "target": 2000,
+      "warning_threshold": 1000,
+      "error_threshold": 500,
+      "direction": "higher_is_better"
+    },
+    "sessions_weekly": {
+      "target": 3000,
+      "warning_threshold": 1500,
+      "error_threshold": 800,
+      "direction": "higher_is_better"
+    },
+    "page_views_weekly": {
+      "target": 5000,
+      "warning_threshold": 2500,
+      "error_threshold": 1000,
+      "direction": "higher_is_better"
+    },
+    "engagement_rate_percent": {
+      "target": 60,
+      "warning_threshold": 45,
+      "error_threshold": 30,
+      "direction": "higher_is_better"
+    },
+    "bounce_rate_percent": {
+      "target": 40,
+      "warning_threshold": 60,
+      "error_threshold": 75,
+      "direction": "lower_is_better"
+    },
+    "avg_engagement_time_seconds": {
+      "target": 60,
+      "warning_threshold": 30,
+      "error_threshold": 15,
+      "direction": "higher_is_better"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 ---
 name: gsc-improvement
-description: Google Search Console の検索パフォーマンスとインデックス問題を docs/todo/04_改善バックログ.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GSC改善", "GSC記録", "インデックス改善", "SEO課題記録", or when analyzing gscエラー/ CSV files.
+description: Google Search Console の検索パフォーマンスとインデックス問題を .claude/todo/improvements.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GSC改善", "GSC記録", "インデックス改善", "SEO課題記録", or when analyzing gscエラー/ CSV files.
 primary_agent: gsc-analyst
 ---
 
@@ -16,7 +16,7 @@ active 一覧と append-only の詳細ログに責務分離して追跡するス
 | 生メトリクス CSV | git: `.claude/skills/analytics/gsc-improvement/reference/snapshots/YYYY-Www/` | immutable、diff 比較、オフライン可 |
 | 目標しきい値設定 | git: `.claude/skills/analytics/gsc-improvement/reference/budgets.json` | プロジェクト設定 |
 | 詳細ログ (agent 用) | git: `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` | 過去判定の根拠・検証コマンド・仮説を含む詳細 |
-| 要約 (人間向け) | git: `docs/todo/04_改善バックログ.md` | active 施策の ID・要約・status・期日を俯瞰 |
+| 要約 (人間向け) | git: `.claude/todo/improvements.md` | active 施策の ID・要約・status・期日を俯瞰 |
 | 週次スナップショット | `.claude/state/metrics/gsc/{history.csv,LATEST.md}` | GitHub Actions が日曜 JST 20:00 に自動更新 |
 
 ## 引数
@@ -26,7 +26,7 @@ $ARGUMENTS — [mode]
              mode:
                - status  (デフォルト) : 直近スナップショット + 進行中施策を要約
                - observe : 新 snapshot 取り込み + 目標判定 + 施策効果追記
-               - action  : 新しい施策行を docs/todo/04_改善バックログ.md に追加
+               - action  : 新しい施策行を .claude/todo/improvements.md に追加
                - next    : 次に着手すべき改善候補を提示
 ```
 
@@ -47,7 +47,7 @@ GSC メトリクス取得の優先順:
 ```
 以下を並列に実行して要約:
 1. reference/snapshots/ 配下の最新 YYYY-Www ディレクトリの CSV を Read
-2. docs/todo/04_改善バックログ.md の6列表から status: pending / in-progress / effect-pending の行を抽出
+2. .claude/todo/improvements.md の6列表から status: pending / in-progress / effect-pending の行を抽出
 3. reference/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
 4. .claude/state/metrics/gsc/LATEST.md を Read し週次推移を取得
 
@@ -82,14 +82,14 @@ GSC メトリクス取得の優先順:
    - .claude/state/metrics/gsc/history.csv から取得しても可
 
 5. 進行中施策の効果判定（最重要）:
-   docs/todo/04_改善バックログ.md の該当 metric 行を抽出する。
+   .claude/todo/improvements.md の該当 metric 行を抽出する。
    各施策に対して:
    - 経過日数 = observe 実行日 - deployed_at
    - 実測 delta = 最新値 - デプロイ時点の値（前週 snapshot から読む）
    - 期日前または証拠不足なら、status と Due を更新して active 行を維持する。
    - 判定可能なら full / partial / none / adverse を
      reference/improvement-log.md に実測値・snapshot・判定日とともに追記し、
-     docs/todo/04_改善バックログ.md から該当行を削除する。
+     .claude/todo/improvements.md から該当行を削除する。
    - adverse から修正タスクが生じる場合は、確定結果の行を残さず新しい改善IDで追加する。
 
 6. 出力:
@@ -111,7 +111,7 @@ GSC メトリクス取得の優先順:
    - 変更内容サマリ / 変更ファイル
    - verification_command（copy-pasteable な curl / API / script）
 
-2. docs/todo/04_改善バックログ.md を Read し、該当 Tier の6列表に1行だけ追加する:
+2. .claude/todo/improvements.md を Read し、該当 Tier の6列表に1行だけ追加する:
 
    ```markdown
    | GSC-NN | <次アクションを含む短い要約> | pending | YYYY-MM-DD | <owner> | gsc |
@@ -126,7 +126,7 @@ GSC メトリクス取得の優先順:
 #### mode = next
 
 ```
-1. docs/todo/04_改善バックログ.md のactive行と、reference/improvement-log.md の過去判定から派生候補を抽出
+1. .claude/todo/improvements.md のactive行と、reference/improvement-log.md の過去判定から派生候補を抽出
 2. reference/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
 3. 最新 snapshot の「次のアクション」候補も合わせる
 
@@ -136,14 +136,14 @@ GSC メトリクス取得の優先順:
 
 ### Step 3: 共通ルール
 
-- **docs/todo/04_改善バックログ.md は active-only** — 未完了施策の追加・status 更新に限定する。effect 確定後は詳細を improvement-log に残し、行を削除する
+- **.claude/todo/improvements.md は active-only** — 未完了施策の追加・status 更新に限定する。effect 確定後は詳細を improvement-log に残し、行を削除する
 - **snapshots/YYYY-Www/ も append-only** — 過去の CSV は改変しない
 - **日付は絶対日付** — 「今週」「先週」は使わない
 - **数値はソース明示** — "snapshots/2026-W17/queries.csv" のような相対パス
 - **施策は 1 PR 1 ID** — 複数目的の PR は分割
 - **想定効果値はデプロイ前に書く** — 後付けバイアス防止
 - **週次 /weekly-review から observe モードが自動呼び出し** される想定
-- **責務を分離する** — `docs/todo/04_改善バックログ.md` はactive一覧、reference/improvement-log.md は判定履歴
+- **責務を分離する** — `.claude/todo/improvements.md` はactive一覧、reference/improvement-log.md は判定履歴
 
 ## 参照パターン
 
@@ -199,7 +199,7 @@ cat .claude/skills/analytics/gsc-improvement/reference/improvement-log.md
 
 ## 前提
 
-- `docs/todo/04_改善バックログ.md` が存在（front-matter `type: improvement-log` / `metric: gsc`）
+- `.claude/todo/improvements.md` が存在（front-matter `type: improvement-log` / `metric: gsc`）
 - `reference/budgets.json` / `reference/snapshots/` / `reference/improvement-log.md` 初期化済
 - GSC プロパティ: `sc-domain:stats47.jp`
 - 本番 URL: `https://stats47.jp`

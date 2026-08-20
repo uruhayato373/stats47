@@ -9,7 +9,7 @@ status: retired
 
 > **⚠️ このスキルは 2026-07-23 に退役しました。** 通常ページへの Indexing API 送信は行いません。
 > 正典: `.claude/skills/analytics/search-growth/reference/platform-contract.md`の
-> 「Indexing API準拠」/ `docs/todo/04_改善バックログ.md [INDEXING-AUTO-01]`。
+> 「Indexing API準拠」/ `.claude/todo/improvements.md [INDEXING-AUTO-01]`。
 
 ## なぜ退役したか (公式仕様)
 

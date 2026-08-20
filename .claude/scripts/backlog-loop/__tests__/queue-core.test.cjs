@@ -1,10 +1,11 @@
 'use strict';
 
 /**
- * キュー選定の契約。
+ * キュー選定の契約 (v3-unified タグ宣言ベース)。
  *
- * 最重要は「触ってはいけないものを触らない」— owner 判断待ち・作業中・quarantine を
- * 拾わないこと。次に escalation が sonnet→fable→人間で止まり、Opus へ勝手に上がらないこと。
+ * 最重要は「触ってはいけないものを触らない」— 🟣 判断待ち・owner 系 executor・
+ * [進行中]・quarantine を拾わないこと。次に escalation が sonnet→fable→人間で止まり、
+ * Opus へ勝手に上がらないこと。
  */
 
 const assert = require('node:assert/strict');
@@ -21,25 +22,37 @@ const POLICY = JSON.parse(
 );
 const AT = '2026-08-17T00:00:00.000Z';
 
-const entry = (id, fields, extra = {}) => ({
+/** v3-unified カード (backlog-lib parseBacklog の出力形) を最小限で作る */
+const card = (id, over = {}) => ({
   id,
-  title: `${id} のタイトル`,
-  section: 'P1 今月',
-  sourceFile: 'docs/todo/05_機能バックログ.md',
+  title: `${id ?? '無名'} のタイトル`,
+  tier: 'high',
+  section: 'high',
+  sourceFile: '.claude/todo/backlog.md',
   startLine: 1,
   endLine: 5,
-  fields,
+  category: '未分類',
+  kind: null,
+  executor: null,
+  verify: null,
+  filed: null,
+  due: null,
+  codex: false,
+  wip: false,
+  hasTagLine: false,
   body: '',
-  ...extra,
+  ...over,
 });
 
 const emptyL = () => normalizeLedger(emptyLedger()).ledger;
 
-test('owner 判断待ちは queue に入らず needsOwner へ回る', () => {
+test('owner 系 executor と 🟣 判断待ちは queue に入らず needsOwner へ回る', () => {
   const entries = [
-    entry('OWNER-01', { status: 'blocked-owner-decision', tier: '0' }),
-    entry('APPROVAL-01', { status: 'blocked-owner-approval', tier: '1' }),
-    entry('OK-01', { status: 'pending', tier: '1' }),
+    card('HOLD-01', { tier: 'hold' }),
+    card('USER-01', { executor: 'ユーザー' }),
+    card('DIALOG-01', { executor: '対話' }),
+    card('WIN-01', { executor: 'windows' }),
+    card('OK-01'),
   ];
   const { picked, needsOwner } = buildQueue({
     entries,
@@ -49,20 +62,38 @@ test('owner 判断待ちは queue に入らず needsOwner へ回る', () => {
     limit: 10,
   });
   assert.deepEqual(picked.map((p) => p.id), ['OK-01']);
-  assert.deepEqual(needsOwner.map((n) => n.id).sort(), ['APPROVAL-01', 'OWNER-01']);
+  assert.deepEqual(
+    needsOwner.map((n) => n.id).sort(),
+    ['DIALOG-01', 'HOLD-01', 'USER-01', 'WIN-01'],
+  );
   assert.equal(preClassify(entries[0]), 'needs-owner');
+  assert.equal(preClassify(entries[1]), 'needs-owner');
+  assert.equal(preClassify(card('SWEEP-01', { executor: 'sweep' })), null);
 });
 
-test('in-progress は触らない (人または別 run が作業中)', () => {
+test('[進行中] は触らない (人または別 run が作業中)', () => {
   const { picked, skipped } = buildQueue({
-    entries: [entry('WIP-01', { status: 'in-progress', tier: '1' })],
+    entries: [card('WIP-01', { wip: true, executor: 'sweep' })],
     ledger: emptyL(),
     quarantined: new Set(),
     policy: POLICY,
     limit: 10,
   });
   assert.equal(picked.length, 0);
-  assert.match(skipped[0].reason, /in-progress/);
+  assert.match(skipped[0].reason, /進行中/);
+});
+
+test('ID の無いカードは処理しない (ledger に結び付けられない)', () => {
+  const { picked, skipped, needsOwner } = buildQueue({
+    entries: [card(null)],
+    ledger: emptyL(),
+    quarantined: new Set(),
+    policy: POLICY,
+    limit: 10,
+  });
+  assert.equal(picked.length, 0);
+  assert.equal(needsOwner.length, 0);
+  assert.match(skipped[0].reason, /ID なし/);
 });
 
 test('quarantine 中は理由つきで除外する (黙って消さない)', () => {
@@ -75,7 +106,7 @@ test('quarantine 中は理由つきで除外する (黙って消さない)', () 
     ));
   }
   const { picked, skipped } = buildQueue({
-    entries: [entry('BAD-01', { status: 'pending', tier: '1' })],
+    entries: [card('BAD-01')],
     ledger,
     quarantined: quarantinedIds(ledger, POLICY.limits.quarantineThreshold),
     policy: POLICY,
@@ -89,9 +120,9 @@ test('tier の小さい順 → 試行回数の少ない順 で選ぶ', () => {
   let ledger = emptyL();
   ({ ledger } = recordAttempt(ledger, { id: 'T1-TRIED', class: 'impl-small', outcome: 'failed', at: AT }, 3));
   const entries = [
-    entry('T2-FRESH', { status: 'pending', tier: '2' }),
-    entry('T1-TRIED', { status: 'pending', tier: '1' }),
-    entry('T1-FRESH', { status: 'pending', tier: '1' }),
+    card('T2-FRESH', { tier: 'mid' }),
+    card('T1-TRIED', { tier: 'high' }),
+    card('T1-FRESH', { tier: 'high' }),
   ];
   const { picked } = buildQueue({
     entries,
@@ -105,7 +136,7 @@ test('tier の小さい順 → 試行回数の少ない順 で選ぶ', () => {
 
 test('limit は policy の maxItemsPerRun を超えられない (暴走の上限)', () => {
   const entries = Array.from({ length: 20 }, (_, i) =>
-    entry(`BULK-${String(i).padStart(2, '0')}`, { status: 'pending', tier: '1' }),
+    card(`BULK-${String(i).padStart(2, '0')}`),
   );
   const { picked } = buildQueue({
     entries,
@@ -161,7 +192,7 @@ test('policy の全 class が model/effort/maxAttempts/delegate/apply を持つ'
 
 test('実データでキューが組める (0 件なら配線が壊れている)', () => {
   const { parseHeadingEntries } = require('../parse-backlog-core.cjs');
-  const file = path.join(ROOT, 'docs/todo/05_機能バックログ.md');
+  const file = path.join(ROOT, '.claude/todo/backlog.md');
   const { entries } = parseHeadingEntries(fs.readFileSync(file, 'utf8'), file);
   const { picked, needsOwner, skipped } = buildQueue({
     entries,
@@ -171,21 +202,22 @@ test('実データでキューが組める (0 件なら配線が壊れている)
     limit: POLICY.limits.itemsPerRun,
   });
   assert.equal(picked.length, POLICY.limits.itemsPerRun);
-  assert.ok(needsOwner.length > 0, 'blocked-owner-* が実在するので needsOwner は 0 にならない');
-  assert.ok(skipped.some((s) => /in-progress/.test(s.reason)), 'in-progress が実在する');
-  // 選ばれたものが owner 待ちでないこと
+  assert.ok(needsOwner.length > 0, 'owner 系 executor / 🟣 が実在するので needsOwner は 0 にならない');
+  assert.ok(skipped.some((s) => /進行中/.test(s.reason)), '[進行中] が実在する');
+  // 選ばれたものが owner 待ち・作業中でないこと
+  const NEEDS = new Set(['対話', 'ユーザー', 'windows', '別環境']);
   for (const p of picked) {
-    assert.ok(!/^blocked-owner/.test(p.status ?? ''), `owner 待ちを選んだ: ${p.id}`);
-    assert.notEqual(p.status, 'in-progress');
+    assert.ok(!NEEDS.has(p.executor), `owner 待ちを選んだ: ${p.id}`);
+    assert.notEqual(p.tier, 'hold', `🟣 を選んだ: ${p.id}`);
   }
 });
 
-test('status が pending でも本文がローカル端末依存なら needsOwner へ回る', () => {
+test('executor 未宣言でも本文がローカル端末依存なら needsOwner へ回る', () => {
   const entries = [
-    entry('LOCAL-01', { status: 'pending', tier: '1' }, {
+    card('LOCAL-01', {
       body: '- **前提**: 永続プロファイル `.local/playwright-a8-profile` に保持する。',
     }),
-    entry('OK-01', { status: 'pending', tier: '1' }, {
+    card('OK-01', {
       body: '- **完了条件**: デプロイ後に本番 URL を Googlebot UA で実測する',
     }),
   ];
@@ -206,9 +238,10 @@ test('status が pending でも本文がローカル端末依存なら needsOwne
   assert.match(row.reason, /blocked-local-runtime/);
 });
 
-test('既に blocked-* の場合は status 側の理由が優先される (二重報告しない)', () => {
+test('executor が宣言済みなら宣言側の理由が優先される (二重報告しない)', () => {
   const entries = [
-    entry('BOTH-01', { status: 'blocked-local-runtime', tier: '1' }, {
+    card('BOTH-01', {
+      executor: 'windows',
       body: '- **前提**: 永続プロファイルが要る',
     }),
   ];
@@ -220,5 +253,24 @@ test('既に blocked-* の場合は status 側の理由が優先される (二�
     limit: 5,
   });
   assert.equal(needsOwner.length, 1);
-  assert.match(needsOwner[0].reason, /owner\/外部待ち/);
+  assert.match(needsOwner[0].reason, /実行:windows/);
+  assert.equal(needsOwner[0].localRuntimeSignals, undefined);
+});
+
+test('★[実行:sweep] の明示宣言は local-runtime backstop を通さない (人間の override)', () => {
+  const entries = [
+    card('DECLARED-01', {
+      executor: 'sweep',
+      body: '本文に Playwright という語が引用されているだけのカード。',
+    }),
+  ];
+  const { picked, needsOwner } = buildQueue({
+    entries,
+    ledger: emptyL(),
+    quarantined: new Set(),
+    policy: POLICY,
+    limit: 5,
+  });
+  assert.deepEqual(picked.map((p) => p.id), ['DECLARED-01']);
+  assert.equal(needsOwner.length, 0);
 });

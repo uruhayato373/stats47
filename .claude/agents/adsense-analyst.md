@@ -53,13 +53,13 @@ RPM は `(imp/PV) × CTR × CPC` の掛け算。**CPC は公式 `cost_per_click`
 - `.claude/state/metrics/adsense/` — AdSense 週次 history (CRUD)。`history.csv` (account) / `history-devices.csv` (デバイス別・`metrics:digest` が生成) / `LATEST.md` (デバイス表+退行アラート) / `impact-LATEST.md` (施策 before/after・`metrics:adsense-impact` が生成)
 - `.claude/scripts/metrics/{update-history-csv,measure-adsense-impact}.mjs` — 計測パイプライン (run)。cron `fetch-metrics-weekly.yml` が週次で両方実行
 - `.claude/skills/analytics/adsense-improvement/reference/` — agent 用詳細層 (CRUD)
-- `docs/todo/04_改善バックログ.md` — read only (improvement-triage 経由)
+- `.claude/todo/improvements.md` — read only (improvement-triage 経由)
 - `.claude/scripts/ads/` — 棚卸し / 管理画面 (`/tmp/stats47-affiliate-dashboard.html` 生成) スクリプト (run)。台帳 SSOT・規約の管理は affiliate-manager が排他
 - `.claude/state/ads/` — 在庫 / GA4 snapshot JSON (CRUD)
 
 ## File Boundary (並行衝突回避)
 
-- `docs/todo/04_改善バックログ.md` への write 一切なし (improvement-triage 経由)
+- `.claude/todo/improvements.md` への write 一切なし (improvement-triage 経由)
 - `.claude/state/metrics/adsense/` への write は本 agent が排他
 - 並行起動可能 agent: gsc-analyst / ga4-analyst / performance-auditor (state は別)、 improvement-triage (read only)
 - 並行起動 NG: 同期間 fetch-adsense-data の adsense-analyst 2 体同時

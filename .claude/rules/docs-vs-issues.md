@@ -18,7 +18,7 @@ skill、agent、prompt、READMEへ複製しない。
 新規Markdownファイルは例外とし、次の順に統合先を探す。
 
 1. 同じ判断範囲を持つ既存SSOTを更新する。
-2. 未完了の行動なら`docs/todo/`の固定バックログへ追加する。
+2. 未完了の行動なら`.claude/todo/`の固定バックログへ追加する。
 3. コードに密結合する仕様なら対象コード近傍の`README.md`へ置く。
 4. agentの実行規約・手順なら`.claude/rules/`または`.claude/skills/`へ置く。
 5. 機械状態・再生成可能値なら`.claude/state/`へ置く。
@@ -48,23 +48,23 @@ skill、agent、prompt、READMEへ複製しない。
 |---|---|
 | 戦略・要件・ペルソナ・ロードマップ | `docs/00_プロジェクト管理/` `docs/02_実装計画/` |
 | 技術設計・アーキテクチャ | `docs/01_技術設計/` |
-| 現在の月次・週次計画 | `docs/todo/{02_今月の重点,03_今週の計画}.md`（上書き。履歴はgit） |
+| 現在の月次・週次計画 | `.claude/todo/{monthly,weekly}.md`（上書き。履歴はgit） |
 | agent用週次レビュー | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` |
 | 週次メトリクス | `.claude/state/metrics/`（機械状態。人手Markdownを複製しない） |
-| 批判的レビュー・事前検死・監査の未完了策 | `docs/todo/{04_改善バックログ,05_機能バックログ,06_指標バックログ}.md`。優先度・実行順・停止条件・完了条件を付ける |
+| 批判的レビュー・事前検死・監査の未完了策 | `.claude/todo/{improvements,backlog}.md`。優先度・実行順・停止条件・完了条件を付ける |
 | 定期レポート・比較用履歴 | 対応skillの `reference/`。機械値だけなら `.claude/state/`。人間向け全文をdocsへ複製しない |
-| 改善施策の一覧・TODO (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 等) | `docs/todo/04_改善バックログ.md` |
-| 未分類の思いつき TODO (受信箱) | `docs/todo/01_未整理タスク.md` (triage で各バックログへ → `docs/todo/00_運用ガイド.md`) |
-| セッション残タスク | `docs/todo/{04_改善バックログ,05_機能バックログ,06_指標バックログ}.md` へ直接反映。未分類のみ `docs/todo/01_未整理タスク.md`（2026-07-22 に一時ハンドオフ文書を廃止） |
+| 改善施策の一覧・TODO (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 等) | `.claude/todo/improvements.md` |
+| 未分類の思いつき TODO | `.claude/todo/backlog.md` へカード起票 (タグ無し = 分類待ちとして検査が集計 → `.claude/rules/todo-standards.md`) |
+| セッション残タスク | `.claude/todo/backlog.md` へカード起票 (改善施策のみ improvements.md。2026-07-22 に一時ハンドオフ文書を廃止) |
 | **テーマ関連のレビュー・監査・運用設計** | `.claude/skills/theme/manage-theme-portfolio/reference/{reviews,audits}/` + `テーマポートフォリオ運用.md`。最新状態はstate、未完了策はTODO |
 | **survey 関連のレビュー・監査・運用設計** | `.claude/skills/survey/manage-survey-portfolio/reference/{reviews,audits}/` + `surveyポートフォリオ運用.md`。最新状態は `.claude/state/surveys/portfolio.json`、未完了策はTODO |
 | **アフィリエイト運用の台帳・監査・実験仕様 (例外)** | 広告在庫・直接配置 = git TS (`apps/web/scripts/affiliate-{ads,direct-placements}-data.ts`)、規約 = `.claude/rules/affiliate-ads-standards.md`、手順 = `.claude/skills/ads/*/SKILL.md`、機械状態 = `.claude/state/ads/*.json`、詳細履歴 = `.claude/skills/analytics/affiliate-improvement/reference/` — agent (affiliate-manager) 主導のため docs に置かない (2026-07-15 オーナー判断。旧 `docs/40_アフィリエイト管理/` は廃止済み、移行履歴はgitに保持) |
-| **商品ポートフォリオの実装・運用詳細 (例外)** | 進捗 = `docs/todo/05_機能バックログ.md`、商品生成規約 = `.claude/rules/coconala-product-standards.md`、横断チャネル詳細 = `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md` — Claude Code／商品管理agent向けの実行情報を実装計画へ重複させない (2026-07-29 オーナー判断で実装計画から移設) |
+| **商品ポートフォリオの実装・運用詳細 (例外)** | 進捗 = `.claude/todo/backlog.md`、商品生成規約 = `.claude/rules/coconala-product-standards.md`、横断チャネル詳細 = `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md` — Claude Code／商品管理agent向けの実行情報を実装計画へ重複させない (2026-07-29 オーナー判断で実装計画から移設) |
 | **SNS競合リサーチ運用 (例外)** | X投稿単位 = `.claude/skills/sns/x-viral-research/SKILL.md`、X/Instagramのアカウント単位 = `.claude/skills/sns/competitor-scan/SKILL.md` — 未採択の専用Playwright collector仕様を実装計画へ保持せず、既存skillを運用SSOTにする。Instagram投稿単位collectorが必要なら同skillの拡張として再提案する (2026-07-29 オーナー判断) |
-| **サイト回遊グラフ・レコメンド実装詳細 (例外)** | 進捗 = `docs/todo/05_機能バックログ.md`の`KAIYU-HUB-01`、詳細 = `.claude/skills/analytics/seo-audit/reference/site-navigation-graph.md`、監査入口 = `/seo-audit --focus content` — ページ横断の内部リンク監査・実装契約をagent参照へ一本化する (2026-07-29 オーナー判断で実装計画から移設) |
-| **検索成長基盤・週次計測契約 (例外)** | 進捗 = `docs/todo/05_機能バックログ.md`の`SEARCH-OBSERVABILITY-RELEASE-01`、運用入口 = `.claude/skills/analytics/search-growth/SKILL.md`、基盤契約 = 同`reference/platform-contract.md`、週次契約 = 同`reference/weekly-cycle-contract.md` — CLI/MCP/metrics/週次agentが共有する恒常契約をskill配下へ一本化する (2026-07-29 オーナー判断で実装計画から移設) |
+| **サイト回遊グラフ・レコメンド実装詳細 (例外)** | 進捗 = `.claude/todo/backlog.md`の`KAIYU-HUB-01`、詳細 = `.claude/skills/analytics/seo-audit/reference/site-navigation-graph.md`、監査入口 = `/seo-audit --focus content` — ページ横断の内部リンク監査・実装契約をagent参照へ一本化する (2026-07-29 オーナー判断で実装計画から移設) |
+| **検索成長基盤・週次計測契約 (例外)** | 進捗 = `.claude/todo/backlog.md`の`SEARCH-OBSERVABILITY-RELEASE-01`、運用入口 = `.claude/skills/analytics/search-growth/SKILL.md`、基盤契約 = 同`reference/platform-contract.md`、週次契約 = 同`reference/weekly-cycle-contract.md` — CLI/MCP/metrics/週次agentが共有する恒常契約をskill配下へ一本化する (2026-07-29 オーナー判断で実装計画から移設) |
 | ブログ / note コンテンツ backlog | `docs/30_note記事企画/backlog/` |
-| 機能 / 自動化 backlog (未着手) | `docs/todo/05_機能バックログ.md`（指標拡充候補は `docs/todo/06_指標バックログ.md`） |
+| 機能 / 自動化 / 指標拡充 backlog (未着手) | `.claude/todo/backlog.md` |
 
 ### GitHub Issues に置くもの
 
@@ -94,7 +94,7 @@ skill、agent、prompt、READMEへ複製しない。
 新規記録を保存したい
   ↓
 未完了の行動か？
-  ├─ YES → docs/todo/ の該当バックログ
+  ├─ YES → .claude/todo/ の該当バックログ
   └─ NO
       ↓
 PR で close される単発タスクか？
@@ -110,15 +110,15 @@ improvement 系スキル (gsc / ga4 / adsense / affiliate / cloudflare-cost / ps
 
 | 場所 | 内容 |
 |---|---|
-| `docs/todo/04_改善バックログ.md` | active 施策の一覧 (6列の簡易表)。pending / in-progress / effect-pending と Tier + 期日を管理し、効果判定後は行を削除する。**TODO 真実源** |
+| `.claude/todo/improvements.md` | active 施策の一覧 (6列の簡易表)。pending / in-progress / effect-pending と Tier + 期日を管理し、効果判定後は行を削除する。**TODO 真実源** |
 | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` | agent 用詳細ログ。検証コマンド・仮説・期日・URL inspection 結果など、agent が深掘り参照する詳細 |
 
-人間は `docs/todo/04_改善バックログ.md` を読み、agent (*-improvement / weekly-review) は両方を読む。
+人間は `.claude/todo/improvements.md` を読み、agent (*-improvement / weekly-review) は両方を読む。
 
 ## frontmatter規約
 
 `docs/00_プロジェクト管理/`、`docs/01_技術設計/`、`docs/02_実装計画/`、
-`docs/todo/`のMarkdownには、少なくとも次の4項目を付ける。
+`.claude/todo/`のMarkdownには、少なくとも次の4項目を付ける。
 
 ```yaml
 ---
@@ -135,14 +135,14 @@ updated: 2026-MM-DD
 
 `updated`は内容を実際に確認・変更した日だけ更新する。検査を通す目的の機械的な日付更新は禁止する。
 
-## TODOの作成契約
+## TODOの作成契約 (カード構文の正典は `.claude/rules/todo-standards.md`)
 
-- IDは英大文字・数字・ハイフンで一意にする。
-- 改善バックログは6列（ID、タイトル、Status、Due、Owner、Metric）を維持する。
-- 機能・指標の見出し型TODOには`status`と「次」「実行順」「trigger」「残り」のいずれかを付ける。
-- 実行中のTODOには完了条件を付ける。外部変更や破壊的操作には停止条件・禁止・承認境界も付ける。
-- 月次・週次計画はTODO IDを参照し、statusや詳細を複製しない。
-- 完了・撤退・supersededは行またはsectionを削除し、Git履歴へ委ねる。
+- IDは英大文字・数字・ハイフンで一意にする（`### [ID] タイトル`）。
+- improvements (改善バックログ) は6列（ID、タイトル、Status、Due、Owner、Metric）を維持する。
+- backlog のカードは tier セクション（🔴🟡🟢🟣）の中に置き、`タグ:` 行（カテゴリ/種類/実行/検証/起票/期日）を付ける。タグ無しは分類待ちとして検査が集計する。
+- 実行中のカードには完了条件を本文に付ける。外部変更や破壊的操作には停止条件・禁止・承認境界も付ける。作業中は `[進行中]` を立てる。
+- 月次・週次計画はカードのIDを参照し、タグや詳細を複製しない。
+- 完了・撤退・supersededはカードまたは行を削除し、Git履歴へ委ねる。
 
 ## 整理・削除契約
 
@@ -177,7 +177,7 @@ CIのwarningはPRを止めないが、週次検査では`--fail-on-warn`によ�
 
 PR で機能改修を行う場合、関連する docs/ ファイル (改善ログ等) を同 PR で更新する規約:
 
-- PR 本文に「対応: `docs/todo/04_改善バックログ.md` の `T1-PSI-LCP-02`」のようにファイルとIDを書く
+- PR 本文に「対応: `.claude/todo/improvements.md` の `T1-PSI-LCP-02`」のようにファイルとIDを書く
 - improvement-log の section の `deployed_at` / `verification_command` を PR 内で更新
 - Issue ベースの `Closes #N` フローは `enhancement` ラベルの Issue でのみ使用
 
@@ -185,8 +185,8 @@ PR で機能改修を行う場合、関連する docs/ ファイル (改善ロ�
 
 - 2026-04: `docs/90_課題管理/` 廃止 → GitHub Issues (`enhancement` ラベル)
 - 2026-04-21: `docs/03_レビュー/` 廃止 → GitHub Issues (`critical-review` 等ラベル)
-- 2026-05-16: GitHub Issues の週次・レビュー系ラベルをファイル運用へ移行。2026-07-15 に現在計画=`docs/todo/`、agent週次レビュー=skill reference、メトリクス=`.claude/state/metrics/`へ再整理。
-- 2026-06-06: `docs/05_改善ログ/` 廃止 → `docs/todo/04_改善バックログ.md` に統合 (1 層構造化)
-- 2026-06-07: `docs/50_Issues/` 廃止 → `docs/todo/05_機能バックログ.md`（機能+自動化）/ `06_指標バックログ.md`（指標拡充）に統合。ui-improvements は対応済みで削除
-- 2026-07-30: レビュー保存ディレクトリを廃止。未完了策は `docs/todo/`、恒久判断は既存SSOT、定期履歴はskill referenceへ統合
+- 2026-05-16: GitHub Issues の週次・レビュー系ラベルをファイル運用へ移行。2026-07-15 に現在計画=`.claude/todo/`、agent週次レビュー=skill reference、メトリクス=`.claude/state/metrics/`へ再整理。
+- 2026-06-06: `docs/05_改善ログ/` 廃止 → `.claude/todo/improvements.md` に統合 (1 層構造化)
+- 2026-06-07: `docs/50_Issues/` 廃止 → 機能・指標バックログ (現 `.claude/todo/backlog.md`) に統合。ui-improvements は対応済みで削除
+- 2026-07-30: レビュー保存ディレクトリを廃止。未完了策は `.claude/todo/`、恒久判断は既存SSOT、定期履歴はskill referenceへ統合
 - 2026-07-30: 文書ガバナンスを機械契約・checker・pre-commit・PR・週次監査へ配線
