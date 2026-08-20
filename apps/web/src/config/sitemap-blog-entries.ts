@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-08-17
- * 件数: blog 430 / tag 60 / survey 73
+ * 最終生成日: 2026-08-20
+ * 件数: blog 433 / tag 60 / survey 73
  */
 
 export interface SitemapBlogEntry {
@@ -54,6 +54,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "bonito-catch-zero-prefectures-gap", lastModified: "2026-06-13" },
   { slug: "bonito-vs-oyster-fish-map", lastModified: "2026-07-10" },
   { slug: "brazilian-resident-population-prefecture-gap", lastModified: "2026-06-13" },
+  { slug: "bread-consumption-expenditure-vs-final-education-university", lastModified: "2026-08-19" },
+  { slug: "bread-consumption-expenditure-vs-high-school-advancement", lastModified: "2026-08-18" },
   { slug: "bread-consumption-expenditure-vs-site-area-per-dwelling", lastModified: "2026-08-17" },
   { slug: "bread-vs-rice-expenditure", lastModified: "2026-07-10" },
   { slug: "butter-vs-margarine-expenditure", lastModified: "2026-07-10" },
@@ -338,6 +340,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "price-index-high-low-prefecture", lastModified: "2026-06-07" },
   { slug: "professor-income-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "psychiatric-bed-count-vs-elementary-school-count", lastModified: "2026-08-11" },
+  { slug: "psychiatric-bed-count-vs-standard-fiscal-demand-municipality", lastModified: "2026-08-20" },
   { slug: "public-phone-count", lastModified: "2026-06-14" },
   { slug: "public-phone-count-gap", lastModified: "2026-06-07" },
   { slug: "public-phone-prefecture-vanishing", lastModified: "2026-03-29" },
