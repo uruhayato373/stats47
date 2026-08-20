@@ -135,7 +135,15 @@ jobs:
         continue-on-error: false
 
       - name: 📝 ESLint Check
-        run: npm run lint
+        # ★`npm run lint` (= turbo → `next lint`) を使わない。
+        #   `next lint` はパッケージマネージャを外部プロセスとして起動して registry を引くため、
+        #   GitHub runner に素で入っている yarn 1.22.22 を誤検出し
+        #   `Failed to get registry from "yarn"` で落ちる (2026-08-20 に develop ゲートで実測)。
+        #   ローカルは corepack が「このプロジェクトは npm」と拒否するため再現しない。
+        #   eslint を直接呼べば同じ設定・同じルールで外部プロセスに依存しない。
+        #   `--max-warnings` は付けない (既存 warning 2 件で常時赤になり無視されるゲートになる)。
+        run: npx eslint src
+        working-directory: apps/web
         continue-on-error: false # Lintエラーで失敗させる
 
       - name: 🎨 Design System Check
