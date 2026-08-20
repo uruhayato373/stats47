@@ -1,4 +1,10 @@
 # commit メッセージに CI skip トークンが紛れ込むのを止める。
 # 「引用のつもり」でも GitHub は拾い、push しても run が 1 本も作られない。
 # 意図的に skip する場合は本文に `ALLOW-SKIP-CI: <理由>` を書く。
+#
+# CI 上では検査しない: cron の commit-back はスキップトークンを**正当に**使う
+# (生成物のみの commit で全ワークフローを再発火させないため)。2026-08-20 時点では
+# husky が依存に無く CI で core.hooksPath も設定されないため実際には発火しないが、
+# 将来 husky を導入した時に cron を壊さないよう明示的に抜ける。
+[ -n "$CI" ] && exit 0
 node .claude/scripts/lib/check-commit-message.cjs "$1"
