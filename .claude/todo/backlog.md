@@ -763,13 +763,34 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
     - `git add -A` は使わない。各commitで上記グループの明示pathのみをstageする。
     - **push/PR/deployは別承認**。remote R2への81ファイルpushも同様に別承認 (§停止条件)。
   - **残作業 (要オーナー承認・本セッションでは実行しない)**:
-    1. `.local/r2/app/japan/` 配下81ファイルをremote R2へpush (`diff-push-r2.ts --prefix app/japan`)
-    2. push後、`/japan/education-culture`以外の16テーマ詳細で実データ描画をlocalhostで再確認
-    3. 上記commit計画に沿ってcommit → develop → PR → main → deploy
+    1. ~~`.local/r2/app/japan/` 配下81ファイルをremote R2へpush~~ → **完了 (2026-08-20)**
+    2. ~~push後、16テーマ詳細で実データ描画をlocalhostで再確認~~ → **完了 (2026-08-20)**
+    3. commit → develop → PR → main → deploy
     4. **WP6の未着手分**: occupation-salary(39指標)・ports(9指標)等の`unknown-no-audit-entry`
        255件はlive-audit対象外 (どのthemeのchartからも参照されないKPI専用metric)。今後の拡張には
        専用のlive audit拡張または個別fetch確認が要る。external/kakei-chousaソース9件は
        derivedレシピ審査が別途要る。CIでのLinux build確認。
+- **#1 R2 push 完了 (2026-08-20・オーナー承認済み)**: 81 metric を remote R2 へ反映した。
+  - **★`.local/` は環境をまたがない**: 前セッション (Windows機) が生成した81ファイルは
+    gitignore のため本作業ツリーに存在せず、**e-Stat から再生成が必要だった**。
+    「local artifact 生成済み」は生成した環境でのみ有効と読むこと。
+  - 再生成: `apps/web/.env.development` の公開ID (node子プロセスで読める) で
+    `generate-japan-series.ts --metric <key> --source-mode official` を81回。**OK=81 / FAIL=0**。
+  - 検証: 総2,677行・空rows 0件・非有限値 0件。dry-runで全件`[NEW]`・キーは`app/japan/`のみ・
+    既存キーの変更/削除 0件を確認してから apply (81/81成功・エラー0)。
+    公開URL実測 3件で HTTP 200・rows一致。
+  - **★zshの落とし穴**: `for k in $KEYS` は zsh では word-split されず1回しか回らない
+    (bashとの差)。全81キーが1つのmetric名として渡り「全件失敗」に見えた。
+    `while IFS= read -r` を使うこと。
+- **#2 実データ描画の確認 完了 (2026-08-20)**: 全17テーマで
+  ページ出力の `N 指標 (公式全国値)` とカタログ期待値を突合し **17/17 一致** (合計92 metric・全HTTP 200)。
+  - チャート実描画も確認: SVG path の点数がR2のrows数と一致、strokeは実色 `rgb(45,66,200)`、
+    軸・目盛り・データ点・出典表示が正常 (browser目視: `/japan/foreign-residents`)。
+  - **★検査で3回誤判定しかけた (今後のため)**: ①チャートは `ssr:false` の client component
+    なのでSSR HTMLに数値は出ない (HTMLを見て「データ無し」と誤判定しかけた) ②このプロジェクトは
+    rechartsではなく**自前SVG** (ライブラリ名で探して「未描画」と誤判定しかけた)
+    ③道路実延長は2005→2023で+3%とほぼ横ばいなので線が平坦 = データの形であり不具合ではない。
+    HTMLの`undefined`はNext.jsのRSC内部 (`"error":"$undefined"`) でデータ起因ではない。
 
 ### [MUNICIPALITY-SCOPE-SEPARATION-01] 市区町村テーマ・ランキングを独立した地理スコープへ分離する
 タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run docs:check] [起票:2026-08-20]
