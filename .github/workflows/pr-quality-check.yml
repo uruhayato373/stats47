@@ -315,6 +315,13 @@ jobs:
         run: |
           node .claude/scripts/lib/check-maintenance-debt.cjs --baseline
           node .claude/scripts/lib/check-maintenance-debt.cjs --ratchet-check
+          node --test .claude/scripts/lib/__tests__/check-maintenance-debt.test.cjs
+        continue-on-error: false
+
+      - name: 🚦 Preflight Aggregator Contract
+        # `npm run preflight` が「ゲートが落ちても exit 0」に退行しないことを固定する。
+        # 常に 0 を返す preflight は「ゲートが無い」より悪い (通ったと誤認させる)。
+        run: node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs
         continue-on-error: false
 
       - name: 🔢 Value Formatting Guard

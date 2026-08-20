@@ -51,7 +51,7 @@ PR を close→reopen しても同じ HEAD が読まれて発火しない** — 
 
 ## ルール
 
-- **feature/***: 機能ブランチ。develop から分岐し、ローカルで `git merge --no-ff feature/<name>` で develop に取り込む。マージ後は削除。PR は不要 (作っても良い、ただし CI は走らない)
+- **feature/***: 機能ブランチ。develop から分岐し、ローカルで `git merge --no-ff feature/<name>` で develop に取り込む。マージ後は削除。PR は不要 (作っても良いが、feature ブランチへの push では CI は走らない)。**develop に push した時点で `develop-quality-gate.yml` の高速 3 ゲートが走る** (下記)
 - **develop**: 統合ブランチ。feature/* からの直 merge を受ける。`git push origin develop` で remote に反映。**develop 直接 commit は推奨されないが禁止ではない** (短い chore は許容)
 - **main**: 本番デプロイブランチ。**develop → main の PR 経由でのみ更新**。`gh pr create --base main --head develop` で CI (`.github/workflows/pr-quality-check.yml`) を発火 → green を確認してマージ → Cloudflare Pages 自動デプロイ
 - main への直接コミット / push / force push は禁止
@@ -74,9 +74,38 @@ git push origin develop
 
 ## なぜ PR を develop → main にだけ置くか
 
-- `pr-quality-check.yml` の trigger は `pull_request: branches: [main]` のため、CI は **main PR でしか発火しない**
-- feature/* → develop の PR は self-merge + CI 無し → 価値がない (オーバーヘッドだけ)
+- `pr-quality-check.yml` (フル suite) の trigger は `pull_request: branches: [main]` のため、**フル CI は main PR でしか発火しない**
+- feature/* → develop の PR は self-merge → PR 自体を作る価値がない (オーバーヘッドだけ)
 - develop → main の PR を「本番デプロイの最終ゲート」に集約することで、CI green + 履歴境界 + ロールバック単位の 3 つを 1 箇所で確保
+
+## develop への push も高速ゲートを通る (★2026-08-20 新設)
+
+**「develop は完全に無検査」ではなくなった。** `develop-quality-gate.yml` が push ごとに
+ESLint / env registry / maintenance debt の 3 つだけを走らせる (実測 7 秒〜1 分)。
+
+なぜ足したか (実測): それ以前の develop は無検査だったため、pre-commit を通っていない変更が
+そのまま着地し、**壊れは「次に develop をマージする人」が払う**構造になっていた。
+2026-08-20 のマージでは `MetricFocusCharts.tsx:63` の ESLint 違反・未登録 env 4 件・
+maintenance debt 1 件が origin/develop に入ったまま残っており (commit `621131d6c`)、
+マージ担当が 3 サイクル・十数分を検査待ちに費やした。しかもマージ中は
+「自分が壊したのか継承したのか」の切り分けが毎回必要になる。
+
+- **ここに重い検査を足さない。** 「決定的か」「1 分以内か」を満たさないものは
+  `pr-quality-check.yml` 側に置く。develop への push が詰まると `--no-verify` を誘発し、
+  ゲートを足した意味が消える。
+- cron の commit-back は `[skip ci]` を持つので発火しない (意図どおり)。
+
+### commit 前に blocker を一度に洗い出す
+
+pre-commit は直列 all-or-nothing で 2 分超かかるため、blocker を 1 つずつ潰すと
+1 個につき 1 サイクル待つことになる。同じ 3 ゲートを**並列**で先に回す:
+
+```bash
+npm run preflight
+```
+
+pre-commit の代替ではない (型・docs・画像 pipeline の深い検査は含まない)。
+**通っても commit が通る保証はしないが、ここで落ちれば確実に落ちる。**
 
 ## デプロイ
 
