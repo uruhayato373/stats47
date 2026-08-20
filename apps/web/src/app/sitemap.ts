@@ -34,6 +34,7 @@ import {
   SITEMAP_SURVEY_IDS,
   SITEMAP_TAG_ENTRIES,
 } from "@/config/sitemap-blog-entries";
+import { SITEMAP_SEGMENTS, type SitemapSegment } from "@/config/sitemap-segments";
 
 import type { MetadataRoute } from "next";
 
@@ -57,21 +58,12 @@ const TYPE_A_THEME_SLUGS = ALL_THEMES
 // Sitemap Index 定義
 // ----------------------------------------------------------------------------
 
-const SEGMENTS = [
-  "static",
-  "themes",
-  "areas",
-  "ranking",
-  "blog",
-  "categories",
-  "surveys",
-  "tags",
-  "cities",
-  // GEO-SCOPE-SEPARATION-01 WP5: 既存 segment の id (配列 index) を変えないため末尾に追記する。
-  "japan",
-] as const;
+// ★定義は `@/config/sitemap-segments` が単一ソース。index (`app/sitemap.xml/route.ts`)
+// も同じものを読む。以前は index 側が件数をハードコードしており、cities / japan が
+// 2 か月以上 index から漏れていた (2026-08-20 実測)。
+const SEGMENTS = SITEMAP_SEGMENTS;
 
-type Segment = (typeof SEGMENTS)[number];
+type Segment = SitemapSegment;
 
 export async function generateSitemaps(): Promise<{ id: number }[]> {
   return SEGMENTS.map((_, id) => ({ id }));
