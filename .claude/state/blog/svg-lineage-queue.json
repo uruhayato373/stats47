@@ -1,13 +1,13 @@
 {
-  "total": 1080,
+  "total": 1089,
   "byStatus": {
-    "both": 974,
+    "both": 983,
     "jsonOnly": 0,
     "neither": 106
   },
   "byMethod": {
     "manual": 43,
-    "done": 974,
+    "done": 983,
     "ssot-restore": 26,
     "ssot-restore-new": 37
   },
@@ -547,6 +547,60 @@
       "slug": "brazilian-resident-population-prefecture-gap",
       "base": "brazilian-resident-population-prefecture-gap-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-final-education-university",
+      "base": "bread-consumption-expenditure-vs-final-education-university-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-final-education-university",
+      "base": "final-education-university-graduate-school-ratio-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-final-education-university",
+      "base": "bread-consumption-expenditure--final-education-university-graduate-school-ratio-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-high-school-advancement",
+      "base": "bread-consumption-expenditure-vs-high-school-advancement-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-high-school-advancement",
+      "base": "high-school-advancement-rate-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "bread-consumption-expenditure-vs-high-school-advancement",
+      "base": "bread-consumption-expenditure--high-school-advancement-rate-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -7008,6 +7062,33 @@
     {
       "slug": "psychiatric-bed-count-vs-elementary-school-count",
       "base": "psychiatric-bed-count--elementary-school-count-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
+      "base": "psychiatric-bed-count-vs-standard-fiscal-demand-municipality-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
+      "base": "standard-fiscal-demand-municipality-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
+      "base": "psychiatric-bed-count--standard-fiscal-demand-municipality-scatter",
       "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
