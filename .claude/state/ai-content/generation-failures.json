@@ -1,4 +1,29 @@
 {
   "version": 1,
-  "keys": {}
+  "keys": {
+    "average-height-primary-school-fifth-grade-male": {
+      "failCount": 1,
+      "lastReason": "agent-record-missing:ranking-content-author",
+      "lastFailedAt": "2026-08-20",
+      "firstFailedAt": "2026-08-20"
+    },
+    "miscellaneous-school-count": {
+      "failCount": 1,
+      "lastReason": "agent-record-missing:ranking-content-author",
+      "lastFailedAt": "2026-08-20",
+      "firstFailedAt": "2026-08-20"
+    },
+    "pear-consumption-expenditure": {
+      "failCount": 1,
+      "lastReason": "agent-record-missing:ranking-content-author",
+      "lastFailedAt": "2026-08-20",
+      "firstFailedAt": "2026-08-20"
+    },
+    "consumer-price-difference-index-utilities": {
+      "failCount": 1,
+      "lastReason": "agent-record-missing:ranking-content-author",
+      "lastFailedAt": "2026-08-20",
+      "firstFailedAt": "2026-08-20"
+    }
+  }
 }
