@@ -76,6 +76,22 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
         metricKey: "household-ratio-with-65plus",
         shortLabel: "65歳以上の世帯員のいる世帯割合",
       },
+      {
+        metricKey: "average-age-of-first-marriage-wife",
+        shortLabel: "平均初婚年齢（妻）",
+      },
+      {
+        metricKey: "population-growth-rate",
+        shortLabel: "人口増減率",
+      },
+      {
+        metricKey: "natural-increase-rate",
+        shortLabel: "自然増減率",
+      },
+      {
+        metricKey: "social-increase-rate",
+        shortLabel: "社会増減率",
+      },
     ],
   },
   "fishery-marine": {
@@ -95,6 +111,18 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       },
       { metricKey: "marine-fishery-output-value", shortLabel: "海面漁業産出額" },
       { metricKey: "fishery-workers", shortLabel: "漁業就業者数" },
+      {
+        metricKey: "inland-fishery-catch",
+        shortLabel: "内水面漁業漁獲量",
+      },
+      {
+        metricKey: "aquaculture-harvest",
+        shortLabel: "養殖収獲量",
+      },
+      {
+        metricKey: "fishery-output-value",
+        shortLabel: "漁業産出額",
+      },
     ],
   },
   "foreign-residents": {
@@ -118,6 +146,26 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
         shortLabel: "韓国・朝鮮籍人口（人口10万人当たり）",
       },
       { metricKey: "total-overnight-guests-foreign", shortLabel: "外国人延べ宿泊者数" },
+      {
+        metricKey: "resident-foreigner-population",
+        shortLabel: "在留外国人数",
+      },
+      {
+        metricKey: "foreign-resident-count-china",
+        shortLabel: "外国人人口（中国籍）",
+      },
+      {
+        metricKey: "foreign-resident-count-korea",
+        shortLabel: "外国人人口（韓国・朝鮮籍）",
+      },
+      {
+        metricKey: "foreign-resident-count-usa-per-100k",
+        shortLabel: "外国人人口（米国籍（10万人当たり））",
+      },
+      {
+        metricKey: "foreign-resident-count-usa",
+        shortLabel: "外国人人口（米国籍）",
+      },
     ],
   },
   healthcare: {
@@ -143,6 +191,30 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       { metricKey: "deaths-diabetes-per-100k", shortLabel: "糖尿病による死亡者数" },
       // ★health-checkup-rate-lifestyle-diseases は意図的に除外 (2017年以降 全国値 0%。
       //   .claude/todo/backlog.md [HEALTH-CHECKUP-RATE-RETIRE-01])。
+      {
+        metricKey: "nurses-in-medical-facilities-per-100k",
+        shortLabel: "看護師・准看護師数",
+      },
+      {
+        metricKey: "general-hospital-bed-count-per-100k",
+        shortLabel: "一般病院病床数",
+      },
+      {
+        metricKey: "pharmacy-count-per-100k",
+        shortLabel: "人口10万人あたり薬局数",
+      },
+      {
+        metricKey: "general-hospital-avg-length-of-stay",
+        shortLabel: "一般病院平均在院日数",
+      },
+      {
+        metricKey: "general-hospital-bed-occupancy-rate",
+        shortLabel: "一般病院病床利用率",
+      },
+      {
+        metricKey: "psychiatric-hospital-count-per-100k",
+        shortLabel: "精神科病院数",
+      },
     ],
   },
   "labor-mobility": {
@@ -157,6 +229,10 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       { metricKey: "active-job-opening-ratio", shortLabel: "有効求人倍率" },
       { metricKey: "unemployment-rate", shortLabel: "完全失業率" },
       { metricKey: "employment-rate", shortLabel: "就職率" },
+      {
+        metricKey: "monthly-average-actual-working-hours-male",
+        shortLabel: "月間平均実労働時間数",
+      },
     ],
   },
   "labor-wages": {
@@ -171,6 +247,34 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       { metricKey: "unemployment-rate", shortLabel: "完全失業率" },
       { metricKey: "employment-rate", shortLabel: "就職率" },
       { metricKey: "turnover-rate", shortLabel: "離職率" },
+      {
+        metricKey: "starting-salary-university",
+        shortLabel: "大卒初任給",
+      },
+      {
+        metricKey: "starting-salary-highschool",
+        shortLabel: "高卒初任給",
+      },
+      {
+        metricKey: "scheduled-salary-male",
+        shortLabel: "所定内給与額（男）",
+      },
+      {
+        metricKey: "male-part-time-hourly-wage",
+        shortLabel: "男性パートタイムの給与",
+      },
+      {
+        metricKey: "female-part-time-hourly-wage",
+        shortLabel: "女性パートタイムの給与",
+      },
+      {
+        metricKey: "employed-people-ratio",
+        shortLabel: "就業者比率",
+      },
+      {
+        metricKey: "monthly-average-actual-working-hours-male",
+        shortLabel: "月間平均実労働時間数",
+      },
     ],
   },
   "living-housing": {
@@ -194,6 +298,22 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       { metricKey: "ratio-never-married-15-plus", shortLabel: "未婚者割合" },
       { metricKey: "marriages", shortLabel: "婚姻件数" },
       { metricKey: "divorces", shortLabel: "離婚件数" },
+      {
+        metricKey: "households",
+        shortLabel: "世帯数",
+      },
+      {
+        metricKey: "population-density-per-km2-inhabitable-area",
+        shortLabel: "可住地面積１km2当たり人口密度",
+      },
+      {
+        metricKey: "habitable-area-ratio",
+        shortLabel: "可住地面積割合",
+      },
+      {
+        metricKey: "densely-inhabited-district-population-density",
+        shortLabel: "人口集中地区人口密度",
+      },
     ],
   },
   "local-economy": {
@@ -207,6 +327,10 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       { metricKey: "minimum-wage-by-region", shortLabel: "地域別最低賃金" },
       { metricKey: "active-job-opening-ratio", shortLabel: "有効求人倍率" },
       { metricKey: "unemployment-rate", shortLabel: "完全失業率" },
+      {
+        metricKey: "per-capita-prefectural-income-h27",
+        shortLabel: "1人当たり県民所得",
+      },
     ],
   },
   "local-finance": {
@@ -239,6 +363,14 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       },
       { metricKey: "per-taxpayer-taxable-income", shortLabel: "課税対象所得（納税義務者1人当たり）" },
       { metricKey: "taxpayer-ratio-per-pref-resident", shortLabel: "納税義務者割合" },
+      {
+        metricKey: "real-balance-ratio",
+        shortLabel: "実質収支比率",
+      },
+      {
+        metricKey: "self-financing-ratio",
+        shortLabel: "自主財源の割合",
+      },
     ],
   },
   manufacturing: {
@@ -260,6 +392,18 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
         metricKey: "manufacturing-shipment-amount-per-establishment",
         shortLabel: "製造品出荷額（事業所当たり）",
       },
+      {
+        metricKey: "manufacturing-establishment-site-area",
+        shortLabel: "製造業事業所敷地面積",
+      },
+      {
+        metricKey: "industrial-land-price-change-rate",
+        shortLabel: "標準価格変動率（工業地）",
+      },
+      {
+        metricKey: "industrial-water-usage",
+        shortLabel: "工業用水量",
+      },
     ],
   },
   "population-dynamics": {
@@ -272,6 +416,26 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       { metricKey: "total-population", shortLabel: "総人口" },
       { metricKey: "ratio-65-plus", shortLabel: "65歳以上人口割合" },
       { metricKey: "young-population-ratio", shortLabel: "15歳未満人口割合" },
+      {
+        metricKey: "population-growth-rate",
+        shortLabel: "人口増減率",
+      },
+      {
+        metricKey: "natural-increase-rate",
+        shortLabel: "自然増減率",
+      },
+      {
+        metricKey: "social-increase-rate",
+        shortLabel: "社会増減率",
+      },
+      {
+        metricKey: "population-density-per-km2-inhabitable-area",
+        shortLabel: "可住地面積１km2当たり人口密度",
+      },
+      {
+        metricKey: "day-time-population-ratio",
+        shortLabel: "昼夜間人口比率",
+      },
     ],
   },
   railway: {
@@ -300,6 +464,14 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       {
         metricKey: "actual-income-worker-households-per-month",
         shortLabel: "実収入（勤労者世帯・月額）",
+      },
+      {
+        metricKey: "per-capita-prefectural-income-h27",
+        shortLabel: "1人当たり県民所得",
+      },
+      {
+        metricKey: "annual-income-per-household",
+        shortLabel: "年間収入",
       },
     ],
   },
@@ -336,6 +508,58 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
         metricKey: "accidental-deaths-per-100k",
         shortLabel: "不慮の事故による死亡者数（人口10万人当たり）",
       },
+      {
+        metricKey: "criminal-recognition-count",
+        shortLabel: "刑法犯認知件数",
+      },
+      {
+        metricKey: "theft-offenses-recognized-per-1000",
+        shortLabel: "窃盗犯認知件数",
+      },
+      {
+        metricKey: "theft-criminal-arrest-rate",
+        shortLabel: "窃盗犯検挙率",
+      },
+      {
+        metricKey: "juvenile-criminal-arrest-person-per-population",
+        shortLabel: "少年刑法犯検挙人員",
+      },
+      {
+        metricKey: "drug-enforcement-arrest-count-per-population",
+        shortLabel: "覚醒剤取締検挙件数",
+      },
+      {
+        metricKey: "traffic-accident-deaths-per-100k",
+        shortLabel: "交通事故死者数（人口10万人当たり）",
+      },
+      {
+        metricKey: "traffic-accident-count-per-population",
+        shortLabel: "交通事故発生件数",
+      },
+      {
+        metricKey: "traffic-accident-deaths-per-100-accidents",
+        shortLabel: "交通事故死者数（事故100件当たり）",
+      },
+      {
+        metricKey: "traffic-accident-injuries-per-100k",
+        shortLabel: "交通事故負傷者数",
+      },
+      {
+        metricKey: "traffic-accident-casualties-elderly-65plus",
+        shortLabel: "交通事故死傷者数（高齢者）",
+      },
+      {
+        metricKey: "fire-damage-casualties-per-population",
+        shortLabel: "火災死傷者数",
+      },
+      {
+        metricKey: "disaster-damage-amount-per-person",
+        shortLabel: "災害被害額",
+      },
+      {
+        metricKey: "police-officer-count-per-population",
+        shortLabel: "警察官数",
+      },
     ],
   },
   tourism: {
@@ -349,6 +573,30 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       { metricKey: "total-overnight-guests-foreign", shortLabel: "外国人延べ宿泊者数" },
       { metricKey: "air-passenger-transport", shortLabel: "航空輸送人員" },
       { metricKey: "jr-passenger-transport", shortLabel: "JR輸送人員" },
+      {
+        metricKey: "room-utilization-rate",
+        shortLabel: "客室稼働率",
+      },
+      {
+        metricKey: "travel-participation-rate-domestic-tourism",
+        shortLabel: "国内観光旅行の行動者率",
+      },
+      {
+        metricKey: "travel-participation-rate-overseas",
+        shortLabel: "海外観光旅行の行動者率",
+      },
+      {
+        metricKey: "travel-participation-rate-overnight",
+        shortLabel: "旅行（1泊2日以上）の行動者率",
+      },
+      {
+        metricKey: "travel-participation-rate-day-trip",
+        shortLabel: "行楽（日帰り）の行動者率",
+      },
+      {
+        metricKey: "number-of-simple-lodging-facilities",
+        shortLabel: "簡易宿所営業施設数",
+      },
     ],
   },
   roads: {
@@ -363,6 +611,51 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
         shortLabel: "道路実延長（高速道路を含む）",
       },
       { metricKey: "road-expressway-length", shortLabel: "高速道路実延長" },
+      {
+        metricKey: "road-total-length",
+        shortLabel: "道路実延長（合計（高速道路を除く））",
+      },
+      {
+        metricKey: "road-national-route-length",
+        shortLabel: "道路実延長（一般国道）",
+      },
+      {
+        metricKey: "road-prefectural-route-length",
+        shortLabel: "道路実延長（主要地方道）",
+      },
+      {
+        metricKey: "road-municipal-length",
+        shortLabel: "道路実延長（市町村道）",
+      },
+      {
+        metricKey: "road-length-per-km2",
+        shortLabel: "道路実延長（面積当たり）",
+      },
+      {
+        metricKey: "main-road-paving-rate",
+        shortLabel: "主要道路舗装率",
+      },
+      {
+        metricKey: "average-road-traffic-volume",
+        shortLabel: "道路平均交通量",
+      },
+    ],
+  },
+  ports: {
+    themeSlug: "ports",
+    title: "港湾",
+    description:
+      "海上出入貨物・旅客船輸送人員など、港湾に関する日本全国の統計を時系列で確認できます。",
+    keywords: ["日本", "全国", "港湾", "海上輸送", "貨物", "旅客船"],
+    metrics: [
+      {
+        metricKey: "maritime-import-export-cargo",
+        shortLabel: "海上出入貨物",
+      },
+      {
+        metricKey: "passenger-ship-transport",
+        shortLabel: "旅客船輸送人員",
+      },
     ],
   },
 };
