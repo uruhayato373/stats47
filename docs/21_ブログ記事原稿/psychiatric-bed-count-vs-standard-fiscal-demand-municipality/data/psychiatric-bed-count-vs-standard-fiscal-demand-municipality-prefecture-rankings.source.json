@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "psychiatric-bed-count",
+  "year": "2023",
+  "unit": "床",
+  "label": "精神病床数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/psychiatric-bed-count/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug psychiatric-bed-count-vs-standard-fiscal-demand-municipality --keys psychiatric-bed-count --data-name psychiatric-bed-count-vs-standard-fiscal-demand-municipality-prefecture-rankings",
+  "fetchedAt": "2026-08-20T14:37:50.608Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
