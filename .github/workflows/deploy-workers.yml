@@ -281,6 +281,14 @@ jobs:
           sleep 5
           bash .github/scripts/smoke-test-routes.sh https://stats47.jp
 
+      # sitemap index が全 shard を列挙しているかを検査する。
+      # ★smoke test では原理的に検知できない欠落を拾う: 各 shard 自体は 200 で正しい
+      # 内容を返すのに、index に載っていなければ Google へ提出されない。
+      # 2026-08-20: cities (1,080 URL) が 2 か月・japan (19 URL) が新設直後から未提出
+      # だったのを、index の件数ハードコードとして発見した (どの監視も緑のままだった)。
+      - name: 🗺️ Sitemap index の整合性
+        run: bash .github/scripts/check-sitemap-index.sh https://stats47.jp
+
       # commit message に施策 ID (EXP-NNN / T0-T3-XXX-NN) があれば improvement-log に stub を追記。
       # 詳細: .claude/scripts/lib/append-improvement-log.mjs / .claude/rules/evidence-based-judgment.md
       - name: 📝 Append improvement-log stub
