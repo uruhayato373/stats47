@@ -24,9 +24,10 @@ name: 🚦 Develop Quality Gate
 # ★cron の commit-back はほぼすべて `[skip ci]` を持つので発火しない。
 #   2026-08-20 時点の例外は `gsc-url-inspection-daily.yml` の 1 本だけで、これは
 #   `.claude/state/metrics/gsc/url-inspection/` の CSV/MD しか触らないため緑で通る。
-#   **`paths-ignore` で state を除外しない**: 3 ゲートは変更差分ではなくリポジトリ全体を
-#   走査するので、除外するとその run 分の検査が丸ごと消えて穴になる (state の .json/.md も
-#   maintenance-debt の走査対象)。1 日 1 回の余分な run より穴のほうが高くつく。
+#   **`paths-ignore` で state を除外しない**: 実測すると 3 ゲートはいずれも `.claude/state` を
+#   読まない (maintenance-debt は `state` を EXCLUDED に持ち、env-registry の roots にも無く、
+#   eslint は apps/web/src のみ) ので除外しても今は安全。それでも足さないのは、将来 state を
+#   読むゲートを足したときに除外が黙って穴になるから。1 日 1 回の余分な run のほうが安い。
 # ─────────────────────────────────────────────────────────────────────────────
 
 on:

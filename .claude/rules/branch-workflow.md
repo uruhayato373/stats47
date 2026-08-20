@@ -119,8 +119,11 @@ maintenance debt 1 件が origin/develop に入ったまま残っており (comm
   ゲートを足した意味が消える。
 - cron の commit-back はほぼすべて `[skip ci]` を持つので発火しない (実測: 23 本中 22 本)。
   例外は `gsc-url-inspection-daily.yml` の 1 本だけで、state の CSV/MD しか触らないため緑で通る。
-- **`paths-ignore` で state を除外しない。** 3 ゲートは変更差分ではなく**リポジトリ全体**を
-  走査するので、除外するとその run 分の検査が丸ごと消えて穴になる。
+- **`paths-ignore` で state を除外しない。** 実測すると 3 ゲートはいずれも
+  `.claude/state` を読まない (maintenance-debt は `state` を EXCLUDED に持ち、env-registry の
+  roots にも無く、eslint は `apps/web/src` のみ) ので、**除外しても今は安全**。
+  それでも足さないのは、将来 state を読むゲートを足したときに**除外が黙って穴になる**から。
+  1 日 1 回の余分な run のほうが安い。
 
 ### commit 前に blocker を一度に洗い出す
 
