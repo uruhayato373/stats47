@@ -15,6 +15,7 @@ import { ok } from "@stats47/types";
 import { describe, it, expect, vi } from "vitest";
 
 import { SITEMAP_BLOG_ENTRIES, SITEMAP_SURVEY_IDS, SITEMAP_TAG_ENTRIES } from "@/config/sitemap-blog-entries";
+import { SITEMAP_SEGMENTS } from "@/config/sitemap-segments";
 
 import sitemap from "../sitemap";
 
@@ -32,8 +33,19 @@ vi.mock("@/features/blog/server", () => ({
   listAllTagsWithCount: vi.fn(async () => []),
 }));
 
-/** SEGMENTS の並び順 (sitemap.ts の定義と一致させる。順序変更は URL 変更なので固定) */
-const SEGMENT_ID = { blog: 4, categories: 5, surveys: 6, tags: 7 } as const;
+/**
+ * segment → shard id。**手写ししない**。
+ * 単一ソース `@/config/sitemap-segments` の index から導出する
+ * (2026-08-20: index 側の件数ハードコードで cities/japan が 2 か月漏れた再発防止)。
+ */
+const idOf = (name: (typeof SITEMAP_SEGMENTS)[number]): number =>
+  SITEMAP_SEGMENTS.indexOf(name);
+const SEGMENT_ID = {
+  blog: idOf("blog"),
+  categories: idOf("categories"),
+  surveys: idOf("surveys"),
+  tags: idOf("tags"),
+} as const;
 
 describe("sitemap ビルド時フォールバック (R2 が空でも空にしない)", () => {
   it("blog: 公開記事が全件出る (/blog + 記事)", async () => {

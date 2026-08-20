@@ -5,7 +5,8 @@
  * /sitemap/<id>.xml を生成するように変更したため、Google が探す
  * /sitemap.xml を sitemap index として明示的に提供する route handler。
  *
- * SEGMENTS の数・順序は app/sitemap.ts の SEGMENTS と完全一致させる。
+ * SEGMENTS の数・順序は `@/config/sitemap-segments` が単一ソース。
+ * 手写しせず import する (2026-08-20: ハードコードで cities/japan が index から漏れた)。
  */
 
 import { NextResponse } from "next/server";
