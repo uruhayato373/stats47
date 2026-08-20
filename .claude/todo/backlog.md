@@ -762,14 +762,33 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
     5. **SEO-release**: 本バックログの更新自体 (`.claude/todo/backlog.md`)
     - `git add -A` は使わない。各commitで上記グループの明示pathのみをstageする。
     - **push/PR/deployは別承認**。remote R2への81ファイルpushも同様に別承認 (§停止条件)。
-  - **残作業 (要オーナー承認・本セッションでは実行しない)**:
-    1. ~~`.local/r2/app/japan/` 配下81ファイルをremote R2へpush~~ → **完了 (2026-08-20)**
-    2. ~~push後、16テーマ詳細で実データ描画をlocalhostで再確認~~ → **完了 (2026-08-20)**
-    3. commit → develop → PR → main → deploy
-    4. **WP6の未着手分**: occupation-salary(39指標)・ports(9指標)等の`unknown-no-audit-entry`
-       255件はlive-audit対象外 (どのthemeのchartからも参照されないKPI専用metric)。今後の拡張には
-       専用のlive audit拡張または個別fetch確認が要る。external/kakei-chousaソース9件は
-       derivedレシピ審査が別途要る。CIでのLinux build確認。
+  - **残作業**: 1〜3 は完了 (下記)。**残るのは 4 の一部のみ**。
+    1. ~~R2 push~~ → **完了 (2026-08-20)**
+    2. ~~実データ描画の再確認~~ → **完了 (2026-08-20)**
+    3. ~~commit → develop → PR → main → deploy~~ → **完了 (2026-08-20・PR #808 / #809)**
+    4. **WP6 の未着手分 (残)**: `unknown-no-audit-entry` 142件のうち **71件は 2026-08-20 に採用済**
+       (下記 WP6 拡張note)。**残るのは verified-unsupported 71件と `unknown-non-estat` 9件**。
+       前者は e-Stat 側に有効な全国値が無い (プレースホルダ `'‐'` 等) ので採用不可。
+       後者 (external/kakei-chousa ソース) は derived レシピ審査が別途要る。
+       未採用テーマは `consumer-prices` / `occupation-salary` の 2 件。
+- **WP6 拡張 完了 (2026-08-20・PR #809)**: `/japan` を **17テーマ・81指標 → 18テーマ・146指標** へ拡張した。
+  - **発見**: `unknown-no-audit-entry` 142件は「全国値が無い」のではなく
+    **どのテーマの chart からも参照されないため live-audit の対象外だった**だけだった。
+    候補へ昇格して実 e-Stat fetch + `buildJapanSeriesRows` で値レベル照合したところ
+    **verified-official 71 / verified-unsupported 71 / fetch-error 0** で、半数に公式全国値があった。
+    全文: `.claude/state/geo-scope/wp6-expansion-verification.json`。
+  - 新規テーマ `ports` (海上出入貨物・旅客船輸送人員)。`KNOWN_JAPAN_SLUGS` と sitemap は
+    catalog から動的導出するため自動追従する (別ファイルの再生成は不要)。
+  - artifact 新規65件を生成・push (65/65成功・既存81件は無変更)。146件で総4,501行・空0・非有限値0。
+  - **★shortLabel 衝突のバグを作って直した**: title 末尾の括弧を機械的に削ったため
+    4指標がすべて「道路実延長」という同一ラベルになった。さらに元の title 自体が同一の組も
+    あった (`foreign-resident-count-china`/`-korea` が両方「外国人人口」)。
+    **title は削らず、テーマ内で衝突する場合だけ subtitle を併記**する方式に修正 (8件該当)。
+  - **★同名テストファイルの取りこぼし**: 事前検証で `apps/web/src/__tests__/url-policy.test.ts` を
+    実行したが、実際のガードは `apps/web/src/lib/__tests__/url-policy.test.ts` にあり CI で落ちた
+    (ports 採用で「未採用テーマの実例」が古くなった)。**grep で1件見つけて満足せず全件実行する**。
+    japan を参照するテストは6ファイル・42件。
+
 - **#1 R2 push 完了 (2026-08-20・オーナー承認済み)**: 81 metric を remote R2 へ反映した。
   - **★`.local/` は環境をまたがない**: 前セッション (Windows機) が生成した81ファイルは
     gitignore のため本作業ツリーに存在せず、**e-Stat から再生成が必要だった**。
