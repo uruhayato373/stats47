@@ -49,6 +49,24 @@ PR を close→reopen しても同じ HEAD が読まれて発火しない** — 
 トークンに言及するときは件名を避け、本文でもバッククォートではなく `skip-ci` のような
 別表記にする (バッククォートは GitHub のスキャナに対して無力)。
 
+**★2026-08-20 に同じ事故が 2 回目。機械で止めるようにした。**
+この節を**読んだ直後の** commit で件名にトークンを引用し、push した 6 commit に対して
+run が 0 件になった。2 回とも「トークンを話題にする commit」で起きており、
+**文章で注意を促すだけでは防げない**ことが実測で分かった。
+
+`.husky/commit-msg` → `.claude/scripts/lib/check-commit-message.cjs` が
+`[skip ci]` / `[ci skip]` / `[no ci]` / `[skip actions]` / `***NO_CI***` と
+その表記ゆれ (アンダースコア・ハイフン・大小文字) を拒否する。
+
+意図的に skip したいときは `--no-verify` ではなく本文に理由を宣言する:
+
+```
+ALLOW-SKIP-CI: 生成物のみで検査対象の変更が無いため
+```
+
+grep で追える監査可能な逃げ道で、うっかりでは書けない (理由が空だと通らない)。
+CI 自身の commit-back はローカルフックを通らないので影響を受けない。
+
 ## ルール
 
 - **feature/***: 機能ブランチ。develop から分岐し、ローカルで `git merge --no-ff feature/<name>` で develop に取り込む。マージ後は削除。PR は不要 (作っても良いが、feature ブランチへの push では CI は走らない)。**develop に push した時点で `develop-quality-gate.yml` の高速 3 ゲートが走る** (下記)

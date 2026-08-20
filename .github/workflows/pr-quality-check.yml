@@ -324,6 +324,13 @@ jobs:
         run: node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs
         continue-on-error: false
 
+      - name: 🛑 Commit Message Skip-Token Guard
+        # commit メッセージの CI skip トークンを弾く commit-msg フックの検出力を固定する。
+        # 同じ事故が 2026-08-05 と 2026-08-20 に発生 (どちらもトークンを話題にする commit)。
+        # run が 1 本も作られないため「成功」と区別がつかないのが最も危険。
+        run: node --test .claude/scripts/lib/__tests__/check-commit-message.test.cjs
+        continue-on-error: false
+
       - name: 🔢 Value Formatting Guard
         # 観測値の桁揃えが共有規約 (@stats47/utils の resolveValuePrecision +
         # formatValueWithPrecision) を迂回していないかを検査する。max 単独指定・素の

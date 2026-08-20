@@ -1,0 +1,4 @@
+# commit メッセージに CI skip トークンが紛れ込むのを止める。
+# 「引用のつもり」でも GitHub は拾い、push しても run が 1 本も作られない。
+# 意図的に skip する場合は本文に `ALLOW-SKIP-CI: <理由>` を書く。
+node .claude/scripts/lib/check-commit-message.cjs "$1"
