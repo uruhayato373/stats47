@@ -26,7 +26,7 @@ const LineChartClient = dynamic(
 interface Props {
   /** 選択中の metric (rankingKey) */
   metricKey: string;
-  /** 選択中の都道府県 code (null なら全国 '00000') */
+  /** 選択中の都道府県 code (null = 47都道府県・未選択。e-Stat の '00000' ではない) */
   selectedPrefectureCode: string | null;
   /** 選択 metric の RankingItem (タイトル・単位) */
   rankingItem: RankingItem | undefined;
@@ -36,8 +36,11 @@ interface Props {
 
 /**
  * 選択中の metric に対する 個別チャート群:
- *  - (A) 時系列 line: 全国 or 選択都道府県の推移
- *  - (B) 上下位 5 県 bar: 現在年度のランキング極値
+ *  - (A) 時系列 line: 選択都道府県の推移 (未選択時は fetch せず選択案内を出す)
+ *  - (B) 上下位 5 県 bar: 現在年度のランキング極値 (未選択時も常に表示。ranking を主役にする)
+ *
+ * ★GEO-SCOPE-SEPARATION-01 WP2: 47都道府県 (未選択) では「全国」の時系列を代わりに
+ * 見せない。県を選ぶまでは (B) の上下位ランキングだけが情報源になる。
  *
  * Phase 3 で pie / breakdown を追加予定。
  */
@@ -50,23 +53,28 @@ export function MetricFocusCharts({
   const [timeseries, setTimeseries] = useState<MetricTimeseriesPoint[]>([]);
   const [isPending, startTransition] = useTransition();
 
-  const areaCode = selectedPrefectureCode ?? "00000";
   const areaName = useMemo(() => {
-    if (!selectedPrefectureCode) return "全国";
+    if (!selectedPrefectureCode) return null;
     return lookupArea(selectedPrefectureCode)?.areaName ?? "選択地域";
   }, [selectedPrefectureCode]);
 
   useEffect(() => {
-    if (!metricKey) return;
+    if (!metricKey || !selectedPrefectureCode) {
+      setTimeseries([]);
+      return;
+    }
     let cancelled = false;
     startTransition(async () => {
-      const { points } = await fetchMetricTimeseriesAction(metricKey, areaCode);
+      const { points } = await fetchMetricTimeseriesAction(
+        metricKey,
+        selectedPrefectureCode,
+      );
       if (!cancelled) setTimeseries(points);
     });
     return () => {
       cancelled = true;
     };
-  }, [metricKey, areaCode]);
+  }, [metricKey, selectedPrefectureCode]);
 
   // LineChartData に変換
   const lineChartData: LineChartData | null = useMemo(() => {
@@ -125,19 +133,25 @@ export function MetricFocusCharts({
       description={
         <div className="flex items-center gap-1">
           <MapPin className="h-3 w-3" />
-          <span>{areaName} の時系列推移</span>
-          {!selectedPrefectureCode && (
-            <span className="ml-1">(地図で都道府県を選択すると切り替わります)</span>
+          {areaName ? (
+            <span>{areaName} の時系列推移</span>
+          ) : (
+            <span>地図で都道府県を選択すると、その県の時系列推移が表示されます</span>
           )}
         </div>
       }
     >
-      {/* (A) 時系列ライン */}
+      {/* (A) 時系列ライン (47都道府県・未選択のときは fetch せず案内を出す) */}
       <section>
         <h3 className="text-xs font-medium text-muted-foreground mb-2 flex items-center gap-1">
           <TrendingUp className="h-3 w-3" /> 時系列推移
         </h3>
-        {isPending ? (
+        {!selectedPrefectureCode ? (
+          <ChartEmptyState
+            message="都道府県を選択すると、その県の推移が表示されます"
+            height={120}
+          />
+        ) : isPending ? (
           <ChartLoading height={250} />
         ) : lineChartData ? (
           <LineChartClient chartData={lineChartData} />

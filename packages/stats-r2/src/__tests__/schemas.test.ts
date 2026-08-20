@@ -2,6 +2,7 @@ import { buildRecipe } from "@stats47/data-configs";
 import { describe, expect, it } from "vitest";
 
 import {
+  parseJapanSeriesArtifact,
   parseMigrationFlowPayload,
   parseStatsValuesPayload,
 } from "../schemas";
@@ -143,5 +144,73 @@ describe("parseMigrationFlowPayload", () => {
         rows: [{ ...migrationPayload.rows[0], inflow: "100" }],
       }),
     ).toThrow("rows[0].inflow must be a finite number");
+  });
+});
+
+describe("parseJapanSeriesArtifact (GEO-SCOPE-SEPARATION-01 WP3)", () => {
+  const japanArtifact = {
+    schemaVersion: 1,
+    metricKey: "library-count-per-million",
+    geographyScope: "japan",
+    sourceMode: "official",
+    rows: [
+      { yearCode: "2020", yearName: "2020年", value: 15.31, unit: "校" },
+      { yearCode: "2021", yearName: "2021年", value: 15.2, unit: "校" },
+    ],
+    meta: {
+      generatedAt: "2026-08-20T00:00:00.000Z",
+      configHash: "abc123",
+      recipeHash: "def456",
+      sourceId: "0000010205",
+    },
+  };
+
+  it("valid japan series artifact を parse できる", () => {
+    const result = parseJapanSeriesArtifact(japanArtifact);
+    expect(result.metricKey).toBe("library-count-per-million");
+    expect(result.sourceMode).toBe("official");
+    expect(result.rows).toHaveLength(2);
+  });
+
+  it("rank・areaCode を持たない (47都道府県のフィールドを混入させない)", () => {
+    const result = parseJapanSeriesArtifact(japanArtifact);
+    expect(result.rows[0]).not.toHaveProperty("rank");
+    expect(result.rows[0]).not.toHaveProperty("areaCode");
+  });
+
+  it("schemaVersion が 1 でない場合は拒否する", () => {
+    expect(() =>
+      parseJapanSeriesArtifact({ ...japanArtifact, schemaVersion: 2 }),
+    ).toThrow("schemaVersion must be 1");
+  });
+
+  it("geographyScope が 'japan' でない場合は拒否する", () => {
+    expect(() =>
+      parseJapanSeriesArtifact({ ...japanArtifact, geographyScope: "prefecture" }),
+    ).toThrow("geographyScope must be 'japan'");
+  });
+
+  it("sourceMode が未知の値なら拒否する ('average' や '47-pref-mean' 等を通さない)", () => {
+    expect(() =>
+      parseJapanSeriesArtifact({ ...japanArtifact, sourceMode: "average" }),
+    ).toThrow("sourceMode must be one of");
+  });
+
+  it("row の value が非有限数なら拒否する (0 埋め・プレースホルダを通さない)", () => {
+    expect(() =>
+      parseJapanSeriesArtifact({
+        ...japanArtifact,
+        rows: [{ ...japanArtifact.rows[0], value: Number.NaN }],
+      }),
+    ).toThrow("rows[0].value must be a finite number");
+  });
+
+  it("meta の必須フィールドが欠けていれば拒否する (provenance を失わない)", () => {
+    expect(() =>
+      parseJapanSeriesArtifact({
+        ...japanArtifact,
+        meta: { generatedAt: "2026-08-20T00:00:00.000Z" },
+      }),
+    ).toThrow("meta.configHash must be a string");
   });
 });

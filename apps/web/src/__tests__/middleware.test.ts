@@ -69,3 +69,38 @@ describe("middleware Workers Cache headers", () => {
     expect(response.headers.get("Vary")).toContain("Next-Router-State-Tree");
   });
 });
+
+describe("/japan の未登録スラッグは 410 (GEO-SCOPE-SEPARATION-01 WP5)", () => {
+  const originalNext = NextResponse.next;
+
+  beforeAll(() => {
+    NextResponse.next = () => new NextResponse();
+  });
+
+  afterAll(() => {
+    NextResponse.next = originalNext;
+  });
+
+  function request(pathname: string): NextRequest {
+    const nextRequest = new NextRequest(`https://stats47.jp${pathname}`);
+    Object.defineProperty(nextRequest, "nextUrl", {
+      value: new URL(nextRequest.url),
+    });
+    return nextRequest;
+  }
+
+  test("known な /japan/education-culture は 410 を返さない", () => {
+    const response = middleware(request("/japan/education-culture"));
+    expect(response.status).not.toBe(410);
+  });
+
+  test("未登録スラッグ /japan/not-a-real-theme は 410 を返す (/themes と同型)", () => {
+    const response = middleware(request("/japan/not-a-real-theme"));
+    expect(response.status).toBe(410);
+  });
+
+  test("/japan (トップ、スラッグ無し) は 410 を返さない", () => {
+    const response = middleware(request("/japan"));
+    expect(response.status).not.toBe(410);
+  });
+});

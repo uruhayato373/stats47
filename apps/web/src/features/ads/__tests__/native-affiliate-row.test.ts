@@ -64,6 +64,28 @@ describe("NativeAffiliateRow の構造契約", () => {
     expect(src).toContain("height={b.height}");
     expect(src).toContain('className="block h-auto w-full"');
   });
+
+  it("読了位置用three-upはdesktop 3列・mobile 最優先1件に制限する", () => {
+    expect(src).toContain('variant?: "standard" | "three-up"');
+    expect(src).toContain('variant === "three-up" ? 3 : 4');
+    expect(src).toContain('"grid grid-cols-1 items-start gap-2 md:grid-cols-3"');
+    expect(src).toContain('index > 0 ? "hidden md:block" : undefined');
+    expect(src).toContain('"(max-width: 767px) 100vw, 33vw"');
+  });
+
+  it("three-upの在庫が1〜2件でも左寄せの空き列を作らない", () => {
+    expect(src).toContain("getThreeUpGridClassName(visible.length)");
+    expect(src).toContain('"mx-auto grid max-w-xs grid-cols-1 items-start gap-2"');
+    expect(src).toContain(
+      '"mx-auto grid max-w-2xl grid-cols-1 items-start gap-2 md:grid-cols-2"',
+    );
+  });
+
+  it("既存一覧面のstandardはmobile 2列・desktop 4列を維持する", () => {
+    expect(src).toContain('variant = "standard"');
+    expect(src).toContain('"grid grid-cols-2 items-start gap-2 md:grid-cols-4"');
+    expect(src).toContain('"(max-width: 767px) 50vw, 25vw"');
+  });
 });
 
 describe("SidebarStickyBannerAd の契約", () => {

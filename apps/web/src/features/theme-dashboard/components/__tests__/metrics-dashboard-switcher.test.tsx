@@ -118,9 +118,9 @@ describe("ThemeMetricsDashboard — KPI の描画", () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it("主要指標の重複見出しは読み上げ用だけに残す", () => {
+  it("主要指標の重複見出しは読み上げ用だけに残す ('47都道府県'、'全国'ではない)", () => {
     renderDashboard("education-culture");
-    expect(screen.getByRole("heading", { name: "全国の主要指標" })).toHaveClass("sr-only");
+    expect(screen.getByRole("heading", { name: "47都道府県の主要指標" })).toHaveClass("sr-only");
   });
 
   it("タイルには tabIndicators 由来の指標が渡る", () => {

@@ -36,6 +36,7 @@ import { NationalTrendCard } from "../NationalTrendCard/NationalTrendCard";
 
 import { RankingBasisSwitcher, type RankingBasisMember } from "./RankingBasisSwitcher";
 import { RankingPageContentSections, type RankingPageSections } from "./RankingPageContentSections";
+import { RankingVisualizationDetails } from "./RankingVisualizationDetails";
 import { RankingVisualizationSection } from "./RankingVisualizationSection";
 import { useRankingPageState } from "./useRankingPageState";
 
@@ -179,7 +180,7 @@ export function RankingKeyPageClient({
         </div>
     );
 
-    // 最終更新日とデータ年度の表示用 (SEO freshness)
+    // 最終更新日は可視化直下、年度はカードヘッダーと統計サマリに表示する。
     const formattedUpdated = (() => {
         if (!rankingItem.updatedAt) return null;
         try {
@@ -196,9 +197,12 @@ export function RankingKeyPageClient({
         null;
 
     // subtitle を「定義補足」と「データ注釈(※)」に振り分ける。
-    // 定義 → h1 直下の控えめ行 (HeroCard titleDetail) / 注釈 → チャート直下キャプション。
+    // 定義 → 可視化直下 / 注釈 → 本文先頭のキャプション。
     const { subtitle: definitionalSubtitle, note: subtitleNote } =
         classifyRankingSubtitle(displayInfo.subtitle);
+    const definitionDetail = [definitionalSubtitle, displayInfo.demographicAttr]
+        .filter(Boolean)
+        .join("・") || null;
     // データ注釈の正規ソースは config.note → item.annotation (Phase 4 metadata refresh)。
     // annotation があれば優先し、未移行 metric は subtitle ヒューリスティックを fallback。
     const configNote = rankingItem.annotation?.trim()
@@ -237,15 +241,7 @@ export function RankingKeyPageClient({
             */}
             <div className="flex min-w-0 flex-col gap-4">
                 <div className="order-1">
-                    <RankingHeaderPanel
-                        title={displayInfo.title}
-                        titleDetail={[definitionalSubtitle, displayInfo.demographicAttr]
-                            .filter(Boolean)
-                            .join("・") || null}
-                        sourceName={sourceObj?.name ?? null}
-                        yearName={latestYearName}
-                        updatedAt={formattedUpdated}
-                    />
+                    <RankingHeaderPanel title={displayInfo.title} />
                 </div>
 
                 <div className="order-2 min-w-0 lg:order-4">
@@ -257,6 +253,10 @@ export function RankingKeyPageClient({
                         headerActions={headerActions}
                         cardFooter={cardFooter}
                         isPending={isPending}
+                    />
+                    <RankingVisualizationDetails
+                        description={definitionDetail}
+                        updatedAt={formattedUpdated}
                     />
                 </div>
 

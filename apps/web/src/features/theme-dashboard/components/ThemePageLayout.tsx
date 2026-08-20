@@ -17,11 +17,7 @@ import { THEME_HEROES } from "@/components/layout/page-heroes";
 import { loadPageComponents } from "@/components/stat-charts/server";
 import { prefetchThemeKpiData } from "@/components/stat-charts/services/prefetch-theme-kpi";
 
-import {
-  BannerAd,
-  InContentAdSlot,
-  NativeAffiliateRow,
-} from "@/features/ads";
+import { InContentAdSlot, NativeAffiliateRow } from "@/features/ads";
 import { THEME_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
 import { resolveAffiliateBanners, resolveAffiliateBannersByVertical } from "@/features/ads/server";
 import { isLandscapeBanner } from "@/features/ads/services/banner-geometry";
@@ -81,9 +77,8 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
   // D Phase 3: ネイティブアフィリエイト枠 (テーマの関連サービス)
   // relatedArticleTagKeys で解決 → 空なら theme→vertical 写像 (THEME_AFFILIATE_MAP) でフォールバック。
   // これにより relatedArticleTagKeys 未設定のテーマでも意図一致広告が出る (在庫機会損失の解消)。
-  // ★ 2026-08-04: 4 → 5 に増やし、先頭 4 件をネイティブ枠、5 件目をページ末尾の 300x250 に回す。
-  // ★ 2026-08-06: 5 → 8。縦長 (スカイスクレイパー) は本文枠に出さない (isLandscapeBanner で
-  //   除外。受け皿は sidebar-sticky スロット)。除外後も native 4 + 末尾 1 が埋まる余裕を持たせる。
+  // ★ 2026-08-06: 縦長 (スカイスクレイパー) は本文枠に出さない (isLandscapeBanner で除外。
+  //   受け皿は sidebar-sticky スロット)。除外後も3件が埋まる余裕を持たせるためlimitは8を維持する。
   let nativeBanners = theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0
     ? await resolveAffiliateBanners(theme.relatedArticleTagKeys, 8).catch(() => [])
     : [];
@@ -94,8 +89,6 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
     }
   }
   nativeBanners = nativeBanners.filter(isLandscapeBanner);
-  // 在庫が 4 件以下なら末尾バナーは出さない (ネイティブ枠と同じ広告の重複を避ける)。
-  const themeEndBanner = nativeBanners[4] ?? null;
 
   return (
     <ThemePrefectureProvider
@@ -180,7 +173,7 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
       {areaContext && (
         <div className="mb-4 flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-4 py-2 text-sm">
           <span className="font-medium text-primary">{areaContext.areaName}の視点</span>
-          <span className="text-muted-foreground">— 全国チャートで{areaContext.areaName}をハイライト表示しています</span>
+          <span className="text-muted-foreground">— 47都道府県チャートで{areaContext.areaName}をハイライト表示しています</span>
           <Link href={`/areas/${areaContext.areaCode}`} className="ml-auto text-xs text-primary hover:underline">
             {areaContext.areaName}プロフィールへ →
           </Link>
@@ -257,33 +250,15 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
       */}
       <InContentAdSlot slot={THEMES_CONTENT} />
 
-      {/* ネイティブアフィリエイト枠 (D Phase 3)。
-          旧・本文中央の SidebarPromoBanner は撤去 (316px レール前提の部品を本文幅で使う誤用。
-          native 行 + theme-end 300x250 で枠は充足する。2026-08-06)。 */}
+      {/* ネイティブアフィリエイト枠。読了位置では広告を二段に分けず、
+          desktop 3件 / mobile 最優先1件の単一ブロックにする。 */}
       {nativeBanners.length > 0 && (
         <div className="mt-8">
           <NativeAffiliateRow
-            banners={nativeBanners.slice(0, 4)}
+            banners={nativeBanners}
             position="theme-native"
             trackingCategory={`theme-${theme.themeKey}`}
-          />
-        </div>
-      )}
-
-      {/* ★ 2026-08-04: ページ末尾の 300x250 (theme→vertical で意図一致)。 */}
-      {themeEndBanner && (
-        <div className="mt-8 flex justify-center">
-          <BannerAd
-            href={themeEndBanner.href}
-            imageUrl={themeEndBanner.imageUrl}
-            trackingPixelUrl={themeEndBanner.trackingPixelUrl}
-            width={themeEndBanner.width}
-            height={themeEndBanner.height}
-            label={themeEndBanner.title}
-            category={themeEndBanner.vertical ?? "other"}
-            position="theme-end"
-            adId={themeEndBanner.id}
-            creativeSize={`${themeEndBanner.width}x${themeEndBanner.height}`}
+            variant="three-up"
           />
         </div>
       )}

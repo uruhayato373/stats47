@@ -37,7 +37,7 @@ export function CommuteFlowSectionClient({ initialData }: Props) {
         <div className="flex flex-wrap items-center justify-end gap-2">
           {isNationalFallback && (
             <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
-              全国表示中 — 代表例: {focusName}
+              都道府県未選択のため{focusName}を例に表示中
             </span>
           )}
           <Select value={prefCode} onValueChange={setFocus}>

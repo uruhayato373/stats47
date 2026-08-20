@@ -144,28 +144,6 @@ const nextConfig: NextConfig = {
     };
 
     if (isServer) {
-      // サーバーサイドで不要な Next.js ファイルを除外
-      // 開発ツールを除外（SSRでwindowオブジェクトアクセスエラーを防ぐ）
-      // Next.js 15.5.9で "Cannot find module next-devtools" エラーが発生するため
-      // resolve.alias を使用してダミーモジュールにリダイレクト
-      const stubPath = path.resolve(__dirname, "src", "lib", "next-devtools-stub.ts");
-
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        // next-devtools 関連のすべてのモジュールをダミーにリダイレクト
-        "next-devtools": stubPath,
-        "@next/devtools": stubPath,
-      };
-
-      // NormalModuleReplacementPlugin を使用して next-devtools への参照をスタブに置き換える
-      // 正規表現を厳密化（広範囲すぎるとハングの原因になる）
-      config.plugins.push(
-        new webpack.NormalModuleReplacementPlugin(
-          /^(@next\/devtools|next-devtools|.*next\/dist\/compiled\/next-devtools.*)$/,
-          stubPath
-        )
-      );
-
       // terser、crypto-browserify、compression を一括除外（外部ライブラリのみ）
       // 注意: Next.js内部モジュール（next/dist/...）は絶対にIgnoreしない
       config.plugins.push(

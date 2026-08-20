@@ -1,11 +1,20 @@
 import { parseRecipe } from "@stats47/data-configs";
 
 import type {
+  JapanSeriesArtifact,
+  JapanSeriesRow,
+  JapanSourceMode,
   MigrationFlowPayload,
   MigrationFlowRow,
   SingleEntityRow,
   StatsValuesPayload,
 } from "./types";
+
+const JAPAN_SOURCE_MODES = new Set<JapanSourceMode>([
+  "official",
+  "derived-additive",
+  "derived-ratio",
+]);
 
 const ENTITY_KINDS = new Set(["prefecture", "city", "port"]);
 
@@ -163,5 +172,66 @@ export function parseMigrationFlowPayload(value: unknown): MigrationFlowPayload 
     year: assertFiniteNumber(value.year, "year"),
     rows: value.rows.map(parseMigrationFlowRow),
     meta: parseMigrationFlowMeta(value.meta),
+  };
+}
+
+function parseJapanSeriesRow(value: unknown, index: number): JapanSeriesRow {
+  if (!isRecord(value)) {
+    throw new Error(`rows[${index}] must be an object`);
+  }
+  return {
+    yearCode: assertString(value.yearCode, `rows[${index}].yearCode`),
+    yearName: assertString(value.yearName, `rows[${index}].yearName`),
+    value: assertFiniteNumber(value.value, `rows[${index}].value`),
+    unit: assertString(value.unit, `rows[${index}].unit`),
+  };
+}
+
+function parseJapanSeriesMeta(value: unknown): JapanSeriesArtifact["meta"] {
+  if (!isRecord(value)) {
+    throw new Error("meta must be an object");
+  }
+  return {
+    generatedAt: assertString(value.generatedAt, "meta.generatedAt"),
+    configHash: assertString(value.configHash, "meta.configHash"),
+    recipeHash: assertString(value.recipeHash, "meta.recipeHash"),
+    sourceId: assertString(value.sourceId, "meta.sourceId"),
+  };
+}
+
+/**
+ * 日本全国値 artifact のパーサ (GEO-SCOPE-SEPARATION-01 WP3)。
+ *
+ * ★rank・47県配列・全国コード "00000" を一切扱わない (doc 43 §5)。値は必ず有限数
+ * (NaN・Infinity・欠測の 0 埋めは resolveJapanValue が事前に弾いているため、ここでは
+ * 「壊れた値がR2に紛れ込んでいないか」の最終防波堤として再確認する)。
+ */
+export function parseJapanSeriesArtifact(value: unknown): JapanSeriesArtifact {
+  if (!isRecord(value)) {
+    throw new Error("japan series artifact must be an object");
+  }
+  if (value.schemaVersion !== 1) {
+    throw new Error("schemaVersion must be 1");
+  }
+  if (value.geographyScope !== "japan") {
+    throw new Error("geographyScope must be 'japan'");
+  }
+  const sourceMode = assertString(value.sourceMode, "sourceMode");
+  if (!JAPAN_SOURCE_MODES.has(sourceMode as JapanSourceMode)) {
+    throw new Error(
+      `sourceMode must be one of ${[...JAPAN_SOURCE_MODES].join(", ")}`,
+    );
+  }
+  if (!Array.isArray(value.rows)) {
+    throw new Error("rows must be an array");
+  }
+
+  return {
+    schemaVersion: 1,
+    metricKey: assertString(value.metricKey, "metricKey"),
+    geographyScope: "japan",
+    sourceMode: sourceMode as JapanSourceMode,
+    rows: value.rows.map(parseJapanSeriesRow),
+    meta: parseJapanSeriesMeta(value.meta),
   };
 }

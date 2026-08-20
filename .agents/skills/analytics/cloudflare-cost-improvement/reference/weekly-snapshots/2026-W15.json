@@ -1,0 +1,81 @@
+{
+  "snapshot_id": "2026-W15",
+  "period_label": "Mar 15 – Apr 14, 2026 (月次請求)",
+  "period_start": "2026-03-15",
+  "period_end": "2026-04-14",
+  "source": "Cloudflare invoice IN-62466340 (manual entry)",
+  "recorded_at": "2026-04-21",
+  "metrics": {
+    "d1_rows_read": {
+      "value": 39524193411,
+      "unit": "rows",
+      "billable_overage": 14524193411,
+      "billable_amount_usd": 14.53,
+      "note": "無料枠 25B を 14.5B 超過。sitemap.ts と /ports の全行スキャンが主因。"
+    },
+    "d1_rows_written": {
+      "value": 0,
+      "unit": "rows",
+      "billable_overage": 0,
+      "billable_amount_usd": 0.0,
+      "note": "書き込みは /sync-remote-d1 の手動実行時のみ（月次請求期間内はゼロ）"
+    },
+    "d1_storage_gb": {
+      "value": 6,
+      "unit": "GB-month",
+      "billable_overage": 1,
+      "billable_amount_usd": 0.75,
+      "note": "5GB 無料枠 + 1GB 超過。古いテーブル整理で削減可能"
+    },
+    "workers_cpu_ms": {
+      "value": 225488730,
+      "unit": "CPU ms",
+      "billable_overage": 195488730,
+      "billable_amount_usd": 3.92,
+      "note": "OGP 画像の Satori 動的生成が主因"
+    },
+    "workers_requests_standard": {
+      "value": 0,
+      "unit": "requests",
+      "billable_overage": 0,
+      "billable_amount_usd": 0.0,
+      "note": "10M 無料枠内"
+    },
+    "subscription_workers_paid": {
+      "value": 1,
+      "unit": "month",
+      "billable_amount_usd": 5.0
+    }
+  },
+  "cost_summary": {
+    "subtotal_usd": 24.2,
+    "tax_usd": 2.42,
+    "tax_rate": 0.1,
+    "tax_region": "JAPAN",
+    "total_usd": 26.62,
+    "exchange_rate_jpy": 159.65,
+    "total_jpy": 4252
+  },
+  "alerts": [
+    {
+      "metric": "d1_rows_read",
+      "severity": "error",
+      "reason": "無料枠 25B を 58% 超過（14.5B 超過）"
+    },
+    {
+      "metric": "d1_storage_gb",
+      "severity": "error",
+      "reason": "無料枠 5GB を 20% 超過"
+    },
+    {
+      "metric": "workers_cpu_ms",
+      "severity": "error",
+      "reason": "無料枠 30M を 651% 超過（6.5 倍）"
+    },
+    {
+      "metric": "total_cost_usd_monthly",
+      "severity": "error",
+      "reason": "警告しきい値 $10 / エラーしきい値 $15 を突破（$26.62）"
+    }
+  ]
+}

@@ -233,6 +233,16 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
     }
   }
 
+  // /japan/{unknown-slug} → 410 (GEO-SCOPE-SEPARATION-01 WP5)。
+  // /themes と同型の判定だが、UrlPolicy.japan は独立の known 集合を持つ
+  // (education-culture pilot の1テーマのみ known。/themes の known とは意図的に別集合)。
+  if (pathname.startsWith("/japan/")) {
+    const slug = pathname.slice("/japan/".length).split("/")[0];
+    if (slug && !UrlPolicy.japan.isKnown(slug)) {
+      return gone();
+    }
+  }
+
   return null;
 }
 

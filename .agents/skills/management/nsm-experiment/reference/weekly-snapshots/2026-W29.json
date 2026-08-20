@@ -1,0 +1,236 @@
+{
+  "week_id": "2026-W29",
+  "year": 2026,
+  "week": 29,
+  "generated_at": "2026-07-19T11:49:59.447Z",
+  "ranges": {
+    "ga4": {
+      "this": {
+        "start": "2026-07-12",
+        "end": "2026-07-18"
+      },
+      "prev": {
+        "start": "2026-07-05",
+        "end": "2026-07-11"
+      }
+    },
+    "gsc": {
+      "this": {
+        "start": "2026-07-10",
+        "end": "2026-07-16"
+      },
+      "prev": {
+        "start": "2026-07-03",
+        "end": "2026-07-09"
+      }
+    }
+  },
+  "ga4": {
+    "channels": [
+      {
+        "channel": "Organic Search",
+        "thisUsers": 1887,
+        "prevUsers": 1696,
+        "userDelta": 191,
+        "userDeltaPct": 11.26179245283019,
+        "thisSessions": 2256,
+        "prevSessions": 2015,
+        "thisEngagedSessions": 1392,
+        "prevEngagedSessions": 1301,
+        "thisEngagementRate": 0.6170212765957447
+      },
+      {
+        "channel": "Direct",
+        "thisUsers": 813,
+        "prevUsers": 1145,
+        "userDelta": -332,
+        "userDeltaPct": -28.995633187772924,
+        "thisSessions": 843,
+        "prevSessions": 1195,
+        "thisEngagedSessions": 177,
+        "prevEngagedSessions": 211,
+        "thisEngagementRate": 0.2099644128113879
+      },
+      {
+        "channel": "Referral",
+        "thisUsers": 155,
+        "prevUsers": 105,
+        "userDelta": 50,
+        "userDeltaPct": 47.61904761904761,
+        "thisSessions": 182,
+        "prevSessions": 137,
+        "thisEngagedSessions": 105,
+        "prevEngagedSessions": 83,
+        "thisEngagementRate": 0.5769230769230769
+      },
+      {
+        "channel": "Unassigned",
+        "thisUsers": 150,
+        "prevUsers": 30,
+        "userDelta": 120,
+        "userDeltaPct": 400,
+        "thisSessions": 167,
+        "prevSessions": 37,
+        "thisEngagedSessions": 13,
+        "prevEngagedSessions": 13,
+        "thisEngagementRate": 0.07784431137724551
+      },
+      {
+        "channel": "AI Assistant",
+        "thisUsers": 52,
+        "prevUsers": 77,
+        "userDelta": -25,
+        "userDeltaPct": -32.467532467532465,
+        "thisSessions": 72,
+        "prevSessions": 97,
+        "thisEngagedSessions": 36,
+        "prevEngagedSessions": 46,
+        "thisEngagementRate": 0.5
+      },
+      {
+        "channel": "Organic Social",
+        "thisUsers": 19,
+        "prevUsers": 3,
+        "userDelta": 16,
+        "userDeltaPct": 533.3333333333333,
+        "thisSessions": 20,
+        "prevSessions": 5,
+        "thisEngagedSessions": 8,
+        "prevEngagedSessions": 2,
+        "thisEngagementRate": 0.4
+      },
+      {
+        "channel": "Cross-network",
+        "thisUsers": 2,
+        "prevUsers": 0,
+        "userDelta": 2,
+        "userDeltaPct": null,
+        "thisSessions": 2,
+        "prevSessions": 0,
+        "thisEngagedSessions": 0,
+        "prevEngagedSessions": 0,
+        "thisEngagementRate": 0
+      }
+    ],
+    "total": {
+      "thisUsers": 3078,
+      "prevUsers": 3056,
+      "thisSessions": 3542,
+      "prevSessions": 3486,
+      "thisEngagedSessions": 1731,
+      "prevEngagedSessions": 1656,
+      "userDelta": 22,
+      "userDeltaPct": 0.7198952879581152,
+      "engagedSessionDelta": 75,
+      "engagedSessionDeltaPct": 4.528985507246377
+    },
+    "organic": {
+      "channel": "Organic Search",
+      "thisUsers": 1887,
+      "prevUsers": 1696,
+      "userDelta": 191,
+      "userDeltaPct": 11.26179245283019,
+      "thisSessions": 2256,
+      "prevSessions": 2015,
+      "thisEngagedSessions": 1392,
+      "prevEngagedSessions": 1301,
+      "thisEngagementRate": 0.6170212765957447
+    }
+  },
+  "gsc": {
+    "total": {
+      "thisClicks": 823,
+      "prevClicks": 797,
+      "clickDelta": 26,
+      "clickDeltaPct": 3.262233375156838,
+      "thisImpressions": 25464,
+      "prevImpressions": 25574,
+      "impressionDelta": -110,
+      "thisCtr": 0.03232013823437009,
+      "prevCtr": 0.03116446390865723,
+      "thisPosition": 8.175777568331762,
+      "prevPosition": 7.874599202314851
+    },
+    "topQueries": [
+      {
+        "query": "stats47",
+        "clicks": 8,
+        "impressions": 12,
+        "ctr": 0.6666666666666666,
+        "position": 1
+      },
+      {
+        "query": "子育てしやすい県ランキング",
+        "clicks": 7,
+        "impressions": 28,
+        "ctr": 0.25,
+        "position": 4.071428571428571
+      },
+      {
+        "query": "うどん消費量ランキング",
+        "clicks": 6,
+        "impressions": 70,
+        "ctr": 0.08571428571428572,
+        "position": 3.6142857142857143
+      },
+      {
+        "query": "米の消費量ランキング 都 道府県 2025",
+        "clicks": 6,
+        "impressions": 17,
+        "ctr": 0.35294117647058826,
+        "position": 3.1176470588235294
+      },
+      {
+        "query": "うどん 消費量 ランキング",
+        "clicks": 5,
+        "impressions": 33,
+        "ctr": 0.15151515151515152,
+        "position": 3.212121212121212
+      },
+      {
+        "query": "実質公債費比率 ランキング",
+        "clicks": 4,
+        "impressions": 113,
+        "ctr": 0.035398230088495575,
+        "position": 9.29203539823009
+      },
+      {
+        "query": "桃 消費量 ランキング",
+        "clicks": 4,
+        "impressions": 20,
+        "ctr": 0.2,
+        "position": 6.2
+      },
+      {
+        "query": "納豆 消費 量 ランキング 2026",
+        "clicks": 4,
+        "impressions": 18,
+        "ctr": 0.2222222222222222,
+        "position": 2
+      },
+      {
+        "query": "納豆 消費量 都道府県",
+        "clicks": 4,
+        "impressions": 44,
+        "ctr": 0.09090909090909091,
+        "position": 4.863636363636363
+      },
+      {
+        "query": "うどん 消費量",
+        "clicks": 3,
+        "impressions": 16,
+        "ctr": 0.1875,
+        "position": 5.5625
+      }
+    ]
+  },
+  "psi": {
+    "skipped": true,
+    "reason": "PSI_API_KEY 未設定"
+  },
+  "notes": [
+    "GSC データは 3 日遅延のため、直近期間は 2026-07-10 〜 2026-07-16 を採用",
+    "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
+    "NSM 定義: docs/00_プロジェクト管理/02_収益化戦略.md"
+  ]
+}

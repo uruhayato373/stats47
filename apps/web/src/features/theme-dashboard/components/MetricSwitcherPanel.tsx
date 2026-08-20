@@ -45,9 +45,9 @@ interface MetricSwitcherPanelProps {
   metrics: MetricKpi[];
   /** rankingKey → 短ラベル (tabIndicators の tabLabel)。無ければ title を使う */
   tabLabels: Record<string, string>;
-  /** 選択中の都道府県コード (null = 全国) */
+  /** 選択中の都道府県コード (null = 47都道府県・未選択) */
   selectedPrefectureCode: string | null;
-  /** 表示名 ("全国" or 県名) */
+  /** 表示名 ("47都道府県" or 県名) */
   areaName: string;
   /** 初期チェックする指標。metrics に無いキーは無視し、全滅したら先頭 1 件に倒す */
   defaultCheckedKeys?: string[];
@@ -63,22 +63,27 @@ const cacheKey = (metricKey: string, areaCode: string) =>
  * 「描けない」を 1 つの `null` にまとめると、読者には全部「推移データがありません」に
  * 見えてしまう。だが単年しか調査されていない指標 (鉄道駅数=2024年のみ 等) は
  * データが欠けているのではなく**そもそも推移が存在しない**ので、そう書いた方が正しい。
+ * `select-prefecture` は 47都道府県 (未選択) 表示のときの状態で、そもそも fetch しない
+ * (GEO-SCOPE-SEPARATION-01 WP2)。
  */
 type ChartState =
   | { kind: 'chart'; data: LineChartData; hasComparison: boolean }
   | { kind: 'single-year'; yearName: string }
-  | { kind: 'none' };
+  | { kind: 'none' }
+  | { kind: 'select-prefecture' };
 
 /**
- * 全国系列の凡例名。
+ * 比較系列の凡例名。
  *
  * ★47 県平均を「全国」と称してはならない (総人口のような実数系は全国値の 1/47 になる)。
  * 判定は action が返す source 申告に従う。正典は aggregate-metric-timeseries.ts。
+ * 平均のときは「都道府県平均」と呼び、「全国」の字を含めない
+ * (docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md §3.1)。
  */
 function nationalSeriesName(
   result: MetricTimeseriesResult | undefined
 ): string {
-  return result?.source === 'national' ? '全国' : '全国平均';
+  return result?.source === 'national' ? '全国' : '都道府県平均';
 }
 
 /**
@@ -135,12 +140,17 @@ function assignAxes(checked: MetricKpi[]): {
  *
  * 「データがありません」で済ませると、読者には取得失敗との区別が付かない。
  * 単年しか調査されていない指標はそう明示して、タイルの値・順位と
- * ランキング導線の方に目を向けてもらう。
+ * ランキング導線の方に目を向けてもらう。47都道府県 (未選択) はエラーではなく
+ * 選択を促す案内にする (GEO-SCOPE-SEPARATION-01 WP2)。
  */
 function emptyMessage(state: ChartState): string {
-  return state.kind === 'single-year'
-    ? `${state.yearName}の単年データのため、推移グラフはありません`
-    : '推移データがありません';
+  if (state.kind === 'single-year') {
+    return `${state.yearName}の単年データのため、推移グラフはありません`;
+  }
+  if (state.kind === 'select-prefecture') {
+    return '都道府県を選択すると、その県の推移が表示されます';
+  }
+  return '推移データがありません';
 }
 
 /**
@@ -214,12 +224,16 @@ export function MetricSwitcherPanel({
   // チェック中の指標について、必要な系列 (自地域 + 全国) のうち未取得のものだけ取る。
   // 県選択時に全国も取るのは比較破線のためだけではない: 県系列を持たない指標
   // (国土数値情報など) の描画フォールバックに要る。
+  //
+  // ★47都道府県 (未選択) のときは何も fetch しない (GEO-SCOPE-SEPARATION-01 WP2)。
+  //   タイルは indicatorDataMap 由来の topRanked (実在する1位県の事実) を即座に表示でき、
+  //   時系列は「都道府県を選択すると表示されます」という案内に置き換わるため、
+  //   ネットワーク往復も「全国」「都道府県平均」の値も一切必要ない。
   useEffect(() => {
+    if (!selectedPrefectureCode) return;
     const keys = checkedKeysKey ? checkedKeysKey.split(',') : [];
     if (keys.length === 0) return;
-    const wanted = selectedPrefectureCode
-      ? [areaCode, NATIONAL_CODE]
-      : [NATIONAL_CODE];
+    const wanted = [areaCode, NATIONAL_CODE];
     const missing: Array<[string, string]> = [];
     for (const key of keys) {
       for (const code of wanted) {
@@ -251,12 +265,14 @@ export function MetricSwitcherPanel({
     };
   }, [checkedKeysKey, areaCode, selectedPrefectureCode, seriesCache]);
 
-  // 1 本でも描ければ描く。全滅のときだけローディング (取得は指標ごとに独立)
-  const isLoadingSeries = checkedMetrics.every(
-    (m) => !seriesCache[cacheKey(m.metricKey, areaCode)]
-  );
+  // 1 本でも描ければ描く。全滅のときだけローディング (取得は指標ごとに独立)。
+  // 47都道府県 (未選択) では何も fetch しないので、ローディングにはならない。
+  const isLoadingSeries =
+    !!selectedPrefectureCode &&
+    checkedMetrics.every((m) => !seriesCache[cacheKey(m.metricKey, areaCode)]);
 
   const chartState: ChartState = useMemo(() => {
+    if (!selectedPrefectureCode) return { kind: 'select-prefecture' };
     if (checkedMetrics.length === 0) return { kind: 'none' };
 
     const { axisOf, leftUnit, rightUnit } = assignAxes(checkedMetrics);
@@ -306,8 +322,9 @@ export function MetricSwitcherPanel({
         // 複数本のときは地域が共通なので指標名で区別する (地域は見出し側が言う)。
         name = single ? areaName : label;
       } else {
-        // 全国表示、または県を選んでいてもその県の系列が取れない指標。
-        // 後者は国土数値情報など e-Stat パラメータを持たない external 種で起きる
+        // 県を選んでいてもその県の系列が取れない指標 (この時点で selectedPrefectureCode は
+        // 必ず設定されている。47都道府県・未選択は chartState が手前で select-prefecture を
+        // 返して抜けている)。国土数値情報など e-Stat パラメータを持たない external 種で起きる
         // (action が resolveEstatParams で null になり空を返す)。
         const nationalPoints = nationalResult?.points ?? [];
         if (nationalPoints.length > 0) {
@@ -320,7 +337,7 @@ export function MetricSwitcherPanel({
             value: p.value,
           }));
           // 47 県平均を「全国」と称さない (実数系は全国値の 1/47 になる)
-          name = single ? '全国平均' : `${label}（平均）`;
+          name = single ? '都道府県平均' : `${label}（平均）`;
         }
       }
 
@@ -493,29 +510,52 @@ export function MetricSwitcherPanel({
                       ) : null}
                     </span>
                     <span className="truncate text-[11px] text-muted-foreground">
-                      {/* 47 県平均を「全国」と誤読させない */}
-                      {m.isNationalAverage && !m.isLoading
-                        ? `${label}（平均）`
-                        : label}
+                      {label}
                     </span>
                   </span>
-                  <span className="w-full truncate text-base font-bold tabular-nums text-foreground">
-                    {m.value !== null
-                      ? m.value.toLocaleString('ja-JP', {
-                          maximumFractionDigits: 2,
-                        })
-                      : '—'}
-                    {m.unit ? (
-                      <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
-                        {m.unit}
+                  {selectedPrefectureCode ? (
+                    <>
+                      <span className="w-full truncate text-base font-bold tabular-nums text-foreground">
+                        {m.value !== null
+                          ? m.value.toLocaleString('ja-JP', {
+                              maximumFractionDigits: 2,
+                            })
+                          : '—'}
+                        {m.unit ? (
+                          <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
+                            {m.unit}
+                          </span>
+                        ) : null}
                       </span>
-                    ) : null}
-                  </span>
-                  {m.rank !== null ? (
-                    <span className="text-[10px] tabular-nums text-muted-foreground">
-                      {m.rank}位 / {m.total}
-                    </span>
-                  ) : null}
+                      {m.rank !== null ? (
+                        <span className="text-[10px] tabular-nums text-muted-foreground">
+                          {m.rank}位 / {m.total}
+                        </span>
+                      ) : null}
+                    </>
+                  ) : (
+                    /* 47都道府県 (未選択): 実在する1位県の値をそのまま出す
+                       (47県平均でも全国値でもない。GEO-SCOPE-SEPARATION-01 WP2) */
+                    <>
+                      <span className="w-full truncate text-base font-bold tabular-nums text-foreground">
+                        {m.topRanked !== null
+                          ? m.topRanked.value.toLocaleString('ja-JP', {
+                              maximumFractionDigits: 2,
+                            })
+                          : '—'}
+                        {m.unit ? (
+                          <span className="ml-0.5 text-[11px] font-normal text-muted-foreground">
+                            {m.unit}
+                          </span>
+                        ) : null}
+                      </span>
+                      {m.topRanked !== null ? (
+                        <span className="truncate text-[10px] tabular-nums text-muted-foreground">
+                          1位: {m.topRanked.areaName}
+                        </span>
+                      ) : null}
+                    </>
+                  )}
                 </button>
               );
             })}

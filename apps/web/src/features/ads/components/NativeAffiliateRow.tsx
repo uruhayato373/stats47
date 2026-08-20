@@ -6,12 +6,27 @@ import { isLandscapeBanner } from "@/features/ads/services/banner-geometry";
 import type { ResolvedAffiliateBanner } from "@/features/ads/services/resolve-affiliate-ad";
 
 interface NativeAffiliateRowProps {
-  /** バナー配列。縦長を除いた先頭 4 件を描画し、0 件なら null を返す */
+  /** バナー配列。縦長を除き、variantの上限（3件または4件）まで描画する */
   banners: ResolvedAffiliateBanner[];
   /** AffiliateLink の position 追跡用 */
   position?: string;
   /** AffiliateLink の category 追跡用 */
   trackingCategory?: string;
+  /**
+   * `standard`: mobile 2列 / desktop 4列（一覧・ハブ用）。
+   * `three-up`: mobile は最優先1件 / desktop は3列（読了位置用）。
+   */
+  variant?: "standard" | "three-up";
+}
+
+function getThreeUpGridClassName(itemCount: number): string {
+  if (itemCount === 1) {
+    return "mx-auto grid max-w-xs grid-cols-1 items-start gap-2";
+  }
+  if (itemCount === 2) {
+    return "mx-auto grid max-w-2xl grid-cols-1 items-start gap-2 md:grid-cols-2";
+  }
+  return "grid grid-cols-1 items-start gap-2 md:grid-cols-3";
 }
 
 /**
@@ -39,14 +54,21 @@ export function NativeAffiliateRow({
   banners,
   position = "native-row",
   trackingCategory = "native-affiliate",
+  variant = "standard",
 }: NativeAffiliateRowProps) {
   // 呼び出し元がフィルタ済みでも冪等 (防御的フィルタ)
-  const visible = banners.filter(isLandscapeBanner).slice(0, 4);
+  const itemLimit = variant === "three-up" ? 3 : 4;
+  const visible = banners.filter(isLandscapeBanner).slice(0, itemLimit);
   if (visible.length === 0) return null;
 
+  const isThreeUp = variant === "three-up";
+  const gridClassName = isThreeUp
+    ? getThreeUpGridClassName(visible.length)
+    : "grid grid-cols-2 items-start gap-2 md:grid-cols-4";
+
   return (
-    <div className="grid grid-cols-2 items-start gap-2 md:grid-cols-4">
-      {visible.map((b) => (
+    <div className={gridClassName}>
+      {visible.map((b, index) => (
         <AdImpressionTracker
           key={b.href + b.imageUrl}
           category={b.vertical ?? trackingCategory}
@@ -54,6 +76,7 @@ export function NativeAffiliateRow({
           position={position}
           adId={b.id}
           creativeSize={`${b.width}x${b.height}`}
+          className={isThreeUp && index > 0 ? "hidden md:block" : undefined}
         >
           <TrackedAffiliateLink
             href={b.href}
@@ -68,7 +91,11 @@ export function NativeAffiliateRow({
               alt={b.title}
               width={b.width}
               height={b.height}
-              sizes="(max-width: 767px) 50vw, 25vw"
+              sizes={
+                isThreeUp
+                  ? "(max-width: 767px) 100vw, 33vw"
+                  : "(max-width: 767px) 50vw, 25vw"
+              }
               className="block h-auto w-full"
               loading="lazy"
             />
