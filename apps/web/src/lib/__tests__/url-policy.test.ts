@@ -89,12 +89,16 @@ describe("UrlPolicy.japan.isKnown (GEO-SCOPE-SEPARATION-01 WP5/WP6)", () => {
     expect(UrlPolicy.japan.isKnown("education-culture")).toBe(true);
   });
   it("/themes の known 集合をそのまま流用していない (値レベル検証で候補ゼロだったテーマは known にしない)", () => {
-    // occupation-salary / ports は /themes には存在するが、WP6 の値レベル検証で
+    // consumer-prices / occupation-salary は /themes には存在するが、値レベル検証で
     // official 候補が 0 件だったため Japan catalog 未採用 (japan-catalog.ts のコメント参照)。
     // /themes の known 集合をそのまま流用すると、日本全国データを持たないテーマ詳細が
     // 200 を返しうる。
+    //
+    // ★ここは「未採用テーマの実例」なので、WP6 拡張で採用されたら差し替える。
+    //   2026-08-20 の拡張で ports を採用したため occupation-salary + consumer-prices へ更新した
+    //   (テストの意図は「/themes の集合を流用しないこと」であり、特定テーマ名ではない)。
     expect(UrlPolicy.japan.isKnown("occupation-salary")).toBe(false);
-    expect(UrlPolicy.japan.isKnown("ports")).toBe(false);
+    expect(UrlPolicy.japan.isKnown("consumer-prices")).toBe(false);
   });
   it("未登録スラッグは known でない", () => {
     expect(UrlPolicy.japan.isKnown("not-a-real-theme")).toBe(false);
