@@ -71,9 +71,37 @@ function resolveAppId(): string {
 }
 
 /** 自前 e-Stat fetch (server-only 回避)。企業プロキシは自動検出。 */
+/**
+ * e-Stat の分類軸パラメータ。**allowlist を自前で緩めない**。
+ * 正典は `packages/ranking/src/utils/source-config.ts` の ESTAT_QUERY_KEYS と同じ集合。
+ *
+ * ★2026-08-20 の実測バグ: ここが cdCat01 だけを送っており、cdTab / cdCat02〜05 を
+ *   落としていた。賃金構造基本統計 (0003445758) は同じ表に「年齢(歳)」「勤続年数」
+ *   「給与(千円)」が並ぶため、全国行として**年齢の行**を拾い、42 metric が
+ *   「単位不一致: config.unit='千円' / e-Stat unit='歳'」で誤って unsupported 判定
+ *   されていた。cdTab を送れば正しく 318.0 千円 が返る (実測)。
+ */
+const ESTAT_AXIS_KEYS = [
+  "cdCat01",
+  "cdCat02",
+  "cdCat03",
+  "cdCat04",
+  "cdCat05",
+  "cdTab",
+] as const;
+
+export function axisParams(config: { source: Record<string, unknown> }): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const key of ESTAT_AXIS_KEYS) {
+    const v = (config.source as Record<string, unknown>)[key];
+    if (typeof v === "string" && v.length > 0) out[key] = v;
+  }
+  return out;
+}
+
 async function fetchEstatRaw(
   statsDataId: string,
-  cdCat01: string | undefined,
+  axes: Record<string, string>,
 ): Promise<EstatStatsDataResponse> {
   const appId = resolveAppId();
   const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
@@ -84,7 +112,7 @@ async function fetchEstatRaw(
     appId,
     statsDataId,
     limit: "1000",
-    ...(cdCat01 ? { cdCat01 } : {}),
+    ...axes,
   });
   const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${query}`;
   const fetchOptions: RequestInit & { dispatcher?: unknown } = {
@@ -124,8 +152,9 @@ export async function generateOneMetric(
 
   const statsDataId = config.source.statsDataId;
   const cdCat01 = config.source.cdCat01;
+  const axes = axisParams(config as unknown as { source: Record<string, unknown> });
 
-  const response = await fetchEstatRaw(statsDataId, cdCat01);
+  const response = await fetchEstatRaw(statsDataId, axes);
   const formatted = formatStatsData(response);
   const schema = formatted.values
     .map(convertToStatsSchema)
@@ -154,7 +183,7 @@ export async function generateOneMetric(
     meta: {
       generatedAt: new Date().toISOString(),
       configHash: recipe.configHash,
-      recipeHash: hash64(JSON.stringify({ statsDataId, cdCat01: cdCat01 ?? null, areaCode: NATIONAL_AREA_CODE })),
+      recipeHash: hash64(JSON.stringify({ statsDataId, axes, areaCode: NATIONAL_AREA_CODE })),
       sourceId: config.source.statsDataId,
     },
   };
