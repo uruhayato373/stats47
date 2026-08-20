@@ -134,14 +134,14 @@ export function ThemeLeafletMap({
 
   return (
     <div className="relative">
-      {/* ドリルダウン時の「全国に戻る」ボタン */}
+      {/* ドリルダウン時の「47都道府県表示に戻る」ボタン (GEO-SCOPE-SEPARATION-01 WP2) */}
       {drilldownPrefCode && (
         <div className="absolute top-2 left-2 z-[1000] flex items-center gap-2">
           <button
             onClick={handleBackToNational}
             className="bg-background/90 backdrop-blur-sm border rounded-md px-3 py-1.5 text-xs font-medium shadow-sm hover:bg-accent transition-colors"
           >
-            ← 全国表示
+            ← 47都道府県表示
           </button>
           {prefName && (
             <span className="bg-background/90 backdrop-blur-sm border rounded-md px-3 py-1.5 text-xs shadow-sm">

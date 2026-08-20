@@ -29,6 +29,9 @@ const R2_DEPENDENT_ROUTES = [
   // 2026-07-06: /survey 一覧が build 時 R2 不可で空 prerender 固着した事故に伴い ƒ 化。
   // [surveyKey] も generateStaticParams (build 時 [] を返すだけ) を撤去済 → 再混入禁止。
   "apps/web/src/app/survey/[surveyKey]/page.tsx",
+  // 2026-08-20: GEO-SCOPE-SEPARATION-01 WP4。readJapanSeries() で app/japan/<metric>/series.json を
+  // ランタイムに読む。build 時に generateStaticParams を付けると同じ notFound 固着が再発する。
+  "apps/web/src/app/japan/[themeSlug]/page.tsx",
 ];
 
 let violations = 0;

@@ -11,6 +11,7 @@
 
 import { readCategoriesFromR2 } from "@stats47/category/server";
 import { CATEGORY_KEYS } from "@stats47/data-configs";
+import { listJapanCatalogThemes } from "@stats47/data-configs/geo-scope";
 import {
   readActiveKeysForSitemapFromR2,
   readSurveysFromR2,
@@ -66,6 +67,8 @@ const SEGMENTS = [
   "surveys",
   "tags",
   "cities",
+  // GEO-SCOPE-SEPARATION-01 WP5: 既存 segment の id (配列 index) を変えないため末尾に追記する。
+  "japan",
 ] as const;
 
 type Segment = (typeof SEGMENTS)[number];
@@ -100,6 +103,21 @@ const THEME_PAGES: MetadataRoute.Sitemap = ALL_THEMES.map((theme) => ({
   changeFrequency: "weekly",
   priority: 0.8,
 }));
+
+/**
+ * `/japan/*` (GEO-SCOPE-SEPARATION-01 WP4/WP5)。JAPAN_CATALOGS は git TS constant
+ * (R2 非依存) なので、ranking/blog/categories/surveys/tags のような build 時 R2 不達
+ * フォールバックは不要 — THEME_PAGES と同じく常に完全に埋まる。
+ * priority は `/survey` (0.6/0.5) と同水準 (pilot段階の新規面のため /themes より低め)。
+ */
+const JAPAN_PAGES: MetadataRoute.Sitemap = [
+  { url: `${BASE_URL}/japan`, changeFrequency: "weekly", priority: 0.6 },
+  ...listJapanCatalogThemes().map((theme) => ({
+    url: `${BASE_URL}/japan/${theme.themeSlug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  })),
+];
 
 const AREA_PAGES: MetadataRoute.Sitemap = [
   ...PREFECTURE_CODES.map((code) => ({
@@ -367,6 +385,8 @@ export default async function sitemap({
         return await getTagPages();
       case "cities":
         return getCityPages();
+      case "japan":
+        return JAPAN_PAGES;
     }
   } catch (error) {
     // 例外時も「空の sitemap」を焼かない。getter 内のフォールバックは
@@ -416,6 +436,10 @@ export default async function sitemap({
       // ranking は reader 側が KNOWN_RANKING_KEYS を返すため、ここに来たら素直に空
       case "ranking":
         return [];
+      // japan は R2 非依存の git constant のため catch 自体に到達しないが、
+      // switch を Segment union に対して網羅させるためのフォールバックとして残す。
+      case "japan":
+        return JAPAN_PAGES;
     }
   }
 }

@@ -141,8 +141,12 @@ function inspect(file) {
     // 廃止予定コードマーカーではない)。
     // enum 値「legacy」(catalog|legacy) とその日本語プローズ (legacy テーマ / カタログ駆動 20 + legacy 2 等)。
     // 負債の「legacy コード」とは別概念 (2026-07-14 ルール精緻化で誤検知 30+ 件を baseline から実削減)
+    // 「縮小専用」は本チェッカー自身の baseline/ratchet 機構が使う確立語彙 (このファイル内の
+    // 「baseline は縮小専用」等と同一表現)。リポジトリ全体で ratchet 統治の文脈以外に現れないため
+    // (2026-08-20 実測)、legacy sentinel を shrink-only ratchet で追跡するテストコメント
+    // (geo-scope-national-sentinel-ratchet.test.ts 等) を条件明示済みとして除外できる。
     if (legacy &&
-        !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|remove(?:d)?\s+(?:when|after|by)|until\b|期限|削除条件|互換|compat|superseded)/i.test(line) &&
+        !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|remove(?:d)?\s+(?:when|after|by)|until\b|期限|削除条件|互換|compat|superseded|縮小専用)/i.test(line) &&
         // `'legacy'` / `"legacy"` は状態名リテラル (`"deprecated"` を除外しているのと同じ enum 値扱い)。
         // `legacy` と `current`/`manifest` が近接する行は image pipeline の manifest 形式名としての用法
         // (例: 「初回manifest移行だけは legacyを安全にcurrent扱いできない」) で廃止予定コードではない。

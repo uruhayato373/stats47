@@ -7,6 +7,8 @@ import { ChevronRight } from "lucide-react";
 
 import { SectionHeader } from "@/components/section";
 
+import { PREFECTURE_SET_LABEL } from "../types";
+
 import { PrefectureSelect } from "./PrefectureSelect";
 import { useThemePrefecture } from "./ThemePrefectureContext";
 import { buildThemeSwitcherOptions } from "./ThemeSwitcher";
@@ -88,7 +90,7 @@ function RegionBlock() {
   const { selectedAreaName, setSelected } = useThemePrefecture();
 
   // 現在の選択は Select 自身が表示するので、同じ文字列を pill で二重に出さない。
-  // 県を選んでいるときだけ「全国に戻す」を添える (Select を開かずに戻せる導線)。
+  // 県を選んでいるときだけ「47都道府県に戻す」を添える (Select を開かずに戻せる導線)。
   return (
     <div className="mt-6">
       <SectionHeader title="地域" as="h2" />
@@ -99,7 +101,7 @@ function RegionBlock() {
           onClick={() => setSelected(null)}
           className="mt-2 text-[11px] text-muted-foreground underline-offset-2 hover:text-primary hover:underline"
         >
-          全国に戻す
+          {PREFECTURE_SET_LABEL}に戻す
         </button>
       ) : (
         <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">

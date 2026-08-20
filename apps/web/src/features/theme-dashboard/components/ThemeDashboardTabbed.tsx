@@ -28,13 +28,13 @@ import { RankingYearSelector } from "@/features/ranking";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 import { fetchIndicatorForYearAction } from "../actions";
+import { PREFECTURE_SET_LABEL, type ThemeDashboardClientProps } from "../types";
 
 import { ChartLoading } from "./ChartState";
 import { ScrollableTabsList } from "./ScrollableTabsList";
 import { ThemeMetricsDashboard } from "./ThemeMetricsDashboard";
 import { useThemePrefecture } from "./ThemePrefectureContext";
 
-import type { ThemeDashboardClientProps } from "../types";
 import type { RankingValue } from "@stats47/ranking";
 
 function chartLoading(props: { height?: number; className?: string }) {
@@ -174,7 +174,7 @@ export function ThemeDashboardTabbed({
     return lookupArea(selectedPrefectureCode)?.areaName ?? null;
   }, [selectedPrefectureCode]);
 
-  // 都道府県セレクタ（全国 + 47 都道府県）
+  // 都道府県セレクタ（47都道府県一覧 + 個別選択）
   const prefectureSelector = (
     <PrefectureSelector
       value={selectedPrefectureCode}
@@ -242,7 +242,7 @@ export function ThemeDashboardTabbed({
 
   // フル幅ダッシュボード (KPI カード + 時系列チャート + 考察) — areas スタイル。
   // cardsOnly は付けない: hideMap テーマでも page-components チャート + 考察を出す
-  // = カタログ情報の完全ダッシュボード化 (2026-07-04)。mapless は地図ヒント抑制のため維持。
+  // = カタログ情報の完全ダッシュボード化 (2026-07-04)。
   const metricsDashboardSection = (
     <ThemeMetricsDashboard
       themeConfig={themeConfig}
@@ -250,7 +250,6 @@ export function ThemeDashboardTabbed({
       indicatorDataMap={indicatorDataMap}
       pageCharts={pageCharts}
       selectedPrefectureCode={selectedPrefectureCode}
-      mapless={themeConfig.hideMap}
     />
   );
 
@@ -495,7 +494,7 @@ function DeferredTabs({
 
 // --- 都道府県セレクタ ---
 
-/** 全国 + 47 都道府県の選択肢（モジュールレベルで一度だけ計算） */
+/** 47 都道府県の選択肢（モジュールレベルで一度だけ計算） */
 const PREFECTURE_OPTIONS = fetchPrefectures().map((p) => ({
   value: p.prefCode,
   label: p.prefName,
@@ -504,8 +503,9 @@ const PREFECTURE_OPTIONS = fetchPrefectures().map((p) => ({
 /**
  * 都道府県セレクタ
  *
- * value=null のとき「全国」を表示し、県選択で5桁コードを返す。
- * 「全国に戻す」は value="all" の SelectItem で表現し、onChange に null を返す。
+ * value=null のとき「47都道府県」を表示し、県選択で5桁コードを返す
+ * (GEO-SCOPE-SEPARATION-01 WP2。e-Stat の "00000" を UI の既定状態にしない)。
+ * 「47都道府県に戻す」は value="all" の SelectItem で表現し、onChange に null を返す。
  */
 function PrefectureSelector({
   value,
@@ -523,7 +523,7 @@ function PrefectureSelector({
         <SelectValue placeholder="都道府県を選択" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="all">全国</SelectItem>
+        <SelectItem value="all">{PREFECTURE_SET_LABEL}</SelectItem>
         {PREFECTURE_OPTIONS.map((p) => (
           <SelectItem key={p.value} value={p.value}>
             {p.label}

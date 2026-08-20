@@ -5,17 +5,18 @@ import { useMemo } from "react";
 import Link from "next/link";
 
 import { lookupArea } from "@stats47/area";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import type { PageComponent } from "@/components/stat-charts";
 
+import { PREFECTURE_SET_LABEL, type ThemeConfig, type ThemeIndicatorData } from "../types";
+
 import { MetricSwitcherPanel } from "./MetricSwitcherPanel";
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 
 import type { MetricKpi } from "./metric-kpi";
-import type { ThemeConfig, ThemeIndicatorData } from "../types";
 import type { CatalogMetricGroup } from "@stats47/data-configs/theme-catalog";
 
 interface Props {
@@ -30,13 +31,8 @@ interface Props {
   indicatorDataMap: Record<string, ThemeIndicatorData>;
   /** DB 管理チャート（page_components） */
   pageCharts?: PageComponent[];
-  /** 選択中の都道府県コード（null = 全国） */
+  /** 選択中の都道府県コード（null = 47都道府県・未選択。e-Stat の "00000" ではない） */
   selectedPrefectureCode: string | null;
-  /**
-   * 地図なしレイアウト時に true を渡す。
-   * 県未選択時の「地図で都道府県を選択すると…」ヒントを非表示にする。
-   */
-  mapless?: boolean;
   /**
    * true のとき KPI スタットカードのみ描画し、時系列チャート・考察
    * (markdown-section) を出さない。hideMap のカードのみビュー用。
@@ -57,14 +53,18 @@ const NON_CHART_TYPES = new Set(["kpi-card", "markdown-section"]);
  * 「KPI カード + 時系列チャート + 考察」として一画面に集約する。
  *
  * - KPI カード: tabIndicators（role≠context の指標）を indicatorDataMap から導出。
- *   都道府県選択時はその県の値・全国順位、未選択時は全都道府県から算出した代表値を表示。
+ *   都道府県選択時はその県の値・全国順位、未選択時は実在する1位県の値 (topRanked) を表示する
+ *   (47県平均や全国値を「代表値」として作らない。GEO-SCOPE-SEPARATION-01 WP2)。
  * - 時系列チャート: page_components の line/mixed/composition 等を ThemeDbChartRenderer で描画。
  *   従来 PrefectureStatsPanel は kpi-card 不在のため section 付きチャートを描画できず、
  *   全テーマで埋め草になっていた（本コンポーネントが置き換える）。
  * - markdown-section: 考察テキストを末尾にフル幅で描画。
  *
- * prefCode="00000"（全国）でも各 Server Action はデータを返すため、
- * 都道府県未選択時は全国トレンドが表示される。
+ * ★page_components チャート (ThemeDbChartRenderer) は KPI パネルとは別経路。e-Stat の全国行
+ * ("00000") を `selectNationalSeries` 経由で正しく優先し、無ければ「全国平均」と明示して
+ * フォールバックする既存の健全な実装なので、未選択時も prefCode="00000" で描画を続ける
+ * (WP2 が除去するのは KPI タイルの「平均を代表値として見せる」経路であり、この page_components
+ * 経路の正しい official/average 出し分けではない)。
  */
 export function ThemeMetricsDashboard({
   themeConfig,
@@ -72,13 +72,11 @@ export function ThemeMetricsDashboard({
   indicatorDataMap,
   pageCharts,
   selectedPrefectureCode,
-  mapless,
   cardsOnly,
 }: Props) {
   const areaName = selectedPrefectureCode
     ? lookupArea(selectedPrefectureCode)?.areaName ?? "選択地域"
-    : "全国";
-  const areaCode = selectedPrefectureCode ?? "00000";
+    : PREFECTURE_SET_LABEL;
 
   const kpiKeys = useMemo(
     () =>
@@ -97,21 +95,13 @@ export function ThemeMetricsDashboard({
 
     return keys.map((key) => {
       const d = indicatorDataMap[key];
-      const values = d.rankingValues
-        .map((v) => v.value)
-        .filter((v): v is number => typeof v === "number" && Number.isFinite(v));
       const total = d.rankingValues.length;
-      const nationalAverage =
-        values.length > 0
-          ? values.reduce((a, b) => a + b, 0) / values.length
-          : null;
 
-      const isNational = !selectedPrefectureCode;
       const target = selectedPrefectureCode
         ? d.rankingValues.find((v) => v.areaCode === selectedPrefectureCode)
         : undefined;
 
-      if (!isNational) {
+      if (selectedPrefectureCode) {
         return {
           metricKey: key,
           title: d.rankingItem.title,
@@ -120,24 +110,34 @@ export function ThemeMetricsDashboard({
           rank: target?.rank ?? null,
           total,
           series: d.nationalSeries ?? [],
-          isNationalAverage: false,
+          topRanked: null,
           isLoading: false,
         };
       }
 
-      // 全国表示: タイルは R2 由来の 47 県平均を即座に出す (「平均」と明示する)。
-      // 真の全国値は MetricSwitcherPanel が選択中の 1 指標だけを取りに行き、
-      // チャートの凡例で「全国」/「全国平均」を出し分ける。ここで全指標ぶんを
-      // 先読みすると初期表示が遅くなるだけなので取りに行かない。
+      // 47都道府県 (未選択) 表示: 「全国」「全国平均」の値を作らず、実在する1位県の
+      // 事実をそのまま渡す (ranking を主役にする。doc 43 §7 WP2)。追加 fetch は発生しない
+      // (rankingValues に既にある値)。県選択後だけ MetricSwitcherPanel がその県 + 全国系列を
+      // 取りに行く (isNational チェックは MetricSwitcherPanel 側が持つ)。
+      const top1 = d.rankingValues.find((v) => v.rank === 1);
+      const topRanked =
+        top1 && typeof top1.value === "number" && Number.isFinite(top1.value)
+          ? {
+              areaCode: top1.areaCode,
+              areaName: lookupArea(top1.areaCode)?.areaName ?? top1.areaCode,
+              value: top1.value,
+            }
+          : null;
+
       return {
         metricKey: key,
         title: d.rankingItem.title,
         unit: d.rankingItem.unit ?? "",
-        value: d.nationalValue ?? nationalAverage,
+        value: null,
         rank: null,
         total,
         series: d.nationalSeries ?? [],
-        isNationalAverage: true,
+        topRanked,
         isLoading: false,
       };
     });
@@ -195,6 +195,11 @@ export function ThemeMetricsDashboard({
       .filter((panel) => panel.metrics.length > 0);
   }, [metricGroups, kpis, themeConfig.defaultRankingKey]);
 
+  // page_components チャート専用の地域コード。KPI パネル (kpis) とは別経路で、
+  // ThemeDbChartRenderer 側が selectNationalSeries 経由で official/average を正しく
+  // 出し分けるため、未選択時も "00000" を渡してよい (WP2 が除去する対象ではない)。
+  const pageComponentsAreaCode = selectedPrefectureCode ?? "00000";
+
   // cardsOnly: KPI スタットカードのみ。チャート・考察は描画しない
   const chartComponents = cardsOnly
     ? []
@@ -212,33 +217,26 @@ export function ThemeMetricsDashboard({
   }
 
   return (
-    <section className="space-y-6">
+    <section className="@container space-y-4">
       {/* KPI カード（areas スタイル） */}
       {kpis.length > 0 && (
         <div>
-          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-primary" />
-              <h2 className="text-lg font-bold">{areaName}の主要指標</h2>
-            </div>
-            {selectedPrefectureCode ? (
+          <h2 className="sr-only">{areaName}の主要指標</h2>
+          {selectedPrefectureCode && (
+            <div className="mb-2 flex justify-end">
               <Link
                 href={`/areas/${selectedPrefectureCode}`}
                 className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
               >
                 {areaName}のプロフィール <ArrowRight className="h-3 w-3" />
               </Link>
-            ) : mapless ? null : (
-              <span className="text-xs text-muted-foreground">
-                地図で都道府県を選択すると順位を表示
-              </span>
-            )}
-          </div>
+            </div>
+          )}
           {/* 指標カード。タイルのチェックで系列を重ね、下の 1 枚に描く。
               カードとチャートで同じ事実を二度描かない構成 (2026-08-05 に全テーマ展開。
               旧 ChartCard グリッドはミニチャートと下段チャートが重複していたので廃止)。
               グループ定義があれば 1 グループ = 1 枚で並べる (2026-08-06)。 */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {panels.map((panel) => (
               <MetricSwitcherPanel
                 key={panel.key}
@@ -256,7 +254,7 @@ export function ThemeMetricsDashboard({
 
       {/* 時系列チャート */}
       {chartComponents.length > 0 && (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 @md:grid-cols-2">
           {chartComponents.map((chart) => (
             <ChartPanel
               key={chart.componentKey}
@@ -272,7 +270,7 @@ export function ThemeMetricsDashboard({
             >
               <ThemeDbChartRenderer
                 chart={chart}
-                prefCode={areaCode}
+                prefCode={pageComponentsAreaCode}
                 prefName={areaName}
               />
             </ChartPanel>
@@ -285,7 +283,7 @@ export function ThemeMetricsDashboard({
         <ThemeDbChartRenderer
           key={chart.componentKey}
           chart={chart}
-          prefCode={areaCode}
+          prefCode={pageComponentsAreaCode}
           prefName={areaName}
         />
       ))}

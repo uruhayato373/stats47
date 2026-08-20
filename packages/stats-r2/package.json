@@ -23,11 +23,13 @@
   },
   "scripts": {
     "export:from-d1": "tsx src/scripts/export-stats-to-r2.ts",
+    "generate:japan-series": "tsx src/scripts/generate-japan-series.ts",
     "test": "vitest",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@stats47/data-configs": "*",
+    "@stats47/estat-api": "*",
     "@stats47/r2-storage": "*",
     "@stats47/types": "*"
   },

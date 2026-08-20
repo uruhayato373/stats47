@@ -97,3 +97,22 @@ test("baselineは既存findingを許容する", (t) => {
   const root = fixture("// FIXME: later\n"); t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   assert.equal(run(root, ["--write-baseline"]).status, 0); assert.equal(run(root, ["--baseline"]).status, 0);
 });
+
+test("同一行の「縮小専用」はlegacy行を除外する (2026-08-20 geo-scope-national-sentinel-ratchet.test.ts:7 誤検知)", (t) => {
+  const root = fixture(
+    '/**\n * `selectedPrefectureCode ?? "00000"` (legacy sentinel) の縮小専用ラチェット\n */\nconst BASELINE = 1;\n',
+  );
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
+test("「縮小専用」を伴わない対象語の行は引き続き検出する (誤って全件を素通りさせていないこと)", (t) => {
+  // スラッシュを分離連結: この行自身がチェッカーの自己走査でコメント本体として
+  // 誤検出され baseline 増加になるのを避ける (2026-08-20 実測)。
+  const marker = "leg" + "acy";
+  const root = fixture("/" + "/ " + marker + ": この分岐はいずれ消す\n");
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 1, result.stdout + result.stderr);
+  const codes = JSON.parse(result.stdout).newFindings.map((item) => item.code);
+  assert.ok(codes.includes("UNBOUNDED_LEGACY"));
+});

@@ -712,7 +712,35 @@
       ]
     },
     {
+      "name": "PWSH_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "R2_ACCESS_KEY_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_DEV_GATEWAY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_DEV_GATEWAY_PORT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_DEV_GATEWAY_UPSTREAM",
       "visibility": "server",
       "contexts": [
         "process"

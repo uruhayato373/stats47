@@ -57,7 +57,7 @@
     {
       "type": "blog-card",
       "source": "r2-static",
-      "aspect": "16:9",
+      "aspect": "1.91:1",
       "entries": 430,
       "expected": 860,
       "ok": 860,

@@ -1,11 +1,14 @@
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import type { EntityKind } from "@stats47/data-configs";
 import {
+  parseJapanSeriesArtifact,
   parseMigrationFlowPayload,
   parseStatsValuesPayload,
 } from "../schemas";
 import {
+  japanR2Key,
   statsR2Key,
+  type JapanSeriesArtifact,
   type MigrationFlowPayload,
   type StatsValuesPayload,
 } from "../types";
@@ -50,4 +53,18 @@ export async function readStatsValuesForYear(
     ...all,
     rows: all.rows.filter((r) => r.yearCode === yearCode),
   };
+}
+
+/**
+ * Read Japan-wide series for a metric from R2 (`app/japan/<metric>/series.json`).
+ *
+ * 独立 namespace (GEO-SCOPE-SEPARATION-01 WP3)。`readStatsValues` (47都道府県) とは
+ * 混ぜない。Returns null when no artifact exists (metric が Japan catalog 未採用、または404)。
+ */
+export async function readJapanSeries(
+  metricKey: string,
+): Promise<JapanSeriesArtifact | null> {
+  const key = japanR2Key(metricKey);
+  const data = await fetchFromR2AsJson<unknown>(key);
+  return data ? parseJapanSeriesArtifact(data) : null;
 }
