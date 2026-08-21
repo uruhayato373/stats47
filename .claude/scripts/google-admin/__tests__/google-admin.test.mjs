@@ -16,7 +16,7 @@ import {
   plannedActionToken,
   requireCommit,
 } from "../apply-allowlisted-settings.mjs";
-import { assertAdSenseAccount, deriveDesiredAdUnits } from "../audit-adsense.mjs";
+import { assertAdSenseAccount, collectAdUnits, deriveDesiredAdUnits } from "../audit-adsense.mjs";
 import { assertPropertyId, assertStreamHost, summarizeCustomDimensions } from "../audit-ga4-api.mjs";
 import { sanitize, sanitizeObject, redactEmail, redactHelpToken } from "../redact.mjs";
 import { acquireLock, releaseLock, LOCK_FILE, isLoginUrl } from "../browser-context.mjs";
@@ -299,4 +299,90 @@ test("lock: 取得・多重拒否・解放", () => {
 test("isLoginUrl: Google ログイン画面の検知", () => {
   assert.ok(isLoginUrl("https://accounts.google.com/v3/signin/identifier?x=1"));
   assert.ok(!isLoginUrl("https://analytics.google.com/analytics/web/#/p463218070/admin"));
+});
+
+
+// ── ad unit inventory: 1 client の失敗で全体を落とさない ──────────────────────
+
+/**
+ * googleapis の adsense client の最小 fake。
+ * `unitsByClient` の値が Error なら、その client の adunits.list が投げる。
+ */
+function fakeAdsense(unitsByClient) {
+  return {
+    accounts: {
+      adclients: {
+        list: async () => ({ data: { adClients: Object.keys(unitsByClient).map((name) => ({ name })) } }),
+        adunits: {
+          list: async ({ parent }) => {
+            const v = unitsByClient[parent];
+            if (v instanceof Error) throw v;
+            return { data: { adUnits: v } };
+          },
+          // native ad unit は adcode を持たない (本番で毎回投げている正常系)
+          getAdcode: async () => {
+            throw new Error("adcode is not supported for native ad units.");
+          },
+        },
+      },
+    },
+  };
+}
+
+test("collectAdUnits: 動く client のユニットを、壊れた client があっても返す", async () => {
+  // ★本番の形: content 用 ca-pub-* は読めるが、AdSense for Search の partner-pub-* は
+  //   広告ユニットの概念を持たず NOT_FOUND を返す (2026-08-16 の run で実測)。
+  const adsense = fakeAdsense({
+    "accounts/pub-1/adclients/ca-pub-1": [
+      { name: "accounts/pub-1/adclients/ca-pub-1/adunits/1", reportingDimensionId: "1", displayName: "sidebar" },
+    ],
+    "accounts/pub-1/adclients/partner-pub-1": new Error("Couldn't find the ad client with name 'partner-pub-1'."),
+  });
+
+  const { units, skippedClients } = await collectAdUnits(adsense, "accounts/pub-1");
+
+  assert.equal(units.length, 1, "読めた client のユニットが落ちている");
+  assert.equal(units[0].displayName, "sidebar");
+  assert.equal(units[0].slotId, "", "getAdcode 失敗はユニットを落とす理由にしない");
+  assert.equal(skippedClients.length, 1, "落ちた client を黙って捨てている");
+  assert.match(skippedClients[0], /partner-pub-1/);
+});
+
+test("collectAdUnits: 全 client が失敗したときだけ throw する (0 件を「ユニット無し」と誤読させない)", async () => {
+  const adsense = fakeAdsense({
+    "accounts/pub-1/adclients/ca-pub-1": new Error("boom"),
+    "accounts/pub-1/adclients/partner-pub-1": new Error("NOT_FOUND"),
+  });
+
+  await assert.rejects(() => collectAdUnits(adsense, "accounts/pub-1"), /全 2 件の ad client/);
+});
+
+test("collectAdUnits: ad client が 0 件なら throw せず空を返す", async () => {
+  const { units, skippedClients } = await collectAdUnits(fakeAdsense({}), "accounts/pub-1");
+  assert.deepEqual(units, []);
+  assert.deepEqual(skippedClients, []);
+});
+
+test("collectAdUnits: ページングを辿る", async () => {
+  let call = 0;
+  const adsense = {
+    accounts: {
+      adclients: {
+        list: async () => ({ data: { adClients: [{ name: "c1" }] } }),
+        adunits: {
+          list: async () => {
+            call += 1;
+            return call === 1
+              ? { data: { adUnits: [{ name: "c1/adunits/1", reportingDimensionId: "1" }], nextPageToken: "t" } }
+              : { data: { adUnits: [{ name: "c1/adunits/2", reportingDimensionId: "2" }] } };
+          },
+          getAdcode: async () => ({ data: { adCode: '<ins data-ad-slot="12345"></ins>' } }),
+        },
+      },
+    },
+  };
+
+  const { units } = await collectAdUnits(adsense, "accounts/pub-1");
+  assert.deepEqual(units.map((u) => u.id), ["1", "2"]);
+  assert.equal(units[0].slotId, "12345");
 });

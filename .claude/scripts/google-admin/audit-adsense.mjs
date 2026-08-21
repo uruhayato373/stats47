@@ -135,21 +135,36 @@ export async function auditAdSenseAccount() {
  *
  * @param {{codeSlots?: Array<object>, accountId?: string|null}} args
  */
-export async function auditAdUnits({ codeSlots = [], accountId = null } = {}) {
-  loadAdsenseEnvFromDotEnv();
-  const account = accountId ?? expectedAdSenseAccount();
-  const adsense = adsenseClient();
-  if (!adsense) {
-    return { status: "credentials-missing", source: "api", units: [], desired: deriveDesiredAdUnits(codeSlots), codeSlots };
-  }
-  if (!account) {
-    return { status: "expected-missing", source: "api", units: [], desired: deriveDesiredAdUnits(codeSlots), codeSlots };
-  }
-  try {
-    const units = [];
-    const clientsRes = await adsense.accounts.adclients.list({ parent: account });
-    for (const client of clientsRes.data.adClients ?? []) {
-      if (!client.name) continue;
+/**
+ * ad client を辿って ad unit を集める。
+ *
+ * ★1 つの ad client の失敗で inventory 全体を落とさない (2026-08-21 修正)。
+ * このアカウントは content 用 `ca-pub-*` のほかに AdSense for Search の `partner-pub-*` を
+ * 持つ。後者は広告ユニットの概念を持たないため `adunits.list` が NOT_FOUND を返す。
+ * per-client の try/catch が無かったせいで **audit の inventory は一度も成功しておらず**、
+ * 週次 audit は毎回「AdSense ad units: 0 件 (error)」を出していた (2026-08-16 の run で実測)。
+ * 同じ欠陥は `fetch-adsense-snapshot.mjs` の `fetchAdUnitInventory` で 2026-08-04 に
+ * 修正済みで、**同じ資格情報で snapshot 側は成功していた** — つまり原因は credential ではなく
+ * この walk の実装だった。判定を揃えるため、あちらと同じ形にする。
+ *
+ * 失敗した client は落とさず `skippedClients` に記録し、**全 client が失敗したときだけ throw**
+ * する (0 件を「ユニットが無い」と誤読させないため)。
+ *
+ * adsense client を引数で受けるのは、fake を注入してこの分岐をテストできるようにするため。
+ *
+ * @param {object} adsense googleapis の adsense client
+ * @param {string} account `accounts/pub-XXXX`
+ * @returns {Promise<{units: object[], skippedClients: string[]}>}
+ */
+export async function collectAdUnits(adsense, account) {
+  const units = [];
+  const skippedClients = [];
+
+  const clientsRes = await adsense.accounts.adclients.list({ parent: account });
+  const adClients = (clientsRes.data.adClients ?? []).filter((c) => c.name);
+
+  for (const client of adClients) {
+    try {
       let pageToken;
       do {
         const res = await adsense.accounts.adclients.adunits.list({
@@ -164,7 +179,8 @@ export async function auditAdUnits({ codeSlots = [], accountId = null } = {}) {
               const code = await adsense.accounts.adclients.adunits.getAdcode({ name: u.name });
               slotId = extractSlotIdFromAdCode(code.data.adCode ?? null);
             } catch {
-              // adCode 単体の失敗はユニットを落とす理由にしない (slotId 不明として残す)
+              // adCode 単体の失敗はユニットを落とす理由にしない (slotId 不明として残す)。
+              // native ad unit は adcode を持たないので、ここは正常系でも通る。
             }
           }
           units.push({
@@ -179,11 +195,37 @@ export async function auditAdUnits({ codeSlots = [], accountId = null } = {}) {
         }
         pageToken = res.data.nextPageToken || undefined;
       } while (pageToken);
+    } catch (e) {
+      skippedClients.push(`${client.name}: ${String(e?.message ?? e).slice(0, 120)}`);
     }
+  }
+
+  if (adClients.length > 0 && skippedClients.length === adClients.length) {
+    throw new Error(
+      `全 ${adClients.length} 件の ad client で adunits.list に失敗した: ${skippedClients.join(" / ")}`,
+    );
+  }
+
+  return { units, skippedClients };
+}
+
+export async function auditAdUnits({ codeSlots = [], accountId = null } = {}) {
+  loadAdsenseEnvFromDotEnv();
+  const account = accountId ?? expectedAdSenseAccount();
+  const adsense = adsenseClient();
+  if (!adsense) {
+    return { status: "credentials-missing", source: "api", units: [], skippedClients: [], desired: deriveDesiredAdUnits(codeSlots), codeSlots };
+  }
+  if (!account) {
+    return { status: "expected-missing", source: "api", units: [], skippedClients: [], desired: deriveDesiredAdUnits(codeSlots), codeSlots };
+  }
+  try {
+    const { units, skippedClients } = await collectAdUnits(adsense, account);
     return {
       status: "ok",
       source: "api",
       units,
+      skippedClients,
       desired: deriveDesiredAdUnits(codeSlots),
       codeSlots,
     };
@@ -192,6 +234,7 @@ export async function auditAdUnits({ codeSlots = [], accountId = null } = {}) {
       status: "error",
       source: "api",
       units: [],
+      skippedClients: [],
       desired: deriveDesiredAdUnits(codeSlots),
       codeSlots,
       detail: String(e.message ?? e).slice(0, 200),

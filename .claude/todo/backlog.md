@@ -815,18 +815,44 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `.claude/rules/blog-data-schema.md`
 
 ### [GOOGLE-ADMIN-AUTOMATION-01] Google管理操作のAPI/UI境界整理とCI化
-タグ: [実行:ユーザー] [起票:2026-07-30]
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run google-admin:test] [起票:2026-07-30]
 
-- **owner**: uruhayato373 (残りは credential 登録と Environment 承認のオーナー工程)
-- **機械側は達成済**（2026-08-17 実測）: `google-admin:test` 33 件 pass / `metrics:test` 76 件 pass /
-  `docs:check` exit 0。schedule は audit のみ（`0 20 * * 0`）、mutation job は
-  `environment: google-admin-production` の承認付き。**Claude 側で進められる工程は残っていない。**
-- **次**: `.claude/scripts/google-admin/README.md`のPhase 0から順に実装する。最初にAdSense write APIを前提にしたallowlistとOAuth scopeを是正し、GA4 Admin read auditをbrowserから分離する。
-- **実行順**: (1) AdSenseの制限API誤認を是正 → (2) GA4/GSC/AdSense read inventoryをAPI-only化 → (3) GA4 custom dimensionの承認付きAPI plan/apply → (4) read-only scheduleとprotected manual Workflow → (5) PlaywrightをGSC link/Libraryだけへ縮小。
-- **残り**: AdSense weekly snapshotは最新runでも別projectのOAuth clientを参照して全jobがerror。正しいprojectの`adsense.readonly` token復旧、GitHub Environment作成、GA4 admin専用credential登録は人間工程。
-- **完了条件**: API部分が`.env.local`・Playwright・MCPへ依存せず、scheduleはread-only、mutationは1 run 1件・plan token・Environment承認付きである。`google-admin:test`、`metrics:test`、`docs:check`がexit 0。
-- **停止条件**: property/stream/account不一致、inventory取得不能、plan token不一致、authored dimension定義なし、quota不明、外部secret/role変更が必要な時点でmutationを止める。
-- **禁止**: AdSense `adunits.create`/`patch`を利用可能と仮定しない。公式にはAdSense for Platforms系の制限プロジェクト向けで、stats47の利用権限は未証明。`--force`、既存dimensionのarchive/delete、storageStateのCI持込、外部secretの無承認変更を行わない。
+- **owner**: uruhayato373 (残りは GitHub Environment の作成と credential 登録の 2 手だけ)
+- **機械側は達成済**（2026-08-21 再実測）: `google-admin:test` 37 件 pass / `metrics:test` 76 件 pass /
+  `docs:check` errors 0。schedule は audit のみ（`0 20 * * 0`）、apply job は
+  `workflow_dispatch` かつ `mode=apply` のときだけ起動し `confirm_site` + `approval_token` を要求する。
+  workflow の `permissions: contents: read`（repo へ書かない）。
+- **2026-08-21 に修正した実バグ**: 週次 audit が毎回「AdSense ad units: 0 件 (error)」を出していたのは
+  **credential ではなく walk の実装欠陥**だった。このアカウントは content 用 `ca-pub-*` に加えて
+  AdSense for Search の `partner-pub-*` を持ち、後者は広告ユニットの概念が無く `adunits.list` が
+  NOT_FOUND を返す。`audit-adsense.mjs` に per-client の try/catch が無く、1 件の失敗で inventory 全体が
+  空になっていた。**同じ資格情報で `fetch-adsense-snapshot.mjs` は成功しており**（2026-08-16 の run で
+  実測・W33 の snapshot は保存済み）、あちらは 2026-08-04 に同じ欠陥を修正済みだった。判定を揃えるため
+  `collectAdUnits` を切り出し、失敗した client は `skippedClients` に残して**全滅のときだけ throw** する形にした。
+  CLI も一部 skip を出すようにし、欠けた件数が status=ok のまま黙って緑にならないようにした。
+- **カードの旧記述は stale だった**: 「AdSense weekly snapshot は最新 run でも別 project の OAuth client を
+  参照して全 job が error」は 2026-08-16 の実測と食い違う。AdSense account assert = ok /
+  GA4 link = ok / GSC = siteOwner で、**OAuth は復旧済み**。
+- **待っている成果**: custom dimension 7 件が `confirmed-absent`（`cta_id` / `content_id` / `target_type` /
+  `target_key` / `card_variant` / `slot` / `experiment_variant`）。台帳 `analytics-event-standards.md` の
+  ⏳要登録 と一致する。これが入るまで buzz-map の deep-click と home-featured の variant 別内訳は取れない。
+- **残るオーナー工程（順序が重要）**:
+  1. GitHub Environment `google-admin-production` を **required reviewer 付きで作る**（現状 `Preview` /
+     `Production` しか無い）。
+  2. `analytics.edit` を持つサービスアカウント鍵を **その Environment の secret** として
+     `GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON` に登録する。
+  - **★順序を逆にしない。** 存在しない Environment を参照する job は GitHub が実行時に
+    **保護ルール無しで自動作成**する。先に repo secret として鍵を登録すると、承認ゲートを通らずに
+    apply が走る状態になる。今は鍵がどこにも無いため apply は `admin-credential-missing` で
+    BLOCKED（二重の fail closed）で安全。
+- **完了条件**: `google-admin-production` が required reviewer 付きで存在し、鍵がその Environment の
+  secret として登録され、`mode=plan` → `mode=apply` で custom dimension 1 件を承認付きで作成できる。
+  `google-admin:test` / `metrics:test` / `docs:check` が exit 0。
+- **停止条件**: property/stream/account 不一致、inventory 取得不能、plan token 不一致、authored dimension
+  定義なし、quota 不明、外部 secret/role 変更が必要な時点で mutation を止める。
+- **禁止**: AdSense `adunits.create`/`patch` を利用可能と仮定しない（AdSense for Platforms 系の制限
+  プロジェクト向けで stats47 の利用権限は未証明）。`--force`、既存 dimension の archive/delete、
+  storageState の CI 持込、外部 secret の無承認変更を行わない。
 - **正典**: `.claude/scripts/google-admin/README.md`
 
 ### [SEO-META-FACTUAL-GATE-01] metric config の SEO 文字列が実データと照合されていない
