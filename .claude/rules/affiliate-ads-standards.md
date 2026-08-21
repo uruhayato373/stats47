@@ -415,6 +415,8 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | ASP 共通操作 (openAsp / ensureTargetSite) | `.claude/scripts/ads/lib/asp-browser.mjs` |
 | 提携状態の実機照合 (read-only / `--write`) | `.claude/scripts/ads/affiliate-status.mjs` |
 | 提携申請 (dry-run 既定 / `--commit`) | `.claude/scripts/ads/affiliate-apply.mjs` |
+| operation plan / journal の I/O | `.claude/scripts/ads/lib/asp-operation-store.mjs` (判定は `asp-operation-core.mjs`) |
+| lock / health の I/O | `.claude/scripts/ads/affiliate-ops.mjs` |
 | afb 未提携案件の走査 | `.claude/scripts/ads/afb-scan.mjs` |
 | もしも未提携案件の走査 | `.claude/scripts/ads/moshimo-scan.mjs` (stats47 で新規作成・移植元に無い) |
 | 走査の vertical 抽出語 (afb / もしも共通) | `.claude/scripts/ads/lib/asp-vertical-keywords.mjs` |
@@ -429,6 +431,9 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 |---|---|
 | サイト帰属を確定できなければ 1 バイトも読まない | `assertSiteOrThrow` が例外。回避引数を作らない |
 | 提携申請は既定 dry-run・実申請はオーナー承認 | `--commit` gate。Red Line 案件は `--commit` でも落とす |
+| **`--commit` は plan 経由でしか通さない** | `--commit --plan <operationId>` のみ許し `--commit --id` を禁止する (`validateArgs`)。dry-run が `.local/affiliate-ops/plans/<id>.json` に「サイト・案件・対象数・ボタン文言」を焼き、commit 直前に同じ画面を再観測して `validatePlanForCommit` で突き合わせる。1 項目でも違えば押さず plan を `.expired.json` へ改名して残す。**id 直指定だと「見た画面」と「押す画面」が別 run になり、間の差し替えを検知できない** |
+| **押した事実を先に書く** | `.local/affiliate-ops/journal.ndjson` に append-only で `planned → intent-recorded → sent → confirmed\|unknown`。押す直前と直後の 2 行は fsync まで完了させる。`sent` か `unknown` がある operation は `canAutoResend` が false になり **自動再送しない** (次は live reconciliation だけ)。途中で kill されても二重申請にならない |
+| **ASP profile は 1 プロセスだけが開く** | `affiliate-ops.mjs lock acquire/release` (O_EXCL・pid+hostname 記録)。生存 PID の lock は奪わず、stale は age と PID 不在の両方を見てから回収する。並行で開くと Chrome がセッションを壊し、進行中の申請の状態が追えなくなる |
 | 「一括提携申請へ」を絶対に押さない | ラベル完全一致 + 「一括」を含む候補を機械除外 |
 | もしもの申請はサイト select を read-back 確認してから押す | `selectSiteInForm` が不一致で abort |
 | 取得できなかった ASP を「提携なし」と混同しない | `affiliate-status` が判定不能として区別。一覧の実件数を必ず併記し「ID 0 件 = 提携ゼロ」と誤読させない (2026-07-28 に実際に誤読し、提携中 7 件・申請中 6 件を「0 件」と報告した)。**もしもは画面テキストに ID が出ない**が `hrefIdPattern` + `listScopeSelector` で抽出でき、行数と一致する (2026-08-04 実測: 提携中 32 行 = ID 32 件)。**A8 は `affiliate-status` に抽出パターンが無く常に 0 件**なので、A8 の提携状態は `a8-catalog.json` 側 (`check-approval`) で見る |
@@ -438,6 +443,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | 申請の完了を文言で判定しない | もしもの申請は **2 段階** (申請ページ →`/apply/confirm` で確定)。確認ページにも「申請」の語が出るため文言判定では未完了を成功と誤報する。完了は**申請中または提携中一覧に当該案件が現れたか**だけを根拠にする (2026-07-28 に 4 件を誤報)。★もしもは**即時承認**があり申請中を経ず提携中へ直行する (同日 4 件実測) — 申請中一覧だけ見ると成功を unverified と誤報する |
 | ID 抽出は一覧行スコープに限定し、行数と一致することを確かめる | ページ全体の `a[href]` から拾うと**一覧行の外にあるページ共通リンクが混ざり超集合**になる。もしもは提携中・申請中の両ページに `promotion_id=7630 / 7556 / 170` の共通リンクがあり、2026-08-04 に提携中 32 行に対し ID 35 件を抽出、うち 2 件を「台帳に無い実機の提携」として**誤検出**した (両ページに同時に出る ID は論理的に一覧項目ではない、が発見の決め手)。config の `listScopeSelector` (もしも = `table a[href]`) で一覧スコープを明示し、ログの「一覧 N 件 / ID 累計 N 件」が**一致すること**を毎回確認する。afb は ID を `【PID:N】` の可視テキストから取るため本件は構造的に起きない |
 | 認証情報を env / config に置かない | 人間が手動ログイン → 永続プロファイル |
+| **afb はセッションを持ち越せない** | `sessionPersistsAcrossProcesses: false`。run のたびに `requiredlogin` へ落ちるので**毎回人間のログインが要る** (2026-08-21 実測: 180 秒待って一度も抜けなかった)。もしも・A8 は永続プロファイルでセッションが生きるため、無人で read-only 走査まで到達できる (同日 もしも実測: 提携中 39 行 / 申請中 37 行・SID 638943 assert ok)。**afb だけが構造的にオーナー工程**であり、3 ASP をまとめて「オーナー待ち」と扱わない |
 
 ### 役割分担
 

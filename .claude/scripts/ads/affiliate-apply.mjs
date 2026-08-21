@@ -26,6 +26,9 @@
 import { createRequire } from "node:module";
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { spawnSync } from "node:child_process";
+import { pathToFileURL } from "node:url";
 import { join } from "node:path";
 
 import {
@@ -39,6 +42,20 @@ import {
   repoRoot,
 } from "./lib/asp-browser.mjs";
 
+import {
+  buildPlan,
+  buildJournalEvent,
+  validatePlanForCommit,
+  deriveOperationOutcome,
+} from "./lib/asp-operation-core.mjs";
+import {
+  writePlan,
+  readPlan,
+  expirePlan,
+  appendJournal,
+  readJournal,
+} from "./lib/asp-operation-store.mjs";
+
 const CATALOG = join(repoRoot(), ".claude/state/ads/affiliate-catalog.json");
 
 // 頻度ガードは CommonJS (A8 側の check-a8-apply-budget.cjs と同じ形) なので require で読む。
@@ -46,17 +63,43 @@ const { applyBudget, toJstDate } = createRequire(import.meta.url)("./check-asp-a
 
 function parseArgs() {
   const a = process.argv.slice(2);
-  const o = { asp: null, ids: [], commit: false };
+  const o = { asp: null, ids: [], commit: false, plan: null };
   for (let i = 0; i < a.length; i++) {
     if (a[i] === "--asp") o.asp = a[++i];
     else if (a[i] === "--id") o.ids.push(...a[++i].split(",").map((s) => s.trim()));
     else if (a[i] === "--commit") o.commit = true;
+    else if (a[i] === "--plan") o.plan = a[++i];
   }
-  if (!o.asp || o.ids.length === 0) {
-    console.error("usage: --asp <moshimo|afb> --id <id[,id]> [--commit]");
+  const err = validateArgs(o);
+  if (err) {
+    console.error(err);
+    console.error("usage:");
+    console.error("  --asp <moshimo|afb> --id <id[,id]>        # dry-run (plan を作る)");
+    console.error("  --asp <moshimo|afb> --plan <operationId> --commit   # 実申請 (plan 1 件だけ)");
     process.exit(2);
   }
   return o;
+}
+
+/**
+ * 引数の整合 (doc 42 §6.3)。`--commit` は `--plan` を必須にし `--id` を禁止する。
+ *
+ * ★なぜ `--commit --id` を禁じるか: id 直指定だと「見た画面」と「押す画面」が別 run になり、
+ *   間に案件の差し替え・サイト select の変化が起きても検知できない。plan を挟むと
+ *   commit 直前の再照合で不一致を捕まえられる。純関数にして単体で固定する。
+ *
+ * @returns {string|null} エラー文言 (問題なければ null)
+ */
+export function validateArgs(o) {
+  if (!o.asp) return "--asp が必要";
+  if (o.commit) {
+    if (!o.plan) return "--commit には --plan <operationId> が必要 (dry-run で作った計画を指す)";
+    if (o.ids.length > 0) return "--commit --id は禁止 (押す対象は plan だけが決める)";
+    return null;
+  }
+  if (o.plan) return "--plan は --commit と一緒に使う (dry-run は --id で対象を指定する)";
+  if (o.ids.length === 0) return "--id が必要";
+  return null;
 }
 
 /** カタログから該当エントリを引く (Red Line 判定と記録更新のため)。 */
@@ -171,7 +214,7 @@ async function assertSingleTarget(page, id) {
   if (String(found.promo[0]) !== String(id)) {
     return { ok: false, reason: `申請対象が ${found.promo[0]} で指定 ${id} と違う。押さない` };
   }
-  return { ok: true, reason: `申請対象 1 件 (promotion_id=${found.promo[0]})` };
+  return { ok: true, reason: `申請対象 1 件 (promotion_id=${found.promo[0]})`, formTargetCount: found.promo.length };
 }
 
 /** 申請ページから案件名を取る (完了判定の照合キー。ページ見出しは全案件共通で使えない)。 */
@@ -272,7 +315,7 @@ async function selectSiteInForm(page, asp, siteLabel, siteId) {
  *   6. a>img[alt="提携申請はこちら"] がちょうど 1 個であることを確認して押す
  *   7. 検証は文言でなく実測: PID を再検索し行 badge が 申請中/提携中 に変わったこと
  */
-async function applyAfbOne(page, asp, root, siteLabel, id, commit) {
+async function applyAfbOne(page, asp, root, siteLabel, id, commit, { catalog, plan }) {
   await ensureTargetSite(page, asp, root, { navigateTo: "/pa/promolist/?rel=non" });
 
   // ★ 検索結果ページには status badge テキストが出ない (rel=non 一覧と別レイアウト・2026-07-28 実測)。
@@ -349,16 +392,43 @@ async function applyAfbOne(page, asp, root, siteLabel, id, commit) {
     return { id, title, action: "abort", reason: `同時申請チェックを外せない (SID: ${stillChecked.join(",")})` };
   }
 
-  if (!commit) return { id, title, action: "dry-run", reason: `確認ブロック到達 (site=${siteM[1]}・押していない)` };
+  // afb は確認ブロックまで来て初めて対象が確定する。ここが「押す直前の観測」。
+  const observed = {
+    action: "apply",
+    asp: "afb",
+    siteId: String(asp.sites?.[root.targetSiteName] ?? siteM[1]),
+    programId: String(id),
+    programName: title,
+    formTargetCount: 1,
+    applyLabel: "提携申請はこちら",
+    confirmLabel: null,
+    termsFingerprint: null,
+    eligibilityFingerprint: eligibilityFingerprint(catalog, "afb", id),
+  };
 
+  if (!commit) {
+    const created = planFromObservation(observed);
+    return { id, title, action: "dry-run", reason: `確認ブロック到達 (site=${siteM[1]}) plan=${created.operationId}` };
+  }
+
+  if (!gateCommit(plan, observed)) {
+    return { id, title, action: "abort", reason: "再照合不一致 (plan 失効)" };
+  }
+
+  journal(plan, "intent-recorded");
   page.once("dialog", (d) => d.accept().catch(() => {}));
   await finalBtns.first().click();
+  journal(plan, "sent");
   await page.waitForTimeout(7000);
 
   // 実測検証: 再検索して行の申請ボタンが消えたこと (= 申請済み状態) を確認する。
   // 検索結果は badge を出さないため、申請中/提携中の別は週次の affiliate-status --write が確定する。
   const after = await searchPid();
-  if (after.found && after.applyHrefs.length === 0) return { id, title, action: "applied", reason: "" };
+  if (after.found && after.applyHrefs.length === 0) {
+    journal(plan, "confirmed");
+    return { id, title, action: "applied", reason: "" };
+  }
+  journal(plan, "unknown", after.found ? "申請後も申請ボタンが残っている" : "申請後の再検索で行が見つからない");
   await dumpFailure(page, { browser: asp.browser }, `apply-afb-${id}`).catch(() => {});
   return {
     id,
@@ -366,6 +436,81 @@ async function applyAfbOne(page, asp, root, siteLabel, id, commit) {
     action: "unverified",
     reason: after.found ? "申請後も申請ボタンが残っている" : "申請後の再検索で行が見つからない",
   };
+}
+
+/**
+ * 掲載適格性の指紋。**いま実際に見ている条件だけ**をハッシュする (推測で広げない)。
+ *
+ * doc 42 §7 の eligibility core (targetRankingKeys の hard allowlist) はまだ無いので、
+ * 現状の判定材料は「Red Line か」「どの vertical か」の 2 つしかない。core が入れば
+ * 入力が増えて指紋が変わり、**古い plan は再照合で自動的に失効する** — それが正しい挙動。
+ */
+function eligibilityFingerprint(catalog, aspName, id) {
+  const hit = findInCatalog(catalog, aspName, id);
+  const material = {
+    asp: aspName,
+    programId: String(id),
+    redLine: hit?.program?.redLine === true,
+    vertical: hit?.program?.vertical ?? null,
+    // ★ここに targetRankingKeys 等を足すのは eligibility core と同時に行う
+  };
+  return createHash("sha256").update(JSON.stringify(material)).digest("hex").slice(0, 32);
+}
+
+/** ASP profile の排他 lock。protocol の実装は affiliate-ops.mjs に一本化してある。 */
+function opsLock(action, aspName, operationId) {
+  const r = spawnSync(
+    process.execPath,
+    [join(repoRoot(), ".claude/scripts/ads/affiliate-ops.mjs"), "lock", action, "--asp", aspName, "--operation-id", operationId],
+    { encoding: "utf-8" },
+  );
+  if (r.stdout?.trim()) console.log(`  ${r.stdout.trim()}`);
+  if (r.status !== 0 && r.stderr?.trim()) console.error(`  ${r.stderr.trim()}`);
+  return r.status === 0;
+}
+
+/** journal へ 1 event。押す前後の記録が落ちると二重申請の検知ができないので握り潰さない。 */
+function journal(plan, event, reason = null) {
+  appendJournal(
+    buildJournalEvent({
+      operationId: plan.operationId,
+      at: new Date().toISOString(),
+      asp: plan.asp,
+      siteId: plan.siteId,
+      programId: plan.programId,
+      event,
+      planSha256: plan.payloadSha256,
+      reason,
+    }),
+  );
+}
+
+/**
+ * dry-run が観測した申請対象から plan を作って保存する。
+ * @returns {object} 保存した plan
+ */
+function planFromObservation(observed) {
+  const plan = buildPlan({ ...observed, createdAt: new Date().toISOString() });
+  writePlan(plan);
+  journal(plan, "planned");
+  console.log(`  plan: ${plan.operationId} (sha=${plan.payloadSha256.slice(0, 12)}… 期限 ${plan.expiresAt})`);
+  return plan;
+}
+
+/**
+ * commit 直前の再照合 (§6.3)。不一致なら plan を失効させ、押さない。
+ * @returns {boolean} 押してよいか
+ */
+function gateCommit(plan, observed) {
+  const v = validatePlanForCommit({ plan, nowIso: new Date().toISOString(), observed });
+  if (!v.ok) {
+    expirePlan(plan.operationId);
+    journal(plan, "aborted", v.reason);
+    console.error(`  ✗ ${v.reason}`);
+    return false;
+  }
+  console.log(`  ${v.reason}`);
+  return true;
 }
 
 async function main() {
@@ -379,6 +524,27 @@ async function main() {
   const catalog = JSON.parse(readFileSync(CATALOG, "utf-8"));
   const siteLabel = targetSiteLabel(asp, root);
   const siteId = asp.sites?.[root.targetSiteName];
+
+  // ★commit は plan 経由でしか走らない (§6.3)。plan が決めた 1 件だけを対象にする。
+  let plan = null;
+  if (opts.commit) {
+    plan = readPlan(opts.plan);
+    if (!plan) {
+      console.error(`✗ plan が見つからない: ${opts.plan} (dry-run で作り直す)`);
+      process.exit(1);
+    }
+    if (plan.asp !== opts.asp) {
+      console.error(`✗ plan の ASP は ${plan.asp} で --asp ${opts.asp} と違う`);
+      process.exit(1);
+    }
+    const outcome = deriveOperationOutcome(readJournal(plan.operationId));
+    if (!outcome.canAutoResend) {
+      // sent / unknown がある = 押した記録がある。未申請と誤認して再送しない (§6.4)
+      console.error(`✗ この plan は既に実行済み (state=${outcome.state})。再送しない — live reconciliation で確認する`);
+      process.exit(1);
+    }
+    opts.ids = [plan.programId];
+  }
 
   console.log(
     `提携申請 [${asp.label}] ${opts.ids.length} 件  対象サイト=${siteLabel}  モード=${opts.commit ? "★実申請" : "dry-run"}`,
@@ -415,6 +581,14 @@ async function main() {
         !new RegExp(asp.reAuthPattern, "i").test(page.url()) &&
         (await page.locator(asp.readyMarker).count().catch(() => 0)) > 0
     : undefined;
+  // ★ASP profile は 1 プロセスしか触らない (§6.5)。同じ profile を並行で開くと Chrome が
+  //   セッションを壊し、途中まで進んだ申請の状態が追えなくなる。
+  const lockId = plan?.operationId ?? `dryrun-${opts.asp}-${Date.now()}`;
+  if (!opsLock("acquire", opts.asp, lockId)) {
+    console.error(`✗ ${opts.asp} の profile lock を取得できない (別の run が使用中)`);
+    process.exit(2);
+  }
+
   const { ctx, page } = await openAsp(asp, { isReady, label: opts.asp });
 
   const results = [];
@@ -422,7 +596,7 @@ async function main() {
     for (const id of opts.ids) {
       // afb は URL 構造が違うため専用フロー (検索 → 行ボタン → 確認ブロック → badge 実測)
       if (opts.asp === "afb") {
-        const r = await applyAfbOne(page, asp, root, siteLabel, id, opts.commit);
+        const r = await applyAfbOne(page, asp, root, siteLabel, id, opts.commit, { catalog, plan });
         const mark = r.action === "applied" ? "✓ 申請を確認" : r.action === "approved" ? "✓ 申請を確認 (即時承認→提携中)" : `△ ${r.action}`;
         console.log(`\n[${id}] ${r.title}\n  ${mark}${r.reason ? ` — ${r.reason}` : ""}`);
         results.push(r);
@@ -445,6 +619,8 @@ async function main() {
       const promoName = await readPromotionName(page);
       const title = (promoName || text.split("\n").find((l) => l.trim().length > 4) || "").trim().slice(0, 60);
 
+      // moshimo 以外は対象数を数える手段が無いので plan の既定 1 を使う
+      let singleTargetCount = 1;
       const btn = await findApplyButton(page, asp.applyButtonLabel ?? "提携申請する");
       if (!btn.ok) {
         console.log(`  skip: ${btn.reason}`);
@@ -461,6 +637,7 @@ async function main() {
           continue;
         }
         console.log(`  ${single.reason}`);
+        singleTargetCount = single.formTargetCount;
       }
 
       const siteSel = await selectSiteInForm(page, asp, siteLabel, siteId);
@@ -471,13 +648,38 @@ async function main() {
       }
       console.log(`  ${siteSel.reason}`);
 
+      // 押す直前に観測した「意味上の申請対象」。dry-run はこれを plan に焼き、
+      // commit はこれと plan を突き合わせる (§6.3)。
+      const observed = {
+        action: "apply",
+        asp: opts.asp,
+        siteId: String(siteId),
+        programId: String(id),
+        programName: promoName ?? title,
+        formTargetCount: singleTargetCount,
+        applyLabel: asp.applyButtonLabel,
+        confirmLabel: asp.confirmButtonLabel ?? null,
+        termsFingerprint: null,
+        eligibilityFingerprint: eligibilityFingerprint(catalog, opts.asp, id),
+      };
+
       if (!opts.commit) {
         console.log(`  dry-run: 「${asp.applyButtonLabel}」を押せる状態 (押していない)`);
-        results.push({ id, title, action: "dry-run", reason: "押下可能" });
+        const created = planFromObservation(observed);
+        results.push({ id, title, action: "dry-run", reason: `plan=${created.operationId}` });
         continue;
       }
 
+      if (!gateCommit(plan, observed)) {
+        results.push({ id, title, action: "abort", reason: "再照合不一致 (plan 失効)" });
+        continue;
+      }
+
+      // ★押す前に intent、押した直後に sent。この 2 行が journal に無いと、途中で落ちたときに
+      //   「押したか」が永久に分からなくなる (§6.4)。
+      journal(plan, "intent-recorded");
       await btn.el.click();
+      journal(plan, "sent");
       await page.waitForTimeout(4000);
 
       // ★ もしもは 2 段階。1 段目は確認ページへ行くだけで申請は成立しない。
@@ -496,6 +698,7 @@ async function main() {
 
       // ★ 完了判定は文言ではなく実測。申請中 or 提携中 (即時承認) の一覧に出て初めて「申請した」と言う。
       const verified = await verifyApplied(page, asp, siteId, promoName, id);
+      journal(plan, verified.ok ? "confirmed" : "unknown", verified.ok ? null : verified.reason);
       console.log(`  ${verified.ok ? (verified.state === "approved" ? "✓ 申請を確認 (即時承認→提携中)" : "✓ 申請を確認") : `△ ${verified.reason}`}`);
       if (!verified.ok) await dumpFailure(page, { browser: asp.browser }, `apply-${opts.asp}-${id}`).catch(() => {});
       const ok = verified.ok;
@@ -512,6 +715,7 @@ async function main() {
     }
   } finally {
     await ctx.close().catch(() => {});
+    opsLock("release", opts.asp, lockId);
   }
 
   console.log(`\n=== まとめ ===`);
@@ -519,7 +723,10 @@ async function main() {
   if (!opts.commit) console.log(`\n→ 実申請するには --commit を付ける (規約同意を伴うのでユーザーの明示許可が要る)`);
 }
 
-main().catch((e) => {
-  console.error("Fatal:", e?.message || e);
-  process.exit(1);
-});
+// ★import.meta.url と argv[1] を文字列連結で比べない (Windows で必ず不一致になる)。
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((e) => {
+    console.error("Fatal:", e?.message || e);
+    process.exit(1);
+  });
+}

@@ -21,25 +21,65 @@ updated: 2026-08-20
 
 ## 🔴 高 — 今月中に着手したい
 
-### [ASP-CONTINUITY-01] もしも・afbの承認追跡と広告コード取得
-タグ: [実行:ユーザー] [起票:2026-07-28]
+### [ASP-CONTINUITY-01] afb の承認追跡と広告コード取得 (オーナーのログインが要る分)
+タグ: [収益化] [種類:改善] [実行:ユーザー] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-07-28]
 
-- **owner**: uruhayato373 (実行順 3 の走査承認と Playwright プロファイルがオーナー環境にある)
-- **★backlog-loop では閉じられない** (2026-08-17): 実行順 3 が「オーナー承認後に走査」で、
-  かつ ASP の Playwright は `.local/playwright-{a8,coconala}-profile` の永続プロファイル
-  (手動ログイン済み) を要求する。CI にはどちらも無い。pending のままだとループが毎回 pick して
-  失敗を積み、3 回で quarantine するだけになる。
-- **根拠**: apply後の承認追跡とharvestがなく、申請済み案件がSSOT登録まで到達しない。
-- **実行順**:
-  1. Phase 2でeligibility pure coreと`targetRankingKeys` hard allowlistを実装し、配信をfail-closedにする。
-  2. apply CLIへplan hash・journal・profile lockを必須化し、期限切れplan、二重実行、対象差替えを拒否する。
-  3. オーナー承認後にもしも・afbのapplying/partnered全ページをread-onlyで走査し、selectorとpagination終端をfixtureへ固定する。
-  4. 完全走査に成功したASPだけ、`applying → partnered`をpositive-onlyで更新する。unknownや未走査を失敗・承認へ推測変換しない。
-  5. 広告コード取得はsite/program対応を検証し、raw HTMLを保存せずmask・0600権限・7日retentionを守る。
-  6. register候補をdry-runで生成し、git TS差分、rollback、cron healthを確認する。SSOT反映・ASP操作・公開はそれぞれ別承認とする。
-- **停止条件**: login要求、captcha、selector複数一致、pagination不明、plan hash不一致、lock競合、site/program不一致のいずれかで停止する。
-- **完了条件**: もしも/afbの `apply → approval check → harvest → register候補` がdry-runで縦断し、artifact権限、retention、cron health、rollbackをテストする。
-- **正典**: `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` / `.claude/rules/affiliate-ads-standards.md`
+- **owner**: uruhayato373 (afb の手動ログインと `--commit` 承認)
+- **★2026-08-21 に前提を実測し直した。カードの旧記述は誤りだった**:
+  - 「Playwright プロファイルがオーナー側にある」→ **この Windows 端末に実在する**
+    (`.local/playwright-{a8,afb,moshimo}-profile`。a8 は 282MB)。
+  - **もしもはセッションが生きており、read-only 走査がこの端末で通る**。実測:
+    提携中 39 行 / ID 39 件、申請中 37 行 / ID 37 件、SID 638943 (stats47) の assert ok、
+    行数と ID 数のパリティ一致、幻 ID 検出なし。ドリフト 29 件を検出
+    (申請中のはずが実機に無い 28 件 = 却下か走査漏れ / 提携中のはずが無い 1 件 = 提携終了の可能性)。
+  - **afb だけがセッションを持ち越せない** (`sessionPersistsAcrossProcesses: false`)。実測で
+    180 秒待っても `requiredlogin` から抜けず、1 バイトも読めなかった。**ここが唯一の構造的な
+    オーナー工程**で、3 ASP をまとめて「オーナー待ち」と扱っていたのが誤りだった。
+- **★backlog-loop では閉じない**: afb は run のたびに人のログインが要る。CI にはどちらも無い。
+- **残り (オーナー工程)**:
+  1. afb に手動ログインして `affiliate-status.mjs --asp afb` を通し、applying/partnered を確定する。
+  2. もしもの検出ドリフト 29 件を人が確認し、`affiliate-status.mjs --asp moshimo --write` で台帳を直す
+     (却下と走査漏れは機械では区別できない)。
+  3. 提携申請の `--commit` 承認 (規約同意を伴う不可逆操作)。手順は下の機械ゲート経由。
+  4. harvest → SSOT 登録 → 公開は、それぞれ別に承認する。
+- **完了条件**: afb の applying/partnered が台帳と一致し、もしものドリフトが 0 になり、
+  承認済みの申請が journal に `confirmed` として残る。
+- **停止条件**: login 要求、captcha、selector 数不一致、pagination 不明、plan hash 不一致、
+  lock 競合、site/program 不一致のいずれかで停止する。
+- **正典**: `.claude/rules/affiliate-ads-standards.md` §11 /
+  `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md`
+
+### [ASP-ELIGIBILITY-GATE-01] 掲載適格性を eligibility core にして配信を fail-closed にする
+タグ: [収益化] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-08-21]
+
+- **owner**: Claude Code (ブラウザ不要・pure code)
+- **経緯**: `ASP-CONTINUITY-01` から機械側だけを切り出した。旧カードは 6 手順を 1 枚に混ぜていたため、
+  ブラウザが要らない工程まで「オーナー待ち」に見えて誰も着手できなかった。
+- **完了済 (2026-08-21)**: doc 42 §6.3-6.5 の **plan / journal / lock を apply CLI へ配線した**。
+  純粋コア `asp-operation-core.mjs` は前からあったが、`affiliate-ops.mjs` が lock と health を
+  使うだけで、**申請の本体 `affiliate-apply.mjs` はどれも使っていなかった**。
+  - `--commit --plan <operationId>` のみ許し `--commit --id` を禁止 (`validateArgs`・単体テスト)。
+  - dry-run が `.local/affiliate-ops/plans/<id>.json` に「サイト・案件・対象数・ボタン文言・
+    適格性指紋」を焼き、commit 直前に同じ画面を再観測して `validatePlanForCommit` で突き合わせる。
+    不一致は押さずに `.expired.json` へ改名して残す。
+  - journal は `planned → intent-recorded → sent → confirmed|unknown` を fsync 付き append。
+    `sent`/`unknown` があれば `canAutoResend` が false になり自動再送しない。
+  - ASP profile の排他 lock を `affiliate-ops.mjs` 経由で取得・解放する。
+  - **実測 (もしも・実機)**: dry-run 8 件で lock 取得→解放、plan 6 件生成 (24h 期限・sha256 付き)、
+    クリックなし。commit の拒否 3 経路 (plan 無し / ASP 不一致 / `sent` 済みの再送) が
+    ブラウザへ到達する前に止まることを実測。テスト 25 件 pass。
+- **残り**: doc 42 §7 の eligibility core。いまの適格性の材料は「Red Line か」「vertical」の 2 つだけで、
+  `targetRankingKeys` の hard allowlist が無い。core を入れると `eligibilityFingerprint` の入力が増え、
+  **古い plan は再照合で自動失効する** — それが正しい挙動なので、入れる側で壊れない。
+- **次**: (1) eligibility pure core を `lib/` に足してテストで固定する
+  (2) `affiliate-apply.mjs` の `eligibilityFingerprint` の材料へ足す
+  (3) 配信側 (`resolve-affiliate-ad.ts`) を fail-closed にする
+  (4) register 側を dry-run で縦断し、git TS 差分・rollback を確認する。
+- **完了条件**: eligibility が pure core に集約され、allowlist 外の案件が配信に出ないことを
+  テストで固定し、apply の plan 指紋にその入力が乗っている。
+- **禁止**: `--force` 相当の迂回引数を作らない。`--commit` の実行と SSOT 反映・公開は別承認。
+- **正典**: `.claude/rules/affiliate-ads-standards.md` §11 /
+  `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` §7
 
 ### [AFF-INTENT-FRICTION-PORTFOLIO-01] 低ハードル・高意図案件を二層で検証できるアフィリエイト基盤
 タグ: [収益化] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-08-20]
