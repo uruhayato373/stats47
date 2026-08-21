@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-17T16:58:48.887Z",
+  "updatedAt": "2026-08-21T17:05:22.088Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -396,6 +396,62 @@
         "failCount": 0,
         "lastReason": null,
         "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "IMAGE-DELTA-PUBLISH-01": {
+      "class": "impl-small",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-21T17:05:22.060Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "test:image-pipeline 99件green・type-check:image-pipeline green・check:image-pipeline-policy 0件green・git statusはclean(未commit実装は既に無い)。web buildのみサンドボックス制約で未実行のため completed にできない",
+          "failReason": "サンドボックスが npm run build --workspace apps/web (完了条件の1項目) を拒否 (network/build permission denied)",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "サンドボックスが npm run build --workspace apps/web (完了条件の1項目) を拒否 (network/build permission denied)",
+        "since": "2026-08-21T17:05:22.060Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "KSJ-PREF-ASSIGN-01": {
+      "class": "impl-small",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-21T17:05:22.088Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "残タスクはtourism-resource-countの観光資源定義決定+13指標目の再生成。license=non-commercialな点も要確認。R2読み取り(HTTPS)がこのサンドボックスで拒否されるため検証・再生成とも実行不能",
+          "failReason": "サンドボックスが外向きnetwork (curl等)を拒否し、R2上の現在値確認・KSJ P12再取得・regenerateが不可能",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "サンドボックスが外向きnetwork (curl等)を拒否し、R2上の現在値確認・KSJ P12再取得・regenerateが不可能",
+        "since": "2026-08-21T17:05:22.088Z"
       },
       "reclassifiedFrom": [],
       "completedAt": null
