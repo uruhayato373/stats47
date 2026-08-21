@@ -41,6 +41,7 @@ import {
   classifyInventoryStatus,
   buildInventoryManifest,
 } from "./lib/adsense-report-contract.mjs";
+import { collectAdUnitEntries } from "./lib/adsense-ad-unit-walk.mjs";
 
 function requireEnv(name) {
   const v = process.env[name];
@@ -97,6 +98,9 @@ function flatten(report) {
  * 個別ユニットの adCode 取得が失敗しても、そのユニットを落とさず slot_id を空にして続ける
  * (一覧そのものは価値があるため)。取得できなかった件数は manifest の limitation に残す。
  *
+ * ★走査そのものは `lib/adsense-ad-unit-walk.mjs` に共有してある (2026-08-21)。
+ *   ここは「entries → snapshot 用の行」に変換するだけ。google-admin の audit も同じ走査を使う。
+ *
  * ★1 つの ad client の失敗で inventory 全体を落とさない (2026-08-04 修正)。
  * このアカウントは content 用 `ca-pub-*` のほかに AdSense for Search の
  * `partner-pub-*` を持つ。後者は広告ユニットの概念を持たないため adunits.list が
@@ -110,52 +114,19 @@ function flatten(report) {
  * @returns {Promise<{rows: object[], slotIdMissingCount: number, skippedClients: string[]}>}
  */
 export async function fetchAdUnitInventory(adsense, account) {
+  const { entries, skippedClients } = await collectAdUnitEntries(adsense, account, {
+    onAdCodeError: (unit, e) =>
+      console.error(`[adsense-snapshot] getAdcode failed for ${unit.name}:`, e.message || e),
+    onClientSkipped: (client, reason) =>
+      console.error(`[adsense-snapshot] adunits.list skipped for ${client.name}: ${reason}`),
+  });
+
   const rows = [];
-  const skippedClients = [];
   let slotIdMissingCount = 0;
-
-  const clientsRes = await adsense.accounts.adclients.list({ parent: account });
-  const adClients = (clientsRes.data.adClients || []).filter((c) => c.name);
-
-  for (const client of adClients) {
-    try {
-      let pageToken;
-      do {
-        const res = await adsense.accounts.adclients.adunits.list({
-          parent: client.name,
-          pageSize: 100,
-          ...(pageToken ? { pageToken } : {}),
-        });
-        const units = res.data.adUnits || [];
-        for (const unit of units) {
-          let adCode = null;
-          if (unit.name) {
-            try {
-              const codeRes = await adsense.accounts.adclients.adunits.getAdcode({ name: unit.name });
-              adCode = codeRes.data.adCode ?? null;
-            } catch (e) {
-              // adCode 単体の失敗はユニット行を落とす理由にしない (slot_id を空にして続ける)
-              console.error(`[adsense-snapshot] getAdcode failed for ${unit.name}:`, e.message || e);
-            }
-          }
-          const row = adUnitInventoryRow(unit, adCode);
-          if (!row.slot_id) slotIdMissingCount++;
-          rows.push(row);
-        }
-        pageToken = res.data.nextPageToken || undefined;
-      } while (pageToken);
-    } catch (e) {
-      // ad unit を持たない client (AdSense for Search の partner-pub-* 等) はここに来る。
-      const reason = e?.message || String(e);
-      console.error(`[adsense-snapshot] adunits.list skipped for ${client.name}: ${reason}`);
-      skippedClients.push(`${client.name}: ${reason.slice(0, 120)}`);
-    }
-  }
-
-  if (adClients.length > 0 && skippedClients.length === adClients.length) {
-    throw new Error(
-      `全 ${adClients.length} 件の ad client で adunits.list に失敗した: ${skippedClients.join(" / ")}`,
-    );
+  for (const { unit, adCode } of entries) {
+    const row = adUnitInventoryRow(unit, adCode);
+    if (!row.slot_id) slotIdMissingCount++;
+    rows.push(row);
   }
 
   return { rows, slotIdMissingCount, skippedClients };

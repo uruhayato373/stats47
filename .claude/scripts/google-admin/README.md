@@ -71,7 +71,10 @@ OAuth scope、必要ロールまで公式リファレンスとローカル `goog
 > 無く `adunits.list` が NOT_FOUND を返す。per-client の try/catch が無かったため、
 > **週次 audit は毎回「AdSense ad units: 0 件 (error)」だった** (同じ資格情報で
 > `fetch-adsense-snapshot.mjs` は成功しており、原因は credential ではなく walk の実装だった)。
-> `collectAdUnits` が失敗した client を `skippedClients` に残し、**全滅のときだけ throw** する。
+> 走査は `.claude/scripts/metrics/lib/adsense-ad-unit-walk.mjs` (`collectAdUnitEntries`) に
+> **1 箇所へ集約**した。snapshot と audit は同じ走査を使い、行の形だけを各自が決める。
+> 失敗した client は `skippedClients` に残り、**全滅のときだけ throw** する。
+> 再実装が生えると `metrics/__tests__/adsense-ad-unit-walk.test.mjs` の検知テストが落ちる。
 > CLI は skip を `! ad client を読めなかった: …` として出すので、一部欠けが status=ok のまま
 > 緑に見えることはない。
 | custom dimension台帳との突合 | `dimension-ledger.mjs` |
