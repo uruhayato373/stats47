@@ -21,34 +21,6 @@ updated: 2026-08-20
 
 ## 🔴 高 — 今月中に着手したい
 
-### [KNOWN-KEYS-TRANSIENT-DELETE-01] KNOWN/SITEMAP 生成器の一時障害が生きたページを消す
-タグ: [起票:2026-08-17]
-
-- **owner**: Claude Code
-- **済 (発生源の修正)**: `apps/web/scripts/generate-known-ranking-keys.ts` の `checkExists` が
-  **HEAD 1 回・例外も非 ok もすべて `false`** に倒していた。2,164 件を並列 30 で叩くため、
-  一時的な失敗 1 回が KNOWN / SITEMAP からのキー削除 = **本番 404 とサイトマップ脱落**になる。
-  404 のみ `absent`、それ以外は 3 回リトライし、尽きたら `undetermined` を返して
-  **1 件でも残れば書き込みを中止**するよう変更した (部分結果で上書きしない)。
-- **実害 (2026-08-17 実測)**: CI の `sync-ranking-keys` が
-  `chore/ranking-keys-sync` ブランチに `bath-soap-consumption-expenditure` の削除を commit
-  していた (2164 → 2163)。しかし同キーは
-  `app/ranking/<key>/{item,values}.json` も `app/stats/<key>/values.json` も **200**、
-  本番ページも **200 で正しいタイトルを表示**、config も `isActive: true`。
-  **完全な誤削除**だったのでこのブランチはマージせず破棄した。
-  修正後の生成器を実 R2 に対して走らせて **2164 件・bath-soap 保持**を確認済み
-  (develop 版との差分は生成日のみ)。
-- **残り**: (1) `checkExists` を export して**リトライと undetermined の分岐を単体テストで固定**する
-  (現状は実 R2 での 1 回の実行が唯一の根拠。スクリプトが top-level 副作用を持つため
-  そのままでは import できず、切り出しが要る)。
-  (2) 同じ「存在確認して列挙を書き出す」形の生成器が他にもあれば同じ穴が無いか点検する
-  (`generate-sitemap-ranking-keys` / `known-tag-keys` / `unpublished-blog-slugs`)。
-  (3) CI がキー数の**減少**を検出したら PR を自動マージしない・人が見るゲートを検討する。
-- **完了条件**: 誤削除を注入したテストが落ち、正常時は落ちないことを両方向で固定する。
-  他の生成器の点検結果を本エントリに記録する。
-- 関連: `.claude/rules/metric-config-standards.md`「isActive:true ≠ 本番公開」/
-  `apps/web/scripts/generate-known-ranking-keys.ts`
-
 ### [ASP-CONTINUITY-01] もしも・afbの承認追跡と広告コード取得
 タグ: [実行:ユーザー] [起票:2026-07-28]
 
