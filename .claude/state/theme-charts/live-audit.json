@@ -1,11 +1,13 @@
 {
-  "auditedAt": "2026-08-15T20:22:47.785Z",
+  "auditedAt": "2026-08-21T01:36:10.773Z",
   "distinctExpected": 192,
   "audited": 192,
   "partial": false,
   "coverageOk": true,
   "errorCount": 0,
-  "warnCount": 3,
+  "warnCount": 4,
+  "noNationalCount": 3,
+  "nationalRowEmptyCount": 1,
   "results": [
     {
       "theme": "aging-society",
@@ -17,6 +19,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -30,6 +33,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -43,6 +47,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -56,6 +61,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -69,6 +75,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -82,6 +89,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -95,6 +103,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -108,6 +117,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -121,6 +131,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -134,6 +145,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -147,6 +159,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -160,6 +173,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -173,6 +187,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -186,6 +201,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -199,6 +215,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -212,6 +229,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -225,6 +243,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -238,6 +257,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -251,6 +271,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -264,6 +285,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -277,6 +299,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -290,6 +313,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -303,6 +327,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -316,6 +341,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -329,6 +355,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -342,6 +369,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -355,6 +383,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -368,6 +397,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -381,6 +411,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -394,6 +425,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -407,6 +439,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -420,6 +453,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -433,6 +467,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -446,6 +481,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -459,6 +495,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -472,6 +509,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -485,6 +523,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -498,6 +537,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -511,6 +551,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -524,6 +565,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -537,6 +579,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -550,6 +593,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -563,6 +607,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -576,6 +621,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -589,6 +635,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -602,6 +649,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -615,6 +663,7 @@
       },
       "status": "ok",
       "rows": 96,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -628,6 +677,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -641,6 +691,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -654,6 +705,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -667,6 +719,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -680,6 +733,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -693,6 +747,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -706,6 +761,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -719,6 +775,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -732,6 +789,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -745,6 +803,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -758,6 +817,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -771,6 +831,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -784,6 +845,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -797,6 +859,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -810,6 +873,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -823,6 +887,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -836,6 +901,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -849,6 +915,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -862,6 +929,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -875,6 +943,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -888,6 +957,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -901,6 +971,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｅ　教育"
     },
@@ -914,6 +985,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｅ　教育"
     },
@@ -927,6 +999,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｅ　教育"
     },
@@ -940,6 +1013,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｅ　教育"
     },
@@ -953,6 +1027,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｅ　教育"
     },
@@ -966,6 +1041,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｆ　労働"
     },
@@ -979,6 +1055,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｇ　文化・スポーツ"
     },
@@ -992,6 +1069,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｇ　文化・スポーツ"
     },
@@ -1005,6 +1083,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｈ　居住"
     },
@@ -1018,6 +1097,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｈ　居住"
     },
@@ -1031,6 +1111,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｊ　福祉・社会保障"
     },
@@ -1044,6 +1125,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -1057,6 +1139,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -1070,6 +1153,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -1083,6 +1167,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -1096,6 +1181,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -1109,6 +1195,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -1122,6 +1209,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -1135,6 +1223,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -1148,6 +1237,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -1161,6 +1251,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｌ　家計"
     },
@@ -1174,6 +1265,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1187,6 +1279,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1200,6 +1293,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1213,6 +1307,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1226,6 +1321,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1239,6 +1335,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1252,6 +1349,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1265,6 +1363,7 @@
       },
       "status": "ok",
       "rows": 96,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1278,6 +1377,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1291,6 +1391,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1304,6 +1405,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1317,6 +1419,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1330,6 +1433,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1343,6 +1447,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1356,6 +1461,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1369,6 +1475,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ａ　人口・世帯"
     },
@@ -1382,6 +1489,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -1395,6 +1503,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｃ　経済基盤"
     },
@@ -1408,6 +1517,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1421,6 +1531,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1434,6 +1545,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1447,6 +1559,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1460,6 +1573,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1473,6 +1587,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1486,6 +1601,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1499,6 +1615,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1512,6 +1629,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1525,6 +1643,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1538,6 +1657,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1551,6 +1671,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1564,6 +1685,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｄ　行政基盤"
     },
@@ -1577,6 +1699,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｅ　教育"
     },
@@ -1590,6 +1713,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｅ　教育"
     },
@@ -1603,6 +1727,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｅ　教育"
     },
@@ -1616,7 +1741,8 @@
       },
       "status": "ok",
       "rows": 200,
-      "hasNational": true,
+      "hasNationalRow": true,
+      "hasNational": false,
       "tableTitle": "Ｅ　教育"
     },
     {
@@ -1629,6 +1755,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｅ　教育"
     },
@@ -1642,6 +1769,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｆ　労働"
     },
@@ -1655,6 +1783,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｆ　労働"
     },
@@ -1668,6 +1797,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｆ　労働"
     },
@@ -1681,6 +1811,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｆ　労働"
     },
@@ -1694,6 +1825,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｆ　労働"
     },
@@ -1707,6 +1839,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｆ　労働"
     },
@@ -1720,6 +1853,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｆ　労働"
     },
@@ -1733,6 +1867,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｆ　労働"
     },
@@ -1746,6 +1881,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｆ　労働"
     },
@@ -1759,6 +1895,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｇ　文化・スポーツ"
     },
@@ -1772,6 +1909,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｇ　文化・スポーツ"
     },
@@ -1785,6 +1923,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｇ　文化・スポーツ"
     },
@@ -1798,6 +1937,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｈ　居住"
     },
@@ -1811,6 +1951,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｈ　居住"
     },
@@ -1824,6 +1965,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｈ　居住"
     },
@@ -1837,6 +1979,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｈ　居住"
     },
@@ -1850,6 +1993,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -1863,6 +2007,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -1876,6 +2021,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -1889,6 +2035,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -1902,6 +2049,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -1915,6 +2063,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -1928,6 +2077,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -1941,6 +2091,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -1954,6 +2105,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -1967,6 +2119,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -1980,6 +2133,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -1993,6 +2147,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｉ　健康・医療"
     },
@@ -2006,6 +2161,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｊ　福祉・社会保障"
     },
@@ -2019,6 +2175,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -2032,6 +2189,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -2045,6 +2203,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -2058,6 +2217,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｋ　安全"
     },
@@ -2071,6 +2231,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｌ　家計"
     },
@@ -2084,6 +2245,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｌ　家計"
     },
@@ -2097,6 +2259,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｌ　家計"
     },
@@ -2110,6 +2273,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｌ　家計"
     },
@@ -2123,6 +2287,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "Ｌ　家計"
     },
@@ -2136,6 +2301,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": false,
       "hasNational": false,
       "tableTitle": "第１部　入港船舶・船舶乗降人員及び海上出入貨物総括表 第３表　海上出入貨物表　（１）トン数総数表 都道府県"
     },
@@ -2149,6 +2315,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": false,
       "hasNational": false,
       "tableTitle": "第１部　入港船舶・船舶乗降人員及び海上出入貨物総括表 第３表　海上出入貨物表　（１）トン数総数表 都道府県"
     },
@@ -2162,6 +2329,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2175,6 +2343,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2188,6 +2357,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2201,6 +2371,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2214,6 +2385,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2227,6 +2399,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2240,6 +2413,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2253,6 +2427,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2266,6 +2441,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2279,6 +2455,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2292,6 +2469,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2305,6 +2483,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)"
     },
@@ -2317,6 +2496,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": false,
       "hasNational": false,
       "tableTitle": "令和２年以降 一般_都道府県別_年齢階級別DB"
     },
@@ -2329,6 +2509,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "地域別価格差 10大費目別消費者物価地域差指数 （全国平均＝100）－全国，地方，都道府県，都道府県庁所在市及び政令指定都市（2013年～）"
     },
@@ -2342,6 +2523,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2355,6 +2537,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2368,6 +2551,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2381,6 +2565,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2394,6 +2579,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2407,6 +2593,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2420,6 +2607,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2433,6 +2621,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2446,6 +2635,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2459,6 +2649,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2472,6 +2663,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2485,6 +2677,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     },
@@ -2498,6 +2691,7 @@
       },
       "status": "ok",
       "rows": 200,
+      "hasNationalRow": true,
       "hasNational": true,
       "tableTitle": "令和２年以降 一般_都道府県別_職種（特掲）DB"
     }

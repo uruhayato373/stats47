@@ -861,25 +861,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 所有者の整理を待つ。存在しないcommand/pathを推測せず、exportsと呼び出し元を読んでから実装する。
 ```
 
-### [THEME-AUDIT-NATIONAL-VALUE-GAP-01] theme-chart-live-audit の hasNational 判定が値の有効性を見ていない
-タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:node .claude/scripts/audit/theme-chart-live-audit.mjs] [起票:2026-08-20]
-
-- **owner**: Claude Code
-- **根拠 (2026-08-20、GEO-SCOPE-SEPARATION-01 WP0で発見)**: `theme-chart-live-audit.mjs` の
-  `hasNational` 判定は `values.some(v => v['@area']==='00000')` = **00000行の存在**しか見ていない。
-  値が e-Stat のプレースホルダ `'-'` (該当なし) でも `hasNational: true` を返す。実例:
-  `in-pref-university-entrance-ratio-by-highschool-origin` (statsDataId 0000010205 #E0940302) は
-  live-audit で `hasNational: true` だったが、実際に `getStatsData` で値を確認すると
-  1980-2024年の全42時点で `value='-'`。行の存在≠値の有効性、という判定漏れがある。
-- **次**: `inspect()` 関数 (`.claude/scripts/audit/theme-chart-live-audit.mjs`) の hasNational 判定を
-  「00000行が存在し、かつ値が有限数にパースできる」に強化する。既存 `[no-national]` warn に加えて
-  `[national-row-empty]` (行はあるが値が非数値) を新設し、区別して報告する。既存 warn 件数への
-  影響 (誤検知の増減) を実測してから配線する。
-- **完了条件**: `'-'` 値の00000行を注入したfixtureでこの新判定が発火し、実数値の00000行では
-  発火しないことを両方向で固定する。既存の `theme-chart-audit-weekly.yml` の warn 集計と整合する。
-- **正典**: `.claude/rules/theme-catalog-standards.md` / `.claude/scripts/audit/theme-chart-live-audit.mjs` /
-  発見元 `.claude/state/geo-scope/wp0-inventory-education-culture.json`
-
 ### [QUALITY-GATE-COVERAGE-01] CI・テスト・監査の実効網羅性強化
 タグ: [起票:2026-08-13]
 
