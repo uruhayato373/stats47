@@ -53,6 +53,28 @@ const EXTENSIONS = new Set([".js", ".cjs", ".mjs", ".ts", ".tsx", ".mts", ".cts"
  * 文字列連結で file:// URL を作っている箇所を返す純関数。
  * このファイル自身の説明文が引っかからないよう、呼び出し側で除外する。
  */
+/**
+ * 行から `//` 以降を落とす。文字列リテラル内の `//` (URL 等) は落とさない。
+ * ブロックコメントは扱わない — 複数行に跨るものを正しく扱うには構文解析が要る。
+ * 過剰に賢くせず、実際に踏んだ「行コメントで規約を説明した」ケースだけを救う。
+ */
+function stripComment(line) {
+  let inSingle = false;
+  let inDouble = false;
+  let inTick = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (line[i - 1] === "\\") continue;
+    if (c === "'" && !inDouble && !inTick) inSingle = !inSingle;
+    else if (c === '"' && !inSingle && !inTick) inDouble = !inDouble;
+    else if (c === "`" && !inSingle && !inDouble) inTick = !inTick;
+    else if (c === "/" && line[i + 1] === "/" && !inSingle && !inDouble && !inTick) {
+      return line.slice(0, i);
+    }
+  }
+  return line;
+}
+
 function findViolations(source) {
   const found = [];
   const patterns = [
@@ -63,9 +85,15 @@ function findViolations(source) {
   ];
   const lines = source.split("\n");
   lines.forEach((line, index) => {
+    // ★コメント行は見ない (2026-08-21)。この規約を**説明した行**が違反として検出され、
+    //   「なぜ駄目か」を書いた瞬間に CI が落ちるようになっていた
+    //   (commit 件名に skip-ci トークンを引用すると CI が止まるのと同型の罠)。
+    //   規約を書けないチェッカーは、規約を残せない。
+    const code = stripComment(line);
+    if (!code.trim()) return;
     for (const { re, kind } of patterns) {
       re.lastIndex = 0;
-      if (re.test(line)) {
+      if (re.test(code)) {
         found.push({ line: index + 1, kind, text: line.trim() });
       }
     }

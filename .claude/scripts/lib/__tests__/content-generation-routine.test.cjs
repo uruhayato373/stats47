@@ -144,3 +144,29 @@ test('blog auto-publish reconciles revised articles, not just unpublished ones',
     );
   }
 });
+
+// ── data-refresh: 成功分は押し出す (partial-publish) ─────────────────────────
+
+test('data-refresh pushes the metrics that succeeded even when the gate fails', () => {
+  // ★1 件でもゲートに掛かると exit 1 で後続 push が skip され、正常に取り込んだ 2,000 件超が
+  //   一度も R2 へ届かない状態が続いていた (2026-08-16 実測: ok=2175 / shape=4 で全滅)。
+  //   壊れた metric はローカルに書かれず、diff-push は upload-only なので部分 push は安全。
+  //   「continue-on-error を外す」「反映ステップを前に動かす」の両方が退行なのでここで固定する。
+  const doc = YAML.parse(read('.github/workflows/data-refresh.yml'));
+  const steps = doc.jobs.refresh.steps;
+  const idx = (needle) => steps.findIndex((s) => String(s.name ?? '').includes(needle));
+
+  const batch = steps[idx('page-data-batch')];
+  assert.equal(batch.id, 'batch', 'gate の結果を後段から参照できない');
+  assert.equal(batch['continue-on-error'], true, 'ゲート失敗で後続 push が skip される');
+
+  const reflect = idx('Reflect batch gate result');
+  assert.ok(reflect !== -1, 'ゲート結果を job に反映するステップが無い (常に緑になる)');
+  assert.match(String(steps[reflect].if), /steps\.batch\.outcome/);
+
+  // 反映は push / 派生生成より後ろでなければ partial-publish の意味が無い
+  assert.ok(idx('Push observations to R2') < reflect, 'push より前で job を落としている');
+  assert.ok(idx('Regenerate derived snapshots') < reflect, '派生生成より前で job を落としている');
+  // 失敗 Issue は反映より後ろ (failure() が真になる位置)
+  assert.ok(reflect < idx('Open issue on failure'), 'Issue 起票がゲート反映より前にある');
+});

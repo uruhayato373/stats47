@@ -169,7 +169,16 @@ jobs:
         run: npm ci
 
       # e-Stat → .local/r2/app/stats (観測値 R2 直書き)。dry_run=true なら fetch のみ。
+      # ★ゲートで落ちても「取り込みに成功した分」は push させる (partial-publish)。
+      #   以前は 1 件でもゲートに掛かると exit 1 → 後続の push が skip され、
+      #   **正常に取り込んだ 2,000 件超が一度も R2 へ届かなかった** (2026-08-16 の実測では
+      #   ok=2175 / shape=4 で全滅)。壊れた metric はそもそもローカルに書かれず
+      #   (`writable = notEmpty && shapeOk`)、diff-push は upload-only で R2 を削除しないため、
+      #   部分 push で壊れたデータが配信されることはない。
+      #   run 自体は最後の「ゲート結果を job に反映」で赤にするので、欠陥は見逃さない。
       - name: 📊 page-data-batch (e-Stat fetch)
+        id: batch
+        continue-on-error: true
         if: steps.resolve.outputs.skip != 'true'
         run: |
           # ARGS は配列で組む ("$ARGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
@@ -272,6 +281,15 @@ jobs:
   # cloudflare-usage-daily) は失敗時に Issue を起票しており、ここだけ欠けていた。同じ方式に揃える。
   #
   # 手動 dispatch の失敗は起票しない (人がその場で見ているため)。
+      # push と派生生成を通したあとで、取り込みゲートの結果を job に反映する。
+      # ここより前に置くと partial-publish の意味が無くなる (後続が skip される)。
+      - name: 🔴 Reflect batch gate result
+        if: steps.batch.outcome == 'failure'
+        run: |
+          echo "page-data-batch がゲートで落ちた。成功分の push は完了しているが、" >&2
+          echo "落ちた metric の R2 は旧データのまま。ログの [fatal] 行を見て是正する。" >&2
+          exit 1
+
       - name: 🚨 Open issue on failure (schedule / push のみ)
         if: failure() && github.event_name != 'workflow_dispatch'
         env:
@@ -290,8 +308,9 @@ jobs:
             echo ""
             echo "### 見るところ"
             echo ""
-            echo "- \`page-data-batch\` で落ちた → e-Stat 側の障害か config の不正。形状ゲートが"
-            echo "  書き込みを止めた場合は既存 R2 が温存されているので配信は壊れていない"
+            echo "- \`page-data-batch\` で落ちた → e-Stat 側の障害か config の不正。**取り込みに"
+            echo "  成功した分は既に R2 へ push 済み** (partial-publish)。落ちた metric は"
+            echo "  ローカルにも書かれていないので既存 R2 が温存されており、配信は壊れていない"
             echo "- \`sync-snapshots\` で落ちた → 観測値の push は完了済み。派生 snapshot だけが古い。"
             echo "  2026-07-05 は correlation task で JS ヒープ OOM (4,051 MB)。heap は 8 GB へ"
             echo "  引き上げ済だが、metric 数が増えれば再発しうる (その時は streaming 化が要る)"

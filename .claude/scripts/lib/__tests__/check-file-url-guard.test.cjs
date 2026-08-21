@@ -51,3 +51,25 @@ test("リポジトリ全体に違反が無い", () => {
     "file:// を文字列連結している。pathToFileURL / new URL を使う",
   );
 });
+
+test("行コメントの中の禁止パターンは違反にしない (規約を説明できる)", () => {
+  // ★これを見ないと「なぜ file:// を連結してはいけないか」を書いた行が違反になり、
+  //   規約を残せなくなる (commit 件名に skip-ci トークンを引用すると CI が止まるのと同型)。
+  const src = [
+    "// 文字列連結 (`file://${process.argv[1]}`) は Windows で不一致になる",
+    "const ok = pathToFileURL(process.argv[1]).href;",
+  ].join("\n");
+  assert.deepEqual(findViolations(src), []);
+});
+
+test("コードに書かれた禁止パターンは、同じ行にコメントがあっても検出する", () => {
+  const src = "const bad = `file://${p}`; // これは本物の違反";
+  const found = findViolations(src);
+  assert.equal(found.length, 1);
+  assert.equal(found[0].kind, "template-literal");
+});
+
+test("文字列リテラル内の // をコメント開始と誤認しない", () => {
+  const src = 'const u = "https://example.com"; const bad = "file://" + p;';
+  assert.equal(findViolations(src).length, 1, "URL の // でコメント扱いして違反を見逃している");
+});
