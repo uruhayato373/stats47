@@ -117,6 +117,24 @@ Next.js 自身による SWC lockfile patch の外向き fetch は引き続き `S
 (`packages/estat-api/src/core/client/http-client.ts` / `packages/ranking/src/scripts/audit-ranking-data-integrity.ts` の実装)。
 `R2_PUBLIC_FETCH_URL` を使う読み取りスクリプトはこの経路で動く。
 
+**★「HTTPS_PROXY を継承していれば通る」は自動ではない (2026-08-21 実測)**。Node の組み込み fetch は
+`HTTPS_PROXY` を見ないので、**スクリプト側が明示的に `ProxyAgent` を作って `dispatcher` に渡す**
+必要がある。上記 2 実装が通るのはそう書いてあるからで、素の `fetch()` を書いた新しいスクリプトは
+会社 PC で `ENOTFOUND` になる。実測 (Node v22.14 / 対 e-Stat API):
+
+| 書き方 | 結果 |
+|---|---|
+| `fetch(url)` | `ENOTFOUND` (DNS ごと遮断) |
+| `NODE_USE_ENV_PROXY=1 fetch(url)` | `ENOTFOUND` (このバージョンでは効かない) |
+| `fetch(url, { dispatcher: new ProxyAgent(process.env.HTTPS_PROXY) })` | 200 |
+
+ESM (`.mjs`) から undici を取るときは `createRequire(import.meta.url)("undici")` を使う。
+CI (Linux) は `HTTPS_PROXY` が無いので、**env があるときだけ dispatcher を作る**書き方にすれば
+両方で動く (手本: `.claude/scripts/audit/theme-chart-live-audit.mjs` の `resolveDispatcher`)。
+
+**e-Stat の app ID は `apps/web/.env.development` にある** (公開 ID・git tracked・秘密ではない)。
+`NEXT_PUBLIC_ESTAT_APP_ID` が未設定でも、スクリプトがこのファイルを読めば e-Stat を叩ける。
+
 ### ★Windows では `next build` が完走しない (2026-08-05)
 
 `npm run build --workspace apps/web` は `/themes/[themeSlug]/opengraph-image` の prerender で

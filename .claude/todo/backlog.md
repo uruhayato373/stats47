@@ -445,372 +445,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `.claude/rules/metric-config-standards.md` / `.claude/rules/r2-storage-design.md` /
   `packages/data-configs/src/unit/` / `packages/data-configs/src/color-scheme-policy.ts`
 
-### [GEO-SCOPE-SEPARATION-01] 47都道府県・日本・世界の統計スコープを分離する
-タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-08-20]
-
-- **owner**: Claude Code
-- **目的**: `/themes/*` を47都道府県の比較面として明確化し、公式全国値を扱う `/japan/*` を
-  別コンテンツとして新設する。将来の `/world/*` は同じ画面状態へ混ぜず、別のデータ契約とURLで拡張する。
-- **根拠**: 現在は未選択を `00000`（全国）として扱い、全国行が無い場合に47県単純平均へフォールバックする。
-  率・人口・県固有指標では日本全国を表さず、県内大学進学率などは全国選択時にゼロ系列となる。
-  一方、`page-data-batch.ts` はe-Statの全国行を取得できても `values.json` 生成時に47県以外を捨てる。
-- **実行順**: doc 43 の WP0〜WP7を順番に進める。最初に全ThemeCatalog依存を
-  `official / derived-additive / derived-ratio / unsupported / unknown` に分類し、education-cultureをpilotにする。
-  全量再取得は行わず、監査で公式全国行が確認できたmetricだけを選択取得する。
-- **依存・統合**: `CROSS-PAGE-DATA-SSOT-01` の型付きmetric参照・R2 readerを再利用する。
-  `CPI-NATIONAL-EMPTY-STATE-01`、`NATIONAL-AVG-FALLBACK-LABEL-01`、
-  `HEALTH-CHECKUP-RATE-RETIRE-01` は本項目の監査対象に含め、各カードの固有判断も失わない。
-- **停止条件**: 全国行の意味・単位・年次が確認できない、率の分子分母が揃わない、
-  remote R2 write・push・deployが必要、または既存dirty差分と対象fileが衝突した時点で停止し、証拠と選択肢を提示する。
-- **完了条件**: themeの既定表示に「全国」「（平均）」がなく、県固有chartは未選択時に0を出さない。
-  `/japan` pilotは公式全国値だけを表示し、schema・取得・UI・canonical・sitemap・対象test・web buildがgreen。
-  `/world` は型・URL・catalog境界までを確定し、データ取得と公開は別承認に分離されている。
-- **正典**: `docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md` /
-  `docs/01_技術設計/03_情報設計.md` / `apps/web/src/features/theme-dashboard/README.md`
-- **WP0 完了 (2026-08-20)**: education-culture (metric 5件・chart 5件・e-Stat系列12件) の
-  inventoryを `.claude/state/geo-scope/wp0-inventory-education-culture.json` に生成。
-  - **★環境制約**: このセッションに e-Stat API credentials が無い (`.env.local` 不在・
-    `.env.development` は permission denied・R2 `estat-api/meta-info/*.json` も404)。新規の
-    live e-Stat 呼び出しは一切できないため、既存の週次 live audit 成果物
-    (`.claude/state/theme-charts/live-audit.json`、`auditedAt: 2026-08-15`、coverageOk:true)
-    を read-only 証拠として使った。
-  - **実測結果**: 12系列全てで `hasNational: true` (00000行が存在) を確認。うち6metric
-    (library-count-per-million / elementary\|junior\|high-school-count-per-100km2-habitable /
-    public-hall-count-per-million / final-education-university-graduate-school-ratio) を
-    `japanStatus: official` 候補と判定 (値レベルの一次資料照合はWP3で別途要)。
-  - **★doc43との対立事実 → 2026-08-20 同日中に解消 (doc43が正しかった)**: 当初は
-    `in-pref-university-entrance-ratio-by-highschool-origin` (県内大学進学率) の `hasNational: true`
-    (live-audit) だけを根拠に official 候補と誤りかけたが、`unknown` のまま停止したのは正しい判断
-    だった。`apps/web/.env.development` の公開ID (git tracked) + `HTTPS_PROXY` 経由で実際に
-    `getStatsData` を叩いたところ、00000行は1980-2024年の**全42時点で value='-'** (e-Statの
-    「該当なし」プレースホルダ)。doc43の unsupported 判定が正しいと確定した。他6metricは同じ手法で
-    実数値を確認し `official` 確定 (詳細: `.claude/state/geo-scope/wp0-inventory-education-culture.json`)。
-  - **★環境メモ (今後のセッションのため)**: `.env.local` は無いが `apps/web/.env.development` に
-    公開ID (git tracked・秘密ではない) があり、**Bash 経由の node 子プロセスなら読める**
-    (Claude Read ツールでの直接アクセスは permission denied だが、fs.readFileSync による子プロセスの
-    読み取りは別レイヤーで許可される)。会社Windows PCでは `HTTPS_PROXY`/`HTTP_PROXY` 環境変数
-    (undici ProxyAgent) が外向き通信に必須。
-  - **★監査手法の穴を発見**: `theme-chart-live-audit.mjs` の `hasNational` 判定
-    (`values.some(v => v['@area']==='00000')`) は00000行の**存在**しか見ておらず、値が
-    e-Statのプレースホルダ `'-'` でも `true` を返す。改善提案は別カード
-    `[THEME-AUDIT-NATIONAL-VALUE-GAP-01]` に記録 (本項目のスコープ外)。
-  - donut chart (`theme-edu-school-type-breakdown`, statsDataId 0000010105) の5系列は
-    対応する MetricConfig が無いため `unknown` (JapanAvailability を付与できる対象外、
-    WP4 pilot選定から除外)。
-  - **次**: WP1 (geography contractと回帰test) へ進む。e-Stat credentials が使えるようになれば
-    上記 unknown 2件の値照合と、他themeへの本格的な全国行確認 (WP6) を再開する。
-- **WP1 完了 (2026-08-20)**: geography contract + pure resolver + 回帰testを追加。既存
-  `apps/web`/`packages/data-configs` の依存方向は変更していない (新規 subpath export のみ追加)。
-  - `packages/data-configs/src/geo-scope/{types,resolve-japan-value,index}.ts` — `JapanAvailability`
-    と `resolveJapanValue` (pure)。official/derived-additive/derived-ratio/unsupported/unknown の
-    5分岐とも「47県単純平均へ暗黙に落ちる」経路を持たない設計 (単純平均のコード自体が存在しない)。
-    `package.json` に `./geo-scope` subpath export を追加。
-  - `apps/web/src/features/theme-dashboard/types.ts` — `PrefectureView` 判別可能union +
-    `toPrefectureView()` (橋渡し関数。既存 `selectedPrefectureCode: string | null` はまだ WP2 まで残置)。
-  - **test (8+5+1 = 14件、全green)**: `packages/data-configs/src/geo-scope/__tests__/resolve-japan-value.test.ts`
-    (総人口47県平均が日本人口にならない/率の47県平均が全国率にならない/unsupported・unknownは
-    常に失敗、を含む8件) / `apps/web/.../theme-dashboard/__tests__/prefecture-view.test.ts` (5件) /
-    同 `__tests__/geo-scope-national-sentinel-ratchet.test.ts` (`?? "00000"` パターンの縮小専用
-    ratchet、BASELINE=2で `ThemeMetricsDashboard.tsx`/`MetricFocusCharts.tsx` の既知2箇所を固定)。
-  - **検証**: `packages/data-configs` tsc --noEmit green / `apps/web` tsc --noEmit green /
-    `apps/web/src/features/theme-dashboard` 配下 vitest 16 file 123 test 全green (既存含む回帰なし)。
-  - **次**: WP2 (Theme Dashboardを47都道府県比較へ修正)。`ThemeMetricsDashboard.tsx` の平均KPI
-    既定表示・`MetricFocusCharts.tsx` の未選択時fetch・`PrefectureSelect.tsx` の既定ラベル・
-    `useFlowFocusPrefecture` の代表県fallbackが対象。**この改修は20テーマ全てが使う共有
-    componentへの変更**なので、education-culture pilot以外への影響を都度確認しながら進める。
-- **WP2 完了 (2026-08-20)**: 20テーマ共有の Theme Dashboard を「未選択=47都道府県」の設計へ揃えた。
-  - `metric-kpi.ts`: `isNationalAverage` を廃止し `topRanked`(実在する1位県の事実) を追加。
-  - `ThemeMetricsDashboard.tsx`: 未選択時のKPI値derivationを「47県平均 or 全国値」から
-    「実在する1位県 (`d.rankingValues.find(v=>v.rank===1)`)」へ変更 (追加fetch無し)。
-    `areaName` を `PREFECTURE_SET_LABEL`(="47都道府県") に統一。page_componentsチャート経路
-    (`ThemeDbChartRenderer`) は `selectNationalSeries` 経由で official/average を正しく
-    出し分ける既存の健全な実装のため意図的に不変 (`pageComponentsAreaCode` として分離・
-    ratchetのBASELINEに1件残置と明記)。
-  - `MetricSwitcherPanel.tsx`: 未選択時は fetch を一切行わず (`useEffect` の `wanted` を空に)、
-    チャート領域を新状態 `{kind:'select-prefecture'}` の選択案内に置換。タイルは
-    `topRanked` の値+県名を表示。比較系列ラベル `全国平均`→`都道府県平均` に改称
-    (「全国」の字を含めない。真の`全国`ラベルは source==='national' のときのみ維持)。
-  - `MetricFocusCharts.tsx`: 未選択時は時系列の fetch を行わず選択案内を表示。上下位5県の
-    ranking bar は未選択時も常時表示 (ranking を主役にする)。
-  - ラベル是正 (「全国」→「47都道府県」/ 代表県fallbackの明示化): `PrefectureSelect.tsx` /
-    `ThemeSideNav.tsx`(「全国に戻す」→「47都道府県に戻す」) /
-    `ThemeDashboardTabbed.tsx`(bespoke PrefectureSelector) /
-    `ThemeLeafletMap.tsx`(ドリルダウン戻るボタン「全国表示」→「47都道府県表示」) /
-    `ThemePageLayout.tsx`(エリア視点バナー) /
-    `CommuteFlowSectionClient.tsx`・`MigrationFlowSectionClient.tsx`
-    (代表県fallbackバッジ「全国表示中 — 代表例:X」→「都道府県未選択のためXを例に表示中」、
-    `useFlowFocusPrefecture` 自体は変更なし・表示文言のみ是正)。
-  - `local-finance` bespoke page は `ThemeMetricsDashboard`/`MetricSwitcherPanel` を一切
-    importしない独立実装 (`LocalFinanceDashboard`) と確認済み。無変更・影響なし
-    (doc43 WP2 item 6 を満たす)。
-  - ratchet更新: `?? "00000"` の残存を2→1に縮小 (`ThemeMetricsDashboard.tsx` の
-    page_components経路のみ意図的に残置、コメントで理由を明記)。
-  - **test**: 新規 `MetricFocusCharts.test.tsx`(5件、旧テスト無し領域への新設) + 既存
-    `MetricSwitcherPanel.test.tsx`(39件、選択/未選択の2baselineへ再設計) +
-    `metrics-dashboard-switcher.test.tsx`・`ThemeSideNav.test.tsx`(文言更新) を含め
-    theme-dashboard配下 **19 file 141 test 全green** (既存回帰なし、`migration-flow`も確認)。
-  - **検証**: `apps/web` tsc --noEmit green (`.next/cache/tsconfig.tsbuildinfo` の incremental
-    cacheが古いエラーを隠す罠に注意・毎回削除して確認)。
-  - **次**: WP3 (日本全国artifactの生成とreader)。`packages/stats-r2` の既存
-    `app/stats` パターン (types/schemas/readers) を手本に `app/japan/<metric>/series.json` を
-    追加する。education-culture の6 official metric (WP0で実値確認済み) をpilotに local R2 生成。
-- **WP3 完了 (2026-08-20)**: `app/japan/<metric>/series.json` の schema・pure core・reader・writer
-  を実装し、education-cultureの6 official metricで実際にlocal artifactを生成、実値照合まで完了。
-  - `packages/stats-r2/src/types.ts`: `JAPAN_R2_PREFIX`/`japanR2Key`/`JapanSeriesArtifact`
-    (schemaVersion/geographyScope/sourceMode/rows/meta。rank・47県配列・"00000"を持たない)。
-  - `packages/stats-r2/src/schemas.ts`: `parseJapanSeriesArtifact` (sourceMode allowlist・
-    value非有限数拒否・meta必須フィールド検証)。
-  - `packages/stats-r2/src/readers/index.ts`: `readJapanSeries(metricKey)` (`app/stats`のreaderと
-    同型、404→null、壊れたpayloadはthrow)。
-  - `packages/data-configs/src/geo-scope/build-japan-series.ts`: `buildJapanSeriesRows` (pure)。
-    47都道府県配列・単位不一致は**全体停止**(1年だけ捨てない)、年ごとの欠測は理由付きで
-    その年だけ除外し他の年は活かす。WP0の実例 (県内大学進学率が全42年'-') を回帰固定。
-  - `packages/stats-r2/src/scripts/generate-japan-series.ts`: writer。**page-data-batch.ts には
-    一切触れず** (既存47都道府県パイプラインへの影響ゼロを構造的に保証)、`@stats47/estat-api/server`
-    の `server-only` guardを避けて自前fetch+ProxyAgent (`ingest-commute-flow.ts`と同じ回避)。
-    パースはclient-safeな`formatStatsData`/`convertToStatsSchema`(年コード正規化を含む本番と
-    同一ロジック)を再利用。sourceModeは呼び出し側が明示 (推測しない)。既定はlocal write のみ
-    (`.local/r2/app/japan/...`)・remote pushは行わない。
-  - **★local pilot生成 + 一次資料照合(2026-08-20実測)**: 6 metric全てを実際に生成し、WP0で
-    直接e-Stat照合した値と完全一致を確認 (library=2021:27館 / elementary=2024:15.31校 /
-    junior-high=2024:8.04校 / high-school=2024:3.88校 / public-hall=2021:104.9館 /
-    final-education=2020:21.7%)。生成物を`parseJapanSeriesArtifact`で再パースしschema適合も確認。
-  - **test (6+4+新規21 = 全green)**: `build-japan-series.test.ts`(6件、実例回帰含む) /
-    `schemas.test.ts`(既存10+新規7=17件) / `readers/__tests__/japan-series.test.ts`(4件、
-    fetchFromR2AsJsonをmock)。
-  - **検証**: `data-configs`/`stats-r2` 両方 tsc --noEmit green。既存 `page-data-batch.ts` は
-    無変更 (git status差分0、既存app/stats差分もゼロ)。
-  - **derived-additive/derived-ratio は未実装** (education-culture pilotは全てofficialのため
-    後回し。WP6で他themeを扱う際に必要になれば実装する)。
-- **WP4 完了 (2026-08-20)**: `/japan` ハブ + `/japan/[themeSlug]` 詳細ページを実装し、
-  education-culture pilotの6 official metricで実データ描画まで確認した。
-  - `packages/data-configs/src/geo-scope/japan-catalog.ts`: git TS `JAPAN_CATALOGS`
-    (`getJapanCatalogTheme`/`listJapanCatalogThemes`)。WP0/WP3で実値確認済みの6 metricのみ採用
-    (donut chart の未確認5系列・県内大学進学率のunsupportedは含めない)。
-  - `apps/web/src/app/japan/page.tsx`: テーマ一覧ハブ (SurfaceLinkCard)。ranking件数・47県要約は
-    複製しない (doc43 §7 WP4 step3)。
-  - `apps/web/src/app/japan/[themeSlug]/page.tsx`: 詳細ページ。`readJapanSeries()` を
-    metricごとにruntime fetchしChartPanel+JapanMetricChartで描画、値が無いmetricは
-    (catalog採用時点で確認済みという前提のもと) そのカードだけ防御的にskip。
-    R2依存のため`generateStaticParams`を持たせず (`revalidate`のみ) `ƒ`を維持。
-    `.claude/scripts/lib/check-r2-route-ssg.cjs`のR2_DEPENDENT_ROUTESに追加し再混入を機械的に防止。
-  - `apps/web/src/app/japan/[themeSlug]/JapanMetricChart.tsx`: 既存`LineChartClient`を
-    dynamic importするclient component。系列は常に1本 (公式全国値のみ、比較線を持たない)。
-  - **検証**: `apps/web`/`data-configs`/`stats-r2` 全て tsc --noEmit green
-    (`.next/cache/tsconfig.tsbuildinfo`削除後に確認)。`data-configs`の`geo-scope`配下
-    vitest 21件・`stats-r2`配下21件、全green。`check-r2-route-ssg.cjs`green。
-  - **browser smoke (localhost、remote R2 write無し)**: `/japan` はeducation-culture 1テーマ+
-    6指標を正しく表示。`/japan/education-culture`はremote R2に`app/japan/*`がまだ存在しない
-    ため「現在表示できる全国値がありません」の空状態を正しく表示 (console error無し、クラッシュ無し)。
-    ★remote R2への書き込みは本タスクの停止条件 (別承認が必要) のため、実データ描画の見た目は
-    localhost実機ではなく、WP3で生成した実artifact 6件 (`.local/r2/app/japan/<metric>/series.json`、
-    WP0の一次資料照合値と完全一致) をpage.tsxの消費形 (`rows[].{yearName,value,unit}`,
-    `meta.sourceId`) に対して構造的に突合し確認した。
-- **WP5 完了 (2026-08-20)**: `/japan` を `/themes` と同型の known-slug 契約・sitemap segment・
-  独自 metadata 意図で公開経路に接続した (header/home 導線は未追加のまま = doc43 §7 WP5 の意図どおり)。
-  - `apps/web/src/config/known-japan-slugs.ts`: `KNOWN_JAPAN_SLUGS` を `JAPAN_CATALOGS` (git TS)
-    から動的導出 (`known-theme-slugs.ts` と同型。手動リスト再生成不要)。
-  - `apps/web/src/lib/url-policy.ts`: `UrlPolicy.japan.isKnown` を新設。**`theme.isKnown` を
-    流用しない**独立判定 (`/themes` に存在する未採用テーマの slug が `/japan` でも known に
-    なるのを防ぐ。/japan の known 集合は education-culture 1 件のみ)。
-  - `apps/web/src/middleware.ts`: `/japan/{unknown-slug}` → 410 (既存 `/themes/{unknown-slug}` の
-    ブロックと同じ `checkContentTypePolicy` 内に隣接配置。matcher は既存の catch-all を流用、
-    変更不要)。
-  - `apps/web/src/app/sitemap.ts`: `SEGMENTS` 末尾に `"japan"` を追記 (既存 `static`〜`cities` の
-    配列 index=0-8 は不変・japanはid=9)。`JAPAN_PAGES` は `listJapanCatalogThemes()` から直接
-    構築 (R2 非依存の git constant のため THEME_PAGES と同型、build 時 R2 不達フォールバック不要)。
-    try/catch 両方の switch に `case "japan"` を追加 (Segment union の網羅性のため)。
-  - **metadata 差別化を実測確認**: `/themes/education-culture` (title="教育・文化"、
-    「都道府県別」「ランキング」「地域差」「47都道府県」を含む description) vs
-    `/japan/education-culture` (title="教育・文化 | 日本の統計"、「日本全国」「時系列」を含み
-    「都道府県」比較語を含まない description、keywords に「日本」「全国」を追加)。
-  - **GA4 内部ナビ計測は意図的に追加しない**: `/themes/page.tsx` の一覧カードも `trackNavClick`
-    等の計測を持たない (precedent 確認済)。既存規約に倣うと `/japan` ハブのカードにも新規計測を
-    足さないのが「既存 GA4 event 規約に沿う」対応であり、新規パターンを増やさない。
-  - **test**: `middleware.test.ts`(+3件、known/unknown/トップの410判定) /
-    `sitemap-build-phase.test.ts`(+1件、japan segment実測。★総数ループのhardcode `9` を
-    `generateSitemaps()`由来の動的値へ是正 — 新規segment追加が無言で対象外になる穴を発見し修正) /
-    `url-policy.test.ts`(+3件、`/themes`の known 集合を流用していないことを含む)。
-  - **browser smoke (localhost)**: `/japan/not-a-real-theme` → 410 (network実測) /
-    `/japan` → 200・`/japan/education-culture` → 200 (既知slug、hub→詳細への実クリック導線含む) /
-    console error は自分が発行した410リクエストのログのみ (実害なし)。
-  - **検証**: `apps/web` tsc --noEmit green。`docs:check` errors=0 (warning は本項目と無関係な
-    既存カードのDue超過のみ)。
-- **WP6 完了 (2026-08-20)**: education-culture pilot (1 テーマ・6 metric) を **17 テーマ・81 metric**
-  (theme-metric 組で 92) へ機械的に拡張した。全 20 ThemeCatalog の依存を対象にした
-  classify→verify の 2 段パイプラインを新設し、値レベル照合を通ったものだけ採用した。
-  - **① 分類 (無料・API 呼び出しゼロ)**: `packages/data-configs/scripts/classify-japan-candidates.ts`
-    が `THEME_CATALOGS` 全 20 テーマの `metrics[]` (265件) を、既存の週次 live-audit
-    (`.claude/state/theme-charts/live-audit.json`、192 distinct request・coverageOk:true・
-    2026-08-15実測) と `requestKey()` (chart-dependencies.ts と同一実装) で突合し、
-    `official-candidate`(114) / `unsupported`(0) / `unknown-non-estat`(9、external/kakei-chousa
-    ソースで別途derivedレシピ審査が要る) / `unknown-no-audit-entry`(142、metricがどのthemeの
-    chartからも参照されずlive-audit対象外) に分類した。
-    - **★実装時の欠陥と修正 (重要な教訓)**: 初回実装は `config.source` の**全 string field**
-      (displayName・urlまで) を e-Stat filter として拾ってしまい、114件あるべき official 候補が
-      **1件**しか出なかった (education-culture の 5/5 が誤って unknown 判定)。原因は
-      `source-config.ts` の `ESTAT_QUERY_KEYS` allowlist を使わず自前で緩い抽出をしたこと。
-      同じ allowlist (`cdCat01`〜`cdCat05`/`cdTab`) に絞って再実行し 114 候補を正しく検出した。
-      **教訓: 既存の allowlist 実装があるのに緩い抽出を自作すると、大量の偽陰性が出ても
-      「エラー無く完走する」ため気づきにくい**。
-  - **② 値レベル検証 (実 e-Stat fetch・114 件)**: `generate-japan-series.ts` から
-    `generateOneMetric(key, {write})` を切り出し (CLI と batch verifier の共有コア化)、
-    `packages/stats-r2/src/scripts/verify-japan-candidates.ts` が 114 候補全てに実際に
-    `fetchEstatRaw`→`buildJapanSeriesRows` を通した。結果: **verified-official 90 / unsupported 24 /
-    fetch-error 0**。WP0 と同型の罠が複数実測で再確認できた
-    (`crude-birth-rate`/`fiscal-strength-index-prefecture`/`consumer-price-difference-index-*` は
-    特定年の unit が e-Stat 応答で `'‐'` プレースホルダになっており正しく棄却)。
-  - **★NFKC 正規化バグを発見・修正**: `road-total-length-with-expressway`/`road-expressway-length`
-    (2件) が `config.unit='km'`(半角) vs `e-Stat unit='ｋｍ'`(全角、2005年) の**表記ゆれだけ**で
-    誤って unsupported 判定されていた。`build-japan-series.ts` の単位比較が生文字列 `!==` だった
-    ことが原因で、`unit-semantics-standards.md` の指示どおり `parseUnit().normalized` (NFKC+trim)
-    経由の比較に修正 (`packages/data-configs/src/geo-scope/build-japan-series.ts`)。
-    プレースホルダ (`'‐'` 等、正規化しても一致しない) は引き続き不一致として正しく棄却される
-    ことを回帰test で固定 (`build-japan-series.test.ts` +2件)。修正後、この2件は
-    verified-official に昇格 → **最終 92 件**。
-  - **既知の discontinuity は値レベル照合を通っても意図的に除外**: `health-checkup-rate-lifestyle-diseases`
-    (latest 2023=0%) は `.claude/todo/backlog.md` 既存カード `[HEALTH-CHECKUP-RATE-RETIRE-01]`
-    (2017年以降 全国値0%・実施主体変更で系列が不連続) と一致することを確認し、doc43 §11 停止条件
-    (「極端な不連続」) により Japan catalog から除外した (healthcare は残り5 metricで採用)。
-  - **`packages/data-configs/src/geo-scope/japan-catalog.ts`**: 17テーマ・92 theme-metric組
-    (distinct metricKey 81) へ拡張。新規16テーマ (aging-society/fishery-marine/foreign-residents/
-    healthcare/labor-mobility/labor-wages/living-housing/local-economy/local-finance/manufacturing/
-    population-dynamics/railway/real-income/safety/tourism/roads) を追加。description/keywords は
-    `/themes/*` と重複させず「日本全国」「時系列」軸で個別執筆 (WP5 差別化方針を継続)。
-    採用しなかった themes (occupation-salary=39件全 unknown-no-audit / ports=9件全 unknown-no-audit /
-    railway・real-income・roads・local-finance・fishery-marine の一部 external/kakei-chousaソース
-    9件) は未着手として残置 (doc43 WP6 step3: 無理に埋めない)。
-  - **local artifact 生成**: `generateOneMetric(key, {write:true})` を81 distinct metricで実行し
-    全件成功 (ok=81 fail=0)。`.local/r2/app/japan/<metricKey>/series.json` に生成済み。
-    **remote R2へは未反映** (停止条件: remote R2 write は別承認)。
-  - **test**: `build-japan-series.test.ts`(+2件、NFKC回帰含め計10件) /
-    `japan-catalog.test.ts`(7件、81 metricKey全てregistry実在+isActive:true を再確認) /
-    `url-policy.test.ts`(WP5で書いた「healthcareは未採用」の前提がWP6で採用に変わったため
-    occupation-salary/portsに差し替え)。
-  - **browser smoke (localhost)**: `/japan` が17テーマカードを正しく表示 / 新規テーマ詳細
-    (`/japan/safety`・`/japan/roads`) がクラッシュせず正しく空状態を表示 (remote R2未反映のため
-    想定どおり0指標) / 未採用テーマ (`/japan/occupation-salary`、/themesには存在するがJapan
-    catalog未採用) が正しく410 / console error は自分が発行した410テストのログのみ。
-  - **検証**: `apps/web`/`data-configs`/`stats-r2` 全て tsc --noEmit green。
-    `data-configs`のgeo-scope+theme-catalog配下 vitest 89件 / `stats-r2` 21件 / `apps/web`の
-    middleware+sitemap+url-policy 38件、全green。`validate:catalog`(error0・既存warn194は無関係)
-    `validate:config`(error0・既存warn2は無関係) green。`docs:check` errors=0。
-  - **remote R2 反映計画 (未実行・要別承認)**: `diff-push-r2.ts --prefix app/japan` で
-    `.local/r2/app/japan/` 配下81ファイルをpushする想定 (新規keyのみ・既存`app/stats`等は無関係)。
-    push後は `/japan/education-culture` 以外の16テーマ詳細ページで実データ描画をlocalhostで
-    再確認してからdeployする。
-- **WP7 完了 (2026-08-20)**: `/world` (国際比較) の型契約を確定した。**データ取得・route実装はしない**
-  (doc43 §7 WP7 step1どおり別backlogへ分離)。全体最終検証を実行した。
-  - **型契約**: `packages/data-configs/src/geo-scope/world-types.ts` — `WorldAvailability`
-    (official/derived-additive/derived-ratio/unsupported/unknown、`JapanAvailability`と同型だが
-    独立定義)、`WorldCatalogTheme`/`WorldCatalogMetric` (`JapanCatalogTheme`と対称形)、
-    `WORLD_CATALOGS = {}` (**意図的に空**)。`/world`は`/japan`(47県→1全国値へ集約)ではなく
-    `/themes`(都道府県比較)に近い形になる根拠をコメントで明記 (国=都道府県の役割、N行/年で
-    日本はその中の1行)。
-  - **R2 artifact 契約**: `packages/stats-r2/src/types.ts` に `WorldValuesArtifact`/`WorldValueRow`/
-    `worldR2Key()` を追加。key命名 `app/world/<metric>/values.json` はdoc43 §5で確定済みの仕様を
-    そのまま実装 (Japanの`series.json`とは異なるファイル名で namespace 混在を防ぐ)。
-    **reader/writerは実装しない** — 呼び出し元が存在しない状態でreaderだけ用意すると
-    「404=null」と「未実装=null」を区別できない静かなバグの温床になるため、`WORLD_CATALOGS`が
-    非空になるWP8以降にJapan (WP3) と同じ construction (fetch→schema→shape gate→reader/writer
-    同時実装) で追加する設計とした。
-  - **国際データ源の read-only 机上評価 (WebSearch実測・アクセス日2026-08-20)**: OECD Data
-    Explorer (無料API・60件/時間のrate limit・SDMXベース・OECD加盟国限定)、World Bank Open Data
-    (**CC BY 4.0で商用利用可・3候補中最も許諾が明確**・World Development Indicatorsは全加盟国
-    収録)、UNdata (無料だが「UNdataを出典引用」条件のみでCC等の明示ライセンスではない・正確性の
-    保証なし)。第一候補はWorld Bank。詳細・根拠URLは `world-types.ts` の
-    `WORLD_DATA_PROVIDER_EVALUATIONS` (実装値ではなく机上評価。実データ取得可否は着手時に
-    metricごとの実fetchで別途確認する)。
-  - **gate確認 (doc43 §7 WP7 gate)**: `apps/web/src/app/world/` は存在しない (route未作成)。
-    → world未実装がtheme/japanへfallbackする経路は構造的に存在しない (フォールバックする対象の
-    routeが無い)。release差分は本カードのWP4-WP7ログ + 下記commit計画、rollback対象は
-    「geo-scope配下の新規ファイル一式 + japan-catalog.tsの追記分」に限定され明確。
-  - **test**: `world-types.test.ts`(4件、空catalog+机上評価の形を固定) /
-    `world-contract.test.ts`(2件、`worldR2Key`のkey命名)。
-  - **全体最終検証**:
-    - `data-configs`/`stats-r2`/`apps/web` 全て tsc --noEmit green。
-    - `data-configs`のgeo-scope(27件)+theme-catalog(62件)、`stats-r2`全体(23件)、`apps/web`の
-      middleware+sitemap+url-policy(38件)+theme-dashboard/commute-flow/migration-flow(141件)、
-      全green (regressionなし)。
-    - `validate:catalog`(error0)・`validate:config`(error0)・`docs:check`(error0) green
-      (既存warnはいずれも本項目と無関係)。
-    - **`npm run build --workspace apps/web`**: **Windows既知の未完走障害で失敗**
-      (`.claude/rules/local-environment.md`「★Windows では `next build` が完走しない」節と
-      症状一致 — vendored `@vercel/og` の path.join バグに起因する prerender 失敗が
-      `/areas/[areaCode]/cities/[cityCode]/[categoryKey]` 等**私の変更と無関係な既存ページ**の
-      "Collecting page data" 失敗に波及。`/japan`系ページはエラー一覧に一切登場しない)。
-      同ファイルの指示どおり「ローカル検証はtype-check+対象testで行う、Linux CIビルドが権威」に
-      従い、build成否の最終確認はCIに委ねる (本セッションでは実行できない・別途CI/Linux環境での
-      確認が要る)。
-    - **localhost browser smoke**: `/japan`が17テーマカードを正しく表示 / 新規テーマ詳細
-      (`/japan/safety`・`/japan/roads`) がクラッシュせず空状態を表示 (remote R2未反映のため想定
-      どおり) / 未採用テーマ (`/japan/occupation-salary`) が410 / `/japan/not-a-real-theme`が410 /
-      console errorは自分が発行した410テストのログのみ。
-  - **commit計画 (提示のみ・未実行)**: doc43 §10 の境界に沿って分割する想定。
-    1. **contract**: `packages/data-configs/src/geo-scope/{types,resolve-japan-value,build-japan-series,world-types,index}.ts`
-       + `apps/web/src/features/theme-dashboard/types.ts` (`PrefectureView`) + 関連test
-    2. **theme-UI**: `apps/web/src/features/theme-dashboard/components/*.tsx`
-       (ThemeMetricsDashboard/MetricSwitcherPanel/MetricFocusCharts等) +
-       commute-flow/migration-flow の文言修正 + 関連test
-    3. **Japan-data**: `packages/stats-r2/src/{types,scripts/generate-japan-series,scripts/verify-japan-candidates}.ts` +
-       `packages/data-configs/src/geo-scope/japan-catalog.ts` +
-       `packages/data-configs/scripts/classify-japan-candidates.ts` + 関連test
-       (**`.local/r2/app/japan/*` の81ファイルはgit管理外・remote R2 pushで別途反映**)
-    4. **Japan-route**: `apps/web/src/app/japan/**` +
-       `apps/web/src/{config/known-japan-slugs.ts,lib/url-policy.ts,middleware.ts,app/sitemap.ts}` +
-       `.claude/scripts/lib/check-r2-route-ssg.cjs` + 関連test
-    5. **SEO-release**: 本バックログの更新自体 (`.claude/todo/backlog.md`)
-    - `git add -A` は使わない。各commitで上記グループの明示pathのみをstageする。
-    - **push/PR/deployは別承認**。remote R2への81ファイルpushも同様に別承認 (§停止条件)。
-  - **残作業**: 1〜3 は完了 (下記)。**残るのは 4 の一部のみ**。
-    1. ~~R2 push~~ → **完了 (2026-08-20)**
-    2. ~~実データ描画の再確認~~ → **完了 (2026-08-20)**
-    3. ~~commit → develop → PR → main → deploy~~ → **完了 (2026-08-20・PR #808 / #809)**
-    4. **WP6 の未着手分 (残)**: `unknown-no-audit-entry` 142件のうち **71件は 2026-08-20 に採用済**
-       (下記 WP6 拡張note)。**残るのは verified-unsupported 71件と `unknown-non-estat` 9件**。
-       前者は e-Stat 側に有効な全国値が無い (プレースホルダ `'‐'` 等) ので採用不可。
-       後者 (external/kakei-chousa ソース) は derived レシピ審査が別途要る。
-       未採用テーマは `consumer-prices` / `occupation-salary` の 2 件。
-- **WP6 拡張 完了 (2026-08-20・PR #809)**: `/japan` を **17テーマ・81指標 → 18テーマ・146指標** へ拡張した。
-  - **発見**: `unknown-no-audit-entry` 142件は「全国値が無い」のではなく
-    **どのテーマの chart からも参照されないため live-audit の対象外だった**だけだった。
-    候補へ昇格して実 e-Stat fetch + `buildJapanSeriesRows` で値レベル照合したところ
-    **verified-official 71 / verified-unsupported 71 / fetch-error 0** で、半数に公式全国値があった。
-    全文: `.claude/state/geo-scope/wp6-expansion-verification.json`。
-  - 新規テーマ `ports` (海上出入貨物・旅客船輸送人員)。`KNOWN_JAPAN_SLUGS` と sitemap は
-    catalog から動的導出するため自動追従する (別ファイルの再生成は不要)。
-  - artifact 新規65件を生成・push (65/65成功・既存81件は無変更)。146件で総4,501行・空0・非有限値0。
-  - **★shortLabel 衝突のバグを作って直した**: title 末尾の括弧を機械的に削ったため
-    4指標がすべて「道路実延長」という同一ラベルになった。さらに元の title 自体が同一の組も
-    あった (`foreign-resident-count-china`/`-korea` が両方「外国人人口」)。
-    **title は削らず、テーマ内で衝突する場合だけ subtitle を併記**する方式に修正 (8件該当)。
-  - **★同名テストファイルの取りこぼし**: 事前検証で `apps/web/src/__tests__/url-policy.test.ts` を
-    実行したが、実際のガードは `apps/web/src/lib/__tests__/url-policy.test.ts` にあり CI で落ちた
-    (ports 採用で「未採用テーマの実例」が古くなった)。**grep で1件見つけて満足せず全件実行する**。
-    japan を参照するテストは6ファイル・42件。
-
-- **#1 R2 push 完了 (2026-08-20・オーナー承認済み)**: 81 metric を remote R2 へ反映した。
-  - **★`.local/` は環境をまたがない**: 前セッション (Windows機) が生成した81ファイルは
-    gitignore のため本作業ツリーに存在せず、**e-Stat から再生成が必要だった**。
-    「local artifact 生成済み」は生成した環境でのみ有効と読むこと。
-  - 再生成: `apps/web/.env.development` の公開ID (node子プロセスで読める) で
-    `generate-japan-series.ts --metric <key> --source-mode official` を81回。**OK=81 / FAIL=0**。
-  - 検証: 総2,677行・空rows 0件・非有限値 0件。dry-runで全件`[NEW]`・キーは`app/japan/`のみ・
-    既存キーの変更/削除 0件を確認してから apply (81/81成功・エラー0)。
-    公開URL実測 3件で HTTP 200・rows一致。
-  - **★zshの落とし穴**: `for k in $KEYS` は zsh では word-split されず1回しか回らない
-    (bashとの差)。全81キーが1つのmetric名として渡り「全件失敗」に見えた。
-    `while IFS= read -r` を使うこと。
-- **#2 実データ描画の確認 完了 (2026-08-20)**: 全17テーマで
-  ページ出力の `N 指標 (公式全国値)` とカタログ期待値を突合し **17/17 一致** (合計92 metric・全HTTP 200)。
-  - チャート実描画も確認: SVG path の点数がR2のrows数と一致、strokeは実色 `rgb(45,66,200)`、
-    軸・目盛り・データ点・出典表示が正常 (browser目視: `/japan/foreign-residents`)。
-  - **★検査で3回誤判定しかけた (今後のため)**: ①チャートは `ssr:false` の client component
-    なのでSSR HTMLに数値は出ない (HTMLを見て「データ無し」と誤判定しかけた) ②このプロジェクトは
-    rechartsではなく**自前SVG** (ライブラリ名で探して「未描画」と誤判定しかけた)
-    ③道路実延長は2005→2023で+3%とほぼ横ばいなので線が平坦 = データの形であり不具合ではない。
-    HTMLの`undefined`はNext.jsのRSC内部 (`"error":"$undefined"`) でデータ起因ではない。
-
 ### [MUNICIPALITY-SCOPE-SEPARATION-01] 市区町村テーマ・ランキングを独立した地理スコープへ分離する
 タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run docs:check] [起票:2026-08-20]
 
@@ -832,6 +466,12 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **実行順**: doc 44の WP0〜WP8を順に進める。WP0 inventory → WP1 scope/entity/catalog →
   WP2専用R2 snapshot/ranking core → WP3 pilot route → WP4 theme UX → WP5地方財政移行 →
   WP6 URL/SEO/計測 → WP7承認付きrelease → WP8計測後の拡大。
+- **統合 (2026-08-21)**: 旧 `[CITY-PAGES-REVIVAL]` (市区町村ページの公開数を増やす・trigger待ち) を
+  受入条件を持つ本カードへ統合して削除した。現状の公開は `PHASE_1_SSG_CITIES` の **360市** のみ
+  (政令市20 + 中核市/県庁所在地60 + STAGE_3 280。sitemap shard 8 = city 360 + city-category 720 = 1,080 URL)。
+  それ以外の city コードは HTTP 200 + 「市区町村が見つかりません」= soft 404 (noindex 済)。公開数を
+  増やすかは WP8 (計測後の拡大) で pilot の 28日/56日判定を見てから決める。旧カードの trigger を引き継ぐ:
+  都道府県ページで検索・回遊の需要を実証し、city snapshot 欠損と thin-content 基準を解消した後。
 - **pilot規則**: WP0で値・entity・年度・検索需要を監査して一件だけ選ぶ。地方財政は、市・町・村・
   東京23特別区を含み政令指定都市の行政区を除く財政主体監査が完了するまでpilotにしない。
 - **停止条件**: entity/年度/単位/母集団が不明、欠測と0を区別できない、県artifactへ差分が出る、
@@ -1392,6 +1032,25 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 根拠・再現条件: 本番 /themes/population-dynamics の hydration 後 DOM。証跡 = post-deploy smoke run 30876315662 の error-context.md (aria: `link "統計" /url: "#"`)
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [JAPAN-DERIVED-METRICS-01] /japan に derived レシピ由来の指標を足せるか判定する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-08-21]
+
+- **owner**: Claude Code
+- **前提**: `/japan` (18テーマ・146指標) は 2026-08-20 に公開済み (PR #808 / #809)。GEO-SCOPE-SEPARATION-01 の
+  完了条件は全て満たして 2026-08-21 にカードを削除した。ここで扱うのは**公式全国値を採用できなかった残り**だけ。
+- **対象**: `unknown-non-estat` 9件 (external / kakei-chousa ソース)。e-Stat の全国行が無いため、
+  分子・分母を宣言して derived として組めるかを 1 件ずつ審査する。未採用テーマは
+  `consumer-prices` / `occupation-salary` の 2 件。
+- **対象外 (再調査しない)**: `verified-unsupported` 71件。2026-08-20 に実 e-Stat fetch で値レベル照合し、
+  全国行の値がプレースホルダ (`'-'` 等) = 公式全国値が存在しないと確定した。実測全文は
+  `.claude/state/geo-scope/wp6-expansion-verification.json`。
+- **停止条件**: 分子・分母の単位や母集団が揃わない、年次が一致しない、「47県から合成した値」を
+  公式全国値として出すことになる — いずれかに当たったら採用しない。
+- **完了条件**: 9件それぞれに採用/不採用の判定と根拠があり、採用分は `app/japan/<metric>/series.json` が
+  生成されて `/japan/<theme>` に実データで描画される。
+- **正典**: `docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md` /
+  `packages/data-configs/src/geo-scope/` / `.claude/rules/unit-semantics-standards.md`
 
 ### [BACKLOG-LOOP-PERMISSION-01] backlog-loop が `.claude/todo/` を書き換えられない原因を確定する
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-08-21] [期日:2026-08-24]
@@ -1961,12 +1620,6 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 - **trigger**: ココナラまたはnoteの単一商品で実売、粗利、supportMinutesを測定できた後。
 - **正典**: `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md`
 
-### [CITY-PAGES-REVIVAL] 市区町村ページ復活
-タグ: [起票:2026-07-04]
-
-- **owner**: Claude Code
-- **trigger**: 都道府県ページで検索・回遊の需要を実証し、city snapshot欠損とthin-content基準を解消した後。
-
 ### [GIS-CROSS-CONTENT-BACKLOG] 統計×GISコンテンツ
 タグ: [起票:2026-07-04]
 
@@ -2089,7 +1742,7 @@ gis 123 件 + `apps/web` type-check green。両呼び出し元 (`geoshape-servic
 
 | 紐づけ先 | スクリプト |
 |---|---|
-| `CITY-PAGES-REVIVAL` (deferred) | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs` |
+| `MUNICIPALITY-SCOPE-SEPARATION-01` (旧 CITY-PAGES-REVIVAL を 2026-08-21 に統合) | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs` |
 | `BLOG-SVG-LINEAGE-RESTORE-01` (in-progress) | `blog/restore-{findings,ranking,scatter}-from-svg.mjs` |
 | `NOTE-MAGAZINE-REORG-01` (in-progress) | `note/{note-magazine,fetch-note-magazines,fetch-magazine-members}.mjs` / `note/probe-{create-form,magazine-create,magazine-ui}.mjs` |
 | `CHART-LINEAGE-RESIDUAL-01` (pending) | `blog/resolve-scatter-axes.mjs` |
