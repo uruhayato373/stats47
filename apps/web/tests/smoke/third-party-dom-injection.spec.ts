@@ -11,19 +11,15 @@ import { expect, test } from "@playwright/test";
  * 「人口」「旅行ガイド、旅行記」が同様に置換されていた。出典の信頼性を損ない、
  * PR 表記の無いアフィリエイトリンクが引用文の中に生まれることになる。
  *
- * ★出所は**まだ特定できていない** (2026-08-21 実測)。分かっているのは次まで:
- *   - AdSense ではない。`adsbygoogle.js` は表示停止中で読み込まれてすらいない。
- *   - 読み込まれる第三者は a8.net 系・GTM・GA・Cloudflare Insights のみ。
- *   - ただし **A8 リンクマネージャーの公式仕様は「広告主サイトへのリンクを A8 の
- *     アフィリエイトリンクに置換する」URL 書き換えで、平文をリンク化する機能ではない**
- *     (support.a8.net/as/linkmanager)。したがって「人口動態統計」の「統計」だけが
- *     リンクになる断片単位の置換は、この仕様では説明できない。
- *   犯人を決め打ちせず、**再発したら中身を出して特定する**のがこのテストの役目。
+ * ★出所は **AdSense の自動広告**。オーナーが 2026-08-21 に設定を解除した。
  *
- * ★このテストが今日は緑なのは正しい。同日に headless / headed × themes / blog の 4 通りを
- *   最大 36 秒スクロールしながら観測して**再現しなかった**。断続的か A8 側の設定変更で
- *   止まっている。再現しないものは直せないので、**戻ってきたときに気づけるようにする**のが
- *   このテストの役割。緑であること自体が「今は起きていない」という観測になる。
+ * ★**このテストは AdSense 停止中は緑になるが、それは証拠にならない**。
+ *   2026-08-04 に捕捉 → **2026-08-16 に `ADSENSE_DISPLAY_ENABLED=false`** で
+ *   `adsbygoogle.js` ごと停止 → 2026-08-21 の実測で再現せず、という順序で、
+ *   「停止したから撃てなくなった」だけである。`ADSENSE_DISPLAY_ENABLED=true` に戻したあとの
+ *   実測が唯一の根拠になる。再開手順は `.claude/rules/affiliate-ads-standards.md` §12。
+ *   (私は停止の 5 日後に観測して一度「AdSense ではない」と誤結論した。
+ *    現在の状態から過去の事象を推論しない。)
  *
  * 判定の作り方: `href="#"` を全部拾うと誤検知する。実測で 2 種類の正当な `#` が居た。
  *   1. **ライブラリの UI コントロール** — Leaflet のズーム (`a.leaflet-control-zoom-in`)。
@@ -43,7 +39,7 @@ import { expect, test } from "@playwright/test";
 const PAGES = ["/themes/population-dynamics", "/blog/accommodation-expenditure-ranking", "/ranking/total-population"];
 
 /**
- * リンクマネージャーは 3 秒の idle 遅延の後に読み込まれ、そこから DOM を走査する。
+ * 広告スクリプトは requestIdleCallback で遅れて読み込まれ、そこから DOM を触る。
  * 読み込み前に判定すると、注入があっても緑になってしまう。
  */
 const SETTLE_MS = 12_000;
@@ -78,7 +74,7 @@ test.describe("第三者スクリプトの本文書き換え", () => {
 
       expect(
         injected,
-        `本文中の語がリンクへ置換されている。出所は未特定なので、この中身から特定する: ${JSON.stringify(injected)}`,
+        `本文中の語がリンクへ置換されている (AdSense 自動広告の再発を疑う): ${JSON.stringify(injected)}`,
       ).toEqual([]);
     });
   }

@@ -524,6 +524,15 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 > **AdSense再開時の rollback**: `ADSENSE_DISPLAY_ENABLED=true` で従来の AdSense 枠を戻し、
 > ranking 右レールの文脈バナーも従来の下段位置へ戻す。ranking 本文中段へ回した先頭バナーは
 > 読了枠の解決結果へ戻し、同一バナーを欠落・二重表示させない。
+>
+> **★再開したら必ず本文書き換えの smoke を回す**:
+> `npx playwright test --config playwright.smoke.config.ts third-party-dom-injection`
+> (`apps/web/tests/smoke/third-party-dom-injection.spec.ts`)。
+> 2026-08-04 に**自動広告**が出典テキストの語を `href="#"` のリンクへ置き換えた
+> (「出典: 人口動態統計」の「統計」だけがリンク + アイコンになる)。出典の信頼性を損ない、
+> PR 表記の無い広告リンクが引用文の中に生まれる。オーナーが 2026-08-21 に自動広告の設定を
+> 解除したが、**停止中は自動広告が動かないので緑でも証拠にならない** — 再開後の実測だけが
+> 解決の根拠になる。再開時は AdSense 管理画面の自動広告が意図した設定かも併せて確認する。
 
 ### 5 チャネルの役割分担 (混ぜない)
 

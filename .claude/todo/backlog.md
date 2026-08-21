@@ -1052,17 +1052,25 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   なる (SSR HTML には無く hydration 後に出現)。本文でも「人口」「旅行ガイド、旅行記」が同様に置換される。
   出典の信頼性を損ない、**PR 表記の無いアフィリエイトリンクが引用文の中に生まれる**。
   証跡 = post-deploy smoke run 30876315662 の error-context.md (aria: `link "統計" /url: "#"`)。
-- **★2026-08-21 に出所を実測して訂正した。AdSense ではない。**
-  本番 `/themes/population-dynamics` で読み込まれる第三者 origin は
-  a8.net (statics / linkmgr / www14 / www19)・googletagmanager・google-analytics・cloudflareinsights のみで、
-  **AdSense の `adsbygoogle.js` は表示停止中で読み込まれてすらいなかった**。
-  本文を書き換えうるのは **A8 リンクマネージャー** (`statics.a8.net/a8link/a8linkmgr.js`) だけ。
-  読み込み元は `apps/web/src/lib/a8net/A8LinkManager.tsx` で、**layout から全ページに入っている**
-  (自己申告のふるまいが「ページ内の通常リンクを自動的にアフィリエイトリンクに変換する」)。
-  置換されていた語「旅行ガイド、旅行記」は A8 のプログラム分類名そのもので、傍証になる。
-- **同日は再現しなかった**: headless / headed × themes / blog / ranking を最大 36 秒スクロールしながら
-  観測して `#` リンクは 0 件。断続的か A8 側の設定変更で止まっている可能性がある。
-  **再現しないものは直せない**ので、戻ってきたときに気づけるようにするところまでを機械化した。
+- **★出所は AdSense の自動広告。オーナーが 2026-08-21 に設定を解除した。**
+  私が同日「AdSense ではない」と書いたのは**測定時期を取り違えた誤り**だった。タイムラインが決定的:
+
+  | 日付 | 出来事 | `adsbygoogle.js` |
+  |---|---|---|
+  | 2026-08-04 | smoke が `link "統計" /url: "#"` を捕捉 | **読み込まれていた** |
+  | 2026-08-16 | `ec944e50b feat(web): pause all AdSense display` | 以降は読み込まれない |
+  | 2026-08-21 | 私の実測「AdSense は読み込まれていない」「再現しない」 | 読み込まれない |
+
+  `AdSenseScript` は `ADSENSE_DISPLAY_ENABLED` が true のときだけ `adsbygoogle.js` を挿す。
+  **停止の 5 日後に観測して「犯人ではない」と結論した**が、実際は「停止したから撃てなくなった」
+  だけで、これは自動広告説を**支持する**自然実験だった。現在の状態から過去の事象を推論しない
+  (`evidence-based-judgment.md`)。
+  - A8 リンクマネージャーを疑ったのも取り下げる。公式仕様
+    (support.a8.net/as/linkmanager) は「**広告主サイトへのリンク**をアフィリエイトリンクに
+    置換する」URL 書き換えで、平文の断片をリンク化する機能ではない。
+- **2026-08-21 に再現しなかったのは AdSense が 8/16 に停止していたから**。
+  headless / headed × themes / blog / ranking を最大 36 秒スクロールして `#` リンクは 0 件。
+  **停止中の緑は「直った」ではなく「今は撃てない」**を意味する。
 - **完了済 (2026-08-21)**: post-deploy smoke に検知を追加した
   (`apps/web/tests/smoke/third-party-dom-injection.spec.ts`)。自分たちのコードは `href="#"` を
   一度も出力しないので、`#` リンクの存在がそのまま外部注入の証拠になる。
@@ -1078,15 +1086,10 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
     (文脈つきの指摘文が出る)。緑であること自体が「今は起きていない」という観測になる。
   - 副産物: hydration 前に append したリンクは React の再描画で消えるため、注入は
     hydration 後にしか成立しない。settle は 12 秒。
-- **残り (オーナー判断)**: A8 リンクマネージャーを**残すか外すか**。判断材料:
-  - 収益の裏付けが無い。LinkManager が変換したリンクは `TrackedAffiliateLink` を通らないので
-    `affiliate_click` を発火せず、GA4 では 1 件も観測できない。
-  - 引用文の中に PR 表記の無いアフィリエイトリンクが生まれるのは景表法の観点で望ましくない
-    (`affiliate-ads-standards.md` §7 の PR 表記規律と整合しない)。
-  - 外すのは `A8LinkManager` を layout から抜くだけで可逆。**ただし収益導線の変更なので
-    オーナー承認が要る**。除外指定で出典まわりだけ守れるかは A8 の仕様確認が先。
-- **完了条件**: 出典・本文が第三者スクリプトでリンク化されないことを smoke が継続して示し、
-  LinkManager の残置/撤去がオーナー判断で確定している。
+- **残り**: **AdSense を再開したとき**に再発しないことを確認する。停止中の緑は証拠にならないので、
+  再開手順に smoke の実行を紐づけた (`affiliate-ads-standards.md` §12)。自動広告の解除は
+  実施済みなので、再開後の smoke が緑なら解決とみなす。
+- **完了条件**: AdSense 再開後の post-deploy smoke で、出典・本文がリンク化されないことを示す。
 
 ## 🟡 中 — 2〜3ヶ月以内
 
