@@ -814,14 +814,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
 - **正典**: `.claude/rules/blog-data-schema.md`
 
-### [AREAS-DIRECTORY-UX-01] `/areas` 実装済み変更の最終確認
-タグ: [実行:ユーザー] [起票:2026-07-23]
-
-- **owner**: Claude Code
-- **残り**: 390/768/1024/1280/1440pxのlight/dark、keyboard、44px target、cookie banner、console/hydrationを確認する。
-- **完了条件**: visual変更が必要なら対象test・type-check・design-system checkを再実行し、ユーザー承認後のreleaseで `/areas` をsmoke確認する。
-- **正典**: `apps/web/src/features/area-profile/README.md`
-
 ### [GOOGLE-ADMIN-AUTOMATION-01] Google管理操作のAPI/UI境界整理とCI化
 タグ: [実行:ユーザー] [起票:2026-07-30]
 
@@ -973,6 +965,28 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 根拠・再現条件: 本番 /themes/population-dynamics の hydration 後 DOM。証跡 = post-deploy smoke run 30876315662 の error-context.md (aria: `link "統計" /url: "#"`)
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [A11Y-FOOTER-TAP-TARGET-01] フッター SNS アイコンのタップ領域が 16px で WCAG 2.5.8 を満たさない
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:node .claude/scripts/ui/measure-page-a11y.mjs] [起票:2026-08-21]
+
+- **owner**: Claude Code
+- **根拠 (2026-08-21 実測・Playwright)**: `FooterSocialLinks.tsx` の 4 リンクは
+  `<a>` にパディングが無く、中の lucide アイコン (`h-4 w-4` / `h-5 w-5`) がそのまま
+  タップ領域になる。実測は X 16×16 / Instagram 16×16 / YouTube 20×20 / note 16×16。
+  **WCAG 2.5.8 (AA・24×24) を下回る**。`gap-3` (12px) では 24px 円が重なるので
+  間隔による例外も成立しない。フッターは全ページに出る。
+- **同時に測った他の 44px 未満**: ヘッダのロゴ (96×20)・パンくず「ホーム」(42×20)・
+  フッタ法務リンク 3 件 (18px) は**文中リンク相当**で 2.5.8 の適用外。テーマ切替ボタン
+  (40×40)・検索 input (358×40)・cookie banner のボタン (28px) は **AA は満たす**が
+  44px (2.5.5 AAA) には届かない。**`/areas` の県選択 UI は 47 件すべて 44px 以上**で問題なし。
+- **次**: `<a>` に `inline-flex items-center justify-center` + 最低 24px (できれば 44px) の
+  当たり判定を付ける。アイコンの見た目サイズは変えない (余白で確保する)。
+- **停止条件**: フッターの高さが変わってレイアウトが崩れるなら、`-m` の相殺で見た目を保つ。
+  それでも崩れるならデザイン判断としてオーナーへ返す。
+- **完了条件**: 390px で 4 リンクとも 24×24 以上。`npm run check:design-system` と
+  対象 test が green で、フッターの見た目に差分が無い。
+- **正典**: `apps/web/src/components/organisms/Footer/FooterSocialLinks.tsx` /
+  `.claude/rules/ui-components.md`
 
 ### [PERF-AREA-DETAIL-01] /areas/<code> だけ dev で 1.9 秒かかる原因を特定する
 タグ: [インフラ・計測] [種類:改善] [実行:windows] [検証:npm run dev:web] [起票:2026-08-21]
