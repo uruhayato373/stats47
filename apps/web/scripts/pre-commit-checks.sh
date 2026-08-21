@@ -733,6 +733,12 @@ else
   echo -e "${GREEN}✅ TypeScriptファイルの変更なし${NC}"
 fi
 
+# ── backlog カードの鮮度リマインダ (blocker ではない) ─────────────────────────
+# 変更したファイルを名指ししているカードがあれば知らせる。カードが古いまま残ると
+# 別 PC が解決済みの問題に着手する (2026-08-21 に同一セッションで 2 回やった)。
+# 止めない — カードを触る必要が無いこともあるため。
+node "$PROJECT_ROOT/.claude/scripts/lib/check-card-freshness.cjs" 2>/dev/null || true
+
 # エラーがある場合はコミットを拒否
 if [ $ERROR_COUNT -gt 0 ]; then
   echo ""
