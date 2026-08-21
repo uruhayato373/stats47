@@ -1405,14 +1405,52 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [BACKLOG-LOOP-PERMISSION-01] backlog-loop が `.claude/todo/` を書き換えられない原因を確定する
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-08-21] [期日:2026-08-24]
+
+- **症状 (2026-08-20 run 32395252885)**: `permission_denials_count: 16`。セッションは
+  「Edit / Write / Bash の `>` と `sed -i` がすべて権限レベルで拒否された」と報告したが、
+  `.claude/settings.json` に該当する deny は無く `--allowedTools` にも `Write,Edit` が入っている。
+  **モデルの自己申告以外の証拠が無く原因を確定できていない。**
+- **前提は解消済み**: `9af614eb2` で summarizer が拒否の tool と対象を出すようにした。
+  これで次の run の Step Summary に `[permission 拒否]` 節が出る。
+- **次**: 修正後の run の Step Summary を読み、拒否された tool と対象を実測で名指しする。
+  Bash だけなら設計どおり (許可パターンは prefix 一致)。Edit / Write が拒否されているなら
+  `--permission-mode dontAsk` と `--allowedTools` の相互作用を疑う。
+- **完了条件**: 拒否の内訳を実測で示し、(a) 設定を直して書き込みが通る か
+  (b) 通せない理由を確定して needs-owner へ回す のどちらかまで到達する。
+- **禁止**: 回避のために `.github/` や `backlog-routing-policy.json` を触らない
+  (ループが自分の権限を広げる口になる)。
+
+### [GSC-ANCHOR-ROWS-01] `pages.csv` のアンカー行を consumer ごとに扱うか決める
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-08-21]
+
+- **事実 (2026-08-21 実測)**: GSC の page 次元には `#見出し` 付き URL が独立行として入る。
+  W33 で **312 行・39,934 imp・clicks 3 (CTR 0.01%)** = page 次元 imp の **26%**。4 週で倍増した。
+  日付次元には含まれない (非アンカー合計 ÷ `daily.csv` 合計が 5 週とも 104.4-105.0% で安定)。
+  除外前は blog の CTR を 1.90% と読んでいたが、実際は 3.26% だった。
+- **問題**: `pages.csv` を読む 5 スクリプト (`build-remediation-queue` / `build-ai-content-queue` /
+  `analyze-winning-patterns` / `extract-low-ctr-ranking-pages` / `build-placement-map`) が
+  **いずれもアンカー行を明示的に扱っていない**。含めるか外すかが偶然に決まっている。
+- **次**: 各 consumer が slug 完全一致で弾いているか前方一致で束ねているかを読む。束ねている経路が
+  あれば CTR が半減して見えるので除外する。判定は `analyze-ctr-seesaw.mjs` の `isAnchorRow` を使う。
+- **完了条件**: 5 スクリプトそれぞれについて「含める / 外す」を決め、その意図をコードに書く。
+  挙動が変わるものは変更前後の出力差を実測で示す。
+
 ### [BACKLOG-LOOP-V3-VERIFY-01] v3-unified 移行後の backlog-loop 日次 run が green か確認する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-08-18] [期日:2026-08-21]
 
 - **背景**: 2026-08-18 に TODO を v3-unified カード構文へ移行した (queue パリティは移行時に
   実測一致: picked 同一・needsOwner 16+意図的2・wip 5)。無人 CI (JST 01:30) が新形式で
   実走して green になることは翌日の run でしか確認できない。
-- **次**: `gh run list --workflow backlog-loop-daily.yml --limit 1` で移行後最初の run を確認し、
-  green なら本カードを削除する。red なら verify / queue の出力を読み、原因を新カードに起票する。
+- **実測 (2026-08-21)**: 移行後 3 run とも完了条件を満たしていない。8/18・8/19 は green だが
+  **ledger を 1 行も更新せず commit も無い** (最終更新は 8/17)。8/20 は 2 件を実装して gate も
+  通したのに `.claude/todo/backlog.md` を書き換えられず、verify が `gate-passed-but-not-removed` で
+  run ごと落とし実装差分も ledger も破棄された (108 turn / $16.21)。3 run とも同じ 2 件を選び直している。
+- **対応済み (`9af614eb2`)**: 拒否の内訳を Step Summary に出すようにし、prompt を「消してから記録する」
+  順序へ変更した (消せなければ deferred に落とし、実装差分と ledger は push される)。
+- **次**: 原因の確定は `BACKLOG-LOOP-PERMISSION-01` へ切り出した。本カードは
+  **修正後の run が 1 回 green になるまで残す**。
 - **完了条件**: 移行後の日次 run が 1 回 green (行削除があった場合は verify も通過)。
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
