@@ -83,27 +83,6 @@ AdSense 判定順は「新規変更を止める」だけを守る形にして Mu
   - 成功基準: `status: listed` が 10 → **20 件**になり、各冊に ASIN が入る。
     残り 12 冊は W35 へ。真実源 `.claude/config/kdp-listings.json`。
 
-- [x] **`blog-remediation-daily` の修復を実測で確認する**（重点1・S）— **達成 (2026-08-21 確認)**
-  - 8/21 08:17 JST の run は provenance ratchet が赤 (23→26) だが、`remediation-queue.json` の
-    `generatedAt` は `2026-08-20T23:18Z` に更新され outbox prune も commit された。
-    成功基準「ratchet が赤でも是正キューと outbox prune が commit される」を満たしている。
-  - 8/17 08:00 JST の run を見る。**成功しなくてもよい**（provenance ratchet は赤のままでよい）。
-    確認するのは「**ratchet が赤でも是正キューと outbox prune が commit される**」こと。
-  - 成功基準: `remediation-queue.json` の `generatedAt` が 8/17 に更新される。
-    されなければ修正が効いていないので原因を追う。真実源 `.claude/state/blog/remediation-queue.json`。
-
-- [x] **GSC のシーソーを切り分ける**（重点2・M）— **達成 (2026-08-21)。前提が誤りだった**
-  - 4 週スパン (W29→W33・実質非重複) では CTR は **3.02%→3.26% (+0.24pp) と改善**。増分だけの CTR は 4.84%。
-  - 「-0.42pp」は 21 週の全期間最高値 (7/17-23 の 3.84%) を基準に取ったもの。3.00% は 5 月以降の常用帯の下端で、clicks 930 は期間最高。
-  - 実在する問題は最新週 (8/07-13) の増分の質: **+6,380 imp / +101 clicks = 限界 CTR 1.58%**。
-    内訳は ranking 63% / areas 21% / category 5%。最も薄いのは areas(市区町村) で 4 週で表示倍増・clicks +1 (CTR 1.39%→0.75%)。
-  - 前提として `pages.csv` のアンカー行 (page 次元 imp の 26%・クリックゼロ) を除外する必要があった → `GSC-ANCHOR-ROWS-01` を起票。
-  - 全数値と手順: `improvement-log.md#RANKING-CTR-01` / 再実行: `node .claude/scripts/gsc/analyze-ctr-seesaw.mjs`
-  - rolling28d の `pages.csv` / `queries.csv` から、表示が増えた面と CTR が落ちた面が同一かを見る。
-  - 手掛かり: 「納豆消費量 ランキング」は表示 137 / CTR 5.1%（順位 4.4）で上位クエリ中もっとも低い。
-  - 成功基準: 「どの面の表示が増え、どの面の CTR が落ちたか」を数値で言える状態にする。
-    施策の実施はここでは求めない（判断材料を作るところまで）。真実源 `improvements.md#RANKING-CTR-01`。
-
 ## Should
 
 - [ ] **GA4 Unassigned 206 セッション（engagementRate 0.0%）の発生源を特定する**（2 週連続未着手）。

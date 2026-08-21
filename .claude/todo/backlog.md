@@ -1953,14 +1953,6 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
   両方向をテストで固定する。
 - 関連: `.claude/scripts/lib/check-dispatch-freshness.cjs` / `.claude/skills/db/sync-snapshots/SKILL.md`
 
-### [CI-SMOKE-TIMEOUT-01] post-deploy smoke testのtimeout修正をmainへ反映
-タグ: [実行:ユーザー] [起票:2026-07-29]
-
-- **owner**: Claude Code
-- **問題**: `post-deploy-smoke.yml` の `timeout-minutes` を実測ベースで5→12へ修正済 (`a2e31cdcd`)。ただし `workflow_run` はデフォルトブランチ側の workflow ファイルを使うため、developに置いただけでは発効しない。実測は smoke 3分20秒 + warm-cache 約2分30秒 = 約5分50秒で予算5分を恒常的に超過し、2026-07-28/29と2回連続 cancelled。`warm-cache.sh` は常に exit 0 なので job を fail させず、成功した検証結果ごと cancelled 扱いになりデプロイ後検証が機能していなかった。
-- **次**: 次のまとまった develop→main デプロイに同梱する。この項目のために単独デプロイはしない。
-- **完了条件**: main の `post-deploy-smoke.yml` が `timeout-minutes: 12` になり、次回デプロイの smoke test が cancelled でなく success で終わること。
-
 ### [BUILD-PERF-PHASE34] CI cacheと型検査重複の実験
 タグ: [起票:2026-07-12]
 
