@@ -207,14 +207,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **外部反映**: commit/PR/deploy/R2初回移行は検証後に別承認。大量dispatchは禁止し、`r2-write`を直列実行する。
 - **正典**: `.claude/rules/ogp-image-standards.md` / `.claude/rules/r2-storage-design.md`
 
-### [RELEASE-PENDING-ADS-01] 広告関連の未反映差分を一回のreleaseへまとめる
-タグ: [実行:ユーザー] [起票:2026-07-28]
-
-- **owner**: uruhayato373
-- **次**: PR #646とdevelop上の広告関連差分が現在も未反映かをremoteで再確認し、対象commit、CI、設定値、rollbackをpreflightする。
-- **完了条件**: ユーザーの明示承認後に1回だけdeployし、affiliate表示、PR表記、AdSense、主要routeをsmoke確認する。
-- **禁止**: この項目の存在をdeploy承認と解釈しない。
-
 ### [CROSS-PAGE-DATA-SSOT-01] テーマ・ランキング・ブログのデータ／単位／配色SSOT統合
 タグ: [進行中] [起票:2026-08-13]
 
