@@ -440,8 +440,30 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run docs:check] [起票:2026-08-20]
 
 - **owner**: Claude Code Sonnet 5 high（1 session = 1 work package、writerは同時に1体）
-- **再開ポインタ**: `nextWorkPackage=WP0` / `lastCompleted=none`。WPのgateを満たした場合だけ更新する。
+- **再開ポインタ**: `nextWorkPackage=WP1` / `lastCompleted=WP0` (2026-08-21)。WPのgateを満たした場合だけ更新する。
   完了した作業の長文ログは残さず、変更path、検証、未検証、次の一手を3〜6行で追記する。
+- **WP0 完了 (2026-08-21)**: read-only 棚卸しを機械化した。
+  生成器 `.claude/scripts/municipalities/build-wp0-inventory.ts` /
+  出力 `.claude/state/municipalities/{wp0-inventory.json,LATEST.md}`。コード・R2・URL は未変更。
+  - metric: active 2,193 のうち **city-only 19 / both 165 = 候補 184 件** (カードの見立てと一致)。
+  - R2 `app/stats/<key>/cities.json`: **present 180 / absent 4 / undetermined 0** (184 件を実測)。
+    absent は家計費目 4 件 (`{culture-recreation,education,healthcare,housing}-cost-all-households`)。
+  - **★最大の発見: present 180 件のうち 178 件が政令市の「本体」と「行政区」を同じ payload に
+    同居させている**。entity 数は一律 1,913 = 自治体 1,719 + 行政区 194 で、素の件数だけ見ると
+    二重計上に気づけない (札幌市と札幌市中央区が同じ表に並ぶ)。WP1 の entity policy が機械的に落とす。
+  - entity 母集団: cities.json 1,913 行 / 自治体 1,719 / 行政区 194 / 政令市本体 21。
+    重複 code 0・親不明の行政区 0。行政区の `prefCode` は県ではなく**親の市コード**を指す (全件で確認)。
+  - **東京23特別区は個別 entity として存在しない** — cities.json は「特別区部」1 件 (13100) に
+    集約している。doc 44 の pilot 規則が言う「東京23特別区を含む財政主体監査」は現状のデータでは
+    満たせないので、WP1 でこの前提を先に決める。
+  - 鮮度: 最新年が 2015 年未満の artifact が **36 件** (最古 `crime-rate-per-1k` 2005)。
+  - URL 面: `/municipalities` 系 route は無し。公開 city allowlist は `stage-1-cities.ts` と
+    `sitemap.ts` の 2 箇所が読む。
+- **pilot 候補 (WP0 の結論・WP1 で確定する)**: `elderly-population-ratio` を第一候補にする。
+  2020 年・null 率 0・zero 率 0.0016 (3 件) で母集団が最も素直、定義が全自治体で一貫し、
+  財政主体の曖昧さが無い。`per-taxpayer-income` は 2023 年と新しく需要も見込めるが
+  **zero 率 8.9% (171 件) の説明が付いていない**ので、理由を確かめるまで pilot にしない。
+  `fiscal-strength-index` は地方財政なので pilot 規則により除外。
 - **目的**: `/themes/*` と `/ranking/*` を47都道府県に保ち、市区町村比較を
   `/municipalities/{themes,ranking}/*` へ分離する。既存 `/areas/{pref}/cities/{city}` canonicalは維持する。
 - **根拠**: active MetricConfig 2,193件のうち市区町村候補は184件（city-only 19 / pref+city 165）だが、
