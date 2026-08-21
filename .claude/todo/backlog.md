@@ -1045,12 +1045,42 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   OOM 4,051MB。heap は 8GB へ引き上げ済)。同じ「連続失敗」でも原因が違うので混同しない。
   また 2026-08-16 dispatch / 2026-08-17 push でも失敗しており、schedule 以外でも再現する。
 
-### [SOURCE-TEXT-LINK-INJECTION-01] 出典テキストがクライアント側でアフィリエイトリンクに置換される
-タグ: [種類:不具合] [起票:2026-08-04]
+### [SOURCE-TEXT-LINK-INJECTION-01] 出典テキストが第三者スクリプトでリンクに置換される
+タグ: [収益化] [種類:不具合] [実行:ユーザー] [検証:npx playwright test --config playwright.smoke.config.ts third-party-dom-injection] [起票:2026-08-04]
 
-**出典テキストがクライアント側でアフィリエイトリンクに置換されている**。チャート footer の「出典: 人口動態統計」の「統計」だけが `href="#"` のリンク + アイコンになる (SSR HTML には無く hydration 後に出現)。出典の信頼性を損なううえリンク先が機能しない。本文 markdown でも「人口」「旅行ガイド、旅行記」が同様に置換される。AdSense 等の第三者スクリプトによる関連検索リンク注入が疑わしい。出典まわりだけでも除外できないか要調査
-
-根拠・再現条件: 本番 /themes/population-dynamics の hydration 後 DOM。証跡 = post-deploy smoke run 30876315662 の error-context.md (aria: `link "統計" /url: "#"`)
+- **症状**: チャート footer の「出典: 人口動態統計」の「統計」だけが `href="#"` のリンク + アイコンに
+  なる (SSR HTML には無く hydration 後に出現)。本文でも「人口」「旅行ガイド、旅行記」が同様に置換される。
+  出典の信頼性を損ない、**PR 表記の無いアフィリエイトリンクが引用文の中に生まれる**。
+  証跡 = post-deploy smoke run 30876315662 の error-context.md (aria: `link "統計" /url: "#"`)。
+- **★2026-08-21 に出所を実測して訂正した。AdSense ではない。**
+  本番 `/themes/population-dynamics` で読み込まれる第三者 origin は
+  a8.net (statics / linkmgr / www14 / www19)・googletagmanager・google-analytics・cloudflareinsights のみで、
+  **AdSense の `adsbygoogle.js` は表示停止中で読み込まれてすらいなかった**。
+  本文を書き換えうるのは **A8 リンクマネージャー** (`statics.a8.net/a8link/a8linkmgr.js`) だけ。
+  読み込み元は `apps/web/src/lib/a8net/A8LinkManager.tsx` で、**layout から全ページに入っている**
+  (自己申告のふるまいが「ページ内の通常リンクを自動的にアフィリエイトリンクに変換する」)。
+  置換されていた語「旅行ガイド、旅行記」は A8 のプログラム分類名そのもので、傍証になる。
+- **同日は再現しなかった**: headless / headed × themes / blog / ranking を最大 36 秒スクロールしながら
+  観測して `#` リンクは 0 件。断続的か A8 側の設定変更で止まっている可能性がある。
+  **再現しないものは直せない**ので、戻ってきたときに気づけるようにするところまでを機械化した。
+- **完了済 (2026-08-21)**: post-deploy smoke に検知を追加した
+  (`apps/web/tests/smoke/third-party-dom-injection.spec.ts`)。自分たちのコードは `href="#"` を
+  一度も出力しないので、`#` リンクの存在がそのまま外部注入の証拠になる。
+  - **最初の版は誤検知した** — `/ranking/total-population` が落ちたが中身は Leaflet のズーム
+    (`a.leaflet-control-zoom-in`) だった。役割がボタンのものと地図ウィジェット内を除外して是正。
+  - **両方向を実測**: 本番 3 ページで緑 / 本文へ `#` リンクを 1 本注入すると 3 ページとも赤
+    (文脈つきの指摘文が出る)。緑であること自体が「今は起きていない」という観測になる。
+  - 副産物: hydration 前に append したリンクは React の再描画で消えるため、注入は
+    hydration 後 (LinkManager は 3 秒の idle 遅延の後に走る) にしか成立しない。settle は 12 秒。
+- **残り (オーナー判断)**: A8 リンクマネージャーを**残すか外すか**。判断材料:
+  - 収益の裏付けが無い。LinkManager が変換したリンクは `TrackedAffiliateLink` を通らないので
+    `affiliate_click` を発火せず、GA4 では 1 件も観測できない。
+  - 引用文の中に PR 表記の無いアフィリエイトリンクが生まれるのは景表法の観点で望ましくない
+    (`affiliate-ads-standards.md` §7 の PR 表記規律と整合しない)。
+  - 外すのは `A8LinkManager` を layout から抜くだけで可逆。**ただし収益導線の変更なので
+    オーナー承認が要る**。除外指定で出典まわりだけ守れるかは A8 の仕様確認が先。
+- **完了条件**: 出典・本文が第三者スクリプトでリンク化されないことを smoke が継続して示し、
+  LinkManager の残置/撤去がオーナー判断で確定している。
 
 ## 🟡 中 — 2〜3ヶ月以内
 
