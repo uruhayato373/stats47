@@ -1,7 +1,12 @@
 # Claude Code routine のトークン実績
 
-`ai-content-generate-daily` / `blog-generate-daily` の各 run が 1 行 append する。
+`backlog-loop-daily` の各 run が 1 行 append する。
 書き込み口は `.claude/scripts/lib/record-claude-usage.mjs` のみ（追記専用・既存行は書き換えない）。
+
+**★2026-08-21 以降、ai-content / blog の行は増えない。** 日次生成ループを削除し、生成を
+対話セッションへ移したため。対話セッションはこの JSON を出さないので、生成の消費は
+このファイルからは追えなくなる。**既存の行は消さない** — 件数を決めるときの唯一の実測
+（ai-content は 5 件で $79〜90、blog は 1 本で $8.2）で、月次の本数目標の根拠に使う。
 
 ## 何のために取るか
 
@@ -33,36 +38,13 @@
   極端に小さい行がその候補）
 - 失敗 run も記録する。利用枠に当たったかを見たいのは主にそちら
 
-## 期間限定 boost を掛ける / 止める
+## (廃止) 期間限定 boost
 
-不在週など対話利用がゼロになる期間だけ ai-content の件数と回数を上げられる。
-Max の週次枠は繰り越されないので、使わなければ捨てるだけになる。
-
-**操作口は `.claude/config/content-generation-boost.json` の 1 ファイルだけ**で、
-develop へ push すれば次のスケジュール実行から効く。cloud セッションは
-`actions:write` を持たず workflow_dispatch できない (403) ので、この経路にしてある。
-
-| したいこと | 操作 |
-|---|---|
-| 件数を変える | `aiContent.limit` を書き換える (上限 MAX_LIMIT = 5・baseline の枠にも効く) |
-| 回数を**増減**する | `aiContent.extraCrons` を足し引きする。**産出を増やすときはここ** (件数を増やすと 1 件あたりが悪化する) |
-| 今すぐ止める | `until` を過去の日時にする、またはファイルごと削除する |
-| 延長する | `until` を延ばす |
-
-放置しても `until` を過ぎれば自動で baseline に戻る。**戻し忘れが事故にならない**ことが
-この設計の目的なので、期限を外して恒久化しない (恒久的に増やすなら workflow の
-`--default-limit` を上げ、予算ガードを通す)。
-
-### 使用量が多いかをどう判断するか
-
-**枠の消費率は測れない** (上の注意書きのとおり `cost_usd` は換算値)。観測できるのは:
-
-- 各 run が `history.csv` に 1 行 commit する `items` と `is_error`
-- gate job が run ごとに job summary へ出す「boost 開始以降 N 回 / M 件 / 失敗 K 回」
-
-判断材料は**失敗の増え方**。枠に当たった run は成果ゼロのまま枠を消費するので、
-直近 2 回が連続失敗したら gate が追加スロットを止め baseline へ戻す
-(`maxConsecutiveFailures`)。成功が 1 回入れば自動で復帰する。
+ai-content の日次件数と回数を不在週だけ上げる仕組み
+(`.claude/config/content-generation-boost.json` + `content-generation-boost.mjs`) があったが、
+**2026-08-21 に日次生成ループごと削除した**。件数は週次計画 (`.claude/todo/weekly.md` の Must) で
+決める。月間目標は `.claude/todo/monthly.md`、blog の月間本数 SSOT は
+`.claude/state/blog/seo-strategy.json` の `typeMix.perMonth`。
 
 ## 関連
 

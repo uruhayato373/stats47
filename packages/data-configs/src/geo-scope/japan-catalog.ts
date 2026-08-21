@@ -275,6 +275,10 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
         metricKey: "monthly-average-actual-working-hours-male",
         shortLabel: "月間平均実労働時間数",
       },
+      {
+        metricKey: "nurse-salary",
+        shortLabel: "看護師の給与",
+      },
     ],
   },
   "living-housing": {

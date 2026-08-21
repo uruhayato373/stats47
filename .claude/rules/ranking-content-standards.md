@@ -158,24 +158,22 @@ outbox は**フラットな `<rankingKey>.json`** でなければならない (w
 
 ### ★2026-08-07: バッチは partial-publish (1 件の失敗で全件を止めない)
 
-日次 CI のバッチ verify は **オールオアナッシングにしない**。以前は対象 N 件のうち 1 件でも
+バッチで複数件を回すときは **オールオアナッシングにしない**。以前は対象 N 件のうち 1 件でも
 audit / critic に落ちると `GENERATED != EXPECTED` で run 全体を fail させ、後続の publish
 dispatch が skip され、**通過していた N-1 件も公開されずに捨てられていた** (2026-08-05 に
 5 件中 4 件が PASS したのに 0 件公開・生成 $86 が無駄。`manufacturing-industry-added-value`
 が 47 県 commentary の定型重複で critic を通らず毎回バッチを道連れにしていた)。
 
-正典の verify セマンティクス (`ai-content-generate-daily.yml` / `blog-generate-daily.yml`):
+verify セマンティクス (日次 CI 廃止後は**対話セッションが同じ規律で回す**):
 
 - **通過分だけ publish する**。失敗キーは outbox (`data/ai-content-staging/<key>.json` /
   `docs/21_ブログ記事原稿/<slug>/`) を drop して次回生成へ繰り越す。
-- **公開対象 0 件のときだけ run を赤くする** (silent-green 防止)。Claude execution log が
-  無い = author/critic が動いていない場合も赤。
-- 失敗は `::warning::` で残し、run は緑のまま publish へ進む。
-- per-item の gate 失敗で step を殺さないよう、fallible command は必ず `if` で受ける
-  (`set -e` 下でも継続)。
+- **公開対象が 0 件なら「成功」と報告しない** (silent-green 防止)。
+- 失敗は握り潰さず、どのキーがなぜ落ちたかを残す。
+- 1 件の gate 失敗で残りの処理を止めない。
 
-**quarantine (ai-content のみ)**: 連続で critic に落ちる常習キーは自動生成を止める。
-verify が `.claude/scripts/ai-content/record-generation-outcome.mjs` で失敗回数を
+**quarantine (ai-content のみ)**: 連続で critic に落ちる常習キーは対象から外す。
+`.claude/scripts/ai-content/record-generation-outcome.mjs` で失敗回数を
 `.claude/state/ai-content/generation-failures.json` に積み、**3 回連続で失敗したキーを
 `build-ai-content-queue.mjs --next` が除外**する (doomed key が毎回バッチの 1 枠と生成
 コストを食い潰すのを防ぐ)。除外したキーは LATEST.md の「🚧 quarantine」節に理由付きで
@@ -183,46 +181,44 @@ verify が `.claude/scripts/ai-content/record-generation-outcome.mjs` で失敗�
 での再挑戦やプロンプト/データ是正が要る。blog は新規記事で同じ slug を再ピックしないため
 quarantine は持たない。
 
-再発防止テスト: `.claude/scripts/lib/__tests__/content-generation-routine.test.cjs`
-(両 workflow が all-or-nothing に戻っていないこと) / `.claude/scripts/ai-content/__tests__/generation-outcome.test.mjs`
-(quarantine の積み上げ・PASS でのリセット)。
+再発防止テスト: `.claude/scripts/ai-content/__tests__/generation-outcome.test.mjs`
+(quarantine の積み上げ・PASS でのリセット)。日次 workflow を対象にしていた
+`content-generation-routine.test.cjs` 側の検査は、workflow ごと 2026-08-21 に削除した。
 
-### ★2026-08-02: Claude Code OAuth の日次 CI へ統合 (Gemini テキスト経路は撤去)
+### ★2026-08-21: 日次 CI を廃止し、月次目標 → 週次割当へ移した
 
-Gemini テキスト経路
-(`gemini-text-client` / `model-preflight` / `preflight-gemini` / `--model gemini-api` /
-`ai-content-preflight.yml`) を**撤去**した。画像生成 (`gemini-image-client`) は別経路なので残す。
+**`ai-content-generate-daily.yml` を削除した。** Claude Code を CI で無人実行する日次ループは
+対話セッションと同じ Pro/Max 利用枠を食う。歩留まりが崩れた時点で、枠だけ削って成果が出ない
+構図になっていた (`.claude/state/metrics/claude-usage/history.csv` の実測):
 
-| 経路 | 課金 |
-|---|---|
-| Claude Code OAuth (`claude setup-token` → `CLAUDE_CODE_OAUTH_TOKEN`) | Pro / Max プランの利用枠 |
-| Anthropic API キー (`ANTHROPIC_API_KEY`) | API 従量課金 (サブスク外) |
-| Gemini API | Google の従量課金 |
+| 日 | limit | items | turns | cost |
+|---|---:|---:|---:|---:|
+| 08-15〜08-18 | 5 | 5 / 5 / 5 / 5 | 47〜98 | $79〜$90 |
+| **08-19** | 5 | **0** | 57 | $87.31 |
+| **08-20** | 5 | **1** | 27 | $21.33 |
 
-日次 workflow は schedule event に依存しない公式 `claude-code-base-action` を commit SHA 固定で使う。
-`CLAUDE_CODE_OAUTH_TOKEN` は Repository Secret のみで扱い、full output・Web・MCP・project hooks を
-無効化する。キュー・prompt 準備と、生成後の gate / 対象件数照合は通常の shell step が担う。
+08-20 の run は `rate_limit_event: 1` を記録し、turns も cost も平常の 1/3 で途中終了した
+(最終メッセージ「I'll wait for it to complete before proceeding」)。
 
-```
-CI: キュー再構築 → 対象別 prompt
-  → Claude Code: author → audit → critic (別コンテキスト) → outbox
-  → CI: 対象全件の outbox / audit / critic PASS を再照合
-  → develop push → publish workflow を明示 dispatch
-```
+**現在の運用**:
 
-対象ありで OAuth token が無い、生成物が1件でも欠ける、audit / critic が通らない、push / dispatch を
-確認できない場合は run を赤くする。
+1. **月次計画 (`.claude/todo/monthly.md`) が月間の本数目標を持つ。** 対話セッションの
+   1 件あたり消費は測っていないので、控えめに置いて翌月に実績で見直す。
+2. **週次計画 (`.claude/todo/weekly.md`) が「今週 N 件」を Must として割り当てる。**
+   未達を翌週へ積み増さない (Must が形骸化するため)。足りなければ月次の目標側を下げる。
+3. 生成は対話セッションが `/generate-ai-content` で行う。キュー
+   (`build-ai-content-queue.mjs --next N`) が対象を出し、`audit-ai-content.mjs` が機械の床、
+   `ranking-content-critic` が意味レビューを担う。
+4. **push すれば公開される。** `data/ai-content-staging/<key>.json` を develop へ push すると
+   `publish-ai-content.yml` が push トリガーで発火し、R2 反映前に
+   `audit-ai-content.mjs` を再実行する。CI の既定 `GITHUB_TOKEN` による push は
+   後続 workflow を発火させないが、人間 / セッションからの push は発火する。
 
-**日次件数の SSOT は workflow の `LIMIT` (`.github/workflows/{ai-content,blog}-generate-daily.yml`)。
-ここに数値を書かない** (2026-08-03 に 1→5 / 1→3 へ変えた際、この行が「既定1件」のまま取り残された)。
-増やすときの規律だけを置く:
-
-- 1 件あたりの実測コストから `timeout-minutes` と `--max-turns` も比例させる。足りないと生成が
-  途中で切れ、verify が「対象あり・生成物なし」で落ちて 1 日分が無駄になる。
-  この関係は `content-generation-routine.test.cjs` が機械的に強制する
-- 律速は job timeout ではなく **Pro / Max の利用枠** (オーナーの対話利用と共有)。一気に上限まで
-  上げず、`.claude/state/metrics/claude-usage/history.csv` の実測を見て刻む
-- **旧 40 件/日は Gemini 前提の根拠なき暫定値**で、引き継がない
+**★critic PASS の機械強制は無くなった。** CI は `.local/ci/ai-content-reviews/<key>.json` の
+`verdict == PASS` を照合していたが、これは CI 専用パスで publish 側に無い。blog と違い
+ai-content には `review.md` 相当の永続成果物が無い。**critic を通してから push すること**を
+`/generate-ai-content` の手順で担保する。機械の床 (`audit-ai-content.mjs`) は publish 側に
+残るので、捏造・NG ワード・欠落は引き続き止まる。
 
 以下は撤去前の Gemini 運用の記録 (経緯として保持する)。
 

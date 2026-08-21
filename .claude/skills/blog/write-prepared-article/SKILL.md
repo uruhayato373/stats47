@@ -1,20 +1,32 @@
 ---
 name: write-prepared-article
-description: 準備済みのブログ記事 (接地・データ健全性ゲート・SVG・prompt まで完了) を手動で書き上げ、決定的ゲート → critic → 公開待ちまで確定する。日次CIが失敗した場合の再実行・調査にも使う。Use when user says "準備済み記事を書く", "今日のブログを書く", "write-prepared-article".
+description: 週次計画が割り当てた本数のブログ記事を、接地・データ健全性ゲート・SVG・prompt の準備から書き上げ、決定的ゲート → critic → 公開待ちまで確定する。Use when user says "今週のブログを書く", "準備済み記事を書く", "write-prepared-article".
 disable-model-invocation: true
 primary_agent: article-writer
 ---
 
 # /write-prepared-article — 準備済みブログ記事を書き上げる
 
-`blog-generate-daily.yml` が用意した記事を、対話セッションから手動で書き上げるフォールバック。
-日次 workflow 自身は Claude Code OAuth で執筆・機械ゲート・独立 critic・publish dispatch まで完結する。
+新規記事を書く**主経路**。準備 (接地・健全性ゲート・SVG・prompt) は決定的スクリプトが行い、
+本文と critic を対話セッションが回す。
 
-> CI は `claude setup-token` で発行した `CLAUDE_CODE_OAUTH_TOKEN` を Repository Secret から読み、
-> Pro / Max の利用枠で公式 Base Action を起動する。API従量課金の `ANTHROPIC_API_KEY` は使わない。
+> **★件数を決めるのは週次計画** (`.claude/todo/weekly.md` の Must)。月間本数の SSOT は
+> `.claude/state/blog/seo-strategy.json` の `typeMix.perMonth` (月 17-19 本) で、
+> `.claude/todo/monthly.md` がそれを重点として持つ。日次 CI (`blog-generate-daily.yml`) は
+> 2026-08-21 に削除した — 対話セッションと同じ Pro/Max 利用枠を食うため。
 > 正典: `.claude/rules/blog-quality-standards.md` / `.claude/rules/blog-data-schema.md` §0
 
-## 前提（CI が用意しているもの）
+## 準備（この skill の中で先に回す）
+
+```bash
+# 1. 何を書くか (topic-queue の pending から払い出す)
+node .claude/scripts/blog/build-topic-queue.mjs
+
+# 2. 接地・データ健全性ゲート・SVG・prompt までを用意する
+npx tsx packages/ai-content/src/scripts/generate-blog-article.ts --limit 1 --keep-draft
+```
+
+準備が終わると次の形になる。
 
 ```
 docs/21_ブログ記事原稿/<slug>/
@@ -93,11 +105,13 @@ R2 に公開する。公開後は CI が `docs/21` の当該ドラフトを自�
 | 自分で書いた記事を自分で critic する | `blog-critic` を別コンテキストで起動する |
 | ground truth に無い数値を書く | `data/*.json` にある値だけを使う |
 | R2 の article.md を直接編集する | outbox → push → CI が公開する |
-| 準備済みディレクトリを手で消す | 原因を直して日次 routine を再実行する |
+| 準備済みディレクトリを手で消す | 原因を直して準備コマンドを再実行する |
 
 ## 関連
 
-- 準備側: `.github/workflows/blog-generate-daily.yml` / `packages/ai-content/src/scripts/generate-blog-article.ts`
+- 準備側: `packages/ai-content/src/scripts/generate-blog-article.ts` / `.claude/scripts/blog/build-topic-queue.mjs`
+- 公開: `docs/21_ブログ記事原稿/<slug>/article.md` を `published: true` で develop へ push すると
+  `blog-auto-publish.yml` が push トリガーで発火する
 - 品質基準（正典）: `.claude/rules/blog-quality-standards.md`（§ルール ↔ 機械チェック 対応表）
 - 決定的ゲート: `.claude/scripts/blog/quality-gate.mjs`
 - agent: `article-writer`（執筆）/ `blog-critic`（審査）

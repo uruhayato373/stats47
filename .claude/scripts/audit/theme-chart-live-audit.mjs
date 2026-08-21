@@ -19,6 +19,7 @@
  *   - [no-rows]    リクエストは通るが 0 件 (cdCat01 等の絞りが実データと合っていない)
  *   - [http-error] API エラー・タイムアウト
  *   - [no-national] 全国行 (areaCode 00000) が無い → 全国表示では 47 県平均へ落ちる (warn)
+ *   - [national-row-empty] 全国行はあるが値がプレースホルダ ('-' 等) で実データが無い (warn)
  * 成功条件: 期待集合と実集合が一致し (limit 無し時)、その全件が成功すること。
  *
  * read-only。e-Stat API を叩くだけで R2 にも git にも書かない (state JSON の出力のみ)。
@@ -29,7 +30,9 @@
  * 要 env: NEXT_PUBLIC_ESTAT_APP_ID (apps/web/.env.development に公開 ID あり)
  */
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");
 const DEPENDENCY_MIRROR = path.join(
@@ -38,6 +41,22 @@ const DEPENDENCY_MIRROR = path.join(
 );
 const ESTAT_ENDPOINT =
   "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData";
+
+/**
+ * 会社ネットワーク等、直接の外向き通信が遮断され明示 CONNECT だけが通る環境向け。
+ * ★CI では HTTPS_PROXY が無いので dispatcher は undefined = 従来どおり素の fetch。
+ *   undici が解決できない環境でも落とさない (proxy 無しで続行する)。
+ */
+function resolveDispatcher() {
+  const proxy = process.env.HTTPS_PROXY ?? process.env.https_proxy ?? process.env.HTTP_PROXY;
+  if (!proxy) return undefined;
+  try {
+    const { ProxyAgent } = createRequire(import.meta.url)("undici");
+    return new ProxyAgent(proxy);
+  } catch {
+    return undefined;
+  }
+}
 
 function parseArgs() {
   const argv = process.argv.slice(2);
@@ -95,12 +114,12 @@ function loadExpectedRequests() {
  * ★誤検知を出す監査は運用で無視されるようになる。e-Stat は実測で単発の 503 を返すことがあり
  *   (2026-08-04: 1 回目 503 → 直後の 3 回は 200)、1 発で alert を上げてはならない。
  */
-async function fetchWithRetry(url, attempts = 3) {
+async function fetchWithRetry(url, dispatcher, attempts = 3) {
   let last = { status: "http-error", detail: "unknown" };
   for (let i = 0; i < attempts; i++) {
     if (i > 0) await new Promise((r) => setTimeout(r, 1000 * 2 ** (i - 1)));
     try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(30_000) });
+      const res = await fetch(url, { dispatcher, signal: AbortSignal.timeout(30_000) });
       if (res.ok) return { res };
       // 4xx は再試行しても同じ (パラメータが誤っている)
       if (res.status < 500 && res.status !== 429) {
@@ -114,9 +133,33 @@ async function fetchWithRetry(url, attempts = 3) {
   return { error: last };
 }
 
-async function inspect(appId, params) {
+/**
+ * e-Stat の値が実データか判定する。「該当なし」「秘匿」は `-` / `‐` / `***` / `X` 等の
+ * プレースホルダ文字列で返るため、数値としてパースできるかで見分ける。
+ */
+export function isFiniteEstatValue(raw) {
+  if (raw === undefined || raw === null) return false;
+  const s = String(raw).trim().replace(/,/g, "");
+  if (s === "") return false;
+  return Number.isFinite(Number(s));
+}
+
+/**
+ * 全国行 (areaCode 00000) を「行の存在」と「値の有効性」に分けて判定する。
+ * ★行の存在だけを見てはならない。e-Stat は該当なしをプレースホルダで返すので、
+ *   00000 行があっても全国値が取れないことがある (実測:
+ *   in-pref-university-entrance-ratio-by-highschool-origin は 1980-2024 の全 42 時点が '-')。
+ *   行の存在だけで hasNational: true を返していた頃は、この統計表を「全国値あり」と誤判定した。
+ */
+export function classifyNational(values) {
+  const rows = values.filter((v) => v["@area"] === "00000");
+  if (rows.length === 0) return { hasNationalRow: false, hasNational: false };
+  return { hasNationalRow: true, hasNational: rows.some((v) => isFiniteEstatValue(v.$)) };
+}
+
+async function inspect(appId, params, dispatcher) {
   const query = new URLSearchParams({ appId, limit: "200", ...params });
-  const { res, error } = await fetchWithRetry(`${ESTAT_ENDPOINT}?${query}`);
+  const { res, error } = await fetchWithRetry(`${ESTAT_ENDPOINT}?${query}`, dispatcher);
   if (error) return error;
 
   let body;
@@ -135,10 +178,11 @@ async function inspect(appId, params) {
   const values = [].concat(statistical?.DATA_INF?.VALUE ?? []);
   if (values.length === 0) return { status: "no-rows", detail: "0 件" };
 
-  const hasNational = values.some((v) => v["@area"] === "00000");
+  const { hasNationalRow, hasNational } = classifyNational(values);
   return {
     status: "ok",
     rows: values.length,
+    hasNationalRow,
     hasNational,
     tableTitle: String(statistical?.TABLE_INF?.TITLE?.$ ?? statistical?.TABLE_INF?.TITLE ?? "")
       .slice(0, 80),
@@ -153,6 +197,7 @@ async function main() {
     process.exit(1);
   }
 
+  const dispatcher = resolveDispatcher();
   const { requests: allRequests, distinctExpected } = loadExpectedRequests();
   const partial = Number.isFinite(limit) && limit < allRequests.length;
   const requests = allRequests.slice(0, limit);
@@ -163,9 +208,10 @@ async function main() {
   const results = [];
   const errors = [];
   const warns = [];
+  const emptyNationalWarns = [];
 
   for (const req of requests) {
-    const outcome = await inspect(appId, req.params);
+    const outcome = await inspect(appId, req.params, dispatcher);
     const where = `${req.theme}/${req.componentKey}`;
     const label = `${where} (${req.params.statsDataId}${req.params.cdCat01 ? ` cdCat01=${req.params.cdCat01}` : ""})`;
     results.push({ ...req, ...outcome });
@@ -173,16 +219,28 @@ async function main() {
     if (outcome.status !== "ok") {
       errors.push(`[${outcome.status}] ${label}: ${outcome.detail}`);
     } else if (!outcome.hasNational) {
-      warns.push(`[no-national] ${label}: 全国行なし → 全国表示は 47 県平均になる`);
+      // 行が無いのか、行はあるが値がプレースホルダなのかを分けて報告する。
+      // 前者は統計表の設計、後者は「該当なし」で、是正の打ち手が違う。
+      if (outcome.hasNationalRow) {
+        emptyNationalWarns.push(
+          `[national-row-empty] ${label}: 全国行はあるが値がプレースホルダ (実データ無し)`,
+        );
+      } else {
+        warns.push(`[no-national] ${label}: 全国行なし → 全国表示は 47 県平均になる`);
+      }
     }
     // e-Stat のレート制限を避ける
     await new Promise((r) => setTimeout(r, 250));
   }
 
-  if (warns.length > 0) {
-    console.log(`⚠️  warn ${warns.length} 件 (全国行なし)`);
-    for (const w of warns.slice(0, 20)) console.log("   " + w);
-    if (warns.length > 20) console.log(`   … 他 ${warns.length - 20} 件`);
+  for (const [title, list] of [
+    ["全国行なし", warns],
+    ["全国行はあるが値が無い", emptyNationalWarns],
+  ]) {
+    if (list.length === 0) continue;
+    console.log(`⚠️  warn ${list.length} 件 (${title})`);
+    for (const w of list.slice(0, 20)) console.log("   " + w);
+    if (list.length > 20) console.log(`   … 他 ${list.length - 20} 件`);
     console.log("");
   }
 
@@ -201,7 +259,9 @@ async function main() {
           partial,
           coverageOk,
           errorCount: errors.length,
-          warnCount: warns.length,
+          warnCount: warns.length + emptyNationalWarns.length,
+          noNationalCount: warns.length,
+          nationalRowEmptyCount: emptyNationalWarns.length,
           results,
         },
         null,
@@ -236,7 +296,12 @@ async function main() {
   process.exit(0);
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+// ★直接実行のときだけ main() を回す。テストから pure 関数を import しても走らせない。
+// 文字列連結 (`file://${process.argv[1]}`) は Windows で不一致になるため pathToFileURL を使う
+// (.claude/rules/coding-standards.md)。
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}

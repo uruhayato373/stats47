@@ -2,10 +2,10 @@
 title: 今月の重点
 type: monthly-plan
 month: 2026-08
-updated: 2026-08-03
+updated: 2026-08-21
 status: active
 focus_themes:
-  - 無人生成ループを定着させ産出量を型配分と整合させる
+  - 生成を無人ループから外し月次目標→週次割当で回す
   - 公開中の誤値・欠測を解消する
 ---
 
@@ -56,39 +56,50 @@ viewability が -15pp 落ちている。つまり**露出を増やしても収�
 
 ## 今月の重点テーマ
 
-### 重点1: 無人生成ループを定着させ、産出量を型配分と整合させる
+### 重点1: 生成を無人ループから外し、月次目標 → 週次割当で回す
 
-- **なぜ今月これか**: 検索流入 +52% はコンテンツが効いている証拠だが、その供給が W31 に完全停止した。
-  日次生成ループは **2026-08-03 に初めて end-to-end で green** になったばかりで、
-  引き上げた件数（ai-content 5/日・blog 3/日）は **1 度も実走していない**。
-  収益レーン優先順位 1（AdSense）は PV に依存するため、産出の定着が最短の収益レバーになる。
+- **なぜ変えたか (2026-08-21)**: 無人の日次ループは対話セッションと同じ Pro/Max 利用枠を食う。
+  月初は「定着させる」方針だったが、歩留まりが崩れて**枠だけ削って成果が出ない**構図になった
+  (`.claude/state/metrics/claude-usage/history.csv`):
+
+  | 日 | limit | items | cost |
+  |---|---:|---:|---:|
+  | 08-15〜08-18 | 5 | 5 / 5 / 5 / 5 | $79〜$90 |
+  | **08-19** | 5 | **0** | $87.31 |
+  | **08-20** | 5 | **1** | $21.33 |
+
+  2 日で $108 を使って成果 1 件。`ai-content-generate-daily.yml` と `blog-generate-daily.yml` を
+  削除し、**量と時期を人が決める**運用へ移した。公開経路 (`publish-ai-content.yml` /
+  `blog-auto-publish.yml`) と機械ゲートはそのまま残る。
+
+- **今月の本数目標**:
+  - **blog: 月 17-19 本**。既存の `.claude/state/blog/seo-strategy.json` の `typeMix.perMonth`
+    (B5 / D2 4 / A 3-4 / F3 / G 1-2 / C_E 1-2) をそのまま SSOT として使う。**新しい数値を作らない。**
+    月初からの実績を差し引いた残りを、残り週で割って weekly の Must に置く。
+  - **ai-content: 週 5 件 (月 20 件) を上限**として始める。対話セッションの 1 件あたり消費は
+    **1 度も測っていない**ので、日次 CI の実測 (5 件で $79〜90) を手掛かりに控えめに置き、
+    9 月に実績で見直す。キューの残数 (needs-regen 1,895 件) は**目標ではなく在庫**として扱う。
 
 - **今月のゴール（月末に検証可能）**:
-  1. 日次 run の成功率が `claude-usage/history.csv` から読め、**1 件あたりのトークン実測に基づいて件数が再設定されている**
-  2. ranking ai-content done が **208 → 300 以上**（+92 以上。5 件/日が全日成立すれば +140）
-  3. ブログ公開が**型配分 SSOT と整合した本数**で行われている（下記の未解決点を解消したうえで）
-  4. outbox 滞留が 0 件（現在 3 本）
+  1. 日次生成 workflow が 2 つとも削除され、cron が発火していない
+  2. 週次計画に本数の Must が入り、その週の実績が weekly の振り返りに記録されている
+  3. 生成した分が push で公開経路に乗っている (publish workflow の run が push 発火で出ている)
+  4. outbox 滞留が 0 件
 
-- **未解決点（今月中に決める）**: **日次 blog 3 本/日 = 月 84 本は、型配分 SSOT の「月 15-20 本」と 4-5 倍食い違う**。
-  `.claude/state/blog/seo-strategy.json` の `typeMix.perMonth` は B5 / D2 4 / A 3-4 / F3 / G 1-2 / C_E 1-2 = 計 17-20 本、
-  `BLOG-SEO-PACE-01` も「月 15〜20 本の**上限**内」と書いている。件数はトークン実測だけを見て 8/3 に決めたため、
-  この上限と突き合わせていなかった。**推奨: W32 は blog 1 本/日（≈30 本/月）へ落として品質実測（critic PASS 率・
-  gate blocker 率）を 1 週間取り、その結果で「上限を上げる」か「日次を 0.5-0.7 本相当に落とす」かを決める。**
-  ai-content は記事ではなくページ内コンテンツなので、この上限の対象外。
+- **未達のときの扱い**: **翌週へ積み増さない。** Must が形骸化するため、足りなければ
+  月次の目標側を下げてその根拠を書く。
 
 - **構成タスク**:
-  - `CONTENT-ROUTINE-LIVE-VERIFY-01`: 新件数での日次 run を 7 日連続観測し成功率を出す [S]（→ W32）
-  - blog 日次件数と型配分上限の整合を決める [S]（→ W32・上記推奨の判断）
-  - トークン実測から件数を再設定する [S]（→ W33・7 日分のデータが揃ってから）
-  - outbox 滞留 3 本の処置（PASS 2 本の公開経路確認 + REVISE 1 本の指摘対応）[S]（→ W32）
-  - `AICONTENT-DBLESS-REBUILD`: needs-regen 1,968 件の内訳（incomplete 1,682 / missing 221 / blocker 65）で
-    優先度を切り、全件量産を前提にしない件数設計へ改める [M]（→ W33-W34）
-  - ブログ品質是正キュー（pending 188 / must-fix 34）を日次ループに載せるか判断する [M]（→ W34）
+  - 週次の Must に本数を置き、実績を weekly の振り返りに残す [S]（毎週）
+  - `AICONTENT-DBLESS-REBUILD`: needs-regen の内訳で優先度を切り、全件量産を前提にしない
+    件数設計へ改める [M]
+  - ブログ品質是正キュー（`/brushup-blog --target queue`）を週次の枠に載せるか判断する [M]
 
-- **依存・ブロッカー**: Pro/Max 利用枠。日次ループが枠を食う量が未知のため、W32 の実測前に件数を追加で上げない。
+- **依存・ブロッカー**: Pro/Max 利用枠。対話セッションの消費が未知なので、実績を見るまで
+  週次の割当を増やさない。
 
-- **真実源リンク**: `backlog.md#CONTENT-ROUTINE-LIVE-VERIFY-01` / `#AICONTENT-DBLESS-REBUILD` /
-  `improvements.md`（`BLOG-SEO-PACE-01`）/ `.claude/state/metrics/claude-usage/`
+- **真実源リンク**: `backlog.md#AICONTENT-DBLESS-REBUILD` / `.claude/state/blog/seo-strategy.json` /
+  `.claude/state/metrics/claude-usage/`
 
 ### 重点2: 公開中の誤値・欠測を解消する
 

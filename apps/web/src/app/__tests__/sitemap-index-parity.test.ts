@@ -23,7 +23,11 @@ describe("sitemap index ↔ shard の件数整合", () => {
     expect(count).toBe(SITEMAP_SEGMENTS.length);
   });
 
-  it("generateSitemaps が SITEMAP_SEGMENTS.length ぶんの id を返す", async () => {
+  // ★時間予算を明示する。generateSitemaps 自体は SEGMENTS.map() だけだが、
+  //   `@/app/sitemap` の import が R2 reader・blog reader・data-configs を丸ごと引くため
+  //   コールドな transform に時間がかかる (Windows 実測 25.5s / 既定の 10s では timeout)。
+  //   assert している内容は id の並びであって速度ではないので、予算だけ広げる。
+  it("generateSitemaps が SITEMAP_SEGMENTS.length ぶんの id を返す", { timeout: 60_000 }, async () => {
     const { generateSitemaps } = await import("@/app/sitemap");
     const ids = await generateSitemaps();
     expect(ids.length).toBe(SITEMAP_SEGMENTS.length);

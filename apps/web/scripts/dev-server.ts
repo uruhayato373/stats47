@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const DEFAULT_NEXT_PORT = 3000;
+const DEFAULT_GATEWAY_CACHE_SECONDS = 300;
 const DEFAULT_GATEWAY_PORT = 4777;
 const DEFAULT_R2_UPSTREAM = 'https://storage.stats47.jp';
 const GATEWAY_START_ATTEMPTS = 60;
@@ -68,9 +69,21 @@ function startNext(nextPort: number, r2BaseUrl?: string): ChildProcess {
   });
 }
 
+/**
+ * gateway の GET キャッシュ TTL (秒)。R2 を更新した直後に dev へ即反映したいときは
+ * `R2_DEV_GATEWAY_CACHE_SECONDS=0` で無効化する。数値以外・負値は既定に倒す。
+ */
+function parseCacheSeconds(raw: string | undefined): number {
+  if (raw === undefined || raw === '') return DEFAULT_GATEWAY_CACHE_SECONDS;
+  const n = Number(raw);
+  if (!Number.isFinite(n) || n < 0 || n > 86_400) return DEFAULT_GATEWAY_CACHE_SECONDS;
+  return Math.floor(n);
+}
+
 function startWindowsGateway(port: number, upstream: string): ChildProcess {
   const scriptPath = path.join(SCRIPT_DIR, 'r2-dev-gateway.ps1');
   const powershell = process.env.PWSH_PATH || 'powershell.exe';
+  const cacheSeconds = parseCacheSeconds(process.env.R2_DEV_GATEWAY_CACHE_SECONDS);
   return spawn(
     powershell,
     [
@@ -84,6 +97,8 @@ function startWindowsGateway(port: number, upstream: string): ChildProcess {
       String(port),
       '-UpstreamBase',
       upstream,
+      '-CacheSeconds',
+      String(cacheSeconds),
     ],
     { cwd: APP_ROOT, stdio: 'inherit' }
   );

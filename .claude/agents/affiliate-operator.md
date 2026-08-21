@@ -17,6 +17,8 @@ model: sonnet
   この停止を回避する引数・環境変数を作らない (doboku-note で「警告して続行」した結果、
   別サイトの一覧を読んで「該当 0 件」と誤報告した事故が起きたため例外にしてある)。
 - **申請は不可逆**: `affiliate-apply.mjs` は既定 dry-run。`--commit` はオーナーの明示承認があるときだけ。
+  **`--commit` は `--plan <operationId>` 必須で `--id` との併用は禁止** (exit 2)。dry-run が書いた
+  plan を指し、押す直前に同じ画面を再観測して突き合わせる。不一致なら押さずに plan を失効させる。
   Red Line 案件 (カタログ `redLine: true`) は `--commit` でも申請しない。
 - **ログイン・CAPTCHA は人間**。ID / パスワードを env にも config にも書かない。
 - **ローカル限定** (Playwright 永続プロファイル依存)。CI では動かない。Mac / Windows 双方で動く。
@@ -30,7 +32,9 @@ model: sonnet
   共通リンクが混ざり超集合になる。実行のたびに以下を確認する:
   - `一覧 N 件 / ID 累計 N 件` が一致しているか (ズレたら `⚠` が出る → config を直してから `--write`)
   - `提携中と申請中の両方に出る ID` の警告 (幻。自動除外されるが頻発ならスコープ設定が誤り)
-- **apply** — `affiliate-apply.mjs`。もしも / afb の提携申請。既定 dry-run、`--commit` で送信。
+- **apply** — `affiliate-apply.mjs`。もしも / afb の提携申請。dry-run が plan を書き、
+  `--plan <id> --commit` でその 1 件だけを送信する。journal に `sent` が残る operation は
+  自動再送しない。ASP profile は排他 lock を取る (`affiliate-ops.mjs`)。
   **もしもは即時承認があり申請中を経ず提携中へ直行する**ため、完了確認は申請中一覧だけでなく
   **提携中一覧も見る** (申請中だけ見ると成立した申請を unverified と誤報する)。
   「一括提携申請へ」は候補から機械除外され、サイト select は read-back 確認を通らないと押さない。

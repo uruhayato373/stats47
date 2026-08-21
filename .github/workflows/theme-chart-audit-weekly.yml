@@ -19,6 +19,8 @@ name: 📈 Theme Chart Live Audit (weekly)
 #   - e-Stat が統計表を返すか (not-found)
 #   - 0 件でないか (no-rows: 絞りが実データと不整合)
 #   - 全国行 (areaCode 00000) を持つか (warn: 無ければ全国表示は 47 県平均になる)
+#   - 全国行の値が実データか (warn national-row-empty: e-Stat は該当なしを '-' 等の
+#     プレースホルダで返すため、行の存在だけでは全国値の有無を判定できない)
 #   - 期待集合と実集合が一致するか (coverageOk: ミラー破損/slice の陰性対照)
 #
 # 正典: .claude/scripts/audit/theme-chart-live-audit.mjs / .claude/rules/theme-catalog-standards.md

@@ -13,7 +13,7 @@ name: Workflow Dispatch Proxy
 # App の権限セットはアプリ発行元 (Anthropic) が定義するので、リポジトリ側から追加できない。
 # 一方 **develop への push はできる**。そして CI 内から `GITHUB_TOKEN` +
 # `permissions: actions: write` で `gh workflow run` する経路は
-# `ai-content-generate-daily.yml` が毎晩実証している (run の出現を確認する hard gate 付き)。
+# `backlog-loop-daily.yml` が毎晩実証している (run の出現を確認する hard gate 付き)。
 #
 # この 2 つを合成したのが本 workflow。request JSON を develop に push すれば、
 # **workflow_dispatch でしか起動できない workflow をクラウドから起動できる**。
@@ -194,7 +194,7 @@ jobs:
           gh workflow run "$TARGET_WORKFLOW" --ref "$TARGET_REF" "${ARGS[@]+"${ARGS[@]}"}"
 
           # dispatch は非同期。「起動した」と言い切らず run の出現を実測する
-          # (ai-content-generate-daily.yml と同じ hard gate)
+          # (backlog-loop-daily.yml と同じ hard gate)
           for _ in $(seq 1 12); do
             sleep 5
             LATEST_AFTER=$(gh run list --workflow "$TARGET_WORKFLOW" --limit 1 \

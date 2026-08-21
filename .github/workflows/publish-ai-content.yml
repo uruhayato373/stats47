@@ -19,9 +19,10 @@ name: 📤 AI Content Publish (develop → R2)
 #
 # ★発火経路は 2 つある。混同すると生成物が outbox に滞留する (2026-07-31 実測):
 #   - 人間 / セッションからの push → 下の push トリガーで発火する
-#   - **workflow からの push (ai-content-generate-daily.yml の commit-back) → 発火しない**。
+#   - **CI からの push (既定 GITHUB_TOKEN による commit-back) → 発火しない**。
 #     GitHub Actions は既定の GITHUB_TOKEN による push で後続 workflow を起動しない仕様のため。
-#     日次 cron 側は actions: write を持ち、本 workflow を明示 dispatch している
+#     CI 側から起こす場合は actions: write を持たせて本 workflow を明示 dispatch する
+#     (2026-08-21 に日次生成ループを削除したので、現在の主経路は人間 / セッションからの push)
 # 正典: .claude/rules/ranking-content-standards.md §生成パイプライン / .claude/todo/backlog.md [AICONTENT-DBLESS-REBUILD]
 
 on:

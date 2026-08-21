@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { ConsoleNavLinks, type NavGroup } from "./console-nav-links";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -31,7 +33,15 @@ const NAV_GROUPS: readonly NavGroup[] = [
       { href: "/dashboard", label: "プロジェクト現況" },
       { href: "/quality", label: "品質" },
       { href: "/ops", label: "CI・台帳" },
-      { href: "/todo", label: "TODO" },
+      {
+        label: "TODO",
+        children: [
+          { href: "/todo", label: "バックログ（マスタ）" },
+          { href: "/todo?f=weekly", label: "週間" },
+          { href: "/todo?f=monthly", label: "月間" },
+          { href: "/todo?f=improvements", label: "改善施策" },
+        ],
+      },
     ],
   },
 ];
@@ -51,7 +61,9 @@ export function ConsoleSidebar() {
         </span>
       </div>
 
-      <ConsoleNavLinks groups={NAV_GROUPS} />
+      <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
+        <ConsoleNavLinks groups={NAV_GROUPS} />
+      </Suspense>
 
       {/* spacer: テーマ切替を最下部へ落とす */}
       <div className="flex-1" />

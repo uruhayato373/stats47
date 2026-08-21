@@ -20,8 +20,8 @@ Mac / Windows 双方で動く。
 |---|---|---|
 | `status` (既定) | `node .claude/scripts/ads/affiliate-status.mjs [--asp a8,moshimo,afb]` | なし (read-only) |
 | `status --write` | 同上 `--write` | カタログ JSON を実機値で更新 |
-| `apply` (dry-run) | `node .claude/scripts/ads/affiliate-apply.mjs --asp <moshimo\|afb> --id <id>` | なし |
-| `apply --commit` | 同上 `--commit` | **提携申請を送信 (不可逆・要オーナー承認)** |
+| `apply` (dry-run) | `node .claude/scripts/ads/affiliate-apply.mjs --asp <moshimo\|afb> --id <id>` | plan を書き出す (押さない) |
+| `apply --commit` | `同上 --plan <operationId> --commit` | **提携申請を送信 (不可逆・要オーナー承認)** |
 | `scan` (afb) | `node .claude/scripts/ads/afb-scan.mjs [--vertical <軸>] [--mode search\|crawl]` | なし (走査 JSON を .local に出力) |
 | `scan` (もしも) | `node .claude/scripts/ads/moshimo-scan.mjs [--query <語>] [--vertical <軸>]` | なし (同上) |
 | `budget` | `node .claude/scripts/ads/check-asp-apply-budget.cjs --asp <moshimo\|afb>` | なし (週の残枠を表示) |
@@ -76,11 +76,21 @@ node .claude/scripts/ads/afb-scan.mjs --vertical travel,economy
 ### 3. apply — 提携申請する
 
 ```bash
-# まず dry-run (押せる状態かだけ確認)
+# 1. dry-run。押せる状態かを確認し、plan を .local/affiliate-ops/plans/ に書き出す
 node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154
-# オーナー承認を得てから実申請
-node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154 --commit
+#    → 出力の `plan: moshimo-6154-<timestamp>` が operationId
+
+# 2. オーナー承認を得てから、その plan だけを実行する
+node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --plan moshimo-6154-<timestamp> --commit
 ```
+
+- **★`--commit --id` は使えない (exit 2)。`--commit` は `--plan` 必須**。id 直指定だと
+  「見た画面」と「押す画面」が別 run になり、間の差し替えを検知できないため
+  (doc 42 §6.3 / `affiliate-ads-standards.md` §11)。
+- plan は **24 時間で失効**する。期限切れ・画面が変わっている場合は押さずに失効させるので、
+  dry-run からやり直す。
+- 同じ plan を 2 度は実行できない。journal に `sent` が残っている operation は
+  自動再送しない (二重申請の防止)。状態を知りたいときは `affiliate-status` で実機を見る。
 
 - **`--commit` は外部への不可逆送信 (規約同意を伴う)。オーナーの明示承認なしに実行しない。**
 - **週上限がある** (config `asps.<name>.weeklyApplyMax`。現在 100 — 2026-07-28 にオーナー判断で 10→100)。
@@ -136,7 +146,7 @@ A8 は `scout → apply → check-approval → harvest → register → 公開` 
 | 工程 | A8 | もしも / afb |
 |---|---|---|
 | 案件探索 | `scout` | ✅ `moshimo-scan` / `afb-scan` |
-| 申請 | `apply --id` | ✅ `affiliate-apply --commit` |
+| 申請 | `apply --id` | ✅ `affiliate-apply --plan … --commit` |
 | **承認の追跡** | `check-approval` (週次で applied→approved) | ✅ `affiliate-status --write` (実機照合で applying→approved。名前も補完する) |
 | **広告コード取得** | `harvest` | ❌ **無い**。SSOT に登録できない |
 | SSOT 追記 | `append-affiliate-ads` | ❌ 上記が無いので到達しない |

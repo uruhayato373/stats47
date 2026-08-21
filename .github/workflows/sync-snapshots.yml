@@ -215,6 +215,35 @@ jobs:
             echo "ranking / tag keys 差分なし — PR 不要"
             exit 0
           fi
+          # ★キー数の増減を Step Summary と PR 本文に出す。減少 = 生きているページの削除に
+          #   なりうるので、人が merge を押す前に気づけるようにする。2026-08-17 に
+          #   bath-soap-consumption-expenditure が誤削除されたとき、PR 本文には何の手掛かりも
+          #   無かった。生成器側は判定不能で中止するよう直したが、config 変更や isActive の
+          #   巻き戻しによる正当な減少と誤削除は、件数を見ないと区別できない。
+          DELTA_FILE=$(mktemp)
+          for f in "${KEY_FILES[@]}"; do
+            # ★`|| echo 0` にしない。grep -c は一致 0 でも "0" を出して exit 1 を返すため、
+            #   フォールバックが二重に出力され 0 が 2 行になり、整数比較が壊れる。
+            BEFORE=$(git show "HEAD:$f" 2>/dev/null | grep -cE '^  "' || true)
+            AFTER=$(grep -cE '^  "' "$f" || true)
+            [ "$BEFORE" = "$AFTER" ] && continue
+            # format 中のバッククォートは markdown のコードスパンで、コマンド置換ではない。
+            # 単一引用符のままが正しい (二重引用符にすると本当に置換されてしまう)。
+            # shellcheck disable=SC2016
+            if [ "$AFTER" -lt "$BEFORE" ]; then
+              printf -- '- `%s`: %s → %s ⚠️ **減少**\n' "$f" "$BEFORE" "$AFTER" >> "$DELTA_FILE"
+            else
+              printf -- '- `%s`: %s → %s\n' "$f" "$BEFORE" "$AFTER" >> "$DELTA_FILE"
+            fi
+          done
+          [ -s "$DELTA_FILE" ] || echo "件数の増減なし (内容のみ変更)" >> "$DELTA_FILE"
+          KEY_DELTA_NOTE=$(cat "$DELTA_FILE")
+          {
+            echo "### ranking / tag キーの増減"
+            echo ""
+            cat "$DELTA_FILE"
+          } >> "$GITHUB_STEP_SUMMARY"
+
           BRANCH="chore/ranking-keys-sync"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -234,6 +263,6 @@ jobs:
           if [ "$OPEN_PRS" -eq 0 ]; then
             gh pr create --base main --head "$BRANCH" \
               --title "chore(ranking): 新規 ranking キーを KNOWN/SITEMAP に同期" \
-              --body "sync-snapshots が R2 に push した item.json を KNOWN/SITEMAP に反映。新規 metric を本番公開 (200) + sitemap 掲載するための派生キー更新。**マージ = 本番デプロイ**なので、まとまったタイミングで承認してください。" \
+              --body "sync-snapshots が R2 に push した item.json を KNOWN/SITEMAP に反映。新規 metric を本番公開 (200) + sitemap 掲載するための派生キー更新。**マージ = 本番デプロイ**なので、まとまったタイミングで承認してください。\n\n### キーの増減\n\n${KEY_DELTA_NOTE}\n\n⚠️ **減少** が付いている行は、生きているページが KNOWN から消える可能性がある。config で isActive を落とした等の心当たりが無ければマージしない。" \
               --label enhancement || true
           fi

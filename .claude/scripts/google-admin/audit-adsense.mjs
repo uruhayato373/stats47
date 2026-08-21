@@ -25,6 +25,7 @@ import { google } from "googleapis";
 // API-only の read 経路が browser 依存になるため)。
 import { PROJECT_ROOT } from "../metrics/lib/auth.mjs";
 import { extractSlotIdFromAdCode } from "../metrics/lib/adsense-report-contract.mjs";
+import { collectAdUnitEntries } from "../metrics/lib/adsense-ad-unit-walk.mjs";
 
 const ADSENSE_ENV_KEYS = Object.freeze([
   "GOOGLE_ADSENSE_CLIENT_ID",
@@ -135,55 +136,52 @@ export async function auditAdSenseAccount() {
  *
  * @param {{codeSlots?: Array<object>, accountId?: string|null}} args
  */
+/**
+ * ad client を辿って ad unit を集め、audit 用の行に変換する。
+ *
+ * ★走査そのものは `../metrics/lib/adsense-ad-unit-walk.mjs` に共有してある (2026-08-21)。
+ *   元はこの関数と `fetch-adsense-snapshot.mjs` に**同じ走査が二重実装**されていて、
+ *   2026-08-04 に snapshot 側だけ「1 client の失敗で全体を落とさない」修正が入り、
+ *   こちらは素通しのままだった。結果、同じ資格情報で snapshot は成功しているのに
+ *   audit は毎回「AdSense ad units: 0 件 (error)」になり、原因を credential 側だと
+ *   誤診する材料になった。片方だけ直せる形が原因だったので、走査を 1 箇所に集めた。
+ *   ここは entries → audit 用の行に変換するだけ。
+ *
+ * @param {object} adsense googleapis の adsense client
+ * @param {string} account `accounts/pub-XXXX`
+ * @returns {Promise<{units: object[], skippedClients: string[]}>}
+ */
+export async function collectAdUnits(adsense, account) {
+  const { entries, skippedClients } = await collectAdUnitEntries(adsense, account);
+  const units = entries.map(({ unit, adCode }) => ({
+    id: unit.reportingDimensionId ?? "",
+    resourceName: unit.name ?? "",
+    displayName: unit.displayName ?? "",
+    state: unit.state ?? "",
+    format: unit.contentAdsSettings?.type ?? null,
+    size: unit.contentAdsSettings?.size ?? null,
+    slotId: extractSlotIdFromAdCode(adCode) ?? "",
+  }));
+  return { units, skippedClients };
+}
+
 export async function auditAdUnits({ codeSlots = [], accountId = null } = {}) {
   loadAdsenseEnvFromDotEnv();
   const account = accountId ?? expectedAdSenseAccount();
   const adsense = adsenseClient();
   if (!adsense) {
-    return { status: "credentials-missing", source: "api", units: [], desired: deriveDesiredAdUnits(codeSlots), codeSlots };
+    return { status: "credentials-missing", source: "api", units: [], skippedClients: [], desired: deriveDesiredAdUnits(codeSlots), codeSlots };
   }
   if (!account) {
-    return { status: "expected-missing", source: "api", units: [], desired: deriveDesiredAdUnits(codeSlots), codeSlots };
+    return { status: "expected-missing", source: "api", units: [], skippedClients: [], desired: deriveDesiredAdUnits(codeSlots), codeSlots };
   }
   try {
-    const units = [];
-    const clientsRes = await adsense.accounts.adclients.list({ parent: account });
-    for (const client of clientsRes.data.adClients ?? []) {
-      if (!client.name) continue;
-      let pageToken;
-      do {
-        const res = await adsense.accounts.adclients.adunits.list({
-          parent: client.name,
-          pageSize: 100,
-          ...(pageToken ? { pageToken } : {}),
-        });
-        for (const u of res.data.adUnits ?? []) {
-          let slotId = null;
-          if (u.name) {
-            try {
-              const code = await adsense.accounts.adclients.adunits.getAdcode({ name: u.name });
-              slotId = extractSlotIdFromAdCode(code.data.adCode ?? null);
-            } catch {
-              // adCode 単体の失敗はユニットを落とす理由にしない (slotId 不明として残す)
-            }
-          }
-          units.push({
-            id: u.reportingDimensionId ?? "",
-            resourceName: u.name ?? "",
-            displayName: u.displayName ?? "",
-            state: u.state ?? "",
-            format: u.contentAdsSettings?.type ?? null,
-            size: u.contentAdsSettings?.size ?? null,
-            slotId: slotId ?? "",
-          });
-        }
-        pageToken = res.data.nextPageToken || undefined;
-      } while (pageToken);
-    }
+    const { units, skippedClients } = await collectAdUnits(adsense, account);
     return {
       status: "ok",
       source: "api",
       units,
+      skippedClients,
       desired: deriveDesiredAdUnits(codeSlots),
       codeSlots,
     };
@@ -192,6 +190,7 @@ export async function auditAdUnits({ codeSlots = [], accountId = null } = {}) {
       status: "error",
       source: "api",
       units: [],
+      skippedClients: [],
       desired: deriveDesiredAdUnits(codeSlots),
       codeSlots,
       detail: String(e.message ?? e).slice(0, 200),

@@ -733,6 +733,13 @@
       ]
     },
     {
+      "name": "R2_DEV_GATEWAY_CACHE_SECONDS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "R2_DEV_GATEWAY_PORT",
       "visibility": "server",
       "contexts": [

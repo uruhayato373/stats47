@@ -99,6 +99,13 @@ jobs:
         run: npm run test:backlog-loop
         continue-on-error: false
 
+      - name: 📈 Audit Script Contract Gate
+        # 監査スクリプトの判定は「行の存在」ではなく「値の有効性」を見る。
+        # e-Stat は該当なしを '-' / '‐' 等のプレースホルダで返すため、行だけを数えると
+        # 全国値が無い統計表を「全国値あり」と誤判定する (実測 1 件・2026-08-20 発見)。
+        run: npm run test:audit-scripts
+        continue-on-error: false
+
       - name: 🖼️ Image Generation Pipeline Contract Gate
         # planner/manifest/exact publisher/renderer hash と workflow policy の契約を
         # ネットワークや本番R2に依存せず検証する。公開R2の鮮度監査は週次・post-deploy が担当する。

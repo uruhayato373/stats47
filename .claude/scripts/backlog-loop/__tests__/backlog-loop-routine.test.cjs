@@ -145,29 +145,47 @@ test('件数が job timeout に収まる (1 次式 × 安全率 1.25)', () => {
   );
 });
 
-test('★実行枠が blog / ai-content と実時間で重ならない (利用枠の共有)', () => {
+// ★Claude を CI で走らせる workflow どうしは実時間で重ねない。同じ Pro/Max 利用枠を
+//   共有するため、重ねると後から走った方が枠切れで途中終了する。
+//   2026-08-21 に ai-content / blog の日次生成ループを削除したので、現在この条件を満たす
+//   workflow は backlog-loop だけ。**対象をファイル名で列挙せず base-action の利用で拾う**ので、
+//   将来 Claude workflow を足したら自動で検査対象に入る。
+test('★Claude を使う workflow どうしが実時間で重ならない (利用枠の共有)', () => {
+  const dir = path.join(ROOT, '.github/workflows');
+  const claudeWorkflows = fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith('.yml'))
+    .map((f) => ({ file: f, source: fs.readFileSync(path.join(dir, f), 'utf8') }))
+    .filter(({ source }) => source.includes('claude-code-base-action'))
+    .filter(({ source }) => /- cron: "/.test(source));
+
+  // 列挙が空 = 何も検査していない、を防ぐ (backlog-loop 自身は必ず入る)
+  assert.ok(
+    claudeWorkflows.some(({ file }) => file === path.basename(WORKFLOW)),
+    'backlog-loop が Claude workflow として拾えていない = 列挙が壊れている',
+  );
+
   const crons = (source) => [...source.matchAll(/- cron: "([^"]+)"/g)].map((m) => m[1]);
   const startHour = (cron) => Number(cron.split(/\s+/)[1]);
   const timeoutOf = (source) =>
     Math.max(...[...source.matchAll(/timeout-minutes: (\d+)/g)].map((m) => Number(m[1])));
 
-  const mine = read(WORKFLOW);
-  const myStart = startHour(crons(mine)[0]);
-  const myEnd = myStart + timeoutOf(mine) / 60;
-
-  for (const other of [
-    '.github/workflows/blog-generate-daily.yml',
-    '.github/workflows/ai-content-generate-daily.yml',
-  ]) {
-    const source = read(other);
-    const span = timeoutOf(source) / 60;
+  const spans = [];
+  for (const { file, source } of claudeWorkflows) {
+    const hours = timeoutOf(source) / 60;
     for (const cron of crons(source)) {
       const start = startHour(cron);
-      const end = start + span;
-      const overlaps = myStart < end && start < myEnd;
+      spans.push({ file, cron, start, end: start + hours });
+    }
+  }
+
+  for (let a = 0; a < spans.length; a += 1) {
+    for (let b = a + 1; b < spans.length; b += 1) {
+      if (spans[a].file === spans[b].file) continue;
+      const overlaps = spans[a].start < spans[b].end && spans[b].start < spans[a].end;
       assert.ok(
         !overlaps,
-        `${other} の ${cron} (UTC ${start}:00-${end}:00) と backlog-loop (UTC ${myStart}:30-${myEnd}:30) が重なる`,
+        `${spans[a].file} の ${spans[a].cron} と ${spans[b].file} の ${spans[b].cron} が実時間で重なる`,
       );
     }
   }
@@ -181,6 +199,19 @@ test('★request は結果によらず消費する (再 push が発火しなく�
   const stashAt = consume.indexOf('git stash push');
   const rebaseAt = consume.indexOf('git pull --rebase');
   assert.ok(stashAt !== -1 && stashAt < rebaseAt, 'consume が rebase 前に stash していない');
+});
+
+// ★2026-08-20 の実障害: gate を通した 2 件を ledger に completed と記録した後で
+//   バックログの行を消せず、verify が gate-passed-but-not-removed で run ごと落とした。
+//   push step はその前に止まるので、実装差分も ledger も丸ごと破棄された (16 分 / $16.21)。
+//   順序 (消してから記録) と、消せなかったときの逃げ道 (deferred) を prompt に固定する。
+test('★prompt は「行を消してから記録する」順序と、消せないときの deferred を固定している', () => {
+  const prompt = read('.claude/prompts/ci/backlog-loop-routine.md');
+  assertOrdered(prompt, ['### 3. 行を消す', '### 4. 結果を記録する']);
+  assert.match(prompt, /completed にしない/);
+  assert.match(prompt, /--outcome deferred --fail-reason cannot-edit-backlog/);
+  // 逃げ道が「禁止パスを触る」方向に開かないこと (ここが開くと他の制約が全部無意味になる)
+  assert.match(prompt, /`\.github\/` や routing policy を触らない/);
 });
 
 test('★prompt が排他 writer と自己昇格の境界を明示している', () => {

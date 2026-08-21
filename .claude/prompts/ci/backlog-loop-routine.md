@@ -40,7 +40,22 @@ class ごとの gate は正典の表に従う。**gate は宣言ではなく実�
   片方だけなら deferred
 - `impl-small` — エントリの完了条件コマンドが green で、diff が scope 内
 
-### 3. 結果を記録する
+### 3. 行を消す (completed にする候補だけ)
+
+行番号で消す (文字列一致は同じ語を含む別エントリを壊す)。エントリの見出し行から次の
+見出し直前までを、末尾の空行 1 つと一緒に消す。
+
+**★消すのが先で、記録は後。** 記録を先にすると「ledger は completed なのに行が残っている」状態が
+作れてしまい、verify が run ごと落として**その run の実装差分も ledger もまとめて破棄される**
+(2026-08-20 に 16 分・$16.21 の作業がこれで消えた)。
+
+`.claude/todo/backlog.md` を書き換えられなかったときは **completed にしない**。
+`--outcome deferred --fail-reason cannot-edit-backlog` で記録し、evidence に「試した手段と
+どう拒否されたか」を書く。こうすれば verify が通り、実装差分と ledger は push されるので
+次回が同じ作業をやり直さずに済む。**書き換えられないことを回避しようとして
+`.github/` や routing policy を触らない** (それこそがこのループで最も触ってはいけないもの)。
+
+### 4. 結果を記録する
 
 ```bash
 node .claude/scripts/backlog-loop/record-backlog-outcome.mjs \
@@ -55,10 +70,6 @@ node .claude/scripts/backlog-loop/record-backlog-outcome.mjs \
 エントリをバックログへ追加してよい。名指ししていない新規追加は verify が落とす (仕事の捏造防止)。
 残件が無いなら追加しない。
 
-### 4. completed のものだけ行を消す
-
-行番号で消す (文字列一致は同じ語を含む別エントリを壊す)。エントリの見出し行から次の
-見出し直前までを、末尾の空行 1 つと一緒に消す。
 
 ## 触ってはいけないもの
 

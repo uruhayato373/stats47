@@ -42,6 +42,18 @@ $ARGUMENTS — レビュー対象のファイルパスまたはディレクト�
 6. **フォーム**: `<label>` 欠損, `<select>` の `appearance-none` 欠損
 7. **アクセシビリティ**: `aria-label` 欠損（アイコンボタン）, `<th scope>` 欠損, `outline: none` without ring
 
+**実測が要るもの (静的検査では出ない)**: 横スクロール・タップ領域・キーボード順序・
+フォーカスリング・dark mode の実配色は、コードを読んでも分からない。ページを実際に開いて測る:
+
+```bash
+node .claude/scripts/ui/measure-page-a11y.mjs --url http://localhost:3000/areas
+```
+
+複数の幅 × light/dark で、overflow・24px/44px 未満のタップ領域・キーボード到達・
+console エラーを一度に出す。**dark は `colorScheme` ではなく localStorage の `theme` で切り替える**
+(このサイトは next-themes を `enableSystem={false}` で使っており OS 設定を無視するため、
+`colorScheme: 'dark'` で測ると light と同じ色が返って「dark が壊れている」と誤報する)。
+
 **stats47 固有チェック**:
 - 素の HTML 要素（`<table>`, `<select>`, `<button>`）の使用 → `@stats47/components` を推奨
 - ビューポート `md:` がダッシュボードカードグリッドに使われていないか → コンテナクエリ `@md:` を推奨

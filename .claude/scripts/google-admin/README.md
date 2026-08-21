@@ -65,6 +65,18 @@ OAuth scope、必要ロールまで公式リファレンスとローカル `goog
 | GSC inventory | `audit-gsc.mjs` |
 | GA4 UI residual (GSC link / Library のみ) | `audit-ga4.mjs` |
 | AdSense API inventory / account assert | `audit-adsense.mjs` |
+
+> **ad client を 1 つ落としても inventory 全体を捨てない (2026-08-21)**: この口座は content 用
+> `ca-pub-*` に加えて AdSense for Search の `partner-pub-*` を持ち、後者は広告ユニットの概念が
+> 無く `adunits.list` が NOT_FOUND を返す。per-client の try/catch が無かったため、
+> **週次 audit は毎回「AdSense ad units: 0 件 (error)」だった** (同じ資格情報で
+> `fetch-adsense-snapshot.mjs` は成功しており、原因は credential ではなく walk の実装だった)。
+> 走査は `.claude/scripts/metrics/lib/adsense-ad-unit-walk.mjs` (`collectAdUnitEntries`) に
+> **1 箇所へ集約**した。snapshot と audit は同じ走査を使い、行の形だけを各自が決める。
+> 失敗した client は `skippedClients` に残り、**全滅のときだけ throw** する。
+> 再実装が生えると `metrics/__tests__/adsense-ad-unit-walk.test.mjs` の検知テストが落ちる。
+> CLI は skip を `! ad client を読めなかった: …` として出すので、一部欠けが status=ok のまま
+> 緑に見えることはない。
 | custom dimension台帳との突合 | `dimension-ledger.mjs` |
 | custom dimension登録状況 | `.claude/rules/analytics-event-standards.md` |
 | code slot定義 | `apps/web/src/lib/google-adsense/constants.ts` |

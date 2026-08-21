@@ -96,6 +96,10 @@ function printApiAudit(audit) {
   console.log(`GSC property (API): present=${s(audit.gsc?.present)} permission=${audit.gsc?.permissionLevel ?? "-"} (${audit.gsc?.status})`);
   console.log(`AdSense account assert: ${audit.adsense?.account?.status ?? "-"}${audit.adsense?.account?.detail ? ` (${audit.adsense.account.detail})` : ""}`);
   console.log(`AdSense ad units: ${audit.adsense?.adUnits?.units?.length ?? 0} 件 (${audit.adsense?.adUnits?.status ?? "-"})`);
+  // 一部の ad client だけ失敗したときは status=ok のまま件数が欠ける。黙って緑にしない。
+  for (const skipped of audit.adsense?.adUnits?.skippedClients ?? []) {
+    console.log(`  ! ad client を読めなかった: ${skipped}`);
+  }
   const rec = audit.dimensionReconcile;
   if (rec?.skipped) {
     console.log(`custom dimension 突合: 判定不能 (${rec.skipped})`);

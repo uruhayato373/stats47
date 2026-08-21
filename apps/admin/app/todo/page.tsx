@@ -15,7 +15,7 @@ export const metadata = { title: "TODO — stats47 統合メディアコンソ�
 /**
  * TODO ボード (.claude/todo の読み取り専用ビュー)。doboku-note の admin と同型:
  *
- * - **層 (バックログ/週間/月間/改善) は上部のスイッチャ**が持つ。層は別ファイルで、
+ * - **層 (バックログ/週間/月間/改善施策) は共通サイドバーの TODO 階層**が持つ。層は別ファイルで、
  *   週間・月間は backlog の部分集合ではなく pull されたコピー＝「行き先」であって絞り込みではない。
  * - **優先度・種類・実行は本文右のレール**に置く。backlog カードの属性でしかない
  *   (他層には存在しない) ため。クライアント JS を持たず、絞り込みは searchParams に載せる:
@@ -34,6 +34,20 @@ const TIERS: { key: TierKey; label: string; dot: string }[] = [
   { key: "hold", label: "判断待ち", dot: "bg-console-accent" },
   { key: "none", label: "未設定", dot: "bg-console-muted" },
 ];
+
+const LAYER_TITLES: Record<LayerId, string> = {
+  backlog: "バックログ（マスタ）",
+  weekly: "週間",
+  monthly: "月間",
+  improvements: "改善施策",
+};
+
+const LAYER_HINTS: Record<LayerId, string> = {
+  backlog: "未完了タスクの全量を持つマスタ・唯一の起票先",
+  weekly: "バックログから今週実行する項目を選んだ計画",
+  monthly: "バックログから選んだ今月の重点とゴール",
+  improvements: "効果判定・期限・Owner・Metricを持つ専用の改善施策台帳",
+};
 
 const tierKey = (c: TodoCard): TierKey => c.tier ?? "none";
 
@@ -266,31 +280,29 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
         </p>
       </header>
 
-      {/* 層スイッチャ */}
-      <nav className="flex flex-wrap items-center gap-2">
-        {board.layers.map((l) => (
-          <Link
-            key={l.id}
-            href={href({}, { f: l.id === "backlog" ? undefined : l.id })}
-            className={`rounded-md border px-3 py-1.5 text-sm ${
-              l.id === layer
-                ? "border-console-accent bg-console-accent/10 font-medium text-console-accent"
-                : "border-console-border text-console-fg hover:border-console-accent/50"
-            }`}
-          >
-            {l.label} <span className="font-mono text-[11px] text-console-muted">{l.count}</span>
-          </Link>
-        ))}
+      <section
+        aria-labelledby="todo-layer-heading"
+        className="flex flex-wrap items-start gap-3 border-b border-console-border pb-3"
+      >
+        <div className="min-w-0 flex-1">
+          <h2 id="todo-layer-heading" className="text-base font-semibold text-console-fg">
+            {LAYER_TITLES[layer]}
+            <span className="ml-2 font-mono text-[11px] font-normal text-console-muted">
+              {layerMeta?.count ?? 0} 件
+            </span>
+          </h2>
+          <p className="mt-0.5 text-[11px] text-console-muted">{LAYER_HINTS[layer]}</p>
+        </div>
         {layerMeta ? (
           <a
             href={editorHref(layerMeta.abs, 1)}
-            className="ml-auto text-[11px] text-console-muted hover:text-console-accent"
+            className="text-[11px] text-console-muted hover:text-console-accent"
             title={layerMeta.rel}
           >
             {layerMeta.file} を開く{layerMeta.updated ? ` (更新 ${layerMeta.updated})` : ""}
           </a>
         ) : null}
-      </nav>
+      </section>
 
       {layer === "improvements" ? (
         <>
