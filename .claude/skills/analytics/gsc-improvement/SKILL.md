@@ -157,6 +157,14 @@ node .claude/scripts/lib/scan-pending-improvements.mjs --format markdown
 
 # 効果測定済み施策・詳細ログ
 cat .claude/skills/analytics/gsc-improvement/reference/improvement-log.md
+
+# 「表示は伸びたのにクリックが伸びない」を面別に切り分ける
+#   pages.csv を素で集計してはならない: アンカー行 (#見出し 付き URL) が page 次元 imp の
+#   26% を占めクリックがゼロなので、除外しないと CTR を系統的に過小評価する。
+#   rolling28d の隣接週は 21 日重複するので WoW 比較も不可。下記が両方を扱う。
+node .claude/scripts/gsc/analyze-ctr-seesaw.mjs 2026-W29 2026-W33   # 非重複な 28 日窓どうし
+node .claude/scripts/gsc/analyze-ctr-seesaw.mjs 2026-W32 2026-W33   # 差分 = 最新週 − 落ちた週
+node .claude/scripts/gsc/analyze-ctr-seesaw.mjs --weekly            # 日次を連結して 7 日ずつ
 ```
 
 ## 実証チェックリスト（効果判定を確定してTODO行を削除する前に必須）
