@@ -110,6 +110,32 @@ listen は `127.0.0.1`、method は `GET` / `HEAD`、R2 key は path traversal �
 **TLS 検証を無効化しない。** `npm run dev:web` または `npm run dev --workspace=apps/web` で自動的に有効になる。
 一時的に従来経路へ戻す場合だけ `R2_DEV_GATEWAY=0` を指定する。Windows 以外では gateway を起動しない。
 
+**gateway は GET を 300 秒メモリキャッシュする (2026-08-21)**。`GetContext()` の逐次ループなので、
+アプリが並列に投げた R2 fetch も 1 本ずつ社内プロキシへ出ていく。同じオブジェクトを読み直さない
+だけで、R2 依存の重いページが実測で速くなった (同一端末・warm・中央値):
+
+| route | before | after |
+|---|---:|---:|
+| `/themes/population-dynamics` | 2,857 / 3,106 ms | 862 / 918 ms |
+| `/ranking/total-population` | 1,213 / 1,508 ms | 862 / 1,005 ms |
+| `/areas/13000` | 2,228 / 1,955 ms | 1,788 / 1,981 ms (ほぼ不変 = R2 律速ではない) |
+| 一覧系 (`/themes` `/areas` `/ranking`) | 222〜526 ms | 227〜490 ms (元から速い) |
+
+R2 を更新した直後に dev へ即反映したいときは `R2_DEV_GATEWAY_CACHE_SECONDS=0` で切る。
+キャッシュするのは **GET の 200 だけ**で、Range・条件付き・`Cache-Control: no-cache` は素通し。
+応答に `X-R2-Dev-Cache: HIT|MISS` が付く。
+
+**★`.ps1` は UTF-8 BOM 付きで保存する。** `powershell.exe` (Windows PowerShell 5.1) は BOM の無い
+`.ps1` を ANSI (CP932) として読むため、UTF-8 の日本語がコメントにあるだけでも化けて
+「予期しない `}`」の構文エラーになり gateway が起動しない (2026-08-21 実測: BOM 無しで構文エラー
+2 件、BOM 付きで 0 件)。契約は `dev-r2-gateway-contract.test.ts` が固定する。
+
+**★計測するときは curl のプロセス起動を分離する。** Git Bash の `curl` は 1 回の起動だけで
+実測 ~310 ms かかるので、1 リクエスト 1 プロセスで測ると本来の応答時間がそこに埋もれる
+(「gateway 1 回 259 ms」という誤った値を一度出した。実際のキャッシュヒットは 11.5 ms)。
+1 プロセスに URL を並べて渡し、`-o /dev/null` を URL の数だけ付ける (足りないと 2 本目以降の
+本文が `-w` の出力に混ざる)。
+
 Next.js 自身による SWC lockfile patch の外向き fetch は引き続き `SELF_SIGNED_CERT_IN_CHAIN` を警告する場合がある。
 `✓ Ready` の後にページが 200 で表示できるなら非致命であり、R2 データ・画像の取得には影響しない。
 

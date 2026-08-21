@@ -197,19 +197,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 最後に、成果、変更ファイル、検証結果、既存問題、未完了、次のWPを簡潔に報告してください。
 ```
 
-### [PERF-LOCAL-NAV-01] localhost共通ページ遷移の高速化
-タグ: [実行:windows] [起票:2026-07-29]
-
-- **owner**: uruhayato373 (計測はオーナー端末でしかできない)
-- **★backlog-loop では閉じられない** (2026-08-17): 完了条件が「**同一端末**・同一 route で
-  before/after を記録」で、対象も localhost の遷移。CI は毎回新しいランナーなので同一端末の
-  比較が成立しない。加えて会社 Windows PC では dev サーバー自体が起動禁止
-  (`local-environment.md`「会社 Windows PC では dev サーバーを起動しない」)。
-- **scope**: トップ→ランキング、Header→ブログ/テーマ/都道府県、同一系統の初回・2回目遷移。
-- **制約**: DOM、文言、色、余白、レスポンシブ、URL、SEO、計測イベントを変更しない。
-- **調査順**: Next dev compile時間 → navigation request waterfall → R2/self-fetch → route layout/server dependency → middleware → client prefetch。
-- **完了条件**: 同一端末・同一routeでbefore/afterを記録し、対象遷移の共通ボトルネックを除去する。対象testとweb type-checkを通し、UI差分0を確認する。
-
 ### [IMAGE-DELTA-PUBLISH-01] 生成画像の変更検知とexact R2反映
 タグ: [起票:2026-07-27]
 
@@ -1004,6 +991,21 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 根拠・再現条件: 本番 /themes/population-dynamics の hydration 後 DOM。証跡 = post-deploy smoke run 30876315662 の error-context.md (aria: `link "統計" /url: "#"`)
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [PERF-AREA-DETAIL-01] /areas/<code> だけ dev で 1.9 秒かかる原因を特定する
+タグ: [インフラ・計測] [種類:改善] [実行:windows] [検証:npm run dev:web] [起票:2026-08-21]
+
+- **owner**: Claude Code
+- **前提**: PERF-LOCAL-NAV-01 で dev gateway の GET キャッシュを入れ、R2 依存の重いページは
+  `/themes/population-dynamics` 2,857→862ms、`/ranking/total-population` 1,213→862ms へ短縮した
+  (同一端末・warm・中央値)。**`/areas/13000` だけ 2,228→1,788ms でほぼ動かない**。
+- **根拠**: キャッシュ有効/無効で差が出ない = R2 往復が律速ではない。残る候補は server component の
+  計算量、module graph の大きさ、県データブックのブロック数。
+- **次**: `/areas/13000` の server render を分解する。まず R2 read の回数と distinct キー数を数え、
+  次に databook のセクション数と `page-components` の展開コストを見る。
+- **停止条件**: 原因が本番 (Cloudflare Workers) に無く dev 固有と分かった時点で、投資を止めて記録する。
+- **完了条件**: 律速が何かを実測で名指しし、直すか「直さない理由」を書く。UI・DOM・URL は変えない。
+- **正典**: `.claude/rules/local-environment.md`「会社 Windows PC の dev は Windows R2 gateway を使う」
 
 ### [JAPAN-DERIVED-METRICS-01] /japan に derived レシピ由来の指標を足せるか判定する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-08-21]

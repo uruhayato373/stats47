@@ -1,7 +1,14 @@
+﻿# -*- coding: utf-8 -*-
+# ★このファイルは UTF-8 BOM 付きで保存する。powershell.exe (Windows PowerShell 5.1) は
+#   BOM の無い .ps1 を ANSI (日本語環境では CP932) として読むため、UTF-8 の日本語が
+#   コメント内にあるだけでも化けて「予期しない '}'」の構文エラーになる (2026-08-21 実測)。
 param(
   [ValidateRange(1, 65535)]
   [int]$Port = 4777,
-  [string]$UpstreamBase = "https://storage.stats47.jp"
+  [string]$UpstreamBase = "https://storage.stats47.jp",
+  # dev セッション中は同じ R2 オブジェクトを何度も読む。0 で無効。
+  [ValidateRange(0, 86400)]
+  [int]$CacheSeconds = 300
 )
 
 $ErrorActionPreference = "Stop"
@@ -22,6 +29,62 @@ $handler.UseProxy = $true
 $handler.DefaultProxyCredentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 $client = [System.Net.Http.HttpClient]::new($handler)
 $client.Timeout = [TimeSpan]::FromSeconds(60)
+
+# ---------------------------------------------------------------------------
+# メモリキャッシュ
+#
+# ★なぜ要るか (2026-08-21 実測): この gateway は GetContext() の逐次ループなので、
+#   アプリが並列に投げた R2 fetch も 1 本ずつ社内プロキシへ出ていく。単発なら 80ms
+#   だが 20 回逐次で 5.19s = 1 回あたり 259ms かかる。/themes/<slug> のような詳細
+#   ページは毎リクエストで同じオブジェクトを読み直すため、warm でも中央値 3.1s だった
+#   (一覧ページは 0.3s)。同じキーを再取得しないだけで詳細ページの遷移が桁で速くなる。
+#
+# 安全側の制約: 200 応答だけ / Range・条件付きリクエストは対象外 / サイズと件数に上限。
+# ---------------------------------------------------------------------------
+$cacheStore = [System.Collections.Generic.Dictionary[string, object]]::new()
+$cacheOrder = [System.Collections.Generic.Queue[string]]::new()
+$maxCacheBytes = 8MB
+$maxCacheEntries = 2000
+
+function Test-Cacheable {
+  param([System.Net.HttpListenerRequest]$Request)
+
+  if ($CacheSeconds -le 0) { return $false }
+  # HEAD は本文を持たないので、GET の本文を流用すると Content-Length を偽ることになる。
+  if ($Request.HttpMethod -ne "GET") { return $false }
+  # Range / 条件付きは応答が要求ごとに変わるのでキャッシュしない。
+  foreach ($h in @("Range", "If-None-Match", "If-Modified-Since")) {
+    if ($Request.Headers[$h]) { return $false }
+  }
+  $cc = $Request.Headers["Cache-Control"]
+  if ($cc -and $cc -match "no-cache|no-store") { return $false }
+  return $true
+}
+
+function Add-CacheEntry {
+  param([string]$Key, [object]$Entry)
+
+  if ($cacheStore.ContainsKey($Key)) { return }
+  $cacheStore[$Key] = $Entry
+  $cacheOrder.Enqueue($Key)
+  # 件数上限を超えたら古いものから落とす (dev 用なので厳密な LRU にはしない)。
+  while ($cacheOrder.Count -gt $maxCacheEntries) {
+    $evict = $cacheOrder.Dequeue()
+    [void]$cacheStore.Remove($evict)
+  }
+}
+
+function Get-CacheEntry {
+  param([string]$Key)
+
+  $entry = $null
+  if (-not $cacheStore.TryGetValue($Key, [ref]$entry)) { return $null }
+  if ([DateTime]::UtcNow -ge $entry.ExpiresAt) {
+    [void]$cacheStore.Remove($Key)
+    return $null
+  }
+  return $entry
+}
 
 function Write-TextResponse {
   param(
@@ -53,6 +116,11 @@ function Copy-ResponseHeader {
 
 $listener.Start()
 Write-Host "[r2-dev-gateway] listening on http://127.0.0.1:$Port"
+if ($CacheSeconds -gt 0) {
+  Write-Host "[r2-dev-gateway] GET cache: ${CacheSeconds}s TTL / max $($maxCacheEntries) entries / max $($maxCacheBytes) bytes each"
+} else {
+  Write-Host "[r2-dev-gateway] GET cache: disabled"
+}
 
 try {
   while ($listener.IsListening) {
@@ -83,6 +151,23 @@ try {
         Write-TextResponse -Response $response -StatusCode 400 -Text "Invalid R2 key"
         continue
       }
+      $cacheable = Test-Cacheable -Request $request
+      if ($cacheable) {
+        $hit = Get-CacheEntry -Key $key
+        if ($null -ne $hit) {
+          $response.StatusCode = 200
+          $response.Headers["X-R2-Dev-Cache"] = "HIT"
+          if ($hit.ContentType) { $response.ContentType = $hit.ContentType }
+          foreach ($cachedHeader in $hit.Headers.Keys) {
+            $response.Headers[$cachedHeader] = $hit.Headers[$cachedHeader]
+          }
+          $response.ContentLength64 = $hit.Bytes.Length
+          $response.OutputStream.Write($hit.Bytes, 0, $hit.Bytes.Length)
+          continue
+        }
+        $response.Headers["X-R2-Dev-Cache"] = "MISS"
+      }
+
       $escapedKey = ($segments | ForEach-Object { [Uri]::EscapeDataString($_) }) -join "/"
       $base = $UpstreamBase.TrimEnd("/")
       $remoteRequest = [System.Net.Http.HttpRequestMessage]::new(
@@ -113,7 +198,34 @@ try {
         Copy-ResponseHeader -Source $remoteResponse -Target $response -Name $headerName
       }
 
-      if ($request.HttpMethod -eq "GET") {
+      # 200 かつサイズが上限内のときだけ本文を読み切って保存する。
+      # それ以外は従来どおりストリームで素通しする (大きい素材でメモリを使わない)。
+      $storeBytes = $null
+      if ($cacheable -and [int]$remoteResponse.StatusCode -eq 200) {
+        $declaredLength = $remoteResponse.Content.Headers.ContentLength
+        if ($null -eq $declaredLength -or $declaredLength -le $maxCacheBytes) {
+          $storeBytes = $remoteResponse.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult()
+          if ($storeBytes.Length -gt $maxCacheBytes) { $storeBytes = $null }
+        }
+      }
+
+      if ($null -ne $storeBytes) {
+        $headerSnapshot = @{}
+        foreach ($headerName in @("ETag", "Last-Modified", "Cache-Control", "Accept-Ranges")) {
+          if ($response.Headers[$headerName]) {
+            $headerSnapshot[$headerName] = $response.Headers[$headerName]
+          }
+        }
+        Add-CacheEntry -Key $key -Entry ([PSCustomObject]@{
+          ContentType = $response.ContentType
+          Bytes       = $storeBytes
+          Headers     = $headerSnapshot
+          ExpiresAt   = [DateTime]::UtcNow.AddSeconds($CacheSeconds)
+        })
+        $response.ContentLength64 = $storeBytes.Length
+        $response.OutputStream.Write($storeBytes, 0, $storeBytes.Length)
+      }
+      elseif ($request.HttpMethod -eq "GET") {
         [void]$remoteResponse.Content.CopyToAsync($response.OutputStream).GetAwaiter().GetResult()
       }
     }
