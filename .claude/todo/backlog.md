@@ -1066,12 +1066,18 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了済 (2026-08-21)**: post-deploy smoke に検知を追加した
   (`apps/web/tests/smoke/third-party-dom-injection.spec.ts`)。自分たちのコードは `href="#"` を
   一度も出力しないので、`#` リンクの存在がそのまま外部注入の証拠になる。
-  - **最初の版は誤検知した** — `/ranking/total-population` が落ちたが中身は Leaflet のズーム
-    (`a.leaflet-control-zoom-in`) だった。役割がボタンのものと地図ウィジェット内を除外して是正。
-  - **両方向を実測**: 本番 3 ページで緑 / 本文へ `#` リンクを 1 本注入すると 3 ページとも赤
+  - **誤検知を 2 回踏んで是正した**。(1) Leaflet のズーム (`a.leaflet-control-zoom-in`)。
+    (2) **自分たちのフォールバック** — `md-content.tsx` の `source-link` /
+    `related-article-link` / banner は記事が href を書き忘れると `href={href ?? "#"}` を出す。
+    最初「自分たちは `#` を出力しない」と書いたのは誤りで、リテラル検索しかしていなかった。
+  - そこで**症状そのもの**で判定する形にした: 「文章の中の 1 語だけがリンクになる」=
+    **親に生のテキストノードが同居しているインラインの `#` リンク**。上の 2 種はどちらも
+    兄弟テキストを持たないので分離できる (兄弟「要素」を数えると Leaflet の + と − が
+    互いを兄弟テキストとみなして再び誤検知する — これも実測で踏んだ)。
+  - **両方向を実測**: 本番 3 ページで緑 / 本文へ `#` リンクを 1 本注入すると赤
     (文脈つきの指摘文が出る)。緑であること自体が「今は起きていない」という観測になる。
   - 副産物: hydration 前に append したリンクは React の再描画で消えるため、注入は
-    hydration 後 (LinkManager は 3 秒の idle 遅延の後に走る) にしか成立しない。settle は 12 秒。
+    hydration 後にしか成立しない。settle は 12 秒。
 - **残り (オーナー判断)**: A8 リンクマネージャーを**残すか外すか**。判断材料:
   - 収益の裏付けが無い。LinkManager が変換したリンクは `TrackedAffiliateLink` を通らないので
     `affiliate_click` を発火せず、GA4 では 1 件も観測できない。
