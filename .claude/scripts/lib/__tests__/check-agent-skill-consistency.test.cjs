@@ -19,6 +19,14 @@ function fixture(files) {
   return root;
 }
 
+function runWithOrphan(root) {
+  return spawnSync(process.execPath, [CHECKER], {
+    cwd: root,
+    encoding: "utf8",
+    env: { ...process.env, CLAUDE_PROJECT_DIR: root },
+  });
+}
+
 function run(root) {
   return spawnSync(process.execPath, [CHECKER, "--no-orphan"], {
     cwd: root,
@@ -301,4 +309,36 @@ primary_agent: hard
   const result = run(bad);
   assert.notEqual(result.status, 0, "未知のモデルを通してはいけない");
   assert.match(result.stdout + result.stderr, /gpt-9/);
+});
+
+// ── orphan 走査: .ts と相対 import (2026-08-21) ─────────────────────────────
+
+test("orphan 走査は .claude/scripts 配下の .ts も見る", () => {
+  // ★.ts を歩いていなかったため、TS で書いたスクリプトは一度も検査されていなかった。
+  const root = fixture({
+    ".claude/scripts/demo/lonely.ts": "export const x = 1;",
+  });
+  const result = runWithOrphan(root);
+  assert.match(result.stdout, /lonely[.]ts.*orphan/, "TS スクリプトが orphan 判定されていない");
+});
+
+test("相対 import で参照されている module は orphan にしない", () => {
+  // ★import は拡張子を書かないので、basename 照合だけだと誤報する。
+  const root = fixture({
+    ".claude/scripts/demo/index.ts": 'import { a } from "./data/thing"; export const b = a;',
+    ".claude/scripts/demo/data/thing.ts": "export const a = 1;",
+  });
+  const result = runWithOrphan(root);
+  assert.doesNotMatch(result.stdout, /thing[.]ts.*orphan/, "相対 import が参照として見えていない");
+});
+
+test("ただの文字列一致では参照とみなさない", () => {
+  // ★拡張子を落とした素の名前で緩く探すと `key: "thing"` のような無関係な文字列に当たる。
+  //   import 指定子の形 (`/thing` の直後が引用符) だけを参照とみなす。
+  const root = fixture({
+    ".claude/scripts/demo/index.ts": 'export const registry = [{ key: "thing" }];',
+    ".claude/scripts/demo/data/thing.ts": "export const a = 1;",
+  });
+  const result = runWithOrphan(root);
+  assert.match(result.stdout, /thing[.]ts.*orphan/, "無関係な文字列一致を参照と誤認している");
 });

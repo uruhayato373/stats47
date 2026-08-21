@@ -520,7 +520,10 @@ function checkCodexMcpContract(findings, scope) {
 }
 
 function checkOrphanScripts(findings) {
-  const scripts = walk(path.join(ROOT, ".claude/scripts"), [".mjs", ".cjs", ".js", ".py", ".sh"]);
+  // ★.ts を入れる (2026-08-21)。参照の抽出側 (L364 等) は最初から .ts を見ていたのに、
+  //   orphan 走査だけが .ts を歩いておらず、`.claude/scripts/**/*.ts` は**一度も検査されていなかった**。
+  //   同日に追加した build-wp0-inventory.ts がこの穴をすり抜けたので塞ぐ。
+  const scripts = walk(path.join(ROOT, ".claude/scripts"), [".mjs", ".cjs", ".js", ".py", ".sh", ".ts"]);
   // 参照コーパス。**自分自身は除いて**数え、1 回でも出れば参照ありとする。
   //
   // ★2026-08-03 に 3 つの誤報原因を直した (63 警告の大半が false positive だった)。
@@ -617,10 +620,36 @@ function checkOrphanScripts(findings) {
     return false;
   }
 
+  /**
+   * 相対 import で参照されているか (`import x from "./data/koumuin-gis"`)。
+   *
+   * ★TS/JS の import は**拡張子を書かない**ので、basename (`koumuin-gis.ts`) の照合では
+   *   一致しない。.ts を orphan 走査に入れた 2026-08-21 に、実際は index.ts から import
+   *   されている catalog data 4 件を orphan と誤報した。
+   *   拡張子なしの素の名前で探すと今度は緩すぎる — `key: "koumuin-gis"` のような
+   *   ただの文字列にも当たってしまう (magazines.ts に実在する)。
+   *   そこで **import 指定子の形** (`/<stem>` の直後が引用符) だけを一致とみなす。
+   */
+  function referencedAsModule(scriptPath, selfFile) {
+    const stem = path.basename(scriptPath).replace(/\.[^.]+$/, "");
+    if (!stem) return false;
+    for (const entry of corpus) {
+      if (entry.file === selfFile) continue;
+      let idx = 0;
+      const needle = `/${stem}`;
+      while ((idx = entry.text.indexOf(needle, idx)) !== -1) {
+        const next = entry.text[idx + needle.length];
+        if (next === '"' || next === "'" || next === "`") return true;
+        idx += needle.length;
+      }
+    }
+    return false;
+  }
+
   for (const s of scripts) {
     const base = path.basename(s);
     const dirRel = rel(path.dirname(s));
-    const wired = referencedElsewhere(base, s) || runAsDirectory(dirRel, s);
+    const wired = referencedElsewhere(base, s) || runAsDirectory(dirRel, s) || referencedAsModule(s, s);
     if (!wired) {
       findings.push({
         level: "warn",
