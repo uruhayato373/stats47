@@ -91,6 +91,7 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 |---|---|
 | ゲート未実行での完了宣言 | `record-backlog-outcome.mjs` が `completed` に `--gate-commands` + `--gate-pass` を必須化 |
 | gate 証拠なしの行削除 | `verify-backlog-run.mjs` が exit 1 |
+| **completed と記録したのに行が残る** (順序を逆にする) | 同上。この run は push まで到達しないので、**実装差分も ledger もまとめて破棄される**。だから prompt は「消してから記録する」順序で、消せなければ `deferred` に落とす (2026-08-20 に 16 分・$16.21 を失った) |
 | 処理対象外の ID を巻き込む削除 | 同上 (`removal-out-of-queue`) |
 | ledger の直接編集 | CLI 経由のみ (agent の禁止事項に明記)。直接編集は証拠の捏造 |
 | improvements / memory / learned への write | verify の `FORBIDDEN_PATH_PATTERNS` |
@@ -185,6 +186,8 @@ node --test .claude/scripts/backlog-loop/__tests__/*.test.cjs
 新規追加を既定で落とす (仕事の捏造を止めるため) が、ここで名指しした ID だけは通す。名指しは
 **gate を通した completed attempt** にしか効かず、今回の処理対象 (`--queued`) 外のエントリが
 宣言したものは流用できない。残件を闇に葬るのも、巨大なエントリのまま残すのも避けるための逃げ道。
+
+run が赤いときは Step Summary の `[permission 拒否]` 節を先に読む。tool と対象まで出るので「何を触ろうとして弾かれたか」が分かる (件数だけだった頃は原因を確定できなかった)。
 
 quarantine されたエントリを戻すには、原因を潰したうえで 1 度 `completed` を記録する
 (`failCount` が 0 に戻り次の run から queue に復帰する)。理由は ledger の

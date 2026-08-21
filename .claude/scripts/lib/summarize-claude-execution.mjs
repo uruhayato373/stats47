@@ -21,6 +21,8 @@
 import { pathToFileURL } from "node:url";
 const MAX_TEXT = 600;
 const EARLY_TURN_LIMIT = 2;
+const MAX_DENIAL_ROWS = 12;
+const MAX_DENIAL_TARGET = 120;
 
 /** 秘匿値らしき文字列を伏せる。誤検知で伏せ過ぎる方に倒す (読めない方が漏らすより安全)。 */
 export function redact(text) {
@@ -86,6 +88,71 @@ function collectTokens(list) {
   return { ...sum, source: 'messages' };
 }
 
+/**
+ * 拒否された tool 呼び出しの「対象」を 1 行にする。何を触ろうとして弾かれたかが分かればよい。
+ * 対象まで出さないと tool 名だけになり、パスの問題かコマンドの問題かを切り分けられない。
+ */
+export function denialTarget(input) {
+  if (!input || typeof input !== 'object') return '';
+  for (const key of ['file_path', 'notebook_path', 'path', 'command', 'pattern', 'url']) {
+    const value = input[key];
+    if (typeof value === 'string' && value) return truncate(redact(value), MAX_DENIAL_TARGET);
+  }
+  return '';
+}
+
+// tool_result 側の拒否文言。表現は Claude Code のバージョンで変わるので広めに取り、
+// 拾えなければ「内訳を取れなかった」と正直に言う (推測で埋めない)。
+const DENIAL_RE =
+  /requested permissions|permissions? (?:to use [^.]*)?(?:was |were )?denied|denied permission|haven'?t granted|has not granted|not allowed to use|許可されていません|拒否されました/i;
+
+/**
+ * permission 拒否の内訳を取る。
+ *
+ * ★なぜ要るか (2026-08-21)
+ * backlog-loop の 8/20 run は permission_denials_count=16 を記録しながら、**どの tool が
+ * どの対象で弾かれたかを一切残していなかった**。セッション自身は「.claude/todo/ への書き込みが
+ * 拒否された」と報告したが、settings.json に該当する deny は無く、モデルの自己申告以外の
+ * 証拠が無いため原因を確定できなかった。数だけでは切り分けに使えない。
+ *
+ * 優先順位は result entry の構造化フィールド → tool_result の拒否文言との突き合わせ。
+ * 後者は tool_use の id で紐付けるので tool 名と入力が確実に取れる。
+ */
+function collectDenials(list) {
+  const result = list.find((entry) => entry.type === 'result');
+  const structured = Array.isArray(result?.permission_denials) ? result.permission_denials : [];
+  const rows = [];
+  for (const denial of structured) {
+    if (!denial || typeof denial !== 'object') continue;
+    rows.push({
+      tool: typeof denial.tool_name === 'string' ? denial.tool_name : 'unknown',
+      target: denialTarget(denial.tool_input),
+    });
+  }
+  if (rows.length > 0) return { rows, source: 'result' };
+
+  const uses = new Map();
+  for (const entry of list) {
+    const content = entry.message?.content;
+    if (!Array.isArray(content)) continue;
+    for (const part of content) {
+      if (part && part.type === 'tool_use' && typeof part.id === 'string') uses.set(part.id, part);
+    }
+  }
+  for (const entry of list) {
+    const content = entry.message?.content;
+    if (!Array.isArray(content)) continue;
+    for (const part of content) {
+      if (!part || part.type !== 'tool_result') continue;
+      const text = typeof part.content === 'string' ? part.content : textOf(part.content);
+      if (!DENIAL_RE.test(text)) continue;
+      const use = uses.get(part.tool_use_id);
+      rows.push({ tool: use?.name ?? 'unknown', target: denialTarget(use?.input) });
+    }
+  }
+  return { rows, source: rows.length > 0 ? 'tool_result' : null };
+}
+
 export function summarizeClaudeExecution(entries) {
   const list = Array.isArray(entries) ? entries.filter((e) => e && typeof e === 'object') : [];
   const byType = {};
@@ -136,6 +203,7 @@ export function summarizeClaudeExecution(entries) {
 
   const result = list.find((entry) => entry.type === 'result') ?? null;
   const numTurns = typeof result?.num_turns === 'number' ? result.num_turns : null;
+  const denials = collectDenials(list);
 
   const rawError =
     (typeof result?.error === 'string' && result.error) ||
@@ -159,7 +227,13 @@ export function summarizeClaudeExecution(entries) {
     durationMs: typeof result?.duration_ms === 'number' ? result.duration_ms : null,
     totalCostUsd: typeof result?.total_cost_usd === 'number' ? result.total_cost_usd : null,
     permissionDenials:
-      typeof result?.permission_denials_count === 'number' ? result.permission_denials_count : null,
+      typeof result?.permission_denials_count === 'number'
+        ? result.permission_denials_count
+        : denials.rows.length > 0
+          ? denials.rows.length
+          : null,
+    denialRows: denials.rows,
+    denialSource: denials.source,
     toolUseCount,
     agentTypes: [...agentTypes].sort(),
     unfinishedAgents,
@@ -194,6 +268,30 @@ export function formatSummary(summary) {
     );
   }
   lines.push(`entry 種別: ${JSON.stringify(summary.entryCounts)}`);
+  // permission 拒否は件数だけでは切り分けに使えない。tool と対象まで出す (2026-08-21)。
+  // 件数があるのに内訳が取れないときは「取れなかった」と明示する — 0 件と混同させない。
+  if (summary.denialRows.length > 0) {
+    const counts = new Map();
+    for (const row of summary.denialRows) {
+      const key = row.target ? `${row.tool} → ${row.target}` : row.tool;
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+    const sorted = [...counts].sort((a, b) => b[1] - a[1]);
+    lines.push(
+      `
+[permission 拒否] ${summary.permissionDenials} 件 (内訳の出所: ${summary.denialSource})`,
+    );
+    for (const [key, count] of sorted.slice(0, MAX_DENIAL_ROWS)) {
+      lines.push(`  ${key}${count > 1 ? ` ×${count}` : ''}`);
+    }
+    if (sorted.length > MAX_DENIAL_ROWS) lines.push(`  … 他 ${sorted.length - MAX_DENIAL_ROWS} 種`);
+  } else if (typeof summary.permissionDenials === 'number' && summary.permissionDenials > 0) {
+    lines.push(
+      `
+[permission 拒否] ${summary.permissionDenials} 件 — 内訳を log から取れなかった。` +
+        'tool と対象が分からないと原因を確定できないので、内訳が出る形に直してから再実行する。',
+    );
+  }
   // ★[error] を名乗れるのは is_error=true のときだけ (2026-08-13)。
   //   rawError は result.error が無ければ result.result にフォールバックし、それは
   //   **成功 run では Claude の最終メッセージ**。見出しを [error] 固定にしていたため、

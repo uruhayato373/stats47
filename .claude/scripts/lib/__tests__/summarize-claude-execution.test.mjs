@@ -213,3 +213,108 @@ test('失敗 run では従来どおり [error] で出す', () => {
   assert.match(out, /\[error\]/);
   assert.match(out, /Credit balance is too low/);
 });
+
+// ── permission 拒否の内訳 (2026-08-21) ───────────────────────────────────────
+// backlog-loop の 8/20 run は denials=16 としか残さず、どの tool がどの対象で弾かれたのか
+// 分からないまま原因を確定できなかった。件数だけの状態に戻ったらこの群が落ちる。
+
+const denialResult = (extra = {}) => ({
+  type: 'result',
+  subtype: 'success',
+  is_error: false,
+  num_turns: 100,
+  permission_denials_count: 3,
+  ...extra,
+});
+
+test('result の構造化フィールドから tool と対象を出す', () => {
+  const summary = summarizeClaudeExecution([
+    denialResult({
+      permission_denials: [
+        { tool_name: 'Write', tool_input: { file_path: '.claude/todo/backlog.md' } },
+        { tool_name: 'Write', tool_input: { file_path: '.claude/todo/backlog.md' } },
+        { tool_name: 'Bash', tool_input: { command: 'sed -i s/a/b/ .claude/todo/backlog.md' } },
+      ],
+    }),
+  ]);
+  assert.equal(summary.denialSource, 'result');
+  assert.equal(summary.denialRows.length, 3);
+  const text = formatSummary(summary);
+  assert.ok(text.includes('[permission 拒否] 3 件'), text);
+  // 同じ対象はまとめ、件数の多い順に出す
+  assert.ok(text.includes('Write → .claude/todo/backlog.md ×2'), text);
+  assert.ok(text.includes('Bash → sed -i'), text);
+});
+
+test('構造化フィールドが無くても tool_result の拒否文言から復元する', () => {
+  const summary = summarizeClaudeExecution([
+    {
+      type: 'assistant',
+      message: {
+        content: [
+          { type: 'tool_use', id: 'tu_1', name: 'Edit', input: { file_path: '.claude/todo/backlog.md' } },
+        ],
+      },
+    },
+    {
+      type: 'user',
+      message: {
+        content: [
+          {
+            type: 'tool_result',
+            tool_use_id: 'tu_1',
+            content: "Claude requested permissions to use Edit, but you haven't granted it yet.",
+          },
+        ],
+      },
+    },
+    denialResult({ permission_denials_count: 1 }),
+  ]);
+  assert.equal(summary.denialSource, 'tool_result');
+  assert.deepEqual(summary.denialRows, [{ tool: 'Edit', target: '.claude/todo/backlog.md' }]);
+  assert.ok(formatSummary(summary).includes('Edit → .claude/todo/backlog.md'));
+});
+
+test('件数だけあって内訳が取れないときは「取れなかった」と明示する', () => {
+  // ここを 0 件と同じ扱い (無言) にすると、拒否が起きていないのと区別がつかなくなる
+  const summary = summarizeClaudeExecution([denialResult()]);
+  assert.equal(summary.denialRows.length, 0);
+  assert.equal(summary.denialSource, null);
+  assert.ok(formatSummary(summary).includes('内訳を log から取れなかった'));
+});
+
+test('拒否が無い run では permission 節を出さない', () => {
+  const summary = summarizeClaudeExecution([
+    { type: 'result', subtype: 'success', is_error: false, num_turns: 10, permission_denials_count: 0 },
+  ]);
+  assert.ok(!formatSummary(summary).includes('permission 拒否'));
+});
+
+test('拒否対象の秘匿値は伏せる', () => {
+  const summary = summarizeClaudeExecution([
+    denialResult({
+      permission_denials_count: 1,
+      permission_denials: [
+        { tool_name: 'Bash', tool_input: { command: 'curl -H "authorization: sk-abcdefghijklmnop" x' } },
+      ],
+    }),
+  ]);
+  const text = formatSummary(summary);
+  assert.doesNotMatch(text, /sk-abcdefghijklmnop/);
+  assert.match(text, /REDACTED/);
+});
+
+test('普通の tool_result を拒否と誤検出しない', () => {
+  const summary = summarizeClaudeExecution([
+    {
+      type: 'assistant',
+      message: { content: [{ type: 'tool_use', id: 'tu_9', name: 'Read', input: { file_path: 'a.md' } }] },
+    },
+    {
+      type: 'user',
+      message: { content: [{ type: 'tool_result', tool_use_id: 'tu_9', content: 'ok: 3 行読んだ' }] },
+    },
+    { type: 'result', subtype: 'success', is_error: false, num_turns: 5, permission_denials_count: 0 },
+  ]);
+  assert.equal(summary.denialRows.length, 0);
+});

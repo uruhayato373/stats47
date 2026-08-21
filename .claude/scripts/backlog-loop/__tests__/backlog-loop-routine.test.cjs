@@ -183,6 +183,19 @@ test('★request は結果によらず消費する (再 push が発火しなく�
   assert.ok(stashAt !== -1 && stashAt < rebaseAt, 'consume が rebase 前に stash していない');
 });
 
+// ★2026-08-20 の実障害: gate を通した 2 件を ledger に completed と記録した後で
+//   バックログの行を消せず、verify が gate-passed-but-not-removed で run ごと落とした。
+//   push step はその前に止まるので、実装差分も ledger も丸ごと破棄された (16 分 / $16.21)。
+//   順序 (消してから記録) と、消せなかったときの逃げ道 (deferred) を prompt に固定する。
+test('★prompt は「行を消してから記録する」順序と、消せないときの deferred を固定している', () => {
+  const prompt = read('.claude/prompts/ci/backlog-loop-routine.md');
+  assertOrdered(prompt, ['### 3. 行を消す', '### 4. 結果を記録する']);
+  assert.match(prompt, /completed にしない/);
+  assert.match(prompt, /--outcome deferred --fail-reason cannot-edit-backlog/);
+  // 逃げ道が「禁止パスを触る」方向に開かないこと (ここが開くと他の制約が全部無意味になる)
+  assert.match(prompt, /`\.github\/` や routing policy を触らない/);
+});
+
 test('★prompt が排他 writer と自己昇格の境界を明示している', () => {
   const prompt = read('.claude/prompts/ci/backlog-loop-routine.md');
   for (const forbidden of [
