@@ -1543,6 +1543,19 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
+### [WORKFLOW-DELETE-REACH-MAIN-01] 削除した日次生成 workflow が main から消えたのを確認する
+タグ: [インフラ・計測] [種類:定期] [実行:対話] [検証:gh workflow list --all] [起票:2026-08-21]
+
+- **owner**: Claude Code
+- **状況**: `ai-content-generate-daily.yml` / `blog-generate-daily.yml` は develop から削除済みだが、
+  **main にはまだファイルがある** (`git ls-tree origin/main -- '.github/workflows/'` が 64 対 62)。
+  scheduled workflow は default branch の定義で発火するため、2026-08-21 に
+  `gh workflow disable` で暫定的に止めてある (`disabled_manually`)。
+- **trigger**: 次に develop → main をデプロイしたとき。
+- **完了条件**: `gh workflow list --all` から 2 つが消えること。消えていれば disable 状態も
+  不要になるので、このカードを削除する。
+- **正典**: `.claude/rules/branch-workflow.md`「scheduled workflow は default branch の定義で発火する」
+
 ### [DISPATCH-FRESHNESS-PRECISION-01] main 反映順チェックの入力パス判定を workflow ごとに絞る
 タグ: [起票:2026-08-17]
 

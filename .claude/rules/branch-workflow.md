@@ -94,6 +94,25 @@ git push origin develop
 
 原則は「main に入るものは必ず develop を先に通す」。hotfix もできる限り `feature → develop → PR develop→main` に乗せ、緊急で main 直行した場合のみ上記で即同期する。`/deploy` は Step 1 で `origin/develop..origin/main` を必ずチェックする。
 
+## ★scheduled workflow は default branch (main) の定義で発火する (2026-08-21 実測)
+
+**cron を止めたいのに develop から workflow を消しても止まらない。** GitHub Actions は
+schedule を **default branch のファイルから読む**ので、main に残っている限り発火し続ける。
+しかも中身が `ref: develop` を checkout する作りだと、develop 側で prompt やスクリプトを
+消した分だけ**毎晩失敗する run** が積み上がる (失敗 Issue を起票する workflow なら通知も出る)。
+
+2026-08-21 に ai-content / blog の日次生成ループを削除したとき、develop から消えた時点で
+「cron は止まった」と判断しかけた。実際は main に 2 ファイルが残っており
+(`git ls-tree origin/main -- '.github/workflows/'` が 64 対 62)、同日中に発火する状態だった。
+
+- **確認は `git ls-tree origin/main` で行う。** `git cat-file -e origin/main:<path>` は
+  Git Bash (MSYS) がパスを変換して**偽の「無い」を返す**。実際にこれで誤判定しかけた。
+  `MSYS_NO_PATHCONV=1` を付けるか `ls-tree` を使う。
+- **デプロイせずに即止めるなら `gh workflow disable <file>`。** main を触らず、可逆で、
+  次のデプロイでファイルごと消えたあとは disable 状態も不要になる。
+- 逆に **新しい cron は main へマージされるまで一度も発火しない**。develop で試したいなら
+  `workflow_dispatch` か request push トリガーを併記する。
+
 ## なぜ PR を develop → main にだけ置くか
 
 - `pr-quality-check.yml` (フル suite) の trigger は `pull_request: branches: [main]` のため、**フル CI は main PR でしか発火しない**
