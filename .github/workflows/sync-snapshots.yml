@@ -227,6 +227,9 @@ jobs:
             BEFORE=$(git show "HEAD:$f" 2>/dev/null | grep -cE '^  "' || true)
             AFTER=$(grep -cE '^  "' "$f" || true)
             [ "$BEFORE" = "$AFTER" ] && continue
+            # format 中のバッククォートは markdown のコードスパンで、コマンド置換ではない。
+            # 単一引用符のままが正しい (二重引用符にすると本当に置換されてしまう)。
+            # shellcheck disable=SC2016
             if [ "$AFTER" -lt "$BEFORE" ]; then
               printf -- '- `%s`: %s → %s ⚠️ **減少**\n' "$f" "$BEFORE" "$AFTER" >> "$DELTA_FILE"
             else
