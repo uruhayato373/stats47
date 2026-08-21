@@ -215,7 +215,8 @@ quarantine されたエントリを戻すには、原因を潰したうえで 1 
 - カード構文・タグ語彙 (v3-unified の正典): `.claude/rules/todo-standards.md`
 - 文書ガバナンス (検査): `.claude/rules/docs-vs-issues.md`
 - 実証ベース判定: `.claude/rules/evidence-based-judgment.md`
-- 無人 Claude ループの安全契約 (複製元): `.github/workflows/ai-content-generate-daily.yml` /
-  `.claude/scripts/lib/__tests__/content-generation-routine.test.cjs`
+- 無人 Claude ループの安全契約: `.claude/scripts/backlog-loop/__tests__/backlog-loop-routine.test.cjs`
+  (複製元だった ai-content / blog の日次生成ループは 2026-08-21 に削除した。**現在 Claude を
+  CI で無人実行するのは backlog-loop だけ**で、枠の重なり検査もこのテストが持つ)
 - agent: `.claude/agents/backlog-processor.md` / `.claude/agents/backlog-solver-hard.md`
 - skill: `.claude/skills/management/process-backlog/SKILL.md`

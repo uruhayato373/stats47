@@ -519,20 +519,26 @@ BLOG-CTR-03 / 04 で 10 記事を curiosity gap 改修:
 
 4 週後 (2026-06-20) に GSC snapshot で検証。実測 CTR が想定の 70% 以上なら本パターンは effect/full 確定。
 
-## 新規記事の無人生成パイプライン (★2026-07-31 新設)
+## 新規記事の生成パイプライン (★2026-08-21 改訂: 日次 CI から週次割当へ)
 
-Claude のトークンを使わず、Gemini API + 決定的ゲートだけで新規記事を書いて公開まで届ける。
-ranking ai-content の日次ループ (`ranking-content-standards.md` §全件量産の日次ループ) と同じ形。
+接地・ゲート・SVG・prompt までを決定的スクリプトが用意し、本文と critic を書き手が回す。
+
+> **★`blog-generate-daily.yml` は 2026-08-21 に削除した。** Claude Code を CI で無人実行する
+> 日次ループは対話セッションと同じ Pro/Max 利用枠を食う。ai-content 側の歩留まりが
+> 08-19 に 0/5 ($87.31)、08-20 に 1/5 ($21.33) まで落ちたのを受け、生成の量と時期は
+> **月次計画が目標を持ち、週次計画が「今週 N 本」を Must として割り当てる**運用へ移した。
+> 月間本数の SSOT は既存の `.claude/state/blog/seo-strategy.json` の `typeMix.perMonth`
+> (月 17-19 本)。新しい数値を作らない。
 
 ```
-topic-queue (何を書くか)
+topic-queue (何を書くか。build-topic-queue.mjs)
   → R2 観測値を接地 (fetch-ranking-data-r2.mjs --with-map)
   → ★データ健全性ゲート (blog-topic-gate) — 壊れた metric の記事は書かない
   → SVG 生成 (generate-article-charts.ts。ランキング + タイルマップの 2 枚)
-  → 本文生成 (Gemini) → quality-gate → 落ちたら指摘を添えて再試行
-  → ★critic (別コンテキストの Gemini。記事本文だけを渡す) → review.md
+  → 本文生成 → quality-gate → 落ちたら指摘を添えて再試行
+  → ★critic (別コンテキスト。記事本文だけを渡す) → review.md
   → published:true → 最終ゲート → docs/21 outbox → develop push
-  → blog-auto-publish.yml を dispatch → factual/quality 再検証 → R2 公開
+  → blog-auto-publish.yml が push トリガーで発火 → factual/quality 再検証 → R2 公開
 ```
 
 | 要素 | 実装 |
@@ -540,7 +546,7 @@ topic-queue (何を書くか)
 | 生成 | `packages/ai-content/src/scripts/generate-blog-article.ts` |
 | prompt | `packages/ai-content/src/services/prompts/blog-article-prompt.ts` (本文 + critic) |
 | データ健全性ゲート | `packages/ai-content/src/services/blog-topic-gate.ts` (+ `__tests__/`) |
-| 日次 cron | `.github/workflows/blog-generate-daily.yml` (JST 04:30) |
+| 割当 | 月次 `.claude/todo/monthly.md` → 週次 `.claude/todo/weekly.md` の Must |
 
 ### データ健全性ゲートが生成の**前**に要る理由
 
@@ -572,29 +578,22 @@ GSC 実測と是正ループ (`blog-remediation-loop.md`) で品質を上げる�
 相関 snapshot にペアが無ければその記事は成立しないので skip する。**第2指標もデータ健全性ゲートを
 通す**。カードは 1 枚だけ (dup-ranking-link を避ける) なので、第2指標へはテキストリンクで導線を作る。
 
-### 起動経路 (cloud セッションからも回せる)
+### 公開までの経路
 
-`blog-generate-daily.yml` は 3 経路で発火する。
+`docs/21_ブログ記事原稿/<slug>/article.md` を `published: true` で develop へ push すると、
+`blog-auto-publish.yml` が push トリガーで発火し、R2 反映前に `ci-factual-gate` と
+`quality-gate.mjs` を再実行する。**`review.md` の critic PASS も `quality-gate.mjs` が見る**ので、
+日次 CI を消しても critic ゲートは残る。
 
-| 経路 | 用途 |
-|---|---|
-| schedule (JST 04:30) | 無人の日次ループ |
-| **push `data/blog-generate-requests.json`** | **cloud セッション用**。`{ "limit": 1, "dryRun": false, "keepDraft": true, "requestedAt": "<ISO>" }` を develop へ commit すると実行し、request を git rm で commit-back する |
-| workflow_dispatch | ローカルからの手動 |
-
-**再投入するときは `requestedAt` を必ず更新する。** paths フィルタは差分で判定するので、同じ内容を
-書き直しても diff が出ず発火しない (2026-07-31 に実際に踏んだ)。request は**結果によらず消費される**
-(失敗した run が残すと、同じ内容では再実行できなくなるため)。
-
-push 経路が要るのは、**cloud セッションが `actions:write` を持たず workflow_dispatch できない (403)**
-ため。`data-refresh.yml` / `gemini-image-run.yml` と同じ方式で、`ai-content-generate-daily.yml` にも
-同型の口 (`data/ai-content-generate-requests.json`) を用意した。これが無いと cloud からは cron を
-待つしかなく、実生成を検証できない (2026-07-31 に実際に詰まった)。
+CI の既定 `GITHUB_TOKEN` による push は後続 workflow を発火させないが、人間 / セッションからの
+push は発火する。発火しなかったときは `gh workflow run blog-auto-publish.yml -f slugs="<slug>"` で
+明示 dispatch する。
 
 ### 件数は実測してから増やす
 
-既定 `limit: 2`。1 記事あたり本文生成 + critic の 2 回 Gemini を呼ぶ。公開された記事の品質を
-GSC と critic の指摘で確認してから増やす (ai-content の 40 件と同列に扱わない)。
+対話セッション 1 本あたりの消費は測っていない。日次 CI の実測 (blog 1 本で $8.2 / 14 turns) が
+唯一の手掛かりなので、週次の割当は控えめに置いて月次で見直す。**未達を翌週へ積み増さない** —
+Must が形骸化するため、足りなければ月次の目標側を下げる。
 
 ## ルール ↔ 機械チェック 対応表 (★2026-07-31 棚卸し・ゲート設計の SSOT)
 

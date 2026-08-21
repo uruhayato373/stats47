@@ -805,16 +805,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 全公開blogの本文参照assetが200、全theme参照が正しい地域種別の非空`item` / `values`を持つか明示的にcatalogから除外、全known rankingの契約が合格し、全metric更新の実走証跡が残る。さらにseedした5種類の欠陥でCIが失敗し、復旧後にgreenへ戻ること。
 - **正典**: `.github/workflows/ranking-integrity-audit-weekly.yml` / `.github/workflows/blog-remediation-daily.yml` / `apps/web/src/features/theme-dashboard/lib/load-theme-data.ts`
 
-### [CONTENT-ROUTINE-LIVE-VERIFY-01] AI-content / blog のClaude Code日次生成を初回実走する
-タグ: [実行:ユーザー] [起票:2026-08-02]
-
-- **owner**: human / Claude Code
-- **現況**: `CLAUDE_CODE_OAUTH_TOKEN`のRepository Secret登録後も、AI-content / blogの`limit=1`実走はどちらも即時`is_error: true`となり生成0件。secret未登録ではなく、認証・モデル・利用枠・runner実行のいずれかを切り分ける段階。
-- **次**: token本文を出さずに終了code、stderr分類、Claude Code version、選択model、quota/auth判定をartifactへ残す。根因を修正後、AI-contentとblogを`limit=1`で各1回dispatchする。
-- **停止条件**: 対象別author/critic実行記録、決定的gate、生成件数照合、後続publish runのいずれかを確認できなければ件数を増やさない。
-- **完了条件**: 両workflowが対象1件を生成し、対象あり生成0件をsuccessにせず、後続publish runの生成まで確認できる。
-- **正典**: `.github/workflows/ai-content-generate-daily.yml` / `.github/workflows/blog-generate-daily.yml`
-
 ### [BLOG-SVG-LINEAGE-RESTORE-01] ブログSVG系譜キューの継続消化
 タグ: [進行中] [起票:2026-07-22]
 
@@ -1025,8 +1015,16 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   「Edit / Write / Bash の `>` と `sed -i` がすべて権限レベルで拒否された」と報告したが、
   `.claude/settings.json` に該当する deny は無く `--allowedTools` にも `Write,Edit` が入っている。
   **モデルの自己申告以外の証拠が無く原因を確定できていない。**
-- **前提は解消済み**: `9af614eb2` で summarizer が拒否の tool と対象を出すようにした。
-  これで次の run の Step Summary に `[permission 拒否]` 節が出る。
+- **★前提は解消していなかった (2026-08-21 実測)**: `9af614eb2` の summarizer は
+  `result.permission_denials_count` を読むが、**実行ログのファイルにはこのフィールドが無い**。
+  ai-content run 32404256626 は action の console 出力に `"permission_denials_count": 12` を
+  出しているのに、同じ run の Step Summary は `denials=null` で `[permission 拒否]` 節が
+  1 行も出ていない (`entry 種別` は `result:1` なので result エントリ自体は読めている)。
+  つまり **console と実行ログファイルで result の中身が違う**。artifact 化されていないので
+  ファイルの実体をこちらから見られず、フィールド名を推測で当てるべきではない。
+- **次 (改)**: summarizer に「`permission_denials_count` が無いときは result エントリの
+  キー名一覧を出す」診断を足す (キー名は秘密ではない)。次の run でフィールド名が判明したら
+  それを読む。**それまで `[permission 拒否]` 節が出ないことを「拒否ゼロ」と読まない。**
 - **次**: 修正後の run の Step Summary を読み、拒否された tool と対象を実測で名指しする。
   Bash だけなら設計どおり (許可パターンは prefix 一致)。Edit / Write が拒否されているなら
   `--permission-mode dontAsk` と `--allowedTools` の相互作用を疑う。

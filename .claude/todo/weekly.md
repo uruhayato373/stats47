@@ -2,7 +2,7 @@
 title: 今週の計画
 type: weekly-plan
 week: 2026-W34
-updated: 2026-08-16
+updated: 2026-08-21
 status: active
 ---
 
@@ -13,7 +13,7 @@ status と期限は各バックログを正典とし、ここでは成果だけ�
 
 ## 今月の重点（月次計画より）
 
-- **重点1**: 無人生成ループを定着させ、産出量を型配分と整合させる
+- **重点1**: 生成を無人ループから外し、月次目標 → 週次割当で回す（2026-08-21 に方針変更）
 - **重点2**: 公開中の誤値・欠測を解消する
 - 今週この重点で進めること: **止まっていた日次ループの修復を実測で確かめる**（重点1）と
   **露出が伸びているのにクリックが伸びない原因の特定**（重点2 の外側だが影響が最大）。
@@ -73,6 +73,19 @@ AdSense 判定順は「新規変更を止める」だけを守る形にして Mu
    10 冊を一度に出すより数日に分けた方が安全。
 
 ## Must
+
+- [ ] **ai-content を今週 3 件生成する**（重点1・S）
+  - 2026-08-21 に日次生成ループ (`ai-content-generate-daily.yml`) を削除した。件数は
+    ここで決める。月間上限は 20 件で、W34 は残り 3 日なので **3 件**。
+  - `build-ai-content-queue.mjs --next 3` → author → `audit-ai-content.mjs` →
+    critic PASS を確認 → develop へ push（`/generate-ai-content` の「週次の回し方」）。
+  - 成功基準: 3 件が R2 に載り、`publish-ai-content.yml` が **push 発火**で走ったこと。
+    **未達を翌週へ積み増さない**。足りなければ月次の目標側を下げる。
+- [ ] **blog を今週 2 本書く**（重点1・M）
+  - 同じく `blog-generate-daily.yml` を削除した。月間 17-19 本 (`seo-strategy.json` の
+    `typeMix.perMonth`) に対し W34 は残り 3 日なので **2 本**。
+  - `/write-prepared-article`（準備コマンドを含む）→ quality-gate → blog-critic PASS →
+    `published: true` で push。成功基準は `blog-auto-publish.yml` が push 発火で走ること。
 
 - [ ] **KDP を今週 10 冊公開する**（重点外・オーナー指示・M）
   - 対象は `kdp-listings.json` の `status: draft` 22 件のうち 10 件（`K-S1-11` から順に）。

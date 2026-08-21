@@ -9,8 +9,6 @@
 | PR Quality Check                                    | PR作成・更新 (main)                                | Lint、Type Check、Unit Test、Coverage、Build、Playwright E2E                                                                                                                                                    |
 | Deploy to Cloudflare Workers                        | Push (main)                                        | Build、認証確認、デプロイ、ヘルスチェック                                                                                                                                                                       |
 | Security Scan                                       | PR/Push、毎週日曜0時、手動                         | npm audit、CodeQL分析                                                                                                                                                                                           |
-| AI Content Daily (`ai-content-generate-daily.yml`)  | 毎日3時JST、手動、request push                     | Claude Code OAuthでランキング本文を生成し、audit・独立critic・件数照合後に公開workflowを起動                                                                                                                    |
-| Blog Generate Daily (`blog-generate-daily.yml`)     | 毎日4時30分JST、手動、request push                 | 接地後にClaude Code OAuthで記事を執筆し、factual・quality・独立critic・件数照合後に公開workflowを起動                                                                                                           |
 | Backlog Loop Daily (`backlog-loop-daily.yml`)       | 毎日1時30分JST、手動、request push                 | .claude/todo の 05/01/06 を分類して処理し、**機械ゲートを通した証拠が台帳にあるものだけ**行削除する。verify が「行削除 ⇔ ledger の gate.pass」を突合し、宣言だけの完了を落とす                                     |
 | Regenerate Blog SVGs (`regenerate-blog-svgs.yml`)   | 手動                                               | `all` は既存JSONから全チャートを再描画。`scatter-canonical` は散布図71件を正方形・単色で再描画し、破損2件のデータと旧5件の出典manifestを一次ソース照合後に復旧。dry-run確認後、明示keyだけR2へ反映              |
 | Google Admin settings (`google-admin-settings.yml`) | 毎週月曜5時JST (schedule)、手動 (audit/plan/apply) | GA4 Admin API / GSC / AdSense を read-only 監査。dispatch の `apply` だけが protected Environment `google-admin-production` で GA4 custom dimension を 1 件作成。正典: `.claude/scripts/google-admin/README.md` |
@@ -40,7 +38,7 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 | `CLOUDFLARE_API_TOKEN`       | Cloudflareデプロイ認証                                                                                                                                          | 40文字の英数字（Workers Scripts、D1、R2の編集権限が必要） |
 | `AUTH_SECRET`                | NextAuth認証シークレット                                                                                                                                        | 32文字以上のランダム文字列                                |
 | `WORKER_CACHE_PURGE_SECRET`  | R2公開後にWorkers Cacheを全体/tag purgeする内部APIのBearer認証。deploy時に同名Worker secretへ同期する                                                           | `openssl rand -hex 32`。Variable やログへ出さない         |
-| `CLAUDE_CODE_OAUTH_TOKEN`    | `ai-content-generate-daily.yml` / `blog-generate-daily.yml` の Claude Code 認証。ローカルで `claude setup-token` を実行して発行し、Repository Secret に登録する | OAuth token。Variable やログへ出さない                    |
+| `CLAUDE_CODE_OAUTH_TOKEN`    | `backlog-loop-daily.yml` の Claude Code 認証。ローカルで `claude setup-token` を実行して発行し、Repository Secret に登録する | OAuth token。Variable やログへ出さない                    |
 
 ### Repository Variables
 

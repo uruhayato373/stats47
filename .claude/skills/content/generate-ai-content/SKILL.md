@@ -58,9 +58,11 @@ R2 読み取り env（認証不要）: `NODE_OPTIONS='--conditions react-server'
 
 ## クイックスタート
 
-> **日次量産の正典**は `.github/workflows/ai-content-generate-daily.yml`。Claude Code OAuth で
-> author → audit → 独立 critic → 対象全件照合 → publish dispatch まで実行する。
-> `generate-parallel.ts` はローカルの手動フォールバックであり、日次 workflow からは呼ばない。
+> **件数を決めるのは週次計画** (`.claude/todo/weekly.md` の Must)。月間目標は
+> `.claude/todo/monthly.md` が持つ。日次 CI (`ai-content-generate-daily.yml`) は
+> 2026-08-21 に削除した — 対話セッションと同じ Pro/Max 利用枠を食う一方で歩留まりが
+> 08-19 に 0/5 ($87.31)、08-20 に 1/5 ($21.33) まで落ちたため。
+> **生成は対話セッションが行う**のがいまの正典で、`generate-parallel.ts` は端末用の別経路。
 
 > Claude Code の Bash から `generate-parallel.ts` の claude CLI 子プロセスを起動しない。
 > 大きい stdin が詰まるため、対話セッションでは agent 生成、端末では CLI、日次は workflow と経路を混在させない。
@@ -131,18 +133,25 @@ node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
 **outbox はフラットな `<rankingKey>.json` でなければならない**。workflow の検出 glob が
 `data/ai-content-staging/*.json` なので、`app/ranking/<key>/` の階層を作ると拾われない。
 
-## Routine（日次 CI）
+## 週次の回し方（日次 CI 廃止後の正典）
 
-`ai-content-generate-daily.yml` が次を一続きで実行する。
+1. **今週の件数を確認する。** `.claude/todo/weekly.md` の Must に「ai-content N 件」がある。
+   無ければ月次目標 (`.claude/todo/monthly.md`) から割って先にそこへ書く。
+2. **対象を出す。** `node .claude/scripts/ai-content/build-ai-content-queue.mjs --next N`
+   （既定 scope は GSC 流入優先。全件完成フェーズは `--scope all`）。
+3. **1 件ずつ author agent を foreground で起動**し、`data/ai-content-staging/<key>.json` を書かせる。
+4. **機械の床を通す。** `node .claude/scripts/ai-content/audit-ai-content.mjs --file <path>`。
+   blocker があれば同じ author に blocker と対象 field だけ渡して外科修正し、再実行する。
+5. **critic を別コンテキストで回す** (batch ≤10 key。§critic の起動方法)。
+   **★PASS を確認してから push する。** 日次 CI は `.local/ci/ai-content-reviews/<key>.json` の
+   `verdict == PASS` を機械照合していたが、publish 側にその検査は無い。ここは人が見る。
+6. **push する。** develop へ push すると `publish-ai-content.yml` が push トリガーで発火し、
+   R2 反映前に `audit-ai-content.mjs` を再実行する。発火しなければ
+   `gh workflow run publish-ai-content.yml -f keys="<key>"` で明示 dispatch する。
 
-1. 全件キューを再構築し、needs-regen を `LIMIT` 件選ぶ (件数の SSOT は workflow。ここに数値を書かない)
-2. R2観測値から対象別 prompt を決定的に準備する
-3. 公式 Claude Code Base Action を OAuth 認証で起動し、author → audit → 独立 critic を回す
-4. shell step が対象全件の outbox・audit・critic PASS manifest を再照合する
-5. develop へ push し、`publish-ai-content.yml` を明示 dispatch する
-
-`CLAUDE_CODE_OAUTH_TOKEN` 未登録、対象あり生成0件、一部対象の欠落、gate / critic 不通過、
-push / dispatch 未確認はいずれも hard fail する。既定件数は1で、成功実測後にだけ増やす。
+**通過分だけ公開する。** 1 件落ちても残りを止めない。公開 0 件のときは「成功」と report しない。
+連続で critic に落ちるキーは `record-generation-outcome.mjs` に記録すると
+`build-ai-content-queue.mjs --next` が 3 回目から除外する。
 
 ## 品質ゲート（必須）
 

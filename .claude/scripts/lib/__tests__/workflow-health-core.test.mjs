@@ -184,7 +184,9 @@ test('実在の workflow で scheduled 判定が妥当な件数になる', async
   assert.ok(scheduled.length > 5, `scheduled が ${scheduled.length} 件しか無い = 判定が厳しすぎる`);
   assert.ok(scheduled.length < all.length, 'すべてを scheduled と判定している = 判定が効いていない');
   // 既知の cron が漏れていない
-  for (const known of ['ai-content-generate-daily.yml', 'blog-generate-daily.yml', 'sync-rakuten-catalog.yml']) {
+  // ★ai-content / blog の日次生成ループは 2026-08-21 に削除した。列挙は readdirSync なので
+  //   監視対象は自動で追従するが、この allowlist だけは実在する cron に差し替える。
+  for (const known of ['backlog-loop-daily.yml', 'blog-remediation-daily.yml', 'sync-rakuten-catalog.yml']) {
     assert.ok(scheduled.includes(known), `${known} が scheduled から漏れている`);
   }
 });
