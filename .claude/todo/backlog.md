@@ -1011,39 +1011,44 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 13 指標すべてが属性または空間結合で解決され、未解決 0 で再生成・公開されている。
 - **正典**: `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/prefecture-assign.ts`
 
-### [DATA-REFRESH-ZEROGATE-ALLORNOTHING-01] ゼロ件ゲートが成功 2,148 件の R2 push を巻き添えにする
-タグ: [起票:2026-08-17]
+### [DATA-REFRESH-ZEROGATE-ALLORNOTHING-01] 形状ゲートに掛かる 4 metric を是正する
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:gh run list --workflow=data-refresh.yml --limit 3] [起票:2026-08-17]
 
 - **owner**: data-ingester
-- **実測 (run 30979118359 / 2026-08-05 schedule のログ)**: `page-data-batch` は
-  **ok=2148 / fail=10 / empty=37** で取り込み自体は成功している。落ちているのは最後の
-  ゼロ件ゲート `[fatal] 観測値が 0 件の metric が 37 件あります` による **exit 1** で、
-  `data-refresh.yml` の `☁️ Push observations to R2` は `if:` に `always()` を持たないため
-  **skip される**。つまり **正常に取り込んだ 2,148 件が一度も R2 へ push されない**。
-  月次 cron が 2 回連続でこの形なので「e-Stat → R2 の更新が止まっている」は事実。
-- **これは `SYNC-SNAPSHOTS-ALLORNOTHING-01` と同型**: 1 件の失敗で全件を捨てる。
-  あちらは verify 側を partial-publish に直して解決した。
-- **push しても壊れない根拠**: `page-data-batch` は空を返した metric について
-  「★既存 N 行が消失するため書き込みを中止 (データ破壊防止)」で**ローカルにも書かない**。
-  したがって `.local` に残るのは取り込みに成功した正しい値だけで、push しても
-  壊れたデータは配信されない。
-- **empty 37 件の内訳**（この 37 件を仕分けるのが本体の作業）: `gpp-*` 6 /
-  `fishery-*`・`fishing-*` 6 / `voluntary-car-insurance-rate-*` 3 /
-  `sixth-industry-agriculture-*` 2 / `national-pension-*-exemption-rate` 2 /
-  `kindergarten-*` 2 / `nursery-education-diffusion-rate` ほか。うち
-  `kindergarten-education-diffusion-rate` / `nursery-education-diffusion-rate` は
-  `SSDS-EDU-DIFFUSION-CODE-01` が既に追っているコード改廃。
-- **fail 10 件**: `construction-contract-*` 7 / `construction-projects-total` /
-  `noise-regulation-rate` / `voter-turnout-house-proportional` (fetch failed)。
-- **次**: (1) empty 37 件を「実在の欠陥」と「`expected-empty.ts` 登録漏れ」に仕分ける。
-  (2) 仕分けと並行して、ゼロ件ゲートを exit 1 のままにするか、成功分の push を
-  通してからゲートで落とすかを決める (partial-publish 化)。**(2) は `.github/` を触るので
-  人間の PR が要る** (`ACTIONS-EXPRESSION-INJECTION-01` と同じ制約)。
-- **完了条件**: schedule run が 2 回連続 success、または empty 37 件が仕分け済で
-  fatal が出ず、R2 の `app/stats` が当月分に更新されていることを実測できる。
+- **★カードを 2026-08-21 に実測で書き直した。起票時の前提はもう成り立たない。**
+  当時は「empty 37 件が本体」と書いたが、**empty は 0 になっている**。
+  いま止めているのは形状ゲートで、対象は **4 metric だけ**。
+- **最新の実測** (run 31975905930 / 2026-08-16 の full dispatch):
+  `ok=2175 / fail=9 / skip=57 / empty=0 / empty-allowed=2 / shape=4 / shape-allowed=48`
+  fatal は `[fatal] 形状が壊れた metric が 4 件あります`。
+- **落ちている 4 件**（いずれも `expected-shape-anomaly.ts` に**未登録**。実測で確認済み）:
+  | key | 素性 |
+  |---|---|
+  | `bowling-alley-public` | **全 47 県が 0**。ai-content 側で既知 (`value-health` が not-eligible 判定) |
+  | `gini-coefficient-disposable-income` | 同上。ai-content キューから除外済み |
+  | `unemployment-measures-project-expenses-prefecture` | 同上 |
+  | `commuter-ratio-from-other-municipalities` | 比率系の市区町村データに閾値が合っていない可能性。**allowlist の冒頭コメントは「legitimate で登録した」と書いているが実エントリが無い** — コメントと実装のドリフト |
+- **✅ 完了 (2026-08-21)**: 巻き添え構造は解消した。1 件でもゲートに掛かると exit 1 で
+  後続の push が skip され、**正常に取り込んだ 2,175 件が一度も R2 へ届かなかった**。
+  `data-refresh.yml` の batch を `continue-on-error` にして push と派生生成を通し、
+  最後の「🔴 Reflect batch gate result」で job を赤にする形にした。
+  - 安全性の根拠: 壊れた metric は `writable = notEmpty && shapeOk` でローカルにも書かれず、
+    `diff-push-r2` は `DeleteObjectCommand` を持たない **upload-only**。部分 push で
+    壊れたデータが配信されることも R2 が削られることもない。
+  - 契約テスト: `.claude/scripts/lib/__tests__/content-generation-routine.test.cjs`
+    (`continue-on-error` を外す / 反映ステップを前へ動かす の両方が退行として落ちる)。
+- **次**: 4 件をそれぞれ「是正する」か「`expected-shape-anomaly.ts` に登録する」か決める。
+  1. `commuter-ratio-*` — コメントが言う legitimate 判定が正しいなら
+     `disposition: "legitimate"` でエントリを実際に追加する (コメントだけでは効かない)。
+  2. 残り 3 件は ai-content 側で「データが不成立」と判定済み。**config を直せるのか、
+     e-Stat の値がそもそもそうなのかを先に確かめる** (`diagnose-unpinned-axes.ts --fetch`)。
+     直せないなら `known-broken` で登録するが、**`MAX_KNOWN_BROKEN` (現在 14) は
+     縮小専用の規律なので、増やすなら理由を書く**。
+- **完了条件**: data-refresh の full run (schedule または dispatch) が success で終わり、
+  `app/stats` が当月分に更新されていることを実測できる。
 - **注意**: 2026-07-05 の失敗は**別原因** (sync-snapshots の correlation task が JS ヒープ
-  OOM 4,051MB。heap は 8GB へ引き上げ済)。同じ「連続失敗」でも原因が違うので混同しない。
-  また 2026-08-16 dispatch / 2026-08-17 push でも失敗しており、schedule 以外でも再現する。
+  OOM。heap は 8GB へ引き上げ済)。同じ「連続失敗」でも原因が違うので混同しない。
+  2026-08-17 の失敗も別で、page-data-batch と push は成功し `sync-snapshots` で落ちている。
 
 ### [SOURCE-TEXT-LINK-INJECTION-01] 出典テキストが第三者スクリプトでリンクに置換される
 タグ: [収益化] [種類:不具合] [実行:ユーザー] [検証:npx playwright test --config playwright.smoke.config.ts third-party-dom-injection] [起票:2026-08-04]
