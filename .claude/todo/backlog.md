@@ -822,6 +822,13 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **根拠**: active MetricConfig 2,193件のうち市区町村候補は184件（city-only 19 / pref+city 165）だが、
   現行ranking loaderはprefecture固定で、`rankingValuesKeyPath`はareaTypeを無視するためcity生成が県valuesを
   上書きし得る。`/themes/local-finance/cities` は財政主体scope監査がblockedのままである。
+- **発見 (2026-08-21・本カードの対象外だがWP6で拾う)**: `/areas/{prefCode}/cities` (一覧パス) は
+  route fileが無いのに **HTTP 200** を返す。middlewareのareas判定が `seg[2] !== "cities"` で410対象から
+  除外する一方、Next側は `/areas/[areaCode]/[themeSlug]` が "cities" をthemeSlugとして拾うため、
+  not-found相当の中身を200で返すsoft 404になっている (noindexは付くので索引はされない)。47県ぶん存在するが
+  内部リンクが無く、GSC是正キューにも0件 = まだクロールされていない。WP6 (URL/SEO/計測) で404/410か
+  実ページかを決める。市区町村詳細側のsoft 404 (未公開cityコード) はGSC是正キューが49件pendingとして
+  既に追跡している (observe-after-fix 42 / noindex 7)。
 - **実行順**: doc 44の WP0〜WP8を順に進める。WP0 inventory → WP1 scope/entity/catalog →
   WP2専用R2 snapshot/ranking core → WP3 pilot route → WP4 theme UX → WP5地方財政移行 →
   WP6 URL/SEO/計測 → WP7承認付きrelease → WP8計測後の拡大。
