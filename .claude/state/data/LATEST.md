@@ -1,6 +1,6 @@
 # 再取り込みキュー (LATEST)
 
-- 生成: 2026-08-15T19:48:51.838Z
+- 生成: 2026-08-22T19:49:23.035Z
 - 対象: 形状 allowlist の `known-broken` 14 件
 - 判定: config の最終更新 (git) と 配信データの書き込み日 (R2 Last-Modified) の前後
 - ★全 metric には広げない。一括コミットが全 config に触れるため日付では
@@ -15,34 +15,34 @@
 
 ## 再取り込みが要る metric
 
-- `city-gas-supply-area-household-ratio` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:07.000Z
-- `convenience-store-count-commercial` **[known-broken]** — config はデータより 41 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-07-05T04:34:05.000Z
-- `current-balance-ratio` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:09.000Z
-- `day-time-population-ratio` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:09.000Z
-- `daytime-population-ratio` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:09.000Z
-- `employment-insurance-daily-receipt-rate` **[known-broken]** — config はデータより 41 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-07-05T04:34:37.000Z
-- `flush-toilet-population-ratio` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:09.000Z
-- `food-self-sufficiency-rate-calorie` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:09.000Z
-- `future-burden-ratio` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:09.000Z
-- `local-debt-current-ratio` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:10.000Z
-- `nursery-utilization-rate` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:09.000Z
-- `psychiatric-hospital-bed-occupancy-rate` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:12.000Z
-- `water-supply-population-ratio-2012on` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:11.000Z
-- `water-supply-population-ratio-pre2011` **[known-broken]** — config はデータより 13 日新しい — 再取り込みで直る見込み
-  - config: 2026-08-15T19:26:57Z / data: 2026-08-02T05:09:11.000Z
+- `city-gas-supply-area-household-ratio` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:07.000Z
+- `convenience-store-count-commercial` **[known-broken]** — config はデータより 5 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-17T07:36:01.000Z
+- `current-balance-ratio` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:09.000Z
+- `day-time-population-ratio` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:09.000Z
+- `daytime-population-ratio` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:09.000Z
+- `employment-insurance-daily-receipt-rate` **[known-broken]** — config はデータより 48 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-07-05T04:34:37.000Z
+- `flush-toilet-population-ratio` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:09.000Z
+- `food-self-sufficiency-rate-calorie` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:09.000Z
+- `future-burden-ratio` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:09.000Z
+- `local-debt-current-ratio` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:10.000Z
+- `nursery-utilization-rate` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:09.000Z
+- `psychiatric-hospital-bed-occupancy-rate` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:12.000Z
+- `water-supply-population-ratio-2012on` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:11.000Z
+- `water-supply-population-ratio-pre2011` **[known-broken]** — config はデータより 20 日新しい — 再取り込みで直る見込み
+  - config: 2026-08-22T19:24:53Z / data: 2026-08-02T05:09:11.000Z
 
 
 ## 直し方
