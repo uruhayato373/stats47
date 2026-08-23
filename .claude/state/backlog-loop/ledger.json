@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-22T16:52:33.841Z",
+  "updatedAt": "2026-08-23T17:01:42.514Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -418,18 +418,40 @@
           "evidence": "test:image-pipeline 99件green・type-check:image-pipeline green・check:image-pipeline-policy 0件green・git statusはclean(未commit実装は既に無い)。web buildのみサンドボックス制約で未実行のため completed にできない",
           "failReason": "サンドボックスが npm run build --workspace apps/web (完了条件の1項目) を拒否 (network/build permission denied)",
           "followUps": []
+        },
+        {
+          "at": "2026-08-23T17:01:35.560Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test:image-pipeline",
+              "npm run type-check:image-pipeline",
+              "npm run check:image-pipeline-policy",
+              "npm run type-check --workspace apps/web",
+              "npm run build --workspace apps/web"
+            ],
+            "pass": false
+          },
+          "evidence": "git status clean(未commit実装は既に無い)。test:image-pipeline 99件green・type-check:image-pipeline green・check:image-pipeline-policy 0件green・apps/web type-check green。npm run build --workspace apps/webはこのサンドボックスにNEXT_PUBLIC_BASE_URL/NEXT_PUBLIC_ESTAT_APP_IDが無く(R2 credsも無し)失敗、コード欠陥ではなく環境制約。加",
+          "failReason": "web-build-env-blocked+cannot-edit-backlog",
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
-        "lastReason": "サンドボックスが npm run build --workspace apps/web (完了条件の1項目) を拒否 (network/build permission denied)",
+        "failCount": 2,
+        "lastReason": "web-build-env-blocked+cannot-edit-backlog",
         "since": "2026-08-21T17:05:22.060Z"
       },
       "reclassifiedFrom": [],
       "completedAt": null
     },
     "KSJ-PREF-ASSIGN-01": {
-      "class": "impl-small",
+      "class": "needs-owner",
       "status": "open",
       "sourceFile": null,
       "title": null,
@@ -446,6 +468,19 @@
           "evidence": "残タスクはtourism-resource-countの観光資源定義決定+13指標目の再生成。license=non-commercialな点も要確認。R2読み取り(HTTPS)がこのサンドボックスで拒否されるため検証・再生成とも実行不能",
           "failReason": "サンドボックスが外向きnetwork (curl等)を拒否し、R2上の現在値確認・KSJ P12再取得・regenerateが不可能",
           "followUps": []
+        },
+        {
+          "at": "2026-08-23T17:01:42.514Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "12/13指標は済で残る観光資源数(tourism-resource-count)はP12種別(P12_005)が16766/17254件プレースホルダで「観光資源」の定義自体が製品判断待ち(カード本文が明記)。自動処理が独断で定義を決めるべきでないためneeds-ownerへ再分類。加えてこのサンドボックスはcurl等の外向きnetworkを拒否しR2/e-Stat/KSJ再取得も不能。[実行:対話]タグを付与しようとEditを試みたが.claude/todo/backlog.mdへの書込がpermission deniedのため未実施(次回runも本",
+          "failReason": "needs-owner",
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -453,7 +488,13 @@
         "lastReason": "サンドボックスが外向きnetwork (curl等)を拒否し、R2上の現在値確認・KSJ P12再取得・regenerateが不可能",
         "since": "2026-08-21T17:05:22.088Z"
       },
-      "reclassifiedFrom": [],
+      "reclassifiedFrom": [
+        {
+          "from": "impl-small",
+          "to": "needs-owner",
+          "at": "2026-08-23T17:01:42.514Z"
+        }
+      ],
       "completedAt": null
     },
     "PUBLIC-DATA-CONTRACT-AUDIT-01": {
