@@ -218,7 +218,8 @@ function defaults(mech: Partial<SurveyEntry>, reviewRef: string | null): SurveyE
       // PR-3 の集計前は「判定に使える標本なし」= insufficient-data (数値は持たない)
       gsc: { status: "insufficient-data", windowDays: 0 },
       ga4: { status: "insufficient-data", windowDays: 0 },
-      internalNav: { status: "not-instrumented" }, // survey→ranking 遷移は GA4 未計装
+      // 初回 build 時点では snapshot が無い。aggregate-survey-metrics が実測へ置換する。
+      internalNav: { status: "insufficient-data", windowDays: 0 },
     },
     currentHypothesis: null,
     evidenceRefs: reviewRef ? [reviewRef] : [],

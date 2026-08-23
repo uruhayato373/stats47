@@ -37,7 +37,7 @@ export const koumuinGisArticles: NoteArticle[] = [
   {
     key: "recovered-na21015ac366d",
     vertical: "koumuin-gis",
-    title: "【2021年版】都道府県「剣道の行動者率」ランキング｜山形と長野が同率首位、意外な武道地図",
+    title: "【2021年版】剣道をした人が多い県は？ 1位は山形県・長野県｜都道府県ランキング",
     magazine: "koumuin-gis",
     isPaid: false,
     status: "published",
@@ -45,5 +45,6 @@ export const koumuinGisArticles: NoteArticle[] = [
     publishedAt: "2026-03-24",
     r2Path: "note/koumuin-gis/na21015ac366d",
     r2Body: true,
+    stats47Targets: ["/ranking/sports-participation-rate-kendo"],
   },
 ];

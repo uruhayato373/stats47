@@ -17,6 +17,7 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 - Indexing API での即時送信 (`/indexing-api-submit`)
 - sitemap 提出 (`/submit-sitemap`)
 - GSC カバレッジ是正ループ (`/gsc-coverage-remediation`) — 404/soft404/5xx を本番実測で A/B 分類し是正・経過観測。content-check (soft404→200 の薄さ判定) を担当
+- GSC運用サイクル監査 (`audit-operations-cycle.mjs`) — snapshot / weekly-review / search-growth判断 / effect verdict / weekly・monthly planの接続を検査
 - ブログ勝ち要因分析 (`/analyze-winning-patterns`) — GSC 実測 (CTR/順位) × 構造特徴で「良い記事」を学習する天井ループ
 
 ## 担当スキル
@@ -30,6 +31,7 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 | `/indexing-api-submit` | Indexing API 即時送信 |
 | `/submit-sitemap` | sitemap 提出 |
 | `/gsc-coverage-remediation` | GSC カバレッジ是正ループ (404/soft404/5xx の ingest→本番実測 A/B 分類→是正→経過観測)。content-check の薄さ/描画判定を担当。正典 `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`。co: improvement-triage |
+| `audit-operations-cycle.mjs` | 日曜計測後の週次レビュー・候補判断・次週計画・月次集約の接続監査。FAILは`gsc-cycle-alert`へ通知 |
 | `/analyze-winning-patterns` | ブログ勝ち要因分析 (CTR×構造特徴→featureSignals、順位交絡統制付き)。co: blog-critic / trend-scout |
 
 ## 担当外
@@ -48,6 +50,7 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 ## 触る state / files
 
 - `.claude/state/metrics/gsc/` — GSC 週次 history (CRUD)
+- `.claude/state/metrics/gsc/operations-cycle-LATEST.{json,md}` — 運用サイクル監査結果 (CRUD)
 - `.claude/skills/analytics/gsc-improvement/reference/snapshots/` — 週次 snapshot CSV (CRUD)
 - `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` — agent 用詳細層 (CRUD)
 - `.claude/todo/improvements.md` — read only (improvement-triage が排他 write)

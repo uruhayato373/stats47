@@ -32,7 +32,7 @@ Related canon:
 `app/themes/local-finance/cities`) render it directly and must **not** wrap it in another `PageShell`.
 
 ```
-ThemePrefectureProvider          ← prefecture state (URL ?pref= sync)
+ThemePrefectureProvider          ← prefecture state (URL + Cookie sync)
   └─ PageShell leftRail={ThemeSideNav} leftRailNarrowBehavior="hide"
        └─ breadcrumb / compact ThemeSwitcher + PrefectureSelect toolbar / ThemeAreaHeader / dashboard
 ```
@@ -47,16 +47,20 @@ owns one compact toolbar directly below the breadcrumb. It combines `ThemeSwitch
 
 ## Geography Scope Contract
 
-Theme Dashboard is a 47-prefecture comparison surface. Its default state is `prefecture-set`, not a
-Japanese national observation.
+Theme Dashboard is a 47-prefecture comparison surface. Its geography never becomes a Japanese
+national observation. The initial display preference is resolved in this order:
+`/areas` context → URL `?pref=` → `preferred-prefecture` Cookie → first-visit default `兵庫県 (28000)`.
+The explicit `prefecture-set` choice is stored as the `all` sentinel so a later visit does not reset it
+to Hyogo. React context remains the runtime SSOT; a second client-state library is not introduced.
 
-- Default UI label: `47都道府県`.
+- First-visit UI selection: `兵庫県`. Explicit collection-view label: `47都道府県`.
 - A selected prefecture uses `?pref=<5桁都道府県コード>` and exposes that prefecture's value, rank, and trend.
+- Theme-switch links carry the current `pref` value as well as the Cookie to prevent stale prefetched state.
 - `00000` is an e-Stat national area code. It must not also represent the theme UI's no-selection state.
 - The arithmetic mean of 47 prefectures is never a Japanese national value. After a prefecture is selected,
   it may be shown only as an explicitly labeled `都道府県平均` comparison baseline.
-- A chart that requires a prefecture stays unavailable until a prefecture is selected. Missing data is not
-  converted to zero and is not silently replaced with a representative prefecture.
+- In explicit `prefecture-set` view, a chart that requires a prefecture shows a compact selection prompt.
+  Missing data is not converted to zero and is not silently replaced with a representative prefecture.
 - True national observations belong to `/japan/*` and a separate reader/data contract. World comparisons
   belong to `/world/*`; they are not added to the prefecture context.
 

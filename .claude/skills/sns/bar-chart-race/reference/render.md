@@ -14,7 +14,7 @@
 | パラメータ | 必須 | デフォルト | 説明 |
 |---|---|---|---|
 | **key** | - | 全件 | 特定のランキングキーのみ処理 |
-| **platform** | - | 全プラットフォーム | `instagram` / `tiktok` / `x` |
+| **platform** | - | 全プラットフォーム | `instagram` / `x` |
 | **dry-run** | - | false | レンダリングせずジョブ一覧を表示 |
 
 ## 出力先
@@ -22,7 +22,6 @@
 ```
 .local/r2/sns/bar-chart-race/<rankingKey>/
   instagram/reel.mp4
-  tiktok/reel.mp4
   x/video.mp4
 ```
 
@@ -72,7 +71,7 @@ npx tsx scripts/pipeline/render-bar-chart-race.ts --key total-population --platf
 ## 所要時間の目安
 
 - 1動画: 50年 × 36fps = ~2,000フレーム → 約10〜20分
-- 26ランキング × 3プラットフォーム = 78動画 → 約13〜26時間
+- 26ランキング × 2プラットフォーム = 52動画 → 約9〜18時間
 
 ## npm script
 

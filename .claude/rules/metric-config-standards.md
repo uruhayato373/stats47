@@ -43,6 +43,18 @@
 - `description` → 「統計の定義」カード (`RankingDefinitionCard`)
 - 一覧表 (`category`/`survey`) のタイトルは注釈(※)を連結しない (`isCaveatNote` で除外)
 
+### 読者向けコピーは title と分ける
+
+`title`は出典と照合できる正準名のまま維持する。カード・記事・SNSで使う平易な名前と問いは、
+`packages/data-configs/src/prominence/derive-ranking-hook.ts`の決定規則から生成し、RankingItemへ
+`readerLabel` / `hook`として焼き込む。`subtitle`や`seoTitle`へ読者向けコピーを混ぜない。
+
+- `readerLabel`: 意味を変えない平易な名詞句（例: 「日曜大工をした人の割合」）
+- `hook`: 読者への問い（例: 「日曜大工をした人が多い県は？」）
+- 共通パターンは導出規則、個別の編集判断だけoverrideに置く。全metricへの手入力は禁止
+- 「好き」「盛ん」など、観測していない嗜好・因果へ言い換えない
+- CI/週次の`generate-ranking-prominence --audit`で長さ・記号・専門語残存を監査する
+
 暫定: 専用 `note` フィールド移行が完了するまで、UI は `classifyRankingSubtitle` /
 `isCaveatNote` (`apps/web/src/features/ranking/utils/classify-subtitle.ts`) で subtitle 文面から
 注釈を判定して振り分ける。**データ側に `note` を分離したらこのヒューリスティックは不要になる。**

@@ -1,4 +1,4 @@
-# GSC カバレッジ是正 — 2026-W32 (2026-08-23)
+# GSC カバレッジ是正 — 2026-W32 (2026-08-24)
 
 > SSOT: `.claude/state/gsc/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`
 
@@ -22,19 +22,18 @@
 
 ## 是正キュー (本番 HTTP 実測ベース)
 
-- 追跡 URL: **2456** / 要対応 pending: **419**
+- 追跡 URL: **2456** / 要対応 pending: **170**
 
 | action | 件数 | 意味 |
 |---|---:|---|
-| observe-after-fix | 347 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
-| deactivate | 31 | config/データ無しの空200 ranking→KNOWN除去で404/410化 |
-| noindex | 13 | 空テンプレ/検索/未公開blog→noindex or 410 |
-| content-check | 13 | soft404→現在200=薄さ/描画 未判定 |
-| enrich | 27 | 全国テンプレ重複(area×cat)/未公開md→県別補強・公開 |
-| verify-intent | 19 | 現在も404=公開漏れ or 死亡の判別 |
-| none | 2006 | 意図的/解消済=放置 |
+| observe-after-fix | 170 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
+| deactivate | 74 | config/データ無しの空200 ranking→KNOWN除去で404/410化 |
+| content-check | 5 | soft404→現在200=薄さ/描画 未判定 |
+| enrich | 26 | 全国テンプレ重複(area×cat)/未公開md→県別補強・公開 |
+| verify-intent | 14 | 現在も404=公開漏れ or 死亡の判別 |
+| none | 2167 | 意図的/解消済=放置 |
 
-- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**347 URL**) → 修正後に url-inspection-daily.cjs で観測
+- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**170 URL**) → 修正後に url-inspection-daily.cjs で観測
 
 ## 次サイクル
 

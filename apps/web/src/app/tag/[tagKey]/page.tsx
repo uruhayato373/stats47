@@ -12,6 +12,8 @@ import {
     listArticleSummariesByTagKey,
 } from "@/features/blog/server";
 
+import { MIN_INDEXABLE_TAG_ARTICLES } from "@/lib/url-policy";
+
 import type { Metadata } from "next";
 
 
@@ -46,10 +48,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const { tagKey } = await params;
     const tag = decodeTagKey(tagKey);
 
-    // 記事が 2 本未満のタグは thin content と判定されやすいため noindex。
+    // sitemap と同じ閾値未満のタグは thin content として noindex。
     // 0 本の場合はページ本体で notFound() が呼ばれる。
-    const articles = await listArticleSummariesByTagKey(tag, 2);
-    const indexable = articles.length >= 2;
+    const articles = await listArticleSummariesByTagKey(tag, MIN_INDEXABLE_TAG_ARTICLES);
+    const indexable = articles.length >= MIN_INDEXABLE_TAG_ARTICLES;
 
     const title = `「${tag}」タグの記事一覧`;
     const description = `「${tag}」タグが付いた都道府県統計ブログの記事一覧。`;

@@ -40,4 +40,11 @@ describe("AreaDirectoryList", () => {
       screen.getAllByRole("link", { name: /の統計を見る$/ }),
     ).toHaveLength(47);
   });
+
+  it("compact は境界線カードではなく地方別テキストリンクを描画する", () => {
+    render(<AreaDirectoryList regionGroups={regionGroups} density="compact" />);
+    const tokyo = screen.getByRole("link", { name: "東京都の統計を見る" });
+    expect(tokyo).not.toHaveClass("border");
+    expect(tokyo).not.toHaveTextContent("→");
+  });
 });

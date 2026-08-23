@@ -270,7 +270,7 @@ export const koumuinClaudeCodeArticles: NoteArticle[] = [
   {
     key: "22-monthly-routine-skills",
     vertical: "koumuin-claude-code",
-    title: "22-monthly-routine-skills",
+    title: ".claude/skills で「毎月の定型業務」を 1 コマンド化する",
     magazine: "koumuin-claude-code",
     isPaid: false,
     status: "draft",
@@ -279,7 +279,7 @@ export const koumuinClaudeCodeArticles: NoteArticle[] = [
   {
     key: "23-mcp-internal-system",
     vertical: "koumuin-claude-code",
-    title: "23-mcp-internal-system",
+    title: "MCP server を庁内システムにつなぐ実験 (架空 LGWAN 想定)",
     magazine: "koumuin-claude-code",
     isPaid: false,
     status: "draft",
@@ -288,7 +288,7 @@ export const koumuinClaudeCodeArticles: NoteArticle[] = [
   {
     key: "24-subagents-parallel-research",
     vertical: "koumuin-claude-code",
-    title: "24-subagents-parallel-research",
+    title: "Subagents で「複数案件の並行調査」を回す",
     magazine: "koumuin-claude-code",
     isPaid: false,
     status: "draft",
@@ -297,7 +297,7 @@ export const koumuinClaudeCodeArticles: NoteArticle[] = [
   {
     key: "25-excel-vba-to-python",
     vertical: "koumuin-claude-code",
-    title: "25-excel-vba-to-python",
+    title: "既存の Excel マクロを Claude Code で Python 移植する",
     magazine: "koumuin-claude-code",
     isPaid: false,
     status: "draft",
@@ -306,7 +306,7 @@ export const koumuinClaudeCodeArticles: NoteArticle[] = [
   {
     key: "26-boss-approval-deck",
     vertical: "koumuin-claude-code",
-    title: "26-boss-approval-deck",
+    title: "上司に Claude Code 導入を承認させた説明資料 (実例加工)",
     magazine: "koumuin-claude-code",
     isPaid: false,
     status: "draft",
@@ -315,7 +315,7 @@ export const koumuinClaudeCodeArticles: NoteArticle[] = [
   {
     key: "27-internal-study-30min",
     vertical: "koumuin-claude-code",
-    title: "27-internal-study-30min",
+    title: "庁内勉強会の進め方: 30 分で職員を Claude Code 入門させる",
     magazine: "koumuin-claude-code",
     isPaid: false,
     status: "draft",
@@ -324,7 +324,7 @@ export const koumuinClaudeCodeArticles: NoteArticle[] = [
   {
     key: "28-ai-skeptic-qa",
     vertical: "koumuin-claude-code",
-    title: "28-ai-skeptic-qa",
+    title: "AI 導入を渋る上席への対応 Q&A 集 (現場感あり)",
     magazine: "koumuin-claude-code",
     isPaid: false,
     status: "draft",
@@ -333,7 +333,7 @@ export const koumuinClaudeCodeArticles: NoteArticle[] = [
   {
     key: "29-evaluated-without-side-job",
     vertical: "koumuin-claude-code",
-    title: "29-evaluated-without-side-job",
+    title: "公務員が副業せずに Claude Code スキルで評価される 5 つの場",
     magazine: "koumuin-claude-code",
     isPaid: false,
     status: "draft",
@@ -342,7 +342,7 @@ export const koumuinClaudeCodeArticles: NoteArticle[] = [
   {
     key: "30-post-retirement-career",
     vertical: "koumuin-claude-code",
-    title: "30-post-retirement-career",
+    title: "退職後のキャリア: AI × 公的セクター経験者の市場価値",
     magazine: "koumuin-claude-code",
     isPaid: false,
     status: "draft",

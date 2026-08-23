@@ -16,10 +16,9 @@
  *   → 公開 URL から read。list 不可なので slug は committed seed (packages/database/seed/articles.json) から列挙
  */
 
-import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
-import yaml from "js-yaml";
+
 
 import {
   fetchFromR2AsJson,
@@ -27,7 +26,10 @@ import {
   listFromR2,
   saveToR2,
 } from "@stats47/r2-storage/server";
+import dotenv from "dotenv";
+import yaml from "js-yaml";
 
+import { resolveArticleSurveyIds } from "../src/features/blog/services/article-survey-taxonomy";
 import {
   BLOG_SNAPSHOT_KEY,
   type BlogSnapshot,
@@ -182,6 +184,9 @@ async function main() {
         : prev
           ? prev.published
           : hasValidPublishedAt(fm.publishedAt);
+    const surveyIds = published
+      ? await resolveArticleSurveyIds({ slug, content })
+      : [];
     articles.push({
       slug,
       title: fm.title ?? slug,
@@ -197,6 +202,7 @@ async function main() {
       createdAt: prev?.createdAt ?? null,
       updatedAt: normalizeDate(fm.updatedAt) ?? prev?.updatedAt ?? null,
       tags,
+      surveyIds,
     });
   }
 

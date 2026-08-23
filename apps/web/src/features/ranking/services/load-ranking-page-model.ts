@@ -4,7 +4,6 @@ import { readRankingAiContentFromR2 } from "@stats47/ai-content/server";
 import { getRankingTitle, type RankingValue } from "@stats47/ranking";
 import {
   readAllYearsRankingValuesFromR2,
-  readNationalTrendFromR2,
   readRankingItemsByGroupKeyFromR2,
   readRankingItemsBySurveyFromR2,
   type GroupRankingItem,
@@ -71,13 +70,6 @@ export async function loadRankingPageModel(rankingKey: string) {
       return null;
     },
   );
-
-  // 全国平均の推移 (基準別)。事前生成済み snapshot を 1 fetch (~数KB)。
-  // 未生成なら null → カードは描画しない (段階導入できるようにする)。
-  const nationalTrendPromise = readNationalTrendFromR2(rankingKey).catch((error) => {
-    logger.error({ error }, "RankingKeyPage: 全国時系列 取得失敗");
-    return null;
-  });
 
   const cityRankingItemPromise = cachedFindRankingItem(rankingKey, "city")
     .then((r) => (isOk(r) ? r.data : null))
@@ -149,7 +141,6 @@ export async function loadRankingPageModel(rankingKey: string) {
   const [
     allYearsValues,
     aiContent,
-    nationalTrend,
     cityRankingItem,
     surveyRelatedItems,
     groupMembers,
@@ -158,7 +149,6 @@ export async function loadRankingPageModel(rankingKey: string) {
   ] = await Promise.all([
     allYearsValuesPromise,
     aiContentPromise,
-    nationalTrendPromise,
     cityRankingItemPromise,
     surveyRelatedItemsPromise,
     groupMembersPromise,
@@ -201,7 +191,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     rankingValues,
     nationalAverageSeries,
     aiContent,
-    nationalTrend,
     cityRankingItem,
     surveyName,
     originalSurveys,

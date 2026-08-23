@@ -26,7 +26,7 @@ import {
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 import { themeHref } from "@/features/theme-dashboard/config/theme-urls";
 
-import { UrlPolicy } from "@/lib/url-policy";
+import { MIN_INDEXABLE_TAG_ARTICLES, UrlPolicy } from "@/lib/url-policy";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
 import {
@@ -297,11 +297,15 @@ async function getTagPages(): Promise<MetadataRoute.Sitemap> {
     console.error("[sitemap/getTagPages] listAllTagsWithCount failed", { error });
     return tagPagesFromGit();
   }
-  // 旧クエリで count >= 5 を要求していたため踏襲
-  const eligible = tagMeta.filter((t) => t.count >= 5);
+  const eligible = tagMeta.filter(
+    (t) => t.count >= MIN_INDEXABLE_TAG_ARTICLES,
+  );
   if (eligible.length === 0) {
     // eslint-disable-next-line no-console -- sitemap.ts は logger 未設定、空 0 検出のため console を使用
-    console.warn("[sitemap/getTagPages] no eligible tags (count>=5)", { totalTags: tagMeta.length });
+    console.warn("[sitemap/getTagPages] no eligible tags", {
+      minimumArticleCount: MIN_INDEXABLE_TAG_ARTICLES,
+      totalTags: tagMeta.length,
+    });
     return tagPagesFromGit();
   }
 

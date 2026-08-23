@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ALL_THEMES } from "../../config/all-themes";
+import { ThemePrefectureProvider } from "../ThemePrefectureContext";
 import { ThemeSwitcher, buildThemeSwitcherOptions } from "../ThemeSwitcher";
 
 // router.push を安定した spy にするため next/navigation をこのファイルで上書きする
@@ -58,6 +59,20 @@ describe("buildThemeSwitcherOptions", () => {
     expect(keys).toContain("population-dynamics");
     expect(keys).toContain("tourism");
   });
+
+  it("通常テーマ間のリンクへ選択中の都道府県を引き継ぐ", () => {
+    const opts = buildThemeSwitcherOptions(undefined, "28000");
+    expect(opts.find((o) => o.themeKey === "tourism")?.href).toBe(
+      "/themes/tourism?pref=28000",
+    );
+  });
+
+  it("47都道府県の明示選択もテーマ間リンクへ引き継ぐ", () => {
+    const opts = buildThemeSwitcherOptions(undefined, null);
+    expect(opts.find((o) => o.themeKey === "tourism")?.href).toBe(
+      "/themes/tourism?pref=all",
+    );
+  });
 });
 
 describe("ThemeSwitcher", () => {
@@ -89,6 +104,22 @@ describe("ThemeSwitcher", () => {
 
     await waitFor(() => {
       expect(pushMock).toHaveBeenCalledWith("/themes/tourism");
+    });
+  });
+
+  it("Provider 配下では選択中の都道府県を保って別テーマへ遷移する", async () => {
+    render(
+      <ThemePrefectureProvider initialAreaCode="28000" initialAreaName="兵庫県">
+        <ThemeSwitcher currentThemeKey="population-dynamics" />
+      </ThemePrefectureProvider>,
+    );
+    const target = ALL_THEMES.find((t) => t.themeKey === "tourism")!;
+
+    fireEvent.click(screen.getByRole("combobox"));
+    fireEvent.click(await screen.findByRole("option", { name: target.title }));
+
+    await waitFor(() => {
+      expect(pushMock).toHaveBeenCalledWith("/themes/tourism?pref=28000");
     });
   });
 

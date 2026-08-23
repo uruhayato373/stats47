@@ -27,7 +27,12 @@ describe("FeaturedRankingCard", () => {
       "/ranking/annual-sunshine-duration",
     );
     expect(card).toHaveClass("aspect-[1.47/1]");
-    expect(getByText("日照時間が最も長い県は？")).toBeInTheDocument();
+    expect(card).toHaveClass("p-3");
+    expect(getByText("日照時間が最も長い県は？")).toHaveClass(
+      "text-sm",
+      "font-semibold",
+      "line-clamp-2",
+    );
     expect(getByText("1位")).toBeInTheDocument();
     expect(getByText("高知県")).toBeInTheDocument();
     expect(getByText(/2,309/)).toBeInTheDocument();

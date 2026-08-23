@@ -64,7 +64,9 @@
 ## Tier 4: SNS (primary 4 体 + trend-scout / strategy-advisor が SNS 責務を兼務)
 
 > SNS 実行規約の正典は `.claude/rules/sns-content-standards.md` (チャネル戦略・頻度・雛形・投稿台帳)。
-> 現行チャネル: **IG (主力・10K)** / **X (自動化 1-2K)** / **note (衛星)**。TikTok・YouTube は撤退恒久。
+> 現行チャネル: **IG (主力・10K)** / **X (自動化 1-2K)** / **note (衛星)** / **YouTube (6週間・通常動画3本の限定 pilot)**。TikTok は撤退恒久。
+> YouTube pilot は専任 agent を復活させない。`strategy-advisor` が実験を所有し、`article-writer` が構成・台本、
+> `chart-author` が図表素材、`sns-metrics-sync` が計測を担当する。最終編集・確認・YouTube Studio 投稿は人間工程。
 
 | agent | role | 派生元 |
 |---|---|---|
@@ -184,6 +186,6 @@
 ## 旧 README 互換 (Tier 1-3 表記)
 
 過去のドキュメント / commit メッセージ参照のため、旧 Tier 表記との対応:
-- 旧 Tier 1 (主力 4 体): x/youtube/instagram-strategist + seo-auditor → 新 Tier 4-5 に分散 (youtube-strategist は 2026-07-27 の YouTube 撤退で廃止)
+- 旧 Tier 1 (主力 4 体): x/youtube/instagram-strategist + seo-auditor → 新 Tier 4-5 に分散 (`youtube-strategist` は 2026-07-27 に廃止。2026-08-23 の限定 pilot でも復活させず既存 owner で分担)
 - 旧 Tier 2 (Specialist 12 体): theme / data / db / blog / sns / note / code / ui / devops / tdd / strategy → 新 Tier 1-7 に分散
 - 旧 Tier 3 (Worker 1 体): article-writer → 新 Tier 3 維持

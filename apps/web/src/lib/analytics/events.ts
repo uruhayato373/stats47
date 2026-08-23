@@ -151,8 +151,14 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * `nav_surface` の値:
  * - `desktop-header` / `mobile-drawer`: グローバルナビ
  * - `areas_search` / `areas_list` / `areas_map`: /areas の県選択導線（検索 / 一覧 / 地図）
- * - `home_category` / `home_use_case` / `home_area` / `home_blog`:
+ * - `home_category` / `home_use_case` / `home_area_map` / `home_area_list` / `home_blog`:
  *   home ポータルの発見セクション（カテゴリ / 知りたいこと / 都道府県 / ブログ）
+ * - `category_area_map` / `category_area_list`: category ページの都道府県選択導線
+ * - `category_blog`: category ページのカテゴリ関連記事
+ * - `ranking_survey` / `category_survey` / `theme_survey` / `blog_survey`:
+ *   各コンテンツ面から、そのデータを生成した調査ハブへの導線
+ * - `survey_ranking` / `survey_theme` / `survey_blog`:
+ *   調査ハブから、その調査を使う各コンテンツ面への逆方向導線
  * - `theme_kpi_switcher`: テーマページの指標カードのタイル（`MetricSwitcherPanel`）。
  *   `nav_label` に rankingKey が入るので、どの指標が見られているかを追える。
  *   ★2026-08-06 の複数チェック化以降、送るのは**チェック ON のときだけ**。
@@ -163,10 +169,7 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * いずれも既存 GA4 custom dimension `nav_surface` の値追加であり、新しい dimension は増やさない
  * (`.claude/rules/analytics-event-standards.md` §2)。
  */
-export function trackNavClick(params: {
-  label: string;
-  href: string;
-  surface:
+export type NavSurface =
     | "desktop-header"
     | "mobile-drawer"
     | "areas_search"
@@ -174,10 +177,26 @@ export function trackNavClick(params: {
     | "areas_map"
     | "home_category"
     | "home_use_case"
-    | "home_area"
+    | "home_area_map"
+    | "home_area_list"
     | "home_blog"
+    | "category_blog"
+    | "category_area_map"
+    | "category_area_list"
     | "theme_kpi_switcher"
-    | "category_sidebar";
+    | "category_sidebar"
+    | "ranking_survey"
+    | "category_survey"
+    | "theme_survey"
+    | "blog_survey"
+    | "survey_ranking"
+    | "survey_theme"
+    | "survey_blog";
+
+export function trackNavClick(params: {
+  label: string;
+  href: string;
+  surface: NavSurface;
 }): void {
   sendEvent("nav_click", {
     event_category: "navigation",

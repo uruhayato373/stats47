@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "maxStateAgeDays": 10,
+  "ranking": {
+    "minActiveResolved": 1924,
+    "minActiveCoveragePct": 88.91
+  },
+  "theme": {
+    "minResolvedCharts": 89,
+    "minCoveragePct": 100,
+    "maxMissingLineageCharts": 0
+  },
+  "blog": {
+    "minCharts": 1087,
+    "minResolvedCharts": 733,
+    "minCoveragePct": 72.5,
+    "maxUnresolvedCharts": 99,
+    "maxMissingLineageCharts": 179
+  }
+}

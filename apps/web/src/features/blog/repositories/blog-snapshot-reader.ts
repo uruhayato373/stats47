@@ -43,6 +43,7 @@ function toArticle(row: SnapshotArticle): Article {
     proofreadAt: row.proofreadAt,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
+    surveyIds: row.surveyIds ?? [],
     tags: JSON.stringify(row.tags ?? []),
     content: "",
     frontmatter,
@@ -151,6 +152,27 @@ export async function readArticleSummariesByTagKeyFromR2(
     .sort(compareByPublishedAtDesc)
     .slice(0, limit)
     .map((a) => ({ slug: a.slug, title: a.title, description: a.description }));
+}
+
+export async function readArticleSummariesBySurveyIdFromR2(
+  surveyId: string,
+  limit = 6,
+): Promise<Array<{ slug: string; title: string; description: string | null }>> {
+  const snapshot = await loadSnapshot();
+  return snapshot.articles
+    .filter(
+      (article) =>
+        article.published === true &&
+        Array.isArray(article.surveyIds) &&
+        article.surveyIds.includes(surveyId),
+    )
+    .sort(compareByPublishedAtDesc)
+    .slice(0, limit)
+    .map((article) => ({
+      slug: article.slug,
+      title: article.title,
+      description: article.description,
+    }));
 }
 
 export async function readBlogSnapshotMetaFromR2(): Promise<{

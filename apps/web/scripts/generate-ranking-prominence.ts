@@ -32,6 +32,7 @@ import { listAllMetrics, listCategories } from "@stats47/data-configs";
 import {
   auditDerivedHooks,
   computeProminenceScores,
+  resolveRankingReaderLabel,
   resolveRankingHook,
   selectHomeFeatured,
   selectRepresentatives,
@@ -177,10 +178,14 @@ function resolveReferenceYear(inputs: readonly ProminenceInput[]): number {
 function toRepresentative(
   result: ProminenceResult,
   units: Map<string, string>,
-): { rankingKey: string; title: string; hook: string } {
+): { rankingKey: string; title: string; readerLabel: string; hook: string } {
   return {
     rankingKey: result.rankingKey,
     title: result.title,
+    readerLabel: resolveRankingReaderLabel({
+      rankingKey: result.rankingKey,
+      title: result.title,
+    }),
     hook: resolveRankingHook({
       rankingKey: result.rankingKey,
       title: result.title,
@@ -251,7 +256,10 @@ function build(): string {
 
 export interface RankingRepresentative {
   rankingKey: string;
+  /** 正準な統計名 */
   title: string;
+  /** 読者向けの平易な指標名。正準名から決定規則で導出 */
+  readerLabel?: string;
   /** 問いかけコピー。導出規則 + override で確定したもの */
   hook: string;
 }

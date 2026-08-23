@@ -7,6 +7,9 @@
 
 import { notFound } from 'next/navigation';
 
+import { METRICS_REGISTRY } from '@stats47/data-configs';
+import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
+import { resolveThemeSurveyTaxonomy } from '@stats47/ranking';
 import {
   readRankingItemsBySurveyFromR2,
   readRankingValuesFromR2,
@@ -28,6 +31,7 @@ import {
   type AffiliateVertical,
 } from '@/features/ads/constants/affiliate-category';
 import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
+import { listArticleSummariesBySurveyId } from '@/features/blog/server';
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
@@ -36,7 +40,7 @@ import {
   type CategoryRankingListItem,
 } from '@/features/ranking';
 import { buildFeaturedRankingCardModel } from '@/features/ranking/server';
-import { getSurveyEditorialContent } from '@/features/survey';
+import { getSurveyEditorialContent, SurveyOutboundLinkArea } from '@/features/survey';
 
 import { HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
@@ -131,6 +135,16 @@ export default async function SurveyPage({ params }: PageProps) {
 
   const rankingResult = await readRankingItemsBySurveyFromR2(surveyKey);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
+  const relatedThemes = Object.values(THEME_CATALOGS)
+    .filter((catalog) =>
+      resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY).surveys.some(
+        (entry) => entry.id === surveyKey,
+      ),
+    )
+    .map((catalog) => ({ key: catalog.key, title: catalog.title }));
+  const relatedArticles = await listArticleSummariesBySurveyId(surveyKey, 6).catch(
+    () => [],
+  );
   // ★ 2026-07-28: 旧実装は tag を ['economy','population','labor'] に固定しており、
   //   調査の主題 (農林業センサス / 学校基本調査 等) と広告が一切連動していなかった。
   //   この調査に属するランキングの categoryKey 最頻値から vertical を導出する。
@@ -302,20 +316,22 @@ export default async function SurveyPage({ params }: PageProps) {
                 number={String(sectionNumber++)}
                 title={`${survey.name}から答えを探す`}
               />
-              <div className="grid gap-3 sm:grid-cols-2">
-                {readerQuestions.map((item) => (
-                  <SurfaceLinkCard
-                    key={item.rankingKey}
-                    href={`/ranking/${item.rankingKey}`}
-                    className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
-                  >
-                    {item.question}
-                    <span className="ml-1 text-primary" aria-hidden="true">
-                      →
-                    </span>
-                  </SurfaceLinkCard>
-                ))}
-              </div>
+              <SurveyOutboundLinkArea surface="survey_ranking">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {readerQuestions.map((item) => (
+                    <SurfaceLinkCard
+                      key={item.rankingKey}
+                      href={`/ranking/${item.rankingKey}`}
+                      className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
+                    >
+                      {item.question}
+                      <span className="ml-1 text-primary" aria-hidden="true">
+                        →
+                      </span>
+                    </SurfaceLinkCard>
+                  ))}
+                </div>
+              </SurveyOutboundLinkArea>
             </div>
           )}
         </section>
@@ -327,17 +343,65 @@ export default async function SurveyPage({ params }: PageProps) {
             number={String(sectionNumber++)}
             title="注目のランキング"
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-            {featuredItems.map((item) => (
-              <FeaturedRankingCard
-                key={item.rankingKey}
-                rankingKey={item.rankingKey}
-                year={item.latestYear}
-                unit={item.unit}
-                model={item.model}
-              />
-            ))}
-          </div>
+          <SurveyOutboundLinkArea surface="survey_ranking">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+              {featuredItems.map((item) => (
+                <FeaturedRankingCard
+                  key={item.rankingKey}
+                  rankingKey={item.rankingKey}
+                  year={item.latestYear}
+                  unit={item.unit}
+                  model={item.model}
+                />
+              ))}
+            </div>
+          </SurveyOutboundLinkArea>
+        </section>
+      )}
+
+      {relatedThemes.length > 0 && (
+        <section className="mb-12">
+          <SectionHeader
+            number={String(sectionNumber++)}
+            title="この調査を使うテーマ"
+          />
+          <SurveyOutboundLinkArea surface="survey_theme">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedThemes.map((theme) => (
+                <SurfaceLinkCard
+                  key={theme.key}
+                  href={`/themes/${theme.key}`}
+                  className="text-sm font-medium text-foreground hover:bg-accent/50"
+                >
+                  {theme.title}
+                  <span className="ml-1 text-primary" aria-hidden="true">→</span>
+                </SurfaceLinkCard>
+              ))}
+            </div>
+          </SurveyOutboundLinkArea>
+        </section>
+      )}
+
+      {relatedArticles.length > 0 && (
+        <section className="mb-12">
+          <SectionHeader
+            number={String(sectionNumber++)}
+            title="この調査を使う記事"
+          />
+          <SurveyOutboundLinkArea surface="survey_blog">
+            <div className="grid gap-3 sm:grid-cols-2">
+              {relatedArticles.map((article) => (
+                <SurfaceLinkCard
+                  key={article.slug}
+                  href={`/blog/${article.slug}`}
+                  className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
+                >
+                  {article.title}
+                  <span className="ml-1 text-primary" aria-hidden="true">→</span>
+                </SurfaceLinkCard>
+              ))}
+            </div>
+          </SurveyOutboundLinkArea>
         </section>
       )}
 
@@ -354,7 +418,9 @@ export default async function SurveyPage({ params }: PageProps) {
           number={String(sectionNumber++)}
           title={`全${rankingItems.length}件のランキング`}
         />
-        <CategoryRankingTable items={allItems} />
+        <SurveyOutboundLinkArea surface="survey_ranking">
+          <CategoryRankingTable items={allItems} />
+        </SurveyOutboundLinkArea>
       </section>
 
       {editorial && (

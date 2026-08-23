@@ -74,6 +74,7 @@ export async function RankingSidebarContainer({
             rankingKey: item.rankingKey,
             areaType: "prefecture" as const,
             title: item.title,
+            readerLabel: item.readerLabel,
             subtitle: item.subtitle,
             demographicAttr: item.demographicAttr,
             normalizationBasis: item.normalizationBasis,

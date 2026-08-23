@@ -45,19 +45,20 @@ function collapseByTitle(items: CategoryTopicListItem[]): CollapsedRow[] {
 function TopicRow({ row }: { row: CollapsedRow }) {
   const [primary] = row.variants;
   const hasVariants = row.variants.length > 1;
+  const readerLabel = primary.readerLabel ?? row.title;
 
   return (
     <li className="border-b border-border last:border-b-0">
       <div className="flex flex-col gap-0.5 px-3 py-2">
         <div className="flex items-baseline justify-between gap-3">
           {hasVariants ? (
-            <span className="min-w-0 flex-1 truncate text-[13px]">{row.title}</span>
+            <span className="min-w-0 flex-1 truncate text-[13px]">{readerLabel}</span>
           ) : (
             <Link
               href={`/ranking/${primary.rankingKey}`}
               className="min-w-0 flex-1 truncate text-[13px] hover:text-primary hover:underline"
             >
-              {row.title}
+              {readerLabel}
             </Link>
           )}
           {primary.top1 ? (

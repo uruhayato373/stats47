@@ -104,3 +104,50 @@ describe("/japan の未登録スラッグは 410 (GEO-SCOPE-SEPARATION-01 WP5)",
     expect(response.status).not.toBe(410);
   });
 });
+
+describe("動的コンテンツの soft-404 防止", () => {
+  const originalNext = NextResponse.next;
+
+  beforeAll(() => {
+    NextResponse.next = () => new NextResponse();
+  });
+
+  afterAll(() => {
+    NextResponse.next = originalNext;
+  });
+
+  function request(pathname: string): NextRequest {
+    const nextRequest = new NextRequest(`https://stats47.jp${pathname}`);
+    Object.defineProperty(nextRequest, "nextUrl", {
+      value: new URL(nextRequest.url),
+    });
+    return nextRequest;
+  }
+
+  test("未登録 ranking key は page の notFound に委譲せず 410", () => {
+    expect(middleware(request("/ranking/food-consumption-expenditure")).status).toBe(410);
+  });
+
+  test("既知 ranking key は通過", () => {
+    expect(middleware(request("/ranking/frozen-food-consumption-expenditure")).status).not.toBe(410);
+  });
+
+  test("実在する政令指定都市の区は親県 URL で通過", () => {
+    expect(middleware(request("/areas/04000/cities/04103")).status).not.toBe(410);
+  });
+
+  test("市区町村と親県が不一致なら 410", () => {
+    expect(middleware(request("/areas/05000/cities/04103")).status).toBe(410);
+  });
+
+  test("存在しない市区町村とカテゴリは 410", () => {
+    expect(middleware(request("/areas/04000/cities/04999")).status).toBe(410);
+    expect(middleware(request("/areas/04000/cities/04100/not-a-category")).status).toBe(410);
+  });
+
+  test("公開記事カタログに無い blog slug は 410、既知記事と tag ハブは通過", () => {
+    expect(middleware(request("/blog/BarChartRace")).status).toBe(410);
+    expect(middleware(request("/blog/yogurt-spending-prefecture-gap")).status).not.toBe(410);
+    expect(middleware(request("/blog/tags")).status).not.toBe(410);
+  });
+});

@@ -27,7 +27,7 @@ stats47 は都道府県統計データの可視化サイト。以下の特性を
 - **ユーザー**: 統計好き一般層、学生、ライター、メディア関係者
 - **技術基盤**: Next.js + Cloudflare（運用コスト極小）
 - **運営**: 個人開発
-- **成長チャネル**: SEO、SNS（X/Instagram/YouTube/TikTok）、note.com
+- **成長チャネル**: SEO、SNS（X/Instagram、YouTube通常動画pilot）、note.com。TikTokは撤退
 
 ## North Star Metric の要件
 

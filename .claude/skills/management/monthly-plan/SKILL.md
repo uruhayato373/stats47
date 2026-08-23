@@ -60,7 +60,9 @@ primary_agent: strategy-advisor
    cat .claude/state/metrics/gsc/LATEST.md 2>/dev/null | head -20
    cat .claude/state/metrics/ga4/LATEST.md 2>/dev/null | head -20
    ls -t .claude/skills/management/nsm-experiment/reference/weekly-snapshots/*.json | head -1
+   node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input
    ```
+   → GSCの数値だけでなく、計測週・review・候補判断・effect verdictの接続状態を月次入力にする。
 
 6. **現在の月次計画**（月替わり時は上書き前に達成状況を読む）
    ```bash
@@ -103,6 +105,14 @@ primary_agent: strategy-advisor
 
 Write tool で `.claude/todo/monthly.md` を上書きする。frontmatter 必須。作成後にパスを報告する。
 
+保存後に月次接続ゲートを実行する。
+
+```bash
+node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monthly --write --strict
+```
+
+FAILが残る場合は月次計画を「完了」と報告せず、欠落週review・候補判断・effect反映を週配分へ入れて再実行する。
+
 ## 出力フォーマット（ファイル本文）
 
 ```markdown
@@ -141,6 +151,15 @@ tags: []
 | 公開記事数 | N | +N | |
 | 改善ログ effect/pending | N | | due 集中時期 |
 
+## GSC運用サイクル
+
+| 項目 | 最新 | 月内評価 | 次アクション |
+|---|---|---|---|
+| 計測→週次review | YYYY-Www / PASS-WARN-FAIL | 直近4週 N/4 | 欠落週があれば `/weekly-review` |
+| search-growth判断 | approve/dismiss N件 | 週次最低1件 | 最大3件を審査 |
+| effect判定 | full/partial/none/adverse/pending | target欠落 N件 | `improvement-triage` またはtarget負債処置 |
+| index coverage | URL Inspection取得日 / remediation週 | fresh/stale | stale sourceを回復 |
+
 ## 今月の重点テーマ（1-2 個）
 
 ### 重点1: <テーマ名>
@@ -178,6 +197,7 @@ tags: []
 ## 運用ルール
 
 - **毎月初（第 1 週の月曜など）に 1 回実行**する想定。`/monthly-plan` だけで完結。
+- **GSC運用サイクルは重点テーマ数に数えない健康管理の床**。GSCを重点に選ばない月も固定節を省略しない。
 - 月内の進捗は **週次計画 `/weekly-plan` が分割消化**する。週次は `.claude/todo/monthly.md` の `focus_themes` を読む。
 - **タスクの実体（status / due）は各バックログが真実源。** 月次計画は選定理由と配分だけを持ち、進捗は週次計画とバックログで扱う。
 - 月末の振り返りは独立スキルを作らず、**翌月の `/monthly-plan` の Phase 1-2 + 「前月の振り返り」セクション**で吸収する（軽量維持のため。重い振り返りが必要なら `/weekly-review` の月末回で代替）。

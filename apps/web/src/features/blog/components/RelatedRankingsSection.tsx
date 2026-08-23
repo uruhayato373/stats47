@@ -31,7 +31,7 @@ export async function RelatedRankingsSection({
         seen.add(item.rankingKey);
         rankings.push({
           rankingKey: item.rankingKey,
-          title: getRankingTitle(item),
+          title: item.readerLabel ?? getRankingTitle(item),
         });
       }
     }

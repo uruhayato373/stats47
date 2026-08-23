@@ -8,7 +8,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { fetchPrefectures, REGIONS } from "@stats47/area";
+import { fetchPrefectures } from "@stats47/area";
 import { getCategoryDescription } from "@stats47/data-configs/categories";
 import { RANKING_PROMINENCE_CATEGORIES } from "@stats47/data-configs/ranking-prominence";
 import {
@@ -18,26 +18,22 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
-import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
-import {
-  PageShell,
-  PageHeader,
-  HeroBanner,
-  Breadcrumbs,
-} from "@/components/layout";
-import { CATEGORY_HEROES } from "@/components/layout/page-heroes";
-import { RightRailWidgets } from "@/components/rail";
+import { Breadcrumbs, PageHeader, PageShell } from "@/components/layout";
 import { SectionHeader } from "@/components/section";
+import { HorizontalCardCarousel } from "@/components/surface";
 
 import {
-  InContentAdSlot,
   FooterAdSlot,
+  InContentAdSlot,
   NativeAffiliateRow,
+  RailAdSlot,
+  SidebarPromoBanner,
 } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
-import { listLatestArticles } from "@/features/blog/server";
+import { PrefectureNavigator } from "@/features/area-profile";
+import { listArticlesByTagKey } from "@/features/blog/server";
 import { findCategoryByKey } from "@/features/category/server";
-import { PortalCategoryGrid } from "@/features/home-portal";
+import { PortalBlogCard, PortalCategoryGrid } from "@/features/home-portal";
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
@@ -52,9 +48,8 @@ import {
   readRankingItemsByCategory,
 } from "@/features/ranking/server";
 
-import { HUB_INCONTENT } from "@/lib/google-adsense";
+import { ADSENSE_DISPLAY_ENABLED, HUB_INCONTENT, RAIL_RECT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
-import { BLOG_THUMBNAIL_ASPECT_CLASS } from "@/lib/metadata/ogp-image";
 
 import type { Metadata } from "next";
 
@@ -74,6 +69,30 @@ const CATEGORY_FALLBACK_TAGS: Record<string, string[]> = {
   landweather: ["land-use", "environment"],
 };
 
+/**
+ * Category と blog Tag は別分類なので暗黙に同一視せず、関連記事の代表タグを明示する。
+ * 各タグは blog snapshot の tagMeta に存在し、カテゴリページでは新着順に最大8件を表示する。
+ */
+const CATEGORY_BLOG_TAG_KEYS: Readonly<Record<string, string>> = {
+  landweather: "気候",
+  population: "人口",
+  laborwage: "労働",
+  agriculture: "農業",
+  miningindustry: "製造業",
+  commercial: "産業構造",
+  economy: "経済",
+  construction: "住宅",
+  energy: "エネルギー",
+  tourism: "観光",
+  educationsports: "教育",
+  administrativefinancial: "地方財政",
+  safetyenvironment: "環境",
+  socialsecurity: "社会保障",
+  international: "多文化共生",
+  infrastructure: "インフラ",
+  ict: "IT",
+};
+
 interface PageProps {
   params: Promise<{ categoryKey: string }>;
 }
@@ -81,8 +100,7 @@ interface PageProps {
 /** latestYear JSON から yearCode を抽出 */
 function parseLatestYear(latestYear: unknown): string {
   try {
-    const parsed =
-      typeof latestYear === "string" ? JSON.parse(latestYear) : latestYear;
+    const parsed = typeof latestYear === "string" ? JSON.parse(latestYear) : latestYear;
     if (parsed?.yearCode) return parsed.yearCode;
   } catch {
     /* fallback */
@@ -90,9 +108,7 @@ function parseLatestYear(latestYear: unknown): string {
   return "2024";
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { categoryKey } = await params;
 
   try {
@@ -109,8 +125,9 @@ export async function generateMetadata({
     const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
     const rankingCount = rankingItems.length;
     const representativeKeySet = new Set(
-      RANKING_PROMINENCE_CATEGORIES.find((c) => c.categoryKey === categoryKey)
-        ?.representatives.map((r) => r.rankingKey) ?? [],
+      RANKING_PROMINENCE_CATEGORIES.find((c) => c.categoryKey === categoryKey)?.representatives.map(
+        (r) => r.rankingKey
+      ) ?? []
     );
     const sampleTitles = rankingItems
       .filter((i) => representativeKeySet.has(i.rankingKey))
@@ -152,11 +169,12 @@ export default async function CategoryPage({ params }: PageProps) {
   }
 
   const fallbackTags = CATEGORY_FALLBACK_TAGS[categoryKey] ?? [];
+  const blogTagKey = CATEGORY_BLOG_TAG_KEYS[categoryKey];
 
-  const [rankingResult, latestArticles, sourceSurveys, categoryTopics, nativeBanners] =
+  const [rankingResult, categoryArticles, sourceSurveys, categoryTopics, nativeBanners] =
     await Promise.all([
       readRankingItemsByCategory(categoryKey),
-      listLatestArticles(4).catch(() => []),
+      blogTagKey ? listArticlesByTagKey(blogTagKey, 8).catch(() => []) : Promise.resolve([]),
       // このカテゴリの active item の出典調査 (焼き込みサマリ)。全調査リストを出さない
       // (旧実装は readSurveysFromR2 = 全 74 調査を無関係に表示していた。2026-07-14 是正)
       readCategorySourceSurveysFromR2(categoryKey)
@@ -198,6 +216,7 @@ export default async function CategoryPage({ params }: PageProps) {
   const topicItems: CategoryTopicListItem[] = rankingItems.map((item) => ({
     rankingKey: item.rankingKey,
     title: item.title,
+    readerLabel: item.readerLabel,
     subtitle: item.subtitle && !isCaveatNote(item.subtitle) ? item.subtitle : null,
     unit: item.unit,
     topicKey: item.topicKey ?? null,
@@ -209,8 +228,9 @@ export default async function CategoryPage({ params }: PageProps) {
   // しかもその 8 件は「ホームの注目」と完全に同じだったため、カテゴリの注目が
   // ホームの注目をそのまま映していた (13 カテゴリは別規則の fallback に落ちていた)。
   const representativeKeys =
-    RANKING_PROMINENCE_CATEGORIES.find((c) => c.categoryKey === categoryKey)
-      ?.representatives.map((r) => r.rankingKey) ?? [];
+    RANKING_PROMINENCE_CATEGORIES.find((c) => c.categoryKey === categoryKey)?.representatives.map(
+      (r) => r.rankingKey
+    ) ?? [];
   const itemByKey = new Map(rankingItems.map((item) => [item.rankingKey, item]));
   const featuredRaw = representativeKeys.flatMap((key) => {
     const item = itemByKey.get(key);
@@ -221,11 +241,7 @@ export default async function CategoryPage({ params }: PageProps) {
   // 旧実装の「1位 batch + 全件」の二重 read は行わない。
   const allValuesResults = await Promise.all(
     featuredRaw.map((item) =>
-      readRankingValuesFromR2(
-        item.rankingKey,
-        "prefecture",
-        parseLatestYear(item.latestYear)
-      )
+      readRankingValuesFromR2(item.rankingKey, "prefecture", parseLatestYear(item.latestYear))
     )
   );
 
@@ -245,200 +261,154 @@ export default async function CategoryPage({ params }: PageProps) {
     });
     if (!model) return [];
 
-    return [{
-      rankingKey: item.rankingKey,
-      title,
-      latestYear,
-      unit: item.unit,
-      model,
-    }];
+    return [
+      {
+        rankingKey: item.rankingKey,
+        title,
+        latestYear,
+        unit: item.unit,
+        model,
+      },
+    ];
   });
 
-  const r2Url =
-    process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
-
-  // 都道府県プロフィール (/areas/[code]) への内部リンク用 (静的・同期読み取り。SSG-safe)
+  // 共通県選択ナビ用（静的・同期読み取り。SSG-safe）
   const prefectures = fetchPrefectures();
-  const prefMap = new Map(prefectures.map((p) => [p.prefCode, p]));
 
   if (rankingItems.length === 0) {
     notFound();
   }
 
-  const categoryDescription = getCategoryDescription(categoryKey);
-
-  // hero 画像を持つカテゴリ (CATEGORY_HEROES) は画像付きの HeroBanner に差し替える。
-  const categoryHero = CATEGORY_HEROES[categoryKey];
-
-  // 右レールの本文関連ウィジェット（新着記事 + 調査ナビ）。広告・promo は RightRailWidgets が供給する。
-  const railTopWidgets = (
-    <>
-      {/* 新着記事 */}
-      {latestArticles.length > 0 && (
-        <div>
-          <h3 className="text-sm font-medium text-muted-foreground mb-2">
-            新着記事
-          </h3>
-          <div className="flex flex-col gap-2">
-            {latestArticles.map((article) => (
-              <Link
-                key={article.slug}
-                href={`/blog/${article.slug}`}
-                className="group block rounded-sm border border-border overflow-hidden hover:border-primary/50 transition-colors"
-              >
-                <div
-                  className={`relative ${BLOG_THUMBNAIL_ASPECT_CLASS} w-full bg-muted overflow-hidden`}
-                >
-                  <ThemeAwareImage
-                    lightSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-light.webp`}
-                    darkSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-dark.webp`}
-                    alt={article.title}
-                    fill
-                    sizes="256px"
-                    className="object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* この統計の出典調査 (このカテゴリの item の出典のみ。空ならカード非表示) */}
-      <SurveyCard
-        surveys={sourceSurveys.map((s) => ({ id: s.id, name: s.name }))}
-      />
-    </>
-  );
-
   return (
-    <PageShell rightRail={<RightRailWidgets topWidgets={railTopWidgets} />}>
-      <Breadcrumbs
-        items={[
-          { label: "ホーム", href: "/" },
-          { label: category.categoryName },
-        ]}
-      />
-      {categoryHero ? (
-        <HeroBanner
-          eyebrow="カテゴリ"
-          title={category.categoryName}
-          tagline={
-            categoryHero.tagline ??
-            categoryDescription ??
-            `${category.categoryName}分野の都道府県別ランキング ${rankingItems.length} 件を、地図・グラフ・テーブルで比較できます。`
-          }
-          imageSrc={categoryHero.image.src}
-          imageAlt={categoryHero.imageAlt}
-        />
-      ) : (
-        <PageHeader
-          eyebrow="カテゴリ"
-          title={category.categoryName}
-          description={
-            categoryDescription ??
-            `${category.categoryName}分野の都道府県別ランキング ${rankingItems.length} 件を、地図・グラフ・テーブルで比較できます。`
-          }
-        />
-      )}
-
-      {/* メインコンテンツ */}
-      {/* 左のカテゴリナビは home と同じ「本文内 aside + 自前 grid」方式。
-          PageShell は左右レールを併用できない (showLeft = hasLeft && !hasRight で
-          契約テストが「右が勝つ」を固定) ため、右レール (広告・出典調査) を保ったまま
-          3 カラムにするにはこの形しかない。 */}
-      <div className="lg:grid lg:grid-cols-[228px_minmax(0,1fr)] lg:items-start lg:gap-6">
-        <aside className="mb-8 lg:sticky lg:top-20 lg:mb-0">
-          <SectionHeader title="カテゴリ" />
+    <PageShell className="py-5 lg:py-6">
+      {/* home と同じ desktop 2ペイン。mobile は主要コンテンツをカテゴリ一覧より先に読む。 */}
+      <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[264px_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[280px_minmax(0,1fr)]">
+        <aside className="order-2 lg:order-1 lg:pr-1">
+          <SectionHeader title="カテゴリから探す" />
           <PortalCategoryGrid
             variant="sidebar"
             activeCategoryKey={categoryKey}
             surface="category_sidebar"
           />
-        </aside>
-        <div className="min-w-0">
-        {/* 注目ランキング */}
-        {featuredItems.length > 0 && (
-          <section className="mb-12">
-            <SectionHeader title="注目のランキング" />
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {featuredItems.map((item) => (
-                <FeaturedRankingCard
-                  key={item.rankingKey}
-                  rankingKey={item.rankingKey}
-                  year={item.latestYear}
-                  unit={item.unit}
-                  model={item.model}
-                />
-              ))}
+
+          {sourceSurveys.length > 0 && (
+            <div className="mt-6">
+              <SurveyCard
+                surveys={sourceSurveys.map((survey) => ({
+                  id: survey.id,
+                  name: survey.name,
+                }))}
+                title="このカテゴリの出典調査"
+                surface="category_survey"
+              />
             </div>
-          </section>
-        )}
-
-        {/* 全件テーブル */}
-        <section className="mb-12">
-          <SectionHeader title={`全${rankingItems.length}件のランキング`} />
-          {categoryTopics.length > 0 ? (
-            <CategoryTopicGroups topics={categoryTopics} items={topicItems} />
-          ) : (
-            <CategoryRankingTable items={allItems} />
           )}
-        </section>
 
-        {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
-        <InContentAdSlot slot={HUB_INCONTENT} />
-
-        {/* ネイティブアフィリエイト。可視要素はバナー画像のみ。 */}
-        {nativeBanners.length > 0 && (
-          <section className="mb-12">
-            <NativeAffiliateRow
-              banners={nativeBanners}
-              position="category-native"
-              trackingCategory={`category-${categoryKey}`}
-            />
-          </section>
-        )}
-
-        {/* 47都道府県から探す (category→area 内部リンク。回遊性 / クロール深度の改善) */}
-        <section className="mb-12" aria-labelledby="category-area-links">
-          <SectionHeader
-            title={<span id="category-area-links">47都道府県から探す</span>}
-            description={`${category.categoryName}を含む各都道府県の統計プロファイルを見る`}
-          />
-          <div className="space-y-4">
-            {REGIONS.map((region) => {
-              const regionPrefs = region.prefectures
-                .map((code) => prefMap.get(code))
-                .filter((p): p is NonNullable<typeof p> => p != null);
-              const headingId = `category-region-${region.regionCode}`;
-              return (
-                <section key={region.regionCode} aria-labelledby={headingId}>
-                  <h3
-                    id={headingId}
-                    className="mb-1 text-sm font-semibold text-muted-foreground"
-                  >
-                    {region.regionName}
-                  </h3>
-                  <div className="flex flex-wrap gap-x-3 gap-y-1">
-                    {regionPrefs.map((pref) => (
-                      <Link
-                        key={pref.prefCode}
-                        href={`/areas/${pref.prefCode}`}
-                        className="text-sm text-foreground transition-colors hover:text-primary"
-                      >
-                        {pref.prefName}
-                      </Link>
-                    ))}
-                  </div>
-                </section>
-              );
-            })}
+          {ADSENSE_DISPLAY_ENABLED && (
+            <div className="mt-6">
+              <RailAdSlot slot={RAIL_RECT} />
+            </div>
+          )}
+          <div className="mt-4">
+            <SidebarPromoBanner index={0} />
           </div>
-        </section>
+        </aside>
 
-        {/* コンテンツ末尾の全幅フッター広告 */}
-        <FooterAdSlot />
+        <div className="order-1 min-w-0 lg:order-2">
+          <Breadcrumbs
+            items={[{ label: "ホーム", href: "/" }, { label: category.categoryName }]}
+          />
+          <PageHeader
+            title={category.categoryName}
+            description={`${category.categoryName}に関する都道府県ランキングを、地図やグラフで比較できます。`}
+          />
+
+          <div className="space-y-8">
+            {/* 注目ランキング */}
+            {featuredItems.length > 0 && (
+              <section>
+                <SectionHeader title="注目のランキング" />
+                <HorizontalCardCarousel ariaLabel={`${category.categoryName}の注目ランキング`}>
+                  {featuredItems.map((item) => (
+                    <FeaturedRankingCard
+                      key={item.rankingKey}
+                      rankingKey={item.rankingKey}
+                      year={item.latestYear}
+                      unit={item.unit}
+                      model={item.model}
+                    />
+                  ))}
+                </HorizontalCardCarousel>
+              </section>
+            )}
+
+            {/* Category と Tag の明示対応で絞った関連記事。全体の最新記事は混ぜない。 */}
+            {categoryArticles.length > 0 && blogTagKey && (
+              <section>
+                <SectionHeader
+                  title={`${category.categoryName}の新着ブログ`}
+                  action={
+                    <Link
+                      href={`/tag/${blogTagKey}`}
+                      className="font-semibold text-primary hover:underline"
+                    >
+                      すべての記事 →
+                    </Link>
+                  }
+                />
+                <HorizontalCardCarousel ariaLabel={`${category.categoryName}の新着ブログ`}>
+                  {categoryArticles.map((article) => (
+                    <PortalBlogCard
+                      key={article.slug}
+                      slug={article.slug}
+                      title={article.title}
+                      surface="category_blog"
+                    />
+                  ))}
+                </HorizontalCardCarousel>
+              </section>
+            )}
+
+            {/* 全件テーブル */}
+            <section>
+              <SectionHeader title={`全${rankingItems.length}件のランキング`} />
+              {categoryTopics.length > 0 ? (
+                <CategoryTopicGroups topics={categoryTopics} items={topicItems} />
+              ) : (
+                <CategoryRankingTable items={allItems} />
+              )}
+            </section>
+
+            {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
+            <InContentAdSlot slot={HUB_INCONTENT} />
+
+            {/* ネイティブアフィリエイト。可視要素はバナー画像のみ。 */}
+            {nativeBanners.length > 0 && (
+              <section>
+                <NativeAffiliateRow
+                  banners={nativeBanners}
+                  position="category-native"
+                  trackingCategory={`category-${categoryKey}`}
+                />
+              </section>
+            )}
+
+            {/* 47都道府県から探す (category→area 内部リンク。回遊性 / クロール深度の改善) */}
+            <section aria-labelledby="category-area-links">
+              <SectionHeader
+                title={<span id="category-area-links">47都道府県から探す</span>}
+                description={`${category.categoryName}を含む各都道府県の統計プロファイルを見る`}
+              />
+              <PrefectureNavigator
+                prefectures={prefectures}
+                variant="embedded"
+                surface="category"
+              />
+            </section>
+
+            {/* コンテンツ末尾の全幅フッター広告 */}
+            <FooterAdSlot />
+          </div>
         </div>
       </div>
     </PageShell>

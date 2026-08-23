@@ -26,19 +26,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { areaCode, cityCode, categoryKey } = await params;
   const context = getCityRouteContext(areaCode, cityCode);
   if (!context) {
-    return { title: "市区町村が見つかりません" };
+    return { title: "市区町村が見つかりません", robots: "noindex, follow" };
   }
 
   const categoriesResult = await listCategories();
   const categories = isOk(categoriesResult) ? categoriesResult.data : [];
   const category = categories.find((c) => c.categoryKey === categoryKey);
   if (!category) {
-    return { title: "カテゴリが見つかりません" };
+    return { title: "カテゴリが見つかりません", robots: "noindex, follow" };
   }
 
   const title = `${context.city.areaName}の${category.categoryName}データ`;
   const description = `${context.city.areaName}（${context.pref.areaName}）の${category.categoryName}に関する統計データをチャートで可視化。`;
-  const robots = UrlPolicy.cityCategory.isIndexableCategory(categoryKey)
+  const robots =
+    UrlPolicy.city.isIndexable(areaCode, cityCode) &&
+    UrlPolicy.cityCategory.isIndexableCategory(categoryKey)
     ? "index, follow"
     : "noindex, follow";
 

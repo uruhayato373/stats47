@@ -24,6 +24,11 @@ export interface BlogImageData {
 export type BlogBackgroundInput =
   | { source: 'brand' }
   | {
+      source: 'shared';
+      sha256: string;
+      visualType: OgpVisualType;
+    }
+  | {
       source: 'ai';
       promptHash: string;
       sha256: string;
@@ -31,6 +36,13 @@ export type BlogBackgroundInput =
 
 export type BlogBackgroundMetadata =
   | { source: 'brand' }
+  | {
+      source: 'shared';
+      sha256: string;
+      model: string;
+      promptVersion: string;
+      visualType: OgpVisualType;
+    }
   | {
       source: 'ai';
       promptHash: string;
@@ -123,15 +135,15 @@ export function createBlogImagePlan(options: {
       key: keys.light,
       variant: 'light',
       contentType: 'image/webp' as const,
-      width: 1200,
-      height: 630,
+      width: 640,
+      height: 336,
     },
     {
       key: keys.dark,
       variant: 'dark',
       contentType: 'image/webp' as const,
-      width: 1200,
-      height: 630,
+      width: 640,
+      height: 336,
     },
     {
       key: keys.ogp,

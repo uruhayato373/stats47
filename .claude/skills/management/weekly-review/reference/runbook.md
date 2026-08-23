@@ -147,12 +147,12 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    （週2件・全active WIP5以下をCLIが機械強制。却下は`search-growth:dismiss --reason "..."`）。
    承認後も翌週計画への採用は最大1〜2件。効果は`search-growth:measure`が14/28/56日の判定日を返す。
 
-   **Coverage Drilldown データ（Phase 8、2026-04-26）**:
+   **URL Inspection 日次データ**:
    GitHub Actions `gsc-url-inspection-daily.yml` が毎朝 JST 06:00 に自動取得・集計している（API 視点・自サイト把握 URL のみ）。
    レビュー本文「パフォーマンス → GSC」セクションに以下を埋め込む:
-   - `.claude/state/metrics/gsc/coverage-drilldown/LATEST.md` の表（カテゴリ × 件数 × 前週比、url-inspection 由来）
-   - 詳細週次データ: `.claude/state/metrics/gsc/coverage-drilldown/YYYY-Www/{category}-urls.csv`（url-inspection 由来）
-   - 関連 issue: #43（[T0-DECAY-01] Coverage Drilldown 週次記録）
+   - `.claude/state/metrics/gsc/url-inspection/LATEST.md` の verdict / coverageState 表
+   - 時系列: `.claude/state/metrics/gsc/url-inspection/history.csv`、詳細: 最新日付CSV
+   - `.claude/state/metrics/gsc/coverage-drilldown/LATEST.md` は旧集約なので最新状態の根拠に使わない。GSC UI exportは下記remediation queueで読む
 
    **GSC カバレッジ是正ループ**:
    ユーザーが GSC UI から「ページ」export を取得していれば（API では取れない総件数・未把握 URL を含む）、是正ループを回す。
@@ -471,18 +471,24 @@ snapshot CSV: `.claude/skills/analytics/gsc-improvement/reference/snapshots/YYYY
 `snapshots/YYYY-Www/index-coverage.csv` が存在する場合は以下を 1 行で:
 - 404 / 5xx / ソフト404 / クロール済み未登録 / 検出未登録 / 登録済みの前週差
 
-**GSC Alert**: `/gsc-improvement observe` のアラート判定結果を 1 行で記載（閾値非超過なら本節は省略）:
-- 登録済み ≤ -10% / 404 ≥ +5% / 5xx ≥ +20% のいずれか発火時、対象指標と対応方針を明記
+**GSC運用サイクル**: `.claude/state/metrics/gsc/operations-cycle-LATEST.md` と対象週の
+`.claude/state/effect-verdict/verdicts-YYYY-Www.json`を参照し、FAIL/WARNと次アクションを記載する。
+review作成前の入力検査は次で実行する:
+
+```bash
+node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input --week YYYY-Www
+```
 
 **施策効果サマリ** (`.claude/todo/improvements.md` を Read し `status: pending` 以外の行を抽出):
 
 | Section | Tier | 経過日数 | ターゲット | status |
 |---|---|---|---|---|
 
-observe モードがこの週に判定変化を起こした施策のみを列挙。以下のルールで整形:
+effect-verdictがこの週に判定変化を起こした施策のみを列挙。以下のルールで整形:
 - status が **先週から変化** した施策は行末に `(変化)` マークを付与（pending→partial 等）
 - `effect/adverse` が含まれる場合は **このセクション冒頭で警告**
 - 着手待ち（`effect/pending` かつ経過日数 < 14）の Tier 1 施策は下部に「待機中」として別枠で列挙
+- gsc/coverage/inspectionがfreshで候補がある場合、最大3件を審査し、approve/dismissを最低1件記録する。採用0件ならdismiss理由を残す
 
 **ブログ品質是正キューの進捗** (`.claude/state/blog/remediation-queue.json` の `summary` を Read):
 

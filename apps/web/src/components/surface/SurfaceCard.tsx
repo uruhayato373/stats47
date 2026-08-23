@@ -18,6 +18,17 @@ const interactiveSurfaceClass =
  */
 export const PORTAL_CARD_ASPECT_CLASS = "aspect-[1.47/1]";
 
+/** FeaturedRankingCardを基準にしたポータルカード共通の内側余白。 */
+export const PORTAL_CARD_PADDING_CLASS = "p-3";
+
+/** FeaturedRankingCardを基準にしたタイトル階層。 */
+export const PORTAL_CARD_TITLE_CLASS =
+  "relative z-10 line-clamp-2 min-h-[2.4rem] text-sm font-semibold leading-snug transition-colors group-hover:text-primary";
+
+/** タイトル下に置く短い説明。カード本文なので12px未満にしない。 */
+export const PORTAL_CARD_DESCRIPTION_CLASS =
+  "relative z-10 line-clamp-2 text-[13px] leading-[1.5] text-muted-foreground";
+
 interface SurfaceClassNameOptions {
   interactive?: boolean;
   className?: string;

@@ -28,7 +28,46 @@ const socialLinkClass =
  * 記事一覧と記事詳細で共用し、ホームの省スペース版 OperatorProfileCard とは
  * 情報密度の責務を分ける。プロフィール本文と URL は operator-profile.ts が SSOT。
  */
-export function BlogAuthorProfileCard() {
+export function BlogAuthorProfileCard({
+  compact = false,
+}: {
+  compact?: boolean;
+}) {
+  if (compact) {
+    return (
+      <SurfaceCard className="p-4">
+        <p className="text-[11px] font-medium tracking-[0.18em] text-muted-foreground">
+          運営者
+        </p>
+
+        <div className="mt-3 flex items-center gap-3">
+          <Image
+            src={OPERATOR_PROFILE.avatarSrc}
+            alt={OPERATOR_PROFILE.avatarAlt}
+            width={64}
+            height={64}
+            className="h-16 w-16 shrink-0 rounded-full border border-border object-cover"
+          />
+          <div className="min-w-0">
+            <p className="text-sm font-bold text-foreground">
+              {OPERATOR_PROFILE.name}
+            </p>
+            <p className="mt-1 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
+              {OPERATOR_PROFILE.bio}
+            </p>
+          </div>
+        </div>
+
+        <Link
+          href={OPERATOR_PROFILE.links.about}
+          className="mt-3 inline-flex min-h-9 items-center text-xs font-medium text-primary transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          運営者について →
+        </Link>
+      </SurfaceCard>
+    );
+  }
+
   return (
     <SurfaceCard className="overflow-hidden p-0">
       <div className="p-5">

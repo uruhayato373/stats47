@@ -20,10 +20,15 @@ export {
   readArticleTitlesBySlugsFromR2 as findArticleTitlesBySlugs,
   readLatestArticlesFromR2 as listLatestArticles,
   readArticleSummariesByTagKeyFromR2 as listArticleSummariesByTagKey,
+  readArticleSummariesBySurveyIdFromR2 as listArticleSummariesBySurveyId,
   readTagKeysForArticleFromR2 as getTagKeysForArticle,
   readTagsForArticlesFromR2 as getTagsForArticles,
   readBlogSnapshotMetaFromR2,
 } from "./repositories/blog-snapshot-reader";
+export {
+  resolveArticleSurveyTaxonomy,
+  resolveArticleSurveyIds,
+} from "./services/article-survey-taxonomy";
 
 // サービス
 export { articleService } from "./services/article-service";

@@ -28,7 +28,7 @@ schema・判定規律の正典: `.claude/state/surveys/README.md`。
 ## コマンド (PR-4 で確定)
 
 ```bash
-# ★継続監査の入口 (月次推奨・四半期必須): build → aggregate → validate → 実験期日 → drift
+# ★継続監査の入口 (週次自動・四半期レビュー): build → aggregate → validate → 実験期日 → drift
 bash .claude/scripts/surveys/run-survey-portfolio-audit.sh
 
 # 個別実行
@@ -41,7 +41,7 @@ node .claude/scripts/surveys/evaluate-survey-experiments.mjs --check          # 
 node .claude/scripts/surveys/evaluate-survey-experiments.mjs --verdict <id> <verdict> --evidence <ref>
 ```
 
-- cadence: **月次で run-survey-portfolio-audit.sh、四半期で監査レポート**
+- cadence: **週次 workflow (`survey-taxonomy-audit-weekly.yml`) で再導出、四半期で監査レポート**
   (`reference/audits/YYYY-MM-DD-survey-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の
   Survey Portfolio State Guard) は schema/drift/orphan/linkage の検証のみで、本文生成・R2 push・deploy をしない。
 
@@ -57,10 +57,11 @@ node .claude/scripts/surveys/evaluate-survey-experiments.mjs --verdict <id> <ver
    ```
 2. **実測集計**: `npx tsx .claude/scripts/surveys/aggregate-survey-metrics.ts` — GSC / GA4 pages.csv
    の `/survey/<id>` 行を 56d (非重複 2 窓) で合算。**行が無い = 表示 0 の実測として measured-low の
-   カウント 0、標本不足 (imp<100) は measured-low (比率値保存禁止)、未計装 (survey→ranking 内部遷移)
-   は not-instrumented として保存し推測値を入れない**。
+   カウント 0、標本不足 (imp<100) は measured-low (比率値保存禁止)**。内部遷移は GA4
+   `survey-navigation.csv` の `survey_ranking` を同じ56日で集計し、20 clicks 未満は measured-low。
+   2窓のどちらかが欠ければゼロ推定せず insufficient-data とする。
 3. **検証**: `npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts` が green であること
-   (drift・根拠なし判定・重複実験は validator が弾く)。
+   (drift・根拠なし判定・重複実験・state 35日超 stale は validator が弾く)。
 4. **差分レポート**: lifecycle/editorial の変更・r2-drift・orphan・insufficient-data の一覧を
    agent の OUTPUT FORMAT で報告。四半期監査時は
    `reference/audits/YYYY-MM-DD-survey-portfolio-audit.md` に保存。
@@ -97,6 +98,7 @@ npx tsx .claude/scripts/surveys/build-survey-portfolio.ts --add-experiment /tmp/
 ```bash
 npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts   # schema + 判定規律 + drift
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts   # 紐付け実測 (数値の根拠)
+npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check # 横断taxonomy freshness/ratchet
 npx vitest run apps/web/src/features/survey/survey-editorial.test.ts --root apps/web  # editorial 変更時
 ```
 

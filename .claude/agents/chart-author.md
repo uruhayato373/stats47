@@ -14,6 +14,7 @@ model: sonnet
 - note 記事用チャート生成 (`/generate-note-charts`)
 - 家計 (kakei) note 用専用チャート (`/generate-kakei-charts`)
 - 記事用データ取得 (`/draft-from-trend` ã®ãã¼ã¿æ¥å° fetch-ranking-data-r2.mjs)
+- YouTube 通常動画 pilot の図表・地図・短いアニメーション素材。NLE編集や動画master生成は担当しない
 
 ## 担当スキル
 
@@ -42,6 +43,7 @@ model: sonnet
 - R2 push → `r2-publisher` に委譲
 - 画像プロンプト生成 → `image-prompt-curator` に委譲
 - Web コンポーネントチャート（React + D3.js）→ `chart-component-builder` に委譲
+- YouTube master のNLE編集・公開 → 人間工程
 
 ## 必読 rules
 

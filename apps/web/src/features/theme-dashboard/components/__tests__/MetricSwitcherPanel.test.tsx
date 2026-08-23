@@ -161,11 +161,10 @@ describe("MetricSwitcherPanel — 47都道府県 (未選択) の既定表示", (
 
   it("チャート領域は選択案内になる (エラー文言ではない)", async () => {
     renderUnselected();
-    await waitFor(() =>
-      expect(
-        screen.getByText("都道府県を選択すると、その県の推移が表示されます"),
-      ).toBeInTheDocument(),
+    const prompt = await screen.findByText(
+      "都道府県を選択すると、その県の推移が表示されます",
     );
+    expect(prompt).toHaveStyle({ height: "80px" });
     expect(screen.queryByText("推移データがありません")).toBeNull();
     expect(screen.queryByTestId("line-chart")).toBeNull();
   });

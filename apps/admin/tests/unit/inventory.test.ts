@@ -92,7 +92,7 @@ describe("inventory", () => {
         localSnsFiles: [
           "ranking/key-a/x/stills/a.png",
           "ranking/key-a/instagram/reel.mp4",
-          // YouTube は撤退済でホワイトリスト外 (新規素材ディレクトリは走査しない)
+          // YouTube master は video/<slug>/ に置くため SNS platform の走査対象外
           "compare/key-b/youtube/reel.mp4",
           // platform 以外のディレクトリ (無視される)
           "ranking/key-a/misc/note.txt",

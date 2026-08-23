@@ -10,7 +10,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+import { METRICS_REGISTRY } from "@stats47/data-configs";
 import { THEME_CATALOGS } from "@stats47/data-configs/theme-catalog";
+import { getSurveyTaxonomyEntries, resolveThemeSurveyTaxonomy } from "@stats47/ranking";
 
 import { PageShell } from "@/components/layout";
 import { THEME_HEROES } from "@/components/layout/page-heroes";
@@ -21,6 +23,7 @@ import { InContentAdSlot, NativeAffiliateRow } from "@/features/ads";
 import { THEME_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
 import { resolveAffiliateBanners, resolveAffiliateBannersByVertical } from "@/features/ads/server";
 import { isLandscapeBanner } from "@/features/ads/services/banner-geometry";
+import { SurveyTaxonomyCard } from "@/features/survey";
 
 import { HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
 
@@ -28,6 +31,7 @@ import {
   HALF_WIDTH_SECTIONS,
   THEME_SECTION_REGISTRY,
 } from "../config/theme-section-registry";
+import { getAreaThemeHighlights } from "../lib/area-theme-highlights";
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
@@ -51,6 +55,8 @@ interface Props {
   data: ThemePageData;
   /** エリアページ経由時の都道府県コード（5桁）と名称 */
   areaContext?: { areaCode: string; areaName: string };
+  /** 通常テーマ画面で URL / Cookie / 初回既定値から解決した初期都道府県 */
+  initialPrefecture?: { areaCode: string; areaName: string } | null;
   /**
    * パンくず直下に差し込むページ固有のコントロール
    * （local-finance/cities の「都道府県 / 市区町村」切替など）。
@@ -68,11 +74,25 @@ interface Props {
  * `ThemePrefectureProvider` の内側に無いと動かないため、Provider → PageShell(leftRail) の
  * 入れ子をここで固定する。呼び出し側の page.tsx は PageShell を重ねない。
  */
-export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Props) {
+export async function ThemePageLayout({
+  theme,
+  data,
+  areaContext,
+  initialPrefecture,
+  toolbar,
+}: Props) {
   const pageCharts = await loadPageComponents("theme", theme.themeKey);
   const kpiDataByArea = await prefetchThemeKpiData(pageCharts);
   const breadcrumbData = generateThemeBreadcrumbStructuredData(theme);
   const pageData = generateThemePageStructuredData(theme);
+  const catalog = THEME_CATALOGS[theme.themeKey];
+  const catalogSurveyIds = catalog
+    ? resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY).surveys.map((survey) => survey.id)
+    : [];
+  const indicatorSurveyIds = Object.values(data.indicatorDataMap).flatMap(({ rankingItem }) =>
+    (rankingItem.originalSurveys ?? []).map((survey) => survey.id),
+  );
+  const themeSurveys = getSurveyTaxonomyEntries([...catalogSurveyIds, ...indicatorSurveyIds]);
 
   // D Phase 3: ネイティブアフィリエイト枠 (テーマの関連サービス)
   // relatedArticleTagKeys で解決 → 空なら theme→vertical 写像 (THEME_AFFILIATE_MAP) でフォールバック。
@@ -89,11 +109,15 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
     }
   }
   nativeBanners = nativeBanners.filter(isLandscapeBanner);
+  const providerPrefecture = areaContext ?? initialPrefecture;
+  const areaHighlights = areaContext
+    ? getAreaThemeHighlights(data, areaContext.areaCode)
+    : [];
 
   return (
     <ThemePrefectureProvider
-      initialAreaCode={areaContext?.areaCode ?? null}
-      initialAreaName={areaContext?.areaName ?? null}
+      initialAreaCode={providerPrefecture?.areaCode ?? null}
+      initialAreaName={providerPrefecture?.areaName ?? null}
     >
     <PageShell
       leftRail={
@@ -188,6 +212,31 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
         <ThemeAreaHeader themeTitle={theme.title} description={theme.description} />
       )}
 
+      {areaContext && areaHighlights.length > 0 && (
+        <section
+          aria-labelledby="area-theme-highlights"
+          className="mb-6 border-y border-border bg-muted/30 px-4 py-4"
+        >
+          <h2 id="area-theme-highlights" className="text-base font-semibold">
+            {areaContext.areaName}の主なデータ
+          </h2>
+          <p className="mt-1 text-xs text-muted-foreground">
+            このテーマに関連する最新公表値です。
+          </p>
+          <dl className="mt-3 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-3">
+            {areaHighlights.map((highlight) => (
+              <div key={highlight.key}>
+                <dt className="text-xs text-muted-foreground">{highlight.title}</dt>
+                <dd className="mt-0.5 font-mono text-base font-semibold tabular-nums">
+                  {highlight.value.toLocaleString("ja-JP")} {highlight.unit}
+                </dd>
+                <dd className="text-xs text-muted-foreground">{highlight.yearName}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+
       <ThemeDashboardClient
         themeConfig={theme}
         metricGroups={THEME_CATALOGS[theme.themeKey]?.metricGroups}
@@ -243,6 +292,14 @@ export async function ThemePageLayout({ theme, data, areaContext, toolbar }: Pro
 
       {/* このテーマの全指標 (context 指標・選定根拠を含む完全一覧) */}
       <ThemeIndicatorCatalogSection themeKey={theme.themeKey} />
+
+      <SurveyTaxonomyCard
+        surveys={themeSurveys}
+        title="このテーマの出典調査"
+        description="主要指標と各チャートのデータ系譜から自動集約しています。"
+        surface="theme_survey"
+        variant="section"
+      />
 
       {/*
         広告: ダッシュボード読了後・関連記事の前。生 AdSenseAd から slot 部品へ寄せ、

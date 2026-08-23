@@ -26,12 +26,15 @@ import { ScrollableRow } from './ScrollableRow';
 
 import type { MetricKpi } from './metric-kpi';
 
+const CHART_HEIGHT = 250;
+const PREFECTURE_PROMPT_HEIGHT = 80;
+
 const LineChartClient = dynamic(
   () =>
     import('@/components/stat-charts/components/charts/LineChart/LineChartClient').then(
       (mod) => mod.LineChartClient
     ),
-  { ssr: false, loading: () => <ChartLoading height={250} /> }
+  { ssr: false, loading: () => <ChartLoading height={CHART_HEIGHT} /> }
 );
 
 const NATIONAL_CODE = '00000';
@@ -563,11 +566,18 @@ export function MetricSwitcherPanel({
         </ScrollableRow>
       </div>
       {isLoadingSeries ? (
-        <ChartLoading height={250} />
+        <ChartLoading height={CHART_HEIGHT} />
       ) : chartState.kind === 'chart' ? (
         <LineChartClient chartData={chartState.data} />
       ) : (
-        <ChartEmptyState message={emptyMessage(chartState)} height={250} />
+        <ChartEmptyState
+          message={emptyMessage(chartState)}
+          height={
+            chartState.kind === 'select-prefecture'
+              ? PREFECTURE_PROMPT_HEIGHT
+              : CHART_HEIGHT
+          }
+        />
       )}
     </ChartPanel>
   );

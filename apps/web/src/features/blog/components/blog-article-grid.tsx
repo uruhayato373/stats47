@@ -5,7 +5,7 @@ import { SurfaceLinkCard } from '@/components/surface/SurfaceCard';
 
 import {
   BLOG_THUMBNAIL_ASPECT_CLASS,
-  ogpImageUrl,
+  blogThumbnailUrl,
 } from '@/lib/metadata/ogp-image';
 
 import type { Article } from '../types';
@@ -53,12 +53,8 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
                 className={`relative ${BLOG_THUMBNAIL_ASPECT_CLASS} w-full overflow-hidden border-b border-border bg-muted`}
               >
                 <ThemeAwareImage
-                  lightSrc={ogpImageUrl(
-                    `app/blog/${article.slug}/thumbnail-light.webp`
-                  )}
-                  darkSrc={ogpImageUrl(
-                    `app/blog/${article.slug}/thumbnail-dark.webp`
-                  )}
+                  lightSrc={blogThumbnailUrl(article.slug, 'light')}
+                  darkSrc={blogThumbnailUrl(article.slug, 'dark')}
                   alt=""
                   fill
                   loading={index < 3 ? 'eager' : 'lazy'}

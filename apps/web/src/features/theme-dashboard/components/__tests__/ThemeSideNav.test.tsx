@@ -21,7 +21,7 @@ function renderWithProvider(ui: React.ReactElement) {
 describe("ThemeSideNav — テーマ一覧", () => {
   it("リンクは buildThemeSwitcherOptions と同数・同 href (SSOT から導出・複製しない)", () => {
     renderWithProvider(<ThemeSideNav currentThemeKey="population-dynamics" />);
-    const expected = buildThemeSwitcherOptions();
+    const expected = buildThemeSwitcherOptions(undefined, null);
     const nav = screen.getByRole("navigation", { name: "テーマと地域" });
     const links = within(nav).getAllByRole("link");
 

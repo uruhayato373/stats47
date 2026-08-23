@@ -70,7 +70,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
       return NextResponse.redirect(new URL(`/areas/${key}`, baseUrl), { status: 301 });
     }
     if (pageType === "ranking" && key) {
-      if (UrlPolicy.ranking.isGone(key)) return gone();
+      if (UrlPolicy.ranking.isGone(key) || !UrlPolicy.ranking.isKnown(key)) return gone();
       return NextResponse.redirect(new URL(`/ranking/${key}`, baseUrl), { status: 301 });
     }
   }
@@ -140,15 +140,19 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
   if (pathname.startsWith("/ranking/prefecture/")) {
     const slug = pathname.slice("/ranking/prefecture/".length).split("/")[0];
     if (!slug) return gone();
-    if (UrlPolicy.ranking.isGone(slug)) return gone();
+    if (UrlPolicy.ranking.isGone(slug) || !UrlPolicy.ranking.isKnown(slug)) return gone();
     return NextResponse.redirect(new URL(`/ranking/${slug}`, baseUrl), { status: 301 });
   }
 
-  // /ranking/{key}: GONE は 410。未登録キーは page の notFound() に委譲
+  // /ranking/{key}: GONE / 未登録は middleware で 410。
+  // page の notFound() へ委譲すると OpenNext で HTTP 200 の soft-404 が固着しうる。
   if (pathname.startsWith("/ranking/")) {
     const rankingKey = pathname.slice("/ranking/".length).split("/")[0];
     if (rankingKey) {
-      if (UrlPolicy.ranking.isGone(rankingKey)) {
+      if (
+        UrlPolicy.ranking.isGone(rankingKey) ||
+        !UrlPolicy.ranking.isKnown(rankingKey)
+      ) {
         return gone();
       }
     }
@@ -185,6 +189,8 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
   if (pathname.startsWith("/blog/")) {
     const slug = pathname.slice("/blog/".length).split("/")[0];
     if (slug) {
+      // 実在する /blog/tags ハブは動的 [slug] の allowlist 対象外。
+      if (slug === "tags" && pathname === "/blog/tags") return null;
       const newSlug = BLOG_SLUG_REDIRECTS[slug];
       if (newSlug) {
         return NextResponse.redirect(
@@ -199,6 +205,9 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
       if (UrlPolicy.blog.isUnpublished(slug)) return gone();
       // 旧カテゴリ名が blog slug として解釈されるパターン
       if (OLD_CATEGORY_KEYS.has(slug)) return gone();
+      // 公開記事カタログに無い slug を page の notFound() へ渡すと、OpenNext で
+      // HTTP 200 +「記事が見つかりません」が固着しうるため前段で 410 にする。
+      if (!UrlPolicy.blog.isKnownPublished(slug)) return gone();
     }
   }
 
@@ -272,6 +281,26 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
     seg[2] !== seg[1]
   ) {
     return gone();
+  }
+
+  // /areas/{prefCode}/cities は一覧 route を持たない。
+  if (seg.length === 3 && seg[2] === "cities") return gone();
+
+  // city / city-category は実在自治体と親県を静的マスタで検証する。
+  // 未存在を page の notFound() に渡すと OpenNext で 200 soft-404 になりうる。
+  if (seg.length >= 4 && seg[2] === "cities") {
+    const areaCode = seg[1];
+    const cityCode = seg[3];
+    if (
+      !UrlPolicy.area.isValidPrefCode(areaCode) ||
+      !UrlPolicy.city.isKnownUnderPrefecture(areaCode, cityCode)
+    ) {
+      return gone();
+    }
+    if (seg.length === 5 && !UrlPolicy.cityCategory.isKnown(seg[4])) {
+      return gone();
+    }
+    if (seg.length > 5) return gone();
   }
 
   // /areas/{prefCode}/{categoryKey} → /areas/{prefCode}/{themeSlug} (301)

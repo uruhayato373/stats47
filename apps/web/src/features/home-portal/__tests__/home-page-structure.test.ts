@@ -89,12 +89,14 @@ describe('home page structure (portal)', () => {
     expect(PAGE).not.toContain('FooterAdSlot');
   });
 
-  it('都道府県地図と運営者プロフィールを右コンテンツの2列に置く', () => {
-    expect(PAGE).toContain('generatePrefectureOverviewSvg()');
-    expect(PAGE).toContain(
-      '<PortalAreaEntry mapSvg={prefectureOverviewSvg} />'
-    );
-    expect(PAGE).toContain('md:grid-cols-2');
+  it('直接遷移できる共通都道府県ナビを右コンテンツの全幅に置く', () => {
+    expect(PAGE).toContain('const prefectures = fetchPrefectures()');
+    expect(PAGE).toContain('<PrefectureNavigator');
+    expect(PAGE).toContain('variant="embedded"');
+    expect(PAGE).toContain('surface="home"');
+    expect(PAGE).not.toContain('generatePrefectureOverviewSvg');
+    expect(PAGE).not.toContain('PortalAreaEntry');
+    expect(PAGE).not.toContain('PORTAL_CARD_ASPECT_CLASS');
     expect(PAGE).toContain('OperatorProfileCard');
   });
 

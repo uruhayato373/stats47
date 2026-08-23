@@ -36,3 +36,21 @@ export const DISPLAYNAME_TO_SURVEY: Record<string, string> = {
   畜産統計調査: "livestock-statistics",
   工場立地動向調査: "factory-location-survey",
 };
+
+/**
+ * registry に同じ統計表の metric が無く、displayName consensus を作れない一次統計。
+ * e-Stat の統計表 ID は恒久 ID なので、ThemeCatalog 等の直接参照も同じ resolver で解決する。
+ */
+export const STATS_DATA_ID_TO_SURVEY_OVERRIDE: Record<
+  string,
+  { id: string; name: string }
+> = {
+  "0003130738": {
+    id: "port-statistics",
+    name: "港湾調査（港湾統計年報）",
+  },
+  "0003441258": {
+    id: "retail-price-survey",
+    name: "小売物価統計調査（構造編）",
+  },
+};

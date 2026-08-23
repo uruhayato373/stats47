@@ -29,7 +29,7 @@ export default function Header() {
     count: category.count,
     rankings: category.representatives.slice(0, 4).map((representative) => ({
       rankingKey: representative.rankingKey,
-      title: representative.title,
+      title: representative.readerLabel ?? representative.title,
     })),
   }));
 

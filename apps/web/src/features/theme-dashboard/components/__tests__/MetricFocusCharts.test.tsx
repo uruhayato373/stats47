@@ -45,6 +45,26 @@ beforeEach(() => {
 });
 
 describe("MetricFocusCharts — 47都道府県 (未選択)", () => {
+  it("正式指標名より読者向けラベルを見出しに使う", () => {
+    render(
+      <MetricFocusCharts
+        metricKey="hobby-participation-rate-diy"
+        selectedPrefectureCode={null}
+        rankingItem={{
+          ...rankingItem,
+          title: "日曜大工の行動者率",
+          readerLabel: "日曜大工をした人の割合",
+        }}
+        currentValues={currentValues}
+      />,
+    );
+    expect(
+      screen.getByRole("heading", {
+        name: "日曜大工をした人の割合 — 詳細チャート",
+      }),
+    ).toBeInTheDocument();
+  });
+
   it("★時系列の fetch を一切行わない", async () => {
     render(
       <MetricFocusCharts

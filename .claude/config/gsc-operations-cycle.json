@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "urlInspectionMaxAgeDays": 3,
+  "searchGrowthMaxAgeDays": 8,
+  "minimumCandidateDecisionsPerWeek": 1,
+  "minimumReviewsInTrailingFourWeeks": 3,
+  "requiredMonthlyHeading": "## GSC運用サイクル",
+  "legacyMissingTargetSubjectIds": [
+    "BLOG-WAVE-2026-05-23-manual",
+    "BLOG-WAVE-2026-05-25-auto",
+    "BLOG-WAVE-2026-05-29-auto",
+    "BLOG-WAVE-2026-06-07-manual",
+    "BLOG-WAVE-2026-06-07-manual-2",
+    "BLOG-WAVE-2026-06-07-manual-3",
+    "BLOG-WAVE-2026-06-10-manual"
+  ]
+}

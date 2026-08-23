@@ -10,12 +10,16 @@ import {
   adjectiveFromTitle,
   adjectiveFromUnit,
   deriveRankingHook,
+  deriveRankingReaderLabel,
   isCrossDimensionMismatch,
   type HookAdjective,
   type RankingHookInput,
 } from "./derive-ranking-hook";
 import { stripParentheticals } from "./normalize-title";
-import { RANKING_HOOK_OVERRIDES } from "./ranking-hook-overrides";
+import {
+  RANKING_HOOK_OVERRIDES,
+  RANKING_READER_LABEL_OVERRIDES,
+} from "./ranking-hook-overrides";
 
 /** hook の長さ制約。旧 `validateHomeFeaturedRankings` の 8〜28 文字を引き継ぐ。 */
 export const HOOK_MIN_LENGTH = 8;
@@ -23,6 +27,8 @@ export const HOOK_MAX_LENGTH = 28;
 
 /** hook に混ざると読みにくくなる記号。中黒 `・` は複合語で普通に使うので含めない。 */
 const UNREADABLE_SYMBOLS = /[／/【】[\]＜＞<>|｜＝=]/;
+/** 読者向けコピーに残してはいけない統計固有の専門語。 */
+const UNFRIENDLY_TERMS = /行動者率/;
 
 /**
  * 記号判定は「括弧の外にある記号」に限る。
@@ -34,6 +40,16 @@ const UNREADABLE_SYMBOLS = /[／/【】[\]＜＞<>|｜＝=]/;
 
 export interface RankingHookResolveInput extends RankingHookInput {
   readonly rankingKey: string;
+}
+
+/** 個別の編集例外を優先し、無ければ共通規則から平易な表示名を導出する。 */
+export function resolveRankingReaderLabel(
+  input: Pick<RankingHookResolveInput, "rankingKey" | "title">,
+): string {
+  return (
+    RANKING_READER_LABEL_OVERRIDES[input.rankingKey] ??
+    deriveRankingReaderLabel(input.title)
+  );
 }
 
 /** override を優先して hook を確定する。 */
@@ -48,6 +64,8 @@ export type HookAuditReason =
   | "symbol"
   /** 正規化したのに空白が残っている（想定外の空白文字） */
   | "whitespace"
+  /** 平易化対象の統計用語が問いかけに残っている */
+  | "jargon"
   /**
    * title 由来と unit 由来で述語が**次元をまたいで**食い違う。
    * 「長い/広い」と「多い/高い」の食い違いは、どちらかの規則が壊れている強い兆候。
@@ -85,6 +103,7 @@ export function auditDerivedHooks(
     if (length < HOOK_MIN_LENGTH || length > HOOK_MAX_LENGTH) reasons.push("length");
     if (UNREADABLE_SYMBOLS.test(stripParentheticals(hook))) reasons.push("symbol");
     if (/[\s　]/.test(hook)) reasons.push("whitespace");
+    if (UNFRIENDLY_TERMS.test(hook)) reasons.push("jargon");
 
     const titleAdjective = adjectiveFromTitle(input.title);
     const unitAdjective = adjectiveFromUnit(input.unit);

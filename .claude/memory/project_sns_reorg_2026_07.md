@@ -1,6 +1,6 @@
 ---
 name: project_sns_reorg_2026_07
-description: SNS/Remotion スキル・エージェント整理 + SSOT 化 (2026-07-04)。sns-content-standards.md が実行規約の正典、投稿台帳 SSOT は posts.json、YouTube 月1再開、TikTok 撤退恒久、週次運用は /sns-weekly-plan
+description: SNS/Remotion スキル・エージェント整理 + SSOT 化。sns-content-standards.md が正典、posts.json が投稿台帳。YouTube は2026-08-23から通常動画3本のmaster-first pilot、TikTok撤退恒久
 metadata: 
   node_type: memory
   type: project
@@ -20,6 +20,12 @@ metadata:
 
 - IG=主力 (10K)・X=自動化 1-2K・**YouTube=月1本の慎重再開**・note=衛星・**TikTok 撤退恒久**。
 - W19-W25 で 6 週投稿ゼロ → 週次運用ルーチン `/sns-weekly-plan` (strategy-advisor) を新設。
+
+## チャネル方針 (2026-08-23 更新)
+
+- 2026-07-27 の再撤退後、オーナー判断で**通常動画3本・6週間の限定 pilot (EXP-006)** として再開。
+- YouTube の通常動画をマスターとし、Instagram Reels / X は派生。Remotion は図表素材に限り、Shorts/BCR/47県分割の量産は再開しない。
+- 専任 `youtube-strategist`、OAuth、自動upload、API計測は復活させない。人間が Studio 投稿・計測し、成功判定後にだけ自動化を審査する。
 
 ## スキル統合 (23+2 → 15+2 + 新規3)
 

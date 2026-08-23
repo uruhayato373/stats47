@@ -7,7 +7,7 @@ import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
 /**
  * action 系 Route Handler (publish-x / regenerate) の integration。
  * spawn を mock し実プロセスを起動しない。7日ガード・whitelist・job 実行中 409 を検証。
- * (YouTube は撤退済のため publish-yt 系テストは削除)
+ * (YouTube pilot は Studio 手動投稿のため publish-yt action を持たない)
  */
 class FakeChild extends EventEmitter {
   stdout = new EventEmitter();

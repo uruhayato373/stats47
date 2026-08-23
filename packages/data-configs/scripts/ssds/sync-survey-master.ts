@@ -1,8 +1,8 @@
 /**
  * PROPOSED_NEW_SURVEYS を survey マスタ (packages/ranking/src/data/surveys.json) に冪等同期する。
  *
- * source-name-to-survey.ts の PROPOSED_NEW_SURVEYS が SSOT。既に存在する id はスキップし、
- * 未登録のものだけ surveys.json のスキーマに沿って追加する。
+ * source-name-to-survey.ts の PROPOSED_NEW_SURVEYS が SSOT。未登録 id を追加し、
+ * 既存行の organization / url が null の場合だけ正典の値で補完する。
  *
  * 実行: cd packages/data-configs && npx tsx scripts/ssds/sync-survey-master.ts
  */
@@ -41,13 +41,29 @@ type SurveyRow = {
 
 function main(): void {
   const rows: SurveyRow[] = JSON.parse(readFileSync(SURVEYS_JSON, "utf-8"));
-  const existing = new Set(rows.map((r) => r.id));
-  const now = "2026-06-02 00:00:00";
+  const existing = new Map(rows.map((r) => [r.id, r]));
+  const now = "2026-08-22 00:00:00";
 
   let added = 0;
-  for (const { id, name, organization } of Object.values(PROPOSED_NEW_SURVEYS)) {
-    if (existing.has(id)) continue;
-    existing.add(id);
+  let enriched = 0;
+  for (const { id, name, organization, url } of Object.values(PROPOSED_NEW_SURVEYS)) {
+    const current = existing.get(id);
+    if (current) {
+      let changed = false;
+      if (!current.organization && organization) {
+        current.organization = organization;
+        changed = true;
+      }
+      if (!current.url && url) {
+        current.url = url;
+        changed = true;
+      }
+      if (changed) {
+        current.updatedAt = now;
+        enriched++;
+      }
+      continue;
+    }
     rows.push({
       id,
       sourceKind: "survey",
@@ -55,7 +71,7 @@ function main(): void {
       parentSourceId: "estat",
       name,
       organization: organization ?? null,
-      url: null,
+      url: url ?? null,
       description: null,
       attributionText: null,
       license: null,
@@ -67,11 +83,12 @@ function main(): void {
       createdAt: now,
       updatedAt: now,
     });
+    existing.set(id, rows[rows.length - 1]);
     added++;
   }
 
   writeFileSync(SURVEYS_JSON, JSON.stringify(rows, null, 2) + "\n", "utf-8");
-  console.log(`survey master: +${added} 追加 / 合計 ${rows.length} 件`);
+  console.log(`survey master: +${added} 追加 / ${enriched} 補完 / 合計 ${rows.length} 件`);
 }
 
 main();

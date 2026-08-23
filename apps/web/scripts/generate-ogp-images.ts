@@ -15,7 +15,7 @@
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type ranking       [--limit N] [--key a,b]
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type areas
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type ranking-cards [--limit N]
- *   npx tsx apps/web/scripts/generate-ogp-images.ts --type note-covers   [--limit N]
+ *   npx tsx apps/web/scripts/generate-ogp-images.ts --type note-covers   [--limit N] [--note-source remote|local]
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type pref-silhouette [--key 28,13]
  *
  * areas = 県シルエットカード (blue/ogp比率) を app/areas/<code>/ogp/ogp.png へ。
@@ -90,6 +90,7 @@ interface CliOptions {
   limit: number | null;
   maxGenerate: number | null;
   source: 'sitemap' | 'known';
+  noteSource: 'remote' | 'local';
 }
 
 function parseArgs(): CliOptions {
@@ -111,6 +112,7 @@ function parseArgs(): CliOptions {
   const rawLimit = val('--limit');
   const rawMax = val('--max-generate');
   const rawSource = val('--source');
+  const rawNoteSource = val('--note-source');
   const parsePositiveInteger = (
     raw: string | null,
     flag: string
@@ -124,6 +126,16 @@ function parseArgs(): CliOptions {
   };
   if (rawSource !== null && rawSource !== 'sitemap' && rawSource !== 'known') {
     throw new Error('--source は sitemap | known を指定してください');
+  }
+  if (
+    rawNoteSource !== null &&
+    rawNoteSource !== 'remote' &&
+    rawNoteSource !== 'local'
+  ) {
+    throw new Error('--note-source は remote | local を指定してください');
+  }
+  if (rawNoteSource !== null && rawType !== 'note-covers') {
+    throw new Error('--note-source は --type note-covers でだけ指定できます');
   }
   const keys = rawKey
     ? rawKey
@@ -142,6 +154,7 @@ function parseArgs(): CliOptions {
     limit: parsePositiveInteger(rawLimit, '--limit'),
     maxGenerate: parsePositiveInteger(rawMax, '--max-generate'),
     source: rawSource === 'known' ? 'known' : 'sitemap',
+    noteSource: rawNoteSource === 'local' ? 'local' : 'remote',
   };
 }
 
@@ -605,9 +618,23 @@ async function main() {
     } else {
       const entry = noteEntries.find((candidate) => candidate.slug === id);
       if (!entry) return null;
-      const markdown = await fetchRequiredText(
-        `${PUBLIC_URL}/${entry.r2Path}/draft.md`
+      const localDraftPath = join(
+        PROJECT_ROOT,
+        '.local/r2',
+        entry.r2Path,
+        'draft.md'
       );
+      const markdown =
+        opts.noteSource === 'local'
+          ? (() => {
+              if (!existsSync(localDraftPath)) {
+                throw new Error(
+                  `${id}: local note draft がありません: ${localDraftPath}`
+                );
+              }
+              return readFileSync(localDraftPath, 'utf8');
+            })()
+          : await fetchRequiredText(`${PUBLIC_URL}/${entry.r2Path}/draft.md`);
       const title = parseTitle(markdown);
       if (!title) {
         throw new Error(`${id}: note draft frontmatterにtitleがありません`);

@@ -14,8 +14,9 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 
 > **役割分担 (重複しない)**
 > - **survey-curator (本エージェント)**: surveys.json マスタ / 導出辞書 / config.surveyId の管理と監査、
->   survey-editorial.ts の編集、**ポートフォリオ評価 + 編集ハブ化の優先順位 + 実験台帳**
->   (真実源 = `.claude/state/surveys/{portfolio,experiments}.json`)。
+>   ranking / theme / blog の横断 taxonomy state、survey-editorial.ts の編集、
+>   **ポートフォリオ評価 + 編集ハブ化の優先順位 + 実験台帳**
+>   (真実源 = `.claude/state/surveys/{taxonomy,portfolio,experiments}.json`)。
 > - `data-ingester`: metric config 作成・観測値投入 (投入後の紐付け確認は本エージェントに委譲される)。
 > - `r2-publisher` / CI (sync-snapshots): R2 push。
 > - `ranking-publisher`: KNOWN/SITEMAP/deploy の公開パイプライン。
@@ -61,26 +62,29 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
    (辞書導出への一本化)。不正 id は `validate:config` (survey-id lint) が error で弾く。
 5. **R2 反映の段取り** (実行は CI / r2-publisher): `generate-ranking-items` → `export-master-snapshots` の
    **順序厳守** (逆だと master が stale item.json を読む)。
+6. **横断 taxonomy 監査**: `audit-survey-taxonomy.ts` で ThemeCatalog 全 chart と公開 blog 全 chart を
+   含めて監査する。theme/blog に surveyId を手書きせず、metricKey / e-Stat param / source.json から
+   共通 core で派生する。`taxonomy.json` と ratchet は script 経由だけで更新する。
 
 ### B. 編集コンテンツ (従来・変更なし)
 
-6. **survey-editorial.ts の設計・編集**: `survey-content-standards.md` の編集文法に従い、1 survey ずつ
+7. **survey-editorial.ts の設計・編集**: `survey-content-standards.md` の編集文法に従い、1 survey ずつ
    実証 (一括長文化禁止)。実装前に事前監査 (`reference/reviews/YYYY-MM-DD-survey-<surveyId>.md`) を書く。
 
 ### C. ポートフォリオ管理 (2026-07-13 拡張・skill `/manage-survey-portfolio`)
 
-7. **状態リコンサイル**: `npx tsx .claude/scripts/surveys/build-survey-portfolio.ts` で portfolio.json を
+8. **状態リコンサイル**: `npx tsx .claude/scripts/surveys/build-survey-portfolio.ts` で portfolio.json を
    再導出 (surveys.json × 紐付け監査 × R2 all.json × survey-editorial.ts × レビュー文書の決定的突合)。
    更新後は必ず `npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts` を通す。
-8. **lifecycle / editorial 判定**: 実測に基づき `--set` 経由で更新。7d = 異常検知のみ / 28d = 暫定 /
+9. **lifecycle / editorial 判定**: 実測に基づき `--set` 経由で更新。7d = 異常検知のみ / 28d = 暫定 /
    **56d = 基本判定**。GSC impressions < 100/期間 は CTR 効果を確定しない (measured-low)。
    merge/retire は evidenceRefs ≥ 2 + GSC/GA4 両輪 56d 集計済みが必須 (validator が弾く)。
-9. **編集ハブ化の優先順位決定**: 候補条件・除外条件 (運用設計 §4) に実測を当て、editorial-candidate を
+10. **編集ハブ化の優先順位決定**: 候補条件・除外条件 (運用設計 §4) に実測を当て、editorial-candidate を
    根拠付きで選別。YMYL (医療系) は品質監査完了まで候補にしない。
-10. **実験管理**: 編集ハブ等の本番反映前後で `--add-experiment` により baseline を登録。デプロイ確定時に
+11. **実験管理**: 編集ハブ等の本番反映前後で `--add-experiment` により baseline を登録。デプロイ確定時に
     `evaluate-survey-experiments.mjs --schedule <id> <デプロイ日>` で startedAt + d7/d28/d56 期日を機械算出。
     期日到達で実測を突合し verdict を記録。同一 surveyId × changeType の pending 重複は登録不可。
-11. **四半期監査レポート**: `reference/audits/YYYY-MM-DD-survey-portfolio-audit.md` に保存
+12. **四半期監査レポート**: `reference/audits/YYYY-MM-DD-survey-portfolio-audit.md` に保存
     (履歴はskill reference、最新状態はstate、未完了策はTODO)。
 
 ## improvement-triage への引き渡し形式
@@ -97,6 +101,7 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 
 - R2 JSON の手編集 / 合成 id (`ssds-src:`/`src:`) のマスタ登録 / 未分類受け皿の擬似調査の新設
 - `resolveSurveyLinkage` (builder) を経由しない独自紐付けロジックの追加
+- ThemeCatalog / blog metadata への独自 surveyId 追加 (既存 lineage から共通 core で派生する)
 - /survey 系 route への generateStaticParams 追加 (`check-r2-route-ssg.cjs` が守る)
 - portfolio/experiments の手編集 (builder スクリプト経由のみ) / 推測値の保存
 - surveys.json / survey-editorial.ts への GSC・GA4 等の変動値の書き込み
@@ -120,6 +125,7 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts          # 紐付け監査 (人間向け)
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --json   # 機械向け (perSurvey/perSurveyActive)
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2  # R2 焼き込み突合 (item 単位)
+npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check # 横断 state / freshness / ratchet
 npm run validate:config --workspace=@stats47/data-configs             # surveyId 実在 lint
 npx tsx .claude/scripts/surveys/build-survey-portfolio.ts             # portfolio 再導出 (upsert)
 npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts          # schema + 判定規律 + drift

@@ -21,6 +21,58 @@ export interface RankingHookInput {
   readonly unit: string;
 }
 
+interface ParticipationReaderCopy {
+  readonly readerLabel: string;
+  readonly hook: string;
+}
+
+/**
+ * 社会生活基本調査の専門語「行動者率」を、意味を広げず日常語へ置き換える。
+ * 「好き」「盛ん」のような嗜好・因果は調査していないため使わない。
+ */
+function deriveParticipationReaderCopy(title: string): ParticipationReaderCopy | null {
+  const normalized = normalizeTitleForHook(title);
+  const participationTitle = stripTrailingParenthetical(normalized);
+
+  if (
+    participationTitle ===
+    "スマートフォン・パソコン使用者の趣味・娯楽行動者率"
+  ) {
+    return {
+      readerLabel: "スマホ等利用者のうち趣味・娯楽をした人の割合",
+      hook: "スマホ等利用者で趣味をした人が多い県は？",
+    };
+  }
+
+  // 79 件中この語順だけが「〜の行動者率」形ではない。
+  if (participationTitle === "マンガを読む行動者率") {
+    return {
+      readerLabel: "マンガを読んだ人の割合",
+      hook: "マンガを読んだ人が多い県は？",
+    };
+  }
+
+  const matched = participationTitle.match(/^(.+)の(?:年間)?行動者率$/);
+  if (!matched) return null;
+
+  const activity = matched[1];
+  return {
+    readerLabel: `${activity}をした人の割合`,
+    hook: `${activity}をした人が多い県は？`,
+  };
+}
+
+/**
+ * 正準な統計名から、カード・記事・チャートで使える平易な名詞句を導出する。
+ * 専用規則がない指標は正準名を維持し、意味を推測して言い換えない。
+ */
+export function deriveRankingReaderLabel(title: string): string {
+  return (
+    deriveParticipationReaderCopy(title)?.readerLabel ??
+    normalizeTitleForHook(title)
+  );
+}
+
 /**
  * title の末尾語 → 述語。**unit より優先する**。
  *
@@ -135,6 +187,9 @@ export function resolveHookAdjective({ title, unit }: RankingHookInput): HookAdj
  * 8〜28 文字という既存の hook 長制約に収めるためでもある。
  */
 export function deriveRankingHook(input: RankingHookInput): string {
+  const participationCopy = deriveParticipationReaderCopy(input.title);
+  if (participationCopy) return participationCopy.hook;
+
   const title = normalizeTitleForHook(input.title);
   const adjective = resolveHookAdjective(input);
   return `${title}が最も${adjective}県は？`;

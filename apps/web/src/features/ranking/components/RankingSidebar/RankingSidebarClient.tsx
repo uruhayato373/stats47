@@ -75,7 +75,7 @@ export function RankingSidebarClient({
                         <RailLinkItem
                             key={`${item.rankingKey}-${item.areaType}`}
                             href={`${linkPrefix}/${item.rankingKey}`}
-                            title={item.title}
+                            title={item.readerLabel ?? item.title}
                             onClick={() =>
                                 trackRailClick({
                                     widget: "related-rankings",
@@ -87,7 +87,7 @@ export function RankingSidebarClient({
                         >
                             <span className="flex min-w-0 flex-col">
                                 <span className="line-clamp-1 leading-snug">
-                                    {item.title}
+                                    {item.readerLabel ?? item.title}
                                     {(() => {
                                         const detail = item.subtitle
                                             || [item.demographicAttr, item.normalizationBasis].filter(Boolean).join("・")

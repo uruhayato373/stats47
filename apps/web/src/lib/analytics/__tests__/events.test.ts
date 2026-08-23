@@ -144,6 +144,18 @@ describe("GA4 カスタムイベント", () => {
     }));
   });
 
+  it("共通都道府県ナビの配置・導線別 surface を受け付ける", () => {
+    trackNavClick({ label: "大阪府", href: "/areas/27000", surface: "home_area_map" });
+    trackNavClick({ label: "京都府", href: "/areas/26000", surface: "category_area_list" });
+
+    expect(mockGtag).toHaveBeenNthCalledWith(1, "event", "nav_click", expect.objectContaining({
+      nav_surface: "home_area_map",
+    }));
+    expect(mockGtag).toHaveBeenNthCalledWith(2, "event", "nav_click", expect.objectContaining({
+      nav_surface: "category_area_list",
+    }));
+  });
+
   // ─── ホーム注目ランキング ───
 
   it("trackHomeFeaturedImpression が全 parameter を送信する", () => {

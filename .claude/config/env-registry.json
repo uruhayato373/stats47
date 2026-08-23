@@ -866,6 +866,14 @@
       ]
     },
     {
+      "name": "SURVEY_STATE_MAX_AGE_DAYS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "survey portfolio / linkage 監査 state の鮮度上限日数 (既定 35)。validate-survey-portfolio.ts が読む"
+    },
+    {
       "name": "USER",
       "visibility": "server",
       "contexts": [

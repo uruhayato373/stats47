@@ -51,7 +51,20 @@ const LIMIT_ARG = (() => {
 
 // Phase 8: 対象 URL を 1,500 まで拡張（API quota 2,000/日の 75%）
 const MAX_URLS = 1500;
+const OBSERVED_URL_QUOTA = 500;
+const REMEDIATION_URL_QUOTA = 300;
+const GONE_RANKING_QUOTA = 100;
+const KNOWN_RANKING_QUOTA = 800;
 const REQUEST_INTERVAL_MS = 300; // ~200 req/min（quota 効率を保ちつつ 1,500 を約 8 分）
+
+function todayInTokyo(date = new Date()) {
+  return new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+}
 
 // coverageState (日本語) → Coverage Drilldown カテゴリ ID の mapping
 const COVERAGE_STATE_TO_CATEGORY = {
@@ -134,11 +147,90 @@ function getLatestSnapshotDir() {
 }
 
 function loadKeysFromTsFile(filename) {
-  const p = path.join(PROJECT_ROOT, "apps/web/src/config", filename);
+  const movedRankingConfig = new Set([
+    "known-ranking-keys.ts",
+    "gone-ranking-keys.ts",
+  ]);
+  const p = movedRankingConfig.has(filename)
+    ? path.join(PROJECT_ROOT, "packages/ranking/src/config", filename)
+    : path.join(PROJECT_ROOT, "apps/web/src/config", filename);
   if (!fs.existsSync(p)) return [];
   const txt = fs.readFileSync(p, "utf-8");
-  const matches = txt.match(/"([a-z0-9-]+)"/g) || [];
-  return matches.map((m) => m.slice(1, -1));
+  return [...txt.matchAll(/^\s*"([^"]+)",?\s*$/gm)].map((m) => m[1]);
+}
+
+function loadSitemapTagKeys() {
+  const p = path.join(
+    PROJECT_ROOT,
+    "apps/web/src/config/sitemap-blog-entries.ts",
+  );
+  if (!fs.existsSync(p)) return [];
+  const txt = fs.readFileSync(p, "utf-8");
+  return [...txt.matchAll(/tagKey:\s*"([^"]+)"/g)].map((m) => m[1]);
+}
+
+/**
+ * URL Inspection はフラグメントをサーバーへ送らないため、`/page#section` を
+ * 別 URL として測る意味がない。GSC pages.csv にはサイトリンク由来の fragment URL が
+ * 混ざるため、投入前に正規ページへ畳み込む。
+ */
+function normalizeInspectionUrl(raw) {
+  if (typeof raw !== "string" || raw.trim() === "") return null;
+  try {
+    const url = new URL(raw.trim());
+    if (url.protocol !== "http:" && url.protocol !== "https:") return null;
+    url.hash = "";
+    return url.href;
+  } catch {
+    return null;
+  }
+}
+
+function uniqueNormalizedUrls(rawUrls, limit = Infinity) {
+  const seen = new Set();
+  const result = [];
+  for (const raw of rawUrls) {
+    const url = normalizeInspectionUrl(raw);
+    if (!url || seen.has(url)) continue;
+    seen.add(url);
+    result.push(url);
+    if (result.length >= limit) break;
+  }
+  return result;
+}
+
+/** 全件を数日で巡回できるよう、日付で開始位置をずらす。 */
+function rotateDaily(
+  items,
+  limit,
+  dateString = todayInTokyo(),
+) {
+  if (items.length <= limit) return [...items];
+  const day = Math.floor(
+    new Date(`${dateString}T00:00:00.000Z`).getTime() / 86400000,
+  );
+  const start = (day * limit) % items.length;
+  return Array.from({ length: limit }, (_, i) => items[(start + i) % items.length]);
+}
+
+function loadRemediationUrls() {
+  const p = path.join(
+    PROJECT_ROOT,
+    ".claude/state/gsc/coverage-remediation-queue.json",
+  );
+  if (!fs.existsSync(p)) return [];
+  try {
+    const queue = JSON.parse(fs.readFileSync(p, "utf8")).queue ?? [];
+    return queue
+      .filter(
+        (entry) =>
+          (entry.status === "pending" || entry.status === "in-progress") &&
+          entry.action !== "none",
+      )
+      .map((entry) => entry.url);
+  } catch {
+    return [];
+  }
 }
 
 function buildUrlList() {
@@ -147,7 +239,7 @@ function buildUrlList() {
   // 重複排除後に MAX_URLS で切る
   const ordered = []; // 優先度順
 
-  // Priority 1: GSC pages.csv 全件（観測対象 URL を最優先）
+  // Priority 1: GSC pages.csv の検索実績上位。fragment は除去してから quota を使う。
   const snapshotDir = getLatestSnapshotDir();
   if (snapshotDir) {
     const pagesCsv = path.join(snapshotDir, "pages.csv");
@@ -158,12 +250,24 @@ function buildUrlList() {
           impressions: parseInt(r.impressions, 10) || 0,
         }))
         .sort((a, b) => b.impressions - a.impressions);
-      for (const p of pages) ordered.push(p.url);
-      log(`P1: Added ${pages.length} URLs from pages.csv`);
+      const observed = uniqueNormalizedUrls(
+        pages.map((p) => p.url),
+        OBSERVED_URL_QUOTA,
+      );
+      ordered.push(...observed);
+      log(`P1: Added ${observed.length} normalized URLs from pages.csv`);
     }
   }
 
-  // Priority 2: 主要静的ページ
+  // Priority 2: 是正キュー。修正後の coverageState 遷移を日次で追う。
+  const remediationUrls = rotateDaily(
+    uniqueNormalizedUrls(loadRemediationUrls()),
+    REMEDIATION_URL_QUOTA,
+  );
+  ordered.push(...remediationUrls);
+  log(`P2: Added ${remediationUrls.length} URLs from remediation queue`);
+
+  // Priority 3: 主要静的ページ
   const staticPages = [
     `${SITE_ORIGIN}/`,
     `${SITE_ORIGIN}/about`,
@@ -176,45 +280,54 @@ function buildUrlList() {
   ];
   for (const u of staticPages) ordered.push(u);
 
-  // Priority 3: 47 都道府県 /areas/{prefCode} (47)
+  // Priority 4: 47 都道府県 /areas/{prefCode} (47)
   for (let i = 1; i <= 47; i++) {
     const code = String(i).padStart(2, "0") + "000";
     ordered.push(`${SITE_ORIGIN}/areas/${code}`);
   }
 
-  // Priority 4: KNOWN_RANKING_KEYS 全件（active な ranking URL）
-  const knownKeys = loadKeysFromTsFile("known-ranking-keys.ts");
-  for (const k of knownKeys) {
-    ordered.push(`${SITE_ORIGIN}/ranking/${k}`);
-  }
-  log(`P4: Added ${knownKeys.length} URLs from KNOWN_RANKING_KEYS`);
+  // Priority 5: sitemap に載る tag（thin/noindex tag に quota を使わない）
+  const tagKeys = loadSitemapTagKeys();
+  for (const k of tagKeys) ordered.push(`${SITE_ORIGIN}/tag/${encodeURIComponent(k)}`);
+  log(`P5: Added ${tagKeys.length} URLs from SITEMAP_TAG_ENTRIES`);
 
-  // Priority 5: GONE_RANKING_KEYS（旧 URL の観測 — 410 化が Google に認識されているか）
-  const goneKeys = loadKeysFromTsFile("gone-ranking-keys.ts");
+  // Priority 6: GONE_RANKING_KEYS（数日で全件を巡回）
+  const goneKeys = rotateDaily(
+    loadKeysFromTsFile("gone-ranking-keys.ts"),
+    GONE_RANKING_QUOTA,
+  );
   for (const k of goneKeys) {
     ordered.push(`${SITE_ORIGIN}/ranking/${k}`);
   }
-  log(`P5: Added ${goneKeys.length} URLs from GONE_RANKING_KEYS`);
+  log(`P6: Added ${goneKeys.length} rotated URLs from GONE_RANKING_KEYS`);
 
-  // Priority 6: KNOWN_TAG_KEYS
-  const tagKeys = loadKeysFromTsFile("known-tag-keys.ts");
-  for (const k of tagKeys) {
-    ordered.push(`${SITE_ORIGIN}/tag/${k}`);
+  // Priority 7: KNOWN_RANKING_KEYS（約3日で全件を巡回）
+  const knownKeys = rotateDaily(
+    loadKeysFromTsFile("known-ranking-keys.ts"),
+    KNOWN_RANKING_QUOTA,
+  );
+  for (const k of knownKeys) {
+    ordered.push(`${SITE_ORIGIN}/ranking/${k}`);
   }
-  log(`P6: Added ${tagKeys.length} URLs from KNOWN_TAG_KEYS`);
+  log(`P7: Added ${knownKeys.length} rotated URLs from KNOWN_RANKING_KEYS`);
 
   // 重複排除（順序保持）+ MAX_URLS で切る
   const seen = new Set();
   const result = [];
-  for (const u of ordered) {
+  let collapsed = 0;
+  for (const raw of ordered) {
+    const u = normalizeInspectionUrl(raw);
+    if (!u) continue;
     if (!seen.has(u)) {
       seen.add(u);
       result.push(u);
+    } else {
+      collapsed++;
     }
     if (result.length >= MAX_URLS) break;
   }
   log(
-    `Total: ${result.length} URLs (capped at MAX_URLS=${MAX_URLS}, raw ${ordered.length})`,
+    `Total: ${result.length} URLs (capped at MAX_URLS=${MAX_URLS}, raw ${ordered.length}, normalized duplicates ${collapsed})`,
   );
   return result;
 }
@@ -338,7 +451,7 @@ function writeLatest(dateStr, summary, prevSummary) {
 }
 
 async function main() {
-  const dateStr = new Date().toISOString().slice(0, 10);
+  const dateStr = todayInTokyo();
   const outDir = path.join(
     PROJECT_ROOT,
     ".claude/state/metrics/gsc/url-inspection",
@@ -662,7 +775,16 @@ function writeCoverageDrilldown(rows, dateStr) {
   log(`[drilldown] LATEST.md updated`);
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}
+
+module.exports = {
+  normalizeInspectionUrl,
+  rotateDaily,
+  todayInTokyo,
+  uniqueNormalizedUrls,
+};

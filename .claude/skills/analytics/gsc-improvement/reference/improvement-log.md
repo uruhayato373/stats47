@@ -739,6 +739,12 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
   2. **noindex 13** (未着手): city/search/未公開blog を noindex or 410。
   3. **enrich 46** (未着手): area×category の県別データ化 (全国テンプレ流用の解消)。情報設計 `docs/01_技術設計/03_情報設計.md` の area ページ責務と併せて判断。
 
+- **2026-08-24 再監査・対策実装 (wave `2026-08-24-gsc-indexability`)**:
+  - W32 GSC export 2,456 URL を Googlebot UA で再実測。HTTP 200 の374 URLは HTML の robots と not-found title も検査し、未修正の **200 soft-404 74件**（ranking 52 / blog 10 / city 12）を分離した。
+  - ranking/blog の未登録 slug は middleware allowlist で 410、実在 city は親県解決を修正し、整備済み360市のみ index・その他は noindex。area×theme 29件は県固有の最新観測値を server HTML に追加。localhost で 410 / noindex / 固有本文を実測済み。
+  - 監視誤差を是正: URL fragment を除去・重複排除、設定移設後0件になっていた KNOWN/GONE 読込先を修正、検索実績/是正キュー/既知/削除URLを日次ローテーション。sitemap・OGP・静的素材と正常noindexを設計どおりへ自動分類する。
+  - queue は pending 419→170、in-progress 105、resolved-by-design 2,181。旧survey/内部資産404 14件は発生源修正済みとして resolved-by-design。**effect/pending** — deploy 後に74件の410/noindexと29件の固有本文を本番実測し、次週GSC export / URL Inspectionで減少を確認する。
+
 ### [PHASE-9-FOLLOWUP] Cloudflare token 集約 + Smoke Test cascade fix
 
 - **対応日**: 2026-04-26 / コミット: `e97b6db7`

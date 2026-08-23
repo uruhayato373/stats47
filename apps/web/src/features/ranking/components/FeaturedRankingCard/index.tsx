@@ -1,5 +1,7 @@
 import {
   PORTAL_CARD_ASPECT_CLASS,
+  PORTAL_CARD_PADDING_CLASS,
+  PORTAL_CARD_TITLE_CLASS,
   SurfaceLinkCard,
 } from "@/components/surface";
 
@@ -25,11 +27,11 @@ export function FeaturedRankingCard({
   return (
     <SurfaceLinkCard
       href={`/ranking/${rankingKey}`}
-      className={`${PORTAL_CARD_ASPECT_CLASS} group flex flex-col overflow-hidden p-3`}
+      className={`${PORTAL_CARD_ASPECT_CLASS} ${PORTAL_CARD_PADDING_CLASS} group flex flex-col overflow-hidden`}
     >
       {/* hook を常に2行分の高さで確保し、下の flex-1 地図領域を全カードで同じ高さに揃える
           (1行/2行のタイトル差で地図の大きさがバラつくのを防ぐ)。 */}
-      <span className="relative z-10 line-clamp-2 min-h-[2.4rem] text-sm font-semibold leading-snug transition-colors group-hover:text-primary">
+      <span className={PORTAL_CARD_TITLE_CLASS}>
         {model.hook}
       </span>
       <div className="relative mt-1 min-h-0 flex-1">

@@ -52,6 +52,7 @@ export function MetricFocusCharts({
 }: Props) {
   const [timeseries, setTimeseries] = useState<MetricTimeseriesPoint[]>([]);
   const [isPending, startTransition] = useTransition();
+  const displayTitle = rankingItem?.readerLabel ?? rankingItem?.title ?? "値";
 
   const areaName = useMemo(() => {
     if (!selectedPrefectureCode) return null;
@@ -88,13 +89,13 @@ export function MetricFocusCharts({
       lines: [
         {
           dataKey: "value",
-          name: `${areaName}の${rankingItem?.title ?? "値"}`,
+          name: `${areaName}の${displayTitle}`,
           color: "hsl(var(--primary))",
         },
       ],
       unit: rankingItem?.unit ?? "",
     };
-  }, [timeseries, areaName, rankingItem]);
+  }, [timeseries, areaName, displayTitle, rankingItem?.unit]);
 
   // 上下位 5 県 bar 用データ
   const { topFive, bottomFive } = useMemo(() => {
@@ -117,7 +118,7 @@ export function MetricFocusCharts({
 
   return (
     <ChartPanel
-      title={`${rankingItem.title} — 詳細チャート`}
+      title={`${displayTitle} — 詳細チャート`}
       icon={<TrendingUp className="h-4 w-4 shrink-0 text-primary" />}
       titleClassName="text-base"
       className="rounded-lg"

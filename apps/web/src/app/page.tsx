@@ -1,14 +1,11 @@
 import Link from 'next/link';
 
-import { generatePrefectureOverviewSvg } from '@stats47/visualization/server';
+import { fetchPrefectures } from '@stats47/area';
 import { Metadata } from 'next';
 
 import { PageShell, PageHeader } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
-import {
-  HorizontalCardCarousel,
-  PORTAL_CARD_ASPECT_CLASS,
-} from '@/components/surface';
+import { HorizontalCardCarousel } from '@/components/surface';
 
 import {
   NativeAffiliateRow,
@@ -20,9 +17,9 @@ import {
   resolveAffiliateBannersByVertical,
   SidebarStickyBannerAd,
 } from '@/features/ads/server';
+import { PrefectureNavigator } from '@/features/area-profile';
 import { listLatestArticles } from '@/features/blog/server';
 import {
-  PortalAreaEntry,
   PortalBlogCard,
   PortalCategoryGrid,
   PortalUseCaseGrid,
@@ -118,7 +115,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function HomePage() {
   const latestArticles = await listLatestArticles(8).catch(() => []);
-  const prefectureOverviewSvg = generatePrefectureOverviewSvg();
+  const prefectures = fetchPrefectures();
   // limit 8 = 縦長 (sidebar-sticky 在庫) を描画側で除外しても 4 件残すための余裕
   const homeNativeBanners = await resolveAffiliateBannersByVertical(
     'economy',
@@ -221,39 +218,39 @@ export default async function HomePage() {
               <PortalUseCaseGrid />
             </section>
 
-            <div className="grid gap-6 md:grid-cols-2">
-              <section>
-                <SectionHeader
-                  title="都道府県から探す"
-                  action={
-                    <Link
-                      href="/areas"
-                      className="font-semibold text-primary hover:underline"
-                    >
-                      一覧 →
-                    </Link>
-                  }
-                />
-                <PortalAreaEntry mapSvg={prefectureOverviewSvg} />
-              </section>
+            <section>
+              <SectionHeader
+                title="都道府県から探す"
+                action={
+                  <Link
+                    href="/areas"
+                    className="font-semibold text-primary hover:underline"
+                  >
+                    一覧 →
+                  </Link>
+                }
+              />
+              <PrefectureNavigator
+                prefectures={prefectures}
+                variant="embedded"
+                surface="home"
+              />
+            </section>
 
-              <section>
-                <SectionHeader
-                  title="運営者プロフィール"
-                  action={
-                    <Link
-                      href="/about"
-                      className="font-semibold text-primary hover:underline"
-                    >
-                      詳しく見る →
-                    </Link>
-                  }
-                />
-                <OperatorProfileCard
-                  className={`${PORTAL_CARD_ASPECT_CLASS} overflow-hidden`}
-                />
-              </section>
-            </div>
+            <section>
+              <SectionHeader
+                title="運営者プロフィール"
+                action={
+                  <Link
+                    href="/about"
+                    className="font-semibold text-primary hover:underline"
+                  >
+                    詳しく見る →
+                  </Link>
+                }
+              />
+              <OperatorProfileCard className="overflow-hidden" />
+            </section>
 
             {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。 */}
             {homeNativeBanners.length > 0 && (

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-23T22:09:26.484Z",
+  "stage": "monitor",
+  "status": "fail",
+  "measurementWeek": "2026-W33",
+  "expectedCompletedWeek": "2026-W34",
+  "expectedPlanWeek": "2026-W34",
+  "currentMonth": "2026-08",
+  "summary": {
+    "pass": 10,
+    "warn": 1,
+    "fail": 2
+  },
+  "checks": [
+    {
+      "code": "snapshot-period",
+      "level": "pass",
+      "detail": "2026-W33 finalized7d coverage complete",
+      "action": null
+    },
+    {
+      "code": "snapshot-freshness",
+      "level": "fail",
+      "detail": "latest=2026-W33, expected>=2026-W34",
+      "action": "npm run fetch-gsc-snapshot -- 2026-W34"
+    },
+    {
+      "code": "effect-verdict",
+      "level": "pass",
+      "detail": "2026-W33 verdict 7件を記録済み",
+      "action": null
+    },
+    {
+      "code": "effect-target-ratchet",
+      "level": "warn",
+      "detail": "既知の過去欠落 7件（新規欠落0）",
+      "action": "既知7件は推測で補わず、週次で終了または再計測を判断"
+    },
+    {
+      "code": "effect-backlog-reconciliation",
+      "level": "pass",
+      "detail": "確定 verdict と active 一覧の不整合0",
+      "action": null
+    },
+    {
+      "code": "search-growth-freshness",
+      "level": "pass",
+      "detail": "week=2026-W33, age=8d",
+      "action": null
+    },
+    {
+      "code": "search-growth-sources",
+      "level": "fail",
+      "detail": "stale/missing: inspection",
+      "action": "npm run search-growth:collect && npm run search-growth:all"
+    },
+    {
+      "code": "search-growth-decision",
+      "level": "pass",
+      "detail": "証拠不足または候補0のため判断を強制しない",
+      "action": null
+    },
+    {
+      "code": "url-inspection-freshness",
+      "level": "pass",
+      "detail": "latest=2026-08-21, age=3d",
+      "action": null
+    },
+    {
+      "code": "weekly-review",
+      "level": "pass",
+      "detail": "2026-W33 review の search-growth 節=あり",
+      "action": null
+    },
+    {
+      "code": "weekly-plan",
+      "level": "pass",
+      "detail": "plan=2026-W34, expected=2026-W34",
+      "action": null
+    },
+    {
+      "code": "monthly-plan",
+      "level": "pass",
+      "detail": "month=2026-08, GSC運用サイクル節=あり",
+      "action": null
+    },
+    {
+      "code": "monthly-review-coverage",
+      "level": "pass",
+      "detail": "直近4週レビュー 4/4（必要 3以上）",
+      "action": null
+    }
+  ]
+}

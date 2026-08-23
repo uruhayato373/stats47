@@ -104,7 +104,7 @@ export function ThemeMetricsDashboard({
       if (selectedPrefectureCode) {
         return {
           metricKey: key,
-          title: d.rankingItem.title,
+          title: d.rankingItem.readerLabel ?? d.rankingItem.title,
           unit: d.rankingItem.unit ?? "",
           value: typeof target?.value === "number" ? target.value : null,
           rank: target?.rank ?? null,
@@ -131,7 +131,7 @@ export function ThemeMetricsDashboard({
 
       return {
         metricKey: key,
-        title: d.rankingItem.title,
+        title: d.rankingItem.readerLabel ?? d.rankingItem.title,
         unit: d.rankingItem.unit ?? "",
         value: null,
         rank: null,

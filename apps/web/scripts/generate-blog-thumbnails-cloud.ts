@@ -15,16 +15,13 @@
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
-
 import {
   createS3ImageObjectStoreFromEnv,
   type ImageObjectStore,
 } from '@stats47/r2-storage/image-pipeline';
 import dotenv from 'dotenv';
 
-import {
-  BLOG_CODEX_BACKGROUND_BY_SLUG,
-} from './data/blog-codex-background-catalog';
+import { BLOG_CODEX_BACKGROUND_BY_SLUG } from './data/blog-codex-background-catalog';
 import {
   BLOG_AI_BACKGROUND_NORMALIZER_SOURCES,
   BLOG_IMAGE_GENERATOR_SPEC,
@@ -38,6 +35,10 @@ import {
   type AiBackgroundCache,
 } from './lib/blog-ai-background-cache';
 import { normalizeAiBackgroundBuffer } from './lib/blog-ai-background-normalizer';
+import {
+  parseBlogArticleImageContext,
+  resolveArticleBackgroundSource,
+} from './lib/blog-article-background';
 import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
 import {
   BLOG_IMAGE_PUBLISH_PLAN,
@@ -374,10 +375,6 @@ async function main(): Promise<void> {
     PROJECT_ROOT,
     blogRendererSources('ai')
   );
-  const brandRendererHash = calculateRendererHash(
-    PROJECT_ROOT,
-    blogRendererSources('brand')
-  );
   const normalizerHash = calculateRendererHash(
     PROJECT_ROOT,
     BLOG_AI_BACKGROUND_NORMALIZER_SOURCES
@@ -412,10 +409,15 @@ async function main(): Promise<void> {
           ? { ogpVisualType: options.visualTypeOverride }
           : {}),
       });
-      const codexSource = await resolveCodexBackgroundSource(
+      const articleSource = await resolveArticleBackgroundSource(
+        PROJECT_ROOT,
+        parseBlogArticleImageContext(slug, markdown)
+      );
+      const legacyCodexSource = await resolveCodexBackgroundSource(
         PROJECT_ROOT,
         slug
       );
+      const codexSource = articleSource ?? legacyCodexSource;
       const ai: AiDescriptor = codexSource
         ? {
             prompt: codexSource.prompt,
@@ -512,19 +514,23 @@ async function main(): Promise<void> {
               metadata: makeAiMetadata(ai, reusableSha),
             }
           : null;
+      if (!background && !needsAiGeneration) {
+        throw new Error(
+          `${slug}: 記事固有背景がありません。` +
+            'blog-images:codex request-article で生成してください'
+        );
+      }
       const plan = needsAiGeneration
         ? null
         : createBlogImagePlan({
             slug,
             data,
-            background: background
-              ? {
-                  source: 'ai',
-                  promptHash: background.metadata.promptHash,
-                  sha256: background.metadata.sha256,
-                }
-              : { source: 'brand' },
-            rendererHash: background ? baseRendererHash : brandRendererHash,
+            background: {
+              source: 'ai',
+              promptHash: background!.metadata.promptHash,
+              sha256: background!.metadata.sha256,
+            },
+            rendererHash: baseRendererHash,
           });
       const status = plan ? await inspector.inspect(plan) : null;
       if (status?.reason === 'probe-error') {
@@ -654,20 +660,21 @@ async function main(): Promise<void> {
       if (!item.plan || !item.status) {
         throw new Error('generation plan が確定していません');
       }
+      if (!item.background) {
+        throw new Error(`${item.slug}: 記事固有背景がありません`);
+      }
       const files = assetFiles(item.plan, pilotRoot, item.slug);
       const keys = blogImageKeys(item.slug);
       const metadata: BlogImageMetadata = {
         title: item.data.title,
         subtitle: item.data.subtitle,
-        background: item.background?.metadata ?? { source: 'brand' },
+        background: item.background.metadata,
       };
-      const aiBackground = item.background
-        ? await loadAiBackground({
-            item,
-            store,
-            cache: backgroundCache,
-          })
-        : null;
+      const aiBackground = await loadAiBackground({
+        item,
+        store,
+        cache: backgroundCache,
+      });
       await renderBlogImageBundle({
         data: item.data,
         fonts,
@@ -675,18 +682,12 @@ async function main(): Promise<void> {
           light: files.get(keys.light)!,
           dark: files.get(keys.dark)!,
           ogp: files.get(keys.ogp)!,
-          ...(item.background
-            ? { background: files.get(keys.background)! }
-            : {}),
+          background: files.get(keys.background)!,
         },
-        ...(aiBackground
-          ? {
-              aiBackground: {
-                buffer: aiBackground,
-                sha256: item.background!.metadata.sha256,
-              },
-            }
-          : {}),
+        aiBackground: {
+          buffer: aiBackground,
+          sha256: item.background.metadata.sha256,
+        },
       });
       if (pilotRoot) {
         const metadataPath = join(pilotRoot, item.slug, 'ogp/ogp.json');

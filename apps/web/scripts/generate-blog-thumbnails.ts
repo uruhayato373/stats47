@@ -22,12 +22,15 @@ import { join } from 'node:path';
 import { createS3ImageObjectStoreFromEnv } from '@stats47/r2-storage/image-pipeline';
 import { config as loadEnv } from 'dotenv';
 
-
 import { OGP_MODEL, OGP_PROMPT_VERSION } from './data/blog-ogp-visual-catalog';
 import {
   BLOG_IMAGE_GENERATOR_SPEC,
   blogRendererSources,
 } from './data/image-generator-registry';
+import {
+  parseBlogArticleImageContext,
+  resolveArticleBackgroundSource,
+} from './lib/blog-article-background';
 import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
 import {
   BLOG_IMAGE_PUBLISH_PLAN,
@@ -252,13 +255,18 @@ async function readReusableAiBackground(options: {
   title: string;
 }): Promise<ReusableAiBackground | null> {
   const keys = blogImageKeys(options.slug);
-  const visual = resolveOgpVisual(
-    parseOgpVisualFrontmatter(options.markdown)
-  );
-  const codexSource = await resolveCodexBackgroundSource(
+  const visual = resolveOgpVisual(parseOgpVisualFrontmatter(options.markdown));
+  const articleSource = options.markdown
+    ? await resolveArticleBackgroundSource(
+        PROJECT_ROOT,
+        parseBlogArticleImageContext(options.slug, options.markdown)
+      )
+    : null;
+  const legacyCodexSource = await resolveCodexBackgroundSource(
     PROJECT_ROOT,
     options.slug
   );
+  const codexSource = articleSource ?? legacyCodexSource;
   if (codexSource) {
     return {
       buffer: codexSource.buffer,
@@ -409,10 +417,6 @@ async function main(): Promise<void> {
     );
   }
 
-  const brandRendererHash = calculateRendererHash(
-    PROJECT_ROOT,
-    blogRendererSources('brand')
-  );
   const aiRendererHash = calculateRendererHash(
     PROJECT_ROOT,
     blogRendererSources('ai')
@@ -428,6 +432,12 @@ async function main(): Promise<void> {
           title: source.data.title,
         })
       : null;
+    if (!background) {
+      throw new Error(
+        `${slug}: 記事固有背景がありません。` +
+          'blog-images:codex request-article で生成してください'
+      );
+    }
     return {
       slug,
       data: source.data,
@@ -435,14 +445,12 @@ async function main(): Promise<void> {
       plan: createBlogImagePlan({
         slug,
         data: source.data,
-        background: background
-          ? {
-              source: 'ai',
-              promptHash: background.metadata.promptHash,
-              sha256: background.metadata.sha256,
-            }
-          : { source: 'brand' },
-        rendererHash: background ? aiRendererHash : brandRendererHash,
+        background: {
+          source: 'ai',
+          promptHash: background.metadata.promptHash,
+          sha256: background.metadata.sha256,
+        },
+        rendererHash: aiRendererHash,
       }),
     };
   });
@@ -512,7 +520,7 @@ async function main(): Promise<void> {
       const metadata: BlogImageMetadata = {
         title: item.data.title,
         subtitle: item.data.subtitle,
-        background: item.background?.metadata ?? { source: 'brand' },
+        background: item.background.metadata,
       };
       await renderBlogImageBundle({
         data: item.data,
@@ -525,14 +533,10 @@ async function main(): Promise<void> {
             ? { background: files.get(keys.background)! }
             : {}),
         },
-        ...(item.background
-          ? {
-              aiBackground: {
-                buffer: item.background.buffer,
-                sha256: item.background.metadata.sha256,
-              },
-            }
-          : {}),
+        aiBackground: {
+          buffer: item.background.buffer,
+          sha256: item.background.metadata.sha256,
+        },
       });
       const manifest = writeBlogImageManifest({
         projectRoot: PROJECT_ROOT,

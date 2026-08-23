@@ -1,12 +1,12 @@
 ---
 name: sns-metrics-sync
-description: 全 SNS プラットフォーム (X / IG) のメトリクス同期と post 連携。 各 strategist と sns-renderer から metrics 系を集約。 (TikTok は撤退で対象外)
+description: SNS (X / IG / YouTube pilot) のメトリクス同期と post 連携。YouTube pilot はStudio手動値とGA4 UTMをEXP-006へ記録し、API自動取得は行わない。各 strategist と sns-renderer から metrics 系を集約。TikTok は撤退で対象外。
 model: sonnet
 ---
 
 # SNS Metrics Sync Agent
 
-X / Instagram / note の SNS プラットフォーム横断でメトリクスを取得し、 投稿台帳 `.claude/state/sns/posts.json` (`sns-posts-store.cjs`) と `.claude/state/metrics/sns/` に同期する agent。 各 strategist が個別に持っていた metrics 系を集約。 投稿時の posted 印付けも担当。 **caption 生成は各チャネル strategist に返上** (責務ねじれ解消、2026-07)。 TikTok は撤退で対象外。
+X / Instagram / YouTube pilot / note の SNS プラットフォーム横断でメトリクスを取得し、 投稿台帳 `.claude/state/sns/posts.json` (`sns-posts-store.cjs`) と `.claude/state/metrics/sns/` に同期する agent。YouTube は Studio の手動値と GA4 UTM を EXP-006 へ記録し、pilot 中は OAuth/API 自動取得を持たない。各 strategist が個別に持っていた metrics 系を集約。 投稿時の posted 印付けも担当。 **caption 生成は各チャネル strategist に返上** (責務ねじれ解消、2026-07)。 TikTok は撤退で対象外。
 
 ## 担当範囲
 
@@ -15,6 +15,7 @@ X / Instagram / note の SNS プラットフォーム横断でメトリクスを
 - SNS 横断週次レポート (`/sns-weekly-report`)
 - note.com 個別記事メトリクス取得 (`/fetch-note-metrics`)
 - SNS metrics improvement 詳細記録
+- YouTube pilot の公開14日後計測 (views / 30秒維持率 / 平均視聴率 / 平均視聴時間 / UTM engaged sessions) を EXP-006 へ記録
 
 ## 担当スキル
 
@@ -29,6 +30,7 @@ X / Instagram / note の SNS プラットフォーム横断でメトリクスを
 
 - **caption 生成 → 各チャネル strategist に返上** (X=`/post-x`、IG=`/post-ig-6angles`、BCR=`/bar-chart-race --step captions`)
 - 各プラットフォームへの個別投稿 → `x-strategist` / `instagram-strategist` に委譲
+- YouTube Studio 投稿 → 人間工程
 - レンダリング (Remotion) → `sns-renderer` に委譲
 - 週次運用オーケストレーション → `strategy-advisor` (`/sns-weekly-plan`)
 - 改善ログ status 更新 → `improvement-triage` に委譲

@@ -1,11 +1,11 @@
 ---
 name: YouTube シャドウバン回復 (2026-04-24 → 2026-05-26)
-description: 【2026-05-29 YouTube 完全撤退で打ち切り・履歴アーカイブ】Issue #88 回復努力の記録。撤退後は回復施策を再開しない。経緯は [[project_env_local_ci_consolidation]]
+description: 【2026-05-29 自動運用撤退で打ち切り・履歴アーカイブ】Issue #88 回復努力の記録。2026-08-23 の通常動画 pilot でも旧回復自動化は再開しない。経緯は [[project_env_local_ci_consolidation]]
 type: project
 originSessionId: c9531999-b179-475d-b95d-acf0a75b0d37
 ---
 
-> ⚠️ **2026-05-29: YouTube から完全撤退**（shadowban 継続で SUGGESTED_VIDEO=0 + 低 ROI: 32 subs/~7 views/日 + 戦略上 IG 集中）。関連 skill/script/CI（24 ファイル）は `feature/youtube-withdrawal` で削除済。本 memory は**回復努力の履歴アーカイブ**であり、**回復施策は再開しない**。経緯: [[project_env_local_ci_consolidation]]
+> ⚠️ **2026-05-29: YouTube 自動運用から撤退**（shadowban 継続で SUGGESTED_VIDEO=0 + 低 ROI: 32 subs/~7 views/日 + 戦略上 IG 集中）。関連 skill/script/CI（24 ファイル）は `feature/youtube-withdrawal` で削除済。本 memory は**回復努力の履歴アーカイブ**。2026-08-23 からは EXP-006 として通常動画3本を手動制作・手動投稿するが、旧 Shorts 量産・OAuth・回復自動化は再開しない。経緯: [[project_env_local_ci_consolidation]]
 
 2026-04-24 に `/diagnose-youtube-shadowban` でシャドウバン疑い確定（17 本が views < 50）→ Issue #88 集約 → 2026-05-16 CLOSED。Recovery 完了とされたが daily audit の verdict は `likely-shadowban` 継続。2026-05-26 に根本原因調査でチャンネル整理を実施。
 
@@ -33,12 +33,12 @@ OAuth 失効・個人 ch 誤投稿に加え、**2026-03 の Shorts 量産＋重�
 
 **Why**: 量産モード（68 本/月）に入った 2026-03 に重複アップロードが頻発し、YouTube のアルゴが duplicate-content spam と判定。SUGGESTED_VIDEO が 0 に固定された。再発させない設計が必要。
 
-**How to apply**:
-- **新規アップロード前に必ず `check-youtube-duplicate.cjs` でタイトル重複チェック**（2026-05-26 実装、upload.js が自動呼び出し）
-- 週次予算 3 本上限（既存）に加え、**同じテーマ・同じ素材の再アップロード禁止**を `youtube-strategist.md` に明文化
-- Shorts 量産時は素材を 47 県別に分割して **重複しない切り口** を作る。同じ「47県カウントアップ」テンプレを月 10 本以上投稿しない
-- `08no2ZRhTyo`（救急出動 BCR Shorts、28 秒、JST 20:00）は 2026-05-10 公開の正式復帰テスト動画。48h 判定は Issue #88 最終コメント参照
-- pause は既に解除済み（`.claude/state/youtube-pause.json` は削除済）。`check-youtube-post-budget.cjs` ガードは通る状態
+**How to apply（2026-08-23 pilot）**:
+- master は6〜12分の通常動画3本に限定し、同一テーマ・同一素材の再アップロードを禁止する
+- Shorts 単独量産は再開せず、Instagram / X の派生素材は master と同じ `content_key` と `parent_post_id` で追跡する
+- 投稿前に人が既存タイトル・サムネイル・動画内容の重複を確認する。撤去済みの `check-youtube-duplicate.cjs` / upload script を前提にしない
+- OAuth・自動投稿・監視 CI は復活させず、YouTube Studio で手動投稿・手動計測する
+- 2本連続で14日100 views未満かつ30秒時点維持率30%未満なら停止し、旧回復施策へ戻さない
 
 ## 現状メトリクス (2026-05-26)
 

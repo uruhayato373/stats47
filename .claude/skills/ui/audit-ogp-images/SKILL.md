@@ -36,6 +36,10 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 - OGP タブは各ページの `og:image` meta から**実際に配信されている URL**を解決する (静的フォールバック・
   ランタイム 500 をそのまま反映 = 真実を映す監査)。
 - ranking 系はデフォルト 30 件サンプル、`--all` で全量 (~2000)。他タブは全量。
+- blogは`blog-ogp`と`blog-card`を別契約として判定する。OGPは大きなタイトル・ブランドが必要、
+  cardは640×336 light/darkで画像内テキストが無いことを確認する。
+- blog manifestの`background.source`は`ai`または`shared`を正とし、`shared`は記事prefixに
+  `ogp/background.jpg`を持たない。背景欠落と共有の非複製を混同しない。
 
 ## 目視 (クラウド / ローカル)
 

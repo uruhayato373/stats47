@@ -18,9 +18,11 @@ const item = (
   topicKey: string | null,
   subtitle: string | null = null,
   top1: { areaName: string; value: string | null } | null = null,
+  readerLabel?: string,
 ): CategoryTopicListItem => ({
   rankingKey,
   title,
+  readerLabel,
   subtitle,
   unit: "％",
   topicKey,
@@ -73,6 +75,21 @@ describe("CategoryTopicGroups", () => {
     expect(html).toContain("女性・非有業者");
     // 畳んだ行の件数バッジは畳み後の 1
     expect(html).toContain(">1<");
+  });
+
+  it("正準名で同名判定しつつ、表示には読者向けラベルを使う", () => {
+    const html = markup([
+      item(
+        "diy",
+        "日曜大工の行動者率",
+        "other",
+        null,
+        null,
+        "日曜大工をした人の割合",
+      ),
+    ]);
+    expect(html).toContain("日曜大工をした人の割合");
+    expect(html).not.toContain("日曜大工の行動者率");
   });
 
   it("subtitle が無い畳み行は「総数」と表示する", () => {

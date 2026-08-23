@@ -310,6 +310,12 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   validator (catalog well-formed) × generate:catalog --check (catalog==page-components JSON) ×
   mirror gate (mirror==collector 出力) → 監査は mirror 全件。テスト計 44 (mirror parity + provenance 3)。
   **残 (WP6): 全 192 request の live 全件緑は e-Stat 実照会が要る (read-only・cron が担う)**。
+- **survey taxonomy 横断 checkpoint (2026-08-22)**: `survey-taxonomy.ts` を共通 resolver とし、
+  ranking / ThemeCatalog 113 chart / 公開 blog chart を同じ survey master へ接続。master 80、ranking active
+  2,164 件中 1,924 解決 (88.91%)、theme は適用対象 89/89 解決 (100%)、blog は 1,087 chart 中
+  resolved 733 / unresolved 99 / missing-lineage 179 / not-applicable 76。週次全量監査・PR offline freshness・
+  shrink-only ratchet・双方向 UI / GA4 計測まで実装済み。blog lineage 再監査は 1,089 枚中 source+json 983 / neither 106、
+  source provenance defect 22。残件は推測で survey を付けず、本項目 WP6 と既存 lineage queue で縮小する。
 - **WP5 core (2026-08-13)**: 色 semantic role の SSOT `theme-catalog/chart-color-role.ts`
   (`CHART_COLOR_ROLES` 20 role + web resolver `resolveChartColorCssVar` + static/SVG resolver
   `resolveChartColorHex`)。両 resolver が同 role 集合を実装する parity をテスト固定

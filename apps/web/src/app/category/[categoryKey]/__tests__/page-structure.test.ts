@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
+import { listCategories } from '@stats47/data-configs/categories';
 import { describe, expect, it } from 'vitest';
 
 const PAGE = readFileSync(
@@ -9,7 +10,7 @@ const PAGE = readFileSync(
 );
 
 describe('category page featured ranking cards', () => {
-  it('homeと同じカードmodel resolverと共通componentだけを使う', () => {
+  it('homeと同じカードmodel resolver・carousel・共通componentを使う', () => {
     const featuredSection =
       PAGE.match(
         /\{\/\* 注目ランキング \*\/\}([\s\S]*?)\{\/\* 全件テーブル \*\/\}/
@@ -18,12 +19,56 @@ describe('category page featured ranking cards', () => {
     expect(PAGE).toContain('buildFeaturedRankingCardModel({');
     expect(featuredSection).toContain('<FeaturedRankingCard');
     expect(featuredSection).toContain('model={item.model}');
-    expect(featuredSection).toContain(
-      'grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3'
-    );
+    expect(featuredSection).toContain('<HorizontalCardCarousel');
     expect(featuredSection).not.toContain('fitHeight');
     expect(featuredSection).not.toContain('topAreaName=');
     expect(featuredSection).not.toContain('tileMapSvg=');
+  });
+
+  it('home準拠の2ペインでカテゴリ関連記事を本文に表示する', () => {
+    expect(PAGE).toContain(
+      'lg:grid-cols-[264px_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[280px_minmax(0,1fr)]'
+    );
+    expect(PAGE).toContain('listArticlesByTagKey(blogTagKey, 8)');
+    expect(PAGE).toContain('surface="category_blog"');
+    expect(PAGE).toContain('title={`${category.categoryName}の新着ブログ`}');
+    expect(PAGE).not.toContain('<HeroBanner');
+    expect(PAGE).not.toContain('<RightRailWidgets');
+    expect(PAGE).toContain('<PrefectureNavigator');
+    expect(PAGE).toContain('surface="category"');
+    expect(PAGE).not.toContain('REGIONS.map');
+    expect(PAGE).not.toContain('prefMap');
+  });
+
+  it('パンくずと簡潔な見出しを右のメイン領域に置く', () => {
+    const mainColumn =
+      PAGE.match(
+        /<div className="order-1 min-w-0 lg:order-2">([\s\S]*?)\{\/\* 注目ランキング \*\/\}/
+      )?.[1] ?? '';
+
+    expect(mainColumn).toContain('<Breadcrumbs');
+    expect(mainColumn).toContain('<PageHeader');
+    expect(mainColumn).toContain(
+      '`${category.categoryName}に関する都道府県ランキングを、地図やグラフで比較できます。`'
+    );
+    expect(PAGE).not.toContain('eyebrow="カテゴリ"');
+    expect(PAGE).not.toContain('stats={`全${rankingItems.length}件のランキング`}');
+  });
+
+  it('全カテゴリに関連記事タグを明示する', () => {
+    const mapping =
+      PAGE.match(
+        /const CATEGORY_BLOG_TAG_KEYS:[\s\S]*?= \{([\s\S]*?)\n\};/
+      )?.[1] ?? '';
+    const mappedCategoryKeys = Array.from(
+      mapping.matchAll(/^\s{2}([a-z]+):/gm),
+      (match) => match[1]
+    ).sort();
+    const categoryKeys = listCategories()
+      .map((category) => category.categoryKey)
+      .sort();
+
+    expect(mappedCategoryKeys).toEqual(categoryKeys);
   });
 
   it('全件readから派生値と地図を作り、1位batchを重複取得しない', () => {

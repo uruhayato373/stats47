@@ -1,0 +1,141 @@
+name: 🧬 Survey Taxonomy Audit (weekly)
+
+# ranking / theme chart / blog chart を survey master へ接続する横断 taxonomy と、
+# survey portfolio / experiment の鮮度を週次で再導出する。
+# R2 は公開 GET のみ。R2 write / deploy / コンテンツ生成は行わない。
+# 正典: .claude/rules/survey-linkage-standards.md
+
+on:
+  schedule:
+    - cron: "30 15 * * 0" # 日 15:30 UTC = 月 00:30 JST (週次 metrics 完了後)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: survey-taxonomy-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧬 Rebuild cross-surface taxonomy
+        id: taxonomy
+        run: |
+          set +e
+          npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts \
+            --json .claude/state/surveys/taxonomy.json --tighten-ratchet \
+            2>&1 | tee /tmp/survey-taxonomy.log
+          BUILD_RC="${PIPESTATUS[0]}"
+          npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts \
+            --offline --check 2>&1 | tee -a /tmp/survey-taxonomy.log
+          CHECK_RC="${PIPESTATUS[0]}"
+          RC=0
+          if [ "$BUILD_RC" -ne 0 ] || [ "$CHECK_RC" -ne 0 ]; then RC=1; fi
+          echo "exit_code=$RC" >> "$GITHUB_OUTPUT"
+
+      - name: 📋 Rebuild portfolio and evaluate experiments
+        id: portfolio
+        run: |
+          set +e
+          bash .claude/scripts/surveys/run-survey-portfolio-audit.sh \
+            2>&1 | tee /tmp/survey-portfolio.log
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: 📝 Add audit summary
+        if: always()
+        run: |
+          {
+            echo "### Survey taxonomy / portfolio 週次監査"
+            echo '```'
+            tail -30 /tmp/survey-taxonomy.log 2>/dev/null || true
+            tail -30 /tmp/survey-portfolio.log 2>/dev/null || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 📤 Commit survey state to develop
+        if: steps.taxonomy.outputs.exit_code == '0' && steps.portfolio.outputs.exit_code == '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/surveys/taxonomy.json \
+            .claude/state/surveys/portfolio.json \
+            .claude/state/surveys/experiments.json \
+            .claude/config/survey-taxonomy-ratchet.json
+          if git diff --cached --quiet; then
+            echo "No survey state changes"
+            exit 0
+          fi
+          git commit -m "chore(survey): weekly taxonomy audit $(date -u +%Y-%m-%d) [skip ci]"
+          git pull --rebase --autostash origin develop
+          git push origin develop
+
+      - name: 🚨 Open issue on taxonomy or portfolio failure
+        if: steps.taxonomy.outputs.exit_code != '0' || steps.portfolio.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[Survey Taxonomy Alert] 調査taxonomyの横断整合または鮮度に異常"
+          {
+            echo "## Survey taxonomy 週次監査 ($DATE)"
+            echo ""
+            echo "ranking / theme / blog の横断紐付け、または portfolio / experiment の更新に失敗しました。"
+            echo "既知の未解決件数は ratchet 内なら失敗ではなく、悪化・state drift・stale だけを通知します。"
+            echo ""
+            echo "### Taxonomy"
+            echo '```'
+            tail -50 /tmp/survey-taxonomy.log
+            echo '```'
+            echo "### Portfolio"
+            echo '```'
+            tail -50 /tmp/survey-portfolio.log
+            echo '```'
+            echo ""
+            echo "正典: `.claude/rules/survey-linkage-standards.md`"
+            echo "state: `.claude/state/surveys/{taxonomy,portfolio,experiments}.json`"
+          } > /tmp/survey-taxonomy-issue.md
+
+          gh label create survey-taxonomy-alert \
+            --description "調査taxonomyの横断整合・鮮度・ratchet異常" \
+            --color "b60205" --force 2>/dev/null || true
+          EXISTING=$(gh issue list --state open --label survey-taxonomy-alert \
+            --search '"[Survey Taxonomy Alert]" in:title' --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/survey-taxonomy-issue.md
+          else
+            gh issue create --title "$TITLE" \
+              --label "survey-taxonomy-alert,auto-generated" \
+              --body-file /tmp/survey-taxonomy-issue.md
+          fi
+
+      - name: ✅ Close recovered taxonomy alert
+        if: steps.taxonomy.outputs.exit_code == '0' && steps.portfolio.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label survey-taxonomy-alert --limit 100 \
+            --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "Survey taxonomy / portfolio の週次監査が正常へ復旧したため自動Closeします。"
+            done

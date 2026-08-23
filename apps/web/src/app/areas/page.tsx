@@ -4,9 +4,9 @@ import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 
 import { FooterAdSlot } from '@/features/ads';
 import {
-  AreaDirectory,
   AreaDirectoryRegionNav,
   AreaDirectoryRegionProvider,
+  PrefectureNavigator,
 } from '@/features/area-profile';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
@@ -66,7 +66,13 @@ export default function AreasPage() {
           description="47都道府県の全国順位、地域の強み・弱み、人口・産業・暮らしの統計を確認できます。"
         />
 
-        <AreaDirectory prefectures={prefectures} />
+        <PrefectureNavigator
+          prefectures={prefectures}
+          variant="full"
+          surface="areas"
+          heading="都道府県を選ぶ"
+          className="mt-2"
+        />
 
         {/*
           一覧面の共通フッター枠。PageShell の左レール化により広告は本文カラム幅へ

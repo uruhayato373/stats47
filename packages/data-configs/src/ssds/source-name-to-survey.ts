@@ -14,6 +14,7 @@
  *     割り当てる (未マッピングでも全 metric が必ず原典を 1 つ以上持つことを保証)。
  *
  * 出典 Excel: https://www.stat.go.jp/data/ssds/2.html (アクセス日 2026-06-02)
+ * 追加原典の所管・公式 URL は各府省サイトで確認 (アクセス日 2026-08-22)。
  */
 
 /** 既存 survey マスタ (surveys.json) に存在する id への対応 */
@@ -39,6 +40,7 @@ export const KNOWN_SOURCE_TO_SURVEY: Record<string, string> = {
   全国消費実態調査報告: "national-household-survey", // 全国家計構造調査の前身
   犯罪統計書: "police-statistics",
   交通事故統計年報: "traffic-accident-statistics",
+  道路の交通に関する統計: "traffic-accident-statistics",
   宿泊旅行統計調査報告: "accommodation-survey",
   "医師・歯科医師・薬剤師統計": "physician-survey",
   "医師・歯科医師・薬剤師調査": "physician-survey",
@@ -57,7 +59,7 @@ export const KNOWN_SOURCE_TO_SURVEY: Record<string, string> = {
  */
 export const PROPOSED_NEW_SURVEYS: Record<
   string,
-  { id: string; name: string; organization?: string }
+  { id: string; name: string; organization?: string; url?: string }
 > = {
   // --- Phase 1 で宣言済 ---
   社会福祉施設等調査: { id: "social-welfare-facility-survey", name: "社会福祉施設等調査", organization: "厚生労働省" },
@@ -69,7 +71,12 @@ export const PROPOSED_NEW_SURVEYS: Record<
   "介護サービス施設・事業所調査": { id: "care-service-facility-survey", name: "介護サービス施設・事業所調査", organization: "厚生労働省" },
   被保護者調査: { id: "public-assistance-survey", name: "被保護者調査", organization: "厚生労働省" },
   消費者物価指数年報: { id: "cpi-annual", name: "消費者物価指数年報", organization: "総務省統計局" },
-  "小売物価統計調査（構造編）": { id: "retail-price-survey", name: "小売物価統計調査（構造編）", organization: "総務省統計局" },
+  "小売物価統計調査（構造編）": {
+    id: "retail-price-survey",
+    name: "小売物価統計調査（構造編）",
+    organization: "総務省統計局",
+    url: "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
+  },
   学校保健統計調査報告書: { id: "school-health-survey", name: "学校保健統計調査報告書", organization: "文部科学省" },
   福祉行政報告例: { id: "welfare-admin-report", name: "福祉行政報告例", organization: "厚生労働省" },
   事業所・企業統計調査報告: { id: "establishment-enterprise-census", name: "事業所・企業統計調査報告", organization: "総務省" },
@@ -99,6 +106,38 @@ export const PROPOSED_NEW_SURVEYS: Record<
   建設工事施工統計調査報告: { id: "construction-work-statistics", name: "建設工事施工統計調査報告", organization: "国土交通省" },
   旅客地域流動調査: { id: "passenger-regional-flow-survey", name: "旅客地域流動調査", organization: "国土交通省" },
   自然公園の面積: { id: "natural-park-area", name: "自然公園の面積", organization: "環境省" },
+
+  // --- 2026-08 調査 taxonomy 横断監査で正式化した原典 ---
+  貨物地域流動調査: {
+    id: "freight-regional-flow-survey",
+    name: "貨物地域流動調査",
+    organization: "国土交通省",
+    url: "https://www.mlit.go.jp/statistics/details/sample03_2_00035.html",
+  },
+  "厚生年金保険・国民年金事業年報": {
+    id: "pension-insurance-annual-report",
+    name: "厚生年金保険・国民年金事業年報",
+    organization: "厚生労働省",
+    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000106808_1.html",
+  },
+  国民医療費: {
+    id: "national-medical-expenditure",
+    name: "国民医療費",
+    organization: "厚生労働省",
+    url: "https://www.mhlw.go.jp/toukei/list/37-21a.html",
+  },
+  後期高齢者医療事業年報: {
+    id: "late-elderly-medical-annual-report",
+    name: "後期高齢者医療事業年報",
+    organization: "厚生労働省",
+    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/iryouhoken/database/seido/kouki_houkoku.html",
+  },
+  "港湾調査（港湾統計年報）": {
+    id: "port-statistics",
+    name: "港湾調査（港湾統計年報）",
+    organization: "国土交通省",
+    url: "https://www.mlit.go.jp/k-toukei/kouwan.html",
+  },
 
   // --- override 解決に必要な原典 ---
   日本銀行統計: { id: "boj-statistics", name: "日本銀行統計", organization: "日本銀行" },

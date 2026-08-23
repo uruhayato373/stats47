@@ -13,8 +13,9 @@ export {
 } from "./exporters/home-featured";
 export {
   buildRankingItemFromMetric,
+  resolveSurveyLinkage,
   yearNameOf,
   type BuildContext,
   type ValuesContext,
 } from "./builders/build-ranking-item-from-metric";
-
+export * from "./survey/survey-taxonomy";

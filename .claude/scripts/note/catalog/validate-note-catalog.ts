@@ -7,7 +7,7 @@
  *   npx tsx .claude/scripts/note/catalog/validate-note-catalog.ts [--strict]
  *   (--strict は warn も exit 1)
  */
-import { readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { NOTE_ARTICLES, NOTE_MAGAZINE_KEYS, getMagazine } from "./index";
@@ -18,6 +18,19 @@ const STRICT = process.argv.includes("--strict");
 
 const errors: string[] = [];
 const warns: string[] = [];
+const HARD_READER_TITLE_PATTERN = /行動者率/;
+
+function parseFrontmatterTitle(markdown: string): string | null {
+  const raw = markdown.match(/^title:\s*(.+?)\s*$/m)?.[1]?.trim();
+  if (!raw) return null;
+  if (
+    (raw.startsWith('"') && raw.endsWith('"')) ||
+    (raw.startsWith("'") && raw.endsWith("'"))
+  ) {
+    return raw.slice(1, -1);
+  }
+  return raw;
+}
 
 // KNOWN_RANKING_KEYS を正規表現で読む (react-server import を避ける)
 let knownKeys = new Set<string>();
@@ -49,6 +62,68 @@ for (const [title, keys] of titleSeen)
     warns.push(`title 重複の疑い: "${title.slice(0, 30)}…" → ${keys.join(", ")}`);
 
 for (const a of NOTE_ARTICLES) {
+  // 読者が最初に見る表題には、統計上の専門語ではなく平易なコピーを使う。
+  // 本文中で正式名称として「行動者率」を説明することは許可する。
+  if (HARD_READER_TITLE_PATTERN.test(a.title)) {
+    errors.push(`${a.key}: catalog title に専門語「行動者率」が残存`);
+  }
+
+  // ローカル R2 mirror がある環境では、記事表題・H1・catalog のドリフトも検査する。
+  const draftPath = join(ROOT, ".local/r2", a.r2Path, "draft.md");
+  if (existsSync(draftPath)) {
+    const markdown = readFileSync(draftPath, "utf8");
+    const draftTitle = parseFrontmatterTitle(markdown);
+    if (!draftTitle) {
+      errors.push(`${a.key}: draft.md frontmatter に title なし`);
+    } else {
+      if (draftTitle !== a.title) {
+        errors.push(`${a.key}: catalog title と draft.md title が不一致`);
+      }
+      if (HARD_READER_TITLE_PATTERN.test(draftTitle)) {
+        errors.push(`${a.key}: draft.md title に専門語「行動者率」が残存`);
+      }
+    }
+
+    const h1 = markdown.match(/^#\s+(.+)$/m)?.[1]?.trim();
+    if (h1 && HARD_READER_TITLE_PATTERN.test(h1)) {
+      errors.push(`${a.key}: 記事H1に専門語「行動者率」が残存`);
+    }
+    if (
+      draftTitle?.includes("都道府県ランキング") &&
+      markdown.includes("行動者率") &&
+      !a.stats47Targets?.length
+    ) {
+      errors.push(`${a.key}: 平易化したランキング記事だが stats47Targets なし`);
+    }
+
+    const coverManifestPath = join(
+      ROOT,
+      ".local/r2",
+      a.r2Path,
+      "images/cover-generation.json",
+    );
+    if (existsSync(coverManifestPath)) {
+      try {
+        const coverManifest = JSON.parse(
+          readFileSync(coverManifestPath, "utf8"),
+        ) as { metadata?: { title?: string } };
+        const coverTitle = coverManifest.metadata?.title;
+        if (!coverTitle) {
+          errors.push(`${a.key}: cover-generation.json に metadata.title なし`);
+        } else {
+          if (draftTitle && coverTitle !== draftTitle) {
+            errors.push(`${a.key}: cover title と draft.md title が不一致`);
+          }
+          if (HARD_READER_TITLE_PATTERN.test(coverTitle)) {
+            errors.push(`${a.key}: cover title に専門語「行動者率」が残存`);
+          }
+        }
+      } catch {
+        errors.push(`${a.key}: cover-generation.json が不正なJSON`);
+      }
+    }
+  }
+
   // 3. magazine キー実在 + vertical 整合
   if (a.magazine !== null) {
     if (!NOTE_MAGAZINE_KEYS.has(a.magazine)) {

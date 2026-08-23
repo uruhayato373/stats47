@@ -22,7 +22,7 @@ PORT=5000 npm run admin    # ポート上書き
 | パス | 内容 |
 |---|---|
 | `/` | 導線 + 件数サマリ |
-| `/sns` | 投稿台帳 (X/IG。YouTube は撤退済で過去実績のみ閲覧)・素材再生・caption 編集・投稿/予約・残枠・IG 整合性警告 |
+| `/sns` | 投稿台帳 (X/IG と YouTube 過去実績/pilot 記録)・素材再生・caption 編集・投稿/予約・残枠・IG 整合性警告。YouTube 投稿は Studio の人間工程 |
 | `/assets` | 画像/動画資産 11 タブ・欠落チェック (HEAD probe)・再生成 (whitelist 5 タブのみ) |
 | `/svg` | ブログ SVG 分類カタログ (手動ロード・10 分キャッシュ) |
 | `/dashboard` | メトリクス/進捗キュー/バックログ/STP の読み取り専用ミラー (60 秒キャッシュ) |

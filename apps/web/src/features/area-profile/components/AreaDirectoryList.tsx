@@ -19,6 +19,8 @@ interface AreaDirectoryListProps {
   activeRegionCode?: string;
   /** リンククリック時の計測フック（遷移は Link 自身が行う） */
   onSelect?: (prefCode: string, prefName: string) => void;
+  /** embedded 面では境界線カードを省き、地方別テキストリンクとして密度を上げる。 */
+  density?: "comfortable" | "compact";
   className?: string;
 }
 
@@ -26,7 +28,7 @@ interface AreaDirectoryListProps {
  * 地方区分ごとの都道府県リンク一覧（semantic list・SSR）。
  *
  * `<nav>` > 地方 `<section>` > `<ul><li><Link>` の構造で、全県がキーボードだけで到達可能。
- * 各リンクは最低 44px の高さを持つ（モバイルのタップターゲット）。
+ * comfortable の各リンクは最低44px、embedded向けcompactは32pxのインラインリンク。
  * 同一ページ内で複数箇所（デスクトップ 2 ペイン / モバイルタブ）に描画されるため、
  * 重複 id を避けて `aria-label` で見出しを与える。
  */
@@ -34,10 +36,16 @@ export function AreaDirectoryList({
   regionGroups,
   activeRegionCode = "all",
   onSelect,
+  density = "comfortable",
   className,
 }: AreaDirectoryListProps) {
+  const compact = density === "compact";
+
   return (
-    <nav aria-label="都道府県一覧" className={cn("flex flex-col gap-5", className)}>
+    <nav
+      aria-label="都道府県一覧"
+      className={cn("flex flex-col", compact ? "gap-3" : "gap-5", className)}
+    >
       {regionGroups.map((region) => {
         const isHidden =
           activeRegionCode !== "all" && activeRegionCode !== region.regionCode;
@@ -57,7 +65,13 @@ export function AreaDirectoryList({
               />
               {region.regionName}
             </h3>
-            <ul className="grid grid-cols-2 gap-1.5 xl:grid-cols-3">
+            <ul
+              className={cn(
+                compact
+                  ? "flex flex-wrap gap-x-1 gap-y-0.5"
+                  : "grid grid-cols-2 gap-1.5 xl:grid-cols-3",
+              )}
+            >
               {region.prefectures.map((pref) => (
                 <li key={pref.prefCode}>
                   <Link
@@ -65,14 +79,18 @@ export function AreaDirectoryList({
                     aria-label={`${pref.prefName}の統計を見る`}
                     onClick={() => onSelect?.(pref.prefCode, pref.prefName)}
                     className={cn(
-                      "flex min-h-11 items-center justify-between gap-2 rounded-none border border-border bg-card px-3 text-sm text-foreground transition-colors hover:bg-muted",
+                      compact
+                        ? "inline-flex min-h-8 items-center px-1.5 text-sm text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+                        : "flex min-h-11 items-center justify-between gap-2 rounded-none border border-border bg-card px-3 text-sm text-foreground transition-colors hover:bg-muted",
                       FOCUS_RING,
                     )}
                   >
                     <span>{pref.prefName}</span>
-                    <span aria-hidden="true" className="text-muted-foreground">
-                      →
-                    </span>
+                    {!compact && (
+                      <span aria-hidden="true" className="text-muted-foreground">
+                        →
+                      </span>
+                    )}
                   </Link>
                 </li>
               ))}

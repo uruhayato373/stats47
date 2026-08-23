@@ -8,7 +8,7 @@ import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
  * actions.ts のガードを検証する: REGEN whitelist 外 kind 拒否 / keys 正規表現違反 /
  * X 7 日ガード (lastPublishXSuccess)。
  * spawn は mock して実プロセスを起動しない。
- * (YouTube は撤退済のため publishYt 系テストは削除)
+ * (YouTube pilot は Studio 手動投稿のため publishYt action を持たない)
  */
 class FakeChild extends EventEmitter {
   stdout = new EventEmitter();

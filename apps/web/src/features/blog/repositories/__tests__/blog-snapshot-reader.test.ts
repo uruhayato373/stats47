@@ -15,7 +15,12 @@ vi.mock("@stats47/r2-storage/server", () => ({
   createSnapshotReader: () => loadSnapshot,
 }));
 
-function article(slug: string, publishedAt: string, published = true) {
+function article(
+  slug: string,
+  publishedAt: string,
+  published = true,
+  surveyIds?: string[],
+) {
   return {
     slug,
     title: `${slug} のタイトル`,
@@ -31,6 +36,7 @@ function article(slug: string, publishedAt: string, published = true) {
     createdAt: publishedAt,
     updatedAt: publishedAt,
     tags: [{ tagKey: "population" }],
+    ...(surveyIds ? { surveyIds } : {}),
   };
 }
 
@@ -126,5 +132,35 @@ describe("readBlogIndexPageFromR2", () => {
     await expect(readBlogIndexPageFromR2(2, 0)).rejects.toThrow(
       "R2 unavailable",
     );
+  });
+});
+
+describe("readArticleSummariesBySurveyIdFromR2", () => {
+  it("公開記事だけを surveyId で逆引きし、新しい順と limit を守る", async () => {
+    loadSnapshot.mockResolvedValueOnce({
+      ...SNAPSHOT,
+      articles: [
+        article("old", "2026-01-01", true, ["kakei-chousa"]),
+        article("new", "2026-05-01", true, ["kakei-chousa"]),
+        article("other", "2026-06-01", true, ["school-basic-survey"]),
+        article("draft", "2026-07-01", false, ["kakei-chousa"]),
+      ],
+    });
+    const { readArticleSummariesBySurveyIdFromR2 } = await importReader();
+
+    const articles = await readArticleSummariesBySurveyIdFromR2(
+      "kakei-chousa",
+      1,
+    );
+
+    expect(articles.map((article) => article.slug)).toEqual(["new"]);
+  });
+
+  it("旧 snapshot の surveyIds 欠落を安全に空配列として扱う", async () => {
+    const { readArticleSummariesBySurveyIdFromR2 } = await importReader();
+
+    await expect(
+      readArticleSummariesBySurveyIdFromR2("kakei-chousa"),
+    ).resolves.toEqual([]);
   });
 });

@@ -193,12 +193,28 @@ npm run google-admin:audit-api
 > ままだと **home の click と混ざって導線別の内訳が取れなくなる**。`TrackedPortalCategoryLink`
 > に `surface` prop を足し、home 側は未指定で挙動不変。値は `trackNavClick` の union で縛る。
 >
+> **nav_surface の値追加 (2026-08-22)**: category ページ本文の関連記事カードに
+> `category_blog` を追加した。home と共通の `PortalBlogCard` を使う一方、home のブログ導線と
+> category 内の関連記事導線を混在させずに内部 CTR を比較するための値追加である。
+>
+> **nav_surface の値追加 (2026-08-22・survey taxonomy)**: ranking / category / theme / blog から
+> 調査ハブへ向かう `ranking_survey` / `category_survey` / `theme_survey` / `blog_survey` と、
+> 調査ハブからコンテンツへ戻る `survey_ranking` / `survey_theme` / `survey_blog` を追加した。
+> いずれも登録済み `nav_surface` / `nav_label` の値追加で、新しい custom dimension は無い。
+> 週次 GA4 snapshot は Japan-only の `survey_ranking` を `survey-navigation.csv` に保存し、
+> survey portfolio の `metrics.internalNav.rankingOutboundClicks` を非重複56日で集計する。
+>
+> **nav_surface の値変更 (2026-08-22)**: home / category / `/areas` の県選択UIを共通の
+> `PrefectureNavigator` へ統合した。home の旧単一入口 `home_area` は送信を終了し、直接選択を
+> `home_area_map` / `home_area_list` で送る。category は `category_area_map` /
+> `category_area_list` を追加した。`areas_search` / `areas_map` / `areas_list` は変更しない。
+>
 > **nav_surface の値追加 (2026-07-23)**: ポータル型 home の発見セクションに
 > `home_category` / `home_use_case` / `home_area` / `home_blog` を追加した
 > (既存 `nav_surface` dimension の**値追加**・新 dimension なし)。home → カテゴリ/テーマ/都道府県/
 > ブログのclick内訳を導線別に判定するのに使う。呼び出し元は
 > `apps/web/src/features/home-portal/`。検索はHeaderの`trackSearch`
-> (GA4標準`search`)を使う。4つのsurfaceはすべて実装済み。
+> (GA4標準`search`)を使う。なお `home_area` は 2026-08-22 に上記の map/list 2値へ置換した。
 
 ---
 

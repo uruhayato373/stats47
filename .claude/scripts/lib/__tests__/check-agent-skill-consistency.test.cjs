@@ -281,6 +281,67 @@ npm run blog-images:codex -- request --slug example
   assert.match(result.stdout, /\[E10\].*mcp-server/);
 });
 
+test("accepts YouTube master-first pilot and TikTok withdrawal policy", (t) => {
+  const root = fixture({
+    ".claude/rules/sns-content-standards.md": [
+      "| **YouTube** | **限定 pilot** |",
+      "通常動画をマスターコンテンツにする",
+      "| **TikTok** | **撤退 (恒久)** |",
+    ].join("\n"),
+    "apps/remotion/scripts/pipeline/render-sns-all.ts": "// IG/X/note only",
+    "apps/remotion/scripts/pipeline/render-bar-chart-race.ts":
+      'const allowed = new Set(["instagram", "x"]);',
+    ".claude/skills/sns/generate-compare/reference/captions.md":
+      "X / Instagram only",
+    ".claude/skills/sns/update-sns-metrics/SKILL.md": `---
+name: update-sns-metrics
+description: YouTube pilot uses manual Studio metrics
+primary_agent: worker
+---
+
+YouTube pilot は Studio 手動計測
+`,
+    ".claude/agents/worker.md": VALID_AGENT,
+  });
+  t.after(() => fs.rmSync(root, { recursive: true }));
+  const result = run(root);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+
+test("rejects legacy YouTube Shorts or TikTok batch paths", (t) => {
+  const root = fixture({
+    ".claude/rules/sns-content-standards.md": [
+      "| **YouTube** | **限定 pilot** |",
+      "通常動画をマスターコンテンツにする",
+      "| **TikTok** | **撤退 (恒久)** |",
+    ].join("\n"),
+    "apps/remotion/scripts/pipeline/render-sns-all.ts":
+      'const id = "RankingYouTube-Short";',
+    "apps/remotion/scripts/pipeline/render-bar-chart-race.ts": [
+      'const allowed = new Set(["instagram", "x"]);',
+      'const old = { platform: "tiktok" };',
+    ].join("\n"),
+    ".claude/skills/sns/generate-compare/reference/captions.md":
+      "youtube/shorts.json\ntiktok/caption.json",
+    ".claude/skills/sns/update-sns-metrics/SKILL.md": `---
+name: update-sns-metrics
+description: YouTube pilot uses manual Studio metrics
+primary_agent: worker
+---
+
+YouTube pilot は Studio 手動計測
+`,
+    ".claude/agents/worker.md": VALID_AGENT,
+  });
+  t.after(() => fs.rmSync(root, { recursive: true }));
+  const result = run(root);
+  assert.equal(result.status, 1);
+  assert.match(result.stdout, /\[E11\]/);
+  assert.match(result.stdout, /旧一括生成経路/);
+  assert.match(result.stdout, /TikTok 自動生成/);
+  assert.match(result.stdout, /比較キャプションの旧出力/);
+});
+
 test("accepts fable as an agent model but still rejects unknown models", (t) => {
   // fable は 2026-08-17 に backlog-loop の escalation 先として許可した。
   // 許可値が野放図に広がらないよう、未知の値は落ちることを同時に固定する。

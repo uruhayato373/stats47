@@ -13,3 +13,7 @@ export { ThemeSideNav } from "./components/ThemeSideNav";
 
 // Server-only loader
 export { loadThemeData } from "./lib/load-theme-data";
+export {
+  THEME_PREFECTURE_COOKIE_NAME,
+  resolveInitialThemePrefecture,
+} from "./lib/theme-prefecture-preference";

@@ -22,7 +22,10 @@ import {
   type MetricRegistry,
   type ProvenanceSurvey,
 } from "@stats47/data-configs";
-import { resolveRankingHook } from "@stats47/data-configs/prominence";
+import {
+  resolveRankingReaderLabel,
+  resolveRankingHook,
+} from "@stats47/data-configs/prominence";
 import { assertKnownColorScheme } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 
@@ -254,6 +257,10 @@ export function buildRankingItemFromMetric(
     areaType: "prefecture" as AreaType,
     rankingName: config.title,
     title: config.title,
+    readerLabel: resolveRankingReaderLabel({
+      rankingKey: config.key,
+      title: config.title,
+    }),
     ...(config.subtitle ? { subtitle: config.subtitle } : {}),
     unit: config.unit,
     categoryKey: config.category,

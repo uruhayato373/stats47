@@ -12,7 +12,8 @@
  * レコードは snake_case (旧 sns_posts カラム名と同一): id / platform / post_type / domain /
  * content_key / caption / post_url / quote_url / media_path / thumbnail_path / has_link /
  * utm_url / status / scheduled_at / posted_at / impressions / likes / reposts / replies /
- * bookmarks / metrics_updated_at / deleted_at / template / metric_keys / created_at / updated_at
+ * bookmarks / metrics_updated_at / deleted_at / template / metric_keys / parent_post_id /
+ * source_timecode / survey_ids / provenance_urls / created_at / updated_at
  */
 
 const fs = require("node:fs");

@@ -34,9 +34,13 @@ export function blogRendererSources(
   const sharedSources = BLOG_IMAGE_GENERATOR_SPEC.rendererSources.filter(
     (source) => source !== BLOG_AI_BACKGROUND_NORMALIZER_SOURCES[0]
   );
-  return backgroundSource === 'brand'
-    ? [...sharedSources, ...BLOG_IMAGE_GENERATOR_SPEC.brandBackgroundSources]
-    : BLOG_IMAGE_GENERATOR_SPEC.rendererSources;
+  if (backgroundSource === 'brand') {
+    return [
+      ...sharedSources,
+      ...BLOG_IMAGE_GENERATOR_SPEC.brandBackgroundSources,
+    ];
+  }
+  return BLOG_IMAGE_GENERATOR_SPEC.rendererSources;
 }
 
 export const IMAGE_GENERATOR_SPECS = {

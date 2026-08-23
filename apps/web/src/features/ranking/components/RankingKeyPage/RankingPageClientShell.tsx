@@ -42,9 +42,9 @@ export function RankingPageClientShell({
       cityRankingItem={model.cityRankingItem?.isActive ? model.cityRankingItem : undefined}
       surveyName={model.surveyName ?? undefined}
       groupMembers={model.groupMembers}
-      nationalTrend={model.nationalTrend}
       breadcrumb={
         <RankingPageBreadcrumbs
+          key="breadcrumb"
           rankingName={model.rankingName}
           category={model.breadcrumbCategory}
         />
@@ -52,6 +52,7 @@ export function RankingPageClientShell({
       sections={{
         sidebar: (
           <RankingPageSidebarSection
+            key="sidebar"
             rankingKey={rankingKey}
             areaType={model.areaType}
             rankingItem={model.rankingItem}
@@ -60,13 +61,20 @@ export function RankingPageClientShell({
             rankingName={model.rankingName}
           />
         ),
-        correlation: <RankingPageCorrelationSection rankingKey={rankingKey} />,
-        rankingPageCards: <RankingPageSupplementCardsSection rankingKey={rankingKey} />,
+        correlation: (
+          <RankingPageCorrelationSection key="correlation" rankingKey={rankingKey} />
+        ),
+        rankingPageCards: (
+          <RankingPageSupplementCardsSection
+            key="ranking-page-cards"
+            rankingKey={rankingKey}
+          />
+        ),
         funnelCta: shouldShowFunnelCta(model.rankingItem.categoryKey) ? (
-          <RankingFunnelCta rankingKey={rankingKey} />
+          <RankingFunnelCta key="funnel-cta" rankingKey={rankingKey} />
         ) : null,
         inContentAffiliate: inContentAffiliateBanner ? (
-          <div className="flex justify-center">
+          <div key="in-content-affiliate" className="flex justify-center">
             <BannerAd
               href={inContentAffiliateBanner.href}
               imageUrl={inContentAffiliateBanner.imageUrl}
@@ -83,6 +91,7 @@ export function RankingPageClientShell({
         ) : null,
         nativeAffiliate: (
           <RankingPageNativeAffiliateSection
+            key="native-affiliate"
             banners={
               ADSENSE_DISPLAY_ENABLED
                 ? affiliateBanners
@@ -93,6 +102,7 @@ export function RankingPageClientShell({
         ),
         relatedRankings: (
           <RankingPageRelatedRankingsSection
+            key="related-rankings"
             rankingKey={rankingKey}
             categoryKey={model.rankingItem.categoryKey}
             areaType={model.areaType}
@@ -100,6 +110,7 @@ export function RankingPageClientShell({
         ),
         insights: (
           <RankingPageInsightsSection
+            key="insights"
             aiContent={model.aiContent}
             rankingName={model.rankingName}
           />
@@ -107,6 +118,7 @@ export function RankingPageClientShell({
         regionalAnalysis: null,
         faq: (
           <RankingPageFaqSection
+            key="faq"
             aiContent={model.aiContent}
             rankingName={model.rankingName}
           />
