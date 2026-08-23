@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-16T13:30:52.636Z",
+  "generatedAt": "2026-08-23T13:32:17.946Z",
   "inventorySnapshot": ".claude/state/ads/inventory-latest.json",
-  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-08-16.json",
+  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-08-23.json",
   "freshness": {
     "inventoryDays": 0,
     "ga4Days": 0
@@ -33,7 +33,7 @@
         "kind": "code",
         "targetLocation": null,
         "startedAt": "2026-08-04",
-        "daysElapsed": 12,
+        "daysElapsed": 19,
         "minSamplePerVariant": 500,
         "minDurationDays": 14,
         "maxDurationDays": 56,
@@ -68,8 +68,8 @@
     }
   ],
   "ga4Totals": {
-    "impressions": 12020,
-    "clicks": 3,
-    "ctr": 0.0002495840266222962
+    "impressions": 21036,
+    "clicks": 11,
+    "ctr": 0.0005229131013500665
   }
 }
