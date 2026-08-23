@@ -1,35 +1,34 @@
-# AdSense Latest — 2026-W33
+# AdSense Latest — 2026-W34
 
 ## 確定7日 KPI (finalized7d・前週比は直前の重複しない7日)
 
 | Metric | 確定7日 | 前週比 |
 |---|---|---|
-| Earnings | 118.00 ▼ |  (-9.2%) |
-| Page Views | 3152 ▼ |  (-29.5%) |
-| Page RPM | 37.000 ▲ | |
-| Impressions | 3318 ▼ |  (-20.1%) |
-| 公式 Imp RPM | ¥36.00 | |
-| Clicks | 29 ▼ |  (-14.7%) |
-| CTR | 0.87% · | |
-| 公式 CPC | ¥4.00 | |
-| Viewability | 48.5% ▼ | |
-| Ad Requests | 11151 | |
-| Coverage | 45.0% | |
+| Earnings | 8.00 ▼ |  (-93.2%) |
+| Page Views | 324 ▼ |  (-89.7%) |
+| Page RPM | 25.000 ▼ | |
+| Impressions | 286 ▼ |  (-91.4%) |
+| 公式 Imp RPM | ¥28.00 | |
+| Clicks | 5 ▼ |  (-82.8%) |
+| CTR | 1.75% · | |
+| 公式 CPC | ¥2.00 | |
+| Viewability | 40.3% ▼ | |
+| Ad Requests | 860 | |
+| Coverage | 46.5% | |
 
 ## 収益分解
 
-- Impression density (imp/PV): **1.053** (前週 0.929)
-- Viewable imp / PV: **0.511**
-- 公式 Imp RPM: ¥36.00 / 公式 CPC: ¥4.00
+- Impression density (imp/PV): **0.883** (前週 1.053)
+- Viewable imp / PV: **0.356**
+- 公式 Imp RPM: ¥28.00 / 公式 CPC: ¥2.00
 
 ## デバイス別（確定7日 / 前週比）
 
 | Platform | RPM | Viewability | 公式CPC | 収益/click(legacy) | imp/PV | Earnings |
 |---|---|---|---|---|---|---|
-| Connected TV | ¥10.00 | 0.0% | ¥0.00 | ¥0.00 | 1.000 | ¥0.00 |
-| Desktop | ¥51.00 ▲ | 52.9% ▼ | ¥43.00 | ¥43.00 | 1.379 | ¥86.00 (-19.6%) |
-| Mobile | ¥20.00 ▲ | 38.3% ▼ | ¥1.00 | ¥1.04 | 0.632 | ¥28.00 (+33.3%) |
-| Tablet | ¥77.00 ▲ | 37.9% ▲ +7.9pp | ¥0.00 | ¥0.00 | 2.102 | ¥4.00 (+100.0%) |
+| Desktop | ¥26.00 ▼ | 50.0% ▼ | ¥5.00 | ¥5.00 | 1.005 | ¥5.00 (-94.2%) |
+| Mobile | ¥21.00 ▲ | 20.2% ▼ -18.1pp | ¥1.00 | ¥0.75 | 0.711 | ¥3.00 (-89.3%) |
+| Tablet | ¥48.00 ▼ | 40.0% ▲ | ¥0.00 | ¥0.00 | 0.846 | ¥1.00 (-75.0%) |
 
 履歴: [`history.csv`](./history.csv) / [`history-devices.csv`](./history-devices.csv) (デバイス別) / [`history-units.csv`](./history-units.csv) (ユニット別) / [`history-formats.csv`](./history-formats.csv) (フォーマット別) / [`history-placements.csv`](./history-placements.csv) (配置別) / [`history-bid-types.csv`](./history-bid-types.csv) (入札型別)
 
