@@ -851,7 +851,12 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 タグ: [進行中] [起票:2026-06-01]
 
 - **owner**: Claude Code
-- **次**: `CONTENT-ROUTINE-LIVE-VERIFY-01` の1件実走後、成功率と利用枠を実測しながら小バッチ件数を決める。
+- **次**: 対話セッションで 3 件並列を続ける。2026-08-24 に 86 件試して生成 FAIL 0 / 公開 83 件
+  (CI の権威ゲートでも skip 0)。止まった 2 件は接地データ側の欠陥で
+  `AICONTENT-BUILDINPUT-ZEROFILL-01` が扱う。旧「次」が指していた
+  `CONTENT-ROUTINE-LIVE-VERIFY-01` はカードが現存せず、日次ループ
+  (`ai-content-generate-daily.yml`) も 2026-08-21 に削除済みなので無効。件数は月次計画が
+  目標を持ち週次が割り当てる。
 - **完了条件**: 全active rankingを処理し、欠測・矛盾・未検証生成を0にする。R2 pushとCDN反映は別承認。
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
@@ -1101,6 +1106,52 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   再開手順に smoke の実行を紐づけた (`affiliate-ads-standards.md` §12)。自動広告の解除は
   実施済みなので、再開後の smoke が緑なら解決とみなす。
 - **完了条件**: AdSense 再開後の post-deploy smoke で、出典・本文がリンク化されないことを示す。
+
+### [AICONTENT-BUILDINPUT-ZEROFILL-01] build-input が R2 に無い県をゼロ埋めするのをやめる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx vitest run packages/ai-content/src] [起票:2026-08-24]
+
+`packages/ai-content/src/scripts/build-input.ts` は R2 の観測値に存在しない県を `value: 0` /
+`rank: 0` で埋めて 47 件に揃え、生成器へ渡す。生成器はそれを実在の観測として読むため、
+対象外の県に解説が書かれる。
+
+- **実害** (2026-08-24 に 6 例を実測。左が R2 の実行数、右がゼロ埋めされる県数):
+  voter-turnout-governor 11/36 ・ fishery-species-catch-snow-crab 14/25 ・
+  factory-location-area-annual 42/5 ・ high-school-teacher-annual-income 42/5 ・
+  port-container-count / port-inbound-ships / fishery-workers-coastal-offshore 39〜40/7〜8
+- **なぜ機械で止まらないか**: `audit-ai-content.mjs` はこれを blocker にしない
+  (`pref-unknown-area` / `pref-count` の warn 止まり)。`voter-turnout-governor` では実際に
+  「この年度に選挙が実施されておらず、投票率の値は記録されていません」という中身のない解説が
+  36 件生成された。嘘ではないが読者価値がなく、rank 0 / value 0 は「投票率 0%」と誤読されうる。
+- **次**: R2 に無い県を渡さない。渡すなら「対象外」と識別できる形にし、生成器とゲートの双方が
+  ゼロ埋めと実在の 0 を区別できるようにする (施設数は 0 が実在しうるので一律除外にはしない)。
+- **完了条件**: 上記 6 key で build-input が返す県数が R2 の行数と一致し、それを固定するテストがある。
+- **保留中の生成物**: `voter-turnout-governor` は `.local/aic-held/` に退避 (公開していない)。
+  `high-school-teacher-annual-income` は未生成。どちらも是正後に生成できる。
+- **正典**: `.claude/rules/ranking-content-standards.md`
+
+### [UI-CARD-CENSUS-SURVEY-01] SurveyTaxonomyCard の census ベースラインを決着させる
+タグ: [UI・UX] [種類:意思決定] [実行:対話] [検証:node .claude/scripts/lib/check-card-census.cjs] [起票:2026-08-24]
+
+`check-card-census.cjs` が 2 件で落ちており、**develop→main の PR (`pr-quality-check`) を
+ブロックする**。develop の CI は通るのでデプロイ直前まで気づけない (2026-08-24 実測)。
+
+- **新規**: `apps/web/src/features/survey/components/SurveyTaxonomyCard.tsx` がベースライン外。
+  まず既存の共有カード (`SurfaceCard` / `ChartPanel` / `ChartCard` / `RailCard` / `KpiCard`) で
+  表現できないか検討する。どうしても必要なら理由コメント付きで BASELINE に追加する。
+- **削除済み**: `NationalTrendCard` が消えているので BASELINE を縮小する。
+- **完了条件**: `node .claude/scripts/lib/check-card-census.cjs` が exit 0。
+- **正典**: `docs/01_技術設計/04_デザインシステム.md` / `.claude/rules/ui-components.md`
+
+### [UI-AD-RAILSLOT-CATEGORY-01] category ページの RailAdSlot を本文カラムから外す
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:node .claude/scripts/lib/check-ad-placement.cjs] [起票:2026-08-24]
+
+`apps/web/src/app/category/[categoryKey]/page.tsx` が `RailAdSlot` を右レール以外で使っている。
+右レール (316px) 前提の枠なので本文カラムに置くと枠だけレール幅で浮く。**develop→main の PR
+(`pr-quality-check`) をブロックする** (2026-08-24 実測)。
+
+- **次**: 本文末尾に置きたいなら `FooterAdSlot` に替える。配置意図が別なら合う枠を選ぶ。
+- **完了条件**: `node .claude/scripts/lib/check-ad-placement.cjs` が exit 0。
+- **正典**: `docs/01_技術設計/04_デザインシステム.md` / `.claude/rules/ui-components.md`
 
 ## 🟡 中 — 2〜3ヶ月以内
 
