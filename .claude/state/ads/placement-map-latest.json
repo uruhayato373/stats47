@@ -1,411 +1,411 @@
 {
-  "generatedAt": "2026-08-16T12:15:49.016Z",
-  "gscWeek": "2026-W33",
+  "generatedAt": "2026-08-23T12:16:39.137Z",
+  "gscWeek": "2026-W34",
   "inputs": {
-    "pages": 3055,
-    "rankingKeys": 2202,
-    "articleTags": 440,
+    "pages": 3303,
+    "rankingKeys": 2193,
+    "articleTags": 445,
     "articleTagsSource": "r2"
   },
   "demand": {
     "byType": {
       "blog": {
-        "imp": 95483,
-        "clicks": 1813,
-        "pages": 729
+        "imp": 116271,
+        "clicks": 2089,
+        "pages": 764
       },
       "ranking": {
-        "imp": 42990,
-        "clicks": 1635,
-        "pages": 1182
+        "imp": 55766,
+        "clicks": 2064,
+        "pages": 1295
       },
       "home": {
-        "imp": 615,
-        "clicks": 43,
+        "imp": 728,
+        "clicks": 57,
         "pages": 1
       },
-      "other": {
-        "imp": 92,
-        "clicks": 5,
-        "pages": 8
-      },
       "areas": {
-        "imp": 9791,
-        "clicks": 110,
-        "pages": 993
+        "imp": 11351,
+        "clicks": 137,
+        "pages": 1082
       },
       "themes": {
-        "imp": 736,
-        "clicks": 14,
+        "imp": 1017,
+        "clicks": 27,
         "pages": 23
       },
+      "other": {
+        "imp": 108,
+        "clicks": 4,
+        "pages": 13
+      },
       "survey": {
-        "imp": 1029,
-        "clicks": 12,
+        "imp": 1120,
+        "clicks": 13,
         "pages": 60
       },
       "category": {
-        "imp": 722,
-        "clicks": 5,
+        "imp": 1104,
+        "clicks": 10,
         "pages": 17
       },
       "tag": {
-        "imp": 98,
+        "imp": 162,
         "clicks": 0,
-        "pages": 42
+        "pages": 48
       }
     },
     "byVertical": {
       "economy": {
-        "imp": 102238,
-        "clicks": 2411,
-        "pages": 1190
+        "imp": 128914,
+        "clicks": 2920,
+        "pages": 1265
       },
       "population": {
-        "imp": 8024,
-        "clicks": 320,
-        "pages": 172
+        "imp": 9349,
+        "clicks": 357,
+        "pages": 173
       },
       "education": {
-        "imp": 11362,
-        "clicks": 389,
-        "pages": 165
+        "imp": 13370,
+        "clicks": 480,
+        "pages": 176
       },
       "mobility": {
-        "imp": 4518,
-        "clicks": 102,
-        "pages": 81
+        "imp": 5785,
+        "clicks": 146,
+        "pages": 88
       },
       "health": {
-        "imp": 11176,
-        "clicks": 217,
-        "pages": 141
+        "imp": 13448,
+        "clicks": 245,
+        "pages": 163
       },
       "furusato": {
-        "imp": 14400,
-        "clicks": 228,
-        "pages": 1118
+        "imp": 16619,
+        "clicks": 271,
+        "pages": 1214
       },
       "energy": {
-        "imp": 1221,
-        "clicks": 30,
-        "pages": 28
+        "imp": 1463,
+        "clicks": 42,
+        "pages": 29
       },
       "labor": {
-        "imp": 3739,
-        "clicks": 87,
-        "pages": 159
+        "imp": 4566,
+        "clicks": 82,
+        "pages": 170
       },
       "housing": {
-        "imp": 1561,
-        "clicks": 43,
+        "imp": 1717,
+        "clicks": 52,
         "pages": 59
       },
       "travel": {
-        "imp": 813,
-        "clicks": 6,
-        "pages": 34
+        "imp": 861,
+        "clicks": 8,
+        "pages": 37
       }
     },
     "byTypeVertical": [
       {
         "type": "blog",
         "vertical": "economy",
-        "imp": 77860,
-        "clicks": 1366,
-        "pages": 532
+        "imp": 95216,
+        "clicks": 1582,
+        "pages": 559
       },
       {
         "type": "ranking",
         "vertical": "economy",
-        "imp": 22934,
-        "clicks": 1027,
-        "pages": 590
+        "imp": 31951,
+        "clicks": 1313,
+        "pages": 638
       },
       {
         "type": "areas",
         "vertical": "furusato",
-        "imp": 9791,
-        "clicks": 110,
-        "pages": 993
+        "imp": 11351,
+        "clicks": 137,
+        "pages": 1082
       },
       {
         "type": "ranking",
         "vertical": "education",
-        "imp": 8896,
-        "clicks": 227,
-        "pages": 147
+        "imp": 10421,
+        "clicks": 293,
+        "pages": 158
       },
       {
         "type": "blog",
         "vertical": "health",
-        "imp": 8102,
-        "clicks": 106,
-        "pages": 36
+        "imp": 9719,
+        "clicks": 109,
+        "pages": 37
       },
       {
         "type": "blog",
         "vertical": "population",
-        "imp": 5378,
-        "clicks": 238,
-        "pages": 61
+        "imp": 6307,
+        "clicks": 259,
+        "pages": 59
       },
       {
         "type": "ranking",
         "vertical": "health",
-        "imp": 2890,
-        "clicks": 108,
-        "pages": 102
+        "imp": 3377,
+        "clicks": 129,
+        "pages": 123
       },
       {
         "type": "blog",
         "vertical": "mobility",
-        "imp": 2519,
-        "clicks": 51,
+        "imp": 2913,
+        "clicks": 65,
         "pages": 13
       },
       {
         "type": "blog",
         "vertical": "education",
-        "imp": 2427,
-        "clicks": 162,
+        "imp": 2882,
+        "clicks": 186,
         "pages": 16
-      },
-      {
-        "type": "blog",
-        "vertical": "furusato",
-        "imp": 2397,
-        "clicks": 51,
-        "pages": 29
-      },
-      {
-        "type": "ranking",
-        "vertical": "furusato",
-        "imp": 2138,
-        "clicks": 67,
-        "pages": 92
-      },
-      {
-        "type": "blog",
-        "vertical": "labor",
-        "imp": 2055,
-        "clicks": 43,
-        "pages": 52
       },
       {
         "type": "ranking",
         "vertical": "mobility",
-        "imp": 1916,
-        "clicks": 51,
-        "pages": 62
+        "imp": 2749,
+        "clicks": 78,
+        "pages": 69
+      },
+      {
+        "type": "blog",
+        "vertical": "labor",
+        "imp": 2689,
+        "clicks": 42,
+        "pages": 60
+      },
+      {
+        "type": "blog",
+        "vertical": "furusato",
+        "imp": 2673,
+        "clicks": 58,
+        "pages": 26
+      },
+      {
+        "type": "ranking",
+        "vertical": "furusato",
+        "imp": 2476,
+        "clicks": 75,
+        "pages": 102
       },
       {
         "type": "ranking",
         "vertical": "population",
-        "imp": 1284,
-        "clicks": 65,
-        "pages": 48
+        "imp": 1507,
+        "clicks": 78,
+        "pages": 51
       },
       {
         "type": "ranking",
         "vertical": "housing",
-        "imp": 1277,
-        "clicks": 35,
-        "pages": 49
+        "imp": 1393,
+        "clicks": 43,
+        "pages": 47
       },
       {
         "type": "survey",
         "vertical": "economy",
-        "imp": 1029,
-        "clicks": 12,
+        "imp": 1120,
+        "clicks": 13,
         "pages": 60
       },
       {
         "type": "survey",
         "vertical": "population",
-        "imp": 1029,
-        "clicks": 12,
+        "imp": 1120,
+        "clicks": 13,
         "pages": 60
       },
       {
         "type": "survey",
         "vertical": "labor",
-        "imp": 1029,
-        "clicks": 12,
+        "imp": 1120,
+        "clicks": 13,
         "pages": 60
       },
       {
         "type": "blog",
         "vertical": "energy",
-        "imp": 659,
-        "clicks": 13,
+        "imp": 755,
+        "clicks": 21,
         "pages": 9
       },
       {
         "type": "ranking",
         "vertical": "labor",
-        "imp": 610,
-        "clicks": 32,
-        "pages": 43
-      },
-      {
-        "type": "ranking",
-        "vertical": "travel",
-        "imp": 484,
-        "clicks": 5,
-        "pages": 26
+        "imp": 705,
+        "clicks": 26,
+        "pages": 46
       },
       {
         "type": "ranking",
         "vertical": "energy",
-        "imp": 413,
-        "clicks": 15,
-        "pages": 17
+        "imp": 520,
+        "clicks": 19,
+        "pages": 18
+      },
+      {
+        "type": "category",
+        "vertical": "economy",
+        "imp": 487,
+        "clicks": 3,
+        "pages": 3
+      },
+      {
+        "type": "ranking",
+        "vertical": "travel",
+        "imp": 465,
+        "clicks": 6,
+        "pages": 28
       },
       {
         "type": "themes",
         "vertical": "population",
-        "imp": 309,
-        "clicks": 5,
+        "imp": 366,
+        "clicks": 6,
         "pages": 2
-      },
-      {
-        "type": "category",
-        "vertical": "economy",
-        "imp": 309,
-        "clicks": 2,
-        "pages": 3
       },
       {
         "type": "blog",
         "vertical": "travel",
-        "imp": 290,
-        "clicks": 1,
-        "pages": 5
-      },
-      {
-        "type": "blog",
-        "vertical": "housing",
-        "imp": 205,
-        "clicks": 5,
-        "pages": 7
+        "imp": 351,
+        "clicks": 2,
+        "pages": 6
       },
       {
         "type": "themes",
         "vertical": "health",
-        "imp": 165,
-        "clicks": 3,
+        "imp": 314,
+        "clicks": 6,
         "pages": 2
+      },
+      {
+        "type": "blog",
+        "vertical": "housing",
+        "imp": 210,
+        "clicks": 6,
+        "pages": 9
       },
       {
         "type": "category",
         "vertical": "energy",
-        "imp": 149,
+        "imp": 188,
         "clicks": 2,
         "pages": 2
       },
       {
         "type": "themes",
         "vertical": "economy",
-        "imp": 106,
-        "clicks": 4,
+        "imp": 140,
+        "clicks": 9,
         "pages": 5
       },
       {
         "type": "category",
         "vertical": "housing",
-        "imp": 76,
+        "imp": 108,
         "clicks": 1,
+        "pages": 2
+      },
+      {
+        "type": "category",
+        "vertical": "furusato",
+        "imp": 77,
+        "clicks": 0,
         "pages": 2
       },
       {
         "type": "themes",
         "vertical": "mobility",
-        "imp": 56,
-        "clicks": 0,
+        "imp": 75,
+        "clicks": 3,
         "pages": 4
       },
       {
         "type": "category",
-        "vertical": "furusato",
-        "imp": 47,
-        "clicks": 0,
-        "pages": 2
+        "vertical": "education",
+        "imp": 54,
+        "clicks": 1,
+        "pages": 1
       },
       {
         "type": "category",
-        "vertical": "education",
-        "imp": 27,
-        "clicks": 0,
+        "vertical": "population",
+        "imp": 49,
+        "clicks": 1,
         "pages": 1
       },
       {
         "type": "category",
         "vertical": "mobility",
-        "imp": 27,
+        "imp": 48,
         "clicks": 0,
         "pages": 2
       },
       {
         "type": "themes",
         "vertical": "furusato",
-        "imp": 27,
-        "clicks": 0,
-        "pages": 2
-      },
-      {
-        "type": "category",
-        "vertical": "population",
-        "imp": 24,
-        "clicks": 0,
-        "pages": 1
-      },
-      {
-        "type": "category",
-        "vertical": "labor",
-        "imp": 23,
-        "clicks": 0,
-        "pages": 1
-      },
-      {
-        "type": "themes",
-        "vertical": "labor",
-        "imp": 22,
-        "clicks": 0,
-        "pages": 3
-      },
-      {
-        "type": "category",
-        "vertical": "travel",
-        "imp": 21,
-        "clicks": 0,
+        "imp": 42,
+        "clicks": 1,
         "pages": 2
       },
       {
         "type": "category",
         "vertical": "health",
-        "imp": 19,
+        "imp": 38,
+        "clicks": 1,
+        "pages": 1
+      },
+      {
+        "type": "category",
+        "vertical": "travel",
+        "imp": 29,
         "clicks": 0,
+        "pages": 2
+      },
+      {
+        "type": "category",
+        "vertical": "labor",
+        "imp": 26,
+        "clicks": 1,
         "pages": 1
       },
       {
         "type": "themes",
+        "vertical": "labor",
+        "imp": 26,
+        "clicks": 0,
+        "pages": 3
+      },
+      {
+        "type": "themes",
         "vertical": "travel",
-        "imp": 18,
+        "imp": 16,
         "clicks": 0,
         "pages": 1
       },
       {
         "type": "themes",
         "vertical": "education",
-        "imp": 12,
+        "imp": 13,
         "clicks": 0,
         "pages": 1
       },
       {
         "type": "themes",
         "vertical": "housing",
-        "imp": 3,
+        "imp": 6,
         "clicks": 2,
         "pages": 1
       }
@@ -452,8 +452,8 @@
   "gaps": [
     {
       "vertical": "economy",
-      "imp": 102238,
-      "clicks": 2411,
+      "imp": 128914,
+      "clicks": 2920,
       "inventory": 27,
       "banner": 16,
       "text": 11,
@@ -461,35 +461,35 @@
     },
     {
       "vertical": "furusato",
-      "imp": 14400,
-      "clicks": 228,
+      "imp": 16619,
+      "clicks": 271,
       "inventory": 7,
       "banner": 4,
       "text": 3,
       "kinds": []
     },
     {
-      "vertical": "education",
-      "imp": 11362,
-      "clicks": 389,
-      "inventory": 25,
-      "banner": 12,
-      "text": 13,
-      "kinds": []
-    },
-    {
       "vertical": "health",
-      "imp": 11176,
-      "clicks": 217,
+      "imp": 13448,
+      "clicks": 245,
       "inventory": 14,
       "banner": 9,
       "text": 5,
       "kinds": []
     },
     {
+      "vertical": "education",
+      "imp": 13370,
+      "clicks": 480,
+      "inventory": 25,
+      "banner": 12,
+      "text": 13,
+      "kinds": []
+    },
+    {
       "vertical": "population",
-      "imp": 8024,
-      "clicks": 320,
+      "imp": 9349,
+      "clicks": 357,
       "inventory": 18,
       "banner": 10,
       "text": 8,
@@ -497,8 +497,8 @@
     },
     {
       "vertical": "mobility",
-      "imp": 4518,
-      "clicks": 102,
+      "imp": 5785,
+      "clicks": 146,
       "inventory": 13,
       "banner": 6,
       "text": 7,
@@ -506,8 +506,8 @@
     },
     {
       "vertical": "labor",
-      "imp": 3739,
-      "clicks": 87,
+      "imp": 4566,
+      "clicks": 82,
       "inventory": 50,
       "banner": 25,
       "text": 25,
@@ -515,8 +515,8 @@
     },
     {
       "vertical": "housing",
-      "imp": 1561,
-      "clicks": 43,
+      "imp": 1717,
+      "clicks": 52,
       "inventory": 26,
       "banner": 13,
       "text": 13,
@@ -524,8 +524,8 @@
     },
     {
       "vertical": "energy",
-      "imp": 1221,
-      "clicks": 30,
+      "imp": 1463,
+      "clicks": 42,
       "inventory": 29,
       "banner": 14,
       "text": 15,
@@ -533,8 +533,8 @@
     },
     {
       "vertical": "travel",
-      "imp": 813,
-      "clicks": 6,
+      "imp": 861,
+      "clicks": 8,
       "inventory": 51,
       "banner": 29,
       "text": 22,
@@ -542,11 +542,11 @@
     }
   ],
   "unmapped": {
-    "totalImp": 1056,
+    "totalImp": 1338,
     "byReason": [
       {
         "reason": "no-slot:home",
-        "imp": 615,
+        "imp": 728,
         "pages": 1,
         "examples": [
           "https://stats47.jp/"
@@ -554,18 +554,28 @@
       },
       {
         "reason": "ranking-key-unknown",
-        "imp": 148,
-        "pages": 6,
+        "imp": 202,
+        "pages": 15,
         "examples": [
-          "bowling-alley-public",
           "https://stats47.jp/ranking",
+          "bowling-alley-public",
           "patient-receiving-rate-by-disease"
         ]
       },
       {
+        "reason": "article-unknown",
+        "imp": 119,
+        "pages": 15,
+        "examples": [
+          "https://stats47.jp/blog",
+          "https://stats47.jp/blog?page=17",
+          "https://stats47.jp/blog?page=18"
+        ]
+      },
+      {
         "reason": "no-slot:other",
-        "imp": 92,
-        "pages": 8,
+        "imp": 108,
+        "pages": 13,
         "examples": [
           "https://stats47.jp/about",
           "https://stats47.jp/terms",
@@ -573,58 +583,64 @@
         ]
       },
       {
-        "reason": "article-unknown",
-        "imp": 85,
-        "pages": 15,
-        "examples": [
-          "https://stats47.jp/blog",
-          "https://stats47.jp/blog?page=17",
-          "https://stats47.jp/blog?page=4"
-        ]
-      },
-      {
-        "reason": "theme-unmapped:null",
-        "imp": 16,
-        "pages": 1,
-        "examples": [
-          "https://stats47.jp/themes"
-        ]
-      },
-      {
-        "reason": "tag-unmapped:%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
-        "imp": 9,
-        "pages": 1,
-        "examples": [
-          "%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA"
-        ]
-      },
-      {
-        "reason": "tag-unmapped:%E7%8C%9B%E6%9A%91%E6%97%A5",
-        "imp": 6,
-        "pages": 1,
-        "examples": [
-          "%E7%8C%9B%E6%9A%91%E6%97%A5"
-        ]
-      },
-      {
-        "reason": "tag-unmapped:%E8%8C%A8%E5%9F%8E%E7%9C%8C",
-        "imp": 6,
-        "pages": 1,
-        "examples": [
-          "%E8%8C%A8%E5%9F%8E%E7%9C%8C"
-        ]
-      },
-      {
         "reason": "tag-unmapped:%E8%B3%83%E9%87%91%E6%A7%8B%E9%80%A0%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E8%AA%BF%E6%9F%BB",
-        "imp": 6,
+        "imp": 22,
         "pages": 1,
         "examples": [
           "%E8%B3%83%E9%87%91%E6%A7%8B%E9%80%A0%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E8%AA%BF%E6%9F%BB"
         ]
       },
       {
+        "reason": "theme-unmapped:null",
+        "imp": 18,
+        "pages": 1,
+        "examples": [
+          "https://stats47.jp/themes"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E7%8C%9B%E6%9A%91%E6%97%A5",
+        "imp": 13,
+        "pages": 1,
+        "examples": [
+          "%E7%8C%9B%E6%9A%91%E6%97%A5"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
+        "imp": 11,
+        "pages": 1,
+        "examples": [
+          "%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E8%8C%A8%E5%9F%8E%E7%9C%8C",
+        "imp": 7,
+        "pages": 1,
+        "examples": [
+          "%E8%8C%A8%E5%9F%8E%E7%9C%8C"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85",
+        "imp": 6,
+        "pages": 1,
+        "examples": [
+          "%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E5%9C%B0%E5%BD%A2",
+        "imp": 6,
+        "pages": 1,
+        "examples": [
+          "%E5%9C%B0%E5%BD%A2"
+        ]
+      },
+      {
         "reason": "tag-unmapped:%E7%B4%85%E8%8C%B6",
-        "imp": 5,
+        "imp": 6,
         "pages": 1,
         "examples": [
           "%E7%B4%85%E8%8C%B6"
@@ -632,18 +648,66 @@
       },
       {
         "reason": "tag-unmapped:%E4%BA%BA%E5%8F%A3%E6%B8%9B%E5%B0%91",
-        "imp": 4,
+        "imp": 5,
         "pages": 1,
         "examples": [
           "%E4%BA%BA%E5%8F%A3%E6%B8%9B%E5%B0%91"
         ]
       },
       {
+        "reason": "tag-unmapped:%E5%81%A5%E5%BA%B7",
+        "imp": 5,
+        "pages": 1,
+        "examples": [
+          "%E5%81%A5%E5%BA%B7"
+        ]
+      },
+      {
         "reason": "tag-unmapped:%E5%9C%B0%E5%90%8D",
-        "imp": 4,
+        "imp": 5,
         "pages": 1,
         "examples": [
           "%E5%9C%B0%E5%90%8D"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E5%9C%B0%E6%96%B9%E8%B2%A1%E6%94%BF",
+        "imp": 4,
+        "pages": 1,
+        "examples": [
+          "%E5%9C%B0%E6%96%B9%E8%B2%A1%E6%94%BF"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E5%B0%8F%E5%AD%A6%E6%A0%A1",
+        "imp": 4,
+        "pages": 1,
+        "examples": [
+          "%E5%B0%8F%E5%AD%A6%E6%A0%A1"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E7%84%BC%E8%82%89",
+        "imp": 4,
+        "pages": 1,
+        "examples": [
+          "%E7%84%BC%E8%82%89"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E7%97%85%E9%99%A2",
+        "imp": 4,
+        "pages": 1,
+        "examples": [
+          "%E7%97%85%E9%99%A2"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E8%A1%8C%E5%8B%95%E8%80%85%E7%8E%87",
+        "imp": 4,
+        "pages": 1,
+        "examples": [
+          "%E8%A1%8C%E5%8B%95%E8%80%85%E7%8E%87"
         ]
       },
       {
@@ -655,19 +719,27 @@
         ]
       },
       {
-        "reason": "tag-unmapped:%E5%81%A5%E5%BA%B7",
-        "imp": 3,
-        "pages": 1,
-        "examples": [
-          "%E5%81%A5%E5%BA%B7"
-        ]
-      },
-      {
         "reason": "tag-unmapped:%E5%9C%B0%E6%96%B9%E5%82%B5",
         "imp": 3,
         "pages": 1,
         "examples": [
           "%E5%9C%B0%E6%96%B9%E5%82%B5"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E5%A4%96%E9%A3%9F",
+        "imp": 3,
+        "pages": 1,
+        "examples": [
+          "%E5%A4%96%E9%A3%9F"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E6%9D%B1%E5%8C%97",
+        "imp": 3,
+        "pages": 1,
+        "examples": [
+          "%E6%9D%B1%E5%8C%97"
         ]
       },
       {
@@ -679,11 +751,11 @@
         ]
       },
       {
-        "reason": "tag-unmapped:%E7%97%85%E9%99%A2",
+        "reason": "tag-unmapped:2050%E5%B9%B4",
         "imp": 3,
         "pages": 1,
         "examples": [
-          "%E7%97%85%E9%99%A2"
+          "2050%E5%B9%B4"
         ]
       },
       {
@@ -695,19 +767,19 @@
         ]
       },
       {
+        "reason": "tag-unmapped:%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84",
+        "imp": 2,
+        "pages": 1,
+        "examples": [
+          "%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84"
+        ]
+      },
+      {
         "reason": "tag-unmapped:%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E6%A0%BC%E5%B7%AE",
         "imp": 2,
         "pages": 1,
         "examples": [
           "%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E6%A0%BC%E5%B7%AE"
-        ]
-      },
-      {
-        "reason": "tag-unmapped:%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85",
-        "imp": 2,
-        "pages": 1,
-        "examples": [
-          "%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85"
         ]
       },
       {
@@ -719,19 +791,19 @@
         ]
       },
       {
-        "reason": "tag-unmapped:%E5%9C%B0%E6%96%B9%E8%B2%A1%E6%94%BF",
+        "reason": "tag-unmapped:%E5%9C%B0%E6%96%B9%E4%BA%A4%E4%BB%98%E7%A8%8E",
         "imp": 2,
         "pages": 1,
         "examples": [
-          "%E5%9C%B0%E6%96%B9%E8%B2%A1%E6%94%BF"
+          "%E5%9C%B0%E6%96%B9%E4%BA%A4%E4%BB%98%E7%A8%8E"
         ]
       },
       {
-        "reason": "tag-unmapped:%E5%A4%96%E9%A3%9F",
+        "reason": "tag-unmapped:%E5%9C%B0%E6%96%B9%E7%A8%8E",
         "imp": 2,
         "pages": 1,
         "examples": [
-          "%E5%A4%96%E9%A3%9F"
+          "%E5%9C%B0%E6%96%B9%E7%A8%8E"
         ]
       },
       {
@@ -743,19 +815,19 @@
         ]
       },
       {
-        "reason": "tag-unmapped:%E5%B0%8F%E5%AD%A6%E6%A0%A1",
-        "imp": 2,
-        "pages": 1,
-        "examples": [
-          "%E5%B0%8F%E5%AD%A6%E6%A0%A1"
-        ]
-      },
-      {
         "reason": "tag-unmapped:%E6%89%80%E5%BE%97",
         "imp": 2,
         "pages": 1,
         "examples": [
           "%E6%89%80%E5%BE%97"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E6%96%87%E5%8C%96%E8%B3%87%E6%9C%AC",
+        "imp": 2,
+        "pages": 1,
+        "examples": [
+          "%E6%96%87%E5%8C%96%E8%B3%87%E6%9C%AC"
         ]
       },
       {
@@ -767,35 +839,11 @@
         ]
       },
       {
-        "reason": "tag-unmapped:%E6%9D%B1%E5%8C%97",
+        "reason": "tag-unmapped:%E7%9C%8C%E6%B0%91%E6%89%80%E5%BE%97",
         "imp": 2,
         "pages": 1,
         "examples": [
-          "%E6%9D%B1%E5%8C%97"
-        ]
-      },
-      {
-        "reason": "tag-unmapped:%E7%84%BC%E8%82%89",
-        "imp": 2,
-        "pages": 1,
-        "examples": [
-          "%E7%84%BC%E8%82%89"
-        ]
-      },
-      {
-        "reason": "tag-unmapped:%E8%A1%8C%E5%8B%95%E8%80%85%E7%8E%87",
-        "imp": 2,
-        "pages": 1,
-        "examples": [
-          "%E8%A1%8C%E5%8B%95%E8%80%85%E7%8E%87"
-        ]
-      },
-      {
-        "reason": "theme-unmapped:climate",
-        "imp": 2,
-        "pages": 1,
-        "examples": [
-          "climate"
+          "%E7%9C%8C%E6%B0%91%E6%89%80%E5%BE%97"
         ]
       },
       {
@@ -815,14 +863,6 @@
         ]
       },
       {
-        "reason": "tag-unmapped:%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84",
-        "imp": 1,
-        "pages": 1,
-        "examples": [
-          "%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84"
-        ]
-      },
-      {
         "reason": "tag-unmapped:%E4%BA%BA%E5%8F%A3",
         "imp": 1,
         "pages": 1,
@@ -839,19 +879,11 @@
         ]
       },
       {
-        "reason": "tag-unmapped:%E5%9C%B0%E5%BD%A2",
+        "reason": "tag-unmapped:%E5%A4%96%E5%9B%BD%E4%BA%BA",
         "imp": 1,
         "pages": 1,
         "examples": [
-          "%E5%9C%B0%E5%BD%A2"
-        ]
-      },
-      {
-        "reason": "tag-unmapped:%E5%9C%B0%E6%96%B9%E7%A8%8E",
-        "imp": 1,
-        "pages": 1,
-        "examples": [
-          "%E5%9C%B0%E6%96%B9%E7%A8%8E"
+          "%E5%A4%96%E5%9B%BD%E4%BA%BA"
         ]
       },
       {
@@ -871,11 +903,11 @@
         ]
       },
       {
-        "reason": "tag-unmapped:%E6%96%87%E5%8C%96%E8%B3%87%E6%9C%AC",
+        "reason": "tag-unmapped:%E5%B8%82%E5%8C%BA%E7%94%BA%E6%9D%91",
         "imp": 1,
         "pages": 1,
         "examples": [
-          "%E6%96%87%E5%8C%96%E8%B3%87%E6%9C%AC"
+          "%E5%B8%82%E5%8C%BA%E7%94%BA%E6%9D%91"
         ]
       },
       {
@@ -887,11 +919,19 @@
         ]
       },
       {
-        "reason": "tag-unmapped:%E7%9C%8C%E6%B0%91%E6%89%80%E5%BE%97",
+        "reason": "tag-unmapped:%E6%B0%91%E7%94%9F%E8%B2%BB",
         "imp": 1,
         "pages": 1,
         "examples": [
-          "%E7%9C%8C%E6%B0%91%E6%89%80%E5%BE%97"
+          "%E6%B0%91%E7%94%9F%E8%B2%BB"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:%E7%94%B7%E5%A5%B3%E5%B7%AE",
+        "imp": 1,
+        "pages": 1,
+        "examples": [
+          "%E7%94%B7%E5%A5%B3%E5%B7%AE"
         ]
       },
       {
@@ -933,6 +973,14 @@
         "examples": [
           "dual-income-households"
         ]
+      },
+      {
+        "reason": "theme-unmapped:climate",
+        "imp": 1,
+        "pages": 1,
+        "examples": [
+          "climate"
+        ]
       }
     ],
     "top": [
@@ -940,39 +988,39 @@
         "url": "https://stats47.jp/",
         "type": "home",
         "key": null,
-        "imp": 615,
-        "clicks": 43,
+        "imp": 728,
+        "clicks": 57,
         "reason": "no-slot:home"
-      },
-      {
-        "url": "https://stats47.jp/ranking/bowling-alley-public",
-        "type": "ranking",
-        "key": "bowling-alley-public",
-        "imp": 65,
-        "clicks": 1,
-        "reason": "ranking-key-unknown"
       },
       {
         "url": "https://stats47.jp/about",
         "type": "other",
         "key": null,
-        "imp": 57,
-        "clicks": 5,
+        "imp": 63,
+        "clicks": 3,
         "reason": "no-slot:other"
       },
       {
         "url": "https://stats47.jp/ranking",
         "type": "ranking",
         "key": null,
-        "imp": 44,
+        "imp": 57,
         "clicks": 0,
+        "reason": "ranking-key-unknown"
+      },
+      {
+        "url": "https://stats47.jp/ranking/bowling-alley-public",
+        "type": "ranking",
+        "key": "bowling-alley-public",
+        "imp": 51,
+        "clicks": 1,
         "reason": "ranking-key-unknown"
       },
       {
         "url": "https://stats47.jp/blog",
         "type": "blog",
         "key": null,
-        "imp": 42,
+        "imp": 51,
         "clicks": 0,
         "reason": "article-unknown"
       },
@@ -980,6 +1028,38 @@
         "url": "https://stats47.jp/ranking/patient-receiving-rate-by-disease",
         "type": "ranking",
         "key": "patient-receiving-rate-by-disease",
+        "imp": 23,
+        "clicks": 0,
+        "reason": "ranking-key-unknown"
+      },
+      {
+        "url": "https://stats47.jp/ranking/patient-receiving-rate-by-age",
+        "type": "ranking",
+        "key": "patient-receiving-rate-by-age",
+        "imp": 22,
+        "clicks": 2,
+        "reason": "ranking-key-unknown"
+      },
+      {
+        "url": "https://stats47.jp/tag/%E8%B3%83%E9%87%91%E6%A7%8B%E9%80%A0%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E8%AA%BF%E6%9F%BB",
+        "type": "tag",
+        "key": "%E8%B3%83%E9%87%91%E6%A7%8B%E9%80%A0%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E8%AA%BF%E6%9F%BB",
+        "imp": 22,
+        "clicks": 0,
+        "reason": "tag-unmapped:%E8%B3%83%E9%87%91%E6%A7%8B%E9%80%A0%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E8%AA%BF%E6%9F%BB"
+      },
+      {
+        "url": "https://stats47.jp/blog?page=17",
+        "type": "blog",
+        "key": null,
+        "imp": 21,
+        "clicks": 0,
+        "reason": "article-unknown"
+      },
+      {
+        "url": "https://stats47.jp/ranking/construction-contract-total",
+        "type": "ranking",
+        "key": "construction-contract-total",
         "imp": 20,
         "clicks": 0,
         "reason": "ranking-key-unknown"
@@ -988,7 +1068,7 @@
         "url": "https://stats47.jp/themes",
         "type": "themes",
         "key": null,
-        "imp": 16,
+        "imp": 18,
         "clicks": 0,
         "reason": "theme-unmapped:null"
       },
@@ -997,40 +1077,48 @@
         "type": "other",
         "key": null,
         "imp": 15,
-        "clicks": 0,
+        "clicks": 1,
         "reason": "no-slot:other"
       },
       {
-        "url": "https://stats47.jp/ranking/patient-receiving-rate-by-age",
+        "url": "https://stats47.jp/tag/%E7%8C%9B%E6%9A%91%E6%97%A5",
+        "type": "tag",
+        "key": "%E7%8C%9B%E6%9A%91%E6%97%A5",
+        "imp": 13,
+        "clicks": 0,
+        "reason": "tag-unmapped:%E7%8C%9B%E6%9A%91%E6%97%A5"
+      },
+      {
+        "url": "https://stats47.jp/ranking/construction-projects-total",
         "type": "ranking",
-        "key": "patient-receiving-rate-by-age",
-        "imp": 14,
-        "clicks": 2,
+        "key": "construction-projects-total",
+        "imp": 12,
+        "clicks": 0,
         "reason": "ranking-key-unknown"
-      },
-      {
-        "url": "https://stats47.jp/privacy",
-        "type": "other",
-        "key": null,
-        "imp": 14,
-        "clicks": 0,
-        "reason": "no-slot:other"
-      },
-      {
-        "url": "https://stats47.jp/blog?page=17",
-        "type": "blog",
-        "key": null,
-        "imp": 11,
-        "clicks": 0,
-        "reason": "article-unknown"
       },
       {
         "url": "https://stats47.jp/tag/%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
         "type": "tag",
         "key": "%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
-        "imp": 9,
+        "imp": 11,
         "clicks": 0,
         "reason": "tag-unmapped:%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA"
+      },
+      {
+        "url": "https://stats47.jp/privacy",
+        "type": "other",
+        "key": null,
+        "imp": 10,
+        "clicks": 0,
+        "reason": "no-slot:other"
+      },
+      {
+        "url": "https://stats47.jp/blog?page=18",
+        "type": "blog",
+        "key": null,
+        "imp": 7,
+        "clicks": 0,
+        "reason": "article-unknown"
       },
       {
         "url": "https://stats47.jp/blog?page=4",
@@ -1041,140 +1129,100 @@
         "reason": "article-unknown"
       },
       {
-        "url": "https://stats47.jp/tag/%E7%8C%9B%E6%9A%91%E6%97%A5",
-        "type": "tag",
-        "key": "%E7%8C%9B%E6%9A%91%E6%97%A5",
-        "imp": 6,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E7%8C%9B%E6%9A%91%E6%97%A5"
-      },
-      {
         "url": "https://stats47.jp/tag/%E8%8C%A8%E5%9F%8E%E7%9C%8C",
         "type": "tag",
         "key": "%E8%8C%A8%E5%9F%8E%E7%9C%8C",
-        "imp": 6,
+        "imp": 7,
         "clicks": 0,
         "reason": "tag-unmapped:%E8%8C%A8%E5%9F%8E%E7%9C%8C"
       },
       {
-        "url": "https://stats47.jp/tag/%E8%B3%83%E9%87%91%E6%A7%8B%E9%80%A0%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E8%AA%BF%E6%9F%BB",
-        "type": "tag",
-        "key": "%E8%B3%83%E9%87%91%E6%A7%8B%E9%80%A0%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E8%AA%BF%E6%9F%BB",
+        "url": "https://stats47.jp/api/ranking/secondary-activity-avg-time-unemployed-male/download?format=json",
+        "type": "other",
+        "key": null,
         "imp": 6,
         "clicks": 0,
-        "reason": "tag-unmapped:%E8%B3%83%E9%87%91%E6%A7%8B%E9%80%A0%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E8%AA%BF%E6%9F%BB"
+        "reason": "no-slot:other"
       },
       {
-        "url": "https://stats47.jp/blog?page=18",
+        "url": "https://stats47.jp/blog?page=16",
         "type": "blog",
         "key": null,
-        "imp": 5,
+        "imp": 6,
         "clicks": 0,
         "reason": "article-unknown"
+      },
+      {
+        "url": "https://stats47.jp/tag/%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85",
+        "type": "tag",
+        "key": "%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85",
+        "imp": 6,
+        "clicks": 0,
+        "reason": "tag-unmapped:%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85"
+      },
+      {
+        "url": "https://stats47.jp/tag/%E5%9C%B0%E5%BD%A2",
+        "type": "tag",
+        "key": "%E5%9C%B0%E5%BD%A2",
+        "imp": 6,
+        "clicks": 0,
+        "reason": "tag-unmapped:%E5%9C%B0%E5%BD%A2"
       },
       {
         "url": "https://stats47.jp/tag/%E7%B4%85%E8%8C%B6",
         "type": "tag",
         "key": "%E7%B4%85%E8%8C%B6",
-        "imp": 5,
+        "imp": 6,
         "clicks": 0,
         "reason": "tag-unmapped:%E7%B4%85%E8%8C%B6"
       },
       {
-        "url": "https://stats47.jp/ranking/gini-coefficient-disposable-income",
-        "type": "ranking",
-        "key": "gini-coefficient-disposable-income",
-        "imp": 4,
+        "url": "https://stats47.jp/api/ranking/local-allocation-tax-ratio-pref-finance/download?format=csv&basis=original",
+        "type": "other",
+        "key": null,
+        "imp": 5,
         "clicks": 0,
-        "reason": "ranking-key-unknown"
-      },
-      {
-        "url": "https://stats47.jp/tag/%E4%BA%BA%E5%8F%A3%E6%B8%9B%E5%B0%91",
-        "type": "tag",
-        "key": "%E4%BA%BA%E5%8F%A3%E6%B8%9B%E5%B0%91",
-        "imp": 4,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E4%BA%BA%E5%8F%A3%E6%B8%9B%E5%B0%91"
-      },
-      {
-        "url": "https://stats47.jp/tag/%E5%9C%B0%E5%90%8D",
-        "type": "tag",
-        "key": "%E5%9C%B0%E5%90%8D",
-        "imp": 4,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E5%9C%B0%E5%90%8D"
+        "reason": "no-slot:other"
       },
       {
         "url": "https://stats47.jp/blog?page=10",
         "type": "blog",
         "key": null,
-        "imp": 3,
+        "imp": 5,
         "clicks": 0,
         "reason": "article-unknown"
       },
       {
-        "url": "https://stats47.jp/blog?page=13",
-        "type": "blog",
-        "key": null,
-        "imp": 3,
-        "clicks": 0,
-        "reason": "article-unknown"
-      },
-      {
-        "url": "https://stats47.jp/blog?page=5",
-        "type": "blog",
-        "key": null,
-        "imp": 3,
-        "clicks": 0,
-        "reason": "article-unknown"
-      },
-      {
-        "url": "https://stats47.jp/blog?page=7",
-        "type": "blog",
-        "key": null,
-        "imp": 3,
-        "clicks": 0,
-        "reason": "article-unknown"
-      },
-      {
-        "url": "https://stats47.jp/tag/%E3%82%A8%E3%83%B3%E3%82%B2%E3%83%AB%E4%BF%82%E6%95%B0",
+        "url": "https://stats47.jp/tag/%E4%BA%BA%E5%8F%A3%E6%B8%9B%E5%B0%91",
         "type": "tag",
-        "key": "%E3%82%A8%E3%83%B3%E3%82%B2%E3%83%AB%E4%BF%82%E6%95%B0",
-        "imp": 3,
+        "key": "%E4%BA%BA%E5%8F%A3%E6%B8%9B%E5%B0%91",
+        "imp": 5,
         "clicks": 0,
-        "reason": "tag-unmapped:%E3%82%A8%E3%83%B3%E3%82%B2%E3%83%AB%E4%BF%82%E6%95%B0"
+        "reason": "tag-unmapped:%E4%BA%BA%E5%8F%A3%E6%B8%9B%E5%B0%91"
       },
       {
         "url": "https://stats47.jp/tag/%E5%81%A5%E5%BA%B7",
         "type": "tag",
         "key": "%E5%81%A5%E5%BA%B7",
-        "imp": 3,
+        "imp": 5,
         "clicks": 0,
         "reason": "tag-unmapped:%E5%81%A5%E5%BA%B7"
       },
       {
-        "url": "https://stats47.jp/tag/%E5%9C%B0%E6%96%B9%E5%82%B5",
+        "url": "https://stats47.jp/tag/%E5%9C%B0%E5%90%8D",
         "type": "tag",
-        "key": "%E5%9C%B0%E6%96%B9%E5%82%B5",
-        "imp": 3,
+        "key": "%E5%9C%B0%E5%90%8D",
+        "imp": 5,
         "clicks": 0,
-        "reason": "tag-unmapped:%E5%9C%B0%E6%96%B9%E5%82%B5"
+        "reason": "tag-unmapped:%E5%9C%B0%E5%90%8D"
       },
       {
-        "url": "https://stats47.jp/tag/%E6%A0%BC%E5%B7%AE",
-        "type": "tag",
-        "key": "%E6%A0%BC%E5%B7%AE",
-        "imp": 3,
+        "url": "https://stats47.jp/blog?page=15",
+        "type": "blog",
+        "key": null,
+        "imp": 4,
         "clicks": 0,
-        "reason": "tag-unmapped:%E6%A0%BC%E5%B7%AE"
-      },
-      {
-        "url": "https://stats47.jp/tag/%E7%97%85%E9%99%A2",
-        "type": "tag",
-        "key": "%E7%97%85%E9%99%A2",
-        "imp": 3,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E7%97%85%E9%99%A2"
+        "reason": "article-unknown"
       }
     ]
   },
