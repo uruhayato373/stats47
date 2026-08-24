@@ -14,17 +14,18 @@
  * ★SEGMENTS の順序を変えると URL (数字 id) が変わる。追加は必ず末尾へ。
  */
 export const SITEMAP_SEGMENTS = [
-  "static",
-  "themes",
-  "areas",
-  "ranking",
-  "blog",
-  "categories",
-  "surveys",
-  "tags",
-  "cities",
+  'static',
+  'themes',
+  'areas',
+  'ranking',
+  'blog',
+  'categories',
+  'surveys',
+  'tags',
+  'cities',
   // GEO-SCOPE-SEPARATION-01 WP5: 既存 segment の id (配列 index) を変えないため末尾に追記する。
-  "japan",
+  'japan',
+  'municipalities',
 ] as const;
 
 export type SitemapSegment = (typeof SITEMAP_SEGMENTS)[number];

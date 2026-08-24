@@ -34,6 +34,16 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
       "rankingKey": "public-hall-count-per-million",
       "shortLabel": "公民館",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "final-education-university-graduate-school-ratio",
+      "shortLabel": "大学・大学院卒",
+      "role": "context"
+    },
+    {
+      "rankingKey": "in-pref-university-entrance-ratio-by-highschool-origin",
+      "shortLabel": "県内大学進学率",
+      "role": "context"
     }
   ],
   "keywords": [

@@ -204,6 +204,11 @@ npm run google-admin:audit-api
 > 週次 GA4 snapshot は Japan-only の `survey_ranking` を `survey-navigation.csv` に保存し、
 > survey portfolio の `metrics.internalNav.rankingOutboundClicks` を非重複56日で集計する。
 >
+> **nav_surface の値追加 (2026-08-24・evidence lens)**: ThemeCatalog の白書・統計論点から
+> ranking / theme / tag へ進む内部導線に `theme_evidence` を追加した。登録済みの
+> `nav_surface` / `nav_label` を使う値追加で、新しい custom dimension は無い。公式資料への外部リンクは
+> `nav_click` に混ぜず、サイト内周遊だけを比較する。
+>
 > **nav_surface の値変更 (2026-08-22)**: home / category / `/areas` の県選択UIを共通の
 > `PrefectureNavigator` へ統合した。home の旧単一入口 `home_area` は送信を終了し、直接選択を
 > `home_area_map` / `home_area_list` で送る。category は `category_area_map` /

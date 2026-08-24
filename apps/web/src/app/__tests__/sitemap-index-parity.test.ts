@@ -43,7 +43,9 @@ describe("sitemap index ↔ shard の件数整合", () => {
     }
   });
 
-  it("japan segment が末尾にあり index に載る (GEO-SCOPE-SEPARATION-01 の完了条件)", () => {
-    expect(SITEMAP_SEGMENTS[SITEMAP_SEGMENTS.length - 1]).toBe("japan");
+  it("追加segmentを末尾へ足し、japanとmunicipalitiesをともに維持する", () => {
+    expect(SITEMAP_SEGMENTS.at(-1)).toBe("municipalities");
+    expect(SITEMAP_SEGMENTS).toContain("japan");
+    expect(SITEMAP_SEGMENTS).toContain("municipalities");
   });
 });

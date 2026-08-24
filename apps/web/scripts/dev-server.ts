@@ -13,6 +13,8 @@ const GATEWAY_START_INTERVAL_MS = 250;
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const APP_ROOT = path.resolve(SCRIPT_DIR, '..');
+const PAGE_COMPONENTS_ROOT = path.join(SCRIPT_DIR, 'data', 'page-components');
+const LOCAL_R2_ROOT = path.resolve(APP_ROOT, '..', '..', '.local', 'r2');
 
 function parsePort(value: string | undefined, fallback: number): number {
   if (!value) return fallback;
@@ -76,14 +78,17 @@ function startNext(nextPort: number, r2BaseUrl?: string): ChildProcess {
 function parseCacheSeconds(raw: string | undefined): number {
   if (raw === undefined || raw === '') return DEFAULT_GATEWAY_CACHE_SECONDS;
   const n = Number(raw);
-  if (!Number.isFinite(n) || n < 0 || n > 86_400) return DEFAULT_GATEWAY_CACHE_SECONDS;
+  if (!Number.isFinite(n) || n < 0 || n > 86_400)
+    return DEFAULT_GATEWAY_CACHE_SECONDS;
   return Math.floor(n);
 }
 
 function startWindowsGateway(port: number, upstream: string): ChildProcess {
   const scriptPath = path.join(SCRIPT_DIR, 'r2-dev-gateway.ps1');
   const powershell = process.env.PWSH_PATH || 'powershell.exe';
-  const cacheSeconds = parseCacheSeconds(process.env.R2_DEV_GATEWAY_CACHE_SECONDS);
+  const cacheSeconds = parseCacheSeconds(
+    process.env.R2_DEV_GATEWAY_CACHE_SECONDS
+  );
   return spawn(
     powershell,
     [
@@ -97,6 +102,10 @@ function startWindowsGateway(port: number, upstream: string): ChildProcess {
       String(port),
       '-UpstreamBase',
       upstream,
+      '-LocalOverrideRoot',
+      PAGE_COMPONENTS_ROOT,
+      '-LocalR2Root',
+      LOCAL_R2_ROOT,
       '-CacheSeconds',
       String(cacheSeconds),
     ],

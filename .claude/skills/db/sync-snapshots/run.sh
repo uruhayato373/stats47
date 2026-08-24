@@ -51,6 +51,7 @@ declare -a TASKS=(
   #   射影するだけだから (逆順だと計算型が 1 年前のまま配信される)。
   "calculated-stats|packages/ranking/src/scripts/generate-calculated-stats.ts"
   "ranking-values|packages/ranking/src/scripts/generate-ranking-values.ts"
+  "municipality-ranking|packages/ranking/src/scripts/generate-municipality-ranking.ts"
   "ranking-normalized-values|packages/ranking/src/scripts/generate-ranking-normalized-values.ts"
   "item-seo-refresh|packages/ranking/src/scripts/refresh-item-seo.ts --apply"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
@@ -159,7 +160,13 @@ if [ "$DRY_RUN" = "0" ]; then
   if [ "$CI" = "true" ] || [ "$GITHUB_ACTIONS" = "true" ] || [ "$ALLOW_LOCAL_R2_WRITE" = "1" ]; then
     echo ""
     echo "════ R2 push ════"
-    if npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts; then
+    PUSH_ARGS=()
+    # 単独実行時に CI runner へ同梱された無関係な staging asset を巻き込まない。
+    # municipality ranking は専用 URL namespace のため prefix を安全に限定できる。
+    if [ "$ONLY" = "municipality-ranking" ]; then
+      PUSH_ARGS+=(--prefix app/municipalities)
+    fi
+    if npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts "${PUSH_ARGS[@]}"; then
       echo "✅ snapshot を R2 に push 完了"
     else
       echo "❌ R2 push 失敗"

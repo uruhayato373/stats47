@@ -112,6 +112,14 @@ export default async function CityPage({ params }: PageProps) {
       />
 
       <main className="min-w-0 space-y-10">
+        <p className="text-sm">
+          <Link
+            href={`/municipalities/ranking/elderly-population-ratio?q=${encodeURIComponent(context.city.areaName)}`}
+            className="font-medium text-primary hover:underline"
+          >
+            {context.city.areaName}を全国の市区町村ランキングで見る →
+          </Link>
+        </p>
         {validStrengths.length > 0 ? (
           <SurfaceSection className="p-6">
             <h2 className="text-lg font-bold text-foreground">

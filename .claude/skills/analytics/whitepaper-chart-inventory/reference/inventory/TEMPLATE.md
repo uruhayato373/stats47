@@ -35,7 +35,8 @@ node .claude/scripts/notebooklm-cross-query.mjs \
     "chart_target": "prefecture/national/age/time-series/cross-section のいずれか",
     "source_stats_name": "...",
     "years_covered": "...",
-    "key_insight": "1 行で curiosity gap"
+    "key_insight": "1 行で curiosity gap",
+    "evidence_lens": "regional-access/service-capacity/participation/outcomes/mobility/composition/equity/sustainability/undecided"
   }
 ]
 プロセス・概念図・写真は除外し、定量データの可視化のみ列挙してください。' \
@@ -48,10 +49,10 @@ node .claude/scripts/notebooklm-cross-query.mjs \
 
 ## 2. チャート一覧
 
-| chart_id | chapter | title | chart_type | chart_target | source_stats_name | years_covered | key_insight | responsibility |
-|---|---|---|---|---|---|---|---|---|
-| <wp-slug>-<chapter>-01 | <章> | <タイトル> | line | national | <統計名> | 2000-2023 | <1 行> | undecided |
-| ... | ... | ... | ... | ... | ... | ... | ... | ... |
+| chart_id | chapter | title | chart_type | chart_target | source_stats_name | years_covered | key_insight | evidence_lens | responsibility |
+|---|---|---|---|---|---|---|---|---|---|
+| <wp-slug>-<chapter>-01 | <章> | <タイトル> | line | national | <統計名> | 2000-2023 | <1 行> | undecided | undecided |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
 ## 3. enum 外 chart_type の出現
 

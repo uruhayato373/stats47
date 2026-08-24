@@ -72,6 +72,7 @@
     "generate:editorial-index": "tsx scripts/generate-editorial-index.ts",
     "validate:area-databook": "tsx scripts/validate-area-databook.ts",
     "validate:prefecture-statistics": "tsx scripts/validate-prefecture-statistics-catalog.ts",
+    "validate:municipalities": "tsx scripts/validate-municipality-catalog.ts",
     "check:prefecture-statistics-links": "tsx scripts/check-prefecture-statistics-links.ts",
     "validate:open-data-catalog": "tsx scripts/validate-open-data-catalog.ts",
     "check:open-data-links": "tsx scripts/check-open-data-links.ts",
@@ -82,6 +83,7 @@
     "validate:survey-master": "tsx scripts/ssds/validate-survey-master-coverage.ts"
   },
   "dependencies": {
+    "@stats47/area": "*",
     "@stats47/types": "*"
   },
   "devDependencies": {

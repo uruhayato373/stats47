@@ -15,7 +15,7 @@ const EXPECTED_TYPE_A = [
   "real-income", "labor-mobility", "local-finance", "fishery-marine", "climate",
 ];
 
-const EXPECTED_TYPE_B = ["ports", "railway", "roads", "local-finance-city"];
+const EXPECTED_TYPE_B = ["ports", "railway", "roads"];
 
 describe("area-theme-slugs", () => {
   it("Type B テーマ (都道府県ページ非対応) は isAreaTheme=false", () => {

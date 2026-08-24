@@ -16,7 +16,6 @@ const AREA_EXCLUDED_THEME_KEYS: ReadonlySet<string> = new Set([
   "ports",
   "railway",
   "roads",
-  "local-finance-city",
 ]);
 
 /**

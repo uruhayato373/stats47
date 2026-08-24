@@ -1,34 +1,34 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
-import { PageShell } from "@/components/layout";
+import { PageShell } from '@/components/layout';
 
-import { InContentAdSlot } from "@/features/ads";
-import type { FinanceFlowData } from "@/features/finance-flow";
+import { InContentAdSlot } from '@/features/ads';
+import type { FinanceFlowData } from '@/features/finance-flow';
 import {
   LocalFinanceDashboard,
   loadFinanceCards,
-} from "@/features/local-finance-dashboard";
-import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+} from '@/features/local-finance-dashboard';
+import { ALL_THEMES } from '@/features/theme-dashboard/config/all-themes';
 import {
   ThemeIndicatorCatalogSection,
   ThemeSideNav,
   ThemeSwitcher,
-} from "@/features/theme-dashboard/server";
+} from '@/features/theme-dashboard/server';
 
-import { HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
-import { generateOGMetadata } from "@/lib/metadata/og-generator";
+import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
+import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
 /** サイドバー用に ALL_THEMES のエントリ (テーマ一覧 + 指標) を使う */
-const theme = ALL_THEMES.find((t) => t.themeKey === "local-finance");
+const theme = ALL_THEMES.find((t) => t.themeKey === 'local-finance');
 
-const R2_BASE = "https://storage.stats47.jp";
+const R2_BASE = 'https://storage.stats47.jp';
 
 // 財政フロー(R2 public URL fetch) を runtime で確実に読むため force-dynamic。
 // 本ページは bespoke LocalFinanceDashboard を使い、汎用 loadThemeData は経由しない。
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export function generateMetadata(): Metadata {
   if (!theme) return {};
@@ -40,7 +40,7 @@ export function generateMetadata(): Metadata {
     alternates: { canonical: `/themes/local-finance` },
     ...generateOGMetadata({
       title,
-      description: theme.description ?? "",
+      description: theme.description ?? '',
       imageUrl: `/themes/local-finance/opengraph-image`,
     }),
   };
@@ -67,7 +67,9 @@ export default async function LocalFinanceThemePage() {
 
   return (
     <PageShell
-      leftRail={<ThemeSideNav currentThemeKey="local-finance" showRegion={false} />}
+      leftRail={
+        <ThemeSideNav currentThemeKey="local-finance" showRegion={false} />
+      }
       leftRailNarrowBehavior="hide"
     >
       {/* 狭幅のテーマ切替（bespoke ページのため ThemePageLayout を使わず個別配置）。
@@ -77,22 +79,15 @@ export default async function LocalFinanceThemePage() {
       <div className="lg:hidden">
         <ThemeSwitcher currentThemeKey="local-finance" />
       </div>
-      {/* 都道府県 / 市区町村 切替 */}
-      <nav
-        aria-label="表示単位切替"
-        className="mb-4 inline-flex rounded-full border border-border bg-card p-1 shadow-sm text-xs"
-      >
-        <span className="px-3 py-1 rounded-full bg-primary text-primary-foreground font-medium">
-          都道府県
-        </span>
-        <Link
-          href="/themes/local-finance/cities"
-          className="px-3 py-1 rounded-full text-muted-foreground hover:text-foreground transition-colors"
-        >
-          市区町村
+      <nav aria-label="関連する統計範囲" className="mb-4 text-sm">
+        <Link href="/municipalities" className="font-medium text-primary hover:underline">
+          市区町村の地方財政は、市区町村統計で管理しています →
         </Link>
       </nav>
-      <LocalFinanceDashboard cards={cards} initialFinanceFlow={initialFinanceFlow} />
+      <LocalFinanceDashboard
+        cards={cards}
+        initialFinanceFlow={initialFinanceFlow}
+      />
 
       {/*
         広告 2 枠。bespoke ページなので ThemePageLayout を通らず、他テーマが ThemePageLayout から持つ枠が

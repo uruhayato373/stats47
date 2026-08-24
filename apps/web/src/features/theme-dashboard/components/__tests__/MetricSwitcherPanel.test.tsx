@@ -628,6 +628,15 @@ describe("MetricSwitcherPanel — 指数系は全国比較線を出さない", (
 });
 
 describe("MetricSwitcherPanel — カード見出しと回遊と計測", () => {
+  it("指標選択列はカード左右の余白を予約せず全幅を使う", async () => {
+    renderPanel();
+    const tile = await screen.findByRole("checkbox", { name: /賃金/ });
+    const strip = tile.parentElement;
+    expect(strip).toHaveClass("min-w-full", "divide-x");
+    expect(strip).not.toHaveClass("gap-2");
+    expect(strip?.parentElement).toHaveClass("w-full");
+  });
+
   it("title を渡すとカード見出しになる (グループ名)", async () => {
     renderPanel({ title: "賃金の水準" });
     await waitFor(() => expect(screen.getByText("賃金の水準")).toBeInTheDocument());

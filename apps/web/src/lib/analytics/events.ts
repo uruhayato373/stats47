@@ -159,6 +159,8 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  *   各コンテンツ面から、そのデータを生成した調査ハブへの導線
  * - `survey_ranking` / `survey_theme` / `survey_blog`:
  *   調査ハブから、その調査を使う各コンテンツ面への逆方向導線
+ * - `theme_evidence`: 白書・統計の論点からランキング・関連テーマ・記事へ進む導線。
+ *   `nav_label` は `<topic-key>:<target-type>:<target-key>`。
  * - `theme_kpi_switcher`: テーマページの指標カードのタイル（`MetricSwitcherPanel`）。
  *   `nav_label` に rankingKey が入るので、どの指標が見られているかを追える。
  *   ★2026-08-06 の複数チェック化以降、送るのは**チェック ON のときだけ**。
@@ -184,6 +186,7 @@ export type NavSurface =
     | "category_area_map"
     | "category_area_list"
     | "theme_kpi_switcher"
+    | "theme_evidence"
     | "category_sidebar"
     | "ranking_survey"
     | "category_survey"
