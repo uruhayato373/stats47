@@ -271,9 +271,9 @@ function checkContentTypePolicy(
   }
 
   // 市区町村テーマは `/themes/*` から分離した。地方財政は母集団監査中のため
-  // 公開済み市区町村ハブへ一時転送し、存在しない財政ランキングを見せない。
+  // 公開済み市区町村ハブへ恒久転送し、存在しない財政ランキングを見せない。
   if (pathname === '/themes/local-finance-city') {
-    return NextResponse.redirect(new URL('/municipalities', baseUrl));
+    return NextResponse.redirect(new URL('/municipalities', baseUrl), 301);
   }
 
   // /themes/{unknown-slug} → 410
