@@ -26,12 +26,15 @@ import { ScrollableRow } from './ScrollableRow';
 
 import type { MetricKpi } from './metric-kpi';
 
+const CHART_HEIGHT = 250;
+const PREFECTURE_PROMPT_HEIGHT = 80;
+
 const LineChartClient = dynamic(
   () =>
     import('@/components/stat-charts/components/charts/LineChart/LineChartClient').then(
       (mod) => mod.LineChartClient
     ),
-  { ssr: false, loading: () => <ChartLoading height={250} /> }
+  { ssr: false, loading: () => <ChartLoading height={CHART_HEIGHT} /> }
 );
 
 const NATIONAL_CODE = '00000';
@@ -448,6 +451,7 @@ export function MetricSwitcherPanel({
     <ChartPanel
       title={title}
       titleClassName="text-base"
+      contentClassName="p-0"
       footer={
         representative ? (
           <ChartFooter
@@ -460,9 +464,9 @@ export function MetricSwitcherPanel({
       {!title && representative ? (
         <h3 className="sr-only">{representative.title}</h3>
       ) : null}
-      <div className="mb-3">
-        <ScrollableRow className="snap-x snap-mandatory">
-          <div className="inline-flex w-max gap-2">
+      <div className="border-b border-border">
+        <ScrollableRow className="snap-x snap-mandatory" controlsMode="overlay">
+          <div className="inline-flex w-max min-w-full divide-x divide-border">
             {metrics.map((m) => {
               const label = tabLabels[m.metricKey] ?? m.title;
               const checked = checkedSet.has(m.metricKey);
@@ -487,7 +491,7 @@ export function MetricSwitcherPanel({
                       : // タイル幅に収まらないラベルを hover で読めるようにする
                         label
                   }
-                  className={`snap-start flex w-36 shrink-0 flex-col items-start gap-1 rounded-none border-0 border-b-2 bg-transparent px-3 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
+                  className={`snap-start flex w-36 min-w-36 shrink-0 grow flex-col items-start gap-1 rounded-none border-0 border-b-2 bg-transparent px-3 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/50 ${
                     checked
                       ? 'bg-accent/40'
                       : 'border-b-border hover:bg-accent/30'
@@ -562,13 +566,22 @@ export function MetricSwitcherPanel({
           </div>
         </ScrollableRow>
       </div>
-      {isLoadingSeries ? (
-        <ChartLoading height={250} />
-      ) : chartState.kind === 'chart' ? (
-        <LineChartClient chartData={chartState.data} />
-      ) : (
-        <ChartEmptyState message={emptyMessage(chartState)} height={250} />
-      )}
+      <div className="p-4">
+        {isLoadingSeries ? (
+          <ChartLoading height={CHART_HEIGHT} />
+        ) : chartState.kind === 'chart' ? (
+          <LineChartClient chartData={chartState.data} />
+        ) : (
+          <ChartEmptyState
+            message={emptyMessage(chartState)}
+            height={
+              chartState.kind === 'select-prefecture'
+                ? PREFECTURE_PROMPT_HEIGHT
+                : CHART_HEIGHT
+            }
+          />
+        )}
+      </div>
     </ChartPanel>
   );
 }

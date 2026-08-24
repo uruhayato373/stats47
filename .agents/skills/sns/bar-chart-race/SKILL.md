@@ -1,8 +1,8 @@
 ---
 name: bar-chart-race
-description: Bar Chart Race (BCR) 動画を「データ生成 → レンダリング → キャプション」の一連で作る統合スキル。Use when user says "バーチャートレース", "bar chart race", "BCR作成", "BCR動画". Instagram リール / TikTok / X 向けの動画フォーマット。--step で工程を指定。
+description: Bar Chart Race (BCR) 動画を「データ生成 → レンダリング → キャプション」の一連で作る統合スキル。Use when user says "バーチャートレース", "bar chart race", "BCR作成", "BCR動画". Instagram リール / X 向けの動画フォーマット。--step で工程を指定。
 disable-model-invocation: true
-argument-hint: "<rankingKey> [--step generate|render|captions|all] [--platform instagram|tiktok|x] [--dry-run]"
+argument-hint: "<rankingKey> [--step generate|render|captions|all] [--platform instagram|x] [--dry-run]"
 primary_agent: sns-renderer
 co_agents: [instagram-strategist, x-strategist]
 ---
@@ -12,8 +12,8 @@ co_agents: [instagram-strategist, x-strategist]
 Bar Chart Race (全年度推移の順位変動アニメ動画) を 1 本の線で作る。旧 `generate-bar-chart-race` /
 `render-bar-chart-race` / `post-bar-chart-race-captions` の 3 スキルを統合した (詳細手順は `reference/` に温存)。
 
-> **位置づけ**: BCR は Instagram リール / TikTok / X 向けの動画フォーマット
-> (`.Codex/rules/sns-content-standards.md` §0。YouTube は撤退済で対象外)。レンダは 1 本 4-20 分かかるため
+> **位置づけ**: BCR は Instagram リール / X 向けの動画フォーマット。
+> YouTube pilot は通常動画 master-first、TikTok は撤退済みのため対象外 (`.Codex/rules/sns-content-standards.md` §0)。レンダは 1 本 4-20 分かかるため
 > 瞬発力トラック (react-to-news) からは外す。投稿は本スキルでは行わず、各チャネルの既存投稿フローに委ねる。
 > **Remotion BCR レンダの正典入口は本スキル** (静止画/動画一般は `/render-sns-stills`、プレビューは `/preview-remotion`)。
 >
@@ -50,7 +50,7 @@ npx tsx scripts/pipeline/render-bar-chart-race.ts --key total-population --platf
    `config.json` (hookText 15 字以内・eventLabels) と `data.json` (フレーム) を生成。
    観測値が無ければ先に `/page-data-batch --metric <key>`。
 2. **render**: `apps/remotion/scripts/pipeline/render-bar-chart-race.ts` で動画化。`--dry-run` で対象確認 → 本番。
-   `--platform instagram` / `--platform tiktok` / `--platform x`。詳細 `reference/render.md`。
+   `--platform instagram` / `--platform x`。詳細 `reference/render.md`。
 3. **captions**: `reference/captions.md` の型で全 SNS キャプションを生成し posts.json に draft 登録
    (UTM は `.Codex/rules/sns-content-standards.md` §4)。
 4. **投稿は本スキルでは行わない**。各チャネルの既存投稿フロー (`publish-x` / IG cron 等) に委ねる。

@@ -59,6 +59,8 @@ const AD_COMPONENTS = [
 const RAIL_SLOT_ALLOWLIST = new Set([
   // home の左レール (aside)。lg 以上で 264px / xl で 280px のカラム。
   "apps/web/src/app/page.tsx",
+  // category の左レール (aside)。home と同じ 264px / 280px の2ペイン構成。
+  "apps/web/src/app/category/[categoryKey]/page.tsx",
   // blog 詳細の ArticleShell 右レール (316px)。
   "apps/web/src/app/blog/[slug]/page.tsx",
 ]);
@@ -170,7 +172,7 @@ if (slotFormats.size === 0) {
 // 検査 1-4: app 配下のページファイル
 // ---------------------------------------------------------------------------
 for (const abs of listFiles(APP_DIR, ".tsx")) {
-  const rel = path.relative(PROJECT_ROOT, abs);
+  const rel = path.relative(PROJECT_ROOT, abs).split(path.sep).join("/");
   const raw = fs.readFileSync(abs, "utf8");
   const src = stripComments(raw);
 

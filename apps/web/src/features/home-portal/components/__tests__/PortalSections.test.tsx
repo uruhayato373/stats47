@@ -7,13 +7,9 @@ vi.mock('@/lib/analytics/events', () => ({
   trackNavClick: (...args: unknown[]) => navMock(...args),
 }));
 
-import { PortalAreaEntry } from '../PortalAreaEntry';
 import { PortalBlogCard } from '../PortalBlogCard';
 import { PortalCategoryGrid } from '../PortalCategoryGrid';
 import { PortalUseCaseGrid } from '../PortalUseCaseGrid';
-
-const AREA_MAP_SVG =
-  '<svg data-map-layout="prefecture-overview"><path data-pref-code="13"/></svg>';
 
 describe('PortalCategoryGrid', () => {
   it('全カテゴリを /category/<key> リンクで描画する', () => {
@@ -39,7 +35,7 @@ describe('PortalCategoryGrid', () => {
 
 describe('PortalUseCaseGrid', () => {
   it('active な use case を /themes/<key> リンクで描画する', () => {
-    render(<PortalUseCaseGrid />);
+    const { container } = render(<PortalUseCaseGrid />);
     const active = HOME_PORTAL_USE_CASES.filter((u) => u.isActive);
     expect(screen.getAllByRole('link')).toHaveLength(active.length);
     const migrationLink = screen.getByRole('link', {
@@ -55,6 +51,22 @@ describe('PortalUseCaseGrid', () => {
       'xl:auto-cols-[calc((100%_-_2.25rem)/4)]'
     );
     expect(migrationLink.parentElement).toHaveAttribute('role', 'region');
+    const images = [...container.querySelectorAll('img')];
+    expect(images).toHaveLength(active.length);
+    expect(images[0]?.getAttribute('src')).toContain(
+      '%2Fimages%2Fhome%2Fuse-cases%2Fmigration.webp'
+    );
+    expect(images.every((image) => image.getAttribute('alt') === '')).toBe(
+      true
+    );
+    expect(screen.getByText('移住先を比較したい')).toHaveClass(
+      'text-sm',
+      'font-semibold',
+      'line-clamp-2'
+    );
+    expect(
+      screen.getByText('人口移動・転入超過から住みやすい地域を探す')
+    ).toHaveClass('text-[13px]', 'line-clamp-2');
   });
 
   it('use case クリックで home_use_case を計測する', () => {
@@ -67,29 +79,8 @@ describe('PortalUseCaseGrid', () => {
   });
 });
 
-describe('PortalAreaEntry', () => {
-  it('/areas への地図付き単一入口を描画する', () => {
-    const { container } = render(<PortalAreaEntry mapSvg={AREA_MAP_SVG} />);
-    const link = screen.getByRole('link', { name: /都道府県から探す/ });
-    expect(link).toHaveAttribute('href', '/areas');
-    expect(link).toHaveClass('aspect-[1.47/1]');
-    expect(
-      container.querySelector('[data-map-layout="prefecture-overview"]')
-    ).toBeInTheDocument();
-  });
-
-  it('クリックで home_area を計測する', () => {
-    navMock.mockClear();
-    render(<PortalAreaEntry mapSvg={AREA_MAP_SVG} />);
-    fireEvent.click(screen.getByRole('link', { name: /都道府県から探す/ }));
-    expect(navMock).toHaveBeenCalledWith(
-      expect.objectContaining({ surface: 'home_area', href: '/areas' })
-    );
-  });
-});
-
 describe('PortalBlogCard', () => {
-  it('1200×630のサムネイルとタイトルを表示する', () => {
+  it('ランキング基準の文字階層と右下の文字なしサムネイルを表示する', () => {
     const { container } = render(
       <PortalBlogCard
         slug="population-change"
@@ -106,10 +97,36 @@ describe('PortalBlogCard', () => {
     expect(link).toHaveClass('aspect-[1.47/1]');
     expect(image).toHaveAttribute(
       'src',
-      'https://storage.stats47.jp/app/blog/population-change/thumbnail-light.webp'
+      'https://storage.stats47.jp/app/blog/population-change/thumbnail-light.webp?v=20260822-v3'
     );
     expect(image).toHaveAttribute('alt', '');
-    expect(image?.parentElement).toHaveClass('aspect-[1200/630]');
-    expect(screen.getByText('人口が増えている都道府県は？')).toBeVisible();
+    expect(image).toHaveClass('absolute', 'object-cover');
+    expect(screen.getByText('人口が増えている都道府県は？')).toHaveClass(
+      'text-sm',
+      'font-semibold',
+      'line-clamp-2'
+    );
+    expect(screen.getByText('統計ブログ')).toBeVisible();
+  });
+
+  it('カテゴリ配置では category_blog を計測する', () => {
+    navMock.mockClear();
+    render(
+      <PortalBlogCard
+        slug="population-change"
+        title="人口が増えている都道府県は？"
+        surface="category_blog"
+      />
+    );
+
+    fireEvent.click(
+      screen.getByRole('link', { name: /人口が増えている都道府県/ })
+    );
+    expect(navMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        surface: 'category_blog',
+        href: '/blog/population-change',
+      })
+    );
   });
 });

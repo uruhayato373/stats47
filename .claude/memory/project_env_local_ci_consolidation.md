@@ -20,10 +20,13 @@ metadata:
 ## GSC/GA4 は元々 `.env.local` 不使用
 サービスアカウントで認証: ローカル=リポジトリroot `stats47-f6b5dae19196.json` / CI=Secret `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`。GA4 property ID はコードにハードコード(463218070)。
 
-## YouTube は完全撤退 (2026-05-29) → GOOGLE_OAUTH_* 削除
+## YouTube 自動運用は完全撤退 (2026-05-29) → GOOGLE_OAUTH_* 削除
 shadowban (SUGGESTED_VIDEO=0) + 低 ROI (32 subs / 81本 / ~7 views/日) + 戦略上 IG 集中のため YouTube から完全撤退を決定。
 - `.env.local` から `GOOGLE_OAUTH_{CLIENT_ID,CLIENT_SECRET,REFRESH_TOKEN}` 削除
 - 撤去 (**PR #376 → develop マージ済 2026-05-29**, 64 ファイル削除): CI 3 (`youtube-audit-daily` / `youtube-weekly-review` / `oauth-token-health-check`) + `.claude/scripts/youtube/*` (12) + `check-youtube-duplicate.cjs` + skills 8 (post-youtube / publish-youtube-normal / plan-youtube-normal / fetch-youtube-data / analyze-youtube / diagnose-youtube-shadowban / record-youtube-experiment / recover-youtube-shadowban)
+
+> **2026-08-23 update**: チャネル方針は通常動画3本・6週間の限定 pilot (EXP-006) へ変更したが、
+> OAuth / upload script / CI は復活させない。pilot は YouTube Studio の手動投稿・手動計測で行う。
 - `sns-metrics-weekly.yml` は IG のみに外科的縮小 (YT step + Compose .env.local step 削除)
 - 動画制作 (Remotion / bar-chart-race / render-sns-stills) は維持 → IG/TikTok/note 配信は継続可
 - ※ AdSense は別クライアント `GOOGLE_ADSENSE_*` で本件と無関係 (.env.local の "共通" コメントは古かった)

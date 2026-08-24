@@ -28,7 +28,7 @@ export {
 export { generateAreaMetadata } from './utils/generate-area-metadata';
 export { getCityRouteContext } from './utils/city-route-context';
 
-// 都道府県一覧（/areas）の県選択ハブ（左レール / 検索 / 一覧 / 軽量タイル地図）
-export { AreaDirectory } from './components/AreaDirectory';
+// 都道府県選択（home / category / /areas 共通）
+export { PrefectureNavigator } from './components/PrefectureNavigator';
 export { AreaDirectoryRegionNav } from './components/AreaDirectoryRegionNav';
 export { AreaDirectoryRegionProvider } from './components/AreaDirectoryRegionContext';

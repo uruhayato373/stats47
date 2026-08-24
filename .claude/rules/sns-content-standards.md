@@ -1,6 +1,6 @@
 # SNS コンテンツ標準 (チャネル戦略 + 投稿雛形 + 頻度リミットの正典)
 
-stats47 の SNS 運用 (X / Instagram / note) における**実行規約の単一ソース (SSOT)**。
+stats47 の SNS 運用 (X / Instagram / YouTube pilot / note) における**実行規約の単一ソース (SSOT)**。
 SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間はこれに従う。
 
 > **方式**: `chart-component-standards.md` / `blog-quality-standards.md` と同じ「rules に規約カタログ 1 ファイル、
@@ -9,14 +9,24 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 
 ---
 
-## 0. チャネル別の位置づけ (2026-07 更新)
+## 0. チャネル別の位置づけ (2026-08-23 更新)
 
 | チャネル | 位置づけ | 目標 | 頻度上限 | 主フォーマット | primary agent |
 |---|---|---|---|---|---|
 | **Instagram** | **主力** | フォロワー 10K (2027-02)・保存率 | カルーセル 2 + リール 1 / 週 | 6 枚カルーセル / Reels | `instagram-strategist` |
 | **X** | 自動化・トレンド瞬発 | 1-2K 維持・サイト送客 | 予約 2-3 / 週 + 引用RT 随時 (1 日 ≤ 3) | ランキング投稿 / 引用RT | `x-strategist` |
 | **note** | 外部衛星 | stats47 への送客 | 上限なし (2026-08-03 オーナー判断で撤廃・下記) | 広い検索意図の記事 | `note-manager` |
+| **YouTube** | **限定 pilot** | 通常動画の視聴維持・指名/サイト送客を検証 | **6週間で3本まで** | 6〜12分の横型・編集動画 | `strategy-advisor` (実験 owner) |
 | **TikTok** | **撤退 (恒久)** | — | **0 (投稿しない)** | — | — |
+
+### YouTube pilot の方式 (2026-08-23〜、EXP-006)
+
+- **通常動画をマスターコンテンツにする**。YouTube 用の 6〜12 分動画を先に編集し、そこから Instagram Reels / X 用に各 2〜4 本を切り出す
+- マスターは台本・ナレーション・実写/ストック・図表を NLE で編集する。**Remotion は図表・地図・短いアニメーション素材に限る**。Remotion の自動ランキング動画をマスターにしない
+- 1 本ごとにランキング / ブログ / テーマの根拠 URL、使用 metric、`surveyId` / provenance を台本と説明欄へ引き継ぐ。出典確認なしで公開しない
+- Shorts-first、Bar Chart Race の横流し、47県分割、同一動画の自動量産は pilot 対象外
+- 編集・事実確認・Studio 投稿は人間承認。OAuth / 自動アップロード / 定期 cron は pilot 成功判定後まで再実装しない
+- pilot の企画・基準・結果は `.claude/state/experiments.json` の `EXP-006`、投稿実績は `posts.json` を SSOT とする
 
 ### 差別化軸
 
@@ -32,6 +42,8 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 | ルール | 値 | 根拠 |
 |---|---|---|
 | **TikTok に投稿しない** | 0 | 撤退恒久 |
+| **YouTube 通常動画は pilot 中3本まで** | ≤ 3 / 6週間 | 少量で制作工数・視聴維持・送客を検証する。Shorts 単独量産は禁止 |
+| **YouTube マスター1本からの派生** | Reels / X 各 2〜4 本 | マスター先行。派生は同じ主張・出典を保ち、切り抜きだけで意味を歪めない |
 | **X は 1 日 3 本まで** (`X_DAILY_MAX=3`) | ≤ 3 / 日 | スパム判定回避。予約 + 引用RT + ニュース連動の合算 |
 | **X 定型ストックは週 14-21 本** (`X_WEEKLY_TARGET_MIN=14` / `X_WEEKLY_TARGET_MAX=21`) | 14-21 / 週 | 2026-07 積極運用へ転換。ランキング定型を量産し流入を作る |
 | **X 引用RT は 1 日 3 本まで** | ≤ 3 / 日 | 上記 1 日上限の内数。スパム判定回避 |
@@ -257,7 +269,11 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
   (2026-05-18〜08-03 に 94 件がこの状態で滞留した。ドリフト検知は `record-posted.cjs --check`)
 - レコードは snake_case: `id / platform / post_type / domain / content_key / caption / post_url /
   quote_url / media_path / status / scheduled_at / posted_at / impressions / likes / reposts /
-  replies / bookmarks / metrics_updated_at / template / metric_keys / ...`
+  replies / bookmarks / metrics_updated_at / template / metric_keys / parent_post_id / source_timecode /
+  survey_ids / provenance_urls / ...`
+- **YouTube master と派生投稿の関係**: master は `platform=youtube` / `post_type=video`、派生 Reels / X は
+  master と同じ `content_key` を持ち、`parent_post_id=<YouTube row id>` と `source_timecode=<開始>-<終了>` を記録する。
+  使用した調査と出典は全行で `survey_ids` / `provenance_urls` を引き継ぐ
 - メトリクスは投稿後に `/update-sns-metrics` が UPDATE。時系列 snapshot は
   `.claude/skills/analytics/sns-metrics-improvement/snapshots/` が SSOT
 
@@ -284,7 +300,7 @@ SNS 投稿の stats47.jp リンクには UTM を付ける。note は付けない
 
 | パラメータ | 値 |
 |---|---|
-| `utm_source` | `x` / `instagram` |
+| `utm_source` | `x` / `instagram` / `youtube` |
 | `utm_medium` | `social` |
 | `utm_campaign` | ranking: `<rankingKey>` / compare: `compare-<areaA>-vs-<areaB>` / correlation: `correlation-<keyX>--<keyY>` |
 | `utm_content` | `<template>` (例: `shock`, `paradox`) |
@@ -308,6 +324,7 @@ https://stats47.jp/ranking/taxable-income-per-capita
 | **X (量産)** | `post-x-batch` (候補選定→画像→執筆→lint→draft 登録) | quick-still (ranking-card) | `publish-x --from-queue` (ローカル) → `mark-sns-posted` | `update-sns-metrics` → `analyze-x-winning-patterns` |
 | **X (瞬発)** | `find-quote-rt` / `react-to-news` | (キャプション) | `publish-x` → `mark-sns-posted` | `update-sns-metrics` |
 | **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) | `render-sns-stills` | `post-instagram` (GHA cron) → `record-posted.cjs` | `update-sns-metrics` |
+| **YouTube pilot** | EXP-006 の brief → `article-writer` が構成・台本・出典表 | NLE で通常動画を編集 (`chart-author` / Remotion は図表素材のみ) | 人間が事実確認 → YouTube Studio へ手動投稿 → `sns-posts-store.cjs` で記録 | Studio の 30秒維持率・平均視聴率・視聴数を14日後に手動記録 + GA4 YouTube UTM |
 | **buzz-map (X/IG 横断)** | curated catalog (`build-buzz-map-catalog.ts --next`・正典 `buzz-map-standards.md` §4-5) | `prepare-buzz-map-batch.ts` (dry-run 既定・landing contract+isPostable ゲート→R2→draft) / admin `/buzz-map` | 既存 guarded flow (`publish-x` / IG cron — draft からの昇格は人間判断) | `buzz-map-attribution.mjs` (campaign 別) → score 還流 |
 
 - **buzz-map の deep-click 計測は要ユーザー操作 (GA4 custom dimension)**: `buzz-map-attribution.mjs` は
@@ -323,6 +340,8 @@ https://stats47.jp/ranking/taxable-income-per-capita
   `caption.txt` を R2 push → posts.json draft `template=buzzmap-<型>`)、`preview-remotion` はプレビュー専用 (レンダしない)
 - 週次運用は `/sns-weekly-plan` が上記を 1 コマンドで束ねる
 - 競合の定点観測は `/competitor-scan` (月次)。示唆は §2-10 の承認ゲート経由でカタログへ反映
+- **YouTube 自動化の停止線**: pilot 中は Data API / OAuth / upload cron を持たない。3本の結果を EXP-006 で判定し、
+  継続が決まった場合だけ専用 skill / uploader / 自動計測の要否を設計する
 
 ---
 
@@ -350,10 +369,11 @@ SNS 投稿は `/sns` セクション、OGP/リンクカード/note カバー・
 
 ### R2 素材保持ポリシー (★コスト対策)
 
-**投稿済み (posted) の動画 (.mp4) は投稿後 30 日で R2 から自動削除する**
+**投稿済み (posted) の派生 SNS 動画 (.mp4) は投稿後 30 日で R2 から自動削除する**
 (`cleanup-posted-sns-videos.ts` + `.github/workflows/cleanup-r2-sns-videos.yml` weekly)。
 
 - サムネイル (.png) / caption.txt / posts.json の投稿記録・メトリクスは**永続**
+- YouTube pilot の通常動画 master は再編集可能なソース資産のため `video/<slug>/master.mp4` に保持し、30日削除の対象外とする
 - draft / scheduled が残る content_key の素材は削除しない (再投稿予定を守る)
 - 削除済み動画を再投稿したい場合は **Remotion で再レンダー**する (素材は再生成可能な派生物)
 - 背景: R2 は無料枠 10GB を超過し課金中 (2026-07 時点 20.65GB)。動画の無制限保持は肥大の主因になる

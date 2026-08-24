@@ -3,8 +3,8 @@
  * Bar Chart Race 動画 一括生成
  *
  * .local/r2/sns/bar-chart-race/ 配下の全ディレクトリを走査し、
- * Instagram Reel / TikTok / X 用の動画を生成する。
- * (YouTube は撤退済のため youtube / youtube-normal 系統は生成しない)
+ * Instagram Reel / X 用の動画を生成する。
+ * YouTube pilot は通常動画 master-first、TikTok は撤退済みのため自動生成しない。
  *
  * 前提:
  *   - config.json, data.json が各ディレクトリに存在すること
@@ -15,7 +15,7 @@
  *
  * オプション:
  *   --key <key>         特定のランキングキーのみ処理
- *   --platform <p>      特定プラットフォームのみ (instagram / tiktok / x)
+ *   --platform <p>      特定プラットフォームのみ (instagram / x)
  *   --dry-run           レンダリングせずジョブ一覧を表示
  */
 
@@ -66,6 +66,13 @@ const targetKeys =
 const platformIdx = args.indexOf("--platform");
 const targetPlatform = platformIdx !== -1 ? args[platformIdx + 1] : undefined;
 const dryRun = args.includes("--dry-run");
+const ALLOWED_PLATFORMS = new Set(["instagram", "x"]);
+
+if (targetPlatform && !ALLOWED_PLATFORMS.has(targetPlatform)) {
+  throw new Error(
+    `--platform must be instagram or x (received: ${targetPlatform})`
+  );
+}
 
 // ---------------------------------------------------------
 // 型定義
@@ -151,12 +158,6 @@ const PLATFORM_CONFIG: Array<{
     outputFile: "instagram/reel.mp4",
   },
   {
-    platform: "tiktok",
-    variant: "tiktok",
-    compositionId: "BarChartRace-TikTok",
-    outputFile: "tiktok/reel.mp4",
-  },
-  {
     platform: "x",
     variant: "youtube",
     compositionId: "BarChartRace-YouTubeShort",
@@ -237,7 +238,7 @@ async function main() {
     allJobs.push(...jobs);
   }
 
-  const platforms = targetPlatform || "instagram/tiktok/x";
+  const platforms = targetPlatform || "instagram/x";
   console.log(`📂 対象: ${dirs.length - skipped.length} ランキング (${platforms})`);
   console.log(`🎬 ジョブ数: ${allJobs.length}`);
   if (skipped.length > 0) {

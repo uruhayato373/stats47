@@ -55,4 +55,21 @@ describe('BlogAuthorProfileCard', () => {
     }
     expect(container).not.toHaveTextContent('@stats47');
   });
+
+  it('compact表示では記事レール向けの最小情報だけを表示する', () => {
+    render(<BlogAuthorProfileCard compact />);
+
+    expect(screen.getByText('運営者')).toBeInTheDocument();
+    expect(screen.getByText(OPERATOR_PROFILE.name)).toBeInTheDocument();
+    expect(screen.getByText(OPERATOR_PROFILE.bio)).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: '運営者について →' })
+    ).toHaveAttribute('href', OPERATOR_PROFILE.links.about);
+    expect(screen.queryByText('経歴・専門領域')).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', {
+        name: 'noteで統計の読み方・AI活用を発信中',
+      })
+    ).not.toBeInTheDocument();
+  });
 });

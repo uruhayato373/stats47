@@ -53,7 +53,7 @@ test.describe("ヘッダーナビゲーション", () => {
 
   test("統計ブログリンクをクリックして遷移する", async ({ page }) => {
     // 統計ブログリンクを取得
-    const blogLink = page.getByRole("link", { name: /統計ブログ/i });
+    const blogLink = page.getByRole("link", { name: "統計ブログ", exact: true });
     
     // href属性が正しいことを確認
     await expect(blogLink).toHaveAttribute("href", "/blog");

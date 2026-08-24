@@ -25,9 +25,15 @@ import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
+import { THEME_INDICATOR_SETS } from "@stats47/types";
+
 import { METRICS_REGISTRY } from "../src/registry";
 import { normalizeUnitForAxis } from "../src/theme-catalog/types";
 import { listThemeCatalogs, CATALOG_COMPONENT_TYPES, type ThemeCatalog } from "../src/theme-catalog";
+import {
+  EVIDENCE_LENS_CATALOG,
+  EVIDENCE_SOURCE_CATALOG,
+} from "../src/theme-catalog/evidence-lenses";
 import { validateChartProps } from "../src/theme-catalog/stat-series-ref";
 import { collectColorFieldViolations } from "../src/theme-catalog/chart-color-role";
 
@@ -227,10 +233,142 @@ export function validateMetricGroups(
   }
 }
 
+export function validateEvidenceSources(errors: string[]): void {
+  for (const [key, source] of Object.entries(EVIDENCE_SOURCE_CATALOG)) {
+    if (!/^https:\/\//.test(source.sourceUrl)) {
+      errors.push(
+        `[evidence-source-url] ${key}: sourceUrl は https の公式 URL を指定する`
+      );
+    }
+    const notebookId = 'notebookId' in source ? source.notebookId : undefined;
+    if (
+      typeof notebookId === 'string' &&
+      !/^[0-9a-f-]{36}$/i.test(notebookId)
+    ) {
+      errors.push(
+        `[evidence-notebook-id] ${key}: notebookId が UUID 形式でない`
+      );
+    }
+  }
+}
+
+/**
+ * Theme に採択した論点レンズと、その周遊先の実在を検査する。
+ * 候補調査は skill reference / session で扱い、ここへ入った時点で公開可能でなければならない。
+ */
+export function validateEvidenceTopics(
+  c: ThemeCatalog,
+  themeKeys: Set<string>,
+  errors: string[],
+  warns: string[]
+): void {
+  const topics = c.evidenceTopics;
+  if (!topics || topics.length === 0) return;
+
+  const seen = new Set<string>();
+  const chartKeys = new Set(c.charts.map((chart) => chart.componentKey));
+
+  for (const topic of topics) {
+    const where = `${c.key}/${topic.key}`;
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(topic.key)) {
+      errors.push(`[evidence-key] ${where}: key は kebab-case にする`);
+    }
+    if (seen.has(topic.key)) {
+      errors.push(
+        `[evidence-dup-key] ${c.key}: evidenceTopic key "${topic.key}" が重複`
+      );
+    }
+    seen.add(topic.key);
+
+    if (
+      !Object.prototype.hasOwnProperty.call(
+        EVIDENCE_LENS_CATALOG,
+        topic.lensKey
+      )
+    ) {
+      errors.push(
+        `[evidence-lens] ${where}: lensKey "${topic.lensKey}" が台帳に不在`
+      );
+    }
+    if (
+      !topic.title.trim() ||
+      !topic.question.trim() ||
+      !topic.summary.trim()
+    ) {
+      errors.push(
+        `[evidence-copy] ${where}: title / question / summary は空にできない`
+      );
+    }
+    if (topic.sourceKeys.length === 0) {
+      errors.push(`[evidence-source] ${where}: sourceKeys が空`);
+    }
+    for (const sourceKey of new Set(topic.sourceKeys)) {
+      if (
+        !Object.prototype.hasOwnProperty.call(
+          EVIDENCE_SOURCE_CATALOG,
+          sourceKey
+        )
+      ) {
+        errors.push(
+          `[evidence-source] ${where}: sourceKey "${sourceKey}" が台帳に不在`
+        );
+      }
+    }
+
+    for (const rankingKey of new Set(topic.relatedRankingKeys ?? [])) {
+      if (!metricExists(rankingKey)) {
+        errors.push(
+          `[evidence-ranking] ${where}: rankingKey "${rankingKey}" が METRICS_REGISTRY に不在`
+        );
+      } else if (METRICS_REGISTRY[rankingKey]?.isActive !== true) {
+        errors.push(
+          `[evidence-ranking] ${where}: rankingKey "${rankingKey}" は isActive:false`
+        );
+      }
+    }
+    for (const chartKey of new Set(topic.relatedChartKeys ?? [])) {
+      if (!chartKeys.has(chartKey)) {
+        errors.push(
+          `[evidence-chart] ${where}: chartKey "${chartKey}" が同テーマの charts に不在`
+        );
+      }
+    }
+    for (const themeKey of new Set(topic.relatedThemeKeys ?? [])) {
+      if (!themeKeys.has(themeKey)) {
+        errors.push(
+          `[evidence-theme] ${where}: themeKey "${themeKey}" がテーマ登録簿に不在`
+        );
+      } else if (themeKey === c.key) {
+        errors.push(
+          `[evidence-theme] ${where}: 自分自身へのテーマリンクは置かない`
+        );
+      }
+    }
+    for (const tagKey of new Set(topic.relatedArticleTagKeys ?? [])) {
+      if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(tagKey)) {
+        errors.push(
+          `[evidence-tag] ${where}: tagKey "${tagKey}" は kebab-case にする`
+        );
+      }
+    }
+
+    const internalLinks =
+      (topic.relatedRankingKeys?.length ?? 0) +
+      (topic.relatedThemeKeys?.length ?? 0) +
+      (topic.relatedArticleTagKeys?.length ?? 0);
+    if (internalLinks === 0) {
+      warns.push(`[evidence-no-route] ${where}: 内部の関連導線が無い`);
+    }
+  }
+}
+
 function main() {
   const catalogs = listThemeCatalogs();
   const errors: string[] = [];
   const warns: string[] = [];
+
+  validateEvidenceSources(errors);
+  const themeKeys = new Set(THEME_INDICATOR_SETS.map((set) => set.key));
 
   const globalComponentKeys = new Map<string, string>(); // componentKey → theme
 
@@ -335,6 +473,7 @@ function main() {
 
     // metricGroups (指標カードの編成)。省略時は UI が「非 context を 1 グループ」に倒すので検査不要。
     validateMetricGroups(c, metricKeys, errors, warns);
+    validateEvidenceTopics(c, themeKeys, errors, warns);
   }
 
   const estatParamsChecked = validatePageComponentEstatParams(errors);

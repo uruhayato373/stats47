@@ -6,7 +6,7 @@ import { z } from "zod";
  * scheduled_at:null 許容・日本語 caption 許容・comma 区切り keys 許容。
  */
 
-/** 書込対象の platform enum (X / IG のみ。YouTube は撤退済で新規作成不可)。 */
+/** 書込対象の platform enum (X / IG のみ。YouTube pilot は Studio 手動投稿)。 */
 export const WritePlatform = z.enum(["x", "instagram"]);
 
 /** PATCH /api/posts/:id — caption / scheduled_at のみ。厳密検証は server 側 updatePost が担う。 */

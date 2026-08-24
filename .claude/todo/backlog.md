@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-20
+updated: 2026-08-24
 ---
 
 # バックログ (タスクマスタ)
@@ -20,6 +20,31 @@ updated: 2026-08-20
 ```
 
 ## 🔴 高 — 今月中に着手したい
+
+### [THEME-EVIDENCE-LENS-ROLLOUT-01] 白書論点レンズをテーマ横断で段階展開する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-08-24] [期日:2026-08-31]
+
+- **owner**: `theme-researcher → theme-designer → theme-component-builder`。観測は GA4 `nav_surface=theme_evidence`。
+- **実装済み基盤**: `evidence-lenses.ts` の lens/source SSOT、`ThemeCatalog.evidenceTopics`、
+  source/ranking/chart/theme/tag validator、`ThemeEvidenceTopicsSection`、教育・文化の2論点、クリック計測。
+  教育・文化は可視化パイロットとして、施設指標を学校/文化の2群へ分割し、重複する独立推移2件を削除、
+  高等教育2系列を比較チャートへ統合済み。開発ゲートウェイはgit管理のpage-componentsをローカル優先し、
+  生成直後の配置をR2 pushなしで確認できる。
+- **次**: 白書台帳に登録済みのテーマから2〜3件ずつ `/research-theme-catalog <theme-key>` を実行する。
+  NotebookLM は引用付き候補抽出だけに使い、公式HTTPS URLと実在routeを確認できた候補だけ
+  theme-designerが採択する。文部科学白書は公式source登録済みだがNotebookLM ID未登録なので、
+  別PCで `find-or-create` / `add-source` 後に台帳へ実IDを記録する。
+- **展開順**: (1) 登録済みNotebookのあるテーマ、(2) GSC流入のあるテーマ、(3) 残り。
+  1テーマ1〜3論点を上限とし、同じ問い・説明・リンク集合を横展開しない。
+- **計測**: 公開後56日で `theme_evidence` のtopic別クリック、遷移先、ページ回遊を確認する。
+  外部白書リンクは内部CTRへ混ぜない。効果判定前にGA4 dimension台帳を確認する。
+- **完了条件**: 適用可能な各ThemeCatalogが、公式sourceと1件以上の内部routeを持つ採択済み論点、
+  または「白書で県別に検証できる論点なし」の明示判定を持ち、catalog/type/test/docs gateが全て通る。
+- **停止条件**: NotebookLMのみの根拠、推測URL、inactive ranking、他テーマのchart key、内部route 0、
+  白書名を第四taxonomy/新規URLにする案は採択せず停止する。
+- **Claude Code Sonnet指示**: 「`THEME-EVIDENCE-LENS-ROLLOUT-01` の次テーマ1件だけを処理。
+  research-theme-catalogの実証ゲートに従い、公式資料とrouteを検証してからThemeCatalogへ反映。
+  validate:catalog、対象test、web type-checkを通し、カードの次テーマだけ更新。デプロイしない。」
 
 ### [ASP-CONTINUITY-01] afb の承認追跡と広告コード取得 (オーナーのログインが要る分)
 タグ: [収益化] [種類:改善] [実行:ユーザー] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-07-28]
@@ -310,6 +335,12 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   validator (catalog well-formed) × generate:catalog --check (catalog==page-components JSON) ×
   mirror gate (mirror==collector 出力) → 監査は mirror 全件。テスト計 44 (mirror parity + provenance 3)。
   **残 (WP6): 全 192 request の live 全件緑は e-Stat 実照会が要る (read-only・cron が担う)**。
+- **survey taxonomy 横断 checkpoint (2026-08-22)**: `survey-taxonomy.ts` を共通 resolver とし、
+  ranking / ThemeCatalog 113 chart / 公開 blog chart を同じ survey master へ接続。master 80、ranking active
+  2,164 件中 1,924 解決 (88.91%)、theme は適用対象 89/89 解決 (100%)、blog は 1,087 chart 中
+  resolved 733 / unresolved 99 / missing-lineage 179 / not-applicable 76。週次全量監査・PR offline freshness・
+  shrink-only ratchet・双方向 UI / GA4 計測まで実装済み。blog lineage 再監査は 1,089 枚中 source+json 983 / neither 106、
+  source provenance defect 22。残件は推測で survey を付けず、本項目 WP6 と既存 lineage queue で縮小する。
 - **WP5 core (2026-08-13)**: 色 semantic role の SSOT `theme-catalog/chart-color-role.ts`
   (`CHART_COLOR_ROLES` 20 role + web resolver `resolveChartColorCssVar` + static/SVG resolver
   `resolveChartColorHex`)。両 resolver が同 role 集合を実装する parity をテスト固定
@@ -437,11 +468,26 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `packages/data-configs/src/unit/` / `packages/data-configs/src/color-scheme-policy.ts`
 
 ### [MUNICIPALITY-SCOPE-SEPARATION-01] 市区町村テーマ・ランキングを独立した地理スコープへ分離する
-タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run docs:check] [起票:2026-08-20]
+タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run validate:municipalities --workspace=@stats47/data-configs] [起票:2026-08-20]
 
 - **owner**: Claude Code Sonnet 5 high（1 session = 1 work package、writerは同時に1体）
-- **再開ポインタ**: `nextWorkPackage=WP1` / `lastCompleted=WP0` (2026-08-21)。WPのgateを満たした場合だけ更新する。
+- **再開ポインタ**: `nextWorkPackage=WP7-remote-release` / `lastCompleted=WP6-local` (2026-08-24)。WPのgateを満たした場合だけ更新する。
   完了した作業の長文ログは残さず、変更path、検証、未検証、次の一手を3〜6行で追記する。
+- **WP1 完了 (2026-08-24)**: `packages/area/src/municipalities/` と
+  `packages/data-configs/src/geo-scope/{types,municipality-catalog}.ts` にscope・entity policy・公開判断SSOTを追加した。
+  現行マスタ1,913行から公開候補1,718、行政区除外194、`13100 特別区部`集約除外1を決定的に導出する。
+  active city metric 184件は全件availability理由を持ち、監査済みpilot 1件だけをpublishedにした。
+- **WP2〜WP6 ローカル完了 (2026-08-24)**: 専用R2 namespace、hub/theme/ranking、検索・県filter・50件paging、
+  city profile相互導線、known/410/redirect/sitemap/navigationを実装。対象93 test、lint、全25 package type-check、web buildはgreen。
+  `elderly-population-ratio` は2020年1,717有効値。分母人口0の双葉町0%をvaluePolicyで欠測相当へ除外した。
+- **WP5 blocked**: 個別東京23特別区の観測値が現R2/masterに無いため地方財政はdraft。県theme一覧から旧city themeを除き、
+  市区町村hubへ監査中表示と一時転送を置いた。推測値・行政区混入・0埋めは行わない。
+- **WP7 preflight**: remoteは両keyとも404。upload候補は`item.json` 490B sha256 `0b576fc2…fb08`、
+  `values.json` 182,591B sha256 `b4f763b3…da3d`。rollback prefixは`app/municipalities/ranking/elderly-population-ratio/`全削除。
+  `sync-snapshots` の `municipality-ranking` task、専用prefix push、公開後schema verifierへ接続済み。
+  次はowner承認後にremote R2 write、git push/PR/deployを一回で実行し、本番smokeと28日/56日計測を開始する。
+  pilot公開日を2026-08-24とし、28日判定は2026-09-21、56日判定は2026-10-19。GSCの表示回数・クリック、
+  GA4のlanding/engagement/市区町村導線eventをprefecture既存ページと混在させず専用URL prefixで比較する。
 - **WP0 完了 (2026-08-21)**: read-only 棚卸しを機械化した。
   生成器 `.claude/scripts/municipalities/build-wp0-inventory.ts` /
   出力 `.claude/state/municipalities/{wp0-inventory.json,LATEST.md}`。コード・R2・URL は未変更。
@@ -845,7 +891,12 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 タグ: [進行中] [起票:2026-06-01]
 
 - **owner**: Claude Code
-- **次**: `CONTENT-ROUTINE-LIVE-VERIFY-01` の1件実走後、成功率と利用枠を実測しながら小バッチ件数を決める。
+- **次**: 対話セッションで 3 件並列を続ける。2026-08-24 に 86 件試して生成 FAIL 0 / 公開 83 件
+  (CI の権威ゲートでも skip 0)。止まった 2 件は接地データ側の欠陥で
+  `AICONTENT-BUILDINPUT-ZEROFILL-01` が扱う。旧「次」が指していた
+  `CONTENT-ROUTINE-LIVE-VERIFY-01` はカードが現存せず、日次ループ
+  (`ai-content-generate-daily.yml`) も 2026-08-21 に削除済みなので無効。件数は月次計画が
+  目標を持ち週次が割り当てる。
 - **完了条件**: 全active rankingを処理し、欠測・矛盾・未検証生成を0にする。R2 pushとCDN反映は別承認。
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
@@ -1011,39 +1062,44 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 13 指標すべてが属性または空間結合で解決され、未解決 0 で再生成・公開されている。
 - **正典**: `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/prefecture-assign.ts`
 
-### [DATA-REFRESH-ZEROGATE-ALLORNOTHING-01] ゼロ件ゲートが成功 2,148 件の R2 push を巻き添えにする
-タグ: [起票:2026-08-17]
+### [DATA-REFRESH-ZEROGATE-ALLORNOTHING-01] 形状ゲートに掛かる 4 metric を是正する
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:gh run list --workflow=data-refresh.yml --limit 3] [起票:2026-08-17]
 
 - **owner**: data-ingester
-- **実測 (run 30979118359 / 2026-08-05 schedule のログ)**: `page-data-batch` は
-  **ok=2148 / fail=10 / empty=37** で取り込み自体は成功している。落ちているのは最後の
-  ゼロ件ゲート `[fatal] 観測値が 0 件の metric が 37 件あります` による **exit 1** で、
-  `data-refresh.yml` の `☁️ Push observations to R2` は `if:` に `always()` を持たないため
-  **skip される**。つまり **正常に取り込んだ 2,148 件が一度も R2 へ push されない**。
-  月次 cron が 2 回連続でこの形なので「e-Stat → R2 の更新が止まっている」は事実。
-- **これは `SYNC-SNAPSHOTS-ALLORNOTHING-01` と同型**: 1 件の失敗で全件を捨てる。
-  あちらは verify 側を partial-publish に直して解決した。
-- **push しても壊れない根拠**: `page-data-batch` は空を返した metric について
-  「★既存 N 行が消失するため書き込みを中止 (データ破壊防止)」で**ローカルにも書かない**。
-  したがって `.local` に残るのは取り込みに成功した正しい値だけで、push しても
-  壊れたデータは配信されない。
-- **empty 37 件の内訳**（この 37 件を仕分けるのが本体の作業）: `gpp-*` 6 /
-  `fishery-*`・`fishing-*` 6 / `voluntary-car-insurance-rate-*` 3 /
-  `sixth-industry-agriculture-*` 2 / `national-pension-*-exemption-rate` 2 /
-  `kindergarten-*` 2 / `nursery-education-diffusion-rate` ほか。うち
-  `kindergarten-education-diffusion-rate` / `nursery-education-diffusion-rate` は
-  `SSDS-EDU-DIFFUSION-CODE-01` が既に追っているコード改廃。
-- **fail 10 件**: `construction-contract-*` 7 / `construction-projects-total` /
-  `noise-regulation-rate` / `voter-turnout-house-proportional` (fetch failed)。
-- **次**: (1) empty 37 件を「実在の欠陥」と「`expected-empty.ts` 登録漏れ」に仕分ける。
-  (2) 仕分けと並行して、ゼロ件ゲートを exit 1 のままにするか、成功分の push を
-  通してからゲートで落とすかを決める (partial-publish 化)。**(2) は `.github/` を触るので
-  人間の PR が要る** (`ACTIONS-EXPRESSION-INJECTION-01` と同じ制約)。
-- **完了条件**: schedule run が 2 回連続 success、または empty 37 件が仕分け済で
-  fatal が出ず、R2 の `app/stats` が当月分に更新されていることを実測できる。
+- **★カードを 2026-08-21 に実測で書き直した。起票時の前提はもう成り立たない。**
+  当時は「empty 37 件が本体」と書いたが、**empty は 0 になっている**。
+  いま止めているのは形状ゲートで、対象は **4 metric だけ**。
+- **最新の実測** (run 31975905930 / 2026-08-16 の full dispatch):
+  `ok=2175 / fail=9 / skip=57 / empty=0 / empty-allowed=2 / shape=4 / shape-allowed=48`
+  fatal は `[fatal] 形状が壊れた metric が 4 件あります`。
+- **落ちている 4 件**（いずれも `expected-shape-anomaly.ts` に**未登録**。実測で確認済み）:
+  | key | 素性 |
+  |---|---|
+  | `bowling-alley-public` | **全 47 県が 0**。ai-content 側で既知 (`value-health` が not-eligible 判定) |
+  | `gini-coefficient-disposable-income` | 同上。ai-content キューから除外済み |
+  | `unemployment-measures-project-expenses-prefecture` | 同上 |
+  | `commuter-ratio-from-other-municipalities` | 比率系の市区町村データに閾値が合っていない可能性。**allowlist の冒頭コメントは「legitimate で登録した」と書いているが実エントリが無い** — コメントと実装のドリフト |
+- **✅ 完了 (2026-08-21)**: 巻き添え構造は解消した。1 件でもゲートに掛かると exit 1 で
+  後続の push が skip され、**正常に取り込んだ 2,175 件が一度も R2 へ届かなかった**。
+  `data-refresh.yml` の batch を `continue-on-error` にして push と派生生成を通し、
+  最後の「🔴 Reflect batch gate result」で job を赤にする形にした。
+  - 安全性の根拠: 壊れた metric は `writable = notEmpty && shapeOk` でローカルにも書かれず、
+    `diff-push-r2` は `DeleteObjectCommand` を持たない **upload-only**。部分 push で
+    壊れたデータが配信されることも R2 が削られることもない。
+  - 契約テスト: `.claude/scripts/lib/__tests__/content-generation-routine.test.cjs`
+    (`continue-on-error` を外す / 反映ステップを前へ動かす の両方が退行として落ちる)。
+- **次**: 4 件をそれぞれ「是正する」か「`expected-shape-anomaly.ts` に登録する」か決める。
+  1. `commuter-ratio-*` — コメントが言う legitimate 判定が正しいなら
+     `disposition: "legitimate"` でエントリを実際に追加する (コメントだけでは効かない)。
+  2. 残り 3 件は ai-content 側で「データが不成立」と判定済み。**config を直せるのか、
+     e-Stat の値がそもそもそうなのかを先に確かめる** (`diagnose-unpinned-axes.ts --fetch`)。
+     直せないなら `known-broken` で登録するが、**`MAX_KNOWN_BROKEN` (現在 14) は
+     縮小専用の規律なので、増やすなら理由を書く**。
+- **完了条件**: data-refresh の full run (schedule または dispatch) が success で終わり、
+  `app/stats` が当月分に更新されていることを実測できる。
 - **注意**: 2026-07-05 の失敗は**別原因** (sync-snapshots の correlation task が JS ヒープ
-  OOM 4,051MB。heap は 8GB へ引き上げ済)。同じ「連続失敗」でも原因が違うので混同しない。
-  また 2026-08-16 dispatch / 2026-08-17 push でも失敗しており、schedule 以外でも再現する。
+  OOM。heap は 8GB へ引き上げ済)。同じ「連続失敗」でも原因が違うので混同しない。
+  2026-08-17 の失敗も別で、page-data-batch と push は成功し `sync-snapshots` で落ちている。
 
 ### [SOURCE-TEXT-LINK-INJECTION-01] 出典テキストが第三者スクリプトでリンクに置換される
 タグ: [収益化] [種類:不具合] [実行:ユーザー] [検証:npx playwright test --config playwright.smoke.config.ts third-party-dom-injection] [起票:2026-08-04]
@@ -1090,6 +1146,52 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   再開手順に smoke の実行を紐づけた (`affiliate-ads-standards.md` §12)。自動広告の解除は
   実施済みなので、再開後の smoke が緑なら解決とみなす。
 - **完了条件**: AdSense 再開後の post-deploy smoke で、出典・本文がリンク化されないことを示す。
+
+### [AICONTENT-BUILDINPUT-ZEROFILL-01] build-input が R2 に無い県をゼロ埋めするのをやめる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx vitest run packages/ai-content/src] [起票:2026-08-24]
+
+`packages/ai-content/src/scripts/build-input.ts` は R2 の観測値に存在しない県を `value: 0` /
+`rank: 0` で埋めて 47 件に揃え、生成器へ渡す。生成器はそれを実在の観測として読むため、
+対象外の県に解説が書かれる。
+
+- **実害** (2026-08-24 に 6 例を実測。左が R2 の実行数、右がゼロ埋めされる県数):
+  voter-turnout-governor 11/36 ・ fishery-species-catch-snow-crab 14/25 ・
+  factory-location-area-annual 42/5 ・ high-school-teacher-annual-income 42/5 ・
+  port-container-count / port-inbound-ships / fishery-workers-coastal-offshore 39〜40/7〜8
+- **なぜ機械で止まらないか**: `audit-ai-content.mjs` はこれを blocker にしない
+  (`pref-unknown-area` / `pref-count` の warn 止まり)。`voter-turnout-governor` では実際に
+  「この年度に選挙が実施されておらず、投票率の値は記録されていません」という中身のない解説が
+  36 件生成された。嘘ではないが読者価値がなく、rank 0 / value 0 は「投票率 0%」と誤読されうる。
+- **次**: R2 に無い県を渡さない。渡すなら「対象外」と識別できる形にし、生成器とゲートの双方が
+  ゼロ埋めと実在の 0 を区別できるようにする (施設数は 0 が実在しうるので一律除外にはしない)。
+- **完了条件**: 上記 6 key で build-input が返す県数が R2 の行数と一致し、それを固定するテストがある。
+- **保留中の生成物**: `voter-turnout-governor` は `.local/aic-held/` に退避 (公開していない)。
+  `high-school-teacher-annual-income` は未生成。どちらも是正後に生成できる。
+- **正典**: `.claude/rules/ranking-content-standards.md`
+
+### [UI-CARD-CENSUS-SURVEY-01] SurveyTaxonomyCard の census ベースラインを決着させる
+タグ: [UI・UX] [種類:意思決定] [実行:対話] [検証:node .claude/scripts/lib/check-card-census.cjs] [起票:2026-08-24]
+
+`check-card-census.cjs` が 2 件で落ちており、**develop→main の PR (`pr-quality-check`) を
+ブロックする**。develop の CI は通るのでデプロイ直前まで気づけない (2026-08-24 実測)。
+
+- **新規**: `apps/web/src/features/survey/components/SurveyTaxonomyCard.tsx` がベースライン外。
+  まず既存の共有カード (`SurfaceCard` / `ChartPanel` / `ChartCard` / `RailCard` / `KpiCard`) で
+  表現できないか検討する。どうしても必要なら理由コメント付きで BASELINE に追加する。
+- **削除済み**: `NationalTrendCard` が消えているので BASELINE を縮小する。
+- **完了条件**: `node .claude/scripts/lib/check-card-census.cjs` が exit 0。
+- **正典**: `docs/01_技術設計/04_デザインシステム.md` / `.claude/rules/ui-components.md`
+
+### [UI-AD-RAILSLOT-CATEGORY-01] category ページの RailAdSlot を本文カラムから外す
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:node .claude/scripts/lib/check-ad-placement.cjs] [起票:2026-08-24]
+
+`apps/web/src/app/category/[categoryKey]/page.tsx` が `RailAdSlot` を右レール以外で使っている。
+右レール (316px) 前提の枠なので本文カラムに置くと枠だけレール幅で浮く。**develop→main の PR
+(`pr-quality-check`) をブロックする** (2026-08-24 実測)。
+
+- **次**: 本文末尾に置きたいなら `FooterAdSlot` に替える。配置意図が別なら合う枠を選ぶ。
+- **完了条件**: `node .claude/scripts/lib/check-ad-placement.cjs` が exit 0。
+- **正典**: `docs/01_技術設計/04_デザインシステム.md` / `.claude/rules/ui-components.md`
 
 ## 🟡 中 — 2〜3ヶ月以内
 
@@ -1683,19 +1785,6 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 根拠・再現条件: e-Stat 0003130737。R2 `app/stats/port-passengers-total/values.json` の年別行数を確認。未検証キューに残置
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
-
-### [WORKFLOW-DELETE-REACH-MAIN-01] 削除した日次生成 workflow が main から消えたのを確認する
-タグ: [インフラ・計測] [種類:定期] [実行:対話] [検証:gh workflow list --all] [起票:2026-08-21]
-
-- **owner**: Claude Code
-- **状況**: `ai-content-generate-daily.yml` / `blog-generate-daily.yml` は develop から削除済みだが、
-  **main にはまだファイルがある** (`git ls-tree origin/main -- '.github/workflows/'` が 64 対 62)。
-  scheduled workflow は default branch の定義で発火するため、2026-08-21 に
-  `gh workflow disable` で暫定的に止めてある (`disabled_manually`)。
-- **trigger**: 次に develop → main をデプロイしたとき。
-- **完了条件**: `gh workflow list --all` から 2 つが消えること。消えていれば disable 状態も
-  不要になるので、このカードを削除する。
-- **正典**: `.claude/rules/branch-workflow.md`「scheduled workflow は default branch の定義で発火する」
 
 ### [DISPATCH-FRESHNESS-PRECISION-01] main 反映順チェックの入力パス判定を workflow ごとに絞る
 タグ: [起票:2026-08-17]

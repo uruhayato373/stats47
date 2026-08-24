@@ -21,7 +21,10 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { METRICS_REGISTRY } from "../../src/registry";
-import { DISPLAYNAME_TO_SURVEY } from "../../src/ssds/displayname-to-survey";
+import {
+  DISPLAYNAME_TO_SURVEY,
+  STATS_DATA_ID_TO_SURVEY_OVERRIDE,
+} from "../../src/ssds/displayname-to-survey";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT = join(__dirname, "../../src/ssds/estat-provenance.generated.json");
@@ -60,6 +63,15 @@ function main(): void {
     if (sorted.length > 1) {
       conflicts.push(`${sdi}: ${sorted.map(([id, v]) => `${id}(${v.count})`).join(", ")}`);
     }
+  }
+
+  // ThemeCatalog など registry 外から直接参照する一次統計を明示的に補完する。
+  // SSDS テーブルへの誤上書きは provenance 層の混在になるため fail-fast。
+  for (const [sdi, survey] of Object.entries(STATS_DATA_ID_TO_SURVEY_OVERRIDE)) {
+    if (ssdsTableIds.has(sdi)) {
+      throw new Error(`statsDataId override が SSDS テーブルと競合しています: ${sdi}`);
+    }
+    statsDataIdToSurvey[sdi] = survey;
   }
 
   writeFileSync(

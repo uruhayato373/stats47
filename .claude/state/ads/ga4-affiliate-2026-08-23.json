@@ -1,0 +1,4847 @@
+{
+  "schemaVersion": 2,
+  "measurementEpoch": "affiliate-impression-v1",
+  "eventNames": {
+    "impression": "affiliate_impression",
+    "click": "affiliate_click"
+  },
+  "generatedAt": "2026-08-23T13:32:17.020Z",
+  "date": "2026-08-23",
+  "days": 28,
+  "dimensions": [
+    "ad_id",
+    "affiliate_vertical",
+    "link_position"
+  ],
+  "hasVerticalBreakdown": true,
+  "hasCategoryBreakdown": true,
+  "hasVariantBreakdown": false,
+  "totals": {
+    "impressions": 21036,
+    "clicks": 11,
+    "ctr": 0.0005229131013500665
+  },
+  "quality": {
+    "recognizedVerticalImpressions": 13673,
+    "unsetVerticalImpressions": 0,
+    "unsetVerticalRatio": 0
+  },
+  "rows": [
+    {
+      "ad_id": "neo-recruit-300x250",
+      "affiliate_vertical": "other",
+      "link_position": "sidebar",
+      "impressions": 4345,
+      "clicks": 5,
+      "ctr": 0.0011507479861910242
+    },
+    {
+      "ad_id": "af_fp_soudan_economy_001",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1084,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_002",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 669,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_dmm-com-dmm-cfd_a8_001",
+      "affiliate_vertical": "other",
+      "link_position": "article-inline",
+      "impressions": 602,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_fp_soudan_economy_001",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-incontent",
+      "impressions": 436,
+      "clicks": 1,
+      "ctr": 0.0022935779816513763
+    },
+    {
+      "ad_id": "strategy-career-300x250",
+      "affiliate_vertical": "other",
+      "link_position": "sidebar",
+      "impressions": 350,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_dmm-com-dmm-cfd_a8_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 327,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_text_001",
+      "affiliate_vertical": "other",
+      "link_position": "article-inline",
+      "impressions": 324,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "strategy-career-300x250",
+      "affiliate_vertical": "other",
+      "link_position": "sidebar-left",
+      "impressions": 322,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026218001_a8_text_001",
+      "affiliate_vertical": "other",
+      "link_position": "article-inline",
+      "impressions": 290,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "neo-recruit-300x250",
+      "affiliate_vertical": "other",
+      "link_position": "sidebar-right",
+      "impressions": 289,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_002",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-native",
+      "impressions": 287,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_area_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "ranking-sidebar",
+      "impressions": 234,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_dmm-com-dmm-cfd_a8_001",
+      "affiliate_vertical": "other",
+      "link_position": "sidebar",
+      "impressions": 212,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_economy_banner_001",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-native",
+      "impressions": 211,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_agent_camp_economy_001",
+      "affiliate_vertical": "education",
+      "link_position": "ranking-sidebar",
+      "impressions": 204,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tossy_a8_001",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-native",
+      "impressions": 194,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_002",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 193,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026218001_a8_text_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 190,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_housing_banner_001",
+      "affiliate_vertical": "housing",
+      "link_position": "ranking-sidebar",
+      "impressions": 186,
+      "clicks": 1,
+      "ctr": 0.005376344086021506
+    },
+    {
+      "ad_id": "af_economy_banner_001",
+      "affiliate_vertical": "economy",
+      "link_position": "home-native",
+      "impressions": 184,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_002",
+      "affiliate_vertical": "economy",
+      "link_position": "home-native",
+      "impressions": 184,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_text_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 184,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_fp_soudan_economy_001",
+      "affiliate_vertical": "economy",
+      "link_position": "home-native",
+      "impressions": 182,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hanayume_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 168,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tossy_a8_001",
+      "affiliate_vertical": "economy",
+      "link_position": "home-native",
+      "impressions": 165,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_fp_soudan_economy_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 161,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "ranking-sidebar",
+      "impressions": 159,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_area_001",
+      "affiliate_vertical": "other",
+      "link_position": "area-sidebar",
+      "impressions": 158,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hokenbang_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "ranking-sidebar",
+      "impressions": 157,
+      "clicks": 1,
+      "ctr": 0.006369426751592357
+    },
+    {
+      "ad_id": "af_tossy_a8_001",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 150,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_001",
+      "affiliate_vertical": "population",
+      "link_position": "ranking-sidebar",
+      "impressions": 148,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_lec_education_001",
+      "affiliate_vertical": "education",
+      "link_position": "ranking-sidebar",
+      "impressions": 141,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_conoha_ai_canvas_001",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 128,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_economy_banner_001",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 124,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026694001_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 122,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "ranking-sidebar",
+      "impressions": 120,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_socialsecurity_001",
+      "affiliate_vertical": "health",
+      "link_position": "ranking-sidebar",
+      "impressions": 120,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_dmm-com-dmm-cfd_a8_001",
+      "affiliate_vertical": "economy",
+      "link_position": "sidebar",
+      "impressions": 119,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_area_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "ranking-incontent",
+      "impressions": 112,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hokenbang_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "ranking-incontent",
+      "impressions": 106,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_conoha_ai_canvas_001",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-native",
+      "impressions": 103,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ucarpac_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "ranking-sidebar",
+      "impressions": 103,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025713001_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 102,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026218001_a8_text_001",
+      "affiliate_vertical": "other",
+      "link_position": "sidebar",
+      "impressions": 101,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_sbi_skyscraper_001",
+      "affiliate_vertical": "economy",
+      "link_position": "home-left-rail",
+      "impressions": 94,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_classpass_001",
+      "affiliate_vertical": "health",
+      "link_position": "ranking-sidebar",
+      "impressions": 92,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tossy_a8_text_001",
+      "affiliate_vertical": "other",
+      "link_position": "article-inline",
+      "impressions": 92,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_002",
+      "affiliate_vertical": "population",
+      "link_position": "ranking-sidebar",
+      "impressions": 91,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_a8_text_001",
+      "affiliate_vertical": "health",
+      "link_position": "article-inline",
+      "impressions": 88,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_economy_banner_002",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-end",
+      "impressions": 85,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_fp_soudan_economy_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-end",
+      "impressions": 83,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_fp_soudan_economy_001",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-native",
+      "impressions": 83,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_002",
+      "affiliate_vertical": "population",
+      "link_position": "blog-sidebar",
+      "impressions": 82,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_002",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 80,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "ranking-native",
+      "impressions": 77,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_agent_camp_economy_001",
+      "affiliate_vertical": "education",
+      "link_position": "ranking-incontent",
+      "impressions": 76,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_classpass_001",
+      "affiliate_vertical": "health",
+      "link_position": "blog-sidebar",
+      "impressions": 75,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_001",
+      "affiliate_vertical": "population",
+      "link_position": "blog-sidebar",
+      "impressions": 72,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_au-pay_a8_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "ranking-native",
+      "impressions": 70,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025743001_a8_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "ranking-native",
+      "impressions": 70,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ibj_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 69,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_lec_education_001",
+      "affiliate_vertical": "education",
+      "link_position": "ranking-native",
+      "impressions": 68,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "other",
+      "link_position": "sidebar",
+      "impressions": 66,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025713001_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "blog-sidebar",
+      "impressions": 63,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hokenbang_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "article-inline",
+      "impressions": 62,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_conoha_ai_canvas_001",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-end",
+      "impressions": 61,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_itkyujin_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "ranking-sidebar",
+      "impressions": 60,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_socialsecurity_001",
+      "affiliate_vertical": "health",
+      "link_position": "blog-sidebar",
+      "impressions": 59,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026218001_a8_text_001",
+      "affiliate_vertical": "economy",
+      "link_position": "sidebar",
+      "impressions": 59,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026694001_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "ranking-native",
+      "impressions": 59,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tossy_a8_text_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 57,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ucarpac_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "ranking-native",
+      "impressions": 54,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_nisa-dmm_a8_text_001",
+      "affiliate_vertical": "other",
+      "link_position": "article-inline",
+      "impressions": 53,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_socialsecurity_001",
+      "affiliate_vertical": "health",
+      "link_position": "ranking-incontent",
+      "impressions": 53,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_5-500-47_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "ranking-native",
+      "impressions": 52,
+      "clicks": 1,
+      "ctr": 0.019230769230769232
+    },
+    {
+      "ad_id": "af_maca_emperor_001",
+      "affiliate_vertical": "health",
+      "link_position": "blog-sidebar",
+      "impressions": 52,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000015388007_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "ranking-native",
+      "impressions": 51,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_housing_banner_001",
+      "affiliate_vertical": "housing",
+      "link_position": "ranking-incontent",
+      "impressions": 50,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_repilates_a8_text_001",
+      "affiliate_vertical": "health",
+      "link_position": "article-inline",
+      "impressions": 49,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000024293001_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "ranking-native",
+      "impressions": 49,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-うどん",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 49,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_english_a8_text_001",
+      "affiliate_vertical": "health",
+      "link_position": "article-inline",
+      "impressions": 48,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000027148002_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "blog-sidebar",
+      "impressions": 46,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_fp_soudan_economy_001",
+      "affiliate_vertical": "economy",
+      "link_position": "theme-native",
+      "impressions": 45,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_002",
+      "affiliate_vertical": "economy",
+      "link_position": "theme-native",
+      "impressions": 45,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tenshoku_agent_navi_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "ranking-sidebar",
+      "impressions": 44,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_economy_banner_001",
+      "affiliate_vertical": "economy",
+      "link_position": "theme-native",
+      "impressions": 43,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_lec_education_001",
+      "affiliate_vertical": "education",
+      "link_position": "blog-sidebar",
+      "impressions": 43,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_agent_camp_economy_001",
+      "affiliate_vertical": "education",
+      "link_position": "ranking-native",
+      "impressions": 39,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "ranking-native",
+      "impressions": 39,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000017136001_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "blog-sidebar",
+      "impressions": 39,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000027148002_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "ranking-native",
+      "impressions": 39,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_area_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 38,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-納豆",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 38,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_classpass_001",
+      "affiliate_vertical": "health",
+      "link_position": "ranking-native",
+      "impressions": 37,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_economy_banner_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 36,
+      "clicks": 1,
+      "ctr": 0.027777777777777776
+    },
+    {
+      "ad_id": "af_s00000017136001_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "ranking-end",
+      "impressions": 36,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025743001_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 35,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "other",
+      "link_position": "sidebar-left",
+      "impressions": 34,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_jalan_tourism_001",
+      "affiliate_vertical": "travel",
+      "link_position": "ranking-sidebar",
+      "impressions": 34,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tossy_a8_001",
+      "affiliate_vertical": "economy",
+      "link_position": "theme-native",
+      "impressions": 34,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "other",
+      "link_position": "sidebar-right",
+      "impressions": 33,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000022743001_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "ranking-native",
+      "impressions": 33,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_nisa-dmm_a8_text_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 32,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_gmo-gmo-bb_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "ranking-sidebar",
+      "impressions": 30,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hanayume_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "sidebar",
+      "impressions": 30,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000023383001_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "ranking-native",
+      "impressions": 30,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "blog-sidebar",
+      "impressions": 29,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_global-step-academy_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "ranking-end",
+      "impressions": 29,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_sbi_skyscraper_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-end",
+      "impressions": 29,
+      "clicks": 1,
+      "ctr": 0.034482758620689655
+    },
+    {
+      "ad_id": "af_ucarpac_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "article-inline",
+      "impressions": 29,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "other",
+      "link_position": "article-inline",
+      "impressions": 28,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_maca_emperor_001",
+      "affiliate_vertical": "health",
+      "link_position": "ranking-native",
+      "impressions": 28,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_001",
+      "affiliate_vertical": "population",
+      "link_position": "ranking-incontent",
+      "impressions": 28,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026246001_a8_text_001",
+      "affiliate_vertical": "other",
+      "link_position": "article-inline",
+      "impressions": 28,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_strategy_career_text_economy",
+      "affiliate_vertical": "labor",
+      "link_position": "article-inline",
+      "impressions": 28,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 27,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_repilates_001",
+      "affiliate_vertical": "health",
+      "link_position": "ranking-native",
+      "impressions": 27,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026694001_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "sidebar",
+      "impressions": 27,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "strategy-career-300x250",
+      "affiliate_vertical": "other",
+      "link_position": "theme-banner",
+      "impressions": 27,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_area_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "area-content",
+      "impressions": 26,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-end",
+      "impressions": 26,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_agent_camp_economy_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-inline",
+      "impressions": 25,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_002",
+      "affiliate_vertical": "population",
+      "link_position": "ranking-native",
+      "impressions": 25,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025671001_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 25,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 24,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ahamo_001",
+      "affiliate_vertical": "energy",
+      "link_position": "blog-sidebar",
+      "impressions": 24,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_socialsecurity_001",
+      "affiliate_vertical": "health",
+      "link_position": "article-end",
+      "impressions": 24,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025713001_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "ranking-native",
+      "impressions": 24,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_conoha_ai_canvas_001",
+      "affiliate_vertical": "economy",
+      "link_position": "theme-end",
+      "impressions": 23,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_softbank_air_001",
+      "affiliate_vertical": "energy",
+      "link_position": "blog-sidebar",
+      "impressions": 23,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_global-step-academy_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "blog-sidebar",
+      "impressions": 22,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000020062001_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "blog-sidebar",
+      "impressions": 22,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025896001_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "ranking-native",
+      "impressions": 22,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-豚肉",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 22,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_gmo-gmo-bb_a8_text_001",
+      "affiliate_vertical": "energy",
+      "link_position": "article-inline",
+      "impressions": 21,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_a8_text_001",
+      "affiliate_vertical": "health",
+      "link_position": "sidebar",
+      "impressions": 21,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 20,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_jobs_a8_text_001",
+      "affiliate_vertical": "labor",
+      "link_position": "article-inline",
+      "impressions": 20,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rakuten_travel_001",
+      "affiliate_vertical": "travel",
+      "link_position": "ranking-sidebar",
+      "impressions": 20,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025896001_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 20,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "economy",
+      "link_position": "sidebar",
+      "impressions": 19,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_5-500-47_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "article-inline",
+      "impressions": 19,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_lec_education_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-inline",
+      "impressions": 19,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025713001_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "sidebar",
+      "impressions": 19,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_sbi_skyscraper_001",
+      "affiliate_vertical": "economy",
+      "link_position": "home-native",
+      "impressions": 19,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_au-pay_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 18,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025743001_a8_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 18,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025743001_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 18,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026246001_a8_text_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 18,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_5-500-47_a8_text_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "sidebar",
+      "impressions": 17,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_area_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "ranking-native",
+      "impressions": 17,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_housing_banner_001",
+      "affiliate_vertical": "housing",
+      "link_position": "ranking-native",
+      "impressions": 17,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_itkyujin_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "article-end",
+      "impressions": 17,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_itkyujin_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "ranking-incontent",
+      "impressions": 17,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025743001_a8_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "blog-sidebar",
+      "impressions": 17,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tenshoku_agent_navi_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "blog-sidebar",
+      "impressions": 17,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_001",
+      "affiliate_vertical": "population",
+      "link_position": "category-native",
+      "impressions": 16,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_002",
+      "affiliate_vertical": "population",
+      "link_position": "category-native",
+      "impressions": 16,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_a8_001",
+      "affiliate_vertical": "health",
+      "link_position": "ranking-end",
+      "impressions": 16,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000020062001_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "ranking-end",
+      "impressions": 16,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025713001_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "category-native",
+      "impressions": 16,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025896001_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "category-native",
+      "impressions": 16,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_baby-planet_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "blog-sidebar",
+      "impressions": 15,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_fp_soudan_economy_001",
+      "affiliate_vertical": "economy",
+      "link_position": "category-native",
+      "impressions": 15,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_002",
+      "affiliate_vertical": "economy",
+      "link_position": "category-native",
+      "impressions": 15,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_002",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 15,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_a8_001",
+      "affiliate_vertical": "health",
+      "link_position": "ranking-native",
+      "impressions": 15,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_socialsecurity_001",
+      "affiliate_vertical": "health",
+      "link_position": "article-inline",
+      "impressions": 15,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_socialsecurity_001",
+      "affiliate_vertical": "health",
+      "link_position": "ranking-native",
+      "impressions": 15,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000023341001_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "blog-sidebar",
+      "impressions": 15,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_shukatsu_neo_text_economy",
+      "affiliate_vertical": "labor",
+      "link_position": "article-inline",
+      "impressions": 15,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-アイスクリーム",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 15,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-コーヒー",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 15,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ahamo_001",
+      "affiliate_vertical": "energy",
+      "link_position": "ranking-sidebar",
+      "impressions": 14,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_au-pay_a8_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-end",
+      "impressions": 14,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ecoclean_001",
+      "affiliate_vertical": "housing",
+      "link_position": "ranking-end",
+      "impressions": 14,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_economy_banner_001",
+      "affiliate_vertical": "economy",
+      "link_position": "category-native",
+      "impressions": 14,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000017136001_a8_text_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "article-inline",
+      "impressions": 14,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026694001_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-inline",
+      "impressions": 14,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-鶏肉",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 14,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_economy_banner_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-end",
+      "impressions": 12,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_global-step-academy_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "ranking-native",
+      "impressions": 12,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hanayume_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 12,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_repilates_001",
+      "affiliate_vertical": "health",
+      "link_position": "blog-sidebar",
+      "impressions": 12,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_a8_text_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 12,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000015388007_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-end",
+      "impressions": 12,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000023341001_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "ranking-end",
+      "impressions": 12,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tenshoku_agent_navi_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "ranking-native",
+      "impressions": 12,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tossy_a8_001",
+      "affiliate_vertical": "economy",
+      "link_position": "category-native",
+      "impressions": 12,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ai_jobsupport_economy_001",
+      "affiliate_vertical": "labor",
+      "link_position": "ranking-native",
+      "impressions": 11,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_baby-planet_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "ranking-end",
+      "impressions": 11,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_buildjob_construction_001",
+      "affiliate_vertical": "labor",
+      "link_position": "ranking-native",
+      "impressions": 11,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ecoclean_001",
+      "affiliate_vertical": "housing",
+      "link_position": "ranking-native",
+      "impressions": 11,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_gmo-bb-au_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "article-inline",
+      "impressions": 11,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_itkyujin_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "article-inline",
+      "impressions": 11,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_001",
+      "affiliate_vertical": "population",
+      "link_position": "ranking-native",
+      "impressions": 11,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000013307001_a8_text_001",
+      "affiliate_vertical": "health",
+      "link_position": "article-inline",
+      "impressions": 11,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000020839002_a8_text_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-inline",
+      "impressions": 11,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026694001_a8_text_001",
+      "affiliate_vertical": "education",
+      "link_position": "sidebar",
+      "impressions": 11,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-牛肉",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 11,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_au-pay_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 10,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_baby-planet_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "ranking-native",
+      "impressions": 10,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_baby-planet_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 10,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_buildjob_construction_001",
+      "affiliate_vertical": "labor",
+      "link_position": "blog-sidebar",
+      "impressions": 10,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_itkyujin_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "theme-native",
+      "impressions": 10,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_jalan_tourism_001",
+      "affiliate_vertical": "travel",
+      "link_position": "ranking-incontent",
+      "impressions": 10,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000016807002_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 10,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000024293001_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "article-end",
+      "impressions": 10,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tenshoku_agent_navi_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "theme-native",
+      "impressions": 10,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "theme-native",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_area_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "theme-native",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_agent_camp_economy_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-end",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ai_jobsupport_economy_001",
+      "affiliate_vertical": "labor",
+      "link_position": "theme-native",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_baby-planet_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "theme-end",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_buildjob_construction_001",
+      "affiliate_vertical": "labor",
+      "link_position": "theme-native",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_english_a8_001",
+      "affiliate_vertical": "health",
+      "link_position": "ranking-end",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_english_a8_text_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_english_a8_text_001",
+      "affiliate_vertical": "health",
+      "link_position": "sidebar",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_gmo-gmo-bb_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "category-native",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_gmo-gmo-bb_a8_text_001",
+      "affiliate_vertical": "energy",
+      "link_position": "sidebar",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hokenbang_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "ranking-native",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_001",
+      "affiliate_vertical": "population",
+      "link_position": "theme-native",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_population_banner_002",
+      "affiliate_vertical": "population",
+      "link_position": "theme-native",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025713001_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "theme-native",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025743001_a8_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "theme-native",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025896001_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "theme-native",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-まぐろ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 9,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_au-pay_a8_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "theme-native",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_fp_soudan_economy_001",
+      "affiliate_vertical": "economy",
+      "link_position": "survey-native",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_housing_banner_002",
+      "affiliate_vertical": "housing",
+      "link_position": "ranking-end",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ibj_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ikyu_travel_001",
+      "affiliate_vertical": "travel",
+      "link_position": "ranking-native",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_lec_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_maca_emperor_001",
+      "affiliate_vertical": "health",
+      "link_position": "theme-native",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_002",
+      "affiliate_vertical": "economy",
+      "link_position": "survey-native",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ozmall_001",
+      "affiliate_vertical": "travel",
+      "link_position": "ranking-native",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rakuten_travel_001",
+      "affiliate_vertical": "travel",
+      "link_position": "ranking-native",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025896001_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-end",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_strategy_career_economy_001",
+      "affiliate_vertical": "labor",
+      "link_position": "blog-sidebar",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-みかん",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 8,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "population",
+      "link_position": "sidebar",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ahamo_a8_text_001",
+      "affiliate_vertical": "energy",
+      "link_position": "sidebar",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ai_jobsupport_economy_001",
+      "affiliate_vertical": "labor",
+      "link_position": "blog-sidebar",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_classpass_001",
+      "affiliate_vertical": "health",
+      "link_position": "theme-native",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_economy_banner_001",
+      "affiliate_vertical": "economy",
+      "link_position": "survey-native",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_gmo-gmo-bb_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "ranking-incontent",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_jobs_a8_001",
+      "affiliate_vertical": "labor",
+      "link_position": "ranking-native",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_repilates_001",
+      "affiliate_vertical": "health",
+      "link_position": "theme-native",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_a8_001",
+      "affiliate_vertical": "health",
+      "link_position": "theme-end",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_socialsecurity_001",
+      "affiliate_vertical": "health",
+      "link_position": "theme-native",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000024757002_a8_001",
+      "affiliate_vertical": "labor",
+      "link_position": "ranking-end",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_strategy_career_text_economy",
+      "affiliate_vertical": "labor",
+      "link_position": "sidebar",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tenshoku_agent_navi_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "article-inline",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tossy_a8_001",
+      "affiliate_vertical": "economy",
+      "link_position": "survey-native",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_travelwest_001",
+      "affiliate_vertical": "travel",
+      "link_position": "ranking-native",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-うなぎのかば焼き",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-かつお",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-切り花",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-生うどん",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-音楽",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 7,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_area_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-end",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ai_jobsupport_economy_001",
+      "affiliate_vertical": "labor",
+      "link_position": "category-native",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_buildjob_construction_001",
+      "affiliate_vertical": "labor",
+      "link_position": "category-native",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ikyu_travel_001",
+      "affiliate_vertical": "travel",
+      "link_position": "category-native",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_itkyujin_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "category-native",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_jalan_tourism_001",
+      "affiliate_vertical": "travel",
+      "link_position": "category-native",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ozmall_001",
+      "affiliate_vertical": "travel",
+      "link_position": "category-native",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rakuten_travel_001",
+      "affiliate_vertical": "travel",
+      "link_position": "category-native",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000015388007_a8_text_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-inline",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000024293001_a8_text_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "sidebar",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025713001_a8_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026694001_a8_text_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-inline",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000027148002_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "ranking-end",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_strategy_career_economy_001",
+      "affiliate_vertical": "labor",
+      "link_position": "theme-end",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_strategy_career_text_economy",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tenshoku_agent_navi_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "category-native",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-チーズ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-パン",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ビール",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-豚肉",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-食パン",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 6,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ahamo_001",
+      "affiliate_vertical": "energy",
+      "link_position": "category-native",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ahamo_001",
+      "affiliate_vertical": "energy",
+      "link_position": "ranking-native",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ahamo_a8_text_001",
+      "affiliate_vertical": "energy",
+      "link_position": "article-inline",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_au_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "category-native",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_classpass_001",
+      "affiliate_vertical": "health",
+      "link_position": "article-inline",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_expedia_travel_001",
+      "affiliate_vertical": "travel",
+      "link_position": "ranking-end",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_housing_banner_001",
+      "affiliate_vertical": "housing",
+      "link_position": "article-inline",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_housing_banner_001",
+      "affiliate_vertical": "housing",
+      "link_position": "survey-native",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_jobs_a8_text_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_new_a8_text_001",
+      "affiliate_vertical": "labor",
+      "link_position": "article-inline",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "survey-native",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_text_002",
+      "affiliate_vertical": "housing",
+      "link_position": "article-inline",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_text_002",
+      "affiliate_vertical": "housing",
+      "link_position": "sidebar",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000000489002_a8_text_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "article-inline",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000019330001_a8_text_001",
+      "affiliate_vertical": "travel",
+      "link_position": "sidebar",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000022743001_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "survey-native",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000023383001_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "survey-native",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000023383001_a8_text_001",
+      "affiliate_vertical": "housing",
+      "link_position": "article-inline",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000024757004_a8_text_001",
+      "affiliate_vertical": "labor",
+      "link_position": "article-inline",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_shukatsu_neo_text_economy",
+      "affiliate_vertical": "economy",
+      "link_position": "sidebar",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_shukatsu_neo_text_economy",
+      "affiliate_vertical": "labor",
+      "link_position": "sidebar",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_softbank_air_001",
+      "affiliate_vertical": "energy",
+      "link_position": "category-native",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_strategy_career_text_economy",
+      "affiliate_vertical": "economy",
+      "link_position": "sidebar",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-小麦粉",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-砂糖",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-納豆",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-食塩",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 5,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "energy",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "health",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "housing",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "other",
+      "link_position": "area-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_5-500-47_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "survey-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_5-500-47_a8_text_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "category-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_area_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "category-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_au-pay_a8_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "category-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_au_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "ranking-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ecoclean_001",
+      "affiliate_vertical": "housing",
+      "link_position": "blog-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_fp_soudan_economy_001",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_global-step-academy_a8_text_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_gmo-gmo-bb_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "article-end",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hanayume_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hokenbang_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "survey-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_housing_banner_001",
+      "affiliate_vertical": "housing",
+      "link_position": "category-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_itkyujin_laborwage_001",
+      "affiliate_vertical": "labor",
+      "link_position": "ranking-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_lec_a8_text_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_maca_emperor_001",
+      "affiliate_vertical": "health",
+      "link_position": "article-end",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "category-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_003",
+      "affiliate_vertical": "housing",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_oooh_a8_text_001",
+      "affiliate_vertical": "travel",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ozmall_a8_text_001",
+      "affiliate_vertical": "travel",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000019330001_a8_text_001",
+      "affiliate_vertical": "travel",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000020001001_a8_text_001",
+      "affiliate_vertical": "health",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000022743001_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "category-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000022743001_a8_text_001",
+      "affiliate_vertical": "housing",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000024293001_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "survey-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000024757002_a8_text_001",
+      "affiliate_vertical": "labor",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025713001_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025743001_a8_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-end",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025743001_a8_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "category-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_sbi_skyscraper_001",
+      "affiliate_vertical": "economy",
+      "link_position": "theme-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_shukatsu_neo_text_economy",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_softbank_air_001",
+      "affiliate_vertical": "energy",
+      "link_position": "ranking-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_tossy_a8_001",
+      "affiliate_vertical": "economy",
+      "link_position": "theme-end",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ucarpac_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "survey-native",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-こんぶ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-すいか",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-みそ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-テレビ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-他の化粧品",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-梅干し",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-清酒",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-灯油",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-焼肉",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-紅茶",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-紅茶",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-緑茶",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-豆腐",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 4,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "mobility",
+      "link_position": "article-inline",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_au_a8_text_001",
+      "affiliate_vertical": "energy",
+      "link_position": "article-inline",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_buildjob_construction_001",
+      "affiliate_vertical": "labor",
+      "link_position": "article-end",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_classpass_001",
+      "affiliate_vertical": "health",
+      "link_position": "category-native",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_classpass_001",
+      "affiliate_vertical": "health",
+      "link_position": "survey-native",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_fp_a8_text_001",
+      "affiliate_vertical": "other",
+      "link_position": "article-inline",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hanayume_a8_text_001",
+      "affiliate_vertical": "health",
+      "link_position": "sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_housing_banner_002",
+      "affiliate_vertical": "housing",
+      "link_position": "blog-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ibj_a8_text_001",
+      "affiliate_vertical": "health",
+      "link_position": "article-inline",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_jobs_a8_001",
+      "affiliate_vertical": "labor",
+      "link_position": "blog-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_jobs_a8_001",
+      "affiliate_vertical": "labor",
+      "link_position": "ranking-end",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_lec_a8_text_001",
+      "affiliate_vertical": "education",
+      "link_position": "sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_maca_emperor_001",
+      "affiliate_vertical": "health",
+      "link_position": "category-native",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_maca_emperor_001",
+      "affiliate_vertical": "health",
+      "link_position": "survey-native",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1-cyma_a8_text_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "article-inline",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "article-inline",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_repilates_001",
+      "affiliate_vertical": "health",
+      "link_position": "category-native",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_repilates_001",
+      "affiliate_vertical": "health",
+      "link_position": "survey-native",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_socialsecurity_001",
+      "affiliate_vertical": "health",
+      "link_position": "category-native",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rizap_socialsecurity_001",
+      "affiliate_vertical": "health",
+      "link_position": "survey-native",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000010685001_a8_text_001",
+      "affiliate_vertical": "housing",
+      "link_position": "article-inline",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000024293001_a8_text_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "article-inline",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025713001_a8_text_001",
+      "affiliate_vertical": "health",
+      "link_position": "sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025896001_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026694001_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "blog-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-いか",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-さけ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-さつまいも",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-しゅうまい",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-なす",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-みかん",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-カステラ",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-トマト",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ドレッシング",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-パン",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ワイン",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-外食",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-小麦粉",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-日本そば",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-清酒",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-焼酎",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-牛肉",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-眼鏡",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 3,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "energy",
+      "link_position": "sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "health",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "health",
+      "link_position": "sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "labor",
+      "link_position": "sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "mobility",
+      "link_position": "sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "other",
+      "link_position": "theme-banner",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_5-500-47_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "tag-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_5-500-47_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_agent_camp_economy_001",
+      "affiliate_vertical": "education",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ai_jobsupport_economy_001",
+      "affiliate_vertical": "labor",
+      "link_position": "article-end",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_buildjob_construction_001",
+      "affiliate_vertical": "labor",
+      "link_position": "article-inline",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_dmm-com-dmm-cfd_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_eco_a8_text_001",
+      "affiliate_vertical": "housing",
+      "link_position": "article-inline",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_english_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_gmo-gmo-bb_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "ranking-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hokenbang_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "tag-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_hokenbang_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_housing_banner_001",
+      "affiliate_vertical": "housing",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_jalan_tourism_001",
+      "affiliate_vertical": "travel",
+      "link_position": "article-end",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_lec_education_001",
+      "affiliate_vertical": "education",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ozmall_001",
+      "affiliate_vertical": "travel",
+      "link_position": "blog-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_rakuten_travel_001",
+      "affiliate_vertical": "travel",
+      "link_position": "blog-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000015388007_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000022743001_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "article-inline",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000022743001_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000022743001_a8_text_001",
+      "affiliate_vertical": "housing",
+      "link_position": "sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000023383001_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "article-end",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000023383001_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000024293001_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "tag-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000024293001_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000024757004_a8_text_001",
+      "affiliate_vertical": "economy",
+      "link_position": "article-inline",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025713001_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000025896001_a8_text_001",
+      "affiliate_vertical": "health",
+      "link_position": "article-inline",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026694001_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000027108001_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "ranking-end",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000027108001_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "ranking-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000027148002_a8_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "theme-end",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000027148002_a8_text_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "article-inline",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_sbi_skyscraper_001",
+      "affiliate_vertical": "economy",
+      "link_position": "category-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_travelwest_001",
+      "affiliate_vertical": "travel",
+      "link_position": "ranking-end",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ucarpac_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "tag-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ucarpac_mobility_001",
+      "affiliate_vertical": "mobility",
+      "link_position": "theme-native",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "furusato-toyama",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "furusato-yamanashi",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-あさり",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-かに",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-かまぼこ",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-さつまいも",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-さといも",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-しょう油",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-じゃがいも",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-たばこ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-たらこ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ぶり",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ようかん",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ウイスキー",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-カップ麺",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-カレールウ",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ゲームソフト等",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-チョコレート",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-テレビ",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-パスタ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-パソコン",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ベーコン",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ミネラルウォーター",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-レンタカー",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-中華麺",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-他のきのこ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-冷凍調理食品",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-即席麺",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-洗濯用洗剤",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-焼酎",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-生しいたけ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-魚介の漬物",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 2,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "education",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "labor",
+      "link_position": "article-inline",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "mobility",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "(not set)",
+      "affiliate_vertical": "travel",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "survey-native",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_aeon_kyushu_area_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "survey-native",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_agent_camp_economy_001",
+      "affiliate_vertical": "education",
+      "link_position": "survey-native",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ahamo_001",
+      "affiliate_vertical": "energy",
+      "link_position": "article-inline",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ai-neuro-dive_a8_text_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-inline",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_au_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "article-end",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_baby-planet_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ecoclean_001",
+      "affiliate_vertical": "housing",
+      "link_position": "theme-end",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_esim-japan-global-esim_a8_text_001",
+      "affiliate_vertical": "travel",
+      "link_position": "article-inline",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_global-step-academy_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "theme-end",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_gmo-gmo-bb_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "article-inline",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_housing_banner_001",
+      "affiliate_vertical": "housing",
+      "link_position": "article-end",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ikyu_travel_001",
+      "affiliate_vertical": "travel",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_jalan_tourism_001",
+      "affiliate_vertical": "travel",
+      "link_position": "article-inline",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_jalan_tourism_001",
+      "affiliate_vertical": "travel",
+      "link_position": "ranking-native",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_lec_education_001",
+      "affiliate_vertical": "education",
+      "link_position": "survey-native",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_no-1_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ozmall_001",
+      "affiliate_vertical": "travel",
+      "link_position": "article-end",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_ozmall_a8_text_001",
+      "affiliate_vertical": "travel",
+      "link_position": "sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000015388007_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "survey-native",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000016807002_a8_text_001",
+      "affiliate_vertical": "furusato",
+      "link_position": "article-inline",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000020839002_a8_text_001",
+      "affiliate_vertical": "population",
+      "link_position": "article-inline",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000022054001_a8_text_001",
+      "affiliate_vertical": "travel",
+      "link_position": "article-inline",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000023383001_a8_001",
+      "affiliate_vertical": "housing",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026218001_a8_text_001",
+      "affiliate_vertical": "housing",
+      "link_position": "sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026694001_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "article-end",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000026694001_a8_001",
+      "affiliate_vertical": "education",
+      "link_position": "survey-native",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_s00000027108001_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_sbi_skyscraper_001",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_softbank_air_001",
+      "affiliate_vertical": "energy",
+      "link_position": "article-inline",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_travelwest_001",
+      "affiliate_vertical": "travel",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_zoot-native_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "af_zoot-native_a8_001",
+      "affiliate_vertical": "energy",
+      "link_position": "ranking-end",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "furusato-akita",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "furusato-hyogo",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "furusato-kagawa",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "furusato-kyoto",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "furusato-shiga",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "furusato-shizuoka",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "furusato-tochigi",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "furusato-tokushima",
+      "affiliate_vertical": "furusato",
+      "link_position": "sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-えび",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-かき(貝)",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-かつお節",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-かつお節",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-きゅうり",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ぎょうざ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-こんぶ",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-しじみ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-しらす干し",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-すし(外食)",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-すし(弁当)",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-たい",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-たこ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ふりかけ",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ぶどう",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ぶり",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-まぐろ",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-もち",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-もやし",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-やきとり",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-りんご",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-れんこん",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ウイスキー",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-オレンジ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-カステラ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-カーテン",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-キャンデー",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ケーキ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ゲーム機",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-コロッケ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-コンタクトレンズ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-コーヒー",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-シャンプー",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ストーブ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-チョコレート",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-チョコレート菓子",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-チーズ",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ハンバーグ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-バター",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-バナナ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ビデオレコーダー",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ブロッコリー",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ペットフード",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-マヨネーズ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-メロン",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ヨーグルト",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-ワイン",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-中華そば",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-他のパン",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-他の果物",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-和食",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-和食",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-国公立大学",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-外食",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-天ぷら",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-帽子",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-干しあじ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-干ししいたけ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-教科書",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-楽器",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-楽器",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-歯ブラシ",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-男子用ズボン",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-男子用洋服",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-砂糖",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-粉ミルク",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-緑茶",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-自動車購入",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-豆腐",
+      "affiliate_vertical": "economy",
+      "link_position": "blog-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-豆類",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-食用油",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-魚介のつくだ煮",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "ad_id": "rakuten-item-鶏肉",
+      "affiliate_vertical": "economy",
+      "link_position": "ranking-sidebar",
+      "impressions": 1,
+      "clicks": 0,
+      "ctr": 0
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generated_by": "generate-note-catalog.ts",
-    "generated_at": "2026-08-03",
+    "generated_at": "2026-08-23",
     "source": "note-catalog git TS SSOT (.claude/scripts/note/catalog/)",
     "note": "このファイルは派生インデックス。真実源は note-catalog の data/*.ts。手編集しない。"
   },
@@ -392,7 +392,7 @@
     },
     "a-maximum-temperature": {
       "vertical": "stats47-note",
-      "title": "a-maximum-temperature",
+      "title": "【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海",
       "url": "https://note.com/stats47/n/n91e96edf3950",
       "is_paid": false,
       "published_at": "2026-08-03",
@@ -972,7 +972,7 @@
     },
     "recovered-n026bb22ad4eb": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「バレーボールの行動者率」ランキング｜宮崎県が偏差値83.2で圧倒的1位、富山県は最下位",
+      "title": "【2021年版】バレーボールをした人が多い県は？ 1位は宮崎県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n026bb22ad4eb",
       "is_paid": false,
       "published_at": "2026-04-12",
@@ -1002,7 +1002,7 @@
     },
     "recovered-n04c2737daf2c": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ヨガの行動者率」ランキング｜東京と青森で3倍の差",
+      "title": "【2021年版】ヨガをした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n04c2737daf2c",
       "is_paid": false,
       "published_at": "2026-04-13",
@@ -1022,7 +1022,7 @@
     },
     "recovered-n0654ddf27920": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「カラオケの行動者率」ランキング｜1位は東京都、2位に鹿児島県が浮上",
+      "title": "【2021年版】カラオケをした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n0654ddf27920",
       "is_paid": false,
       "published_at": "2026-04-07",
@@ -1032,7 +1032,7 @@
     },
     "recovered-n08eb33492a93": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「コーラス・声楽の行動者率」ランキング｜1位は神奈川県、東北の岩手県も上位に",
+      "title": "【2021年版】コーラス・声楽をした人が多い県は？ 1位は神奈川県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n08eb33492a93",
       "is_paid": false,
       "published_at": "2026-03-26",
@@ -1042,7 +1042,7 @@
     },
     "recovered-n0b7373c9648a": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「サッカーの行動者率」ランキング｜1位は愛知県、最下位の岐阜県とは隣県で2倍以上の差",
+      "title": "【2021年版】サッカーをした人が多い県は？ 1位は愛知県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n0b7373c9648a",
       "is_paid": false,
       "published_at": "2026-03-25",
@@ -1072,7 +1072,7 @@
     },
     "recovered-n14f716fcd76d": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「水泳の行動者率」ランキング｜東京が偏差値83で圧倒、青森は半分以下",
+      "title": "【2021年版】水泳をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n14f716fcd76d",
       "is_paid": false,
       "published_at": "2026-03-26",
@@ -1092,7 +1092,7 @@
     },
     "recovered-n1649910097fb": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「楽器の演奏の行動者率」ランキング｜沖縄8位・三線文化の力",
+      "title": "【2021年版】楽器の演奏をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n1649910097fb",
       "is_paid": false,
       "published_at": "2026-04-01",
@@ -1162,7 +1162,7 @@
     },
     "recovered-n250b7aab145f": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「スキー・スノーボードの行動者率」ランキング｜北海道が首位、沖縄との差は41.5倍",
+      "title": "【2021年版】スキー・スノーボードをした人が多い県は？ 1位は北海道｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n250b7aab145f",
       "is_paid": false,
       "published_at": "2026-03-24",
@@ -1172,7 +1172,7 @@
     },
     "recovered-n279776fbbbb1": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「サイクリングの行動者率」ランキング｜東京が偏差値91で独走、長崎は5分の1",
+      "title": "【2021年版】サイクリングをした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n279776fbbbb1",
       "is_paid": false,
       "published_at": "2026-03-20",
@@ -1182,7 +1182,7 @@
     },
     "recovered-n27cb4242cb67": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「将棋の行動者率」ランキング｜1位は香川県、秋田県との差は2.7倍",
+      "title": "【2021年版】将棋をした人が多い県は？ 1位は香川県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n27cb4242cb67",
       "is_paid": false,
       "published_at": "2026-04-10",
@@ -1192,7 +1192,7 @@
     },
     "recovered-n285e0ba282d0": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「CD・スマートフォンなどによる音楽鑑賞の行動者率」ランキング｜東京64％と青森43％の21ポイント差",
+      "title": "【2021年版】CD・スマートフォンなどによる音楽鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n285e0ba282d0",
       "is_paid": false,
       "published_at": "2026-04-08",
@@ -1202,7 +1202,7 @@
     },
     "recovered-n28943c36410a": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「趣味としての読書の行動者率」ランキング｜東京43％、青森23％の読書格差",
+      "title": "【2021年版】趣味としての読書をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n28943c36410a",
       "is_paid": false,
       "published_at": "2026-04-09",
@@ -1222,7 +1222,7 @@
     },
     "recovered-n361a963fb079": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「邦楽の行動者率」ランキング｜沖縄県が偏差値97で圧倒的1位",
+      "title": "【2021年版】邦楽をした人が多い県は？ 1位は沖縄県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n361a963fb079",
       "is_paid": false,
       "published_at": "2026-04-02",
@@ -1232,7 +1232,7 @@
     },
     "recovered-n36624f1c4134": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「演芸・演劇・舞踊鑑賞の行動者率」ランキング｜東京は青森の約4倍",
+      "title": "【2021年版】演芸・演劇・舞踊鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n36624f1c4134",
       "is_paid": false,
       "published_at": "2026-04-11",
@@ -1272,7 +1272,7 @@
     },
     "recovered-n3a94353f31aa": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「グラウンドゴルフの行動者率」ランキング｜鹿児島が首位、格差は8.5倍",
+      "title": "【2021年版】グラウンドゴルフをした人が多い県は？ 1位は鹿児島県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n3a94353f31aa",
       "is_paid": false,
       "published_at": "2026-03-22",
@@ -1282,7 +1282,7 @@
     },
     "recovered-n3e67c2f80ec1": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「園芸・ガーデニングの行動者率」ランキング｜群馬県が32.8％で1位、大阪は最下位",
+      "title": "【2021年版】園芸・庭いじり・ガーデニングをした人が多い県は？ 1位は群馬県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n3e67c2f80ec1",
       "is_paid": false,
       "published_at": "2026-03-31",
@@ -1292,7 +1292,7 @@
     },
     "recovered-n3e69a23bb946": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「バスケットボールの行動者率」ランキング｜バスケの本場・秋田県が1位、東京都はまさかの42位",
+      "title": "【2021年版】バスケットボールをした人が多い県は？ 1位は秋田県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n3e69a23bb946",
       "is_paid": false,
       "published_at": "2026-03-19",
@@ -1332,7 +1332,7 @@
     },
     "recovered-n4d38db115f82": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「編み物・手芸の行動者率」ランキング｜北海道が10.7％で圧倒的1位",
+      "title": "【2021年版】編み物・手芸をした人が多い県は？ 1位は北海道｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n4d38db115f82",
       "is_paid": false,
       "published_at": "2026-04-07",
@@ -1352,7 +1352,7 @@
     },
     "recovered-n4e1e67f70686": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「器具を使ったトレーニングの行動者率」ランキング｜沖縄6位の意外な筋トレ県",
+      "title": "【2021年版】器具を使ったトレーニングをした人が多い県は？ 1位は神奈川県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n4e1e67f70686",
       "is_paid": false,
       "published_at": "2026-03-22",
@@ -1372,7 +1372,7 @@
     },
     "recovered-n51f946877627": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「遊園地・動植物園・水族館の行動者率」ランキング｜愛知県が東京を抜いて1位",
+      "title": "【2021年版】遊園地・動植物園・水族館をした人が多い県は？ 1位は愛知県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n51f946877627",
       "is_paid": false,
       "published_at": "2026-04-11",
@@ -1382,7 +1382,7 @@
     },
     "recovered-n523b6fbeabdf": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「野球の行動者率」ランキング｜1位はカープの街・広島県、プロ野球の影響色濃く",
+      "title": "【2021年版】野球をした人が多い県は？ 1位は広島県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n523b6fbeabdf",
       "is_paid": false,
       "published_at": "2026-03-19",
@@ -1392,7 +1392,7 @@
     },
     "recovered-n55cd6de6a733": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「テニスの行動者率」ランキング｜神奈川が首位、テニス不毛地帯は意外にも雪国",
+      "title": "【2021年版】テニスをした人が多い県は？ 1位は神奈川県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n55cd6de6a733",
       "is_paid": false,
       "published_at": "2026-04-02",
@@ -1412,7 +1412,7 @@
     },
     "recovered-n578b6e871067": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「商業実務・ビジネス関係の行動者率」ランキング｜東京は青森の2.3倍",
+      "title": "【2021年版・商業実務関係】商業実務・ビジネス関係をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n578b6e871067",
       "is_paid": false,
       "published_at": "2026-04-13",
@@ -1432,7 +1432,7 @@
     },
     "recovered-n583a06d171e1": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「華道の行動者率」ランキング｜島根県が2.1％でトップ、都市部は低迷",
+      "title": "【2021年版】華道をした人が多い県は？ 1位は島根県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n583a06d171e1",
       "is_paid": false,
       "published_at": "2026-03-30",
@@ -1442,7 +1442,7 @@
     },
     "recovered-n5867882dd7ab": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「詩・和歌・俳句・小説などの創作の行動者率」ランキング｜東京と秋田で約3倍の差",
+      "title": "【2021年版】詩・和歌・俳句・小説などの創作をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n5867882dd7ab",
       "is_paid": false,
       "published_at": "2026-04-12",
@@ -1452,7 +1452,7 @@
     },
     "recovered-n598a096ecbff": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「和裁・洋裁の行動者率」ランキング｜神奈川県が6.3％で全国1位",
+      "title": "【2021年版】和裁・洋裁をした人が多い県は？ 1位は神奈川県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n598a096ecbff",
       "is_paid": false,
       "published_at": "2026-04-10",
@@ -1462,7 +1462,7 @@
     },
     "recovered-n5ced125edb74": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ゴルフの行動者率」ランキング｜愛知が首位、青森は愛知の3分の1",
+      "title": "【2021年版】ゴルフをした人が多い県は？ 1位は愛知県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n5ced125edb74",
       "is_paid": false,
       "published_at": "2026-03-21",
@@ -1472,7 +1472,7 @@
     },
     "recovered-n5ddcfb6bf233": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「書道の行動者率」ランキング｜佐賀県が4.5％で全国1位",
+      "title": "【2021年版】書道をした人が多い県は？ 1位は佐賀県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n5ddcfb6bf233",
       "is_paid": false,
       "published_at": "2026-03-24",
@@ -1492,7 +1492,7 @@
     },
     "recovered-n6305d990f2d2": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「邦舞・おどりの行動者率」ランキング｜鹿児島県が東京都と並んで1位",
+      "title": "【2021年版】邦舞・おどりをした人が多い県は？ 1位は鹿児島県・東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n6305d990f2d2",
       "is_paid": false,
       "published_at": "2026-04-01",
@@ -1502,7 +1502,7 @@
     },
     "recovered-n67729e8be7c4": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「バドミントンの行動者率」ランキング｜宮城が首位、長崎は全国の半分",
+      "title": "【2021年版】バドミントンをした人が多い県は？ 1位は宮城県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n67729e8be7c4",
       "is_paid": false,
       "published_at": "2026-03-19",
@@ -1532,7 +1532,7 @@
     },
     "recovered-n724eab276711": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「人文・社会・自然科学の行動者率」ランキング｜東京14.6％、宮崎5.7％の知的格差",
+      "title": "【2021年版】人文・社会・自然科学をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n724eab276711",
       "is_paid": false,
       "published_at": "2026-04-12",
@@ -1552,7 +1552,7 @@
     },
     "recovered-n765fc88c67ef": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「芸術・文化の行動者率」ランキング｜東京17.3％が圧倒、神奈川・京都が同率2位",
+      "title": "【2021年版】芸術・文化をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n765fc88c67ef",
       "is_paid": false,
       "published_at": "2026-04-12",
@@ -1562,7 +1562,7 @@
     },
     "recovered-n7ea3a816d39b": {
       "vertical": "stats47-note",
-      "title": "【2001年版】都道府県「旅行・行楽の年間行動者率」ランキング（15歳以上）｜1位は埼玉県、沖縄県は59％で断トツ最下位",
+      "title": "【2001年版・15歳以上】旅行・行楽をした人が多い県は？ 1位は埼玉県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n7ea3a816d39b",
       "is_paid": false,
       "published_at": "2026-03-24",
@@ -1572,7 +1572,7 @@
     },
     "recovered-n7ff099157abd": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ジョギング・マラソンの行動者率」ランキング｜東京が首位、岐阜は半分",
+      "title": "【2021年版】ジョギング・マラソンをした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n7ff099157abd",
       "is_paid": false,
       "published_at": "2026-03-23",
@@ -1592,7 +1592,7 @@
     },
     "recovered-n827191af8c1c": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「海外旅行の年間行動者率」ランキング（10歳以上）｜コロナ禍で全国平均0.34％、1位は意外にも京都府",
+      "title": "【2021年版・10歳以上】海外旅行をした人が多い県は？ 1位は京都府｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n827191af8c1c",
       "is_paid": false,
       "published_at": "2026-05-10",
@@ -1612,7 +1612,7 @@
     },
     "recovered-n88d2a55a9e36": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「柔道の行動者率」ランキング｜山口県が偏差値91で圧倒的1位",
+      "title": "【2021年版】柔道をした人が多い県は？ 1位は山口県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n88d2a55a9e36",
       "is_paid": false,
       "published_at": "2026-03-24",
@@ -1622,7 +1622,7 @@
     },
     "recovered-n8df3cf170cf4": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ソフトボールの行動者率」ランキング｜山口県が3.0％で圧倒的1位、1位と最下位の差は5倍",
+      "title": "【2021年版】ソフトボールをした人が多い県は？ 1位は山口県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n8df3cf170cf4",
       "is_paid": false,
       "published_at": "2026-03-26",
@@ -1652,7 +1652,7 @@
     },
     "recovered-n97bd102186c6": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ボウリングの行動者率」ランキング｜沖縄が全国トップ、秋田は半分以下",
+      "title": "【2021年版】ボウリングをした人が多い県は？ 1位は沖縄県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n97bd102186c6",
       "is_paid": false,
       "published_at": "2026-03-20",
@@ -1662,7 +1662,7 @@
     },
     "recovered-n991a75be91ce": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ゲームの行動者率」ランキング｜愛知が東京を僅差で抑えて1位",
+      "title": "【2021年版】ゲームをした人が多い県は？ 1位は愛知県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n991a75be91ce",
       "is_paid": false,
       "published_at": "2026-04-11",
@@ -1692,7 +1692,7 @@
     },
     "recovered-n9dcb0680cea6": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「絵画・彫刻の制作の行動者率」ランキング｜京都府が東京都に肉薄して2位",
+      "title": "【2021年版】絵画・彫刻の制作をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/n9dcb0680cea6",
       "is_paid": false,
       "published_at": "2026-04-08",
@@ -1702,7 +1702,7 @@
     },
     "recovered-na21015ac366d": {
       "vertical": "koumuin-gis",
-      "title": "【2021年版】都道府県「剣道の行動者率」ランキング｜山形と長野が同率首位、意外な武道地図",
+      "title": "【2021年版】剣道をした人が多い県は？ 1位は山形県・長野県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/na21015ac366d",
       "is_paid": false,
       "published_at": "2026-03-24",
@@ -1712,7 +1712,7 @@
     },
     "recovered-na25ccb15a6cb": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「写真の撮影・プリントの行動者率」ランキング｜青森と東京で約2倍の差",
+      "title": "【2021年版】写真の撮影・プリントをした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/na25ccb15a6cb",
       "is_paid": false,
       "published_at": "2026-04-09",
@@ -1722,7 +1722,7 @@
     },
     "recovered-na2720854b1d9": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「キャンプの行動者率」ランキング｜北海道が9.1％でダントツ1位",
+      "title": "【2021年版】キャンプをした人が多い県は？ 1位は北海道｜都道府県ランキング",
       "url": "https://note.com/stats47/n/na2720854b1d9",
       "is_paid": false,
       "published_at": "2026-03-25",
@@ -1732,7 +1732,7 @@
     },
     "recovered-naa474d085c7b": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「つりの行動者率」ランキング｜広島が首位、海なし県の東京が最下位",
+      "title": "【2021年版】つりをした人が多い県は？ 1位は広島県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/naa474d085c7b",
       "is_paid": false,
       "published_at": "2026-03-21",
@@ -1742,7 +1742,7 @@
     },
     "recovered-nabd65a1c893d": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「美術鑑賞の行動者率」ランキング｜福井・石川・富山の北陸勢が上位に集結",
+      "title": "【2021年版】美術鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nabd65a1c893d",
       "is_paid": false,
       "published_at": "2026-03-23",
@@ -1752,7 +1752,7 @@
     },
     "recovered-nafc693255794": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「洋舞・社交ダンスの行動者率」ランキング｜東京都が1.7％で断トツ1位",
+      "title": "【2021年版】洋舞・社交ダンスをした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nafc693255794",
       "is_paid": false,
       "published_at": "2026-04-11",
@@ -1762,7 +1762,7 @@
     },
     "recovered-nb16c0b751d01": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ウォーキング・軽い体操の行動者率」ランキング｜青森県は東京都の6割にとどまる",
+      "title": "【2021年版】ウォーキング・軽い体操をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nb16c0b751d01",
       "is_paid": false,
       "published_at": "2026-04-12",
@@ -1782,7 +1782,7 @@
     },
     "recovered-nb90f2342ebd8": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「映画館での映画鑑賞の行動者率」ランキング｜福井県7位の意外な映画好き県",
+      "title": "【2021年版】映画館での映画鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nb90f2342ebd8",
       "is_paid": false,
       "published_at": "2026-03-27",
@@ -1792,7 +1792,7 @@
     },
     "recovered-nbedecc99f3a3": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「陶芸・工芸の行動者率」ランキング｜福井県と滋賀県が東京都と並んで1位",
+      "title": "【2021年版】陶芸・工芸をした人が多い県は？ 1位は福井県・滋賀県・東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nbedecc99f3a3",
       "is_paid": false,
       "published_at": "2026-04-09",
@@ -1802,7 +1802,7 @@
     },
     "recovered-nbf1373427ca3": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「パソコンなどの情報処理の行動者率」ランキング｜東京23.2％、岩手10.3％の格差",
+      "title": "【2021年版】パソコンなどの情報処理をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nbf1373427ca3",
       "is_paid": false,
       "published_at": "2026-04-13",
@@ -1812,7 +1812,7 @@
     },
     "recovered-nc0e7474b34e1": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「登山・ハイキングの行動者率」ランキング｜東京と兵庫が同率首位、沖縄は4分の1",
+      "title": "【2021年版】登山・ハイキングをした人が多い県は？ 1位は東京都・兵庫県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nc0e7474b34e1",
       "is_paid": false,
       "published_at": "2026-03-23",
@@ -1832,7 +1832,7 @@
     },
     "recovered-nc60f702445f8": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「国内旅行の行動者率」ランキング｜東京都41.7％、徳島県は16.3％",
+      "title": "【2021年版】国内旅行をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nc60f702445f8",
       "is_paid": false,
       "published_at": "2026-03-26",
@@ -1842,7 +1842,7 @@
     },
     "recovered-ncaddeaf3e2ff": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「卓球の行動者率」ランキング｜東京都が6.2％で1位、卓球人気の地域差は意外に大きい",
+      "title": "【2021年版】卓球をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/ncaddeaf3e2ff",
       "is_paid": false,
       "published_at": "2026-03-29",
@@ -1862,7 +1862,7 @@
     },
     "recovered-ncf6086199c7d": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「趣味としての料理・菓子作りの行動者率」ランキング｜東京都が21.9％で1位",
+      "title": "【2021年版】趣味としての料理・菓子作りをした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/ncf6086199c7d",
       "is_paid": false,
       "published_at": "2026-03-29",
@@ -1882,7 +1882,7 @@
     },
     "recovered-nda04ec118c93": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「行楽（日帰り）の行動者率」ランキング｜愛知県が1位、沖縄県は半分以下",
+      "title": "【2021年版】行楽（日帰り）をした人が多い県は？ 1位は愛知県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nda04ec118c93",
       "is_paid": false,
       "published_at": "2026-03-25",
@@ -1942,7 +1942,7 @@
     },
     "recovered-ne3cdb7819c41": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「国内観光旅行の行動者率」ランキング｜東京34.2％で1位、徳島は11.4％",
+      "title": "【2021年版】国内観光旅行をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/ne3cdb7819c41",
       "is_paid": false,
       "published_at": "2026-03-27",
@@ -1952,7 +1952,7 @@
     },
     "recovered-ne4a6ec30706a": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「マンガを読む行動者率」ランキング｜全国平均34％、3人に1人がマンガ読者",
+      "title": "【2021年版】マンガを読んだ人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/ne4a6ec30706a",
       "is_paid": false,
       "published_at": "2026-04-08",
@@ -1962,7 +1962,7 @@
     },
     "recovered-ne5b9d2b01255": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「囲碁の行動者率」ランキング｜1位は意外にも長崎県",
+      "title": "【2021年版】囲碁をした人が多い県は？ 1位は長崎県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/ne5b9d2b01255",
       "is_paid": false,
       "published_at": "2026-04-01",
@@ -1972,7 +1972,7 @@
     },
     "recovered-ne62fa955bcff": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「旅行・行楽の年間行動者率」ランキング（10歳以上）｜コロナ禍で半数以下に急落、愛知県がトップ",
+      "title": "【2021年版・10歳以上】旅行・行楽をした人が多い県は？ 1位は愛知県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/ne62fa955bcff",
       "is_paid": false,
       "published_at": "2026-03-23",
@@ -1992,7 +1992,7 @@
     },
     "recovered-ne85980349fda": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「スポーツ観覧の行動者率」ランキング｜広島県が偏差値92で圧倒的1位",
+      "title": "【2021年版】スポーツ観覧をした人が多い県は？ 1位は広島県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/ne85980349fda",
       "is_paid": false,
       "published_at": "2026-04-10",
@@ -2002,7 +2002,7 @@
     },
     "recovered-nead586305cdb": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「パチンコの行動者率」ランキング｜九州勢が上位独占、東京は46位",
+      "title": "【2021年版】パチンコをした人が多い県は？ 1位は鹿児島県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nead586305cdb",
       "is_paid": false,
       "published_at": "2026-04-08",
@@ -2022,7 +2022,7 @@
     },
     "recovered-nefd814b49c5d": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「スポーツの年間行動者率」ランキング（10歳以上）｜東京都が圧倒的1位、青森県との差は22ポイント超",
+      "title": "【2021年版】スポーツをした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nefd814b49c5d",
       "is_paid": false,
       "published_at": "2026-03-19",
@@ -2032,7 +2032,7 @@
     },
     "recovered-nf0c533293f5b": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「クラシック音楽鑑賞の行動者率」ランキング｜福井県3位・山形県9位の意外な結果",
+      "title": "【2021年版】クラシック音楽鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nf0c533293f5b",
       "is_paid": false,
       "published_at": "2026-03-28",
@@ -2042,7 +2042,7 @@
     },
     "recovered-nf0fc2a7eb326": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「家政・家事の行動者率」ランキング｜京都府が1位、青森県との差は1.8倍",
+      "title": "【2021年版】家政・家事をした人が多い県は？ 1位は京都府｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nf0fc2a7eb326",
       "is_paid": false,
       "published_at": "2026-03-28",
@@ -2052,7 +2052,7 @@
     },
     "recovered-nf1a5abab3d5e": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ポピュラー音楽鑑賞の行動者率」ランキング｜沖縄県が最下位の意外",
+      "title": "【2021年版】ポピュラー音楽鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nf1a5abab3d5e",
       "is_paid": false,
       "published_at": "2026-04-09",
@@ -2062,7 +2062,7 @@
     },
     "recovered-nf5b4ced7a736": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ボランティア活動の年間行動者率」ランキング（10歳以上）｜子どもを含めても島根県が不動の1位",
+      "title": "【2021年版・15歳以上】ボランティア活動をした人が多い県は？ 1位は島根県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nf5b4ced7a736",
       "is_paid": false,
       "published_at": "2026-05-10",
@@ -2082,7 +2082,7 @@
     },
     "recovered-nfa4057b9b8de": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「茶道の行動者率」ランキング｜1位は京都ではなく富山県",
+      "title": "【2021年版】茶道をした人が多い県は？ 1位は広島県｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nfa4057b9b8de",
       "is_paid": false,
       "published_at": "2026-04-10",
@@ -2092,7 +2092,7 @@
     },
     "recovered-nfbdfd99fee1b": {
       "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「映画館以外での映画鑑賞の行動者率」ランキング｜東京は6割超、青森は4割台",
+      "title": "【2021年版】映画館以外での映画鑑賞をした人が多い県は？ 1位は東京都｜都道府県ランキング",
       "url": "https://note.com/stats47/n/nfbdfd99fee1b",
       "is_paid": false,
       "published_at": "2026-04-01",

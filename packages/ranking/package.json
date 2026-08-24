@@ -33,6 +33,8 @@
     }
   },
   "scripts": {
+    "generate:municipality-ranking": "tsx src/scripts/generate-municipality-ranking.ts",
+    "verify:municipality-ranking": "tsx src/scripts/verify-municipality-ranking.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",

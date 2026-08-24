@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-16T23:01:43.003Z",
+  "generatedAt": "2026-08-22T18:55:55.748Z",
   "site": "https://stats47.jp",
   "r2": "https://storage.stats47.jp",
   "sampled": false,
@@ -8,9 +8,9 @@
       "type": "blog-ogp",
       "source": "r2-static",
       "aspect": "1.91:1",
-      "entries": 430,
-      "expected": 430,
-      "ok": 430,
+      "entries": 434,
+      "expected": 434,
+      "ok": 434,
       "missing": [],
       "r2KeyPattern": "app/blog/<slug>/ogp/ogp.png"
     },
@@ -58,9 +58,9 @@
       "type": "blog-card",
       "source": "r2-static",
       "aspect": "1.91:1",
-      "entries": 430,
-      "expected": 860,
-      "ok": 860,
+      "entries": 434,
+      "expected": 868,
+      "ok": 868,
       "missing": [],
       "r2KeyPattern": "app/blog/<slug>/thumbnail-{light,dark}.webp"
     },

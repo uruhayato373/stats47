@@ -16,8 +16,7 @@ import { NAV_THEMES } from "@/features/theme-dashboard/config/theme-urls";
 import { HeaderClient } from "./HeaderClient";
 
 export default function Header() {
-  // NAV_THEMES は静的 (curated・表示順)。local-finance-city は local-finance の
-  // 市区町村ビューのためグローバルナビから除外済 (config/theme-urls.ts)。
+  // NAV_THEMES は静的 (curated・表示順)。市区町村統計は専用ナビで扱う。
   const themes = NAV_THEMES.map((t) => ({ themeKey: t.themeKey, title: t.title }));
   // 件数と代表ランキングはビルド前に git TS から焼いた生成物を使う。ここで
   // listAllMetrics() を呼ぶと、共通 Header 経由で METRICS_REGISTRY が
@@ -29,7 +28,7 @@ export default function Header() {
     count: category.count,
     rankings: category.representatives.slice(0, 4).map((representative) => ({
       rankingKey: representative.rankingKey,
-      title: representative.title,
+      title: representative.readerLabel ?? representative.title,
     })),
   }));
 

@@ -463,7 +463,11 @@ export async function readPublishedBackgroundState(options: {
   }
 
   if (background.source !== 'ai') {
-    if (source === 'common' && background.source !== 'brand') {
+    if (
+      source === 'common' &&
+      background.source !== 'brand' &&
+      background.source !== 'shared'
+    ) {
       throw new Error(
         `${options.slug}: 共通manifestのbackground sourceが不正です`
       );

@@ -181,6 +181,38 @@ Remotion と共有する型なので、theme 固有の UI 都合を持ち込ま�
 
 ---
 
+## 4.6 白書・統計の論点レンズ (`evidenceTopics`) — 2026-08-24 新設
+
+白書・報告書を独立した第四 taxonomy にせず、Theme に従属する「データを読む問い」として管理する。
+論点レンズと公式資料の正典は `theme-catalog/evidence-lenses.ts`、テーマごとの採択結果は
+`ThemeCatalog.evidenceTopics` に置く。
+
+```ts
+evidenceTopics: [
+  {
+    key: 'facility-access',
+    lensKey: 'regional-access',
+    title: '教育・文化施設への地域アクセス',
+    question: '施設の量とアクセス条件には、どのような地域差があるか。',
+    summary: '白書の論点を都道府県データで確かめるための短い案内。',
+    sourceKeys: ['mext-whitepaper-2024'],
+    relatedRankingKeys: ['library-count-per-million'],
+    relatedChartKeys: ['education-school-count-trend'],
+    relatedThemeKeys: ['population-dynamics'],
+    relatedArticleTagKeys: ['教育'],
+  },
+];
+```
+
+- `lensKey` は複数テーマで再利用できる安定した観点、`sourceKeys` は根拠資料である。白書名を lens にしない。
+- NotebookLM は論点・図表候補を抽出する補助。採択には公式 HTTPS URL、資料の実在、関連 route の実在が必要。
+- 1 topic = 1 問い。指標カードやチャートと同じ事実を再説明せず、関連ページへ進む理由を短く示す。
+- 公開 URL は増やさない。`/themes/*` 内から既存 ranking / theme / tag へ接続し、`nav_surface=theme_evidence` で計測する。
+- `relatedChartKeys` は同じ ThemeCatalog の実在 chart、ranking は active、theme は自己参照不可とする。
+- generator は読まない。UI は `ThemeEvidenceTopicsSection` が ThemeCatalog を直読みする。
+
+---
+
 ## 5. validator (`npm run validate:catalog`)
 
 決定的 lint `packages/data-configs/scripts/validate-theme-catalog.ts`。pre-commit + CI に配線済み。
@@ -192,6 +224,8 @@ Remotion と共有する型なので、theme 固有の UI 都合を持ち込ま�
 | **error (鮮度)** | `generate:catalog --check` — 生成物と SSOT の diff (手編集・生成忘れの両方向) |
 | **warn** (`--strict` で error) | selection 未記入 / componentKey **横断**共有 (複数ページ再利用は設計上許容) / primary がチャート未使用 (metrics[] の stat-card で描画) / sortOrder 重複 (描画は配列順で安定) |
 | **warn (metricGroups)** | `[group-default-many]` 初期チェック 4 件以上 (mount 時にその数だけ時系列を取りに行く) / `[group-large]` 系列候補 9 件以上 / `[group-orphan]` 非 context 指標がどのグループにも未所属 |
+| **error (evidenceTopics)** | source/lens 不在、key 重複、ranking 非実在・inactive、chart 非実在、theme 非実在・自己参照、tag/key 形式違反、公式 source が HTTPS でない |
+| **warn (evidenceTopics)** | ranking/theme/tag の内部導線が 1 件もない |
 
 ---
 
@@ -213,8 +247,9 @@ Remotion と共有する型なので、theme 固有の UI 都合を持ち込ま�
 | 工程 | 担当 |
 |---|---|
 | 指標×チャート候補の**調査・提案** (白書/Web/競合/GSC) | `theme-researcher` (read-only、提案を `.claude/todo/backlog.md` へ) |
-| 提案の**採否判断・カタログ設計** (role/チャート構成) | `theme-designer` (採択分を catalog TS 化) |
-| チャート **componentProps 詳細化・監査** | `theme-component-builder` |
+| 白書からの**論点レンズ候補抽出** (NotebookLM + 公式資料照合) | `theme-researcher` (read-only、候補を theme-designer へ返す) |
+| 提案の**採否判断・カタログ設計** (role/チャート構成/evidenceTopics) | `theme-designer` (採択分を catalog TS 化) |
+| チャート **componentProps 詳細化・監査** | `theme-component-builder` (`relatedChartKeys` との整合も確認) |
 | チャートコンポーネント自体の新設 | `chart-component-builder` (`chart-component-standards.md`) |
 | 観測値投入 (e-Stat → R2) | `data-ingester` |
 | e-Stat 実在検証 | `estat-researcher` |
@@ -236,6 +271,7 @@ Remotion と共有する型なので、theme 固有の UI 都合を持ち込ま�
 | `charts.section` | **テーマページでは未使用** (area ページの `AreaChartSection` のみ使用) | — |
 | `keywords` | `<meta>` / 構造化データ | theme utils |
 | `relatedArticleTagKeys` | 関連記事セクション + ネイティブアフィリ | `ThemeRelatedArticles` |
+| `evidenceTopics` | **「白書・統計から見る論点」**。公式資料から ranking / theme / tag へ周遊 | `ThemeEvidenceTopicsSection` (`nav_surface=theme_evidence`) |
 | `rejectedCandidates` | UI 非表示 (再調査防止の記録のみ) | — |
 | (別途) EMBEDDED_SECTIONS | 埋め込み section。**半幅 2 カラム** = 人口移動フロー / 通勤フロー (ChartPanel 化・2026-08-04)、**全幅** = 駅乗降 / 高速道路 / 過疎×医療 / 日照。`hideMap` と独立に描画 | `THEME_SECTION_REGISTRY` + `HALF_WIDTH_SECTIONS` |
 | (別途) 左レール | テーマ一覧 + 地域選択 (`ThemeSideNav`)。xl 未満は非表示で `ThemeSwitcher` 帯が代替 | `ThemePageLayout` の `PageShell leftRail` |

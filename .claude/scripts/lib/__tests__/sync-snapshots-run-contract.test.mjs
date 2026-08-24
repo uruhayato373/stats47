@@ -117,6 +117,15 @@ test("--dry-run では R2 push を呼ばない", () => {
   );
 });
 
+test("municipality-ranking 単独実行は専用 prefix だけを push する", () => {
+  const { status, calls } = runRunSh({ args: ["--only", "municipality-ranking"] });
+  assert.equal(status, 0);
+  const pushes = calls.filter((c) => c.includes("diff-push-r2.ts"));
+  assert.deepEqual(pushes, [
+    "tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/municipalities",
+  ]);
+});
+
 test("sync job の timeout は末尾 push を含む実測所要時間を上回る", () => {
   // 2026-08-17 実測 (完走した run 32020891418): 生成 33m07s + push 24m44s
   // (14,033 件 / 9.45 files/s) = sync job 全体 58m01s。

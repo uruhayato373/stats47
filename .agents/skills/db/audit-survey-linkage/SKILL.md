@@ -15,6 +15,7 @@ ranking↔survey 紐付けの監査・是正スキル。**正典: `.Codex/rules/
 - 新 metric 追加後 (data-ingester の量産フロー後)
 - surveys.json / 導出辞書を編集した後
 - 四半期の定期棚卸し
+- ThemeCatalog chart / blog chart の lineage 変更後
 
 ## 手順
 
@@ -25,6 +26,7 @@ npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts               # 人
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --json        # 機械向け
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --unresolved  # 未分類の全キー列挙
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2  # R2 焼き込み突合 (live item.json vs git 導出。--sample N で間引き)
+npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check # ranking/theme/blog 横断 state・鮮度・ratchet
 ```
 
 レポート: 解決済/未分類 (内訳: ssds-synthetic-only / estat-uncovered / external / calculated) /
@@ -35,6 +37,18 @@ npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2  # R2 
 > 全在庫が未公開の調査 (inactive-only) が R2 に無いのは正常。stale (r2-drift) と誤診して
 > sync・公開を要求しない。焼き込みの実測は `--compare-r2` (月次ポートフォリオ監査で実行)。
 
+横断監査の全量再生成 (公開 blog の R2 source.json を読むためネットワーク必須):
+
+```bash
+npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts \
+  --json .Codex/state/surveys/taxonomy.json --tighten-ratchet
+npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check
+```
+
+`resolved` / `unresolved` / `missing-lineage` / `not-applicable` を混同しない。theme/blog に
+surveyId を直接足して穴埋めせず、ThemeCatalog の metric/e-Stat lineage または blog source.json を
+正す。週次 workflow は改善値だけを ratchet へ反映する。
+
 ### Step 2: 是正 (survey-curator の責務)
 
 | 症状 | 是正 |
@@ -44,6 +58,8 @@ npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2  # R2 
 | orphan survey | surveys.json から物理削除 (git 履歴で復活可) |
 | config.surveyId 不正 | 該当 metric TS を修正 (`validate:config` の survey-id lint でも検知) |
 | `external` / `calculated-unresolved` | 原則未分類のまま (偽の調査を作らない)。必要なら config.surveyId で個別オーバーライド |
+| theme chart `unresolved` / `missing-lineage` | ThemeCatalog の `relatedRankingKeys` / `rankingLink` / `estatParams` を一次出典に基づき是正 |
+| blog chart `unresolved` / `missing-lineage` | R2 source.json の rankingKey / statsDataId lineage を chart-author / blog-editor へ引き渡す |
 
 ### Step 3: 検証 + R2 反映
 

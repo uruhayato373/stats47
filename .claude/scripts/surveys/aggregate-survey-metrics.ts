@@ -14,7 +14,8 @@
  *     activeUsers は週横断で加算不能のため最新窓のみ activeUsersLast28d として保存
  *   - snapshot に行が無い = その窓で表示/流入 0 の実測 (GSC/GA4 はゼロ行を出力しない) →
  *     measured-low のカウント 0 として保存する (insufficient-data ではない)
- *   - internalNav (survey→ranking 遷移) は GA4 未計装 → not-instrumented のまま触らない
+ *   - internalNav: survey-navigation.csv が両窓にある場合だけ survey→ranking nav_click を合算。
+ *     20 clicks/56d 以上を measured、未満を measured-low。snapshot 欠損は insufficient-data
  *   - latestDataYear は本スクリプトでは集計しない (survey→items→values の多段 fetch が重い。
  *     editorial 候補の個別事前監査で記入する)
  *
@@ -36,6 +37,7 @@ const GA4_SNAP = path.join(PROJECT_ROOT, ".claude/skills/analytics/ga4-improveme
 
 const MIN_GSC_IMPRESSIONS = 100; // per 56d (README 判定規律 3: imp<100 は CTR を確定しない)
 const MIN_GA4_PAGEVIEWS = 100;
+const MIN_INTERNAL_NAV_CLICKS = 20;
 
 // ---------- 窓の決定 (非重複 2 窓) ----------
 function pickWeeks(): [string, string] {
@@ -110,12 +112,27 @@ function aggregateGa4(weeks: [string, string]): Map<string, Ga4Agg> {
   return out;
 }
 
+function aggregateInternalNav(weeks: [string, string]): Map<string, number> | null {
+  const files = weeks.map((week) => path.join(GA4_SNAP, week, "survey-navigation.csv"));
+  if (files.some((file) => !fs.existsSync(file))) return null;
+  const out = new Map<string, number>();
+  for (const file of files) {
+    for (const row of readCsv(file)) {
+      const p = normalizeSurveyPath(row.pagePath ?? "");
+      if (!p || row.nav_surface !== "survey_ranking") continue;
+      out.set(p, (out.get(p) ?? 0) + (Number(row.eventCount) || 0));
+    }
+  }
+  return out;
+}
+
 // ---------- main ----------
 function main() {
   const weeks = pickWeeks();
   const pf = JSON.parse(fs.readFileSync(PORTFOLIO, "utf8"));
   const gsc = aggregateGsc(weeks);
   const ga4 = aggregateGa4(weeks);
+  const internalNav = aggregateInternalNav(weeks);
 
   const round = (n: number, d: number) => Number(n.toFixed(d));
   const withDemand: string[] = [];
@@ -153,7 +170,22 @@ function main() {
         landingPageViews: a?.pageViews ?? 0,
       };
     }
-    // internalNav は not-instrumented のまま (触らない)
+    // ── internal navigation ──
+    if (internalNav === null) {
+      s.metrics.internalNav = {
+        status: "insufficient-data",
+        windowDays: 56,
+        weeks: [...weeks].sort(),
+      };
+    } else {
+      const rankingOutboundClicks = internalNav.get(p) ?? 0;
+      s.metrics.internalNav = {
+        status: rankingOutboundClicks >= MIN_INTERNAL_NAV_CLICKS ? "measured" : "measured-low",
+        windowDays: 56,
+        weeks: [...weeks].sort(),
+        rankingOutboundClicks,
+      };
+    }
     s.gscSnapshotRef = `.claude/skills/analytics/gsc-improvement/reference/snapshots/${weeks[0]}/pages.csv`;
     s.ga4SnapshotRef = `.claude/skills/analytics/ga4-improvement/reference/snapshots/${weeks[0]}/pages.csv`;
 
@@ -176,7 +208,9 @@ function main() {
     .forEach((r) => console.log("  " + r));
   const gscOk = pf.surveys.filter((s: { metrics: { gsc: { status: string } } }) => s.metrics.gsc.status === "measured").length;
   const ga4Ok = pf.surveys.filter((s: { metrics: { ga4: { status: string } } }) => s.metrics.ga4.status === "measured").length;
-  console.log(`GSC measured ${gscOk}/${pf.surveys.length} / GA4 measured ${ga4Ok}/${pf.surveys.length} → ${PORTFOLIO}`);
+  const navOk = pf.surveys.filter((s: { metrics: { internalNav: { status: string } } }) => s.metrics.internalNav.status === "measured").length;
+  const navState = internalNav === null ? "snapshot 欠損" : `measured ${navOk}/${pf.surveys.length}`;
+  console.log(`GSC measured ${gscOk}/${pf.surveys.length} / GA4 measured ${ga4Ok}/${pf.surveys.length} / internalNav ${navState} → ${PORTFOLIO}`);
 }
 
 main();

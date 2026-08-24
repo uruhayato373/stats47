@@ -204,6 +204,28 @@ Git Bash から `npx turbo` / `npx tsc` を直接呼べば env 前置が効く (
 `--continue` を付けないと最初の失敗で残りが検査されない。
 **判定は必ず出力本文の `error TS` 件数で行う** (`| tail` や `| grep` の終了コードを見ない)。
 
+### ★ファイルを書くときは Write/Edit を使う。heredoc で内容を流し込まない (2026-08-21)
+
+Git Bash + Python/シェルの heredoc で**ファイル本文を書こうとすると壊れる**。同じセッションで
+3 回踏んだので手順として固定する。
+
+| 症状 | 原因 |
+|---|---|
+| JS/TS の文字列内が**本物の改行**になり `SyntaxError: Invalid or unexpected token` | Python の非 raw 文字列がバックスラッシュ n を改行に変換する |
+| `unexpected EOF while looking for matching` の引用符エラー | 長い heredoc (~8KB 超) がシェル側で切れる |
+| YAML やテーブルに意図しない改行が入る | 同上 |
+
+**この注意書き自体、最初に heredoc で書いて上の 1 行目が壊れた** (4 回目)。
+Edit ツールで書き直している。
+
+**使い分け**:
+
+- **ファイルを新規作成する / 大きく書き換える** → Write ツール。heredoc を使わない。
+- **既存ファイルの一部を差し替える** → Edit ツール、または Python で
+  **`r'''...'''` (raw 文字列)** を使う。非 raw ではバックスラッシュを含む文字が化ける。
+- **アンカーは記憶で書かない**。`sed -n 'N,Mp'` や `cat -A` で**実バイトを読んでから**
+  置換文字列を組む。`assert old in s` が落ちる原因はほぼこれ。
+
 ### ★`file://` URL を文字列連結しない (2026-08-05)
 
 `` `file://${process.argv[1]}` `` は Windows で必ず不一致になる。Node は `argv[1]` を絶対パスへ

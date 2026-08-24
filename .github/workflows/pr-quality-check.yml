@@ -77,6 +77,11 @@ jobs:
         run: npm run test:alert-lifecycle
         continue-on-error: false
 
+      - name: 🔄 GSC operations cycle contract
+        # snapshot→review→候補判断→plan→月次集約の接続と、JST週境界の退行を止める。
+        run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs
+        continue-on-error: false
+
       - name: 🔁 Workflow Commit-back Contract Gate
         # cron が「確実にループし続ける」ための契約。2026-08-16 に 2 つの停止事故を踏んだ:
         # pull せずに push して (fetch first) で毎回落ちる型 (11 workflow) と、
@@ -90,6 +95,12 @@ jobs:
         # 対象あり生成0件をgreenに戻さない。LLM実行→決定的検証→公開の順序と
         # OAuth / MCP / full-output の安全契約を静的に固定する。
         run: npm run test:content-routines
+        continue-on-error: false
+
+      - name: 🗒️ note Catalog Contract Gate
+        # 読者表題への専門語再混入、catalog参照整合性、title重複を決定的に検査する。
+        # ローカルR2がある環境では draft/H1/cover title のドリフトも同じvalidatorが検出する。
+        run: npm run note:catalog:validate
         continue-on-error: false
 
       - name: 🗂️ Backlog Loop Contract Gate
@@ -289,6 +300,14 @@ jobs:
         # 重複実験防止・推測値混入防止) を検証。読み取り専用で破壊的変更なし
         # (本文生成・R2 push・deploy は行わない)。正典: .claude/state/surveys/README.md
         run: npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts
+        continue-on-error: false
+
+      - name: 🧬 Survey Taxonomy Cross-Surface Guard
+        # ranking / ThemeCatalog chart / blog chart を同じ survey master へ接続した全量 state を検証。
+        # PR では R2 を再走査せず、git 由来の ranking/theme drift・state freshness・縮小専用
+        # ratchet を offline で確認する。blog の全量再取得は週次 workflow が担当する。
+        # 正典: .claude/rules/survey-linkage-standards.md
+        run: npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check
         continue-on-error: false
 
       - name: 🧹 Repository Hygiene Regression Guard

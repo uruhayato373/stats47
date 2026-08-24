@@ -55,6 +55,75 @@ export interface BuildOptions {
   backgroundImage?: string;
 }
 
+export const BLOG_OGP_SIZE = { width: 1200, height: 630 } as const;
+export const BLOG_THUMBNAIL_SIZE = { width: 640, height: 336 } as const;
+
+export interface BlogOgpTypography {
+  titleFontSize: number;
+  titleLineHeight: number;
+  showSubtitle: boolean;
+}
+
+/** 日本語タイトルの長さに応じ、OGP内で最大限大きく読める決定的な文字組みを返す。 */
+export function resolveBlogOgpTypography(title: string): BlogOgpTypography {
+  const length = Array.from(title.trim()).length;
+  if (length <= 18) {
+    return { titleFontSize: 72, titleLineHeight: 1.15, showSubtitle: true };
+  }
+  if (length <= 30) {
+    return { titleFontSize: 60, titleLineHeight: 1.18, showSubtitle: true };
+  }
+  if (length <= 42) {
+    return { titleFontSize: 50, titleLineHeight: 1.2, showSubtitle: false };
+  }
+  return { titleFontSize: 44, titleLineHeight: 1.18, showSubtitle: false };
+}
+
+/**
+ * サイト内カード専用。元背景の右側を拡大して主役を見せ、文字は一切合成しない。
+ * 記事タイトルはカード側のDOMテキストを正典とする。
+ */
+export function buildBlogThumbnailElement(
+  dark: boolean,
+  backgroundImage?: string
+) {
+  const source = backgroundImage ?? brandBackground(dark);
+  return createElement(
+    'div',
+    {
+      style: {
+        width: BLOG_THUMBNAIL_SIZE.width,
+        height: BLOG_THUMBNAIL_SIZE.height,
+        position: 'relative',
+        display: 'flex',
+        overflow: 'hidden',
+        background: dark ? '#0F172A' : '#F8FAFC',
+      },
+    },
+    createElement('img', {
+      src: source,
+      width: 960,
+      height: 504,
+      style: {
+        position: 'absolute',
+        right: 0,
+        top: -84,
+        width: 960,
+        height: 504,
+        objectFit: 'fill',
+      },
+    })
+  );
+}
+
+/** SNS共有専用。タイトルとブランドを持つ1200×630の自己完結画像。 */
+export function buildBlogOgpElement(data: OgpData, backgroundImage?: string) {
+  return buildElement(data, false, {
+    background: true,
+    backgroundImage,
+  });
+}
+
 export function buildElement(
   data: OgpData,
   dark: boolean,
@@ -74,6 +143,7 @@ export function buildElement(
 
   // --- background variant (blog OGP): 日本地図ブランド背景 + 左寄せテキスト ---
   if (opts?.background) {
+    const typography = resolveBlogOgpTypography(data.title);
     return createElement(
       'div',
       {
@@ -100,16 +170,28 @@ export function buildElement(
           objectFit: 'cover',
         },
       }),
+      // 背景モチーフが安全域へ少し入っても、タイトルの可読性を一定に保つ。
+      createElement('div', {
+        style: {
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          width: 820,
+          height: 630,
+          background:
+            'linear-gradient(90deg, rgba(248,250,252,0.99) 0%, rgba(248,250,252,0.95) 76%, rgba(248,250,252,0) 100%)',
+        },
+      }),
       // content column (left)
       createElement(
         'div',
         {
           style: {
             position: 'absolute',
-            left: 72,
-            top: 72,
-            width: 656,
-            height: 486,
+            left: 64,
+            top: 56,
+            width: 680,
+            height: 518,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
@@ -123,11 +205,11 @@ export function buildElement(
             'div',
             {
               style: {
-                padding: '4px 12px',
+                padding: '6px 14px',
                 background: BRAND.primary,
                 color: '#fff',
                 fontFamily: FONT_JP,
-                fontSize: 12,
+                fontSize: 16,
                 fontWeight: 800,
                 letterSpacing: 3,
               },
@@ -145,9 +227,9 @@ export function buildElement(
               style: {
                 fontFamily: FONT_JP,
                 fontWeight: 900,
-                fontSize: 48,
+                fontSize: typography.titleFontSize,
                 color: titleColor,
-                lineHeight: 1.25,
+                lineHeight: typography.titleLineHeight,
                 letterSpacing: -1,
               },
             },
@@ -162,13 +244,13 @@ export function buildElement(
               marginBottom: 16,
             },
           }),
-          data.subtitle
+          data.subtitle && typography.showSubtitle
             ? createElement(
                 'div',
                 {
                   style: {
                     fontFamily: FONT_JP,
-                    fontSize: 20,
+                    fontSize: 24,
                     color: mutedColor,
                     fontWeight: 500,
                     lineHeight: 1.5,
@@ -187,7 +269,7 @@ export function buildElement(
             {
               style: {
                 fontWeight: 900,
-                fontSize: 18,
+                fontSize: 22,
                 color: titleColor,
                 fontFamily: FONT_JP,
               },
@@ -199,7 +281,7 @@ export function buildElement(
             {
               style: {
                 fontWeight: 900,
-                fontSize: 18,
+                fontSize: 22,
                 color: '#fff',
                 background: BRAND.primary,
                 padding: '2px 7px',
@@ -213,7 +295,7 @@ export function buildElement(
             {
               style: {
                 fontFamily: FONT_JP,
-                fontSize: 12,
+                fontSize: 14,
                 color: mutedColor,
                 marginLeft: 10,
                 letterSpacing: 1,

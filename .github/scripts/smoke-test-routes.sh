@@ -103,8 +103,20 @@ for url in "${URLS[@]}" "${STRICT_URLS[@]}"; do
   strict=0
   for s in "${STRICT_URLS[@]}"; do [ "$url" = "$s" ] && strict=1; done
   checked=$((checked + 1))
-  body="$(curl -s -A "$UA" --max-time 30 -w '\n__HTTP__%{http_code}' "$url" 2>/dev/null)"
-  code="$(echo "$body" | sed -n 's/.*__HTTP__//p' | tail -1)"
+  # ★接続できなかった (curl の code=000) ときは再試行する。
+  #   デプロイ直後は Worker のロールアウトと warm-cache のバーストが重なり、数 URL が
+  #   一過性で応答しない (2026-08-21 の run 32461722593 で smoke 1 件 + warm-cache 2 件が
+  #   000。数分後に測り直すと全て 200 だった)。これを HTTP エラーと同じ扱いにすると
+  #   deploy が理由なく赤くなり、**本物の失敗を見ても誰も驚かなくなる**。
+  #   000 のときだけ間を置いて 2 回まで試す。
+  body=""
+  code="000"
+  for attempt in 1 2 3; do
+    body="$(curl -s -A "$UA" --max-time 30 -w '\n__HTTP__%{http_code}' "$url" 2>/dev/null)"
+    code="$(echo "$body" | sed -n 's/.*__HTTP__//p' | tail -1)"
+    [ "$code" != "000" ] && break
+    [ "$attempt" -lt 3 ] && echo "  ⏳ [000] ${url} — 接続できず ${attempt}/2 回目の再試行" && sleep 5
+  done
   title="$(echo "$body" | grep -o '<title>[^<]*</title>' | head -1 | sed 's/<[^>]*>//g')"
 
   if [ "$code" != "200" ]; then

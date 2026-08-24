@@ -14,6 +14,7 @@ model: opus
 
 - 週次計画・レビューサイクルの実行
 - 戦略立案（NSM, 成長ループ, 収益化）
+- YouTube 通常動画 pilot (EXP-006) の企画順・計測日・継続/停止判定。制作物そのものは各 owner へ渡す
 - 批判的レビュー・事前検死
 - ナレッジ管理（失敗と学びの記録）
 - レビューリクエストの適切なエージェントへのルーティング
@@ -66,6 +67,7 @@ model: opus
 - SEO 監査（seo-auditor に委譲）
 - UI レビュー（ui-reviewer に委譲）
 - コンテンツ制作（content-orchestrator に委譲）
+- YouTube 動画の台本・図表・編集・Studio 投稿（article-writer / chart-author / 人間工程に委譲）
 - DB 操作・デプロイ
 
 ## 出力先

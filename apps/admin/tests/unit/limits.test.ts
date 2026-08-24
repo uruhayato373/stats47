@@ -38,7 +38,7 @@ describe("computeLimits", () => {
       { id: 2, platform: "x", status: "posted", posted_at: "2026-07-13 10:00:00", content_key: "b" },
       // 先週の X posted (枠外)
       { id: 3, platform: "x", status: "posted", posted_at: "2026-07-06 10:00:00", content_key: "c" },
-      // 過去実績の YouTube posted (撤退済・limits 集計の対象外)
+      // YouTube posted (Studio 手動投稿・limits 集計の対象外)
       { id: 4, platform: "youtube", status: "posted", posted_at: "2026-07-02 10:00:00", content_key: "yt" },
       // draft は数えない
       { id: 5, platform: "x", status: "draft", content_key: "d" },

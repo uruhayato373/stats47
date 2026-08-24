@@ -56,7 +56,11 @@ const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
   const { item } = await (await fetch(R2 + '/app/ranking/<RANKING_KEY>/item.json')).json();
   // demographic_attr / normalization_basis は廃止列。正規化は calculation.normalizationOptions を使う
   console.log(JSON.stringify({
-    ranking_key: item.rankingKey, title: item.title, unit: item.unit,
+    ranking_key: item.rankingKey,
+    canonical_title: item.rankingName || item.title,
+    reader_label: item.readerLabel || item.title,
+    hook: item.hook,
+    unit: item.unit,
     category_key: item.categoryKey, latest_year: item.latestYear,
     normalization_options: item.calculation?.normalizationOptions ?? null,
   }, null, 2));
@@ -137,6 +141,11 @@ const chartData = {
     source: 'post-note-ranking',
     generatedAt: new Date().toISOString()
   },
+  copy: {
+    canonicalTitle: '<CANONICAL_TITLE>',
+    readerLabel: '<READER_LABEL>',
+    hook: '<HOOK>'
+  },
   summary: {
     mean: <MEAN>,
     stddev: <STDDEV>,
@@ -176,8 +185,8 @@ A シリーズは量産型だが、レポートや辞書のような無機質な
 
 ```markdown
 ---
-title: "【<YEAR>年版】都道府県「<タイトル>」ランキング｜<意外性のあるポイント要約>"
-description: "<1位の県名>が<値><単位>で全国1位。最下位の<47位の県名>は<値><単位>で、その差は<倍率>倍。47都道府県の<タイトル>をランキングで紹介します。"
+title: "【<YEAR>年版】<HOOK> 1位は<1位の県名>｜都道府県ランキング"
+description: "<1位の県名>が<値><単位>で全国1位。最下位の<47位の県名>は<値><単位>。47都道府県の<READER_LABEL>を比較します。正式指標名は「<CANONICAL_TITLE>」です。"
 tags:
   - 都道府県ランキング
   - <タイトル関連タグ1>
@@ -187,6 +196,10 @@ tags:
   - 統計データ
   - 都道府県比較
 ---
+
+`subtitle`（例: `10歳以上`）がある場合、対象条件を省略せず
+`【<YEAR>年版・<SUBTITLE>】<HOOK> 1位は<1位の県名>｜都道府県ランキング`
+とする。
 
 <インパクトのある事実や問いかけで始める。定義から入らない。
 例: 「阪神・淡路大震災から30年。兵庫県は今も年収の3.3倍にあたる将来負担を背負い続けています。」
@@ -406,7 +419,7 @@ fs.mkdirSync(dir + '/note/images', { recursive: true });
 
 // data.json
 const data = {
-  categoryName: item.title,
+  categoryName: item.readerLabel || item.title,
   yearName: '<YEAR>年',
   unit: item.unit,
   data: rows.map((r, i) => ({
@@ -421,14 +434,19 @@ fs.writeFileSync(dir + '/data.json', JSON.stringify(data, null, 2));
 // ranking_items.json
 const itemMeta = {
   title: item.title,
+  readerLabel: item.readerLabel || item.title,
+  hook: item.hook,
   unit: item.unit,
   demographicAttr: item.demographic_attr || undefined,
   normalizationBasis: item.normalization_basis || undefined,
 };
 fs.writeFileSync(dir + '/ranking_items.json', JSON.stringify(itemMeta, null, 2));
 
-// caption.json (最低限)
-fs.writeFileSync(dir + '/instagram/caption.json', JSON.stringify({ hookText: '', displayTitle: item.title }));
+// caption.json (R2 item.json の読者向けコピーを全媒体で共有)
+fs.writeFileSync(dir + '/instagram/caption.json', JSON.stringify({
+  hookText: item.hook,
+  displayTitle: item.readerLabel || item.title,
+}));
 
 console.log('Data files generated for:', rankingKey);
 })();
@@ -451,6 +469,8 @@ try { itemMeta = JSON.parse(fs.readFileSync('../../.local/r2/sns/ranking/<RANKIN
 
 const props = {
   theme: 'light',
+  hookText: itemMeta.hook || '',
+  displayTitle: itemMeta.readerLabel || itemMeta.title || data.categoryName,
   meta: {
     title: itemMeta.title || data.categoryName,
     unit: itemMeta.unit || data.unit,

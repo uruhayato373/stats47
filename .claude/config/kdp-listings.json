@@ -764,9 +764,9 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-12/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S1-12/v1/cover.jpg",
-      "status": "draft",
+      "status": "listed",
       "asin": null,
-      "publishedAt": null,
+      "publishedAt": "2026-08-22",
       "draftId": "AMH6ZZXN3T35Y"
     },
     "K-S2-01": {
@@ -827,9 +827,9 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-01/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-01/v1/cover.jpg",
-      "status": "draft",
+      "status": "listed",
       "asin": null,
-      "publishedAt": null,
+      "publishedAt": "2026-08-22",
       "draftId": "A2UWQYBWVB2439"
     },
     "K-S2-02": {

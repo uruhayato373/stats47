@@ -1,6 +1,6 @@
 ---
 name: article-writer
-description: 1つのmetricを受け取って統計記事1本を完成させる専門エージェント。成果物はslug単位で分離し、並行実行が必要な場合は別worktreeで最大3体まで。
+description: 1つのmetricを受け取って統計記事1本を完成させる専門エージェント。YouTube通常動画pilotでは既存ランキング・ブログ・テーマを根拠に構成・台本・出典表を作る。成果物はslug単位で分離し、並行実行が必要な場合は別worktreeで最大3体まで。
 model: sonnet
 ---
 
@@ -15,6 +15,7 @@ model: sonnet
 - 原稿執筆 (callout・内部リンク・source-link をルール準拠で配置)
 - **`docs/21_ブログ記事原稿/<slug>/article.md` へのドラフト書き出し** (完全DBレス: article.md frontmatter が SSOT。公開は CI)
 - 一括リライト (`/brushup-blog --target batch`) — GSC 中位記事の rewrite を担当 (ユーザー指示時のみ、publish は blog-editor 経由)
+- **YouTube 通常動画 pilot (EXP-006) の構成・台本・出典表** — 既存コンテンツを根拠に6〜12分へ再構成。動画編集・公開は担当しない
 
 ## 担当しないこと (他スキルが対応)
 
@@ -23,6 +24,8 @@ model: sonnet
 | R2 への公開 push / all.json 再生成 / 本番 URL 確認 | `publish-blog.yml` (CI、`gh workflow run`) |
 | OG 画像・サムネイル生成 | `publish-blog.yml` の generate-blog-thumbnails step (article.md frontmatter から自動導出) |
 | SVG チャート生成 | `/generate-article-charts` |
+| YouTube 用図表素材 | `chart-author` |
+| 動画編集・YouTube Studio 投稿 | 人間工程 |
 | GSC データ集計・企画立案 | `/fetch-gsc-data` + `/draft-from-trend` |
 
 ## 起動方法

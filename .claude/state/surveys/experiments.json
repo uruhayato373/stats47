@@ -26,8 +26,48 @@
         "gsc.averagePosition": 25.43
       },
       "observations": {
-        "d7": null,
-        "d28": null,
+        "d7": {
+          "observedAt": "2026-08-22",
+          "window": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "values": {
+            "gsc.impressions": {
+              "value": 62,
+              "status": "measured-low"
+            },
+            "gsc.averagePosition": {
+              "value": null,
+              "status": "measured-low"
+            },
+            "gsc.ctr": {
+              "value": null,
+              "status": "measured-low"
+            }
+          }
+        },
+        "d28": {
+          "observedAt": "2026-08-22",
+          "window": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "values": {
+            "gsc.impressions": {
+              "value": 62,
+              "status": "measured-low"
+            },
+            "gsc.averagePosition": {
+              "value": null,
+              "status": "measured-low"
+            },
+            "gsc.ctr": {
+              "value": null,
+              "status": "measured-low"
+            }
+          }
+        },
         "d56": null
       },
       "verdict": "pending",
@@ -63,8 +103,56 @@
         "gsc.averagePosition": 10.16
       },
       "observations": {
-        "d7": null,
-        "d28": null,
+        "d7": {
+          "observedAt": "2026-08-22",
+          "window": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "values": {
+            "gsc.clicks": {
+              "value": 1,
+              "status": "measured"
+            },
+            "gsc.impressions": {
+              "value": 518,
+              "status": "measured"
+            },
+            "gsc.averagePosition": {
+              "value": 9.52,
+              "status": "measured"
+            },
+            "gsc.ctr": {
+              "value": 0.0019,
+              "status": "measured"
+            }
+          }
+        },
+        "d28": {
+          "observedAt": "2026-08-22",
+          "window": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "values": {
+            "gsc.clicks": {
+              "value": 1,
+              "status": "measured"
+            },
+            "gsc.impressions": {
+              "value": 518,
+              "status": "measured"
+            },
+            "gsc.averagePosition": {
+              "value": 9.52,
+              "status": "measured"
+            },
+            "gsc.ctr": {
+              "value": 0.0019,
+              "status": "measured"
+            }
+          }
+        },
         "d56": null
       },
       "verdict": "pending",

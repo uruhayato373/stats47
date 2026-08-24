@@ -18,6 +18,7 @@
  *   [E8] subagent 委譲 skill が共通契約を参照し、同時起動上限 3 以下か
  *   [E9] agent/skill frontmatter に YAML として危険な plain scalar が無いか
  *   [E10] Claude Code → Codex MCP と blog画像skillの入口がSSOTどおりか
+ *   [E11] SNSチャネル方針 (YouTube master-first pilot / TikTok撤退) と生成経路が整合するか
  *   [W1] .claude/scripts/** のスクリプトがどこからも参照されていない (orphan)
  *   [W2] 非 dead の SKILL.md が参照する packages/**|apps/** の scripts が存在しない (dead-skill 検知)
  *
@@ -519,6 +520,69 @@ function checkCodexMcpContract(findings, scope) {
   }
 }
 
+function checkSnsChannelPolicy(findings, scope) {
+  const files = {
+    rule: ".claude/rules/sns-content-standards.md",
+    batch: "apps/remotion/scripts/pipeline/render-sns-all.ts",
+    bcr: "apps/remotion/scripts/pipeline/render-bar-chart-race.ts",
+    compare: ".claude/skills/sns/generate-compare/reference/captions.md",
+    metrics: ".claude/skills/sns/update-sns-metrics/SKILL.md",
+  };
+  const relevant = Object.values(files);
+  if (scope && !relevant.some((file) => scope.has(file))) return;
+
+  const rule = readSafe(path.join(ROOT, files.rule));
+  // 汎用 fixture には SNS policy が無い。正典が存在する repository だけで契約を有効化する。
+  if (!rule) return;
+
+  const errors = [];
+  if (!rule.includes("| **YouTube** | **限定 pilot**")) {
+    errors.push([files.rule, "YouTube 限定 pilot のチャネル行が無い"]);
+  }
+  if (!rule.includes("通常動画をマスターコンテンツにする")) {
+    errors.push([files.rule, "YouTube master-first 契約が無い"]);
+  }
+  if (!rule.includes("| **TikTok** | **撤退 (恒久)**")) {
+    errors.push([files.rule, "TikTok 恒久撤退のチャネル行が無い"]);
+  }
+
+  const batch = readSafe(path.join(ROOT, files.batch));
+  for (const forbidden of [
+    "RankingYouTube-Short",
+    "RankingTikTok-Short",
+    'rankingDir, "youtube/stills"',
+    'rankingDir, "tiktok/stills"',
+  ]) {
+    if (batch.includes(forbidden)) {
+      errors.push([files.batch, `旧一括生成経路 '${forbidden}' が復活している`]);
+    }
+  }
+
+  const bcr = readSafe(path.join(ROOT, files.bcr));
+  if (bcr.includes('platform: "tiktok"')) {
+    errors.push([files.bcr, "BCR の TikTok 自動生成が復活している"]);
+  }
+  if (bcr && !bcr.includes('new Set(["instagram", "x"])')) {
+    errors.push([files.bcr, "BCR --platform の IG/X allowlist が無い"]);
+  }
+
+  const compare = readSafe(path.join(ROOT, files.compare));
+  for (const forbidden of ["youtube/shorts.json", "tiktok/caption.json"] ) {
+    if (compare.includes(forbidden)) {
+      errors.push([files.compare, `比較キャプションの旧出力 '${forbidden}' が復活している`]);
+    }
+  }
+
+  const metrics = readSafe(path.join(ROOT, files.metrics));
+  if (metrics && (!metrics.includes("YouTube pilot") || !metrics.includes("Studio"))) {
+    errors.push([files.metrics, "YouTube pilot の Studio 手動計測契約が無い"]);
+  }
+
+  for (const [file, msg] of errors) {
+    findings.push({ level: "error", code: "E11", file, msg });
+  }
+}
+
 function checkOrphanScripts(findings) {
   // ★.ts を入れる (2026-08-21)。参照の抽出側 (L364 等) は最初から .ts を見ていたのに、
   //   orphan 走査だけが .ts を歩いておらず、`.claude/scripts/**/*.ts` は**一度も検査されていなかった**。
@@ -728,6 +792,7 @@ function runChecks({ orphan, scope }) {
     checkHookFiles(findings);
   }
   checkCodexMcpContract(findings, scope);
+  checkSnsChannelPolicy(findings, scope);
   if (orphan) checkOrphanScripts(findings);
   return findings;
 }

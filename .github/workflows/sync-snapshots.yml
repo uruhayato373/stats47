@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       only:
-        description: '対象 task (空=全 task)。正典は run.sh の TASKS 配列 (.claude/skills/db/sync-snapshots/run.sh)。例: ranking-items / calculated-stats / ranking-values / ranking-normalized-values / master / page-components / blog / area-profile'
+        description: '対象 task (空=全 task)。正典は run.sh の TASKS 配列。例: municipality-ranking / ranking-items / ranking-values / page-components / blog'
         required: false
         default: ''
       dry_run:
@@ -122,6 +122,9 @@ jobs:
           fi
           if [ -z "$ONLY" ] || [ "$ONLY" = "affiliate-ads" ]; then
             npx tsx apps/web/scripts/verify-affiliate-ads-snapshot.ts
+          fi
+          if [ -z "$ONLY" ] || [ "$ONLY" = "municipality-ranking" ]; then
+            npm run verify:municipality-ranking --workspace=@stats47/ranking
           fi
 
       - name: 🧹 Purge Workers Cache after snapshot sync

@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-13",
+  "generatedAt": "2026-08-22",
   "linkage": {
-    "auditedAt": "2026-07-13",
-    "metrics": 2235,
-    "resolved": 1984,
-    "unresolved": 251,
-    "coveragePct": 88.8,
+    "auditedAt": "2026-08-22",
+    "metrics": 2255,
+    "resolved": 2006,
+    "unresolved": 249,
+    "coveragePct": 89,
     "unresolvedByReason": {
-      "estat-uncovered": 56,
-      "ssds-synthetic-only": 134,
-      "external": 61
+      "estat-uncovered": 79,
+      "ssds-synthetic-only": 123,
+      "external": 47
     },
-    "uncoveredStatsDataIds": 50,
+    "uncoveredStatsDataIds": 49,
     "orphanSurveys": 0,
     "badOverrides": 0
   },
@@ -32,30 +32,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 14,
+          "impressions": 13,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 8
+          "landingPageViews": 5
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -79,30 +84,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 1,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -126,15 +136,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -143,20 +153,25 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 9
+      "liveItemCount": 11
     },
     {
       "surveyId": "agriculture-management-survey",
@@ -173,15 +188,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -190,13 +205,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -220,30 +240,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 16,
+          "impressions": 35,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 3
+          "landingPageViews": 9
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -267,30 +292,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 3,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -314,30 +344,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 3,
+          "impressions": 12,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -361,30 +396,35 @@
       "editorialContentExists": true,
       "readerQuestionCount": 5,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 70,
-          "clicks": 1
+          "impressions": 62,
+          "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 23
+          "landingPageViews": 12
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": "調査固有の編集ハブ (分かること/問い5件/注意) で指名系 query の表示と CTR が改善する",
@@ -393,7 +433,7 @@
       ],
       "lastReviewedAt": "2026-07-11",
       "nextReviewAt": "2026-08-09",
-      "liveItemCount": 300
+      "liveItemCount": 305
     },
     {
       "surveyId": "city-planning-survey",
@@ -410,30 +450,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 4,
+          "impressions": 78,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -457,30 +502,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 7,
+          "impressions": 6,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 11
+          "landingPageViews": 56
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -504,37 +554,42 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 4,
+          "impressions": 1,
           "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 3
+      "liveItemCount": 4
     },
     {
       "surveyId": "comprehensive-living-conditions-survey",
@@ -551,15 +606,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -568,13 +623,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -588,47 +648,52 @@
       "name": "建設工事受注動態統計調査",
       "organization": "国土交通省",
       "lifecycleStatus": "observe",
-      "linkageStatus": "ok",
+      "linkageStatus": "inactive-only",
       "editorialStatus": "fallback",
       "itemCount": 8,
-      "activeItemCount": 8,
+      "activeItemCount": 0,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 2,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 8
+      "liveItemCount": null
     },
     {
       "surveyId": "construction-work-statistics",
@@ -645,30 +710,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 16,
+          "impressions": 26,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -692,15 +762,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -709,13 +779,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -739,30 +814,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 6,
-          "clicks": 2
+          "impressions": 2,
+          "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 13
+          "landingPageViews": 2
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -786,37 +866,42 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 48,
+          "impressions": 97,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 6
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 35
+      "liveItemCount": 37
     },
     {
       "surveyId": "economic-census-basic",
@@ -833,37 +918,42 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 6,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 2
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 18
+      "liveItemCount": 19
     },
     {
       "surveyId": "employment-structure-survey",
@@ -880,30 +970,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 61,
+          "impressions": 15,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 7
+          "landingPageViews": 6
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -927,30 +1022,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 6,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -974,30 +1074,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 18,
+          "impressions": 11,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 2
+          "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1021,30 +1126,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 1,
+          "impressions": 5,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 2
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1068,30 +1178,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 16,
+          "impressions": 62,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1115,15 +1230,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -1132,13 +1247,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 4
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1162,15 +1282,68 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
+          ],
+          "impressions": 1,
+          "clicks": 0
+        },
+        "ga4": {
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "landingPageViews": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 7
+    },
+    {
+      "surveyId": "freight-regional-flow-survey",
+      "name": "貨物地域流動調査",
+      "organization": "国土交通省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
+      "metrics": {
+        "gsc": {
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -1179,20 +1352,24 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01",
-      "liveItemCount": 7
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "health-admin-report",
@@ -1209,30 +1386,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 1,
+          "impressions": 5,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1256,30 +1438,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 77,
+          "impressions": 33,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1303,37 +1490,42 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
-          "clicks": 0
+          "impressions": 8,
+          "clicks": 2
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 14
+          "landingPageViews": 22
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 19
+      "liveItemCount": 23
     },
     {
       "surveyId": "housing-land-survey",
@@ -1350,30 +1542,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 35,
+          "impressions": 13,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 8
+          "landingPageViews": 2
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1397,15 +1594,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -1414,13 +1611,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1444,30 +1646,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 2,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1491,15 +1698,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -1508,20 +1715,25 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 5
+      "liveItemCount": 8
     },
     {
       "surveyId": "japan-post-statistics",
@@ -1538,30 +1750,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 7,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1585,30 +1802,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 12,
+          "impressions": 25,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1632,32 +1854,38 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "measured",
-          "windowDays": 56,
-          "weeks": [
-            "2026-W24",
-            "2026-W28"
-          ],
-          "impressions": 142,
-          "clicks": 1,
-          "ctr": 0.007,
-          "averagePosition": 9.15
-        },
-        "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 90
+          "impressions": 90,
+          "clicks": 2
+        },
+        "ga4": {
+          "status": "measured",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "landingPageViews": 144,
+          "activeUsersLast28d": 18,
+          "engagementRatePvWeighted": 0.8616,
+          "avgSessionDurationSecPvWeighted": 127
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1683,15 +1911,68 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
+          ],
+          "impressions": 7,
+          "clicks": 0
+        },
+        "ga4": {
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "landingPageViews": 2
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 9
+    },
+    {
+      "surveyId": "late-elderly-medical-annual-report",
+      "name": "後期高齢者医療事業年報",
+      "organization": "厚生労働省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 1,
+      "activeItemCount": 1,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
+      "metrics": {
+        "gsc": {
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -1700,20 +1981,24 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01",
-      "liveItemCount": 9
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "livestock-statistics",
@@ -1730,15 +2015,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 5,
           "clicks": 0
@@ -1747,13 +2032,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1777,30 +2067,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 1,
+          "impressions": 3,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1817,37 +2112,42 @@
       "linkageStatus": "ok",
       "editorialStatus": "candidate",
       "itemCount": 133,
-      "activeItemCount": 133,
+      "activeItemCount": 132,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 93,
-          "clicks": 2
+          "impressions": 22,
+          "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 10
+          "landingPageViews": 15
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1856,7 +2156,7 @@
       ],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 129
+      "liveItemCount": 137
     },
     {
       "surveyId": "local-gov-staffing-survey",
@@ -1873,30 +2173,37 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
-          "clicks": 0
+          "impressions": 127,
+          "clicks": 0,
+          "ctr": 0,
+          "averagePosition": 9.28
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1920,30 +2227,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 1,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -1967,30 +2279,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 1,
+          "impressions": 0,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 3
+          "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2014,15 +2331,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -2031,13 +2348,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2061,37 +2383,42 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
-          "clicks": 0
+          "impressions": 31,
+          "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 22
+      "liveItemCount": 29
     },
     {
       "surveyId": "national-household-survey",
@@ -2101,22 +2428,75 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 22,
-      "activeItemCount": 21,
+      "activeItemCount": 20,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
+          ],
+          "impressions": 3,
+          "clicks": 0
+        },
+        "ga4": {
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "landingPageViews": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 20
+    },
+    {
+      "surveyId": "national-medical-expenditure",
+      "name": "国民医療費",
+      "organization": "厚生労働省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
+      "metrics": {
+        "gsc": {
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -2125,20 +2505,24 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01",
-      "liveItemCount": 21
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "natural-park-area",
@@ -2155,32 +2539,37 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 112,
+          "impressions": 177,
           "clicks": 0,
           "ctr": 0,
-          "averagePosition": 6.76
+          "averagePosition": 6.84
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2204,15 +2593,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -2221,13 +2610,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2244,44 +2638,101 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 3,
-      "activeItemCount": 3,
+      "activeItemCount": 2,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 43,
+          "impressions": 32,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 1
+          "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 3
+      "liveItemCount": 2
+    },
+    {
+      "surveyId": "pension-insurance-annual-report",
+      "name": "厚生年金保険・国民年金事業年報",
+      "organization": "厚生労働省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 4,
+      "activeItemCount": 4,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
+      "metrics": {
+        "gsc": {
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "impressions": 0,
+          "clicks": 0
+        },
+        "ga4": {
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "landingPageViews": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "physician-survey",
@@ -2298,30 +2749,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 1,
+          "impressions": 0,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2345,30 +2801,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 26,
+          "impressions": 39,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 3
+          "landingPageViews": 2
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2392,30 +2853,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 8,
+          "impressions": 7,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 36
+          "landingPageViews": 22
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2439,15 +2905,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -2456,13 +2922,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": "7指標 (projected-population-2020..2050) すべて isActive:false = 未公開在庫。R2 不在は正常 (inactive-only)。公開判断は ranking-expander の需要ファーストキュー",
@@ -2472,6 +2943,58 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": null
+    },
+    {
+      "surveyId": "port-statistics",
+      "name": "港湾調査（港湾統計年報）",
+      "organization": "国土交通省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "fallback",
+      "itemCount": 3,
+      "activeItemCount": 3,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
+      "metrics": {
+        "gsc": {
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "impressions": 0,
+          "clicks": 0
+        },
+        "ga4": {
+          "status": "measured-low",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ],
+          "landingPageViews": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "prefectural-accounts",
@@ -2488,37 +3011,42 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 38,
+          "impressions": 11,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 23
+          "landingPageViews": 14
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 11
+      "liveItemCount": 16
     },
     {
       "surveyId": "prefectural-land-price-survey",
@@ -2535,15 +3063,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -2552,13 +3080,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2575,44 +3108,49 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 122,
-      "activeItemCount": 122,
+      "activeItemCount": 121,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 2,
+          "impressions": 20,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 3
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 122
+      "liveItemCount": 121
     },
     {
       "surveyId": "public-assistance-survey",
@@ -2629,15 +3167,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -2646,13 +3184,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2676,30 +3219,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 2,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2723,30 +3271,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 20,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2770,37 +3323,42 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 31,
-          "clicks": 0
+          "impressions": 10,
+          "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 6
+          "landingPageViews": 5
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 68
+      "liveItemCount": 74
     },
     {
       "surveyId": "school-health-survey",
@@ -2817,30 +3375,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 32,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 2
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2864,15 +3427,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -2881,13 +3444,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -2904,44 +3472,49 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 36,
-      "activeItemCount": 36,
+      "activeItemCount": 35,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 24,
-          "clicks": 1
+          "impressions": 4,
+          "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 3
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 36
+      "liveItemCount": 35
     },
     {
       "surveyId": "social-life-basic-survey",
@@ -2950,38 +3523,43 @@
       "lifecycleStatus": "editorial-candidate",
       "linkageStatus": "ok",
       "editorialStatus": "candidate",
-      "itemCount": 99,
-      "activeItemCount": 99,
+      "itemCount": 107,
+      "activeItemCount": 107,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 44,
+          "impressions": 48,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 25
+          "landingPageViews": 20
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -3007,30 +3585,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 2,
+          "impressions": 5,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -3054,30 +3637,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 56,
+          "impressions": 17,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -3093,38 +3681,43 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
-      "itemCount": 1,
-      "activeItemCount": 1,
+      "itemCount": 10,
+      "activeItemCount": 10,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 23,
+          "impressions": 20,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 2
+          "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -3148,30 +3741,37 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 39,
-          "clicks": 0
+          "impressions": 303,
+          "clicks": 4,
+          "ctr": 0.0132,
+          "averagePosition": 7.77
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 4
+          "landingPageViews": 12
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -3195,30 +3795,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 9,
-          "clicks": 0
+          "impressions": 10,
+          "clicks": 1
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 2
+          "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -3242,32 +3847,37 @@
       "editorialContentExists": true,
       "readerQuestionCount": 5,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 809,
+          "impressions": 518,
           "clicks": 1,
-          "ctr": 0.0012,
-          "averagePosition": 10.16
+          "ctr": 0.0019,
+          "averagePosition": 9.52
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 20
+          "landingPageViews": 23
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": "職種別年収の指名検索意図 (大工/SW作成者/理学療法士等) に編集ハブで応えると CTR 0.22% が改善する",
@@ -3294,30 +3904,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 6,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 2
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -3341,30 +3956,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 1,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -3388,30 +4008,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
-          "clicks": 0
+          "impressions": 10,
+          "clicks": 2
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 0
+          "landingPageViews": 1
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -3435,15 +4060,15 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "impressions": 0,
           "clicks": 0
@@ -3452,13 +4077,18 @@
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "landingPageViews": 6
+          "landingPageViews": 34
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -3482,30 +4112,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 0,
+          "impressions": 6,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,
@@ -3529,30 +4164,35 @@
       "editorialContentExists": false,
       "readerQuestionCount": null,
       "relatedArticleCount": null,
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
-      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W33/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W33/pages.csv",
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
-          "impressions": 9,
+          "impressions": 10,
           "clicks": 0
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W24",
-            "2026-W28"
+            "2026-W29",
+            "2026-W33"
           ],
           "landingPageViews": 0
         },
         "internalNav": {
-          "status": "not-instrumented"
+          "status": "insufficient-data",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W29",
+            "2026-W33"
+          ]
         }
       },
       "currentHypothesis": null,

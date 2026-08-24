@@ -1,19 +1,21 @@
 export type HeaderNavKey =
-  | "ranking"
-  | "category"
-  | "areas"
-  | "themes"
-  | "blog";
+  | 'ranking'
+  | 'category'
+  | 'areas'
+  | 'municipalities'
+  | 'themes'
+  | 'blog';
 
 const ROUTES: ReadonlyArray<{
   key: HeaderNavKey;
   root: `/${string}`;
 }> = [
-  { key: "ranking", root: "/ranking" },
-  { key: "category", root: "/category" },
-  { key: "areas", root: "/areas" },
-  { key: "themes", root: "/themes" },
-  { key: "blog", root: "/blog" },
+  { key: 'ranking', root: '/ranking' },
+  { key: 'category', root: '/category' },
+  { key: 'areas', root: '/areas' },
+  { key: 'municipalities', root: '/municipalities' },
+  { key: 'themes', root: '/themes' },
+  { key: 'blog', root: '/blog' },
 ];
 
 function isRoute(pathname: string, root: string): boolean {

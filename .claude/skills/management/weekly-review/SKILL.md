@@ -21,6 +21,14 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 既存snapshotがあれば再生成しない。上書きが必要な根拠がある時だけ`--force`を使う。
 
+続けてGSC入力契約を検査する。
+
+```bash
+node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input --week [YYYY-Www]
+```
+
+FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成前なので、この段階ではreview/planの欠落自体は検査しない。
+
 ## Phase 1: 実績収集
 
 収集専用subagentは起動せず、以下5trackを同一セッションの並列tool callで読む。
@@ -55,6 +63,7 @@ GSC/GA4は次の用途を混在させない。
 6. search-growth候補は最大3件（technical/blocker、acquisition/content、measurementを原則各1件）だけ審査する。
 7. CTR候補はpage×query、現行title/content、past effectを確認する。大量title書換えを提案しない。
 8. 候補は人間承認前に改善バックログへ追加しない。active施策のWIPは5以下を守る。
+9. gsc/coverage/inspectionがfreshで候補がある週は、最大3件を審査し、最低1件を`search-growth:approve`または`search-growth:dismiss`で記録する。採用を強制せず、採用しない場合もdismiss理由を残す。
 
 ## Phase 3: 記録
 
@@ -72,6 +81,14 @@ GSC/GA4は次の用途を混在させない。
 恒久的な失敗知見だけを`/knowledge`へ渡す。改善施策statusの更新は`improvement-triage`へ渡す。
 `.claude/todo/weekly.md`はレビュー中に書き換えない。
 
+保存後に接続ゲートを実行する。
+
+```bash
+node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review --week [YYYY-Www] --write --strict
+```
+
+FAILが残る場合はレビューを「完了」と報告せず、出力された次アクションをBlockersに残す。
+
 ## Phase 4: 次週計画
 
 レビュー保存後、ユーザーの依頼範囲に週次計画が含まれる場合だけ`/weekly-plan`を実行する。
@@ -84,6 +101,7 @@ GSC/GA4は次の用途を混在させない。
 - 実測の無い数値・効果・完了を記録していない。
 - search-growth候補は最大3件で、未承認候補を`.claude/todo/improvements.md`へ自動追加していない。
 - current-weekの未完了項目を申し送りへ反映している。
+- GSC証拠がfreshで候補がある場合、approve/dismissが最低1件記録されている。
 - 保存先が`reference/reviews/YYYY-Www.md`である。
 
 ## Output Contract

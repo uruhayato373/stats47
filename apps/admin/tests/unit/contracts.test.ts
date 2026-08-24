@@ -74,7 +74,7 @@ describe("WritePlatform enum (書込側は厳密)", () => {
     expect(WritePlatform.safeParse("x").success).toBe(true);
     expect(WritePlatform.safeParse("instagram").success).toBe(true);
   });
-  it("note / tiktok / youtube は拒否 (YouTube は撤退済で新規作成不可)", () => {
+  it("note / tiktok / youtube は拒否 (YouTube pilot は Studio 手動投稿)", () => {
     expect(WritePlatform.safeParse("note").success).toBe(false);
     expect(WritePlatform.safeParse("tiktok").success).toBe(false);
     expect(WritePlatform.safeParse("youtube").success).toBe(false);

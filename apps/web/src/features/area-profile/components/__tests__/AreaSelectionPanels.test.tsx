@@ -20,7 +20,7 @@ beforeEach(() => {
 
 describe('AreaSelectionPanels', () => {
   it('既定タブが『一覧から探す』(list) である', () => {
-    render(<AreaSelectionPanels {...data} />);
+    render(<AreaSelectionPanels {...data} surface="areas" />);
     expect(screen.getByRole('tab', { name: '一覧から探す' })).toHaveAttribute(
       'aria-selected',
       'true'
@@ -32,7 +32,7 @@ describe('AreaSelectionPanels', () => {
   });
 
   it('一覧リンククリックで areas_list を計測する', () => {
-    render(<AreaSelectionPanels {...data} />);
+    render(<AreaSelectionPanels {...data} surface="areas" />);
     // 一覧 (nav) 内の東京都リンクをクリック (地図タイルと区別する)
     const nav = screen.getAllByRole('navigation', { name: '都道府県一覧' })[0];
     fireEvent.click(
@@ -44,7 +44,7 @@ describe('AreaSelectionPanels', () => {
   });
 
   it('地図タイルクリックで areas_map を計測する', () => {
-    render(<AreaSelectionPanels {...data} />);
+    render(<AreaSelectionPanels {...data} surface="areas" />);
     // 地図 (group) 内の東京都タイルをクリック (一覧リンクと区別する)
     const mapGroup = screen.getAllByRole('group', {
       name: '地図から都道府県を選ぶ',
@@ -58,7 +58,7 @@ describe('AreaSelectionPanels', () => {
   });
 
   it('モバイル用に一覧/地図の2タブを備える', () => {
-    render(<AreaSelectionPanels {...data} />);
+    render(<AreaSelectionPanels {...data} surface="areas" />);
     const tabs = screen.getAllByRole('tab');
     expect(tabs).toHaveLength(2);
     expect(
@@ -73,7 +73,7 @@ describe('AreaSelectionPanels', () => {
     render(
       <AreaDirectoryRegionProvider>
         <AreaDirectoryRegionNav regions={data.regionGroups} />
-        <AreaSelectionPanels {...data} />
+        <AreaSelectionPanels {...data} surface="areas" />
       </AreaDirectoryRegionProvider>
     );
     const regionNav = screen.getByRole('navigation', {
@@ -96,5 +96,33 @@ describe('AreaSelectionPanels', () => {
     expect(
       within(desktopDirectory).getByRole('region', { name: '関東' })
     ).not.toHaveClass('hidden');
+  });
+
+  it('embedded の地図・一覧クリックを配置別に計測する', () => {
+    render(
+      <AreaSelectionPanels
+        {...data}
+        variant="embedded"
+        surface="home"
+      />
+    );
+
+    const mapGroup = screen.getByRole('group', {
+      name: '地図から都道府県を選ぶ',
+    });
+    fireEvent.click(
+      within(mapGroup).getByRole('link', { name: '東京都の統計を見る' })
+    );
+    expect(trackMock).toHaveBeenCalledWith(
+      expect.objectContaining({ surface: 'home_area_map' })
+    );
+
+    const directory = screen.getByRole('navigation', { name: '都道府県一覧' });
+    fireEvent.click(
+      within(directory).getByRole('link', { name: '東京都の統計を見る' })
+    );
+    expect(trackMock).toHaveBeenCalledWith(
+      expect.objectContaining({ surface: 'home_area_list' })
+    );
   });
 });

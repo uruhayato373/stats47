@@ -1,7 +1,12 @@
 'use client';
 
+import Image from 'next/image';
+
 import {
   PORTAL_CARD_ASPECT_CLASS,
+  PORTAL_CARD_DESCRIPTION_CLASS,
+  PORTAL_CARD_PADDING_CLASS,
+  PORTAL_CARD_TITLE_CLASS,
   SurfaceLinkCard,
 } from '@/components/surface';
 
@@ -11,6 +16,7 @@ interface PortalNavCardProps {
   href: string;
   label: string;
   description?: string;
+  imageSrc: string;
 }
 
 /**
@@ -22,6 +28,7 @@ export function PortalNavCard({
   href,
   label,
   description,
+  imageSrc,
 }: PortalNavCardProps) {
   return (
     <SurfaceLinkCard
@@ -33,17 +40,29 @@ export function PortalNavCard({
           // analytics 失敗で遷移を止めない
         }
       }}
-      className={`${PORTAL_CARD_ASPECT_CLASS} group flex items-start gap-3 overflow-hidden`}
+      className={`${PORTAL_CARD_ASPECT_CLASS} ${PORTAL_CARD_PADDING_CLASS} group relative block overflow-hidden`}
     >
-      <span className="min-w-0">
-        <span className="block font-semibold text-foreground group-hover:text-primary">
+      <span className="relative z-10 block w-[60%] min-w-0">
+        <span className={PORTAL_CARD_TITLE_CLASS}>
           {label}
         </span>
         {description && (
-          <span className="mt-0.5 block line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+          <span className={`${PORTAL_CARD_DESCRIPTION_CLASS} mt-1 block`}>
             {description}
           </span>
         )}
+      </span>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-1 right-1 h-[70%] w-[48%]"
+      >
+        <Image
+          src={imageSrc}
+          alt=""
+          fill
+          sizes="(min-width: 1280px) 110px, (min-width: 1024px) 120px, (min-width: 640px) 160px, 40vw"
+          className="object-contain object-right-bottom"
+        />
       </span>
     </SurfaceLinkCard>
   );

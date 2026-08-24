@@ -1,19 +1,1221 @@
 {
-  "generatedAt": "2026-08-15T19:26:56.426Z",
+  "generatedAt": "2026-08-22T19:24:52.878Z",
   "origin": "https://stats47.jp",
   "mode": "per-route:10",
-  "pagesCrawled": 91,
-  "pagesKnown": 4489,
-  "uniqueTargets": 2965,
+  "pagesCrawled": 121,
+  "pagesKnown": 5584,
+  "uniqueTargets": 3361,
   "statusCount": {
-    "200": 2955,
-    "301": 10
+    "200": 3231,
+    "301": 10,
+    "410": 120
   },
-  "brokenCount": 5,
+  "brokenCount": 125,
   "brokenByRoute": {
+    "/areas/[c]/[theme]": 120,
     "/ranking/[k]": 5
   },
   "broken": [
+    {
+      "target": "/areas/01100/climate",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01100/education-culture",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01100/foreign-residents",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01100/healthcare",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01100/labor-wages",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01100/living-housing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01100/local-economy",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01100/local-finance",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01100/manufacturing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01100/population-dynamics",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01100/safety",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/01100/tourism",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/01000/cities/01100"
+      ]
+    },
+    {
+      "target": "/areas/05206/climate",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/05206/education-culture",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/05206/foreign-residents",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/05206/healthcare",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/05206/labor-wages",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/05206/living-housing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/05206/local-economy",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/05206/local-finance",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/05206/manufacturing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/05206/population-dynamics",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/05206/safety",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/05206/tourism",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/05000/cities/05206"
+      ]
+    },
+    {
+      "target": "/areas/18209/climate",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/18209/education-culture",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/18209/foreign-residents",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/18209/healthcare",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/18209/labor-wages",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/18209/living-housing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/18209/local-economy",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/18209/local-finance",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/18209/manufacturing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/18209/population-dynamics",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/18209/safety",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/18209/tourism",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/18000/cities/18209"
+      ]
+    },
+    {
+      "target": "/areas/20202/climate",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20202/education-culture",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20202/foreign-residents",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20202/healthcare",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20202/labor-wages",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20202/living-housing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20202/local-economy",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20202/local-finance",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20202/manufacturing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20202/population-dynamics",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20202/safety",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/20202/tourism",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/20000/cities/20202"
+      ]
+    },
+    {
+      "target": "/areas/21220/climate",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/21220/education-culture",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/21220/foreign-residents",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/21220/healthcare",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/21220/labor-wages",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/21220/living-housing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/21220/local-economy",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/21220/local-finance",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/21220/manufacturing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/21220/population-dynamics",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/21220/safety",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/21220/tourism",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/21000/cities/21220"
+      ]
+    },
+    {
+      "target": "/areas/25209/climate",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/25209/education-culture",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/25209/foreign-residents",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/25209/healthcare",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/25209/labor-wages",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/25209/living-housing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/25209/local-economy",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/25209/local-finance",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/25209/manufacturing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/25209/population-dynamics",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/25209/safety",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/25209/tourism",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/25000/cities/25209"
+      ]
+    },
+    {
+      "target": "/areas/32206/climate",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/32206/education-culture",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/32206/foreign-residents",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/32206/healthcare",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/32206/labor-wages",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/32206/living-housing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/32206/local-economy",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/32206/local-finance",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/32206/manufacturing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/32206/population-dynamics",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/32206/safety",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/32206/tourism",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/32000/cities/32206"
+      ]
+    },
+    {
+      "target": "/areas/36208/climate",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/36208/education-culture",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/36208/foreign-residents",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/36208/healthcare",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/36208/labor-wages",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/36208/living-housing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/36208/local-economy",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/36208/local-finance",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/36208/manufacturing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/36208/population-dynamics",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/36208/safety",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/36208/tourism",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/36000/cities/36208"
+      ]
+    },
+    {
+      "target": "/areas/38203/climate",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/38203/education-culture",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/38203/foreign-residents",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/38203/healthcare",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/38203/labor-wages",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/38203/living-housing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/38203/local-economy",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/38203/local-finance",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/38203/manufacturing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/38203/population-dynamics",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/38203/safety",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/38203/tourism",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/38000/cities/38203"
+      ]
+    },
+    {
+      "target": "/areas/44202/climate",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
+    {
+      "target": "/areas/44202/education-culture",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
+    {
+      "target": "/areas/44202/foreign-residents",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
+    {
+      "target": "/areas/44202/healthcare",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
+    {
+      "target": "/areas/44202/labor-wages",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
+    {
+      "target": "/areas/44202/living-housing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
+    {
+      "target": "/areas/44202/local-economy",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
+    {
+      "target": "/areas/44202/local-finance",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
+    {
+      "target": "/areas/44202/manufacturing",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
+    {
+      "target": "/areas/44202/population-dynamics",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
+    {
+      "target": "/areas/44202/safety",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
+    {
+      "target": "/areas/44202/tourism",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/areas/44000/cities/44202"
+      ]
+    },
     {
       "target": "/ranking/current-balance-ratio-city",
       "status": 200,

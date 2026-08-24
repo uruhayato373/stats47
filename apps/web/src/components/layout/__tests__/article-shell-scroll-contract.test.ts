@@ -20,7 +20,14 @@ describe("right rail scroll contract", () => {
     // 寸法を変える変更もここで一度止まるので、意図した変更かを必ず確認できる
     // 316px は PageShell と共通。300×250 バナーは Card なしで等倍表示する。
     expect(source).toContain(
-      'className="hidden w-[316px] shrink-0 lg:flex lg:flex-col lg:gap-3"',
+      'className="hidden w-[316px] shrink-0 lg:flex lg:self-stretch lg:flex-col lg:gap-3"',
+    );
+
+    const asideStart = source.indexOf('<aside className="hidden w-[316px]');
+    const asideEnd = source.indexOf('</aside>', asideStart);
+    const asideSource = source.slice(asideStart, asideEnd);
+    expect(asideSource.indexOf('{railSticky &&')).toBeLessThan(
+      asideSource.lastIndexOf('{rail}')
     );
   });
 

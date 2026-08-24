@@ -101,6 +101,12 @@ primary_agent: strategy-advisor
   → 未完了 SEO 施策: `.Codex/todo/improvements.md`（status != done の行）
   → トレンド（改善中 / 悪化中 / 横ばい）を判定し計画に反映
 
+- GSC運用サイクル
+  ```bash
+  node .Codex/scripts/gsc/audit-operations-cycle.mjs --stage review-input
+  ```
+  → FAIL項目は今週のMust候補にする。特に前週review欠落、候補判断0件、確定verdict未反映を他の検索施策より先に閉じる
+
 出力形式: 「直近のパフォーマンス概況」「成長/停滞の兆候」
 注: API 呼び出しは行わない（`/weekly-review` が取得済みのデータを参照する）。
 ```
@@ -289,6 +295,14 @@ tags: []
 
 作成後、ファイルパスを報告する。前週のskill referenceレビューから引用した場合は、本文に対象週を明記する。
 
+保存後に次週接続ゲートを実行する。
+
+```bash
+node .Codex/scripts/gsc/audit-operations-cycle.mjs --stage plan --write --strict
+```
+
+FAILが残る場合は週次計画を「完了」と報告せず、GSC運用サイクルの未接続項目をMustへ反映して再実行する。
+
 ## 出力フォーマット（ファイル本文）
 
 ```markdown
@@ -330,6 +344,7 @@ tags: []
 | 公開記事数 | N | Sprint目標 |
 | SNS 投稿済み | N 件 | — |
 | 直近14日 imp (X) | N | — |
+| GSC運用サイクル | PASS/WARN/FAIL | FAIL 0 |
 
 ## トレンド機会
 

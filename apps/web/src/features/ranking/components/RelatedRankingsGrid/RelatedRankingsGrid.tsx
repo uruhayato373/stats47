@@ -64,9 +64,10 @@ export async function RelatedRankingsGrid({
       <div className="px-5 pb-5 pt-4">
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => {
+            const readerLabel = item.readerLabel ?? item.title;
             const title = item.subtitle
-              ? `${item.title}（${item.subtitle}）`
-              : item.title;
+              ? `${readerLabel}（${item.subtitle}）`
+              : readerLabel;
             const subtitle = [item.demographicAttr, item.normalizationBasis]
               .filter(Boolean)
               .join(" / ");

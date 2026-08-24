@@ -7,7 +7,8 @@ import { weekStartJst, jstDateStr } from "./time";
 /**
  * 頻度リミットの残枠計算 (旧 server.mjs の LIMITS / computeLimits を忠実移植)。
  * 正典: sns-content-standards.md §1。値は旧実装と同一に保つ (x/ig=週3)。
- * YouTube は撤退済のため対象外 (過去実績は posts.json に platform=youtube のまま残す)。
+ * YouTube pilot は Studio からの手動投稿で、管理画面の予約枠対象外
+ * (過去実績と pilot 実績は posts.json に platform=youtube で残す)。
  */
 const LIMITS = {
   x: { per: "week", max: 3, label: "X 週2-3" },

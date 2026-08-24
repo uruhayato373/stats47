@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-16T00:00:00.000Z",
+  "updated_at": "2026-08-22T21:49:44.689Z",
   "experiments": [
     {
       "id": "EXP-001",
@@ -354,6 +354,216 @@
           "summary": "EXP-004 close (result=NONE) を受けて立案。LCP 要素特定を先行させる調査 phase。Phase 2 では要素タイプ別の対策を別実験で行う。"
         }
       ]
+    },
+    {
+      "id": "EXP-006",
+      "title": "YouTube通常動画マスター型パイロット（3本/6週間）",
+      "hypothesis": "ランキング・ブログ・テーマを横断した6〜12分の編集動画をマスターとして3型制作し、Instagram/Xへ派生すれば、Shorts量産や投稿自動化を復活させずに、再現可能な視聴維持とSNS経由のエンゲージドセッションを作れる。",
+      "target_metric": "youtube_intro_retention_30s / youtube_average_percentage_viewed / ga4_youtube_engaged_sessions / production_hours_per_master",
+      "target_delta": "3本公開、2/3本が公開14日で100 views以上、対象動画の30秒維持率中央値50%以上、平均視聴率35%以上（内部仮説値）、YouTube UTM engaged sessions合計10以上、各masterからIG/X各2〜4本を派生",
+      "rubric": {
+        "impact": 1,
+        "effort": 0,
+        "learning": 3,
+        "certainty": 1,
+        "weighted": 1.1,
+        "verdict": "owner_override",
+        "reason": "通常の採用閾値1.5未満だが、オーナーが恒久撤退の撤回と少数展開を明示。収益施策ではなく高学習価値の限定pilotとして開始する。"
+      },
+      "baseline": {
+        "date": "2026-08-23",
+        "source": "metrics-reader.mjs --json (2026-W34, Japan-only finalized7d)",
+        "ga4_period": "2026-08-16..2026-08-22",
+        "ga4_total_sessions": 3911,
+        "ga4_total_engaged_sessions": 2422,
+        "ga4_organic_social_sessions": 21,
+        "ga4_organic_social_engaged_sessions": 12,
+        "youtube_current_baseline": null,
+        "youtube_baseline_note": "OAuth/APIは撤去済み。pilot開始時にYouTube Studioでチャンネル状態と直近28日中央値を人間が記録する。"
+      },
+      "status": "running",
+      "created_at": "2026-08-22T21:39:54.195Z",
+      "started_at": "2026-08-22T21:39:54.198Z",
+      "result": null,
+      "learnings": null,
+      "closed_at": null,
+      "actions": [
+        "[done] 恒久撤退を限定pilotへ変更し、rules/docs/agent/skill/admin/R2保持のSSOTをmaster-firstで統一",
+        "[done] 旧Remotion一括レンダからYouTube Shorts/TikTok生成を除外し、BCRをIG/X限定にした",
+        "[next] YouTube Studioへのアクセス、チャンネル状態、直近28日のviews/視聴維持/登録者を手動確認",
+        "[next] 1本目『給料が高い県＝豊か？物価を引いた実質収入で見る47都道府県』の構成・台本・出典表を作る",
+        "[planned] 2本目『子育てしやすい県はどこ？所得・住宅・保育を横断』を制作",
+        "[planned] 3本目『納豆王国は水戸じゃない？支出と消費で変わる1位』を制作",
+        "[planned] 各masterからInstagram Reels / Xを各2〜4本派生し、posts.jsonでparent_post_id/source_timecodeを記録",
+        "[planned] 各公開14日後と最終2026-10-18にStudio/GA4/制作工数を計測して継続・修正・再撤退を判定"
+      ],
+      "pending_user_actions": [
+        "YouTube Studioにアクセスできるチャンネルの存在・所有権を確認する（削除済みなら新規作成は別途承認）",
+        "各動画を公開前に最終視聴し、YouTube Studioから手動投稿する"
+      ],
+      "next_check_date": "2026-09-06",
+      "history": [
+        {
+          "date": "2026-08-22T21:39:54.195Z",
+          "action": "proposed"
+        },
+        {
+          "date": "2026-08-22T21:39:54.198Z",
+          "action": "running",
+          "summary": "オーナー承認で恒久撤退を撤回。通常動画master-firstの限定pilotとして開始。外部公開と自動化は未実施。"
+        }
+      ],
+      "experiment_window": {
+        "start": "2026-08-23",
+        "last_publish_target": "2026-10-04",
+        "final_measurement": "2026-10-18"
+      },
+      "pilot_videos": [
+        {
+          "order": 1,
+          "slug": "real-income-prefectures",
+          "title": "給料が高い県＝豊か？物価を引いた実質収入で見る47都道府県",
+          "archetype": "wallet-paradox",
+          "master_format": "youtube-normal-6-12m",
+          "primary_url": "https://stats47.jp/themes/real-income",
+          "source_domains": [
+            "theme",
+            "ranking",
+            "blog"
+          ],
+          "metric_keys": [
+            "actual-income-worker-households-per-month",
+            "disposable-income-worker-households",
+            "consumer-price-difference-index-overall"
+          ],
+          "survey_ids": [
+            "household-survey",
+            "retail-price-survey"
+          ],
+          "lineage_status": "resolved",
+          "outline": [
+            "0:00 給料1位が暮らしやすさ1位とは限らない",
+            "0:30 実収入・可処分所得・物価指数の違い",
+            "2:00 名目収入の47県比較",
+            "4:00 物価を重ねると順位の見え方が変わる",
+            "6:30 高収入県と高購買力県の違い・指標の限界",
+            "8:00 自分の県をtheme/rankingで確認するCTA"
+          ],
+          "derivative_angles": [
+            "給料1位＝豊かではない30秒",
+            "実収入と可処分所得の違い45秒",
+            "物価を引くと浮上する県60秒"
+          ],
+          "target_publish_date": "2026-09-06",
+          "status": "script-next"
+        },
+        {
+          "order": 2,
+          "slug": "childcare-friendly-prefectures",
+          "title": "子育てしやすい県はどこ？所得・住宅・保育を横断",
+          "archetype": "decision-support",
+          "master_format": "youtube-normal-6-12m",
+          "primary_url": "https://stats47.jp/ranking/nursery-children-per-nursery-teacher",
+          "related_urls": [
+            "https://stats47.jp/ranking/certified-childcare-center-count-per-100k-0-5",
+            "https://stats47.jp/ranking/per-capita-child-welfare-expenditure-under17-pref-municipal"
+          ],
+          "source_domains": [
+            "ranking",
+            "theme",
+            "blog"
+          ],
+          "metric_keys": [
+            "certified-childcare-center-count-per-100k-0-5",
+            "nursery-children-per-nursery-teacher",
+            "per-capita-child-welfare-expenditure-under17-pref-municipal"
+          ],
+          "survey_ids": [
+            "census",
+            "social-welfare-facility-survey",
+            "local-finance",
+            "municipal-settlement-survey",
+            "prefectural-settlement-survey"
+          ],
+          "lineage_status": "resolved",
+          "demand_evidence": "GSC 2026-W34: 子育てしやすい県ランキング 12 clicks / 32 impressions / position 2.56",
+          "outline": [
+            "0:00 『子育てしやすい』を1指標で決めない",
+            "0:40 保育施設数・保育者負担・子ども福祉支出の定義",
+            "2:30 3指標の上位県と一致しない県",
+            "5:00 所得・住宅を重ねる際の注意",
+            "7:00 家庭ごとに重みが違うため総合順位を断定しない",
+            "8:30 3ランキングを比較するCTA"
+          ],
+          "derivative_angles": [
+            "保育園が多い県＝入りやすい県？",
+            "保育士1人あたりの子ども数で見る負担",
+            "子ども福祉支出が多い県の読み方"
+          ],
+          "target_publish_date": "2026-09-20",
+          "status": "brief-ready"
+        },
+        {
+          "order": 3,
+          "slug": "natto-kingdom-myth",
+          "title": "納豆王国は水戸じゃない？支出と消費で変わる1位",
+          "archetype": "culture-myth-busting",
+          "master_format": "youtube-normal-6-12m",
+          "primary_url": "https://stats47.jp/ranking/natto-consumption-expenditure",
+          "related_urls": [
+            "https://stats47.jp/blog/natto-consumption-expenditure",
+            "https://stats47.jp/blog/natto-consumption-east-west-divide",
+            "https://stats47.jp/blog/natto-production-vs-consumption"
+          ],
+          "source_domains": [
+            "ranking",
+            "blog"
+          ],
+          "metric_keys": [
+            "natto-consumption-expenditure"
+          ],
+          "survey_ids": [
+            "kakei-chousa"
+          ],
+          "lineage_status": "resolved",
+          "demand_evidence": "GSC 2026-W34: 納豆関連上位queryに32/26/12/12/10 clicks。rankingはindexed確認済み",
+          "outline": [
+            "0:00 納豆王国は水戸、という通説を問い直す",
+            "0:30 支出額・購入量・生産量は別の統計",
+            "2:00 家計調査の対象と都道府県庁所在市という注意",
+            "3:30 東北上位・関西下位の地理パターン",
+            "6:00 生産地と消費地が一致しない理由を仮説として整理",
+            "8:00 自分の県と東西境界の記事へCTA"
+          ],
+          "derivative_angles": [
+            "納豆支出1位は水戸ではない30秒",
+            "支出・消費・生産の違い45秒",
+            "納豆の東西境界60秒"
+          ],
+          "target_publish_date": "2026-10-04",
+          "status": "brief-ready"
+        }
+      ],
+      "success_criteria": {
+        "masters_published": 3,
+        "videos_with_100_views_min": "2/3 by day 14",
+        "median_intro_retention_30s_min": 0.5,
+        "average_percentage_viewed_min_internal_hypothesis": 0.35,
+        "ga4_youtube_engaged_sessions_total_min": 10,
+        "derivatives_per_master_per_platform": "2-4",
+        "derivative_success": "各masterにつき最低1本が対象platformのpilot開始前28日reach中央値を上回る"
+      },
+      "stop_conditions": [
+        "出典・単位・統計調査との紐付けに重大欠陥がある",
+        "最初の2本が各公開14日で100 views未満かつ30秒維持率30%未満",
+        "3本目まで制作フローを回してもmaster 1本の制作工数が12時間を超える",
+        "YouTube継続のためにpilot中のOAuth/API自動化が必須になる"
+      ],
+      "lineage_gate": {
+        "rule": "台本で使う metric は survey taxonomy resolved のものだけ。未解決の派生指標は解決するまで動画の数値根拠に使わない。",
+        "checked_at": "2026-08-23",
+        "result": "PASS (7 unique metric keys resolved)"
+      }
     }
   ]
 }

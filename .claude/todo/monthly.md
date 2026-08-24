@@ -2,7 +2,7 @@
 title: 今月の重点
 type: monthly-plan
 month: 2026-08
-updated: 2026-08-21
+updated: 2026-08-24
 status: active
 focus_themes:
   - 生成を無人ループから外し月次目標→週次割当で回す
@@ -53,6 +53,20 @@ ai-content は 08-01 以降増加 0 件。PR 34 件の大半が品質ゲート�
 **今月最も重要な 1 行**: PV は 4 週で +41.6% 伸びたのに earnings は横ばいで、page RPM が -20%、
 viewability が -15pp 落ちている。つまり**露出を増やしても収益に変換できていない**。
 ただし原因の切り分けは 8月には行わない（理由は「今月やらないこと」）。
+
+## GSC運用サイクル
+
+GSCは重点テーマ数に含めない健康管理の床とし、検索施策を採用しない月でも計測→review→判断→effectを止めない。
+
+| 項目 | 最新（2026-08-24監査） | 月内評価 | 次アクション |
+|---|---|---|---|
+| 計測→週次review | `origin/develop` snapshot W34 / review W33 | **FAIL**（1週未接続） | ローカル同期後に `/weekly-review 2026-W34` |
+| search-growth判断 | W34候補1,022件、approve/dismiss 0件 | **FAIL**（判断記録なし） | 最大3件を審査し、最低1件をapproveまたは理由付きdismiss |
+| effect判定 | W34 7件すべてpending | **WARN**（既知target欠落7件、新規0件） | 推測で補わず、終了または再計測を週次で判断 |
+| index coverage | URL Inspection日次は稼働 / 週次coverage表示は旧世代 | **WARN** | URL Inspectionとremediation queueを週次レビューの正典にする |
+
+機械監査は`.claude/state/metrics/gsc/operations-cycle-LATEST.{json,md}`、閾値は
+`.claude/config/gsc-operations-cycle.json`をSSOTとする。月曜20:30のworkflowがFAIL時だけ固定Issueを更新する。
 
 ## 今月の重点テーマ
 

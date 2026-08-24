@@ -118,7 +118,7 @@ export default function RankingIndexPage() {
                       {item.hook}
                     </p>
                     <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-                      {item.title}
+                      {item.readerLabel ?? item.title}
                       <ChevronRight className="size-3 transition-transform group-hover:translate-x-0.5" />
                     </span>
                   </Link>
@@ -167,7 +167,7 @@ export default function RankingIndexPage() {
                           href={`/ranking/${representative.rankingKey}`}
                           className="hover:text-primary hover:underline"
                         >
-                          {representative.title}
+                          {representative.readerLabel ?? representative.title}
                         </Link>
                       </li>
                     ))}

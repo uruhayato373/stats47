@@ -177,7 +177,7 @@ co_agents: [strategy-advisor]
 
 **教訓（恒常的に有効）**: OAuth 連携を増やすときは client を必ず "In production" に publish する。再び 7 日サイクルで失効する場合は publishing status が「テスト」に戻っていないか確認する（scope 変更で Testing に戻ることがある）。
 
-> 注: YouTube 連携は 2026-05 に完全撤退済み（PR #376）。当時の youtube OAuth runbook / 監視 workflow / `youtube/oauth-*` スクリプトは撤去済みのため本項からは削除した。現存する OAuth 連携は AdSense（`.claude/scripts/adsense/oauth-setup.js`）。
+> 注: YouTube の自動連携は 2026-05 に撤去済み（PR #376）。2026-08-23 に通常動画3本・6週間の手動 pilot (EXP-006) を開始したが、youtube OAuth runbook / 監視 workflow / `youtube/oauth-*` スクリプトは復活させない。現存する OAuth 連携は AdSense（`.claude/scripts/adsense/oauth-setup.js`）。
 
 ---
 

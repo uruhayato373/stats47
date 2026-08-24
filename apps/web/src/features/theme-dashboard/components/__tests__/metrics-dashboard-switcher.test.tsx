@@ -19,13 +19,14 @@ vi.mock("../MetricSwitcherPanel", () => ({
     title,
     defaultCheckedKeys,
   }: {
-    metrics: { metricKey: string }[];
+    metrics: { metricKey: string; title: string }[];
     title?: string;
     defaultCheckedKeys?: string[];
   }) => (
     <div
       data-testid="switcher-panel"
       data-keys={metrics.map((m) => m.metricKey).join(",")}
+      data-metric-titles={metrics.map((m) => m.title).join(",")}
       data-title={title ?? ""}
       data-default={(defaultCheckedKeys ?? []).join(",")}
     />
@@ -47,9 +48,14 @@ import type { ThemeConfig, ThemeIndicatorData } from "../../types";
 const METRIC_KEY = "wage";
 
 /** KPI に採用されるには MIN_VALUES_FOR_KPI (=10) 以上の観測が要る */
-function indicatorData(title: string, unit: string, valueCount = 12): ThemeIndicatorData {
+function indicatorData(
+  title: string,
+  unit: string,
+  valueCount = 12,
+  readerLabel?: string,
+): ThemeIndicatorData {
   return {
-    rankingItem: { title, unit },
+    rankingItem: { title, readerLabel, unit },
     rankingValues: Array.from({ length: valueCount }, (_, i) => ({
       areaCode: String(i + 1).padStart(5, "0"),
       value: 100 + i,
@@ -126,6 +132,23 @@ describe("ThemeMetricsDashboard — KPI の描画", () => {
   it("タイルには tabIndicators 由来の指標が渡る", () => {
     renderDashboard("labor-wages");
     expect(screen.getByTestId("switcher-panel")).toHaveAttribute("data-keys", METRIC_KEY);
+  });
+
+  it("正式指標名ではなく読者向けラベルをタイルへ渡す", () => {
+    renderDashboard("education-culture", {
+      indicatorDataMap: {
+        [METRIC_KEY]: indicatorData(
+          "日曜大工の行動者率",
+          "％",
+          12,
+          "日曜大工をした人の割合",
+        ),
+      },
+    });
+    expect(screen.getByTestId("switcher-panel")).toHaveAttribute(
+      "data-metric-titles",
+      "日曜大工をした人の割合",
+    );
   });
 });
 

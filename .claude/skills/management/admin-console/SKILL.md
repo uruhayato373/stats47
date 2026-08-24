@@ -1,6 +1,6 @@
 ---
 name: admin-console
-description: 統合メディア管理コンソール (ローカル) を起動する。SNS 投稿素材 (X/IG。YouTube は撤退済で過去実績のみ) を動画再生しながら確認し投稿/予約/caption 編集/メトリクス閲覧、OGP/リンクカード/note カバー・記事内画像/動画 master の閲覧・欠落チェック・再生成、ブログ SVG カタログ閲覧を 1 画面で行う。Use when user says "管理画面", "メディアコンソール", "admin", "投稿管理画面", "画像資産を確認", "OGP/カード一覧", "SNSギャラリー"。
+description: 統合メディア管理コンソール (ローカル) を起動する。SNS 投稿素材 (X/IG と YouTube 過去実績/pilot 記録) を動画再生しながら確認し投稿/予約/caption 編集/メトリクス閲覧、OGP/リンクカード/note カバー・記事内画像/動画 master の閲覧・欠落チェック・再生成、ブログ SVG カタログ閲覧を 1 画面で行う。Use when user says "管理画面", "メディアコンソール", "admin", "投稿管理画面", "画像資産を確認", "OGP/カード一覧", "SNSギャラリー"。
 primary_agent: sns-metrics-sync
 ---
 
@@ -22,7 +22,7 @@ PORT=5000 npm run admin    # ポート変更
 | パス | セクション | 内容 |
 |---|---|---|
 | `/` | ホーム | 各セクションへのナビ + 件数サマリ (`GET /api/assets/summary`) |
-| `/sns` | SNS 投稿ギャラリー | X/IG 素材の動画再生・caption 編集・投稿/予約・メトリクス・残枠バッジ (YouTube は撤退済で過去実績のみ閲覧) |
+| `/sns` | SNS 投稿ギャラリー | X/IG 素材の動画再生・caption 編集・投稿/予約・メトリクス・残枠バッジ。YouTube は過去実績と pilot 台帳を表示するが、投稿は Studio の人間工程 |
 | `/assets` | 画像資産 | OGP / リンクカード(light/dark) / note カバー / note 記事内画像 / 動画 master。欠落チェック + 再生成 |
 | `/svg` | ブログ SVG カタログ | 記事内 SVG を 6 カタログ + table + unknown に機械分類して一覧 |
 | `/dashboard` | プロジェクト現況 | メトリクス(GSC/GA4/AdSense/PSI/カバレッジ) + 進捗キュー(blog是正/ai-content/記事ネタ/SNS/実験) + 改善バックログTODO(優先度ソート・Owner列) + 機能バックログ + 戦略(STP)。state JSON / md を**読み取り専用ミラー**でライブ表示 (60秒キャッシュ)。編集は各 SSOT 側で |

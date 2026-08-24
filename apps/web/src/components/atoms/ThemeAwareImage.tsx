@@ -20,7 +20,7 @@ interface ThemeAwareImageProps extends Omit<ImageProps, "src"> {
  *
  * CLS 防止: このコンポーネントを fill で使う場合は必ず実画像の生成契約と同じ
  * aspect-ratio でロックした `relative` コンテナ内に配置すること
- * (ブログは 1200×630、ranking カードは 640×360)。
+ * (ブログは640×336、rankingカードは640×360)。
  * `sizes` prop も呼び出し元で必ず指定することで不要な帯域を削減できる。
  */
 export function ThemeAwareImage({

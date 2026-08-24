@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
+import { blogThumbnailUrl } from '@/lib/metadata/ogp-image';
+
 import { BlogArticleGrid } from '../blog-article-grid';
 
 import type { Article } from '../../types';
@@ -26,11 +28,11 @@ describe('BlogArticleGrid', () => {
     expect(screen.getByText('更新 2026.07.25')).toBeInTheDocument();
     expect(container.querySelector('img')).toHaveAttribute(
       'src',
-      'https://storage.stats47.jp/app/blog/population-change/thumbnail-light.webp'
+      blogThumbnailUrl(ARTICLE.slug, 'light')
     );
     expect(container.querySelector('img')).toHaveAttribute('alt', '');
     expect(container.querySelector('img')?.parentElement).toHaveClass(
-      'aspect-[1200/630]'
+      'aspect-[40/21]'
     );
   });
 

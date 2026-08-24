@@ -3,7 +3,8 @@
  * SNS 画像・動画 一括生成
  *
  * .local/r2/sns/ranking/ 配下の全ランキングディレクトリを走査し、
- * 各 SNS (Instagram/X/YouTube/TikTok/note) の静止画・動画を生成する。
+ * 現行チャネルの Instagram/X/note 用素材を生成する。
+ * YouTube pilot は通常動画 master-first のため本バッチで Shorts を生成せず、TikTok は撤退済み。
  *
  * 前提:
  *   - data.json, ranking_items.json が各ディレクトリに存在すること
@@ -146,7 +147,7 @@ interface SnsProps {
 
 async function loadProps(
   rankingDir: string
-): Promise<{ light: SnsProps; ig: SnsProps; yt: SnsProps; tt: SnsProps } | null> {
+): Promise<{ light: SnsProps; ig: SnsProps } | null> {
   try {
     const dataJson = JSON.parse(
       await fs.readFile(path.join(rankingDir, "data.json"), "utf8")
@@ -212,28 +213,6 @@ async function loadProps(
         colorSchemeType,
         divergingMidpointValue,
       },
-      yt: {
-        theme: "dark",
-        hookText,
-        displayTitle,
-        meta,
-        allEntries,
-        variant: "youtube",
-        colorScheme,
-        colorSchemeType,
-        divergingMidpointValue,
-      },
-      tt: {
-        theme: "dark",
-        hookText,
-        displayTitle,
-        meta,
-        allEntries,
-        variant: "tiktok",
-        colorScheme,
-        colorSchemeType,
-        divergingMidpointValue,
-      },
     };
   } catch {
     return null;
@@ -264,7 +243,7 @@ type RenderJob = StillJob | VideoJob;
 
 function buildJobs(
   rankingDir: string,
-  props: { light: SnsProps; ig: SnsProps; yt: SnsProps; tt: SnsProps }
+  props: { light: SnsProps; ig: SnsProps }
 ): RenderJob[] {
   const jobs: RenderJob[] = [];
 
@@ -360,20 +339,6 @@ function buildJobs(
         outputPath: path.join(rankingDir, "instagram/stills/reel.mp4"),
         label: "ig/reel.mp4",
         inputProps: props.ig as unknown as Record<string, unknown>,
-      },
-      {
-        type: "video",
-        compositionId: "RankingYouTube-Short",
-        outputPath: path.join(rankingDir, "youtube/stills/reel.mp4"),
-        label: "yt/reel.mp4",
-        inputProps: props.yt as unknown as Record<string, unknown>,
-      },
-      {
-        type: "video",
-        compositionId: "RankingTikTok-Short",
-        outputPath: path.join(rankingDir, "tiktok/stills/reel.mp4"),
-        label: "tt/reel.mp4",
-        inputProps: props.tt as unknown as Record<string, unknown>,
       }
     );
   }
@@ -510,8 +475,6 @@ async function main() {
       await Promise.all([
         fs.mkdir(path.join(rankingDir, "instagram/stills"), { recursive: true }),
         fs.mkdir(path.join(rankingDir, "x/stills"), { recursive: true }),
-        fs.mkdir(path.join(rankingDir, "youtube/stills"), { recursive: true }),
-        fs.mkdir(path.join(rankingDir, "tiktok/stills"), { recursive: true }),
         fs.mkdir(path.join(rankingDir, "note/images"), { recursive: true }),
       ]);
 

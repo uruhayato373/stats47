@@ -6,6 +6,7 @@
  *
  * 出力先: .claude/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/
  *   - overview/pages/channels/devices/daily.csv … raw ローリング28日 (機会発見 + pollution 監視用)
+ *   - survey-navigation.csv … Japan-only の survey→ranking nav_click (ローリング28日)
  *   - overview-clean.csv … Japan-only カレンダー週 (GA4-PIPELINE-02 後方互換系列・history.csv 用)
  *   - daily-clean.csv … Japan-only 日別 14 日 (確定7日 KPI の coverage 判定用)
  *   - summary.json … jpFinalized7d/jpPrevious7d KPI + raw pollution (期間 metadata 付き)
@@ -39,6 +40,26 @@ const JAPAN_FILTER = {
   filter: {
     fieldName: "country",
     stringFilter: { matchType: "EXACT", value: "Japan" },
+  },
+};
+
+const SURVEY_RANKING_NAV_FILTER = {
+  andGroup: {
+    expressions: [
+      JAPAN_FILTER,
+      {
+        filter: {
+          fieldName: "eventName",
+          stringFilter: { matchType: "EXACT", value: "nav_click" },
+        },
+      },
+      {
+        filter: {
+          fieldName: "customEvent:nav_surface",
+          stringFilter: { matchType: "EXACT", value: "survey_ranking" },
+        },
+      },
+    ],
   },
 };
 
@@ -150,6 +171,37 @@ async function main() {
   } catch (e) {
     errors.push(`pages: ${e.message}`);
     console.error("[ga4-snapshot] pages failed:", e.message);
+  }
+
+  // survey-navigation: 調査ハブ → ranking の内部遷移 (Japan-only)
+  // nav_surface / nav_label は既存の event-scoped custom dimensions (2026-07-20 登録済み)。
+  try {
+    const apiDims = ["pagePath", "customEvent:nav_surface", "customEvent:nav_label"];
+    const metrics = ["eventCount"];
+    const raw = await runReportPaged(analyticsdata, property, {
+      dateRanges: rollingRange,
+      dimensions: apiDims.map((name) => ({ name })),
+      metrics: metrics.map((name) => ({ name })),
+      dimensionFilter: SURVEY_RANKING_NAV_FILTER,
+      orderBys: [{ metric: { metricName: "eventCount" }, desc: true }],
+    });
+    const rows = raw.map((row) => {
+      const value = toRow(row, apiDims, metrics);
+      return {
+        pagePath: value.pagePath,
+        nav_surface: value["customEvent:nav_surface"],
+        nav_label: value["customEvent:nav_label"],
+        eventCount: value.eventCount,
+      };
+    });
+    writeFileSync(
+      join(outDir, "survey-navigation.csv"),
+      toCsv(rows, ["pagePath", "nav_surface", "nav_label", "eventCount"]),
+    );
+    summaryLines.push(`survey-navigation.csv: ${rows.length} rows (Japan-only)`);
+  } catch (e) {
+    errors.push(`survey-navigation: ${e.message}`);
+    console.error("[ga4-snapshot] survey-navigation failed:", e.message);
   }
 
   // channels (raw)

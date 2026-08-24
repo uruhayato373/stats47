@@ -1,7 +1,7 @@
 {
   "generatedFrom": "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
-  "totalRequests": 258,
-  "distinctRequests": 192,
+  "totalRequests": 253,
+  "distinctRequests": 187,
   "requests": [
     {
       "key": "0000010101?cdCat01=A1101",
@@ -1204,43 +1204,13 @@
       "componentType": "line-chart"
     },
     {
-      "key": "0000010205?cdCat01=#E0110201",
-      "statsDataId": "0000010205",
-      "filters": {
-        "cdCat01": "#E0110201"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010205?cdCat01=#E0110202",
-      "statsDataId": "0000010205",
-      "filters": {
-        "cdCat01": "#E0110202"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010205?cdCat01=#E0110203",
-      "statsDataId": "0000010205",
-      "filters": {
-        "cdCat01": "#E0110203"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-trend",
-      "componentType": "line-chart"
-    },
-    {
       "key": "0000010205?cdCat01=#E0940302",
       "statsDataId": "0000010205",
       "filters": {
         "cdCat01": "#E0940302"
       },
       "themeKey": "education-culture",
-      "componentKey": "theme-edu-in-pref-university-trend",
+      "componentKey": "theme-edu-higher-education-trend",
       "componentType": "line-chart"
     },
     {
@@ -1250,7 +1220,7 @@
         "cdCat01": "#E09504"
       },
       "themeKey": "education-culture",
-      "componentKey": "theme-edu-university-enrollment-trend",
+      "componentKey": "theme-edu-higher-education-trend",
       "componentType": "line-chart"
     },
     {
@@ -1341,26 +1311,6 @@
       },
       "themeKey": "labor-mobility",
       "componentKey": "theme-lm-employment-mobility-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010207?cdCat01=#G01101",
-      "statsDataId": "0000010207",
-      "filters": {
-        "cdCat01": "#G01101"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-culture-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010207?cdCat01=#G01104",
-      "statsDataId": "0000010207",
-      "filters": {
-        "cdCat01": "#G01104"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-culture-trend",
       "componentType": "line-chart"
     },
     {

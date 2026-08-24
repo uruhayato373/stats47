@@ -43,10 +43,6 @@ const BASELINE = new Set([
   "DefinitionsCard",
   "FeaturedRankingCard",
   "KeyMetricsTableCard",
-  // 全国平均の推移カード。外枠・描画とも既存の共有部品 (ChartCard + MiniLineChart) を
-  // そのまま使う薄い wrapper で、新しいカード枠は定義していない。norm 切替に応じて
-  // national-trend.json の series を選ぶ feature 固有ロジックのみを持つ (2026-07-29)。
-  "NationalTrendCard",
   "KpiCard",
   "MultiStatCard",
   // OperatorPromoCard からプロフィール部だけ切り出した home 用省スペースカード
@@ -63,6 +59,9 @@ const BASELINE = new Set([
   "SurfaceCard",
   "SurfaceLinkCard",
   "SurveyCard",
+  // 調査taxonomyの解決結果を ranking/category/theme/blog の各surfaceへ共通表示し、
+  // 導線計測も一元化するfeature composite。外枠は RailCard / SurfaceSection を再利用する。
+  "SurveyTaxonomyCard",
   // home-featured-v1 の計測ラッパー (doc 28 §9)。カード枠を描画しない (impression/click 計測の
   // ための div ラップのみ)。表示は children (EditorialFeaturedCard / FeaturedRankingCard) に委譲。
   "TrackedFeaturedRankingCard",

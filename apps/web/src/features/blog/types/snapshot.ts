@@ -8,6 +8,8 @@ export interface SnapshotArticleTag {
 
 export interface SnapshotArticle extends Omit<ArticleRow, "tags"> {
   tags: SnapshotArticleTag[];
+  /** article chart source.json → survey taxonomy core の派生結果。 */
+  surveyIds?: string[];
 }
 
 export interface SnapshotTagMeta {

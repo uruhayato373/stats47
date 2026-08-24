@@ -1,9 +1,12 @@
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 import {
+  THEME_PREFECTURE_COOKIE_NAME,
   ThemePageLayout,
   loadThemeData,
+  resolveInitialThemePrefecture,
 } from "@/features/theme-dashboard/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
@@ -16,7 +19,7 @@ import type { Metadata } from "next";
  * 旧: 17 個の静的 `app/themes/<key>/page.tsx` ハードコード
  * 新: 1 個の動的 `[themeSlug]/page.tsx` で全テーマを生成
  *
- * 例外: `themes/local-finance/page.tsx` と `themes/local-finance/cities/page.tsx`
+ * 例外: `themes/local-finance/page.tsx`
  * は都道府県/市区町村切替 UI を持つため static のまま維持。
  * Next.js のルート優先順位 (static > dynamic) で正しく解決される。
  *
@@ -34,6 +37,7 @@ export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ themeSlug: string }>;
+  searchParams: Promise<{ pref?: string | string[] }>;
 }
 
 export async function generateMetadata({
@@ -57,8 +61,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function ThemeDynamicPage({ params }: PageProps) {
-  const { themeSlug } = await params;
+export default async function ThemeDynamicPage({ params, searchParams }: PageProps) {
+  const [{ themeSlug }, query, cookieStore] = await Promise.all([
+    params,
+    searchParams,
+    cookies(),
+  ]);
   const theme = ALL_THEMES.find((t) => t.themeKey === themeSlug);
   if (!theme) {
     notFound();
@@ -69,7 +77,18 @@ export default async function ThemeDynamicPage({ params }: PageProps) {
     throw new Error(`theme data unavailable: ${theme.themeKey}`);
   }
 
+  const initialPrefecture = resolveInitialThemePrefecture({
+    urlPreference: query.pref,
+    cookiePreference: cookieStore.get(THEME_PREFECTURE_COOKIE_NAME)?.value,
+  });
+
   // PageShell は ThemePageLayout が持つ (左レール = ThemeSideNav を
   // ThemePrefectureProvider の内側に置く必要があるため)。ここで重ねない。
-  return <ThemePageLayout theme={theme} data={data} />;
+  return (
+    <ThemePageLayout
+      theme={theme}
+      data={data}
+      initialPrefecture={initialPrefecture}
+    />
+  );
 }

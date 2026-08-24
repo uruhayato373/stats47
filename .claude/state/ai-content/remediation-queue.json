@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-08-20T19:15:55.786Z",
+  "generatedAt": "2026-08-22T08:32:53.330Z",
   "gscSnapshot": "2026-W33",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2164,
-    "done": 269,
-    "needsRegen": 1895,
+    "done": 270,
+    "needsRegen": 1894,
     "needsByReason": {
-      "incomplete": 1617,
+      "incomplete": 1616,
       "missing": 217,
       "blocker": 61
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 35521,
-    "needsImpressions": 7265,
+    "doneImpressions": 35568,
+    "needsImpressions": 7218,
     "opusReviewTier": 30
   },
   "entries": [
@@ -1958,15 +1958,12 @@
       "impressions": 47,
       "clicks": 4,
       "position": 5.21,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Thu, 20 Aug 2026 19:17:11 GMT",
+      "updatedAt": "2026-08-20T00:00:00.000Z"
     },
     {
       "rankingKey": "pickled-plum-consumption-expenditure",
@@ -2628,7 +2625,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "sports-participation-rate-volleyball",

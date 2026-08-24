@@ -14,7 +14,7 @@ import type { Metadata } from "next";
 
 /**
  * Type A テーマ（都道府県単位で集計できるもの）。インフラ・ネットワーク系 (Type B:
- * ports/railway/roads/local-finance-city) は都道府県ページに出さない。
+ * ports/railway/roads) は都道府県ページに出さない。
  * SSOT は theme-dashboard/config/area-theme-slugs.ts（ThemeSwitcher と共有）。
  */
 const TYPE_A_THEMES = AREA_THEMES;

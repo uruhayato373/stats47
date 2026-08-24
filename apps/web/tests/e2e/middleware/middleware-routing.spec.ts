@@ -103,10 +103,9 @@ test.describe("Middleware ルーティング", () => {
       }
     });
 
-    test("/ranking/nonexistent-ranking-xxx は notFound ページに委譲される", async ({ request }) => {
+    test("/ranking/nonexistent-ranking-xxx は 410", async ({ request }) => {
       const res = await request.get(`${BASE}/ranking/nonexistent-ranking-xxx`, { maxRedirects: 0 });
-      expect(res.status()).toBe(200);
-      expect(await res.text()).toContain("見つかりません");
+      expect(res.status()).toBe(410);
     });
   });
 

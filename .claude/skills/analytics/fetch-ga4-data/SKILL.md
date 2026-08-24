@@ -217,6 +217,7 @@ GA4 データは GSC より遅延が少なく、前日分まで取得可能。
 引数の `snapshot YYYY-Www` が検出されたら、レポート種類指定は無視して以下を順次取得する:
 
 - `overview.csv` / `pages.csv` / `channels.csv` / `devices.csv` / `daily.csv` — raw 値 (bot 込み)
+- `survey-navigation.csv` — Japan-only の `survey_ranking` nav_click (survey portfolio の内部遷移KPI)
 - `overview-clean.csv` / `channels-clean.csv` — country=Japan only クリーン値（engagedSessions / engagementRate を含む）
 - `pollution-summary.csv` — bot/spam 推定 (overseas_sessions / overseas_engagedSessions / notSet_sessions) の集計 1 行
 

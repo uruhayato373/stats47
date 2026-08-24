@@ -390,7 +390,7 @@ function IndicatorGrid({
                 className="block p-3"
               >
                 <div className="text-sm font-medium mb-2 line-clamp-2">
-                  {data.rankingItem.title}
+                  {data.rankingItem.readerLabel ?? data.rankingItem.title}
                 </div>
                 {top1 && top1Name && (
                   <div className="text-xs text-muted-foreground">

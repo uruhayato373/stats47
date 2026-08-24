@@ -2,7 +2,8 @@ name: 📊 SNS Metrics Weekly (Instagram)
 
 # X は API 従量課金のため収集対象外。Instagram (Graph API) のみ。
 # 毎週日曜 JST 20:30 に実行（fetch-metrics-weekly の 30 分後）。
-# YouTube は 2026-05-29 に撤退（shadowban・低 ROI）。計測ステップを削除。
+# YouTube は 2026-08-23 から通常動画3本の限定 pilot。pilot 中は Studio の手動計測と
+# GA4 UTM だけを使い、OAuth/API の自動収集は成功判定後まで追加しない。
 
 on:
   schedule:

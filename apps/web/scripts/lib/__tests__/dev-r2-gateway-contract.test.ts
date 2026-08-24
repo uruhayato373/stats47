@@ -31,6 +31,30 @@ describe('Windows development R2 gateway contract', () => {
     expect(supervisor).toContain("'powershell.exe'");
   });
 
+  it('serves authored page-components from the git SSOT during development', () => {
+    const supervisor = read('scripts/dev-server.ts');
+    const gateway = read('scripts/r2-dev-gateway.ps1');
+
+    expect(supervisor).toContain(
+      "path.join(SCRIPT_DIR, 'data', 'page-components')"
+    );
+    expect(supervisor).toContain("'-LocalOverrideRoot'");
+    expect(gateway).toContain('"app/page-components/"');
+    expect(gateway).toContain('X-R2-Dev-Source');
+    expect(gateway).toContain('local-override');
+    expect(gateway).toContain('Cache-Control"] = "no-store"');
+  });
+
+  it('serves generated municipality snapshots from the local R2 mirror', () => {
+    const supervisor = read('scripts/dev-server.ts');
+    const gateway = read('scripts/r2-dev-gateway.ps1');
+
+    expect(supervisor).toContain("'.local', 'r2'");
+    expect(supervisor).toContain("'-LocalR2Root'");
+    expect(gateway).toContain('"app/municipalities/"');
+    expect(gateway).toContain('$localR2Base');
+  });
+
   it('uses Windows credentials without weakening TLS and stays read-only', () => {
     const gateway = read('scripts/r2-dev-gateway.ps1');
 
@@ -46,9 +70,7 @@ describe('Windows development R2 gateway contract', () => {
     //   読む。UTF-8 の日本語がコメントにあるだけでも化けて「予期しない '}'」の構文エラーに
     //   なり、gateway が起動しなくなる (2026-08-21 実測: BOM 無しで 2 件の構文エラー、
     //   BOM 付きで 0 件)。ここが落ちたら BOM を消したということ。
-    const raw = readFileSync(
-      path.join(WEB_ROOT, 'scripts/r2-dev-gateway.ps1')
-    );
+    const raw = readFileSync(path.join(WEB_ROOT, 'scripts/r2-dev-gateway.ps1'));
 
     expect(raw.subarray(0, 3)).toEqual(Buffer.from([0xef, 0xbb, 0xbf]));
   });
@@ -57,7 +79,9 @@ describe('Windows development R2 gateway contract', () => {
     const gateway = read('scripts/r2-dev-gateway.ps1');
 
     // HEAD を GET の本文で返すと Content-Length を偽ることになる。
-    expect(gateway).toContain('if ($Request.HttpMethod -ne "GET") { return $false }');
+    expect(gateway).toContain(
+      'if ($Request.HttpMethod -ne "GET") { return $false }'
+    );
     // Range / 条件付きは応答が要求ごとに変わる。
     expect(gateway).toContain('"Range", "If-None-Match", "If-Modified-Since"');
     // 200 以外を配り続けないこと。

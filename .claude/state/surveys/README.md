@@ -12,11 +12,13 @@
     `--set <surveyId> --lifecycle ... --editorial ... --add-evidence ...`
 - **再構築可能**: surveys.json (git) + 紐付け監査 (`audit-survey-linkage.ts --json`) + R2
   `app/survey/all.json` (公開 URL・GET のみ) + survey-editorial.ts + 計測 snapshot
-  (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) + レビュー文書
+  (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`; GA4 は
+  `survey-navigation.csv` を含む) + レビュー文書
   (`.claude/skills/survey/manage-survey-portfolio/reference/reviews/YYYY-MM-DD-survey-<surveyId>.md`)
   から常に再導出できる派生物 (theme portfolio / blog remediation-queue と同思想)。
 - **検証**: `npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts` (決定的 lint。schema +
-  下記の判定規律 + survey-editorial.ts との drift を enforce。CI 配線は PR-4)。
+  下記の判定規律 + survey-editorial.ts との drift を enforce)。`generatedAt` と
+  `linkage.auditedAt` は既定35日を超えると stale error (`SURVEY_STATE_MAX_AGE_DAYS` で変更可)。
 - 運用設計の正典: `.claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md`。
 
 ## portfolio.json
@@ -77,7 +79,9 @@
                  "landingPageViews": 42 },                // screenPageViews 合算 (加算可能)
                  // "engagedSessions": GA4 週次 snapshot に非搭載 (engagementRate のみ)。
                  // measured 時に engagementRatePvWeighted として代替保存する (PR-3 で確定)
-        "internalNav": { "status": "not-instrumented" }   // survey→ranking 遷移 (rankingOutboundClicks)。GA4 未計装
+        "internalNav": { "status": "measured-low", "windowDays": 56,
+                         "weeks": ["2026-W24", "2026-W28"],
+                         "rankingOutboundClicks": 8 }       // survey→ranking nav_click。20/56d 未満は measured-low
       },
       "currentHypothesis": "調査固有の編集ハブで指名系 query の CTR が改善する", // 無ければ null
       "evidenceRefs": [                     // レビュー文書・実測・実験 ID への参照
@@ -112,7 +116,9 @@
 2. さらに **GSC と GA4 の両方が「集計済み」(`status` ∈ {measured, measured-low}) かつ
    `windowDays ≥ 56` が必須** — データ不足 (未集計) を需要不足と混同した廃止判定の機械的禁止。
 3. 最低標本数 (これ未満は `measured-low` = 比率値の保存禁止): GSC impressions **100/観測期間**・
-   GA4 landingPageViews **100/観測期間**。**impressions 100 未満で CTR 効果を確定しない**。
+   GA4 landingPageViews **100/観測期間**・internalNav rankingOutboundClicks **20/56日**。
+   **impressions 100 未満で CTR 効果を確定しない**。`survey-navigation.csv` が非重複2窓の
+   どちらかに無い場合、内部遷移はゼロと推定せず `insufficient-data` にする。
 4. 観測期間の使い分け: 7 日 = インデックス/canonical/404/計測異常の検知のみ (効果判定に使わない) /
    28 日 = 暫定判定 / **56 日 = 基本判定**。
 5. 期間の重複する複数 snapshot (各週 last-28d 窓) を合算しない。query 非開示分を推測で補完しない。

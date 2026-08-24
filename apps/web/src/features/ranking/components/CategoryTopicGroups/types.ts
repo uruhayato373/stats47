@@ -2,6 +2,7 @@
 export interface CategoryTopicListItem {
   rankingKey: string;
   title: string;
+  readerLabel?: string | null;
   subtitle: string | null;
   unit: string;
   /** カテゴリ内グループのキー。未分類 (旧 snapshot) は null */

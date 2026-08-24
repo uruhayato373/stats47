@@ -12,6 +12,7 @@
 export {
   adjectiveFromTitle,
   adjectiveFromUnit,
+  deriveRankingReaderLabel,
   deriveRankingHook,
   isCrossDimensionMismatch,
   resolveHookAdjective,
@@ -34,10 +35,14 @@ export {
   type ProminenceResult,
 } from "./compute-prominence";
 
-export { RANKING_HOOK_OVERRIDES } from "./ranking-hook-overrides";
+export {
+  RANKING_HOOK_OVERRIDES,
+  RANKING_READER_LABEL_OVERRIDES,
+} from "./ranking-hook-overrides";
 
 export {
   auditDerivedHooks,
+  resolveRankingReaderLabel,
   resolveRankingHook,
   HOOK_MAX_LENGTH,
   HOOK_MIN_LENGTH,

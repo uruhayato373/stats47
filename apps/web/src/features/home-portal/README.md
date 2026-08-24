@@ -9,6 +9,7 @@
 | -------------------- | --------------------------------------------------------------------- |
 | ページ構造・表示件数 | `apps/web/src/app/page.tsx`                                           |
 | 利用意図と表示順     | `packages/data-configs/src/home-portal.ts`                            |
+| 利用意図の画像生成仕様 | `apps/web/scripts/data/home-use-case-image-catalog.ts`               |
 | UI・レイアウト       | `docs/01_技術設計/04_デザインシステム.md`                             |
 | 情報設計             | `docs/01_技術設計/03_情報設計.md`                                     |
 | GA4イベント          | `.claude/rules/analytics-event-standards.md`                          |
@@ -37,6 +38,18 @@
 - `id`、遷移先、`order`を重複させない
 - `order`は1始まりの連番
 - runtime LLM、JSON SSOT、D1を追加しない
+- `imageSrc`は`/images/home/use-cases/<id>.webp`と一致させる
+
+## 利用意図カード画像
+
+- 配信用の透過WebPは`apps/web/public/images/home/use-cases/`に置く。UIと同じリリースで
+  変更する少数の静的素材なのでR2へ分離しない
+- imagegenの元PNGは`docs/assets/home-use-case-<id>.png`に残す
+- 共通スタイル・主題・プロンプトは`home-use-case-image-catalog.ts`で管理する
+- 元PNGを差し替えた後は
+  `npx tsx apps/web/scripts/process-home-use-case-images.ts --only <id>`で、右側トリミング・
+  背景透過・WebP最適化を同じ条件で再実行する
+- 画像は装飾扱い (`alt=""`) とし、リンク名と説明は常にDOMテキストで提供する
 
 カテゴリは17軸の正典から、ブログはsnapshotから直接導出する。home専用のカテゴリ複製や
 人気検索語設定は持たない。

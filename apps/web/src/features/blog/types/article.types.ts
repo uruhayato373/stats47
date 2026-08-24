@@ -19,6 +19,8 @@ export interface ArticleRow {
   tags: string;
   createdAt: string | null;
   updatedAt: string | null;
+  /** chart source lineage から派生した survey master id。独立 SSOT ではない。 */
+  surveyIds?: string[];
 }
 
 export interface Article extends ArticleRow {

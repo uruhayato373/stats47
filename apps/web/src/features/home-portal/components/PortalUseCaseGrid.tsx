@@ -20,6 +20,7 @@ export function PortalUseCaseGrid() {
           href={`/themes/${u.themeKey}`}
           label={u.label}
           description={u.description}
+          imageSrc={u.imageSrc}
         />
       ))}
     </HorizontalCardCarousel>

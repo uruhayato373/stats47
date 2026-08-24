@@ -34,6 +34,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import {
+  isIntentionallyNonIndexableResource,
+  readHtmlIndexSignals,
+} from "./coverage-policy.mjs";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -45,6 +50,14 @@ const getArg = (flag, fb) => {
 };
 const hasFlag = (f) => args.includes(f);
 
+const todayInTokyo = () =>
+  new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+
 const DRILLDOWN_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics/gsc/coverage-drilldown");
 const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/gsc");
 const QUEUE_PATH = path.join(STATE_DIR, "coverage-remediation-queue.json");
@@ -53,7 +66,7 @@ const TOTALS_HISTORY = path.join(STATE_DIR, "coverage-totals-history.csv");
 
 const GOOGLEBOT_UA =
   "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
-const TODAY = getArg("--date", new Date().toISOString().slice(0, 10));
+const TODAY = getArg("--date", todayInTokyo());
 
 // ── カテゴリ定義 ───────────────────────────────────────────────
 // actionable = 実測して live/壊れを判別する。intentional = 設計上の挙動なので放置。
@@ -267,6 +280,46 @@ async function probeAll(urls, limit) {
   return results;
 }
 
+async function probeHtmlSignals(url) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 12000);
+  try {
+    const dispatcher = await getProxyDispatcher();
+    const res = await fetch(url, {
+      method: "GET",
+      headers: { "User-Agent": GOOGLEBOT_UA },
+      redirect: "manual",
+      signal: ctrl.signal,
+      ...(dispatcher ? { dispatcher } : {}),
+    });
+    if (res.status !== 200) return null;
+    const contentType = res.headers.get("content-type") ?? "";
+    if (!contentType.includes("text/html")) return null;
+    return readHtmlIndexSignals(
+      await res.text(),
+      res.headers.get("x-robots-tag") ?? "",
+    );
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+async function probeHtmlSignalsAll(urls) {
+  const results = new Map();
+  let idx = 0;
+  const CONC = 6;
+  async function worker() {
+    while (idx < urls.length) {
+      const url = urls[idx++];
+      results.set(url, await probeHtmlSignals(url));
+    }
+  }
+  await Promise.all(Array.from({ length: CONC }, worker));
+  return results;
+}
+
 // ── ranking キーの GONE 誤登録検出 (2026-07-03 の 56件 410 誤配信の再発防止) ──
 // 「410 = 削除済 → 放置 (resolved-by-design)」と即断せず、KNOWN_RANKING_KEYS +
 // metric config isActive:true と突合する。両方に該当する 410 は「誤って GONE 化された
@@ -366,20 +419,47 @@ async function build() {
   const probeLimit = parseInt(getArg("--probe-limit", "2500"), 10);
   const noProbe = hasFlag("--no-probe");
   const actionableUrls = drilldowns
-    .filter((r) => ACTIONABLE.has(r.category))
+    .filter(
+      (r) =>
+        ACTIONABLE.has(r.category) &&
+        !isIntentionallyNonIndexableResource(r.url),
+    )
     .map((r) => r.url);
   const uniqActionable = [...new Set(actionableUrls)].slice(0, probeLimit);
 
   let httpByUrl = new Map();
+  let htmlSignalsByUrl = new Map();
   if (noProbe) {
     for (const u of uniqActionable) {
       const p = prevByUrl.get(u);
       httpByUrl.set(u, p?.current_http ?? null);
+      if (
+        p?.current_http === 200 &&
+        typeof p?.robots_noindex === "boolean" &&
+        typeof p?.soft_not_found === "boolean"
+      ) {
+        htmlSignalsByUrl.set(u, {
+          robotsNoindex: Boolean(p.robots_noindex),
+          softNotFound: Boolean(p.soft_not_found),
+        });
+      }
     }
     console.error(`[probe] --no-probe: ${uniqActionable.length} URL はキャッシュ値を使用`);
   } else {
     console.error(`[probe] ${uniqActionable.length} actionable URL を Googlebot UA で実測中...`);
     httpByUrl = await probeAll(uniqActionable, null);
+    const htmlSignalUrls = drilldowns
+      .filter(
+        (r) =>
+          ACTIONABLE.has(r.category) &&
+          httpByUrl.get(r.url) === 200 &&
+          !isIntentionallyNonIndexableResource(r.url),
+      )
+      .map((r) => r.url);
+    console.error(
+      `[probe] HTTP 200 ${htmlSignalUrls.length} URL の HTML index signal を確認中...`,
+    );
+    htmlSignalsByUrl = await probeHtmlSignalsAll([...new Set(htmlSignalUrls)]);
   }
 
   // upsert
@@ -388,13 +468,40 @@ async function build() {
   for (const r of drilldowns) {
     if (seen.has(r.url)) continue; // 同 URL は最初のカテゴリで代表
     seen.add(r.url);
-    const http = ACTIONABLE.has(r.category)
+    const old = prevByUrl.get(r.url);
+    const nonIndexableResource = isIntentionallyNonIndexableResource(r.url);
+    const http = ACTIONABLE.has(r.category) && !nonIndexableResource
       ? httpByUrl.has(r.url)
         ? httpByUrl.get(r.url)
         : null
-      : null; // intentional は未実測 (null)
-    const cls = classify(r.category, http ?? -1);
-    const old = prevByUrl.get(r.url);
+      : nonIndexableResource
+        ? old?.current_http ?? null
+        : null; // intentional は未実測 (null)
+    const htmlSignals = htmlSignalsByUrl.get(r.url) ?? null;
+    const healthyNoindex =
+      http === 200 &&
+      htmlSignals?.robotsNoindex === true &&
+      htmlSignals.softNotFound === false;
+    const liveSoftNotFound = http === 200 && htmlSignals?.softNotFound === true;
+    const cls = nonIndexableResource
+      ? {
+          verdict: "non-indexable-resource",
+          action: "none",
+          design: true,
+        }
+      : healthyNoindex
+        ? {
+            verdict: "intentional-noindex",
+          action: "none",
+          design: true,
+        }
+      : liveSoftNotFound
+        ? {
+            verdict: "live-soft404",
+            action: "deactivate",
+            design: false,
+          }
+      : classify(r.category, http ?? -1);
 
     // 410 の ranking URL が KNOWN∩isActive なら「誤GONE」— 放置 (now-gone) にせず復帰対象へ
     if (http === 410 && isMisgoneRankingUrl(r.url)) {
@@ -405,7 +512,12 @@ async function build() {
 
     // content-check の確定判定 (content_verdict) があれば action を上書きして保持
     const contentVerdict = old?.content_verdict ?? null;
-    if (contentVerdict && CONTENT_VERDICT_ACTION[contentVerdict]) {
+    if (
+      !cls.design &&
+      !liveSoftNotFound &&
+      contentVerdict &&
+      CONTENT_VERDICT_ACTION[contentVerdict]
+    ) {
       cls.action = CONTENT_VERDICT_ACTION[contentVerdict];
       cls.verdict = `cc:${contentVerdict}`;
       cls.design = false;
@@ -416,6 +528,14 @@ async function build() {
       status = "resolved-by-design";
     } else if (old && old.status === "in-progress") {
       status = "in-progress"; // 人/agent が作業中 → 触らない
+    } else if (
+      old &&
+      old.status === "resolved-by-design" &&
+      http === 404
+    ) {
+      // 人が「この 404 は意図どおり」と確定した URL は、同じ 404 の間は再オープンしない。
+      // 200/5xx 等へ変化した場合は通常分類へ戻して再確認する。
+      status = "resolved-by-design";
     } else if (old && old.status === "done") {
       // done だが再び壊れて検出された場合のみ pending に戻す
       status = cls.action === "none" ? "done" : "done"; // done は維持 (再計測で壊れたら下で上書き)
@@ -431,6 +551,12 @@ async function build() {
       gsc_category: r.category,
       gsc_last_crawl: r.lastCrawl,
       current_http: http,
+      ...(htmlSignals
+        ? {
+            robots_noindex: htmlSignals.robotsNoindex,
+            soft_not_found: htmlSignals.softNotFound,
+          }
+        : {}),
       verdict: cls.verdict,
       action: cls.action,
       status,

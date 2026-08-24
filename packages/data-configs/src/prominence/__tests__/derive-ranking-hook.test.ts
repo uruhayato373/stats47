@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   adjectiveFromTitle,
   adjectiveFromUnit,
+  deriveRankingReaderLabel,
   deriveRankingHook,
 } from "../derive-ranking-hook";
 import {
@@ -10,7 +11,11 @@ import {
   normalizeTitleForHook,
 } from "../normalize-title";
 import { RANKING_HOOK_OVERRIDES } from "../ranking-hook-overrides";
-import { auditDerivedHooks, resolveRankingHook } from "../resolve-ranking-hook";
+import {
+  auditDerivedHooks,
+  resolveRankingHook,
+  resolveRankingReaderLabel,
+} from "../resolve-ranking-hook";
 
 describe("normalizeTitleForHook", () => {
   it("「県は？」と重複する冗長サフィックスを落とす", () => {
@@ -118,6 +123,48 @@ describe("deriveRankingHook", () => {
       "なんらかの指標が最も多い県は？",
     );
   });
+
+  it("行動者率は調査用語を残さず、人を主語にした問いへ変換する", () => {
+    expect(
+      deriveRankingHook({ title: "日曜大工の行動者率", unit: "％" }),
+    ).toBe("日曜大工をした人が多い県は？");
+    expect(
+      deriveRankingHook({ title: "海外旅行の年間行動者率", unit: "％" }),
+    ).toBe("海外旅行をした人が多い県は？");
+    expect(
+      deriveRankingHook({ title: "マンガを読む行動者率", unit: "％" }),
+    ).toBe("マンガを読んだ人が多い県は？");
+    expect(
+      deriveRankingHook({
+        title:
+          "スマートフォン・パソコン使用者の趣味・娯楽行動者率（10歳以上・週全体・総数）",
+        unit: "％",
+      }),
+    ).toBe("スマホ等利用者で趣味をした人が多い県は？");
+  });
+});
+
+describe("deriveRankingReaderLabel", () => {
+  it("行動者率を意味を保った平易なラベルへ変換する", () => {
+    expect(deriveRankingReaderLabel("日曜大工の行動者率")).toBe(
+      "日曜大工をした人の割合",
+    );
+    expect(deriveRankingReaderLabel("海外旅行の年間行動者率")).toBe(
+      "海外旅行をした人の割合",
+    );
+    expect(deriveRankingReaderLabel("マンガを読む行動者率")).toBe(
+      "マンガを読んだ人の割合",
+    );
+    expect(
+      deriveRankingReaderLabel(
+        "スマートフォン・パソコン使用者の趣味・娯楽行動者率（10歳以上・週全体・総数）",
+      ),
+    ).toBe("スマホ等利用者のうち趣味・娯楽をした人の割合");
+  });
+
+  it("平易化規則の対象外は正準名を維持する", () => {
+    expect(deriveRankingReaderLabel("空き家率")).toBe("空き家率");
+  });
 });
 
 describe("resolveRankingHook", () => {
@@ -152,13 +199,45 @@ describe("resolveRankingHook", () => {
   });
 
   it("旧 HOME_FEATURED_RANKINGS の 8 本すべてを引き継いでいる", () => {
-    expect(Object.keys(RANKING_HOOK_OVERRIDES)).toHaveLength(8);
+    const legacyKeys = [
+      "annual-sunshine-duration",
+      "total-population",
+      "future-population-change-rate-2050",
+      "agricultural-output",
+      "fiscal-strength-index-prefecture",
+      "annual-clear-days",
+      "retirement-allowance-admin-prefecture",
+      "consumption-expenditure-multi-person-households-per-month",
+    ];
+    for (const key of legacyKeys) {
+      expect(RANKING_HOOK_OVERRIDES[key]).toBeTruthy();
+    }
     for (const hook of Object.values(RANKING_HOOK_OVERRIDES)) {
       const length = [...hook].length;
       expect(length).toBeGreaterThanOrEqual(8);
       expect(length).toBeLessThanOrEqual(28);
       expect(hook).not.toContain("\n");
     }
+  });
+});
+
+describe("resolveRankingReaderLabel", () => {
+  it("編集例外を共通導出より優先する", () => {
+    expect(
+      resolveRankingReaderLabel({
+        rankingKey: "fiscal-strength-index-prefecture",
+        title: "財政力指数",
+      }),
+    ).toBe("自治体の財政力");
+  });
+
+  it("例外が無ければ行動者率の共通規則を使う", () => {
+    expect(
+      resolveRankingReaderLabel({
+        rankingKey: "hobby-participation-rate-diy",
+        title: "日曜大工の行動者率",
+      }),
+    ).toBe("日曜大工をした人の割合");
   });
 });
 
@@ -233,6 +312,17 @@ describe("auditDerivedHooks", () => {
         { rankingKey: "income2", title: "1人当たり県民所得", unit: "千円" },
       ]),
     ).toEqual([]);
+  });
+
+  it("平易化できず調査用語が残った問いを jargon で報告する", () => {
+    const [finding] = auditDerivedHooks([
+      {
+        rankingKey: "unmatched-participation-rate",
+        title: "行動者率（再掲）",
+        unit: "％",
+      },
+    ]);
+    expect(finding.reasons).toContain("jargon");
   });
 });
 

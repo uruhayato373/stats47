@@ -18,6 +18,7 @@ active 一覧と append-only の詳細ログに責務分離して追跡するス
 | 詳細ログ (agent 用) | git: `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` | 過去判定の根拠・検証コマンド・仮説を含む詳細 |
 | 要約 (人間向け) | git: `.claude/todo/improvements.md` | active 施策の ID・要約・status・期日を俯瞰 |
 | 週次スナップショット | `.claude/state/metrics/gsc/{history.csv,LATEST.md}` | GitHub Actions が日曜 JST 20:00 に自動更新 |
+| 運用サイクル監査 | `.claude/state/metrics/gsc/operations-cycle-LATEST.{json,md}` | 計測→review→候補判断→plan→月次集約の接続状態 |
 
 ## 引数
 
@@ -50,6 +51,7 @@ GSC メトリクス取得の優先順:
 2. .claude/todo/improvements.md の6列表から status: pending / in-progress / effect-pending の行を抽出
 3. reference/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
 4. .claude/state/metrics/gsc/LATEST.md を Read し週次推移を取得
+5. `node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monitor` を実行し、未接続工程を取得
 
 出力:
 - 最新 snapshot の主要指標 + 目標超過メトリクス
@@ -82,15 +84,13 @@ GSC メトリクス取得の優先順:
    - .claude/state/metrics/gsc/history.csv から取得しても可
 
 5. 進行中施策の効果判定（最重要）:
-   .claude/todo/improvements.md の該当 metric 行を抽出する。
-   各施策に対して:
-   - 経過日数 = observe 実行日 - deployed_at
-   - 実測 delta = 最新値 - デプロイ時点の値（前週 snapshot から読む）
-   - 期日前または証拠不足なら、status と Due を更新して active 行を維持する。
-   - 判定可能なら full / partial / none / adverse を
-     reference/improvement-log.md に実測値・snapshot・判定日とともに追記し、
-     .claude/todo/improvements.md から該当行を削除する。
-   - adverse から修正タスクが生じる場合は、確定結果の行を残さず新しい改善IDで追加する。
+   ```bash
+   node .claude/scripts/lib/effect-verdict/cli.mjs --week <YYYY-Www>
+   node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input --week <YYYY-Www>
+   ```
+   - effect ラベルの自動判定は `effect-verdict` の閾値・4ガードを正典とし、同じ比較を手作業で再実装しない。
+   - `insufficient-target` は推測で補わない。`.claude/config/gsc-operations-cycle.json` の既知負債以外が1件でも増えたら運用監査をFAILにする。
+   - 確定 verdict の `.claude/todo/improvements.md` 反映は `improvement-triage` に委譲する。確定済みIDがactive一覧に残れば運用監査がFAILにする。
 
 6. 出力:
    - 目標超過アラートを先頭で強調
@@ -119,7 +119,8 @@ GSC メトリクス取得の優先順:
 
 3. front-matter の `updated:` を本日日付に更新。
 4. target metric、対象、baseline、想定効果、deployed_at、PR、検証コマンドは
-   reference/improvement-log.md に appendする。
+   reference/improvement-log.md に appendする。想定効果は必ず `[target: +N clicks]`、
+   `[target: -N errors]` の機械可読記法を併記し、欠落時は action を完了しない。
 5. 次の観測日（デプロイ + 14 / 28 日）を計算して提示。
 ```
 
@@ -142,7 +143,7 @@ GSC メトリクス取得の優先順:
 - **数値はソース明示** — "snapshots/2026-W17/queries.csv" のような相対パス
 - **施策は 1 PR 1 ID** — 複数目的の PR は分割
 - **想定効果値はデプロイ前に書く** — 後付けバイアス防止
-- **週次 /weekly-review から observe モードが自動呼び出し** される想定
+- **週次の正典** — 日曜 `fetch-metrics-weekly` がsnapshot+effect verdictを生成し、`/weekly-review`が候補判断を記録、月曜20:30の`gsc-operations-cycle-weekly`が接続を監査する
 - **責務を分離する** — `.claude/todo/improvements.md` はactive一覧、reference/improvement-log.md は判定履歴
 
 ## 参照パターン
@@ -165,6 +166,10 @@ cat .claude/skills/analytics/gsc-improvement/reference/improvement-log.md
 node .claude/scripts/gsc/analyze-ctr-seesaw.mjs 2026-W29 2026-W33   # 非重複な 28 日窓どうし
 node .claude/scripts/gsc/analyze-ctr-seesaw.mjs 2026-W32 2026-W33   # 差分 = 最新週 − 落ちた週
 node .claude/scripts/gsc/analyze-ctr-seesaw.mjs --weekly            # 日次を連結して 7 日ずつ
+
+# 計測→review→候補判断→plan→月次集約の接続
+node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monitor
+node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs
 ```
 
 ## 実証チェックリスト（効果判定を確定してTODO行を削除する前に必須）

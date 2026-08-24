@@ -1,0 +1,78 @@
+name: 🔄 GSC Operations Cycle (weekly)
+
+on:
+  schedule:
+    - cron: '30 11 * * 1' # JST Monday 20:30。Sunday 20:00 metrics 後のレビュー猶予を確保
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: gsc-operations-cycle-weekly
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🔍 Audit measurement → review → decision → plan
+        id: audit
+        run: |
+          node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monitor --write
+          STATUS=$(node -e 'const j=require("./.claude/state/metrics/gsc/operations-cycle-LATEST.json");process.stdout.write(j.status)')
+          echo "status=$STATUS" >> "$GITHUB_OUTPUT"
+          cat .claude/state/metrics/gsc/operations-cycle-LATEST.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 💾 Commit operations state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/gsc/operations-cycle-LATEST.json
+          git add .claude/state/metrics/gsc/operations-cycle-LATEST.md
+          if git diff --staged --quiet; then
+            echo "No GSC operations state changes"
+          else
+            git commit -m "chore(gsc): weekly operations cycle audit [skip ci]"
+            git pull --rebase --autostash origin develop
+            git push origin develop
+          fi
+
+      - name: 🚨 Upsert GSC cycle alert
+        if: steps.audit.outputs.status == 'fail'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="[GSC Cycle Alert] 週次レビュー・改善サイクルが未完了"
+          {
+            cat .claude/state/metrics/gsc/operations-cycle-LATEST.md
+            echo ""
+            echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } > /tmp/gsc-cycle-issue.md
+
+          gh label create gsc-cycle-alert --description "GSCの計測・レビュー・改善サイクル異常" --color "b60205" --force 2>/dev/null || true
+          EXISTING=$(gh issue list --state open --label gsc-cycle-alert --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/gsc-cycle-issue.md
+          else
+            gh issue create --title "$TITLE" --label "gsc-cycle-alert,auto-generated" --body-file /tmp/gsc-cycle-issue.md
+          fi
+
+      - name: ✅ Close recovered GSC cycle alert
+        if: steps.audit.outputs.status != 'fail'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label gsc-cycle-alert --limit 50 --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "GSC運用サイクル監査が回復したため自動クローズ (run ${{ github.run_id }})。"
+            done

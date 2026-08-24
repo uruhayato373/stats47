@@ -31,104 +31,78 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
       "rankingKey": "public-hall-count-per-million",
       "shortLabel": "公民館",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "final-education-university-graduate-school-ratio",
+      "shortLabel": "大学・大学院卒",
+      "role": "context"
+    },
+    {
+      "rankingKey": "in-pref-university-entrance-ratio-by-highschool-origin",
+      "shortLabel": "県内大学進学率",
+      "role": "context"
     }
+  ],
+  metricGroups: [
+    {
+      key: "school-facilities",
+      title: "学校施設",
+      rankingKeys: [
+        "elementary-school-count-per-100km2-habitable",
+        "junior-high-school-count-per-100km2-habitable",
+        "high-school-count-per-100km2-habitable",
+      ],
+      defaultCheckedKeys: [
+        "elementary-school-count-per-100km2-habitable",
+        "junior-high-school-count-per-100km2-habitable",
+        "high-school-count-per-100km2-habitable",
+      ],
+    },
+    {
+      key: "cultural-facilities",
+      title: "文化施設",
+      rankingKeys: [
+        "library-count-per-million",
+        "public-hall-count-per-million",
+      ],
+      defaultCheckedKeys: [
+        "library-count-per-million",
+        "public-hall-count-per-million",
+      ],
+    },
   ],
   "charts": [
     {
-      "componentKey": "theme-edu-school-trend",
+      "componentKey": "theme-edu-higher-education-trend",
       "componentType": "line-chart",
-      "title": "学校数の推移（可住地面積100km²当たり）",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010205",
-            "cdCat01": "#E0110201"
-          },
-          {
-            "statsDataId": "0000010205",
-            "cdCat01": "#E0110202"
-          },
-          {
-            "statsDataId": "0000010205",
-            "cdCat01": "#E0110203"
-          }
-        ],
-        "labels": [
-          "小学校",
-          "中学校",
-          "高等学校"
-        ],
-        "seriesColors": [
-          "population",
-          "improve",
-          "count"
-        ]
-      },
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "rankingLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "学校",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-edu-culture-trend",
-      "componentType": "line-chart",
-      "title": "文化施設数の推移（人口100万人当たり）",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010207",
-            "cdCat01": "#G01104"
-          },
-          {
-            "statsDataId": "0000010207",
-            "cdCat01": "#G01101"
-          }
-        ],
-        "labels": [
-          "図書館",
-          "公民館"
-        ],
-        "seriesColors": [
-          "population",
-          "count"
-        ]
-      },
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "rankingLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "文化施設",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-edu-university-enrollment-trend",
-      "componentType": "line-chart",
-      "title": "最終学歴が大学・大学院卒の割合の推移",
+      "title": "教育到達と県内大学進学率の推移",
       "componentProps": {
         "estatParams": [
           {
             "statsDataId": "0000010205",
             "cdCat01": "#E09504"
+          },
+          {
+            "statsDataId": "0000010205",
+            "cdCat01": "#E0940302"
           }
         ],
         "labels": [
-          "大学・大学院卒の割合"
+          "大学・大学院卒の割合",
+          "県内大学進学率"
         ],
         "seriesColors": [
-          "population"
+          "population",
+          "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "final-education-university-graduate-school-ratio",
+        "in-pref-university-entrance-ratio-by-highschool-origin"
+      ],
       "sourceName": "総務省 社会・人口統計体系（学校基本調査）",
-      "sourceLink": null,
-      "rankingLink": "/ranking/final-education-university-graduate-school-ratio",
+      "sourceLink": "https://www.mext.go.jp/b_menu/toukei/chousa01/kihon/kekka/k_detail/2024.htm",
+      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -137,37 +111,9 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
       "sortOrder": 10
     },
     {
-      "componentKey": "theme-edu-in-pref-university-trend",
-      "componentType": "line-chart",
-      "title": "県内大学進学率の推移",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010205",
-            "cdCat01": "#E0940302"
-          }
-        ],
-        "labels": [
-          "県内大学進学率"
-        ],
-        "seriesColors": [
-          "danger"
-        ]
-      },
-      "sourceName": "総務省 社会・人口統計体系（学校基本調査）",
-      "sourceLink": null,
-      "rankingLink": "/ranking/in-pref-university-entrance-ratio-by-highschool-origin",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 20
-    },
-    {
       "componentKey": "theme-edu-school-type-breakdown",
       "componentType": "donut-chart",
-      "title": "学校種別の学校数（最新年）",
+      "title": "学校種別の構成（最新年）",
       "componentProps": {
         "statsDataId": "0000010105",
         "categories": [
@@ -200,15 +146,50 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
         "topN": 5
       },
       "sourceName": "総務省 社会・人口統計体系（学校基本調査）",
-      "sourceLink": null,
+      "sourceLink": "https://www.mext.go.jp/b_menu/toukei/chousa01/kihon/kekka/k_detail/2024.htm",
       "rankingLink": "/ranking/university-count",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": null,
-      "sortOrder": 30
+      "sortOrder": 20
     }
+  ],
+  evidenceTopics: [
+    {
+      key: "facility-access",
+      lensKey: "regional-access",
+      title: "教育・文化施設への地域アクセス",
+      question:
+        "人口や可住地面積を基準にすると、施設の配置は地域ごとにどう異なるか",
+      summary:
+        "学校・図書館・公民館は、実数だけでなく対象人口と居住可能な面積を分けて比較します。",
+      sourceKeys: ["mext-whitepaper-2024", "mext-statistical-overview-2024"],
+      relatedRankingKeys: [
+        "library-count-per-million",
+        "elementary-school-count-per-100km2-habitable",
+        "junior-high-school-count-per-100km2-habitable",
+        "high-school-count-per-100km2-habitable",
+        "public-hall-count-per-million",
+      ],
+      relatedThemeKeys: ["population-dynamics", "living-housing"],
+    },
+    {
+      key: "higher-education-mobility",
+      lensKey: "mobility",
+      title: "高等教育への進学と地域移動",
+      question: "教育到達と県内進学は、地域ごとにどのような違いを示すか",
+      summary:
+        "大学進学に関する割合を、最終学歴と県内進学という異なる問いに分けて読みます。",
+      sourceKeys: ["mext-whitepaper-2024", "mext-school-basic-survey-2024"],
+      relatedRankingKeys: [
+        "final-education-university-graduate-school-ratio",
+        "in-pref-university-entrance-ratio-by-highschool-origin",
+      ],
+      relatedChartKeys: ["theme-edu-higher-education-trend"],
+      relatedThemeKeys: ["labor-mobility", "population-dynamics"],
+    },
   ],
   "keywords": [
     "学校数",

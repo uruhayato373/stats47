@@ -1,11 +1,11 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from 'next/server';
 
-import { resolvePageCacheHeaders } from "@/lib/cache-policy";
-import { UrlPolicy } from "@/lib/url-policy";
+import { resolvePageCacheHeaders } from '@/lib/cache-policy';
+import { UrlPolicy } from '@/lib/url-policy';
 
-import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
-import { LEGACY_CATEGORY_KEYS_SET } from "@/config/legacy-category-keys";
-import { REDIRECT_TAG_KEYS } from "@/config/redirect-tag-keys";
+import { BLOG_SLUG_REDIRECTS } from '@/config/blog-redirects';
+import { LEGACY_CATEGORY_KEYS_SET } from '@/config/legacy-category-keys';
+import { REDIRECT_TAG_KEYS } from '@/config/redirect-tag-keys';
 
 /**
  * 410 Gone 応答（CDN cacheable + noindex 強化）。
@@ -21,8 +21,8 @@ function gone(): Response {
   return new Response(null, {
     status: 410,
     headers: {
-      "Cache-Control": "public, max-age=86400, s-maxage=604800",
-      "X-Robots-Tag": "noindex",
+      'Cache-Control': 'public, max-age=86400, s-maxage=604800',
+      'X-Robots-Tag': 'noindex',
     },
   });
 }
@@ -40,10 +40,24 @@ const OLD_CATEGORY_KEYS = LEGACY_CATEGORY_KEYS_SET;
  * リクエストごとに new Set を作らないよう module スコープに hoist (2026-06)。
  */
 const TYPE_A_THEME_SLUGS = new Set([
-  "population-dynamics", "aging-society", "living-housing", "local-economy",
-  "labor-wages", "manufacturing", "healthcare", "safety", "education-culture",
-  "tourism", "consumer-prices", "foreign-residents", "occupation-salary",
-  "real-income", "labor-mobility", "local-finance", "fishery-marine", "climate",
+  'population-dynamics',
+  'aging-society',
+  'living-housing',
+  'local-economy',
+  'labor-wages',
+  'manufacturing',
+  'healthcare',
+  'safety',
+  'education-culture',
+  'tourism',
+  'consumer-prices',
+  'foreign-residents',
+  'occupation-salary',
+  'real-income',
+  'labor-mobility',
+  'local-finance',
+  'fishery-marine',
+  'climate',
 ]);
 
 /**
@@ -58,27 +72,38 @@ export const isValidPrefCode = UrlPolicy.area.isValidPrefCode;
 // （301→410 チェーン解消で Google の「壊れたリダイレクト」判定を回避）。
 
 function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
-  const segments = pathname.split("/").filter(Boolean);
+  const segments = pathname.split('/').filter(Boolean);
 
   // /{cat}/{sub}/dashboard/{prefCode} → /areas/{prefCode}
   // /{cat}/{sub}/ranking/{rankingKey} → /ranking/{rankingKey}
   if (segments.length >= 4 && OLD_CATEGORY_KEYS.has(segments[0])) {
     const pageType = segments[2];
     const key = segments[3];
-    if (pageType === "dashboard" && /^\d{5}$/.test(key)) {
+    if (pageType === 'dashboard' && /^\d{5}$/.test(key)) {
       if (!UrlPolicy.area.isValidPrefCode(key)) return gone();
-      return NextResponse.redirect(new URL(`/areas/${key}`, baseUrl), { status: 301 });
+      return NextResponse.redirect(new URL(`/areas/${key}`, baseUrl), {
+        status: 301,
+      });
     }
-    if (pageType === "ranking" && key) {
-      if (UrlPolicy.ranking.isGone(key)) return gone();
-      return NextResponse.redirect(new URL(`/ranking/${key}`, baseUrl), { status: 301 });
+    if (pageType === 'ranking' && key) {
+      if (UrlPolicy.ranking.isGone(key) || !UrlPolicy.ranking.isKnown(key))
+        return gone();
+      return NextResponse.redirect(new URL(`/ranking/${key}`, baseUrl), {
+        status: 301,
+      });
     }
   }
 
   // /area-profile/{prefCode} → /areas/{prefCode}
-  if (segments.length >= 2 && segments[0] === "area-profile" && /^\d{5}$/.test(segments[1])) {
+  if (
+    segments.length >= 2 &&
+    segments[0] === 'area-profile' &&
+    /^\d{5}$/.test(segments[1])
+  ) {
     if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
-    return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), { status: 301 });
+    return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), {
+      status: 301,
+    });
   }
 
   // /areas/{prefCode}/administrativefinancial → /themes/local-finance?pref={prefCode}
@@ -86,40 +111,52 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
   // 旧 URL アクセスを themes 側の 1 県深掘りに集約する 301。
   if (
     segments.length === 3 &&
-    segments[0] === "areas" &&
+    segments[0] === 'areas' &&
     /^\d{5}$/.test(segments[1]) &&
-    segments[2] === "administrativefinancial"
+    segments[2] === 'administrativefinancial'
   ) {
     if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
     return NextResponse.redirect(
       new URL(`/themes/local-finance?pref=${segments[1]}`, baseUrl),
-      { status: 301 },
+      { status: 301 }
     );
   }
 
   // /dashboard/{prefCode}/... → /areas/{prefCode}（旧 URL のセグメント順序違いバリアント）
-  if (segments.length >= 2 && segments[0] === "dashboard" && /^\d{5}$/.test(segments[1])) {
+  if (
+    segments.length >= 2 &&
+    segments[0] === 'dashboard' &&
+    /^\d{5}$/.test(segments[1])
+  ) {
     if (!UrlPolicy.area.isValidPrefCode(segments[1])) return gone();
-    return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), { status: 301 });
+    return NextResponse.redirect(new URL(`/areas/${segments[1]}`, baseUrl), {
+      status: 301,
+    });
   }
 
   // 完全廃止のパスは 410 Gone
   if (
-    pathname.startsWith("/blog/prefecture-rank/") ||
-    pathname.startsWith("/stats/")
+    pathname.startsWith('/blog/prefecture-rank/') ||
+    pathname.startsWith('/stats/')
   ) {
     return gone();
   }
 
   // /{cat}/{sub}[/dashboard|/ranking] → /category/{cat} に集約 301
-  if (segments.length >= 2 && segments.length <= 3 && OLD_CATEGORY_KEYS.has(segments[0])) {
-    return NextResponse.redirect(new URL(`/category/${segments[0]}`, baseUrl), { status: 301 });
+  if (
+    segments.length >= 2 &&
+    segments.length <= 3 &&
+    OLD_CATEGORY_KEYS.has(segments[0])
+  ) {
+    return NextResponse.redirect(new URL(`/category/${segments[0]}`, baseUrl), {
+      status: 301,
+    });
   }
 
   // OLD_CATEGORY_KEYS にマッチしない旧URL構造（subcategory 先頭等）+ dashboard/ranking + prefCode
   if (
     segments.length >= 3 &&
-    (segments.includes("dashboard") || segments.includes("ranking"))
+    (segments.includes('dashboard') || segments.includes('ranking'))
   ) {
     if (segments.some((s) => /^\d{5}$/.test(s))) {
       return gone();
@@ -135,20 +172,30 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
 // 各コンテンツタイプの未登録 / 削除済 key を 410 化して Google に削除シグナル送信。
 // Phase 9 で Fix 6 / Fix 7 / Fix 9 / 旧 ranking ロジック等の重複を 1 関数に集約。
 
-function checkContentTypePolicy(pathname: string, baseUrl: string): Response | null {
+function checkContentTypePolicy(
+  pathname: string,
+  baseUrl: string
+): Response | null {
   // /ranking/prefecture/{slug} → /ranking/{slug} へ 301（known なら）/ 直接 410（unknown なら）
-  if (pathname.startsWith("/ranking/prefecture/")) {
-    const slug = pathname.slice("/ranking/prefecture/".length).split("/")[0];
+  if (pathname.startsWith('/ranking/prefecture/')) {
+    const slug = pathname.slice('/ranking/prefecture/'.length).split('/')[0];
     if (!slug) return gone();
-    if (UrlPolicy.ranking.isGone(slug)) return gone();
-    return NextResponse.redirect(new URL(`/ranking/${slug}`, baseUrl), { status: 301 });
+    if (UrlPolicy.ranking.isGone(slug) || !UrlPolicy.ranking.isKnown(slug))
+      return gone();
+    return NextResponse.redirect(new URL(`/ranking/${slug}`, baseUrl), {
+      status: 301,
+    });
   }
 
-  // /ranking/{key}: GONE は 410。未登録キーは page の notFound() に委譲
-  if (pathname.startsWith("/ranking/")) {
-    const rankingKey = pathname.slice("/ranking/".length).split("/")[0];
+  // /ranking/{key}: GONE / 未登録は middleware で 410。
+  // page の notFound() へ委譲すると OpenNext で HTTP 200 の soft-404 が固着しうる。
+  if (pathname.startsWith('/ranking/')) {
+    const rankingKey = pathname.slice('/ranking/'.length).split('/')[0];
     if (rankingKey) {
-      if (UrlPolicy.ranking.isGone(rankingKey)) {
+      if (
+        UrlPolicy.ranking.isGone(rankingKey) ||
+        !UrlPolicy.ranking.isKnown(rankingKey)
+      ) {
         return gone();
       }
     }
@@ -165,14 +212,19 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
       //   2026-07-24 実測: 8 件が 301 → 410 の 2 ホップになっていた
       //   (agricultural-processing→農産加工 等。記事が 0 本になったタグ)。
       const jaKey = REDIRECT_TAG_KEYS.get(tagKey);
-      if (jaKey && UrlPolicy.tag.isKnown(jaKey) && !UrlPolicy.tag.isGone(jaKey)) {
+      if (
+        jaKey &&
+        UrlPolicy.tag.isKnown(jaKey) &&
+        !UrlPolicy.tag.isGone(jaKey)
+      ) {
         return NextResponse.redirect(
           new URL(`/tag/${encodeURIComponent(jaKey)}`, baseUrl),
-          { status: 301 },
+          { status: 301 }
         );
       }
       if (jaKey) return gone();
-      if (UrlPolicy.tag.isGone(tagKey) || !UrlPolicy.tag.isKnown(tagKey)) return gone();
+      if (UrlPolicy.tag.isGone(tagKey) || !UrlPolicy.tag.isKnown(tagKey))
+        return gone();
     }
   }
 
@@ -182,15 +234,16 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
   }
 
   // /blog/{slug}: redirect → 301、GONE → 410、旧カテゴリ名 → 410
-  if (pathname.startsWith("/blog/")) {
-    const slug = pathname.slice("/blog/".length).split("/")[0];
+  if (pathname.startsWith('/blog/')) {
+    const slug = pathname.slice('/blog/'.length).split('/')[0];
     if (slug) {
+      // 実在する /blog/tags ハブは動的 [slug] の allowlist 対象外。
+      if (slug === 'tags' && pathname === '/blog/tags') return null;
       const newSlug = BLOG_SLUG_REDIRECTS[slug];
       if (newSlug) {
-        return NextResponse.redirect(
-          new URL(`/blog/${newSlug}`, baseUrl),
-          { status: 301 },
-        );
+        return NextResponse.redirect(new URL(`/blog/${newSlug}`, baseUrl), {
+          status: 301,
+        });
       }
       if (UrlPolicy.blog.isGone(slug)) return gone();
       // 未公開記事: ページは notFound() を呼ぶが OpenNext がそれを prerender として
@@ -199,35 +252,33 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
       if (UrlPolicy.blog.isUnpublished(slug)) return gone();
       // 旧カテゴリ名が blog slug として解釈されるパターン
       if (OLD_CATEGORY_KEYS.has(slug)) return gone();
+      // 公開記事カタログに無い slug を page の notFound() へ渡すと、OpenNext で
+      // HTTP 200 +「記事が見つかりません」が固着しうるため前段で 410 にする。
+      if (!UrlPolicy.blog.isKnownPublished(slug)) return gone();
     }
   }
 
   // /correlation: 探索 UI は廃止し、各ランキングページの「相関が高い指標」セクションに
   // 内部リンクで誘導する設計に移行（CorrelationSection 経由）。
   // /correlation 本体・配下パス・query 版すべて 410。
-  if (pathname === "/correlation" || pathname.startsWith("/correlation/")) {
+  if (pathname === '/correlation' || pathname.startsWith('/correlation/')) {
     return gone();
   }
 
   // /dashboard/* (legacy redirect でカバーされない亜種を捕捉)
-  if (pathname.startsWith("/dashboard") || pathname.includes("/dashboard/")) {
+  if (pathname.startsWith('/dashboard') || pathname.includes('/dashboard/')) {
     return gone();
   }
 
-  // /themes/local-finance-city → /themes/local-finance/cities (301 統合)
-  // 動的ルート [themeSlug] が解決してしまう重複 URL を正典 (市区町村財政ページ) へ集約。
-  // themeKey は KNOWN のため下の unknown→410 には落ちない。canonical/ナビ/sitemap は
-  // 既に正典を指す (config/theme-urls.ts)。
-  if (pathname === "/themes/local-finance-city") {
-    return NextResponse.redirect(
-      new URL("/themes/local-finance/cities", baseUrl),
-      { status: 301 },
-    );
+  // 市区町村テーマは `/themes/*` から分離した。地方財政は母集団監査中のため
+  // 公開済み市区町村ハブへ一時転送し、存在しない財政ランキングを見せない。
+  if (pathname === '/themes/local-finance-city') {
+    return NextResponse.redirect(new URL('/municipalities', baseUrl));
   }
 
   // /themes/{unknown-slug} → 410
-  if (pathname.startsWith("/themes/")) {
-    const slug = pathname.slice("/themes/".length).split("/")[0];
+  if (pathname.startsWith('/themes/')) {
+    const slug = pathname.slice('/themes/'.length).split('/')[0];
     if (slug && !UrlPolicy.theme.isKnown(slug)) {
       return gone();
     }
@@ -236,11 +287,21 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
   // /japan/{unknown-slug} → 410 (GEO-SCOPE-SEPARATION-01 WP5)。
   // /themes と同型の判定だが、UrlPolicy.japan は独立の known 集合を持つ
   // (education-culture pilot の1テーマのみ known。/themes の known とは意図的に別集合)。
-  if (pathname.startsWith("/japan/")) {
-    const slug = pathname.slice("/japan/".length).split("/")[0];
+  if (pathname.startsWith('/japan/')) {
+    const slug = pathname.slice('/japan/'.length).split('/')[0];
     if (slug && !UrlPolicy.japan.isKnown(slug)) {
       return gone();
     }
+  }
+
+  if (pathname.startsWith('/municipalities/themes/')) {
+    const slug = pathname.slice('/municipalities/themes/'.length).split('/')[0];
+    if (slug && !UrlPolicy.municipality.isKnownTheme(slug)) return gone();
+  }
+
+  if (pathname.startsWith('/municipalities/ranking/')) {
+    const key = pathname.slice('/municipalities/ranking/'.length).split('/')[0];
+    if (key && !UrlPolicy.municipality.isKnownRanking(key)) return gone();
   }
 
   return null;
@@ -251,14 +312,14 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
 // ============================================================================
 
 function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
-  const seg = pathname.split("/").filter(Boolean);
-  if (seg[0] !== "areas") return null;
+  const seg = pathname.split('/').filter(Boolean);
+  if (seg[0] !== 'areas') return null;
 
   // Next.js 内部ルート（opengraph-image 等）は 410 対象外
-  if (seg[2] === "opengraph-image") return null;
+  if (seg[2] === 'opengraph-image') return null;
 
   // /areas/{無効5桁コード}: cities セグメント以外は 410
-  if (seg.length >= 2 && seg[1] !== "cities") {
+  if (seg.length >= 2 && seg[1] !== 'cities') {
     if (/^\d{5}$/.test(seg[1]) && !UrlPolicy.area.isValidPrefCode(seg[1])) {
       return gone();
     }
@@ -267,46 +328,68 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
   // /areas/{prefCode}/{5桁数字} → 410（cityCode が areaCode 直下にきた異常パターン）
   if (
     seg.length >= 3 &&
-    seg[1] !== "cities" &&
+    seg[1] !== 'cities' &&
     /^\d{5}$/.test(seg[2]) &&
     seg[2] !== seg[1]
   ) {
     return gone();
   }
 
+  // /areas/{prefCode}/cities は一覧 route を持たない。
+  if (seg.length === 3 && seg[2] === 'cities') return gone();
+
+  // city / city-category は実在自治体と親県を静的マスタで検証する。
+  // 未存在を page の notFound() に渡すと OpenNext で 200 soft-404 になりうる。
+  if (seg.length >= 4 && seg[2] === 'cities') {
+    const areaCode = seg[1];
+    const cityCode = seg[3];
+    if (
+      !UrlPolicy.area.isValidPrefCode(areaCode) ||
+      !UrlPolicy.city.isKnownUnderPrefecture(areaCode, cityCode)
+    ) {
+      return gone();
+    }
+    if (seg.length === 5 && !UrlPolicy.cityCategory.isKnown(seg[4])) {
+      return gone();
+    }
+    if (seg.length > 5) return gone();
+  }
+
   // /areas/{prefCode}/{categoryKey} → /areas/{prefCode}/{themeSlug} (301)
   // 旧カテゴリ別ページを対応するテーマページへリダイレクト
   const CATEGORY_TO_THEME: Record<string, string> = {
-    population: "population-dynamics",
-    laborwage: "labor-wages",
-    economy: "local-economy",
-    agriculture: "local-economy",
-    miningindustry: "manufacturing",
-    construction: "living-housing",
-    commercial: "local-economy",
-    tourism: "tourism",
-    socialsecurity: "healthcare",
-    educationsports: "education-culture",
-    safetyenvironment: "safety",
-    landweather: "climate",
-    international: "foreign-residents",
-    administrativefinancial: "local-finance",
+    population: 'population-dynamics',
+    laborwage: 'labor-wages',
+    economy: 'local-economy',
+    agriculture: 'local-economy',
+    miningindustry: 'manufacturing',
+    construction: 'living-housing',
+    commercial: 'local-economy',
+    tourism: 'tourism',
+    socialsecurity: 'healthcare',
+    educationsports: 'education-culture',
+    safetyenvironment: 'safety',
+    landweather: 'climate',
+    international: 'foreign-residents',
+    administrativefinancial: 'local-finance',
     // テーマ未対応カテゴリ → エリアプロフィールへ
-    energy: "",
-    ict: "",
-    infrastructure: "",
+    energy: '',
+    ict: '',
+    infrastructure: '',
   };
   if (
     seg.length === 3 &&
     /^\d{5}$/.test(seg[1]) &&
     UrlPolicy.area.isValidPrefCode(seg[1]) &&
-    seg[2] !== "cities" &&
+    seg[2] !== 'cities' &&
     !/^\d{5}$/.test(seg[2]) &&
     Object.prototype.hasOwnProperty.call(CATEGORY_TO_THEME, seg[2])
   ) {
     const themeSlug = CATEGORY_TO_THEME[seg[2]];
     // テーマスラグ空文字 = 対応テーマなし → エリアプロフィールへ
-    const dest = themeSlug ? `/areas/${seg[1]}/${themeSlug}` : `/areas/${seg[1]}`;
+    const dest = themeSlug
+      ? `/areas/${seg[1]}/${themeSlug}`
+      : `/areas/${seg[1]}`;
     return NextResponse.redirect(new URL(dest, req.url), { status: 301 });
   }
 
@@ -326,7 +409,7 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
     seg.length >= 3 &&
     /^\d{5}$/.test(seg[1]) &&
     UrlPolicy.area.isValidPrefCode(seg[1]) &&
-    seg[2] !== "cities" &&
+    seg[2] !== 'cities' &&
     !/^\d{5}$/.test(seg[2]) &&
     !UrlPolicy.area.isIndexableCategory(seg[2])
   ) {
@@ -344,21 +427,34 @@ export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // --- ホスト正規化: www → 非 www（301）---
-  const host = req.headers.get("host") || "";
-  if (host.startsWith("www.")) {
-    const url = new URL(pathname, "https://stats47.jp");
+  const host = req.headers.get('host') || '';
+  if (host.startsWith('www.')) {
+    const url = new URL(pathname, 'https://stats47.jp');
     url.search = req.nextUrl.search;
     return NextResponse.redirect(url, { status: 301 });
   }
 
   // --- Trailing slash 正規化（301）---
-  if (pathname !== "/" && pathname.endsWith("/")) {
+  if (pathname !== '/' && pathname.endsWith('/')) {
     const url = new URL(pathname.slice(0, -1), req.url);
     url.search = req.nextUrl.search;
     return NextResponse.redirect(url, { status: 301 });
   }
 
   // --- Section 2: コンテンツタイプ別 Allowlist 判定 ---
+  const cityRankingMatch = pathname.match(/^\/ranking\/([^/]+)$/);
+  if (cityRankingMatch && req.nextUrl.searchParams.get('areaType') === 'city') {
+    const rankingKey = cityRankingMatch[1];
+    if (UrlPolicy.municipality.isKnownRanking(rankingKey)) {
+      return NextResponse.redirect(
+        new URL(`/municipalities/ranking/${rankingKey}`, req.url),
+        301
+      );
+    }
+    if (!UrlPolicy.ranking.isKnown(rankingKey)) return gone();
+    return NextResponse.redirect(new URL(`/ranking/${rankingKey}`, req.url), 301);
+  }
+
   // baseUrl は req.url 由来の origin を使う (preview/staging が prod へ 301 しないように)。
   const contentResponse = checkContentTypePolicy(pathname, req.url);
   if (contentResponse) return contentResponse;
@@ -374,24 +470,27 @@ export default function middleware(req: NextRequest) {
   // --- 既存ルートへの query → path 正規化 301 ---
   // /{categoryKey} → /category/{categoryKey}
   {
-    const segments = pathname.split("/").filter(Boolean);
+    const segments = pathname.split('/').filter(Boolean);
     if (segments.length === 1 && OLD_CATEGORY_KEYS.has(segments[0])) {
       return NextResponse.redirect(
         new URL(`/category/${segments[0]}`, req.url),
-        { status: 301 },
+        { status: 301 }
       );
     }
   }
 
   // /areas/{areaCode}?category={key} → /areas/{areaCode}/{key}
-  if (pathname.startsWith("/areas/") && req.nextUrl.searchParams.has("category")) {
-    const pathSegments = pathname.split("/").filter(Boolean);
+  if (
+    pathname.startsWith('/areas/') &&
+    req.nextUrl.searchParams.has('category')
+  ) {
+    const pathSegments = pathname.split('/').filter(Boolean);
     if (pathSegments.length >= 2) {
-      const categoryKey = req.nextUrl.searchParams.get("category");
+      const categoryKey = req.nextUrl.searchParams.get('category');
       if (categoryKey) {
         const newUrl = new URL(`${pathname}/${categoryKey}`, req.url);
-        const ranking = req.nextUrl.searchParams.get("ranking");
-        if (ranking) newUrl.searchParams.set("ranking", ranking);
+        const ranking = req.nextUrl.searchParams.get('ranking');
+        if (ranking) newUrl.searchParams.set('ranking', ranking);
         return NextResponse.redirect(newUrl, { status: 301 });
       }
     }
@@ -408,11 +507,11 @@ export default function middleware(req: NextRequest) {
   {
     const compareMatch = pathname.match(/^\/compare(?:\/([^/]+))?\/?$/);
     if (compareMatch) {
-      const categoryKey = compareMatch[1] ?? "population";
+      const categoryKey = compareMatch[1] ?? 'population';
       const search = req.nextUrl.search;
       return NextResponse.redirect(
         new URL(`/category/${categoryKey}/compare${search}`, req.url),
-        { status: 301 },
+        { status: 301 }
       );
     }
   }
@@ -421,16 +520,16 @@ export default function middleware(req: NextRequest) {
   //  - /ports → /themes/ports (港湾テーマ新設)
   //  - /fishing-ports → /themes/fishery-marine (既存「漁業（水産業）」テーマ、漁港数を含む)
   // 独立ページを廃止し theme に一本化。クエリは保持。
-  if (pathname === "/ports" || pathname === "/ports/") {
+  if (pathname === '/ports' || pathname === '/ports/') {
     return NextResponse.redirect(
       new URL(`/themes/ports${req.nextUrl.search}`, req.url),
-      { status: 301 },
+      { status: 301 }
     );
   }
-  if (pathname === "/fishing-ports" || pathname === "/fishing-ports/") {
+  if (pathname === '/fishing-ports' || pathname === '/fishing-ports/') {
     return NextResponse.redirect(
       new URL(`/themes/fishery-marine${req.nextUrl.search}`, req.url),
-      { status: 301 },
+      { status: 301 }
     );
   }
   // /station-passengers・/station-passengers/[prefCode] (廃止 2026-05-28) → /themes/railway に統合
@@ -438,7 +537,7 @@ export default function middleware(req: NextRequest) {
   if (/^\/station-passengers(?:\/.*)?$/.test(pathname)) {
     return NextResponse.redirect(
       new URL(`/themes/railway${req.nextUrl.search}`, req.url),
-      { status: 301 },
+      { status: 301 }
     );
   }
   // /maps/highway-timeline・/maps/highway-timeline/[year] (廃止 2026-05-28) → /themes/roads に統合
@@ -446,7 +545,7 @@ export default function middleware(req: NextRequest) {
   if (/^\/maps\/highway-timeline(?:\/.*)?$/.test(pathname)) {
     return NextResponse.redirect(
       new URL(`/themes/roads${req.nextUrl.search}`, req.url),
-      { status: 301 },
+      { status: 301 }
     );
   }
   // /gis-cross・/gis-cross/* (廃止 2026-05-29) → /themes に統合
@@ -458,35 +557,35 @@ export default function middleware(req: NextRequest) {
   if (/^\/gis-cross\/migration-flow(?:\/.*)?$/.test(pathname)) {
     return NextResponse.redirect(
       new URL(`/themes/population-dynamics${req.nextUrl.search}`, req.url),
-      { status: 301 },
+      { status: 301 }
     );
   }
   if (/^\/gis-cross\/depopulation-medical(?:\/.*)?$/.test(pathname)) {
     return NextResponse.redirect(
       new URL(`/themes/healthcare${req.nextUrl.search}`, req.url),
-      { status: 301 },
+      { status: 301 }
     );
   }
   if (/^\/gis-cross\/sunshine-map(?:\/.*)?$/.test(pathname)) {
     return NextResponse.redirect(
       new URL(`/themes/climate${req.nextUrl.search}`, req.url),
-      { status: 301 },
+      { status: 301 }
     );
   }
   if (/^\/gis-cross(?:\/.*)?$/.test(pathname)) {
     return NextResponse.redirect(
       new URL(`/themes${req.nextUrl.search}`, req.url),
-      { status: 301 },
+      { status: 301 }
     );
   }
 
   // /blog?q=... → /search?type=blog&...
-  if (pathname === "/blog") {
+  if (pathname === '/blog') {
     const sp = req.nextUrl.searchParams;
-    const blogParamKeys = ["q", "tags", "year", "month"];
+    const blogParamKeys = ['q', 'tags', 'year', 'month'];
     if (blogParamKeys.some((key) => sp.has(key))) {
-      const url = new URL("/search", req.url);
-      url.searchParams.set("type", "blog");
+      const url = new URL('/search', req.url);
+      url.searchParams.set('type', 'blog');
       for (const key of blogParamKeys) {
         const value = sp.get(key);
         if (value) url.searchParams.set(key, value);
@@ -497,7 +596,7 @@ export default function middleware(req: NextRequest) {
 
   // パス名ヘッダーの追加（page.tsx 側で利用）
   const requestHeaders = new Headers(req.headers);
-  requestHeaders.set("x-pathname", pathname);
+  requestHeaders.set('x-pathname', pathname);
 
   const response = NextResponse.next({
     request: { headers: requestHeaders },
@@ -506,13 +605,16 @@ export default function middleware(req: NextRequest) {
   // Workers Cache は path/query を主キーとし、RSC ヘッダーは既定キーに含まれない。
   // HTML だけを共有キャッシュし、RSC / 認証・preview / 非安全メソッドは no-store にする。
   const cacheHeaders = resolvePageCacheHeaders(req, pathname);
-  response.headers.set("Cache-Control", cacheHeaders.cacheControl);
-  response.headers.set("Vary", cacheHeaders.vary);
+  response.headers.set('Cache-Control', cacheHeaders.cacheControl);
+  response.headers.set('Vary', cacheHeaders.vary);
   if (cacheHeaders.cloudflareCdnCacheControl) {
-    response.headers.set("Cloudflare-CDN-Cache-Control", cacheHeaders.cloudflareCdnCacheControl);
+    response.headers.set(
+      'Cloudflare-CDN-Cache-Control',
+      cacheHeaders.cloudflareCdnCacheControl
+    );
   }
   if (cacheHeaders.cacheTag) {
-    response.headers.set("Cache-Tag", cacheHeaders.cacheTag);
+    response.headers.set('Cache-Tag', cacheHeaders.cacheTag);
   }
 
   return response;
@@ -525,6 +627,6 @@ export const config = {
      * - _next/static / _next/image / favicon / 静的アセット
      * - api/ ルート（middleware を通す必要なし、Phase 9 で明示）
      */
-    "/((?!_next/static|_next/image|api/|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)).*)",
+    '/((?!_next/static|_next/image|api/|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)).*)',
   ],
 };

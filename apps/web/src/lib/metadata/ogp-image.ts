@@ -13,12 +13,23 @@
 const R2_PUBLIC_URL =
   process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
 
-/** ブログ OGP / サイト内サムネイルの共通表示比率。生成契約は 1200×630。 */
-export const BLOG_THUMBNAIL_ASPECT_CLASS = "aspect-[1200/630]";
+/** サイト内ブログサムネイルの表示比率。生成契約は640×336（40:21）。 */
+export const BLOG_THUMBNAIL_ASPECT_CLASS = "aspect-[40/21]";
+
+/** stable R2 keyの旧bytesを掴まないためのblog card表示版。 */
+export const BLOG_THUMBNAIL_CACHE_VERSION = "20260822-v3";
 
 /** R2 キー (先頭スラッシュ無し) から静的 OGP 画像の絶対 URL を作る。 */
 export function ogpImageUrl(r2Key: string): string {
   return `${R2_PUBLIC_URL}/${r2Key}`;
+}
+
+export function blogThumbnailUrl(
+  slug: string,
+  variant: "light" | "dark",
+): string {
+  const key = `app/blog/${slug}/thumbnail-${variant}.webp`;
+  return `${ogpImageUrl(key)}?v=${BLOG_THUMBNAIL_CACHE_VERSION}`;
 }
 
 export const ogpImageKeys = {

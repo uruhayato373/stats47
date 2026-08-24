@@ -251,6 +251,11 @@ export interface RankingItem {
   rankingName: string;
   /** 表示タイトル（リストや見出しで使用） */
   title: string;
+  /**
+   * 読者向けの平易な指標名。正準名 title から決定規則で導出して焼き込む。
+   * 旧 snapshot との後方互換のため optional。
+   */
+  readerLabel?: string;
   /** サブタイトル（補足的なタイトル） */
   subtitle?: string;
   /** 対象属性（例: "15歳以上"） */
@@ -392,6 +397,8 @@ export interface FeaturedRankingItem extends RankingItem {
 export interface CategoryRankingItem {
   rankingKey: string;
   title: string;
+  /** 読者向けの平易な指標名。旧 snapshot は欠損しうる。 */
+  readerLabel?: string | null;
   subtitle: string | null;
   unit: string;
   latestYear: unknown;

@@ -6,7 +6,6 @@ import Link from "next/link";
 
 import {
     type RankingItem,
-    type RankingNationalTrendSnapshot,
     type RankingValue,
     buildRankingDisplayInfo,
 } from "@stats47/ranking";
@@ -31,8 +30,6 @@ import {
     AdSenseAd,
     RANKING_PAGE_TABLE_SIDE,
 } from "@/lib/google-adsense";
-
-import { NationalTrendCard } from "../NationalTrendCard/NationalTrendCard";
 
 import { RankingBasisSwitcher, type RankingBasisMember } from "./RankingBasisSwitcher";
 import { RankingPageContentSections, type RankingPageSections } from "./RankingPageContentSections";
@@ -63,8 +60,6 @@ interface RankingKeyPageClientProps {
     groupMembers?: RankingBasisMember[];
     /** ArticleShell の breadcrumb slot に描画するパンくず */
     breadcrumb?: React.ReactNode;
-    /** 事前生成済み全国時系列 (未生成なら null → カード非表示) */
-    nationalTrend?: RankingNationalTrendSnapshot | null;
 }
 
 export function RankingKeyPageClient({
@@ -80,7 +75,6 @@ export function RankingKeyPageClient({
     surveyName,
     groupMembers = [],
     breadcrumb,
-    nationalTrend = null,
 }: RankingKeyPageClientProps) {
     const {
         activeRankingItem,
@@ -282,18 +276,7 @@ export function RankingKeyPageClient({
                     yearName={latestYearName}
                 />
 
-                {/*
-                  order-5 の枠は残す。この列は order-* でモバイルの並び (地図を先に見せる) を
-                  作っているので、order を持たない兄弟を足すと並びが崩れる。
-                  全国推移カードは本文コンテンツなので同じ枠の中に入れる。
-                */}
                 <div className="order-5 flex flex-col gap-4">
-                    <NationalTrendCard
-                        nationalTrend={nationalTrend}
-                        normalizationType={normalizationType}
-                        decimalPlaces={displayInfo.decimalPlaces}
-                    />
-
                     <RankingPageContentSections
                         rankingKey={rankingKey}
                         rankingItem={rankingItem}

@@ -3,7 +3,7 @@ import test from 'node:test';
 
 import { buildTab } from '../gallery-collectors.mjs';
 
-test('blog-card は 1200×630 の約1.91:1として列挙する', async () => {
+test('blog-card は640×336の約1.91:1として列挙する', async () => {
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async () =>
     new Response(

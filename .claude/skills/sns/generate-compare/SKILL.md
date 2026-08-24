@@ -14,7 +14,7 @@ R2 観測値から 2 地域の比較データを取得し、`.local/r2/sns/compa
 | step | 内容 | 詳細 |
 |---|---|---|
 | `data` | 比較 data.json 生成 (下記手順) | 本ファイル |
-| `captions` | X / IG / YouTube キャプション生成 (TikTok は撤退で対象外) | `reference/captions.md` |
+| `captions` | X / IG キャプション生成 (YouTube pilot は通常動画 master-first、TikTok は撤退) | `reference/captions.md` |
 | `all` (既定) | data → captions | — |
 
 ## ディレクトリ構造

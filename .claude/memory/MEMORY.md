@@ -7,6 +7,7 @@
 - [feedback_periodic_progress_reports.md](feedback_periodic_progress_reports.md) — 長時間のsubagent/workflow中は聞かれる前に約4-5分間隔で実測ベース進捗報告を自発的に(2026-07-17指摘)
 - [feedback_exit_code_not_via_pipe.md](feedback_exit_code_not_via_pipe.md) — 検証exit codeを`| tail`越しで測ると常に0(全PASS誤認)。直接実行orPIPESTATUS。全PASSなら1件壊して検証器を検証
 - [feedback_hand_synced_duplication.md](feedback_hand_synced_duplication.md) — 「追加時は両方を更新」のコメントで担保する二重管理は必ずドリフトする。件数/idは単一ソースから導出。2026-08-20にsitemap indexでcities1080URLが2か月未提出
+- [feedback_page_semantic_dedup_contract.md](feedback_page_semantic_dedup_contract.md) — 同じ意味のUIを別部品が描画すると単体テストは両方通る。ページ合成のcanonical ownerを1つにし、feature全体のrenderer数を契約テストで固定する
 - [feedback_mutation_test_passes_wrongly.md](feedback_mutation_test_passes_wrongly.md) — ミューテーションでも「間違った理由で赤/緑」になる。probeが除外語彙に当たっていないか・赤の理由がクラッシュでないかを毎回読む
 - [feedback_develop_had_no_ci_gate.md](feedback_develop_had_no_ci_gate.md) — develop pushは長らく無検査で壊れが次のマージ担当に回っていた。2026-08-20にdevelop-quality-gate.yml + npm run preflightで是正
 - [feedback_debt_baseline_shrink_only.md](feedback_debt_baseline_shrink_only.md) — maintenance-debt baselineは縮小専用(2026-07-14)。CI --ratchet-checkが増加拒否。新規debtは実修正かルール修正のみ
@@ -19,7 +20,7 @@
 - [project_survey_linkage_ssot.md](project_survey_linkage_ssot.md) — ranking↔調査紐付けSSOT再設計(2026-07-06,PR#535)。/survey空prerenderをforce-dynamicで解消。item.jsonにsurveyIds焼き込み。orphan調査8件削除(83→75)。管理=survey-curator+/audit-survey-linkage
 - [project_blog_topic_queue_seo_expansion.md](project_blog_topic_queue_seo_expansion.md) — 新規ブログSEO拡充(2026-07-05)。「次に何を書くか」=topic-queue.json(build-topic-queue.mjs)。型8種に拡張(D2食品/F市区町村/G移動)。タイトル~17字・gap1要素。/plan-article-queue。戦略正典=docs/02_実装計画/15
 - [feedback_theme_indicator_research_pattern.md](feedback_theme_indicator_research_pattern.md) — テーマ指標調査は同一セッションで一次資料/e-Stat IDを解決。未解決候補は保存せず、tool回数を証拠にしない
-- [project_sns_reorg_2026_07.md](project_sns_reorg_2026_07.md) — SNS/Remotion整理+SSOT化(2026-07-04)。正典=sns-content-standards.md、投稿台帳SSOT=.claude/state/sns/posts.json。IG主力/X自動化/YouTube月1/TikTok撤退。6週投稿ゼロ対策=/sns-weekly-plan
+- [project_sns_reorg_2026_07.md](project_sns_reorg_2026_07.md) — SNS/Remotion整理+SSOT化。正典=sns-content-standards.md、投稿台帳=posts.json。YouTubeは2026-08-23から通常動画3本のmaster-first pilot、TikTok撤退。専任agent/OAuthは成功判定まで復活させない
 - [project_react_to_news_pipeline.md](project_react_to_news_pipeline.md) — じじネタ→即SNS瞬発パイプライン(2026-07-02)。find-metrics(発見索引・同義語レイヤー必須)+quick-still(指標key→SVG+PNG+caption)+/react-to-news。未決=tags恒久バックフィル/quick-still→publish-x連結
 - [feedback_generatestaticparams_r2_notfound_stuck.md](feedback_generatestaticparams_r2_notfound_stuck.md) — R2依存動的routeにgenerateStaticParams付けると●SSG化→build時R2不可でnotFound永久固着(2026-06-22 ranking/areas/cities)。修正=撤去しrevalidateのみ→ƒ。正典nextjs-ssg-preservation.md
 - [project_ai_content_remediation_queue.md](project_ai_content_remediation_queue.md) — ranking ai-content(考察/地域別/FAQ/県別)DBレス生成+状態付き是正キュー。doneはR2 auditRow通過で再導出=R2真実源。build-ai-content-queue.mjs→ranking-content-author並列。正典02_機能バックログ
@@ -86,7 +87,7 @@
 - [project_r2_writes_ci_only.md](project_r2_writes_ci_only.md) — 2026-06-20: ローカル/CI両方からremote R2読み書き可。remoteが唯一の真実源。ローカルミラー廃止。ローカル書込はR2 S3 creds要
 - [project_ranking_download_onthefly.md](project_ranking_download_onthefly.md) — ranking downloadはオンザフライ生成(route)。事前bakeは23K files/timeoutで不採用。iconv-lite SJISはWorkers動作確認済
 - [feedback_check_why_removed_before_reviving.md](feedback_check_why_removed_before_reviving.md) — 削除済みコード復活前に削除理由をgit log/docs確認。スケール処理は単一サンプル成功でOKとしない
-- [project_env_local_ci_consolidation.md](project_env_local_ci_consolidation.md) — .env.local秘匿値をCI専任に削減(2026-05-29)。AdSense/PSI/META/GA削除済、YouTube完全撤退(GOOGLE_OAUTH_*削除)
+- [project_env_local_ci_consolidation.md](project_env_local_ci_consolidation.md) — .env.local秘匿値をCI専任に削減(2026-05-29)。YouTube OAuth/自動uploadは撤去済みのまま。2026-08-23の通常動画pilotはStudio手動運用
 - [feedback_shared_working_copy_git_race.md](feedback_shared_working_copy_git_race.md) — 2セッションが同一working copy/.git共有でgitレース(index/HEAD奪い合い)。回避はworktree分離
 - [project_sankey_landing_views.md](project_sankey_landing_views.md) — Sankey着地ビュー。migration(#393)/finance(#396)本番稼働、共通HubSankey。通勤はPhase 2(statsDataId 0003454526)
 - [feedback_sticky_aside_max_h.md](feedback_sticky_aside_max_h.md) — CSS Grid(items-start)内sticky asideにmax-h-[calc(100vh-5.5rem)]+overflow必須。削除でフッター非表示(2度踏んだ)

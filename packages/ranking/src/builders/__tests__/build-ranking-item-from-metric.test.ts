@@ -57,6 +57,7 @@ describe("buildRankingItemFromMetric", () => {
     expect(item.areaType).toBe("prefecture");
     expect(item.rankingName).toBe("総人口");
     expect(item.title).toBe("総人口");
+    expect(item.readerLabel).toBe("人口");
     expect(item.unit).toBe("人");
     expect(item.categoryKey).toBe("population");
     expect(item.isActive).toBe(true);
@@ -89,6 +90,23 @@ describe("buildRankingItemFromMetric", () => {
     // createdAt は既存を保持、updatedAt は now
     expect(item.createdAt).toBe("2025-11-09 04:27:32");
     expect(item.updatedAt).toBe(NOW);
+  });
+
+  it("正準名とは別に読者向けラベルと問いかけを焼き込む", () => {
+    const item = buildRankingItemFromMetric(
+      {
+        ...baseConfig,
+        key: "hobby-participation-rate-diy",
+        title: "日曜大工の行動者率",
+        unit: "％",
+      },
+      { values: null, now: NOW },
+    );
+
+    expect(item.rankingName).toBe("日曜大工の行動者率");
+    expect(item.title).toBe("日曜大工の行動者率");
+    expect(item.readerLabel).toBe("日曜大工をした人の割合");
+    expect(item.hook).toBe("日曜大工をした人が多い県は？");
   });
 
   it("fiscal の availableYears は降順で yearName='年度'、latestYear は先頭", () => {

@@ -23,6 +23,7 @@ model: sonnet
 
 - テーマダッシュボードの現状監査（既存 components vs IndicatorSet のギャップ分析）
 - componentKey / componentType / componentProps の設計
+- `ThemeCatalog.evidenceTopics.relatedChartKeys` と実在 `charts[].componentKey` の整合確認
 - `data/page-components/theme/<key>.json` への要素追加（git TS 編集）
 - **注意**: `area-category/` は都道府県専用データのみ。`city-*` componentKey は `city-category/` のみに置く（混在禁止）
 - generator 再生成 + cloud 一致検証の支援
@@ -58,6 +59,12 @@ sortOrder 順**で並べる。配置は「どのチャートを載せるか + so
 ### 5. 色は theme-designer の規約に従う
 
 予約色（男=#3b82f6, 女=#ec4899）、推奨マッピング（危険=#ef4444, 件数=#f59e0b, 改善=#22c55e）。
+
+### 6. 論点レンズとチャートの接続
+
+白書由来の `evidenceTopics.relatedChartKeys` は、その問いを検証できる同一 ThemeCatalog の chart だけを参照する。
+タイトル語が似ているだけの chart、未描画の componentKey、他テーマの chart key は接続しない。
+最終確認は `npm run validate:catalog --workspace=@stats47/data-configs` で行う。
 
 ## 担当スキル
 

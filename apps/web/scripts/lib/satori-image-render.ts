@@ -1,7 +1,9 @@
 import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
 
 import type { ReactNode } from 'react';
+
 import satori from 'satori';
 import sharp from 'sharp';
 
@@ -12,10 +14,13 @@ export type SatoriFont = {
   style: 'normal' | 'italic';
 };
 
+const moduleRequire = createRequire(import.meta.url);
+
 export function loadFonts(projectRoot: string): SatoriFont[] {
-  const base = join(
-    projectRoot,
-    'node_modules/@expo-google-fonts/noto-sans-jp'
+  const base = dirname(
+    moduleRequire.resolve('@expo-google-fonts/noto-sans-jp', {
+      paths: [projectRoot],
+    })
   );
   return [
     {

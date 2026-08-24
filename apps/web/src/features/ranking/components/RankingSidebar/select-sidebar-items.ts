@@ -12,6 +12,7 @@ export interface SidebarRankingItem {
     rankingKey: string;
     areaType: string;
     title: string;
+    readerLabel?: string | null;
     subtitle?: string | null;
     demographicAttr?: string | null;
     normalizationBasis?: string | null;

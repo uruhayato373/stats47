@@ -9,7 +9,7 @@
  *   npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts            # scratchpad へ (非破壊)
  *   npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply    # 本番 state を上書き
  */
-import { writeFileSync } from "fs";
+import { mkdirSync, writeFileSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { NOTE_ARTICLES } from "./index";
@@ -52,13 +52,11 @@ const output = {
   articles,
 };
 
+const scratchpad = process.env.SCRATCHPAD || "/tmp";
+if (!APPLY) mkdirSync(scratchpad, { recursive: true });
 const outPath = APPLY
   ? join(ROOT, ".claude/state/note-published-urls.json")
-  : join(
-      process.env.SCRATCHPAD ||
-        "/tmp/claude-0/-home-user-stats47/accde802-2b3c-52e9-b434-3061736191b8/scratchpad",
-      "note-published-urls.generated.json",
-    );
+  : join(scratchpad, "note-published-urls.generated.json");
 
 writeFileSync(outPath, JSON.stringify(output, null, 2) + "\n", "utf8");
 console.log(`=== generate-note-catalog ${APPLY ? "(apply)" : "(dry)"} ===`);

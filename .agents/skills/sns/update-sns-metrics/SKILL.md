@@ -1,13 +1,13 @@
 ---
 name: update-sns-metrics
-description: 各 SNS プラットフォームからメトリクスを一括取得し `.Codex/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". Instagram は公式 API、X は browser-use CLI。(YouTube は撤退済で対象外)
+description: SNS メトリクスを `.Codex/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". Instagram は公式 API、X は browser-use CLI。YouTube pilot は Studio 手動値と GA4 UTM を記録する（API自動取得なし）。
 disable-model-invocation: true
 argument-hint: [--platform x|instagram|all]
 primary_agent: sns-metrics-sync
 co_agents: [x-strategist, instagram-strategist]
 ---
 
-各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.Codex/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは投稿台帳 `.Codex/state/sns/posts.json` の各レコード（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に `sns-posts-store.cjs` の `updateById` で記録する。Instagram は Graph API v21、X は browser-use CLI を使用する。（YouTube は撤退済のため対象外。過去実績は posts.json に platform=youtube のまま残る）
+各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.Codex/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは投稿台帳 `.Codex/state/sns/posts.json` の各レコード（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に `sns-posts-store.cjs` の `updateById` で記録する。Instagram は Graph API v21、X は browser-use CLI を使用する。YouTube pilot は公開14日後に Studio から views / 30秒維持率 / 平均視聴率 / 平均視聴時間を手動取得し、GA4 の `utm_source=youtube` と合わせて EXP-006 に記録する。pilot 成功までは YouTube OAuth/API を再構築しない。
 
 **記録先の統一原則（.Codex/rules/data-storage.md）**:
 - 時系列履歴 → `.Codex/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（ヘルパ: `.Codex/scripts/lib/sns-metrics-store.cjs`）

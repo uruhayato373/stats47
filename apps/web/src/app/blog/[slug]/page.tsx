@@ -33,7 +33,9 @@ import {
     getTagKeysForArticle,
     getTagsForArticles,
     articleService,
+    resolveArticleSurveyTaxonomy,
 } from "@/features/blog/server";
+import { SurveyTaxonomyCard } from "@/features/survey";
 
 import { getRequiredBaseUrl } from "@/lib/env";
 import { RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
@@ -123,11 +125,16 @@ export default async function BlogPostPage({ params }: PageProps) {
     const uniqueSlugs = [...new Set(blogLinkSlugs)];
 
     // tagKeys / 本文リンクのタイトル / アフィバナーは互いに独立 → 並列取得 (waterfall 解消)
-    const [articleTagData, relatedArticleTitles, affiliateBannersByCategory] =
+    const [articleTagData, relatedArticleTitles, affiliateBannersByCategory, articleSurveys] =
         await Promise.all([
             getTagKeysForArticle(slug),
             findArticleTitlesBySlugs(uniqueSlugs),
             resolveAffiliateBannersByCategory(),
+            resolveArticleSurveyTaxonomy({
+                slug,
+                content: article.content,
+                snapshotSurveyIds: article.surveyIds,
+            }),
         ]);
     const tagKeys = articleTagData.map((t) => t.tagKey);
     // テキスト広告は本文 inline のみに置く。右レールの PR は画像バナーへ統一する。
@@ -184,17 +191,20 @@ export default async function BlogPostPage({ params }: PageProps) {
         publisher: buildPublisherOrganization(baseUrl),
     };
 
-    // レール上段 (非 sticky): 本文関連 widget + 広告。初期表示で見える位置に置き viewability を確保
+    // レール通常領域: 関連コンテンツ → 運営者 → 広告の順で、記事理解と回遊を優先する。
     const rail = (
         <>
-            {/* 運営者プロフィール (PC のみ。モバイルは従来どおりフッター上のグローバルカードが担う) */}
-            <div className="hidden lg:block">
-                <BlogAuthorProfileCard />
-            </div>
-
             <RelatedRankingsSection tagKeys={tagKeys} compact />
 
+            <SurveyTaxonomyCard
+                surveys={articleSurveys}
+                title="この記事の出典調査"
+                surface="blog_survey"
+            />
+
             <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />
+
+            <BlogAuthorProfileCard compact />
 
             <hr className="my-1 border-t border-border" />
 
@@ -231,8 +241,12 @@ export default async function BlogPostPage({ params }: PageProps) {
         </>
     );
 
-    // レール末尾の sticky クラスタ: TOC が読中に追従する (doboku-note パターン)
-    const railSticky = <ArticleTableOfContents content={article.content} compact />;
+    // レール末尾の sticky クラスタ: PCでTOCが読中に追従する。モバイルは本文冒頭だけを使う。
+    const railSticky = (
+        <div className="hidden lg:block">
+            <ArticleTableOfContents content={article.content} compact />
+        </div>
+    );
 
     return (
         <>

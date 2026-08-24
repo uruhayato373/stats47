@@ -41,9 +41,16 @@ docs/31_note記事原稿/a-<rankingKey>/
 指定年の都道府県行だけを使い、順位、平均、標準偏差、偏差値、上位/下位倍率を決定的に計算する。
 47県未満、値欠落、ゼロ除算、年不一致があれば原稿生成を止める。
 
+コピーは`item.json`の3層を混ぜずに使う。
+
+- `rankingName ?? title`: 正式指標名。定義・出典・タグに使う
+- `readerLabel ?? title`: 平易な指標名。画像の表示名に使う
+- `hook`: 読者への問い。記事タイトルと導入に使う
+
 ## Phase 2: 再生成可能な入力を保存する
 
 `chart-data.json`へrankingKey、year、取得時刻、計算済みsummary、全都道府県rowを保存する。
+同じ入力から表題を再現できるよう、`copy`へcanonicalTitle、readerLabel、hookも保存する。
 `data-provenance.json`へR2 source key、restore command、生成chart一覧を保存する。
 値をSVGや本文から逆算しない。
 
@@ -54,6 +61,10 @@ docs/31_note記事原稿/a-<rankingKey>/
 `reference/runbook.md`の「Phase 2: 記事テキスト生成」をtemplateとして使う。
 
 - 導入は1位・最下位・差の意外性から始める。
+- 表題は`【<year>年版】<hook> 1位は<1位県>｜都道府県ランキング`を基本形とし、
+  hookと1位県はR2／`chart-data.json`の値をそのまま使う。年齢などの`subtitle`が
+  ある場合は`【<year>年版・<subtitle>】`とし、対象条件を落とさない。
+- 「好き」「盛ん」など、観測していない嗜好・因果へ言い換えない。
 - 数値、順位、県名は`chart-data.json`だけから取る。
 - 上位/下位の背景説明には一次資料を使い、推測を事実として書かない。
 - 相関や因果を観測値だけから主張しない。
@@ -71,6 +82,8 @@ docs/31_note記事原稿/a-<rankingKey>/
 ## Gate
 
 - draftの全数値・順位が`chart-data.json`と一致する。
+- draft表題の問いが`copy.hook`、1位県が`data[0].area_name`と一致する。
+- 画像の`displayTitle`が`copy.readerLabel`と一致し、正式名を平易名として再利用しない。
 - `data-provenance.json`のrankingKey/year/source/chart一覧が実ファイルと一致する。
 - 生成対象ならPNG 4枚がdecodeでき、期待寸法である。
 - stats47 linkが`/rankings/`でなく`/ranking/`を使う。
@@ -79,7 +92,7 @@ docs/31_note記事原稿/a-<rankingKey>/
 ## 公開への引き渡し
 
 ユーザーがR2同期または公開も明示した場合だけ`reference/runbook.md`の
-「生成後: R2同期」を読み、`.Codex/rules/branch-workflow.md`の承認境界に従う。
+「生成後: R2同期」を読み、`.claude/rules/branch-workflow.md`の承認境界に従う。
 
 ## Output Contract
 

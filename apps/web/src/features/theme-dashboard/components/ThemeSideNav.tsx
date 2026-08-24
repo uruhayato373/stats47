@@ -42,7 +42,11 @@ export function ThemeSideNav({
   areaContext,
   showRegion = true,
 }: Props) {
-  const options = buildThemeSwitcherOptions(areaContext);
+  const { hasProvider, selectedPrefectureCode } = useThemePrefecture();
+  const options = buildThemeSwitcherOptions(
+    areaContext,
+    hasProvider ? selectedPrefectureCode : undefined,
+  );
 
   return (
     <nav aria-label="テーマと地域" className="pr-1">

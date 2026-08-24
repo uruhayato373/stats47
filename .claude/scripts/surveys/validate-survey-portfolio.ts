@@ -17,6 +17,7 @@
  *      (gsc: impressions,clicks / ga4: landingPageViews / internalNav: rankingOutboundClicks)
  *      insufficient-data・not-instrumented = windowDays のみ
  *   S6 orphanStatus と linkageStatus / itemCount の整合
+ *   S7 portfolio / linkage 監査日の freshness (既定35日、SURVEY_STATE_MAX_AGE_DAYSで変更可)
  *   E1 experimentId 一意 / surveyId がマスタに実在
  *   E2 同一 surveyId × changeType の pending 実験は 1 件まで (重複実験防止)
  *   E3 baseline 必須 / verdict enum / effect-* 確定には observations の d28|d56 + evidenceRefs 必須
@@ -65,6 +66,7 @@ const VERDICT = new Set([
 const CHANGE_TYPE = new Set(["editorial-hub", "linkage", "title-meta", "structure", "merge", "retire"]);
 const HARD_CANDIDATES = new Set(["merge-candidate", "retire-candidate"]);
 const MIN_CTR_IMPRESSIONS = 100;
+const MAX_STATE_AGE_DAYS = Number(process.env.SURVEY_STATE_MAX_AGE_DAYS ?? 35);
 
 function loadJson(file: string): { data: any; exists: boolean; parseError?: string } {
   const p = path.join(STATE_DIR, file);
@@ -93,6 +95,19 @@ function validatePortfolio(pf: any) {
   }
   if (!pf.linkage || typeof pf.linkage !== "object")
     w("S0", "linkage グローバルサマリが無い (build を実行して転記する)");
+  const today = Date.now();
+  for (const [field, value] of [
+    ["generatedAt", pf.generatedAt],
+    ["linkage.auditedAt", pf.linkage?.auditedAt],
+  ] as const) {
+    const timestamp = typeof value === "string" ? new Date(`${value}T00:00:00Z`).getTime() : NaN;
+    const ageDays = (today - timestamp) / 86_400_000;
+    if (!Number.isFinite(ageDays)) {
+      v("S7", `${field} が有効な YYYY-MM-DD でない (${value ?? "欠落"})`);
+    } else if (ageDays > MAX_STATE_AGE_DAYS) {
+      v("S7", `${field} が stale (${ageDays.toFixed(1)}日 > ${MAX_STATE_AGE_DAYS}日) — 週次監査を再実行`);
+    }
+  }
   const ids = new Set<string>();
   for (const s of pf.surveys) {
     const id = s.surveyId;

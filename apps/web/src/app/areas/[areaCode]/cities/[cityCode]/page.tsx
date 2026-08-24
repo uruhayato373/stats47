@@ -17,6 +17,7 @@ import { readCityProfile } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
 import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
+import { UrlPolicy } from "@/lib/url-policy";
 
 import type { Metadata } from "next";
 
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { areaCode, cityCode } = await params;
   const context = getCityRouteContext(areaCode, cityCode);
   if (!context) {
-    return { title: "市区町村が見つかりません" };
+    return { title: "市区町村が見つかりません", robots: "noindex, follow" };
   }
 
   const profile = await readCityProfile(areaCode, cityCode);
@@ -50,7 +51,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
-    robots: "index, follow",
+    robots: UrlPolicy.city.isIndexable(areaCode, cityCode)
+      ? "index, follow"
+      : "noindex, follow",
     alternates: { canonical: `/areas/${areaCode}/cities/${cityCode}` },
     // 親県の静的 R2 OGP を明示。未指定だと最寄りの areas/[areaCode]/opengraph-image (ランタイム) に
     // 落ち Cloudflare Worker で 500 になる (正典: .claude/rules/ogp-image-standards.md §3 課題0)。
@@ -109,6 +112,14 @@ export default async function CityPage({ params }: PageProps) {
       />
 
       <main className="min-w-0 space-y-10">
+        <p className="text-sm">
+          <Link
+            href={`/municipalities/ranking/elderly-population-ratio?q=${encodeURIComponent(context.city.areaName)}`}
+            className="font-medium text-primary hover:underline"
+          >
+            {context.city.areaName}を全国の市区町村ランキングで見る →
+          </Link>
+        </p>
         {validStrengths.length > 0 ? (
           <SurfaceSection className="p-6">
             <h2 className="text-lg font-bold text-foreground">

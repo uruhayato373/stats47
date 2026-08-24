@@ -4,5 +4,4 @@
  */
 export { PortalCategoryGrid } from './components/PortalCategoryGrid';
 export { PortalUseCaseGrid } from './components/PortalUseCaseGrid';
-export { PortalAreaEntry } from './components/PortalAreaEntry';
 export { PortalBlogCard } from './components/PortalBlogCard';
