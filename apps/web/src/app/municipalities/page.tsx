@@ -12,6 +12,7 @@ import {
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { RightRailWidgets } from '@/components/rail';
+import { SectionHeader } from '@/components/section';
 import { SurfaceLinkCard } from '@/components/surface';
 
 import { StatisticsScopeNav } from '@/features/municipalities';
@@ -80,13 +81,8 @@ export default function MunicipalitiesHubPage() {
         </div>
       </section>
 
-      <section
-        className="mt-8 border-t border-border pt-6"
-        aria-labelledby="municipality-draft-themes"
-      >
-        <h2 id="municipality-draft-themes" className="text-base font-semibold">
-          データ監査中
-        </h2>
+      <section className="mt-8 border-t border-border pt-6">
+        <SectionHeader title="データ監査中" hideRule />
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           {draftThemes.map((theme) => {
             const availability = getMunicipalityMetricAvailability(

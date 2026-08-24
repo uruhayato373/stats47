@@ -2,6 +2,14 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@stats47/components/atoms/ui/table';
 import { KNOWN_MUNICIPALITY_RANKING_KEYS } from '@stats47/data-configs/geo-scope';
 import {
   readMunicipalityRankingItem,
@@ -240,15 +248,15 @@ export default async function MunicipalityRankingPage({
       </div>
 
       <div className="mt-2 overflow-x-auto border border-border">
-        <table className="w-full border-collapse text-sm">
-          <thead className="bg-muted/40 text-left text-xs text-muted-foreground">
-            <tr>
-              <th className="w-20 px-3 py-2 font-medium">順位</th>
-              <th className="px-3 py-2 font-medium">市区町村</th>
-              <th className="px-3 py-2 text-right font-medium">値</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table>
+          <TableHeader className="bg-muted/40 text-left text-xs text-muted-foreground">
+            <TableRow>
+              <TableHead className="w-20">順位</TableHead>
+              <TableHead>市区町村</TableHead>
+              <TableHead className="text-right">値</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {filtered.rows.map((row) => {
               const profileHref = `/areas/${row.prefectureCode}/cities/${row.areaCode}`;
               const hasProfile = UrlPolicy.city.isIndexable(
@@ -256,11 +264,11 @@ export default async function MunicipalityRankingPage({
                 row.areaCode
               );
               return (
-                <tr key={row.areaCode} className="border-t border-border">
-                  <td className="px-3 py-2 tabular-nums text-muted-foreground">
+                <TableRow key={row.areaCode}>
+                  <TableCell className="tabular-nums text-muted-foreground">
                     {row.rank}位
-                  </td>
-                  <td className="px-3 py-2 font-medium">
+                  </TableCell>
+                  <TableCell className="font-medium">
                     {hasProfile ? (
                       <Link
                         href={profileHref}
@@ -271,15 +279,15 @@ export default async function MunicipalityRankingPage({
                     ) : (
                       municipalityLeafName(row.areaName)
                     )}
-                  </td>
-                  <td className="px-3 py-2 text-right tabular-nums">
+                  </TableCell>
+                  <TableCell className="text-right tabular-nums">
                     {numberFormat.format(row.value)} {snapshot.unit}
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               );
             })}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
         {filtered.rows.length === 0 && (
           <p className="p-6 text-center text-sm text-muted-foreground">
             該当する自治体はありません。

@@ -87,7 +87,7 @@ export default async function MunicipalityThemePage({
               href={`/municipalities/ranking/${item.rankingKey}`}
               className="block"
             >
-              <h2 className="font-semibold text-foreground">{item.title}</h2>
+              <h3 className="font-semibold text-foreground">{item.title}</h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 {item.latestYear.yearName}・
                 {item.valueCount.toLocaleString('ja-JP')}自治体

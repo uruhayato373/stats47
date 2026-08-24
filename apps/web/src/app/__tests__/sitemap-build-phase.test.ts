@@ -13,6 +13,7 @@ import { CATEGORY_KEYS } from "@stats47/data-configs";
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 
 import { SITEMAP_BLOG_ENTRIES, SITEMAP_SURVEY_IDS, SITEMAP_TAG_ENTRIES } from "@/config/sitemap-blog-entries";
+import { SITEMAP_SEGMENTS } from "@/config/sitemap-segments";
 
 import sitemap, { generateSitemaps } from "../sitemap";
 
@@ -69,8 +70,8 @@ describe("sitemap: NEXT_PHASE=phase-production-build (実 reader)", () => {
   });
 
   it("japan segment がビルド時も pilot テーマを出す (R2 非依存の git constant)", async () => {
-    const segmentIds = await generateSitemaps();
-    const japanId = segmentIds.length - 1; // WP5: 末尾に追記 (既存 id を変えない)
+    const japanId = SITEMAP_SEGMENTS.indexOf("japan");
+    expect(japanId).toBeGreaterThanOrEqual(0);
     const entries = await sitemap({ id: japanId });
     expect(entries.some((e) => e.url.endsWith("/japan"))).toBe(true);
     expect(entries.some((e) => e.url.endsWith("/japan/education-culture"))).toBe(true);
