@@ -7,10 +7,10 @@
 
 - **横幅は `PageShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない。正確な幅と rail 寸法は `PageShell.tsx` を正典とする。**寸法は doboku-note に合わせている（2026-08-03）**: コンテナ 1280px / lg+ 左右 40px（`lg:px-10`）/ gap 40px（`gap-10`）/ 右レール **316px**。300×250 の `SidebarPromoBanner` は Card で囲まず、レール内に等倍で表示する。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（reading zone + flex 密着）を使う。
 - **サイト全体ナビの PC 常設左サイドバーは廃止**。グローバルナビはヘッダー（カテゴリは**メガメニュー**）に集約し、モバイルは `MobileNavDrawer`（Sheet）。
-  - **例外: ページ内ナビの左レール（2026-08-04）**。「そのページの表示内容を切り替えるナビ」は `PageShell` の `leftRail` に置いてよい。Theme はテーマ切替 + 地域 + ページ内目次 + 全指標 + 出典調査、home / `/ranking` / `/category/*` はカテゴリ探索を置く。全テーマやグローバルナビを常時展開して複製しない。
+  - **例外: ページ内ナビの左レール（2026-08-04）**。「そのページの表示内容を切り替えるナビ」は `PageShell` の `leftRail` に置いてよい。Theme はグループ別テーマリンク + 地域 + 全指標 + 出典調査、home / `/ranking` / `/category/*` はカテゴリ探索を置く。Theme の「テーマ」「出典調査」には、それぞれ `/themes`・`/survey` の上位ハブリンクを1件置き、狭幅代替 UI にも同じ出口を残す。テーマの地域は「比較単位（47都道府県 / 市区町村 / 日本）」と「表示する都道府県」を分け、広幅では左レール、992px 未満では本文上部へ置く。テーマの表示グループは navigation-only SSOT `THEME_NAV_GROUPS` で管理し、ranking category / ThemeCatalog taxonomy と混ぜない。現在テーマのグループだけ初期展開する。
   - 左レールは `PageShell` 実装上**右レールと併用できない**（`showLeft = hasLeft && !hasRight`）。テーマページは元々右レールなしなので成立する。
-  - **左レールは `lg`(1024px) から出す**。列幅・gap は `PageShell` だけが持ち、page.tsx に `grid-cols-[264px_…]` 等を複製しない。機械ゲート = `page-shell-rail-contract.test.tsx` + `check-design-system.mjs`。
-  - **lg 未満で操作ナビを隠す場合は `leftRailNarrowBehavior="hide"` とし、テーマ・地域・ページ内目次・全指標・出典調査の同等 UI を本文上部に出す**。関連リンク型の左レールは既定 `stack` で本文後へ積んでよい。
+  - **`PageShell` の左レールは専用境界 `992px` から出す**。992px 時も本文幅 656px を確保でき、1024px 未満になりやすいアプリ内ブラウザでも横幅を有効利用できる。Tailwind 全体の `lg`、`ArticleShell`、右レールは変更しない。列幅・gap・表示境界は `PageShell` の共有クラスだけが持ち、page.tsx に複製しない。機械ゲート = `page-shell-rail-contract.test.tsx` + `check-design-system.mjs`。
+  - **992px 未満で操作ナビを隠す場合は `leftRailNarrowBehavior="hide"` とし、テーマ Select・地域・ページ内クイックリンク・全指標・出典調査を本文上部に出す**。代替 UI は `PAGE_SHELL_NARROW_ONLY_CLASS` を使って境界を共有する。関連リンク型の左レールは既定 `stack` で本文後へ積んでよい。
   - 左レールが `ThemePrefectureProvider` のような context を使う場合、**Provider の内側に leftRail を置く**（`ThemePageLayout` が Provider → `PageShell` の入れ子を持ち、呼び出し側の page.tsx は `PageShell` を重ねない）。
 - **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0`）**。カードやパネルへの `rounded-xl`/`rounded-2xl` の手動付与は禁止し、外枠は `rounded-none` とする。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。`ArticleShell` の `.reading-zone` は薄グレー地を維持するが、角丸と影は通常カード（`rounded-none`・`shadow-sm`）に揃える。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。

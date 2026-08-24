@@ -32,4 +32,18 @@ describe('StatisticsScopeNav', () => {
       screen.getByRole('link', { name: '47都道府県' })
     ).not.toHaveAttribute('aria-current');
   });
+
+  it('左レールでも同じリンクを比較単位として表示する', () => {
+    render(<StatisticsScopeNav current="prefectures" variant="rail" />);
+
+    const nav = screen.getByRole('navigation', { name: '統計の地域単位' });
+    expect(nav).toHaveTextContent('比較単位');
+    expect(
+      screen.getByRole('link', { name: '47都道府県' })
+    ).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('link', { name: '市区町村' })).toHaveAttribute(
+      'href',
+      '/municipalities'
+    );
+  });
 });

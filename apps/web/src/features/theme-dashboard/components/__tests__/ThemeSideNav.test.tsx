@@ -9,37 +9,42 @@ import { describe, expect, it } from 'vitest';
 
 import { ThemePrefectureProvider } from '../ThemePrefectureContext';
 import { ThemeSideNav } from '../ThemeSideNav';
-import { buildThemeSwitcherOptions } from '../ThemeSwitcher';
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(<ThemePrefectureProvider>{ui}</ThemePrefectureProvider>);
 }
 
-describe('ThemeSideNav — ページ内ナビ', () => {
-  it('全テーマ一覧を展開せず、共通ThemeSwitcherで切り替える', () => {
+describe('ThemeSideNav — テーマナビ', () => {
+  it('デスクトップはグループ別リストを表示し、現在テーマを明示する', () => {
     renderWithProvider(<ThemeSideNav currentThemeKey="population-dynamics" />);
 
-    expect(screen.getByLabelText('テーマを切り替える')).toBeInTheDocument();
+    const themeNav = screen.getByRole('navigation', {
+      name: 'テーマを切り替える',
+    });
+    const current = within(themeNav).getByRole('link', { name: '人口動態' });
+
     expect(
-      screen.queryByRole('navigation', { name: 'テーマと地域' })
+      within(themeNav).getByRole('link', { name: 'テーマ一覧へ' })
+    ).toHaveAttribute('href', '/themes');
+    expect(current).toHaveAttribute('aria-current', 'page');
+    expect(current.closest('details')).toHaveAttribute('open');
+    expect(
+      screen.queryByRole('combobox', { name: 'テーマを切り替える' })
     ).toBeNull();
   });
 
-  it('ページ内リンク・全指標・出典調査を役割別に表示する', () => {
+  it('左レールから「このページ」を除き、全指標・出典調査を役割別に表示する', () => {
     renderWithProvider(
       <ThemeSideNav
         currentThemeKey="population-dynamics"
-        pageLinks={[{ href: '#theme-charts', label: 'チャート' }]}
         metrics={[{ rankingKey: 'total-population', label: '総人口' }]}
         surveys={[{ id: 'population-census', name: '国勢調査' }]}
       />
     );
 
     expect(
-      within(
-        screen.getByRole('navigation', { name: 'このページの内容' })
-      ).getByRole('link', { name: 'チャート' })
-    ).toHaveAttribute('href', '#theme-charts');
+      screen.queryByRole('navigation', { name: 'このページの内容' })
+    ).toBeNull();
     expect(
       within(
         screen.getByRole('navigation', { name: 'このテーマの全指標' })
@@ -48,26 +53,52 @@ describe('ThemeSideNav — ページ内ナビ', () => {
     expect(
       within(
         screen.getByRole('navigation', { name: 'このテーマの出典調査' })
+      ).getByRole('link', { name: '調査一覧へ' })
+    ).toHaveAttribute('href', '/survey');
+    expect(
+      within(
+        screen.getByRole('navigation', { name: 'このテーマの出典調査' })
       ).getByRole('link', { name: '国勢調査' })
     ).toHaveAttribute('href', '/survey/population-census');
   });
 
-  it('areaContextのテーマ選択肢は都道府県文脈を維持する', () => {
-    const options = buildThemeSwitcherOptions({ areaCode: '13000' }, null);
+  it('areaContextのテーマリンクは都道府県文脈を維持し、Type Bを除外する', () => {
+    render(
+      <ThemeSideNav
+        currentThemeKey="population-dynamics"
+        areaContext={{ areaCode: '13000' }}
+        showRegion={false}
+      />
+    );
+    const themeNav = screen.getByRole('navigation', {
+      name: 'テーマを切り替える',
+    });
 
-    expect(options.length).toBeGreaterThan(0);
-    for (const option of options) {
-      expect(option.href).toMatch(/^\/areas\/13000\//);
-    }
-    expect(options.map((option) => option.href)).not.toContain(
-      '/areas/13000/ports'
+    expect(
+      within(themeNav).getByRole('link', { name: '観光', hidden: true })
+    ).toHaveAttribute('href', '/areas/13000/tourism');
+    expect(
+      within(themeNav).queryByRole('link', { name: '港湾', hidden: true })
+    ).toBeNull();
+  });
+
+  it('関連調査がなくても調査ハブへの導線を残す', () => {
+    render(<ThemeSideNav currentThemeKey="local-finance" showRegion={false} />);
+
+    expect(screen.getByRole('link', { name: '調査一覧へ' })).toHaveAttribute(
+      'href',
+      '/survey'
     );
   });
 });
 
 describe('ThemeSideNav — 地域ブロック', () => {
-  it('既定では地域セレクタを出し、未選択時は47都道府県を現在値にする', () => {
+  it('比較単位と表示する都道府県を分けて表示する', () => {
     renderWithProvider(<ThemeSideNav currentThemeKey="population-dynamics" />);
+    expect(
+      screen.getByRole('navigation', { name: '統計の地域単位' })
+    ).toHaveTextContent('比較単位');
+    expect(screen.getByText('表示する都道府県')).toBeInTheDocument();
     expect(screen.getByLabelText('都道府県を選択')).toHaveTextContent(
       '47都道府県'
     );
@@ -79,10 +110,28 @@ describe('ThemeSideNav — 地域ブロック', () => {
     ).toBeNull();
   });
 
-  it('showRegion=falseで地域ブロックを出さない', () => {
+  it('showRegion=falseでは都道府県選択だけを隠し、比較単位は残す', () => {
     render(<ThemeSideNav currentThemeKey="local-finance" showRegion={false} />);
     expect(screen.queryByLabelText('都道府県を選択')).toBeNull();
-    expect(screen.getByLabelText('テーマを切り替える')).toBeInTheDocument();
+    expect(
+      screen.getByRole('navigation', { name: '統計の地域単位' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('navigation', { name: 'テーマを切り替える' })
+    ).toBeInTheDocument();
+  });
+
+  it('showScope=falseでは比較単位だけを隠し、都道府県選択は残す', () => {
+    renderWithProvider(
+      <ThemeSideNav
+        currentThemeKey="population-dynamics"
+        showScope={false}
+      />
+    );
+    expect(
+      screen.queryByRole('navigation', { name: '統計の地域単位' })
+    ).toBeNull();
+    expect(screen.getByLabelText('都道府県を選択')).toBeInTheDocument();
   });
 
   it('県を選ぶと47都道府県へ戻す操作を表示する', async () => {

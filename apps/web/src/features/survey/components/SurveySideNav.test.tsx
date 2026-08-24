@@ -48,6 +48,10 @@ describe('SurveySideNav', () => {
   it('狭幅代替ナビにもページ内移動と関連分類を残す', () => {
     render(<SurveyMobileNav pageLinks={pageLinks} categories={categories} />);
 
+    expect(screen.getByRole('link', { name: '調査一覧へ' })).toHaveAttribute(
+      'href',
+      '/survey'
+    );
     expect(
       screen.getByRole('navigation', {
         name: 'この調査ページの内容（モバイル）',

@@ -17,7 +17,7 @@ import {
   resolveThemeSurveyTaxonomy,
 } from '@stats47/ranking';
 
-import { PageShell } from '@/components/layout';
+import { PAGE_SHELL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { loadPageComponents } from '@/components/stat-charts/server';
@@ -161,7 +161,7 @@ export async function ThemePageLayout({
             areaContext={
               areaContext ? { areaCode: areaContext.areaCode } : undefined
             }
-            pageLinks={pageLinks}
+            showScope={!areaContext}
             metrics={themeMetrics}
             surveys={themeSurveys}
           />
@@ -213,26 +213,38 @@ export async function ThemePageLayout({
             </BreadcrumbList>
           </Breadcrumb>
 
-          {!areaContext && <StatisticsScopeNav current="prefectures" />}
+          {!areaContext && (
+            <div className={PAGE_SHELL_NARROW_ONLY_CLASS}>
+              <StatisticsScopeNav current="prefectures" />
+            </div>
+          )}
 
           {toolbar}
 
-          {/* 狭幅（lg 未満）のテーマ・地域切替。lg+ は左レール ThemeSideNav が担うので隠す。
-          ★境界は PageShell の左レール (hidden lg:block) と必ず一致させること。
-          ずれると両方出る幅ができる (2026-08-05 に xl/lg のずれを是正)。
+          {/* 992px 未満のテーマ・地域切替。広幅は左レール ThemeSideNav が担うので隠す。
+          ★境界は PageShell の共有クラスと必ず一致させること。
+          ずれると両方出る幅ができるため PAGE_SHELL_NARROW_ONLY_CLASS を使う。
           areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
           <div
             role="group"
             aria-label="テーマと地域"
-            className="mb-4 grid grid-cols-1 gap-2 border-y border-border py-3 sm:grid-cols-2 lg:hidden"
+            className={`mb-4 grid grid-cols-1 gap-2 border-y border-border py-3 sm:grid-cols-2 ${PAGE_SHELL_NARROW_ONLY_CLASS}`}
           >
-            <ThemeSwitcher
-              currentThemeKey={theme.themeKey}
-              areaContext={
-                areaContext ? { areaCode: areaContext.areaCode } : undefined
-              }
-              compact
-            />
+            <div className="min-w-0">
+              <ThemeSwitcher
+                currentThemeKey={theme.themeKey}
+                areaContext={
+                  areaContext ? { areaCode: areaContext.areaCode } : undefined
+                }
+                compact
+              />
+              <Link
+                href="/themes"
+                className="mt-1 inline-flex min-h-10 items-center text-sm font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+              >
+                テーマ一覧へ
+              </Link>
+            </div>
             <div className="min-w-0">
               <span className="block text-xs font-medium text-muted-foreground">
                 地域
@@ -243,7 +255,7 @@ export async function ThemePageLayout({
 
           <nav
             aria-label="このページの内容"
-            className="mb-5 border-b border-border pb-3 lg:hidden"
+            className={`mb-5 border-b border-border pb-3 ${PAGE_SHELL_NARROW_ONLY_CLASS}`}
           >
             <div className="flex gap-x-5 gap-y-2 overflow-x-auto">
               {pageLinks.map((item) => (
@@ -281,11 +293,17 @@ export async function ThemePageLayout({
                       </ul>
                     </div>
                   )}
-                  {themeSurveys.length > 0 && (
-                    <div>
-                      <p className="text-sm font-semibold text-muted-foreground">
-                        出典調査
-                      </p>
+                  <div>
+                    <p className="text-sm font-semibold text-muted-foreground">
+                      出典調査
+                    </p>
+                    <Link
+                      href="/survey"
+                      className="mt-1 inline-flex min-h-10 items-center text-sm font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                    >
+                      調査一覧へ
+                    </Link>
+                    {themeSurveys.length > 0 && (
                       <ul className="mt-2 space-y-1">
                         {themeSurveys.map((survey) => (
                           <li key={survey.id}>
@@ -298,8 +316,8 @@ export async function ThemePageLayout({
                           </li>
                         ))}
                       </ul>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </details>
             )}
