@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-24T11:14:07.386Z",
-  "stage": "monthly",
+  "generatedAt": "2026-08-24T11:54:19.167Z",
+  "stage": "monitor",
   "status": "warn",
   "measurementWeek": "2026-W34",
   "expectedCompletedWeek": "2026-W34",
   "expectedPlanWeek": "2026-W35",
   "currentMonth": "2026-08",
   "summary": {
-    "pass": 11,
+    "pass": 12,
     "warn": 1,
     "fail": 0
   },
@@ -71,6 +71,12 @@
       "code": "weekly-review",
       "level": "pass",
       "detail": "2026-W34 review の search-growth 節=あり",
+      "action": null
+    },
+    {
+      "code": "weekly-plan",
+      "level": "pass",
+      "detail": "plan=2026-W35, expected=2026-W35",
       "action": null
     },
     {

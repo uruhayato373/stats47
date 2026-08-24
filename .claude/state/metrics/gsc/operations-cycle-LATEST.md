@@ -1,6 +1,6 @@
 # GSC Operations Cycle — 2026-W34
 
-**Status**: WARN / **Stage**: monthly / **Generated**: 2026-08-24T11:14:07.386Z
+**Status**: WARN / **Stage**: monitor / **Generated**: 2026-08-24T11:54:19.167Z
 
 計測週: 2026-W34 / 次週計画: 2026-W35 / 月次: 2026-08
 
@@ -16,6 +16,7 @@
 | search-growth-decision | PASS | 2026-W34 の承認/却下 1件（必要 1件以上） |
 | url-inspection-freshness | PASS | latest=2026-08-23, age=1d |
 | weekly-review | PASS | 2026-W34 review の search-growth 節=あり |
+| weekly-plan | PASS | plan=2026-W35, expected=2026-W35 |
 | monthly-plan | PASS | month=2026-08, GSC運用サイクル節=あり |
 | monthly-review-coverage | PASS | 直近4週レビュー 4/4（必要 3以上） |
 
