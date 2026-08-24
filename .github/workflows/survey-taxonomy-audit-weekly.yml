@@ -111,8 +111,8 @@ jobs:
             tail -50 /tmp/survey-portfolio.log
             echo '```'
             echo ""
-            echo '正典: `.claude/rules/survey-linkage-standards.md`'
-            echo 'state: `.claude/state/surveys/{taxonomy,portfolio,experiments}.json`'
+            echo "正典: \`.claude/rules/survey-linkage-standards.md\`"
+            echo "state: \`.claude/state/surveys/{taxonomy,portfolio,experiments}.json\`"
           } > /tmp/survey-taxonomy-issue.md
 
           gh label create survey-taxonomy-alert \
