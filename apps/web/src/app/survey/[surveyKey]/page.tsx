@@ -7,7 +7,7 @@
 
 import { notFound } from 'next/navigation';
 
-import { METRICS_REGISTRY } from '@stats47/data-configs';
+import { listCategories, METRICS_REGISTRY } from '@stats47/data-configs';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import { resolveThemeSurveyTaxonomy } from '@stats47/ranking';
 import {
@@ -36,11 +36,17 @@ import {
   FeaturedRankingCard,
   CategoryRankingTable,
   isCaveatNote,
-  REPRESENTATIVE_RANKING_KEY_SET,
   type CategoryRankingListItem,
 } from '@/features/ranking';
 import { buildFeaturedRankingCardModel } from '@/features/ranking/server';
-import { getSurveyEditorialContent, SurveyOutboundLinkArea } from '@/features/survey';
+import {
+  getSurveyEditorialContent,
+  selectSurveyRepresentativeRankings,
+  SurveyMobileNav,
+  SurveyOutboundLinkArea,
+  SurveySideNav,
+  type SurveyPageNavLink,
+} from '@/features/survey';
 
 import { HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
@@ -135,16 +141,41 @@ export default async function SurveyPage({ params }: PageProps) {
 
   const rankingResult = await readRankingItemsBySurveyFromR2(surveyKey);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
+  if (rankingItems.length === 0) {
+    notFound();
+  }
+
+  const categoryCounts = new Map<string, number>();
+  for (const item of rankingItems) {
+    if (!item.categoryKey) continue;
+    categoryCounts.set(
+      item.categoryKey,
+      (categoryCounts.get(item.categoryKey) ?? 0) + 1
+    );
+  }
+  const relatedCategories = listCategories().flatMap((category) => {
+    const count = categoryCounts.get(category.categoryKey) ?? 0;
+    return count > 0
+      ? [
+          {
+            categoryKey: category.categoryKey,
+            label: category.categoryName,
+            count,
+          },
+        ]
+      : [];
+  });
   const relatedThemes = Object.values(THEME_CATALOGS)
     .filter((catalog) =>
       resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY).surveys.some(
-        (entry) => entry.id === surveyKey,
-      ),
+        (entry) => entry.id === surveyKey
+      )
     )
     .map((catalog) => ({ key: catalog.key, title: catalog.title }));
-  const relatedArticles = await listArticleSummariesBySurveyId(surveyKey, 6).catch(
-    () => [],
-  );
+  const relatedArticles = await listArticleSummariesBySurveyId(
+    surveyKey,
+    6
+  ).catch(() => []);
   // ★ 2026-07-28: 旧実装は tag を ['economy','population','labor'] に固定しており、
   //   調査の主題 (農林業センサス / 学校基本調査 等) と広告が一切連動していなかった。
   //   この調査に属するランキングの categoryKey 最頻値から vertical を導出する。
@@ -155,12 +186,7 @@ export default async function SurveyPage({ params }: PageProps) {
   ).catch(() => []);
   const editorial = getSurveyEditorialContent(surveyKey);
 
-  // Hero KPI: 最新年, 注目件数, etc.
-  // 注目の定義は索引 (/ranking) と同じ掲載価値スコアの代表集合に統一する
-  // (旧 isFeatured は 2,295 件中 8 件しか設定されておらず、ほぼ全調査で 0 件だった)。
-  const featuredCount = rankingItems.filter((i) =>
-    REPRESENTATIVE_RANKING_KEY_SET.has(i.rankingKey),
-  ).length;
+  // Hero KPI: 最新年, 代表件数, etc.
   const latestYear =
     rankingItems
       .map((i) => parseLatestYear(i.latestYear))
@@ -186,16 +212,9 @@ export default async function SurveyPage({ params }: PageProps) {
     };
   });
 
-  // 調査はカテゴリを跨ぐので、索引の代表集合に入っているものを先頭 6 件まで拾う。
-  const seenKeys = new Set<string>();
-  const featuredRaw = rankingItems
-    .filter((item) => {
-      if (!REPRESENTATIVE_RANKING_KEY_SET.has(item.rankingKey)) return false;
-      if (seenKeys.has(item.rankingKey)) return false;
-      seenKeys.add(item.rankingKey);
-      return true;
-    })
-    .slice(0, 6);
+  // サイト共通の代表集合を優先しつつ、調査固有のカテゴリ分散フォールバックを持つ。
+  // 最大8候補まで値を確認し、欠測があっても描画可能な4件を残す。
+  const featuredRaw = selectSurveyRepresentativeRankings(rankingItems, 8);
   // home/category と同じカードモデルを、1 回の全47件 read から導出する。
   // (旧: 独自の縦型カード + baseThumbnailUrl の画像サムネイル)。
   const featuredValues = await Promise.all(
@@ -203,42 +222,42 @@ export default async function SurveyPage({ params }: PageProps) {
       readRankingValuesFromR2(
         item.rankingKey,
         'prefecture',
-        parseLatestYear(item.latestYear),
-      ),
-    ),
+        parseLatestYear(item.latestYear)
+      )
+    )
   );
-  const featuredItems = featuredRaw.flatMap((item, idx) => {
-    const latestYear = parseLatestYear(item.latestYear);
-    const valuesResult = featuredValues[idx];
-    if (!isOk(valuesResult) || valuesResult.data.length === 0) return [];
+  const featuredItems = featuredRaw
+    .flatMap((item, idx) => {
+      const latestYear = parseLatestYear(item.latestYear);
+      const valuesResult = featuredValues[idx];
+      if (!isOk(valuesResult) || valuesResult.data.length === 0) return [];
 
-    const title =
-      item.subtitle && !isCaveatNote(item.subtitle)
-        ? `${item.title}（${item.subtitle}）`
-        : item.title;
-    const model = buildFeaturedRankingCardModel({
-      rankingKey: item.rankingKey,
-      title,
-      values: valuesResult.data,
-    });
-    if (!model) return [];
+      const title =
+        item.subtitle && !isCaveatNote(item.subtitle)
+          ? `${item.title}（${item.subtitle}）`
+          : item.title;
+      const model = buildFeaturedRankingCardModel({
+        rankingKey: item.rankingKey,
+        title,
+        values: valuesResult.data,
+      });
+      if (!model) return [];
 
-    return [{
-      rankingKey: item.rankingKey,
-      title,
-      latestYear,
-      unit: item.unit,
-      model,
-    }];
-  });
-
-  if (rankingItems.length === 0) {
-    notFound();
-  }
+      return [
+        {
+          rankingKey: item.rankingKey,
+          title,
+          latestYear,
+          unit: item.unit,
+          model,
+        },
+      ];
+    })
+    .slice(0, 4);
 
   const statsText = [
     `全 ${rankingItems.length} ランキング`,
-    featuredCount > 0 ? `注目 ${featuredCount} 件` : null,
+    featuredItems.length > 0 ? `代表 ${featuredItems.length} 件` : null,
     latestYear ? `最新 ${latestYear} 年` : null,
     '47 都道府県',
   ]
@@ -249,10 +268,39 @@ export default async function SurveyPage({ params }: PageProps) {
     editorial?.readerQuestions.filter((item) =>
       rankingKeys.has(item.rankingKey)
     ) ?? [];
+  const pageLinks: SurveyPageNavLink[] = [
+    ...(editorial
+      ? [{ href: '#survey-overview', label: 'この調査で分かること' } as const]
+      : []),
+    ...(featuredItems.length > 0
+      ? [{ href: '#representative-rankings', label: '代表ランキング' } as const]
+      : []),
+    ...(relatedThemes.length > 0
+      ? [{ href: '#related-themes', label: '関連テーマ' } as const]
+      : []),
+    ...(relatedArticles.length > 0
+      ? [{ href: '#related-articles', label: '関連記事' } as const]
+      : []),
+    { href: '#all-rankings', label: `全${rankingItems.length}件のランキング` },
+    ...(editorial
+      ? [{ href: '#survey-caveats', label: '数字を読むときの注意' } as const]
+      : []),
+  ];
+  const representativeNav = featuredItems.map((item) => ({
+    rankingKey: item.rankingKey,
+    label: item.title,
+  }));
   let sectionNumber = 1;
 
   return (
     <ArticleShell
+      leftRail={
+        <SurveySideNav
+          pageLinks={pageLinks}
+          representativeRankings={representativeNav}
+          categories={relatedCategories}
+        />
+      }
       breadcrumb={
         <Breadcrumbs
           items={[
@@ -291,8 +339,10 @@ export default async function SurveyPage({ params }: PageProps) {
         }
       />
 
+      <SurveyMobileNav pageLinks={pageLinks} categories={relatedCategories} />
+
       {editorial && (
-        <section className="mb-12 space-y-8">
+        <section id="survey-overview" className="mb-12 scroll-mt-24 space-y-8">
           <div>
             <SectionHeader
               number={String(sectionNumber++)}
@@ -303,7 +353,12 @@ export default async function SurveyPage({ params }: PageProps) {
             </p>
             <ul className="grid gap-3 sm:grid-cols-2">
               {editorial.whatYouCanLearn.map((item) => (
-                <li key={item} className={getSurfaceCardClassName({ className: "text-sm leading-6" })}>
+                <li
+                  key={item}
+                  className={getSurfaceCardClassName({
+                    className: 'text-sm leading-6',
+                  })}
+                >
                   {item}
                 </li>
               ))}
@@ -338,10 +393,10 @@ export default async function SurveyPage({ params }: PageProps) {
       )}
 
       {featuredItems.length > 0 && (
-        <section className="mb-12">
+        <section id="representative-rankings" className="mb-12 scroll-mt-24">
           <SectionHeader
             number={String(sectionNumber++)}
-            title="注目のランキング"
+            title="代表ランキング"
           />
           <SurveyOutboundLinkArea surface="survey_ranking">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -360,7 +415,7 @@ export default async function SurveyPage({ params }: PageProps) {
       )}
 
       {relatedThemes.length > 0 && (
-        <section className="mb-12">
+        <section id="related-themes" className="mb-12 scroll-mt-24">
           <SectionHeader
             number={String(sectionNumber++)}
             title="この調査を使うテーマ"
@@ -374,7 +429,9 @@ export default async function SurveyPage({ params }: PageProps) {
                   className="text-sm font-medium text-foreground hover:bg-accent/50"
                 >
                   {theme.title}
-                  <span className="ml-1 text-primary" aria-hidden="true">→</span>
+                  <span className="ml-1 text-primary" aria-hidden="true">
+                    →
+                  </span>
                 </SurfaceLinkCard>
               ))}
             </div>
@@ -383,7 +440,7 @@ export default async function SurveyPage({ params }: PageProps) {
       )}
 
       {relatedArticles.length > 0 && (
-        <section className="mb-12">
+        <section id="related-articles" className="mb-12 scroll-mt-24">
           <SectionHeader
             number={String(sectionNumber++)}
             title="この調査を使う記事"
@@ -397,7 +454,9 @@ export default async function SurveyPage({ params }: PageProps) {
                   className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
                 >
                   {article.title}
-                  <span className="ml-1 text-primary" aria-hidden="true">→</span>
+                  <span className="ml-1 text-primary" aria-hidden="true">
+                    →
+                  </span>
                 </SurfaceLinkCard>
               ))}
             </div>
@@ -413,7 +472,7 @@ export default async function SurveyPage({ params }: PageProps) {
       */}
       <InContentAdSlot slot={HUB_INCONTENT} />
 
-      <section className="mb-12">
+      <section id="all-rankings" className="mb-12 scroll-mt-24">
         <SectionHeader
           number={String(sectionNumber++)}
           title={`全${rankingItems.length}件のランキング`}
@@ -424,7 +483,7 @@ export default async function SurveyPage({ params }: PageProps) {
       </section>
 
       {editorial && (
-        <section className="mb-12">
+        <section id="survey-caveats" className="mb-12 scroll-mt-24">
           <SectionHeader
             number={String(sectionNumber++)}
             title="数字を読むときの注意"

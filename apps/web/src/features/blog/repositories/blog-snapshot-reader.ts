@@ -1,23 +1,27 @@
-import "server-only";
+import 'server-only';
 
-import { createSnapshotReader } from "@stats47/r2-storage/server";
+import { createSnapshotReader } from '@stats47/r2-storage/server';
 
 import {
   BLOG_SNAPSHOT_KEY,
   type BlogSnapshot,
   type SnapshotArticle,
   type SnapshotTagMeta,
-} from "../types/snapshot";
+} from '../types/snapshot';
 
-import type { Article, ArticleFrontmatter } from "../types/article.types";
+import type { Article, ArticleFrontmatter } from '../types/article.types';
 
 // module-level キャッシュは持たない (r2-storage-design.md)。
 // re-push 直後の取りこぼしや warm isolate の stale 保持を防ぐため毎回 R2 を直接 fetch する。
 const loadSnapshot = createSnapshotReader<BlogSnapshot, BlogSnapshot>({
   key: BLOG_SNAPSHOT_KEY,
-  label: "blog",
+  label: 'blog',
   select: (snapshot) => snapshot,
-  fallback: { generatedAt: new Date(0).toISOString(), articles: [], tagMeta: [] },
+  fallback: {
+    generatedAt: new Date(0).toISOString(),
+    articles: [],
+    tagMeta: [],
+  },
 });
 
 function toArticle(row: SnapshotArticle): Article {
@@ -45,32 +49,37 @@ function toArticle(row: SnapshotArticle): Article {
     updatedAt: row.updatedAt,
     surveyIds: row.surveyIds ?? [],
     tags: JSON.stringify(row.tags ?? []),
-    content: "",
+    content: '',
     frontmatter,
   };
 }
 
-function compareByPublishedAtDesc(a: SnapshotArticle, b: SnapshotArticle): number {
-  const ap = a.publishedAt ?? "";
-  const bp = b.publishedAt ?? "";
+function compareByPublishedAtDesc(
+  a: SnapshotArticle,
+  b: SnapshotArticle
+): number {
+  const ap = a.publishedAt ?? '';
+  const bp = b.publishedAt ?? '';
   if (ap !== bp) return ap < bp ? 1 : -1;
-  const ac = a.createdAt ?? "";
-  const bc = b.createdAt ?? "";
+  const ac = a.createdAt ?? '';
+  const bc = b.createdAt ?? '';
   if (ac !== bc) return ac < bc ? 1 : -1;
   return 0;
 }
 
-export async function readArticleBySlugFromR2(slug: string): Promise<Article | null> {
+export async function readArticleBySlugFromR2(
+  slug: string
+): Promise<Article | null> {
   const snapshot = await loadSnapshot();
   const row = snapshot.articles.find(
-    (a) => a.slug === slug && a.published === true,
+    (a) => a.slug === slug && a.published === true
   );
   return row ? toArticle(row) : null;
 }
 
 export async function readLatestArticlesFromR2(
   limit = 10,
-  offset = 0,
+  offset = 0
 ): Promise<Article[]> {
   const snapshot = await loadSnapshot();
   const published = snapshot.articles
@@ -82,12 +91,12 @@ export async function readLatestArticlesFromR2(
 export async function readArticlesByTagKeyFromR2(
   tagKey: string,
   limit = 10,
-  offset = 0,
+  offset = 0
 ): Promise<Article[]> {
   const snapshot = await loadSnapshot();
   const matched = snapshot.articles
     .filter(
-      (a) => a.published === true && a.tags.some((t) => t.tagKey === tagKey),
+      (a) => a.published === true && a.tags.some((t) => t.tagKey === tagKey)
     )
     .sort(compareByPublishedAtDesc);
   return matched.slice(offset, offset + limit).map(toArticle);
@@ -108,18 +117,20 @@ export async function readAllUniqueTagsFromR2(): Promise<string[]> {
 }
 
 export async function readArticleTitlesBySlugsFromR2(
-  slugs: string[],
+  slugs: string[]
 ): Promise<Record<string, string>> {
   if (slugs.length === 0) return {};
   const snapshot = await loadSnapshot();
   const set = new Set(slugs);
   return Object.fromEntries(
-    snapshot.articles.filter((a) => set.has(a.slug)).map((a) => [a.slug, a.title]),
+    snapshot.articles
+      .filter((a) => set.has(a.slug))
+      .map((a) => [a.slug, a.title])
   );
 }
 
 export async function readTagKeysForArticleFromR2(
-  slug: string,
+  slug: string
 ): Promise<Array<{ tagKey: string }>> {
   const snapshot = await loadSnapshot();
   const article = snapshot.articles.find((a) => a.slug === slug);
@@ -127,7 +138,7 @@ export async function readTagKeysForArticleFromR2(
 }
 
 export async function readTagsForArticlesFromR2(
-  slugs: string[],
+  slugs: string[]
 ): Promise<Map<string, Array<{ tagKey: string }>>> {
   if (slugs.length === 0) return new Map();
   const snapshot = await loadSnapshot();
@@ -135,19 +146,22 @@ export async function readTagsForArticlesFromR2(
   const result = new Map<string, Array<{ tagKey: string }>>();
   for (const a of snapshot.articles) {
     if (!set.has(a.slug)) continue;
-    result.set(a.slug, a.tags.map((t) => ({ tagKey: t.tagKey })));
+    result.set(
+      a.slug,
+      a.tags.map((t) => ({ tagKey: t.tagKey }))
+    );
   }
   return result;
 }
 
 export async function readArticleSummariesByTagKeyFromR2(
   tagKey: string,
-  limit = 10,
+  limit = 10
 ): Promise<Array<{ slug: string; title: string; description: string | null }>> {
   const snapshot = await loadSnapshot();
   return snapshot.articles
     .filter(
-      (a) => a.published === true && a.tags.some((t) => t.tagKey === tagKey),
+      (a) => a.published === true && a.tags.some((t) => t.tagKey === tagKey)
     )
     .sort(compareByPublishedAtDesc)
     .slice(0, limit)
@@ -156,15 +170,19 @@ export async function readArticleSummariesByTagKeyFromR2(
 
 export async function readArticleSummariesBySurveyIdFromR2(
   surveyId: string,
-  limit = 6,
+  limit = 6
 ): Promise<Array<{ slug: string; title: string; description: string | null }>> {
   const snapshot = await loadSnapshot();
+  const indexedSlugs = snapshot.surveyArticleIndex?.[surveyId];
+  const indexedSlugSet = indexedSlugs ? new Set(indexedSlugs) : null;
   return snapshot.articles
     .filter(
       (article) =>
         article.published === true &&
-        Array.isArray(article.surveyIds) &&
-        article.surveyIds.includes(surveyId),
+        (indexedSlugSet
+          ? indexedSlugSet.has(article.slug)
+          : Array.isArray(article.surveyIds) &&
+            article.surveyIds.includes(surveyId))
     )
     .sort(compareByPublishedAtDesc)
     .slice(0, limit)
@@ -202,7 +220,7 @@ export interface BlogIndexPageResult {
  */
 export async function readBlogIndexPageFromR2(
   pageSize: number,
-  offset: number,
+  offset: number
 ): Promise<BlogIndexPageResult> {
   const snapshot = await loadSnapshot();
   const published = snapshot.articles

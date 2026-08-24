@@ -48,6 +48,10 @@ interface PageShellProps {
 export const SHELL_WIDTH_CLASS =
   'mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-10';
 
+/** PageShell / ArticleShell 共通の左レール列。レール寸法を2系統へ分岐させない。 */
+export const LEFT_RAIL_GRID_CLASS =
+  'lg:grid lg:grid-cols-[264px_minmax(0,1fr)] lg:gap-6 lg:items-start xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10';
+
 /**
  * 全ページ共通の単一レイアウト Shell。
  *
@@ -90,7 +94,7 @@ export function PageShell({
       : showLeft
         ? // 左レールは lg+ で出す。home / ranking / category / theme がこの単一契約を使い、
           // page.tsx 側へ同じ grid-template-columns を複製しない。
-          'lg:grid lg:grid-cols-[264px_minmax(0,1fr)] lg:gap-6 lg:items-start xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10'
+          LEFT_RAIL_GRID_CLASS
         : hasRight
           ? 'xl:grid xl:grid-cols-[minmax(0,1fr)_316px] xl:gap-10 xl:items-start'
           : '';

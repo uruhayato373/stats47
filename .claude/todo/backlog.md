@@ -21,6 +21,73 @@ updated: 2026-08-24
 
 ## 🔴 高 — 今月中に着手したい
 
+### [SURVEY-HUB-HANDOFF-01] 調査ハブ改修の別PC実画面検証と配信snapshot反映
+タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run type-check --workspace apps/web] [起票:2026-08-24]
+
+- **実装済み**: `ArticleShell.leftRail`、調査詳細のデスクトップ左ナビとモバイル上部代替、
+  調査固有の代表ランキング選定（共通代表が0件でもカテゴリ分散で最大4件）、関連カテゴリ導線、
+  `nav_surface=survey_category`、blog snapshot v2 の `surveyArticleIndex`、古いsnapshotの
+  `surveyIds` / 逆引き欠落を検出するtaxonomy監査、各対象単体テスト。
+- **原因確定済み**: `/survey/city-planning-survey` から関連記事が見えないのはUI条件ではなく、
+  配信中 `app/blog/all.json` が2026-08-20生成の旧schemaで
+  `commercial-land-price-trend.surveyIds=[]` のため。記事側はtaxonomy coreから
+  `city-planning-survey` と `prefectural-land-price-survey` を正しく表示している。
+- **次（別PC）**:
+  1. `git pull --ff-only origin develop` 後、同じ作業ツリーで他のClaude Code/Codexが動いていないことを確認。
+  2. 下記でblog snapshotを**ローカルだけ**再生成する（`saveToR2` は `.local/r2` 書き込み。pushしない）。
+     `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_ENV=development NODE_OPTIONS="--conditions react-server" npx tsx apps/web/scripts/export-blog-snapshot.ts`
+  3. `R2_DEV_GATEWAY_CACHE_SECONDS=0 npm run dev:web` で
+     `/survey/city-planning-survey` を確認。lg+は左ナビ・代表地図4件・関連分類3系統・関連記事、
+     lg未満は左ナビが消えてPageHeader直後の折りたたみナビだけが出ることを確認する。
+  4. 大規模調査 `/survey/census` でも、全ランキングを左railへ大量展開せず、代表4件と本文の全件表へ
+     分離できていることを確認する。テーマはThemeCatalogの実在lineageがある場合だけ表示し、空を偽リンクで埋めない。
+  5. 対象test、web type-check、scripts type-check、design-system check、docs check、
+     `audit-survey-taxonomy --offline --check`、web buildを実行。失敗は既存findingと新規回帰を分ける。
+- **本番反映**: 実画面確認後に `app/blog/all.json` の明示keyだけをR2へpushし、ISR/CDN purge・deployは
+  オーナーが別途承認した1回にまとめる。このカードの存在をR2 write/deploy承認とは解釈しない。
+- **完了条件**: city-planningで双方向blogリンク、代表地図、desktop/mobileナビを確認し、censusでも
+  レール過密がなく、全ゲートがgreen。配信snapshot反映後に本番200と関連記事表示を確認したらカードを削除する。
+- **別PC用 Claude Code Sonnet 指示**: 「`SURVEY-HUB-HANDOFF-01` だけを再開する。AGENTS.md、
+  survey-linkage-standards、デザインシステム、本カードを読み、まずdevelopをff-only同期する。
+  実装済みコードを作り直さず、ローカルblog snapshotを再生成してcity-planningとcensusをdesktop/mobileで確認。
+  欠陥があれば外科的に修正し、記載した全gateを通す。theme/blogのsurveyIdは手書きしない。
+  R2 push・CDN purge・deployは行わず、必要なら実行対象keyと検証結果だけ報告する。」
+
+### [SURVEY-EDITORIAL-80-01] 全80調査へ一次資料に基づく個別説明を手作業で整備する
+タグ: [コンテンツ品質] [種類:制作] [実行:sweep] [検証:npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts] [Codex候補] [起票:2026-08-24]
+
+- **owner**: `survey-curator`。通常実装は Claude Code Sonnet。1回の実行は最大10調査とし、
+  `apps/web/src/features/survey/survey-editorial.ts` を authored SSOT として追記する。
+- **目的**: fallback の組織名だけで終わる調査ハブを、読者が「何が分かるか・どの問いへ進めるか・
+  何に注意して読むか」を判断できる出典ハブにする。全80調査へ同じ定型文を一斉生成する作業ではない。
+- **再開ポインタ**: `nextBatch=survey-editorial.ts に未登録の survey を surveys.json の displayOrder 順で先頭10件`。
+  各runの最後に、完了したsurveyIdと次の先頭surveyIdだけをこの行へ記録する。長い実行ログは残さない。
+- **1調査の必須項目**:
+  1. `summary`: 調査主体・対象・周期・調査が捉える範囲を、公式一次資料で確認した2〜3文。
+  2. `whatYouCanLearn`: 実在する関連ランキング群から導ける3〜5項目。一般論を水増ししない。
+  3. `readerQuestions`: 3〜5件。`rankingKey` はその調査の R2 items / taxonomy core に実在するものだけ。
+  4. `caveats`: 母数、標本、時点、系列断絶、合計と率、県庁所在市など、その調査固有の注意を2〜5件。
+- **実行順**: (1) `packages/ranking/src/data/surveys.json` と
+  `app/survey/<surveyId>/items.json` で対象・実在keyを確定、(2) `survey.url` または所管省庁の公式ページで
+  対象・周期・定義を確認、(3) 10調査だけ執筆、(4) validator / taxonomy audit / web type-check、
+  (5) 意味レビュー後に次batchへ進む。公式URLが失効している場合は検索結果の要約を根拠にせず停止する。
+- **機械ゲートの追加**: validator に `--require-all-editorial` を追加し、master 80/80、必須配列の非空、
+  readerQuestions の key が当該調査へ所属、重複question、過度な定型文一致を検査する。移行中の通常CIは
+  既存件数を下回らないratchet、完了時に `--require-all-editorial` をPR必須へ切り替える。
+- **完了条件**: active master 80/80に個別内容があり、全readerQuestionsが当該調査に所属し、公式一次資料と
+  調査固有の注意を人が確認済み。`audit-survey-taxonomy --offline --check`、portfolio validator、web type-check、
+  対象テストが通り、fallback表示が0件になる。
+- **停止条件**: 一次資料で対象・周期・定義を確認できない、調査に属する有効rankingKeyが3件未満、
+  市区町村/全国/都道府県の地理スコープが混在、系列断絶を説明できない場合。その調査だけ未完了で残し、
+  推測・別調査からの転記・存在しないsurveyId/rankingKeyの追加はしない。
+- **別PC用 Claude Code Sonnet 指示**: 「`SURVEY-EDITORIAL-80-01` の次batchだけを実装する。
+  最初に `git pull --ff-only origin develop` と working tree を確認し、AGENTS.md、
+  `.claude/rules/survey-linkage-standards.md`、本カードを読む。未登録surveyをdisplayOrder順に最大10件選び、
+  公式一次資料と当該survey itemsを照合して `survey-editorial.ts` の4項目を個別執筆する。
+  文面テンプレの横展開やsurveyId手書き紐付けは禁止。対象テスト、portfolio validator、
+  `audit-survey-taxonomy --offline --check`、web type-checkを実行し、通ったbatchだけcommitする。
+  デプロイ・R2 pushはしない。最後に本カードの再開ポインタだけ更新する。」
+
 ### [THEME-EVIDENCE-LENS-ROLLOUT-01] 白書論点レンズをテーマ横断で段階展開する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-08-24] [期日:2026-08-31]
 

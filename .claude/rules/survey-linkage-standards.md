@@ -58,10 +58,11 @@ config.surveyId (手動オーバーライド・先頭固定)
 | `/themes/<key>` 本文 | 「このテーマの出典調査」 | ThemeCatalog 全 chart + indicator item の lineage から request 時に派生 |
 | `/blog/<slug>` 右レール | 「この記事の出典調査」 | `all.json.surveyIds`、旧 snapshot は chart source.json を fallback 解決 |
 | `/survey` 一覧 | 調査カード + 件数 | all.json (`itemCount` 焼き込み、force-dynamic) |
-| `/survey/<id>` | 調査ハブ + 関連ランキング / テーマ / ブログ記事 | survey items + ThemeCatalog 逆引き + `app/blog/all.json.surveyIds` (ƒ オンデマンド ISR) |
+| `/survey/<id>` | 調査ハブ + 代表/全ランキング / 関連カテゴリ / テーマ / ブログ記事 | survey items + ThemeCatalog 逆引き + `app/blog/all.json.surveyArticleIndex` (ƒ オンデマンド ISR) |
 
 双方向リンクは `nav_click` の既存 custom dimensions で計測する。各面→survey は
-`*_survey`、survey→各面は `survey_ranking` / `survey_theme` / `survey_blog`。
+`*_survey`、survey→各面は `survey_ranking` / `survey_theme` / `survey_blog` /
+`survey_category`。
 `survey_ranking` は週次 `survey-navigation.csv` から portfolio の internalNav へ56日集計する。
 
 - **/survey 系ページに generateStaticParams を付けない** (build 時 R2 不可 → 空/notFound prerender 固着。
@@ -81,7 +82,9 @@ config.surveyId (手動オーバーライド・先頭固定)
   月次のポートフォリオ監査 (`/manage-survey-portfolio`) で実行する (ネットワーク必須のため PR CI には
   入れない)。初回全件実測 2026-07-14: active 2,159 件 一致 100%・欠落 0・調査集合一致。
 - **横断層**: `audit-survey-taxonomy.ts` が ranking / ThemeCatalog 全 chart / 公開 blog 全 SVG を
-  同じ core で監査し、`.claude/state/surveys/taxonomy.json` に逆引き索引も保存する。PR は
+  同じ core で監査し、`.claude/state/surveys/taxonomy.json` に逆引き索引も保存する。配信中 blog snapshot の
+  `surveyIds` と `surveyArticleIndex` が同じ導出結果を含むことも検査し、古い snapshot による片方向リンクを
+  失敗として扱う。PR は
   `--offline --check` で git drift・10日 freshness・ratchet を検査し、週次 workflow が R2 blog を
   全量再取得して ratchet を改善方向だけに更新する。
 
@@ -111,7 +114,7 @@ npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts   # 未カバー st
 npx tsx packages/ranking/src/scripts/generate-ranking-items.ts        # CI: sync-snapshots (ranking-items)
 # 2. その後に master (survey items.json / all.json) を再グループ化
 npx tsx packages/ranking/src/scripts/export-master-snapshots.ts       # CI: sync-snapshots (master)
-# 3. blog article の逆引き surveyIds は blog publish 時に source.json から再生成
+# 3. blog article の surveyIds と surveyArticleIndex は blog publish 時に source.json から再生成
 NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-blog-snapshot.ts
 ```
 

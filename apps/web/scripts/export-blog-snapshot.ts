@@ -16,31 +16,31 @@
  *   → 公開 URL から read。list 不可なので slug は committed seed (packages/database/seed/articles.json) から列挙
  */
 
-import fs from "fs";
-import path from "path";
-
+import fs from 'fs';
+import path from 'path';
 
 import {
   fetchFromR2AsJson,
   fetchFromR2AsString,
   listFromR2,
   saveToR2,
-} from "@stats47/r2-storage/server";
-import dotenv from "dotenv";
-import yaml from "js-yaml";
+} from '@stats47/r2-storage/server';
+import dotenv from 'dotenv';
+import yaml from 'js-yaml';
 
-import { resolveArticleSurveyIds } from "../src/features/blog/services/article-survey-taxonomy";
+import { resolveArticleSurveyIds } from '../src/features/blog/services/article-survey-taxonomy';
 import {
   BLOG_SNAPSHOT_KEY,
+  buildSurveyArticleIndex,
   type BlogSnapshot,
   type SnapshotArticle,
   type SnapshotTagMeta,
-} from "../src/features/blog/types/snapshot";
+} from '../src/features/blog/types/snapshot';
 
-dotenv.config({ path: ".env.local" });
-dotenv.config({ path: ".env" });
+dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env' });
 
-const BLOG_PREFIX = "app/blog/";
+const BLOG_PREFIX = 'app/blog/';
 
 interface Frontmatter {
   title?: string;
@@ -71,7 +71,7 @@ function normalizeDate(v: unknown): string | null {
 }
 
 interface SlugInfo {
-  ext: "md" | "mdx" | null;
+  ext: 'md' | 'mdx' | null;
   hasCharts: boolean;
 }
 
@@ -91,12 +91,14 @@ interface ArticleSeedRow {
 function collectSlugInfoFromSeed(): Map<string, SlugInfo> {
   const seedPath = path.resolve(
     __dirname,
-    "../../../packages/database/seed/articles.json",
+    '../../../packages/database/seed/articles.json'
   );
-  const seed = JSON.parse(fs.readFileSync(seedPath, "utf8")) as ArticleSeedRow[];
+  const seed = JSON.parse(
+    fs.readFileSync(seedPath, 'utf8')
+  ) as ArticleSeedRow[];
   const map = new Map<string, SlugInfo>();
   for (const row of seed) {
-    const ext = row.format === "mdx" ? "mdx" : "md";
+    const ext = row.format === 'mdx' ? 'mdx' : 'md';
     map.set(row.slug, { ext, hasCharts: !!row.has_charts });
   }
   return map;
@@ -109,14 +111,15 @@ async function collectSlugInfo(): Promise<Map<string, SlugInfo>> {
       const slugInfo = new Map<string, SlugInfo>();
       for (const key of keys) {
         const rest = key.slice(BLOG_PREFIX.length); // <slug>/...
-        const slash = rest.indexOf("/");
+        const slash = rest.indexOf('/');
         if (slash < 0) continue;
         const slug = rest.slice(0, slash);
         const file = rest.slice(slash + 1);
         const info = slugInfo.get(slug) ?? { ext: null, hasCharts: false };
-        if (file === "article.mdx") info.ext = "mdx";
-        else if (file === "article.md" && info.ext !== "mdx") info.ext = "md";
-        if (file.startsWith("data/") && file.endsWith(".json")) info.hasCharts = true;
+        if (file === 'article.mdx') info.ext = 'mdx';
+        else if (file === 'article.md' && info.ext !== 'mdx') info.ext = 'md';
+        if (file.startsWith('data/') && file.endsWith('.json'))
+          info.hasCharts = true;
         slugInfo.set(slug, info);
       }
       return slugInfo;
@@ -124,7 +127,9 @@ async function collectSlugInfo(): Promise<Map<string, SlugInfo>> {
   } catch {
     // R2 list 不可 (公開URL専用環境) → seed 列挙へ
   }
-  console.log("ℹ️  R2 list 不可。committed seed (articles.json) から slug を列挙します");
+  console.log(
+    'ℹ️  R2 list 不可。committed seed (articles.json) から slug を列挙します'
+  );
   return collectSlugInfoFromSeed();
 }
 
@@ -143,7 +148,7 @@ async function main() {
   // cloud を読ませること (公開 URL 経由が標準)。
   const prior = await fetchFromR2AsJson<BlogSnapshot>(BLOG_SNAPSHOT_KEY);
   const priorBySlug = new Map<string, SnapshotArticle>(
-    (prior?.articles ?? []).map((a) => [a.slug, a]),
+    (prior?.articles ?? []).map((a) => [a.slug, a])
   );
 
   const slugInfo = await collectSlugInfo();
@@ -152,18 +157,24 @@ async function main() {
   // 配信側にしか無い記事 (ローカルミラー欠落分) も拾う。
   const allSlugs = new Set<string>([
     ...priorBySlug.keys(),
-    ...[...slugInfo.entries()].filter(([, v]) => v.ext !== null).map(([s]) => s),
+    ...[...slugInfo.entries()]
+      .filter(([, v]) => v.ext !== null)
+      .map(([s]) => s),
   ]);
   const slugs = [...allSlugs].sort();
-  console.log(`📄 対象記事: ${slugs.length} 件 (配信 ${priorBySlug.size} ∪ ローカル ${slugInfo.size})`);
+  console.log(
+    `📄 対象記事: ${slugs.length} 件 (配信 ${priorBySlug.size} ∪ ローカル ${slugInfo.size})`
+  );
 
   const articles: SnapshotArticle[] = [];
   for (const slug of slugs) {
     const info = slugInfo.get(slug);
     const prev = priorBySlug.get(slug);
-    const ext: "md" | "mdx" =
-      info?.ext ?? (prev?.format === "mdx" ? "mdx" : "md");
-    const content = await fetchFromR2AsString(`${BLOG_PREFIX}${slug}/article.${ext}`);
+    const ext: 'md' | 'mdx' =
+      info?.ext ?? (prev?.format === 'mdx' ? 'mdx' : 'md');
+    const content = await fetchFromR2AsString(
+      `${BLOG_PREFIX}${slug}/article.${ext}`
+    );
     if (content === null) {
       // 本文を取得できない場合は配信中エントリをそのまま保持 (記事を消さない)
       if (prev) {
@@ -175,11 +186,11 @@ async function main() {
     }
     const fm = parseFrontmatter(content);
     const tags = (Array.isArray(fm.tags) ? (fm.tags as string[]) : []).map(
-      (tagKey) => ({ tagKey: String(tagKey) }),
+      (tagKey) => ({ tagKey: String(tagKey) })
     );
     // sticky: frontmatter の boolean が最優先 → 配信状態 → (初回生成時のみ) publishedAt 推定
     const published =
-      typeof fm.published === "boolean"
+      typeof fm.published === 'boolean'
         ? fm.published
         : prev
           ? prev.published
@@ -197,7 +208,8 @@ async function main() {
       hasCharts: info?.hasCharts ?? prev?.hasCharts ?? false,
       published,
       publishedAt: normalizeDate(fm.publishedAt),
-      ogImageType: typeof fm.ogImage === "string" ? "static" : prev?.ogImageType ?? null,
+      ogImageType:
+        typeof fm.ogImage === 'string' ? 'static' : (prev?.ogImageType ?? null),
       proofreadAt: prev?.proofreadAt ?? null,
       createdAt: prev?.createdAt ?? null,
       updatedAt: normalizeDate(fm.updatedAt) ?? prev?.updatedAt ?? null,
@@ -218,23 +230,25 @@ async function main() {
     .sort((a, b) => b.articleCount - a.articleCount);
 
   const snapshot: BlogSnapshot = {
+    schemaVersion: 2,
     generatedAt: new Date().toISOString(),
     articles,
     tagMeta,
+    surveyArticleIndex: buildSurveyArticleIndex(articles),
   };
 
   const body = JSON.stringify(snapshot);
   const result = await saveToR2(BLOG_SNAPSHOT_KEY, body, {
-    contentType: "application/json; charset=utf-8",
+    contentType: 'application/json; charset=utf-8',
   });
 
   const publishedCount = articles.filter((a) => a.published).length;
   console.log(
-    `✅ blog snapshot: articles=${snapshot.articles.length} published=${publishedCount} tags=${snapshot.tagMeta.length} bytes=${result.size} key=${result.key}`,
+    `✅ blog snapshot: articles=${snapshot.articles.length} published=${publishedCount} tags=${snapshot.tagMeta.length} bytes=${result.size} key=${result.key}`
   );
 }
 
 main().catch((err) => {
-  console.error("Fatal:", err);
+  console.error('Fatal:', err);
   process.exit(1);
 });
