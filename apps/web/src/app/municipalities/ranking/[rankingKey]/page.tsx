@@ -197,9 +197,13 @@ export default async function MunicipalityRankingPage({
         method="get"
         className="mt-5 grid gap-3 border-y border-border py-4 sm:grid-cols-[1fr_14rem_auto]"
       >
-        <label className="text-xs font-medium text-muted-foreground">
+        <label
+          htmlFor="municipality-query"
+          className="text-xs font-medium text-muted-foreground"
+        >
           自治体名
           <input
+            id="municipality-query"
             type="search"
             name="q"
             defaultValue={query}
@@ -207,9 +211,13 @@ export default async function MunicipalityRankingPage({
             className="mt-1 h-10 w-full border border-input bg-background px-3 text-sm text-foreground outline-none focus:border-primary"
           />
         </label>
-        <label className="text-xs font-medium text-muted-foreground">
+        <label
+          htmlFor="municipality-prefecture"
+          className="text-xs font-medium text-muted-foreground"
+        >
           都道府県
           <select
+            id="municipality-prefecture"
             name="pref"
             defaultValue={prefectureCode}
             className="mt-1 h-10 w-full border border-input bg-background px-3 text-sm text-foreground outline-none focus:border-primary"

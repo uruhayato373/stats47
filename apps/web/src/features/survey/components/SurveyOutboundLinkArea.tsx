@@ -28,5 +28,7 @@ export function SurveyOutboundLinkArea({
     trackNavClick({ label, href, surface });
   }
 
-  return <div onClick={handleClick}>{children}</div>;
+  // container 自体は操作対象ではない。keyboard activation を含む子 anchor の click を
+  // capture して計測するため、role/tabIndex を付けて偽の操作要素にはしない。
+  return <div onClickCapture={handleClick}>{children}</div>;
 }
