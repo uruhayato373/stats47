@@ -1,16 +1,16 @@
-import { type ReactNode } from "react";
+import { type ReactNode } from 'react';
 
 import {
   RailAdSlot,
   SidebarPromoBanner,
   selectPromoBannerIndexForRanking,
-} from "@/features/ads";
+} from '@/features/ads';
 
 import {
   ADSENSE_DISPLAY_ENABLED,
   RANKING_PAGE_SIDEBAR,
   RANKING_SIDEBAR_TOP,
-} from "@/lib/google-adsense";
+} from '@/lib/google-adsense';
 
 interface RightRailWidgetsProps {
   /** 上部に挿入する追加 widget (関連ランキング・関連記事など) */
@@ -30,7 +30,7 @@ interface RightRailWidgetsProps {
 }
 
 /**
- * 全ページ共通の右サイドバー widget セット。
+ * 文脈付き右サイドバーの共通 widget セット。
  *
  * 配置順 (本文関連 widget を上・promo/広告を下):
  *   1. topWidgets / midWidgets / bottomWidgets (関連ランキング・関連記事など)
@@ -38,6 +38,7 @@ interface RightRailWidgetsProps {
  *   2. 画像アフィリエイトバナー
  *   3. AdSense Rectangle (上 → 下)
  *
+ * 関連 widget が無いページを広告だけのために狭める用途では使わない。
  * 右レールの PR は登録済み画像バナーに限定し、独自テキストカードを置かない。
  * 自然フロー（sticky/独立スクロールなし）。本文を主役にするため促進系を下げている。
  * 設計仕様: docs/01_技術設計/04_デザインシステム.md

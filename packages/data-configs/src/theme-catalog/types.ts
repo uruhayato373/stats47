@@ -15,12 +15,9 @@
  * generator: `packages/data-configs/scripts/generate-theme-catalog.ts`
  * validator: `packages/data-configs/scripts/validate-theme-catalog.ts`
  */
-import type {
-  IndicatorSetCategory,
-  IndicatorSetUsage,
-} from "@stats47/types";
+import type { IndicatorSetCategory, IndicatorSetUsage } from '@stats47/types';
 
-import type { EvidenceLensKey, EvidenceSourceKey } from "./evidence-lenses";
+import type { EvidenceLensKey, EvidenceSourceKey } from './evidence-lenses';
 
 /**
  * テーマページ (`/themes/*`) で有効な componentType の文字列 union。
@@ -36,16 +33,16 @@ import type { EvidenceLensKey, EvidenceSourceKey } from "./evidence-lenses";
  */
 export const CATALOG_COMPONENT_TYPES = [
   // ThemeDbChartComponentProps (チャート 6 種)
-  "line-chart",
-  "mixed-chart",
-  "composition-chart",
-  "donut-chart",
-  "cpi-profile",
-  "cpi-heatmap",
+  'line-chart',
+  'mixed-chart',
+  'composition-chart',
+  'donut-chart',
+  'cpi-profile',
+  'cpi-heatmap',
   // 非チャート (ThemeMetricsDashboard で個別描画)
-  "kpi-card",
-  "markdown-section",
-  "pyramid-chart",
+  'kpi-card',
+  'markdown-section',
+  'pyramid-chart',
 ] as const;
 
 export type CatalogComponentType = (typeof CATALOG_COMPONENT_TYPES)[number];
@@ -69,7 +66,7 @@ export interface CatalogMetric {
   /** 短縮ラベル (タブ・凡例・比較表示用) */
   shortLabel: string;
   /** テーマ内での役割 */
-  role: "primary" | "secondary" | "context";
+  role: 'primary' | 'secondary' | 'context';
   /** 選定根拠 (移行時は省略可) */
   selection?: MetricSelection;
 }
@@ -80,6 +77,11 @@ export interface CatalogChart {
   componentKey: string;
   componentType: CatalogComponentType;
   title: string;
+  /**
+   * 読者向けの「何が分かるか / どう読むか」。未指定時は componentType ごとの
+   * 決定的な標準文を generator が補い、配信 JSON では必ず文字列になる。
+   */
+  description?: string;
   /** チャート固有 props (estatParams 等)。型は app 層 DashboardConfigMap で担保。 */
   componentProps: Record<string, unknown>;
   /** このチャートが扱う指標の rankingKey (metrics との整合 validator 用) */
@@ -167,7 +169,7 @@ export interface CatalogEvidenceTopic {
  * ここ 1 か所に置く。
  */
 export function normalizeUnitForAxis(unit: string): string {
-  return unit.normalize("NFKC").trim();
+  return unit.normalize('NFKC').trim();
 }
 
 /** テーマ 1 件の統合カタログ (指標選定 + チャート割当 + 選定根拠)。 */

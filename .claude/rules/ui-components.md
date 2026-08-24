@@ -7,10 +7,10 @@
 
 - **横幅は `PageShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない。正確な幅と rail 寸法は `PageShell.tsx` を正典とする。**寸法は doboku-note に合わせている（2026-08-03）**: コンテナ 1280px / lg+ 左右 40px（`lg:px-10`）/ gap 40px（`gap-10`）/ 右レール **316px**。300×250 の `SidebarPromoBanner` は Card で囲まず、レール内に等倍で表示する。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（reading zone + flex 密着）を使う。
 - **サイト全体ナビの PC 常設左サイドバーは廃止**。グローバルナビはヘッダー（カテゴリは**メガメニュー**）に集約し、モバイルは `MobileNavDrawer`（Sheet）。
-  - **例外: ページ内ナビの左レール（2026-08-04）**。「そのページの表示内容を切り替えるナビ」は `PageShell` の `leftRail` に置いてよい。該当は**テーマページの `ThemeSideNav`**（`/themes/*`・`/areas/*/[themeSlug]`。テーマ一覧 (ALL_THEMES = 22 件) + 地域選択）。ホーム / `/ranking` が本文内 `aside` に `PortalCategoryGrid variant="sidebar"` を置くのと同役割で、リストの見た目もそれに揃える（`min-h-9` / `text-[13px]` / `ChevronRight`）。
+  - **例外: ページ内ナビの左レール（2026-08-04）**。「そのページの表示内容を切り替えるナビ」は `PageShell` の `leftRail` に置いてよい。Theme はテーマ切替 + 地域 + ページ内目次 + 全指標 + 出典調査、home / `/ranking` / `/category/*` はカテゴリ探索を置く。全テーマやグローバルナビを常時展開して複製しない。
   - 左レールは `PageShell` 実装上**右レールと併用できない**（`showLeft = hasLeft && !hasRight`）。テーマページは元々右レールなしなので成立する。
-  - **左レールは `lg`(1024px) から出す**。home / `/ranking` の本文内 `aside`（`lg:grid-cols-[264px_…]`）と同じ境界に揃えてある。★**2026-08-05 是正**: 左レールだけ `xl`(1280px) だったため「同じウィンドウ幅で home には左サイドバーが出るのにテーマページには出ない」という食い違いが起きていた。列幅・gap も home に合わせる（lg で 264px/gap-6、xl で 280px/gap-10）。機械ゲート = `page-shell-rail-contract.test.tsx`（`xl:grid` に戻ると落ちる）。
-  - **lg 未満は `leftRailNarrowBehavior="hide"` で隠し、代替セレクタを本文上部に出す**（既定の `stack` は本文の下に積む挙動で、ページ内容を切り替えるナビがそこに来ると操作対象より後ろになり意味を失う）。テーマページの代替は `lg:hidden` の `ThemeSwitcher`（テーマ）と `PrefectureSelect`（地域・`ThemeAreaHeader` / `ThemeHero` の actions）。★**代替 UI 側の境界もレール本体と必ず一致させる**。ずれると両方出る幅（または両方消える幅）ができる。
+  - **左レールは `lg`(1024px) から出す**。列幅・gap は `PageShell` だけが持ち、page.tsx に `grid-cols-[264px_…]` 等を複製しない。機械ゲート = `page-shell-rail-contract.test.tsx` + `check-design-system.mjs`。
+  - **lg 未満で操作ナビを隠す場合は `leftRailNarrowBehavior="hide"` とし、テーマ・地域・ページ内目次・全指標・出典調査の同等 UI を本文上部に出す**。関連リンク型の左レールは既定 `stack` で本文後へ積んでよい。
   - 左レールが `ThemePrefectureProvider` のような context を使う場合、**Provider の内側に leftRail を置く**（`ThemePageLayout` が Provider → `PageShell` の入れ子を持ち、呼び出し側の page.tsx は `PageShell` を重ねない）。
 - **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0`）**。カードやパネルへの `rounded-xl`/`rounded-2xl` の手動付与は禁止し、外枠は `rounded-none` とする。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。`ArticleShell` の `.reading-zone` は薄グレー地を維持するが、角丸と影は通常カード（`rounded-none`・`shadow-sm`）に揃える。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。
@@ -36,11 +36,13 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 ```
 
 適用箇所:
+
 - `apps/web/src/app/blog/[slug]/page.tsx` — 左・右 aside
 - `apps/web/src/app/category/[categoryKey]/page.tsx` — 右 aside
 - 3カラムレイアウトを持つすべての新規ページ
 
 独立スクロール禁止の適用箇所:
+
 - `apps/web/src/components/layout/ArticleShell.tsx`
 - `apps/web/src/components/rail/RightRailWidgets.tsx`
 - 右レールに渡す widget
@@ -50,11 +52,11 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 新規 UI を作るときは、まず**どの tier に置くか**を決める。下位 tier に既にあるものを feature 内に再実装しない
 （再実装が共通化を阻む最大要因。実測で feature 層の重複が散在 → 恒久ルールは `docs/01_技術設計/04_デザインシステム.md` に集約）。
 
-| tier | 置き場所 | import 元 | 中身 | 追加方法 |
-|---|---|---|---|---|
-| **① プリミティブ** | `packages/components/src/atoms/ui` | `@stats47/components` | shadcn/ui 由来の素部品（Button/Card/Select/Table/Tabs…30 個） | `cd packages/components && npx shadcn add`（`packages/components/README.md`）。app-local に置かない |
-| **② 共有 composite** | `apps/web/src/components/{surface,charts,stat-charts,layout,molecules}` | `@/components/...` | 複数 feature が使う合成部品（`SurfaceCard` / `ChartCard` / `PageShell` / `MiniCharts` / KPI カード等）。**これは正式な共有層**（実質 180+ import のハブ） | ① を組み合わせて作る。チャートは `chart-component-builder` agent |
-| **③ feature 固有** | `apps/web/src/features/<feature>/components` | feature 内 `index.ts` 経由 | その feature だけで使う UI。複数 feature で必要になったら ② へ昇格 | feature 内。**他 feature から直接 import しない**（app 層経由で合成） |
+| tier                 | 置き場所                                                                | import 元                  | 中身                                                                                                                                                      | 追加方法                                                                                            |
+| -------------------- | ----------------------------------------------------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **① プリミティブ**   | `packages/components/src/atoms/ui`                                      | `@stats47/components`      | shadcn/ui 由来の素部品（Button/Card/Select/Table/Tabs…30 個）                                                                                             | `cd packages/components && npx shadcn add`（`packages/components/README.md`）。app-local に置かない |
+| **② 共有 composite** | `apps/web/src/components/{surface,charts,stat-charts,layout,molecules}` | `@/components/...`         | 複数 feature が使う合成部品（`SurfaceCard` / `ChartCard` / `PageShell` / `MiniCharts` / KPI カード等）。**これは正式な共有層**（実質 180+ import のハブ） | ① を組み合わせて作る。チャートは `chart-component-builder` agent                                    |
+| **③ feature 固有**   | `apps/web/src/features/<feature>/components`                            | feature 内 `index.ts` 経由 | その feature だけで使う UI。複数 feature で必要になったら ② へ昇格                                                                                        | feature 内。**他 feature から直接 import しない**（app 層経由で合成）                               |
 
 判断フロー: 「① にあるか？ → ② にあるか？ → 無ければ作る（汎用なら ②、その feature 専用なら ③）」。
 
@@ -87,11 +89,11 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 ## レスポンシブブレイクポイントの使い分け
 
-| 対象 | 使うべきブレイクポイント | 理由 |
-|---|---|---|
-| ページレイアウト（2カラム/1カラム、右レール表示） | `xl:` (ビューポート 1280px) | `PageShell` の右レール（316px）は `xl:` で出現 |
-| テキスト・ボタンのサイズ調整 | `sm:` / `md:` (ビューポート) | デバイスサイズで決まる |
-| ダッシュボードカードグリッド | `@sm:` / `@md:` / `@lg:` (コンテナクエリ) | 親コンテナ幅が可変（右レール有無で本文カラム幅が変動）のため |
+| 対象                                              | 使うべきブレイクポイント                  | 理由                                                         |
+| ------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------ |
+| ページレイアウト（2カラム/1カラム、右レール表示） | `xl:` (ビューポート 1280px)               | `PageShell` の右レール（316px）は `xl:` で出現               |
+| テキスト・ボタンのサイズ調整                      | `sm:` / `md:` (ビューポート)              | デバイスサイズで決まる                                       |
+| ダッシュボードカードグリッド                      | `@sm:` / `@md:` / `@lg:` (コンテナクエリ) | 親コンテナ幅が可変（右レール有無で本文カラム幅が変動）のため |
 
 コンテナクエリのブレイクポイントは `tailwind.config.ts` でカスタム定義（`@sm: 480px`, `@md: 768px`, `@lg: 1024px`）。プラグインのデフォルト値とは異なるので注意。ビューポートブレイクポイントとコンテナクエリの混在は意図的な設計。カードグリッドをビューポートの `md:` に変えると右レールあり画面で幅不足になるため、必ずコンテナクエリを使うこと。
 

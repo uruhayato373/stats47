@@ -1,4 +1,4 @@
-import type { PageComponent } from "./load-page-components";
+import type { PageComponent } from './load-page-components';
 
 export function parsePageComponents(value: unknown): PageComponent[] {
   if (!Array.isArray(value)) return [];
@@ -32,6 +32,7 @@ function parsePageComponent(value: unknown): PageComponent | null {
     componentKey,
     componentType,
     title,
+    description: parseNullableString(value.description),
     componentProps,
     sourceName: parseNullableString(value.sourceName),
     sourceLink: parseNullableString(value.sourceLink),
@@ -46,15 +47,15 @@ function parsePageComponent(value: unknown): PageComponent | null {
 }
 
 function parseRequiredString(value: unknown): string | null {
-  return typeof value === "string" && value.length > 0 ? value : null;
+  return typeof value === 'string' && value.length > 0 ? value : null;
 }
 
 function parseNullableString(value: unknown): string | null {
-  return typeof value === "string" ? value : null;
+  return typeof value === 'string' ? value : null;
 }
 
 function parseNumber(value: unknown): number | null {
-  return typeof value === "number" && Number.isFinite(value) ? value : null;
+  return typeof value === 'number' && Number.isFinite(value) ? value : null;
 }
 
 function parseNullableNumber(value: unknown): number | null {
@@ -66,5 +67,5 @@ function parseRecord(value: unknown): Record<string, unknown> | null {
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }

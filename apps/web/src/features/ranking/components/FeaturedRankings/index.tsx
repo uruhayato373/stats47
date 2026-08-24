@@ -35,6 +35,8 @@ interface FeaturedRankingsProps {
   showHeader?: boolean;
   /** home 2ペイン内へ外枠なしで埋め込む。 */
   embedded?: boolean;
+  /** home 専用の impression / click 計測を有効にする。home 以外では false。 */
+  trackHomeEvents?: boolean;
 }
 
 /**
@@ -50,6 +52,7 @@ export async function FeaturedRankings({
   limit = 6,
   showHeader = true,
   embedded = false,
+  trackHomeEvents = true,
 }: FeaturedRankingsProps) {
   let gridItems: FeaturedRankingGridItem[] = [];
 
@@ -179,7 +182,11 @@ export async function FeaturedRankings({
           </Link>
         </div>
       )}
-      <FeaturedRankingGrid items={gridItems} compact={embedded} />
+      <FeaturedRankingGrid
+        items={gridItems}
+        compact={embedded}
+        trackHomeEvents={trackHomeEvents}
+      />
     </>
   );
 

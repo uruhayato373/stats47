@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { PageShell } from '@/components/layout';
+import { StatisticsScopeNav } from '@/components/navigation';
 
 import { InContentAdSlot } from '@/features/ads';
 import type { FinanceFlowData } from '@/features/finance-flow';
@@ -79,8 +80,12 @@ export default async function LocalFinanceThemePage() {
       <div className="lg:hidden">
         <ThemeSwitcher currentThemeKey="local-finance" />
       </div>
+      <StatisticsScopeNav current="prefectures" />
       <nav aria-label="関連する統計範囲" className="mb-4 text-sm">
-        <Link href="/municipalities" className="font-medium text-primary hover:underline">
+        <Link
+          href="/municipalities"
+          className="font-medium text-primary hover:underline"
+        >
           市区町村の地方財政は、市区町村統計で管理しています →
         </Link>
       </nav>

@@ -4,6 +4,7 @@
 > stats47 固有の例外は【stats47】で注記。
 >
 > **2026-06 更新（フラットデザイン / 正典: `docs/01_技術設計/04_デザインシステム.md`）**:
+>
 > - **角丸はサイト全体で 0**（`--radius:0`）。下記 `rounded-lg`/`rounded-md` 等は**すべて 0 に解決**される。
 >   手動の `rounded-xl`/`rounded-2xl` は禁止。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。
 > - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。
@@ -20,9 +21,11 @@
 セクション間隔     : space-y-8 〜 space-y-10
 仕切り線           : border-t border-border
 ```
+
 （PC 常設の**サイト全体ナビ**サイドバーは 2026-06 廃止。ナビはヘッダー＋モバイルドロワー。
-例外: **そのページの内容を切り替えるページ内ナビ**は `leftRail` に置いてよい
-= テーマページの `ThemeSideNav`。条件は `.claude/design-system/prohibited.md` の例外節）
+例外: **そのページの内容を切り替えるページ内ナビ**は `leftRail` に置いてよい。
+Theme のページ内ナビと home / ranking / category のカテゴリ探索が該当する。条件は
+`.claude/design-system/prohibited.md` の例外節）
 
 ## テキスト
 
@@ -66,16 +69,17 @@ Alert（全種）      : flex items-start gap-3 p-4 border rounded-lg（border-l
 ナビ（Default）     : text-muted-foreground hover:bg-accent/60 transition-colors
 パンくずリスト      : text-sm + text-muted-foreground / 現在ページ text-foreground font-medium
 ```
+
 （PC 常設のサイト全体ナビサイドバーは 2026-06 廃止。ページ内ナビの `leftRail` は例外）
 
 ## シャドウ（4段階のみ）
 
-| レベル | 用途 | Tailwind |
-|--------|------|----------|
-| none | フラット要素 | — |
-| sm | カード（デフォルト）・Toast | `shadow-sm` |
-| md | カード hover・Dropdown | `shadow-md` |
-| overlay | モーダル専用 | `shadow-xl` |
+| レベル  | 用途                        | Tailwind    |
+| ------- | --------------------------- | ----------- |
+| none    | フラット要素                | —           |
+| sm      | カード（デフォルト）・Toast | `shadow-sm` |
+| md      | カード hover・Dropdown      | `shadow-md` |
+| overlay | モーダル専用                | `shadow-xl` |
 
 **禁止**: `shadow-lg` / `shadow-2xl` / `shadow-inner`
 

@@ -25,10 +25,10 @@ describe('category page featured ranking cards', () => {
     expect(featuredSection).not.toContain('tileMapSvg=');
   });
 
-  it('home準拠の2ペインでカテゴリ関連記事を本文に表示する', () => {
-    expect(PAGE).toContain(
-      'lg:grid-cols-[264px_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[280px_minmax(0,1fr)]'
-    );
+  it('PageShellの左レールでカテゴリ関連記事を本文に表示する', () => {
+    expect(PAGE).toContain('const leftRail = (');
+    expect(PAGE).toContain('<PageShell leftRail={leftRail}');
+    expect(PAGE).not.toContain('lg:grid-cols-[264px_minmax(0,1fr)]');
     expect(PAGE).toContain('listArticlesByTagKey(blogTagKey, 8)');
     expect(PAGE).toContain('surface="category_blog"');
     expect(PAGE).toContain('title={`${category.categoryName}の新着ブログ`}');
@@ -40,19 +40,16 @@ describe('category page featured ranking cards', () => {
     expect(PAGE).not.toContain('prefMap');
   });
 
-  it('パンくずと簡潔な見出しを右のメイン領域に置く', () => {
-    const mainColumn =
-      PAGE.match(
-        /<div className="order-1 min-w-0 lg:order-2">([\s\S]*?)\{\/\* 注目ランキング \*\/\}/
-      )?.[1] ?? '';
-
-    expect(mainColumn).toContain('<Breadcrumbs');
-    expect(mainColumn).toContain('<PageHeader');
-    expect(mainColumn).toContain(
+  it('パンくずと簡潔な見出しをメイン領域に置く', () => {
+    expect(PAGE).toContain('<Breadcrumbs');
+    expect(PAGE).toContain('<PageHeader');
+    expect(PAGE).toContain(
       '`${category.categoryName}に関する都道府県ランキングを、地図やグラフで比較できます。`'
     );
     expect(PAGE).not.toContain('eyebrow="カテゴリ"');
-    expect(PAGE).not.toContain('stats={`全${rankingItems.length}件のランキング`}');
+    expect(PAGE).not.toContain(
+      'stats={`全${rankingItems.length}件のランキング`}'
+    );
   });
 
   it('全カテゴリに関連記事タグを明示する', () => {

@@ -1,19 +1,22 @@
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation';
 
-import { getMetricConfig } from "@stats47/data-configs";
-import { getJapanCatalogTheme, listJapanCatalogThemes } from "@stats47/data-configs/geo-scope";
-import { readJapanSeries } from "@stats47/stats-r2/readers";
+import { getMetricConfig } from '@stats47/data-configs';
+import {
+  getJapanCatalogTheme,
+  listJapanCatalogThemes,
+} from '@stats47/data-configs/geo-scope';
+import { readJapanSeries } from '@stats47/stats-r2/readers';
 
-import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
-import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
-import { RightRailWidgets } from "@/components/rail";
+import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ChartPanel } from '@/components/charts/ChartPanel';
+import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
+import { StatisticsScopeNav } from '@/components/navigation';
 
-import { generateOGMetadata } from "@/lib/metadata/og-generator";
+import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
-import { JapanMetricChart } from "./JapanMetricChart";
+import { JapanMetricChart } from './JapanMetricChart';
 
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
 interface Params {
   themeSlug: string;
@@ -35,7 +38,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
     ...generateOGMetadata({
       title,
       description: theme.description,
-      imageUrl: "/og-image.jpg",
+      imageUrl: '/og-image.jpg',
     }),
   };
 }
@@ -43,6 +46,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
 interface MetricSeriesView {
   metricKey: string;
   title: string;
+  description: string;
   unit: string;
   sourceId: string;
   points: { yearName: string; value: number }[];
@@ -50,7 +54,7 @@ interface MetricSeriesView {
 }
 
 async function loadMetricSeries(
-  metricKeys: string[],
+  metricKeys: string[]
 ): Promise<MetricSeriesView[]> {
   const views: MetricSeriesView[] = [];
   for (const metricKey of metricKeys) {
@@ -61,10 +65,16 @@ async function loadMetricSeries(
     //   (doc 43: 値が無い metric は非表示ではなく catalog 非採用が原則。ここは
     //   catalog は正しいが配信がまだ追いついていない場合の防御的スキップ)。
     if (!series || series.rows.length === 0 || !config) continue;
-    const points = series.rows.map((r) => ({ yearName: r.yearName, value: r.value }));
+    const points = series.rows.map((r) => ({
+      yearName: r.yearName,
+      value: r.value,
+    }));
     views.push({
       metricKey,
       title: config.title,
+      description:
+        config.description ??
+        `${config.title}の公式全国値を時系列で示します。線の傾きから長期的な増減を確認できます。`,
       unit: series.rows[0].unit,
       sourceId: series.meta.sourceId,
       points,
@@ -78,17 +88,20 @@ export default async function JapanThemePage({ params }: { params: Params }) {
   const theme = getJapanCatalogTheme(params.themeSlug);
   if (!theme) notFound();
 
-  const metricViews = await loadMetricSeries(theme.metrics.map((m) => m.metricKey));
+  const metricViews = await loadMetricSeries(
+    theme.metrics.map((m) => m.metricKey)
+  );
 
   return (
-    <PageShell rightRail={<RightRailWidgets />}>
+    <PageShell>
       <Breadcrumbs
         items={[
-          { label: "ホーム", href: "/" },
-          { label: "日本", href: "/japan" },
+          { label: 'ホーム', href: '/' },
+          { label: '日本', href: '/japan' },
           { label: theme.title },
         ]}
       />
+      <StatisticsScopeNav current="japan" />
       <PageHeader
         eyebrow="日本"
         title={theme.title}
@@ -107,12 +120,16 @@ export default async function JapanThemePage({ params }: { params: Params }) {
               key={m.metricKey}
               title={m.title}
               description={
-                m.latest ? (
-                  <span>
-                    最新: {m.latest.yearName} {m.latest.value.toLocaleString("ja-JP")}
-                    {m.unit}
-                  </span>
-                ) : undefined
+                <>
+                  <span className="block">{m.description}</span>
+                  {m.latest && (
+                    <span className="mt-1 block font-medium text-foreground">
+                      最新: {m.latest.yearName}{' '}
+                      {m.latest.value.toLocaleString('ja-JP')}
+                      {m.unit}
+                    </span>
+                  )}
+                </>
               }
               footer={
                 <ChartFooter
@@ -122,7 +139,11 @@ export default async function JapanThemePage({ params }: { params: Params }) {
                 />
               }
             >
-              <JapanMetricChart title={m.title} unit={m.unit} points={m.points} />
+              <JapanMetricChart
+                title={m.title}
+                unit={m.unit}
+                points={m.points}
+              />
             </ChartPanel>
           ))}
         </div>

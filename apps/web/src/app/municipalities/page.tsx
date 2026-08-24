@@ -11,11 +11,9 @@ import {
 } from '@stats47/data-configs/geo-scope';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
-import { RightRailWidgets } from '@/components/rail';
+import { StatisticsScopeNav } from '@/components/navigation';
 import { SectionHeader } from '@/components/section';
 import { SurfaceLinkCard } from '@/components/surface';
-
-import { StatisticsScopeNav } from '@/features/municipalities';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -41,7 +39,7 @@ export default function MunicipalitiesHubPage() {
   const draftThemes = themes.filter((theme) => theme.status === 'draft');
 
   return (
-    <PageShell rightRail={<RightRailWidgets />}>
+    <PageShell>
       <Breadcrumbs
         items={[{ label: 'ホーム', href: '/' }, { label: '市区町村' }]}
       />

@@ -12,12 +12,12 @@ source: legacy implementation plan removed on 2026-06-29
 
 完全 DB レス構成を正典にする。
 
-| Layer | SSOT | Delivery | Consumer |
-|---|---|---|---|
-| Theme list / metadata | `apps/web/src/features/theme-dashboard/config/all-themes.ts` | build-time import | `generateStaticParams` / `loadThemeData` |
-| Indicator sets | `packages/types/src/indicator-sets/*.ts` | build-time import | `to-theme-config.ts` |
-| Chart composition | `apps/web/scripts/data/page-components/theme/<key>.json` | R2 `app/page-components/theme/<key>.json` | `ThemeDbChartRenderer` |
-| Metric values | R2 `app/ranking/<key>/values.json` | R2 partitions | `loadThemeData` / `ThemeMetricsDashboard` |
+| Layer                 | SSOT                                                         | Delivery                                                   | Consumer                                  |
+| --------------------- | ------------------------------------------------------------ | ---------------------------------------------------------- | ----------------------------------------- |
+| Theme list / metadata | `apps/web/src/features/theme-dashboard/config/all-themes.ts` | build-time import                                          | `generateStaticParams` / `loadThemeData`  |
+| Indicator sets        | `packages/types/src/indicator-sets/*.ts`                     | build-time import                                          | `to-theme-config.ts`                      |
+| Chart composition     | `packages/data-configs/src/theme-catalog/<key>.ts`           | generated JSON → R2 `app/page-components/theme/<key>.json` | `ThemeDbChartRenderer`                    |
+| Metric values         | R2 `app/ranking/<key>/values.json`                           | R2 partitions                                              | `loadThemeData` / `ThemeMetricsDashboard` |
 
 Related canon:
 
@@ -34,14 +34,14 @@ Related canon:
 ```
 ThemePrefectureProvider          ← prefecture state (URL + Cookie sync)
   └─ PageShell leftRail={ThemeSideNav} leftRailNarrowBehavior="hide"
-       └─ breadcrumb / compact ThemeSwitcher + PrefectureSelect toolbar / ThemeAreaHeader / dashboard
+       └─ geography scope / compact controls / ThemeAreaHeader / dashboard
 ```
 
 The provider must stay outside `PageShell` because `ThemeSideNav` holds the prefecture select and
-would otherwise read the default (no-op) context. Below `xl` the rail is hidden — a nav that switches
+would otherwise read the default (no-op) context. Below `lg` the rail is hidden — a nav that switches
 the page content is useless when stacked after the content it controls. The content column therefore
-owns one compact toolbar directly below the breadcrumb. It combines `ThemeSwitcher` and
-`PrefectureSelect`; do not reintroduce separate switcher bands or duplicate header actions.
+owns equivalent controls directly below the breadcrumb: `ThemeSwitcher`, `PrefectureSelect`, page anchors,
+all metric links, and source surveys. The desktop rail has the same roles and does not expand the full theme list.
 
 `app/themes/local-finance` is bespoke (it has no provider) and passes `showRegion={false}`.
 
@@ -69,13 +69,13 @@ The migration is specified in
 
 ## Chart Type Decision
 
-| Need | Preferred chart |
-|---|---|
-| 47-prefecture current comparison | choropleth / ranking bar |
-| Time trend by prefecture | line chart |
-| Composition / breakdown | pie or stacked bar only when categories are semantically stable |
-| Cross-metric relation | scatter plot |
-| Heavy national structure | theme page, not area page |
+| Need                             | Preferred chart                                                 |
+| -------------------------------- | --------------------------------------------------------------- |
+| 47-prefecture current comparison | choropleth / ranking bar                                        |
+| Time trend by prefecture         | line chart                                                      |
+| Composition / breakdown          | pie or stacked bar only when categories are semantically stable |
+| Cross-metric relation            | scatter plot                                                    |
+| Heavy national structure         | theme page, not area page                                       |
 
 ## R2 Reflection Flow
 

@@ -1,43 +1,39 @@
+import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
+import { StatisticsScopeNav } from '@/components/navigation';
+import { SurfaceLinkCard } from '@/components/surface';
 
-import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
-import { RightRailWidgets } from "@/components/rail";
-import { SurfaceLinkCard } from "@/components/surface";
+import { FooterAdSlot } from '@/features/ads/slots';
+import { themeHref } from '@/features/theme-dashboard/config/theme-urls';
+import { ALL_THEMES } from '@/features/theme-dashboard/listing.server';
 
-import { FooterAdSlot } from "@/features/ads/slots";
-import { themeHref } from "@/features/theme-dashboard/config/theme-urls";
-import { ALL_THEMES } from "@/features/theme-dashboard/listing.server";
+import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
-import { generateOGMetadata } from "@/lib/metadata/og-generator";
-
-import type { Metadata } from "next";
-
+import type { Metadata } from 'next';
 
 export function generateMetadata(): Metadata {
-  const title = "テーマダッシュボード一覧";
+  const title = 'テーマダッシュボード一覧';
   const description =
-    "少子高齢化・労働・医療・観光・物価・外国人など、テーマ別に都道府県の統計データをダッシュボードで比較分析";
+    '少子高齢化・労働・医療・観光・物価・外国人など、テーマ別に都道府県の統計データをダッシュボードで比較分析';
   return {
     title,
     description,
-    alternates: { canonical: "/themes" },
-    ...generateOGMetadata({ title, description, imageUrl: "/og-image.jpg" }),
+    alternates: { canonical: '/themes' },
+    ...generateOGMetadata({ title, description, imageUrl: '/og-image.jpg' }),
   };
 }
 
 export default function ThemesPage() {
   const totalRankings = ALL_THEMES.reduce(
     (acc, t) => acc + t.rankingKeys.length,
-    0,
+    0
   );
 
   return (
-    <PageShell rightRail={<RightRailWidgets />}>
+    <PageShell>
       <Breadcrumbs
-        items={[
-          { label: "ホーム", href: "/" },
-          { label: "テーマ" },
-        ]}
+        items={[{ label: 'ホーム', href: '/' }, { label: 'テーマ' }]}
       />
+      <StatisticsScopeNav current="prefectures" />
       <PageHeader
         eyebrow="ディスカバリー"
         title="テーマダッシュボード"

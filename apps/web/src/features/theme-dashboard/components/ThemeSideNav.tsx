@@ -1,115 +1,162 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { cn } from "@stats47/components";
-import { ChevronRight } from "lucide-react";
+import { FileText, ListTree } from 'lucide-react';
 
-import { SectionHeader } from "@/components/section";
+import { SectionHeader } from '@/components/section';
 
-import { PREFECTURE_SET_LABEL } from "../types";
+import { PREFECTURE_SET_LABEL } from '../types';
 
-import { PrefectureSelect } from "./PrefectureSelect";
-import { useThemePrefecture } from "./ThemePrefectureContext";
-import { buildThemeSwitcherOptions } from "./ThemeSwitcher";
+import { PrefectureSelect } from './PrefectureSelect';
+import { useThemePrefecture } from './ThemePrefectureContext';
+import { ThemeSwitcher } from './ThemeSwitcher';
+
+export interface ThemeNavMetric {
+  rankingKey: string;
+  label: string;
+}
+
+export interface ThemeNavSurvey {
+  id: string;
+  name: string;
+}
+
+export interface ThemePageNavLink {
+  href: string;
+  label: string;
+}
 
 interface Props {
   /** 現在表示中のテーマキー（URL/props が正）。 */
   currentThemeKey: string;
   /** エリアページ経由時の都道府県コード（5桁）。指定時はリンクが都道府県文脈を維持する。 */
   areaContext?: { areaCode: string };
-  /**
-   * 地域ブロック（全国 / 都道府県セレクタ）を出すか。
-   * `ThemePrefectureProvider` の外側で使うページ（bespoke な /themes/local-finance）は
-   * セレクタが動かないので false にする。
-   */
+  /** Provider を持たない bespoke ページでは false。 */
   showRegion?: boolean;
+  pageLinks?: ThemePageNavLink[];
+  metrics?: ThemeNavMetric[];
+  surveys?: ThemeNavSurvey[];
 }
 
 /**
- * テーマページの左レール（テーマ一覧 + 地域選択）。
+ * テーマ詳細のページ内ナビ。
  *
- * テーマ切替（旧: パンくず下の帯）と都道府県選択（旧: H1 右の小さな Select）を
- * 1 か所に集約し、全テーマ (ALL_THEMES) を一覧しながら回遊できるようにする。リストの文法は
- * ホーム / ランキング一覧の `PortalCategoryGrid variant="sidebar"` に合わせる。
- *
- * lg 未満では `PageShell` が描画しない（`leftRailNarrowBehavior="hide"`）。狭幅の代替は
- * ヘッダーの `lg:hidden` セレクタ 2 つ（テーマ = ThemeSwitcher / 地域 = PrefectureSelect）で、
- * ページ内容を切り替えるナビが操作対象より後ろに回らないようにしている。
+ * サイト全体のテーマ一覧はヘッダーと ThemeSwitcher に任せ、このレールは現在ページの操作と
+ * 読み進め方（地域・セクション・指標・出典）だけを担う。
  */
 export function ThemeSideNav({
   currentThemeKey,
   areaContext,
   showRegion = true,
+  pageLinks = [],
+  metrics = [],
+  surveys = [],
 }: Props) {
-  const { hasProvider, selectedPrefectureCode } = useThemePrefecture();
-  const options = buildThemeSwitcherOptions(
-    areaContext,
-    hasProvider ? selectedPrefectureCode : undefined,
-  );
-
   return (
-    <nav aria-label="テーマと地域" className="pr-1">
-      <SectionHeader title="テーマ" as="h2" />
-      <div className="grid grid-cols-1 border-t border-border">
-        {options.map((o) => {
-          const active = o.themeKey === currentThemeKey;
-          return (
-            <Link
-              key={o.themeKey}
-              href={o.href}
-              aria-current={active ? "page" : undefined}
-              className={cn(
-                "group flex min-h-9 items-center gap-2 border-b border-border px-2 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
-                active ? "bg-accent" : "hover:bg-accent/50",
-              )}
-            >
-              <span
-                className={cn(
-                  "min-w-0 flex-1 text-[13px]",
-                  active
-                    ? "font-semibold text-primary"
-                    : "font-medium text-foreground group-hover:text-primary",
-                )}
-              >
-                {o.title}
-              </span>
-              <ChevronRight
-                className={cn(
-                  "size-3.5 shrink-0 transition-transform group-hover:translate-x-0.5",
-                  active ? "text-primary" : "text-muted-foreground group-hover:text-primary",
-                )}
-              />
-            </Link>
-          );
-        })}
+    <div className="space-y-6 pr-1">
+      <div>
+        <SectionHeader title="テーマ" as="h2" />
+        <ThemeSwitcher
+          currentThemeKey={currentThemeKey}
+          areaContext={areaContext}
+          compact
+        />
       </div>
 
       {showRegion && <RegionBlock />}
-    </nav>
+
+      {pageLinks.length > 0 && (
+        <nav aria-label="このページの内容">
+          <SectionHeader title="このページ" as="h2" />
+          <ul className="border-t border-border">
+            {pageLinks.map((item) => (
+              <li key={item.href} className="border-b border-border">
+                <Link
+                  href={item.href}
+                  className="flex min-h-10 items-center px-2 text-sm font-medium text-foreground transition-colors hover:bg-accent/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      {metrics.length > 0 && (
+        <details className="group border-y border-border py-2">
+          <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+            <ListTree className="size-4 text-muted-foreground" aria-hidden />
+            全指標（{metrics.length}）
+          </summary>
+          <nav aria-label="このテーマの全指標" className="pb-1 pt-2">
+            <ul className="space-y-1">
+              {metrics.map((metric) => (
+                <li key={metric.rankingKey}>
+                  <Link
+                    href={`/ranking/${metric.rankingKey}`}
+                    className="block py-1 text-sm leading-relaxed text-foreground hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                  >
+                    {metric.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </details>
+      )}
+
+      {surveys.length > 0 && (
+        <nav aria-label="このテーマの出典調査">
+          <SectionHeader
+            title={
+              <span className="inline-flex items-center gap-2">
+                <FileText
+                  className="size-4 text-muted-foreground"
+                  aria-hidden
+                />
+                出典調査
+              </span>
+            }
+            as="h2"
+          />
+          <ul className="space-y-1">
+            {surveys.map((survey) => (
+              <li key={survey.id}>
+                <Link
+                  href={`/survey/${survey.id}`}
+                  className="block py-1 text-sm leading-relaxed text-foreground hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                >
+                  {survey.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+    </div>
   );
 }
 
 function RegionBlock() {
   const { selectedAreaName, setSelected } = useThemePrefecture();
 
-  // 現在の選択は Select 自身が表示するので、同じ文字列を pill で二重に出さない。
-  // 県を選んでいるときだけ「47都道府県に戻す」を添える (Select を開かずに戻せる導線)。
   return (
-    <div className="mt-6">
+    <div>
       <SectionHeader title="地域" as="h2" />
       <PrefectureSelect className="w-full" />
       {selectedAreaName ? (
         <button
           type="button"
           onClick={() => setSelected(null)}
-          className="mt-2 text-[11px] text-muted-foreground underline-offset-2 hover:text-primary hover:underline"
+          className="mt-2 min-h-10 text-sm text-muted-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
         >
           {PREFECTURE_SET_LABEL}に戻す
         </button>
       ) : (
-        <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
-          県を選ぶと、指標カード・チャート・人の流れがその県に切り替わります。
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          県を選ぶと、指標とチャートがその県に切り替わります。
         </p>
       )}
     </div>

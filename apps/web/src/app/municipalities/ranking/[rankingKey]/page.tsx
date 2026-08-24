@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
+import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Table,
   TableBody,
@@ -15,13 +16,13 @@ import {
   readMunicipalityRankingItem,
   readMunicipalityRankingValues,
 } from '@stats47/ranking/server';
+import { ChevronDown } from 'lucide-react';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
-import { RightRailWidgets } from '@/components/rail';
+import { StatisticsScopeNav } from '@/components/navigation';
 
 import {
   MunicipalityRankingViewTracker,
-  StatisticsScopeNav,
   filterMunicipalityRanking,
   municipalityLeafName,
 } from '@/features/municipalities';
@@ -83,7 +84,10 @@ export default async function MunicipalityRankingPage({
   params: Promise<Params>;
   searchParams: Promise<SearchParams>;
 }) {
-  const [{ rankingKey }, queryParams] = await Promise.all([params, searchParams]);
+  const [{ rankingKey }, queryParams] = await Promise.all([
+    params,
+    searchParams,
+  ]);
   if (!KNOWN_MUNICIPALITY_RANKING_KEYS.has(rankingKey)) notFound();
   const [item, snapshot] = await Promise.all([
     readMunicipalityRankingItem(rankingKey),
@@ -143,7 +147,7 @@ export default async function MunicipalityRankingPage({
   };
 
   return (
-    <PageShell rightRail={<RightRailWidgets />}>
+    <PageShell>
       <MunicipalityRankingViewTracker
         rankingKey={item.rankingKey}
         title={item.title}
@@ -166,6 +170,7 @@ export default async function MunicipalityRankingPage({
       <PageHeader
         eyebrow="市区町村ランキング"
         title={item.title}
+        description={item.description}
         stats={`${snapshot.yearName}・${snapshot.count.toLocaleString('ja-JP')}自治体`}
       />
 
@@ -208,7 +213,7 @@ export default async function MunicipalityRankingPage({
             name="q"
             defaultValue={query}
             placeholder="例：神戸市"
-            className="mt-1 h-10 w-full border border-input bg-background px-3 text-sm text-foreground outline-none focus:border-primary"
+            className="mt-1 h-10 w-full border border-input bg-background px-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
           />
         </label>
         <label
@@ -216,26 +221,29 @@ export default async function MunicipalityRankingPage({
           className="text-xs font-medium text-muted-foreground"
         >
           都道府県
-          <select
-            id="municipality-prefecture"
-            name="pref"
-            defaultValue={prefectureCode}
-            className="mt-1 h-10 w-full border border-input bg-background px-3 text-sm text-foreground outline-none focus:border-primary"
-          >
-            <option value="">すべて</option>
-            {fetchPrefectures().map((prefecture) => (
-              <option key={prefecture.prefCode} value={prefecture.prefCode}>
-                {prefecture.prefName}
-              </option>
-            ))}
-          </select>
+          <span className="relative block">
+            <select
+              id="municipality-prefecture"
+              name="pref"
+              defaultValue={prefectureCode}
+              className="mt-1 h-10 w-full appearance-none border border-input bg-background px-3 pr-9 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+            >
+              <option value="">すべて</option>
+              {fetchPrefectures().map((prefecture) => (
+                <option key={prefecture.prefCode} value={prefecture.prefCode}>
+                  {prefecture.prefName}
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+              aria-hidden
+            />
+          </span>
         </label>
-        <button
-          type="submit"
-          className="h-10 self-end bg-primary px-5 text-sm font-medium text-primary-foreground"
-        >
+        <Button type="submit" className="h-10 self-end px-5">
           絞り込む
-        </button>
+        </Button>
       </form>
 
       <div className="mt-4 flex items-end justify-between gap-4">
@@ -339,7 +347,7 @@ export default async function MunicipalityRankingPage({
         </nav>
       )}
 
-      <footer className="mt-8 border-t border-border pt-5 text-xs leading-relaxed text-muted-foreground">
+      <footer className="mt-8 border-t border-border pt-5 text-sm leading-relaxed text-muted-foreground">
         <p>
           出典：
           <a href={item.source.url} className="text-primary hover:underline">

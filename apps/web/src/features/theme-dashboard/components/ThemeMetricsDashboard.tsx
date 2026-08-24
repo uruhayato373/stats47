@@ -1,23 +1,27 @@
-"use client";
+'use client';
 
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { lookupArea } from "@stats47/area";
-import { ArrowRight } from "lucide-react";
+import { lookupArea } from '@stats47/area';
+import { ArrowRight } from 'lucide-react';
 
-import { ChartFooter } from "@/components/charts/ChartFooter";
-import { ChartPanel } from "@/components/charts/ChartPanel";
-import type { PageComponent } from "@/components/stat-charts";
+import { ChartFooter } from '@/components/charts/ChartFooter';
+import { ChartPanel } from '@/components/charts/ChartPanel';
+import type { PageComponent } from '@/components/stat-charts';
 
-import { PREFECTURE_SET_LABEL, type ThemeConfig, type ThemeIndicatorData } from "../types";
+import {
+  PREFECTURE_SET_LABEL,
+  type ThemeConfig,
+  type ThemeIndicatorData,
+} from '../types';
 
-import { MetricSwitcherPanel } from "./MetricSwitcherPanel";
-import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
+import { MetricSwitcherPanel } from './MetricSwitcherPanel';
+import { ThemeDbChartRenderer } from './ThemeDbChartRenderer';
 
-import type { MetricKpi } from "./metric-kpi";
-import type { CatalogMetricGroup } from "@stats47/data-configs/theme-catalog";
+import type { MetricKpi } from './metric-kpi';
+import type { CatalogMetricGroup } from '@stats47/data-configs/theme-catalog';
 
 interface Props {
   /** テーマ設定 */
@@ -44,7 +48,7 @@ interface Props {
 const MIN_VALUES_FOR_KPI = 10;
 
 /** ThemeDbChartRenderer が描画できないコンポーネントタイプは除外 */
-const NON_CHART_TYPES = new Set(["kpi-card", "markdown-section"]);
+const NON_CHART_TYPES = new Set(['kpi-card', 'markdown-section']);
 
 /**
  * テーマページのフル幅ダッシュボード
@@ -75,7 +79,7 @@ export function ThemeMetricsDashboard({
   cardsOnly,
 }: Props) {
   const areaName = selectedPrefectureCode
-    ? lookupArea(selectedPrefectureCode)?.areaName ?? "選択地域"
+    ? (lookupArea(selectedPrefectureCode)?.areaName ?? '選択地域')
     : PREFECTURE_SET_LABEL;
 
   const kpiKeys = useMemo(
@@ -85,9 +89,9 @@ export function ThemeMetricsDashboard({
         .filter(
           (k) =>
             indicatorDataMap[k] &&
-            indicatorDataMap[k].rankingValues.length >= MIN_VALUES_FOR_KPI,
+            indicatorDataMap[k].rankingValues.length >= MIN_VALUES_FOR_KPI
         ),
-    [themeConfig.tabIndicators, indicatorDataMap],
+    [themeConfig.tabIndicators, indicatorDataMap]
   );
 
   const kpis = useMemo<MetricKpi[]>(() => {
@@ -105,8 +109,8 @@ export function ThemeMetricsDashboard({
         return {
           metricKey: key,
           title: d.rankingItem.readerLabel ?? d.rankingItem.title,
-          unit: d.rankingItem.unit ?? "",
-          value: typeof target?.value === "number" ? target.value : null,
+          unit: d.rankingItem.unit ?? '',
+          value: typeof target?.value === 'number' ? target.value : null,
           rank: target?.rank ?? null,
           total,
           series: d.nationalSeries ?? [],
@@ -121,7 +125,7 @@ export function ThemeMetricsDashboard({
       // 取りに行く (isNational チェックは MetricSwitcherPanel 側が持つ)。
       const top1 = d.rankingValues.find((v) => v.rank === 1);
       const topRanked =
-        top1 && typeof top1.value === "number" && Number.isFinite(top1.value)
+        top1 && typeof top1.value === 'number' && Number.isFinite(top1.value)
           ? {
               areaCode: top1.areaCode,
               areaName: lookupArea(top1.areaCode)?.areaName ?? top1.areaCode,
@@ -132,7 +136,7 @@ export function ThemeMetricsDashboard({
       return {
         metricKey: key,
         title: d.rankingItem.readerLabel ?? d.rankingItem.title,
-        unit: d.rankingItem.unit ?? "",
+        unit: d.rankingItem.unit ?? '',
         value: null,
         rank: null,
         total,
@@ -146,9 +150,9 @@ export function ThemeMetricsDashboard({
   const tabLabels = useMemo(
     () =>
       Object.fromEntries(
-        themeConfig.tabIndicators.map((t) => [t.rankingKey, t.tabLabel]),
+        themeConfig.tabIndicators.map((t) => [t.rankingKey, t.tabLabel])
       ),
-    [themeConfig.tabIndicators],
+    [themeConfig.tabIndicators]
   );
 
   /**
@@ -166,7 +170,7 @@ export function ThemeMetricsDashboard({
       return kpis.length > 0
         ? [
             {
-              key: "default",
+              key: 'default',
               // 見出しは section の h2 が既に言っているので重ねない。
               // パネル側が代表指標のタイトルに倒す (= 従来の 1 パネル構成と同じ)
               title: undefined as string | undefined,
@@ -188,7 +192,7 @@ export function ThemeMetricsDashboard({
           title: group.title as string | undefined,
           metrics: groupMetrics,
           defaultCheckedKeys: group.defaultCheckedKeys.filter((k) =>
-            alive.has(k),
+            alive.has(k)
           ),
         };
       })
@@ -198,7 +202,7 @@ export function ThemeMetricsDashboard({
   // page_components チャート専用の地域コード。KPI パネル (kpis) とは別経路で、
   // ThemeDbChartRenderer 側が selectNationalSeries 経由で official/average を正しく
   // 出し分けるため、未選択時も "00000" を渡してよい (WP2 が除去する対象ではない)。
-  const pageComponentsAreaCode = selectedPrefectureCode ?? "00000";
+  const pageComponentsAreaCode = selectedPrefectureCode ?? '00000';
 
   // cardsOnly: KPI スタットカードのみ。チャート・考察は描画しない
   const chartComponents = cardsOnly
@@ -206,7 +210,7 @@ export function ThemeMetricsDashboard({
     : (pageCharts ?? []).filter((c) => !NON_CHART_TYPES.has(c.componentType));
   const markdownComponents = cardsOnly
     ? []
-    : (pageCharts ?? []).filter((c) => c.componentType === "markdown-section");
+    : (pageCharts ?? []).filter((c) => c.componentType === 'markdown-section');
 
   if (
     panels.length === 0 &&
@@ -217,7 +221,10 @@ export function ThemeMetricsDashboard({
   }
 
   return (
-    <section className="@container space-y-4">
+    <section
+      id="theme-indicators"
+      className="@container space-y-4 scroll-mt-24"
+    >
       {/* KPI カード（areas スタイル） */}
       {kpis.length > 0 && (
         <div>
@@ -254,11 +261,15 @@ export function ThemeMetricsDashboard({
 
       {/* 時系列チャート */}
       {chartComponents.length > 0 && (
-        <div className="grid grid-cols-1 gap-4 @md:grid-cols-2">
+        <div
+          id="theme-charts"
+          className="grid scroll-mt-24 grid-cols-1 gap-4 @md:grid-cols-2"
+        >
           {chartComponents.map((chart) => (
             <ChartPanel
               key={chart.componentKey}
               title={chart.title}
+              description={chart.description}
               footer={
                 <ChartFooter
                   source={chart.sourceName ?? undefined}
