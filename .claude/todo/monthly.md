@@ -117,30 +117,24 @@ GSCは重点テーマ数に含めない健康管理の床とし、検索施策�
 
 ### 重点2: 公開中の誤値・欠測を解消する
 
-- **なぜ今月これか**: `IND-DATA-CORRUPTION-01` は P0 かつ **2 週連続で着手 0**。due が 8/24 に 3 件集中している。
-  さらに重点1 と結合している — **日次ループは R2 の値から 1 日 5 件のコンテンツを書く**。
+- **なぜ今月これか**: `DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01` / `R2-STORAGE-01` の
+  3件が未完了のまま due 8/24 を迎えた。さらに重点1 と結合している — コンテンツ生成は R2 の値を読むため、
   値が誤っていれば生成物は誤った値を忠実に記述し、**数値照合ゲートは「一致」として通してしまう**
   （`ranking-content-standards.md` が明記する既知の型）。産出を増やす前に値を直す必要がある。
 
 - **今月のゴール（月末に検証可能）**:
-  1. `marriages-per-total-population` / `divorces-per-total-population` が一次統計値に戻り、
-     R2 values・ranking 表示・記事 SVG が同じ値になっている
-  2. `DATA-ESTAT-FETCH-01` の 25 metric すべてに「config 修正 / 代替統計 / 一時非公開」の処置が決まっている
-  3. `DATA-MANUAL-RESTORE-01` の 12 metric に provenance 付きの処置結果が付いている
-  4. `R2-STORAGE-01` の残作業（egress 48,197MB の増加源特定）に結論が出ている
+  1. `DATA-ESTAT-FETCH-01` の 25 metric すべてに「config 修正 / 代替統計 / 一時非公開」の処置が決まっている
+  2. `DATA-MANUAL-RESTORE-01` の 12 metric に provenance 付きの処置結果が付いている
+  3. `R2-STORAGE-01` の残作業（egress増加源の特定）に結論が出ている
 
 - **構成タスク**:
-  - `IND-DATA-CORRUPTION-01`: e-Stat メタ（`0003411835/cdTab=10280`・`0003411861/cdTab=10320`）と代表 3 県を照合し
-    修正手順を確定 [M]（→ W32）
-  - 同上の修正適用と R2 反映（要承認）[M]（→ W33）
-  - `DATA-ESTAT-FETCH-01`: 25 metric を statsDataId / cdCat / 失敗種別で分類し処置を決める [L]（→ W33-W34）
-  - `DATA-MANUAL-RESTORE-01`: 12 metric の一次ファイル再取得と照合 [L]（→ W34-W35）
+  - `DATA-ESTAT-FETCH-01`: 25 metric を statsDataId / cdCat / 失敗種別で分類し処置を決める [L]（→ W35）
+  - `DATA-MANUAL-RESTORE-01`: 12 metric の一次ファイル再取得と照合 [L]（→ W35）
   - `R2-STORAGE-01`: egress の増加源を特定する [M]（→ W35）
 
 - **依存・ブロッカー**: R2 write と本番反映はユーザー承認が要る。誤値の推測補正は禁止（計算補正だけで直さない）。
 
-- **真実源リンク**: `backlog.md`（`IND-DATA-CORRUPTION-01`）/
-  `improvements.md`（`DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01` / `R2-STORAGE-01`）
+- **真実源リンク**: `improvements.md`（`DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01` / `R2-STORAGE-01`）
 
 ## 今月やらないこと（予算のため意図的に見送る）
 
@@ -163,10 +157,7 @@ GSCは重点テーマ数に含めない健康管理の床とし、検索施策�
 
 | 週 | 期間 | 主に進める重点 | マイルストーン |
 |---|---|---|---|
-| W32 | 08-03〜08-09 | 重点1 + 重点2 | 新件数の日次 run を 7 日観測開始 / blog 件数と型配分の整合を決める / outbox 3 本を処置 / 婚姻・離婚率の照合完了 |
-| W33 | 08-10〜08-16 | 重点1 + 重点2 | トークン実測で件数再設定 / 誤値の修正適用（要承認）/ `DATA-ESTAT-FETCH-01` の分類着手 |
-| W34 | 08-17〜08-23 | 重点2 | 25 metric の処置決定（due 8/24 前）/ ai-content 件数設計の見直し |
-| W35 | 08-24〜08-30 | 重点2 + 重点1 | 手動 12 metric の再取得 / egress 増加源の特定 / done 300 到達確認 |
+| W35 | 08-24〜08-30 | 重点2 + 重点1 | 手動12 metricの再取得 / egress増加源の特定 / blog 2本 |
 | W36 | 08-31 | 集約 | 月末判定と 9 月計画の入力づくり |
 
 ## 批判的レビュー

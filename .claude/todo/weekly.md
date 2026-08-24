@@ -36,11 +36,9 @@ GSC operations audit は既知の過去欠落target 7件のWARNだけで、必�
 | blog 2本 | **Mustへ再割当** | 8月公開15本。月間下限17本まであと2本 |
 | KDP残り8冊 | **今週は実施しない** | 外部公開かつ月次の「商品チャネル新規展開をしない」に従う。再開は明示承認時だけ |
 | GA4 Unassigned | **条件付き監視** | 206→8 sessionsへ収束。原因調査は再発閾値を超えたときだけ |
-| migration-flow | **診断完了・実装はbacklog** | 構造欠陥を特定しschedule停止済み。月次重点外 |
+| migration-flow | **backlogで再実装待ち** | clean checkoutで成立する投稿経路が未実装。月次重点外 |
 | ブログ品質是正3本 | **Shouldへ縮小** | workflowが12回連続失敗。まず入口を一本化して1本だけ実証する |
 | Due超過棚卸し | **重点2の3件をMust/Shouldへ** | DATA-MANUAL / DATA-ESTAT / R2を実作業へ変換 |
-| IND SEO修正 | **完了・持ち越さない** | 2 key是正とfactual gateを実装済み |
-| search-growth鮮度 | **回復済み** | W35候補880件、必須source fresh、1件承認済み |
 
 ## 現状サマリー
 
@@ -107,7 +105,6 @@ GSC operations audit は既知の過去欠落target 7件のWARNだけで、必�
 
 ## GSC運用サイクル
 
-- W34 review: 本レビューで作成済み。
 - W35 search-growth: 必須source fresh、候補880件、approved 1件、WIP 1/5。
 - 承認候補 `soft-404-risk::/ranking/barber-beautician-annual-income` は既存のデータ補強を観測するだけ。
   14日判定は 2026-09-07、28日は 09-21、56日は 10-19。今週は追加改修・送信をしない。
