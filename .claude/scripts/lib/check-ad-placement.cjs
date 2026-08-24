@@ -172,7 +172,7 @@ if (slotFormats.size === 0) {
 // 検査 1-4: app 配下のページファイル
 // ---------------------------------------------------------------------------
 for (const abs of listFiles(APP_DIR, ".tsx")) {
-  const rel = path.relative(PROJECT_ROOT, abs);
+  const rel = path.relative(PROJECT_ROOT, abs).split(path.sep).join("/");
   const raw = fs.readFileSync(abs, "utf8");
   const src = stripComments(raw);
 
