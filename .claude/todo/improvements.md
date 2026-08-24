@@ -2,7 +2,7 @@
 title: 改善バックログ
 type: improvement-backlog
 created: 2026-06-06
-updated: 2026-08-18
+updated: 2026-08-24
 status: active
 ---
 
@@ -20,7 +20,7 @@ status: active
 | PERF-WORKERS-CACHE-01 | 2026-08-16デプロイ済。HTMLのMISS→HIT、RSC/認証のno-store分離、home warm TTFB 924ms→15ms、LCP 1,290ms→901msを本番labで確認。**★purge実走で問題を実測 (2026-08-17)**: KSJ是正の公開で`/ranking/nuclear-power-plant-count`のHTMLを更新したが、`purge-cache.ts --urls`(zone purge・API success)を2回、`--files`(R2キー)、CIの`purge-worker-cache.ts --all`(sync-snapshots run 31996468008・成功)をすべて通しても**同一エントリがHITのまま残りageが2090→2740と伸び続けた**。originは`?cb=`で正しい内容を返すのでレンダリングは正常。**purgeが成功を返しながらHTML edgeエントリを落とせていない**。**★実害の再測 (2026-08-17 06:50)**: 同エントリはage 7,395 (約2時間) でHITのままだが、cache-bustした応答とHTMLをbyte比較すると**差分は`?cb=`のecho分のみで内容は同一** (京都府=0・福井県=4の是正後データ)。entryがR2是正**後**に作られたため、このページで「古いHTMLが出た」事実は無い。前段の「最大24h古いHTMLが出る」はeviction不能から導いた推論で、実害としては未実証。**切り分けが1つ進んだ**: 応答headerは`cache-control: public, max-age=0, must-revalidate`なのにedgeが2時間HITで保持している = edge TTLは応答headerではなく**Cloudflare側のCache Rule**が決めている (storage.stats47.jpのmax-age=14400と同構造)。残る切り分けはWorkers CacheとCDN edgeのどちらが保持しているか。**残: 上記の切り分けと、2026-08-23以降に日次PSI 7点で回帰なしを判定**（guard: insufficient-sample / insufficient-target） | effect/pending | 2026-08-24 | claude | performance |
 | PERF-WORKER-P99-01 | Workers traces / GraphQLでCPU p99 1.48〜2.02秒・wall p99 3.80〜4.61秒の支配route / R2 bindingを特定してから対象routeだけを修正する | pending | 2026-08-19 | claude | performance |
 | AFF-BRAND-FIT-01 | health 軸のブランド不適合広告を停止し、`精力`・`マカ`を blocklist に追加するか判断する。公的統計サイトの信頼を優先する | pending | 2026-08-05 | uruhayato373 | affiliate |
-| R2-STORAGE-01 | R2無料枠超過を解消する。incremental cache GC後の全バケット容量、増加率、現行build保持条件を計測し、再増加をalertする | in-progress | 2026-08-24 | claude | cloudflare-cost |
+| R2-STORAGE-01 | stats47診断とsiteScope別alertは完了。残るaccount 22.20GB超過はdoboku-note-archive 8.98GBの保持方針を決め、許容または削減を選ぶ。stats47の削除候補22.7MBだけでは解消しない | pending | 2026-08-31 | uruhayato373 | cloudflare-cost |
 | DATA-ESTAT-FETCH-01 | `DATA_INF` 系で取得失敗している25 metricのconfigを一次統計メタと照合し、修正または一時非公開にする | pending | 2026-08-24 | claude | data-quality |
 | DATA-MANUAL-RESTORE-01 | 手動抽出12 metricをprovenance付きで再取得し、values欠損を解消する | pending | 2026-08-24 | claude | data-quality |
 | SEARCH-GROWTH-CYCLE-01 | finalized 7日でKPI判定、rolling 28日で候補発見、週1〜2件採択、14/28/56日判定を4週連続で運用する | pending | 2026-08-31 | claude | gsc |

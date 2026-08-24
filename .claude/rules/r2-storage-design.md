@@ -140,6 +140,11 @@ objectはPUTしない。mtime・ローカルcache・`app/blog`等の広域prefix
 `RETENTION_TARGETS` / `PROTECTED_PREFIXES` (コード側 allowlist) 外の prefix は削除できない設計
 (誤入力で配信データを消せない)。
 
+再増加は日次Cloudflare usageで二段階に検知する。アカウント合計は18GB超、stats47 bucketは
+12.5GB超でalertし、原因判定では必ずbucket別にsiteScopeを分離する。ISR cacheは容量閾値とは別に
+`r2-isr-gc.yml`の`--assert-max 4`で世代数をfail-closedに検査する。閾値のSSOTは
+`.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json`。
+
 ### 2026-07-27 の実績 (根本原因と是正)
 
 **根本原因**: OpenNext は ISR キャッシュを `incremental-cache/<buildId>/` に書き、デプロイのたびに

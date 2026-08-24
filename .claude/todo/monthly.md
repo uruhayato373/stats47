@@ -117,24 +117,22 @@ GSCは重点テーマ数に含めない健康管理の床とし、検索施策�
 
 ### 重点2: 公開中の誤値・欠測を解消する
 
-- **なぜ今月これか**: `DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01` / `R2-STORAGE-01` の
-  3件が未完了のまま due 8/24 を迎えた。さらに重点1 と結合している — コンテンツ生成は R2 の値を読むため、
+- **なぜ今月これか**: `DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01` の
+  2件が未完了のまま due 8/24 を迎えた。さらに重点1 と結合している — コンテンツ生成は R2 の値を読むため、
   値が誤っていれば生成物は誤った値を忠実に記述し、**数値照合ゲートは「一致」として通してしまう**
   （`ranking-content-standards.md` が明記する既知の型）。産出を増やす前に値を直す必要がある。
 
 - **今月のゴール（月末に検証可能）**:
   1. `DATA-ESTAT-FETCH-01` の 25 metric すべてに「config 修正 / 代替統計 / 一時非公開」の処置が決まっている
   2. `DATA-MANUAL-RESTORE-01` の 12 metric に provenance 付きの処置結果が付いている
-  3. `R2-STORAGE-01` の残作業（egress増加源の特定）に結論が出ている
 
 - **構成タスク**:
   - `DATA-ESTAT-FETCH-01`: 25 metric を statsDataId / cdCat / 失敗種別で分類し処置を決める [L]（→ W35）
   - `DATA-MANUAL-RESTORE-01`: 12 metric の一次ファイル再取得と照合 [L]（→ W35）
-  - `R2-STORAGE-01`: egress の増加源を特定する [M]（→ W35）
 
 - **依存・ブロッカー**: R2 write と本番反映はユーザー承認が要る。誤値の推測補正は禁止（計算補正だけで直さない）。
 
-- **真実源リンク**: `improvements.md`（`DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01` / `R2-STORAGE-01`）
+- **真実源リンク**: `improvements.md`（`DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01`）
 
 ## 今月やらないこと（予算のため意図的に見送る）
 
@@ -157,7 +155,7 @@ GSCは重点テーマ数に含めない健康管理の床とし、検索施策�
 
 | 週 | 期間 | 主に進める重点 | マイルストーン |
 |---|---|---|---|
-| W35 | 08-24〜08-30 | 重点2 + 重点1 | 手動12 metricの再取得 / egress増加源の特定 / blog 2本 |
+| W35 | 08-24〜08-30 | 重点2 + 重点1 | 手動12 metricの再取得 / blog 2本 |
 | W36 | 08-31 | 集約 | 月末判定と 9 月計画の入力づくり |
 
 ## 批判的レビュー

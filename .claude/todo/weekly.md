@@ -15,8 +15,8 @@ status と期限は各バックログを正典とし、ここでは週内に確�
 
 - **重点1**: 生成を無人ループから外し、月次目標 → 週次割当で回す
 - **重点2**: 公開中の誤値・欠測を解消する
-- 今週は、月次配分どおり **手動12 metricの再取得**、**R2増加源の特定**、
-  **ブログ月間下限に必要な2本だけを手動生成**する。
+- 今週は、月次配分どおり **手動12 metricの再取得**と
+  **ブログ月間下限に必要な2本だけを手動生成**を進める。
 
 ## 前週の振り返り（W34）
 
@@ -52,7 +52,6 @@ GSC operations audit は既知の過去欠落target 7件のWARNだけで、必�
 | KDP | listed 12 / draft 20 | 今週は外部公開しない |
 | search-growth | 880候補 / approved 1 / WIP 1 | WIP上限5以内 |
 | URL Inspection | PASS 353 / NEUTRAL 147 | 8/20比 PASS +5 |
-| R2 account storage | 22.20GB | stats47 11.59GB / doboku-note-archive 8.98GB。siteScope分離必須 |
 
 ## Must
 
@@ -62,13 +61,6 @@ GSC operations audit は既知の過去欠落target 7件のWARNだけで、必�
   - 欠けたprovenanceや取得不能は推測で埋めず、metric単位で blocker を残す。
   - 成功基準: 12件すべてに `ready / blocked` と根拠が付き、ready分の候補生成と
     provenance audit が通る。**R2 write・公開は別途承認まで行わない。**
-
-- [ ] **`R2-STORAGE-01` の増加源を siteScope 付きで特定する**（重点2・M）
-  - account合計22.20GBをそのままstats47の増加と扱わず、bucket / prefix / build世代で分解する。
-  - stats47 11.59GBについて、8/19比の増分、保持中build、cache、生成物prefixを計測する。
-  - doboku-note / archiveは別siteScopeとして隔離し、stats47の削除候補に混ぜない。
-  - 成功基準: 増加上位prefix、保持理由、削除可否、再増加alert条件が記録される。
-    削除は対象を明示して別工程にし、今週の診断では実行しない。
 
 - [ ] **ブログを2本だけ手動生成・公開経路へ載せる**（重点1・M）
   - topic queueの `must-write` から需要確認済み候補を2件選ぶ。
