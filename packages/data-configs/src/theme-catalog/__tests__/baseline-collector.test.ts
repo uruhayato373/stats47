@@ -18,9 +18,9 @@ import type { CatalogChart, ThemeCatalog } from "../types";
  *      `#` 付きコードを足す・型付き参照を外すと、対応する計測が動くことを固定する。
  *      ②が無いと ① の lock は「何も見ていない緑」と区別がつかない。
  *
- * 実測 (2026-08-13, THEME_CATALOGS 実行時オブジェクト):
- *   themes 20 / charts 113 / rawEstatParams chart 87 / relatedRankingKeys chart 3 /
- *   rawColorPlaces 179 / distinctColors 14。
+ * 実測 (2026-08-24, THEME_CATALOGS 実行時オブジェクト):
+ *   themes 20 / charts 110 / rawEstatParams chart 84 / relatedRankingKeys chart 4 /
+ *   rawColorPlaces 0 / distinctColors 0。
  *
  * ※ `#` 前置の e-Stat コード (`#A0160102` 等) は 社会・人口統計体系テーブルの**実コード**で
  *   欠陥ではない (本番キャッシュで STATUS 0・正しく distinct フィルタを 3 テーブルで実測確認)。
@@ -31,9 +31,9 @@ import type { CatalogChart, ThemeCatalog } from "../types";
 /** 実測で確定したベースライン。移行で動いたらここを更新する (shrink/grow の向きを守る)。 */
 const BASELINE = {
   themes: 20,
-  charts: 113,
-  chartsWithRawEstatParams: 87,
-  chartsWithRelatedRankingKeys: 3,
+  charts: 110,
+  chartsWithRawEstatParams: 84,
+  chartsWithRelatedRankingKeys: 4,
   // WP5 完了: 生色を color role へ全移行 (179 → 0)。以後 ratchet は「生色 0」を強制する。
   rawColorPlaces: 0,
   distinctColors: 0,
@@ -49,7 +49,7 @@ describe("baseline lock (ratchet)", () => {
 
   it("componentType ごとの chart 数を固定する (chart 種別内訳の baseline)", () => {
     expect(live.chartsByType).toEqual({
-      "line-chart": 67,
+      "line-chart": 64,
       "mixed-chart": 4,
       "composition-chart": 4,
       "donut-chart": 6,
