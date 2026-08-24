@@ -157,6 +157,14 @@ describe('市区町村URLのknown集合と旧query移行', () => {
       'https://stats47.jp/municipalities/ranking/elderly-population-ratio'
     );
   });
+
+  test('旧市区町村テーマは市区町村ハブへ恒久転送する', () => {
+    const response = middleware(request('/themes/local-finance-city'));
+    expect(response.status).toBe(301);
+    expect(response.headers.get('location')).toBe(
+      'https://stats47.jp/municipalities'
+    );
+  });
 });
 
 describe('動的コンテンツの soft-404 防止', () => {
