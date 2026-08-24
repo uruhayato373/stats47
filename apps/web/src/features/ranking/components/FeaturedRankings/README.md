@@ -1,7 +1,8 @@
-# FeaturedRankings — ホーム「注目のランキング」
+# FeaturedRankings — 「注目のランキング」
 
 現行UI仕様の正典: `docs/01_技術設計/04_デザインシステム.md`「Surface」。
-本書はFeaturedRankingsの実装・データ・計測契約の正典とする。
+本書は home / ranking index の FeaturedRankings と、category / survey を含む
+FeaturedRankingCard の実装・データ・計測契約の正典とする。
 
 > **home-featured-v1 実験は終了 (2026-07-23)**: 50/50 A/B (control=map/number vs editorial=
 > question/comparison/territory/top-three) は判定前だったが、ポータル型 home 再設計で
@@ -17,7 +18,7 @@
 
 | データ | SSOT |
 |---|---|
-| 掲載指標・順番・hook | `packages/data-configs/src/home-featured-rankings.ts` (`HOME_FEATURED_RANKINGS`) |
+| 掲載指標・順番・hook | `packages/data-configs/src/prominence/ranking-prominence.generated.ts` (`HOME_FEATURED_PROMINENCE`) |
 | 派生値 (top/map/homeFeatured) | R2 `app/home/featured.json` (exporter が焼き込み) |
 | 派生ロジック | `packages/ranking/src/exporters/home-featured.ts` (pure・fixture test 済) |
 | card model 解決 | `utils/resolve-featured-ranking-card.ts` |
@@ -35,6 +36,8 @@ home
        └─ FeaturedRankingGrid
             └─ TrackedFeaturedRankingCard … impression + click 計測
                  └─ FeaturedRankingCard
+/ranking
+  └─ FeaturedRankings (Server) … home と同じ snapshot / model / card、home 専用計測は無効
 category / survey
   └─ buildFeaturedRankingCardModel … values→同じ model
        └─ FeaturedRankingCard
@@ -42,6 +45,8 @@ category / survey
 
 `FeaturedRankingCard`が`PORTAL_CARD_ASPECT_CLASS`、文字階層、1位情報、地理地図配置を所有する。
 呼び出し側のpropsは`rankingKey / year / unit / model`だけで、表示variantを選べない。
+`FeaturedRankings`を home 以外で使う場合は`trackHomeEvents={false}`を指定し、
+home 専用イベントへ別画面の表示・クリックを混入させない。
 
 ## 終了済み実験の計測互換
 

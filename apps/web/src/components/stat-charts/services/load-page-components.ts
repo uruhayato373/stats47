@@ -1,4 +1,4 @@
-import "server-only";
+import 'server-only';
 
 /**
  * ページコンポーネント（DB から取得した統一型）
@@ -12,6 +12,7 @@ export interface PageComponent {
   componentKey: string;
   componentType: string;
   title: string;
+  description: string | null;
   componentProps: Record<string, unknown>;
   sourceName: string | null;
   sourceLink: string | null;

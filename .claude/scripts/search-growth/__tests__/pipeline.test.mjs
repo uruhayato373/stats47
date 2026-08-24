@@ -6,7 +6,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { normalizeAll } from "../normalize.mjs";
 import { collect } from "../collect.mjs";
-import { isoWeekEndDate, mapCoverageCategory, parseCsv } from "../lib/sources.mjs";
+import { isoWeekEndDate, mapCoverageCategory, parseCsv, shouldEmitCoverageCategory } from "../lib/sources.mjs";
 import { createObservation } from "../lib/contracts.mjs";
 import { extractLocs } from "../lib/live-sitemap.mjs";
 import { textLength } from "../lib/live-http.mjs";
@@ -92,6 +92,13 @@ test("mapCoverageCategory: GSC カテゴリ → engine 語彙", () => {
   assert.equal(mapCoverageCategory("ソフト404"), "soft-404");
   assert.equal(mapCoverageCategory("crawled - currently not indexed"), "crawled-not-indexed");
   assert.equal(mapCoverageCategory("クロール済み - インデックス未登録"), "crawled-not-indexed");
+});
+
+test("coverage queue: 未処置だけを候補化し、作業中・非対象は重複させない", () => {
+  assert.equal(shouldEmitCoverageCategory({ status: "pending", action: "content-check" }), true);
+  assert.equal(shouldEmitCoverageCategory({ status: "in-progress", action: "content-check" }), false);
+  assert.equal(shouldEmitCoverageCategory({ status: "pending", action: "none" }), false);
+  assert.equal(shouldEmitCoverageCategory({ status: "resolved", action: "observe-after-fix" }), false);
 });
 
 test("parseCsv: quoted field / カンマ入りを正しく分割", () => {

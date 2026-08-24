@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T17:01:42.514Z",
+  "updatedAt": "2026-08-24T17:09:01.777Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -515,6 +515,19 @@
           "evidence": "5段階の実行順・R2再生成・CI配線・deployを跨ぐ大規模監査で、単発CI runで完結できずdraft PRが要るためimpl-largeと判定しスキップした",
           "failReason": "class-needs-pr",
           "followUps": []
+        },
+        {
+          "at": "2026-08-24T17:09:01.777Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "impl-large は本 run (backlog-loop 日次 CI) では着手しない (draft-pr が要るため)。backlog-solver-hard への委譲対象として据え置く。",
+          "failReason": "class-needs-pr",
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -549,6 +562,34 @@
         "failCount": 0,
         "lastReason": null,
         "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "SURVEY-EDITORIAL-80-01": {
+      "class": "impl-small",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-24T17:08:57.270Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "この run 環境には WebFetch/WebSearch ツールが無く、Bash 経由の curl/node -e/ヒアドキュメントも don't-ask モードで自動拒否される (git status 等の許可済みコマンドのみ通る)。カードは一次資料 (総務省/厚労省/経産省/文科省等の公式ページ) を実際に取得して確認することを必須要件とし、推測や検索要約での代替を明示的に禁じている。一次資料を取得する手段が皆無のため、内容を書かずに次回 (WebFetch 利用可能な環境/セッション) へ繰り越す。",
+          "failReason": "no-web-access",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "no-web-access",
+        "since": "2026-08-24T17:08:57.270Z"
       },
       "reclassifiedFrom": [],
       "completedAt": null

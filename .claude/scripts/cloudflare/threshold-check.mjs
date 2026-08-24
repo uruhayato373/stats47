@@ -10,7 +10,7 @@
 
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const STATE_DIR = join(PROJECT_ROOT, ".claude/state/metrics/cloudflare");
@@ -39,11 +39,18 @@ function loadLatestSnapshot() {
   return JSON.parse(readFileSync(join(SNAPSHOTS_DIR, `${latest}.json`), "utf-8"));
 }
 
-function flatten(snapshot) {
+function normalizeBucketMetricKey(bucketName) {
+  return bucketName
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
+export function flatten(snapshot) {
   const errorRate = snapshot.workers.totalRequests > 0
     ? (snapshot.workers.totalErrors / snapshot.workers.totalRequests) * 100
     : 0;
-  return {
+  const metrics = {
     d1_databases: snapshot.d1.databases.length,
     d1_read_queries: snapshot.d1.readQueries,
     d1_rows_read: snapshot.d1.rowsRead,
@@ -59,6 +66,14 @@ function flatten(snapshot) {
     r2_storage_gb: snapshot.r2_storage.totalBytes / 1e9,
     r2_objects: snapshot.r2_storage.totalObjects,
   };
+
+  for (const [bucketName, storage] of Object.entries(snapshot.r2_storage.byBucket ?? {})) {
+    const bucketKey = normalizeBucketMetricKey(bucketName);
+    metrics[`r2_bucket_${bucketKey}_storage_gb`] = storage.bytes / 1e9;
+    metrics[`r2_bucket_${bucketKey}_objects`] = storage.objects;
+  }
+
+  return metrics;
 }
 
 function compare(actual, threshold, op) {
@@ -72,21 +87,25 @@ function compare(actual, threshold, op) {
   }
 }
 
-function main() {
-  const opts = parseArgs();
-  const snapshot = loadLatestSnapshot();
-  if (!snapshot) {
-    console.error("No snapshots found");
-    process.exit(1);
-  }
-  const budgets = JSON.parse(readFileSync(BUDGETS_PATH, "utf-8"));
-  const metrics = flatten(snapshot);
-
+export function evaluateRules(metrics, rules) {
   const violations = [];
   const passed = [];
-  for (const rule of budgets.rules) {
+  for (const rule of rules) {
     const actual = metrics[rule.metric_key];
-    if (actual === undefined) continue;
+    if (actual === undefined) {
+      if (!rule.required) continue;
+      violations.push({
+        rule_id: rule.rule_id,
+        title: `${rule.title} metric unavailable`,
+        metric_key: rule.metric_key,
+        actual: null,
+        threshold: rule.threshold,
+        operator: rule.operator,
+        severity: "critical",
+        note: `required metric is missing. ${rule.note}`,
+      });
+      continue;
+    }
     const violated = compare(actual, rule.threshold, rule.operator);
     const entry = {
       rule_id: rule.rule_id,
@@ -101,6 +120,20 @@ function main() {
     if (violated) violations.push(entry);
     else passed.push(entry);
   }
+  return { violations, passed };
+}
+
+function main() {
+  const opts = parseArgs();
+  const snapshot = loadLatestSnapshot();
+  if (!snapshot) {
+    console.error("No snapshots found");
+    process.exit(1);
+  }
+  const budgets = JSON.parse(readFileSync(BUDGETS_PATH, "utf-8"));
+  const metrics = flatten(snapshot);
+
+  const { violations } = evaluateRules(metrics, budgets.rules);
 
   const lines = [];
   lines.push(`# Cloudflare Usage Threshold Report — ${snapshot.date}`);
@@ -159,6 +192,9 @@ function main() {
   lines.push(`| R2 Class B ops | ${metrics.r2_class_b_ops.toLocaleString()} |`);
   lines.push(`| R2 storage | ${metrics.r2_storage_gb.toFixed(2)} GB / ${metrics.r2_objects.toLocaleString()} objects |`);
   lines.push(`| R2 egress | ${metrics.r2_egress_mb.toFixed(0)} MB |`);
+  for (const [bucketName, storage] of Object.entries(snapshot.r2_storage.byBucket ?? {})) {
+    lines.push(`| R2 bucket: ${bucketName} | ${(storage.bytes / 1e9).toFixed(2)} GB / ${storage.objects.toLocaleString()} objects |`);
+  }
 
   const report = lines.join("\n") + "\n";
   if (opts.output) writeFileSync(opts.output, report);
@@ -175,4 +211,8 @@ function main() {
   console.log("✓ All thresholds passed");
 }
 
-main();
+const isDirectExecution = process.argv[1]
+  ? import.meta.url === pathToFileURL(resolve(process.argv[1])).href
+  : false;
+
+if (isDirectExecution) main();

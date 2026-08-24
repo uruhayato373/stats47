@@ -7,10 +7,8 @@ import {
 import { readMunicipalityRankingItem } from '@stats47/ranking/server';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
-import { RightRailWidgets } from '@/components/rail';
+import { StatisticsScopeNav } from '@/components/navigation';
 import { SurfaceLinkCard } from '@/components/surface';
-
-import { StatisticsScopeNav } from '@/features/municipalities';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -57,7 +55,7 @@ export default async function MunicipalityThemePage({
   ).filter((item) => item !== null);
 
   return (
-    <PageShell rightRail={<RightRailWidgets />}>
+    <PageShell>
       <Breadcrumbs
         items={[
           { label: 'ホーム', href: '/' },
@@ -89,6 +87,9 @@ export default async function MunicipalityThemePage({
             >
               <h3 className="font-semibold text-foreground">{item.title}</h3>
               <p className="mt-1 text-sm text-muted-foreground">
+                {item.description}
+              </p>
+              <p className="mt-2 text-sm text-muted-foreground">
                 {item.latestYear.yearName}・
                 {item.valueCount.toLocaleString('ja-JP')}自治体
               </p>

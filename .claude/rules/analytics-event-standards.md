@@ -199,7 +199,8 @@ npm run google-admin:audit-api
 >
 > **nav_surface の値追加 (2026-08-22・survey taxonomy)**: ranking / category / theme / blog から
 > 調査ハブへ向かう `ranking_survey` / `category_survey` / `theme_survey` / `blog_survey` と、
-> 調査ハブからコンテンツへ戻る `survey_ranking` / `survey_theme` / `survey_blog` を追加した。
+> 調査ハブからコンテンツへ戻る `survey_ranking` / `survey_theme` / `survey_blog` /
+> `survey_category` を追加した。
 > いずれも登録済み `nav_surface` / `nav_label` の値追加で、新しい custom dimension は無い。
 > 週次 GA4 snapshot は Japan-only の `survey_ranking` を `survey-navigation.csv` に保存し、
 > survey portfolio の `metrics.internalNav.rankingOutboundClicks` を非重複56日で集計する。

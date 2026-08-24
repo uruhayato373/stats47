@@ -1,12 +1,15 @@
-"use client";
+'use client';
 
-import type { MouseEvent, ReactNode } from "react";
+import type { MouseEvent, ReactNode } from 'react';
 
-import { trackNavClick, type NavSurface } from "@/lib/analytics/events";
+import { trackNavClick, type NavSurface } from '@/lib/analytics/events';
 
 interface SurveyOutboundLinkAreaProps {
   children: ReactNode;
-  surface: Extract<NavSurface, "survey_ranking" | "survey_theme" | "survey_blog">;
+  surface: Extract<
+    NavSurface,
+    'survey_ranking' | 'survey_theme' | 'survey_blog' | 'survey_category'
+  >;
 }
 
 /**
@@ -20,11 +23,12 @@ export function SurveyOutboundLinkArea({
   function handleClick(event: MouseEvent<HTMLDivElement>) {
     const target = event.target;
     if (!(target instanceof Element)) return;
-    const link = target.closest<HTMLAnchorElement>("a[href]");
+    const link = target.closest<HTMLAnchorElement>('a[href]');
     if (!link || !event.currentTarget.contains(link)) return;
-    const href = link.getAttribute("href");
+    const href = link.getAttribute('href');
     if (!href) return;
-    const label = href.split(/[?#]/, 1)[0].split("/").filter(Boolean).at(-1) ?? href;
+    const label =
+      href.split(/[?#]/, 1)[0].split('/').filter(Boolean).at(-1) ?? href;
     trackNavClick({ label, href, surface });
   }
 

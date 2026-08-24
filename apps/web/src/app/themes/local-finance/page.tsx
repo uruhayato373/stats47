@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { PageShell } from '@/components/layout';
+import { PAGE_SHELL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
+import { StatisticsScopeNav } from '@/components/navigation';
 
 import { InContentAdSlot } from '@/features/ads';
 import type { FinanceFlowData } from '@/features/finance-flow';
@@ -73,14 +74,35 @@ export default async function LocalFinanceThemePage() {
       leftRailNarrowBehavior="hide"
     >
       {/* 狭幅のテーマ切替（bespoke ページのため ThemePageLayout を使わず個別配置）。
-          lg+ は左レールが担う。本ページは ThemePrefectureProvider を持たないので
-          左レールの地域ブロックは出さない (showRegion=false)。
-          ★境界は PageShell の左レール (hidden lg:block) と必ず一致させること。 */}
-      <div className="lg:hidden">
+          992px+ は左レールが担う。本ページは ThemePrefectureProvider を持たないので
+          左レールの都道府県選択だけを出さない (showRegion=false)。比較単位は表示する。
+          ★境界は PageShell の共有クラスと必ず一致させること。 */}
+      <div className={PAGE_SHELL_NARROW_ONLY_CLASS}>
         <ThemeSwitcher currentThemeKey="local-finance" />
+        <nav
+          aria-label="テーマ・調査の一覧"
+          className="flex flex-wrap gap-x-5"
+        >
+          <Link
+            href="/themes"
+            className="inline-flex min-h-10 items-center text-sm font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+          >
+            テーマ一覧へ
+          </Link>
+          <Link
+            href="/survey"
+            className="inline-flex min-h-10 items-center text-sm font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+          >
+            調査一覧へ
+          </Link>
+        </nav>
+        <StatisticsScopeNav current="prefectures" />
       </div>
       <nav aria-label="関連する統計範囲" className="mb-4 text-sm">
-        <Link href="/municipalities" className="font-medium text-primary hover:underline">
+        <Link
+          href="/municipalities"
+          className="font-medium text-primary hover:underline"
+        >
           市区町村の地方財政は、市区町村統計で管理しています →
         </Link>
       </nav>

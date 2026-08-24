@@ -17,6 +17,7 @@ export interface FeaturedRankingGridItem {
 interface FeaturedRankingGridProps {
   items: FeaturedRankingGridItem[];
   compact?: boolean;
+  trackHomeEvents?: boolean;
 }
 
 /**
@@ -32,22 +33,33 @@ interface FeaturedRankingGridProps {
 export function FeaturedRankingGrid({
   items,
   compact = false,
+  trackHomeEvents = true,
 }: FeaturedRankingGridProps) {
-  const cards = items.map((item, idx) => (
-    <div key={`${item.rankingKey}-${idx}`}>
-      <TrackedFeaturedRankingCard
+  const cards = items.map((item, idx) => {
+    const card = (
+      <FeaturedRankingCard
         rankingKey={item.rankingKey}
-        slot={idx + 1}
-      >
-        <FeaturedRankingCard
-          rankingKey={item.rankingKey}
-          year={item.latestYear}
-          unit={item.unit}
-          model={item.model}
-        />
-      </TrackedFeaturedRankingCard>
-    </div>
-  ));
+        year={item.latestYear}
+        unit={item.unit}
+        model={item.model}
+      />
+    );
+
+    return (
+      <div key={`${item.rankingKey}-${idx}`}>
+        {trackHomeEvents ? (
+          <TrackedFeaturedRankingCard
+            rankingKey={item.rankingKey}
+            slot={idx + 1}
+          >
+            {card}
+          </TrackedFeaturedRankingCard>
+        ) : (
+          card
+        )}
+      </div>
+    );
+  });
 
   if (compact) {
     return (

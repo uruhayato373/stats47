@@ -69,8 +69,8 @@ interface Props {
 /**
  * テーマ詳細ページ上部のコンパクトなテーマ切替コントロール。
  *
- * **xl 未満 (左レール非表示) 専用の狭幅代替**。xl 以上ではテーマ切替は左レール
- * `ThemeSideNav` が担うので、呼び出し側が `lg:hidden` で包む
+ * **992px 未満 (左レール非表示) 専用の狭幅代替**。992px 以上ではテーマ切替は左レール
+ * `ThemeSideNav` が担うので、呼び出し側が `PAGE_SHELL_NARROW_ONLY_CLASS` で包む
  * (`ThemePageLayout` / bespoke な `/themes/local-finance`)。
  *
  * 経緯: 2026-06 に常設左レール `ThemeSidebar` を廃止して本コンポーネントが唯一の切替 UI に

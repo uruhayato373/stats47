@@ -3,8 +3,8 @@
  */
 
 function sendEvent(name: string, params: Record<string, unknown>): void {
-  if (typeof window === "undefined" || !window.gtag) return;
-  window.gtag("event", name, params);
+  if (typeof window === 'undefined' || !window.gtag) return;
+  window.gtag('event', name, params);
 }
 
 // ─── ファイルダウンロード ───────────────────────────────────
@@ -16,9 +16,9 @@ export function trackCsvDownload(params: {
   rankingKey: string;
   yearCode: string;
 }): void {
-  sendEvent("file_download", {
+  sendEvent('file_download', {
     file_name: `${params.rankingKey}-${params.yearCode}.csv`,
-    file_extension: "csv",
+    file_extension: 'csv',
     ranking_key: params.rankingKey,
     year_code: params.yearCode,
   });
@@ -46,8 +46,8 @@ export function trackAffiliateClick(params: {
   variantId?: string;
   creativeSize?: string;
 }): void {
-  sendEvent("affiliate_click", {
-    event_category: "affiliate",
+  sendEvent('affiliate_click', {
+    event_category: 'affiliate',
     event_label: params.label,
     affiliate_category: params.category,
     affiliate_vertical: params.vertical ?? params.category,
@@ -81,12 +81,12 @@ export function trackCtaClick(params: {
   /** buzz-map ideaId 等・SNS campaign と landing CTA を紐付ける (§7.3 content_id) */
   contentId?: string;
   /** 遷移先種別 ranking | theme | area | blog (§7.3 target_type) */
-  targetType?: "ranking" | "theme" | "area" | "blog";
+  targetType?: 'ranking' | 'theme' | 'area' | 'blog';
   /** 遷移先の key / slug (§7.3 target_key) */
   targetKey?: string;
 }): void {
-  sendEvent("cta_click", {
-    event_category: "cta",
+  sendEvent('cta_click', {
+    event_category: 'cta',
     event_label: params.label,
     cta_id: params.ctaId,
     link_position: params.position,
@@ -114,14 +114,16 @@ export interface HomeFeaturedEventParams {
   experimentVariant: string;
 }
 
-function homeFeaturedPayload(params: HomeFeaturedEventParams): Record<string, unknown> {
+function homeFeaturedPayload(
+  params: HomeFeaturedEventParams
+): Record<string, unknown> {
   return {
     ranking_key: params.rankingKey,
     card_variant: params.cardVariant,
     slot: params.slot,
     experiment_id: params.experimentId,
     experiment_variant: params.experimentVariant,
-    link_position: "home_featured",
+    link_position: 'home_featured',
   };
 }
 
@@ -129,15 +131,17 @@ function homeFeaturedPayload(params: HomeFeaturedEventParams): Record<string, un
  * ホーム注目ランキングカードの impression (50% 以上 × 1 秒 × card mount につき 1 回)。
  * 発火条件の機械実装は features/ranking の impression watcher が担う。
  */
-export function trackHomeFeaturedImpression(params: HomeFeaturedEventParams): void {
-  sendEvent("home_featured_impression", homeFeaturedPayload(params));
+export function trackHomeFeaturedImpression(
+  params: HomeFeaturedEventParams
+): void {
+  sendEvent('home_featured_impression', homeFeaturedPayload(params));
 }
 
 /**
  * ホーム注目ランキングカードのクリック (カード全体リンクへの遷移)。
  */
 export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
-  sendEvent("home_featured_click", homeFeaturedPayload(params));
+  sendEvent('home_featured_click', homeFeaturedPayload(params));
 }
 
 // ─── ナビゲーション (ヘッダー IA・P0-1 効果判定) ──────────────
@@ -157,7 +161,7 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * - `category_blog`: category ページのカテゴリ関連記事
  * - `ranking_survey` / `category_survey` / `theme_survey` / `blog_survey`:
  *   各コンテンツ面から、そのデータを生成した調査ハブへの導線
- * - `survey_ranking` / `survey_theme` / `survey_blog`:
+ * - `survey_ranking` / `survey_theme` / `survey_blog` / `survey_category`:
  *   調査ハブから、その調査を使う各コンテンツ面への逆方向導線
  * - `theme_evidence`: 白書・統計の論点からランキング・関連テーマ・記事へ進む導線。
  *   `nav_label` は `<topic-key>:<target-type>:<target-key>`。
@@ -172,37 +176,38 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * (`.claude/rules/analytics-event-standards.md` §2)。
  */
 export type NavSurface =
-    | "desktop-header"
-    | "mobile-drawer"
-    | "areas_search"
-    | "areas_list"
-    | "areas_map"
-    | "home_category"
-    | "home_use_case"
-    | "home_area_map"
-    | "home_area_list"
-    | "home_blog"
-    | "category_blog"
-    | "category_area_map"
-    | "category_area_list"
-    | "theme_kpi_switcher"
-    | "theme_evidence"
-    | "category_sidebar"
-    | "ranking_survey"
-    | "category_survey"
-    | "theme_survey"
-    | "blog_survey"
-    | "survey_ranking"
-    | "survey_theme"
-    | "survey_blog";
+  | 'desktop-header'
+  | 'mobile-drawer'
+  | 'areas_search'
+  | 'areas_list'
+  | 'areas_map'
+  | 'home_category'
+  | 'home_use_case'
+  | 'home_area_map'
+  | 'home_area_list'
+  | 'home_blog'
+  | 'category_blog'
+  | 'category_area_map'
+  | 'category_area_list'
+  | 'theme_kpi_switcher'
+  | 'theme_evidence'
+  | 'category_sidebar'
+  | 'ranking_survey'
+  | 'category_survey'
+  | 'theme_survey'
+  | 'blog_survey'
+  | 'survey_ranking'
+  | 'survey_theme'
+  | 'survey_blog'
+  | 'survey_category';
 
 export function trackNavClick(params: {
   label: string;
   href: string;
   surface: NavSurface;
 }): void {
-  sendEvent("nav_click", {
-    event_category: "navigation",
+  sendEvent('nav_click', {
+    event_category: 'navigation',
     event_label: params.label,
     nav_label: params.label,
     nav_href: params.href,
@@ -219,13 +224,13 @@ export function trackNavClick(params: {
  * `rail_slot` で先頭からの表示順 (1 始まり) を送り、「先頭=関連」がクリックを得ているか追う。
  */
 export function trackRailClick(params: {
-  widget: "related-rankings" | "related-articles" | "survey" | "promo";
+  widget: 'related-rankings' | 'related-articles' | 'survey' | 'promo';
   href: string;
   slot: number;
   rankingKey?: string;
 }): void {
-  sendEvent("rail_click", {
-    event_category: "rail",
+  sendEvent('rail_click', {
+    event_category: 'rail',
     event_label: params.widget,
     rail_widget: params.widget,
     rail_href: params.href,
@@ -247,7 +252,7 @@ export function trackRankingView(params: {
   areaType?: string;
   yearCode?: string;
 }): void {
-  sendEvent("ranking_view", {
+  sendEvent('ranking_view', {
     ranking_key: params.rankingKey,
     ranking_title: params.title,
     category_key: params.categoryKey,
@@ -264,7 +269,7 @@ export function trackYearChange(params: {
   fromYear: string;
   toYear: string;
 }): void {
-  sendEvent("year_change", {
+  sendEvent('year_change', {
     ranking_key: params.rankingKey,
     from_year: params.fromYear,
     to_year: params.toYear,
@@ -278,7 +283,7 @@ export function trackAreaTypeChange(params: {
   rankingKey: string;
   areaType: string;
 }): void {
-  sendEvent("area_type_change", {
+  sendEvent('area_type_change', {
     ranking_key: params.rankingKey,
     area_type: params.areaType,
   });
@@ -293,7 +298,7 @@ export function trackSearch(params: {
   searchTerm: string;
   resultsCount?: number;
 }): void {
-  sendEvent("search", {
+  sendEvent('search', {
     search_term: params.searchTerm,
     results_count: params.resultsCount,
   });
@@ -309,7 +314,7 @@ export function trackShare(params: {
   contentType?: string;
   itemId?: string;
 }): void {
-  sendEvent("share", {
+  sendEvent('share', {
     method: params.method,
     content_type: params.contentType,
     item_id: params.itemId,
@@ -322,8 +327,8 @@ export function trackShare(params: {
  * 404 エラーイベント。壊れたリンクの検出に使用。
  */
 export function trackNotFound(): void {
-  if (typeof window === "undefined") return;
-  sendEvent("page_not_found", {
+  if (typeof window === 'undefined') return;
+  sendEvent('page_not_found', {
     page_path: window.location.pathname,
     page_referrer: document.referrer,
   });

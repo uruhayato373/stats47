@@ -2,96 +2,89 @@
 
 ## Single Source of Truth
 
-全ダッシュボードコンポーネント（KPI・チャート・属性マトリクス等）は `page_components` テーブルが唯一の定義元。
+永続 DB は使わない。ページコンポーネントの正典と配信経路は次のとおり。
 
-### テーブル構造
+| 対象                                 | SSOT                                                          | 生成物 / 配信                                                 |
+| ------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| Theme                                | `packages/data-configs/src/theme-catalog/<key>.ts`            | `apps/web/scripts/data/page-components/theme/<key>.json` → R2 |
+| Area / Area category / City category | `apps/web/scripts/data/page-components/<pageType>/<key>.json` | 同一 byte を R2 へ配信                                        |
+| Area databook                        | `packages/data-configs/src/area-databook/`                    | area page-components JSON → R2                                |
 
-- `page_components`: コンポーネント定義（componentKey, componentType, componentProps JSON, colors, grid 等）
-- `page_component_assignments`: ページ割り当て（pageType, pageKey, componentKey, section, sortOrder）
+Theme の生成済み JSON は手編集しない。編集後は
+`npm run generate:catalog --workspace=@stats47/data-configs` と
+`npm run validate:catalog --workspace=@stats47/data-configs` を実行する。
+R2 反映は `apps/web/scripts/export-page-components-snapshot.ts` が担当する。
 
-### ページ種別（pageType）
+## PageComponent contract
 
-| pageType | pageKey の例 | 用途 |
-|---|---|---|
-| theme | safety, population-dynamics | テーマダッシュボード |
-| area | 13000, 01000 | エリアトップページ |
-| area-category | safetyenvironment, economy | エリアカテゴリページ |
+各行は少なくとも次を持つ。
 
-### pageType 配置の責務分離 (重要)
+| field                            | 用途                                                       |
+| -------------------------------- | ---------------------------------------------------------- |
+| `componentKey` / `componentType` | 一意な識別子と描画型                                       |
+| `title`                          | 可視化の短い見出し                                         |
+| `description`                    | 読者向けの「何が分かるか / どう読むか」。可視 chart は必須 |
+| `componentProps`                 | statsDataId、系列、ラベル、色 role 等                      |
+| `sourceName` / `sourceLink`      | 出典                                                       |
+| `rankingLink`                    | 対応する単一指標ランキング                                 |
+| `gridColumnSpan* `               | レスポンシブ配置                                           |
+| `section` / `sortOrder`          | グループと表示順                                           |
 
-何を `theme` / `area` に置くかの判定基準は [`docs/01_技術設計/03_情報設計.md`](../../docs/01_技術設計/03_情報設計.md) で定義。要点:
+ThemeCatalog の `charts.description` は個別の説明を上書きする。未指定時も
+`resolveChartDescription` が component type 別の標準文を決定的に生成し、配信 JSON へ書き出す。
+`metrics.selection.rationale` は内部 provenance であり、読者向け description として表示しない。
 
-- **`theme`**: 全国横断可視化（地図/コロプレス、移動フロー、ピラミッド、散布図）と主題ダッシュボードのタブチャート群
-- **`area`**: 県固有の時系列推移、県の年齢構成、県内の市区町村ランキングなど「**この県だけ**」の可視化
-- **NG**: 主題深掘り可視化を `pageType="area"` に登録する（47 ページに複製され build/SEO に悪影響）
+## pageType の責務
 
-新規追加・既存変更時は責務分離ドキュメントを参照すること。違反検知は `.claude/scripts/audit/page-components-audit.cjs` で実行可能。
+配置判断の正典は
+[`docs/01_技術設計/03_情報設計.md`](../../docs/01_技術設計/03_情報設計.md)。
 
-### 1データ1コンポーネント原則
+| pageType        | 置く情報                                   | 置かない情報                           |
+| --------------- | ------------------------------------------ | -------------------------------------- |
+| `theme`         | 47都道府県横断でテーマを説明する指標・関係 | 一県だけの事情、公式全国値だけの chart |
+| `area`          | 一地域のプロフィール、他地域との差         | 全国テーマの一般説明だけの chart       |
+| `area-category` | 地域 × 統計分類として意味がある比較        | 全国値の無条件な複製                   |
+| `city-category` | 市区町村の統計主体・定義で成立する比較     | 都道府県用 statsDataId の流用          |
 
-同じ統計データは **1つのコンポーネント定義を共有**し、`page_component_assignments` で複数ページに割り当てる。
+市区町村と都道府県は entity と statsDataId が異なる。サービス層で暗黙変換せず、
+各カタログ / pageType が正しい参照を持つ。日本の公式全国値は `/japan/*` の別契約で扱い、
+47県平均を page-components から全国値として作らない。
 
-- 都道府県用（`pref-` or テーマ共用）と市区町村用（`city-`）の **2レコードのみ** 作成
-- テーマページ・エリアページ・カテゴリページで同じ chart_key を共有
-- チャートタイプ・色・ラベルはコンポーネント定義で統一（ページごとに変えない）
+## 1データ1コンポーネント原則
 
-```
-例: 年齢3区分人口
-  theme-age-composition (composition-chart, sid=0000010101)
-    → theme/population-dynamics
-    → theme/aging-society
-    → area-category/population
+同じ統計・同じ entity・同じ表現は既存 component を再利用する。ページごとに chart key、
+chart type、色、ラベルを複製しない。ただし地理粒度や統計主体が異なる場合は別定義にする。
 
-  city-pop-age (composition-chart, sid=0000020101)
-    → city-category/population
-```
+## 読者向け表示契約
 
-**禁止**: 同じデータに対してページごとに異なる chart_key・チャートタイプを作成すること。
+各 `ChartPanel` は次を近接して表示する。
 
-### 都道府県/市区町村の statsDataId 分離
+1. title
+2. 1〜2文の reader description
+3. chart / legend / axis
+4. 年度・単位・出典・注意事項・ranking link
 
-SSDSE は都道府県用と市区町村用で異なる `statsDataId` を使う。`page_components` にそれぞれのレコードを持たせ、`page_component_assignments` の `page_type` で正しい方を割り当てる。
+ページ header に全 chart の説明をまとめたり、ページ末尾だけに出典を集約したりしない。
+同じ事実を KPI card と chart で二度強調せず、値・比較・推移・構成の役割を分ける。
 
-| page_type | 使用するコンポーネント |
-|---|---|
-| `theme`, `area`, `area-category` | 都道府県用（`statsDataId: 000001xxxx`） |
-| `city-category` | 市区町村用（`statsDataId: 000002xxxx`） |
+## 色
 
-サービス層での statsDataId 自動変換は行わない。DB が正しいデータを持つ。
+ThemeCatalog は `chart-color-role.ts` の role を持ち、generator が配信用の色へ解決する。
+ThemeCatalog の色 field に生の hex / rgb / hsl を書かない。性別等の意味色と可読性は
+`.claude/rules/chart-component-standards.md` に従う。
 
-### コンポーネント追加手順
+## 機械検証
 
-1. `page_components` に INSERT（componentKey, componentType, title, componentProps）
-2. 市区町村ページでも使う場合は `city-` 版も INSERT（statsDataId のみ差し替え）
-3. `page_component_assignments` に INSERT（pageType, pageKey, componentKey, section, sortOrder）
-4. コード変更不要
+- `generate:catalog --check`: ThemeCatalog と生成物の drift
+- `validate:catalog`: key、props、link、reader description、evidence の整合
+- `apps/web/scripts/check-design-system.mjs`: layout / focus / surface の禁止パターン
+- `npm run type-check --workspace apps/web`: reader 型と renderer の整合
 
-### 禁止事項
+## 禁止事項
 
-- IndicatorSet に charts フィールドを追加してはならない（型から削除済み）
-- comparison_components にチャートを追加してはならない（廃止済み）
-- コード内にチャート定義をハードコードしてはならない
-
-### componentProps の色指定
-
-チャートには必ず色を含める:
-- line-chart: `seriesColors: ["#ef4444", "#3b82f6"]`
-- mixed-chart: `columnColors: ["#f59e0b"]`, `lineColors: ["#22c55e"]`
-
-### 予約カラー（変更禁止）
-
-| 意味 | 色 | Hex | 用途 |
-|---|---|---|---|
-| 男性 | 青 | `#3b82f6` | 男女比較チャート専用 |
-| 女性 | ピンク | `#ec4899` | 男女比較チャート専用 |
-
-### 推奨カラーマッピング（チャート系列用）
-
-| 意味 | 色 | Hex |
-|---|---|---|
-| 危険・死者数（交通事故死、火災死等） | 赤 | `#ef4444` |
-| 件数・量（認知件数、事故件数、出火件数等） | 橙 | `#f59e0b` |
-| 改善・率（検挙率、納付率等） | 緑 | `#22c55e` |
-| 中立・補助 | グレー | `#6b7280` |
-| 特殊（自殺率等） | 紫 | `#8b5cf6` |
-| 人口・出生 | 青 | `#3b82f6`（男女比較でない文脈ならOK） |
+- 永続 D1 / table を page-components の SSOT とする
+- Theme の生成済み JSON を手編集する
+- page / component 内へ chart 定義をハードコードする
+- 可視 chart を description 無しで配信する
+- 47県 chart を市区町村・日本へ無条件に複製する
+- ThemeCatalog の内部 selection rationale を読者 UI へそのまま露出する

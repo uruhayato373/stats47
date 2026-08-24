@@ -1,13 +1,12 @@
-import { listJapanCatalogThemes } from "@stats47/data-configs/geo-scope";
+import { listJapanCatalogThemes } from '@stats47/data-configs/geo-scope';
 
-import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
-import { RightRailWidgets } from "@/components/rail";
-import { SurfaceLinkCard } from "@/components/surface";
+import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
+import { StatisticsScopeNav } from '@/components/navigation';
+import { SurfaceLinkCard } from '@/components/surface';
 
+import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
-import { generateOGMetadata } from "@/lib/metadata/og-generator";
-
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
 /**
  * `/japan` ハブ (GEO-SCOPE-SEPARATION-01 WP4)。
@@ -17,14 +16,14 @@ import type { Metadata } from "next";
  * `/themes` のようなランキング件数・47県要約は出さない (複製しない、doc 43 §7 WP4 step 3)。
  */
 export function generateMetadata(): Metadata {
-  const title = "日本の統計 | 都道府県ではなく全国の推移";
+  const title = '日本の統計 | 都道府県ではなく全国の推移';
   const description =
-    "都道府県比較ではなく、日本全国の公式統計値がどう推移してきたかをテーマ別に確認できます。";
+    '都道府県比較ではなく、日本全国の公式統計値がどう推移してきたかをテーマ別に確認できます。';
   return {
     title,
     description,
-    alternates: { canonical: "/japan" },
-    ...generateOGMetadata({ title, description, imageUrl: "/og-image.jpg" }),
+    alternates: { canonical: '/japan' },
+    ...generateOGMetadata({ title, description, imageUrl: '/og-image.jpg' }),
   };
 }
 
@@ -32,8 +31,11 @@ export default function JapanHubPage() {
   const themes = listJapanCatalogThemes();
 
   return (
-    <PageShell rightRail={<RightRailWidgets />}>
-      <Breadcrumbs items={[{ label: "ホーム", href: "/" }, { label: "日本" }]} />
+    <PageShell>
+      <Breadcrumbs
+        items={[{ label: 'ホーム', href: '/' }, { label: '日本' }]}
+      />
+      <StatisticsScopeNav current="japan" />
       <PageHeader
         eyebrow="日本"
         title="日本の統計"

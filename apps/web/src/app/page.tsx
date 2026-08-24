@@ -26,10 +26,7 @@ import {
 } from '@/features/home-portal';
 import { FeaturedRankings } from '@/features/ranking/featured.server';
 
-import {
-  ADSENSE_DISPLAY_ENABLED,
-  RAIL_RECT,
-} from '@/lib/google-adsense';
+import { ADSENSE_DISPLAY_ENABLED, RAIL_RECT } from '@/lib/google-adsense';
 
 /**
  * 動的レンダリング（ランタイム SSR）を強制する。
@@ -121,146 +118,141 @@ export default async function HomePage() {
     'economy',
     8
   ).catch(() => []);
+  const leftRail = (
+    <aside className="lg:pr-1">
+      <SectionHeader
+        title="カテゴリから探す"
+        action={
+          <Link
+            href="/ranking"
+            className="font-semibold text-primary hover:underline"
+          >
+            一覧 →
+          </Link>
+        }
+      />
+      <PortalCategoryGrid variant="sidebar" />
+      {ADSENSE_DISPLAY_ENABLED && (
+        <div className="mt-6">
+          <RailAdSlot slot={RAIL_RECT} />
+        </div>
+      )}
+      <div className="mt-4">
+        <SidebarPromoBanner index={0} />
+      </div>
+      <div className="mt-4">
+        <SidebarStickyBannerAd position="home-left-rail" />
+      </div>
+    </aside>
+  );
 
   return (
     <div className="w-full">
-      {/* ① desktop: 左カテゴリ / 右ランキング・ブログ・テーマ。検索は共通headerへ集約 */}
-      <PageShell className="py-5 lg:py-6">
+      <PageShell leftRail={leftRail} className="py-5 lg:py-6">
         <PageHeader
           title="日本の地域データを探す"
           description="47都道府県のランキング、人口・年収・暮らしの統計を検索できます。"
           className="mb-4"
         />
 
-        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[264px_minmax(0,1fr)] lg:gap-6 xl:grid-cols-[280px_minmax(0,1fr)]">
-          <aside className="order-2 lg:order-1 lg:pr-1">
+        <div className="space-y-6">
+          <section>
             <SectionHeader
-              title="カテゴリから探す"
+              title="注目のランキング"
               action={
                 <Link
                   href="/ranking"
+                  className="font-semibold text-primary hover:underline"
+                >
+                  もっと見る →
+                </Link>
+              }
+            />
+            <FeaturedRankings limit={6} showHeader={false} embedded />
+          </section>
+
+          {latestArticles.length > 0 && (
+            <section>
+              <SectionHeader
+                title="新着ブログ"
+                action={
+                  <Link
+                    href="/blog"
+                    className="font-semibold text-primary hover:underline"
+                  >
+                    すべての記事 →
+                  </Link>
+                }
+              />
+              <HorizontalCardCarousel ariaLabel="新着ブログ">
+                {latestArticles.map((article) => (
+                  <PortalBlogCard
+                    key={article.slug}
+                    slug={article.slug}
+                    title={article.title}
+                  />
+                ))}
+              </HorizontalCardCarousel>
+            </section>
+          )}
+
+          <section>
+            <SectionHeader
+              title="知りたいことから探す"
+              action={
+                <Link
+                  href="/themes"
+                  className="font-semibold text-primary hover:underline"
+                >
+                  すべてのテーマ →
+                </Link>
+              }
+            />
+            <PortalUseCaseGrid />
+          </section>
+
+          <section>
+            <SectionHeader
+              title="都道府県から探す"
+              action={
+                <Link
+                  href="/areas"
                   className="font-semibold text-primary hover:underline"
                 >
                   一覧 →
                 </Link>
               }
             />
-            <PortalCategoryGrid variant="sidebar" />
-            {ADSENSE_DISPLAY_ENABLED && (
-              <div className="mt-6">
-                <RailAdSlot slot={RAIL_RECT} />
-              </div>
-            )}
-            {/* ★ 2026-07-28: home はアフィリエイト枠がゼロで AdSense のみだった。
-                vertical 解決の手掛かりが無いページなのでハウス枠 (vertical 非依存) を置く。 */}
-            <div className="mt-4">
-              <SidebarPromoBanner index={0} />
-            </div>
-            {/* 縦長 (スカイスクレイパー) の受け皿。lg+ のみ・sticky なし (構造テストが assert)。 */}
-            <div className="mt-4">
-              <SidebarStickyBannerAd position="home-left-rail" />
-            </div>
-          </aside>
+            <PrefectureNavigator
+              prefectures={prefectures}
+              variant="embedded"
+              surface="home"
+            />
+          </section>
 
-          <div className="order-1 min-w-0 space-y-6 lg:order-2">
-            <section>
-              <SectionHeader
-                title="注目のランキング"
-                action={
-                  <Link
-                    href="/ranking"
-                    className="font-semibold text-primary hover:underline"
-                  >
-                    もっと見る →
-                  </Link>
-                }
-              />
-              <FeaturedRankings limit={6} showHeader={false} embedded />
-            </section>
+          <section>
+            <SectionHeader
+              title="運営者プロフィール"
+              action={
+                <Link
+                  href="/about"
+                  className="font-semibold text-primary hover:underline"
+                >
+                  詳しく見る →
+                </Link>
+              }
+            />
+            <OperatorProfileCard className="overflow-hidden" />
+          </section>
 
-            {latestArticles.length > 0 && (
-              <section>
-                <SectionHeader
-                  title="新着ブログ"
-                  action={
-                    <Link
-                      href="/blog"
-                      className="font-semibold text-primary hover:underline"
-                    >
-                      すべての記事 →
-                    </Link>
-                  }
-                />
-                <HorizontalCardCarousel ariaLabel="新着ブログ">
-                  {latestArticles.map((article) => (
-                    <PortalBlogCard
-                      key={article.slug}
-                      slug={article.slug}
-                      title={article.title}
-                    />
-                  ))}
-                </HorizontalCardCarousel>
-              </section>
-            )}
-
-            <section>
-              <SectionHeader
-                title="知りたいことから探す"
-                action={
-                  <Link
-                    href="/themes"
-                    className="font-semibold text-primary hover:underline"
-                  >
-                    すべてのテーマ →
-                  </Link>
-                }
-              />
-              <PortalUseCaseGrid />
-            </section>
-
-            <section>
-              <SectionHeader
-                title="都道府県から探す"
-                action={
-                  <Link
-                    href="/areas"
-                    className="font-semibold text-primary hover:underline"
-                  >
-                    一覧 →
-                  </Link>
-                }
-              />
-              <PrefectureNavigator
-                prefectures={prefectures}
-                variant="embedded"
-                surface="home"
-              />
-            </section>
-
-            <section>
-              <SectionHeader
-                title="運営者プロフィール"
-                action={
-                  <Link
-                    href="/about"
-                    className="font-semibold text-primary hover:underline"
-                  >
-                    詳しく見る →
-                  </Link>
-                }
-              />
-              <OperatorProfileCard className="overflow-hidden" />
-            </section>
-
-            {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。 */}
-            {homeNativeBanners.length > 0 && (
-              <NativeAffiliateRow
-                banners={homeNativeBanners}
-                position="home-native"
-                trackingCategory="home"
-              />
-            )}
-          </div>
+          {/* home 訪問者の検索意図は食品消費・家計が最多 (GSC 実測 46%) なので economy 軸で解決する。 */}
+          {homeNativeBanners.length > 0 && (
+            <NativeAffiliateRow
+              banners={homeNativeBanners}
+              position="home-native"
+              trackingCategory="home"
+            />
+          )}
         </div>
       </PageShell>
     </div>

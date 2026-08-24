@@ -258,8 +258,8 @@ export function ThemeDashboardTabbed({
   // hideMap: 地図タブ UI (コロプレス/指標タブ/年度セレクタ) は出さず、KPI カード +
   // page-components チャート + 考察のフル幅ダッシュボードを描画する。
   // 都道府県セレクタは同時に 1 つだけ見える状態にする (2026-08-04):
-  // xl 以上 = 左レール ThemeSideNav の地域ブロック / xl 未満 = ThemeAreaHeader の
-  // PageHeader actions (lg:hidden)。本体側 prefectureSelector はここでは出さない。
+  // 992px 以上 = 左レール ThemeSideNav の地域ブロック / 992px 未満 = ThemePageLayout の
+  // 上部代替 UI。本体側 prefectureSelector はここでは出さない。
   // 選択エリアは H1 に反映される。
   if (themeConfig.hideMap) {
     return (

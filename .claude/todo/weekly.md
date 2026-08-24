@@ -1,134 +1,129 @@
 ---
 title: 今週の計画
 type: weekly-plan
-week: 2026-W34
-updated: 2026-08-21
+week: 2026-W35
+updated: 2026-08-24
 status: active
 ---
 
-# 2026-W34 今週の計画
+# 2026-W35 今週の計画
 
-期間: 2026-08-17（月）〜 2026-08-23（日）。WIP 上限は 5 件。
-status と期限は各バックログを正典とし、ここでは成果だけを確認する。
+期間: 2026-08-24（月）〜 2026-08-30（日）。WIP 上限は5件。
+status と期限は各バックログを正典とし、ここでは週内に確認できる成果だけを置く。
 
 ## 今月の重点（月次計画より）
 
-- **重点1**: 生成を無人ループから外し、月次目標 → 週次割当で回す（2026-08-21 に方針変更）
+- **重点1**: 生成を無人ループから外し、月次目標 → 週次割当で回す
 - **重点2**: 公開中の誤値・欠測を解消する
-- 今週この重点で進めること: **止まっていた日次ループの修復を実測で確かめる**（重点1）と
-  **露出が伸びているのにクリックが伸びない原因の特定**（重点2 の外側だが影響が最大）。
-  詳細は [月間計画](monthly.md)。
+- 今週は、月次配分どおり **手動12 metricの再取得**と
+  **ブログ月間下限に必要な2本だけを手動生成**を進める。
 
-## 前週の振り返り (W33)
+## 前週の振り返り（W34）
 
-| タスク | 分類 | 状態 | メモ |
-|---|---|---|---|
-| W33 の週次計画そのもの | — | **未作成** | 計画が無い週に未着手が 6 件へ増えた。W32 申し送り 10 件中 完了1/改善2/一部1/**未着手6** |
-| `blog-remediation-daily` の連続失敗解消 | Must (W32) | **8/16 に修復・未検証** | 17 日連続失敗。ratchet を queue 単位に分離して commit を通した。**次回 run は 8/17 08:00** |
-| 日次生成の run 欠測率 | — | **改善** | blog 56%→83% / ai-content 67%→83% |
-| GSC シーソー切り分け | Should (W32) | **未着手** | **4 週連続**。W30/W31/W32/W33 すべて見送り |
-| GA4 Unassigned の発生源 | Should (W32) | **未着手** | 2 週連続。9→206 セッション・engagementRate 0.0% |
-| AdSense の交絡整理 | Should (W32) | **守られなかった** | 「新規変更を止める」としたのに native 枠変更が 1 件入った |
+検索は大きく伸びた。GSC clicks +77.3%、impressions +44.3%、CTR +0.69pp、
+GA4 Japan-only engagedSessions +61.5%。一方、8/21に置いた手動割当は ai-content 0/3、blog 0/2。
+KDPは2/10、ブログ品質是正は0/3だった。
 
-**パターン分析**: W33 は計画が無く、実装は 95 commits 動いた一方で**計測・調査・是正が 6 件未着手**になった。
-W32 の「Must に置けば進み、Should 以下だと進まない」がより強く再現した形。
-今週は **4 週連続で流れている GSC 切り分けを Must に上げる**（Should に置く限り着手されない実績が 4 回ある）。
+検索運用は8/24に回復した。W34 snapshot、effect verdict、URL Inspection、search-growthを接続し、
+登録済みURLやcoverage remediation作業中URLを重複候補化する欠陥も修正した。
+GSC operations audit は既知の過去欠落target 7件のWARNだけで、必須工程はPASSしている。
 
-## 前週からの持ち越し
+## 前週からの持ち越し方針
 
-W32→W33 の申し送りのうち未着手 6 件（GSC 切り分け / GA4 Unassigned / search-growth 鮮度 /
-`IND-DATA-CORRUPTION-01` の SEO 修正 / `ASP-CONTINUITY-01` / AdSense 判定順）。
-うち `ASP-CONTINUITY-01` は **3 週連続未着手**なので今月は見送り（9月へ）、
-AdSense 判定順は「新規変更を止める」だけを守る形にして Must から外す。
+| W34項目 | W35での扱い | 理由 |
+|---|---|---|
+| ai-content 3件 | **積み増さない** | 月次上限20件に対し8月のdone増分は既に20件超。月次規約どおり0件 |
+| blog 2本 | **Mustへ再割当** | 8月公開15本。月間下限17本まであと2本 |
+| KDP残り8冊 | **今週は実施しない** | 外部公開かつ月次の「商品チャネル新規展開をしない」に従う。再開は明示承認時だけ |
+| GA4 Unassigned | **条件付き監視** | 206→8 sessionsへ収束。原因調査は再発閾値を超えたときだけ |
+| migration-flow | **backlogで再実装待ち** | clean checkoutで成立する投稿経路が未実装。月次重点外 |
+| ブログ品質是正3本 | **Shouldへ縮小** | workflowが12回連続失敗。まず入口を一本化して1本だけ実証する |
+| Due超過棚卸し | **重点2の3件をMust/Shouldへ** | DATA-MANUAL / DATA-ESTAT / R2を実作業へ変換 |
 
 ## 現状サマリー
 
-| 指標 | 現在値 | 備考 |
-|---|---|---|
-| GSC clicks (finalized 7d) | 930 | +7.4% WoW。**表示は +22.5%・順位 8.12→7.79 と改善したのに CTR -0.42pp** |
-| NSM engagedSessions | 1,371 | -20.0% WoW。ただし同一期間の GA4 値が snapshot 間で食い違う問題あり（W33 レビュー参照） |
-| AdSense earnings (7d) | ¥130 (W32) | W33 分は日曜 20:00 の cron 待ち |
-| 公開ブログ記事 | 445 本 | W33 の新規は 5 本（全て B 型） |
-| ranking ai-content done | 249 / 2,173 | **キューが 8/12 生成で stale**。W33 の生成 20 件が未反映 |
-| ブログ是正キュー pending | 178（must-fix 32） | **8/11 生成で stale**。2 週連続で是正 0 本 |
-| **KDP** | **listed 10 / draft 22** | 下書きは全て作成済み。公開だけが残っている |
-| cron 連続失敗 | 5 件 | blog-remediation(修復済・未検証) / migration-flow 12回 / data-refresh / ogp-audit / 他 |
-| 改善バックログ Due 超過 | 7 件 | AFF-BRAND-FIT-01 / ASSET-POLICY-BURNDOWN-01 / BLOG-WAVE-2026-07-09-MANUAL / PERF-AREA-DOM-01 / PERF-RANKING-LCP-02 / RANKING-CTR-01 / RANKING-KEYS-SYNC-01 |
-
-## 今週の重要な発見（着手前に共有）
-
-1. **キューが 2 つとも stale なので「次に何をするか」が決まらない状態が続いていた。**
-   `blog-remediation-daily` が 17 日止まり、是正キュー（8/11）と ai-content キュー（8/12）が
-   更新されていない。8/16 に修復したが**実測はまだ**。これが直らない限り、
-   ブログ是正も ai-content の進捗把握も再開できない。
-
-2. **露出は伸びているのにクリックが伸びていない。**
-   2 週で順位 8.12→7.79、表示 25,293→30,995（+22.5%）に対し clicks は 866→930（+7.4%）。
-   新しく露出した面の CTR が既存面より低い形。切り分けが 4 週連続で未実施のため、
-   どの面が増えてどの面の CTR が落ちたかを誰も把握していない。
-
-3. **KDP は下書き 22 冊が作成済みで、公開だけが残っている。**
-   KDP は未公開（下書き + 審査中）が約 10 冊で作成数制限に当たるが、**新規作成はしないので影響しない**。
-   公開すれば draft 枠は空く。ただし**公開直後は審査中（最大 72h）として枠を食う**ので、
-   10 冊を一度に出すより数日に分けた方が安全。
+| 指標 | 現在値 | 判断 |
+|---|---:|---|
+| GSC clicks finalized7d | 1,651 | +77.3% WoW。単週なので継続判定は保留 |
+| NSM engagedSessions | 2,610 | +61.5% WoW、Japan-only |
+| ブログ8月公開 | 15本 | 月間下限17本まで2本 |
+| ranking ai-content done | 270 / 2,164 | 8月増分が月次上限を超えたため今週0件 |
+| ブログ是正 queue | pending 222 / in-progress 1 | workflow 12回連続失敗 |
+| KDP | listed 12 / draft 20 | 今週は外部公開しない |
+| search-growth | 880候補 / approved 1 / WIP 1 | WIP上限5以内 |
+| URL Inspection | PASS 353 / NEUTRAL 147 | 8/20比 PASS +5 |
 
 ## Must
 
-- [ ] **ai-content を今週 3 件生成する**（重点1・S）
-  - 2026-08-21 に日次生成ループ (`ai-content-generate-daily.yml`) を削除した。件数は
-    ここで決める。月間上限は 20 件で、W34 は残り 3 日なので **3 件**。
-  - `build-ai-content-queue.mjs --next 3` → author → `audit-ai-content.mjs` →
-    critic PASS を確認 → develop へ push（`/generate-ai-content` の「週次の回し方」）。
-  - 成功基準: 3 件が R2 に載り、`publish-ai-content.yml` が **push 発火**で走ったこと。
-    **未達を翌週へ積み増さない**。足りなければ月次の目標側を下げる。
-- [ ] **blog を今週 2 本書く**（重点1・M）
-  - 同じく `blog-generate-daily.yml` を削除した。月間 17-19 本 (`seo-strategy.json` の
-    `typeMix.perMonth`) に対し W34 は残り 3 日なので **2 本**。
-  - `/write-prepared-article`（準備コマンドを含む）→ quality-gate → blog-critic PASS →
-    `published: true` で push。成功基準は `blog-auto-publish.yml` が push 発火で走ること。
+- [ ] **`DATA-MANUAL-RESTORE-01` の12 metricを再取得可能な状態まで進める**（重点2・L）
+  - 12件それぞれの provenance 9点セット、一次ファイルURL、hash、年、単位を確認する。
+  - 一次ファイルを再取得し、代表3県を git TS / R2候補と照合する。
+  - 欠けたprovenanceや取得不能は推測で埋めず、metric単位で blocker を残す。
+  - 成功基準: 12件すべてに `ready / blocked` と根拠が付き、ready分の候補生成と
+    provenance audit が通る。**R2 write・公開は別途承認まで行わない。**
 
-- [ ] **KDP を今週 10 冊公開する**（重点外・オーナー指示・M）
-  - 対象は `kdp-listings.json` の `status: draft` 22 件のうち 10 件（`K-S1-11` から順に）。
-  - **cron は使わない**（2026-08-16 に手動のみへ確定。正典 `.claude/rules/coconala-product-standards.md` §8）。
-    `/kdp-publish` で 1 冊ずつ verify → `--commit` を回す。
-  - **一度に 10 冊を連続実行しない**。公開直後は審査中として作成枠を食うので、
-    2〜3 冊ずつ・日を分ける。作成数制限モーダルが出たら中断して翌日へ回す。
-  - 成功基準: `status: listed` が 10 → **20 件**になり、各冊に ASIN が入る。
-    残り 12 冊は W35 へ。真実源 `.claude/config/kdp-listings.json`。
+- [ ] **ブログを2本だけ手動生成・公開経路へ載せる**（重点1・M）
+  - topic queueの `must-write` から需要確認済み候補を2件選ぶ。
+  - `/write-prepared-article` → quality gate → blog-critic PASS → `published: true` の順を守る。
+  - 成功基準: 8月公開が15→17本となり、topic queueが2件done、公開workflowがpush発火する。
+  - **3本目は作らない。ai-contentは今週0件。未達分を翌週へ積み増さない。**
 
 ## Should
 
-- [ ] **GA4 Unassigned 206 セッション（engagementRate 0.0%）の発生源を特定する**（2 週連続未着手）。
-  source/medium 内訳で切り分ける。自動アクセスなら GA4 フィルタか Cloudflare WAF を検討。
-- [ ] **`migration-flow-weekly` の 12 回連続失敗を調べる**。失敗ステップは「📱 Post to Instagram + X」で
-  push とは別原因。3 か月近く止まっている。
-- [ ] **ブログ品質是正 3 本**（Must 2 でキューが復活したら）。`/brushup-blog --target queue --next 3`。
-  2 週連続 0 本なので、キューが動いた時点で消化する。
+- [ ] **`DATA-ESTAT-FETCH-01` 25 metricを失敗型で分類する**（重点2・L）
+  - statsDataId / cdCat / API失敗メッセージでまとめ、同じ入力の無意味な再実行を止める。
+  - 各metricを `config修正 / 代替統計 / 一時非公開 / blocker` のいずれかへ決定する。
+  - 成功基準: 25件すべてに処置が付き、代表3県照合が必要な次バッチが明確になる。
+
+- [ ] **ブログ品質是正の入口を一本化し、1本だけ実証する**（重点1・M）
+  - `blog-remediation-daily` の12回連続失敗が、廃止済み無人ループの残骸か現行必須workflowかを確定する。
+  - 無人生成を再開せず、`/brushup-blog --target queue --next 1` の手動経路で1本をゲート通過させる。
+  - 成功基準: 1本の是正成果とqueue更新が対応し、不要workflowならschedule/監視のdriftを解消する。
+
+- [ ] **`RANKING-KEYS-SYNC-01` の次回実走を確認する**（indexing・S）
+  - 是正後スクリプトが生きたkeyを落とさず、open PRだけを判定し、必要ならPRを作れることを確認する。
+  - 成功基準: check結果とworkflow runが揃い、item / KNOWN / sitemap の不整合0。
 
 ## Could
 
-- [ ] **改善バックログの Due 超過 7 件を棚卸しする**。実測で再設定するか、今月やらないものは削除する。
-- [ ] **`IND-DATA-CORRUPTION-01` の SEO 文字列修正**（2 週連続未着手・S）。
-- [ ] **search-growth の source 鮮度を回復する**（2 週 stale。coverage は 6/16 から更新なし）。
+- [ ] **GA4 Unassignedを閾値付きで監視する**（計測・S）
+  - 次回snapshotで `sessions >= 100` または engagementRate 0%が2週連続なら source/medium調査を再開する。
+  - 閾値未満なら「収束」とだけ記録し、原因を推測しない。
+
+- [ ] **CTR候補1件のquery別根拠だけを確認する**（検索・S）
+  - `/blog/avg-height-high-school-2nd-male` は impressions 4,253 / CTR 0.52% / position 8.49。
+  - page×queryと現行titleを確認し、過去title rewriteの effect/none を踏まえて approve / dismiss を判断する。
+  - 一括title書換えはしない。
+
+## GSC運用サイクル
+
+- W35 search-growth: 必須source fresh、候補880件、approved 1件、WIP 1/5。
+- 承認候補 `soft-404-risk::/ranking/barber-beautician-annual-income` は既存のデータ補強を観測するだけ。
+  14日判定は 2026-09-07、28日は 09-21、56日は 10-19。今週は追加改修・送信をしない。
+- effect verdict の既知の過去欠落target 7件は推測で補完せず、個別の終了/再計測判断までWARNを維持する。
 
 ## 今週やらないこと
 
-- **AdSense の枠追加・配置変更** — W31 から交絡が 10 件積み上がっている。判定できるまで新規変更を止める
-  （W33 で「止める」としながら 1 件入れてしまった。今週は入れない）。
-- **KDP cron の再開** — 手動のみへ確定した（`coconala-product-standards.md` §8）。
-- **`ASP-CONTINUITY-01`** — 3 週連続未着手なので今月は見送り、9月へ送る。
-- **新規記事の手動執筆** — 日次ループが topic-queue から自動で書くため。
+- ai-content生成 — 8月の月次上限超過のため0件。
+- KDP残り8冊の公開 — 外部公開かつ月次重点外。明示承認なしに続行しない。
+- AdSenseの枠追加・配置変更 — 交絡を増やさず計測のみ。
+- migration-flow schedule再開 — clean checkoutで成立する公開R2経路ができるまで戻さない。
+- search-growth候補の大量承認 — 週2件上限。現時点のapproved 1件を先に観測する。
+- 本番デプロイ、R2 write、CDN purge、外部投稿 — 必要になった時点で別途承認を得る。
 
 ## 完了条件
 
-- チェックは成果物、実測値、または再現コマンドがある場合だけ付ける。
-- 本番デプロイ、R2 write、**KDP 公開**、ASP 申請、管理画面変更は、実装完了と分けてユーザー承認を得る。
-- 未完了は説明をここへ蓄積せず、該当バックログの blocker または次アクションを更新する。
+- チェックは成果物・実測値・再現コマンドが揃った場合だけ付ける。
+- WIPは Must 3件 + 着手中Should最大2件まで。新規着手時は1件閉じる。
+- `node .claude/scripts/gsc/audit-operations-cycle.mjs --stage plan --week 2026-W34 --strict`
+  が FAIL 0 であること。
+- 未達は翌週へ自動加算せず、月次目標または優先順位を根拠付きで更新する。
 
 ## 参照
 
 - 今月: [月間計画](monthly.md)
+- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/2026-W34.md`
 - 改善: [改善バックログ](improvements.md)
 - 機能: [バックログ](backlog.md)
-- 指標: [指標カード (バックログ内)](backlog.md)
-- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/2026-W33.md`
+- search-growth: `.claude/state/search-growth/{health,candidates}.json`
+- GSC cycle audit: `.claude/state/metrics/gsc/operations-cycle-LATEST.md`

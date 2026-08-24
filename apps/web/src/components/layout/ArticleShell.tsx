@@ -1,10 +1,17 @@
-import { type ReactNode } from "react";
+import { type ReactNode } from 'react';
 
-import { cn } from "@stats47/components";
+import { cn } from '@stats47/components';
+
+import { LEFT_RAIL_GRID_CLASS } from './PageShell';
 
 interface ArticleShellProps {
   /** 記事本文 (flex-1 で残り幅いっぱいに広がる) */
   children: ReactNode;
+  /**
+   * lg+ で左に表示するページ内ナビ。調査ハブなど「読み進め方」を先に示す記事面向け。
+   * 狭幅では描画しないため、必要な操作はページ側で本文上部に代替 UI を置く。
+   */
+  leftRail?: ReactNode;
   /** レール上段 (非 sticky)。広告・CTA・関連 widget — 初期表示の viewability を確保する */
   rail?: ReactNode;
   /** レール先頭の sticky クラスタ。TOC・ナビなど読中に追従させたいもの */
@@ -29,24 +36,32 @@ interface ArticleShellProps {
  *   (PageShell reading variant の「1fr 列内で本文 760px 制限 → ワイド画面で空白」を根治)
  * - レールは「sticky TOC クラスタ先頭 + 非 sticky widget」の 2 段構成
  * - レール内に独立スクロールを作らず、ページ本体のスクロールで全内容に到達する
+ * - 左レールと右レールは併存させない。右レールがある場合は右レールを優先する
  *
  * 設計仕様: docs/01_技術設計/04_デザインシステム.md /
  * docs/01_技術設計/04_デザインシステム.md「reading zone」
  */
 export function ArticleShell({
   children,
+  leftRail,
   rail,
   railSticky,
   breadcrumb,
   className,
 }: ArticleShellProps) {
-  const hasRail = !!rail || !!railSticky;
+  const hasRightRail = !!rail || !!railSticky;
+  const showLeftRail = !!leftRail && !hasRightRail;
 
   return (
-    <div className={cn("reading-zone w-full bg-background", className)}>
+    <div className={cn('reading-zone w-full bg-background', className)}>
       <div className="mx-auto w-full max-w-[1280px] px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
         {breadcrumb}
-        {hasRail ? (
+        {showLeftRail ? (
+          <div className={LEFT_RAIL_GRID_CLASS}>
+            <aside className="sticky top-20 hidden lg:block">{leftRail}</aside>
+            <main className="min-w-0">{children}</main>
+          </div>
+        ) : hasRightRail ? (
           <>
             <div className="lg:flex lg:items-start lg:gap-10">
               <main className="min-w-0 flex-1">{children}</main>

@@ -1,7 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { PageShell } from "../PageShell";
+import {
+  PAGE_SHELL_NARROW_ONLY_CLASS,
+  PageShell,
+} from "../PageShell";
 
 /**
  * PageShell のレール契約。
@@ -19,11 +22,11 @@ const RIGHT = <aside aria-label="right-rail">right</aside>;
 describe("PageShell — leftRail", () => {
   it("既定 (stack): 狭幅用の積み下ろし領域にも leftRail を描く", () => {
     render(<PageShell leftRail={LEFT}>{MAIN}</PageShell>);
-    // グリッド内 (lg+) と積み下ろし (lg 未満) の 2 か所
+    // グリッド内 (992px+) と積み下ろし (992px 未満) の 2 か所
     expect(screen.getAllByLabelText("left-rail")).toHaveLength(2);
   });
 
-  it("hide: 積み下ろし領域に leftRail を描かない (lg+ のみ)", () => {
+  it("hide: 積み下ろし領域に leftRail を描かない (992px+ のみ)", () => {
     render(
       <PageShell leftRail={LEFT} leftRailNarrowBehavior="hide">
         {MAIN}
@@ -31,36 +34,41 @@ describe("PageShell — leftRail", () => {
     );
     const rails = screen.getAllByLabelText("left-rail");
     expect(rails).toHaveLength(1);
-    // 残る 1 つは lg+ でのみ表示されるグリッド側
-    expect(rails[0].parentElement).toHaveClass("hidden", "lg:block");
+    // 残る 1 つは 992px+ でのみ表示されるグリッド側
+    expect(rails[0].parentElement).toHaveClass(
+      "hidden",
+      "min-[992px]:block",
+    );
   });
 
   /**
-   * ★左レールの表示開始幅は home / ランキング一覧の本文内 aside (lg) と一致させる。
-   * ここが xl のままだと「同じウィンドウ幅で home には出るがテーマには出ない」という
-   * 食い違いになる (2026-08-05 にオーナー指摘で是正)。
+   * ★992px は、従来の 1024px 時と同じ本文最小幅 656px を維持しつつ、
+   * アプリ内ブラウザの実測 1017px で上部代替 UI へ落ちる境界問題を解消する。
    */
-  it("左レールは lg から出す (home の本文内 aside と同じ境界)", () => {
+  it("左レールは専用の 992px 境界から出す", () => {
     const { container } = render(
       <PageShell leftRail={LEFT} leftRailNarrowBehavior="hide">
         {MAIN}
       </PageShell>,
     );
-    const grid = container.querySelector(".lg\\:grid");
-    expect(grid).not.toBeNull();
-    // xl 始まりのグリッドに戻っていないこと (戻ると 1024-1280px で消える)
-    expect(container.querySelector(".xl\\:grid")).toBeNull();
+    const grid = container.firstElementChild?.firstElementChild;
+    expect(grid).toHaveClass(
+      "min-[992px]:grid",
+      "min-[992px]:grid-cols-[264px_minmax(0,1fr)]",
+      "min-[992px]:gap-6",
+    );
+    expect(grid).not.toHaveClass("lg:grid", "xl:grid");
   });
 
   /**
    * 狭幅の積み下ろし境界がレール本体とずれると、両方出る幅 / どちらも出ない幅ができる。
    * `hide` でも積み下ろしコンテナ自体は描かれるので、その境界クラスを固定する。
    */
-  it("積み下ろし境界がレール本体と同じ lg になっている", () => {
+  it("積み下ろし境界がレール本体と同じ 992px になっている", () => {
     render(<PageShell leftRail={LEFT}>{MAIN}</PageShell>);
     const stacked = screen.getAllByLabelText("left-rail")[1].parentElement;
-    expect(stacked).toHaveClass("lg:hidden");
-    expect(stacked).not.toHaveClass("xl:hidden");
+    expect(stacked).toHaveClass(PAGE_SHELL_NARROW_ONLY_CLASS);
+    expect(stacked).not.toHaveClass("lg:hidden", "xl:hidden");
   });
 
   it("leftRail と rightRail を同時に渡すと右が勝ち、左は描かれない", () => {

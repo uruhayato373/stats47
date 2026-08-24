@@ -228,7 +228,7 @@ const COVERAGE = {
           provenance: { file: rel(file), api: "coverage HTTP probe (Googlebot UA)", limitations: ["build-coverage-queue の本番 HTTP 実測値 (live probe ではない)"] },
         }));
       }
-      if (e.gsc_category) {
+      if (e.gsc_category && shouldEmitCoverageCategory(e)) {
         obs.push(createObservation({
           source: "static", metric: "coverageCategory", dimensions: { page }, value: mapCoverageCategory(e.gsc_category),
           observedAt, freshness,
@@ -420,6 +420,13 @@ export function mapCoverageCategory(gscCategory) {
   if (/5xx|server|サーバー/i.test(c)) return "server-error-5xx";
   if (/404|not.?found|見つか/i.test(c)) return "not-found-404";
   return c;
+}
+
+/** 既存 remediation の作業中・解決済み・非対象 URL を新規候補へ重複登録しない。 */
+export function shouldEmitCoverageCategory(entry) {
+  const status = entry?.status ?? "pending";
+  const action = entry?.action;
+  return status === "pending" && action !== "none";
 }
 
 function weekStart(endIso) {

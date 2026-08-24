@@ -22,6 +22,7 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
 
   return (
     <SurfaceSection
+      id="theme-evidence"
       className="mt-8 p-0"
       aria-labelledby="theme-evidence-topics-title"
     >
