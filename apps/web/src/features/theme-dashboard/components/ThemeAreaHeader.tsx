@@ -13,17 +13,10 @@ import { useThemePrefecture } from "./ThemePrefectureContext";
  */
 export function ThemeAreaHeader({
   themeTitle,
-  description,
 }: {
   themeTitle: string;
-  description?: string;
 }) {
   const { selectedAreaName } = useThemePrefecture();
   const title = selectedAreaName ? `${selectedAreaName}の${themeTitle}` : themeTitle;
-  return (
-    <PageHeader
-      title={title}
-      description={description}
-    />
-  );
+  return <PageHeader title={title} />;
 }

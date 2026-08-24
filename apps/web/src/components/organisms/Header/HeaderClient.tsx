@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 
-import { cn } from "@stats47/components";
-import { Button } from "@stats47/components/atoms/ui/button";
+import { cn } from '@stats47/components';
+import { Button } from '@stats47/components/atoms/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@stats47/components/atoms/ui/dropdown-menu";
-import { Input } from "@stats47/components/atoms/ui/input";
+} from '@stats47/components/atoms/ui/dropdown-menu';
+import { Input } from '@stats47/components/atoms/ui/input';
 import {
   BarChart3,
   ChevronDown,
@@ -21,15 +21,15 @@ import {
   Moon,
   Search,
   Sun,
-} from "lucide-react";
+} from 'lucide-react';
 
-import { trackNavClick, trackSearch } from "@/lib/analytics/events";
+import { trackNavClick, trackSearch } from '@/lib/analytics/events';
 
-import { useTheme } from "@/hooks/useTheme";
+import { useTheme } from '@/hooks/useTheme';
 
-import { useSidebarStore } from "@/store/sidebar-store";
+import { useSidebarStore } from '@/store/sidebar-store';
 
-import { getActiveHeaderNav, type HeaderNavKey } from "./header-navigation";
+import { getActiveHeaderNav, type HeaderNavKey } from './header-navigation';
 
 type NavItem = {
   key: HeaderNavKey;
@@ -43,22 +43,27 @@ type NavItem = {
 // テーマ dropdown は下の render で 都道府県 と 統計ブログ の間に挿入する。
 const NAV_ITEMS_BEFORE_THEME: NavItem[] = [
   {
-    key: "ranking",
-    href: "/ranking",
-    label: "ランキング",
+    key: 'ranking',
+    href: '/ranking',
+    label: 'ランキング',
   },
   {
-    key: "areas",
-    href: "/areas",
-    label: "都道府県",
+    key: 'areas',
+    href: '/areas',
+    label: '都道府県',
+  },
+  {
+    key: 'municipalities',
+    href: '/municipalities',
+    label: '市区町村',
   },
 ];
 
 const NAV_ITEMS_AFTER_THEME: NavItem[] = [
   {
-    key: "blog",
-    href: "/blog",
-    label: "統計ブログ",
+    key: 'blog',
+    href: '/blog',
+    label: '統計ブログ',
   },
 ];
 
@@ -91,10 +96,10 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
   const { toggleTheme } = useTheme();
   const toggleDrawer = useSidebarStore((s) => s.toggle);
   const router = useRouter();
-  const pathname = usePathname() ?? "";
-  const [searchQuery, setSearchQuery] = useState("");
+  const pathname = usePathname() ?? '';
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategoryKey, setSelectedCategoryKey] = useState(
-    categories[0]?.categoryKey ?? "",
+    categories[0]?.categoryKey ?? ''
   );
 
   const handleSearch = useCallback(
@@ -109,17 +114,18 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
       }
       router.push(`/search?q=${encodeURIComponent(q)}`);
     },
-    [searchQuery, router],
+    [searchQuery, router]
   );
 
   const activeNav = getActiveHeaderNav(pathname);
   const selectedCategory =
-    categories.find((category) => category.categoryKey === selectedCategoryKey) ??
-    categories[0];
+    categories.find(
+      (category) => category.categoryKey === selectedCategoryKey
+    ) ?? categories[0];
 
   const handleNavClick = (label: string, href: string) => {
     try {
-      trackNavClick({ label, href, surface: "desktop-header" });
+      trackNavClick({ label, href, surface: 'desktop-header' });
     } catch {
       // analytics 失敗で遷移を止めない
     }
@@ -132,13 +138,13 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
         key={href}
         href={href}
         onClick={() => handleNavClick(label, href)}
-        aria-current={isActive ? "page" : undefined}
-        data-active={isActive ? "true" : undefined}
+        aria-current={isActive ? 'page' : undefined}
+        data-active={isActive ? 'true' : undefined}
         className={cn(
-          "relative flex h-full items-center whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors",
+          'relative flex h-full items-center whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors',
           isActive
-            ? "border-primary text-foreground"
-            : "border-transparent text-foreground/80 hover:text-foreground",
+            ? 'border-primary text-foreground'
+            : 'border-transparent text-foreground/80 hover:text-foreground'
         )}
       >
         {label}
@@ -187,13 +193,13 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
               <DropdownMenuTrigger asChild>
                 <button
                   className={cn(
-                    "flex h-full items-center gap-1 whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
-                    activeNav === "category"
-                      ? "border-primary text-foreground"
-                      : "border-transparent text-foreground/80 hover:text-foreground",
+                    'flex h-full items-center gap-1 whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+                    activeNav === 'category'
+                      ? 'border-primary text-foreground'
+                      : 'border-transparent text-foreground/80 hover:text-foreground'
                   )}
                   aria-label="カテゴリから探す"
-                  data-active={activeNav === "category" ? "true" : undefined}
+                  data-active={activeNav === 'category' ? 'true' : undefined}
                 >
                   カテゴリ
                   <ChevronDown className="h-3.5 w-3.5 opacity-70" />
@@ -211,24 +217,35 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                     </p>
                     <div className="grid grid-cols-2 pt-1">
                       {categories.map((category) => {
-                        const isSelected = category.categoryKey === selectedCategory?.categoryKey;
+                        const isSelected =
+                          category.categoryKey ===
+                          selectedCategory?.categoryKey;
                         return (
                           <Link
                             key={category.categoryKey}
                             href={`/category/${category.categoryKey}`}
-                            onMouseEnter={() => setSelectedCategoryKey(category.categoryKey)}
-                            onFocus={() => setSelectedCategoryKey(category.categoryKey)}
+                            onMouseEnter={() =>
+                              setSelectedCategoryKey(category.categoryKey)
+                            }
+                            onFocus={() =>
+                              setSelectedCategoryKey(category.categoryKey)
+                            }
                             onClick={() =>
-                              handleNavClick(category.title, `/category/${category.categoryKey}`)
+                              handleNavClick(
+                                category.title,
+                                `/category/${category.categoryKey}`
+                              )
                             }
                             className={cn(
-                              "flex min-h-10 items-center gap-2 px-2 py-1.5 text-[13px] transition-colors",
+                              'flex min-h-10 items-center gap-2 px-2 py-1.5 text-[13px] transition-colors',
                               isSelected
-                                ? "bg-accent text-accent-foreground"
-                                : "text-foreground/80 hover:bg-accent/60 hover:text-foreground",
+                                ? 'bg-accent text-accent-foreground'
+                                : 'text-foreground/80 hover:bg-accent/60 hover:text-foreground'
                             )}
                           >
-                            <span className="min-w-0 flex-1 truncate">{category.title}</span>
+                            <span className="min-w-0 flex-1 truncate">
+                              {category.title}
+                            </span>
                             <span className="text-[11px] tabular-nums text-muted-foreground">
                               {category.count}
                             </span>
@@ -241,7 +258,9 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                     {selectedCategory && (
                       <>
                         <div className="flex items-baseline justify-between border-b border-border pb-3">
-                          <p className="font-semibold text-foreground">{selectedCategory.title}</p>
+                          <p className="font-semibold text-foreground">
+                            {selectedCategory.title}
+                          </p>
                           <span className="text-xs tabular-nums text-muted-foreground">
                             {selectedCategory.count}件
                           </span>
@@ -253,10 +272,14 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                               <Link
                                 key={ranking.rankingKey}
                                 href={href}
-                                onClick={() => handleNavClick(ranking.title, href)}
+                                onClick={() =>
+                                  handleNavClick(ranking.title, href)
+                                }
                                 className="group flex min-h-11 items-center gap-2 border-b border-border py-2 text-sm text-foreground/80 hover:text-primary"
                               >
-                                <span className="min-w-0 flex-1 line-clamp-2">{ranking.title}</span>
+                                <span className="min-w-0 flex-1 line-clamp-2">
+                                  {ranking.title}
+                                </span>
                                 <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary" />
                               </Link>
                             );
@@ -267,7 +290,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                           onClick={() =>
                             handleNavClick(
                               `${selectedCategory.title}をすべて見る`,
-                              `/category/${selectedCategory.categoryKey}`,
+                              `/category/${selectedCategory.categoryKey}`
                             )
                           }
                           className="mt-4 flex items-center justify-between text-sm font-semibold text-primary hover:underline"
@@ -291,13 +314,13 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
               <DropdownMenuTrigger asChild>
                 <button
                   className={cn(
-                    "flex h-full items-center gap-1 whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
-                    activeNav === "themes"
-                      ? "border-primary text-foreground"
-                      : "border-transparent text-foreground/80 hover:text-foreground",
+                    'flex h-full items-center gap-1 whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+                    activeNav === 'themes'
+                      ? 'border-primary text-foreground'
+                      : 'border-transparent text-foreground/80 hover:text-foreground'
                   )}
                   aria-label="テーマ一覧"
-                  data-active={activeNav === "themes" ? "true" : undefined}
+                  data-active={activeNav === 'themes' ? 'true' : undefined}
                 >
                   テーマ
                   <ChevronDown className="h-3.5 w-3.5 opacity-70" />
@@ -318,10 +341,10 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                         href={href}
                         onClick={() => handleNavClick(theme.title, href)}
                         className={cn(
-                          "rounded-md px-2.5 py-2 text-sm transition-colors",
+                          'rounded-md px-2.5 py-2 text-sm transition-colors',
                           isActive
-                            ? "bg-accent text-accent-foreground"
-                            : "text-foreground/80 hover:bg-accent/60 hover:text-foreground",
+                            ? 'bg-accent text-accent-foreground'
+                            : 'text-foreground/80 hover:bg-accent/60 hover:text-foreground'
                         )}
                       >
                         <span className="truncate">{theme.title}</span>
@@ -331,7 +354,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
                 </div>
                 <Link
                   href="/themes"
-                  onClick={() => handleNavClick("すべてのテーマ", "/themes")}
+                  onClick={() => handleNavClick('すべてのテーマ', '/themes')}
                   className="mt-2 block rounded-md px-2.5 py-2 text-sm font-medium text-primary hover:bg-accent/60"
                 >
                   すべてのテーマを見る →

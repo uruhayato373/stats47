@@ -62,6 +62,7 @@ $ARGUMENTS — <wp-slug> [mode]
 | `source_stats_name` | 出典統計名 (Phase C 照合キー) |
 | `years_covered` | 対象年次 |
 | `key_insight` | 何の curiosity gap か (1 行) |
+| `evidence_lens` | `EVIDENCE_LENS_CATALOG` の候補 key。未検証は `undecided` |
 | `responsibility` | area / theme / both / undecided (Phase D で確定) |
 
 ## 実行手順
@@ -87,7 +88,8 @@ question:
     "chart_target": "prefecture (47県別) / national (全国一系列) / age (年齢構成) / time-series (年次推移) / cross-section (一時点断面) のいずれか",
     "source_stats_name": "出典統計名 (図注に書かれているもの。例: 「人口動態調査」「学校基本統計」)",
     "years_covered": "対象年次 (例: 2000-2023)",
-    "key_insight": "1 行で curiosity gap (例: 「東京 vs 北海道で44倍」「半減後 V 字回復」)"
+    "key_insight": "1 行で curiosity gap (例: 「東京 vs 北海道で44倍」「半減後 V 字回復」)",
+    "evidence_lens": "regional-access/service-capacity/participation/outcomes/mobility/composition/equity/sustainability/undecided"
   }
 ]
 プロセス・概念図・写真は除外し、定量データの可視化のみ列挙してください。
@@ -136,7 +138,7 @@ user が CLI を実行して結果 JSON を `reference/queries/<wp-slug>/*.json`
 - **応答 truncate**: 1 query で 50+ chart を要求すると応答切れる。章単位分割を厳守
 - **chart_type enum**: 現行 `theme_metrics.chart_type` は `["choropleth", "line", "pie", "bar", "ranking-table"]` のみ。白書に頻出の `pyramid` / `flow` / `scatter` 等は Phase D 拡張候補として README に集約 (本スキル段階では migration しない)
 - **出典が e-Stat 以外も多い**: OECD / 内閣府独自集計 / 民間調査 は Phase C で `external-source` ラベル付与。e-Stat に無いデータは Phase E 取込対象外
-- **本スキルは `responsibility` を確定しない**: Phase D で別途振り分け。本スキルの出力は「素材リスト」
+- **本スキルは `responsibility` と `evidence_lens` を確定しない**: 既存 lens に明確に対応する候補だけ key を付け、判断不能は `undecided`。採択は theme-designer が公式資料と内部 route を再確認して行う
 
 ## 関連
 

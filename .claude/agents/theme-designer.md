@@ -171,6 +171,11 @@ CPI→`cpi-profile`・`cpi-heatmap` / 年齢構造→`pyramid-chart` / 単一値
 pre-commit/CI の Theme Catalog Gate が弾く)。legacy (未登録) テーマのみ従来どおり IndicatorSet TS を直接編集。
 参考: `packages/data-configs/src/theme-catalog/manufacturing.ts`。規約: `.claude/rules/theme-catalog-standards.md`。
 
+採択済みの白書論点がある場合は、`theme-catalog/evidence-lenses.ts` の既存 lens/source を再利用し、
+`evidenceTopics` に 1 topic = 1 問いで追加する。新しい source は公式 HTTPS URL を確認してから登録する。
+`relatedRankingKeys` は active、`relatedChartKeys` は同じカタログ内、`relatedThemeKeys` は自己参照不可。
+白書名を第四 taxonomy や新規 route にしない。
+
 ### Step 8: 未登録指標の投入 (完全DBレス)
 
 Step 2 で発見した未登録指標:
@@ -210,6 +215,11 @@ export const <THEME>_CATALOG: ThemeCatalog = {
       componentProps: { estatParams: [/* metric source から転記 */], labels: ["..."], seriesColors: ["#3b82f6"] },
       relatedRankingKeys: ["..."], sourceName: "...", rankingLink: "/ranking/...",
       gridColumnSpan: 12, dataSource: "ranking", sortOrder: 0 },
+  ],
+  evidenceTopics: [
+    { key: "...", lensKey: "regional-access", title: "...", question: "...", summary: "...",
+      sourceKeys: ["..."], relatedRankingKeys: ["..."], relatedChartKeys: ["..."],
+      relatedThemeKeys: ["..."] },
   ],
   keywords: ["..."],
 };

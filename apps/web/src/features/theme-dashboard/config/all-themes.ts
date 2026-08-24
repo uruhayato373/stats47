@@ -15,17 +15,16 @@ import {
   REAL_INCOME_SET,
   LABOR_MOBILITY_SET,
   LOCAL_FINANCE_SET,
-  LOCAL_FINANCE_CITY_SET,
   FISHERY_MARINE_SET,
   PORTS_SET,
   RAILWAY_SET,
   ROADS_SET,
   CLIMATE_SET,
-} from "@stats47/types";
+} from '@stats47/types';
 
-import { toThemeConfig } from "../lib/to-theme-config";
+import { toThemeConfig } from '../lib/to-theme-config';
 
-import type { ThemeConfig } from "../types";
+import type { ThemeConfig } from '../types';
 
 /** テーマ表示順（IndicatorSet） */
 const THEME_SETS = [
@@ -45,7 +44,6 @@ const THEME_SETS = [
   REAL_INCOME_SET,
   LABOR_MOBILITY_SET,
   LOCAL_FINANCE_SET,
-  LOCAL_FINANCE_CITY_SET,
   FISHERY_MARINE_SET,
   PORTS_SET,
   RAILWAY_SET,
@@ -62,12 +60,12 @@ const THEME_SETS = [
  * (depopulation-medical を healthcare / aging-society の両方で使用)。
  */
 const EMBEDDED_SECTIONS: Record<string, string[]> = {
-  "population-dynamics": ["migration-flow", "commute-flow"],
-  roads: ["highway"],
-  railway: ["station-passengers"],
-  healthcare: ["depopulation-medical"],
-  "aging-society": ["depopulation-medical"],
-  climate: ["sunshine-map"],
+  'population-dynamics': ['migration-flow', 'commute-flow'],
+  roads: ['highway'],
+  railway: ['station-passengers'],
+  healthcare: ['depopulation-medical'],
+  'aging-society': ['depopulation-medical'],
+  climate: ['sunshine-map'],
   // ※ local-finance は専用 bespoke ページ (LocalFinanceDashboard) が財政フロー Sankey を
   //   自前で持つため、汎用 embeddedSections には登録しない。
 };
@@ -88,7 +86,9 @@ const MAP_VISIBLE_THEMES = new Set<string>([]);
 export const ALL_THEMES: ThemeConfig[] = THEME_SETS.map((set) => {
   const config = toThemeConfig(set);
   const embeddedSections = EMBEDDED_SECTIONS[config.themeKey];
-  const withEmbedded = embeddedSections ? { ...config, embeddedSections } : config;
+  const withEmbedded = embeddedSections
+    ? { ...config, embeddedSections }
+    : config;
   const hideMap = !MAP_VISIBLE_THEMES.has(config.themeKey);
   return hideMap ? { ...withEmbedded, hideMap: true } : withEmbedded;
 });

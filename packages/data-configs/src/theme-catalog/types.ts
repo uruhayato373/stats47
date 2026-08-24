@@ -20,6 +20,8 @@ import type {
   IndicatorSetUsage,
 } from "@stats47/types";
 
+import type { EvidenceLensKey, EvidenceSourceKey } from "./evidence-lenses";
+
 /**
  * テーマページ (`/themes/*`) で有効な componentType の文字列 union。
  *
@@ -128,6 +130,29 @@ export interface CatalogMetricGroup {
   defaultCheckedKeys: string[];
 }
 
+export interface CatalogEvidenceTopic {
+  /** kebab-case。テーマ内で一意。計測 label と section anchor に使う。 */
+  key: string;
+  /** 横断的な読み方。evidence-lenses.ts の登録値だけを使う。 */
+  lensKey: EvidenceLensKey;
+  /** テーマ固有の論点名。 */
+  title: string;
+  /** 読者がデータへ尋ねる問い。 */
+  question: string;
+  /** 指標をどう読み分けるかの短い説明。資料本文の転載はしない。 */
+  summary: string;
+  /** 根拠にした白書・報告書・統計要覧。 */
+  sourceKeys: EvidenceSourceKey[];
+  /** 論点から直接たどれるランキング。ThemeCatalog.metrics 外も許容する。 */
+  relatedRankingKeys?: string[];
+  /** 同じテーマ内で論点を可視化する componentKey。 */
+  relatedChartKeys?: string[];
+  /** 論点を別の主語から深掘りできるテーマ。 */
+  relatedThemeKeys?: string[];
+  /** 関連記事一覧へ接続する tag key。 */
+  relatedArticleTagKeys?: string[];
+}
+
 /**
  * 単位を「同じ Y 軸に載せてよいか」の判定キーへ正規化する。
  *
@@ -161,6 +186,8 @@ export interface ThemeCatalog {
    * 1 グループ内の相異なる単位は 2 種まで (チャートの Y 軸が左右 2 本のため。validator error)。
    */
   metricGroups?: CatalogMetricGroup[];
+  /** 白書等の論点を指標・チャート・周遊導線へ接続する Theme 従属メタデータ。 */
+  evidenceTopics?: CatalogEvidenceTopic[];
   /** SEO キーワード */
   keywords?: string[];
   /** 関連記事のタグキー */

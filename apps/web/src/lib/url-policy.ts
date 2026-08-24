@@ -16,22 +16,26 @@
  *   リダイレクト先が unknown なら直接 410（301→410 チェーン回避）
  */
 
-import { lookupArea } from "@stats47/area";
+import { lookupArea } from '@stats47/area';
+import {
+  KNOWN_MUNICIPALITY_RANKING_KEYS,
+  KNOWN_MUNICIPALITY_THEME_SLUGS,
+} from '@stats47/data-configs/geo-scope';
 
-import { PHASE_1_SSG_CITIES } from "@/features/area-profile/constants/stage-1-cities";
+import { PHASE_1_SSG_CITIES } from '@/features/area-profile/constants/stage-1-cities';
 
-import { GONE_BLOG_SLUGS } from "@/config/gone-blog-slugs";
-import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
-import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
-import { INDEXABLE_RANKING_KEYS } from "@/config/indexable-ranking-keys";
-import { KNOWN_JAPAN_SLUGS } from "@/config/known-japan-slugs";
-import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
-import { KNOWN_TAG_KEYS } from "@/config/known-tag-keys";
-import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
-import { LEGACY_CATEGORY_KEYS_SET } from "@/config/legacy-category-keys";
-import { SITEMAP_BLOG_ENTRIES } from "@/config/sitemap-blog-entries";
-import { SITEMAP_RANKING_KEYS } from "@/config/sitemap-ranking-keys";
-import { UNPUBLISHED_BLOG_SLUGS } from "@/config/unpublished-blog-slugs";
+import { GONE_BLOG_SLUGS } from '@/config/gone-blog-slugs';
+import { GONE_RANKING_KEYS } from '@/config/gone-ranking-keys';
+import { GONE_TAG_KEYS } from '@/config/gone-tag-keys';
+import { INDEXABLE_RANKING_KEYS } from '@/config/indexable-ranking-keys';
+import { KNOWN_JAPAN_SLUGS } from '@/config/known-japan-slugs';
+import { KNOWN_RANKING_KEYS } from '@/config/known-ranking-keys';
+import { KNOWN_TAG_KEYS } from '@/config/known-tag-keys';
+import { KNOWN_THEME_SLUGS } from '@/config/known-theme-slugs';
+import { LEGACY_CATEGORY_KEYS_SET } from '@/config/legacy-category-keys';
+import { SITEMAP_BLOG_ENTRIES } from '@/config/sitemap-blog-entries';
+import { SITEMAP_RANKING_KEYS } from '@/config/sitemap-ranking-keys';
+import { UNPUBLISHED_BLOG_SLUGS } from '@/config/unpublished-blog-slugs';
 
 /** tag page と sitemap が共有する thin-content 閾値。 */
 export const MIN_INDEXABLE_TAG_ARTICLES = 5;
@@ -46,40 +50,42 @@ export const MIN_INDEXABLE_TAG_ARTICLES = 5;
  *   city-category は municipality×category で規模が大きいため population/economy 維持。
  */
 export const INDEXABLE_AREA_CATEGORIES = [
-  "population",
-  "economy",
-  "laborwage",
-  "construction",
-  "landweather",
-  "socialsecurity",
-  "energy",
-  "tourism",
-  "administrativefinancial",
-  "agriculture",
-  "commercial",
-  "educationsports",
-  "ict",
-  "infrastructure",
-  "international",
-  "miningindustry",
-  "safetyenvironment",
+  'population',
+  'economy',
+  'laborwage',
+  'construction',
+  'landweather',
+  'socialsecurity',
+  'energy',
+  'tourism',
+  'administrativefinancial',
+  'agriculture',
+  'commercial',
+  'educationsports',
+  'ict',
+  'infrastructure',
+  'international',
+  'miningindustry',
+  'safetyenvironment',
 ] as const;
 
 const INDEXABLE_AREA_CATEGORIES_SET = new Set<string>(
-  INDEXABLE_AREA_CATEGORIES,
+  INDEXABLE_AREA_CATEGORIES
 );
 
 /**
  * city-category (/areas/{pref}/cities/{city}/{cat}) のインデックス対象。
  * municipality × category は規模が大きいため population/economy に限定維持（2026-06-01 決定）。
  */
-const INDEXABLE_CITY_CATEGORIES = ["population", "economy"] as const;
-const INDEXABLE_CITY_CATEGORIES_SET = new Set<string>(INDEXABLE_CITY_CATEGORIES);
+const INDEXABLE_CITY_CATEGORIES = ['population', 'economy'] as const;
+const INDEXABLE_CITY_CATEGORIES_SET = new Set<string>(
+  INDEXABLE_CITY_CATEGORIES
+);
 const INDEXABLE_CITY_PATHS_SET = new Set(
-  PHASE_1_SSG_CITIES.map(({ areaCode, cityCode }) => `${areaCode}:${cityCode}`),
+  PHASE_1_SSG_CITIES.map(({ areaCode, cityCode }) => `${areaCode}:${cityCode}`)
 );
 const KNOWN_PUBLISHED_BLOG_SLUGS = new Set(
-  SITEMAP_BLOG_ENTRIES.map(({ slug }) => slug),
+  SITEMAP_BLOG_ENTRIES.map(({ slug }) => slug)
 );
 
 /**
@@ -88,15 +94,15 @@ const KNOWN_PUBLISHED_BLOG_SLUGS = new Set(
  */
 function prefectureCodeForCity(cityCode: string): string | null {
   const city = lookupArea(cityCode);
-  if (!city || city.areaType !== "city") return null;
+  if (!city || city.areaType !== 'city') return null;
 
   const parent = lookupArea(city.parentAreaCode);
   if (!parent) return null;
-  if (parent.areaType === "prefecture") return parent.areaCode;
-  if (parent.areaType !== "city") return null;
+  if (parent.areaType === 'prefecture') return parent.areaCode;
+  if (parent.areaType !== 'city') return null;
 
   const prefecture = lookupArea(parent.parentAreaCode);
-  return prefecture?.areaType === "prefecture" ? prefecture.areaCode : null;
+  return prefecture?.areaType === 'prefecture' ? prefecture.areaCode : null;
 }
 
 /**
@@ -107,7 +113,7 @@ export function isValidPrefCode(code: string): boolean {
   if (!/^\d{5}$/.test(code)) return false;
   const prefNum = parseInt(code.slice(0, 2), 10);
   const suffix = code.slice(2);
-  return prefNum >= 1 && prefNum <= 47 && suffix === "000";
+  return prefNum >= 1 && prefNum <= 47 && suffix === '000';
 }
 
 export const UrlPolicy = {
@@ -175,6 +181,12 @@ export const UrlPolicy = {
    */
   japan: {
     isKnown: (slug: string): boolean => KNOWN_JAPAN_SLUGS.has(slug),
+  },
+  municipality: {
+    isKnownTheme: (slug: string): boolean =>
+      KNOWN_MUNICIPALITY_THEME_SLUGS.has(slug),
+    isKnownRanking: (key: string): boolean =>
+      KNOWN_MUNICIPALITY_RANKING_KEYS.has(key),
   },
   blog: {
     isKnownPublished: (slug: string): boolean =>

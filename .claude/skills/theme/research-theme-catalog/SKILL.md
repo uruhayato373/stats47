@@ -1,6 +1,6 @@
 ---
 name: research-theme-catalog
-description: テーマページ (/themes/*) の指標×チャート候補を白書 (NotebookLM)・Web 競合・GSC 検索需要から調査し、provenance 付きの提案を指標バックログに書き出す。theme-researcher が実行。新規テーマの立ち上げ調査や既存テーマの指標拡充検討に使う。
+description: テーマページ (/themes/*) の指標×チャート候補と白書由来の論点レンズを NotebookLM・Web競合・GSCから調査し、provenance付きで提案する。theme-researcher が実行。
 primary_agent: theme-researcher
 allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch
 ---
@@ -49,7 +49,7 @@ cat .claude/skills/theme/research-theme-catalog/reference/notebooks.md
 # 対象テーマの白書に問う (引用付き回答だけ受領・PDF はコンテキストに載せない)
 node .claude/scripts/notebooklm-cross-query.mjs \
   --notebooks "<対象白書ノートブック名>" \
-  "<theme> の地域差・都道府県間格差を示す統計指標と、その根拠データを列挙してください。出典の統計名も。"
+  "<theme> の地域差を示す統計指標に加え、政策上の問い、対象集団、供給・アクセス・参加・成果等の論点を列挙してください。各項目に引用と出典統計名を付けてください。"
 ```
 
 - 対象テーマの白書が**未登録**なら `notebooklm-notebook-builder.mjs find-or-create` で作成し、
@@ -87,10 +87,18 @@ grep -iE "<theme 関連語>" .claude/todo/backlog.md
   - statsDataId は分かるが確信が持てない → `要呼び元検証(statsDataId=X)` (呼び元が最終確定)
   - e-Stat に不在 / statsDataId すら不明 (`❌不在`) → **不採用** (rejectedCandidates 行き)
 
+論点レンズ候補は `theme-catalog/evidence-lenses.ts` の既存 lens/source を先に照合する。新規 source 候補は
+省庁等の公式 HTTPS URL を実際に開いて確認し、関連 ranking / theme / tag はコード上の実在 route だけを残す。
+NotebookLM の引用だけ、または内部導線が 0 件の候補は採用推奨にしない。
+
 ## Stage 3: 統合・提案
 
 `.claude/todo/backlog.md` の7列候補表へ、実在確認に合格した候補だけを追加する。フォーマットは
 `.claude/agents/theme-researcher.md` の「提案の出力先フォーマット」に従う。不採用・unknown・重複候補は追加しない。
+
+論点レンズ候補は `Lens | Question | Official source | Related routes | Verdict` の table-only で呼び出し元へ返す。
+候補のまま永続化せず、採択後に theme-designer が `EVIDENCE_SOURCE_CATALOG` と
+`ThemeCatalog.evidenceTopics` へ反映する。
 
 ## ★ 呼び元の受け入れ検証 (捏造を機械的に弾く・書き込み前に必須)
 
@@ -113,6 +121,11 @@ theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一
      + THEME_CATALOGS 登録 + npm run generate:catalog + validate:catalog
   → theme-component-builder が componentProps (estatParams 等) を詳細化
   → data-ingester が未登録指標を e-Stat → R2 投入
+
+論点レンズ候補 (chat table)
+  → theme-designer が公式 source / route を再確認
+  → evidence-lenses.ts + ThemeCatalog.evidenceTopics
+  → validate:catalog → ThemeEvidenceTopicsSection → nav_surface=theme_evidence
 ```
 
 ## モデル役割分担 (トークン節約)

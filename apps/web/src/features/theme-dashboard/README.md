@@ -29,7 +29,7 @@ Related canon:
 ## Page Shell / Navigation
 
 `ThemePageLayout` owns the shell. Page components (`app/themes/[themeSlug]`, `app/areas/[areaCode]/[themeSlug]`,
-`app/themes/local-finance/cities`) render it directly and must **not** wrap it in another `PageShell`.
+`app/themes/local-finance/page.tsx`) render it directly and must **not** wrap it in another `PageShell`.
 
 ```
 ThemePrefectureProvider          ← prefecture state (URL + Cookie sync)
@@ -84,6 +84,10 @@ npm run export:page-components --workspace apps/web
 ```
 
 Production reflection should go through CI / snapshot workflows. Local R2 writes are not the default path. After reflection, ISR / R2 reader cache may delay rendering updates; purge CDN only when an outward-facing confirmation requires it.
+
+`npm run dev` では R2 開発ゲートウェイが、この git SSOT 配下の `app/page-components/*`
+だけをローカル優先で配信する。画像と観測値は従来どおり R2 から読むため、カタログ生成後は
+R2 push や本番デプロイなしでチャート構成を確認できる。
 
 ## Backlog
 

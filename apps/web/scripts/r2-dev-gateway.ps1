@@ -6,6 +6,10 @@ param(
   [ValidateRange(1, 65535)]
   [int]$Port = 4777,
   [string]$UpstreamBase = "https://storage.stats47.jp",
+  # git SSOT の page-components は、開発中の変更を本番 R2 より優先する。
+  [string]$LocalOverrideRoot = "",
+  # generator が作るローカル R2 派生物を本番 R2 より優先する。
+  [string]$LocalR2Root = "",
   # dev セッション中は同じ R2 オブジェクトを何度も読む。0 で無効。
   [ValidateRange(0, 86400)]
   [int]$CacheSeconds = 300
@@ -18,6 +22,22 @@ Add-Type -AssemblyName System.Net.Http
 $upstreamUri = [Uri]$UpstreamBase
 if ($upstreamUri.Scheme -ne "https" -or -not $upstreamUri.IsAbsoluteUri) {
   throw "UpstreamBase は絶対 HTTPS URL にしてください"
+}
+
+$localOverrideBase = $null
+if ($LocalOverrideRoot) {
+  $localOverrideBase = [IO.Path]::GetFullPath($LocalOverrideRoot).TrimEnd(
+    [IO.Path]::DirectorySeparatorChar,
+    [IO.Path]::AltDirectorySeparatorChar
+  )
+}
+
+$localR2Base = $null
+if ($LocalR2Root) {
+  $localR2Base = [IO.Path]::GetFullPath($LocalR2Root).TrimEnd(
+    [IO.Path]::DirectorySeparatorChar,
+    [IO.Path]::AltDirectorySeparatorChar
+  )
 }
 
 $allowedMethods = @("GET", "HEAD")
@@ -100,6 +120,57 @@ function Write-TextResponse {
   $Response.OutputStream.Write($bytes, 0, $bytes.Length)
 }
 
+function Resolve-LocalOverrideFile {
+  param([string]$Key)
+
+  if ($localR2Base -and $Key.StartsWith("app/municipalities/", [StringComparison]::Ordinal)) {
+    $r2RelativePath = $Key.Replace(
+      [IO.Path]::AltDirectorySeparatorChar,
+      [IO.Path]::DirectorySeparatorChar
+    )
+    $r2Candidate = [IO.Path]::GetFullPath((Join-Path $localR2Base $r2RelativePath))
+    $r2RootPrefix = $localR2Base + [IO.Path]::DirectorySeparatorChar
+    if (-not $r2Candidate.StartsWith($r2RootPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+      return $null
+    }
+    if (Test-Path -LiteralPath $r2Candidate -PathType Leaf) { return $r2Candidate }
+  }
+
+  if (-not $localOverrideBase) { return $null }
+  $prefix = "app/page-components/"
+  if (-not $Key.StartsWith($prefix, [StringComparison]::Ordinal)) { return $null }
+
+  $relativePath = $Key.Substring($prefix.Length).Replace(
+    [IO.Path]::AltDirectorySeparatorChar,
+    [IO.Path]::DirectorySeparatorChar
+  )
+  $candidate = [IO.Path]::GetFullPath((Join-Path $localOverrideBase $relativePath))
+  $rootPrefix = $localOverrideBase + [IO.Path]::DirectorySeparatorChar
+  if (-not $candidate.StartsWith($rootPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+    return $null
+  }
+  if (Test-Path -LiteralPath $candidate -PathType Leaf) { return $candidate }
+  return $null
+}
+
+function Write-LocalFileResponse {
+  param(
+    [System.Net.HttpListenerRequest]$Request,
+    [System.Net.HttpListenerResponse]$Response,
+    [string]$FilePath
+  )
+
+  $bytes = [IO.File]::ReadAllBytes($FilePath)
+  $Response.StatusCode = 200
+  $Response.ContentType = "application/json; charset=utf-8"
+  $Response.Headers["Cache-Control"] = "no-store"
+  $Response.Headers["X-R2-Dev-Source"] = "local-override"
+  $Response.ContentLength64 = $bytes.Length
+  if ($Request.HttpMethod -eq "GET") {
+    $Response.OutputStream.Write($bytes, 0, $bytes.Length)
+  }
+}
+
 function Copy-ResponseHeader {
   param(
     [System.Net.Http.HttpResponseMessage]$Source,
@@ -149,6 +220,12 @@ try {
       $hasUnsafeSegment = $segments | Where-Object { $_ -eq "." -or $_ -eq ".." }
       if (-not $key -or $key.Contains("\") -or $key.Contains([char]0) -or $hasUnsafeSegment) {
         Write-TextResponse -Response $response -StatusCode 400 -Text "Invalid R2 key"
+        continue
+      }
+
+      $localFile = Resolve-LocalOverrideFile -Key $key
+      if ($localFile) {
+        Write-LocalFileResponse -Request $request -Response $response -FilePath $localFile
         continue
       }
       $cacheable = Test-Cacheable -Request $request

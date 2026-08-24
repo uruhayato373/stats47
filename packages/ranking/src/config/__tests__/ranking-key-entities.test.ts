@@ -13,16 +13,17 @@
  * したがって固定するのは「city / port / migration-flow 専用 metric は /ranking を持たない」。
  * これを持たせたくなったら、上の 3 箇所すべてと本テストを同時に変える。
  */
-import { describe, expect, it } from "vitest";
-import { listAllMetrics } from "@stats47/data-configs";
-import { KNOWN_RANKING_KEYS } from "../known-ranking-keys";
+import { describe, expect, it } from 'vitest';
+import { listAllMetrics } from '@stats47/data-configs';
+import { KNOWN_MUNICIPALITY_RANKING_KEYS } from '@stats47/data-configs/geo-scope';
+import { KNOWN_RANKING_KEYS } from '../known-ranking-keys';
 
 const allMetrics = listAllMetrics();
 const hasPrefecture = (m: { entities?: readonly string[] }) =>
-  m.entities?.includes("prefecture") ?? false;
+  m.entities?.includes('prefecture') ?? false;
 
-describe("ranking key と metric entities の境界", () => {
-  it("KNOWN_RANKING_KEYS は prefecture を持つ metric だけで構成される", () => {
+describe('ranking key と metric entities の境界', () => {
+  it('KNOWN_RANKING_KEYS は prefecture を持つ metric だけで構成される', () => {
     const configByKey = new Map(allMetrics.map((m) => [m.key, m]));
     const offenders = [...KNOWN_RANKING_KEYS].filter((key) => {
       const config = configByKey.get(key);
@@ -32,17 +33,33 @@ describe("ranking key と metric entities の境界", () => {
     expect(offenders).toEqual([]);
   });
 
-  it("prefecture を持たない active metric は KNOWN に載らない", () => {
-    const nonPrefectureActive = allMetrics.filter((m) => m.isActive && !hasPrefecture(m));
+  it('prefecture を持たない active metric は KNOWN に載らない', () => {
+    const nonPrefectureActive = allMetrics.filter(
+      (m) => m.isActive && !hasPrefecture(m)
+    );
     // 実測 29 件 (city 19 / port 9 / migration-flow 1)。0 件になったらこの検査は無意味なので、
     // 「そもそも対象が存在する」ことも一緒に固定する (母集団ごと消えた緑を合格と誤読しない)。
     expect(nonPrefectureActive.length).toBeGreaterThan(0);
-    expect(nonPrefectureActive.filter((m) => KNOWN_RANKING_KEYS.has(m.key)).map((m) => m.key)).toEqual(
-      [],
-    );
+    expect(
+      nonPrefectureActive
+        .filter((m) => KNOWN_RANKING_KEYS.has(m.key))
+        .map((m) => m.key)
+    ).toEqual([]);
   });
 
-  it("KNOWN は空ではない (生成スクリプトが全件落としたのを緑にしない)", () => {
+  it('KNOWN は空ではない (生成スクリプトが全件落としたのを緑にしない)', () => {
     expect(KNOWN_RANKING_KEYS.size).toBeGreaterThan(1000);
+  });
+
+  it('県rankingと市区町村rankingのknown集合を混在させない', () => {
+    expect(KNOWN_RANKING_KEYS.has('elderly-population-ratio')).toBe(false);
+    expect(
+      KNOWN_MUNICIPALITY_RANKING_KEYS.has('elderly-population-ratio')
+    ).toBe(true);
+    expect(
+      [...KNOWN_MUNICIPALITY_RANKING_KEYS].filter((key) =>
+        KNOWN_RANKING_KEYS.has(key)
+      )
+    ).toEqual([]);
   });
 });

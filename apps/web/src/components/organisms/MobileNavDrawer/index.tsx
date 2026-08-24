@@ -14,7 +14,7 @@ import { NAV_THEMES } from "@/features/theme-dashboard/config/theme-urls";
 import { MobileNavDrawerClient } from "./MobileNavDrawerClient";
 
 export function MobileNavDrawer() {
-  // local-finance-city はグローバルナビから除外 (config/theme-urls.ts)。
+  // 市区町村統計はテーマ一覧とは別の専用ナビで表示する。
   const themes = NAV_THEMES.map((t) => ({ themeKey: t.themeKey, title: t.title }));
 
   return <MobileNavDrawerClient themes={themes} />;

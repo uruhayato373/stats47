@@ -40,6 +40,7 @@ import {
 import { PrefectureSelect } from "./PrefectureSelect";
 import { ThemeAreaHeader } from "./ThemeAreaHeader";
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
+import { ThemeEvidenceTopicsSection } from "./ThemeEvidenceTopicsSection";
 import { ThemeHero } from "./ThemeHero";
 import { ThemeIndicatorCatalogSection } from "./ThemeIndicatorCatalogSection";
 import { ThemePrefectureProvider } from "./ThemePrefectureContext";
@@ -59,7 +60,7 @@ interface Props {
   initialPrefecture?: { areaCode: string; areaName: string } | null;
   /**
    * パンくず直下に差し込むページ固有のコントロール
-   * （local-finance/cities の「都道府県 / 市区町村」切替など）。
+   * （テーマ固有の補助ナビゲーションなど）。
    */
   toolbar?: ReactNode;
 }
@@ -209,7 +210,7 @@ export async function ThemePageLayout({
       {THEME_HEROES[theme.themeKey] ? (
         <ThemeHero themeTitle={theme.title} hero={THEME_HEROES[theme.themeKey]} />
       ) : (
-        <ThemeAreaHeader themeTitle={theme.title} description={theme.description} />
+        <ThemeAreaHeader themeTitle={theme.title} />
       )}
 
       {areaContext && areaHighlights.length > 0 && (
@@ -289,6 +290,8 @@ export async function ThemePageLayout({
           </>
         );
       })()}
+
+      <ThemeEvidenceTopicsSection themeKey={theme.themeKey} />
 
       {/* このテーマの全指標 (context 指標・選定根拠を含む完全一覧) */}
       <ThemeIndicatorCatalogSection themeKey={theme.themeKey} />

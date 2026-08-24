@@ -25,7 +25,7 @@
 | tourism | 観光白書 | 観光庁 |
 | local-economy / local-finance | 地方財政白書 | 総務省 |
 | safety | 犯罪白書 / 交通安全白書 / 防災白書 | 法務省/内閣府 |
-| education-culture | 文部科学白書 | 文科省 |
+| education-culture | 文部科学白書（公式資料は evidence source 登録済／NotebookLM ID 未登録） | 文科省 |
 | consumer-prices / real-income | 経済財政白書 / 消費者白書 | 内閣府/消費者庁 |
 | fishery-marine | 水産白書 | 水産庁 |
 | foreign-residents | 出入国在留管理 / 多文化共生 関連 | 出入国在留管理庁/総務省 |

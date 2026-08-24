@@ -19,7 +19,7 @@ import type { Metadata } from "next";
  * 旧: 17 個の静的 `app/themes/<key>/page.tsx` ハードコード
  * 新: 1 個の動的 `[themeSlug]/page.tsx` で全テーマを生成
  *
- * 例外: `themes/local-finance/page.tsx` と `themes/local-finance/cities/page.tsx`
+ * 例外: `themes/local-finance/page.tsx`
  * は都道府県/市区町村切替 UI を持つため static のまま維持。
  * Next.js のルート優先順位 (static > dynamic) で正しく解決される。
  *

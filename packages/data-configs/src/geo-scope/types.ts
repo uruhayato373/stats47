@@ -6,14 +6,40 @@
  * 自由記述の真偽値 (例: `hasNational: boolean`) を増やさず、この型だけを正とする。
  */
 export type JapanAvailability =
-  | { status: "official" }
-  | { status: "derived-additive"; recipeKey: string }
-  | { status: "derived-ratio"; recipeKey: string }
-  | { status: "unsupported"; reason: string }
-  | { status: "unknown" };
+  | { status: 'official' }
+  | { status: 'derived-additive'; recipeKey: string }
+  | { status: 'derived-ratio'; recipeKey: string }
+  | { status: 'unsupported'; reason: string }
+  | { status: 'unknown' };
+
+/** URL・UIが扱う統計上の主語。storage側の `EntityKind` とは分離する。 */
+export type StatisticsScope =
+  | { kind: 'prefecture-set' }
+  | { kind: 'prefecture'; prefectureCode: string }
+  | {
+      kind: 'municipality-set';
+      prefectureCode?: string;
+      peerGroup?: string;
+    }
+  | {
+      kind: 'municipality';
+      municipalityCode: string;
+      prefectureCode: string;
+    }
+  | { kind: 'japan' }
+  | { kind: 'world' };
+
+export function isMunicipalityStatisticsScope(
+  scope: StatisticsScope
+): scope is Extract<
+  StatisticsScope,
+  { kind: 'municipality-set' | 'municipality' }
+> {
+  return scope.kind === 'municipality-set' || scope.kind === 'municipality';
+}
 
 /** e-Stat の全国行 areaCode。 */
-export const JAPAN_NATIONAL_AREA_CODE = "00000";
+export const JAPAN_NATIONAL_AREA_CODE = '00000';
 
 /** 都道府県コード (01000〜47000)。 */
 export const PREFECTURE_AREA_CODE_RE = /^(0[1-9]|[1-3][0-9]|4[0-7])000$/;

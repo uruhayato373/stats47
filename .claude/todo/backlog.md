@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-20
+updated: 2026-08-24
 ---
 
 # バックログ (タスクマスタ)
@@ -20,6 +20,31 @@ updated: 2026-08-20
 ```
 
 ## 🔴 高 — 今月中に着手したい
+
+### [THEME-EVIDENCE-LENS-ROLLOUT-01] 白書論点レンズをテーマ横断で段階展開する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-08-24] [期日:2026-08-31]
+
+- **owner**: `theme-researcher → theme-designer → theme-component-builder`。観測は GA4 `nav_surface=theme_evidence`。
+- **実装済み基盤**: `evidence-lenses.ts` の lens/source SSOT、`ThemeCatalog.evidenceTopics`、
+  source/ranking/chart/theme/tag validator、`ThemeEvidenceTopicsSection`、教育・文化の2論点、クリック計測。
+  教育・文化は可視化パイロットとして、施設指標を学校/文化の2群へ分割し、重複する独立推移2件を削除、
+  高等教育2系列を比較チャートへ統合済み。開発ゲートウェイはgit管理のpage-componentsをローカル優先し、
+  生成直後の配置をR2 pushなしで確認できる。
+- **次**: 白書台帳に登録済みのテーマから2〜3件ずつ `/research-theme-catalog <theme-key>` を実行する。
+  NotebookLM は引用付き候補抽出だけに使い、公式HTTPS URLと実在routeを確認できた候補だけ
+  theme-designerが採択する。文部科学白書は公式source登録済みだがNotebookLM ID未登録なので、
+  別PCで `find-or-create` / `add-source` 後に台帳へ実IDを記録する。
+- **展開順**: (1) 登録済みNotebookのあるテーマ、(2) GSC流入のあるテーマ、(3) 残り。
+  1テーマ1〜3論点を上限とし、同じ問い・説明・リンク集合を横展開しない。
+- **計測**: 公開後56日で `theme_evidence` のtopic別クリック、遷移先、ページ回遊を確認する。
+  外部白書リンクは内部CTRへ混ぜない。効果判定前にGA4 dimension台帳を確認する。
+- **完了条件**: 適用可能な各ThemeCatalogが、公式sourceと1件以上の内部routeを持つ採択済み論点、
+  または「白書で県別に検証できる論点なし」の明示判定を持ち、catalog/type/test/docs gateが全て通る。
+- **停止条件**: NotebookLMのみの根拠、推測URL、inactive ranking、他テーマのchart key、内部route 0、
+  白書名を第四taxonomy/新規URLにする案は採択せず停止する。
+- **Claude Code Sonnet指示**: 「`THEME-EVIDENCE-LENS-ROLLOUT-01` の次テーマ1件だけを処理。
+  research-theme-catalogの実証ゲートに従い、公式資料とrouteを検証してからThemeCatalogへ反映。
+  validate:catalog、対象test、web type-checkを通し、カードの次テーマだけ更新。デプロイしない。」
 
 ### [ASP-CONTINUITY-01] afb の承認追跡と広告コード取得 (オーナーのログインが要る分)
 タグ: [収益化] [種類:改善] [実行:ユーザー] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-07-28]
@@ -443,11 +468,26 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `packages/data-configs/src/unit/` / `packages/data-configs/src/color-scheme-policy.ts`
 
 ### [MUNICIPALITY-SCOPE-SEPARATION-01] 市区町村テーマ・ランキングを独立した地理スコープへ分離する
-タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run docs:check] [起票:2026-08-20]
+タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run validate:municipalities --workspace=@stats47/data-configs] [起票:2026-08-20]
 
 - **owner**: Claude Code Sonnet 5 high（1 session = 1 work package、writerは同時に1体）
-- **再開ポインタ**: `nextWorkPackage=WP1` / `lastCompleted=WP0` (2026-08-21)。WPのgateを満たした場合だけ更新する。
+- **再開ポインタ**: `nextWorkPackage=WP7-remote-release` / `lastCompleted=WP6-local` (2026-08-24)。WPのgateを満たした場合だけ更新する。
   完了した作業の長文ログは残さず、変更path、検証、未検証、次の一手を3〜6行で追記する。
+- **WP1 完了 (2026-08-24)**: `packages/area/src/municipalities/` と
+  `packages/data-configs/src/geo-scope/{types,municipality-catalog}.ts` にscope・entity policy・公開判断SSOTを追加した。
+  現行マスタ1,913行から公開候補1,718、行政区除外194、`13100 特別区部`集約除外1を決定的に導出する。
+  active city metric 184件は全件availability理由を持ち、監査済みpilot 1件だけをpublishedにした。
+- **WP2〜WP6 ローカル完了 (2026-08-24)**: 専用R2 namespace、hub/theme/ranking、検索・県filter・50件paging、
+  city profile相互導線、known/410/redirect/sitemap/navigationを実装。対象93 test、lint、全25 package type-check、web buildはgreen。
+  `elderly-population-ratio` は2020年1,717有効値。分母人口0の双葉町0%をvaluePolicyで欠測相当へ除外した。
+- **WP5 blocked**: 個別東京23特別区の観測値が現R2/masterに無いため地方財政はdraft。県theme一覧から旧city themeを除き、
+  市区町村hubへ監査中表示と一時転送を置いた。推測値・行政区混入・0埋めは行わない。
+- **WP7 preflight**: remoteは両keyとも404。upload候補は`item.json` 490B sha256 `0b576fc2…fb08`、
+  `values.json` 182,591B sha256 `b4f763b3…da3d`。rollback prefixは`app/municipalities/ranking/elderly-population-ratio/`全削除。
+  `sync-snapshots` の `municipality-ranking` task、専用prefix push、公開後schema verifierへ接続済み。
+  次はowner承認後にremote R2 write、git push/PR/deployを一回で実行し、本番smokeと28日/56日計測を開始する。
+  pilot公開日を2026-08-24とし、28日判定は2026-09-21、56日判定は2026-10-19。GSCの表示回数・クリック、
+  GA4のlanding/engagement/市区町村導線eventをprefecture既存ページと混在させず専用URL prefixで比較する。
 - **WP0 完了 (2026-08-21)**: read-only 棚卸しを機械化した。
   生成器 `.claude/scripts/municipalities/build-wp0-inventory.ts` /
   出力 `.claude/state/municipalities/{wp0-inventory.json,LATEST.md}`。コード・R2・URL は未変更。
