@@ -336,10 +336,10 @@
   },
   "theme": {
     "themes": 20,
-    "charts": 113,
-    "applicableCharts": 89,
+    "charts": 110,
+    "applicableCharts": 86,
     "byStatus": {
-      "resolved": 89,
+      "resolved": 86,
       "unresolved": 0,
       "not-applicable": 24,
       "missing-lineage": 0

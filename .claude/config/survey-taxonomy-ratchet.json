@@ -6,7 +6,7 @@
     "minActiveCoveragePct": 88.91
   },
   "theme": {
-    "minResolvedCharts": 89,
+    "minResolvedCharts": 86,
     "minCoveragePct": 100,
     "maxMissingLineageCharts": 0
   },
