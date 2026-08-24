@@ -1,34 +1,34 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-23T22:09:26.484Z",
-  "stage": "monitor",
-  "status": "fail",
-  "measurementWeek": "2026-W33",
+  "generatedAt": "2026-08-24T11:14:07.386Z",
+  "stage": "monthly",
+  "status": "warn",
+  "measurementWeek": "2026-W34",
   "expectedCompletedWeek": "2026-W34",
-  "expectedPlanWeek": "2026-W34",
+  "expectedPlanWeek": "2026-W35",
   "currentMonth": "2026-08",
   "summary": {
-    "pass": 10,
+    "pass": 11,
     "warn": 1,
-    "fail": 2
+    "fail": 0
   },
   "checks": [
     {
       "code": "snapshot-period",
       "level": "pass",
-      "detail": "2026-W33 finalized7d coverage complete",
+      "detail": "2026-W34 finalized7d coverage complete",
       "action": null
     },
     {
       "code": "snapshot-freshness",
-      "level": "fail",
-      "detail": "latest=2026-W33, expected>=2026-W34",
-      "action": "npm run fetch-gsc-snapshot -- 2026-W34"
+      "level": "pass",
+      "detail": "latest=2026-W34, expected>=2026-W34",
+      "action": null
     },
     {
       "code": "effect-verdict",
       "level": "pass",
-      "detail": "2026-W33 verdict 7件を記録済み",
+      "detail": "2026-W34 verdict 7件を記録済み",
       "action": null
     },
     {
@@ -46,37 +46,31 @@
     {
       "code": "search-growth-freshness",
       "level": "pass",
-      "detail": "week=2026-W33, age=8d",
+      "detail": "week=2026-W35, age=0d",
       "action": null
     },
     {
       "code": "search-growth-sources",
-      "level": "fail",
-      "detail": "stale/missing: inspection",
-      "action": "npm run search-growth:collect && npm run search-growth:all"
+      "level": "pass",
+      "detail": "gsc/coverage/inspection は利用可能",
+      "action": null
     },
     {
       "code": "search-growth-decision",
       "level": "pass",
-      "detail": "証拠不足または候補0のため判断を強制しない",
+      "detail": "2026-W34 の承認/却下 1件（必要 1件以上）",
       "action": null
     },
     {
       "code": "url-inspection-freshness",
       "level": "pass",
-      "detail": "latest=2026-08-21, age=3d",
+      "detail": "latest=2026-08-23, age=1d",
       "action": null
     },
     {
       "code": "weekly-review",
       "level": "pass",
-      "detail": "2026-W33 review の search-growth 節=あり",
-      "action": null
-    },
-    {
-      "code": "weekly-plan",
-      "level": "pass",
-      "detail": "plan=2026-W34, expected=2026-W34",
+      "detail": "2026-W34 review の search-growth 節=あり",
       "action": null
     },
     {

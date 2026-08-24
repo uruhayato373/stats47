@@ -35,6 +35,7 @@ function fixture({
   decision = true,
   targetSubject = null,
   confirmedActive = false,
+  candidateWeek = '2026-W34',
 } = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'gsc-cycle-'));
   write(
@@ -46,7 +47,7 @@ function fixture({
     }
   );
   write(root, '.claude/state/effect-verdict/verdicts-2026-W34.json', {
-    week: '2026-W34',
+    week: candidateWeek,
     summary: { total: targetSubject || confirmedActive ? 1 : 0 },
     verdicts: [
       ...(targetSubject
@@ -151,6 +152,22 @@ test('全工程が接続されていれば monitor は pass', (t) => {
   assert.equal(result.measurementWeek, '2026-W34');
   assert.equal(result.expectedPlanWeek, '2026-W35');
   assert.match(renderMarkdown(result), /Status\*\*: PASS/);
+});
+
+test('月曜に再構築した次週cadenceの候補も前週レビュー入力として扱う', (t) => {
+  const root = fixture({ candidateWeek: '2026-W35' });
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = auditOperationsCycle({
+    root,
+    now: NOW,
+    stage: 'monitor',
+    policy: POLICY,
+  });
+  assert.equal(
+    result.checks.find((item) => item.code === 'search-growth-freshness')
+      ?.level,
+    'pass'
+  );
 });
 
 test('最新計測に対応するreviewと次週planの欠落をfailにする', (t) => {

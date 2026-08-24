@@ -193,7 +193,11 @@ function crawledNotIndexed(bucket, cfg) {
   const cov = str(val(bucket, "inspection", "coverageState"));
   const status = num(val(bucket, "http", "status"));
   const category = str(val(bucket, "static", "coverageCategory"));
-  const isCni = (cov && /crawled.*not indexed|クロール済/i.test(cov)) || category === "crawled-not-indexed";
+  // URL Inspection が取れている場合は、古い GSC UI export 由来の category より優先する。
+  // 「登録済み」と「crawled-not-indexed」が同居した誤候補を手作業で消し続けないため。
+  const isCni = cov
+    ? /crawled.*not indexed|クロール済/i.test(cov)
+    : category === "crawled-not-indexed";
   if (!isCni) return [];
   if (status != null && status !== 200) return []; // 生存 URL のみ (死んでいれば別 candidate)
   return [

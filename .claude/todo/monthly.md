@@ -60,8 +60,8 @@ GSCは重点テーマ数に含めない健康管理の床とし、検索施策�
 
 | 項目 | 最新（2026-08-24監査） | 月内評価 | 次アクション |
 |---|---|---|---|
-| 計測→週次review | `origin/develop` snapshot W34 / review W33 | **FAIL**（1週未接続） | ローカル同期後に `/weekly-review 2026-W34` |
-| search-growth判断 | W34候補1,022件、approve/dismiss 0件 | **FAIL**（判断記録なし） | 最大3件を審査し、最低1件をapproveまたは理由付きdismiss |
+| 計測→週次review | snapshot W34 / review W34 / plan W35 | **PASS** | 次回も finalized snapshot → review → plan の順で接続 |
+| search-growth判断 | W35候補880件、approved 1件、WIP 1/5 | **PASS** | soft-404候補を9/7・9/21・10/19に再計測。週2件上限を維持 |
 | effect判定 | W34 7件すべてpending | **WARN**（既知target欠落7件、新規0件） | 推測で補わず、終了または再計測を週次で判断 |
 | index coverage | URL Inspection日次は稼働 / 週次coverage表示は旧世代 | **WARN** | URL Inspectionとremediation queueを週次レビューの正典にする |
 

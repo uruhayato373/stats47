@@ -77,6 +77,16 @@ test("soft-404-risk: thin 200", () => {
   assert.ok(types(cands, url).includes("soft-404-risk"));
 });
 
+test("crawled-not-indexed: 登録済みの Inspection は古い coverage category を上書き", () => {
+  const url = "/ranking/indexed";
+  const cands = buildCandidates([
+    obs("inspection", "coverageState", "送信して登録されました", { page: url }),
+    obs("http", "status", 200, { page: url }),
+    obs("static", "coverageCategory", "crawled-not-indexed", { page: url }),
+  ]);
+  assert.ok(!types(cands, url).includes("crawled-not-indexed"));
+});
+
 test("canonical-drift: user と Google canonical 不一致", () => {
   const url = "/ranking/canon";
   const cands = buildCandidates([

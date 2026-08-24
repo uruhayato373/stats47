@@ -337,8 +337,11 @@ export function auditOperationsCycle({
 
   const candidateDoc = readJson(paths.candidates);
   const candidateGeneratedAge = ageDays(candidateDoc?.generatedAt, now);
+  const validCandidateWeeks = new Set(
+    [measurementWeek, expectedPlanWeek].filter(Boolean)
+  );
   const candidateFresh =
-    candidateDoc?.week === measurementWeek &&
+    validCandidateWeeks.has(candidateDoc?.week) &&
     candidateGeneratedAge != null &&
     candidateGeneratedAge <= policy.searchGrowthMaxAgeDays;
   addCheck(
