@@ -279,7 +279,7 @@ evidenceTopics: [
 | `evidenceTopics`                                   | **「白書・統計から見る論点」**。公式資料から ranking / theme / tag へ周遊                                                                                              | `ThemeEvidenceTopicsSection` (`nav_surface=theme_evidence`)                                       |
 | `rejectedCandidates`                               | UI 非表示 (再調査防止の記録のみ)                                                                                                                                       | —                                                                                                 |
 | (別途) EMBEDDED_SECTIONS                           | 埋め込み section。**半幅 2 カラム** = 人口移動フロー / 通勤フロー (ChartPanel 化・2026-08-04)、**全幅** = 駅乗降 / 高速道路 / 過疎×医療 / 日照。`hideMap` と独立に描画 | `THEME_SECTION_REGISTRY` + `HALF_WIDTH_SECTIONS`                                                  |
-| (別途) 左レール                                    | テーマ切替 + 地域 + ページ内目次 + 全指標 + 出典調査。lg 未満は本文上部の同等 UI が代替                                                                                | `ThemePageLayout` の `PageShell leftRail`                                                         |
+| (別途) 左レール                                    | `THEME_NAV_GROUPS` のグループ別テーマリンク + 地域 + 全指標 + 出典調査。992px 未満は本文上部のテーマ Select・ページ内クイックリンク等が代替                           | `ThemePageLayout` の `PageShell leftRail`                                                         |
 
 > `hideMap: true` (全テーマ既定) は地図タブ UI (コロプレス/年度セレクタ) を隠すだけ。
 > **page-components チャート・考察 (markdown)・埋め込み section は hideMap に関係なく描画する**

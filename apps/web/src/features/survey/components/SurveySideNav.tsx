@@ -125,6 +125,12 @@ export function SurveyMobileNav({
         <ListTree className="size-4 text-muted-foreground" aria-hidden />
         このページと関連する分類
       </summary>
+      <Link
+        href="/survey"
+        className="mt-1 flex min-h-11 items-center border-y border-border px-2 text-sm font-medium text-foreground hover:bg-accent/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+      >
+        調査一覧へ
+      </Link>
       <nav aria-label="この調査ページの内容（モバイル）" className="pt-2">
         <ul className="border-t border-border">
           {pageLinks.map((item) => (

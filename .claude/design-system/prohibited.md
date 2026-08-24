@@ -80,11 +80,12 @@
 
 > **例外: ページ内ナビの左レール（2026-08-04）**。禁止しているのは「サイト全体ナビを常設左サイドバーで重複させること」で、
 > **そのページの表示内容を切り替えるページ内ナビ**は左レールに置いてよい。テーマページの
-> `ThemeSideNav` はテーマ切替・地域・ページ内目次・全指標・出典調査、home / `/ranking` /
-> `/category/*` はカテゴリ探索を `PageShell leftRail` に置く。全テーマやグローバルナビを常時展開しない。
+> `ThemeSideNav` はグループ別テーマリンク・地域・全指標・出典調査、home / `/ranking` /
+> `/category/*` はカテゴリ探索を `PageShell leftRail` に置く。テーマは現在グループだけ初期展開し、
+> navigation-only SSOT `THEME_NAV_GROUPS` を ranking category / ThemeCatalog taxonomy と混ぜない。
 >
 > 条件: (1) 中身はそのページを操作するナビだけ（グローバルナビを複製しない）、(2) `PageShell leftRail` 経由で幅を直書きしない、
-> (3) lg 未満で操作ナビを隠す場合は `leftRailNarrowBehavior="hide"` とし、同等 UI を**本文上部**に出す
+> (3) 992px 未満で操作ナビを隠す場合は `leftRailNarrowBehavior="hide"` とし、テーマ Select 等の代替 UI を**本文上部**に出す
 > （操作対象より後ろに積むと意味を失うため）、(4) 現在地に `aria-current="page"`。
 > 正典: `.claude/rules/ui-components.md` / `docs/01_技術設計/04_デザインシステム.md`。
 

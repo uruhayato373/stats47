@@ -2,15 +2,18 @@
 
 import Link from 'next/link';
 
-import { FileText, ListTree } from 'lucide-react';
+import { cn } from '@stats47/components';
+import { ChevronDown, FileText, ListTree } from 'lucide-react';
 
+import { StatisticsScopeNav } from '@/components/navigation';
 import { SectionHeader } from '@/components/section';
 
+import { THEME_NAV_GROUPS } from '../config/theme-navigation';
 import { PREFECTURE_SET_LABEL } from '../types';
 
 import { PrefectureSelect } from './PrefectureSelect';
 import { useThemePrefecture } from './ThemePrefectureContext';
-import { ThemeSwitcher } from './ThemeSwitcher';
+import { buildThemeSwitcherOptions } from './ThemeSwitcher';
 
 export interface ThemeNavMetric {
   rankingKey: string;
@@ -22,11 +25,6 @@ export interface ThemeNavSurvey {
   name: string;
 }
 
-export interface ThemePageNavLink {
-  href: string;
-  label: string;
-}
-
 interface Props {
   /** 現在表示中のテーマキー（URL/props が正）。 */
   currentThemeKey: string;
@@ -34,7 +32,8 @@ interface Props {
   areaContext?: { areaCode: string };
   /** Provider を持たない bespoke ページでは false。 */
   showRegion?: boolean;
-  pageLinks?: ThemePageNavLink[];
+  /** エリア文脈など、地理スコープを切り替えないページでは false。 */
+  showScope?: boolean;
   metrics?: ThemeNavMetric[];
   surveys?: ThemeNavSurvey[];
 }
@@ -42,46 +41,29 @@ interface Props {
 /**
  * テーマ詳細のページ内ナビ。
  *
- * サイト全体のテーマ一覧はヘッダーと ThemeSwitcher に任せ、このレールは現在ページの操作と
- * 読み進め方（地域・セクション・指標・出典）だけを担う。
+ * デスクトップでは navigation-only のグループ別テーマ一覧を表示し、現在テーマを明示する。
+ * 狭幅のテーマ切替は ThemePageLayout の Select が担う。このレールは地域・指標・出典も扱う。
  */
 export function ThemeSideNav({
   currentThemeKey,
   areaContext,
   showRegion = true,
-  pageLinks = [],
+  showScope = true,
   metrics = [],
   surveys = [],
 }: Props) {
   return (
     <div className="space-y-6 pr-1">
-      <div>
-        <SectionHeader title="テーマ" as="h2" />
-        <ThemeSwitcher
-          currentThemeKey={currentThemeKey}
-          areaContext={areaContext}
-          compact
+      <ThemeGroupNavigation
+        currentThemeKey={currentThemeKey}
+        areaContext={areaContext}
+      />
+
+      {(showScope || showRegion) && (
+        <RegionBlock
+          showScope={showScope}
+          showPrefectureSelect={showRegion}
         />
-      </div>
-
-      {showRegion && <RegionBlock />}
-
-      {pageLinks.length > 0 && (
-        <nav aria-label="このページの内容">
-          <SectionHeader title="このページ" as="h2" />
-          <ul className="border-t border-border">
-            {pageLinks.map((item) => (
-              <li key={item.href} className="border-b border-border">
-                <Link
-                  href={item.href}
-                  className="flex min-h-10 items-center px-2 text-sm font-medium text-foreground transition-colors hover:bg-accent/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
       )}
 
       {metrics.length > 0 && (
@@ -107,21 +89,27 @@ export function ThemeSideNav({
         </details>
       )}
 
-      {surveys.length > 0 && (
-        <nav aria-label="このテーマの出典調査">
-          <SectionHeader
-            title={
-              <span className="inline-flex items-center gap-2">
-                <FileText
-                  className="size-4 text-muted-foreground"
-                  aria-hidden
-                />
-                出典調査
-              </span>
-            }
-            as="h2"
-          />
-          <ul className="space-y-1">
+      <nav aria-label="このテーマの出典調査">
+        <SectionHeader
+          title={
+            <span className="inline-flex items-center gap-2">
+              <FileText
+                className="size-4 text-muted-foreground"
+                aria-hidden
+              />
+              出典調査
+            </span>
+          }
+          as="h2"
+        />
+        <Link
+          href="/survey"
+          className="flex min-h-10 items-center border-y border-border px-2 text-sm font-medium text-foreground transition-colors hover:bg-accent/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+        >
+          調査一覧へ
+        </Link>
+        {surveys.length > 0 && (
+          <ul className="mt-2 space-y-1">
             {surveys.map((survey) => (
               <li key={survey.id}>
                 <Link
@@ -133,19 +121,113 @@ export function ThemeSideNav({
               </li>
             ))}
           </ul>
-        </nav>
-      )}
+        )}
+      </nav>
     </div>
   );
 }
 
-function RegionBlock() {
-  const { selectedAreaName, setSelected } = useThemePrefecture();
+function ThemeGroupNavigation({
+  currentThemeKey,
+  areaContext,
+}: Pick<Props, 'currentThemeKey' | 'areaContext'>) {
+  const { hasProvider, selectedPrefectureCode } = useThemePrefecture();
+  const options = buildThemeSwitcherOptions(
+    areaContext,
+    hasProvider ? selectedPrefectureCode : undefined
+  );
+  const optionByKey = new Map(options.map((option) => [option.themeKey, option]));
 
+  return (
+    <nav aria-label="テーマを切り替える">
+      <SectionHeader title="テーマ" as="h2" />
+      <div className="border-y border-border">
+        <Link
+          href="/themes"
+          className="flex min-h-10 items-center border-b border-border px-2 text-sm font-medium text-foreground transition-colors hover:bg-accent/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+        >
+          テーマ一覧へ
+        </Link>
+        {THEME_NAV_GROUPS.map((group) => {
+          const groupOptions = group.themeKeys.flatMap((themeKey) => {
+            const option = optionByKey.get(themeKey);
+            return option ? [option] : [];
+          });
+          if (groupOptions.length === 0) return null;
+
+          const isCurrentGroup = groupOptions.some(
+            (option) => option.themeKey === currentThemeKey
+          );
+
+          return (
+            <details
+              key={group.id}
+              open={isCurrentGroup}
+              className="group border-b border-border last:border-b-0"
+            >
+              <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 px-2 text-sm font-semibold text-foreground hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+                {group.label}
+                <ChevronDown
+                  className="ml-auto size-4 text-muted-foreground transition-transform group-open:rotate-180"
+                  aria-hidden
+                />
+              </summary>
+              <ul className="pb-2">
+                {groupOptions.map((option) => {
+                  const isCurrent = option.themeKey === currentThemeKey;
+                  return (
+                    <li key={option.themeKey}>
+                      <Link
+                        href={option.href}
+                        aria-current={isCurrent ? 'page' : undefined}
+                        className={cn(
+                          'flex min-h-10 items-center px-4 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+                          isCurrent
+                            ? 'bg-accent font-semibold text-primary'
+                            : 'text-foreground hover:bg-accent/50 hover:text-primary'
+                        )}
+                      >
+                        {option.title}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </details>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
+function RegionBlock({
+  showScope,
+  showPrefectureSelect,
+}: {
+  showScope: boolean;
+  showPrefectureSelect: boolean;
+}) {
   return (
     <div>
       <SectionHeader title="地域" as="h2" />
-      <PrefectureSelect className="w-full" />
+      {showScope && (
+        <StatisticsScopeNav current="prefectures" variant="rail" />
+      )}
+      {showPrefectureSelect && <PrefectureControl hasScope={showScope} />}
+    </div>
+  );
+}
+
+function PrefectureControl({ hasScope }: { hasScope: boolean }) {
+  const { selectedAreaName, setSelected } = useThemePrefecture();
+
+  return (
+    <div className={hasScope ? 'mt-4' : undefined}>
+      <span className="block text-xs font-medium text-muted-foreground">
+        表示する都道府県
+      </span>
+      <PrefectureSelect className="mt-1 w-full" />
       {selectedAreaName ? (
         <button
           type="button"
