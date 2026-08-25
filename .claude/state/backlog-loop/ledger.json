@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-24T17:09:01.777Z",
+  "updatedAt": "2026-08-25T17:19:49.361Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -590,6 +590,62 @@
         "failCount": 1,
         "lastReason": "no-web-access",
         "since": "2026-08-24T17:08:57.270Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "THEME-CHART-RECIPE-DRIFT-01": {
+      "class": "impl-small",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-25T17:19:42.260Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "Confirmed via code read: LineChartComponentProps/fetchLineData(apps/web/src/features/theme-dashboard/actions/{theme-chart-props,fetch-db-chart-data}.ts) has zero support for axisRatio/tabCombination computation (raw e-Stat fetch only). (1) labor-wages-gender-gap and (2) theme-occ",
+          "failReason": "2/3 sub-items blocked by card's own stop condition; 3rd item fixed",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "2/3 sub-items blocked by card's own stop condition; 3rd item fixed",
+        "since": "2026-08-25T17:19:42.260Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "THEME-METRIC-DEFINITION-133-01": {
+      "class": "indicator-expansion",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-25T17:19:49.361Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "133 unique ranking keys each need individual description/note text verified against primary government sources (所管省庁・e-Statメタ・調査票/用語解説), explicitly batched at max 10/run per the card's own 実行順. This matches indicator-expansion class scale (e-Stat 実在検証 → config → validate green), ",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
       },
       "reclassifiedFrom": [],
       "completedAt": null

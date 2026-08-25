@@ -106,7 +106,7 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
     {
       "componentKey": "theme-economy-income-wage",
       "componentType": "line-chart",
-      "title": "課税所得と最低賃金の推移",
+      "title": "可処分所得と最低賃金の推移",
       "componentProps": {
         "estatParams": [
           {
@@ -119,7 +119,7 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
           }
         ],
         "labels": [
-          "課税所得（勤労者世帯）",
+          "可処分所得（勤労者世帯）",
           "最低賃金"
         ],
         "seriesColors": [
