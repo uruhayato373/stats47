@@ -134,6 +134,11 @@ export const SAFETY_SET: IndicatorSet = {
       "rankingKey": "police-officer-count-per-population",
       "shortLabel": "警察官数",
       "role": "context"
+    },
+    {
+      "rankingKey": "traffic-accident-injuries",
+      "shortLabel": "交通事故負傷者数",
+      "role": "context"
     }
   ],
   "keywords": [

@@ -71,7 +71,12 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "rankingKey": "divorces",
       "shortLabel": "離婚件数",
       "role": "context"
-    }
+    },
+    {
+      "rankingKey": "single-person-household-ratio",
+      "shortLabel": "単独世帯割合",
+      "role": "context"
+    },
   ],
   "charts": [
     {
@@ -98,9 +103,12 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
           "population"
         ]
       },
+      "relatedRankingKeys": [
+        "vacant-housing-ratio",
+        "owner-occupied-housing-ratio"
+      ],
       "sourceName": "住宅・土地統計調査",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -132,9 +140,12 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
           "count"
         ]
       },
+      "relatedRankingKeys": [
+        "ratio-never-married-15-plus",
+        "elderly-couple-only-household-ratio"
+      ],
       "sourceName": "国勢調査 / 国民生活基礎調査",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -174,7 +185,6 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       },
       "sourceName": "国土交通白書 2025 / 住宅・土地統計調査 (総務省統計局) / 厚生労働白書 (令和7年版) / 空家等対策の推進に関する特別措置法 (国土交通省) / 立地適正化計画 (国土交通省)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -214,7 +224,6 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       },
       "sourceName": "国土交通白書 2025 / 空家等対策の推進に関する特別措置法 (国土交通省) / 立地適正化計画 (国土交通省) / 住宅セーフティネット制度 (国土交通省) / 相続登記の申請義務化 (法務省)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -227,6 +236,7 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "componentType": "markdown-section",
       "title": "よくある質問",
       "componentProps": {
+        "displayMode": "faq",
         "subtitle": "住宅・暮らしについて読者が気になる 7 問",
         "markdown": "### Q1: 空き家率の地域差はなぜ?\n\n2023年住宅・土地統計調査で全国空き家率は13.8%（過去最高）。山梨・和歌山・長野・徳島・高知等の地方県で20%超が常態化。最大の要因は**若年層の都市部流出による世帯数縮小**と**相続物件の放置**。親世代から相続した実家を居住・売却・賃貸いずれにも活用しない「居住目的のない空き家」が急増している。2024年4月施行の相続登記義務化により所有者不明土地・空き家問題への取組みが強化される。(出典: 住宅・土地統計調査 / 国土交通白書 2025)\n\n### Q2: 持ち家率の高低が意味するものは?\n\n持ち家率上位は秋田・富山・福井等で約80%、下位は東京都・沖縄県等で5割前後。都市部の低持ち家率は地価・住宅価格高騰により若年層が賃貸を選択する傾向の反映。地方の高持ち家率は土地・住宅価格が相対的に安く取得が容易なため。「高いほど良い」とは限らず、世帯所得・地価・住宅市況の地域差を反映した結果。住宅取得は世帯形成・出生率にも影響し、都市部の少子化加速の一因とも指摘される。(出典: 住宅・土地統計調査)\n\n### Q3: 東京の住宅事情はなぜ特殊?\n\n東京都心では新築マンション価格が1億円超、共働き世帯のパワーカップル需要で価格上昇が続く。持ち家率は約45%と全国最低水準で、若年層は賃貸を選択する傾向が強く住居費負担率が高い。延べ床面積も狭く、47都道府県中最小水準。一方で空き家率は約11%と全国平均を下回り、賃貸需給は逼迫している。住宅取得の高ハードルが世帯形成・出生率低下の構造要因の一つになっている。(出典: 住宅・土地統計調査)\n\n### Q4: 高齢単身世帯はなぜ増えているのか?\n\n核家族化と高齢化の進展により、高齢単身世帯は急増。2050年には全世帯の20%を超える見通し。要因は配偶者との死別、未婚化、子世代との別居等の複合。地方では高齢夫婦のみ・高齢単身世帯比率が高く、本人死亡後の住宅処分が困難な「空き家予備軍」が増大。都市部でも孤独死・住宅セーフティネットの課題が顕在化。サービス付き高齢者向け住宅（サ高住、約28万戸）の整備、地域包括ケアシステムとの統合運用が進められている。(出典: 厚生労働白書 令和7年版)\n\n### Q5: 人口密度の地域差は何を意味する?\n\n可住地面積当たり人口密度は東京都が突出して高く（約9,500人/km²）、北海道・岩手・秋田等が低い。DID（人口集中地区）人口密度は都市の集約度を示し、コンパクトシティ政策の指標として重要。人口密度が高いほどインフラ効率は良いが、住宅事情は厳しくなる。一方、低密度地域では行政サービスコストが嵩み、立地適正化計画による中心部集約が進められている。(出典: 国土交通白書 2025)\n\n### Q6: 未婚率と婚姻件数の地域差は?\n\n生涯未婚率（50歳時点で結婚経験なしの割合）は男性で30%超、女性で20%弱に達し、都市部・地方ともに上昇傾向。婚姻件数は2024年に約47万組と過去最少を更新。背景は経済的不安・価値観の多様化・出会いの機会減少等。地方では未婚者の人口性比（女性100人に対する男性数）が30代前半で140を超える地域もあり、固定的な性別役割分担意識が若い女性の流出を加速させる構造的問題がある。(出典: 男女共同参画白書 令和7年版)\n\n### Q7: コンパクトシティとは何?\n\n人口減少・高齢化に対応する都市政策の柱で、「**コンパクト・プラス・ネットワーク**」と呼ばれる。各市町村が**立地適正化計画**を策定し（2024年時点で約700市町村）、居住誘導区域・都市機能誘導区域を設定。中心部に居住・サービスを集約することで、空き家・空き店舗・インフラ維持コストの三重課題に対処する。富山市・宇都宮市・青森市等の先行事例ではLRT・BRT等の公共交通網と一体的な都市再生が進む。(出典: 国土交通白書 2025)",
         "sources": [
@@ -254,7 +264,6 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       },
       "sourceName": "国土交通白書 2025 / 住宅・土地統計調査 (総務省統計局) / 厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 立地適正化計画 (国土交通省)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -286,9 +295,11 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
           "count"
         ]
       },
+      "relatedRankingKeys": [
+        "housing-floor-area"
+      ],
       "sourceName": "住宅・土地統計調査",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/housing-floor-area",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -320,9 +331,11 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "marriages"
+      ],
       "sourceName": "人口動態調査",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/marriages",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -354,9 +367,11 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "single-person-household-ratio"
+      ],
       "sourceName": "総務省「国勢調査」",
       "sourceLink": null,
-      "rankingLink": "/ranking/single-person-household-ratio",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

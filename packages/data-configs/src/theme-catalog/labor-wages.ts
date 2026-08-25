@@ -106,9 +106,11 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
           "female"
         ]
       },
+      "relatedRankingKeys": [
+        "gender-wage-gap"
+      ],
       "sourceName": "賃金構造基本統計調査",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -140,9 +142,12 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "active-job-opening-ratio",
+        "unemployment-rate"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -182,7 +187,6 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
       },
       "sourceName": "労働経済白書 (令和7年版) / 賃金構造基本統計調査 (厚生労働省) / 厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 地域別最低賃金 (厚生労働省)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -222,7 +226,6 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
       },
       "sourceName": "労働経済白書 (令和7年版) / 中央最低賃金審議会 (厚生労働省) / 三位一体の労働市場改革 (内閣官房) / 同一労働同一賃金特集ページ (厚生労働省) / 労務費の適切な転嫁のための価格交渉に関する指針 (内閣官房)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -235,6 +238,7 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
       "componentType": "markdown-section",
       "title": "よくある質問",
       "componentProps": {
+        "displayMode": "faq",
         "subtitle": "賃金・労働について読者が気になる 7 問",
         "markdown": "### Q1: 最低賃金の地域差はなぜ?\n\n地域別最低賃金は中央最低賃金審議会の目安に基づき、各都道府県の**生計費・賃金水準・通常の事業の支払能力**を考慮して決定される。Aランク（東京・神奈川・大阪等）からCランク（地方各県）まで4ランク制で、2024年度は最高1,163円（東京）と最低951円程度（複数県）で約200円の差がある。生活費の地域差や産業の支払能力差を反映する仕組みだが、政府は2020年代に全国平均1,500円への引き上げを目標としている。(出典: 厚生労働省・地域別最低賃金)\n\n### Q2: 東京の所定内給与が突出して高いのはなぜ?\n\n令和6年の所定内給与額は東京都が男女共に全国最高（男性44.1万円、女性33.8万円）。これは高付加価値な**情報通信業・金融保険業・専門サービス業**が集中していることが最大の要因。これらの業種は労働生産性が高く、賃金水準も全国平均を大きく上回る。さらに大企業（資本金10億円以上）の本社・大規模事業所が集中し、規模別賃金プレミアム（大企業賃金は中小の1.3〜1.5倍）の恩恵を受ける労働者比率が高いことも要因。(出典: 賃金構造基本統計調査)\n\n### Q3: 男女賃金格差にはどんな意味がある?\n\n女性の所定内給与額（パートタイム除く一般労働者）は男性の約75%程度で推移しており、依然として大きな開きがある。要因は**管理職比率・勤続年数・職種構成**の複合的差。出産・育児を機に非正規雇用へ転換する「L字カーブ」が背景にあり、M字カーブ（年齢別労働力率の落ち込み）解消後も残る課題。2022年7月から常時雇用301人以上の事業主に男女賃金差異の情報開示が義務付けられ、透明性向上が進む。(出典: 男女共同参画白書 令和7年版)\n\n### Q4: 大卒・高卒初任給の地域差は?\n\n大卒初任給は2024年度に大幅引き上げが進み、全国平均で月23万円台。東京都が突出して高く、地方との差は2〜4万円程度。高卒初任給も同様の傾向で、全国平均月18万円台。地域差は最低賃金水準・地域別物価・産業構造の差を反映する。近年は人手不足を背景に地方企業でも初任給引き上げ競争が激化しており、地域差は緩やかに縮小傾向。看護師・介護職員等のエッセンシャルワーカーの初任給上昇も顕著。(出典: 賃金構造基本統計調査)\n\n### Q5: 看護師年収の地域差はなぜ?\n\n看護師の年収は勤務地域だけでなく**勤務先（病院・診療所）、勤務形態（夜勤の有無）、勤続年数、認定看護師等の資格**で大きく変動。都市部の大規模病院では夜勤手当・住宅手当等が充実し年収500万円超もあるが、地方の小規模医療機関では年収400万円台が多い。政府は2024年度診療報酬改定で看護職員の処遇改善（ベースアップ評価料新設等）を進め、地域差是正と全体的な賃金水準引き上げを並行して図っている。(出典: 厚生労働白書 令和7年版)\n\n### Q6: パート時給の地域差は何を意味する?\n\nパートタイム労働者の時給は最低賃金の影響を直接受けるため、最低賃金ランクと連動した地域差が現れる。男性パート時給は全国平均1,200円台、女性は1,100円台。東京都が突出して高く、地方では低水準。2020年4月施行の**同一労働同一賃金**により正社員との不合理な待遇差は禁止されたが、職務内容に応じた待遇差説明義務に基づく漸進的改善が続く。最低賃金1500円目標達成に向けて、特に女性パート労働者の時給上昇が期待される。(出典: 労働経済白書 令和7年版)\n\n### Q7: 賃上げ動向と賃上げのノルムとは?\n\n2024年度の現金給与総額は前年度比3.0%増と33年ぶりの高い伸び。2024年春闘の賃上げ率は5%台と高水準だが、物価高で実質賃金は0.0%横ばい。政府はコストカット型経済からの脱却を目指し「**賃上げを起点とした成長型経済**」への移行を最優先課題とし、今後5年間で持続的物価上昇下で実質賃金1%程度の上昇を新たな社会規範（ノルム）として定着させる目標。中小企業の労務費の価格転嫁徹底、最低賃金1500円目標、リスキリング支援等が政策の柱。(出典: 労働経済白書 令和7年版)",
         "sources": [
@@ -258,7 +262,6 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
       },
       "sourceName": "労働経済白書 (令和7年版) / 賃金構造基本統計調査 (厚生労働省) / 男女共同参画白書 (令和7年版) / 地域別最低賃金 (厚生労働省)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -284,9 +287,11 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
           "population"
         ]
       },
+      "relatedRankingKeys": [
+        "employment-rate"
+      ],
       "sourceName": "総務省 社会・人口統計体系（労働）",
       "sourceLink": null,
-      "rankingLink": "/ranking/employment-rate",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

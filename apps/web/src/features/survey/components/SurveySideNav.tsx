@@ -1,8 +1,9 @@
 import Link from 'next/link';
 
-import { FileText, ListTree } from 'lucide-react';
+import { ListTree } from 'lucide-react';
 
-import { SectionHeader } from '@/components/section';
+import { LEFT_RAIL_NARROW_ONLY_CLASS } from '@/components/layout';
+import { SectionHeader, SectionIndexLink } from '@/components/section';
 
 import { SurveyOutboundLinkArea } from './SurveyOutboundLinkArea';
 
@@ -37,14 +38,11 @@ export function SurveySideNav({
   return (
     <div className="space-y-6 pr-1">
       <div>
-        <SectionHeader title="調査" as="h2" />
-        <Link
-          href="/survey"
-          className="flex min-h-10 items-center gap-2 border-y border-border px-2 text-sm font-medium text-foreground transition-colors hover:bg-accent/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-        >
-          <FileText className="size-4 text-muted-foreground" aria-hidden />
-          調査一覧へ
-        </Link>
+        <SectionHeader
+          title="調査"
+          as="h2"
+          action={<SectionIndexLink href="/survey" label="調査一覧へ" />}
+        />
       </div>
 
       <nav aria-label="この調査ページの内容">
@@ -120,7 +118,9 @@ export function SurveyMobileNav({
   categories,
 }: Pick<SurveyNavigationProps, 'pageLinks' | 'categories'>) {
   return (
-    <details className="mb-8 border-y border-border py-2 lg:hidden">
+    <details
+      className={`mb-8 border-y border-border py-2 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
+    >
       <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
         <ListTree className="size-4 text-muted-foreground" aria-hidden />
         このページと関連する分類

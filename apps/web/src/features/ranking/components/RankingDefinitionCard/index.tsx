@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 import { ExternalLink } from "lucide-react";
 
-import { SurfaceCard } from "@/components/surface";
+import { ContentDisclosure } from "@/components/content";
 
 import type { RankingItem } from "@stats47/ranking";
 
@@ -29,9 +29,7 @@ export function RankingDefinitionCard({
   itemDetail,
 }: RankingDefinitionCardProps) {
   return (
-    <SurfaceCard className="p-6">
-      <h3 className="text-lg font-semibold mb-3">統計の定義</h3>
-
+    <ContentDisclosure title="統計の定義" headingLevel={3}>
       <DefinitionWithMath
         content={definition}
         className="text-sm text-muted-foreground whitespace-pre-wrap leading-relaxed"
@@ -52,6 +50,6 @@ export function RankingDefinitionCard({
           </a>
         </div>
       )}
-    </SurfaceCard>
+    </ContentDisclosure>
   );
 }

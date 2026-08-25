@@ -1,11 +1,18 @@
 ---
 type: agent-reference
-date: 2026-07-11
-status: pending
+date: 2026-08-25
+status: superseded
 tags: [theme-catalog, definitions, caveats, ui]
 ---
 
 # テーマ定義・注意事項カード仕様
+
+> **2026-08-25 superseded**: ヘッダー直後へ定義カードを複製する案は実装しない。
+> `/ranking/[key]` を指標定義・一般注釈・出典・関連記事の指標ハブとし、Theme chart は
+> `relatedRankingKeys` で接続する。chart 固有の誤読防止条件だけを `ThemeCatalog.charts[].annotation` から
+> footer に表示する。正典は `docs/01_技術設計/03_情報設計.md`、
+> `.claude/rules/theme-catalog-standards.md`、`apps/web/src/features/theme-dashboard/README.md`。
+> 以下は採用しなかった旧案の記録であり、実装指示として使用しない。
 
 > 実装状況と優先度は `.claude/todo/backlog.md` の
 > `THEME-GUIDANCE-CARDS-01` を正典とする。本書はエージェントが実装時に読む詳細仕様であり、

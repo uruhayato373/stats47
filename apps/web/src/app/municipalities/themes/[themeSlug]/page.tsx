@@ -5,6 +5,7 @@ import {
   MUNICIPALITY_THEME_CATALOGS,
 } from '@stats47/data-configs/geo-scope';
 import { readMunicipalityRankingItem } from '@stats47/ranking/server';
+import { ChartNoAxesColumnIncreasing } from 'lucide-react';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
@@ -93,8 +94,9 @@ export default async function MunicipalityThemePage({
                 {item.latestYear.yearName}・
                 {item.valueCount.toLocaleString('ja-JP')}自治体
               </p>
-              <p className="mt-3 text-xs font-medium text-primary">
-                ランキングを見る →
+              <p className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
+                <ChartNoAxesColumnIncreasing className="size-4" aria-hidden />
+                ランキング
               </p>
             </SurfaceLinkCard>
           ))}

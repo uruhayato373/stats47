@@ -54,7 +54,7 @@
 
 > **2026-06 更新（フラットデザイン採用 / 正典: `docs/01_技術設計/04_デザインシステム.md`）**:
 > サイト全体を**フラット化**（`--radius: 0`）。角丸は統一トークン任せで 0、円形（アイコン背景・ピル・アバター）のみ `rounded-full`。
-> 横幅・レール・余白は `PageShell`（`@/components/layout`）経由で統一（1280px / 右レール 316px / lg+ 左右 40px）。
+> 横幅・レール・余白は `PageShell` / `ArticleShell`（`@/components/layout`）経由で統一（1280px / 右レール 316px / lg+ 左右 40px）。左レールの列と 992px 境界は `LeftRailLayout` だけが所有する。
 > PC の常設左サイドバーは廃止し、ナビはヘッダー（カテゴリはメガメニュー）＋モバイルドロワーに集約。
 >
 > **例外: reading zone（記事系ページ・2026-07-11）**: 記事系ページ（blog 詳細 / ranking 詳細 / survey /
@@ -71,12 +71,12 @@
 | `gap-0` between sections                            | セクションの区切りが不明瞭                           | `gap-6` 以上                                                                                                  |
 | `m-0` for page content                              | ページ端にコンテンツが張り付く                       | `px-6 py-8` 以上                                                                                              |
 | PC で左に**サイト全体ナビ**の常設サイドバーを置く   | 2026-06 廃止。ヘッダーナビと役割が重複               | PC=ヘッダーナビ（カテゴリはメガメニュー）/ モバイル=`MobileNavDrawer`（`w-72`）。**ページ内ナビの例外は下記** |
-| ページ幅・レール幅をページ内で直書き                | ページ間で幅がばらつく温床                           | `PageShell`（`@/components/layout`）経由（1280px / 右レール 316px、doc 13）                                   |
+| ページ幅・レール幅をページ内で直書き                | ページ間で幅がばらつく温床                           | `PageShell` / `ArticleShell` + `LeftRailLayout` の共有契約を使う                                              |
 | ナビ/カード/ボタンへの手動角丸（`rounded-xl` 等）   | フラット統一（`--radius:0`）を崩す                   | 角丸トークン任せ（= 0）。円形のみ `rounded-full`                                                              |
 | ナビアイコン `w-7 h-7` 以上                         | DS標準アイコンサイズからの逸脱                       | `w-5 h-5`                                                                                                     |
 | Drawer のフォーカストラップ省略                     | キーボードユーザーが背面要素を操作してしまう         | フォーカストラップを実装                                                                                      |
 | `aria-current="page"` 省略                          | スクリーンリーダーが現在ページを識別できない         | Active ナビアイテムに必ず付与                                                                                 |
-| 独自グリッドで多カラムを直書き                      | レール幅・余白がページ間でばらつく                   | `PageShell` 定義済みの 1/2/3 カラム（doc 13）に従う                                                           |
+| 独自グリッドで多カラムを直書き                      | レール幅・余白がページ間でばらつく                   | `PageShell` / `ArticleShell` と共有 `LeftRailLayout` に従う                                                   |
 
 > **例外: ページ内ナビの左レール（2026-08-04）**。禁止しているのは「サイト全体ナビを常設左サイドバーで重複させること」で、
 > **そのページの表示内容を切り替えるページ内ナビ**は左レールに置いてよい。テーマページの
@@ -84,9 +84,9 @@
 > `/category/*` はカテゴリ探索を `PageShell leftRail` に置く。テーマは現在グループだけ初期展開し、
 > navigation-only SSOT `THEME_NAV_GROUPS` を ranking category / ThemeCatalog taxonomy と混ぜない。
 >
-> 条件: (1) 中身はそのページを操作するナビだけ（グローバルナビを複製しない）、(2) `PageShell leftRail` 経由で幅を直書きしない、
+> 条件: (1) 中身はそのページを操作するナビだけ（グローバルナビを複製しない）、(2) `PageShell` / `ArticleShell` の `leftRail` 経由で幅を直書きしない、
 > (3) 992px 未満で操作ナビを隠す場合は `leftRailNarrowBehavior="hide"` とし、テーマ Select 等の代替 UI を**本文上部**に出す
-> （操作対象より後ろに積むと意味を失うため）、(4) 現在地に `aria-current="page"`。
+> （ArticleShell の狭幅ナビも `LEFT_RAIL_NARROW_ONLY_CLASS` を使う）、(4) 現在地に `aria-current="page"`。
 > 正典: `.claude/rules/ui-components.md` / `docs/01_技術設計/04_デザインシステム.md`。
 
 ---

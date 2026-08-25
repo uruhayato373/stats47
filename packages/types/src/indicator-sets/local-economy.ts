@@ -39,6 +39,31 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
       "rankingKey": "fiscal-strength-index-prefecture",
       "shortLabel": "財政力指数",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "employed-people-ratio-primary",
+      "shortLabel": "第1次産業就業者比率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "employed-people-ratio-secondary",
+      "shortLabel": "第2次産業就業者比率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "employed-people-ratio-tertiary",
+      "shortLabel": "第3次産業就業者比率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "disposable-income-worker-households",
+      "shortLabel": "可処分所得（二人以上の世帯のうち勤労者世帯）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "number-of-establishments-economic-census-basic-survey",
+      "shortLabel": "事業所数",
+      "role": "context"
     }
   ],
   "keywords": [

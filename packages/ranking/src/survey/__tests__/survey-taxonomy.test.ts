@@ -65,6 +65,16 @@ describe("resolveSurveyTaxonomy", () => {
     expect(result.unresolvedMetricKeys).toEqual(["ghost-metric"]);
     expect(result.unresolvedEstatReferences).toEqual([{ statsDataId: "9999999999" }]);
   });
+
+  it("原典名は共通辞書を経由し、master に実在する調査だけへ解決する", () => {
+    const result = resolveSurveyTaxonomy(
+      { sourceNames: ["過去の気象データ", "存在しない資料源"] },
+      METRICS_REGISTRY,
+    );
+    expect(result.surveys.map((survey) => survey.id)).toEqual(["weather-statistics"]);
+    expect(result.resolvedSourceNames).toEqual(["過去の気象データ"]);
+    expect(result.unresolvedSourceNames).toEqual(["存在しない資料源"]);
+  });
 });
 
 describe("resolveThemeSurveyTaxonomy", () => {
@@ -133,6 +143,31 @@ describe("blog chart taxonomy", () => {
     expect(refs.estatReferences).toEqual([
       { statsDataId: "0000010103", cdCat01: "#A03506" },
     ]);
+  });
+
+  it("手動取得の統計 chart は surveyId 直書きなしで原典名から調査へ接続する", () => {
+    const result = resolveBlogChartSurveyTaxonomy(
+      {
+        kind: "manual",
+        sourceName: "過去の気象データ",
+        source: "https://www.data.jma.go.jp/obd/stats/etrn/index.php",
+      },
+      METRICS_REGISTRY,
+    );
+    expect(result.status).toBe("resolved");
+    expect(result.references.sourceNames).toEqual(["過去の気象データ"]);
+    expect(result.surveys.map((survey) => survey.id)).toEqual(["weather-statistics"]);
+  });
+
+  it("辞書に無い原典名は unresolved、原典名なしの既存 manual は対象外を維持する", () => {
+    expect(resolveBlogChartSurveyTaxonomy(
+      { kind: "manual", sourceName: "不明な資料源", source: "https://example.com" },
+      METRICS_REGISTRY,
+    ).status).toBe("unresolved");
+    expect(resolveBlogChartSurveyTaxonomy(
+      { kind: "manual", source: "https://example.com" },
+      METRICS_REGISTRY,
+    ).status).toBe("not-applicable");
   });
 
   it("ranking source を survey へ接続する", () => {

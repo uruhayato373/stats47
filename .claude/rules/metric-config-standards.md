@@ -11,15 +11,15 @@
 
 ## フィールドの役割 (混ぜない)
 
-| field | 役割 | 入れてよい | 入れてはいけない |
-|---|---|---|---|
-| `title` (必須) | 正準なランキング名 (h1) | 指標の名前 | **年** (2018年)・**注釈** (※/調査対象外)・subtitle の繰り返し |
-| `subtitle?` | 同名指標を区別する短い定義補足 | 「乳用牛(めす)の飼養頭数合計」等の区別子 | title と同一/包含 (冗長)・注釈(※) |
-| `note?` | データの注意書き / methodology | 「内陸県は漁港がなく調査対象外 (0で表示)」 | 定義・名前 |
-| `description?` | 指標の定義・説明 (散文。「統計の定義」カード) | 出典・定義文 | 注釈(※)・SEO 文 |
-| `category` (必須) | e-Stat 機械分類 (17 軸) | `CategoryKey` の 17 キーのいずれか | 17 軸外のキー (型 union でブロック) |
-| `unit` (必須) | 単位 | 「人」「百万円」「％」 | 空文字・「‐」「-」(プレースホルダ) |
-| `seoTitle?` / `seoDescription?` | SEO 専用 | 検索向け文 | フルタイムコード (2009100000) |
+| field                           | 役割                                          | 入れてよい                                 | 入れてはいけない                                              |
+| ------------------------------- | --------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------- |
+| `title` (必須)                  | 正準なランキング名 (h1)                       | 指標の名前                                 | **年** (2018年)・**注釈** (※/調査対象外)・subtitle の繰り返し |
+| `subtitle?`                     | 同名指標を区別する短い定義補足                | 「乳用牛(めす)の飼養頭数合計」等の区別子   | title と同一/包含 (冗長)・注釈(※)                             |
+| `note?`                         | データの注意書き / methodology                | 「内陸県は漁港がなく調査対象外 (0で表示)」 | 定義・名前                                                    |
+| `description?`                  | 指標の定義・説明 (散文。「統計の定義」カード) | 出典・定義文                               | 注釈(※)・SEO 文                                               |
+| `category` (必須)               | e-Stat 機械分類 (17 軸)                       | `CategoryKey` の 17 キーのいずれか         | 17 軸外のキー (型 union でブロック)                           |
+| `unit` (必須)                   | 単位                                          | 「人」「百万円」「％」                     | 空文字・「‐」「-」(プレースホルダ)                            |
+| `seoTitle?` / `seoDescription?` | SEO 専用                                      | 検索向け文                                 | フルタイムコード (2009100000)                                 |
 
 **年は `years` / `latestYear` が持つ。title に焼かない。** UI はデータ年度を別途表示する。
 
@@ -43,6 +43,10 @@
 - `description` → 「統計の定義」カード (`RankingDefinitionCard`)
 - 一覧表 (`category`/`survey`) のタイトルは注釈(※)を連結しない (`isCaveatNote` で除外)
 
+`/ranking/[key]` は指標ハブであり、`description`（定義）、`note`（一般注釈）、出典、関連記事、
+関連ランキングを集約する。Theme chart はこの内容を title 下へ複製せず `relatedRankingKeys` で接続する。
+ThemeCatalog の `annotation` は系列断絶・母集団差など、その chart 固有の誤読防止条件だけに使う。
+
 ### 読者向けコピーは title と分ける
 
 `title`は出典と照合できる正準名のまま維持する。カード・記事・SNSで使う平易な名前と問いは、
@@ -61,10 +65,10 @@
 
 ## lint の重大度 (validate-metric-config.ts)
 
-| レベル | 対象 | 挙動 |
-|---|---|---|
+| レベル                               | 対象                                                                                                                                                                                                                                          | 挙動   |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
 | **error** (CI/pre-commit をブロック) | 無効 category キー / title 年混入 (`title-year`) / title 注釈(※)混入 (`title-note`) / subtitle が注釈(※) (`subtitle-note`) / subtitle が title と冗長 (`subtitle-redundant`) / unit 空・「‐」(`unit`) / 重複 title に区別子なし (`dup-title`) | exit 1 |
-| **warn** (表示のみ) | 現在は該当チェックなし (将来の段階的 cleanup 用に tier を温存) | exit 0 |
+| **warn** (表示のみ)                  | 現在は該当チェックなし (将来の段階的 cleanup 用に tier を温存)                                                                                                                                                                                | exit 0 |
 
 > **2026-06 昇格済**: 旧 warn だった 5 系統 (title-year/title-note・subtitle-note/redundant・unit・dup-title) は Phase 3 のデータ是正で warn=0 を達成 → **error に昇格**。量産時の再混入を CI/pre-commit でブロックする。新規 cleanup を warn から始めたい場合のみ warn tier を再利用する。
 
@@ -94,22 +98,22 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 
 ### 絞るべき軸
 
-| config | e-Stat の軸 | 絞り忘れたときの症状 |
-|---|---|---|
-| `cdCat01` 〜 `cdCat04` | cat01-cat05 | 同じ県が「軸のコード数」倍に増える |
-| `cdTab` | tab (表章項目) | 同上。実数と率が同居する表で特に危険 |
-| `timeScope: "annual"` | time | 年計 + 四半期 + 月次が 4 桁年に潰れて 17 倍になる |
+| config                 | e-Stat の軸    | 絞り忘れたときの症状                              |
+| ---------------------- | -------------- | ------------------------------------------------- |
+| `cdCat01` 〜 `cdCat04` | cat01-cat05    | 同じ県が「軸のコード数」倍に増える                |
+| `cdTab`                | tab (表章項目) | 同上。実数と率が同居する表で特に危険              |
+| `timeScope: "annual"`  | time           | 年計 + 四半期 + 月次が 4 桁年に潰れて 17 倍になる |
 
 **e-Stat は 4 軸目以降を持つ表が普通にある** (`smartphone-usage-students` は cat01-cat05 の 5 軸)。
 `cdCat01`/`cdCat02` だけ指定して安心しない。
 
 ### 機械的な検査 (3 層)
 
-| 層 | 実装 | 発火 |
-|---|---|---|
-| 取り込み時 | `page-data-batch.ts` の `gateShape` (error なら**書かずに既存 R2 を温存**) | `data-refresh.yml` |
-| 事後監査 | `audit-ranking-data-integrity.ts` の検査 (j) | 週次 `ranking-integrity-audit-weekly.yml` |
-| 棚卸し | `scan-stats-shape.ts` (R2 走査 + allowlist 生成 + 進捗計測) | 手動 |
+| 層         | 実装                                                                       | 発火                                      |
+| ---------- | -------------------------------------------------------------------------- | ----------------------------------------- |
+| 取り込み時 | `page-data-batch.ts` の `gateShape` (error なら**書かずに既存 R2 を温存**) | `data-refresh.yml`                        |
+| 事後監査   | `audit-ranking-data-integrity.ts` の検査 (j)                               | 週次 `ranking-integrity-audit-weekly.yml` |
+| 棚卸し     | `scan-stats-shape.ts` (R2 走査 + allowlist 生成 + 進捗計測)                | 手動                                      |
 
 判定はすべて `packages/data-configs/src/shape-gate.ts` の**同じ純関数**。
 両端で同一定義にすることで「書き込み時に通ったものが監査で落ちる」食い違いを防ぐ。
@@ -141,12 +145,12 @@ valueMin/valueMax を既に計算していて `min === max` は 1 行で判定�
 
 **閾値は実測から決めた** (active 2,176 件の全走査):
 
-| 検査 | 該当 | 判断 |
-|---|---|---|
-| latest 年の全県同値 | 3 件 = 既知の欠陥と完全一致・誤検知 0 | error |
-| ゼロ率 ≥90% | 2 件 (46/47・41/44 でどちらも要調査) | warn |
-| ゼロ率 50-90% | 16 件 — 地熱発電所・原発・植物園など**正当が優勢** | 検知しない |
-| 個数 unit の負値 | 1 件 (既知の壊れ) | warn |
+| 検査                | 該当                                               | 判断       |
+| ------------------- | -------------------------------------------------- | ---------- |
+| latest 年の全県同値 | 3 件 = 既知の欠陥と完全一致・誤検知 0              | error      |
+| ゼロ率 ≥90%         | 2 件 (46/47・41/44 でどちらも要調査)               | warn       |
+| ゼロ率 50-90%       | 16 件 — 地熱発電所・原発・植物園など**正当が優勢** | 検知しない |
+| 個数 unit の負値    | 1 件 (既知の壊れ)                                  | warn       |
 
 ゼロ率 50-90% を弾かないのは「原発がある県は数県だけ」のような正当なデータが多数派だから
 (誤検知を出すゲートは運用で無効化される)。負値も ％/‰/℃/円/人 は増減率・収支・気温で正当に
@@ -168,10 +172,10 @@ agent 検証なしで壊れだけ取れる」を試して失敗した — 壊れ
 その中に確定バグ (gini) が入っていた。分離に必要な情報は**指標が何を数えているかという意味の側**
 にしかない。
 
-| SSOT | 意味 | 形 | ラチェット |
-|---|---|---|---|
-| `expected-shape-anomaly.ts` | **壊れ**を期限つきで許可 | 生成物 (`--emit-allowlist`) | 件数の**縮小**専用 |
-| `verified-value-profiles.ts` | **正当**と検証済み | agent が根拠つきで手書き | 未検証件数の**縮小**専用 |
+| SSOT                         | 意味                     | 形                          | ラチェット               |
+| ---------------------------- | ------------------------ | --------------------------- | ------------------------ |
+| `expected-shape-anomaly.ts`  | **壊れ**を期限つきで許可 | 生成物 (`--emit-allowlist`) | 件数の**縮小**専用       |
+| `verified-value-profiles.ts` | **正当**と検証済み       | agent が根拠つきで手書き    | 未検証件数の**縮小**専用 |
 
 疑い (`value-verification.ts`・監査層専用・取り込みは止めない):
 
@@ -215,11 +219,11 @@ allowlist の `until: 2026-12-31` まで誰も催促せず、`MAX_KNOWN_BROKEN` 
 `packages/data-configs/scripts/audit-reingest-queue.ts` が recipe に依存せず、
 **git の config 更新日** と **R2 の `meta.generatedAt`** の前後だけで判定する:
 
-| verdict | 意味 | 直し方 |
-|---|---|---|
-| `stale-delivery` | config の方が新しい = 再取り込みで直る | `page-data-batch.ts --metric <key>` |
+| verdict               | 意味                                            | 直し方                                         |
+| --------------------- | ----------------------------------------------- | ---------------------------------------------- |
+| `stale-delivery`      | config の方が新しい = 再取り込みで直る          | `page-data-batch.ts --metric <key>`            |
 | `config-insufficient` | データの方が新しい = 是正後に取り込んでもこの形 | `diagnose-unpinned-axes.ts --fetch` で軸を診断 |
-| `unknown` | どちらかの日付が取れず判定不能 | — |
+| `unknown`             | どちらかの日付が取れず判定不能                  | —                                              |
 
 同時刻は `config-insufficient` に倒す。「直したのに古い」と誤報して無駄な再取り込みを促すより、
 「まだ壊れている」と報告して調査を促す方が安全なため。
@@ -265,14 +269,14 @@ getMetaInfo から未指定軸を列挙し、title と軸コード名の一致�
 
 ### 宣言演算 (これがあると単発クエリでは再現できない)
 
-| フィールド | 用途 | 例 |
-|---|---|---|
-| `tabCombination` | 複数 tab の線形結合 | 年収 = 月額 tab08 × 12 + 賞与 tab12 × 1 |
-| `axisSum` | 軸メンバーの合算 (総数コードが無い / 一部県にしか出ない) | 港湾の輸送形態 |
-| `axisRatio` | 部分 / 部分の合計 × 100 | 非正規率 = 322 / (321+322) |
-| `timeScope: "annual"` | 年計のみ採用 (月次・四半期を持つ表) | 商業動態統計 |
-| `areaAxis` | 都道府県が area 軸ではなく cat 軸にある表 | 患者調査 (cat03 に 1〜48) |
-| (kakei-chousa) | 県庁所在市 → 都道府県の写像 | 家計調査 694 件すべて |
+| フィールド            | 用途                                                     | 例                                      |
+| --------------------- | -------------------------------------------------------- | --------------------------------------- |
+| `tabCombination`      | 複数 tab の線形結合                                      | 年収 = 月額 tab08 × 12 + 賞与 tab12 × 1 |
+| `axisSum`             | 軸メンバーの合算 (総数コードが無い / 一部県にしか出ない) | 港湾の輸送形態                          |
+| `axisRatio`           | 部分 / 部分の合計 × 100                                  | 非正規率 = 322 / (321+322)              |
+| `timeScope: "annual"` | 年計のみ採用 (月次・四半期を持つ表)                      | 商業動態統計                            |
+| `areaAxis`            | 都道府県が area 軸ではなく cat 軸にある表                | 患者調査 (cat03 に 1〜48)               |
+| (kakei-chousa)        | 県庁所在市 → 都道府県の写像                              | 家計調査 694 件すべて                   |
 
 ### 両端で同一定義 (手選びコピーを作らない)
 
@@ -303,11 +307,11 @@ cdCat03 以降が落ちて多系列が混入し、`source`/`note` が param に�
 
 ### 禁止
 
-| NG | OK |
-|---|---|
-| `sourceConfig` を丸ごと e-Stat に spread | `resolveEstatParams()` の返り値だけ |
-| derived metric を e-Stat 単発クエリで再取得 | 正典 `app/stats/<key>/values.json` を読む |
-| `calculation.formula` に自由文字列で計算式を書く | `tabCombination` / `axisRatio` / `axisSum` で宣言する (実行される) |
+| NG                                                  | OK                                                                        |
+| --------------------------------------------------- | ------------------------------------------------------------------------- |
+| `sourceConfig` を丸ごと e-Stat に spread            | `resolveEstatParams()` の返り値だけ                                       |
+| derived metric を e-Stat 単発クエリで再取得         | 正典 `app/stats/<key>/values.json` を読む                                 |
+| `calculation.formula` に自由文字列で計算式を書く    | `tabCombination` / `axisRatio` / `axisSum` で宣言する (実行される)        |
 | 取り込み時に計算する metric に `isCalculated: true` | `false`。`isCalculated` は **他 metric を参照して実行時計算する**ものだけ |
 
 `isCalculated: true` は `calculation.type` (`ratio`/`per_capita`/`subtraction`) と
@@ -327,13 +331,13 @@ app/ranking へ射影するだけ。`calculateRankingValues` はランタイム�
 配信値は単発スクリプトの産物で分子・分母の更新に追従せず、同じ扱いの 3 件が 1 年 / 1 年 /
 18 年とバラバラだった。
 
-| 層 | 実装 |
-|---|---|
-| 導出の純関数 (generator と監査が共有) | `packages/ranking/src/scripts/lib/calculated-stats-core.ts` |
-| 期間換算・丸めの resolver | `packages/ranking/src/utils/period-align.ts` |
-| CLI | `packages/ranking/src/scripts/generate-calculated-stats.ts` |
-| task 配線 | `run.sh` の TASKS。**`ranking-items` の後・`ranking-values` の前** (producer が先) |
-| 監査 | `audit-ranking-data-integrity.ts` の検査 (m) |
+| 層                                    | 実装                                                                               |
+| ------------------------------------- | ---------------------------------------------------------------------------------- |
+| 導出の純関数 (generator と監査が共有) | `packages/ranking/src/scripts/lib/calculated-stats-core.ts`                        |
+| 期間換算・丸めの resolver             | `packages/ranking/src/utils/period-align.ts`                                       |
+| CLI                                   | `packages/ranking/src/scripts/generate-calculated-stats.ts`                        |
+| task 配線                             | `run.sh` の TASKS。**`ranking-items` の後・`ranking-values` の前** (producer が先) |
+| 監査                                  | `audit-ranking-data-integrity.ts` の検査 (m)                                       |
 
 行の形・rank 規則 (value 降順・同値同順位・null は rank:null)・ソート順は
 `page-data-batch` と揃える。**0 行・依存欠落・非有限値は書かずに exit 1** (空で R2 の既存
@@ -373,11 +377,11 @@ periodAlign: { numerator: "monthly", denominator: "annual", result: "monthly" }
 generator と同じ `expectedCalculatedYears` で導出するので、監査が赤なら generator を
 回せば必ず解消する)。
 
-| NG | OK |
-|---|---|
-| 単発スクリプトで app/stats を手動生成する | `calculated-stats` task で再生成 |
-| subtraction で `periodAlign` を省く | 必ず宣言 (lint が error) |
-| ×100 を生成器にハードコードする | `scaleFactor: 100` を config に宣言 |
+| NG                                           | OK                                                        |
+| -------------------------------------------- | --------------------------------------------------------- |
+| 単発スクリプトで app/stats を手動生成する    | `calculated-stats` task で再生成                          |
+| subtraction で `periodAlign` を省く          | 必ず宣言 (lint が error)                                  |
+| ×100 を生成器にハードコードする              | `scaleFactor: 100` を config に宣言                       |
 | 計算型でない metric にも `ops.calc` を広げる | calculated fetcher のみ (2,000 件超の一斉 drift を避ける) |
 
 ## isActive:true ≠ 本番公開（多段依存・★再発防止 2026-06-03）

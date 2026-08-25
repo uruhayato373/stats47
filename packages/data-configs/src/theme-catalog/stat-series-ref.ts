@@ -13,6 +13,7 @@
  * 規約: `.claude/rules/theme-catalog-standards.md` / backlog `CROSS-PAGE-DATA-SSOT-01` WP1
  */
 import type { ChartColorRole } from "./chart-color-role";
+import { parseFaqMarkdown } from "./faq-markdown";
 import type { CatalogComponentType } from "./types";
 
 // ChartColorRole の SSOT は chart-color-role.ts (resolver と parity テストの単一ソース)。
@@ -123,6 +124,16 @@ export function validateChartProps(
       break;
     case "markdown-section":
       need(nonEmptyString(props.markdown), "markdown-section: markdown (本文) が必要");
+      need(
+        props.displayMode === undefined ||
+          props.displayMode === "prose" ||
+          props.displayMode === "faq",
+        "markdown-section: displayMode は prose または faq",
+      );
+      if (props.displayMode === "faq") {
+        const parsed = parseFaqMarkdown(props.markdown);
+        need(parsed.ok, `markdown-section: ${parsed.ok ? "" : parsed.error}`);
+      }
       break;
     case "pyramid-chart":
       // props は空 ({})。rankingLink / dataSource で描画される。必須フィールドなし。

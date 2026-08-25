@@ -6,39 +6,39 @@ import type { IndicatorSet } from "../indicator-set";
 export const POPULATION_DYNAMICS_SET: IndicatorSet = {
   "key": "population-dynamics",
   "title": "人口動態",
-  "description": "都道府県別の出生率・死亡率・高齢化率・転入超過率をランキングとチャートで比較。人口ピラミッド・年齢構成・自然増減率など11指標の推移を47都道府県で確認できます。",
+  "description": "都道府県の人口増減を、増減率、出生・死亡、転入・転出、年齢構成の順に整理。結果と要因を分けて47都道府県で比較できます。",
   "category": "demographics",
   "usage": "theme",
   "metrics": [
     {
       "rankingKey": "total-population",
       "shortLabel": "総人口",
-      "role": "primary"
+      "role": "context"
     },
     {
       "rankingKey": "total-fertility-rate",
       "shortLabel": "合計特殊出生率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "moving-in-excess-rate",
       "shortLabel": "転入超過率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "ratio-65-plus",
       "shortLabel": "高齢化率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "population-growth-rate",
       "shortLabel": "人口増減率",
-      "role": "context"
+      "role": "primary"
     },
     {
       "rankingKey": "natural-increase-rate",
       "shortLabel": "自然増減率",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "crude-birth-rate",

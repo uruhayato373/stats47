@@ -2,6 +2,8 @@ import { type ReactNode } from 'react';
 
 import { cn } from '@stats47/components';
 
+import { LEFT_RAIL_NARROW_ONLY_CLASS, LeftRailLayout } from './LeftRailLayout';
+
 interface PageShellProps {
   /** 中央メインコンテンツ */
   children: ReactNode;
@@ -22,7 +24,7 @@ interface PageShellProps {
    * - `stack`（既定）: 本文の下に積む。関連リンク集など「読み終えた後で見る」もの向け
    * - `hide`: 描画しない。**ページ内容を切り替えるナビ**はページ末尾に置くと操作対象より
    *   後ろに来て意味を失うため、狭幅では非表示にし、代替 UI をページ側が本文上部に出す
-   *   （テーマページ = ヘッダーの `PAGE_SHELL_NARROW_ONLY_CLASS`）。
+   *   （テーマページ = ヘッダーの `LEFT_RAIL_NARROW_ONLY_CLASS`）。
    *   ★代替 UI 側も同じ共有クラスを使うこと。ずれると両方出る幅ができる
    */
   leftRailNarrowBehavior?: 'stack' | 'hide';
@@ -47,20 +49,6 @@ interface PageShellProps {
  */
 export const SHELL_WIDTH_CLASS =
   'mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-10';
-
-/** ArticleShell の左レール列。読み物は本文幅を優先し、従来どおり lg から表示する。 */
-export const LEFT_RAIL_GRID_CLASS =
-  'lg:grid lg:grid-cols-[264px_minmax(0,1fr)] lg:gap-6 lg:items-start xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10';
-
-/**
- * PageShell の左レールは 992px から表示する。
- * 992px 時の本文幅は 656px（外側48 + rail264 + gap24）で、従来の 1024px 時と同じ。
- * Tailwind 全体の lg や ArticleShell / 右レールの境界は変更しない。
- */
-export const PAGE_SHELL_LEFT_RAIL_GRID_CLASS =
-  'min-[992px]:grid min-[992px]:grid-cols-[264px_minmax(0,1fr)] min-[992px]:gap-6 min-[992px]:items-start xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10';
-export const PAGE_SHELL_LEFT_RAIL_VISIBLE_CLASS = 'hidden min-[992px]:block';
-export const PAGE_SHELL_NARROW_ONLY_CLASS = 'min-[992px]:hidden';
 
 /**
  * 全ページ共通の単一レイアウト Shell。
@@ -98,21 +86,17 @@ export function PageShell({
   const hasLeft = !!leftRail;
   const showLeft = hasLeft && !hasRight;
 
-  const gridClass =
+  const rightGridClass =
     rightRailBreakpoint === 'lg' && hasRight
       ? 'lg:grid lg:grid-cols-[minmax(0,1fr)_316px] lg:gap-10 lg:items-start'
-      : showLeft
-        ? // 左レールは 992px+ で出す。home / ranking / category / theme がこの単一契約を使い、
-          // page.tsx 側へ同じ grid-template-columns を複製しない。
-          PAGE_SHELL_LEFT_RAIL_GRID_CLASS
-        : hasRight
-          ? 'xl:grid xl:grid-cols-[minmax(0,1fr)_316px] xl:gap-10 xl:items-start'
-          : '';
+      : hasRight
+        ? 'xl:grid xl:grid-cols-[minmax(0,1fr)_316px] xl:gap-10 xl:items-start'
+        : '';
 
   // 左レールと右レールは併存しない (showLeft = hasLeft && !hasRight) ので、
   // 積み下ろしの境界はどちらか一方だけを見ればよい。
   const narrowHiddenClass = showLeft
-    ? PAGE_SHELL_NARROW_ONLY_CLASS
+    ? LEFT_RAIL_NARROW_ONLY_CLASS
     : rightRailBreakpoint === 'lg'
       ? 'lg:hidden'
       : 'xl:hidden';
@@ -127,25 +111,26 @@ export function PageShell({
     <div className={cn(SHELL_WIDTH_CLASS, 'py-8', className)}>
       {hasRight || hasLeft ? (
         <>
-          <div className={gridClass}>
-            {showLeft && (
-              <div className={PAGE_SHELL_LEFT_RAIL_VISIBLE_CLASS}>
-                {leftRail}
-              </div>
-            )}
-            <div className={mainClass}>{children}</div>
-            {hasRight && (
-              <div
-                className={
-                  rightRailBreakpoint === 'lg'
-                    ? 'hidden lg:block'
-                    : 'hidden xl:block'
-                }
-              >
-                {rightRail}
-              </div>
-            )}
-          </div>
+          {showLeft ? (
+            <LeftRailLayout leftRail={leftRail} mainClassName={mainClass}>
+              {children}
+            </LeftRailLayout>
+          ) : (
+            <div className={rightGridClass}>
+              <div className={mainClass}>{children}</div>
+              {hasRight && (
+                <div
+                  className={
+                    rightRailBreakpoint === 'lg'
+                      ? 'hidden lg:block'
+                      : 'hidden xl:block'
+                  }
+                >
+                  {rightRail}
+                </div>
+              )}
+            </div>
+          )}
           {/* レール表示幅未満でレールを本文下に積み下ろす */}
           <div className={cn('mt-10 space-y-8', narrowHiddenClass)}>
             {hasRight && rightRail}

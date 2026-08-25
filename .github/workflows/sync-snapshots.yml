@@ -69,12 +69,6 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
-      # 一部 exporter が読むビルド DB (SQLite) を R2 から取得 (read-only)。
-      # DBレス移行で不要になった exporter のみ対象なら失敗しても続行できるよう best-effort。
-      - name: ⬇️ Pull build DB (best-effort)
-        continue-on-error: true
-        run: npm run db:pull --workspace=packages/r2-storage
-
       # 特産品イラスト (Codex 生成・CI では再生成できない実質ソース) を git tracked な
       # source dir から .local/r2 に配置する。run.sh 末尾の snapshot push が
       # app/areas/<code>/specialty/<slug>.webp として R2 に push する。

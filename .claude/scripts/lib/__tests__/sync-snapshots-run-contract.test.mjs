@@ -80,6 +80,32 @@ function finalPushIndex(calls) {
   return calls.findIndex((c) => c.includes("diff-push-r2.ts") && !c.includes("--prefix"));
 }
 
+test("ranking-items を master より先に生成し metadata refresh を master 直前に保つ", () => {
+  const source = fs.readFileSync(RUN_SH, "utf8");
+  const taskBlock = source.match(/declare -a TASKS=\(\n([\s\S]*?)\n\)/)?.[1] ?? "";
+  const labels = [...taskBlock.matchAll(/^\s*"([^|]+)\|/gm)].map((match) => match[1]);
+  const rankingItemsAt = labels.indexOf("ranking-items");
+  const metadataRefreshAt = labels.indexOf("item-metadata-refresh");
+  const masterAt = labels.indexOf("master");
+
+  assert.ok(rankingItemsAt >= 0, "ranking-items task が見つからない");
+  assert.ok(metadataRefreshAt >= 0, "item-metadata-refresh task が見つからない");
+  assert.ok(masterAt >= 0, "master task が見つからない");
+  assert.ok(
+    rankingItemsAt < masterAt,
+    "ranking-items が master より後だと、同じ run の survey reverse-index に新規 item が入らない",
+  );
+  assert.equal(
+    metadataRefreshAt + 1,
+    masterAt,
+    "item-metadata-refresh は master の category 再グループ化へ反映するため直前を保つ",
+  );
+  assert.ok(
+    rankingItemsAt < metadataRefreshAt,
+    "新規 item を生成してから metadata refresh で patch し、master へ渡す必要がある",
+  );
+});
+
 test("1 task が失敗しても、末尾の push を実行してから exit 1 する", () => {
   const { status, stdout, calls } = runRunSh({
     failPattern: "generate-ranking-values.ts",
@@ -141,6 +167,11 @@ test("sync job の timeout は末尾 push を含む実測所要時間を上回�
     Number(m[1]) >= 90,
     `sync job の timeout-minutes=${m[1]} は実測 58 分に対して余裕が無い (90 分以上にすること)`,
   );
+});
+
+test("完全 DB レスの snapshot sync は旧 SQLite を取得しない", () => {
+  const yml = fs.readFileSync(path.join(ROOT, ".github/workflows/sync-snapshots.yml"), "utf8");
+  assert.doesNotMatch(yml, /db:pull|stats47\.sqlite|Pull build DB/);
 });
 
 test("旧ロジック (push より前で exit 1) を注入すると push が呼ばれなくなる = 検査が効いている", () => {

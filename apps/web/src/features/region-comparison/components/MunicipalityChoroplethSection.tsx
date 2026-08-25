@@ -4,6 +4,7 @@ import { useMemo } from "react";
 
 import { DivergingChoroplethMap, type DivergingChoroplethValue } from "@stats47/visualization/d3/DivergingChoroplethMap";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 
 import type { ComparisonRegion } from "../types";
@@ -77,7 +78,12 @@ export function MunicipalityChoroplethSection({ regions, mapData }: Props) {
               <ChartPanel
                 key={panel.region.areaCode}
                 title={panel.region.areaName}
-                footer="出典: 国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」"
+                footer={
+                  <ChartFooter
+                    source="日本の地域別将来推計人口（令和5年推計）"
+                    sourceLink="https://www.ipss.go.jp/pp-shicyoson/j/shicyoson23/t-page.asp"
+                  />
+                }
               >
                 <PanelMap
                   topo={panel.topo}

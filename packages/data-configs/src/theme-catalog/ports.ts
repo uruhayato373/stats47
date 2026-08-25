@@ -78,9 +78,11 @@ export const PORTS_CATALOG: ThemeCatalog = {
           "count"
         ]
       },
+      "relatedRankingKeys": [
+        "port-cargo-total"
+      ],
       "sourceName": "港湾統計",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/port-cargo-total",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

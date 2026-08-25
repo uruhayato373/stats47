@@ -78,17 +78,20 @@ export interface CatalogChart {
   componentType: CatalogComponentType;
   title: string;
   /**
-   * 読者向けの「何が分かるか / どう読むか」。未指定時は componentType ごとの
-   * 決定的な標準文を generator が補い、配信 JSON では必ず文字列になる。
+   * この可視化に固有の誤読防止注釈（対象期間の差、系列断絶、比較不能条件など）。
+   * generator が既存 page-component 契約の componentProps.annotation へ出力する。
+   * 指標一般の定義・単位・算出式は ranking の指標ハブへ置き、ここには複製しない。
    */
-  description?: string;
+  annotation?: string;
   /** チャート固有 props (estatParams 等)。型は app 層 DashboardConfigMap で担保。 */
   componentProps: Record<string, unknown>;
-  /** このチャートが扱う指標の rankingKey (metrics との整合 validator 用) */
+  /**
+   * このコンポーネントが扱う指標の rankingKey。
+   * markdown-section 以外は validator が 1 件以上を必須化し、先頭を主導線に使う。
+   */
   relatedRankingKeys?: string[];
   sourceName?: string | null;
   sourceLink?: string | null;
-  rankingLink?: string | null;
   gridColumnSpan?: number;
   gridColumnSpanTablet?: number | null;
   gridColumnSpanSm?: number | null;

@@ -44,6 +44,11 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
       "rankingKey": "in-pref-university-entrance-ratio-by-highschool-origin",
       "shortLabel": "県内大学進学率",
       "role": "context"
+    },
+    {
+      "rankingKey": "university-count",
+      "shortLabel": "大学数",
+      "role": "context"
     }
   ],
   "keywords": [

@@ -6,7 +6,7 @@ import { cn } from '@stats47/components';
 import { ChevronDown, FileText, ListTree } from 'lucide-react';
 
 import { StatisticsScopeNav } from '@/components/navigation';
-import { SectionHeader } from '@/components/section';
+import { SectionHeader, SectionIndexLink } from '@/components/section';
 
 import { THEME_NAV_GROUPS } from '../config/theme-navigation';
 import { PREFECTURE_SET_LABEL } from '../types';
@@ -101,15 +101,10 @@ export function ThemeSideNav({
             </span>
           }
           as="h2"
+          action={<SectionIndexLink href="/survey" label="調査一覧へ" />}
         />
-        <Link
-          href="/survey"
-          className="flex min-h-10 items-center border-y border-border px-2 text-sm font-medium text-foreground transition-colors hover:bg-accent/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-        >
-          調査一覧へ
-        </Link>
         {surveys.length > 0 && (
-          <ul className="mt-2 space-y-1">
+          <ul className="space-y-1 border-y border-border py-2">
             {surveys.map((survey) => (
               <li key={survey.id}>
                 <Link
@@ -140,14 +135,12 @@ function ThemeGroupNavigation({
 
   return (
     <nav aria-label="テーマを切り替える">
-      <SectionHeader title="テーマ" as="h2" />
+      <SectionHeader
+        title="テーマ"
+        as="h2"
+        action={<SectionIndexLink href="/themes" label="テーマ一覧へ" />}
+      />
       <div className="border-y border-border">
-        <Link
-          href="/themes"
-          className="flex min-h-10 items-center border-b border-border px-2 text-sm font-medium text-foreground transition-colors hover:bg-accent/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-        >
-          テーマ一覧へ
-        </Link>
         {THEME_NAV_GROUPS.map((group) => {
           const groupOptions = group.themeKeys.flatMap((themeKey) => {
             const option = optionByKey.get(themeKey);

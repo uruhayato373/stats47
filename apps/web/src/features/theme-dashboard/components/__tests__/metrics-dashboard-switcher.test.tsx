@@ -1,5 +1,6 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
 
 /**
  * ThemeMetricsDashboard が KPI をどう描くかの契約。
@@ -13,7 +14,7 @@ import { describe, expect, it, vi } from "vitest";
  *      (2026-08-06。カタログ未登録のテーマを壊さないためのフォールバック)
  */
 
-vi.mock("../MetricSwitcherPanel", () => ({
+vi.mock('../MetricSwitcherPanel', () => ({
   MetricSwitcherPanel: ({
     metrics,
     title,
@@ -25,39 +26,41 @@ vi.mock("../MetricSwitcherPanel", () => ({
   }) => (
     <div
       data-testid="switcher-panel"
-      data-keys={metrics.map((m) => m.metricKey).join(",")}
-      data-metric-titles={metrics.map((m) => m.title).join(",")}
-      data-title={title ?? ""}
-      data-default={(defaultCheckedKeys ?? []).join(",")}
+      data-keys={metrics.map((m) => m.metricKey).join(',')}
+      data-metric-titles={metrics.map((m) => m.title).join(',')}
+      data-title={title ?? ''}
+      data-default={(defaultCheckedKeys ?? []).join(',')}
     />
   ),
 }));
-vi.mock("../ThemeDbChartRenderer", () => ({
+vi.mock('../ThemeDbChartRenderer', () => ({
   ThemeDbChartRenderer: () => <div />,
 }));
 
 const { fetchMock } = vi.hoisted(() => ({ fetchMock: vi.fn() }));
-vi.mock("../../actions", () => ({
+vi.mock('../../actions', () => ({
   fetchMetricTimeseriesAction: (...args: unknown[]) => fetchMock(...args),
 }));
 
-import { ThemeMetricsDashboard } from "../ThemeMetricsDashboard";
+import type { PageComponent } from '@/components/stat-charts';
 
-import type { ThemeConfig, ThemeIndicatorData } from "../../types";
+import { ThemeMetricsDashboard } from '../ThemeMetricsDashboard';
 
-const METRIC_KEY = "wage";
+import type { ThemeConfig, ThemeIndicatorData } from '../../types';
+
+const METRIC_KEY = 'wage';
 
 /** KPI に採用されるには MIN_VALUES_FOR_KPI (=10) 以上の観測が要る */
 function indicatorData(
   title: string,
   unit: string,
   valueCount = 12,
-  readerLabel?: string,
+  readerLabel?: string
 ): ThemeIndicatorData {
   return {
     rankingItem: { title, readerLabel, unit },
     rankingValues: Array.from({ length: valueCount }, (_, i) => ({
-      areaCode: String(i + 1).padStart(5, "0"),
+      areaCode: String(i + 1).padStart(5, '0'),
       value: 100 + i,
       rank: i + 1,
     })),
@@ -69,14 +72,17 @@ function indicatorData(
 }
 
 const indicatorDataMap: Record<string, ThemeIndicatorData> = {
-  [METRIC_KEY]: indicatorData("賃金", "円"),
-  ratio: indicatorData("有効求人辺率", "倍"),
-  telework: indicatorData("テレワーク率", "％"),
+  [METRIC_KEY]: indicatorData('賃金', '円'),
+  ratio: indicatorData('有効求人辺率', '倍'),
+  telework: indicatorData('テレワーク率', '％'),
   /** 観測 3 件 = MIN_VALUES_FOR_KPI 未満なので KPI に採用されない */
-  thin: indicatorData("観測不足", "円", 3),
+  thin: indicatorData('観測不足', '円', 3),
 };
 
-function themeConfig(themeKey: string, keys: string[] = [METRIC_KEY]): ThemeConfig {
+function themeConfig(
+  themeKey: string,
+  keys: string[] = [METRIC_KEY]
+): ThemeConfig {
   return {
     themeKey,
     tabIndicators: keys.map((k) => ({ rankingKey: k, tabLabel: k })),
@@ -86,7 +92,7 @@ function themeConfig(themeKey: string, keys: string[] = [METRIC_KEY]): ThemeConf
 
 function renderDashboard(
   themeKey: string,
-  over: Partial<React.ComponentProps<typeof ThemeMetricsDashboard>> = {},
+  over: Partial<React.ComponentProps<typeof ThemeMetricsDashboard>> = {}
 ) {
   return render(
     <ThemeMetricsDashboard
@@ -94,145 +100,220 @@ function renderDashboard(
       indicatorDataMap={indicatorDataMap}
       selectedPrefectureCode={null}
       {...over}
-    />,
+    />
   );
 }
 
 function panels() {
-  return screen.getAllByTestId("switcher-panel");
+  return screen.getAllByTestId('switcher-panel');
 }
 
-describe("ThemeMetricsDashboard — KPI の描画", () => {
-  it.each(["labor-wages", "population-dynamics", "safety", "occupation-salary"])(
-    "%s で切替パネルを描く (テーマ別の分岐を持たない)",
-    (themeKey) => {
-      renderDashboard(themeKey);
-      expect(screen.getByTestId("switcher-panel")).toBeInTheDocument();
-    },
-  );
-
-  it("旧 ChartCard グリッドの導線を描かない (二重表示の復活防止)", () => {
-    renderDashboard("population-dynamics");
-    // 旧グリッドは各カード footer に /ranking/<key> リンクを持っていた。
-    // 現在この導線は切替パネル内のフッター 1 本だけが担う (パネルは mock 済 = 0 本)
-    expect(screen.queryByRole("link", { name: /ランキングを見る/ })).toBeNull();
+describe('ThemeMetricsDashboard — KPI の描画', () => {
+  it.each([
+    'labor-wages',
+    'population-dynamics',
+    'safety',
+    'occupation-salary',
+  ])('%s で切替パネルを描く (テーマ別の分岐を持たない)', (themeKey) => {
+    renderDashboard(themeKey);
+    expect(screen.getByTestId('switcher-panel')).toBeInTheDocument();
   });
 
-  it("★KPI の一括全国 fetch を行わない (選択指標だけをパネルが遅延取得する)", () => {
+  it('旧 ChartCard グリッドの導線を描かない (二重表示の復活防止)', () => {
+    renderDashboard('population-dynamics');
+    // 旧グリッドは各カード footer に /ranking/<key> リンクを持っていた。
+    // 現在この導線は切替パネル内のフッター 1 本だけが担う (パネルは mock 済 = 0 本)
+    expect(screen.queryByRole('link', { name: /ランキングを見る/ })).toBeNull();
+  });
+
+  it('★KPI の一括全国 fetch を行わない (選択指標だけをパネルが遅延取得する)', () => {
     fetchMock.mockClear();
-    renderDashboard("population-dynamics");
+    renderDashboard('population-dynamics');
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it("主要指標の重複見出しは読み上げ用だけに残す ('47都道府県'、'全国'ではない)", () => {
-    renderDashboard("education-culture");
-    expect(screen.getByRole("heading", { name: "47都道府県の主要指標" })).toHaveClass("sr-only");
+    renderDashboard('education-culture');
+    expect(
+      screen.getByRole('heading', { name: '47都道府県の主要指標' })
+    ).toHaveClass('sr-only');
   });
 
-  it("タイルには tabIndicators 由来の指標が渡る", () => {
-    renderDashboard("labor-wages");
-    expect(screen.getByTestId("switcher-panel")).toHaveAttribute("data-keys", METRIC_KEY);
+  it('タイルには tabIndicators 由来の指標が渡る', () => {
+    renderDashboard('labor-wages');
+    expect(screen.getByTestId('switcher-panel')).toHaveAttribute(
+      'data-keys',
+      METRIC_KEY
+    );
   });
 
-  it("正式指標名ではなく読者向けラベルをタイルへ渡す", () => {
-    renderDashboard("education-culture", {
+  it('正式指標名ではなく読者向けラベルをタイルへ渡す', () => {
+    renderDashboard('education-culture', {
       indicatorDataMap: {
         [METRIC_KEY]: indicatorData(
-          "日曜大工の行動者率",
-          "％",
+          '日曜大工の行動者率',
+          '％',
           12,
-          "日曜大工をした人の割合",
+          '日曜大工をした人の割合'
         ),
       },
     });
-    expect(screen.getByTestId("switcher-panel")).toHaveAttribute(
-      "data-metric-titles",
-      "日曜大工をした人の割合",
+    expect(screen.getByTestId('switcher-panel')).toHaveAttribute(
+      'data-metric-titles',
+      '日曜大工をした人の割合'
     );
   });
 });
 
-describe("ThemeMetricsDashboard — 指標カードの編成 (metricGroups)", () => {
-  const THREE = [METRIC_KEY, "ratio", "telework"];
+describe('ThemeMetricsDashboard — 指標カードの編成 (metricGroups)', () => {
+  const THREE = [METRIC_KEY, 'ratio', 'telework'];
 
-  it("metricGroups があればグループ数ぶんのカードに分かれる", () => {
+  it('metricGroups があればグループ数ぶんのカードに分かれる', () => {
     render(
       <ThemeMetricsDashboard
-        themeConfig={themeConfig("labor-wages", THREE)}
+        themeConfig={themeConfig('labor-wages', THREE)}
         metricGroups={[
-          { key: "level", title: "賃金の水準", rankingKeys: [METRIC_KEY], defaultCheckedKeys: [METRIC_KEY] },
           {
-            key: "market",
-            title: "労働市場",
-            rankingKeys: ["ratio", "telework"],
-            defaultCheckedKeys: ["ratio", "telework"],
+            key: 'level',
+            title: '賃金の水準',
+            rankingKeys: [METRIC_KEY],
+            defaultCheckedKeys: [METRIC_KEY],
+          },
+          {
+            key: 'market',
+            title: '労働市場',
+            rankingKeys: ['ratio', 'telework'],
+            defaultCheckedKeys: ['ratio', 'telework'],
           },
         ]}
         indicatorDataMap={indicatorDataMap}
         selectedPrefectureCode={null}
-      />,
+      />
     );
     const found = panels();
     expect(found).toHaveLength(2);
-    expect(found[0]).toHaveAttribute("data-title", "賃金の水準");
-    expect(found[0]).toHaveAttribute("data-keys", METRIC_KEY);
-    expect(found[1]).toHaveAttribute("data-title", "労働市場");
-    expect(found[1]).toHaveAttribute("data-keys", "ratio,telework");
-    expect(found[1]).toHaveAttribute("data-default", "ratio,telework");
+    expect(found[0]).toHaveAttribute('data-title', '賃金の水準');
+    expect(found[0]).toHaveAttribute('data-keys', METRIC_KEY);
+    expect(found[1]).toHaveAttribute('data-title', '労働市場');
+    expect(found[1]).toHaveAttribute('data-keys', 'ratio,telework');
+    expect(found[1]).toHaveAttribute('data-default', 'ratio,telework');
   });
 
-  it("metricGroups 未定義なら全 KPI を 1 枚に倒す (カタログ未登録テーマを壊さない)", () => {
+  it('metricGroups 未定義なら全 KPI を 1 枚に倒す (カタログ未登録テーマを壊さない)', () => {
     render(
       <ThemeMetricsDashboard
-        themeConfig={themeConfig("climate", THREE)}
+        themeConfig={themeConfig('climate', THREE)}
         indicatorDataMap={indicatorDataMap}
         selectedPrefectureCode={null}
-      />,
+      />
     );
     const found = panels();
     expect(found).toHaveLength(1);
-    expect(found[0]).toHaveAttribute("data-keys", THREE.join(","));
+    expect(found[0]).toHaveAttribute('data-keys', THREE.join(','));
     // 見出しは section の h2 が言うのでパネル側には渡さない
-    expect(found[0]).toHaveAttribute("data-title", "");
-    expect(found[0]).toHaveAttribute("data-default", METRIC_KEY);
+    expect(found[0]).toHaveAttribute('data-title', '');
+    expect(found[0]).toHaveAttribute('data-default', METRIC_KEY);
   });
 
-  it("観測不足で KPI から落ちたキーはグループからも除き、初期チェックを生存キーに絞る", () => {
+  it('観測不足で KPI から落ちたキーはグループからも除き、初期チェックを生存キーに絞る', () => {
     render(
       <ThemeMetricsDashboard
-        themeConfig={themeConfig("labor-wages", [METRIC_KEY, "thin"])}
+        themeConfig={themeConfig('labor-wages', [METRIC_KEY, 'thin'])}
         metricGroups={[
           {
-            key: "level",
-            title: "賃金の水準",
-            rankingKeys: [METRIC_KEY, "thin"],
-            defaultCheckedKeys: [METRIC_KEY, "thin"],
+            key: 'level',
+            title: '賃金の水準',
+            rankingKeys: [METRIC_KEY, 'thin'],
+            defaultCheckedKeys: [METRIC_KEY, 'thin'],
           },
         ]}
         indicatorDataMap={indicatorDataMap}
         selectedPrefectureCode={null}
-      />,
+      />
     );
     const found = panels();
     expect(found).toHaveLength(1);
-    expect(found[0]).toHaveAttribute("data-keys", METRIC_KEY);
-    expect(found[0]).toHaveAttribute("data-default", METRIC_KEY);
+    expect(found[0]).toHaveAttribute('data-keys', METRIC_KEY);
+    expect(found[0]).toHaveAttribute('data-default', METRIC_KEY);
   });
 
-  it("グループの指標が全滅したらそのカードは描かない (空カードを置かない)", () => {
+  it('グループの指標が全滅したらそのカードは描かない (空カードを置かない)', () => {
     render(
       <ThemeMetricsDashboard
-        themeConfig={themeConfig("labor-wages", [METRIC_KEY, "thin"])}
+        themeConfig={themeConfig('labor-wages', [METRIC_KEY, 'thin'])}
         metricGroups={[
-          { key: "level", title: "賃金の水準", rankingKeys: [METRIC_KEY], defaultCheckedKeys: [METRIC_KEY] },
-          { key: "dead", title: "観測不足のみ", rankingKeys: ["thin"], defaultCheckedKeys: ["thin"] },
+          {
+            key: 'level',
+            title: '賃金の水準',
+            rankingKeys: [METRIC_KEY],
+            defaultCheckedKeys: [METRIC_KEY],
+          },
+          {
+            key: 'dead',
+            title: '観測不足のみ',
+            rankingKeys: ['thin'],
+            defaultCheckedKeys: ['thin'],
+          },
         ]}
         indicatorDataMap={indicatorDataMap}
         selectedPrefectureCode={null}
-      />,
+      />
     );
     const found = panels();
     expect(found).toHaveLength(1);
-    expect(found[0]).toHaveAttribute("data-title", "賃金の水準");
+    expect(found[0]).toHaveAttribute('data-title', '賃金の水準');
+  });
+});
+
+describe('ThemeMetricsDashboard — chart編集情報', () => {
+  const chart: PageComponent = {
+    componentKey: 'test-trend',
+    componentType: 'line-chart',
+    title: '出生率の推移',
+    description: '線の傾きから変化を確認できます。',
+    componentProps: {
+      annotation: '2020年に系列が接続しません。',
+      rankingLinks: [
+        { label: '第2指標の定義・ランキング', url: '/ranking/second' },
+        { label: '第3指標の定義・ランキング', url: '/ranking/third' },
+        { label: '第4指標の定義・ランキング', url: '/ranking/fourth' },
+      ],
+    },
+    sourceName: '人口動態統計',
+    sourceLink: null,
+    rankingLink: '/ranking/primary',
+    gridColumnSpan: 12,
+    gridColumnSpanTablet: null,
+    gridColumnSpanSm: null,
+    dataSource: null,
+    section: null,
+    sortOrder: 0,
+  };
+
+  it('header定型文を隠し、footerへ固有注釈・全hub・調査導線を置く', async () => {
+    const user = userEvent.setup();
+    renderDashboard('population-dynamics', {
+      pageCharts: [chart],
+      chartSourceLinks: {
+        'test-trend': [
+          { label: '人口動態統計', url: '/survey/vital-statistics' },
+        ],
+      },
+    });
+
+    expect(screen.getByRole('region', { name: '出生率の推移' })).toBeVisible();
+    expect(screen.queryByText('線の傾きから変化を確認できます。')).toBeNull();
+    expect(screen.getByText('2020年に系列が接続しません。')).toBeVisible();
+    expect(screen.getByRole('link', { name: '出典: 人口動態統計' })).toHaveAttribute(
+      'href',
+      '/survey/vital-statistics'
+    );
+    await user.click(screen.getByRole('button', { name: 'ランキング4件を表示' }));
+    expect(
+      screen.getByRole('menuitem', { name: '指標の定義・ランキング' })
+    ).toHaveAttribute('href', '/ranking/primary');
+    expect(screen.getByRole('menuitem', { name: '第2指標の定義・ランキング' })).toBeVisible();
+    expect(screen.getByRole('menuitem', { name: '第3指標の定義・ランキング' })).toBeVisible();
+    expect(screen.getByRole('menuitem', { name: '第4指標の定義・ランキング' })).toBeVisible();
   });
 });

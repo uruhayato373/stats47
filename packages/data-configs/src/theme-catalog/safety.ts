@@ -131,7 +131,12 @@ export const SAFETY_CATALOG: ThemeCatalog = {
       "rankingKey": "police-officer-count-per-population",
       "shortLabel": "警察官数",
       "role": "context"
-    }
+    },
+    {
+      "rankingKey": "traffic-accident-injuries",
+      "shortLabel": "交通事故負傷者数",
+      "role": "context"
+    },
   ],
   "charts": [
     {
@@ -166,9 +171,12 @@ export const SAFETY_CATALOG: ThemeCatalog = {
           "improve"
         ]
       },
+      "relatedRankingKeys": [
+        "penal-code-offenses-recognized-per-1000",
+        "criminal-arrest-rate"
+      ],
       "sourceName": "犯罪統計",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -200,9 +208,12 @@ export const SAFETY_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "traffic-accident-count",
+        "traffic-accident-injuries"
+      ],
       "sourceName": "交通事故統計",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -234,9 +245,12 @@ export const SAFETY_CATALOG: ThemeCatalog = {
           "improve"
         ]
       },
+      "relatedRankingKeys": [
+        "building-fire-count-per-100-thousand-people",
+        "annual-emergency-dispatches-per-1000"
+      ],
       "sourceName": "消防統計",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -268,9 +282,12 @@ export const SAFETY_CATALOG: ThemeCatalog = {
           "neutral"
         ]
       },
+      "relatedRankingKeys": [
+        "suicides-per-100k",
+        "accidental-deaths-per-100k"
+      ],
       "sourceName": "人口動態統計",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -313,9 +330,11 @@ export const SAFETY_CATALOG: ThemeCatalog = {
           }
         ]
       },
+      "relatedRankingKeys": [
+        "criminal-recognition-count"
+      ],
       "sourceName": "総務省統計局 社会・人口統計体系（警察庁 犯罪統計）",
       "sourceLink": null,
-      "rankingLink": "/ranking/criminal-recognition-count",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -343,9 +362,11 @@ export const SAFETY_CATALOG: ThemeCatalog = {
           }
         ]
       },
+      "relatedRankingKeys": [
+        "fire-deaths-per-100k"
+      ],
       "sourceName": "総務省統計局 社会・人口統計体系（消防庁 火災年報）",
       "sourceLink": null,
-      "rankingLink": "/ranking/fire-deaths-per-100k",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

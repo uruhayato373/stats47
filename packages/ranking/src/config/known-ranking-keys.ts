@@ -15,8 +15,8 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-08-16
- * 件数: 2164
+ * 最終生成日: 2026-08-25
+ * 件数: 2167
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -854,6 +854,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "homemaking-lesson-consumption-expenditure",
   "horse-mackerel-consumption-expenditure",
   "horse-mackerel-consumption-quantity",
+  "hospital-bed-count",
   "hospital-staff-by-occupation",
   "household-head-allowance-consumption-expenditure",
   "household-head-annual-income-per-household",
@@ -1166,6 +1167,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "national-health-insurance-enrollees-per-1000",
   "national-health-insurance-medical-expense-per-person",
   "national-health-insurance-visit-rate-per-1000",
+  "national-medical-expense-inpatient",
   "national-medical-expense-per-person",
   "national-medical-expense-total",
   "national-park-area",
@@ -1863,6 +1865,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "spouse-income",
   "squid-consumption-expenditure",
   "squid-consumption-quantity",
+  "ss-pollution-load",
   "standard-fiscal-demand-municipality",
   "standard-fiscal-expenditure",
   "standard-fiscal-revenue",

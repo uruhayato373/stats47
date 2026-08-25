@@ -9,6 +9,7 @@
  */
 import {
   resolveProvenanceByParams,
+  resolveSurveyIdBySourceName,
   type MetricRegistry,
   type ProvenanceSurvey,
 } from "@stats47/data-configs";
@@ -28,6 +29,7 @@ export interface SurveyEstatReference {
 export interface SurveyTaxonomyInput {
   metricKeys?: readonly string[];
   estatReferences?: readonly SurveyEstatReference[];
+  sourceNames?: readonly string[];
 }
 
 export interface SurveyTaxonomyResolution {
@@ -36,6 +38,8 @@ export interface SurveyTaxonomyResolution {
   unresolvedMetricKeys: string[];
   resolvedEstatReferences: SurveyEstatReference[];
   unresolvedEstatReferences: SurveyEstatReference[];
+  resolvedSourceNames: string[];
+  unresolvedSourceNames: string[];
 }
 
 export type SurveySurfaceStatus =
@@ -66,6 +70,7 @@ export interface BlogChartSourceReferences {
   rankingKeys: string[];
   statsDataIds: string[];
   estatReferences: SurveyEstatReference[];
+  sourceNames: string[];
 }
 
 export interface BlogChartSurveyTaxonomy {
@@ -75,6 +80,7 @@ export interface BlogChartSurveyTaxonomy {
   references: BlogChartSourceReferences;
   unresolvedMetricKeys: string[];
   unresolvedEstatReferences: SurveyEstatReference[];
+  unresolvedSourceNames: string[];
 }
 
 const MASTER_BY_ID = new Map(
@@ -82,7 +88,7 @@ const MASTER_BY_ID = new Map(
 );
 const MASTER_IDS = new Set(MASTER_BY_ID.keys());
 
-const NON_SURVEY_BLOG_KINDS = new Set(["authored", "manual"]);
+const NON_SURVEY_BLOG_KINDS = new Set(["authored"]);
 
 function unique(values: readonly string[]): string[] {
   return [...new Set(values.filter(Boolean))];
@@ -119,6 +125,8 @@ export function resolveSurveyTaxonomy(
   const unresolvedMetricKeys: string[] = [];
   const resolvedEstatReferences: SurveyEstatReference[] = [];
   const unresolvedEstatReferences: SurveyEstatReference[] = [];
+  const resolvedSourceNames: string[] = [];
+  const unresolvedSourceNames: string[] = [];
 
   for (const key of unique(input.metricKeys ?? [])) {
     const metric = registry[key];
@@ -151,18 +159,29 @@ export function resolveSurveyTaxonomy(
     }
   }
 
+  for (const sourceName of unique(input.sourceNames ?? [])) {
+    const surveyId = resolveSurveyIdBySourceName(sourceName);
+    const entries = surveyId ? getSurveyTaxonomyEntries([surveyId]) : [];
+    if (entries.length === 0) unresolvedSourceNames.push(sourceName);
+    else {
+      resolvedSourceNames.push(sourceName);
+      surveys.push(...entries);
+    }
+  }
+
   return {
     surveys: dedupeSurveys(surveys),
     resolvedMetricKeys,
     unresolvedMetricKeys,
     resolvedEstatReferences,
     unresolvedEstatReferences,
+    resolvedSourceNames,
+    unresolvedSourceNames,
   };
 }
 
 function chartMetricKeys(chart: ThemeCatalog["charts"][number]): string[] {
-  const linkKey = /^\/ranking\/([a-z0-9-]+)\/?$/.exec(chart.rankingLink ?? "")?.[1];
-  return unique([...(chart.relatedRankingKeys ?? []), ...(linkKey ? [linkKey] : [])]);
+  return unique(chart.relatedRankingKeys ?? []);
 }
 
 /** ThemeCatalog の metric と全 chart を survey taxonomy へ決定的に接続する。 */
@@ -258,7 +277,7 @@ function nestedRecords(source: Record<string, unknown>): Record<string, unknown>
 /** blog chart source.json から taxonomy が読む参照だけを決定的に抽出する。 */
 export function extractBlogChartSourceReferences(sourceData: unknown): BlogChartSourceReferences {
   if (!isRecord(sourceData)) {
-    return { rankingKeys: [], statsDataIds: [], estatReferences: [] };
+    return { rankingKeys: [], statsDataIds: [], estatReferences: [], sourceNames: [] };
   }
 
   const nested = nestedRecords(sourceData);
@@ -288,8 +307,11 @@ export function extractBlogChartSourceReferences(sourceData: unknown): BlogChart
     }
   }
   const statsDataIds = unique(estatReferences.map((reference) => reference.statsDataId));
+  const sourceNames = unique(
+    nested.flatMap((item) => splitReferenceValues(item.sourceName)),
+  );
 
-  return { rankingKeys, statsDataIds, estatReferences };
+  return { rankingKeys, statsDataIds, estatReferences, sourceNames };
 }
 
 /** blog chart source.json 1 件を survey taxonomy へ接続する。 */
@@ -302,9 +324,10 @@ export function resolveBlogChartSurveyTaxonomy(
       kind: null,
       status: "missing-lineage",
       surveys: [],
-      references: { rankingKeys: [], statsDataIds: [], estatReferences: [] },
+      references: { rankingKeys: [], statsDataIds: [], estatReferences: [], sourceNames: [] },
       unresolvedMetricKeys: [],
       unresolvedEstatReferences: [],
+      unresolvedSourceNames: [],
     };
   }
   const kind = typeof sourceData.kind === "string" ? sourceData.kind : null;
@@ -317,13 +340,32 @@ export function resolveBlogChartSurveyTaxonomy(
       references,
       unresolvedMetricKeys: [],
       unresolvedEstatReferences: [],
+      unresolvedSourceNames: [],
+    };
+  }
+  if (kind === "manual" && references.sourceNames.length === 0) {
+    return {
+      kind,
+      status: "not-applicable",
+      surveys: [],
+      references,
+      unresolvedMetricKeys: [],
+      unresolvedEstatReferences: [],
+      unresolvedSourceNames: [],
     };
   }
   const resolution = resolveSurveyTaxonomy(
-    { metricKeys: references.rankingKeys, estatReferences: references.estatReferences },
+    {
+      metricKeys: references.rankingKeys,
+      estatReferences: references.estatReferences,
+      sourceNames: references.sourceNames,
+    },
     registry,
   );
-  const hasReferences = references.rankingKeys.length > 0 || references.estatReferences.length > 0;
+  const hasReferences =
+    references.rankingKeys.length > 0 ||
+    references.estatReferences.length > 0 ||
+    references.sourceNames.length > 0;
   return {
     kind,
     status:
@@ -336,5 +378,6 @@ export function resolveBlogChartSurveyTaxonomy(
     references,
     unresolvedMetricKeys: resolution.unresolvedMetricKeys,
     unresolvedEstatReferences: resolution.unresolvedEstatReferences,
+    unresolvedSourceNames: resolution.unresolvedSourceNames,
   };
 }

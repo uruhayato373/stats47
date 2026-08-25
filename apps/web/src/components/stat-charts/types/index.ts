@@ -52,6 +52,8 @@ export interface DashboardCommonProps {
   sourceLink?: string | null;
   /** データソース名（例: "社会・人口統計体系"） */
   sourceName?: string | null;
+  /** taxonomy から解決した調査ハブ（手書き surveyId は持たない） */
+  sourceLinks?: Array<{ label: string; url: string }>;
   /** データソース種別（デフォルト: "estat"） */
   dataSource?: string;
   /** 注釈テキスト（カード下部に表示、出典とは別） */

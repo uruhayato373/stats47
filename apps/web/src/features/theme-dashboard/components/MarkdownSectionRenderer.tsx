@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 
+import { FaqSection } from "@/components/content";
 import { SurfaceSection } from "@/components/surface";
 
 import type { MarkdownSectionComponentProps } from "../types";
@@ -37,7 +38,30 @@ const proseClasses =
  * - 入力は信頼できる DB 経由前提（DOMPurify は不要）
  */
 export function MarkdownSectionRenderer({ title, props, fallbackSourceName }: Props) {
-  const { markdown, subtitle, sources } = props;
+  const { subtitle, sources } = props;
+
+  if (props.displayMode === "faq") {
+    const faqSources = sources?.length
+      ? sources
+      : fallbackSourceName
+        ? [{ label: fallbackSourceName }]
+        : undefined;
+    return (
+      <FaqSection
+        title={title}
+        subtitle={subtitle}
+        items={props.items}
+        sources={faqSources}
+        renderAnswer={(answer) => (
+          <div className={proseClasses}>
+            <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+              {`A. ${answer}`}
+            </ReactMarkdown>
+          </div>
+        )}
+      />
+    );
+  }
 
   return (
     <SurfaceSection
@@ -50,7 +74,7 @@ export function MarkdownSectionRenderer({ title, props, fallbackSourceName }: Pr
       )}
       <div className={proseClasses}>
         <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
-          {markdown}
+          {props.markdown}
         </ReactMarkdown>
       </div>
       {sources && sources.length > 0 && (

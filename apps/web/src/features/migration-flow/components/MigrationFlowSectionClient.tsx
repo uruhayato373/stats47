@@ -70,6 +70,7 @@ export function MigrationFlowSectionClient({ initialData }: Props) {
       footer={
         <ChartFooter
           source="住民基本台帳人口移動報告"
+          sourceLink="https://www.e-stat.go.jp/dbview?sid=0003423613"
           rankingLink="/ranking/moving-in-excess-rate"
           rankingLabel="ランキングを見る"
         />

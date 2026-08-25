@@ -69,6 +69,7 @@ export const PyramidChartDashboard = async ({
           <ChartFooter
             source={sourceName ?? undefined}
             sourceLink={sourceLink}
+            sourceLinks={common.sourceLinks}
             sourceDetail="人"
             annotation={annotation}
             rankingLink={rankingLink}

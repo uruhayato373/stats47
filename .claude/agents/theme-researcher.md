@@ -31,8 +31,9 @@ model: sonnet
 
 - テーマに載せるべき指標候補を **白書 (NotebookLM) / Web / 競合ダッシュボード / GSC 検索需要** から発見
 - 白書の政策論点を既存 `EvidenceLensKey` に正規化し、関連 ranking / theme / tag の周遊候補を発見
-- 各候補に **推奨チャート (componentType)** と **選定根拠 (provenance)** を付与
-- 候補の **e-Stat 実在検証を estat-researcher に委譲**し、実装可能性を確認
+- 各候補に **推奨チャート (componentType)**、実在 `relatedRankingKeys`、選定根拠を付与
+- 定義・母集団・分母・系列断絶・比較不能条件を調べ、chart 固有の `annotation` 候補だけを返す
+- 候補の **e-Stat 実在検証を inline tool で実行**し、実装可能性を確認
 - 実在確認に合格した提案を `.claude/todo/backlog.md` の7列候補表へ1行追加
 
 ## File Boundary (read-only 原則)
@@ -87,22 +88,25 @@ statsDataId、必要なcdCat、都道府県粒度、年次、既存非重複を�
 | Lens | Question | Official source | Related ranking/theme/tag | Verdict |
 ```
 
+chart 候補は `Candidate | componentType | relatedRankingKeys | annotation candidate | Evidence | Verdict` で返す。
+`annotation candidate` は具体的な誤読リスクがある場合だけ記述し、「推移を確認できます」等の汎用文は禁止。
+
 ## Output Contract (呼び出し元への chat 返答)
 
 `.claude/rules/agent-output-contract.md` に従う。
 
-- **Template A** (table-only): 指標は `候補 | 推奨チャート | statsDataId | 出典 | e-Stat実在 | verdict`、論点は `Lens | Question | Official source | Related routes | verdict`
+- **Template A** (table-only): 指標は `候補 | 推奨チャート | relatedRankingKeys | annotation candidate | statsDataId | 出典 | verdict`、論点は `Lens | Question | Official source | Related routes | verdict`
 - verdict は「採用推奨 / 要判断 / 不採用」。Reason 列は 8 words 以内
 - prose / section header / 前置き文は禁止。詳細は backlog.md に書き chat には出さない
 - 各採用候補は一次資料URLとstatsDataId+cdCat01へ結び付ける。tool回数は証拠として扱わない。
 
 ## 連携パターン
 
-| シナリオ | フロー |
-|---|---|
-| 新規テーマ調査 | theme-researcher (調査→提案) → 人間レビュー → theme-designer (catalog TS) → theme-component-builder (props) |
-| 既存テーマ拡充 | gsc-analyst (流入分析) → theme-researcher (不足指標調査) → theme-designer |
-| 未登録指標の発見 | theme-researcher (候補) → estat-researcher (実在確認) → data-ingester (投入) |
+| シナリオ         | フロー                                                                                                      |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- |
+| 新規テーマ調査   | theme-researcher (調査→提案) → 人間レビュー → theme-designer (catalog TS) → theme-component-builder (props) |
+| 既存テーマ拡充   | gsc-analyst (流入分析) → theme-researcher (不足指標調査) → theme-designer                                   |
+| 未登録指標の発見 | theme-researcher (inline 実在確認) → data-ingester (投入)                                                   |
 
 ## トークン節約の要点
 

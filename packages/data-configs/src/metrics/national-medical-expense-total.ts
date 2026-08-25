@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const nationalMedicalExpenseTotal: MetricConfig = {
   "key": "national-medical-expense-total",
   "title": "国民医療費",
+  "subtitle": "総額",
   "unit": "億円",
   "category": "socialsecurity",
   "source": {

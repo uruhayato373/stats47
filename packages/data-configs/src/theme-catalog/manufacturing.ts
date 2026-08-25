@@ -151,7 +151,6 @@ export const MANUFACTURING_CATALOG: ThemeCatalog = {
         "manufacturing-shipment-amount-per-establishment"
       ],
       "sourceName": "総務省 社会・人口統計体系",
-      "rankingLink": "/ranking/manufacturing-shipment-amount-per-employee",
       "gridColumnSpan": 12,
       "dataSource": "ranking",
       "sortOrder": 100

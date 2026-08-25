@@ -8,7 +8,7 @@
 > - **角丸はサイト全体で 0**（`--radius:0`）。下記 `rounded-lg`/`rounded-md` 等は**すべて 0 に解決**される。
 >   手動の `rounded-xl`/`rounded-2xl` は禁止。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。
 > - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。
-> - **横幅は `PageShell`（`@/components/layout`）経由**で統一（1280px / 右レール 316px / lg+ 左右 40px）。
+> - **横幅は `PageShell` / `ArticleShell`（`@/components/layout`）経由**で統一。左レールは共有 `LeftRailLayout`（992px / 左264〜280px）、右レールは316px。
 
 ---
 
@@ -17,7 +17,7 @@
 ```
 ページ全体         : bg-background min-h-screen
 ページコンテンツ   : <PageShell>...</PageShell>（@/components/layout、1280px・px-4 sm:px-6 lg:px-10・py-8）
-2/3カラム          : <PageShell rightRail={...}> または <PageShell leftRail={...}>（右316px / 左280px・併用不可）
+2/3カラム          : <PageShell ...> / <ArticleShell ...>（左は共有 LeftRailLayout、右316px・併用不可）
 セクション間隔     : space-y-8 〜 space-y-10
 仕切り線           : border-t border-border
 ```

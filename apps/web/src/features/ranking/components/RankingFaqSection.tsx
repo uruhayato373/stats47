@@ -1,4 +1,4 @@
-import { SurfaceSection } from "@/components/surface";
+import { FaqSection } from "@/components/content";
 
 interface FaqItem {
   question: string;
@@ -73,41 +73,10 @@ export function RankingFaqSection({ faqJson, rankingName }: RankingFaqSectionPro
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replaceAll("<", "\\u003c") }}
       />
-      <SurfaceSection
-        aria-labelledby="ranking-faq-heading"
-        className="p-0"
-      >
-        <details open className="group">
-          <summary className="flex cursor-pointer items-center justify-between px-6 py-4 font-semibold text-foreground">
-            <h2 id="ranking-faq-heading" className="text-lg">
-              {rankingName} についてよくある質問
-            </h2>
-            <span aria-hidden className="text-muted-foreground transition-transform group-open:rotate-180">
-              ▼
-            </span>
-          </summary>
-          <div className="border-t px-6 pb-6">
-            {items.map((item, idx) => (
-              <details
-                key={idx}
-                className="group/q border-b py-3 last:border-b-0"
-              >
-                <summary className="flex cursor-pointer items-start justify-between gap-3 text-left">
-                  <span className="font-medium text-foreground">
-                    Q. {item.question}
-                  </span>
-                  <span aria-hidden className="text-xs text-muted-foreground transition-transform group-open/q:rotate-180">
-                    ▼
-                  </span>
-                </summary>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  A. {item.answer}
-                </p>
-              </details>
-            ))}
-          </div>
-        </details>
-      </SurfaceSection>
+      <FaqSection
+        title={`${rankingName}についてよくある質問`}
+        items={items}
+      />
     </>
   );
 }

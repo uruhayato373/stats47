@@ -13,7 +13,7 @@ export const StatsTable = async ({
   common,
   config,
 }: DashboardItemProps<"stats-table">) => {
-  const { title, area, rankingLink, sourceName, sourceLink } = common;
+  const { title, area, rankingLink, sourceName, sourceLink, sourceLinks } = common;
   const { statsDataId, rows: rowDefs, description } = config;
   const areaCode = area.areaCode;
 
@@ -57,6 +57,7 @@ export const StatsTable = async ({
           dataByYear={tableData.dataByYear}
           sourceName={sourceName}
           sourceLink={sourceLink}
+          sourceLinks={sourceLinks}
         />
       );
     }

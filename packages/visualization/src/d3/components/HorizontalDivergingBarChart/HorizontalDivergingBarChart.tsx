@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@stats47/components";
+import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 import { select, scaleLinear, scaleBand, axisTop } from "d3";
 import { useEffect, useRef } from "react";
 import { computeChartLayout, computeMarginsByRatio } from "../../../shared/layout";
@@ -41,6 +42,20 @@ export function HorizontalDivergingBarChart({
   });
 
   const { innerWidth, innerHeight, marginTop, marginLeft } = layout;
+  const values = data.map((item) => item.value);
+  const valuePrecision = resolveValuePrecision([...values, baseline]);
+  const valueRange =
+    values.length > 0
+      ? `${formatValueWithPrecision(Math.min(...values), valuePrecision)}から${formatValueWithPrecision(Math.max(...values), valuePrecision)}${unit}`
+      : undefined;
+  const accessibleLabel = [
+    "基準値からの乖離を示す水平棒グラフ",
+    `基準値: ${formatValueWithPrecision(baseline, valuePrecision)}${unit}`,
+    `項目: ${data.map((item) => item.label).join("、")}`,
+    valueRange ? `値の範囲: ${valueRange}` : undefined,
+  ]
+    .filter(Boolean)
+    .join("。");
 
   useEffect(() => {
     if (!svgRef.current || data.length === 0) return;
@@ -171,6 +186,8 @@ export function HorizontalDivergingBarChart({
         height="100%"
         viewBox={`0 0 ${width} ${height}`}
         preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-label={accessibleLabel}
       />
     </div>
   );

@@ -74,6 +74,11 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
       "rankingKey": "divorces",
       "shortLabel": "離婚件数",
       "role": "context"
+    },
+    {
+      "rankingKey": "single-person-household-ratio",
+      "shortLabel": "単独世帯割合",
+      "role": "context"
     }
   ],
   "keywords": [

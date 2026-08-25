@@ -1,10 +1,10 @@
 'use client';
 
-import { type ReactNode } from 'react';
+import { type ReactNode, useId } from 'react';
 
 import { cn } from '@stats47/components';
 
-import { SurfaceCard } from '@/components/surface';
+import { SurfaceSection } from '@/components/surface';
 
 export interface ChartPanelProps {
   title?: ReactNode;
@@ -34,9 +34,16 @@ export function ChartPanel({
   footerClassName,
 }: ChartPanelProps) {
   const hasHeader = title || description || action || icon;
+  const generatedId = useId();
+  const titleId = title ? `${generatedId}-title` : undefined;
+  const descriptionId = description ? `${generatedId}-description` : undefined;
 
   return (
-    <SurfaceCard className={cn('w-full p-0', className)}>
+    <SurfaceSection
+      className={cn('w-full p-0', className)}
+      aria-labelledby={titleId}
+      aria-describedby={descriptionId}
+    >
       {hasHeader && (
         <div
           className={cn('border-b border-border px-4 py-3', headerClassName)}
@@ -46,6 +53,7 @@ export function ChartPanel({
               {icon}
               {title && (
                 <h3
+                  id={titleId}
                   className={cn(
                     'text-sm font-semibold text-foreground',
                     titleClassName
@@ -58,7 +66,10 @@ export function ChartPanel({
             {action}
           </div>
           {description && (
-            <div className="mt-1 text-sm leading-relaxed text-muted-foreground">
+            <div
+              id={descriptionId}
+              className="mt-1 text-sm leading-relaxed text-muted-foreground"
+            >
               {description}
             </div>
           )}
@@ -75,6 +86,6 @@ export function ChartPanel({
           {footer}
         </div>
       )}
-    </SurfaceCard>
+    </SurfaceSection>
   );
 }

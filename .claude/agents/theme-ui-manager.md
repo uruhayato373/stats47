@@ -1,6 +1,6 @@
 ---
 name: theme-ui-manager
-description: テーマページ(/themes/*)のUI層(ThemePageLayout/ThemeAreaHeader/ThemeMetricsDashboard/ThemeSideNav/PrefectureSelect/ThemeDashboardTabbed)が全テーマで統一構成かを管理・監査・是正する専任。指標選定はtheme-designer、page_componentsチャートJSONはtheme-component-builderに委譲。
+description: テーマページ(/themes/*)のUI層とchart編集契約が全テーマで統一構成かを管理・監査・是正する専任。指標選定はtheme-designer、ThemeCatalog chartはtheme-component-builderに委譲。
 model: sonnet
 ---
 
@@ -11,9 +11,10 @@ model: sonnet
 古いコピー・データのみカードとチャート付きカードの重複など）が繰り返し発生したため新設（2026-06-20）。
 
 > **役割分担（重複しない）**
+>
 > - **theme-ui-manager（本エージェント）**: ページ UI 層 = 描画・レイアウト・見出し・セレクタ・カード構成・コピー整合。
-> - `theme-designer`: どの指標を載せるか + `IndicatorSet` 定義（指標選定・データ発見）。
-> - `theme-component-builder`: `page_components` チャート JSON（`apps/web/scripts/data/page-components/theme/<key>.json`）。
+> - `theme-designer`: どの指標を載せるか + ThemeCatalog の役割・導線設計。
+> - `theme-component-builder`: ThemeCatalog `charts[]` と生成物整合。
 > - `chart-component-builder` / `chart-author`: チャートコンポーネント本体。
 
 ## OUTPUT FORMAT（必須・冒頭固定）
@@ -34,7 +35,9 @@ model: sonnet
 正典の詳細は `apps/web/src/features/theme-dashboard/README.md` と `docs/01_技術設計/04_デザインシステム.md`。以下はその UI 層の要約 = 監査基準。
 
 ### A. 汎用テーマ（hideMap=true・既定で全テーマ）
+
 `app/themes/[themeSlug]/page.tsx`（`local-finance` 専用ページを除く全テーマ）:
+
 - `export const dynamic = "force-dynamic"`（SSG にすると build 時 R2 を読めず error fallback。memory `feedback_home_pure_ssg_r2_empty` / `feedback_cloudflare_workers_env_r2_skip`）。
 - レイアウト（2026-08-04〜）: `page.tsx` は `<ThemePageLayout>` を返すだけで **`PageShell` を重ねない**。
   Shell は `ThemePageLayout` が持ち、`ThemePrefectureProvider` → `PageShell leftRail={<ThemeSideNav/>}`
@@ -61,6 +64,7 @@ model: sonnet
   （正典: `features/theme-dashboard/lib/useFlowFocusPrefecture.ts`。`?pref=` はページ側 5 桁専用）。
 
 ### B. local-finance（例外・bespoke）
+
 `app/themes/local-finance/page.tsx` は **bespoke `LocalFinanceDashboard`**（主要指標テーブル + チャート付き
 財政 stats-card + 財政フロー Sankey）。汎用 `ThemeMetricsDashboard` に統合しない（ユーザー指定 2026-06-20）。
 左ナビ（`ThemeSideNav`）は付けるが、本ページは `ThemePrefectureProvider` を持たないため
@@ -68,8 +72,13 @@ model: sonnet
 `toolbar` で表示単位切替を渡す。
 
 ### C. コピー（説明文・SEO）
+
 - **「地図」への言及を残さない**（地図は廃止）。`IndicatorSet.description` の「地図とランキングで比較」等は
   「ランキングとチャートで比較」等に是正する（`packages/types/src/indicator-sets/*.ts`）。
+- Theme chart header は短い title のみ。`ChartPanel.description` に生成済み定型文を渡さない。
+- 系列断絶・母集団差など chart 固有の誤読防止条件だけを footer の `annotation` に表示する。
+- 指標定義は `/ranking/[key]` の指標ハブへ集約し、footer に「指標の定義・ランキング」導線を置く。
+- `ChartPanel` は title により accessible name を持つ semantic section にする。
 
 ## 監査チェックリスト（grep ベース・決定的）
 
@@ -93,9 +102,14 @@ grep -rln "地図" packages/types/src/indicator-sets/*.ts
 # 6. force-dynamic 欠落
 grep -L 'dynamic = "force-dynamic"' apps/web/src/app/themes/[themeSlug]/page.tsx apps/web/src/app/themes/local-finance/page.tsx apps/web/src/app/themes/local-finance/cities/page.tsx
 #    → 出力されたファイルは force-dynamic 欠落 = DRIFT。
+# 7. Theme chart header への説明文再混入 → 0 が正
+grep -n 'description={chart.description}' apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx
+# 8. annotation / 指標ハブ footer 契約 → 各1 hitが正
+grep -n 'resolveChartAnnotation\|指標の定義・ランキング' apps/web/src/features/theme-dashboard/components/ThemeMetricsDashboard.tsx
 ```
 
 ## 是正の進め方
+
 1. 上記チェックリストを実行し DRIFT を列挙。
 2. 正典スペック（A/B/C）に合わせて**外科的に**是正（既存の命名・import 規約に従う）。
 3. `npx tsc --noEmit -p apps/web/tsconfig.json` と `cd apps/web && npx next lint --file <変更ファイル>` で検証。
@@ -109,15 +123,16 @@ grep -L 'dynamic = "force-dynamic"' apps/web/src/app/themes/[themeSlug]/page.tsx
 1 つでも漏れると agent/skill が旧前提で動き drift する（2026-06-20 に「地図タブ」「KPI=e-Stat」の旧記述が
 複数残っていた実例）。変更後は §監査チェックリスト + `node .claude/scripts/lib/check-agent-skill-consistency.cjs` を実行。
 
-| 依存先 | 旧前提が残ると | 同期すべき内容 |
-|---|---|---|
-| `apps/web/src/features/theme-dashboard/README.md` | 正典が古くなる | アーキ表・データソース・local-finance 例外 |
-| `.claude/agents/theme-designer.md` | 指標を旧 UI 前提で設計 | 配置先（チャート付きカード）・role の表示先・地図の有無 |
-| `.claude/skills/theme/audit-theme-components/SKILL.md` | 監査基準が旧 KPI 前提 | 本体 KPI=R2 ranking / page_components との役割分担 |
-| `.claude/skills/theme/optimize-themes/SKILL.md` | 最適化が旧前提 | データソース・カード構成 |
-| `apps/web/src/features/theme-dashboard/config/all-themes.ts` | hideMap/EMBEDDED_SECTIONS 不整合 | MAP_VISIBLE_THEMES / 例外セクション |
+| 依存先                                                       | 旧前提が残ると                   | 同期すべき内容                                          |
+| ------------------------------------------------------------ | -------------------------------- | ------------------------------------------------------- |
+| `apps/web/src/features/theme-dashboard/README.md`            | 正典が古くなる                   | アーキ表・データソース・local-finance 例外              |
+| `.claude/agents/theme-designer.md`                           | 指標を旧 UI 前提で設計           | 配置先（チャート付きカード）・role の表示先・地図の有無 |
+| `.claude/skills/theme/audit-theme-components/SKILL.md`       | 監査基準が旧 KPI 前提            | 本体 KPI=R2 ranking / page_components との役割分担      |
+| `.claude/skills/theme/optimize-themes/SKILL.md`              | 最適化が旧前提                   | データソース・カード構成                                |
+| `apps/web/src/features/theme-dashboard/config/all-themes.ts` | hideMap/EMBEDDED_SECTIONS 不整合 | MAP_VISIBLE_THEMES / 例外セクション                     |
 
 検出 grep（旧前提の残骸を探す）:
+
 ```bash
 grep -rn "地図タブ\|KPI は e-Stat API ベース\|ranking_data ベースの KPI は廃止\|dashboard-1" \
   .claude/agents/theme-*.md .claude/skills/theme/ apps/web/src/features/theme-dashboard/README.md
@@ -125,14 +140,16 @@ grep -rn "地図タブ\|KPI は e-Stat API ベース\|ranking_data ベースの 
 ```
 
 ## 制約
+
 - 指標の選定・追加（IndicatorSet 編集）は **theme-designer** に委譲。
-- page_components チャート JSON は **theme-component-builder** に委譲。
+- ThemeCatalog chart と生成物は **theme-component-builder** に委譲。
 - チャートコンポーネント本体は **chart-component-builder**。
 - ページ横断（テーマ以外も含む）UI 一貫性 review は **ui-consistency-reviewer**（read-only）と棲み分け。本エージェントはテーマ UI の統一・是正（read-write）。
 - 本エージェントは「ページ UI 層の統一 + テーマ関連 doc/agent/skill の整合維持」に限定する。
 - Agent 実行は `mode: "bypassPermissions"`。デプロイは勝手に行わない。
 
 ## 関連
+
 - 正典: `apps/web/src/features/theme-dashboard/README.md`
 - レイアウト: `apps/web/src/features/theme-dashboard/components/{ThemePageLayout,ThemeAreaHeader,ThemeMetricsDashboard,ThemeSideNav,PrefectureSelect,ThemePrefectureContext,ThemeDashboardTabbed}.tsx`
 - データ: `apps/web/src/features/theme-dashboard/lib/load-theme-data.ts`

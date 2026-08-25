@@ -28,6 +28,15 @@ describe('SurveySideNav', () => {
       'href',
       '/survey'
     );
+    const surveyHeadingRow = screen
+      .getByRole('heading', { name: '調査' })
+      .parentElement?.parentElement;
+    expect(surveyHeadingRow).not.toBeNull();
+    expect(
+      within(surveyHeadingRow as HTMLElement).getByRole('link', {
+        name: '調査一覧へ',
+      })
+    ).toHaveAttribute('href', '/survey');
     expect(
       within(
         screen.getByRole('navigation', { name: 'この調査ページの内容' })

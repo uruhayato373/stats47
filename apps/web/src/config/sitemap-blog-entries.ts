@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-08-20
- * 件数: blog 433 / tag 60 / survey 73
+ * 最終生成日: 2026-08-25
+ * 件数: blog 433 / tag 60 / survey 78
  */
 
 export interface SitemapBlogEntry {
@@ -552,6 +552,7 @@ export const SITEMAP_SURVEY_IDS: readonly string[] = [
   "fishery-aquaculture-production",
   "flood-statistics",
   "foreign-residents-statistics",
+  "freight-regional-flow-survey",
   "health-admin-report",
   "hospital-report",
   "household-survey",
@@ -563,6 +564,7 @@ export const SITEMAP_SURVEY_IDS: readonly string[] = [
   "job-placement-statistics",
   "kakei-chousa",
   "labor-market-annual",
+  "late-elderly-medical-annual-report",
   "livestock-statistics",
   "local-education-expense-survey",
   "local-finance",
@@ -572,12 +574,15 @@ export const SITEMAP_SURVEY_IDS: readonly string[] = [
   "minimum-wage",
   "municipal-settlement-survey",
   "national-household-survey",
+  "national-medical-expenditure",
   "natural-park-area",
   "passenger-regional-flow-survey",
   "patient-survey",
+  "pension-insurance-annual-report",
   "physician-survey",
   "police-statistics",
   "population-estimates",
+  "port-statistics",
   "prefectural-accounts",
   "prefectural-land-price-survey",
   "prefectural-settlement-survey",

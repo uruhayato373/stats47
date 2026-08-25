@@ -1,7 +1,7 @@
 {
   "generatedFrom": "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
-  "totalRequests": 253,
-  "distinctRequests": 187,
+  "totalRequests": 247,
+  "distinctRequests": 186,
   "requests": [
     {
       "key": "0000010101?cdCat01=A1101",
@@ -941,16 +941,6 @@
       },
       "themeKey": "aging-society",
       "componentKey": "theme-as-youth-old-dep-index",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A03501",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A03501"
-      },
-      "themeKey": "population-dynamics",
-      "componentKey": "theme-pd-aging-young-crossover",
       "componentType": "line-chart"
     },
     {

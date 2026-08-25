@@ -32,9 +32,8 @@ ThemeCatalog (SSOT, git TS)
         └─▶ R2 app/page-components/theme/<key>.json → 本番テーマページが読む (完全DBレス)
 ```
 
-- **legacy 共存**: `THEME_CATALOGS` に未登録のテーマ (現在 manufacturing 以外) は従来どおり手編集の
-  IndicatorSet TS + page-components JSON を SSOT とする。generator は触らない (golden diff ゼロ保証)。
-- **横展開**: テーマ 1 件ずつ catalog TS を作り `THEME_CATALOGS` に登録 → golden diff (byte 一致) 確認 → commit。
+- `THEME_CATALOGS` には現在 20 テーマを登録済み。登録テーマの生成物を直接編集しない。
+- bespoke / 未登録 route をカタログ化する場合は catalog TS 作成と registry 登録を同じ変更で行い、golden diff を確認する。
 
 ---
 
@@ -74,7 +73,12 @@ ThemeCatalog (SSOT, git TS)
 | 消費者物価の指標プロファイル          | `cpi-profile`       | CPI 専用                                                 |
 | 消費者物価のヒートマップ              | `cpi-heatmap`       | CPI 専用                                                 |
 | 年齢構造 (男女×年齢階級)              | `pyramid-chart`     | 人口ピラミッド (非チャート扱いで個別描画)                |
-| 考察・解説テキスト                    | `markdown-section`  | 末尾フル幅の文章 (指標非紐付き・relatedRankingKeys 不要) |
+| 考察・解説テキスト / FAQ              | `markdown-section`  | 末尾フル幅。FAQ は `componentProps.displayMode="faq"`   |
+
+FAQ の authored SSOT は `componentProps.markdown` に `### Q1: 質問` + 回答の組を記述し、必ず
+`displayMode: "faq"` を付ける。generator が `items: [{question, answer}]` へ構造化して配信し、runtime は
+Markdown 見出しを再解析しない。空回答・不正見出し・重複質問は `validate:catalog` で error とする。
+通常の考察は `displayMode` を省略するか `"prose"` とし、FAQ 表示のために feature 側へ個別 parser を足さない。
 
 - **色は必ず「意味 role」で指定する** (ページ間統一・生 hex 禁止。2026-08-13 の WP5 で 179 生色を role 化)。
   色キー (`seriesColors` / `lineColors` / `columnColors` / `colors` / `palette` / `color` / `fill` / `stroke`) には
@@ -221,11 +225,11 @@ evidenceTopics: [
 
 | レベル                         | 検査                                                                                                                                                                                                                                                                                   |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **error**                      | metrics.rankingKey / relatedRankingKeys が METRICS_REGISTRY・metrics に不在 / componentType union 外 / componentKey **テーマ内**重複                                                                                                                                                   |
-| **error (reader description)** | 可視 chart の読者向け説明が20文字未満。`charts.description` を優先し、未指定は componentType 別標準文を生成                                                                                                                                                                            |
+| **error**                      | metrics.rankingKey / relatedRankingKeys が METRICS_REGISTRY・metrics に不在 / `markdown-section` 以外で relatedRankingKeys が空 / componentType union 外 / componentKey **テーマ内**重複                                                                                                 |
+| **error (chart editorial)**    | 旧 componentType 別の汎用 description、空 annotation、catalog と componentProps の annotation 二重定義                                                                                                                                                                                 |
 | **error (metricGroups)**       | `[group-key]` rankingKeys が metrics に不在 / `[group-dup-key]`・`[group-dup-title]` テーマ内重複 / `[group-empty]` rankingKeys が空 / `[group-default]` defaultCheckedKeys が空 or rankingKeys 外 / **`[group-units]` グループ内の相異なる単位が 3 種以上** (Y 軸は左右 2 本しかない) |
 | **error (鮮度)**               | `generate:catalog --check` — 生成物と SSOT の diff (手編集・生成忘れの両方向)                                                                                                                                                                                                          |
-| **warn** (`--strict` で error) | selection 未記入 / componentKey **横断**共有 (複数ページ再利用は設計上許容) / primary がチャート未使用 (metrics[] の stat-card で描画) / sortOrder 重複 (描画は配列順で安定)                                                                                                           |
+| **warn** (`--strict` で error) | selection 未記入 / componentKey **横断**共有 (複数ページ再利用は設計上許容) / primary がチャート未使用 (metrics[] の stat-card で描画) / sortOrder 重複 / 指標ハブ本文の定義・注釈が未整備                                                                                               |
 | **warn (metricGroups)**        | `[group-default-many]` 初期チェック 4 件以上 (mount 時にその数だけ時系列を取りに行く) / `[group-large]` 系列候補 9 件以上 / `[group-orphan]` 非 context 指標がどのグループにも未所属                                                                                                   |
 | **error (evidenceTopics)**     | source/lens 不在、key 重複、ranking 非実在・inactive、chart 非実在、theme 非実在・自己参照、tag/key 形式違反、公式 source が HTTPS でない                                                                                                                                              |
 | **warn (evidenceTopics)**      | ranking/theme/tag の内部導線が 1 件もない                                                                                                                                                                                                                                              |
@@ -240,8 +244,10 @@ evidenceTopics: [
 | カタログ外の componentType 文字列を使う                                                       | `CATALOG_COMPONENT_TYPES` の 18 種から選ぶ                                                                                                                                                                                          |
 | 出典なしで selection.proposedBy に「白書」と書く                                              | sourceUrl + surveyedAt を併記 (evidence-based)                                                                                                                                                                                      |
 | 実在しない rankingKey を metrics に入れる                                                     | METRICS_REGISTRY 実在キーのみ (validator が弾く)                                                                                                                                                                                    |
-| `isActive:false` のキーを metrics / `rankingLink` に置く                                      | isActive:true のキーのみ。inactive は `/ranking/<key>` が 410 か空ページになる (validator `[metric-inactive]` / `[ranking-link]` が error。2026-07-24 に `dwelling-per-floor-area` が `/themes/living-housing` で 410 を返していた) |
-| legacy テーマの JSON をカタログ化せず generator 対象に混ぜる                                  | `THEME_CATALOGS` 登録 = カタログ化と一体で行う                                                                                                                                                                                      |
+| `isActive:false` のキーを metrics / `relatedRankingKeys` に置く                               | isActive:true のキーのみ。inactive は `/ranking/<key>` が 410 か空ページになる (validator `[metric-inactive]` が error。2026-07-24 に `dwelling-per-floor-area` が `/themes/living-housing` で 410 を返していた)                |
+| componentType だけから「確認できます」等の説明を生成する                                      | title・凡例・軸に委ね、誤読防止に不可欠な条件だけ `charts.annotation` に記述                                                                                                                                                        |
+| 指標の定義・算出方法を Theme chart ごとに複製する                                             | `/ranking/[key]` を指標ハブとし、`relatedRankingKeys` で接続                                                                                                                                                                        |
+| 未登録 route の JSON を暗黙に generator 対象へ混ぜる                                          | ThemeCatalog 作成と `THEME_CATALOGS` 登録を同じ変更で行う                                                                                                                                                                           |
 
 ---
 
@@ -271,15 +277,16 @@ evidenceTopics: [
 | `metrics` (全 role・context 含む)                  | 左レールの折りたたみ「全指標」。狭幅は本文上部の同等 UI                                                                                                                | `ThemeSideNav` / `ThemePageLayout`                                                                |
 | `metrics.selection`                                | **UI 非表示**。採否・再調査用の内部 provenance として SSOT に保持                                                                                                      | —                                                                                                 |
 | `charts.componentProps`                            | チャート本体 (line/mixed/composition/donut/cpi/pyramid)                                                                                                                | `ThemeDbChartRenderer`                                                                            |
-| `charts.description`                               | チャート header の読者向け説明。未指定時は componentType 別の標準文を決定的に生成                                                                                      | `resolveChartDescription` → `ChartPanel.description`                                              |
-| `charts.sourceName` / `sourceLink` / `rankingLink` | チャートカード footer (出典 + 「ランキングを見る」)                                                                                                                    | `ChartFooter` (ThemeMetricsDashboard の ChartPanel footer)                                        |
+| `charts.annotation`                                | 系列断絶・母集団差・比較不能条件など、この可視化固有の誤読防止注釈                                                                                                     | generator → `componentProps.annotation` → `ChartFooter`                                           |
+| `charts.sourceName` / `sourceLink`                 | チャートカード footer の出典                                                                                                                                            | `ChartFooter` (ThemeMetricsDashboard の ChartPanel footer)                                        |
+| `charts.relatedRankingKeys`                        | `markdown-section` 以外で必須の指標ハブ導線。先頭を primary `rankingLink`、残りを `rankingLinks` へ決定生成                                                            | `catalogToPageComponentsJson` → `ChartFooter`                                                     |
 | `charts.section`                                   | **テーマページでは未使用** (area ページの `AreaChartSection` のみ使用)                                                                                                 | —                                                                                                 |
 | `keywords`                                         | `<meta>` / 構造化データ                                                                                                                                                | theme utils                                                                                       |
 | `relatedArticleTagKeys`                            | 関連記事セクション + ネイティブアフィリ                                                                                                                                | `ThemeRelatedArticles`                                                                            |
 | `evidenceTopics`                                   | **「白書・統計から見る論点」**。公式資料から ranking / theme / tag へ周遊                                                                                              | `ThemeEvidenceTopicsSection` (`nav_surface=theme_evidence`)                                       |
 | `rejectedCandidates`                               | UI 非表示 (再調査防止の記録のみ)                                                                                                                                       | —                                                                                                 |
 | (別途) EMBEDDED_SECTIONS                           | 埋め込み section。**半幅 2 カラム** = 人口移動フロー / 通勤フロー (ChartPanel 化・2026-08-04)、**全幅** = 駅乗降 / 高速道路 / 過疎×医療 / 日照。`hideMap` と独立に描画 | `THEME_SECTION_REGISTRY` + `HALF_WIDTH_SECTIONS`                                                  |
-| (別途) 左レール                                    | `THEME_NAV_GROUPS` のグループ別テーマリンク + 地域 + 全指標 + 出典調査。992px 未満は本文上部のテーマ Select・ページ内クイックリンク等が代替                           | `ThemePageLayout` の `PageShell leftRail`                                                         |
+| (別途) 左レール                                    | `THEME_NAV_GROUPS` のグループ別テーマリンク + 地域 + 全指標 + 出典調査。992px 未満は本文上部のテーマ Select・ページ内クイックリンク等が代替                            | `ThemePageLayout` の `PageShell leftRail`                                                         |
 
 > `hideMap: true` (全テーマ既定) は地図タブ UI (コロプレス/年度セレクタ) を隠すだけ。
 > **page-components チャート・考察 (markdown)・埋め込み section は hideMap に関係なく描画する**

@@ -41,6 +41,14 @@ export function CategoryHeatmap({
   });
 
   const { innerWidth, innerHeight, marginTop, marginLeft } = layout;
+  const xLabels = [...new Set(data.map((item) => item.x))];
+  const yLabels = [...new Set(data.map((item) => item.y))];
+  const accessibleLabel = [
+    "カテゴリヒートマップ",
+    `横軸: ${xLabels.join("、")}`,
+    `縦軸: ${yLabels.join("、")}`,
+    `基準値: ${baseline}${unit}`,
+  ].join("。");
 
   useEffect(() => {
     if (!svgRef.current || data.length === 0) return;
@@ -164,6 +172,8 @@ export function CategoryHeatmap({
         height="100%"
         viewBox={`0 0 ${width} ${height}`}
         preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-label={accessibleLabel}
       />
     </div>
   );

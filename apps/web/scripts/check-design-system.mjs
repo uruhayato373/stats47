@@ -20,10 +20,19 @@ const rules = [
   {
     id: 'no-manual-page-rail-grid',
     message:
-      'Page rail columns belong to PageShell. Use leftRail/rightRail instead of hardcoding the shell grid in page.tsx.',
+      'Left rail columns belong to LeftRailLayout. Use the shared layout instead of hardcoding the shell grid.',
     pattern: /grid-cols-\[264px_minmax\(0,1fr\)\]/,
     allow: (relativePath) =>
-      relativePath === 'src/components/layout/PageShell.tsx',
+      relativePath === 'src/components/layout/LeftRailLayout.tsx',
+  },
+  {
+    id: 'no-manual-left-rail-breakpoint',
+    message:
+      'Left rail responsive classes belong to LeftRailLayout. Use LEFT_RAIL_NARROW_ONLY_CLASS for narrow alternatives.',
+    pattern:
+      /min-\[992px\]:(?:grid|block|hidden|grid-cols-\[264px_minmax\(0,1fr\)\]|gap-6|items-start)/,
+    allow: (relativePath) =>
+      relativePath === 'src/components/layout/LeftRailLayout.tsx',
   },
   {
     id: 'no-generic-only-right-rail',
@@ -275,6 +284,62 @@ function checkFile(relativePath) {
 const violations = scanRoots
   .flatMap((root) => listFiles(root))
   .flatMap((file) => checkFile(file));
+
+// PageShell / ArticleShell の surface は異なっても、左レールの列・境界・DOM 構造は
+// LeftRailLayout を単一契約として共有する。片方だけ独自実装へ戻る drift を止める。
+for (const relativePath of [
+  'src/components/layout/PageShell.tsx',
+  'src/components/layout/ArticleShell.tsx',
+]) {
+  const source = readFileSync(path.join(cwd, relativePath), 'utf8');
+  if (source.includes('<LeftRailLayout')) continue;
+  violations.push({
+    ruleId: 'shell-must-use-shared-left-rail-layout',
+    message:
+      'PageShell and ArticleShell must compose LeftRailLayout instead of owning separate left rail markup.',
+    file: relativePath,
+    lineNumber: 1,
+    line: 'LeftRailLayout',
+  });
+}
+
+// 操作用 left rail を hide する consumer は、同じファイルの狭幅代替 UI に共有境界を
+// 使わなければならない。独自 lg:hidden 等だと 992-1023px に二重表示/欠落が生じる。
+// /areas は PrefectureNavigator 自体が全幅で地方別一覧を常設するため、別 visibility wrapper
+// を持たない。この例外も fallback component の存在まで決定的に検査する。
+const integratedLeftRailFallbacks = new Map([
+  ['src/app/areas/page.tsx', '<PrefectureNavigator'],
+]);
+for (const root of scanRoots) {
+  for (const relativePath of listFiles(root)) {
+    const source = readFileSync(path.join(cwd, relativePath), 'utf8');
+    if (!source.includes('leftRailNarrowBehavior="hide"')) continue;
+    if (source.includes('LEFT_RAIL_NARROW_ONLY_CLASS')) continue;
+    const integratedFallback = integratedLeftRailFallbacks.get(relativePath);
+    if (integratedFallback && source.includes(integratedFallback)) continue;
+    violations.push({
+      ruleId: 'left-rail-hide-requires-shared-narrow-alternative',
+      message:
+        'A hidden left rail requires a narrow alternative using LEFT_RAIL_NARROW_ONLY_CLASS in the same consumer.',
+      file: relativePath,
+      lineNumber: 1,
+      line: 'leftRailNarrowBehavior="hide"',
+    });
+  }
+}
+
+const surveyNavPath = 'src/features/survey/components/SurveySideNav.tsx';
+const surveyNavSource = readFileSync(path.join(cwd, surveyNavPath), 'utf8');
+if (!surveyNavSource.includes('LEFT_RAIL_NARROW_ONLY_CLASS')) {
+  violations.push({
+    ruleId: 'survey-mobile-nav-must-share-left-rail-breakpoint',
+    message:
+      'SurveyMobileNav must use LEFT_RAIL_NARROW_ONLY_CLASS so its handoff matches the shared desktop rail.',
+    file: surveyNavPath,
+    lineNumber: 1,
+    line: 'SurveyMobileNav',
+  });
+}
 
 // カード角丸の SSOT は globals.css の --radius: 0。
 // 通常領域・reading-zone のどちらかへ非ゼロ値が再導入された場合、見た目がページ種別で

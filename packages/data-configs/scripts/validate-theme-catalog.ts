@@ -10,6 +10,7 @@
  *   - componentKey 重複 (テーマ内)
  *   - rankingLink の参照先が不在 or isActive:false
  *   - page-components の estatParams 構造 (statsDataId 桁 / 系列数とラベル数)
+ *   - chart の旧自動生成・汎用 description と空 annotation
  *   - metricGroups: key/title 重複・rankingKeys ⊄ metrics・defaultCheckedKeys 不整合・単位 3 種以上
  * warn (exit 0 / 表示のみ, --strict で error):
  *   - primary/secondary の selection 未記入 / componentKey の横断共有 / sortOrder 重複
@@ -40,7 +41,7 @@ import {
 } from '../src/theme-catalog/evidence-lenses';
 import { validateChartProps } from '../src/theme-catalog/stat-series-ref';
 import { collectColorFieldViolations } from '../src/theme-catalog/chart-color-role';
-import { resolveChartDescription } from '../src/theme-catalog/transform';
+import { isGenericChartDescription } from '../src/theme-catalog/transform';
 
 const STRICT = process.argv.includes('--strict');
 const VALID_TYPES = new Set<string>(CATALOG_COMPONENT_TYPES);
@@ -58,6 +59,155 @@ function tally(list: string[]): string {
   return Object.entries(counts)
     .map(([k, v]) => `${k}=${v}`)
     .join(' ');
+}
+
+/**
+ * チャート近接テキストの責務を検査する。
+ *
+ * description は廃止済み。型を迂回した残存も拒否する。
+ * annotation は可視化固有の注意に限定する入口なので、指定時は空文字を許さない。
+ */
+export function validateChartContentContract(
+  chart: ThemeCatalog['charts'][number],
+  where: string,
+  errors: string[]
+): void {
+  const rawChart = chart as unknown as Record<string, unknown>;
+  if (Object.prototype.hasOwnProperty.call(rawChart, 'description')) {
+    const description = rawChart.description;
+    const tag =
+      typeof description === 'string' && isGenericChartDescription(description)
+        ? 'chart-description-boilerplate'
+        : 'chart-description-legacy';
+    errors.push(
+      `[${tag}] ${where}: CatalogChart.description は廃止済み。誤読防止注釈だけを annotation に置く`
+    );
+  }
+
+  const annotation = chart.annotation?.trim();
+  if (chart.annotation !== undefined && !annotation) {
+    errors.push(
+      `[chart-annotation] ${where}: annotation は空でない文字列にする`
+    );
+  }
+  if (
+    annotation &&
+    Object.prototype.hasOwnProperty.call(chart.componentProps, 'annotation')
+  ) {
+    errors.push(
+      `[chart-annotation] ${where}: annotation は CatalogChart.annotation に一元化し、componentProps と二重定義しない`
+    );
+  }
+}
+
+/**
+ * チャートから既存の指標ハブへ到達できるかを検査する。
+ *
+ * 自由記述 URL は許さず、relatedRankingKeys だけを導線の SSOT とする。
+ * markdown-section 以外は 1 件以上を必須化し、実在性・有効性・重複を error で止める。
+ */
+export function validateChartIndicatorHubContract(
+  chart: ThemeCatalog['charts'][number],
+  where: string,
+  errors: string[],
+  _warns: string[]
+): void {
+  const rawChart = chart as unknown as Record<string, unknown>;
+  if (Object.prototype.hasOwnProperty.call(rawChart, 'rankingLink')) {
+    errors.push(
+      `[ranking-link-legacy] ${where}: rankingLink は廃止済み。relatedRankingKeys[0] から生成する`
+    );
+  }
+
+  const rawLinks = chart.componentProps.rankingLinks;
+  if (rawLinks !== undefined) {
+    errors.push(
+      `[ranking-links-legacy] ${where}: componentProps.rankingLinks は廃止済み。relatedRankingKeys[1..] から生成する`
+    );
+  }
+
+  const relatedKeys = chart.relatedRankingKeys ?? [];
+  if (chart.componentType !== 'markdown-section' && relatedKeys.length === 0) {
+    errors.push(
+      `[indicator-hub-missing] ${where}: markdown-section 以外は relatedRankingKeys を1件以上指定する`
+    );
+  }
+  const seen = new Set<string>();
+  for (const key of relatedKeys) {
+    if (!key.trim()) {
+      errors.push(
+        `[related-key] ${where}: relatedRankingKeys に空文字を置かない`
+      );
+      continue;
+    }
+    if (seen.has(key)) {
+      errors.push(
+        `[related-key-duplicate] ${where}: relatedRankingKey "${key}" が重複`
+      );
+    }
+    seen.add(key);
+    if (!metricExists(key)) {
+      errors.push(
+        `[related-key] ${where}: relatedRankingKey "${key}" が METRICS_REGISTRY に不在`
+      );
+    } else if (METRICS_REGISTRY[key]?.isActive !== true) {
+      errors.push(
+        `[related-key] ${where}: relatedRankingKey "${key}" は isActive:false — 指標ハブへ到達できない`
+      );
+    }
+  }
+}
+
+/** 現在の authored 説明の欠落数。改善で減らせるが、回帰で増やせない。 */
+const INDICATOR_HUB_DESCRIPTION_MISSING_BASELINE = 114;
+
+export interface IndicatorHubContentCoverage {
+  totalKeys: number;
+  missingDescriptionKeys: string[];
+  authoredNoteKeys: string[];
+}
+
+/**
+ * チャートから到達する指標ハブに、読者向け定義文があるかを監査する。
+ *
+ * 導線の正しさと本文の充実度は別契約にする。現欠落は公開阻害せず明示 warn、
+ * 欠落数の増加だけを error にして、段階的な著者追記を妨げない。
+ */
+export function validateIndicatorHubContentCompleteness(
+  catalogs: ThemeCatalog[],
+  errors: string[],
+  warns: string[]
+): IndicatorHubContentCoverage {
+  const keys = [
+    ...new Set(
+      catalogs.flatMap((catalog) =>
+        catalog.charts.flatMap((chart) => chart.relatedRankingKeys ?? [])
+      )
+    ),
+  ].sort();
+  const missingDescriptionKeys = keys.filter(
+    (key) => !METRICS_REGISTRY[key]?.description?.trim()
+  );
+  const authoredNoteKeys = keys.filter((key) =>
+    Boolean(METRICS_REGISTRY[key]?.note?.trim())
+  );
+
+  if (
+    missingDescriptionKeys.length > INDICATOR_HUB_DESCRIPTION_MISSING_BASELINE
+  ) {
+    errors.push(
+      `[indicator-hub-content-regression] description欠落 ${missingDescriptionKeys.length} 件 ` +
+        `(baseline ${INDICATOR_HUB_DESCRIPTION_MISSING_BASELINE} 件) — 新しい指標ハブには定義文を追加する`
+    );
+  }
+  if (missingDescriptionKeys.length > 0) {
+    warns.push(
+      `[indicator-hub-content] total=${keys.length} descriptionMissing=${missingDescriptionKeys.length} ` +
+        `noteAuthored=${authoredNoteKeys.length} keys=${missingDescriptionKeys.join(',')}`
+    );
+  }
+
+  return { totalKeys: keys.length, missingDescriptionKeys, authoredNoteKeys };
 }
 
 /**
@@ -99,13 +249,28 @@ function validatePageComponentEstatParams(errors: string[]): number {
         {}) as Record<string, unknown>;
       const where = `${theme}/${key}`;
 
+      if (description !== null) {
+        if (
+          typeof description === 'string' &&
+          isGenericChartDescription(description)
+        ) {
+          errors.push(
+            `[chart-description-boilerplate] ${where}: componentType 由来の定型説明を表示しない`
+          );
+        } else {
+          errors.push(
+            `[chart-description] ${where}: 生成物 description は互換用 null に固定する`
+          );
+        }
+      }
+
       if (
-        type !== 'kpi-card' &&
-        type !== 'markdown-section' &&
-        (typeof description !== 'string' || description.trim().length < 20)
+        Object.prototype.hasOwnProperty.call(props, 'annotation') &&
+        (typeof props.annotation !== 'string' ||
+          props.annotation.trim().length === 0)
       ) {
         errors.push(
-          `[chart-description] ${where}: 生成済み page-components の description は20文字以上にする`
+          `[chart-annotation] ${where}: annotation は空でない文字列にする`
         );
       }
 
@@ -439,19 +604,13 @@ function main() {
           `[component-type] ${c.key}/${ch.componentKey}: 無効な componentType "${ch.componentType}"`
         );
       }
-      if (
-        ch.componentType !== 'kpi-card' &&
-        ch.componentType !== 'markdown-section' &&
-        (resolveChartDescription(ch)?.trim().length ?? 0) < 20
-      ) {
-        errors.push(
-          '[chart-description] ' +
-            c.key +
-            '/' +
-            ch.componentKey +
-            ': 読者向け description は20文字以上で記述する'
-        );
-      }
+      validateChartContentContract(ch, `${c.key}/${ch.componentKey}`, errors);
+      validateChartIndicatorHubContract(
+        ch,
+        `${c.key}/${ch.componentKey}`,
+        errors,
+        warns
+      );
       // componentProps の形を chart 種別ごとに検証 (WP1)。従来は union membership しか
       // 見ておらず、必須フィールド欠落の壊れた chart を素通りさせていた。
       for (const msg of validateChartProps(
@@ -522,22 +681,6 @@ function main() {
         }
         keysInCharts.add(k);
       }
-      // rankingLink は本番に出るリンクなので、実在 + isActive を検査する
-      // (2026-07-24 実測: dwelling-per-floor-area が /themes/living-housing で 410 を返していた)
-      const linkKey = /^\/ranking\/([a-z0-9-]+)\/?$/.exec(
-        ch.rankingLink ?? ''
-      )?.[1];
-      if (linkKey) {
-        if (!metricExists(linkKey)) {
-          errors.push(
-            `[ranking-link] ${c.key}/${ch.componentKey}: rankingLink "${ch.rankingLink}" が METRICS_REGISTRY に不在`
-          );
-        } else if (METRICS_REGISTRY[linkKey]?.isActive !== true) {
-          errors.push(
-            `[ranking-link] ${c.key}/${ch.componentKey}: rankingLink "${ch.rankingLink}" は isActive:false — 410 か空ページになる`
-          );
-        }
-      }
     }
 
     // primary 指標のカバレッジ (warn: primary は metrics[] 由来の stat-card として
@@ -555,6 +698,8 @@ function main() {
     validateMetricGroups(c, metricKeys, errors, warns);
     validateEvidenceTopics(c, themeKeys, errors, warns);
   }
+
+  validateIndicatorHubContentCompleteness(catalogs, errors, warns);
 
   const estatParamsChecked = validatePageComponentEstatParams(errors);
 

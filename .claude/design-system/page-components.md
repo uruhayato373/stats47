@@ -19,20 +19,23 @@ R2 反映は `apps/web/scripts/export-page-components-snapshot.ts` が担当す�
 
 各行は少なくとも次を持つ。
 
-| field                            | 用途                                                       |
-| -------------------------------- | ---------------------------------------------------------- |
-| `componentKey` / `componentType` | 一意な識別子と描画型                                       |
-| `title`                          | 可視化の短い見出し                                         |
-| `description`                    | 読者向けの「何が分かるか / どう読むか」。可視 chart は必須 |
-| `componentProps`                 | statsDataId、系列、ラベル、色 role 等                      |
-| `sourceName` / `sourceLink`      | 出典                                                       |
-| `rankingLink`                    | 対応する単一指標ランキング                                 |
-| `gridColumnSpan* `               | レスポンシブ配置                                           |
-| `section` / `sortOrder`          | グループと表示順                                           |
+| field                            | 用途                                                     |
+| -------------------------------- | -------------------------------------------------------- |
+| `componentKey` / `componentType` | 一意な識別子と描画型                                     |
+| `title`                          | 可視化の短い見出し                                       |
+| `description`                    | 互換用の任意補足。Theme chart header では表示しない      |
+| `componentProps`                 | statsDataId、系列、ラベル、色 role、任意 `annotation` 等 |
+| `sourceName` / `sourceLink`      | 出典                                                     |
+| `rankingLink`                    | 対応する単一指標ランキング                               |
+| `gridColumnSpan* `               | レスポンシブ配置                                         |
+| `section` / `sortOrder`          | グループと表示順                                         |
 
-ThemeCatalog の `charts.description` は個別の説明を上書きする。未指定時も
-`resolveChartDescription` が component type 別の標準文を決定的に生成し、配信 JSON へ書き出す。
-`metrics.selection.rationale` は内部 provenance であり、読者向け description として表示しない。
+ThemeCatalog は `charts.description` / `charts.rankingLink` を持たない。component type 由来の定型文は生成せず、
+生成済み Theme PageComponent の `description` は互換用に `null` とする。
+誤読防止に不可欠なチャート固有条件だけを `charts.annotation` に書き、generator が
+`componentProps.annotation` へ出力する。指標の定義・算出方法・一般注釈は `/ranking/[key]` の指標ハブを正典とし、
+`relatedRankingKeys` で接続する。generator は先頭 key を `rankingLink`、残りを `rankingLinks` へ変換する。
+`metrics.selection.rationale` は内部 provenance であり、読者 UI に表示しない。
 
 ## pageType の責務
 
@@ -60,10 +63,12 @@ chart type、色、ラベルを複製しない。ただし地理粒度や統計�
 各 `ChartPanel` は次を近接して表示する。
 
 1. title
-2. 1〜2文の reader description
-3. chart / legend / axis
-4. 年度・単位・出典・注意事項・ranking link
+2. chart / legend / axis
+3. 年度・単位・出典
+4. 存在する場合だけ chart 固有 annotation
+5. 対応する指標ハブへの link
 
+一般的な「線の傾きを確認できます」等を title 下へ自動生成しない。指標一般の定義を chart ごとに複製せず、
 ページ header に全 chart の説明をまとめたり、ページ末尾だけに出典を集約したりしない。
 同じ事実を KPI card と chart で二度強調せず、値・比較・推移・構成の役割を分ける。
 
@@ -76,7 +81,7 @@ ThemeCatalog の色 field に生の hex / rgb / hsl を書かない。性別等�
 ## 機械検証
 
 - `generate:catalog --check`: ThemeCatalog と生成物の drift
-- `validate:catalog`: key、props、link、reader description、evidence の整合
+- `validate:catalog`: key、props、全 data-bound component の link coverage、annotation、旧定型 description、evidence の整合
 - `apps/web/scripts/check-design-system.mjs`: layout / focus / surface の禁止パターン
 - `npm run type-check --workspace apps/web`: reader 型と renderer の整合
 
@@ -85,6 +90,8 @@ ThemeCatalog の色 field に生の hex / rgb / hsl を書かない。性別等�
 - 永続 D1 / table を page-components の SSOT とする
 - Theme の生成済み JSON を手編集する
 - page / component 内へ chart 定義をハードコードする
-- 可視 chart を description 無しで配信する
+- component type 由来の汎用 description を生成・表示する
+- ThemeCatalog に `description` / `rankingLink` を二重管理する
+- 指標定義を Theme chart の annotation へ複製する
 - 47県 chart を市区町村・日本へ無条件に複製する
 - ThemeCatalog の内部 selection rationale を読者 UI へそのまま露出する

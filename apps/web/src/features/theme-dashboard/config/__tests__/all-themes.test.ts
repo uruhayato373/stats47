@@ -78,14 +78,17 @@ describe('埋め込み section の registry 整合', () => {
     expect(unknown).toEqual([]);
   });
 
-  it('半幅 section を持つテーマは 2 件以上ある (1 件だと 2 カラムの右が空く)', () => {
-    // 1 件のテーマがあっても ThemePageLayout が全幅へ戻すので壊れはしないが、
-    // 意図せず 1 件だけになった構成を検知するために件数を可視化しておく。
-    for (const theme of ALL_THEMES) {
-      const half = (theme.embeddedSections ?? []).filter((k) =>
-        HALF_WIDTH_SECTIONS.has(k)
-      );
-      if (half.length > 0) expect(half.length).toBeGreaterThanOrEqual(2);
-    }
+  it('人口移動と通勤移動を意味の異なるテーマへ分離する', () => {
+    const population = ALL_THEMES.find(
+      (theme) => theme.themeKey === 'population-dynamics'
+    );
+    const labor = ALL_THEMES.find(
+      (theme) => theme.themeKey === 'labor-mobility'
+    );
+
+    expect(population?.embeddedSections).toContain('migration-flow');
+    expect(population?.embeddedSections).not.toContain('commute-flow');
+    expect(labor?.embeddedSections).toContain('commute-flow');
+    expect(labor?.embeddedSections).not.toContain('migration-flow');
   });
 });

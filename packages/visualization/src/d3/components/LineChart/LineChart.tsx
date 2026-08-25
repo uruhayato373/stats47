@@ -93,6 +93,25 @@ export function LineChart({
     color: s.color,
     marker: "line" as const,
   }));
+  const categoryLabels = data
+    .map((row) => String(row.label ?? row[categoryKey] ?? ""))
+    .filter(Boolean);
+  const firstCategory = categoryLabels[0];
+  const lastCategory = categoryLabels[categoryLabels.length - 1];
+  const categoryRange = firstCategory
+    ? firstCategory === lastCategory
+      ? firstCategory
+      : `${firstCategory}から${lastCategory}`
+    : undefined;
+  const accessibleLabel = [
+    title ? `折れ線グラフ「${title}」` : "折れ線グラフ",
+    `系列: ${legendSeries.map((item) => item.name).join("、")}`,
+    categoryRange ? `期間: ${categoryRange}` : undefined,
+    unit ? `左軸単位: ${unit}` : undefined,
+    hasRightAxis && rightUnit ? `右軸単位: ${rightUnit}` : undefined,
+  ]
+    .filter(Boolean)
+    .join("。");
 
   useEffect(() => {
     if (!svgRef.current || !data.length) return;
@@ -399,6 +418,8 @@ export function LineChart({
           viewBox={`0 0 ${width} ${height}`}
           className="h-auto w-full"
           overflow="hidden"
+          role="img"
+          aria-label={accessibleLabel}
         />
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-background/50">

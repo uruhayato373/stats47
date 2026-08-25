@@ -455,6 +455,9 @@ export function MetricSwitcherPanel({
       footer={
         representative ? (
           <ChartFooter
+            source={representative.sourceName}
+            sourceLink={representative.sourceLink}
+            sourceLinks={representative.sourceLinks}
             rankingLink={`/ranking/${representative.metricKey}`}
             rankingLabel="ランキングを見る"
           />

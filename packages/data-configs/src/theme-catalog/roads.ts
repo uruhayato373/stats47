@@ -83,9 +83,11 @@ export const ROADS_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "road-total-length-with-expressway"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/road-total-length-with-expressway",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

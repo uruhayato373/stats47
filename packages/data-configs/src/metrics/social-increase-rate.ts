@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const socialIncreaseRate: MetricConfig = {
   "key": "social-increase-rate",
   "title": "社会増減率",
+  "note": "このランキングで配信している社会・人口統計体系の系列は2019年までです。最新年の人口増減率や自然増減率とは調査時点が異なります。",
+  "description": "転入などによる人口の増加と、転出などによる人口の減少の差を人口1,000人当たりで表した値です。正の値は社会増、負の値は社会減を示します。",
   "unit": "‰",
   "category": "population",
   "source": {

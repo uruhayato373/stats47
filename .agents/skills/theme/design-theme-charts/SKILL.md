@@ -1,24 +1,23 @@
 ---
 name: design-theme-charts
-description: テーマ用チャートを設計する（既存コンポーネント再利用 + e-Stat API 調査 + 新規設計）。Use when user says "テーマチャート設計", "チャート追加設計". chart_key/componentType/componentProps JSON生成.
+description: テーマ用チャートを設計する（既存コンポーネント再利用 + e-Stat API 調査 + 指標ハブ・注釈契約）。Use when user says "テーマチャート設計", "チャート追加設計".
 disable-model-invocation: true
-argument-hint: "<theme-key>"
+argument-hint: '<theme-key>'
 allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch
 primary_agent: theme-component-builder
 ---
 
 テーマダッシュボードに追加するチャートを設計する。既存コンポーネントの再利用を最優先し、不足分のみ新規設計する。
 
-> **★ カタログ駆動テーマ (2026-07-04〜)**: `THEME_CATALOGS` 登録テーマは
+> **★ ThemeCatalog SSOT**: `THEME_CATALOGS` 登録テーマは
 > `packages/data-configs/src/theme-catalog/<key>.ts` が SSOT、page-components JSON は生成物 (手編集禁止)。
-> 正典 = `.Codex/rules/theme-catalog-standards.md` (componentType 9 種・チャート選定文法)。
+> 正典 = `.claude/rules/theme-catalog-standards.md` (componentType 9 種・チャート選定文法)。
 > **panelTabs は廃止済み**・**section は theme renderer 未使用** (配置は componentType + `sortOrder` + `gridColumnSpan`)。
-> 以下の panelTab/section 記述は legacy テーマ向けの旧記述として読むこと。
 
 ## 設計原則
 
 1. **1データ1コンポーネント**: 同じ指標は1つの chart_key を areas / theme で共有する
-2. **既存コンポーネント再利用優先**: areas ページに既にあるチャートは `page_components` に同じ chart_key を別行 INSERT するだけ
+2. **既存コンポーネント再利用優先**: areas ページに既にあるチャートは既存 contract を再利用する
 3. **e-Stat API 起点**: DB にデータがなくても e-Stat API から取得可能なら新規設計の対象
 4. **共通コンポーネント使用**: LineChartClient, CompositionChartClient 等の共通 UI を使う
 5. **都道府県/市区町村分離**: 都道府県用と市区町村用は別レコード（statsDataId が異なる）
@@ -31,9 +30,9 @@ primary_agent: theme-component-builder
 
 ### Phase 1: 現状把握
 
-1. IndicatorSet を読み込む（panelTabs, indicators）
-2. 既存の page_components（theme + area-category）を DB から取得
-3. panelTab 別のチャート有無を確認
+1. 対象 `ThemeCatalog` の `metrics[]` / `charts[]` を読み込む
+2. 生成済み page-components（theme + area-category）を読み、共有候補を確認
+3. `sortOrder`、指標カードとの重複、指標ハブ導線の有無を確認
 
 ### Phase 2: 既存コンポーネント再利用調査
 
@@ -68,7 +67,8 @@ for (const [key, e] of byKey) {
 "
 ```
 
-再利用可能なチャートは、対象テーマの git TS JSON（`apps/web/scripts/data/page-components/theme/<THEME_KEY>.json`）に同じ `componentKey` のエントリを追記する（別 pageKey で再利用）。反映は `/sync-snapshots`（生成スクリプトが git TS → R2）。
+再利用可能なチャートは、対象テーマの `ThemeCatalog.charts[]` に同じ契約を記述する。生成済み
+`page-components/theme/<THEME_KEY>.json` は直接編集しない。
 
 ### Phase 3: e-Stat API データ調査
 
@@ -108,6 +108,9 @@ WebSearch: "{テーマキーワード} site:resas.go.jp"
 - chart-patterns.md の決定木でチャートタイプを決定
 - 色規約に従う（男女色 #3b82f6/#ec4899 は予約）
 - `showLatestValues: true` でチャート下リスト表示を検討
+- 指標一般の定義・算出方法は `/ranking/[key]` に置き、`relatedRankingKeys` で接続する
+- `annotation` は系列断絶・分母差・比較不能条件など、表示しないと誤読する固有条件だけにする
+- 「線の傾きを確認できます」等の componentType 由来 description は設計しない
 
 10. chart_key の命名:
     - areas でも使えるよう汎用的な名前にする（`theme-` プレフィックスではなく `cmp-` 等）
@@ -120,36 +123,36 @@ WebSearch: "{テーマキーワード} site:resas.go.jp"
 ```markdown
 ## チャート設計: {テーマ名}
 
-### 既存コンポーネント再利用（assignments のみ）
+### 既存コンポーネント再利用
 
-| chart_key | title | type | 元ページ | 追加先 section |
-|-----------|-------|------|---------|---------------|
-| cmp-econ-gdp | 県内総生産額の推移 | line-chart | area-category/economy | GDP・所得 |
+| componentKey | title              | type       | 元ページ              | relatedRankingKeys | annotation |
+| ------------ | ------------------ | ---------- | --------------------- | ------------------ | ---------- |
+| cmp-econ-gdp | 県内総生産額の推移 | line-chart | area-category/economy | prefectural-gdp    | —          |
 
 ### 新規チャート
 
-| chart_key | title | type | section | estatParams |
-|-----------|-------|------|---------|-------------|
-| cmp-xxx | ... | line-chart | ... | statsDataId:xxx, cdCat01:xxx |
+| componentKey | title | type       | estatParams                  | relatedRankingKeys | annotation |
+| ------------ | ----- | ---------- | ---------------------------- | ------------------ | ---------- |
+| cmp-xxx      | ...   | line-chart | statsDataId:xxx, cdCat01:xxx | ...                | 必要時のみ |
 
-### INSERT SQL プレビュー
+### ThemeCatalog TS 差分プレビュー
+
 ...
 ```
 
-**この段階では DB に INSERT しない。ユーザー承認後に `/insert-theme-components` で実行する。**
+**この段階では SSOT を変更しない。承認後に `/insert-theme-components` で ThemeCatalog TS へ反映する。**
 
 ## 注意
 
-- DB は readonly で開くこと
 - 既存チャートと chart_key の重複を必ず確認
 - e-Stat API のメタ情報で取得可能なデータを確認してから設計する
-- 1セクション最大3チャート（KPI 除く）
+- 同じ事実を指標カードと chart で二重に強調しない
 
 ## 参照
 
 - `/inspect-estat-meta` — e-Stat メタデータ調査
 - `/search-estat` — e-Stat 統計表検索
 - `/audit-theme-components` — テーマ監査
-- `/insert-theme-components` — DB 投入
-- `.Codex/design-system/page-components.md` — 設計原則（1データ1コンポーネント）
+- `/insert-theme-components` — ThemeCatalog TS 反映
+- `.claude/design-system/page-components.md` — 設計原則（1データ1コンポーネント）
 - `${CLAUDE_SKILL_DIR}/reference/chart-patterns.md` — チャート決定木

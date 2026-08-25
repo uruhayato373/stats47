@@ -19,6 +19,10 @@ export interface MetricKpi {
   /** 都道府県選択時のみ、その県の全国順位。未選択時は null。 */
   rank: number | null;
   total: number;
+  /** ランキング snapshot の provenance。フッターの出典導線に使用する。 */
+  sourceName?: string;
+  sourceLink?: string;
+  sourceLinks?: Array<{ label: string; url: string }>;
   /** 選択中都道府県の年次推移 (都道府県選択時のみ使用)。 */
   series: { year: number; value: number }[];
   /**
