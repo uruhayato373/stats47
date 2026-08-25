@@ -71,6 +71,25 @@ describe('theme chart SVG accessibility', () => {
     ).toBeTruthy();
   });
 
+  it('ドーナツグラフの合計をデータセット精度で表示する', () => {
+    render(
+      <DonutChart
+        title="産業構成"
+        data={[
+          { name: '第一次産業', value: 20.5 },
+          { name: '第二次産業', value: 79 },
+        ]}
+        unit="%"
+      />
+    );
+
+    expect(
+      screen.getByRole('img', {
+        name: 'ドーナツグラフ「産業構成」。内訳: 第一次産業、第二次産業。合計: 99.5%',
+      })
+    ).toBeTruthy();
+  });
+
   it('水平乖離棒グラフを基準値・項目・値域で識別できる', () => {
     render(
       <HorizontalDivergingBarChart
@@ -85,6 +104,24 @@ describe('theme chart SVG accessibility', () => {
     expect(
       screen.getByRole('img', {
         name: '基準値からの乖離を示す水平棒グラフ。基準値: 100。項目: 食料、住居。値の範囲: 98から103',
+      })
+    ).toBeTruthy();
+  });
+
+  it('水平乖離棒グラフの基準値と値域の小数桁を揃える', () => {
+    render(
+      <HorizontalDivergingBarChart
+        data={[
+          { label: '食料', value: 98 },
+          { label: '住居', value: 103.5 },
+        ]}
+        baseline={100}
+      />
+    );
+
+    expect(
+      screen.getByRole('img', {
+        name: '基準値からの乖離を示す水平棒グラフ。基準値: 100.0。項目: 食料、住居。値の範囲: 98.0から103.5',
       })
     ).toBeTruthy();
   });
@@ -122,6 +159,24 @@ describe('theme chart SVG accessibility', () => {
     expect(
       await screen.findByRole('img', {
         name: '人口ピラミッド「年齢構成」。年齢階級: 0〜4歳、5〜9歳。男性合計: 220人。女性合計: 240人',
+      })
+    ).toBeTruthy();
+  });
+
+  it('人口ピラミッドの男女合計の小数桁を揃える', async () => {
+    render(
+      <PyramidChart
+        title="年齢構成"
+        chartData={[
+          { ageGroup: '0〜4歳', male: -100, female: 110 },
+          { ageGroup: '5〜9歳', male: -120.5, female: 130 },
+        ]}
+      />
+    );
+
+    expect(
+      await screen.findByRole('img', {
+        name: '人口ピラミッド「年齢構成」。年齢階級: 0〜4歳、5〜9歳。男性合計: 220.5人。女性合計: 240.0人',
       })
     ).toBeTruthy();
   });

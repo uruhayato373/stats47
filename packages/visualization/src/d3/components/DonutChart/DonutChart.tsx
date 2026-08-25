@@ -3,6 +3,7 @@
 import { select, schemeTableau10, arc, pie, scaleOrdinal, sum } from "d3";
 import { useEffect, useRef } from "react";
 import { cn } from "@stats47/components";
+import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 import { computeFontSize } from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { DonutChartDataNode, DonutChartProps } from "./types";
@@ -30,10 +31,11 @@ export function DonutChart({
     const svgRef = useRef<SVGSVGElement>(null);
     const { showTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
     const total = sum(data, (item) => item.value);
+    const valuePrecision = resolveValuePrecision(data.map((item) => item.value));
     const accessibleLabel = [
         title ? `ドーナツグラフ「${title}」` : "ドーナツグラフ",
         data.length > 0 ? `内訳: ${data.map((item) => item.name).join("、")}` : "データなし",
-        data.length > 0 ? `合計: ${total.toLocaleString()}${unit}` : undefined,
+        data.length > 0 ? `合計: ${formatValueWithPrecision(total, valuePrecision)}${unit}` : undefined,
         centerText ? `中央表示: ${centerText}` : undefined,
     ].filter(Boolean).join("。");
 

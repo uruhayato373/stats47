@@ -8,10 +8,11 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 
 import type { D3PyramidChartProps } from "../../types/d3";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
-import { select, rollup, sum, stack, stackOffsetDiverging, max, scaleLinear, scaleBand, scaleOrdinal, format } from "d3";
+import { select, rollup, sum, stack, stackOffsetDiverging, max, scaleLinear, scaleBand, scaleOrdinal } from "d3";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
 
 
@@ -29,8 +30,7 @@ export function PyramidChart({
   marginLeft: propsMarginLeft,
   title,
   unit = "人",
-  valueFormatter = (value: number) =>
-    new Intl.NumberFormat("ja-JP").format(Math.abs(value)),
+  valueFormatter,
 }: D3PyramidChartProps) {
   const maleColor = "hsl(221, 83%, 53%)";
   const femaleColor = "hsl(340, 82%, 52%)";
@@ -39,11 +39,16 @@ export function PyramidChart({
   const { showTooltip, updateTooltipPosition, hideTooltip } = useD3Tooltip();
   const maleTotal = chartData.reduce((total, item) => total + Math.abs(item.male), 0);
   const femaleTotal = chartData.reduce((total, item) => total + Math.abs(item.female), 0);
+  const valuePrecision = resolveValuePrecision(
+    chartData.flatMap((item) => [Math.abs(item.male), Math.abs(item.female)]),
+  );
+  const formatAccessibleValue = valueFormatter ?? ((value: number) =>
+    formatValueWithPrecision(Math.abs(value), valuePrecision));
   const accessibleLabel = [
     title ? `人口ピラミッド「${title}」` : "人口ピラミッド",
     `年齢階級: ${chartData.map((item) => item.ageGroup).join("、")}`,
-    `男性合計: ${maleTotal.toLocaleString()}${unit}`,
-    `女性合計: ${femaleTotal.toLocaleString()}${unit}`,
+    `男性合計: ${formatAccessibleValue(maleTotal)}${unit}`,
+    `女性合計: ${formatAccessibleValue(femaleTotal)}${unit}`,
   ].join("。");
 
   useEffect(() => {
@@ -185,11 +190,6 @@ export function PyramidChart({
       .domain(["男性", "女性"])
       .range([maleColor, femaleColor]);
 
-    // パーセンテージフォーマッター（値の絶対値をフォーマット）
-    const formatValue = ((format) => (x: number) => format(Math.abs(x)))(
-      format(",")
-    );
-
     // SVGコンテナを作成
     const svg = select(svgRef.current)
       .attr("viewBox", `0 0 ${width} ${height}`)
@@ -240,7 +240,7 @@ export function PyramidChart({
         select(svgRef.current).selectAll("*").remove();
       }
     };
-  }, [isClient, chartData, width, height, valueFormatter, marginTop, marginRight, marginBottom, marginLeft, baseFontSize, showTooltip, updateTooltipPosition, hideTooltip]);
+  }, [isClient, chartData, width, height, marginTop, marginRight, marginBottom, marginLeft, baseFontSize, showTooltip, updateTooltipPosition, hideTooltip]);
 
   if (!isClient) {
     return <div>Loading...</div>;
