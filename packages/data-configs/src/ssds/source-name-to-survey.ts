@@ -24,7 +24,7 @@ export const KNOWN_SOURCE_TO_SURVEY: Record<string, string> = {
   人口動態統計: "vital-statistics",
   学校基本調査報告書: "school-basic-survey",
   社会生活基本調査報告: "social-life-basic-survey",
-  住宅・土地統計調査報告: "housing-land-survey",
+  "住宅・土地統計調査報告": "housing-land-survey",
   医療施設調査: "medical-facility-survey",
   "医療施設調査・病院報告": "medical-facility-survey",
   病院報告: "hospital-report",
@@ -79,7 +79,7 @@ export const PROPOSED_NEW_SURVEYS: Record<
   },
   学校保健統計調査報告書: { id: "school-health-survey", name: "学校保健統計調査報告書", organization: "文部科学省" },
   福祉行政報告例: { id: "welfare-admin-report", name: "福祉行政報告例", organization: "厚生労働省" },
-  事業所・企業統計調査報告: { id: "establishment-enterprise-census", name: "事業所・企業統計調査報告", organization: "総務省" },
+  "事業所・企業統計調査報告": { id: "establishment-enterprise-census", name: "事業所・企業統計調査報告", organization: "総務省" },
   農林業センサス: { id: "agriculture-forestry-census", name: "農林業センサス", organization: "農林水産省" },
 
   // --- Phase 2 で auto-slug から昇格 (高頻度) ---
