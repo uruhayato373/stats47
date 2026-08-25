@@ -557,7 +557,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "safetyenvironment",
     "categoryName": "司法・安全・環境",
-    "count": 105,
+    "count": 106,
     "representatives": [
       {
         "rankingKey": "theft-offenses-recognized",
@@ -600,7 +600,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "socialsecurity",
     "categoryName": "社会保障・衛生",
-    "count": 244,
+    "count": 246,
     "representatives": [
       {
         "rankingKey": "psychiatric-bed-count",

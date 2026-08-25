@@ -908,6 +908,7 @@ import { homeOwnershipRateKakei } from "./metrics/home-ownership-rate-kakei";
 import { homemakingLessonConsumptionExpenditure } from "./metrics/homemaking-lesson-consumption-expenditure";
 import { horseMackerelConsumptionExpenditure } from "./metrics/horse-mackerel-consumption-expenditure";
 import { horseMackerelConsumptionQuantity } from "./metrics/horse-mackerel-consumption-quantity";
+import { hospitalBedCount } from "./metrics/hospital-bed-count";
 import { hospitalStaffByOccupation } from "./metrics/hospital-staff-by-occupation";
 import { householdHeadAllowanceConsumptionExpenditure } from "./metrics/household-head-allowance-consumption-expenditure";
 import { householdHeadAnnualIncomePerHousehold } from "./metrics/household-head-annual-income-per-household";
@@ -1233,6 +1234,7 @@ import { nationalHealthInsuranceBenefits } from "./metrics/national-health-insur
 import { nationalHealthInsuranceEnrolleesPer1000 } from "./metrics/national-health-insurance-enrollees-per-1000";
 import { nationalHealthInsuranceMedicalExpensePerPerson } from "./metrics/national-health-insurance-medical-expense-per-person";
 import { nationalHealthInsuranceVisitRatePer1000 } from "./metrics/national-health-insurance-visit-rate-per-1000";
+import { nationalMedicalExpenseInpatient } from "./metrics/national-medical-expense-inpatient";
 import { nationalMedicalExpensePerPerson } from "./metrics/national-medical-expense-per-person";
 import { nationalMedicalExpenseTotal } from "./metrics/national-medical-expense-total";
 import { nationalParkArea } from "./metrics/national-park-area";
@@ -1968,6 +1970,7 @@ import { sportswearConsumptionExpenditure } from "./metrics/sportswear-consumpti
 import { spouseIncome } from "./metrics/spouse-income";
 import { squidConsumptionExpenditure } from "./metrics/squid-consumption-expenditure";
 import { squidConsumptionQuantity } from "./metrics/squid-consumption-quantity";
+import { ssPollutionLoad } from "./metrics/ss-pollution-load";
 import { standardFinancialScaleMunicipal } from "./metrics/standard-financial-scale-municipal";
 import { standardFiscalDemandMunicipality } from "./metrics/standard-fiscal-demand-municipality";
 import { standardFiscalExpenditure } from "./metrics/standard-fiscal-expenditure";
@@ -3207,6 +3210,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "homemaking-lesson-consumption-expenditure": homemakingLessonConsumptionExpenditure,
   "horse-mackerel-consumption-expenditure": horseMackerelConsumptionExpenditure,
   "horse-mackerel-consumption-quantity": horseMackerelConsumptionQuantity,
+  "hospital-bed-count": hospitalBedCount,
   "hospital-staff-by-occupation": hospitalStaffByOccupation,
   "household-head-allowance-consumption-expenditure": householdHeadAllowanceConsumptionExpenditure,
   "household-head-annual-income-per-household": householdHeadAnnualIncomePerHousehold,
@@ -3532,6 +3536,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "national-health-insurance-enrollees-per-1000": nationalHealthInsuranceEnrolleesPer1000,
   "national-health-insurance-medical-expense-per-person": nationalHealthInsuranceMedicalExpensePerPerson,
   "national-health-insurance-visit-rate-per-1000": nationalHealthInsuranceVisitRatePer1000,
+  "national-medical-expense-inpatient": nationalMedicalExpenseInpatient,
   "national-medical-expense-per-person": nationalMedicalExpensePerPerson,
   "national-medical-expense-total": nationalMedicalExpenseTotal,
   "national-park-area": nationalParkArea,
@@ -4267,6 +4272,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "spouse-income": spouseIncome,
   "squid-consumption-expenditure": squidConsumptionExpenditure,
   "squid-consumption-quantity": squidConsumptionQuantity,
+  "ss-pollution-load": ssPollutionLoad,
   "standard-financial-scale-municipal": standardFinancialScaleMunicipal,
   "standard-fiscal-demand-municipality": standardFiscalDemandMunicipality,
   "standard-fiscal-expenditure": standardFiscalExpenditure,
