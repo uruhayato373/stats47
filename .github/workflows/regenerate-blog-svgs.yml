@@ -22,6 +22,7 @@ name: 🎨 Regenerate Blog SVGs (svg-builder 経由・dark mode 付与)
 #   gh workflow run regenerate-blog-svgs.yml -f slugs="slug-a" -f dry_run=false  # 指定 slug を本番反映
 #   gh workflow run regenerate-blog-svgs.yml -f mode=scatter-canonical # 散布図71件 dry-run
 #   gh workflow run regenerate-blog-svgs.yml -f mode=scatter-canonical -f dry_run=false # 同じ対象をR2反映
+#   gh workflow run regenerate-blog-svgs.yml -f mode=source-repair -f source_repair_payload='<base64>'
 #
 # scatter-canonical は SVG だけでなく source.json も検査する。破損2件は一次ソースから
 # data/source/article を復元し、旧5件は公開JSONと一次ソースの点集合が一致した場合だけ
@@ -31,15 +32,20 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'all: 全チャート / scatter-canonical: 散布図の描画・データ・出典を正規化'
+        description: 'all: 全チャート / scatter-canonical: 散布図を正規化 / source-repair: 欠落 source.json を復旧'
         required: false
         type: choice
         options:
           - all
           - scatter-canonical
+          - source-repair
         default: 'all'
       slugs:
         description: 'all モードの対象 slug (スペース区切り)。空なら all.json の全 slug'
+        required: false
+        default: ''
+      source_repair_payload:
+        description: 'source-repair 用 base64 JSON: [{slug,base,manifest}]（既存 manifest の上書き不可）'
         required: false
         default: ''
       dry_run:
@@ -84,7 +90,7 @@ jobs:
         run: npm ci
 
       - name: 📥 Download blog data from R2 (app/blog)
-        if: ${{ github.event.inputs.mode == 'all' }}
+        if: ${{ github.event.inputs.mode == 'all' || github.event.inputs.mode == 'source-repair' }}
         run: npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix app/blog
 
       - name: 🔎 Resolve target slugs
@@ -144,6 +150,62 @@ jobs:
             echo "散布図はすでに正規化済みです（R2更新なし）"
           fi
 
+      - name: 🩹 Prepare missing source manifests
+        if: ${{ github.event.inputs.mode == 'source-repair' }}
+        env:
+          SOURCE_REPAIR_PAYLOAD_B64: ${{ github.event.inputs.source_repair_payload }}
+        run: |
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import { inspectChartSourceManifest } from './.claude/scripts/lib/chart-provenance.mjs';
+
+          const { METRICS_REGISTRY } = await import('@stats47/data-configs');
+          const { resolveBlogChartSurveyTaxonomy } = await import(
+            './packages/ranking/src/survey/survey-taxonomy.ts'
+          );
+
+          const encoded = process.env.SOURCE_REPAIR_PAYLOAD_B64 ?? '';
+          if (!/^[A-Za-z0-9+/=]+$/.test(encoded)) throw new Error('source_repair_payload は base64 必須');
+          const repairs = JSON.parse(Buffer.from(encoded, 'base64').toString('utf8'));
+          if (!Array.isArray(repairs) || repairs.length < 1 || repairs.length > 20) {
+            throw new Error('repair は1〜20件の配列にすること');
+          }
+          const safeName = /^[a-z0-9][a-z0-9-]*$/;
+          const keys = [];
+          for (const repair of repairs) {
+            if (!repair || !safeName.test(repair.slug) || !safeName.test(repair.base)) {
+              throw new Error('slug/base は kebab-case 必須');
+            }
+            const verdict = inspectChartSourceManifest(repair.manifest);
+            if (verdict.verdict === 'invalid') {
+              throw new Error(`${repair.slug}/${repair.base}: ${verdict.detail}`);
+            }
+            const taxonomy = resolveBlogChartSurveyTaxonomy(repair.manifest, METRICS_REGISTRY);
+            if (taxonomy.status === 'unresolved' || taxonomy.status === 'missing-lineage') {
+              throw new Error(`${repair.slug}/${repair.base}: survey taxonomy ${taxonomy.status}`);
+            }
+            const dir = path.join('.local/r2/app/blog', repair.slug, 'data');
+            const svg = path.join(dir, `${repair.base}.svg`);
+            const target = path.join(dir, `${repair.base}.source.json`);
+            const key = `app/blog/${repair.slug}/data/${repair.base}.source.json`;
+            if (!fs.existsSync(svg)) throw new Error(`公開 SVG が無い: ${repair.slug}/${repair.base}`);
+            const content = `${JSON.stringify(repair.manifest, null, 2)}\n`;
+            if (fs.existsSync(target)) {
+              if (fs.readFileSync(target, 'utf8') !== content) {
+                throw new Error(`既存 source.json は上書きしない: ${repair.slug}/${repair.base}`);
+              }
+              keys.push(key);
+              continue;
+            }
+            fs.writeFileSync(target, content);
+            keys.push(key);
+          }
+          if (keys.length === 0) throw new Error('新規 repair 対象が0件');
+          fs.writeFileSync('.local/generated-blog-svg-keys.txt', `${keys.sort().join('\n')}\n`);
+          console.log(`source repair: ${keys.length}件`);
+          NODE
+
       - name: 🖼️ Build review gallery (local)
         run: |
           node .claude/scripts/blog/build-svg-gallery.mjs --source local \
@@ -156,7 +218,7 @@ jobs:
           path: /tmp/blog-svg-gallery.html
           if-no-files-found: warn
 
-      - name: 📤 Push regenerated assets to R2 (本番時のみ)
+      - name: 📤 Push regenerated/repaired assets to R2 (本番時のみ)
         if: ${{ github.event.inputs.dry_run == 'false' }}
         run: |
           KEY_FILE=".local/generated-blog-svg-keys.txt"
@@ -165,7 +227,7 @@ jobs:
               echo "散布図はすでに正規化済みです（R2更新なし）"
               exit 0
             fi
-            echo "::error::再生成されたSVG keyが0件です"
+            echo "::error::R2 exact publish keyが0件です"
             exit 1
           fi
           ARGS=()
@@ -182,6 +244,15 @@ jobs:
           if [ "${#ARGS[@]}" -gt 0 ]; then
             npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts "${ARGS[@]}"
           fi
+
+      - name: 🧮 Regenerate and publish blog survey index after source repair
+        if: ${{ github.event.inputs.mode == 'source-repair' && github.event.inputs.dry_run == 'false' }}
+        run: |
+          # source.json を先に R2 へ反映済み。公開URLの404 cacheを踏まないよう S3 readを使い、
+          # surveyIds / surveyArticleIndex を同じ導出coreで再生成する。
+          R2_PUBLIC_FETCH_URL='' NODE_OPTIONS='--conditions react-server' \
+            npx tsx apps/web/scripts/export-blog-snapshot.ts
+          npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts --key app/blog/all.json
 
       - name: 🧹 Purge Workers data cache (本番時のみ)
         if: ${{ github.event.inputs.dry_run == 'false' }}

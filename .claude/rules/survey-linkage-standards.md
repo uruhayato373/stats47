@@ -23,7 +23,7 @@ chart source.json) を共通 resolver が surveys.json へ解決する。
 | **配信 (item→survey)** | R2 `app/ranking/<key>/item.json` の `surveyIds[]` + `originalSurveys[]` | 焼き込み | `generate-ranking-items.ts` (builder) が生成 |
 | **配信 (survey→items)** | R2 `app/survey/<id>/items.json` + `app/survey/all.json` (itemCount 付き) | 焼き込み | master exporter (`export-master-snapshots.ts`) が生成 |
 | **テーマ chart lineage** | `packages/data-configs/src/theme-catalog/*.ts` の `relatedRankingKeys` / `rankingLink` / `estatParams` | git TS | `resolveThemeSurveyTaxonomy` が直接解決。surveyId を重複記録しない |
-| **ブログ chart lineage** | R2 `app/blog/<slug>/data/<base>.source.json` | R2 JSON | rankingKey / statsDataId を解決。記事単位の派生 `surveyIds[]` は `app/blog/all.json` へ焼く |
+| **ブログ chart lineage** | R2 `app/blog/<slug>/data/<base>.source.json` | R2 JSON | rankingKey / statsDataId、または手動取得統計の `sourceName` を共通原典辞書で解決。記事単位の派生 `surveyIds[]` は `app/blog/all.json` へ焼く |
 | **横断監査 state** | `.claude/state/surveys/taxonomy.json` | 派生 JSON | ranking/theme/blog 全量 + survey→各面の逆引き。手編集禁止 |
 | **悪化防止 ratchet** | `.claude/config/survey-taxonomy-ratchet.json` | git JSON | 週次監査が改善方向だけに tighten。PR は offline check |
 
@@ -131,7 +131,7 @@ NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-blog-sn
 | 合成 id を `/survey/<id>` リンクとして描画する | `SourceAttribution` の `isLinkableSurveyId` (kebab-case ASCII のみ通す) で最終防波堤。合成 id は**調査名をテキスト表示**しリンクにしない。★`attribution.originalSurveys` は surveys.json 照合を経ずに item.json へ焼き込まれるため、`resolveSurveyLinkage` の除外だけでは漏れる (2026-07-24 に約 231 ランキングページが `/survey/ssds-src:世界農林業センサス` へ 404 リンクしていた) |
 | 未分類の受け皿となる擬似調査 (旧 `ssds`) を作る | 未分類は非表示のまま辞書追記で回収 |
 | bucketing/builder を経由しない独自の紐付けロジック追加 | `resolveSurveyLinkage` に一本化 |
-| theme/blog に手書き surveyId を追加 | 既存 lineage を `resolveSurveyTaxonomy` で派生 |
+| theme/blog に手書き surveyId を追加 | rankingKey / statsDataId / 共通辞書に実在する sourceName を `resolveSurveyTaxonomy` で派生 |
 | taxonomy state / portfolio / experiments を手編集 | 各 audit / builder script で再生成 |
 | /survey 系に generateStaticParams を付ける | ƒ (revalidate) / force-dynamic (`check-r2-route-ssg.cjs` が守る) |
 

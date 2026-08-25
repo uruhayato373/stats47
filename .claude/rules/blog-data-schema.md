@@ -105,8 +105,8 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 // metric 化していない e-Stat 直叩き — ここで初めて statsDataId + params を保存
 { "kind": "estat", "statsDataId": "0003448237", "params": {…}, "year": "2023", "transform": "top5+bottom5" }
 
-// 手動/外部 — データ自体が唯一の源
-{ "kind": "manual", "source": "総務省 決算カード 2022 (URL)" }
+// 手動/外部 — データ自体が唯一の源。統計資料なら共通原典辞書の sourceName も持つ
+{ "kind": "manual", "sourceName": "過去の気象データ", "source": "気象庁の公式URL" }
 ```
 
 ### source.json の `kind` 語彙 + 「再取得できるか」の機械検査 (2026-07-29)

@@ -94,6 +94,7 @@ export {
   type ProvenanceSurvey,
   type SourceAttribution,
 } from "./provenance/resolve-metric-provenance";
+export { resolveSurveyId as resolveSurveyIdBySourceName } from "./ssds/source-name-to-survey";
 export {
   HOME_PORTAL_USE_CASES,
   validateHomePortal,

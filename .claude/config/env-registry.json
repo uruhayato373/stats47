@@ -845,6 +845,14 @@
       ]
     },
     {
+      "name": "SOURCE_REPAIR_PAYLOAD_B64",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "regenerate-blog-svgs source-repair の一時入力。値はGitHub Actions input由来で永続保存しない"
+    },
+    {
       "name": "STATE_DIR",
       "visibility": "server",
       "contexts": [
