@@ -43,9 +43,9 @@ TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 # 集計するエフェメラル producer (build-correlation-snapshot.ts) として再実装 (DBレス Derived)。
 declare -a TASKS=(
   "remotion-static|apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all"
+  "ranking-items|packages/ranking/src/scripts/generate-ranking-items.ts"
   "item-metadata-refresh|packages/ranking/src/scripts/refresh-item-metadata.ts --apply"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
-  "ranking-items|packages/ranking/src/scripts/generate-ranking-items.ts"
   # ★calculated-stats は ranking-values より前に置くこと。計算型 metric の正典
   #   app/stats/<key>/values.json を作る producer で、ranking-values はそれを配信用に
   #   射影するだけだから (逆順だと計算型が 1 年前のまま配信される)。

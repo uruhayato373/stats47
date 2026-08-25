@@ -80,6 +80,32 @@ function finalPushIndex(calls) {
   return calls.findIndex((c) => c.includes("diff-push-r2.ts") && !c.includes("--prefix"));
 }
 
+test("ranking-items を master より先に生成し metadata refresh を master 直前に保つ", () => {
+  const source = fs.readFileSync(RUN_SH, "utf8");
+  const taskBlock = source.match(/declare -a TASKS=\(\n([\s\S]*?)\n\)/)?.[1] ?? "";
+  const labels = [...taskBlock.matchAll(/^\s*"([^|]+)\|/gm)].map((match) => match[1]);
+  const rankingItemsAt = labels.indexOf("ranking-items");
+  const metadataRefreshAt = labels.indexOf("item-metadata-refresh");
+  const masterAt = labels.indexOf("master");
+
+  assert.ok(rankingItemsAt >= 0, "ranking-items task が見つからない");
+  assert.ok(metadataRefreshAt >= 0, "item-metadata-refresh task が見つからない");
+  assert.ok(masterAt >= 0, "master task が見つからない");
+  assert.ok(
+    rankingItemsAt < masterAt,
+    "ranking-items が master より後だと、同じ run の survey reverse-index に新規 item が入らない",
+  );
+  assert.equal(
+    metadataRefreshAt + 1,
+    masterAt,
+    "item-metadata-refresh は master の category 再グループ化へ反映するため直前を保つ",
+  );
+  assert.ok(
+    rankingItemsAt < metadataRefreshAt,
+    "新規 item を生成してから metadata refresh で patch し、master へ渡す必要がある",
+  );
+});
+
 test("1 task が失敗しても、末尾の push を実行してから exit 1 する", () => {
   const { status, stdout, calls } = runRunSh({
     failPattern: "generate-ranking-values.ts",
