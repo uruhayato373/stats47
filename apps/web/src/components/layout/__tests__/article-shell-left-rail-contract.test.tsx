@@ -8,17 +8,20 @@ const LEFT = <nav aria-label="article-left-rail">left</nav>;
 const RIGHT = <aside aria-label="article-right-rail">right</aside>;
 
 describe('ArticleShell — leftRail', () => {
-  it('記事本文の前に lg+ 専用の左レールを描く', () => {
-    const { container } = render(
-      <ArticleShell leftRail={LEFT}>{MAIN}</ArticleShell>
-    );
+  it('記事本文の前に共通の 992px+ 左レールを描く', () => {
+    render(<ArticleShell leftRail={LEFT}>{MAIN}</ArticleShell>);
 
     expect(screen.getByLabelText('article-left-rail')).toBeInTheDocument();
     expect(screen.getByText('article-content')).toBeInTheDocument();
-    expect(container.querySelector('.lg\\:grid')).not.toBeNull();
+    const grid =
+      screen.getByLabelText('article-left-rail').parentElement?.parentElement;
+    expect(grid).toHaveClass('min-[992px]:grid');
     expect(
       screen.getByLabelText('article-left-rail').parentElement
-    ).toHaveClass('hidden', 'lg:block');
+    ).toHaveClass('hidden', 'min-[992px]:block');
+    expect(
+      screen.getByLabelText('article-left-rail').parentElement
+    ).not.toHaveClass('sticky');
   });
 
   it('右レールと同時指定された場合は既存の右レール契約を優先する', () => {

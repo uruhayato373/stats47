@@ -83,8 +83,9 @@ describe("RankingFaqSection", () => {
 
     const html = renderFaq(faqJson, "人口ランキング");
     // 可視アコーディオン: 質問と回答がページ上に表示される
-    expect(html).toContain("人口ランキング についてよくある質問");
+    expect(html).toContain("人口ランキングについてよくある質問");
     expect(html).toContain("Q. 1位の県は？");
     expect(html).toContain("A. 東京都です。");
+    expect(html).not.toContain("▼");
   });
 });

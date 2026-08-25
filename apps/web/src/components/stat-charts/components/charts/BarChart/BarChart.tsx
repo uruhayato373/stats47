@@ -87,6 +87,7 @@ export const DashboardBarChart = async ({
         <ChartFooter
           source={sourceName ?? undefined}
           sourceLink={sourceLink}
+          sourceLinks={common.sourceLinks}
           sourceDetail={unitProp}
           rankingLink={rankingLink}
         />

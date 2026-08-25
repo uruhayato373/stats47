@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { Sparkles } from "lucide-react";
 
-import { SurfaceCard } from "@/components/surface";
+import { ContentDisclosure } from "@/components/content";
 
 interface AiInsightCardProps {
   /** カード見出し（例: "データの考察"） */
@@ -13,24 +13,20 @@ interface AiInsightCardProps {
 }
 
 /**
- * AI 生成コンテンツの常時表示カード（Option D / Phase 1）
+ * AI 生成コンテンツの共通開閉カード。
  *
- * 折りたたみではなく、ヘッダー + 本文を常に表示する。
- * `footer` を渡すと本文の下に区切り線付きでサブ節を同一カード内に統合表示する。
- * Server Component（インタラクティブ要素なし）。
+ * `footer` を渡すと本文の下にサブ節を同一カード内に統合表示する。
+ * ネイティブ details のため Server Component のまま本文を SSR できる。
  */
 export function AiInsightCard({ title, children, footer }: AiInsightCardProps) {
   return (
-    <SurfaceCard className="p-0">
-      <div className="flex items-center justify-between gap-4 border-b border-border px-6 py-4">
-        <div className="flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-primary" />
-          <h2 className="text-lg font-semibold text-foreground">{title}</h2>
-        </div>
-        <span className="text-[11px] text-muted-foreground">AI生成</span>
-      </div>
-      <div className="px-6 py-4">{children}</div>
-      {footer && <div className="border-t border-border">{footer}</div>}
-    </SurfaceCard>
+    <ContentDisclosure
+      title={title}
+      leading={<Sparkles className="h-4 w-4 text-primary" aria-hidden="true" />}
+      meta={<span className="text-xs font-normal text-muted-foreground">AI生成</span>}
+    >
+      {children}
+      {footer ? <div className="mt-4 border-t border-border">{footer}</div> : null}
+    </ContentDisclosure>
   );
 }

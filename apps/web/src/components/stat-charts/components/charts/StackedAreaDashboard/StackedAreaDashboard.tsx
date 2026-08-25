@@ -72,6 +72,7 @@ export const StackedAreaDashboard = async ({
         <ChartFooter
           source={sourceName ?? undefined}
           sourceLink={sourceLink}
+          sourceLinks={common.sourceLinks}
           annotation={annotation}
           rankingLink={rankingLink}
           rankingLinks={rankingLinks}

@@ -27,15 +27,24 @@ export function PyramidChart({
   marginRight: propsMarginRight,
   marginBottom: propsMarginBottom,
   marginLeft: propsMarginLeft,
+  title,
+  unit = "人",
   valueFormatter = (value: number) =>
     new Intl.NumberFormat("ja-JP").format(Math.abs(value)),
 }: D3PyramidChartProps) {
   const maleColor = "hsl(221, 83%, 53%)";
   const femaleColor = "hsl(340, 82%, 52%)";
-  const unit = "人";
   const svgRef = useRef<SVGSVGElement>(null);
   const [isClient, setIsClient] = useState(false);
   const { showTooltip, updateTooltipPosition, hideTooltip } = useD3Tooltip();
+  const maleTotal = chartData.reduce((total, item) => total + Math.abs(item.male), 0);
+  const femaleTotal = chartData.reduce((total, item) => total + Math.abs(item.female), 0);
+  const accessibleLabel = [
+    title ? `人口ピラミッド「${title}」` : "人口ピラミッド",
+    `年齢階級: ${chartData.map((item) => item.ageGroup).join("、")}`,
+    `男性合計: ${maleTotal.toLocaleString()}${unit}`,
+    `女性合計: ${femaleTotal.toLocaleString()}${unit}`,
+  ].join("。");
 
   useEffect(() => {
     setIsClient(true);
@@ -239,11 +248,15 @@ export function PyramidChart({
 
   return (
     <div className="w-full">
-      <svg ref={svgRef} className="w-full" />
+      <svg
+        ref={svgRef}
+        className="w-full"
+        role="img"
+        aria-label={accessibleLabel}
+      />
     </div>
   );
 }
 
 /** @deprecated Use PyramidChart */
 export { PyramidChart as D3PyramidChart };
-

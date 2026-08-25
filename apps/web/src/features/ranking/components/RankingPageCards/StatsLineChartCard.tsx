@@ -1,3 +1,4 @@
+import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { LineChartClient, toLineChartData } from "@/components/stat-charts";
 import { fetchEstatData, toKpiCardData } from "@/components/stat-charts/server";
@@ -46,17 +47,10 @@ export async function StatsLineChartCard({
       title={title}
       description={description}
       footer={
-        <>
-          出典:{" "}
-          <a
-            href="https://www.e-stat.go.jp/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
-            社会・人口統計体系
-          </a>
-        </>
+        <ChartFooter
+          source="社会・人口統計体系"
+          sourceLink={`https://www.e-stat.go.jp/dbview?sid=${statParams.statsDataId}`}
+        />
       }
     >
       <div className="flex flex-col gap-4">

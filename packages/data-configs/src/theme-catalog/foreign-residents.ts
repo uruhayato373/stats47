@@ -83,9 +83,12 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
           "count"
         ]
       },
+      "relatedRankingKeys": [
+        "foreign-resident-count-per-100k",
+        "foreign-resident-count"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -117,9 +120,12 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
           "population"
         ]
       },
+      "relatedRankingKeys": [
+        "foreign-resident-count-china-per-100k",
+        "foreign-resident-count-korea-per-100k"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

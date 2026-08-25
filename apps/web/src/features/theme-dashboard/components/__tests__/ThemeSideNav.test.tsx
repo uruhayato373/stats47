@@ -22,9 +22,15 @@ describe('ThemeSideNav — テーマナビ', () => {
       name: 'テーマを切り替える',
     });
     const current = within(themeNav).getByRole('link', { name: '人口動態' });
+    const themeHeadingRow = within(themeNav)
+      .getByRole('heading', { name: 'テーマ' })
+      .parentElement?.parentElement;
 
+    expect(themeHeadingRow).not.toBeNull();
     expect(
-      within(themeNav).getByRole('link', { name: 'テーマ一覧へ' })
+      within(themeHeadingRow as HTMLElement).getByRole('link', {
+        name: 'テーマ一覧へ',
+      })
     ).toHaveAttribute('href', '/themes');
     expect(current).toHaveAttribute('aria-current', 'page');
     expect(current.closest('details')).toHaveAttribute('open');
@@ -60,6 +66,15 @@ describe('ThemeSideNav — テーマナビ', () => {
         screen.getByRole('navigation', { name: 'このテーマの出典調査' })
       ).getByRole('link', { name: '国勢調査' })
     ).toHaveAttribute('href', '/survey/population-census');
+    const surveyHeadingRow = screen
+      .getByRole('heading', { name: '出典調査' })
+      .parentElement?.parentElement;
+    expect(surveyHeadingRow).not.toBeNull();
+    expect(
+      within(surveyHeadingRow as HTMLElement).getByRole('link', {
+        name: '調査一覧へ',
+      })
+    ).toHaveAttribute('href', '/survey');
   });
 
   it('areaContextのテーマリンクは都道府県文脈を維持し、Type Bを除外する', () => {

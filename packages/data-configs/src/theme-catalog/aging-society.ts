@@ -56,7 +56,67 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "rankingKey": "household-ratio-with-65plus",
       "shortLabel": "65歳以上世帯割合",
       "role": "context"
-    }
+    },
+    {
+      "rankingKey": "marriages-per-total-population",
+      "shortLabel": "婚姻率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "divorces-per-total-population",
+      "shortLabel": "離婚率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "births",
+      "shortLabel": "出生数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "death-count",
+      "shortLabel": "死亡数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "late-elderly-medical-expense-per-insured",
+      "shortLabel": "後期高齢者医療費",
+      "role": "context"
+    },
+    {
+      "rankingKey": "total-population",
+      "shortLabel": "総人口",
+      "role": "context"
+    },
+    {
+      "rankingKey": "single-person-household-old-population-ratio",
+      "shortLabel": "65歳以上世帯員の単独世帯の割合",
+      "role": "context"
+    },
+    {
+      "rankingKey": "elderly-couple-only-household-ratio",
+      "shortLabel": "高齢夫婦のみの世帯の割合",
+      "role": "context"
+    },
+    {
+      "rankingKey": "pension-benefit-total",
+      "shortLabel": "厚生年金受給権者年金総額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "volunteer-activity-annual-participation-rate-15plus",
+      "shortLabel": "ボランティア活動の年間行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "young-population-index",
+      "shortLabel": "年少人口指数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "old-population-index",
+      "shortLabel": "老年人口指数",
+      "role": "context"
+    },
   ],
   "charts": [
     {
@@ -83,9 +143,12 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "crude-birth-rate",
+        "ratio-65-plus"
+      ],
       "sourceName": "人口動態統計 / 国勢調査",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -117,9 +180,12 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "series-12"
         ]
       },
+      "relatedRankingKeys": [
+        "marriages-per-total-population",
+        "divorces-per-total-population"
+      ],
       "sourceName": "人口動態統計",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -151,9 +217,12 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "neutral"
         ]
       },
+      "relatedRankingKeys": [
+        "births",
+        "death-count"
+      ],
       "sourceName": "人口統計",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -179,9 +248,11 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "late-elderly-medical-expense-per-insured"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/late-elderly-medical-expense-per-insured",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -213,9 +284,11 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "crude-birth-rate"
+      ],
       "sourceName": "人口動態統計",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -248,9 +321,11 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
         ],
         "totalCode": "A1101"
       },
+      "relatedRankingKeys": [
+        "ratio-65-plus"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -263,9 +338,11 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "pyramid-chart",
       "title": "人口ピラミッド",
       "componentProps": {},
+      "relatedRankingKeys": [
+        "total-population"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -305,7 +382,6 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       },
       "sourceName": "高齢社会白書 (令和6年版) / 厚生労働白書 (令和7年版) / 国土交通白書 2025 / 男女共同参画白書 (令和7年版) / 日本の将来推計人口 (令和5年推計) — 国立社会保障・人口問題研究所",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -340,24 +416,14 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
         "yAxisConfig": {
           "mode": "sync"
         },
-        "rankingLinks": [
-          {
-            "label": "65歳以上世帯員のいる世帯割合ランキング",
-            "url": "/ranking/household-ratio-with-65plus"
-          },
-          {
-            "label": "65歳以上単独世帯割合ランキング",
-            "url": "/ranking/single-person-household-old-population-ratio"
-          },
-          {
-            "label": "高齢夫婦のみ世帯割合ランキング",
-            "url": "/ranking/elderly-couple-only-household-ratio"
-          }
-        ]
       },
+      "relatedRankingKeys": [
+        "household-ratio-with-65plus",
+        "single-person-household-old-population-ratio",
+        "elderly-couple-only-household-ratio"
+      ],
       "sourceName": null,
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 6,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -397,7 +463,6 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       },
       "sourceName": "厚生労働白書 (令和7年版) / 高齢社会白書 (令和6年版) / 国土交通白書 2025 / 持続可能な物流の実現に向けた検討会 (国土交通省) / 日本の将来推計人口 (令和5年推計) — 国立社会保障・人口問題研究所",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -423,9 +488,11 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "series-7"
         ]
       },
+      "relatedRankingKeys": [
+        "pension-benefit-total"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/pension-benefit-total",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -438,6 +505,7 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "markdown-section",
       "title": "よくある質問",
       "componentProps": {
+        "displayMode": "faq",
         "subtitle": "高齢化について読者が気になる 6 問",
         "markdown": "### Q1: 高齢化率って何?\n\n高齢化率とは、総人口に占める65歳以上人口の割合のこと。日本では2020年に28.6%だったものが、2050年には約37.1%、2070年には38.7%に達すると推計されている。国民の約2.6人に1人が65歳以上となる計算で、社会保障や労働力確保の中核課題となっている。(出典: 高齢社会白書 令和6年版)\n\n### Q2: 日本は世界と比べてどれくらい高齢化が進んでいる?\n\n日本は先進7か国（G7）の中で平均寿命・健康寿命ともに最も長く、長寿社会を実現している国である。一方で、2070年には高齢化率が約39%に達し、現役世代（15〜64歳）が1990年代の約7割から約5割へ縮む見通しで、世界でも類を見ない速度で人口減少・少子高齢化が進行している。(出典: 厚生労働白書 令和7年版)\n\n### Q3: 「2025年問題」「2040年問題」とは?\n\n2025年問題は、団塊の世代が全員75歳以上の後期高齢者となり、医療・介護需要が急増する課題を指す。2040年問題は、高齢者人口が約3,953万人とピークに達する一方、現役世代が2025年比で1,000万人以上減少し、社会保障の担い手不足が深刻化する事態を意味する。(出典: 厚生労働白書 令和7年版)\n\n### Q4: 高齢者はどれくらい働いている?\n\n高齢者の就業意欲は高く、約6割が65歳を超えても働くことを希望している。実際の就業率も上昇傾向にあり、2024年時点で60〜64歳男性は84.0%、65〜69歳男性は62.8%が就業している。深刻な人手不足を背景に、年齢に関わらず能力を発揮できる「生涯現役社会」の実現が国家戦略となっている。(出典: 厚生労働白書 令和7年版)\n\n### Q5: 仕事と介護を両立している人はどのくらい?\n\n2022年時点で介護をしている約629万人のうち、58.0%にあたる約365万人が働きながら介護を行っている。介護離職を防ぐため、介護休業制度の拡充や企業向け「介護支援プラン」策定支援、両立支援企業の象徴である「トモニン」マークの普及などが進められている。(出典: 厚生労働白書 令和7年版)\n\n### Q6: 社会保障の費用と国民負担はどのくらい?\n\n2024年度の社会保障給付費は予算ベースで138兆円に達し、対GDP比で22.4%を占める。これを支える税と社会保険料の合計である「国民負担率」は、令和6年度実績見込みで45.8%、令和7年度見通しで46.2%である。介護費用だけでも2040年度には約25.8兆円まで増大する見通しで、給付と負担のバランス確保が急務とされている。(出典: 厚生労働白書 令和7年版)\n\n### Q7: 地方と都市で高齢化の進み方はなぜ違う?\n\n地方の高齢化は「高齢者が増えた」以上に、進学・就職を機に若い世代が都市部へ流出することで分母（若年・現役人口）が縮み、結果として高齢化率が押し上げられている側面が大きい。特に若年女性の流出が出生数の減少と相まって、地方の高齢化を加速させている。(出典: 男女共同参画白書 令和7年版)",
         "sources": [
@@ -461,7 +529,6 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       },
       "sourceName": "高齢社会白書 (令和6年版) / 厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 日本の将来推計人口 (令和5年推計) — 国立社会保障・人口問題研究所",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -487,9 +554,11 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "improve"
         ]
       },
+      "relatedRankingKeys": [
+        "volunteer-activity-annual-participation-rate-15plus"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/volunteer-activity-annual-participation-rate-15plus",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -521,9 +590,12 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "young-population-index",
+        "old-population-index"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

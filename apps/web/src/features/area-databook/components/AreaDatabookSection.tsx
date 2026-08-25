@@ -3,6 +3,7 @@ import { BookOpen } from "lucide-react";
 
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { DashboardComponentRenderer } from "@/components/stat-charts/server";
+import { resolveChartSourceLinks } from "@/components/stat-charts/utils/resolveChartSourceLinks";
 import { getSurfaceCardClassName } from "@/components/surface";
 
 import { AreaChartSection } from "@/features/area-profile";
@@ -101,7 +102,14 @@ function renderBlock(
             component={{
               id: chart.componentKey,
               componentType: chart.componentType,
-              componentProps: JSON.stringify(chart.componentProps),
+              componentProps: JSON.stringify({
+                ...chart.componentProps,
+                sourceLinks: resolveChartSourceLinks({
+                  rankingLink: chart.rankingLink,
+                  rankingLinks: chart.componentProps.rankingLinks,
+                  relatedRankingKeys: chart.relatedRankingKeys,
+                }),
+              }),
               title: chart.title,
               sortOrder: chart.sortOrder,
               gridColumnSpan: chart.gridColumnSpan ?? 12,
@@ -114,13 +122,7 @@ function renderBlock(
               dataSource: null,
             }}
             area={{ areaCode, areaName, areaType: "prefecture" }}
-            hideSource
           />
-          {chart.sourceName && (
-            <p className="mt-1 text-right text-[10px] text-muted-foreground">
-              出典: {chart.sourceName}
-            </p>
-          )}
         </div>
       );
     }

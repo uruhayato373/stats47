@@ -71,16 +71,46 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
 function parseMarkdownSectionComponentProps(
   value: Record<string, unknown>,
 ): MarkdownSectionComponentProps | null {
-  if (typeof value.markdown !== "string") return null;
-
   const subtitle = typeof value.subtitle === "string" ? value.subtitle : undefined;
   const sources = parseMarkdownSources(value.sources);
 
+  if (value.displayMode === "faq") {
+    const items = parseFaqItems(value.items);
+    if (!items) return null;
+    return { displayMode: "faq", items, subtitle, sources };
+  }
+
+  if (value.displayMode !== undefined && value.displayMode !== "prose") return null;
+  if (typeof value.markdown !== "string") return null;
+
   return {
+    displayMode: "prose",
     markdown: value.markdown,
     subtitle,
     sources,
   };
+}
+
+function parseFaqItems(
+  value: unknown,
+): Array<{ question: string; answer: string }> | null {
+  if (!Array.isArray(value) || value.length === 0) return null;
+  const items = value.map((item) => {
+    if (typeof item !== "object" || item === null || Array.isArray(item)) return null;
+    const candidate = item as Record<string, unknown>;
+    if (
+      typeof candidate.question !== "string" ||
+      candidate.question.trim().length === 0 ||
+      typeof candidate.answer !== "string" ||
+      candidate.answer.trim().length === 0
+    ) {
+      return null;
+    }
+    return { question: candidate.question, answer: candidate.answer };
+  });
+  return items.every((item) => item !== null)
+    ? (items as Array<{ question: string; answer: string }>)
+    : null;
 }
 
 function parseMarkdownSources(

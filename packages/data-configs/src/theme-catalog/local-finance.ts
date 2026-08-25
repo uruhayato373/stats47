@@ -109,9 +109,11 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "cdCat01": "D2101"
         }
       },
+      "relatedRankingKeys": [
+        "fiscal-strength-index-prefecture"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/fiscal-strength-index-prefecture",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -130,9 +132,11 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
         },
         "unit": "％"
       },
+      "relatedRankingKeys": [
+        "current-balance-ratio"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/current-balance-ratio",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -151,9 +155,11 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
         },
         "unit": "％"
       },
+      "relatedRankingKeys": [
+        "real-public-debt-service-ratio"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/real-public-debt-service-ratio",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -172,9 +178,11 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
         },
         "unit": "％"
       },
+      "relatedRankingKeys": [
+        "future-burden-ratio"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/future-burden-ratio",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -206,9 +214,12 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "series-6"
         ]
       },
+      "relatedRankingKeys": [
+        "fiscal-strength-index-prefecture",
+        "current-balance-ratio"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -240,9 +251,13 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           }
         ]
       },
+      "relatedRankingKeys": [
+        "local-tax-ratio-pref-finance",
+        "local-allocation-tax-ratio-pref-finance",
+        "national-treasury-disbursement-ratio-pref-finance"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -279,9 +294,14 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           }
         ]
       },
+      "relatedRankingKeys": [
+        "personnel-expenditure-ratio-pref-finance",
+        "welfare-expenditure-ratio-pref-finance",
+        "education-expenditure-ratio-pref-finance",
+        "public-works-expenditure-ratio-pref-finance"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -313,9 +333,12 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "special"
         ]
       },
+      "relatedRankingKeys": [
+        "per-capita-inhabitant-tax-pref-municipal",
+        "per-taxpayer-taxable-income"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -347,9 +370,12 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "count"
         ]
       },
+      "relatedRankingKeys": [
+        "real-public-debt-service-ratio",
+        "future-burden-ratio"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -387,9 +413,13 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "special"
         ]
       },
+      "relatedRankingKeys": [
+        "local-tax-ratio-pref-finance",
+        "local-allocation-tax-ratio-pref-finance",
+        "national-treasury-disbursement-ratio-pref-finance"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -415,9 +445,11 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "population"
         ]
       },
+      "relatedRankingKeys": [
+        "per-capita-total-expenditure-pref-municipal"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -443,9 +475,11 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "improve"
         ]
       },
+      "relatedRankingKeys": [
+        "taxpayer-ratio-per-pref-resident"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -483,9 +517,11 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
           "improve"
         ]
       },
+      "relatedRankingKeys": [
+        "personnel-expenditure-ratio-pref-finance"
+      ],
       "sourceName": "総務省「地方財政状況調査」",
       "sourceLink": null,
-      "rankingLink": "/ranking/personnel-expenditure-ratio-pref-finance",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

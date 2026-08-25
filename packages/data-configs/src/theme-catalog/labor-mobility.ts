@@ -46,7 +46,12 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "rankingKey": "monthly-average-actual-working-hours-male",
       "shortLabel": "月間労働時間(男)",
       "role": "context"
-    }
+    },
+    {
+      "rankingKey": "employment-mobility-rate",
+      "shortLabel": "就業異動率",
+      "role": "context"
+    },
   ],
   "charts": [
     {
@@ -73,9 +78,12 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
           "improve"
         ]
       },
+      "relatedRankingKeys": [
+        "turnover-rate",
+        "job-change-rate"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -115,7 +123,6 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       },
       "sourceName": "労働経済白書 (令和7年版) / 厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 経済財政白書 (令和7年版) / 賃金構造基本統計調査 (厚生労働省)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -155,7 +162,6 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       },
       "sourceName": "労働経済白書 (令和7年版) / 経済財政白書 (令和7年版) / 厚生労働白書 (令和7年版) / 三位一体の労働市場改革 (内閣官房) / 特定技能制度 (出入国在留管理庁)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -168,6 +174,7 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "componentType": "markdown-section",
       "title": "よくある質問",
       "componentProps": {
+        "displayMode": "faq",
         "subtitle": "労働移動・求人倍率について読者が気になる 7 問",
         "markdown": "### Q1: 有効求人倍率の地域差はなぜ?\n\n2024年の全国平均は1.25倍だが、東京都・愛知県など都市部・製造業集積地で高く、地方では低い傾向がある。都市部には情報通信業や専門サービス業など高賃金で多様な職種が集中し、旺盛な労働需要を生んでいる。一方、地方では「医療・福祉」に従事する正規雇用者の割合が高く（長崎県42.5%等）、職種が限定的。賃金水準の差（東京都の所定内給与は男性44.1万円、青森・沖縄等は大きな開き）が若年層を都市部に引き寄せ、地方の労働需給を緩めている。(出典: 労働経済白書 令和7年版)\n\n### Q2: 離職率が高い県・低い県の特徴は?\n\n離職率は雇用形態と産業構造に強く左右される。宿泊業・飲食サービス業・小売業など非正規雇用比率が高い産業が集積する観光地・都市部では離職率が高くなる傾向にある。一方、製造業中心で年功的雇用慣行が残る地域では離職率は低い。注目すべきは離職理由で、最新白書では「より良い条件の仕事を探すため」という前向き理由が3年連続で増加しており、転職者数は2024年に331万人に達している。離職率の高低だけでなく、その内訳を見る視点が重要。(出典: 労働経済白書 令和7年版)\n\n### Q3: テレワーク率の地域差はなぜ?\n\nテレワーク実施率（有業者ベース）は東京都が34.0%と突出して高く、神奈川21.4%・千葉16.7%が続く。これはテレワークに適した「情報通信業」「専門・技術サービス業」が都市部に集中しているため。一方、地方に多い建設業・運輸業・医療・福祉などの「現場職種」ではAIやデジタル技術による代替が難しく、テレワーク活用が進みにくい構造にある。テレワーク率の低さは「ICTインフラの遅れ」ではなく、産業構造の差として読み解く必要がある。(出典: 労働経済白書 令和7年版)\n\n### Q4: 副業率が示すものは何?\n\n副業希望者は近年増加傾向にあり、リスキリングや収入補完、自律的キャリア形成の手段として注目されている。ただし企業側では自社の労働時間管理の困難さから副業を認めない例も残る。地方では「労働者協同組合」による兼業での地域貢献（岐阜県東白川村等）といった、新しい形の「複業」による地域課題解決の萌芽もみられる。副業率が高い地域は労働市場の流動性が高い証左である一方、生活費補完目的の副業比率も含むため、内訳を見る視点が必要。(出典: 労働経済白書 令和7年版)\n\n### Q5: 失業率の読み方は?\n\n失業率は労働市場の需給だけでなく、産業構造や年齢構成によっても変動する。日本全体の失業率は近年低水準（2〜3%台）で推移しているが、地域差は依然存在する。注目すべきは「欠員率」との関係で、欠員率は全体で2.8%まで上昇しており、求人があっても採用に至らない**ミスマッチ**が拡大している。職種別に見ると事務職は0.43倍と低水準だが、保安職業は6.91倍、建設・採掘従事者は5.72倍と人手不足が深刻。失業率の低さと人手不足が同居する構造を理解することが重要。(出典: 労働経済白書 令和7年版)\n\n### Q6: 人手不足が深刻な業種は?\n\n建設・物流・医療・福祉が代表的。建設・採掘従事者の有効求人倍率は5.72倍、保安職業は6.91倍と極めて高水準。物流分野では「2030年問題」（ドライバー不足による輸送能力34.1%減）が指摘される。介護分野は2040年度に約272万人が必要とされ、約57万人の追加確保が課題。これら現場職種はテレワーク等の柔軟な働き方が難しく、AI・ロボットによる省人化（自動運転レベル4、i-Construction 2.0等）と、特定技能制度による外国人材活用（2028年度末までに最大約82万人）が政策の柱になっている。(出典: 労働経済白書 令和7年版 / 厚生労働白書 令和7年版)\n\n### Q7: リスキリング支援策にはどんなものがある?\n\n政府は「三位一体の労働市場改革」の一環として、教育訓練給付金の給付率上限引き上げ（2024年10月）、教育訓練を受けるための休暇取得を支援する「教育訓練休暇給付金」創設（2025年10月）を実施。あわせて、職務内容を明確にした「ジョブ型」人事制度導入を促進する「ジョブ型人事指針」（2024年8月）を取りまとめ、スキルの可視化と適切な評価、自律的キャリア形成を支援する環境整備が進む。これらは成長分野への円滑な労働移動と持続的賃上げの実現が目的。(出典: 労働経済白書 令和7年版)",
         "sources": [
@@ -187,7 +194,6 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       },
       "sourceName": "労働経済白書 (令和7年版) / 厚生労働白書 (令和7年版) / 三位一体の労働市場改革 (内閣官房)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -213,9 +219,11 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "employment-mobility-rate"
+      ],
       "sourceName": "総務省 社会・人口統計体系（労働）",
       "sourceLink": null,
-      "rankingLink": "/ranking/employment-mobility-rate",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

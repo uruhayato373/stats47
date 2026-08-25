@@ -1,15 +1,6 @@
-"use client";
-
 import type { ReactNode } from "react";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@stats47/components/atoms/ui/accordion";
-
-import { SurfaceCard } from "@/components/surface";
+import { ContentDisclosure } from "@/components/content";
 
 interface AiContentAccordionProps {
   title: string;
@@ -23,20 +14,9 @@ interface AiContentAccordionProps {
 
 /** AI 生成コンテンツの折りたたみセクション（汎用） */
 export function AiContentAccordion({ title, children, bordered = true }: AiContentAccordionProps) {
-  const accordion = (
-    <Accordion type="single" collapsible>
-      <AccordionItem value="content" className="border-none">
-        <AccordionTrigger className="px-6 py-4 hover:no-underline">
-          <h2 className="text-lg font-semibold">{title}</h2>
-        </AccordionTrigger>
-        <AccordionContent className="px-6 pb-6 pt-0">
-          {children}
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
+  return (
+    <ContentDisclosure title={title} bordered={bordered}>
+      {children}
+    </ContentDisclosure>
   );
-
-  if (!bordered) return accordion;
-
-  return <SurfaceCard className="p-0">{accordion}</SurfaceCard>;
 }

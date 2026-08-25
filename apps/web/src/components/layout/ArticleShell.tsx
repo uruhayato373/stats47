@@ -2,13 +2,13 @@ import { type ReactNode } from 'react';
 
 import { cn } from '@stats47/components';
 
-import { LEFT_RAIL_GRID_CLASS } from './PageShell';
+import { LeftRailLayout } from './LeftRailLayout';
 
 interface ArticleShellProps {
   /** 記事本文 (flex-1 で残り幅いっぱいに広がる) */
   children: ReactNode;
   /**
-   * lg+ で左に表示するページ内ナビ。調査ハブなど「読み進め方」を先に示す記事面向け。
+   * 992px+ で左に表示するページ内ナビ。調査ハブなど「読み進め方」を先に示す記事面向け。
    * 狭幅では描画しないため、必要な操作はページ側で本文上部に代替 UI を置く。
    */
   leftRail?: ReactNode;
@@ -55,14 +55,14 @@ export function ArticleShell({
   return (
     <div className={cn('reading-zone w-full bg-background', className)}>
       <div className="mx-auto w-full max-w-[1280px] px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
-        {breadcrumb}
         {showLeftRail ? (
-          <div className={LEFT_RAIL_GRID_CLASS}>
-            <aside className="sticky top-20 hidden lg:block">{leftRail}</aside>
-            <main className="min-w-0">{children}</main>
-          </div>
+          <LeftRailLayout leftRail={leftRail} mainAs="main">
+            {breadcrumb}
+            {children}
+          </LeftRailLayout>
         ) : hasRightRail ? (
           <>
+            {breadcrumb}
             <div className="lg:flex lg:items-start lg:gap-10">
               <main className="min-w-0 flex-1">{children}</main>
               <aside className="hidden w-[316px] shrink-0 lg:flex lg:self-stretch lg:flex-col lg:gap-3">
@@ -81,7 +81,10 @@ export function ArticleShell({
             </div>
           </>
         ) : (
-          <main className="min-w-0">{children}</main>
+          <>
+            {breadcrumb}
+            <main className="min-w-0">{children}</main>
+          </>
         )}
       </div>
     </div>

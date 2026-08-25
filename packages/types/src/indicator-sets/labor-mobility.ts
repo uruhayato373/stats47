@@ -49,6 +49,11 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
       "rankingKey": "monthly-average-actual-working-hours-male",
       "shortLabel": "月間労働時間(男)",
       "role": "context"
+    },
+    {
+      "rankingKey": "employment-mobility-rate",
+      "shortLabel": "就業異動率",
+      "role": "context"
     }
   ],
   "keywords": [

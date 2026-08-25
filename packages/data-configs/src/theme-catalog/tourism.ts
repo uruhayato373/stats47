@@ -56,7 +56,12 @@ export const TOURISM_CATALOG: ThemeCatalog = {
       "rankingKey": "number-of-simple-lodging-facilities",
       "shortLabel": "簡易宿所数",
       "role": "context"
-    }
+    },
+    {
+      "rankingKey": "number-of-hotel-facilities",
+      "shortLabel": "ホテル営業施設数",
+      "role": "context"
+    },
   ],
   "charts": [
     {
@@ -83,9 +88,12 @@ export const TOURISM_CATALOG: ThemeCatalog = {
           "count"
         ]
       },
+      "relatedRankingKeys": [
+        "total-overnight-guests",
+        "total-overnight-guests-foreign"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -111,9 +119,11 @@ export const TOURISM_CATALOG: ThemeCatalog = {
           "series-7"
         ]
       },
+      "relatedRankingKeys": [
+        "air-passenger-transport"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -145,9 +155,11 @@ export const TOURISM_CATALOG: ThemeCatalog = {
           "count"
         ]
       },
+      "relatedRankingKeys": [
+        "number-of-hotel-facilities"
+      ],
       "sourceName": "総務省 社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": "/ranking/number-of-hotel-facilities",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

@@ -3,14 +3,14 @@ import type { ThemeCatalog } from "./types";
 export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
   "key": "population-dynamics",
   "title": "人口動態",
-  "description": "都道府県別の出生率・死亡率・高齢化率・転入超過率をランキングとチャートで比較。人口ピラミッド・年齢構成・自然増減率など11指標の推移を47都道府県で確認できます。",
+  "description": "都道府県の人口増減を、増減率、出生・死亡、転入・転出、年齢構成の順に整理。結果と要因を分けて47都道府県で比較できます。",
   "category": "demographics",
   "usage": "theme",
   "metrics": [
     {
       "rankingKey": "total-population",
       "shortLabel": "総人口",
-      "role": "primary",
+      "role": "context",
       "selection": {
         "proposedBy": "総務省統計局「人口推計（2024年10月1日現在）」",
         "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
@@ -21,22 +21,22 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "total-fertility-rate",
       "shortLabel": "合計特殊出生率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "moving-in-excess-rate",
       "shortLabel": "転入超過率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "ratio-65-plus",
       "shortLabel": "高齢化率",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "population-growth-rate",
       "shortLabel": "人口増減率",
-      "role": "context",
+      "role": "primary",
       "selection": {
         "proposedBy": "総務省統計局「人口推計（2024年10月1日現在）」",
         "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
@@ -47,7 +47,7 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "natural-increase-rate",
       "shortLabel": "自然増減率",
-      "role": "context",
+      "role": "secondary",
       "selection": {
         "proposedBy": "総務省統計局「人口推計（2024年10月1日現在）」",
         "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
@@ -85,7 +85,7 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
         "proposedBy": "総務省統計局「人口推計（2024年10月1日現在）」",
         "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
         "surveyedAt": "2026-07-11",
-        "rationale": "転入・転出による要因分解の中心指標。ただし現行MetricConfigは2018-2019年までのため、primaryへの昇格はPR-2（鮮度解決）まで保留し secondary に留める"
+        "rationale": "転入・転出による要因分解の中心指標。ただし現行MetricConfigは2018-2019年までのため、主要カードへの採用は鮮度解決まで保留し context に留める"
       }
     },
     {
@@ -104,45 +104,25 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "role": "context"
     }
   ],
+  "metricGroups": [
+    {
+      "key": "population-change",
+      "title": "人口増減の結果と自然増減",
+      "rankingKeys": [
+        "population-growth-rate",
+        "natural-increase-rate"
+      ],
+      "defaultCheckedKeys": [
+        "population-growth-rate",
+        "natural-increase-rate"
+      ]
+    }
+  ],
   "charts": [
     {
-      "componentKey": "birth-death-rate-trend",
+      "componentKey": "birth-death-count-trend",
       "componentType": "line-chart",
-      "title": "出生率・死亡率の推移",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010101",
-            "cdCat01": "A4101"
-          },
-          {
-            "statsDataId": "0000010101",
-            "cdCat01": "A4201"
-          }
-        ],
-        "labels": [
-          "出生率",
-          "死亡率"
-        ],
-        "seriesColors": [
-          "population",
-          "danger"
-        ]
-      },
-      "sourceName": "人口動態統計",
-      "sourceLink": null,
-      "rankingLink": "/ranking/crude-birth-rate",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "出生・死亡",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "natural-social-increase-trend",
-      "componentType": "line-chart",
-      "title": "出生数・死亡数の推移（自然増減）",
+      "title": "自然増減：出生数と死亡数",
       "componentProps": {
         "estatParams": [
           {
@@ -163,20 +143,60 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
           "neutral"
         ]
       },
-      "sourceName": "人口統計",
-      "sourceLink": null,
-      "rankingLink": "/ranking/natural-increase-rate",
+      "relatedRankingKeys": [
+        "natural-increase-rate",
+        "crude-birth-rate",
+        "crude-death-rate"
+      ],
+      "sourceName": "総務省 社会・人口統計体系（人口動態統計）",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
-      "section": "移動",
-      "sortOrder": 0
+      "section": "人口の増減要因",
+      "sortOrder": 10
+    },
+    {
+      "componentKey": "theme-pop-migration-trend",
+      "componentType": "line-chart",
+      "title": "社会増減：転入者数と転出者数",
+      "componentProps": {
+        "estatParams": [
+          {
+            "statsDataId": "0000010101",
+            "cdCat01": "A5103"
+          },
+          {
+            "statsDataId": "0000010101",
+            "cdCat01": "A5104"
+          }
+        ],
+        "labels": [
+          "転入者数",
+          "転出者数"
+        ],
+        "seriesColors": [
+          "population",
+          "count"
+        ]
+      },
+      "relatedRankingKeys": [
+        "social-increase-rate"
+      ],
+      "sourceName": "総務省 社会・人口統計体系",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "人口の増減要因",
+      "sortOrder": 20
     },
     {
       "componentKey": "theme-age-composition",
       "componentType": "composition-chart",
-      "title": "年齢3区分人口構成の推移",
+      "title": "人口構造：年齢3区分の推移",
       "componentProps": {
         "statsDataId": "0000010101",
         "segments": [
@@ -198,64 +218,37 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
         ],
         "totalCode": "A1101"
       },
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "rankingLink": "/ranking/ratio-65-plus",
+      "relatedRankingKeys": [
+        "ratio-65-plus",
+        "young-population-ratio",
+        "total-population"
+      ],
+      "sourceName": "総務省 社会・人口統計体系",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
-      "section": "構造",
-      "sortOrder": 0
+      "section": "人口構造",
+      "sortOrder": 30
     },
     {
       "componentKey": "theme-population-pyramid",
       "componentType": "pyramid-chart",
-      "title": "人口ピラミッド",
+      "title": "人口構造：人口ピラミッド",
       "componentProps": {},
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "rankingLink": "/ranking/total-population",
+      "relatedRankingKeys": [
+        "total-population",
+        "ratio-65-plus"
+      ],
+      "sourceName": "総務省 社会・人口統計体系",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
-      "section": "出生・死亡",
-      "sortOrder": 10
-    },
-    {
-      "componentKey": "theme-pop-migration-trend",
-      "componentType": "line-chart",
-      "title": "転入者数・転出者数の推移（社会増減）",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010101",
-            "cdCat01": "A5103"
-          },
-          {
-            "statsDataId": "0000010101",
-            "cdCat01": "A5104"
-          }
-        ],
-        "labels": [
-          "転入者数",
-          "転出者数"
-        ],
-        "seriesColors": [
-          "population",
-          "count"
-        ]
-      },
-      "sourceName": "社会・人口統計体系（2019年時点までのデータ。natural-increase-rate等の2024年値と同一年ではない点に注意）",
-      "sourceLink": null,
-      "rankingLink": "/ranking/moving-in-excess-rate",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "移動",
-      "sortOrder": 10
+      "section": "人口構造",
+      "sortOrder": 40
     },
     {
       "componentKey": "md-population-dynamics-discussion",
@@ -289,13 +282,12 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       },
       "sourceName": "厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 国土交通白書 2025 / 少子化社会対策白書 (令和6年版) / 日本の将来推計人口 (令和5年推計) — 国立社会保障・人口問題研究所",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
-      "section": "考察",
-      "sortOrder": 10
+      "section": "読み解き",
+      "sortOrder": 100
     },
     {
       "componentKey": "md-population-dynamics-related-topics",
@@ -329,19 +321,19 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       },
       "sourceName": "厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 国土交通白書 2025 / 少子化社会対策白書 (令和6年版) / 地方財政計画 (令和8年度) — 総務省",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
-      "section": "考察",
-      "sortOrder": 20
+      "section": "読み解き",
+      "sortOrder": 110
     },
     {
       "componentKey": "md-population-dynamics-faq",
       "componentType": "markdown-section",
       "title": "よくある質問",
       "componentProps": {
+        "displayMode": "faq",
         "subtitle": "人口動態について読者が気になる 7 問",
         "markdown": "### Q1: 合計特殊出生率とは?\n\n合計特殊出生率とは、1人の女性が一生の間に生むこどもの数の平均を指す指標。2024年の数値は**1.15**（概数）で、過去最低を更新した。人口を維持するのに必要な水準（人口置換水準）は約2.07とされ、現在の水準は長期的な人口減少を意味する。(出典: 厚生労働白書 令和7年版)\n\n### Q2: 日本の人口は将来どこまで減る?\n\n2008年の1億2,808万人をピークに減少が始まり、2024年時点で1億2,380万人。**2056年に1億人を割り込み、2070年には約8,700万人**まで減少すると見込まれている。生産年齢人口（15〜64歳）は同期間に約7,509万人から約6,213万人へ縮小する見通し。(出典: 厚生労働白書 令和7年版 / 国土交通白書 2025)\n\n### Q3: 「東京圏一極集中」はいつから続いている?\n\n東京圏（1都3県）への転入超過は**1990年代後半から男女ともに継続**している。特に**女性の転入超過数が男性を上回るようになったのは2009（平成21）年以降**。直近2024年では、男女ともに人口が増加したのは東京都のみという極端な集中構造となっている。(出典: 男女共同参画白書 令和7年版)\n\n### Q4: 若い世代が地方を離れる最大の理由は?\n\nきっかけとして最も多いのは「自分の進学」と「自分の就職」。東京圏以外から東京圏へ転出した女性の42.1%が「希望する進学先が少なかった」を理由に挙げ、次いで「やりたい仕事や就職先の少なさ」が続く。大学進学率は東京都77.6% vs 宮崎県38.7% と2倍近い開きがあり、進学機会の偏在が流出を構造化している。(出典: 男女共同参画白書 令和7年版)\n\n### Q5: なぜ地方の人口流出は特に女性に偏る?\n\n地方には女性が働きたいと思える職種が限定的（医療・福祉に集中）であることに加え、**「家事・育児・介護は女性の仕事」という固定的な性別役割分担意識**が依然として根強いことが背景にある。東京圏へ転出した女性は、男性に比べて「地元から離れたかった」「親や周囲の干渉から逃れたかった」を理由に挙げる割合が高い。(出典: 男女共同参画白書 令和7年版)\n\n### Q6: 「自然増減」と「社会増減」の違いは?\n\n**自然増減**は出生数から死亡数を引いたもので、現在は**全47都道府県で自然減**（死亡 > 出生）の状態にある。**社会増減**は転入数から転出数を引いたもので、2024年は東京都など**7〜8都府県のみが社会増**、残り約40道府県が転出超過。同じ「人口減少県」でも、自然減主因と社会減主因では必要な対策が異なる。(出典: 男女共同参画白書 令和7年版)\n\n### Q7: 平均初婚年齢や第1子出産年齢はどのくらい?\n\n晩婚化・晩産化が進行している。2023年の**平均初婚年齢は男性31.1歳、女性29.7歳**。**第1子出産時の母親平均年齢は31.0歳**で、1990年の27.0歳と比較して4歳上昇している。晩産化は1人あたり出生数の減少にも直結する。(出典: 厚生労働白書 令和7年版)",
         "sources": [
@@ -365,89 +357,12 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       },
       "sourceName": "厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 国土交通白書 2025 / 少子化社会対策白書 (令和6年版)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
-      "section": "考察",
-      "sortOrder": 30
-    },
-    {
-      "componentKey": "theme-pd-aging-young-crossover",
-      "componentType": "line-chart",
-      "title": "高齢化率と年少人口割合の推移（クロスオーバー）",
-      "componentProps": {
-        "estatParams": [
-          {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A03503"
-          },
-          {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A03501"
-          }
-        ],
-        "labels": [
-          "高齢化率（65歳以上）",
-          "年少人口割合（15歳未満）"
-        ],
-        "seriesColors": [
-          "danger",
-          "population"
-        ]
-      },
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "rankingLink": "/ranking/ratio-65-plus",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 40
-    },
-    {
-      "componentKey": "theme-pd-totalpop-aging-mix",
-      "componentType": "mixed-chart",
-      "title": "総人口と高齢化率の推移",
-      "componentProps": {
-        "columnParams": [
-          {
-            "statsDataId": "0000010101",
-            "cdCat01": "A1101"
-          }
-        ],
-        "lineParams": [
-          {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A03503"
-          }
-        ],
-        "columnLabels": [
-          "総人口"
-        ],
-        "lineLabels": [
-          "高齢化率"
-        ],
-        "leftUnit": "人",
-        "rightUnit": "%",
-        "columnColors": [
-          "neutral"
-        ],
-        "lineColors": [
-          "danger"
-        ]
-      },
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "rankingLink": "/ranking/total-population",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": null,
-      "sortOrder": 50
+      "section": "読み解き",
+      "sortOrder": 120
     }
   ],
   "keywords": [

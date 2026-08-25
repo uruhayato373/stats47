@@ -2,6 +2,7 @@ import { BarChart3 } from "lucide-react";
 
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { DashboardComponentRenderer, loadPageComponents, type PageComponent } from "@/components/stat-charts/server";
+import { resolveChartSourceLinks } from "@/components/stat-charts/utils/resolveChartSourceLinks";
 
 interface Props {
   areaCode: string;
@@ -47,7 +48,13 @@ export async function AreaChartSection({ areaCode, areaName }: Props) {
                   component={{
                     id: chart.componentKey,
                     componentType: chart.componentType,
-                    componentProps: JSON.stringify(chart.componentProps),
+                    componentProps: JSON.stringify({
+                      ...chart.componentProps,
+                      sourceLinks: resolveChartSourceLinks({
+                        rankingLink: chart.rankingLink,
+                        rankingLinks: chart.componentProps.rankingLinks,
+                      }),
+                    }),
                     title: chart.title,
                     sortOrder: chart.sortOrder,
                     gridColumnSpan: chart.gridColumnSpan,
@@ -64,13 +71,7 @@ export async function AreaChartSection({ areaCode, areaName }: Props) {
                     areaName,
                     areaType: "prefecture",
                   }}
-                  hideSource
                 />
-                {chart.sourceName && (
-                  <p className="text-[10px] text-muted-foreground mt-1 text-right">
-                    出典: {chart.sourceName}
-                  </p>
-                )}
               </div>
             ))}
         </ChartPanel>

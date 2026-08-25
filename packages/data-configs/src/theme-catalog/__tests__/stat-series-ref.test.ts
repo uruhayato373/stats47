@@ -52,6 +52,8 @@ describe("② 必須フィールドを壊すと error (陰性対照)", () => {
     { name: "donut-chart: categories の color 欠落", type: "donut-chart", props: { statsDataId: "X", categories: [{ code: "A", label: "b" }] } },
     { name: "cpi-profile: statsDataId 欠落", type: "cpi-profile", props: { year: "2024" } },
     { name: "markdown-section: markdown 欠落", type: "markdown-section", props: { subtitle: "x" } },
+    { name: "markdown-section: FAQ 書式不正", type: "markdown-section", props: { displayMode: "faq", markdown: "本文だけ" } },
+    { name: "markdown-section: displayMode 不正", type: "markdown-section", props: { displayMode: "accordion", markdown: "本文" } },
   ];
   for (const c of cases) {
     it(`★${c.name}`, () => {
@@ -75,6 +77,7 @@ describe("② 正常系は error を出さない", () => {
     { type: "kpi-card", props: { estatParams: { statsDataId: "X", cdCat01: "D2101" } } },
     { type: "kpi-card", props: {} }, // ranking 駆動 kpi-card は estatParams なしでも可
     { type: "markdown-section", props: { markdown: "本文" } },
+    { type: "markdown-section", props: { displayMode: "faq", markdown: "### Q1: 質問\n\n回答" } },
     { type: "pyramid-chart", props: {} },
   ];
   for (const c of ok) {

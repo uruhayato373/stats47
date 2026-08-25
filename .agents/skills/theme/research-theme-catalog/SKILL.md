@@ -91,11 +91,19 @@ grep -iE "<theme 関連語>" .Codex/todo/backlog.md
 省庁等の公式 HTTPS URL を実際に開いて確認し、関連 ranking / theme / tag はコード上の実在 route だけを残す。
 NotebookLM の引用だけ、または内部導線が 0 件の候補は採用推奨にしない。
 
+各 chart 候補について、次も一次資料または metric config で確認する。
+
+- 指標定義、母集団、分母、統計主体、単位
+- 系列断絶、定義変更、比較不能条件、左右軸など具体的な誤読リスク
+- 実在 active metric の `relatedRankingKeys`。タイトル類似だけの推測 mapping は不採用
+- 誤読リスクが無い場合は `annotation` を作らない。汎用的な chart の読み方は出力しない
+
 ## Stage 3: 統合・提案
 
 `.Codex/todo/backlog.md` の7列候補表へ、実在確認に合格した候補だけを追加する。フォーマットは
 `.Codex/agents/theme-researcher.md` の「提案の出力先フォーマット」に従う。不採用・unknown・重複候補は追加しない。
 
+chart 候補は `Candidate | componentType | relatedRankingKeys | annotation candidate | Evidence | Verdict`、
 論点レンズ候補は `Lens | Question | Official source | Related routes | Verdict` の table-only で呼び出し元へ返す。
 候補のまま永続化せず、採択後に theme-designer が `EVIDENCE_SOURCE_CATALOG` と
 `ThemeCatalog.evidenceTopics` へ反映する。
@@ -130,16 +138,16 @@ theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一
 
 ## モデル役割分担 (トークン節約)
 
-| 役割 | モデル |
-|---|---|
-| Stage 1 収集 (NotebookLM/競合/GSC) | theme-researcher が tool を直接実行 |
-| Stage 2 実在検証 (estat-researcher) | sonnet (既存) |
-| 統合・提案文書化 (theme-researcher 本体) | sonnet |
-| 提案採否・カタログ設計 | メインセッション (上位モデル) |
+| 役割                                     | モデル                                 |
+| ---------------------------------------- | -------------------------------------- |
+| Stage 1 収集 (NotebookLM/競合/GSC)       | theme-researcher が tool を直接実行    |
+| Stage 2 実在検証                         | theme-researcher が inline tool で確認 |
+| 統合・提案文書化 (theme-researcher 本体) | sonnet                                 |
+| 提案採否・カタログ設計                   | メインセッション (上位モデル)          |
 
 ## 関連
 
-- 規約: `.Codex/rules/theme-catalog-standards.md`
-- agent: `.Codex/agents/theme-researcher.md`
+- 規約: `.claude/rules/theme-catalog-standards.md`
+- agent: `.claude/agents/theme-researcher.md`
 - 白書台帳: `reference/notebooks.md`
 - 後続スキル: `/design-theme-charts` (チャート設計) / `/insert-theme-components` (反映) / `/audit-theme-components` (監査)

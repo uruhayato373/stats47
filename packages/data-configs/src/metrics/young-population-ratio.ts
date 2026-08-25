@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const youngPopulationRatio: MetricConfig = {
   "key": "young-population-ratio",
   "title": "15歳未満人口割合",
+  "description": "総人口に占める15歳未満人口の割合です。地域の年少人口の厚みを示し、65歳以上人口割合や生産年齢人口割合と合わせて人口構造を読みます。",
   "unit": "％",
   "category": "population",
   "source": {

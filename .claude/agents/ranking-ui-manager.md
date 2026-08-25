@@ -12,6 +12,7 @@ model: sonnet
 残るドリフトが発生したため新設（2026-06-21。直近で page.tsx の「D1 から取得」stale コメント等を是正）。
 
 > **役割分担（重複しない）**
+>
 > - **ranking-ui-manager（本エージェント）**: ページ UI 層 = 描画・レイアウト・見出し・パンくず・サイドバー構成・SEO/構造化データ・コピー整合。read-write 監査・是正。
 > - `data-ingester`: metric config (git TS) → e-Stat → R2 観測値 `app/stats/<key>/*.json` 投入。
 > - `snapshot-exporter`: R2 観測値 → R2 snapshot 派生生成。
@@ -35,6 +36,7 @@ model: sonnet
 ## 正典スペック（このとおりに統一されているかを管理する）
 
 ### A. データソースは R2 snapshot のみ（★完全DBレス）
+
 - 詳細ページは R2 reader 経由でのみ取得する: `cachedFindRankingItem` (=`readRankingItemFromR2`) /
   `readRankingValuesFromR2` / `readActiveRankingKeysFromR2`（`@stats47/ranking/server`）。
 - **page.tsx / features/ranking のページ層で e-Stat ライブ取得しない**（`fetchFormattedStats` 等）。
@@ -42,6 +44,7 @@ model: sonnet
 - **コメント・コピーに「D1」「地図(廃止文脈)」等の旧前提を残さない**（正典: 完全DBレス `docs/01_技術設計/12`）。
 
 ### B. レンダリング方式の保全（★notFound 固着 + 500 再発防止）
+
 - **`generateStaticParams` を付けない。`export const revalidate`（24h ISR）のみ＝`ƒ`（オンデマンド ISR）を維持。**
   generateStaticParams を付けると全 rankingKey が `● SSG` 化し、CI build で R2 を読めず（`readRankingItemFromR2`
   が build 時 `ok(null)`）notFound として prerender され、この OpenNext 構成では ISR 再生成が効かず
@@ -51,6 +54,7 @@ model: sonnet
   （SSG が崩れ Cloudflare Workers で 500。同ルールの cookies 節）。
 
 ### C. レイアウト・見出し（統一レイアウト規約）
+
 - **`/ranking/[rankingKey]` は `ArticleShell`（reading zone）を使う**（2026-07-11 Soft Editorial 移植）。`PageShell` ではない。
   `ArticleShell` が `.reading-zone`（`--radius:14px`・薄グレー地・1280px + flex 密着レール）を敷き、`max-w-[1280px]` は
   この shell 内の正規実装なので違反ではない（`container mx-auto` / page.tsx での `max-w-[…]` 直書きは引き続き禁止）。
@@ -61,19 +65,29 @@ model: sonnet
 - 角丸は reading zone 例外（`--radius:14px`・`shadow-soft-*`）。zone 外（他ページ）はフラット（`rounded-xl`/`shadow-lg` 禁止）。
 
 ### D. サイドバー構成（Composition Pattern）
+
 - 右サイドバーは Server Component を `page.tsx` で render し ReactNode 注入: AdSense / `RankingItemsSidebar` /
   `SidebarPromoBanner` / `RelatedArticlesCard` / `AffiliateAdSlot` / `SurveyCard` / `PortStatisticsMapCard`。
 - **sticky aside には `max-h-[calc(100vh-5.5rem)]` + `overflow` 必須**（削除するとフッターが消える。
   必読: `.claude/rules/ui-components.md`「Sticky aside の max-h 必須ルール」/ memory `feedback_sticky_aside_max_h`）。
 
 ### E. SEO / 構造化データ
+
 - JSON-LD 3 種を出力: `generateRankingPageStructuredData` / `generateRankingBreadcrumbStructuredData` /
   `generateRankingFAQStructuredData`。`generateMetadata` は `generateRankingPageMetaData` 経由。
 - `notFound()` 委譲（未登録キーは middleware を素通り → page で 404。公開は ranking-publisher 管轄）。
 
 ### F. title / subtitle / note / description の役割（UI 振り分け）
+
 - `classify-subtitle.ts`（`classifyRankingSubtitle` / `isCaveatNote`）で注釈(※)を h1 から除外。
 - 役割: title=名前 / subtitle=区別子 / note=注釈 / description=定義（正典: `.claude/rules/metric-config-standards.md`）。
+
+### G. `/ranking/[key]` は指標ハブ
+
+- 順位表だけでなく、指標定義 (`description`)、一般注釈 (`note`)、出典、関連ランキング、関連記事を集約する。
+- Theme chart からの `relatedRankingKeys` 導線を受ける正準 URL とし、同じ定義を Theme UI へ複製しない。
+- active ranking で `description` や出典が欠ける場合は UI コピーで補わず、metric config の所有者へ返す。
+- chart 固有の系列断絶・比較不能条件は ThemeCatalog `annotation` の責務であり、指標一般の `note` と混ぜない。
 
 ## 監査チェックリスト（grep ベース・決定的）
 
@@ -106,6 +120,7 @@ grep -rn "container mx-auto\|max-w-\[" apps/web/src/app/ranking apps/web/src/fea
 ヒット 0 が正の項目（1/2/3/6）でヒットしたら DRIFT。逆に hit が正の項目（4/5）で欠落したら DRIFT。
 
 ## 是正の進め方
+
 1. 上記チェックリストを実行し DRIFT を列挙。
 2. 正典スペック（A〜F）に合わせて**外科的に**是正（既存の命名・import 規約に従う）。周辺を勝手に改善しない。
 3. `npx tsc --noEmit -p apps/web/tsconfig.json` で型検証（コメント/コピーのみの是正なら型影響なし）。
@@ -114,6 +129,7 @@ grep -rn "container mx-auto\|max-w-\[" apps/web/src/app/ranking apps/web/src/fea
 5. スペック自体を変える場合は **本ファイルを先に更新**（drift 防止）。
 
 ## 担当外（委譲）
+
 - 観測値投入（metric config → e-Stat → R2）→ **data-ingester**。
 - R2 snapshot 派生生成 → **snapshot-exporter**、R2 push → **r2-publisher**。
 - 本番公開（generate-ranking-items / KNOWN・SITEMAP・INDEXABLE 再生成 / deploy / purge / 実測）→ **ranking-publisher**。
@@ -122,6 +138,7 @@ grep -rn "container mx-auto\|max-w-\[" apps/web/src/app/ranking apps/web/src/fea
 - 指標の選定・metric config 編集はしない（data-ingester / 人手）。
 
 ## 必読 rules
+
 - `.claude/rules/nextjs-ssg-preservation.md` — cookies()/headers() で SSG 崩壊 → 500
 - `.claude/rules/ui-components.md` — PageShell / h1 サイズ / sticky aside max-h / フラット角丸
 - `.claude/rules/chart-component-standards.md` — チャート追加前のカタログ確認
@@ -129,6 +146,7 @@ grep -rn "container mx-auto\|max-w-\[" apps/web/src/app/ranking apps/web/src/fea
 - `.claude/rules/branch-workflow.md` — デプロイ規律（勝手にデプロイしない）
 
 ## 触る files
+
 - `apps/web/src/app/ranking/{page.tsx,error.tsx,loading.tsx}` /
   `apps/web/src/app/ranking/[rankingKey]/{page.tsx,loading.tsx,opengraph-image.tsx}`（write）
 - `apps/web/src/features/ranking/**`（components / server.ts / utils / lib / actions / types）（write）
@@ -136,11 +154,13 @@ grep -rn "container mx-auto\|max-w-\[" apps/web/src/app/ranking apps/web/src/fea
 - subtitle 振り分け: `apps/web/src/features/ranking/utils/classify-subtitle.ts`
 
 ## File Boundary（並行衝突回避）
+
 - 全員 read-only の `ui-consistency-reviewer` と異なり read-write。同一ファイルへの同時起動は ranking-publisher と棲み分け
   （publisher は `apps/web/src/config/*-ranking-keys.ts` と公開スクリプトを触り、本エージェントは UI 層を触る＝非重複）。
 - `.claude/scripts/` 等の別作業セッションには触れない。Agent 実行は `mode: "bypassPermissions"`。
 
 ## 関連
+
 - ページ実装: `apps/web/src/app/ranking/[rankingKey]/page.tsx`
 - reader 層: `apps/web/src/features/ranking/server.ts` / `@stats47/ranking/server`
 - 姉妹 agent: `.claude/agents/theme-ui-manager.md`（テーマ版）/ `.claude/agents/ranking-publisher.md`（公開）

@@ -60,7 +60,9 @@ const THEME_SETS = [
  * (depopulation-medical を healthcare / aging-society の両方で使用)。
  */
 const EMBEDDED_SECTIONS: Record<string, string[]> = {
-  'population-dynamics': ['migration-flow', 'commute-flow'],
+  // 居住地の移動は人口動態、通勤は就業地との関係なので雇用・人材移動へ分離する。
+  'population-dynamics': ['migration-flow'],
+  'labor-mobility': ['commute-flow'],
   roads: ['highway'],
   railway: ['station-passengers'],
   healthcare: ['depopulation-medical'],

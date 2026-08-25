@@ -59,6 +59,66 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
       "rankingKey": "household-ratio-with-65plus",
       "shortLabel": "65歳以上世帯割合",
       "role": "context"
+    },
+    {
+      "rankingKey": "marriages-per-total-population",
+      "shortLabel": "婚姻率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "divorces-per-total-population",
+      "shortLabel": "離婚率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "births",
+      "shortLabel": "出生数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "death-count",
+      "shortLabel": "死亡数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "late-elderly-medical-expense-per-insured",
+      "shortLabel": "後期高齢者医療費",
+      "role": "context"
+    },
+    {
+      "rankingKey": "total-population",
+      "shortLabel": "総人口",
+      "role": "context"
+    },
+    {
+      "rankingKey": "single-person-household-old-population-ratio",
+      "shortLabel": "65歳以上世帯員の単独世帯の割合",
+      "role": "context"
+    },
+    {
+      "rankingKey": "elderly-couple-only-household-ratio",
+      "shortLabel": "高齢夫婦のみの世帯の割合",
+      "role": "context"
+    },
+    {
+      "rankingKey": "pension-benefit-total",
+      "shortLabel": "厚生年金受給権者年金総額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "volunteer-activity-annual-participation-rate-15plus",
+      "shortLabel": "ボランティア活動の年間行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "young-population-index",
+      "shortLabel": "年少人口指数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "old-population-index",
+      "shortLabel": "老年人口指数",
+      "role": "context"
     }
   ],
   "keywords": [

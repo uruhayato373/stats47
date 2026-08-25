@@ -64,6 +64,7 @@ export const SunburstDashboardChart = async ({
         <ChartFooter
           source={sourceName ?? undefined}
           sourceLink={sourceLink}
+          sourceLinks={common.sourceLinks}
           sourceDetail={statsDataId}
           rankingLink={rankingLink}
         />

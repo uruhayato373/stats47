@@ -2,9 +2,8 @@
  * ThemeCatalog レジストリ — カタログ駆動テーマの単一入口。
  *
  * ⚠️ ここに登録されたテーマだけが generator/validator の対象になる。
- * 未登録テーマ (legacy) は従来どおり手編集の IndicatorSet TS + page-components JSON を SSOT とする。
- *
- * 横展開: テーマ 1 件ずつ catalog TS を追加 → ここに登録 → golden diff → commit。
+ * 登録テーマの IndicatorSet TS + page-components JSON は生成物であり手編集しない。
+ * 新規登録: catalog TS を追加 → ここに登録 → golden diff → commit。
  */
 import type { ThemeCatalog } from "./types";
 import { AGING_SOCIETY_CATALOG } from "./aging-society";
@@ -34,6 +33,7 @@ export * from "./population-pyramid-deps";
 export * from "./chart-color-role";
 export * from "./stat-series-ref";
 export * from "./chart-dependencies";
+export * from "./faq-markdown";
 
 /** カタログ駆動テーマの登録簿 (key → catalog)。 */
 export const THEME_CATALOGS: Record<string, ThemeCatalog> = {

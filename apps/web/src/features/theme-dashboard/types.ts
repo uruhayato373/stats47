@@ -62,14 +62,28 @@ export interface MarkdownSectionSource {
  * page_components.componentProps に保存される構造。
  * componentType="markdown-section" の場合に利用。
  */
-export interface MarkdownSectionComponentProps {
-  /** 本文（Markdown 文字列） */
-  markdown: string;
+interface MarkdownSectionBaseProps {
   /** サブタイトル（タイトル下の小さな説明文） */
   subtitle?: string;
   /** 出典リスト（末尾に「出典」見出し付きで表示） */
   sources?: MarkdownSectionSource[];
 }
+
+/** 通常の長文セクション、または生成時に構造化済みの FAQ。 */
+export type MarkdownSectionComponentProps = MarkdownSectionBaseProps &
+  (
+    | {
+        displayMode?: "prose";
+        /** 本文（Markdown 文字列） */
+        markdown: string;
+        items?: never;
+      }
+    | {
+        displayMode: "faq";
+        items: Array<{ question: string; answer: string }>;
+        markdown?: never;
+      }
+  );
 
 /** テーマ設定 */
 export interface ThemeConfig {
@@ -138,6 +152,8 @@ export interface ThemeDashboardClientProps {
   topology: TopoJSONTopology | null;
   /** DB 管理チャート（page_components + page_component_assignments） */
   pageCharts?: import("@/components/stat-charts/services/load-page-components").PageComponent[];
+  /** componentKey ごとに survey taxonomy から解決した出典調査ハブ。 */
+  chartSourceLinks?: Record<string, Array<{ label: string; url: string }>>;
   /** KPI カードの全都道府県データ（chartKey → areaCode → KpiCardClientProps） */
   kpiDataByArea?: Record<string, Record<string, import("@/components/stat-charts/components/cards/KpiCard/KpiCardClient").KpiCardClientProps>>;
   /** ハイライト対象の都道府県コード（5桁、/areas/[code]/[themeSlug] 経由時に設定） */

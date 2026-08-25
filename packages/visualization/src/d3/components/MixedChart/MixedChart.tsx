@@ -35,6 +35,7 @@ export function MixedChart({
   colors = schemeTableau10,
   isLoading = false,
   className,
+  title,
 }: MixedChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const { showTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
@@ -67,6 +68,30 @@ export function MixedChart({
       marker: "line" as const,
     })),
   ];
+  const categoryLabels = data
+    .map((row) => String(row.label ?? row[categoryKey] ?? ""))
+    .filter(Boolean);
+  const firstCategory = categoryLabels[0];
+  const lastCategory = categoryLabels[categoryLabels.length - 1];
+  const categoryRange = firstCategory
+    ? firstCategory === lastCategory
+      ? firstCategory
+      : `${firstCategory}から${lastCategory}`
+    : undefined;
+  const accessibleLabel = [
+    title ? `棒・折れ線複合グラフ「${title}」` : "棒・折れ線複合グラフ",
+    columns.length > 0
+      ? `棒系列: ${columns.map((item) => item.name).join("、")}`
+      : undefined,
+    lines.length > 0
+      ? `折れ線系列: ${lines.map((item) => item.name).join("、")}`
+      : undefined,
+    categoryRange ? `期間: ${categoryRange}` : undefined,
+    leftUnit || unit ? `左軸単位: ${leftUnit || unit}` : undefined,
+    rightUnit || unit ? `右軸単位: ${rightUnit || unit}` : undefined,
+  ]
+    .filter(Boolean)
+    .join("。");
 
   useEffect(() => {
     if (!svgRef.current || !data.length) return;
@@ -244,6 +269,8 @@ export function MixedChart({
           ref={svgRef}
           viewBox={`0 0 ${width} ${height}`}
           className="h-auto w-full"
+          role="img"
+          aria-label={accessibleLabel}
         />
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-background/50">

@@ -153,9 +153,12 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
           "series-6"
         ]
       },
+      "relatedRankingKeys": [
+        "fish-catch",
+        "marine-fishery-catch"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -195,9 +198,12 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
           "improve"
         ]
       },
+      "relatedRankingKeys": [
+        "marine-aquaculture-harvest",
+        "inland-aquaculture-harvest"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -229,9 +235,12 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
           "neutral"
         ]
       },
+      "relatedRankingKeys": [
+        "marine-fishery-aquaculture-output-value",
+        "marine-fishery-output-value"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -263,9 +272,12 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
           "special"
         ]
       },
+      "relatedRankingKeys": [
+        "fish-catch",
+        "fishery-workers"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -343,9 +355,22 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
           }
         ]
       },
+      "relatedRankingKeys": [
+        "fishery-species-catch-scallop",
+        "fishery-species-catch-japanese-squid",
+        "fishery-species-catch-tuna",
+        "fishery-species-catch-bonito",
+        "fishery-species-catch-mackerel",
+        "fishery-species-catch-pacific-saury",
+        "fishery-species-catch-yellowtail",
+        "fishery-species-catch-sardine",
+        "fishery-species-catch-pollock",
+        "fishery-species-catch-kelp",
+        "fishery-species-catch-snow-crab",
+        "fishery-species-catch-sea-bream"
+      ],
       "sourceName": "海面漁業生産統計調査",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 6,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -389,9 +414,14 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
           "series-6"
         ]
       },
+      "relatedRankingKeys": [
+        "fishery-species-catch-sardine",
+        "fishery-species-catch-pacific-saury",
+        "fishery-species-catch-scallop",
+        "fishery-species-catch-japanese-squid"
+      ],
       "sourceName": "海面漁業生産統計調査",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 6,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

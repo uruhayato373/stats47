@@ -11,8 +11,10 @@ import {
 } from "@stats47/components/atoms/ui/select";
 
 import { ChartCard } from "@/components/charts/ChartCard";
+import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartLegend } from "@/components/charts/ChartLegend";
 import { FINANCE_CHART_COLORS, getChartColors } from "@/components/charts/ChartPalette";
+import { ChartPanel } from "@/components/charts/ChartPanel";
 import { HubSankey } from "@/components/charts/HubSankey";
 import { KeyMetricsTableCard } from "@/components/charts/KeyMetricsTableCard";
 import {
@@ -24,7 +26,10 @@ import {
 } from "@/components/charts/MiniCharts";
 import { SankeyFallback } from "@/components/charts/SankeyFallback";
 
-import { FinanceSankey } from "@/features/finance-flow/components/FinanceSankey";
+import {
+  FinanceSankey,
+  LOCAL_FINANCE_SOURCE_LINKS,
+} from "@/features/finance-flow/components/FinanceSankey";
 import type { FinanceFlowData } from "@/features/finance-flow/lib/types";
 import { PREFECTURES } from "@/features/migration-flow/lib/prefectures";
 
@@ -146,9 +151,11 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
             地方財政｜財政状況
             <span className="ml-2 text-base font-normal text-muted-foreground">{latestYear}年度</span>
           </h1>
-          <p className="mt-1 text-xs text-muted-foreground">
-            出典: 総務省「地方財政状況調査（決算カード）」2020〜{latestYear}年度
-          </p>
+          <ChartFooter
+            source="地方財政状況調査（決算カード）"
+            sourceLinks={LOCAL_FINANCE_SOURCE_LINKS}
+            sourceDetail={`2020〜${latestYear}年度`}
+          />
         </div>
         <div className="flex items-center gap-2">
           <Select value={prefCode} onValueChange={handlePrefChange}>
@@ -244,20 +251,32 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
         </p>
         {isCity ? (
           cityFlow ? (
-            <HubSankey
+            <ChartPanel
               title={`${cityName} 財政フロー（${latestYear}年度）`}
-              subtitle="左: 歳入の財源 → 中央: 一般会計 → 右: 目的別歳出（幅=金額）"
-              centerLabel="一般会計"
-              centerSub={`歳入 ${oku(cityFlow.totals.revenue)} / 歳出 ${oku(cityFlow.totals.expenditure)}`}
-              centerSubColor={FINANCE_CHART_COLORS.subtext}
-              leftNodes={cityFlow.revenue}
-              rightNodes={cityFlow.expenditure}
-              leftColor={FINANCE_CHART_COLORS.revenue}
-              rightColor={FINANCE_CHART_COLORS.expenditure}
-              formatValue={oku}
-              footer={`出典: 地方財政状況調査 決算カード（${latestYear}年度）`}
-              labelGutter={182}
-            />
+              description="左: 歳入の財源 → 中央: 一般会計 → 右: 目的別歳出（幅=金額）"
+              footer={
+                <ChartFooter
+                  source="地方財政状況調査 決算カード"
+                  sourceLinks={LOCAL_FINANCE_SOURCE_LINKS}
+                  sourceDetail={`${latestYear}年度`}
+                />
+              }
+            >
+              <HubSankey
+                title={`${cityName} 財政フロー（${latestYear}年度）`}
+                subtitle="左: 歳入の財源 → 中央: 一般会計 → 右: 目的別歳出（幅=金額）"
+                centerLabel="一般会計"
+                centerSub={`歳入 ${oku(cityFlow.totals.revenue)} / 歳出 ${oku(cityFlow.totals.expenditure)}`}
+                centerSubColor={FINANCE_CHART_COLORS.subtext}
+                leftNodes={cityFlow.revenue}
+                rightNodes={cityFlow.expenditure}
+                leftColor={FINANCE_CHART_COLORS.revenue}
+                rightColor={FINANCE_CHART_COLORS.expenditure}
+                formatValue={oku}
+                labelGutter={182}
+                chrome="bare"
+              />
+            </ChartPanel>
           ) : (
             <SankeyFallback message="この団体のフローデータがありません。" />
           )

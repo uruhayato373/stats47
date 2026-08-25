@@ -6,8 +6,8 @@ import { join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { renderBlogImageBundle } from '../blog-image-render';
 import { createBlogImagePlan } from '../blog-image-generation';
+import { renderBlogImageBundle } from '../blog-image-render';
 import {
   buildBlogOgpElement,
   buildBlogThumbnailElement,
@@ -17,15 +17,28 @@ import {
 
 const temporaryDirectories: string[] = [];
 
+// Windows では libvips のキャッシュが生成物を保持し、後片付けを妨げることがある。
+sharp.cache(false);
+
 function makeTemporaryDirectory(): string {
   const directory = mkdtempSync(join(tmpdir(), 'stats47-blog-images-'));
   temporaryDirectories.push(directory);
   return directory;
 }
 
+async function readImageMetadata(path: string) {
+  const image = sharp(path);
+  try {
+    return await image.metadata();
+  } finally {
+    image.destroy();
+  }
+}
+
 afterEach(() => {
   for (const directory of temporaryDirectories.splice(0)) {
-    rmSync(directory, { recursive: true, force: true });
+    // sharp/libvips が Windows で出力ハンドルを数十ms保持する場合がある。
+    rmSync(directory, { recursive: true, force: true, maxRetries: 30, retryDelay: 100 });
   }
 });
 
@@ -121,22 +134,22 @@ describe('blog image variants', () => {
       },
     });
 
-    await expect(sharp(light).metadata()).resolves.toMatchObject({
+    await expect(readImageMetadata(light)).resolves.toMatchObject({
       format: 'webp',
       width: 640,
       height: 336,
     });
-    await expect(sharp(dark).metadata()).resolves.toMatchObject({
+    await expect(readImageMetadata(dark)).resolves.toMatchObject({
       format: 'webp',
       width: 640,
       height: 336,
     });
-    await expect(sharp(ogp).metadata()).resolves.toMatchObject({
+    await expect(readImageMetadata(ogp)).resolves.toMatchObject({
       format: 'png',
       width: 1200,
       height: 630,
     });
-    await expect(sharp(backgroundPath).metadata()).resolves.toMatchObject({
+    await expect(readImageMetadata(backgroundPath)).resolves.toMatchObject({
       format: 'jpeg',
       width: 1200,
       height: 630,

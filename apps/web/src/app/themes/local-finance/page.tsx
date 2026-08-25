@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { PAGE_SHELL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
+import { LEFT_RAIL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
 
 import { InContentAdSlot } from '@/features/ads';
@@ -77,12 +77,9 @@ export default async function LocalFinanceThemePage() {
           992px+ は左レールが担う。本ページは ThemePrefectureProvider を持たないので
           左レールの都道府県選択だけを出さない (showRegion=false)。比較単位は表示する。
           ★境界は PageShell の共有クラスと必ず一致させること。 */}
-      <div className={PAGE_SHELL_NARROW_ONLY_CLASS}>
+      <div className={LEFT_RAIL_NARROW_ONLY_CLASS}>
         <ThemeSwitcher currentThemeKey="local-finance" />
-        <nav
-          aria-label="テーマ・調査の一覧"
-          className="flex flex-wrap gap-x-5"
-        >
+        <nav aria-label="テーマ・調査の一覧" className="flex flex-wrap gap-x-5">
           <Link
             href="/themes"
             className="inline-flex min-h-10 items-center text-sm font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"

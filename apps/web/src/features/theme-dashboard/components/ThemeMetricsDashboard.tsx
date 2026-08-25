@@ -33,8 +33,10 @@ interface Props {
   metricGroups?: CatalogMetricGroup[];
   /** 全指標のプリロード済みデータ（rankingKey → data） */
   indicatorDataMap: Record<string, ThemeIndicatorData>;
-  /** DB 管理チャート（page_components） */
+  /** ThemeCatalog から生成し R2 配信するチャート（page_components） */
   pageCharts?: PageComponent[];
+  /** componentKey ごとに survey taxonomy から解決した出典調査ハブ。 */
+  chartSourceLinks?: Record<string, Array<{ label: string; url: string }>>;
   /** 選択中の都道府県コード（null = 47都道府県・未選択。e-Stat の "00000" ではない） */
   selectedPrefectureCode: string | null;
   /**
@@ -46,9 +48,31 @@ interface Props {
 
 /** KPI 計算に十分な観測数（47 都道府県の大半が揃っている指標のみ採用） */
 const MIN_VALUES_FOR_KPI = 10;
-
 /** ThemeDbChartRenderer が描画できないコンポーネントタイプは除外 */
 const NON_CHART_TYPES = new Set(['kpi-card', 'markdown-section']);
+
+function resolveChartAnnotation(chart: PageComponent): string | undefined {
+  const value = chart.componentProps.annotation;
+  return typeof value === 'string' && value.trim() ? value.trim() : undefined;
+}
+
+function resolveChartRankingLinks(
+  chart: PageComponent
+): Array<{ label: string; url: string }> | undefined {
+  const value = chart.componentProps.rankingLinks;
+  if (!Array.isArray(value)) return undefined;
+
+  const links = value.flatMap((item) => {
+    if (typeof item !== 'object' || item === null || Array.isArray(item)) {
+      return [];
+    }
+    const record = item as Record<string, unknown>;
+    const label = typeof record.label === 'string' ? record.label.trim() : '';
+    const url = typeof record.url === 'string' ? record.url.trim() : '';
+    return label && url ? [{ label, url }] : [];
+  });
+  return links.length > 0 ? links : undefined;
+}
 
 /**
  * テーマページのフル幅ダッシュボード
@@ -75,6 +99,7 @@ export function ThemeMetricsDashboard({
   metricGroups,
   indicatorDataMap,
   pageCharts,
+  chartSourceLinks,
   selectedPrefectureCode,
   cardsOnly,
 }: Props) {
@@ -100,6 +125,18 @@ export function ThemeMetricsDashboard({
     return keys.map((key) => {
       const d = indicatorDataMap[key];
       const total = d.rankingValues.length;
+      const source = {
+        sourceName:
+          d.rankingItem.attribution?.compilation?.name ??
+          d.rankingItem.source?.name,
+        sourceLink:
+          d.rankingItem.attribution?.compilation?.url ??
+          d.rankingItem.source?.url,
+        sourceLinks: (d.rankingItem.originalSurveys ?? []).map((survey) => ({
+          label: survey.name,
+          url: `/survey/${survey.id}`,
+        })),
+      };
 
       const target = selectedPrefectureCode
         ? d.rankingValues.find((v) => v.areaCode === selectedPrefectureCode)
@@ -113,6 +150,7 @@ export function ThemeMetricsDashboard({
           value: typeof target?.value === 'number' ? target.value : null,
           rank: target?.rank ?? null,
           total,
+          ...source,
           series: d.nationalSeries ?? [],
           topRanked: null,
           isLoading: false,
@@ -140,6 +178,7 @@ export function ThemeMetricsDashboard({
         value: null,
         rank: null,
         total,
+        ...source,
         series: d.nationalSeries ?? [],
         topRanked,
         isLoading: false,
@@ -269,13 +308,15 @@ export function ThemeMetricsDashboard({
             <ChartPanel
               key={chart.componentKey}
               title={chart.title}
-              description={chart.description}
               footer={
                 <ChartFooter
                   source={chart.sourceName ?? undefined}
                   sourceLink={chart.sourceLink}
+                  sourceLinks={chartSourceLinks?.[chart.componentKey]}
+                  annotation={resolveChartAnnotation(chart)}
                   rankingLink={chart.rankingLink}
-                  rankingLabel="ランキングを見る"
+                  rankingLabel="指標の定義・ランキング"
+                  rankingLinks={resolveChartRankingLinks(chart)}
                 />
               }
             >

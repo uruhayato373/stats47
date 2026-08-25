@@ -234,9 +234,13 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
           "count"
         ]
       },
+      "relatedRankingKeys": [
+        "doctor-annual-income",
+        "nurse-annual-income",
+        "care-worker-annual-income"
+      ],
       "sourceName": "厚生労働省「賃金構造基本統計調査」",
       "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -268,9 +272,12 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
           "special"
         ]
       },
+      "relatedRankingKeys": [
+        "system-consultant-annual-income",
+        "software-engineer-annual-income"
+      ],
       "sourceName": "厚生労働省「賃金構造基本統計調査」",
       "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -302,9 +309,12 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "school-teacher-annual-income",
+        "university-professor-annual-income"
+      ],
       "sourceName": "厚生労働省「賃金構造基本統計調査」",
       "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -342,9 +352,13 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
           "neutral"
         ]
       },
+      "relatedRankingKeys": [
+        "truck-driver-annual-income",
+        "taxi-driver-annual-income",
+        "carpenter-annual-income"
+      ],
       "sourceName": "厚生労働省「賃金構造基本統計調査」",
       "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -382,9 +396,13 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
           "neutral"
         ]
       },
+      "relatedRankingKeys": [
+        "cook-annual-income",
+        "barber-beautician-annual-income",
+        "security-guard-annual-income"
+      ],
       "sourceName": "厚生労働省「賃金構造基本統計調査」",
       "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

@@ -68,6 +68,7 @@ export const TreemapDashboardChart = async ({
         <ChartFooter
           source={sourceName ?? undefined}
           sourceLink={sourceLink}
+          sourceLinks={common.sourceLinks}
           sourceDetail={statsDataId}
           rankingLink={rankingLink}
         />

@@ -81,6 +81,7 @@ export function ThemeDashboardTabbed({
   indicatorDataMap,
   topology,
   pageCharts,
+  chartSourceLinks,
   highlightAreaCode,
 }: ThemeDashboardClientProps) {
   const tabIndicators = themeConfig.tabIndicators;
@@ -249,6 +250,7 @@ export function ThemeDashboardTabbed({
       metricGroups={metricGroups}
       indicatorDataMap={indicatorDataMap}
       pageCharts={pageCharts}
+      chartSourceLinks={chartSourceLinks}
       selectedPrefectureCode={selectedPrefectureCode}
     />
   );

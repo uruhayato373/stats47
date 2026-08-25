@@ -138,6 +138,7 @@ export const CompositionChartDashboard = async ({
             <ChartFooter
               source={sourceName ?? undefined}
               sourceLink={sourceLink}
+              sourceLinks={common.sourceLinks}
               attribution={cardAttribution}
               annotation={annotation}
               rankingLink={rankingLink}
@@ -158,6 +159,7 @@ export const CompositionChartDashboard = async ({
           <ChartFooter
             source={sourceName ?? undefined}
             sourceLink={sourceLink}
+            sourceLinks={common.sourceLinks}
             attribution={cardAttribution}
             annotation={annotation}
             rankingLink={rankingLink}

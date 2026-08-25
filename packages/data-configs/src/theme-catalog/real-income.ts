@@ -61,7 +61,12 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
       "rankingKey": "private-rent-consumption-expenditure",
       "shortLabel": "家賃支出",
       "role": "context"
-    }
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-food",
+      "shortLabel": "消費者物価地域差指数",
+      "role": "context"
+    },
   ],
   "charts": [
 {
@@ -94,9 +99,13 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
           "count"
         ]
       },
+      "relatedRankingKeys": [
+        "consumer-price-difference-index-overall",
+        "consumer-price-difference-index-housing",
+        "consumer-price-difference-index-food"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -122,9 +131,11 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
           "population"
         ]
       },
+      "relatedRankingKeys": [
+        "actual-income-worker-households-per-month"
+      ],
       "sourceName": "総務省 家計調査",
       "sourceLink": null,
-      "rankingLink": "/ranking/actual-income-worker-households-per-month",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

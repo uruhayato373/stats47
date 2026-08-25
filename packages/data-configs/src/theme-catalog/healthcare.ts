@@ -98,9 +98,12 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
           "improve"
         ]
       },
+      "relatedRankingKeys": [
+        "physicians-in-medical-facilities-per-100k",
+        "general-hospital-count-per-100k"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -126,9 +129,11 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "national-medical-expense-per-person"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -160,9 +165,12 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
           "improve"
         ]
       },
+      "relatedRankingKeys": [
+        "deaths-lifestyle-diseases-per-100k",
+        "health-checkup-rate-lifestyle-diseases"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -202,7 +210,6 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       },
       "sourceName": "厚生労働白書 (令和7年版) / 地方財政白書 (令和8年版) / 経済財政白書 (令和7年版) / 地域医療構想・病床機能報告 (厚生労働省) / 医師の働き方改革 (厚生労働省)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -242,7 +249,6 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       },
       "sourceName": "厚生労働白書 (令和7年版) / 医療DXの推進に関する工程表 (内閣官房) / 新たな地域医療構想等に関する検討会 (厚生労働省) / 国立健康危機管理研究機構 (JIHS) / 健康日本21(第三次) (厚生労働省)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -255,6 +261,7 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "componentType": "markdown-section",
       "title": "よくある質問",
       "componentProps": {
+        "displayMode": "faq",
         "subtitle": "医療・健康について読者が気になる 7 問",
         "markdown": "### Q1: 医師の数に地域差があるのはなぜ?\n\n全国的に医師数は増加しているが、「西高東低」と呼ばれる地域偏在が続いている。これは歴史的に西日本の医学部設置数が多く、養成・供給能力が高い状態が維持されてきた一方、人口が急増した関東圏や東北地方では供給が追いついていないため。2018年度開始の新専門医制度の影響で若手医師が症例の豊富な都市部に集中するリスクもあり、政府は都市部の採用数上限（シーリング）や、卒業後に特定地域で働く「地域枠」で是正を図っている。(出典: 厚生労働白書 令和7年版)\n\n### Q2: 医療費が高い県にはどんな特徴がある?\n\n2つの特徴がある。第一に**高齢化率の高さ**。医療費は年齢とともに増加し、一生涯にかかる費用の多くが高齢期に集中するため、高齢者が多い県ほど一人当たり医療費も高くなる。第二に**入院期間の長さ**といった受療行動の差異。病床数が多い地域では入院医療への依存度が高くなる傾向があり、国は地域医療構想を通じて過剰病床の整理や効率的な医療提供体制への転換を急いでいる。(出典: 厚生労働白書 令和7年版)\n\n### Q3: 健康寿命と平均寿命は何が違う?\n\n平均寿命は「生まれてから亡くなるまでの期間」だが、健康寿命は「日常生活に制限がない期間の平均」を指す。日本は世界最高レベルの長寿国で、2022年時点で健康寿命は男性72.57年、女性75.45年。平均寿命との間には約9〜12年の差があり、この期間は本人のQOL低下と医療・介護費の増大を招くため、政府は2040年までに健康寿命を男女共に75歳以上とすることを目指している。(出典: 厚生労働白書 令和7年版)\n\n### Q4: 「2025年問題」で医療体制はどう変わる?\n\n2025年は約800万人の団塊の世代が全員75歳以上の後期高齢者に達する節目の年。医療・介護ニーズが爆発的に増大し、現役世代の負担が限界に達することが懸念される。これに対応するため、病院完結型の医療から、住み慣れた地域で医療・介護・生活支援を一体的に受ける「地域包括ケアシステム」への転換が進められている。2040年に向けては支え手となる生産年齢人口の急減も踏まえた効率化が一段と求められる。(出典: 厚生労働白書 令和7年版)\n\n### Q5: 医師が足りない地域への対策は?\n\n国は「医師確保計画」を策定し、都道府県ごとの「医師偏在指標」を基に具体策を講じている。主な施策は、医学部入学定員に特定地域での勤務を条件とする「地域枠」の設定や、不足地域での勤務を評価する認定制度の創設。2024年4月施行の医師の働き方改革（時間外労働規制）を受け、医師の業務を看護師等へ移管する「タスク・シフト／シェア」や、遠隔医療導入による効率化も強力に推進されている。(出典: 厚生労働白書 令和7年版)\n\n### Q6: 「地域医療構想」とは私たちにどんな影響がある?\n\n将来の人口構造を見据えて病床（病院のベッド）の機能を役割分担させる仕組み。これまでは多くの病院が「急性期」を目指していたが、今後は「回復期」や在宅医療復帰を支える機能を強化する。患者は状態に合わせた適切な場所で質の高い医療を効率的に受けられるようになる。2025年度からは「かかりつけ医機能報告制度」が始まり、身近な医療機関がどのような役割を担っているかが可視化される。(出典: 厚生労働白書 令和7年版)\n\n### Q7: 健康診断の受診率に地域差があるのはなぜ?\n\n自治体や保険者による受診勧奨の熱心さや利便性によって差が生じている。特定健診の実施率が高い地域ほど、生活習慣病の重症化を予防でき、中長期的な医療費の適正化につながる傾向がある。特に女性のがん検診受診率は徐々に上昇しているものの依然として5割に届かない項目が多く、地域間での啓発の差も指摘されている。国はマイナ保険証を活用した医療情報共有（医療DX）により、個人の健康状態に合わせた適切な受診判断を支援する体制を整えている。(出典: 厚生労働白書 令和7年版)",
         "sources": [
@@ -278,7 +285,6 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       },
       "sourceName": "厚生労働白書 (令和7年版) / 地域医療構想 (厚生労働省) / 医師の働き方改革 (厚生労働省) / 健康日本21(第三次) (厚生労働省)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -321,9 +327,11 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
           }
         ]
       },
+      "relatedRankingKeys": [
+        "deaths-lifestyle-diseases-per-100k"
+      ],
       "sourceName": "総務省統計局 社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": "/ranking/deaths-lifestyle-diseases-per-100k",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -349,9 +357,11 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
           "improve"
         ]
       },
+      "relatedRankingKeys": [
+        "deaths-diabetes-per-100k"
+      ],
       "sourceName": "総務省統計局 社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": "/ranking/deaths-diabetes-per-100k",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

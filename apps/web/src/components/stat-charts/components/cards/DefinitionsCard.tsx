@@ -1,16 +1,11 @@
 import React from "react";
 
 import { Table, TableBody, TableCell, TableRow } from "@stats47/components";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@stats47/components/atoms/ui/accordion";
 import { Badge } from "@stats47/components/atoms/ui/badge";
 import { Icon } from "@stats47/components/atoms/ui/icon";
 import { InfoIcon } from "lucide-react";
 
+import { ContentDisclosure } from "@/components/content";
 import { SurfaceCard } from "@/components/surface";
 
 import { getDefinitionSet } from "../../data/definitions";
@@ -85,20 +80,20 @@ const GroupCard: React.FC<{ group: DefinitionGroup }> = ({ group }) => {
   const iconName = group.icon ? ICON_NAME_MAP[group.icon] || group.icon : undefined;
 
   return (
-    <SurfaceCard className={`overflow-hidden p-0 shadow-none ${colors.border} ${colors.bg}`}>
+    <SurfaceCard className={`overflow-hidden shadow-none ${colors.border} ${colors.bg}`}>
       {/* ヘッダー */}
-      <div className={`flex items-center gap-2 px-4 py-3 border-b ${colors.border}`}>
+      <div className={`flex items-center gap-2 border-b pb-3 ${colors.border}`}>
         {iconName && <Icon name={iconName} className={`h-4 w-4 ${colors.icon}`} />}
         <span className={`font-semibold text-sm ${colors.text}`}>{group.name}</span>
       </div>
 
       {/* 説明文 */}
       {group.description && (
-        <p className="px-4 pt-2 text-xs text-muted-foreground">{group.description}</p>
+        <p className="pt-2 text-sm text-muted-foreground">{group.description}</p>
       )}
 
       {/* アイテムテーブル */}
-      <div className="px-4 py-2">
+      <div className="pt-2">
         <Table>
           <TableBody>
             {group.items.map((item) => (
@@ -135,49 +130,34 @@ export const DefinitionsCard: React.FC<DashboardItemProps<"definitions-card">> =
   const title = common.title || "統計の定義";
 
   return (
-    <SurfaceCard className="p-0">
-      <Accordion type="single" collapsible>
-        <AccordionItem value="definitions" className="border-none">
-          <AccordionTrigger className="px-6 py-4 hover:no-underline">
-            <div className="flex items-center gap-3 text-left">
-              <InfoIcon className="h-5 w-5 text-muted-foreground shrink-0" />
-              <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-2">
-                  {data.badge && (
-                    <Badge variant="secondary" className="text-[10px]">
-                      {data.badge}
-                    </Badge>
-                  )}
-                  <h3 className="text-lg font-semibold">{title}</h3>
-                </div>
-                {data.description && (
-                  <p className="text-sm text-muted-foreground font-normal">
-                    {data.description}
-                  </p>
-                )}
-              </div>
-            </div>
-          </AccordionTrigger>
+    <ContentDisclosure
+      title={title}
+      headingLevel={3}
+      leading={<InfoIcon className="h-4 w-4 text-muted-foreground" aria-hidden="true" />}
+      description={data.description}
+      meta={
+        data.badge ? (
+          <Badge variant="secondary" className="text-[10px]">
+            {data.badge}
+          </Badge>
+        ) : undefined
+      }
+    >
+      {/* グループグリッド */}
+      <div className="@container mt-2 grid grid-cols-1 gap-4 @md:grid-cols-2">
+        {data.groups.map((group) => (
+          <GroupCard key={group.name} group={group} />
+        ))}
+      </div>
 
-          <AccordionContent className="px-6 pb-6 pt-0">
-            {/* グループグリッド */}
-            <div className="@container grid grid-cols-1 @md:grid-cols-2 gap-4 mt-2">
-              {data.groups.map((group) => (
-                <GroupCard key={group.name} group={group} />
-              ))}
-            </div>
-
-            {/* データソース */}
-            {data.source && (
-              <div className="mt-4 pt-3 border-t border-border/60">
-                <p className="text-xs text-muted-foreground text-center">
-                  データソース: {data.source}
-                </p>
-              </div>
-            )}
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    </SurfaceCard>
+      {/* データソース */}
+      {data.source && (
+        <div className="mt-4 border-t border-border/60 pt-3">
+          <p className="text-center text-sm text-muted-foreground">
+            データソース: {data.source}
+          </p>
+        </div>
+      )}
+    </ContentDisclosure>
   );
 };

@@ -58,9 +58,11 @@ export const RAILWAY_CATALOG: ThemeCatalog = {
           "count"
         ]
       },
+      "relatedRankingKeys": [
+        "jr-passenger-transport"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/jr-passenger-transport",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -86,9 +88,11 @@ export const RAILWAY_CATALOG: ThemeCatalog = {
           "special"
         ]
       },
+      "relatedRankingKeys": [
+        "jr-freight-shipment"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/jr-freight-shipment",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

@@ -190,6 +190,7 @@ export const RankingChartDashboard = async ({
             <ChartFooter
               source={sourceName ?? undefined}
               sourceLink={sourceLink}
+              sourceLinks={common.sourceLinks}
               rankingLink={rankingLink}
             />
           }
@@ -210,6 +211,7 @@ export const RankingChartDashboard = async ({
           <ChartFooter
             source={sourceName ?? undefined}
             sourceLink={sourceLink}
+            sourceLinks={common.sourceLinks}
             rankingLink={rankingLink}
           />
         }

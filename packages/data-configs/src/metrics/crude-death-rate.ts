@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const crudeDeathRate: MetricConfig = {
   "key": "crude-death-rate",
   "title": "粗死亡率",
+  "description": "1年間の死亡数を人口で割り、人口1,000人当たりで表した値です。年齢構成の違いを含む地域全体の死亡水準を示します。",
   "unit": "人口千対",
   "category": "population",
   "source": {

@@ -16,10 +16,9 @@ import {
   TableRow,
 } from "@stats47/components";
 
-import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartFooter, type ChartFooterLink } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { ChartEmptyState } from "@/components/charts/ChartState";
-
 
 import type { StatsTableRowData } from "../../../types/visualization";
 
@@ -31,6 +30,7 @@ interface StatsTableClientProps {
   dataByYear: Record<string, StatsTableRowData[]>;
   sourceName?: string | null;
   sourceLink?: string | null;
+  sourceLinks?: ChartFooterLink[];
 }
 
 export const StatsTableClient: React.FC<StatsTableClientProps> = ({
@@ -41,6 +41,7 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
   dataByYear,
   sourceName,
   sourceLink,
+  sourceLinks,
 }) => {
   const [selectedYearCode, setSelectedYearCode] = useState(
     years[0]?.yearCode ?? ""
@@ -57,6 +58,7 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
         <ChartFooter
           source={sourceName ?? undefined}
           sourceLink={sourceLink}
+          sourceLinks={sourceLinks}
           sourceDetail={selectedYear?.yearName ? `${selectedYear.yearName}時点` : undefined}
           rankingLink={rankingLink}
         />

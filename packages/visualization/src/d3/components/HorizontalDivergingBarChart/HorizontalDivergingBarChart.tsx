@@ -41,6 +41,19 @@ export function HorizontalDivergingBarChart({
   });
 
   const { innerWidth, innerHeight, marginTop, marginLeft } = layout;
+  const values = data.map((item) => item.value);
+  const valueRange =
+    values.length > 0
+      ? `${Math.min(...values).toLocaleString()}から${Math.max(...values).toLocaleString()}${unit}`
+      : undefined;
+  const accessibleLabel = [
+    "基準値からの乖離を示す水平棒グラフ",
+    `基準値: ${baseline}${unit}`,
+    `項目: ${data.map((item) => item.label).join("、")}`,
+    valueRange ? `値の範囲: ${valueRange}` : undefined,
+  ]
+    .filter(Boolean)
+    .join("。");
 
   useEffect(() => {
     if (!svgRef.current || data.length === 0) return;
@@ -171,6 +184,8 @@ export function HorizontalDivergingBarChart({
         height="100%"
         viewBox={`0 0 ${width} ${height}`}
         preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-label={accessibleLabel}
       />
     </div>
   );

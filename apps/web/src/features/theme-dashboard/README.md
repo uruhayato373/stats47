@@ -77,9 +77,25 @@ The migration is specified in
 | Cross-metric relation            | scatter plot                                                    |
 | Heavy national structure         | theme page, not area page                                       |
 
+## Chart Editorial Contract
+
+Theme chart は複数指標の関係を読むための可視化であり、指標定義の保存場所ではない。
+
+- header は短い title のみ。component type から「線の傾きを確認できます」等を自動生成しない。
+- legend、axis、unit、year は chart 本体に置く。
+- 系列断絶、母集団差、比較不能条件など、その chart 固有の注意だけを `ThemeCatalog.charts[].annotation` に置き、footer に表示する。
+- 指標の定義、算出方法、一般注釈、出典詳細、関連ページは `/ranking/[key]` を指標ハブとして集約する。
+- chart は `relatedRankingKeys` で指標ハブへ接続する。title 類似だけで mapping を推測しない。
+- footer は primary hub と補助2件までを表示する。全関連指標は左レール／狭幅の「全指標」で探索する。
+- `ChartPanel` は title を accessible name にした `section` とし、説明文を外しても領域名を失わない。
+
+契約は `validate:catalog`、transform tests、Theme UI contract tests が固定する。
+
 ## R2 Reflection Flow
 
 ```bash
+npm run generate:catalog --workspace=@stats47/data-configs
+npm run validate:catalog --workspace=@stats47/data-configs
 npm run export:page-components --workspace apps/web
 ```
 

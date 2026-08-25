@@ -41,7 +41,12 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
       "rankingKey": "in-pref-university-entrance-ratio-by-highschool-origin",
       "shortLabel": "県内大学進学率",
       "role": "context"
-    }
+    },
+    {
+      "rankingKey": "university-count",
+      "shortLabel": "大学数",
+      "role": "context"
+    },
   ],
   metricGroups: [
     {
@@ -102,7 +107,6 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
       ],
       "sourceName": "総務省 社会・人口統計体系（学校基本調査）",
       "sourceLink": "https://www.mext.go.jp/b_menu/toukei/chousa01/kihon/kekka/k_detail/2024.htm",
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -145,9 +149,11 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
         ],
         "topN": 5
       },
+      "relatedRankingKeys": [
+        "university-count"
+      ],
       "sourceName": "総務省 社会・人口統計体系（学校基本調査）",
       "sourceLink": "https://www.mext.go.jp/b_menu/toukei/chousa01/kihon/kekka/k_detail/2024.htm",
-      "rankingLink": "/ranking/university-count",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

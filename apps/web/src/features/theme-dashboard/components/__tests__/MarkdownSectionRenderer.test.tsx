@@ -92,4 +92,30 @@ describe("MarkdownSectionRenderer", () => {
     expect(section).not.toBeNull();
     expect(section?.getAttribute("aria-label")).toBe("FAQ");
   });
+
+  test("構造化 FAQ を共通の軽量アコーディオンで表示する", () => {
+    const props: MarkdownSectionComponentProps = {
+      displayMode: "faq",
+      subtitle: "人口について読者が気になる 2 問",
+      items: [
+        { question: "自然増減とは?", answer: "**出生数と死亡数**の差です。" },
+        { question: "社会増減とは?", answer: "転入数と転出数の差です。" },
+      ],
+      sources: [{ label: "人口動態統計", url: "https://example.com/source" }],
+    };
+
+    const { container } = render(
+      <MarkdownSectionRenderer title="よくある質問" props={props} />,
+    );
+
+    expect(screen.getByRole("heading", { level: 2, name: "よくある質問" })).toBeInTheDocument();
+    expect(screen.getByText("Q. 自然増減とは?")).toBeInTheDocument();
+    expect(screen.getByText("出生数と死亡数")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "人口動態統計" })).toHaveAttribute(
+      "href",
+      "https://example.com/source",
+    );
+    expect(container.querySelectorAll("details")).toHaveLength(2);
+    expect(container.textContent).not.toContain("▼");
+  });
 });

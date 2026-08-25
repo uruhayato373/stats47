@@ -161,8 +161,7 @@ export function resolveSurveyTaxonomy(
 }
 
 function chartMetricKeys(chart: ThemeCatalog["charts"][number]): string[] {
-  const linkKey = /^\/ranking\/([a-z0-9-]+)\/?$/.exec(chart.rankingLink ?? "")?.[1];
-  return unique([...(chart.relatedRankingKeys ?? []), ...(linkKey ? [linkKey] : [])]);
+  return unique(chart.relatedRankingKeys ?? []);
 }
 
 /** ThemeCatalog の metric と全 chart を survey taxonomy へ決定的に接続する。 */

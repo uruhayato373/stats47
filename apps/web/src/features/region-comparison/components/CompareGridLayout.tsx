@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import { ChartSkeleton, type DashboardComponent, type DashboardComponentType } from "@/components/stat-charts";
 import { DashboardComponentRenderer, computeSharedYDomain, type PageComponent } from "@/components/stat-charts/server";
+import { resolveChartSourceLinks } from "@/components/stat-charts/utils/resolveChartSourceLinks";
 
 import type { ComparisonRegion } from "../types";
 import type { Area } from "@stats47/area";
@@ -20,7 +21,13 @@ function pageComponentToDashboard(comp: PageComponent, titlePrefix?: string): Da
     componentKey: comp.componentKey,
     componentType: comp.componentType,
     title: titlePrefix ? `${titlePrefix}の${comp.title}` : comp.title,
-    componentProps: JSON.stringify(comp.componentProps),
+    componentProps: JSON.stringify({
+      ...comp.componentProps,
+      sourceLinks: resolveChartSourceLinks({
+        rankingLink: comp.rankingLink,
+        rankingLinks: comp.componentProps.rankingLinks,
+      }),
+    }),
     rankingLink: comp.rankingLink,
     sourceLink: comp.sourceLink,
     sourceName: comp.sourceName,
@@ -94,7 +101,6 @@ export async function CompareGridLayout({ regions, components }: CompareGridLayo
                     component={pageComponentToDashboard(comp, region.areaName)}
                     area={toArea(region)}
                     sharedYDomain={yDomainMap.get(comp.componentKey)}
-                    hideSource
                   />
                 </Suspense>
             </div>

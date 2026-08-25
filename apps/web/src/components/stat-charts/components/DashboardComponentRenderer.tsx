@@ -58,20 +58,13 @@ interface DashboardComponentRendererProps {
   area: Area;
   /** 比較ページで事前計算された共有 Y 軸ドメイン */
   sharedYDomain?: [number, number];
-  /** 出典を非表示にする */
-  hideSource?: boolean;
 }
 
 export const DashboardComponentRenderer: React.FC<
   DashboardComponentRendererProps
-> = ({ component, area, sharedYDomain, hideSource }) => {
+> = ({ component, area, sharedYDomain }) => {
   const type = component.componentType as DashboardComponentType;
   const { common, config } = extractDashboardProps(component, area);
-
-  if (hideSource) {
-    common.sourceName = undefined;
-    common.sourceLink = undefined;
-  }
 
   // 共有 Y 軸ドメインがあれば config に注入（チャートコンポーネントが優先的に使用）
   if (sharedYDomain && config && typeof config === "object") {

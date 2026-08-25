@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-24
+updated: 2026-08-25
 ---
 
 # バックログ (タスクマスタ)
@@ -22,6 +22,7 @@ updated: 2026-08-24
 ## 🔴 高 — 今月中に着手したい
 
 ### [SURVEY-HUB-HANDOFF-01] 調査ハブ改修の別PC実画面検証と配信snapshot反映
+
 タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run type-check --workspace apps/web] [起票:2026-08-24]
 
 - **実装済み**: `ArticleShell.leftRail`、調査詳細のデスクトップ左ナビとモバイル上部代替、
@@ -54,6 +55,7 @@ updated: 2026-08-24
   R2 push・CDN purge・deployは行わず、必要なら実行対象keyと検証結果だけ報告する。」
 
 ### [SURVEY-EDITORIAL-80-01] 全80調査へ一次資料に基づく個別説明を手作業で整備する
+
 タグ: [コンテンツ品質] [種類:制作] [実行:sweep] [検証:npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts] [Codex候補] [起票:2026-08-24]
 
 - **owner**: `survey-curator`。通常実装は Claude Code Sonnet。1回の実行は最大10調査とし、
@@ -89,6 +91,7 @@ updated: 2026-08-24
   デプロイ・R2 pushはしない。最後に本カードの再開ポインタだけ更新する。」
 
 ### [THEME-EVIDENCE-LENS-ROLLOUT-01] 白書論点レンズをテーマ横断で段階展開する
+
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-08-24] [期日:2026-08-31]
 
 - **owner**: `theme-researcher → theme-designer → theme-component-builder`。観測は GA4 `nav_surface=theme_evidence`。
@@ -113,7 +116,56 @@ updated: 2026-08-24
   research-theme-catalogの実証ゲートに従い、公式資料とrouteを検証してからThemeCatalogへ反映。
   validate:catalog、対象test、web type-checkを通し、カードの次テーマだけ更新。デプロイしない。」
 
+### [THEME-METRIC-DEFINITION-133-01] テーマ指標ハブ133件の定義・注釈を一次資料で整備する
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:npm run validate:config --workspace=@stats47/data-configs] [Codex候補] [起票:2026-08-25]
+
+- **owner**: `estat-researcher → data-ingester`。ThemeCatalog が参照する ranking key だけを対象にし、
+  `MetricConfig` git TS を authored SSOT とする。ランキング本文や生成JSONへ説明を複製しない。
+- **実測ベースライン (2026-08-25)**: 133 unique ranking key のうち `description` 欠落114件、
+  `note` 記載0件。タイトル・単位・series名をつないだ自動文は統計の定義・注意にならないため採用しない。
+- **実行順**:
+  1. `validate-metric-config` の pure collector に `themeReferencedKeys`、`missingDescription`、
+     `populatedNote` を追加し、description欠落数だけを増加不可のbaseline ratchetにする。
+     note件数は観測値に留め、汎用文による穴埋め・正規化後の同文重複を拒否する。
+     既存欠落を成功扱いで固定せず、移行完了時にdescriptionの必須gateへ切り替える。
+  2. テーマ画面から定義ハブへ露出する指標を優先し、1 run 最大10件ずつ、所管省庁・e-Statメタ・
+     調査票/用語解説の一次資料で定義、分母、地域粒度、時点、単位、系列断絶を確認する。
+  3. `description` は「何を測るか・計算定義」を個別執筆する。`note` は標本、対象範囲、
+     比較上の具体的注意を一次資料で確認できた指標だけに追加する。generator/fallbackによる穴埋め、
+     同一定型文の横展開、出典未確認の推測はしない。
+  4. 各batchで config validator、対象test、`validate:catalog`、data-configs type-checkを実行し、
+     一次資料URLとMetricConfig source座標が一致したbatchだけ反映する。
+- **停止条件**: 一次資料が失効、定義とe-Stat座標が不一致、都道府県/県庁所在市/全国が混在、
+  分子・分母または系列断絶を確定できない場合。そのkeyは未変更で残し、類似指標の文面を転記しない。
+- **完了条件**: 133/133で個別の`description`があり、必要な`note`だけが一次資料の具体的注意と一致し、
+  description欠落0・空定型0・note定型穴埋め0。ratchetをdescription必須gateへ縮小し、
+  config/catalog validator、対象test、data-configs type-checkがgreenになる。
+
+### [THEME-CHART-RECIPE-DRIFT-01] テーマチャート3系統の取得レシピ・表示名ドリフトを是正する
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [Codex候補] [起票:2026-08-25]
+
+- **owner**: `theme-component-builder`。`MetricConfig` と `StatSeriesRef` を再利用し、ThemeCatalog内に
+  独立した軸・換算レシピSSOTを増やさない。`CROSS-PAGE-DATA-SSOT-01` の移行境界を迂回しない。
+- **実測した不一致 (2026-08-25)**:
+  1. `labor-wages/labor-wages-gender-gap` は statsDataId しか指定せず、正典
+     `gender-wage-gap` の cdTab=10、cdCat02/03/04=01、cat01女性03÷男性02の`axisRatio`が欠落。
+  2. `occupation-salary/theme-occ-medical-trend` は職種cdCat02だけで、医師・看護師・介護職員の正典にある
+     cdCat01=01、月例給与tab08×12 + 賞与tab12の`tabCombination`と値換算が欠落。
+  3. `local-economy/theme-economy-income-wage` は L3130を参照するが、正典は可処分所得なのに
+     title/labelが「課税所得」。relatedRankingKeyは`disposable-income-worker-households`で矛盾している。
+- **実行順**: (1) 3系統を対応MetricConfig参照へ移す、(2) ThemeCatalog生成物を再生成、
+  (3) ratio・年収合成・L3130名称を各fixtureでred→green確認、(4) catalog validatorに
+  relatedRankingKeysと系列レシピ/表示名の意味ドリフト検査を追加する。
+- **停止条件**: e-StatメタとMetricConfigが一致しない、複数relatedRankingKeyから系列対応を一意に決められない、
+  または修正が生e-Statレシピの新規複製を要求する場合。値・軸・名称を推測で補わずSSOT移行へ戻す。
+- **完了条件**: 男女格差が正しい比率、医療3職種が月例給与×12+賞与の年収、L3130が可処分所得として
+  表示される。seedした3種類の欠陥でvalidator/testが失敗し、修復後に`generate:catalog --check`、
+  `validate:catalog`、data-configs test/type-checkがgreenになる。
+
 ### [ASP-CONTINUITY-01] afb の承認追跡と広告コード取得 (オーナーのログインが要る分)
+
 タグ: [収益化] [種類:改善] [実行:ユーザー] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-07-28]
 
 - **owner**: uruhayato373 (afb の手動ログインと `--commit` 承認)
@@ -142,6 +194,7 @@ updated: 2026-08-24
   `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md`
 
 ### [ASP-ELIGIBILITY-GATE-01] 掲載適格性を eligibility core にして配信を fail-closed にする
+
 タグ: [収益化] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-08-21]
 
 - **owner**: Claude Code (ブラウザ不要・pure code)
@@ -174,6 +227,7 @@ updated: 2026-08-24
   `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` §7
 
 ### [AFF-INTENT-FRICTION-PORTFOLIO-01] 低ハードル・高意図案件を二層で検証できるアフィリエイト基盤
+
 タグ: [収益化] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-08-20]
 
 - **owner**: Claude Code Sonnet（通常実装は high。work package ごとに1回ずつ実行）
@@ -212,6 +266,7 @@ updated: 2026-08-24
 4. A8期間フォームの月レンジ/日レンジを推測で操作せず、`--probe-period`の観察結果からselector、要求期間、
    CSVファイル名の実期間をfixture化する。成果SSOT未生成と累計期間を`outcomeGate=blocked`の理由として保持する。
 5. 現在のコードとrulesの配置表を突合する。とくに未commitのtheme/ranking末尾枠変更を推測で上書きしない。
+
 - **完了条件**: query fallback事故、variant欠落、旧schema混入、stale sourceを両方向fixtureで再現し、
   WP1以降が読むbaseline、measurement gate、outcome gateが決定的になる。
 
@@ -227,6 +282,7 @@ updated: 2026-08-24
    未確認を`unknown`として一覧化する。もしも/afbも識別子を推測しない。
 4. `affiliate-catalog.json`と`a8-catalog.json`は状態機械として維持し、offer catalogへ統合しない。
    authored判断・運用状態・配信creativeの3責務をvalidatorで分離する。
+
 - **変更候補**: `apps/web/src/features/ads/types/index.ts`、`affiliate-ads-data.ts`、
   `export-affiliate-ads-snapshot.ts`、新規`affiliate-offer-profiles-data.ts`、
   `.claude/scripts/ads/lib/affiliate-offer-core.mjs`とtest。
@@ -242,6 +298,7 @@ updated: 2026-08-24
 3. experiment variantを通常readerから除外し、実験対象外の枠へ漏らさない。target指定広告を非ranking文脈へ
    出さないfail-closedは`ASP-CONTINUITY-01`のpure coreを利用する。
 4. agentは候補を1件提示するだけ。apply、winner反映、priority変更、公開は自動化しない。
+
 - **完了条件**: 高単価F4がthemeへ出ない、F1が文脈不一致で出ない、experiment variantが通常枠へ出ない、
   unknownが候補上位にならないことをresolver/core testで固定する。
 
@@ -258,6 +315,7 @@ updated: 2026-08-24
    これは派生stateであり手編集禁止。
 4. `affiliate-operations-latest.json`へportfolio gateとrecommendedActionsを追加する。stale、scope mismatch、
    missing programRef、outcome unavailableを明示し、0へ丸めない。
+
 - **変更候補**: `fetch-affiliate-ga4.cjs`、`affiliate-operations-core.mjs`、
   `build-affiliate-operations-state.ts`、新規`build-affiliate-portfolio-state.ts`、A8 report map生成/check、関連tests。
 - **完了条件**: 同一fixtureで広告別CTRと実験別CTRを同時取得でき、A8 shared/account-wideをstats47単独へ
@@ -275,6 +333,7 @@ updated: 2026-08-24
 4. 週次workflowはstate生成・候補提示まで。ASP申請、SSOT書換え、winner反映、push/deployを含めない。
    workflow healthの対象にportfolio state freshnessを追加する。
 5. 恒久判断は収益化戦略/affiliate rules、反復手順はskills、機械値はstate、active施策はimprovementsに分離する。
+
 - **完了条件**: agent/skill consistency、dashboard/admin parity、workflow安全境界、automation inventory、
   analytics event台帳、docs governanceがgreen。read-only UIから外部変更できない。
 
@@ -289,6 +348,7 @@ updated: 2026-08-24
 4. registryへ期間、minimum sample、成果確定待ち、primary metric、UX guard、停止条件を事前固定する。
    CTR勝者を収益勝者と扱わない。直近12,020 impression / 3 clickを基準に必要click/impと推定日数を先に算出し、
    最大期間内に判定母数へ届かない場合は`not-feasible`として公開しない。
+
 - **開始gate**: measurement/portfolio ready、variant取得可、programRef coverage、A8成果fresh、既存同枠実験なし、
   オーナーの案件・ページ・push承認。
 - **完了条件**: 対象test、web/admin type-check、SSGを含むweb build、compliance、主要routeのlocalhost目視がgreen。
@@ -300,6 +360,7 @@ updated: 2026-08-24
 2. 主指標は確定収益/1,000 viewable imp。CTR、CVR、確定率、imp/pageview、engagement・内部回遊は説明/guard。
 3. 勝者は人間へ提示し、1ページ→同意図クラスタの順に拡大する。負け/判定不能でも自動停止・priority変更しない。
 4. 実験決着後はimprovement-logへ根拠を残し、active行と完了カードを規約どおり削除する。
+
 - **完了条件**: source、取得日、再現コマンド、before/after、guard、判定不能理由を持つverdictが生成され、
   次の1実験だけがrecommendedActionになる。
 
@@ -330,6 +391,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 ```
 
 ### [IMAGE-DELTA-PUBLISH-01] 生成画像の変更検知とexact R2反映
+
 タグ: [起票:2026-07-27]
 
 - **owner**: Claude Code
@@ -340,6 +402,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `.claude/rules/ogp-image-standards.md` / `.claude/rules/r2-storage-design.md`
 
 ### [CROSS-PAGE-DATA-SSOT-01] テーマ・ランキング・ブログのデータ／単位／配色SSOT統合
+
 タグ: [進行中] [起票:2026-08-13]
 
 - **owner**: Claude Code
@@ -418,7 +481,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   追加 6 色 → series-7..12 (role パレットを 14→20 に拡張)。**`generate:catalog --check` の golden diff が
   byte 一致 = app側renderer入力のconfig回帰0を証明**（実ブラウザの描画回帰までは証明しない。179置換後にpage-components /
   indicator-sets とも git diff 空）。生色の再混入は validator `[raw-color]` (error) と WP0 ratchet
-  (rawColorPlaces=0) が CI で弾く (mutation で発火・restore で緑を実測)。色キーの正典 (COLOR_*_KEYS /
+  (rawColorPlaces=0) が CI で弾く (mutation で発火・restore で緑を実測)。色キーの正典 (COLOR\_\*\_KEYS /
   COLOR_VALUE_RE) を chart-color-role.ts に一本化し baseline collector と共有。web/static resolver parity
   (WP5 core) 済。data-configs 508 test / tsc 0・apps/web tsc 0。
   **レビュー指摘 2 点を是正 (2026-08-13)**: ① validator が未知 role (typo) を素通ししていた
@@ -535,6 +598,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `packages/data-configs/src/unit/` / `packages/data-configs/src/color-scheme-policy.ts`
 
 ### [MUNICIPALITY-SCOPE-SEPARATION-01] 市区町村テーマ・ランキングを独立した地理スコープへ分離する
+
 タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run validate:municipalities --workspace=@stats47/data-configs] [起票:2026-08-20]
 
 - **owner**: Claude Code Sonnet 5 high（1 session = 1 work package、writerは同時に1体）
@@ -628,6 +692,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 ```
 
 ### [QUALITY-GATE-COVERAGE-01] CI・テスト・監査の実効網羅性強化
+
 タグ: [起票:2026-08-13]
 
 - **owner**: Claude Code
@@ -840,6 +905,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `PUBLIC-DATA-CONTRACT-AUDIT-01` / `MAINTENANCE-DEBT-PAYDOWN-01`
 
 ### [RANKING-VALUES-PARTITION-INTEGRITY-01] 分類軸の絞り忘れによる配信データ汚染の是正
+
 タグ: [進行中] [起票:2026-07-30]
 
 - **owner**: Claude Code
@@ -955,6 +1021,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `.claude/rules/ranking-content-standards.md` §実データ照合
 
 ### [AICONTENT-DBLESS-REBUILD] ranking ai-content生成の完走
+
 タグ: [進行中] [起票:2026-06-01]
 
 - **owner**: Claude Code
@@ -968,6 +1035,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
 ### [PUBLIC-DATA-CONTRACT-AUDIT-01] blog / ranking / theme の配信データ契約を全量検証する
+
 タグ: [起票:2026-08-03]
 
 - **owner**: Claude Code
@@ -986,6 +1054,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `.github/workflows/ranking-integrity-audit-weekly.yml` / `.github/workflows/blog-remediation-daily.yml` / `apps/web/src/features/theme-dashboard/lib/load-theme-data.ts`
 
 ### [BLOG-SVG-LINEAGE-RESTORE-01] ブログSVG系譜キューの継続消化
+
 タグ: [進行中] [起票:2026-07-22]
 
 - **owner**: Claude Code
@@ -995,6 +1064,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `.claude/rules/blog-data-schema.md`
 
 ### [GOOGLE-ADMIN-AUTOMATION-01] Google管理操作のAPI/UI境界整理とCI化
+
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run google-admin:test] [起票:2026-07-30]
 
 - **owner**: uruhayato373 (残りは GitHub Environment の作成と credential 登録の 2 手だけ)
@@ -1036,6 +1106,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `.claude/scripts/google-admin/README.md`
 
 ### [SEO-META-FACTUAL-GATE-01] metric config の SEO 文字列が実データと照合されていない
+
 タグ: [進行中] [起票:2026-08-03]
 
 - **owner**: Claude Code
@@ -1093,6 +1164,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   書き換えない。**config を直しただけで「本番の誤値を消した」と report しない**。
 
 ### [KSJ-PREF-ASSIGN-01] KSJ 由来ランキングの県帰属を全 13 指標で是正する
+
 タグ: [起票:2026-08-17]
 
 - **owner**: claude
@@ -1130,6 +1202,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/prefecture-assign.ts`
 
 ### [DATA-REFRESH-ZEROGATE-ALLORNOTHING-01] 形状ゲートに掛かる 4 metric を是正する
+
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:gh run list --workflow=data-refresh.yml --limit 3] [起票:2026-08-17]
 
 - **owner**: data-ingester
@@ -1169,6 +1242,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   2026-08-17 の失敗も別で、page-data-batch と push は成功し `sync-snapshots` で落ちている。
 
 ### [SOURCE-TEXT-LINK-INJECTION-01] 出典テキストが第三者スクリプトでリンクに置換される
+
 タグ: [収益化] [種類:不具合] [実行:ユーザー] [検証:npx playwright test --config playwright.smoke.config.ts third-party-dom-injection] [起票:2026-08-04]
 
 - **症状**: チャート footer の「出典: 人口動態統計」の「統計」だけが `href="#"` のリンク + アイコンに
@@ -1178,11 +1252,11 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **★出所は AdSense の自動広告。オーナーが 2026-08-21 に設定を解除した。**
   私が同日「AdSense ではない」と書いたのは**測定時期を取り違えた誤り**だった。タイムラインが決定的:
 
-  | 日付 | 出来事 | `adsbygoogle.js` |
-  |---|---|---|
-  | 2026-08-04 | smoke が `link "統計" /url: "#"` を捕捉 | **読み込まれていた** |
-  | 2026-08-16 | `ec944e50b feat(web): pause all AdSense display` | 以降は読み込まれない |
-  | 2026-08-21 | 私の実測「AdSense は読み込まれていない」「再現しない」 | 読み込まれない |
+  | 日付       | 出来事                                                 | `adsbygoogle.js`     |
+  | ---------- | ------------------------------------------------------ | -------------------- |
+  | 2026-08-04 | smoke が `link "統計" /url: "#"` を捕捉                | **読み込まれていた** |
+  | 2026-08-16 | `ec944e50b feat(web): pause all AdSense display`       | 以降は読み込まれない |
+  | 2026-08-21 | 私の実測「AdSense は読み込まれていない」「再現しない」 | 読み込まれない       |
 
   `AdSenseScript` は `ADSENSE_DISPLAY_ENABLED` が true のときだけ `adsbygoogle.js` を挿す。
   **停止の 5 日後に観測して「犯人ではない」と結論した**が、実際は「停止したから撃てなくなった」
@@ -1191,6 +1265,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   - A8 リンクマネージャーを疑ったのも取り下げる。公式仕様
     (support.a8.net/as/linkmanager) は「**広告主サイトへのリンク**をアフィリエイトリンクに
     置換する」URL 書き換えで、平文の断片をリンク化する機能ではない。
+
 - **2026-08-21 に再現しなかったのは AdSense が 8/16 に停止していたから**。
   headless / headed × themes / blog / ranking を最大 36 秒スクロールして `#` リンクは 0 件。
   **停止中の緑は「直った」ではなく「今は撃てない」**を意味する。
@@ -1215,6 +1290,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: AdSense 再開後の post-deploy smoke で、出典・本文がリンク化されないことを示す。
 
 ### [AICONTENT-BUILDINPUT-ZEROFILL-01] build-input が R2 に無い県をゼロ埋めするのをやめる
+
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx vitest run packages/ai-content/src] [起票:2026-08-24]
 
 `packages/ai-content/src/scripts/build-input.ts` は R2 の観測値に存在しない県を `value: 0` /
@@ -1237,6 +1313,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
 ### [UI-CARD-CENSUS-SURVEY-01] SurveyTaxonomyCard の census ベースラインを決着させる
+
 タグ: [UI・UX] [種類:意思決定] [実行:対話] [検証:node .claude/scripts/lib/check-card-census.cjs] [起票:2026-08-24]
 
 `check-card-census.cjs` が 2 件で落ちており、**develop→main の PR (`pr-quality-check`) を
@@ -1250,6 +1327,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `docs/01_技術設計/04_デザインシステム.md` / `.claude/rules/ui-components.md`
 
 ### [UI-AD-RAILSLOT-CATEGORY-01] category ページの RailAdSlot を本文カラムから外す
+
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:node .claude/scripts/lib/check-ad-placement.cjs] [起票:2026-08-24]
 
 `apps/web/src/app/category/[categoryKey]/page.tsx` が `RailAdSlot` を右レール以外で使っている。
@@ -1263,6 +1341,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [A11Y-FOOTER-TAP-TARGET-01] フッター SNS アイコンのタップ領域が 16px で WCAG 2.5.8 を満たさない
+
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:node .claude/scripts/ui/measure-page-a11y.mjs] [起票:2026-08-21]
 
 - **owner**: Claude Code
@@ -1285,6 +1364,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `.claude/rules/ui-components.md`
 
 ### [PERF-AREA-DETAIL-01] /areas/<code> だけ dev で 1.9 秒かかる原因を特定する
+
 タグ: [インフラ・計測] [種類:改善] [実行:windows] [検証:npm run dev:web] [起票:2026-08-21]
 
 - **owner**: Claude Code
@@ -1300,6 +1380,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `.claude/rules/local-environment.md`「会社 Windows PC の dev は Windows R2 gateway を使う」
 
 ### [JAPAN-DERIVED-METRICS-01] /japan に derived レシピ由来の指標を足せるか判定する
+
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-08-21]
 
 - **owner**: Claude Code
@@ -1319,6 +1400,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `packages/data-configs/src/geo-scope/` / `.claude/rules/unit-semantics-standards.md`
 
 ### [BACKLOG-LOOP-PERMISSION-01] backlog-loop が `.claude/todo/` を書き換えられない原因を確定する
+
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-08-21] [期日:2026-08-24]
 
 - **症状 (2026-08-20 run 32395252885)**: `permission_denials_count: 16`。セッションは
@@ -1344,6 +1426,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   (ループが自分の権限を広げる口になる)。
 
 ### [GSC-ANCHOR-ROWS-01] `pages.csv` のアンカー行を consumer ごとに扱うか決める
+
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-08-21]
 
 - **事実 (2026-08-21 実測)**: GSC の page 次元には `#見出し` 付き URL が独立行として入る。
@@ -1359,6 +1442,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   挙動が変わるものは変更前後の出力差を実測で示す。
 
 ### [BACKLOG-LOOP-V3-VERIFY-01] v3-unified 移行後の backlog-loop 日次 run が green か確認する
+
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-08-18] [期日:2026-08-21]
 
 - **背景**: 2026-08-18 に TODO を v3-unified カード構文へ移行した (queue パリティは移行時に
@@ -1375,6 +1459,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 移行後の日次 run が 1 回 green (行削除があった場合は verify も通過)。
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
+
 タグ: [起票:2026-08-17]
 
 - **owner**: Claude Code
@@ -1422,6 +1507,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - 関連: `.claude/skills/db/sync-snapshots/SKILL.md` / `packages/r2-storage/src/scripts/{purge-worker-cache,purge-cache}.ts`
 
 ### [SITEMAP-BLOG-ENTRIES-DRIFT-01] ブログ公開で sitemap-blog-entries が更新されない
+
 タグ: [起票:2026-08-17]
 
 - **owner**: Claude Code
@@ -1445,6 +1531,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **禁止**: `--check` を PR ゲートから外して回避しない (sitemap 欠落が見えなくなる)。
 
 ### [TILEMAP-LINEAGE-01] タイルマップ 9 枚が SSOT からも data JSON からも再生成できない
+
 タグ: [起票:2026-08-03]
 
 - **owner**: `chart-author`
@@ -1455,6 +1542,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 123 枚すべてが `lintTileGridQuality` + `lintSvgSize` を error 0 で通る。
 
 ### [DATA-PATIENT-SURVEY-01] 患者調査 (0004026104) の取り込みが0件で3ページが更新不能
+
 タグ: [起票:2026-07-29]
 
 - **owner**: `data-ingester` (座標の実在検証は `estat-researcher`)
@@ -1464,6 +1552,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **機械検知**: 週次 `ranking-integrity-audit-weekly.yml` が実在と絶対鮮度でこの3件を検出し `ranking-alert` を起票するため、放置しても埋もれない。
 
 ### [RELATED-RANKINGS-TAGS-01] ブログ関連ランキングが常時非表示
+
 タグ: [起票:2026-07-24]
 
 - **owner**: Claude Code
@@ -1472,6 +1561,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 関連性のある候補だけが描画され、0件時の不要fetchがなく、R2モノリス読込回数が1以下。
 
 ### [LOCAL-FINANCE-CHART-HOVER-01] local-financeチャートのhover再現
+
 タグ: [実行:ユーザー] [起票:2026-06-19]
 
 - **owner**: Claude Code
@@ -1479,6 +1569,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 原因を再現testへ固定し、見た目を変えずtooltip操作を回復する。
 
 ### [COCONALA-PRODUCT-FACTORY-01] 14テーマパックの商品化
+
 タグ: [起票:2026-07-18]
 
 - **owner**: Claude Code
@@ -1486,16 +1577,18 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: catalog、dataset、Office成果物、validatorが一致し、最初の1商品を出品判断できる。出品操作はユーザーが行う。
 - **正典**: `.claude/rules/coconala-product-standards.md` / `.claude/skills/product/build-coconala-product/`
 
-### [THEME-PORTFOLIO-REMAINDER-01] テーマ分類・カタログ・注意カードの残工程
+### [THEME-PORTFOLIO-REMAINDER-01] テーマ分類・カタログの残工程
+
 タグ: [起票:2026-07-04]
 
 - **owner**: Claude Code
-- **統合元**: `THEME-TAXONOMY-REORGANIZE-01` / `THEME-CATALOG-QUALITY-01` / `THEME-GUIDANCE-CARDS-01` / chart expansion。
-- **次**: 22テーマreviewの結果から、まず欠測・重複・定義誤認だけを修正する。分類再編は重複matrixと移行影響が確定するまで実装しない。
-- **完了条件**: catalog validator、選定provenance、guidance型が一致し、UI変更はテーマ単位の小さな差分で検証する。
-- **正典**: `.claude/skills/theme/manage-theme-portfolio/reference/theme-improvement-execution.md` / `theme-taxonomy-reorganization.md` / `theme-guidance-implementation.md`
+- **統合元**: `THEME-TAXONOMY-REORGANIZE-01` / `THEME-CATALOG-QUALITY-01` / chart expansion。旧 guidance card 案は 2026-08-25 に指標ハブ契約へ置換済み。
+- **次**: 22テーマreviewの結果から、欠測・重複・定義誤認だけを修正する。分類再編は重複matrixと移行影響が確定するまで実装しない。
+- **完了条件**: catalog validator、選定provenance、分類契約が一致し、UI変更はテーマ単位の小さな差分で検証する。
+- **正典**: `.claude/skills/theme/manage-theme-portfolio/reference/theme-improvement-execution.md` / `theme-taxonomy-reorganization.md` / `.claude/rules/theme-catalog-standards.md`
 
 ### [KAIYU-HUB-01] 回遊面ハブ化のread-only監査
+
 タグ: [起票:2026-07-09]
 
 - **owner**: Claude Code
@@ -1504,6 +1597,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `.claude/skills/analytics/seo-audit/reference/site-navigation-graph.md`
 
 ### [NOTE-CIRCULATION-CTA-01] note回遊とCTAのcatalog駆動化
+
 タグ: [起票:2026-07-18]
 
 - **owner**: Claude Code
@@ -1511,6 +1605,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 記事、マガジン、stats47 CTAの対応をcatalogから決定的に生成し、全記事一括変更しない。
 
 ### [NOTE-MAGAZINE-REORG-01] note既存投稿のマガジン再編成 + 新規投稿の増産
+
 タグ: [実行:windows] [起票:2026-08-03]
 
 - **owner**: Claude Code
@@ -1525,10 +1620,10 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
      - **済 (membership 検証)**: `fetch-magazine-members.mjs` で各マガジンの note.com 実所属を取得・突合。結果: product-d3-colors 6=6 一致 / koumuin-claude-code note.com 37 vs catalog 35 (note.com が2件多い・マガジンが vertical 跨ぎ) / **koumuin-estat note.com 1 vs catalog 14 = 13件未追加 (Track B で追加)**。30 warn (有料マガジンに無料記事) は note.com buy-once モデルの実態と確認 (catalog は正しい)。
      - **flow 判明 (create-probe)**: マガジン作成/管理は `/notes` ダッシュボード。記事の「…」→ マガジンに追加、上部「マガジン ▾」で絞り込み。`/magazine/new` は 404。作成入口は追加モーダル内 or 専用ページ (要 click probe)。
      - **済 (Track B・operator 実装)**: `lib/note-session.mjs` (account assert) + `note-magazine.mjs` CLI (`plan` / `create --key --commit`)。作成フォームは `https://note.com/magazines/new` (名前≤30字 + 説明≤400字 + 無料/有料 + 作成)。dry-run で作成候補15件 (14 s47 + koumuin-gis・全て名前30字以内) を算出済み。無料マガジン専用 (有料は手動)、既存 noteUrl 持ちは作り直さない、`--commit` gate + account assert。
-     - **済 (Track B・マガジン作成)**: `note-magazine.mjs create-all --commit` で s47-* 14 + koumuin-gis = **15マガジンを note.com に実作成完了** (pilot 検証後に一括)。全 noteUrl を magazines.ts へ書き戻し。note.com マガジン総数 19 (今回15 + 既存4) を実測確認。catalog 18中15稼働・残3 (ict/international/energy) は記事0で受け皿。auto mode は「全て自動化」の明示指示で outbound write を許可。
+     - **済 (Track B・マガジン作成)**: `note-magazine.mjs create-all --commit` で s47-\* 14 + koumuin-gis = **15マガジンを note.com に実作成完了** (pilot 検証後に一括)。全 noteUrl を magazines.ts へ書き戻し。note.com マガジン総数 19 (今回15 + 既存4) を実測確認。catalog 18中15稼働・残3 (ict/international/energy) は記事0で受け皿。auto mode は「全て自動化」の明示指示で outbound write を許可。
      - **済 (Track B・記事割当 = add-article)**: `note-magazine.mjs add-articles --commit` で **合計156記事をマガジンへ投入完了** (s47-sports-culture 74本 / 自治体財政 14本 / koumuin-estat +13本 等・成功率100%)。API は `POST /api/v1/our/magazines/{magKey}/notes` body `{note_id, note_key}` (両方必須) + header `X-Requested-With: XMLHttpRequest` (CSRF 不要)。note_id は creator contents API (`kind=note`) の key→id マップから解決。既存メンバーは skip する冪等実装。**マガジン再編成 + 記事投入は note.com 上で完全稼働**。
-  1b. **残 (整理・任意)**: (a) note.com 上の別URL重複投稿3件 (災害SNS/苦情/FAQ) の削除判断 = オーナー領域。(b) 未公開ドラフト22件のカテゴリ手当て or 整理。(c) s47-ict/international/energy (記事0) は新規投稿が付いたら create + add。(d) 新規投稿の増産 (`sns-content-standards.md` の note 頻度上限は 2026-08-03 撤廃済)。
-  1c. **下書き37本の新規投稿 (browser-use・進行中) ★resume ポイント**:
+       1b. **残 (整理・任意)**: (a) note.com 上の別URL重複投稿3件 (災害SNS/苦情/FAQ) の削除判断 = オーナー領域。(b) 未公開ドラフト22件のカテゴリ手当て or 整理。(c) s47-ict/international/energy (記事0) は新規投稿が付いたら create + add。(d) 新規投稿の増産 (`sns-content-standards.md` の note 頻度上限は 2026-08-03 撤廃済)。
+       1c. **下書き37本の新規投稿 (browser-use・進行中) ★resume ポイント**:
      - **方針**: 「投稿できるものは全て投稿・上限なし」(2026-08-03 オーナー判断)。対象 = 完成済み下書き37本 (stats47-note 28 + koumuin-claude-code 9)。product-sales 55 は凍結チャネルで対象外。
      - **前提**: 投稿は **browser-use + Chrome Profile 5** (note.com/stats47 ログイン済・アカウントゲート合格確認済)。実行環境 = オーナーのローカル Mac。`export PATH="$HOME/.browser-use-env/bin:$PATH"`。
      - **済 (pilot 1本・実公開)**: `a-maximum-temperature` → https://note.com/stats47/n/n91e96edf3950 (HTTP 200・図3枚正配置・s47-climate へ束ね済)。
@@ -1550,6 +1645,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - 関連: [NOTE-CIRCULATION-CTA-01] (回遊/CTA の catalog 駆動)・`.claude/scripts/note/catalog/README.md`・`.claude/rules/sns-content-standards.md` §note
 
 ### [BUZZ-MAP-FOLLOWUP-01] buzz-map投稿とdeep-click計測
+
 タグ: [起票:2026-07-18]
 
 - **owner**: Claude Code
@@ -1557,6 +1653,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: attribution欠損、重複投稿、landing不一致をgateで停止する。
 
 ### [MIGRATION-FLOW-PHASE23-01] 人口移動 月次/年次 workflowの生成ステップ未実装
+
 タグ: [起票:2026-08-01]
 
 - **owner**: Claude Code
@@ -1565,6 +1662,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **停止条件**: 生成が未実装のままscheduleを戻さない (毎月の確定failureに戻るため)。
 
 ### [RANKING-AICONTENT-UI-UNIFY-HELD] ranking考察セクション統合の保留差分
+
 タグ: [実行:ユーザー] [起票:2026-06-21]
 
 - **owner**: Claude Code
@@ -1572,6 +1670,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: UI変更を続ける価値がある場合だけvisual回帰込みで単独PR化し、不要なら差分を安全に廃棄する判断をユーザーへ返す。
 
 ### [KAKEI-EXPANSION-02] 家計調査2025 refreshと残品目
+
 タグ: [実行:ユーザー] [起票:2026-07-10]
 
 - **owner**: Claude Code
@@ -1581,6 +1680,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `.claude/skills/blog/draft-from-trend/reference/kakei-topic-catalog.md`
 
 ### [BACKLOG-LOOP-PHASE23-01] バックログ処理ループの学習 (Phase 2) と指標バックログ取り込み (Phase 3)
+
 タグ: [起票:2026-08-17]
 
 - **owner**: Claude Code
@@ -1607,6 +1707,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   agent `backlog-processor`・`backlog-solver-hard`
 
 ### [ACTIONS-EXPRESSION-INJECTION-01] workflow の式インジェクション残 13 件
+
 タグ: [実行:ユーザー] [起票:2026-07-30]
 
 - **owner**: uruhayato373 (人間の PR でのみ着手できる)
@@ -1622,6 +1723,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **制約**: 1 PR で全 workflow を書き換えない (デプロイ経路の workflow が多く、壊すと配信が止まる)。3-4 本ずつに分け、変更した workflow は実際に 1 回発火させて確認する
 
 ### [CHART-LINEAGE-RESIDUAL-01] 元データ喪失の図表 残り11枚 (SSOT側の欠落が律速)
+
 タグ: [起票:2026-08-12]
 
 - **owner**: Claude Code
@@ -1658,6 +1760,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   **指標を投入すれば 2 種類まとめて解ける**ので、この 3 記事を先に片付ける
 
 ### [SYNC-SNAPSHOTS-MANIFEST-CARRY-01] sync-snapshots の「差分 push」が CI では毎回フル push になる
+
 タグ: [起票:2026-08-17]
 
 - **owner**: `r2-publisher`
@@ -1673,6 +1776,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   **送るべきものを skip する**方が、全件送るより実害が大きい (stale 配信は 6 日間気づかれなかった)。
 
 ### [SCRIPTS-TYPECHECK-01] `.claude/scripts` を型検査に載せる
+
 タグ: [起票:2026-08-13]
 
 - **owner**: uruhayato373
@@ -1722,6 +1826,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 47県を確認し、既存metricとの非重複と全国比較可能性を検証する。
 
 ### [SSDS-EDU-DIFFUSION-CODE-01] 教育普及度 2 指標の代替コード特定 (または退役)
+
 タグ: [起票:2026-08-16]
 
 - **owner**: estat-researcher
@@ -1739,6 +1844,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   「表示が正常＝データが更新されている」ではない。
 
 ### [CONSTRUCTION-ORDER-ALT-01] 建設工事受注データの代替出典を採るか判断する
+
 タグ: [起票:2026-08-16]
 
 - **owner**: theme-designer
@@ -1753,32 +1859,33 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 採否を決め、採る場合は 47 県ぶんの取得を dry-run で実測する。
 
 ### [INDICATOR-CANDIDATES-01] 指標候補キュー (P1/P2 検証済み)
+
 タグ: [実行:対話] [起票:2026-05-19]
 
 一次統計の実在、都道府県粒度、既存 metric との非重複を確認した候補だけを残す。
 需要未確認の大量候補、取得失敗、重複は削除済みで、再調査は Git 履歴から行う。
 `parse-backlog.cjs` が次の表を読む。`high` は既存テーマの欠測または需要が明確、`medium` は鮮度・特殊軸・導入先の追加判断が必要。
 
-| priority | candidate_slug | category | suggested_theme | estat_stats_data_id | rationale | status |
-|---|---|---|---|---|---|---|
-| high | outpatient-consultation-rate-total | socialsecurity | healthcare | 0004026105 | 患者調査2023 cat01=1,cat03=4。既存テーマに全傷病の外来受療率がない | pending |
-| high | inpatient-consultation-rate-total | socialsecurity | healthcare | 0004026105 | 患者調査2023 cat01=1,cat03=1。外来と対で医療アクセスを比較できる | pending |
-| high | ambulance-dispatch-count | safetyenvironment | healthcare | 0000010111 | SSDS K1210、47県。救急搬送の基礎指標 | pending |
-| high | infant-mortality-rate | socialsecurity | healthcare | 0003411730 | 人口動態統計2024、47県。既存healthcareの結果指標を補う | pending |
-| high | average-household-members | population | population-dynamics | 0003414255 | 国勢調査2020 cdTab=1390、47県。人口動態テーマの世帯構造を補う | pending |
-| high | working-age-population-ratio | population | population-dynamics | 0000010201 | SSDS #A03502、2024。年齢構造の基礎比率 | pending |
-| high | juvenile-offenders-count | safetyenvironment | safety | 0000010111 | SSDS K4204、2023、47県。千人比は別calculated metricで扱う | pending |
-| high | average-job-tenure | laborwage | labor-wages | 0003426933 | 賃金構造基本統計 cat04=01,cat03=01、47県 | pending |
-| high | nursing-home-count | socialsecurity | aging-society | 0000010210 | SSDS #J022011、2023、既存4指標と非重複 | pending |
-| high | paid-nursing-home-count | socialsecurity | aging-society | 0000010210 | SSDS #J02204、2023、47県 | pending |
-| high | life-time-use-series | laborwage | living-housing | 0000010113 | SSDS生活時間。sleep/housework/mealsのcdCat01確定後に個別keyへ分割する | pending |
-| medium | beef-cattle-count | agriculture | local-economy | 0004041846 | 畜産統計2024。都道府県がcat01=1013-1059に入るためarea読替が必要 | pending |
-| medium | pig-count | agriculture | local-economy | 0004041860 | 畜産統計2024。通常area軸ではなくcat01読替が必要 | pending |
-| medium | household-head-average-age | economy | consumer-prices | 0003348239 | 家計調査2024、県庁所在市52件。都道府県値と誤認しない表示設計が必要 | pending |
-| medium | fishery-species-catch-salmon | agriculture | fishery-marine | 0003425253 | さけ・ます類、2019、cat01=100-150。鮮度を明示する | pending |
-| medium | fishery-species-harvest-nori | agriculture | fishery-marine | 0003425258 | のり類養殖収獲量、2019。既存魚種テーマの欠測 | pending |
-| medium | fishery-species-harvest-oyster | agriculture | fishery-marine | 0003425257 | かき類養殖収獲量、2019。既存魚種テーマの欠測 | pending |
-| medium | housing-seismic-retrofit-count | construction | safety | 0004025509 | 住宅土地統計2023 cat03=15。「耐震化率」ではなく改修実施戸数として扱う | pending |
+| priority | candidate_slug                     | category          | suggested_theme     | estat_stats_data_id | rationale                                                             | status  |
+| -------- | ---------------------------------- | ----------------- | ------------------- | ------------------- | --------------------------------------------------------------------- | ------- |
+| high     | outpatient-consultation-rate-total | socialsecurity    | healthcare          | 0004026105          | 患者調査2023 cat01=1,cat03=4。既存テーマに全傷病の外来受療率がない    | pending |
+| high     | inpatient-consultation-rate-total  | socialsecurity    | healthcare          | 0004026105          | 患者調査2023 cat01=1,cat03=1。外来と対で医療アクセスを比較できる      | pending |
+| high     | ambulance-dispatch-count           | safetyenvironment | healthcare          | 0000010111          | SSDS K1210、47県。救急搬送の基礎指標                                  | pending |
+| high     | infant-mortality-rate              | socialsecurity    | healthcare          | 0003411730          | 人口動態統計2024、47県。既存healthcareの結果指標を補う                | pending |
+| high     | average-household-members          | population        | population-dynamics | 0003414255          | 国勢調査2020 cdTab=1390、47県。人口動態テーマの世帯構造を補う         | pending |
+| high     | working-age-population-ratio       | population        | population-dynamics | 0000010201          | SSDS #A03502、2024。年齢構造の基礎比率                                | pending |
+| high     | juvenile-offenders-count           | safetyenvironment | safety              | 0000010111          | SSDS K4204、2023、47県。千人比は別calculated metricで扱う             | pending |
+| high     | average-job-tenure                 | laborwage         | labor-wages         | 0003426933          | 賃金構造基本統計 cat04=01,cat03=01、47県                              | pending |
+| high     | nursing-home-count                 | socialsecurity    | aging-society       | 0000010210          | SSDS #J022011、2023、既存4指標と非重複                                | pending |
+| high     | paid-nursing-home-count            | socialsecurity    | aging-society       | 0000010210          | SSDS #J02204、2023、47県                                              | pending |
+| high     | life-time-use-series               | laborwage         | living-housing      | 0000010113          | SSDS生活時間。sleep/housework/mealsのcdCat01確定後に個別keyへ分割する | pending |
+| medium   | beef-cattle-count                  | agriculture       | local-economy       | 0004041846          | 畜産統計2024。都道府県がcat01=1013-1059に入るためarea読替が必要       | pending |
+| medium   | pig-count                          | agriculture       | local-economy       | 0004041860          | 畜産統計2024。通常area軸ではなくcat01読替が必要                       | pending |
+| medium   | household-head-average-age         | economy           | consumer-prices     | 0003348239          | 家計調査2024、県庁所在市52件。都道府県値と誤認しない表示設計が必要    | pending |
+| medium   | fishery-species-catch-salmon       | agriculture       | fishery-marine      | 0003425253          | さけ・ます類、2019、cat01=100-150。鮮度を明示する                     | pending |
+| medium   | fishery-species-harvest-nori       | agriculture       | fishery-marine      | 0003425258          | のり類養殖収獲量、2019。既存魚種テーマの欠測                          | pending |
+| medium   | fishery-species-harvest-oyster     | agriculture       | fishery-marine      | 0003425257          | かき類養殖収獲量、2019。既存魚種テーマの欠測                          | pending |
+| medium   | housing-seismic-retrofit-count     | construction      | safety              | 0004025509          | 住宅土地統計2023 cat03=15。「耐震化率」ではなく改修実施戸数として扱う | pending |
 
 **投入手順** (完了した行は削除する):
 
@@ -1789,6 +1896,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 5. 完了した行は削除する。
 
 ### [CPI-NATIONAL-EMPTY-STATE-01] テーマページで全国選択時に cpi-profile / cpi-heatmap が無言で消える
+
 タグ: [種類:改善] [起票:2026-08-04]
 
 テーマページで全国を選ぶと cpi-profile / cpi-heatmap が無言で消える。CPI 地域差指数表は全国行を持たず `prefCode=00000` で 0 件 → null 返却。「全国平均=100 の指数なので全国は表示しない」旨の案内を出すか、全国選択時はカード自体を隠すか要判断
@@ -1796,6 +1904,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 根拠・再現条件: `/themes/consumer-prices` を全国表示。`fetch-db-chart-data.ts` の `fetchCpiProfileData` / `fetchCpiHeatmapData` は `isNational` を受け取らず cdArea=00000 をそのまま渡す
 
 ### [NATIONAL-AVG-FALLBACK-LABEL-01] 全国行を持たない 5 チャートの 47 県平均フォールバックが無表記
+
 タグ: [種類:改善] [起票:2026-08-04]
 
 全国行を持たない 5 チャートは 47 県平均へフォールバックする (labor-wages 1 / ports 4)。KPI は「（全国平均）」と明示するがチャート本体は無表記。凡例か注記で出すか要判断
@@ -1803,20 +1912,23 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 根拠・再現条件: `node .claude/scripts/audit/theme-chart-live-audit.mjs` の `[no-national]` warn
 
 ### [THEME-KPI-DECIMAL-PRECISION-01] KPI カードの小数丸めで合計特殊出生率 1.15 が 1.2 になる
+
 タグ: [種類:不具合] [起票:2026-08-04]
 
 KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の全国値 **1.15 が「1.2」** と出る。0.05 の差でも出生率では意味が変わる。指標の unit / 桁数に応じた表示桁の解決が要る (`.claude/rules/blog-svg-chart-standards.md` の `resolveValuePrecision` と同じ考え方)
 
 根拠・再現条件: localhost `/themes/population-dynamics` の KPI「合計特殊出生率 1.2 （人）」。R2 `app/stats/total-fertility-rate` の全国値は 1.15
 
-### [ESLINT-FEATURE-DEEP-IMPORT-01] features/*/components で no-restricted-imports が実質無効
+### [ESLINT-FEATURE-DEEP-IMPORT-01] features/\*/components で no-restricted-imports が実質無効
+
 タグ: [種類:改善] [起票:2026-08-04]
 
-**eslint の `no-restricted-imports` が features/*/components 配下で実質無効**。`eslint.config.mjs:67` が `@/features/*/lib/*` 等の deep import を禁止しているが、同 174-221 の「ドメイン内Barrel強制」ブロックが `src/features/*/components/**` に対しルールを丸ごと上書きするため、**component ファイルからは他 feature の内部実装を自由に deep import できてしまう**。今回 1 件是正したが、他にも同型が残っている可能性。上書きブロックに元の patterns をマージすべきか要判断 (影響が全 feature に及ぶので別タスク)
+**eslint の `no-restricted-imports` が features/\*/components 配下で実質無効**。`eslint.config.mjs:67` が `@/features/*/lib/*` 等の deep import を禁止しているが、同 174-221 の「ドメイン内Barrel強制」ブロックが `src/features/*/components/**` に対しルールを丸ごと上書きするため、**component ファイルからは他 feature の内部実装を自由に deep import できてしまう**。今回 1 件是正したが、他にも同型が残っている可能性。上書きブロックに元の patterns をマージすべきか要判断 (影響が全 feature に及ぶので別タスク)
 
 根拠・再現条件: `eslint.config.mjs` の 61-79 と 174-221 を読む。実例: `CommuteFlowSectionClient.tsx` が `@/features/migration-flow/lib/useFlowFocusPrefecture` を import しても lint が通っていた (2026-08-04 是正済)
 
 ### [SMOKE-OGIMAGE-RETRY-01] post-deploy smoke が og:image の単発タイムアウトで赤くなる
+
 タグ: [種類:改善] [起票:2026-08-04]
 
 **post-deploy smoke が単発で赤くなることがある**。本番相手に 5 回連続実行して 1 回だけ `1/16 failed` になり、直後の 3 回は 16/16 緑。og:image の実 fetch (`--max-time 20`) がタイムアウトしたか cold start の 5xx が疑わしいが特定できていない。デプロイの gate なので、単発の揺れで赤くなると gate 自体が信用されなくなる。ページ本体と同じく og:image チェックにも短い再試行を入れるか要判断 (chart-provenance は最大 3 回再試行の前例あり)
@@ -1824,6 +1936,7 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 根拠・再現条件: `bash .github/scripts/smoke-test-routes.sh https://stats47.jp` を 5 回。1 回だけ失敗、再現せず
 
 ### [MIGRATION-FLOW-WEEKLY-REOPEN-01] migration-flow-weekly の週次 IG 投稿が停止したまま (設計欠陥未修正)
+
 タグ: [種類:改善] [起票:2026-08-16]
 
 **migration-flow-weekly の schedule を停止したまま (投稿の設計欠陥は未修正)**。`post-instagram.ts:86-88` が gitignored な `.local/r2/sns/<slug>/instagram` を existsSync で要求するため、clean checkout の CI では構造的に必ず失敗する (2026-05-25 から 12 回連続失敗)。8/16 に schedule を削除して無言の失敗を止めたが、**週次の県ローテーション IG 投稿そのものが止まったまま**。再開するなら post-instagram-scheduled.yml と同じ「公開 R2 URL を IG Graph API に渡す」経路へ寄せるか、post step 前に R2 から pull する step を足す
@@ -1831,6 +1944,7 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 根拠・再現条件: `.github/workflows/migration-flow-weekly.yml` (冒頭コメントに経緯)。成功している手本 = `.claude/scripts/instagram/post-from-schedule.cjs` の `PUBLIC_R2_BASE` 経由
 
 ### [MUSEUM-COUNT-AXIS-01] 博物館系 3 指標が類似施設を除外して実在県を 0 にしている
+
 タグ: [種類:不具合] [起票:2026-08-05]
 
 **博物館系 3 指標が「類似施設」を除外して実在県を 0 にしている**。`botanical-garden-count` は登録+相当の 10 館のみ集計だが同調査の博物館類似施設に植物園が 107 館・33 県ある。`zoo-count` は 35 館のみで類似施設の動物園 59 館・26 県を除外 (大分等が 0 表示)、`aquarium-count` は 38 館のみで類似施設 46 館・28 県を除外。cdCat の集計軸を見直すか、指標名を「登録博物館のみ」に改めるかの判断が要る
@@ -1838,6 +1952,7 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 根拠・再現条件: e-Stat 0003348811。値分布の検証キャンペーンで検出。未検証キューに残置
 
 ### [HEALTH-CHECKUP-RATE-RETIRE-01] health-checkup-rate-lifestyle-diseases が 2017 年以降 全国値 0%
+
 タグ: [種類:不具合] [起票:2026-08-05]
 
 **`health-checkup-rate-lifestyle-diseases` は全国値も 2017 年以降 0.0%**。1997 年と 2008 年に定義・実施主体が変わり、いまの系列は保健所実施分のみ = 実際の受診率と別軸。ランキングとして意味を成していないので、代替出典 (特定健診の法定報告等) への差し替えか退役かの判断が要る
@@ -1845,6 +1960,7 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 根拠・再現条件: e-Stat 0000010209。未検証キューに残置
 
 ### [PORT-PASSENGERS-MISSING-COASTAL-01] port-passengers-total から沿岸 13 県が消えている
+
 タグ: [種類:不具合] [起票:2026-08-05]
 
 **`port-passengers-total` から沿岸 13 県が消えている**。欠落 21 県のうち新潟・千葉・宮城・熊本等 13 県は沿岸県。新潟は 2009-19 年に約 300 万人を計上していたが 2020 年以降消失し、2021 年は 6 行しかない。他の港湾系 (39 行) と件数が違う理由が説明できず、集計軸か調査対象の変更を疑う
@@ -1854,6 +1970,7 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [DISPATCH-FRESHNESS-PRECISION-01] main 反映順チェックの入力パス判定を workflow ごとに絞る
+
 タグ: [起票:2026-08-17]
 
 - **owner**: Claude Code
@@ -1875,6 +1992,7 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 - 関連: `.claude/scripts/lib/check-dispatch-freshness.cjs` / `.claude/skills/db/sync-snapshots/SKILL.md`
 
 ### [BUILD-PERF-PHASE34] CI cacheと型検査重複の実験
+
 タグ: [起票:2026-07-12]
 
 - **owner**: Claude Code
@@ -1882,12 +2000,14 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 - **停止条件**: restore/save込みで短縮しない、cacheが過大、または検査を弱める場合は採用しない。
 
 ### [AREA-DATABOOK-REMAINDER] 県データブックの小粒残件
+
 タグ: [起票:2026-07-19]
 
 - **owner**: Claude Code
 - **trigger**: 既存47県版の利用実測で、欠損セクションが回遊または検索の阻害要因と確認できたとき。
 
 ### [MULTICHANNEL-CONTENT-PRODUCT-01] 商品チャネル横断化
+
 タグ: [起票:2026-07-18]
 
 - **owner**: Claude Code
@@ -1895,18 +2015,21 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 - **正典**: `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md`
 
 ### [GIS-CROSS-CONTENT-BACKLOG] 統計×GISコンテンツ
+
 タグ: [起票:2026-07-04]
 
 - **owner**: Claude Code
 - **trigger**: 既存GIS素材と検索需要が一致する単一pilotを選べたとき。
 
 ### [CHART-DARKMODE-BATCH-01] 既存ブログSVGのdark mode対応
+
 タグ: [起票:2026-05-28]
 
 - **owner**: Claude Code
 - **trigger**: chart auditでdark mode欠損が主要品質問題として再浮上し、CTR施策より優先すると判断したとき。
 
 ### [AUTO-ALERT-CLOSE-01] 古い自動アラートIssueの整理
+
 タグ: [起票:2026-05-16]
 
 - **owner**: Claude Code
@@ -1914,33 +2037,35 @@ KPI カードの小数表示が 1 桁に丸められ、合計特殊出生率の�
 - **制約**: 同種alertが直近3日継続中ならcloseしない。dry-runを先に行う。
 
 ### [CLOUDFLARE-INVOICE-01] 請求書PDFと予測値の突合
+
 タグ: [起票:2026-05-16]
 
 - **owner**: Claude Code
 - **trigger**: 手動精算漏れが再発するか、請求額が継続して予測から10%以上ずれるとき。
 
 ### [CODEQL-JS-BACKLOG-01] CodeQL JS/TS の既存 alert 9 件
+
 タグ: [起票:2026-07-30]
 
 - **owner**: Claude Code
 - **背景**: 2026-07-30 に `security-scan.yml` へ SARIF ダンプを配線して初めて中身が見えた (それまでは件数だけが見え、Security タブと code-scanning API はどちらも一部セッションから 403 で読めなかった)。ブランチ全体で当初 12 件。同日に 3 件を是正 (`js/incomplete-html-attribute-sanitization` × 2 = EPUB を壊す実バグ、`js/identity-replacement` × 1 = 死んだ置換)。残り 9 件が本項目。**CodeQL は required check ではないので merge はブロックしない** (`mergeable_state: unstable`)。
 - **★9 件すべてこの PR の差分外** (`main` と同一)。CodeQL が一部を「新規」と報告するのは自身の注記どおり "changes were too large" による誤帰属。件数は `node .github/scripts/dump-codeql-sarif.mjs sarif-results` が Security Scan job の summary に出す
 
-| severity | rule | file:line | 評価 |
-|---|---|---|---|
-| 9.1 × 4 | `js/request-forgery` | `packages/gis/src/geoshape/adapters/{fetch-topology-from-r2.ts:59,geoshape-api-client.ts:22}` / `packages/gis/src/mlit/adapters/fetch-mlit-from-r2.ts:56` / `packages/r2-storage/src/lib/operations/fetch.ts:61` | 未評価。R2 key / dataId を URL に組む経路。key の形を検証 (`/^[a-z0-9/_.-]+$/` 等) して塞げる見込み |
-| 7.5 × 4 | `js/path-injection` | `packages/gis/src/geoshape/services/geoshape-service.ts:54,55,81,82` | 未評価。areaCode 由来のパス結合と思われる。コード形式の検証で塞げる見込み |
-| 6.3 | `js/shell-command-injection-from-environment` | `apps/admin/lib/server/jobs.ts:68` | **実危険度は低い**。gallery は localhost 専用 (127.0.0.1 固定)。taint 源は `process.env.STATS47_PROJECT_ROOT` で、これを設定できる者はすでにローカルでコードを実行できる。`regenerate()` は `kind` をホワイトリスト・`keys` を `/^[a-z0-9,_-]+$/` で検証済み |
+| severity | rule                                          | file:line                                                                                                                                                                                                        | 評価                                                                                                                                                                                                                                                         |
+| -------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 9.1 × 4  | `js/request-forgery`                          | `packages/gis/src/geoshape/adapters/{fetch-topology-from-r2.ts:59,geoshape-api-client.ts:22}` / `packages/gis/src/mlit/adapters/fetch-mlit-from-r2.ts:56` / `packages/r2-storage/src/lib/operations/fetch.ts:61` | 未評価。R2 key / dataId を URL に組む経路。key の形を検証 (`/^[a-z0-9/_.-]+$/` 等) して塞げる見込み                                                                                                                                                          |
+| 7.5 × 4  | `js/path-injection`                           | `packages/gis/src/geoshape/services/geoshape-service.ts:54,55,81,82`                                                                                                                                             | 未評価。areaCode 由来のパス結合と思われる。コード形式の検証で塞げる見込み                                                                                                                                                                                    |
+| 6.3      | `js/shell-command-injection-from-environment` | `apps/admin/lib/server/jobs.ts:68`                                                                                                                                                                               | **実危険度は低い**。gallery は localhost 専用 (127.0.0.1 固定)。taint 源は `process.env.STATS47_PROJECT_ROOT` で、これを設定できる者はすでにローカルでコードを実行できる。`regenerate()` は `kind` をホワイトリスト・`keys` を `/^[a-z0-9,_-]+$/` で検証済み |
 
 #### 是正済 (2026-08-17・9 件中 7 件)
 
 `prefCode` の書式検証 (`/^\d{2}$/`) を **補間する直前の 2 箇所**に置いた。`request-forgery` 3 件と
 `path-injection` 4 件はどちらもこの経路を指しており同時に塞がる。
 
-| 置いた場所 | 直前の状態 |
-|---|---|
-| `packages/gis/src/mlit/utils/mlit-r2-path.ts` | **一切検証せず** R2 key とローカルのファイルパスへ補間していた = **唯一の実バグ** |
-| `packages/gis/src/geoshape/utils/geoshape-url-builder.ts` | `extractPrefectureCode` (= `substring(0,2)` のみ) の戻り値を無検証で補間 |
+| 置いた場所                                                | 直前の状態                                                                        |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `packages/gis/src/mlit/utils/mlit-r2-path.ts`             | **一切検証せず** R2 key とローカルのファイルパスへ補間していた = **唯一の実バグ** |
+| `packages/gis/src/geoshape/utils/geoshape-url-builder.ts` | `extractPrefectureCode` (= `substring(0,2)` のみ) の戻り値を無検証で補間          |
 
 検証器は `packages/gis/src/utils/prefecture-code.ts` (`isValidPrefectureCode` / `assertPrefectureCode`)。
 **`packages/area` の `extractPrefectureCode` は変えていない** — 5 桁の市区町村コードから県コードを
@@ -1968,6 +2093,7 @@ gis 123 件 + `apps/web` type-check green。両呼び出し元 (`geoshape-servic
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
 ### [THEME-SIDENAV-MOBILE-DOM-01] ThemeSideNav が xl 未満でも DOM に残り転送量を食う
+
 タグ: [種類:改善] [起票:2026-08-04]
 
 テーマ左レール (`ThemeSideNav`) は xl 未満で `display:none` のまま DOM に残る (PageShell の `hidden xl:block`)。表示はされないがモバイルでもテーマ 22 リンクが HTML に含まれる。既存の右レールと同じ挙動なので緊急ではないが、テーマページは全 22 ページで効くため転送量を測って判断したい
@@ -1975,6 +2101,7 @@ gis 123 件 + `apps/web` type-check green。両呼び出し元 (`geoshape-servic
 根拠・再現条件: `/themes/population-dynamics` を 375px で DOM 検査 (`nav[aria-label="テーマと地域"]` の rect width = 0 だがリンク 22 件が存在)
 
 ### [VALUE-DISTRIBUTION-UNVERIFIED-01] 値分布の未検証 2 件 (幼稚園費・鉄道投資) の裏取り
+
 タグ: [種類:改善] [起票:2026-08-05]
 
 **値分布の未検証 2 件は根拠を得られず保留**。`kindergarten-expenses-prefecture` は全国計=47県合計で欠損は無いが、非ゼロ 15 県 (長野 116 億等) が県立園費なのか私学助成なのか特定できず 0 の性質が不明。`general-project-investment-railway` は非ゼロ 25 府県が整備新幹線等と対応するものの静岡・広島・沖縄の 0 を裏付ける一次情報が未確認。推測で profile を書かず unverified のまま baseline に残している
@@ -1984,6 +2111,7 @@ gis 123 件 + `apps/web` type-check green。両呼び出し元 (`geoshape-servic
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
 
 ### [GIT-HISTORY-SECRET-PURGE-01] Git履歴のAPIキーを扱う方針決定
+
 タグ: [実行:対話] [起票:2026-07-11]
 
 - **owner**: uruhayato373
@@ -1992,6 +2120,7 @@ gis 123 件 + `apps/web` type-check green。両呼び出し元 (`geoshape-servic
 - **禁止**: owner承認なしにfilter-repo、force push、branch削除を行わない。
 
 ### [SCRIPT-ORPHAN-DELETE-01] 役目が終わった orphan スクリプト 6 本の削除可否
+
 タグ: [実行:対話] [起票:2026-08-17]
 
 - **owner**: uruhayato373 (削除可否はオーナー判断)
@@ -2014,12 +2143,12 @@ gis 123 件 + `apps/web` type-check green。両呼び出し元 (`geoshape-servic
 
 **(b) 生きているバックログに紐づく 13 本** → 消さない。紐づけ先が閉じるまで資産として残す
 
-| 紐づけ先 | スクリプト |
-|---|---|
-| `MUNICIPALITY-SCOPE-SEPARATION-01` (旧 CITY-PAGES-REVIVAL を 2026-08-21 に統合) | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs` |
-| `BLOG-SVG-LINEAGE-RESTORE-01` (in-progress) | `blog/restore-{findings,ranking,scatter}-from-svg.mjs` |
-| `NOTE-MAGAZINE-REORG-01` (in-progress) | `note/{note-magazine,fetch-note-magazines,fetch-magazine-members}.mjs` / `note/probe-{create-form,magazine-create,magazine-ui}.mjs` |
-| `CHART-LINEAGE-RESIDUAL-01` (pending) | `blog/resolve-scatter-axes.mjs` |
+| 紐づけ先                                                                        | スクリプト                                                                                                                          |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `MUNICIPALITY-SCOPE-SEPARATION-01` (旧 CITY-PAGES-REVIVAL を 2026-08-21 に統合) | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs`            |
+| `BLOG-SVG-LINEAGE-RESTORE-01` (in-progress)                                     | `blog/restore-{findings,ranking,scatter}-from-svg.mjs`                                                                              |
+| `NOTE-MAGAZINE-REORG-01` (in-progress)                                          | `note/{note-magazine,fetch-note-magazines,fetch-magazine-members}.mjs` / `note/probe-{create-form,magazine-create,magazine-ui}.mjs` |
+| `CHART-LINEAGE-RESIDUAL-01` (pending)                                           | `blog/resolve-scatter-axes.mjs`                                                                                                     |
 
 `restore-*-from-svg.mjs` は名前に反して**逆復元をしない** — 旧 SVG の表示値を
 「SSOT が正しいことの照合先」としてのみ使い、≥0.95 一致したときだけ SSOT から再生成する
@@ -2039,9 +2168,11 @@ DOM が変わりやすく、実機 probe なしでは実装を直せない (`kdp
 **なぜ orphan 警告を 0 にしないか**: (b) の 13 本は「今は呼ばれていないが消してはいけない」もので、
 これを 0 にするには allowlist を作るか無理に参照を生やすことになる。どちらも実態を曇らせる。
 warning のまま**理由付きで残す**のが正しい形で、これが本エントリの成果物。
+
 - **完了条件**: orphan 警告が 0 になるか、残るものが「なぜ残すか」を添えて記録されている。
 
 ### [T2-RANKING-NORM-SSG-01] ranking正規化派生のURL方針
+
 タグ: [実行:対話] [起票:2026-05-25]
 
 - **owner**: Claude Code
@@ -2049,6 +2180,7 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
 - **完了条件**: URL policy、canonical、sitemap、既存queryの扱いを先に決め、実装案を混在させない。
 
 ### [MIGRATION-FLOW-IG-01] migration-flow の IG 投稿が 3 か月止まっている
+
 タグ: [実行:対話] [起票:2026-08-13]
 
 - **owner**: uruhayato373 (継続可否の判断)
@@ -2066,6 +2198,7 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
 - **正典**: `.claude/rules/sns-content-standards.md` §5.5 (R2 素材保持ポリシー)
 
 ### [KDP-PUBLISH-REMAINING-01] KDP 残り 22 冊を出すか出版をやめるかの方針決定
+
 タグ: [種類:意思決定] [実行:対話] [起票:2026-08-16]
 
 **KDP 残り 22 冊の出版が手動待ちになった**。日次 cron (`com.stats47.kdp-resume-daily`) を停止し KDP 出品は手動のみへ確定したため (規約 `.claude/rules/coconala-product-standards.md` §8)、`status != listed` の 22 冊は誰かが `/kdp-publish` を回さない限り進まない。1 冊ずつ承認して出すか、出版自体をやめるかの方針が要る

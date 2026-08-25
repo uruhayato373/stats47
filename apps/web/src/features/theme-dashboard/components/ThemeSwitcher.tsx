@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
-import { cn } from "@stats47/components";
+import { cn } from '@stats47/components';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@stats47/components/atoms/ui/select";
+} from '@stats47/components/atoms/ui/select';
 
-import { ALL_THEMES } from "../config/all-themes";
-import { isAreaTheme } from "../config/area-theme-slugs";
-import { themeHref } from "../config/theme-urls";
-import { THEME_PREFECTURE_SET_VALUE } from "../lib/theme-prefecture-preference";
+import { ALL_THEMES } from '../config/all-themes';
+import { isAreaTheme } from '../config/area-theme-slugs';
+import { themeHref } from '../config/theme-urls';
+import { THEME_PREFECTURE_SET_VALUE } from '../lib/theme-prefecture-preference';
 
-import { useThemePrefecture } from "./ThemePrefectureContext";
+import { useThemePrefecture } from './ThemePrefectureContext';
 
 export interface ThemeSwitcherOption {
   themeKey: string;
@@ -35,7 +35,7 @@ export interface ThemeSwitcherOption {
  */
 export function buildThemeSwitcherOptions(
   areaContext?: { areaCode: string },
-  selectedPrefectureCode?: string | null,
+  selectedPrefectureCode?: string | null
 ): ThemeSwitcherOption[] {
   const themes = areaContext
     ? ALL_THEMES.filter((t) => isAreaTheme(t.themeKey))
@@ -70,7 +70,7 @@ interface Props {
  * テーマ詳細ページ上部のコンパクトなテーマ切替コントロール。
  *
  * **992px 未満 (左レール非表示) 専用の狭幅代替**。992px 以上ではテーマ切替は左レール
- * `ThemeSideNav` が担うので、呼び出し側が `PAGE_SHELL_NARROW_ONLY_CLASS` で包む
+ * `ThemeSideNav` が担うので、呼び出し側が `LEFT_RAIL_NARROW_ONLY_CLASS` で包む
  * (`ThemePageLayout` / bespoke な `/themes/local-finance`)。
  *
  * 経緯: 2026-06 に常設左レール `ThemeSidebar` を廃止して本コンポーネントが唯一の切替 UI に
@@ -80,24 +80,28 @@ interface Props {
  * 遷移は `@stats47/components` の `Select` + `useRouter().push()`。現在値は props を正とし
  * ローカル state で二重管理しない。
  */
-export function ThemeSwitcher({ currentThemeKey, areaContext, compact = false }: Props) {
+export function ThemeSwitcher({
+  currentThemeKey,
+  areaContext,
+  compact = false,
+}: Props) {
   const router = useRouter();
   const { hasProvider, selectedPrefectureCode } = useThemePrefecture();
   const options = buildThemeSwitcherOptions(
     areaContext,
-    hasProvider ? selectedPrefectureCode : undefined,
+    hasProvider ? selectedPrefectureCode : undefined
   );
 
   return (
     <div
       className={cn(
         compact
-          ? "min-w-0"
-          : "mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-border pb-3 text-sm",
+          ? 'min-w-0'
+          : 'mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-border pb-3 text-sm'
       )}
     >
       <span className="block shrink-0 text-xs font-medium text-muted-foreground">
-        {compact ? "テーマ" : "テーマを切り替える"}
+        {compact ? 'テーマ' : 'テーマを切り替える'}
       </span>
       <Select
         value={currentThemeKey}
@@ -108,7 +112,7 @@ export function ThemeSwitcher({ currentThemeKey, areaContext, compact = false }:
         }}
       >
         <SelectTrigger
-          className={compact ? "mt-1 w-full" : "w-full sm:w-64"}
+          className={compact ? 'mt-1 w-full' : 'w-full sm:w-64'}
           aria-label="テーマを切り替える"
         >
           <SelectValue />

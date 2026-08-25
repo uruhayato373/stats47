@@ -57,6 +57,7 @@ export function CommuteFlowSectionClient({ initialData }: Props) {
       footer={
         <ChartFooter
           source="国勢調査 従業地・通学地集計"
+          sourceLinks={[{ label: "国勢調査", url: "/survey/census" }]}
           rankingLink="/ranking/day-time-population-ratio"
           rankingLabel="ランキングを見る"
         />

@@ -22,12 +22,20 @@ export function DonutChart({
     centerText,
     colors = schemeTableau10,
     title,
+    unit = "",
     isLoading = false,
     className,
     onNodeClick,
 }: DonutChartProps) {
     const svgRef = useRef<SVGSVGElement>(null);
     const { showTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
+    const total = sum(data, (item) => item.value);
+    const accessibleLabel = [
+        title ? `ドーナツグラフ「${title}」` : "ドーナツグラフ",
+        data.length > 0 ? `内訳: ${data.map((item) => item.name).join("、")}` : "データなし",
+        data.length > 0 ? `合計: ${total.toLocaleString()}${unit}` : undefined,
+        centerText ? `中央表示: ${centerText}` : undefined,
+    ].filter(Boolean).join("。");
 
     useEffect(() => {
         if (!svgRef.current || data.length === 0) return;
@@ -134,6 +142,8 @@ export function DonutChart({
                     viewBox={`0 0 ${width} ${height}`}
                     className="w-full h-auto"
                     style={{ maxWidth: Math.min(width, height) }}
+                    role="img"
+                    aria-label={accessibleLabel}
                 />
                 {isLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-background/50">

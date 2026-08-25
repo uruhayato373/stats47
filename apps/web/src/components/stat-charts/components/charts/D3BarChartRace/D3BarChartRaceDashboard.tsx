@@ -50,6 +50,7 @@ export async function D3BarChartRaceDashboard({
         <ChartFooter
           source={common.sourceName ?? undefined}
           sourceLink={common.sourceLink}
+          sourceLinks={common.sourceLinks}
           rankingLink={common.rankingLink}
         />
       }

@@ -64,6 +64,11 @@ export const REAL_INCOME_SET: IndicatorSet = {
       "rankingKey": "private-rent-consumption-expenditure",
       "shortLabel": "家賃支出",
       "role": "context"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-food",
+      "shortLabel": "消費者物価地域差指数",
+      "role": "context"
     }
   ],
   "keywords": [

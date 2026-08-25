@@ -69,30 +69,31 @@ describe("toThemeConfig", () => {
 /**
  * population-dynamics の指標カード枚数。
  *
- * ★2026-08-04 に 10 → 4 へ削減した。削減の理由は「下のチャートと同じ事実を二度見せない」
- * ことで、カタログの role を context に落として実現している。role は生成物 (IndicatorSet) 経由で
- * ここに効くため、カタログ編集や再生成の巻き戻しで黙って 10 枚に戻りうる。ここで枚数と
+ * ★2026-08-25 のストーリー再編で「結果→自然増減」を担う2指標へ削減した。
+ * 下の要因チャートと同じ事実を二度見せず、人口増減率を入口にするため、カタログの role を
+ * context に落として実現している。role は生成物 (IndicatorSet) 経由でここに効くため、
+ * カタログ編集や再生成の巻き戻しで黙って枚数が戻りうる。ここで枚数と
  * 顔ぶれを固定する。増減させたいときはこのテストを意図的に更新すること。
  */
 describe("population-dynamics の指標カード", () => {
-  it("role≠context は 4 指標 (総人口 / 出生率 / 転入超過 / 高齢化)", () => {
+  it("role≠context は 2 指標 (人口増減率 / 自然増減率)", () => {
     const config = toThemeConfig(POPULATION_DYNAMICS_SET);
 
     expect(config.tabIndicators.map((t) => t.rankingKey)).toEqual([
-      "total-population",
-      "total-fertility-rate",
-      "moving-in-excess-rate",
-      "ratio-65-plus",
+      "population-growth-rate",
+      "natural-increase-rate",
     ]);
   });
 
-  it("チャートと重複する 6 指標は context に落ちている", () => {
+  it("要因チャート・人口構造と重複する 8 指標は context に落ちている", () => {
     const config = toThemeConfig(POPULATION_DYNAMICS_SET);
     const shown = new Set(config.tabIndicators.map((t) => t.rankingKey));
 
     for (const key of [
-      "population-growth-rate",
-      "natural-increase-rate",
+      "total-population",
+      "total-fertility-rate",
+      "moving-in-excess-rate",
+      "ratio-65-plus",
       "crude-birth-rate",
       "crude-death-rate",
       "social-increase-rate",

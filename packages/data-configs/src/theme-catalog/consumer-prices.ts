@@ -80,9 +80,22 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
           "00120"
         ]
       },
+      "relatedRankingKeys": [
+        "consumer-price-difference-index-overall",
+        "consumer-price-difference-index-overall-excl-rent",
+        "consumer-price-difference-index-food",
+        "consumer-price-difference-index-housing",
+        "consumer-price-difference-index-utilities",
+        "consumer-price-difference-index-education",
+        "consumer-price-difference-index-culture-recreation",
+        "consumer-price-difference-index-transport-communication",
+        "consumer-price-difference-index-healthcare",
+        "consumer-price-difference-index-clothing-footwear",
+        "consumer-price-difference-index-furniture-household",
+        "consumer-price-difference-index-miscellaneous"
+      ],
       "sourceName": "小売物価統計調査（構造編）",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -120,9 +133,13 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
           "population"
         ]
       },
+      "relatedRankingKeys": [
+        "consumer-price-difference-index-food",
+        "consumer-price-difference-index-housing",
+        "consumer-price-difference-index-utilities"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -141,9 +158,22 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
           "00120"
         ]
       },
+      "relatedRankingKeys": [
+        "consumer-price-difference-index-overall",
+        "consumer-price-difference-index-overall-excl-rent",
+        "consumer-price-difference-index-food",
+        "consumer-price-difference-index-housing",
+        "consumer-price-difference-index-utilities",
+        "consumer-price-difference-index-education",
+        "consumer-price-difference-index-culture-recreation",
+        "consumer-price-difference-index-transport-communication",
+        "consumer-price-difference-index-healthcare",
+        "consumer-price-difference-index-clothing-footwear",
+        "consumer-price-difference-index-furniture-household",
+        "consumer-price-difference-index-miscellaneous"
+      ],
       "sourceName": "小売物価統計調査（構造編）",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -175,7 +205,6 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
       },
       "sourceName": "経済財政白書 (令和7年度版) / 男女共同参画白書 (令和7年版) / 小売物価統計調査 — 総務省統計局",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -211,7 +240,6 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
       },
       "sourceName": "経済財政白書 (令和7年度版) / GX 推進戦略 — 経済産業省 / 持続可能な物流の実現に向けた検討会 (国土交通省) / 国際収支統計 — 財務省",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -224,6 +252,7 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
       "componentType": "markdown-section",
       "title": "よくある質問",
       "componentProps": {
+        "displayMode": "faq",
         "subtitle": "消費者物価について読者が気になる 7 問",
         "markdown": "### Q1: 消費者物価地域差指数って何?\n\n消費者物価地域差指数とは、全国平均を100として、各都道府県の物価水準を比較した指標。2023年時点で東京都が104.5で最も高く、鹿児島県が95.9で最も低い。38府県が全国平均を下回り、地域間で約9ポイントの差がある。住居・食料・光熱水道など費目別寄与度を見ることで、地域差の構造が読み解ける。(出典: 小売物価統計調査)\n\n### Q2: なぜ東京の物価が高いの?\n\n首都圏（特に東京都）の物価を押し上げている最大要因は住居費である。都市部への人口流入による需要増と、地価・建築費の高騰が家賃水準を押し上げ、家賃の差だけで全国平均との差の大半が説明できる構造となっている。食料品や交通費の差は比較的小さい。(出典: 経済財政白書 令和7年度版)\n\n### Q3: 沖縄や北海道で物価が高い理由は?\n\n沖縄県では離島ゆえの輸送コストにより食料品価格が、北海道・東北・中国地方では寒冷地特有の暖房需要やインフラ維持コストにより光熱・水道費が、それぞれ全国平均より高くなっている。総合指数だけでなく費目別寄与度を見ることで、地域固有の物価構造が把握できる。(出典: 経済財政白書 令和7年度版)\n\n### Q4: 現在の物価上昇率はどのくらい?\n\nCPI総合は2025年1月に前年同月比4.0%に達し、1991年以来となる「3年連続で前年比2%以上の上昇」局面にある。特に米類は2025年5月に前年比101.7%（2倍超）の上昇を記録した。輸入原材料費の上昇、円安、人手不足に伴う人件費の販売価格への転嫁が複合的に作用している。(出典: 経済財政白書 令和7年度版)\n\n### Q5: 賃金は物価上昇に追いついている?\n\n2024年度の名目賃金（現金給与総額）は前年度比3.0%増と、33年ぶりの高い伸びとなった。しかし物価上昇率が同水準で進んだため、物価の影響を除いた実質賃金は0.0%の横ばいにとどまっている。政府は2029年度までに実質賃金1%程度の上昇を新たなノルムとして定着させることを目標としている。(出典: 経済財政白書 令和7年度版)\n\n### Q6: 物価高に対する政府の対策は?\n\n政府は「激変緩和対策事業」を通じて家計や企業の負担を軽減している。ガソリン等の燃料油価格の抑制に加え、電気・都市ガスについても使用量に応じた料金値引きを実施している。また、中小企業の労務費の適切な価格転嫁、地方交付税の増額（令和7年度補正予算で2,000億円増額交付）など、賃上げが定着する環境整備も並行して進めている。(出典: 経済財政白書 令和7年度版)\n\n### Q7: 家計はどんな節約行動をとっている?\n\n消費者は安価な店舗や品目への徹底した代替行動をとっている。スーパーより価格が低い傾向にあるドラッグストアでの食料品購入を増やし、牛肉や豚肉から安価な鶏肉へ切り替えたり、中古品を選択したりする動きが特に若年層で強まっている。統計上のCPIと家計が実際に支払う購入単価には乖離が生じている。(出典: 経済財政白書 令和7年度版)",
         "sources": [
@@ -243,7 +272,6 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
       },
       "sourceName": "経済財政白書 (令和7年度版) / 小売物価統計調査 — 総務省統計局 / 毎月勤労統計調査 — 厚生労働省",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

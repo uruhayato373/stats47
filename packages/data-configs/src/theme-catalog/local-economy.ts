@@ -36,7 +36,32 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "rankingKey": "fiscal-strength-index-prefecture",
       "shortLabel": "財政力指数",
       "role": "secondary"
-    }
+    },
+    {
+      "rankingKey": "employed-people-ratio-primary",
+      "shortLabel": "第1次産業就業者比率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "employed-people-ratio-secondary",
+      "shortLabel": "第2次産業就業者比率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "employed-people-ratio-tertiary",
+      "shortLabel": "第3次産業就業者比率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "disposable-income-worker-households",
+      "shortLabel": "可処分所得（二人以上の世帯のうち勤労者世帯）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "number-of-establishments-economic-census-basic-survey",
+      "shortLabel": "事業所数",
+      "role": "context"
+    },
   ],
   "charts": [
     {
@@ -64,9 +89,13 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
         ],
         "topN": 3
       },
+      "relatedRankingKeys": [
+        "employed-people-ratio-primary",
+        "employed-people-ratio-secondary",
+        "employed-people-ratio-tertiary"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -98,9 +127,12 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
           "count"
         ]
       },
+      "relatedRankingKeys": [
+        "disposable-income-worker-households",
+        "minimum-wage-by-region"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -140,9 +172,12 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
           "danger"
         ]
       },
+      "relatedRankingKeys": [
+        "active-job-opening-ratio",
+        "unemployment-rate"
+      ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -182,7 +217,6 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       },
       "sourceName": "経済財政白書 (令和7年版) / 中小企業白書 (2024年版) / 地方財政白書 (令和8年版) / 男女共同参画白書 (令和7年版) / 国土交通白書 2025",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -222,7 +256,6 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       },
       "sourceName": "経済財政白書 (令和7年版) / 中小企業白書 (2024年版) / 地方財政白書 (令和8年版) / 情報通信白書 (令和7年版) / 国土交通白書 2025",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -235,6 +268,7 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "componentType": "markdown-section",
       "title": "よくある質問",
       "componentProps": {
+        "displayMode": "faq",
         "subtitle": "地域経済について読者が気になる 7 問",
         "markdown": "### Q1: 「地域経済」とは何を指す?\n\n地域経済とは、個々の地方公共団体（都道府県・市区町村）が、自然条件・歴史・産業構造・人口規模に応じて営む経済活動の集合体を指す。地方政府は国内総生産（GDP）の10.8%（69.7兆円）を占める巨大な経済主体で、中央政府（4.6%）の約2.3倍の最終支出を行っている。住民の交通・買い物・医療福祉等の生活サービスを支える基盤である。(出典: 地方財政白書 令和8年版)\n\n### Q2: 「県民所得」と「GDP（県内総生産）」は何が違う?\n\nGDP（県内総生産）はその地域内で一定期間に生み出された付加価値の総額。県民所得はその地域の居住者が受け取った所得の総額（県外勤務分など地域外からの所得も含む）。日本全体の名目GDPは2024年度に初めて600兆円を突破（617.0兆円）して過去最高を更新した。ベッドタウン県ではGDPは小さくても県民所得は高くなる傾向があるため、両者は使い分けが必要である。(出典: 経済財政白書 令和7年版)\n\n### Q3: 東京一極集中はなぜ続く?\n\n最大の要因は若年層（10代後半〜20代）の進学と就職である。大学進学率は東京都77.6%に対し宮崎県は38.7%と倍以上の格差があり、進学を機に東京圏へ流入する。賃金格差も大きく、所定内給与（女性）は東京都33.8万円が全国最高。女性は男性に比べ東京圏に留まる傾向が強く、地方に残る「固定的な性別役割分担意識」や閉塞感から逃れたいという心理的要因も指摘されている。(出典: 男女共同参画白書 令和7年版)\n\n### Q4: 地方は有効求人倍率が高いのに、なぜ人が集まらない?\n\n労働需要（求人）と供給（求職者）の深刻なミスマッチが原因である。2024年の全職業計の有効求人倍率1.22倍に対し、保安職業6.91倍・建設採掘5.72倍と人手不足が極端な職種では、賃金上昇率が平均を下回っていることが多く、過酷な労働環境に見合う処遇が得られにくい。地方の中小企業は大企業に比べ価格転嫁・生産性向上の取組が遅れており、賃上げ原資を確保できていない実態が背景にある。(出典: 経済財政白書 令和7年版)\n\n### Q5: 「地方創生」と「地方創生2.0」は何が違う?\n\n2014年開始の従来「地方創生」は、人口減少の克服と東京一極集中の是正を掲げてきた。2024年10月始動の「地方創生2.0」は「地方こそ成長の主役」との発想に立ち、人口が減っても経済成長を維持する「適応策」を重視する。AI・自動運転等の新技術活用（地域社会DX）、自治体間の広域連携、若者・女性から選ばれる地域づくりに集中的に取り組む。令和8年度地方財政計画では「地域未来基金費」4,000億円が新規計上された。(出典: 情報通信白書 令和7年版)\n\n### Q6: 財政力指数が低い地域はどうなる?\n\n財政力指数（基準財政収入額÷基準財政需要額）が低い地域は、自前の税収だけでは行政サービスを賄えず、地方交付税（国からの財源移転）への依存度が高まる。人口1人当たり税収額は東京都（指数167.3）に対し長崎県（70.3）と約2.4倍の格差があり、法人関係二税では最大5.8倍。財政力が弱い自治体ではインフラ老朽化対応やデジタル人材確保が困難になる「供給制約」が顕在化している。(出典: 地方財政白書 令和8年版)\n\n### Q7: 地方経済を立て直す方法は?\n\n白書は3つの戦略を提唱する。(1)「稼ぐ力」の強化 — デジタル技術で人手不足を克服し、脱炭素投資（GX）でエネルギーの地産地消と新規産業を創出する。(2) 地域循環共生圏の構築 — 地域の自然資本（再エネ・森林等）を持続的に活用し、環境・経済・社会の課題を同時解決する事業を生む。(3) 人の流れの創出 — 移住者だけでなく継続的に地域に関わる「関係人口」を拡大し、令和8年度中に「ふるさと住民登録制度」を創設、二地域居住を促進する。(出典: 環境白書 令和7年版 / 国土交通白書 2025)",
         "sources": [
@@ -270,7 +304,6 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       },
       "sourceName": "経済財政白書 (令和7年版) / 中小企業白書 (2024年版) / 地方財政白書 (令和8年版) / 情報通信白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 国土交通白書 2025 / 環境白書 (令和7年版)",
       "sourceLink": null,
-      "rankingLink": null,
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -296,9 +329,11 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
           "population"
         ]
       },
+      "relatedRankingKeys": [
+        "number-of-establishments-economic-census-basic-survey"
+      ],
       "sourceName": "総務省・経済産業省「経済センサス」",
       "sourceLink": null,
-      "rankingLink": "/ranking/number-of-establishments-economic-census-basic-survey",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

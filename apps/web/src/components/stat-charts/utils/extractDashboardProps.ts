@@ -36,6 +36,7 @@ export function extractDashboardProps<T extends DashboardComponentType>(
     rankingLinkLabel: (config.rankingLinkLabel as string) ?? undefined,
     sourceLink: component.sourceLink ?? undefined,
     sourceName: component.sourceName ?? undefined,
+    sourceLinks: (config.sourceLinks as Array<{ label: string; url: string }>) ?? undefined,
     dataSource: component.dataSource ?? "estat",
     annotation: (config.annotation as string) ?? undefined,
     rankingLinks: (config.rankingLinks as Array<{ label: string; url: string }>) ?? undefined,

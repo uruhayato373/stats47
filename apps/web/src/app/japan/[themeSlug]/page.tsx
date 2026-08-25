@@ -134,6 +134,7 @@ export default async function JapanThemePage({ params }: { params: Params }) {
               footer={
                 <ChartFooter
                   source={`e-Stat 統計表 ${m.sourceId} (公式全国値)`}
+                  sourceLink={`https://www.e-stat.go.jp/dbview?sid=${m.sourceId}`}
                   rankingLink={`/ranking/${m.metricKey}`}
                   rankingLabel="都道府県ランキングを見る"
                 />

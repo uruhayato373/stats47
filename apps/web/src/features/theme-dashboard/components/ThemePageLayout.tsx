@@ -17,7 +17,7 @@ import {
   resolveThemeSurveyTaxonomy,
 } from '@stats47/ranking';
 
-import { PAGE_SHELL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
+import { LEFT_RAIL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
 import { THEME_HEROES } from '@/components/layout/page-heroes';
 import { StatisticsScopeNav } from '@/components/navigation';
 import { loadPageComponents } from '@/components/stat-charts/server';
@@ -92,11 +92,22 @@ export async function ThemePageLayout({
   const breadcrumbData = generateThemeBreadcrumbStructuredData(theme);
   const pageData = generateThemePageStructuredData(theme);
   const catalog = THEME_CATALOGS[theme.themeKey];
-  const catalogSurveyIds = catalog
-    ? resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY).surveys.map(
-        (survey) => survey.id
-      )
-    : [];
+  const catalogTaxonomy = catalog
+    ? resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY)
+    : null;
+  const catalogSurveyIds =
+    catalogTaxonomy?.surveys.map((survey) => survey.id) ?? [];
+  const chartSourceLinks = Object.fromEntries(
+    (catalogTaxonomy?.charts ?? [])
+      .filter((chart) => chart.surveys.length > 0)
+      .map((chart) => [
+        chart.componentKey,
+        chart.surveys.map((survey) => ({
+          label: survey.name,
+          url: `/survey/${survey.id}`,
+        })),
+      ])
+  );
   const indicatorSurveyIds = Object.values(data.indicatorDataMap).flatMap(
     ({ rankingItem }) =>
       (rankingItem.originalSurveys ?? []).map((survey) => survey.id)
@@ -214,7 +225,7 @@ export async function ThemePageLayout({
           </Breadcrumb>
 
           {!areaContext && (
-            <div className={PAGE_SHELL_NARROW_ONLY_CLASS}>
+            <div className={LEFT_RAIL_NARROW_ONLY_CLASS}>
               <StatisticsScopeNav current="prefectures" />
             </div>
           )}
@@ -222,13 +233,13 @@ export async function ThemePageLayout({
           {toolbar}
 
           {/* 992px 未満のテーマ・地域切替。広幅は左レール ThemeSideNav が担うので隠す。
-          ★境界は PageShell の共有クラスと必ず一致させること。
-          ずれると両方出る幅ができるため PAGE_SHELL_NARROW_ONLY_CLASS を使う。
+          ★境界は左レールの共有クラスと必ず一致させること。
+          ずれると両方出る幅ができるため LEFT_RAIL_NARROW_ONLY_CLASS を使う。
           areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
           <div
             role="group"
             aria-label="テーマと地域"
-            className={`mb-4 grid grid-cols-1 gap-2 border-y border-border py-3 sm:grid-cols-2 ${PAGE_SHELL_NARROW_ONLY_CLASS}`}
+            className={`mb-4 grid grid-cols-1 gap-2 border-y border-border py-3 sm:grid-cols-2 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
           >
             <div className="min-w-0">
               <ThemeSwitcher
@@ -255,7 +266,7 @@ export async function ThemePageLayout({
 
           <nav
             aria-label="このページの内容"
-            className={`mb-5 border-b border-border pb-3 ${PAGE_SHELL_NARROW_ONLY_CLASS}`}
+            className={`mb-5 border-b border-border pb-3 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
           >
             <div className="flex gap-x-5 gap-y-2 overflow-x-auto">
               {pageLinks.map((item) => (
@@ -391,6 +402,7 @@ export async function ThemePageLayout({
             indicatorDataMap={data.indicatorDataMap}
             topology={data.topology}
             pageCharts={pageCharts}
+            chartSourceLinks={chartSourceLinks}
             kpiDataByArea={kpiDataByArea}
             highlightAreaCode={areaContext?.areaCode}
           />
