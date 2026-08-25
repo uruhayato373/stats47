@@ -169,6 +169,11 @@ test("sync job の timeout は末尾 push を含む実測所要時間を上回�
   );
 });
 
+test("完全 DB レスの snapshot sync は旧 SQLite を取得しない", () => {
+  const yml = fs.readFileSync(path.join(ROOT, ".github/workflows/sync-snapshots.yml"), "utf8");
+  assert.doesNotMatch(yml, /db:pull|stats47\.sqlite|Pull build DB/);
+});
+
 test("旧ロジック (push より前で exit 1) を注入すると push が呼ばれなくなる = 検査が効いている", () => {
   const source = fs.readFileSync(RUN_SH, "utf8");
   const marker = '  echo "   → 成功した task の出力は下の push で反映してから exit 1 する (下記の理由)"';
