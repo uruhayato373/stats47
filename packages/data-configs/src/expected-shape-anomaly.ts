@@ -40,7 +40,7 @@ import type { ExpectedShapeAnomalyEntry } from "./shape-gate";
  * 壊れている (`known-broken`) エントリは 14 件のままで増えていない。
  */
 
-export const MAX_KNOWN_BROKEN = 14;
+export const MAX_KNOWN_BROKEN = 13;
 
 /**
  * 値の分布検査 (`VALUE_CHECKS`) 側の上限 (縮小専用ラチェット・2026-08-04 新設)。
@@ -170,15 +170,6 @@ export const EXPECTED_SHAPE_ANOMALY: readonly ExpectedShapeAnomalyEntry[] = [
     disposition: "known-broken",
     observedSeverity: 100.9,
     reason: "2026-07-30 実測: unit が % なのに最大値 100.9。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "convenience-store-count-commercial",
-    check: "duplicate-area-year",
-    disposition: "known-broken",
-    observedSeverity: 2,
-    reason: "2026-07-30 実測: 同一 (県, 年) に最大 2 行。分類軸の絞り忘れ。是正待ち",
     issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
     until: "2026-12-31",
   },
