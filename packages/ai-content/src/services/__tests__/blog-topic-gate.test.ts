@@ -67,11 +67,11 @@ describe("checkGroundedRows", () => {
 
 describe("findKnownBrokenChecks", () => {
   it("★allowlist に known-broken で載る key を検出する", () => {
-    // convenience-store-count-commercial は duplicate-area-year の known-broken (until 2026-12-31)。
+    // employment-insurance-daily-receipt-rate は percent-out-of-range の known-broken (until 2026-12-31)。
     // これが空になったら allowlist 側が変わったということなので、テストで気づけるようにする。
-    const hits = findKnownBrokenChecks("convenience-store-count-commercial", NOW);
+    const hits = findKnownBrokenChecks("employment-insurance-daily-receipt-rate", NOW);
     expect(hits.length).toBeGreaterThan(0);
-    expect(hits.join()).toMatch(/duplicate-area-year/);
+    expect(hits.join()).toMatch(/percent-out-of-range/);
   });
 
   it("allowlist に無い key は空", () => {
@@ -82,7 +82,7 @@ describe("findKnownBrokenChecks", () => {
     // until を過ぎると findExpectedShapeAnomaly が null を返すため hits も空になる。
     // 「期限切れ = 素通し」ではなく、接地データ側の検査 (checkGroundedRows) が実データで弾く。
     const far = new Date("2030-01-01T00:00:00Z");
-    expect(findKnownBrokenChecks("convenience-store-count-commercial", far)).toEqual([]);
+    expect(findKnownBrokenChecks("employment-insurance-daily-receipt-rate", far)).toEqual([]);
   });
 });
 
@@ -92,7 +92,7 @@ describe("gateTopicData", () => {
   });
 
   it("★known-broken な key はデータが綺麗に見えても書かない", () => {
-    const v = gateTopicData("convenience-store-count-commercial", healthyRows(), NOW);
+    const v = gateTopicData("employment-insurance-daily-receipt-rate", healthyRows(), NOW);
     expect(v.ok).toBe(false);
     expect(v.reasons.join()).toMatch(/既知の壊れ/);
   });
