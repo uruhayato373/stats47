@@ -78,6 +78,16 @@ describe("② 必須フィールドを壊すと error (陰性対照)", () => {
   it("★StatSeriesRef の未登録 metricKey を拒否する", () => {
     expect(parseStatSeriesRefs([{ metricKey: "not-in-metrics-registry" }])).toBeNull();
   });
+
+  it.each([
+    "rainbow",
+    "red",
+    "var(--chart-danger)",
+    "oklch(60% 0.2 30)",
+    "series-99",
+  ])("★StatSeriesRef.colorRole の不許可値 %s を拒否する", (colorRole) => {
+    expect(parseStatSeriesRefs([{ metricKey: "doctor-annual-income", colorRole }])).toBeNull();
+  });
 });
 
 describe("② 正常系は error を出さない", () => {

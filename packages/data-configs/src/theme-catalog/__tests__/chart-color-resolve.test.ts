@@ -91,6 +91,16 @@ describe("collectColorFieldViolations — 色キーの role でない値を弾�
     ]);
   });
 
+  it.each([
+    ["rainbow", "unknown-role"],
+    ["red", "unknown-role"],
+    ["var(--chart-danger)", "unknown-role"],
+    ["oklch(60% 0.2 30)", "unknown-role"],
+    ["series-99", "unknown-role"],
+  ] as const)("role欄の不許可値 %s を拒否する", (value, kind) => {
+    expect(collectColorFieldViolations({ color: value })).toEqual([{ value, kind }]);
+  });
+
   it("正しい role だけなら違反ゼロ", () => {
     expect(
       collectColorFieldViolations({

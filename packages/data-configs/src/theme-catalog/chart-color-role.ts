@@ -2,18 +2,9 @@
  * チャート色の semantic role と resolver (CROSS-PAGE-DATA-SSOT-01 WP5)
  *
  * ThemeCatalog は色コード (#3b82f6 等) ではなく **意味 role** だけを持ち (2026-08-13 に 179 箇所を
- * 全移行)、実際の色は resolver が解決する。resolver は 2 つ:
- *   - static/SVG (server): 決定的な固定 hex を返す。**現在の採択形** — 生成器
- *     `transform.chartToPageComponent` がこれで role→hex を解決し、生成物 page-components は
- *     解決済み hex を持つ。app 側 renderer は現状どおり hex を読む (無改修・目視回帰ゼロ)。
- *   - web (client): CSS custom property を返す (`var(--chart-<role>)`)。**現在未採用**
- *     (app はチャートで CSS 変数を使っておらず、`--chart-<role>` トークンも 0 件)。
- *     ★去就は owner 判断 (2026-08-13 concurrent review で分岐): (A) done_when の
- *     「web/static resolver parity」節を満たすため保持し、CSS-var 追従 (テーマ追従チャート=新挙動・
- *     visual-gated) を WP6/7 で採用する / (B) 静的 hex 解決を最終形とし本 resolver を削除、
- *     CSS-var 追従が要るなら別の挙動変更として再提案する。下の parity テストは (A) を採る場合に
- *     「採用時 web token と static hex が同じ role 集合で一致する」ことを保証する契約。
- * 両者が **同じ role 集合** を実装することをテストで固定する (parity)。
+ * 全移行)、実際の色は static/SVG resolver が決定的な固定 hex へ解決する。
+ * 生成器 `transform.chartToPageComponent` が role→hex を解決し、生成物 page-components は
+ * 解決済み hex を持つ。app 側 renderer は現状どおり hex を読む (無改修・目視回帰ゼロ)。
  *
  * choropleth (連続・発散) は別系統で `color-scheme-policy.ts` が正典。ここは categorical /
  * semantic チャート (line/mixed/composition/donut) の色 role。
@@ -78,11 +69,6 @@ export const CHART_COLOR_ROLE_HEX: Record<ChartColorRole, string> = {
 /** static/SVG 用: role → 決定的な固定 hex。 */
 export function resolveChartColorHex(role: ChartColorRole): string {
   return CHART_COLOR_ROLE_HEX[role];
-}
-
-/** web 用: role → CSS custom property。テーマトークン `--chart-<role>` を参照。 */
-export function resolveChartColorCssVar(role: ChartColorRole): string {
-  return `var(--chart-${role})`;
 }
 
 /** role として妥当か (catalog 検証・移行で使う)。 */
