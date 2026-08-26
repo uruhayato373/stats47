@@ -31,6 +31,9 @@ updated: 2026-08-26
   教育・文化は可視化パイロットとして、施設指標を学校/文化の2群へ分割し、重複する独立推移2件を削除、
   高等教育2系列を比較チャートへ統合済み。開発ゲートウェイはgit管理のpage-componentsをローカル優先し、
   生成直後の配置をR2 pushなしで確認できる。
+- **2026-08-26 checkpoint**: 公式一次資料とactiveな内部routeを親側でも再確認し、道路2論点、医療2論点、
+  鉄道2論点を追加した。医療の候補1件は観測値の既知欠陥を検出して不採択。鉄道はJR・民鉄の旅客規模と
+  貨物利用を分離し、延べ輸送量と実人数、発送量とCO2削減量を混同しない注意書きを固定した。
 - **次**: 白書台帳に登録済みのテーマから2〜3件ずつ `/research-theme-catalog <theme-key>` を実行する。
   NotebookLM は引用付き候補抽出だけに使い、公式HTTPS URLと実在routeを確認できた候補だけ
   theme-designerが採択する。文部科学白書は公式source登録済みだがNotebookLM ID未登録なので、
@@ -551,6 +554,12 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   checkerの実行文脈を `declared / invoked / blocking / scheduled` へ分類した。blocking 41件・scheduled 22件に対する
   未宣言criticalは0。未配線、docs-only、`continue-on-error`、期限切れ例外、重複ID、不存在command、
   未宣言criticalのfixture 11件と実repo監査がgreen。次はQG1から再開する。
+- **QG1 checkpoint (2026-08-26)**: production webからe-Stat providerへの推移import graphをAST化し、
+  static/dynamic/re-export/require/wrapper/aliasを検出、type-onlyだけを許可する18 testを固定した。
+  ThemeCatalogとWeb runtimeのchart propsを共有parserへ統合し、欠落`statsDataId`、空配列、非string filter、
+  未知field/chart/metricKeyを両側で拒否する。unit classifierはSI倍率、分母の母集団・量、異なる計数単位、
+  片側period不明を理由付きで判定し、公開`./unit` APIを実際のテーマ軸判定へ接続した。残りはmoney unit監査の
+  blocking配線とsource/stored/display/recipe変異で、QG1カード全体は未完了。
 - **監査ベースライン (2026-08-13、ローカル実測)**:
   - rootの`test:packages`は`vitest run --project '@stats47/*'`で、`apps/admin`のunit test
     **14 file / 136 test**はPR CI対象外。galleryにはPlaywright 6 specもあるがworkflowから呼ばれていない。
@@ -893,13 +902,14 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `CONTENT-ROUTINE-LIVE-VERIFY-01` はカードが現存せず、日次ループ
   (`ai-content-generate-daily.yml`) も 2026-08-21 に削除済みなので無効。件数は月次計画が
   目標を持ち週次が割り当てる。
-- **2026-08-26 checkpoint**: active 2,167件を全量再構築し、done 353 / needs 1,814
-  （missing 203 / incomplete 1,552 / blocker 59）を確定。上位5件
+- **2026-08-26 checkpoint**: R2公開後にactive 2,167件を全量再構築し、done 362 / needs 1,805
+  （missing 198 / incomplete 1,548 / blocker 59）を確定。当日公開9件はすべて公開R2の決定的監査が
+  blocker 0 / warn 0で、Googlebotの対象routeも200。上位5件
   `gpp-public-service` / `voter-turnout-governor` / `high-school-teacher-annual-income` /
-  `junior-high-club-per100-soft-tennis` / `junior-high-club-per100-swimming`をstaging生成し、
-  決定的監査は5件ともblocker 0 / warn 0。意味criticで、公務分の指標名、暦年/年度、派生指標の
+  `junior-high-club-per100-soft-tennis` / `junior-high-club-per100-swimming`は公開済み。意味criticで、公務分の指標名、暦年/年度、派生指標の
   分子・分母時点を是正した。疎なpartitionは実観測件数とcommentary件数を照合し、未観測県を
-  47件へ水増ししない監査契約を追加（AI監査48 test green）。R2公開は未承認のため未実施。
+  47件へ水増ししない監査契約を追加（AI監査48 test green）。当日の月次上限内で生成を停止し、次回は
+  `other-fresh-fish-consumption-expenditure`から再開する。
 - **完了条件**: 全active rankingを処理し、欠測・矛盾・未検証生成を0にする。R2 pushとCDN反映は別承認。
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
