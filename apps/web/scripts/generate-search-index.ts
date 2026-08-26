@@ -29,9 +29,11 @@ import {
 } from "../src/features/blog/types/snapshot";
 import { tokenize } from "../src/features/search/lib/tokenize";
 import type { ContentType, SearchDocument } from "../src/features/search/types/search.types";
+import { configureSearchIndexR2Environment } from "./lib/search-index-r2-env";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config({ path: ".env" });
+configureSearchIndexR2Environment(process.env);
 
 const STORE_FIELDS = [
   "id",
