@@ -16,7 +16,7 @@ import type { CatalogChart, ThemeCatalog } from '../types';
  *      ②が無いと ① の lock は「何も見ていない緑」と区別がつかない。
  *
  * 実測 (2026-08-24, THEME_CATALOGS 実行時オブジェクト):
- *   themes 20 / charts 107 / rawEstatParams chart 81 / relatedRankingKeys chart 83 /
+ *   themes 20 / charts 107 / rawEstatParams chart 77 / relatedRankingKeys chart 83 /
  *   rawColorPlaces 0 / distinctColors 0。
  *
  * ※ `#` 前置の e-Stat コード (`#A0160102` 等) は 社会・人口統計体系テーブルの**実コード**で
@@ -29,7 +29,7 @@ import type { CatalogChart, ThemeCatalog } from '../types';
 const BASELINE = {
   themes: 20,
   charts: 107,
-  chartsWithRawEstatParams: 81,
+  chartsWithRawEstatParams: 77,
   // markdown-section 24 件を除く全 data-bound component が指標ハブを持つ。
   chartsWithRelatedRankingKeys: 83,
   // WP5 完了: 生色を color role へ全移行 (179 → 0)。以後 ratchet は「生色 0」を強制する。

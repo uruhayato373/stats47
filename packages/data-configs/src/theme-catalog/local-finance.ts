@@ -126,10 +126,11 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "kpi-card",
       "title": "経常収支比率",
       "componentProps": {
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D2103"
-        },
+        "seriesRefs": [
+          {
+            "metricKey": "current-balance-ratio"
+          }
+        ],
         "unit": "％"
       },
       "relatedRankingKeys": [

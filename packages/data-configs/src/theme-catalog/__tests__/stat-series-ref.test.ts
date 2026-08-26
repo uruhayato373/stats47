@@ -162,6 +162,20 @@ describe("StatSeriesRef — line-chart の R2 参照移行契約", () => {
     ).toContain("line-chart: seriesRefs と estatParams は同時指定できない");
   });
 
+  it("kpi-card は単一 seriesRef で表せ、生 estatParams との二重指定を拒否する", () => {
+    expect(
+      validateChartProps("kpi-card", {
+        seriesRefs: [{ metricKey: "current-balance-ratio" }],
+      }),
+    ).toEqual([]);
+    expect(
+      validateChartProps("kpi-card", {
+        seriesRefs: [{ metricKey: "current-balance-ratio" }],
+        estatParams: { statsDataId: "0000010104", cdCat01: "D2103" },
+      }),
+    ).toContain("kpi-card: seriesRefs と estatParams は同時指定できない");
+  });
+
   it("seriesRefs と relatedRankingKeys の順序・件数ドリフトを拒否する", () => {
     expect(
       validateStatSeriesRefAlignment(
@@ -201,6 +215,7 @@ describe("StatSeriesRef — line-chart の R2 参照移行契約", () => {
     "labor-wages-gender-gap",
     "theme-occ-medical-trend",
     "theme-economy-income-wage",
+    "kpi-lf-current-balance",
   ])("移行済み %s は生レシピへ戻せない", (componentKey) => {
     expect(
       validateMigratedSeriesRefContract(componentKey, {

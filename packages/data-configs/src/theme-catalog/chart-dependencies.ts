@@ -110,6 +110,7 @@ export function collectChartDependencies(chart: CatalogChart): ChartDependencies
       break;
     case "kpi-card":
       // estatParams があれば 1 request。無ければ ranking 由来 (R2)。
+      metricRefs.push(...(parseStatSeriesRefs(props.seriesRefs) ?? []));
       if (props.estatParams !== undefined) requests.push(...estatParamsList(props.estatParams));
       break;
     case "pyramid-chart":
