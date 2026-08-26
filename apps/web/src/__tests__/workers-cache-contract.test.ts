@@ -81,6 +81,20 @@ describe("Workers Cache invalidation wiring", () => {
     expect(workflow).toContain('from "../.open-next/worker.js"');
     expect(workflow).not.toContain('main = ".open-next/worker.js"');
   });
+
+  it("deploy prebuildが検索index生成用のR2読取変数を受け取る", () => {
+    const workflow = readProjectFile(".github/workflows/deploy-workers.yml");
+    expect(workflow).toContain(
+      "R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}",
+    );
+    expect(workflow).toContain(
+      "R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}",
+    );
+    expect(workflow).toContain(
+      "R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com",
+    );
+    expect(workflow).toContain("R2_PUBLIC_FETCH_URL: https://storage.stats47.jp");
+  });
 });
 
 describe("API cache safety contract", () => {
