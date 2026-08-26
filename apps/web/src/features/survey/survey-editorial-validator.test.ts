@@ -41,7 +41,7 @@ describe('validate-survey-portfolio editorial gates', () => {
 
     expect(result.status).toBe(1);
     expect(output.violations).toContainEqual(
-      '[S8] editorial 実装数 0 が ratchet 73 を下回る'
+      '[S8] editorial 実装数 0 が ratchet 80 を下回る'
     );
   });
 
@@ -68,5 +68,15 @@ describe('validate-survey-portfolio editorial gates', () => {
     expect(output.violations).toContainEqual(
       expect.stringMatching(/^\[S8\] editorial 未実装 80 件:/)
     );
+  });
+
+  it('移行完了後は通常CI経路でも80件の完全ゲートを通す', () => {
+    const result = runValidator([]);
+    const output = JSON.parse(result.stdout);
+
+    expect(result.status).toBe(0);
+    expect(output.editorialImplemented).toBe(80);
+    expect(output.editorialRequired).toBe(80);
+    expect(output.violations).toEqual([]);
   });
 });

@@ -235,6 +235,22 @@ test("実験: sample 未到達 → collecting", () => {
   });
   assert.equal(result.active.length, 1);
   assert.equal(result.active[0].status, "collecting");
+  assert.ok(result.active[0].decisionGuards.includes("insufficient-sample"));
+});
+
+test("実験: measurement gate blocked / confound は sample 到達後も ready にしない", () => {
+  const result = evaluateExperiments({
+    registry: [registryEntry({ confounds: ["same-slot-change"] })],
+    ads: ssotVariants(),
+    variantMetrics: [
+      { experimentId: "exp1", variantId: "A", impressions: 1500, clicks: 30, ctr: 0.02 },
+      { experimentId: "exp1", variantId: "B", impressions: 1200, clicks: 12, ctr: 0.01 },
+    ],
+    nowIso: NOW,
+    measurementGate: { status: "blocked", reasons: ["ga4-snapshot-stale"] },
+  });
+  assert.equal(result.readyToDecide.length, 0);
+  assert.deepEqual(result.active[0].decisionGuards, ["measurement-gate-blocked", "confounded"]);
 });
 
 test("実験: 最大期間到達でも sample 未到達 → inconclusive", () => {

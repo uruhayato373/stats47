@@ -56,12 +56,13 @@ weight?: number | null;        // 加重ランダムの重み (既定 1)
 
 `.claude/rules/evidence-based-judgment.md` 準拠。**停止ルールは実験開始時に registry へ固定**する:
 
-1. **最小サンプル**: 各 variant imp ≥ 1,000 (既定。低トラフィック枠は期間で代替: 最低 4 週)。
-2. **比較**: variant 間 CTR の 2 標本比率 z 検定 (有意水準 5%)。実用基準は
-   「勝者 CTR が次点比 +20% かつ 95% 有意」。
-3. **勝者採用**: 人間の決定後に weight 引き上げ / 敗者 `isActive:false`。実測・サンプル・判定根拠を
+1. **最小サンプル**: 各 variant imp ≥ 1,000 (既定) と最小期間を両方満たす。期間だけで代替しない。
+2. **比較**: variant 間の CTR・click・impression・相対差を提示する。週次snapshot 1点へ
+   2標本比率検定を導入せず、freshness / sample / confound guard が1つでも失敗したら判定不能に留める。
+3. **勝者採用**: `ready-to-decide` は勝者確定ではない。人間の決定後に weight 引き上げ / 敗者
+   `isActive:false`。実測・サンプル・判定根拠を
    improvement-log に記録 (status 更新は improvement-triage)。
-4. **多重比較**: 1 実験の variant は 2〜3 個に絞る。
+4. **比較数**: 1 実験の variant は 2〜3 個に絞り、読みづらい多数案を同時投入しない。
 
 判定状態 (invalid / collecting / ready-to-decide / inconclusive / closed) の定義と評価は
 `lib/affiliate-operations-core.mjs` の `evaluateExperiments` が正典 (テスト付き)。

@@ -35,7 +35,7 @@ export default defineConfig({
 
   webServer: {
     command: "npm run dev",
-    env: { PORT: "47470" },
+    env: { PORT: "47470", NEXT_DIST_DIR: ".local/next-e2e" },
     url: "http://127.0.0.1:47470",
     reuseExistingServer: true,
     timeout: 120_000,

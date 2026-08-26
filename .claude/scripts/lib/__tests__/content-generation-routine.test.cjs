@@ -160,7 +160,7 @@ test('data-refresh pushes the metrics that succeeded even when the gate fails', 
   assert.equal(batch.id, 'batch', 'gate の結果を後段から参照できない');
   assert.equal(batch['continue-on-error'], true, 'ゲート失敗で後続 push が skip される');
 
-  const reflect = idx('Reflect batch gate result');
+  const reflect = idx('Reflect refresh gate result');
   assert.ok(reflect !== -1, 'ゲート結果を job に反映するステップが無い (常に緑になる)');
   assert.match(String(steps[reflect].if), /steps\.batch\.outcome/);
 
@@ -169,4 +169,59 @@ test('data-refresh pushes the metrics that succeeded even when the gate fails', 
   assert.ok(idx('Regenerate derived snapshots') < reflect, '派生生成より前で job を落としている');
   // 失敗 Issue は反映より後ろ (failure() が真になる位置)
   assert.ok(reflect < idx('Open issue on failure'), 'Issue 起票がゲート反映より前にある');
+});
+
+// ── 公開データ契約: producer 成功と live 配信の間を横断監査する ─────────────────
+
+test('public data contract audit is wired after every R2 publication path', () => {
+  const dataRefresh = YAML.parse(read('.github/workflows/data-refresh.yml'));
+  const refreshSteps = dataRefresh.jobs.refresh.steps;
+  const refreshIdx = (needle) =>
+    refreshSteps.findIndex((step) => String(step.name ?? '').includes(needle));
+  const refreshAudit = refreshSteps[refreshIdx('Audit public data contracts')];
+  const refreshReflect = refreshSteps[refreshIdx('Reflect refresh gate result')];
+
+  assert.equal(refreshAudit.id, 'public_contract');
+  assert.equal(
+    refreshAudit['continue-on-error'],
+    true,
+    'data-refresh は request 消費と Issue 起票の前に監査失敗で止めてはいけない',
+  );
+  assert.ok(
+    refreshIdx('Purge Workers Cache') < refreshIdx('Audit public data contracts'),
+    'data-refresh は cache purge 後の live 配信を監査する',
+  );
+  assert.match(String(refreshReflect.if), /steps\.public_contract\.outcome/);
+
+  for (const [workflow, indexStep, purgeStep] of [
+    ['.github/workflows/blog-auto-publish.yml', 'Regenerate blog index', 'Purge CDN'],
+    ['.github/workflows/publish-blog.yml', 'Push all.json index', 'Purge Workers Cache'],
+  ]) {
+    const doc = YAML.parse(read(workflow));
+    const steps = Object.values(doc.jobs)[0].steps;
+    const idx = (needle) => steps.findIndex((step) => String(step.name ?? '').includes(needle));
+    const auditAt = idx('Audit public data contracts');
+    assert.ok(auditAt !== -1, `${workflow}: 公開後監査が無い`);
+    assert.ok(idx(indexStep) < auditAt, `${workflow}: all.json 更新前に監査している`);
+    assert.ok(idx(purgeStep) < auditAt, `${workflow}: cache purge 前に監査している`);
+    assert.match(String(steps[auditAt].run), /audit:public-data-contract/);
+  }
+});
+
+test('weekly public contract audit opens, closes, and fails visibly', () => {
+  const doc = YAML.parse(read('.github/workflows/ranking-integrity-audit-weekly.yml'));
+  const steps = doc.jobs.audit.steps;
+  const idx = (needle) => steps.findIndex((step) => String(step.name ?? '').includes(needle));
+  const audit = steps[idx('Audit public data contracts')];
+  const open = steps[idx('Open issue on public data contract')];
+  const close = steps[idx('Close recovered public data contract')];
+  const reflect = steps[idx('Reflect public data contract result')];
+
+  assert.equal(audit.id, 'public_contract');
+  assert.equal(audit['continue-on-error'], true, 'Issue 起票前に監査失敗で job が止まる');
+  assert.match(String(open.if), /public_contract\.outputs\.exit_code != '0'/);
+  assert.match(String(close.if), /public_contract\.outputs\.exit_code == '0'/);
+  assert.match(String(reflect.if), /always\(\)/);
+  assert.ok(idx('Upload public data contract report') < idx('Open issue on public data contract'));
+  assert.match(String(open.run), /public-data-contract-alert/);
 });

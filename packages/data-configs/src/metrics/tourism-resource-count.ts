@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const tourismResourceCount: MetricConfig = {
   "key": "tourism-resource-count",
-  "title": "観光資源数",
+  "title": "観光資源データ登録件数",
   "unit": "件",
   "category": "tourism",
   "source": {
@@ -11,14 +11,16 @@ export const tourismResourceCount: MetricConfig = {
     "config": {
       "source": {
         "name": "国土数値情報",
-        "url": "https://nlftp.mlit.go.jp/ksj/index.html",
+        "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P12-v2_2.html",
+        "license": "非商用（GIS空間演算の集計結果は出典・加工者表示付きで利用）",
+        "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement_02.html",
       },
       "ksjDataId": "P12",
       "ksjVersion": "14",
-      "description": "国土数値情報に登録されている観光資源の都道府県別数",
+      "description": "観光資源台帳のA級以上と観光庁の観光地点等名簿を統合した国土数値情報P12の都道府県別登録件数。2014年9月30日時点であり、各都道府県の観光地を網羅した総数ではない。点・線・面の重複は県コードと観光資源_IDで除外して集計。",
     },
     "displayName": "国土数値情報",
-    "url": "https://nlftp.mlit.go.jp/ksj/index.html",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P12-v2_2.html",
   },
   "entities": [
     "prefecture",
@@ -47,7 +49,7 @@ export const tourismResourceCount: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "観光資源数ランキング都道府県【2014年】｜1位福岡県（389件）",
-  "seoDescription": "2014年の観光資源数の都道府県別ランキング。1位福岡県（389件）、最下位鹿児島県（9件）で43.2倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "観光資源データ登録件数ランキング【2014年】｜都道府県比較",
+  "seoDescription": "国土数値情報P12に収録された観光資源・観光地点の2014年都道府県別登録件数を比較。元台帳の収録差を含むため、観光地の網羅数や魅力度を示すランキングではありません。",
   "isActive": true,
 };

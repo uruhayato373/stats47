@@ -39,7 +39,10 @@ import { fileURLToPath } from "node:url";
 
 import { METRICS_REGISTRY } from "@stats47/data-configs";
 
-import { getSurveyEditorialContent } from "../../../apps/web/src/features/survey/survey-editorial";
+import {
+  getSurveyEditorialContent,
+  requiredSurveyReaderQuestionCount,
+} from "../../../apps/web/src/features/survey/survey-editorial";
 import { resolveSurveyTaxonomy } from "../../../packages/ranking/src/survey/survey-taxonomy";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -74,7 +77,7 @@ const CHANGE_TYPE = new Set(["editorial-hub", "linkage", "title-meta", "structur
 const HARD_CANDIDATES = new Set(["merge-candidate", "retire-candidate"]);
 const MIN_CTR_IMPRESSIONS = 100;
 const MAX_STATE_AGE_DAYS = Number(process.env.SURVEY_STATE_MAX_AGE_DAYS ?? 35);
-const EDITORIAL_COUNT_RATCHET = 73;
+const EDITORIAL_COUNT_RATCHET = 80;
 const MIN_REQUIRED_MASTER_COUNT = 80;
 const MAX_EDITORIAL_SIMILARITY = 0.88;
 
@@ -143,7 +146,8 @@ function validateEditorial() {
   if (implemented.length < EDITORIAL_COUNT_RATCHET) {
     v("S8", `editorial 実装数 ${implemented.length} が ratchet ${EDITORIAL_COUNT_RATCHET} を下回る`);
   }
-  if (!requireAllEditorial) return;
+  // 80/80 移行前は通常CIを件数ratchetだけに留め、完了後は通常CIでも完全ゲートを維持する。
+  if (!requireAllEditorial && EDITORIAL_COUNT_RATCHET < MIN_REQUIRED_MASTER_COUNT) return;
 
   if (masterSurveys.length < MIN_REQUIRED_MASTER_COUNT)
     v("S8", `survey master が ${masterSurveys.length} 件 (最低 ${MIN_REQUIRED_MASTER_COUNT} 件)`);
@@ -160,8 +164,13 @@ function validateEditorial() {
       v("S8", `${surveyId}: summary は2〜3文が必須 (現在 ${summarySentences}文)`);
     if (content.whatYouCanLearn.length < 3 || content.whatYouCanLearn.length > 5)
       v("S8", `${surveyId}: whatYouCanLearn は3〜5件が必須 (現在 ${content.whatYouCanLearn.length}件)`);
-    if (content.readerQuestions.length < 3 || content.readerQuestions.length > 5)
-      v("S8", `${surveyId}: readerQuestions は3〜5件が必須 (現在 ${content.readerQuestions.length}件)`);
+    const surveyKeys = membership.get(surveyId) ?? new Set<string>();
+    const requiredReaderQuestions = requiredSurveyReaderQuestionCount(surveyKeys.size);
+    if (content.readerQuestions.length < requiredReaderQuestions || content.readerQuestions.length > 5)
+      v(
+        "S8",
+        `${surveyId}: readerQuestions はactive在庫に応じて${requiredReaderQuestions}〜5件が必須 (active ${surveyKeys.size}件 / 現在 ${content.readerQuestions.length}件)`,
+      );
     if (content.caveats.length < 2 || content.caveats.length > 5)
       v("S8", `${surveyId}: caveats は2〜5件が必須 (現在 ${content.caveats.length}件)`);
     for (const [field, values] of [
@@ -172,7 +181,6 @@ function validateEditorial() {
         v("S8", `${surveyId}: ${field} に空文字がある`);
     }
 
-    const surveyKeys = membership.get(surveyId) ?? new Set<string>();
     const surveyQuestions = new Set<string>();
     const surveyRankingKeys = new Set<string>();
     for (const readerQuestion of content.readerQuestions) {

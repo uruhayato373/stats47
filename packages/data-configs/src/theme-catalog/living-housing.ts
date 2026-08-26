@@ -18,8 +18,13 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "role": "secondary"
     },
     {
-      "rankingKey": "housing-floor-area",
-      "shortLabel": "延べ面積",
+      "rankingKey": "floor-area-per-dwelling-owner",
+      "shortLabel": "持ち家延べ面積",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "floor-area-per-dwelling-rented",
+      "shortLabel": "借家延べ面積",
       "role": "secondary"
     },
     {
@@ -296,7 +301,8 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
         ]
       },
       "relatedRankingKeys": [
-        "housing-floor-area"
+        "floor-area-per-dwelling-owner",
+        "floor-area-per-dwelling-rented"
       ],
       "sourceName": "住宅・土地統計調査",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",

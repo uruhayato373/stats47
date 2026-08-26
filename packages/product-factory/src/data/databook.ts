@@ -60,7 +60,6 @@ import { TOTAL_OVERNIGHT_GUESTS_2024 } from "./datasets/total-overnight-guests";
 import { TOTAL_OVERNIGHT_GUESTS_FOREIGN_2024 } from "./datasets/total-overnight-guests-foreign";
 import { TOTAL_POPULATION_2024 } from "./datasets/total-population";
 import { TOTAL_REVENUE_PREFECTURE_2022 } from "./datasets/total-revenue-prefecture";
-import { TOURISM_RESOURCE_COUNT_2014 } from "./datasets/tourism-resource-count";
 import { TRAVEL_PARTICIPATION_RATE_OVERNIGHT_2021 } from "./datasets/travel-participation-rate-overnight";
 import { WATER_SUPPLY_ANNUAL_VOLUME_2022 } from "./datasets/water-supply-annual-volume";
 
@@ -104,7 +103,6 @@ export const DATABOOKS: Readonly<Record<string, Databook>> = {
       NUMBER_OF_HOTEL_FACILITIES_2017,
       NUMBER_OF_HOTEL_ROOMS_2017,
       TRAVEL_PARTICIPATION_RATE_OVERNIGHT_2021,
-      TOURISM_RESOURCE_COUNT_2014,
     ],
   },
   "P-04": {
@@ -210,7 +208,6 @@ export const DATABOOKS: Readonly<Record<string, Databook>> = {
       NUMBER_OF_HOTEL_FACILITIES_2017,
       NUMBER_OF_HOTEL_ROOMS_2017,
       TRAVEL_PARTICIPATION_RATE_OVERNIGHT_2021,
-      TOURISM_RESOURCE_COUNT_2014,
       FISCAL_STRENGTH_INDEX_PREFECTURE_2022,
       REAL_PUBLIC_DEBT_SERVICE_RATIO_2022,
       LOCAL_TAX_PREFECTURE_2022,

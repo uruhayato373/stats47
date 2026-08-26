@@ -10,6 +10,15 @@
  */
 import type { PackTheme } from "./types";
 
+/**
+ * 有償商品へ収録しない ranking key。
+ * P12 は「非商用」データで、約款が許す集計結果のサイト表示と、編集可能な表データの
+ * 有償再配布はリスクが異なる。商品化は権利者確認が取れるまで fail-closed で除外する。
+ */
+export const PRODUCT_EXCLUDED_RANKING_KEYS: ReadonlySet<string> = new Set([
+  "tourism-resource-count",
+]);
+
 /** e-Stat カテゴリ (17 分類) → 主テーマ。economy は既定 P-09、物価/地価/家賃は P-07 へ振り分ける。 */
 export const CATEGORY_PACK: Readonly<Record<string, PackTheme>> = {
   population: "population-household", // P-01

@@ -33,7 +33,7 @@ export const educationExpenditureRatioMultiPersonHouseholds: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "教育費割合ランキング都道府県【2024年】｜1位東京都（6％）",
-  "seoDescription": "2024年の教育費割合の都道府県別ランキング。1位東京都（6％）、最下位秋田県（0.9％）で6.7倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "教育費割合 都道府県ランキング【2024年】｜1位埼玉県（6.0％）",
+  "seoDescription": "2024年の教育費割合を都道府県別に比較。1位は埼玉県（6.0％）、最下位は秋田県（0.9％）、最大と最小の差は6.7倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

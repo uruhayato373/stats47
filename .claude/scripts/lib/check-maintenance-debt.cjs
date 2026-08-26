@@ -8,7 +8,7 @@ const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..
 const BASELINE = process.env.MAINTENANCE_DEBT_BASELINE || path.join(ROOT, ".claude/config/maintenance-debt-baseline.json");
 const SCAN_ROOTS = ["apps", "packages", ".claude", ".github"].map((item) => path.join(ROOT, item));
 const TEXT_EXT = /\.(?:[cm]?[jt]sx?|md|ya?ml|json|sh|css|scss)$/i;
-const EXCLUDED = new Set(["node_modules", ".next", "dist", "coverage", ".git", "state", "worktrees"]);
+const EXCLUDED = new Set(["node_modules", ".next", ".local", "dist", "coverage", ".git", "state", "worktrees"]);
 
 function rel(file) { return path.relative(ROOT, file).split(path.sep).join("/"); }
 function walk(dir) {
