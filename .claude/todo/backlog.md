@@ -65,6 +65,10 @@ updated: 2026-08-27
   「賃金構造基本統計調査」、総務省「令和2年国勢調査」を一次資料に、労働需給、男女賃金差、
   外国人人口規模・比率、国籍構成の4論点を追加した。公式URL 3件、内部route 10件は公開200、
   専用test 6件、data-configs全699件、catalog error 0、生成物check、型検査はgreen。未整備は6テーマ。
+- **2026-08-27 population / local-finance wave**: 厚労省「2024年人口動態統計」、総務省
+  「人口推計 2024年」「令和7年版 地方財政白書」「令和5年度 健全化判断比率確報」を一次資料に、
+  自然増減、年齢構成、財源構成、公債費・将来負担の4論点を追加した。公式URL 4件、内部route 12件は
+  公開200、専用test 6件、data-configs全705件、catalog error 0、生成物check、型検査はgreen。未整備は4テーマ。
 - **次**: 白書台帳に登録済みのテーマから2〜3件ずつ `/research-theme-catalog <theme-key>` を実行する。
   NotebookLM は引用付き候補抽出だけに使い、公式HTTPS URLと実在routeを確認できた候補だけ
   theme-designerが採択する。文部科学白書は公式source登録済みだがNotebookLM ID未登録なので、
