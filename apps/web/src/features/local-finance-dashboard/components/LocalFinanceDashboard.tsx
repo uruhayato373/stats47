@@ -63,15 +63,16 @@ function oku(thousandYen: number): string {
 
 interface RatioMeta {
   key: keyof YearRecord;
+  componentKey: string;
   label: string;
   unit: string;
   decimals: number;
 }
 const RATIO_METRICS: RatioMeta[] = [
-  { key: "fiscalIndex", label: "財政力指数", unit: "", decimals: 2 },
-  { key: "currentBalanceRatio", label: "経常収支比率", unit: "%", decimals: 1 },
-  { key: "debtServiceRatio", label: "実質公債費比率", unit: "%", decimals: 1 },
-  { key: "futureBurdenRatio", label: "将来負担比率", unit: "%", decimals: 1 },
+  { key: "fiscalIndex", componentKey: "kpi-lf-fiscal-strength", label: "財政力指数", unit: "", decimals: 2 },
+  { key: "currentBalanceRatio", componentKey: "kpi-lf-current-balance", label: "経常収支比率", unit: "%", decimals: 1 },
+  { key: "debtServiceRatio", componentKey: "kpi-lf-debt-service", label: "実質公債費比率", unit: "%", decimals: 1 },
+  { key: "futureBurdenRatio", componentKey: "kpi-lf-future-burden", label: "将来負担比率", unit: "%", decimals: 1 },
 ];
 
 
@@ -230,13 +231,24 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
           {RATIO_METRICS.map((meta) => {
             const latestVal = latest ? latest[meta.key] : null;
+            const points = lineSeries(meta.key, 1);
             return (
-              <ChartCard
+              <div
                 key={String(meta.key)}
-                label={meta.label}
-                value={latestVal == null ? "—" : `${latestVal.toFixed(meta.decimals)}${meta.unit}`}
-                chart={<MiniLineChart points={lineSeries(meta.key, 1)} unit={meta.unit} />}
-              />
+                data-theme-chart="true"
+                data-theme-component-key={meta.componentKey}
+                data-theme-component-type="kpi-card"
+                data-data-state={points.length > 0 ? "ready" : "no-data"}
+                data-unit={meta.unit || "指数"}
+                data-year={`${latestYear}年度`}
+                data-series-count={points.length}
+              >
+                <ChartCard
+                  label={meta.label}
+                  value={latestVal == null ? "—" : `${latestVal.toFixed(meta.decimals)}${meta.unit}`}
+                  chart={<MiniLineChart points={points} unit={meta.unit} />}
+                />
+              </div>
             );
           })}
         </div>

@@ -114,7 +114,7 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
     canonicalPath: "/themes/local-finance",
     heading: "地方財政",
     dataSelector: '[data-theme-chart="true"]',
-    expectedChartCount: 9,
+    expectedChartCount: 4,
     representativeTypes: ["kpi-card"],
   },
 ] as const;

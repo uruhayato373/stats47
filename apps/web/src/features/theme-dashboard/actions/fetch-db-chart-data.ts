@@ -470,7 +470,7 @@ async function fetchCpiProfileData(
         type: "cpi-profile",
         data: result,
         contract: {
-          unit: filtered[0]?.unit ?? "指数",
+          unit: filtered[0]?.unit?.trim() || "指数",
           year: filtered[0]?.yearName ?? filtered[0]?.yearCode ?? "",
           seriesCount: result.length,
         },
@@ -510,7 +510,7 @@ async function fetchCpiHeatmapData(
         type: "cpi-heatmap",
         data: result,
         contract: {
-          unit: rawData[0]?.unit ?? "指数",
+          unit: rawData[0]?.unit?.trim() || "指数",
           year: latestYear(rawData),
           seriesCount: new Set(result.map((item) => item.y)).size,
         },
