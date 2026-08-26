@@ -1,0 +1,61 @@
+{
+  "kind": "stats47-image-generation",
+  "schemaVersion": 1,
+  "generator": "blog-ogp",
+  "entityId": "waste-management-recycling-gap",
+  "inputHash": "152465a80af9ac1cf1ef1453fe2df8c3482b8d6ae4a2f8c7482f99a90c277e2f",
+  "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+  "fingerprint": "19590eb33ab74695ccf33f1ec42e4c8818c5a04a9d73038c39fd49ee0b8fdece",
+  "generatedAt": "2026-08-22T05:17:40.975Z",
+  "assets": [
+    {
+      "key": "app/blog/waste-management-recycling-gap/ogp/background.jpg",
+      "variant": "background",
+      "contentType": "image/jpeg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 81010,
+      "sha256": "91ca466a9bb274253a202640ac276466efd670b247c1755aa7191179e9d63f55"
+    },
+    {
+      "key": "app/blog/waste-management-recycling-gap/ogp/ogp.png",
+      "variant": "ogp",
+      "contentType": "image/png",
+      "width": 1200,
+      "height": 630,
+      "bytes": 490782,
+      "sha256": "d6df64955e62b71263ac0f5c545c536255104dbd6146e06bf62cc76d33c0b469"
+    },
+    {
+      "key": "app/blog/waste-management-recycling-gap/thumbnail-dark.webp",
+      "variant": "dark",
+      "contentType": "image/webp",
+      "width": 640,
+      "height": 336,
+      "bytes": 12568,
+      "sha256": "0fcbdb8e5aaffaa33fa9aea4f36c8a1cbe33ea74e8b972f42b253e8003594b76"
+    },
+    {
+      "key": "app/blog/waste-management-recycling-gap/thumbnail-light.webp",
+      "variant": "light",
+      "contentType": "image/webp",
+      "width": 640,
+      "height": 336,
+      "bytes": 24484,
+      "sha256": "411ad859e350ae2148fde5ee694f88afe564c7e1f881a23422e8c770cbfe5430"
+    }
+  ],
+  "metadata": {
+    "title": "ごみリサイクル率29%の県と12%の県",
+    "subtitle": "リサイクル率29%の県と12%の県、何が違うのか",
+    "background": {
+      "source": "ai",
+      "promptHash": "sha256-b38bb7f9f6b0d887aed98b657d324418e4fd9050afba1e73e157ea46c2f6a49c",
+      "sha256": "91ca466a9bb274253a202640ac276466efd670b247c1755aa7191179e9d63f55",
+      "model": "gpt-image-2",
+      "promptVersion": "blog-article-context-v1",
+      "visualType": "industry",
+      "motif": "article:waste-management-recycling-gap"
+    }
+  }
+}

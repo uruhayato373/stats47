@@ -1,0 +1,50 @@
+<svg width="780" height="482" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="最終処分場残余容量 下位15">
+<title>最終処分場残余容量 下位15</title>
+<rect width="680" height="420" fill="#fafafa" rx="8"/>
+<text x="340" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">最終処分場残余容量 下位15</text>
+<text x="85" y="74" text-anchor="end" font-size="9" fill="#374151">徳島</text>
+<rect x="90" y="63" width="2" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="95.17817279867714" y="74" font-size="8" fill="#6b7280">57</text>
+<text x="85" y="96" text-anchor="end" font-size="9" fill="#374151">鳥取</text>
+<rect x="90" y="85" width="3.4311699049193884" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="97.43116990491939" y="96" font-size="8" fill="#6b7280">166</text>
+<text x="85" y="118" text-anchor="end" font-size="9" fill="#374151">佐賀</text>
+<rect x="90" y="107" width="4.2786275320380325" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="98.27862753203803" y="118" font-size="8" fill="#6b7280">207</text>
+<text x="85" y="140" text-anchor="end" font-size="9" fill="#374151">山梨</text>
+<rect x="90" y="129" width="4.795369987598181" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="98.79536998759818" y="140" font-size="8" fill="#6b7280">232</text>
+<text x="85" y="162" text-anchor="end" font-size="9" fill="#374151">福井</text>
+<rect x="90" y="151" width="4.9813972715998345" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="98.98139727159983" y="162" font-size="8" fill="#6b7280">241</text>
+<text x="85" y="184" text-anchor="end" font-size="9" fill="#374151">茨城</text>
+<rect x="90" y="173" width="5.828854898718479" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="99.82885489871848" y="184" font-size="8" fill="#6b7280">282</text>
+<text x="85" y="206" text-anchor="end" font-size="9" fill="#374151">富山</text>
+<rect x="90" y="195" width="8.701942951632907" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="102.7019429516329" y="206" font-size="8" fill="#6b7280">421</text>
+<text x="85" y="228" text-anchor="end" font-size="9" fill="#374151">高知</text>
+<rect x="90" y="217" width="8.701942951632907" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="102.7019429516329" y="228" font-size="8" fill="#6b7280">421</text>
+<text x="85" y="250" text-anchor="end" font-size="9" fill="#374151">香川</text>
+<rect x="90" y="239" width="9.073997519636213" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="103.07399751963621" y="250" font-size="8" fill="#6b7280">439</text>
+<text x="85" y="272" text-anchor="end" font-size="9" fill="#374151">滋賀</text>
+<rect x="90" y="261" width="9.652749069863582" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="103.65274906986357" y="272" font-size="8" fill="#6b7280">467</text>
+<text x="85" y="294" text-anchor="end" font-size="9" fill="#374151">和歌山</text>
+<rect x="90" y="283" width="10.128152128978916" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="104.12815212897891" y="294" font-size="8" fill="#6b7280">490</text>
+<text x="85" y="316" text-anchor="end" font-size="9" fill="#374151">三重</text>
+<rect x="90" y="305" width="10.87226126498553" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="104.87226126498553" y="316" font-size="8" fill="#6b7280">526</text>
+<text x="85" y="338" text-anchor="end" font-size="9" fill="#374151">栃木</text>
+<rect x="90" y="327" width="11.07895824720959" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="105.07895824720958" y="338" font-size="8" fill="#6b7280">536</text>
+<text x="85" y="360" text-anchor="end" font-size="9" fill="#374151">岩手</text>
+<rect x="90" y="349" width="11.63704009921455" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="105.63704009921454" y="360" font-size="8" fill="#6b7280">563</text>
+<text x="85" y="382" text-anchor="end" font-size="9" fill="#374151">山形</text>
+<rect x="90" y="371" width="11.761058288548988" height="16" rx="2" fill="#ef5350" opacity="0.85"/>
+<text x="105.76105828854898" y="382" font-size="8" fill="#6b7280">569</text>
+</svg>
