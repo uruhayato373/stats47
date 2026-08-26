@@ -109,6 +109,13 @@ export const EVIDENCE_SOURCE_CATALOG = {
     sourceUrl:
       "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2712000.html",
   },
+  "jta-accommodation-survey": {
+    kind: "statistical-overview",
+    title: "宿泊旅行統計調査",
+    publisher: "観光庁",
+    sourceUrl:
+      "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+  },
   "mhlw-physician-workforce-plan": {
     kind: "report",
     title: "医師確保対策・医師確保計画",

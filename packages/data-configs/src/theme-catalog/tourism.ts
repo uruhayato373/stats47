@@ -168,6 +168,23 @@ export const TOURISM_CATALOG: ThemeCatalog = {
       "sortOrder": 110
     }
   ],
+  evidenceTopics: [
+    {
+      key: "domestic-and-inbound-stays",
+      lensKey: "participation",
+      title: "国内外の宿泊需要の地域集中",
+      question:
+        "延べ宿泊者数と外国人延べ宿泊者数には、宿泊需要の地域的な集中がどう表れるか",
+      summary:
+        "延べ宿泊者数は1人が複数泊すると泊数分を数えます。外国人延べ宿泊者数は総数の内数なので、両者を足さず、総需要と外国人需要の集中を分けて読みます。",
+      sourceKeys: ["jta-accommodation-survey"],
+      relatedRankingKeys: [
+        "total-overnight-guests",
+        "total-overnight-guests-foreign",
+      ],
+      relatedChartKeys: ["theme-tourism-stay-trend"],
+    },
+  ],
   "keywords": [
     "観光",
     "宿泊者数",
