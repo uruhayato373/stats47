@@ -1,10 +1,13 @@
 import "server-only";
 
 import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import { createSnapshotReader } from "@stats47/r2-storage/server";
 
-import type { AreaDatabookSnapshot } from "../types/databook-snapshot";
-import { areaDatabookKeyPath } from "../types/databook-snapshot";
+import {
+  areaDatabookKeyPath,
+  parseAreaDatabookSnapshot,
+  type AreaDatabookSnapshot,
+} from "../types/databook-snapshot";
 
 /**
  * R2 `app/areas/<code>/databook.json` から県データブックの値+全国順位を取得。
@@ -19,16 +22,14 @@ export async function readAreaDatabookFromR2(
   if (process.env.NEXT_PHASE === "phase-production-build") {
     return null;
   }
-  try {
-    const data = await fetchFromR2AsJson<AreaDatabookSnapshot>(
-      areaDatabookKeyPath(areaCode),
-    );
-    return data ?? null;
-  } catch (error) {
-    logger.error(
-      { areaCode, error: error instanceof Error ? error.message : String(error) },
-      "readAreaDatabookFromR2: failed",
-    );
-    return null;
-  }
+  const result = await createSnapshotReader({
+    key: areaDatabookKeyPath(areaCode),
+    label: `area-databook:${areaCode}`,
+    parse: parseAreaDatabookSnapshot,
+    select: (snapshot) => snapshot,
+  }).readResult();
+  if (result.status === "ok" || result.status === "stale") return result.data;
+  if (result.status === "no-data") return null;
+  logger.error({ areaCode, status: result.status, error: result.error.message }, "readAreaDatabookFromR2: failed");
+  throw result.error;
 }

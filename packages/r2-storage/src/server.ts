@@ -13,7 +13,9 @@ export {
     listFromR2WithSize,
     saveToR2,
     shouldSkipRemoteR2Read,
-    type SnapshotReaderOptions
+    type SnapshotReader,
+    type SnapshotReaderOptions,
+    type SnapshotReadResult
 } from "./lib";
 
 export { assertR2WriteAllowed } from "./scripts/_assert-ci-write";

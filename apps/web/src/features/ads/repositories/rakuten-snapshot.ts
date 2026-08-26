@@ -36,6 +36,41 @@ export interface RakutenSnapshot {
   items: RakutenSnapshotItem[];
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+export function parseRakutenSnapshot(value: unknown): RakutenSnapshot {
+  if (!isRecord(value)) throw new Error("rakuten snapshot must be an object");
+  if (typeof value.generatedAt !== "string" || !Number.isFinite(Date.parse(value.generatedAt))) {
+    throw new Error("rakuten snapshot generatedAt must be a valid date string");
+  }
+  if (!Array.isArray(value.items)) throw new Error("rakuten snapshot items must be an array");
+  const items = value.items.map((item, index): RakutenSnapshotItem => {
+    if (!isRecord(item)) throw new Error(`items[${index}] must be an object`);
+    if (typeof item.name !== "string" || typeof item.url !== "string") {
+      throw new Error(`items[${index}] name and url must be strings`);
+    }
+    if (item.image !== null && typeof item.image !== "string") {
+      throw new Error(`items[${index}].image must be string or null`);
+    }
+    for (const field of ["price", "reviewCount", "reviewAverage"] as const) {
+      if (!Number.isFinite(item[field])) {
+        throw new Error(`items[${index}].${field} must be a finite number`);
+      }
+    }
+    return {
+      name: item.name,
+      url: item.url,
+      price: item.price as number,
+      image: item.image,
+      reviewCount: item.reviewCount as number,
+      reviewAverage: item.reviewAverage as number,
+    };
+  });
+  return { generatedAt: value.generatedAt, items };
+}
+
 /**
  * 品目 (例「納豆」) 単位の商品スナップショット。
  *
@@ -94,6 +129,7 @@ function read(key: string, label: string): Promise<RakutenSnapshot> {
   return createSnapshotReader<RakutenSnapshot, RakutenSnapshot>({
     key,
     label,
+    parse: parseRakutenSnapshot,
     select: (snapshot) => snapshot,
     fallback: EMPTY,
   })();

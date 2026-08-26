@@ -6,8 +6,8 @@ import { saveToR2 } from "@stats47/r2-storage/server";
 
 import type { Category } from "../types/category";
 import {
+  buildCategoriesSnapshot,
   CATEGORIES_SNAPSHOT_KEY,
-  type CategoriesSnapshot,
 } from "../types/snapshot";
 
 export interface ExportCategoriesSnapshotResult {
@@ -33,11 +33,7 @@ export async function exportCategoriesSnapshot(): Promise<ExportCategoriesSnapsh
     displayOrder: c.displayOrder,
   }));
 
-  const snapshot: CategoriesSnapshot = {
-    generatedAt: new Date().toISOString(),
-    count: categories.length,
-    categories,
-  };
+  const snapshot = buildCategoriesSnapshot(categories);
 
   const body = JSON.stringify(snapshot);
   const result = await saveToR2(CATEGORIES_SNAPSHOT_KEY, body, {

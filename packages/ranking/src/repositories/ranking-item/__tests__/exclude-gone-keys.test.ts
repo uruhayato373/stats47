@@ -46,6 +46,7 @@ import {
 function item(rankingKey: string) {
   return {
     rankingKey,
+    rankingName: rankingKey,
     title: rankingKey,
     subtitle: null,
     unit: "件",
@@ -54,6 +55,8 @@ function item(rankingKey: string) {
     categoryKey: "population",
     groupKey: "g1",
     dataSourceId: "estat",
+    hook: `${rankingKey} は？`,
+    createdAt: "2026-01-01T00:00:00Z",
     updatedAt: "2026-01-01T00:00:00Z",
     latestYear: { yearCode: "2023" },
     tags: [{ tagKey: "t1" }],
@@ -62,14 +65,20 @@ function item(rankingKey: string) {
 
 const ROWS = [item(GONE_KEY), item(LIVE_KEY)];
 
+function snapshot(items: ReturnType<typeof item>[]) {
+  return {
+    generatedAt: "2026-08-05T00:00:00Z",
+    categoryKey: "population",
+    surveyId: "census",
+    count: items.length,
+    items,
+  };
+}
+
 beforeEach(() => {
   fetchFromR2AsJson.mockReset();
   // どのキーパスを読まれても同じ 2 行を返す (all.json / category / survey / featured 共通)
-  fetchFromR2AsJson.mockResolvedValue({
-    generatedAt: "2026-08-05T00:00:00Z",
-    count: ROWS.length,
-    items: ROWS,
-  });
+  fetchFromR2AsJson.mockResolvedValue(snapshot(ROWS));
 });
 
 /** 戻り値の形が関数ごとに違うので rankingKey だけ取り出す */
@@ -110,13 +119,13 @@ describe("退役キーは R2 snapshot に残っていてもリンク一覧に出
   });
 
   it("★退役キーしか無いタグは「該当なし」になる (退役キーで代替しない)", async () => {
-    fetchFromR2AsJson.mockResolvedValue({ items: [item(GONE_KEY)] });
+    fetchFromR2AsJson.mockResolvedValue(snapshot([item(GONE_KEY)]));
     expect((await readFirstKeyByTagFromR2("t1")).success).toBe(false);
     expect((await readRankingItemsByTagFromR2("t1")).success).toBe(false);
   });
 
   it("陰性対照: GONE が空なら何も落とさない (filter が効きすぎていない)", async () => {
-    fetchFromR2AsJson.mockResolvedValue({ items: [item(LIVE_KEY), item("total-households")] });
+    fetchFromR2AsJson.mockResolvedValue(snapshot([item(LIVE_KEY), item("total-households")]));
     const res = await readRankingItemsByCategoryFromR2("population");
     expect(keysOf(res)).toEqual([LIVE_KEY, "total-households"]);
   });

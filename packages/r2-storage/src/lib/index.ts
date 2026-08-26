@@ -8,7 +8,9 @@ export { listFromR2, listFromR2WithSize } from "./operations/list";
 export { saveToR2 } from "./operations/save";
 export {
   createSnapshotReader,
+  type SnapshotReader,
   type SnapshotReaderOptions,
+  type SnapshotReadResult,
 } from "./operations/snapshot-reader";
 
 // utils

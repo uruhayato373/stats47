@@ -7,12 +7,14 @@ import { err, ok, type Result } from "@stats47/types";
 
 import {
   SURVEYS_SNAPSHOT_KEY,
+  parseSurveysSnapshot,
   type SurveysSnapshot,
 } from "../../types/snapshot";
 
 const loadAll = createSnapshotReader<SurveysSnapshot, Source[]>({
   key: SURVEYS_SNAPSHOT_KEY,
   label: "surveys",
+  parse: parseSurveysSnapshot,
   select: (snapshot) => snapshot.surveys,
   fallback: [],
 });

@@ -53,9 +53,79 @@ export interface RankingItemsSnapshot {
 }
 
 export interface SurveysSnapshot {
+  schemaVersion: 2;
   generatedAt: string;
   count: number;
   surveys: Source[];
+}
+
+function isSnapshotRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function parseNullableString(value: unknown, path: string): string | null {
+  if (value === null) return null;
+  if (typeof value !== "string") throw new Error(`${path} must be string or null`);
+  return value;
+}
+
+function parseSource(value: unknown, index: number): Source {
+  if (!isSnapshotRecord(value)) throw new Error(`surveys[${index}] must be an object`);
+  const path = (field: string) => `surveys[${index}].${field}`;
+  for (const field of ["id", "sourceKind", "name"] as const) {
+    if (typeof value[field] !== "string" || value[field].length === 0) {
+      throw new Error(`${path(field)} must be a non-empty string`);
+    }
+  }
+  const nullableFields = [
+    "externalId", "parentSourceId", "organization", "url", "description",
+    "attributionText", "license", "licenseUrl", "baseUrl", "linkTemplate",
+    "createdAt", "updatedAt",
+  ] as const;
+  const nullable = Object.fromEntries(
+    nullableFields.map((field) => [field, parseNullableString(value[field], path(field))]),
+  ) as Pick<Source, (typeof nullableFields)[number]>;
+  if (value.displayOrder !== null && !Number.isFinite(value.displayOrder)) {
+    throw new Error(`${path("displayOrder")} must be finite number or null`);
+  }
+  if (value.isActive !== null && typeof value.isActive !== "boolean") {
+    throw new Error(`${path("isActive")} must be boolean or null`);
+  }
+  if (value.itemCount !== undefined && (!Number.isInteger(value.itemCount) || (value.itemCount as number) < 0)) {
+    throw new Error(`${path("itemCount")} must be a non-negative integer`);
+  }
+  return {
+    id: value.id as string,
+    sourceKind: value.sourceKind as string,
+    ...nullable,
+    name: value.name as string,
+    displayOrder: value.displayOrder as number | null,
+    isActive: value.isActive as boolean | null,
+    ...(value.itemCount === undefined ? {} : { itemCount: value.itemCount as number }),
+  };
+}
+
+export function buildSurveysSnapshot(
+  surveys: readonly Source[],
+  generatedAt = new Date().toISOString(),
+): SurveysSnapshot {
+  return { schemaVersion: 2, generatedAt, count: surveys.length, surveys: [...surveys] };
+}
+
+export function parseSurveysSnapshot(value: unknown): SurveysSnapshot {
+  if (!isSnapshotRecord(value)) throw new Error("surveys snapshot must be an object");
+  if (value.schemaVersion !== undefined && value.schemaVersion !== 2) {
+    throw new Error("surveys snapshot schemaVersion must be 2 or omitted legacy");
+  }
+  if (typeof value.generatedAt !== "string" || !Number.isFinite(Date.parse(value.generatedAt))) {
+    throw new Error("surveys snapshot generatedAt must be a valid date string");
+  }
+  if (!Array.isArray(value.surveys)) throw new Error("surveys must be an array");
+  const surveys = value.surveys.map(parseSource);
+  if (!Number.isInteger(value.count) || value.count !== surveys.length) {
+    throw new Error("surveys snapshot count must equal surveys.length");
+  }
+  return buildSurveysSnapshot(surveys, value.generatedAt);
 }
 
 /**

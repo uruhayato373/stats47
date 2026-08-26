@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "contracts": [
+    {
+      "id": "stats-r2",
+      "sourceFiles": ["packages/stats-r2/src/readers/index.ts"],
+      "criticality": "critical",
+      "runtimeParsers": ["parseStatsValuesPayload", "parseMigrationFlowPayload", "parseJapanSeriesArtifact"],
+      "missingBehavior": "no-data",
+      "fallback": "null on 404 only",
+      "owner": "snapshot-exporter"
+    },
+    {
+      "id": "ranking-items",
+      "sourceFiles": ["packages/ranking/src/repositories/ranking-item/read-ranking-items-snapshot.ts"],
+      "criticality": "critical",
+      "runtimeParsers": ["parseRankingItemSnapshot", "parseRankingItemsSnapshot", "parseCategoryItemsSnapshot"],
+      "missingBehavior": "no-data",
+      "fallback": "route-specific empty/null on 404 only",
+      "owner": "ranking-publisher"
+    },
+    {
+      "id": "ranking-values",
+      "sourceFiles": ["packages/ranking/src/repositories/ranking-value/read-ranking-values-from-r2.ts"],
+      "criticality": "critical",
+      "runtimeParsers": ["parseRankingValuesKeySnapshot", "parseNationalTrendSnapshot"],
+      "missingBehavior": "no-data",
+      "fallback": "null/empty on 404 only",
+      "owner": "ranking-publisher"
+    },
+    {
+      "id": "page-components",
+      "sourceFiles": ["apps/web/src/components/stat-charts/services/page-components-snapshot.ts"],
+      "criticality": "critical",
+      "runtimeParsers": ["parsePageComponents", "parseStringArray"],
+      "missingBehavior": "no-data",
+      "fallback": "empty on 404; throw on corrupt/source unavailable",
+      "owner": "theme-component-builder"
+    },
+    {
+      "id": "categories",
+      "sourceFiles": ["packages/category/src/repositories/read-categories-snapshot.ts"],
+      "criticality": "high",
+      "runtimeParsers": ["parseCategoriesSnapshot"],
+      "missingBehavior": "no-data",
+      "fallback": "empty on 404; Result error on corrupt/source unavailable",
+      "owner": "ranking-ui-manager"
+    },
+    {
+      "id": "area-profile",
+      "sourceFiles": ["packages/area-profile/src/repositories/read-area-profile-snapshot.ts"],
+      "criticality": "high",
+      "runtimeParsers": ["parseAreaProfileData"],
+      "missingBehavior": "no-data",
+      "fallback": "null on 404; throw on corrupt/source unavailable",
+      "owner": "area-curator"
+    },
+    {
+      "id": "area-databook",
+      "sourceFiles": ["packages/area-profile/src/repositories/read-area-databook-snapshot.ts"],
+      "criticality": "high",
+      "runtimeParsers": ["parseAreaDatabookSnapshot"],
+      "missingBehavior": "no-data",
+      "fallback": "null on 404; throw on corrupt/source unavailable",
+      "owner": "area-curator"
+    },
+    {
+      "id": "correlations",
+      "sourceFiles": [
+        "packages/correlation/src/repositories/read-correlation-snapshot.ts",
+        "packages/correlation/src/repositories/read-correlation-by-key.ts"
+      ],
+      "criticality": "high",
+      "runtimeParsers": ["parseCorrelationTopPairsSnapshot", "parseCorrelationStatsSnapshot", "parseCorrelationByKeySnapshot"],
+      "missingBehavior": "no-data",
+      "fallback": "empty/zero on 404; throw or Result error on corrupt/source unavailable",
+      "owner": "snapshot-exporter"
+    }
+  ]
+}

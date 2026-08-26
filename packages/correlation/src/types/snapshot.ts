@@ -71,3 +71,107 @@ export interface CorrelationByKeySnapshot {
   rankingKey: string;
   pairs: CorrelatedItem[];
 }
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function assertString(value: unknown, path: string): string {
+  if (typeof value !== "string") throw new Error(`${path} must be a string`);
+  return value;
+}
+
+function assertNullableString(value: unknown, path: string): string | null {
+  if (value === null) return null;
+  return assertString(value, path);
+}
+
+function assertNumber(value: unknown, path: string): number {
+  if (!Number.isFinite(value)) throw new Error(`${path} must be finite`);
+  return value as number;
+}
+
+function assertNullableNumber(value: unknown, path: string): number | null {
+  if (value === null) return null;
+  return assertNumber(value, path);
+}
+
+function parseTopCorrelation(value: unknown, index: number): TopCorrelation {
+  if (!isRecord(value)) throw new Error(`pairs[${index}] must be an object`);
+  return {
+    rankingKeyX: assertString(value.rankingKeyX, `pairs[${index}].rankingKeyX`),
+    rankingKeyY: assertString(value.rankingKeyY, `pairs[${index}].rankingKeyY`),
+    titleX: assertNullableString(value.titleX, `pairs[${index}].titleX`),
+    titleY: assertNullableString(value.titleY, `pairs[${index}].titleY`),
+    normalizationBasisX: assertNullableString(value.normalizationBasisX, `pairs[${index}].normalizationBasisX`),
+    normalizationBasisY: assertNullableString(value.normalizationBasisY, `pairs[${index}].normalizationBasisY`),
+    pearsonR: assertNumber(value.pearsonR, `pairs[${index}].pearsonR`),
+    effectiveR: assertNumber(value.effectiveR, `pairs[${index}].effectiveR`),
+    partialRPopulation: assertNullableNumber(value.partialRPopulation, `pairs[${index}].partialRPopulation`),
+    partialRArea: assertNullableNumber(value.partialRArea, `pairs[${index}].partialRArea`),
+    partialRAging: assertNullableNumber(value.partialRAging, `pairs[${index}].partialRAging`),
+    partialRDensity: assertNullableNumber(value.partialRDensity, `pairs[${index}].partialRDensity`),
+  };
+}
+
+function assertGeneratedAt(value: unknown): string {
+  const generatedAt = assertString(value, "generatedAt");
+  if (!Number.isFinite(Date.parse(generatedAt))) throw new Error("generatedAt must be a valid date");
+  return generatedAt;
+}
+
+export function parseCorrelationTopPairsSnapshot(value: unknown): CorrelationTopPairsSnapshot {
+  if (!isRecord(value) || !Array.isArray(value.pairs)) {
+    throw new Error("correlation top-pairs snapshot is schema-invalid");
+  }
+  return {
+    generatedAt: assertGeneratedAt(value.generatedAt),
+    pairs: value.pairs.map(parseTopCorrelation),
+  };
+}
+
+export function parseCorrelationStatsSnapshot(value: unknown): CorrelationStatsSnapshot {
+  if (!isRecord(value)) throw new Error("correlation stats snapshot must be an object");
+  return {
+    generatedAt: assertGeneratedAt(value.generatedAt),
+    total: assertNumber(value.total, "total"),
+    strong: assertNumber(value.strong, "strong"),
+  };
+}
+
+function parseCorrelatedItem(value: unknown, index: number): CorrelatedItem {
+  if (!isRecord(value) || !Array.isArray(value.scatterData)) {
+    throw new Error(`pairs[${index}] is schema-invalid`);
+  }
+  return {
+    rankingKey: assertString(value.rankingKey, `pairs[${index}].rankingKey`),
+    title: assertString(value.title, `pairs[${index}].title`),
+    subtitle: assertNullableString(value.subtitle, `pairs[${index}].subtitle`),
+    unit: assertString(value.unit, `pairs[${index}].unit`),
+    pearsonR: assertNumber(value.pearsonR, `pairs[${index}].pearsonR`),
+    partialRPopulation: assertNullableNumber(value.partialRPopulation, `pairs[${index}].partialRPopulation`),
+    partialRArea: assertNullableNumber(value.partialRArea, `pairs[${index}].partialRArea`),
+    partialRAging: assertNullableNumber(value.partialRAging, `pairs[${index}].partialRAging`),
+    partialRDensity: assertNullableNumber(value.partialRDensity, `pairs[${index}].partialRDensity`),
+    scatterData: value.scatterData.map((point, pointIndex) => {
+      if (!isRecord(point)) throw new Error(`pairs[${index}].scatterData[${pointIndex}] must be an object`);
+      return {
+        areaCode: assertString(point.areaCode, `pairs[${index}].scatterData[${pointIndex}].areaCode`),
+        areaName: assertString(point.areaName, `pairs[${index}].scatterData[${pointIndex}].areaName`),
+        x: assertNumber(point.x, `pairs[${index}].scatterData[${pointIndex}].x`),
+        y: assertNumber(point.y, `pairs[${index}].scatterData[${pointIndex}].y`),
+      };
+    }),
+  };
+}
+
+export function parseCorrelationByKeySnapshot(value: unknown): CorrelationByKeySnapshot {
+  if (!isRecord(value) || !Array.isArray(value.pairs)) {
+    throw new Error("correlation by-key snapshot is schema-invalid");
+  }
+  return {
+    generatedAt: assertGeneratedAt(value.generatedAt),
+    rankingKey: assertString(value.rankingKey, "rankingKey"),
+    pairs: value.pairs.map(parseCorrelatedItem),
+  };
+}

@@ -4,6 +4,7 @@ import { createSnapshotReader } from '@stats47/r2-storage/server';
 
 import {
   BLOG_SNAPSHOT_KEY,
+  parseBlogSnapshot,
   type BlogSnapshot,
   type SnapshotArticle,
   type SnapshotTagMeta,
@@ -16,6 +17,7 @@ import type { Article, ArticleFrontmatter } from '../types/article.types';
 const loadSnapshot = createSnapshotReader<BlogSnapshot, BlogSnapshot>({
   key: BLOG_SNAPSHOT_KEY,
   label: 'blog',
+  parse: parseBlogSnapshot,
   select: (snapshot) => snapshot,
   fallback: {
     generatedAt: new Date(0).toISOString(),

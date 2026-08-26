@@ -2,7 +2,31 @@ import { describe, expect, it, vi } from "vitest";
 
 const { fetchMock } = vi.hoisted(() => ({ fetchMock: vi.fn() }));
 vi.mock("@stats47/r2-storage/server", () => ({
-  fetchFromR2AsJson: (...args: unknown[]) => fetchMock(...args),
+  createSnapshotReader: (options: {
+    key: string;
+    parse: (value: unknown) => unknown;
+    select: (value: unknown) => unknown;
+  }) => {
+    const readResult = async () => {
+      const value = await fetchMock(options.key);
+      if (value === null) return { status: "no-data", attempts: 1 };
+      try {
+        return {
+          status: "ok",
+          data: options.select(options.parse(value)),
+          attempts: 1,
+        };
+      } catch (error) {
+        return {
+          status: "schema-invalid",
+          reason: "schema-invalid",
+          error,
+          attempts: 1,
+        };
+      }
+    };
+    return Object.assign(async () => undefined, { readResult });
+  },
 }));
 
 import { readJapanSeries } from "../index";
