@@ -14,7 +14,7 @@
     "pdf-lib": "^1.17.1",
     "pptxgenjs": "^4.0.1",
     "satori": "^0.26.0",
-    "sharp": "^0.33.5",
+    "sharp": "^0.35.3",
     "topojson-client": "^3"
   },
   "scripts": {
@@ -46,6 +46,6 @@
     "@types/topojson-client": "^3",
     "tsx": "^4.21.0",
     "typescript": "^5.0.0",
-    "vitest": "^2.1.8"
+    "vitest": "^4.1.11"
   }
 }

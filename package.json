@@ -54,6 +54,7 @@
     "metrics:check-period-contract": "node .claude/scripts/metrics/check-period-contract.mjs",
     "metrics:adsense-diagnostics": "node .claude/scripts/metrics/adsense-diagnostics-run.mjs",
     "metrics:test": "node --test .claude/scripts/metrics/__tests__/*.test.mjs",
+    "test:dependency-security": "node --test .claude/scripts/lib/__tests__/dependency-security-contract.test.cjs",
     "psi:test": "node --test .claude/scripts/psi/__tests__/*.test.mjs",
     "effect-verdict": "node .claude/scripts/lib/effect-verdict/cli.mjs",
     "effect-verdict:test": "node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs .claude/scripts/lib/__tests__/write-past-effects.test.mjs",
@@ -82,10 +83,11 @@
     "@types/shapefile": "^0.6.4",
     "@types/unzipper": "^0.10.11",
     "csv-parse": "^6.1.0",
+    "eslint-plugin-react-hooks": "7.0.1",
     "googleapis": "^171.4.0",
     "knip": "^5.82.1",
     "prettier": "^3.4.2",
-    "turbo": "^2.8.9",
+    "turbo": "^2.10.12",
     "youtube-transcript": "^1.3.0"
   },
   "workspaces": [
@@ -93,11 +95,31 @@
     "packages/*"
   ],
   "overrides": {
-    "next": "15.5.23",
-    "jsdom": "25.0.1"
+    "@aws-sdk/xml-builder": "3.972.40",
+    "@babel/core": "7.29.7",
+    "body-parser": "2.3.0",
+    "@esbuild-kit/core-utils": {
+      "esbuild": "0.28.1"
+    },
+    "eslint-plugin-react-hooks": "$eslint-plugin-react-hooks",
+    "fast-xml-builder": "1.3.1",
+    "fast-xml-parser": "5.11.0",
+    "form-data": "4.0.6",
+    "image-size": "$image-size",
+    "js-yaml": "4.3.1",
+    "next": "15.5.24",
+    "postcss": "8.5.26",
+    "qs": "6.15.3",
+    "sharp": "0.35.3",
+    "typescript": "5.9.3",
+    "undici": "7.29.0",
+    "uuid": "11.1.1",
+    "workerd": "1.20260825.1",
+    "ws": "8.21.3"
   },
   "packageManager": "npm@10.8.2",
   "dependencies": {
+    "image-size": "file:packages/product-factory/src/shims/image-size-disabled",
     "d3": "^7.9.0",
     "d3-scale-chromatic": "^3.1.0",
     "http-proxy-agent": "^8.0.0",

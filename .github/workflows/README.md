@@ -281,10 +281,12 @@ GitHub Actionsのキャッシュが古い場合:
 
 **チェック内容**:
 
-1. `npm audit` - 依存関係の脆弱性チェック（moderate以上）
-2. CodeQL分析 - コードの静的解析（JavaScript/TypeScript）
+1. `npm run test:dependency-security` - 置換依存と到達不能性の契約テスト
+2. `npm audit --audit-level=high` - 全依存のcritical/highを拒否
+3. `npm audit --omit=dev --audit-level=low` - runtime依存の全脆弱性を拒否
+4. CodeQL分析 - コードの静的解析（JavaScript/TypeScript）
 
-**注意**: エラーは警告のみで、ワークフロー自体は失敗させません（`continue-on-error: true`）
+**注意**: 依存関係ゲートはfail-closedで、違反時はワークフローを失敗させます。CodeQLは解析基盤側の一時障害でリリースを止めないよう警告扱いです。
 
 ## チェックリスト
 

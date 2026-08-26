@@ -1,0 +1,15 @@
+{
+  "name": "image-size",
+  "version": "2.0.3",
+  "private": true,
+  "description": "Fail-closed replacement for the unused vulnerable image-size parser pulled by pptxgenjs.",
+  "main": "./index.cjs",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "require": "./index.cjs",
+      "default": "./index.cjs"
+    }
+  }
+}

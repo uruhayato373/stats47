@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T20:42:54.560Z",
+  "updatedAt": "2026-08-26T04:32:48.862Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -917,6 +917,73 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-25T11:35:01.189Z"
+    },
+    "SEC-DEPENDABOT-76-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-26T04:04:16.089Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm audit --audit-level=high",
+              "npm audit --omit=dev --audit-level=low",
+              "npm run type-check",
+              "npm run test:packages",
+              "npm run test:run --workspace apps/web",
+              "npm run build --workspace apps/web",
+              "npm run build --workspace apps/remotion",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "ローカルはcritical/high/runtime=0、型25/25、packages 188/188、Web 171/171、Web/Remotion build green。main未反映のためDependabot open76の再走査待ち。",
+          "failReason": "カード完了条件のGitHub open 0はmain反映後のDependabot再走査が必要。deployは本カード権限外。",
+          "followUps": []
+        },
+        {
+          "at": "2026-08-26T04:32:48.862Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm ci",
+              "npm ls --all",
+              "npm audit --audit-level=low",
+              "npm run test:dependency-security",
+              "npm run type-check",
+              "npm run test:packages",
+              "npm run test:run --workspace apps/web",
+              "npm run build --workspace apps/web",
+              "npm run build --workspace apps/remotion",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "ローカル依存監査は開発/runtimeを含め0件。npm ci・npm ls成功、型25/25、packages 188/188（1880件）、Web 171/171（1063件）、Web/Remotion build green。main未反映のためDependabot再走査待ち。",
+          "failReason": "カード完了条件のGitHub open 0はmain反映後のDependabot再走査が必要。deployは本カード権限外。",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 2,
+        "lastReason": "カード完了条件のGitHub open 0はmain反映後のDependabot再走査が必要。deployは本カード権限外。",
+        "since": "2026-08-26T04:04:16.089Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }

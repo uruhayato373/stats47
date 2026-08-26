@@ -18,14 +18,11 @@ export default defineConfig({
     setupFiles: ["./src/config/test.setup.tsx"],
     // Node.jsモジュールを正しく処理するための設定
     pool: "threads",
-    poolOptions: {
-      threads: {
-        singleThread: false,
-      },
-    },
     // 並列実行を有効化（パフォーマンス向上）
     maxWorkers: 4,
     minWorkers: 2,
+    // Vitest 4 は worker 数が異なる project に固有の groupOrder を求める。
+    sequence: { groupOrder: 1 },
     // テストタイムアウトを設定（デフォルト: 5秒）
     testTimeout: 10000,
     
