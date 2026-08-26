@@ -4,7 +4,7 @@ import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
 import { HEALTHCARE_CATALOG } from "../theme-catalog/healthcare";
 
 describe("healthcare evidence topics", () => {
-  it("医療供給・病床利用・予防成果を重複しない論点に分ける", () => {
+  it("医療供給と病床利用を重複しない論点に分ける", () => {
     expect(
       HEALTHCARE_CATALOG.evidenceTopics?.map(({ key, lensKey }) => ({
         key,
@@ -13,7 +13,6 @@ describe("healthcare evidence topics", () => {
     ).toEqual([
       { key: "physician-distribution", lensKey: "service-capacity" },
       { key: "inpatient-capacity-and-use", lensKey: "participation" },
-      { key: "checkup-and-health-outcomes", lensKey: "outcomes" },
     ]);
   });
 
@@ -39,13 +38,5 @@ describe("healthcare evidence topics", () => {
         expect(source.sourceUrl).toMatch(/^https:\/\/www\.mhlw\.go\.jp\//);
       }
     }
-  });
-
-  it("健診と死亡の併記を因果関係と断定しない", () => {
-    const topic = HEALTHCARE_CATALOG.evidenceTopics?.find(
-      ({ key }) => key === "checkup-and-health-outcomes",
-    );
-
-    expect(topic?.summary).toContain("因果効果とは扱いません");
   });
 });

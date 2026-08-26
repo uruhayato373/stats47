@@ -116,13 +116,6 @@ export const EVIDENCE_SOURCE_CATALOG = {
     sourceUrl:
       "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/open_data_00020.html",
   },
-  "mhlw-healthy-japan-21-third": {
-    kind: "report",
-    title: "健康日本21（第三次）",
-    publisher: "厚生労働省",
-    sourceUrl:
-      "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kenkounippon21_00006.html",
-  },
 } as const satisfies Record<string, EvidenceSourceDefinition>;
 
 export type EvidenceSourceKey = keyof typeof EVIDENCE_SOURCE_CATALOG;

@@ -405,21 +405,6 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
         "general-hospital-avg-length-of-stay",
       ],
     },
-    {
-      key: "checkup-and-health-outcomes",
-      lensKey: "outcomes",
-      title: "健診参加と生活習慣病の健康成果",
-      question:
-        "健診受診率と生活習慣病死亡率の推移は、予防参加と健康成果の地域差をどう示すか",
-      summary:
-        "健診参加と死亡という異なる指標を併記し、時系列の連動をそのまま因果効果とは扱いません。",
-      sourceKeys: ["mhlw-healthy-japan-21-third"],
-      relatedRankingKeys: [
-        "health-checkup-rate-lifestyle-diseases",
-        "deaths-lifestyle-diseases-per-100k",
-      ],
-      relatedChartKeys: ["theme-health-lifestyle-trend"],
-    },
   ],
   "keywords": [
     "医師数",
