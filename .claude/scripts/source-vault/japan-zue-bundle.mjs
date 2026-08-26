@@ -21,21 +21,67 @@ import { spawn } from "node:child_process";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(SCRIPT_DIR, "../../..");
-const SOURCE_KEY = "japan-zue";
-const EDITION = "2025-26";
-const REVISION = 1;
-const SOURCE_ROOT_NAME = "日本国勢図絵";
-const BUNDLE_FILE_NAME = `stats47-${SOURCE_KEY}-${EDITION}-r${REVISION}.tar.gz`;
-const MANIFEST_FILE_NAME = `stats47-${SOURCE_KEY}-${EDITION}-r${REVISION}.manifest.json`;
-const DEFAULT_SOURCE = path.join(PROJECT_ROOT, "books", SOURCE_ROOT_NAME);
-const DEFAULT_OUTPUT_DIR = path.join(
-  tmpdir(),
-  "stats47-source-vault",
-  SOURCE_KEY,
-  EDITION,
-  `r${REVISION}`,
-);
+const PROFILE_CONFIG_PATH = path.join(PROJECT_ROOT, ".claude", "config", "source-vault.json");
 const DEFAULT_PART_SIZE_MIB = 90;
+let PROFILE_NAME;
+let SOURCE_KEY;
+let EDITION;
+let REVISION;
+let SOURCE_ROOT_NAME;
+let BUNDLE_FILE_NAME;
+let MANIFEST_FILE_NAME;
+let DEFAULT_SOURCE;
+let DEFAULT_OUTPUT_DIR;
+let DRIVE_FOLDER_PATH;
+
+async function activateProfile(profileName) {
+  const config = JSON.parse(await readFile(PROFILE_CONFIG_PATH, "utf8"));
+  if (config.schemaVersion !== 1 || !config.profiles || typeof config.profiles !== "object") {
+    throw new Error(`Invalid source vault config: ${PROFILE_CONFIG_PATH}`);
+  }
+  PROFILE_NAME = profileName ?? config.defaultProfile;
+  const profile = config.profiles[PROFILE_NAME];
+  if (!profile) {
+    throw new Error(`Unknown source vault profile: ${PROFILE_NAME}`);
+  }
+  for (const field of ["sourceKey", "edition", "sourceRootName", "localPath", "driveFolderPath"]) {
+    if (typeof profile[field] !== "string" || profile[field] === "") {
+      throw new Error(`Invalid ${field} in source vault profile: ${PROFILE_NAME}`);
+    }
+  }
+  if (!Number.isInteger(profile.revision) || profile.revision < 1) {
+    throw new Error(`Invalid revision in source vault profile: ${PROFILE_NAME}`);
+  }
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(profile.sourceKey) || !/^[a-z0-9][a-z0-9-]*$/.test(profile.edition)) {
+    throw new Error(`Unsafe sourceKey or edition in source vault profile: ${PROFILE_NAME}`);
+  }
+  assertSafeFileName(profile.sourceRootName, "profile sourceRootName");
+  SOURCE_KEY = profile.sourceKey;
+  EDITION = profile.edition;
+  REVISION = profile.revision;
+  SOURCE_ROOT_NAME = profile.sourceRootName;
+  DRIVE_FOLDER_PATH = profile.driveFolderPath;
+  BUNDLE_FILE_NAME = `stats47-${SOURCE_KEY}-${EDITION}-r${REVISION}.tar.gz`;
+  MANIFEST_FILE_NAME = `stats47-${SOURCE_KEY}-${EDITION}-r${REVISION}.manifest.json`;
+  DEFAULT_SOURCE = path.resolve(PROJECT_ROOT, profile.localPath);
+  const booksRoot = path.join(PROJECT_ROOT, "books");
+  const sourceRelative = path.relative(booksRoot, DEFAULT_SOURCE);
+  if (
+    sourceRelative === "" ||
+    sourceRelative.startsWith("..") ||
+    path.isAbsolute(sourceRelative) ||
+    path.basename(DEFAULT_SOURCE) !== SOURCE_ROOT_NAME
+  ) {
+    throw new Error(`Profile localPath must be a named child of books/: ${PROFILE_NAME}`);
+  }
+  DEFAULT_OUTPUT_DIR = path.join(
+    tmpdir(),
+    "stats47-source-vault",
+    SOURCE_KEY,
+    EDITION,
+    `r${REVISION}`,
+  );
+}
 
 function usage() {
   return `Usage:
@@ -44,6 +90,7 @@ function usage() {
   node .claude/scripts/source-vault/japan-zue-bundle.mjs restore [options]
 
 create options:
+  --profile <name>     Source profile from .claude/config/source-vault.json (default: ${PROFILE_NAME})
   --source <dir>       Source directory (default: books/${SOURCE_ROOT_NAME})
   --bundle <file>      Archive output (default: ${DEFAULT_OUTPUT_DIR}/${BUNDLE_FILE_NAME})
   --manifest <file>    Manifest output (default: ${DEFAULT_OUTPUT_DIR}/${MANIFEST_FILE_NAME})
@@ -61,7 +108,7 @@ restore options:
   --manifest <file>    Required manifest
   --bundle <file>      Required archive
   --parts-dir <dir>    Use verified parts instead of --bundle
-  --target <dir>       Restore target (default: books/${SOURCE_ROOT_NAME})
+  --target <dir>       Restore target (default: books/<manifest.sourceRootName>)
 
 The bundle is private source material. Do not place it inside the Git repository.`;
 }
@@ -106,6 +153,30 @@ function normalizeRelative(filePath) {
     throw new Error(`Unsafe relative path: ${filePath}`);
   }
   return normalized;
+}
+
+function assertSafeFileName(value, label) {
+  if (
+    typeof value !== "string" ||
+    value === "" ||
+    value === "." ||
+    value === ".." ||
+    value.includes("/") ||
+    value.includes("\\") ||
+    value.includes("\0")
+  ) {
+    throw new Error(`Unsafe ${label}: ${String(value)}`);
+  }
+}
+
+function assertSafeManifestPath(value, label) {
+  if (typeof value !== "string" || value === "" || value.includes("\\") || value.includes("\0")) {
+    throw new Error(`Unsafe ${label}: ${String(value)}`);
+  }
+  const segments = value.split("/");
+  if (value.startsWith("/") || segments.some((segment) => segment === "" || segment === "." || segment === "..")) {
+    throw new Error(`Unsafe ${label}: ${value}`);
+  }
 }
 
 async function sha256File(filePath) {
@@ -234,14 +305,32 @@ async function readManifest(manifestPath) {
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
   if (
     manifest.schemaVersion !== 1 ||
-    manifest.sourceKey !== SOURCE_KEY ||
-    manifest.edition !== EDITION ||
-    manifest.revision !== REVISION ||
-    manifest.sourceRootName !== SOURCE_ROOT_NAME ||
+    typeof manifest.sourceKey !== "string" ||
+    typeof manifest.edition !== "string" ||
+    !Number.isInteger(manifest.revision) ||
+    typeof manifest.sourceRootName !== "string" ||
     !manifest.bundle ||
+    typeof manifest.bundle.fileName !== "string" ||
     !Array.isArray(manifest.files)
   ) {
     throw new Error(`Unsupported or invalid manifest: ${manifestPath}`);
+  }
+  assertSafeFileName(manifest.sourceRootName, "manifest sourceRootName");
+  assertSafeFileName(manifest.bundle.fileName, "manifest bundle fileName");
+  if (!Array.isArray(manifest.bundle.parts) || manifest.bundle.parts.length === 0) {
+    throw new Error(`Manifest does not contain bundle parts: ${manifestPath}`);
+  }
+  const partNames = new Set();
+  for (const part of manifest.bundle.parts) {
+    assertSafeFileName(part.fileName, "manifest part fileName");
+    if (partNames.has(part.fileName)) throw new Error(`Duplicate manifest part fileName: ${part.fileName}`);
+    partNames.add(part.fileName);
+  }
+  const filePaths = new Set();
+  for (const file of manifest.files) {
+    assertSafeManifestPath(file.path, "manifest file path");
+    if (filePaths.has(file.path)) throw new Error(`Duplicate manifest file path: ${file.path}`);
+    filePaths.add(file.path);
   }
   return manifest;
 }
@@ -388,6 +477,7 @@ async function createBundle(options) {
   const parts = await splitBundle(bundlePath, partsDir, partSizeMib * 1024 * 1024, options.force);
   const manifest = {
     schemaVersion: 1,
+    profile: PROFILE_NAME,
     sourceKey: SOURCE_KEY,
     edition: EDITION,
     revision: REVISION,
@@ -395,7 +485,7 @@ async function createBundle(options) {
     storage: {
       provider: "google-drive",
       visibility: "private",
-      folderPath: `stats47-private-sources/${SOURCE_KEY}/${EDITION}`,
+      folderPath: DRIVE_FOLDER_PATH,
     },
     bundle: {
       fileName: BUNDLE_FILE_NAME,
@@ -431,11 +521,10 @@ async function restore(options) {
   if (!options.manifest || (!options.bundle && !options["parts-dir"])) {
     throw new Error("restore requires --manifest and either --bundle or --parts-dir");
   }
-  const targetPath = path.resolve(options.target ?? DEFAULT_SOURCE);
-  if (await pathExists(targetPath)) throw new Error(`Restore target already exists; refusing to overwrite: ${targetPath}`);
-
   const manifestPath = path.resolve(options.manifest);
   const manifest = await readManifest(manifestPath);
+  const targetPath = path.resolve(options.target ?? path.join(PROJECT_ROOT, "books", manifest.sourceRootName));
+  if (await pathExists(targetPath)) throw new Error(`Restore target already exists; refusing to overwrite: ${targetPath}`);
   let bundlePath;
   let removeAssembledBundle = false;
   let assembledDir;
@@ -444,7 +533,7 @@ async function restore(options) {
     await verifyBundle(bundlePath, manifest);
   } else {
     assembledDir = await mkdtemp(path.join(tmpdir(), "stats47-source-vault-restore-"));
-    bundlePath = path.join(assembledDir, BUNDLE_FILE_NAME);
+    bundlePath = path.join(assembledDir, manifest.bundle.fileName);
     await assembleParts(path.resolve(options["parts-dir"]), bundlePath, manifest);
     removeAssembledBundle = true;
   }
@@ -455,7 +544,7 @@ async function restore(options) {
   await mkdir(staging, { recursive: false });
   try {
     await runTar(["-xzf", bundlePath, "-C", staging], PROJECT_ROOT);
-    const extractedRoot = path.join(staging, SOURCE_ROOT_NAME);
+    const extractedRoot = path.join(staging, manifest.sourceRootName);
     await verifySource(extractedRoot, manifest);
     await rename(extractedRoot, targetPath);
   } finally {
@@ -467,6 +556,7 @@ async function restore(options) {
 
 async function main() {
   const { command, options } = parseArgs(process.argv.slice(2));
+  await activateProfile(options.profile);
   if (!command || command === "--help" || command === "help") {
     console.log(usage());
     return;

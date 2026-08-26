@@ -80,6 +80,7 @@
     "search-growth:measure": "node .claude/scripts/search-growth/cli.mjs measure",
     "search-growth:all": "node .claude/scripts/search-growth/cli.mjs all",
     "search-growth:test": "node --test .claude/scripts/search-growth/__tests__/*.test.mjs",
+    "source-vault": "node .claude/scripts/source-vault/japan-zue-bundle.mjs",
     "source-vault:japan-zue": "node .claude/scripts/source-vault/japan-zue-bundle.mjs",
     "source-vault:test": "node --test .claude/scripts/source-vault/__tests__/*.test.mjs"
   },

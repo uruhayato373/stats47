@@ -149,3 +149,62 @@ test("restore assembles verified parts", async (t) => {
   ]);
   assert.equal(await readFile(path.join(target, "md", "p026.md"), "utf8"), "sample\n");
 });
+
+test("profile creates and restores a second private source", async (t) => {
+  const root = path.join(tmpdir(), `stats47-source-vault-profile-test-${process.pid}-${Date.now()}`);
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const source = path.join(root, "47都道府県の偏差値");
+  const bundle = path.join(root, "stats47-prefecture-deviation-unknown-r1.tar.gz");
+  const manifestPath = path.join(root, "stats47-prefecture-deviation-unknown-r1.manifest.json");
+  const parts = path.join(root, "parts");
+  await mkdir(source, { recursive: true });
+  await writeFile(path.join(source, "scan.pdf"), "private-source\n");
+
+  await run([
+    "create",
+    "--profile",
+    "prefecture-deviation",
+    "--source",
+    source,
+    "--bundle",
+    bundle,
+    "--manifest",
+    manifestPath,
+    "--parts-dir",
+    parts,
+  ]);
+  const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+  assert.equal(manifest.profile, "prefecture-deviation");
+  assert.equal(manifest.sourceKey, "prefecture-deviation");
+  assert.equal(manifest.edition, "unknown");
+  assert.equal(manifest.sourceRootName, "47都道府県の偏差値");
+  assert.equal(manifest.componentCounts.pdfs, 1);
+
+  await rm(bundle);
+  const target = path.join(root, "restored", "47都道府県の偏差値");
+  await run(["restore", "--manifest", manifestPath, "--parts-dir", parts, "--target", target]);
+  assert.equal(await readFile(path.join(target, "scan.pdf"), "utf8"), "private-source\n");
+});
+
+test("verify rejects manifest paths that can escape the download directory", async (t) => {
+  const paths = await fixture();
+  t.after(() => rm(paths.root, { recursive: true, force: true }));
+  await run([
+    "create",
+    "--source",
+    paths.source,
+    "--bundle",
+    paths.bundle,
+    "--manifest",
+    paths.manifest,
+    "--parts-dir",
+    paths.parts,
+  ]);
+  const manifest = JSON.parse(await readFile(paths.manifest, "utf8"));
+  manifest.bundle.parts[0].fileName = "../outside.part";
+  await writeFile(paths.manifest, `${JSON.stringify(manifest)}\n`);
+  await assert.rejects(
+    run(["verify", "--manifest", paths.manifest, "--parts-dir", paths.parts]),
+    /Unsafe manifest part fileName/,
+  );
+});

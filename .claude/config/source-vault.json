@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "defaultProfile": "japan-zue",
+  "profiles": {
+    "japan-zue": {
+      "sourceKey": "japan-zue",
+      "edition": "2025-26",
+      "revision": 1,
+      "sourceRootName": "日本国勢図絵",
+      "localPath": "books/日本国勢図絵",
+      "driveFolderPath": "stats47-private-sources/japan-zue/2025-26"
+    },
+    "prefecture-deviation": {
+      "sourceKey": "prefecture-deviation",
+      "edition": "unknown",
+      "revision": 1,
+      "sourceRootName": "47都道府県の偏差値",
+      "localPath": "books/47都道府県の偏差値",
+      "driveFolderPath": "stats47-private-sources/prefecture-deviation/unknown"
+    }
+  }
+}
