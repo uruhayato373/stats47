@@ -35,6 +35,8 @@ test("unitMultiplier: 百万 は 万 より先に判定される", () => {
   assert.equal(unitMultiplier("百万円"), 1e6);
   assert.equal(unitMultiplier("万人"), 1e4);
   assert.equal(unitMultiplier("兆円"), 1e12);
+  assert.equal(unitMultiplier("kg"), 1);
+  assert.equal(unitMultiplier("kWh"), 1);
   assert.equal(unitMultiplier("店"), 1);
   assert.equal(unitMultiplier(undefined), 1);
 });

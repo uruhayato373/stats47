@@ -1,0 +1,108 @@
+name: 🗺️ KSJ aggregate ingest → R2
+
+# KSJ の公開元データを CI 内で再取得し、都道府県別集計だけを
+# app/stats/<metric>/values.json へ公開する。元の GIS / TopoJSON は R2 へ再配布しない。
+# SSOT: packages/gis/src/mlit-ksj/{datasets,registry}.ts / .claude/rules/gis-data.md
+
+on:
+  workflow_dispatch:
+    inputs:
+      metric:
+        description: '集計・公開する metric'
+        required: true
+        type: choice
+        default: tourism-resource-count
+        options:
+          - tourism-resource-count
+      dry_run:
+        description: 'true: 取得・集計・検証のみ (R2 へ書かない)'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧱 Rebuild disposable GIS catalog
+        run: |
+          npm run db:migrate:local --workspace=@stats47/database
+          npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts
+
+      - name: 📥 Fetch and convert P12 locally
+        if: inputs.metric == 'tourism-resource-count'
+        run: npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts P12
+
+      - name: 🧮 Build prefecture aggregate (unresolved=0 gate)
+        run: |
+          npx tsx packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts \
+            --metric "${{ inputs.metric }}" --compare
+
+      - name: ✅ Verify exact aggregate payload
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const metric = 'tourism-resource-count';
+          const path = `.local/r2/app/stats/${metric}/values.json`;
+          const payload = JSON.parse(fs.readFileSync(path, 'utf8'));
+          if (payload.metricKey !== metric) throw new Error(`metricKey mismatch: ${payload.metricKey}`);
+          if (!Array.isArray(payload.rows) || payload.rows.length !== 47) {
+            throw new Error(`47 prefectures required: ${payload.rows?.length ?? 'missing'}`);
+          }
+          const codes = new Set(payload.rows.map((row) => row.areaCode));
+          if (codes.size !== 47) throw new Error(`duplicate/missing prefecture codes: ${codes.size}`);
+          if (payload.rows.some((row) => !Number.isFinite(row.value) || row.value < 0)) {
+            throw new Error('aggregate includes a non-finite or negative value');
+          }
+          console.log(`${metric}: rows=47 generatedAt=${payload.generatedAt}`);
+          NODE
+
+      - name: 📤 Publish aggregate only (never raw GIS)
+        if: inputs.dry_run != 'true'
+        run: |
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts \
+            --prefix "app/stats/${{ inputs.metric }}"
+
+      - name: 📝 Summary
+        if: always()
+        env:
+          METRIC: ${{ inputs.metric }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          {
+            echo '### KSJ aggregate ingest'
+            echo ''
+            echo "- metric: \`$METRIC\`"
+            echo "- dry run: \`$DRY_RUN\`"
+            echo '- raw GIS publish: **disabled**'
+            echo '- prefecture aggregate gate: 47 rows / unresolved 0'
+          } >> "$GITHUB_STEP_SUMMARY"

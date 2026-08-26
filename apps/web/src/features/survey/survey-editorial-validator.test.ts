@@ -12,6 +12,8 @@ const VALIDATOR = path.join(
   '.claude/scripts/surveys/validate-survey-portfolio.ts'
 );
 const tempDirs: string[] = [];
+// CIのcold startではtsx起動と80調査の全量検証が10秒を超えるため、CLI統合テストだけに適用する。
+const CLI_TEST_TIMEOUT_MS = 30_000;
 
 function runValidator(args: string[], env: Record<string, string> = {}) {
   return spawnSync(process.execPath, [TSX_CLI, VALIDATOR, '--json', ...args], {
@@ -43,7 +45,7 @@ describe('validate-survey-portfolio editorial gates', () => {
     expect(output.violations).toContainEqual(
       '[S8] editorial 実装数 0 が ratchet 80 を下回る'
     );
-  });
+  }, CLI_TEST_TIMEOUT_MS);
 
   it('--require-all-editorialでmaster全件の実装を要求する', () => {
     const dir = mkdtempSync(path.join(tmpdir(), 'survey-editorial-validator-'));
@@ -68,7 +70,7 @@ describe('validate-survey-portfolio editorial gates', () => {
     expect(output.violations).toContainEqual(
       expect.stringMatching(/^\[S8\] editorial 未実装 80 件:/)
     );
-  });
+  }, CLI_TEST_TIMEOUT_MS);
 
   it('移行完了後は通常CI経路でも80件の完全ゲートを通す', () => {
     const result = runValidator([]);
@@ -78,5 +80,5 @@ describe('validate-survey-portfolio editorial gates', () => {
     expect(output.editorialImplemented).toBe(80);
     expect(output.editorialRequired).toBe(80);
     expect(output.violations).toEqual([]);
-  });
+  }, CLI_TEST_TIMEOUT_MS);
 });

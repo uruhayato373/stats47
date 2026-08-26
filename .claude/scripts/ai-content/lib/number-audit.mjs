@@ -85,6 +85,11 @@ function toHalfWidth(text) {
  */
 export function unitMultiplier(unit) {
   if (!unit) return 1;
+  // `unitMult` は本文の「13,326千円」を抽出器が 13,326,000 と読む場合に、
+  // SSOT 値 (13,326、unit=千円) と桁をそろえるためだけの補正。
+  // kg / km / kWh など SI 接頭辞までここで補正すると、本文も SSOT も kg 表記なのに
+  // 上限を 1000 倍へ広げて「87.54kg → 8754kg」の桁落ちを許可してしまう。
+  if (!/^[百千万億兆]/.test(unit.trim())) return 1;
   // 解釈は正典へ委譲。解釈できない単位は 1 とみなす (ここは「倍率を掛けない」が正しい既定で、
   // 換算の可否を問う conversionFactor とは役割が違う)。
   return unitScaleMultiplier(unit) ?? 1;

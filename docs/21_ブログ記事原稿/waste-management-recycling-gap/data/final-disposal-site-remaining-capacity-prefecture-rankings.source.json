@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "final-disposal-site-remaining-capacity",
+  "source": "r2:app/ranking/final-disposal-site-remaining-capacity/values.json",
+  "upstream": "metric config → e-Stat → R2 app/ranking",
+  "generatedBy": "generate-article-charts.ts",
+  "chartType": "bar",
+  "dataFile": "final-disposal-site-remaining-capacity-prefecture-rankings.json",
+  "year": "2023",
+  "unit": "千ｍ3",
+  "label": "最終処分場残余容量 都道府県ランキング（2023年）"
+}

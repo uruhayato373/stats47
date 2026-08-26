@@ -3,6 +3,18 @@ import { describe, expect, it } from "vitest";
 import { checkGroundedRows, findKnownBrokenChecks, gateTopicData } from "../blog-topic-gate";
 
 const NOW = new Date("2026-07-31T00:00:00Z");
+const KNOWN_BROKEN_FIXTURE = [
+  {
+    key: "test-known-broken",
+    check: "percent-out-of-range" as const,
+    entities: ["prefecture" as const],
+    disposition: "known-broken" as const,
+    observedSeverity: 200,
+    reason: "テスト専用の既知破損データ",
+    issue: "TEST-ONLY",
+    until: "2026-12-31",
+  },
+];
 
 /** 47 県ぶんのダミー行 (値は全て異なる) */
 function healthyRows(n = 47) {
@@ -67,11 +79,13 @@ describe("checkGroundedRows", () => {
 
 describe("findKnownBrokenChecks", () => {
   it("★allowlist に known-broken で載る key を検出する", () => {
-    // employment-insurance-daily-receipt-rate は percent-out-of-range の known-broken (until 2026-12-31)。
-    // これが空になったら allowlist 側が変わったということなので、テストで気づけるようにする。
-    const hits = findKnownBrokenChecks("employment-insurance-daily-receipt-rate", NOW);
+    const hits = findKnownBrokenChecks("test-known-broken", NOW, KNOWN_BROKEN_FIXTURE);
     expect(hits.length).toBeGreaterThan(0);
     expect(hits.join()).toMatch(/percent-out-of-range/);
+  });
+
+  it("legitimate な100％超の公式値は known-broken と扱わない", () => {
+    expect(findKnownBrokenChecks("employment-insurance-daily-receipt-rate", NOW)).toEqual([]);
   });
 
   it("allowlist に無い key は空", () => {
@@ -82,7 +96,7 @@ describe("findKnownBrokenChecks", () => {
     // until を過ぎると findExpectedShapeAnomaly が null を返すため hits も空になる。
     // 「期限切れ = 素通し」ではなく、接地データ側の検査 (checkGroundedRows) が実データで弾く。
     const far = new Date("2030-01-01T00:00:00Z");
-    expect(findKnownBrokenChecks("employment-insurance-daily-receipt-rate", far)).toEqual([]);
+    expect(findKnownBrokenChecks("test-known-broken", far, KNOWN_BROKEN_FIXTURE)).toEqual([]);
   });
 });
 
@@ -92,7 +106,7 @@ describe("gateTopicData", () => {
   });
 
   it("★known-broken な key はデータが綺麗に見えても書かない", () => {
-    const v = gateTopicData("employment-insurance-daily-receipt-rate", healthyRows(), NOW);
+    const v = gateTopicData("test-known-broken", healthyRows(), NOW, KNOWN_BROKEN_FIXTURE);
     expect(v.ok).toBe(false);
     expect(v.reasons.join()).toMatch(/既知の壊れ/);
   });

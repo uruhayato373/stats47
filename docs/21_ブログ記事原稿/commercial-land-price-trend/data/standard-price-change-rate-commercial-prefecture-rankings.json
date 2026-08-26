@@ -1,0 +1,289 @@
+{
+  "label": "標準価格対前年平均変動率",
+  "unit": "％",
+  "year": "2024",
+  "data": [
+    {
+      "areaName": "東京都",
+      "rank": 1,
+      "value": 8.4,
+      "unit": "％"
+    },
+    {
+      "areaName": "大阪府",
+      "rank": 2,
+      "value": 7.3,
+      "unit": "％"
+    },
+    {
+      "areaName": "福岡県",
+      "rank": 3,
+      "value": 6.7,
+      "unit": "％"
+    },
+    {
+      "areaName": "神奈川県",
+      "rank": 4,
+      "value": 6.2,
+      "unit": "％"
+    },
+    {
+      "areaName": "沖縄県",
+      "rank": 5,
+      "value": 6.1,
+      "unit": "％"
+    },
+    {
+      "areaName": "京都府",
+      "rank": 6,
+      "value": 5.7,
+      "unit": "％"
+    },
+    {
+      "areaName": "千葉県",
+      "rank": 7,
+      "value": 5,
+      "unit": "％"
+    },
+    {
+      "areaName": "宮城県",
+      "rank": 8,
+      "value": 4.3,
+      "unit": "％"
+    },
+    {
+      "areaName": "愛知県",
+      "rank": 9,
+      "value": 3.6,
+      "unit": "％"
+    },
+    {
+      "areaName": "兵庫県",
+      "rank": 10,
+      "value": 2.8,
+      "unit": "％"
+    },
+    {
+      "areaName": "熊本県",
+      "rank": 10,
+      "value": 2.8,
+      "unit": "％"
+    },
+    {
+      "areaName": "埼玉県",
+      "rank": 12,
+      "value": 2.7,
+      "unit": "％"
+    },
+    {
+      "areaName": "佐賀県",
+      "rank": 13,
+      "value": 1.7,
+      "unit": "％"
+    },
+    {
+      "areaName": "広島県",
+      "rank": 14,
+      "value": 1.5,
+      "unit": "％"
+    },
+    {
+      "areaName": "茨城県",
+      "rank": 15,
+      "value": 1.4,
+      "unit": "％"
+    },
+    {
+      "areaName": "奈良県",
+      "rank": 16,
+      "value": 1.2,
+      "unit": "％"
+    },
+    {
+      "areaName": "滋賀県",
+      "rank": 17,
+      "value": 1,
+      "unit": "％"
+    },
+    {
+      "areaName": "北海道",
+      "rank": 18,
+      "value": 0.9,
+      "unit": "％"
+    },
+    {
+      "areaName": "岡山県",
+      "rank": 18,
+      "value": 0.9,
+      "unit": "％"
+    },
+    {
+      "areaName": "石川県",
+      "rank": 20,
+      "value": 0.7,
+      "unit": "％"
+    },
+    {
+      "areaName": "福島県",
+      "rank": 21,
+      "value": 0.6,
+      "unit": "％"
+    },
+    {
+      "areaName": "岐阜県",
+      "rank": 21,
+      "value": 0.6,
+      "unit": "％"
+    },
+    {
+      "areaName": "三重県",
+      "rank": 23,
+      "value": 0.4,
+      "unit": "％"
+    },
+    {
+      "areaName": "富山県",
+      "rank": 24,
+      "value": 0.3,
+      "unit": "％"
+    },
+    {
+      "areaName": "静岡県",
+      "rank": 24,
+      "value": 0.3,
+      "unit": "％"
+    },
+    {
+      "areaName": "長崎県",
+      "rank": 24,
+      "value": 0.3,
+      "unit": "％"
+    },
+    {
+      "areaName": "群馬県",
+      "rank": 27,
+      "value": 0.2,
+      "unit": "％"
+    },
+    {
+      "areaName": "大分県",
+      "rank": 28,
+      "value": 0.1,
+      "unit": "％"
+    },
+    {
+      "areaName": "長野県",
+      "rank": 29,
+      "value": 0,
+      "unit": "％"
+    },
+    {
+      "areaName": "山口県",
+      "rank": 29,
+      "value": 0,
+      "unit": "％"
+    },
+    {
+      "areaName": "山形県",
+      "rank": 31,
+      "value": -0.2,
+      "unit": "％"
+    },
+    {
+      "areaName": "和歌山県",
+      "rank": 31,
+      "value": -0.2,
+      "unit": "％"
+    },
+    {
+      "areaName": "香川県",
+      "rank": 31,
+      "value": -0.2,
+      "unit": "％"
+    },
+    {
+      "areaName": "秋田県",
+      "rank": 34,
+      "value": -0.3,
+      "unit": "％"
+    },
+    {
+      "areaName": "山梨県",
+      "rank": 34,
+      "value": -0.3,
+      "unit": "％"
+    },
+    {
+      "areaName": "宮崎県",
+      "rank": 34,
+      "value": -0.3,
+      "unit": "％"
+    },
+    {
+      "areaName": "栃木県",
+      "rank": 37,
+      "value": -0.4,
+      "unit": "％"
+    },
+    {
+      "areaName": "福井県",
+      "rank": 37,
+      "value": -0.4,
+      "unit": "％"
+    },
+    {
+      "areaName": "青森県",
+      "rank": 39,
+      "value": -0.6,
+      "unit": "％"
+    },
+    {
+      "areaName": "高知県",
+      "rank": 39,
+      "value": -0.6,
+      "unit": "％"
+    },
+    {
+      "areaName": "新潟県",
+      "rank": 41,
+      "value": -0.7,
+      "unit": "％"
+    },
+    {
+      "areaName": "鳥取県",
+      "rank": 42,
+      "value": -0.9,
+      "unit": "％"
+    },
+    {
+      "areaName": "島根県",
+      "rank": 42,
+      "value": -0.9,
+      "unit": "％"
+    },
+    {
+      "areaName": "愛媛県",
+      "rank": 44,
+      "value": -1,
+      "unit": "％"
+    },
+    {
+      "areaName": "鹿児島県",
+      "rank": 44,
+      "value": -1,
+      "unit": "％"
+    },
+    {
+      "areaName": "岩手県",
+      "rank": 46,
+      "value": -1.1,
+      "unit": "％"
+    },
+    {
+      "areaName": "徳島県",
+      "rank": 47,
+      "value": -1.4,
+      "unit": "％"
+    }
+  ]
+}

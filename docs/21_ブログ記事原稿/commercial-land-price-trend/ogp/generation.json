@@ -1,0 +1,61 @@
+{
+  "kind": "stats47-image-generation",
+  "schemaVersion": 1,
+  "generator": "blog-ogp",
+  "entityId": "commercial-land-price-trend",
+  "inputHash": "0f4831f7e8da767e8be56c6abe19137715e9172509c5cee498371c46d7f09c0f",
+  "rendererHash": "186e9cb4ea87df8674c26b21e6b51187c4ea09f67808fd9a1dd2d673abebab39",
+  "fingerprint": "f30347df17154f21a23a5c225528095e351d3d07a5bf9cd196ad8d3ad06546d2",
+  "generatedAt": "2026-08-22T05:17:21.184Z",
+  "assets": [
+    {
+      "key": "app/blog/commercial-land-price-trend/ogp/background.jpg",
+      "variant": "background",
+      "contentType": "image/jpeg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 90372,
+      "sha256": "fbe9b44e7e0d7d21e3629704c5f0cf9e77ca283b0de74c1498e25b9218fd7fee"
+    },
+    {
+      "key": "app/blog/commercial-land-price-trend/ogp/ogp.png",
+      "variant": "ogp",
+      "contentType": "image/png",
+      "width": 1200,
+      "height": 630,
+      "bytes": 470776,
+      "sha256": "449ade219521bf8e212b27ae58eda4f5431bd4ac6a5409ffb7f840a5ffa001a7"
+    },
+    {
+      "key": "app/blog/commercial-land-price-trend/thumbnail-dark.webp",
+      "variant": "dark",
+      "contentType": "image/webp",
+      "width": 640,
+      "height": 336,
+      "bytes": 14736,
+      "sha256": "48dc0eb44b8081485952b43bdb6522508cd4d9508a465944734bd7fe55fa2514"
+    },
+    {
+      "key": "app/blog/commercial-land-price-trend/thumbnail-light.webp",
+      "variant": "light",
+      "contentType": "image/webp",
+      "width": 640,
+      "height": 336,
+      "bytes": 28388,
+      "sha256": "7c3c29e2ddf7473efb0edb4469391cfbdc4b098575ea5886937f7775037578b8"
+    }
+  ],
+  "metadata": {
+    "title": "商業地が広い県ほど地価が下がる──面積と価値が逆転する地方の二極化",
+    "subtitle": "東京+8.4%で商業地域は全国中位、島根・鳥取は面積比率上位だが価格はマイナス──需給の逆転構造",
+    "background": {
+      "source": "ai",
+      "promptHash": "sha256-d6b53d8d32683bdfdb4be46e001ac006593c9cc79b1bd9a3d103db80f23a02a6",
+      "sha256": "fbe9b44e7e0d7d21e3629704c5f0cf9e77ca283b0de74c1498e25b9218fd7fee",
+      "model": "gpt-image-2",
+      "promptVersion": "blog-article-context-v1",
+      "visualType": "economy",
+      "motif": "article:commercial-land-price-trend"
+    }
+  }
+}

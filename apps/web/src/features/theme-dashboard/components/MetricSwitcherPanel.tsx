@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 // 型サブパスから読む。registry (index) を値 import すると 20 テーマ分のカタログが
 // client bundle に載る (types.ts は型 import しか持たないので何も引き連れない)
 import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
+import { classifyUnitComparability } from '@stats47/data-configs/unit';
 import { Check } from 'lucide-react';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -115,26 +116,25 @@ function assignAxes(checked: MetricKpi[]): {
   leftUnit: string;
   rightUnit?: string;
 } {
-  /** 軸を分ける判定キー。`%` と `％` を別物にしない (正典は normalizeUnitForAxis) */
-  const keyOf = (m: MetricKpi) => normalizeUnitForAxis(m.unit);
+  /** 倍率1の同一単位だけを同じ軸へ載せる。換算可能でも値を変換していない系列は分ける。 */
+  const sharesAxis = (a: string, b: string) =>
+    normalizeUnitForAxis(a) === normalizeUnitForAxis(b) ||
+    classifyUnitComparability(a, b).verdict === 'same';
   const units: string[] = [];
-  const labels = new Map<string, string>();
   for (const m of checked) {
-    const key = keyOf(m);
-    if (!units.includes(key)) {
-      units.push(key);
-      // 軸頭には config の表記をそのまま出す (正規化は比較のためだけ)
-      labels.set(key, m.unit);
-    }
+    if (!units.some((unit) => sharesAxis(unit, m.unit))) units.push(m.unit);
   }
   const axisOf = new Map<string, 'left' | 'right'>();
   for (const m of checked) {
-    axisOf.set(m.metricKey, keyOf(m) === units[1] ? 'right' : 'left');
+    axisOf.set(
+      m.metricKey,
+      units[1] && sharesAxis(units[1], m.unit) ? 'right' : 'left'
+    );
   }
   return {
     axisOf,
-    leftUnit: units[0] ? (labels.get(units[0]) ?? '') : '',
-    rightUnit: units[1] ? labels.get(units[1]) : undefined,
+    leftUnit: units[0] ?? '',
+    rightUnit: units[1],
   };
 }
 
@@ -295,7 +295,12 @@ export function MetricSwitcherPanel({
      */
     const rows = new Map<string, Record<string, string | number>>();
     const labelOfYear = new Map<string, string>();
-    const put = (year: string, yearName: string, key: string, value: number) => {
+    const put = (
+      year: string,
+      yearName: string,
+      key: string,
+      value: number
+    ) => {
       const yk = year.slice(0, 4);
       if (!labelOfYear.has(yk)) labelOfYear.set(yk, yearName);
       const row = rows.get(yk) ?? {};

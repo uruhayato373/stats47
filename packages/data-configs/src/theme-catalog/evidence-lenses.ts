@@ -81,6 +81,55 @@ export const EVIDENCE_SOURCE_CATALOG = {
     sourceUrl:
       "https://www.mext.go.jp/b_menu/toukei/chousa01/kihon/kekka/k_detail/2024.htm",
   },
+  "mlit-whitepaper-2025-road-network": {
+    kind: "whitepaper",
+    title: "令和7年版 国土交通白書－幹線道路ネットワークの整備",
+    publisher: "国土交通省",
+    sourceUrl:
+      "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2511000.html",
+  },
+  "mlit-whitepaper-2025-infrastructure-maintenance": {
+    kind: "whitepaper",
+    title: "令和7年版 国土交通白書－社会資本の老朽化対策等",
+    publisher: "国土交通省",
+    sourceUrl:
+      "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2140000.html",
+  },
+  "mlit-whitepaper-2025-railway-industry": {
+    kind: "whitepaper",
+    title: "令和7年版 国土交通白書－鉄道関連産業の動向と施策",
+    publisher: "国土交通省",
+    sourceUrl:
+      "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2531000.html",
+  },
+  "mlit-whitepaper-2025-low-carbon-transport": {
+    kind: "whitepaper",
+    title: "令和7年版 国土交通白書－地球温暖化対策（緩和策）の推進",
+    publisher: "国土交通省",
+    sourceUrl:
+      "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2712000.html",
+  },
+  "mhlw-physician-workforce-plan": {
+    kind: "report",
+    title: "医師確保対策・医師確保計画",
+    publisher: "厚生労働省",
+    sourceUrl:
+      "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kinkyu/index.html",
+  },
+  "mhlw-regional-healthcare-vision": {
+    kind: "report",
+    title: "地域医療構想",
+    publisher: "厚生労働省",
+    sourceUrl:
+      "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000080850.html",
+  },
+  "mhlw-hospital-function-report-2025": {
+    kind: "statistical-overview",
+    title: "令和7年度 病床機能報告公表データ",
+    publisher: "厚生労働省",
+    sourceUrl:
+      "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/open_data_00020.html",
+  },
 } as const satisfies Record<string, EvidenceSourceDefinition>;
 
 export type EvidenceSourceKey = keyof typeof EVIDENCE_SOURCE_CATALOG;

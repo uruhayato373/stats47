@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import type { ChartColorRole } from "../chart-color-role";
 import { THEME_CATALOGS } from "../index";
 import {
+  parseStatSeriesRefs,
   type StatSeriesRef,
   validateChartProps,
   validateMigratedSeriesRefContract,
@@ -51,6 +52,9 @@ describe("② 必須フィールドを壊すと error (陰性対照)", () => {
   const cases: Array<{ name: string; type: string; props: Record<string, unknown> }> = [
     { name: "line-chart: estatParams 欠落", type: "line-chart", props: { labels: ["a"] } },
     { name: "line-chart: estatParams が空配列", type: "line-chart", props: { estatParams: [] } },
+    { name: "line-chart: statsDataId 欠落", type: "line-chart", props: { estatParams: [{ cdCat01: "A" }] } },
+    { name: "line-chart: filter が非 string", type: "line-chart", props: { estatParams: [{ statsDataId: "X", cdCat01: 1 }] } },
+    { name: "line-chart: 未知 field", type: "line-chart", props: { estatParams: [{ statsDataId: "X" }], mystery: true } },
     { name: "mixed-chart: lineParams 欠落", type: "mixed-chart", props: { columnParams: [{ statsDataId: "X" }] } },
     { name: "composition-chart: segments 欠落", type: "composition-chart", props: { statsDataId: "X" } },
     { name: "composition-chart: statsDataId 欠落", type: "composition-chart", props: { segments: [{ code: "A", label: "b" }] } },
@@ -69,6 +73,10 @@ describe("② 必須フィールドを壊すと error (陰性対照)", () => {
   it("★未知の componentType は skip せず error", () => {
     const errs = validateChartProps("bar-chart-race", { estatParams: [{ statsDataId: "X" }] });
     expect(errs.some((e) => e.includes("未知の componentType"))).toBe(true);
+  });
+
+  it("★StatSeriesRef の未登録 metricKey を拒否する", () => {
+    expect(parseStatSeriesRefs([{ metricKey: "not-in-metrics-registry" }])).toBeNull();
   });
 });
 

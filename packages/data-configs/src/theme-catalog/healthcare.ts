@@ -370,6 +370,42 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "sortOrder": 50
     }
   ],
+  evidenceTopics: [
+    {
+      key: "physician-distribution",
+      lensKey: "service-capacity",
+      title: "医師の地域偏在と医療供給",
+      question:
+        "人口10万人当たり医師数は、都道府県間の医療人材供給にどのような差を示すか",
+      summary:
+        "医師数を看護師数・病院数と分けて確認し、単一の人員指標だけで医療体制全体を判断しません。",
+      sourceKeys: ["mhlw-physician-workforce-plan"],
+      relatedRankingKeys: [
+        "physicians-in-medical-facilities-per-100k",
+        "nurses-in-medical-facilities-per-100k",
+        "general-hospital-count-per-100k",
+      ],
+      relatedChartKeys: ["theme-health-supply-trend"],
+    },
+    {
+      key: "inpatient-capacity-and-use",
+      lensKey: "participation",
+      title: "病床の供給と利用",
+      question:
+        "病床数・病床利用率・平均在院日数は、入院医療の供給と利用をどう分けて示すか",
+      summary:
+        "病床数は供給規模、利用率は稼働状況、平均在院日数は利用期間として別々に読みます。",
+      sourceKeys: [
+        "mhlw-regional-healthcare-vision",
+        "mhlw-hospital-function-report-2025",
+      ],
+      relatedRankingKeys: [
+        "general-hospital-bed-count-per-100k",
+        "general-hospital-bed-occupancy-rate",
+        "general-hospital-avg-length-of-stay",
+      ],
+    },
+  ],
   "keywords": [
     "医師数",
     "病院数",

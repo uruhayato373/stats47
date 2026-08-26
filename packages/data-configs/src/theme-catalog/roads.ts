@@ -96,6 +96,41 @@ export const ROADS_CATALOG: ThemeCatalog = {
       "sortOrder": 10
     },
 ],
+  evidenceTopics: [
+    {
+      key: "trunk-road-network-access",
+      lensKey: "regional-access",
+      title: "幹線道路ネットワークと地域アクセス",
+      question:
+        "高速道路の延長と道路密度には、広域移動を支えるネットワークの地域差がどう表れるか",
+      summary:
+        "高速道路延長と面積当たり道路延長を分け、道路網の総量と地域内の密度を読み比べます。",
+      sourceKeys: ["mlit-whitepaper-2025-road-network"],
+      relatedRankingKeys: [
+        "road-expressway-length",
+        "road-length-per-km2",
+        "average-road-traffic-volume",
+      ],
+      relatedChartKeys: ["roads-length-trend"],
+      relatedThemeKeys: ["local-economy"],
+    },
+    {
+      key: "road-stock-maintenance",
+      lensKey: "sustainability",
+      title: "道路ストックの規模と維持管理",
+      question:
+        "道路実延長と舗装率を合わせると、維持対象の規模と整備水準をどう読み分けられるか",
+      summary:
+        "延長は維持対象の規模、舗装率は整備水準を示します。延長だけで老朽化の程度は判断しません。",
+      sourceKeys: ["mlit-whitepaper-2025-infrastructure-maintenance"],
+      relatedRankingKeys: [
+        "road-total-length-with-expressway",
+        "main-road-paving-rate",
+      ],
+      relatedChartKeys: ["roads-length-trend"],
+      relatedThemeKeys: ["local-finance"],
+    },
+  ],
   "keywords": [
     "道路",
     "高速道路",

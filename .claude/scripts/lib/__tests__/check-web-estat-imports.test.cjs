@@ -1,95 +1,257 @@
-/**
- * WP2 境界チェックの分類テスト (mutation testing)。
- * 実行: node --test .claude/scripts/lib/__tests__/check-web-estat-imports.test.cjs
- *
- * ★値 import と型のみ import の分類を両方向で固定する。実装中に踏んだ罠を回帰させない:
- *   - 単一/複数行 `import type` を値 import と誤検出しない
- *   - 混在 `import { type A, valueB }` は値 import
- *   - インライン `import("...").Foo` 型参照は値でない
- *   - ファイル先頭の別 import から estat-api の from まで非貪欲マッチが跨がない (文境界)
- */
-const assert = require("node:assert/strict");
-const { describe, it } = require("node:test");
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+const { describe, it } = require('node:test');
 
 const {
-  hasEstatValueImport,
-  diffAgainstAllowlist,
-  collectValueImportFiles,
   ALLOWLIST,
-} = require("../check-web-estat-imports.cjs");
+  collectForbiddenReachability,
+  collectValueImportFiles,
+  diffAgainstAllowlist,
+  diffAllowlistGrowth,
+  findNewRelevantEdges,
+  hasEstatValueImport,
+  hasForbiddenProviderDependency,
+  parseValueDependencies,
+} = require('../check-web-estat-imports.cjs');
 
-describe("hasEstatValueImport — 値 import を検知", () => {
-  const isValue = (t) => hasEstatValueImport(t);
-  it("単一行の値 import", () => {
-    assert.equal(isValue(`import { fetchFormattedStats } from "@stats47/estat-api/server";`), true);
-  });
-  it("複数行の値 import", () => {
-    assert.equal(
-      isValue(`import {\n  fetchFormattedStats,\n  extractYearsFromStats,\n} from "@stats47/estat-api/server";`),
-      true,
-    );
-  });
-  it("混在 import { type A, valueB } は値", () => {
-    assert.equal(
-      isValue(`import { fetchFormattedStats, type GetStatsDataParams } from "@stats47/estat-api/server";`),
-      true,
-    );
-  });
-});
+function createFixture(files, paths = { '@/*': ['./src/*'] }) {
+  const root = fs.mkdtempSync(
+    path.join(os.tmpdir(), 'stats47-web-estat-import-')
+  );
+  const webRoot = path.join(root, 'apps/web');
+  const webSrc = path.join(webRoot, 'src');
+  fs.mkdirSync(webSrc, { recursive: true });
+  fs.writeFileSync(
+    path.join(webRoot, 'tsconfig.json'),
+    `${JSON.stringify({ compilerOptions: { baseUrl: '.', paths } }, null, 2)}\n`
+  );
+  for (const [relative, content] of Object.entries(files)) {
+    const target = path.join(webSrc, relative);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.writeFileSync(target, content);
+  }
+  return {
+    root,
+    graph: () => collectForbiddenReachability({ projectRoot: root }),
+    remove: () => fs.rmSync(root, { recursive: true, force: true }),
+  };
+}
 
-describe("hasEstatValueImport — 型のみは値でない (誤検出しない)", () => {
-  const isValue = (t) => hasEstatValueImport(t);
-  it("単一行 import type", () => {
-    assert.equal(isValue(`import type { GetStatsDataParams } from "@stats47/estat-api/server";`), false);
+function assertReachable(files, expectedEntries, paths) {
+  const fixture = createFixture(files, paths);
+  try {
+    const graph = fixture.graph();
+    assert.deepEqual(graph.reachableEntries, expectedEntries);
+    assert.ok(
+      graph.relevantEdges.length > 0,
+      'forbidden path must contain a runtime edge'
+    );
+    return graph;
+  } finally {
+    fixture.remove();
+  }
+}
+
+describe('TypeScript AST runtime-edge classification', () => {
+  it('detects a static value import', () => {
+    const text = `import { fetchFormattedStats } from "@stats47/estat-api/server";`;
+    assert.equal(hasEstatValueImport(text), true);
+    assert.equal(hasForbiddenProviderDependency(text), true);
   });
-  it("複数行 import type", () => {
-    assert.equal(
-      isValue(`import type {\n  GetStatsDataParams,\n} from "@stats47/estat-api/server";`),
-      false,
+
+  it('detects a multiline mixed type/value import', () => {
+    const text = `import {\n type GetStatsDataParams,\n fetchFormattedStats,\n} from "@stats47/estat-api/server";`;
+    assert.equal(hasEstatValueImport(text), true);
+  });
+
+  it('detects dynamic import, re-export, and require', () => {
+    assert.deepEqual(
+      parseValueDependencies(
+        `const api = await import("@stats47/estat-api/server");\n` +
+          `export { fetchFormattedStats } from "@stats47/estat-api/server";\n` +
+          `const legacy = require("@stats47/estat-api/server");`
+      ).map((edge) => edge.kind),
+      ['dynamic-import', 're-export', 'require']
     );
   });
-  it("インライン import 型参照 (import(\"...\").Foo)", () => {
-    assert.equal(
-      isValue(`const x = params as unknown as import("@stats47/estat-api/server").GetStatsDataParams;`),
-      false,
-    );
-  });
-  it("★先頭の別 import から estat-api の from まで跨がない (文境界)", () => {
-    // React の値 import が先にあり、その後 estat-api の import type が来るファイル。
+
+  it('allows import type, type-only named imports/exports, and inline import types', () => {
     const text = [
-      `import React from "react";`,
-      `import { useState } from "react";`,
       `import type { GetStatsDataParams } from "@stats47/estat-api/server";`,
-    ].join("\n");
-    assert.equal(isValue(text), false);
+      `import { type EstatStatsDataResponse } from "@stats47/estat-api";`,
+      `export type { GetStatsDataParams } from "@stats47/estat-api/server";`,
+      `export { type EstatStatsDataResponse } from "@stats47/estat-api";`,
+      `type Params = import("@stats47/estat-api/server").GetStatsDataParams;`,
+    ].join('\n');
+    assert.deepEqual(parseValueDependencies(text), []);
+    assert.equal(hasForbiddenProviderDependency(text), false);
   });
-  it("estat-api を全く import しない", () => {
-    assert.equal(isValue(`import { foo } from "@/lib/foo";`), false);
+
+  it('does not match comments or ordinary string literals', () => {
+    const text = `// import("@stats47/estat-api/server")\nconst docs = "require('@stats47/estat-api')";`;
+    assert.deepEqual(parseValueDependencies(text), []);
   });
 });
 
-describe("diffAgainstAllowlist — ratchet", () => {
-  it("allowlist 通りなら new も resolved も無い", () => {
-    const { newOnes, resolved } = diffAgainstAllowlist([...ALLOWLIST]);
-    assert.deepEqual(newOnes, []);
-    assert.deepEqual(resolved, []);
+describe('production web -> e-Stat transitive reachability fixtures', () => {
+  it('static import is red', () => {
+    assertReachable(
+      {
+        'page.ts': `import { fetchFormattedStats } from "@stats47/estat-api/server";`,
+      },
+      ['page.ts']
+    );
   });
-  it("★新規の値 import は違反として出る", () => {
-    const { newOnes } = diffAgainstAllowlist([...ALLOWLIST, "features/new/leak.ts"]);
-    assert.deepEqual(newOnes, ["features/new/leak.ts"]);
+
+  it('dynamic import is red', () => {
+    assertReachable(
+      {
+        'page.ts': `export async function load() { return import("@stats47/estat-api/server"); }`,
+      },
+      ['page.ts']
+    );
   });
-  it("allowlist から消えたら resolved (移行の進捗)", () => {
-    const shrunk = ALLOWLIST.slice(1);
-    const { resolved } = diffAgainstAllowlist(shrunk);
-    assert.deepEqual(resolved, [ALLOWLIST[0]]);
+
+  it('re-export is red', () => {
+    assertReachable(
+      {
+        'page.ts': `export { fetchFormattedStats } from "@stats47/estat-api/server";`,
+      },
+      ['page.ts']
+    );
+  });
+
+  it('require is red', () => {
+    assertReachable(
+      {
+        'page.ts': `const api = require("@stats47/estat-api/server"); export { api };`,
+      },
+      ['page.ts']
+    );
+  });
+
+  it('local wrapper is red for both caller and boundary', () => {
+    assertReachable(
+      {
+        'page.ts': `import { load } from "./wrapper"; export { load };`,
+        'wrapper.ts': `export { fetchFormattedStats as load } from "@stats47/estat-api/server";`,
+      },
+      ['page.ts', 'wrapper.ts']
+    );
+  });
+
+  it('tsconfig alias to a local wrapper is red', () => {
+    assertReachable(
+      {
+        'page.ts': `import { load } from "@local/wrapper"; export { load };`,
+        'wrapper.ts': `export { fetchFormattedStats as load } from "@stats47/estat-api/server";`,
+      },
+      ['page.ts', 'wrapper.ts'],
+      { '@local/*': ['./src/*'] }
+    );
+  });
+
+  it('cyclic local wrappers cannot hide a provider path', () => {
+    assertReachable(
+      {
+        'a.ts': `export * from "./b";`,
+        'b.ts': `export * from "./a"; export * from "./provider";`,
+        'provider.ts': `export { fetchFormattedStats } from "@stats47/estat-api/server";`,
+      },
+      ['a.ts', 'b.ts', 'provider.ts']
+    );
+  });
+
+  it('type-only dependency is green', () => {
+    const fixture = createFixture({
+      'page.ts': `import type { GetStatsDataParams } from "@stats47/estat-api/server";`,
+    });
+    try {
+      const graph = fixture.graph();
+      assert.deepEqual(graph.reachableEntries, []);
+      assert.deepEqual(graph.relevantEdges, []);
+    } finally {
+      fixture.remove();
+    }
+  });
+
+  it('test/spec/story files are outside production roots', () => {
+    const fixture = createFixture({
+      'page.test.ts': `import { fetchFormattedStats } from "@stats47/estat-api/server";`,
+      'component.stories.tsx': `export { fetchFormattedStats } from "@stats47/estat-api/server";`,
+    });
+    try {
+      assert.deepEqual(fixture.graph().reachableEntries, []);
+    } finally {
+      fixture.remove();
+    }
   });
 });
 
-describe("実ツリーで allowlist と一致する", () => {
-  it("現行の値 import は allowlist と完全一致 (new/resolved 0)", () => {
+describe('shrink-only ratchets', () => {
+  it('legacy direct static allowlist still rejects a new file', () => {
+    const { newOnes } = diffAgainstAllowlist([
+      ...ALLOWLIST,
+      'features/new/leak.ts',
+    ]);
+    assert.deepEqual(newOnes, ['features/new/leak.ts']);
+  });
+
+  it('ALLOWLIST additions are rejected while removals are allowed', () => {
+    assert.deepEqual(diffAllowlistGrowth(['a.ts'], ['a.ts', 'b.ts']), []);
+    assert.deepEqual(diffAllowlistGrowth(['a.ts', 'new.ts'], ['a.ts']), [
+      'new.ts',
+    ]);
+  });
+
+  it('a newly reachable edge is red and an existing edge is green', () => {
+    const fixture = createFixture({
+      'page.ts': `import { load } from "./wrapper"; export { load };`,
+      'wrapper.ts': `export { fetchFormattedStats as load } from "@stats47/estat-api/server";`,
+    });
+    try {
+      const graph = fixture.graph();
+      const source = (repoPath) => {
+        if (repoPath.endsWith('page.ts'))
+          return `import { load } from "./wrapper"; export { load };`;
+        if (repoPath.endsWith('wrapper.ts')) {
+          return `export { fetchFormattedStats as load } from "@stats47/estat-api/server";`;
+        }
+        return null;
+      };
+      const existing = findNewRelevantEdges(
+        graph.relevantEdges,
+        source,
+        graph.aliases,
+        graph.aliases,
+        fixture.root
+      );
+      assert.deepEqual(existing, []);
+      const newlyIntroduced = findNewRelevantEdges(
+        graph.relevantEdges,
+        () => 'export {};',
+        graph.aliases,
+        graph.aliases,
+        fixture.root
+      );
+      assert.equal(newlyIntroduced.length, graph.relevantEdges.length);
+    } finally {
+      fixture.remove();
+    }
+  });
+});
+
+describe('real repository baseline', () => {
+  it('legacy static imports remain exactly inside the original allowlist', () => {
     const found = collectValueImportFiles();
     const { newOnes, resolved } = diffAgainstAllowlist(found);
-    assert.deepEqual(newOnes, [], `新規違反: ${newOnes.join(", ")}`);
-    assert.deepEqual(resolved, [], `未除去の移行済み: ${resolved.join(", ")}`);
+    assert.deepEqual(newOnes, [], `new direct imports: ${newOnes.join(', ')}`);
+    assert.deepEqual(
+      resolved,
+      [],
+      `remove migrated entries: ${resolved.join(', ')}`
+    );
   });
 });

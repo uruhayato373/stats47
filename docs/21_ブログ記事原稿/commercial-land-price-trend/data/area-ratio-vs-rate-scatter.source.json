@@ -1,0 +1,39 @@
+{
+  "kind": "scatter",
+  "xKey": "commercial-and-neighborhood-commercial-area-ratio",
+  "yKey": "standard-price-change-rate-commercial",
+  "year": "x:2023/y:2024",
+  "xSource": "r2:app/ranking/commercial-and-neighborhood-commercial-area-ratio/values.json",
+  "ySource": "r2:app/ranking/standard-price-change-rate-commercial/values.json",
+  "verifiedBy": "article-link+axis-range",
+  "note": "記事 /ranking/ リンク key を SSOT値域で x/y 軸に割当 (著者由来=信頼)。x/y は元SVGの軸目盛レンジ適合で決定。点値照合不可のため verifiedMatchRate なし。",
+  "rangeVerification": {
+    "x": {
+      "svgRange": [
+        5,
+        13
+      ],
+      "ssotRange": [
+        5,
+        13.2
+      ],
+      "scale": 1,
+      "cov": 0.976
+    },
+    "y": {
+      "svgRange": [
+        -2,
+        8
+      ],
+      "ssotRange": [
+        -1.4,
+        8.4
+      ],
+      "scale": 1,
+      "cov": 1
+    }
+  },
+  "restoredFrom": "restore-scatter-from-svg.mjs",
+  "restore": "node .claude/scripts/blog/restore-scatter-from-svg.mjs --base commercial-land-price-trend/area-ratio-vs-rate-scatter --apply",
+  "fetchedAt": "2026-06-20T22:22:10.294Z"
+}

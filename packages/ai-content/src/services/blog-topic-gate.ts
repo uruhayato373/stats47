@@ -35,6 +35,7 @@ import {
   PREFECTURE_COUNT,
   findExpectedShapeAnomaly,
 } from "@stats47/data-configs";
+import type { ExpectedShapeAnomalyEntry } from "@stats47/data-configs";
 
 /** 接地済みデータ 1 行 (fetch-ranking-data-r2.mjs が書く data/*.json の要素) */
 export interface GroundedRow {
@@ -55,7 +56,11 @@ export interface TopicGateVerdict {
  * `legitimate` は「統計の性質上その形が正しい」ので記事を書いてよい。期限切れの entry は
  * `findExpectedShapeAnomaly` が null を返すため、ここでも許可されない (= 書かない側に倒れる)。
  */
-export function findKnownBrokenChecks(rankingKey: string, now: Date): string[] {
+export function findKnownBrokenChecks(
+  rankingKey: string,
+  now: Date,
+  anomalies: readonly ExpectedShapeAnomalyEntry[] = EXPECTED_SHAPE_ANOMALY,
+): string[] {
   const checks = [
     "duplicate-area-year",
     "raw-truncated",
@@ -65,7 +70,7 @@ export function findKnownBrokenChecks(rankingKey: string, now: Date): string[] {
   const hits: string[] = [];
   for (const check of checks) {
     const entry = findExpectedShapeAnomaly(
-      EXPECTED_SHAPE_ANOMALY,
+      anomalies,
       rankingKey,
       check,
       "prefecture",
@@ -138,8 +143,9 @@ export function gateTopicData(
   rankingKey: string,
   rows: readonly GroundedRow[],
   now: Date,
+  anomalies: readonly ExpectedShapeAnomalyEntry[] = EXPECTED_SHAPE_ANOMALY,
 ): TopicGateVerdict {
-  const known = findKnownBrokenChecks(rankingKey, now).map(
+  const known = findKnownBrokenChecks(rankingKey, now, anomalies).map(
     (c) => `既知の壊れ (allowlist known-broken): ${c}`,
   );
   const grounded = checkGroundedRows(rows);
