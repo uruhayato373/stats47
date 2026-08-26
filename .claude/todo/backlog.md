@@ -983,6 +983,12 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   data-refresh、blog自動/手動publish、週次監査へ同一gateを配線し、専用Issueの起票・復旧Close・artifact・
   最終job失敗をworkflow契約testで固定した。次はこの差分とSVGを承認付きで1回反映し、live全量greenと
   full data-refresh成功を確認する。
+- **2026-08-27 live再監査**: R2公開値をranking 2,167、theme参照299、blog 434、asset 1,088で再検査し、
+  findingは5件。前回refreshの派生生成が途中失敗したため、4 ranking
+  (`actual-income-worker-households-per-month` / `bank-loan-balance` / `cpi-change-rate-housing` /
+  `mobile-phone-bill-consumption-expenditure`) の`latestYear`が欠落し、前者を参照する`real-income` themeも
+  unusableになっている。既知集合だけを派生生成へ渡す修正とR2 readの30秒・3回retryはdevelopへ反映済み。
+  修正版のfull refresh後に同じ全量監査でfinding 0を確認するまで未完了とする。
 - **実行順**:
   1. 上記1 assetを正しいJSON/sourceから再生成し、themeの欠測4件（`manufacturing-sales-private` / `manufacturing-net-value-added-private` / `industrial-land-price` / `housing-floor-area`）と地域種別不一致1件を、R2再生成またはcatalog参照削除で解消する。
   2. 公開blog全記事、`ALL_THEMES`、`KNOWN_RANKING_KEYS`から期待集合を決定的に生成し、R2の存在、schema、row数、年、地域種別、参照assetをread-onlyで全量検査する。既存ファイルの列挙だけで期待集合を作らない。
@@ -1136,6 +1142,10 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **次**: 上記差分をdevelop/mainへ反映し、data-refreshのfull runを実行する。成功後に
   `app/stats`の`generatedAt`が当月へ更新されていることと、city payloadに9,640を含む正当値が
   欠落せず反映されたことを実測する。
+- **2026-08-27 初回full rerun**: e-Stat batchは`ok=2089 / fail=1 / skip=55 / empty=0 / shape=0`
+  （`freshwater-clam-consumption-expenditure`の一時的fetch失敗1件）。14,003件のupload自体はerror 0だったが、
+  旧orphan item 38件をstrict parserへ渡したこととR2 read 10秒・1回のtimeoutで派生生成が失敗した。
+  既知公開keyだけを列挙し、readを30秒・3回retryする修正を追加済み。GitHub Actions復旧後に再実走する。
 - **完了条件**: data-refresh の full run (schedule または dispatch) が success で終わり、
   `app/stats` が当月分に更新されていることを実測できる。
 - **注意**: 2026-07-05 の失敗は**別原因** (sync-snapshots の correlation task が JS ヒープ
