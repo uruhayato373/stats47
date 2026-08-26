@@ -9,8 +9,8 @@
  * 更新方法: `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
  * 更新タイミング: ブログ公開で R2 blog snapshot が変わった後。commit + デプロイで反映。
  *
- * 最終生成日: 2026-08-25
- * 件数: 868
+ * 最終生成日: 2026-08-26
+ * 件数: 866
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "1000世帯あたり",
@@ -138,7 +138,6 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "エンゲル係数",
   "エンジニア",
   "エンジニア年収",
-  "オーバーツーリズム",
   "カステラ",
   "カップ麺",
   "カツオ",
@@ -394,7 +393,6 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "地方の暮らし",
   "地方交付税",
   "地方債",
-  "地方分散",
   "地方創生",
   "地方税",
   "地方自治",
