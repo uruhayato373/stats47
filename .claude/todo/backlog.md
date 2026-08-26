@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-25
+updated: 2026-08-26
 ---
 
 # バックログ (タスクマスタ)
@@ -20,80 +20,6 @@ updated: 2026-08-25
 ```
 
 ## 🔴 高 — 今月中に着手したい
-
-### [SURVEY-HUB-HANDOFF-01] 調査ハブ改修の別PC実画面検証と配信snapshot反映
-
-タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run type-check --workspace apps/web] [起票:2026-08-24]
-
-- **実装済み**: `ArticleShell.leftRail`、調査詳細のデスクトップ左ナビとモバイル上部代替、
-  調査固有の代表ランキング選定（共通代表が0件でもカテゴリ分散で最大4件）、関連カテゴリ導線、
-  `nav_surface=survey_category`、blog snapshot v2 の `surveyArticleIndex`、古いsnapshotの
-  `surveyIds` / 逆引き欠落を検出するtaxonomy監査、各対象単体テスト。
-- **原因確定済み**: `/survey/city-planning-survey` から関連記事が見えないのはUI条件ではなく、
-  配信中 `app/blog/all.json` が2026-08-20生成の旧schemaで
-  `commercial-land-price-trend.surveyIds=[]` のため。記事側はtaxonomy coreから
-  `city-planning-survey` と `prefectural-land-price-survey` を正しく表示している。
-- **次（別PC）**:
-  1. `git pull --ff-only origin develop` 後、同じ作業ツリーで他のClaude Code/Codexが動いていないことを確認。
-  2. 下記でblog snapshotを**ローカルだけ**再生成する（`saveToR2` は `.local/r2` 書き込み。pushしない）。
-     `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_ENV=development NODE_OPTIONS="--conditions react-server" npx tsx apps/web/scripts/export-blog-snapshot.ts`
-  3. `R2_DEV_GATEWAY_CACHE_SECONDS=0 npm run dev:web` で
-     `/survey/city-planning-survey` を確認。lg+は左ナビ・代表地図4件・関連分類3系統・関連記事、
-     lg未満は左ナビが消えてPageHeader直後の折りたたみナビだけが出ることを確認する。
-  4. 大規模調査 `/survey/census` でも、全ランキングを左railへ大量展開せず、代表4件と本文の全件表へ
-     分離できていることを確認する。テーマはThemeCatalogの実在lineageがある場合だけ表示し、空を偽リンクで埋めない。
-  5. 対象test、web type-check、scripts type-check、design-system check、docs check、
-     `audit-survey-taxonomy --offline --check`、web buildを実行。失敗は既存findingと新規回帰を分ける。
-- **本番反映**: 実画面確認後に `app/blog/all.json` の明示keyだけをR2へpushし、ISR/CDN purge・deployは
-  オーナーが別途承認した1回にまとめる。このカードの存在をR2 write/deploy承認とは解釈しない。
-- **完了条件**: city-planningで双方向blogリンク、代表地図、desktop/mobileナビを確認し、censusでも
-  レール過密がなく、全ゲートがgreen。配信snapshot反映後に本番200と関連記事表示を確認したらカードを削除する。
-- **別PC用 Claude Code Sonnet 指示**: 「`SURVEY-HUB-HANDOFF-01` だけを再開する。AGENTS.md、
-  survey-linkage-standards、デザインシステム、本カードを読み、まずdevelopをff-only同期する。
-  実装済みコードを作り直さず、ローカルblog snapshotを再生成してcity-planningとcensusをdesktop/mobileで確認。
-  欠陥があれば外科的に修正し、記載した全gateを通す。theme/blogのsurveyIdは手書きしない。
-  R2 push・CDN purge・deployは行わず、必要なら実行対象keyと検証結果だけ報告する。」
-
-### [SURVEY-EDITORIAL-80-01] 全80調査へ一次資料に基づく個別説明を手作業で整備する
-
-タグ: [コンテンツ品質] [種類:制作] [実行:sweep] [検証:npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts] [Codex候補] [起票:2026-08-24]
-
-- **owner**: `survey-curator`。通常実装は Claude Code Sonnet。1回の実行は最大10調査とし、
-  `apps/web/src/features/survey/survey-editorial.ts` を authored SSOT として追記する。
-- **目的**: fallback の組織名だけで終わる調査ハブを、読者が「何が分かるか・どの問いへ進めるか・
-  何に注意して読むか」を判断できる出典ハブにする。全80調査へ同じ定型文を一斉生成する作業ではない。
-- **再開ポインタ**: `completedIds=water-pollution-survey,workplace-accident-survey / nextSurvey=minimum-wage`。
-  各runの最後に、完了したsurveyIdと次の先頭surveyIdだけをこの行へ記録する。長い実行ログは残さない。
-- **在庫再評価 (2026-08-26)**: CI secret の e-Stat APP_ID で refresh を完走し、
-  `hospital-bed-count`（tab 280）、`national-medical-expense-inpatient`（SSDS J4005）、
-  `ss-pollution-load`をR2・ランキング・調査逆引きへ公開した。`hospital-report`、
-  `national-medical-expenditure`、`water-pollution-survey`は関連rankingKey 3件を満たす。
-  それ以外の3件未満の調査は引き続き個別停止し、次batch開始時にR2 itemsから在庫を再計算する。
-- **1調査の必須項目**:
-  1. `summary`: 調査主体・対象・周期・調査が捉える範囲を、公式一次資料で確認した2〜3文。
-  2. `whatYouCanLearn`: 実在する関連ランキング群から導ける3〜5項目。一般論を水増ししない。
-  3. `readerQuestions`: 3〜5件。`rankingKey` はその調査の R2 items / taxonomy core に実在するものだけ。
-  4. `caveats`: 母数、標本、時点、系列断絶、合計と率、県庁所在市など、その調査固有の注意を2〜5件。
-- **実行順**: (1) `packages/ranking/src/data/surveys.json` と
-  `app/survey/<surveyId>/items.json` で対象・実在keyを確定、(2) `survey.url` または所管省庁の公式ページで
-  対象・周期・定義を確認、(3) 10調査だけ執筆、(4) validator / taxonomy audit / web type-check、
-  (5) 意味レビュー後に次batchへ進む。公式URLが失効している場合は検索結果の要約を根拠にせず停止する。
-- **機械ゲートの追加**: validator に `--require-all-editorial` を追加し、master 80/80、必須配列の非空、
-  readerQuestions の key が当該調査へ所属、重複question、過度な定型文一致を検査する。移行中の通常CIは
-  既存件数を下回らないratchet、完了時に `--require-all-editorial` をPR必須へ切り替える。
-- **完了条件**: active master 80/80に個別内容があり、全readerQuestionsが当該調査に所属し、公式一次資料と
-  調査固有の注意を人が確認済み。`audit-survey-taxonomy --offline --check`、portfolio validator、web type-check、
-  対象テストが通り、fallback表示が0件になる。
-- **停止条件**: 一次資料で対象・周期・定義を確認できない、調査に属する有効rankingKeyが3件未満、
-  市区町村/全国/都道府県の地理スコープが混在、系列断絶を説明できない場合。その調査だけ未完了で残し、
-  推測・別調査からの転記・存在しないsurveyId/rankingKeyの追加はしない。
-- **別PC用 Claude Code Sonnet 指示**: 「`SURVEY-EDITORIAL-80-01` の次batchだけを実装する。
-  最初に `git pull --ff-only origin develop` と working tree を確認し、AGENTS.md、
-  `.claude/rules/survey-linkage-standards.md`、本カードを読む。未登録surveyをdisplayOrder順に最大10件選び、
-  公式一次資料と当該survey itemsを照合して `survey-editorial.ts` の4項目を個別執筆する。
-  文面テンプレの横展開やsurveyId手書き紐付けは禁止。対象テスト、portfolio validator、
-  `audit-survey-taxonomy --offline --check`、web type-checkを実行し、通ったbatchだけcommitする。
-  デプロイ・R2 pushはしない。最後に本カードの再開ポインタだけ更新する。」
 
 ### [THEME-EVIDENCE-LENS-ROLLOUT-01] 白書論点レンズをテーマ横断で段階展開する
 
@@ -172,6 +98,13 @@ updated: 2026-08-25
     現時点で`.claude/state/metrics/affiliate/{a8-results,a8-report-log}.json`は未生成。A8の既定期間は
     年初から当月までの累計で、normalizerは単月でなければ月次recordsへ写さない。期間フォーム対応前に
     CV・確定額を0または当月実績として扱わない。
+- **2026-08-26 WP0 checkpoint**: GA4取得を`overview` / `experiments` / `pages`の独立reportへ分離し、
+  ad_id tierの成功がvariant取得を隠さないfallbackと標準`pagePath`→page type導出をpure core + fixtureで固定。
+  実験判定は「95%有意」を廃止し、sample・期間・measurement freshness・confound guardを通った場合だけ
+  `ready-to-decide`として人間へ提示する契約へ統一した。広告script全201 test、追加core 27 test、
+  operations state validateはgreen。実stateは`ga4-variant-dimension-missing`で正しくblocked。
+  A8 `--probe-period`はread-only起動したが未ログインを検出して入力・クリック前に停止したため、
+  月/日レンジselectorと`outcomeGate`のfixture化は未完了。`nextWorkPackage=WP0`を維持する。
 - **依存・競合回避**:
   - standalone Claude CodeとCodexを同じ作業ツリーで同時実行しない。開始時に対象fileがdirtyなら
     別worktreeを作るか、現在の変更を所有者がcommitするまで停止する。`git add -A`は禁止。
@@ -929,9 +862,21 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   落としていたのを是正した (155 件の config 是正がこの経路に届いていなかった)
 - **反映**: config 修正だけでは R2 に届かない。`data-refresh.yml` (page-data-batch → diff-push-r2)
   → `sync-snapshots.yml` の `ranking-values` → `ranking-items` の順で再生成が要る。
-- **完了条件**: `scan-stats-shape.ts` の違反が port/fishery の coverage warn のみになり、
-  `MAX_KNOWN_BROKEN` が 0 になること。加えて監査 (k) の `unbaked` が 0 になること
-  (全 payload にレシピが焼かれた状態)。
+- **2026-08-26 再監査**: 公開R2 active 2,167件はitem/values欠落0、正規化欠落0、shape未許可error 0、
+  configHash drift 0。旧allowlistの`known-broken`13件を一次データで再判定したところ、12件は
+  経常収支比率・昼間人口比率・食料自給率等の「100%を上限としない比率」で、R2 recipeも現configと一致。
+  残る日雇受給率もe-Stat公式計算式`J6110/J6109`どおり、福島県1994年度
+  `170人÷11人×100=1545.5%`と一致した。13件の偽債務を削除し、日雇受給率だけは1000超errorを
+  書き込み可能にする`legitimate`例外として保持。`MAX_KNOWN_BROKEN=0`、再取り込みキュー0、
+  対象61 test・type-check・当該metric e-Stat dry-runがgreen。allowlist生成器もerrorだけを候補化し、
+  100〜1000のwarnを自動で`known-broken`へ誤分類しないよう是正した。
+- **残りの実測値**: 形状warnはarea coverage 31、正当な100%超13、zero-heavy 2。カード完了を止めるのは
+  公開payloadの未焼き込み33件だけでconfig driftは0。full data-refresh / snapshot同期後に未焼き込み0を
+  再実測する（R2 write・workflow dispatchの承認は別）。
+- **完了条件**: `scan-stats-shape.ts` の未許可errorと`known-broken`が0で、残るwarnが一次資料または
+  `verified-value-profiles.ts`で説明されていること。`MAX_KNOWN_BROKEN`は0を維持する。加えて監査 (k) の
+  `unbaked` が0になること（全payloadにレシピが焼かれた状態）。100%を上限としない公式比率や
+  port/fisheryの正当なcoverage不足を、件数を0にするためだけに欠陥扱いしない。
 - **停止条件**: 再生成後の監査で `drift` が 0 にならない場合は R2 push を止めて原因を見る
   (config と R2 が食い違ったまま配信するより、古いデータが残る方がまし)。
 - **正典**: `.claude/rules/metric-config-standards.md` §形状ゲート /
@@ -948,6 +893,13 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `CONTENT-ROUTINE-LIVE-VERIFY-01` はカードが現存せず、日次ループ
   (`ai-content-generate-daily.yml`) も 2026-08-21 に削除済みなので無効。件数は月次計画が
   目標を持ち週次が割り当てる。
+- **2026-08-26 checkpoint**: active 2,167件を全量再構築し、done 353 / needs 1,814
+  （missing 203 / incomplete 1,552 / blocker 59）を確定。上位5件
+  `gpp-public-service` / `voter-turnout-governor` / `high-school-teacher-annual-income` /
+  `junior-high-club-per100-soft-tennis` / `junior-high-club-per100-swimming`をstaging生成し、
+  決定的監査は5件ともblocker 0 / warn 0。意味criticで、公務分の指標名、暦年/年度、派生指標の
+  分子・分母時点を是正した。疎なpartitionは実観測件数とcommentary件数を照合し、未観測県を
+  47件へ水増ししない監査契約を追加（AI監査48 test green）。R2公開は未承認のため未実施。
 - **完了条件**: 全active rankingを処理し、欠測・矛盾・未検証生成を0にする。R2 pushとCDN反映は別承認。
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
@@ -960,6 +912,13 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   - ranking は公開中の既知 2,176 件で `item` / `values` が全件 HTTP 200、年の対応も一致した。ただし直近の data refresh は対象 14 件中 12 件の更新に留まり、`convenience-store-count-commercial` は0行、`employment-insurance-daily-receipt-rate` はshape gateで既存値を温存した。全2,295 metricの定期更新完走を示す証拠ではない。
   - theme は22ページすべて HTTP 200だが、282参照（256 unique）のうち4 metricがR2に存在せず、1 metricは期待する地域種別とpayloadが不一致だった。部分データfallbackによりページのHTTP成功だけでは欠測を検知できない。
   - blog は公開419記事の本文を取得できたが、本文が参照する1,047 assetのうち `pork-consumption-expenditure/data/pork-expenditure-ranking.svg` が404だった。
+- **2026-08-26 checkpoint**: 期待集合を`KNOWN_RANKING_KEYS` / `ALL_THEMES` / 公開blog manifestから作る
+  `audit-public-data-contract.ts`を実装し、missing / empty / wrong area type / 本文のみ参照asset /
+  theme部分fallback / transientの6 fixtureがgreen。全量liveはranking 2,167、theme参照299、blog 434、
+  asset 1,091を検査し、上記SVG 1件だけが404。themeの旧欠測参照は実在するowner/rented 2系列へ是正済み。
+  data-refresh、blog自動/手動publish、週次監査へ同一gateを配線し、専用Issueの起票・復旧Close・artifact・
+  最終job失敗をworkflow契約testで固定した。次はこの差分とSVGを承認付きで1回反映し、live全量greenと
+  full data-refresh成功を確認する。
 - **実行順**:
   1. 上記1 assetを正しいJSON/sourceから再生成し、themeの欠測4件（`manufacturing-sales-private` / `manufacturing-net-value-added-private` / `industrial-land-price` / `housing-floor-area`）と地域種別不一致1件を、R2再生成またはcatalog参照削除で解消する。
   2. 公開blog全記事、`ALL_THEMES`、`KNOWN_RANKING_KEYS`から期待集合を決定的に生成し、R2の存在、schema、row数、年、地域種別、参照assetをread-onlyで全量検査する。既存ファイルの列挙だけで期待集合を作らない。
@@ -975,8 +934,12 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 タグ: [進行中] [起票:2026-07-22]
 
 - **owner**: Claude Code
-- **現況**: 公開419記事の本文は全件取得できたが、本文参照asset 1,047件のうち `pork-consumption-expenditure/data/pork-expenditure-ranking.svg` が404。既存SVG起点の監査では、ファイル自体が無い参照を検知できない。
-- **次**: 欠落SVGを既存JSON/sourceから再生成する。その後、remediation queueのmust-fixを小バッチで処理し、全`article.md`の参照から期待asset集合を生成する監査へ拡張する。R2由来、算式、年、metric keyを復元できない図は推測で再生成しない。
+- **現況**: 全`article.md`参照から期待asset集合を作る公開契約監査へ拡張済み。公開434記事・本文参照
+  1,091 assetで `pork-consumption-expenditure/data/pork-expenditure-ranking.svg` だけが404。SVGは既存JSON/sourceから
+  ローカル再生成済みで、公開gateもdata refresh / blog publish / 週次へ配線済み。R2全量pullのdry-runは
+  `app/blog` 8,913 files（local差分8,526）を確認したが、read-only取得の承認前なので実pullしていない。
+- **次**: 欠落SVGの限定R2反映後に公開契約監査をgreenへ戻す。全量SVG品質監査は承認後の`app/blog` pullで
+  must-fixを確定し、小バッチで処理する。R2由来、算式、年、metric keyを復元できない図は推測で再生成しない。
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
 - **正典**: `.claude/rules/blog-data-schema.md`
 
@@ -1069,8 +1032,11 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
     最下位富山県 1.06 / 2.0倍。audit の不一致リストから 2 件とも消え **baseline 102 → 100**。
   - `MONEY-UNIT-SCALE-01`（金額 44 指標のスケール）→ **再取得まで完了**（audit のスケール不一致 0）。
     残っていた「seoTitle がデータと整合」は baseline 100 件の部分集合なのでここで扱う。
-- **次**: baseline の 100 件を実データから書き直して減らす。金額系は再取得が済んでいるので
-  待ちは無い。順位県の取り違えは値のスケールと無関係なのでそのまま残っている。
+- **2026-08-26 checkpoint**: R2観測値から100件の年・1位・最下位・値・倍率を決定的に再生成し、
+  baseline **100→0**。倍率unitの順位値を格差倍率と混同する監査器の欠陥と、市区町村12指標を
+  `values.json`だけ読んで判定不能にしていた欠陥も、fixture付きで是正した。全2,008対象で不一致0・
+  判定不能0、26 test、config/years validator、data-configs type-checkがgreen。
+- **次**: `ranking-items` snapshotを承認付きで再生成・R2反映し、Googlebot UAで本番titleを全数sample実測する。
 - **完了条件**: baseline が 0 件になり、**かつ是正後の `seoTitle` / `seoDescription` が
   本番に出ている**こと。config を直しても本番の `<title>` は変わらない —
   `generate-meta-data.ts` が読むのは **R2 `app/ranking/<key>/item.json` の `seoTitle`** で、
@@ -1105,11 +1071,19 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   風力 1位北海道55 / バイオマス 1位北海道33 / 道の駅 1位北海道122 (最下位 東京1) /
   漁港 1位北海道290・2位長崎288 (0 は内陸 8 県ちょうど) / 空港 1位北海道15・2位沖縄13 (0 は 10 県) /
   鉄道駅 1位東京892 (最下位 沖縄19)。
-- **残り**: `tourism-resource-count` (観光資源数) の**定義を決める**。P12 は同じ資源を点/線/面の
-  3 系統で持つため資源 ID (`P12_001`) で畳んで 17,254 件になるが、県別の偏りが説明できない
-  (新潟県 1,913 に対し愛知県 4)。原因は**種別 (`P12_005`) を持つのが 488 件だけ**で、残り 16,766 件が
-  「‐」のプレースホルダであること。このまま出すと意味を成さないランキングになるので**公開を保留中**
-  (`.local/r2` の values.json も生成しない)。「何を観光資源として数えるか」を決めてから再開する。
+- **2026-08-26 checkpoint (13指標目の定義・ローカル生成まで完了)**: 国土数値情報P12の一次資料と
+  2014年データを再確認し、これは観光地の網羅的な施設数ではなく「観光資源台帳A級以上」と
+  観光庁「観光地点等名簿」を統合した**登録件数**だと確定した。表示名を`観光資源データ登録件数`へ変更し、
+  基準日2014-09-30・非網羅性・同一県内の`P12_001`重複除外を説明へ固定。公式19,140地物を処理して
+  登録17,254件、形状重複1,886件、県帰属未解決0件で`.local/r2/app/stats/tourism-resource-count/values.json`
+  を生成した（1位新潟1,913、兵庫874、愛知4）。同じ資源IDが別県に現れた場合は別登録として数え、
+  同一県・同一IDだけを畳む回帰testを追加した。
+- **商用境界**: 公式配布ページがP12を`非商用`と明記するため、商品factory・Kindle・データブックから
+  `tourism-resource-count`をfail-closedで除外し、全商品catalogに混入しない回帰testを追加した。
+  GIS空間処理結果の利用可否と配信形態は公開前に利用規約の条件を再確認し、データベース再配布は行わない。
+- **残り**: ローカル生成物を承認付きsnapshot同期で`app/stats`→`app/ranking`（values / item /
+  正規化 / national-trend）と`app/ranking-items/all.json`へ反映し、本番表示・出典・未解決0を実測する。
+  本カードの存在をR2 write / deploy承認とは解釈しない。
 - **住所が欠けるレイヤに注意**: P03 でも水力 6 / 太陽光 843 / 風力 4 件は住所が空で、空間結合に
   落ちる。太陽光は施設名だけで畳むと 9,808 → 3,253 に潰れるので、重複排除は必ず名前 + 住所で行う。
 - **禁止**: 全プロパティを走査して「それらしい値」を県コードに使わない。P12 観光資源の `P12_001` は
@@ -1145,13 +1119,17 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
     壊れたデータが配信されることも R2 が削られることもない。
   - 契約テスト: `.claude/scripts/lib/__tests__/content-generation-routine.test.cjs`
     (`continue-on-error` を外す / 反映ステップを前へ動かす の両方が退行として落ちる)。
-- **次**: 4 件をそれぞれ「是正する」か「`expected-shape-anomaly.ts` に登録する」か決める。
-  1. `commuter-ratio-*` — コメントが言う legitimate 判定が正しいなら
-     `disposition: "legitimate"` でエントリを実際に追加する (コメントだけでは効かない)。
-  2. 残り 3 件は ai-content 側で「データが不成立」と判定済み。**config を直せるのか、
-     e-Stat の値がそもそもそうなのかを先に確かめる** (`diagnose-unpinned-axes.ts --fetch`)。
-     直せないなら `known-broken` で登録するが、**`MAX_KNOWN_BROKEN` (現在 14) は
-     縮小専用の規律なので、増やすなら理由を書く**。
+- **✅ 2026-08-26 追加是正**: 3件の全県0 metricは既に退役済み。残る
+  `commuter-ratio-from-other-municipalities` をCI dry-run (run 32942581934) とe-Stat一次データで再実測した。
+  市区町村表 `0000020306` / `#F02702` は単位が`％`のまま最大9,640（葛尾村・2015年）で、
+  千代田区など100％超が継続するため、一般的な百分率上限を適用できない正当値と確定。
+  city限定の`legitimate`例外と重症度ラチェットをSSOTへ追加し、known-brokenは書き込み不可、
+  legitimateだけは観測済み最大値まで書き込み可とする取り込み契約・陰性対照テストを実装した。
+  対象60 testと`@stats47/data-configs` type-checkはgreen。次はこの差分をdevelop/mainへ反映後、
+  full data-refreshを実走して当月`app/stats`更新を確認する。
+- **次**: 上記差分をdevelop/mainへ反映し、data-refreshのfull runを実行する。成功後に
+  `app/stats`の`generatedAt`が当月へ更新されていることと、city payloadに9,640を含む正当値が
+  欠落せず反映されたことを実測する。
 - **完了条件**: data-refresh の full run (schedule または dispatch) が success で終わり、
   `app/stats` が当月分に更新されていることを実測できる。
 - **注意**: 2026-07-05 の失敗は**別原因** (sync-snapshots の correlation task が JS ヒープ

@@ -25,6 +25,9 @@
       "minSamplePerVariant": 500,
       "minDurationDays": 14,
       "maxDurationDays": 56,
+      "primaryMetric": "ctr",
+      "decisionRule": "sample・期間・freshness・confound guard通過後にCTRと相対差を提示し、人間が判断する",
+      "confounds": [],
       "owner": "improvement-triage",
       "notes": "★2026-08-04 に計装の断絶がある (未計装 4 コンポーネントの是正・vertical 汚染の是正・枠拡張を同時に実施)。この日より前の窓と比較しない。close は weight ではなくコード変更 PR で行う"
     }

@@ -56,7 +56,7 @@ export const employmentInsuranceDailyReceiptRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "雇用保険（日雇）受給率ランキング都道府県【2023年】｜1位鹿児島県（89.2％）",
-  "seoDescription": "2023年の雇用保険（日雇）受給率の都道府県別ランキング。1位鹿児島県（89.2％）、最下位宮崎県（0％）で地図やグラフで47都道府県を比較。",
+  "seoTitle": "雇用保険（日雇）受給率 都道府県ランキング【2023年】｜1位鹿児島県（89.2％）",
+  "seoDescription": "2023年の雇用保険（日雇）受給率を都道府県別に比較。1位は鹿児島県（89.2％）、最下位は熊本県（0.0％）。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

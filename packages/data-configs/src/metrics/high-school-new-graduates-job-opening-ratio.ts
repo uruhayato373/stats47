@@ -77,7 +77,7 @@ export const highSchoolNewGraduatesJobOpeningRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "高等学校新規卒業者の求人倍率ランキング都道府県【2023年】｜1位東京都（13.63倍）",
-  "seoDescription": "2023年の高等学校新規卒業者の求人倍率の都道府県別ランキング。1位東京都（13.63倍）、最下位沖縄県（2.06倍）で6.6倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "高等学校新規卒業者の求人倍率 都道府県ランキング【2023年】｜1位東京都（13.63倍）",
+  "seoDescription": "2023年の高等学校新規卒業者の求人倍率を都道府県別に比較。1位は東京都（13.63倍）、最下位は沖縄県（2.06倍）、最大と最小の差は6.6倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

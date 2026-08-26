@@ -111,7 +111,6 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "total-overnight-guests-foreign", // 外国人延べ宿泊者数 — 本文 1087字 / [insights,regionalAnalysis,faq]
     "travel-participation-rate-homecoming", // 帰省・訪問などの旅行の行動者率 — 本文 1079字 / [insights,regionalAnalysis,faq]
     "travel-participation-rate-domestic", // 国内旅行の行動者率 — 本文 1063字 / [insights,regionalAnalysis,faq]
-    "tourism-resource-count", // 観光資源数 — 本文 1060字 / [insights,regionalAnalysis,faq]
   ],
   "K-S2-04": [
     "general-funds-prefecture", // 一般財源 — 本文 2139字 / [insights,regionalAnalysis,faq]

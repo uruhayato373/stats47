@@ -32,7 +32,7 @@ export const hobbyParticipationRatePottery: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "陶芸・工芸の行動者率ランキング都道府県【2021年】｜1位滋賀県（2.1％）",
-  "seoDescription": "2021年の陶芸・工芸の行動者率の都道府県別ランキング。1位滋賀県（2.1％）、最下位沖縄県（0.8％）で2.6倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "陶芸・工芸の行動者率 都道府県ランキング【2021年】｜1位東京都（2.1％）",
+  "seoDescription": "2021年の陶芸・工芸の行動者率を都道府県別に比較。1位は東京都（2.1％）、最下位は沖縄県（0.8％）、最大と最小の差は2.6倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

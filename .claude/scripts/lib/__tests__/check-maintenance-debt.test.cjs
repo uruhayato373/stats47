@@ -47,6 +47,17 @@ test(".claude/todo/ backlog への参照はdebtとして検出しない (2026-08
   const result = run(root);
   assert.equal(result.status, 0, result.stdout + result.stderr);
 });
+test("ネストした .local の生成物は保守負債の走査対象にしない", (t) => {
+  const root = fixture("export const source = true;\n");
+  const generated = path.join(root, "apps/admin/.local/next-e2e/server");
+  fs.mkdirSync(generated, { recursive: true });
+  const todoMarker = "TO" + "DO";
+  const deprecatedMarker = "depre" + "cated";
+  fs.writeFileSync(path.join(generated, "vendor.js"), `// ${todoMarker}: dependency source\n// ${deprecatedMarker} generated code\n`);
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+});
 function mdFixture(content) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-maintenance-debt-"));
   fs.mkdirSync(path.join(root, ".claude/todo"), { recursive: true });

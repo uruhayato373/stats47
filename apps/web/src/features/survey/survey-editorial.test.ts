@@ -1,8 +1,17 @@
 import { describe, expect, it } from 'vitest';
 
-import { getSurveyEditorialContent } from './survey-editorial';
+import {
+  getSurveyEditorialContent,
+  requiredSurveyReaderQuestionCount,
+} from './survey-editorial';
 
 describe('getSurveyEditorialContent', () => {
+  it('active在庫が3件未満なら存在する導線数を必須数にする', () => {
+    expect([0, 1, 2, 3, 5].map(requiredSurveyReaderQuestionCount)).toEqual([
+      0, 1, 2, 3, 3,
+    ]);
+  });
+
   it('国勢調査の編集情報を返す', () => {
     const content = getSurveyEditorialContent('census');
 
@@ -25,6 +34,32 @@ describe('getSurveyEditorialContent', () => {
       expect(q.rankingKey).not.toMatch(/pre2019/);
     }
     expect(content?.caveats.length).toBeGreaterThan(0);
+  });
+
+  it('病院報告の3つのactiveランキングへ案内する', () => {
+    const content = getSurveyEditorialContent('hospital-report');
+
+    expect(content?.readerQuestions.map((item) => item.rankingKey)).toEqual([
+      'hospital-bed-count',
+      'bed-utilization-rate',
+      'average-length-of-stay',
+    ]);
+    expect(content?.caveats).toContainEqual(
+      expect.stringContaining('100％を超える場合があります')
+    );
+  });
+
+  it('国民医療費の総額・1人当たり・入院分へ案内する', () => {
+    const content = getSurveyEditorialContent('national-medical-expenditure');
+
+    expect(content?.readerQuestions.map((item) => item.rankingKey)).toEqual([
+      'national-medical-expense-total',
+      'national-medical-expense-per-person',
+      'national-medical-expense-inpatient',
+    ]);
+    expect(content?.caveats).toContainEqual(
+      expect.stringContaining('正常な妊娠・分娩')
+    );
   });
 
   it('未定義の調査では現行表示へフォールバックできる', () => {

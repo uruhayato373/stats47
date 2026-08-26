@@ -110,6 +110,22 @@ describe("countByPrefecture / 重複排除 (号機 → 施設)", () => {
     expect(r.countsByPref.get("18")).toBe(2);
     expect(r.deduped).toBe(0);
   });
+
+  it("同じ整理番号でも県が違えば別件として数える (P12 の ID は全国一意ではない)", () => {
+    const source = { kind: "prefCode", field: "pref" } as const;
+    const r = countByPrefecture(
+      [
+        { properties: { pref: "01", resourceId: 10001 }, coord: null },
+        { properties: { pref: "02", resourceId: 10001 }, coord: null },
+        // 同じ県・同じ整理番号の点/面は 1 件へ畳む。
+        { properties: { pref: "01", resourceId: 10001 }, coord: null },
+      ],
+      { source, dedupeBy: ["resourceId"] },
+    );
+    expect(r.countsByPref.get("01")).toBe(1);
+    expect(r.countsByPref.get("02")).toBe(1);
+    expect(r.deduped).toBe(1);
+  });
 });
 
 describe("buildStatsPayload", () => {

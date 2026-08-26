@@ -481,7 +481,7 @@
     "parentSourceId": null,
     "name": "病院報告",
     "organization": "厚生労働省",
-    "url": "https://www.mhlw.go.jp/toukei/saikin/hw/byouin/m24/dl/9912kekka.pdf",
+    "url": "https://www.mhlw.go.jp/toukei/list/80-1a.html",
     "description": null,
     "attributionText": null,
     "license": null,
@@ -491,7 +491,7 @@
     "displayOrder": 999,
     "isActive": true,
     "createdAt": "2026-03-13 04:41:41",
-    "updatedAt": "2026-03-13 04:41:41"
+    "updatedAt": "2026-08-26 00:00:00"
   },
   {
     "id": "health-admin-report",
@@ -1089,7 +1089,7 @@
     "parentSourceId": "estat",
     "name": "日本の将来推計人口",
     "organization": "国立社会保障・人口問題研究所",
-    "url": null,
+    "url": "https://www.ipss.go.jp/pp-shicyoson/j/shicyoson23/t-page.asp",
     "description": null,
     "attributionText": null,
     "license": null,
@@ -1099,7 +1099,7 @@
     "displayOrder": 0,
     "isActive": true,
     "createdAt": "2026-06-02 00:00:00",
-    "updatedAt": "2026-06-02 00:00:00"
+    "updatedAt": "2026-08-26 00:00:00"
   },
   {
     "id": "local-gov-staffing-survey",
@@ -1412,7 +1412,7 @@
     "parentSourceId": "estat",
     "name": "建設工事受注動態統計調査",
     "organization": "国土交通省",
-    "url": null,
+    "url": "https://www.mlit.go.jp/statistics/details/kkoji_list.html",
     "description": null,
     "attributionText": null,
     "license": null,

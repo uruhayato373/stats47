@@ -42,6 +42,25 @@ describe("extractSeoClaims", () => {
     ]);
   });
 
+  it("unit が倍の順位値を最大/最小の倍率と混同しない", () => {
+    const c = extractSeoClaims(
+      "2022年の有効求人倍率。1位福井県（1.94倍）、最下位神奈川県（0.88倍）、最大と最小の差は2.2倍です。",
+      "倍",
+    );
+    expect(c.ranks.map((rank) => rank.value)).toEqual([1.94, 0.88]);
+    expect(c.ratio).toBe(2.2);
+  });
+
+  it("都道府県名で切らず市区町村名まで順位主張として拾う", () => {
+    const c = extractSeoClaims(
+      "2021年の財政力指数。1位愛知県 飛島村（2.1）、最下位熊本県 熊本市 北区（0.08）。",
+    );
+    expect(c.ranks.map((rank) => rank.areaName)).toEqual([
+      "愛知県 飛島村",
+      "熊本県 熊本市 北区",
+    ]);
+  });
+
   it("読点や数字を県名に食い込ませない", () => {
     const c = extractSeoClaims("1位東京都、2位大阪府");
     expect(c.ranks).toHaveLength(1);

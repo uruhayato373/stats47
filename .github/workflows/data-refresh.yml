@@ -225,6 +225,15 @@ jobs:
         if: steps.resolve.outputs.skip != 'true' && (steps.resolve.outputs.dry_run != 'true')
         run: npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --all
 
+      # producer が成功しても公開 R2 の item/values、theme 参照、blog asset の契約が
+      # 壊れていないとは限らない。cache purge 後の live 配信を同じ横断監査で確認する。
+      # Issue 起票と request 消費を通すため一旦 continue し、末尾で job を赤へ戻す。
+      - name: 🌐 Audit public data contracts after refresh
+        id: public_contract
+        if: steps.resolve.outputs.skip != 'true' && (steps.resolve.outputs.dry_run != 'true')
+        continue-on-error: true
+        run: npm run audit:public-data-contract
+
       # 形状 allowlist の**縮小だけ**を自動反映する。
       #
       # 再取得で直った metric を allowlist に残すと、その key ではゲートが黙るので
@@ -283,11 +292,19 @@ jobs:
   # 手動 dispatch の失敗は起票しない (人がその場で見ているため)。
       # push と派生生成を通したあとで、取り込みゲートの結果を job に反映する。
       # ここより前に置くと partial-publish の意味が無くなる (後続が skip される)。
-      - name: 🔴 Reflect batch gate result
-        if: steps.batch.outcome == 'failure'
+      - name: 🔴 Reflect refresh gate result
+        if: steps.batch.outcome == 'failure' || steps.public_contract.outcome == 'failure'
+        env:
+          BATCH_OUTCOME: ${{ steps.batch.outcome }}
+          PUBLIC_CONTRACT_OUTCOME: ${{ steps.public_contract.outcome }}
         run: |
-          echo "page-data-batch がゲートで落ちた。成功分の push は完了しているが、" >&2
-          echo "落ちた metric の R2 は旧データのまま。ログの [fatal] 行を見て是正する。" >&2
+          if [ "$BATCH_OUTCOME" = "failure" ]; then
+            echo "page-data-batch がゲートで落ちた。成功分の push は完了しているが、" >&2
+            echo "落ちた metric の R2 は旧データのまま。ログの [fatal] 行を見て是正する。" >&2
+          fi
+          if [ "$PUBLIC_CONTRACT_OUTCOME" = "failure" ]; then
+            echo "更新後の公開データ契約監査が落ちた。ranking / theme / blog の欠落を是正する。" >&2
+          fi
           exit 1
 
       - name: 🚨 Open issue on failure (schedule / push のみ)

@@ -11,7 +11,11 @@ import { writeFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { METRICS_REGISTRY } from "@stats47/data-configs";
-import { assignPackTheme, MAP_CHART_ASSET_KEYS } from "./pack-theme-map";
+import {
+  assignPackTheme,
+  MAP_CHART_ASSET_KEYS,
+  PRODUCT_EXCLUDED_RANKING_KEYS,
+} from "./pack-theme-map";
 import { THEME_BY_ID, EXPECTED_PACK_IDS } from "./packs";
 import type { PackTheme } from "./types";
 
@@ -39,6 +43,7 @@ function build(): void {
     };
     if (c.isActive !== true) continue;
     if (!Array.isArray(c.entities) || !c.entities.includes("prefecture")) continue;
+    if (PRODUCT_EXCLUDED_RANKING_KEYS.has(key)) continue;
     const theme = assignPackTheme(key, c.category ?? "", c.source?.kind);
     if (!theme) {
       skippedNoCat += 1;

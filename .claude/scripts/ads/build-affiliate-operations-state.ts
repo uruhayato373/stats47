@@ -86,12 +86,15 @@ function main(): void {
     nowIso,
     hasActiveExperiments,
   });
-  const variantMetrics = aggregateVariantMetrics(ga4?.data?.rows ?? []);
+  const variantMetrics = aggregateVariantMetrics(
+    ga4?.data?.reports?.experiments?.rows ?? ga4?.data?.rows ?? [],
+  );
   const experiments = evaluateExperiments({
     registry,
     ads: AFFILIATE_ADS,
     variantMetrics,
     nowIso,
+    measurementGate,
   });
 
   const state = buildOperationsState({

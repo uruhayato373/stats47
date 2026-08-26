@@ -105,6 +105,26 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
+      # ranking / theme / blog が参照する公開 R2 契約を同じ live 実測で検査する。
+      # 個別 producer の成功だけでは、values.json の欠落・theme の部分 fallback・
+      # 記事本文だけが参照する SVG 欠落を横断検知できないため、週次の最終防波堤にする。
+      - name: 🌐 Audit public data contracts
+        id: public_contract
+        continue-on-error: true
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: |
+          set +e
+          npm run audit:public-data-contract -- --json /tmp/public-data-contract.json \
+            2>&1 | tee /tmp/public-data-contract.log
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+          {
+            echo "### 公開データ契約 (ranking / theme / blog)"
+            echo '```'
+            tail -30 /tmp/public-data-contract.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: 📤 Commit audit result to develop
         run: |
           git config user.name "github-actions[bot]"
@@ -118,6 +138,15 @@ jobs:
           # pull せずに push すると develop が進んだ瞬間に (fetch first) で落ちる (2026-08-16 是正)
           git pull --rebase origin develop
           git push origin develop
+
+      - name: 📎 Upload public data contract report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: public-data-contract-${{ github.run_id }}
+          path: /tmp/public-data-contract.json
+          if-no-files-found: warn
+          retention-days: 30
 
       - name: 🚨 Open issue on integrity violations
         if: steps.check.outputs.exit_code != '0' || steps.reingest.outputs.exit_code != '0' || steps.calculated.outputs.exit_code != '0'
@@ -186,3 +215,63 @@ jobs:
               gh issue close "$NUMBER" --reason completed \
                 --comment "ランキング整合性監査と再取り込みラチェットがともに復旧したため自動Closeします。"
             done
+
+      - name: 🚨 Open issue on public data contract violations
+        if: always() && steps.public_contract.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[Public Data Contract Alert] blog・ranking・theme 配信契約の異常"
+          {
+            echo "## 公開データ契約 週次監査 ($DATE)"
+            echo ""
+            echo "公開 R2 を横断実測し、参照先の欠落・空データ・地域型不一致・部分 fallback を検出しました。"
+            echo ""
+            echo "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo ""
+            echo '```'
+            tail -80 /tmp/public-data-contract.log 2>/dev/null || echo "(監査ログなし)"
+            echo '```'
+            echo ""
+            echo "全件 JSON: workflow artifact \`public-data-contract-${{ github.run_id }}\`"
+            echo "正典: apps/web/scripts/audit-public-data-contract.ts"
+          } > /tmp/public-data-contract-issue.md
+
+          gh label create public-data-contract-alert \
+            --description "blog / ranking / theme の公開R2契約違反" \
+            --color "b60205" --force 2>/dev/null || true
+
+          EXISTING=$(gh issue list --state open --label public-data-contract-alert \
+            --search "\"[Public Data Contract Alert]\" in:title" \
+            --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/public-data-contract-issue.md
+          else
+            gh issue create --title "$TITLE" \
+              --label "public-data-contract-alert,auto-generated" \
+              --body-file /tmp/public-data-contract-issue.md
+          fi
+
+      - name: ✅ Close recovered public data contract alert
+        if: always() && steps.public_contract.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --state open --label public-data-contract-alert --limit 100 \
+            --json number --jq '.[].number' |
+            while read -r NUMBER; do
+              gh issue close "$NUMBER" --reason completed \
+                --comment "公開データ契約の横断監査が復旧したため自動Closeします。"
+            done
+
+      # continue-on-error は Issue 起票を必ず通すため。最後に job を赤へ戻して見逃さない。
+      - name: 🚦 Reflect public data contract result
+        if: always()
+        env:
+          PUBLIC_CONTRACT_EXIT: ${{ steps.public_contract.outputs.exit_code }}
+        run: |
+          if [ "${PUBLIC_CONTRACT_EXIT:-1}" != "0" ]; then
+            echo "公開データ契約に違反がある。専用 Issue と監査ログを確認する。" >&2
+            exit 1
+          fi

@@ -50,7 +50,7 @@ export const fisherySpeciesCatchJapaneseSquid: MetricConfig = {
     ],
   },
   "groupKey": "fishery-species",
-  "seoTitle": "スルメイカ漁獲量ランキング都道府県【2015年】｜1位北海道（39,936トン）",
-  "seoDescription": "2015年のスルメイカ漁獲量の都道府県別ランキング。1位北海道（39,936トン）、最下位沖縄県（0トン）で地図やグラフで47都道府県を比較。",
+  "seoTitle": "スルメイカ漁獲量 都道府県ランキング【2015年】｜1位北海道（39,936トン）",
+  "seoDescription": "2015年のスルメイカ漁獲量を都道府県別に比較。1位は北海道（39,936トン）、最下位は広島県（0トン）。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

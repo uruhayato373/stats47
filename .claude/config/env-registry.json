@@ -513,6 +513,13 @@
       ]
     },
     {
+      "name": "NEXT_DIST_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "NEXT_PHASE",
       "visibility": "server",
       "contexts": [

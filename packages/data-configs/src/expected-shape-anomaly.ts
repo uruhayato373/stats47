@@ -29,18 +29,12 @@ import type { ExpectedShapeAnomalyEntry } from "./shape-gate";
  * 是正して allowlist からエントリを消したら**この定数も下げる**。
  * 上げる変更は原則しない (新しい壊れ方は allowlist ではなく config の是正で解決する)。
  *
- * ## 14 → 15 に上げた例外 (2026-07-31・オーナー判断)
- *
- * `commuter-ratio-from-other-municipalities` (city) を `disposition: "legitimate"` で
- * 登録するため。**新しい壊れ方ではない** — 実測して「値は正当で、閾値の側が比率系の
- * 市区町村データに合っていない」と確定した (詳細は当該エントリの reason)。
- * このラチェットが止めたいのは「壊れたものを allowlist で緑にする」ことなので、
- * legitimate と確認できたものは対象外と判断した。
- *
- * 壊れている (`known-broken`) エントリは 14 件のままで増えていない。
+ * `legitimate` は統計定義上の例外であり、壊れたデータの返済残数には含めない。
+ * テストも `disposition === "known-broken"` だけを数える。2026-08-26 に旧13件を
+ * 一次資料とR2の焼き込み済みrecipeで再検証し、すべて正当値と確定したため0へ縮小した。
  */
 
-export const MAX_KNOWN_BROKEN = 13;
+export const MAX_KNOWN_BROKEN = 0;
 
 /**
  * 値の分布検査 (`VALUE_CHECKS`) 側の上限 (縮小専用ラチェット・2026-08-04 新設)。
@@ -57,120 +51,24 @@ export const MAX_KNOWN_BROKEN_VALUE = 0;
 
 export const EXPECTED_SHAPE_ANOMALY: readonly ExpectedShapeAnomalyEntry[] = [
   {
+    key: "commuter-ratio-from-other-municipalities",
+    check: "percent-out-of-range",
+    entities: ["city"],
+    disposition: "legitimate",
+    observedSeverity: 9640,
+    reason:
+      "2026-08-26 e-Stat 市区町村表 0000020306 / #F02702 を直接実測。単位は％のまま最大9640（葛尾村2015年）で、千代田区など流入通勤者が常住就業者を上回る地域も継続して100％超。百分率上限の一般則を適用できない正当値",
+    issue: "DATA-REFRESH-ZEROGATE-ALLORNOTHING-01",
+    until: "2027-08-31",
+  },
+  {
     key: "employment-insurance-daily-receipt-rate",
     check: "percent-out-of-range",
-    disposition: "known-broken",
+    disposition: "legitimate",
     observedSeverity: 1545.5,
-    reason: "2026-07-30 実測: unit が % なのに最大値 1545.5。率ではなく実数が入っている。是正待ち",
+    reason:
+      "2026-08-26 e-Stat 0000010206 / #F07201 と計算式を直接確認。福島県1994年度は受給者実人員170人÷日雇労働被保険者11人×100=1545.5％で公式値と一致。期間内受給者を時点被保険者で割るため100％上限を適用できない正当値",
     issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "future-burden-ratio",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 330.8,
-    reason: "2026-07-30 実測: unit が % なのに最大値 330.8。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "local-debt-current-ratio",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 256.5,
-    reason: "2026-07-30 実測: unit が % なのに最大値 256.5。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "food-self-sufficiency-rate-calorie",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 223,
-    reason: "2026-07-30 実測: unit が % なのに最大値 223。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "day-time-population-ratio",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 122,
-    reason: "2026-07-30 実測: unit が % なのに最大値 122。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "current-balance-ratio",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 117.4,
-    reason: "2026-07-30 実測: unit が % なのに最大値 117.4。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "daytime-population-ratio",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 116.14287,
-    reason: "2026-07-30 実測: unit が % なのに最大値 116.14287。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "psychiatric-hospital-bed-occupancy-rate",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 115.2,
-    reason: "2026-07-30 実測: unit が % なのに最大値 115.2。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "nursery-utilization-rate",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 113.2,
-    reason: "2026-07-30 実測: unit が % なのに最大値 113.2。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "city-gas-supply-area-household-ratio",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 106.7,
-    reason: "2026-07-30 実測: unit が % なのに最大値 106.7。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "water-supply-population-ratio-2012on",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 101.6,
-    reason: "2026-07-30 実測: unit が % なのに最大値 101.6。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "flush-toilet-population-ratio",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 101.2,
-    reason: "2026-07-30 実測: unit が % なのに最大値 101.2。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
-  },
-  {
-    key: "water-supply-population-ratio-pre2011",
-    check: "percent-out-of-range",
-    disposition: "known-broken",
-    observedSeverity: 100.9,
-    reason: "2026-07-30 実測: unit が % なのに最大値 100.9。率ではなく実数が入っている。是正待ち",
-    issue: "RANKING-VALUES-PARTITION-INTEGRITY-01",
-    until: "2026-12-31",
+    until: "2027-08-31",
   },
 ];

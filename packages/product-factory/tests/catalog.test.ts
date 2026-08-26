@@ -4,6 +4,7 @@ import { validateCatalog } from "../src/validators/catalog-validator";
 import { EXPECTED_TOTAL, EXPECTED_PACK_IDS } from "../src/catalog/packs";
 import { LICENSE_IDS } from "../src/catalog/licenses";
 import { DATASET_KEYS } from "../src/data/datasets";
+import { PRODUCT_EXCLUDED_RANKING_KEYS } from "../src/catalog/pack-theme-map";
 
 describe("pack catalog", () => {
   it("registers exactly 14 packs (P-01..P-14)", () => {
@@ -48,6 +49,14 @@ describe("pack catalog", () => {
         }
       }
     }
+  });
+
+  it("権利確認前の非商用データを有償パックへ収録しない", () => {
+    for (const p of ALL_PRODUCTS) {
+      for (const key of p.datasets) expect(PRODUCT_EXCLUDED_RANKING_KEYS.has(key)).toBe(false);
+      for (const key of p.rankingKeys) expect(PRODUCT_EXCLUDED_RANKING_KEYS.has(key)).toBe(false);
+    }
+    expect(DATASET_KEYS.has("tourism-resource-count")).toBe(false);
   });
 
   it("P-01 inherits the real 4 datasets of former D-01 and is listable", () => {

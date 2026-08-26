@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * GA4 から アフィリエイト計測イベント (affiliate_impression / affiliate_click) を取得し、
- * (affiliate_category × link_position) 別の impression / click / CTR を集計する。
+ * overview（広告/vertical/position）・experiments・pages を独立reportとして集計する。
+ * 1 reportのrich tier成功が、別reportのcustom dimension欠落を隠さない。
  *
  * /affiliate-improvement の observe モードのデータ源。
  *
@@ -18,6 +19,12 @@
 const fs = require("fs");
 const path = require("path");
 const { google } = require("googleapis");
+const {
+  CLICK_EVENT,
+  IMPRESSION_EVENT,
+  REPORT_SPECS,
+  fetchAllReports,
+} = require("./lib/affiliate-ga4-reports-core.cjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const PROPERTY_ID = process.env.GA4_PROPERTY_ID || "463218070";
@@ -26,8 +33,6 @@ const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"
 //   旧名は GA4 の AdSense 連携が自動生成する名前と同じで、取得しても AdSense 分しか返らず
 //   CTR の分母にならなかった (直近 7 日 3,346 件が全件 AdSense 由来・残余ゼロ)。
 //   改名日より前の窓を指定しても affiliate_impression は 0 件になる (それが正しい挙動)。
-const IMPRESSION_EVENT = "affiliate_impression";
-const CLICK_EVENT = "affiliate_click";
 const EVENTS = [IMPRESSION_EVENT, CLICK_EVENT];
 
 function resolveKey() {
@@ -40,8 +45,7 @@ function resolveKey() {
   );
 }
 
-async function runReport(analyticsdata, dimensions) {
-  const days = Number(process.argv[2] || 28);
+async function runReport(analyticsdata, dimensions, days) {
   const { data } = await analyticsdata.properties.runReport({
     property: `properties/${PROPERTY_ID}`,
     requestBody: {
@@ -60,65 +64,6 @@ async function runReport(analyticsdata, dimensions) {
   return data.rows || [];
 }
 
-// 取得を試みる dimension の tier (richest → 最小)。未登録 custom dimension があると runReport が
-// 失敗するため、上から順に試し最初に成功した tier を使う。
-const DIM_TIERS = [
-  // 最上位: 広告 1 件単位 (ad_id) × vertical × position。ad_id custom dimension 登録後に案件別 CTR が取れる。
-  [
-    "eventName",
-    "customEvent:ad_id",
-    "customEvent:affiliate_vertical",
-    "customEvent:link_position",
-  ],
-  [
-    "eventName",
-    "customEvent:affiliate_vertical",
-    "customEvent:affiliate_category",
-    "customEvent:link_position",
-    "customEvent:experiment_id",
-    "customEvent:variant_id",
-    "customEvent:creative_size",
-  ],
-  [
-    "eventName",
-    "customEvent:affiliate_vertical",
-    "customEvent:link_position",
-  ],
-  ["eventName", "customEvent:affiliate_category", "customEvent:link_position"],
-  ["eventName"],
-];
-
-const shortName = (apiName) => apiName.replace(/^customEvent:/, "");
-
-/**
- * dimNames[0] は eventName。残りを複合キーにして impression/click を集計し CTR を出す。
- * 各 value dimension は短縮名 (affiliate_category 等) のフィールドとして row に展開する。
- */
-function pivot(rows, dimNames) {
-  const valueDims = dimNames.slice(1);
-  const map = new Map();
-  for (const r of rows) {
-    const dims = (r.dimensionValues || []).map((d) => d.value);
-    const event = dims[0];
-    const fields = {};
-    valueDims.forEach((dn, i) => {
-      fields[shortName(dn)] = dims[i + 1] || "(unset)";
-    });
-    const key = valueDims.length
-      ? valueDims.map((_, i) => dims[i + 1] || "(unset)").join("|")
-      : "(all)";
-    const count = Number((r.metricValues || [])[0]?.value || 0);
-    const cur = map.get(key) || { ...fields, impressions: 0, clicks: 0 };
-    if (event === IMPRESSION_EVENT) cur.impressions += count;
-    else if (event === CLICK_EVENT) cur.clicks += count;
-    map.set(key, cur);
-  }
-  return [...map.values()].map((v) => ({
-    ...v,
-    ctr: v.impressions > 0 ? v.clicks / v.impressions : null,
-  }));
-}
-
 async function main() {
   const auth = new google.auth.GoogleAuth({
     keyFile: resolveKey(),
@@ -126,28 +71,26 @@ async function main() {
   });
   const analyticsdata = google.analyticsdata({ version: "v1beta", auth });
 
-  let usedDims = null;
-  let rows = null;
-  for (const tier of DIM_TIERS) {
-    try {
-      rows = await runReport(analyticsdata, tier);
-      usedDims = tier;
-      break;
-    } catch (e) {
+  const days = Number(process.argv[2] || 28);
+  const reports = await fetchAllReports(
+    (dimensions) => runReport(analyticsdata, dimensions, days),
+    REPORT_SPECS,
+  );
+  for (const report of Object.values(reports)) {
+    for (const failure of report.failures) {
       process.stderr.write(
-        `[warn] dims=[${tier.join(", ")}] 取得失敗 → 次の tier にフォールバック: ${e.message}\n`,
+        `[warn] report=${report.reportName} dims=[${failure.dimensions.join(", ")}] 取得失敗 → 次の tier: ${failure.reason}\n`,
       );
     }
   }
-  if (!rows || !usedDims) throw new Error("GA4 取得失敗 (全 dimension tier)");
 
-  const valueDimNames = usedDims.slice(1).map(shortName);
+  const valueDimNames = reports.overview.dimensions;
   const hasVerticalDims = valueDimNames.includes("affiliate_vertical");
   const hasCategoryDims =
     hasVerticalDims || valueDimNames.includes("affiliate_category");
-  const hasVariantDims = valueDimNames.includes("variant_id");
+  const hasVariantDims = reports.experiments.dimensions.includes("variant_id");
 
-  const pivoted = pivot(rows, usedDims).sort((a, b) => b.impressions - a.impressions);
+  const pivoted = reports.overview.rows.sort((a, b) => b.impressions - a.impressions);
   const totalImp = pivoted.reduce((s, v) => s + v.impressions, 0);
   const totalClick = pivoted.reduce((s, v) => s + v.clicks, 0);
   const date = new Date().toISOString().slice(0, 10);
@@ -172,7 +115,7 @@ async function main() {
     eventNames: { impression: IMPRESSION_EVENT, click: CLICK_EVENT },
     generatedAt: new Date().toISOString(),
     date,
-    days: Number(process.argv[2] || 28),
+    days,
     dimensions: valueDimNames,
     hasVerticalBreakdown: hasVerticalDims,
     hasCategoryBreakdown: hasCategoryDims,
@@ -188,6 +131,7 @@ async function main() {
       unsetVerticalRatio: totalImp > 0 ? unsetVerticalImpressions / totalImp : null,
     },
     rows: pivoted,
+    reports,
   };
 
   const dir = path.join(PROJECT_ROOT, ".claude/state/ads");
@@ -249,7 +193,7 @@ async function main() {
     out.push("## experiment 別 variant CTR (勝敗判定の入力)");
     out.push("");
     out.push(
-      "> 停止ルール: 各 variant imp ≥ 1,000 (or 4 週)、勝者 CTR が次点比 +20% かつ 95% 有意で採用。",
+      "> 判定境界: 各 variant の事前固定sample・期間・freshness・confound guardを通過後、CTRと相対差を人間へ提示します。統計的有意性による自動採用はしません。",
     );
   }
 
