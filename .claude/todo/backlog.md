@@ -952,7 +952,8 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **2026-08-27 next 8–9**: `deaths-lifestyle-diseases`（2023年度・人）と
   `junior-high-club-per100-basketball`（2025年度・人）を公開R2の47県へ接地して生成。全areaCode・県名・
   順位・値・年・単位の不一致0、機械監査blocker 0 / warn 0、AI監査48件、独立criticのfull→外科修正→
-  delta PASS。全データrefreshとのR2競合を避けるため、公開はrefresh完了後に直列実行する。
+  delta PASS。CIの権威ゲートを再通過し、R2公開2件・CDN purge2 URL・outbox削除まで成功
+  （run `33005947804`、skip 0 / upload error 0）。
 - **完了条件**: 全active rankingを処理し、欠測・矛盾・未検証生成を0にする。R2 pushとCDN反映は別承認。
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
