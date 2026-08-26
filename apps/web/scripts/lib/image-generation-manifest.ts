@@ -45,6 +45,34 @@ export type ImageGenerationStatus = (
     }
 ) & { remoteManifestSha256: string | null };
 
+const IMAGE_REPAIR_REASON_PRIORITY: Record<
+  ImageGenerationStatus['reason'],
+  number
+> = {
+  'manifest-missing': 0,
+  'asset-missing': 1,
+  'manifest-invalid': 2,
+  'asset-contract-changed': 3,
+  'fingerprint-changed': 4,
+  current: 5,
+  'probe-error': 6,
+};
+
+/**
+ * A bounded repair batch must restore missing public assets before migrating
+ * stale legacy manifests. The entity id tie-break keeps repeated runs stable.
+ */
+export function prioritizeChangedImageCandidates<T extends { id: string }>(
+  changed: readonly { item: T; status: ImageGenerationStatus }[]
+): Array<{ item: T; status: ImageGenerationStatus }> {
+  return [...changed].sort(
+    (a, b) =>
+      IMAGE_REPAIR_REASON_PRIORITY[a.status.reason] -
+        IMAGE_REPAIR_REASON_PRIORITY[b.status.reason] ||
+      a.item.id.localeCompare(b.item.id)
+  );
+}
+
 function canonicalize(value: unknown, active = new WeakSet<object>()): unknown {
   if (
     value === null ||
