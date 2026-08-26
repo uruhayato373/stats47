@@ -95,6 +95,34 @@ export const EVIDENCE_SOURCE_CATALOG = {
     sourceUrl:
       "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2140000.html",
   },
+  "mhlw-physician-workforce-plan": {
+    kind: "report",
+    title: "医師確保対策・医師確保計画",
+    publisher: "厚生労働省",
+    sourceUrl:
+      "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kinkyu/index.html",
+  },
+  "mhlw-regional-healthcare-vision": {
+    kind: "report",
+    title: "地域医療構想",
+    publisher: "厚生労働省",
+    sourceUrl:
+      "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000080850.html",
+  },
+  "mhlw-hospital-function-report-2025": {
+    kind: "statistical-overview",
+    title: "令和7年度 病床機能報告公表データ",
+    publisher: "厚生労働省",
+    sourceUrl:
+      "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/open_data_00020.html",
+  },
+  "mhlw-healthy-japan-21-third": {
+    kind: "report",
+    title: "健康日本21（第三次）",
+    publisher: "厚生労働省",
+    sourceUrl:
+      "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/kenkounippon21_00006.html",
+  },
 } as const satisfies Record<string, EvidenceSourceDefinition>;
 
 export type EvidenceSourceKey = keyof typeof EVIDENCE_SOURCE_CATALOG;
