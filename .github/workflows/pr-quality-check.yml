@@ -190,12 +190,13 @@ jobs:
         continue-on-error: false
 
       - name: 🚧 Web e-Stat Import Boundary Guard
-        # 本番 apps/web の e-Stat 直呼び (値 import) を shrink-only ratchet で監視。
-        # 新規の直呼びを弾く (最終形は 0 = 全ページ R2 snapshot 読み)。
+        # 本番 apps/web から e-Stat への推移的な値 import 到達を監視。
+        # static/dynamic/re-export/require/wrapper/alias の新規 edge を PR base と比較して弾く。
+        # 既存 direct allowlist も shrink-only (最終形は 0 = 全ページ R2 snapshot 読み)。
         # 正典: .claude/todo/backlog.md の CROSS-PAGE-DATA-SSOT-01 (WP2)
         run: |
           node --test .claude/scripts/lib/__tests__/check-web-estat-imports.test.cjs
-          node .claude/scripts/lib/check-web-estat-imports.cjs
+          node .claude/scripts/lib/check-web-estat-imports.cjs --base "${{ github.event.pull_request.base.sha }}"
         continue-on-error: false
 
       - name: 📚 Docs Governance and Link Guard
