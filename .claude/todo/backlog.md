@@ -61,6 +61,10 @@ updated: 2026-08-27
   「令和7年度 水産白書」を一次資料に、製造拠点・雇用、人員あたり出荷規模、漁獲と養殖、漁業担い手の
   4論点を追加した。関連ranking 5件・theme 3件は公開200、専用test 6件、data-configs全693件、
   catalog error 0、生成物check、data-configs / web型検査はgreen。未整備は8テーマ。
+- **2026-08-27 labor / foreign-residents wave**: 厚労省「令和7年版 労働経済白書」・
+  「賃金構造基本統計調査」、総務省「令和2年国勢調査」を一次資料に、労働需給、男女賃金差、
+  外国人人口規模・比率、国籍構成の4論点を追加した。公式URL 3件、内部route 10件は公開200、
+  専用test 6件、data-configs全699件、catalog error 0、生成物check、型検査はgreen。未整備は6テーマ。
 - **次**: 白書台帳に登録済みのテーマから2〜3件ずつ `/research-theme-catalog <theme-key>` を実行する。
   NotebookLM は引用付き候補抽出だけに使い、公式HTTPS URLと実在routeを確認できた候補だけ
   theme-designerが採択する。文部科学白書は公式source登録済みだがNotebookLM ID未登録なので、
@@ -606,8 +610,13 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **QG4 admin slice (2026-08-27)**: PR CIのpackages testが`@stats47/*`だけを対象にし、activeな
   `apps/admin` 16 files / 150 testsを一度も実行していなかった欠落を是正した。`test` jobでadmin unitを
   blocking実行し、command削除・`continue-on-error`化・required集約からの切断を各mutationで検知する
-  workspace契約を追加。契約17件、admin 150件、型検査はgreen。残りQG4はadmin build/変更path E2E、
-  remotion・ges、全workspace risk matrixとCI時間集計。
+  workspace契約を追加。契約17件、admin 150件、型検査はgreen。
+- **QG4 build / media slice (2026-08-27)**: admin production buildとdesktop smoke 15件を独立required jobへ
+  接続し、build欠落・E2E soft-fail・required切断をmutationで固定した。Remotionは166 sourceの
+  critical bundlerとしてbundle buildをrequired並列jobへ追加し、GESは3 sourceのtooling-only generatorとして
+  PRではtype-check、外部実機生成はdeferredとregistryへ明記。親側実測はadmin build 10.72秒、E2E 15/15・19.1秒、
+  Remotion bundle 9.39秒、admin/media契約10/10、workspace契約25、workflow policy 64/0、checker wiring 96・new 0。
+  残りQG4は全source-bearing workspaceのrisk分類、test 0 / lint / build enforcement、CI p95集計。
 - **監査ベースライン (2026-08-13、ローカル実測)**:
   - rootの`test:packages`は`vitest run --project '@stats47/*'`で、`apps/admin`のunit test
     **14 file / 136 test**はPR CI対象外。galleryにはPlaywright 6 specもあるがworkflowから呼ばれていない。
