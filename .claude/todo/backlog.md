@@ -27,16 +27,18 @@ updated: 2026-08-27
 
 - **program owner**: `open-data-curator`。工程ownerは
   `docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md` §9。
-- **再開ポインタ**: `lastCompleted=WP0` / `nextWorkPackage=WP1`。
+- **再開ポインタ**: `lastCompleted=WP1-source-vault` / `nextWorkPackage=WP1-inventory-pilot`。
 - **現状証拠**: ローカル2025/26年版はp.26–529の504 Markdown、表見出し721、図見出し200、
   figure 201、transcript 13、scan PDF 13。全体は1,746ファイル・466MBで、`/books/`はGit対象外。
-  OCRは未校正で数値引用禁止。
+  OCRは未校正で数値引用禁止。private Google DriveにはGit manifest 1件と90MiB以下のarchive part 6件を置き、
+  すべて`shared:false`、合計480,666,655 bytesをreadback済み。Git manifestが全1,746ファイルのSHA-256を保持する。
 - **目的**: 書籍を公開taxonomyやデータ出典にせず、全定量項目を内部evidence inventoryへ登録する。
   数値は一次資料から再取得し、既存Category / Theme / Tag、metric、surveyへ統合した後、
   ranking / theme / area / japan / blog / note / YouTube通常動画 / Instagram / Xへ展開する。
 - **実行順**:
-  1. WP1: private `stats47-source-vault`用manifestとdry-run push/pullを実装し、承認後にsource bundleを配置する。
-     続いてp.26–65でtyped inventory、stable ID、extract/validate/coverageを実装し、代表10項目を選ぶ。
+  1. WP1 inventory pilot: p.26–65でtyped inventory、stable ID、extract/validate/coverageを実装し、
+     代表10項目を選ぶ。別PCではGit manifestのpart名をGoogle Drive MCPで取得し、
+     `npm run source-vault:japan-zue -- restore`で検証復元してから着手する。
   2. WP2: 全504ページとp.1–25の有無を照合し、表・図・本文統計の母数を確定する。
   3. WP3: 一次資料・利用条件・既存metric / survey / themeとの重複を全件照合する。
   4. WP4: 10項目を一次資料→local R2→Web配置までend-to-end実装する。
@@ -50,10 +52,10 @@ updated: 2026-08-27
   - Web・記事・動画・派生投稿がmetricKeys / surveyIds / provenanceUrlsで追跡できる。
   - 新版で追加・変更・削除された項目と影響先を機械列挙できる。
 - **停止条件**: 一次資料不明、利用条件不明、民間権利、OCR/原本不一致、年度・単位・地域粒度不一致では
-  `primary-source-unavailable`または`rights-hold`にして停止する。source bucketのpublic access、通常`stats47`
-  bucket指定、manifest / hash不一致でも停止する。推測値や書籍値で埋めない。
+  `primary-source-unavailable`または`rights-hold`にして停止する。Drive itemの共有、part欠落、manifest / size / hash不一致、
+  公開R2へのsource配置でも停止する。推測値や書籍値で埋めない。
 - **外部変更境界**: remote R2 write、git push、PR、deploy、note / YouTube / Instagram / X公開は
-  対象と検証結果を提示し、別途オーナー承認を得る。private bucket作成とsource bundle初回uploadもこの境界に含む。
+  対象と検証結果を提示し、別途オーナー承認を得る。Drive source vaultの次revision追加・差し替えもこの境界に含む。
   YouTubeはEXP-006の6週間3本上限を増やさない。
 
 ### [ASP-CONTINUITY-01] afb の承認追跡と広告コード取得 (オーナーのログインが要る分)
