@@ -325,7 +325,10 @@ jobs:
 
       - name: 📦 Workspace Contract Guard
         # package entrypoint/exports、internal dependency、runtime循環、package-lock登録を検査。
-        run: node .claude/scripts/lib/check-workspace-contract.cjs
+        # active admin のbuild/E2Eがrequired jobから外れる退行もmutation契約で止める。
+        run: |
+          node .claude/scripts/lib/check-workspace-contract.cjs
+          node --test .claude/scripts/lib/__tests__/admin-ci-contract.test.cjs
         continue-on-error: false
 
       - name: 🔐 Environment Registry Guard
@@ -715,6 +718,54 @@ jobs:
       # vitest.config.ts が coverage-thresholds.json (単一ソース) を読み floor 未達で exit 1 する。
       # 旧「Check coverage thresholds」step (閾値リテラル 10 を再ハードコード) は重複のため削除。
 
+  admin-quality:
+    name: Admin Build & E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Admin Console
+        run: npm run build --workspace=apps/admin
+        env:
+          NODE_ENV: production
+          NODE_OPTIONS: '--max-old-space-size=4096'
+        continue-on-error: false
+
+      - name: 🌐 Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: 🎭 Run Admin Desktop Smoke
+        # production buildをnext startで再利用し、11画面・ナビ・横幅をdesktopで検証する。
+        # 全6 spec / mobileは実データ依存を含むため、PRの最小安定経路には混ぜない。
+        run: npm run test:e2e --workspace=apps/admin -- --project=desktop tests/e2e/smoke.spec.ts
+        env:
+          CI: 'true'
+          NODE_ENV: production
+        continue-on-error: false
+
+      - name: 📊 Upload Admin Playwright report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: admin-playwright-e2e-report
+          path: |
+            apps/admin/playwright-report/
+            apps/admin/test-results/
+          if-no-files-found: ignore
+          retention-days: 30
+
   build:
     name: Build Check
     runs-on: ubuntu-latest
@@ -830,7 +881,7 @@ jobs:
   # (needs のいずれかが失敗すると本 job は skip されうるため、結果を明示チェックする)。
   quality-check:
     name: Code Quality Check
-    needs: [static-gates, type-check, test, build, remote-asset-audit, e2e]
+    needs: [static-gates, type-check, test, admin-quality, build, remote-asset-audit, e2e]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -840,7 +891,7 @@ jobs:
         if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped') }}
         run: |
           echo "::error::One or more required checks did not pass."
-          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }}"
+          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} admin-quality=${{ needs.admin-quality.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }}"
           exit 1
 
       - name: ✅ All Checks Passed
