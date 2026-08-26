@@ -49,3 +49,18 @@ SSR が 200 を返すためブラウザでのみ「消えた」ように見え�
 
 関連: [[feedback_nextjs_ssg_cookies]] (SSG を壊す別経路=cookies/headers) / [[project_r2_writes_ci_only]] /
 [[project_ranking_publish_pipeline_gap]] / [[feedback_shared_working_copy_git_race]] (本対応中 develop が別 worktree 専有で sync 保留)。
+
+## 2026-08-27 追記: search index は script 限定 R2 read + aggregate snapshot
+
+上記 latent issue の search index は解消済み。`generate-search-index.ts` がランキングごとの
+`app/ranking/<key>/item.json` を約2,164回取得していたため、CIで公開R2読込を有効にしても15分制限へ
+近づいていた。次の2点を正典とする。
+
+- CIでS3資格情報が無い場合だけ、**search-index prebuild の子processに限定して**
+  `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp` を渡す。親process / Next buildへは漏らさず、
+  `generateStaticParams` のランキング全件事前生成を再発させない。ローカル実行のfallbackも増やさない。
+- ランキングはper-key HTTPではなく、1回の `app/ranking-items/all.json` 読込からactive prefecture itemを
+  決定的に抽出する。snapshotの`count !== items.length`はfail-closedにする。
+
+本番deploy run `33009537590` で、ランキング2,167件・ブログ434件・合計2,601件を約7秒で生成し、
+`search-index.json` / `search-index-meta.json`のupload、本番16ルート、sitemap 11 shardがgreenになった。
