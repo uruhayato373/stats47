@@ -567,6 +567,10 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   soft-fail、required集約切断を8 mutation契約で検知する。追加CI時間は実測4.29秒、関連65 files / 751 tests、
   契約43件、type-checkはgreen。残りQG5はcritical module拡張、web routeロジックのpure抽出、
   `src/app`一括除外縮小、意味あるfixtureによるbranch coverage改善。
+- **QG5 recipe / value slice (2026-08-27)**: metric recipeとvalue verificationを同じinventoryへ追加し、
+  実測floorをrecipe 100 / 93.47 / 100、value 100 / 97.91 / 100（lines / branches / functions）に固定した。
+  7領域200 testsをPR blockingへ接続し、未分類IDとrecipe branch低下のRED、復元後GREENを確認。
+  data-configs全64 files / 718 tests、契約8件、type-check、pre-commitはgreen。CI増分は初回QG5比約1.1秒。
 - **監査ベースライン (2026-08-13、ローカル実測)**:
   - rootの`test:packages`は`vitest run --project '@stats47/*'`で、`apps/admin`のunit test
     **14 file / 136 test**はPR CI対象外。galleryにはPlaywright 6 specもあるがworkflowから呼ばれていない。
