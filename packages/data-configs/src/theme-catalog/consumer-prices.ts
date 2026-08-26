@@ -280,6 +280,39 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
       "sortOrder": 30
     }
   ],
+  evidenceTopics: [
+    {
+      key: "overall-price-level-and-rent",
+      lensKey: "composition",
+      title: "総合物価水準と家賃の影響",
+      question:
+        "総合と家賃を除く総合の地域差指数には、どのような違いが表れるか",
+      summary:
+        "地域差指数は全国平均の価格水準を100とする相対指数で、前年からの物価上昇率ではありません。総合にも持家の帰属家賃は含まれず、家賃を除く総合では実際の家賃も除かれます。",
+      sourceKeys: ["stat-retail-price-survey-structural"],
+      relatedRankingKeys: [
+        "consumer-price-difference-index-overall",
+        "consumer-price-difference-index-overall-excl-rent",
+      ],
+      relatedChartKeys: ["theme-cpi-profile"],
+    },
+    {
+      key: "essential-cost-profile",
+      lensKey: "composition",
+      title: "食料・住居・光熱水道の価格構造",
+      question:
+        "食料、住居、光熱・水道の価格水準には、地域ごとにどのような違いがあるか",
+      summary:
+        "費目別指数は、それぞれの全国平均を100とする価格水準です。家計が実際に支払った金額や支出割合ではなく、費目間の指数を足したり単純平均したりして総合指数を作ることはできません。",
+      sourceKeys: ["stat-retail-price-survey-structural"],
+      relatedRankingKeys: [
+        "consumer-price-difference-index-food",
+        "consumer-price-difference-index-housing",
+        "consumer-price-difference-index-utilities",
+      ],
+      relatedChartKeys: ["theme-cpi-living-cost"],
+    },
+  ],
   "keywords": [
     "消費者物価指数",
     "物価",

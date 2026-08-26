@@ -190,6 +190,12 @@ export const EVIDENCE_SOURCE_CATALOG = {
     publisher: "総務省統計局",
     sourceUrl: "https://www.stat.go.jp/data/jyutaku/2023/tyousake.html",
   },
+  "stat-retail-price-survey-structural": {
+    kind: "statistical-overview",
+    title: "小売物価統計調査（構造編）－調査結果",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
+  },
 } as const satisfies Record<string, EvidenceSourceDefinition>;
 
 export type EvidenceSourceKey = keyof typeof EVIDENCE_SOURCE_CATALOG;
