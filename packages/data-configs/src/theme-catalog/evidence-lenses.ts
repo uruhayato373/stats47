@@ -81,6 +81,20 @@ export const EVIDENCE_SOURCE_CATALOG = {
     sourceUrl:
       "https://www.mext.go.jp/b_menu/toukei/chousa01/kihon/kekka/k_detail/2024.htm",
   },
+  "mlit-whitepaper-2025-road-network": {
+    kind: "whitepaper",
+    title: "令和7年版 国土交通白書－幹線道路ネットワークの整備",
+    publisher: "国土交通省",
+    sourceUrl:
+      "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2511000.html",
+  },
+  "mlit-whitepaper-2025-infrastructure-maintenance": {
+    kind: "whitepaper",
+    title: "令和7年版 国土交通白書－社会資本の老朽化対策等",
+    publisher: "国土交通省",
+    sourceUrl:
+      "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2140000.html",
+  },
 } as const satisfies Record<string, EvidenceSourceDefinition>;
 
 export type EvidenceSourceKey = keyof typeof EVIDENCE_SOURCE_CATALOG;
