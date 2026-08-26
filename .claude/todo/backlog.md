@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-25
+updated: 2026-08-26
 ---
 
 # バックログ (タスクマスタ)
@@ -62,7 +62,7 @@ updated: 2026-08-25
   `apps/web/src/features/survey/survey-editorial.ts` を authored SSOT として追記する。
 - **目的**: fallback の組織名だけで終わる調査ハブを、読者が「何が分かるか・どの問いへ進めるか・
   何に注意して読むか」を判断できる出典ハブにする。全80調査へ同じ定型文を一斉生成する作業ではない。
-- **再開ポインタ**: `completedIds=water-pollution-survey,workplace-accident-survey / nextSurvey=minimum-wage`。
+- **再開ポインタ**: `completedIds=water-pollution-survey,workplace-accident-survey,hospital-report,national-medical-expenditure / nextSurvey=minimum-wage`。
   各runの最後に、完了したsurveyIdと次の先頭surveyIdだけをこの行へ記録する。長い実行ログは残さない。
 - **在庫再評価 (2026-08-26)**: CI secret の e-Stat APP_ID で refresh を完走し、
   `hospital-bed-count`（tab 280）、`national-medical-expense-inpatient`（SSDS J4005）、

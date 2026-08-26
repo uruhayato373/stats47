@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T05:34:45.712Z",
+  "updatedAt": "2026-08-26T06:13:09.256Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -665,11 +665,34 @@
           "evidence": "訂正: survey editorialの正しいtest pathで3/3 green。2調査追加済みだが全80完了条件には未達",
           "failReason": "残り9調査のranking在庫不足とe-Stat APP_ID未設定。直前attemptの__tests__付きpathは誤記",
           "followUps": []
+        },
+        {
+          "at": "2026-08-26T06:13:09.256Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "failed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run apps/web/src/features/survey/survey-editorial.test.ts apps/web/src/features/survey/survey-editorial-validator.test.ts",
+              "npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts --json",
+              "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check",
+              "npm run type-check --workspace apps/web",
+              "npm run validate:config --workspace=@stats47/data-configs",
+              "git diff --check"
+            ],
+            "pass": true
+          },
+          "evidence": "病院報告・国民医療費を公式一次資料とactive key各3件で個別整備しeditorial 71→73。通常ratchet、7 tests、taxonomy、type-check、configはgreen。全件flagが残7調査と既存inactive導線6件を検出。",
+          "failReason": "残7調査はactive ranking在庫0〜2件でカード停止条件に該当。全80/80と全readerQuestions有効の完了条件は未達。",
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 3,
-        "lastReason": "残り9調査のranking在庫不足とe-Stat APP_ID未設定。直前attemptの__tests__付きpathは誤記",
+        "failCount": 4,
+        "lastReason": "残7調査はactive ranking在庫0〜2件でカード停止条件に該当。全80/80と全readerQuestions有効の完了条件は未達。",
         "since": "2026-08-24T17:08:57.270Z"
       },
       "reclassifiedFrom": [],

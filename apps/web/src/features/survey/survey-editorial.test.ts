@@ -27,6 +27,32 @@ describe('getSurveyEditorialContent', () => {
     expect(content?.caveats.length).toBeGreaterThan(0);
   });
 
+  it('病院報告の3つのactiveランキングへ案内する', () => {
+    const content = getSurveyEditorialContent('hospital-report');
+
+    expect(content?.readerQuestions.map((item) => item.rankingKey)).toEqual([
+      'hospital-bed-count',
+      'bed-utilization-rate',
+      'average-length-of-stay',
+    ]);
+    expect(content?.caveats).toContainEqual(
+      expect.stringContaining('100％を超える場合があります')
+    );
+  });
+
+  it('国民医療費の総額・1人当たり・入院分へ案内する', () => {
+    const content = getSurveyEditorialContent('national-medical-expenditure');
+
+    expect(content?.readerQuestions.map((item) => item.rankingKey)).toEqual([
+      'national-medical-expense-total',
+      'national-medical-expense-per-person',
+      'national-medical-expense-inpatient',
+    ]);
+    expect(content?.caveats).toContainEqual(
+      expect.stringContaining('正常な妊娠・分娩')
+    );
+  });
+
   it('未定義の調査では現行表示へフォールバックできる', () => {
     expect(getSurveyEditorialContent('unknown-survey')).toBeNull();
   });
