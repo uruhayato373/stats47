@@ -1,4 +1,9 @@
 import "@testing-library/jest-dom";
+import { installDeterministicDomEnvironment } from "./src/shared/__tests__/helpers/render-test-contract";
+
+if (process.env.RUN_RENDER_TESTS === "1") {
+  installDeterministicDomEnvironment();
+}
 
 // D3 のレイアウト計算やトランジションで使われる SVG プロパティをモック化
 if (typeof SVGElement !== "undefined") {

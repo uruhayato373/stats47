@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { Scatterplot } from "../Scatterplot";
 import type { ScatterplotDataNode } from "../types";
@@ -18,11 +18,12 @@ describe("Scatterplot SVG structure", () => {
         expect(svg?.getAttribute("viewBox")).toBe("0 0 640 400");
     });
 
-    it("circle 要素（プロット点）が生成されていること", () => {
+    it("circle 要素（プロット点）が生成されていること", async () => {
         const { container } = render(
             <Scatterplot data={mockData} />
         );
-        const circles = container.querySelectorAll("circle");
-        expect(circles.length).toBe(3);
+        await waitFor(() => {
+            expect(container.querySelectorAll("circle")).toHaveLength(3);
+        });
     });
 });

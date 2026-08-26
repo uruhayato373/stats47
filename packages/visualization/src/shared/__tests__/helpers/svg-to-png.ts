@@ -1,4 +1,5 @@
 import sharp from "sharp";
+import { prepareSvgForDeterministicRender } from "./render-test-contract";
 
 /**
  * SVG 文字列を PNG バッファに変換する
@@ -8,7 +9,7 @@ export async function svgToPng(
   width: number,
   height: number
 ): Promise<Buffer> {
-  return sharp(Buffer.from(svg))
+  return sharp(Buffer.from(prepareSvgForDeterministicRender(svg)))
     .resize(width, height)
     .png()
     .toBuffer();

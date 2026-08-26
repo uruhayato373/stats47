@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { describe, it } from "vitest";
 import { compareWithGolden } from "../../../../shared/__tests__/helpers/golden-compare";
 import { svgToPng } from "../../../../shared/__tests__/helpers/svg-to-png";
@@ -19,6 +19,12 @@ describe("Scatterplot PNG Golden Test", () => {
         const { container } = render(
             <Scatterplot data={mockData} width={width} height={height} title="Landscape Scatter" />
         );
+
+        await waitFor(() => {
+            if (container.querySelectorAll("circle").length !== mockData.length) {
+                throw new Error("Scatterplot points are not ready");
+            }
+        });
 
         const svgElement = container.querySelector("svg");
         if (!svgElement) throw new Error("SVG not found");
