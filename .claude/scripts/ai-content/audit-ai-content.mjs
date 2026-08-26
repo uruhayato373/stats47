@@ -197,9 +197,16 @@ export function auditRow(row, options = {}) {
     catch { add("blocker", "pref-parse", "prefectureCommentary の JSON parse 失敗"); }
     if (pc) {
       const items = Array.isArray(pc) ? pc : (pc.items ?? []);
-      // 件数: 都道府県ランキングは 47。area type を ai-content 単独で確定できないため warn 止まり
-      if (items.length !== EXPECTED_PREF_COUNT) {
-        add("warn", "pref-count", `prefectureCommentary ${items.length} 件 (都道府県ランキングは ${EXPECTED_PREF_COUNT} 件のはず。market/port 等なら想定内)`);
+      // 実データ照合時は、その年に観測された県数が正典。知事選のように同一年へ全47県が
+      // そろわない統計や、港湾・漁業の対象外県を47件へ水増ししない。値を取得できない
+      // オフライン監査だけは従来どおり47件を期待し、誤って少ない生成物を見逃さない。
+      const expectedCount = valueContext?.count ?? EXPECTED_PREF_COUNT;
+      if (items.length !== expectedCount) {
+        add(
+          "warn",
+          "pref-count",
+          `prefectureCommentary ${items.length} 件 (照合対象の観測値は ${expectedCount} 件)`,
+        );
       }
       const lenOut = items.filter((it) => {
         const n = jpLen(it?.commentary);

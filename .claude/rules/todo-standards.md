@@ -96,8 +96,10 @@ doboku-note = `scripts/lib/backlog-lib.mjs` (admin・CI・検査はすべてこ�
 | `monthly.md` | `/monthly-plan` skill (Write 上書き) |
 | `weekly.md` | `/weekly-plan` skill (Write 上書き) |
 
-閲覧は管理画面 `npm run admin` → http://127.0.0.1:4747/todo (読み取り専用・層タブ + 優先度/種類/実行の
-ファセット)。検査は `npm run docs:check` (`check-docs-governance.cjs` が backlog-lib で card を検査)。
+閲覧は管理画面 `npm run admin` → http://127.0.0.1:4747/todo (読み取り専用・層タブ + 優先度/種類の
+ファセット)。`[実行:]` は自動処理の安全判定として内部に保持し、画面では必要なカードだけ
+「確認が必要」「外部作業あり」へ要約する。検査は `npm run docs:check`
+(`check-docs-governance.cjs` が backlog-lib で card を検査)。
 
 ## 7. 書き込み先の判断 (stats47)
 

@@ -136,7 +136,7 @@ export function aggregateVariantMetrics(ga4Rows) {
  * @param {string} args.nowIso 現在時刻 (ISO)
  * @returns {{active:Array, readyToDecide:Array, invalid:Array, inconclusive:Array, closed:Array}}
  */
-export function evaluateExperiments({ registry, ads, variantMetrics, nowIso }) {
+export function evaluateExperiments({ registry, ads, variantMetrics, nowIso, measurementGate = null }) {
   const active = [];
   const readyToDecide = [];
   const invalid = [];
@@ -221,6 +221,11 @@ export function evaluateExperiments({ registry, ads, variantMetrics, nowIso }) {
     const minDurationReached = daysElapsed >= Number(exp.minDurationDays);
     const maxDurationReached =
       Number(exp.maxDurationDays) > 0 && daysElapsed >= Number(exp.maxDurationDays);
+    const decisionGuards = [];
+    if (!sampleReached) decisionGuards.push("insufficient-sample");
+    if (!minDurationReached) decisionGuards.push("insufficient-duration");
+    if (measurementGate?.status === "blocked") decisionGuards.push("measurement-gate-blocked");
+    if ((exp.confounds ?? []).length > 0) decisionGuards.push("confounded");
 
     const summary = {
       experimentId: id,
@@ -232,10 +237,14 @@ export function evaluateExperiments({ registry, ads, variantMetrics, nowIso }) {
       minDurationDays: Number(exp.minDurationDays),
       maxDurationDays: Number(exp.maxDurationDays) > 0 ? Number(exp.maxDurationDays) : null,
       sampleReached,
+      minDurationReached,
+      primaryMetric: exp.primaryMetric ?? "ctr",
+      decisionRule: exp.decisionRule ?? null,
+      decisionGuards,
       variants: perVariant,
     };
 
-    if (sampleReached && minDurationReached) {
+    if (decisionGuards.length === 0) {
       readyToDecide.push({ ...summary, status: "ready-to-decide" });
     } else if (maxDurationReached) {
       inconclusive.push({ ...summary, status: "inconclusive" });

@@ -189,6 +189,12 @@ jobs:
           npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls "${URLS[@]}"
           npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --urls "${URLS[@]}"
 
+      # 記事 frontmatter だけでなく本文中の SVG / image 参照も含め、cache purge 後の
+      # 公開 R2 を実測する。PUBLISHED が空なら公開変更が無いので実行しない。
+      - name: 🌐 Audit public data contracts after blog publish
+        if: ${{ env.PUBLISHED != '' }}
+        run: npm run audit:public-data-contract
+
       # docs/21 は ephemeral outbox: 公開に成功した slug のドラフトを R2 反映後に削除し、
       # commit-back する。これで docs/21 は常に空 (未公開ドラフトのみ) に保たれ、R2(正典)と
       # ドリフトしない。[skip ci] で自己再発火を防止、pull --rebase で他 push との race を吸収。

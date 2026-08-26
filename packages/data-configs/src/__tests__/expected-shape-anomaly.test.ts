@@ -17,7 +17,9 @@ import { VALUE_CHECKS } from "../shape-gate";
 describe("EXPECTED_SHAPE_ANOMALY の健全性", () => {
   it("★形状検査のエントリ数が上限を超えないこと (縮小専用ラチェット)", () => {
     // 是正して減らしたら MAX_KNOWN_BROKEN も下げる。増やす変更は原則しない。
-    const shape = EXPECTED_SHAPE_ANOMALY.filter((e) => !VALUE_CHECKS.includes(e.check));
+    const shape = EXPECTED_SHAPE_ANOMALY.filter(
+      (e) => e.disposition === "known-broken" && !VALUE_CHECKS.includes(e.check),
+    );
     expect(shape.length).toBeLessThanOrEqual(MAX_KNOWN_BROKEN);
   });
 

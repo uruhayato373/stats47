@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import {
   todoBoard,
@@ -17,9 +18,9 @@ export const metadata = { title: "TODO — stats47 統合メディアコンソ�
  *
  * - **役割 (実行/計画/検証) は共通サイドバーの TODO 階層**が持つ。台帳は別ファイルで、
  *   週間・月間は backlog の部分集合ではなく pull されたコピー＝「行き先」であって絞り込みではない。
- * - **優先度・種類・実行は本文右のレール**に置く。backlog カードの属性でしかない
+ * - **優先度・種類は本文右のレール**に置く。backlog カードの属性でしかない
  *   (他層には存在しない) ため。クライアント JS を持たず、絞り込みは searchParams に載せる:
- *   f=層 / t=優先度 / k=種類 / e=実行
+ *   f=層 / t=優先度 / k=種類。実行タグは自動処理の内部契約で、読者向け分類には使わない。
  * - 件数は**自分以外の絞り込みを当てた集合**で数える (押した先が 0 件になる導線に件数を出さない)。
  * - 読み取り専用。編集は vscode リンクで元ファイルを開く (排他 writer 契約を画面から崩さない)。
  */
@@ -126,8 +127,17 @@ function Badge({ tone, children }: { tone: "bad" | "warn" | "info" | "accent" | 
   return <span className={`rounded border px-1.5 py-0.5 text-[11px] ${cls}`}>{children}</span>;
 }
 
+function getExecutorStatus(executor: string | null) {
+  if (executor === "対話") return { label: "確認が必要", tone: "warn" as const };
+  if (executor === "ユーザー" || executor === "windows" || executor === "別環境") {
+    return { label: "外部作業あり", tone: "info" as const };
+  }
+  return null;
+}
+
 function Card({ c, today }: { c: TodoCard; today: string }) {
   const overdue = c.due !== null && c.due < today;
+  const executorStatus = getExecutorStatus(c.executor);
   return (
     <article className="rounded-md border border-console-border bg-console-card p-3">
       <a
@@ -140,7 +150,7 @@ function Card({ c, today }: { c: TodoCard; today: string }) {
       <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
         {c.id ? <span className="font-mono text-[11px] text-console-muted">{c.id}</span> : null}
         {c.kind ? <Badge tone={c.kind === "不具合" ? "bad" : "muted"}>{c.kind}</Badge> : null}
-        {c.executor ? <Badge tone="muted">実行:{c.executor}</Badge> : null}
+        {executorStatus ? <Badge tone={executorStatus.tone}>{executorStatus.label}</Badge> : null}
         {c.wip ? <Badge tone="info">進行中</Badge> : null}
         {c.codex ? <Badge tone="accent">Codex</Badge> : null}
         {c.due ? <Badge tone={overdue ? "bad" : "muted"}>期日 {c.due}</Badge> : null}
@@ -222,6 +232,10 @@ function ImprovementsTable({ rows, abs, today }: { rows: ImprovementRow[]; abs: 
 
 export default async function TodoPage({ searchParams }: { searchParams: Promise<Query> }) {
   const q = await searchParams;
+
+  // 旧「実行」ファセットの URL は、内部タグで表示を絞らず現在の URL 契約へ正規化する。
+  if (q.e) redirect(href(q, { e: undefined }));
+
   const board = todoBoard();
   const today = new Date().toISOString().slice(0, 10);
 
@@ -237,38 +251,32 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
   const layer: LayerId = board.layers.some((l) => l.id === q.f) ? (q.f as LayerId) : "backlog";
   const layerMeta = board.layers.find((l) => l.id === layer);
   const layerCards = board.items.filter((c) => c.layer === layer);
-  // 種類・実行のタグ行を持つのは backlog だけ。他層で空の絞り込みを出さない
+  // 種類タグを持つのは backlog だけ。他層で空の絞り込みを出さない
   const faceted = layer === "backlog";
 
   const tier = TIERS.some((t) => t.key === q.t) ? (q.t as TierKey) : null;
   const kind = faceted && q.k && layerCards.some((c) => c.kind === q.k) ? q.k : null;
-  const executor = faceted && q.e && layerCards.some((c) => c.executor === q.e) ? q.e : null;
 
   const byTier = (cs: TodoCard[]) => (tier ? cs.filter((c) => tierKey(c) === tier) : cs);
   const byKind = (cs: TodoCard[]) => (kind ? cs.filter((c) => c.kind === kind) : cs);
-  const byExecutor = (cs: TodoCard[]) => (executor ? cs.filter((c) => c.executor === executor) : cs);
 
   // 各軸のスコープ＝自分以外の絞り込みだけを当てた集合
-  const tierScope = byKind(byExecutor(layerCards));
-  const kindScope = byTier(byExecutor(layerCards));
-  const executorScope = byTier(byKind(layerCards));
+  const tierScope = byKind(layerCards);
+  const kindScope = byTier(layerCards);
   const tierCounts = countBy(tierScope, tierKey);
   const kindCounts = countBy(kindScope, (c) => c.kind);
-  const executorCounts = countBy(executorScope, (c) => c.executor);
   const items = byTier(tierScope);
 
   const now: Query = {
     f: layer === "backlog" ? undefined : layer,
     t: tier ?? undefined,
     k: kind ?? undefined,
-    e: executor ?? undefined,
   };
 
   // 優先度を選んでいなければ tier ごとに見出しを立てる (1 グループなら見出しは要らない)
   const groups = TIERS.filter((t) => tierCounts.has(t.key) && (!tier || tier === t.key));
   // 語彙の宣言順で並べる (件数順にすると押すたびに行が動く)
   const kindKeys = board.kinds.filter((k) => kindCounts.has(k) || kind === k);
-  const executorKeys = board.executors.filter((e) => executorCounts.has(e) || executor === e);
 
   return (
     <div className="space-y-5">
@@ -341,11 +349,11 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
             )}
           </div>
 
-          {/* 右レール: 優先度・種類・実行のファセット */}
+          {/* 右レール: 読者の整理に使う優先度・種類だけを表示する */}
           <aside className="w-full shrink-0 space-y-4 md:w-52">
             <div className="flex items-center justify-between px-2">
               <span className="text-[11px] font-bold text-console-muted">絞り込み</span>
-              {tier || kind || executor ? (
+              {tier || kind ? (
                 <Link
                   href={href({}, { f: now.f })}
                   className="text-[11px] text-console-accent hover:underline"
@@ -370,28 +378,14 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
             />
 
             {faceted ? (
-              <>
-                <Facet
-                  title="種類"
-                  param="k"
-                  now={now}
-                  active={kind}
-                  total={kindScope.length}
-                  items={kindKeys.map((v) => ({ key: v, label: v, count: kindCounts.get(v) ?? 0 }))}
-                />
-                <Facet
-                  title="実行"
-                  param="e"
-                  now={now}
-                  active={executor}
-                  total={executorScope.length}
-                  items={executorKeys.map((v) => ({
-                    key: v,
-                    label: v,
-                    count: executorCounts.get(v) ?? 0,
-                  }))}
-                />
-              </>
+              <Facet
+                title="種類"
+                param="k"
+                now={now}
+                active={kind}
+                total={kindScope.length}
+                items={kindKeys.map((v) => ({ key: v, label: v, count: kindCounts.get(v) ?? 0 }))}
+              />
             ) : null}
           </aside>
         </div>

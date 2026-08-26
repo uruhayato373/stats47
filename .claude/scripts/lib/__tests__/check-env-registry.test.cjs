@@ -48,6 +48,19 @@ test("未登録envを検出する", (t) => {
   assert.ok(result.output.findings.some((finding) => finding.code === "ENV_UNREGISTERED"));
 });
 
+test("apps配下の.local生成物は走査しない", (t) => {
+  const item = fixture("process.env.REGISTERED_SETTING;\n");
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  execFileSync(process.execPath, [item.checker, "--write-registry"], { cwd: item.root });
+  const generated = path.join(item.root, "apps/admin/.local/next-e2e/server/chunk.js");
+  fs.mkdirSync(path.dirname(generated), { recursive: true });
+  fs.writeFileSync(generated, "process.env.GENERATED_ONLY_SETTING;\n");
+
+  const result = run(item);
+  assert.equal(result.status, 0);
+  assert.equal(result.output.findings.length, 0);
+});
+
 test("公開接頭辞の機密名を検出する", (t) => {
   const item = fixture("process.env.NEXT_PUBLIC_PRIVATE_TOKEN;\n");
   t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));

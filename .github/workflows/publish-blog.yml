@@ -153,6 +153,10 @@ jobs:
             "https://stats47.jp/" \
             "https://stats47.jp/sitemap.xml"
 
+      - name: 🌐 Audit public data contracts after blog publish
+        if: ${{ github.event.inputs.dry_run == 'false' }}
+        run: npm run audit:public-data-contract
+
       - name: ✅ Verify live (本番公開時のみ)
         if: ${{ github.event.inputs.dry_run == 'false' }}
         run: |

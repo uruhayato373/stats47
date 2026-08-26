@@ -43,6 +43,8 @@
     "test:workflow-commit-back": "node --test .claude/scripts/lib/__tests__/workflow-commit-back.test.cjs .claude/scripts/lib/__tests__/sync-snapshots-run-contract.test.mjs",
     "test:backlog-loop": "node --test .claude/scripts/backlog-loop/__tests__/*.test.cjs .claude/scripts/lib/__tests__/backlog-lib.test.cjs",
     "test:audit-scripts": "node --test .claude/scripts/audit/__tests__/*.test.mjs",
+    "audit:public-data-contract": "tsx apps/web/scripts/audit-public-data-contract.ts",
+    "test:public-data-contract": "vitest run apps/web/scripts/lib/__tests__/public-data-contract.test.ts",
     "cloudflare-usage:fetch": "node .claude/scripts/cloudflare/fetch-usage.mjs",
     "cloudflare-usage:digest": "node .claude/scripts/cloudflare/update-digest.mjs",
     "cloudflare-usage:check": "node .claude/scripts/cloudflare/threshold-check.mjs",

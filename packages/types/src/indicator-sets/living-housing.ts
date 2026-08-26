@@ -21,8 +21,13 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
-      "rankingKey": "housing-floor-area",
-      "shortLabel": "延べ面積",
+      "rankingKey": "floor-area-per-dwelling-owner",
+      "shortLabel": "持ち家延べ面積",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "floor-area-per-dwelling-rented",
+      "shortLabel": "借家延べ面積",
       "role": "secondary"
     },
     {

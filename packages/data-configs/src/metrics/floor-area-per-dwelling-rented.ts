@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const floorAreaPerDwellingRented: MetricConfig = {
   "key": "floor-area-per-dwelling-rented",
   "title": "借家住宅の延べ面積",
+  "description": "借家として居住する住宅について、1住宅当たりの延べ面積を都道府県別に示す。居住室のほか、玄関、台所、浴室、廊下、押入れなど住宅内の床面積を含む。",
+  "note": "借家だけを集計した値で、持ち家を含む住宅全体の平均ではない。共同住宅の共用廊下・階段や、別棟の物置・車庫は延べ面積に含まれない。",
   "unit": "ｍ2",
   "category": "construction",
   "source": {

@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-23T13:32:17.946Z",
+  "generatedAt": "2026-08-26T08:56:11.757Z",
   "inventorySnapshot": ".claude/state/ads/inventory-latest.json",
   "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-08-23.json",
   "freshness": {
     "inventoryDays": 0,
-    "ga4Days": 0
+    "ga4Days": 2
   },
   "measurementGate": {
     "status": "blocked",
@@ -33,11 +33,18 @@
         "kind": "code",
         "targetLocation": null,
         "startedAt": "2026-08-04",
-        "daysElapsed": 19,
+        "daysElapsed": 22,
         "minSamplePerVariant": 500,
         "minDurationDays": 14,
         "maxDurationDays": 56,
         "sampleReached": false,
+        "minDurationReached": true,
+        "primaryMetric": "ctr",
+        "decisionRule": "sample・期間・freshness・confound guard通過後にCTRと相対差を提示し、人間が判断する",
+        "decisionGuards": [
+          "insufficient-sample",
+          "measurement-gate-blocked"
+        ],
         "variants": [
           {
             "variantId": "text",

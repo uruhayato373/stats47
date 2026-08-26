@@ -115,11 +115,12 @@ function near(a: number, b: number, tol: number): boolean {
  * 県名に食い込み、実データと一致しているのに不一致として報告してしまう。47 県すべて
  * 漢字表記なので、絞っても取りこぼさない。
  */
-const AREA_NAME = /[一-鿿]{1,4}[都道府県]/;
+const AREA_NAME = /(?:[一-鿿]{1,4}[都道府県](?:\s+[一-鿿々ヶケヵが]{1,12}(?:市|区|町|村)){1,2}|[一-鿿]{1,4}[都道府県])/;
 
 export function extractSeoClaims(text: string, ssotUnit?: string | null): SeoClaims {
   const s = String(text ?? "");
   const ranks: RankClaim[] = [];
+  const rankValueRanges: Array<readonly [start: number, end: number]> = [];
   for (const m of s.matchAll(
     new RegExp(
       `(1位|最下位)\\s*(?:は|が|の)?\\s*(${AREA_NAME.source})\\s*[（(]?\\s*([\\d,]+(?:\\.\\d+)?)?\\s*(${SCALE_TOKEN})?`,
@@ -136,9 +137,24 @@ export function extractSeoClaims(text: string, ssotUnit?: string | null): SeoCla
       value: base === null || mult === null ? null : base * mult,
       raw: m[0].trim(),
     });
+    // unit 自体が「倍」の指標では「1位福井県（1.94倍）」の 1.94 を
+    // 最大/最小の倍率と誤認しない。順位値の直後に続く「倍」まで範囲に含め、
+    // 後段の倍率候補から除外する。
+    if (m.index !== undefined && m[3]) {
+      const matchEnd = m.index + m[0].length;
+      const unitSuffixLength = s.slice(matchEnd).startsWith("倍") ? 1 : 0;
+      rankValueRanges.push([m.index, matchEnd + unitSuffixLength]);
+    }
   }
-  // 倍率には桁の接頭辞を付けない (「1741.3倍」)。単位を持たない無次元量なので接頭辞を読まない
-  const ratioMatch = s.match(/([\d,]+(?:\.\d+)?)\s*倍/);
+  // 倍率には桁の接頭辞を付けない (「1741.3倍」)。単位を持たない無次元量なので接頭辞を読まない。
+  // ただし順位値の unit が「倍」の箇所は上で除外する。
+  const ratioMatch = [...s.matchAll(/([\d,]+(?:\.\d+)?)\s*倍/g)].find(
+    (candidate) =>
+      candidate.index === undefined ||
+      !rankValueRanges.some(
+        ([start, end]) => candidate.index! >= start && candidate.index! < end,
+      ),
+  );
   const years = [...new Set([...s.matchAll(/(\d{4})\s*年/g)].map((m) => Number(m[1])))];
   return {
     ranks,

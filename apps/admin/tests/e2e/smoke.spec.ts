@@ -101,4 +101,14 @@ test.describe("smoke: 5画面の疎通", () => {
     await expect(page).toHaveURL(/\/todo\?f=improvements$/);
     await expect(page.getByRole("heading", { name: /効果測定・改善/ })).toBeVisible();
   });
+
+  test("TODO は内部の実行分類を表示せず旧 URL を正規化する", async ({ page }) => {
+    await page.goto("/todo?e=sweep");
+
+    await expect(page).toHaveURL(/\/todo$/);
+    await expect(page.getByRole("heading", { name: "実行", exact: true })).toHaveCount(0);
+    await expect(page.getByText(/^実行:/)).toHaveCount(0);
+    await expect(page.getByText("確認が必要", { exact: true }).first()).toBeVisible();
+    await expect(page.getByText("外部作業あり", { exact: true }).first()).toBeVisible();
+  });
 });

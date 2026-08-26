@@ -137,10 +137,11 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   {
     dataId: "P12", name: "観光資源", category: "facility", geometryType: "point", coverage: "national", license: "non-commercial",
     stats47Category: "tourism", isRankingTarget: true, latestVersion: "14",
-    // P12 は同じ観光資源を点 (P12a 17,258) / 線 (P12b 85) / 面 (P12c 1,797) の 3 系統で
+    // P12 は同じ登録対象を点 (P12a 17,258) / 線 (P12b 85) / 面 (P12c 1,797) の 3 系統で
     // 持つ。例: 小笠原の「南島」は P12a と P12c の両方に P12_001=10034 で入っている。
-    // 全ファイルを数えると重複するので、資源 ID で畳んで実際の資源数にする。
-    rankingConfig: [{ rankingKey: "tourism-resource-count", rankingName: "観光資源数", unit: "件", categoryKey: "tourism", yearCode: "2014", description: "国土数値情報に登録されている観光資源の都道府県別数", dedupeByProperties: ["P12_001"] }],
+    // countByPrefecture は解決済み県コードを identity key に自動付加するため、県内の整理番号
+    // P12_001 で畳むと 19,140 feature → 17,254 登録対象になる。P12_001 は全国一意ではない。
+    rankingConfig: [{ rankingKey: "tourism-resource-count", rankingName: "観光資源データ登録件数", unit: "件", categoryKey: "tourism", yearCode: "2014", description: "国土数値情報P12に収録された観光資源・観光地点の都道府県別登録件数（2014年9月30日時点。観光地の網羅数ではない）", dedupeByProperties: ["P12_001"] }],
   },
   { dataId: "P13", name: "都市公園", category: "facility", geometryType: "polygon", coverage: "prefecture", license: "non-commercial", stats47Category: "infrastructure", isRankingTarget: false },
   { dataId: "P14", name: "福祉施設", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "socialsecurity", isRankingTarget: false },

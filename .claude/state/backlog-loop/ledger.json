@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T04:32:48.862Z",
+  "updatedAt": "2026-08-26T09:04:05.950Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -375,8 +375,8 @@
     "DATA-REFRESH-ZEROGATE-ALLORNOTHING-01": {
       "class": "impl-large",
       "status": "open",
-      "sourceFile": ".claude/todo/05_機能バックログ.md",
-      "title": "ゼロ件ゲートが成功2,148件のR2 pushを巻き添えにする",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "形状ゲートに掛かる4 metricを是正する",
       "attempts": [
         {
           "at": "2026-08-17T16:58:48.887Z",
@@ -390,12 +390,31 @@
           "evidence": "実測確認: fail10件のうちconstruction-contract-*7件+construction-projects-total+noise-regulation-rateは既に2026-08-16にisActive:false化済(残るのはvoter-turnout-house-proportinalのみ実質未解決)。kindergarten/nursery-education-diffusion-rateはEXPECTED_EMPTYに既登録済(until 2026-11-30, issue SSDS-EDU-DIFFUSION-CODE-",
           "failReason": "class-needs-pr",
           "followUps": []
+        },
+        {
+          "at": "2026-08-26T07:58:26.583Z",
+          "runId": null,
+          "model": "gpt-5.6-sol",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run packages/data-configs/src/__tests__/ingest-shape-allowance.test.ts",
+              "npm run type-check --workspace=@stats47/data-configs"
+            ],
+            "pass": true
+          },
+          "evidence": "commuter-ratioの市区町村9640%を一次データで正当値と確定しlegitimate例外と陰性対照を実装。main反映後のfull refresh実走が未承認のため未完了",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 0,
+        "failCount": 1,
         "lastReason": null,
-        "since": null
+        "since": "2026-08-26T07:58:26.583Z"
       },
       "reclassifiedFrom": [],
       "completedAt": null
@@ -473,7 +492,7 @@
       "completedAt": "2026-08-25T11:08:10.268Z"
     },
     "KSJ-PREF-ASSIGN-01": {
-      "class": "needs-owner",
+      "class": "impl-large",
       "status": "open",
       "sourceFile": null,
       "title": null,
@@ -503,11 +522,34 @@
           "evidence": "12/13指標は済で残る観光資源数(tourism-resource-count)はP12種別(P12_005)が16766/17254件プレースホルダで「観光資源」の定義自体が製品判断待ち(カード本文が明記)。自動処理が独断で定義を決めるべきでないためneeds-ownerへ再分類。加えてこのサンドボックスはcurl等の外向きnetworkを拒否しR2/e-Stat/KSJ再取得も不能。[実行:対話]タグを付与しようとEditを試みたが.claude/todo/backlog.mdへの書込がpermission deniedのため未実施(次回runも本",
           "failReason": "needs-owner",
           "followUps": []
+        },
+        {
+          "at": "2026-08-26T08:13:12.370Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test:run --workspace packages/gis -- src/mlit-ksj/__tests__/ksj-stats-core.test.ts src/mlit-ksj/__tests__/prefecture-assign.test.ts",
+              "npm run type-check --workspace packages/gis",
+              "npm run test:run --workspace packages/product-factory",
+              "npm run type-check --workspace packages/product-factory",
+              "npm run type-check --workspace packages/data-configs",
+              "npm run validate:config --workspace packages/data-configs"
+            ],
+            "pass": true
+          },
+          "evidence": "P12一次資料で登録件数定義と非商用境界を確定。19140地物→17254登録/重複1886/未解決0をローカル生成し商品系から除外。40 GIS test、184 product test、3 workspace typecheck、config2298件error0。R2公開は未承認のためdeferred。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
-        "lastReason": "サンドボックスが外向きnetwork (curl等)を拒否し、R2上の現在値確認・KSJ P12再取得・regenerateが不可能",
+        "failCount": 2,
+        "lastReason": null,
         "since": "2026-08-21T17:05:22.088Z"
       },
       "reclassifiedFrom": [
@@ -515,6 +557,11 @@
           "from": "impl-small",
           "to": "needs-owner",
           "at": "2026-08-23T17:01:42.514Z"
+        },
+        {
+          "from": "needs-owner",
+          "to": "impl-large",
+          "at": "2026-08-26T08:13:12.370Z"
         }
       ],
       "completedAt": null
@@ -550,12 +597,32 @@
           "evidence": "impl-large は本 run (backlog-loop 日次 CI) では着手しない (draft-pr が要るため)。backlog-solver-hard への委譲対象として据え置く。",
           "failReason": "class-needs-pr",
           "followUps": []
+        },
+        {
+          "at": "2026-08-26T07:58:26.502Z",
+          "runId": null,
+          "model": "gpt-5.6-sol",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test:public-data-contract",
+              "npm run test:content-routines",
+              "npm run type-check --workspace apps/web"
+            ],
+            "pass": true
+          },
+          "evidence": "local実装・6 fixture・3公開経路・週次Issue配線はgreen。live全量はpork SVG 1件404、full data-refreshとR2反映が未承認のため未完了",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 0,
+        "failCount": 1,
         "lastReason": null,
-        "since": null
+        "since": "2026-08-26T07:58:26.502Z"
       },
       "reclassifiedFrom": [],
       "completedAt": null
@@ -609,7 +676,7 @@
     },
     "SURVEY-EDITORIAL-80-01": {
       "class": "impl-small",
-      "status": "quarantined",
+      "status": "completed",
       "sourceFile": ".claude/todo/backlog.md",
       "title": "全80調査へ一次資料に基づく個別説明を手作業で整備する",
       "attempts": [
@@ -665,15 +732,60 @@
           "evidence": "訂正: survey editorialの正しいtest pathで3/3 green。2調査追加済みだが全80完了条件には未達",
           "failReason": "残り9調査のranking在庫不足とe-Stat APP_ID未設定。直前attemptの__tests__付きpathは誤記",
           "followUps": []
+        },
+        {
+          "at": "2026-08-26T06:13:09.256Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "failed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run apps/web/src/features/survey/survey-editorial.test.ts apps/web/src/features/survey/survey-editorial-validator.test.ts",
+              "npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts --json",
+              "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check",
+              "npm run type-check --workspace apps/web",
+              "npm run validate:config --workspace=@stats47/data-configs",
+              "git diff --check"
+            ],
+            "pass": true
+          },
+          "evidence": "病院報告・国民医療費を公式一次資料とactive key各3件で個別整備しeditorial 71→73。通常ratchet、7 tests、taxonomy、type-check、configはgreen。全件flagが残7調査と既存inactive導線6件を検出。",
+          "failReason": "残7調査はactive ranking在庫0〜2件でカード停止条件に該当。全80/80と全readerQuestions有効の完了条件は未達。",
+          "followUps": []
+        },
+        {
+          "at": "2026-08-26T06:52:08.601Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts --require-all-editorial",
+              "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check",
+              "npm run type-check --workspace apps/web",
+              "npm exec --workspace apps/web -- vitest run src/features/survey/survey-editorial.test.ts src/features/survey/survey-editorial-validator.test.ts",
+              "git diff --check"
+            ],
+            "pass": true
+          },
+          "evidence": "公式一次資料に基づく個別editorialを80/80へ完了。active在庫連動の導線ゲートで水増しと404を防止し、全readerQuestions所属、taxonomy、type-check、9 tests、diff checkがgreen。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 3,
-        "lastReason": "残り9調査のranking在庫不足とe-Stat APP_ID未設定。直前attemptの__tests__付きpathは誤記",
-        "since": "2026-08-24T17:08:57.270Z"
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-26T06:52:08.601Z"
     },
     "THEME-CHART-RECIPE-DRIFT-01": {
       "class": "test-fix",
@@ -920,9 +1032,9 @@
     },
     "SEC-DEPENDABOT-76-01": {
       "class": "impl-large",
-      "status": "open",
-      "sourceFile": null,
-      "title": null,
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "Dependabot 76件を段階更新で解消する",
       "attempts": [
         {
           "at": "2026-08-26T04:04:16.089Z",
@@ -975,12 +1087,278 @@
           "evidence": "ローカル依存監査は開発/runtimeを含め0件。npm ci・npm ls成功、型25/25、packages 188/188（1880件）、Web 171/171（1063件）、Web/Remotion build green。main未反映のためDependabot再走査待ち。",
           "failReason": "カード完了条件のGitHub open 0はmain反映後のDependabot再走査が必要。deployは本カード権限外。",
           "followUps": []
+        },
+        {
+          "at": "2026-08-26T05:34:45.712Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm audit --audit-level=low",
+              "npm run test:dependency-security",
+              "npm run type-check",
+              "npm run test:packages",
+              "npm run test:run --workspace apps/web",
+              "npm run build --workspace apps/web",
+              "npm run build --workspace apps/remotion",
+              "npm run docs:check",
+              "gh run view 32933190145 --exit-status",
+              "gh run view 32933678507 --exit-status",
+              "gh run view 32934202212 --exit-status",
+              "gh api repos/uruhayato373/stats47/dependabot/alerts?state=open"
+            ],
+            "pass": true
+          },
+          "evidence": "main dc51982d1へPR #825を統合。PR CI・Cloudflare deploy/warm/smoke・独立post-deploy smokeが同SHAでsuccessし、Dependabot REST再走査open=0を確認。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 2,
-        "lastReason": "カード完了条件のGitHub open 0はmain反映後のDependabot再走査が必要。deployは本カード権限外。",
-        "since": "2026-08-26T04:04:16.089Z"
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-26T05:34:45.712Z"
+    },
+    "BLOG-SVG-LINEAGE-RESTORE-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ブログSVG系譜キューの継続消化",
+      "attempts": [
+        {
+          "at": "2026-08-26T07:58:26.529Z",
+          "runId": null,
+          "model": "gpt-5.6-sol",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "公開1,091 assetの期待集合監査と欠落SVGローカル再生成まで完了。liveは1件404、R2全量pull dry-runは8,913 filesで実pull承認待ち",
+          "failReason": "external-r2-read-write-approval",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "external-r2-read-write-approval",
+        "since": "2026-08-26T07:58:26.529Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "SEO-META-FACTUAL-GATE-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "metric config の SEO 文字列が実データと照合されていない",
+      "attempts": [
+        {
+          "at": "2026-08-26T07:58:26.555Z",
+          "runId": null,
+          "model": "gpt-5.6-sol",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new",
+              "npx vitest run packages/data-configs/src/__tests__/seo-meta-facts.test.ts",
+              "npm run type-check --workspace=@stats47/data-configs"
+            ],
+            "pass": true
+          },
+          "evidence": "2,008対象で不一致100→0・判定不能12→0。production item snapshot反映とGooglebot実測が未承認のため未完了",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": null,
+        "since": "2026-08-26T07:58:26.555Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "SURVEY-HUB-HANDOFF-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "調査ハブ改修の別PC実画面検証と配信snapshot反映",
+      "attempts": [
+        {
+          "at": "2026-08-26T08:21:41.555Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test:run --workspace apps/web -- src/features/survey/survey-editorial.test.ts src/features/survey/survey-editorial-validator.test.ts",
+              "npm run type-check --workspace apps/web",
+              "npm run type-check:scripts",
+              "npm run design-system:check",
+              "NODE_OPTIONS='--conditions react-server' npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check",
+              "npm run docs:check",
+              "npm run build --workspace apps/web"
+            ],
+            "pass": true
+          },
+          "evidence": "blog snapshot v2をローカル再生成。city-planning/censusを1280/800px実画面で確認し、左rail/代替nav/代表4件/関連記事/全件分離が正常。全gate green。残りは未承認のsnapshot限定pushと本番確認。",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-08-26T08:47:49.347Z",
+          "runId": null,
+          "model": "gpt-5",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run survey tests",
+              "npm run type-check --workspace apps/web",
+              "npx tsx audit-survey-taxonomy.ts --offline --check",
+              "npm run design-system:check",
+              "curl storage.stats47.jp/app/blog/all.json",
+              "curl stats47.jp/survey/city-planning-survey"
+            ],
+            "pass": true
+          },
+          "evidence": "snapshot schema v2 generatedAt 2026-08-26 articleCount445 city-planning reverse index contains commercial-land-price-trend; production route returns related article and survey_category; 12 tests typecheck taxonomy ratchet and design gate green; prior desktop/mobile and full build",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-26T08:47:49.347Z"
+    },
+    "RANKING-VALUES-PARTITION-INTEGRITY-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-26T08:30:03.934Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "NODE_OPTIONS='--conditions react-server' npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts --json /tmp/ranking-integrity-20260826.json --concurrency 30",
+              "npx tsx packages/data-configs/scripts/scan-stats-shape.ts --json /tmp/stats47-shape-after-20260826.json --fail-on-error",
+              "npx tsx packages/data-configs/scripts/audit-reingest-queue.ts --json",
+              "npx dotenvx run -f apps/web/.env.development -- npx tsx packages/data-configs/scripts/page-data-batch.ts --metric employment-insurance-daily-receipt-rate --dry-run",
+              "npm test --workspace packages/data-configs -- --run src/__tests__/expected-shape-anomaly.test.ts src/__tests__/ingest-shape-allowance.test.ts src/__tests__/shape-gate.test.ts",
+              "npm run type-check --workspace packages/data-configs"
+            ],
+            "pass": true
+          },
+          "evidence": "公開2167件は欠落0/drift0。e-Stat一次資料で旧known-broken13件を正当値と確定しMAX=0、再取込queue=0。61 test/typecheck/dry-run green。未焼込33件だけ残り、full refreshは未承認。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": null,
+        "since": "2026-08-26T08:30:03.934Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "AICONTENT-DBLESS-REBUILD": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-26T09:04:05.921Z",
+          "runId": null,
+          "model": "gpt-5.6-sol",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/ai-content/__tests__/*.test.mjs",
+              "node .claude/scripts/ai-content/audit-ai-content.mjs --file <5 staging files>"
+            ],
+            "pass": true
+          },
+          "evidence": "active 2167件のqueueをdone 353 / needs 1814に再構築。上位5件をstaging生成し、決定的監査 blocker 0 / warn 0、意味critic PASS。R2未反映のためカードは維持。",
+          "failReason": "残り1809件相当の制作と、別承認が必要なR2公開が未完了",
+          "followUps": [
+            "次の3件を生成・criticへ回す",
+            "R2反映は別承認"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "残り1809件相当の制作と、別承認が必要なR2公開が未完了",
+        "since": "2026-08-26T09:04:05.921Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "AFF-INTENT-FRICTION-PORTFOLIO-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-26T09:04:05.950Z",
+          "runId": null,
+          "model": "gpt-5.6-sol",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/ads/__tests__/*.test.mjs .claude/scripts/ads/__tests__/*.test.cjs",
+              "npm run type-check:scripts"
+            ],
+            "pass": true
+          },
+          "evidence": "WP0のGA4 overview/experiments/pages分離、report別fallback、page type導出、sample/duration/freshness/confound guardを実装。広告202 testとscripts type-check green。",
+          "failReason": "A8未ログインで期間selector/outcomeGateの実機観察ができず、WP0未完了。WP1-WP6も残存。",
+          "followUps": [
+            "A8へ手動ログイン後にread-only --probe-periodを再実行",
+            "WP0を完了してWP1へ進む"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "A8未ログインで期間selector/outcomeGateの実機観察ができず、WP0未完了。WP1-WP6も残存。",
+        "since": "2026-08-26T09:04:05.950Z"
       },
       "reclassifiedFrom": [],
       "completedAt": null

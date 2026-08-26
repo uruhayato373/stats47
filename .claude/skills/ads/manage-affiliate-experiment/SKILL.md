@@ -39,7 +39,9 @@ co_agents: [improvement-triage, ga4-analyst]
    `measurementGate` が `ready` で `ga4Snapshot` に variant dimension があることを確認
    (blocked のまま実験を始めない)。
 2. **停止条件を事前固定**する: `minSamplePerVariant` (既定 1,000 imp) / `minDurationDays` (既定 28) /
-   `maxDurationDays` (既定 84) / `primaryMetric` (ctr) / 採用基準 (次点比 +20% かつ 95% 有意)。
+   `maxDurationDays` (既定 84) / `primaryMetric` (ctr)。`ready-to-decide` は sample・期間・freshness・
+   confound guard を通過して人間へ観測値を提示できる状態であり、勝者確定ではない。単一snapshotへ
+   2標本比率検定を当てて「95%有意」を装わず、CTR・相対差・guardを併記して人間が判断する。
 3. variant は 2〜3 個に絞る (4 個以上は必要サンプルが急増)。
 
 ### start — 実験を開始する
@@ -57,7 +59,7 @@ co_agents: [improvement-triage, ga4-analyst]
      "minDurationDays": 28,
      "maxDurationDays": 84,
      "primaryMetric": "ctr",
-     "decisionRule": "勝者 CTR が次点比 +20% かつ 95% 有意 (2標本比率 z 検定)",
+     "decisionRule": "sample・期間・freshness・confound guard通過後にCTRと相対差を提示し、人間が判断する",
      "status": "active",
      "winnerVariantId": null
    }
@@ -74,7 +76,8 @@ co_agents: [improvement-triage, ga4-analyst]
 ### decide — ready-to-decide の実験を人間に提示する
 
 1. `experiments.readyToDecide` の variant 別 imp / click / CTR を表で提示。
-2. 採用基準 (decisionRule) との照合結果を添えて **ユーザーに判断を仰ぐ** (自動採用しない)。
+2. `decisionGuards`、CTR、相対差を添えて **ユーザーに判断を仰ぐ** (自動採用しない)。
+   `measurement-gate-blocked` / `confounded` があれば判定不能のままにする。
 3. 効果の記録は `.claude/rules/evidence-based-judgment.md` のテンプレで
    `reference/improvement-log.md` (affiliate-improvement) に書き、status 更新は improvement-triage へ。
 

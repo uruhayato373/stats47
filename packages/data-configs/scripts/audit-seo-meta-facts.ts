@@ -79,8 +79,13 @@ function declaredYears(config: MetricConfig): Set<number> {
   return new Set();
 }
 
-async function fetchStats(key: string): Promise<StatsRow[] | null> {
-  const res = await fetch(`${R2}/app/stats/${key}/values.json`).catch(() => null);
+async function fetchStats(
+  key: string,
+  entities: MetricConfig["entities"],
+): Promise<StatsRow[] | null> {
+  const isCityOnly = entities.includes("city") && !entities.includes("prefecture");
+  const file = isCityOnly ? "cities.json" : "values.json";
+  const res = await fetch(`${R2}/app/stats/${key}/${file}`).catch(() => null);
   if (!res || !res.ok) return null;
   const payload = (await res.json().catch(() => null)) as { rows?: StatsRow[] } | null;
   return payload?.rows?.length ? payload.rows : null;
@@ -110,6 +115,7 @@ async function main(): Promise<void> {
 
   const results = new Map<string, SeoFactFinding[]>();
   let skipped = 0;
+  const skippedKeys: string[] = [];
   let noClaim = 0;
 
   const queue = [...targets];
@@ -127,12 +133,15 @@ async function main(): Promise<void> {
           continue;
         }
 
-        const rows = await fetchStats(config.key);
+        const rows = await fetchStats(config.key, config.entities);
         if (!rows) {
           // 観測値を取れなかった。config だけで判定できる「宣言範囲外の年」は見る
           const f = checkSeoFacts({ claims, truth: null, declaredYears: declaredYears(config) });
           if (f.length > 0) results.set(config.key, f);
-          else skipped++;
+          else {
+            skipped++;
+            skippedKeys.push(config.key);
+          }
           continue;
         }
 
@@ -186,6 +195,9 @@ async function main(): Promise<void> {
       `  内訳 (指摘数)       : ${[...byKind].sort((a, b) => b[1] - a[1]).map(([k, n]) => `${k}=${n}`).join(" / ")}`,
     );
   }
+  if (skippedKeys.length > 0) {
+    console.log(`  判定不能 key        : ${skippedKeys.sort().join(", ")}`);
+  }
 
   if (violatingKeys.length > 0) {
     console.log("\n── 不一致 ──");
@@ -200,7 +212,15 @@ async function main(): Promise<void> {
     mkdirSync(dirname(resolve(args.json)), { recursive: true });
     writeFileSync(
       resolve(args.json),
-      JSON.stringify({ keys: violatingKeys, findings: Object.fromEntries(results) }, null, 2),
+      JSON.stringify(
+        {
+          keys: violatingKeys,
+          skippedKeys: skippedKeys.sort(),
+          findings: Object.fromEntries(results),
+        },
+        null,
+        2,
+      ),
       "utf8",
     );
     console.log(`\nJSON: ${args.json}`);

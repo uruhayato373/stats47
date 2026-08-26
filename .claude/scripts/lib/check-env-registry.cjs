@@ -17,7 +17,7 @@ function walk(directory, output = []) {
   let entries = [];
   try { entries = fs.readdirSync(directory, { withFileTypes: true }); } catch { return output; }
   for (const entry of entries) {
-    if (["node_modules", ".git", ".next", ".open-next", "dist", "coverage", "__tests__"].includes(entry.name)) continue;
+    if (["node_modules", ".git", ".local", ".next", ".open-next", "dist", "coverage", "__tests__"].includes(entry.name)) continue;
     const absolute = path.join(directory, entry.name);
     if (entry.isDirectory()) walk(absolute, output);
     else if (TEXT_EXTENSIONS.has(path.extname(entry.name))) output.push(absolute);

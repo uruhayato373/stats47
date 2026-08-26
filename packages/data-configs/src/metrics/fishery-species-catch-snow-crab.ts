@@ -50,7 +50,7 @@ export const fisherySpeciesCatchSnowCrab: MetricConfig = {
     ],
   },
   "groupKey": "fishery-species",
-  "seoTitle": "ズワイガニ漁獲量ランキング都道府県【2015年】｜1位兵庫県（1,064トン）",
-  "seoDescription": "2015年のズワイガニ漁獲量の都道府県別ランキング。1位兵庫県（1,064トン）、最下位沖縄県（0トン）で地図やグラフで47都道府県を比較。",
+  "seoTitle": "ズワイガニ漁獲量 都道府県ランキング【2015年】｜1位兵庫県（1,064トン）",
+  "seoDescription": "2015年のズワイガニ漁獲量を都道府県別に比較。1位は兵庫県（1,064トン）、最下位は宮城県（0トン）。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

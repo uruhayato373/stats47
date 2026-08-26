@@ -35,7 +35,7 @@ export const averageRelativeHumidity: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "年平均相対湿度ランキング都道府県【2024年】｜1位山口県（77％）",
-  "seoDescription": "2024年の年平均相対湿度の都道府県別ランキング。1位山口県（77％）、最下位広島県（62％）で1.2倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "年平均相対湿度 都道府県ランキング【2024年】｜1位青森県（77％）",
+  "seoDescription": "2024年の年平均相対湿度を都道府県別に比較。1位は青森県（77％）、最下位は広島県（62％）、最大と最小の差は1.2倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

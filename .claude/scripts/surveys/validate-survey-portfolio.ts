@@ -18,6 +18,8 @@
  *      insufficient-data・not-instrumented = windowDays のみ
  *   S6 orphanStatus と linkageStatus / itemCount の整合
  *   S7 portfolio / linkage 監査日の freshness (既定35日、SURVEY_STATE_MAX_AGE_DAYSで変更可)
+ *   S8 survey-editorial.ts の移行 ratchet。--require-all-editorial では master 全件、
+ *      必須項目件数、readerQuestions の所属・重複、過度な本文類似も検査
  *   E1 experimentId 一意 / surveyId がマスタに実在
  *   E2 同一 surveyId × changeType の pending 実験は 1 件まで (重複実験防止)
  *   E3 baseline 必須 / verdict enum / effect-* 確定には observations の d28|d56 + evidenceRefs 必須
@@ -27,6 +29,7 @@
  * Usage:
  *   npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts          # 人間向け (violation で exit 1)
  *   npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts --json   # CI 向け JSON (violation で exit 1)
+ *   npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts --require-all-editorial
  *
  * ファイルが両方とも未生成 (PR-2 前) は skip 扱いで exit 0。
  */
@@ -34,7 +37,13 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { getSurveyEditorialContent } from "../../../apps/web/src/features/survey/survey-editorial";
+import { METRICS_REGISTRY } from "@stats47/data-configs";
+
+import {
+  getSurveyEditorialContent,
+  requiredSurveyReaderQuestionCount,
+} from "../../../apps/web/src/features/survey/survey-editorial";
+import { resolveSurveyTaxonomy } from "../../../packages/ranking/src/survey/survey-taxonomy";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -42,6 +51,7 @@ const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, ".claude/stat
 const SURVEYS_JSON =
   process.env.SURVEYS_JSON || path.join(PROJECT_ROOT, "packages/ranking/src/data/surveys.json");
 const jsonMode = process.argv.includes("--json");
+const requireAllEditorial = process.argv.includes("--require-all-editorial");
 
 const LIFECYCLE = new Set([
   "keep", "observe", "improve", "editorial-candidate", "linkage-fix-required",
@@ -67,6 +77,9 @@ const CHANGE_TYPE = new Set(["editorial-hub", "linkage", "title-meta", "structur
 const HARD_CANDIDATES = new Set(["merge-candidate", "retire-candidate"]);
 const MIN_CTR_IMPRESSIONS = 100;
 const MAX_STATE_AGE_DAYS = Number(process.env.SURVEY_STATE_MAX_AGE_DAYS ?? 35);
+const EDITORIAL_COUNT_RATCHET = 80;
+const MIN_REQUIRED_MASTER_COUNT = 80;
+const MAX_EDITORIAL_SIMILARITY = 0.88;
 
 function loadJson(file: string): { data: any; exists: boolean; parseError?: string } {
   const p = path.join(STATE_DIR, file);
@@ -83,9 +96,127 @@ const warnings: string[] = [];
 const v = (code: string, msg: string) => violations.push(`[${code}] ${msg}`);
 const w = (code: string, msg: string) => warnings.push(`[${code}] ${msg}`);
 
-const masterIds = new Set(
-  (JSON.parse(fs.readFileSync(SURVEYS_JSON, "utf8")) as Array<{ id: string }>).map((s) => s.id),
-);
+const masterSurveys = JSON.parse(
+  fs.readFileSync(SURVEYS_JSON, "utf8"),
+) as Array<{ id: string }>;
+const masterIds = new Set(masterSurveys.map((s) => s.id));
+
+function sentenceCount(value: string): number {
+  return value.split(/[。！？!?]+/).map((part) => part.trim()).filter(Boolean).length;
+}
+
+function normalizeText(value: string): string {
+  return value.normalize("NFKC").toLowerCase().replace(/[\s\p{P}\p{S}]/gu, "");
+}
+
+function normalizedNgrams(value: string, size = 3): Set<string> {
+  const normalized = normalizeText(value);
+  const grams = new Set<string>();
+  for (let i = 0; i <= normalized.length - size; i += 1) grams.add(normalized.slice(i, i + size));
+  return grams;
+}
+
+function jaccardSimilarity(a: Set<string>, b: Set<string>): number {
+  if (a.size === 0 || b.size === 0) return 0;
+  let intersection = 0;
+  for (const item of a) if (b.has(item)) intersection += 1;
+  return intersection / (a.size + b.size - intersection);
+}
+
+function activeRankingKeysBySurvey(): Map<string, Set<string>> {
+  const result = new Map<string, Set<string>>();
+  for (const metric of Object.values(METRICS_REGISTRY)) {
+    if (metric.isActive === false) continue;
+    const resolution = resolveSurveyTaxonomy({ metricKeys: [metric.key] }, METRICS_REGISTRY);
+    for (const survey of resolution.surveys) {
+      const keys = result.get(survey.id) ?? new Set<string>();
+      keys.add(metric.key);
+      result.set(survey.id, keys);
+    }
+  }
+  return result;
+}
+
+function validateEditorial() {
+  const implemented = masterSurveys.flatMap((survey) => {
+    const content = getSurveyEditorialContent(survey.id);
+    return content ? [{ surveyId: survey.id, content }] : [];
+  });
+
+  if (implemented.length < EDITORIAL_COUNT_RATCHET) {
+    v("S8", `editorial 実装数 ${implemented.length} が ratchet ${EDITORIAL_COUNT_RATCHET} を下回る`);
+  }
+  // 80/80 移行前は通常CIを件数ratchetだけに留め、完了後は通常CIでも完全ゲートを維持する。
+  if (!requireAllEditorial && EDITORIAL_COUNT_RATCHET < MIN_REQUIRED_MASTER_COUNT) return;
+
+  if (masterSurveys.length < MIN_REQUIRED_MASTER_COUNT)
+    v("S8", `survey master が ${masterSurveys.length} 件 (最低 ${MIN_REQUIRED_MASTER_COUNT} 件)`);
+  const missing = masterSurveys.map((survey) => survey.id)
+    .filter((surveyId) => !getSurveyEditorialContent(surveyId));
+  if (missing.length > 0)
+    v("S8", `editorial 未実装 ${missing.length} 件: ${missing.join(",")}`);
+
+  const membership = activeRankingKeysBySurvey();
+  const fingerprints: Array<{ surveyId: string; grams: Set<string> }> = [];
+  for (const { surveyId, content } of implemented) {
+    const summarySentences = sentenceCount(content.summary);
+    if (summarySentences < 2 || summarySentences > 3)
+      v("S8", `${surveyId}: summary は2〜3文が必須 (現在 ${summarySentences}文)`);
+    if (content.whatYouCanLearn.length < 3 || content.whatYouCanLearn.length > 5)
+      v("S8", `${surveyId}: whatYouCanLearn は3〜5件が必須 (現在 ${content.whatYouCanLearn.length}件)`);
+    const surveyKeys = membership.get(surveyId) ?? new Set<string>();
+    const requiredReaderQuestions = requiredSurveyReaderQuestionCount(surveyKeys.size);
+    if (content.readerQuestions.length < requiredReaderQuestions || content.readerQuestions.length > 5)
+      v(
+        "S8",
+        `${surveyId}: readerQuestions はactive在庫に応じて${requiredReaderQuestions}〜5件が必須 (active ${surveyKeys.size}件 / 現在 ${content.readerQuestions.length}件)`,
+      );
+    if (content.caveats.length < 2 || content.caveats.length > 5)
+      v("S8", `${surveyId}: caveats は2〜5件が必須 (現在 ${content.caveats.length}件)`);
+    for (const [field, values] of [
+      ["whatYouCanLearn", content.whatYouCanLearn],
+      ["caveats", content.caveats],
+    ] as const) {
+      if (values.some((value) => value.trim().length === 0))
+        v("S8", `${surveyId}: ${field} に空文字がある`);
+    }
+
+    const surveyQuestions = new Set<string>();
+    const surveyRankingKeys = new Set<string>();
+    for (const readerQuestion of content.readerQuestions) {
+      const question = readerQuestion.question.trim();
+      const rankingKey = readerQuestion.rankingKey.trim();
+      if (!question || !rankingKey) {
+        v("S8", `${surveyId}: readerQuestions に空の question/rankingKey がある`);
+        continue;
+      }
+      if (!surveyKeys.has(rankingKey))
+        v("S8", `${surveyId}: readerQuestion の ${rankingKey} は当該調査の active ranking に所属しない`);
+      if (surveyRankingKeys.has(rankingKey))
+        v("S8", `${surveyId}: readerQuestions の rankingKey 重複 (${rankingKey})`);
+      surveyRankingKeys.add(rankingKey);
+      const normalizedQuestion = normalizeText(question);
+      if (surveyQuestions.has(normalizedQuestion))
+        v("S8", `${surveyId}: readerQuestion 重複: 「${question}」`);
+      surveyQuestions.add(normalizedQuestion);
+    }
+
+    fingerprints.push({
+      surveyId,
+      grams: normalizedNgrams(
+        [content.summary, ...content.whatYouCanLearn, ...content.caveats].join(" "),
+      ),
+    });
+  }
+
+  for (let i = 0; i < fingerprints.length; i += 1) {
+    for (let j = i + 1; j < fingerprints.length; j += 1) {
+      const similarity = jaccardSimilarity(fingerprints[i].grams, fingerprints[j].grams);
+      if (similarity >= MAX_EDITORIAL_SIMILARITY)
+        v("S8", `editorial 本文の過度な類似: ${fingerprints[i].surveyId},${fingerprints[j].surveyId} (${similarity.toFixed(3)} >= ${MAX_EDITORIAL_SIMILARITY})`);
+    }
+  }
+}
 
 // ---------- portfolio.json ----------
 function validatePortfolio(pf: any) {
@@ -248,6 +379,7 @@ function validateExperiments(ex: any) {
 const pf = loadJson("portfolio.json");
 const ex = loadJson("experiments.json");
 
+validateEditorial();
 if (pf.parseError) v("S0", `portfolio.json parse 失敗: ${pf.parseError}`);
 if (ex.parseError) v("E0", `experiments.json parse 失敗: ${ex.parseError}`);
 if (pf.data) validatePortfolio(pf.data);
@@ -260,6 +392,8 @@ const result = {
   experimentsExists: ex.exists,
   surveys: pf.data?.surveys?.length ?? 0,
   experiments: ex.data?.experiments?.length ?? 0,
+  editorialImplemented: masterSurveys.filter((survey) => getSurveyEditorialContent(survey.id)).length,
+  editorialRequired: requireAllEditorial ? masterSurveys.length : EDITORIAL_COUNT_RATCHET,
   violations,
   warnings,
 };
@@ -270,6 +404,7 @@ if (jsonMode) {
   console.log("survey state 未生成 (PR-2 前) — skip");
 } else {
   console.log(`surveys: ${result.surveys} / experiments: ${result.experiments}`);
+  console.log(`editorial: ${result.editorialImplemented} / ${result.editorialRequired}${requireAllEditorial ? " (all required)" : " (ratchet)"}`);
   violations.forEach((x) => console.log("✗", x));
   warnings.forEach((x) => console.log("⚠", x));
   if (violations.length === 0) console.log("✓ survey state 違反なし");

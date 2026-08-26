@@ -58,9 +58,24 @@ import {
   findExpectedShapeAnomaly,
   hasShapeError,
   summarizeShape,
+  type ClassifyShapeInput,
   type ShapeSummary,
+  type ShapeViolation,
 } from "../src/shape-gate.js";
 import type { MetricConfig, SourceConfig } from "../src/types.js";
+
+// known-broken は「公開済みの欠陥を認知している」だけなので新規書き込みを許可しない。
+// legitimate は統計の定義上正しい形であり、重症度ラチェットの範囲内なら書き込んでよい。
+const LEGITIMATE_SHAPE_ANOMALIES = EXPECTED_SHAPE_ANOMALY.filter(
+  (entry) => entry.disposition === "legitimate",
+);
+
+/** 取り込み時に適用してよいのは、既知破損ではなく定義上正当と確認済みの例外だけ。 */
+export function classifyIngestShape(
+  input: Omit<ClassifyShapeInput, "allowlist">,
+): ShapeViolation[] {
+  return classifyShape({ ...input, allowlist: LEGITIMATE_SHAPE_ANOMALIES });
+}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
@@ -1005,7 +1020,7 @@ async function processOne(
         Object.values(summary.perYearAreaCount).some((n) => n < PREFECTURE_COUNT);
       const priorSummary = hasShortfall ? await readPublishedCoverage(config.key, artifact) : null;
 
-      const violations = classifyShape({
+      const violations = classifyIngestShape({
         key: config.key,
         entity,
         summary,
@@ -1013,7 +1028,7 @@ async function processOne(
         raw,
         priorSummary,
         now: new Date(),
-        // ★取り込み時は allowlist を **書いてよいかの判定には使わない**。
+        // ★取り込み時は known-broken allowlist を **書いてよいかの判定には使わない**。
         //
         //   allowlist の意味は「**いま R2 にある公開済みデータ**が壊れているのを知っている」
         //   であって「新しく取ってくるデータも壊れていてよい」ではない。ここで適用すると、
@@ -1022,8 +1037,10 @@ async function processOne(
         //   実際に確認: 1076% が allowlist の重症度 896500 を下回るため素通りした)。
         //   重症度ラチェットは「悪化」しか見ないので、この穴は塞げない。
         //
-        //   allowlist は下で **run を fail させるかどうか**にだけ使う (既知の破損で
+        //   known-broken は下で **run を fail させるかどうか**にだけ使う (既知の破損で
         //   毎晩 CI を赤くしない)。意図的な書き込み例外は --allow-shape で 1 回ずつ明示する。
+        //   一方 legitimate は定義上正しい形なので、上の限定集合だけを渡し、観測済み重症度を
+        //   超えない場合に限って error を降格して書き込みを許可する。
         cliAllowed: allowShape,
       });
       if (violations.length === 0) return true;
@@ -1044,6 +1061,11 @@ async function processOne(
           console.warn(
             `  [shape:${allow!.disposition}] ${v.message} (allowlist 済のため run は継続。` +
               `書き込みはしない — allowlist は fail 判定専用で、書き込み例外は --allow-shape)`,
+          );
+        } else if (v.allowedBy) {
+          softShape = true;
+          console.warn(
+            `  [shape:${v.allowedBy.disposition}] ${v.message} (統計の定義上正当なため書き込み可)`,
           );
         } else {
           softShape = true;
