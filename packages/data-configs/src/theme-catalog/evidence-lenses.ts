@@ -200,6 +200,25 @@ export const EVIDENCE_SOURCE_CATALOG = {
     sourceUrl:
       "https://www.jfa.maff.go.jp/j/kikaku/wpaper/R7/260605_1.html",
   },
+  "mhlw-labor-economy-whitepaper-2025": {
+    kind: "whitepaper",
+    title: "令和7年版 労働経済の分析",
+    publisher: "厚生労働省",
+    sourceUrl:
+      "https://www.mhlw.go.jp/stf/wp/hakusyo/roudou/25/index.html",
+  },
+  "mhlw-wage-structure-survey": {
+    kind: "statistical-overview",
+    title: "賃金構造基本統計調査",
+    publisher: "厚生労働省",
+    sourceUrl: "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+  },
+  "stat-census-2020-foreign-population": {
+    kind: "statistical-overview",
+    title: "令和2年国勢調査－人口等基本集計",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+  },
   "stat-housing-land-survey-2023": {
     kind: "statistical-overview",
     title: "令和5年住宅・土地統計調査－調査の結果",

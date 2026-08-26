@@ -323,6 +323,34 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
       defaultCheckedKeys: ["gender-wage-gap", "telework-rate"],
     },
   ],
+  evidenceTopics: [
+    {
+      key: "labor-market-tightness",
+      lensKey: "service-capacity",
+      title: "求人と失業から見る労働需給",
+      question:
+        "有効求人倍率と完全失業率は、地域の仕事の需給をそれぞれどう映しているか。",
+      summary:
+        "有効求人倍率は公共職業安定所の求人・求職、完全失業率は国勢調査の労働力人口を基礎にします。調査対象と時点が異なるため、数値を直接差し引いて比較はできません。",
+      sourceKeys: ["mhlw-labor-economy-whitepaper-2025"],
+      relatedRankingKeys: ["active-job-opening-ratio", "unemployment-rate"],
+      relatedChartKeys: ["labor-wages-job-ratio-vs-unemployment"],
+      relatedThemeKeys: ["labor-mobility"],
+    },
+    {
+      key: "gender-wage-equity",
+      lensKey: "equity",
+      title: "男女の所定内給与水準",
+      question:
+        "男性を100とした女性の所定内給与水準には、どのような地域差があるか。",
+      summary:
+        "一般労働者の所定内給与額を男女で比べた未調整の比率です。短時間労働者を含まず、年齢、勤続年数、職種などの構成差を調整した格差ではありません。",
+      sourceKeys: ["mhlw-wage-structure-survey"],
+      relatedRankingKeys: ["gender-wage-gap"],
+      relatedChartKeys: ["labor-wages-gender-gap"],
+      relatedThemeKeys: ["occupation-salary"],
+    },
+  ],
   "keywords": [
     "最低賃金",
     "初任給",
