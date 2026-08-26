@@ -1,0 +1,23 @@
+{
+  "kind": "calculated",
+  "inputs": [
+    {
+      "rankingKey": "total-overnight-guests-foreign",
+      "role": "numerator",
+      "source": "r2:app/ranking/total-overnight-guests-foreign/values.json"
+    },
+    {
+      "rankingKey": "total-overnight-guests",
+      "role": "denominator",
+      "source": "r2:app/ranking/total-overnight-guests/values.json"
+    }
+  ],
+  "formula": "G7102 / G7101 * 100",
+  "transform": "2024年区分をareaCodeで結合し、小数第1位へ四捨五入して降順に再順位付け",
+  "chartType": "tile-grid",
+  "dataFile": "foreign-guest-ratio-map.json",
+  "year": "2024",
+  "unit": "％",
+  "label": "外国人延べ宿泊者数が全宿泊に占める構成比",
+  "generatedBy": "generate-article-charts.ts"
+}
