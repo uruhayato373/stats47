@@ -251,6 +251,12 @@ export const EVIDENCE_SOURCE_CATALOG = {
     publisher: "総務省統計局",
     sourceUrl: "https://www.stat.go.jp/data/jyutaku/2023/tyousake.html",
   },
+  "stat-family-income-expenditure-survey-2024": {
+    kind: "statistical-overview",
+    title: "家計調査年報（家計収支編）2024年",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/kakei/2024np/index.html",
+  },
   "stat-retail-price-survey-structural": {
     kind: "statistical-overview",
     title: "小売物価統計調査（構造編）－調査結果",

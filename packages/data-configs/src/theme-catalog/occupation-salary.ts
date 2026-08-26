@@ -460,6 +460,39 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
       ],
     },
   ],
+  evidenceTopics: [
+    {
+      key: "medical-care-pay-structure",
+      lensKey: "equity",
+      title: "医療・介護職の賃金構造",
+      question: "医師・看護師・介護職員の推計年収には、どのような地域差があるか。",
+      summary:
+        "一般労働者・男女計の6月のきまって支給する現金給与額を12倍し、前年の賞与等を加えた税・社会保険料控除前の標本平均で比べる。年齢、勤続年数、事業所規模などの構成差は調整していないため、地域そのものの賃金効果とは限らない。",
+      sourceKeys: ["mhlw-wage-structure-survey"],
+      relatedRankingKeys: [
+        "doctor-annual-income",
+        "nurse-annual-income",
+        "care-worker-annual-income",
+      ],
+      relatedChartKeys: ["theme-occ-medical-trend"],
+      relatedThemeKeys: ["labor-wages", "healthcare"],
+    },
+    {
+      key: "it-occupation-pay-comparison",
+      lensKey: "composition",
+      title: "IT職種区分ごとの推計年収",
+      question: "システムコンサルタント等とソフトウェア作成者の推計年収は、地域ごとにどう異なるか。",
+      summary:
+        "別々の職種区分について、一般労働者・男女計の6月のきまって支給する現金給与額を年換算し前年賞与等を加えた標本平均を比較する。個人の実年収ではなく、年齢、勤続年数、事業所規模などの構成差も調整していない。",
+      sourceKeys: ["mhlw-wage-structure-survey"],
+      relatedRankingKeys: [
+        "system-consultant-annual-income",
+        "software-engineer-annual-income",
+      ],
+      relatedChartKeys: ["theme-occ-it-trend"],
+      relatedThemeKeys: ["labor-wages"],
+    },
+  ],
   "keywords": [
     "職業別年収",
     "職種別年収",
