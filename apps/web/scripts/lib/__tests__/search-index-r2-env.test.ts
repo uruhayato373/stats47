@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   assertCompleteSearchIndexSources,
   configureSearchIndexR2Environment,
+  selectSearchRankingItems,
 } from "../search-index-r2-env";
 
 describe("configureSearchIndexR2Environment", () => {
@@ -71,6 +72,36 @@ describe("configureSearchIndexR2Environment", () => {
     configureSearchIndexR2Environment(env);
 
     expect(env.R2_PUBLIC_FETCH_URL).toBeUndefined();
+  });
+});
+
+describe("selectSearchRankingItems", () => {
+  it("activeな都道府県itemだけを返す", () => {
+    const items = selectSearchRankingItems({
+      count: 3,
+      items: [
+        { rankingKey: "active", areaType: "prefecture", isActive: true },
+        { rankingKey: "inactive", areaType: "prefecture", isActive: false },
+        { rankingKey: "city", areaType: "city", isActive: true },
+      ],
+    });
+
+    expect(items).toEqual([
+      { rankingKey: "active", areaType: "prefecture", isActive: true },
+    ]);
+  });
+
+  it("snapshotのcount不一致を拒否する", () => {
+    expect(() =>
+      selectSearchRankingItems({
+        count: 2,
+        items: [{ areaType: "prefecture", isActive: true }],
+      }),
+    ).toThrow(/件数が不一致/);
+  });
+
+  it("snapshot欠落を拒否する", () => {
+    expect(() => selectSearchRankingItems(null)).toThrow(/取得できませんでした/);
   });
 });
 

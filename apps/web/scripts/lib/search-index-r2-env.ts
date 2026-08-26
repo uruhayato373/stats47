@@ -38,6 +38,28 @@ interface SearchIndexSourceCounts {
   blogCount: number;
 }
 
+interface RankingSnapshotLike<T> {
+  count: number;
+  items: T[];
+}
+
+/** 単一snapshotの件数契約を検証し、検索対象の公開都道府県itemだけを返す。 */
+export function selectSearchRankingItems<
+  T extends { areaType: string; isActive: boolean },
+>(snapshot: RankingSnapshotLike<T> | null): T[] {
+  if (!snapshot || !Array.isArray(snapshot.items)) {
+    throw new Error("ranking-items snapshot が取得できませんでした");
+  }
+  if (!Number.isInteger(snapshot.count) || snapshot.count !== snapshot.items.length) {
+    throw new Error(
+      `ranking-items snapshot の件数が不一致です: count=${snapshot.count} items=${snapshot.items.length}`,
+    );
+  }
+  return snapshot.items.filter(
+    (item) => item.isActive === true && item.areaType === "prefecture",
+  );
+}
+
 /**
  * 本番検索は ranking / blog の両方を一つのindexへ統合する。
  * 片方だけ取得できた状態で書き出すと、そのcontent typeが検索結果から消えるため
