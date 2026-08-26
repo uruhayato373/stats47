@@ -43,8 +43,10 @@ describe("ThemeEvidenceTopicsSection", () => {
     });
   });
 
-  it("論点未設定のテーマでは何も表示しない", () => {
-    const { container } = render(<ThemeEvidenceTopicsSection themeKey="tourism" />);
+  it("カタログ未設定のテーマキーでは何も表示しない", () => {
+    const { container } = render(
+      <ThemeEvidenceTopicsSection themeKey="__missing-theme-catalog__" />,
+    );
     expect(container).toBeEmptyDOMElement();
   });
 });
