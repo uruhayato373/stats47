@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T04:32:48.862Z",
+  "updatedAt": "2026-08-26T05:34:45.712Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -920,9 +920,9 @@
     },
     "SEC-DEPENDABOT-76-01": {
       "class": "impl-large",
-      "status": "open",
-      "sourceFile": null,
-      "title": null,
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "Dependabot 76件を段階更新で解消する",
       "attempts": [
         {
           "at": "2026-08-26T04:04:16.089Z",
@@ -975,15 +975,44 @@
           "evidence": "ローカル依存監査は開発/runtimeを含め0件。npm ci・npm ls成功、型25/25、packages 188/188（1880件）、Web 171/171（1063件）、Web/Remotion build green。main未反映のためDependabot再走査待ち。",
           "failReason": "カード完了条件のGitHub open 0はmain反映後のDependabot再走査が必要。deployは本カード権限外。",
           "followUps": []
+        },
+        {
+          "at": "2026-08-26T05:34:45.712Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm audit --audit-level=low",
+              "npm run test:dependency-security",
+              "npm run type-check",
+              "npm run test:packages",
+              "npm run test:run --workspace apps/web",
+              "npm run build --workspace apps/web",
+              "npm run build --workspace apps/remotion",
+              "npm run docs:check",
+              "gh run view 32933190145 --exit-status",
+              "gh run view 32933678507 --exit-status",
+              "gh run view 32934202212 --exit-status",
+              "gh api repos/uruhayato373/stats47/dependabot/alerts?state=open"
+            ],
+            "pass": true
+          },
+          "evidence": "main dc51982d1へPR #825を統合。PR CI・Cloudflare deploy/warm/smoke・独立post-deploy smokeが同SHAでsuccessし、Dependabot REST再走査open=0を確認。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 2,
-        "lastReason": "カード完了条件のGitHub open 0はmain反映後のDependabot再走査が必要。deployは本カード権限外。",
-        "since": "2026-08-26T04:04:16.089Z"
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-26T05:34:45.712Z"
     }
   }
 }

@@ -21,31 +21,6 @@ updated: 2026-08-25
 
 ## 🔴 高 — 今月中に着手したい
 
-### [SEC-DEPENDABOT-76-01] Dependabot 76件を段階更新で解消する
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm audit --audit-level=high] [Codex候補] [起票:2026-08-25] [期日:2026-08-31]
-
-- **owner**: `code-reviewer + devops-runner`。2026-08-25時点のdefault branch (`main`) は
-  open 76件（critical 19 / high 24 / medium 24 / low 9、development 62 / runtime 14）。
-  `develop` の `npm audit` は44依存グループ（critical 6 / high 21 / moderate 15 / low 2）。
-  GitHub上73件はpatch情報あり、3件はpatch未掲載（`extract-zip` 1件、`image-size` 2件）。
-- **実行順**:
-  1. 専用branchで `npm audit --json` とDependabot APIのbaselineを保存せず再取得し、runtimeを先に処理する。
-  2. `npm audit fix` 相当の互換更新（Turbo、js-yaml、form-data、qs、AWS XML系等）だけを適用し、
-     lockfile差分・型・対象テスト・buildを確認して1コミットに分離する。
-  3. Vitest 2→4と`@cloudflare/vitest-pool-workers` 0.5→0.22、Remotion 4.0.441→4.0.516、
-     Sharp 0.33→0.35を系統ごとに更新する。Next/PostCSSはNext 16移行と安全なoverrideを比較し、別コミットで検証する。
-  4. `extract-zip` はRemotion更新で依存除去を確認する。`pptxgenjs -> image-size` 2件は呼び出し元と
-     非信頼画像入力の有無を確認し、上流修正版がなければ依存置換または脆弱parserを通さない実装へ変更する。
-  5. `npm audit` とDependabot件数の悪化を拒否するCI ratchetを追加し、main反映後に76件のcloseを確認する。
-- **禁止・停止条件**: `npm audit fix --force` の一括実行、`pptxgenjs@1.1.5`・`exceljs@3.4.0`・
-  `drizzle-kit@0.18.1`への監査都合のdowngrade、根拠なしdismiss、テストを外す対応は禁止。
-  peer dependency不整合、公開API変更、生成物差分、Web/Remotion/商品生成の回帰が出た系統はそこで停止し、混ぜずに戻す。
-  R2 write・deployは本カードの権限に含めない。
-- **完了条件**: `npm audit` のcritical/high/runtime脆弱性が0、残るmedium/lowも修正または個別の到達不能証拠と
-  オーナー承認があり、GitHubのopen 76件が0。全workspace型検査、packages/Web対象テスト、Web build、
-  Remotion render smoke、product-factory生成テストがgreenで、CI ratchetが新規critical/highを拒否する。
-
 ### [SURVEY-HUB-HANDOFF-01] 調査ハブ改修の別PC実画面検証と配信snapshot反映
 
 タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run type-check --workspace apps/web] [起票:2026-08-24]
