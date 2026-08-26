@@ -21,6 +21,41 @@ updated: 2026-08-27
 
 ## 🔴 高 — 今月中に着手したい
 
+### [JAPAN-ZUE-CONTENT-PIPELINE-01] 日本国勢図会の全統計を一次資料化してサイト・記事・動画へ展開する
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-08-27]
+
+- **program owner**: `open-data-curator`。工程ownerは
+  `docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md` §9。
+- **再開ポインタ**: `lastCompleted=WP0` / `nextWorkPackage=WP1`。
+- **現状証拠**: ローカル2025/26年版はp.26–529の504 Markdown、表見出し721、図見出し200、
+  figure 201、transcript 13、scan PDF 13。全体は1,746ファイル・466MBで、`/books/`はGit対象外。
+  OCRは未校正で数値引用禁止。
+- **目的**: 書籍を公開taxonomyやデータ出典にせず、全定量項目を内部evidence inventoryへ登録する。
+  数値は一次資料から再取得し、既存Category / Theme / Tag、metric、surveyへ統合した後、
+  ranking / theme / area / japan / blog / note / YouTube通常動画 / Instagram / Xへ展開する。
+- **実行順**:
+  1. WP1: private `stats47-source-vault`用manifestとdry-run push/pullを実装し、承認後にsource bundleを配置する。
+     続いてp.26–65でtyped inventory、stable ID、extract/validate/coverageを実装し、代表10項目を選ぶ。
+  2. WP2: 全504ページとp.1–25の有無を照合し、表・図・本文統計の母数を確定する。
+  3. WP3: 一次資料・利用条件・既存metric / survey / themeとの重複を全件照合する。
+  4. WP4: 10項目を一次資料→local R2→Web配置までend-to-end実装する。
+  5. WP5: 独自分析のmaster記事・通常動画briefを作り、既存EXP-006の上限内で派生案を作る。
+  6. WP6–7: 全件をwave展開し、版更新・coverage・lineage監査を定常運用へ統合する。
+- **完了条件**:
+  - 全定量項目が一意なIDと解決結果を持ち、resolution coverageが100%。
+  - 公開候補100%に一次資料、年度、単位、地域粒度、rights判定があり、書籍値の直接投入が0。
+  - 新規metricがprovenance、unit、値分布、survey taxonomy、ThemeCatalogの既存gateを通る。
+  - 公開原稿・図表・動画が書籍文章・figure・章構成を模倣せず、独自の問いと分析を持つ。
+  - Web・記事・動画・派生投稿がmetricKeys / surveyIds / provenanceUrlsで追跡できる。
+  - 新版で追加・変更・削除された項目と影響先を機械列挙できる。
+- **停止条件**: 一次資料不明、利用条件不明、民間権利、OCR/原本不一致、年度・単位・地域粒度不一致では
+  `primary-source-unavailable`または`rights-hold`にして停止する。source bucketのpublic access、通常`stats47`
+  bucket指定、manifest / hash不一致でも停止する。推測値や書籍値で埋めない。
+- **外部変更境界**: remote R2 write、git push、PR、deploy、note / YouTube / Instagram / X公開は
+  対象と検証結果を提示し、別途オーナー承認を得る。private bucket作成とsource bundle初回uploadもこの境界に含む。
+  YouTubeはEXP-006の6週間3本上限を増やさない。
+
 ### [ASP-CONTINUITY-01] afb の承認追跡と広告コード取得 (オーナーのログインが要る分)
 
 タグ: [収益化] [種類:改善] [実行:ユーザー] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-07-28]
