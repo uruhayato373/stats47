@@ -900,6 +900,8 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **残りの実測値**: 形状warnはarea coverage 31、正当な100%超13、zero-heavy 2。カード完了を止めるのは
   公開payloadの未焼き込み33件だけでconfig driftは0。full data-refresh / snapshot同期後に未焼き込み0を
   再実測する（R2 write・workflow dispatchの承認は別）。
+- **引継ぎ**: 実行中full refresh、監査コマンド、ledger記録とカード削除の条件は
+  `DATA-REFRESH-ZEROGATE-ALLORNOTHING-01`の「2026-08-27 別PC引継ぎcheckpoint」を正典とする。
 - **完了条件**: `scan-stats-shape.ts` の未許可errorと`known-broken`が0で、残るwarnが一次資料または
   `verified-value-profiles.ts`で説明されていること。`MAX_KNOWN_BROKEN`は0を維持する。加えて監査 (k) の
   `unbaked` が0になること（全payloadにレシピが焼かれた状態）。100%を上限としない公式比率や
@@ -959,7 +961,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 
 ### [PUBLIC-DATA-CONTRACT-AUDIT-01] blog / ranking / theme の配信データ契約を全量検証する
 
-タグ: [起票:2026-08-03]
+タグ: [起票:2026-08-03] [進行中]
 
 - **owner**: Claude Code
 - **監査時点の証拠**:
@@ -979,6 +981,8 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `mobile-phone-bill-consumption-expenditure`) の`latestYear`が欠落し、前者を参照する`real-income` themeも
   unusableになっている。既知集合だけを派生生成へ渡す修正とR2 readの30秒・3回retryはdevelopへ反映済み。
   修正版のfull refresh後に同じ全量監査でfinding 0を確認するまで未完了とする。
+- **引継ぎ**: 別PCでの再開手順と現在実行中のrunは
+  `DATA-REFRESH-ZEROGATE-ALLORNOTHING-01`の「2026-08-27 別PC引継ぎcheckpoint」を正典とする。
 - **実行順**:
   1. 上記1 assetを正しいJSON/sourceから再生成し、themeの欠測4件（`manufacturing-sales-private` / `manufacturing-net-value-added-private` / `industrial-land-price` / `housing-floor-area`）と地域種別不一致1件を、R2再生成またはcatalog参照削除で解消する。
   2. 公開blog全記事、`ALL_THEMES`、`KNOWN_RANKING_KEYS`から期待集合を決定的に生成し、R2の存在、schema、row数、年、地域種別、参照assetをread-onlyで全量検査する。既存ファイルの列挙だけで期待集合を作らない。
@@ -1050,7 +1054,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 
 ### [KSJ-PREF-ASSIGN-01] KSJ 由来ランキングの県帰属を全 13 指標で是正する
 
-タグ: [起票:2026-08-17]
+タグ: [起票:2026-08-17] [進行中]
 
 - **owner**: claude
 - **問題**: 旧 `register-ksj-rankings.ts` の `findNearestPref` が施設座標から**最寄りの県庁所在地**で
@@ -1086,6 +1090,8 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **残り**: ローカル生成物を承認付きsnapshot同期で`app/stats`→`app/ranking`（values / item /
   正規化 / national-trend）と`app/ranking-items/all.json`へ反映し、本番表示・出典・未解決0を実測する。
   本カードの存在をR2 write / deploy承認とは解釈しない。
+- **引継ぎ**: P12集計はCI run `32978459243`でS3へ1件・error 0で公開済み。公開URLだけが旧CDN値だったため、
+  `DATA-REFRESH-ZEROGATE-ALLORNOTHING-01`の実行中full refresh完了後にpurge済み公開値を再検証する。
 - **住所が欠けるレイヤに注意**: P03 でも水力 6 / 太陽光 843 / 風力 4 件は住所が空で、空間結合に
   落ちる。太陽光は施設名だけで畳むと 9,808 → 3,253 に潰れるので、重複排除は必ず名前 + 住所で行う。
 - **禁止**: 全プロパティを走査して「それらしい値」を県コードに使わない。P12 観光資源の `P12_001` は
@@ -1096,7 +1102,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 
 ### [DATA-REFRESH-ZEROGATE-ALLORNOTHING-01] 形状ゲートに掛かる 4 metric を是正する
 
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:gh run list --workflow=data-refresh.yml --limit 3] [起票:2026-08-17]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:gh run list --workflow=data-refresh.yml --limit 3] [起票:2026-08-17] [進行中]
 
 - **owner**: data-ingester
 - **★カードを 2026-08-21 に実測で書き直した。起票時の前提はもう成り立たない。**
@@ -1136,6 +1142,34 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   （`freshwater-clam-consumption-expenditure`の一時的fetch失敗1件）。14,003件のupload自体はerror 0だったが、
   旧orphan item 38件をstrict parserへ渡したこととR2 read 10秒・1回のtimeoutで派生生成が失敗した。
   既知公開keyだけを列挙し、readを30秒・3回retryする修正を追加済み。GitHub Actions復旧後に再実走する。
+- **2026-08-27 別PC引継ぎcheckpoint**:
+  - 実装修正はPR [#830](https://github.com/uruhayato373/stats47/pull/830)でmainへmerge済み
+    （main `0e7356ed8af76d63a7c9dc5638e75186119a639c`）。本番deploy run
+    [33009537590](https://github.com/uruhayato373/stats47/actions/runs/33009537590)はsuccess、
+    Workers version `b7964073-de5a-4b37-acd6-394c5c8a2f91`。検索indexはranking 2,167 + blog 434 = 2,601件、
+    本番route 16/16・sitemap 11 shardがgreen。
+  - full data refresh run [33010325149](https://github.com/uruhayato373/stats47/actions/runs/33010325149)は
+    main上で実行中。2026-08-27の引継ぎ時点では`page-data-batch`と`app/stats` pushがsuccess、
+    `Regenerate derived snapshots + push to R2`を実行中。このrunはGitHub Actions上なので元PC停止後も継続する。
+    完了前に別のR2 writerを重ねない。
+  - developは`5c36c4377cfd67e5b0b1c397d5411a57a6a6b7ca`までpush済みで、元PCのtracked worktreeはclean。
+    別PCでは`git switch develop && git pull --ff-only`の後、`gh run watch 33010325149`から再開する。
+  - run成功後はログのbatch件数・upload error 0・派生task全成功・公開契約finding 0を回収する。続いて
+    `npm run audit:public-data-contract`と
+    `npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts`を実行し、shape violation / delivery dup /
+    recipe unbaked / config drift / config missingを0で確認する。
+  - 公開R2を直接確認する対象は、4ランキング
+    (`actual-income-worker-households-per-month` / `bank-loan-balance` / `cpi-change-rate-housing` /
+    `mobile-phone-bill-consumption-expenditure`)の`latestYear=2024`と新しい`updatedAt`、`real-income` themeの利用可能、
+    `commuter-ratio-from-other-municipalities`の9,640、`daytime-population-ratio`の7,917.1、
+    `tourism-resource-count`の47県・2014年・新潟1,913・県帰属未解決0。
+  - 上記がすべてgreenのときだけledgerへcompletedを記録して
+    `RANKING-VALUES-PARTITION-INTEGRITY-01` / `PUBLIC-DATA-CONTRACT-AUDIT-01` /
+    `KSJ-PREF-ASSIGN-01` / `DATA-REFRESH-ZEROGATE-ALLORNOTHING-01`をカード単位で削除する。
+    run失敗または実測不一致なら削除せず、失敗producerを修正して再実行する。
+  - その後`npm run docs:fix` / `npm run docs:check` / `npm run docs:check:all`、backlog-loop verify、
+    追補PRのCI・mergeを行う。最後にmain/developを同期し、内容が統合済みと確認できたcodex worktree・branchだけを
+    明示的に削除する。stashは削除しない。ASP人手、Google credential、継続AI/SVG/品質カードは完了扱いしない。
 - **完了条件**: data-refresh の full run (schedule または dispatch) が success で終わり、
   `app/stats` が当月分に更新されていることを実測できる。
 - **注意**: 2026-07-05 の失敗は**別原因** (sync-snapshots の correlation task が JS ヒープ
