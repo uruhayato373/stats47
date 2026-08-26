@@ -15,6 +15,7 @@
 import { isChartColorRole, type ChartColorRole } from "./chart-color-role";
 import { parseFaqMarkdown } from "./faq-markdown";
 import type { CatalogComponentType } from "./types";
+import { getMetricConfig } from "../registry";
 
 // ChartColorRole の SSOT は chart-color-role.ts (resolver と parity テストの単一ソース)。
 // 再 export はしない (index が chart-color-role から出すので二重 export を避ける)。
@@ -52,17 +53,70 @@ export const MIGRATED_LINE_SERIES_REF_COMPONENT_KEYS: ReadonlySet<string> = new 
   "theme-economy-income-wage",
 ]);
 
+export type EstatParams = Record<string, string>;
+
+export interface LineChartComponentProps {
+  estatParams?: EstatParams | EstatParams[];
+  seriesRefs?: StatSeriesRef[];
+  labels?: string[];
+  seriesColors?: string[];
+  showLatestValues?: boolean;
+  yAxisConfig?: {
+    mode: "auto" | "sync" | "fixed";
+    domain?: [number, number];
+  };
+}
+
+export interface MixedChartComponentProps {
+  columnParams: EstatParams[];
+  lineParams: EstatParams[];
+  columnLabels?: string[];
+  lineLabels?: string[];
+  leftUnit?: string;
+  rightUnit?: string;
+  columnColors?: string[];
+  lineColors?: string[];
+}
+
+export interface CompositionChartComponentProps {
+  statsDataId: string;
+  segments: Array<{ code: string; label: string; color?: string }>;
+  totalCode?: string;
+  defaultTab?: "composition" | "trend";
+}
+
+export interface DonutChartComponentProps {
+  statsDataId: string;
+  categories: Array<{ code: string; label: string; color: string }>;
+  topN?: number;
+}
+
+export interface CpiChartComponentProps {
+  statsDataId: string;
+  excludeCodes?: string[];
+  year?: string;
+}
+
+/** runtime が扱う 6 chart の共有 discriminated union。 */
+export type ThemeDbChartComponentProps =
+  | { componentType: "line-chart"; props: LineChartComponentProps }
+  | { componentType: "mixed-chart"; props: MixedChartComponentProps }
+  | { componentType: "composition-chart"; props: CompositionChartComponentProps }
+  | { componentType: "donut-chart"; props: DonutChartComponentProps }
+  | { componentType: "cpi-profile"; props: CpiChartComponentProps }
+  | { componentType: "cpi-heatmap"; props: CpiChartComponentProps };
+
 // ---- 現行 componentProps の discriminated-union 検証 ----
 
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === "object" && v !== null && !Array.isArray(v);
 }
 
-/** e-Stat パラメータ 1 件 (全値が string の非空オブジェクト)。 */
+/** e-Stat パラメータ 1 件 (statsDataId 必須、全値 string)。 */
 function isEstatParams(v: unknown): boolean {
   return (
     isRecord(v) &&
-    Object.keys(v).length > 0 &&
+    nonEmptyString(v.statsDataId) &&
     Object.values(v).every((x) => typeof x === "string")
   );
 }
@@ -71,12 +125,13 @@ function isEstatParamsList(v: unknown): boolean {
   return Array.isArray(v) && v.length > 0 && v.every(isEstatParams);
 }
 
-function nonEmptyString(v: unknown): boolean {
+function nonEmptyString(v: unknown): v is string {
   return typeof v === "string" && v.length > 0;
 }
 
 function isStatSeriesRef(v: unknown): v is StatSeriesRef {
-  if (!isRecord(v) || !nonEmptyString(v.metricKey)) return false;
+  if (!isRecord(v) || !nonEmptyString(v.metricKey) || !getMetricConfig(v.metricKey)) return false;
+  if (!hasOnlyKeys(v, ["metricKey", "year", "area", "label", "colorRole"])) return false;
   if (v.year !== undefined && (typeof v.year !== "string" || !/^\d{4}$/.test(v.year))) {
     return false;
   }
@@ -150,11 +205,85 @@ function isCodeLabelList(v: unknown, requireColor: boolean): boolean {
     v.every(
       (item) =>
         isRecord(item) &&
+        hasOnlyKeys(item, ["code", "label", "color"]) &&
         nonEmptyString(item.code) &&
         nonEmptyString(item.label) &&
+        (item.color === undefined || nonEmptyString(item.color)) &&
         (!requireColor || nonEmptyString(item.color)),
     )
   );
+}
+
+function hasOnlyKeys(value: Record<string, unknown>, allowed: readonly string[]): boolean {
+  const allowedSet = new Set(allowed);
+  return Object.keys(value).every((key) => allowedSet.has(key));
+}
+
+function isStringArray(v: unknown): v is string[] {
+  return Array.isArray(v) && v.every(nonEmptyString);
+}
+
+function isYAxisConfig(v: unknown): boolean {
+  if (!isRecord(v) || !hasOnlyKeys(v, ["mode", "domain"])) return false;
+  if (v.mode !== "auto" && v.mode !== "sync" && v.mode !== "fixed") return false;
+  if (v.domain === undefined) return v.mode !== "fixed";
+  return (
+    v.mode === "fixed" &&
+    Array.isArray(v.domain) &&
+    v.domain.length === 2 &&
+    v.domain.every((value) => typeof value === "number" && Number.isFinite(value))
+  );
+}
+
+function isRankingLinks(v: unknown): boolean {
+  return (
+    Array.isArray(v) &&
+    v.length > 0 &&
+    v.every(
+      (item) =>
+        isRecord(item) &&
+        hasOnlyKeys(item, ["label", "url"]) &&
+        nonEmptyString(item.label) &&
+        nonEmptyString(item.url),
+    )
+  );
+}
+
+function isMarkdownSources(v: unknown): boolean {
+  return (
+    Array.isArray(v) &&
+    v.every(
+      (item) =>
+        isRecord(item) &&
+        hasOnlyKeys(item, ["label", "url"]) &&
+        nonEmptyString(item.label) &&
+        (item.url === undefined || nonEmptyString(item.url)),
+    )
+  );
+}
+
+const GENERATED_PROP_KEYS = ["annotation", "rankingLinks"] as const;
+
+function validateKnownKeys(
+  componentType: string,
+  props: Record<string, unknown>,
+  componentKeys: readonly string[],
+): string[] {
+  const allowed = new Set<string>([...componentKeys, ...GENERATED_PROP_KEYS]);
+  return Object.keys(props)
+    .filter((key) => !allowed.has(key))
+    .map((key) => `${componentType}: 未知の field "${key}"`);
+}
+
+function validateGeneratedProps(props: Record<string, unknown>): string[] {
+  const errors: string[] = [];
+  if (props.annotation !== undefined && !nonEmptyString(props.annotation)) {
+    errors.push("annotation は空でない string にする");
+  }
+  if (props.rankingLinks !== undefined && !isRankingLinks(props.rankingLinks)) {
+    errors.push("rankingLinks は {label,url} の非空配列にする");
+  }
+  return errors;
 }
 
 /**
@@ -166,6 +295,7 @@ export function validateChartProps(
   props: Record<string, unknown>,
 ): string[] {
   const errors: string[] = [];
+  let knownKeys: readonly string[] | null = null;
   const need = (cond: boolean, msg: string) => {
     if (!cond) errors.push(msg);
   };
@@ -173,9 +303,16 @@ export function validateChartProps(
   switch (componentType as CatalogComponentType) {
     case "line-chart":
       {
+      knownKeys = ["estatParams", "seriesRefs", "labels", "seriesColors", "showLatestValues", "yAxisConfig"];
       const hasEstatParams =
         isEstatParams(props.estatParams) || isEstatParamsList(props.estatParams);
       const hasSeriesRefs = parseStatSeriesRefs(props.seriesRefs) !== null;
+      if (props.estatParams !== undefined) {
+        need(hasEstatParams, "line-chart: estatParams は statsDataId を含む object または非空配列");
+      }
+      if (props.seriesRefs !== undefined) {
+        need(hasSeriesRefs, "line-chart: seriesRefs は登録済み metricKey の非空配列");
+      }
       need(
         hasEstatParams || hasSeriesRefs,
         "line-chart: estatParams または seriesRefs (非空配列) が必要",
@@ -184,25 +321,45 @@ export function validateChartProps(
         !(hasEstatParams && hasSeriesRefs),
         "line-chart: seriesRefs と estatParams は同時指定できない",
       );
+      if (props.labels !== undefined) need(isStringArray(props.labels), "line-chart: labels は string 配列");
+      if (props.seriesColors !== undefined) need(isStringArray(props.seriesColors), "line-chart: seriesColors は string 配列");
+      if (props.showLatestValues !== undefined) need(typeof props.showLatestValues === "boolean", "line-chart: showLatestValues は boolean");
+      if (props.yAxisConfig !== undefined) need(isYAxisConfig(props.yAxisConfig), "line-chart: yAxisConfig が不正");
       break;
       }
     case "mixed-chart":
+      knownKeys = ["columnParams", "lineParams", "columnLabels", "lineLabels", "leftUnit", "rightUnit", "columnColors", "lineColors"];
       need(isEstatParamsList(props.columnParams), "mixed-chart: columnParams (非空配列) が必要");
       need(isEstatParamsList(props.lineParams), "mixed-chart: lineParams (非空配列) が必要");
+      for (const key of ["columnLabels", "lineLabels", "columnColors", "lineColors"] as const) {
+        if (props[key] !== undefined) need(isStringArray(props[key]), `mixed-chart: ${key} は string 配列`);
+      }
+      for (const key of ["leftUnit", "rightUnit"] as const) {
+        if (props[key] !== undefined) need(nonEmptyString(props[key]), `mixed-chart: ${key} は空でない string`);
+      }
       break;
     case "composition-chart":
+      knownKeys = ["statsDataId", "segments", "totalCode", "defaultTab"];
       need(nonEmptyString(props.statsDataId), "composition-chart: statsDataId が必要");
       need(isCodeLabelList(props.segments, false), "composition-chart: segments {code,label} が必要");
+      if (props.totalCode !== undefined) need(nonEmptyString(props.totalCode), "composition-chart: totalCode は空でない string");
+      if (props.defaultTab !== undefined) need(props.defaultTab === "composition" || props.defaultTab === "trend", "composition-chart: defaultTab が不正");
       break;
     case "donut-chart":
+      knownKeys = ["statsDataId", "categories", "topN"];
       need(nonEmptyString(props.statsDataId), "donut-chart: statsDataId が必要");
       need(isCodeLabelList(props.categories, true), "donut-chart: categories {code,label,color} が必要");
+      if (props.topN !== undefined) need(Number.isInteger(props.topN) && (props.topN as number) > 0, "donut-chart: topN は正の整数");
       break;
     case "cpi-profile":
     case "cpi-heatmap":
+      knownKeys = ["statsDataId", "excludeCodes", "year"];
       need(nonEmptyString(props.statsDataId), `${componentType}: statsDataId が必要`);
+      if (props.excludeCodes !== undefined) need(isStringArray(props.excludeCodes), `${componentType}: excludeCodes は string 配列`);
+      if (props.year !== undefined) need(nonEmptyString(props.year), `${componentType}: year は空でない string`);
       break;
     case "kpi-card":
+      knownKeys = ["estatParams", "unit"];
       // データは estatParams か rankingLink 由来。estatParams があれば形を検証、無くても可 (ranking 駆動)。
       if (props.estatParams !== undefined) {
         need(
@@ -210,8 +367,10 @@ export function validateChartProps(
           "kpi-card: estatParams は object か非空配列",
         );
       }
+      if (props.unit !== undefined) need(nonEmptyString(props.unit), "kpi-card: unit は空でない string");
       break;
     case "markdown-section":
+      knownKeys = ["markdown", "displayMode", "subtitle", "sources"];
       need(nonEmptyString(props.markdown), "markdown-section: markdown (本文) が必要");
       need(
         props.displayMode === undefined ||
@@ -223,12 +382,40 @@ export function validateChartProps(
         const parsed = parseFaqMarkdown(props.markdown);
         need(parsed.ok, `markdown-section: ${parsed.ok ? "" : parsed.error}`);
       }
+      if (props.subtitle !== undefined) need(nonEmptyString(props.subtitle), "markdown-section: subtitle は空でない string");
+      if (props.sources !== undefined) need(isMarkdownSources(props.sources), "markdown-section: sources は {label,url?} 配列");
       break;
     case "pyramid-chart":
+      knownKeys = [];
       // props は空 ({})。rankingLink / dataSource で描画される。必須フィールドなし。
       break;
     default:
       errors.push(`未知の componentType: ${componentType} (依存抽出の対象外になる)`);
   }
+  if (knownKeys) errors.push(...validateKnownKeys(componentType, props, knownKeys));
+  errors.push(...validateGeneratedProps(props));
   return errors;
+}
+
+/** catalog validator と runtime が同じ schema を使う唯一の parser。 */
+export function parseThemeDbChartComponentProps(
+  componentType: string,
+  props: Record<string, unknown>,
+): ThemeDbChartComponentProps | null {
+  if (validateChartProps(componentType, props).length > 0) return null;
+  switch (componentType) {
+    case "line-chart":
+      return { componentType, props: props as LineChartComponentProps };
+    case "mixed-chart":
+      return { componentType, props: props as unknown as MixedChartComponentProps };
+    case "composition-chart":
+      return { componentType, props: props as unknown as CompositionChartComponentProps };
+    case "donut-chart":
+      return { componentType, props: props as unknown as DonutChartComponentProps };
+    case "cpi-profile":
+    case "cpi-heatmap":
+      return { componentType, props: props as unknown as CpiChartComponentProps };
+    default:
+      return null;
+  }
 }
