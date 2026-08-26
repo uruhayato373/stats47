@@ -15,8 +15,7 @@
  *     · name_en と build state (r2_version/file_count/converted_at 等) は保持 (上書きしない)
  *   - GIS_DATASETS に無い行の is_ranking_target は 0 にリセット (target から外れた旧 dataId を掃除)
  *
- * 前提: gis_datasets テーブルは migration / seed-ksj-catalog.ts で作成済みであること。
- *       (テーブル不在時は seed-ksj-catalog.ts を先に実行)
+ * 空の使い捨て SQLite でも現在の gis_datasets schema を作成してから seed する。
  *
  * Usage:
  *   npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts
@@ -29,6 +28,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import Database from "better-sqlite3";
 import { GIS_DATASETS } from "../datasets";
+import { ensureDisposableGisCatalog } from "../disposable-catalog-db";
 
 const LOCAL_D1_PATH = "packages/database/.data/stats47.sqlite";
 
@@ -69,15 +69,13 @@ function main(): void {
   }
 
   const projectRoot = findProjectRoot();
-  const dbPath = path.join(projectRoot, LOCAL_D1_PATH);
-  if (!fs.existsSync(dbPath)) {
-    console.error(
-      `ローカル SQLite が見つかりません: ${dbPath}\n  先に migration / seed-ksj-catalog.ts でテーブルを作成してください。`,
-    );
-    process.exit(1);
-  }
+  const dbPath = process.env.LOCAL_DB_PATH
+    ? path.resolve(process.env.LOCAL_DB_PATH)
+    : path.join(projectRoot, LOCAL_D1_PATH);
+  fs.mkdirSync(path.dirname(dbPath), { recursive: true });
 
   const db = new Database(dbPath);
+  ensureDisposableGisCatalog(db);
 
   // git TS に無い行の ranking フラグを掃除 (target から外れた旧 dataId)
   const resetRanking = db.prepare(
