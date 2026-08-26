@@ -1,12 +1,18 @@
 import { describe, expect, it, vi } from "vitest";
 
-const { fetchMock } = vi.hoisted(() => ({ fetchMock: vi.fn() }));
+const { fetchMock, readerOptionsMock } = vi.hoisted(() => ({
+  fetchMock: vi.fn(),
+  readerOptionsMock: vi.fn(),
+}));
 vi.mock("@stats47/r2-storage/server", () => ({
   createSnapshotReader: (options: {
     key: string;
     parse: (value: unknown) => unknown;
     select: (value: unknown) => unknown;
+    timeoutMs?: number;
+    maxAttempts?: number;
   }) => {
+    readerOptionsMock(options);
     const readResult = async () => {
       const value = await fetchMock(options.key);
       if (value === null) return { status: "no-data", attempts: 1 };
@@ -51,6 +57,9 @@ describe("readJapanSeries (GEO-SCOPE-SEPARATION-01 WP3)", () => {
     await readJapanSeries("library-count-per-million");
     expect(fetchMock).toHaveBeenCalledWith(
       "app/japan/library-count-per-million/series.json",
+    );
+    expect(readerOptionsMock).toHaveBeenLastCalledWith(
+      expect.objectContaining({ timeoutMs: 30_000, maxAttempts: 3 }),
     );
   });
 
