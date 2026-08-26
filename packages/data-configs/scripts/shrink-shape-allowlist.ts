@@ -24,6 +24,10 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly.js";
+import {
+  VALUE_CHECKS,
+  type ExpectedShapeAnomalyEntry,
+} from "../src/shape-gate.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
@@ -32,6 +36,86 @@ const SCANNER = resolve(__dirname, "scan-stats-shape.ts");
 
 function entryId(e: { key: string; check: string }): string {
   return `${e.key}::${e.check}`;
+}
+
+/** scanner が検査する prefecture 粒度の (key, check) を抽出する。 */
+export function parsePrefectureScanIds(emitted: string): Set<string> {
+  const ids = new Set<string>();
+  const re = /key:\s*"([^"]+)",\s*\n\s*check:\s*"([^"]+)"/g;
+  for (let match = re.exec(emitted); match !== null; match = re.exec(emitted)) {
+    ids.add(`${match[1]}::${match[2]}`);
+  }
+  return ids;
+}
+
+function includesEntity(
+  entry: ExpectedShapeAnomalyEntry,
+  entity: "prefecture" | "city",
+): boolean {
+  return entry.entities === undefined || entry.entities.includes(entity);
+}
+
+/**
+ * prefecture 専用 scanner の結果を、entity scope を壊さず現行リストへ反映する。
+ *
+ * scanner が見ていない city-only エントリを「解消」と判定しないことが要点。両 entity の
+ * エントリで prefecture 側だけ解消した場合も、city-only へ狭めて保持する。
+ */
+export function reconcilePrefectureScan(
+  current: readonly ExpectedShapeAnomalyEntry[],
+  scannedIds: ReadonlySet<string>,
+): {
+  entries: ExpectedShapeAnomalyEntry[];
+  added: string[];
+  removed: string[];
+} {
+  const currentPrefectureIds = new Set(
+    current.filter((entry) => includesEntity(entry, "prefecture")).map(entryId),
+  );
+  const added = [...scannedIds].filter((id) => !currentPrefectureIds.has(id));
+  const removed: string[] = [];
+  const entries: ExpectedShapeAnomalyEntry[] = [];
+
+  for (const entry of current) {
+    if (!includesEntity(entry, "prefecture")) {
+      entries.push(entry);
+      continue;
+    }
+    if (scannedIds.has(entryId(entry))) {
+      entries.push(entry);
+      continue;
+    }
+
+    removed.push(`${entryId(entry)}::prefecture`);
+    if (includesEntity(entry, "city")) {
+      entries.push({ ...entry, entities: ["city"] });
+    }
+  }
+
+  return { entries, added, removed };
+}
+
+/** 配列差し替え用の決定的な TS リテラルを生成する。 */
+export function renderEntries(entries: readonly ExpectedShapeAnomalyEntry[]): string {
+  return entries
+    .map((entry) => {
+      const lines = [
+        "  {",
+        `    key: ${JSON.stringify(entry.key)},`,
+        `    check: ${JSON.stringify(entry.check)},`,
+      ];
+      if (entry.entities) lines.push(`    entities: ${JSON.stringify(entry.entities)},`);
+      lines.push(
+        `    disposition: ${JSON.stringify(entry.disposition)},`,
+        `    observedSeverity: ${entry.observedSeverity},`,
+        `    reason: ${JSON.stringify(entry.reason)},`,
+        `    issue: ${JSON.stringify(entry.issue)},`,
+        `    until: ${JSON.stringify(entry.until)},`,
+        "  },",
+      );
+      return lines.join("\n");
+    })
+    .join("\n");
 }
 
 /**
@@ -77,23 +161,21 @@ function main(): void {
     { cwd: REPO_ROOT, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 },
   );
 
-  // 生成物から key::check を拾う (TS を評価せずテキストで照合する)
-  const nextIds = new Set<string>();
-  const re = /key:\s*"([^"]+)",\s*\n\s*check:\s*"([^"]+)"/g;
-  for (let m = re.exec(emitted); m !== null; m = re.exec(emitted)) {
-    nextIds.add(`${m[1]}::${m[2]}`);
-  }
+  // scanner は active + prefecture だけを検査する。city-only 例外は現行から保持する。
+  const scannedIds = parsePrefectureScanIds(emitted);
 
-  if (nextIds.size === 0) {
+  if (scannedIds.size === 0 && !/エントリ数:\s*0/.test(emitted)) {
     console.error("✗ scanner の出力からエントリを 1 件も読めませんでした (書式変更を疑う)。中止");
     process.exit(1);
   }
 
-  const currentIds = new Set(EXPECTED_SHAPE_ANOMALY.map(entryId));
-  const added = [...nextIds].filter((id) => !currentIds.has(id));
-  const removed = [...currentIds].filter((id) => !nextIds.has(id));
+  const reconciled = reconcilePrefectureScan(EXPECTED_SHAPE_ANOMALY, scannedIds);
+  const { added, removed } = reconciled;
 
-  console.log(`現行 ${currentIds.size} 件 / 再スキャン ${nextIds.size} 件`);
+  console.log(
+    `現行 ${EXPECTED_SHAPE_ANOMALY.length} 件 / prefecture再スキャン ${scannedIds.size} 件` +
+      ` / entity統合後 ${reconciled.entries.length} 件`,
+  );
   console.log(`  解消 (削除できる): ${removed.length} 件`);
   for (const id of removed.slice(0, 20)) console.log(`    - ${id}`);
   if (removed.length > 20) console.log(`    … 他 ${removed.length - 20} 件`);
@@ -121,13 +203,19 @@ function main(): void {
   }
 
   const before = readFileSync(TARGET, "utf8");
-  const next = spliceEntries(before, emitted, nextIds.size);
+  const rendered = renderEntries(reconciled.entries);
+  const knownBrokenShapeCount = reconciled.entries.filter(
+    (entry) => entry.disposition === "known-broken" && !VALUE_CHECKS.includes(entry.check),
+  ).length;
+  const next = spliceEntries(before, rendered, knownBrokenShapeCount);
   if (before === next) {
     console.log("\n内容が同一のため書き換えなし。");
     return;
   }
   writeFileSync(TARGET, next);
-  console.log(`\n✅ ${TARGET} を更新 (${currentIds.size} → ${nextIds.size} 件)`);
+  console.log(
+    `\n✅ ${TARGET} を更新 (${EXPECTED_SHAPE_ANOMALY.length} → ${reconciled.entries.length} 件)`,
+  );
 }
 
 // 直接実行されたときだけ走らせる (テストが spliceEntries だけを import できるように。

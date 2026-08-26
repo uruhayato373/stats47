@@ -3,7 +3,11 @@ import "server-only";
 import { logger } from "@stats47/logger/server";
 import { createSnapshotReader } from "@stats47/r2-storage/server";
 
-import { adVertical, type AffiliateVertical } from "../constants/affiliate-category";
+import {
+  AFFILIATE_VERTICALS,
+  adVertical,
+  type AffiliateVertical,
+} from "../constants/affiliate-category";
 
 import type { AffiliateAd, AffiliateLocationCode } from "../types";
 
@@ -16,11 +20,62 @@ export interface AffiliateAdsSnapshot {
   ads: AffiliateAdRow[];
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function parseAffiliateAd(value: unknown, index: number): AffiliateAdRow {
+  if (!isRecord(value)) throw new Error(`ads[${index}] must be an object`);
+  const path = (field: string) => `ads[${index}].${field}`;
+  for (const field of ["id", "title", "htmlContent", "locationCode", "adType"] as const) {
+    if (typeof value[field] !== "string" || value[field].length === 0) {
+      throw new Error(`${path(field)} must be a non-empty string`);
+    }
+  }
+  const nullableStrings = [
+    "areaCode", "categoryKey", "startDate", "endDate", "targetCategories",
+    "imageUrl", "trackingPixelUrl", "createdAt", "updatedAt", "experimentId", "variantId",
+  ] as const;
+  for (const field of nullableStrings) {
+    if (value[field] !== null && value[field] !== undefined && typeof value[field] !== "string") {
+      throw new Error(`${path(field)} must be string, null, or omitted`);
+    }
+  }
+  if (value.isActive !== null && typeof value.isActive !== "boolean") {
+    throw new Error(`${path("isActive")} must be boolean or null`);
+  }
+  for (const field of ["priority", "width", "height", "weight"] as const) {
+    if (value[field] !== null && value[field] !== undefined && !Number.isFinite(value[field])) {
+      throw new Error(`${path(field)} must be finite number, null, or omitted`);
+    }
+  }
+  if (value.vertical !== undefined && value.vertical !== null &&
+    !AFFILIATE_VERTICALS.includes(value.vertical as AffiliateVertical)) {
+    throw new Error(`${path("vertical")} must be a known affiliate vertical`);
+  }
+  if (value.targetRankingKeys !== undefined && value.targetRankingKeys !== null &&
+    (!Array.isArray(value.targetRankingKeys) ||
+      !value.targetRankingKeys.every((key) => typeof key === "string"))) {
+    throw new Error(`${path("targetRankingKeys")} must contain strings`);
+  }
+  return value as unknown as AffiliateAdRow;
+}
+
+export function parseAffiliateAdsSnapshot(value: unknown): AffiliateAdsSnapshot {
+  if (!isRecord(value)) throw new Error("affiliate ads snapshot must be an object");
+  if (typeof value.generatedAt !== "string" || !Number.isFinite(Date.parse(value.generatedAt))) {
+    throw new Error("affiliate ads snapshot generatedAt must be a valid date string");
+  }
+  if (!Array.isArray(value.ads)) throw new Error("affiliate ads snapshot ads must be an array");
+  return { generatedAt: value.generatedAt, ads: value.ads.map(parseAffiliateAd) };
+}
+
 // module-level キャッシュは持たない (r2-storage-design.md)。
 // 一時的な miss を恒久キャッシュしないため毎回 R2 を直接 fetch する。
 const loadSnapshot = createSnapshotReader<AffiliateAdsSnapshot, AffiliateAdsSnapshot>({
   key: AFFILIATE_ADS_SNAPSHOT_KEY,
   label: "affiliate-ads",
+  parse: parseAffiliateAdsSnapshot,
   select: (snapshot) => snapshot,
   fallback: { generatedAt: new Date(0).toISOString(), ads: [] },
 });

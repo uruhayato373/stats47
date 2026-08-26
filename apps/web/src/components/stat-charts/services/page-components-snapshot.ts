@@ -1,7 +1,10 @@
 import "server-only";
 
 import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import {
+  createSnapshotReader,
+  type SnapshotReadResult,
+} from "@stats47/r2-storage/server";
 
 import { parsePageComponents } from "./page-component-schema";
 
@@ -28,18 +31,13 @@ export async function readCityCategoryKeysFromR2(): Promise<string[]> {
   if (process.env.NEXT_PHASE === "phase-production-build") {
     return [];
   }
-  try {
-    const data = await fetchFromR2AsJson<string[]>(
-      CITY_CATEGORY_KEYS_SNAPSHOT_KEY,
-    );
-    return data ?? [];
-  } catch (error) {
-    logger.error(
-      { error: error instanceof Error ? error.message : String(error) },
-      "readCityCategoryKeysFromR2: failed",
-    );
-    return [];
-  }
+  const result = await createSnapshotReader({
+    key: CITY_CATEGORY_KEYS_SNAPSHOT_KEY,
+    label: "city-category-keys",
+    parse: parseStringArray,
+    select: (keys) => keys,
+  }).readResult();
+  return unwrapArrayResult(result);
 }
 
 /**
@@ -60,15 +58,28 @@ export async function readPageComponentsFromR2(
     return [];
   }
 
-  try {
-    const data = await fetchFromR2AsJson<unknown>(pageComponentsKeyPath(pageType, pageKey));
-    if (!data) return [];
-    return parsePageComponents(data);
-  } catch (error) {
-    logger.error(
-      { pageType, pageKey, error: error instanceof Error ? error.message : String(error) },
-      "readPageComponentsFromR2: failed",
-    );
-    return [];
+  const result = await createSnapshotReader({
+    key: pageComponentsKeyPath(pageType, pageKey),
+    label: `page-components:${pageType}:${pageKey}`,
+    parse: parsePageComponents,
+    select: (components) => components,
+  }).readResult();
+  return unwrapArrayResult(result);
+}
+
+function parseStringArray(value: unknown): string[] {
+  if (!Array.isArray(value) || !value.every((item) => typeof item === "string")) {
+    throw new Error("snapshot must be a string array");
   }
+  return value;
+}
+
+function unwrapArrayResult<T>(result: SnapshotReadResult<T[]>): T[] {
+  if (result.status === "ok" || result.status === "stale") return result.data;
+  if (result.status === "no-data") return [];
+  logger.error(
+    { status: result.status, error: result.error.message },
+    "page-components R2 contract failed",
+  );
+  throw result.error;
 }

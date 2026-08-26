@@ -4,7 +4,13 @@ import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
-import { spliceEntries } from "../../scripts/shrink-shape-allowlist";
+import {
+  parsePrefectureScanIds,
+  reconcilePrefectureScan,
+  renderEntries,
+  spliceEntries,
+} from "../../scripts/shrink-shape-allowlist";
+import type { ExpectedShapeAnomalyEntry } from "../shape-gate";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const TARGET = resolve(HERE, "../expected-shape-anomaly.ts");
@@ -75,5 +81,57 @@ describe("spliceEntries — ★ファイルを壊さないこと", () => {
     expect(() => spliceEntries("export const OTHER = [];\n", EMITTED, 1)).toThrow(
       /配列宣言が見つかりません/,
     );
+  });
+});
+
+const ENTRY = {
+  check: "percent-out-of-range",
+  disposition: "legitimate",
+  observedSeverity: 2000,
+  reason: "一次資料と値を照合した正当な例外です",
+  issue: "TEST-01",
+  until: "2027-12-31",
+} satisfies Omit<ExpectedShapeAnomalyEntry, "key">;
+
+describe("prefecture scanner 結果の entity-aware 統合", () => {
+  it("scanner が見ていない city-only 例外を削除しない", () => {
+    const cityOnly = { ...ENTRY, key: "city-only", entities: ["city"] as const };
+    const pref = { ...ENTRY, key: "pref" };
+    const result = reconcilePrefectureScan(
+      [cityOnly, pref],
+      new Set(["pref::percent-out-of-range"]),
+    );
+
+    expect(result.entries).toEqual([cityOnly, pref]);
+    expect(result.removed).toEqual([]);
+  });
+
+  it("prefecture 側だけ解消した両entity例外は city-only に狭める", () => {
+    const both = {
+      ...ENTRY,
+      key: "both",
+      entities: ["prefecture", "city"] as const,
+    };
+    const result = reconcilePrefectureScan([both], new Set());
+
+    expect(result.entries).toEqual([{ ...both, entities: ["city"] }]);
+    expect(result.removed).toEqual(["both::percent-out-of-range::prefecture"]);
+  });
+
+  it("prefecture の新規違反は追加扱いにして自動反映を止める", () => {
+    const result = reconcilePrefectureScan(
+      [],
+      new Set(["new-error::percent-out-of-range"]),
+    );
+    expect(result.added).toEqual(["new-error::percent-out-of-range"]);
+  });
+
+  it("scanner の0件出力と city-only リテラルを安全に扱える", () => {
+    expect(parsePrefectureScanIds("// 生成日時: test / エントリ数: 0\n")).toEqual(new Set());
+    const rendered = renderEntries([
+      { ...ENTRY, key: "city-only", entities: ["city"] },
+    ]);
+    expect(rendered).toContain('entities: ["city"]');
+    expect(rendered).toContain('key: "city-only"');
   });
 });

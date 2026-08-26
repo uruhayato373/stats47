@@ -1,4 +1,7 @@
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import {
+  createSnapshotReader,
+  type SnapshotReadResult,
+} from "@stats47/r2-storage/server";
 import type { EntityKind } from "@stats47/data-configs";
 import {
   parseJapanSeriesArtifact,
@@ -25,18 +28,36 @@ export async function readStatsValues(
   metricKey: string,
   entityKind: Exclude<EntityKind, "migration-flow">,
 ): Promise<StatsValuesPayload | null> {
-  const key = statsR2Key(metricKey, entityKind);
-  const data = await fetchFromR2AsJson<unknown>(key);
-  return data ? parseStatsValuesPayload(data) : null;
+  return unwrapNullable(await readStatsValuesResult(metricKey, entityKind));
+}
+
+export async function readStatsValuesResult(
+  metricKey: string,
+  entityKind: Exclude<EntityKind, "migration-flow">,
+): Promise<SnapshotReadResult<StatsValuesPayload>> {
+  return createStatsReader(
+    statsR2Key(metricKey, entityKind),
+    `stats:${metricKey}:${entityKind}`,
+    parseStatsValuesPayload,
+  ).readResult();
 }
 
 export async function readMigrationFlow(
   metricKey: string,
   year: number,
 ): Promise<MigrationFlowPayload | null> {
-  const key = statsR2Key(metricKey, "migration-flow", year);
-  const data = await fetchFromR2AsJson<unknown>(key);
-  return data ? parseMigrationFlowPayload(data) : null;
+  return unwrapNullable(await readMigrationFlowResult(metricKey, year));
+}
+
+export async function readMigrationFlowResult(
+  metricKey: string,
+  year: number,
+): Promise<SnapshotReadResult<MigrationFlowPayload>> {
+  return createStatsReader(
+    statsR2Key(metricKey, "migration-flow", year),
+    `migration-flow:${metricKey}:${year}`,
+    parseMigrationFlowPayload,
+  ).readResult();
 }
 
 /**
@@ -64,7 +85,38 @@ export async function readStatsValuesForYear(
 export async function readJapanSeries(
   metricKey: string,
 ): Promise<JapanSeriesArtifact | null> {
-  const key = japanR2Key(metricKey);
-  const data = await fetchFromR2AsJson<unknown>(key);
-  return data ? parseJapanSeriesArtifact(data) : null;
+  return unwrapNullable(await readJapanSeriesResult(metricKey));
+}
+
+export async function readJapanSeriesResult(
+  metricKey: string,
+): Promise<SnapshotReadResult<JapanSeriesArtifact>> {
+  return createStatsReader(
+    japanR2Key(metricKey),
+    `japan-series:${metricKey}`,
+    parseJapanSeriesArtifact,
+  ).readResult();
+}
+
+function createStatsReader<T>(
+  key: string,
+  label: string,
+  parse: (value: unknown) => T,
+) {
+  return createSnapshotReader<T, T>({
+    key,
+    label,
+    parse,
+    select: (snapshot) => snapshot,
+    generatedAt: (snapshot) => {
+      const meta = (snapshot as { meta?: { generatedAt?: unknown } }).meta;
+      return typeof meta?.generatedAt === "string" ? meta.generatedAt : undefined;
+    },
+  });
+}
+
+function unwrapNullable<T>(result: SnapshotReadResult<T>): T | null {
+  if (result.status === "ok" || result.status === "stale") return result.data;
+  if (result.status === "no-data") return null;
+  throw result.error;
 }

@@ -15,7 +15,25 @@ const { fetchFromR2AsJsonMock } = vi.hoisted(() => ({
 }));
 
 vi.mock("@stats47/r2-storage/server", () => ({
-  fetchFromR2AsJson: fetchFromR2AsJsonMock,
+  createSnapshotReader: (options: {
+    key: string;
+    parse: (value: unknown) => unknown;
+    select: (value: unknown) => unknown;
+  }) => ({
+    readResult: async () => {
+      try {
+        const value = await fetchFromR2AsJsonMock(options.key);
+        if (value === null) return { status: "no-data", attempts: 1 };
+        try {
+          return { status: "ok", data: options.select(options.parse(value)), attempts: 1 };
+        } catch (error) {
+          return { status: "schema-invalid", reason: "schema-invalid", error, attempts: 1 };
+        }
+      } catch (error) {
+        return { status: "source-unavailable", reason: "transport-error", error, attempts: 1 };
+      }
+    },
+  }),
   saveToR2: vi.fn(),
 }));
 

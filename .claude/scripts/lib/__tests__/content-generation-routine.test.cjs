@@ -145,6 +145,27 @@ test('blog auto-publish reconciles revised articles, not just unpublished ones',
   }
 });
 
+test('blog publication locks and publishes the exact image set before the article prefix', () => {
+  const auto = YAML.parse(read('.github/workflows/blog-auto-publish.yml'));
+  const autoRun = auto.jobs['auto-publish'].steps.find((step) =>
+    String(step.name ?? '').includes('Gate + Stage + Publish'),
+  ).run;
+  assert.ok(
+    autoRun.indexOf('push-generated-image-set.ts') < autoRun.indexOf('diff-push-r2.ts'),
+    'auto-publish が article prefix で画像 manifest を先に更新し、exact plan の楽観ロックを壊す',
+  );
+
+  const manual = YAML.parse(read('.github/workflows/publish-blog.yml'));
+  const manualSteps = Object.values(manual.jobs)[0].steps;
+  const imageAt = manualSteps.findIndex((step) =>
+    String(step.name ?? '').includes('Publish exact blog image set'),
+  );
+  const articleAt = manualSteps.findIndex((step) =>
+    String(step.name ?? '').includes('Push article files to R2'),
+  );
+  assert.ok(imageAt !== -1 && articleAt !== -1 && imageAt < articleAt);
+});
+
 // ── data-refresh: 成功分は押し出す (partial-publish) ─────────────────────────
 
 test('data-refresh pushes the metrics that succeeded even when the gate fails', () => {

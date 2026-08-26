@@ -107,19 +107,6 @@ jobs:
           # .local/image-staging/blog に bundle + exact plan を生成する。
           npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "${{ github.event.inputs.slug }}"
 
-      # CI の export-blog-snapshot は cloud(S3) を list するため、新記事を index(all.json) に
-      # 含めるには「先に記事本体を cloud へ push」してから all.json を再生成する必要がある。
-      - name: 📤 Push article files to R2 (記事本体を先に cloud へ)
-        run: |
-          SLUG="${{ github.event.inputs.slug }}"
-          if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
-            echo "本番: 記事ファイルを cloud へ push (app/blog/$SLUG)"
-            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
-          else
-            echo "dry-run: 記事 push スキップ (差分のみ)"
-            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG" --dry-run
-          fi
-
       - name: 🖼️ Publish exact blog image set
         run: |
           PLAN=".local/image-generation-publish-plan-blog.json"
@@ -128,6 +115,20 @@ jobs:
             npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
           else
             npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN" --dry-run
+          fi
+
+      # CI の export-blog-snapshot は cloud(S3) を list するため、新記事を index(all.json) に
+      # 含めるには記事本体を cloud へ push してから all.json を再生成する。画像 manifest は
+      # prefix 内にもあるため、exact plan の楽観ロックを壊さないよう画像セット確定後に同期する。
+      - name: 📤 Push article files to R2 (画像セット確定後)
+        run: |
+          SLUG="${{ github.event.inputs.slug }}"
+          if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
+            echo "本番: 記事ファイルを cloud へ push (app/blog/$SLUG)"
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
+          else
+            echo "dry-run: 記事 push スキップ (差分のみ)"
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG" --dry-run
           fi
 
       - name: 🧮 Regenerate blog snapshot (cloud 記事集合 + 新記事 → all.json, union 方式)

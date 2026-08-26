@@ -19,11 +19,22 @@ import {
   RANKING_ITEMS_SNAPSHOT_KEY,
   rankingItemKeyPath,
   surveyItemsKeyPath,
-  type RankingItemsSnapshot,
 } from "../../types/snapshot";
 import type { CategoryRankingItem } from "../../types/ranking-item";
 import type { RankingConfigResponse } from "../../types/ranking-config-response";
 import { compareByRepresentativeThenRecency } from "../../lib/ranking-order";
+import {
+  parseCategoryItemsSnapshot,
+  parseHomeFeaturedSnapshot,
+  parseRankingItemSnapshot,
+  parseRankingItemsSnapshot,
+  parseSurveyItemsSnapshot,
+  parseTaggedRankingItemSnapshot,
+  type CategorySourceSurvey,
+  type CategoryTopic,
+} from "../schemas/ranking-item.schemas";
+
+export type { CategorySourceSurvey, CategoryTopic } from "../schemas/ranking-item.schemas";
 
 // Phase 7 (2026-05-28): find-ranking-items-by-group-key.ts 削除に伴い、
 // GroupRankingItem 型を本ファイルに inline 移動 (snapshot reader だけで使用)。
@@ -77,59 +88,21 @@ function excludeGone<T extends { rankingKey: string }>(items: T[]): T[] {
 // Phase 1 — URL 単位の小さい JSON を使う関数
 // ────────────────────────────────────────────────────────────────────────────
 
-interface HomeFeaturedSnapshot {
-  generatedAt: string;
-  count: number;
-  /** exporter が「1 位」表示とミニタイルマップ SVG を焼き込んだ featured item 群。 */
-  items: FeaturedRankingItem[];
-}
-
-/** カテゴリ内 active item の出典調査 (exporter が survey バケットと同じ導出で焼き込み) */
-export interface CategorySourceSurvey {
-  id: string;
-  name: string;
-  itemCount: number;
-}
-
-/** カテゴリ内グループ (topic) の表示順マニフェスト 1 件分 */
-export interface CategoryTopic {
-  key: string;
-  label: string;
-}
-
-interface CategoryItemsSnapshot {
-  generatedAt: string;
-  categoryKey: string;
-  count: number;
-  items: (CategoryRankingItem & { areaType: string })[];
-  /** 2026-07-14 追加。旧 snapshot には無い (その場合ページは出典調査カードを出さない) */
-  sourceSurveys?: CategorySourceSurvey[];
-  /**
-   * 2026-08-05 追加。カテゴリ内グループの表示順マニフェスト。
-   * 1 件以上該当した topic だけがカタログ順に並び、`other` は該当があれば末尾に付く。
-   * 旧 snapshot / カタログ未登録カテゴリには無い (その場合ページは平坦一覧へ縮退)。
-   */
-  topics?: CategoryTopic[];
-}
-
-interface RankingItemSnapshot {
-  generatedAt: string;
-  item: RankingItem;
-}
-
-interface SurveyItemsSnapshot {
-  generatedAt: string;
-  surveyId: string;
-  count: number;
-  items: (CategoryRankingItem & { areaType: string })[];
+async function readValidatedSnapshot<T>(
+  key: string,
+  parse: (value: unknown) => T,
+): Promise<T | null> {
+  const value = await fetchFromR2AsJson<unknown>(key);
+  return value === null ? null : parse(value);
 }
 
 export async function readFeaturedRankingItemsFromR2(
   limit = 20,
 ): Promise<Result<FeaturedRankingItem[], Error>> {
   try {
-    const snapshot = await fetchFromR2AsJson<HomeFeaturedSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       homeFeaturedKeyPath(),
+      parseHomeFeaturedSnapshot,
     );
     if (!snapshot) {
       warnMissingR2Snapshot(
@@ -149,8 +122,9 @@ export async function readRankingItemsByCategoryFromR2(
   categoryKey: string,
 ): Promise<Result<CategoryRankingItem[], Error>> {
   try {
-    const snapshot = await fetchFromR2AsJson<CategoryItemsSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       categoryItemsKeyPath(categoryKey),
+      parseCategoryItemsSnapshot,
     );
     if (!snapshot) {
       warnMissingR2Snapshot(
@@ -175,8 +149,9 @@ export async function readCategorySourceSurveysFromR2(
   categoryKey: string,
 ): Promise<Result<CategorySourceSurvey[], Error>> {
   try {
-    const snapshot = await fetchFromR2AsJson<CategoryItemsSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       categoryItemsKeyPath(categoryKey),
+      parseCategoryItemsSnapshot,
     );
     return ok(snapshot?.sourceSurveys ?? []);
   } catch (error) {
@@ -193,8 +168,9 @@ export async function readCategoryTopicsFromR2(
   categoryKey: string,
 ): Promise<Result<CategoryTopic[], Error>> {
   try {
-    const snapshot = await fetchFromR2AsJson<CategoryItemsSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       categoryItemsKeyPath(categoryKey),
+      parseCategoryItemsSnapshot,
     );
     return ok(snapshot?.topics ?? []);
   } catch (error) {
@@ -208,8 +184,9 @@ export async function readRankingItemFromR2(
   areaType: AreaType,
 ): Promise<Result<RankingItem | null, Error>> {
   try {
-    const snapshot = await fetchFromR2AsJson<RankingItemSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       rankingItemKeyPath(rankingKey),
+      parseRankingItemSnapshot,
     );
     if (!snapshot) {
       return ok(null);
@@ -229,8 +206,9 @@ export async function readRankingItemByKeyFromR2(
   rankingKey: string,
 ): Promise<Result<RankingItem | null, Error>> {
   try {
-    const snapshot = await fetchFromR2AsJson<RankingItemSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       rankingItemKeyPath(rankingKey),
+      parseRankingItemSnapshot,
     );
     if (!snapshot) {
       return ok(null);
@@ -261,9 +239,7 @@ export async function listRankingItemsWithTagsFromR2(options?: {
 
     const items: RankingItemWithTags[] = [];
     for (const key of itemKeys) {
-      const snapshot = await fetchFromR2AsJson<{ item: RankingItemWithTags }>(
-        key,
-      );
+      const snapshot = await readValidatedSnapshot(key, parseTaggedRankingItemSnapshot);
       const item = snapshot?.item;
       if (!item) continue;
       if (GONE_RANKING_KEYS.has(item.rankingKey)) continue;
@@ -313,8 +289,9 @@ export async function readRankingItemByKeyAndAreaTypeFromR2(
   areaType: AreaType,
 ): Promise<Result<RankingItem[], Error>> {
   try {
-    const snapshot = await fetchFromR2AsJson<RankingItemSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       rankingItemKeyPath(rankingKey),
+      parseRankingItemSnapshot,
     );
     if (!snapshot) {
       return ok([]);
@@ -332,8 +309,9 @@ export async function readTagsForItemFromR2(
   areaType: AreaType,
 ): Promise<Result<string[], Error>> {
   try {
-    const snapshot = await fetchFromR2AsJson<RankingItemSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       rankingItemKeyPath(rankingKey),
+      parseRankingItemSnapshot,
     );
     if (!snapshot) {
       return ok([]);
@@ -360,8 +338,9 @@ export async function readRankingItemsBySurveyFromR2(
   }
 
   try {
-    const snapshot = await fetchFromR2AsJson<SurveyItemsSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       surveyItemsKeyPath(surveyId),
+      parseSurveyItemsSnapshot,
     );
     if (!snapshot) {
       warnMissingR2Snapshot(
@@ -391,8 +370,9 @@ export async function readActiveRankingKeysFromR2(
   }
 
   try {
-    const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       RANKING_ITEMS_SNAPSHOT_KEY,
+      parseRankingItemsSnapshot,
     );
     if (!snapshot) {
       warnMissingR2Snapshot(
@@ -424,8 +404,9 @@ export async function readActiveKeysForSitemapFromR2(): Promise<
   }
 
   try {
-    const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       RANKING_ITEMS_SNAPSHOT_KEY,
+      parseRankingItemsSnapshot,
     );
     if (!snapshot) {
       warnMissingR2Snapshot(
@@ -451,8 +432,9 @@ export async function readLatestYearForAreaTypeFromR2(
   areaType: AreaType,
 ): Promise<Result<string | null, Error>> {
   try {
-    const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       RANKING_ITEMS_SNAPSHOT_KEY,
+      parseRankingItemsSnapshot,
     );
     if (!snapshot) {
       warnMissingR2Snapshot(
@@ -480,8 +462,9 @@ export async function readRankingItemsByAreaTypeFromR2(
   options?: { dataSourceId?: string; categoryKey?: string },
 ): Promise<Result<RankingItem[], Error>> {
   try {
-    const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       RANKING_ITEMS_SNAPSHOT_KEY,
+      parseRankingItemsSnapshot,
     );
     if (!snapshot) {
       warnMissingR2Snapshot(
@@ -518,8 +501,9 @@ export async function readRankingItemsByGroupKeyFromR2(
   }
 
   try {
-    const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       RANKING_ITEMS_SNAPSHOT_KEY,
+      parseRankingItemsSnapshot,
     );
     if (!snapshot) {
       warnMissingR2Snapshot(
@@ -558,8 +542,9 @@ export async function readRankingItemsByTagFromR2(
   }
 
   try {
-    const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       RANKING_ITEMS_SNAPSHOT_KEY,
+      parseRankingItemsSnapshot,
     );
     if (!snapshot) {
       warnMissingR2Snapshot(
@@ -604,8 +589,9 @@ export async function readFirstKeyByTagFromR2(
   tagKey: string,
 ): Promise<Result<string, Error>> {
   try {
-    const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
+    const snapshot = await readValidatedSnapshot(
       RANKING_ITEMS_SNAPSHOT_KEY,
+      parseRankingItemsSnapshot,
     );
     if (!snapshot) {
       warnMissingR2Snapshot(

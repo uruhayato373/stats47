@@ -560,6 +560,11 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   未知field/chart/metricKeyを両側で拒否する。unit classifierはSI倍率、分母の母集団・量、異なる計数単位、
   片側period不明を理由付きで判定し、公開`./unit` APIを実際のテーマ軸判定へ接続した。残りはmoney unit監査の
   blocking配線とsource/stored/display/recipe変異で、QG1カード全体は未完了。
+- **QG2 完了 (2026-08-26)**: `createSnapshotReader`をruntime parser必須にし、正常 / 404 / malformed /
+  schema-invalid / 旧新schema / stale / 5xx / timeoutの9状態をfixtureで固定した。categoriesはproducer→reader
+  round-tripとpage adapterの状態写像を検証し、stats-r2、page-components、area profile/databook、correlation、
+  ranking itemなど公開routeへ届く優先readerをparser境界へ移行。reader契約inventoryも機械化した。
+  対象69 test、packages 1,930 test、web 1,081 test、全workspace + scripts type-checkがgreen。次はQG3。
 - **監査ベースライン (2026-08-13、ローカル実測)**:
   - rootの`test:packages`は`vitest run --project '@stats47/*'`で、`apps/admin`のunit test
     **14 file / 136 test**はPR CI対象外。galleryにはPlaywright 6 specもあるがworkflowから呼ばれていない。
@@ -994,67 +999,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   プロジェクト向けで stats47 の利用権限は未証明）。`--force`、既存 dimension の archive/delete、
   storageState の CI 持込、外部 secret の無承認変更を行わない。
 - **正典**: `.claude/scripts/google-admin/README.md`
-
-### [SEO-META-FACTUAL-GATE-01] metric config の SEO 文字列が実データと照合されていない
-
-タグ: [進行中] [起票:2026-08-03]
-
-- **owner**: Claude Code
-- **発見経緯**: `IND-DATA-CORRUPTION-01` の照合（W32）で、婚姻率・離婚率の誤りが**観測値ではなく
-  `seoTitle` / `seoDescription`** にあると判明した。離婚率の説明文「沖縄は2015年の6.1から急落」の
-  6.1 は**婚姻率 沖縄 2015 = 6.07**（離婚率は 2.51）で、別指標の系列から書かれていた。
-  他にも存在しない年（2024年、データは 1975-2022）、実在しない最下位県（婚姻率の「最下位 沖縄県 0.9」、
-  実際は秋田 3.70）を主張している。
-- **規模**（2026-08-03 実測。config 2,295 件）:
-  - `seoTitle` に数値を含む **2,027 件**
-  - `seoDescription` に「倍」を含む **1,769 件**
-  - ~~このうち何件が実データと食い違うかは**未計測**~~ → **2026-08-17 に全数走査して確定:
-    対象 2,008 件（isActive かつ SEO 文字列あり）のうち **105 件 = 5.2%** が食い違う**。
-    指摘 316 件の内訳は 1位/最下位の県違い 193 / 倍率違い 43 / 主張した年の観測値なし 40 /
-    値違い 38 / 宣言年の範囲外 2。例: `accountant-annual-income` は
-    「【2023年】1位山梨県（1,532.6万円）…最下位岡山県（360.1万円）で4.3倍」だが、
-    実データは **2022 年しか無く 1 位は和歌山県・最下位は岩手県・3.6 倍**（年・県・値・倍率が全滅）。
-- **読者・検索エンジンに見えている実害**: `seoTitle` / `seoDescription` はランキングページの
-  `<title>` と `<meta name="description">` としてそのまま配信される。誤った数値が検索結果に出る。
-- **原因**: SEO 文字列は決定的に生成されておらず、`values.json` との照合ゲートも無い。
-  `validate-metric-config.ts` は構造（category / 年混入 / 単位 / 重複 title）しか見ていない。
-- **完了済（2026-08-17）**: ゲートを新設して配線した。判定の純関数は
-  `packages/data-configs/src/seo-meta-facts.ts`（`extractSeoClaims` / `checkSeoFacts`）、
-  全数走査は `packages/data-configs/scripts/audit-seo-meta-facts.ts`。
-  `validate-metric-config.ts` には入れなかった — あちらは config を**テキストとして同期に**
-  読む設計で、R2 の観測値を要る非同期検査を混ぜると性格が変わる。
-  `audit-money-unit-scale.ts` と同じ「別スクリプト + 純関数 + テスト」の形にした。
-  - 見るのは**確実に違反と言える 3 つだけ**: 1位/最下位の県名・その県に添えられた値
-    （相対 2%）・「N倍」（相対 5%）。散文の一般的な数値は見ない（何と比べるべきかが
-    機械には決まらない）。年は「config.years の範囲外」と「観測値が無い年」を分けて見る。
-  - 県名は**漢字のみ + 都道府県**に絞った。ひらがなを許すと「1位は北海道」の助詞まで
-    県名に食い込み、一致しているのに不一致と報告する（実装中に実際に踏んだ）。
-  - baseline `.claude/state/data/seo-meta-facts-baseline.json`（105 件・縮小専用）。
-    配線先は **pre-commit（staged 分のみ・警告）** と **`pr-quality-check.yml` の
-    SEO Meta Factual Gate（全数・`--fail-on-new` で新規混入を error）**。全 2,008 件は
-    R2 を 2,000 回読むので pre-commit には重く、権威は CI 側に置く。
-  - **ゲート自体を実測**: 単体 17 件（正しい定型で非発火 / 実際に見つかった欠陥 5 種で発火）に
-    加え、baseline に無い `total-population` の 1 位県を書き換えて **exit 1 になることを実測**し、
-    復元して緑に戻ることも確認した。
-- **統合済**（2026-08-17 の棚卸しで、同じ成果を指す 2 件をここへ寄せた）:
-  - `IND-DATA-CORRUPTION-01`（婚姻率・離婚率の 2 key）→ **是正済**。R2 実測（2022年・人口千対）
-    から書き直し、婚姻率 1位東京都 5.36 / 最下位秋田県 2.63 / 2.0倍、離婚率 1位沖縄県 2.10 /
-    最下位富山県 1.06 / 2.0倍。audit の不一致リストから 2 件とも消え **baseline 102 → 100**。
-  - `MONEY-UNIT-SCALE-01`（金額 44 指標のスケール）→ **再取得まで完了**（audit のスケール不一致 0）。
-    残っていた「seoTitle がデータと整合」は baseline 100 件の部分集合なのでここで扱う。
-- **2026-08-26 checkpoint**: R2観測値から100件の年・1位・最下位・値・倍率を決定的に再生成し、
-  baseline **100→0**。倍率unitの順位値を格差倍率と混同する監査器の欠陥と、市区町村12指標を
-  `values.json`だけ読んで判定不能にしていた欠陥も、fixture付きで是正した。全2,008対象で不一致0・
-  判定不能0、26 test、config/years validator、data-configs type-checkがgreen。
-- **次**: `ranking-items` snapshotを承認付きで再生成・R2反映し、Googlebot UAで本番titleを全数sample実測する。
-- **完了条件**: baseline が 0 件になり、**かつ是正後の `seoTitle` / `seoDescription` が
-  本番に出ている**こと。config を直しても本番の `<title>` は変わらない —
-  `generate-meta-data.ts` が読むのは **R2 `app/ranking/<key>/item.json` の `seoTitle`** で、
-  config → item.json の反映は `sync-snapshots.yml` の `ranking-items`（手動 dispatch のみ・
-  自動では走らない）。**Googlebot UA で本番 `<title>` を実測して確認する**。
-- **禁止**: 誤検知を出すゲートにしない（運用で無効化されるため）。SEO 文字列を LLM で
-  一括再生成しない（同じ穴を作り直すことになる）。実データを見ずに「もっともらしい」数値へ
-  書き換えない。**config を直しただけで「本番の誤値を消した」と report しない**。
 
 ### [KSJ-PREF-ASSIGN-01] KSJ 由来ランキングの県帰属を全 13 指標で是正する
 

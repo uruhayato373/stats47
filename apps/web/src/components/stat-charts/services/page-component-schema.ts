@@ -1,14 +1,12 @@
 import type { PageComponent } from './load-page-components';
 
 export function parsePageComponents(value: unknown): PageComponent[] {
-  if (!Array.isArray(value)) return [];
-  return value
-    .map(parsePageComponent)
-    .filter((component): component is PageComponent => component !== null);
+  if (!Array.isArray(value)) throw new Error('page-components payload must be an array');
+  return value.map((component, index) => parsePageComponent(component, index));
 }
 
-function parsePageComponent(value: unknown): PageComponent | null {
-  if (!isRecord(value)) return null;
+function parsePageComponent(value: unknown, index: number): PageComponent {
+  if (!isRecord(value)) throw new Error(`page-components[${index}] must be an object`);
 
   const componentKey = parseRequiredString(value.componentKey);
   const componentType = parseRequiredString(value.componentType);
@@ -25,7 +23,7 @@ function parsePageComponent(value: unknown): PageComponent | null {
     gridColumnSpan === null ||
     sortOrder === null
   ) {
-    return null;
+    throw new Error(`page-components[${index}] is schema-invalid`);
   }
 
   return {
@@ -51,7 +49,9 @@ function parseRequiredString(value: unknown): string | null {
 }
 
 function parseNullableString(value: unknown): string | null {
-  return typeof value === 'string' ? value : null;
+  if (value == null) return null;
+  if (typeof value !== 'string') throw new Error('nullable string field is schema-invalid');
+  return value;
 }
 
 function parseNumber(value: unknown): number | null {
@@ -59,7 +59,10 @@ function parseNumber(value: unknown): number | null {
 }
 
 function parseNullableNumber(value: unknown): number | null {
-  return value == null ? null : parseNumber(value);
+  if (value == null) return null;
+  const parsed = parseNumber(value);
+  if (parsed === null) throw new Error('nullable number field is schema-invalid');
+  return parsed;
 }
 
 function parseRecord(value: unknown): Record<string, unknown> | null {

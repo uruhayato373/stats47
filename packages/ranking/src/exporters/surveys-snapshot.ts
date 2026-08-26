@@ -8,8 +8,8 @@ import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 
 import {
+  buildSurveysSnapshot,
   SURVEYS_SNAPSHOT_KEY,
-  type SurveysSnapshot,
 } from "../types/snapshot";
 
 export interface ExportSurveysSnapshotResult {
@@ -50,11 +50,7 @@ export async function exportSurveysSnapshot(
     itemCounts?.[s.id] !== undefined ? { ...s, itemCount: itemCounts[s.id] } : s,
   );
 
-  const snapshot: SurveysSnapshot = {
-    generatedAt: new Date().toISOString(),
-    count: surveys.length,
-    surveys,
-  };
+  const snapshot = buildSurveysSnapshot(surveys);
 
   const body = JSON.stringify(snapshot);
   const result = await saveToR2(SURVEYS_SNAPSHOT_KEY, body, {

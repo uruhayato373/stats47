@@ -1,9 +1,9 @@
 import "server-only";
 
 import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import { createSnapshotReader } from "@stats47/r2-storage/server";
 
-import type { AreaProfileData } from "../types";
+import { parseAreaProfileData, type AreaProfileData } from "../types";
 import { areaProfileKeyPath } from "../types/snapshot";
 
 /**
@@ -25,17 +25,16 @@ export async function readAreaProfileFromR2(
     return null;
   }
 
-  try {
-    const data = await fetchFromR2AsJson<AreaProfileData>(areaProfileKeyPath(areaCode));
-    if (!data) {
-      logger.warn({ areaCode }, "area-profile snapshot が R2 に存在しません");
-    }
-    return data ?? null;
-  } catch (error) {
-    logger.error(
-      { areaCode, error: error instanceof Error ? error.message : String(error) },
-      "readAreaProfileFromR2: failed",
-    );
+  const result = await createSnapshotReader({
+    key: areaProfileKeyPath(areaCode),
+    label: `area-profile:${areaCode}`,
+    parse: parseAreaProfileData,
+    select: (profile) => profile,
+  }).readResult();
+  if (result.status === "ok" || result.status === "stale") return result.data;
+  if (result.status === "no-data") {
+    logger.warn({ areaCode }, "area-profile snapshot が R2 に存在しません");
     return null;
   }
+  throw result.error;
 }

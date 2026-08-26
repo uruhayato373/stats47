@@ -1,26 +1,15 @@
 import "server-only";
 
 import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import { createSnapshotReader } from "@stats47/r2-storage/server";
 import { err, ok, type Result } from "@stats47/types";
 
 import {
   type CorrelatedItem,
   type CorrelationByKeySnapshot,
   correlationByKeyPath,
+  parseCorrelationByKeySnapshot,
 } from "../types/snapshot";
-
-const STALE_AFTER_DAYS = 30;
-
-function warnIfStale(generatedAt: string, key: string): void {
-  const ageDays = (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
-  if (ageDays > STALE_AFTER_DAYS) {
-    logger.warn(
-      { key, generatedAt, ageDays: Math.round(ageDays) },
-      `correlation per-key snapshot が ${STALE_AFTER_DAYS} 日以上古い`,
-    );
-  }
-}
 
 /**
  * R2 上の per-ranking-key snapshot から、対象キーの相関上位 N ペアを返す。
@@ -43,18 +32,24 @@ export async function readHighlyCorrelatedFromR2(
 
   try {
     const path = correlationByKeyPath(rankingKey);
-    const snapshot = await fetchFromR2AsJson<CorrelationByKeySnapshot>(path);
+    const result = await createSnapshotReader<CorrelationByKeySnapshot, CorrelationByKeySnapshot>({
+      key: path,
+      label: `correlation-by-key:${rankingKey}`,
+      parse: parseCorrelationByKeySnapshot,
+      select: (value) => value,
+    }).readResult();
 
-    if (!snapshot) {
+    if (result.status === "no-data") {
       logger.warn(
         { rankingKey, path },
         "per-key correlation snapshot が R2 に存在しません。空配列を返します",
       );
       return ok([]);
     }
-
-    warnIfStale(snapshot.generatedAt, path);
-    return ok(snapshot.pairs.slice(0, limit));
+    if (result.status === "source-unavailable" || result.status === "schema-invalid") {
+      return err(result.error);
+    }
+    return ok(result.data.pairs.slice(0, limit));
   } catch (error) {
     logger.error(
       {

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T09:04:05.950Z",
+  "updatedAt": "2026-08-26T13:17:28.478Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -1156,7 +1156,7 @@
     },
     "SEO-META-FACTUAL-GATE-01": {
       "class": "impl-large",
-      "status": "open",
+      "status": "completed",
       "sourceFile": ".claude/todo/backlog.md",
       "title": "metric config の SEO 文字列が実データと照合されていない",
       "attempts": [
@@ -1179,15 +1179,37 @@
           "evidence": "2,008対象で不一致100→0・判定不能12→0。production item snapshot反映とGooglebot実測が未承認のため未完了",
           "failReason": null,
           "followUps": []
+        },
+        {
+          "at": "2026-08-26T13:17:28.478Z",
+          "runId": null,
+          "model": "gpt-5.6-sol",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/data-configs/scripts/audit-seo-meta-facts.ts --fail-on-new",
+              "npx tsx packages/ranking/src/scripts/refresh-item-seo.ts",
+              "curl -A Googlebot https://stats47.jp/ranking/{accountant-annual-income",
+              "marriages-per-total-population",
+              "divorces-per-total-population}"
+            ],
+            "pass": true
+          },
+          "evidence": "SEO監査2,008件で不一致0/判定不能0。item SEO dry-runは2,298走査・差分0。Googlebotで会計士年収/婚姻率/離婚率の是正後titleを本番確認。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
+        "failCount": 0,
         "lastReason": null,
-        "since": "2026-08-26T07:58:26.555Z"
+        "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-26T13:17:28.478Z"
     },
     "SURVEY-HUB-HANDOFF-01": {
       "class": "impl-large",
