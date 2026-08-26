@@ -77,6 +77,19 @@ export function classifyIngestShape(
   return classifyShape({ ...input, allowlist: LEGITIMATE_SHAPE_ANOMALIES });
 }
 
+/**
+ * 全量更新は公開対象 (`isActive !== false`) だけを処理する。
+ *
+ * 退役済み metric は過去データの参照や個別診断のため registry に残るが、全量更新の
+ * 成否を左右させてはいけない。`--metric` 明示時だけは退役済みも再検証できるよう残す。
+ */
+export function filterActiveRefreshTargets(
+  configs: readonly MetricConfig[],
+  isExplicitMetric: boolean,
+): MetricConfig[] {
+  return isExplicitMetric ? [...configs] : configs.filter((config) => config.isActive !== false);
+}
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
 const R2_LOCAL = resolve(REPO_ROOT, ".local/r2");
@@ -1202,8 +1215,8 @@ async function main() {
   const all = listAllMetrics();
   console.log(`[batch] registry size: ${all.length}`);
 
-  let targets = all;
   const isExplicitMetric = Boolean(args.metric);
+  let targets = filterActiveRefreshTargets(all, isExplicitMetric);
   if (args.metric) {
     // --metric はカンマ区切りで複数指定できる (欠落キーの一括復旧用。単一指定は従来どおり)
     const wanted = new Set(

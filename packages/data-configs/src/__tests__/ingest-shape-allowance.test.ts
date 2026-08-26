@@ -13,6 +13,24 @@ function percentRows(max: number): ShapeRow[] {
 }
 
 describe("page-data-batch の正当な形状例外", () => {
+  it("昼夜間人口比率は飯舘村2015年の公式計算値7917.1％まで書き込みを止めない", () => {
+    const violations = classifyIngestShape({
+      key: "day-time-population-ratio",
+      entity: "city",
+      summary: summarizeShape([
+        { areaCode: "07564", yearCode: "2015", value: 7_917.1 },
+        { areaCode: "13101", yearCode: "2015", value: 1_460.6 },
+      ]),
+      unit: "％",
+      priorSummary: null,
+      now: NOW,
+    });
+
+    expect(violations).toHaveLength(1);
+    expect(violations[0].allowedBy?.disposition).toBe("legitimate");
+    expect(hasShapeError(violations)).toBe(false);
+  });
+
   it("通勤者比率の市区町村値は観測済み最大値まで書き込みを止めない", () => {
     const violations = classifyIngestShape({
       key: "commuter-ratio-from-other-municipalities",
@@ -49,6 +67,17 @@ describe("page-data-batch の正当な形状例外", () => {
   });
 
   it("観測済み最大値を超える悪化と別metricは引き続き停止する", () => {
+    const dayTimeWorsened = classifyIngestShape({
+      key: "day-time-population-ratio",
+      entity: "city",
+      summary: summarizeShape([
+        { areaCode: "07564", yearCode: "2015", value: 7_917.2 },
+        { areaCode: "13101", yearCode: "2015", value: 1_460.6 },
+      ]),
+      unit: "％",
+      priorSummary: null,
+      now: NOW,
+    });
     const worsened = classifyIngestShape({
       key: "commuter-ratio-from-other-municipalities",
       entity: "city",
@@ -66,6 +95,7 @@ describe("page-data-batch の正当な形状例外", () => {
       now: NOW,
     });
 
+    expect(hasShapeError(dayTimeWorsened)).toBe(true);
     expect(hasShapeError(worsened)).toBe(true);
     expect(hasShapeError(unrelated)).toBe(true);
   });

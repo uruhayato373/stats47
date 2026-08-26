@@ -51,6 +51,17 @@ export const MAX_KNOWN_BROKEN_VALUE = 0;
 
 export const EXPECTED_SHAPE_ANOMALY: readonly ExpectedShapeAnomalyEntry[] = [
   {
+    key: "day-time-population-ratio",
+    check: "percent-out-of-range",
+    entities: ["city"],
+    disposition: "legitimate",
+    observedSeverity: 7917.1,
+    reason:
+      "2026-08-26 e-Stat 市区町村表 0000020201 / A6108 を直接実測。最大は飯舘村2015年の7917.1％で、同表の昼間人口3246人÷夜間人口41人×100=7917.1％と一致。公式定義上100％超に上限はなく、避難で夜間人口が極端に小さい年の正当値",
+    issue: "DATA-REFRESH-ZEROGATE-ALLORNOTHING-01",
+    until: "2027-08-31",
+  },
+  {
     key: "commuter-ratio-from-other-municipalities",
     check: "percent-out-of-range",
     entities: ["city"],
