@@ -9,10 +9,11 @@
  * 芯: componentType の switch は **exhaustive**。未知種別は skip せず throw する
  *   (依存の取りこぼし = 監査が緑なのに実は見ていない、を構造的に防ぐ)。
  *
- * 依存 = 1 e-Stat request (statsDataId + フィルタ)。ranking 由来の値は R2 に既にあるが、
- * theme chart は現状 e-Stat を叩くので、その request 集合を列挙する。
+ * 依存は (a) 正典 R2 metric 参照と (b) 移行前の e-Stat request の2系統。
+ * R2移行済みchartを依存0として扱わずmetricKeyを列挙し、legacy request（期限: 2026-09-30、削除条件: 全chartのR2移行完了）だけをlive e-Stat監査へ渡す。
  */
 import { enumeratePyramidCategoryCodes, PYRAMID_STATS_DATA_ID } from "./population-pyramid-deps";
+import { parseStatSeriesRefs, type StatSeriesRef } from "./stat-series-ref";
 import type { CatalogChart, CatalogComponentType } from "./types";
 
 /** 1 つの e-Stat request 依存。statsDataId + 任意のカテゴリ/タブ等のフィルタ。 */
@@ -25,6 +26,9 @@ export interface EstatRequestDep {
 export interface ChartDependencies {
   componentKey: string;
   componentType: CatalogComponentType;
+  /** 正典 R2 metric 参照。取得 recipe は参照先 MetricConfig が持つ。 */
+  metricRefs: StatSeriesRef[];
+  /** 移行前の生 e-Stat request。WP6 で 0 へ縮小する。 */
   requests: EstatRequestDep[];
 }
 
@@ -67,9 +71,11 @@ function expandByCode(statsDataId: string, codes: string[]): EstatRequestDep[] {
 export function collectChartDependencies(chart: CatalogChart): ChartDependencies {
   const props = (chart.componentProps ?? {}) as Record<string, unknown>;
   const requests: EstatRequestDep[] = [];
+  const metricRefs: StatSeriesRef[] = [];
 
   switch (chart.componentType) {
     case "line-chart":
+      metricRefs.push(...(parseStatSeriesRefs(props.seriesRefs) ?? []));
       requests.push(...estatParamsList(props.estatParams));
       break;
     case "mixed-chart":
@@ -123,7 +129,7 @@ export function collectChartDependencies(chart: CatalogChart): ChartDependencies
       throw new Error(`未知の componentType の依存を抽出できない: ${String(exhaustive)}`);
     }
   }
-  return { componentKey: chart.componentKey, componentType: chart.componentType, requests };
+  return { componentKey: chart.componentKey, componentType: chart.componentType, metricRefs, requests };
 }
 
 /** request の一意キー (dedup / 監査突合用)。 */
@@ -142,6 +148,10 @@ export interface ThemeDependencySet {
   totalRequests: number;
   /** distinct な request キー集合 (ソート済み) */
   distinctRequests: string[];
+  /** R2 metric 参照の総数 (chart 間重複を含む)。 */
+  totalMetricRefs: number;
+  /** R2 metricKey の distinct 集合。 */
+  distinctMetricKeys: string[];
 }
 
 /** 全カタログの期待依存集合を列挙する (pure)。validator / generator / audit が共有する。 */
@@ -150,11 +160,17 @@ export function collectThemeDataDependencies(
 ): ThemeDependencySet {
   const perChart: ChartDependencies[] = [];
   const distinct = new Set<string>();
+  const distinctMetricKeys = new Set<string>();
   let total = 0;
+  let totalMetricRefs = 0;
   for (const cat of catalogs) {
     for (const chart of cat.charts) {
       const deps = collectChartDependencies(chart);
       perChart.push(deps);
+      for (const ref of deps.metricRefs) {
+        totalMetricRefs += 1;
+        distinctMetricKeys.add(ref.metricKey);
+      }
       for (const r of deps.requests) {
         total += 1;
         distinct.add(requestKey(r));
@@ -165,6 +181,8 @@ export function collectThemeDataDependencies(
     perChart,
     totalRequests: total,
     distinctRequests: [...distinct].sort(),
+    totalMetricRefs,
+    distinctMetricKeys: [...distinctMetricKeys].sort(),
   };
 }
 

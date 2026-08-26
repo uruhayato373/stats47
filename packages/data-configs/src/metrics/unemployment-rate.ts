@@ -4,6 +4,8 @@ export const unemploymentRate: MetricConfig = {
   "key": "unemployment-rate",
   "title": "完全失業率",
   "subtitle": "総数",
+  "description": "国勢調査の完全失業者数を、就業者と完全失業者を合わせた労働力人口で割り、100倍した値。",
+  "note": "完全失業者は調査週間に収入を伴う仕事をせず、就業可能で、積極的に仕事を探していた人。ふだんの就業・不就業状態ではなく調査週間の状態を表す。",
   "unit": "％",
   "category": "laborwage",
   "source": {

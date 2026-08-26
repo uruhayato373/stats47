@@ -719,6 +719,13 @@
       ]
     },
     {
+      "name": "QUALITY_GATES_REGISTRY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "R2_ACCESS_KEY_ID",
       "visibility": "server",
       "contexts": [

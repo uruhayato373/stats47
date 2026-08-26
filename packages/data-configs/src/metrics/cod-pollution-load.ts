@@ -12,7 +12,7 @@ export const codPollutionLoad: MetricConfig = {
     "cdCat01": "110",
     "cdCat02": "120",
     "displayName": "水質汚濁物質排出量総合調査",
-    "url": "https://www.env.go.jp/water/pollution.html",
+    "url": "https://www.env.go.jp/water/impure/index.html",
   },
   "entities": [
     "prefecture",

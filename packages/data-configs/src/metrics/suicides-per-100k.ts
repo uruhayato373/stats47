@@ -6,6 +6,8 @@ export const suicidesPer100k: MetricConfig = {
   "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "safetyenvironment",
+  "description": "人口動態調査の死因簡単分類で「自殺」に分類された死亡者数を日本人人口で除し、人口10万人当たりに換算した値。",
+  "note": "暦年の人口動態統計に基づく死亡率で、分母は総人口ではなく日本人人口である。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010209",

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const oldPopulationIndex: MetricConfig = {
   "key": "old-population-index",
   "title": "老年人口指数",
+  "description": "65歳以上人口を15～64歳人口で除し、100を掛けた指数です。",
   "unit": "指数",
   "category": "population",
   "source": {

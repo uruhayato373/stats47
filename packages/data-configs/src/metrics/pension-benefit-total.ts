@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const pensionBenefitTotal: MetricConfig = {
   "key": "pension-benefit-total",
   "title": "厚生年金受給権者年金総額",
+  "description": "3月31日現在の厚生年金受給権者について、裁定済みの年金額（年額）を合計した金額です。",
+  "note": "年度中に実際に支給した総額ではなく、支給停止中の年金額も含みます。全国値には海外居住者分が含まれるため、都道府県合計と一致しません。",
   "unit": "千円",
   "category": "socialsecurity",
   "source": {

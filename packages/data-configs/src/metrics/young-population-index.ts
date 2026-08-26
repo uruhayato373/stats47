@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const youngPopulationIndex: MetricConfig = {
   "key": "young-population-index",
   "title": "年少人口指数",
+  "description": "15歳未満人口を15～64歳人口で除し、100を掛けた指数です。",
   "unit": "指数",
   "category": "population",
   "source": {

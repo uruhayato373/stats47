@@ -36,7 +36,7 @@ export default function RootLayout({
       <body>
         <div className="flex min-h-screen">
           <ConsoleSidebar />
-          <main className="min-w-0 flex-1 px-6 py-8">{children}</main>
+          <main className="min-w-0 flex-1 px-3 py-5 sm:px-6 sm:py-8">{children}</main>
         </div>
       </body>
     </html>

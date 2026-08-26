@@ -23,8 +23,8 @@ const YAML = require('yaml');
 const ROOT = path.resolve(__dirname, '..', '..', '..', '..');
 const WORKFLOW = '.github/workflows/backlog-loop-daily.yml';
 
-// ai-content / blog と同じ commit を指していること。片方だけ動くと「ピンが外れた」検知になる。
-const ACTION_SHA = 'e5758aabe98b80fec1bcbd4a51fe2e1f8935dfc3';
+// workflow 側の immutable pin と同じ commit を指す。更新時にテストも追従させる。
+const ACTION_SHA = 'd0287e81bb2e7a297a825f8634e1403af70c4e93';
 
 function read(rel) {
   return fs.readFileSync(path.join(ROOT, rel), 'utf8');

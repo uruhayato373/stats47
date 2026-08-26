@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const barberBeauticianAnnualIncome: MetricConfig = {
   "key": "barber-beautician-annual-income",
   "title": "理容・美容師の平均年収",
+  "description": "賃金構造基本統計調査の一般労働者・男女計の理容・美容師について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
+  "note": "理容師と美容師を合わせた職種区分で、自営業者の所得は対象外。6月の月例給与を年換算した税・社会保険料等控除前の標本平均。",
   "unit": "万円",
   "category": "laborwage",
   "source": {

@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const fishCatch: MetricConfig = {
   "key": "fish-catch",
   "title": "漁獲量",
+  "description": "海面漁業と内水面漁業で採捕された水産動植物を、採捕時の原形重量で合計した量です。",
+  "note": "養殖業の収獲量は含みません。内水面漁業は調査対象となる河川・湖沼の範囲が時期により異なるため、長期比較には注意が必要です。",
   "unit": "トン",
   "category": "agriculture",
   "source": {

@@ -81,9 +81,9 @@ describe("readActiveBannersByVerticalsFromR2 — targetRankingKeys ターゲテ�
     expect(result.map((a) => a.id)).toEqual(["generic-tenshoku"]);
   });
 
-  it("rankingKey 未指定 (blog 等 非 ranking 文脈) ではターゲティングを適用せず両方返す (後方互換)", async () => {
+  it("rankingKey 未指定の非ranking文脈ではranking専用広告を除外する", async () => {
     const result = await readActiveBannersByVerticalsFromR2(["labor"], 10);
-    expect(result.map((a) => a.id).sort()).toEqual(["generic-tenshoku", "strategy-career"]);
+    expect(result.map((a) => a.id)).toEqual(["generic-tenshoku"]);
   });
 });
 
@@ -126,6 +126,15 @@ describe("readActiveTextAdsByVerticalsFromR2 — targetRankingKeys ターゲテ�
       "sidebar-bottom",
       10,
       "nurse-annual-income",
+    );
+    expect(r.map((a) => a.id)).toEqual(["generic-text"]);
+  });
+
+  it("rankingKey 未指定の非ranking文脈でもtargetRankingKeysを無視しない", async () => {
+    const r = await readActiveTextAdsByVerticalsFromR2(
+      ["labor"],
+      "sidebar-bottom",
+      10,
     );
     expect(r.map((a) => a.id)).toEqual(["generic-text"]);
   });

@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const marriages: MetricConfig = {
   "key": "marriages",
   "title": "婚姻件数",
+  "description": "人口動態調査で、各年1月1日から12月31日までに日本国内の市区町村長へ届け出られた婚姻の件数。",
+  "note": "暦年の届出件数であり、婚姻している人の総数や婚姻率ではない。",
   "unit": "組",
   "category": "population",
   "source": {

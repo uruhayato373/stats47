@@ -1,12 +1,16 @@
 "use server";
 
 
+import { resolveChartColorHex } from "@stats47/data-configs/theme-catalog";
+import { readStatsValues } from "@stats47/stats-r2/readers";
+
 import { toCompositionChartData, type CompositionChartData } from "@/components/stat-charts/adapters/toCompositionChartData";
 import { toLineChartData } from "@/components/stat-charts/adapters/toLineChartData";
 import { toMixedChartData } from "@/components/stat-charts/adapters/toMixedChartData";
 import { fetchEstatData } from "@/components/stat-charts/server";
 import type { LineChartData, MixedChartData } from "@/components/stat-charts/types/visualization";
 
+import { aggregateMetricTimeseries } from "../lib/aggregate-metric-timeseries";
 import {
   NATIONAL_AREA_CODE,
   selectNationalSeries,
@@ -96,6 +100,10 @@ async function fetchLineData(
   prefCode: string,
   isNational: boolean
 ): Promise<{ type: "line"; data: LineChartData; showLatestValues?: boolean } | null> {
+  if (props.seriesRefs) {
+    return fetchR2LineData(props, prefCode);
+  }
+  if (!props.estatParams) return null;
   const paramsList = Array.isArray(props.estatParams)
     ? props.estatParams
     : [props.estatParams];
@@ -109,6 +117,59 @@ async function fetchLineData(
     data: chartData,
     showLatestValues: props.showLatestValues,
   };
+}
+
+/**
+ * MetricConfig の取得・派生・換算を一度だけ適用して生成された R2 系列を読む。
+ * ThemeCatalog 側には metricKey / label / color role 以外の recipe を置かない。
+ */
+async function fetchR2LineData(
+  props: LineChartComponentProps,
+  prefCode: string,
+): Promise<{ type: "line"; data: LineChartData; showLatestValues?: boolean } | null> {
+  const refs = props.seriesRefs;
+  if (!refs) return null;
+
+  try {
+    const rawDataList = await Promise.all(
+      refs.map(async (ref) => {
+        const payload = await readStatsValues(ref.metricKey, "prefecture");
+        if (!payload) return null;
+        const areaCode = ref.area === "national" ? NATIONAL_AREA_CODE : prefCode;
+        const rows = ref.year
+          ? payload.rows.filter((row) => row.yearCode === ref.year)
+          : payload.rows;
+        const series = aggregateMetricTimeseries(rows, areaCode);
+        if (series.points.length === 0) return null;
+        const unit = rows.find((row) => row.unit)?.unit;
+        if (!unit) return null;
+        return series.points.map(
+          (point): StatsSchema => ({
+            areaCode,
+            areaName: areaCode === NATIONAL_AREA_CODE ? "全国" : areaCode,
+            yearCode: point.year,
+            yearName: point.yearName,
+            metricKey: ref.metricKey,
+            value: point.value,
+            unit,
+          }),
+        );
+      }),
+    );
+    if (rawDataList.some((series) => series === null)) return null;
+
+    const labels = refs.map((ref) => ref.label ?? ref.metricKey);
+    const colors = refs.every((ref) => ref.colorRole !== undefined)
+      ? refs.map((ref) => resolveChartColorHex(ref.colorRole!))
+      : undefined;
+    return {
+      type: "line",
+      data: toLineChartData(rawDataList as StatsSchema[][], labels, colors),
+      showLatestValues: props.showLatestValues,
+    };
+  } catch {
+    return null;
+  }
 }
 
 async function fetchMixedData(

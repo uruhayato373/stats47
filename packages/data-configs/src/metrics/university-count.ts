@@ -4,6 +4,7 @@ export const universityCount: MetricConfig = {
   "key": "university-count",
   "title": "大学数",
   "subtitle": "総数",
+  "description": "学校基本調査で大学として集計された学校の総数です。",
   "unit": "校",
   "category": "educationsports",
   "source": {

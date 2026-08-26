@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "statuses": ["pending", "approved", "blocked"],
+  "riskFlags": [
+    "ymyl-medical",
+    "financial-high-risk",
+    "adult-or-dating",
+    "body-modification",
+    "investigation",
+    "brand-mismatch",
+    "terms-unverified"
+  ],
+  "pageTypes": ["ranking", "blog", "theme", "area", "category", "survey"],
+  "reviewers": ["code", "owner"]
+}

@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const manufacturingIndustryAddedValue: MetricConfig = {
   "key": "manufacturing-industry-added-value",
   "title": "製造業付加価値額",
+  "description": "従業者4人以上の製造業事業所について、製造品出荷額等から原材料使用額等や内国消費税等を差し引き、事業所が生み出した価値を表した金額。",
+  "note": "従業者30人以上は在庫増減を加え減価償却額も控除する付加価値額、29人以下は粗付加価値額で集計する。2020年度以降は調査が年により切り替わるため時系列比較に注意。",
   "unit": "百万円",
   "category": "miningindustry",
   "source": {

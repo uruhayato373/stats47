@@ -41,13 +41,13 @@ function compareByPriorityDesc(a: AffiliateAdRow, b: AffiliateAdRow): number {
  * ranking-key 単位のターゲティング判定 (転職クラスタの文脈一致配置)。
  * - targetRankingKeys 未設定/空 → 無制限 (従来挙動・後方互換)。
  * - 設定済 かつ rankingKey 指定あり → 一致時のみ対象 (ranking ページの native / sidebar 枠)。
- * - 設定済 かつ rankingKey 無し (blog 等 非 ranking 文脈) → ターゲティングを適用せず従来どおり表示。
- *   (ranking 専用のターゲティングを非 ranking 文脈に波及させないための非対称設計)
+ * - 設定済 かつ rankingKey 無し (blog 等 非 ranking 文脈) → 対象外。
+ *   targetRankingKeys は広告を掲載できるページの hard allowlist として扱う。
  */
 function matchesRankingTarget(ad: AffiliateAdRow, rankingKey?: string): boolean {
   const targets = ad.targetRankingKeys;
   if (!targets || targets.length === 0) return true;
-  if (rankingKey == null) return true;
+  if (rankingKey == null) return false;
   return targets.includes(rankingKey);
 }
 

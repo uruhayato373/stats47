@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const inlandAquacultureHarvest: MetricConfig = {
   "key": "inland-aquaculture-harvest",
   "title": "内水面養殖業収獲量",
+  "description": "一定区画の内水面または陸上で淡水を使用して育成し、食用目的で収獲した水産動植物の原形重量です。",
+  "note": "自家用の食用分は含みますが、増殖用・養殖用の種苗販売量は含みません。",
   "unit": "トン",
   "category": "agriculture",
   "source": {

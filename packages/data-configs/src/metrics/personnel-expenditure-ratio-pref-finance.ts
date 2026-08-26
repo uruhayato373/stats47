@@ -4,6 +4,8 @@ export const personnelExpenditureRatioPrefFinance: MetricConfig = {
   "key": "personnel-expenditure-ratio-pref-finance",
   "title": "人件費割合",
   "subtitle": "都道府県財政",
+  "description": "都道府県財政の性質別歳出における人件費を、歳出決算総額で割り、100倍した割合。",
+  "note": "歳出に占める人件費の構成比であり、職員1人当たりの給与額や職員数を示す指標ではない。",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const births: MetricConfig = {
   "key": "births",
   "title": "出生数",
+  "description": "人口動態統計で把握した、1年間に出生した子の数です。",
   "unit": "人",
   "category": "population",
   "source": {

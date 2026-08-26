@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-23T12:16:39.137Z",
+  "generatedAt": "2026-08-26T01:01:04.947Z",
   "gscWeek": "2026-W34",
   "inputs": {
     "pages": 3303,
-    "rankingKeys": 2193,
+    "rankingKeys": 2196,
     "articleTags": 445,
     "articleTagsSource": "r2"
   },
@@ -57,9 +57,9 @@
     },
     "byVertical": {
       "economy": {
-        "imp": 128914,
-        "clicks": 2920,
-        "pages": 1265
+        "imp": 58167,
+        "clicks": 1885,
+        "pages": 965
       },
       "population": {
         "imp": 9349,
@@ -109,18 +109,18 @@
     },
     "byTypeVertical": [
       {
-        "type": "blog",
-        "vertical": "economy",
-        "imp": 95216,
-        "clicks": 1582,
-        "pages": 559
-      },
-      {
         "type": "ranking",
         "vertical": "economy",
         "imp": 31951,
         "clicks": 1313,
         "pages": 638
+      },
+      {
+        "type": "blog",
+        "vertical": "economy",
+        "imp": 24469,
+        "clicks": 547,
+        "pages": 259
       },
       {
         "type": "areas",
@@ -452,8 +452,8 @@
   "gaps": [
     {
       "vertical": "economy",
-      "imp": 128914,
-      "clicks": 2920,
+      "imp": 58167,
+      "clicks": 1885,
       "inventory": 27,
       "banner": 16,
       "text": 11,
@@ -542,8 +542,18 @@
     }
   ],
   "unmapped": {
-    "totalImp": 1338,
+    "totalImp": 72085,
     "byReason": [
+      {
+        "reason": "tags-unmapped",
+        "imp": 70747,
+        "pages": 300,
+        "examples": [
+          "avg-height-high-school-2nd-male",
+          "local-government-debt-burden",
+          "convenience-store-density-map"
+        ]
+      },
       {
         "reason": "no-slot:home",
         "imp": 728,
@@ -985,244 +995,244 @@
     ],
     "top": [
       {
-        "url": "https://stats47.jp/",
-        "type": "home",
-        "key": null,
-        "imp": 728,
-        "clicks": 57,
-        "reason": "no-slot:home"
-      },
-      {
-        "url": "https://stats47.jp/about",
-        "type": "other",
-        "key": null,
-        "imp": 63,
-        "clicks": 3,
-        "reason": "no-slot:other"
-      },
-      {
-        "url": "https://stats47.jp/ranking",
-        "type": "ranking",
-        "key": null,
-        "imp": 57,
-        "clicks": 0,
-        "reason": "ranking-key-unknown"
-      },
-      {
-        "url": "https://stats47.jp/ranking/bowling-alley-public",
-        "type": "ranking",
-        "key": "bowling-alley-public",
-        "imp": 51,
-        "clicks": 1,
-        "reason": "ranking-key-unknown"
-      },
-      {
-        "url": "https://stats47.jp/blog",
+        "url": "https://stats47.jp/blog/avg-height-high-school-2nd-male",
         "type": "blog",
-        "key": null,
-        "imp": 51,
-        "clicks": 0,
-        "reason": "article-unknown"
+        "key": "avg-height-high-school-2nd-male",
+        "imp": 4253,
+        "clicks": 22,
+        "reason": "tags-unmapped"
       },
       {
-        "url": "https://stats47.jp/ranking/patient-receiving-rate-by-disease",
-        "type": "ranking",
-        "key": "patient-receiving-rate-by-disease",
-        "imp": 23,
-        "clicks": 0,
-        "reason": "ranking-key-unknown"
-      },
-      {
-        "url": "https://stats47.jp/ranking/patient-receiving-rate-by-age",
-        "type": "ranking",
-        "key": "patient-receiving-rate-by-age",
-        "imp": 22,
-        "clicks": 2,
-        "reason": "ranking-key-unknown"
-      },
-      {
-        "url": "https://stats47.jp/tag/%E8%B3%83%E9%87%91%E6%A7%8B%E9%80%A0%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E8%AA%BF%E6%9F%BB",
-        "type": "tag",
-        "key": "%E8%B3%83%E9%87%91%E6%A7%8B%E9%80%A0%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E8%AA%BF%E6%9F%BB",
-        "imp": 22,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E8%B3%83%E9%87%91%E6%A7%8B%E9%80%A0%E5%9F%BA%E6%9C%AC%E7%B5%B1%E8%A8%88%E8%AA%BF%E6%9F%BB"
-      },
-      {
-        "url": "https://stats47.jp/blog?page=17",
+        "url": "https://stats47.jp/blog/local-government-debt-burden",
         "type": "blog",
-        "key": null,
-        "imp": 21,
-        "clicks": 0,
-        "reason": "article-unknown"
+        "key": "local-government-debt-burden",
+        "imp": 3336,
+        "clicks": 273,
+        "reason": "tags-unmapped"
       },
       {
-        "url": "https://stats47.jp/ranking/construction-contract-total",
-        "type": "ranking",
-        "key": "construction-contract-total",
-        "imp": 20,
-        "clicks": 0,
-        "reason": "ranking-key-unknown"
-      },
-      {
-        "url": "https://stats47.jp/themes",
-        "type": "themes",
-        "key": null,
-        "imp": 18,
-        "clicks": 0,
-        "reason": "theme-unmapped:null"
-      },
-      {
-        "url": "https://stats47.jp/terms",
-        "type": "other",
-        "key": null,
-        "imp": 15,
-        "clicks": 1,
-        "reason": "no-slot:other"
-      },
-      {
-        "url": "https://stats47.jp/tag/%E7%8C%9B%E6%9A%91%E6%97%A5",
-        "type": "tag",
-        "key": "%E7%8C%9B%E6%9A%91%E6%97%A5",
-        "imp": 13,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E7%8C%9B%E6%9A%91%E6%97%A5"
-      },
-      {
-        "url": "https://stats47.jp/ranking/construction-projects-total",
-        "type": "ranking",
-        "key": "construction-projects-total",
-        "imp": 12,
-        "clicks": 0,
-        "reason": "ranking-key-unknown"
-      },
-      {
-        "url": "https://stats47.jp/tag/%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
-        "type": "tag",
-        "key": "%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA",
-        "imp": 11,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E6%B6%88%E8%B2%BB%E6%94%AF%E5%87%BA"
-      },
-      {
-        "url": "https://stats47.jp/privacy",
-        "type": "other",
-        "key": null,
-        "imp": 10,
-        "clicks": 0,
-        "reason": "no-slot:other"
-      },
-      {
-        "url": "https://stats47.jp/blog?page=18",
+        "url": "https://stats47.jp/blog/convenience-store-density-map",
         "type": "blog",
-        "key": null,
-        "imp": 7,
-        "clicks": 0,
-        "reason": "article-unknown"
+        "key": "convenience-store-density-map",
+        "imp": 2811,
+        "clicks": 90,
+        "reason": "tags-unmapped"
       },
       {
-        "url": "https://stats47.jp/blog?page=4",
+        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character",
         "type": "blog",
-        "key": null,
-        "imp": 7,
-        "clicks": 0,
-        "reason": "article-unknown"
+        "key": "noodle-consumption-prefecture-character",
+        "imp": 2343,
+        "clicks": 250,
+        "reason": "tags-unmapped"
       },
       {
-        "url": "https://stats47.jp/tag/%E8%8C%A8%E5%9F%8E%E7%9C%8C",
-        "type": "tag",
-        "key": "%E8%8C%A8%E5%9F%8E%E7%9C%8C",
-        "imp": 7,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E8%8C%A8%E5%9F%8E%E7%9C%8C"
-      },
-      {
-        "url": "https://stats47.jp/api/ranking/secondary-activity-avg-time-unemployed-male/download?format=json",
-        "type": "other",
-        "key": null,
-        "imp": 6,
-        "clicks": 0,
-        "reason": "no-slot:other"
-      },
-      {
-        "url": "https://stats47.jp/blog?page=16",
+        "url": "https://stats47.jp/blog/bonito-catch-prefecture",
         "type": "blog",
-        "key": null,
-        "imp": 6,
-        "clicks": 0,
-        "reason": "article-unknown"
+        "key": "bonito-catch-prefecture",
+        "imp": 2115,
+        "clicks": 45,
+        "reason": "tags-unmapped"
       },
       {
-        "url": "https://stats47.jp/tag/%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85",
-        "type": "tag",
-        "key": "%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85",
-        "imp": 6,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85"
-      },
-      {
-        "url": "https://stats47.jp/tag/%E5%9C%B0%E5%BD%A2",
-        "type": "tag",
-        "key": "%E5%9C%B0%E5%BD%A2",
-        "imp": 6,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E5%9C%B0%E5%BD%A2"
-      },
-      {
-        "url": "https://stats47.jp/tag/%E7%B4%85%E8%8C%B6",
-        "type": "tag",
-        "key": "%E7%B4%85%E8%8C%B6",
-        "imp": 6,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E7%B4%85%E8%8C%B6"
-      },
-      {
-        "url": "https://stats47.jp/api/ranking/local-allocation-tax-ratio-pref-finance/download?format=csv&basis=original",
-        "type": "other",
-        "key": null,
-        "imp": 5,
-        "clicks": 0,
-        "reason": "no-slot:other"
-      },
-      {
-        "url": "https://stats47.jp/blog?page=10",
+        "url": "https://stats47.jp/blog/manufacturing-aichi-dominance",
         "type": "blog",
-        "key": null,
-        "imp": 5,
-        "clicks": 0,
-        "reason": "article-unknown"
+        "key": "manufacturing-aichi-dominance",
+        "imp": 2076,
+        "clicks": 12,
+        "reason": "tags-unmapped"
       },
       {
-        "url": "https://stats47.jp/tag/%E4%BA%BA%E5%8F%A3%E6%B8%9B%E5%B0%91",
-        "type": "tag",
-        "key": "%E4%BA%BA%E5%8F%A3%E6%B8%9B%E5%B0%91",
-        "imp": 5,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E4%BA%BA%E5%8F%A3%E6%B8%9B%E5%B0%91"
-      },
-      {
-        "url": "https://stats47.jp/tag/%E5%81%A5%E5%BA%B7",
-        "type": "tag",
-        "key": "%E5%81%A5%E5%BA%B7",
-        "imp": 5,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E5%81%A5%E5%BA%B7"
-      },
-      {
-        "url": "https://stats47.jp/tag/%E5%9C%B0%E5%90%8D",
-        "type": "tag",
-        "key": "%E5%9C%B0%E5%90%8D",
-        "imp": 5,
-        "clicks": 0,
-        "reason": "tag-unmapped:%E5%9C%B0%E5%90%8D"
-      },
-      {
-        "url": "https://stats47.jp/blog?page=15",
+        "url": "https://stats47.jp/blog/foreign-residents-diversity-map",
         "type": "blog",
-        "key": null,
-        "imp": 4,
+        "key": "foreign-residents-diversity-map",
+        "imp": 1642,
+        "clicks": 28,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/convenience-store-density-map#%E3%81%BE%E3%81%A8%E3%82%81",
+        "type": "blog",
+        "key": "convenience-store-density-map",
+        "imp": 1556,
         "clicks": 0,
-        "reason": "article-unknown"
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/convenience-store-density-map#%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8B%E5%AF%86%E5%BA%A6%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0%E4%BA%BA%E5%8F%A310%E4%B8%87%E4%BA%BA%E5%BD%93%E3%81%9F%E3%82%8A",
+        "type": "blog",
+        "key": "convenience-store-density-map",
+        "imp": 1552,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%81%BE%E3%81%A8%E3%82%81",
+        "type": "blog",
+        "key": "noodle-consumption-prefecture-character",
+        "imp": 1493,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%81%86%E3%81%A9%E3%82%93%E5%9C%8F%E3%81%AF%E9%A6%99%E5%B7%9D%E3%81%A0%E3%81%91%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84",
+        "type": "blog",
+        "key": "noodle-consumption-prefecture-character",
+        "imp": 1490,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/precipitation-snow-regional-gap",
+        "type": "blog",
+        "key": "precipitation-snow-regional-gap",
+        "imp": 1487,
+        "clicks": 16,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/convenience-store-density-map#%E9%83%BD%E9%81%93%E5%BA%9C%E7%9C%8C%E3%83%9E%E3%83%83%E3%83%97%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8B%E3%81%AE%E5%9C%B0%E5%9F%9F%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3",
+        "type": "blog",
+        "key": "convenience-store-density-map",
+        "imp": 1448,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/habitable-area-land-use",
+        "type": "blog",
+        "key": "habitable-area-land-use",
+        "imp": 1415,
+        "clicks": 13,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%81%9D%E3%81%B0%E5%9C%8F%E3%81%AF%E3%81%86%E3%81%A9%E3%82%93%E3%81%A8%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E3%81%8C%E5%85%B1%E5%AD%98%E3%81%99%E3%82%8B",
+        "type": "blog",
+        "key": "noodle-consumption-prefecture-character",
+        "imp": 1408,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/temperature-extremes-map",
+        "type": "blog",
+        "key": "temperature-extremes-map",
+        "imp": 1388,
+        "clicks": 13,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/convenience-store-density-map#%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8B%E5%AF%86%E5%BA%A6-%E5%B0%8F%E5%A3%B2%E5%BA%97%E5%AF%86%E5%BA%A6%E6%95%A3%E5%B8%83%E5%9B%B3%E3%81%A7%E8%A6%8B%E3%82%8B%E6%A7%8B%E9%80%A0%E3%81%AE%E9%81%95%E3%81%84",
+        "type": "blog",
+        "key": "convenience-store-density-map",
+        "imp": 1264,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%81%86%E3%81%A9%E3%82%93%E5%9C%8F%E3%81%A8%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E5%9C%8F%E3%81%AF%E9%80%86%E7%9B%B8%E9%96%A2%E3%81%99%E3%82%8B",
+        "type": "blog",
+        "key": "noodle-consumption-prefecture-character",
+        "imp": 1226,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%81%AA%E3%81%9C%E9%BA%BA%E6%96%87%E5%8C%96%E3%81%AF%E5%88%86%E3%81%8B%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%8B",
+        "type": "blog",
+        "key": "noodle-consumption-prefecture-character",
+        "imp": 1150,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E5%9C%8F%E3%81%AF%E6%9D%B1%E5%8C%97%E3%83%BB%E5%8C%97%E9%99%B8%E3%81%8C%E5%B8%AD%E5%B7%BB%E3%81%99%E3%82%8B",
+        "type": "blog",
+        "key": "noodle-consumption-prefecture-character",
+        "imp": 1150,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/local-government-debt-burden#%E9%83%BD%E9%81%93%E5%BA%9C%E7%9C%8C%E3%83%9E%E3%83%83%E3%83%97%E5%9C%B0%E6%96%B9%E5%82%B5%E3%81%AE%E9%87%8D%E3%81%95%E3%81%8C%E8%A6%8B%E3%81%88%E3%82%8B%E5%9C%B0%E5%9B%B3",
+        "type": "blog",
+        "key": "local-government-debt-burden",
+        "imp": 1121,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/local-government-debt-burden#%E5%AE%9F%E8%B3%AA%E5%85%AC%E5%82%B5%E8%B2%BB%E6%AF%94%E7%8E%87%E3%81%8B%E3%82%89%E8%A6%8B%E3%82%8B%E8%BF%94%E6%B8%88%E3%81%AE%E9%87%8D%E3%81%95",
+        "type": "blog",
+        "key": "local-government-debt-burden",
+        "imp": 1106,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/local-government-debt-burden#%E5%9C%B0%E6%96%B9%E5%82%B5%E5%89%B2%E5%90%88%E3%81%A8%E5%B0%86%E6%9D%A5%E8%B2%A0%E6%8B%85%E6%AF%94%E7%8E%87%E3%81%AE%E9%96%A2%E4%BF%82",
+        "type": "blog",
+        "key": "local-government-debt-burden",
+        "imp": 1071,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/manufacturing-productivity",
+        "type": "blog",
+        "key": "manufacturing-productivity",
+        "imp": 1048,
+        "clicks": 20,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/local-government-debt-burden#%E5%9C%B0%E6%96%B9%E5%82%B5%E7%8F%BE%E5%9C%A8%E9%AB%98%E5%89%B2%E5%90%88%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B02022%E5%B9%B4%E5%BA%A6",
+        "type": "blog",
+        "key": "local-government-debt-burden",
+        "imp": 1038,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/local-government-debt-burden#%E5%9C%B0%E6%96%B9%E4%BA%A4%E4%BB%98%E7%A8%8E%E3%81%B8%E3%81%AE%E4%BE%9D%E5%AD%98",
+        "type": "blog",
+        "key": "local-government-debt-burden",
+        "imp": 934,
+        "clicks": 0,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/yato-yatsu-place-name-boundary",
+        "type": "blog",
+        "key": "yato-yatsu-place-name-boundary",
+        "imp": 918,
+        "clicks": 21,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/distinctive-place-name-kanji-by-prefecture",
+        "type": "blog",
+        "key": "distinctive-place-name-kanji-by-prefecture",
+        "imp": 836,
+        "clicks": 4,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/population-density-urbanization",
+        "type": "blog",
+        "key": "population-density-urbanization",
+        "imp": 781,
+        "clicks": 11,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/development-history-place-name-map",
+        "type": "blog",
+        "key": "development-history-place-name-map",
+        "imp": 757,
+        "clicks": 7,
+        "reason": "tags-unmapped"
       }
     ]
   },

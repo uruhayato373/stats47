@@ -135,23 +135,23 @@ function Ledger({
 }) {
   if (hasError(data)) {
     return (
-      <div className="space-y-1">
+      <div className="min-w-0 space-y-1">
         <h3 className="text-[13px] font-medium text-console-muted">{title}</h3>
         <ErrorNote error={data.error} />
       </div>
     );
   }
   return (
-    <div className="space-y-1">
+    <div className="min-w-0 space-y-1">
       <h3 className="text-[13px] font-medium text-console-muted">
         {title} <span className="text-console-muted/70">({data.length})</span>
       </h3>
-      <div className="max-h-96 overflow-y-auto rounded-md border border-console-border bg-console-card">
+      <div className="max-h-96 overflow-x-hidden overflow-y-auto rounded-md border border-console-border bg-console-card">
         <ul className="divide-y divide-console-border/50">
           {data.map((e) => (
             <li key={e.relPath} className="px-2 py-1.5">
-              <div className="flex items-baseline gap-2">
-                <span className="text-[13px] font-medium text-console-fg">{e.name}</span>
+              <div className="flex min-w-0 items-baseline gap-2">
+                <span className="min-w-0 break-all text-[13px] font-medium text-console-fg">{e.name}</span>
                 {e[extra] ? (
                   <span className="text-[11px] text-console-muted">{String(e[extra])}</span>
                 ) : null}

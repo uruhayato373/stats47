@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-25T23:29:46.811Z",
+  "generatedAt": "2026-08-26T00:52:24.230Z",
   "masterSurveyCount": 80,
   "ranking": {
     "metrics": 2258,
     "activeMetrics": 2167,
-    "resolved": 2009,
-    "unresolved": 249,
-    "coveragePct": 88.97,
-    "activeResolved": 1927,
-    "activeUnresolved": 240,
-    "activeCoveragePct": 88.92,
+    "resolved": 2010,
+    "unresolved": 248,
+    "coveragePct": 89.02,
+    "activeResolved": 1928,
+    "activeUnresolved": 239,
+    "activeCoveragePct": 88.97,
     "activeUnresolvedKeys": [
       "accident-death-30day",
       "agricultural-land-conversion-area",
@@ -153,7 +153,6 @@
       "number-of-freight-cars",
       "number-of-individual-fishery-management",
       "nursing-care-insurance-benefit",
-      "occupational-accident-frequency-rate",
       "overtime-pay-admin-prefecture",
       "pachinko-shop-density-per-10k",
       "pharmacy-count-by-prefecture",
@@ -331,7 +330,7 @@
       "waterworks-statistics": 5,
       "weather-statistics": 9,
       "welfare-admin-report": 10,
-      "workplace-accident-survey": 2
+      "workplace-accident-survey": 3
     }
   },
   "theme": {
@@ -4018,7 +4017,7 @@
     },
     {
       "surveyId": "workplace-accident-survey",
-      "rankingCount": 2,
+      "rankingCount": 3,
       "themeKeys": [],
       "blogSlugs": [
         "workplace-accident-regional-map"

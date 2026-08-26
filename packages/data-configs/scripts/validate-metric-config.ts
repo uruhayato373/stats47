@@ -28,6 +28,12 @@ import { COLOR_SCHEME_CATALOG, isKnownColorScheme } from "@stats47/types";
 import { CATEGORY_KEYS } from "../src/types";
 import { moneyUnitExponent } from "../src/money-unit";
 import { METRICS_REGISTRY } from "../src/registry";
+import {
+  THEME_METRIC_DESCRIPTION_MISSING_BASELINE,
+  collectThemeMetricContentCoverage,
+  listThemeCatalogs,
+  validateThemeMetricContentCoverage,
+} from "../src/theme-catalog";
 import { parseUnit } from "../src/unit/unit-semantics";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -139,6 +145,15 @@ function main() {
 
   const errors: string[] = [];
   const warns: string[] = [];
+
+  validateThemeMetricContentCoverage(
+    collectThemeMetricContentCoverage(listThemeCatalogs(), METRICS_REGISTRY),
+    {
+      maxMissingDescriptions: THEME_METRIC_DESCRIPTION_MISSING_BASELINE,
+      errors,
+      warns,
+    },
+  );
 
   // error: 語彙外の colorScheme
   //

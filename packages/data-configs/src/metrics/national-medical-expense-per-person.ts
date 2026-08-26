@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const nationalMedicalExpensePerPerson: MetricConfig = {
   "key": "national-medical-expense-per-person",
   "title": "1人当たりの国民医療費",
+  "description": "当該年度の国民医療費を同年度の総人口で割った、人口1人当たりの医療費。",
+  "note": "国民医療費は保険診療の対象となり得る傷病の治療費の推計で、2000年度以降は介護保険へ移行した費用を含まない。",
   "unit": "千円",
   "category": "socialsecurity",
   "source": {

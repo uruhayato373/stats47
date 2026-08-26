@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const divorcesPerTotalPopulation: MetricConfig = {
   "key": "divorces-per-total-population",
   "title": "離婚率",
+  "description": "1年間の離婚件数を総人口で除し、人口千人当たりに換算した率です。",
   "unit": "人口千対",
   "category": "population",
   "source": {

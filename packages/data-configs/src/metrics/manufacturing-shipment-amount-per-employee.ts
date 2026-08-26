@@ -4,6 +4,8 @@ export const manufacturingShipmentAmountPerEmployee: MetricConfig = {
   "key": "manufacturing-shipment-amount-per-employee",
   "title": "製造品出荷額等",
   "subtitle": "従業員当たり",
+  "description": "製造品出荷額等を製造業従業者数で割った、従業者1人当たりの出荷額等。",
+  "note": "出荷額等には加工賃、くず廃物、その他収入や内国消費税等を含むため、従業者1人当たりの賃金や付加価値額を示す指標ではない。調査変更をまたぐ時系列比較には注意が必要。",
   "unit": "万円",
   "category": "miningindustry",
   "source": {

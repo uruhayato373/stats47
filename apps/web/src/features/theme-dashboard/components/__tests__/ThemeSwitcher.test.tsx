@@ -87,6 +87,10 @@ describe('ThemeSwitcher', () => {
     render(<ThemeSwitcher currentThemeKey="population-dynamics" compact />);
     expect(screen.getByText('テーマ')).toBeInTheDocument();
     expect(screen.queryByText('テーマを切り替える')).toBeNull();
+    expect(screen.getByRole('link', { name: 'テーマ一覧' })).toHaveAttribute(
+      'href',
+      '/themes'
+    );
   });
 
   it('現在のテーマがセレクターの現在値として表示される', () => {

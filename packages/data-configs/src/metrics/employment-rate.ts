@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const employmentRate: MetricConfig = {
   "key": "employment-rate",
   "title": "就職率",
+  "description": "公共職業安定所における一般の就職件数の年度計を、一般の月間有効求職者数の年度計で割り、100倍した値。",
+  "note": "新規学卒者とパートタイムを含まない。月間有効求職者数の年度計は各月の有効求職者を足した延べ人数で、同じ求職者が複数月に計上され得る。",
   "unit": "％",
   "category": "laborwage",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const singlePersonHouseholdOldPopulationRatio: MetricConfig = {
   "key": "single-person-household-old-population-ratio",
   "title": "65歳以上世帯員の単独世帯の割合",
+  "description": "65歳以上世帯員の単独世帯数を一般世帯数で除して100を掛けた割合です。",
   "unit": "％",
   "category": "population",
   "source": {

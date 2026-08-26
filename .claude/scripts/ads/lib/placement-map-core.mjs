@@ -79,8 +79,7 @@ export function resolveVerticalsForPage(page, maps) {
       const tags = articleTags[page.key];
       if (!tags) return { verticals: [], reason: "article-unknown" };
       const vs = [...new Set(tags.map((t) => tagMap[t]).filter(Boolean))];
-      // 実装 (resolveAffiliateTextAdsByTagKeys) は 0 件のとき economy にフォールバックする
-      return vs.length ? { verticals: vs, reason: "tags" } : { verticals: ["economy"], reason: "fallback-economy" };
+      return vs.length ? { verticals: vs, reason: "tags" } : { verticals: [], reason: "tags-unmapped" };
     }
     case "tag": {
       const v = tagMap[page.key];

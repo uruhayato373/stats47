@@ -25,6 +25,7 @@ export const DISPLAYNAME_TO_SURVEY: Record<string, string> = {
   水質汚濁物質排出量総合調査: "water-pollution-survey",
   患者調査: "patient-survey",
   病院報告: "hospital-report",
+  労働災害動向調査: "workplace-accident-survey",
   国勢調査: "census",
   人口推計: "population-estimates",
   社会福祉施設等調査: "social-welfare-facility-survey",

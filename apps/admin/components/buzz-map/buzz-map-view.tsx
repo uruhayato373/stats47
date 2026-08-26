@@ -108,7 +108,7 @@ export function BuzzMapView() {
     <div className="space-y-4">
       {catalog ? <BuzzMapSummary summary={catalog.summary} /> : null}
 
-      <div className="sticky top-[57px] z-10 -mx-6 space-y-2 border-b border-console-border bg-console-bg/95 px-6 py-3 backdrop-blur">
+      <div className="sticky top-[57px] z-10 -mx-3 space-y-2 border-b border-console-border bg-console-bg/95 px-3 py-3 backdrop-blur sm:-mx-6 sm:px-6">
         <div className="flex flex-wrap items-center gap-3">
           <FilterGroup label="priority" options={PRIORITIES} value={priority} onChange={setPriority} />
           <FilterGroup

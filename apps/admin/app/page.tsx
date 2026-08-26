@@ -34,7 +34,7 @@ const SECTIONS = [
   {
     href: "/dashboard",
     title: "プロジェクト現況",
-    desc: "メトリクス・進捗キュー・改善バックログ TODO・STP 戦略 (読み取り専用)",
+    desc: "メトリクス・進捗キュー・効果測定サマリ・STP 戦略 (読み取り専用)",
   },
   {
     href: "/quality",
@@ -49,7 +49,7 @@ const SECTIONS = [
   {
     href: "/todo",
     title: "TODO",
-    desc: ".claude/todo の台帳 (受信箱・機能バックログ) を俯瞰",
+    desc: ".claude/todo を実行バックログ・計画・効果測定の役割で俯瞰",
   },
 ] as const;
 

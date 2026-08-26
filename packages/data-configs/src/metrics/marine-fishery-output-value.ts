@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const marineFisheryOutputValue: MetricConfig = {
   "key": "marine-fishery-output-value",
   "title": "海面漁業産出額",
+  "description": "海面漁業の魚種別生産量に魚種別価格を乗じて推計した、水産物の産出額です。",
   "unit": "百万円",
   "category": "agriculture",
   "source": {

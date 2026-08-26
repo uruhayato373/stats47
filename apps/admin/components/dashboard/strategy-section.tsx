@@ -75,7 +75,7 @@ export function StrategySection({ strategy }: { strategy: Wrapped<StrategyData> 
           <div className="mt-2 text-[10px] text-console-muted">
             SSOT:{" "}
             {strategy.sources.map((s, i) => (
-              <code key={i} className="mr-1 rounded bg-console-bg px-1">
+              <code key={i} className="mr-1 break-all rounded bg-console-bg px-1">
                 {s}
               </code>
             ))}

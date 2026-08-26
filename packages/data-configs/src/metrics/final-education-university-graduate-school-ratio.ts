@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const finalEducationUniversityGraduateSchoolRatio: MetricConfig = {
   "key": "final-education-university-graduate-school-ratio",
   "title": "最終学歴が大学・大学院卒の者の割合",
+  "description": "最終学歴人口の卒業者総数に占める、最終学歴が大学または大学院である人の割合です。",
   "unit": "％",
   "category": "educationsports",
   "source": {
