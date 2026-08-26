@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "standard-price-change-rate-commercial",
+  "year": "2024",
+  "unit": "％",
+  "label": "標準価格対前年平均変動率",
+  "transform": "latest year, all prefectures; rank is preserved or recomputed by value descending",
+  "source": "r2:app/stats/standard-price-change-rate-commercial/values.json",
+  "upstream": "metric config → e-Stat → R2 app/stats",
+  "restore": "node .claude/scripts/blog/build-article-data-from-r2.mjs commercial-land-price-trend:standard-price-change-rate-commercial",
+  "generatedBy": "build-article-data-from-r2.mjs"
+}

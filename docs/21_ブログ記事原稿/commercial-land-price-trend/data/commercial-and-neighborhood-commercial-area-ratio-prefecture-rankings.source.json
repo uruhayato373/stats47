@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "commercial-and-neighborhood-commercial-area-ratio",
+  "source": "r2:app/ranking/commercial-and-neighborhood-commercial-area-ratio/values.json",
+  "upstream": "metric config → e-Stat → R2 app/ranking",
+  "generatedBy": "generate-article-charts.ts",
+  "chartType": "bar",
+  "dataFile": "commercial-and-neighborhood-commercial-area-ratio-prefecture-rankings.json",
+  "year": "2023",
+  "unit": "％",
+  "label": "商業・近隣商業地域面積比率 都道府県ランキング（2023年）"
+}

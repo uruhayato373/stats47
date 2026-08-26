@@ -1,0 +1,10 @@
+{
+  "kind": "authored",
+  "chartType": "findings",
+  "dataFile": "commercial-summary-findings.json",
+  "note": "authored 要点テキスト (記事由来)。旧SVG表示テキストから忠実抽出。SVGは見出し+本文の richer 形式のため再生成せず保持 (現 findings-card.ts は単一text簡易形式)。",
+  "regenerated": false,
+  "regenerationCaveat": "現renderer で再生成すると見出し/本文の区別が失われ簡易形式になる。視覚維持のため旧SVGを保持。",
+  "upstream": "記事本文 (authored)。SSOT指標ではない。",
+  "generatedBy": "restore-findings-from-svg.mjs"
+}
