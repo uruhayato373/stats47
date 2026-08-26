@@ -152,12 +152,14 @@ jobs:
             fi
             # --- thumbnail 差分生成 (isolated staging + exact plan) ---
             npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "$SLUG"
-            # --- 記事本体を R2 へ push ---
-            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
             # --- 生成した画像だけを asset → manifest の順で反映 ---
             PLAN=".local/image-generation-publish-plan-blog.json"
             test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $SLUG"; exit 1; }
             npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
+            # --- 記事本体を R2 へ push ---
+            # prefix には画像 manifest も含まれる。exact plan の前に同期すると
+            # manifest の楽観ロックを自分自身で壊すため、画像セット確定後に同期する。
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
             PUBLISHED="$PUBLISHED $SLUG"
             echo "✅ $SLUG published"
             echo "::endgroup::"
