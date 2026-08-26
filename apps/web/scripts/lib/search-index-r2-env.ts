@@ -16,3 +16,29 @@ export function configureSearchIndexR2Environment(env: MutableEnvironment): void
     env.R2_S3_ENDPOINT = `https://${env.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`;
   }
 }
+
+interface SearchIndexSourceCounts {
+  rankingCount: number;
+  blogCount: number;
+}
+
+/**
+ * 本番検索は ranking / blog の両方を一つのindexへ統合する。
+ * 片方だけ取得できた状態で書き出すと、そのcontent typeが検索結果から消えるため
+ * prebuildをfail-closedにする。
+ */
+export function assertCompleteSearchIndexSources({
+  rankingCount,
+  blogCount,
+}: SearchIndexSourceCounts): void {
+  const missingSources: string[] = [];
+  if (rankingCount <= 0) missingSources.push("ranking");
+  if (blogCount <= 0) missingSources.push("blog");
+
+  if (missingSources.length > 0) {
+    throw new Error(
+      `検索インデックスの必須データ源が空です: ${missingSources.join(", ")} ` +
+        `(ranking=${rankingCount}, blog=${blogCount})`,
+    );
+  }
+}

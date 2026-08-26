@@ -29,7 +29,10 @@ import {
 } from "../src/features/blog/types/snapshot";
 import { tokenize } from "../src/features/search/lib/tokenize";
 import type { ContentType, SearchDocument } from "../src/features/search/types/search.types";
-import { configureSearchIndexR2Environment } from "./lib/search-index-r2-env";
+import {
+  assertCompleteSearchIndexSources,
+  configureSearchIndexR2Environment,
+} from "./lib/search-index-r2-env";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config({ path: ".env" });
@@ -160,16 +163,8 @@ async function main() {
     console.warn("ブログ記事の取得に失敗:", error);
   }
 
-  // R2 データ源が読めない環境 (CI で R2 不在 等) では documents が 0 件になる。
-  // この場合に空インデックスで上書きすると本番検索が壊れるため、既存の committed
-  // search-index.json を保持して early return する (旧 D1 版の writeEmptyIndex と同じ安全策)。
-  // search-index.json はローカルで再生成して commit する運用 (prebuild の CI 実行は no-op)。
-  if (documents.length === 0 && fs.existsSync(indexPath) && fs.existsSync(metaPath)) {
-    console.log(
-      "ℹ️  ドキュメント 0 件 (R2 データ源不在)。既存の search-index.json / meta を保持します",
-    );
-    return;
-  }
+  const blogCount = documents.length - rankingCount;
+  assertCompleteSearchIndexSources({ rankingCount, blogCount });
 
   // MiniSearch に追加
   miniSearch.addAll(documents);

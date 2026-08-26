@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { configureSearchIndexR2Environment } from "../search-index-r2-env";
+import {
+  assertCompleteSearchIndexSources,
+  configureSearchIndexR2Environment,
+} from "../search-index-r2-env";
 
 describe("configureSearchIndexR2Environment", () => {
   it("deploy用Cloudflare名を検索index readerの正規名へ写す", () => {
@@ -36,5 +39,23 @@ describe("configureSearchIndexR2Environment", () => {
       R2_SECRET_ACCESS_KEY: "explicit-secret",
       R2_S3_ENDPOINT: "https://explicit.example.com",
     });
+  });
+});
+
+describe("assertCompleteSearchIndexSources", () => {
+  it("accepts an index containing both required content types", () => {
+    expect(() =>
+      assertCompleteSearchIndexSources({ rankingCount: 1800, blogCount: 120 }),
+    ).not.toThrow();
+  });
+
+  it.each([
+    { rankingCount: 0, blogCount: 120, missing: "ranking" },
+    { rankingCount: 1800, blogCount: 0, missing: "blog" },
+    { rankingCount: 0, blogCount: 0, missing: "ranking, blog" },
+  ])("rejects an incomplete index: $missing", ({ rankingCount, blogCount, missing }) => {
+    expect(() => assertCompleteSearchIndexSources({ rankingCount, blogCount })).toThrow(
+      `検索インデックスの必須データ源が空です: ${missing}`,
+    );
   });
 });
