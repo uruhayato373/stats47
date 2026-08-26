@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-26
+updated: 2026-08-27
 ---
 
 # バックログ (タスクマスタ)
@@ -20,35 +20,6 @@ updated: 2026-08-26
 ```
 
 ## 🔴 高 — 今月中に着手したい
-
-### [THEME-EVIDENCE-LENS-ROLLOUT-01] 白書論点レンズをテーマ横断で段階展開する
-
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-08-24] [期日:2026-08-31]
-
-- **owner**: `theme-researcher → theme-designer → theme-component-builder`。観測は GA4 `nav_surface=theme_evidence`。
-- **実装済み基盤**: `evidence-lenses.ts` の lens/source SSOT、`ThemeCatalog.evidenceTopics`、
-  source/ranking/chart/theme/tag validator、`ThemeEvidenceTopicsSection`、教育・文化の2論点、クリック計測。
-  教育・文化は可視化パイロットとして、施設指標を学校/文化の2群へ分割し、重複する独立推移2件を削除、
-  高等教育2系列を比較チャートへ統合済み。開発ゲートウェイはgit管理のpage-componentsをローカル優先し、
-  生成直後の配置をR2 pushなしで確認できる。
-- **2026-08-26 checkpoint**: 公式一次資料とactiveな内部routeを親側でも再確認し、道路2論点、医療2論点、
-  鉄道2論点を追加した。医療の候補1件は観測値の既知欠陥を検出して不採択。鉄道はJR・民鉄の旅客規模と
-  貨物利用を分離し、延べ輸送量と実人数、発送量とCO2削減量を混同しない注意書きを固定した。
-- **次**: 白書台帳に登録済みのテーマから2〜3件ずつ `/research-theme-catalog <theme-key>` を実行する。
-  NotebookLM は引用付き候補抽出だけに使い、公式HTTPS URLと実在routeを確認できた候補だけ
-  theme-designerが採択する。文部科学白書は公式source登録済みだがNotebookLM ID未登録なので、
-  別PCで `find-or-create` / `add-source` 後に台帳へ実IDを記録する。
-- **展開順**: (1) 登録済みNotebookのあるテーマ、(2) GSC流入のあるテーマ、(3) 残り。
-  1テーマ1〜3論点を上限とし、同じ問い・説明・リンク集合を横展開しない。
-- **計測**: 公開後56日で `theme_evidence` のtopic別クリック、遷移先、ページ回遊を確認する。
-  外部白書リンクは内部CTRへ混ぜない。効果判定前にGA4 dimension台帳を確認する。
-- **完了条件**: 適用可能な各ThemeCatalogが、公式sourceと1件以上の内部routeを持つ採択済み論点、
-  または「白書で県別に検証できる論点なし」の明示判定を持ち、catalog/type/test/docs gateが全て通る。
-- **停止条件**: NotebookLMのみの根拠、推測URL、inactive ranking、他テーマのchart key、内部route 0、
-  白書名を第四taxonomy/新規URLにする案は採択せず停止する。
-- **Claude Code Sonnet指示**: 「`THEME-EVIDENCE-LENS-ROLLOUT-01` の次テーマ1件だけを処理。
-  research-theme-catalogの実証ゲートに従い、公式資料とrouteを検証してからThemeCatalogへ反映。
-  validate:catalog、対象test、web type-checkを通し、カードの次テーマだけ更新。デプロイしない。」
 
 ### [ASP-CONTINUITY-01] afb の承認追跡と広告コード取得 (オーナーのログインが要る分)
 
@@ -358,6 +329,11 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   **production consumer は WP6 の `WrittenStatsMeta` 焼き込み時に接続** (R2 再生成を伴うため remote-gated)。
   **`sourceUnit`/`valueScale` の `WrittenStatsMeta` 焼き込み (取り込み時一回) と
   consumer 二重変換の縮小 ratchet は R2 再生成を伴うため残 (WP6・`MONEY-UNIT-SCALE-01` 依存)**。
+- **WP6 wave 1 (2026-08-26)**: `kpi-lf-current-balance`を旧APIとR2で48地域比較し、値・年・unit・
+  欠測の差分0を確認して`seriesRefs`へ移行した。QG2 parser付きの共通R2 readerを使い、直API fallbackはない。
+  生参照chart 78→77、request 241→240、typed metric ref 6→7。data-configs 669 test、対象web test、
+  両package型検査、catalog / 生成物 / 依存mirror gateはgreen。地方財政の本番routeはbespoke dashboardなので、
+  このwaveはcatalog依存の移行でありroute本体のreader置換とは数えない。年度集合が一致しないline候補は移行しなかった。
 - **依存**:
   - `MONEY-UNIT-SCALE-01`: `sourceUnit` / `valueScale` / 取り込みゲート / R2再生成を再利用し、同じ変換表を作らない。
   - `RANKING-VALUES-PARTITION-INTEGRITY-01`: `MetricRecipe` / shape gate / configHash監査を再利用する。
@@ -451,7 +427,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run validate:municipalities --workspace=@stats47/data-configs] [起票:2026-08-20]
 
 - **owner**: Claude Code Sonnet 5 high（1 session = 1 work package、writerは同時に1体）
-- **再開ポインタ**: `nextWorkPackage=WP7-remote-release` / `lastCompleted=WP6-local` (2026-08-24)。WPのgateを満たした場合だけ更新する。
+- **再開ポインタ**: `nextWorkPackage=WP8-measurement` / `lastCompleted=WP7-remote-release` (2026-08-26)。WPのgateを満たした場合だけ更新する。
   完了した作業の長文ログは残さず、変更path、検証、未検証、次の一手を3〜6行で追記する。
 - **WP1 完了 (2026-08-24)**: `packages/area/src/municipalities/` と
   `packages/data-configs/src/geo-scope/{types,municipality-catalog}.ts` にscope・entity policy・公開判断SSOTを追加した。
@@ -462,10 +438,10 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `elderly-population-ratio` は2020年1,717有効値。分母人口0の双葉町0%をvaluePolicyで欠測相当へ除外した。
 - **WP5 blocked**: 個別東京23特別区の観測値が現R2/masterに無いため地方財政はdraft。県theme一覧から旧city themeを除き、
   市区町村hubへ監査中表示と一時転送を置いた。推測値・行政区混入・0埋めは行わない。
-- **WP7 preflight**: remoteは両keyとも404。upload候補は`item.json` 490B sha256 `0b576fc2…fb08`、
-  `values.json` 182,591B sha256 `b4f763b3…da3d`。rollback prefixは`app/municipalities/ranking/elderly-population-ratio/`全削除。
-  `sync-snapshots` の `municipality-ranking` task、専用prefix push、公開後schema verifierへ接続済み。
-  次はowner承認後にremote R2 write、git push/PR/deployを一回で実行し、本番smokeと28日/56日計測を開始する。
+- **WP7 remote release完了 (2026-08-26)**: 専用R2の`item.json` / `values.json`と本番routeがHTTP 200。
+  `values.json`はschemaVersion 1、2020年度、1,717自治体（分母人口0の双葉町を除外）で、canonicalも
+  `/municipalities/ranking/elderly-population-ratio`に一致した。catalog監査は入力1,913 / 公開可能1,718 /
+  候補184 / 公開pilot 1でgreen。次は公開値やURLを変えず、28日/56日の専用prefix計測だけを行う。
   pilot公開日を2026-08-24とし、28日判定は2026-09-21、56日判定は2026-10-19。GSCの表示回数・クリック、
   GA4のlanding/engagement/市区町村導線eventをprefecture既存ページと混在させず専用URL prefixで比較する。
 - **WP0 完了 (2026-08-21)**: read-only 棚卸しを機械化した。
@@ -565,6 +541,36 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   round-tripとpage adapterの状態写像を検証し、stats-r2、page-components、area profile/databook、correlation、
   ranking itemなど公開routeへ届く優先readerをparser境界へ移行。reader契約inventoryも機械化した。
   対象69 test、packages 1,930 test、web 1,081 test、全workspace + scripts type-checkがgreen。次はQG3。
+- **QG3 checkpoint (2026-08-26)**: 同一fixtureのmetric / year / area / value / unit / provenanceを
+  ranking・theme・blog adapterで縦断照合し、10倍変異をRED、復元後25 test GREENで固定した。
+  known routeをstatus / canonical / heading / data要素で検証する公開route matrixと、375 / 768 / 1280pxの
+  responsive smokeを追加。初回実走でCPIの空unitとbespoke地方財政の機械属性欠落を検出・是正し、
+  公開8導線 + 5テーマ全9 chart type + 4幅の25 E2E、型検査、pre-commitはgreen。
+  no-data / source errorの専用表示など残りのQG3受入は継続する。
+- **QG4 admin slice (2026-08-27)**: PR CIのpackages testが`@stats47/*`だけを対象にし、activeな
+  `apps/admin` 16 files / 150 testsを一度も実行していなかった欠落を是正した。`test` jobでadmin unitを
+  blocking実行し、command削除・`continue-on-error`化・required集約からの切断を各mutationで検知する
+  workspace契約を追加。契約17件、admin 150件、型検査はgreen。
+- **QG4 build / media slice (2026-08-27)**: admin production buildとdesktop smoke 15件を独立required jobへ
+  接続し、build欠落・E2E soft-fail・required切断をmutationで固定した。Remotionは166 sourceの
+  critical bundlerとしてbundle buildをrequired並列jobへ追加し、GESは3 sourceのtooling-only generatorとして
+  PRではtype-check、外部実機生成はdeferredとregistryへ明記。親側実測はadmin build 10.72秒、E2E 15/15・19.1秒、
+  Remotion bundle 9.39秒、admin/media契約10/10、workspace契約25、workflow policy 64/0、checker wiring 96・new 0。
+  残りQG4は全source-bearing workspaceのrisk分類、test 0 / lint / build enforcement、CI p95集計。
+- **QG4 workspace matrix (2026-08-27)**: source-bearing 25 workspaceをactive 22 / tooling-only 3へ分類し、
+  type-check必須25、test必須19・none 6、build必須3・none 22、lint必須1・none 24をmanifestから自動突合する
+  0.10秒のblocking契約を追加した。親側で全量/mutation契約18/18、workspace契約25、workflow policy 64/0、
+  checker wiring 96・new 0を再確認。QG4の分類・配線残件は0、実CI p95は統合後のrun履歴で計測する。
+- **QG5 first slice (2026-08-27)**: shape gate、unit classifier、dependency collector、chart props validator、
+  R2 runtime parserの5モジュールについて、実測したlines / branches / functionsの個別floorを単一inventoryへ固定し、
+  PRのrequired `test` jobへ134 testのcoverage判定をblocking接続した。inventory欠落、推測floor、Vitest配線欠落、
+  soft-fail、required集約切断を8 mutation契約で検知する。追加CI時間は実測4.29秒、関連65 files / 751 tests、
+  契約43件、type-checkはgreen。残りQG5はcritical module拡張、web routeロジックのpure抽出、
+  `src/app`一括除外縮小、意味あるfixtureによるbranch coverage改善。
+- **QG5 recipe / value slice (2026-08-27)**: metric recipeとvalue verificationを同じinventoryへ追加し、
+  実測floorをrecipe 100 / 93.47 / 100、value 100 / 97.91 / 100（lines / branches / functions）に固定した。
+  7領域200 testsをPR blockingへ接続し、未分類IDとrecipe branch低下のRED、復元後GREENを確認。
+  data-configs全64 files / 718 tests、契約8件、type-check、pre-commitはgreen。CI増分は初回QG5比約1.1秒。
 - **監査ベースライン (2026-08-13、ローカル実測)**:
   - rootの`test:packages`は`vitest run --project '@stats47/*'`で、`apps/admin`のunit test
     **14 file / 136 test**はPR CI対象外。galleryにはPlaywright 6 specもあるがworkflowから呼ばれていない。
@@ -915,6 +921,27 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   分子・分母時点を是正した。疎なpartitionは実観測件数とcommentary件数を照合し、未観測県を
   47件へ水増ししない監査契約を追加（AI監査48 test green）。当日の月次上限内で生成を停止し、次回は
   `other-fresh-fish-consumption-expenditure`から再開する。
+- **2026-08-26 next 1**: `other-fresh-fish-consumption-expenditure`を2024年・円・47県の公開R2へ接地して生成。
+  長崎9,910円（1位）/ 高知3,652円（47位）を含む順位・県名・値・areaCode不一致0、機械監査
+  blocker 0 / warn 0。独立criticの初回REVISE（数値過多・反復・神奈川の誤認）を是正し、delta最終PASS。
+  R2公開は全データrefreshとの競合を避け、親工程で直列実行する。
+- **2026-08-27 next 2**: `game-console-consumption-expenditure`を2024年・円・47県の公開R2へ接地して生成。
+  静岡3,033円（1位）、8県0円（同率40位）を欠測へ変換せず全47県の解説へ保持し、構造不一致0、
+  機械監査blocker 0 / warn 0、AI監査48件、独立criticのdelta判定までgreen。R2公開は全データrefresh後に直列実行する。
+- **2026-08-27 next 3**: `manufacturing-establishments`を2024年度・事業所・47県の公開R2へ接地して生成。
+  大阪18,481（最大）/ 鳥取854（最小）、欠測・0値・同率0、全areaCode・県名・順位・値の不一致0。
+  機械監査blocker 0 / warn 0、AI監査48件、独立criticのREVISE 4点をdelta是正して最終PASS。
+- **2026-08-27 next 4**: `cod-roe-consumption-expenditure`を2024年・円・47県の公開R2へ接地して生成。
+  福岡4,870円（最大）/ 沖縄589円（最小）、欠測・0値・同率0、全areaCode・県名・順位・値の不一致0。
+  機械監査blocker 0 / warn 0、AI監査48件、独立criticのREVISEを全件delta是正して最終PASS。
+- **2026-08-27 next 5**: `library-lending-books`を2020年度・冊・47県の公開R2へ接地して生成。
+  東京85,113,851冊（最大）/ 秋田2,463,802冊（最小）、欠測・0値・同率0、全areaCode・県名・順位・値の
+  不一致0。機械監査blocker 0 / warn 0、AI監査48件、独立criticのfull / delta 2回を是正して最終PASS。
+- **2026-08-27 next 6–7**: `sole-proprietor-sales`（2025年・万円）と
+  `coffee-drink-consumption-expenditure`（2024年・円）を公開R2の47県へ接地して生成。欠測・0値なし、
+  同率順位と全areaCode・県名・順位・値を保持し、各機械監査blocker 0 / warn 0、AI監査48件、
+  独立critic full→外科修正→delta PASS。3件ともCIの権威ゲートを再通過し、R2公開・CDN purge・
+  outbox削除まで成功（runs `32989601036` / `32991476893` / `32991854174`、skip 0 / upload error 0）。
 - **完了条件**: 全active rankingを処理し、欠測・矛盾・未検証生成を0にする。R2 pushとCDN反映は別承認。
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
@@ -934,6 +961,12 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   data-refresh、blog自動/手動publish、週次監査へ同一gateを配線し、専用Issueの起票・復旧Close・artifact・
   最終job失敗をworkflow契約testで固定した。次はこの差分とSVGを承認付きで1回反映し、live全量greenと
   full data-refresh成功を確認する。
+- **2026-08-27 live再監査**: R2公開値をranking 2,167、theme参照299、blog 434、asset 1,088で再検査し、
+  findingは5件。前回refreshの派生生成が途中失敗したため、4 ranking
+  (`actual-income-worker-households-per-month` / `bank-loan-balance` / `cpi-change-rate-housing` /
+  `mobile-phone-bill-consumption-expenditure`) の`latestYear`が欠落し、前者を参照する`real-income` themeも
+  unusableになっている。既知集合だけを派生生成へ渡す修正とR2 readの30秒・3回retryはdevelopへ反映済み。
+  修正版のfull refresh後に同じ全量監査でfinding 0を確認するまで未完了とする。
 - **実行順**:
   1. 上記1 assetを正しいJSON/sourceから再生成し、themeの欠測4件（`manufacturing-sales-private` / `manufacturing-net-value-added-private` / `industrial-land-price` / `housing-floor-area`）と地域種別不一致1件を、R2再生成またはcatalog参照削除で解消する。
   2. 公開blog全記事、`ALL_THEMES`、`KNOWN_RANKING_KEYS`から期待集合を決定的に生成し、R2の存在、schema、row数、年、地域種別、参照assetをread-onlyで全量検査する。既存ファイルの列挙だけで期待集合を作らない。
@@ -953,8 +986,11 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   1,091 assetで `pork-consumption-expenditure/data/pork-expenditure-ranking.svg` だけが404。SVGは既存JSON/sourceから
   ローカル再生成済みで、公開gateもdata refresh / blog publish / 週次へ配線済み。R2全量pullのdry-runは
   `app/blog` 8,913 files（local差分8,526）を確認したが、read-only取得の承認前なので実pullしていない。
-- **次**: 欠落SVGの限定R2反映後に公開契約監査をgreenへ戻す。全量SVG品質監査は承認後の`app/blog` pullで
-  must-fixを確定し、小バッチで処理する。R2由来、算式、年、metric keyを復元できない図は推測で再生成しない。
+- **2026-08-27 生成物監査**: R2 `app/blog` 8,944 filesをローカルへ同期し、432記事・2,443 SVGを同一lintで
+  再走査した。構造error 98記事、dark mode非対応135記事を機械stateへ記録した。旧stateの98記事・141 SVG・error 0は母集団が
+  生成物全量を覆っておらず、完了証拠には使えない。公開参照asset契約とSVG内容品質は別gateとして維持する。
+- **次**: 構造error 98記事を優先し、小バッチで処理する。R2由来、算式、年、metric keyを復元できない図は
+  推測で再生成しない。公開参照asset契約と内容品質gateを各バッチ後に再実行する。
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
 - **正典**: `.claude/rules/blog-data-schema.md`
 
@@ -1084,6 +1120,10 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **次**: 上記差分をdevelop/mainへ反映し、data-refreshのfull runを実行する。成功後に
   `app/stats`の`generatedAt`が当月へ更新されていることと、city payloadに9,640を含む正当値が
   欠落せず反映されたことを実測する。
+- **2026-08-27 初回full rerun**: e-Stat batchは`ok=2089 / fail=1 / skip=55 / empty=0 / shape=0`
+  （`freshwater-clam-consumption-expenditure`の一時的fetch失敗1件）。14,003件のupload自体はerror 0だったが、
+  旧orphan item 38件をstrict parserへ渡したこととR2 read 10秒・1回のtimeoutで派生生成が失敗した。
+  既知公開keyだけを列挙し、readを30秒・3回retryする修正を追加済み。GitHub Actions復旧後に再実走する。
 - **完了条件**: data-refresh の full run (schedule または dispatch) が success で終わり、
   `app/stats` が当月分に更新されていることを実測できる。
 - **注意**: 2026-07-05 の失敗は**別原因** (sync-snapshots の correlation task が JS ヒープ

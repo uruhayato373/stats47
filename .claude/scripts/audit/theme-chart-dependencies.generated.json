@@ -1,6 +1,6 @@
 {
   "generatedFrom": "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
-  "totalRequests": 241,
+  "totalRequests": 240,
   "distinctRequests": 180,
   "requests": [
     {
@@ -660,8 +660,8 @@
         "cdCat01": "D2103"
       },
       "themeKey": "local-finance",
-      "componentKey": "kpi-lf-current-balance",
-      "componentType": "kpi-card"
+      "componentKey": "theme-lf-fiscal-ratios-trend",
+      "componentType": "line-chart"
     },
     {
       "key": "0000010104?cdCat01=D2111",

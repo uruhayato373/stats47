@@ -14,6 +14,7 @@ const CHECKER = path.join(ROOT, ".claude/scripts/lib/check-workspace-contract.cj
  * @param options.registered   root vitest.config.ts の projects に登録するパッケージ。省略時は全件
  * @param options.turbo        turbo.json の内容 (TURBO_MISSING_PASSTHROUGH_ENV 用)。
  *                             省略時は turbo.json を作らない = 検査対象外
+ * @param options.prUnitTest   PR unit test 契約と fixture workflow
  */
 function fixture(packages, options = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-workspace-contract-"));
@@ -39,6 +40,32 @@ function fixture(packages, options = {}) {
   fs.writeFileSync(path.join(root, "package-lock.json"), JSON.stringify({ lockfileVersion: 3, packages: lockPackages }));
   if (options.turbo !== undefined) {
     fs.writeFileSync(path.join(root, "turbo.json"), JSON.stringify(options.turbo));
+  }
+  if (options.prUnitTest !== undefined) {
+    const { path: workspacePath, job = "test", command, workflow } = options.prUnitTest;
+    fs.mkdirSync(path.join(root, ".claude/config"), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, ".claude/config/quality-gates.json"),
+      `${JSON.stringify({
+        version: 1,
+        workspaces: [{
+          id: path.basename(workspacePath),
+          path: workspacePath,
+          lifecycle: "active",
+          owner: "devops-runner",
+          evidence: `${workspacePath}/package.json`,
+          reviewBy: "2099-12-31",
+          prUnitTest: { job, command },
+        }],
+        gates: [],
+        exceptions: [],
+      })}\n`,
+    );
+    fs.mkdirSync(path.join(root, ".github/workflows"), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, ".github/workflows/pr-quality-check.yml"),
+      workflow ?? `name: quality\non:\n  pull_request:\njobs:\n  ${job}:\n    steps:\n      - name: workspace tests\n        run: ${command}\n        continue-on-error: false\n  quality-check:\n    needs: [${job}]\n    steps:\n      - run: echo ok\n`,
+    );
   }
   return { root, checker };
 }
@@ -171,6 +198,81 @@ test("root vitest.config.ts が無ければ検出する", (t) => {
     result.output.findings.map((f) => f.code),
     ["MISSING_VITEST_CONFIG"],
   );
+});
+
+// --- PR_UNIT_TEST_NOT_BLOCKING (QG4) ---
+// active app の unit test が package runner の外にある場合、PR workflow へ明示配線する。
+// commandの欠落・soft-fail化・集約jobからの切断を別々のmutationで固定する。
+
+test("registryに宣言したapp unit testがPRのblocking jobなら受理する", (t) => {
+  const item = fixture(
+    { "apps/admin": { name: "admin", scripts: { test: "vitest run" } } },
+    {
+      testFilesIn: ["apps/admin"],
+      prUnitTest: {
+        path: "apps/admin",
+        command: "npm run test --workspace=apps/admin",
+      },
+    },
+  );
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item);
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(result.output.findings, []);
+});
+
+test("registryのapp unit commandをworkflowから外すと検出する", (t) => {
+  const item = fixture(
+    { "apps/admin": { name: "admin", scripts: { test: "vitest run" } } },
+    {
+      testFilesIn: ["apps/admin"],
+      prUnitTest: {
+        path: "apps/admin",
+        command: "npm run test --workspace=apps/admin",
+        workflow: "name: quality\non:\n  pull_request:\njobs:\n  test:\n    steps:\n      - run: npm run test:packages\n  quality-check:\n    needs: [test]\n    steps:\n      - run: echo ok\n",
+      },
+    },
+  );
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item);
+  assert.equal(result.status, 1);
+  assert.ok(result.output.findings.some((finding) => finding.code === "PR_UNIT_TEST_NOT_BLOCKING"));
+});
+
+test("registryのapp unit commandをcontinue-on-errorにすると検出する", (t) => {
+  const item = fixture(
+    { "apps/admin": { name: "admin", scripts: { test: "vitest run" } } },
+    {
+      testFilesIn: ["apps/admin"],
+      prUnitTest: {
+        path: "apps/admin",
+        command: "npm run test --workspace=apps/admin",
+        workflow: "name: quality\non:\n  pull_request:\njobs:\n  test:\n    steps:\n      - run: npm run test --workspace=apps/admin\n        continue-on-error: true\n  quality-check:\n    needs: [test]\n    steps:\n      - run: echo ok\n",
+      },
+    },
+  );
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item);
+  assert.equal(result.status, 1);
+  assert.ok(result.output.findings.some((finding) => finding.code === "PR_UNIT_TEST_NOT_BLOCKING"));
+});
+
+test("app unit jobをrequired集約から外すと検出する", (t) => {
+  const item = fixture(
+    { "apps/admin": { name: "admin", scripts: { test: "vitest run" } } },
+    {
+      testFilesIn: ["apps/admin"],
+      prUnitTest: {
+        path: "apps/admin",
+        command: "npm run test --workspace=apps/admin",
+        workflow: "name: quality\non:\n  pull_request:\njobs:\n  test:\n    steps:\n      - run: npm run test --workspace=apps/admin\n  quality-check:\n    needs: [static-gates]\n    steps:\n      - run: echo ok\n",
+      },
+    },
+  );
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const result = run(item);
+  assert.equal(result.status, 1);
+  assert.ok(result.output.findings.some((finding) => finding.code === "PR_UNIT_TEST_JOB_NOT_REQUIRED"));
 });
 
 // --- TURBO_MISSING_PASSTHROUGH_ENV (2026-08-04 追加) ---

@@ -109,6 +109,27 @@ export const EVIDENCE_SOURCE_CATALOG = {
     sourceUrl:
       "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2712000.html",
   },
+  "jta-accommodation-survey": {
+    kind: "statistical-overview",
+    title: "宿泊旅行統計調査",
+    publisher: "観光庁",
+    sourceUrl:
+      "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+  },
+  "npa-crime-statistics": {
+    kind: "statistical-overview",
+    title: "犯罪統計",
+    publisher: "警察庁",
+    sourceUrl:
+      "https://www.npa.go.jp/publications/statistics/sousa/statistics.html",
+  },
+  "npa-traffic-accident-statistics": {
+    kind: "statistical-overview",
+    title: "交通事故発生状況",
+    publisher: "警察庁",
+    sourceUrl:
+      "https://www.npa.go.jp/publications/statistics/koutsuu/index_jiko.html",
+  },
   "mhlw-physician-workforce-plan": {
     kind: "report",
     title: "医師確保対策・医師確保計画",
@@ -129,6 +150,136 @@ export const EVIDENCE_SOURCE_CATALOG = {
     publisher: "厚生労働省",
     sourceUrl:
       "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/open_data_00020.html",
+  },
+  "mlit-port-statistics": {
+    kind: "statistical-overview",
+    title: "港湾関係統計データ",
+    publisher: "国土交通省",
+    sourceUrl: "https://www.mlit.go.jp/statistics/details/port_list.html",
+  },
+  "cao-aging-whitepaper-2025-households": {
+    kind: "whitepaper",
+    title: "令和7年版 高齢社会白書－家族と世帯",
+    publisher: "内閣府",
+    sourceUrl:
+      "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_1_3.html",
+    notebookName: "最新の白書",
+    notebookId: "2bf7f0dd-3935-49be-8cef-2d428c59eaa9",
+  },
+  "cao-aging-whitepaper-2025-housing": {
+    kind: "whitepaper",
+    title: "令和7年版 高齢社会白書－高齢期の生活環境",
+    publisher: "内閣府",
+    sourceUrl:
+      "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_2_4.html",
+    notebookName: "最新の白書",
+    notebookId: "2bf7f0dd-3935-49be-8cef-2d428c59eaa9",
+  },
+  "cao-aging-whitepaper-2025-regional-aging": {
+    kind: "whitepaper",
+    title: "令和7年版 高齢社会白書－地域別に見た高齢化",
+    publisher: "内閣府",
+    sourceUrl:
+      "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_1_4.html",
+    notebookName: "最新の白書",
+    notebookId: "2bf7f0dd-3935-49be-8cef-2d428c59eaa9",
+  },
+  "meti-monodzukuri-whitepaper-2026": {
+    kind: "whitepaper",
+    title: "2026年版ものづくり白書",
+    publisher: "経済産業省・厚生労働省・文部科学省",
+    sourceUrl:
+      "https://www.meti.go.jp/report/whitepaper/mono/2026/index.html",
+    notebookName: "最新の白書",
+    notebookId: "2bf7f0dd-3935-49be-8cef-2d428c59eaa9",
+  },
+  "jfa-fisheries-whitepaper-2025": {
+    kind: "whitepaper",
+    title: "令和7年度 水産白書",
+    publisher: "水産庁",
+    sourceUrl:
+      "https://www.jfa.maff.go.jp/j/kikaku/wpaper/R7/260605_1.html",
+  },
+  "mhlw-labor-economy-whitepaper-2025": {
+    kind: "whitepaper",
+    title: "令和7年版 労働経済の分析",
+    publisher: "厚生労働省",
+    sourceUrl:
+      "https://www.mhlw.go.jp/stf/wp/hakusyo/roudou/25/index.html",
+  },
+  "mhlw-wage-structure-survey": {
+    kind: "statistical-overview",
+    title: "賃金構造基本統計調査",
+    publisher: "厚生労働省",
+    sourceUrl: "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+  },
+  "stat-employment-status-survey-2022": {
+    kind: "statistical-overview",
+    title: "令和4年就業構造基本調査－調査の結果",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/shugyou/2022/index2.html",
+  },
+  "stat-census-2020-employment-status": {
+    kind: "statistical-overview",
+    title: "令和2年国勢調査－就業状態等基本集計",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+  },
+  "stat-economic-census-basic-2014": {
+    kind: "statistical-overview",
+    title: "平成26年経済センサス－基礎調査",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/e-census/2014/kekka.html",
+  },
+  "stat-census-2020-foreign-population": {
+    kind: "statistical-overview",
+    title: "令和2年国勢調査－人口等基本集計",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+  },
+  "stat-population-estimates-2024": {
+    kind: "statistical-overview",
+    title: "人口推計（2024年10月1日現在）",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/jinsui/2024np/index.html",
+  },
+  "mhlw-vital-statistics-2024": {
+    kind: "statistical-overview",
+    title: "令和6年（2024）人口動態統計（確定数）の概況",
+    publisher: "厚生労働省",
+    sourceUrl: "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/kakutei24/",
+  },
+  "mic-local-finance-whitepaper-2025": {
+    kind: "whitepaper",
+    title: "令和7年版 地方財政白書（令和5年度決算）",
+    publisher: "総務省",
+    sourceUrl:
+      "https://www.soumu.go.jp/menu_seisaku/hakusyo/chihou/r07data/2025data/r07czb00-00.html",
+  },
+  "mic-fiscal-soundness-ratios-fy2023": {
+    kind: "report",
+    title: "令和5年度決算に基づく健全化判断比率・資金不足比率の概要（確報）",
+    publisher: "総務省",
+    sourceUrl:
+      "https://www.soumu.go.jp/menu_news/s-news/01zaisei07_02000409.html",
+  },
+  "stat-housing-land-survey-2023": {
+    kind: "statistical-overview",
+    title: "令和5年住宅・土地統計調査－調査の結果",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/jyutaku/2023/tyousake.html",
+  },
+  "stat-family-income-expenditure-survey-2024": {
+    kind: "statistical-overview",
+    title: "家計調査年報（家計収支編）2024年",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/kakei/2024np/index.html",
+  },
+  "stat-retail-price-survey-structural": {
+    kind: "statistical-overview",
+    title: "小売物価統計調査（構造編）－調査結果",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
   },
 } as const satisfies Record<string, EvidenceSourceDefinition>;
 

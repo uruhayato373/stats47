@@ -19,9 +19,10 @@ vi.mock("@stats47/logger/server", () => ({
 }));
 
 const fetchFromR2AsJson = vi.fn();
+const listFromR2 = vi.fn(async (_prefix?: string): Promise<string[]> => []);
 vi.mock("@stats47/r2-storage/server", () => ({
   fetchFromR2AsJson: (...args: unknown[]) => fetchFromR2AsJson(...args),
-  listFromR2: vi.fn(async () => []),
+  listFromR2: (prefix?: string) => listFromR2(prefix),
   shouldSkipRemoteR2Read: () => true,
 }));
 
@@ -35,6 +36,7 @@ import {
   readActiveRankingKeysFromR2,
   readFeaturedRankingItemsFromR2,
   readFirstKeyByTagFromR2,
+  listRankingItemsWithTagsFromR2,
   readRankingItemsByAreaTypeFromR2,
   readRankingItemsByCategoryFromR2,
   readRankingItemsByGroupKeyFromR2,
@@ -77,8 +79,36 @@ function snapshot(items: ReturnType<typeof item>[]) {
 
 beforeEach(() => {
   fetchFromR2AsJson.mockReset();
+  listFromR2.mockReset();
+  listFromR2.mockResolvedValue([]);
   // どのキーパスを読まれても同じ 2 行を返す (all.json / category / survey / featured 共通)
   fetchFromR2AsJson.mockResolvedValue(snapshot(ROWS));
+});
+
+describe("per-key item 一覧は公開rankingの正典だけを読む", () => {
+  it("R2に残る旧itemをstrict parserへ渡さない", async () => {
+    const knownPath = `app/ranking/${LIVE_KEY}/item.json`;
+    const orphanPath = "app/ranking/legacy-orphan/item.json";
+    listFromR2.mockResolvedValue([knownPath, orphanPath]);
+    fetchFromR2AsJson.mockImplementation(async (key: string) => {
+      if (key === orphanPath) {
+        throw new Error("旧itemは読まれてはいけない");
+      }
+      return {
+        generatedAt: "2026-08-27T00:00:00Z",
+        item: item(LIVE_KEY),
+      };
+    });
+
+    const result = await listRankingItemsWithTagsFromR2();
+
+    expect(result.success).toBe(true);
+    expect(result.success && result.data.map(({ rankingKey }) => rankingKey)).toEqual([
+      LIVE_KEY,
+    ]);
+    expect(fetchFromR2AsJson).toHaveBeenCalledTimes(1);
+    expect(fetchFromR2AsJson).toHaveBeenCalledWith(knownPath);
+  });
 });
 
 /** 戻り値の形が関数ごとに違うので rankingKey だけ取り出す */

@@ -53,6 +53,11 @@ export const MIGRATED_LINE_SERIES_REF_COMPONENT_KEYS: ReadonlySet<string> = new 
   "theme-economy-income-wage",
 ]);
 
+/** KPI card のうち R2 `StatSeriesRef` へ移行済みの component key。 */
+export const MIGRATED_KPI_SERIES_REF_COMPONENT_KEYS: ReadonlySet<string> = new Set([
+  "kpi-lf-current-balance",
+]);
+
 export type EstatParams = Record<string, string>;
 
 export interface LineChartComponentProps {
@@ -191,10 +196,15 @@ export function validateMigratedSeriesRefContract(
   componentKey: string,
   props: Record<string, unknown>,
 ): string[] {
-  if (!MIGRATED_LINE_SERIES_REF_COMPONENT_KEYS.has(componentKey)) return [];
+  if (
+    !MIGRATED_LINE_SERIES_REF_COMPONENT_KEYS.has(componentKey) &&
+    !MIGRATED_KPI_SERIES_REF_COMPONENT_KEYS.has(componentKey)
+  ) {
+    return [];
+  }
   return parseStatSeriesRefs(props.seriesRefs)
     ? []
-    : ["移行済み line-chart は生の estatParams ではなく seriesRefs を使う"];
+    : ["移行済み chart は生の estatParams ではなく seriesRefs を使う"];
 }
 
 /** {code,label} を必須とする配列 (composition segments)。 */
@@ -359,16 +369,28 @@ export function validateChartProps(
       if (props.year !== undefined) need(nonEmptyString(props.year), `${componentType}: year は空でない string`);
       break;
     case "kpi-card":
-      knownKeys = ["estatParams", "unit"];
-      // データは estatParams か rankingLink 由来。estatParams があれば形を検証、無くても可 (ranking 駆動)。
-      if (props.estatParams !== undefined) {
+      {
+        knownKeys = ["estatParams", "seriesRefs", "unit"];
+        // データは estatParams / seriesRefs / rankingLink のいずれか。ranking 駆動は props 無しでも可。
+        const refs = parseStatSeriesRefs(props.seriesRefs);
+        if (props.estatParams !== undefined) {
+          need(
+            isEstatParams(props.estatParams) || isEstatParamsList(props.estatParams),
+            "kpi-card: estatParams は object か非空配列",
+          );
+        }
+        if (props.seriesRefs !== undefined) {
+          need(refs?.length === 1, "kpi-card: seriesRefs は登録済み metricKey 1件の配列");
+        }
         need(
-          isEstatParams(props.estatParams) || isEstatParamsList(props.estatParams),
-          "kpi-card: estatParams は object か非空配列",
+          !(props.estatParams !== undefined && refs !== null),
+          "kpi-card: seriesRefs と estatParams は同時指定できない",
         );
+        if (props.unit !== undefined) {
+          need(nonEmptyString(props.unit), "kpi-card: unit は空でない string");
+        }
+        break;
       }
-      if (props.unit !== undefined) need(nonEmptyString(props.unit), "kpi-card: unit は空でない string");
-      break;
     case "markdown-section":
       knownKeys = ["markdown", "displayMode", "subtitle", "sources"];
       need(nonEmptyString(props.markdown), "markdown-section: markdown (本文) が必要");

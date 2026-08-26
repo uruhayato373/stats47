@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T13:17:28.478Z",
+  "updatedAt": "2026-08-26T16:29:50.245Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -1384,6 +1384,43 @@
       },
       "reclassifiedFrom": [],
       "completedAt": null
+    },
+    "THEME-EVIDENCE-LENS-ROLLOUT-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-26T16:29:50.245Z",
+          "runId": null,
+          "model": "gpt-5.6-sol",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm test --workspace=@stats47/data-configs -- --run",
+              "npm run validate:catalog --workspace=@stats47/data-configs",
+              "npm run generate:catalog --workspace=@stats47/data-configs -- --check",
+              "npm run type-check --workspace=@stats47/data-configs",
+              "npm run type-check --workspace=apps/web"
+            ],
+            "pass": true
+          },
+          "evidence": "全20 ThemeCatalogに公式一次資料とactive内部routeを持つevidenceTopicsを整備。未設定0、64 files/717 tests、catalog error0、生成物最新、data-configs/web型検査green。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-26T16:29:50.245Z"
     }
   }
 }

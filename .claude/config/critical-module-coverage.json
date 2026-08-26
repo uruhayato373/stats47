@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "description": "Measured module floors for critical pure contracts. Values are the V8 coverage percentages observed at measuredAt; PR coverage may improve but must not fall below them.",
+  "modules": [
+    {
+      "id": "shape-gate",
+      "workspace": "packages/data-configs",
+      "module": "src/shape-gate.ts",
+      "tests": ["src/__tests__/shape-gate.test.ts"],
+      "floor": { "lines": 98.29, "branches": 92.52, "functions": 91.3 },
+      "measuredAt": "431afed6f87ded35d974c03a603744dafaa546a3"
+    },
+    {
+      "id": "unit-classifier",
+      "workspace": "packages/data-configs",
+      "module": "src/unit/unit-comparability.ts",
+      "tests": ["src/unit/__tests__/unit-comparability.test.ts"],
+      "floor": { "lines": 100, "branches": 96.77, "functions": 100 },
+      "measuredAt": "431afed6f87ded35d974c03a603744dafaa546a3"
+    },
+    {
+      "id": "dependency-collector",
+      "workspace": "packages/data-configs",
+      "module": "src/theme-catalog/chart-dependencies.ts",
+      "tests": ["src/theme-catalog/__tests__/chart-dependencies.test.ts"],
+      "floor": { "lines": 100, "branches": 80.59, "functions": 100 },
+      "measuredAt": "431afed6f87ded35d974c03a603744dafaa546a3"
+    },
+    {
+      "id": "chart-props-validator",
+      "workspace": "packages/data-configs",
+      "module": "src/theme-catalog/stat-series-ref.ts",
+      "tests": ["src/theme-catalog/__tests__/stat-series-ref.test.ts"],
+      "floor": { "lines": 86.86, "branches": 74.47, "functions": 85.18 },
+      "measuredAt": "431afed6f87ded35d974c03a603744dafaa546a3"
+    },
+    {
+      "id": "r2-runtime-parser",
+      "workspace": "packages/r2-storage",
+      "module": "src/lib/operations/snapshot-reader.ts",
+      "tests": ["src/lib/operations/__tests__/snapshot-reader.test.ts"],
+      "floor": { "lines": 89.39, "branches": 71.73, "functions": 87.5 },
+      "measuredAt": "431afed6f87ded35d974c03a603744dafaa546a3"
+    },
+    {
+      "id": "metric-recipe",
+      "workspace": "packages/data-configs",
+      "module": "src/recipe.ts",
+      "tests": ["src/__tests__/recipe.test.ts"],
+      "floor": { "lines": 100, "branches": 93.47, "functions": 100 },
+      "measuredAt": "69c9521c34e79e86516871c9e0a2fd19059afba8"
+    },
+    {
+      "id": "value-verification",
+      "workspace": "packages/data-configs",
+      "module": "src/value-verification.ts",
+      "tests": ["src/__tests__/value-verification.test.ts"],
+      "floor": { "lines": 100, "branches": 97.91, "functions": 100 },
+      "measuredAt": "69c9521c34e79e86516871c9e0a2fd19059afba8"
+    }
+  ]
+}

@@ -232,6 +232,38 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "sortOrder": 40
     },
 ],
+  evidenceTopics: [
+    {
+      key: "job-separation-and-change",
+      lensKey: "mobility",
+      title: "離職・転職・就業異動の違い",
+      question: "離職、転職、新規就業を分けると、地域の就業異動はどう見えるか。",
+      summary:
+        "2022年就業構造基本調査の1年前との状態変化を読む。離職率は継続就業者・転職者・離職者の合計、転職率は現在の有業者、就業異動率は15歳以上人口が分母で互いに異なるため、率の大小をそのまま差し引かない。",
+      sourceKeys: ["stat-employment-status-survey-2022"],
+      relatedRankingKeys: [
+        "turnover-rate",
+        "job-change-rate",
+        "employment-mobility-rate",
+      ],
+      relatedChartKeys: [
+        "labor-mobility-turnover-vs-jobchange",
+        "theme-lm-employment-mobility-trend",
+      ],
+      relatedThemeKeys: ["labor-wages", "local-economy"],
+    },
+    {
+      key: "telework-participation",
+      lensKey: "participation",
+      title: "テレワーク実施の地域差",
+      question: "有業者のうちテレワークを実施した人の割合には、どのような地域差があるか。",
+      summary:
+        "2022年の有業者を分母に、テレワークを実施した人の割合を比べる単年の構造調査である。産業・職業構成の違いを含むため、地域差を通信環境や制度の効果だけで説明せず、時系列変化とも解釈しない。",
+      sourceKeys: ["stat-employment-status-survey-2022"],
+      relatedRankingKeys: ["telework-rate"],
+      relatedThemeKeys: ["labor-wages", "local-economy"],
+    },
+  ],
   "keywords": [
     "離職率",
     "転職率",

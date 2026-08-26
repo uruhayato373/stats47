@@ -15,52 +15,53 @@ type CpiHeatmapResult = Extract<NonNullThemeChartResult, { type: "cpi-heatmap" }
 type PyramidResult = Extract<NonNullThemeChartResult, { type: "pyramid" }>;
 type CompositionResult = Extract<NonNullThemeChartResult, { type: "composition" }>;
 
-const D3MixedChart = dynamic(
-  () => import("@stats47/visualization/d3/MixedChart").then((mod) => mod.MixedChart),
-  { ssr: false, loading: () => <ChartLoading height={200} /> },
-);
+const D3MixedChart = dynamic(() => import("@stats47/visualization/d3/MixedChart").then((mod) => mod.MixedChart), {
+  ssr: false,
+  loading: () => <ChartLoading height={200} />,
+});
 
-const DonutChart = dynamic(
-  () => import("@stats47/visualization/d3/DonutChart").then((mod) => mod.DonutChart),
-  { ssr: false, loading: () => <ChartLoading height={200} /> },
-);
+const DonutChart = dynamic(() => import("@stats47/visualization/d3/DonutChart").then((mod) => mod.DonutChart), {
+  ssr: false,
+  loading: () => <ChartLoading height={200} />,
+});
 
 const HorizontalDivergingBarChart = dynamic(
   () => import("@stats47/visualization/d3/HorizontalDivergingBarChart").then((mod) => mod.HorizontalDivergingBarChart),
-  { ssr: false, loading: () => <ChartLoading height={250} /> },
+  { ssr: false, loading: () => <ChartLoading height={250} /> }
 );
 
 const CategoryHeatmap = dynamic(
   () => import("@stats47/visualization/d3/CategoryHeatmap").then((mod) => mod.CategoryHeatmap),
-  { ssr: false, loading: () => <ChartLoading height={280} /> },
+  { ssr: false, loading: () => <ChartLoading height={280} /> }
 );
 
 const LineChartClient = dynamic(
-  () => import("@/components/stat-charts/components/charts/LineChart/LineChartClient").then((mod) => mod.LineChartClient),
-  { ssr: false, loading: () => <ChartLoading height={250} /> },
+  () =>
+    import("@/components/stat-charts/components/charts/LineChart/LineChartClient").then((mod) => mod.LineChartClient),
+  { ssr: false, loading: () => <ChartLoading height={250} /> }
 );
 
 const CompositionChartClient = dynamic(
-  () => import("@/components/stat-charts/components/charts/CompositionChart/CompositionChartClient").then((mod) => mod.CompositionChartClient),
-  { ssr: false, loading: () => <ChartLoading height={220} /> },
+  () =>
+    import("@/components/stat-charts/components/charts/CompositionChart/CompositionChartClient").then(
+      (mod) => mod.CompositionChartClient
+    ),
+  { ssr: false, loading: () => <ChartLoading height={220} /> }
 );
 
 const PyramidChartClient = dynamic(
-  () => import("@/components/stat-charts/components/charts/PyramidChart/PyramidChartClient").then((mod) => mod.PyramidChartClient),
-  { ssr: false, loading: () => <ChartLoading height={400} /> },
+  () =>
+    import("@/components/stat-charts/components/charts/PyramidChart/PyramidChartClient").then(
+      (mod) => mod.PyramidChartClient
+    ),
+  { ssr: false, loading: () => <ChartLoading height={400} /> }
 );
 
 interface ThemeChartResultRendererProps {
   chartResult: ThemeChartResult;
 }
 
-export function ThemeChartResultRenderer({
-  chartResult,
-}: ThemeChartResultRendererProps) {
-  if (!chartResult) {
-    return <ChartEmptyState message="チャートデータがありません" />;
-  }
-
+export function ThemeChartResultRenderer({ chartResult }: ThemeChartResultRendererProps) {
   switch (chartResult.type) {
     case "line":
       return <LineResultChart result={chartResult} />;
@@ -117,7 +118,7 @@ function DonutResultChart({ result }: { result: DonutResult }) {
     return <ChartEmptyState message="構成データがありません" />;
   }
 
-  const total = data.reduce((sum, d) => sum + d.value, 0);
+  const total = data.reduce((sum: number, d: { value: number }) => sum + d.value, 0);
   const topItem = data[0];
   const topPct = total > 0 ? ((topItem.value / total) * 100).toFixed(1) : "0";
 
@@ -125,13 +126,13 @@ function DonutResultChart({ result }: { result: DonutResult }) {
     <>
       {/* ★同上。DonutChart は正方形なので width/height で上限 200px に絞る */}
       <DonutChart
-        data={data.map((d) => ({ ...d }))}
+        data={data.map((d: { name: string; value: number; color: string }) => ({ ...d }))}
         centerText={`${topPct}%`}
         width={200}
         height={200}
       />
       <div className="mt-2 flex flex-wrap justify-center gap-x-3 gap-y-1">
-        {data.slice(0, 5).map((d) => (
+        {data.slice(0, 5).map((d: { name: string; value: number; color: string }) => (
           <div key={d.name} className="flex items-center gap-1 text-[10px] text-muted-foreground">
             <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: d.color }} />
             {d.name} {total > 0 ? ((d.value / total) * 100).toFixed(1) : 0}%
@@ -151,13 +152,11 @@ function CpiProfileResultChart({ result }: { result: CpiProfileResult }) {
   return (
     <>
       <HorizontalDivergingBarChart
-        data={data.map((d) => ({ label: d.label, value: d.value }))}
+        data={data.map((d: { label: string; value: number }) => ({ label: d.label, value: d.value }))}
         baseline={100}
         height={Math.max(250, data.length * 30 + 40)}
       />
-      <p className="mt-1 text-[10px] text-muted-foreground">
-        全国平均=100
-      </p>
+      <p className="mt-1 text-[10px] text-muted-foreground">全国平均=100</p>
     </>
   );
 }
@@ -171,9 +170,7 @@ function CpiHeatmapResultChart({ result }: { result: CpiHeatmapResult }) {
   return (
     <>
       <CategoryHeatmap data={data} baseline={100} height={300} />
-      <p className="mt-1 text-[10px] text-muted-foreground">
-        青=全国平均より高い / オレンジ=低い（全国平均=100）
-      </p>
+      <p className="mt-1 text-[10px] text-muted-foreground">青=全国平均より高い / オレンジ=低い（全国平均=100）</p>
     </>
   );
 }

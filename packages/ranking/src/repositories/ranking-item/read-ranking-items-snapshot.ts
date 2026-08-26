@@ -221,14 +221,15 @@ export async function readRankingItemByKeyFromR2(
 }
 
 /**
- * 全 ranking-item を R2 の per-key item.json (`app/ranking/<key>/item.json`) から走査して返す。
+ * 公開中の都道府県 ranking-item を R2 の per-key item.json から走査して返す。
  * 完全DBレス (docs/01_技術設計/19): `listRankingItemsWithTags` の R2 代替。
+ * 列挙の正典は `KNOWN_RANKING_KEYS`。R2には退役・city/port専用の孤立itemが残り得るため、
+ * list結果だけを母集団にすると公開契約外の旧schema 1件で全一覧が停止する。
  * item.json の `.item` は tags まで含む完全な RankingItemWithTags なのでそのまま使える。
  * 旧来の list 系 R2 リーダはモノリス `app/ranking-items/all.json` を読むが、これは廃止予定 (現在欠落)
  * のため、per-key ファイル群を直接イテレートする。
  *
- * 注: build スクリプトで使う場合、`listFromR2`/`fetchFromR2AsJson` はローカル FS (`.local/r2`) を
- * 使うため NODE_ENV=development で実行すること (S3 トークン廃止のため scripts 経路は cloud 不可)。
+ * 非prefecture一覧はこの関数の対象外。city/portは専用readerを使う。
  */
 export async function listRankingItemsWithTagsFromR2(options?: {
   areaType?: AreaType;
@@ -257,30 +258,30 @@ export async function listRankingItemsWithTagsFromR2(options?: {
 }
 
 /**
- * `app/ranking/<key>/item.json` キーを列挙する。
- *  1. R2 list (SSD ローカル FS / S3 認証がある環境)
- *  2. 不可なら committed `KNOWN_RANKING_KEYS` から列挙 (公開URL専用の SSD/認証なし環境)
- *
- * KNOWN_RANKING_KEYS は prefecture & active の SSOT。list 不可環境では
- * prefecture 以外を列挙できないため、その場合は明示的にエラーにする (silent な欠落を防ぐ)。
+ * `KNOWN_RANKING_KEYS` とR2 listの積集合を返す。list不可時も同じgit正典へfallbackする。
+ * R2に残る旧itemをstrict parserへ渡さず、同時にknown keyの欠落をfallbackで隠さない。
  */
 async function enumerateRankingItemKeys(areaType?: AreaType): Promise<string[]> {
+  if (areaType && areaType !== "prefecture") {
+    throw new Error(
+      `areaType=${areaType} の ranking item 一覧はこのリーダーの対象外です ` +
+        `(公開 /ranking の正典は prefecture の KNOWN_RANKING_KEYS)`,
+    );
+  }
+
+  const knownItemKeys = new Set(
+    [...KNOWN_RANKING_KEYS].map((key) => `app/ranking/${key}/item.json`),
+  );
   try {
     const allKeys = await listFromR2("app/ranking/");
     const itemKeys = allKeys.filter((k) =>
-      /^app\/ranking\/[^/]+\/item\.json$/.test(k),
+      /^app\/ranking\/[^/]+\/item\.json$/.test(k) && knownItemKeys.has(k),
     );
     if (itemKeys.length > 0) return itemKeys;
   } catch {
     // R2 list 不可 (公開URL専用環境) → git 列挙フォールバックへ
   }
 
-  if (areaType && areaType !== "prefecture") {
-    throw new Error(
-      `R2 list 不可環境では areaType=${areaType} の ranking item を列挙できません ` +
-        `(KNOWN_RANKING_KEYS は prefecture のみ。SSD 接続 or S3 認証が必要)`,
-    );
-  }
   return [...KNOWN_RANKING_KEYS].map((key) => `app/ranking/${key}/item.json`);
 }
 

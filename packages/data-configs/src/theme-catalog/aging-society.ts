@@ -604,6 +604,36 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "sortOrder": 60
     }
   ],
+  evidenceTopics: [
+    {
+      key: "regional-aging-composition",
+      lensKey: "composition",
+      title: "地域別の高齢化と年齢構成",
+      question:
+        "65歳以上人口割合と年齢3区分の構成には、地域ごとにどのような差があるか",
+      summary:
+        "高齢化率は65歳以上人口を総人口で割った割合で、65歳以上人口の絶対数ではありません。年少・生産年齢・老年人口の構成と合わせ、分子と分母の変化を分けて読みます。",
+      sourceKeys: ["cao-aging-whitepaper-2025-regional-aging"],
+      relatedRankingKeys: ["ratio-65-plus"],
+      relatedChartKeys: ["theme-age-composition"],
+    },
+    {
+      key: "elderly-household-composition",
+      lensKey: "composition",
+      title: "高齢者が暮らす世帯の構成",
+      question:
+        "高齢者のいる世帯、単独世帯、高齢夫婦のみの世帯には、地域ごとにどのような差があるか",
+      summary:
+        "関連ランキングの3指標は、それぞれ該当する世帯数を一般世帯数で割った割合です。高齢者のいる世帯だけを分母にした構成比ではないため、3指標を足して100％になるとは限りません。",
+      sourceKeys: ["cao-aging-whitepaper-2025-households"],
+      relatedRankingKeys: [
+        "household-ratio-with-65plus",
+        "single-person-household-old-population-ratio",
+        "elderly-couple-only-household-ratio",
+      ],
+      relatedChartKeys: ["cmp-pop-elderly-household"],
+    },
+  ],
   "keywords": [
     "少子高齢化",
     "高齢化率",

@@ -365,6 +365,50 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "sortOrder": 120
     }
   ],
+  "evidenceTopics": [
+    {
+      "key": "natural-population-change",
+      "lensKey": "outcomes",
+      "title": "出生と死亡から見る自然増減",
+      "question": "出生と死亡の差は、地域の自然増減にどのように表れているか。",
+      "summary": "人口動態統計の出生・死亡と自然増減率を結び付けます。粗出生率・粗死亡率は人口規模で標準化した率であり、出生数・死亡数そのものとは区別して読みます。",
+      "sourceKeys": [
+        "mhlw-vital-statistics-2024"
+      ],
+      "relatedRankingKeys": [
+        "natural-increase-rate",
+        "crude-birth-rate",
+        "crude-death-rate"
+      ],
+      "relatedChartKeys": [
+        "birth-death-count-trend"
+      ],
+      "relatedThemeKeys": [
+        "aging-society"
+      ]
+    },
+    {
+      "key": "age-structure-balance",
+      "lensKey": "composition",
+      "title": "年少人口と高齢人口の構成",
+      "question": "年少人口と65歳以上人口の構成には、どのような地域差があるか。",
+      "summary": "人口推計の年齢3区分を、総人口に占める構成比として読みます。割合の差は人口規模の差を示さず、将来人口の予測値でもありません。",
+      "sourceKeys": [
+        "stat-population-estimates-2024"
+      ],
+      "relatedRankingKeys": [
+        "young-population-ratio",
+        "ratio-65-plus"
+      ],
+      "relatedChartKeys": [
+        "theme-age-composition",
+        "theme-population-pyramid"
+      ],
+      "relatedThemeKeys": [
+        "aging-society"
+      ]
+    }
+  ],
   "keywords": [
     "人口動態",
     "人口増減率",

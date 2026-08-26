@@ -2,11 +2,12 @@
 
 import { useEffect, useState, useTransition } from "react";
 
+import { ChartErrorState } from "@/components/charts/ChartState";
 import type { PageComponent } from "@/components/stat-charts";
 
 import { ChartEmptyState, ChartLoading } from "./ChartState";
 import { MarkdownSectionRenderer } from "./MarkdownSectionRenderer";
-import { loadThemeChartResult, type ThemeChartResult } from "./theme-chart-result";
+import { loadThemeChartResult, type ThemeChartLoadResult } from "./theme-chart-result";
 import { ThemeChartResultRenderer } from "./ThemeChartResultRenderer";
 
 import type { MarkdownSectionComponentProps } from "../types";
@@ -24,26 +25,26 @@ interface Props {
  * 実際のチャート描画は ThemeChartResultRenderer に委譲する。
  */
 export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
-  const [chartResult, setChartResult] = useState<ThemeChartResult | undefined>(undefined);
+  const [loadResult, setLoadResult] = useState<ThemeChartLoadResult | undefined>(undefined);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     if (chart.componentType === "markdown-section") return;
 
     let cancelled = false;
-    setChartResult(undefined);
+    setLoadResult(undefined);
 
     startTransition(async () => {
       const result = await loadThemeChartResult(chart, prefCode);
       if (!cancelled) {
-        setChartResult(result);
+        setLoadResult(result);
       }
     });
 
     return () => {
       cancelled = true;
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- chart object reference changes on every render; key/type/area identify the fetch
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- chart object reference changes on every render; key/type/area identify the fetch
   }, [chart.componentKey, chart.componentType, prefCode]);
 
   if (chart.componentType === "markdown-section") {
@@ -53,24 +54,72 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
     }
 
     return (
-      <MarkdownSectionRenderer
-        title={chart.title}
-        props={props}
-        fallbackSourceName={chart.sourceName}
-      />
+      <div
+        data-theme-component-key={chart.componentKey}
+        data-theme-component-type="markdown-section"
+        data-data-state="ready"
+      >
+        <MarkdownSectionRenderer title={chart.title} props={props} fallbackSourceName={chart.sourceName} />
+      </div>
     );
   }
 
-  if (isPending || chartResult === undefined) {
-    return <ChartLoading height={200} />;
+  if (isPending || loadResult === undefined) {
+    return (
+      <div
+        data-theme-chart="true"
+        data-theme-component-key={chart.componentKey}
+        data-theme-component-type={chart.componentType}
+        data-data-state="loading"
+      >
+        <ChartLoading height={200} />
+      </div>
+    );
   }
 
-  return <ThemeChartResultRenderer chartResult={chartResult} />;
+  if (loadResult.state === "source-unavailable") {
+    return (
+      <div
+        data-theme-chart="true"
+        data-theme-component-key={chart.componentKey}
+        data-theme-component-type={chart.componentType}
+        data-data-state="source-unavailable"
+      >
+        <ChartErrorState message="データソースからチャートを取得できません" height={200} />
+      </div>
+    );
+  }
+
+  if (loadResult.state === "no-data") {
+    return (
+      <div
+        data-theme-chart="true"
+        data-theme-component-key={chart.componentKey}
+        data-theme-component-type={chart.componentType}
+        data-data-state="no-data"
+      >
+        <ChartEmptyState message="チャートデータがありません" />
+      </div>
+    );
+  }
+
+  const { result } = loadResult;
+  return (
+    <div
+      data-theme-chart="true"
+      data-theme-component-key={chart.componentKey}
+      data-theme-component-type={chart.componentType}
+      data-data-state="ready"
+      data-unit={result.contract.unit}
+      data-year={result.contract.year}
+      data-series-count={result.contract.seriesCount}
+    >
+      <ThemeChartResultRenderer chartResult={result} />
+    </div>
+  );
 }
 
-function parseMarkdownSectionComponentProps(
-  value: Record<string, unknown>,
-): MarkdownSectionComponentProps | null {
+function parseMarkdownSectionComponentProps(value: Record<string, unknown>): MarkdownSectionComponentProps | null {
   const subtitle = typeof value.subtitle === "string" ? value.subtitle : undefined;
   const sources = parseMarkdownSources(value.sources);
 
@@ -91,9 +140,7 @@ function parseMarkdownSectionComponentProps(
   };
 }
 
-function parseFaqItems(
-  value: unknown,
-): Array<{ question: string; answer: string }> | null {
+function parseFaqItems(value: unknown): Array<{ question: string; answer: string }> | null {
   if (!Array.isArray(value) || value.length === 0) return null;
   const items = value.map((item) => {
     if (typeof item !== "object" || item === null || Array.isArray(item)) return null;
@@ -108,14 +155,10 @@ function parseFaqItems(
     }
     return { question: candidate.question, answer: candidate.answer };
   });
-  return items.every((item) => item !== null)
-    ? (items as Array<{ question: string; answer: string }>)
-    : null;
+  return items.every((item) => item !== null) ? (items as Array<{ question: string; answer: string }>) : null;
 }
 
-function parseMarkdownSources(
-  value: unknown,
-): MarkdownSectionComponentProps["sources"] {
+function parseMarkdownSources(value: unknown): MarkdownSectionComponentProps["sources"] {
   if (!Array.isArray(value)) return undefined;
 
   const sources = value.map((item) => {
@@ -128,7 +171,5 @@ function parseMarkdownSources(
     };
   });
 
-  return sources.every((source) => source !== null)
-    ? (sources as MarkdownSectionComponentProps["sources"])
-    : undefined;
+  return sources.every((source) => source !== null) ? (sources as MarkdownSectionComponentProps["sources"]) : undefined;
 }

@@ -1,5 +1,13 @@
 import { defineConfig } from "vitest/config";
 
+import criticalCoverage from "../../.claude/config/critical-module-coverage.json";
+
+const criticalThresholds = Object.fromEntries(
+  criticalCoverage.modules
+    .filter(({ workspace }) => workspace === "packages/data-configs")
+    .map(({ module, floor }) => [module, floor]),
+);
+
 /**
  * data-configs のテスト設定。
  *
@@ -19,6 +27,7 @@ export default defineConfig({
       reporter: ["text", "json", "html"],
       include: ["src/**/*.ts"],
       exclude: ["src/**/__tests__/**", "src/**/*.test.ts", "src/**/index.ts", "src/metrics/**"],
+      thresholds: criticalThresholds,
     },
   },
 });

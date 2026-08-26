@@ -430,6 +430,48 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "sortOrder": 1
     }
   ],
+  "evidenceTopics": [
+    {
+      "key": "aquaculture-supply-shift",
+      "lensKey": "sustainability",
+      "title": "漁獲と養殖の供給構造",
+      "question": "漁獲量と養殖収獲量の推移には、どのような地域差があるか。",
+      "summary": "漁獲と養殖を別系列で追うと、水産物の生産構造の違いを確認できます。資源量の健全性や需要、採算性を直接示す指標ではありません。",
+      "sourceKeys": [
+        "jfa-fisheries-whitepaper-2025"
+      ],
+      "relatedRankingKeys": [
+        "fish-catch",
+        "aquaculture-harvest"
+      ],
+      "relatedChartKeys": [
+        "theme-fishery-catch-trend",
+        "theme-fishery-aquaculture-mix"
+      ],
+      "relatedThemeKeys": [
+        "local-economy"
+      ]
+    },
+    {
+      "key": "fishery-workforce-continuity",
+      "lensKey": "service-capacity",
+      "title": "漁業の担い手と地域の継続性",
+      "question": "漁業就業者数の長期変化は、地域の担い手基盤をどう映しているか。",
+      "summary": "漁業就業者数の長期推移から担い手規模の変化を確認できます。新規就業者数、年齢構成、兼業状況はこの系列に含まれません。",
+      "sourceKeys": [
+        "jfa-fisheries-whitepaper-2025"
+      ],
+      "relatedRankingKeys": [
+        "fishery-workers"
+      ],
+      "relatedChartKeys": [
+        "theme-fishery-half-century"
+      ],
+      "relatedThemeKeys": [
+        "aging-society"
+      ]
+    }
+  ],
   "keywords": [
     "漁業",
     "水産業",

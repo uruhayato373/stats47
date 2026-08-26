@@ -1,24 +1,22 @@
-import type { PageComponent, LineChartData, MixedChartData } from "@/components/stat-charts";
-import type { CompositionChartData } from "@/components/stat-charts/adapters/toCompositionChartData";
+import type { PageComponent } from "@/components/stat-charts";
 
 import {
   fetchDbChartDataAction,
   fetchPopulationPyramidAction,
-  type CpiHeatmapItem,
-  type CpiProfileItem,
-  type DonutChartItem,
   type PopulationPyramidResult,
+  type ThemeDbChartResult,
 } from "../actions";
 
 export type ThemeChartResult =
-  | { type: "line"; data: LineChartData; showLatestValues?: boolean }
-  | { type: "mixed"; data: MixedChartData }
-  | { type: "composition"; data: CompositionChartData; defaultTab?: "composition" | "trend" }
-  | { type: "donut"; data: DonutChartItem[] }
-  | { type: "cpi-profile"; data: CpiProfileItem[] }
-  | { type: "cpi-heatmap"; data: CpiHeatmapItem[] }
-  | { type: "pyramid"; data: PopulationPyramidResult }
-  | null;
+  | NonNullable<ThemeDbChartResult>
+  | {
+      type: "pyramid";
+      data: PopulationPyramidResult;
+      contract: { unit: string; year: string; seriesCount: number };
+    };
+
+export type ThemeChartLoadResult =
+  { state: "ready"; result: ThemeChartResult } | { state: "no-data" } | { state: "source-unavailable" };
 
 const DB_CHART_TYPES = new Set([
   "line-chart",
@@ -29,22 +27,33 @@ const DB_CHART_TYPES = new Set([
   "cpi-heatmap",
 ]);
 
-export async function loadThemeChartResult(
-  chart: PageComponent,
-  prefCode: string,
-): Promise<ThemeChartResult> {
-  if (DB_CHART_TYPES.has(chart.componentType)) {
-    return fetchDbChartDataAction(
-      chart.componentType,
-      chart.componentProps,
-      prefCode,
-    );
-  }
+export async function loadThemeChartResult(chart: PageComponent, prefCode: string): Promise<ThemeChartLoadResult> {
+  try {
+    if (DB_CHART_TYPES.has(chart.componentType)) {
+      const result = await fetchDbChartDataAction(chart.componentType, chart.componentProps, prefCode);
+      return result ? { state: "ready", result } : { state: "no-data" };
+    }
 
-  if (chart.componentType === "pyramid-chart") {
-    const result = await fetchPopulationPyramidAction(prefCode);
-    return result ? { type: "pyramid", data: result } : null;
-  }
+    if (chart.componentType === "pyramid-chart") {
+      const data = await fetchPopulationPyramidAction(prefCode);
+      return data
+        ? {
+            state: "ready",
+            result: {
+              type: "pyramid",
+              data,
+              contract: {
+                unit: "人",
+                year: data.yearName,
+                seriesCount: data.pyramidData.length,
+              },
+            },
+          }
+        : { state: "no-data" };
+    }
 
-  return null;
+    return { state: "no-data" };
+  } catch {
+    return { state: "source-unavailable" };
+  }
 }
