@@ -16,6 +16,7 @@ import * as path from "path";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 import { assertR2WriteAllowed } from "./_assert-ci-write";
+import { assertDiffPushComplete } from "./lib/diff-push-result";
 
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
@@ -206,6 +207,10 @@ async function main(): Promise<void> {
   console.log(`アップロード成功: ${success}`);
   console.log(`エラー: ${errors}`);
   console.log(`マニフェスト更新: ${getManifestPath(prefix)}`);
+
+  // 一部だけ書けた状態を exit 0 にすると、後続 producer が新旧混在の R2 を読み込む。
+  // 成功済み object は温存しつつ run 自体は必ず赤にして再実行を要求する。
+  assertDiffPushComplete({ attempted: toUpload.length, success, errors });
 }
 
 main().catch((err) => {

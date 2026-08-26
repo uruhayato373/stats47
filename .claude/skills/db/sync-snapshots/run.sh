@@ -105,6 +105,19 @@ for task in "${TASKS[@]}"; do
     continue
   fi
 
+  # ★ranking-items の per-key item.json は master が直後に remote から再読込する。
+  # saveToR2 は .local/r2 への staging だけなので、末尾の一括 push まで待つと master が
+  # 旧 item.json を読み、fresh な staging を同じ path へ上書きする (2026-08-27 実測)。
+  # 生成直後に per-key を S3 へ反映し、後続 metadata/master の read-after-write を保証する。
+  # この push が不完全なまま master を続けると旧値を再び焼き込むため、失敗時は即停止する。
+  if [ "$label" = "ranking-items" ] && [ "$DRY_RUN" = "0" ] && push_allowed; then
+    echo "── ranking-items の per-key item.json を先に push (後続 metadata/master が remote から読むため) ──"
+    if ! npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking; then
+      echo "❌ ranking-items の中間 push に失敗。stale item の再取込を防ぐため後続 task を停止します"
+      exit 1
+    fi
+  fi
+
   # ★calculated-stats だけは書いた直後に push する (2026-08-05 実測で必要と判明)。
   #
   # 各 task は .local/r2 に書き、push は末尾に 1 回 — が原則だが、**reader は

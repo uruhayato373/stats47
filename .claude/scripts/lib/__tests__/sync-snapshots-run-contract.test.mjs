@@ -106,6 +106,41 @@ test("ranking-items を master より先に生成し metadata refresh を master
   );
 });
 
+test("ranking-items を生成直後に push してから metadata と master が remote を読む", () => {
+  const { status, calls } = runRunSh();
+  assert.equal(status, 0);
+
+  const rankingItemsAt = calls.findIndex((c) => c.includes("generate-ranking-items.ts"));
+  const itemPushAt = calls.findIndex(
+    (c) => c.includes("diff-push-r2.ts") && c.includes("--prefix app/ranking"),
+  );
+  const metadataAt = calls.findIndex((c) => c.includes("refresh-item-metadata.ts"));
+  const masterAt = calls.findIndex((c) => c.includes("export-master-snapshots.ts"));
+
+  assert.ok(rankingItemsAt >= 0, "ranking-items task が呼ばれていない");
+  assert.ok(itemPushAt > rankingItemsAt, "per-key item push が生成より前か、呼ばれていない");
+  assert.ok(metadataAt > itemPushAt, "metadata refresh が fresh item push より前に走っている");
+  assert.ok(masterAt > metadataAt, "master が metadata refresh より前に走っている");
+});
+
+test("ranking-items の中間 push 失敗時は stale item を読む master を実行しない", () => {
+  const { status, calls } = runRunSh({ failPattern: "--prefix app/ranking" });
+  assert.equal(status, 1);
+  assert.ok(calls.some((c) => c.includes("generate-ranking-items.ts")));
+  assert.ok(calls.some((c) => c.includes("--prefix app/ranking")));
+  assert.equal(
+    calls.some((c) => c.includes("refresh-item-metadata.ts")),
+    false,
+    "中間 push 失敗後に metadata が stale remote を読んでいる",
+  );
+  assert.equal(
+    calls.some((c) => c.includes("export-master-snapshots.ts")),
+    false,
+    "中間 push 失敗後に master が stale remote を読んでいる",
+  );
+  assert.equal(finalPushIndex(calls), -1, "依存境界の失敗後に末尾の全体 push まで進んでいる");
+});
+
 test("1 task が失敗しても、末尾の push を実行してから exit 1 する", () => {
   const { status, stdout, calls } = runRunSh({
     failPattern: "generate-ranking-values.ts",

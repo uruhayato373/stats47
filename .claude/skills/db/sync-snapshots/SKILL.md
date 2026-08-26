@@ -57,7 +57,7 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 |---|---|---|---|
 | item-metadata-refresh (**master の直前**) | `packages/ranking/src/scripts/refresh-item-metadata.ts --apply` | `app/ranking/{key}/item.json` の title/subtitle/annotation(note)/categoryKey を git TS config から patch。master の category 再グループ化に反映させるため master の前に実行 | — |
 | master (per-URL + surveys + categories) | `packages/ranking/src/scripts/export-master-snapshots.ts` | `app/home/featured.json` / `app/category/{key}/items.json` / `app/ranking/{key}/item.json` / `app/survey/{id}/items.json` / `app/survey/all.json` | ~13MB |
-| **ranking-items** (master の直後) | `packages/ranking/src/scripts/generate-ranking-items.ts` | `app/ranking-items/all.json` / `app/ranking/{key}/item.json` — config(isActive:true) の全 metric を再生成。新規 metric 公開時に必須 | — |
+| **ranking-items** (metadata / master の直前) | `packages/ranking/src/scripts/generate-ranking-items.ts` | `app/ranking-items/all.json` / `app/ranking/{key}/item.json` — config の全 metric を再生成。生成直後に `app/ranking` を中間pushし、S3直接readで metadata / master へ渡す。新規 metric 公開時に必須 | — |
 | **calculated-stats** (ranking-items の後・ranking-values の**前**) | `packages/ranking/src/scripts/generate-calculated-stats.ts` | `app/stats/{metric}/values.json` — `fetcherKey:"calculated"` の metric (家賃控除後可処分所得 / 実質可処分所得 / エンゲル係数) を分子・分母から計算して**正典**を書く producer。ranking-values はこれを配信用に射影するだけなので、逆順だと計算型が 1 年前のまま配信される。**この task の直後だけ `diff-push-r2 --prefix app/stats` を挟む** — reader はローカルミラーを読まない (remote が唯一の真実源) ため、末尾の一括 push では後続が旧値を読む。★2026-08-05 新設 (計算結果を書く工程がどのパイプラインにも無く、月額から年額を引いた誤値が配信されていた事故の恒久対策) | 3 files |
 | **ranking-values** (calculated-stats の**後**) | `packages/ranking/src/scripts/generate-ranking-values.ts` | `app/ranking/{key}/values.json` — 正典 `app/stats/{metric}/values.json` から配信用に決定的変換 (rank は正典値を引き継ぐ)。実描画値・OGP・blog がこれを読む。★2026-07-27 に復活 (Phase 6 で writer が 2 ヶ月間不在化していた事故の恒久対策) | ~2,116 files |
 | **municipality-ranking** | `packages/ranking/src/scripts/generate-municipality-ranking.ts` | `app/municipalities/ranking/{key}/{item,values}.json` — city 観測値を municipality entity/value policy で絞り、市区町村専用ランキングへ変換。単独実行時は `app/municipalities` prefix だけを push し、公開後 verifier を通す | key ごと2 files |
@@ -115,6 +115,15 @@ gh run watch                                                        # 進捗確�
 (PATH 先頭に fake `npx` を置いて `run.sh` の制御フローだけを走らせる。旧ロジックを注入すると
 push が呼ばれないことも assert するので「何も見ていないのに緑」にはならない)。
 CI 配線は `npm run test:workflow-commit-back`。
+
+### ranking-items → master の read-after-write 境界
+
+`saveToR2` は remote へ即時保存せず `.local/r2` へ staging する一方、metadata refresh と master は
+remote R2 を読む。2026-08-27 の full refresh では、ranking-items が正しく生成した4件の最新年を
+master が旧 remote item で上書きした。このため `run.sh` は ranking-items 成功直後に
+`diff-push-r2 --prefix app/ranking` を実行し、CI reader は公開CDNよりS3を優先する。
+中間pushが1件でも失敗した場合は master を走らせず fail closed とする。順序・dry-run・失敗停止は
+`sync-snapshots-run-contract.test.mjs`、read tier は `fetch-priority.test.ts` が固定する。
 
 ### timeout は 120 分 (★2026-08-17 変更・45 分では完走しない)
 
