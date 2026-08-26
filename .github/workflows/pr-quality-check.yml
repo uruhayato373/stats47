@@ -325,11 +325,13 @@ jobs:
 
       - name: 📦 Workspace Contract Guard
         # package entrypoint/exports、internal dependency、runtime循環、package-lock登録を検査。
-        # active admin のbuild/E2Eがrequired jobから外れる退行もmutation契約で止める。
+        # 全source-bearing workspaceのlifecycle/riskとtest/type/build/lint方針をmanifestから突合し、
+        # blocking stepの欠落・soft-fail化・required集約切断をmutation契約で止める。
         run: |
           node .claude/scripts/lib/check-workspace-contract.cjs
           node --test .claude/scripts/lib/__tests__/admin-ci-contract.test.cjs
           node --test .claude/scripts/lib/__tests__/media-workspace-ci-contract.test.cjs
+          node --test .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs
         continue-on-error: false
 
       - name: 🔐 Environment Registry Guard
