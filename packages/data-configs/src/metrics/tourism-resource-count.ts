@@ -19,7 +19,7 @@ export const tourismResourceCount: MetricConfig = {
       "ksjVersion": "14",
       "description": "観光資源台帳のA級以上と観光庁の観光地点等名簿を統合した国土数値情報P12の都道府県別登録件数。2014年9月30日時点であり、各都道府県の観光地を網羅した総数ではない。点・線・面の重複は県コードと観光資源_IDで除外して集計。",
     },
-    "displayName": "国土数値情報",
+    "displayName": "国土交通省「国土数値情報（観光資源）」／加工：stats47",
     "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P12-v2_2.html",
   },
   "entities": [
