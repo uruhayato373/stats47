@@ -629,6 +629,12 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   type-check必須25、test必須19・none 6、build必須3・none 22、lint必須1・none 24をmanifestから自動突合する
   0.10秒のblocking契約を追加した。親側で全量/mutation契約18/18、workspace契約25、workflow policy 64/0、
   checker wiring 96・new 0を再確認。QG4の分類・配線残件は0、実CI p95は統合後のrun履歴で計測する。
+- **QG5 first slice (2026-08-27)**: shape gate、unit classifier、dependency collector、chart props validator、
+  R2 runtime parserの5モジュールについて、実測したlines / branches / functionsの個別floorを単一inventoryへ固定し、
+  PRのrequired `test` jobへ134 testのcoverage判定をblocking接続した。inventory欠落、推測floor、Vitest配線欠落、
+  soft-fail、required集約切断を8 mutation契約で検知する。追加CI時間は実測4.29秒、関連65 files / 751 tests、
+  契約43件、type-checkはgreen。残りQG5はcritical module拡張、web routeロジックのpure抽出、
+  `src/app`一括除外縮小、意味あるfixtureによるbranch coverage改善。
 - **監査ベースライン (2026-08-13、ローカル実測)**:
   - rootの`test:packages`は`vitest run --project '@stats47/*'`で、`apps/admin`のunit test
     **14 file / 136 test**はPR CI対象外。galleryにはPlaywright 6 specもあるがworkflowから呼ばれていない。
