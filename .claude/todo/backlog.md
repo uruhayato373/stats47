@@ -937,6 +937,11 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **2026-08-27 next 5**: `library-lending-books`を2020年度・冊・47県の公開R2へ接地して生成。
   東京85,113,851冊（最大）/ 秋田2,463,802冊（最小）、欠測・0値・同率0、全areaCode・県名・順位・値の
   不一致0。機械監査blocker 0 / warn 0、AI監査48件、独立criticのfull / delta 2回を是正して最終PASS。
+- **2026-08-27 next 6–7**: `sole-proprietor-sales`（2025年・万円）と
+  `coffee-drink-consumption-expenditure`（2024年・円）を公開R2の47県へ接地して生成。欠測・0値なし、
+  同率順位と全areaCode・県名・順位・値を保持し、各機械監査blocker 0 / warn 0、AI監査48件、
+  独立critic full→外科修正→delta PASS。library-lending-booksはR2公開・CDN purge・outbox削除まで成功し、
+  後者2件はpublish workflow待ち。
 - **完了条件**: 全active rankingを処理し、欠測・矛盾・未検証生成を0にする。R2 pushとCDN反映は別承認。
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
