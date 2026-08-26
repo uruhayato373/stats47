@@ -3,7 +3,7 @@
   "description": "Execution-aware quality gate and workspace inventory. Checker discovery remains automatic; gates lists the critical contracts whose trigger and blocking semantics are enforced.",
   "workspaces": [
     { "id": "repository", "path": ".", "lifecycle": "active", "owner": "devops-runner", "evidence": "package.json", "reviewBy": "2026-11-30" },
-    { "id": "admin", "path": "apps/admin", "lifecycle": "active", "owner": "devops-runner", "evidence": "apps/admin/package.json", "reviewBy": "2026-11-30" },
+    { "id": "admin", "path": "apps/admin", "lifecycle": "active", "owner": "devops-runner", "evidence": "apps/admin/package.json", "reviewBy": "2026-11-30", "prUnitTest": { "job": "test", "command": "npm run test --workspace=apps/admin" } },
     { "id": "ges", "path": "apps/ges", "lifecycle": "tooling-only", "owner": "sns-renderer", "evidence": "apps/ges/package.json", "reviewBy": "2026-11-30" },
     { "id": "remotion", "path": "apps/remotion", "lifecycle": "active", "owner": "sns-renderer", "evidence": "apps/remotion/package.json", "reviewBy": "2026-11-30" },
     { "id": "web", "path": "apps/web", "lifecycle": "active", "owner": "site-ux-manager", "evidence": "apps/web/package.json", "reviewBy": "2026-11-30" },

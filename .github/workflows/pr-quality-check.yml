@@ -601,6 +601,13 @@ jobs:
         run: npm run test:packages
         continue-on-error: false
 
+      # apps/admin は root の `test:packages` (`--project '@stats47/*'`) に含まれない。
+      # active workspace の unit / route integration suite を明示実行し、失敗時は
+      # required `test` job → 集約 `quality-check` を通じてPRを止める。
+      - name: 🧪 Run Admin Unit Tests
+        run: npm run test --workspace=apps/admin
+        continue-on-error: false
+
       - name: 📊 Upload coverage to artifacts
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
