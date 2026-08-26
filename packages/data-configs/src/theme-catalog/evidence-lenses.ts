@@ -157,12 +157,30 @@ export const EVIDENCE_SOURCE_CATALOG = {
     publisher: "国土交通省",
     sourceUrl: "https://www.mlit.go.jp/statistics/details/port_list.html",
   },
+  "cao-aging-whitepaper-2025-households": {
+    kind: "whitepaper",
+    title: "令和7年版 高齢社会白書－家族と世帯",
+    publisher: "内閣府",
+    sourceUrl:
+      "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_1_3.html",
+    notebookName: "最新の白書",
+    notebookId: "2bf7f0dd-3935-49be-8cef-2d428c59eaa9",
+  },
   "cao-aging-whitepaper-2025-housing": {
     kind: "whitepaper",
     title: "令和7年版 高齢社会白書－高齢期の生活環境",
     publisher: "内閣府",
     sourceUrl:
       "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_2_4.html",
+    notebookName: "最新の白書",
+    notebookId: "2bf7f0dd-3935-49be-8cef-2d428c59eaa9",
+  },
+  "cao-aging-whitepaper-2025-regional-aging": {
+    kind: "whitepaper",
+    title: "令和7年版 高齢社会白書－地域別に見た高齢化",
+    publisher: "内閣府",
+    sourceUrl:
+      "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_1_4.html",
     notebookName: "最新の白書",
     notebookId: "2bf7f0dd-3935-49be-8cef-2d428c59eaa9",
   },
