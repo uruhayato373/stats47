@@ -336,6 +336,36 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "sortOrder": 20
     }
   ],
+  evidenceTopics: [
+    {
+      key: "employment-industry-composition",
+      lensKey: "composition",
+      title: "就業者の産業構成",
+      question: "第1次・第2次・第3次産業で働く就業者の構成は、地域ごとにどう異なるか。",
+      summary:
+        "2020年国勢調査の調査週間に実際に働いた主な事業所の産業で就業者を分類する。産業分類不能の就業者は各区分の分子に含まれないため、3区分の比率の合計が必ずしも100％にはならない。",
+      sourceKeys: ["stat-census-2020-employment-status"],
+      relatedRankingKeys: [
+        "employed-people-ratio-primary",
+        "employed-people-ratio-secondary",
+        "employed-people-ratio-tertiary",
+      ],
+      relatedChartKeys: ["theme-industry-structure"],
+      relatedThemeKeys: ["manufacturing", "labor-mobility"],
+    },
+    {
+      key: "business-base-density",
+      lensKey: "service-capacity",
+      title: "地域の事業所基盤",
+      question: "事業活動を継続して行う場所は、人口規模や面積を踏まえると地域ごとにどれほどあるか。",
+      summary:
+        "事業所総数だけでは人口・面積の大きい地域ほど多くなるため、人口10万人当たり・面積100平方キロメートル当たりも併読する。農林漁家の個人経営などは対象外で、2009年と2014年は産業分類が異なり、2014年は福島県の一部調査区を除く。",
+      sourceKeys: ["stat-economic-census-basic-2014"],
+      relatedRankingKeys: ["number-of-establishments-economic-census-basic-survey"],
+      relatedChartKeys: ["theme-le-establishments-trend"],
+      relatedThemeKeys: ["manufacturing", "labor-mobility"],
+    },
+  ],
   "keywords": [
     "地域経済",
     "県内総生産",

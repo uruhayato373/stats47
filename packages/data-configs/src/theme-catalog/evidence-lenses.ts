@@ -213,6 +213,24 @@ export const EVIDENCE_SOURCE_CATALOG = {
     publisher: "厚生労働省",
     sourceUrl: "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
   },
+  "stat-employment-status-survey-2022": {
+    kind: "statistical-overview",
+    title: "令和4年就業構造基本調査－調査の結果",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/shugyou/2022/index2.html",
+  },
+  "stat-census-2020-employment-status": {
+    kind: "statistical-overview",
+    title: "令和2年国勢調査－就業状態等基本集計",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
+  },
+  "stat-economic-census-basic-2014": {
+    kind: "statistical-overview",
+    title: "平成26年経済センサス－基礎調査",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/e-census/2014/kekka.html",
+  },
   "stat-census-2020-foreign-population": {
     kind: "statistical-overview",
     title: "令和2年国勢調査－人口等基本集計",
