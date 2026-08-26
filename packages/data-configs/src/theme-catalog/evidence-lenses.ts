@@ -219,6 +219,32 @@ export const EVIDENCE_SOURCE_CATALOG = {
     publisher: "総務省統計局",
     sourceUrl: "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
   },
+  "stat-population-estimates-2024": {
+    kind: "statistical-overview",
+    title: "人口推計（2024年10月1日現在）",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/jinsui/2024np/index.html",
+  },
+  "mhlw-vital-statistics-2024": {
+    kind: "statistical-overview",
+    title: "令和6年（2024）人口動態統計（確定数）の概況",
+    publisher: "厚生労働省",
+    sourceUrl: "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/kakutei24/",
+  },
+  "mic-local-finance-whitepaper-2025": {
+    kind: "whitepaper",
+    title: "令和7年版 地方財政白書（令和5年度決算）",
+    publisher: "総務省",
+    sourceUrl:
+      "https://www.soumu.go.jp/menu_seisaku/hakusyo/chihou/r07data/2025data/r07czb00-00.html",
+  },
+  "mic-fiscal-soundness-ratios-fy2023": {
+    kind: "report",
+    title: "令和5年度決算に基づく健全化判断比率・資金不足比率の概要（確報）",
+    publisher: "総務省",
+    sourceUrl:
+      "https://www.soumu.go.jp/menu_news/s-news/01zaisei07_02000409.html",
+  },
   "stat-housing-land-survey-2023": {
     kind: "statistical-overview",
     title: "令和5年住宅・土地統計調査－調査の結果",

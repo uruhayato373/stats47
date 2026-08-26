@@ -531,6 +531,50 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "sortOrder": 30
     }
   ],
+  "evidenceTopics": [
+    {
+      "key": "revenue-base-and-equalization",
+      "lensKey": "composition",
+      "title": "自主財源と財源調整の構成",
+      "question": "地方税と地方交付税の構成は、地域の財源基盤の違いをどう補っているか。",
+      "summary": "財政力指数と歳入構成を組み合わせて読みます。地方税割合と地方交付税割合は歳入総額を分母とする構成比であり、割合だけで財政余力や税負担の大きさは判断できません。",
+      "sourceKeys": [
+        "mic-local-finance-whitepaper-2025"
+      ],
+      "relatedRankingKeys": [
+        "fiscal-strength-index-prefecture",
+        "local-tax-ratio-pref-finance",
+        "local-allocation-tax-ratio-pref-finance"
+      ],
+      "relatedChartKeys": [
+        "theme-lf-fiscal-ratios-trend",
+        "theme-lf-revenue-composition"
+      ],
+      "relatedThemeKeys": [
+        "local-economy"
+      ]
+    },
+    {
+      "key": "debt-burden-and-soundness",
+      "lensKey": "sustainability",
+      "title": "公債費と将来負担の持続可能性",
+      "question": "現在の公債費負担と将来負担は、地域の財政運営にどのような制約を与えるか。",
+      "summary": "実質公債費比率と将来負担比率は、対象期間と算定対象が異なる健全化判断比率です。関連ランキングは2022年度、確報資料は2023年度決算のため、同一年の値として比較しません。",
+      "sourceKeys": [
+        "mic-fiscal-soundness-ratios-fy2023"
+      ],
+      "relatedRankingKeys": [
+        "real-public-debt-service-ratio",
+        "future-burden-ratio"
+      ],
+      "relatedChartKeys": [
+        "theme-lf-debt-trend"
+      ],
+      "relatedThemeKeys": [
+        "local-economy"
+      ]
+    }
+  ],
   "keywords": [
     "地方財政",
     "財政力指数",
