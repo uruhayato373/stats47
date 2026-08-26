@@ -386,6 +386,43 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "sortOrder": 140
     }
   ],
+  evidenceTopics: [
+    {
+      key: "housing-stock-and-aging",
+      lensKey: "sustainability",
+      title: "高齢期の住まいと空き家ストック",
+      question:
+        "持ち家率と空き家率には、高齢化に伴う住まいの継承・利用の地域差がどう表れるか",
+      summary:
+        "白書は65歳以上の持ち家と使用目的のない空き家を扱います。ランキングは全世帯の持ち家率と、賃貸・売却用や二次的住宅も含む空き家率であり、対象を同一視しません。",
+      sourceKeys: [
+        "cao-aging-whitepaper-2025-housing",
+        "stat-housing-land-survey-2023",
+      ],
+      relatedRankingKeys: [
+        "owner-occupied-housing-ratio",
+        "vacant-housing-ratio",
+      ],
+      relatedChartKeys: ["vacancy-ownership-rate-trend"],
+      relatedThemeKeys: ["aging-society"],
+    },
+    {
+      key: "tenure-space-gap",
+      lensKey: "equity",
+      title: "持ち家・借家の居住空間",
+      question:
+        "持ち家と借家の1住宅当たり延べ面積には、どのような地域差があるか",
+      summary:
+        "延べ面積は住宅内の広さを示す平均値です。住宅価格や家賃、世帯人員、建物の品質は示さないため、取得・居住の負担とは分けて読みます。",
+      sourceKeys: ["stat-housing-land-survey-2023"],
+      relatedRankingKeys: [
+        "floor-area-per-dwelling-owner",
+        "floor-area-per-dwelling-rented",
+      ],
+      relatedChartKeys: ["lh-dwelling-floor-area-trend"],
+      relatedThemeKeys: ["real-income"],
+    },
+  ],
   "keywords": [
     "空き家",
     "持ち家",

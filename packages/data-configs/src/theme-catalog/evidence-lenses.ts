@@ -136,6 +136,21 @@ export const EVIDENCE_SOURCE_CATALOG = {
     publisher: "国土交通省",
     sourceUrl: "https://www.mlit.go.jp/statistics/details/port_list.html",
   },
+  "cao-aging-whitepaper-2025-housing": {
+    kind: "whitepaper",
+    title: "令和7年版 高齢社会白書－高齢期の生活環境",
+    publisher: "内閣府",
+    sourceUrl:
+      "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_2_4.html",
+    notebookName: "最新の白書",
+    notebookId: "2bf7f0dd-3935-49be-8cef-2d428c59eaa9",
+  },
+  "stat-housing-land-survey-2023": {
+    kind: "statistical-overview",
+    title: "令和5年住宅・土地統計調査－調査の結果",
+    publisher: "総務省統計局",
+    sourceUrl: "https://www.stat.go.jp/data/jyutaku/2023/tyousake.html",
+  },
 } as const satisfies Record<string, EvidenceSourceDefinition>;
 
 export type EvidenceSourceKey = keyof typeof EVIDENCE_SOURCE_CATALOG;
