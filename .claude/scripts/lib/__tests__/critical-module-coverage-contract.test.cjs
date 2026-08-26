@@ -12,8 +12,10 @@ const EXPECTED_IDS = new Set([
   "dependency-collector",
   "chart-props-validator",
   "r2-runtime-parser",
+  "metric-recipe",
+  "value-verification",
 ]);
-const DATA_COMMAND = "(cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts --coverage --coverage.reporter=text-summary)";
+const DATA_COMMAND = "(cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts --coverage --coverage.reporter=text-summary)";
 const R2_COMMAND = "(cd packages/r2-storage && npx vitest run src/lib/operations/__tests__/snapshot-reader.test.ts --coverage --coverage.reporter=text-summary)";
 const CONTRACT_COMMAND = "node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs";
 
@@ -120,7 +122,7 @@ function fixtureInventory() {
     version: 1,
     modules: [...EXPECTED_IDS].map((id, index) => ({
       id,
-      workspace: index === EXPECTED_IDS.size - 1 ? "packages/r2-storage" : "packages/data-configs",
+      workspace: id === "r2-runtime-parser" ? "packages/r2-storage" : "packages/data-configs",
       module: `src/${id}.ts`,
       tests: [`src/${id}.test.ts`],
       floor: { lines: 80, branches: 70, functions: 75 },
@@ -159,7 +161,7 @@ test("実inventory・Vitest config・PR workflowがcritical module coverage契�
   assert.deepEqual(auditWorkflow(workflow), []);
 });
 
-test("正常な5領域inventoryとblocking workflowを受理する", () => {
+test("正常な7領域inventoryとblocking workflowを受理する", () => {
   const inventory = fixtureInventory();
   assert.deepEqual(auditInventory(inventory, fixtureEnvironment(inventory)), []);
   assert.deepEqual(auditWorkflow(healthyWorkflow()), []);

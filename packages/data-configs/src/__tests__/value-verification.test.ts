@@ -118,6 +118,12 @@ describe("classifyValueSuspicion — プロファイル突合", () => {
     expect(r.reasons.join()).toContain("rowCountMin");
   });
 
+  it("ゼロ率の疑いを cover しない profile では緑にならない", () => {
+    const r = run(withZeros(20), [profile({ rowCountMin: 40 })]);
+    expect(r.status).toBe("unverified");
+    expect(r.reasons).toEqual(["zeroShareMax 未記載なのにゼロ率が高い"]);
+  });
+
   it("負値は negativesAllowed:true でだけ通る", () => {
     expect(run(withNegatives(3), [profile({ negativesAllowed: true })]).status).toBe("verified");
     expect(run(withNegatives(3), [profile({ negativesAllowed: false })]).status).toBe("unverified");

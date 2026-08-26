@@ -41,6 +41,22 @@
       "tests": ["src/lib/operations/__tests__/snapshot-reader.test.ts"],
       "floor": { "lines": 89.39, "branches": 71.73, "functions": 87.5 },
       "measuredAt": "431afed6f87ded35d974c03a603744dafaa546a3"
+    },
+    {
+      "id": "metric-recipe",
+      "workspace": "packages/data-configs",
+      "module": "src/recipe.ts",
+      "tests": ["src/__tests__/recipe.test.ts"],
+      "floor": { "lines": 100, "branches": 93.47, "functions": 100 },
+      "measuredAt": "69c9521c34e79e86516871c9e0a2fd19059afba8"
+    },
+    {
+      "id": "value-verification",
+      "workspace": "packages/data-configs",
+      "module": "src/value-verification.ts",
+      "tests": ["src/__tests__/value-verification.test.ts"],
+      "floor": { "lines": 100, "branches": 97.91, "functions": 100 },
+      "measuredAt": "69c9521c34e79e86516871c9e0a2fd19059afba8"
     }
   ]
 }
