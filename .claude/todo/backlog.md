@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-26
+updated: 2026-08-27
 ---
 
 # バックログ (タスクマスタ)
@@ -37,6 +37,26 @@ updated: 2026-08-26
 - **2026-08-26 ports wave**: 港湾統計の公式一覧とactiveな内部routeを実測し、貨物・コンテナ利用と
   船舶旅客利用の2論点を追加した。国土交通白書のNotebookLM台帳IDは実機に存在しなかったため利用せず、
   公式HTTPS一次資料へ直接接続した。catalog / 生成物 / 対象test / data-configs・web型検査はgreen。
+- **2026-08-26 living-housing wave**: 内閣府「令和7年版 高齢社会白書」と総務省統計局
+  「令和5年住宅・土地統計調査」の公式URL、activeな内部routeを実測し、高齢化と住宅ストック、
+  持ち家・借家の居住面積差の2論点を追加した。母集団の違いと価格・家賃・世帯人員を直接説明できない
+  限界を明記し、catalog / 生成物 / 対象test / data-configs・web型検査はgreen。
+- **2026-08-27 tourism wave**: 観光庁「宿泊旅行統計調査」とactiveなテーマ・ランキングrouteを実測し、
+  国内・訪日客の延べ宿泊者数の地域集中を1論点として追加した。泊数を人数と同一視しないこと、
+  外国人延べ宿泊者数は総数の内数で加算しないことを固定。供給・稼働率、交通・アクセス候補は
+  母集団・観光目的を一次資料から確定できないため不採択。catalog / 生成物 / 対象test / 型検査はgreen。
+- **2026-08-27 safety wave**: 警察庁「犯罪統計」「交通事故発生状況」とactiveな内部routeを実測し、
+  犯罪認知件数と検挙率、交通事故発生件数と負傷者数の2論点を追加した。未認知事件、検挙人員割合、
+  物損事故を混同せず、件数と人数を加算しない注意を固定。火災・救急、自殺・不慮事故は資料主体と
+  対象定義が異なるため不採択。catalog / 生成物 / 対象test / 型検査はgreen。
+- **2026-08-27 aging-society wave**: 内閣府「令和7年版 高齢社会白書」の公式2節と登録済みNotebookを
+  照合し、地域別高齢化と年齢構成、高齢者世帯の構成の2論点を追加した。高齢化率は絶対数でないこと、
+  世帯3指標は重なりがあり合計100%にならないことを固定。出生率、医療・介護需要、移動困難は
+  一次資料・同一theme chart・active rankingの組合せ不足で不採択。catalog / test / 型検査はgreen。
+- **2026-08-27 consumer-prices wave**: 総務省統計局「小売物価統計調査（構造編）」とactiveな内部routeを
+  実測し、総合物価水準と家賃、食料・住居・光熱水道の価格構造の2論点を追加した。地域差指数は
+  物価上昇率でなく全国平均=100の価格水準であり、費目指数は支出額・割合でなく単純加算できないことを固定。
+  全国CPI等の候補は都道府県別の直接根拠不足で不採択。catalog / test / 型検査はgreen。
 - **次**: 白書台帳に登録済みのテーマから2〜3件ずつ `/research-theme-catalog <theme-key>` を実行する。
   NotebookLM は引用付き候補抽出だけに使い、公式HTTPS URLと実在routeを確認できた候補だけ
   theme-designerが採択する。文部科学白書は公式source登録済みだがNotebookLM ID未登録なので、
@@ -579,6 +599,11 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   responsive smokeを追加。初回実走でCPIの空unitとbespoke地方財政の機械属性欠落を検出・是正し、
   公開8導線 + 5テーマ全9 chart type + 4幅の25 E2E、型検査、pre-commitはgreen。
   no-data / source errorの専用表示など残りのQG3受入は継続する。
+- **QG4 admin slice (2026-08-27)**: PR CIのpackages testが`@stats47/*`だけを対象にし、activeな
+  `apps/admin` 16 files / 150 testsを一度も実行していなかった欠落を是正した。`test` jobでadmin unitを
+  blocking実行し、command削除・`continue-on-error`化・required集約からの切断を各mutationで検知する
+  workspace契約を追加。契約17件、admin 150件、型検査はgreen。残りQG4はadmin build/変更path E2E、
+  remotion・ges、全workspace risk matrixとCI時間集計。
 - **監査ベースライン (2026-08-13、ローカル実測)**:
   - rootの`test:packages`は`vitest run --project '@stats47/*'`で、`apps/admin`のunit test
     **14 file / 136 test**はPR CI対象外。galleryにはPlaywright 6 specもあるがworkflowから呼ばれていない。
@@ -933,6 +958,12 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   長崎9,910円（1位）/ 高知3,652円（47位）を含む順位・県名・値・areaCode不一致0、機械監査
   blocker 0 / warn 0。独立criticの初回REVISE（数値過多・反復・神奈川の誤認）を是正し、delta最終PASS。
   R2公開は全データrefreshとの競合を避け、親工程で直列実行する。
+- **2026-08-27 next 2**: `game-console-consumption-expenditure`を2024年・円・47県の公開R2へ接地して生成。
+  静岡3,033円（1位）、8県0円（同率40位）を欠測へ変換せず全47県の解説へ保持し、構造不一致0、
+  機械監査blocker 0 / warn 0、AI監査48件、独立criticのdelta判定までgreen。R2公開は全データrefresh後に直列実行する。
+- **2026-08-27 next 3**: `manufacturing-establishments`を2024年度・事業所・47県の公開R2へ接地して生成。
+  大阪18,481（最大）/ 鳥取854（最小）、欠測・0値・同率0、全areaCode・県名・順位・値の不一致0。
+  機械監査blocker 0 / warn 0、AI監査48件、独立criticのREVISE 4点をdelta是正して最終PASS。
 - **完了条件**: 全active rankingを処理し、欠測・矛盾・未検証生成を0にする。R2 pushとCDN反映は別承認。
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
@@ -971,6 +1002,9 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   1,091 assetで `pork-consumption-expenditure/data/pork-expenditure-ranking.svg` だけが404。SVGは既存JSON/sourceから
   ローカル再生成済みで、公開gateもdata refresh / blog publish / 週次へ配線済み。R2全量pullのdry-runは
   `app/blog` 8,913 files（local差分8,526）を確認したが、read-only取得の承認前なので実pullしていない。
+- **2026-08-27 生成物監査**: ローカルR2ミラーの432記事・2,437 SVGを同一lintで再走査し、構造error
+  98記事、dark mode非対応133記事を機械stateへ記録した。旧stateの98記事・141 SVG・error 0は母集団が
+  生成物全量を覆っておらず、完了証拠には使えない。公開参照asset契約とSVG内容品質は別gateとして維持する。
 - **次**: 欠落SVGの限定R2反映後に公開契約監査をgreenへ戻す。全量SVG品質監査は承認後の`app/blog` pullで
   must-fixを確定し、小バッチで処理する。R2由来、算式、年、metric keyを復元できない図は推測で再生成しない。
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
