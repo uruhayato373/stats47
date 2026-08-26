@@ -13,6 +13,7 @@
 | Regenerate Blog SVGs (`regenerate-blog-svgs.yml`)   | 手動                                               | `all` は既存JSONから全チャートを再描画。`scatter-canonical` は散布図を一次ソース照合後に正規化。`source-repair` は公開SVGの存在・manifest構造・安全なkeyを検証し、欠落`source.json`だけを上書き不可で復旧してblog調査索引も再生成。dry-run後、明示keyだけR2へ反映 |
 | Google Admin settings (`google-admin-settings.yml`) | 毎週月曜5時JST (schedule)、手動 (audit/plan/apply) | GA4 Admin API / GSC / AdSense を read-only 監査。dispatch の `apply` だけが protected Environment `google-admin-production` で GA4 custom dimension を 1 件作成。正典: `.claude/scripts/google-admin/README.md` |
 | GSC Operations Cycle (`gsc-operations-cycle-weekly.yml`) | 毎週月曜20時30分JST、手動 | 最新GSC snapshotに対する週次レビュー、候補のapprove/dismiss、翌週計画、月次GSC欄、effect verdictの接続を決定的に監査。異常は固定`gsc-cycle-alert` Issueへupsertし、回復時に自動Close |
+| KSJ aggregate ingest (`ksj-aggregate-ingest.yml`) | 手動 | KSJの元データをCI内で再取得し、都道府県帰属の未解決0・47県ゲート後に集計`app/stats`だけをR2へ公開。元GIS / TopoJSONは公開しない |
 
 ### ブランチ戦略
 
