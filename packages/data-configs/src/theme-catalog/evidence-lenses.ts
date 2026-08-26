@@ -95,6 +95,20 @@ export const EVIDENCE_SOURCE_CATALOG = {
     sourceUrl:
       "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2140000.html",
   },
+  "mlit-whitepaper-2025-railway-industry": {
+    kind: "whitepaper",
+    title: "令和7年版 国土交通白書－鉄道関連産業の動向と施策",
+    publisher: "国土交通省",
+    sourceUrl:
+      "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2531000.html",
+  },
+  "mlit-whitepaper-2025-low-carbon-transport": {
+    kind: "whitepaper",
+    title: "令和7年版 国土交通白書－地球温暖化対策（緩和策）の推進",
+    publisher: "国土交通省",
+    sourceUrl:
+      "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n2712000.html",
+  },
   "mhlw-physician-workforce-plan": {
     kind: "report",
     title: "医師確保対策・医師確保計画",

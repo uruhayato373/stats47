@@ -101,6 +101,35 @@ export const RAILWAY_CATALOG: ThemeCatalog = {
       "sortOrder": 20
     }
   ],
+  evidenceTopics: [
+    {
+      key: "passenger-demand-by-operator",
+      lensKey: "participation",
+      title: "JR・民鉄の旅客利用規模",
+      question:
+        "JRと民鉄の輸送人員には、都道府県ごとの利用規模の違いがどう表れるか",
+      summary:
+        "輸送人員は延べ輸送規模で、利用者の実人数ではありません。JRと民鉄は対象事業者が異なるため、系列を分けて読みます。",
+      sourceKeys: ["mlit-whitepaper-2025-railway-industry"],
+      relatedRankingKeys: [
+        "jr-passenger-transport",
+        "private-railway-passenger-transport",
+      ],
+      relatedChartKeys: ["railway-passenger-trend"],
+    },
+    {
+      key: "freight-modal-shift",
+      lensKey: "sustainability",
+      title: "貨物鉄道の地域別利用",
+      question:
+        "JR貨物発送量は、低炭素物流を担う鉄道貨物の地域別利用規模をどう示すか",
+      summary:
+        "発送量は発送地側の輸送規模です。輸送先や鉄道以外の貨物量、CO2削減量は示しません。",
+      sourceKeys: ["mlit-whitepaper-2025-low-carbon-transport"],
+      relatedRankingKeys: ["jr-freight-shipment"],
+      relatedChartKeys: ["railway-freight-trend"],
+    },
+  ],
   "keywords": [
     "鉄道",
     "JR",
