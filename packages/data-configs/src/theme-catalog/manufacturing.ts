@@ -156,6 +156,47 @@ export const MANUFACTURING_CATALOG: ThemeCatalog = {
       "sortOrder": 100
     }
   ],
+  "evidenceTopics": [
+    {
+      "key": "production-base-capacity",
+      "lensKey": "service-capacity",
+      "title": "生産拠点と雇用の地域基盤",
+      "question": "事業所数と従業者数は、地域の製造基盤としてどのように推移しているか。",
+      "summary": "事業所数と従業者数を並べると、生産拠点の量と雇用規模の変化を読み分けられます。職種別の人手不足や技能水準までは、この2指標だけでは示しません。",
+      "sourceKeys": [
+        "meti-monodzukuri-whitepaper-2026"
+      ],
+      "relatedRankingKeys": [
+        "manufacturing-establishments",
+        "manufacturing-employees"
+      ],
+      "relatedChartKeys": [
+        "manufacturing-establishments-employees-trend"
+      ],
+      "relatedThemeKeys": [
+        "labor-wages"
+      ]
+    },
+    {
+      "key": "shipment-per-worker",
+      "lensKey": "outcomes",
+      "title": "人員あたりの出荷規模",
+      "question": "従業者1人あたりの製造品出荷額には、どのような地域差があるか。",
+      "summary": "従業者1人あたり出荷額は、生産規模を人員数で割った比較です。付加価値額や利益を分子にする労働生産性とは定義が異なります。",
+      "sourceKeys": [
+        "meti-monodzukuri-whitepaper-2026"
+      ],
+      "relatedRankingKeys": [
+        "manufacturing-shipment-amount-per-employee"
+      ],
+      "relatedChartKeys": [
+        "theme-manufacturing-labor-productivity"
+      ],
+      "relatedThemeKeys": [
+        "local-economy"
+      ]
+    }
+  ],
   "keywords": [
     "製造業",
     "製造品出荷額",

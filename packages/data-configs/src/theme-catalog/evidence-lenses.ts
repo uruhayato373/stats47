@@ -184,6 +184,22 @@ export const EVIDENCE_SOURCE_CATALOG = {
     notebookName: "最新の白書",
     notebookId: "2bf7f0dd-3935-49be-8cef-2d428c59eaa9",
   },
+  "meti-monodzukuri-whitepaper-2026": {
+    kind: "whitepaper",
+    title: "2026年版ものづくり白書",
+    publisher: "経済産業省・厚生労働省・文部科学省",
+    sourceUrl:
+      "https://www.meti.go.jp/report/whitepaper/mono/2026/index.html",
+    notebookName: "最新の白書",
+    notebookId: "2bf7f0dd-3935-49be-8cef-2d428c59eaa9",
+  },
+  "jfa-fisheries-whitepaper-2025": {
+    kind: "whitepaper",
+    title: "令和7年度 水産白書",
+    publisher: "水産庁",
+    sourceUrl:
+      "https://www.jfa.maff.go.jp/j/kikaku/wpaper/R7/260605_1.html",
+  },
   "stat-housing-land-survey-2023": {
     kind: "statistical-overview",
     title: "令和5年住宅・土地統計調査－調査の結果",
