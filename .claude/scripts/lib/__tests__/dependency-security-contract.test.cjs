@@ -84,15 +84,28 @@ test('every resolved esbuild version is outside the vulnerable range', () => {
   );
 });
 
-test('the lockfile includes the Rolldown binding used by Linux CI', () => {
+test('the lockfile includes every native binding used by Linux CI', () => {
   const lockfile = readJson('package-lock.json');
-  const linuxBinding =
-    lockfile.packages['node_modules/@rolldown/binding-linux-x64-gnu'];
+  const linuxBindings = [
+    '@ast-grep/napi-linux-x64-gnu',
+    '@img/sharp-libvips-linux-x64',
+    '@img/sharp-linux-x64',
+    '@oxc-resolver/binding-linux-x64-gnu',
+    '@remotion/compositor-linux-x64-gnu',
+    '@rolldown/binding-linux-x64-gnu',
+    '@rspack/binding-linux-x64-gnu',
+    '@unrs/resolver-binding-linux-x64-gnu',
+    'lightningcss-linux-x64-gnu',
+  ];
 
-  assert.equal(linuxBinding.version, '1.2.5');
-  assert.deepEqual(linuxBinding.cpu, ['x64']);
-  assert.deepEqual(linuxBinding.os, ['linux']);
-  assert.equal(linuxBinding.optional, true);
+  for (const dependencyName of linuxBindings) {
+    const linuxBinding =
+      lockfile.packages[`node_modules/${dependencyName}`];
+    assert.ok(linuxBinding, `${dependencyName} is absent from package-lock.json`);
+    assert.deepEqual(linuxBinding.cpu, ['x64']);
+    assert.deepEqual(linuxBinding.os, ['linux']);
+    assert.equal(linuxBinding.optional, true);
+  }
 });
 
 test('CI rejects high-risk development findings and every runtime finding', () => {
