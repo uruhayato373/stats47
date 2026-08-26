@@ -13,7 +13,7 @@ import {
 import { dirname, isAbsolute, relative, resolve } from 'node:path';
 
 import type { ImageObjectStore } from '@stats47/r2-storage/image-pipeline';
-import sharp from 'sharp';
+import sharp, { type Metadata } from 'sharp';
 
 import {
   BLOG_AI_BACKGROUND_CONTENT_TYPE,
@@ -110,7 +110,7 @@ async function validateImageContract(
   buffer: Buffer,
   label: string
 ): Promise<void> {
-  let metadata: sharp.Metadata;
+  let metadata: Metadata;
   try {
     const image = sharp(buffer, { failOn: 'error' });
     metadata = await image.metadata();

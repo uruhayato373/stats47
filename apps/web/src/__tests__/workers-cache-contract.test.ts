@@ -49,8 +49,8 @@ describe("Cloudflare Workers Cache configuration", () => {
     const packageJson = JSON.parse(readFileSync(resolve(WEB_ROOT, "package.json"), "utf8")) as {
       devDependencies: Record<string, string>;
     };
-    expect(packageJson.devDependencies.wrangler).toBe("^4.123.0");
-    expect(packageJson.devDependencies["@cloudflare/workers-types"]).toBe("^5.20260815.1");
+    expect(packageJson.devDependencies.wrangler).toBe("^4.126.0");
+    expect(packageJson.devDependencies["@cloudflare/workers-types"]).toBe("^5.20260825.1");
   });
 });
 

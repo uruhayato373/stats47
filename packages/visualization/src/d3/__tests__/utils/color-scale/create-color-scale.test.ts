@@ -10,6 +10,7 @@ describe('createColorScale', () => {
   const mockScaleFunction = vi.fn((value: number) => `color-${value}`);
 
   beforeEach(() => {
+    vi.restoreAllMocks();
     // 各スケール生成関数をモック
     vi.spyOn(sequentialModule, 'createSequentialColorScale').mockResolvedValue(mockScaleFunction);
     vi.spyOn(divergingModule, 'createDivergingColorScale').mockResolvedValue(mockScaleFunction);

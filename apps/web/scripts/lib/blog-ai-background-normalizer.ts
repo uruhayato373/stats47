@@ -1,4 +1,4 @@
-import sharp from 'sharp';
+import sharp, { type OverlayOptions } from 'sharp';
 
 export const BLOG_AI_BACKGROUND_WIDTH = 1200;
 export const BLOG_AI_BACKGROUND_HEIGHT = 630;
@@ -27,7 +27,7 @@ export async function normalizeAiBackgroundBuffer(
   input: Buffer,
   dark: boolean
 ): Promise<Buffer> {
-  const overlays: sharp.OverlayOptions[] = [];
+  const overlays: OverlayOptions[] = [];
   let pipeline = sharp(input).resize(
     BLOG_AI_BACKGROUND_WIDTH,
     BLOG_AI_BACKGROUND_HEIGHT,
