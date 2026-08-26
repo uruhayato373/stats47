@@ -27,14 +27,14 @@
     "dotenv": "^17.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "remotion": "4.0.441",
-    "sharp": "^0.33.5",
+    "remotion": "4.0.517",
+    "sharp": "^0.35.3",
     "tailwind-merge": "^2.2.2",
     "topojson-client": "^3.1.0",
-    "zod": "4.3.6"
+    "zod": "4.4.3"
   },
   "devDependencies": {
-    "@remotion/cli": "4.0.441",
+    "@remotion/cli": "4.0.517",
     "@types/better-sqlite3": "^7.6.13",
     "@types/d3-geo": "^3.1.0",
     "@types/d3-scale": "^4.0.0",

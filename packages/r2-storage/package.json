@@ -38,17 +38,18 @@
     "@stats47/logger": "*",
     "@stats47/types": "*",
     "server-only": "^0.0.1",
-    "sharp": "^0.33.5"
+    "sharp": "^0.35.3"
   },
   "peerDependencies": {
-    "@cloudflare/workers-types": "^4.20250830.0",
-    "@opennextjs/cloudflare": "^1.12.0"
+    "@cloudflare/workers-types": "^5.20260825.1",
+    "@opennextjs/cloudflare": "^1.20.2"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.958.0",
+    "@cloudflare/workers-types": "^5.20260825.1",
+    "@opennextjs/cloudflare": "^1.20.2",
     "dotenv": "^17.2.3",
-    "@cloudflare/workers-types": "^4.20250830.0",
-    "@opennextjs/cloudflare": "^1.12.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "wrangler": "4.126.0"
   }
 }

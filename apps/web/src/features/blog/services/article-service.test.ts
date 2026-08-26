@@ -4,8 +4,21 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ArticleService } from "./article-service";
 
+const { mockExistsSync, mockFindArticle, mockReadFileSync } = vi.hoisted(() => ({
+  mockExistsSync: vi.fn(),
+  mockFindArticle: vi.fn(),
+  mockReadFileSync: vi.fn(),
+}));
+
 // Mock dependencies
-vi.mock("fs");
+vi.mock("fs", () => ({
+  default: {
+    existsSync: mockExistsSync,
+    readFileSync: mockReadFileSync,
+  },
+  existsSync: mockExistsSync,
+  readFileSync: mockReadFileSync,
+}));
 vi.mock("path", async () => {
   const actual = await vi.importActual("path");
   return {
@@ -16,10 +29,6 @@ vi.mock("path", async () => {
 });
 
 // Mock repository functions
-const { mockFindArticle } = vi.hoisted(() => ({
-  mockFindArticle: vi.fn(),
-}));
-
 vi.mock("../repositories/blog-snapshot-reader", () => ({
   readArticleBySlugFromR2: mockFindArticle,
 }));
@@ -59,8 +68,8 @@ describe("ArticleService", () => {
       };
       mockFindArticle.mockResolvedValue(mockArticle);
 
-      vi.mocked(fs.existsSync).mockReturnValue(true);
-      vi.mocked(fs.readFileSync).mockReturnValue("# Content");
+      mockExistsSync.mockReturnValue(true);
+      mockReadFileSync.mockReturnValue("# Content");
 
       const result = await service.getArticle("slug");
       expect(result).not.toBeNull();
@@ -83,7 +92,7 @@ describe("ArticleService", () => {
       };
       mockFindArticle.mockResolvedValue(mockArticle);
 
-      vi.mocked(fs.existsSync).mockReturnValue(false);
+      mockExistsSync.mockReturnValue(false);
 
       const result = await service.getArticle("slug");
       expect(result?.content).toBe("");

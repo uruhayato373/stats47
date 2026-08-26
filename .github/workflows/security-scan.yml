@@ -6,8 +6,8 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '0 0 * * 0'  # 毎週日曜日 00:00 UTC
-  workflow_dispatch:  # 手動実行も可能
+    - cron: '0 0 * * 0' # 毎週日曜日 00:00 UTC
+  workflow_dispatch: # 手動実行も可能
 
 permissions:
   contents: read
@@ -30,15 +30,20 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
 
-      - name: 🔍 Run npm audit
-        run: npm audit --audit-level=moderate
-        continue-on-error: true  # 警告のみ、失敗させない
+      - name: 🔍 Enforce dependency security contracts
+        run: npm run test:dependency-security
+
+      - name: 🔍 Reject critical/high dependency vulnerabilities
+        run: npm audit --audit-level=high
+
+      - name: 🔍 Reject every runtime vulnerability
+        run: npm audit --omit=dev --audit-level=low
 
       - name: 🛡️ Initialize CodeQL
         uses: github/codeql-action/init@ff2f1c621b7f889edc0d3c761ac2e6a3f8cdb0dd # v4.37.7
@@ -48,7 +53,7 @@ jobs:
       - name: 🔍 Perform CodeQL Analysis
         id: codeql
         uses: github/codeql-action/analyze@ff2f1c621b7f889edc0d3c761ac2e6a3f8cdb0dd # v4.37.7
-        continue-on-error: true  # 警告のみ、失敗させない
+        continue-on-error: true # 警告のみ、失敗させない
         with:
           # SARIF をファイルに落として次の step で中身を出す。
           # ★理由: 検出結果 (rule / file / line) を読む唯一の経路が Security タブと

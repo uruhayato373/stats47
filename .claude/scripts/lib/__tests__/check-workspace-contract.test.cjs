@@ -11,7 +11,7 @@ const CHECKER = path.join(ROOT, ".claude/scripts/lib/check-workspace-contract.cj
 /**
  * @param packages  relative path → package.json の内容
  * @param options.testFilesIn  テストファイルを置くパッケージ (UNWIRED_TEST_SUITE 用)
- * @param options.registered   vitest.workspace.ts に登録するパッケージ。省略時は全件
+ * @param options.registered   root vitest.config.ts の projects に登録するパッケージ。省略時は全件
  * @param options.turbo        turbo.json の内容 (TURBO_MISSING_PASSTHROUGH_ENV 用)。
  *                             省略時は turbo.json を作らない = 検査対象外
  */
@@ -33,8 +33,8 @@ function fixture(packages, options = {}) {
   }
   const registered = options.registered ?? Object.keys(packages);
   fs.writeFileSync(
-    path.join(root, "vitest.workspace.ts"),
-    `export default [\n${registered.map((r) => `  '${r}/vitest.config.ts',`).join("\n")}\n];\n`,
+    path.join(root, "vitest.config.ts"),
+    `export default { test: { projects: [\n${registered.map((r) => `  '${r}/vitest.config.ts',`).join("\n")}\n] } };\n`,
   );
   fs.writeFileSync(path.join(root, "package-lock.json"), JSON.stringify({ lockfileVersion: 3, packages: lockPackages }));
   if (options.turbo !== undefined) {
@@ -162,14 +162,14 @@ test("node_modules 配下のテストは登録要求の根拠にしない", (t) 
   assert.deepEqual(result.output.findings, []);
 });
 
-test("vitest.workspace.ts が無ければ検出する", (t) => {
+test("root vitest.config.ts が無ければ検出する", (t) => {
   const item = fixture({ "packages/a": { name: "@stats47/a", main: "./src/index.ts" } });
   t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
-  fs.rmSync(path.join(item.root, "vitest.workspace.ts"));
+  fs.rmSync(path.join(item.root, "vitest.config.ts"));
   const result = run(item);
   assert.deepEqual(
     result.output.findings.map((f) => f.code),
-    ["MISSING_VITEST_WORKSPACE"],
+    ["MISSING_VITEST_CONFIG"],
   );
 });
 
