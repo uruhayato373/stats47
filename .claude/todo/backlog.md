@@ -57,6 +57,10 @@ updated: 2026-08-27
   実測し、総合物価水準と家賃、食料・住居・光熱水道の価格構造の2論点を追加した。地域差指数は
   物価上昇率でなく全国平均=100の価格水準であり、費目指数は支出額・割合でなく単純加算できないことを固定。
   全国CPI等の候補は都道府県別の直接根拠不足で不採択。catalog / test / 型検査はgreen。
+- **2026-08-27 manufacturing / fishery wave**: 経産省等「2026年版ものづくり白書」と水産庁
+  「令和7年度 水産白書」を一次資料に、製造拠点・雇用、人員あたり出荷規模、漁獲と養殖、漁業担い手の
+  4論点を追加した。関連ranking 5件・theme 3件は公開200、専用test 6件、data-configs全693件、
+  catalog error 0、生成物check、data-configs / web型検査はgreen。未整備は8テーマ。
 - **次**: 白書台帳に登録済みのテーマから2〜3件ずつ `/research-theme-catalog <theme-key>` を実行する。
   NotebookLM は引用付き候補抽出だけに使い、公式HTTPS URLと実在routeを確認できた候補だけ
   theme-designerが採択する。文部科学白書は公式source登録済みだがNotebookLM ID未登録なので、
