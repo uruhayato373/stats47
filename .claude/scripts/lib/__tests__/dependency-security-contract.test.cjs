@@ -84,6 +84,17 @@ test('every resolved esbuild version is outside the vulnerable range', () => {
   );
 });
 
+test('the lockfile includes the Rolldown binding used by Linux CI', () => {
+  const lockfile = readJson('package-lock.json');
+  const linuxBinding =
+    lockfile.packages['node_modules/@rolldown/binding-linux-x64-gnu'];
+
+  assert.equal(linuxBinding.version, '1.2.5');
+  assert.deepEqual(linuxBinding.cpu, ['x64']);
+  assert.deepEqual(linuxBinding.os, ['linux']);
+  assert.equal(linuxBinding.optional, true);
+});
+
 test('CI rejects high-risk development findings and every runtime finding', () => {
   const workflow = fs.readFileSync(
     path.join(ROOT, '.github/workflows/security-scan.yml'),
