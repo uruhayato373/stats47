@@ -81,6 +81,19 @@ describe("Workers Cache invalidation wiring", () => {
     expect(workflow).toContain('from "../.open-next/worker.js"');
     expect(workflow).not.toContain('main = ".open-next/worker.js"');
   });
+
+  it("deploy prebuildが検索index専用processでCloudflare資格情報を変換する", () => {
+    const workflow = readProjectFile(".github/workflows/deploy-workers.yml");
+    const generator = readProjectFile("apps/web/scripts/generate-search-index.ts");
+    expect(workflow).toContain(
+      "CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}",
+    );
+    expect(workflow).toContain(
+      "CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}",
+    );
+    expect(generator).toContain("configureSearchIndexR2Environment(process.env)");
+    expect(workflow).not.toMatch(/^\s+R2_ACCESS_KEY_ID:/m);
+  });
 });
 
 describe("API cache safety contract", () => {

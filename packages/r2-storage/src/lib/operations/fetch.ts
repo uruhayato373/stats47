@@ -91,20 +91,19 @@ export async function fetchFromR2(
     return null;
   }
 
-  // build / スクリプト環境の明示 opt-in: R2_PUBLIC_FETCH_URL が設定されていれば
-  // binding/S3 を試さず公開 URL に直行する。Node スクリプトでは getCloudflareContext()
-  // が必ず失敗しノイズ + 遅延になるため、その試行ごと回避する。
-  // CF Workers は本変数を設定しない (wrangler.toml の vars に入れない) ため挙動不変。
+  const env = detectEnvironment();
+
+  // build / スクリプト環境でS3資格情報が無い場合だけ、明示された公開URLへ直行する。
+  // S3資格情報があるCIでは、直前にpushしたobjectをCDN cache越しに読み直すと
+  // 古いsnapshotを派生物へ焼き込むため、下のS3 tierを必ず優先する。
   const forcedPublicBase = process.env.R2_PUBLIC_FETCH_URL?.replace(/\/+$/, "");
-  if (forcedPublicBase) {
+  if (forcedPublicBase && !env.hasS3Credentials) {
     return await fetchFromPublicUrl(forcedPublicBase, key);
   }
 
   if (shouldSkipRemoteR2Read()) {
     return null;
   }
-
-  const env = detectEnvironment();
 
   if (env.isCloudflareWorkers) {
     try {

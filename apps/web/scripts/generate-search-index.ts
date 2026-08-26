@@ -3,7 +3,7 @@
  *
  * 3 つの SSOT を統合して MiniSearch 用の search-index.json と
  * フィルタ用の search-index-meta.json を生成する:
- *   - ranking docs : R2 ranking item.json (listRankingItemsWithTagsFromR2) + git TS の description
+ *   - ranking docs : R2 app/ranking-items/all.json + git TS の description
  *   - blog docs    : R2 app/blog/all.json (BlogSnapshot, export-blog-snapshot の出力)
  *   - categories   : git TS categories マスタ (@stats47/data-configs)
  *
@@ -21,7 +21,7 @@ import path from "path";
 
 import { getCategoryName, getMetricConfig, listCategories } from "@stats47/data-configs";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
-import { listRankingItemsWithTagsFromR2 } from "@stats47/ranking/server";
+import type { RankingItem } from "@stats47/ranking/types";
 
 import {
   BLOG_SNAPSHOT_KEY,
@@ -29,9 +29,22 @@ import {
 } from "../src/features/blog/types/snapshot";
 import { tokenize } from "../src/features/search/lib/tokenize";
 import type { ContentType, SearchDocument } from "../src/features/search/types/search.types";
+import {
+  assertCompleteSearchIndexSources,
+  configureSearchIndexR2Environment,
+  selectSearchRankingItems,
+} from "./lib/search-index-r2-env";
+
+const RANKING_ITEMS_SNAPSHOT_KEY = "app/ranking-items/all.json";
+
+interface RankingItemsSnapshot {
+  count: number;
+  items: RankingItem[];
+}
 
 dotenv.config({ path: ".env.local" });
 dotenv.config({ path: ".env" });
+configureSearchIndexR2Environment(process.env);
 
 const STORE_FIELDS = [
   "id",
@@ -92,14 +105,14 @@ async function main() {
     return;
   }
 
-  // 1. ランキング項目（R2 item.json メタ + git TS の description）
+  // 1. ランキング項目（R2 all.json + git TS の description）
+  // 一覧生成物を1回読む。per-key item.jsonを2,000回超直列fetchするとCI buildが
+  // timeoutへ近づくため、同じgeneratorが同時生成する集約snapshotを検索用途の入力にする。
   try {
-    const result = await listRankingItemsWithTagsFromR2({
-      areaType: "prefecture",
-      isActive: true,
-    });
-    if (!result.success) throw result.error;
-    const items = [...result.data];
+    const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
+      RANKING_ITEMS_SNAPSHOT_KEY,
+    );
+    const items = selectSearchRankingItems(snapshot);
     items.sort((a, b) => a.rankingKey.localeCompare(b.rankingKey));
 
     for (const item of items) {
@@ -158,16 +171,8 @@ async function main() {
     console.warn("ブログ記事の取得に失敗:", error);
   }
 
-  // R2 データ源が読めない環境 (CI で R2 不在 等) では documents が 0 件になる。
-  // この場合に空インデックスで上書きすると本番検索が壊れるため、既存の committed
-  // search-index.json を保持して early return する (旧 D1 版の writeEmptyIndex と同じ安全策)。
-  // search-index.json はローカルで再生成して commit する運用 (prebuild の CI 実行は no-op)。
-  if (documents.length === 0 && fs.existsSync(indexPath) && fs.existsSync(metaPath)) {
-    console.log(
-      "ℹ️  ドキュメント 0 件 (R2 データ源不在)。既存の search-index.json / meta を保持します",
-    );
-    return;
-  }
+  const blogCount = documents.length - rankingCount;
+  assertCompleteSearchIndexSources({ rankingCount, blogCount });
 
   // MiniSearch に追加
   miniSearch.addAll(documents);

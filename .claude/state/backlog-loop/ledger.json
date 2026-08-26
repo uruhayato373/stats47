@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T16:29:50.245Z",
+  "updatedAt": "2026-08-26T18:19:44.535Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -545,6 +545,19 @@
           "evidence": "P12一次資料で登録件数定義と非商用境界を確定。19140地物→17254登録/重複1886/未解決0をローカル生成し商品系から除外。40 GIS test、184 product test、3 workspace typecheck、config2298件error0。R2公開は未承認のためdeferred。",
           "failReason": null,
           "followUps": []
+        },
+        {
+          "at": "2026-08-26T18:19:44.535Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "impl-large は draft PR 経路 (delegate=agent:backlog-solver-hard) で、この CI run では着手しない規約により skip",
+          "failReason": "class-needs-pr",
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -628,7 +641,7 @@
       "completedAt": null
     },
     "QUALITY-GATE-COVERAGE-01": {
-      "class": "impl-large",
+      "class": "needs-owner",
       "status": "open",
       "sourceFile": ".claude/todo/backlog.md",
       "title": "CI・テスト・監査の実効網羅性強化",
@@ -664,6 +677,19 @@
           "evidence": "QG0は26 workspace・critical checker 43件を登録。未分類critical 0、fixture 11件と実repo監査green",
           "failReason": "親カードのQG1-QG8が残るため削除条件未達",
           "followUps": []
+        },
+        {
+          "at": "2026-08-26T18:19:39.523Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "route.class が既に needs-owner (attempts=2, escalatedFrom=fable)。オーナー判断待ちのため触らず次へ",
+          "failReason": "needs-owner",
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -671,7 +697,13 @@
         "lastReason": "親カードのQG1-QG8が残るため削除条件未達",
         "since": "2026-08-25T20:41:21.255Z"
       },
-      "reclassifiedFrom": [],
+      "reclassifiedFrom": [
+        {
+          "from": "impl-large",
+          "to": "needs-owner",
+          "at": "2026-08-26T18:19:39.523Z"
+        }
+      ],
       "completedAt": null
     },
     "SURVEY-EDITORIAL-80-01": {
