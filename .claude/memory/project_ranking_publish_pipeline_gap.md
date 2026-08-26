@@ -1,6 +1,6 @@
 ---
 name: project_ranking_publish_pipeline_gap
-description: ranking metric の本番公開は config isActive:true だけでは不十分 (KNOWN/SITEMAP/INDEXABLE/R2 整合が要る)。未登録キーは 2026-06-06 5d9afb24 以降 middleware 410 でなく page notFound=404 (GONE のみ 410)。残: all.json/item.json の isActive sync + SITEMAP 追加
+description: ranking metric の本番公開は config isActive:true だけでは不十分 (KNOWN/SITEMAP/R2 values/OGP 整合が要る)。画像の件数制限は manifest-missing を旧manifest移行より優先する
 metadata: 
   node_type: memory
   type: project
@@ -36,5 +36,22 @@ ranking を本番公開するための派生物パイプライン (DBレス移�
 3. `sitemap-ranking-keys.ts` → `node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs` (KNOWN 全キー掲載。sync-ranking-keys job で自動)
 4. `indexable-ranking-keys.ts` → legacy 安全弁 (専用生成器なし・sitemap builder が読むだけ)
 5. 再デプロイ → `gh workflow run purge-cdn.yml` で全パージ (7日キャッシュ)
+
+## 2026-08-26 OGP公開フックの優先順位修正
+
+**問題**: 新規ranking 3件のページ本体・調査ハブ・内部リンクは本番200だったが、静的R2 OGPと
+ranking cardが404で、デプロイ後のroute smokeが失敗した。
+
+**原因**: `sync-snapshots.yml`の画像生成フック自体は実行されていたが、候補2,167件の内訳が
+`manifest-invalid=2164 / manifest-missing=3`だった。生成器は候補順の先頭へ`--limit 50`を適用したため、
+既存の旧manifest移行50件だけを処理し、新規3件を後回しにした。
+
+**対策**: `prioritizeChangedImageCandidates`で`manifest-missing`→`asset-missing`→既存manifestの
+移行・更新の順に決定的ソートし、その後でlimitを適用する。同一理由はentity id順。回帰テストは
+`image-generation-manifest.test.ts`、公開後の最終gateは`.github/scripts/smoke-test-routes.sh`の
+`og:image` HTTP 200検査とする。
+
+**証拠**: GitHub Actions `32906240999`（画像フックの選択内訳）、`32912691655`
+（3件のOGP 404）、`apps/web/scripts/lib/image-generation-manifest.ts`（優先順位実装）。
 
 [[project_dbless_migration_2026_05_29]] [[feedback_check_why_removed_before_reviving]]

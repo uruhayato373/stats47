@@ -32,6 +32,7 @@ import {
   createImageGenerationPlan,
   createImageGenerationPublishPlan,
   inspectRemoteImageGeneration,
+  prioritizeChangedImageCandidates,
   selectChangedImageBatch,
   sha256,
 } from '../image-generation-manifest';
@@ -223,6 +224,37 @@ describe('image generation fingerprint', () => {
         maxGenerate: 2,
       })
     ).toThrow('安全上限');
+  });
+
+  it('prioritizes missing public bundles before legacy manifest migration', () => {
+    const status = (
+      reason:
+        | 'manifest-missing'
+        | 'asset-missing'
+        | 'manifest-invalid'
+        | 'fingerprint-changed'
+    ) => ({
+      isCurrent: false as const,
+      reason,
+      remoteFingerprint: null,
+      remoteManifestSha256: null,
+    });
+
+    const prioritized = prioritizeChangedImageCandidates([
+      { item: { id: 'legacy-b' }, status: status('manifest-invalid') },
+      { item: { id: 'new-b' }, status: status('manifest-missing') },
+      { item: { id: 'stale-a' }, status: status('fingerprint-changed') },
+      { item: { id: 'broken-a' }, status: status('asset-missing') },
+      { item: { id: 'new-a' }, status: status('manifest-missing') },
+    ]);
+
+    expect(prioritized.map(({ item }) => item.id)).toEqual([
+      'new-a',
+      'new-b',
+      'broken-a',
+      'legacy-b',
+      'stale-a',
+    ]);
   });
 
   it('separates AI background content from the final composite renderer', () => {

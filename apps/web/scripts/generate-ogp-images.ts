@@ -68,6 +68,7 @@ import {
   calculateRendererHash,
   createImageGenerationPlan,
   createImageGenerationPublishPlan,
+  prioritizeChangedImageCandidates,
   selectChangedImageBatch,
   serializeImageGenerationManifest,
   type ImageGenerationPlan,
@@ -678,9 +679,9 @@ async function main() {
         ' 障害時に全件再生成しないため処理を中止します。'
     );
   }
-  const changed = opts.force
-    ? checked
-    : checked.filter(({ status }) => !status.isCurrent);
+  const changed = prioritizeChangedImageCandidates(
+    opts.force ? checked : checked.filter(({ status }) => !status.isCurrent)
+  );
   const reasonCounts = new Map<string, number>();
   for (const { status } of changed) {
     reasonCounts.set(status.reason, (reasonCounts.get(status.reason) ?? 0) + 1);
