@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const marineAquacultureHarvest: MetricConfig = {
   "key": "marine-aquaculture-harvest",
   "title": "海面養殖業収獲量",
+  "description": "海面または陸上の施設で海水を使用して水産動植物を集約的に育成し、収獲時の原形重量で合計した量です。",
   "unit": "トン",
   "category": "agriculture",
   "source": {

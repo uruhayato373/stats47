@@ -4,6 +4,8 @@ export const localAllocationTaxRatioPrefFinance: MetricConfig = {
   "key": "local-allocation-tax-ratio-pref-finance",
   "title": "地方交付税割合",
   "subtitle": "都道府県財政",
+  "description": "都道府県財政の地方交付税収入を、歳入決算総額で割り、100倍した割合。",
+  "note": "歳入に占める地方交付税の構成比を示す。割合が低くても、地方税など他の歳入構成や歳入総額を併せて見なければ財政力の高低は判断できない。",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

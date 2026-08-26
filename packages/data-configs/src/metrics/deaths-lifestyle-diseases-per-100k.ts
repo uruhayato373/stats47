@@ -4,6 +4,8 @@ export const deathsLifestyleDiseasesPer100k: MetricConfig = {
   "key": "deaths-lifestyle-diseases-per-100k",
   "title": "生活習慣病による死亡者数",
   "subtitle": "人口10万人当たり",
+  "description": "人口動態調査で原死因が悪性新生物（腫瘍）、糖尿病、高血圧性疾患、心疾患（高血圧性を除く）、脳血管疾患のいずれかだった死亡者数の合計を、日本人人口で割り10万倍した値。",
+  "note": "死亡診断書に複数の死因が記載された場合も、統計表章では死亡を引き起こした一連の事象の起因となる原死因1つで分類する。",
   "unit": "人",
   "category": "population",
   "source": {

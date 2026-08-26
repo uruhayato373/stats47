@@ -87,8 +87,13 @@ updated: 2026-08-25
   `apps/web/src/features/survey/survey-editorial.ts` を authored SSOT として追記する。
 - **目的**: fallback の組織名だけで終わる調査ハブを、読者が「何が分かるか・どの問いへ進めるか・
   何に注意して読むか」を判断できる出典ハブにする。全80調査へ同じ定型文を一斉生成する作業ではない。
-- **再開ポインタ**: `nextBatch=survey-editorial.ts に未登録の survey を surveys.json の displayOrder 順で先頭10件`。
+- **再開ポインタ**: `completedIds=water-pollution-survey,workplace-accident-survey / nextSurvey=minimum-wage`。
   各runの最後に、完了したsurveyIdと次の先頭surveyIdだけをこの行へ記録する。長い実行ログは残さない。
+- **在庫再評価 (2026-08-26)**: CI secret の e-Stat APP_ID で refresh を完走し、
+  `hospital-bed-count`（tab 280）、`national-medical-expense-inpatient`（SSDS J4005）、
+  `ss-pollution-load`をR2・ランキング・調査逆引きへ公開した。`hospital-report`、
+  `national-medical-expenditure`、`water-pollution-survey`は関連rankingKey 3件を満たす。
+  それ以外の3件未満の調査は引き続き個別停止し、次batch開始時にR2 itemsから在庫を再計算する。
 - **1調査の必須項目**:
   1. `summary`: 調査主体・対象・周期・調査が捉える範囲を、公式一次資料で確認した2〜3文。
   2. `whatYouCanLearn`: 実在する関連ランキング群から導ける3〜5項目。一般論を水増ししない。
@@ -141,54 +146,6 @@ updated: 2026-08-25
   research-theme-catalogの実証ゲートに従い、公式資料とrouteを検証してからThemeCatalogへ反映。
   validate:catalog、対象test、web type-checkを通し、カードの次テーマだけ更新。デプロイしない。」
 
-### [THEME-METRIC-DEFINITION-133-01] テーマ指標ハブ133件の定義・注釈を一次資料で整備する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:npm run validate:config --workspace=@stats47/data-configs] [Codex候補] [起票:2026-08-25]
-
-- **owner**: `estat-researcher → data-ingester`。ThemeCatalog が参照する ranking key だけを対象にし、
-  `MetricConfig` git TS を authored SSOT とする。ランキング本文や生成JSONへ説明を複製しない。
-- **実測ベースライン (2026-08-25)**: 133 unique ranking key のうち `description` 欠落114件、
-  `note` 記載0件。タイトル・単位・series名をつないだ自動文は統計の定義・注意にならないため採用しない。
-- **実行順**:
-  1. `validate-metric-config` の pure collector に `themeReferencedKeys`、`missingDescription`、
-     `populatedNote` を追加し、description欠落数だけを増加不可のbaseline ratchetにする。
-     note件数は観測値に留め、汎用文による穴埋め・正規化後の同文重複を拒否する。
-     既存欠落を成功扱いで固定せず、移行完了時にdescriptionの必須gateへ切り替える。
-  2. テーマ画面から定義ハブへ露出する指標を優先し、1 run 最大10件ずつ、所管省庁・e-Statメタ・
-     調査票/用語解説の一次資料で定義、分母、地域粒度、時点、単位、系列断絶を確認する。
-  3. `description` は「何を測るか・計算定義」を個別執筆する。`note` は標本、対象範囲、
-     比較上の具体的注意を一次資料で確認できた指標だけに追加する。generator/fallbackによる穴埋め、
-     同一定型文の横展開、出典未確認の推測はしない。
-  4. 各batchで config validator、対象test、`validate:catalog`、data-configs type-checkを実行し、
-     一次資料URLとMetricConfig source座標が一致したbatchだけ反映する。
-- **停止条件**: 一次資料が失効、定義とe-Stat座標が不一致、都道府県/県庁所在市/全国が混在、
-  分子・分母または系列断絶を確定できない場合。そのkeyは未変更で残し、類似指標の文面を転記しない。
-- **完了条件**: 133/133で個別の`description`があり、必要な`note`だけが一次資料の具体的注意と一致し、
-  description欠落0・空定型0・note定型穴埋め0。ratchetをdescription必須gateへ縮小し、
-  config/catalog validator、対象test、data-configs type-checkがgreenになる。
-
-### [THEME-CHART-RECIPE-DRIFT-01] テーマチャート3系統の取得レシピ・表示名ドリフトを是正する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [Codex候補] [起票:2026-08-25]
-
-- **owner**: `theme-component-builder`。`MetricConfig` と `StatSeriesRef` を再利用し、ThemeCatalog内に
-  独立した軸・換算レシピSSOTを増やさない。`CROSS-PAGE-DATA-SSOT-01` の移行境界を迂回しない。
-- **実測した不一致 (2026-08-25)**:
-  1. `labor-wages/labor-wages-gender-gap` は statsDataId しか指定せず、正典
-     `gender-wage-gap` の cdTab=10、cdCat02/03/04=01、cat01女性03÷男性02の`axisRatio`が欠落。
-  2. `occupation-salary/theme-occ-medical-trend` は職種cdCat02だけで、医師・看護師・介護職員の正典にある
-     cdCat01=01、月例給与tab08×12 + 賞与tab12の`tabCombination`と値換算が欠落。
-  3. `local-economy/theme-economy-income-wage` は L3130を参照するが、正典は可処分所得なのに
-     title/labelが「課税所得」。relatedRankingKeyは`disposable-income-worker-households`で矛盾している。
-- **実行順**: (1) 3系統を対応MetricConfig参照へ移す、(2) ThemeCatalog生成物を再生成、
-  (3) ratio・年収合成・L3130名称を各fixtureでred→green確認、(4) catalog validatorに
-  relatedRankingKeysと系列レシピ/表示名の意味ドリフト検査を追加する。
-- **停止条件**: e-StatメタとMetricConfigが一致しない、複数relatedRankingKeyから系列対応を一意に決められない、
-  または修正が生e-Statレシピの新規複製を要求する場合。値・軸・名称を推測で補わずSSOT移行へ戻す。
-- **完了条件**: 男女格差が正しい比率、医療3職種が月例給与×12+賞与の年収、L3130が可処分所得として
-  表示される。seedした3種類の欠陥でvalidator/testが失敗し、修復後に`generate:catalog --check`、
-  `validate:catalog`、data-configs test/type-checkがgreenになる。
-
 ### [ASP-CONTINUITY-01] afb の承認追跡と広告コード取得 (オーナーのログインが要る分)
 
 タグ: [収益化] [種類:改善] [実行:ユーザー] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-07-28]
@@ -217,39 +174,6 @@ updated: 2026-08-25
   lock 競合、site/program 不一致のいずれかで停止する。
 - **正典**: `.claude/rules/affiliate-ads-standards.md` §11 /
   `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md`
-
-### [ASP-ELIGIBILITY-GATE-01] 掲載適格性を eligibility core にして配信を fail-closed にする
-
-タグ: [収益化] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-08-21]
-
-- **owner**: Claude Code (ブラウザ不要・pure code)
-- **経緯**: `ASP-CONTINUITY-01` から機械側だけを切り出した。旧カードは 6 手順を 1 枚に混ぜていたため、
-  ブラウザが要らない工程まで「オーナー待ち」に見えて誰も着手できなかった。
-- **完了済 (2026-08-21)**: doc 42 §6.3-6.5 の **plan / journal / lock を apply CLI へ配線した**。
-  純粋コア `asp-operation-core.mjs` は前からあったが、`affiliate-ops.mjs` が lock と health を
-  使うだけで、**申請の本体 `affiliate-apply.mjs` はどれも使っていなかった**。
-  - `--commit --plan <operationId>` のみ許し `--commit --id` を禁止 (`validateArgs`・単体テスト)。
-  - dry-run が `.local/affiliate-ops/plans/<id>.json` に「サイト・案件・対象数・ボタン文言・
-    適格性指紋」を焼き、commit 直前に同じ画面を再観測して `validatePlanForCommit` で突き合わせる。
-    不一致は押さずに `.expired.json` へ改名して残す。
-  - journal は `planned → intent-recorded → sent → confirmed|unknown` を fsync 付き append。
-    `sent`/`unknown` があれば `canAutoResend` が false になり自動再送しない。
-  - ASP profile の排他 lock を `affiliate-ops.mjs` 経由で取得・解放する。
-  - **実測 (もしも・実機)**: dry-run 8 件で lock 取得→解放、plan 6 件生成 (24h 期限・sha256 付き)、
-    クリックなし。commit の拒否 3 経路 (plan 無し / ASP 不一致 / `sent` 済みの再送) が
-    ブラウザへ到達する前に止まることを実測。テスト 25 件 pass。
-- **残り**: doc 42 §7 の eligibility core。いまの適格性の材料は「Red Line か」「vertical」の 2 つだけで、
-  `targetRankingKeys` の hard allowlist が無い。core を入れると `eligibilityFingerprint` の入力が増え、
-  **古い plan は再照合で自動失効する** — それが正しい挙動なので、入れる側で壊れない。
-- **次**: (1) eligibility pure core を `lib/` に足してテストで固定する
-  (2) `affiliate-apply.mjs` の `eligibilityFingerprint` の材料へ足す
-  (3) 配信側 (`resolve-affiliate-ad.ts`) を fail-closed にする
-  (4) register 側を dry-run で縦断し、git TS 差分・rollback を確認する。
-- **完了条件**: eligibility が pure core に集約され、allowlist 外の案件が配信に出ないことを
-  テストで固定し、apply の plan 指紋にその入力が乗っている。
-- **禁止**: `--force` 相当の迂回引数を作らない。`--commit` の実行と SSOT 反映・公開は別承認。
-- **正典**: `.claude/rules/affiliate-ads-standards.md` §11 /
-  `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` §7
 
 ### [AFF-INTENT-FRICTION-PORTFOLIO-01] 低ハードル・高意図案件を二層で検証できるアフィリエイト基盤
 
@@ -414,17 +338,6 @@ CLAUDE.mdを読み、.claude/todo/backlog.md の AFF-INTENT-FRICTION-PORTFOLIO-0
 ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/priority反映は別の明示承認なしに実行しないでください。
 最後に、成果、変更ファイル、検証結果、既存問題、未完了、次のWPを簡潔に報告してください。
 ```
-
-### [IMAGE-DELTA-PUBLISH-01] 生成画像の変更検知とexact R2反映
-
-タグ: [起票:2026-07-27]
-
-- **owner**: Claude Code
-- **根拠**: 作業ツリーに未commit実装があり、全件再生成・prefix pushを廃止する途中。
-- **次**: 現在差分を再監査し、無関係なdirty fileを混ぜず、manifest fingerprint・asset hash・plan TTL・ETag CAS・lock競合・no-change空planを対象testで閉じる。
-- **完了条件**: `test:image-pipeline`、`type-check:image-pipeline`、policy audit、関連workspace type-check、web buildがgreen。同一入力は0件、1依存変更は該当bundleだけ、破損1件はそのbundleだけself-healする。
-- **外部反映**: commit/PR/deploy/R2初回移行は検証後に別承認。大量dispatchは禁止し、`r2-write`を直列実行する。
-- **正典**: `.claude/rules/ogp-image-standards.md` / `.claude/rules/r2-storage-design.md`
 
 ### [CROSS-PAGE-DATA-SSOT-01] テーマ・ランキング・ブログのデータ／単位／配色SSOT統合
 
@@ -726,6 +639,10 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **目的**: 「checkerやtestファイルが存在する」ではなく、公開値を壊す欠陥を意図的に混入したときに
   対応するPR gateが確実に失敗し、修復後にgreenへ戻る状態を作る。production workspace、R2境界、主要route、
   単位・配色・欠測の意味まで同じ契約で検証し、未実行・fail-open・過度なskipを機械的に検出する。
+- **QG0 完了 (2026-08-26)**: `quality-gates.json` に26 workspaceとcritical checker 43件を登録し、
+  checkerの実行文脈を `declared / invoked / blocking / scheduled` へ分類した。blocking 41件・scheduled 22件に対する
+  未宣言criticalは0。未配線、docs-only、`continue-on-error`、期限切れ例外、重複ID、不存在command、
+  未宣言criticalのfixture 11件と実repo監査がgreen。次はQG1から再開する。
 - **監査ベースライン (2026-08-13、ローカル実測)**:
   - rootの`test:packages`は`vitest run --project '@stats47/*'`で、`apps/admin`のunit test
     **14 file / 136 test**はPR CI対象外。galleryにはPlaywright 6 specもあるがworkflowから呼ばれていない。
@@ -1313,55 +1230,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   再開手順に smoke の実行を紐づけた (`affiliate-ads-standards.md` §12)。自動広告の解除は
   実施済みなので、再開後の smoke が緑なら解決とみなす。
 - **完了条件**: AdSense 再開後の post-deploy smoke で、出典・本文がリンク化されないことを示す。
-
-### [AICONTENT-BUILDINPUT-ZEROFILL-01] build-input が R2 に無い県をゼロ埋めするのをやめる
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx vitest run packages/ai-content/src] [起票:2026-08-24]
-
-`packages/ai-content/src/scripts/build-input.ts` は R2 の観測値に存在しない県を `value: 0` /
-`rank: 0` で埋めて 47 件に揃え、生成器へ渡す。生成器はそれを実在の観測として読むため、
-対象外の県に解説が書かれる。
-
-- **実害** (2026-08-24 に 6 例を実測。左が R2 の実行数、右がゼロ埋めされる県数):
-  voter-turnout-governor 11/36 ・ fishery-species-catch-snow-crab 14/25 ・
-  factory-location-area-annual 42/5 ・ high-school-teacher-annual-income 42/5 ・
-  port-container-count / port-inbound-ships / fishery-workers-coastal-offshore 39〜40/7〜8
-- **なぜ機械で止まらないか**: `audit-ai-content.mjs` はこれを blocker にしない
-  (`pref-unknown-area` / `pref-count` の warn 止まり)。`voter-turnout-governor` では実際に
-  「この年度に選挙が実施されておらず、投票率の値は記録されていません」という中身のない解説が
-  36 件生成された。嘘ではないが読者価値がなく、rank 0 / value 0 は「投票率 0%」と誤読されうる。
-- **次**: R2 に無い県を渡さない。渡すなら「対象外」と識別できる形にし、生成器とゲートの双方が
-  ゼロ埋めと実在の 0 を区別できるようにする (施設数は 0 が実在しうるので一律除外にはしない)。
-- **完了条件**: 上記 6 key で build-input が返す県数が R2 の行数と一致し、それを固定するテストがある。
-- **保留中の生成物**: `voter-turnout-governor` は `.local/aic-held/` に退避 (公開していない)。
-  `high-school-teacher-annual-income` は未生成。どちらも是正後に生成できる。
-- **正典**: `.claude/rules/ranking-content-standards.md`
-
-### [UI-CARD-CENSUS-SURVEY-01] SurveyTaxonomyCard の census ベースラインを決着させる
-
-タグ: [UI・UX] [種類:意思決定] [実行:対話] [検証:node .claude/scripts/lib/check-card-census.cjs] [起票:2026-08-24]
-
-`check-card-census.cjs` が 2 件で落ちており、**develop→main の PR (`pr-quality-check`) を
-ブロックする**。develop の CI は通るのでデプロイ直前まで気づけない (2026-08-24 実測)。
-
-- **新規**: `apps/web/src/features/survey/components/SurveyTaxonomyCard.tsx` がベースライン外。
-  まず既存の共有カード (`SurfaceCard` / `ChartPanel` / `ChartCard` / `RailCard` / `KpiCard`) で
-  表現できないか検討する。どうしても必要なら理由コメント付きで BASELINE に追加する。
-- **削除済み**: `NationalTrendCard` が消えているので BASELINE を縮小する。
-- **完了条件**: `node .claude/scripts/lib/check-card-census.cjs` が exit 0。
-- **正典**: `docs/01_技術設計/04_デザインシステム.md` / `.claude/rules/ui-components.md`
-
-### [UI-AD-RAILSLOT-CATEGORY-01] category ページの RailAdSlot を本文カラムから外す
-
-タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:node .claude/scripts/lib/check-ad-placement.cjs] [起票:2026-08-24]
-
-`apps/web/src/app/category/[categoryKey]/page.tsx` が `RailAdSlot` を右レール以外で使っている。
-右レール (316px) 前提の枠なので本文カラムに置くと枠だけレール幅で浮く。**develop→main の PR
-(`pr-quality-check`) をブロックする** (2026-08-24 実測)。
-
-- **次**: 本文末尾に置きたいなら `FooterAdSlot` に替える。配置意図が別なら合う枠を選ぶ。
-- **完了条件**: `node .claude/scripts/lib/check-ad-placement.cjs` が exit 0。
-- **正典**: `docs/01_技術設計/04_デザインシステム.md` / `.claude/rules/ui-components.md`
 
 ## 🟡 中 — 2〜3ヶ月以内
 

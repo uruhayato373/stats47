@@ -4,6 +4,7 @@ export const deathsDiabetesPer100k: MetricConfig = {
   "key": "deaths-diabetes-per-100k",
   "title": "糖尿病による死亡者数",
   "subtitle": "人口10万人当たり",
+  "description": "人口動態調査で原死因が糖尿病だった死亡者数を日本人人口で割り、10万倍した値。",
   "unit": "人",
   "category": "population",
   "source": {

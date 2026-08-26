@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const householdRatioWith65plus: MetricConfig = {
   "key": "household-ratio-with-65plus",
   "title": "65歳以上の世帯員のいる世帯割合",
+  "description": "65歳以上の世帯員がいる世帯数を一般世帯数で除して100を掛けた割合です。",
   "unit": "％",
   "category": "population",
   "source": {

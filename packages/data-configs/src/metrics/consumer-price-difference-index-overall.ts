@@ -4,6 +4,8 @@ export const consumerPriceDifferenceIndexOverall: MetricConfig = {
   "key": "consumer-price-difference-index-overall",
   "title": "消費者物価地域差指数",
   "subtitle": "総合",
+  "description": "全国平均の物価水準を100とし、総合の品目構成で都道府県の物価水準を比較した年平均指数です。",
+  "note": "消費者物価指数（CPI）の総合に含まれる「持家の帰属家賃」は、この総合指数には含まれません。",
   "unit": "（全国=100）",
   "category": "economy",
   "source": {

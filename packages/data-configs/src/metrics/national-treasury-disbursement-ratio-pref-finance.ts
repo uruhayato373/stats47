@@ -4,6 +4,8 @@ export const nationalTreasuryDisbursementRatioPrefFinance: MetricConfig = {
   "key": "national-treasury-disbursement-ratio-pref-finance",
   "title": "国庫支出金割合",
   "subtitle": "都道府県財政",
+  "description": "都道府県財政の国庫支出金収入を、歳入決算総額で割り、100倍した割合。",
+  "note": "歳入に占める国庫支出金の構成比であり、国庫支出金の金額そのものや、都道府県の自主財源割合を直接示す指標ではない。",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

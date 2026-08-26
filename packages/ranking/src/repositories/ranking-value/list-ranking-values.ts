@@ -23,9 +23,12 @@ export async function listRankingValues(
     const payload = await readStatsValues(rankingKey, areaType);
     if (!payload) return ok([]);
 
-    const filtered = payload.rows.filter((r) => {
-      if (!yearCode) return true;
-      return r.yearCode === yearCode || r.yearCode.startsWith(yearCode);
+    const filtered = payload.rows.filter((row) => {
+      const matchesYear =
+        !yearCode || row.yearCode === yearCode || row.yearCode.startsWith(yearCode);
+      // R2 は対象外・未集計の地域を value/rank=null の行として保持する。
+      // 0 に変換すると実在の観測値と区別できなくなるため、ランキング値として返さない。
+      return matchesYear && row.value !== null && row.rank != null;
     });
 
     const values: RankingValue[] = filtered.map((row) => ({
@@ -35,9 +38,9 @@ export async function listRankingValues(
       yearCode: String(row.yearCode ?? ""),
       yearName: row.yearName ?? "",
       metricKey: rankingKey,
-      value: row.value != null ? Number(row.value) : 0,
+      value: Number(row.value),
       unit: row.unit ?? "",
-      rank: row.rank != null ? Number(row.rank) : 0,
+      rank: Number(row.rank),
     }));
 
     return ok(values);

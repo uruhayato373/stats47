@@ -5,6 +5,8 @@ export const airPassengerTransport: MetricConfig = {
   "title": "航空輸送人員",
   "unit": "千人",
   "category": "tourism",
+  "description": "旅客地域流動調査で集計された、定期国内航空便による年間の旅客輸送人員。",
+  "note": "国内旅客だけを対象とし、大阪国際空港の輸送人員は大阪府に帰属させている。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010103",

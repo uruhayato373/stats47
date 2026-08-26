@@ -35,8 +35,24 @@ const live = collectThemeDataDependencies(Object.values(THEME_CATALOGS));
 
 describe("① 期待依存集合が完全に列挙できる (baseline lock)", () => {
   it("総 request / distinct request を固定 (移行で動いたら更新)", () => {
-    expect(live.totalRequests).toBe(247);
-    expect(live.distinctRequests.length).toBe(186);
+    expect(live.totalRequests).toBe(241);
+    expect(live.distinctRequests.length).toBe(180);
+  });
+
+  it("R2へ移行済みの系列も metricKey 依存として列挙する", () => {
+    expect(live.totalMetricRefs).toBe(6);
+    expect(live.distinctMetricKeys).toEqual([
+      "care-worker-annual-income",
+      "disposable-income-worker-households",
+      "doctor-annual-income",
+      "gender-wage-gap",
+      "minimum-wage-by-region",
+      "nurse-annual-income",
+    ]);
+    expect(
+      live.perChart.find((chart) => chart.componentKey === "theme-occ-medical-trend")
+        ?.metricRefs,
+    ).toHaveLength(3);
   });
 
   it("pyramid は props 空でも 34 request/chart を列挙 (旧監査で漏れていた)", () => {
@@ -133,9 +149,9 @@ describe("④ provenance 付き collector — 監査母集団の単一ソース 
 describe("⑤ 依存ミラー — 決定的・正典と byte 一致する形 (audit が読む鏡)", () => {
   it("buildThemeDependencyMirror は distinct を key 昇順で並べ件数を一致させる", () => {
     const mirror = buildThemeDependencyMirror(THEME_CATALOGS);
-    expect(mirror.totalRequests).toBe(247);
-    expect(mirror.distinctRequests).toBe(186);
-    expect(mirror.requests.length).toBe(186);
+    expect(mirror.totalRequests).toBe(241);
+    expect(mirror.distinctRequests).toBe(180);
+    expect(mirror.requests.length).toBe(180);
     const keys = mirror.requests.map((r) => r.key);
     expect(keys).toEqual([...keys].sort());
     // 各 request は audit が e-Stat に送れる形 (statsDataId + filters)

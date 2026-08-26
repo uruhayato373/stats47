@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const vacantHousingRatio: MetricConfig = {
   "key": "vacant-housing-ratio",
   "title": "空き家比率",
+  "description": "住宅・土地統計調査の空き家数を総住宅数で割り、100倍した値。空き家には二次的住宅、賃貸用・売却用住宅、その他の人が住んでいない住宅を含む。",
+  "note": "別荘など一時的に使用する住宅も空き家に含むため、管理不全・放置住宅だけの割合ではない。",
   "unit": "％",
   "category": "construction",
   "source": {

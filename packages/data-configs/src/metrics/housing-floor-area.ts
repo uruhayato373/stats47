@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const housingFloorArea: MetricConfig = {
   "key": "housing-floor-area",
   "title": "1住宅当たり延べ面積",
+  "description": "住宅・土地統計調査における1住宅当たりの床面積の合計。居住室に加え、玄関、台所、トイレ、浴室、廊下、階段、押入れや住宅内の営業用部分を含む。",
+  "note": "別棟の物置・車庫や営業用の附属建物、共同住宅の共用廊下・階段は含まない。2013年・2018年は福島県の一部避難地域が調査対象外。",
   "unit": "m²",
   "category": "construction",
   "source": {

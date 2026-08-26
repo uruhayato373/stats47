@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { cn } from '@stats47/components';
@@ -100,9 +101,23 @@ export function ThemeSwitcher({
           : 'mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-border pb-3 text-sm'
       )}
     >
-      <span className="block shrink-0 text-xs font-medium text-muted-foreground">
-        {compact ? 'テーマ' : 'テーマを切り替える'}
-      </span>
+      {compact ? (
+        <div className="flex min-h-6 items-center justify-between gap-3">
+          <span className="block shrink-0 text-xs font-medium text-muted-foreground">
+            テーマ
+          </span>
+          <Link
+            href="/themes"
+            className="text-xs font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+          >
+            テーマ一覧
+          </Link>
+        </div>
+      ) : (
+        <span className="block shrink-0 text-xs font-medium text-muted-foreground">
+          テーマを切り替える
+        </span>
+      )}
       <Select
         value={currentThemeKey}
         onValueChange={(key) => {

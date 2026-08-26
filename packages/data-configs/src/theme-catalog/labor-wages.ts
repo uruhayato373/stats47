@@ -94,16 +94,12 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "男女賃金格差の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0003426933"
+            "metricKey": "gender-wage-gap",
+            "label": "男女賃金格差",
+            "colorRole": "female"
           }
-        ],
-        "labels": [
-          "男女賃金格差"
-        ],
-        "seriesColors": [
-          "female"
         ]
       },
       "relatedRankingKeys": [

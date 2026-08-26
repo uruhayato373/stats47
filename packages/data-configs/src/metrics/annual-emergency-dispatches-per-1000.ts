@@ -5,6 +5,8 @@ export const annualEmergencyDispatchesPer1000: MetricConfig = {
   "title": "年間救急出動件数",
   "unit": "件",
   "category": "safetyenvironment",
+  "description": "救急自動車による年間の救急出動件数を総人口で除し、人口1,000人当たりに換算した値。",
+  "note": "出動件数には急病、一般負傷、交通、転院搬送のほか、火災、自然災害、水難など消防庁が定める事故種別を含む。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010209",

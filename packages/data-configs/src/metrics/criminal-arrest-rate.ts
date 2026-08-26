@@ -5,6 +5,8 @@ export const criminalArrestRate: MetricConfig = {
   "title": "刑法犯検挙率",
   "unit": "％",
   "category": "safetyenvironment",
+  "description": "犯罪統計の刑法犯検挙件数を、交通業過を除く刑法犯認知件数で除して100を掛けた割合。",
+  "note": "分子は検挙した事件の件数、分母は被害届などを端緒に警察が認知した事件の件数であり、検挙人員の割合ではない。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",

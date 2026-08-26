@@ -29,7 +29,7 @@ import type { CatalogChart, ThemeCatalog } from '../types';
 const BASELINE = {
   themes: 20,
   charts: 107,
-  chartsWithRawEstatParams: 84,
+  chartsWithRawEstatParams: 81,
   // markdown-section 24 件を除く全 data-bound component が指標ハブを持つ。
   chartsWithRelatedRankingKeys: 83,
   // WP5 完了: 生色を color role へ全移行 (179 → 0)。以後 ratchet は「生色 0」を強制する。

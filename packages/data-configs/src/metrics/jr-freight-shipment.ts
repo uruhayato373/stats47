@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const jrFreightShipment: MetricConfig = {
   "key": "jr-freight-shipment",
   "title": "ＪＲ貨物発送量",
+  "description": "貨物地域流動調査で、日本貨物鉄道株式会社（JR貨物）が年度中に各都道府県から発送した車扱貨物とコンテナ貨物の重量。",
+  "note": "その他の鉄道事業者による貨物輸送は含まず、1988年度以降は無償輸送分も除く。到着量ではなく発送地側の輸送量。",
   "unit": "トン",
   "category": "tourism",
   "source": {

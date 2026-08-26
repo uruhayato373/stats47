@@ -6,6 +6,8 @@ export const trafficAccidentInjuries: MetricConfig = {
   "subtitle": "総数",
   "unit": "人",
   "category": "safetyenvironment",
+  "description": "道路交通事故によって重傷または軽傷を負った人の年間総数。重傷は医師の診断で30日以上、軽傷は30日未満の治療を要する人をいう。",
+  "note": "事故発生後24時間以内に死亡した人は死者として扱われ、この負傷者数には含まれない。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010111",

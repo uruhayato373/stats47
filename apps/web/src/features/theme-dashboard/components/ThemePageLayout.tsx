@@ -224,6 +224,17 @@ export async function ThemePageLayout({
             </BreadcrumbList>
           </Breadcrumb>
 
+          {/* h1 は狭幅ナビより先に置き、画面を開いた時点でページの主語を示す。
+          hero 画像を持つテーマ (THEME_HEROES) は画像付きの ThemeHero に差し替える。 */}
+          {THEME_HEROES[theme.themeKey] ? (
+            <ThemeHero
+              themeTitle={theme.title}
+              hero={THEME_HEROES[theme.themeKey]}
+            />
+          ) : (
+            <ThemeAreaHeader themeTitle={theme.title} />
+          )}
+
           {!areaContext && (
             <div className={LEFT_RAIL_NARROW_ONLY_CLASS}>
               <StatisticsScopeNav current="prefectures" />
@@ -239,7 +250,7 @@ export async function ThemePageLayout({
           <div
             role="group"
             aria-label="テーマと地域"
-            className={`mb-4 grid grid-cols-1 gap-2 border-y border-border py-3 sm:grid-cols-2 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
+            className={`mb-3 grid grid-cols-1 gap-3 border-y border-border py-3 sm:grid-cols-2 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
           >
             <div className="min-w-0">
               <ThemeSwitcher
@@ -249,12 +260,6 @@ export async function ThemePageLayout({
                 }
                 compact
               />
-              <Link
-                href="/themes"
-                className="mt-1 inline-flex min-h-10 items-center text-sm font-medium text-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-              >
-                テーマ一覧へ
-              </Link>
             </div>
             <div className="min-w-0">
               <span className="block text-xs font-medium text-muted-foreground">
@@ -266,9 +271,12 @@ export async function ThemePageLayout({
 
           <nav
             aria-label="このページの内容"
-            className={`mb-5 border-b border-border pb-3 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
+            className={`mb-4 border-b border-border pb-3 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}
           >
-            <div className="flex gap-x-5 gap-y-2 overflow-x-auto">
+            <div className="flex items-center gap-x-5 gap-y-2 overflow-x-auto">
+              <span className="shrink-0 text-xs font-medium text-muted-foreground">
+                ページ内
+              </span>
               {pageLinks.map((item) => (
                 <Link
                   key={item.href}
@@ -280,9 +288,14 @@ export async function ThemePageLayout({
               ))}
             </div>
             {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
-              <details className="mt-2 border-t border-border pt-2">
+              <details className="group mt-1 border-t border-border pt-1">
                 <summary className="min-h-10 cursor-pointer py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
-                  全指標・出典調査
+                  <span className="group-open:hidden">
+                    全指標・出典調査を見る
+                  </span>
+                  <span className="hidden group-open:inline">
+                    全指標・出典調査を閉じる
+                  </span>
                 </summary>
                 <div className="grid gap-5 pb-2 sm:grid-cols-2">
                   {themeMetrics.length > 0 && (
@@ -351,17 +364,6 @@ export async function ThemePageLayout({
                 {areaContext.areaName}プロフィールへ →
               </Link>
             </div>
-          )}
-
-          {/* エリア連動の H1（全国デフォルト・client-side、SSG 不変）。
-          hero 画像を持つテーマ (THEME_HEROES) は画像付きの ThemeHero に差し替える。 */}
-          {THEME_HEROES[theme.themeKey] ? (
-            <ThemeHero
-              themeTitle={theme.title}
-              hero={THEME_HEROES[theme.themeKey]}
-            />
-          ) : (
-            <ThemeAreaHeader themeTitle={theme.title} />
           )}
 
           {areaContext && areaHighlights.length > 0 && (

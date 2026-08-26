@@ -15,7 +15,7 @@ export function TabBar({
   onSelect: (id: string) => void;
 }) {
   return (
-    <div className="sticky top-[57px] z-10 -mx-6 flex flex-wrap gap-1.5 border-b border-console-border bg-console-bg px-6 py-2.5">
+    <div className="sticky top-[57px] z-10 -mx-3 flex flex-wrap gap-1.5 border-b border-console-border bg-console-bg px-3 py-2.5 sm:-mx-6 sm:px-6">
       {tabs.map((tab) => (
         <button
           key={tab.id}

@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const doctorAnnualIncome: MetricConfig = {
   "key": "doctor-annual-income",
   "title": "医師の平均年収",
+  "description": "賃金構造基本統計調査の一般労働者・男女計の医師について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
+  "note": "現金給与額は所得税・社会保険料等の控除前で、時間外勤務手当等を含む。6月の月例給与を年換算した標本平均であり、個々の医師の実年収を示すものではない。",
   "unit": "万円",
   "category": "socialsecurity",
   "source": {

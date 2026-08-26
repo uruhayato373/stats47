@@ -4,6 +4,8 @@ export const fiscalStrengthIndexPrefecture: MetricConfig = {
   "key": "fiscal-strength-index-prefecture",
   "title": "財政力指数",
   "subtitle": "都道府県財政",
+  "description": "都道府県の基準財政収入額を基準財政需要額で割った値について、過去3年間を平均した指数。",
+  "note": "値が高いほど普通交付税算定上の留保財源が大きく、一般に財源の余裕があることを示す。単年度の収支や財政黒字率ではない。",
   "unit": "指数",
   "category": "administrativefinancial",
   "source": {

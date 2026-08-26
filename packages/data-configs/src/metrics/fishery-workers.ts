@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const fisheryWorkers: MetricConfig = {
   "key": "fishery-workers",
   "title": "漁業就業者数",
+  "description": "満15歳以上で、過去1年間に漁業の海上作業へ30日以上従事した人の数です。",
   "unit": "人",
   "category": "agriculture",
   "source": {

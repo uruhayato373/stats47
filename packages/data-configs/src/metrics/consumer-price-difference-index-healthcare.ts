@@ -4,6 +4,7 @@ export const consumerPriceDifferenceIndexHealthcare: MetricConfig = {
   "key": "consumer-price-difference-index-healthcare",
   "title": "消費者物価地域差指数",
   "subtitle": "保健医療",
+  "description": "全国平均の保健医療価格水準を100とし、都道府県ごとの同費目の物価水準を比較した年平均指数です。",
   "unit": "（全国=100）",
   "category": "economy",
   "source": {

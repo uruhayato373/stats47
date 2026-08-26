@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const jobChangeRate: MetricConfig = {
   "key": "job-change-rate",
   "title": "転職率",
+  "description": "1年前の勤め先と現在の勤め先が異なる転職者数を、現在の有業者数で割り、100倍した値。",
   "unit": "％",
   "category": "laborwage",
   "source": {

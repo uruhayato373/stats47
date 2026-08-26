@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const careWorkerAnnualIncome: MetricConfig = {
   "key": "care-worker-annual-income",
   "title": "介護職員の平均年収",
+  "description": "賃金構造基本統計調査の一般労働者・男女計の介護職員（医療・福祉施設等）について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
+  "note": "訪問介護従事者や介護支援専門員は別職種で含まない。6月の月例給与を年換算した税・社会保険料等控除前の標本平均で、個人の実年収ではない。",
   "unit": "万円",
   "category": "laborwage",
   "source": {

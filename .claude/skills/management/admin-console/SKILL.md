@@ -25,7 +25,8 @@ PORT=5000 npm run admin    # ポート変更
 | `/sns` | SNS 投稿ギャラリー | X/IG 素材の動画再生・caption 編集・投稿/予約・メトリクス・残枠バッジ。YouTube は過去実績と pilot 台帳を表示するが、投稿は Studio の人間工程 |
 | `/assets` | 画像資産 | OGP / リンクカード(light/dark) / note カバー / note 記事内画像 / 動画 master。欠落チェック + 再生成 |
 | `/svg` | ブログ SVG カタログ | 記事内 SVG を 6 カタログ + table + unknown に機械分類して一覧 |
-| `/dashboard` | プロジェクト現況 | メトリクス(GSC/GA4/AdSense/PSI/カバレッジ) + 進捗キュー(blog是正/ai-content/記事ネタ/SNS/実験) + 改善バックログTODO(優先度ソート・Owner列) + 機能バックログ + 戦略(STP)。state JSON / md を**読み取り専用ミラー**でライブ表示 (60秒キャッシュ)。編集は各 SSOT 側で |
+| `/dashboard` | プロジェクト現況 | メトリクス(GSC/GA4/AdSense/PSI/カバレッジ) + 進捗キュー(blog是正/ai-content/記事ネタ/SNS/実験) + 効果測定サマリ + 機能バックログ + 戦略(STP)。改善の全件表は `/todo?f=improvements` に一本化。state JSON / md を**読み取り専用ミラー**でライブ表示 (60秒キャッシュ)。編集は各 SSOT 側で |
+| `/todo` | TODO | 左サイドバーで「収益」「品質・運用」と同列の独立グループとして、実行バックログ・今週の計画・今月の計画・効果測定と改善を表示。全件・Owner・Metricはここで確認し、編集は各 SSOT 側で |
 
 ## API
 

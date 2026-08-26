@@ -1,7 +1,7 @@
 {
   "generatedFrom": "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
-  "totalRequests": 247,
-  "distinctRequests": 186,
+  "totalRequests": 241,
+  "distinctRequests": 180,
   "requests": [
     {
       "key": "0000010101?cdCat01=A1101",
@@ -734,16 +734,6 @@
       "componentType": "donut-chart"
     },
     {
-      "key": "0000010106?cdCat01=F6501",
-      "statsDataId": "0000010106",
-      "filters": {
-        "cdCat01": "F6501"
-      },
-      "themeKey": "local-economy",
-      "componentKey": "theme-economy-income-wage",
-      "componentType": "line-chart"
-    },
-    {
       "key": "0000010107?cdCat01=G7101",
       "statsDataId": "0000010107",
       "filters": {
@@ -882,16 +872,6 @@
       "themeKey": "safety",
       "componentKey": "safety-crime-types-donut",
       "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010112?cdCat01=L3130",
-      "statsDataId": "0000010112",
-      "filters": {
-        "cdCat01": "L3130"
-      },
-      "themeKey": "local-economy",
-      "componentKey": "theme-economy-income-wage",
-      "componentType": "line-chart"
     },
     {
       "key": "0000010201?cdCat01=#A01601",
@@ -1714,14 +1694,6 @@
       "componentType": "donut-chart"
     },
     {
-      "key": "0003426933",
-      "statsDataId": "0003426933",
-      "filters": {},
-      "themeKey": "labor-wages",
-      "componentKey": "labor-wages-gender-gap",
-      "componentType": "line-chart"
-    },
-    {
       "key": "0003441258",
       "statsDataId": "0003441258",
       "filters": {},
@@ -1750,26 +1722,6 @@
       "componentType": "line-chart"
     },
     {
-      "key": "0003445758?cdCat02=1121",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1121"
-      },
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-medical-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0003445758?cdCat02=1133",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1133"
-      },
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-medical-trend",
-      "componentType": "line-chart"
-    },
-    {
       "key": "0003445758?cdCat02=1192",
       "statsDataId": "0003445758",
       "filters": {
@@ -1787,16 +1739,6 @@
       },
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-edu-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0003445758?cdCat02=1361",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1361"
-      },
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-medical-trend",
       "componentType": "line-chart"
     },
     {

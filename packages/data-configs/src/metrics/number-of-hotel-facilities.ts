@@ -5,6 +5,8 @@ export const numberOfHotelFacilities: MetricConfig = {
   "title": "ホテル営業施設数",
   "unit": "施設",
   "category": "commercial",
+  "description": "衛生行政報告例で、旅館業法上のホテル営業として都道府県知事または保健所設置市の市長から許可を受けた営業施設の数。",
+  "note": "3月31日現在の施設数。社会・人口統計体系では都道府県系列の収集が2017年で中止されているため、現在の施設数を示す指標ではない。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010103",

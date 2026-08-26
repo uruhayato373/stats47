@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const manufacturingEstablishments: MetricConfig = {
   "key": "manufacturing-establishments",
   "title": "製造業事業所数",
+  "description": "経済センサス‐活動調査または経済構造実態調査で、一区画を占めて主として製造・加工を行う工場、製作所、加工所等として把握された事業所の数。",
+  "note": "2020年度以降は、経済センサス‐活動調査の実施年とそれ以外の年で使用する調査が異なり、調査対象等も異なるため、時系列比較には注意が必要。",
   "unit": "事業所",
   "category": "commercial",
   "source": {

@@ -4,6 +4,8 @@ export const currentBalanceRatio: MetricConfig = {
   "key": "current-balance-ratio",
   "title": "経常収支比率",
   "subtitle": "都道府県財政",
+  "description": "人件費、扶助費、公債費など毎年度経常的に支出する経費に充てた一般財源を、経常一般財源と減収補てん債特例分・猶予特例債・臨時財政対策債の合計で割った割合。",
+  "note": "経常的な収入が経常的な経費にどれだけ充てられているかを示し、比率が高いほど財政構造の硬直化が進んでいることを表す。",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

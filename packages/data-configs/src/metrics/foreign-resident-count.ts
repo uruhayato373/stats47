@@ -4,6 +4,8 @@ export const foreignResidentCount: MetricConfig = {
   "key": "foreign-resident-count",
   "title": "外国人人口",
   "subtitle": "総数",
+  "description": "国勢調査で日本国籍以外に分類された、調査地域に常住する人の総数です。",
+  "note": "日本と外国の両方の国籍を持つ人は日本人に分類されます。外国人総数には無国籍・国名不詳を含みます。",
   "unit": "人",
   "category": "population",
   "source": {

@@ -4,6 +4,8 @@ export const manufacturingShipmentAmountPerEstablishment: MetricConfig = {
   "key": "manufacturing-shipment-amount-per-establishment",
   "title": "製造品出荷額等",
   "subtitle": "事業所当たり",
+  "description": "製造品出荷額等を製造業事業所数で割った、1事業所当たりの出荷額等。",
+  "note": "事業所規模の違いを含む平均で、製造業の利益や付加価値額を示す指標ではない。経済センサス‐活動調査と経済構造実態調査では対象等が異なるため、時系列比較には注意が必要。",
   "unit": "百万円",
   "category": "miningindustry",
   "source": {

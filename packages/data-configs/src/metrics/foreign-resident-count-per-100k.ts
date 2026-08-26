@@ -4,6 +4,7 @@ export const foreignResidentCountPer100k: MetricConfig = {
   "key": "foreign-resident-count-per-100k",
   "title": "外国人人口",
   "subtitle": "総数（人口10万人当たり）",
+  "description": "国勢調査の外国人人口を総人口で除し、人口10万人当たりに換算した人数です。",
   "unit": "人",
   "category": "population",
   "source": {

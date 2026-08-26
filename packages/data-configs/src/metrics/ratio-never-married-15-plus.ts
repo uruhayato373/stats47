@@ -4,6 +4,8 @@ export const ratioNeverMarried15Plus: MetricConfig = {
   "key": "ratio-never-married-15-plus",
   "title": "未婚者割合",
   "subtitle": "15歳以上総数",
+  "description": "国勢調査の15歳以上人口に占める、まだ結婚したことのない人の割合。",
+  "note": "配偶関係は届出の有無ではなく実際の状態で区分する。死別・離別後に独身の人は未婚ではなく、それぞれ死別・離別に分類される。",
   "unit": "％",
   "category": "population",
   "source": {

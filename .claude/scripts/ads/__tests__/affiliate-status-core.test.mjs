@@ -190,6 +190,32 @@ test("識別子が無ければ error", () => {
   assert.ok(r.errors.some((e) => e.includes("識別子")));
 });
 
+test("eligibility が存在する場合は policy 外の語彙を構造違反にする", () => {
+  const r = validateCatalog({
+    _statusVocab: VOCAB,
+    programs: {
+      "moshimo-1": {
+        name: "X",
+        vertical: "labor",
+        eligibility: {
+          status: "approved",
+          riskFlags: ["unknown-risk"],
+          allowedPageTypes: ["home"],
+          allowedRankingKeys: [],
+          allowedTagKeys: [],
+          minimumEligibleImpressions: null,
+          reviewedAt: null,
+          reviewedBy: "code",
+          evidence: [],
+        },
+        asps: { moshimo: { promotionId: "1", status: "approved" } },
+      },
+    },
+  });
+  assert.ok(r.errors.some((e) => e.includes("risk-flags-invalid")));
+  assert.ok(r.errors.some((e) => e.includes("page-types-invalid")));
+});
+
 test("approved で name 未補完 / vertical 未設定は warn (error にしない)", () => {
   const r = validateCatalog({
     _statusVocab: VOCAB,

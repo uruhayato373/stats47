@@ -1,7 +1,15 @@
+import {
+  parseStatSeriesRefs,
+  type StatSeriesRef,
+} from "@stats47/data-configs/theme-catalog";
+
 type EstatParams = Record<string, string>;
 
 export interface LineChartComponentProps {
-  estatParams: EstatParams | EstatParams[];
+  /** legacy（期限: 2026-09-30、削除条件: 全 line-chart の seriesRefs 移行完了）。 */
+  estatParams?: EstatParams | EstatParams[];
+  /** MetricConfig から生成済みの R2 系列参照。生の取得・換算 recipe を持たない。 */
+  seriesRefs?: StatSeriesRef[];
   labels?: string[];
   seriesColors?: string[];
   showLatestValues?: boolean;
@@ -76,10 +84,12 @@ function parseLineChartComponentProps(
   props: Record<string, unknown>,
 ): LineChartComponentProps | null {
   const estatParams = parseEstatParamsOrList(props.estatParams);
-  if (!estatParams) return null;
+  const seriesRefs = parseStatSeriesRefs(props.seriesRefs);
+  if ((!estatParams && !seriesRefs) || (estatParams && seriesRefs)) return null;
 
   return {
-    estatParams,
+    estatParams: estatParams ?? undefined,
+    seriesRefs: seriesRefs ?? undefined,
     labels: parseStringArray(props.labels),
     seriesColors: parseStringArray(props.seriesColors),
     showLatestValues:

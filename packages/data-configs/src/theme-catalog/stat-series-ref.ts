@@ -12,7 +12,7 @@
  *
  * 規約: `.claude/rules/theme-catalog-standards.md` / backlog `CROSS-PAGE-DATA-SSOT-01` WP1
  */
-import type { ChartColorRole } from "./chart-color-role";
+import { isChartColorRole, type ChartColorRole } from "./chart-color-role";
 import { parseFaqMarkdown } from "./faq-markdown";
 import type { CatalogComponentType } from "./types";
 
@@ -39,6 +39,19 @@ export interface StatSeriesRef {
   colorRole?: ChartColorRole;
 }
 
+/**
+ * line chart のうち R2 `StatSeriesRef` へ移行済みの component key。
+ *
+ * 移行済みチャートが生の e-Stat recipe へ戻る回帰を validator で拒否する shrink-only
+ * ratchet。CROSS-PAGE-DATA-SSOT-01 WP6 の wave ごとに追加し、最終的には全 line chart を
+ * 型付き参照へ移す。
+ */
+export const MIGRATED_LINE_SERIES_REF_COMPONENT_KEYS: ReadonlySet<string> = new Set([
+  "labor-wages-gender-gap",
+  "theme-occ-medical-trend",
+  "theme-economy-income-wage",
+]);
+
 // ---- 現行 componentProps の discriminated-union 検証 ----
 
 function isRecord(v: unknown): v is Record<string, unknown> {
@@ -60,6 +73,73 @@ function isEstatParamsList(v: unknown): boolean {
 
 function nonEmptyString(v: unknown): boolean {
   return typeof v === "string" && v.length > 0;
+}
+
+function isStatSeriesRef(v: unknown): v is StatSeriesRef {
+  if (!isRecord(v) || !nonEmptyString(v.metricKey)) return false;
+  if (v.year !== undefined && (typeof v.year !== "string" || !/^\d{4}$/.test(v.year))) {
+    return false;
+  }
+  if (v.area !== undefined && v.area !== "prefecture" && v.area !== "national") {
+    return false;
+  }
+  if (v.label !== undefined && !nonEmptyString(v.label)) return false;
+  if (v.colorRole !== undefined && !isChartColorRole(v.colorRole)) return false;
+  return true;
+}
+
+/** runtime / validator が共有する seriesRefs parser。無効・空配列は null。 */
+export function parseStatSeriesRefs(v: unknown): StatSeriesRef[] | null {
+  if (!Array.isArray(v) || v.length === 0 || !v.every(isStatSeriesRef)) return null;
+  return v;
+}
+
+/**
+ * seriesRefs と relatedRankingKeys / ThemeCatalog.metrics shortLabel の対応を検証する。
+ * recipe は metricKey の先で MetricConfig が一元管理し、表示名も同テーマの指標ラベルを再利用する。
+ */
+export function validateStatSeriesRefAlignment(
+  props: Record<string, unknown>,
+  relatedRankingKeys: readonly string[],
+  metricLabels: ReadonlyMap<string, string>,
+): string[] {
+  if (props.seriesRefs === undefined) return [];
+  const refs = parseStatSeriesRefs(props.seriesRefs);
+  if (!refs) return ["seriesRefs は1件以上の有効な StatSeriesRef 配列にする"];
+
+  const errors: string[] = [];
+  if (refs.length !== relatedRankingKeys.length) {
+    errors.push(
+      `seriesRefs (${refs.length}) と relatedRankingKeys (${relatedRankingKeys.length}) の要素数が不一致`,
+    );
+  }
+  for (let index = 0; index < refs.length; index += 1) {
+    const ref = refs[index];
+    const relatedKey = relatedRankingKeys[index];
+    if (ref.metricKey !== relatedKey) {
+      errors.push(
+        `系列${index + 1}: metricKey "${ref.metricKey}" と relatedRankingKeys "${String(relatedKey)}" が不一致`,
+      );
+    }
+    const expectedLabel = metricLabels.get(ref.metricKey);
+    if (ref.label !== undefined && expectedLabel !== undefined && ref.label !== expectedLabel) {
+      errors.push(
+        `系列${index + 1}: label "${ref.label}" は ThemeCatalog.metrics の shortLabel "${expectedLabel}" と一致させる`,
+      );
+    }
+  }
+  return errors;
+}
+
+/** 移行済み key が legacy recipe（期限: 2026-09-30、削除条件: 全chartのR2移行完了）へ戻っていないかを検証する。 */
+export function validateMigratedSeriesRefContract(
+  componentKey: string,
+  props: Record<string, unknown>,
+): string[] {
+  if (!MIGRATED_LINE_SERIES_REF_COMPONENT_KEYS.has(componentKey)) return [];
+  return parseStatSeriesRefs(props.seriesRefs)
+    ? []
+    : ["移行済み line-chart は生の estatParams ではなく seriesRefs を使う"];
 }
 
 /** {code,label} を必須とする配列 (composition segments)。 */
@@ -92,11 +172,20 @@ export function validateChartProps(
 
   switch (componentType as CatalogComponentType) {
     case "line-chart":
+      {
+      const hasEstatParams =
+        isEstatParams(props.estatParams) || isEstatParamsList(props.estatParams);
+      const hasSeriesRefs = parseStatSeriesRefs(props.seriesRefs) !== null;
       need(
-        isEstatParams(props.estatParams) || isEstatParamsList(props.estatParams),
-        "line-chart: estatParams (object か非空配列) が必要",
+        hasEstatParams || hasSeriesRefs,
+        "line-chart: estatParams または seriesRefs (非空配列) が必要",
+      );
+      need(
+        !(hasEstatParams && hasSeriesRefs),
+        "line-chart: seriesRefs と estatParams は同時指定できない",
       );
       break;
+      }
     case "mixed-chart":
       need(isEstatParamsList(props.columnParams), "mixed-chart: columnParams (非空配列) が必要");
       need(isEstatParamsList(props.lineParams), "mixed-chart: lineParams (非空配列) が必要");

@@ -4,6 +4,8 @@ export const welfareExpenditureRatioPrefFinance: MetricConfig = {
   "key": "welfare-expenditure-ratio-pref-finance",
   "title": "民生費割合",
   "subtitle": "都道府県財政",
+  "description": "都道府県が児童、高齢者、心身障害者等の福祉施設の整備・運営、生活保護、災害救助などに支出した民生費を、歳出決算総額で割り、100倍した割合。",
+  "note": "都道府県財政だけの目的別歳出構成比で、市町村の民生費は含まない。民生費の金額や住民1人当たり支出額を示す指標ではない。",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

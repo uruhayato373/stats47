@@ -4,6 +4,7 @@ export const inPrefUniversityEntranceRatioByHighschoolOrigin: MetricConfig = {
   "key": "in-pref-university-entrance-ratio-by-highschool-origin",
   "title": "県内大学入学者割合",
   "subtitle": "出身高校所在地県基準",
+  "description": "当該県の高校出身である大学入学者のうち、同じ県内の大学へ入学した者の割合です。",
   "unit": "％",
   "category": "educationsports",
   "source": {

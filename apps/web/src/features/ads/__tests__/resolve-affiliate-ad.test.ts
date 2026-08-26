@@ -6,11 +6,17 @@ vi.mock("../repositories/affiliate-ad-snapshot");
 import {
   readActiveTextAdByVerticalFromR2,
   readActiveBannersByVerticalsFromR2,
+  readActiveTextAdsByVerticalsFromR2,
 } from "../repositories/affiliate-ad-snapshot";
-import { resolveAffiliateAd, resolveAffiliateBanners } from "../services/resolve-affiliate-ad";
+import {
+  resolveAffiliateAd,
+  resolveAffiliateBanners,
+  resolveAffiliateTextAdsByTagKeys,
+} from "../services/resolve-affiliate-ad";
 
 const mockFindActiveAd = vi.mocked(readActiveTextAdByVerticalFromR2);
 const mockFindBanners = vi.mocked(readActiveBannersByVerticalsFromR2);
+const mockFindTextAds = vi.mocked(readActiveTextAdsByVerticalsFromR2);
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -193,5 +199,26 @@ describe("resolveAffiliateBanners", () => {
     const result = await resolveAffiliateBanners(["economy"]);
     expect(result[0].width).toBe(300);
     expect(result[0].height).toBe(250);
+  });
+});
+
+describe("resolveAffiliateTextAdsByTagKeys", () => {
+  it("tagをverticalへ解決できない場合はeconomyへ推測フォールバックしない", async () => {
+    const result = await resolveAffiliateTextAdsByTagKeys(["unknown-tag"]);
+    expect(result).toEqual([]);
+    expect(mockFindTextAds).not.toHaveBeenCalled();
+  });
+
+  it("一致verticalに在庫がなくてもeconomyへ再クエリしない", async () => {
+    mockFindTextAds.mockResolvedValue([]);
+
+    const result = await resolveAffiliateTextAdsByTagKeys(["wages"]);
+
+    expect(result).toEqual([]);
+    expect(mockFindTextAds).toHaveBeenCalledTimes(1);
+    expect(mockFindTextAds).toHaveBeenCalledWith(
+      ["labor"],
+      "sidebar-bottom",
+    );
   });
 });
