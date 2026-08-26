@@ -375,6 +375,38 @@ export const SAFETY_CATALOG: ThemeCatalog = {
       "sortOrder": 20
     }
   ],
+  evidenceTopics: [
+    {
+      key: "recognized-crime-and-clearance",
+      lensKey: "outcomes",
+      title: "犯罪の認知状況と検挙状況",
+      question:
+        "刑法犯の認知件数と検挙率には、地域ごとにどのような差があるか",
+      summary:
+        "認知件数は警察が犯罪の発生を認知した事件数で、未認知の事件は含みません。検挙率は検挙した事件件数を認知件数で割った割合であり、検挙人員の割合ではありません。",
+      sourceKeys: ["npa-crime-statistics"],
+      relatedRankingKeys: [
+        "penal-code-offenses-recognized-per-1000",
+        "criminal-arrest-rate",
+      ],
+      relatedChartKeys: ["crime-count-arrest-rate-trend"],
+    },
+    {
+      key: "traffic-accidents-and-injuries",
+      lensKey: "outcomes",
+      title: "交通事故の発生と人的被害",
+      question:
+        "交通事故の発生件数と負傷者数には、地域ごとにどのような差があるか",
+      summary:
+        "現在の交通事故統計は、人の死亡または負傷を伴う事故を対象とし、物損事故は含みません。発生件数は事故の数、負傷者数は重傷者と軽傷者の人数なので、同じ単位として足し合わせません。",
+      sourceKeys: ["npa-traffic-accident-statistics"],
+      relatedRankingKeys: [
+        "traffic-accident-count",
+        "traffic-accident-injuries",
+      ],
+      relatedChartKeys: ["traffic-accident-deaths-trend"],
+    },
+  ],
   "keywords": [
     "犯罪",
     "刑法犯",

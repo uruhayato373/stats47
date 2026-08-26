@@ -116,6 +116,20 @@ export const EVIDENCE_SOURCE_CATALOG = {
     sourceUrl:
       "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
   },
+  "npa-crime-statistics": {
+    kind: "statistical-overview",
+    title: "犯罪統計",
+    publisher: "警察庁",
+    sourceUrl:
+      "https://www.npa.go.jp/publications/statistics/sousa/statistics.html",
+  },
+  "npa-traffic-accident-statistics": {
+    kind: "statistical-overview",
+    title: "交通事故発生状況",
+    publisher: "警察庁",
+    sourceUrl:
+      "https://www.npa.go.jp/publications/statistics/koutsuu/index_jiko.html",
+  },
   "mhlw-physician-workforce-plan": {
     kind: "report",
     title: "医師確保対策・医師確保計画",
