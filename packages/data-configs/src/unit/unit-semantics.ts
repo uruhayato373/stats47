@@ -42,6 +42,28 @@ const SCALE_PREFIX: ReadonlyArray<readonly [string, number]> = [
   ["十", 1],
 ];
 
+/** SI・慣用単位を同一次元の基底単位へ揃える倍率 (10 の指数)。 */
+const SCALED_BASE_UNITS: ReadonlyArray<readonly [string, string, string, number]> = [
+  // [表記, 次元, 基底単位, 10の指数]
+  ["g", "mass", "g", 0],
+  ["kg", "mass", "g", 3],
+  ["t", "mass", "g", 6],
+  ["トン", "mass", "g", 6],
+  ["ml", "volume", "l", -3],
+  ["l", "volume", "l", 0],
+  ["kl", "volume", "l", 3],
+  ["m3", "volume", "l", 3],
+  ["mm", "length", "m", -3],
+  ["cm", "length", "m", -2],
+  ["m", "length", "m", 0],
+  ["km", "length", "m", 3],
+  ["m2", "area", "m2", 0],
+  ["ha", "area", "m2", 4],
+  ["km2", "area", "m2", 6],
+  ["kWh", "energy", "Wh", 3],
+  ["MWh", "energy", "Wh", 6],
+];
+
 /**
  * 換算可能な次元の基底単位。
  * ここに無い単位は「解釈できない」= 換算しない (数える対象としては扱える)。
@@ -125,7 +147,14 @@ const RATIO_UNITS: ReadonlyArray<readonly [string, string]> = [
 const INDEX_PATTERNS: readonly RegExp[] = [/^指数$/, /^（.*=\s*\d+）$/, /^\(.*=\s*\d+\)$/];
 
 /** 分母つき (人口10万対 など)。素の単位と換算してはならない。 */
-const DENOMINATOR_PATTERN = /(人口|児童|出生|生徒|婚姻)?\s*(十万|百万|万|千|10万|100万)\s*(対|あたり|当たり)/;
+const DENOMINATOR_PATTERN = /(人口|児童|出生|生徒|婚姻)?\s*(十万|百万|(?:\d+)?万|(?:\d+)?千)\s*(対|あたり|当たり)/;
+
+export interface UnitDenominator {
+  /** 分母の母集団。同じ量でも母集団が違えば換算しない。 */
+  readonly population: string;
+  /** 例: 人口10万対 → 100000。 */
+  readonly quantity: number;
+}
 
 export interface UnitSemantics {
   /** 入力を正規化した文字列 (NFKC + trim)。 */
@@ -137,8 +166,12 @@ export interface UnitSemantics {
   readonly dimension: string | null;
   /** 基底単位に対する 10 の指数 (千円なら 3)。解釈できない場合は 0。 */
   readonly scaleExponent: number;
+  /** 換算先を共有できる基底単位。件と校のような異なる計数単位は別値。 */
+  readonly baseUnit: string | null;
   /** 分母つき単位 (人口10万対 等) かどうか。素の単位と換算しない。 */
   readonly hasDenominator: boolean;
+  /** 分母の母集団と量。分母なしは null。 */
+  readonly denominator: UnitDenominator | null;
 }
 
 /** 全半角ゆれを畳む (ｈａ → ha、ｍ2 → m2)。 */
@@ -156,18 +189,42 @@ function normalize(raw: string): string {
  */
 export function parseUnit(raw: string | null | undefined): UnitSemantics {
   const normalized = raw == null ? "" : normalize(raw);
-  const empty: UnitSemantics = { normalized, dimension: null, scaleExponent: 0, hasDenominator: false };
+  const empty: UnitSemantics = {
+    normalized,
+    dimension: null,
+    scaleExponent: 0,
+    baseUnit: null,
+    hasDenominator: false,
+    denominator: null,
+  };
   if (normalized === "") return empty;
 
-  const hasDenominator = DENOMINATOR_PATTERN.test(normalized);
+  const denominator = parseDenominator(normalized);
+  const hasDenominator = denominator !== null;
 
   for (const [pattern] of INDEX_PATTERNS.entries()) void pattern;
   if (INDEX_PATTERNS.some((re) => re.test(normalized))) {
-    return { normalized, dimension: "index", scaleExponent: 0, hasDenominator: false };
+    return {
+      normalized,
+      dimension: "index",
+      scaleExponent: 0,
+      baseUnit: "index",
+      hasDenominator: false,
+      denominator: null,
+    };
   }
 
   for (const [token, dim] of RATIO_UNITS) {
-    if (normalized === token) return { normalized, dimension: dim, scaleExponent: 0, hasDenominator: false };
+    if (normalized === token) {
+      return {
+        normalized,
+        dimension: dim,
+        scaleExponent: 0,
+        baseUnit: dim,
+        hasDenominator: false,
+        denominator: null,
+      };
+    }
   }
 
   // 分母つきは括弧を落とした本体で次元を見る (「人（人口10万対）」→ 人)
@@ -178,31 +235,75 @@ export function parseUnit(raw: string | null | undefined): UnitSemantics {
   for (const [prefix, exp] of SCALE_PREFIX) {
     if (!target.startsWith(prefix)) continue;
     const rest = target.slice(prefix.length);
-    const dim = matchBaseUnit(rest);
-    if (dim) return { normalized, dimension: dim, scaleExponent: exp, hasDenominator };
+    const matched = matchBaseUnit(rest);
+    if (matched) {
+      return {
+        normalized,
+        dimension: matched.dimension,
+        scaleExponent: exp + matched.scaleExponent,
+        baseUnit: matched.baseUnit,
+        hasDenominator,
+        denominator,
+      };
+    }
   }
 
-  const dim = matchBaseUnit(target);
-  if (dim) return { normalized, dimension: dim, scaleExponent: 0, hasDenominator };
+  const matched = matchBaseUnit(target);
+  if (matched) {
+    return {
+      normalized,
+      dimension: matched.dimension,
+      scaleExponent: matched.scaleExponent,
+      baseUnit: matched.baseUnit,
+      hasDenominator,
+      denominator,
+    };
+  }
 
   // 「人口千対」のように基底単位を持たない分母表現
-  if (hasDenominator) return { normalized, dimension: "rate-per", scaleExponent: 0, hasDenominator: true };
+  if (hasDenominator) {
+    return {
+      normalized,
+      dimension: "rate-per",
+      scaleExponent: 0,
+      baseUnit: "rate",
+      hasDenominator: true,
+      denominator,
+    };
+  }
 
   return empty;
 }
 
-function matchBaseUnit(s: string): string | null {
+function matchBaseUnit(s: string): Pick<UnitSemantics, "dimension" | "baseUnit" | "scaleExponent"> | null {
   const t = s.trim();
   if (t === "") return null;
+  for (const [token, dimension, baseUnit, scaleExponent] of SCALED_BASE_UNITS) {
+    if (token.toLowerCase() === t.toLowerCase()) {
+      return { dimension, baseUnit, scaleExponent };
+    }
+  }
   for (const [token, dim] of BASE_UNITS) {
-    if (t === token) return dim;
+    if (t === token) return { dimension: dim, baseUnit: token, scaleExponent: 0 };
   }
   // 大文字小文字ゆれ (KG / Ha)
   const lower = t.toLowerCase();
   for (const [token, dim] of BASE_UNITS) {
-    if (token.toLowerCase() === lower) return dim;
+    if (token.toLowerCase() === lower) return { dimension: dim, baseUnit: token, scaleExponent: 0 };
   }
   return null;
+}
+
+function parseDenominator(normalized: string): UnitDenominator | null {
+  const matched = normalized.match(DENOMINATOR_PATTERN);
+  if (!matched) return null;
+  const token = matched[2];
+  let quantity = 0;
+  if (token === "十万") quantity = 100_000;
+  else if (token === "百万") quantity = 1_000_000;
+  else if (token.endsWith("万")) quantity = Number(token.slice(0, -1) || "1") * 10_000;
+  else quantity = Number(token.slice(0, -1) || "1") * 1_000;
+  return { population: matched[1] ?? "unspecified", quantity };
 }
 
 /**
@@ -211,16 +312,15 @@ function matchBaseUnit(s: string): string | null {
  * ★null を 1 にフォールバックしてはならない。桁違いの値が「一致」になり監査が壊れる
  * (2026-08-12 に書籍監査で実際に起きた)。
  */
-export function conversionFactor(
-  from: string | null | undefined,
-  to: string | null | undefined,
-): number | null {
+export function conversionFactor(from: string | null | undefined, to: string | null | undefined): number | null {
   const a = parseUnit(from);
   const b = parseUnit(to);
   if (a.dimension === null || b.dimension === null) return null;
   if (a.dimension !== b.dimension) return null;
+  if (a.baseUnit !== b.baseUnit) return null;
   // 分母の有無が違うものは比べられない (「人」と「人口10万対の人」)
   if (a.hasDenominator !== b.hasDenominator) return null;
+  if (a.denominator?.population !== b.denominator?.population || a.denominator?.quantity !== b.denominator?.quantity) return null;
   return 10 ** (a.scaleExponent - b.scaleExponent);
 }
 
@@ -255,10 +355,7 @@ export function scalePrefixMultiplier(prefix: string | null | undefined): number
  * ★これを誤ると桁が 1000 倍ずれる。2026-08-12 に地図照合で
  *   `unit="千円"` の「13,326千円」を ×1000 して全県不一致にした実例がある。
  */
-export function isScalePrefixPartOfUnit(
-  prefix: string | null | undefined,
-  ssotUnit: string | null | undefined,
-): boolean {
+export function isScalePrefixPartOfUnit(prefix: string | null | undefined, ssotUnit: string | null | undefined): boolean {
   if (typeof prefix !== "string" || prefix === "") return false;
   const unit = ssotUnit == null ? "" : normalize(ssotUnit);
   return unit.startsWith(normalize(prefix));
@@ -275,11 +372,4 @@ export function unitScaleMultiplier(unit: string | null | undefined): number | n
 }
 
 /** 実測で確認した語彙 (metric config 2,295 件の走査結果)。カバレッジ計測に使う。 */
-export const KNOWN_UNIT_SAMPLES: readonly string[] = [
-  "円", "千円", "万円", "百万円", "億円", "兆円",
-  "％", "%", "‰",
-  "人", "千人", "万人", "人（人口10万対）", "人口千対", "人口10万対",
-  "世帯", "件", "戸", "台", "店", "校", "館", "所", "か所", "箇所", "施設", "事業所",
-  "g", "kg", "t", "トン", "ml", "l", "km", "cm", "ha",
-  "時間", "分", "日", "年", "歳", "℃", "指数", "（全国=100）",
-];
+export const KNOWN_UNIT_SAMPLES: readonly string[] = ["円", "千円", "万円", "百万円", "億円", "兆円", "％", "%", "‰", "人", "千人", "万人", "人（人口10万対）", "人口千対", "人口10万対", "世帯", "件", "戸", "台", "店", "校", "館", "所", "か所", "箇所", "施設", "事業所", "g", "kg", "t", "トン", "ml", "l", "kl", "m3", "mm", "cm", "m", "km", "m2", "ha", "km2", "kWh", "MWh", "時間", "分", "日", "年", "歳", "℃", "指数", "（全国=100）"];

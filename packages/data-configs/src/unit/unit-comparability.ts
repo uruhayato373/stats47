@@ -14,27 +14,17 @@
  */
 import { conversionFactor, parseUnit } from "./unit-semantics";
 
-/** 分母つき単位の分母 (括弧内) を取り出す。無ければ null。例 "人（人口10万対）" → "人口10万対"。 */
-function extractDenominator(normalized: string): string | null {
-  const m = normalized.match(/[（(](.+?)[）)]/);
-  return m ? m[1].trim() : null;
-}
-
 export type ComparabilityVerdict = "same" | "convertible" | "incomparable";
 
 export type IncomparableReason =
   | "uninterpretable" // どちらかの単位を解釈できない (dimension null)
   | "dimension-mismatch" // 次元が違う (人 vs 円、％ vs ‰ 等)
+  | "base-unit-mismatch" // 同じ count 次元でも計数対象が違う (件 vs 校)
   | "denominator-mismatch" // 分母の有無が違う (人 vs 人口10万対)
+  | "period-unknown" // 片側の期間だけ不明
   | "period-mismatch"; // 期間が違う (月額 vs 年額) — period を渡したときのみ
 
-export interface ComparabilityResult {
-  verdict: ComparabilityVerdict;
-  /** convertible のとき: a の値を b 単位で表す倍率。same なら 1。 */
-  factor?: number;
-  /** incomparable のとき: なぜ比べられないか。 */
-  reason?: IncomparableReason;
-}
+export type ComparabilityResult = { verdict: "same"; factor: 1 } | { verdict: "convertible"; factor: number } | { verdict: "incomparable"; reason: IncomparableReason };
 
 export interface ComparabilityOptions {
   /** 期間セマンティクス (例 "monthly" / "annual")。両方渡したときだけ突き合わせる。 */
@@ -46,11 +36,7 @@ export interface ComparabilityOptions {
  * 単位 a, b を比較/自動換算して良いか判定する (pure)。
  * incomparable は必ず reason 付き。1 倍フォールバックはしない。
  */
-export function classifyUnitComparability(
-  a: string | null | undefined,
-  b: string | null | undefined,
-  opts: ComparabilityOptions = {},
-): ComparabilityResult {
+export function classifyUnitComparability(a: string | null | undefined, b: string | null | undefined, opts: ComparabilityOptions = {}): ComparabilityResult {
   const ua = parseUnit(a);
   const ub = parseUnit(b);
 
@@ -60,15 +46,15 @@ export function classifyUnitComparability(
   if (ua.dimension !== ub.dimension) {
     return { verdict: "incomparable", reason: "dimension-mismatch" };
   }
+  if (ua.baseUnit !== ub.baseUnit) {
+    return { verdict: "incomparable", reason: "base-unit-mismatch" };
+  }
   if (ua.hasDenominator !== ub.hasDenominator) {
     return { verdict: "incomparable", reason: "denominator-mismatch" };
   }
-  // ★分母が両方あっても中身が違えば比較不能 (人口10万対 vs 人口1万対 は 10 倍違う)。
-  //   hasDenominator の boolean 一致だけでは取りこぼす (2026-08-13 review)。差があれば安全側に拒否する。
+  // 分母の母集団・量のどちらかが違えば自動換算しない。
   if (ua.hasDenominator && ub.hasDenominator) {
-    const da = extractDenominator(ua.normalized);
-    const db = extractDenominator(ub.normalized);
-    if (da !== null && db !== null && da !== db) {
+    if (ua.denominator?.population !== ub.denominator?.population || ua.denominator?.quantity !== ub.denominator?.quantity) {
       return { verdict: "incomparable", reason: "denominator-mismatch" };
     }
   }
@@ -78,7 +64,10 @@ export function classifyUnitComparability(
   const hasPeriodA = opts.periodA !== undefined;
   const hasPeriodB = opts.periodB !== undefined;
   if (hasPeriodA || hasPeriodB) {
-    if (hasPeriodA !== hasPeriodB || opts.periodA !== opts.periodB) {
+    if (hasPeriodA !== hasPeriodB) {
+      return { verdict: "incomparable", reason: "period-unknown" };
+    }
+    if (opts.periodA !== opts.periodB) {
       return { verdict: "incomparable", reason: "period-mismatch" };
     }
   }
@@ -86,5 +75,6 @@ export function classifyUnitComparability(
   const factor = conversionFactor(a, b);
   // dimension/denominator を上で弾いているので factor は非 null のはず (防御的に null 検査)。
   if (factor === null) return { verdict: "incomparable", reason: "dimension-mismatch" };
-  return { verdict: factor === 1 ? "same" : "convertible", factor };
+  if (factor === 1) return { verdict: "same", factor: 1 };
+  return { verdict: "convertible", factor };
 }
