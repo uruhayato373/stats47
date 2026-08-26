@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-08-26T08:53:24.825Z",
+  "generatedAt": "2026-08-26T12:21:04.122Z",
   "gscSnapshot": "2026-W34",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2167,
-    "done": 353,
-    "needsRegen": 1814,
+    "done": 362,
+    "needsRegen": 1805,
     "needsByReason": {
-      "missing": 203,
-      "incomplete": 1552,
+      "incomplete": 1548,
+      "missing": 198,
       "blocker": 59
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 49152,
-    "needsImpressions": 6410,
+    "doneImpressions": 49524,
+    "needsImpressions": 6038,
     "opusReviewTier": 30
   },
   "entries": [
@@ -2161,10 +2161,12 @@
       "impressions": 50,
       "clicks": 2,
       "position": 8.92,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [],
+      "lastModified": "Wed, 26 Aug 2026 10:57:22 GMT",
+      "updatedAt": "2026-08-26T00:00:00.000Z"
     },
     {
       "rankingKey": "public-health-nurse-count",
@@ -2231,15 +2233,17 @@
       "impressions": 48,
       "clicks": 2,
       "position": 4.52,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-count"
       ],
+      "lastModified": "Wed, 26 Aug 2026 10:57:22 GMT",
+      "updatedAt": "2026-08-26T00:00:00.000Z",
       "dataWarns": [
         "thin-coverage"
-      ],
-      "reviewTier": "opus"
+      ]
     },
     {
       "rankingKey": "eggplant-consumption-quantity",
@@ -2309,15 +2313,14 @@
       "impressions": 45,
       "clicks": 2,
       "position": 7,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-count"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Wed, 26 Aug 2026 10:57:22 GMT",
+      "updatedAt": "2026-08-26T00:00:00.000Z"
     },
     {
       "rankingKey": "junior-high-club-per100-table-tennis",
@@ -2462,20 +2465,24 @@
       "impressions": 42,
       "clicks": 0,
       "position": 7.26,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [],
+      "lastModified": "Wed, 26 Aug 2026 10:57:22 GMT",
+      "updatedAt": "2026-08-26T00:00:00.000Z"
     },
     {
       "rankingKey": "junior-high-club-per100-swimming",
       "impressions": 42,
       "clicks": 0,
       "position": 6.83,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [],
+      "lastModified": "Wed, 26 Aug 2026 10:57:22 GMT",
+      "updatedAt": "2026-08-26T00:00:00.000Z"
     },
     {
       "rankingKey": "public-phone-count-per-1000",
@@ -2520,15 +2527,12 @@
       "impressions": 41,
       "clicks": 1,
       "position": 6.39,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Wed, 26 Aug 2026 10:57:22 GMT",
+      "updatedAt": "2026-08-26T00:00:00.000Z"
     },
     {
       "rankingKey": "railway-passengers",
@@ -2638,15 +2642,12 @@
       "impressions": 37,
       "clicks": 1,
       "position": 7.22,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Wed, 26 Aug 2026 10:57:22 GMT",
+      "updatedAt": "2026-08-26T00:00:00.000Z"
     },
     {
       "rankingKey": "national-pension-payment-rate",
@@ -2729,10 +2730,12 @@
       "impressions": 35,
       "clicks": 1,
       "position": 7.11,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [],
+      "lastModified": "Wed, 26 Aug 2026 10:57:22 GMT",
+      "updatedAt": "2026-08-26T00:00:00.000Z"
     },
     {
       "rankingKey": "public-enterprise-accounting-staff",
@@ -2911,10 +2914,12 @@
       "impressions": 32,
       "clicks": 1,
       "position": 6.91,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [],
+      "lastModified": "Wed, 26 Aug 2026 12:14:39 GMT",
+      "updatedAt": "2026-08-26T11:59:05Z"
     },
     {
       "rankingKey": "hobby-participation-rate-calligraphy",
@@ -3602,7 +3607,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "study-participation-rate-arts-culture",
@@ -3629,7 +3634,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "final-disposal-site-remaining-capacity",
@@ -3658,7 +3663,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "fried-tofu-consumption-expenditure",
@@ -3673,7 +3678,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "general-hospital-count",
@@ -3695,7 +3700,7 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "integrated-kindergarten-enrollment",
@@ -3705,7 +3710,7 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "kiwi-consumption-quantity",
@@ -3739,7 +3744,7 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "starting-salary-highschool",
@@ -3766,7 +3771,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "business-tax",
@@ -3793,7 +3798,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "electrician-annual-income",
