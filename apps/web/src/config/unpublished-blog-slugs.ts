@@ -14,7 +14,7 @@
  *
  * 更新方法: `cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts`
  *
- * 最終生成日: 2026-08-25
+ * 最終生成日: 2026-08-26
  * 件数: 10
  */
 export const UNPUBLISHED_BLOG_SLUGS: ReadonlySet<string> = new Set([
