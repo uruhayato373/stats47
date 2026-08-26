@@ -332,6 +332,7 @@ jobs:
           node --test .claude/scripts/lib/__tests__/admin-ci-contract.test.cjs
           node --test .claude/scripts/lib/__tests__/media-workspace-ci-contract.test.cjs
           node --test .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs
+          node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs
         continue-on-error: false
 
       - name: 🔐 Environment Registry Guard
@@ -605,6 +606,14 @@ jobs:
       #   RUN_RENDER_TESTS=1 の opt-in に分けてある。
       - name: 🧪 Run Package Unit Tests
         run: npm run test:packages
+        continue-on-error: false
+
+      - name: 🎯 Critical Pure Module Coverage
+        # 全体率を上げるための除外ではなく、shape/unit/dependency/validator/R2 parserの
+        # 実測module floorを個別に固定する。JSON/HTML成果物は保存せず、V8がメモリ上で判定する。
+        run: |
+          (cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts --coverage --coverage.reporter=text-summary)
+          (cd packages/r2-storage && npx vitest run src/lib/operations/__tests__/snapshot-reader.test.ts --coverage --coverage.reporter=text-summary)
         continue-on-error: false
 
       # apps/admin は root の `test:packages` (`--project '@stats47/*'`) に含まれない。
