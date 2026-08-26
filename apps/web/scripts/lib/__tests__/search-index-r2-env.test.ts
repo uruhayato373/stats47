@@ -40,6 +40,38 @@ describe("configureSearchIndexR2Environment", () => {
       R2_S3_ENDPOINT: "https://explicit.example.com",
     });
   });
+
+  it("secretを持たないCIでは検索index子processだけに公開read URLを補う", () => {
+    const env: Record<string, string | undefined> = {
+      CI: "true",
+      R2_PUBLIC_FETCH_URL: "",
+    };
+
+    configureSearchIndexR2Environment(env);
+
+    expect(env.R2_PUBLIC_FETCH_URL).toBe("https://storage.stats47.jp");
+  });
+
+  it("ローカル環境には公開read URLを暗黙設定しない", () => {
+    const env: Record<string, string | undefined> = {};
+
+    configureSearchIndexR2Environment(env);
+
+    expect(env.R2_PUBLIC_FETCH_URL).toBeUndefined();
+  });
+
+  it("CIでもS3資格情報が揃う場合は公開URLを設定しない", () => {
+    const env: Record<string, string | undefined> = {
+      GITHUB_ACTIONS: "true",
+      R2_ACCESS_KEY_ID: "access",
+      R2_SECRET_ACCESS_KEY: "secret",
+      R2_S3_ENDPOINT: "https://example.r2.cloudflarestorage.com",
+    };
+
+    configureSearchIndexR2Environment(env);
+
+    expect(env.R2_PUBLIC_FETCH_URL).toBeUndefined();
+  });
 });
 
 describe("assertCompleteSearchIndexSources", () => {

@@ -1,5 +1,7 @@
 type MutableEnvironment = Record<string, string | undefined>;
 
+const PUBLIC_R2_BASE_URL = "https://storage.stats47.jp";
+
 /**
  * deploy prebuildの子processだけで、GitHub secret名をR2 readerの正規名へ写す。
  * 親のNext buildへR2_*を渡すとgenerateStaticParamsが全rankingを列挙するため、
@@ -14,6 +16,20 @@ export function configureSearchIndexR2Environment(env: MutableEnvironment): void
   }
   if (!env.R2_S3_ENDPOINT && env.CLOUDFLARE_ACCOUNT_ID) {
     env.R2_S3_ENDPOINT = `https://${env.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`;
+  }
+
+  // PR build / E2E はR2 secretを持たない。検索index生成processだけに公開read URLを補い、
+  // ranking/blogが0件の壊れたindexを生成しない。process.envの変更はnpmのprebuild子process内に
+  // 閉じるため、後続のNext buildへR2接続を渡して全routeを列挙させることはない。
+  if (
+    !env.R2_ACCESS_KEY_ID &&
+    !env.R2_SECRET_ACCESS_KEY &&
+    !env.R2_S3_ENDPOINT &&
+    !env.R2_PUBLIC_FETCH_URL &&
+    !env.NEXT_PUBLIC_R2_PUBLIC_URL &&
+    (env.CI === "true" || env.GITHUB_ACTIONS === "true")
+  ) {
+    env.R2_PUBLIC_FETCH_URL = PUBLIC_R2_BASE_URL;
   }
 }
 
