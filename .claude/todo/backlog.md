@@ -571,6 +571,13 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   実測floorをrecipe 100 / 93.47 / 100、value 100 / 97.91 / 100（lines / branches / functions）に固定した。
   7領域200 testsをPR blockingへ接続し、未分類IDとrecipe branch低下のRED、復元後GREENを確認。
   data-configs全64 files / 718 tests、契約8件、type-check、pre-commitはgreen。CI増分は初回QG5比約1.1秒。
+- **QG6 semantic color slice (2026-08-27)**: semantic role 20件をすべて有効なhexへ解決し、移行前14色の
+  goldenを固定した。`rainbow` / `red` / `var(...)` / `oklch(...)` / `series-99`をcatalog・runtime双方で拒否し、
+  consumer 0だったCSS resolverを削除。対象67 test、data-configs全727 test、type-check、catalog監査はgreen。
+- **QG6 render deterministic contract (2026-08-27)**: opt-in render 9件のinventory、TZ・locale・viewport・DPR・
+  font SHA・artifact出力先・RAF待機を決定的契約へ固定し、通常suite 28 files / 172 testsはgreen。opt-in実走は
+  37 files / 185 testsのうちpixel差7件が残ったため、停止条件どおりPR必須化・scheduled配線は保留した。
+  次は固定raster engineでgoldenを再検証し、7件を解消後にworkflowへ接続する。
 - **監査ベースライン (2026-08-13、ローカル実測)**:
   - rootの`test:packages`は`vitest run --project '@stats47/*'`で、`apps/admin`のunit test
     **14 file / 136 test**はPR CI対象外。galleryにはPlaywright 6 specもあるがworkflowから呼ばれていない。
@@ -942,6 +949,10 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   同率順位と全areaCode・県名・順位・値を保持し、各機械監査blocker 0 / warn 0、AI監査48件、
   独立critic full→外科修正→delta PASS。3件ともCIの権威ゲートを再通過し、R2公開・CDN purge・
   outbox削除まで成功（runs `32989601036` / `32991476893` / `32991854174`、skip 0 / upload error 0）。
+- **2026-08-27 next 8–9**: `deaths-lifestyle-diseases`（2023年度・人）と
+  `junior-high-club-per100-basketball`（2025年度・人）を公開R2の47県へ接地して生成。全areaCode・県名・
+  順位・値・年・単位の不一致0、機械監査blocker 0 / warn 0、AI監査48件、独立criticのfull→外科修正→
+  delta PASS。全データrefreshとのR2競合を避けるため、公開はrefresh完了後に直列実行する。
 - **完了条件**: 全active rankingを処理し、欠測・矛盾・未検証生成を0にする。R2 pushとCDN反映は別承認。
 - **正典**: `.claude/rules/ranking-content-standards.md`
 
