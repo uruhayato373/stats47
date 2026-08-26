@@ -1002,11 +1002,11 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   1,091 assetで `pork-consumption-expenditure/data/pork-expenditure-ranking.svg` だけが404。SVGは既存JSON/sourceから
   ローカル再生成済みで、公開gateもdata refresh / blog publish / 週次へ配線済み。R2全量pullのdry-runは
   `app/blog` 8,913 files（local差分8,526）を確認したが、read-only取得の承認前なので実pullしていない。
-- **2026-08-27 生成物監査**: ローカルR2ミラーの432記事・2,437 SVGを同一lintで再走査し、構造error
-  98記事、dark mode非対応133記事を機械stateへ記録した。旧stateの98記事・141 SVG・error 0は母集団が
+- **2026-08-27 生成物監査**: R2 `app/blog` 8,944 filesをローカルへ同期し、432記事・2,443 SVGを同一lintで
+  再走査した。構造error 98記事、dark mode非対応135記事を機械stateへ記録した。旧stateの98記事・141 SVG・error 0は母集団が
   生成物全量を覆っておらず、完了証拠には使えない。公開参照asset契約とSVG内容品質は別gateとして維持する。
-- **次**: 欠落SVGの限定R2反映後に公開契約監査をgreenへ戻す。全量SVG品質監査は承認後の`app/blog` pullで
-  must-fixを確定し、小バッチで処理する。R2由来、算式、年、metric keyを復元できない図は推測で再生成しない。
+- **次**: 構造error 98記事を優先し、小バッチで処理する。R2由来、算式、年、metric keyを復元できない図は
+  推測で再生成しない。公開参照asset契約と内容品質gateを各バッチ後に再実行する。
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
 - **正典**: `.claude/rules/blog-data-schema.md`
 

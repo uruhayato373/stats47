@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-26T15:09:31.164Z",
+  "generatedAt": "2026-08-26T15:33:24.504Z",
   "base": ".local/r2/app/blog",
   "articlesWithCharts": 432,
-  "totalSvgs": 2437,
+  "totalSvgs": 2443,
   "articlesWithErrors": 98,
-  "articlesDarkModeNonCompliant": 133,
+  "articlesDarkModeNonCompliant": 135,
   "articles": [
     {
       "slug": "wage-vs-living-cost",
@@ -823,6 +823,14 @@
       "themeColorInline": 3
     },
     {
+      "slug": "inbound-overnight-stay-concentration",
+      "svgCount": 9,
+      "errors": 0,
+      "warnings": 6,
+      "darkModeMissing": 3,
+      "themeColorInline": 3
+    },
+    {
       "slug": "minimum-wage-1000yen-breakthrough",
       "svgCount": 12,
       "errors": 0,
@@ -1017,6 +1025,14 @@
     {
       "slug": "abortion-rate-prefecture-gap",
       "svgCount": 5,
+      "errors": 0,
+      "warnings": 2,
+      "darkModeMissing": 1,
+      "themeColorInline": 1
+    },
+    {
+      "slug": "commercial-land-price-trend",
+      "svgCount": 17,
       "errors": 0,
       "warnings": 2,
       "darkModeMissing": 1,
@@ -1639,14 +1655,6 @@
       "themeColorInline": 0
     },
     {
-      "slug": "commercial-land-price-trend",
-      "svgCount": 16,
-      "errors": 0,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
       "slug": "convenience-store-density-map",
       "svgCount": 9,
       "errors": 0,
@@ -2161,14 +2169,6 @@
     {
       "slug": "inbound-overnight-guests-prefecture",
       "svgCount": 9,
-      "errors": 0,
-      "warnings": 0,
-      "darkModeMissing": 0,
-      "themeColorInline": 0
-    },
-    {
-      "slug": "inbound-overnight-stay-concentration",
-      "svgCount": 4,
       "errors": 0,
       "warnings": 0,
       "darkModeMissing": 0,
