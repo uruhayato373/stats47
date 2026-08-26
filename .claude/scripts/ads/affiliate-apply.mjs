@@ -55,6 +55,10 @@ import {
   appendJournal,
   readJournal,
 } from "./lib/asp-operation-store.mjs";
+import {
+  buildEligibilityFingerprintMaterial,
+  evaluateAffiliateEligibility,
+} from "./lib/affiliate-eligibility-core.mjs";
 
 const CATALOG = join(repoRoot(), ".claude/state/ads/affiliate-catalog.json");
 
@@ -438,21 +442,24 @@ async function applyAfbOne(page, asp, root, siteLabel, id, commit, { catalog, pl
   };
 }
 
-/**
- * 掲載適格性の指紋。**いま実際に見ている条件だけ**をハッシュする (推測で広げない)。
- *
- * doc 42 §7 の eligibility core (targetRankingKeys の hard allowlist) はまだ無いので、
- * 現状の判定材料は「Red Line か」「どの vertical か」の 2 つしかない。core が入れば
- * 入力が増えて指紋が変わり、**古い plan は再照合で自動的に失効する** — それが正しい挙動。
- */
-function eligibilityFingerprint(catalog, aspName, id) {
+/** catalog の案件を pure core で評価する。未登録も未承認として止める。 */
+export function evaluateCatalogApplyEligibility(catalog, aspName, id) {
+  const hit = findInCatalog(catalog, aspName, id);
+  if (!hit) {
+    return { eligible: false, reasons: ["catalog-program-not-found"] };
+  }
+  return evaluateAffiliateEligibility(hit.program?.eligibility);
+}
+
+/** 掲載条件を plan に焼き、条件変更時は古い plan を再照合で失効させる。 */
+export function eligibilityFingerprint(catalog, aspName, id) {
   const hit = findInCatalog(catalog, aspName, id);
   const material = {
     asp: aspName,
     programId: String(id),
     redLine: hit?.program?.redLine === true,
     vertical: hit?.program?.vertical ?? null,
-    // ★ここに targetRankingKeys 等を足すのは eligibility core と同時に行う
+    eligibility: buildEligibilityFingerprintMaterial(hit?.program?.eligibility),
   };
   return createHash("sha256").update(JSON.stringify(material)).digest("hex").slice(0, 32);
 }
@@ -565,14 +572,23 @@ async function main() {
     }
   }
 
-  // Red Line は --commit でも通さない (gate の前に落とす)
+  // Red Line と掲載適格性は dry-run の plan 作成前に落とす。
   const blocked = [];
   for (const id of opts.ids) {
     const hit = findInCatalog(catalog, opts.asp, id);
-    if (hit?.program?.redLine) blocked.push({ id, key: hit.key });
+    if (hit?.program?.redLine) {
+      blocked.push({ id, key: hit.key, reasons: ["red-line"] });
+      continue;
+    }
+    const eligibility = evaluateCatalogApplyEligibility(catalog, opts.asp, id);
+    if (!eligibility.eligible) {
+      blocked.push({ id, key: hit?.key ?? "未登録", reasons: eligibility.reasons });
+    }
   }
   if (blocked.length) {
-    for (const b of blocked) console.error(`  ✗ ${b.id} (${b.key}) は Red Line 案件。申請しない`);
+    for (const b of blocked) {
+      console.error(`  ✗ ${b.id} (${b.key}) は掲載適格性を満たさない: ${b.reasons.join(", ")}`);
+    }
     process.exit(1);
   }
 

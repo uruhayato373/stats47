@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const schoolTeacherAnnualIncome: MetricConfig = {
   "key": "school-teacher-annual-income",
   "title": "小中学校教員の平均年収",
+  "description": "賃金構造基本統計調査の一般労働者・男女計の小・中学校教員について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
+  "note": "公立学校教員だけに限定した統計ではない。6月の月例給与を年換算した税・社会保険料等控除前の標本平均で、個人の実年収ではない。",
   "unit": "万円",
   "category": "educationsports",
   "source": {

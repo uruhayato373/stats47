@@ -4,6 +4,8 @@ export const manufacturingShipmentAmount: MetricConfig = {
   "key": "manufacturing-shipment-amount",
   "title": "製造品出荷額等",
   "subtitle": "総額",
+  "description": "従業者4人以上の製造業事業所について、1年間の製造品出荷額、加工賃収入額、くず廃物の出荷額、その他収入額を合計した金額。",
+  "note": "消費税、酒税、たばこ税、揮発油税、地方揮発油税を含む。2020年度以降は調査が年により切り替わり、2021年経済センサスは従来より幅広く事業所を把握しているため、時系列比較には注意が必要。",
   "unit": "百万円",
   "category": "miningindustry",
   "source": {

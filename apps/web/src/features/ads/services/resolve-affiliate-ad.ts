@@ -143,7 +143,7 @@ export async function resolveAffiliateTextAds(
 /**
  * tagKey 配列からテキスト広告を複数解決する (ブログ記事サイドバー用)。
  * tagKey → vertical を収集し、id/title で dedupe して priority 降順で返す。
- * 該当タグが無い記事でも表示できるよう、マッチ無し時は economy にフォールバックする。
+ * タグ解決不能・一致在庫なしは空配列を返し、別 vertical を推測しない。
  */
 export async function resolveAffiliateTextAdsByTagKeys(
   tagKeys: string[],
@@ -151,14 +151,9 @@ export async function resolveAffiliateTextAdsByTagKeys(
   limit = 2,
 ): Promise<ResolvedAffiliateAd[]> {
   const verticals = verticalsFromTagKeys(tagKeys);
-  if (verticals.length === 0) verticals.push("economy");
+  if (verticals.length === 0) return [];
 
-  let ads = await findActiveTextAdsByVerticals(verticals, locationCode);
-  // ★ 軸は解決できたが**その軸に text 在庫が無い**場合も空になる (例: furusato は text 0 件)。
-  //   tagKey が無い記事だけでなくこのケースでも枠が埋まるよう economy へ再フォールバックする。
-  if (ads.length === 0 && !verticals.includes("economy")) {
-    ads = await findActiveTextAdsByVerticals(["economy"], locationCode);
-  }
+  const ads = await findActiveTextAdsByVerticals(verticals, locationCode);
 
   // vertical 集約後も同一広告が重複しうるため title で dedupe
   const seen = new Set<string>();

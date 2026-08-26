@@ -6,6 +6,8 @@ export const criminalRecognitionCount: MetricConfig = {
   "subtitle": "総数（旧統計）",
   "unit": "件",
   "category": "safetyenvironment",
+  "description": "被害の届出、告訴、告発などを端緒として警察が認知した、交通業過を除く刑法犯事件の年間総数。",
+  "note": "道路上の交通事故に係る業務上過失致死傷罪などは除外される。市区町村データは2008年を最後に収集が中止されている。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010111",

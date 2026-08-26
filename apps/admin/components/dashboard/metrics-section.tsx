@@ -22,9 +22,9 @@ function StatCard({
   sparkColor?: string;
 }) {
   return (
-    <div className="rounded-lg border border-console-border bg-console-card p-3">
-      <div className="text-xl font-bold text-console-fg">{value}</div>
-      <div className="mt-0.5 text-[11px] text-console-muted">{label}</div>
+    <div className="min-w-0 overflow-hidden rounded-lg border border-console-border bg-console-card p-3">
+      <div className="break-words text-xl font-bold text-console-fg">{value}</div>
+      <div className="mt-0.5 break-words text-[11px] text-console-muted">{label}</div>
       {sub ? <div className="mt-1 text-[11px] text-console-muted">{sub}</div> : null}
       {sparkValues ? <Sparkline values={sparkValues} color={sparkColor} /> : null}
     </div>
@@ -155,5 +155,5 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
     return <p className="text-sm text-console-bad">メトリクスの取得に失敗</p>;
   }
 
-  return <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">{cards}</div>;
+  return <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">{cards}</div>;
 }

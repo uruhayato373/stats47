@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const ownerOccupiedHousingRatio: MetricConfig = {
   "key": "owner-occupied-housing-ratio",
   "title": "持ち家比率",
+  "description": "そこに居住する世帯が全部または一部を所有する持ち家数を、居住世帯のある住宅数で割り、100倍した値。",
+  "note": "持ち家は登記の有無を問わず、分割払いが完了していない分譲住宅も含む。空き家など居住世帯のない住宅は分母に含まれない。",
   "unit": "％",
   "category": "construction",
   "source": {

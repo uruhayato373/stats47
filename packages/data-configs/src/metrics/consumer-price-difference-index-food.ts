@@ -4,6 +4,7 @@ export const consumerPriceDifferenceIndexFood: MetricConfig = {
   "key": "consumer-price-difference-index-food",
   "title": "消費者物価地域差指数",
   "subtitle": "食料",
+  "description": "全国平均の食料価格水準を100とし、都道府県ごとの食料費目の物価水準を比較した年平均指数です。",
   "unit": "（全国=100）",
   "category": "economy",
   "source": {

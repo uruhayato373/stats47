@@ -68,10 +68,14 @@ interface LayerMeta {
 
 /** 表示メタだけを持つ。「どのファイルが層か」は backlog-lib の TODO_LAYER_FILES が真実源。 */
 const LAYER_META: Record<string, LayerMeta> = {
-  "backlog.md": { id: "backlog", label: "バックログ", mode: "backlog" },
-  "weekly.md": { id: "weekly", label: "週間", mode: "sections", level: 2 },
-  "monthly.md": { id: "monthly", label: "月間", mode: "sections", level: 3 },
-  "improvements.md": { id: "improvements", label: "改善", mode: "improvements" },
+  "backlog.md": { id: "backlog", label: "実行バックログ", mode: "backlog" },
+  "weekly.md": { id: "weekly", label: "今週", mode: "sections", level: 2 },
+  "monthly.md": { id: "monthly", label: "今月", mode: "sections", level: 3 },
+  "improvements.md": {
+    id: "improvements",
+    label: "効果測定・改善",
+    mode: "improvements",
+  },
 };
 
 export interface TodoCard {

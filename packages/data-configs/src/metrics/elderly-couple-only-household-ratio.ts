@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const elderlyCoupleOnlyHouseholdRatio: MetricConfig = {
   "key": "elderly-couple-only-household-ratio",
   "title": "高齢夫婦のみの世帯の割合",
+  "description": "夫が65歳以上、妻が60歳以上の夫婦のみの世帯数を一般世帯数で除して100を掛けた割合です。",
   "unit": "％",
   "category": "population",
   "source": {

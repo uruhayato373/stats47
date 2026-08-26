@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const manufacturingEmployees: MetricConfig = {
   "key": "manufacturing-employees",
   "title": "製造業従業者数",
+  "description": "製造業事業所の所属従業者から、個人業主・無給家族従業者、1か月未満または日々雇用の臨時雇用者、他事業所への出向・派遣者を除き、他事業所からの出向・派遣受入者を加えた人数。",
+  "note": "2020年度以降は経済センサス‐活動調査と経済構造実態調査が年により切り替わる。2021年経済センサスは法人番号情報を活用して従来より幅広く事業所を把握しており、単純比較できない。",
   "unit": "人",
   "category": "miningindustry",
   "source": {

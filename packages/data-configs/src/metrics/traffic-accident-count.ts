@@ -6,6 +6,8 @@ export const trafficAccidentCount: MetricConfig = {
   "subtitle": "総数",
   "unit": "件",
   "category": "safetyenvironment",
+  "description": "道路交通法上の道路で車両等や列車の交通によって起きた事故のうち、人の死亡または負傷を伴う道路交通事故の発生件数。",
+  "note": "物的損害だけの事故は含まれず、多重事故は1件として計上される。市区町村データは2009年を最後に収集が中止されている。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010111",

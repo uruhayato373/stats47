@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-25T17:19:49.361Z",
+  "updatedAt": "2026-08-25T20:42:54.560Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -402,9 +402,9 @@
     },
     "IMAGE-DELTA-PUBLISH-01": {
       "class": "impl-small",
-      "status": "open",
-      "sourceFile": null,
-      "title": null,
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "生成画像の変更検知とexact R2反映",
       "attempts": [
         {
           "at": "2026-08-21T17:05:22.060Z",
@@ -440,15 +440,37 @@
           "evidence": "git status clean(未commit実装は既に無い)。test:image-pipeline 99件green・type-check:image-pipeline green・check:image-pipeline-policy 0件green・apps/web type-check green。npm run build --workspace apps/webはこのサンドボックスにNEXT_PUBLIC_BASE_URL/NEXT_PUBLIC_ESTAT_APP_IDが無く(R2 credsも無し)失敗、コード欠陥ではなく環境制約。加",
           "failReason": "web-build-env-blocked+cannot-edit-backlog",
           "followUps": []
+        },
+        {
+          "at": "2026-08-25T11:08:10.268Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test:image-pipeline",
+              "npm run type-check:image-pipeline",
+              "npm run check:image-pipeline-policy",
+              "npm run type-check --workspace apps/web",
+              "npm run build --workspace apps/web"
+            ],
+            "pass": true
+          },
+          "evidence": "専用画像ゲートを再実行し、Vitest 82件 + node:test 21件、画像用type-check、workflow policy監査(63 workflows/0 findings)、apps/web type-check、Next.js本番build(SSG 1352ページ)が全て成功。同一入力の決定的fingerprint/no-change空plan、依存内容によるrenderer hash差分、exact bundle plan、破損・ETag CAS・lock・TTL・self-heal系fixtureがgreen。外部R2反映は実施",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 2,
-        "lastReason": "web-build-env-blocked+cannot-edit-backlog",
-        "since": "2026-08-21T17:05:22.060Z"
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-25T11:08:10.268Z"
     },
     "KSJ-PREF-ASSIGN-01": {
       "class": "needs-owner",
@@ -556,21 +578,40 @@
           "evidence": "QG0からQG8まで9段階、CI workflow配線・schema移行・coverage floor再設計を含む大規模プロジェクトで、単発CI runで完結できずdraft PRが要るためimpl-largeと判定しスキップした",
           "failReason": "class-needs-pr",
           "followUps": []
+        },
+        {
+          "at": "2026-08-25T20:41:21.255Z",
+          "runId": null,
+          "model": "fable",
+          "effort": "high",
+          "outcome": "failed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-checker-wiring.test.cjs",
+              "node .claude/scripts/lib/check-checker-wiring.cjs --baseline --json"
+            ],
+            "pass": true
+          },
+          "evidence": "QG0は26 workspace・critical checker 43件を登録。未分類critical 0、fixture 11件と実repo監査green",
+          "failReason": "親カードのQG1-QG8が残るため削除条件未達",
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 0,
-        "lastReason": null,
-        "since": null
+        "failCount": 1,
+        "lastReason": "親カードのQG1-QG8が残るため削除条件未達",
+        "since": "2026-08-25T20:41:21.255Z"
       },
       "reclassifiedFrom": [],
       "completedAt": null
     },
     "SURVEY-EDITORIAL-80-01": {
       "class": "impl-small",
-      "status": "open",
-      "sourceFile": null,
-      "title": null,
+      "status": "quarantined",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "全80調査へ一次資料に基づく個別説明を手作業で整備する",
       "attempts": [
         {
           "at": "2026-08-24T17:08:57.270Z",
@@ -584,22 +625,86 @@
           "evidence": "この run 環境には WebFetch/WebSearch ツールが無く、Bash 経由の curl/node -e/ヒアドキュメントも don't-ask モードで自動拒否される (git status 等の許可済みコマンドのみ通る)。カードは一次資料 (総務省/厚労省/経産省/文科省等の公式ページ) を実際に取得して確認することを必須要件とし、推測や検索要約での代替を明示的に禁じている。一次資料を取得する手段が皆無のため、内容を書かずに次回 (WebFetch 利用可能な環境/セッション) へ繰り越す。",
           "failReason": "no-web-access",
           "followUps": []
+        },
+        {
+          "at": "2026-08-25T20:41:27.382Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": "high",
+          "outcome": "failed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run type-check --workspace apps/web",
+              "npm run test --workspace=@stats47/data-configs -- --run",
+              "npx vitest run apps/web/src/features/survey/__tests__/survey-editorial.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "water/workplaceの2調査を一次資料と実在rankingへ接続。editorial 69/80から71/80、portfolioとlinkage監査green",
+          "failReason": "残り9調査は各3件のranking在庫が不足し親カード削除条件未達。e-Stat APP_IDも未設定",
+          "followUps": []
+        },
+        {
+          "at": "2026-08-25T20:42:54.560Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": "high",
+          "outcome": "failed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run type-check --workspace apps/web",
+              "npm run test --workspace=@stats47/data-configs -- --run",
+              "npx vitest run apps/web/src/features/survey/survey-editorial.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "訂正: survey editorialの正しいtest pathで3/3 green。2調査追加済みだが全80完了条件には未達",
+          "failReason": "残り9調査のranking在庫不足とe-Stat APP_ID未設定。直前attemptの__tests__付きpathは誤記",
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
-        "lastReason": "no-web-access",
+        "failCount": 3,
+        "lastReason": "残り9調査のranking在庫不足とe-Stat APP_ID未設定。直前attemptの__tests__付きpathは誤記",
         "since": "2026-08-24T17:08:57.270Z"
       },
       "reclassifiedFrom": [],
       "completedAt": null
     },
     "THEME-CHART-RECIPE-DRIFT-01": {
-      "class": "impl-small",
-      "status": "open",
+      "class": "test-fix",
+      "status": "completed",
       "sourceFile": null,
       "title": null,
       "attempts": [
+        {
+          "at": "2026-08-25T12:02:10.485Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm test --workspace=@stats47/data-configs -- --run",
+              "npm run type-check --workspace=@stats47/data-configs",
+              "npm run type-check --workspace=web",
+              "npm run generate:catalog --workspace=@stats47/data-configs -- --check",
+              "npx tsx packages/data-configs/scripts/generate-theme-dependency-mirror.ts --check",
+              "npm run validate:catalog --workspace=@stats47/data-configs",
+              "npm test --workspace=web -- --run src/features/theme-dashboard/actions/__tests__/fetch-db-chart-data.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "契約testを先に7失敗/ web1失敗で再現。3 chartをMetricConfig由来R2 seriesRefsへ移行し、生request 247→241、typed refs 0→6。配信R2 recipeでaxisRatio/tabCombination/valueScale/L3130を確認。data-configs 630 test、両tsc、catalog/mirror gate green。",
+          "failReason": null,
+          "followUps": []
+        },
         {
           "at": "2026-08-25T17:19:42.260Z",
           "runId": null,
@@ -615,19 +720,41 @@
         }
       ],
       "quarantine": {
-        "failCount": 1,
-        "lastReason": "2/3 sub-items blocked by card's own stop condition; 3rd item fixed",
-        "since": "2026-08-25T17:19:42.260Z"
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-25T12:02:10.485Z"
     },
     "THEME-METRIC-DEFINITION-133-01": {
-      "class": "indicator-expansion",
-      "status": "open",
+      "class": "impl-small",
+      "status": "completed",
       "sourceFile": null,
       "title": null,
       "attempts": [
+        {
+          "at": "2026-08-25T12:51:01.715Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run packages/data-configs/src/theme-catalog/__tests__/theme-metric-content.test.ts packages/data-configs/src/theme-catalog/__tests__/chart-description.test.ts packages/data-configs/src/theme-catalog/__tests__/chart-dependencies.test.ts",
+              "npm run validate:config --workspace=@stats47/data-configs",
+              "npm run validate:catalog --workspace=@stats47/data-configs",
+              "npm run type-check --workspace=@stats47/data-configs",
+              "git diff --check"
+            ],
+            "pass": true
+          },
+          "evidence": "ThemeCatalog参照135/135指標に一次資料準拠の個別descriptionを整備。欠落0・同文重複0・note79を実測し、欠落許容baselineを0の必須gateへ縮小。対象28 test、config/catalog validator、type-check、diff checkがgreen。",
+          "failReason": null,
+          "followUps": []
+        },
         {
           "at": "2026-08-25T17:19:49.361Z",
           "runId": null,
@@ -648,7 +775,148 @@
         "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-25T12:51:01.715Z"
+    },
+    "UI-CARD-CENSUS-SURVEY-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "SurveyTaxonomyCard の census ベースラインを決着させる",
+      "attempts": [
+        {
+          "at": "2026-08-25T11:10:50.385Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-card-census.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "現HEADを実測するとcard censusは25種・ベースライン超過なしでexit 0。SurveyTaxonomyCardはRailCard/SurfaceSectionを外枠に再利用するfeature compositeとして理由コメント付きでBASELINE登録済み、削除済みNationalTrendCardもbaselineから除去済み。カードの未完了前提が古い。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-25T11:10:50.385Z"
+    },
+    "UI-AD-RAILSLOT-CATEGORY-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "category ページの RailAdSlot を本文カラムから外す",
+      "attempts": [
+        {
+          "at": "2026-08-25T11:10:50.476Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-ad-placement.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "現HEADを実測するとad placement guardはexit 0。categoryのRailAdSlotは本文カラムではなく左aside内で、guard allowlistにも左レールとして理由付き登録済み。本文末尾にはFooterAdSlotが別途配置されており、カードの前提が古い。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-25T11:10:50.476Z"
+    },
+    "AICONTENT-BUILDINPUT-ZEROFILL-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "build-input が R2 に無い県をゼロ埋めするのをやめる",
+      "attempts": [
+        {
+          "at": "2026-08-25T11:15:34.722Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run packages/ranking/src/repositories/ranking-value/__tests__/list-ranking-values.test.ts",
+              "npx vitest run packages/ai-content/src",
+              "npm run type-check --workspace packages/ranking",
+              "npm run type-check --workspace packages/ai-content"
+            ],
+            "pass": true
+          },
+          "evidence": "R2のvalue/rank=null行をlistRankingValuesが0へ変換していた原因を修正し、未観測を除外して実在0は保持する回帰テストを追加。公開R2実測で7キーのbuild-input件数が11/14/42/42/39/40/39へ一致し、snow-crabの実在0は1件保持、rank 0は全キー0。対象test・ai-content 28 tests・両workspace type-checkがgreen。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-25T11:15:34.722Z"
+    },
+    "ASP-ELIGIBILITY-GATE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "掲載適格性を eligibility core にして配信を fail-closed にする",
+      "attempts": [
+        {
+          "at": "2026-08-25T11:35:01.189Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/ads/__tests__/*.test.mjs",
+              "npx vitest run apps/web/src/features/ads/repositories/__tests__/affiliate-ad-snapshot.test.ts apps/web/src/features/ads/__tests__/resolve-affiliate-ad.test.ts",
+              "npm run type-check --workspace apps/web",
+              "npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts --check-size",
+              "NODE_OPTIONS=--conditions=react-server npx tsx apps/web/scripts/export-affiliate-ads-snapshot.ts --validate-only",
+              "npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "versioned policyとpure eligibility coreを実装。未設定/pending/blocked/対象空/未承認riskはブラウザ起動前にplan作成を拒否し、全条件をplan指紋へ含めた。targetRankingKeysをhard allowlist化し、blogとplacement監査のeconomy推測fallbackを廃止。広告core 197 tests、web 15 tests、web type-check、inventory/snapshot/compliance、docs checkが全てexit 0。regi",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-25T11:35:01.189Z"
     }
   }
 }

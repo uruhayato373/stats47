@@ -4,6 +4,8 @@ export const perCapitaInhabitantTaxPrefMunicipal: MetricConfig = {
   "key": "per-capita-inhabitant-tax-pref-municipal",
   "title": "住民税",
   "subtitle": "都道府県・市町村財政合計",
+  "description": "都道府県民税と市町村民税の収入額を合計し、総人口で割った人口1人当たりの住民税額。",
+  "note": "住民税には個人住民税と法人住民税を含むため、個人が実際に負担する平均税額ではない。都道府県・市町村財政の合計を総人口で均した値。",
   "unit": "千円",
   "category": "economy",
   "source": {

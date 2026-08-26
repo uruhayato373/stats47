@@ -16,6 +16,11 @@ vi.mock("@stats47/estat-api/server", () => ({
   fetchFormattedStats: (...args: unknown[]) => fetchFormattedStats(...args),
 }));
 
+const readStatsValues = vi.fn();
+vi.mock("@stats47/stats-r2/readers", () => ({
+  readStatsValues: (...args: unknown[]) => readStatsValues(...args),
+}));
+
 const mockFetchEstatData = vi.mocked(fetchEstatData);
 
 function row(areaCode: string, yearCode: string, value: number): StatsSchema {
@@ -43,6 +48,40 @@ const LINE_PROPS = {
 describe("fetchDbChartDataAction — 地域コードごとの取得経路", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+
+  it("seriesRefs は正典 R2 だけを読み、MetricConfigで合成済みの値をそのまま描画する", async () => {
+    readStatsValues
+      .mockResolvedValueOnce({
+        metricKey: "doctor-annual-income",
+        entityKind: "prefecture",
+        rows: [row("13000", "2023", 1_234.5)],
+        meta: { rowCount: 1, yearRange: ["2023", "2023"], areaCount: 1, generatedAt: "2026-08-25" },
+      })
+      .mockResolvedValueOnce({
+        metricKey: "nurse-annual-income",
+        entityKind: "prefecture",
+        rows: [row("13000", "2023", 567.8)],
+        meta: { rowCount: 1, yearRange: ["2023", "2023"], areaCount: 1, generatedAt: "2026-08-25" },
+      });
+
+    const result = await fetchDbChartDataAction(
+      "line-chart",
+      {
+        seriesRefs: [
+          { metricKey: "doctor-annual-income", label: "医師", colorRole: "population" },
+          { metricKey: "nurse-annual-income", label: "看護師", colorRole: "improve" },
+        ],
+      },
+      "13000",
+    );
+
+    expect(readStatsValues).toHaveBeenNthCalledWith(1, "doctor-annual-income", "prefecture");
+    expect(readStatsValues).toHaveBeenNthCalledWith(2, "nurse-annual-income", "prefecture");
+    expect(mockFetchEstatData).not.toHaveBeenCalled();
+    expect(fetchFormattedStats).not.toHaveBeenCalled();
+    const points = result && result.type === "line" ? result.data.data : [];
+    expect(points[0]).toMatchObject({ 医師: 1_234.5, 看護師: 567.8 });
   });
 
   it("全国 (00000) は全都道府県取得経路を通り、全国行の値を描画する", async () => {

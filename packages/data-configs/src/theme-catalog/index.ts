@@ -34,6 +34,7 @@ export * from "./chart-color-role";
 export * from "./stat-series-ref";
 export * from "./chart-dependencies";
 export * from "./faq-markdown";
+export * from "./theme-metric-content";
 
 /** カタログ駆動テーマの登録簿 (key → catalog)。 */
 export const THEME_CATALOGS: Record<string, ThemeCatalog> = {

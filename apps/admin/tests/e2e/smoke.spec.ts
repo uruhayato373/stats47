@@ -80,25 +80,25 @@ test.describe("smoke: 5画面の疎通", () => {
     await expect(page).toHaveURL(/\/$/);
   });
 
-  test("TODO は階層を開閉し、各台帳へ遷移できる", async ({ page }) => {
+  test("TODO は独立グループとして各台帳へ遷移できる", async ({ page }) => {
     await page.goto("/");
     const sidebar = page.getByRole("complementary");
-    const todo = sidebar.getByRole("button", { name: "TODO", exact: true });
 
-    await expect(todo).toHaveAttribute("aria-expanded", "false");
-    await todo.click();
-    await expect(todo).toHaveAttribute("aria-expanded", "true");
+    await expect(sidebar.getByRole("button", { name: "TODO", exact: true })).toHaveCount(0);
+    await expect(sidebar.getByText("TODO", { exact: true })).toBeVisible();
+    await expect(sidebar.getByRole("link", { name: "実行バックログ", exact: true })).toBeVisible();
+    await expect(sidebar.getByRole("link", { name: "今月の計画", exact: true })).toBeVisible();
 
-    await sidebar.getByRole("link", { name: "週間", exact: true }).click();
+    await sidebar.getByRole("link", { name: "今週の計画", exact: true }).click();
     await expect(page).toHaveURL(/\/todo\?f=weekly$/);
-    await expect(page.getByRole("heading", { name: /週間/ })).toBeVisible();
-    await expect(sidebar.getByRole("button", { name: "TODO", exact: true })).toHaveAttribute(
-      "aria-expanded",
-      "true",
+    await expect(page.getByRole("heading", { name: /計画 — 今週/ })).toBeVisible();
+    await expect(sidebar.getByRole("link", { name: "今週の計画", exact: true })).toHaveAttribute(
+      "aria-current",
+      "page",
     );
 
-    await sidebar.getByRole("link", { name: "改善施策", exact: true }).click();
+    await sidebar.getByRole("link", { name: "効果測定・改善", exact: true }).click();
     await expect(page).toHaveURL(/\/todo\?f=improvements$/);
-    await expect(page.getByRole("heading", { name: /改善施策/ })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /効果測定・改善/ })).toBeVisible();
   });
 });

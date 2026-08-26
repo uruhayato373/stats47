@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { apiGet, ApiError } from "@/lib/client/api-client";
 import { EmptyState, ErrorState, Loading } from "@/components/async-state";
 
-import { BacklogTable, type BacklogRow } from "./backlog-table";
 import { FeatureTable, type FeatureRow } from "./feature-table";
+import { ImprovementSummary, type ImprovementRow } from "./improvement-summary";
 import { MetricsSection, type MetricsData } from "./metrics-section";
 import { QueuesSection, type QueuesData } from "./queues-section";
 import { StrategySection, type StrategyData } from "./strategy-section";
@@ -15,7 +15,7 @@ type Wrapped<T> = T | { error: string };
 
 interface DashboardSummary extends MetricsData, QueuesData {
   generatedAt: string;
-  backlog: Wrapped<{ rows?: BacklogRow[] }>;
+  backlog: Wrapped<{ rows?: ImprovementRow[] }>;
   featureBacklog: Wrapped<{ rows?: FeatureRow[] }>;
   strategy: Wrapped<StrategyData>;
 }
@@ -23,7 +23,7 @@ interface DashboardSummary extends MetricsData, QueuesData {
 const ANCHOR_ITEMS = [
   { href: "#metrics", label: "メトリクス" },
   { href: "#queues", label: "進捗キュー" },
-  { href: "#todo", label: "改善バックログ" },
+  { href: "#todo", label: "効果測定" },
   { href: "#feature", label: "機能バックログ" },
   { href: "#strategy", label: "戦略" },
 ];
@@ -110,13 +110,12 @@ export function DashboardView() {
 
           <section id="todo">
             <h2 className="mb-1 border-b border-console-border pb-1.5 text-sm font-semibold text-console-fg">
-              TODO — 改善バックログ{/* .claude/todo/improvements.md ミラー */}
+              効果測定・改善{/* .claude/todo/improvements.md ミラー */}
             </h2>
             <p className="mb-3 text-xs text-console-muted">
-              真実源: <code className="rounded bg-console-card px-1">.claude/todo/improvements.md</code>{" "}
-              (このテーブルは読み取り専用ミラー。編集は md 側で)
+              現況には状態サマリのみ表示。Owner・Metricを含む詳細台帳はTODOで確認する。
             </p>
-            <BacklogTable backlog={data.backlog} />
+            <ImprovementSummary improvements={data.backlog} />
           </section>
 
           <section id="feature">

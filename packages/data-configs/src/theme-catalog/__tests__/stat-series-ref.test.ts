@@ -2,7 +2,12 @@ import { describe, expect, it } from "vitest";
 
 import type { ChartColorRole } from "../chart-color-role";
 import { THEME_CATALOGS } from "../index";
-import { type StatSeriesRef, validateChartProps } from "../stat-series-ref";
+import {
+  type StatSeriesRef,
+  validateChartProps,
+  validateMigratedSeriesRefContract,
+  validateStatSeriesRefAlignment,
+} from "../stat-series-ref";
 import { CATALOG_COMPONENT_TYPES } from "../types";
 
 /**
@@ -127,5 +132,72 @@ describe("StatSeriesRef — 全 9 型が参照モデルで表せる (WP6 移行�
     expect(Object.keys(ref).every((k) => allowed.has(k))).toBe(true);
     const role: ChartColorRole = "neutral";
     expect(role).toBe("neutral");
+  });
+});
+
+describe("StatSeriesRef — line-chart の R2 参照移行契約", () => {
+  const refs = [
+    { metricKey: "doctor-annual-income", label: "医師", colorRole: "population" },
+    { metricKey: "nurse-annual-income", label: "看護師", colorRole: "improve" },
+  ] satisfies StatSeriesRef[];
+
+  it("seriesRefs だけで line-chart を表せる", () => {
+    expect(validateChartProps("line-chart", { seriesRefs: refs })).toEqual([]);
+  });
+
+  it("seriesRefs と生 estatParams の二重指定を拒否する", () => {
+    expect(
+      validateChartProps("line-chart", {
+        seriesRefs: refs,
+        estatParams: [{ statsDataId: "0003445758" }],
+      }),
+    ).toContain("line-chart: seriesRefs と estatParams は同時指定できない");
+  });
+
+  it("seriesRefs と relatedRankingKeys の順序・件数ドリフトを拒否する", () => {
+    expect(
+      validateStatSeriesRefAlignment(
+        { seriesRefs: refs },
+        ["nurse-annual-income", "doctor-annual-income"],
+        new Map([
+          ["doctor-annual-income", "医師"],
+          ["nurse-annual-income", "看護師"],
+        ]),
+      ),
+    ).toEqual(expect.arrayContaining([expect.stringContaining("系列1") , expect.stringContaining("系列2")]));
+  });
+
+  it("表示ラベルがテーマ指標の shortLabel とずれたら拒否する", () => {
+    const errors = validateStatSeriesRefAlignment(
+      {
+        seriesRefs: [
+          {
+            metricKey: "disposable-income-worker-households",
+            label: "課税所得（勤労者世帯）",
+            colorRole: "population",
+          },
+        ],
+      },
+      ["disposable-income-worker-households"],
+      new Map([
+        [
+          "disposable-income-worker-households",
+          "可処分所得（二人以上の世帯のうち勤労者世帯）",
+        ],
+      ]),
+    );
+    expect(errors).toEqual([expect.stringContaining("shortLabel")]);
+  });
+
+  it.each([
+    "labor-wages-gender-gap",
+    "theme-occ-medical-trend",
+    "theme-economy-income-wage",
+  ])("移行済み %s は生レシピへ戻せない", (componentKey) => {
+    expect(
+      validateMigratedSeriesRefContract(componentKey, {
+        estatParams: [{ statsDataId: "0003445758" }],
+      }),
+    ).toEqual([expect.stringContaining("seriesRefs")]);
   });
 });

@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const healthCheckupRateLifestyleDiseases: MetricConfig = {
   "key": "health-checkup-rate-lifestyle-diseases",
   "title": "生活習慣病健康診断受診率",
+  "description": "保健所が実施した生活習慣病健康診断の受診者数を40歳以上人口で割り、100倍した値。",
+  "note": "同一人に多種目の健康診断を実施した場合は、受診内容に応じて各区分へ重複計上される。市町村実施分を含む健康診断全体の受診率ではない。",
   "unit": "％",
   "category": "socialsecurity",
   "source": {

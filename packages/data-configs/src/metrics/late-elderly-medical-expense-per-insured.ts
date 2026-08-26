@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const lateElderlyMedicalExpensePerInsured: MetricConfig = {
   "key": "late-elderly-medical-expense-per-insured",
   "title": "後期高齢者医療費",
+  "description": "後期高齢者医療制度の医療費を被保険者1人当たりに換算した金額です。",
   "unit": "円",
   "category": "socialsecurity",
   "source": {

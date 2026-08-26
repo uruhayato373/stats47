@@ -6,6 +6,8 @@ export const penalCodeOffensesRecognizedPer1000: MetricConfig = {
   "subtitle": "人口1000人当たり（更新）",
   "unit": "件",
   "category": "safetyenvironment",
+  "description": "犯罪統計の刑法犯総数（交通業過を除く）の認知件数を総人口で除し、人口1,000人当たりに換算した値。",
+  "note": "認知件数は、被害の届出、告訴、告発などを端緒として警察が犯罪の発生を認知した事件数であり、未認知の事件は含まれない。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",

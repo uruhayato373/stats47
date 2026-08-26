@@ -151,6 +151,7 @@ describe("todo server (v3-unified)", () => {
       due: "2026-08-30",
     });
     expect(b.layers.find((l) => l.id === "improvements")?.count).toBe(2);
+    expect(b.layers.find((l) => l.id === "improvements")?.label).toBe("効果測定・改善");
     // improvements の行はカード items に混ざらない
     expect(b.items.filter((c) => c.layer === "improvements")).toEqual([]);
   });

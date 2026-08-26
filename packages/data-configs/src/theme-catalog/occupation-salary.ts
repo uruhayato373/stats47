@@ -209,29 +209,22 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "医療・福祉職の年収推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1121"
+            "metricKey": "doctor-annual-income",
+            "label": "医師",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1133"
+            "metricKey": "nurse-annual-income",
+            "label": "看護師",
+            "colorRole": "improve"
           },
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1361"
+            "metricKey": "care-worker-annual-income",
+            "label": "介護職員",
+            "colorRole": "count"
           }
-        ],
-        "labels": [
-          "医師",
-          "看護師",
-          "介護職員"
-        ],
-        "seriesColors": [
-          "population",
-          "improve",
-          "count"
         ]
       },
       "relatedRankingKeys": [

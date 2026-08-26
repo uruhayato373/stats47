@@ -4,6 +4,7 @@ export const totalPopulation: MetricConfig = {
   "key": "total-population",
   "title": "総人口",
   "subtitle": "総数",
+  "description": "国勢調査または人口推計に基づく、各地域の人口の総数です。",
   "unit": "人",
   "category": "population",
   "source": {

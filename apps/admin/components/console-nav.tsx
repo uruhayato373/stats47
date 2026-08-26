@@ -33,22 +33,22 @@ const NAV_GROUPS: readonly NavGroup[] = [
       { href: "/dashboard", label: "プロジェクト現況" },
       { href: "/quality", label: "品質" },
       { href: "/ops", label: "CI・台帳" },
-      {
-        label: "TODO",
-        children: [
-          { href: "/todo", label: "バックログ（マスタ）" },
-          { href: "/todo?f=weekly", label: "週間" },
-          { href: "/todo?f=monthly", label: "月間" },
-          { href: "/todo?f=improvements", label: "改善施策" },
-        ],
-      },
+    ],
+  },
+  {
+    title: "TODO",
+    items: [
+      { href: "/todo", label: "実行バックログ" },
+      { href: "/todo?f=weekly", label: "今週の計画" },
+      { href: "/todo?f=monthly", label: "今月の計画" },
+      { href: "/todo?f=improvements", label: "効果測定・改善" },
     ],
   },
 ];
 
 export function ConsoleSidebar() {
   return (
-    <aside className="sticky top-0 flex h-screen w-60 shrink-0 flex-col gap-6 overflow-y-auto border-r border-console-border bg-console-card px-3 py-5">
+    <aside className="sticky top-0 flex h-screen w-44 shrink-0 flex-col gap-6 overflow-y-auto border-r border-console-border bg-console-card px-2 py-4 sm:w-60 sm:px-3 sm:py-5">
       <div className="px-3">
         <span className="block text-sm font-bold leading-tight tracking-tight text-console-fg">
           stats47

@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const singlePersonHouseholdRatio: MetricConfig = {
   "key": "single-person-household-ratio",
   "title": "単独世帯割合",
+  "description": "国勢調査の一般世帯数に占める、世帯人員が1人の単独世帯数の割合。",
+  "note": "一般世帯には一戸を構える単身者のほか、間借り・下宿の単身者や会社などの寄宿舎・独身寮に住む単身者を含む。施設等の世帯は分母に含まれない。",
   "unit": "％",
   "category": "population",
   "source": {

@@ -425,6 +425,19 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 **`a8-catalog.json` とはマージしない。** あちらは A8 scout の状態機械、こちらは ASP 横断の運用判断。
 広告そのものの SSOT は `apps/web/scripts/affiliate-ads-data.ts` (git TS) で、いずれも配信データではない。
 
+### 掲載適格性 gate
+
+- `vertical` は広告意図の分類であり、掲載許可には使わない。掲載許可は catalog の program に置く
+  `eligibility` だけで判定し、未設定は `pending` 相当として fail-closed にする。
+- 語彙の SSOT は `.claude/scripts/ads/data/affiliate-eligibility-policy.json`、判定と指紋の正規化は
+  `.claude/scripts/ads/lib/affiliate-eligibility-core.mjs`。policy 外の status / risk / page type は拒否する。
+- apply plan は `status=approved`、掲載対象が1件以上、risk が空の案件だけ生成できる。risk がある案件は
+  `reviewedBy=owner`、有効な `reviewedAt`、案件単位の `evidence` がすべて揃った場合だけ許可する。
+  `--force` 相当の迂回引数は作らない。eligibility 全項目は plan 指紋に含め、変更後の古い plan を失効させる。
+- `targetRankingKeys` は hard allowlist。設定済み広告は key 一致の ranking ページだけに出し、blog 等で
+  `rankingKey` が無い場合も除外する。blog の tag 解決不能・該当在庫なしは空を返し、別 vertical へ推測
+  fallback しない。
+
 ### 規律
 
 | 規律 | 手段 |

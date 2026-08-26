@@ -16,6 +16,8 @@
  * 正典: .claude/rules/affiliate-ads-standards.md §11
  */
 
+import { validateAffiliateEligibilitySchema } from "./affiliate-eligibility-core.mjs";
+
 /** 広告意図軸 (affiliate-category.ts の AffiliateVertical と一致させる)。 */
 export const AFFILIATE_VERTICALS = [
   "labor",
@@ -189,6 +191,11 @@ export function validateCatalog(catalog) {
   for (const [key, p] of Object.entries(programs)) {
     if (p?.vertical != null && !verticals.has(p.vertical)) {
       errors.push(`${key}: vertical "${p.vertical}" は 10 軸外`);
+    }
+    if (p?.eligibility != null) {
+      for (const reason of validateAffiliateEligibilitySchema(p.eligibility)) {
+        errors.push(`${key}: eligibility 構造違反 (${reason})`);
+      }
     }
     const asps = p?.asps ?? {};
     if (Object.keys(asps).length === 0) errors.push(`${key}: asps が空`);

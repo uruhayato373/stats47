@@ -18,7 +18,7 @@ export function PageHeading({
     <header className="space-y-1">
       <h1 className="text-2xl font-bold text-console-fg">{title}</h1>
       <p className="text-sm text-console-muted">
-        真実源: <code className="rounded bg-console-card px-1">{source}</code> — 読み取り専用
+        真実源: <code className="break-all rounded bg-console-card px-1">{source}</code> — 読み取り専用
       </p>
       {children}
     </header>

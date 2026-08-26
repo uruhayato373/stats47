@@ -6,6 +6,8 @@ export const accidentalDeathsPer100k: MetricConfig = {
   "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "population",
+  "description": "人口動態調査の死因簡単分類で「不慮の事故」に分類された死亡者数を総人口で除し、人口10万人当たりに換算した値。",
+  "note": "暦年の人口動態統計に基づく死因別死亡率であり、事故の発生件数ではなく死亡者数を測る。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",

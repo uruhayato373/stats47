@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const truckDriverAnnualIncome: MetricConfig = {
   "key": "truck-driver-annual-income",
   "title": "営業用大型貨物自動車運転者の平均年収",
+  "description": "賃金構造基本統計調査の一般労働者・男女計の営業用大型貨物自動車運転者について、6月のきまって支給する現金給与額を12倍し、前年1年間の賞与その他特別給与額を加えた推計年収。",
+  "note": "大型車を除く営業用貨物、自家用貨物の運転者は別職種。6月の月例給与を年換算した税・社会保険料等控除前の標本平均で、個人の実年収ではない。",
   "unit": "万円",
   "category": "laborwage",
   "source": {

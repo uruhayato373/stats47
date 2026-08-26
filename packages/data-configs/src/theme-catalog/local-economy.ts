@@ -108,23 +108,17 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "可処分所得と最低賃金の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010112",
-            "cdCat01": "L3130"
+            "metricKey": "disposable-income-worker-households",
+            "label": "可処分所得（二人以上の世帯のうち勤労者世帯）",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0000010106",
-            "cdCat01": "F6501"
+            "metricKey": "minimum-wage-by-region",
+            "label": "最低賃金",
+            "colorRole": "count"
           }
-        ],
-        "labels": [
-          "可処分所得（勤労者世帯）",
-          "最低賃金"
-        ],
-        "seriesColors": [
-          "population",
-          "count"
         ]
       },
       "relatedRankingKeys": [

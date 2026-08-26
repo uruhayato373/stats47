@@ -15,7 +15,7 @@ export const metadata = { title: "TODO — stats47 統合メディアコンソ�
 /**
  * TODO ボード (.claude/todo の読み取り専用ビュー)。doboku-note の admin と同型:
  *
- * - **層 (バックログ/週間/月間/改善施策) は共通サイドバーの TODO 階層**が持つ。層は別ファイルで、
+ * - **役割 (実行/計画/検証) は共通サイドバーの TODO 階層**が持つ。台帳は別ファイルで、
  *   週間・月間は backlog の部分集合ではなく pull されたコピー＝「行き先」であって絞り込みではない。
  * - **優先度・種類・実行は本文右のレール**に置く。backlog カードの属性でしかない
  *   (他層には存在しない) ため。クライアント JS を持たず、絞り込みは searchParams に載せる:
@@ -36,17 +36,17 @@ const TIERS: { key: TierKey; label: string; dot: string }[] = [
 ];
 
 const LAYER_TITLES: Record<LayerId, string> = {
-  backlog: "バックログ（マスタ）",
-  weekly: "週間",
-  monthly: "月間",
-  improvements: "改善施策",
+  backlog: "実行バックログ",
+  weekly: "計画 — 今週",
+  monthly: "計画 — 今月",
+  improvements: "効果測定・改善",
 };
 
 const LAYER_HINTS: Record<LayerId, string> = {
   backlog: "未完了タスクの全量を持つマスタ・唯一の起票先",
   weekly: "バックログから今週実行する項目を選んだ計画",
   monthly: "バックログから選んだ今月の重点とゴール",
-  improvements: "効果判定・期限・Owner・Metricを持つ専用の改善施策台帳",
+  improvements: "実装後の効果判定・期限・Owner・Metricを持つ専用台帳",
 };
 
 const tierKey = (c: TodoCard): TierKey => c.tier ?? "none";
@@ -307,12 +307,12 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
       {layer === "improvements" ? (
         <>
           <p className="text-[11px] text-console-muted">
-            improvement-triage の排他 write。effect 判定つき施策の 6 列テーブル (v3-unified カードの対象外)。
+            improvement-triage の排他 write。効果測定項目の 6 列テーブル (v3-unified カードの対象外)。
           </p>
           <ImprovementsTable rows={board.improvements} abs={layerMeta?.abs ?? ""} today={today} />
         </>
       ) : (
-        <div className="flex gap-5">
+        <div className="flex flex-col gap-5 md:flex-row">
           {/* 本文: tier グループのカード */}
           <div className="min-w-0 flex-1 space-y-5">
             {items.length === 0 ? (
@@ -342,7 +342,7 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
           </div>
 
           {/* 右レール: 優先度・種類・実行のファセット */}
-          <aside className="w-52 shrink-0 space-y-4">
+          <aside className="w-full shrink-0 space-y-4 md:w-52">
             <div className="flex items-center justify-between px-2">
               <span className="text-[11px] font-bold text-console-muted">絞り込み</span>
               {tier || kind || executor ? (

@@ -240,7 +240,7 @@ describe('theme chart indicator-hub links', () => {
     }
   });
 
-  it('135指標ハブの説明欠落を112件のratchetとして可視化する', () => {
+  it('テーマが参照する135指標すべてに個別の説明を必須化する', () => {
     const errors: string[] = [];
     const warns: string[] = [];
     const coverage = validateIndicatorHubContentCompleteness(
@@ -249,9 +249,9 @@ describe('theme chart indicator-hub links', () => {
       warns
     );
     expect(coverage.totalKeys).toBe(135);
-    expect(coverage.missingDescriptionKeys).toHaveLength(112);
-    expect(coverage.authoredNoteKeys).toHaveLength(1);
+    expect(coverage.missingDescriptionKeys).toHaveLength(0);
+    expect(coverage.authoredNoteKeys).toHaveLength(79);
     expect(errors).toEqual([]);
-    expect(warns).toEqual([expect.stringContaining('descriptionMissing=112')]);
+    expect(warns).toEqual([]);
   });
 });

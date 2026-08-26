@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const naturalIncreaseRate: MetricConfig = {
   "key": "natural-increase-rate",
   "title": "自然増減率",
+  "description": "人口推計における1年間の自然増減数（出生児数から死亡者数を引いた数）を期首人口で割り、人口1,000人当たりで表した率。",
+  "note": "転入・転出や出入国による社会増減は含まない。負の値は、期間中の死亡者数が出生児数を上回った自然減少を示す。",
   "unit": "‰",
   "category": "population",
   "source": {

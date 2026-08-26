@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const perTaxpayerTaxableIncome: MetricConfig = {
   "key": "per-taxpayer-taxable-income",
   "title": "課税対象所得",
+  "description": "個人の市町村民税所得割の課税対象となった所得総額を、所得割の納税義務者数で割った納税義務者1人当たりの金額。",
+  "note": "各年度の前年所得を7月1日時点で集計し、分離課税の退職所得を除く。地方税法上の所得控除前の所得で、手取り収入や全住民の平均所得ではない。",
   "unit": "千円",
   "category": "economy",
   "source": {

@@ -241,6 +241,7 @@ test('★ループが自分の権限・予算を広げるパスは弾く (workfl
   const allowed = verifyChangedPaths([
     '.claude/config/psi-urls.txt', // routing policy 以外の config は通す
     '.claude/skills/management/process-backlog/SKILL.md',
+    '.agents/skills/management/process-backlog/SKILL.md',
     '.claude/agents/backlog-processor.md',
   ]);
   assert.equal(allowed.ok, true, JSON.stringify(allowed.violations));

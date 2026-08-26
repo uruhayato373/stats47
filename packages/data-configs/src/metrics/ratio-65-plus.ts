@@ -4,6 +4,7 @@ export const ratio65Plus: MetricConfig = {
   "key": "ratio-65-plus",
   "title": "65歳以上人口割合",
   "subtitle": "65歳以上割合",
+  "description": "65歳以上人口を総人口で除して100を掛けた割合です。",
   "unit": "％",
   "category": "population",
   "source": {

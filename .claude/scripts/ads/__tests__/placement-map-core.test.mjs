@@ -50,11 +50,11 @@ test("★写像なし category は verticals 空 = 広告が出ない (AdSense �
   assert.equal(r.reason, "category-unmapped:commercial");
 });
 
-test("blog はタグ解決、0 件なら economy フォールバック (実装 resolveAffiliateTextAdsByTagKeys と同じ)", () => {
+test("blog はタグ解決し、未写像タグを economy と推測しない", () => {
   assert.deepEqual(resolveVerticalsForPage({ type: "blog", key: "natto-map" }, MAPS).verticals, ["economy"]);
   const orphan = resolveVerticalsForPage({ type: "blog", key: "orphan-article" }, MAPS);
-  assert.deepEqual(orphan.verticals, ["economy"]);
-  assert.equal(orphan.reason, "fallback-economy");
+  assert.deepEqual(orphan.verticals, []);
+  assert.equal(orphan.reason, "tags-unmapped");
 });
 
 test("areas は vertical 解決を経由せず furusato 枠として扱う", () => {

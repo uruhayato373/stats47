@@ -4,6 +4,8 @@ export const localTaxRatioPrefFinance: MetricConfig = {
   "key": "local-tax-ratio-pref-finance",
   "title": "地方税割合",
   "subtitle": "都道府県財政",
+  "description": "都道府県財政の地方税収入を、歳入決算総額で割り、100倍した割合。",
+  "note": "歳入のうち地方税が占める構成比であり、税収額そのものや住民1人当たりの税負担を示す指標ではない。",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

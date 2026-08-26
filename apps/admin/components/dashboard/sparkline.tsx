@@ -15,7 +15,14 @@ export function Sparkline({
   const points = sparkPoints(values, { w, h });
   if (!points) return null;
   return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="mt-1.5 block" role="img" aria-hidden="true">
+    <svg
+      width={w}
+      height={h}
+      viewBox={`0 0 ${w} ${h}`}
+      className="mt-1.5 block max-w-full"
+      role="img"
+      aria-hidden="true"
+    >
       {/* ★stroke は「属性」だと var() が解決されないので style で当てる */}
       <polyline points={points} fill="none" style={{ stroke: color }} strokeWidth={1.5} />
     </svg>

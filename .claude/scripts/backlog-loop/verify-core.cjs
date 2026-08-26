@@ -33,6 +33,9 @@ const ALLOWED_PATH_PATTERNS = [
   /^\.claude\/rules\//,
   /^\.claude\/skills\//,
   /^\.claude\/agents\//,
+  // Codex 向け project skill mirror。`.claude/skills/` と同じく task 固有の
+  // skill 修正を許すが、`.agents/` 全体へは広げない。
+  /^\.agents\/skills\//,
   /^\.claude\/config\//,
   /^packages\//,
   /^apps\//,

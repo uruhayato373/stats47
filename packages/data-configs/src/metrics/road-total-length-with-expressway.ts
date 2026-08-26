@@ -6,6 +6,8 @@ export const roadTotalLengthWithExpressway: MetricConfig = {
   "subtitle": "合計（高速道路を含む）",
   "unit": "km",
   "category": "infrastructure",
+  "description": "道路法に基づく路線の総延長から、重用延長、未供用延長、渡船延長を除いた実延長について、高速自動車国道、一般国道、都道府県道、市町村道を合計した値。",
+  "note": "3月31日現在。自転車専用道と歩道は道路実延長に含まれない。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010108",

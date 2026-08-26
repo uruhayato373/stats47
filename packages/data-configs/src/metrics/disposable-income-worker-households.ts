@@ -3,6 +3,8 @@ import type { MetricConfig } from "../types";
 export const disposableIncomeWorkerHouseholds: MetricConfig = {
   "key": "disposable-income-worker-households",
   "title": "可処分所得（二人以上の世帯のうち勤労者世帯）",
+  "description": "家計調査の二人以上の世帯のうち勤労者世帯について、1世帯当たり年平均1か月間の実収入から、直接税や社会保険料などの非消費支出を差し引いた額。",
+  "note": "都道府県値は県庁所在都市別の結果で、都道府県全域の平均ではない。2007年までは農林漁家世帯を除き、2008年から含む。",
   "unit": "円",
   "category": "economy",
   "source": {

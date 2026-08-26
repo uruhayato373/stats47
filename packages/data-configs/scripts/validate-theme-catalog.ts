@@ -33,13 +33,20 @@ import { normalizeUnitForAxis } from '../src/theme-catalog/types';
 import {
   listThemeCatalogs,
   CATALOG_COMPONENT_TYPES,
+  collectThemeMetricContentCoverage,
+  validateThemeMetricContentCoverage,
+  THEME_METRIC_DESCRIPTION_MISSING_BASELINE,
   type ThemeCatalog,
 } from '../src/theme-catalog';
 import {
   EVIDENCE_LENS_CATALOG,
   EVIDENCE_SOURCE_CATALOG,
 } from '../src/theme-catalog/evidence-lenses';
-import { validateChartProps } from '../src/theme-catalog/stat-series-ref';
+import {
+  validateChartProps,
+  validateMigratedSeriesRefContract,
+  validateStatSeriesRefAlignment,
+} from '../src/theme-catalog/stat-series-ref';
 import { collectColorFieldViolations } from '../src/theme-catalog/chart-color-role';
 import { isGenericChartDescription } from '../src/theme-catalog/transform';
 
@@ -158,9 +165,6 @@ export function validateChartIndicatorHubContract(
   }
 }
 
-/** 現在の authored 説明の欠落数。改善で減らせるが、回帰で増やせない。 */
-const INDICATOR_HUB_DESCRIPTION_MISSING_BASELINE = 114;
-
 export interface IndicatorHubContentCoverage {
   totalKeys: number;
   missingDescriptionKeys: string[];
@@ -178,36 +182,21 @@ export function validateIndicatorHubContentCompleteness(
   errors: string[],
   warns: string[]
 ): IndicatorHubContentCoverage {
-  const keys = [
-    ...new Set(
-      catalogs.flatMap((catalog) =>
-        catalog.charts.flatMap((chart) => chart.relatedRankingKeys ?? [])
-      )
-    ),
-  ].sort();
-  const missingDescriptionKeys = keys.filter(
-    (key) => !METRICS_REGISTRY[key]?.description?.trim()
+  const coverage = collectThemeMetricContentCoverage(
+    catalogs,
+    METRICS_REGISTRY
   );
-  const authoredNoteKeys = keys.filter((key) =>
-    Boolean(METRICS_REGISTRY[key]?.note?.trim())
-  );
+  validateThemeMetricContentCoverage(coverage, {
+    maxMissingDescriptions: THEME_METRIC_DESCRIPTION_MISSING_BASELINE,
+    errors,
+    warns,
+  });
 
-  if (
-    missingDescriptionKeys.length > INDICATOR_HUB_DESCRIPTION_MISSING_BASELINE
-  ) {
-    errors.push(
-      `[indicator-hub-content-regression] description欠落 ${missingDescriptionKeys.length} 件 ` +
-        `(baseline ${INDICATOR_HUB_DESCRIPTION_MISSING_BASELINE} 件) — 新しい指標ハブには定義文を追加する`
-    );
-  }
-  if (missingDescriptionKeys.length > 0) {
-    warns.push(
-      `[indicator-hub-content] total=${keys.length} descriptionMissing=${missingDescriptionKeys.length} ` +
-        `noteAuthored=${authoredNoteKeys.length} keys=${missingDescriptionKeys.join(',')}`
-    );
-  }
-
-  return { totalKeys: keys.length, missingDescriptionKeys, authoredNoteKeys };
+  return {
+    totalKeys: coverage.themeReferencedKeys.length,
+    missingDescriptionKeys: coverage.missingDescriptionKeys,
+    authoredNoteKeys: coverage.populatedNoteKeys,
+  };
 }
 
 /**
@@ -574,6 +563,9 @@ function main() {
 
   for (const c of catalogs) {
     const metricKeys = new Set(c.metrics.map((m) => m.rankingKey));
+    const metricLabels = new Map(
+      c.metrics.map((m) => [m.rankingKey, m.shortLabel] as const)
+    );
 
     // metrics.rankingKey 実在 + 到達可能 (isActive)
     for (const m of c.metrics) {
@@ -618,6 +610,19 @@ function main() {
         (ch.componentProps ?? {}) as Record<string, unknown>
       )) {
         errors.push(`[chart-props] ${c.key}/${ch.componentKey}: ${msg}`);
+      }
+      for (const msg of validateMigratedSeriesRefContract(
+        ch.componentKey,
+        (ch.componentProps ?? {}) as Record<string, unknown>
+      )) {
+        errors.push(`[series-ref-migration] ${c.key}/${ch.componentKey}: ${msg}`);
+      }
+      for (const msg of validateStatSeriesRefAlignment(
+        (ch.componentProps ?? {}) as Record<string, unknown>,
+        ch.relatedRankingKeys ?? [],
+        metricLabels
+      )) {
+        errors.push(`[series-ref-alignment] ${c.key}/${ch.componentKey}: ${msg}`);
       }
       // 色は role で持ち生成器が hex へ解決する (WP5)。色キー文脈に role でない値
       // (生 hex/hsl/rgb = raw-color / typo 等の未知 role = unknown-role) が残っていたら error。

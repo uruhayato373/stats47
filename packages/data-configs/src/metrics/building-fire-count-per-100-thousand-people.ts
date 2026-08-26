@@ -5,6 +5,8 @@ export const buildingFireCountPer100ThousandPeople: MetricConfig = {
   "title": "火災出火件数",
   "unit": "件",
   "category": "safetyenvironment",
+  "description": "消防統計の出火件数を総人口で除し、人口10万人当たりに換算した値。",
+  "note": "基礎値はすべての出火件数であり、建物火災だけに限定した指標ではない。",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010211",
