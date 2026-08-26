@@ -91,6 +91,33 @@ export const PORTS_CATALOG: ThemeCatalog = {
       "sortOrder": 10
     }
   ],
+  evidenceTopics: [
+    {
+      key: "cargo-throughput-concentration",
+      lensKey: "participation",
+      title: "港湾貨物とコンテナ利用の集中",
+      question:
+        "海上出入貨物量とコンテナ取扱個数には、港湾利用の地域的な集中がどう表れるか",
+      summary:
+        "貨物量はトン、コンテナ個数はTEUで単位と対象が異なります。同じ量として足し合わせず、地域別の利用規模を別々に読みます。",
+      sourceKeys: ["mlit-port-statistics"],
+      relatedRankingKeys: ["port-cargo-total", "port-container-count"],
+      relatedChartKeys: ["ports-cargo-trend"],
+      relatedThemeKeys: ["roads"],
+    },
+    {
+      key: "passenger-port-use",
+      lensKey: "participation",
+      title: "船舶旅客の地域別利用",
+      question:
+        "港湾旅客数は、港を利用する旅客移動の地域差をどう示すか",
+      summary:
+        "港湾旅客数は船舶乗降人員の集計です。利用者の実人数や移動距離、航路数は示しません。",
+      sourceKeys: ["mlit-port-statistics"],
+      relatedRankingKeys: ["port-passengers-total"],
+      relatedThemeKeys: ["railway"],
+    },
+  ],
   "keywords": [
     "港湾",
     "港",

@@ -130,6 +130,12 @@ export const EVIDENCE_SOURCE_CATALOG = {
     sourceUrl:
       "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/open_data_00020.html",
   },
+  "mlit-port-statistics": {
+    kind: "statistical-overview",
+    title: "港湾関係統計データ",
+    publisher: "国土交通省",
+    sourceUrl: "https://www.mlit.go.jp/statistics/details/port_list.html",
+  },
 } as const satisfies Record<string, EvidenceSourceDefinition>;
 
 export type EvidenceSourceKey = keyof typeof EVIDENCE_SOURCE_CATALOG;
