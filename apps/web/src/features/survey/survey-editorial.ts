@@ -2501,6 +2501,77 @@ const SURVEY_EDITORIAL_CONTENT = {
       '制度開始前を含む旧系列が収録される場合があります。現行の後期高齢者医療制度と同じ定義かを年度ごとに確認してください。',
     ],
   },
+  'local-public-employee-salary': {
+    summary:
+      '地方公務員給与実態調査は、総務省が地方公務員の職員構成、給料、諸手当などを地方公共団体別・職種別に毎年把握する調査です。このハブでは、都道府県職員の平均給与月額、賞与、時間外勤務手当、給与水準などを比較できます。',
+    whatYouCanLearn: [
+      '都道府県職員の全職種・一般行政職における平均給与月額',
+      '期末・勤勉手当や時間外勤務手当の地域差',
+      '職員の平均年齢や職種構成と給与水準の関係',
+      '国を100としたラスパイレス指数や知事給与の違い',
+    ],
+    readerQuestions: [
+      {
+        question: '全職種の平均給与月額が高い都道府県は？',
+        rankingKey: 'avg-salary-all-prefecture',
+      },
+      {
+        question: '一般行政職の平均給与月額が高い都道府県は？',
+        rankingKey: 'avg-salary-admin-prefecture',
+      },
+      {
+        question: '一般行政職の期末・勤勉手当が高い都道府県は？',
+        rankingKey: 'bonus-admin-prefecture',
+      },
+      {
+        question: 'ラスパイレス指数が高い都道府県は？',
+        rankingKey: 'laspeyres-index-prefecture',
+      },
+    ],
+    caveats: [
+      '調査年・基準日と給与の支給対象期間を確認してください。平均給与月額、年間の期末・勤勉手当、時間外勤務手当は期間と定義が異なります。',
+      '平均給与月額は給料月額と諸手当を含む平均で、基本給だけを示す平均給料月額とは異なります。手取り額でもありません。',
+      '職種、年齢、経験年数、職員構成が地域ごとに異なるため、平均額の差を同一人物の待遇差とみなさないでください。',
+      'ラスパイレス指数は職員構成を国と同じと仮定した給与水準の指数です。民間賃金や地域の生活費を直接比較する指標ではありません。',
+    ],
+  },
+  'telecommunications-service-contract-report': {
+    summary:
+      '電気通信役務契約等状況報告は、電気通信事業報告規則に基づく事業者の報告を集計した資料です。このハブでは、NTT東日本・NTT西日本が報告する3月31日現在の公衆電話設置台数を、実数と人口当たりで比較できます。',
+    whatYouCanLearn: [
+      '公衆電話設置台数の都道府県差',
+      '人口1000人当たりに換算した設置密度',
+      '同じ定義で見た公衆電話設置台数の長期的な変化',
+    ],
+    readerQuestions: [
+      {
+        question: '公衆電話の設置台数が多い都道府県は？',
+        rankingKey: 'public-phone-count',
+      },
+      {
+        question: '人口当たりの公衆電話が多い都道府県は？',
+        rankingKey: 'public-phone-count-per-1000',
+      },
+      {
+        question: '電話加入数が多い都道府県は？',
+        rankingKey: 'telephone-subscription-count',
+      },
+      {
+        question: '人口当たりの電話加入数が多い都道府県は？',
+        rankingKey: 'telephone-subscription-count-per-1000',
+      },
+      {
+        question: '人口当たりの住宅用電話加入数が多い都道府県は？',
+        rankingKey: 'residential-telephone-subscription-count-per-1000',
+      },
+    ],
+    caveats: [
+      '掲載値は各年3月31日現在の時点値です。年度内の新設・撤去件数や年間平均ではありません。',
+      '支店などのサービス区域と行政区域が一致しない場合があるため、原資料の地域区分を確認してください。',
+      '設置台数は通話回数、利用者数、災害時の稼働状況、通信サービスの品質を示すものではありません。',
+      'NTT東日本・NTT西日本の報告に基づく系列です。制度や公衆電話の区分変更をまたぐ長期比較では、同じ対象範囲か確認してください。',
+    ],
+  },
 } as const satisfies Record<string, SurveyEditorialContent>;
 
 export function getSurveyEditorialContent(

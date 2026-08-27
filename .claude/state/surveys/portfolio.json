@@ -4,13 +4,13 @@
   "linkage": {
     "auditedAt": "2026-08-27",
     "metrics": 2298,
-    "resolved": 2054,
-    "unresolved": 244,
-    "coveragePct": 89.4,
+    "resolved": 2066,
+    "unresolved": 232,
+    "coveragePct": 89.9,
     "unresolvedByReason": {
       "estat-uncovered": 78,
-      "ssds-synthetic-only": 119,
-      "external": 47
+      "ssds-synthetic-only": 117,
+      "external": 37
     },
     "uncoveredStatsDataIds": 48,
     "orphanSurveys": 0,
@@ -2213,6 +2213,43 @@
       "liveItemCount": 8
     },
     {
+      "surveyId": "local-public-employee-salary",
+      "name": "地方公務員給与実態調査",
+      "organization": "総務省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "implemented",
+      "itemCount": 10,
+      "activeItemCount": 10,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": true,
+      "readerQuestionCount": 4,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
       "surveyId": "local-tax",
       "name": "地方税に関する調べ",
       "organization": "総務省",
@@ -3710,6 +3747,43 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 3
+    },
+    {
+      "surveyId": "telecommunications-service-contract-report",
+      "name": "電気通信役務契約等状況報告",
+      "organization": "総務省・NTT東日本・NTT西日本",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "implemented",
+      "itemCount": 5,
+      "activeItemCount": 5,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": true,
+      "readerQuestionCount": 5,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "traffic-accident-statistics",

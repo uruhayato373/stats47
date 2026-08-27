@@ -39,7 +39,7 @@ config.surveyId (手動オーバーライド・先頭固定)
       - kind "estat" SSDS       → cdCat01 → 原典調査 (複数可)
       - kind "estat" 非SSDS     → statsDataId → 調査 (1件)
       - kind "calculated"       → 分子/分母 metric を再帰的に辿る
-      - kind "mlit"/"external"  → 合成 id (src:) のみ → マスタ非実在なので除外 = 未分類
+      - kind "mlit"/"external"  → displayName 辞書に正式登録済みなら実調査、未登録は合成 id (src:) → 除外 = 未分類
   > 空 = 未分類 (UI は調査カード非表示。偽の調査を作らない)
 ```
 
@@ -47,7 +47,10 @@ config.surveyId (手動オーバーライド・先頭固定)
 - `surveyIds` は**配列** (SSDS は複数原典に属す)。`surveyId` (単数) は後方互換の主参照 = 先頭。
 - `surveyIds: []` (空配列) は「未分類が確定」の意味。exporter はこれを尊重し fallback しない。
 - theme/blog は `resolved` / `unresolved` / `missing-lineage` / `not-applicable` を区別する。
-  未解決を空成功に丸めず、`authored` / `manual` の非統計 chart だけを対象外にする。
+  未解決を空成功に丸めず、`authored` / `manual` の非統計 chart だけを既定で対象外にする。
+- GIS など「公開データセットを派生集計したが統計調査を原典としない」blog chart は、
+  source.json に `surveyScope: "not-applicable"` と10文字以上の `surveyScopeReason` を併記する。
+  kind や参照先からの推測では対象外にせず、この明示契約がない派生 chart は `missing-lineage` とする。
 
 ## 2. UI での意味
 
@@ -132,6 +135,7 @@ NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-blog-sn
 | 未分類の受け皿となる擬似調査 (旧 `ssds`) を作る | 未分類は非表示のまま辞書追記で回収 |
 | bucketing/builder を経由しない独自の紐付けロジック追加 | `resolveSurveyLinkage` に一本化 |
 | theme/blog に手書き surveyId を追加 | rankingKey / statsDataId / 共通辞書に実在する sourceName を `resolveSurveyTaxonomy` で派生 |
+| GIS派生を kind だけで survey 対象外にする | source.json に `surveyScope: "not-applicable"` + 根拠を `surveyScopeReason` で明記 |
 | taxonomy state / portfolio / experiments を手編集 | 各 audit / builder script で再生成 |
 | /survey 系に generateStaticParams を付ける | ƒ (revalidate) / force-dynamic (`check-r2-route-ssg.cjs` が守る) |
 

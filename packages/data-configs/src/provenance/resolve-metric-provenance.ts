@@ -14,6 +14,7 @@
  */
 
 import type { MetricConfig, MetricRegistry, SourceConfig } from "../types";
+import { DISPLAYNAME_TO_SURVEY } from "../ssds/displayname-to-survey";
 import estatProvenanceJson from "../ssds/estat-provenance.generated.json";
 import ssdsProvenanceJson from "../ssds/ssds-provenance.generated.json";
 
@@ -115,9 +116,10 @@ export function resolveSourceProvenance(
       return dedupe(resolveCalculated(source, registry, depth));
     case "mlit":
     case "external":
-      return source.displayName
-        ? [{ id: `src:${source.displayName}`, name: source.displayName }]
-        : [];
+      if (!source.displayName) return [];
+      return DISPLAYNAME_TO_SURVEY[source.displayName]
+        ? [{ id: DISPLAYNAME_TO_SURVEY[source.displayName], name: source.displayName }]
+        : [{ id: `src:${source.displayName}`, name: source.displayName }];
     default:
       return [];
   }
@@ -151,4 +153,3 @@ export function resolveAttribution(
     originalSurveys: resolveProvenanceByParams(statsDataId, cdCat01),
   };
 }
-

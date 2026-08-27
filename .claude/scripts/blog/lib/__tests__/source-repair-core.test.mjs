@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import test from 'node:test';
 
 import {
@@ -13,6 +14,25 @@ test('base64 JSON payloadを件数上限内で解釈する', () => {
   );
   assert.deepEqual(parseSourceRepairPayload(encoded), [{ slug: 'a' }]);
   assert.throws(() => parseSourceRepairPayload('not-base64!'), /base64/);
+});
+
+test('Node 20 + tsx の package namespace からtaxonomy resolverを復元できる', () => {
+  const code = `
+    import * as dataConfigModule from '@stats47/data-configs';
+    import * as surveyTaxonomyModule from './packages/ranking/src/survey/survey-taxonomy.ts';
+    const dataConfig = dataConfigModule.default ?? dataConfigModule;
+    const surveyTaxonomy = surveyTaxonomyModule.default ?? surveyTaxonomyModule;
+    if (!dataConfig.METRICS_REGISTRY) throw new Error('METRICS_REGISTRY missing');
+    if (typeof surveyTaxonomy.resolveBlogChartSurveyTaxonomy !== 'function') {
+      throw new Error('resolveBlogChartSurveyTaxonomy missing');
+    }
+  `;
+  const result = spawnSync(
+    process.execPath,
+    ['--import', 'tsx', '--input-type=module', '--eval', code],
+    { cwd: process.cwd(), encoding: 'utf8' }
+  );
+  assert.equal(result.status, 0, result.stderr || result.stdout);
 });
 
 test('新規objectはexpected hashなしでcreateする', () => {
