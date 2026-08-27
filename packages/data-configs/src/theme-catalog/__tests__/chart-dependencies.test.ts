@@ -1,4 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+import * as registry from "../../registry";
 
 import {
   buildThemeDependencyMirror,
@@ -89,6 +91,30 @@ describe("② exhaustive switch — 未知種別は throw", () => {
 });
 
 describe("③ 陰性対照 — 依存を 1 つ落とすと request が減る", () => {
+  it("line/kpi の estatParams を文字列 filter だけに正規化し、不正な request は除外する", () => {
+    const line = collectChartDependencies(
+      chart("line-chart", {
+        estatParams: [
+          { statsDataId: "S2", cdTab: "2", ignoredNumber: 1 },
+          { statsDataId: "S1", cdCat01: "A" },
+          { statsDataId: "", cdCat01: "skip" },
+          { cdCat01: "skip" },
+          null,
+        ],
+      }),
+    );
+    const kpi = collectChartDependencies(
+      chart("kpi-card", { estatParams: { statsDataId: "K", cdCat01: "C" } }),
+    );
+    expect(line.requests).toEqual([
+      { statsDataId: "S2", filters: { cdTab: "2" } },
+      { statsDataId: "S1", filters: { cdCat01: "A" } },
+    ]);
+    expect(kpi.requests).toEqual([
+      { statsDataId: "K", filters: { cdCat01: "C" } },
+    ]);
+  });
+
   it("donut: category を 1 つ落とすと request が 1 減る", () => {
     const three = collectChartDependencies(
       chart("donut-chart", {
@@ -183,6 +209,34 @@ describe("④ provenance 付き collector — 監査母集団の単一ソース 
     expect(pyr.length).toBe(34);
     for (const d of pyr) expect(d.metricKey).toMatch(/^theme-population-pyramid-/);
   });
+
+  it("生 request も重複排除し、key 昇順で最初の由来を保持する", () => {
+    const fixture = {
+      z: {
+        charts: [chart("line-chart", {
+          estatParams: [
+            { statsDataId: "S2", cdCat01: "B" },
+            { statsDataId: "S1", cdCat01: "A" },
+          ],
+        })],
+      },
+      a: {
+        charts: [chart("line-chart", {
+          estatParams: [
+            { statsDataId: "S1", cdCat01: "A" },
+            { statsDataId: "S3", cdCat01: "C" },
+          ],
+        })],
+      },
+    };
+    const setOnly = collectThemeDataDependencies(Object.values(fixture));
+    const withProvenance = collectThemeDataDependenciesWithProvenance(fixture);
+    expect(setOnly.totalRequests).toBe(4);
+    expect(setOnly.distinctRequests).toEqual(["S1?cdCat01=A", "S2?cdCat01=B", "S3?cdCat01=C"]);
+    expect(withProvenance.totalRequests).toBe(4);
+    expect(withProvenance.distinct.map((row) => row.key)).toEqual(setOnly.distinctRequests);
+    expect(withProvenance.distinct[0]?.themeKey).toBe("z");
+  });
 });
 
 describe("⑤ 依存ミラー — 決定的・正典と byte 一致する形 (audit が読む鏡)", () => {
@@ -208,6 +262,37 @@ describe("⑤ 依存ミラー — 決定的・正典と byte 一致する形 (au
       expect(metric.expectedUnit.length).toBeGreaterThan(0);
       expect(metric.expectedConfigHash).toMatch(/^[0-9a-f]{16}$/);
     }
+  });
+
+  it("生 request をミラーへ写し、未登録 metric 参照は黙って落とさない", () => {
+    const fixture = {
+      fixture: {
+        charts: [chart("line-chart", {
+          seriesRefs: [{ metricKey: "current-balance-ratio" }],
+          estatParams: { statsDataId: "S", cdCat01: "A" },
+        })],
+      },
+    };
+    expect(buildThemeDependencyMirror(fixture).requests).toEqual([{
+      key: "S?cdCat01=A",
+      statsDataId: "S",
+      filters: { cdCat01: "A" },
+      themeKey: "fixture",
+      componentKey: "k",
+      componentType: "line-chart",
+    }]);
+    const config = registry.getMetricConfig("current-balance-ratio");
+    const getMetricConfig = vi.spyOn(registry, "getMetricConfig")
+      .mockReturnValueOnce(config)
+      .mockReturnValueOnce(undefined);
+    expect(() => buildThemeDependencyMirror({
+      broken: {
+        charts: [chart("line-chart", {
+          seriesRefs: [{ metricKey: "current-balance-ratio" }],
+        })],
+      },
+    })).toThrow(/未登録 metric/);
+    getMetricConfig.mockRestore();
   });
 });
 
