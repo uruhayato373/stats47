@@ -30,6 +30,7 @@ describe("resolveSurveyTaxonomy", () => {
 
   it.each([
     ["0000010103", "C3702", "freight-regional-flow-survey"],
+    ["0000010101", "A5103", "resident-registry-migration-report"],
     ["0000010110", "J5104", "pension-insurance-annual-report"],
     ["0000010111", "K3101", "traffic-accident-statistics"],
     ["0000010209", "#I15106", "national-medical-expenditure"],
