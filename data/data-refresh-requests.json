@@ -1,0 +1,7 @@
+{
+  "metric": "ambulance-hospital-arrival-time",
+  "since": "",
+  "allowEmpty": "",
+  "dryRun": false,
+  "migrateLegacyRecipes": true
+}
