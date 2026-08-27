@@ -138,6 +138,12 @@ export const PROPOSED_NEW_SURVEYS: Record<
     organization: "国土交通省",
     url: "https://www.mlit.go.jp/k-toukei/kouwan.html",
   },
+  住民基本台帳人口移動報告年報: {
+    id: "resident-registry-migration-report",
+    name: "住民基本台帳人口移動報告",
+    organization: "総務省統計局",
+    url: "https://www.stat.go.jp/data/idou/index.html",
+  },
 
   // --- override 解決に必要な原典 ---
   日本銀行統計: { id: "boj-statistics", name: "日本銀行統計", organization: "日本銀行" },

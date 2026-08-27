@@ -1518,5 +1518,24 @@
     "isActive": true,
     "createdAt": "2026-08-22 00:00:00",
     "updatedAt": "2026-08-22 00:00:00"
+  },
+  {
+    "id": "resident-registry-migration-report",
+    "sourceKind": "survey",
+    "externalId": null,
+    "parentSourceId": "estat",
+    "name": "住民基本台帳人口移動報告",
+    "organization": "総務省統計局",
+    "url": "https://www.stat.go.jp/data/idou/index.html",
+    "description": null,
+    "attributionText": null,
+    "license": null,
+    "licenseUrl": null,
+    "baseUrl": null,
+    "linkTemplate": null,
+    "displayOrder": 0,
+    "isActive": true,
+    "createdAt": "2026-08-22 00:00:00",
+    "updatedAt": "2026-08-22 00:00:00"
   }
 ]
