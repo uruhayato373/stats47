@@ -3182,6 +3182,16 @@
               "at": "2026-08-27T00:54:39.317Z",
               "status": "approved",
               "note": "affiliate-status 実機一覧の正一致"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "harvested",
+              "note": "SID・PID・visit.php・lead pixel・canonical 300x250を再検証"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "registered",
+              "note": "labor適合・同一案件なしのためSSOT登録"
             }
           ],
           "rewardYen": 8800
@@ -3615,6 +3625,16 @@
               "at": "2026-08-27T00:54:39.317Z",
               "status": "approved",
               "note": "affiliate-status 実機一覧の正一致"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "harvested",
+              "note": "SID・PID・visit.php・lead pixel・canonical 300x250を再検証"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "registered",
+              "note": "energy適合・同一案件なしのためSSOT登録"
             }
           ],
           "rewardYen": 4230
@@ -3837,6 +3857,16 @@
               "at": "2026-08-27T00:54:39.317Z",
               "status": "approved",
               "note": "affiliate-status 実機一覧の正一致"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "harvested",
+              "note": "SID・PID・visit.php・lead pixel・canonical 300x250を再検証"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "registered",
+              "note": "education適合・同一案件なしのためSSOT登録"
             }
           ],
           "rewardYen": 2537

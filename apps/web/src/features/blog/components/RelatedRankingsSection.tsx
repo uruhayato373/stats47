@@ -1,8 +1,10 @@
-import { readRankingItemsByTagFromR2, getRankingTitle } from "@stats47/ranking/server";
+import { getRankingTitle, readRelatedRankingItemsByTagKeysFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { BarChart3 } from "lucide-react";
 
 import { RailCard, SurfaceLinkCard } from "@/components/surface";
+
+import { getCategoryKeysForBlogTagKeys } from "@/config/category-blog-tag-keys";
 
 interface RelatedRankingsSectionProps {
   tagKeys: string[];
@@ -15,27 +17,23 @@ export async function RelatedRankingsSection({
 }: RelatedRankingsSectionProps) {
   if (tagKeys.length === 0) return null;
 
-  const allResults = await Promise.all(
-    tagKeys.map((tagKey) => readRankingItemsByTagFromR2(tagKey))
+  const result = await readRelatedRankingItemsByTagKeysFromR2(
+    tagKeys,
+    getCategoryKeysForBlogTagKeys(tagKeys),
   );
+  if (!isOk(result)) return null;
 
   const seen = new Set<string>();
   const rankings: { rankingKey: string; title: string }[] = [];
 
-  for (const result of allResults) {
-    if (!isOk(result)) continue;
-    for (const item of result.data.rankingItems) {
-      if (!item) continue;
-      if (item.areaType !== "prefecture") continue;
-      if (!seen.has(item.rankingKey) && rankings.length < 6) {
-        seen.add(item.rankingKey);
-        rankings.push({
-          rankingKey: item.rankingKey,
-          title: item.readerLabel ?? getRankingTitle(item),
-        });
-      }
+  for (const item of result.data) {
+    if (!seen.has(item.rankingKey) && rankings.length < 6) {
+      seen.add(item.rankingKey);
+      rankings.push({
+        rankingKey: item.rankingKey,
+        title: item.readerLabel ?? getRankingTitle(item),
+      });
     }
-    if (rankings.length >= 6) break;
   }
 
   if (rankings.length === 0) return null;

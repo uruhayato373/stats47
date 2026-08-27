@@ -23,6 +23,12 @@ const CHART = {
   sortOrder: 1,
 } as unknown as PageComponent;
 
+const CPI_CHART = {
+  ...CHART,
+  componentKey: "fixture-cpi",
+  componentType: "cpi-profile",
+} as unknown as PageComponent;
+
 describe("loadThemeChartResult state contract", () => {
   beforeEach(() => vi.clearAllMocks());
 
@@ -51,5 +57,14 @@ describe("loadThemeChartResult state contract", () => {
       state: "ready",
       result,
     });
+  });
+
+  it("CPIの全国表示は取得せず、指数の性質を説明するempty stateにする", async () => {
+    await expect(loadThemeChartResult(CPI_CHART, "00000")).resolves.toEqual({
+      state: "no-data",
+      message:
+        "全国平均を100とする指数のため、全国表示には対応していません。都道府県を選択してください。",
+    });
+    expect(fetchDbChartDataAction).not.toHaveBeenCalled();
   });
 });

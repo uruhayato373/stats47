@@ -1,4 +1,5 @@
 import { logger } from "@stats47/logger";
+import { resolveValuePrecision } from "@stats47/utils";
 
 import { toKpiCardData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
@@ -42,6 +43,11 @@ export const KpiCard = async ({
         year={cardData.year}
         changeRate={cardData.changeRate}
         changeDirection={cardData.changeDirection}
+        precision={
+          typeof cardData.value === "number"
+            ? resolveValuePrecision([cardData.value])
+            : undefined
+        }
       />
     );
   } catch (err) {

@@ -25,6 +25,8 @@ import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 
+import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
+
 const require = createRequire(import.meta.url);
 const core = require("./lib/placement-map-core.mjs");
 const scoutCore = require("./lib/a8-scout-core.mjs");
@@ -156,11 +158,14 @@ async function main() {
     console.error(`GSC snapshot がありません: ${pagesCsv}`);
     process.exit(2);
   }
-  const rows = readCsv(pagesCsv).map((r) => ({
-    url: r.page,
-    clicks: Number(r.clicks) || 0,
-    imp: Number(r.impressions) || 0,
-  }));
+  const rows = readCsv(pagesCsv)
+    // 配置需要はページ単位。同じページの #見出し imp は二重加算しない。
+    .filter((r) => !isAnchorRow(r.page))
+    .map((r) => ({
+      url: r.page,
+      clicks: Number(r.clicks) || 0,
+      imp: Number(r.impressions) || 0,
+    }));
 
   const { keyToCategory, keyTitles } = loadMetricMaps();
   const { categoryMap, themeMap, tagMap } = loadAffiliateMaps();

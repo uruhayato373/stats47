@@ -55,6 +55,8 @@ import {
 } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
+import { CATEGORY_BLOG_TAG_KEYS } from '@/config/category-blog-tag-keys';
+
 import type { Metadata } from 'next';
 
 /** 24時間 ISR */
@@ -71,30 +73,6 @@ const CATEGORY_FALLBACK_TAGS: Record<string, string[]> = {
   construction: ['housing', 'real-estate'],
   administrativefinancial: ['public-finance', 'furusato-nozei'],
   landweather: ['land-use', 'environment'],
-};
-
-/**
- * Category と blog Tag は別分類なので暗黙に同一視せず、関連記事の代表タグを明示する。
- * 各タグは blog snapshot の tagMeta に存在し、カテゴリページでは新着順に最大8件を表示する。
- */
-const CATEGORY_BLOG_TAG_KEYS: Readonly<Record<string, string>> = {
-  landweather: '気候',
-  population: '人口',
-  laborwage: '労働',
-  agriculture: '農業',
-  miningindustry: '製造業',
-  commercial: '産業構造',
-  economy: '経済',
-  construction: '住宅',
-  energy: 'エネルギー',
-  tourism: '観光',
-  educationsports: '教育',
-  administrativefinancial: '地方財政',
-  safetyenvironment: '環境',
-  socialsecurity: '社会保障',
-  international: '多文化共生',
-  infrastructure: 'インフラ',
-  ict: 'IT',
 };
 
 interface PageProps {

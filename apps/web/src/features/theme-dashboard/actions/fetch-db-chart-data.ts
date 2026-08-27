@@ -78,6 +78,8 @@ export interface ThemeChartDataContract {
   unit: string;
   year: string;
   seriesCount: number;
+  /** 全国行が無い場合に、全国値と誤認させないための表示ラベル。 */
+  scopeLabel?: "47都道府県平均";
 }
 
 export type ThemeDbChartResult = ChartResult;
@@ -86,12 +88,26 @@ function latestYear(rows: readonly StatsSchema[]): string {
   return rows.reduce((latest, row) => (row.yearCode.localeCompare(latest) > 0 ? row.yearCode : latest), "");
 }
 
-function lineContract(data: LineChartData): ThemeChartDataContract {
+function resolveScopeLabel(
+  rows: ReadonlyArray<readonly StatsSchema[] | null | undefined>,
+): ThemeChartDataContract["scopeLabel"] {
+  return rows.some((series) =>
+    series?.some((row) => row.areaName === "全国平均"),
+  )
+    ? "47都道府県平均"
+    : undefined;
+}
+
+function lineContract(
+  data: LineChartData,
+  rows: ReadonlyArray<readonly StatsSchema[]>,
+): ThemeChartDataContract {
   const last = data.data.at(-1);
   return {
     unit: data.unit ?? "",
     year: String(last?.yearCode ?? last?.year ?? ""),
     seriesCount: data.lines.length,
+    scopeLabel: resolveScopeLabel(rows),
   };
 }
 
@@ -151,7 +167,7 @@ async function fetchLineData(
   return {
     type: "line",
     data: chartData,
-    contract: lineContract(chartData),
+    contract: lineContract(chartData, rawDataList),
     showLatestValues: props.showLatestValues,
   };
 }
@@ -180,7 +196,12 @@ async function fetchR2LineData(
         if (!unit) return null;
         return series.points.map((point): StatsSchema => ({
           areaCode,
-          areaName: areaCode === NATIONAL_AREA_CODE ? "全国" : areaCode,
+          areaName:
+            series.source === "average"
+              ? "全国平均"
+              : areaCode === NATIONAL_AREA_CODE
+                ? "全国"
+                : areaCode,
           yearCode: point.year,
           yearName: point.yearName,
           metricKey: ref.metricKey,
@@ -199,7 +220,7 @@ async function fetchR2LineData(
     return {
       type: "line",
       data: chartData,
-      contract: lineContract(chartData),
+      contract: lineContract(chartData, rawDataList as StatsSchema[][]),
       showLatestValues: props.showLatestValues,
     };
   } catch (error) {
@@ -236,6 +257,7 @@ async function fetchMixedData(
       unit: [chartData.leftUnit, chartData.rightUnit].filter(Boolean).join(" / "),
       year: String(last?.yearCode ?? last?.year ?? ""),
       seriesCount: chartData.columns.length + chartData.lines.length,
+      scopeLabel: resolveScopeLabel([...colData, ...lineData]),
     },
   };
 }
@@ -337,6 +359,10 @@ async function fetchCompositionData(
           unit: chartData.unit,
           year: chartData.latestYearLabel,
           seriesCount: chartData.series.length,
+          scopeLabel: resolveScopeLabel([
+            ...(segmentData as StatsSchema[][]),
+            totalData,
+          ]),
         },
         defaultTab: props.defaultTab,
       }
@@ -380,6 +406,10 @@ async function fetchDonutData(
         },
         year: sorted[0].yearName || sorted[0].yearCode,
         unit: sorted[0].unit ?? "",
+        scopeLabel:
+          sorted[0].areaName === "全国平均"
+            ? ("47都道府県平均" as const)
+            : undefined,
       };
     })
   );
@@ -394,6 +424,9 @@ async function fetchDonutData(
     unit: validResults[0].unit,
     year: validResults[0].year,
     seriesCount: valid.length,
+    scopeLabel: validResults.some((result) => result.scopeLabel)
+      ? "47都道府県平均"
+      : undefined,
   };
 
   // 降順ソート → 上位N + その他

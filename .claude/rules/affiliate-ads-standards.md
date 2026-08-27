@@ -524,7 +524,7 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 | ranking 右レール | 1 → **2 枚** (`AffiliateAdSlot bannerLimit`) | categoryKey → vertical |
 | ranking 記事下 | ネイティブ 4 件の直後に **300x250 を 1 枚** (`position=ranking-end`) | tagKeys → vertical で 5 件解決し 5 件目を使う |
 | themes 末尾 | **300x250 を 1 枚** (`position=theme-end`) | relatedArticleTagKeys → 無ければ THEME_AFFILIATE_MAP |
-| ranking 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=ranking-incontent`)。既存 native 解決結果の先頭を使い、読了枠からは除外して本文内重複を防ぐ | tagKeys → 無ければ categoryKey → vertical |
+| ranking 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=ranking-incontent`)。既存 native 解決結果の先頭を使い、読了枠からは除外して本文内重複を防ぐ。検索意図との一致を確認できない個別ページは `ranking-incontent-affiliate-policy.ts` で抑止する | tagKeys → 無ければ categoryKey → vertical |
 | ranking 右レール (AdSense停止中) | 従来の最大2枚を、停止した上段 AdSense 枠へ**移設**。枚数は増やさず初期 viewability を改善する | categoryKey → vertical |
 | areas 県 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=area-content`)。在庫が無ければ空枠を作らない | `furusato` vertical |
 

@@ -115,4 +115,15 @@ describe("fetchDbChartDataAction — 地域コードごとの取得経路", () =
     const points = result && result.type === "line" ? result.data.data : [];
     expect(points[0]["総人口"]).toBe(14_000_000);
   });
+
+  it("全国行が無い系列は47都道府県平均であることを表示契約へ残す", async () => {
+    fetchFormattedStats.mockResolvedValue([
+      row("01000", "2024", 100),
+      row("02000", "2024", 300),
+    ]);
+
+    const result = await fetchDbChartDataAction("line-chart", LINE_PROPS, "00000");
+
+    expect(result?.contract.scopeLabel).toBe("47都道府県平均");
+  });
 });

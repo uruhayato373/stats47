@@ -18,6 +18,7 @@ export {
   readRankingItemsByGroupKeyFromR2,
   readRankingItemsBySurveyFromR2,
   readRankingItemsByTagFromR2,
+  readRelatedRankingItemsByTagKeysFromR2,
   readTagsForItemFromR2,
 } from "./read-ranking-items-snapshot";
 export type { CategorySourceSurvey, GroupRankingItem } from "./read-ranking-items-snapshot";

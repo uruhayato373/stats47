@@ -6,6 +6,7 @@ import {
   type PopulationPyramidResult,
   type ThemeDbChartResult,
 } from "../actions";
+import { NATIONAL_AREA_CODE } from "../lib/select-national-series";
 
 export type ThemeChartResult =
   | NonNullable<ThemeDbChartResult>
@@ -16,7 +17,9 @@ export type ThemeChartResult =
     };
 
 export type ThemeChartLoadResult =
-  { state: "ready"; result: ThemeChartResult } | { state: "no-data" } | { state: "source-unavailable" };
+  | { state: "ready"; result: ThemeChartResult }
+  | { state: "no-data"; message?: string }
+  | { state: "source-unavailable" };
 
 const DB_CHART_TYPES = new Set([
   "line-chart",
@@ -30,6 +33,15 @@ const DB_CHART_TYPES = new Set([
 export async function loadThemeChartResult(chart: PageComponent, prefCode: string): Promise<ThemeChartLoadResult> {
   try {
     if (DB_CHART_TYPES.has(chart.componentType)) {
+      if (
+        prefCode === NATIONAL_AREA_CODE &&
+        (chart.componentType === "cpi-profile" || chart.componentType === "cpi-heatmap")
+      ) {
+        return {
+          state: "no-data",
+          message: "全国平均を100とする指数のため、全国表示には対応していません。都道府県を選択してください。",
+        };
+      }
       const result = await fetchDbChartDataAction(chart.componentType, chart.componentProps, prefCode);
       return result ? { state: "ready", result } : { state: "no-data" };
     }

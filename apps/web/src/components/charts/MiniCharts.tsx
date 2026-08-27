@@ -221,8 +221,9 @@ export function MiniLineChart({
       .attr("width", layout.plotWidth)
       .attr("height", layout.plotHeight)
       .attr("fill", "transparent")
+      .attr("data-mini-chart-hit-area", "line")
       .style("cursor", "crosshair")
-      .on("mousemove", (event: MouseEvent) => {
+      .on("pointermove", (event: PointerEvent) => {
         const [mouseX] = pointer(event);
         let closestIdx = 0;
         let minDist = Infinity;
@@ -246,7 +247,7 @@ export function MiniLineChart({
           { unit },
         );
       })
-      .on("mouseleave", () => {
+      .on("pointerleave", () => {
         crosshair.attr("opacity", 0);
         dot.attr("opacity", 0);
         hideTooltip();
@@ -340,8 +341,9 @@ export function MiniStackedBarChart({
       .attr("width", layout.plotWidth)
       .attr("height", layout.plotHeight)
       .attr("fill", "transparent")
+      .attr("data-mini-chart-hit-area", "stacked-bar")
       .style("cursor", "crosshair")
-      .on("mousemove", (event: MouseEvent) => {
+      .on("pointermove", (event: PointerEvent) => {
         const [mouseX] = pointer(event);
         const index = getSlotIndex(mouseX, n, slot, layout.padX);
         const cx = layout.padX + slot * (index + 0.5);
@@ -359,7 +361,7 @@ export function MiniStackedBarChart({
           { unit },
         );
       })
-      .on("mouseleave", () => {
+      .on("pointerleave", () => {
         highlight.attr("opacity", 0);
         hideTooltip();
       });
@@ -453,8 +455,9 @@ export function MiniBarChart({
       .attr("width", layout.plotWidth)
       .attr("height", layout.plotHeight)
       .attr("fill", "transparent")
+      .attr("data-mini-chart-hit-area", "bar")
       .style("cursor", "crosshair")
-      .on("mousemove", (event: MouseEvent) => {
+      .on("pointermove", (event: PointerEvent) => {
         const [mouseX] = pointer(event);
         const index = getSlotIndex(mouseX, n, slot, layout.padX);
         const cx = layout.padX + slot * (index + 0.5);
@@ -469,7 +472,7 @@ export function MiniBarChart({
           { unit },
         );
       })
-      .on("mouseleave", () => {
+      .on("pointerleave", () => {
         highlight.attr("opacity", 0);
         marker.attr("opacity", 0);
         hideTooltip();

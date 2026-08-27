@@ -586,6 +586,48 @@ export async function readRankingItemsByTagFromR2(
   }
 }
 
+/**
+ * ブログ等の複数タグから関連ランキングを 1 回の snapshot read で選ぶ。
+ *
+ * RankingItem.tags は editorial 任意項目なので、呼び出し側が明示変換した categoryKeys
+ * も候補に使う。タグ・カテゴリのどちらにも一致しない指標は出さず、関連性のない
+ * 「最新ランキング」で空枠を埋めない。
+ */
+export async function readRelatedRankingItemsByTagKeysFromR2(
+  tagKeys: readonly string[],
+  categoryKeys: readonly string[] = [],
+): Promise<Result<RankingItem[], Error>> {
+  if ((tagKeys.length === 0 && categoryKeys.length === 0) || isNextProductionBuild()) return ok([]);
+
+  try {
+    const snapshot = await readValidatedSnapshot(
+      RANKING_ITEMS_SNAPSHOT_KEY,
+      parseRankingItemsSnapshot,
+    );
+    if (!snapshot) return ok([]);
+
+    const tags = new Set(tagKeys);
+    const categories = new Set(categoryKeys);
+    const matched = excludeGone(snapshot.items)
+      .filter(
+        (item) =>
+          item.isActive &&
+          item.areaType === "prefecture" &&
+          ((typeof item.categoryKey === "string" && categories.has(item.categoryKey)) ||
+            (item.tags ?? []).some((tag) => tags.has(tag.tagKey))),
+      )
+      .sort(compareByRepresentativeThenRecency);
+
+    return ok(matched);
+  } catch (error) {
+    logger.error(
+      { error, tagKeys, categoryKeys },
+      "readRelatedRankingItemsByTagKeysFromR2: failed",
+    );
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
 export async function readFirstKeyByTagFromR2(
   tagKey: string,
 ): Promise<Result<string, Error>> {

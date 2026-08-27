@@ -4,6 +4,7 @@ import {
 } from "@stats47/data-configs/theme-catalog";
 import { logger } from "@stats47/logger";
 import { readJapanSeries, readStatsValues } from "@stats47/stats-r2/readers";
+import { resolveValuePrecision } from "@stats47/utils";
 
 import { toKpiCardData } from "../adapters";
 
@@ -47,9 +48,18 @@ export async function prefetchThemeKpiData(
           byArea.set(item.areaCode, group);
         }
 
+        const kpisByArea = Array.from(byArea, ([areaCode, areaData]) => ({
+          areaCode,
+          kpi: toKpiCardData(areaData),
+        }));
+        const precision = resolveValuePrecision(
+          kpisByArea.flatMap(({ kpi }) =>
+            typeof kpi.value === "number" ? [kpi.value] : [],
+          ),
+        );
+
         const areaKpis: Record<string, KpiCardClientProps> = {};
-        for (const [areaCode, areaData] of byArea) {
-          const kpi = toKpiCardData(areaData);
+        for (const { areaCode, kpi } of kpisByArea) {
           areaKpis[areaCode] = {
             title: chart.title,
             value: kpi.value,
@@ -57,6 +67,7 @@ export async function prefetchThemeKpiData(
             year: kpi.year,
             changeRate: kpi.changeRate,
             changeDirection: kpi.changeDirection,
+            precision,
           };
         }
 
