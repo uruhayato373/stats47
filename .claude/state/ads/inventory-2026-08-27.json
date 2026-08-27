@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-08-27T04:01:25.241Z",
+  "generatedAt": "2026-08-27T06:40:11.640Z",
   "date": "2026-08-27",
   "totals": {
     "entries": 263,
-    "active": 262,
-    "uniqueAdvertisers": 162
+    "active": 263,
+    "uniqueAdvertisers": 163
   },
   "byCategory": {
-    "(null)": 234,
+    "(null)": 235,
     "energy": 2,
     "tourism": 5,
     "socialsecurity": 4,
@@ -24,19 +24,19 @@
     "economy": 27,
     "housing": 26,
     "education": 26,
-    "labor": 50,
+    "labor": 51,
     "mobility": 13,
     "population": 18
   },
   "byLocation": {
-    "blog-bottom": 136,
+    "blog-bottom": 137,
     "area-sidebar": 1,
     "sidebar-sticky": 2,
     "sidebar-inline": 1,
     "sidebar-bottom": 122
   },
   "byAdType": {
-    "banner": 140,
+    "banner": 141,
     "text": 122
   },
   "coverage": {
@@ -82,7 +82,7 @@
       "economy": 16,
       "housing": 13,
       "education": 13,
-      "labor": 25,
+      "labor": 26,
       "mobility": 6,
       "population": 10
     },
