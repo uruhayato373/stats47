@@ -1,15 +1,15 @@
 {
-  "total": 1089,
+  "total": 1090,
   "byStatus": {
-    "both": 983,
+    "both": 986,
     "jsonOnly": 0,
-    "neither": 106
+    "neither": 104
   },
   "byMethod": {
-    "manual": 43,
-    "done": 983,
-    "ssot-restore": 26,
-    "ssot-restore-new": 37
+    "manual": 41,
+    "done": 986,
+    "ssot-restore": 28,
+    "ssot-restore-new": 35
   },
   "entries": [
     {
@@ -1148,12 +1148,12 @@
     },
     {
       "slug": "commercial-land-price-trend",
-      "base": "commercial-rate-timeseries",
+      "base": "standard-price-change-rate-commercial-timeseries",
       "chartType": "line",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "commercial-land-price-trend",
@@ -4064,12 +4064,12 @@
     },
     {
       "slug": "inbound-overnight-stay-concentration",
-      "base": "foreign-guests-ranking",
+      "base": "inbound-overnight-stay-concentration-prefecture-rankings",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "inbound-overnight-stay-concentration",
@@ -4082,26 +4082,8 @@
     },
     {
       "slug": "inbound-overnight-stay-concentration",
-      "base": "nationality-breakdown-top10",
-      "chartType": "stacked",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
-    },
-    {
-      "slug": "inbound-overnight-stay-concentration",
-      "base": "foreign-guests-trend",
+      "base": "national-timeseries",
       "chartType": "line",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
-    },
-    {
-      "slug": "inbound-overnight-stay-concentration",
-      "base": "summary-findings",
-      "chartType": "findings",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -8437,6 +8419,42 @@
       "restoreMethod": "done"
     },
     {
+      "slug": "temperature-extremes-map",
+      "base": "annual-temp-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": true,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "temperature-extremes-map",
+      "base": "mosha-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": true,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "temperature-extremes-map",
+      "base": "winter-days-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": true,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "temperature-extremes-map",
+      "base": "temp-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": true,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
       "slug": "textbook-expenditure-ranking",
       "base": "textbook-ranking",
       "chartType": "ranking",
@@ -9329,15 +9347,6 @@
     },
     {
       "slug": "waste-management-recycling-gap",
-      "base": "recycling-bar",
-      "chartType": "unknown",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "manual"
-    },
-    {
-      "slug": "waste-management-recycling-gap",
       "base": "recycle-vs-landfill-scatter",
       "chartType": "scatter",
       "hasJson": true,
@@ -9349,10 +9358,10 @@
       "slug": "waste-management-recycling-gap",
       "base": "disposal-capacity-bar",
       "chartType": "unknown",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "manual"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "waste-management-recycling-gap",
