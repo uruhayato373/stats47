@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T18:19:44.535Z",
+  "updatedAt": "2026-08-27T01:49:18.564Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -345,10 +345,10 @@
       "completedAt": "2026-08-17T13:28:15.948Z"
     },
     "ASP-CONTINUITY-01": {
-      "class": "impl-large",
-      "status": "open",
-      "sourceFile": ".claude/todo/05_機能バックログ.md",
-      "title": "もしも・afbの承認追跡と広告コード取得",
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "afb の承認追跡と広告コード取得",
       "attempts": [
         {
           "at": "2026-08-17T16:58:36.850Z",
@@ -362,6 +362,28 @@
           "evidence": "6段階の多フェーズ実装(plan hash/journal/profile lock/オーナー承認後のPlaywright走査/harvest/register候補生成)。完了条件はdry-run縦断+cron health実測で、CIの1runで扱う規模ではない。impl-largeとしてfableへ委譲対象、この日次runでは着手しない",
           "failReason": "class-needs-pr",
           "followUps": []
+        },
+        {
+          "at": "2026-08-27T01:49:18.564Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/ads/__tests__/*.test.mjs",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "afb SID 959426を実機確認し3案件をapprovedへ更新。3件の300x250原稿をPID/SID/click URL/lead pixel再解析付きでローカル取得し、広告suite 202/202とdocs checkがgreen。",
+          "failReason": null,
+          "followUps": [
+            "ASP-MOSHIMO-DRIFT-01",
+            "AFF-AFB-REGISTER-01"
+          ]
         }
       ],
       "quarantine": {
@@ -369,8 +391,14 @@
         "lastReason": null,
         "since": null
       },
-      "reclassifiedFrom": [],
-      "completedAt": null
+      "reclassifiedFrom": [
+        {
+          "from": "impl-large",
+          "to": "impl-small",
+          "at": "2026-08-27T01:49:18.564Z"
+        }
+      ],
+      "completedAt": "2026-08-27T01:49:18.564Z"
     },
     "DATA-REFRESH-ZEROGATE-ALLORNOTHING-01": {
       "class": "impl-large",

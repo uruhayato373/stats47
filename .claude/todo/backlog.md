@@ -58,34 +58,25 @@ updated: 2026-08-27
   対象と検証結果を提示し、別途オーナー承認を得る。Drive source vaultの次revision追加・差し替えもこの境界に含む。
   YouTubeはEXP-006の6週間3本上限を増やさない。
 
-### [ASP-CONTINUITY-01] afb の承認追跡と広告コード取得 (オーナーのログインが要る分)
+### [ASP-MOSHIMO-DRIFT-01] もしもの提携状態ドリフト29件を確定する
 
-タグ: [収益化] [種類:改善] [実行:ユーザー] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-07-28]
+タグ: [収益化] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-08-27]
 
-- **owner**: uruhayato373 (afb の手動ログインと `--commit` 承認)
-- **★2026-08-21 に前提を実測し直した。カードの旧記述は誤りだった**:
-  - 「Playwright プロファイルがオーナー側にある」→ **この Windows 端末に実在する**
-    (`.local/playwright-{a8,afb,moshimo}-profile`。a8 は 282MB)。
-  - **もしもはセッションが生きており、read-only 走査がこの端末で通る**。実測:
-    提携中 39 行 / ID 39 件、申請中 37 行 / ID 37 件、SID 638943 (stats47) の assert ok、
-    行数と ID 数のパリティ一致、幻 ID 検出なし。ドリフト 29 件を検出
-    (申請中のはずが実機に無い 28 件 = 却下か走査漏れ / 提携中のはずが無い 1 件 = 提携終了の可能性)。
-  - **afb だけがセッションを持ち越せない** (`sessionPersistsAcrossProcesses: false`)。実測で
-    180 秒待っても `requiredlogin` から抜けず、1 バイトも読めなかった。**ここが唯一の構造的な
-    オーナー工程**で、3 ASP をまとめて「オーナー待ち」と扱っていたのが誤りだった。
-- **★backlog-loop では閉じない**: afb は run のたびに人のログインが要る。CI にはどちらも無い。
-- **残り (オーナー工程)**:
-  1. afb に手動ログインして `affiliate-status.mjs --asp afb` を通し、applying/partnered を確定する。
-  2. もしもの検出ドリフト 29 件を人が確認し、`affiliate-status.mjs --asp moshimo --write` で台帳を直す
-     (却下と走査漏れは機械では区別できない)。
-  3. 提携申請の `--commit` 承認 (規約同意を伴う不可逆操作)。手順は下の機械ゲート経由。
-  4. harvest → SSOT 登録 → 公開は、それぞれ別に承認する。
-- **完了条件**: afb の applying/partnered が台帳と一致し、もしものドリフトが 0 になり、
-  承認済みの申請が journal に `confirmed` として残る。
-- **停止条件**: login 要求、captcha、selector 数不一致、pagination 不明、plan hash 不一致、
-  lock 競合、site/program 不一致のいずれかで停止する。
-- **正典**: `.claude/rules/affiliate-ads-standards.md` §11 /
-  `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md`
+- **次**: stats47 SID 638943 を assert した read-only 走査を再実行し、実機に無い申請中28件と
+  提携中1件を人が却下・終了・走査漏れへ分類してから、確認済み遷移だけを台帳へ反映する。
+- **停止条件**: 却下と走査漏れを区別できない、行数とID数が不一致、サイト帰属・paginationが不明なら書かない。
+- **完了条件**: 提携中・申請中の実機一覧と台帳のドリフトが0で、stats47 SIDと件数パリティの証拠が残る。
+
+### [AFF-AFB-REGISTER-01] 取得済みafb広告コード3件を掲載候補としてSSOT登録する
+
+タグ: [収益化] [種類:改善] [実行:windows] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-08-27]
+
+- **次**: `.local/affiliate-harvest/afb/` のPID 14567 / 16683 / 15743を対象に、vertical・掲載適格性・
+  既存在庫との重複を1件ずつ審査し、採用分だけaffiliate-manager経由でSSOTへ登録する。
+- **停止条件**: SID 959426・PID・click URL・lead pixel・canonical sizeのどれかを再検証できない、
+  または掲載適格性が未確定なら登録しない。raw codeをログ・Git管理ファイルへ複製しない。
+- **完了条件**: 採用/見送り理由が3件とも確定し、採用分のSSOT検証とcompliance監査がgreen。
+  push・公開・deployは別途オーナー承認まで行わない。
 
 ### [AFF-INTENT-FRICTION-PORTFOLIO-01] 低ハードル・高意図案件を二層で検証できるアフィリエイト基盤
 
