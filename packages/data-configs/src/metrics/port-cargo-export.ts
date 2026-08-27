@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const portCargoExport: MetricConfig = {
   "key": "port-cargo-export",
   "title": "輸出貨物量（港湾統計）",
+  "description": "港湾を通じて国外へ輸出された貨物量。都道府県の港湾別データを集計した重量で示す。",
   "unit": "トン",
   "category": "infrastructure",
   "source": {

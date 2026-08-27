@@ -4,6 +4,7 @@ export const elementarySchoolCount: MetricConfig = {
   "key": "elementary-school-count",
   "title": "小学校数",
   "subtitle": "総数",
+  "description": "都道府県内に所在する小学校の総数。学校教育施設の供給規模を示す。",
   "unit": "校",
   "category": "educationsports",
   "source": {

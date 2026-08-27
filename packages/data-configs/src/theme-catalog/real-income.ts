@@ -74,18 +74,15 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "消費者物価地域差指数の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010212",
-            "cdCat01": "#L04414"
+            "metricKey": "consumer-price-difference-index-overall"
           },
           {
-            "statsDataId": "0000010212",
-            "cdCat01": "#L04417"
+            "metricKey": "consumer-price-difference-index-housing"
           },
           {
-            "statsDataId": "0000010212",
-            "cdCat01": "#L04416"
+            "metricKey": "consumer-price-difference-index-food"
           }
         ],
         "labels": [
@@ -118,10 +115,9 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "勤労者世帯の実収入の推移（全国平均）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010212",
-            "cdCat01": "#L01201"
+            "metricKey": "actual-income-worker-households-per-month"
           }
         ],
         "labels": [

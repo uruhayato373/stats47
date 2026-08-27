@@ -47,6 +47,26 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
       "shortLabel": "大学数",
       "role": "context"
     },
+    {
+      "rankingKey": "elementary-school-count",
+      "shortLabel": "小学校数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-school-count",
+      "shortLabel": "中学校数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "high-school-count",
+      "shortLabel": "高等学校数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-college-count",
+      "shortLabel": "短期大学数",
+      "role": "context"
+    },
   ],
   metricGroups: [
     {
@@ -82,14 +102,12 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "教育到達と県内大学進学率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010205",
-            "cdCat01": "#E09504"
+            "metricKey": "final-education-university-graduate-school-ratio"
           },
           {
-            "statsDataId": "0000010205",
-            "cdCat01": "#E0940302"
+            "metricKey": "in-pref-university-entrance-ratio-by-highschool-origin"
           }
         ],
         "labels": [
@@ -119,37 +137,40 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
       "componentType": "donut-chart",
       "title": "学校種別の構成（最新年）",
       "componentProps": {
-        "statsDataId": "0000010105",
-        "categories": [
+        "seriesRefs": [
           {
-            "code": "E2101",
-            "label": "小学校",
-            "color": "population"
+            "metricKey": "elementary-school-count",
+            "label": "小学校数",
+            "colorRole": "population"
           },
           {
-            "code": "E3101",
-            "label": "中学校",
-            "color": "danger"
+            "metricKey": "junior-high-school-count",
+            "label": "中学校数",
+            "colorRole": "danger"
           },
           {
-            "code": "E4101",
-            "label": "高等学校",
-            "color": "improve"
+            "metricKey": "high-school-count",
+            "label": "高等学校数",
+            "colorRole": "improve"
           },
           {
-            "code": "E6101",
-            "label": "短期大学",
-            "color": "count"
+            "metricKey": "junior-college-count",
+            "label": "短期大学数",
+            "colorRole": "count"
           },
           {
-            "code": "E6102",
-            "label": "大学",
-            "color": "special"
+            "metricKey": "university-count",
+            "label": "大学数",
+            "colorRole": "special"
           }
         ],
         "topN": 5
       },
       "relatedRankingKeys": [
+        "elementary-school-count",
+        "junior-high-school-count",
+        "high-school-count",
+        "junior-college-count",
         "university-count"
       ],
       "sourceName": "総務省 社会・人口統計体系（学校基本調査）",

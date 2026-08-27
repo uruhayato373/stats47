@@ -4,6 +4,7 @@ export const investmentExpenditureRatioPrefFinance: MetricConfig = {
   "key": "investment-expenditure-ratio-pref-finance",
   "title": "投資的経費の割合",
   "subtitle": "都道府県財政",
+  "description": "都道府県の歳出総額に占める普通建設事業費など投資的経費の割合。社会資本整備への配分を示す。",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

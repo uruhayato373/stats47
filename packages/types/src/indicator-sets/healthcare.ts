@@ -61,6 +61,26 @@ export const HEALTHCARE_SET: IndicatorSet = {
       "role": "context"
     },
     {
+      "rankingKey": "deaths-malignant-neoplasms-per-100k",
+      "shortLabel": "悪性新生物死亡",
+      "role": "context"
+    },
+    {
+      "rankingKey": "deaths-heart-disease-excl-hypertensive-per-100k",
+      "shortLabel": "心疾患死亡",
+      "role": "context"
+    },
+    {
+      "rankingKey": "deaths-cerebrovascular-disease-per-100k",
+      "shortLabel": "脳血管疾患死亡",
+      "role": "context"
+    },
+    {
+      "rankingKey": "deaths-hypertensive-diseases-per-100k",
+      "shortLabel": "高血圧性疾患死亡",
+      "role": "context"
+    },
+    {
       "rankingKey": "health-checkup-rate-lifestyle-diseases",
       "shortLabel": "健診受診率",
       "role": "secondary"

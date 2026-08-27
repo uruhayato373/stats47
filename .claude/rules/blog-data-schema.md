@@ -121,6 +121,7 @@ suffix で確定できないとき**だけ**これに fallback ディスパッ�
 | kind                                                | 再取得の手掛かり                            | 件数 (2026-07-29) |
 | --------------------------------------------------- | ------------------------------------------- | ----------------- |
 | `ranking`                                           | `rankingKey` + `year`                       | 649               |
+| `metric`                                            | `metricKey` + `year` (`app/stats`)          | 新規はこの型を優先 |
 | `estat`                                             | `statsDataId`                               | 58                |
 | `scatter`                                           | `xKey` + `yKey` + `year`                    | 36                |
 | `derived`                                           | `source` (`r2:...`)                         | 60                |

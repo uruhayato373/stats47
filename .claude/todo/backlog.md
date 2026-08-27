@@ -351,6 +351,19 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   生参照chart 78→77、request 241→240、typed metric ref 6→7。data-configs 669 test、対象web test、
   両package型検査、catalog / 生成物 / 依存mirror gateはgreen。地方財政の本番routeはbespoke dashboardなので、
   このwaveはcatalog依存の移行でありroute本体のreader置換とは数えない。年度集合が一致しないline候補は移行しなかった。
+- **WP6/7 ローカル完了 checkpoint (2026-08-28)**: ThemeCatalog 20テーマ・107 chartを型付きR2参照へ移行し、
+  生`estatParams` 0 / 生色 0 / production e-Stat直呼び0。依存ミラーは192 distinct metricで、staged R2監査は
+  期待=実集合=成功192（部分地域17件はshape-gate SSOTどおりwarn-only）。金額348 metricはmismatch 0、ranking
+  active 2,167件は欠落・normalized欠落・stale・recipe drift 0。blog provenance defect 0、現行自動復元器の
+  auto-recoverable 0、手動残件99は`CHART-LINEAGE-RESIDUAL-01` 93件 / `TILEMAP-LINEAGE-01` 6件へ分離済み。
+  全25 package+scripts type-check、ThemeCatalog 138 test、web full build（SSG 1,350ページ）はgreen。
+  `docs:check`はerror 0・リンク悪化0、`docs:check:all`は本カード外の既存期限超過/未分類27 warningを
+  `--fail-on-warn`が拾うため非0（新規warning 0）。
+- **外部反映待ち (owner承認必須)**: git review/commit/push後、CI `data-refresh`で新規40 metric
+  を先行反映し、blog exact asset 30 keysだけを反映する。一括`.local/r2` pushは禁止。対象key・bytes・manifest
+  hash・rollback手順の機械正典は `.claude/state/data/cross-page-data-ssot-preflight.json`。R2 write直前に既存
+  23 objectを再取得してrollback bundleを作り、新規47 objectはrollback時にexact key deleteする。
+  R2実測→page-components sync→deploy→本番再監査がgreenになってからカード削除する。
 - **依存**:
   - `MONEY-UNIT-SCALE-01`: `sourceUnit` / `valueScale` / 取り込みゲート / R2再生成を再利用し、同じ変換表を作らない。
   - `RANKING-VALUES-PARTITION-INTEGRITY-01`: `MetricRecipe` / shape gate / configHash監査を再利用する。
@@ -1073,11 +1086,15 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   `generate-sitemap-blog-entries.ts --check` が通ることを実測する。
 - **禁止**: `--check` を PR ゲートから外して回避しない (sitemap 欠落が見えなくなる)。
 
-### [TILEMAP-LINEAGE-01] タイルマップ 9 枚が SSOT からも data JSON からも再生成できない
+### [TILEMAP-LINEAGE-01] タイルマップの手動系譜残件
 
 タグ: [起票:2026-08-03]
 
 - **owner**: `chart-author`
+- **CROSS-PAGE-DATA-SSOT-01からの分離 (2026-08-27)**: staged全量棚卸しで、現行の自動復元器が
+  確証できる残件は0。タイルマップの手動判断残件は6枚で、正確な対象は
+  `.claude/state/blog/svg-lineage-queue.json` の `residualCard === "TILEMAP-LINEAGE-01"` を正典とする。
+  1枚 (`per-capita-income-gap/income-map`) は2021年SSOTと100%一致してローカル復元済み。
 - **問題**: 公開済みタイルマップ 123 枚のうち 9 枚が現行の 720×720 デザインに移行できていない。内訳は (a) `data/*.json` が R2 に無い 7 枚 = 元データ消失 (`alcohol-prefecture-map/alcohol-consumption-map` / `childcare-friendly-prefecture-ranking/tile-grid-score` / `food-consumption-prefecture-battle/ramen-gyoza-tilemap` / `international-cooperation-volunteer-map/volunteer-rate-map` / `per-capita-income-gap/income-map` / `purchasing-power-adjusted/income-map` / `waiting-children-progress/waiting-children-map`)、(b) 年が確定できない 2 枚 (`fiscal-health-50years-trend/fiscal-map` / `fiscal-self-reliance-gap/fiscal-strength-map`)。
 - **次**: (a) 元データ消失 7 枚 → SSOT から復元する。(b) 年不確定 2 枚 → 人が年を決めてから固定する。
 - **(a) の手順**: `.claude/rules/blog-data-schema.md` §1.7 の restoreMethod に従い SSOT から復元する。SVG の絵から値を逆復元しない。SSOT に該当年が無ければ e-Stat から取り込んで SSOT を伸ばす (`data-ingester`)。届かない図は記事から外すか SSOT にある図に差し替える。
@@ -1235,11 +1252,16 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 上記走査で 0 件、かつ actionlint exit=0
 - **制約**: 1 PR で全 workflow を書き換えない (デプロイ経路の workflow が多く、壊すと配信が止まる)。3-4 本ずつに分け、変更した workflow は実際に 1 回発火させて確認する
 
-### [CHART-LINEAGE-RESIDUAL-01] 元データ喪失の図表 残り11枚 (SSOT側の欠落が律速)
+### [CHART-LINEAGE-RESIDUAL-01] 元データ喪失図表の手動系譜残件
 
 タグ: [起票:2026-08-12]
 
 - **owner**: Claude Code
+- **CROSS-PAGE-DATA-SSOT-01からの分離 (2026-08-27)**: staged全量棚卸しで、現行のranking自動復元器が
+  確証できる残件は0。非タイルマップの手動判断残件は93枚
+  (unknown 41 / ranking 18 / line 23 / stacked 4 / scatter 5 / findings 2)。正確な対象は
+  `.claude/state/blog/svg-lineage-queue.json` の
+  `residualCard === "CHART-LINEAGE-RESIDUAL-01"` を正典とする。CROSS側はこれらを推測復元せず閉じる。
 - **背景**: 公開散布図 102 枚のうち 24 枚が元データ (`<base>.json` / `.source.json`) を失い、
   gate の検証対象外だった (gate は「78/78 正準」と報告するが 24 枚を見ていない = 死角)。
   2026-08-12 に SSOT から **19 枚を復元** (33 軸を SSOT 照合・一致率 80% 未満 0 件・R2 反映済)。

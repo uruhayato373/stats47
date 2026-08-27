@@ -89,14 +89,12 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "空き家率と持ち家率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010208",
-            "cdCat01": "#H01405"
+            "metricKey": "vacant-housing-ratio"
           },
           {
-            "statsDataId": "0000010208",
-            "cdCat01": "#H01301"
+            "metricKey": "owner-occupied-housing-ratio"
           }
         ],
         "labels": [
@@ -126,14 +124,12 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "未婚率と高齢夫婦世帯率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A0411001"
+            "metricKey": "ratio-never-married-15-plus"
           },
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A06302"
+            "metricKey": "elderly-couple-only-household-ratio"
           }
         ],
         "labels": [
@@ -281,14 +277,12 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "持ち家・借家の延べ床面積の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010208",
-            "cdCat01": "#H0210301"
+            "metricKey": "floor-area-per-dwelling-owner"
           },
           {
-            "statsDataId": "0000010208",
-            "cdCat01": "#H0210302"
+            "metricKey": "floor-area-per-dwelling-rented"
           }
         ],
         "labels": [
@@ -318,27 +312,22 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "婚姻件数・離婚件数の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010101",
-            "cdCat01": "A9101"
+            "metricKey": "marriages",
+            "label": "婚姻件数",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0000010101",
-            "cdCat01": "A9201"
+            "metricKey": "divorces",
+            "label": "離婚件数",
+            "colorRole": "danger"
           }
-        ],
-        "labels": [
-          "婚姻件数",
-          "離婚件数"
-        ],
-        "seriesColors": [
-          "population",
-          "danger"
         ]
       },
       "relatedRankingKeys": [
-        "marriages"
+        "marriages",
+        "divorces"
       ],
       "sourceName": "人口動態調査",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
@@ -354,27 +343,22 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "単独世帯・核家族世帯割合の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A06205"
+            "metricKey": "single-person-household-ratio",
+            "label": "単独世帯割合",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A06202"
+            "metricKey": "nuclear-family-households-ratio",
+            "label": "核家族世帯率",
+            "colorRole": "danger"
           }
-        ],
-        "labels": [
-          "単独世帯割合",
-          "核家族世帯割合"
-        ],
-        "seriesColors": [
-          "population",
-          "danger"
         ]
       },
       "relatedRankingKeys": [
-        "single-person-household-ratio"
+        "single-person-household-ratio",
+        "nuclear-family-households-ratio"
       ],
       "sourceName": "総務省「国勢調査」",
       "sourceLink": null,

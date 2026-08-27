@@ -4,6 +4,7 @@ export const roadExpresswayLength: MetricConfig = {
   "key": "road-expressway-length",
   "title": "道路実延長（高速道路）",
   "subtitle": "高速道路のみ",
+  "description": "都道府県内の高速自動車国道など高速道路の実延長。重複区間を除いた供用延長を示す。",
   "unit": "km",
   "category": "infrastructure",
   "source": {

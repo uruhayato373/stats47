@@ -21,7 +21,7 @@ export async function listRankingValuesAllYears(
     if (!payload) return ok([]);
 
     const values: RankingValue[] = payload.rows
-      .filter((r) => r.areaCode !== "00000")
+      .filter((r) => r.areaCode !== "00000" && r.value !== null)
       .map((row) => ({
         areaType,
         areaCode: row.areaCode,
@@ -29,7 +29,7 @@ export async function listRankingValuesAllYears(
         yearCode: String(row.yearCode),
         yearName: row.yearName,
         metricKey: rankingKey,
-        value: row.value !== null ? Number(row.value) : 0,
+        value: Number(row.value),
         unit: row.unit ?? "",
         rank: row.rank != null ? Number(row.rank) : 0,
       }));

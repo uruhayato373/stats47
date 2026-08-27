@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const numberOfHotelRooms: MetricConfig = {
   "key": "number-of-hotel-rooms",
   "title": "ホテル営業施設客室数",
+  "description": "ホテル営業施設が保有する客室の総数。都道府県の宿泊受入容量を示す。",
   "unit": "室",
   "category": "commercial",
   "source": {

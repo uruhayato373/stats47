@@ -1,6 +1,9 @@
 "use server";
 
-import { resolveChartColorHex } from "@stats47/data-configs/theme-catalog";
+import {
+  resolveChartColorHex,
+  type StatSeriesRef,
+} from "@stats47/data-configs/theme-catalog";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 
 import {
@@ -9,11 +12,10 @@ import {
 } from "@/components/stat-charts/adapters/toCompositionChartData";
 import { toLineChartData } from "@/components/stat-charts/adapters/toLineChartData";
 import { toMixedChartData } from "@/components/stat-charts/adapters/toMixedChartData";
-import { fetchEstatData } from "@/components/stat-charts/server";
 import type { LineChartData, MixedChartData } from "@/components/stat-charts/types/visualization";
 
 import { aggregateMetricTimeseries } from "../lib/aggregate-metric-timeseries";
-import { NATIONAL_AREA_CODE, selectNationalSeries } from "../lib/select-national-series";
+import { NATIONAL_AREA_CODE } from "../lib/select-national-series";
 
 import {
   parseThemeDbChartComponentProps,
@@ -84,10 +86,6 @@ export interface ThemeChartDataContract {
 
 export type ThemeDbChartResult = ChartResult;
 
-function latestYear(rows: readonly StatsSchema[]): string {
-  return rows.reduce((latest, row) => (row.yearCode.localeCompare(latest) > 0 ? row.yearCode : latest), "");
-}
-
 function resolveScopeLabel(
   rows: ReadonlyArray<readonly StatsSchema[] | null | undefined>,
 ): ThemeChartDataContract["scopeLabel"] {
@@ -124,21 +122,20 @@ export async function fetchDbChartDataAction(
   componentProps: Record<string, unknown>,
   prefCode: string
 ): Promise<ChartResult> {
-  const isNational = prefCode === NATIONAL_AREA_CODE;
   const parsed = parseThemeDbChartComponentProps(componentType, componentProps);
   if (!parsed) return null;
 
   if (parsed.componentType === "line-chart") {
-    return fetchLineData(parsed.props, prefCode, isNational);
+    return fetchLineData(parsed.props, prefCode);
   }
   if (parsed.componentType === "mixed-chart") {
-    return fetchMixedData(parsed.props, prefCode, isNational);
+    return fetchMixedData(parsed.props, prefCode);
   }
   if (parsed.componentType === "donut-chart") {
-    return fetchDonutData(parsed.props, prefCode, isNational);
+    return fetchDonutData(parsed.props, prefCode);
   }
   if (parsed.componentType === "composition-chart") {
-    return fetchCompositionData(parsed.props, prefCode, isNational);
+    return fetchCompositionData(parsed.props, prefCode);
   }
   if (parsed.componentType === "cpi-profile") {
     return fetchCpiProfileData(parsed.props, prefCode);
@@ -152,24 +149,8 @@ export async function fetchDbChartDataAction(
 async function fetchLineData(
   props: LineChartComponentProps,
   prefCode: string,
-  isNational: boolean
 ): Promise<Extract<NonNullable<ChartResult>, { type: "line" }> | null> {
-  if (props.seriesRefs) {
-    return fetchR2LineData(props, prefCode);
-  }
-  if (!props.estatParams) return null;
-  const paramsList = Array.isArray(props.estatParams) ? props.estatParams : [props.estatParams];
-
-  const rawDataList = await fetchAllSeries(paramsList, prefCode, isNational);
-  if (!rawDataList) return null;
-
-  const chartData = toLineChartData(rawDataList, props.labels, props.seriesColors);
-  return {
-    type: "line",
-    data: chartData,
-    contract: lineContract(chartData, rawDataList),
-    showLatestValues: props.showLatestValues,
-  };
+  return props.seriesRefs ? fetchR2LineData(props, prefCode) : null;
 }
 
 /**
@@ -185,37 +166,14 @@ async function fetchR2LineData(
 
   try {
     const rawDataList = await Promise.all(
-      refs.map(async (ref) => {
-        const payload = await readStatsValues(ref.metricKey, "prefecture");
-        if (!payload) return null;
-        const areaCode = ref.area === "national" ? NATIONAL_AREA_CODE : prefCode;
-        const rows = ref.year ? payload.rows.filter((row) => row.yearCode === ref.year) : payload.rows;
-        const series = aggregateMetricTimeseries(rows, areaCode);
-        if (series.points.length === 0) return null;
-        const unit = rows.find((row) => row.unit)?.unit;
-        if (!unit) return null;
-        return series.points.map((point): StatsSchema => ({
-          areaCode,
-          areaName:
-            series.source === "average"
-              ? "全国平均"
-              : areaCode === NATIONAL_AREA_CODE
-                ? "全国"
-                : areaCode,
-          yearCode: point.year,
-          yearName: point.yearName,
-          metricKey: ref.metricKey,
-          value: point.value,
-          unit,
-        }));
-      })
+      refs.map((ref) => readR2Series(ref, prefCode)),
     );
     if (rawDataList.some((series) => series === null)) return null;
 
-    const labels = refs.map((ref) => ref.label ?? ref.metricKey);
+    const labels = refs.map((ref, index) => ref.label ?? props.labels?.[index] ?? ref.metricKey);
     const colors = refs.every((ref) => ref.colorRole !== undefined)
       ? refs.map((ref) => resolveChartColorHex(ref.colorRole!))
-      : undefined;
+      : props.seriesColors;
     const chartData = toLineChartData(rawDataList as StatsSchema[][], labels, colors);
     return {
       type: "line",
@@ -228,26 +186,73 @@ async function fetchR2LineData(
   }
 }
 
+async function readR2Series(
+  ref: StatSeriesRef,
+  prefCode: string,
+): Promise<StatsSchema[] | null> {
+  const payload = await readStatsValues(ref.metricKey, "prefecture");
+  if (!payload) return null;
+  const areaCode = ref.area === "national" ? NATIONAL_AREA_CODE : prefCode;
+  const rows = ref.year
+    ? payload.rows.filter((row) => row.yearCode === ref.year)
+    : payload.rows;
+  const series = aggregateMetricTimeseries(rows, areaCode);
+  if (series.points.length === 0) return null;
+  const unit = rows.find((row) => row.unit)?.unit;
+  if (!unit) return null;
+  return series.points.map((point): StatsSchema => ({
+    areaCode,
+    areaName:
+      series.source === "average"
+        ? "全国平均"
+        : areaCode === NATIONAL_AREA_CODE
+          ? "全国"
+          : areaCode,
+    yearCode: point.year,
+    yearName: point.yearName,
+    metricKey: ref.metricKey,
+    value: point.value,
+    unit,
+  }));
+}
+
 async function fetchMixedData(
   props: MixedChartComponentProps,
   prefCode: string,
-  isNational: boolean
 ): Promise<Extract<NonNullable<ChartResult>, { type: "mixed" }> | null> {
-  const [colData, lineData] = await Promise.all([
-    fetchAllSeries(props.columnParams, prefCode, isNational),
-    fetchAllSeries(props.lineParams, prefCode, isNational),
-  ]);
-  if (!colData || !lineData) return null;
+  return props.columnSeriesRefs && props.lineSeriesRefs
+    ? fetchR2MixedData(props, prefCode)
+    : null;
+}
 
+async function fetchR2MixedData(
+  props: MixedChartComponentProps,
+  prefCode: string,
+): Promise<Extract<NonNullable<ChartResult>, { type: "mixed" }> | null> {
+  const columnRefs = props.columnSeriesRefs;
+  const lineRefs = props.lineSeriesRefs;
+  if (!columnRefs || !lineRefs) return null;
+  const [colData, lineData] = await Promise.all([
+    Promise.all(columnRefs.map((ref) => readR2Series(ref, prefCode))),
+    Promise.all(lineRefs.map((ref) => readR2Series(ref, prefCode))),
+  ]);
+  if ([...colData, ...lineData].some((series) => series === null)) return null;
+
+  const columns = colData as StatsSchema[][];
+  const lines = lineData as StatsSchema[][];
   const chartData = toMixedChartData(
-    colData,
-    lineData,
-    props.columnLabels,
-    props.lineLabels,
+    columns,
+    lines,
+    columnRefs.map((ref, index) => ref.label ?? props.columnLabels?.[index] ?? ref.metricKey),
+    lineRefs.map((ref, index) => ref.label ?? props.lineLabels?.[index] ?? ref.metricKey),
     props.leftUnit,
     props.rightUnit,
-    props.columnColors,
-    props.lineColors
+    columnRefs.every((ref) => ref.colorRole !== undefined)
+      ? columnRefs.map((ref) => resolveChartColorHex(ref.colorRole!))
+      : props.columnColors,
+    lineRefs.every((ref) => ref.colorRole !== undefined)
+      ? lineRefs.map((ref) => resolveChartColorHex(ref.colorRole!))
+      : props.lineColors,
   );
   const last = chartData.data.at(-1);
   return {
@@ -257,116 +262,45 @@ async function fetchMixedData(
       unit: [chartData.leftUnit, chartData.rightUnit].filter(Boolean).join(" / "),
       year: String(last?.yearCode ?? last?.year ?? ""),
       seriesCount: chartData.columns.length + chartData.lines.length,
-      scopeLabel: resolveScopeLabel([...colData, ...lineData]),
+      scopeLabel: resolveScopeLabel([...columns, ...lines]),
     },
   };
-}
-
-/**
- * 複数系列のデータを並列取得。全国の場合は全国系列を取得する。
- */
-async function fetchAllSeries(
-  paramsList: Array<Record<string, string>>,
-  prefCode: string,
-  isNational: boolean
-): Promise<StatsSchema[][] | null> {
-  const results = await Promise.all(
-    paramsList.map(async (params) => {
-      if (isNational) {
-        return fetchNationalSeries(params as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
-      }
-      const result = await fetchEstatData(
-        prefCode,
-        params as unknown as import("@stats47/estat-api/server").GetStatsDataParams
-      );
-      if ("error" in result) throw new Error(result.error);
-      return result.data;
-    })
-  );
-
-  if (results.some((r) => r === null)) return null;
-  return results as StatsSchema[][];
-}
-
-/**
- * 全国 (areaCode "00000") の系列を取得する。
- *
- * 「全国行を使うか 47 県平均へ落とすか」の判定は純粋関数 `selectNationalSeries` が持ち、
- * ここは取得だけを担う (判定の不変量はユニットテストで固定する)。
- */
-async function fetchNationalSeries(
-  params: import("@stats47/estat-api/server").GetStatsDataParams
-): Promise<StatsSchema[] | null> {
-  const { fetchFormattedStats } = await import("@stats47/estat-api/server");
-  const { getEstatCacheStorage } = await import("@/components/stat-charts/services/get-estat-cache-storage");
-
-  const storage = await getEstatCacheStorage();
-  const allData = await fetchFormattedStats(params, storage);
-  return selectNationalSeries(allData);
 }
 
 async function fetchCompositionData(
   props: CompositionChartComponentProps,
   prefCode: string,
-  isNational: boolean
 ): Promise<Extract<NonNullable<ChartResult>, { type: "composition" }> | null> {
-  const segmentData = await Promise.all(
-    props.segments.map(async (seg) => {
-      if (isNational) {
-        return await fetchNationalSeries({
-          statsDataId: props.statsDataId,
-          cdCat01: seg.code,
-        } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
-      }
-      const result = await fetchEstatData(prefCode, {
-        statsDataId: props.statsDataId,
-        cdCat01: seg.code,
-      } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
-      if ("error" in result) throw new Error(result.error);
-      return result.data;
-    })
-  );
-
-  if (segmentData.some((d) => d === null)) return null;
-
-  let totalData: StatsSchema[] | undefined;
-  if (props.totalCode) {
-    if (isNational) {
-      totalData =
-        (await fetchNationalSeries({
-          statsDataId: props.statsDataId,
-          cdCat01: props.totalCode,
-        } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)) ?? undefined;
-    } else {
-      const result = await fetchEstatData(prefCode, {
-        statsDataId: props.statsDataId,
-        cdCat01: props.totalCode,
-      } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
-      if ("error" in result) throw new Error(result.error);
-      totalData = result.data;
-    }
+  if (props.seriesRefs) {
+    const segmentData = await Promise.all(
+      props.seriesRefs.map((ref) => readR2Series(ref, prefCode)),
+    );
+    if (segmentData.some((series) => series === null)) return null;
+    const rows = segmentData as StatsSchema[][];
+    const labels = props.seriesRefs.map(
+      (ref, index) => ref.label ?? props.segments?.[index]?.label ?? ref.metricKey,
+    );
+    const colors = props.seriesRefs.map((ref, index) =>
+      ref.colorRole
+        ? resolveChartColorHex(ref.colorRole)
+        : (props.segments?.[index]?.color ?? resolveChartColorHex("series-1")),
+    );
+    const chartData = toCompositionChartData(rows, labels, colors);
+    return chartData.trendData.length > 0
+      ? {
+          type: "composition",
+          data: chartData,
+          contract: {
+            unit: chartData.unit,
+            year: chartData.latestYearLabel,
+            seriesCount: chartData.series.length,
+            scopeLabel: resolveScopeLabel(rows),
+          },
+          defaultTab: props.defaultTab,
+        }
+      : null;
   }
-
-  const labels = props.segments.map((s) => s.label);
-  const colors = props.segments.map((s) => s.color).filter((c): c is string => !!c);
-  const chartData = toCompositionChartData(segmentData as StatsSchema[][], labels, colors, totalData);
-
-  return chartData.trendData.length > 0
-    ? {
-        type: "composition",
-        data: chartData,
-        contract: {
-          unit: chartData.unit,
-          year: chartData.latestYearLabel,
-          seriesCount: chartData.series.length,
-          scopeLabel: resolveScopeLabel([
-            ...(segmentData as StatsSchema[][]),
-            totalData,
-          ]),
-        },
-        defaultTab: props.defaultTab,
-      }
-    : null;
+  return null;
 }
 
 /**
@@ -381,42 +315,45 @@ async function fetchCompositionData(
 async function fetchDonutData(
   props: DonutChartComponentProps,
   prefCode: string,
-  isNational: boolean
 ): Promise<Extract<NonNullable<ChartResult>, { type: "donut" }> | null> {
   const topN = props.topN ?? 9;
 
-  // 各カテゴリの値を並列取得
-  const results = await Promise.all(
-    props.categories.map(async (cat) => {
-      const data = isNational
-        ? await fetchNationalSeries({
-            statsDataId: props.statsDataId,
-            cdCat01: cat.code,
-          } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)
-        : await fetchSeriesDataForDonut({ statsDataId: props.statsDataId, cdCat01: cat.code }, prefCode);
-      if (!data || data.length === 0) return null;
-
-      // 最新年度の値を取得
-      const sorted = [...data].sort((a, b) => b.yearCode.localeCompare(a.yearCode));
-      return {
+  if (props.seriesRefs) {
+    const series = await Promise.all(
+      props.seriesRefs.map((ref) => readR2Series(ref, prefCode)),
+    );
+    const validResults = series.flatMap((rows, index) => {
+      if (!rows || rows.length === 0) return [];
+      const latest = [...rows].sort((a, b) => b.yearCode.localeCompare(a.yearCode))[0];
+      if (typeof latest.value !== "number" || latest.value <= 0) return [];
+      const ref = props.seriesRefs![index];
+      return [{
         item: {
-          name: cat.label,
-          value: sorted[0].value ?? 0,
-          color: cat.color,
+          name: ref.label ?? props.categories?.[index]?.label ?? ref.metricKey,
+          value: latest.value,
+          color: ref.colorRole
+            ? resolveChartColorHex(ref.colorRole)
+            : (props.categories?.[index]?.color ?? resolveChartColorHex("series-1")),
         },
-        year: sorted[0].yearName || sorted[0].yearCode,
-        unit: sorted[0].unit ?? "",
-        scopeLabel:
-          sorted[0].areaName === "全国平均"
-            ? ("47都道府県平均" as const)
-            : undefined,
-      };
-    })
-  );
+        year: latest.yearName || latest.yearCode,
+        unit: latest.unit ?? "",
+        scopeLabel: latest.areaName === "全国平均" ? ("47都道府県平均" as const) : undefined,
+      }];
+    });
+    return buildDonutResult(validResults, topN);
+  }
+  return null;
+}
 
-  const validResults = results.filter(
-    (result): result is NonNullable<typeof result> => result !== null && result.item.value > 0
-  );
+function buildDonutResult(
+  validResults: Array<{
+    item: DonutChartItem;
+    year: string;
+    unit: string;
+    scopeLabel?: "47都道府県平均";
+  }>,
+  topN: number,
+): Extract<NonNullable<ChartResult>, { type: "donut" }> | null {
   const valid = validResults.map((result) => result.item);
   if (valid.length === 0) return null;
 
@@ -449,18 +386,6 @@ async function fetchDonutData(
   };
 }
 
-async function fetchSeriesDataForDonut(
-  params: { statsDataId: string; cdCat01: string },
-  prefCode: string
-): Promise<StatsSchema[] | null> {
-  const result = await fetchEstatData(
-    prefCode,
-    params as unknown as import("@stats47/estat-api/server").GetStatsDataParams
-  );
-  if ("error" in result) throw new Error(result.error);
-  return result.data;
-}
-
 /**
  * CPI プロファイル（10大費目別 消費者物価地域差指数）
  *
@@ -473,42 +398,7 @@ async function fetchCpiProfileData(
   props: CpiChartComponentProps,
   prefCode: string
 ): Promise<Extract<NonNullable<ChartResult>, { type: "cpi-profile" }> | null> {
-  const excludeCodes = new Set(props.excludeCodes ?? ["00010", "00120"]);
-
-  const { fetchFormattedStats } = await import("@stats47/estat-api/server");
-  const params = {
-    statsDataId: props.statsDataId,
-    cdArea: prefCode,
-    ...(props.year && { cdTime: props.year }),
-  };
-
-  const rawData = await fetchFormattedStats(params as import("@stats47/estat-api/server").GetStatsDataParams);
-  if (rawData.length === 0) return null;
-
-  // 年指定なしの場合は最新年のみフィルタ
-  let filtered = rawData.filter((d) => !excludeCodes.has(d.metricKey));
-  if (!props.year) {
-    const latestYear = filtered.reduce((max, d) => (d.yearCode > max ? d.yearCode : max), "");
-    filtered = filtered.filter((d) => d.yearCode === latestYear);
-  }
-
-  const result: CpiProfileItem[] = filtered.map((d) => ({
-    label: d.metricKey,
-    value: d.value ?? 0,
-    code: d.metricKey,
-  }));
-
-  return result.length > 0
-    ? {
-        type: "cpi-profile",
-        data: result,
-        contract: {
-          unit: filtered[0]?.unit?.trim() || "指数",
-          year: filtered[0]?.yearName ?? filtered[0]?.yearCode ?? "",
-          seriesCount: result.length,
-        },
-      }
-    : null;
+  return props.seriesRefs ? fetchR2CpiProfileData(props, prefCode) : null;
 }
 
 /**
@@ -522,31 +412,87 @@ async function fetchCpiHeatmapData(
   props: CpiChartComponentProps,
   prefCode: string
 ): Promise<Extract<NonNullable<ChartResult>, { type: "cpi-heatmap" }> | null> {
-  const excludeCodes = new Set(props.excludeCodes ?? ["00010", "00120"]);
+  return props.seriesRefs ? fetchR2CpiHeatmapData(props, prefCode) : null;
+}
 
-  const { fetchFormattedStats } = await import("@stats47/estat-api/server");
-  const params = {
-    statsDataId: props.statsDataId,
-    cdArea: prefCode,
+function commonCpiYears(series: readonly StatsSchema[][]): string[] {
+  if (series.length === 0) return [];
+  const common = new Set(series[0].map((row) => row.yearCode));
+  for (const rows of series.slice(1)) {
+    const years = new Set(rows.map((row) => row.yearCode));
+    for (const year of common) if (!years.has(year)) common.delete(year);
+  }
+  return [...common].sort();
+}
+
+async function readR2CpiSeries(
+  props: CpiChartComponentProps,
+  prefCode: string,
+): Promise<{ refs: StatSeriesRef[]; series: StatsSchema[][] } | null> {
+  const refs = props.seriesRefs;
+  if (!refs) return null;
+  const rows = await Promise.all(refs.map((ref) => readR2Series(ref, prefCode)));
+  if (rows.some((value) => value === null)) return null;
+  return { refs, series: rows as StatsSchema[][] };
+}
+
+async function fetchR2CpiProfileData(
+  props: CpiChartComponentProps,
+  prefCode: string,
+): Promise<Extract<NonNullable<ChartResult>, { type: "cpi-profile" }> | null> {
+  const loaded = await readR2CpiSeries(props, prefCode);
+  if (!loaded) return null;
+  const commonYears = commonCpiYears(loaded.series);
+  const year = props.year ?? commonYears.at(-1);
+  if (!year || !commonYears.includes(year)) return null;
+  const selected = loaded.series.map((rows) => rows.find((row) => row.yearCode === year));
+  if (selected.some((row) => !row || row.value === null)) return null;
+  const rows = selected as StatsSchema[];
+  return {
+    type: "cpi-profile",
+    data: rows.map((row, index) => ({
+      label: loaded.refs[index].label ?? loaded.refs[index].metricKey,
+      value: row.value as number,
+      code: loaded.refs[index].metricKey,
+    })),
+    contract: {
+      unit: rows[0].unit?.trim() || "指数",
+      year: rows[0].yearName || rows[0].yearCode,
+      seriesCount: rows.length,
+      scopeLabel: resolveScopeLabel(loaded.series),
+    },
   };
+}
 
-  const rawData = await fetchFormattedStats(params as import("@stats47/estat-api/server").GetStatsDataParams);
-  if (rawData.length === 0) return null;
-
-  const result: CpiHeatmapItem[] = rawData
-    .filter((d) => !excludeCodes.has(d.metricKey))
-    .map((d) => ({ x: d.yearName, y: d.metricKey, value: d.value ?? 0 }))
-    .sort((a, b) => a.x.localeCompare(b.x));
-
-  return result.length > 0
-    ? {
-        type: "cpi-heatmap",
-        data: result,
-        contract: {
-          unit: rawData[0]?.unit?.trim() || "指数",
-          year: latestYear(rawData),
-          seriesCount: new Set(result.map((item) => item.y)).size,
-        },
-      }
-    : null;
+async function fetchR2CpiHeatmapData(
+  props: CpiChartComponentProps,
+  prefCode: string,
+): Promise<Extract<NonNullable<ChartResult>, { type: "cpi-heatmap" }> | null> {
+  const loaded = await readR2CpiSeries(props, prefCode);
+  if (!loaded) return null;
+  const years = props.year
+    ? commonCpiYears(loaded.series).filter((year) => year === props.year)
+    : commonCpiYears(loaded.series);
+  if (years.length === 0) return null;
+  const yearSet = new Set(years);
+  const data = loaded.series.flatMap((rows, index) =>
+    rows
+      .filter((row) => yearSet.has(row.yearCode) && row.value !== null)
+      .map((row) => ({
+        x: row.yearName || row.yearCode,
+        y: loaded.refs[index].label ?? loaded.refs[index].metricKey,
+        value: row.value as number,
+      })),
+  ).sort((a, b) => a.x.localeCompare(b.x) || a.y.localeCompare(b.y));
+  if (data.length !== years.length * loaded.refs.length) return null;
+  return {
+    type: "cpi-heatmap",
+    data,
+    contract: {
+      unit: loaded.series[0][0]?.unit?.trim() || "指数",
+      year: years.at(-1) ?? "",
+      seriesCount: loaded.refs.length,
+      scopeLabel: resolveScopeLabel(loaded.series),
+    },
+  };
 }

@@ -6,8 +6,8 @@
  * ## なぜ生成にするか
  *
  * live 監査 `.claude/scripts/audit/theme-chart-live-audit.mjs` は素の `node` で走るため
- * TS collector を import できない。一方、期待依存集合 (どの statsDataId をどのフィルタで
- * 叩くか・pyramid の 34 category を含む) の正典は
+ * TS collector を import できない。一方、期待依存集合 (どの R2 metric を読むか、移行中だけ
+ * 残る移行前互換 e-Stat request は何か) の正典は
  * `packages/data-configs/src/theme-catalog/chart-dependencies.ts` (TS)。
  *
  * 両者に同じ集合が要るが、監査側で独自抽出すると集合がずれる (旧監査は 130 request しか
@@ -66,8 +66,9 @@ function main(): void {
   writeFileSync(OUT, next);
   const parsed = JSON.parse(next);
   console.log(
-    `✅ 依存ミラーを生成: ${OUT}\n` +
-      `   total ${parsed.totalRequests} / distinct ${parsed.distinctRequests} request`,
+      `✅ 依存ミラーを生成: ${OUT}\n` +
+      `   R2 metric ${parsed.totalMetricRefs} refs / ${parsed.distinctMetricRefs} distinct\n` +
+      `   legacy e-Stat ${parsed.totalRequests} refs / ${parsed.distinctRequests} distinct`,
   );
 }
 

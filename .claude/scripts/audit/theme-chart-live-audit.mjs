@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * theme-chart-live-audit — テーマページのチャートが叩く e-Stat リクエストを live 実測する。
+ * theme-chart-live-audit — テーマページの全チャート依存を R2 配信値で live 実測する。
  *
  * ★静的な validator (validate-theme-catalog) は「statsDataId が 10 桁か」までしか見られない。
  *   実在しない statsDataId・廃止された cdCat01・全国行を持たない統計表は、
@@ -14,25 +14,37 @@
  *   `theme-chart-dependencies.generated.json` を読み、期待集合の**全件**を検査する。
  *   ミラーの鮮度は CI (`generate-theme-dependency-mirror.ts --check`) が保証する。
  *
- * 検査項目 (依存ミラーの全 request):
- *   - [not-found]  e-Stat がその statsDataId を返さない (統計表が廃止・ID 誤り)
- *   - [no-rows]    リクエストは通るが 0 件 (cdCat01 等の絞りが実データと合っていない)
- *   - [http-error] API エラー・タイムアウト
- *   - [no-national] 全国行 (areaCode 00000) が無い → 全国表示では 47 県平均へ落ちる (warn)
- *   - [national-row-empty] 全国行はあるが値がプレースホルダ ('-' 等) で実データが無い (warn)
+ * 検査項目 (依存ミラーの全 R2 metric):
+ *   - values.json の存在・JSON/row構造・有限値・年
+ *   - MetricConfig と配信値の unit・recipe configHash 一致
+ *   - meta.areaCount と実際の行の地域数一致
+ *   - 47県未満は shape-gate SSOT と同じ warn-only (港湾・漁業・職種の正当な部分集計を許容)
+ * 移行前互換e-Stat requestが残る期間だけ、従来のAPI実測も同じ母集団で行う。
  * 成功条件: 期待集合と実集合が一致し (limit 無し時)、その全件が成功すること。
  *
- * read-only。e-Stat API を叩くだけで R2 にも git にも書かない (state JSON の出力のみ)。
+ * read-only。公開R2/e-Statを読むだけで R2 にも git にも書かない (指定時のJSON出力のみ)。
  *
  * Usage:
  *   node .claude/scripts/audit/theme-chart-live-audit.mjs [--json <path>] [--limit N]
  *
  * 要 env: NEXT_PUBLIC_ESTAT_APP_ID (apps/web/.env.development に公開 ID あり)
  */
-import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+
+import {
+  classifyNational,
+  inspectEstatPayload,
+  inspectStatsPayload,
+  isFiniteEstatValue,
+  parseAuditLimit,
+  parseDependencyMirror,
+  summarizeAudit,
+} from "./theme-chart-live-audit-core.mjs";
+
+export { classifyNational, isFiniteEstatValue } from "./theme-chart-live-audit-core.mjs";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");
 const DEPENDENCY_MIRROR = path.join(
@@ -61,12 +73,17 @@ function resolveDispatcher() {
 function parseArgs() {
   const argv = process.argv.slice(2);
   let json = null;
-  let limit = Infinity;
+  let rawLimit;
+  let staged = false;
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--json" && argv[i + 1]) json = argv[++i];
-    if (argv[i] === "--limit" && argv[i + 1]) limit = Number(argv[++i]);
+    if (argv[i] === "--limit") {
+      if (!argv[i + 1]) throw new Error("--limit requires a value");
+      rawLimit = argv[++i];
+    }
+    if (argv[i] === "--staged") staged = true;
   }
-  return { json, limit };
+  return { json, limit: parseAuditLimit(rawLimit), staged };
 }
 
 function resolveAppId() {
@@ -88,25 +105,31 @@ function resolveAppId() {
  * ミラーの各 request は `{ statsDataId, filters, themeKey, componentKey, componentType }`。
  * e-Stat に送る params は `{ statsDataId, ...filters }` に平坦化する。
  */
-function loadExpectedRequests() {
-  let mirror;
+function loadExpectedDependencies() {
+  let raw;
   try {
-    mirror = JSON.parse(readFileSync(DEPENDENCY_MIRROR, "utf8"));
+    raw = JSON.parse(readFileSync(DEPENDENCY_MIRROR, "utf8"));
   } catch (error) {
-    console.error(
-      `依存ミラーを読めません: ${DEPENDENCY_MIRROR}\n` +
-        `生成: npx tsx packages/data-configs/scripts/generate-theme-dependency-mirror.ts\n` +
-        String(error).slice(0, 120),
+    throw new Error(
+      `依存ミラーを読めません: ${DEPENDENCY_MIRROR}; ${String(error).slice(0, 120)}`,
     );
-    process.exit(1);
   }
-  const requests = (mirror.requests ?? []).map((r) => ({
-    theme: r.themeKey,
-    componentKey: r.componentKey,
-    componentType: r.componentType,
-    params: { statsDataId: r.statsDataId, ...(r.filters ?? {}) },
-  }));
-  return { requests, distinctExpected: mirror.distinctRequests ?? requests.length };
+  return parseDependencyMirror(raw);
+}
+
+function resolveR2PublicBase() {
+  if (process.env.R2_PUBLIC_FETCH_URL) return process.env.R2_PUBLIC_FETCH_URL.replace(/\/+$/, "");
+  if (process.env.NEXT_PUBLIC_R2_PUBLIC_URL) {
+    return process.env.NEXT_PUBLIC_R2_PUBLIC_URL.replace(/\/+$/, "");
+  }
+  try {
+    const env = readFileSync(path.join(PROJECT_ROOT, "apps/web/.env.development"), "utf8");
+    const value = env.match(/^(?:R2_PUBLIC_FETCH_URL|NEXT_PUBLIC_R2_PUBLIC_URL)=(.+)$/m)?.[1];
+    if (value) return value.trim().replace(/^["']|["']$/g, "").replace(/\/+$/, "");
+  } catch {
+    // 公開配信URLは非secret。環境ファイルが無いCIでも既定値でread-only監査を続ける。
+  }
+  return "https://storage.stats47.jp";
 }
 
 /**
@@ -137,88 +160,97 @@ async function fetchWithRetry(url, dispatcher, attempts = 3) {
  * e-Stat の値が実データか判定する。「該当なし」「秘匿」は `-` / `‐` / `***` / `X` 等の
  * プレースホルダ文字列で返るため、数値としてパースできるかで見分ける。
  */
-export function isFiniteEstatValue(raw) {
-  if (raw === undefined || raw === null) return false;
-  const s = String(raw).trim().replace(/,/g, "");
-  if (s === "") return false;
-  return Number.isFinite(Number(s));
-}
-
-/**
- * 全国行 (areaCode 00000) を「行の存在」と「値の有効性」に分けて判定する。
- * ★行の存在だけを見てはならない。e-Stat は該当なしをプレースホルダで返すので、
- *   00000 行があっても全国値が取れないことがある (実測:
- *   in-pref-university-entrance-ratio-by-highschool-origin は 1980-2024 の全 42 時点が '-')。
- *   行の存在だけで hasNational: true を返していた頃は、この統計表を「全国値あり」と誤判定した。
- */
-export function classifyNational(values) {
-  const rows = values.filter((v) => v["@area"] === "00000");
-  if (rows.length === 0) return { hasNationalRow: false, hasNational: false };
-  return { hasNationalRow: true, hasNational: rows.some((v) => isFiniteEstatValue(v.$)) };
-}
-
 async function inspect(appId, params, dispatcher) {
   const query = new URLSearchParams({ appId, limit: "200", ...params });
   const { res, error } = await fetchWithRetry(`${ESTAT_ENDPOINT}?${query}`, dispatcher);
   if (error) return error;
 
-  let body;
+  let payload;
   try {
-    body = await res.json();
+    payload = await res.json();
   } catch {
-    return { status: "http-error", detail: "JSON parse failed" };
+    return { status: "malformed-json", detail: "JSON parse failed" };
   }
+  return inspectEstatPayload(payload, params);
+}
 
-  const statistical = body?.GET_STATS_DATA?.STATISTICAL_DATA;
-  const resultStatus = body?.GET_STATS_DATA?.RESULT?.STATUS;
-  if (resultStatus !== 0 && resultStatus !== "0") {
-    const msg = body?.GET_STATS_DATA?.RESULT?.ERROR_MSG ?? `status ${resultStatus}`;
-    return { status: "not-found", detail: String(msg).slice(0, 120) };
+async function inspectR2(metric, dispatcher, publicBase, staged) {
+  if (staged) {
+    const localPath = path.join(
+      PROJECT_ROOT,
+      ".local/r2/app/stats",
+      metric.metricKey,
+      "values.json",
+    );
+    if (existsSync(localPath)) {
+      try {
+        return { ...inspectStatsPayload(JSON.parse(readFileSync(localPath, "utf8")), metric), source: "staged" };
+      } catch {
+        return { status: "malformed-json", detail: "staged JSON parse failed", source: "staged" };
+      }
+    }
   }
-  const values = [].concat(statistical?.DATA_INF?.VALUE ?? []);
-  if (values.length === 0) return { status: "no-rows", detail: "0 件" };
-
-  const { hasNationalRow, hasNational } = classifyNational(values);
-  return {
-    status: "ok",
-    rows: values.length,
-    hasNationalRow,
-    hasNational,
-    tableTitle: String(statistical?.TABLE_INF?.TITLE?.$ ?? statistical?.TABLE_INF?.TITLE ?? "")
-      .slice(0, 80),
-  };
+  const { res, error } = await fetchWithRetry(
+    `${publicBase}/app/stats/${encodeURIComponent(metric.metricKey)}/values.json`,
+    dispatcher,
+  );
+  if (error) return { ...error, source: "public-r2" };
+  let payload;
+  try {
+    payload = await res.json();
+  } catch {
+    return { status: "malformed-json", detail: "JSON parse failed", source: "public-r2" };
+  }
+  return { ...inspectStatsPayload(payload, metric), source: "public-r2" };
 }
 
 async function main() {
-  const { json, limit } = parseArgs();
-  const appId = resolveAppId();
-  if (!appId) {
-    console.error("NEXT_PUBLIC_ESTAT_APP_ID が解決できません");
+  const { json, limit, staged } = parseArgs();
+  const dispatcher = resolveDispatcher();
+  const { requests: allRequests, metrics: allMetrics, distinctExpected } =
+    loadExpectedDependencies();
+  const allDependencies = [
+    ...allRequests.map((request) => ({ kind: "estat", ...request })),
+    ...allMetrics.map((metric) => ({ kind: "r2", ...metric })),
+  ];
+  const partial = limit !== null && limit < allDependencies.length;
+  const dependencies = limit === null ? allDependencies : allDependencies.slice(0, limit);
+  const appId = allRequests.length > 0 ? resolveAppId() : undefined;
+  if (allRequests.length > 0 && !appId) {
+    console.error("legacy e-Stat request が残っていますが NEXT_PUBLIC_ESTAT_APP_ID を解決できません");
     process.exit(1);
   }
-
-  const dispatcher = resolveDispatcher();
-  const { requests: allRequests, distinctExpected } = loadExpectedRequests();
-  const partial = Number.isFinite(limit) && limit < allRequests.length;
-  const requests = allRequests.slice(0, limit);
+  const publicBase = resolveR2PublicBase();
   console.log(`## テーマチャート live 監査`);
-  console.log(`期待集合 (依存ミラー): ${distinctExpected} distinct request`);
-  console.log(`対象リクエスト: ${requests.length} 件${partial ? " (--limit で一部のみ)" : ""}\n`);
+  console.log(
+    `期待集合 (依存ミラー): ${allMetrics.length} R2 metric / ${allRequests.length} legacy e-Stat request`,
+  );
+  console.log(`対象依存: ${dependencies.length} 件${partial ? " (--limit で一部のみ)" : ""}\n`);
+  if (staged) console.log("読み取り: .local/r2 staged優先、未生成keyは公開R2へfallback\n");
 
   const results = [];
   const errors = [];
   const warns = [];
   const emptyNationalWarns = [];
+  const areaCoverageWarns = [];
 
-  for (const req of requests) {
-    const outcome = await inspect(appId, req.params, dispatcher);
-    const where = `${req.theme}/${req.componentKey}`;
-    const label = `${where} (${req.params.statsDataId}${req.params.cdCat01 ? ` cdCat01=${req.params.cdCat01}` : ""})`;
-    results.push({ ...req, ...outcome });
+  for (const dependency of dependencies) {
+    const outcome =
+      dependency.kind === "estat"
+        ? await inspect(appId, dependency.params, dispatcher)
+        : await inspectR2(dependency, dispatcher, publicBase, staged);
+    const where = `${dependency.theme}/${dependency.componentKey}`;
+    const label =
+      dependency.kind === "estat"
+        ? `${where} (${dependency.params.statsDataId}${dependency.params.cdCat01 ? ` cdCat01=${dependency.params.cdCat01}` : ""})`
+        : `${where} (R2 ${dependency.metricKey})`;
+    results.push({ ...dependency, ...outcome });
 
     if (outcome.status !== "ok") {
       errors.push(`[${outcome.status}] ${label}: ${outcome.detail}`);
-    } else if (!outcome.hasNational) {
+    } else if (dependency.kind === "r2" && outcome.areaCoverageWarning) {
+      areaCoverageWarns.push(`[area-coverage] ${label}: ${outcome.areaCoverageWarning}`);
+    } else if (dependency.kind === "estat" && !outcome.hasNational) {
       // 行が無いのか、行はあるが値がプレースホルダなのかを分けて報告する。
       // 前者は統計表の設計、後者は「該当なし」で、是正の打ち手が違う。
       if (outcome.hasNationalRow) {
@@ -234,6 +266,7 @@ async function main() {
   }
 
   for (const [title, list] of [
+    ["47都道府県未満 (shape-gate SSOTによりwarn-only)", areaCoverageWarns],
     ["全国行なし", warns],
     ["全国行はあるが値が無い", emptyNationalWarns],
   ]) {
@@ -244,8 +277,12 @@ async function main() {
     console.log("");
   }
 
-  // 期待集合と実集合が一致するか (limit 無し時)。ミラー破損や slice バグの陰性対照。
-  const coverageOk = partial || results.length === distinctExpected;
+  const summary = summarizeAudit({
+    distinctExpected,
+    requested: dependencies.length,
+    results,
+    isPartial: partial,
+  });
 
   if (json) {
     mkdirSync(path.dirname(path.resolve(json)), { recursive: true });
@@ -256,10 +293,15 @@ async function main() {
           auditedAt: new Date().toISOString(),
           distinctExpected,
           audited: results.length,
+          r2MetricExpected: allMetrics.length,
+          legacyEstatExpected: allRequests.length,
+          staged,
           partial,
-          coverageOk,
+          status: summary.status,
+          coverageOk: summary.coverageOk,
           errorCount: errors.length,
-          warnCount: warns.length + emptyNationalWarns.length,
+          warnCount: areaCoverageWarns.length + warns.length + emptyNationalWarns.length,
+          areaCoverageWarningCount: areaCoverageWarns.length,
           noNationalCount: warns.length,
           nationalRowEmptyCount: emptyNationalWarns.length,
           results,
@@ -271,7 +313,7 @@ async function main() {
     console.log(`JSON: ${json}`);
   }
 
-  if (!coverageOk) {
+  if (!summary.coverageOk) {
     console.error(
       `\n❌ 期待集合と実集合が一致しません: 期待 ${distinctExpected} / 検査 ${results.length}`,
     );
@@ -280,16 +322,11 @@ async function main() {
   }
 
   if (errors.length > 0) {
-    console.error(`\n❌ ${errors.length} 件のチャートが実データを取れません`);
+    console.error(`\n❌ ${errors.length} 件のチャート依存が実データ契約を満たしません`);
     for (const e of errors) console.error("   " + e);
-    console.error("\n是正: catalog の estatParams / segments / cdCat01 を e-Stat の現行仕様に合わせる");
+    console.error("\n是正: MetricConfig と app/stats/<metric>/values.json の生成・配信状態を一致させる");
     console.error("規約: .claude/rules/theme-catalog-standards.md");
     process.exit(1);
-  }
-
-  if (partial) {
-    console.log(`\n⚠️  --limit で一部のみ検査 (${results.length}/${distinctExpected})。全件監査は --limit なしで実行する`);
-    process.exit(0);
   }
 
   console.log(`✅ 期待集合 ${distinctExpected} request 全件が実データを返した (期待=実集合=成功)`);

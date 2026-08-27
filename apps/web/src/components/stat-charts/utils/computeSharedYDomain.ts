@@ -1,9 +1,9 @@
-import { fetchFormattedStats, type GetStatsDataParams } from "@stats47/estat-api/server";
-
-import { getEstatCacheStorage } from "../services";
+import {
+  fetchEstatDataAllAreas,
+  type LegacyStatParams,
+} from "../services/fetchEstatData";
 
 import type { DashboardConfigMap, DashboardComponentType } from "../types";
-import type { R2Bucket } from "@stats47/r2-storage";
 import type { StatsSchema } from "@stats47/types";
 
 
@@ -19,14 +19,13 @@ export async function computeSharedYDomain(
   areaCodes: string[],
 ): Promise<[number, number] | undefined> {
   try {
-    const storage = await getEstatCacheStorage();
     switch (componentType) {
       case "line-chart":
-        return computeForLineChart(config as DashboardConfigMap["line-chart"], areaCodes, storage);
+        return computeForLineChart(config as DashboardConfigMap["line-chart"], areaCodes);
       case "stacked-area":
-        return computeForStackedArea(config as DashboardConfigMap["stacked-area"], areaCodes, storage);
+        return computeForStackedArea(config as DashboardConfigMap["stacked-area"], areaCodes);
       case "diverging-bar-chart":
-        return computeForDiverging(config as DashboardConfigMap["diverging-bar-chart"], areaCodes, storage);
+        return computeForDiverging(config as DashboardConfigMap["diverging-bar-chart"], areaCodes);
       default:
         return undefined;
     }
@@ -39,10 +38,9 @@ export async function computeSharedYDomain(
 async function computeForLineChart(
   config: DashboardConfigMap["line-chart"],
   areaCodes: string[],
-  storage?: R2Bucket,
 ): Promise<[number, number] | undefined> {
   const paramsList = Array.isArray(config.estatParams) ? config.estatParams : [config.estatParams];
-  const allValues = await fetchAllValues(paramsList, areaCodes, storage);
+  const allValues = await fetchAllValues(paramsList, areaCodes);
   if (allValues.length === 0) return undefined;
   return [Math.min(0, Math.min(...allValues)), Math.max(...allValues)];
 }
@@ -51,18 +49,15 @@ async function computeForLineChart(
 async function computeForStackedArea(
   config: DashboardConfigMap["stacked-area"],
   areaCodes: string[],
-  storage?: R2Bucket,
 ): Promise<[number, number] | undefined> {
   const { estatParams } = config;
   if (!estatParams || estatParams.length === 0) return undefined;
 
   const allData: StatsSchema[] = [];
-  for (const areaCode of areaCodes) {
-    for (const p of estatParams) {
-      try {
-        const data = await fetchFormattedStats({ ...p, cdArea: areaCode }, storage);
-        allData.push(...data);
-      } catch { /* skip */ }
+  for (const params of estatParams) {
+    const result = await fetchEstatDataAllAreas(params);
+    if ("data" in result) {
+      allData.push(...result.data.filter((row) => areaCodes.includes(row.areaCode)));
     }
   }
   if (allData.length === 0) return undefined;
@@ -83,12 +78,11 @@ async function computeForStackedArea(
 async function computeForDiverging(
   config: DashboardConfigMap["diverging-bar-chart"],
   areaCodes: string[],
-  storage?: R2Bucket,
 ): Promise<[number, number] | undefined> {
   const { estatParams } = config;
   if (!estatParams || estatParams.length < 2) return undefined;
 
-  const allValues = await fetchAllValues(estatParams, areaCodes, storage);
+  const allValues = await fetchAllValues(estatParams, areaCodes);
   if (allValues.length === 0) return undefined;
   const maxVal = Math.max(...allValues.map(Math.abs));
   return [-maxVal, maxVal];
@@ -96,19 +90,16 @@ async function computeForDiverging(
 
 /** ユーティリティ: 複数 estatParams × 複数地域の全数値を取得 */
 async function fetchAllValues(
-  paramsList: GetStatsDataParams[],
+  paramsList: LegacyStatParams[],
   areaCodes: string[],
-  storage?: R2Bucket,
 ): Promise<number[]> {
   const results: number[] = [];
-  for (const areaCode of areaCodes) {
-    for (const p of paramsList) {
-      try {
-        const data = await fetchFormattedStats({ ...p, cdArea: areaCode }, storage);
-        for (const d of data) {
-          if (d.value != null) results.push(d.value);
-        }
-      } catch { /* skip */ }
+  for (const params of paramsList) {
+    const result = await fetchEstatDataAllAreas(params);
+    if ("data" in result) {
+      for (const row of result.data) {
+        if (areaCodes.includes(row.areaCode) && row.value != null) results.push(row.value);
+      }
     }
   }
   return results;

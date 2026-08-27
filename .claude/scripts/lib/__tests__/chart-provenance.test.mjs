@@ -28,6 +28,7 @@ describe('chart provenance manifest', () => {
         detail: '構造上の再取得条件を満たす',
         kind: 'ranking',
         rankingKeys: ['metric-a', 'metric-b'],
+        metricKeys: [],
       }
     );
   });
@@ -35,10 +36,41 @@ describe('chart provenance manifest', () => {
   it('calculated sourceは入力を要求する', () => {
     const result = inspectChartSourceManifest({
       kind: 'calculated',
+      xKey: 'metric-a',
+      yKey: 'calculated',
       inputs: [{ statsDataId: '0003445244' }],
     });
     assert.equal(result.verdict, 'valid');
     assert.deepEqual(result.rankingKeys, []);
+  });
+
+  it('metric sourceは共通R2 statsのmetricKeyを復元参照として返す', () => {
+    assert.deepEqual(
+      inspectChartSourceManifest({
+        kind: 'metric',
+        metricKey: 'metric-a',
+        source: 'r2:app/stats/metric-a/values.json',
+      }),
+      {
+        verdict: 'valid',
+        code: null,
+        detail: '構造上の再取得条件を満たす',
+        kind: 'metric',
+        rankingKeys: [],
+        metricKeys: ['metric-a'],
+      }
+    );
+  });
+
+  it('calculated sourceは表示用xKey/yKeyをranking参照として誤認しない', () => {
+    const result = inspectChartSourceManifest({
+      kind: 'calculated',
+      xKey: 'metric-a',
+      yKey: 'calculated',
+      inputs: [{ rankingKey: 'metric-a' }, { rankingKey: 'metric-b' }],
+    });
+    assert.equal(result.verdict, 'valid');
+    assert.deepEqual(result.rankingKeys, ['metric-a', 'metric-b']);
   });
 
   it('derived sourceの複数の既存表現からranking参照を抽出する', () => {
@@ -49,6 +81,16 @@ describe('chart provenance manifest', () => {
     });
     assert.equal(result.verdict, 'valid');
     assert.deepEqual(result.rankingKeys, ['metric-a', 'metric-b', 'metric-c']);
+  });
+
+  it('derived sourceのconstituentsをranking参照として抽出する', () => {
+    const result = inspectChartSourceManifest({
+      kind: 'derived',
+      formula: 'a - b',
+      constituents: { a: 'metric-a', b: 'metric-b' },
+    });
+    assert.equal(result.verdict, 'valid');
+    assert.deepEqual(result.rankingKeys, ['metric-a', 'metric-b']);
   });
 
   it('scatter sourceは2軸の参照を要求する', () => {
@@ -75,6 +117,16 @@ describe('chart provenance manifest', () => {
         inputs: [{ statsDataId: '0003445758' }],
       }).statsDataIds,
       ['0000010102', '0000010202', '0003445758']
+    );
+  });
+
+  it('直下fieldとR2 pathからstats metric参照を抽出する', () => {
+    assert.deepEqual(
+      extractChartSourceReferences({
+        metricKey: 'metric-a',
+        source: 'r2:app/stats/metric-b/values.json',
+      }).metricKeys,
+      ['metric-a', 'metric-b']
     );
   });
 

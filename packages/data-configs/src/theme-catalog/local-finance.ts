@@ -63,6 +63,16 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "role": "secondary"
     },
     {
+      "rankingKey": "assistance-expenditure-ratio-pref-finance",
+      "shortLabel": "扶助費割合",
+      "role": "context"
+    },
+    {
+      "rankingKey": "investment-expenditure-ratio-pref-finance",
+      "shortLabel": "投資的経費割合",
+      "role": "context"
+    },
+    {
       "rankingKey": "welfare-expenditure-ratio-pref-finance",
       "shortLabel": "民生費割合",
       "role": "secondary"
@@ -104,10 +114,11 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "kpi-card",
       "title": "財政力指数",
       "componentProps": {
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D2101"
-        }
+        "seriesRefs": [
+          {
+            "metricKey": "fiscal-strength-index-prefecture"
+          }
+        ]
       },
       "relatedRankingKeys": [
         "fiscal-strength-index-prefecture"
@@ -150,10 +161,11 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "kpi-card",
       "title": "実質公債費比率",
       "componentProps": {
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D2111"
-        },
+        "seriesRefs": [
+          {
+            "metricKey": "real-public-debt-service-ratio"
+          }
+        ],
         "unit": "％"
       },
       "relatedRankingKeys": [
@@ -173,10 +185,11 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "kpi-card",
       "title": "将来負担比率",
       "componentProps": {
-        "estatParams": {
-          "statsDataId": "0000010104",
-          "cdCat01": "D2112"
-        },
+        "seriesRefs": [
+          {
+            "metricKey": "future-burden-ratio"
+          }
+        ],
         "unit": "％"
       },
       "relatedRankingKeys": [
@@ -196,14 +209,12 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "財政力指数・経常収支比率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010104",
-            "cdCat01": "D2101"
+            "metricKey": "fiscal-strength-index-prefecture"
           },
           {
-            "statsDataId": "0000010104",
-            "cdCat01": "D2103"
+            "metricKey": "current-balance-ratio"
           }
         ],
         "labels": [
@@ -233,22 +244,21 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "composition-chart",
       "title": "歳入構成（地方税・交付税・国庫支出金）",
       "componentProps": {
-        "statsDataId": "0000010204",
-        "segments": [
+        "seriesRefs": [
           {
-            "code": "#D0210101",
-            "label": "地方税",
-            "color": "population"
+            "metricKey": "local-tax-ratio-pref-finance",
+            "label": "地方税割合",
+            "colorRole": "population"
           },
           {
-            "code": "#D0210201",
-            "label": "地方交付税",
-            "color": "series-6"
+            "metricKey": "local-allocation-tax-ratio-pref-finance",
+            "label": "交付税割合",
+            "colorRole": "series-6"
           },
           {
-            "code": "#D0210301",
-            "label": "国庫支出金",
-            "color": "special"
+            "metricKey": "national-treasury-disbursement-ratio-pref-finance",
+            "label": "国庫支出金割合",
+            "colorRole": "special"
           }
         ]
       },
@@ -271,27 +281,26 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "composition-chart",
       "title": "歳出構成（目的別）",
       "componentProps": {
-        "statsDataId": "0000010204",
-        "segments": [
+        "seriesRefs": [
           {
-            "code": "#D0320101",
-            "label": "人件費",
-            "color": "danger"
+            "metricKey": "personnel-expenditure-ratio-pref-finance",
+            "label": "人件費割合",
+            "colorRole": "danger"
           },
           {
-            "code": "#D0310301",
-            "label": "民生費",
-            "color": "female"
+            "metricKey": "welfare-expenditure-ratio-pref-finance",
+            "label": "民生費割合",
+            "colorRole": "female"
           },
           {
-            "code": "#D0311501",
-            "label": "教育費",
-            "color": "population"
+            "metricKey": "education-expenditure-ratio-pref-finance",
+            "label": "教育費割合",
+            "colorRole": "population"
           },
           {
-            "code": "#D0311201",
-            "label": "土木費",
-            "color": "series-12"
+            "metricKey": "public-works-expenditure-ratio-pref-finance",
+            "label": "土木費割合",
+            "colorRole": "series-12"
           }
         ]
       },
@@ -315,14 +324,12 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "1人当たり住民税・課税対象所得の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010204",
-            "cdCat01": "#D0220103"
+            "metricKey": "per-capita-inhabitant-tax-pref-municipal"
           },
           {
-            "statsDataId": "0000010204",
-            "cdCat01": "#D02206"
+            "metricKey": "per-taxpayer-taxable-income"
           }
         ],
         "labels": [
@@ -352,14 +359,12 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "実質公債費比率・将来負担比率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010104",
-            "cdCat01": "D2111"
+            "metricKey": "real-public-debt-service-ratio"
           },
           {
-            "statsDataId": "0000010104",
-            "cdCat01": "D2112"
+            "metricKey": "future-burden-ratio"
           }
         ],
         "labels": [
@@ -389,18 +394,15 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "歳入構造比率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010204",
-            "cdCat01": "#D0210101"
+            "metricKey": "local-tax-ratio-pref-finance"
           },
           {
-            "statsDataId": "0000010204",
-            "cdCat01": "#D0210201"
+            "metricKey": "local-allocation-tax-ratio-pref-finance"
           },
           {
-            "statsDataId": "0000010204",
-            "cdCat01": "#D0210301"
+            "metricKey": "national-treasury-disbursement-ratio-pref-finance"
           }
         ],
         "labels": [
@@ -433,10 +435,9 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "1人当たり歳出決算総額の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010204",
-            "cdCat01": "#D0330103"
+            "metricKey": "per-capita-total-expenditure-pref-municipal"
           }
         ],
         "labels": [
@@ -463,10 +464,9 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "納税義務者割合の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010204",
-            "cdCat01": "#D02207"
+            "metricKey": "taxpayer-ratio-per-pref-resident"
           }
         ],
         "labels": [
@@ -493,33 +493,28 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "性質別歳出割合の推移（人件費・扶助費・投資的経費）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010204",
-            "cdCat01": "#D0320101"
+            "metricKey": "personnel-expenditure-ratio-pref-finance",
+            "label": "人件費割合",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0000010204",
-            "cdCat01": "#D0320201"
+            "metricKey": "assistance-expenditure-ratio-pref-finance",
+            "label": "扶助費割合",
+            "colorRole": "danger"
           },
           {
-            "statsDataId": "0000010204",
-            "cdCat01": "#D0140201"
+            "metricKey": "investment-expenditure-ratio-pref-finance",
+            "label": "投資的経費割合",
+            "colorRole": "improve"
           }
-        ],
-        "labels": [
-          "人件費割合",
-          "扶助費割合",
-          "投資的経費割合"
-        ],
-        "seriesColors": [
-          "population",
-          "danger",
-          "improve"
         ]
       },
       "relatedRankingKeys": [
-        "personnel-expenditure-ratio-pref-finance"
+        "personnel-expenditure-ratio-pref-finance",
+        "assistance-expenditure-ratio-pref-finance",
+        "investment-expenditure-ratio-pref-finance"
       ],
       "sourceName": "総務省「地方財政状況調査」",
       "sourceLink": null,

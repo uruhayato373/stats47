@@ -4,6 +4,7 @@ export const highSchoolCount: MetricConfig = {
   "key": "high-school-count",
   "title": "高等学校数",
   "subtitle": "総数",
+  "description": "都道府県内に所在する高等学校の総数。後期中等教育施設の供給規模を示す。",
   "unit": "校",
   "category": "educationsports",
   "source": {

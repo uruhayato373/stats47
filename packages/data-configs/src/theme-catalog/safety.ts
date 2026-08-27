@@ -144,16 +144,14 @@ export const SAFETY_CATALOG: ThemeCatalog = {
       "componentType": "mixed-chart",
       "title": "刑法犯認知件数と検挙率の推移",
       "componentProps": {
-        "columnParams": [
+        "columnSeriesRefs": [
           {
-            "statsDataId": "0000010211",
-            "cdCat01": "#K06101"
+            "metricKey": "penal-code-offenses-recognized-per-1000"
           }
         ],
-        "lineParams": [
+        "lineSeriesRefs": [
           {
-            "statsDataId": "0000010211",
-            "cdCat01": "#K06201"
+            "metricKey": "criminal-arrest-rate"
           }
         ],
         "columnLabels": [
@@ -189,14 +187,12 @@ export const SAFETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "交通事故 発生件数と負傷者数の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010111",
-            "cdCat01": "K3101"
+            "metricKey": "traffic-accident-count"
           },
           {
-            "statsDataId": "0000010111",
-            "cdCat01": "K3104"
+            "metricKey": "traffic-accident-injuries"
           }
         ],
         "labels": [
@@ -226,14 +222,12 @@ export const SAFETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "火災出火件数と救急出動件数の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010211",
-            "cdCat01": "#K02101"
+            "metricKey": "building-fire-count-per-100-thousand-people"
           },
           {
-            "statsDataId": "0000010209",
-            "cdCat01": "#I11201"
+            "metricKey": "annual-emergency-dispatches-per-1000"
           }
         ],
         "labels": [
@@ -263,14 +257,12 @@ export const SAFETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "自殺率と不慮の事故死亡率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010209",
-            "cdCat01": "#I06201"
+            "metricKey": "suicides-per-100k"
           },
           {
-            "statsDataId": "0000010211",
-            "cdCat01": "#K08101"
+            "metricKey": "accidental-deaths-per-100k"
           }
         ],
         "labels": [
@@ -300,33 +292,32 @@ export const SAFETY_CATALOG: ThemeCatalog = {
       "componentType": "donut-chart",
       "title": "罪種別 刑法犯認知件数の内訳（2023年）",
       "componentProps": {
-        "statsDataId": "0000010111",
         "topN": 5,
-        "categories": [
+        "seriesRefs": [
           {
-            "code": "K420103",
+            "metricKey": "theft-offenses-recognized",
             "label": "窃盗犯",
-            "color": "population"
+            "colorRole": "population"
           },
           {
-            "code": "K420102",
+            "metricKey": "violent-crime-per-100k",
             "label": "粗暴犯",
-            "color": "count"
+            "colorRole": "count"
           },
           {
-            "code": "K420104",
+            "metricKey": "intellectual-crime-per-100k",
             "label": "知能犯",
-            "color": "special"
+            "colorRole": "special"
           },
           {
-            "code": "K420105",
+            "metricKey": "theme-prostitution-crime-recognition-count",
             "label": "風俗犯",
-            "color": "series-6"
+            "colorRole": "series-6"
           },
           {
-            "code": "K420101",
+            "metricKey": "serious-crime-per-100k",
             "label": "凶悪犯",
-            "color": "danger"
+            "colorRole": "danger"
           }
         ]
       },
@@ -347,18 +338,17 @@ export const SAFETY_CATALOG: ThemeCatalog = {
       "componentType": "donut-chart",
       "title": "火災による死傷者の内訳（2023年）",
       "componentProps": {
-        "statsDataId": "0000010111",
         "topN": 2,
-        "categories": [
+        "seriesRefs": [
           {
-            "code": "K2111",
+            "metricKey": "theme-fire-injured-count",
             "label": "火災負傷者",
-            "color": "count"
+            "colorRole": "count"
           },
           {
-            "code": "K2110",
+            "metricKey": "fire-deaths-per-100k",
             "label": "火災死亡者",
-            "color": "danger"
+            "colorRole": "danger"
           }
         ]
       },

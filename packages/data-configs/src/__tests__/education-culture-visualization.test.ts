@@ -49,7 +49,11 @@ describe("education-culture visualization composition", () => {
       ({ componentKey }) => componentKey === "theme-edu-higher-education-trend",
     );
 
-    expect(chart?.componentProps.estatParams).toHaveLength(2);
+    expect(chart?.componentProps.seriesRefs).toEqual([
+      { metricKey: "final-education-university-graduate-school-ratio" },
+      { metricKey: "in-pref-university-entrance-ratio-by-highschool-origin" },
+    ]);
+    expect(chart?.componentProps.estatParams).toBeUndefined();
     expect(chart?.componentProps.labels).toEqual([
       "大学・大学院卒の割合",
       "県内大学進学率",

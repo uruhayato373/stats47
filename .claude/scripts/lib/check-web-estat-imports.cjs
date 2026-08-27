@@ -35,19 +35,8 @@ const SOURCE_EXTENSIONS = [
   '.cjs',
 ];
 
-/** Original direct static-import baseline (2026-08-13). Do not add entries. */
-const ALLOWLIST = [
-  'components/stat-charts/adapters/toBarChartData.ts',
-  'components/stat-charts/adapters/toKpiCardData.ts',
-  'components/stat-charts/adapters/toStatsTableData.ts',
-  'components/stat-charts/adapters/toSunburstData.ts',
-  'components/stat-charts/services/fetchEstatData.ts',
-  'components/stat-charts/utils/computeSharedYDomain.ts',
-  'components/stat-charts/utils/computeYAxisDomain.ts',
-  'features/theme-dashboard/actions/fetch-indicator-for-year.ts',
-  'features/theme-dashboard/actions/fetch-metric-timeseries.ts',
-  'features/theme-dashboard/actions/fetch-population-pyramid.ts',
-];
+/** Migration complete: production runtime e-Stat dependencies are forbidden without exception. */
+const ALLOWLIST = [];
 
 function normalize(file) {
   return file.split(path.sep).join('/');

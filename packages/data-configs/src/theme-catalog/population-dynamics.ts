@@ -1,4 +1,5 @@
 import type { ThemeCatalog } from "./types";
+import { buildPopulationPyramidSeriesRefs } from "./population-pyramid-deps";
 
 export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
   "key": "population-dynamics",
@@ -102,6 +103,26 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "rankingKey": "day-time-population-ratio",
       "shortLabel": "昼夜間人口比率",
       "role": "context"
+    },
+    {
+      "rankingKey": "births",
+      "shortLabel": "出生数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "death-count",
+      "shortLabel": "死亡数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "movers-in",
+      "shortLabel": "転入者数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "movers-out",
+      "shortLabel": "転出者数",
+      "role": "context"
     }
   ],
   "metricGroups": [
@@ -124,29 +145,22 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "自然増減：出生数と死亡数",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010101",
-            "cdCat01": "A4101"
+            "metricKey": "births",
+            "label": "出生数",
+            "colorRole": "improve"
           },
           {
-            "statsDataId": "0000010101",
-            "cdCat01": "A4200"
+            "metricKey": "death-count",
+            "label": "死亡数",
+            "colorRole": "neutral"
           }
-        ],
-        "labels": [
-          "出生数",
-          "死亡数"
-        ],
-        "seriesColors": [
-          "improve",
-          "neutral"
         ]
       },
       "relatedRankingKeys": [
-        "natural-increase-rate",
-        "crude-birth-rate",
-        "crude-death-rate"
+        "births",
+        "death-count"
       ],
       "sourceName": "総務省 社会・人口統計体系（人口動態統計）",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
@@ -162,27 +176,22 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "社会増減：転入者数と転出者数",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010101",
-            "cdCat01": "A5103"
+            "metricKey": "movers-in",
+            "label": "転入者数",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0000010101",
-            "cdCat01": "A5104"
+            "metricKey": "movers-out",
+            "label": "転出者数",
+            "colorRole": "count"
           }
-        ],
-        "labels": [
-          "転入者数",
-          "転出者数"
-        ],
-        "seriesColors": [
-          "population",
-          "count"
         ]
       },
       "relatedRankingKeys": [
-        "social-increase-rate"
+        "movers-in",
+        "movers-out"
       ],
       "sourceName": "総務省 社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
@@ -198,25 +207,23 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "componentType": "composition-chart",
       "title": "人口構造：年齢3区分の推移",
       "componentProps": {
-        "statsDataId": "0000010101",
-        "segments": [
+        "seriesRefs": [
           {
-            "code": "A1301",
+            "metricKey": "theme-age-composition-young-population",
             "label": "年少人口(0〜14歳)",
-            "color": "improve"
+            "colorRole": "improve"
           },
           {
-            "code": "A1302",
+            "metricKey": "theme-age-composition-production-age-population",
             "label": "生産年齢人口(15〜64歳)",
-            "color": "population"
+            "colorRole": "population"
           },
           {
-            "code": "A1303",
+            "metricKey": "theme-age-composition-elderly-population",
             "label": "老年人口(65歳以上)",
-            "color": "count"
+            "colorRole": "count"
           }
-        ],
-        "totalCode": "A1101"
+        ]
       },
       "relatedRankingKeys": [
         "ratio-65-plus",
@@ -236,7 +243,9 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "componentKey": "theme-population-pyramid",
       "componentType": "pyramid-chart",
       "title": "人口構造：人口ピラミッド",
-      "componentProps": {},
+      "componentProps": {
+        "seriesRefs": buildPopulationPyramidSeriesRefs()
+      },
       "relatedRankingKeys": [
         "total-population",
         "ratio-65-plus"

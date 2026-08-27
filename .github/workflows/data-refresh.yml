@@ -203,9 +203,9 @@ jobs:
       # recipe導入前に公開された31 payloadだけを、2026-08-27に固定した行SHA-256と
       # 完全一致した場合に限ってlocal stagingへ移す。値とgeneratedAtは変えない。
       # 通常runでは動かさず、request/inputで明示した一回限りの移行に限定する。
-      - name: 🧬 Migrate reviewed legacy recipe metadata
+      - name: 🧬 Migrate reviewed compatibility recipe metadata
         if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.resolve.outputs.migrate_legacy_recipes == 'true'
-        run: npm run migrate:legacy-recipes:stage --workspace packages/stats-r2
+        run: npm run migrate:reviewed-recipes:stage --workspace packages/stats-r2
 
       # 観測値を R2 に push (app/stats)。schedule 実行 (inputs.dry_run='') では push される。
       - name: ☁️ Push observations to R2 (app/stats)

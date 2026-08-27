@@ -1,4 +1,5 @@
 import type { ThemeCatalog } from "./types";
+import { buildPopulationPyramidSeriesRefs } from "./population-pyramid-deps";
 
 export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
   "key": "aging-society",
@@ -25,6 +26,11 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "crude-birth-rate",
       "shortLabel": "粗出生率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "crude-death-rate",
+      "shortLabel": "死亡率",
       "role": "context"
     },
     {
@@ -124,14 +130,12 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "出生率・高齢化率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A05202"
+            "metricKey": "crude-birth-rate"
           },
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A03503"
+            "metricKey": "ratio-65-plus"
           }
         ],
         "labels": [
@@ -161,14 +165,12 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "婚姻率・離婚率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A06601"
+            "metricKey": "marriages-per-total-population"
           },
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A06602"
+            "metricKey": "divorces-per-total-population"
           }
         ],
         "labels": [
@@ -198,14 +200,12 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "出生数・死亡数の推移（自然増減）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010101",
-            "cdCat01": "A4101"
+            "metricKey": "births"
           },
           {
-            "statsDataId": "0000010101",
-            "cdCat01": "A4200"
+            "metricKey": "death-count"
           }
         ],
         "labels": [
@@ -235,10 +235,9 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "後期高齢者医療費(1人当たり)の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010210",
-            "cdCat01": "#J05208"
+            "metricKey": "late-elderly-medical-expense-per-insured"
           }
         ],
         "labels": [
@@ -265,27 +264,22 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "出生率・死亡率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010101",
-            "cdCat01": "A4101"
+            "metricKey": "crude-birth-rate",
+            "label": "粗出生率",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0000010101",
-            "cdCat01": "A4201"
+            "metricKey": "crude-death-rate",
+            "label": "死亡率",
+            "colorRole": "danger"
           }
-        ],
-        "labels": [
-          "出生率",
-          "死亡率"
-        ],
-        "seriesColors": [
-          "population",
-          "danger"
         ]
       },
       "relatedRankingKeys": [
-        "crude-birth-rate"
+        "crude-birth-rate",
+        "crude-death-rate"
       ],
       "sourceName": "人口動態統計",
       "sourceLink": null,
@@ -301,25 +295,23 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "composition-chart",
       "title": "年齢3区分人口構成の推移",
       "componentProps": {
-        "statsDataId": "0000010101",
-        "segments": [
+        "seriesRefs": [
           {
-            "code": "A1301",
+            "metricKey": "theme-age-composition-young-population",
             "label": "年少人口(0〜14歳)",
-            "color": "improve"
+            "colorRole": "improve"
           },
           {
-            "code": "A1302",
+            "metricKey": "theme-age-composition-production-age-population",
             "label": "生産年齢人口(15〜64歳)",
-            "color": "population"
+            "colorRole": "population"
           },
           {
-            "code": "A1303",
+            "metricKey": "theme-age-composition-elderly-population",
             "label": "老年人口(65歳以上)",
-            "color": "count"
+            "colorRole": "count"
           }
-        ],
-        "totalCode": "A1101"
+        ]
       },
       "relatedRankingKeys": [
         "ratio-65-plus"
@@ -337,7 +329,9 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentKey": "theme-population-pyramid",
       "componentType": "pyramid-chart",
       "title": "人口ピラミッド",
-      "componentProps": {},
+      "componentProps": {
+        "seriesRefs": buildPopulationPyramidSeriesRefs()
+      },
       "relatedRankingKeys": [
         "total-population"
       ],
@@ -394,18 +388,15 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "高齢世帯の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A06301"
+            "metricKey": "household-ratio-with-65plus"
           },
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A06304"
+            "metricKey": "single-person-household-old-population-ratio"
           },
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A06302"
+            "metricKey": "elderly-couple-only-household-ratio"
           }
         ],
         "labels": [
@@ -415,7 +406,7 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
         ],
         "yAxisConfig": {
           "mode": "sync"
-        },
+        }
       },
       "relatedRankingKeys": [
         "household-ratio-with-65plus",
@@ -475,10 +466,9 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "厚生年金受給権者年金総額の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010110",
-            "cdCat01": "J5104"
+            "metricKey": "pension-benefit-total"
           }
         ],
         "labels": [
@@ -541,10 +531,9 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "ボランティア活動の年間行動者率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010207",
-            "cdCat01": "#G04101"
+            "metricKey": "volunteer-activity-annual-participation-rate-15plus"
           }
         ],
         "labels": [
@@ -571,14 +560,12 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "年少人口指数と老年人口指数の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A03401"
+            "metricKey": "young-population-index"
           },
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A03402"
+            "metricKey": "old-population-index"
           }
         ],
         "labels": [

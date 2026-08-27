@@ -39,27 +39,22 @@ export const RAILWAY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "鉄道輸送人員の推移（JR・民鉄）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3704"
+            "metricKey": "jr-passenger-transport",
+            "label": "JR輸送人員",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3705"
+            "metricKey": "private-railway-passenger-transport",
+            "label": "民鉄輸送人員",
+            "colorRole": "count"
           }
-        ],
-        "labels": [
-          "JR",
-          "民鉄"
-        ],
-        "seriesColors": [
-          "population",
-          "count"
         ]
       },
       "relatedRankingKeys": [
-        "jr-passenger-transport"
+        "jr-passenger-transport",
+        "private-railway-passenger-transport"
       ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
@@ -75,10 +70,9 @@ export const RAILWAY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "JR貨物発送量の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3702"
+            "metricKey": "jr-freight-shipment"
           }
         ],
         "labels": [

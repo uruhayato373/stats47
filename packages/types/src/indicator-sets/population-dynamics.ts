@@ -69,6 +69,26 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
       "rankingKey": "day-time-population-ratio",
       "shortLabel": "昼夜間人口比率",
       "role": "context"
+    },
+    {
+      "rankingKey": "births",
+      "shortLabel": "出生数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "death-count",
+      "shortLabel": "死亡数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "movers-in",
+      "shortLabel": "転入者数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "movers-out",
+      "shortLabel": "転出者数",
+      "role": "context"
     }
   ],
   "keywords": [

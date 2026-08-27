@@ -1,3 +1,5 @@
+import { parseStatSeriesRefs } from "@stats47/data-configs/theme-catalog";
+
 import type { PageComponent } from "@/components/stat-charts";
 
 import {
@@ -47,7 +49,9 @@ export async function loadThemeChartResult(chart: PageComponent, prefCode: strin
     }
 
     if (chart.componentType === "pyramid-chart") {
-      const data = await fetchPopulationPyramidAction(prefCode);
+      const seriesRefs = parseStatSeriesRefs(chart.componentProps.seriesRefs);
+      if (!seriesRefs) return { state: "no-data" };
+      const data = await fetchPopulationPyramidAction(prefCode, seriesRefs);
       return data
         ? {
             state: "ready",

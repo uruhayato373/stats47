@@ -14,9 +14,9 @@ describe("theme metric content coverage", () => {
       METRICS_REGISTRY,
     );
 
-    expect(coverage.themeReferencedKeys).toHaveLength(136);
+    expect(coverage.themeReferencedKeys).toHaveLength(152);
     expect(coverage.missingDescriptionKeys).toHaveLength(0);
-    expect(coverage.populatedNoteKeys).toHaveLength(80);
+    expect(coverage.populatedNoteKeys).toHaveLength(78);
     expect(coverage.duplicateDescriptionGroups).toEqual([]);
   });
 

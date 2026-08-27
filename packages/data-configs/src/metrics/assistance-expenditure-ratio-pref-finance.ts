@@ -4,6 +4,7 @@ export const assistanceExpenditureRatioPrefFinance: MetricConfig = {
   "key": "assistance-expenditure-ratio-pref-finance",
   "title": "扶助費割合",
   "subtitle": "都道府県財政",
+  "description": "都道府県の歳出総額に占める扶助費の割合。社会保障関係の給付的経費が財政規模に対してどの程度あるかを示す。",
   "unit": "％",
   "category": "socialsecurity",
   "source": {
