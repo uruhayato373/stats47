@@ -150,7 +150,7 @@ theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一
 | 役割 | モデル |
 |---|---|
 | Stage 1 収集 (NotebookLM/競合/GSC) | theme-researcher が tool を直接実行 |
-| Stage 2 実在検証 (estat-researcher) | sonnet (既存) |
+| Stage 2 実在検証 | theme-researcher が inline tool で確認 |
 | 統合・提案文書化 (theme-researcher 本体) | sonnet |
 | 提案採否・カタログ設計 | メインセッション (上位モデル) |
 

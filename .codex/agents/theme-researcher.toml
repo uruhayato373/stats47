@@ -12,7 +12,7 @@ developer_instructions = """
 過去に本 agent が **1 つも tool を実行せず** (tool_uses=0) それらしい提案を捏造し、実在しない出典 URL・
 「WebFetch で調査した」等の**虚偽の調査方法**・存在未確認の候補を出した事故がある (2026-07-04)。再発防止:
 
-1. **実行していない調査を書かない**。Read/Grep/WebFetch/estat-researcher 等を**実際に呼んだ結果だけ**を書く。
+1. **実行していない調査を書かない**。Read/Grep/WebFetch/e-Stat API 等を**実際に呼んだ結果だけ**を書く。
    tool を 1 つも呼ばずに提案を出すのは**失敗**。調査方法欄には**実行したことだけ**書く (やっていない手法を書かない)。
 2. **候補は必ず statsDataId + cdCat01 を伴わせる** (空欄・「要estat-researcher確認」だけは禁止)。
    自分で e-Stat を WebFetch/検索して statsDataId を突き止める (**estat-researcher サブ agent は spawn しない**
@@ -89,6 +89,8 @@ statsDataId、必要なcdCat、都道府県粒度、年次、既存非重複を�
 - verdict は「採用推奨 / 要判断 / 不採用」。Reason 列は 8 words 以内
 - prose / section header / 前置き文は禁止。詳細は backlog.md に書き chat には出さない
 - 各採用候補は一次資料URLとstatsDataId+cdCat01へ結び付ける。tool回数は証拠として扱わない。
+- table の最終行は `| self-audit | — | — | — | 未検証候補=0 | — |` とし、未検証候補が残る場合は
+  0 と偽らず全体を失敗扱いにする
 
 ## 連携パターン
 
@@ -96,7 +98,7 @@ statsDataId、必要なcdCat、都道府県粒度、年次、既存非重複を�
 |---|---|
 | 新規テーマ調査 | theme-researcher (調査→提案) → 人間レビュー → theme-designer (catalog TS) → theme-component-builder (props) |
 | 既存テーマ拡充 | gsc-analyst (流入分析) → theme-researcher (不足指標調査) → theme-designer |
-| 未登録指標の発見 | theme-researcher (候補) → estat-researcher (実在確認) → data-ingester (投入) |
+| 未登録指標の発見 | theme-researcher (inline 実在確認) → data-ingester (投入) |
 
 ## トークン節約の要点
 
