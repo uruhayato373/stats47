@@ -251,6 +251,35 @@ export function inspectChartSourceManifest(sourceData) {
     };
   }
 
+  const hasSurveyScope = Object.hasOwn(sourceData, 'surveyScope');
+  const hasSurveyScopeReason = Object.hasOwn(sourceData, 'surveyScopeReason');
+  if (hasSurveyScope && sourceData.surveyScope !== 'not-applicable') {
+    return {
+      verdict: 'invalid',
+      code: 'invalid-survey-scope',
+      detail: 'surveyScope は not-applicable のみ指定できる',
+      kind,
+      rankingKeys: [],
+      metricKeys: [],
+    };
+  }
+  if (
+    (hasSurveyScope || hasSurveyScopeReason) &&
+    (sourceData.surveyScope !== 'not-applicable' ||
+      typeof sourceData.surveyScopeReason !== 'string' ||
+      sourceData.surveyScopeReason.trim().length < 10)
+  ) {
+    return {
+      verdict: 'invalid',
+      code: 'invalid-survey-scope-reason',
+      detail:
+        'surveyScope: not-applicable には10文字以上の surveyScopeReason が必要',
+      kind,
+      rankingKeys: [],
+      metricKeys: [],
+    };
+  }
+
   const spec = CHART_SOURCE_KIND_SPECS[kind];
   if (!spec) {
     return {

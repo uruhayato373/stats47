@@ -282,6 +282,8 @@ export function extractBlogChartSourceReferences(sourceData: unknown): BlogChart
 
   const nested = nestedRecords(sourceData);
   const rankingKeys = unique([
+    ...splitReferenceValues(sourceData.metricKey),
+    ...splitReferenceValues(sourceData.metricKeys),
     ...splitReferenceValues(sourceData.rankingKey),
     ...splitReferenceValues(sourceData.rankingKeys),
     ...splitReferenceValues(sourceData.xKey),
@@ -289,12 +291,15 @@ export function extractBlogChartSourceReferences(sourceData: unknown): BlogChart
     ...splitReferenceValues(sourceData.xRankingKey),
     ...splitReferenceValues(sourceData.yRankingKey),
     ...nested.flatMap((item) => splitReferenceValues(item.rankingKey)),
+    ...nested.flatMap((item) => splitReferenceValues(item.metricKey)),
     ...(Array.isArray(sourceData.derivedFrom)
       ? sourceData.derivedFrom.flatMap((item) =>
           typeof item === "string" ? splitReferenceValues(item) : [],
         )
       : []),
     ...[...JSON.stringify(sourceData).matchAll(/(?:r2:)?app\/ranking\/([^/"\s{}]+)\/values\.json/g)]
+      .map((match) => match[1]),
+    ...[...JSON.stringify(sourceData).matchAll(/(?:r2:)?app\/stats\/([^/"\s{}]+)\/values\.json/g)]
       .map((match) => match[1]),
   ]).filter((item) => !item.includes("/") && !item.includes(":"));
 
@@ -332,6 +337,21 @@ export function resolveBlogChartSurveyTaxonomy(
   }
   const kind = typeof sourceData.kind === "string" ? sourceData.kind : null;
   const references = extractBlogChartSourceReferences(sourceData);
+  if (
+    sourceData.surveyScope === "not-applicable" &&
+    typeof sourceData.surveyScopeReason === "string" &&
+    sourceData.surveyScopeReason.trim().length >= 10
+  ) {
+    return {
+      kind,
+      status: "not-applicable",
+      surveys: [],
+      references,
+      unresolvedMetricKeys: [],
+      unresolvedEstatReferences: [],
+      unresolvedSourceNames: [],
+    };
+  }
   if (kind && NON_SURVEY_BLOG_KINDS.has(kind)) {
     return {
       kind,

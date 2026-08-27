@@ -140,6 +140,43 @@ describe('chart provenance manifest', () => {
     assert.equal(result.code, 'self-declared-incomplete');
   });
 
+  it('統計調査を原典としない派生データは理由付きで明示できる', () => {
+    const result = inspectChartSourceManifest({
+      kind: 'derived',
+      source: 'r2:app/gis/medical-facilities.json',
+      surveyScope: 'not-applicable',
+      surveyScopeReason:
+        '国土数値情報のGISデータセットを空間集計した値で、統計調査を原典としないため',
+    });
+    assert.equal(result.verdict, 'valid');
+  });
+
+  it('surveyScopeの未知値と理由欠落を公開可能と判定しない', () => {
+    const unknown = inspectChartSourceManifest({
+      kind: 'derived',
+      source: 'r2:app/gis/medical-facilities.json',
+      surveyScope: 'external',
+    });
+    assert.equal(unknown.verdict, 'invalid');
+    assert.equal(unknown.code, 'invalid-survey-scope');
+
+    const noReason = inspectChartSourceManifest({
+      kind: 'derived',
+      source: 'r2:app/gis/medical-facilities.json',
+      surveyScope: 'not-applicable',
+    });
+    assert.equal(noReason.verdict, 'invalid');
+    assert.equal(noReason.code, 'invalid-survey-scope-reason');
+
+    const orphanReason = inspectChartSourceManifest({
+      kind: 'derived',
+      source: 'r2:app/gis/medical-facilities.json',
+      surveyScopeReason: '統計調査を原典としないため対象外とする',
+    });
+    assert.equal(orphanReason.verdict, 'invalid');
+    assert.equal(orphanReason.code, 'invalid-survey-scope-reason');
+  });
+
   it('未知kindを検出する', () => {
     const result = inspectChartSourceManifest({
       kind: 'future-source',

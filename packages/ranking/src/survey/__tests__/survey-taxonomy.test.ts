@@ -76,6 +76,18 @@ describe("resolveSurveyTaxonomy", () => {
     expect(result.resolvedSourceNames).toEqual(["過去の気象データ"]);
     expect(result.unresolvedSourceNames).toEqual(["存在しない資料源"]);
   });
+
+  it.each([
+    ["avg-salary-all-prefecture", "local-public-employee-salary"],
+    ["public-phone-count", "telecommunications-service-contract-report"],
+  ])("metric %s を正式な master survey %s へ解決する", (metricKey, surveyId) => {
+    const result = resolveSurveyTaxonomy(
+      { metricKeys: [metricKey] },
+      METRICS_REGISTRY,
+    );
+    expect(result.surveys.map((survey) => survey.id)).toContain(surveyId);
+    expect(result.unresolvedMetricKeys).toEqual([]);
+  });
 });
 
 describe("resolveThemeSurveyTaxonomy", () => {
@@ -137,10 +149,12 @@ describe("blog chart taxonomy", () => {
     const refs = extractBlogChartSourceReferences({
       kind: "derived",
       rankingKey: "a + b",
-      inputs: [{ rankingKey: "c", statsDataId: "0000010103", cdCat01: "#A03506" }],
+      metricKey: "metric-e",
+      inputs: [{ rankingKey: "c", metricKey: "metric-f", statsDataId: "0000010103", cdCat01: "#A03506" }],
       source: "r2:app/ranking/d/values.json",
+      comparisonSource: "r2:app/stats/metric-g/values.json",
     });
-    expect(refs.rankingKeys).toEqual(["a", "b", "c", "d"]);
+    expect(refs.rankingKeys).toEqual(["metric-e", "a", "b", "c", "metric-f", "d", "metric-g"]);
     expect(refs.estatReferences).toEqual([
       { statsDataId: "0000010103", cdCat01: "#A03506" },
     ]);
@@ -178,6 +192,43 @@ describe("blog chart taxonomy", () => {
     );
     expect(result.status).toBe("resolved");
     expect(result.surveys.map((survey) => survey.id)).toEqual(["kakei-chousa"]);
+  });
+
+  it("metric source を survey へ接続する", () => {
+    const result = resolveBlogChartSurveyTaxonomy(
+      {
+        kind: "metric",
+        metricKey: "volunteer-activity-international-cooperation-15plus",
+        source: "r2:app/stats/volunteer-activity-international-cooperation-15plus/values.json",
+      },
+      METRICS_REGISTRY,
+    );
+    expect(result.status).toBe("resolved");
+    expect(result.surveys.map((survey) => survey.id)).toEqual(["social-life-basic-survey"]);
+  });
+
+  it("統計調査を原典としないGIS派生は理由付き契約だけを対象外にする", () => {
+    const explicit = resolveBlogChartSurveyTaxonomy(
+      {
+        kind: "derived",
+        source: "r2:app/gis/medical-facilities.json",
+        surveyScope: "not-applicable",
+        surveyScopeReason:
+          "国土数値情報のGISデータセットを空間集計した値で、統計調査を原典としないため",
+      },
+      METRICS_REGISTRY,
+    );
+    expect(explicit.status).toBe("not-applicable");
+
+    const missingReason = resolveBlogChartSurveyTaxonomy(
+      {
+        kind: "derived",
+        source: "r2:app/gis/medical-facilities.json",
+        surveyScope: "not-applicable",
+      },
+      METRICS_REGISTRY,
+    );
+    expect(missingReason.status).toBe("missing-lineage");
   });
 
   it("authored は survey 対象外、欠落 manifest は missing-lineage", () => {
