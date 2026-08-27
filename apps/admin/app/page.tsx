@@ -22,6 +22,11 @@ const SECTIONS = [
     desc: "ブログ SVG チャートをカタログ別に横断閲覧",
   },
   {
+    href: "/research",
+    title: "調査カタログ",
+    desc: "政府・自治体の公式ダッシュボード、指標、可視化、stats47テーマ接続を確認",
+  },
+  {
     href: "/revenue",
     title: "収益 (AdSense)",
     desc: "週次収益・RPM・内訳。実測は AdSense のみで他チャネルは未計測と明示する",
@@ -65,7 +70,7 @@ export default function HomePage() {
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {SECTIONS.map((section) => (
           <a
             key={section.href}

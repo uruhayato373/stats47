@@ -1,6 +1,6 @@
 ---
 name: research-theme-catalog
-description: テーマページ (/themes/*) の指標×チャート候補と白書由来の論点レンズを NotebookLM・Web競合・GSCから調査し、provenance付きで提案する。theme-researcher が実行。
+description: テーマページ (/themes/*) の指標×チャート候補と白書由来の論点レンズを NotebookLM・公式ダッシュボード・GSCから調査し、provenance付きで提案する。theme-researcher が実行。
 primary_agent: theme-researcher
 allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch
 ---
@@ -34,6 +34,10 @@ cat packages/data-configs/src/theme-catalog/<theme>.ts 2>/dev/null \
   || cat packages/types/src/indicator-sets/<theme>.ts   # legacy テーマ
 # 既存チャート
 cat apps/web/scripts/data/page-components/theme/<theme>.json
+
+# 公式ダッシュボードの既知ストーリーをテーマ別に抽出し、カタログ契約も確認
+npm run theme:dashboard-catalog:check
+npm run theme:dashboard-catalog:query -- <theme>
 ```
 
 ## Stage 1: 素材収集 (同一セッションの並列 tool call)
@@ -56,10 +60,23 @@ node .claude/scripts/notebooklm-cross-query.mjs \
   白書 PDF を `add-source` → **台帳 `reference/notebooks.md` を更新**する。
 - 白書カバレッジが無い/薄いテーマは system skill `deep-research` を**質問を絞って**代替に使う。
 
-### 1b. 競合ダッシュボード調査 (WebSearch / WebFetch)
+### 1b. 公式ダッシュボード調査 (catalog → WebSearch / WebFetch)
 
-todo-ran / RESAS / e-Stat ダッシュボード / uub の同テーマページを調べ、**採用されている指標と可視化形式**を抽出。
-`/design-theme-charts` の競合調査部と同じ観点。感情煽り路線には寄せない (信頼性×網羅性で差別化)。
+最初に `reference/public-dashboard-catalog.json` を `theme:dashboard-catalog:query -- <theme>` で絞り込み、RESAS、
+デジタル庁、e-Stat、農林水産省、国土交通省、政府地方創生、都道府県・市区町村が実際に採用している
+**政策上の問い・指標群・可視化形式・地理粒度**を確認する。WebSearch / WebFetch は、カタログに無い公式サイト、
+`status: partial`、180日超の記録、公式メニュー変更の確認に限定する。非公式サイトは補助比較に使えても
+カタログへ登録しない。
+
+この研究カタログは「何をどう見せるか」の発見・比較用であり、指標の実在、値、取得条件を保証しない。
+stats47 へ採用する前に Stage 2 の e-Stat / metric SSOT 照合を必ず行う。
+
+#### 公式ダッシュボード研究カタログの更新契約
+
+- 公式 HTTPS ページを実際に確認し、`verifiedAt` と `evidenceLevel` を更新する。推測 URL は登録しない。
+- 1 story は `question`、`indicatorFamilies`、`visualizations`、`geographyLevels`、`stats47ThemeKeys` まで記録する。
+- RESAS の公式メニュー増減は、40件の期待集合とカテゴリ件数を checker と同じ変更で更新する。
+- 更新後は `npm run theme:dashboard-catalog:test` と `npm run theme:dashboard-catalog:check` を実行する。
 
 ### 1c. GSC 検索需要 (API を再取得しない)
 
@@ -142,4 +159,5 @@ theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一
 - 規約: `.claude/rules/theme-catalog-standards.md`
 - agent: `.claude/agents/theme-researcher.md`
 - 白書台帳: `reference/notebooks.md`
+- 公式ダッシュボード研究カタログ: `reference/public-dashboard-catalog.json`
 - 後続スキル: `/design-theme-charts` (チャート設計) / `/insert-theme-components` (反映) / `/audit-theme-components` (監査)
