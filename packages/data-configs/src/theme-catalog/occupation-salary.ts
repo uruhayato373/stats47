@@ -246,23 +246,17 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "IT・専門職の年収推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1101"
+            "metricKey": "system-consultant-annual-income",
+            "label": "SIer/コンサル",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1104"
+            "metricKey": "software-engineer-annual-income",
+            "label": "SE",
+            "colorRole": "special"
           }
-        ],
-        "labels": [
-          "SIer/コンサル",
-          "SE"
-        ],
-        "seriesColors": [
-          "population",
-          "special"
         ]
       },
       "relatedRankingKeys": [
@@ -283,23 +277,17 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "教育職の年収推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1192"
+            "metricKey": "school-teacher-annual-income",
+            "label": "小中学校教員",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1196"
+            "metricKey": "university-professor-annual-income",
+            "label": "大学教授",
+            "colorRole": "danger"
           }
-        ],
-        "labels": [
-          "小中学校教員",
-          "大学教授"
-        ],
-        "seriesColors": [
-          "population",
-          "danger"
         ]
       },
       "relatedRankingKeys": [
@@ -320,29 +308,22 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "運輸・建設職の年収推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1614"
+            "metricKey": "truck-driver-annual-income",
+            "label": "トラック運転手",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1612"
+            "metricKey": "taxi-driver-annual-income",
+            "label": "タクシー運転手",
+            "colorRole": "count"
           },
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1661"
+            "metricKey": "carpenter-annual-income",
+            "label": "大工",
+            "colorRole": "neutral"
           }
-        ],
-        "labels": [
-          "トラック運転手",
-          "タクシー運転手",
-          "大工"
-        ],
-        "seriesColors": [
-          "population",
-          "count",
-          "neutral"
         ]
       },
       "relatedRankingKeys": [
@@ -364,29 +345,22 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "サービス職の年収推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1391"
+            "metricKey": "cook-annual-income",
+            "label": "調理従事者",
+            "colorRole": "count"
           },
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1381"
+            "metricKey": "barber-beautician-annual-income",
+            "label": "理容・美容師",
+            "colorRole": "special"
           },
           {
-            "statsDataId": "0003445758",
-            "cdCat02": "1453"
+            "metricKey": "security-guard-annual-income",
+            "label": "警備員",
+            "colorRole": "neutral"
           }
-        ],
-        "labels": [
-          "調理従事者",
-          "理容・美容師",
-          "警備員"
-        ],
-        "seriesColors": [
-          "count",
-          "special",
-          "neutral"
         ]
       },
       "relatedRankingKeys": [

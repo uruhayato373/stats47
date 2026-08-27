@@ -7,8 +7,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
  * テストで固定してあるので、ここは経路の選択だけを見る。
  *
  * 守りたいのは 2 方向:
- *  (a) e-Stat を叩いてはいけない metric で叩かない … 計算型・derived で生値が出る事故を防ぐ
- *  (b) e-Stat を叩けない metric を諦めない … 正典 R2 に年次があるならチャートにする
+ *  (a) Web runtime はどのmetricでも e-Stat を叩かない … 計算型・derived・scale迂回を防ぐ
+ *  (b) external 種も正典 R2 に年次があるならチャートにする
  *      (2026-08-05 の是正。external 種が即 EMPTY で、R2 に 14 年あるラスパイレス指数の
  *       チャートが空だった)
  */
@@ -71,13 +71,13 @@ beforeEach(() => {
 });
 
 describe("fetchMetricTimeseriesAction — 取得元の選択", () => {
-  it("e-Stat で取れる metric は e-Stat を叩き、R2 は読まない", async () => {
+  it("e-Stat由来metricも正規化済みR2だけを読み、直APIへ戻らない", async () => {
     readRankingItemFromR2.mockResolvedValue(item(ESTAT_CONFIG));
 
     const result = await fetchMetricTimeseriesAction("total-population", "00000");
 
-    expect(fetchFormattedStats).toHaveBeenCalledTimes(1);
-    expect(readStatsValues).not.toHaveBeenCalled();
+    expect(readStatsValues).toHaveBeenCalledWith("total-population", "prefecture");
+    expect(fetchFormattedStats).not.toHaveBeenCalled();
     expect(result.points).toHaveLength(3);
   });
 

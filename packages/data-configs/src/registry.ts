@@ -2060,6 +2060,45 @@ import { theaterMusicHall } from "./metrics/theater-music-hall";
 import { theftCriminalArrestRate } from "./metrics/theft-criminal-arrest-rate";
 import { theftOffensesRecognizedPer1000 } from "./metrics/theft-offenses-recognized-per-1000";
 import { theftOffensesRecognized } from "./metrics/theft-offenses-recognized";
+import { themeAgeCompositionElderlyPopulation } from "./metrics/theme-age-composition-elderly-population";
+import { themeAgeCompositionProductionAgePopulation } from "./metrics/theme-age-composition-production-age-population";
+import { themeAgeCompositionYoungPopulation } from "./metrics/theme-age-composition-young-population";
+import { themeFireInjuredCount } from "./metrics/theme-fire-injured-count";
+import { themePopulationPyramid04Female } from "./metrics/theme-population-pyramid-0-4-female";
+import { themePopulationPyramid04Male } from "./metrics/theme-population-pyramid-0-4-male";
+import { themePopulationPyramid1014Female } from "./metrics/theme-population-pyramid-10-14-female";
+import { themePopulationPyramid1014Male } from "./metrics/theme-population-pyramid-10-14-male";
+import { themePopulationPyramid1519Female } from "./metrics/theme-population-pyramid-15-19-female";
+import { themePopulationPyramid1519Male } from "./metrics/theme-population-pyramid-15-19-male";
+import { themePopulationPyramid2024Female } from "./metrics/theme-population-pyramid-20-24-female";
+import { themePopulationPyramid2024Male } from "./metrics/theme-population-pyramid-20-24-male";
+import { themePopulationPyramid2529Female } from "./metrics/theme-population-pyramid-25-29-female";
+import { themePopulationPyramid2529Male } from "./metrics/theme-population-pyramid-25-29-male";
+import { themePopulationPyramid3034Female } from "./metrics/theme-population-pyramid-30-34-female";
+import { themePopulationPyramid3034Male } from "./metrics/theme-population-pyramid-30-34-male";
+import { themePopulationPyramid3539Female } from "./metrics/theme-population-pyramid-35-39-female";
+import { themePopulationPyramid3539Male } from "./metrics/theme-population-pyramid-35-39-male";
+import { themePopulationPyramid4044Female } from "./metrics/theme-population-pyramid-40-44-female";
+import { themePopulationPyramid4044Male } from "./metrics/theme-population-pyramid-40-44-male";
+import { themePopulationPyramid4549Female } from "./metrics/theme-population-pyramid-45-49-female";
+import { themePopulationPyramid4549Male } from "./metrics/theme-population-pyramid-45-49-male";
+import { themePopulationPyramid59Female } from "./metrics/theme-population-pyramid-5-9-female";
+import { themePopulationPyramid59Male } from "./metrics/theme-population-pyramid-5-9-male";
+import { themePopulationPyramid5054Female } from "./metrics/theme-population-pyramid-50-54-female";
+import { themePopulationPyramid5054Male } from "./metrics/theme-population-pyramid-50-54-male";
+import { themePopulationPyramid5559Female } from "./metrics/theme-population-pyramid-55-59-female";
+import { themePopulationPyramid5559Male } from "./metrics/theme-population-pyramid-55-59-male";
+import { themePopulationPyramid6064Female } from "./metrics/theme-population-pyramid-60-64-female";
+import { themePopulationPyramid6064Male } from "./metrics/theme-population-pyramid-60-64-male";
+import { themePopulationPyramid6569Female } from "./metrics/theme-population-pyramid-65-69-female";
+import { themePopulationPyramid6569Male } from "./metrics/theme-population-pyramid-65-69-male";
+import { themePopulationPyramid7074Female } from "./metrics/theme-population-pyramid-70-74-female";
+import { themePopulationPyramid7074Male } from "./metrics/theme-population-pyramid-70-74-male";
+import { themePopulationPyramid7579Female } from "./metrics/theme-population-pyramid-75-79-female";
+import { themePopulationPyramid7579Male } from "./metrics/theme-population-pyramid-75-79-male";
+import { themePopulationPyramid80PlusFemale } from "./metrics/theme-population-pyramid-80-plus-female";
+import { themePopulationPyramid80PlusMale } from "./metrics/theme-population-pyramid-80-plus-male";
+import { themeProstitutionCrimeRecognitionCount } from "./metrics/theme-prostitution-crime-recognition-count";
 import { thermalPowerPlantCount } from "./metrics/thermal-power-plant-count";
 import { tissuePaperConsumptionExpenditure } from "./metrics/tissue-paper-consumption-expenditure";
 import { tobaccoConsumptionExpenditure } from "./metrics/tobacco-consumption-expenditure";
@@ -2211,6 +2250,7 @@ import { voluntaryCarInsuranceRateProperty } from "./metrics/voluntary-car-insur
 import { voluntaryCarInsuranceRateVehicle } from "./metrics/voluntary-car-insurance-rate-vehicle";
 import { volunteerActivityAnnualParticipationRate10plus } from "./metrics/volunteer-activity-annual-participation-rate-10plus";
 import { volunteerActivityAnnualParticipationRate15plus } from "./metrics/volunteer-activity-annual-participation-rate-15plus";
+import { volunteerActivityInternationalCooperation15plus } from "./metrics/volunteer-activity-international-cooperation-15plus";
 import { voterListRegistrants } from "./metrics/voter-list-registrants";
 import { voterTurnoutCityAssembly } from "./metrics/voter-turnout-city-assembly";
 import { voterTurnoutCouncilDistrict } from "./metrics/voter-turnout-council-district";
@@ -4362,6 +4402,45 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "theft-criminal-arrest-rate": theftCriminalArrestRate,
   "theft-offenses-recognized-per-1000": theftOffensesRecognizedPer1000,
   "theft-offenses-recognized": theftOffensesRecognized,
+  "theme-age-composition-elderly-population": themeAgeCompositionElderlyPopulation,
+  "theme-age-composition-production-age-population": themeAgeCompositionProductionAgePopulation,
+  "theme-age-composition-young-population": themeAgeCompositionYoungPopulation,
+  "theme-fire-injured-count": themeFireInjuredCount,
+  "theme-population-pyramid-0-4-female": themePopulationPyramid04Female,
+  "theme-population-pyramid-0-4-male": themePopulationPyramid04Male,
+  "theme-population-pyramid-10-14-female": themePopulationPyramid1014Female,
+  "theme-population-pyramid-10-14-male": themePopulationPyramid1014Male,
+  "theme-population-pyramid-15-19-female": themePopulationPyramid1519Female,
+  "theme-population-pyramid-15-19-male": themePopulationPyramid1519Male,
+  "theme-population-pyramid-20-24-female": themePopulationPyramid2024Female,
+  "theme-population-pyramid-20-24-male": themePopulationPyramid2024Male,
+  "theme-population-pyramid-25-29-female": themePopulationPyramid2529Female,
+  "theme-population-pyramid-25-29-male": themePopulationPyramid2529Male,
+  "theme-population-pyramid-30-34-female": themePopulationPyramid3034Female,
+  "theme-population-pyramid-30-34-male": themePopulationPyramid3034Male,
+  "theme-population-pyramid-35-39-female": themePopulationPyramid3539Female,
+  "theme-population-pyramid-35-39-male": themePopulationPyramid3539Male,
+  "theme-population-pyramid-40-44-female": themePopulationPyramid4044Female,
+  "theme-population-pyramid-40-44-male": themePopulationPyramid4044Male,
+  "theme-population-pyramid-45-49-female": themePopulationPyramid4549Female,
+  "theme-population-pyramid-45-49-male": themePopulationPyramid4549Male,
+  "theme-population-pyramid-5-9-female": themePopulationPyramid59Female,
+  "theme-population-pyramid-5-9-male": themePopulationPyramid59Male,
+  "theme-population-pyramid-50-54-female": themePopulationPyramid5054Female,
+  "theme-population-pyramid-50-54-male": themePopulationPyramid5054Male,
+  "theme-population-pyramid-55-59-female": themePopulationPyramid5559Female,
+  "theme-population-pyramid-55-59-male": themePopulationPyramid5559Male,
+  "theme-population-pyramid-60-64-female": themePopulationPyramid6064Female,
+  "theme-population-pyramid-60-64-male": themePopulationPyramid6064Male,
+  "theme-population-pyramid-65-69-female": themePopulationPyramid6569Female,
+  "theme-population-pyramid-65-69-male": themePopulationPyramid6569Male,
+  "theme-population-pyramid-70-74-female": themePopulationPyramid7074Female,
+  "theme-population-pyramid-70-74-male": themePopulationPyramid7074Male,
+  "theme-population-pyramid-75-79-female": themePopulationPyramid7579Female,
+  "theme-population-pyramid-75-79-male": themePopulationPyramid7579Male,
+  "theme-population-pyramid-80-plus-female": themePopulationPyramid80PlusFemale,
+  "theme-population-pyramid-80-plus-male": themePopulationPyramid80PlusMale,
+  "theme-prostitution-crime-recognition-count": themeProstitutionCrimeRecognitionCount,
   "thermal-power-plant-count": thermalPowerPlantCount,
   "tissue-paper-consumption-expenditure": tissuePaperConsumptionExpenditure,
   "tobacco-consumption-expenditure": tobaccoConsumptionExpenditure,
@@ -4513,6 +4592,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "voluntary-car-insurance-rate-vehicle": voluntaryCarInsuranceRateVehicle,
   "volunteer-activity-annual-participation-rate-10plus": volunteerActivityAnnualParticipationRate10plus,
   "volunteer-activity-annual-participation-rate-15plus": volunteerActivityAnnualParticipationRate15plus,
+  "volunteer-activity-international-cooperation-15plus": volunteerActivityInternationalCooperation15plus,
   "voter-list-registrants": voterListRegistrants,
   "voter-turnout-city-assembly": voterTurnoutCityAssembly,
   "voter-turnout-council-district": voterTurnoutCouncilDistrict,

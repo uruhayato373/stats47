@@ -62,6 +62,11 @@ export const TOURISM_CATALOG: ThemeCatalog = {
       "shortLabel": "ホテル営業施設数",
       "role": "context"
     },
+    {
+      "rankingKey": "number-of-hotel-rooms",
+      "shortLabel": "ホテル客室数",
+      "role": "context"
+    },
   ],
   "charts": [
     {
@@ -69,14 +74,12 @@ export const TOURISM_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "宿泊者数の推移（日本人・外国人）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010107",
-            "cdCat01": "G7101"
+            "metricKey": "total-overnight-guests"
           },
           {
-            "statsDataId": "0000010107",
-            "cdCat01": "G7102"
+            "metricKey": "total-overnight-guests-foreign"
           }
         ],
         "labels": [
@@ -106,10 +109,9 @@ export const TOURISM_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "航空旅客輸送量の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3706"
+            "metricKey": "air-passenger-transport"
           }
         ],
         "labels": [
@@ -136,27 +138,22 @@ export const TOURISM_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "宿泊施設数と客室数の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3803"
+            "metricKey": "number-of-hotel-facilities",
+            "label": "ホテル営業施設数",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3804"
+            "metricKey": "number-of-hotel-rooms",
+            "label": "ホテル客室数",
+            "colorRole": "count"
           }
-        ],
-        "labels": [
-          "ホテル施設数",
-          "客室数"
-        ],
-        "seriesColors": [
-          "population",
-          "count"
         ]
       },
       "relatedRankingKeys": [
-        "number-of-hotel-facilities"
+        "number-of-hotel-facilities",
+        "number-of-hotel-rooms"
       ],
       "sourceName": "総務省 社会・人口統計体系",
       "sourceLink": null,

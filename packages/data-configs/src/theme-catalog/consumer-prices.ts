@@ -74,10 +74,19 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
       "componentType": "cpi-profile",
       "title": "物価プロファイル",
       "componentProps": {
-        "statsDataId": "0003441258",
-        "excludeCodes": [
-          "00010",
-          "00120"
+        "seriesRefs": [
+          { "metricKey": "consumer-price-difference-index-overall", "label": "総合", "colorRole": "series-1" },
+          { "metricKey": "consumer-price-difference-index-overall-excl-rent", "label": "家賃除く総合", "colorRole": "series-2" },
+          { "metricKey": "consumer-price-difference-index-food", "label": "食料", "colorRole": "series-3" },
+          { "metricKey": "consumer-price-difference-index-housing", "label": "住居", "colorRole": "series-4" },
+          { "metricKey": "consumer-price-difference-index-utilities", "label": "光熱・水道", "colorRole": "series-5" },
+          { "metricKey": "consumer-price-difference-index-education", "label": "教育", "colorRole": "series-6" },
+          { "metricKey": "consumer-price-difference-index-culture-recreation", "label": "教養娯楽", "colorRole": "series-7" },
+          { "metricKey": "consumer-price-difference-index-transport-communication", "label": "交通・通信", "colorRole": "series-8" },
+          { "metricKey": "consumer-price-difference-index-healthcare", "label": "保健医療", "colorRole": "series-9" },
+          { "metricKey": "consumer-price-difference-index-clothing-footwear", "label": "被服", "colorRole": "series-10" },
+          { "metricKey": "consumer-price-difference-index-furniture-household", "label": "家具", "colorRole": "series-11" },
+          { "metricKey": "consumer-price-difference-index-miscellaneous", "label": "諸雑費", "colorRole": "series-12" }
         ]
       },
       "relatedRankingKeys": [
@@ -108,18 +117,15 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "生活費の地域差指数の推移（食料・住居・光熱水道）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010212",
-            "cdCat01": "#L04416"
+            "metricKey": "consumer-price-difference-index-food"
           },
           {
-            "statsDataId": "0000010212",
-            "cdCat01": "#L04417"
+            "metricKey": "consumer-price-difference-index-housing"
           },
           {
-            "statsDataId": "0000010212",
-            "cdCat01": "#L04418"
+            "metricKey": "consumer-price-difference-index-utilities"
           }
         ],
         "labels": [
@@ -152,10 +158,19 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
       "componentType": "cpi-heatmap",
       "title": "物価推移ヒートマップ",
       "componentProps": {
-        "statsDataId": "0003441258",
-        "excludeCodes": [
-          "00010",
-          "00120"
+        "seriesRefs": [
+          { "metricKey": "consumer-price-difference-index-overall", "label": "総合", "colorRole": "series-1" },
+          { "metricKey": "consumer-price-difference-index-overall-excl-rent", "label": "家賃除く総合", "colorRole": "series-2" },
+          { "metricKey": "consumer-price-difference-index-food", "label": "食料", "colorRole": "series-3" },
+          { "metricKey": "consumer-price-difference-index-housing", "label": "住居", "colorRole": "series-4" },
+          { "metricKey": "consumer-price-difference-index-utilities", "label": "光熱・水道", "colorRole": "series-5" },
+          { "metricKey": "consumer-price-difference-index-education", "label": "教育", "colorRole": "series-6" },
+          { "metricKey": "consumer-price-difference-index-culture-recreation", "label": "教養娯楽", "colorRole": "series-7" },
+          { "metricKey": "consumer-price-difference-index-transport-communication", "label": "交通・通信", "colorRole": "series-8" },
+          { "metricKey": "consumer-price-difference-index-healthcare", "label": "保健医療", "colorRole": "series-9" },
+          { "metricKey": "consumer-price-difference-index-clothing-footwear", "label": "被服", "colorRole": "series-10" },
+          { "metricKey": "consumer-price-difference-index-furniture-household", "label": "家具", "colorRole": "series-11" },
+          { "metricKey": "consumer-price-difference-index-miscellaneous", "label": "諸雑費", "colorRole": "series-12" }
         ]
       },
       "relatedRankingKeys": [

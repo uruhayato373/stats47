@@ -16,6 +16,7 @@
  *
  *   node .claude/scripts/blog/build-lineage-queue.mjs            # R2 公開URLから棚卸し
  *   node .claude/scripts/blog/build-lineage-queue.mjs --limit 20
+ *   node .claude/scripts/blog/build-lineage-queue.mjs --staged   # .local/r2 を優先
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -27,6 +28,7 @@ const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/blog");
 const LIMIT = process.argv.includes("--limit")
   ? Number(process.argv[process.argv.indexOf("--limit") + 1])
   : null;
+const STAGED = process.argv.includes("--staged");
 
 /**
  * CDN のキャッシュを迂回する URL を作る。
@@ -41,6 +43,17 @@ function noCache(u) {
 }
 async function ft(u) { const r = await fetch(noCache(u)); if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }
 async function head(u) { try { const r = await fetch(noCache(u)); return r.ok; } catch { return false; } }
+async function hasBlogData(slug, base, suffix) {
+  if (
+    STAGED &&
+    fs.existsSync(
+      path.join(PROJECT_ROOT, ".local/r2/app/blog", slug, "data", `${base}${suffix}`),
+    )
+  ) {
+    return true;
+  }
+  return head(`${R2}/app/blog/${slug}/data/${base}${suffix}`);
+}
 async function pMap(items, fn, c) {
   const out = []; let i = 0;
   const w = async () => { while (i < items.length) { const k = i++; try { out[k] = await fn(items[k]); } catch { out[k] = null; } } };
@@ -81,14 +94,41 @@ async function main() {
   const rows = await pMap(arts, async (a) => {
     const md = await ft(`${R2}/app/blog/${a.slug}/article.md`);
     const svgs = [...new Set([...md.matchAll(/\]\(data\/([^)]+)\.svg\)/g)].map((m) => m[1]))];
+    const rankingRefs = svgs.filter((base) => classifyByName(base) === "ranking");
+    const rankingKeys = [
+      ...new Set([...md.matchAll(/\/ranking\/([a-z0-9-]+)/gi)].map((match) => match[1])),
+    ];
     return await pMap(svgs, async (base) => {
       const [hasJson, hasSource] = await Promise.all([
-        head(`${R2}/app/blog/${a.slug}/data/${base}.json`),
-        head(`${R2}/app/blog/${a.slug}/data/${base}.source.json`),
+        hasBlogData(a.slug, base, ".json"),
+        hasBlogData(a.slug, base, ".source.json"),
       ]);
       const chartType = classifyByName(base);
       const status = hasJson && hasSource ? "both" : hasJson ? "jsonOnly" : "neither";
-      return { slug: a.slug, base, chartType, hasJson, hasSource, status, restoreMethod: restoreMethod(chartType, hasJson, hasSource) };
+      // 現行 ranking 自動復元器が確証できるのは「記事内ranking SVGが1枚だけ」かつ
+      // `/ranking/<key>` がある場合だけ。これ以外や他chart種は推測を避け、個別cardへ渡す。
+      const autoRecoverable =
+        status !== "both" &&
+        chartType === "ranking" &&
+        rankingRefs.length === 1 &&
+        rankingKeys.length > 0;
+      const residualCard =
+        status === "both"
+          ? null
+          : chartType === "tilemap"
+            ? "TILEMAP-LINEAGE-01"
+            : "CHART-LINEAGE-RESIDUAL-01";
+      return {
+        slug: a.slug,
+        base,
+        chartType,
+        hasJson,
+        hasSource,
+        status,
+        restoreMethod: restoreMethod(chartType, hasJson, hasSource),
+        autoRecoverable,
+        residualCard,
+      };
     }, 4);
   }, 12);
 
@@ -96,16 +136,22 @@ async function main() {
   // 集計
   const byMethod = {};
   const byStatus = { both: 0, jsonOnly: 0, neither: 0 };
+  let autoRecoverableCount = 0;
   for (const r of all) {
     byMethod[r.restoreMethod] = (byMethod[r.restoreMethod] || 0) + 1;
     byStatus[r.status]++;
+    if (r.autoRecoverable) autoRecoverableCount++;
   }
   const n = all.length;
 
   fs.mkdirSync(STATE_DIR, { recursive: true });
   fs.writeFileSync(
     path.join(STATE_DIR, "svg-lineage-queue.json"),
-    JSON.stringify({ total: n, byStatus, byMethod, entries: all }, null, 2),
+    JSON.stringify(
+      { total: n, staged: STAGED, byStatus, byMethod, autoRecoverableCount, entries: all },
+      null,
+      2,
+    ),
   );
   const pct = (x) => `${((x / n) * 100).toFixed(0)}%`;
   const md = `# ブログSVGデータ系譜 復元キュー (LATEST)
@@ -116,6 +162,7 @@ async function main() {
 - ✅ both (json+source・系譜完全): **${byStatus.both}** (${pct(byStatus.both)})
 - 🟡 jsonOnly (再生成可・出典無): **${byStatus.jsonOnly}** (${pct(byStatus.jsonOnly)})
 - 🔴 neither (元データ消失・再生成不可): **${byStatus.neither}** (${pct(byStatus.neither)})
+- 🤖 現行ranking自動復元器で確証可能: **${autoRecoverableCount}**
 
 ## 復元手法別 (restoreMethod)
 ${Object.entries(byMethod).sort((a, b) => b[1] - a[1]).map(([k, v]) => `- \`${k}\`: ${v}`).join("\n")}

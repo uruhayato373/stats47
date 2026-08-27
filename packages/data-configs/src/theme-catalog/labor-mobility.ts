@@ -59,14 +59,12 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "離職率と転職率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010206",
-            "cdCat01": "#F04102"
+            "metricKey": "turnover-rate"
           },
           {
-            "statsDataId": "0000010206",
-            "cdCat01": "#F04101"
+            "metricKey": "job-change-rate"
           }
         ],
         "labels": [
@@ -206,10 +204,9 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "就業異動率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010206",
-            "cdCat01": "#F04104"
+            "metricKey": "employment-mobility-rate"
           }
         ],
         "labels": [

@@ -240,7 +240,7 @@ describe('theme chart indicator-hub links', () => {
     }
   });
 
-  it('テーマが参照する136指標すべてに個別の説明を必須化する', () => {
+  it('テーマが参照する152指標すべてに個別の説明を必須化する', () => {
     const errors: string[] = [];
     const warns: string[] = [];
     const coverage = validateIndicatorHubContentCompleteness(
@@ -248,9 +248,9 @@ describe('theme chart indicator-hub links', () => {
       errors,
       warns
     );
-    expect(coverage.totalKeys).toBe(136);
+    expect(coverage.totalKeys).toBe(152);
     expect(coverage.missingDescriptionKeys).toHaveLength(0);
-    expect(coverage.authoredNoteKeys).toHaveLength(80);
+    expect(coverage.authoredNoteKeys).toHaveLength(78);
     expect(errors).toEqual([]);
     expect(warns).toEqual([]);
   });

@@ -1,1804 +1,1545 @@
 {
   "generatedFrom": "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
-  "totalRequests": 240,
-  "distinctRequests": 180,
-  "requests": [
-    {
-      "key": "0000010101?cdCat01=A1101",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A1101"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-age-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120101",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120101"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120102",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120102"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120201",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120201"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120202",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120202"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120301",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120301"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120302",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120302"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120401",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120401"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120402",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120402"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120501",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120501"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120502",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120502"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120601",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120601"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120602",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120602"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120701",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120701"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120702",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120702"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120801",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120801"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120802",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120802"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120901",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120901"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A120902",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A120902"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121001",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121001"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121002",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121002"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121101",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121101"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121102",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121102"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121201",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121201"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121202",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121202"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121301",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121301"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121302",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121302"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121401",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121401"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121402",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121402"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121501",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121501"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121502",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121502"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121601",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121601"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A121602",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A121602"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A1301",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A1301"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-age-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A1302",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A1302"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-age-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A1303",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A1303"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-age-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A141801",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A141801"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A141802",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A141802"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A1700",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A1700"
-      },
-      "themeKey": "foreign-residents",
-      "componentKey": "theme-foreign-total-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A4101",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A4101"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "natural-social-increase-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A4200",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A4200"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "natural-social-increase-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A4201",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A4201"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "birth-death-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A5103",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A5103"
-      },
-      "themeKey": "population-dynamics",
-      "componentKey": "theme-pop-migration-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A5104",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A5104"
-      },
-      "themeKey": "population-dynamics",
-      "componentKey": "theme-pop-migration-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A9101",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A9101"
-      },
-      "themeKey": "living-housing",
-      "componentKey": "lh-marriage-divorce-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010101?cdCat01=A9201",
-      "statsDataId": "0000010101",
-      "filters": {
-        "cdCat01": "A9201"
-      },
-      "themeKey": "living-housing",
-      "componentKey": "lh-marriage-divorce-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C2107",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C2107"
-      },
-      "themeKey": "local-economy",
-      "componentKey": "theme-le-establishments-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C312001",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C312001"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-output-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C31201",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C31201"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-output-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3121",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3121"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-catch-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C312101",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C312101"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-catch-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C312201",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C312201"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-aquaculture-mix",
-      "componentType": "mixed-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C312202",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C312202"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-aquaculture-mix",
-      "componentType": "mixed-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3125",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3125"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-half-century",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3401",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3401"
-      },
-      "themeKey": "manufacturing",
-      "componentKey": "manufacturing-shipment-value-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3402",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3402"
-      },
-      "themeKey": "manufacturing",
-      "componentKey": "manufacturing-shipment-value-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3403",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3403"
-      },
-      "themeKey": "manufacturing",
-      "componentKey": "manufacturing-establishments-employees-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3404",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3404"
-      },
-      "themeKey": "manufacturing",
-      "componentKey": "manufacturing-establishments-employees-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3702",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3702"
-      },
-      "themeKey": "railway",
-      "componentKey": "railway-freight-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3704",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3704"
-      },
-      "themeKey": "railway",
-      "componentKey": "railway-passenger-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3705",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3705"
-      },
-      "themeKey": "railway",
-      "componentKey": "railway-passenger-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3706",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3706"
-      },
-      "themeKey": "tourism",
-      "componentKey": "theme-tourism-transport-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3803",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3803"
-      },
-      "themeKey": "tourism",
-      "componentKey": "theme-tourism-hotel-supply-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010103?cdCat01=C3804",
-      "statsDataId": "0000010103",
-      "filters": {
-        "cdCat01": "C3804"
-      },
-      "themeKey": "tourism",
-      "componentKey": "theme-tourism-hotel-supply-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010104?cdCat01=D2101",
-      "statsDataId": "0000010104",
-      "filters": {
-        "cdCat01": "D2101"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "kpi-lf-fiscal-strength",
-      "componentType": "kpi-card"
-    },
-    {
-      "key": "0000010104?cdCat01=D2103",
-      "statsDataId": "0000010104",
-      "filters": {
-        "cdCat01": "D2103"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-fiscal-ratios-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010104?cdCat01=D2111",
-      "statsDataId": "0000010104",
-      "filters": {
-        "cdCat01": "D2111"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "kpi-lf-debt-service",
-      "componentType": "kpi-card"
-    },
-    {
-      "key": "0000010104?cdCat01=D2112",
-      "statsDataId": "0000010104",
-      "filters": {
-        "cdCat01": "D2112"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "kpi-lf-future-burden",
-      "componentType": "kpi-card"
-    },
-    {
-      "key": "0000010105?cdCat01=E2101",
-      "statsDataId": "0000010105",
-      "filters": {
-        "cdCat01": "E2101"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-type-breakdown",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010105?cdCat01=E3101",
-      "statsDataId": "0000010105",
-      "filters": {
-        "cdCat01": "E3101"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-type-breakdown",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010105?cdCat01=E4101",
-      "statsDataId": "0000010105",
-      "filters": {
-        "cdCat01": "E4101"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-type-breakdown",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010105?cdCat01=E6101",
-      "statsDataId": "0000010105",
-      "filters": {
-        "cdCat01": "E6101"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-type-breakdown",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010105?cdCat01=E6102",
-      "statsDataId": "0000010105",
-      "filters": {
-        "cdCat01": "E6102"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-school-type-breakdown",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010107?cdCat01=G7101",
-      "statsDataId": "0000010107",
-      "filters": {
-        "cdCat01": "G7101"
-      },
-      "themeKey": "tourism",
-      "componentKey": "theme-tourism-stay-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010107?cdCat01=G7102",
-      "statsDataId": "0000010107",
-      "filters": {
-        "cdCat01": "G7102"
-      },
-      "themeKey": "tourism",
-      "componentKey": "theme-tourism-stay-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010108?cdCat01=H711001",
-      "statsDataId": "0000010108",
-      "filters": {
-        "cdCat01": "H711001"
-      },
-      "themeKey": "roads",
-      "componentKey": "roads-length-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010108?cdCat01=H7113",
-      "statsDataId": "0000010108",
-      "filters": {
-        "cdCat01": "H7113"
-      },
-      "themeKey": "roads",
-      "componentKey": "roads-length-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010110?cdCat01=J5104",
-      "statsDataId": "0000010110",
-      "filters": {
-        "cdCat01": "J5104"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-pension-benefit-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010111?cdCat01=K2110",
-      "statsDataId": "0000010111",
-      "filters": {
-        "cdCat01": "K2110"
-      },
-      "themeKey": "safety",
-      "componentKey": "safety-fire-casualties-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010111?cdCat01=K2111",
-      "statsDataId": "0000010111",
-      "filters": {
-        "cdCat01": "K2111"
-      },
-      "themeKey": "safety",
-      "componentKey": "safety-fire-casualties-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010111?cdCat01=K3101",
-      "statsDataId": "0000010111",
-      "filters": {
-        "cdCat01": "K3101"
-      },
-      "themeKey": "safety",
-      "componentKey": "traffic-accident-deaths-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010111?cdCat01=K3104",
-      "statsDataId": "0000010111",
-      "filters": {
-        "cdCat01": "K3104"
-      },
-      "themeKey": "safety",
-      "componentKey": "traffic-accident-deaths-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010111?cdCat01=K420101",
-      "statsDataId": "0000010111",
-      "filters": {
-        "cdCat01": "K420101"
-      },
-      "themeKey": "safety",
-      "componentKey": "safety-crime-types-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010111?cdCat01=K420102",
-      "statsDataId": "0000010111",
-      "filters": {
-        "cdCat01": "K420102"
-      },
-      "themeKey": "safety",
-      "componentKey": "safety-crime-types-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010111?cdCat01=K420103",
-      "statsDataId": "0000010111",
-      "filters": {
-        "cdCat01": "K420103"
-      },
-      "themeKey": "safety",
-      "componentKey": "safety-crime-types-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010111?cdCat01=K420104",
-      "statsDataId": "0000010111",
-      "filters": {
-        "cdCat01": "K420104"
-      },
-      "themeKey": "safety",
-      "componentKey": "safety-crime-types-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010111?cdCat01=K420105",
-      "statsDataId": "0000010111",
-      "filters": {
-        "cdCat01": "K420105"
-      },
-      "themeKey": "safety",
-      "componentKey": "safety-crime-types-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A01601",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A01601"
-      },
-      "themeKey": "foreign-residents",
-      "componentKey": "theme-foreign-total-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A0160101",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A0160101"
-      },
-      "themeKey": "foreign-residents",
-      "componentKey": "theme-foreign-nationality-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A0160102",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A0160102"
-      },
-      "themeKey": "foreign-residents",
-      "componentKey": "theme-foreign-nationality-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A03401",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A03401"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-as-youth-old-dep-index",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A03402",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A03402"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-as-youth-old-dep-index",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A03503",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A03503"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "birth-rate-aging-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A0411001",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A0411001"
-      },
-      "themeKey": "living-housing",
-      "componentKey": "unmarried-elderly-couple-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A05202",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A05202"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "birth-rate-aging-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A06202",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A06202"
-      },
-      "themeKey": "living-housing",
-      "componentKey": "lh-household-structure-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A06205",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A06205"
-      },
-      "themeKey": "living-housing",
-      "componentKey": "lh-household-structure-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A06301",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A06301"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A06302",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A06302"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A06304",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A06304"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A06601",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A06601"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "marriage-divorce-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010201?cdCat01=#A06602",
-      "statsDataId": "0000010201",
-      "filters": {
-        "cdCat01": "#A06602"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "marriage-divorce-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010203?cdCat01=#C04401",
-      "statsDataId": "0000010203",
-      "filters": {
-        "cdCat01": "#C04401"
-      },
-      "themeKey": "manufacturing",
-      "componentKey": "theme-manufacturing-labor-productivity",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010203?cdCat01=#C04404",
-      "statsDataId": "0000010203",
-      "filters": {
-        "cdCat01": "#C04404"
-      },
-      "themeKey": "manufacturing",
-      "componentKey": "theme-manufacturing-labor-productivity",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D0140201",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D0140201"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-nature-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D0210101",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D0210101"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-revenue-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D0210201",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D0210201"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-revenue-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D0210301",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D0210301"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-revenue-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D0220103",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D0220103"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-income-tax-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D02206",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D02206"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-income-tax-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D02207",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D02207"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-taxpayer-ratio-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D0310301",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D0310301"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D0311201",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D0311201"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D0311501",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D0311501"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D0320101",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D0320101"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-composition",
-      "componentType": "composition-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D0320201",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D0320201"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-expense-nature-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010204?cdCat01=#D0330103",
-      "statsDataId": "0000010204",
-      "filters": {
-        "cdCat01": "#D0330103"
-      },
-      "themeKey": "local-finance",
-      "componentKey": "theme-lf-per-capita-expense-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010205?cdCat01=#E0940302",
-      "statsDataId": "0000010205",
-      "filters": {
-        "cdCat01": "#E0940302"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-higher-education-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010205?cdCat01=#E09504",
-      "statsDataId": "0000010205",
-      "filters": {
-        "cdCat01": "#E09504"
-      },
-      "themeKey": "education-culture",
-      "componentKey": "theme-edu-higher-education-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010206?cdCat01=#F01201",
-      "statsDataId": "0000010206",
-      "filters": {
-        "cdCat01": "#F01201"
-      },
-      "themeKey": "local-economy",
-      "componentKey": "theme-industry-structure",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010206?cdCat01=#F01202",
-      "statsDataId": "0000010206",
-      "filters": {
-        "cdCat01": "#F01202"
-      },
-      "themeKey": "local-economy",
-      "componentKey": "theme-industry-structure",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010206?cdCat01=#F01203",
-      "statsDataId": "0000010206",
-      "filters": {
-        "cdCat01": "#F01203"
-      },
-      "themeKey": "local-economy",
-      "componentKey": "theme-industry-structure",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010206?cdCat01=#F01301",
-      "statsDataId": "0000010206",
-      "filters": {
-        "cdCat01": "#F01301"
-      },
-      "themeKey": "labor-wages",
-      "componentKey": "labor-wages-job-ratio-vs-unemployment",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010206?cdCat01=#F03101",
-      "statsDataId": "0000010206",
-      "filters": {
-        "cdCat01": "#F03101"
-      },
-      "themeKey": "labor-wages",
-      "componentKey": "theme-lw-employment-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010206?cdCat01=#F03103",
-      "statsDataId": "0000010206",
-      "filters": {
-        "cdCat01": "#F03103"
-      },
-      "themeKey": "labor-wages",
-      "componentKey": "labor-wages-job-ratio-vs-unemployment",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010206?cdCat01=#F04101",
-      "statsDataId": "0000010206",
-      "filters": {
-        "cdCat01": "#F04101"
-      },
-      "themeKey": "labor-mobility",
-      "componentKey": "labor-mobility-turnover-vs-jobchange",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010206?cdCat01=#F04102",
-      "statsDataId": "0000010206",
-      "filters": {
-        "cdCat01": "#F04102"
-      },
-      "themeKey": "labor-mobility",
-      "componentKey": "labor-mobility-turnover-vs-jobchange",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010206?cdCat01=#F04104",
-      "statsDataId": "0000010206",
-      "filters": {
-        "cdCat01": "#F04104"
-      },
-      "themeKey": "labor-mobility",
-      "componentKey": "theme-lm-employment-mobility-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010207?cdCat01=#G04101",
-      "statsDataId": "0000010207",
-      "filters": {
-        "cdCat01": "#G04101"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-volunteer-participation-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010208?cdCat01=#H01301",
-      "statsDataId": "0000010208",
-      "filters": {
-        "cdCat01": "#H01301"
-      },
-      "themeKey": "living-housing",
-      "componentKey": "vacancy-ownership-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010208?cdCat01=#H01405",
-      "statsDataId": "0000010208",
-      "filters": {
-        "cdCat01": "#H01405"
-      },
-      "themeKey": "living-housing",
-      "componentKey": "vacancy-ownership-rate-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010208?cdCat01=#H0210301",
-      "statsDataId": "0000010208",
-      "filters": {
-        "cdCat01": "#H0210301"
-      },
-      "themeKey": "living-housing",
-      "componentKey": "lh-dwelling-floor-area-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010208?cdCat01=#H0210302",
-      "statsDataId": "0000010208",
-      "filters": {
-        "cdCat01": "#H0210302"
-      },
-      "themeKey": "living-housing",
-      "componentKey": "lh-dwelling-floor-area-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010209?cdCat01=#I06101",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I06101"
-      },
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-lifestyle-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010209?cdCat01=#I06102",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I06102"
-      },
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-death-causes-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010209?cdCat01=#I06103",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I06103"
-      },
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-death-causes-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010209?cdCat01=#I06104",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I06104"
-      },
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-death-causes-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010209?cdCat01=#I06105",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I06105"
-      },
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-death-causes-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010209?cdCat01=#I06106",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I06106"
-      },
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-death-causes-donut",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0000010209?cdCat01=#I06201",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I06201"
-      },
+  "totalRequests": 0,
+  "distinctRequests": 0,
+  "requests": [],
+  "totalMetricRefs": 267,
+  "distinctMetricRefs": 192,
+  "metrics": [
+    {
+      "metricKey": "accidental-deaths-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "1401568ea390e06d",
       "themeKey": "safety",
       "componentKey": "suicide-accident-death-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0000010209?cdCat01=#I0910103",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I0910103"
-      },
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-supply-trend",
+      "metricKey": "active-job-opening-ratio",
+      "expectedUnit": "倍",
+      "expectedConfigHash": "86f5d2d6a20d7021",
+      "themeKey": "labor-wages",
+      "componentKey": "labor-wages-job-ratio-vs-unemployment",
       "componentType": "line-chart"
     },
     {
-      "key": "0000010209?cdCat01=#I0920101",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I0920101"
-      },
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-supply-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010209?cdCat01=#I11201",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I11201"
-      },
-      "themeKey": "safety",
-      "componentKey": "fire-emergency-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010209?cdCat01=#I13102",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I13102"
-      },
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-lifestyle-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010209?cdCat01=#I15106",
-      "statsDataId": "0000010209",
-      "filters": {
-        "cdCat01": "#I15106"
-      },
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-expense-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010210?cdCat01=#J05208",
-      "statsDataId": "0000010210",
-      "filters": {
-        "cdCat01": "#J05208"
-      },
-      "themeKey": "aging-society",
-      "componentKey": "theme-late-elderly-medical-expense-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010211?cdCat01=#K02101",
-      "statsDataId": "0000010211",
-      "filters": {
-        "cdCat01": "#K02101"
-      },
-      "themeKey": "safety",
-      "componentKey": "fire-emergency-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010211?cdCat01=#K06101",
-      "statsDataId": "0000010211",
-      "filters": {
-        "cdCat01": "#K06101"
-      },
-      "themeKey": "safety",
-      "componentKey": "crime-count-arrest-rate-trend",
-      "componentType": "mixed-chart"
-    },
-    {
-      "key": "0000010211?cdCat01=#K06201",
-      "statsDataId": "0000010211",
-      "filters": {
-        "cdCat01": "#K06201"
-      },
-      "themeKey": "safety",
-      "componentKey": "crime-count-arrest-rate-trend",
-      "componentType": "mixed-chart"
-    },
-    {
-      "key": "0000010211?cdCat01=#K08101",
-      "statsDataId": "0000010211",
-      "filters": {
-        "cdCat01": "#K08101"
-      },
-      "themeKey": "safety",
-      "componentKey": "suicide-accident-death-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0000010212?cdCat01=#L01201",
-      "statsDataId": "0000010212",
-      "filters": {
-        "cdCat01": "#L01201"
-      },
+      "metricKey": "actual-income-worker-households-per-month",
+      "expectedUnit": "千円",
+      "expectedConfigHash": "4592c1fe7b4b6461",
       "themeKey": "real-income",
       "componentKey": "theme-real-income-actual-vs-disposable",
       "componentType": "line-chart"
     },
     {
-      "key": "0000010212?cdCat01=#L04414",
-      "statsDataId": "0000010212",
-      "filters": {
-        "cdCat01": "#L04414"
-      },
-      "themeKey": "real-income",
-      "componentKey": "real-income-cpi-breakdown",
+      "metricKey": "air-passenger-transport",
+      "expectedUnit": "千人",
+      "expectedConfigHash": "72bde515097e4762",
+      "themeKey": "tourism",
+      "componentKey": "theme-tourism-transport-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0000010212?cdCat01=#L04416",
-      "statsDataId": "0000010212",
-      "filters": {
-        "cdCat01": "#L04416"
-      },
-      "themeKey": "consumer-prices",
-      "componentKey": "theme-cpi-living-cost",
+      "metricKey": "annual-emergency-dispatches-per-1000",
+      "expectedUnit": "件",
+      "expectedConfigHash": "65631d0c40520e37",
+      "themeKey": "safety",
+      "componentKey": "fire-emergency-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0000010212?cdCat01=#L04417",
-      "statsDataId": "0000010212",
-      "filters": {
-        "cdCat01": "#L04417"
-      },
-      "themeKey": "consumer-prices",
-      "componentKey": "theme-cpi-living-cost",
+      "metricKey": "assistance-expenditure-ratio-pref-finance",
+      "expectedUnit": "％",
+      "expectedConfigHash": "6d1450fdff42ce42",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-expense-nature-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0000010212?cdCat01=#L04418",
-      "statsDataId": "0000010212",
-      "filters": {
-        "cdCat01": "#L04418"
-      },
-      "themeKey": "consumer-prices",
-      "componentKey": "theme-cpi-living-cost",
+      "metricKey": "barber-beautician-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "3f9ea064e0c2e297",
+      "themeKey": "occupation-salary",
+      "componentKey": "theme-occ-service-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0003130738?cdCat01=110",
-      "statsDataId": "0003130738",
-      "filters": {
-        "cdCat01": "110"
-      },
-      "themeKey": "ports",
-      "componentKey": "ports-cargo-trend",
+      "metricKey": "births",
+      "expectedUnit": "人",
+      "expectedConfigHash": "131aed39051698ea",
+      "themeKey": "aging-society",
+      "componentKey": "natural-social-increase-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0003130738?cdCat01=120",
-      "statsDataId": "0003130738",
-      "filters": {
-        "cdCat01": "120"
-      },
-      "themeKey": "ports",
-      "componentKey": "ports-cargo-trend",
+      "metricKey": "building-fire-count-per-100-thousand-people",
+      "expectedUnit": "件",
+      "expectedConfigHash": "629e4dc4be80a657",
+      "themeKey": "safety",
+      "componentKey": "fire-emergency-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0003238633?cdCat01=0120",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "0120"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
+      "metricKey": "care-worker-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "795ce29e3d70b0dd",
+      "themeKey": "occupation-salary",
+      "componentKey": "theme-occ-medical-trend",
+      "componentType": "line-chart"
     },
     {
-      "key": "0003238633?cdCat01=0250",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "0250"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
+      "metricKey": "carpenter-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "3e6c94316671b4e6",
+      "themeKey": "occupation-salary",
+      "componentKey": "theme-occ-transport-trend",
+      "componentType": "line-chart"
     },
     {
-      "key": "0003238633?cdCat01=0330",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "0330"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0003238633?cdCat01=0410",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "0410"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0003238633?cdCat01=0420",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "0420"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0003238633?cdCat01=0430",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "0430"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0003238633?cdCat01=0490",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "0490"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0003238633?cdCat01=0660",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "0660"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0003238633?cdCat01=0880",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "0880"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0003238633?cdCat01=0980",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "0980"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0003238633?cdCat01=1040",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "1040"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0003238633?cdCat01=1130",
-      "statsDataId": "0003238633",
-      "filters": {
-        "cdCat01": "1130"
-      },
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-species-share",
-      "componentType": "donut-chart"
-    },
-    {
-      "key": "0003441258",
-      "statsDataId": "0003441258",
-      "filters": {},
+      "metricKey": "consumer-price-difference-index-clothing-footwear",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "90660d2492bda6a7",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
     },
     {
-      "key": "0003445758?cdCat02=1101",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1101"
-      },
+      "metricKey": "consumer-price-difference-index-culture-recreation",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "5700c10845b3dd4b",
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-education",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "07650d37c5658b28",
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-food",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "e0b5be5333016bc8",
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-furniture-household",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "d8c0606404e4a4df",
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-healthcare",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "eb1f0e35e738ea6a",
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-housing",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "2b662b62d6c94605",
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-miscellaneous",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "335850c9080d981e",
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-overall",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "93d60411ab991b6e",
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-overall-excl-rent",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "dd8dddb07b680abb",
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-transport-communication",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "2da1ab465cf5ffdd",
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile"
+    },
+    {
+      "metricKey": "consumer-price-difference-index-utilities",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "396a1b756af4b462",
+      "themeKey": "consumer-prices",
+      "componentKey": "theme-cpi-profile",
+      "componentType": "cpi-profile"
+    },
+    {
+      "metricKey": "cook-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "9e77b9e1afc69ab2",
       "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-it-trend",
+      "componentKey": "theme-occ-service-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0003445758?cdCat02=1104",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1104"
-      },
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-it-trend",
+      "metricKey": "criminal-arrest-rate",
+      "expectedUnit": "％",
+      "expectedConfigHash": "3620097ff1719348",
+      "themeKey": "safety",
+      "componentKey": "crime-count-arrest-rate-trend",
+      "componentType": "mixed-chart"
+    },
+    {
+      "metricKey": "crude-birth-rate",
+      "expectedUnit": "人口千対",
+      "expectedConfigHash": "ce1f56ca4a870f15",
+      "themeKey": "aging-society",
+      "componentKey": "birth-rate-aging-rate-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0003445758?cdCat02=1192",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1192"
-      },
+      "metricKey": "crude-death-rate",
+      "expectedUnit": "人口千対",
+      "expectedConfigHash": "2898b3382668f603",
+      "themeKey": "aging-society",
+      "componentKey": "birth-death-rate-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "current-balance-ratio",
+      "expectedUnit": "％",
+      "expectedConfigHash": "e35d1cc3e74b691c",
+      "themeKey": "local-finance",
+      "componentKey": "kpi-lf-current-balance",
+      "componentType": "kpi-card"
+    },
+    {
+      "metricKey": "death-count",
+      "expectedUnit": "人",
+      "expectedConfigHash": "d8fb20bbf1b59cc0",
+      "themeKey": "aging-society",
+      "componentKey": "natural-social-increase-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "deaths-cerebrovascular-disease-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9d7710341b224247",
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-death-causes-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "deaths-diabetes-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "3f559c5961ca65ea",
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-death-causes-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "deaths-heart-disease-excl-hypertensive-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "55710113042f0130",
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-death-causes-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "deaths-hypertensive-diseases-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9cda157accb8b039",
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-death-causes-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "deaths-lifestyle-diseases-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "cc33d21721ba59ec",
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-lifestyle-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "deaths-malignant-neoplasms-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "101bf6282998c893",
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-death-causes-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "disposable-income-worker-households",
+      "expectedUnit": "円",
+      "expectedConfigHash": "acac9e51ce43e00a",
+      "themeKey": "local-economy",
+      "componentKey": "theme-economy-income-wage",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "divorces",
+      "expectedUnit": "組",
+      "expectedConfigHash": "7d0a11a95c09004e",
+      "themeKey": "living-housing",
+      "componentKey": "lh-marriage-divorce-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "divorces-per-total-population",
+      "expectedUnit": "人口千対",
+      "expectedConfigHash": "f5f0aceb39378428",
+      "themeKey": "aging-society",
+      "componentKey": "marriage-divorce-rate-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "doctor-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "d11dc074a749be07",
+      "themeKey": "occupation-salary",
+      "componentKey": "theme-occ-medical-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "education-expenditure-ratio-pref-finance",
+      "expectedUnit": "％",
+      "expectedConfigHash": "ccdc5c96af4ffee5",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-expense-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "elderly-couple-only-household-ratio",
+      "expectedUnit": "％",
+      "expectedConfigHash": "2262a0deb852b045",
+      "themeKey": "aging-society",
+      "componentKey": "cmp-pop-elderly-household",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "elementary-school-count",
+      "expectedUnit": "校",
+      "expectedConfigHash": "5a71c837f0c90098",
+      "themeKey": "education-culture",
+      "componentKey": "theme-edu-school-type-breakdown",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "employed-people-ratio-primary",
+      "expectedUnit": "％",
+      "expectedConfigHash": "bfe416412473b0c2",
+      "themeKey": "local-economy",
+      "componentKey": "theme-industry-structure",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "employed-people-ratio-secondary",
+      "expectedUnit": "％",
+      "expectedConfigHash": "6043c40a971e363d",
+      "themeKey": "local-economy",
+      "componentKey": "theme-industry-structure",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "employed-people-ratio-tertiary",
+      "expectedUnit": "％",
+      "expectedConfigHash": "c3cd05630b85cad4",
+      "themeKey": "local-economy",
+      "componentKey": "theme-industry-structure",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "employment-mobility-rate",
+      "expectedUnit": "％",
+      "expectedConfigHash": "df9c6ab40bd32317",
+      "themeKey": "labor-mobility",
+      "componentKey": "theme-lm-employment-mobility-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "employment-rate",
+      "expectedUnit": "％",
+      "expectedConfigHash": "792ee83cafb87d77",
+      "themeKey": "labor-wages",
+      "componentKey": "theme-lw-employment-rate-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "final-education-university-graduate-school-ratio",
+      "expectedUnit": "％",
+      "expectedConfigHash": "fc83c0f732281c98",
+      "themeKey": "education-culture",
+      "componentKey": "theme-edu-higher-education-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "fire-deaths-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "fbd70cea74a41f25",
+      "themeKey": "safety",
+      "componentKey": "safety-fire-casualties-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fiscal-strength-index-prefecture",
+      "expectedUnit": "指数",
+      "expectedConfigHash": "be531e55822d12c6",
+      "themeKey": "local-finance",
+      "componentKey": "kpi-lf-fiscal-strength",
+      "componentType": "kpi-card"
+    },
+    {
+      "metricKey": "fish-catch",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "9ec0eeb2651a7c5d",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-catch-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-bonito",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "ec40e9fc27b66557",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-japanese-squid",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "f441d82251e44ad1",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-kelp",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "a330a532d78a4575",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-mackerel",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "0133bff2e09ac829",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-pacific-saury",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "ec7a51cf95895622",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-pollock",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "5ac1e57a917a4241",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-sardine",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "549003e3c6a00396",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-scallop",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "24d2bcc499452307",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-sea-bream",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "29ff110912ed7cec",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-snow-crab",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "919926f58f177eec",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-tuna",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "3ab386bebc3622d1",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-species-catch-yellowtail",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "ddc60a68a9d7c03b",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-species-share",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "fishery-workers",
+      "expectedUnit": "人",
+      "expectedConfigHash": "67c3c256eb5631e1",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-half-century",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "floor-area-per-dwelling-owner",
+      "expectedUnit": "ｍ2",
+      "expectedConfigHash": "9dbea6949a6615f7",
+      "themeKey": "living-housing",
+      "componentKey": "lh-dwelling-floor-area-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "floor-area-per-dwelling-rented",
+      "expectedUnit": "ｍ2",
+      "expectedConfigHash": "29857bfbff177858",
+      "themeKey": "living-housing",
+      "componentKey": "lh-dwelling-floor-area-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "foreign-resident-count",
+      "expectedUnit": "人",
+      "expectedConfigHash": "d7c911cd7ad4fdc2",
+      "themeKey": "foreign-residents",
+      "componentKey": "theme-foreign-total-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "foreign-resident-count-china-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "31a5ae0b3163bedc",
+      "themeKey": "foreign-residents",
+      "componentKey": "theme-foreign-nationality-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "foreign-resident-count-korea-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9366e6dc718a0a47",
+      "themeKey": "foreign-residents",
+      "componentKey": "theme-foreign-nationality-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "foreign-resident-count-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "ec0e45ad9938975e",
+      "themeKey": "foreign-residents",
+      "componentKey": "theme-foreign-total-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "future-burden-ratio",
+      "expectedUnit": "％",
+      "expectedConfigHash": "b59c94e524cd52ba",
+      "themeKey": "local-finance",
+      "componentKey": "kpi-lf-future-burden",
+      "componentType": "kpi-card"
+    },
+    {
+      "metricKey": "gender-wage-gap",
+      "expectedUnit": "%",
+      "expectedConfigHash": "bedadbaa823d86cd",
+      "themeKey": "labor-wages",
+      "componentKey": "labor-wages-gender-gap",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "general-hospital-count-per-100k",
+      "expectedUnit": "施設",
+      "expectedConfigHash": "d7f892596eeb8a82",
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-supply-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "health-checkup-rate-lifestyle-diseases",
+      "expectedUnit": "％",
+      "expectedConfigHash": "594f7e76ac816089",
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-lifestyle-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "high-school-count",
+      "expectedUnit": "校",
+      "expectedConfigHash": "876bdf113fe19ffa",
+      "themeKey": "education-culture",
+      "componentKey": "theme-edu-school-type-breakdown",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "household-ratio-with-65plus",
+      "expectedUnit": "％",
+      "expectedConfigHash": "e37748499b83820a",
+      "themeKey": "aging-society",
+      "componentKey": "cmp-pop-elderly-household",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "in-pref-university-entrance-ratio-by-highschool-origin",
+      "expectedUnit": "％",
+      "expectedConfigHash": "ac7bdadbb9ae9a84",
+      "themeKey": "education-culture",
+      "componentKey": "theme-edu-higher-education-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "inland-aquaculture-harvest",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "f61941b77919bfc8",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-aquaculture-mix",
+      "componentType": "mixed-chart"
+    },
+    {
+      "metricKey": "intellectual-crime-per-100k",
+      "expectedUnit": "件",
+      "expectedConfigHash": "434c56d9679fd2fa",
+      "themeKey": "safety",
+      "componentKey": "safety-crime-types-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "investment-expenditure-ratio-pref-finance",
+      "expectedUnit": "％",
+      "expectedConfigHash": "4d112c5dfefb30de",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-expense-nature-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "job-change-rate",
+      "expectedUnit": "％",
+      "expectedConfigHash": "09c62e2143299426",
+      "themeKey": "labor-mobility",
+      "componentKey": "labor-mobility-turnover-vs-jobchange",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "jr-freight-shipment",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "54702f8900e3b116",
+      "themeKey": "railway",
+      "componentKey": "railway-freight-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "jr-passenger-transport",
+      "expectedUnit": "千人",
+      "expectedConfigHash": "f5db56c7cae2e704",
+      "themeKey": "railway",
+      "componentKey": "railway-passenger-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "junior-college-count",
+      "expectedUnit": "校",
+      "expectedConfigHash": "18b5065b91f72584",
+      "themeKey": "education-culture",
+      "componentKey": "theme-edu-school-type-breakdown",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "junior-high-school-count",
+      "expectedUnit": "校",
+      "expectedConfigHash": "bd2fec9c6cab8e47",
+      "themeKey": "education-culture",
+      "componentKey": "theme-edu-school-type-breakdown",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "late-elderly-medical-expense-per-insured",
+      "expectedUnit": "円",
+      "expectedConfigHash": "d1e3c98f535171a4",
+      "themeKey": "aging-society",
+      "componentKey": "theme-late-elderly-medical-expense-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "local-allocation-tax-ratio-pref-finance",
+      "expectedUnit": "％",
+      "expectedConfigHash": "3fbcbe096869374a",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-revenue-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "local-tax-ratio-pref-finance",
+      "expectedUnit": "％",
+      "expectedConfigHash": "fbb409e693023eb5",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-revenue-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "manufacturing-employees",
+      "expectedUnit": "人",
+      "expectedConfigHash": "ddd03e98dfef2353",
+      "themeKey": "manufacturing",
+      "componentKey": "manufacturing-establishments-employees-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "manufacturing-establishments",
+      "expectedUnit": "事業所",
+      "expectedConfigHash": "f921d6b35c801470",
+      "themeKey": "manufacturing",
+      "componentKey": "manufacturing-establishments-employees-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "manufacturing-industry-added-value",
+      "expectedUnit": "百万円",
+      "expectedConfigHash": "673878a62cab0381",
+      "themeKey": "manufacturing",
+      "componentKey": "manufacturing-shipment-value-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "manufacturing-shipment-amount",
+      "expectedUnit": "百万円",
+      "expectedConfigHash": "d55da211ff9771fe",
+      "themeKey": "manufacturing",
+      "componentKey": "manufacturing-shipment-value-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "manufacturing-shipment-amount-per-employee",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "fc1132d0ac2887b3",
+      "themeKey": "manufacturing",
+      "componentKey": "theme-manufacturing-labor-productivity",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "manufacturing-shipment-amount-per-establishment",
+      "expectedUnit": "百万円",
+      "expectedConfigHash": "8d6d6e1903f8b88e",
+      "themeKey": "manufacturing",
+      "componentKey": "theme-manufacturing-labor-productivity",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "marine-aquaculture-harvest",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "c62045e02d31862b",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-aquaculture-mix",
+      "componentType": "mixed-chart"
+    },
+    {
+      "metricKey": "marine-fishery-aquaculture-output-value",
+      "expectedUnit": "百万円",
+      "expectedConfigHash": "2c235b988e656953",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-output-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "marine-fishery-catch",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "b231a49f2d4b35d0",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-catch-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "marine-fishery-output-value",
+      "expectedUnit": "百万円",
+      "expectedConfigHash": "ad6585da6dd634e5",
+      "themeKey": "fishery-marine",
+      "componentKey": "theme-fishery-output-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "marriages",
+      "expectedUnit": "組",
+      "expectedConfigHash": "1c5df2a2b519424d",
+      "themeKey": "living-housing",
+      "componentKey": "lh-marriage-divorce-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "marriages-per-total-population",
+      "expectedUnit": "人口千対",
+      "expectedConfigHash": "3a18a53c45e276df",
+      "themeKey": "aging-society",
+      "componentKey": "marriage-divorce-rate-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "minimum-wage-by-region",
+      "expectedUnit": "円",
+      "expectedConfigHash": "90fb8b2d58b1f1a2",
+      "themeKey": "local-economy",
+      "componentKey": "theme-economy-income-wage",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "movers-in",
+      "expectedUnit": "人",
+      "expectedConfigHash": "1f31d4c42c85f67f",
+      "themeKey": "population-dynamics",
+      "componentKey": "theme-pop-migration-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "movers-out",
+      "expectedUnit": "人",
+      "expectedConfigHash": "eb9ce6c3641db260",
+      "themeKey": "population-dynamics",
+      "componentKey": "theme-pop-migration-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "national-medical-expense-per-person",
+      "expectedUnit": "千円",
+      "expectedConfigHash": "87c34ae4c4af8dbf",
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-expense-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "national-treasury-disbursement-ratio-pref-finance",
+      "expectedUnit": "％",
+      "expectedConfigHash": "687bdc2ce05e71ef",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-revenue-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "nuclear-family-households-ratio",
+      "expectedUnit": "％",
+      "expectedConfigHash": "3160916f2a09ea34",
+      "themeKey": "living-housing",
+      "componentKey": "lh-household-structure-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "number-of-establishments-economic-census-basic-survey",
+      "expectedUnit": "事業所",
+      "expectedConfigHash": "f353befd6b013e56",
+      "themeKey": "local-economy",
+      "componentKey": "theme-le-establishments-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "number-of-hotel-facilities",
+      "expectedUnit": "施設",
+      "expectedConfigHash": "58d11a271347d0b4",
+      "themeKey": "tourism",
+      "componentKey": "theme-tourism-hotel-supply-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "number-of-hotel-rooms",
+      "expectedUnit": "室",
+      "expectedConfigHash": "651cbbb4315d7fdf",
+      "themeKey": "tourism",
+      "componentKey": "theme-tourism-hotel-supply-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "nurse-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "824b85e3e2326f98",
+      "themeKey": "occupation-salary",
+      "componentKey": "theme-occ-medical-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "old-population-index",
+      "expectedUnit": "指数",
+      "expectedConfigHash": "e987909a336a1945",
+      "themeKey": "aging-society",
+      "componentKey": "theme-as-youth-old-dep-index",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "owner-occupied-housing-ratio",
+      "expectedUnit": "％",
+      "expectedConfigHash": "a6ed608c5ee3d667",
+      "themeKey": "living-housing",
+      "componentKey": "vacancy-ownership-rate-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "penal-code-offenses-recognized-per-1000",
+      "expectedUnit": "件",
+      "expectedConfigHash": "ed9ae5b81200b973",
+      "themeKey": "safety",
+      "componentKey": "crime-count-arrest-rate-trend",
+      "componentType": "mixed-chart"
+    },
+    {
+      "metricKey": "pension-benefit-total",
+      "expectedUnit": "千円",
+      "expectedConfigHash": "0a1d2fbae26e3ae1",
+      "themeKey": "aging-society",
+      "componentKey": "theme-pension-benefit-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "per-capita-inhabitant-tax-pref-municipal",
+      "expectedUnit": "千円",
+      "expectedConfigHash": "0aa4553b93ac4b18",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-income-tax-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "per-capita-total-expenditure-pref-municipal",
+      "expectedUnit": "千円",
+      "expectedConfigHash": "c78b07d58e33293a",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-per-capita-expense-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "per-taxpayer-taxable-income",
+      "expectedUnit": "千円",
+      "expectedConfigHash": "b0f9863727bc51e4",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-income-tax-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "personnel-expenditure-ratio-pref-finance",
+      "expectedUnit": "％",
+      "expectedConfigHash": "9b16556a71ed53bd",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-expense-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "physicians-in-medical-facilities-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "7d739ec8527b8d03",
+      "themeKey": "healthcare",
+      "componentKey": "theme-health-supply-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "port-cargo-export",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "d4dbaab6fb240de1",
+      "themeKey": "ports",
+      "componentKey": "ports-cargo-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "port-cargo-import",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "3095f0c5fff81d16",
+      "themeKey": "ports",
+      "componentKey": "ports-cargo-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "private-railway-passenger-transport",
+      "expectedUnit": "千人",
+      "expectedConfigHash": "17c063fa3045cce5",
+      "themeKey": "railway",
+      "componentKey": "railway-passenger-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "public-works-expenditure-ratio-pref-finance",
+      "expectedUnit": "％",
+      "expectedConfigHash": "17aca9e52cda991e",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-expense-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "ratio-65-plus",
+      "expectedUnit": "％",
+      "expectedConfigHash": "0f3b0d52ccc9a80d",
+      "themeKey": "aging-society",
+      "componentKey": "birth-rate-aging-rate-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "ratio-never-married-15-plus",
+      "expectedUnit": "％",
+      "expectedConfigHash": "1a882bf62c1c8a19",
+      "themeKey": "living-housing",
+      "componentKey": "unmarried-elderly-couple-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "real-public-debt-service-ratio",
+      "expectedUnit": "％",
+      "expectedConfigHash": "7c823776a326f6a5",
+      "themeKey": "local-finance",
+      "componentKey": "kpi-lf-debt-service",
+      "componentType": "kpi-card"
+    },
+    {
+      "metricKey": "road-expressway-length",
+      "expectedUnit": "km",
+      "expectedConfigHash": "f5688f1b3a990074",
+      "themeKey": "roads",
+      "componentKey": "roads-length-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "road-total-length-with-expressway",
+      "expectedUnit": "km",
+      "expectedConfigHash": "27f624a5d853d6ae",
+      "themeKey": "roads",
+      "componentKey": "roads-length-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "school-teacher-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "9bfbb5ba5cf23515",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-edu-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0003445758?cdCat02=1196",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1196"
-      },
+      "metricKey": "security-guard-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "cc7f92befd50b951",
+      "themeKey": "occupation-salary",
+      "componentKey": "theme-occ-service-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "serious-crime-per-100k",
+      "expectedUnit": "件",
+      "expectedConfigHash": "92902c64386c13f7",
+      "themeKey": "safety",
+      "componentKey": "safety-crime-types-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "single-person-household-old-population-ratio",
+      "expectedUnit": "％",
+      "expectedConfigHash": "3a62c7049e888577",
+      "themeKey": "aging-society",
+      "componentKey": "cmp-pop-elderly-household",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "single-person-household-ratio",
+      "expectedUnit": "％",
+      "expectedConfigHash": "77e44f7cb409af9f",
+      "themeKey": "living-housing",
+      "componentKey": "lh-household-structure-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "software-engineer-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "d3c9773954978432",
+      "themeKey": "occupation-salary",
+      "componentKey": "theme-occ-it-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "suicides-per-100k",
+      "expectedUnit": "人",
+      "expectedConfigHash": "321ab6e07456a2db",
+      "themeKey": "safety",
+      "componentKey": "suicide-accident-death-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "system-consultant-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "25efc992827d75c9",
+      "themeKey": "occupation-salary",
+      "componentKey": "theme-occ-it-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "taxi-driver-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "ed675903b65e10dc",
+      "themeKey": "occupation-salary",
+      "componentKey": "theme-occ-transport-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "taxpayer-ratio-per-pref-resident",
+      "expectedUnit": "％",
+      "expectedConfigHash": "97284392c8501609",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-taxpayer-ratio-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "theft-offenses-recognized",
+      "expectedUnit": "件",
+      "expectedConfigHash": "89fd89dea0cace2d",
+      "themeKey": "safety",
+      "componentKey": "safety-crime-types-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "theme-age-composition-elderly-population",
+      "expectedUnit": "人",
+      "expectedConfigHash": "baa3543adfba7c85",
+      "themeKey": "aging-society",
+      "componentKey": "theme-age-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "theme-age-composition-production-age-population",
+      "expectedUnit": "人",
+      "expectedConfigHash": "ad8849c3c5210e98",
+      "themeKey": "aging-society",
+      "componentKey": "theme-age-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "theme-age-composition-young-population",
+      "expectedUnit": "人",
+      "expectedConfigHash": "3b9e6ca0f5ce1d8b",
+      "themeKey": "aging-society",
+      "componentKey": "theme-age-composition",
+      "componentType": "composition-chart"
+    },
+    {
+      "metricKey": "theme-fire-injured-count",
+      "expectedUnit": "人",
+      "expectedConfigHash": "268e951b9b0606dc",
+      "themeKey": "safety",
+      "componentKey": "safety-fire-casualties-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-0-4-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "78afaea3f440aa00",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-0-4-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "5cf7bf80f6e4950b",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-10-14-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "5d7cd9a90ff21376",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-10-14-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "c5e2690a50623e65",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-15-19-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "2849d5b6a2819401",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-15-19-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "1e445a85267aead2",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-20-24-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "321402c77daa4584",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-20-24-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "649969c409b3b63f",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-25-29-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "d4d0392c3020c937",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-25-29-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "71c88e6fcc350b0c",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-30-34-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "8096d43d3b2b4aea",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-30-34-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "60e8146ed317bc89",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-35-39-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "aeb10c7adf4a8665",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-35-39-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "c95132d98109cb76",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-40-44-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "6a6fdfcbc9008368",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-40-44-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "d225bc88b5e85c83",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-45-49-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "c662de99d3fd0c0a",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-45-49-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "4c23793ad9005f61",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-5-9-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9569822844d0a483",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-5-9-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "5c6eaa6b3a183b68",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-50-54-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "c408d618c0e8fe7b",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-50-54-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "f42a335b49700510",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-55-59-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "e1636a935edcc308",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-55-59-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "8de49f307aee3763",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-60-64-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "1cd43ae20bcdb739",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-60-64-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "6bbb7a61c63944f2",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-65-69-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "3cd3e4edfad116de",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-65-69-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "be8d275e22d06945",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-70-74-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9ee4761c27b48e2f",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-70-74-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "6023bc1fb2b1f8d4",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-75-79-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9d61767769727b2c",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-75-79-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "7636b1b44e3a5717",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-80-plus-female",
+      "expectedUnit": "人",
+      "expectedConfigHash": "c6051b0342365458",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-population-pyramid-80-plus-male",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9c2592e0cfc92f8b",
+      "themeKey": "aging-society",
+      "componentKey": "theme-population-pyramid",
+      "componentType": "pyramid-chart"
+    },
+    {
+      "metricKey": "theme-prostitution-crime-recognition-count",
+      "expectedUnit": "件",
+      "expectedConfigHash": "c3df864847c5623b",
+      "themeKey": "safety",
+      "componentKey": "safety-crime-types-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "total-overnight-guests",
+      "expectedUnit": "人泊",
+      "expectedConfigHash": "7d70888ce2601167",
+      "themeKey": "tourism",
+      "componentKey": "theme-tourism-stay-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "total-overnight-guests-foreign",
+      "expectedUnit": "人泊",
+      "expectedConfigHash": "a9f3071b058203b0",
+      "themeKey": "tourism",
+      "componentKey": "theme-tourism-stay-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "traffic-accident-count",
+      "expectedUnit": "件",
+      "expectedConfigHash": "a23412ffe6b434b8",
+      "themeKey": "safety",
+      "componentKey": "traffic-accident-deaths-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "traffic-accident-injuries",
+      "expectedUnit": "人",
+      "expectedConfigHash": "16905be2fda40655",
+      "themeKey": "safety",
+      "componentKey": "traffic-accident-deaths-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "truck-driver-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "c955c2d5cdb92b8e",
+      "themeKey": "occupation-salary",
+      "componentKey": "theme-occ-transport-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "turnover-rate",
+      "expectedUnit": "％",
+      "expectedConfigHash": "fa3d6b6af8b4d5a1",
+      "themeKey": "labor-mobility",
+      "componentKey": "labor-mobility-turnover-vs-jobchange",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "unemployment-rate",
+      "expectedUnit": "％",
+      "expectedConfigHash": "5497b6b82fc01813",
+      "themeKey": "labor-wages",
+      "componentKey": "labor-wages-job-ratio-vs-unemployment",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "university-count",
+      "expectedUnit": "校",
+      "expectedConfigHash": "53c273986232d343",
+      "themeKey": "education-culture",
+      "componentKey": "theme-edu-school-type-breakdown",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "university-professor-annual-income",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "182b6366df799319",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-edu-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0003445758?cdCat02=1381",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1381"
-      },
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-service-trend",
+      "metricKey": "vacant-housing-ratio",
+      "expectedUnit": "％",
+      "expectedConfigHash": "bf75e5eb28c6223c",
+      "themeKey": "living-housing",
+      "componentKey": "vacancy-ownership-rate-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0003445758?cdCat02=1391",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1391"
-      },
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-service-trend",
+      "metricKey": "violent-crime-per-100k",
+      "expectedUnit": "件",
+      "expectedConfigHash": "cc2edd2f61d737f4",
+      "themeKey": "safety",
+      "componentKey": "safety-crime-types-donut",
+      "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "volunteer-activity-annual-participation-rate-15plus",
+      "expectedUnit": "％",
+      "expectedConfigHash": "e1fa28d14a59d6ae",
+      "themeKey": "aging-society",
+      "componentKey": "theme-volunteer-participation-trend",
       "componentType": "line-chart"
     },
     {
-      "key": "0003445758?cdCat02=1453",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1453"
-      },
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-service-trend",
-      "componentType": "line-chart"
+      "metricKey": "welfare-expenditure-ratio-pref-finance",
+      "expectedUnit": "％",
+      "expectedConfigHash": "1b9bf11fec98e7ac",
+      "themeKey": "local-finance",
+      "componentKey": "theme-lf-expense-composition",
+      "componentType": "composition-chart"
     },
     {
-      "key": "0003445758?cdCat02=1612",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1612"
-      },
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-transport-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0003445758?cdCat02=1614",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1614"
-      },
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-transport-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "key": "0003445758?cdCat02=1661",
-      "statsDataId": "0003445758",
-      "filters": {
-        "cdCat02": "1661"
-      },
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-transport-trend",
+      "metricKey": "young-population-index",
+      "expectedUnit": "指数",
+      "expectedConfigHash": "17f9d8d5270c241a",
+      "themeKey": "aging-society",
+      "componentKey": "theme-as-youth-old-dep-index",
       "componentType": "line-chart"
     }
   ]

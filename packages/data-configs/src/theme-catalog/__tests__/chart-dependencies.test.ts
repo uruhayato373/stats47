@@ -8,8 +8,12 @@ import {
   requestKey,
 } from "../chart-dependencies";
 import { THEME_CATALOGS } from "../index";
-import { enumeratePyramidCategoryCodes, PYRAMID_STATS_DATA_ID } from "../population-pyramid-deps";
+import {
+  buildPopulationPyramidSeriesRefs,
+  enumeratePyramidCategoryCodes,
+} from "../population-pyramid-deps";
 import type { CatalogChart } from "../types";
+import migrationContract from "./fixtures/series-ref-migration-contract.json";
 
 /**
  * WP4 — 依存抽出の共通 collector。
@@ -35,13 +39,14 @@ const live = collectThemeDataDependencies(Object.values(THEME_CATALOGS));
 
 describe("① 期待依存集合が完全に列挙できる (baseline lock)", () => {
   it("総 request / distinct request を固定 (移行で動いたら更新)", () => {
-    expect(live.totalRequests).toBe(240);
-    expect(live.distinctRequests.length).toBe(180);
+    expect(live.totalRequests).toBe(0);
+    expect(live.distinctRequests).toEqual([]);
+    expect(live.totalMetricRefs).toBe(267);
+    expect(live.distinctMetricKeys).toHaveLength(192);
   });
 
   it("R2へ移行済みの系列も metricKey 依存として列挙する", () => {
-    expect(live.totalMetricRefs).toBe(7);
-    expect(live.distinctMetricKeys).toEqual([
+    const preexisting = [
       "care-worker-annual-income",
       "current-balance-ratio",
       "disposable-income-worker-households",
@@ -49,7 +54,12 @@ describe("① 期待依存集合が完全に列挙できる (baseline lock)", ()
       "gender-wage-gap",
       "minimum-wage-by-region",
       "nurse-annual-income",
-    ]);
+    ];
+    const expected = [
+      ...new Set([...preexisting, ...migrationContract.flatMap((row) => row.metricKeys)]),
+    ].sort();
+    expect(live.totalMetricRefs).toBe(267);
+    for (const key of expected) expect(live.distinctMetricKeys).toContain(key);
     expect(
       live.perChart.find((chart) => chart.componentKey === "theme-occ-medical-trend")
         ?.metricRefs,
@@ -60,10 +70,13 @@ describe("① 期待依存集合が完全に列挙できる (baseline lock)", ()
     ).toEqual([{ metricKey: "current-balance-ratio" }]);
   });
 
-  it("pyramid は props 空でも 34 request/chart を列挙 (旧監査で漏れていた)", () => {
+  it("pyramid は34の型付きR2 metric/chartを列挙する", () => {
     const pyr = live.perChart.filter((p) => p.componentType === "pyramid-chart");
     expect(pyr.length).toBeGreaterThan(0);
-    for (const p of pyr) expect(p.requests.length).toBe(34);
+    for (const p of pyr) {
+      expect(p.requests).toEqual([]);
+      expect(p.metricRefs).toHaveLength(34);
+    }
   });
 });
 
@@ -114,14 +127,35 @@ describe("③ 陰性対照 — 依存を 1 つ落とすと request が減る", (
     expect(dep.requests.map((r) => r.filters.cdCat01).sort()).toEqual(["A", "B", "T"]);
   });
 
+  it("CPI typed refs は全metricを列挙し、生requestを残さない", () => {
+    const dep = collectChartDependencies(
+      chart("cpi-profile", {
+        seriesRefs: [
+          { metricKey: "consumer-price-difference-index-food" },
+          { metricKey: "consumer-price-difference-index-housing" },
+        ],
+      }),
+    );
+    expect(dep.metricRefs.map((ref) => ref.metricKey)).toEqual([
+      "consumer-price-difference-index-food",
+      "consumer-price-difference-index-housing",
+    ]);
+    expect(dep.requests).toEqual([]);
+  });
+
   it("CPI: statsDataId を落とすと request が 0 になる (top-level param の陰性対照)", () => {
     expect(collectChartDependencies(chart("cpi-profile", { statsDataId: "S" })).requests.length).toBe(1);
     expect(collectChartDependencies(chart("cpi-profile", { year: "2024" })).requests.length).toBe(0);
   });
 
-  it("pyramid: SSOT の code 数と request 数が一致する (code を減らせば request も減る)", () => {
-    const dep = collectChartDependencies(chart("pyramid-chart", {}));
-    expect(dep.requests.length).toBe(enumeratePyramidCategoryCodes().length);
+  it("pyramid: SSOT の系列を1つ落とすとmetric依存も1つ減る", () => {
+    const refs = buildPopulationPyramidSeriesRefs();
+    const full = collectChartDependencies(chart("pyramid-chart", { seriesRefs: refs }));
+    const missing = collectChartDependencies(
+      chart("pyramid-chart", { seriesRefs: refs.slice(1) }),
+    );
+    expect(full.metricRefs).toHaveLength(enumeratePyramidCategoryCodes().length);
+    expect(missing.metricRefs).toHaveLength(full.metricRefs.length - 1);
   });
 
   it("markdown-section は依存 0", () => {
@@ -144,19 +178,22 @@ describe("④ provenance 付き collector — 監査母集団の単一ソース 
     }
   });
 
-  it("pyramid の 34 request が provenance 付きで含まれる (旧 live 監査で漏れていた)", () => {
-    const pyr = prov.distinct.filter((d) => d.componentType === "pyramid-chart");
+  it("pyramid の34 R2 metricがprovenance付きで含まれる", () => {
+    const pyr = prov.distinctMetricRefs.filter((d) => d.componentType === "pyramid-chart");
     expect(pyr.length).toBe(34);
-    for (const d of pyr) expect(d.request.statsDataId).toBe(PYRAMID_STATS_DATA_ID);
+    for (const d of pyr) expect(d.metricKey).toMatch(/^theme-population-pyramid-/);
   });
 });
 
 describe("⑤ 依存ミラー — 決定的・正典と byte 一致する形 (audit が読む鏡)", () => {
   it("buildThemeDependencyMirror は distinct を key 昇順で並べ件数を一致させる", () => {
     const mirror = buildThemeDependencyMirror(THEME_CATALOGS);
-    expect(mirror.totalRequests).toBe(240);
-    expect(mirror.distinctRequests).toBe(180);
-    expect(mirror.requests.length).toBe(180);
+    expect(mirror.totalRequests).toBe(0);
+    expect(mirror.distinctRequests).toBe(0);
+    expect(mirror.requests).toEqual([]);
+    expect(mirror.totalMetricRefs).toBe(267);
+    expect(mirror.distinctMetricRefs).toBe(192);
+    expect(mirror.metrics).toHaveLength(192);
     const keys = mirror.requests.map((r) => r.key);
     expect(keys).toEqual([...keys].sort());
     // 各 request は audit が e-Stat に送れる形 (statsDataId + filters)
@@ -164,6 +201,12 @@ describe("⑤ 依存ミラー — 決定的・正典と byte 一致する形 (au
       expect(typeof r.statsDataId).toBe("string");
       expect(r.statsDataId.length).toBeGreaterThan(0);
       expect(typeof r.filters).toBe("object");
+    }
+    const metricKeys = mirror.metrics.map((metric) => metric.metricKey);
+    expect(metricKeys).toEqual([...metricKeys].sort());
+    for (const metric of mirror.metrics) {
+      expect(metric.expectedUnit.length).toBeGreaterThan(0);
+      expect(metric.expectedConfigHash).toMatch(/^[0-9a-f]{16}$/);
     }
   });
 });

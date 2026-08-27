@@ -66,13 +66,13 @@ ThemeCatalog (SSOT, git TS)
 | 見せたいこと (データ形状)             | componentType       | 補足                                                     |
 | ------------------------------------- | ------------------- | -------------------------------------------------------- |
 | 1 指標の単一値 (最新値の強調)         | `kpi-card`          | KPI カード (非チャート)                                  |
-| 時系列の推移・2 指標の乖離            | `line-chart`        | 折れ線。`estatParams`/`labels`/`seriesColors`            |
+| 時系列の推移・2 指標の乖離            | `line-chart`        | 折れ線。`seriesRefs`/`labels`/`seriesColors`              |
 | 棒 + 折れ線の二軸                     | `mixed-chart`       | 左 Y=棒 / 右 Y=折れ線                                    |
-| 構成比 (内訳・その他算出・trend タブ) | `composition-chart` | セグメント構成。`segments`/`statsDataId`                 |
+| 構成比 (内訳・その他算出・trend タブ) | `composition-chart` | `seriesRefs` の型付き系列から構成比を算出                 |
 | 単年の内訳円グラフ                    | `donut-chart`       | `topN` 指定可                                            |
 | 消費者物価の指標プロファイル          | `cpi-profile`       | CPI 専用                                                 |
 | 消費者物価のヒートマップ              | `cpi-heatmap`       | CPI 専用                                                 |
-| 年齢構造 (男女×年齢階級)              | `pyramid-chart`     | 人口ピラミッド (非チャート扱いで個別描画)                |
+| 年齢構造 (男女×年齢階級)              | `pyramid-chart`     | 男女×年齢階級34本の `seriesRefs` を同じR2契約で読む       |
 | 考察・解説テキスト / FAQ              | `markdown-section`  | 末尾フル幅。FAQ は `componentProps.displayMode="faq"`   |
 
 FAQ の authored SSOT は `componentProps.markdown` に `### Q1: 質問` + 回答の組を記述し、必ず
@@ -88,6 +88,15 @@ Markdown 見出しを再解析しない。空回答・不正見出し・重複�
   (`transform.chartToPageComponent`) が page-components 出力時に role→hex へ解決するので app 側 renderer は
   現状どおり hex を読む。生 hex を色キーに書くと validator `[raw-color]` が error にする
   (choropleth の連続・発散配色は別系統で `color-scheme-policy.ts` が正典・role 対象外)。
+- **チャートの観測値参照は `StatSeriesRef` を使う**。line/donut/composition は `seriesRefs`、
+  mixed は `columnSeriesRefs` / `lineSeriesRefs`、KPI は単一要素の `seriesRefs` とする。
+  参照には `metricKey` と表示上必要な label/color role だけを置き、e-Stat filter・倍率・変換式・unitを複製しない。
+  値、年、unit、欠測は全種別で `@stats47/stats-r2/readers` の同じpayload契約から解決する。
+  生の `estatParams` / `statsDataId` / category filter は最終形では禁止し、validator・契約test・
+  `check-web-estat-imports.cjs` が catalog と production runtime の再混入をCIで拒否する。
+  依存ミラーは同じcollectorから全 `metricKey` を列挙し、週次live監査がR2上の存在、年、有限値、unit、
+  `meta.areaCount`、recipe/config hashを全件検査する。47県未満はshape-gate SSOTと同じwarn-onlyだが、
+  `meta.areaCount` と実際の地域数の不一致はerrorとする。
 - **9 種以外のチャート表現が要るとき**は theme renderer 側 (`ThemeDbChartRenderer` /
   `ThemeDbChartComponentProps`) に型と描画を追加してから (chart-component-builder / theme-ui-manager)、
   `CATALOG_COMPONENT_TYPES` にも足す。カタログはあくまで既存の theme componentType の割当。

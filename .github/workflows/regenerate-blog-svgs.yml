@@ -32,7 +32,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'all: 全チャート / scatter-canonical: 散布図を正規化 / source-repair: 欠落 source.json を復旧'
+        description: 'all: 全チャート / scatter-canonical: 散布図を正規化 / source-repair: source/data JSONをCAS復旧'
         required: false
         type: choice
         options:
@@ -45,7 +45,7 @@ on:
         required: false
         default: ''
       source_repair_payload:
-        description: 'source-repair 用 base64 JSON: [{slug,base,manifest}]（既存 manifest の上書き不可）'
+        description: 'base64 JSON: [{slug,base,manifest,expectedSourceSha256?,data?,expectedDataSha256?}]'
         required: false
         default: ''
       dry_run:
@@ -150,7 +150,7 @@ jobs:
             echo "散布図はすでに正規化済みです（R2更新なし）"
           fi
 
-      - name: 🩹 Prepare missing source manifests
+      - name: 🩹 Prepare source/data repairs with CAS
         if: ${{ github.event.inputs.mode == 'source-repair' }}
         env:
           SOURCE_REPAIR_PAYLOAD_B64: ${{ github.event.inputs.source_repair_payload }}
@@ -159,6 +159,10 @@ jobs:
           import fs from 'node:fs';
           import path from 'node:path';
           import { inspectChartSourceManifest } from './.claude/scripts/lib/chart-provenance.mjs';
+          import {
+            parseSourceRepairPayload,
+            resolveCasJsonWrite,
+          } from './.claude/scripts/blog/lib/source-repair-core.mjs';
 
           const { METRICS_REGISTRY } = await import('@stats47/data-configs');
           const { resolveBlogChartSurveyTaxonomy } = await import(
@@ -166,13 +170,10 @@ jobs:
           );
 
           const encoded = process.env.SOURCE_REPAIR_PAYLOAD_B64 ?? '';
-          if (!/^[A-Za-z0-9+/=]+$/.test(encoded)) throw new Error('source_repair_payload は base64 必須');
-          const repairs = JSON.parse(Buffer.from(encoded, 'base64').toString('utf8'));
-          if (!Array.isArray(repairs) || repairs.length < 1 || repairs.length > 20) {
-            throw new Error('repair は1〜20件の配列にすること');
-          }
+          const repairs = parseSourceRepairPayload(encoded, 40);
           const safeName = /^[a-z0-9][a-z0-9-]*$/;
           const keys = [];
+          const actions = { create: 0, update: 0, unchanged: 0 };
           for (const repair of repairs) {
             if (!repair || !safeName.test(repair.slug) || !safeName.test(repair.base)) {
               throw new Error('slug/base は kebab-case 必須');
@@ -191,19 +192,44 @@ jobs:
             const key = `app/blog/${repair.slug}/data/${repair.base}.source.json`;
             if (!fs.existsSync(svg)) throw new Error(`公開 SVG が無い: ${repair.slug}/${repair.base}`);
             const content = `${JSON.stringify(repair.manifest, null, 2)}\n`;
-            if (fs.existsSync(target)) {
-              if (fs.readFileSync(target, 'utf8') !== content) {
-                throw new Error(`既存 source.json は上書きしない: ${repair.slug}/${repair.base}`);
-              }
-              keys.push(key);
-              continue;
+            const sourceResolution = resolveCasJsonWrite({
+              currentContent: fs.existsSync(target) ? fs.readFileSync(target, 'utf8') : null,
+              nextContent: content,
+              expectedSha256: repair.expectedSourceSha256 ?? null,
+              label: `${repair.slug}/${repair.base}.source.json`,
+            });
+            actions[sourceResolution.action] += 1;
+            if (sourceResolution.action !== 'unchanged') {
+              fs.writeFileSync(target, content);
             }
-            fs.writeFileSync(target, content);
             keys.push(key);
+
+            if (repair.data !== undefined) {
+              if (!repair.data || typeof repair.data !== 'object') {
+                throw new Error(`${repair.slug}/${repair.base}: data はobject/array必須`);
+              }
+              const dataTarget = path.join(dir, `${repair.base}.json`);
+              const dataKey = `app/blog/${repair.slug}/data/${repair.base}.json`;
+              const dataContent = `${JSON.stringify(repair.data, null, 2)}\n`;
+              const dataResolution = resolveCasJsonWrite({
+                currentContent: fs.existsSync(dataTarget)
+                  ? fs.readFileSync(dataTarget, 'utf8')
+                  : null,
+                nextContent: dataContent,
+                expectedSha256: repair.expectedDataSha256 ?? null,
+                label: `${repair.slug}/${repair.base}.json`,
+              });
+              actions[dataResolution.action] += 1;
+              if (dataResolution.action !== 'unchanged') {
+                fs.writeFileSync(dataTarget, dataContent);
+              }
+              keys.push(dataKey);
+            }
           }
           if (keys.length === 0) throw new Error('新規 repair 対象が0件');
-          fs.writeFileSync('.local/generated-blog-svg-keys.txt', `${keys.sort().join('\n')}\n`);
-          console.log(`source repair: ${keys.length}件`);
+          const uniqueKeys = [...new Set(keys)].sort();
+          fs.writeFileSync('.local/generated-blog-svg-keys.txt', `${uniqueKeys.join('\n')}\n`);
+          console.log(`source/data repair: keys=${uniqueKeys.length} actions=${JSON.stringify(actions)}`);
           NODE
 
       - name: 🖼️ Build review gallery (local)

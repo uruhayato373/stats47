@@ -69,22 +69,21 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "componentType": "donut-chart",
       "title": "産業別就業者構成比",
       "componentProps": {
-        "statsDataId": "0000010206",
-        "categories": [
+        "seriesRefs": [
           {
-            "code": "#F01201",
-            "label": "第1次産業",
-            "color": "improve"
+            "metricKey": "employed-people-ratio-primary",
+            "label": "第1次産業就業者比率",
+            "colorRole": "improve"
           },
           {
-            "code": "#F01202",
-            "label": "第2次産業",
-            "color": "population"
+            "metricKey": "employed-people-ratio-secondary",
+            "label": "第2次産業就業者比率",
+            "colorRole": "population"
           },
           {
-            "code": "#F01203",
-            "label": "第3次産業",
-            "color": "series-12"
+            "metricKey": "employed-people-ratio-tertiary",
+            "label": "第3次産業就業者比率",
+            "colorRole": "series-12"
           }
         ],
         "topN": 3
@@ -139,16 +138,14 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "componentType": "mixed-chart",
       "title": "有効求人倍率と完全失業率の推移",
       "componentProps": {
-        "columnParams": [
+        "columnSeriesRefs": [
           {
-            "statsDataId": "0000010206",
-            "cdCat01": "#F03103"
+            "metricKey": "active-job-opening-ratio"
           }
         ],
-        "lineParams": [
+        "lineSeriesRefs": [
           {
-            "statsDataId": "0000010206",
-            "cdCat01": "#F01301"
+            "metricKey": "unemployment-rate"
           }
         ],
         "columnLabels": [
@@ -310,10 +307,9 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "全産業事業所数の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C2107"
+            "metricKey": "number-of-establishments-economic-census-basic-survey"
           }
         ],
         "labels": [

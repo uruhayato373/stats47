@@ -31,6 +31,11 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
       "role": "context"
     },
     {
+      "rankingKey": "crude-death-rate",
+      "shortLabel": "死亡率",
+      "role": "context"
+    },
+    {
       "rankingKey": "average-age-of-first-marriage-wife",
       "shortLabel": "初婚年齢(妻)",
       "role": "context"

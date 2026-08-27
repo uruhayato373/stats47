@@ -66,6 +66,16 @@ export const LOCAL_FINANCE_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "assistance-expenditure-ratio-pref-finance",
+      "shortLabel": "扶助費割合",
+      "role": "context"
+    },
+    {
+      "rankingKey": "investment-expenditure-ratio-pref-finance",
+      "shortLabel": "投資的経費割合",
+      "role": "context"
+    },
+    {
       "rankingKey": "welfare-expenditure-ratio-pref-finance",
       "shortLabel": "民生費割合",
       "role": "secondary"

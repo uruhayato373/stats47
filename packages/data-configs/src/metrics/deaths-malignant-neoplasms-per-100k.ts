@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const deathsMalignantNeoplasmsPer100k: MetricConfig = {
   "key": "deaths-malignant-neoplasms-per-100k",
   "title": "腫瘍による死亡者数",
+  "description": "悪性新生物（がん）による死亡者数を、人口10万人当たりで比較するための指標。",
   "unit": "人",
   "category": "population",
   "source": {

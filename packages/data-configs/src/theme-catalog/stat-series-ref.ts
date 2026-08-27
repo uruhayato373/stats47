@@ -73,8 +73,10 @@ export interface LineChartComponentProps {
 }
 
 export interface MixedChartComponentProps {
-  columnParams: EstatParams[];
-  lineParams: EstatParams[];
+  columnParams?: EstatParams[];
+  lineParams?: EstatParams[];
+  columnSeriesRefs?: StatSeriesRef[];
+  lineSeriesRefs?: StatSeriesRef[];
   columnLabels?: string[];
   lineLabels?: string[];
   leftUnit?: string;
@@ -84,22 +86,29 @@ export interface MixedChartComponentProps {
 }
 
 export interface CompositionChartComponentProps {
-  statsDataId: string;
-  segments: Array<{ code: string; label: string; color?: string }>;
+  statsDataId?: string;
+  segments?: Array<{ code: string; label: string; color?: string }>;
+  seriesRefs?: StatSeriesRef[];
   totalCode?: string;
   defaultTab?: "composition" | "trend";
 }
 
 export interface DonutChartComponentProps {
-  statsDataId: string;
-  categories: Array<{ code: string; label: string; color: string }>;
+  statsDataId?: string;
+  categories?: Array<{ code: string; label: string; color: string }>;
+  seriesRefs?: StatSeriesRef[];
   topN?: number;
 }
 
 export interface CpiChartComponentProps {
-  statsDataId: string;
+  statsDataId?: string;
+  seriesRefs?: StatSeriesRef[];
   excludeCodes?: string[];
   year?: string;
+}
+
+export interface PyramidChartComponentProps {
+  seriesRefs: StatSeriesRef[];
 }
 
 /** runtime が扱う 6 chart の共有 discriminated union。 */
@@ -166,6 +175,11 @@ export function validateStatSeriesRefAlignment(
   if (props.seriesRefs === undefined) return [];
   const refs = parseStatSeriesRefs(props.seriesRefs);
   if (!refs) return ["seriesRefs は1件以上の有効な StatSeriesRef 配列にする"];
+
+  // 非公開の theme-only metric はデータ取得SSOTであり、/ranking へのナビゲーション対象ではない。
+  // 1件でも含む複合chartは relatedRankingKeys と1:1にせず、公開済みの代表指標へ案内する。
+  // 「表示不要のmetricを無理にランキング化しない」という ThemeCatalog 契約を優先する。
+  if (refs.some((ref) => getMetricConfig(ref.metricKey)?.isActive === false)) return [];
 
   const errors: string[] = [];
   if (refs.length !== relatedRankingKeys.length) {
@@ -338,9 +352,36 @@ export function validateChartProps(
       break;
       }
     case "mixed-chart":
-      knownKeys = ["columnParams", "lineParams", "columnLabels", "lineLabels", "leftUnit", "rightUnit", "columnColors", "lineColors"];
-      need(isEstatParamsList(props.columnParams), "mixed-chart: columnParams (非空配列) が必要");
-      need(isEstatParamsList(props.lineParams), "mixed-chart: lineParams (非空配列) が必要");
+      knownKeys = ["columnParams", "lineParams", "columnSeriesRefs", "lineSeriesRefs", "columnLabels", "lineLabels", "leftUnit", "rightUnit", "columnColors", "lineColors"];
+      {
+        const hasRawColumns = isEstatParamsList(props.columnParams);
+        const hasRawLines = isEstatParamsList(props.lineParams);
+        const columnRefs = parseStatSeriesRefs(props.columnSeriesRefs);
+        const lineRefs = parseStatSeriesRefs(props.lineSeriesRefs);
+        const hasRaw = hasRawColumns && hasRawLines;
+        const hasAnyRaw = props.columnParams !== undefined || props.lineParams !== undefined;
+        const hasRefs = columnRefs !== null && lineRefs !== null;
+        const hasAnyRefs =
+          props.columnSeriesRefs !== undefined || props.lineSeriesRefs !== undefined;
+        need(hasRaw || hasRefs, "mixed-chart: column/line の raw params または typed refs が必要");
+        need(!(hasAnyRaw && hasAnyRefs), "mixed-chart: raw params と typed refs は同時指定できない");
+        need(
+          props.columnParams === undefined || hasRawColumns,
+          "mixed-chart: columnParams は非空配列",
+        );
+        need(
+          props.lineParams === undefined || hasRawLines,
+          "mixed-chart: lineParams は非空配列",
+        );
+        need(
+          props.columnSeriesRefs === undefined || columnRefs !== null,
+          "mixed-chart: columnSeriesRefs は登録済み metricKey の非空配列",
+        );
+        need(
+          props.lineSeriesRefs === undefined || lineRefs !== null,
+          "mixed-chart: lineSeriesRefs は登録済み metricKey の非空配列",
+        );
+      }
       for (const key of ["columnLabels", "lineLabels", "columnColors", "lineColors"] as const) {
         if (props[key] !== undefined) need(isStringArray(props[key]), `mixed-chart: ${key} は string 配列`);
       }
@@ -349,22 +390,47 @@ export function validateChartProps(
       }
       break;
     case "composition-chart":
-      knownKeys = ["statsDataId", "segments", "totalCode", "defaultTab"];
-      need(nonEmptyString(props.statsDataId), "composition-chart: statsDataId が必要");
-      need(isCodeLabelList(props.segments, false), "composition-chart: segments {code,label} が必要");
+      knownKeys = ["statsDataId", "segments", "seriesRefs", "totalCode", "defaultTab"];
+      {
+        const hasRaw = nonEmptyString(props.statsDataId) && isCodeLabelList(props.segments, false);
+        const refs = parseStatSeriesRefs(props.seriesRefs);
+        const hasAnyRaw = props.statsDataId !== undefined || props.segments !== undefined;
+        const hasAnyRefs = props.seriesRefs !== undefined;
+        need(hasRaw || refs !== null, "composition-chart: raw recipe または typed refs が必要");
+        need(!(hasAnyRaw && hasAnyRefs), "composition-chart: raw recipe と typed refs は同時指定できない");
+        need(!hasAnyRefs || refs !== null, "composition-chart: seriesRefs は登録済み metricKey の非空配列");
+        need(!hasAnyRaw || hasRaw, "composition-chart: raw recipe は statsDataId と segments を両方指定する");
+      }
       if (props.totalCode !== undefined) need(nonEmptyString(props.totalCode), "composition-chart: totalCode は空でない string");
       if (props.defaultTab !== undefined) need(props.defaultTab === "composition" || props.defaultTab === "trend", "composition-chart: defaultTab が不正");
       break;
     case "donut-chart":
-      knownKeys = ["statsDataId", "categories", "topN"];
-      need(nonEmptyString(props.statsDataId), "donut-chart: statsDataId が必要");
-      need(isCodeLabelList(props.categories, true), "donut-chart: categories {code,label,color} が必要");
+      knownKeys = ["statsDataId", "categories", "seriesRefs", "topN"];
+      {
+        const hasRaw = nonEmptyString(props.statsDataId) && isCodeLabelList(props.categories, true);
+        const refs = parseStatSeriesRefs(props.seriesRefs);
+        const hasAnyRaw = props.statsDataId !== undefined || props.categories !== undefined;
+        const hasAnyRefs = props.seriesRefs !== undefined;
+        need(hasRaw || refs !== null, "donut-chart: raw recipe または typed refs が必要");
+        need(!(hasAnyRaw && hasAnyRefs), "donut-chart: raw recipe と typed refs は同時指定できない");
+        need(!hasAnyRefs || refs !== null, "donut-chart: seriesRefs は登録済み metricKey の非空配列");
+        need(!hasAnyRaw || hasRaw, "donut-chart: raw recipe は statsDataId と categories を両方指定する");
+      }
       if (props.topN !== undefined) need(Number.isInteger(props.topN) && (props.topN as number) > 0, "donut-chart: topN は正の整数");
       break;
     case "cpi-profile":
     case "cpi-heatmap":
-      knownKeys = ["statsDataId", "excludeCodes", "year"];
-      need(nonEmptyString(props.statsDataId), `${componentType}: statsDataId が必要`);
+      knownKeys = ["statsDataId", "seriesRefs", "excludeCodes", "year"];
+      {
+        const hasRaw = nonEmptyString(props.statsDataId);
+        const refs = parseStatSeriesRefs(props.seriesRefs);
+        const hasRefs = refs !== null;
+        need(hasRaw || hasRefs, `${componentType}: statsDataId または seriesRefs が必要`);
+        need(!(hasRaw && hasRefs), `${componentType}: raw recipe と typed refs は同時指定できない`);
+        if (props.seriesRefs !== undefined) {
+          need(hasRefs, `${componentType}: seriesRefs は登録済み metricKey の非空配列`);
+        }
+      }
       if (props.excludeCodes !== undefined) need(isStringArray(props.excludeCodes), `${componentType}: excludeCodes は string 配列`);
       if (props.year !== undefined) need(nonEmptyString(props.year), `${componentType}: year は空でない string`);
       break;
@@ -408,8 +474,11 @@ export function validateChartProps(
       if (props.sources !== undefined) need(isMarkdownSources(props.sources), "markdown-section: sources は {label,url?} 配列");
       break;
     case "pyramid-chart":
-      knownKeys = [];
-      // props は空 ({})。rankingLink / dataSource で描画される。必須フィールドなし。
+      knownKeys = ["seriesRefs"];
+      need(
+        parseStatSeriesRefs(props.seriesRefs)?.length === 34,
+        "pyramid-chart: seriesRefs は登録済み年齢×性別metric 34件の配列",
+      );
       break;
     default:
       errors.push(`未知の componentType: ${componentType} (依存抽出の対象外になる)`);

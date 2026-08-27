@@ -79,11 +79,11 @@ test('data-refresh does nothing when a push carries no request file', () => {
   }
 });
 
-test('legacy recipe migration is explicit, hash-gated, and runs before the stats push', () => {
+test('reviewed recipe migration is explicit, hash-gated, and runs before the stats push', () => {
   const doc = YAML.parse(read('.github/workflows/data-refresh.yml'));
   const steps = doc.jobs.refresh.steps;
   const migrationAt = steps.findIndex((step) =>
-    String(step.name ?? '').includes('Migrate reviewed legacy recipe metadata'),
+    String(step.name ?? '').includes('Migrate reviewed compatibility recipe metadata'),
   );
   const pushAt = steps.findIndex((step) =>
     String(step.name ?? '').includes('Push observations to R2'),
@@ -94,7 +94,7 @@ test('legacy recipe migration is explicit, hash-gated, and runs before the stats
     /migrate_legacy_recipes == 'true'/,
     '通常refreshでも旧recipe migrationが動く',
   );
-  assert.match(String(steps[migrationAt].run ?? ''), /migrate:legacy-recipes:stage/);
+  assert.match(String(steps[migrationAt].run ?? ''), /migrate:reviewed-recipes:stage/);
 
   const migrationSource = read(
     'packages/stats-r2/src/scripts/lib/legacy-recipe-migration.ts',

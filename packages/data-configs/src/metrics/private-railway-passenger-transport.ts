@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const privateRailwayPassengerTransport: MetricConfig = {
   "key": "private-railway-passenger-transport",
   "title": "民鉄輸送人員",
+  "description": "民営鉄道が輸送した年間旅客数。都道府県ごとの民鉄利用規模を千人単位で示す。",
   "unit": "千人",
   "category": "tourism",
   "source": {

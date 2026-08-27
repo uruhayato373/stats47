@@ -4,6 +4,7 @@ export const moversIn: MetricConfig = {
   "key": "movers-in",
   "title": "転入者数",
   "subtitle": "外国人移動者",
+  "description": "都道府県へ転入した外国人移動者の年間人数。地域間移動の流入側を実数で示す。",
   "unit": "人",
   "category": "population",
   "source": {

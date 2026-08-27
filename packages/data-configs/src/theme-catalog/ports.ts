@@ -59,27 +59,22 @@ export const PORTS_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "輸出入 海上貨物量の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0003130738",
-            "cdCat01": "110"
+            "metricKey": "port-cargo-export",
+            "label": "輸出貨物量",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0003130738",
-            "cdCat01": "120"
+            "metricKey": "port-cargo-import",
+            "label": "輸入貨物量",
+            "colorRole": "count"
           }
-        ],
-        "labels": [
-          "輸出",
-          "輸入"
-        ],
-        "seriesColors": [
-          "population",
-          "count"
         ]
       },
       "relatedRankingKeys": [
-        "port-cargo-total"
+        "port-cargo-export",
+        "port-cargo-import"
       ],
       "sourceName": "港湾統計",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
