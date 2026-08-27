@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-27T06:23:03.926Z",
+  "updatedAt": "2026-08-27T06:45:10.718Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -402,9 +402,9 @@
     },
     "DATA-REFRESH-ZEROGATE-ALLORNOTHING-01": {
       "class": "impl-large",
-      "status": "open",
+      "status": "completed",
       "sourceFile": ".claude/todo/backlog.md",
-      "title": "形状ゲートに掛かる4 metricを是正する",
+      "title": "形状ゲートに掛かる 4 metric を是正する",
       "attempts": [
         {
           "at": "2026-08-17T16:58:48.887Z",
@@ -437,15 +437,34 @@
           "evidence": "commuter-ratioの市区町村9640%を一次データで正当値と確定しlegitimate例外と陰性対照を実装。main反映後のfull refresh実走が未承認のため未完了",
           "failReason": null,
           "followUps": []
+        },
+        {
+          "at": "2026-08-27T06:45:10.718Z",
+          "runId": "33040005756",
+          "model": "gpt-5.6-sol",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run view 33040005756 --log",
+              "npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts --concurrency 25"
+            ],
+            "pass": true
+          },
+          "evidence": "run 33040005756 success。31 payload反映、app/stats upload 31/31、派生13706/13706、公開契約finding 0。公開監査は欠落0、未許可shape0、recipe未焼込/乖離/設定欠落0。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
+        "failCount": 0,
         "lastReason": null,
-        "since": "2026-08-26T07:58:26.583Z"
+        "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-27T06:45:10.718Z"
     },
     "IMAGE-DELTA-PUBLISH-01": {
       "class": "impl-small",
@@ -521,9 +540,9 @@
     },
     "KSJ-PREF-ASSIGN-01": {
       "class": "impl-large",
-      "status": "open",
-      "sourceFile": null,
-      "title": null,
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "KSJ 由来ランキングの県帰属を全 13 指標で是正する",
       "attempts": [
         {
           "at": "2026-08-21T17:05:22.088Z",
@@ -586,12 +605,31 @@
           "evidence": "impl-large は draft PR 経路 (delegate=agent:backlog-solver-hard) で、この CI run では着手しない規約により skip",
           "failReason": "class-needs-pr",
           "followUps": []
+        },
+        {
+          "at": "2026-08-27T06:44:57.210Z",
+          "runId": "33040005756",
+          "model": "gpt-5.6-sol",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run view 33040005756 --log",
+              "npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts --concurrency 25"
+            ],
+            "pass": true
+          },
+          "evidence": "公開R2で13指標の配信を確認済み。tourism-resource-countは47県・2014年・新潟1913・未解決0。full refresh後の公開2167件監査も欠落/shape/delivery/config drift全0。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 2,
+        "failCount": 0,
         "lastReason": null,
-        "since": "2026-08-21T17:05:22.088Z"
+        "since": null
       },
       "reclassifiedFrom": [
         {
@@ -605,11 +643,11 @@
           "at": "2026-08-26T08:13:12.370Z"
         }
       ],
-      "completedAt": null
+      "completedAt": "2026-08-27T06:44:57.210Z"
     },
     "PUBLIC-DATA-CONTRACT-AUDIT-01": {
       "class": "impl-large",
-      "status": "open",
+      "status": "completed",
       "sourceFile": ".claude/todo/backlog.md",
       "title": "blog / ranking / theme の配信データ契約を全量検証する",
       "attempts": [
@@ -658,15 +696,34 @@
           "evidence": "local実装・6 fixture・3公開経路・週次Issue配線はgreen。live全量はpork SVG 1件404、full data-refreshとR2反映が未承認のため未完了",
           "failReason": null,
           "followUps": []
+        },
+        {
+          "at": "2026-08-27T06:44:56.425Z",
+          "runId": "33040005756",
+          "model": "gpt-5.6-sol",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run view 33040005756 --log",
+              "npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts --concurrency 25"
+            ],
+            "pass": true
+          },
+          "evidence": "run 33040005756の公開全量監査でranking 2167、themeRefs 299、blog 434、assets 1088、findings 0。派生snapshot 13706件もR2 upload error 0。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
+        "failCount": 0,
         "lastReason": null,
-        "since": "2026-08-26T07:58:26.502Z"
+        "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-27T06:44:56.425Z"
     },
     "QUALITY-GATE-COVERAGE-01": {
       "class": "needs-owner",
@@ -1335,9 +1392,9 @@
     },
     "RANKING-VALUES-PARTITION-INTEGRITY-01": {
       "class": "impl-large",
-      "status": "open",
-      "sourceFile": null,
-      "title": null,
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "分類軸の絞り忘れによる配信データ汚染の是正",
       "attempts": [
         {
           "at": "2026-08-26T08:30:03.934Z",
@@ -1361,15 +1418,34 @@
           "evidence": "公開2167件は欠落0/drift0。e-Stat一次資料で旧known-broken13件を正当値と確定しMAX=0、再取込queue=0。61 test/typecheck/dry-run green。未焼込33件だけ残り、full refreshは未承認。",
           "failReason": null,
           "followUps": []
+        },
+        {
+          "at": "2026-08-27T06:44:55.648Z",
+          "runId": "33040005756",
+          "model": "gpt-5.6-sol",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run view 33040005756 --log",
+              "npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts --concurrency 25"
+            ],
+            "pass": true
+          },
+          "evidence": "run 33040005756でlegacy recipe 31/31をR2反映し派生13706件・error 0。公開2167件監査でshape未許可0、delivery重複0、unbaked/drift/configMissing/known-broken 0、総合OK。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
+        "failCount": 0,
         "lastReason": null,
-        "since": "2026-08-26T08:30:03.934Z"
+        "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-27T06:44:55.648Z"
     },
     "AICONTENT-DBLESS-REBUILD": {
       "class": "impl-large",
