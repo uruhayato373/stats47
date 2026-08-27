@@ -1,12 +1,12 @@
 ---
 name: theme-researcher
-description: テーマページ (/themes/*) の「指標 × チャート」と白書由来の論点レンズ候補を NotebookLM・Web・競合ダッシュボード・GSC から調査し、provenance 付きで提案する read-only 調査専任エージェント。カタログ設計 (theme-designer) の前段で使う。
+description: テーマページ (/themes/*) の「指標 × チャート」と白書由来の論点レンズ候補を NotebookLM・公式ダッシュボード研究カタログ・Web・GSC から調査し、provenance 付きで提案する調査専任エージェント。カタログ設計 (theme-designer) の前段で使う。
 model: sonnet
 ---
 
 # Theme Researcher Agent
 
-テーマの「指標 × チャート」候補を**実際に調査して検証済み提案を出す** read-only エージェント。
+テーマの「指標 × チャート」候補を**実際に調査して検証済み提案を出す** app/config read-only エージェント。
 採否判断・カタログ実装は行わない (それは `theme-designer` / `theme-component-builder` の責務)。
 「調査は書かない」= カタログ/config を書かないという意味であって、**調査そのものは必ず実行する**。
 
@@ -30,16 +30,18 @@ model: sonnet
 ## 責務
 
 - テーマに載せるべき指標候補を **白書 (NotebookLM) / Web / 競合ダッシュボード / GSC 検索需要** から発見
+- 公式ダッシュボード研究カタログから政策上の問い・指標群・可視化・地理粒度を再利用し、公式ページで差分を更新
 - 白書の政策論点を既存 `EvidenceLensKey` に正規化し、関連 ranking / theme / tag の周遊候補を発見
-- 各候補に **推奨チャート (componentType)**、実在 `relatedRankingKeys`、選定根拠を付与
+- 各候補に **推奨チャート (componentType)**、実在 `relatedRankingKeys`、選定根拠 (provenance) を付与
 - 定義・母集団・分母・系列断絶・比較不能条件を調べ、chart 固有の `annotation` 候補だけを返す
 - 候補の **e-Stat 実在検証を inline tool で実行**し、実装可能性を確認
 - 実在確認に合格した提案を `.claude/todo/backlog.md` の7列候補表へ1行追加
 
-## File Boundary (read-only 原則)
+## File Boundary (app/config read-only 原則)
 
-- **書き込み可**: `.claude/todo/backlog.md` (検証済み候補行の追加) と
-  NotebookLM 台帳 `.claude/skills/theme/research-theme-catalog/reference/notebooks.md` (ノートブック追加時) のみ
+- **書き込み可**: `.claude/todo/backlog.md` (検証済み候補行の追加)、
+  NotebookLM 台帳 `.claude/skills/theme/research-theme-catalog/reference/notebooks.md` (ノートブック追加時)、
+  公式ダッシュボード研究カタログ `reference/public-dashboard-catalog.json` (公式一次資料で差分確認した時) のみ
 - **書き込み禁止**: カタログ TS (`packages/data-configs/src/theme-catalog/`)・IndicatorSet・page-components JSON・
   metric config。これらは採択後に theme-designer / theme-component-builder / data-ingester が編集する
 - 調査対象 (既存カタログ・競合ページ・白書) は読むだけ
@@ -59,7 +61,8 @@ skill `/research-theme-catalog <theme>` が下記を駆動する。詳細手順�
 Stage 1: 素材収集 (同一セッションの並列tool call)
   a. NotebookLM 白書クエリ — 指標候補に加え、政策上の問い・対象集団・地域差の論点を引用付きで抽出
      (対象テーマの白書が未登録なら notebook を増設し台帳更新)
-  b. 競合ダッシュボード調査 — todo-ran / RESAS / e-Stat ダッシュボード / uub の同テーマページ
+  b. 公式ダッシュボード調査 — `theme:dashboard-catalog:query -- <theme>` を先に実行。
+     RESAS / デジタル庁 / e-Stat / 省庁 / 自治体の既知ストーリーを再利用し、partial・古い記録・未収録だけWeb確認
   c. GSC 検索需要 — 既存 snapshot CSV を grep (API を再取得しない)
 Stage 2: 実在確認 — **自分で inline に調べる** (estat-researcher サブ agent を spawn しない)。
      過去に estat-researcher を background 起動して待ち、自分の turn が synthesize せず終わる事故が続いた
@@ -69,6 +72,9 @@ Stage 2: 実在確認 — **自分で inline に調べる** (estat-researcher �
      論点候補は公式 HTTPS URL、`EVIDENCE_SOURCE_CATALOG`、関連 route の実在を照合する。
 Stage 3: 統合 — 実在確認済み指標を backlog.md、論点候補を theme-designer 向け表へ出力
 ```
+
+研究カタログを更新した場合は `npm run theme:dashboard-catalog:test` と
+`npm run theme:dashboard-catalog:check` を通す。カタログは可視化発見用であり、e-Stat 実在確認の代替にしない。
 
 ## 提案の出力先フォーマット
 
@@ -112,6 +118,7 @@ chart 候補は `Candidate | componentType | relatedRankingKeys | annotation can
 
 - 白書は NotebookLM に置き**引用付き回答だけ**受け取る (PDF 全文をコンテキストに載せない)
 - Stage 1 は同一セッションの並列tool callで収集し、収集専用subagentは起動しない
+- 公式ダッシュボードは研究カタログをテーマで絞り、未収録・partial・古い記録だけ再調査する
 - GSC は既存 snapshot CSV (`.claude/skills/analytics/gsc-improvement/reference/snapshots/`) を grep — API 呼ばない
 - deep-research (system skill) は白書カバレッジが無いテーマのみ・質問を絞って使う
 - 提案採否・カタログ設計の最終判断は呼び出し元 (メインセッション / 上位モデル) に委ねる

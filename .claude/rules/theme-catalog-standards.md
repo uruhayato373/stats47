@@ -255,7 +255,8 @@ evidenceTopics: [
 
 | 工程                                                                | 担当                                                                |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| 指標×チャート候補の**調査・提案** (白書/Web/競合/GSC)               | `theme-researcher` (read-only、提案を `.claude/todo/backlog.md` へ) |
+| 指標×チャート候補の**調査・提案** (白書/Web/競合/GSC)               | `theme-researcher` (app/config read-only、提案を `.claude/todo/backlog.md` へ) |
+| 公式ダッシュボードの**問い・指標・可視化研究**                      | `theme-researcher` (`public-dashboard-catalog.json` を公式一次資料で保守) |
 | 白書からの**論点レンズ候補抽出** (NotebookLM + 公式資料照合)        | `theme-researcher` (read-only、候補を theme-designer へ返す)        |
 | 提案の**採否判断・カタログ設計** (role/チャート構成/evidenceTopics) | `theme-designer` (採択分を catalog TS 化)                           |
 | チャート **componentProps 詳細化・監査**                            | `theme-component-builder` (`relatedChartKeys` との整合も確認)       |
@@ -304,6 +305,8 @@ evidenceTopics: [
 - validator: `packages/data-configs/scripts/validate-theme-catalog.ts`
 - drift guard: `apps/web/src/features/theme-dashboard/actions/theme-chart-props.ts` 末尾 (`_ThemeChartTypeDriftGuard`)
 - 調査スキル: `.claude/skills/theme/research-theme-catalog/SKILL.md`
+- 公式ダッシュボード研究カタログ: `.claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json`
+- 研究カタログ監査: `npm run theme:dashboard-catalog:test && npm run theme:dashboard-catalog:check`
 - 調査 agent: `.claude/agents/theme-researcher.md`
 - チャートコンポーネント: `.claude/rules/chart-component-standards.md`
 - 情報設計 (テーマの責務): `docs/01_技術設計/03_情報設計.md`
