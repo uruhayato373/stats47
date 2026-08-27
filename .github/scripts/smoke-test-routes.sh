@@ -142,7 +142,19 @@ for url in "${URLS[@]}" "${STRICT_URLS[@]}"; do
   # ページは 200・title も正常なのに og:image だけ壊れているケースを検知する。
   ogimg="$(echo "$body" | grep -o '<meta[^>]*property="og:image"[^>]*content="[^"]*"' | head -1 | sed -E 's/.*content="([^"]*)".*/\1/')"
   if [ -n "$ogimg" ]; then
-    ogcode="$(curl -s -o /dev/null -A "$UA" --max-time 20 -w '%{http_code}' "$ogimg" 2>/dev/null)"
+    # OGP 画像は Worker cold start / CDN の一時的な 5xx・429・接続不能だけ再試行する。
+    # 4xx を再試行すると本物のリンク切れを隠すため、そのまま即失敗とする。
+    ogcode="000"
+    for attempt in 1 2 3; do
+      ogcode="$(curl -s -o /dev/null -A "$UA" --max-time 20 -w '%{http_code}' "$ogimg" 2>/dev/null)"
+      [ "$ogcode" = "200" ] && break
+      case "$ogcode" in
+        000|429|5??)
+          [ "$attempt" -lt 3 ] && echo "  ⏳ [og:image ${ogcode}] ${url} — ${attempt}/2 回目の再試行" && sleep 2
+          ;;
+        *) break ;;
+      esac
+    done
     if [ "$ogcode" != "200" ]; then
       echo "  ❌ [og:image ${ogcode}] ${url}"
       echo "        og:image: ${ogimg}"
