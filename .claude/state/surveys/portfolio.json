@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-26",
+  "generatedAt": "2026-08-27",
   "linkage": {
-    "auditedAt": "2026-08-26",
-    "metrics": 2258,
-    "resolved": 2010,
-    "unresolved": 248,
-    "coveragePct": 89,
+    "auditedAt": "2026-08-27",
+    "metrics": 2298,
+    "resolved": 2054,
+    "unresolved": 244,
+    "coveragePct": 89.4,
     "unresolvedByReason": {
       "estat-uncovered": 78,
-      "ssds-synthetic-only": 123,
+      "ssds-synthetic-only": 119,
       "external": 47
     },
     "uncoveredStatsDataIds": 48,
@@ -275,7 +275,7 @@
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 32
+      "liveItemCount": 30
     },
     {
       "surveyId": "boj-statistics",
@@ -388,7 +388,7 @@
       "lifecycleStatus": "improve",
       "linkageStatus": "ok",
       "editorialStatus": "measuring",
-      "itemCount": 312,
+      "itemCount": 349,
       "activeItemCount": 297,
       "latestDataYear": null,
       "unresolvedItemCount": null,
@@ -433,7 +433,7 @@
       ],
       "lastReviewedAt": "2026-07-11",
       "nextReviewAt": "2026-08-09",
-      "liveItemCount": 305
+      "liveItemCount": 297
     },
     {
       "surveyId": "city-planning-survey",
@@ -901,7 +901,7 @@
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 37
+      "liveItemCount": 34
     },
     {
       "surveyId": "economic-census-basic",
@@ -1057,7 +1057,7 @@
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 12
+      "liveItemCount": 11
     },
     {
       "surveyId": "factory-location-survey",
@@ -1118,7 +1118,7 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 9,
+      "itemCount": 10,
       "activeItemCount": 8,
       "latestDataYear": null,
       "unresolvedItemCount": null,
@@ -1577,7 +1577,7 @@
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 33
+      "liveItemCount": 32
     },
     {
       "surveyId": "housing-starts-statistics",
@@ -2156,7 +2156,7 @@
       ],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 137
+      "liveItemCount": 132
     },
     {
       "surveyId": "local-gov-staffing-survey",
@@ -2262,7 +2262,7 @@
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 8
+      "liveItemCount": 7
     },
     {
       "surveyId": "medical-facility-survey",
@@ -2314,7 +2314,7 @@
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 41
+      "liveItemCount": 40
     },
     {
       "surveyId": "minimum-wage",
@@ -2793,7 +2793,7 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 21,
+      "itemCount": 22,
       "activeItemCount": 21,
       "latestDataYear": null,
       "unresolvedItemCount": null,
@@ -2836,7 +2836,7 @@
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 22
+      "liveItemCount": 21
     },
     {
       "surveyId": "population-estimates",
@@ -2845,7 +2845,7 @@
       "lifecycleStatus": "observe",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 219,
+      "itemCount": 256,
       "activeItemCount": 210,
       "latestDataYear": null,
       "unresolvedItemCount": null,
@@ -2888,7 +2888,7 @@
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 216
+      "liveItemCount": 210
     },
     {
       "surveyId": "population-projection",
@@ -3098,7 +3098,7 @@
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 6
+      "liveItemCount": 5
     },
     {
       "surveyId": "prefectural-settlement-survey",
@@ -3203,6 +3203,43 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 15
+    },
+    {
+      "surveyId": "resident-registry-migration-report",
+      "name": "住民基本台帳人口移動報告",
+      "organization": "総務省統計局",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "implemented",
+      "itemCount": 10,
+      "activeItemCount": 10,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": true,
+      "readerQuestionCount": 4,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "retail-price-survey",
@@ -3523,7 +3560,7 @@
       "lifecycleStatus": "editorial-candidate",
       "linkageStatus": "ok",
       "editorialStatus": "implemented",
-      "itemCount": 107,
+      "itemCount": 108,
       "activeItemCount": 107,
       "latestDataYear": null,
       "unresolvedItemCount": null,
@@ -3724,7 +3761,7 @@
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 11
+      "liveItemCount": 10
     },
     {
       "surveyId": "urban-park-survey",
@@ -4199,7 +4236,7 @@
       "evidenceRefs": [],
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
-      "liveItemCount": 2
+      "liveItemCount": 3
     }
   ]
 }

@@ -77,7 +77,7 @@ const CHANGE_TYPE = new Set(["editorial-hub", "linkage", "title-meta", "structur
 const HARD_CANDIDATES = new Set(["merge-candidate", "retire-candidate"]);
 const MIN_CTR_IMPRESSIONS = 100;
 const MAX_STATE_AGE_DAYS = Number(process.env.SURVEY_STATE_MAX_AGE_DAYS ?? 35);
-const EDITORIAL_COUNT_RATCHET = 80;
+const EDITORIAL_COUNT_RATCHET = 81;
 const MIN_REQUIRED_MASTER_COUNT = 80;
 const MAX_EDITORIAL_SIMILARITY = 0.88;
 
@@ -146,7 +146,7 @@ function validateEditorial() {
   if (implemented.length < EDITORIAL_COUNT_RATCHET) {
     v("S8", `editorial 実装数 ${implemented.length} が ratchet ${EDITORIAL_COUNT_RATCHET} を下回る`);
   }
-  // 80/80 移行前は通常CIを件数ratchetだけに留め、完了後は通常CIでも完全ゲートを維持する。
+  // 全件移行前は通常CIを件数ratchetだけに留め、完了後は通常CIでも完全ゲートを維持する。
   if (!requireAllEditorial && EDITORIAL_COUNT_RATCHET < MIN_REQUIRED_MASTER_COUNT) return;
 
   if (masterSurveys.length < MIN_REQUIRED_MASTER_COUNT)
