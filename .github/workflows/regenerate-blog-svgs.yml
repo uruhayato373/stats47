@@ -164,10 +164,19 @@ jobs:
             resolveCasJsonWrite,
           } from './.claude/scripts/blog/lib/source-repair-core.mjs';
 
-          const { METRICS_REGISTRY } = await import('@stats47/data-configs');
-          const { resolveBlogChartSurveyTaxonomy } = await import(
+          // tsx + Node 20 では package.json の module type により、TS/CJS の named export が
+          // default namespace 配下へ入る。local と GitHub Actions の両方で同じ解決にする。
+          const dataConfigsModule = await import('@stats47/data-configs');
+          const dataConfigs = dataConfigsModule.default ?? dataConfigsModule;
+          const { METRICS_REGISTRY } = dataConfigs;
+          const surveyTaxonomyModule = await import(
             './packages/ranking/src/survey/survey-taxonomy.ts'
           );
+          const surveyTaxonomy = surveyTaxonomyModule.default ?? surveyTaxonomyModule;
+          const { resolveBlogChartSurveyTaxonomy } = surveyTaxonomy;
+          if (!METRICS_REGISTRY || typeof resolveBlogChartSurveyTaxonomy !== 'function') {
+            throw new Error('survey taxonomy module exports を解決できない');
+          }
 
           const encoded = process.env.SOURCE_REPAIR_PAYLOAD_B64 ?? '';
           const repairs = parseSourceRepairPayload(encoded, 40);
