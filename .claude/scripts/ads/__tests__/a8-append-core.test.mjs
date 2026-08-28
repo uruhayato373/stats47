@@ -14,7 +14,7 @@ import {
 
 const SRC = `import type { AffiliateAd } from "../src/features/ads/types";
 
-export const AFFILIATE_ADS: AffiliateAd[] = [
+const AFFILIATE_ADS_BASE: AffiliateAd[] = [
   {
     "id": "af_existing_001",
     "title": "既存案件",
@@ -24,12 +24,13 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
 ];
 `;
 
-const EMPTY_SRC = `export const AFFILIATE_ADS: AffiliateAd[] = [];\n`;
+const EMPTY_SRC = `const AFFILIATE_ADS_BASE: AffiliateAd[] = [];\n`;
 
 const draft = {
   id: "af_new_a8_001",
   title: "新規案件",
   htmlContent: "https://px.a8.net/svt/ejp?a8mat=NEW",
+  programRef: "a8:s00000000000001",
   areaCode: null,
   vertical: "labor",
   categoryKey: null,
@@ -154,6 +155,7 @@ test("buildAdDraft: text は sidebar-bottom に置く (blog-bottom だと表示�
   assert.equal(d.locationCode, "sidebar-bottom");
   assert.equal(d.adType, "text");
   assert.equal(d.width, null);
+  assert.equal(d.programRef, "a8:s00000000000001");
 });
 
 test("buildAdDraft: banner は blog-bottom (banner 解決は locationCode を見ないため既定のまま)", () => {

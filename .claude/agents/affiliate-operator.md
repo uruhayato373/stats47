@@ -52,6 +52,9 @@ model: sonnet
   SSOT 登録・公開は行わない。既定の優先順は 300x250 → text → 250x250 → 320x100。
 - **ASP 間比較** — カタログ `programs[].asps[a8|moshimo|afb]` の単価・確定率・EPC を並べ、運用先の判断材料を出す。
   同一案件を複数 ASP で並行運用すると成果の帰属が割れるため、**1 案件 1 ASP に寄せる**根拠を示す。
+- **成果条件の観測** — ASPの案件詳細から成果条件、個人情報、電話・面談、支払い、確認URL、確認日を
+  read-onlyで取得する。取得結果は`programRef`付きでaffiliate-managerへ渡し、本agentは
+  `affiliate-offer-profiles-data.ts`へ書かない。条件が読めない案件は`unknown`とし、低ハードルへ推測分類しない。
 - **カタログ保守** — `.claude/state/ads/affiliate-catalog.json` (3 ASP 横断の提携台帳)。
 
 ## 担当外 (委譲)
@@ -60,6 +63,7 @@ model: sonnet
 |---|---|
 | A8 の案件開拓・自動申請・広告コード取得 | `asp-scout` (skill `/scout-asp`。週次申請上限ガード付き) |
 | 広告 SSOT (`apps/web/scripts/affiliate-ads-data.ts`) への追記・commit/push | `affiliate-manager` (排他 writer) |
+| offer profile SSOT (`affiliate-offer-profiles-data.ts`) の分類・更新 | `affiliate-manager` (排他 writer) |
 | A8 成果レポート CSV の収集 | `a8-report-collector` |
 | 収集した CSV のデータ品質検査 | `a8-csv-auditor` |
 | GA4 側の imp/click 実測・effect 判定 | `ga4-analyst` / `improvement-triage` |

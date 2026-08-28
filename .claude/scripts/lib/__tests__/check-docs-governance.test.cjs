@@ -50,7 +50,7 @@ function fixture(t) {
     fixedDirectories: {
       "docs/00": ["01_project.md"],
       "docs/01": ["01_architecture.md"],
-      ".claude/todo": ["backlog.md", "improvements.md"],
+      ".claude/todo": ["backlog.md", "improvements.md", "monthly.md", "weekly.md"],
     },
     governedDirectories: ["docs/00", "docs/01", "docs/02", ".claude/todo"],
     flatDirectories: ["docs/00", "docs/01", "docs/02", ".claude/todo"],
@@ -75,6 +75,8 @@ function fixture(t) {
       requiredRelatedBacklog: true,
     },
     todo: {
+      monthFile: ".claude/todo/monthly.md",
+      weekFile: ".claude/todo/weekly.md",
       files: [".claude/todo/improvements.md", ".claude/todo/backlog.md"],
       idPattern: "^[A-Z0-9]+(?:-[A-Z0-9]+)+$",
       allowedImprovementStatuses: ["pending", "in-progress", "effect/pending"],
@@ -99,6 +101,16 @@ function fixture(t) {
     body: `| ID | タイトル | Status | Due | Owner | Metric |
 |---|---|---|---|---|---|
 | DOCS-IMPROVE-01 | Improve docs | pending | 2026-08-30 | claude | docs |`,
+  }));
+  write(root, ".claude/todo/monthly.md", markdown({
+    title: "Monthly",
+    type: "monthly-plan",
+    body: "今月は `DOCS-FEATURE-01` を扱う。",
+  }));
+  write(root, ".claude/todo/weekly.md", markdown({
+    title: "Weekly",
+    type: "weekly-plan",
+    body: "今週は `DOCS-FEATURE-01` を扱う。",
   }));
   // v3-unified カード構文 (backlog-lib)。全カードにタグを付けると warning ゼロで通る
   write(root, ".claude/todo/backlog.md", markdown({
@@ -187,6 +199,32 @@ test("duplicate ids / out-of-vocab tags / orphan headings / unknown keys are rej
   assert.ok(codes.has("DG056"), "未知タグキー");
   assert.ok(codes.has("DG057"), "語彙外の 種類/実行");
   assert.ok(codes.has("DG060"), "TODO ID 重複");
+});
+
+test("recurring cards stay out of backlog and plan files cannot copy card syntax", (t) => {
+  const { root, config } = fixture(t);
+  write(root, ".claude/todo/backlog.md", markdown({
+    title: "Backlog",
+    type: "backlog",
+    body: `## 🔴 高
+
+### [DOCS-FEATURE-01] Checker
+タグ: [エージェント・SSOT] [種類:改善] [実行:sweep]
+
+### [DOCS-PERIODIC-01] Weekly check
+タグ: [エージェント・SSOT] [種類:定期] [実行:機械]`,
+  }));
+  write(root, ".claude/todo/weekly.md", markdown({
+    title: "Weekly",
+    type: "weekly-plan",
+    body: `### [DOCS-PERIODIC-01] Weekly check
+タグ: [エージェント・SSOT] [種類:定期] [実行:機械]`,
+  }));
+
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  const codes = new Set(report.errors.map((item) => item.code));
+  assert.ok(codes.has("DG061"), "定期カードのbacklog混入");
+  assert.ok(codes.has("DG062"), "週次・月次へのカード複製");
 });
 
 test("--fix target regenerates only the implementation plan block", (t) => {

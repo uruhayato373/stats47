@@ -80,6 +80,27 @@ jobs:
           { echo '### 配信データの鮮度'; echo '```'; cat /tmp/r2-freshness.txt; echo '```'; } \
             >> "$GITHUB_STEP_SUMMARY"
 
+      - name: 💼 アフィリエイトportfolio stateの鮮度
+        id: affiliate_portfolio
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -o pipefail
+          mkdir -p /tmp/affiliate-portfolio-artifact
+          RUN_ID=$(gh run list --workflow affiliate-ga4-weekly.yml --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty')
+          if [ -n "$RUN_ID" ]; then
+            gh run download "$RUN_ID" --name affiliate-portfolio-state --dir /tmp/affiliate-portfolio-artifact
+          fi
+          STATE_PATH=$(find /tmp/affiliate-portfolio-artifact -name affiliate-portfolio-latest.json -print -quit)
+          if [ -n "$STATE_PATH" ] && node .claude/scripts/ads/check-affiliate-portfolio-freshness.mjs --path "$STATE_PATH" | tee /tmp/affiliate-portfolio-freshness.txt; then
+            echo "fresh=true" >> "$GITHUB_OUTPUT"
+          else
+            if [ -z "$STATE_PATH" ]; then echo "affiliate portfolio artifact missing" | tee /tmp/affiliate-portfolio-freshness.txt; fi
+            echo "fresh=false" >> "$GITHUB_OUTPUT"
+          fi
+          { echo '### アフィリエイトportfolioの鮮度'; echo '```'; cat /tmp/affiliate-portfolio-freshness.txt; echo '```'; } \
+            >> "$GITHUB_STEP_SUMMARY"
+
       - name: 💾 state を commit-back
         run: |
           git config user.name "github-actions[bot]"
@@ -94,7 +115,7 @@ jobs:
           echo "::warning::state の push に失敗した (監査結果自体は job summary にある)"
 
       - name: 🚨 連続失敗を Issue にする
-        if: steps.audit.outputs.healthy == 'false' || steps.freshness.outputs.fresh == 'false'
+        if: steps.audit.outputs.healthy == 'false' || steps.freshness.outputs.fresh == 'false' || steps.affiliate_portfolio.outputs.fresh == 'false'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -112,6 +133,10 @@ jobs:
             echo
             echo '```'
             cat /tmp/r2-freshness.txt
+            echo '```'
+            echo
+            echo '```'
+            cat /tmp/affiliate-portfolio-freshness.txt
             echo '```'
             echo
             echo "## 見かた"
@@ -135,7 +160,7 @@ jobs:
           exit 1
 
       - name: ✅ 復旧したら Issue を閉じる
-        if: steps.audit.outputs.healthy == 'true' && steps.freshness.outputs.fresh == 'true'
+        if: steps.audit.outputs.healthy == 'true' && steps.freshness.outputs.fresh == 'true' && steps.affiliate_portfolio.outputs.fresh == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

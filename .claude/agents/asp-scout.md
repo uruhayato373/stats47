@@ -29,6 +29,9 @@ SSOT への登録・公開は affiliate-manager に渡す 2-agent 分業。
   2026-08-04 まで 1 ページ目 (20 件) しか読んでおらず、実機 158 件に対し承認を取りこぼしていた。
 - **harvest** — `a8-browser.ts harvest`。approved の広告コードを取得 → `a8-code-core` で parse → harvested / pending-vertical。
 - **pending-vertical 解決** — 広告主を見て 10 軸を判断し catalog に vertical 付与 → harvested に戻す。判定不能なら登録しない。
+- **案件負担は未分類で引き渡す** — scout結果の案件名・報酬・カテゴリから`lane` / `actionType` /
+  `frictionTier`を推測しない。ASP詳細の成果条件証拠が無い案件は`pending-classification`として
+  affiliate-managerへ渡す。
 - **失敗診断** — セレクタ破損時は `.local/playwright-a8-debug/` のスクショ/HTML を読み、A8 定数 (URL/セレクタ) の調整を提案。
 
 ## 担当外 (委譲)

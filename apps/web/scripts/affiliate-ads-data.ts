@@ -1,4 +1,8 @@
 import type { AffiliateAd } from "../src/features/ads/types";
+import {
+  AFFILIATE_OFFER_PROFILES,
+  AFFILIATE_PROGRAM_REF_BY_AD_ID,
+} from "./affiliate-offer-profiles-data";
 
 /**
  * affiliate_ads SSOT (完全DBレス → docs/01_技術設計/02_データアーキテクチャ.md)。
@@ -11,7 +15,7 @@ import type { AffiliateAd } from "../src/features/ads/types";
  *   vertical 一覧・写像・登録手順: .claude/rules/affiliate-ads-standards.md
  *   ピクセル無し ASP (ValueCommerce/楽天) は trackingPixelUrl: null。
  */
-export const AFFILIATE_ADS: AffiliateAd[] = [
+const AFFILIATE_ADS_BASE: AffiliateAd[] = [
   {
     "id": "af_aeon_kyushu_001",
     "title": "イオン九州オンライン",
@@ -5544,3 +5548,31 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "updatedAt": "2026-08-27 00:00:00"
   },
 ];
+
+const OFFER_PROFILE_BY_PROGRAM_REF = new Map(
+  AFFILIATE_OFFER_PROFILES.map((profile) => [profile.programRef, profile]),
+);
+
+/**
+ * creative SSOTへ案件参照と安定profileをjoinする。既存のpriority・解決順・表示内容は変更しない。
+ * 参照欠損はexport validatorが fail-closed にするため、ここでは推測フォールバックを持たない。
+ */
+export const AFFILIATE_ADS: AffiliateAd[] = AFFILIATE_ADS_BASE.map((ad) => {
+  const programRef = ad.programRef ?? AFFILIATE_PROGRAM_REF_BY_AD_ID[ad.id];
+  const profile = programRef ? OFFER_PROFILE_BY_PROGRAM_REF.get(programRef) : undefined;
+  return {
+    ...ad,
+    ...(programRef ? { programRef } : {}),
+    ...(profile
+      ? {
+          offerProfile: {
+            lane: profile.lane,
+            actionType: profile.actionType,
+            frictionTier: profile.frictionTier,
+            portfolioStatus: profile.portfolioStatus,
+            allowedPageTypes: profile.allowedPageTypes,
+          },
+        }
+      : {}),
+  };
+});

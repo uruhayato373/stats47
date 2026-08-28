@@ -24,6 +24,7 @@
  *   node .claude/scripts/ads/fetch-a8-ui-csv.mjs --dry-run
  *   node .claude/scripts/ads/fetch-a8-ui-csv.mjs --dry-run --probe-isolation
  *   node .claude/scripts/ads/fetch-a8-ui-csv.mjs --dry-run --probe-period   # 期間フォームの実機観察（単月取得の前提）
+ *   node .claude/scripts/ads/fetch-a8-ui-csv.mjs --dry-run --reports all --month 2026-08
  *   node .claude/scripts/ads/fetch-a8-ui-csv.mjs --reports program-detail
  *   node .claude/scripts/ads/fetch-a8-ui-csv.mjs --reports all --headed
  *
@@ -33,7 +34,7 @@
  *   - selector は role/label/text 優先。候補が 0 or 複数なら推測クリックせず debug dump。
  *   - ダウンロードは必ず page.waitForEvent("download")（suggestedFilename を信用しない）。
  *   - ログイン・CAPTCHA は人間。スクリプトは待つだけで何も自動入力しない。
- *   - --dry-run は DOM 検出のみ（download しない）。
+ *   - --dry-run は download しない。`--month` 併用時はレポートの表示期間だけ適用してselectorを検証する。
  */
 import { mkdirSync, writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -57,6 +58,7 @@ import {
   repoRoot,
 } from "./lib/a8-report-browser.mjs";
 import { decodeCsvBuffer, parsePeriodFromFilename, parseCsv } from "./lib/a8-report-csv.mjs";
+import { buildA8PeriodContract, compareA8Period, currentJstDate } from "./lib/a8-report-period-core.mjs";
 
 const REPO_ROOT = repoRoot();
 // raw CSV / manifest（再取得可能な一次データ）は git 管理外のステージング領域へ
@@ -66,13 +68,21 @@ const LAST_RUN_MARKER = join(AFF_STATE_DIR, "a8-ui-last-run.json");
 
 function parseArgs() {
   const a = process.argv.slice(2);
-  const opts = { dryRun: false, headed: false, reports: "all", probeIsolation: false, probePeriod: false };
+  const opts = {
+    dryRun: false,
+    headed: false,
+    reports: "all",
+    probeIsolation: false,
+    probePeriod: false,
+    month: null,
+  };
   for (let i = 0; i < a.length; i++) {
     if (a[i] === "--dry-run") opts.dryRun = true;
     else if (a[i] === "--headed") opts.headed = true;
     else if (a[i] === "--probe-isolation") opts.probeIsolation = true;
     else if (a[i] === "--probe-period") opts.probePeriod = true;
     else if (a[i] === "--reports") opts.reports = a[++i];
+    else if (a[i] === "--month") opts.month = a[++i];
   }
   return opts;
 }
@@ -198,8 +208,56 @@ async function probePeriodForm(page, cfg, reportKey = "site-summary") {
   return { reportKey, url: page.url(), fields, buttons };
 }
 
+/**
+ * config で実機確認済みの一意な期間フォームだけを操作する。
+ * name だけでは program-detail の月/日フォームが衝突するため placeholder も必須とする。
+ */
+async function applyRequestedPeriod(page, cfg, reportKey, requestedMonth, today) {
+  const form = cfg.a8.periodForm?.[reportKey];
+  if (!form) throw new Error(`periodForm 未設定: ${reportKey}`);
+  if (!form.kind || !form.start?.name || !form.start?.placeholder || !form.end?.name || !form.end?.placeholder) {
+    throw new Error(`periodForm の契約が不完全: ${reportKey}`);
+  }
+
+  const contract = buildA8PeriodContract({ requestedMonth, kind: form.kind, today });
+  const start = page.locator(
+    `input[name=${JSON.stringify(form.start.name)}][placeholder=${JSON.stringify(form.start.placeholder)}]:visible`,
+  );
+  const end = page.locator(
+    `input[name=${JSON.stringify(form.end.name)}][placeholder=${JSON.stringify(form.end.placeholder)}]:visible`,
+  );
+  const buttonLabel = form.applyButtonLabel;
+  const applyButton = page.getByRole("button", { name: buttonLabel, exact: true });
+  const counts = { start: await start.count(), end: await end.count(), apply: await applyButton.count() };
+  if (counts.start !== 1 || counts.end !== 1 || counts.apply !== 1) {
+    throw new Error(
+      `periodForm が一意でない: ${reportKey} (start=${counts.start}, end=${counts.end}, apply=${counts.apply})`,
+    );
+  }
+
+  await start.fill(contract.startValue);
+  await end.fill(contract.endValue);
+  const beforeApply = { start: await start.inputValue(), end: await end.inputValue() };
+  if (beforeApply.start !== contract.startValue || beforeApply.end !== contract.endValue) {
+    throw new Error(
+      `periodForm 入力値が一致しない: ${reportKey} (start=${beforeApply.start}, end=${beforeApply.end})`,
+    );
+  }
+
+  await applyButton.click();
+  await page.waitForLoadState("networkidle", { timeout: 5000 }).catch(() => {});
+  await page.waitForTimeout(1000);
+  const afterApply = { start: await start.inputValue(), end: await end.inputValue() };
+  if (afterApply.start !== contract.startValue || afterApply.end !== contract.endValue) {
+    throw new Error(
+      `periodForm 適用後の値が一致しない: ${reportKey} (start=${afterApply.start}, end=${afterApply.end})`,
+    );
+  }
+  return contract;
+}
+
 /** 1 レポート分の取得。dry-run は検出のみ。 */
-async function processReport(page, cfg, runId, runDir, { reportKey, dryRun }) {
+async function processReport(page, cfg, runId, runDir, { reportKey, dryRun, requestedMonth, today }) {
   const spec = cfg.a8.reports[reportKey];
   const unit = {
     reportKey,
@@ -212,6 +270,7 @@ async function processReport(page, cfg, runId, runDir, { reportKey, dryRun }) {
     sha256: null,
     exportButtonUnique: null,
     siteScope: spec.siteScope || "account-wide",
+    requestedPeriod: null,
     period: null,
     status: "pending",
     error: null,
@@ -219,17 +278,32 @@ async function processReport(page, cfg, runId, runDir, { reportKey, dryRun }) {
 
   unit.reportUrl = await openReport(page, cfg, reportKey);
 
-  // レポート画面に到達しているか（ラベルの可視で判定）
+  // レポート画面に到達しているか（実機確認済みの見出しで判定）
   const body = await readVisibleSiteContext(page);
-  if (!body.includes(spec.label)) {
+  const readyText = spec.readyText ?? spec.label;
+  if (!body.includes(readyText)) {
     await dumpFailure(page, cfg, runId, {
       step: "reach-report",
-      expected: [spec.label],
-      message: `レポート「${spec.label}」に到達できない（URL/ラベルの UI 変更の可能性）`,
+      expected: [readyText],
+      message: `レポート「${readyText}」に到達できない（URL/ラベルの UI 変更の可能性）`,
     });
     unit.status = "report-unreachable";
     unit.error = "レポート画面に到達できず";
     return unit;
+  }
+
+  if (requestedMonth) {
+    try {
+      unit.requestedPeriod = await applyRequestedPeriod(page, cfg, reportKey, requestedMonth, today);
+    } catch (e) {
+      await dumpFailure(page, cfg, runId, {
+        step: "apply-period",
+        message: e?.message || String(e),
+      });
+      unit.status = "period-form-failed";
+      unit.error = String(e?.message || e).slice(0, 200);
+      return unit;
+    }
   }
 
   // ★ site-rows レポートは「対象サイトの行が実在すること」を DL 前に確認する。
@@ -287,6 +361,13 @@ async function processReport(page, cfg, runId, runDir, { reportKey, dryRun }) {
     unit.csvRows = rows.length;
     unit.status = rows.length > 0 ? "downloaded" : "empty-download";
     if (rows.length === 0) unit.error = "CSV は取得できたが行が 0";
+    if (unit.requestedPeriod) {
+      const periodCheck = compareA8Period(unit.requestedPeriod, unit.period);
+      if (!periodCheck.ok) {
+        unit.status = "period-mismatch";
+        unit.error = periodCheck.reason;
+      }
+    }
   } catch (e) {
     await dumpFailure(page, cfg, runId, { step: "download", message: e?.message || String(e) });
     unit.status = "download-failed";
@@ -306,6 +387,14 @@ async function main() {
     opts.reports === "all"
       ? Object.keys(cfg.a8.reports)
       : opts.reports.split(",").map((s) => s.trim()).filter(Boolean);
+  const today = currentJstDate();
+  if (opts.month) {
+    for (const reportKey of reportKeys) {
+      const form = cfg.a8.periodForm?.[reportKey];
+      if (!form) throw new Error(`--month を使えないレポート: ${reportKey} (periodForm 未設定)`);
+      buildA8PeriodContract({ requestedMonth: opts.month, kind: form.kind, today });
+    }
+  }
 
   const manifest = {
     schemaVersion: 1,
@@ -314,6 +403,7 @@ async function main() {
     site: cfg.a8.targetSite,
     mediaId: cfg.a8.mediaId,
     mode: opts.dryRun ? "dry-run" : "fetch",
+    requestedMonth: opts.month,
     browserHeadless: !opts.headed && cfg.browser.headless,
     scriptVersion: gitCommit(),
     units: [],
@@ -380,14 +470,19 @@ async function main() {
     }
 
     if (opts.probePeriod) {
-      const pp = await probePeriodForm(page, cfg);
-      manifest.periodFormProbe = pp;
-      const named = pp.fields.filter((f) => f.name || f.options);
-      console.log(`[probe-period] ${pp.reportKey} ${pp.url}`);
-      console.log(`  input/select ${pp.fields.length} 件（name または options を持つもの ${named.length} 件）:`);
-      for (const f of named) console.log(`    ${JSON.stringify(f)}`);
-      console.log("  button:");
-      for (const b of pp.buttons.filter((b) => b.visible)) console.log(`    ${JSON.stringify(b)}`);
+      const probes = [];
+      for (const reportKey of reportKeys) {
+        if (!cfg.a8.reports[reportKey]) continue;
+        const pp = await probePeriodForm(page, cfg, reportKey);
+        probes.push(pp);
+        const named = pp.fields.filter((f) => f.name || f.options);
+        console.log(`[probe-period] ${pp.reportKey} ${pp.url}`);
+        console.log(`  input/select ${pp.fields.length} 件（name または options を持つもの ${named.length} 件）:`);
+        for (const f of named) console.log(`    ${JSON.stringify(f)}`);
+        console.log("  button:");
+        for (const b of pp.buttons.filter((b) => b.visible)) console.log(`    ${JSON.stringify(b)}`);
+      }
+      manifest.periodFormProbe = probes;
       console.log("  → この出力を見て .claude/config/a8-report-automation.json の a8.periodForm を確定する");
       console.log("     （月レンジと日レンジで同名 input が 2 組ある。どちらを操作するかは推測しない）");
     }
@@ -397,7 +492,12 @@ async function main() {
         console.warn(`[warn] 未知の reportKey: ${reportKey}（config に無し・スキップ）`);
         continue;
       }
-      const unit = await processReport(page, cfg, runId, runDir, { reportKey, dryRun: opts.dryRun });
+      const unit = await processReport(page, cfg, runId, runDir, {
+        reportKey,
+        dryRun: opts.dryRun,
+        requestedMonth: opts.month,
+        today,
+      });
       manifest.units.push(unit);
       console.log(`  ${reportKey}: ${unit.status}${unit.csvRows != null ? ` (${unit.csvRows} 行)` : ""}`);
     }

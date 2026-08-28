@@ -11,10 +11,11 @@
  *
  * 生成 HTML は派生物 (git 管理しない・commit-back 廃止 2026-07-15)。都度この script で再生成する。
  */
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
 import { AFFILIATE_ADS } from "../../../apps/web/scripts/affiliate-ads-data";
+import { buildAffiliatePortfolioViewModel } from "../../../apps/admin/lib/server/affiliate-portfolio-view";
 
 // SSOT: packages/data-configs/src/types.ts の CATEGORY_KEYS (17 軸)
 const CATEGORY_KEYS = [
@@ -52,10 +53,17 @@ function main(): void {
   const gaps = CATEGORY_KEYS.filter((k) => !(byCat[k] ?? 0));
   const advertisers = new Set(active.map((a) => a.title)).size;
   const generatedAt = new Date().toISOString().slice(0, 19).replace("T", " ");
+  const portfolioPath = resolve(process.cwd(), ".claude/state/ads/affiliate-portfolio-latest.json");
+  const portfolio = buildAffiliatePortfolioViewModel(
+    existsSync(portfolioPath) ? JSON.parse(readFileSync(portfolioPath, "utf8")) : {},
+  );
 
   // クライアント JS に渡すデータ (絞り込み用に必要な field だけ)
   const data = ads.map((a) => ({
     id: a.id,
+    programRef: a.programRef ?? "",
+    lane: a.offerProfile?.lane ?? "unknown",
+    frictionTier: a.offerProfile?.frictionTier ?? "unknown",
     title: a.title,
     categoryKey: a.categoryKey ?? "",
     locationCode: a.locationCode ?? "",
@@ -124,6 +132,9 @@ function main(): void {
     <div class="kpi"><b>${advertisers}</b><span>実広告主</span></div>
     <div class="kpi"><b>${covered}/${CATEGORY_KEYS.length}</b><span>カテゴリ軸カバー</span></div>
     <div class="kpi"><b>${gaps.length}</b><span>広告ゼロ軸</span></div>
+    <div class="kpi"><b>${esc(portfolio.gates.portfolio?.status ?? "unknown")}</b><span>portfolio gate</span></div>
+    <div class="kpi"><b>${portfolio.totals.unclassified}</b><span>未分類案件</span></div>
+    <div class="kpi"><b>${portfolio.confirmedRevenueYen == null ? "—" : `¥${portfolio.confirmedRevenueYen.toLocaleString()}`}</b><span>確定収益</span></div>
   </div>
   ${gaps.length ? `<div class="gaps">広告ゼロ軸 (impression 機会損失): ${gaps.map((g) => `<code>${esc(g)}</code>`).join("")}</div>` : ""}
 </header>
@@ -164,11 +175,12 @@ function render() {
       +   '<span class="b cat">' + escapeHtml(a.categoryKey || "—") + '</span>'
       +   '<span class="b">' + escapeHtml(a.locationCode || "—") + '</span>'
       +   '<span class="b">' + escapeHtml(a.adType || "—") + '</span>'
+      +   '<span class="b">' + escapeHtml(a.lane) + '/' + escapeHtml(a.frictionTier) + '</span>'
       +   '<span class="b">P' + a.priority + '</span>'
       +   (a.areaCode ? '<span class="b">area:' + escapeHtml(a.areaCode) + '</span>' : '')
       +   '<span class="b ' + (a.isActive ? "on" : "off") + '">' + (a.isActive ? "active" : "inactive") + '</span>'
       + '</div>'
-      + '<div class="meta">' + escapeHtml(a.id) + (dim ? " ・ " + dim : "") + '</div>'
+      + '<div class="meta">' + escapeHtml(a.id) + ' ・ ' + escapeHtml(a.programRef || "参照なし") + (dim ? " ・ " + dim : "") + '</div>'
       + (a.href ? '<a class="link" href="' + a.href + '" target="_blank" rel="noopener">クリックURLを開く ↗</a>' : '')
       + '</div>';
   }).join("") || '<p style="color:#64748b">該当なし</p>';

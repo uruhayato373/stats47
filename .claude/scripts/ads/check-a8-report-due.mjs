@@ -50,7 +50,7 @@ const REPO_ROOT = repoRoot();
 const MARKER = join(REPO_ROOT, ".claude/state/metrics/affiliate/a8-ui-last-run.json");
 const LOG = join(REPO_ROOT, ".claude/state/metrics/affiliate/a8-report-log.json");
 const REVIEW =
-  "node .claude/scripts/ads/fetch-a8-ui-csv.mjs && node .claude/scripts/ads/normalize-a8-csv.mjs --latest（ローカル・要 A8 ログイン）";
+  "node .claude/scripts/ads/fetch-a8-ui-csv.mjs --reports all --month YYYY-MM && node .claude/scripts/ads/normalize-a8-csv.mjs --latest（ローカル・要 A8 ログイン）";
 
 function readJson(p) {
   try {

@@ -1,13 +1,13 @@
 name: 📊 Refresh Affiliate Inventory & Compliance
 
 # アフィリエイト在庫の棚卸し JSON と直接配置 compliance snapshot を再生成し、
-# 変更があれば develop に commit-back する (週次運用ループの前半。後半 = GA4 + 集約 state は
+# artifact と job summary に残す (週次運用ループの前半。後半 = GA4 + 集約 state は
 # affiliate-ga4-weekly.yml が 1 時間後に実行)。
 #
 # - SSOT (affiliate-ads-data.ts / affiliate-direct-placements-data.ts) が変わったら自動で state を同期
-# - 週次 cron で棚卸し snapshot を履歴として残す (.claude/state/ads/inventory-YYYY-MM-DD.json)
+# - 週次 cron で棚卸し snapshot を artifact として残す
 # - dashboard HTML は /tmp 生成の派生物 (artifact のみ・commit しない。2026-07-15 に commit-back 廃止)
-# - 本番 R2 / アプリには触れない (commit 対象は .claude/state/ads/ のみ)。R2 反映は publish-affiliate-ads.yml が別途担当。
+# - 本番 R2 / アプリ / git には触れない。R2 反映は publish-affiliate-ads.yml が別途担当。
 # - 広告在庫の変更・effect 判定・push・deploy は自動化しない (観測と候補生成まで)。
 
 on:
@@ -16,6 +16,7 @@ on:
     branches: [develop]
     paths:
       - "apps/web/scripts/affiliate-ads-data.ts"
+      - "apps/web/scripts/affiliate-offer-profiles-data.ts"
       - "apps/web/scripts/affiliate-direct-placements-data.ts"
       - ".claude/scripts/ads/build-affiliate-dashboard.ts"
       - ".claude/scripts/ads/audit-affiliate-inventory.ts"
@@ -27,7 +28,7 @@ on:
     - cron: "0 12 * * 0" # JST 21:00 Sunday (UTC 12:00) — 週次棚卸し snapshot
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: affiliate-dashboard-refresh
@@ -68,6 +69,11 @@ jobs:
         continue-on-error: true
         run: node .claude/scripts/ads/build-placement-map.mjs
 
+      - name: 🧮 Build read-only portfolio state
+        run: |
+          npx -y tsx .claude/scripts/ads/build-affiliate-portfolio-state.ts
+          npx -y tsx .claude/scripts/ads/build-affiliate-portfolio-state.ts --check
+
       - name: 🖥️ Build dashboard (/tmp, artifact only)
         run: npx -y tsx .claude/scripts/ads/build-affiliate-dashboard.ts /tmp/stats47-affiliate-dashboard.html > /dev/null
 
@@ -78,6 +84,17 @@ jobs:
           path: /tmp/stats47-affiliate-dashboard.html
           retention-days: 14
 
+      - name: 📤 Upload read-only audit state
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: affiliate-audit-state
+          path: |
+            .claude/state/ads/inventory-latest.json
+            .claude/state/ads/compliance-latest.json
+            .claude/state/ads/placement-map-latest.json
+            .claude/state/ads/affiliate-portfolio-latest.json
+          retention-days: 30
+
       - name: 📝 Job summary (compliance findings のみ)
         run: |
           if grep -qE "^- ❌" /tmp/affiliate-compliance.md; then
@@ -85,18 +102,3 @@ jobs:
           else
             echo "✅ compliance findings なし" >> "$GITHUB_STEP_SUMMARY"
           fi
-
-      - name: 💾 Commit state snapshots if changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ".claude/state/ads/"
-          if git diff --cached --quiet; then
-            echo "No inventory / compliance state changes — skipping commit."
-            exit 0
-          fi
-          DATE=$(date -u +%Y-%m-%d)
-          git commit -m "chore(ads): refresh affiliate inventory + compliance ${DATE} [skip ci]"
-          # commit 済みなので unstaged changes は無く rebase が通る (develop が進んでいた場合に追従)
-          git pull --rebase origin develop
-          git push origin develop

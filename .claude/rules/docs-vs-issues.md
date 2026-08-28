@@ -116,6 +116,29 @@ improvement 系スキル (gsc / ga4 / adsense / affiliate / cloudflare-cost / ps
 
 人間は `.claude/todo/improvements.md` を読み、agent (*-improvement / weekly-review) は両方を読む。
 
+### バックログ・改善・計画・定期観測のライフサイクル
+
+4 層は同じ仕事を複製せず、次の責務で分ける。
+
+| 層 | 入れるもの | 完了・引き渡し |
+|---|---|---|
+| `backlog.md` | 一度だけ実行し、決定的な gate で完了を判定できる実装・不具合是正・移行・意思決定 | gate が通ったらカードを削除する。公開後の効果観測が必要なら、削除と同じ作業単位で `improvements.md` の別 ID へ引き渡す |
+| `improvements.md` | 仮説、対象、baseline、指標、観測期限を持つ active 施策。実装前は `pending`、実行中は `in-progress`、変更が完了して観測だけなら `effect/pending` | 証拠に基づく効果判定を詳細ログへ残し、active 行を削除する |
+| `monthly.md` / `weekly.md` | その月・週に扱う既存 ID、重点、容量配分 | 毎回上書きする計画ビュー。カード本文、status、完了条件を複製しない |
+| workflow / skill + `.claude/state/` | 週次・月次・四半期の取得、監査、再計算と最新の機械状態 | 正常時は TODO を作らない。失敗・閾値違反・人の判断が必要な時だけ Issue または TODO を起票する |
+
+判断の境界は次のとおり。
+
+1. 「来週また測る」「母数が成熟するまで待つ」は未完了実装ではない。変更と計測契約が完成していれば、
+   backlog を閉じて `effect/pending` へ移す。
+2. 公開、R2 write、ASP 操作、GA4 管理設定などの承認待ちは観測ではない。実行が未完了なので backlog に残し、
+   承認対象と完了 gate を明記する。
+3. 週次・月次計画は優先順位を選ぶだけで、タスクの正典にならない。参照 ID のない独自タスクやカード構文を置かない。
+4. 反復する正常運用を `[種類:定期]` の backlog カードにしない。schedule は workflow / skill、今週の実行枠は
+   weekly、結果は state / reference が持つ。
+5. backlog と improvements に同じ ID を同時に置かない。引き渡し先は別 ID にし、元カードの ledger evidence または
+   詳細ログから相互参照する。
+
 ## frontmatter規約
 
 `docs/00_プロジェクト管理/`、`docs/01_技術設計/`、`docs/02_実装計画/`、
