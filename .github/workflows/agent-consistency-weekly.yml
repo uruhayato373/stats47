@@ -56,6 +56,9 @@ jobs:
           fi
           cat /tmp/consistency-report.txt
 
+      - name: 🧭 Check business plan SSOT
+        run: npm run business-plan:check
+
       - name: 🧩 Check checker wiring
         id: checker_wiring
         run: |

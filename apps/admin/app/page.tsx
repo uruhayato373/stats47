@@ -32,6 +32,11 @@ const SECTIONS = [
     desc: "政府・自治体の公式ダッシュボード、指標、可視化、stats47テーマ接続を確認",
   },
   {
+    href: "/strategy",
+    title: "方針・事業計画",
+    desc: "stats47 2.0の取込判断、初期パイロット、企画在庫、KPI、設計文書を確認",
+  },
+  {
     href: "/revenue",
     title: "収益 (AdSense)",
     desc: "週次収益・RPM・内訳。実測は AdSense のみで他チャネルは未計測と明示する",

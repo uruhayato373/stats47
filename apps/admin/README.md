@@ -1,7 +1,7 @@
 # apps/admin — 統合メディアコンソール (localhost 専用)
 
 stats47 のローカル統合メディアコンソール。X / Instagram / note / Kindle の原稿・公開状態、
-SNS 投稿/予約、画像資産の欠落チェック/再生成、ブログ SVG、調査カタログ、プロジェクト現況を横断管理する。
+SNS 投稿/予約、画像資産の欠落チェック/再生成、ブログ SVG、調査カタログ、事業方針、プロジェクト現況を横断管理する。
 2026-07-16 に旧 node:http + Vanilla JS 実装 (`.claude/scripts/gallery/`) から**完全移管** (旧実装は削除済み)。
 
 **公開サイト `apps/web` とは独立**。Cloudflare 等へデプロイしない。リモート公開・認証・DB なし。
@@ -30,13 +30,14 @@ PORT=5000 npm run admin    # ポート上書き
 | `/assets` | 画像/動画資産 11 タブ・欠落チェック (HEAD probe)・再生成 (whitelist 5 タブのみ) |
 | `/svg` | ブログ SVG 分類カタログ (手動ロード・10 分キャッシュ) |
 | `/research` | 政府・自治体の公式ダッシュボード、ストーリー、指標・可視化、stats47テーマ接続の読み取り専用ミラー |
+| `/strategy` | stats47 2.0事業計画の25章判断、設計文書、実行ゲート、KPI/イベント、100企画・X30案・note商品15件の読み取り専用ミラー |
 | `/dashboard` | メトリクス/進捗キュー/バックログ/STP の読み取り専用ミラー (60 秒キャッシュ) |
 | `/buzz-map` | バズ地図 集客ゲート管理 (2026-07-17)。curated catalog 160 件既定 + `?lane=` で machine 全レーン。filter/score breakdown/evidence/landing 状態/素材 preview。操作 job: landing 再判定・spec 生成・レンダ (still/preview/本尺)・R2 push・draft 登録 — **push/draft は確認ダイアログ + isPostable ゲート必須** (landingContract=pass && live 200 なしでは登録不可)。ideaId/action は catalog 実在 allowlist。正典 `.claude/rules/buzz-map-standards.md` §5 |
 
 ## 構成
 
 ```
-app/            17 画面 + api/** (Route Handler) + media/ pilot/ (ローカルファイル配信)
+app/            管理画面 + api/** (Route Handler) + media/ pilot/ (ローカルファイル配信)
 components/     共有 (console-nav / async-state / job-dialog / media-preview) + ページ別
 lib/client/     fetch wrapper (SWR 等は使わない)
 lib/contracts/  API DTO + Zod schema (書込/action body 検証)
@@ -62,6 +63,7 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 | 配信素材 | R2 (`storage.stats47.jp`) | 公開 URL で読む。list しない |
 | dashboard | state JSON / metrics CSV / docs md | 読み取り専用ミラー (`lib/server/dashboard.ts`) |
 | 調査カタログ | `.claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json` | 読み取り専用ミラー (`lib/server/dashboard-catalog.ts`) |
+| 事業計画 | `packages/data-configs/src/business-plan/` + `.claude/state/business-plan/latest.json` | authored SSOTとderived運用stateの読み取り専用ミラー (`lib/server/business-plan.ts`) |
 | 資産列挙 | `.claude/scripts/lib/gallery-collectors.mjs` + `svg-classify.mjs` | **CI 静的ギャラリーと共有 — 削除禁止**。`lib/server/collectors.ts` (+ .d.ts) 経由で import |
 
 ## 安全ガード
