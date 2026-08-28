@@ -1101,25 +1101,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **(b) の手順**: 両記事の本文は 2022年度 を論じているのに地図は 1988年 (live) を表示しており、再生成すると 1989年 に振れる (SSOT 照合が両年で同程度に一致するため)。どの年の地図が記事の主張に対応するかを人が決めてから `--mapping` で固定する。**確定するまで push しない**。
 - **完了条件**: 123 枚すべてが `lintTileGridQuality` + `lintSvgSize` を error 0 で通る。
 
-### [DATA-PATIENT-SURVEY-01] 患者調査 (0004026104) の取り込みが0件で3ページが更新不能
-
-タグ: [起票:2026-07-29]
-
-- **owner**: `data-ingester` (座標の実在検証は `estat-researcher`)
-- **問題**: `inpatient-rate-per-100k` / `outpatient-rate-per-100k` / `patient-receiving-rate-by-age` の正典 `app/stats/<key>/values.json` が rowCount 0 (generatedAt 2026-07-05)。observationが無く values/normalized writer の対象外になるため配信データを更新できない。3件とも isActive かつ sitemap 掲載済で、2026-05-22 の凍結値が現行値のように見え、`?norm=per_area` は 100 倍のまま。3件が `statsDataId` と `cdCat01` まで完全に同一座標を指しており、少なくとも2件は cdCat01 が誤りと考えられる。
-- **次**: `estat-researcher` で 0004026104 の cdCat01 一覧と各コードの意味を確認し、3 metric へ正しいコードを割り当てる。座標が正しいのに0件なら、その統計表が都道府県別の値を持たない可能性を検討する。
-- **完了条件**: 3件の `app/stats/<key>/values.json` が rowCount > 0 になり、sync-snapshots 後に `audit-ranking-data-integrity` の実在欠落と絶対鮮度違反が0件になること。
-- **機械検知**: 週次 `ranking-integrity-audit-weekly.yml` が実在と絶対鮮度でこの3件を検出し `ranking-alert` を起票するため、放置しても埋もれない。
-
-### [COCONALA-PRODUCT-FACTORY-01] 14テーマパックの商品化
-
-タグ: [起票:2026-07-18]
-
-- **owner**: Claude Code
-- **次**: Office実機検証を1商品ずつ行い、P-14に家計・消費の代表datasetを接続する。note channelは14パックから決定的に導出し、旧174商品前提を除去する。
-- **完了条件**: catalog、dataset、Office成果物、validatorが一致し、最初の1商品を出品判断できる。出品操作はユーザーが行う。
-- **正典**: `.claude/rules/coconala-product-standards.md` / `.claude/skills/product/build-coconala-product/`
-
 ### [THEME-PORTFOLIO-REMAINDER-01] テーマ分類・カタログの残工程
 
 タグ: [起票:2026-07-04]
@@ -1310,20 +1291,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **禁止**: push を速くするために検証や purge を削らない。差分判定を誤って
   **送るべきものを skip する**方が、全件送るより実害が大きい (stale 配信は 6 日間気づかれなかった)。
 
-### [SCRIPTS-TYPECHECK-01] `.claude/scripts` を型検査に載せる
-
-タグ: [起票:2026-08-13]
-
-- **owner**: uruhayato373
-- **背景**: 2026-08-13 に `scripts` ディレクトリ全件を型検査へ載せた際、`.claude/scripts` だけ
-  免除として残した。TS 41 ファイル、compiler option を調整しても error 71 件
-  (TS7006 implicit any 39 / TS2339 21 ほか)。素 JS の `lib/*.mjs` core を import する設計なので、
-  型付けの方針 (JSDoc で型を付ける / `.d.ts` を置く / core を TS 化する) を決めるところから要る。
-- **次**: 方針を 1 つ選び、まず 1 ドメイン (例 `ads`) で実証する。
-- **完了条件**: `.claude/scripts/tsconfig.json` が `type-check:scripts` に載り、
-  `scripts-type-check-coverage.test.cjs` の `KNOWN_UNCOVERED` が空になる。
-- **正典**: `.claude/rules/coding-standards.md`「CI が動かすスクリプトも型検査に載せる」
-
 ### [GINI-ALT-SOURCE-01] 等価可処分所得ジニ係数の代替出典
 
 - **owner**: estat-researcher
@@ -1430,14 +1397,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 4. 本番反映はユーザー承認後にまとめて1回行い、HTTP 200、年、単位、代表値を実測する。
 5. 完了した行は削除する。
 
-### [ESLINT-FEATURE-DEEP-IMPORT-01] features/\*/components で no-restricted-imports が実質無効
-
-タグ: [種類:改善] [起票:2026-08-04]
-
-**eslint の `no-restricted-imports` が features/\*/components 配下で実質無効**。`eslint.config.mjs:67` が `@/features/*/lib/*` 等の deep import を禁止しているが、同 174-221 の「ドメイン内Barrel強制」ブロックが `src/features/*/components/**` に対しルールを丸ごと上書きするため、**component ファイルからは他 feature の内部実装を自由に deep import できてしまう**。今回 1 件是正したが、他にも同型が残っている可能性。上書きブロックに元の patterns をマージすべきか要判断 (影響が全 feature に及ぶので別タスク)
-
-根拠・再現条件: `eslint.config.mjs` の 61-79 と 174-221 を読む。実例: `CommuteFlowSectionClient.tsx` が `@/features/migration-flow/lib/useFlowFocusPrefecture` を import しても lint が通っていた (2026-08-04 是正済)
-
 ### [MIGRATION-FLOW-WEEKLY-REOPEN-01] migration-flow-weekly の週次 IG 投稿が停止したまま (設計欠陥未修正)
 
 タグ: [種類:改善] [起票:2026-08-16]
@@ -1445,14 +1404,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 **migration-flow-weekly の schedule を停止したまま (投稿の設計欠陥は未修正)**。`post-instagram.ts:86-88` が gitignored な `.local/r2/sns/<slug>/instagram` を existsSync で要求するため、clean checkout の CI では構造的に必ず失敗する (2026-05-25 から 12 回連続失敗)。8/16 に schedule を削除して無言の失敗を止めたが、**週次の県ローテーション IG 投稿そのものが止まったまま**。再開するなら post-instagram-scheduled.yml と同じ「公開 R2 URL を IG Graph API に渡す」経路へ寄せるか、post step 前に R2 から pull する step を足す
 
 根拠・再現条件: `.github/workflows/migration-flow-weekly.yml` (冒頭コメントに経緯)。成功している手本 = `.claude/scripts/instagram/post-from-schedule.cjs` の `PUBLIC_R2_BASE` 経由
-
-### [MUSEUM-COUNT-AXIS-01] 博物館系 3 指標が類似施設を除外して実在県を 0 にしている
-
-タグ: [種類:不具合] [起票:2026-08-05]
-
-**博物館系 3 指標が「類似施設」を除外して実在県を 0 にしている**。`botanical-garden-count` は登録+相当の 10 館のみ集計だが同調査の博物館類似施設に植物園が 107 館・33 県ある。`zoo-count` は 35 館のみで類似施設の動物園 59 館・26 県を除外 (大分等が 0 表示)、`aquarium-count` は 38 館のみで類似施設 46 館・28 県を除外。cdCat の集計軸を見直すか、指標名を「登録博物館のみ」に改めるかの判断が要る
-
-根拠・再現条件: e-Stat 0003348811。値分布の検証キャンペーンで検出。未検証キューに残置
 
 ### [HEALTH-CHECKUP-RATE-RETIRE-01] health-checkup-rate-lifestyle-diseases が 2017 年以降 全国値 0%
 
