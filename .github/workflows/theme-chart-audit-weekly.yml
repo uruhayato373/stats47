@@ -133,3 +133,10 @@ jobs:
           if [ -n "$EXISTING" ]; then
             gh issue close "$EXISTING" --comment "テーマチャートの e-Stat 取得が全件復旧したため自動クローズします。"
           fi
+
+      - name: ❌ Propagate live audit status
+        if: always()
+        run: |
+          if [ "${{ steps.check.outcome }}" != "success" ] || [ "${{ steps.check.outputs.exit_code }}" != "0" ]; then
+            exit 1
+          fi

@@ -91,6 +91,28 @@ jobs:
         run: npm run test:workflow-commit-back
         continue-on-error: false
 
+      - name: 🧯 Quality Gate Ratchet Contracts
+        # 既存warning/skip/fail-openと金額単位の例外は期限・owner付きbaselineで縮小のみ許可する。
+        # 新しいchecker自身のmutation testと、週次監査がIssue更新後に失敗を伝播する契約も固定する。
+        run: |
+          node --test \
+            .claude/scripts/lib/__tests__/check-money-unit-audit.test.cjs \
+            .claude/scripts/lib/__tests__/check-quality-exceptions.test.cjs \
+            .claude/scripts/lib/__tests__/check-quality-warning-ratchet.test.cjs \
+            .claude/scripts/lib/__tests__/check-render-ci-contract.test.cjs \
+            .claude/scripts/lib/__tests__/scheduled-audit-propagation.test.cjs
+          node .claude/scripts/lib/check-money-unit-audit.cjs --base origin/main
+          node .claude/scripts/lib/check-quality-exceptions.cjs --base origin/main
+          node .claude/scripts/lib/check-quality-warning-ratchet.cjs --base origin/main
+          node .claude/scripts/lib/check-render-ci-contract.cjs --base origin/main
+        continue-on-error: false
+
+      - name: 🧭 Affiliate Offer Taxonomy Contract
+        # creative programRef と案件profileの1:1、vertical/lane/friction/成果条件の型を検査する。
+        # 未確認案件は pending-classification のまま明示し、配信候補へ混入させない。
+        run: npx tsx .claude/scripts/ads/audit-affiliate-offer-profiles.ts
+        continue-on-error: false
+
       - name: 🤖 Content Generation Routine Contract Gate
         # 対象あり生成0件をgreenに戻さない。LLM実行→決定的検証→公開の順序と
         # OAuth / MCP / full-output の安全契約を静的に固定する。
@@ -815,6 +837,40 @@ jobs:
           NODE_OPTIONS: '--max-old-space-size=4096'
         continue-on-error: false
 
+  visualization-render:
+    name: Visualization Render Golden
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎨 Compare deterministic chart renders
+        env:
+          RUN_RENDER_TESTS: "1"
+          RENDER_ARTIFACT_DIR: /tmp/stats47-render-artifacts
+        run: npm run test:run --workspace=@stats47/visualization
+        continue-on-error: false
+
+      - name: 📊 Upload render differences
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: visualization-render-diff
+          path: /tmp/stats47-render-artifacts/
+          if-no-files-found: ignore
+          retention-days: 14
+
   build:
     name: Build Check
     runs-on: ubuntu-latest
@@ -930,7 +986,7 @@ jobs:
   # (needs のいずれかが失敗すると本 job は skip されうるため、結果を明示チェックする)。
   quality-check:
     name: Code Quality Check
-    needs: [static-gates, type-check, test, admin-quality, remotion-quality, build, remote-asset-audit, e2e]
+    needs: [static-gates, type-check, test, admin-quality, remotion-quality, visualization-render, build, remote-asset-audit, e2e]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -940,7 +996,7 @@ jobs:
         if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped') }}
         run: |
           echo "::error::One or more required checks did not pass."
-          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} admin-quality=${{ needs.admin-quality.result }} remotion-quality=${{ needs.remotion-quality.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }}"
+          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} admin-quality=${{ needs.admin-quality.result }} remotion-quality=${{ needs.remotion-quality.result }} visualization-render=${{ needs.visualization-render.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }}"
           exit 1
 
       - name: ✅ All Checks Passed

@@ -6,7 +6,7 @@
 
 | ワークフロー                                        | トリガー                                           | 実行内容                                                                                                                                                                                                        |
 | --------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR Quality Check                                    | PR作成・更新 (main)                                | Lint、Type Check、Unit Test、Coverage、Build、Playwright E2E                                                                                                                                                    |
+| PR Quality Check                                    | PR作成・更新 (main)                                | Lint、Type Check、Unit Test、共有チャートgolden render、Coverage、Build、Playwright E2E                                                                                                                          |
 | Deploy to Cloudflare Workers                        | Push (main)                                        | Build、認証確認、デプロイ、ヘルスチェック                                                                                                                                                                       |
 | Security Scan                                       | PR/Push、毎週日曜0時、手動                         | npm audit、CodeQL分析                                                                                                                                                                                           |
 | Backlog Loop Daily (`backlog-loop-daily.yml`)       | 毎日1時30分JST、手動、request push                 | .claude/todo の 05/01/06 を分類して処理し、**機械ゲートを通した証拠が台帳にあるものだけ**行削除する。verify が「行削除 ⇔ ledger の gate.pass」を突合し、宣言だけの完了を落とす                                     |
@@ -15,6 +15,7 @@
 | Affiliate inventory (`affiliate-dashboard-refresh.yml`) | 毎週日曜21時JST、develop対象push、手動 | 在庫/compliance/配置mapとread-only HTMLをartifact化。git/R2/ASPへ書かない |
 | Affiliate metrics (`affiliate-ga4-weekly.yml`) | 毎週日曜22時JST、手動 | GA4 schema v3、二層portfolio、operations、pilot readinessを生成してartifact化。候補提示までで広告変更・winner・pushをしない |
 | GSC Operations Cycle (`gsc-operations-cycle-weekly.yml`) | 毎週月曜20時30分JST、手動 | 最新GSC snapshotに対する週次レビュー、候補のapprove/dismiss、翌週計画、月次GSC欄、effect verdictの接続を決定的に監査。異常は固定`gsc-cycle-alert` Issueへupsertし、回復時に自動Close |
+| Visualization Render Golden (`visualization-render-weekly.yml`) | 毎週日曜6時30分JST、手動 | 共有チャート9種をgolden PNGと比較。失敗差分をartifact保存し、PR必須render gateの実行経路も静的契約で監査 |
 | KSJ aggregate ingest (`ksj-aggregate-ingest.yml`) | 手動 | KSJの元データをCI内で再取得し、都道府県帰属の未解決0・47県ゲート後に集計`app/stats`だけをR2へ公開。元GIS / TopoJSONは公開しない |
 
 ### ブランチ戦略
@@ -78,7 +79,7 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 
 **ワークフロー**: `pr-quality-check.yml`
 
-自動実行されるチェック項目（タイムアウト: 20分）：
+自動実行されるチェック項目（各jobは最大5〜15分、並列実行）：
 
 1. ✅ **ESLint**: `npm run lint`
    - Lintエラーで失敗（continue-on-error: false）
@@ -93,7 +94,11 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 4. ✅ **Verify Build**: `npm run build`
    - ビルドエラーで失敗
 
-5. ✅ **Full E2E**: Playwright + Chromium
+5. ✅ **Visualization Render Golden**: `RUN_RENDER_TESTS=1 npm run test:run --workspace=@stats47/visualization`
+   - 共有チャート9種のPNG差分で失敗し、差分artifactを保存
+   - golden更新は原因・旧新SHA-256を登録した変更だけ許可
+
+6. ✅ **Full E2E**: Playwright + Chromium
    - 本番ビルドを起動して全E2Eを1 workerで実行
    - 失敗時を含め、HTMLレポートとtest-resultsを30日間保存
 

@@ -1,0 +1,46 @@
+name: 🎨 Visualization Render Golden (weekly)
+
+on:
+  schedule:
+    - cron: "30 21 * * 6"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: visualization-render-weekly
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎨 Compare deterministic chart renders
+        env:
+          RUN_RENDER_TESTS: "1"
+          RENDER_ARTIFACT_DIR: /tmp/stats47-render-artifacts
+        run: npm run test:run --workspace=@stats47/visualization
+        continue-on-error: false
+
+      - name: 📊 Upload render differences
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: visualization-render-diff
+          path: /tmp/stats47-render-artifacts/
+          if-no-files-found: ignore
+          retention-days: 14

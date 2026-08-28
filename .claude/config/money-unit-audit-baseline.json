@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "description": "Shrink-only baseline for money-unit rows whose checked-in e-Stat metadata cannot determine a source unit.",
+  "unknown": [
+    {
+      "code": "meta-missing",
+      "count": 7,
+      "owner": "data-ingester",
+      "reason": "Seven active money tables do not yet have a checked-in metadata mirror.",
+      "expiresAt": "2026-10-31"
+    },
+    {
+      "code": "no-unit-on-pinned-axes",
+      "count": 10,
+      "owner": "data-ingester",
+      "reason": "Ten table metadata mirrors expose no unit on the pinned tab or category axes.",
+      "expiresAt": "2026-10-31"
+    }
+  ]
+}
