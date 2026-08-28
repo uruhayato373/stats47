@@ -21,6 +21,8 @@ import * as fs from "fs";
 import { execFileSync } from "child_process";
 import { createRequire } from "module";
 
+import { AFFILIATE_OFFER_PROFILES } from "../../../apps/web/scripts/affiliate-offer-profiles-data";
+
 const require = createRequire(import.meta.url);
 const core = require("./lib/a8-scout-core.mjs");
 const appendCore = require("./lib/a8-append-core.mjs");
@@ -123,6 +125,32 @@ function main(): void {
       for (const p of pending) console.log(`    - ${p.programId} (${p.name})`);
     }
     return;
+  }
+
+  // 新規 active creative は、成果条件を確認済みの offer profile が先に存在するときだけ登録する。
+  // 未分類profileの自動生成は action/friction の推測確定になるため fail-closed にする。
+  const offerByRef = new Map(AFFILIATE_OFFER_PROFILES.map((profile) => [profile.programRef, profile]));
+  const profileErrors: string[] = [];
+  for (const { entry } of targets) {
+    const programRef = `a8:${entry.programId}`;
+    const profile = offerByRef.get(programRef);
+    if (!profile) {
+      profileErrors.push(`${programRef}: offer profile 不在`);
+      continue;
+    }
+    if (["pending-classification", "blocked", "paused"].includes(profile.portfolioStatus)) {
+      profileErrors.push(`${programRef}: portfolioStatus=${profile.portfolioStatus}`);
+    }
+    if (!profile.allowedVerticals.includes(entry.vertical)) {
+      profileErrors.push(`${programRef}: vertical=${entry.vertical} は profile allowlist 外`);
+    }
+  }
+  if (profileErrors.length > 0) {
+    console.error(
+      "🚨 active広告の登録前に affiliate-offer-profiles-data.ts で成果条件・負担・lane を確認してください:\n" +
+        [...new Set(profileErrors)].map((error) => `  - ${error}`).join("\n"),
+    );
+    process.exit(1);
   }
 
   // ★ 実行前 byte 列を保持 (ゲート失敗時の巻き戻しはこれを書き戻す。git checkout は使わない)

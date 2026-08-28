@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # バックログ (タスクマスタ)
@@ -63,7 +63,7 @@ updated: 2026-08-27
 タグ: [収益化] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-08-20]
 
 - **owner**: Claude Code Sonnet（通常実装は high。work package ごとに1回ずつ実行）
-- **再開ポインタ**: `nextWorkPackage=WP0` / `lastCompleted=none`。各WPは完了条件の検証後にだけ
+- **再開ポインタ**: `nextWorkPackage=WP5-public-pilot-owner-gates` / `lastCompleted=WP4+WP5-WP6-local-framework`。各WPは完了条件の検証後にだけ
   `lastCompleted`と`nextWorkPackage`を更新する。長い実行ログは残さず、検証コマンドと結果を1〜3行で記録する。
 - **目的**: 報酬単価中心の候補選定を、`vertical × discovery/decision × 行動負担 × 確定収益`で
   検証できるポートフォリオへ改める。高単価案件は高意図ページに残し、低ハードル案件は別レーンで
@@ -80,13 +80,18 @@ updated: 2026-08-27
     現時点で`.claude/state/metrics/affiliate/{a8-results,a8-report-log}.json`は未生成。A8の既定期間は
     年初から当月までの累計で、normalizerは単月でなければ月次recordsへ写さない。期間フォーム対応前に
     CV・確定額を0または当月実績として扱わない。
-- **2026-08-26 WP0 checkpoint**: GA4取得を`overview` / `experiments` / `pages`の独立reportへ分離し、
-  ad_id tierの成功がvariant取得を隠さないfallbackと標準`pagePath`→page type導出をpure core + fixtureで固定。
-  実験判定は「95%有意」を廃止し、sample・期間・measurement freshness・confound guardを通った場合だけ
-  `ready-to-decide`として人間へ提示する契約へ統一した。広告script全201 test、追加core 27 test、
-  operations state validateはgreen。実stateは`ga4-variant-dimension-missing`で正しくblocked。
-  A8 `--probe-period`はread-only起動したが未ログインを検出して入力・クリック前に停止したため、
-  月/日レンジselectorと`outcomeGate`のfixture化は未完了。`nextWorkPackage=WP0`を維持する。
+- **2026-08-28 WP0完了**: GA4の独立reportと実験guardに加え、A8実機で口座・全4レポートの月/日selectorを確定。
+  `--month 2026-08`の要求期間と4 CSVの実期間が完全一致し、normalize dry-runは104行・reject 0。
+  口座横断click 326 > site-summary 294を検出したためSSOT書込は止め、outcome gateは欠損/累計/超過/不足をblockedに固定。
+  広告script 216 test、web/admin type-check、operations validate、docs:check、consistency error 0がgreen。
+  `docs:check:all`は既存の期限超過等27 warningsを`--fail-on-warn`で検出（本WP起因の新規error/リンク悪化は0）。
+- **2026-08-28 WP1〜WP4・WP5/WP6ローカル枠組み完了**: 263 creativeを131 `programRef`へ結び、
+  全offerを推測なしの`pending-classification`として隔離。型付きprofile、登録gate、通常readerからの実験隔離、
+  GA4 schema v3独立report、A8 programRef join、二層portfolio、admin/単体HTML共通view model、週次artifact、
+  pilot実現可能性・readiness・verdict（勝者自動選択なし）を実装した。広告script 243、Web広告68、admin 11 test、
+  web/admin/scripts type-check、在庫サイズ、compliance、R2非書込export、docs:check、consistency error 0がgreen。
+  実stateはGA4 v2/variant欠損、A8成果のサイト分離不能、未分類131、既存実験1で正しくblocked。
+  公開pilot・成果成熟後の実判定は、これらのgateと案件/ページ/push承認が揃うまで未完了のためカードを維持する。
 - **依存・競合回避**:
   - standalone Claude CodeとCodexを同じ作業ツリーで同時実行しない。開始時に対象fileがdirtyなら
     別worktreeを作るか、現在の変更を所有者がcommitするまで停止する。`git add -A`は禁止。

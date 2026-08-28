@@ -545,6 +545,14 @@ function inspectRepository({
       if (card.kind && !backlogLib.KINDS.includes(card.kind)) {
         add("error", "DG057", todoFile, `${label}の種類が語彙外: ${card.kind}`);
       }
+      if (card.kind === "定期") {
+        add(
+          "error",
+          "DG061",
+          todoFile,
+          `${label}は反復タスクのためbacklogへ置けない。workflow / skill + stateへ移し、週次・月次はID参照だけにする`,
+        );
+      }
       for (const category of card.unknownCategories) {
         add("error", "DG057", todoFile, `${label}のカテゴリが語彙外: ${category}`);
       }
@@ -564,6 +572,20 @@ function inspectRepository({
     }
     if (noKind > 0) {
       add("warning", "DG059", todoFile, `種類なし ${noKind} 件 / 全 ${cards.length} カード`);
+    }
+  }
+
+  // 月次・週次は TODO のコピー先ではなく、既存 ID を選ぶ計画ビュー。
+  // カード見出しやタグ行を許すと status / 完了条件が backlog と二重管理になる。
+  for (const planFile of [config.todo.monthFile, config.todo.weekFile].filter(Boolean)) {
+    const text = readText(path.join(root, planFile));
+    if (/^###\s+\[[A-Z0-9-]+\]/m.test(text) || /^タグ:\s*/m.test(text)) {
+      add(
+        "error",
+        "DG062",
+        planFile,
+        "月次・週次計画にカード構文を複製できない。backlog / improvements の既存IDだけを参照する",
+      );
     }
   }
 

@@ -11,6 +11,7 @@ import {
   wrap,
   type Wrapped,
 } from "./state-io";
+import { buildAffiliatePortfolioViewModel, type AffiliatePortfolioViewModel } from "./affiliate-portfolio-view";
 
 /**
  * アフィリエイト運用の state (`.claude/state/ads/`) を読む。読み取り専用。
@@ -48,6 +49,7 @@ export interface AdsOperations {
   freshness: { inventoryDays: number | null; ga4Days: number | null };
   measurementGate: Gate;
   publishGate: Gate;
+  portfolioGate: Gate;
   coverage: { gapVerticals: string[]; thinVerticals: string[] };
   directPlacements: { total: number; orphaned: string[]; missingDisclosure: string[] };
   recommendedActions: Array<{ id: string; reason: string; command: string }>;
@@ -86,6 +88,14 @@ export interface AdsGa4 {
   byPosition: Array<{ position: string; impressions: number; clicks: number; ctr: number }>;
 }
 
+export interface AdsPilot {
+  generatedAt: string;
+  readiness: Gate;
+  verdict: { status: string; reasons: string[]; winnerVariantId: null };
+  feasibility: { status: string; requiredImpressions?: number | null; requiredClicks?: number | null; projectedDays?: number | null } | null;
+  recommendedAction: { id: string; reasons: string[] };
+}
+
 /** 状態機械カタログ (a8 / 3ASP) は件数だけ返す */
 export interface CatalogSummary {
   file: string;
@@ -95,6 +105,8 @@ export interface CatalogSummary {
 
 export interface AdsSummary {
   operations: Wrapped<AdsOperations>;
+  portfolio: Wrapped<AffiliatePortfolioViewModel>;
+  pilot: Wrapped<AdsPilot>;
   inventory: Wrapped<AdsInventory>;
   compliance: Wrapped<AdsCompliance>;
   ga4: Wrapped<AdsGa4>;
@@ -148,6 +160,7 @@ function readOperations(): Wrapped<AdsOperations> {
       },
       measurementGate: d.measurementGate ?? { status: "unknown", reasons: [] },
       publishGate: d.publishGate ?? { status: "unknown", reasons: [] },
+      portfolioGate: d.portfolioGate ?? { status: "unknown", reasons: [] },
       coverage: {
         gapVerticals: d.coverage?.gapVerticals ?? [],
         thinVerticals: d.coverage?.thinVerticals ?? [],
@@ -156,6 +169,27 @@ function readOperations(): Wrapped<AdsOperations> {
       recommendedActions: d.recommendedActions ?? [],
       ga4Totals: d.ga4Totals ?? null,
       experiments,
+    };
+  });
+}
+
+function readPortfolio(): Wrapped<AffiliatePortfolioViewModel> {
+  return wrap(() =>
+    buildAffiliatePortfolioViewModel(
+      readJson<Record<string, any>>(`${DIR}/affiliate-portfolio-latest.json`),
+    ),
+  );
+}
+
+function readPilot(): Wrapped<AdsPilot> {
+  return wrap(() => {
+    const d = readJson<Record<string, any>>(`${DIR}/affiliate-pilot-readiness-latest.json`);
+    return {
+      generatedAt: d.generatedAt,
+      readiness: d.readiness,
+      verdict: d.verdict,
+      feasibility: d.feasibility ?? null,
+      recommendedAction: d.recommendedAction,
     };
   });
 }
@@ -200,7 +234,7 @@ function readGa4(): Wrapped<AdsGa4> {
       .sort();
     if (files.length === 0) throw new Error("ga4-affiliate-*.json が無い");
     const d = readJson<Record<string, any>>(`${DIR}/${files[files.length - 1]}`);
-    const rows: Array<Record<string, any>> = d.rows ?? [];
+    const rows: Array<Record<string, any>> = d.overview ?? d.rows ?? [];
 
     const agg = (key: string) => {
       const m = new Map<string, { impressions: number; clicks: number }>();
@@ -260,6 +294,8 @@ function readCatalogs(): Wrapped<CatalogSummary[]> {
 export function adsSummary(): AdsSummary {
   return cached("ads", TTL.daily, () => ({
     operations: readOperations(),
+    portfolio: readPortfolio(),
+    pilot: readPilot(),
     inventory: readInventory(),
     compliance: readCompliance(),
     ga4: readGa4(),

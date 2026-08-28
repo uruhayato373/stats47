@@ -452,6 +452,8 @@ export function toResultsRecords(programRows, { singleMonth = null } = {}) {
     records.push({
       month,
       program: r.program,
+      programId: r.programId ?? null,
+      programRef: r.programId ? `a8:${r.programId}` : null,
       clicks: r.clicks ?? 0,
       conversions: r.conversions ?? 0,
       approved: r.approved ?? 0,

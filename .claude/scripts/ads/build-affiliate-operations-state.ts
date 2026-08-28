@@ -78,6 +78,7 @@ function main(): void {
   const ga4 = latestGa4Snapshot();
   const compliance = readJsonIfExists(resolve(STATE_DIR, "compliance-latest.json"));
   const registry = readJsonIfExists(resolve(STATE_DIR, "experiments.json"))?.experiments ?? [];
+  const portfolio = readJsonIfExists(resolve(STATE_DIR, "affiliate-portfolio-latest.json"));
 
   const hasActiveExperiments = registry.some((e: { status?: string }) => e.status !== "closed");
   const measurementGate = evaluateMeasurementGate({
@@ -87,7 +88,7 @@ function main(): void {
     hasActiveExperiments,
   });
   const variantMetrics = aggregateVariantMetrics(
-    ga4?.data?.reports?.experiments?.rows ?? ga4?.data?.rows ?? [],
+    ga4?.data?.experiments ?? [],
   );
   const experiments = evaluateExperiments({
     registry,
@@ -106,6 +107,7 @@ function main(): void {
     compliance,
     experiments,
     measurementGate,
+    portfolio: portfolio ? { ...portfolio, snapshotPath: ".claude/state/ads/affiliate-portfolio-latest.json" } : null,
   });
 
   const errors = validateOperationsState(state);
@@ -128,6 +130,8 @@ function main(): void {
     (state.measurementGate.reasons.length ? ` (${state.measurementGate.reasons.join(", ")})` : ""));
   lines.push(`- publishGate: **${state.publishGate.status}**` +
     (state.publishGate.reasons.length ? ` (${state.publishGate.reasons.join(", ")})` : ""));
+  lines.push(`- portfolioGate: **${state.portfolioGate.status}**` +
+    (state.portfolioGate.reasons.length ? ` (${state.portfolioGate.reasons.join(", ")})` : ""));
   lines.push(`- freshness: inventory ${state.freshness.inventoryDays ?? "?"}d / ga4 ${state.freshness.ga4Days ?? "?"}d`);
   lines.push(`- coverage: gap=[${state.coverage.gapVerticals.join(", ")}] thin=[${state.coverage.thinVerticals.join(", ")}]`);
   lines.push(`- directPlacements: total ${state.directPlacements.total} / orphaned ${state.directPlacements.orphaned.length} / missingDisclosure ${state.directPlacements.missingDisclosure.length}`);

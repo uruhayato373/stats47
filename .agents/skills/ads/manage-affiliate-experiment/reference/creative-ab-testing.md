@@ -14,7 +14,7 @@ stats47 は完全 SSG + Cloudflare CDN キャッシュ。ビルド時に variant
 
 - サーバー (ビルド時) は枠の候補 variant を**全件** client コンポーネントに props で渡す (静的 HTML に同梱)。
 - client が mount 時に `localStorage` の実験割当を見て、無ければ**加重ランダム**で 1 つ選び保存 (sticky)。
-- 選ばれた variant のみ表示し、`ad_impression` / `affiliate_click` を variant 属性付きで送信。
+- 選ばれた variant のみ表示し、`affiliate_impression` / `affiliate_click` を variant 属性付きで送信。
 - CDN キャッシュは 1 種類のまま・再ビルド不要で配分変更可能。
 - CLS 対策: 枠は固定高さコンテナ (どの variant でもレイアウトが動かない)。
 - 実装: `VariantAdSlot.tsx` / `resolveExperimentVariantsByCategoryKey` (`resolve-affiliate-ad.ts`)。
@@ -38,7 +38,7 @@ weight?: number | null;        // 加重ランダムの重み (既定 1)
 
 ## GA4 計測
 
-`ad_impression` / `affiliate_click` に variant 属性 3 つ (実装済・後方互換):
+`affiliate_impression` / `affiliate_click` に variant 属性 3 つ (実装済):
 
 | param | 例 | 用途 |
 |---|---|---|
@@ -56,12 +56,14 @@ weight?: number | null;        // 加重ランダムの重み (既定 1)
 
 `.claude/rules/evidence-based-judgment.md` 準拠。**停止ルールは実験開始時に registry へ固定**する:
 
-1. **最小サンプル**: 各 variant imp ≥ 1,000 (既定。低トラフィック枠は期間で代替: 最低 4 週)。
-2. **比較**: variant 間 CTR の 2 標本比率 z 検定 (有意水準 5%)。実用基準は
-   「勝者 CTR が次点比 +20% かつ 95% 有意」。
-3. **勝者採用**: 人間の決定後に weight 引き上げ / 敗者 `isActive:false`。実測・サンプル・判定根拠を
+1. **最小サンプルと期間**: registry の `minSamplePerVariant` / `minDurationDays` の両方を満たす。
+   `maxDurationDays`へ達してsample不足なら`inconclusive`にする。期間だけでsampleを代替しない。
+2. **判定guard**: measurement gateがreadyで、snapshotがfresh、`confounds`が空の場合だけ
+   `ready-to-decide`にする。snapshot 1点へz検定や「95%有意」を導入しない。
+3. **比較**: variant別 imp / click / CTRとCTRの相対差を人間へ提示する。これは自動勝者判定ではない。
+4. **勝者採用**: 人間の決定後に weight 引き上げ / 敗者 `isActive:false`。実測・サンプル・判定根拠を
    improvement-log に記録 (status 更新は improvement-triage)。
-4. **多重比較**: 1 実験の variant は 2〜3 個に絞る。
+5. **比較数**: 1 実験の variant は 2〜3 個に絞る。
 
 判定状態 (invalid / collecting / ready-to-decide / inconclusive / closed) の定義と評価は
 `lib/affiliate-operations-core.mjs` の `evaluateExperiments` が正典 (テスト付き)。

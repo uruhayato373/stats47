@@ -53,6 +53,22 @@ function parseAffiliateAd(value: unknown, index: number): AffiliateAdRow {
     !AFFILIATE_VERTICALS.includes(value.vertical as AffiliateVertical)) {
     throw new Error(`${path("vertical")} must be a known affiliate vertical`);
   }
+  if (value.programRef !== undefined &&
+    (typeof value.programRef !== "string" || !/^(a8|afb|moshimo|rakuten|valuecommerce):[^:\s]+$/.test(value.programRef))) {
+    throw new Error(`${path("programRef")} must be a known provider-prefixed reference`);
+  }
+  if (value.offerProfile !== undefined) {
+    if (!isRecord(value.offerProfile)) throw new Error(`${path("offerProfile")} must be an object`);
+    for (const field of ["lane", "actionType", "frictionTier", "portfolioStatus"] as const) {
+      if (typeof value.offerProfile[field] !== "string") {
+        throw new Error(`${path(`offerProfile.${field}`)} must be a string`);
+      }
+    }
+    if (!Array.isArray(value.offerProfile.allowedPageTypes) ||
+      !value.offerProfile.allowedPageTypes.every((pageType) => typeof pageType === "string")) {
+      throw new Error(`${path("offerProfile.allowedPageTypes")} must contain strings`);
+    }
+  }
   if (value.targetRankingKeys !== undefined && value.targetRankingKeys !== null &&
     (!Array.isArray(value.targetRankingKeys) ||
       !value.targetRankingKeys.every((key) => typeof key === "string"))) {
@@ -106,11 +122,13 @@ function matchesRankingTarget(ad: AffiliateAdRow, rankingKey?: string): boolean 
   return targets.includes(rankingKey);
 }
 
-async function getActive(): Promise<AffiliateAdRow[]> {
+async function getActive(includeExperimentVariants = false): Promise<AffiliateAdRow[]> {
   if (process.env.NEXT_PHASE === "phase-production-build") return [];
   try {
     const snapshot = await loadSnapshot();
-    return snapshot.ads.filter(isActive);
+    return snapshot.ads.filter(isActive).filter(
+      (ad) => includeExperimentVariants || !(ad.experimentId || ad.variantId),
+    );
   } catch (error) {
     logger.error(
       { error: error instanceof Error ? error.message : String(error) },
@@ -195,7 +213,7 @@ export async function readActiveBannersByVerticalsFromR2(
 export async function readActiveExperimentVariantsByVerticalFromR2(
   vertical: AffiliateVertical,
 ): Promise<AffiliateAdRow[]> {
-  const active = await getActive();
+  const active = await getActive(true);
   const set = new Set<AffiliateVertical>([vertical]);
   return active
     .filter((a) => inVerticals(a, set) && !!a.experimentId && !!a.variantId)

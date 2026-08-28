@@ -87,9 +87,18 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
   `unknown` とし、0円や負けへ変換しない。
 - 勝者の自動公開、priority 自動変更、新規提携申請は行わない。候補提示までを機械化し、人間承認を残す。
 
-型付き offer catalog、広告との program 参照、成果 join、管理画面、週次改善の実装契約は
-`.claude/todo/backlog.md` の `AFF-INTENT-FRICTION-PORTFOLIO-01` に置く。実装完了までは本節を
-人間・agent の判定規約として使い、案件名から行動負担を推測して state を書き換えない。
+実装上の正典は次のように分離する。
+
+| 責務 | 正典 |
+|---|---|
+| authored成果条件・lane・friction | `apps/web/scripts/affiliate-offer-profiles-data.ts`（affiliate-manager排他writer） |
+| creative / placement | `apps/web/scripts/affiliate-ads-data.ts`（`programRef`でprofile参照） |
+| 変動するGA4・ASP成果・候補 | `.claude/state/ads/affiliate-portfolio-latest.json`（派生・手編集禁止） |
+| pilot開始可否・必要母数・verdict | `.claude/state/ads/affiliate-pilot-readiness-latest.json`（派生・勝者を持たない） |
+
+active広告の新規登録は、参照先profileが存在し、未分類/blocked/pausedでなく、verticalが許可済みの場合だけ通す。
+案件名から行動負担を推測してprofile/stateを書き換えない。公開pilotはmeasurement・outcome・profile・実現可能性・
+既存実験なし・ownerの案件/ページ/push承認をすべて満たした1件だけとする。
 
 ### 提携状況の真実源 (★2026-08-04 に一本化)
 

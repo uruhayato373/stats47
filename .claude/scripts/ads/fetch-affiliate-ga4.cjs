@@ -130,8 +130,15 @@ async function main() {
       unsetVerticalImpressions,
       unsetVerticalRatio: totalImp > 0 ? unsetVerticalImpressions / totalImp : null,
     },
-    rows: pivoted,
-    reports,
+    overview: reports.overview.rows,
+    experiments: reports.experiments.rows,
+    pages: reports.pages.rows,
+    reportQuality: Object.fromEntries(
+      Object.entries(reports).map(([name, report]) => [
+        name,
+        { dimensions: report.dimensions, failures: report.failures },
+      ]),
+    ),
   };
 
   const dir = path.join(PROJECT_ROOT, ".claude/state/ads");

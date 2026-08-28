@@ -38,11 +38,19 @@ co_agents: [improvement-triage, ga4-analyst]
 1. 対象枠 (locationCode) と vertical を決め、`.Codex/state/ads/affiliate-operations-latest.json` の
    `measurementGate` が `ready` で `ga4Snapshot` に variant dimension があることを確認
    (blocked のまま実験を始めない)。
+   二層portfolio pilotでは加えて`affiliate-portfolio-latest.json`と
+   `affiliate-pilot-readiness-latest.json`を読み、programRef/profile/outcome、既存実験なし、
+   実現可能性、案件・ページ・pushのowner承認がすべてreadyであることを確認する。
 2. **停止条件を事前固定**する: `minSamplePerVariant` (既定 1,000 imp) / `minDurationDays` (既定 28) /
-   `maxDurationDays` (既定 84) / `primaryMetric` (ctr) / 採用基準 (次点比 +20% かつ 95% 有意)。
+   `maxDurationDays` (既定 84) / `primaryMetric` (ctr) / measurement freshness / confound guard。
+   snapshot 1点へ検定や「95%有意」を後付けせず、gate通過後もCTRと相対差を人間へ提示するだけにする。
 3. variant は 2〜3 個に絞る (4 個以上は必要サンプルが急増)。
 
 ### start — 実験を開始する
+
+開始前に`npx tsx .Codex/scripts/ads/build-affiliate-pilot-state.ts --check`を通す。
+`readiness.status !== "ready"`ならregistry/creative/pushを一切変更しない。同時にactiveにできる
+二層portfolio pilotは1件だけで、theme/category/homeへ新しい枠を追加しない。
 
 1. `apps/web/scripts/affiliate-ads-data.ts` に同一 `experimentId`・別 `variantId` のエントリを 2〜3 件
    追加 (`/register-affiliate-banner` の Step 4 と同じ形式 + experiment フィールド)。
@@ -57,7 +65,8 @@ co_agents: [improvement-triage, ga4-analyst]
      "minDurationDays": 28,
      "maxDurationDays": 84,
      "primaryMetric": "ctr",
-     "decisionRule": "勝者 CTR が次点比 +20% かつ 95% 有意 (2標本比率 z 検定)",
+     "decisionRule": "sample・期間・freshness・confound guard通過後にCTRと相対差を提示し、人間が判断する",
+     "confounds": [],
      "status": "active",
      "winnerVariantId": null
    }
@@ -74,7 +83,8 @@ co_agents: [improvement-triage, ga4-analyst]
 ### decide — ready-to-decide の実験を人間に提示する
 
 1. `experiments.readyToDecide` の variant 別 imp / click / CTR を表で提示。
-2. 採用基準 (decisionRule) との照合結果を添えて **ユーザーに判断を仰ぐ** (自動採用しない)。
+2. sample・期間・measurement freshness・confound guardの結果とCTRの相対差を添えて
+   **ユーザーに判断を仰ぐ** (統計的有意性を捏造せず、自動採用しない)。
 3. 効果の記録は `.Codex/rules/evidence-based-judgment.md` のテンプレで
    `reference/improvement-log.md` (affiliate-improvement) に書き、status 更新は improvement-triage へ。
 

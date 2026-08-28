@@ -40,6 +40,10 @@ state (`affiliate-catalog.json` / `a8-catalog.json`) を読む** — §2 の表�
 
 ユーザーが ASP で提携承認 → 広告コードを持っている前提。
 
+> **active登録の前提**: `programRef`があり、`affiliate-offer-profiles-data.ts`に同じ参照の
+> profileが存在し、`pending-classification` / `blocked` / `paused`でなく、広告verticalが
+> `allowedVerticals`に含まれること。満たさない広告はactive登録しない。
+
 ### Step 1: コード解析 (ASP 別)
 
 > A8 コードの抽出は `.Codex/scripts/ads/lib/a8-code-core.mjs` の `parseA8Code(html)` に関数化済み
@@ -83,6 +87,7 @@ node .Codex/scripts/ads/inspect-banner.mjs "<imageUrl>" /tmp/banner.png
 ```typescript
 {
   id: "af_<service>_<vertical>_001",       // 一意。複数 placement が要るときだけ placement 別に分ける
+  programRef: "a8:s00000000000000",       // ★案件profileへの安定参照。広告コードから検証済みIDを使う
   title: "サービス名",                      // banner=内部ラベル / text=表示文言
   htmlContent: "https://px.a8.net/svt/ejp?a8mat=...",
   areaCode: null,
@@ -108,7 +113,7 @@ node .Codex/scripts/ads/inspect-banner.mjs "<imageUrl>" /tmp/banner.png
 ```bash
 npx tsc --noEmit -p apps/web/tsconfig.json
 npx tsx .Codex/scripts/ads/audit-affiliate-inventory.ts --json --check-size   # サイズ違反ゼロ (exit 0)
-npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/export-affiliate-ads-snapshot.ts  # vertical 検証 pass
+npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/export-affiliate-ads-snapshot.ts --validate-only  # profile/programRef含む検証だけ。R2 writeなし
 ```
 
 ### Step 6: 反映 (ユーザー判断)

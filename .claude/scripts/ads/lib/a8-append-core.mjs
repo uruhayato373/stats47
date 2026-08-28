@@ -15,8 +15,8 @@
 /** AFFILIATE_ADS 配列が「... },\n];\n」または「...[]」で正しく閉じているか。 */
 export function validateTail(src) {
   if (typeof src !== "string") return { ok: false, error: "src-not-string" };
-  // export const AFFILIATE_ADS ... = [ ... ]; の閉じ括弧 `];` が存在すること。
-  if (!/AFFILIATE_ADS\s*:\s*AffiliateAd\[\]\s*=\s*\[/.test(src)) {
+  // authored 配列 AFFILIATE_ADS_BASE の閉じ括弧 `];` が存在すること。
+  if (!/AFFILIATE_ADS_BASE\s*:\s*AffiliateAd\[\]\s*=\s*\[/.test(src)) {
     return { ok: false, error: "array-decl-not-found" };
   }
   // 最後の `];` を探す (配列の閉じ)。
@@ -79,6 +79,7 @@ export function buildAdDraft(entry, fields) {
     id: `af_${slug}_a8${kind}_001`,
     title: entry.name,
     htmlContent: fields.htmlContent,
+    programRef: `a8:${entry.programId}`,
     areaCode: null,
     vertical: entry.vertical ?? null,
     categoryKey: null,
@@ -113,7 +114,7 @@ export function uniqueId(baseId, existingIds) {
 }
 
 const FIELD_ORDER = [
-  "id", "title", "htmlContent", "areaCode", "vertical", "categoryKey",
+  "id", "title", "htmlContent", "programRef", "areaCode", "vertical", "categoryKey",
   "locationCode", "isActive", "priority", "startDate", "endDate",
   "targetCategories", "adType", "imageUrl", "trackingPixelUrl",
   "width", "height", "createdAt", "updatedAt",

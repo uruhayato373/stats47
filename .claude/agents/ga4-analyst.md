@@ -13,6 +13,9 @@ Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計
 - GA4 週次 snapshot 取得 (`/fetch-ga4-data`)
 - GA4 改善施策計画 + agent 用詳細記録 (`/ga4-improvement`)
 - **GA4 計装イベント台帳の維持** (`.claude/rules/analytics-event-standards.md` §2)。`apps/web/src/lib/analytics/events.ts` に追加されたイベント/パラメータの登録要否・登録状況を追跡し、GA4 で実登録を確認したら `✅登録済 (日付)` に更新する。effect/* 判定の前に「内訳が (not set) に潰れず取れるか」を確認する（推測で登録済みにしない = `evidence-based-judgment.md`）
+- **アフィリエイト計測 schema v3** — `overview`（ad/vertical/position）、`experiments`、`pages`を
+  独立reportで取得する。一つのfallback成功で別reportの欠損を隠さず、reportごとのdimension可用性を
+  `reportQuality`へ残す。旧schemaやvariant欠損は0件でなくmeasurement gate blockedとして渡す。
 - ~~featured ranking 更新 (`/update-featured-rankings`)~~ → **skill ごと削除済（2026-07-29）**。ホーム注目は掲載価値スコア（GSC 表示回数を主軸に厚みで補正）で**自動選定**される。真実源は生成物 `packages/data-configs/src/prominence/ranking-prominence.generated.ts`（生成: `npm run generate:ranking-prominence --workspace apps/web`）。GA4 側から featured を書き換える経路は持たない
 
 ## 担当スキル
