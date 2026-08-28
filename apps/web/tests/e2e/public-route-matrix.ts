@@ -101,7 +101,10 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
   },
   {
     id: "theme-fishery",
-    path: "/themes/fishery-marine",
+    // Release CI は候補ブランチのコードと現在の本番 R2 snapshot を組み合わせて動く。
+    // 全国チャートの scope override が R2 へ同期される前後のどちらでも、
+    // component-type 契約を同じ全国表示で検証する。
+    path: "/themes/fishery-marine?pref=all",
     canonicalPath: "/themes/fishery-marine",
     heading: "漁業（水産業）",
     dataSelector: '[data-theme-chart="true"]',
