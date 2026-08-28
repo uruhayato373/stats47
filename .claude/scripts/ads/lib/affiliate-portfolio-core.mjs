@@ -234,6 +234,8 @@ export function buildAffiliatePortfolioState({
     },
     offers,
     ads: adRows,
+    // ページ粒度だけを保持する。広告別の数値は ads/offers に既にあるため、
+    // page×ad×vertical×position の高cardinalityな複製を state に持ち込まない。
     placements: Array.isArray(ga4?.pages) && ga4Gate.status === "ready" ? ga4.pages : [],
     queueContexts,
     recommendedActions: buildPortfolioRecommendedActions({
