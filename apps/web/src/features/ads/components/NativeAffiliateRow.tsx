@@ -1,12 +1,11 @@
 import Image from "next/image";
 
-import {
-  isLandscapeBanner,
-  type ResolvedAffiliateBanner,
-} from "../services";
+import { isLandscapeBanner } from "../utils";
 
 import { AdImpressionTracker } from "./AdImpressionTracker";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
+
+import type { ResolvedAffiliateBanner } from "../types";
 
 interface NativeAffiliateRowProps {
   /** バナー配列。縦長を除き、variantの上限（3件または4件）まで描画する */

@@ -1,5 +1,31 @@
 import type { AffiliateVertical } from "../constants/affiliate-category";
 
+export interface ResolvedAffiliateAd {
+  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
+  id: string;
+  title: string;
+  href: string;
+  trackingPixelUrl?: string | null;
+}
+
+export interface ResolvedAffiliateBanner {
+  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
+  id: string;
+  title: string;
+  href: string;
+  imageUrl: string;
+  /** ASP のインプレッション計測ピクセル。A8 は 0.gif、ValueCommerce 等は無し (null) */
+  trackingPixelUrl: string | null;
+  width: number;
+  height: number;
+  /**
+   * 広告意図軸 (10 軸)。GA4 の `affiliate_vertical` に送るために解決層で確定させる。
+   * 描画側のページ文脈値を vertical として送ると、10 軸外の値が計測へ混入するため、
+   * バナー自身の vertical を正とする。
+   */
+  vertical: AffiliateVertical | null;
+}
+
 /**
  * アフィリエイト広告の型。完全DBレス Phase F で D1 `affiliate_ads` schema ($inferSelect) から
  * relocate。配信は R2 app/affiliate-ads/all.json (register-affiliate-banner で生成)。

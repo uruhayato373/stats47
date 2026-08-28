@@ -9,8 +9,8 @@ export { AffiliateTextAdList } from "./components/AffiliateTextAdList";
 export { OperatorProfileCard } from "./components/OperatorProfileCard";
 export { SidebarPromoBanner } from "./components/SidebarPromoBanner";
 export { NativeAffiliateRow } from "./components/NativeAffiliateRow";
-export { isLandscapeBanner } from "./services/banner-geometry";
-export type { ResolvedAffiliateBanner } from "./services/resolve-affiliate-ad";
+export { isLandscapeBanner } from "./utils";
+export type { ResolvedAffiliateBanner } from "./types";
 
 // 標準広告スロット部品（エディトリアル文法の統一枠）
 export {
