@@ -3,7 +3,7 @@
  * 外部変更や勝者選択は行わず、ready-to-presentでも人間へ比較材料を返すだけにする。
  */
 
-export const AFFILIATE_PILOT_STATE_SCHEMA_VERSION = 1;
+export const AFFILIATE_PILOT_STATE_SCHEMA_VERSION = 2;
 
 function unique(values) {
   return [...new Set(values.filter(Boolean))];
@@ -105,6 +105,14 @@ export function evaluateAffiliatePilotReadiness({
 }
 
 export function evaluateAffiliatePilotVerdict({ plan, readiness, observation, nowIso }) {
+  if (readiness?.reasons?.includes("eligible-lane-pair-missing")) {
+    return {
+      status: "not-feasible",
+      reasons: ["eligible-lane-pair-missing"],
+      comparison: null,
+      winnerVariantId: null,
+    };
+  }
   const reasons = [];
   if (!plan) reasons.push("pilot-plan-missing");
   if (readiness?.status !== "ready") reasons.push(...(readiness?.reasons ?? ["pilot-readiness-blocked"]));
@@ -164,8 +172,10 @@ export function buildAffiliatePilotState(input) {
     observation: input.observation,
     nowIso: input.nowIso,
   });
-  const recommendedAction = readiness.status !== "ready"
-    ? { id: "resolve-pilot-start-gates", reasons: readiness.reasons }
+  const recommendedAction = verdict.status === "not-feasible"
+    ? { id: "classify-next-offer-for-lane-pair", reasons: verdict.reasons }
+    : readiness.status !== "ready"
+      ? { id: "resolve-pilot-start-gates", reasons: readiness.reasons }
     : verdict.status === "ready-to-present"
       ? { id: "present-pilot-verdict-to-owner", reasons: [] }
       : { id: "continue-one-pilot-observation", reasons: verdict.reasons };
@@ -186,7 +196,7 @@ export function validateAffiliatePilotState(state) {
   if (!state?.generatedAt || Number.isNaN(Date.parse(state.generatedAt))) errors.push("generated-at-invalid");
   if (!state?.readiness || !["ready", "blocked"].includes(state.readiness.status)) errors.push("readiness-invalid");
   if (!Array.isArray(state?.readiness?.reasons)) errors.push("readiness-reasons-invalid");
-  if (!state?.verdict || !["pending", "inconclusive", "confounded", "ready-to-present"].includes(state.verdict.status)) {
+  if (!state?.verdict || !["pending", "not-feasible", "inconclusive", "confounded", "ready-to-present"].includes(state.verdict.status)) {
     errors.push("verdict-invalid");
   }
   if (state?.verdict?.winnerVariantId != null) errors.push("winner-must-not-be-selected-automatically");

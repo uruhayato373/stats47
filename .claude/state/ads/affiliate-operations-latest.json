@@ -1,33 +1,19 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-08-28T04:34:37.381Z",
+  "generatedAt": "2026-08-28T07:08:00.165Z",
   "inventorySnapshot": ".claude/state/ads/inventory-latest.json",
-  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-08-23.json",
+  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-08-28.json",
   "freshness": {
     "inventoryDays": 0,
-    "ga4Days": 4
+    "ga4Days": 0
   },
   "measurementGate": {
-    "status": "blocked",
-    "reasons": [
-      "ga4-schema-unsupported(v2)",
-      "ga4-variant-dimension-missing"
-    ]
+    "status": "ready",
+    "reasons": []
   },
   "portfolioGate": {
-    "status": "blocked",
-    "reasons": [
-      "offer-profile-unclassified:131",
-      "ga4-schema-unsupported(v2)",
-      "ga4-variant-dimension-missing",
-      "ga4-overview-report-missing",
-      "ga4-experiments-report-missing",
-      "ga4-pages-report-missing",
-      "a8-report-log-missing",
-      "a8-results-missing",
-      "a8-cross-check-unavailable",
-      "eligible-candidate-missing"
-    ]
+    "status": "ready",
+    "reasons": []
   },
   "portfolioSnapshot": ".claude/state/ads/affiliate-portfolio-latest.json",
   "publishGate": {
@@ -44,56 +30,22 @@
     "missingDisclosure": []
   },
   "experiments": {
-    "active": [
-      {
-        "experimentId": "blog-inbody-format",
-        "kind": "code",
-        "targetLocation": null,
-        "startedAt": "2026-08-04",
-        "daysElapsed": 24,
-        "minSamplePerVariant": 500,
-        "minDurationDays": 14,
-        "maxDurationDays": 56,
-        "sampleReached": false,
-        "minDurationReached": true,
-        "primaryMetric": "ctr",
-        "decisionRule": "sample・期間・freshness・confound guard通過後にCTRと相対差を提示し、人間が判断する",
-        "decisionGuards": [
-          "insufficient-sample",
-          "measurement-gate-blocked"
-        ],
-        "variants": [
-          {
-            "variantId": "text",
-            "impressions": 0,
-            "clicks": 0,
-            "ctr": null
-          },
-          {
-            "variantId": "banner",
-            "impressions": 0,
-            "clicks": 0,
-            "ctr": null
-          }
-        ],
-        "status": "collecting"
-      }
-    ],
+    "active": [],
     "readyToDecide": [],
     "invalid": [],
     "inconclusive": [],
-    "closed": []
+    "closed": [
+      {
+        "experimentId": "blog-inbody-format",
+        "status": "closed",
+        "winnerVariantId": "banner"
+      }
+    ]
   },
-  "recommendedActions": [
-    {
-      "id": "fix-measurement-gate",
-      "reason": "ga4-schema-unsupported(v2), ga4-variant-dimension-missing",
-      "command": "gh workflow run affiliate-ga4-weekly.yml / GA4 custom dimension 登録 (rules §6)"
-    }
-  ],
+  "recommendedActions": [],
   "ga4Totals": {
-    "impressions": 21036,
+    "impressions": 23771,
     "clicks": 11,
-    "ctr": 0.0005229131013500665
+    "ctr": 0.00046274872744099955
   }
 }

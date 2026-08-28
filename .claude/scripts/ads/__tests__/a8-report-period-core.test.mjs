@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { parsePeriodFromFilename } from "../lib/a8-report-csv.mjs";
+import { crossCheckAgainstSite, parsePeriodFromFilename, toResultsRecords } from "../lib/a8-report-csv.mjs";
 import {
   buildA8PeriodContract,
   compareA8Period,
@@ -147,4 +147,68 @@ test("サイト別との超過・不足は成果を0へ丸めず blocked にす�
     expectedSite: SITE,
   });
   assert.ok(shortfall.reasons.includes("a8-cross-check-shortfall"));
+});
+
+test("共用案件を含む口座横断値は専用分を下限・共用込みを上限として検算する", () => {
+  const siteRow = { clicks: 294, conversions: 2, grossRevenueYen: 1200, approved: 1, revenueYen: 500 };
+  const rows = [
+    {
+      programId: "s-exclusive",
+      clicks: 280,
+      conversions: 2,
+      grossRevenueYen: 1200,
+      approved: 1,
+      revenueYen: 500,
+    },
+    {
+      programId: "s-shared",
+      clicks: 46,
+      conversions: 0,
+      grossRevenueYen: 0,
+      approved: 0,
+      revenueYen: 0,
+    },
+  ];
+
+  const bounded = crossCheckAgainstSite(siteRow, rows, { sharedProgramIds: ["s-shared"] });
+  assert.equal(bounded.exceeded, false);
+  assert.equal(bounded.hasShortfall, false);
+  assert.equal(bounded.withinBounds, true);
+  assert.deepEqual(bounded.deltas.clicks, {
+    site: 294,
+    picked: 326,
+    exclusive: 280,
+    shared: 46,
+    lowerBound: 280,
+    upperBound: 326,
+    delta: 32,
+  });
+
+  const exclusiveOverflow = crossCheckAgainstSite(
+    siteRow,
+    [{ ...rows[0], clicks: 295 }, rows[1]],
+    { sharedProgramIds: ["s-shared"] },
+  );
+  assert.equal(exclusiveOverflow.exceeded, true);
+
+  const unexplainedShortfall = crossCheckAgainstSite(
+    siteRow,
+    [{ ...rows[0], clicks: 200 }, { ...rows[1], clicks: 20 }],
+    { sharedProgramIds: ["s-shared"] },
+  );
+  assert.equal(unexplainedShortfall.hasShortfall, true);
+});
+
+test("共用案件の口座横断成果をstats47月次recordsへ写さない", () => {
+  const result = toResultsRecords(
+    [
+      { programId: "s-exclusive", program: "ad-exclusive", programRaw: "専用", clicks: 3, revenueYen: 100 },
+      { programId: "s-shared", program: "ad-shared", programRaw: "共用", clicks: 8, revenueYen: 500 },
+    ],
+    { singleMonth: "2026-08", sharedProgramIds: ["s-shared"] },
+  );
+  assert.deepEqual(result.records.map((record) => record.programId), ["s-exclusive"]);
+  assert.equal(result.notAttributable.length, 1);
+  assert.equal(result.notAttributable[0].programId, "s-shared");
+  assert.equal(result.notAttributable[0].reason, "両サイト共用プログラムのためstats47単独成果へ配賦できない");
 });

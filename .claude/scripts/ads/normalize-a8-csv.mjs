@@ -206,7 +206,9 @@ function main() {
       .filter(inCurrentPeriod)
       .find((r) => String(r.site || "").includes(cfg.a8.targetSite));
     const allowlisted = allProgramRows.filter((r) => r.program);
-    log.crossCheck = crossCheckAgainstSite(siteRow, allowlisted);
+    log.crossCheck = crossCheckAgainstSite(siteRow, allowlisted, {
+      sharedProgramIds: cfg.a8._sharedWithDobokuNote?.ids ?? [],
+    });
     if (log.crossCheck) log.crossCheck.period = currentPeriod;
   }
 
@@ -226,6 +228,7 @@ function main() {
   // **絞り込み前の全行を渡す**（絞ってから渡すと unmapped 判定が構造上発火しない）。
   const { records, unmapped, notAttributable } = toResultsRecords(allProgramRows, {
     singleMonth: period?.singleMonth ?? null,
+    sharedProgramIds: cfg.a8._sharedWithDobokuNote?.ids ?? [],
   });
   // 未写像の生リスト自体は doboku-note 込みでノイズが大きいので件数だけ持ち、判断材料は candidates に寄せる
   log.unmappedCount = unmapped.length;
@@ -263,15 +266,17 @@ function main() {
   if (log.crossCheck?.comparable) {
     const d = log.crossCheck.deltas;
     console.log(
-      `  検算（allowlist 抽出 vs サイト別）: click ${d.clicks.picked}/${d.clicks.site} · 確定額 ${d.revenueYen.picked}/${d.revenueYen.site}` +
-        (log.crossCheck.exceeded ? "  ← ★超過＝他サイト混入の疑い" : "  ← 範囲内"),
+      `  検算（専用下限..共用込み上限 vs サイト別）: click ${d.clicks.lowerBound}..${d.clicks.upperBound}/${d.clicks.site}` +
+        ` · 確定額 ${d.revenueYen.lowerBound}..${d.revenueYen.upperBound}/${d.revenueYen.site}` +
+        (log.crossCheck.exceeded ? "  ← ★専用分が超過＝他サイト混入の疑い" : log.crossCheck.hasShortfall ? "  ← ★共用込みでも不足" : "  ← 範囲内"),
     );
   }
   console.log(`SSOT: ${RESULTS} records ${beforeCount} → ${results.records.length}`);
   if (notAttributable.length > 0) {
+    const reasonSummary = [...new Set(notAttributable.map((item) => item.reason))].join(" / ");
     console.warn(
-      `\n[注意] 対象期間が単月でないため ${notAttributable.length} 件を a8-results.json（月次）へ写していません。` +
-        `\n  現在の期間: ${period?.raw ?? "不明"}。月次内訳には期間フォーム対応が必要（backlog 参照）。`,
+      `\n[注意] stats47単独成果へ配賦できない ${notAttributable.length} 件を a8-results.json（月次）へ写していません。` +
+        `\n  理由: ${reasonSummary}`,
     );
   }
   if (log.crossCheck?.hasShortfall) {
