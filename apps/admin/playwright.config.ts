@@ -13,7 +13,8 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: isCI,
   retries: 0,
-  workers: isCI ? 1 : undefined,
+  // Next dev の初回コンパイルを同時に叩きすぎると Windows で30秒を超えるため上限を固定する。
+  workers: isCI ? 1 : 4,
 
   reporter: [
     ["html", { outputFolder: "playwright-report", open: "never" }],

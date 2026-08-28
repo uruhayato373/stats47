@@ -207,6 +207,98 @@ export interface ScheduleIgResponse {
   postId: number;
 }
 
+// ─── content operations (/content) ─────────────────────
+
+export type ContentChannelDTO = "x" | "instagram" | "note" | "kindle";
+export type ContentStageDTO =
+  | "draft"
+  | "ready"
+  | "scheduled"
+  | "published"
+  | "blocked";
+export type ContentFindingSeverityDTO = "error" | "warning";
+
+export interface ContentFindingDTO {
+  severity: ContentFindingSeverityDTO;
+  code: string;
+  channel: ContentChannelDTO;
+  itemId: string | null;
+  message: string;
+}
+
+export interface ContentChannelSummaryDTO {
+  channel: ContentChannelDTO;
+  label: string;
+  href: string;
+  total: number;
+  draft: number;
+  ready: number;
+  scheduled: number;
+  published: number;
+  blocked: number;
+  source: string;
+}
+
+export interface KindleContentDTO {
+  id: string;
+  title: string;
+  subtitle: string | null;
+  series: string;
+  stage: ContentStageDTO;
+  listingStatus: string;
+  buildStatus: string | null;
+  priceYen: number;
+  asin: string | null;
+  draftId: string | null;
+  publishedAt: string | null;
+  hasEpub: boolean;
+  hasCover: boolean;
+  manuscriptCount: number;
+  nextAction: string;
+  sourcePaths: string[];
+}
+
+export interface NoteContentDTO {
+  key: string;
+  title: string;
+  vertical: string;
+  series: string | null;
+  magazine: string | null;
+  stage: ContentStageDTO;
+  catalogStatus: string;
+  operationalStatus: string | null;
+  isPaid: boolean;
+  priceJpy: number;
+  noteUrl: string | null;
+  publishedAt: string | null;
+  r2Path: string;
+  r2Body: boolean;
+  stats47Targets: string[];
+  nextAction: string;
+  sourcePaths: string[];
+}
+
+export interface ContentOperationsResponse {
+  generatedAt: string;
+  decisions: Array<{
+    channel: ContentChannelDTO;
+    status: "pending" | "decided";
+    title: string;
+    detail: string;
+    resumeCondition: string;
+    source: string;
+  }>;
+  audit: {
+    status: "pass" | "warn" | "fail";
+    errors: number;
+    warnings: number;
+    findings: ContentFindingDTO[];
+  };
+  channels: ContentChannelSummaryDTO[];
+  kindle: KindleContentDTO[];
+  note: NoteContentDTO[];
+}
+
 // ─── buzz-map (gallery /buzz-map) ─────────────────────
 
 export interface BuzzMapAssetStatusDTO {

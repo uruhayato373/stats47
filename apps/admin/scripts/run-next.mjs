@@ -31,7 +31,13 @@ const port = raw && raw !== "" ? raw : DEFAULT_PORT;
 
 const args = [mode, "-H", "127.0.0.1", "-p", port, ...process.argv.slice(3)];
 console.error(`[gallery] next ${args.join(" ")}`);
-const child = spawn("next", args, { stdio: "inherit", shell: true });
+const childEnv = { ...process.env };
+// 常設 dev と `next build` が同じ .next を上書きすると、起動中の webpack runtime が
+// 消えた chunk を参照して落ちる。dev は専用 distDir に固定し、build/start と分離する。
+if (mode === "dev" && !childEnv.NEXT_DIST_DIR?.trim()) {
+  childEnv.NEXT_DIST_DIR = ".local/next-admin-dev";
+}
+const child = spawn("next", args, { stdio: "inherit", shell: true, env: childEnv });
 child.on("exit", (code, signal) => {
   if (signal) process.kill(process.pid, signal);
   else process.exit(code ?? 0);

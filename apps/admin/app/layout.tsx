@@ -8,7 +8,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "stats47 管理コンソール",
   description:
-    "SNS・画像資産・調査・収益・品質・CI/台帳・TODO の横断管理 (ローカル専用)",
+    "コンテンツ・SNS・画像資産・調査・収益・品質・CI/台帳・TODO の横断管理 (ローカル専用)",
 };
 
 /**

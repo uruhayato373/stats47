@@ -25,6 +25,7 @@ function isActive(
     if (expectedLayer) return currentLayer === expectedLayer;
     return currentLayer === null || !TODO_LAYERS.has(currentLayer);
   }
+  if (path === "/content") return pathname === "/content";
   return pathname === path || pathname.startsWith(path + "/");
 }
 
