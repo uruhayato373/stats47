@@ -10,34 +10,11 @@ import {
   readActiveTextAdsByVerticalsFromR2 as findActiveTextAdsByVerticals,
 } from "../repositories/affiliate-ad-snapshot";
 
-import type { AffiliateLocationCode } from "../types";
-
-export interface ResolvedAffiliateAd {
-  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
-  id: string;
-  title: string;
-  href: string;
-  trackingPixelUrl?: string | null;
-}
-
-export interface ResolvedAffiliateBanner {
-  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
-  id: string;
-  title: string;
-  href: string;
-  imageUrl: string;
-  /** ASP のインプレッション計測ピクセル。A8 は 0.gif、ValueCommerce 等は無し (null) */
-  trackingPixelUrl: string | null;
-  width: number;
-  height: number;
-  /**
-   * 広告意図軸 (10 軸)。GA4 の `affiliate_vertical` に送るために解決層で確定させる。
-   * ★ 描画側で `trackingCategory` (例 "category-landweather") を vertical として送ると
-   *   10 軸外の値が dimension に流れ内訳が壊れる (実測で "other" バケットが 61% を占めていた)。
-   *   正典: .claude/rules/affiliate-ads-standards.md §0 / analytics-event-standards.md
-   */
-  vertical: AffiliateVertical | null;
-}
+import type {
+  AffiliateLocationCode,
+  ResolvedAffiliateAd,
+  ResolvedAffiliateBanner,
+} from "../types";
 
 /**
  * A/B テスト (AFF-05) の variant 候補。client (VariantAdSlot) が加重ランダムで1つ選ぶ。

@@ -7,7 +7,7 @@ import { AFFILIATE_THEME, type AffiliateCategory } from "../constants/affiliate-
 import { AdImpressionTracker } from "./AdImpressionTracker";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
-import type { ResolvedAffiliateAd } from "../services";
+import type { ResolvedAffiliateAd } from "../types";
 
 interface AffiliateTextAdListProps {
   ads: ResolvedAffiliateAd[];
