@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T01:50:50.227Z",
+  "updatedAt": "2026-08-28T02:02:01.379Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -2352,6 +2352,44 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-28T01:50:50.227Z"
+    },
+    "CROSS-PAGE-DATA-SSOT-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-28T02:02:01.379Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts --require-all-editorial",
+              "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check",
+              "npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "R2 runs 33130521557/33130708270/33131308144。portfolio 83/83・r2-drift 0、taxonomy ratchet・公開3調査・本番6 chart readyを確認。CI 33129348114、deploy 33129802167、smoke 33130180263成功。",
+          "failReason": null,
+          "followUps": [
+            "CHART-LINEAGE-RESIDUAL-01",
+            "TILEMAP-LINEAGE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T02:02:01.379Z"
     }
   }
 }
