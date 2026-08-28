@@ -112,7 +112,16 @@ function routeFor(policy, className) {
   if (cls) return { class: className, ...cls };
   // 未知の class をモデルが名乗った場合、勝手に fable を使わせない (安い側へ倒す)
   const fallback = policy?.classes?.['impl-small'] ?? { model: 'sonnet', effort: 'high', maxAttempts: 1, delegate: 'inline', apply: 'draft-pr' };
-  return { class: className, ...fallback, _fallback: true };
+  // impl-small 自体は実測で fable へ昇格しうるため、その可変 route をそのまま使わない。
+  // 安い側は escalation ladder の先頭で決め、policy 学習が未知 class の予算を広げないようにする。
+  const cheapestModel = policy?.escalation?.[0] ?? 'sonnet';
+  return {
+    class: className,
+    ...fallback,
+    model: cheapestModel,
+    delegate: cheapestModel === 'sonnet' ? 'inline' : fallback.delegate,
+    _fallback: true,
+  };
 }
 
 /**

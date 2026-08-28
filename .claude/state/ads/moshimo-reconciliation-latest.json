@@ -1,0 +1,569 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-27T10:11:25.680Z",
+  "asp": "moshimo",
+  "siteId": "638943",
+  "live": {
+    "partnered": 40,
+    "applying": 36,
+    "parity": {
+      "partnered": {
+        "ok": true,
+        "rowCount": 40,
+        "idCount": 40,
+        "diff": 0
+      },
+      "applying": {
+        "ok": true,
+        "rowCount": 36,
+        "idCount": 36,
+        "diff": 0
+      }
+    }
+  },
+  "transitions": [
+    {
+      "program": "moshimo-2626",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "2626",
+      "evidence": "単一申請フォーム promotion_id=2626 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7404",
+      "asp": "moshimo",
+      "catalog": "approved",
+      "actual": "none",
+      "id": "7404",
+      "evidence": "単一申請フォーム promotion_id=7404 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7614",
+      "asp": "moshimo",
+      "catalog": "approved",
+      "actual": "none",
+      "id": "7614",
+      "evidence": "単一申請フォーム promotion_id=7614 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7430",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "7430",
+      "evidence": "単一申請フォーム promotion_id=7430 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7422",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "7422",
+      "evidence": "単一申請フォーム promotion_id=7422 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7259",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "7259",
+      "evidence": "単一申請フォーム promotion_id=7259 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7260",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "7260",
+      "evidence": "単一申請フォーム promotion_id=7260 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7048",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "unavailable",
+      "id": "7048",
+      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
+    },
+    {
+      "program": "moshimo-7042",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "unavailable",
+      "id": "7042",
+      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
+    },
+    {
+      "program": "moshimo-6910",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "6910",
+      "evidence": "単一申請フォーム promotion_id=6910 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-6662",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "6662",
+      "evidence": "単一申請フォーム promotion_id=6662 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-6650",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "6650",
+      "evidence": "単一申請フォーム promotion_id=6650 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-3639",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "3639",
+      "evidence": "単一申請フォーム promotion_id=3639 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-6928",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "6928",
+      "evidence": "単一申請フォーム promotion_id=6928 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-3209",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "3209",
+      "evidence": "単一申請フォーム promotion_id=3209 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-6955",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "6955",
+      "evidence": "単一申請フォーム promotion_id=6955 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7562",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "7562",
+      "evidence": "単一申請フォーム promotion_id=7562 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7627",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "approved",
+      "id": "7627",
+      "evidence": "実機一覧の正一致"
+    },
+    {
+      "program": "moshimo-6663",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "6663",
+      "evidence": "単一申請フォーム promotion_id=6663 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-3833",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "3833",
+      "evidence": "単一申請フォーム promotion_id=3833 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-6129",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "approved",
+      "id": "6129",
+      "evidence": "実機一覧の正一致"
+    },
+    {
+      "program": "moshimo-6813",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "6813",
+      "evidence": "単一申請フォーム promotion_id=6813 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-6599",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "6599",
+      "evidence": "単一申請フォーム promotion_id=6599 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-6398",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "6398",
+      "evidence": "単一申請フォーム promotion_id=6398 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-5906",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "5906",
+      "evidence": "単一申請フォーム promotion_id=5906 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-6623",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "unavailable",
+      "id": "6623",
+      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
+    },
+    {
+      "program": "moshimo-6697",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "approved",
+      "id": "6697",
+      "evidence": "実機一覧の正一致"
+    },
+    {
+      "program": "moshimo-6614",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "approved",
+      "id": "6614",
+      "evidence": "実機一覧の正一致"
+    },
+    {
+      "program": "moshimo-7392",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "unavailable",
+      "id": "7392",
+      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
+    },
+    {
+      "program": "moshimo-6775",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "6775",
+      "evidence": "単一申請フォーム promotion_id=6775 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-5905",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "5905",
+      "evidence": "単一申請フォーム promotion_id=5905 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-2228",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "approved",
+      "id": "2228",
+      "evidence": "実機一覧の正一致"
+    },
+    {
+      "program": "moshimo-7628",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "approved",
+      "id": "7628",
+      "evidence": "実機一覧の正一致"
+    },
+    {
+      "program": "moshimo-7180",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "7180",
+      "evidence": "単一申請フォーム promotion_id=7180 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-5389",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "5389",
+      "evidence": "単一申請フォーム promotion_id=5389 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-6970",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "6970",
+      "evidence": "単一申請フォーム promotion_id=6970 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7173",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "7173",
+      "evidence": "単一申請フォーム promotion_id=7173 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7045",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "7045",
+      "evidence": "単一申請フォーム promotion_id=7045 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-5471",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "none",
+      "id": "5471",
+      "evidence": "単一申請フォーム promotion_id=5471 / 再申請ボタン1件"
+    },
+    {
+      "program": "moshimo-7348",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "approved",
+      "id": "7348",
+      "evidence": "実機一覧の正一致"
+    },
+    {
+      "program": "moshimo-3830",
+      "asp": "moshimo",
+      "catalog": "applying",
+      "actual": "approved",
+      "id": "3830",
+      "evidence": "実機一覧の正一致"
+    },
+    {
+      "program": "moshimo-7558",
+      "asp": "moshimo",
+      "catalog": "approved",
+      "actual": "none",
+      "id": "7558",
+      "evidence": "単一申請フォーム promotion_id=7558 / 再申請ボタン1件"
+    }
+  ],
+  "unresolved": [],
+  "detailEvidence": {
+    "2626": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "日本最大級のオンラインフィットネスサービス『LEAN BODY（リーンボディ）』の2週間無料会員登録",
+      "evidence": "単一申請フォーム promotion_id=2626 / 再申請ボタン1件"
+    },
+    "3209": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "CLOUD GYM｜パーソナルジムの入会完了",
+      "evidence": "単一申請フォーム promotion_id=3209 / 再申請ボタン1件"
+    },
+    "3639": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "Webデザイン・Webマーケティング・プログラミングスクール｜インターネット・アカデミーの無料カウンセリング申込及び実施",
+      "evidence": "単一申請フォーム promotion_id=3639 / 再申請ボタン1件"
+    },
+    "3833": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "ウズウズIT【UZUZ IT】｜未経験からITエンジニアを目指したい方の特化型就職サポートの無料会員登録",
+      "evidence": "単一申請フォーム promotion_id=3833 / 再申請ボタン1件"
+    },
+    "5389": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "UZUZ（ウズウズ）｜転職相談のためのキャリア面談への参加",
+      "evidence": "単一申請フォーム promotion_id=5389 / 再申請ボタン1件"
+    },
+    "5471": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "ターキッシュエア&トラベル｜海外旅行『トルコ5つの世界遺産周遊ツアー』の予約",
+      "evidence": "単一申請フォーム promotion_id=5471 / 再申請ボタン1件"
+    },
+    "5905": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "CORPO（コーポ）｜人事・HR業界特化の転職エージェントの新規転職相談の申込",
+      "evidence": "単一申請フォーム promotion_id=5905 / 再申請ボタン1件"
+    },
+    "5906": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "ウェブスキ｜WEBデザイン×SNS広告運用のオンラインスクールの無料レクチャー・講座申込",
+      "evidence": "単一申請フォーム promotion_id=5906 / 再申請ボタン1件"
+    },
+    "6398": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "【クローズド】WEBCOACH｜インフルエンサー向け！オンラインWebデザインスクールの無料カウンセリング参加",
+      "evidence": "単一申請フォーム promotion_id=6398 / 再申請ボタン1件"
+    },
+    "6599": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "ウズカレIT｜わずか1ヶ月のオンライン研修で未経験からITエンジニア就職◆無料カウンセリング実施◆",
+      "evidence": "単一申請フォーム promotion_id=6599 / 再申請ボタン1件"
+    },
+    "6623": {
+      "siteId": "638943",
+      "state": "unavailable",
+      "name": null,
+      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
+    },
+    "6650": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "RareTECH｜無料カウンセリング申し込み",
+      "evidence": "単一申請フォーム promotion_id=6650 / 再申請ボタン1件"
+    },
+    "6662": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "ヤマトヒューマンキャピタル｜経営×ファイナンス領域に特化した転職エージェントの面談完了",
+      "evidence": "単一申請フォーム promotion_id=6662 / 再申請ボタン1件"
+    },
+    "6663": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "ユニゾンキャリア｜IT・Web業界専門のIT未経験向け転職エージェントの新規無料相談実施",
+      "evidence": "単一申請フォーム promotion_id=6663 / 再申請ボタン1件"
+    },
+    "6775": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "保育のせかい｜保育士・幼稚園教諭のための就職・転職エージェントの新規会員登録",
+      "evidence": "単一申請フォーム promotion_id=6775 / 再申請ボタン1件"
+    },
+    "6813": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "ウズウズカレッジ＜有料コース＞｜未経験からITエンジニアへ！就職支援型ITスクールの無料カウンセリング参加",
+      "evidence": "単一申請フォーム promotion_id=6813 / 再申請ボタン1件"
+    },
+    "6910": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "転職ボックス｜IT/ゲーム業界の正社員求職者の集客の無料会員登録",
+      "evidence": "単一申請フォーム promotion_id=6910 / 再申請ボタン1件"
+    },
+    "6928": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "マーズキャリア｜若手ハイクラス向け転職エージェントへの転職相談申し込み",
+      "evidence": "単一申請フォーム promotion_id=6928 / 再申請ボタン1件"
+    },
+    "6955": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "PRESENCE（プレゼンス）｜英語コーチングスクールの無料カウンセリング申し込み",
+      "evidence": "単一申請フォーム promotion_id=6955 / 再申請ボタン1件"
+    },
+    "6970": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "女性のためのキャリアコーチング｜ステージアップアップProgram【無料体験セミナー】への参加",
+      "evidence": "単一申請フォーム promotion_id=6970 / 再申請ボタン1件"
+    },
+    "7042": {
+      "siteId": "638943",
+      "state": "unavailable",
+      "name": null,
+      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
+    },
+    "7045": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "転職ボックス｜転職エージェントサイト求人掲載希望の企業用（IT/ゲーム職種のみ）",
+      "evidence": "単一申請フォーム promotion_id=7045 / 再申請ボタン1件"
+    },
+    "7048": {
+      "siteId": "638943",
+      "state": "unavailable",
+      "name": null,
+      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
+    },
+    "7173": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "向き合い転職｜オンライン転職サービスの初回面談実施",
+      "evidence": "単一申請フォーム promotion_id=7173 / 再申請ボタン1件"
+    },
+    "7180": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "techmeets｜プログラミングスクールの無料カウンセリング着座",
+      "evidence": "単一申請フォーム promotion_id=7180 / 再申請ボタン1件"
+    },
+    "7259": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "ジョブサポ薬剤師｜在宅医療・地方転職に強い薬剤師の求人・転職の新規面談完了",
+      "evidence": "単一申請フォーム promotion_id=7259 / 再申請ボタン1件"
+    },
+    "7260": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "ジョブサポ看護師｜訪問看護に強い看護師の求人・転職の新規面談完了",
+      "evidence": "単一申請フォーム promotion_id=7260 / 再申請ボタン1件"
+    },
+    "7392": {
+      "siteId": "638943",
+      "state": "unavailable",
+      "name": null,
+      "evidence": "SID再確認後も詳細URLがホームへリダイレクト"
+    },
+    "7404": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "サロンドタピア｜MINTERAの購入",
+      "evidence": "単一申請フォーム promotion_id=7404 / 再申請ボタン1件"
+    },
+    "7422": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "キャリパト｜キャリアコーチング（キャリア戦略プログラム）の無料相談への申込み",
+      "evidence": "単一申請フォーム promotion_id=7422 / 再申請ボタン1件"
+    },
+    "7430": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "ジョブサポ医師｜在宅診療・地方転職に強い医師の求人・転職の新規面談完了",
+      "evidence": "単一申請フォーム promotion_id=7430 / 再申請ボタン1件"
+    },
+    "7558": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "借金問題解決ナビLINEの友達追加",
+      "evidence": "単一申請フォーム promotion_id=7558 / 再申請ボタン1件"
+    },
+    "7562": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "ウズカレエージェント｜未経験からの戦略的ITエンジニア転職の新規無料面談参加",
+      "evidence": "単一申請フォーム promotion_id=7562 / 再申請ボタン1件"
+    },
+    "7614": {
+      "siteId": "638943",
+      "state": "none",
+      "name": "SellBridge Academy｜越境ECを未経験から始めるための在宅オンラインスクールの受講申込",
+      "evidence": "単一申請フォーム promotion_id=7614 / 再申請ボタン1件"
+    }
+  }
+}

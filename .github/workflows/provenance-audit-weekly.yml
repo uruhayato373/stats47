@@ -46,21 +46,39 @@ jobs:
         id: check
         run: |
           set +e
-          RC=0
+          ERROR_COUNT=0
           echo "=== validate:config (provenance/calc-ref 含む) ==="
           npm run validate:config --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-config.log
           CONFIG_RC="${PIPESTATUS[0]}"
-          if [ "$CONFIG_RC" -ne 0 ]; then RC=1; fi
+          if [ "$CONFIG_RC" -ne 0 ]; then ERROR_COUNT=$((ERROR_COUNT + 1)); fi
           echo "=== validate:catalog (theme selection) ==="
-          npm run validate:catalog --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-catalog.log || true
+          npm run validate:catalog --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-catalog.log
+          CATALOG_RC="${PIPESTATUS[0]}"
+          if [ "$CATALOG_RC" -ne 0 ]; then ERROR_COUNT=$((ERROR_COUNT + 1)); fi
           echo "=== validate:area-databook ==="
-          npm run validate:area-databook --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-area.log || true
+          npm run validate:area-databook --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-area.log
+          AREA_RC="${PIPESTATUS[0]}"
+          if [ "$AREA_RC" -ne 0 ]; then ERROR_COUNT=$((ERROR_COUNT + 1)); fi
+          echo "=== validate:prefecture-statistics ==="
+          npm run validate:prefecture-statistics --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-prefecture.log
+          PREFECTURE_RC="${PIPESTATUS[0]}"
+          if [ "$PREFECTURE_RC" -ne 0 ]; then ERROR_COUNT=$((ERROR_COUNT + 1)); fi
           echo "=== validate:open-data-catalog ==="
-          npm run validate:open-data-catalog --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-opendata.log || true
+          npm run validate:open-data-catalog --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-opendata.log
+          OPEN_DATA_RC="${PIPESTATUS[0]}"
+          if [ "$OPEN_DATA_RC" -ne 0 ]; then ERROR_COUNT=$((ERROR_COUNT + 1)); fi
+          echo "=== check:prefecture-statistics-links ==="
+          npm run check:prefecture-statistics-links --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-prefecture-links.log
+          PREFECTURE_LINK_RC="${PIPESTATUS[0]}"
+          if [ "$PREFECTURE_LINK_RC" -ne 0 ]; then ERROR_COUNT=$((ERROR_COUNT + 1)); fi
+          echo "=== check:open-data-links ==="
+          npm run check:open-data-links --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-open-data-links.log
+          OPEN_DATA_LINK_RC="${PIPESTATUS[0]}"
+          if [ "$OPEN_DATA_LINK_RC" -ne 0 ]; then ERROR_COUNT=$((ERROR_COUNT + 1)); fi
           # D クラス件数を state から拾う
           DCLASS=$(node -e "const d=require('./.claude/state/provenance/queue.json'); console.log((d.byClass&&d.byClass.D)||0)")
           echo "dclass=$DCLASS" >> "$GITHUB_OUTPUT"
-          echo "config_rc=$RC" >> "$GITHUB_OUTPUT"
+          echo "error_count=$ERROR_COUNT" >> "$GITHUB_OUTPUT"
 
       - name: 📤 Commit provenance state to develop
         run: |
@@ -76,7 +94,7 @@ jobs:
           git push origin develop
 
       - name: 🚨 Open issue on validator error
-        if: steps.check.outputs.config_rc != '0'
+        if: steps.check.outputs.error_count != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -104,7 +122,7 @@ jobs:
           fi
 
       - name: ✅ Close recovered provenance alert
-        if: steps.check.outputs.config_rc == '0'
+        if: steps.check.outputs.error_count == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -113,3 +131,10 @@ jobs:
               gh issue close "$NUMBER" --reason completed \
                 --comment "出典・再現性の全量lintが正常へ復旧したため自動Closeします。"
             done
+
+      - name: ❌ Propagate validator status
+        if: always()
+        run: |
+          if [ "${{ steps.check.outcome }}" != "success" ] || [ "${{ steps.check.outputs.error_count }}" != "0" ]; then
+            exit 1
+          fi

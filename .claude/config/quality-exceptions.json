@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "exceptions": [
+    { "type": "continue-on-error", "path": ".github/workflows/affiliate-dashboard-refresh.yml", "count": 1, "owner": "affiliate-manager", "reason": "state publication must run after audit collection", "expiresAt": "2026-10-31" },
+    { "type": "continue-on-error", "path": ".github/workflows/affiliate-ga4-weekly.yml", "count": 1, "owner": "ga4-analyst", "reason": "independent affiliate providers continue after one provider failure", "expiresAt": "2026-10-31" },
+    { "type": "continue-on-error", "path": ".github/workflows/agent-consistency-weekly.yml", "count": 1, "owner": "devops-runner", "reason": "issue publication follows collected consistency status", "expiresAt": "2026-10-31" },
+    { "type": "continue-on-error", "path": ".github/workflows/backlog-loop-daily.yml", "count": 1, "owner": "backlog-processor", "reason": "failure evidence must reach the backlog ledger", "expiresAt": "2026-10-31" },
+    { "type": "continue-on-error", "path": ".github/workflows/blog-remediation-daily.yml", "count": 7, "owner": "blog-editor", "reason": "collection steps feed final ratchet and issue status", "expiresAt": "2026-10-31" },
+    { "type": "continue-on-error", "path": ".github/workflows/data-refresh.yml", "count": 3, "owner": "data-ingester", "reason": "independent datasets preserve partial refresh evidence", "expiresAt": "2026-10-31" },
+    { "type": "continue-on-error", "path": ".github/workflows/deploy-workers.yml", "count": 3, "owner": "devops-runner", "reason": "post-deploy observations do not mask deploy result", "expiresAt": "2026-10-31" },
+    { "type": "continue-on-error", "path": ".github/workflows/fetch-metrics-weekly.yml", "count": 14, "owner": "improvement-triage", "reason": "independent analytics sources publish explicit not-run states", "expiresAt": "2026-10-31" },
+    { "type": "continue-on-error", "path": ".github/workflows/google-admin-settings.yml", "count": 2, "owner": "devops-runner", "reason": "settings evidence remains available after optional API failure", "expiresAt": "2026-10-31" },
+    { "type": "continue-on-error", "path": ".github/workflows/ranking-integrity-audit-weekly.yml", "count": 2, "owner": "ranking-publisher", "reason": "audit result must be recorded before final propagation", "expiresAt": "2026-10-31" },
+    { "type": "continue-on-error", "path": ".github/workflows/security-scan.yml", "count": 1, "owner": "devops-runner", "reason": "advisory audit remains nonblocking until severity policy migration", "expiresAt": "2026-10-31" },
+
+    { "type": "test-skip", "path": "apps/admin/tests/e2e/media.spec.ts", "count": 3, "owner": "sns-renderer", "reason": "local media assets are absent in source-only checkout", "expiresAt": "2026-10-31" },
+    { "type": "test-skip", "path": "apps/web/tests/e2e/middleware/middleware-routing.spec.ts", "count": 1, "owner": "site-ux-manager", "reason": "fixture absence is an explicit environment precondition and full CI data normally satisfies it", "expiresAt": "2026-10-31" },
+    { "type": "test-skip", "path": "apps/web/tests/smoke/responsive-layout.spec.ts", "count": 1, "owner": "ui-reviewer", "reason": "parameterized smoke cases skip only when a project omits its viewport contract", "expiresAt": "2026-10-31" },
+    { "type": "test-skip", "path": "packages/gis/src/geoshape/adapters/__tests__/geoshape-api-client.integration.test.ts", "count": 1, "owner": "gis-pipeline-runner", "reason": "live geoshape test writes diagnostic output and uses network", "expiresAt": "2026-10-31" },
+
+    { "type": "env-opt-in", "path": "packages/gis/src/geoshape/adapters/__tests__/geoshape-api-client.integration.test.ts", "detail": "SAVE_TEST_OUTPUTS", "count": 1, "owner": "gis-pipeline-runner", "reason": "live integration output is manual and network-dependent", "expiresAt": "2026-10-31" },
+    { "type": "env-opt-in", "path": "packages/visualization/vitest.config.ts", "detail": "RUN_RENDER_TESTS", "count": 1, "owner": "chart-component-builder", "reason": "pixel suite runs in required dedicated and weekly jobs", "expiresAt": "2026-10-31" },
+    { "type": "env-opt-in", "path": "packages/visualization/vitest.setup.ts", "detail": "RUN_RENDER_TESTS", "count": 1, "owner": "chart-component-builder", "reason": "deterministic DOM setup is limited to pixel suite", "expiresAt": "2026-10-31" },
+
+    { "type": "test-exclude", "path": "apps/admin/vitest.config.ts", "detail": "tests/e2e/**", "count": 1, "owner": "devops-runner", "reason": "Playwright executes admin E2E in a required separate job", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "apps/web/vitest.config.ts", "detail": "**/tests/e2e/**", "count": 1, "owner": "devops-runner", "reason": "Playwright owns browser E2E execution", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "apps/web/vitest.config.ts", "detail": "**/tests/smoke/**", "count": 1, "owner": "devops-runner", "reason": "Playwright owns browser smoke execution", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "apps/web/vitest.config.ts", "detail": "**/tests/visual/**", "count": 1, "owner": "ui-reviewer", "reason": "Playwright owns browser visual execution", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "packages/category/vitest.config.ts", "detail": "**/*.integration.test.ts", "count": 1, "owner": "data-ingester", "reason": "retired database integration suite is outside DBless unit contract", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "packages/category/vitest.config.ts", "detail": "**/integration.test.ts", "count": 1, "owner": "data-ingester", "reason": "retired database integration suite is outside DBless unit contract", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "packages/database/vitest.config.ts", "detail": "**/*.integration.test.ts", "count": 1, "owner": "db-schema-manager", "reason": "database package retains types without persistent D1 integration", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "packages/database/vitest.config.ts", "detail": "**/integration.test.ts", "count": 1, "owner": "db-schema-manager", "reason": "database package retains types without persistent D1 integration", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "packages/estat-api/vitest.config.ts", "detail": "**/*manual-download*", "count": 1, "owner": "estat-researcher", "reason": "live e-Stat download needs API secret and manual intent", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "packages/gis/vitest.config.ts", "detail": "**/*.integration.test.ts", "count": 1, "owner": "gis-pipeline-runner", "reason": "live GIS adapter needs network and output directory", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "packages/gis/vitest.config.ts", "detail": "**/integration.test.ts", "count": 1, "owner": "gis-pipeline-runner", "reason": "live GIS adapter needs network and output directory", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "packages/product-factory/vitest.config.ts", "detail": "tests/note-channel.test.ts", "count": 1, "owner": "coconala-product-manager", "reason": "frozen note catalog awaits fourteen-pack migration", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "vitest.config.ts", "detail": "**/*manual-download*", "count": 1, "owner": "estat-researcher", "reason": "root suite excludes secret-dependent manual e-Stat download", "expiresAt": "2026-10-31" },
+    { "type": "test-exclude", "path": "packages/visualization/src/shared/__tests__/helpers/render-test-contract.ts", "detail": "OPT_IN_RENDER_TEST_FILES", "count": 9, "owner": "chart-component-builder", "reason": "pixel suite runs in required dedicated and weekly jobs", "expiresAt": "2026-10-31" }
+  ]
+}

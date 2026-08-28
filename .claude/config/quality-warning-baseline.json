@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "warnings": [
+    {
+      "source": "theme-catalog",
+      "code": "no-selection",
+      "count": 120,
+      "owner": "theme-designer",
+      "reason": "selection provenance is being backfilled by theme portfolio",
+      "expiresAt": "2026-10-31"
+    },
+    {
+      "source": "theme-catalog",
+      "code": "dup-sortorder",
+      "count": 36,
+      "owner": "theme-component-builder",
+      "reason": "existing stable array ordering needs staged explicit sort orders",
+      "expiresAt": "2026-10-31"
+    },
+    {
+      "source": "theme-catalog",
+      "code": "primary-orphan",
+      "count": 11,
+      "owner": "theme-designer",
+      "reason": "primary cards may intentionally remain outside chart components",
+      "expiresAt": "2026-10-31"
+    },
+    {
+      "source": "theme-catalog",
+      "code": "dup-key-global",
+      "count": 2,
+      "owner": "theme-component-builder",
+      "reason": "shared component keys remain stable while ownership is clarified",
+      "expiresAt": "2026-10-31"
+    },
+    {
+      "source": "polarity",
+      "code": "polarity-unassigned",
+      "count": 2284,
+      "owner": "data-ingester",
+      "reason": "polarity needs evidence-backed assignment instead of bulk inference",
+      "expiresAt": "2026-10-31"
+    },
+    {
+      "source": "metric-config",
+      "code": "unit-vocab",
+      "count": 46,
+      "owner": "data-ingester",
+      "reason": "unknown units require evidence before parser vocabulary expansion",
+      "expiresAt": "2026-10-31"
+    },
+    {
+      "source": "metric-config",
+      "code": "placeholder-source",
+      "count": 1,
+      "owner": "data-ingester",
+      "reason": "inactive municipality migration source awaits official identifier",
+      "expiresAt": "2026-10-31"
+    }
+  ]
+}
