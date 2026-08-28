@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { PREFECTURE_LIST_2DIGIT as PREFECTURES } from "@stats47/area";
 import {
   Select,
   SelectContent,
@@ -10,13 +11,9 @@ import {
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
 
-// barrel ではなく leaf から import（barrel は server-only な ThemeMigrationFlowSection を含むため）
-import { PREFECTURES } from "@/features/migration-flow/lib/prefectures";
-
 import { FinanceSankey } from "./FinanceSankey";
 
 import type { FinanceFlowData } from "../lib/types";
-
 
 interface Props {
   /** SSG 時にサーバーが R2 から読んだ既定県データ */

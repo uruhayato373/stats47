@@ -195,7 +195,10 @@ const normPref = (s) =>
  *   "portrait"            = 縦長スタックカード（Instagram 用、4:5）
  *   "single"             = 縦1列+中略
  */
-function genBarChartSvg(data, layoutOverride) {
+function genBarChartSvg(
+  data: any,
+  layoutOverride?: 'columns' | 'portrait' | 'single'
+) {
   const items = Array.isArray(data) ? data : data.data || [];
   if (!items.length) return `<!-- empty data -->`;
   const title =
@@ -525,7 +528,13 @@ log(`[info] Found ${jsonFiles.length} JSON file(s) in data/`);
 // Phase 1: JSON syntax check (always)
 let jsonOkCount = 0;
 let jsonNgCount = 0;
-const jsonMeta = [];
+interface JsonChartMeta {
+  file: string;
+  type: string | undefined;
+  parsed: Record<string, unknown>;
+}
+
+const jsonMeta: JsonChartMeta[] = [];
 for (const f of jsonFiles) {
   const fp = path.join(DATA_DIR, f);
   try {
@@ -558,7 +567,7 @@ for (const f of jsonFiles) {
     log(`  [ok ] ${f}  type=${type || 'unknown'}`);
   } catch (e) {
     jsonNgCount++;
-    err(`  [ng ] ${f}  ${e.message}`);
+    err(`  [ng ] ${f}  ${e instanceof Error ? e.message : String(e)}`);
   }
 }
 
@@ -685,7 +694,7 @@ function writeChartSourceIfMissing(
 }
 
 // Default mode: generate SVGs
-const chartNames = [];
+const chartNames: string[] = [];
 for (const { file, type, parsed } of jsonMeta) {
   const baseName = file.replace(/\.json$/, '');
   const svgPath = path.join(DATA_DIR, `${baseName}.svg`);
@@ -715,7 +724,7 @@ for (const { file, type, parsed } of jsonMeta) {
   // chart 系のチェッカーは「provenance 付き SVG = generator 経由で data から作られた」と信頼可能。
   // 相関 scatter 等 file 名に "--" を含むものは buildProvenanceLine が XML 安全化する
   // (生 "--" を XML コメントに入れると <img> 描画で broken image になる)。
-  const provenance = buildProvenanceLine(file);
+  const provenance = buildProvenanceLine(file, new Date());
   fs.writeFileSync(svgPath, provenance + svg, 'utf8');
   // 徹底ルール (§1.7): SVG を書いたら必ず source.json もセット出力 (1画像=1設定ファイル)。
   writeChartSourceIfMissing(

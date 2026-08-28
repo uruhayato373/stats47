@@ -5,6 +5,19 @@ import importPlugin from "eslint-plugin-import";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 
+const FEATURE_INTERNAL_IMPORT_PATTERNS = [
+  {
+    group: [
+      "@/features/*/components/*",
+      "@/features/*/lib/*",
+      "@/features/*/utils/*",
+      "@/features/*/repositories/*",
+      "@/features/*/services/*",
+    ],
+    message: "他 feature の内部実装ではなく Public API (index.ts / server.ts) を使用してください。",
+  },
+];
+
 const eslintConfig = [// TypeScript Configuration
 // React Configuration
 {
@@ -63,17 +76,18 @@ reactHooksPlugin.configs.flat.recommended, {
       {
         patterns: [
           // feature 内部実装への直接アクセス禁止（Public API 経由のみ）
-          "@/features/*/components/*",
-          "@/features/*/lib/*",
-          "@/features/*/utils/*",
-          "@/features/*/repositories/*",
-          "@/features/*/services/*",
+          ...FEATURE_INTERNAL_IMPORT_PATTERNS,
           // @stats47/visualization: コンポーネント内部への直接アクセス禁止
-          "@stats47/visualization/d3/*/*",
-          "@stats47/visualization/shared",
-          "@stats47/visualization/shared/*",
-          "@stats47/visualization/src",
-          "@stats47/visualization/src/*",
+          {
+            group: [
+              "@stats47/visualization/d3/*/*",
+              "@stats47/visualization/shared",
+              "@stats47/visualization/shared/*",
+              "@stats47/visualization/src",
+              "@stats47/visualization/src/*",
+            ],
+            message: "@stats47/visualization の Public API を使用してください。",
+          },
         ],
       },
     ],
@@ -191,6 +205,8 @@ reactHooksPlugin.configs.flat.recommended, {
       "error",
       {
         patterns: [
+          // 後勝ちの override でも feature 境界契約を失わない。
+          ...FEATURE_INTERNAL_IMPORT_PATTERNS,
           {
             group: ["../types/*"],
             message: "ドメイン内の型はBarrel File経由でインポートしてください。'../types' からインポートしてください。",

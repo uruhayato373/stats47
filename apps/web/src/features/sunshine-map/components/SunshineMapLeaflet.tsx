@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css";
 
 import { ImageOverlay, MapContainer, TileLayer } from "react-leaflet";
 
-import { useThemedLeafletTile } from "@/features/map-visualization/utils/use-themed-leaflet-tile";
+import { useThemedLeafletTile } from "@/features/map-visualization/client";
 
 import { useTheme } from "@/hooks/useTheme";
 

@@ -2,7 +2,8 @@ import type { MetricConfig } from "../types";
 
 export const aquariumCount: MetricConfig = {
   "key": "aquarium-count",
-  "title": "水族館数",
+  "title": "登録・相当水族館数",
+  "subtitle": "登録博物館と博物館相当施設の合計（博物館類似施設を除く）",
   "unit": "館",
   "category": "educationsports",
   "source": {
@@ -49,7 +50,7 @@ export const aquariumCount: MetricConfig = {
     ],
   },
   "groupKey": "museum-type-count",
-  "seoTitle": "水族館数 都道府県ランキング【2015年】｜1位北海道（3館）",
-  "seoDescription": "2015年の水族館数を都道府県別に比較。1位は北海道（3館）、最下位は鹿児島県（0館）。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "登録・相当水族館数ランキング【2015年】｜1位北海道（3館）",
+  "seoDescription": "2015年の登録博物館・博物館相当施設に該当する水族館数を都道府県別に比較。博物館類似施設は含みません。",
   "isActive": true,
 };

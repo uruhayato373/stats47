@@ -1,20 +1,7 @@
 {
-  "generatedAt": "2026-07-23T02:20:56.495Z",
+  "generatedAt": "2026-08-28T01:02:13.391Z",
   "total": 14,
   "built": [
-    "P-01",
-    "P-02",
-    "P-03",
-    "P-04",
-    "P-05",
-    "P-06",
-    "P-07",
-    "P-08",
-    "P-09",
-    "P-10",
-    "P-11",
-    "P-12",
-    "P-13",
     "P-14"
   ],
   "note": "catalog-status。生成物は .local/coconala-products (git 管理外)。実機検証・出品は人間工程。",
@@ -24,91 +11,91 @@
       "theme": "population-household",
       "name": "人口・世帯データパック（47都道府県）",
       "catalogStatus": "listed",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-02",
       "theme": "income-wage-hiring",
       "name": "所得・賃金・採用データパック（47都道府県）",
       "catalogStatus": "approved",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-03",
       "theme": "tourism-lodging",
       "name": "観光・宿泊データパック（47都道府県）",
       "catalogStatus": "approved",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-04",
       "theme": "municipal-finance",
       "name": "自治体財政データパック（47都道府県）",
       "catalogStatus": "approved",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-05",
       "theme": "healthcare-nursing",
       "name": "医療・介護データパック（47都道府県）",
       "catalogStatus": "approved",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-06",
       "theme": "education-childcare",
       "name": "教育・子育てデータパック（47都道府県）",
       "catalogStatus": "approved",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-07",
       "theme": "migration-living",
       "name": "移住・生活データパック（47都道府県）",
       "catalogStatus": "approved",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-08",
       "theme": "retail-trade-area",
       "name": "出店・商圏データパック（47都道府県）",
       "catalogStatus": "approved",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-09",
       "theme": "industry-economy",
       "name": "産業・経済データパック（47都道府県）",
       "catalogStatus": "approved",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-10",
       "theme": "disaster-infrastructure",
       "name": "防災・インフラデータパック（47都道府県）",
       "catalogStatus": "approved",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-11",
       "theme": "map-chart-assets",
       "name": "都道府県 地図・チャート素材集",
       "catalogStatus": "approved",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-12",
       "theme": "all-in-one",
       "name": "都道府県データ 全部入りバンドル",
       "catalogStatus": "cataloged",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-13",
       "theme": "free-trial",
       "name": "都道府県データ 無料お試しサンプル",
       "catalogStatus": "cataloged",
-      "liveStatus": "generated"
+      "liveStatus": "cataloged"
     },
     {
       "id": "P-14",

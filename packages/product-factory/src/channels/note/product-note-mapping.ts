@@ -1,19 +1,17 @@
 /**
  * 商品 → note マッピングの決定的導出 (仕様 §6)。
  *
- * CANONICAL_ARTICLES (article-plan) + ALL_PRODUCTS (catalog) から、174 商品それぞれの
- * NoteProductMapping を機械的に組み立てる。disposition は (family, 記事) から決定的に導出し、
- * 手書きの 174 エントリを持たない (ドリフト源を作らない)。
+ * CANONICAL_ARTICLES + ALL_PRODUCTS から、現行14パックそれぞれの
+ * NoteProductMapping を機械的に組み立てる。手書きの対応表を持たない。
  */
 import type { NoteProductMapping, NoteDisposition, NoteArticlePlan } from "./types";
 import { CANONICAL_ARTICLES } from "./article-plan";
 import { ALL_PRODUCTS } from "../../catalog/products";
-import type { ProductDefinition, ProductFamily } from "../../catalog/types";
+import type { ProductDefinition } from "../../catalog/types";
 
-/** family と所属記事から disposition を決定的に導出する。 */
-export function dispositionFor(family: ProductFamily, article: NoteArticlePlan): NoteDisposition {
-  if (family === "license") return "catalog-only";
-  if (family === "entry" || family === "service") return "free-lead";
+/** 商品テーマと所属記事から disposition を決定的に導出する。 */
+export function dispositionFor(product: ProductDefinition, article: NoteArticlePlan): NoteDisposition {
+  if (product.theme === "free-trial" || article.access === "free") return "free-lead";
   if (article.access === "paid" && article.memberProductIds.length === 1) return "standalone-paid";
   return "bundle-member";
 }
@@ -46,7 +44,7 @@ export function buildArticleIndex(
 }
 
 /**
- * 174 商品の NoteProductMapping を決定的に生成する。
+ * 現行パックの NoteProductMapping を決定的に生成する。
  * 記事に割り当てられていない商品は index に無いため、呼び出し側 (coverage validator) が
  * 未割当として検出できるよう、その商品はスキップせず「未割当」印の記事で返す。
  */
@@ -59,7 +57,7 @@ export function buildNoteMappings(
   for (const product of products) {
     const article = index.get(product.id);
     if (!article) continue; // coverage validator が未割当を error にする
-    const disposition = dispositionFor(product.family, article);
+    const disposition = dispositionFor(product, article);
     const attachmentProductIds = article.access === "paid" ? article.memberProductIds : [];
     mappings.push({
       productId: product.id,

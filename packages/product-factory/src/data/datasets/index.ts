@@ -58,6 +58,7 @@ import { SEWERAGE_PENETRATION_RATE_2012ON_2021 } from "./sewerage-penetration-ra
 import { WATER_SUPPLY_ANNUAL_VOLUME_2022 } from "./water-supply-annual-volume";
 import { DISASTER_DAMAGE_AMOUNT_PER_PERSON_2023 } from "./disaster-damage-amount-per-person";
 import { NATURE_PARK_AREA_RATIO_2024 } from "./nature-park-area-ratio";
+import { BEEF_CONSUMPTION_EXPENDITURE_2024 } from "./beef-consumption-expenditure";
 
 export const DATASET_REGISTRY: Readonly<Record<string, Dataset>> = {
   "total-population": TOTAL_POPULATION_2024,
@@ -114,6 +115,7 @@ export const DATASET_REGISTRY: Readonly<Record<string, Dataset>> = {
   "water-supply-annual-volume": WATER_SUPPLY_ANNUAL_VOLUME_2022,
   "disaster-damage-amount-per-person": DISASTER_DAMAGE_AMOUNT_PER_PERSON_2023,
   "nature-park-area-ratio": NATURE_PARK_AREA_RATIO_2024,
+  "beef-consumption-expenditure": BEEF_CONSUMPTION_EXPENDITURE_2024,
 } as const;
 
 /** 実在する実データセット key の集合 (validator が誇大表示防止に使う)。 */

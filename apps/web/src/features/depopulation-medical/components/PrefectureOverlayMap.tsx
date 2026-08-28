@@ -12,8 +12,10 @@ import {
   useMap,
 } from "react-leaflet";
 
-import { LEAFLET_MAP_COLORS } from "@/features/map-visualization/utils/map-palette";
-import { useThemedLeafletTile } from "@/features/map-visualization/utils/use-themed-leaflet-tile";
+import {
+  LEAFLET_MAP_COLORS,
+  useThemedLeafletTile,
+} from "@/features/map-visualization/client";
 
 import { useTheme } from "@/hooks/useTheme";
 

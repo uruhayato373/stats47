@@ -2,7 +2,8 @@ import type { MetricConfig } from "../types";
 
 export const zooCount: MetricConfig = {
   "key": "zoo-count",
-  "title": "動物園数",
+  "title": "登録・相当動物園数",
+  "subtitle": "登録博物館と博物館相当施設の合計（博物館類似施設を除く）",
   "unit": "館",
   "category": "educationsports",
   "source": {
@@ -49,7 +50,7 @@ export const zooCount: MetricConfig = {
     ],
   },
   "groupKey": "museum-type-count",
-  "seoTitle": "動物園数ランキング都道府県【2015年】｜1位神奈川県（4館）",
-  "seoDescription": "2015年の動物園数の都道府県別ランキング。1位神奈川県（4館）、最下位大分県（0館）で地図やグラフで47都道府県を比較。",
+  "seoTitle": "登録・相当動物園数ランキング【2015年】｜1位神奈川県（4館）",
+  "seoDescription": "2015年の登録博物館・博物館相当施設に該当する動物園数を都道府県別に比較。博物館類似施設は含みません。",
   "isActive": true,
 };

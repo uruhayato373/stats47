@@ -1,0 +1,22 @@
+{
+  // Claude/Codex・CI が実行する TypeScript スクリプトを全件検査する。
+  // JavaScript core (.mjs) は実行時 API として import するため checkJs は無効にし、
+  // TypeScript 側の構文・import・既知プロパティの破損を網羅的に捕捉する。
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": false,
+    "strict": true,
+    "noImplicitAny": false,
+    "target": "es2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "lib": ["es2023", "dom"],
+    "types": ["node"]
+  },
+  "include": ["**/*.ts", "**/*.mts"],
+  "exclude": ["node_modules"]
+}

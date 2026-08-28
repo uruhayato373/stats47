@@ -293,7 +293,7 @@ async function repairChinaScatter(): Promise<Repair> {
 
   const workbook = new ExcelJS.Workbook();
   const xlsx = await (await fetchOk(LODGING_2024_XLSX)).arrayBuffer();
-  await workbook.xlsx.load(Buffer.from(xlsx));
+  await workbook.xlsx.load(xlsx);
   const sheet = workbook.getWorksheet('参考第1表(年計)');
   if (!sheet) throw new Error('観光庁Excelに「参考第1表(年計)」がありません');
 

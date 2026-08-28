@@ -56,12 +56,13 @@ if (!KEY) {
   console.error("usage: --key <rankingKey> [--out <dir>] [--year <YYYY>] [--require-png]");
   process.exit(1);
 }
+const rankingKey = KEY;
 
 // 既定は publish-x が読む正典パス `.local/r2/sns/ranking/<key>/x/`。
 // caption.txt / source.json はこの base、画像は base/stills/ に置く (§2-9 image catalog)。
 const BASE_DIR = OUT_DIR_ARG
   ? path.resolve(OUT_DIR_ARG)
-  : path.join(PROJECT_ROOT, ".local", "r2", "sns", "ranking", KEY, "x");
+  : path.join(PROJECT_ROOT, ".local", "r2", "sns", "ranking", rankingKey, "x");
 const OUT_DIR = path.join(BASE_DIR, "stills");
 
 // ---------- 型 (values.json / item.json の実測 shape) ----------
@@ -116,14 +117,14 @@ function choosePalette(key: string): "red" | "blue" | "orange" {
 }
 
 async function main() {
-  const valuesUrl = `${R2_BASE}/app/ranking/${KEY}/values.json`;
-  const itemUrl = `${R2_BASE}/app/ranking/${KEY}/item.json`;
+  const valuesUrl = `${R2_BASE}/app/ranking/${rankingKey}/values.json`;
+  const itemUrl = `${R2_BASE}/app/ranking/${rankingKey}/item.json`;
 
   let values: RankingValuesPayload;
   try {
     values = await getJson<RankingValuesPayload>(valuesUrl);
   } catch (e) {
-    console.error(`[error] failed to fetch values.json for key=${KEY}: ${(e as Error).message}`);
+    console.error(`[error] failed to fetch values.json for key=${rankingKey}: ${(e as Error).message}`);
     process.exit(2);
   }
 
@@ -151,11 +152,11 @@ async function main() {
   }
 
   const unit = item?.unit || sorted[0]?.unit || "";
-  const title = item?.title || item?.rankingName || KEY;
+  const title = item?.title || item?.rankingName || rankingKey;
   const year = partition.yearCode;
   const source =
     item?.sourceConfig?.source?.name || item?.source?.name || "e-Stat（政府統計の総合窓口）";
-  const palette = choosePalette(KEY);
+  const palette = choosePalette(rankingKey);
   const rightPalette = palette === "red" ? "blue" : palette === "blue" ? "red" : "blue";
 
   const N = Math.min(5, Math.floor(sorted.length / 2) || 1);

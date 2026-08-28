@@ -165,7 +165,16 @@ async function main() {
     try {
       const oldSvg = await ft(`${R2}/${t.slug}/data/${t.base}.svg`);
       const display = parseMapDisplay(oldSvg);
-      let best: { key: string; year: string; values: Array<{ areaName: string; value: number; areaCode: string }>; unit: string; title: string; rate: number } | null = null;
+      let best: {
+        key: string;
+        year: string;
+        values: Array<{ areaName: string; value: number; areaCode: string }>;
+        unit: string;
+        title: string;
+        colorScheme?: string;
+        isReversed?: boolean;
+        rate: number;
+      } | null = null;
       for (const key of t.keys) {
         let parts;
         try {

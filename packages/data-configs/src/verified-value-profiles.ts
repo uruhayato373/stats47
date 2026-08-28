@@ -400,6 +400,33 @@ export const VERIFIED_VALUE_PROFILES: readonly VerifiedValueProfile[] = [
     sourceUrl: "https://www.e-stat.go.jp/dbview?sid=0000010102",
     verifiedAt: "2026-08-05",
   },
+  {
+    key: "botanical-garden-count",
+    zeroShareMax: 0.86,
+    evidence:
+      "社会教育調査 0003348770 の cat01=植物園・cat02=登録博物館と博物館相当施設の計を確認。" +
+      "全国計10館、47県中38県が0で、別表の博物館類似施設107館は対象外。指標名にも対象範囲を明示",
+    sourceUrl: "https://www.e-stat.go.jp/dbview?sid=0003348770",
+    verifiedAt: "2026-08-28",
+  },
+  {
+    key: "zoo-count",
+    zeroShareMax: 0.54,
+    evidence:
+      "社会教育調査 0003348770 の cat01=動物園・cat02=登録博物館と博物館相当施設の計を確認。" +
+      "全国計35館、47県中23県が0で、別表の博物館類似施設59館は対象外。指標名にも対象範囲を明示",
+    sourceUrl: "https://www.e-stat.go.jp/dbview?sid=0003348770",
+    verifiedAt: "2026-08-28",
+  },
+  {
+    key: "aquarium-count",
+    zeroShareMax: 0.52,
+    evidence:
+      "社会教育調査 0003348770 の cat01=水族館・cat02=登録博物館と博物館相当施設の計を確認。" +
+      "全国計38館、47県中22県が0で、別表の博物館類似施設46館は対象外。指標名にも対象範囲を明示",
+    sourceUrl: "https://www.e-stat.go.jp/dbview?sid=0003348770",
+    verifiedAt: "2026-08-28",
+  },
   // 家計調査の品目 (県庁所在市・二人以上世帯・1 市あたり約 100 世帯の標本)。
   // 低頻度 / 高額 / 該当世帯が少数の品目は、標本にその世帯が出ないと 0 になる。
   // 全国平均が正であることを 1 件ずつ確認しており、欠損を 0 で埋めているのではない。

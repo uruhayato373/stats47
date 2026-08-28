@@ -1,5 +1,4 @@
-import { BannerAd } from "@/features/ads";
-import { isLandscapeBanner } from "@/features/ads/services/banner-geometry";
+import { BannerAd, isLandscapeBanner } from "@/features/ads";
 
 import { ADSENSE_DISPLAY_ENABLED } from "@/lib/google-adsense";
 
