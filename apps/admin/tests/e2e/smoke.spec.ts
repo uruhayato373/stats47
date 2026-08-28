@@ -9,6 +9,11 @@ import { expect, test, type Page } from "@playwright/test";
 
 const PAGES = [
   { path: "/", heading: "管理コンソール" },
+  { path: "/content", heading: "コンテンツ運用" },
+  { path: "/content/x", heading: "X運用" },
+  { path: "/content/instagram", heading: "Instagram運用" },
+  { path: "/content/note", heading: "note運用" },
+  { path: "/content/kindle", heading: "Kindle運用" },
   { path: "/sns", heading: "SNS 投稿ギャラリー" },
   { path: "/buzz-map", heading: null },
   { path: "/assets", heading: null },
@@ -35,19 +40,19 @@ test.describe("smoke: 管理画面の疎通", () => {
   for (const { path } of PAGES) {
     test(`${path} は 200 で表示され console error が無い`, async ({ page }) => {
       const errors = collectPageErrors(page);
-      const response = await page.goto(path);
+      const response = await page.goto(path, { waitUntil: "load" });
       expect(response?.status()).toBe(200);
       await expect(page.locator("body")).toBeVisible();
-      // クライアントの初回データ取得 (apiGet) が解決するまで待つ
-      await page.waitForLoadState("networkidle");
+      // networkidle は定期取得を持つ運用画面で完了しないため、描画完了を契約にする。
+      await expect(page.locator("main")).toBeVisible();
       expect(errors, `console/page errors on ${path}: ${errors.join("; ")}`).toEqual([]);
     });
   }
 
-  test("横スクロールが発生しない (viewport 内に収まる)", async ({ page }) => {
-    for (const { path } of PAGES) {
-      await page.goto(path);
-      await page.waitForLoadState("networkidle");
+  for (const { path } of PAGES) {
+    test(`${path} は横スクロールが発生しない`, async ({ page }) => {
+      await page.goto(path, { waitUntil: "load" });
+      await expect(page.locator("main")).toBeVisible();
       const { scrollWidth, clientWidth } = await page.evaluate(() => ({
         scrollWidth: document.documentElement.scrollWidth,
         clientWidth: document.documentElement.clientWidth,
@@ -56,14 +61,20 @@ test.describe("smoke: 管理画面の疎通", () => {
         scrollWidth,
         `${path}: scrollWidth=${scrollWidth} clientWidth=${clientWidth}`,
       ).toBeLessThanOrEqual(clientWidth + 1);
-    }
-  });
+    });
+  }
 
   test("共通ナビで相互遷移できる", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "管理コンソール" })).toBeVisible();
 
     const nav = page.getByRole("complementary").getByRole("navigation");
+
+    await nav.getByRole("link", { name: "コンテンツ運用", exact: true }).click();
+    await expect(page).toHaveURL(/\/content$/);
+
+    await nav.getByRole("link", { name: "Kindle", exact: true }).click();
+    await expect(page).toHaveURL(/\/content\/kindle$/);
 
     await nav.getByRole("link", { name: "SNS", exact: true }).click();
     await expect(page).toHaveURL(/\/sns$/);

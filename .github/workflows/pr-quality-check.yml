@@ -756,6 +756,10 @@ jobs:
           NODE_OPTIONS: '--max-old-space-size=4096'
         continue-on-error: false
 
+      - name: 🧾 Audit Content Operations SSOT
+        run: npm run audit:content-operations
+        continue-on-error: false
+
       - name: 🌐 Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 

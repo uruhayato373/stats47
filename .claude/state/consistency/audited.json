@@ -1,10 +1,17 @@
 {
-  "hash": "221feb5ee011087a96e5f534a056932361f29d3ee696c2eb05b018bd1d8c0169",
-  "audited_at": "2026-08-27T02:27:21",
+  "hash": "3b6812569f49efa1df4dab87c45a5301fe7e677b3440ae0777d4fe57a2829479",
+  "audited_at": "2026-08-27T08:02:07",
   "files": [
-    ".agents/skills/ads/affiliate-operate/SKILL.md",
-    ".claude/agents/theme-researcher.md",
-    ".claude/skills/ads/affiliate-operate/SKILL.md",
-    ".claude/skills/theme/research-theme-catalog/SKILL.md"
+    ".agents/skills/management/admin-console/SKILL.md",
+    ".agents/skills/product/kdp-publish/SKILL.md",
+    ".claude/agents/README.md",
+    ".claude/agents/kdp-operator.md",
+    ".claude/agents/kindle-publisher.md",
+    ".claude/agents/note-manager.md",
+    ".claude/rules/sns-content-standards.md",
+    ".claude/scripts/content-operations/audit-content-operations.ts",
+    ".claude/skills/management/admin-console/SKILL.md",
+    ".claude/skills/product/kdp-publish/SKILL.md",
+    "CLAUDE.md"
   ]
 }

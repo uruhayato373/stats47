@@ -67,3 +67,18 @@ export const KDP_AI_DISCLOSURE: KdpAiDisclosure = {
  *   参照する手段は DRM の有無に関わらず確保されている。
  */
 export const KDP_APPLY_DRM = true;
+
+/**
+ * KDPポートフォリオの運用判断SSOT。
+ *
+ * 12冊公開後は一括量産を止め、売上/KENPの実測前に残りを公開しない。
+ * 「未公開が何冊か」はkdp-listingsから毎回計算し、ここへ固定値を持たない。
+ */
+export const KDP_PORTFOLIO_POLICY = {
+  mode: "paused" as const,
+  decisionStatus: "pending" as const,
+  title: "残りのKindleを継続出版するか判断",
+  reason: "公開済み書籍の売上・KENPを実測し、需要があるシリーズだけを1冊ずつ再開する",
+  resumeCondition: "オーナーの明示承認 + 売上またはKENPの需要証拠",
+  source: ".claude/rules/coconala-product-standards.md §8",
+};
