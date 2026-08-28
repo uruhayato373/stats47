@@ -22,6 +22,8 @@ co_agents: [improvement-triage, adsense-analyst]
 | 施策一覧 | `.Codex/todo/improvements.md` | AFF-NN 行の追加・status 更新 |
 | agent 用詳細 | `.Codex/skills/analytics/affiliate-improvement/reference/improvement-log.md` | 検証コマンド・仮説・実測値・GA4 クエリ結果 |
 | **集約状態 (機械・★入口)** | `.Codex/state/ads/affiliate-operations-latest.json` | 計測ゲート・freshness・coverage・直接配置・実験・推奨アクションの現在地 (`build-affiliate-operations-state.ts` が生成、週次 CI 自動更新) |
+| **二層portfolio (機械・★判断入口)** | `.Codex/state/ads/affiliate-portfolio-latest.json` | program/offer/ad/placement、discovery/decision、確定収益、unknown理由、次の1件 |
+| pilot readiness (機械) | `.Codex/state/ads/affiliate-pilot-readiness-latest.json` | 開始gate、必要母数、観測verdict。勝者は持たない |
 | 在庫 snapshot (機械) | `.Codex/state/ads/inventory-*.json` | audit script が生成、ループの入力 |
 | compliance snapshot (機械) | `.Codex/state/ads/compliance-latest.json` | 直接配置の孤立・PR 表記監査 (`/audit-affiliate-compliance`) |
 
@@ -29,6 +31,10 @@ co_agents: [improvement-triage, adsense-analyst]
 > `coverage` / `recommendedActions` が現在地。**在庫ゼロ軸や gap は SKILL に固定記載しない** — 必ず
 > state から読む (値は変動する)。stale (freshness > 10d) なら
 > `npx tsx .Codex/scripts/ads/build-affiliate-operations-state.ts` で再生成する。
+
+> **確定収益を使う前にA8 outcome gateも読む**:
+> `node .Codex/scripts/ads/check-a8-outcome-gate.mjs`。`blocked`では欠損・累計・stale・
+> サイト分離不能を0成果へ丸めず、CTR改善と収益勝敗を分けて報告する。
 
 > **効果判定を確定する前に必ず** `.Codex/rules/evidence-based-judgment.md` の実証チェックリストを通す。
 > 想定値 / 実測値 / 取得コマンド / 経過日数なしに判定してTODO行を削除しない。
@@ -43,6 +49,8 @@ $ARGUMENTS — [mode]
                - audit             : 在庫棚卸しのみ再実行 (vertical 10軸ギャップ + サイズ lint + 配置偏り)
                - observe           : GA4 imp/click を取得 → CTR 集計 → 弱枠特定 → 実測を追記
                - action            : 新しい施策行 (AFF-NN) を追加
+               - portfolio         : 二層portfolio・outcome/measurement gate・次の1件を要約
+               - classify          : 証拠がある未分類profileを1件だけ分類案として提示
                - next              : 次に着手すべき改善候補を提示
 ```
 
@@ -102,7 +110,8 @@ node .Codex/scripts/ads/fetch-affiliate-ga4.cjs 28   # 直近 28 日。snapshot 
 > 1. **GA4 鍵**: `stats47-*.json` がリポジトリルートに必要。**クラウド / web 実行環境には鍵が無いため、
 >    実測は GitHub Actions で行う** → `.github/workflows/affiliate-ga4-weekly.yml`
 >    (週次 cron + `workflow_dispatch`)。シークレット `GOOGLE_SERVICE_ACCOUNT_KEY_JSON` を鍵ファイルに
->    復元して `fetch-affiliate-ga4.cjs` を実行し、snapshot を develop に commit-back する。
+>    復元して `fetch-affiliate-ga4.cjs` を実行し、snapshot / portfolio / operations / pilot stateを
+>    workflow artifactとして保存する。workflowはcommit/pushしない。
 >    鍵のあるローカルなら直接 `node …` でも可。
 > 2. **custom dimension 登録**: `affiliate_vertical` / `affiliate_category` / `link_position` を GA4 管理画面で
 >    イベントスコープのカスタムディメンションとして登録済みでないと内訳が引けない (登録手順の正典:
@@ -133,6 +142,15 @@ node .Codex/scripts/ads/fetch-affiliate-ga4.cjs 28   # 直近 28 日。snapshot 
 | **高 CTR だが imp 少** | CTR 上位だが imp 少 | 同案件を高トラフィック枠へ拡大 |
 
 baseline / 中央値は実測から決め、根拠を improvement-log に書く (推測で閾値を作らない)。
+
+### Step 3.5: portfolio / classify / next
+
+- `portfolio`: `npx tsx .Codex/scripts/ads/build-affiliate-portfolio-state.ts`を実行し、二層キュー、
+  measurement/outcome/coverage gate、欠損理由、`recommendedActions[0]`だけを報告する。
+- `classify`: `pending-classification`の先頭1件について、ASP詳細で成果条件・個人情報・連絡・支払い・
+  出典URL・確認日を実機確認できた場合だけprofile更新案を作る。更新はaffiliate-managerの排他領域。
+  条件を読めなければunknownのまま終了する。
+- `next`: portfolioの`recommendedActions[0]`をそのまま提示する。モデルが別候補へ並べ替えない。
 
 ### Step 4: 施策の記録 (action モード)
 
@@ -175,6 +193,8 @@ TODOのwriteは排他的 writer の `improvement-triage` に委譲してもよ�
 | ファイル | 役割 |
 |---|---|
 | `.Codex/scripts/ads/audit-affiliate-inventory.ts` | 在庫棚卸し (決定的) |
+| `.Codex/scripts/ads/build-affiliate-portfolio-state.ts` | 二層portfolio派生state |
+| `.Codex/scripts/ads/build-affiliate-pilot-state.ts` | pilot readiness / verdict派生state |
 | `.Codex/todo/improvements.md` | 人間向けactive施策一覧 (AFF-NN) |
 | `reference/improvement-log.md` | agent 用詳細ログ |
 | `apps/web/scripts/affiliate-ads-data.ts` | 在庫 SSOT |

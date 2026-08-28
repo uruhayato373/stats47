@@ -1,40 +1,70 @@
 {
-  "schemaVersion": 2,
-  "_note": "A8.net メディア管理画面（media-console.a8.net）のレポート CSV 取得設定。由来: doboku-note の .claude/config/a8-report-automation.json（schemaVersion 2 = 2026-07-27 の実機調査で確定した値）。stats47 版はこのファイルの新規作成にあたり targetSite / programIdMap を stats47 視点へ反転した（doboku-note の同一設定ファイルとは対象サイトが逆）。ラベルが外れたら .local/playwright-a8-debug/<runId>/visible-text.txt を見てここを直す（スクリプトは変更しない）。",
+  "schemaVersion": 3,
+  "_note": "A8.net メディア管理画面（media-console.a8.net）のレポート CSV 取得設定。schemaVersion 3 = 2026-08-28 stats47 実機調査でreadyTextと期間フォーム契約を追加。targetSite / programIdMap はstats47視点。ラベルが外れたら .local/playwright-a8-debug/<runId>/visible-text.txt を見てここを直す（スクリプトは変更しない）。",
   "a8": {
     "baseUrl": "https://media-console.a8.net",
     "homePath": "/home",
     "reAuthPattern": "re-authentication|/login",
     "targetSite": "統計で見る都道府県",
-    "_targetSiteNote": "★捏造防止のため実機未確認の値であることを明記する。doboku-note 側の config は「CSV は合計行を含まず doboku-note と 統計で見る都道府県 の2行のみ」と実機確認済みで、そのサイト別レポート上の表記が「統計で見る都道府県」であることは doboku-note 側の記録から間接的に裏取りできる。ただし stats47 側からの実機確認（visible-text.txt 目視）はまだ行っていないため、初回実行時に必ず表示名を確認し、ズレていればこの値を訂正すること。",
+    "_targetSiteNote": "2026-08-28 stats47 側で実機確認済み。メディアID a25050375786 のサイト別レポートに『統計で見る都道府県』の対象行が表示される。",
     "mediaId": "a25050375786",
     "_accountNote": "doboku-note と同一口座（mediaId 不変）。2026-07-27 実機確認: A8 の管理画面に **サイト切替は存在しない**。メディアID=口座で、ヘッダーの「サイト名」は口座の代表サイトが常に表示されるだけ。したがって assert すべきは『正しい口座か』（mediaId）であり、対象サイトの分離はレポート単位で行う。",
     "_isolationNote": "レポートごとに siteScope が異なる（doboku-note 側 2026-07-27 実機確認・stats47 も同一口座のため同じ制約）:\n  site-rows    = サイト列があり targetSite の行だけ採れば **完全に分離できる**（/report/site のみ）。対象サイト実績の真実源。\n  account-wide = 口座横断でサイト分離不能（program/detail・period/*）。programIdMap の allowlist で対象サイト分を抽出し、site-rows と突合して混入を検算する（allowlist 合計が対象サイト行を超えたら混入の疑い）。\n代替案の検討結果（doboku-note 側で確認済み）: /report/program/detail は category フィルタのみでサイト列なし。/report/material の「素材ID」は 001/003/999 の3桁で a8mat の第4トークンとは別物のため素材による分離も不可。",
-    "_periodNote": "**期間は URL クエリでは制御できない**（start_date/end_date を付けても無視され既定期間が返る＝doboku-note 側 2026-07-27 実測）。画面のフォーム（input name=start / end・月レンジと日レンジの2組）を操作する必要がある。現状の取得は A8 の既定期間（年初〜当月の累計）。実際の期間は CSV のファイル名に入る（例 site_202601-202607_20260727105756.csv）ので manifest に記録する。月次分解は .claude/todo/backlog.md 等の後続タスク。",
+    "_periodNote": "**期間は URL クエリでは制御できない**（start_date/end_date を付けても無視される）。2026-08-28 stats47 実機確認: month は可視 input[name=start/end][placeholder=開始月/終了月]、day は可視 input[name=start/end][placeholder=開始日/終了日]、適用は exact な button『適用』。program-detail には月/日の同名 input が共存するため placeholder と :visible の両方を必須にする。要求期間は CSV ファイル名の実期間と完全一致した場合だけ採用する。",
     "reports": {
       "site-summary": {
         "label": "サイト別",
+        "readyText": "サイト別レポート",
         "path": "/report/site",
         "siteScope": "site-rows",
         "_note": "**対象サイト実績の真実源**。CSV は合計行を含まず、統計で見る都道府県 と doboku-note の2行のみ（doboku-note 側の実機確認より）"
       },
       "program-detail": {
         "label": "プログラム別（詳細）",
+        "readyText": "プログラム別レポート",
         "path": "/report/program/detail",
         "siteScope": "account-wide",
         "_note": "口座横断。programIdMap（プログラムID 基準）の allowlist で対象サイト分のみ抽出し site-summary と突合。EPC 内訳の中核"
       },
       "period-monthly": {
         "label": "期間別（月別）",
+        "readyText": "期間別レポート",
         "path": "/report/period/monthly",
         "siteScope": "account-wide",
         "_note": "口座横断。月次トレンドの参考値（対象サイト単独の月次は取れない＝期間フォーム対応後に site-summary を月ごとに取る）"
       },
       "period-daily": {
         "label": "期間別（日別）",
+        "readyText": "期間別レポート",
         "path": "/report/period/daily",
         "siteScope": "account-wide",
         "_note": "口座横断。日次の異常検知用（水準ではなく変化を見る）"
+      }
+    },
+    "periodForm": {
+      "site-summary": {
+        "kind": "month",
+        "start": { "name": "start", "placeholder": "開始月" },
+        "end": { "name": "end", "placeholder": "終了月" },
+        "applyButtonLabel": "適用"
+      },
+      "program-detail": {
+        "kind": "month",
+        "start": { "name": "start", "placeholder": "開始月" },
+        "end": { "name": "end", "placeholder": "終了月" },
+        "applyButtonLabel": "適用"
+      },
+      "period-monthly": {
+        "kind": "month",
+        "start": { "name": "start", "placeholder": "開始月" },
+        "end": { "name": "end", "placeholder": "終了月" },
+        "applyButtonLabel": "適用"
+      },
+      "period-daily": {
+        "kind": "day",
+        "start": { "name": "start", "placeholder": "開始日" },
+        "end": { "name": "end", "placeholder": "終了日" },
+        "applyButtonLabel": "適用"
       }
     },
     "exportButtonLabels": [

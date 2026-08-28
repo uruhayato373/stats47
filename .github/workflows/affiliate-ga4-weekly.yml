@@ -2,7 +2,7 @@ name: 📊 Fetch Affiliate GA4 Metrics & Operations State
 
 # GA4 から アフィリエイト計測イベント (ad_impression / affiliate_click) を取得し、
 # (vertical × position) 別 snapshot と 集約状態 (affiliate-operations-latest.json) を
-# develop に commit-back する (週次運用ループの後半。前半 = 在庫/compliance は
+# artifact と job summary に残す (週次運用ループの後半。前半 = 在庫/compliance は
 # affiliate-dashboard-refresh.yml が 1 時間前に実行)。
 #
 # クラウド / web 実行環境には GA4 鍵が無いため、実測は CI で行う (既存 metrics workflow と同じ
@@ -22,7 +22,7 @@ on:
     - cron: "0 13 * * 0" # JST 22:00 Sunday (UTC 13:00) — inventory/compliance refresh の後
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: affiliate-ga4-fetch
@@ -70,10 +70,19 @@ jobs:
         if: always()
         run: rm -f stats47-f6b5dae19196.json
 
-      - name: 🧮 Build operations state (決定的判定 + validate)
+      - name: 🔍 Rebuild local inventory/compliance inputs
         run: |
+          npx -y tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json --check-size > /dev/null
+          npx -y tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check > /tmp/affiliate-compliance.md
+
+      - name: 🧮 Build portfolio + operations state (決定的判定 + validate)
+        run: |
+          npx -y tsx .claude/scripts/ads/build-affiliate-portfolio-state.ts | tee /tmp/affiliate-portfolio.md
+          npx -y tsx .claude/scripts/ads/build-affiliate-portfolio-state.ts --check
           npx -y tsx .claude/scripts/ads/build-affiliate-operations-state.ts | tee /tmp/affiliate-operations.md
           npx -y tsx .claude/scripts/ads/build-affiliate-operations-state.ts --check
+          npx -y tsx .claude/scripts/ads/build-affiliate-pilot-state.ts | tee /tmp/affiliate-pilot.md
+          npx -y tsx .claude/scripts/ads/build-affiliate-pilot-state.ts --check
 
       - name: 📝 Job summary (異常があるときだけ action table)
         if: always()
@@ -85,17 +94,13 @@ jobs:
           fi
           cat /tmp/affiliate-ga4.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
 
-      - name: 💾 Commit state snapshots if changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ".claude/state/ads/"
-          if git diff --cached --quiet; then
-            echo "No GA4 / operations state changes — skipping commit."
-            exit 0
-          fi
-          DATE=$(date -u +%Y-%m-%d)
-          git commit -m "chore(ads): affiliate GA4 + operations state ${DATE} [skip ci]"
-          # commit 済みなので unstaged changes は無く rebase が通る
-          git pull --rebase origin develop
-          git push origin develop
+      - name: 📤 Upload read-only portfolio state
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: affiliate-portfolio-state
+          path: |
+            .claude/state/ads/ga4-affiliate-*.json
+            .claude/state/ads/affiliate-portfolio-latest.json
+            .claude/state/ads/affiliate-operations-latest.json
+            .claude/state/ads/affiliate-pilot-readiness-latest.json
+          retention-days: 30

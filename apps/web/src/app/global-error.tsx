@@ -20,7 +20,7 @@ export default function GlobalError({
 
   return (
     <html lang="ja">
-      <body>
+      <body className="google-anno-skip">
         <div
           style={{
             minHeight: "100vh",

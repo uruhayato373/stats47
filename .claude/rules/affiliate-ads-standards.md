@@ -87,9 +87,18 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
   `unknown` とし、0円や負けへ変換しない。
 - 勝者の自動公開、priority 自動変更、新規提携申請は行わない。候補提示までを機械化し、人間承認を残す。
 
-型付き offer catalog、広告との program 参照、成果 join、管理画面、週次改善の実装契約は
-`.claude/todo/backlog.md` の `AFF-INTENT-FRICTION-PORTFOLIO-01` に置く。実装完了までは本節を
-人間・agent の判定規約として使い、案件名から行動負担を推測して state を書き換えない。
+実装上の正典は次のように分離する。
+
+| 責務 | 正典 |
+|---|---|
+| authored成果条件・lane・friction | `apps/web/scripts/affiliate-offer-profiles-data.ts`（affiliate-manager排他writer） |
+| creative / placement | `apps/web/scripts/affiliate-ads-data.ts`（`programRef`でprofile参照） |
+| 変動するGA4・ASP成果・候補 | `.claude/state/ads/affiliate-portfolio-latest.json`（派生・手編集禁止） |
+| pilot開始可否・必要母数・verdict | `.claude/state/ads/affiliate-pilot-readiness-latest.json`（派生・勝者を持たない） |
+
+active広告の新規登録は、参照先profileが存在し、未分類/blocked/pausedでなく、verticalが許可済みの場合だけ通す。
+案件名から行動負担を推測してprofile/stateを書き換えない。公開pilotはmeasurement・outcome・profile・実現可能性・
+既存実験なし・ownerの案件/ページ/push承認をすべて満たした1件だけとする。
 
 ### 提携状況の真実源 (★2026-08-04 に一本化)
 
@@ -453,6 +462,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | 取得できなかった ASP を「提携なし」と混同しない | `affiliate-status` が判定不能として区別。一覧の実件数を必ず併記し「ID 0 件 = 提携ゼロ」と誤読させない (2026-07-28 に実際に誤読し、提携中 7 件・申請中 6 件を「0 件」と報告した)。**もしもは画面テキストに ID が出ない**が `hrefIdPattern` + `listScopeSelector` で抽出でき、行数と一致する (2026-08-04 実測: 提携中 32 行 = ID 32 件)。**A8 は `affiliate-status` に抽出パターンが無く常に 0 件**なので、A8 の提携状態は `a8-catalog.json` 側 (`check-approval`) で見る |
 | 幻 ID を台帳へ書かない | `detectPhantomIds` が提携中∩申請中を自動除外し警告する。1 案件が同時に両方であることはありえないので、両方に出る ID は一覧行の外のページ共通リンク。2026-08-04 実測でもしもの `7630 / 7556 / 170` が該当し、うち 2 件が「台帳に無い実機の提携」と誤検出、1 件は過去の `--write` で実在しないエントリ (`moshimo-170`) として混入していた |
 | 一覧行数と ID 数の一致を毎回確かめる | `checkIdRowParity` が乖離時に警告。ズレは `listScopeSelector` が一覧行に限定できていない (超集合) か取りこぼしのサイン。修正前は提携中 32 行に対し ID 35 件だった |
+| もしもの不在を詳細ページで確定する | `affiliate-status --asp moshimo --verify-moshimo-details` は「プロモーション詳細」以降の単独行だけを読み、未申請/否認中を `none`、プロモーション終了を `unavailable` へ写像する。詳細が申請中/提携中なのに一覧に無ければ pagination/selector drift として全書き込みを停止する。read-only 実行で SID と件数パリティを確認後にだけ `--write` を付ける |
 | 名前を推測で埋めない | `--write` の名前補完は afb = 4 行ブロックのプロモーション名 (`parseAfbBlocks`)、もしも = DOM 順 index 対応 (`zipNamesWithIds`) で、**既知名と照合が通ったときだけ**採用する。通らなければ補完せず報告に留める |
 | 申請の完了を文言で判定しない | もしもの申請は **2 段階** (申請ページ →`/apply/confirm` で確定)。確認ページにも「申請」の語が出るため文言判定では未完了を成功と誤報する。完了は**申請中または提携中一覧に当該案件が現れたか**だけを根拠にする (2026-07-28 に 4 件を誤報)。★もしもは**即時承認**があり申請中を経ず提携中へ直行する (同日 4 件実測) — 申請中一覧だけ見ると成功を unverified と誤報する |
 | ID 抽出は一覧行スコープに限定し、行数と一致することを確かめる | ページ全体の `a[href]` から拾うと**一覧行の外にあるページ共通リンクが混ざり超集合**になる。もしもは提携中・申請中の両ページに `promotion_id=7630 / 7556 / 170` の共通リンクがあり、2026-08-04 に提携中 32 行に対し ID 35 件を抽出、うち 2 件を「台帳に無い実機の提携」として**誤検出**した (両ページに同時に出る ID は論理的に一覧項目ではない、が発見の決め手)。config の `listScopeSelector` (もしも = `table a[href]`) で一覧スコープを明示し、ログの「一覧 N 件 / ID 累計 N 件」が**一致すること**を毎回確認する。afb は ID を `【PID:N】` の可視テキストから取るため本件は構造的に起きない |
@@ -540,14 +550,21 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 > ranking 右レールの文脈バナーも従来の下段位置へ戻す。ranking 本文中段へ回した先頭バナーは
 > 読了枠の解決結果へ戻し、同一バナーを欠落・二重表示させない。
 >
-> **★再開したら必ず本文書き換えの smoke を回す**:
+> **★AdSense の広告インテントは禁止**:
+> AdSense 管理画面の `広告 > stats47.jp > 編集 > インテント重視のフォーマット` で
+> 「広告インテント」をオフに保つ。加えて `app/layout.tsx` と `app/global-error.tsx` の
+> `<body>` に Google 公式の `google-anno-skip` を常設し、管理画面の設定が変わっても
+> リンク・アンカー・チップを全ページで挿入させない。この class は AdSense 再開時にも外さない。
+> 公式仕様: https://support.google.com/adsense/answer/13844047
+>
+> **★再開したら必ず本文書き換えの smoke も回す**:
 > `npx playwright test --config playwright.smoke.config.ts third-party-dom-injection`
 > (`apps/web/tests/smoke/third-party-dom-injection.spec.ts`)。
 > 2026-08-04 に**自動広告**が出典テキストの語を `href="#"` のリンクへ置き換えた
 > (「出典: 人口動態統計」の「統計」だけがリンク + アイコンになる)。出典の信頼性を損ない、
 > PR 表記の無い広告リンクが引用文の中に生まれる。オーナーが 2026-08-21 に自動広告の設定を
-> 解除したが、**停止中は自動広告が動かないので緑でも証拠にならない** — 再開後の実測だけが
-> 解決の根拠になる。再開時は AdSense 管理画面の自動広告が意図した設定かも併せて確認する。
+> 解除した。停止中の smoke が緑なだけでは証拠にならないため、静的契約テストで
+> `google-anno-skip` の常設を検査し、再開後は実ページでも再確認する。
 
 ### 5 チャネルの役割分担 (混ぜない)
 

@@ -13,9 +13,9 @@ import {
 const NOW = "2026-07-15T00:00:00.000Z";
 
 function freshGa4(overrides = {}) {
-  // schema v2 (doc 42 §10.1)。v2 必須フィールドを欠くと gate が blocked になる。
+  // schema v3。独立3 reportと各report品質を欠くと gate が blocked になる。
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     measurementEpoch: "affiliate-impression-v1",
     eventNames: { impression: "affiliate_impression", click: "affiliate_click" },
     generatedAt: "2026-07-12T13:00:00.000Z",
@@ -23,7 +23,14 @@ function freshGa4(overrides = {}) {
     hasVariantBreakdown: true,
     totals: { impressions: 100, clicks: 1, ctr: 0.01 },
     quality: { recognizedVerticalImpressions: 95, unsetVerticalImpressions: 5, unsetVerticalRatio: 0.05 },
-    rows: [],
+    overview: [],
+    experiments: [],
+    pages: [],
+    reportQuality: {
+      overview: { dimensions: ["ad_id", "affiliate_vertical", "link_position"], failures: [] },
+      experiments: { dimensions: ["experiment_id", "variant_id"], failures: [] },
+      pages: { dimensions: ["pagePath", "ad_id"], failures: [] },
+    },
     ...overrides,
   };
 }
@@ -50,7 +57,7 @@ test("gate: GA4 snapshot 欠落 → blocked(ga4-snapshot-missing)", () => {
   assert.ok(gate.reasons.includes("ga4-snapshot-missing"));
 });
 
-test("gate v2: 旧 schema snapshot は値が新鮮でも blocked(ga4-schema-unsupported)", () => {
+test("gate v3: 旧 schema snapshot は値が新鮮でも blocked(ga4-schema-unsupported)", () => {
   // 2026-07-26 実データ形 (schemaVersion 無し・imp 13,115 が AdSense 汚染) の再現
   const legacy = freshGa4();
   delete legacy.schemaVersion;
@@ -62,7 +69,7 @@ test("gate v2: 旧 schema snapshot は値が新鮮でも blocked(ga4-schema-unsu
   assert.ok(gate.reasons.some((r) => r.startsWith("ga4-schema-unsupported")));
 });
 
-test("gate v2: impression 0 → blocked(ga4-impressions-zero)", () => {
+test("gate v3: impression 0 → blocked(ga4-impressions-zero)", () => {
   const gate = evaluateMeasurementGate({
     ga4: freshGa4({
       totals: { impressions: 0, clicks: 0, ctr: null },
@@ -75,7 +82,7 @@ test("gate v2: impression 0 → blocked(ga4-impressions-zero)", () => {
   assert.ok(gate.reasons.includes("ga4-impressions-zero"));
 });
 
-test("gate v2: 認識済み vertical の impression 0 → blocked(ga4-recognized-vertical-zero)", () => {
+test("gate v3: 認識済み vertical の impression 0 → blocked(ga4-recognized-vertical-zero)", () => {
   const gate = evaluateMeasurementGate({
     ga4: freshGa4({
       quality: { recognizedVerticalImpressions: 0, unsetVerticalImpressions: 100, unsetVerticalRatio: 1 },
@@ -87,7 +94,7 @@ test("gate v2: 認識済み vertical の impression 0 → blocked(ga4-recognized
   assert.ok(gate.reasons.includes("ga4-recognized-vertical-zero"));
 });
 
-test("gate v2: (unset) vertical 比率 > 0.10 → blocked(ratio-high)", () => {
+test("gate v3: (unset) vertical 比率 > 0.10 → blocked(ratio-high)", () => {
   const gate = evaluateMeasurementGate({
     ga4: freshGa4({
       quality: { recognizedVerticalImpressions: 80, unsetVerticalImpressions: 20, unsetVerticalRatio: 0.2 },
@@ -99,7 +106,7 @@ test("gate v2: (unset) vertical 比率 > 0.10 → blocked(ratio-high)", () => {
   assert.ok(gate.reasons.some((r) => r.startsWith("ga4-unset-vertical-ratio-high")));
 });
 
-test("gate v2: epoch / impression event 名の不一致 → blocked", () => {
+test("gate v3: epoch / impression event 名の不一致 → blocked", () => {
   const wrongEpoch = evaluateMeasurementGate({
     ga4: freshGa4({ measurementEpoch: "ad-impression-v0" }),
     inventory: freshInventory(),

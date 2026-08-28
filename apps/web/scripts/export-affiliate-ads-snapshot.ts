@@ -22,6 +22,7 @@ import {
   type AffiliateAdsSnapshot,
 } from "../src/features/ads/repositories/affiliate-ad-snapshot";
 import { AFFILIATE_ADS } from "./affiliate-ads-data";
+import { AFFILIATE_OFFER_PROFILES } from "./affiliate-offer-profiles-data";
 
 dotenv.config({ path: ".env.local" });
 
@@ -85,9 +86,54 @@ function validateExperiments(): void {
   }
 }
 
+/** authored offer profile と creative 参照を R2 write 前に fail-closed で検査する。 */
+function validateOfferProfiles(): void {
+  const errors: string[] = [];
+  const byRef = new Map<string, (typeof AFFILIATE_OFFER_PROFILES)[number]>();
+  for (const profile of AFFILIATE_OFFER_PROFILES) {
+    if (byRef.has(profile.programRef)) errors.push(`profile ${profile.programRef}: programRef 重複`);
+    byRef.set(profile.programRef, profile);
+    if (profile.allowedVerticals[0] !== profile.vertical) {
+      errors.push(`profile ${profile.programRef}: canonical vertical が allowedVerticals 先頭でない`);
+    }
+    const isUnknown =
+      profile.lane === "unknown" ||
+      profile.actionType === "unknown" ||
+      profile.frictionTier === "unknown" ||
+      profile.personalDataLevel === "unknown" ||
+      profile.humanContact === "unknown" ||
+      !profile.conversionCondition ||
+      !profile.conditionSource ||
+      !profile.verifiedAt;
+    if (isUnknown && profile.portfolioStatus !== "pending-classification" && profile.portfolioStatus !== "blocked") {
+      errors.push(`profile ${profile.programRef}: unknown は pending-classification|blocked 必須`);
+    }
+    if (profile.lane === "discovery" && !["F0", "F1", "F2"].includes(profile.frictionTier)) {
+      errors.push(`profile ${profile.programRef}: discovery は F0-F2 必須`);
+    }
+  }
+  for (const ad of AFFILIATE_ADS) {
+    if (!ad.programRef) {
+      errors.push(`${ad.id}: programRef 未設定`);
+      continue;
+    }
+    const profile = byRef.get(ad.programRef);
+    if (!profile) {
+      errors.push(`${ad.id}: offer profile 不在 (${ad.programRef})`);
+      continue;
+    }
+    if (ad.vertical && !profile.allowedVerticals.includes(ad.vertical)) {
+      errors.push(`${ad.id}: vertical ${ad.vertical} は profile allowlist 外`);
+    }
+    if (!ad.offerProfile) errors.push(`${ad.id}: offerProfile 未導出`);
+  }
+  if (errors.length > 0) throw new Error(`affiliate offer profile 検証エラー:\n - ${errors.join("\n - ")}`);
+}
+
 async function main() {
   validateExperiments();
   validateVerticals();
+  validateOfferProfiles();
 
   // --validate-only: R2 書き込みをせず検証のみ (append-affiliate-ads.ts の register ゲート用)。
   // 実行には NODE_OPTIONS='--conditions react-server' が要る (repository が server-only を読むため)。

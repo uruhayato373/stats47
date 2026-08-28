@@ -1,5 +1,51 @@
 import type { AffiliateVertical } from "../constants/affiliate-category";
 
+export type AffiliateOfferLane = "discovery" | "decision" | "unknown";
+export type AffiliateFrictionTier = "F0" | "F1" | "F2" | "F3" | "F4" | "unknown";
+export type AffiliateActionType =
+  | "click"
+  | "download"
+  | "free-registration"
+  | "document-request"
+  | "reservation"
+  | "consultation"
+  | "purchase"
+  | "contract"
+  | "unknown";
+export type AffiliatePersonalDataLevel = "none" | "basic" | "sensitive" | "unknown";
+export type AffiliateHumanContact = "none" | "optional" | "required" | "unknown";
+export type AffiliatePortfolioStatus =
+  | "candidate"
+  | "pilot-ready"
+  | "active"
+  | "paused"
+  | "blocked"
+  | "pending-classification";
+export type AffiliateOfferPageType = "ranking" | "blog" | "theme" | "area";
+
+export interface AffiliateOfferProfile {
+  programRef: string;
+  vertical: AffiliateVertical;
+  /** 同一案件を複数の文脈で使う既存在庫の明示的 allowlist。先頭が canonical vertical。 */
+  allowedVerticals: AffiliateVertical[];
+  lane: AffiliateOfferLane;
+  actionType: AffiliateActionType;
+  frictionTier: AffiliateFrictionTier;
+  conversionCondition: string | null;
+  personalDataLevel: AffiliatePersonalDataLevel;
+  humanContact: AffiliateHumanContact;
+  conditionSource: string | null;
+  verifiedAt: string | null;
+  portfolioStatus: AffiliatePortfolioStatus;
+  allowedPageTypes: AffiliateOfferPageType[];
+}
+
+/** R2 配信 snapshot へ複製する、表示・候補判定に必要な最小フィールド。 */
+export type AffiliateOfferSnapshot = Pick<
+  AffiliateOfferProfile,
+  "lane" | "actionType" | "frictionTier" | "portfolioStatus" | "allowedPageTypes"
+>;
+
 export interface ResolvedAffiliateAd {
   /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
   id: string;
@@ -34,6 +80,10 @@ export interface AffiliateAd {
   id: string;
   title: string;
   htmlContent: string;
+  /** ASPの案件単位の安定参照。旧R2 snapshotとの移行中だけ省略を許容する。 */
+  programRef?: string;
+  /** offer profileからexport時に導出する最小スナップショット。手編集しない。 */
+  offerProfile?: AffiliateOfferSnapshot;
   areaCode: string | null;
   /**
    * 広告意図軸 (10 vertical)。ページ→vertical→広告 の解決に使う SSOT の正フィールド。

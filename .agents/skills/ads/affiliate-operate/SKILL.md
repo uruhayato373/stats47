@@ -20,6 +20,7 @@ Mac / Windows 双方で動く。
 |---|---|---|
 | `status` (既定) | `node .Codex/scripts/ads/affiliate-status.mjs [--asp a8,moshimo,afb]` | なし (read-only) |
 | `status --write` | 同上 `--write` | カタログ JSON を実機値で更新 |
+| `status --verify-moshimo-details` | 同上 `--asp moshimo --verify-moshimo-details` | 一覧に無いもしも案件を詳細ページで確定 (read-only) |
 | `apply` (dry-run) | `node .Codex/scripts/ads/affiliate-apply.mjs --asp <moshimo\|afb> --id <id>` | なし |
 | `apply --commit` | 同上 `--commit` | **提携申請を送信 (不可逆・要オーナー承認)** |
 | `scan` (afb) | `node .Codex/scripts/ads/afb-scan.mjs [--vertical <軸>] [--mode search\|crawl]` | なし (走査 JSON を .local に出力) |
@@ -49,6 +50,13 @@ node .Codex/scripts/ads/affiliate-status.mjs
 - 反映するときだけ `--write` を付ける (既定は read-only)。`--write` は正遷移の反映に加えて
   **name の補完**も行う (placeholder のみ上書き。既存の名前は壊さない)。
 - ログ: `.local/affiliate-status/status.log`
+
+もしもで一覧に無い案件を確定するときは、まず
+`--asp moshimo --verify-moshimo-details` を read-only で実行する。詳細ページの
+「プロモーション詳細」以降にある単独行だけを読み、`未申請 / 否認中 → none`、
+`このプロモーションは終了しました。 → unavailable` と確定する。詳細が `申請中 / 提携中`
+なのに一覧に無い場合は pagination / selector drift として全書き込みを停止する。read-only の結果と
+SID・件数パリティを確認後にだけ、同じ引数へ `--write` を加える。
 
 **出力で必ず確認すること (2026-08-04 の事故を受けて機械化済み)**
 

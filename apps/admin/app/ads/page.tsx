@@ -48,11 +48,10 @@ export default function AdsPage() {
                 sub={d.operations.publishGate.reasons.join(" / ") || "—"}
               />
               <Stat
-                label="GA4 (28日)"
-                value={`${d.operations.ga4Totals?.impressions.toLocaleString() ?? "—"} imp`}
-                sub={`clicks ${d.operations.ga4Totals?.clicks ?? "—"} / CTR ${
-                  d.operations.ga4Totals ? (d.operations.ga4Totals.ctr * 100).toFixed(3) + "%" : "—"
-                }`}
+                label="案件ポートフォリオ"
+                value={d.operations.portfolioGate.status}
+                tone={gateTone(d.operations.portfolioGate.status)}
+                sub={d.operations.portfolioGate.reasons.join(" / ") || "—"}
               />
               <Stat
                 label="鮮度"
@@ -120,6 +119,94 @@ export default function AdsPage() {
           </Section>
         </>
       )}
+
+      <Section title="二層ポートフォリオ">
+        {hasError(d.portfolio) ? (
+          <ErrorNote error={d.portfolio.error} />
+        ) : (
+          <>
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+              <Stat label="案件" value={d.portfolio.totals.offers} sub={`creative ${d.portfolio.totals.ads}`} />
+              <Stat
+                label="未分類"
+                value={d.portfolio.totals.unclassified}
+                tone={d.portfolio.totals.unclassified > 0 ? "warn" : "good"}
+                sub="推測せず配信候補から隔離"
+              />
+              <Stat
+                label="確定収益"
+                value={d.portfolio.confirmedRevenueYen === null ? "—" : `¥${d.portfolio.confirmedRevenueYen.toLocaleString()}`}
+                tone={d.portfolio.confirmedRevenueYen === null ? "warn" : "good"}
+                sub={d.portfolio.confirmedRevenueUnavailableReason ?? "A8確定額"}
+              />
+              <Stat
+                label="欠損指標を持つ案件"
+                value={d.portfolio.unknownMetricOffers}
+                tone={d.portfolio.unknownMetricOffers > 0 ? "warn" : "good"}
+                sub={`共用口座 ${d.portfolio.totals.sharedOutcomePrograms} 件`}
+              />
+            </div>
+            <div className="mt-2 grid gap-2 lg:grid-cols-2">
+              <Table columns={["lane", "案件数"]}>
+                {d.portfolio.lanes.map((lane) => (
+                  <Tr key={lane.lane}>
+                    <Td nowrap>{lane.lane}</Td>
+                    <Td nowrap muted>{lane.count}</Td>
+                  </Tr>
+                ))}
+              </Table>
+              <div className="border border-console-border bg-console-surface px-3 py-2 text-sm">
+                <div className="font-medium">次の1件</div>
+                <div className="mt-1 text-console-fg">{d.portfolio.nextAction?.id ?? "—"}</div>
+                <div className="mt-1 break-all text-xs text-console-muted">
+                  {d.portfolio.nextAction?.programRef ?? d.portfolio.nextAction?.reasons.join(" / ") ?? "—"}
+                </div>
+              </div>
+            </div>
+            {d.portfolio.unclassifiedProgramRefs.length > 0 ? (
+              <details className="mt-2 border border-console-border bg-console-surface px-3 py-2 text-sm">
+                <summary className="cursor-pointer font-medium">
+                  未分類 programRef（{d.portfolio.unclassifiedProgramRefs.length}）
+                </summary>
+                <p className="mt-2 break-all text-xs text-console-muted">
+                  {d.portfolio.unclassifiedProgramRefs.join(" · ")}
+                </p>
+              </details>
+            ) : null}
+          </>
+        )}
+      </Section>
+
+      <Section title="公開パイロット">
+        {hasError(d.pilot) ? (
+          <ErrorNote error={d.pilot.error} />
+        ) : (
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            <Stat
+              label="開始ゲート"
+              value={d.pilot.readiness.status}
+              tone={gateTone(d.pilot.readiness.status)}
+              sub={d.pilot.readiness.reasons.join(" / ") || "—"}
+            />
+            <Stat
+              label="観測判定"
+              value={d.pilot.verdict.status}
+              tone={d.pilot.verdict.status === "ready-to-present" ? "good" : "warn"}
+              sub="勝者は自動選択しない"
+            />
+            <Stat
+              label="必要母数"
+              value={d.pilot.feasibility?.requiredImpressions?.toLocaleString() ?? "—"}
+              sub={d.pilot.feasibility?.projectedDays ? `推定 ${d.pilot.feasibility.projectedDays}日` : "plan確定後に計算"}
+            />
+            <Stat
+              label="次の1件"
+              value={d.pilot.recommendedAction.id}
+              sub={d.pilot.recommendedAction.reasons[0] ?? "—"}
+            />
+          </div>
+        )}
+      </Section>
 
       {/* 在庫 */}
       <Section title="在庫">

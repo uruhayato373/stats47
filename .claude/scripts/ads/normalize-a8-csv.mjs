@@ -198,10 +198,11 @@ function main() {
   //   期間を特定できない run（DL 失敗・対象データ 0 件で CSV ボタンが出ない等）では**比較しない**。
   //   ここで全期間を合算すると別期間の値が混ざって誤報になる。
   const allProgramRows = (log.programPeriod || []).filter(inCurrentPeriod);
+  let siteRow = null;
   if (currentPeriod == null) {
     log.crossCheck = { comparable: false, reason: "この run では期間を特定できない（有効な CSV が無い）" };
   } else {
-    const siteRow = (log.siteSummary || [])
+    siteRow = (log.siteSummary || [])
       .filter(inCurrentPeriod)
       .find((r) => String(r.site || "").includes(cfg.a8.targetSite));
     const allowlisted = allProgramRows.filter((r) => r.program);
@@ -235,6 +236,7 @@ function main() {
 
   const results = readJson(RESULTS, { records: [] });
   const beforeCount = (results.records || []).length;
+  results.schemaVersion = 2;
   results.records = upsertBy(results.records || [], records, KEY.results);
   results.updatedAt = log.updatedAt;
   results.source = "fetch-a8-ui-csv.mjs → normalize-a8-csv.mjs（自動取込。手入力は不要）";

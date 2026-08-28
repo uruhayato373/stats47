@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # バックログ (タスクマスタ)
@@ -58,21 +58,12 @@ updated: 2026-08-27
   対象と検証結果を提示し、別途オーナー承認を得る。Drive source vaultの次revision追加・差し替えもこの境界に含む。
   YouTubeはEXP-006の6週間3本上限を増やさない。
 
-### [ASP-MOSHIMO-DRIFT-01] もしもの提携状態ドリフト29件を確定する
-
-タグ: [収益化] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-08-27]
-
-- **次**: stats47 SID 638943 を assert した read-only 走査を再実行し、実機に無い申請中28件と
-  提携中1件を人が却下・終了・走査漏れへ分類してから、確認済み遷移だけを台帳へ反映する。
-- **停止条件**: 却下と走査漏れを区別できない、行数とID数が不一致、サイト帰属・paginationが不明なら書かない。
-- **完了条件**: 提携中・申請中の実機一覧と台帳のドリフトが0で、stats47 SIDと件数パリティの証拠が残る。
-
 ### [AFF-INTENT-FRICTION-PORTFOLIO-01] 低ハードル・高意図案件を二層で検証できるアフィリエイト基盤
 
 タグ: [収益化] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-08-20]
 
 - **owner**: Claude Code Sonnet（通常実装は high。work package ごとに1回ずつ実行）
-- **再開ポインタ**: `nextWorkPackage=WP0` / `lastCompleted=none`。各WPは完了条件の検証後にだけ
+- **再開ポインタ**: `nextWorkPackage=WP5-public-pilot-owner-gates` / `lastCompleted=WP4+WP5-WP6-local-framework`。各WPは完了条件の検証後にだけ
   `lastCompleted`と`nextWorkPackage`を更新する。長い実行ログは残さず、検証コマンドと結果を1〜3行で記録する。
 - **目的**: 報酬単価中心の候補選定を、`vertical × discovery/decision × 行動負担 × 確定収益`で
   検証できるポートフォリオへ改める。高単価案件は高意図ページに残し、低ハードル案件は別レーンで
@@ -89,13 +80,18 @@ updated: 2026-08-27
     現時点で`.claude/state/metrics/affiliate/{a8-results,a8-report-log}.json`は未生成。A8の既定期間は
     年初から当月までの累計で、normalizerは単月でなければ月次recordsへ写さない。期間フォーム対応前に
     CV・確定額を0または当月実績として扱わない。
-- **2026-08-26 WP0 checkpoint**: GA4取得を`overview` / `experiments` / `pages`の独立reportへ分離し、
-  ad_id tierの成功がvariant取得を隠さないfallbackと標準`pagePath`→page type導出をpure core + fixtureで固定。
-  実験判定は「95%有意」を廃止し、sample・期間・measurement freshness・confound guardを通った場合だけ
-  `ready-to-decide`として人間へ提示する契約へ統一した。広告script全201 test、追加core 27 test、
-  operations state validateはgreen。実stateは`ga4-variant-dimension-missing`で正しくblocked。
-  A8 `--probe-period`はread-only起動したが未ログインを検出して入力・クリック前に停止したため、
-  月/日レンジselectorと`outcomeGate`のfixture化は未完了。`nextWorkPackage=WP0`を維持する。
+- **2026-08-28 WP0完了**: GA4の独立reportと実験guardに加え、A8実機で口座・全4レポートの月/日selectorを確定。
+  `--month 2026-08`の要求期間と4 CSVの実期間が完全一致し、normalize dry-runは104行・reject 0。
+  口座横断click 326 > site-summary 294を検出したためSSOT書込は止め、outcome gateは欠損/累計/超過/不足をblockedに固定。
+  広告script 216 test、web/admin type-check、operations validate、docs:check、consistency error 0がgreen。
+  `docs:check:all`は既存の期限超過等27 warningsを`--fail-on-warn`で検出（本WP起因の新規error/リンク悪化は0）。
+- **2026-08-28 WP1〜WP4・WP5/WP6ローカル枠組み完了**: 263 creativeを131 `programRef`へ結び、
+  全offerを推測なしの`pending-classification`として隔離。型付きprofile、登録gate、通常readerからの実験隔離、
+  GA4 schema v3独立report、A8 programRef join、二層portfolio、admin/単体HTML共通view model、週次artifact、
+  pilot実現可能性・readiness・verdict（勝者自動選択なし）を実装した。広告script 243、Web広告68、admin 11 test、
+  web/admin/scripts type-check、在庫サイズ、compliance、R2非書込export、docs:check、consistency error 0がgreen。
+  実stateはGA4 v2/variant欠損、A8成果のサイト分離不能、未分類131、既存実験1で正しくblocked。
+  公開pilot・成果成熟後の実判定は、これらのgateと案件/ページ/push承認が揃うまで未完了のためカードを維持する。
 - **依存・競合回避**:
   - standalone Claude CodeとCodexを同じ作業ツリーで同時実行しない。開始時に対象fileがdirtyなら
     別worktreeを作るか、現在の変更を所有者がcommitするまで停止する。`git add -A`は禁止。
@@ -703,54 +699,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   プロジェクト向けで stats47 の利用権限は未証明）。`--force`、既存 dimension の archive/delete、
   storageState の CI 持込、外部 secret の無承認変更を行わない。
 - **正典**: `.claude/scripts/google-admin/README.md`
-
-### [SOURCE-TEXT-LINK-INJECTION-01] 出典テキストが第三者スクリプトでリンクに置換される
-
-タグ: [収益化] [種類:不具合] [実行:ユーザー] [検証:npx playwright test --config playwright.smoke.config.ts third-party-dom-injection] [起票:2026-08-04]
-
-- **症状**: チャート footer の「出典: 人口動態統計」の「統計」だけが `href="#"` のリンク + アイコンに
-  なる (SSR HTML には無く hydration 後に出現)。本文でも「人口」「旅行ガイド、旅行記」が同様に置換される。
-  出典の信頼性を損ない、**PR 表記の無いアフィリエイトリンクが引用文の中に生まれる**。
-  証跡 = post-deploy smoke run 30876315662 の error-context.md (aria: `link "統計" /url: "#"`)。
-- **★出所は AdSense の自動広告。オーナーが 2026-08-21 に設定を解除した。**
-  私が同日「AdSense ではない」と書いたのは**測定時期を取り違えた誤り**だった。タイムラインが決定的:
-
-  | 日付       | 出来事                                                 | `adsbygoogle.js`     |
-  | ---------- | ------------------------------------------------------ | -------------------- |
-  | 2026-08-04 | smoke が `link "統計" /url: "#"` を捕捉                | **読み込まれていた** |
-  | 2026-08-16 | `ec944e50b feat(web): pause all AdSense display`       | 以降は読み込まれない |
-  | 2026-08-21 | 私の実測「AdSense は読み込まれていない」「再現しない」 | 読み込まれない       |
-
-  `AdSenseScript` は `ADSENSE_DISPLAY_ENABLED` が true のときだけ `adsbygoogle.js` を挿す。
-  **停止の 5 日後に観測して「犯人ではない」と結論した**が、実際は「停止したから撃てなくなった」
-  だけで、これは自動広告説を**支持する**自然実験だった。現在の状態から過去の事象を推論しない
-  (`evidence-based-judgment.md`)。
-  - A8 リンクマネージャーを疑ったのも取り下げる。公式仕様
-    (support.a8.net/as/linkmanager) は「**広告主サイトへのリンク**をアフィリエイトリンクに
-    置換する」URL 書き換えで、平文の断片をリンク化する機能ではない。
-
-- **2026-08-21 に再現しなかったのは AdSense が 8/16 に停止していたから**。
-  headless / headed × themes / blog / ranking を最大 36 秒スクロールして `#` リンクは 0 件。
-  **停止中の緑は「直った」ではなく「今は撃てない」**を意味する。
-- **完了済 (2026-08-21)**: post-deploy smoke に検知を追加した
-  (`apps/web/tests/smoke/third-party-dom-injection.spec.ts`)。自分たちのコードは `href="#"` を
-  一度も出力しないので、`#` リンクの存在がそのまま外部注入の証拠になる。
-  - **誤検知を 2 回踏んで是正した**。(1) Leaflet のズーム (`a.leaflet-control-zoom-in`)。
-    (2) **自分たちのフォールバック** — `md-content.tsx` の `source-link` /
-    `related-article-link` / banner は記事が href を書き忘れると `href={href ?? "#"}` を出す。
-    最初「自分たちは `#` を出力しない」と書いたのは誤りで、リテラル検索しかしていなかった。
-  - そこで**症状そのもの**で判定する形にした: 「文章の中の 1 語だけがリンクになる」=
-    **親に生のテキストノードが同居しているインラインの `#` リンク**。上の 2 種はどちらも
-    兄弟テキストを持たないので分離できる (兄弟「要素」を数えると Leaflet の + と − が
-    互いを兄弟テキストとみなして再び誤検知する — これも実測で踏んだ)。
-  - **両方向を実測**: 本番 3 ページで緑 / 本文へ `#` リンクを 1 本注入すると赤
-    (文脈つきの指摘文が出る)。緑であること自体が「今は起きていない」という観測になる。
-  - 副産物: hydration 前に append したリンクは React の再描画で消えるため、注入は
-    hydration 後にしか成立しない。settle は 12 秒。
-- **残り**: **AdSense を再開したとき**に再発しないことを確認する。停止中の緑は証拠にならないので、
-  再開手順に smoke の実行を紐づけた (`affiliate-ads-standards.md` §12)。自動広告の解除は
-  実施済みなので、再開後の smoke が緑なら解決とみなす。
-- **完了条件**: AdSense 再開後の post-deploy smoke で、出典・本文がリンク化されないことを示す。
 
 ## 🟡 中 — 2〜3ヶ月以内
 

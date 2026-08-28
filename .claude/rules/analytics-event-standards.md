@@ -165,6 +165,10 @@ npm run google-admin:audit-api
 >   カスタムディメンションは**イベント名ではなくパラメータ名**に紐づくため、イベント改名では
 >   再登録不要と考えている (未検証・上記の確認で判定する)。
 > - 取得コマンド: `node .claude/scripts/ads/fetch-affiliate-ga4.cjs [days]`。
+> - 保存schemaはv3。`overview`（ad/vertical/position）、`experiments`、`pages`を独立配列で持ち、
+>   `reportQuality`もreport別に保持する。一つのfallback成功で他の欠損を隠さない。
+> - portfolio/pilot判定はv3だけを受理する。旧schema、variant report欠損、page report欠損は0件へ丸めず
+>   measurement gate blockedとする。
 >   **窓が登録日 (2026-07-06) または改名日 (2026-07-28) より前に伸びると (not set) / 0 件が混ざる**ので、
 >   それ以降に絞って読むこと。
 >

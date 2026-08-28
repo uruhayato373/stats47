@@ -10,14 +10,14 @@
  * routing・freshness・期限・sample 到達の判定はすべてここで決定的に行い、モデルに判断させない。
  */
 
-export const OPERATIONS_SCHEMA_VERSION = 2;
+export const OPERATIONS_SCHEMA_VERSION = 3;
 
 /**
  * GA4 snapshot の要求 schema (doc 42 §10.1)。v2 未満 (= 旧 `ad_impression` 汚染データ) は
  * 値が新鮮でも `ga4-schema-unsupported` で blocked にする。
  * 実測根拠 (2026-07-26 snapshot): 旧 schema の imp 13,115 は全件 AdSense 由来で分母にならない。
  */
-export const GA4_SNAPSHOT_SCHEMA_VERSION = 2;
+export const GA4_SNAPSHOT_SCHEMA_VERSION = 3;
 export const MEASUREMENT_EPOCH = "affiliate-impression-v1";
 export const IMPRESSION_EVENT_NAME = "affiliate_impression";
 /** `(not set)`/`(unset)` vertical の許容比率 (doc 42 §10.2 の named constant)。 */
@@ -82,6 +82,15 @@ export function evaluateMeasurementGate({ ga4, inventory, nowIso, hasActiveExper
       }
       if (ga4.eventNames?.impression !== IMPRESSION_EVENT_NAME) {
         reasons.push(`ga4-impression-event-mismatch(${ga4.eventNames?.impression ?? "none"})`);
+      }
+      if (!Array.isArray(ga4.overview)) reasons.push("ga4-overview-report-missing");
+      if (!Array.isArray(ga4.experiments)) reasons.push("ga4-experiments-report-missing");
+      if (!Array.isArray(ga4.pages)) reasons.push("ga4-pages-report-missing");
+      for (const reportName of ["overview", "experiments", "pages"]) {
+        const quality = ga4.reportQuality?.[reportName];
+        if (!quality || !Array.isArray(quality.dimensions) || !Array.isArray(quality.failures)) {
+          reasons.push(`ga4-${reportName}-quality-missing`);
+        }
       }
       if (!((ga4.totals?.impressions ?? 0) > 0)) reasons.push("ga4-impressions-zero");
       if (!((ga4.quality?.recognizedVerticalImpressions ?? 0) > 0)) {
@@ -330,6 +339,7 @@ export function buildOperationsState({
   experiments,
   measurementGate,
   publishGate = null,
+  portfolio = null,
 }) {
   const coverage = {
     gapVerticals: inventory?.coverage?.gapVerticals ?? [],
@@ -358,6 +368,11 @@ export function buildOperationsState({
       ga4Days: measurementGate.freshness.ga4Days,
     },
     measurementGate: { status: measurementGate.status, reasons: measurementGate.reasons },
+    portfolioGate: portfolio?.gates?.portfolio ?? {
+      status: "blocked",
+      reasons: ["affiliate-portfolio-state-missing"],
+    },
+    portfolioSnapshot: portfolio?.snapshotPath ?? null,
     publishGate: resolvedPublishGate,
     coverage,
     directPlacements,
@@ -392,6 +407,12 @@ export function validateOperationsState(state) {
   }
   if (!state.publishGate || !["ready", "blocked"].includes(state.publishGate.status)) {
     push("publishGate.status が ready|blocked でない");
+  }
+  if (!state.portfolioGate || !["ready", "blocked"].includes(state.portfolioGate.status)) {
+    push("portfolioGate.status が ready|blocked でない");
+  }
+  if (state.portfolioGate?.status === "blocked" && (state.portfolioGate.reasons ?? []).length === 0) {
+    push("portfolioGate blocked なのに reasons が空");
   }
   if (state.publishGate?.status === "blocked" && (state.publishGate.reasons ?? []).length === 0) {
     push("publishGate blocked なのに reasons が空");

@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
+    "affiliate:a8-outcome:check": "node .claude/scripts/ads/check-a8-outcome-gate.mjs --json",
     "coconala-publish": "node .claude/scripts/coconala/coconala-publish.mjs",
     "coconala-edit": "node .claude/scripts/coconala/coconala-edit.mjs",
     "coconala-delete-draft": "node .claude/scripts/coconala/coconala-delete-draft.mjs",
