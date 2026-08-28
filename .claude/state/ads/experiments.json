@@ -9,7 +9,7 @@
     {
       "experimentId": "blog-inbody-format",
       "kind": "code",
-      "status": "collecting",
+      "status": "closed",
       "surface": "blog-article-body",
       "hypothesis": "ブログ本文の広告を 300x250 バナーにすると、テキストリンクより CTR が上がる",
       "variantIds": ["text", "banner"],
@@ -18,8 +18,8 @@
         "banner": "同じ位置に 300x250 バナー 3 枚",
         "end-banner": "記事末尾のバナー。format に関わらず常設なので A/B の対象外 (variantIds に入れない参照系列)"
       },
-      "assignment": "slug のハッシュで記事ごとに固定 (pickInBodyAdFormat)。公開 432 記事で text 219 / banner 213",
-      "implementation": "apps/web/src/features/blog/utils/in-body-ad-format.ts + components/md-content.tsx",
+      "assignment": "終了済み。本文は全記事で banner 固定",
+      "implementation": "apps/web/src/features/blog/utils/inline-affiliate-banner.ts + components/md-content.tsx",
       "measurement": "GA4 affiliate_impression / affiliate_click の experiment_id=blog-inbody-format, variant_id",
       "startedAt": "2026-08-04",
       "minSamplePerVariant": 500,
@@ -29,7 +29,14 @@
       "decisionRule": "sample・期間・freshness・confound guard通過後にCTRと相対差を提示し、人間が判断する",
       "confounds": [],
       "owner": "improvement-triage",
-      "notes": "★2026-08-04 に計装の断絶がある (未計装 4 コンポーネントの是正・vertical 汚染の是正・枠拡張を同時に実施)。この日より前の窓と比較しない。close は weight ではなくコード変更 PR で行う"
+      "winnerVariantId": "banner",
+      "closedAt": "2026-08-28",
+      "decisionSnapshot": {
+        "observedAt": "2026-08-28T06:28:33.210Z",
+        "text": { "impressions": 2683, "clicks": 0, "ctr": 0 },
+        "banner": { "impressions": 821, "clicks": 1, "ctr": 0.001218026796589525 }
+      },
+      "notes": "2026-08-28 オーナーが banner を採用。2026-08-04より前は計装断絶のため比較窓に含めない。code実験のためweightではなく本文分岐を撤去して固定した"
     }
   ]
 }

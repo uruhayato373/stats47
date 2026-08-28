@@ -23,7 +23,7 @@ import {
 } from "@/features/ads";
 import { TAG_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
 import { RakutenItemsCard, resolveAffiliateBanners, resolveAffiliateBannersByCategory, resolveAffiliateTextAdsByTagKeys } from "@/features/ads/server";
-import { BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, pickInBodyAdFormat, type Article } from "@/features/blog";
+import { BLOG_IN_BODY_BANNER_COUNT, BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     RelatedRankingsSection,
     listLatestArticles,
@@ -144,16 +144,12 @@ export default async function BlogPostPage({ params }: PageProps) {
         "sidebar-bottom",
         4,
     );
-    // ★ 2026-08-04: 本文 A/B (テキスト版 / バナー版) と記事末尾バナー、右レールのバナーに使う。
-    //   本文 3 + 末尾 1 + サイドバー 2 = 最大 6 件を 1 回で解決し、用途ごとに切り出す
+    // 本文3 + 末尾1 + サイドバー2 = 最大6件を1回で解決し、用途ごとに切り出す。
     //   (同一 vertical では priority 降順で返るため、先頭ほど確定EPC が高い順に当たる)。
-    const affiliateBannerPool = await resolveAffiliateBanners(tagKeys, 6);
-    const inBodyFormat = pickInBodyAdFormat(slug);
-    // banner 版は本文 3 + 末尾 1 = 4 件、text 版は末尾 1 件だけ本文側で消費する。
-    const bodyBannerCount = inBodyFormat === "banner" ? 4 : 1;
-    const articleBanners = affiliateBannerPool.slice(0, bodyBannerCount);
+    const affiliateBannerPool = await resolveAffiliateBanners(tagKeys, BLOG_IN_BODY_BANNER_COUNT + 2);
+    const articleBanners = affiliateBannerPool.slice(0, BLOG_IN_BODY_BANNER_COUNT);
     // 右レールは「バナーだけ」。本文で使った分より後ろを回して重複を避ける。
-    const sidebarBanners = affiliateBannerPool.slice(bodyBannerCount, bodyBannerCount + 2);
+    const sidebarBanners = affiliateBannerPool.slice(BLOG_IN_BODY_BANNER_COUNT, BLOG_IN_BODY_BANNER_COUNT + 2);
     const affiliateVertical = tagKeys.map((t) => TAG_AFFILIATE_MAP[t]).find(Boolean) ?? null;
     // relatedArticles は tagKeys 依存、articleTagsMap は relatedArticles 依存 (チェーン)
     const relatedArticles = await getRelatedArticles(tagKeys, slug);

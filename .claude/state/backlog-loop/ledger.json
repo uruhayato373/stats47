@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T03:12:50.666Z",
+  "updatedAt": "2026-08-28T07:38:46.530Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -1499,7 +1499,7 @@
     },
     "AFF-INTENT-FRICTION-PORTFOLIO-01": {
       "class": "impl-large",
-      "status": "open",
+      "status": "completed",
       "sourceFile": null,
       "title": null,
       "attempts": [
@@ -1524,15 +1524,43 @@
             "A8へ手動ログイン後にread-only --probe-periodを再実行",
             "WP0を完了してWP1へ進む"
           ]
+        },
+        {
+          "at": "2026-08-28T07:38:46.530Z",
+          "runId": null,
+          "model": "codex-gpt5",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/ads/__tests__/*.test.mjs",
+              "npx vitest run blog+ads",
+              "npm run type-check --workspace apps/web",
+              "npm run type-check --workspace apps/admin",
+              "npm run type-check:scripts",
+              "npm test --workspace apps/admin",
+              "npx tsx audit-affiliate-inventory.ts --json --check-size",
+              "npx tsx audit-affiliate-compliance.ts --check",
+              "npm run docs:check",
+              "npm run build --workspace apps/web",
+              "node check-agent-skill-consistency.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "banner winner fixed from GA4 snapshot (text 2683/0; banner 821/1); A8 2026-08 site attribution checks pass; operations measurement/publish/portfolio ready; pilot not-feasible because eligible discovery/decision lane pair missing, so no unapproved pilot was published; ads 248, web",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
-        "lastReason": "A8未ログインで期間selector/outcomeGateの実機観察ができず、WP0未完了。WP1-WP6も残存。",
-        "since": "2026-08-26T09:04:05.950Z"
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-28T07:38:46.530Z"
     },
     "THEME-EVIDENCE-LENS-ROLLOUT-01": {
       "class": "impl-large",

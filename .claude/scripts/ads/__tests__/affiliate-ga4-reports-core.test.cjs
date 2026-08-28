@@ -5,6 +5,7 @@ const test = require("node:test");
 
 const {
   REPORT_SPECS,
+  aggregatePageRows,
   derivePageType,
   fetchAllReports,
   fetchReportWithFallback,
@@ -28,6 +29,26 @@ test("overview が最上位tierで成功しても experiments と pages を独�
   assert.ok(calls.some((dimensions) => dimensions.includes("customEvent:variant_id")));
   assert.ok(calls.some((dimensions) => dimensions.includes("pagePath")));
   assert.ok(reports.experiments.dimensions.includes("variant_id"));
+});
+
+test("pages report は高cardinalityな広告dimensionを混ぜずページ単位で取得する", () => {
+  assert.deepEqual(REPORT_SPECS.pages.tiers[0], ["eventName", "pagePath"]);
+  assert.equal(
+    REPORT_SPECS.pages.tiers.some((dimensions) =>
+      dimensions.some((dimension) => dimension.startsWith("customEvent:")),
+    ),
+    false,
+  );
+});
+
+test("既存の高粒度page行もページ単位へ集約して派生値を再計算する", () => {
+  assert.deepEqual(
+    aggregatePageRows([
+      { pagePath: "/blog/example", ad_id: "a", impressions: 3, clicks: 1, ctr: 1 / 3 },
+      { pagePath: "/blog/example", ad_id: "b", impressions: 7, clicks: 1, ctr: 1 / 7 },
+    ]),
+    [{ pagePath: "/blog/example", impressions: 10, clicks: 2, ctr: 0.2, page_type: "blog" }],
+  );
 });
 
 test("各reportのfallbackは他reportのdimension可用性を隠さない", async () => {

@@ -326,30 +326,39 @@ export function normalizeA8Csv(csvText, { reportKey, cfg, fetchedAt = null } = {
 
 /**
  * 口座横断レポートから抽出した対象サイト分を、サイト別レポート（真実源）と突合する。
- * 抽出分がサイト別の対象サイト行を**超えていたら** 他サイトの混入を疑う。
+ * 両サイト共用プログラムはサイト別の内訳を持たないため、専用分を下限、共用込みを上限にする。
+ * 専用分だけでサイト値を超えた場合、または共用込みでもサイト値に届かない場合だけ不整合とする。
  * 判定は呼び出し側（auditor）が行うため、ここでは差分を返すだけ。
  */
-export function crossCheckAgainstSite(siteRow, allowlistedRows) {
+export function crossCheckAgainstSite(siteRow, allowlistedRows, { sharedProgramIds = [] } = {}) {
   if (!siteRow) return { comparable: false, reason: "サイト別レポートが無い" };
-  const sum = (f) => allowlistedRows.reduce((s, r) => s + (typeof r[f] === "number" ? r[f] : 0), 0);
+  const sharedIds = new Set(sharedProgramIds);
+  const exclusiveRows = allowlistedRows.filter((row) => !sharedIds.has(row.programId));
+  const sharedRows = allowlistedRows.filter((row) => sharedIds.has(row.programId));
+  const sum = (rows, field) => rows.reduce((total, row) => total + (typeof row[field] === "number" ? row[field] : 0), 0);
   const fields = ["clicks", "conversions", "grossRevenueYen", "approved", "revenueYen"];
   const deltas = {};
   let exceeded = false;
+  let hasShortfall = false;
   for (const f of fields) {
     const site = typeof siteRow[f] === "number" ? siteRow[f] : null;
-    const picked = sum(f);
-    deltas[f] = { site, picked, delta: site == null ? null : picked - site };
-    if (site != null && picked > site) exceeded = true;
+    const exclusive = sum(exclusiveRows, f);
+    const shared = sum(sharedRows, f);
+    const lowerBound = exclusive;
+    const upperBound = exclusive + shared;
+    const picked = upperBound;
+    deltas[f] = { site, picked, exclusive, shared, lowerBound, upperBound, delta: site == null ? null : picked - site };
+    if (site != null && lowerBound > site) exceeded = true;
+    if (site != null && upperBound < site) hasShortfall = true;
   }
   // 不足（site > picked）= allowlist で説明できない対象サイトの活動＝**未登録プログラムの疑い**。
   // 口座横断レポートには他サイトのプログラムも並ぶため「未写像 = 取りこぼし」とは言えない。
   // 取りこぼしの唯一の客観シグナルがこの不足分。
   const shortfall = {
-    clicks: deltas.clicks.site == null ? null : deltas.clicks.site - deltas.clicks.picked,
-    revenueYen: deltas.revenueYen.site == null ? null : deltas.revenueYen.site - deltas.revenueYen.picked,
+    clicks: deltas.clicks.site == null ? null : Math.max(0, deltas.clicks.site - deltas.clicks.upperBound),
+    revenueYen: deltas.revenueYen.site == null ? null : Math.max(0, deltas.revenueYen.site - deltas.revenueYen.upperBound),
   };
-  const hasShortfall = (shortfall.clicks ?? 0) > 0 || (shortfall.revenueYen ?? 0) > 0;
-  return { comparable: true, exceeded, hasShortfall, shortfall, deltas };
+  return { comparable: true, exceeded, hasShortfall, withinBounds: !exceeded && !hasShortfall, shortfall, deltas };
 }
 
 /**
@@ -425,10 +434,11 @@ export function parsePeriodFromFilename(name) {
  * `notAttributable` として理由付きで返す（累計値を特定月の実績として書き込まない）。
  * 写像できない（programIdMap に無い）行は unmapped として返す（黙って捨てない）。
  */
-export function toResultsRecords(programRows, { singleMonth = null } = {}) {
+export function toResultsRecords(programRows, { singleMonth = null, sharedProgramIds = [] } = {}) {
   const records = [];
   const unmapped = [];
   const notAttributable = [];
+  const sharedIds = new Set(sharedProgramIds);
   for (const r of programRows) {
     const month = r.month ?? singleMonth;
     if (!r.program) {
@@ -437,6 +447,16 @@ export function toResultsRecords(programRows, { singleMonth = null } = {}) {
         programId: r.programId ?? null,
         programRaw: r.programRaw,
         reason: "programIdMap に未登録",
+      });
+      continue;
+    }
+    if (sharedIds.has(r.programId)) {
+      notAttributable.push({
+        program: r.program,
+        programId: r.programId,
+        programRaw: r.programRaw,
+        period: r.period ?? null,
+        reason: "両サイト共用プログラムのためstats47単独成果へ配賦できない",
       });
       continue;
     }

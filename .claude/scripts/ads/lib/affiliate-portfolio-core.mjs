@@ -181,8 +181,11 @@ export function buildAffiliatePortfolioState({
     blog: compactQueue(buildAffiliateOfferQueues({ ...queueInputs, pageType: "blog", vertical })),
   }));
 
+  const blockingCoverageReasons = coverageGate.reasons.filter(
+    (reason) => !reason.startsWith("offer-profile-unclassified:"),
+  );
   const portfolioReasons = [
-    ...(coverageGate.status === "blocked" ? coverageGate.reasons : []),
+    ...blockingCoverageReasons,
     ...(ga4Gate.status === "blocked" ? ga4Gate.reasons : []),
     ...(resolvedOutcomeGate.status === "blocked" ? resolvedOutcomeGate.reasons : []),
   ];
@@ -197,9 +200,15 @@ export function buildAffiliatePortfolioState({
   const hasEligibleCandidate = queueContexts.some(
     (context) => context.ranking.discovery.length + context.ranking.decision.length + context.blog.discovery.length + context.blog.decision.length > 0,
   );
+  const hasEligibleLanePair = queueContexts.some(
+    (context) =>
+      (context.ranking.discovery.length > 0 && context.ranking.decision.length > 0) ||
+      (context.blog.discovery.length > 0 && context.blog.decision.length > 0),
+  );
   if (!hasEligibleCandidate) portfolioReasons.push("eligible-candidate-missing");
   const portfolioGate = { status: portfolioReasons.length === 0 ? "ready" : "blocked", reasons: [...new Set(portfolioReasons)] };
   const pilotReasons = [...portfolioGate.reasons];
+  if (!hasEligibleLanePair) pilotReasons.push("eligible-lane-pair-missing");
   if (activeExperiments.length > 0) pilotReasons.push("existing-affiliate-experiment-active");
 
   return {
@@ -225,6 +234,8 @@ export function buildAffiliatePortfolioState({
     },
     offers,
     ads: adRows,
+    // ページ粒度だけを保持する。広告別の数値は ads/offers に既にあるため、
+    // page×ad×vertical×position の高cardinalityな複製を state に持ち込まない。
     placements: Array.isArray(ga4?.pages) && ga4Gate.status === "ready" ? ga4.pages : [],
     queueContexts,
     recommendedActions: buildPortfolioRecommendedActions({

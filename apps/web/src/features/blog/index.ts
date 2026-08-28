@@ -21,8 +21,6 @@ export { BlogAuthorProfileCard } from './components/BlogAuthorProfileCard';
 // ユーティリティ
 export { generateBlogMetadata } from './utils/generate-blog-metadata';
 export {
-  IN_BODY_AD_EXPERIMENT_ID,
-  pickInBodyAdFormat,
-  type InBodyAdFormat,
+  BLOG_IN_BODY_BANNER_COUNT,
   type InlineAffiliateBanner,
-} from './utils/in-body-ad-format';
+} from './utils/inline-affiliate-banner';

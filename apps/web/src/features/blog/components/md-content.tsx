@@ -32,13 +32,7 @@ import {
 } from "@/lib/google-adsense";
 
 import { buildHeadingSlug } from "../lib/heading-slug";
-// ★ A/B の共有定義は client 境界の外に置く (server component からも呼ぶため)。
-import {
-    IN_BODY_AD_EXPERIMENT_ID,
-    pickInBodyAdFormat,
-    type InBodyAdFormat,
-    type InlineAffiliateBanner,
-} from "../utils";
+import { type InlineAffiliateBanner } from "../utils";
 
 import { preprocessCallouts } from "./md-preprocessor";
 import { MarkdownRankingTable } from "./tables/MarkdownRankingTable";
@@ -87,11 +81,6 @@ interface MDContentProps {
      * `<affiliate-banner index="N">` が順に 1 件ずつ消費する。
      */
     affiliateBanners?: InlineAffiliateBanner[];
-    /**
-     * 本文中の広告フォーマット (A/B)。`text` は従来のテキストリンク、`banner` は 300x250。
-     * **記事末尾は format に関係なく常にバナー**。割当は slug のハッシュで決まる (記事ごとに固定)。
-     */
-    inBodyFormat?: InBodyAdFormat;
 }
 
 interface ComponentProps {
@@ -105,7 +94,6 @@ function makeMdComponents(
     affiliateTextAds?: AffiliateTextAdData[],
     affiliateVertical?: AffiliateCategory | null,
     affiliateBanners?: InlineAffiliateBanner[],
-    inBodyFormat?: InBodyAdFormat,
 ): Record<string, React.ComponentType<ComponentProps>> {
     return {
         // 見出し・リンクの見た目は globals.css の .blog-news-article が持つ (Soft Editorial)。
@@ -329,8 +317,6 @@ function makeMdComponents(
                         ads={[ad]}
                         affiliateCategory={affiliateVertical ?? null}
                         position="article-inline"
-                        experimentId={IN_BODY_AD_EXPERIMENT_ID}
-                        variantId={inBodyFormat ?? "text"}
                     />
                 </div>
             );
@@ -358,8 +344,6 @@ function makeMdComponents(
                             position={slot === "end" ? "article-end" : "article-inline"}
                             adId={b.id}
                             creativeSize={`${b.width}x${b.height}`}
-                            experimentId={IN_BODY_AD_EXPERIMENT_ID}
-                            variantId={slot === "end" ? "end-banner" : (inBodyFormat ?? "text")}
                         />
                     </div>
                 );
@@ -484,11 +468,9 @@ function injectAdSlots(md: string): string {
  * 読了文脈に乗るのは本文中なので、テキストリンクだけでなく画像バナーも本文へ出す。
  * 手動で `<affiliate-text` / `<affiliate-banner` を置いた記事は一切触らない。
  *
- * 配置 (2026-08-04 改訂):
- *   - 本文: h2 見出しの 2・4・6 番目の直前に最大 3 枠。**format が `text` ならテキスト、
- *     `banner` なら 300x250 バナー**を出す (slug ハッシュで決まる A/B。experiment_id
- *     `blog-inbody-format` で GA4 比較する)。
- *   - 記事末尾: **format に関わらず常にバナー 1 枠** (読了直後は完読者で意図が強い)。
+ * 配置:
+ *   - 本文: h2 見出しの2・4・6番目の直前に最大3枠の300x250バナー。
+ *   - 記事末尾: バナー1枠（読了直後は完読者で意図が強い）。
  *
  * `injectAdSlots` が使う h2 (2 番目・中盤) と重ならないよう、衝突する位置は 1 つ後ろの h2 へずらす。
  * 在庫を超えては挿入しない — 空枠を作らないため。
@@ -497,11 +479,11 @@ function injectAdSlots(md: string): string {
 // 位置計算・衝突回避・在庫不足時の抑制が絡み、目視では退行を検知できないため。
 export function injectAffiliateUnits(
     md: string,
-    opts: { textCount: number; bannerCount: number; format: InBodyAdFormat },
+    opts: { bannerCount: number },
 ): string {
-    const { textCount, bannerCount, format } = opts;
-    // 本文枠に使える在庫。banner 版は末尾バナー 1 本を残す。
-    const bodyStock = format === "banner" ? Math.max(0, bannerCount - 1) : textCount;
+    const { bannerCount } = opts;
+    // 記事末尾のバナー1本を残し、残りを本文枠へ使う。
+    const bodyStock = Math.max(0, bannerCount - 1);
     const hasEndBanner = bannerCount > 0;
     if (bodyStock <= 0 && !hasEndBanner) return md;
     // 手動配置済みの記事は触らない
@@ -538,18 +520,15 @@ export function injectAffiliateUnits(
 
     const result = [...lines];
     // 行番号のズレを防ぐため後ろから挿入する
-    const unit = (i: number) =>
-        format === "banner"
-            ? `<affiliate-banner index="${i}"></affiliate-banner>`
-            : `<affiliate-text index="${i}"></affiliate-text>`;
+    const unit = (i: number) => `<affiliate-banner index="${i}"></affiliate-banner>`;
     let slot = targets.length - 1;
     for (const idx of [...targets].sort((a, b) => b - a)) {
         result.splice(idx, 0, "", unit(slot), "");
         slot--;
     }
-    // 記事末尾は常にバナー。本文が banner 版なら本文で使った分の次を消費する。
+    // 記事末尾は本文で使った分の次を消費する。
     if (hasEndBanner) {
-        const endIndex = format === "banner" ? targets.length : 0;
+        const endIndex = targets.length;
         result.push("", `<affiliate-banner index="${endIndex}" slot="end"></affiliate-banner>`, "");
     }
     return result.join("\n");
@@ -563,10 +542,7 @@ export function MDContent({
     affiliateTextAds,
     affiliateVertical,
     affiliateBanners,
-    inBodyFormat,
 }: MDContentProps) {
-    // 呼び出し元が渡さない場合も slug から決定的に割り当てる (記事ごとに固定)。
-    const format = inBodyFormat ?? pickInBodyAdFormat(slug);
     const mdComponents = useMemo(
         () =>
             makeMdComponents(
@@ -575,21 +551,18 @@ export function MDContent({
                 affiliateTextAds,
                 affiliateVertical,
                 affiliateBanners,
-                format,
             ),
-        [slug, affiliateBannersByCategory, affiliateTextAds, affiliateVertical, affiliateBanners, format],
+        [slug, affiliateBannersByCategory, affiliateTextAds, affiliateVertical, affiliateBanners],
     );
     const processed = useMemo(
         () =>
             injectAffiliateUnits(
                 injectAdSlots(preprocessCallouts(source, relatedArticleTitles)),
                 {
-                    textCount: affiliateTextAds?.length ?? 0,
                     bannerCount: affiliateBanners?.length ?? 0,
-                    format,
                 },
             ),
-        [source, relatedArticleTitles, affiliateTextAds, affiliateBanners, format],
+        [source, relatedArticleTitles, affiliateBanners],
     );
     return (
         <article
