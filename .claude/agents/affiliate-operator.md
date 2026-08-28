@@ -32,6 +32,9 @@ model: sonnet
   共通リンクが混ざり超集合になる。実行のたびに以下を確認する:
   - `一覧 N 件 / ID 累計 N 件` が一致しているか (ズレたら `⚠` が出る → config を直してから `--write`)
   - `提携中と申請中の両方に出る ID` の警告 (幻。自動除外されるが頻発ならスコープ設定が誤り)
+  - もしもの不在案件は `--verify-moshimo-details` で詳細ページを確認する。ナビの状態語は無視し、
+    「プロモーション詳細」以降の単独行だけを読む。詳細が申請中/提携中なのに一覧に無ければ
+    pagination / selector drift として書き込まず停止する。
 - **apply** — `affiliate-apply.mjs`。もしも / afb の提携申請。dry-run が plan を書き、
   `--plan <id> --commit` でその 1 件だけを送信する。journal に `sent` が残る operation は
   自動再送しない。ASP profile は排他 lock を取る (`affiliate-ops.mjs`)。

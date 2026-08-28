@@ -14,6 +14,8 @@ import {
   zipNamesWithIds,
   namesLikelySame,
   parseAfbBlocks,
+  parseMoshimoDetailStatus,
+  shouldReviewAbsentStatus,
   isPlaceholderName,
   validateCatalog,
 } from "../lib/affiliate-status-core.mjs";
@@ -153,6 +155,51 @@ test("複数ブロックを順に取る", () => {
       ["2", "プロモB"],
     ],
   );
+});
+
+// ─── parseMoshimoDetailStatus ───────────────────────────────────
+test("もしも詳細は見出しより前のナビ状態を無視し、本文の状態だけを読む", () => {
+  const body = [
+    "申請中",
+    "提携中",
+    "プロモーション詳細",
+    "否認中",
+  ].join("\n");
+  assert.deepEqual(parseMoshimoDetailStatus(body), {
+    ok: true,
+    status: "none",
+    rawStatus: "否認中",
+    reason: null,
+  });
+});
+
+test("もしも詳細の5種類の実機状態をカタログ語彙へ変換する", () => {
+  const cases = [
+    ["提携中", "approved"],
+    ["申請中", "applying"],
+    ["未申請", "none"],
+    ["否認中", "none"],
+    ["このプロモーションは終了しました。", "unavailable"],
+  ];
+  for (const [raw, expected] of cases) {
+    const result = parseMoshimoDetailStatus(`プロモーション詳細\n${raw}`);
+    assert.equal(result.ok, true, raw);
+    assert.equal(result.status, expected, raw);
+    assert.equal(result.rawStatus, raw, raw);
+  }
+});
+
+test("もしも詳細の見出し・状態が不明または曖昧なら fail-closed", () => {
+  assert.equal(parseMoshimoDetailStatus("提携中").ok, false);
+  assert.equal(parseMoshimoDetailStatus("プロモーション詳細\n広告主情報").ok, false);
+  assert.equal(parseMoshimoDetailStatus("プロモーション詳細\n提携中\n申請中").ok, false);
+});
+
+test("詳細で確定した none / unavailable は一覧不在レビューへ戻さない", () => {
+  assert.equal(shouldReviewAbsentStatus("none"), false);
+  assert.equal(shouldReviewAbsentStatus("unavailable"), false);
+  assert.equal(shouldReviewAbsentStatus("applying"), true);
+  assert.equal(shouldReviewAbsentStatus("approved"), true);
 });
 
 // ─── isPlaceholderName ──────────────────────────────────────────
