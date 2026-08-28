@@ -20,7 +20,9 @@
     "paths": {
       "@/*": ["./*"],
       "@stats47/components": ["../../packages/components/src"],
-      "@stats47/components/*": ["../../packages/components/src/*"]
+      "@stats47/components/*": ["../../packages/components/src/*"],
+      "@stats47/data-configs": ["../../packages/data-configs/src"],
+      "@stats47/data-configs/*": ["../../packages/data-configs/src/*"]
     }
   },
   "include": [

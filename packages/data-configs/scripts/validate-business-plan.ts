@@ -1,0 +1,215 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import {
+  BUSINESS_PLAN_2026,
+  BUSINESS_PLAN_DECISION_STATUSES,
+  BUSINESS_PLAN_MEASUREMENT_STATUSES,
+  BUSINESS_PLAN_WORK_STATUSES,
+} from '../src/business-plan';
+
+const repoRoot = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '../../..'
+);
+const errors: string[] = [];
+
+function unique<T>(items: readonly T[], label: string): void {
+  if (new Set(items).size !== items.length)
+    errors.push(`${label}: 重複があります`);
+}
+
+function walkSkills(dir: string): Map<string, string> {
+  const found = new Map<string, string>();
+  if (!fs.existsSync(dir)) return found;
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      for (const [name, skillPath] of walkSkills(full))
+        found.set(name, skillPath);
+    } else if (entry.name === 'SKILL.md') {
+      const text = fs.readFileSync(full, 'utf8');
+      const name = text.match(/^name:\s*(.+)$/m)?.[1]?.trim();
+      if (name) found.set(name, path.relative(repoRoot, full));
+    }
+  }
+  return found;
+}
+
+const agentIds = new Set(
+  fs
+    .readdirSync(path.join(repoRoot, '.claude/agents'))
+    .filter((name) => name.endsWith('.md') && name !== 'README.md')
+    .map((name) => name.replace(/\.md$/, ''))
+);
+const skillMap = walkSkills(path.join(repoRoot, '.claude/skills'));
+const metricIds = new Set(
+  BUSINESS_PLAN_2026.metrics.map((metric) => metric.id)
+);
+
+if (BUSINESS_PLAN_2026.decisions.length !== 25) {
+  errors.push(
+    `decisions: expected 25, got ${BUSINESS_PLAN_2026.decisions.length}`
+  );
+}
+if (BUSINESS_PLAN_2026.contentOpportunities.length !== 100) {
+  errors.push(
+    `contentOpportunities: expected 100, got ${BUSINESS_PLAN_2026.contentOpportunities.length}`
+  );
+}
+if (BUSINESS_PLAN_2026.xIdeas.length !== 30) {
+  errors.push(`xIdeas: expected 30, got ${BUSINESS_PLAN_2026.xIdeas.length}`);
+}
+if (BUSINESS_PLAN_2026.noteProducts.length !== 15) {
+  errors.push(
+    `noteProducts: expected 15, got ${BUSINESS_PLAN_2026.noteProducts.length}`
+  );
+}
+
+unique(
+  BUSINESS_PLAN_2026.decisions.map((item) => item.chapter),
+  'decision.chapter'
+);
+unique(
+  BUSINESS_PLAN_2026.documents.map((item) => item.id),
+  'document.id'
+);
+unique(
+  BUSINESS_PLAN_2026.metrics.map((item) => item.id),
+  'metric.id'
+);
+unique(
+  BUSINESS_PLAN_2026.events.map((item) => item.id),
+  'event.id'
+);
+unique(
+  BUSINESS_PLAN_2026.initiatives.map((item) => item.id),
+  'initiative.id'
+);
+unique(
+  BUSINESS_PLAN_2026.pilotSpecs.map((item) => item.id),
+  'pilotSpec.id'
+);
+unique(
+  BUSINESS_PLAN_2026.contentOpportunities.map((item) => item.id),
+  'content.id'
+);
+unique(
+  BUSINESS_PLAN_2026.xIdeas.map((item) => item.id),
+  'xIdea.id'
+);
+unique(
+  BUSINESS_PLAN_2026.noteProducts.map((item) => item.id),
+  'noteProduct.id'
+);
+
+const referencedOwners = new Set<string>();
+const referencedSkills = new Set<string>();
+for (const decision of BUSINESS_PLAN_2026.decisions) {
+  if (!BUSINESS_PLAN_DECISION_STATUSES.includes(decision.status)) {
+    errors.push(`decision:${decision.chapter}: status が不正です`);
+  }
+  if (decision.chapter < 1 || decision.chapter > 25) {
+    errors.push(`decision:${decision.chapter}: chapter が1〜25ではありません`);
+  }
+  decision.owners.forEach((owner) => referencedOwners.add(owner));
+  decision.skills.forEach((skill) => referencedSkills.add(skill));
+  for (const metricId of decision.metricIds) {
+    if (!metricIds.has(metricId))
+      errors.push(
+        `decision:${decision.chapter}: metric ${metricId} が未定義です`
+      );
+  }
+  for (const rel of decision.canonicalPaths) {
+    if (!fs.existsSync(path.join(repoRoot, rel))) {
+      errors.push(
+        `decision:${decision.chapter}: canonical path がありません: ${rel}`
+      );
+    }
+  }
+}
+
+for (const doc of BUSINESS_PLAN_2026.documents) {
+  referencedOwners.add(doc.owner);
+  if (!fs.existsSync(path.join(repoRoot, doc.path)))
+    errors.push(`document:${doc.id}: path がありません: ${doc.path}`);
+}
+for (const metric of BUSINESS_PLAN_2026.metrics) {
+  if (!BUSINESS_PLAN_MEASUREMENT_STATUSES.includes(metric.measurementStatus)) {
+    errors.push(`metric:${metric.id}: measurementStatus が不正です`);
+  }
+}
+for (const event of BUSINESS_PLAN_2026.events) {
+  referencedOwners.add(event.owner);
+  if (!BUSINESS_PLAN_MEASUREMENT_STATUSES.includes(event.status)) {
+    errors.push(`event:${event.id}: status が不正です`);
+  }
+  if (!fs.existsSync(path.join(repoRoot, event.implementationPath))) {
+    errors.push(
+      `event:${event.id}: implementationPath がありません: ${event.implementationPath}`
+    );
+  }
+}
+for (const initiative of BUSINESS_PLAN_2026.initiatives) {
+  referencedOwners.add(initiative.owner);
+  initiative.skills.forEach((skill) => referencedSkills.add(skill));
+  if (!BUSINESS_PLAN_WORK_STATUSES.includes(initiative.status)) {
+    errors.push(`initiative:${initiative.id}: status が不正です`);
+  }
+  for (const metricId of initiative.metricIds) {
+    if (!metricIds.has(metricId))
+      errors.push(
+        `initiative:${initiative.id}: metric ${metricId} が未定義です`
+      );
+  }
+}
+const contentIds = new Set(
+  BUSINESS_PLAN_2026.contentOpportunities.map((item) => item.id)
+);
+for (const pilot of BUSINESS_PLAN_2026.pilotSpecs) {
+  referencedOwners.add(pilot.owner);
+  if (!contentIds.has(pilot.contentId))
+    errors.push(`pilot:${pilot.id}: contentId ${pilot.contentId} が未定義です`);
+  if (!BUSINESS_PLAN_WORK_STATUSES.includes(pilot.status))
+    errors.push(`pilot:${pilot.id}: status が不正です`);
+  if (pilot.dataRefs.length === 0 || pilot.qualityGates.length === 0)
+    errors.push(`pilot:${pilot.id}: dataRefs/qualityGates が空です`);
+}
+for (const item of [
+  ...BUSINESS_PLAN_2026.contentOpportunities,
+  ...BUSINESS_PLAN_2026.xIdeas,
+  ...BUSINESS_PLAN_2026.noteProducts,
+]) {
+  if (!BUSINESS_PLAN_WORK_STATUSES.includes(item.status)) {
+    errors.push(`${item.id}: status が不正です`);
+  }
+}
+
+for (const owner of referencedOwners) {
+  if (!agentIds.has(owner)) errors.push(`owner agent がありません: ${owner}`);
+}
+for (const skill of referencedSkills) {
+  if (!skillMap.has(skill)) errors.push(`skill がありません: ${skill}`);
+}
+
+const dbConflict = BUSINESS_PLAN_2026.decisions.find(
+  (decision) =>
+    decision.chapter === 15 &&
+    decision.status === 'adopted' &&
+    /\b(?:D1|PostGIS)\b/i.test(`${decision.summary} ${decision.rationale}`)
+);
+if (dbConflict)
+  errors.push(
+    'chapter 15: D1/PostGISをadoptedにできません (完全DBレス正典と競合)'
+  );
+
+if (errors.length > 0) {
+  console.error(errors.map((error) => `❌ ${error}`).join('\n'));
+  console.error(`\n事業計画カタログ検証: ${errors.length} error(s)`);
+  process.exitCode = 1;
+} else {
+  console.log(
+    `✅ 事業計画カタログ: 25 decisions / 100 content / 30 X / 15 note products / ${referencedOwners.size} owners / ${referencedSkills.size} skills`
+  );
+}

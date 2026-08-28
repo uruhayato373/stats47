@@ -103,6 +103,12 @@ jobs:
         run: npm run note:catalog:validate
         continue-on-error: false
 
+      - name: 🧭 Business Plan SSOT Contract Gate
+        # 25章の採用差分、100企画、owner/skill、設計文書、KPI参照を決定的に検査する。
+        # 原案のD1/PostGISをDBレス正典へ戻すドリフトも拒否する。
+        run: npm run business-plan:check
+        continue-on-error: false
+
       - name: 🗂️ Backlog Loop Contract Gate
         # バックログの行削除は「機械 gate を通した証拠が ledger にあること」が必要条件。
         # 宣言だけの完了・排他 writer (04 / memory / learned) への write・

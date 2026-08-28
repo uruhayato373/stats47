@@ -115,6 +115,10 @@ primary_agent: strategy-advisor
 
 ```
 調査項目:
+- **事業計画の実行state**: `npm run business-plan:check` と
+  `npm run business-plan:build-state` を実行し、`.claude/state/business-plan/latest.json` の
+  `nextActions`・`sourceFreshness`・`eventCounts` を読む。`ready` / `in-progress` のみ候補にし、
+  `gated` はreadinessGateの証拠が揃うまで着手しない。未計測は0へ変換しない。
 - **今月の月次計画（重点テーマ）**: `.Codex/todo/monthly.md` の frontmatter `focus_themes` と「構成タスク」を Read
   ```bash
   cat .Codex/todo/monthly.md 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"

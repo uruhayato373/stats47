@@ -1,16 +1,15 @@
 {
-  "hash": "8448c4c5cd3ef4cd328a1f9c92d9d5c8d47923f780785a16c2fbdaefa28447a7",
-  "audited_at": "2026-08-28T07:38:05",
+  "hash": "213288bdc24d1ceb4e5e0cc5716e2b4f760a67f5e9b8679728ef53ddfcaabe2b",
+  "audited_at": "2026-08-28T12:45:36",
   "files": [
-    ".claude/scripts/ads/__tests__/a8-report-period-core.test.mjs",
-    ".claude/scripts/ads/__tests__/affiliate-pilot-core.test.mjs",
-    ".claude/scripts/ads/__tests__/affiliate-portfolio-core.test.mjs",
-    ".claude/scripts/ads/lib/a8-report-csv.mjs",
-    ".claude/scripts/ads/lib/affiliate-pilot-core.mjs",
-    ".claude/scripts/ads/lib/affiliate-portfolio-core.mjs",
-    ".claude/scripts/ads/normalize-a8-csv.mjs",
-    ".claude/skills/ads/scout-asp/SKILL.md",
-    ".claude/skills/ads/scout-asp/scripts/a8-browser.ts",
-    ".claude/skills/analytics/affiliate-improvement/reference/improvement-log.md"
+    ".agents/skills/management/business-plan-operate/SKILL.md",
+    ".agents/skills/management/weekly-plan/SKILL.md",
+    ".agents/skills/management/weekly-review/SKILL.md",
+    ".claude/agents/README.md",
+    ".claude/agents/strategy-advisor.md",
+    ".claude/skills/management/business-plan-operate/SKILL.md",
+    ".claude/skills/management/goal/reference/goals/stats47-business-plan-2026-2026-08-28.md",
+    ".claude/skills/management/weekly-plan/SKILL.md",
+    ".claude/skills/management/weekly-review/SKILL.md"
   ]
 }

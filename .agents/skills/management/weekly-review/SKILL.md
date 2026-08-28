@@ -19,6 +19,15 @@ primary_agent: strategy-advisor
 node .Codex/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 ```
 
+事業計画stateも同じ週次証拠として更新する。
+
+```bash
+npm run business-plan:check
+npm run business-plan:build-state -- --snapshot
+```
+
+`.claude/state/business-plan/latest.json` の開始ゲートと計測状態を読み、未計測を0にしない。
+
 既存snapshotがあれば再生成しない。上書きが必要な根拠がある時だけ`--force`を使う。
 
 続けてGSC入力契約を検査する。
@@ -41,6 +50,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | 検索成長 | `npm run search-growth:status`、`npm run search-growth:next -- --limit 10` |
 | NSM実験 | `.Codex/skills/management/nsm-experiment/reference/` |
 | 計画差分 | `.Codex/todo/weekly.md` |
+| 事業計画 | `.claude/state/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
 
 各snapshotの期間、取得日、freshnessを保持する。行が無い場合を推測の0へ変換せず、
 `not-measured` / `not-instrumented` / `insufficient-data`を区別する。
