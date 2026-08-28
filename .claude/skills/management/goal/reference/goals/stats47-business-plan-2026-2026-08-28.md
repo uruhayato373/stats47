@@ -3,7 +3,7 @@
 > **Slug**: `stats47-business-plan-2026`
 > **連携 metric**: custom
 > **連携 improvement skill**: business-plan-operate
-> **ステータス**: ACTIVE
+> **ステータス**: CLOSED-SUCCESS
 > **開始日 / 最終更新**: 2026-08-28 / 2026-08-28
 
 ## 1. 定義
@@ -48,25 +48,29 @@
 | 仮説 | H1 / H2 / H3 / H4 |
 | 施策 | 型付きcatalog、validator/state builder、管理画面、owner/skill、週次運用、CI、既存文書統合 |
 | 想定効果 | 原案と実装の差を可視化し、開始ゲートを守って次の実装へ送れる |
-| 状態 | 実装・検証中 |
-| 次 | 対象テスト・型・文書ゲートを完了し、終了条件を判定 |
+| 状態 | judged / effect/full |
+| 実装証拠 | commit `4674d21cbe842d79b1f21fb0a8216194813dfa15` |
+| 計測証拠 | `.claude/state/business-plan/history/2026-08-28.json` |
+| 結果 | 25判断・100企画・X30案・note15商品・4 pilot specを検証。data-configs 762 tests、admin 166 tests、全25 workspace type-check、admin build、文書・CI・consistency gate PASS |
+| 次 | H5の市場仮説は最初の4系列を需要ゲート順に実行し、別の週次・月次計測で判定 |
 
 <!-- CYCLE_INSERTION_POINT -->
 
 ## 4. ステータス
 
-- 進行中 cycle: 1
-- ベースラインからの改善率: 未判定
-- 終了条件達成: No
-- 残仮説プール数: 1
+- 進行中 cycle: なし
+- ベースラインからの改善率: 実装終了条件 6/6（100%）
+- 終了条件達成: Yes
+- 残仮説プール数: 1（市場反応のH5は継続運用へ移管）
 
 ## 5. 学習資産
 
-- 効いた施策: -
-- 効かなかった施策: -
-- 教訓: -
-- 共通原則として残す内容: -
+- 効いた施策: 原案の文章を複製せず、25章の採用差分、owner、skill、KPI、開始ゲートを型付きcatalogへ変換した。derived state、管理画面、CI、週次運用が同じcatalogを参照するため、方針と実装のドリフトを機械検出できる。
+- 効かなかった施策: 原案の常設D1/PostGIS、初期90日のSaaS・AIチャット、市区町村薄ページ量産は既存正典と需要ゲートに反するため採用しなかった。
+- 教訓: 外部事業計画は「全面採用」ではなく、既存アーキテクチャと実測契約への適合差分として扱う。市場目標は仮説、未計測は0でないことをUIとstateへ同時に残す。
+- 共通原則として残す内容: authored方針はgit TS、観測・派生はR2/state、管理画面は読み取りミラー。新しい公開面は実分析3本・provenance・GA4・thin-content gateが揃うまでindexしない。
 
 ## 6. ステータスログ
 
 - 2026-08-28: ACTIVE 開始。原案の全量抽出と既存SSOT監査を完了し、Cycle 1を開始。
+- 2026-08-28: Cycle 1をeffect/full判定。実装終了条件6/6を満たし、CLOSED-SUCCESS。

@@ -1,15 +1,7 @@
 {
-  "hash": "213288bdc24d1ceb4e5e0cc5716e2b4f760a67f5e9b8679728ef53ddfcaabe2b",
-  "audited_at": "2026-08-28T12:45:36",
+  "hash": "378465f9bee0c5a5104a91c30a0b6589d3a9c0a1d27c8371d80eae8f0b2e75a1",
+  "audited_at": "2026-08-28T12:53:31",
   "files": [
-    ".agents/skills/management/business-plan-operate/SKILL.md",
-    ".agents/skills/management/weekly-plan/SKILL.md",
-    ".agents/skills/management/weekly-review/SKILL.md",
-    ".claude/agents/README.md",
-    ".claude/agents/strategy-advisor.md",
-    ".claude/skills/management/business-plan-operate/SKILL.md",
-    ".claude/skills/management/goal/reference/goals/stats47-business-plan-2026-2026-08-28.md",
-    ".claude/skills/management/weekly-plan/SKILL.md",
-    ".claude/skills/management/weekly-review/SKILL.md"
+    ".claude/skills/management/goal/reference/goals/stats47-business-plan-2026-2026-08-28.md"
   ]
 }
