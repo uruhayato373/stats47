@@ -37,7 +37,14 @@ const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const R2 = `${R2_PUBLIC}/app/blog`;
 const RANK = `${R2_PUBLIC}/app/ranking`;
-const STAGE = path.join(PROJECT_ROOT, ".local/regen-tilemaps");
+const STAGE_ARG_INDEX = process.argv.indexOf("--stage");
+const STAGE =
+  STAGE_ARG_INDEX === -1
+    ? path.join(PROJECT_ROOT, ".local/regen-tilemaps")
+    : path.resolve(PROJECT_ROOT, process.argv[STAGE_ARG_INDEX + 1]);
+if (!STAGE.startsWith(path.join(PROJECT_ROOT, ".local") + path.sep)) {
+  throw new Error("--stage must resolve inside .local/");
+}
 const LIMIT = process.argv.includes("--limit")
   ? Number(process.argv[process.argv.indexOf("--limit") + 1])
   : null;

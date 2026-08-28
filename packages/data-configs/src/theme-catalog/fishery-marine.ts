@@ -134,14 +134,12 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "漁獲量と海面漁業漁獲量の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3121"
+            "metricKey": "fish-catch"
           },
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C312101"
+            "metricKey": "marine-fishery-catch"
           }
         ],
         "labels": [
@@ -171,16 +169,14 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "componentType": "mixed-chart",
       "title": "海面・内水面養殖収獲量の推移",
       "componentProps": {
-        "columnParams": [
+        "columnSeriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C312201"
+            "metricKey": "marine-aquaculture-harvest"
           }
         ],
-        "lineParams": [
+        "lineSeriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C312202"
+            "metricKey": "inland-aquaculture-harvest"
           }
         ],
         "columnLabels": [
@@ -216,14 +212,12 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "漁業産出額の推移（新シリーズと長期）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C31201"
+            "metricKey": "marine-fishery-aquaculture-output-value"
           },
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C312001"
+            "metricKey": "marine-fishery-output-value"
           }
         ],
         "labels": [
@@ -253,14 +247,12 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "漁獲量と漁業就業者数の半世紀（1975-2023）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3121"
+            "metricKey": "fish-catch"
           },
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3125"
+            "metricKey": "fishery-workers"
           }
         ],
         "labels": [
@@ -290,70 +282,81 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "componentType": "donut-chart",
       "title": "魚種別漁獲量構成比（2015年・全国）",
       "componentProps": {
-        "statsDataId": "0003238633",
-        "topN": 9,
-        "categories": [
+        "seriesRefs": [
           {
-            "code": "0980",
+            "metricKey": "fishery-species-catch-scallop",
+            "area": "national",
             "label": "ホタテガイ",
-            "color": "population"
+            "colorRole": "population"
           },
           {
-            "code": "1040",
+            "metricKey": "fishery-species-catch-japanese-squid",
+            "area": "national",
             "label": "スルメイカ",
-            "color": "series-6"
+            "colorRole": "series-6"
           },
           {
-            "code": "0120",
+            "metricKey": "fishery-species-catch-tuna",
+            "area": "national",
             "label": "マグロ類",
-            "color": "special"
+            "colorRole": "special"
           },
           {
-            "code": "0250",
+            "metricKey": "fishery-species-catch-bonito",
+            "area": "national",
             "label": "カツオ",
-            "color": "count"
+            "colorRole": "count"
           },
           {
-            "code": "0410",
+            "metricKey": "fishery-species-catch-mackerel",
+            "area": "national",
             "label": "サバ類",
-            "color": "danger"
+            "colorRole": "danger"
           },
           {
-            "code": "0420",
+            "metricKey": "fishery-species-catch-pacific-saury",
+            "area": "national",
             "label": "サンマ",
-            "color": "improve"
+            "colorRole": "improve"
           },
           {
-            "code": "0430",
+            "metricKey": "fishery-species-catch-yellowtail",
+            "area": "national",
             "label": "ブリ類",
-            "color": "series-11"
+            "colorRole": "series-11"
           },
           {
-            "code": "0330",
+            "metricKey": "fishery-species-catch-sardine",
+            "area": "national",
             "label": "イワシ類",
-            "color": "series-8"
+            "colorRole": "series-8"
           },
           {
-            "code": "0490",
+            "metricKey": "fishery-species-catch-pollock",
+            "area": "national",
             "label": "スケトウダラ",
-            "color": "series-10"
+            "colorRole": "series-10"
           },
           {
-            "code": "1130",
+            "metricKey": "fishery-species-catch-kelp",
+            "area": "national",
             "label": "コンブ類",
-            "color": "series-9"
+            "colorRole": "series-9"
           },
           {
-            "code": "0880",
+            "metricKey": "fishery-species-catch-snow-crab",
+            "area": "national",
             "label": "ズワイガニ",
-            "color": "series-12"
+            "colorRole": "series-12"
           },
           {
-            "code": "0660",
+            "metricKey": "fishery-species-catch-sea-bream",
+            "area": "national",
             "label": "タイ類",
-            "color": "female"
+            "colorRole": "female"
           }
-        ]
+        ],
+        "topN": 9
       },
       "relatedRankingKeys": [
         "fishery-species-catch-scallop",
@@ -383,22 +386,22 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "主要魚種の長期推移（1956-2015年・全国）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0003238633",
-            "cdCat01": "0330"
+            "metricKey": "fishery-species-catch-sardine",
+            "area": "national"
           },
           {
-            "statsDataId": "0003238633",
-            "cdCat01": "0420"
+            "metricKey": "fishery-species-catch-pacific-saury",
+            "area": "national"
           },
           {
-            "statsDataId": "0003238633",
-            "cdCat01": "0980"
+            "metricKey": "fishery-species-catch-scallop",
+            "area": "national"
           },
           {
-            "statsDataId": "0003238633",
-            "cdCat01": "1040"
+            "metricKey": "fishery-species-catch-japanese-squid",
+            "area": "national"
           }
         ],
         "labels": [

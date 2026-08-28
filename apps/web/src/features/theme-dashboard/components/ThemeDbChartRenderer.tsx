@@ -98,7 +98,7 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
         data-theme-component-type={chart.componentType}
         data-data-state="no-data"
       >
-        <ChartEmptyState message="チャートデータがありません" />
+        <ChartEmptyState message={loadResult.message ?? "チャートデータがありません"} />
       </div>
     );
   }
@@ -115,6 +115,12 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
       data-series-count={result.contract.seriesCount}
     >
       <ThemeChartResultRenderer chartResult={result} />
+      {"scopeLabel" in result.contract &&
+      result.contract.scopeLabel === "47都道府県平均" ? (
+        <p className="mt-2 text-xs text-muted-foreground" data-national-average-label>
+          表示値は全国値ではなく、47都道府県の単純平均です。
+        </p>
+      ) : null}
     </div>
   );
 }

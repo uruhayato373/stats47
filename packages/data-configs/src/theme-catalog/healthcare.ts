@@ -58,6 +58,26 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "role": "context"
     },
     {
+      "rankingKey": "deaths-malignant-neoplasms-per-100k",
+      "shortLabel": "悪性新生物死亡",
+      "role": "context"
+    },
+    {
+      "rankingKey": "deaths-heart-disease-excl-hypertensive-per-100k",
+      "shortLabel": "心疾患死亡",
+      "role": "context"
+    },
+    {
+      "rankingKey": "deaths-cerebrovascular-disease-per-100k",
+      "shortLabel": "脳血管疾患死亡",
+      "role": "context"
+    },
+    {
+      "rankingKey": "deaths-hypertensive-diseases-per-100k",
+      "shortLabel": "高血圧性疾患死亡",
+      "role": "context"
+    },
+    {
       "rankingKey": "health-checkup-rate-lifestyle-diseases",
       "shortLabel": "健診受診率",
       "role": "secondary"
@@ -79,14 +99,12 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "医師数と病院数の推移（人口10万人当たり）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010209",
-            "cdCat01": "#I0920101"
+            "metricKey": "physicians-in-medical-facilities-per-100k"
           },
           {
-            "statsDataId": "0000010209",
-            "cdCat01": "#I0910103"
+            "metricKey": "general-hospital-count-per-100k"
           }
         ],
         "labels": [
@@ -116,10 +134,9 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "1人当たり医療費の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010209",
-            "cdCat01": "#I15106"
+            "metricKey": "national-medical-expense-per-person"
           }
         ],
         "labels": [
@@ -146,14 +163,12 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "生活習慣病死亡率と健診受診率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010209",
-            "cdCat01": "#I06101"
+            "metricKey": "deaths-lifestyle-diseases-per-100k"
           },
           {
-            "statsDataId": "0000010209",
-            "cdCat01": "#I13102"
+            "metricKey": "health-checkup-rate-lifestyle-diseases"
           }
         ],
         "labels": [
@@ -297,38 +312,41 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "componentType": "donut-chart",
       "title": "主要死因別の死亡率内訳（人口10万人当たり・2023年）",
       "componentProps": {
-        "statsDataId": "0000010209",
         "topN": 5,
-        "categories": [
+        "seriesRefs": [
           {
-            "code": "#I06102",
-            "label": "悪性新生物（がん）",
-            "color": "danger"
+            "metricKey": "deaths-malignant-neoplasms-per-100k",
+            "label": "悪性新生物死亡",
+            "colorRole": "danger"
           },
           {
-            "code": "#I06105",
-            "label": "心疾患",
-            "color": "population"
+            "metricKey": "deaths-heart-disease-excl-hypertensive-per-100k",
+            "label": "心疾患死亡",
+            "colorRole": "population"
           },
           {
-            "code": "#I06106",
-            "label": "脳血管疾患",
-            "color": "count"
+            "metricKey": "deaths-cerebrovascular-disease-per-100k",
+            "label": "脳血管疾患死亡",
+            "colorRole": "count"
           },
           {
-            "code": "#I06103",
-            "label": "糖尿病",
-            "color": "improve"
+            "metricKey": "deaths-diabetes-per-100k",
+            "label": "糖尿病死亡",
+            "colorRole": "improve"
           },
           {
-            "code": "#I06104",
-            "label": "高血圧性疾患",
-            "color": "special"
+            "metricKey": "deaths-hypertensive-diseases-per-100k",
+            "label": "高血圧性疾患死亡",
+            "colorRole": "special"
           }
         ]
       },
       "relatedRankingKeys": [
-        "deaths-lifestyle-diseases-per-100k"
+        "deaths-malignant-neoplasms-per-100k",
+        "deaths-heart-disease-excl-hypertensive-per-100k",
+        "deaths-cerebrovascular-disease-per-100k",
+        "deaths-diabetes-per-100k",
+        "deaths-hypertensive-diseases-per-100k"
       ],
       "sourceName": "総務省統計局 社会・人口統計体系",
       "sourceLink": null,
@@ -344,10 +362,9 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "糖尿病死亡率の全国推移（人口10万人当たり）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010209",
-            "cdCat01": "#I06103"
+            "metricKey": "deaths-diabetes-per-100k"
           }
         ],
         "labels": [

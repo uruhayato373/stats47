@@ -52,12 +52,12 @@ describe('人口動態テーマの可視化構成', () => {
     const birthDeath = POPULATION_DYNAMICS_CATALOG.charts.find(
       (chart) => chart.componentKey === 'birth-death-count-trend'
     );
-    const params = birthDeath?.componentProps.estatParams as
-      | Array<{ cdCat01?: string }>
+    const refs = birthDeath?.componentProps.seriesRefs as
+      | Array<{ metricKey?: string }>
       | undefined;
 
     expect(birthDeath?.title).toContain('出生数と死亡数');
-    expect(params?.map((param) => param.cdCat01)).toEqual(['A4101', 'A4200']);
+    expect(refs?.map((ref) => ref.metricKey)).toEqual(['births', 'death-count']);
     expect(
       POPULATION_DYNAMICS_CATALOG.charts.map((chart) => chart.componentKey)
     ).not.toContain('birth-death-rate-trend');

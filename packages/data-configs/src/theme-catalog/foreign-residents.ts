@@ -64,14 +64,12 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "外国人比率と外国人数の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A01601"
+            "metricKey": "foreign-resident-count-per-100k"
           },
           {
-            "statsDataId": "0000010101",
-            "cdCat01": "A1700"
+            "metricKey": "foreign-resident-count"
           }
         ],
         "labels": [
@@ -101,14 +99,12 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "国籍別外国人比率の推移（10万人当たり）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A0160102"
+            "metricKey": "foreign-resident-count-china-per-100k"
           },
           {
-            "statsDataId": "0000010201",
-            "cdCat01": "#A0160101"
+            "metricKey": "foreign-resident-count-korea-per-100k"
           }
         ],
         "labels": [

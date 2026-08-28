@@ -1,4 +1,4 @@
-# GSC URL Inspection — 2026-08-26
+# GSC URL Inspection — 2026-08-27
 
 **対象 URL 数**: 500
 
@@ -16,4 +16,4 @@
 | 見つかりませんでした（404） | 1 | ±0 |
 | 送信して登録されました | 499 | ±0 |
 
-_詳細 CSV: `.claude/state/metrics/gsc/url-inspection/2026-08-26.csv`_
+_詳細 CSV: `.claude/state/metrics/gsc/url-inspection/2026-08-27.csv`_

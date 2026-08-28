@@ -1,6 +1,7 @@
-import { fetchFormattedStats, type GetStatsDataParams } from "@stats47/estat-api/server";
-
-import { getEstatCacheStorage } from "../services";
+import {
+  fetchEstatDataAllAreas,
+  type LegacyStatParams,
+} from "../services/fetchEstatData";
 
 import type { YAxisConfig } from "../types";
 import type { StatsSchema } from "@stats47/types";
@@ -8,7 +9,7 @@ import type { StatsSchema } from "@stats47/types";
 
 interface ComputeYAxisDomainOptions {
   yAxisConfig?: YAxisConfig;
-  estatParams: GetStatsDataParams[];
+  estatParams: LegacyStatParams[];
   /**
    * ドメイン計算方式:
    * - "minMax": [min(0, min), max] — 折れ線グラフ向け
@@ -43,10 +44,9 @@ export async function computeYAxisDomain({
     case "sync": {
       let allPrefData: StatsSchema[][];
       try {
-        const storage = await getEstatCacheStorage();
-        allPrefData = await Promise.all(
-          estatParams.map((p) => fetchFormattedStats(p, storage)),
-        );
+        const results = await Promise.all(estatParams.map(fetchEstatDataAllAreas));
+        if (results.some((result) => "error" in result)) return undefined;
+        allPrefData = results.map((result) => ("data" in result ? result.data : []));
       } catch {
         // sync ドメイン算出失敗時は auto にフォールバック
         return undefined;

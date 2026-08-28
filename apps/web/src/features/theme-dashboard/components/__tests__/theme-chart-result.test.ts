@@ -1,3 +1,4 @@
+import { buildPopulationPyramidSeriesRefs } from "@stats47/data-configs/theme-catalog";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { PageComponent } from "@/components/stat-charts";
@@ -21,6 +22,20 @@ const CHART = {
   title: "fixture",
   componentProps: {},
   sortOrder: 1,
+} as unknown as PageComponent;
+
+const CPI_CHART = {
+  ...CHART,
+  componentKey: "fixture-cpi",
+  componentType: "cpi-profile",
+} as unknown as PageComponent;
+
+const PYRAMID_REFS = buildPopulationPyramidSeriesRefs();
+const PYRAMID_CHART = {
+  ...CHART,
+  componentKey: "fixture-pyramid",
+  componentType: "pyramid-chart",
+  componentProps: { seriesRefs: PYRAMID_REFS },
 } as unknown as PageComponent;
 
 describe("loadThemeChartResult state contract", () => {
@@ -51,5 +66,32 @@ describe("loadThemeChartResult state contract", () => {
       state: "ready",
       result,
     });
+  });
+
+  it("CPIの全国表示は取得せず、指数の性質を説明するempty stateにする", async () => {
+    await expect(loadThemeChartResult(CPI_CHART, "00000")).resolves.toEqual({
+      state: "no-data",
+      message:
+        "全国平均を100とする指数のため、全国表示には対応していません。都道府県を選択してください。",
+    });
+    expect(fetchDbChartDataAction).not.toHaveBeenCalled();
+  });
+
+  it("人口ピラミッドはcatalogの34系列参照をR2 actionへ渡す", async () => {
+    fetchPopulationPyramidAction.mockResolvedValue({
+      pyramidData: [{ ageGroup: "0〜4歳", male: -10, female: 11 }],
+      yearName: "2024年",
+    });
+
+    const result = await loadThemeChartResult(PYRAMID_CHART, "28000");
+
+    expect(fetchPopulationPyramidAction).toHaveBeenCalledWith("28000", PYRAMID_REFS);
+    expect(result.state).toBe("ready");
+  });
+
+  it("人口ピラミッドのseriesRefs欠落は取得せずno-dataにする", async () => {
+    const invalid = { ...PYRAMID_CHART, componentProps: {} } as PageComponent;
+    await expect(loadThemeChartResult(invalid, "28000")).resolves.toEqual({ state: "no-data" });
+    expect(fetchPopulationPyramidAction).not.toHaveBeenCalled();
   });
 });

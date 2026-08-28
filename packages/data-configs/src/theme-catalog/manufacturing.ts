@@ -59,14 +59,12 @@ export const MANUFACTURING_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "事業所数と従業者数の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3403"
+            "metricKey": "manufacturing-establishments"
           },
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3404"
+            "metricKey": "manufacturing-employees"
           }
         ],
         "labels": [
@@ -93,14 +91,12 @@ export const MANUFACTURING_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "製造品出荷額と付加価値額の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3401"
+            "metricKey": "manufacturing-shipment-amount"
           },
           {
-            "statsDataId": "0000010103",
-            "cdCat01": "C3402"
+            "metricKey": "manufacturing-industry-added-value"
           }
         ],
         "labels": [
@@ -127,14 +123,12 @@ export const MANUFACTURING_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "製造業の労働生産性の推移（従業者1人あたり・事業所1あたり出荷額）",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010203",
-            "cdCat01": "#C04401"
+            "metricKey": "manufacturing-shipment-amount-per-employee"
           },
           {
-            "statsDataId": "0000010203",
-            "cdCat01": "#C04404"
+            "metricKey": "manufacturing-shipment-amount-per-establishment"
           }
         ],
         "labels": [

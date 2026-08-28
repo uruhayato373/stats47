@@ -32,6 +32,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -65,6 +67,8 @@ function loadGsc() {
   for (const ln of lines) {
     const c = ln.split(",");
     if (c.length < 5) continue;
+    // アンカー行で本文ページの CTR を Map 上書きしない。
+    if (isAnchorRow(c[0])) continue;
     const m = c[0].match(/\/blog\/([^/?#]+)/);
     if (!m) continue;
     bySlug.set(m[1], {

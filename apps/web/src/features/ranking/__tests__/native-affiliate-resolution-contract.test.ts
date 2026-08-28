@@ -65,6 +65,7 @@ describe("ranking native アフィリエイトの解決契約", () => {
 
   it("AdSense停止中は先頭の横長バナー1件を本文中段へ配線し、末尾で重複させない", () => {
     expect(SHELL_SRC).toContain("model.nativeBanners.filter(isLandscapeBanner)");
+    expect(SHELL_SRC).toMatch(/shouldShowRankingInContentAffiliate\(\s*rankingKey\s*\)/);
     expect(SHELL_SRC).toContain('position="ranking-incontent"');
     expect(SHELL_SRC).toMatch(
       /ADSENSE_DISPLAY_ENABLED\s*\?\s*affiliateBanners\s*:\s*affiliateBanners\.slice\(1\)/,

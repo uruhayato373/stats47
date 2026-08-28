@@ -138,6 +138,18 @@ export const PROPOSED_NEW_SURVEYS: Record<
     organization: "国土交通省",
     url: "https://www.mlit.go.jp/k-toukei/kouwan.html",
   },
+  住民基本台帳人口移動報告年報: {
+    id: "resident-registry-migration-report",
+    name: "住民基本台帳人口移動報告",
+    organization: "総務省統計局",
+    url: "https://www.stat.go.jp/data/idou/index.html",
+  },
+  電気通信役務契約等状況報告: {
+    id: "telecommunications-service-contract-report",
+    name: "電気通信役務契約等状況報告",
+    organization: "総務省・NTT東日本・NTT西日本",
+    url: "https://www.e-stat.go.jp/koumoku/koumoku_teigi/H",
+  },
 
   // --- override 解決に必要な原典 ---
   日本銀行統計: { id: "boj-statistics", name: "日本銀行統計", organization: "日本銀行" },
@@ -147,6 +159,12 @@ export const PROPOSED_NEW_SURVEYS: Record<
   // --- 非SSDS 一次統計 (displayname-to-survey.ts と対) ---
   水害統計調査: { id: "flood-statistics", name: "水害統計調査", organization: "国土交通省" },
   建設工事受注動態統計調査: { id: "construction-orders-statistics", name: "建設工事受注動態統計調査", organization: "国土交通省" },
+  地方公務員給与実態調査: {
+    id: "local-public-employee-salary",
+    name: "地方公務員給与実態調査",
+    organization: "総務省",
+    url: "https://www.e-stat.go.jp/stat-search/files?layout=dataset&toukei=00200212",
+  },
 };
 
 /**

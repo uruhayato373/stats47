@@ -24,6 +24,8 @@
   "scripts": {
     "export:from-d1": "tsx src/scripts/export-stats-to-r2.ts",
     "generate:japan-series": "tsx src/scripts/generate-japan-series.ts",
+    "migrate:reviewed-recipes": "tsx src/scripts/migrate-legacy-recipes.ts",
+    "migrate:reviewed-recipes:stage": "tsx src/scripts/migrate-legacy-recipes.ts --apply",
     "test": "vitest",
     "type-check": "tsc --noEmit"
   },

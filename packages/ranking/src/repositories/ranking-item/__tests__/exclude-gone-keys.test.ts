@@ -42,6 +42,7 @@ import {
   readRankingItemsByGroupKeyFromR2,
   readRankingItemsBySurveyFromR2,
   readRankingItemsByTagFromR2,
+  readRelatedRankingItemsByTagKeysFromR2,
 } from "../read-ranking-items-snapshot";
 
 /** 一覧 snapshot の 1 行。全リーダーの filter 条件を同時に満たす形にしてある */
@@ -146,6 +147,24 @@ describe("退役キーは R2 snapshot に残っていてもリンク一覧に出
   it("tag の代表キーに退役キーを選ばない", async () => {
     const res = await readFirstKeyByTagFromR2("t1");
     expect(res.success && res.data).toBe(LIVE_KEY);
+  });
+
+  it("複数tag/categoryの関連ランキングをsnapshot 1回で読む", async () => {
+    const categoryOnly = { ...item("total-households"), tags: [] };
+    fetchFromR2AsJson.mockResolvedValue(snapshot([item(LIVE_KEY), categoryOnly]));
+
+    const result = await readRelatedRankingItemsByTagKeysFromR2(["t1"], ["population"]);
+
+    expect(result.success).toBe(true);
+    expect(keysOf(result)).toEqual([LIVE_KEY, "total-households"]);
+    expect(fetchFromR2AsJson).toHaveBeenCalledTimes(1);
+  });
+
+  it("複数tagのどれにも一致しないランキングは関連候補にしない", async () => {
+    const result = await readRelatedRankingItemsByTagKeysFromR2(["tourism"]);
+
+    expect(result.success).toBe(true);
+    expect(keysOf(result)).toEqual([]);
   });
 
   it("★退役キーしか無いタグは「該当なし」になる (退役キーで代替しない)", async () => {

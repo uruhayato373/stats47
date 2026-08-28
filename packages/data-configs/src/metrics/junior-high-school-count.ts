@@ -4,6 +4,7 @@ export const juniorHighSchoolCount: MetricConfig = {
   "key": "junior-high-school-count",
   "title": "中学校数",
   "subtitle": "総数",
+  "description": "都道府県内に所在する中学校の総数。義務教育後期課程の施設規模を示す。",
   "unit": "校",
   "category": "educationsports",
   "source": {

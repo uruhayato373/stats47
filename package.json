@@ -14,6 +14,9 @@
     "docs:report": "node .claude/scripts/lib/check-docs-governance.cjs --json",
     "docs:check": "node .claude/scripts/lib/check-docs-governance.cjs && node .claude/scripts/lib/check-docs-links.cjs --baseline",
     "docs:check:all": "node --test .claude/scripts/lib/__tests__/check-docs-governance.test.cjs .claude/scripts/lib/__tests__/check-docs-links.test.cjs && node .claude/scripts/lib/check-docs-governance.cjs --fail-on-warn && node .claude/scripts/lib/check-docs-links.cjs --baseline --orphans",
+    "theme:dashboard-catalog:check": "node .claude/scripts/themes/check-public-dashboard-catalog.mjs",
+    "theme:dashboard-catalog:query": "node .claude/scripts/themes/check-public-dashboard-catalog.mjs --theme",
+    "theme:dashboard-catalog:test": "node --test .claude/scripts/themes/__tests__/check-public-dashboard-catalog.test.mjs",
     "check:image-pipeline-policy": "node .claude/scripts/lib/audit-workflow-policy.cjs --strict",
     "blog-images:codex": "tsx apps/web/scripts/manage-blog-codex-backgrounds.ts",
     "check:blog-images": "npm run blog-images:codex -- check",
@@ -79,7 +82,10 @@
     "search-growth:dismiss": "node .claude/scripts/search-growth/cli.mjs dismiss",
     "search-growth:measure": "node .claude/scripts/search-growth/cli.mjs measure",
     "search-growth:all": "node .claude/scripts/search-growth/cli.mjs all",
-    "search-growth:test": "node --test .claude/scripts/search-growth/__tests__/*.test.mjs"
+    "search-growth:test": "node --test .claude/scripts/search-growth/__tests__/*.test.mjs",
+    "source-vault": "node .claude/scripts/source-vault/japan-zue-bundle.mjs",
+    "source-vault:japan-zue": "node .claude/scripts/source-vault/japan-zue-bundle.mjs",
+    "source-vault:test": "node --test .claude/scripts/source-vault/__tests__/*.test.mjs"
   },
   "devDependencies": {
     "@types/shapefile": "^0.6.4",

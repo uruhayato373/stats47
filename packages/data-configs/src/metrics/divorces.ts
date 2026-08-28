@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const divorces: MetricConfig = {
   "key": "divorces",
   "title": "離婚件数",
+  "description": "人口動態統計で把握された年間の離婚件数。都道府県ごとの婚姻動態を実数で示す。",
   "unit": "組",
   "category": "population",
   "source": {

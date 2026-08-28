@@ -52,6 +52,7 @@ test('data-refresh does nothing when a push carries no request file', () => {
         INPUT_SINCE: '',
         INPUT_ALLOW_EMPTY: '',
         INPUT_DRY_RUN: '',
+        INPUT_MIGRATE_LEGACY_RECIPES: '',
         GITHUB_OUTPUT: outFile,
       },
     });
@@ -76,6 +77,31 @@ test('data-refresh does nothing when a push carries no request file', () => {
       `${name}: skip ガードが無い`,
     );
   }
+});
+
+test('reviewed recipe migration is explicit, hash-gated, and runs before the stats push', () => {
+  const doc = YAML.parse(read('.github/workflows/data-refresh.yml'));
+  const steps = doc.jobs.refresh.steps;
+  const migrationAt = steps.findIndex((step) =>
+    String(step.name ?? '').includes('Migrate reviewed compatibility recipe metadata'),
+  );
+  const pushAt = steps.findIndex((step) =>
+    String(step.name ?? '').includes('Push observations to R2'),
+  );
+  assert.ok(migrationAt !== -1 && migrationAt < pushAt, 'migration が stats push より前に無い');
+  assert.match(
+    String(steps[migrationAt].if ?? ''),
+    /migrate_legacy_recipes == 'true'/,
+    '通常refreshでも旧recipe migrationが動く',
+  );
+  assert.match(String(steps[migrationAt].run ?? ''), /migrate:reviewed-recipes:stage/);
+
+  const migrationSource = read(
+    'packages/stats-r2/src/scripts/lib/legacy-recipe-migration.ts',
+  );
+  assert.match(migrationSource, /LEGACY_RECIPE_ROW_HASHES/);
+  assert.match(migrationSource, /row fingerprint changed/);
+  assert.match(migrationSource, /existing recipe drift/);
 });
 
 /**

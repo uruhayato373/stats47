@@ -30,7 +30,7 @@
  * 「復元不能」と混同して復元を試みると捏造になるため、明示的に対象外とする。
  *
  * Usage:
- *   node .claude/scripts/blog/audit-chart-provenance.mjs [--limit N] [--json]
+ *   node .claude/scripts/blog/audit-chart-provenance.mjs [--limit N] [--json] [--staged]
  *
  * 出力: .claude/state/blog/chart-provenance-queue.json (機械用)
  *       .claude/state/blog/chart-provenance-LATEST.md  (人間用)
@@ -58,6 +58,7 @@ const QUEUE_IN = path.join(STATE_DIR, 'svg-lineage-queue.json');
 const CONC = 24;
 const args = process.argv.slice(2);
 const JSON_OUT = args.includes('--json');
+const STAGED = args.includes('--staged');
 const LIMIT = args.includes('--limit')
   ? Number(args[args.indexOf('--limit') + 1])
   : null;
@@ -80,6 +81,23 @@ async function getJson(url) {
     return r.ok ? await r.json() : null;
   } catch {
     return null;
+  }
+}
+
+function getStagedSource(entry) {
+  if (!STAGED) return null;
+  const sourcePath = path.join(
+    PROJECT_ROOT,
+    '.local/r2/app/blog',
+    entry.slug,
+    'data',
+    `${entry.base}.source.json`
+  );
+  if (!fs.existsSync(sourcePath)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
+  } catch {
+    return { __stagedParseError: true };
   }
 }
 async function exists(url) {
@@ -138,7 +156,8 @@ const lineage = JSON.parse(fs.readFileSync(QUEUE_IN, 'utf8'));
 let targets = lineage.entries.filter((e) => e.hasSource);
 if (LIMIT) targets = targets.slice(0, LIMIT);
 log(
-  `[provenance] source.json ${targets.length} 件を検査 (系譜 queue ${lineage.entries.length} 件のうち)`
+  `[provenance] source.json ${targets.length} 件を検査 (系譜 queue ${lineage.entries.length} 件のうち` +
+    `${STAGED ? ' / .local/r2 staged優先' : ''})`
 );
 
 const keyCache = new Map();
@@ -151,6 +170,24 @@ async function rankingKeyExists(key) {
   }
   return keyCache.get(key);
 }
+const metricKeyCache = new Map();
+async function metricKeyExists(key) {
+  if (!metricKeyCache.has(key)) {
+    const stagedPath = path.join(
+      PROJECT_ROOT,
+      '.local/r2/app/stats',
+      key,
+      'values.json'
+    );
+    metricKeyCache.set(
+      key,
+      STAGED && fs.existsSync(stagedPath)
+        ? true
+        : await exists(`${R2}/app/stats/${encodeURIComponent(key)}/values.json`)
+    );
+  }
+  return metricKeyCache.get(key);
+}
 const estatCache = new Map();
 async function eStatDataIdExists(statsDataId) {
   if (!estatCache.has(statsDataId)) {
@@ -161,11 +198,19 @@ async function eStatDataIdExists(statsDataId) {
 
 let done = 0;
 const rows = await pool(targets, async (e) => {
-  const src = await getJson(
-    `${R2}/app/blog/${e.slug}/data/${e.base}.source.json`
-  );
+  const stagedSource = getStagedSource(e);
+  const src =
+    stagedSource ??
+    (await getJson(`${R2}/app/blog/${e.slug}/data/${e.base}.source.json`));
   if (++done % 200 === 0) log(`  ${done}/${targets.length}`);
   const base = { slug: e.slug, base: e.base, chartType: e.chartType };
+  if (src?.__stagedParseError)
+    return {
+      ...base,
+      kind: null,
+      verdict: 'fetch-failed',
+      detail: 'staged source.json を解析できない',
+    };
   if (!src)
     return {
       ...base,
@@ -203,7 +248,17 @@ const rows = await pool(targets, async (e) => {
       detail: `R2 に無い rankingKey: ${dead.join(', ')}`,
     };
   }
-  const { statsDataIds } = extractChartSourceReferences(src);
+  const { metricKeys, statsDataIds } = extractChartSourceReferences(src);
+  const metricPresent = await pool(metricKeys, metricKeyExists);
+  const deadMetrics = metricKeys.filter((_, i) => !metricPresent[i]);
+  if (deadMetrics.length > 0) {
+    return {
+      ...base,
+      kind,
+      verdict: 'dead-metric-reference',
+      detail: `R2 に無い metricKey: ${deadMetrics.join(', ')}`,
+    };
+  }
   const estatPresent = await pool(statsDataIds, eStatDataIdExists);
   const deadEstat = statsDataIds.filter((_, i) => !estatPresent[i]);
   if (deadEstat.length > 0) {
@@ -219,8 +274,8 @@ const rows = await pool(targets, async (e) => {
     kind,
     verdict: 'restorable',
     detail:
-      refs.length || statsDataIds.length
-        ? `参照 ${refs.length + statsDataIds.length} 件を実在確認`
+      refs.length || metricKeys.length || statsDataIds.length
+        ? `参照 ${refs.length + metricKeys.length + statsDataIds.length} 件を実在確認`
         : '参照あり',
   };
 });
@@ -232,6 +287,7 @@ const DEFECTS = new Set([
   'self-declared-incomplete',
   'missing-reference',
   'dead-reference',
+  'dead-metric-reference',
   'dead-estat-reference',
 ]);
 const tally = {};

@@ -6,6 +6,7 @@ import { ADSENSE_DISPLAY_ENABLED } from "@/lib/google-adsense";
 import { shouldShowFunnelCta } from "../../funnel/funnel-cta-config";
 import { RankingFunnelCta } from "../../funnel/RankingFunnelCta";
 
+import { shouldShowRankingInContentAffiliate } from "./ranking-incontent-affiliate-policy";
 import { RankingKeyPageClient } from "./RankingKeyPageClient";
 import { RankingPageFaqSection, RankingPageInsightsSection } from "./RankingPageAiSections";
 import {
@@ -29,7 +30,9 @@ export function RankingPageClientShell({
   model,
 }: RankingPageClientShellProps) {
   const affiliateBanners = model.nativeBanners.filter(isLandscapeBanner);
-  const inContentAffiliateBanner = affiliateBanners[0] ?? null;
+  const inContentAffiliateBanner = shouldShowRankingInContentAffiliate(rankingKey)
+    ? (affiliateBanners[0] ?? null)
+    : null;
 
   return (
     <RankingKeyPageClient

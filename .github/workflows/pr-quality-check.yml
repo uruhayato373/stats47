@@ -219,6 +219,7 @@ jobs:
           node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
           node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
           node --test .claude/scripts/lib/__tests__/chart-provenance.test.mjs
+          node --test .claude/scripts/blog/lib/__tests__/source-repair-core.test.mjs
           node --test .claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs
           # 生成側のゲート (壊れた metric で記事を書き始めないこと・モデル可用性・生成 0 件の扱い)。
           # API キー不要の純粋関数テストなので PR で毎回回せる。

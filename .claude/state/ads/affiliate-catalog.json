@@ -10,8 +10,8 @@
     "unknown": "未確認 (調べていない。none と区別する)"
   },
   "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
-  "updatedAt": "2026-08-04T00:45:19.732Z",
-  "verifiedAt": "2026-08-04",
+  "updatedAt": "2026-08-27T00:54:39.324Z",
+  "verifiedAt": "2026-08-27",
   "programs": {
     "moshimo-7059": {
       "name": "みんなの生命保険アドバイザーの無料保険相談",
@@ -397,7 +397,7 @@
       }
     },
     "afb-14065": {
-      "name": "【PID:14065】 専門転職（その他）",
+      "name": "建設業界専門の転職エージェント【RSG建設転職】",
       "vertical": "labor",
       "asps": {
         "afb": {
@@ -416,7 +416,7 @@
       }
     },
     "afb-15637": {
-      "name": "【PID:15637】 結婚相談・婚活",
+      "name": "業界最大手IBJ所属 オンライン結婚相談所【RINGBELL（リングベル）】",
       "vertical": null,
       "asps": {
         "afb": {
@@ -434,7 +434,7 @@
       }
     },
     "afb-15471": {
-      "name": "【PID:15471】 学習教材",
+      "name": "施工管理技士　受験対策シリーズ　申し込みプロモーション",
       "vertical": "education",
       "asps": {
         "afb": {
@@ -452,7 +452,7 @@
       }
     },
     "afb-15708": {
-      "name": "【PID:15708】 語学・留学",
+      "name": "【DiaTalkディアトーク】いつでもつながるあなた専用のAI英会話",
       "vertical": "education",
       "asps": {
         "afb": {
@@ -470,7 +470,7 @@
       }
     },
     "afb-7763": {
-      "name": "【PID:7763】 資格・通信講座",
+      "name": "きっちり効く勉強方法！受験生を応援するサービス【スタディサプリ高校・大学受験講座】会員登録",
       "vertical": "education",
       "asps": {
         "afb": {
@@ -488,7 +488,7 @@
       }
     },
     "afb-7721": {
-      "name": "【PID:7721】 資格・通信講座",
+      "name": "通信教材！リクルートが提案する新しい勉強法【スタディサプリ小学・中学講座】有料会員登録",
       "vertical": "education",
       "asps": {
         "afb": {
@@ -506,7 +506,7 @@
       }
     },
     "afb-16464": {
-      "name": "【PID:16464】 その他",
+      "name": "3Dキャラクターをわずか数秒でAIが生成【TRIPO AI（トリポ エーアイ）】",
       "vertical": null,
       "asps": {
         "afb": {
@@ -524,7 +524,7 @@
       }
     },
     "afb-16143": {
-      "name": "【PID:16143】 その他",
+      "name": "【DomoAI（ドーモエーアイ）】動画・画像生成AIツール",
       "vertical": null,
       "asps": {
         "afb": {
@@ -542,7 +542,7 @@
       }
     },
     "afb-16153": {
-      "name": "【PID:16153】 その他",
+      "name": "【Plaud.ai】世界100万人が愛用！あなたの生産性を最大化！AIアシスタント",
       "vertical": null,
       "asps": {
         "afb": {
@@ -560,7 +560,7 @@
       }
     },
     "afb-15580": {
-      "name": "【PID:15580】 趣味・スポーツ",
+      "name": "女性専用のAIパーソナルトレーニング【FURDI】",
       "vertical": null,
       "asps": {
         "afb": {
@@ -596,7 +596,7 @@
       }
     },
     "afb-14611": {
-      "name": "【PID:14611】 その他",
+      "name": "AI技術で動画編集・動画の解像度を上げるソフト【HitPaw（ヒットポー）】",
       "vertical": null,
       "asps": {
         "afb": {
@@ -614,7 +614,7 @@
       }
     },
     "afb-14033": {
-      "name": "【PID:14033】 資格・通信講座",
+      "name": "AIxVRビジネス英会話のスマチュー【Smart Tutor（スマートチューター）】",
       "vertical": "education",
       "asps": {
         "afb": {
@@ -632,7 +632,7 @@
       }
     },
     "afb-13462": {
-      "name": "【PID:13462】 その他",
+      "name": "動画編集ソフトFilmoraでおなじみ！【Wondershare】公式ストア",
       "vertical": null,
       "asps": {
         "afb": {
@@ -650,7 +650,7 @@
       }
     },
     "afb-13217": {
-      "name": "【PID:13217】 その他",
+      "name": "AI写真編集ソフト【Luminar（ルミナー）】",
       "vertical": null,
       "asps": {
         "afb": {
@@ -668,7 +668,7 @@
       }
     },
     "afb-16427": {
-      "name": "【PID:16427】 その他",
+      "name": "最先端生成AI 3D プラットフォーム【Meshy AI（メッシーエーアイ）】",
       "vertical": null,
       "asps": {
         "afb": {
@@ -686,7 +686,7 @@
       }
     },
     "afb-16421": {
-      "name": "【PID:16421】 ボディケア",
+      "name": "スマートリング【RINGCONN】",
       "vertical": "health",
       "asps": {
         "afb": {
@@ -704,7 +704,7 @@
       }
     },
     "afb-11096": {
-      "name": "【PID:11096】 一般転職",
+      "name": "心理統計学分析で自分の特性に合う求人が探せる【Future Finder（フューチャーファインダー）】",
       "vertical": "labor",
       "asps": {
         "afb": {
@@ -722,7 +722,7 @@
       }
     },
     "afb-44": {
-      "name": null,
+      "name": "【afb限定】【afb】パートナー募集プロモーション",
       "vertical": null,
       "asps": {
         "afb": {
@@ -3167,15 +3167,31 @@
     },
     "afb-14567": {
       "name": "ハイクラス・金融・コンサルティング転職なら【KOTORA（コトラ）】",
+      "vertical": "labor",
       "asps": {
         "afb": {
           "promotionId": "14567",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T20:55:40.498Z",
           "history": [
             {
               "at": "2026-07-28T20:55:40.498Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-08-27T00:54:39.317Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "harvested",
+              "note": "SID・PID・visit.php・lead pixel・canonical 300x250を再検証"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "registered",
+              "note": "labor適合・同一案件なしのためSSOT登録"
             }
           ],
           "rewardYen": 8800
@@ -3594,15 +3610,31 @@
     },
     "afb-16683": {
       "name": "「節約＆安心」プロパンガスの見直しと親御さんの見守りサービス【おやここ】",
+      "vertical": "energy",
       "asps": {
         "afb": {
           "promotionId": "16683",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T21:14:57.159Z",
           "history": [
             {
               "at": "2026-07-28T21:14:57.159Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-08-27T00:54:39.317Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "harvested",
+              "note": "SID・PID・visit.php・lead pixel・canonical 300x250を再検証"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "registered",
+              "note": "energy適合・同一案件なしのためSSOT登録"
             }
           ],
           "rewardYen": 4230
@@ -3810,15 +3842,31 @@
     },
     "afb-15743": {
       "name": "合格への近道 受験対策講習会【能セン】",
+      "vertical": "education",
       "asps": {
         "afb": {
           "promotionId": "15743",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T21:25:06.713Z",
           "history": [
             {
               "at": "2026-07-28T21:25:06.713Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-08-27T00:54:39.317Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "harvested",
+              "note": "SID・PID・visit.php・lead pixel・canonical 300x250を再検証"
+            },
+            {
+              "at": "2026-08-27T03:59:32.186Z",
+              "status": "registered",
+              "note": "education適合・同一案件なしのためSSOT登録"
             }
           ],
           "rewardYen": 2537

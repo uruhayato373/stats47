@@ -49,6 +49,26 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
       "rankingKey": "university-count",
       "shortLabel": "大学数",
       "role": "context"
+    },
+    {
+      "rankingKey": "elementary-school-count",
+      "shortLabel": "小学校数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-school-count",
+      "shortLabel": "中学校数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "high-school-count",
+      "shortLabel": "高等学校数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-college-count",
+      "shortLabel": "短期大学数",
+      "role": "context"
     }
   ],
   "keywords": [

@@ -2,71 +2,104 @@
 
 import {
   PYRAMID_AGE_GROUPS,
-  PYRAMID_STATS_DATA_ID,
   enumeratePyramidCategoryCodes,
+  type StatSeriesRef,
 } from "@stats47/data-configs/theme-catalog";
-import { fetchFormattedStats, type GetStatsDataParams } from "@stats47/estat-api/server";
-
-import { getEstatCacheStorage } from "@/components/stat-charts/server";
+import { readStatsValues } from "@stats47/stats-r2/readers";
 
 import type { PyramidChartData } from "@stats47/visualization/d3";
-
-/**
- * 5歳階級別人口ピラミッドデータを取得
- *
- * e-Stat 社会・人口統計体系（statsDataId: 0000010101）から
- * 0〜4歳〜100歳以上の21年齢階級 × 男女 = 42コードを並列取得。
- * cdArea/cdTime 指定なしで全都道府県・全年度を一括取得し、R2 キャッシュを共有する。
- */
-
-// ★年齢×性別コードの SSOT は data-configs に移設 (WP4)。app fetch と依存 collector が共有し、
-//   catalog から pyramid の 34 request を機械列挙できるようにする。
-const STATS_DATA_ID = PYRAMID_STATS_DATA_ID;
 
 export interface PopulationPyramidResult {
   pyramidData: PyramidChartData[];
   yearName: string;
 }
 
-export async function fetchPopulationPyramidAction(prefCode: string): Promise<PopulationPyramidResult | null> {
-  const storage = await getEstatCacheStorage();
+type PyramidSeries = {
+  metricKey: string;
+  rows: Array<{
+    areaCode: string;
+    yearCode: string;
+    yearName: string;
+    value: number | null;
+    unit?: string;
+  }>;
+};
 
-  // 34 コードを並列取得（各コードは R2 キャッシュ済みなら即返却）。SSOT = data-configs。
-  const codes = enumeratePyramidCategoryCodes();
+/**
+ * MetricConfig から生成済みの R2 系列だけを使って人口ピラミッドを組み立てる。
+ * 34系列に共通する最新年が無い場合や、1系列でも欠測なら0埋めせず no-data にする。
+ */
+export async function fetchPopulationPyramidAction(
+  prefCode: string,
+  seriesRefs: readonly StatSeriesRef[],
+): Promise<PopulationPyramidResult | null> {
+  const expected = enumeratePyramidCategoryCodes();
+  const expectedKeys = new Set(expected.map(({ metricKey }) => metricKey));
+  const actualKeys = new Set(seriesRefs.map(({ metricKey }) => metricKey));
+  if (
+    seriesRefs.length !== expected.length ||
+    actualKeys.size !== expectedKeys.size ||
+    [...expectedKeys].some((key) => !actualKeys.has(key))
+  ) {
+    return null;
+  }
 
   const results = await Promise.all(
-    codes.map(async (c) => {
-      const params: GetStatsDataParams = {
-        statsDataId: STATS_DATA_ID,
-        cdCat01: c.code,
-      };
-      const data = await fetchFormattedStats(params, storage);
-      return { ...c, data };
-    })
+    seriesRefs.map(async (ref): Promise<PyramidSeries | null> => {
+      const payload = await readStatsValues(ref.metricKey, "prefecture");
+      if (!payload) return null;
+      const rows = payload.rows.filter(
+        (row) =>
+          row.areaCode === prefCode &&
+          row.value !== null &&
+          row.unit === "人" &&
+          (ref.year === undefined || row.yearCode === ref.year),
+      );
+      return rows.length > 0 ? { metricKey: ref.metricKey, rows } : null;
+    }),
   );
+  if (results.some((result) => result === null)) return null;
 
-  // 最新年度を特定（最初の結果から）
-  const firstResult = results[0]?.data.filter((d) => d.areaCode === prefCode);
-  if (!firstResult || firstResult.length === 0) return null;
+  const series = results as PyramidSeries[];
+  const [firstYears, ...remainingYears] = series.map(
+    ({ rows }) => new Set(rows.map(({ yearCode }) => yearCode)),
+  );
+  if (!firstYears) return null;
+  const commonYears = remainingYears.reduce<Set<string>>(
+    (intersection, years) =>
+      new Set([...intersection].filter((year) => years.has(year))),
+    new Set(firstYears),
+  );
+  const yearCode = [...commonYears].sort().at(-1);
+  if (!yearCode) return null;
 
-  const latestYear = firstResult.reduce((latest, d) => (d.yearCode > latest.yearCode ? d : latest));
-  const yearCode = latestYear.yearCode;
-  const yearName = latestYear.yearName ?? yearCode;
+  const valuesByMetric = new Map(
+    series.map(({ metricKey, rows }) => [
+      metricKey,
+      rows.find((row) => row.yearCode === yearCode),
+    ]),
+  );
+  if ([...valuesByMetric.values()].some((row) => row?.value == null)) return null;
 
-  // 各年齢階級の男女データを PyramidChartData に変換
-  const pyramidData: PyramidChartData[] = PYRAMID_AGE_GROUPS.map((ag) => {
-    const maleResult = results.find((r) => r.code === `${ag.base}01`);
-    const femaleResult = results.find((r) => r.code === `${ag.base}02`);
-
-    const maleValue = maleResult?.data.find((d) => d.areaCode === prefCode && d.yearCode === yearCode)?.value ?? 0;
-    const femaleValue = femaleResult?.data.find((d) => d.areaCode === prefCode && d.yearCode === yearCode)?.value ?? 0;
-
+  const pyramidData: PyramidChartData[] = PYRAMID_AGE_GROUPS.map((ageGroup) => {
+    const maleKey = expected.find(
+      ({ label, sex }) => label === ageGroup.label && sex === "male",
+    )?.metricKey;
+    const femaleKey = expected.find(
+      ({ label, sex }) => label === ageGroup.label && sex === "female",
+    )?.metricKey;
+    const male = maleKey ? valuesByMetric.get(maleKey)?.value : null;
+    const female = femaleKey ? valuesByMetric.get(femaleKey)?.value : null;
+    if (male == null || female == null) {
+      throw new Error(`人口ピラミッド系列が不足しています: ${ageGroup.label}`);
+    }
     return {
-      ageGroup: ag.label,
-      male: -Math.abs(Number(maleValue)),
-      female: Math.abs(Number(femaleValue)),
+      ageGroup: ageGroup.label,
+      male: -Math.abs(male),
+      female: Math.abs(female),
     };
   });
 
-  return { pyramidData, yearName };
+  const yearName = series[0]?.rows.find((row) => row.yearCode === yearCode)?.yearName;
+  return { pyramidData, yearName: yearName || yearCode };
 }

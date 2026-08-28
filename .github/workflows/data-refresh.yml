@@ -27,7 +27,8 @@ name: 🔄 Data Refresh (e-Stat → R2)
 #   3. schedule (毎月): 全 metric を実 push
 #
 # request file 形式 (data/data-refresh-requests.json):
-#   { "metric": "vacant-housing-rate,wooden-housing-ratio", "since": "", "dryRun": false }
+#   { "metric": "vacant-housing-rate,wooden-housing-ratio", "since": "", "dryRun": false,
+#     "migrateLegacyRecipes": false }
 #   - metric: 空なら全 metric (2,295 件・60 分では終わらない可能性があるので通常は指定する)
 #   - dryRun: true = fetch と形状検証のみ (R2 に書かない)
 #   - allowEmpty: 0 件 fatal を警告に落とす key (カンマ区切り)。★下記の注意を読むこと
@@ -65,6 +66,11 @@ on:
         description: "true: fetch のみで R2 に書き込まない (手動実行の既定)"
         required: false
         default: "true"
+      migrate_legacy_recipes:
+        description: "true: hash固定済みの旧stats 31件へrecipeを移行する (一回限り)"
+        required: false
+        default: false
+        type: boolean
   # 毎月 5日 03:00 UTC (= 12:00 JST) に全 metric を refresh。schedule 実行は
   # inputs が空 → 全 metric・実 push (dry_run 既定 'true' は workflow_dispatch のみ適用)。
   schedule:
@@ -121,6 +127,7 @@ jobs:
           INPUT_SINCE: ${{ inputs.since }}
           INPUT_ALLOW_EMPTY: ${{ inputs.allow_empty }}
           INPUT_DRY_RUN: ${{ inputs.dry_run }}
+          INPUT_MIGRATE_LEGACY_RECIPES: ${{ inputs.migrate_legacy_recipes }}
         run: |
           REQ=data/data-refresh-requests.json
           if [ "$EVENT_NAME" = "push" ] && [ -f "$REQ" ]; then
@@ -128,6 +135,7 @@ jobs:
             SINCE=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.since??''))")
             ALLOW_EMPTY=$(node -e "const r=require('./$REQ');process.stdout.write(String(r.allowEmpty??''))")
             DRY=$(node -e "const r=require('./$REQ');process.stdout.write(r.dryRun===true?'true':'false')")
+            MIGRATE_LEGACY_RECIPES=$(node -e "const r=require('./$REQ');process.stdout.write(r.migrateLegacyRecipes===true?'true':'false')")
           elif [ "$EVENT_NAME" = "push" ]; then
             # ★request file が無い push (= request の削除 commit) で本体を走らせない (2026-08-03)。
             #   ここは以前 workflow_dispatch 用の else に落ちていた。push イベントに inputs は
@@ -143,12 +151,14 @@ jobs:
             SINCE="$INPUT_SINCE"
             ALLOW_EMPTY="$INPUT_ALLOW_EMPTY"
             DRY="$INPUT_DRY_RUN"
+            MIGRATE_LEGACY_RECIPES="$INPUT_MIGRATE_LEGACY_RECIPES"
           fi
           {
             echo "metric=$METRIC"
             echo "since=$SINCE"
             echo "allow_empty=$ALLOW_EMPTY"
             echo "dry_run=$DRY"
+            echo "migrate_legacy_recipes=$MIGRATE_LEGACY_RECIPES"
           } >> "$GITHUB_OUTPUT"
           echo "解決: metric='$METRIC' since='$SINCE' dry_run='$DRY'"
           # allowEmpty は「未修正の 0 件を通した」証跡なので件数を必ず残す
@@ -189,6 +199,13 @@ jobs:
           [ "${{ steps.resolve.outputs.dry_run }}" = "true" ] && ARGS+=(--dry-run)
           echo "page-data-batch.ts ${ARGS[*]}"
           npx tsx packages/data-configs/scripts/page-data-batch.ts "${ARGS[@]}"
+
+      # recipe導入前に公開された31 payloadだけを、2026-08-27に固定した行SHA-256と
+      # 完全一致した場合に限ってlocal stagingへ移す。値とgeneratedAtは変えない。
+      # 通常runでは動かさず、request/inputで明示した一回限りの移行に限定する。
+      - name: 🧬 Migrate reviewed compatibility recipe metadata
+        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.resolve.outputs.migrate_legacy_recipes == 'true'
+        run: npm run migrate:reviewed-recipes:stage --workspace packages/stats-r2
 
       # 観測値を R2 に push (app/stats)。schedule 実行 (inputs.dry_run='') では push される。
       - name: ☁️ Push observations to R2 (app/stats)

@@ -109,6 +109,71 @@ export interface AssetsCheckResponse {
   result: Record<string, { ok: boolean; status: number; ct: string } | unknown>;
 }
 
+// ─── official dashboard research catalog (/research) ───────────────
+
+export type DashboardPublisherTypeDTO =
+  | "national-government"
+  | "prefecture"
+  | "municipality";
+
+export type DashboardVerificationStatusDTO = "verified" | "partial";
+
+export interface ResearchDashboardDTO {
+  id: string;
+  title: string;
+  publisher: string;
+  publisherType: DashboardPublisherTypeDTO;
+  officialUrl: string;
+  status: DashboardVerificationStatusDTO;
+  platform: string;
+  notes: string;
+  storyCount: number;
+}
+
+export interface ResearchStoryDTO {
+  id: string;
+  dashboardId: string;
+  dashboardTitle: string;
+  dashboardStatus: DashboardVerificationStatusDTO;
+  category: string;
+  title: string;
+  question: string;
+  storyPattern: string;
+  indicatorFamilies: string[];
+  visualizations: string[];
+  geographyLevels: string[];
+  stats47ThemeKeys: string[];
+  sourceUrl: string;
+  evidenceLevel: string;
+  verifiedAt: string;
+}
+
+export interface DashboardCatalogResponse {
+  researchedAt: string;
+  sourcePath: string;
+  summary: {
+    dashboards: number;
+    localDashboards: number;
+    stories: number;
+    resasStories: number;
+    coveredThemes: number;
+    declaredThemes: number;
+    partialDashboards: number;
+    staleStories: number;
+  };
+  audit: {
+    status: "pass" | "warn" | "fail";
+    errors: string[];
+    warnings: string[];
+  };
+  filters: {
+    themes: Array<{ key: string; label: string; count: number }>;
+    patterns: Array<{ key: string; count: number }>;
+  };
+  dashboards: ResearchDashboardDTO[];
+  stories: ResearchStoryDTO[];
+}
+
 export interface SvgChartDTO {
   slug: string;
   file: string;

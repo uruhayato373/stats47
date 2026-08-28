@@ -24,6 +24,7 @@ Mac / Windows 双方で動く。
 | `apply --commit` | 同上 `--commit` | **提携申請を送信 (不可逆・要オーナー承認)** |
 | `scan` (afb) | `node .Codex/scripts/ads/afb-scan.mjs [--vertical <軸>] [--mode search\|crawl]` | なし (走査 JSON を .local に出力) |
 | `scan` (もしも) | `node .Codex/scripts/ads/moshimo-scan.mjs [--query <語>] [--vertical <軸>]` | なし (同上) |
+| `harvest` (afb) | `node .Codex/scripts/ads/afb-harvest.mjs --id <PID[,PID]>` | なし (原稿を `.local/affiliate-harvest/afb/` に保存。SSOT 登録・公開は別工程) |
 | `budget` | `node .Codex/scripts/ads/check-asp-apply-budget.cjs --asp <moshimo\|afb>` | なし (週の残枠を表示) |
 
 ## 手順
@@ -128,28 +129,28 @@ git で運ばれるもの / 運ばれないものを取り違えると、重複�
 - **Windows では実 Chrome の起動が落ちる**ことがある (企業端末で実測)。同梱 chromium へ
   自動フォールバックするので操作は不要だが、ログは残る。
 
-## ★未実装 (継続運用の断絶。申請しても収益に到達しない)
+## 継続運用の残課題
 
-A8 は `scout → apply → check-approval → harvest → register → 公開` が閉じているが、
-**もしも / afb は apply までしか無い** (2026-07-28 時点)。申請が承認されても放置される。
+A8 は `scout → apply → check-approval → harvest → register → 公開` が閉じている。
+afb は承認追跡と広告原稿のローカル取得まで実装済み、もしもは apply までである。
 
 | 工程 | A8 | もしも / afb |
 |---|---|---|
 | 案件探索 | `scout` | ✅ `moshimo-scan` / `afb-scan` |
 | 申請 | `apply --id` | ✅ `affiliate-apply --commit` |
 | **承認の追跡** | `check-approval` (週次で applied→approved) | ✅ `affiliate-status --write` (実機照合で applying→approved。名前も補完する) |
-| **広告コード取得** | `harvest` | ❌ **無い**。SSOT に登録できない |
-| SSOT 追記 | `append-affiliate-ads` | ❌ 上記が無いので到達しない |
+| **広告コード取得** | `harvest` | afb=`afb-harvest.mjs --id ...` / もしも=未実装 |
+| SSOT 追記 | `append-affiliate-ads` | afb/もしもとも手動登録のみ |
 | 定期実行 | 週次 cron | ❌ 手動のみ |
 
 - **承認追跡は 2026-08-04 に埋まった**。`affiliate-status --write` が正遷移を反映するので、
   もしも / afb の承認が申請中のまま放置されることは無くなった (同日の照合で承認 17 件を反映)。
-- **残る断絶は「広告コード取得」**。承認されても広告コードを取れないため SSOT に登録できず、
-  配信に到達しない。当面は `/register-affiliate-banner` の `register` モード (HTML 貼付) で
-  1 件ずつ登録する。自動化するなら A8 の `harvest` と同じ形をもしも / afb 用に作る。
+- **残る断絶は、afb では「取得済み原稿のSSOT登録」、もしもでは「広告コード取得」**。
+  afb の harvest は PID 明示・approved・stats47 SID read-back・PID/name binding・canonical サイズ・
+  クリック URL + lead pixel の完全性を満たす場合だけローカル保存する。登録・公開は別承認で行う。
 - ただし**登録を増やせば収益が増えるとは限らない**。同一 vertical × 枠は banner 上位 1 +
   text 上位 2 しか表示されず、在庫 260 件に対し 28 日で impression が付いたのは 84 件だけ
-  (2026-08-04 実測)。harvest を作る前に、計装が揃った状態の実測で在庫が制約かを確かめる。
+  (2026-08-04 実測)。もしものharvestやSSOT登録自動化を広げる前に、計装が揃った状態の実測で在庫が制約かを確かめる。
 
 ## サイト帰属エラーが出たとき
 

@@ -59,4 +59,24 @@ describe("resolveMetricProvenance (param 単一ルール)", () => {
     const m = metric({ kind: "estat", statsDataId: "9999999999" });
     expect(resolveMetricProvenance(m)).toEqual([]);
   });
+
+  it("external は正式な displayName 辞書があれば master survey id へ解決する", () => {
+    const m = metric({
+      kind: "external",
+      fetcherKey: "local-public-employee-salary",
+      config: {},
+      displayName: "地方公務員給与実態調査",
+    });
+    expect(ids(m)).toEqual(["local-public-employee-salary"]);
+  });
+
+  it("external の未知 displayName は合成 id のまま保持する", () => {
+    const m = metric({
+      kind: "external",
+      fetcherKey: "unknown",
+      config: {},
+      displayName: "未登録の外部資料",
+    });
+    expect(ids(m)).toEqual(["src:未登録の外部資料"]);
+  });
 });

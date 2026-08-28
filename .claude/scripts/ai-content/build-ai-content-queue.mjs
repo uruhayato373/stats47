@@ -53,6 +53,7 @@ import { fileURLToPath } from "node:url";
 import { auditRow } from "./audit-ai-content.mjs";
 import { checkValueHealth, latestPartition } from "./lib/value-health.mjs";
 import { loadFailureState, quarantinedKeys } from "./record-generation-outcome.mjs";
+import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..", "..", "..");
@@ -94,6 +95,8 @@ function parseRankingKeysFromGsc(csvPath) {
   for (let i = 1; i < lines.length; i++) {
     const cols = lines[i].split(",");
     const page = cols[0] ?? "";
+    // ranking key へ畳むとアンカー imp を二重加算するため、ページ需要からは除外。
+    if (isAnchorRow(page)) continue;
     const m = page.match(/\/ranking\/([^/?#]+)/);
     if (!m) continue;
     const key = m[1];

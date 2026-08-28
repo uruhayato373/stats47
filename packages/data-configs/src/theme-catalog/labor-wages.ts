@@ -119,14 +119,12 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "有効求人倍率と完全失業率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010206",
-            "cdCat01": "#F03103"
+            "metricKey": "active-job-opening-ratio"
           },
           {
-            "statsDataId": "0000010206",
-            "cdCat01": "#F01301"
+            "metricKey": "unemployment-rate"
           }
         ],
         "labels": [
@@ -270,10 +268,9 @@ export const LABOR_WAGES_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "就業率の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010206",
-            "cdCat01": "#F03101"
+            "metricKey": "employment-rate"
           }
         ],
         "labels": [

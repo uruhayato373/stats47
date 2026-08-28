@@ -12,9 +12,10 @@
  * 依存は (a) 正典 R2 metric 参照と (b) 移行前の e-Stat request の2系統。
  * R2移行済みchartを依存0として扱わずmetricKeyを列挙し、legacy request（期限: 2026-09-30、削除条件: 全chartのR2移行完了）だけをlive e-Stat監査へ渡す。
  */
-import { enumeratePyramidCategoryCodes, PYRAMID_STATS_DATA_ID } from "./population-pyramid-deps";
 import { parseStatSeriesRefs, type StatSeriesRef } from "./stat-series-ref";
 import type { CatalogChart, CatalogComponentType } from "./types";
+import { getMetricConfig } from "../registry";
+import { buildRecipe } from "../recipe";
 
 /** 1 つの e-Stat request 依存。statsDataId + 任意のカテゴリ/タブ等のフィルタ。 */
 export interface EstatRequestDep {
@@ -79,10 +80,13 @@ export function collectChartDependencies(chart: CatalogChart): ChartDependencies
       requests.push(...estatParamsList(props.estatParams));
       break;
     case "mixed-chart":
+      metricRefs.push(...(parseStatSeriesRefs(props.columnSeriesRefs) ?? []));
+      metricRefs.push(...(parseStatSeriesRefs(props.lineSeriesRefs) ?? []));
       requests.push(...estatParamsList(props.columnParams));
       requests.push(...estatParamsList(props.lineParams));
       break;
     case "composition-chart": {
+      metricRefs.push(...(parseStatSeriesRefs(props.seriesRefs) ?? []));
       const statsDataId = typeof props.statsDataId === "string" ? props.statsDataId : null;
       const segs = Array.isArray(props.segments) ? props.segments : [];
       const codes = segs
@@ -93,6 +97,7 @@ export function collectChartDependencies(chart: CatalogChart): ChartDependencies
       break;
     }
     case "donut-chart": {
+      metricRefs.push(...(parseStatSeriesRefs(props.seriesRefs) ?? []));
       const statsDataId = typeof props.statsDataId === "string" ? props.statsDataId : null;
       const cats = Array.isArray(props.categories) ? props.categories : [];
       const codes = cats
@@ -103,7 +108,8 @@ export function collectChartDependencies(chart: CatalogChart): ChartDependencies
     }
     case "cpi-profile":
     case "cpi-heatmap":
-      // CPI は表全体を 1 request で取り excludeCodes/year で client 側フィルタする。
+      metricRefs.push(...(parseStatSeriesRefs(props.seriesRefs) ?? []));
+      // 移行前互換CPIは表全体を1 requestで取り、excludeCodes/yearでclient側フィルタする。
       if (typeof props.statsDataId === "string") {
         requests.push({ statsDataId: props.statsDataId, filters: {} });
       }
@@ -114,13 +120,8 @@ export function collectChartDependencies(chart: CatalogChart): ChartDependencies
       if (props.estatParams !== undefined) requests.push(...estatParamsList(props.estatParams));
       break;
     case "pyramid-chart":
-      // props は空。依存 (statsDataId × 34 の年齢×性別) は SSOT から展開する。
-      requests.push(
-        ...enumeratePyramidCategoryCodes().map((c) => ({
-          statsDataId: PYRAMID_STATS_DATA_ID,
-          filters: { cdCat01: c.code },
-        })),
-      );
+      // 年齢×性別34系列も他chartと同じR2 metric参照として列挙する。
+      metricRefs.push(...(parseStatSeriesRefs(props.seriesRefs) ?? []));
       break;
     case "markdown-section":
       // 考察テキスト。データ依存なし。
@@ -196,11 +197,23 @@ export interface RequestWithProvenance {
   componentType: CatalogComponentType;
 }
 
+/** distinct R2 metric 1 件 + 由来。R2 live audit の期待集合として使う。 */
+export interface MetricRefWithProvenance {
+  metricKey: string;
+  themeKey: string;
+  componentKey: string;
+  componentType: CatalogComponentType;
+}
+
 export interface ThemeDependencyProvenanceSet {
   /** distinct request (key 昇順)。初出のテーマ/チャートを provenance として保持する。 */
   distinct: RequestWithProvenance[];
   /** 全 request の総数 (chart をまたいだ重複を含む)。 */
   totalRequests: number;
+  /** distinct R2 metric (metricKey 昇順)。 */
+  distinctMetricRefs: MetricRefWithProvenance[];
+  /** 全 R2 metric 参照数 (chart をまたいだ重複を含む)。 */
+  totalMetricRefs: number;
 }
 
 /**
@@ -214,10 +227,23 @@ export function collectThemeDataDependenciesWithProvenance(
   catalogs: Record<string, { charts: CatalogChart[] }>,
 ): ThemeDependencyProvenanceSet {
   const byKey = new Map<string, RequestWithProvenance>();
+  const metricsByKey = new Map<string, MetricRefWithProvenance>();
   let total = 0;
+  let totalMetricRefs = 0;
   for (const [themeKey, cat] of Object.entries(catalogs)) {
     for (const chart of cat.charts) {
       const deps = collectChartDependencies(chart);
+      for (const ref of deps.metricRefs) {
+        totalMetricRefs += 1;
+        if (!metricsByKey.has(ref.metricKey)) {
+          metricsByKey.set(ref.metricKey, {
+            metricKey: ref.metricKey,
+            themeKey,
+            componentKey: chart.componentKey,
+            componentType: chart.componentType,
+          });
+        }
+      }
       for (const r of deps.requests) {
         total += 1;
         const key = requestKey(r);
@@ -234,7 +260,10 @@ export function collectThemeDataDependenciesWithProvenance(
     }
   }
   const distinct = [...byKey.values()].sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
-  return { distinct, totalRequests: total };
+  const distinctMetricRefs = [...metricsByKey.values()].sort((a, b) =>
+    a.metricKey.localeCompare(b.metricKey),
+  );
+  return { distinct, totalRequests: total, distinctMetricRefs, totalMetricRefs };
 }
 
 /** live 監査 (.mjs・素の node) が読む依存ミラーの JSON 形。決定的 (key 昇順)。 */
@@ -253,6 +282,18 @@ export interface ThemeDependencyMirror {
     componentKey: string;
     componentType: CatalogComponentType;
   }>;
+  /** 全 R2 metric 参照数 (chart をまたいだ重複を含む)。 */
+  totalMetricRefs: number;
+  /** distinct R2 metric 数 (= metrics.length)。 */
+  distinctMetricRefs: number;
+  metrics: Array<{
+    metricKey: string;
+    expectedUnit: string;
+    expectedConfigHash: string;
+    themeKey: string;
+    componentKey: string;
+    componentType: CatalogComponentType;
+  }>;
 }
 
 /**
@@ -263,7 +304,8 @@ export interface ThemeDependencyMirror {
 export function buildThemeDependencyMirror(
   catalogs: Record<string, { charts: CatalogChart[] }>,
 ): ThemeDependencyMirror {
-  const { distinct, totalRequests } = collectThemeDataDependenciesWithProvenance(catalogs);
+  const { distinct, totalRequests, distinctMetricRefs, totalMetricRefs } =
+    collectThemeDataDependenciesWithProvenance(catalogs);
   return {
     generatedFrom: "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
     totalRequests,
@@ -276,5 +318,19 @@ export function buildThemeDependencyMirror(
       componentKey: d.componentKey,
       componentType: d.componentType,
     })),
+    totalMetricRefs,
+    distinctMetricRefs: distinctMetricRefs.length,
+    metrics: distinctMetricRefs.map((ref) => {
+      const config = getMetricConfig(ref.metricKey);
+      if (!config) throw new Error(`ThemeCatalog が未登録 metric を参照しています: ${ref.metricKey}`);
+      return {
+        metricKey: ref.metricKey,
+        expectedUnit: config.unit,
+        expectedConfigHash: buildRecipe(config).configHash,
+        themeKey: ref.themeKey,
+        componentKey: ref.componentKey,
+        componentType: ref.componentType,
+      };
+    }),
   };
 }

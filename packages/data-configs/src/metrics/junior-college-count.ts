@@ -4,6 +4,7 @@ export const juniorCollegeCount: MetricConfig = {
   "key": "junior-college-count",
   "title": "短期大学数",
   "subtitle": "総数",
+  "description": "都道府県内に所在する短期大学の総数。短期高等教育機関の供給規模を示す。",
   "unit": "校",
   "category": "educationsports",
   "source": {

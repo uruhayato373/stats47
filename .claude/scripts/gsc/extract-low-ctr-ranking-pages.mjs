@@ -20,6 +20,8 @@ import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { isAnchorRow } from "./analyze-ctr-seesaw.mjs";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -134,6 +136,8 @@ function main() {
   for (const row of rows) {
     const page = row.page;
     if (!page || !page.includes("/ranking/")) continue;
+    // #見出し行を低 CTR の独立ランディングページとして候補化しない。
+    if (isAnchorRow(page)) continue;
     const rankingKey = extractRankingKey(page);
     if (!rankingKey) continue;
     if (FILTER_KEY && rankingKey !== FILTER_KEY) continue;

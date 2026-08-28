@@ -4,6 +4,7 @@ import React from "react";
 
 import { cn } from "@stats47/components";
 import { Badge } from "@stats47/components/atoms/ui/badge";
+import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 import { TrendingDown, TrendingUp } from "lucide-react";
 
 import { SurfaceCard } from "@/components/surface";
@@ -17,6 +18,8 @@ export interface KpiCardClientProps {
   year: string | null;
   changeRate?: number | null;
   changeDirection?: "increase" | "decrease" | "neutral" | null;
+  /** 同じ指標の値集合から解決した表示小数桁。未指定時は現在値から最大2桁まで保持する。 */
+  precision?: number;
 }
 
 export const KpiCardClient: React.FC<KpiCardClientProps> = ({
@@ -26,9 +29,12 @@ export const KpiCardClient: React.FC<KpiCardClientProps> = ({
   year,
   changeRate,
   changeDirection,
+  precision,
 }) => {
   const formattedValue = value !== null && value !== undefined
-    ? typeof value === "number" ? value.toLocaleString() : value
+    ? typeof value === "number"
+      ? formatValueWithPrecision(value, precision ?? resolveValuePrecision([value]))
+      : value
     : "---";
 
   const trendColor =

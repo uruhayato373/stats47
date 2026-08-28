@@ -41,9 +41,45 @@ function rankingKeysFromR2Paths(source) {
   return [...matches].map((match) => match[1]);
 }
 
+function metricKeysFromR2Paths(source) {
+  const matches = JSON.stringify(source).matchAll(
+    /(?:r2:)?app\/stats\/([^/"\s{}]+)\/values\.json/g
+  );
+  return [...matches].map((match) => match[1]);
+}
+
+function referencedMetricKeys(source) {
+  return [
+    ...directRankingKeys(source.metricKey),
+    ...directRankingKeys(source.metricKeys),
+    ...nestedReferenceValues(source, 'metricKey'),
+    ...metricKeysFromR2Paths(source),
+  ];
+}
+
 function directRankingKeys(value) {
   return splitChartSourceKeys(value).filter(
     (item) => !item.includes('/') && !item.includes(':')
+  );
+}
+
+function constituentRankingKeys(source) {
+  if (
+    !source.constituents ||
+    typeof source.constituents !== 'object' ||
+    Array.isArray(source.constituents)
+  ) {
+    return [];
+  }
+  return Object.values(source.constituents).flatMap(directRankingKeys);
+}
+
+function calculatedInputRankingKeys(source) {
+  if (!Array.isArray(source.inputs)) return [];
+  return source.inputs.flatMap((input) =>
+    input && typeof input === 'object'
+      ? directRankingKeys(input.rankingKey)
+      : []
   );
 }
 
@@ -56,6 +92,7 @@ function referencedRankingKeys(source) {
     ...directRankingKeys(source.xRankingKey),
     ...directRankingKeys(source.yRankingKey),
     ...nestedReferenceValues(source, 'rankingKey'),
+    ...constituentRankingKeys(source),
     ...(Array.isArray(source.derivedFrom)
       ? source.derivedFrom.flatMap((item) =>
           typeof item === 'string' ? directRankingKeys(item) : []
@@ -75,7 +112,7 @@ function hasNestedReference(source) {
 
 export function extractChartSourceReferences(sourceData) {
   if (!sourceData || typeof sourceData !== 'object' || Array.isArray(sourceData)) {
-    return { rankingKeys: [], statsDataIds: [] };
+    return { rankingKeys: [], metricKeys: [], statsDataIds: [] };
   }
   const statsDataIds = [
     ...splitStatsDataIds(sourceData.statsDataId),
@@ -91,6 +128,7 @@ export function extractChartSourceReferences(sourceData) {
   ];
   return {
     rankingKeys: [...new Set(referencedRankingKeys(sourceData))],
+    metricKeys: [...new Set(referencedMetricKeys(sourceData))],
     statsDataIds: [...new Set(statsDataIds)],
   };
 }
@@ -99,6 +137,11 @@ export const CHART_SOURCE_KIND_SPECS = {
   ranking: {
     hasReference: (source) => Boolean(source.rankingKey),
     rankingKeys: (source) => splitChartSourceKeys(source.rankingKey),
+  },
+  metric: {
+    hasReference: (source) => referencedMetricKeys(source).length > 0,
+    rankingKeys: () => [],
+    metricKeys: referencedMetricKeys,
   },
   estat: {
     hasReference: (source) => Boolean(source.statsDataId),
@@ -127,7 +170,9 @@ export const CHART_SOURCE_KIND_SPECS = {
   calculated: {
     hasReference: (source) =>
       Array.isArray(source.inputs) && source.inputs.length > 0,
-    rankingKeys: referencedRankingKeys,
+    // xKey/yKey は軸の表示ラベルとして `calculated` 等の sentinel を取り得る。
+    // 再取得依存は inputs[].rankingKey だけを正典とし、表示フィールドをR2 keyと誤認しない。
+    rankingKeys: calculatedInputRankingKeys,
   },
   composite: {
     hasReference: (source) =>
@@ -187,6 +232,7 @@ export function inspectChartSourceManifest(sourceData) {
       detail: 'source.json をオブジェクトとして解析できない',
       kind: null,
       rankingKeys: [],
+      metricKeys: [],
     };
   }
 
@@ -201,6 +247,36 @@ export function inspectChartSourceManifest(sourceData) {
       detail: 'kind フィールドが無い',
       kind: null,
       rankingKeys: [],
+      metricKeys: [],
+    };
+  }
+
+  const hasSurveyScope = Object.hasOwn(sourceData, 'surveyScope');
+  const hasSurveyScopeReason = Object.hasOwn(sourceData, 'surveyScopeReason');
+  if (hasSurveyScope && sourceData.surveyScope !== 'not-applicable') {
+    return {
+      verdict: 'invalid',
+      code: 'invalid-survey-scope',
+      detail: 'surveyScope は not-applicable のみ指定できる',
+      kind,
+      rankingKeys: [],
+      metricKeys: [],
+    };
+  }
+  if (
+    (hasSurveyScope || hasSurveyScopeReason) &&
+    (sourceData.surveyScope !== 'not-applicable' ||
+      typeof sourceData.surveyScopeReason !== 'string' ||
+      sourceData.surveyScopeReason.trim().length < 10)
+  ) {
+    return {
+      verdict: 'invalid',
+      code: 'invalid-survey-scope-reason',
+      detail:
+        'surveyScope: not-applicable には10文字以上の surveyScopeReason が必要',
+      kind,
+      rankingKeys: [],
+      metricKeys: [],
     };
   }
 
@@ -212,6 +288,7 @@ export function inspectChartSourceManifest(sourceData) {
       detail: '未知の kind — chart-provenance.mjs の定義を更新すること',
       kind,
       rankingKeys: [],
+      metricKeys: [],
     };
   }
   if (spec.isOutOfScope) {
@@ -221,6 +298,7 @@ export function inspectChartSourceManifest(sourceData) {
       detail: 'SSOT 指標ではない（data json 自体が真実源）',
       kind,
       rankingKeys: [],
+      metricKeys: [],
     };
   }
   if (sourceData.incomplete === true) {
@@ -230,6 +308,7 @@ export function inspectChartSourceManifest(sourceData) {
       detail: String(sourceData.note ?? 'incomplete: true'),
       kind,
       rankingKeys: [],
+      metricKeys: [],
     };
   }
   if (!spec.hasReference(sourceData)) {
@@ -239,6 +318,7 @@ export function inspectChartSourceManifest(sourceData) {
       detail: '再取得に必要な参照または計算式が無い',
       kind,
       rankingKeys: [],
+      metricKeys: [],
     };
   }
   return {
@@ -247,5 +327,6 @@ export function inspectChartSourceManifest(sourceData) {
     detail: '構造上の再取得条件を満たす',
     kind,
     rankingKeys: [...new Set(spec.rankingKeys(sourceData))],
+    metricKeys: [...new Set(spec.metricKeys?.(sourceData) ?? [])],
   };
 }

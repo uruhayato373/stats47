@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-26T01:01:04.947Z",
+  "generatedAt": "2026-08-27T06:40:25.708Z",
   "gscWeek": "2026-W34",
   "inputs": {
-    "pages": 3303,
+    "pages": 2962,
     "rankingKeys": 2196,
     "articleTags": 445,
     "articleTagsSource": "r2"
@@ -10,9 +10,9 @@
   "demand": {
     "byType": {
       "blog": {
-        "imp": 116271,
-        "clicks": 2089,
-        "pages": 764
+        "imp": 64708,
+        "clicks": 2086,
+        "pages": 423
       },
       "ranking": {
         "imp": 55766,
@@ -57,44 +57,44 @@
     },
     "byVertical": {
       "economy": {
-        "imp": 58167,
-        "clicks": 1885,
-        "pages": 965
+        "imp": 48793,
+        "clicks": 1884,
+        "pages": 879
       },
       "population": {
-        "imp": 9349,
+        "imp": 7272,
         "clicks": 357,
-        "pages": 173
+        "pages": 149
       },
       "education": {
-        "imp": 13370,
+        "imp": 12117,
         "clicks": 480,
-        "pages": 176
+        "pages": 168
       },
       "mobility": {
-        "imp": 5785,
+        "imp": 4733,
         "clicks": 146,
-        "pages": 88
+        "pages": 82
       },
       "health": {
-        "imp": 13448,
+        "imp": 8371,
         "clicks": 245,
-        "pages": 163
+        "pages": 142
       },
       "furusato": {
-        "imp": 16619,
+        "imp": 16031,
         "clicks": 271,
-        "pages": 1214
+        "pages": 1200
       },
       "energy": {
-        "imp": 1463,
+        "imp": 1336,
         "clicks": 42,
-        "pages": 29
+        "pages": 25
       },
       "labor": {
-        "imp": 4566,
+        "imp": 4109,
         "clicks": 82,
-        "pages": 170
+        "pages": 153
       },
       "housing": {
         "imp": 1717,
@@ -118,9 +118,9 @@
       {
         "type": "blog",
         "vertical": "economy",
-        "imp": 24469,
-        "clicks": 547,
-        "pages": 259
+        "imp": 15095,
+        "clicks": 546,
+        "pages": 173
       },
       {
         "type": "areas",
@@ -139,16 +139,16 @@
       {
         "type": "blog",
         "vertical": "health",
-        "imp": 9719,
+        "imp": 4642,
         "clicks": 109,
-        "pages": 37
+        "pages": 16
       },
       {
         "type": "blog",
         "vertical": "population",
-        "imp": 6307,
+        "imp": 4230,
         "clicks": 259,
-        "pages": 59
+        "pages": 35
       },
       {
         "type": "ranking",
@@ -158,20 +158,6 @@
         "pages": 123
       },
       {
-        "type": "blog",
-        "vertical": "mobility",
-        "imp": 2913,
-        "clicks": 65,
-        "pages": 13
-      },
-      {
-        "type": "blog",
-        "vertical": "education",
-        "imp": 2882,
-        "clicks": 186,
-        "pages": 16
-      },
-      {
         "type": "ranking",
         "vertical": "mobility",
         "imp": 2749,
@@ -179,25 +165,39 @@
         "pages": 69
       },
       {
-        "type": "blog",
-        "vertical": "labor",
-        "imp": 2689,
-        "clicks": 42,
-        "pages": 60
-      },
-      {
-        "type": "blog",
-        "vertical": "furusato",
-        "imp": 2673,
-        "clicks": 58,
-        "pages": 26
-      },
-      {
         "type": "ranking",
         "vertical": "furusato",
         "imp": 2476,
         "clicks": 75,
         "pages": 102
+      },
+      {
+        "type": "blog",
+        "vertical": "labor",
+        "imp": 2232,
+        "clicks": 42,
+        "pages": 43
+      },
+      {
+        "type": "blog",
+        "vertical": "furusato",
+        "imp": 2085,
+        "clicks": 58,
+        "pages": 12
+      },
+      {
+        "type": "blog",
+        "vertical": "mobility",
+        "imp": 1861,
+        "clicks": 65,
+        "pages": 7
+      },
+      {
+        "type": "blog",
+        "vertical": "education",
+        "imp": 1629,
+        "clicks": 186,
+        "pages": 8
       },
       {
         "type": "ranking",
@@ -235,18 +235,18 @@
         "pages": 60
       },
       {
-        "type": "blog",
-        "vertical": "energy",
-        "imp": 755,
-        "clicks": 21,
-        "pages": 9
-      },
-      {
         "type": "ranking",
         "vertical": "labor",
         "imp": 705,
         "clicks": 26,
         "pages": 46
+      },
+      {
+        "type": "blog",
+        "vertical": "energy",
+        "imp": 628,
+        "clicks": 21,
+        "pages": 5
       },
       {
         "type": "ranking",
@@ -414,25 +414,25 @@
   "supply": {
     "total": {
       "furusato": 7,
-      "energy": 29,
+      "energy": 30,
       "travel": 51,
       "health": 14,
       "economy": 27,
       "housing": 26,
-      "education": 25,
-      "labor": 50,
+      "education": 26,
+      "labor": 51,
       "mobility": 13,
       "population": 18
     },
     "banner": {
       "furusato": 4,
-      "energy": 14,
+      "energy": 15,
       "travel": 29,
       "health": 9,
       "economy": 16,
       "housing": 13,
-      "education": 12,
-      "labor": 25,
+      "education": 13,
+      "labor": 26,
       "mobility": 6,
       "population": 10
     },
@@ -452,8 +452,8 @@
   "gaps": [
     {
       "vertical": "economy",
-      "imp": 58167,
-      "clicks": 1885,
+      "imp": 48793,
+      "clicks": 1884,
       "inventory": 27,
       "banner": 16,
       "text": 11,
@@ -461,7 +461,7 @@
     },
     {
       "vertical": "furusato",
-      "imp": 16619,
+      "imp": 16031,
       "clicks": 271,
       "inventory": 7,
       "banner": 4,
@@ -469,8 +469,17 @@
       "kinds": []
     },
     {
+      "vertical": "education",
+      "imp": 12117,
+      "clicks": 480,
+      "inventory": 26,
+      "banner": 13,
+      "text": 13,
+      "kinds": []
+    },
+    {
       "vertical": "health",
-      "imp": 13448,
+      "imp": 8371,
       "clicks": 245,
       "inventory": 14,
       "banner": 9,
@@ -478,17 +487,8 @@
       "kinds": []
     },
     {
-      "vertical": "education",
-      "imp": 13370,
-      "clicks": 480,
-      "inventory": 25,
-      "banner": 12,
-      "text": 13,
-      "kinds": []
-    },
-    {
       "vertical": "population",
-      "imp": 9349,
+      "imp": 7272,
       "clicks": 357,
       "inventory": 18,
       "banner": 10,
@@ -497,7 +497,7 @@
     },
     {
       "vertical": "mobility",
-      "imp": 5785,
+      "imp": 4733,
       "clicks": 146,
       "inventory": 13,
       "banner": 6,
@@ -506,10 +506,10 @@
     },
     {
       "vertical": "labor",
-      "imp": 4566,
+      "imp": 4109,
       "clicks": 82,
-      "inventory": 50,
-      "banner": 25,
+      "inventory": 51,
+      "banner": 26,
       "text": 25,
       "kinds": []
     },
@@ -524,10 +524,10 @@
     },
     {
       "vertical": "energy",
-      "imp": 1463,
+      "imp": 1336,
       "clicks": 42,
-      "inventory": 29,
-      "banner": 14,
+      "inventory": 30,
+      "banner": 15,
       "text": 15,
       "kinds": []
     },
@@ -542,12 +542,12 @@
     }
   ],
   "unmapped": {
-    "totalImp": 72085,
+    "totalImp": 37098,
     "byReason": [
       {
         "reason": "tags-unmapped",
-        "imp": 70747,
-        "pages": 300,
+        "imp": 35760,
+        "pages": 126,
         "examples": [
           "avg-height-high-school-2nd-male",
           "local-government-debt-burden",
@@ -1051,51 +1051,11 @@
         "reason": "tags-unmapped"
       },
       {
-        "url": "https://stats47.jp/blog/convenience-store-density-map#%E3%81%BE%E3%81%A8%E3%82%81",
-        "type": "blog",
-        "key": "convenience-store-density-map",
-        "imp": 1556,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/convenience-store-density-map#%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8B%E5%AF%86%E5%BA%A6%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0%E4%BA%BA%E5%8F%A310%E4%B8%87%E4%BA%BA%E5%BD%93%E3%81%9F%E3%82%8A",
-        "type": "blog",
-        "key": "convenience-store-density-map",
-        "imp": 1552,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%81%BE%E3%81%A8%E3%82%81",
-        "type": "blog",
-        "key": "noodle-consumption-prefecture-character",
-        "imp": 1493,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%81%86%E3%81%A9%E3%82%93%E5%9C%8F%E3%81%AF%E9%A6%99%E5%B7%9D%E3%81%A0%E3%81%91%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84",
-        "type": "blog",
-        "key": "noodle-consumption-prefecture-character",
-        "imp": 1490,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
         "url": "https://stats47.jp/blog/precipitation-snow-regional-gap",
         "type": "blog",
         "key": "precipitation-snow-regional-gap",
         "imp": 1487,
         "clicks": 16,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/convenience-store-density-map#%E9%83%BD%E9%81%93%E5%BA%9C%E7%9C%8C%E3%83%9E%E3%83%83%E3%83%97%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8B%E3%81%AE%E5%9C%B0%E5%9F%9F%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3",
-        "type": "blog",
-        "key": "convenience-store-density-map",
-        "imp": 1448,
-        "clicks": 0,
         "reason": "tags-unmapped"
       },
       {
@@ -1107,14 +1067,6 @@
         "reason": "tags-unmapped"
       },
       {
-        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%81%9D%E3%81%B0%E5%9C%8F%E3%81%AF%E3%81%86%E3%81%A9%E3%82%93%E3%81%A8%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E3%81%8C%E5%85%B1%E5%AD%98%E3%81%99%E3%82%8B",
-        "type": "blog",
-        "key": "noodle-consumption-prefecture-character",
-        "imp": 1408,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
         "url": "https://stats47.jp/blog/temperature-extremes-map",
         "type": "blog",
         "key": "temperature-extremes-map",
@@ -1123,83 +1075,11 @@
         "reason": "tags-unmapped"
       },
       {
-        "url": "https://stats47.jp/blog/convenience-store-density-map#%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8B%E5%AF%86%E5%BA%A6-%E5%B0%8F%E5%A3%B2%E5%BA%97%E5%AF%86%E5%BA%A6%E6%95%A3%E5%B8%83%E5%9B%B3%E3%81%A7%E8%A6%8B%E3%82%8B%E6%A7%8B%E9%80%A0%E3%81%AE%E9%81%95%E3%81%84",
-        "type": "blog",
-        "key": "convenience-store-density-map",
-        "imp": 1264,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%81%86%E3%81%A9%E3%82%93%E5%9C%8F%E3%81%A8%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E5%9C%8F%E3%81%AF%E9%80%86%E7%9B%B8%E9%96%A2%E3%81%99%E3%82%8B",
-        "type": "blog",
-        "key": "noodle-consumption-prefecture-character",
-        "imp": 1226,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%81%AA%E3%81%9C%E9%BA%BA%E6%96%87%E5%8C%96%E3%81%AF%E5%88%86%E3%81%8B%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%8B",
-        "type": "blog",
-        "key": "noodle-consumption-prefecture-character",
-        "imp": 1150,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/noodle-consumption-prefecture-character#%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E5%9C%8F%E3%81%AF%E6%9D%B1%E5%8C%97%E3%83%BB%E5%8C%97%E9%99%B8%E3%81%8C%E5%B8%AD%E5%B7%BB%E3%81%99%E3%82%8B",
-        "type": "blog",
-        "key": "noodle-consumption-prefecture-character",
-        "imp": 1150,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/local-government-debt-burden#%E9%83%BD%E9%81%93%E5%BA%9C%E7%9C%8C%E3%83%9E%E3%83%83%E3%83%97%E5%9C%B0%E6%96%B9%E5%82%B5%E3%81%AE%E9%87%8D%E3%81%95%E3%81%8C%E8%A6%8B%E3%81%88%E3%82%8B%E5%9C%B0%E5%9B%B3",
-        "type": "blog",
-        "key": "local-government-debt-burden",
-        "imp": 1121,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/local-government-debt-burden#%E5%AE%9F%E8%B3%AA%E5%85%AC%E5%82%B5%E8%B2%BB%E6%AF%94%E7%8E%87%E3%81%8B%E3%82%89%E8%A6%8B%E3%82%8B%E8%BF%94%E6%B8%88%E3%81%AE%E9%87%8D%E3%81%95",
-        "type": "blog",
-        "key": "local-government-debt-burden",
-        "imp": 1106,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/local-government-debt-burden#%E5%9C%B0%E6%96%B9%E5%82%B5%E5%89%B2%E5%90%88%E3%81%A8%E5%B0%86%E6%9D%A5%E8%B2%A0%E6%8B%85%E6%AF%94%E7%8E%87%E3%81%AE%E9%96%A2%E4%BF%82",
-        "type": "blog",
-        "key": "local-government-debt-burden",
-        "imp": 1071,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
         "url": "https://stats47.jp/blog/manufacturing-productivity",
         "type": "blog",
         "key": "manufacturing-productivity",
         "imp": 1048,
         "clicks": 20,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/local-government-debt-burden#%E5%9C%B0%E6%96%B9%E5%82%B5%E7%8F%BE%E5%9C%A8%E9%AB%98%E5%89%B2%E5%90%88%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B02022%E5%B9%B4%E5%BA%A6",
-        "type": "blog",
-        "key": "local-government-debt-burden",
-        "imp": 1038,
-        "clicks": 0,
-        "reason": "tags-unmapped"
-      },
-      {
-        "url": "https://stats47.jp/blog/local-government-debt-burden#%E5%9C%B0%E6%96%B9%E4%BA%A4%E4%BB%98%E7%A8%8E%E3%81%B8%E3%81%AE%E4%BE%9D%E5%AD%98",
-        "type": "blog",
-        "key": "local-government-debt-burden",
-        "imp": 934,
-        "clicks": 0,
         "reason": "tags-unmapped"
       },
       {
@@ -1232,6 +1112,126 @@
         "key": "development-history-place-name-map",
         "imp": 757,
         "clicks": 7,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/semiconductor-electronics-regional-map",
+        "type": "blog",
+        "key": "semiconductor-electronics-regional-map",
+        "imp": 731,
+        "clicks": 29,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/",
+        "type": "home",
+        "key": null,
+        "imp": 728,
+        "clicks": 57,
+        "reason": "no-slot:home"
+      },
+      {
+        "url": "https://stats47.jp/blog/sunshine-pacific-vs-nihonkai",
+        "type": "blog",
+        "key": "sunshine-pacific-vs-nihonkai",
+        "imp": 648,
+        "clicks": 11,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/household-structure-transformation",
+        "type": "blog",
+        "key": "household-structure-transformation",
+        "imp": 500,
+        "clicks": 13,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/child-height-regional-gap",
+        "type": "blog",
+        "key": "child-height-regional-gap",
+        "imp": 494,
+        "clicks": 5,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/extreme-heat-days-prefecture",
+        "type": "blog",
+        "key": "extreme-heat-days-prefecture",
+        "imp": 462,
+        "clicks": 2,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/police-officer-density-vs-crime-gap",
+        "type": "blog",
+        "key": "police-officer-density-vs-crime-gap",
+        "imp": 403,
+        "clicks": 7,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/park-green-space-gap",
+        "type": "blog",
+        "key": "park-green-space-gap",
+        "imp": 372,
+        "clicks": 5,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/alcohol-prefecture-map",
+        "type": "blog",
+        "key": "alcohol-prefecture-map",
+        "imp": 329,
+        "clicks": 5,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/estat-7-techniques-from-unusable-to-usable",
+        "type": "blog",
+        "key": "estat-7-techniques-from-unusable-to-usable",
+        "imp": 320,
+        "clicks": 7,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/rice-harvest-volume-prefecture-gap",
+        "type": "blog",
+        "key": "rice-harvest-volume-prefecture-gap",
+        "imp": 282,
+        "clicks": 5,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/university-advancement-capacity",
+        "type": "blog",
+        "key": "university-advancement-capacity",
+        "imp": 249,
+        "clicks": 11,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/renewable-energy-regional-gap",
+        "type": "blog",
+        "key": "renewable-energy-regional-gap",
+        "imp": 246,
+        "clicks": 4,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/library-museum-cultural-capital",
+        "type": "blog",
+        "key": "library-museum-cultural-capital",
+        "imp": 225,
+        "clicks": 8,
+        "reason": "tags-unmapped"
+      },
+      {
+        "url": "https://stats47.jp/blog/manufacturing-labor-productivity-pref",
+        "type": "blog",
+        "key": "manufacturing-labor-productivity-pref",
+        "imp": 153,
+        "clicks": 8,
         "reason": "tags-unmapped"
       }
     ]

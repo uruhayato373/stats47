@@ -1,6 +1,6 @@
-import { extractYearsFromStats } from "@stats47/estat-api/server";
-
 import { CHART_COLORS } from "../constants";
+
+import { extractYearsFromStats } from "./extract-years-from-stats";
 
 import type { BarChartData } from "../types/visualization";
 import type { StatsSchema } from "@stats47/types";

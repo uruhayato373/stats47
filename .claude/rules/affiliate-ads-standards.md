@@ -418,6 +418,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | operation plan / journal の I/O | `.claude/scripts/ads/lib/asp-operation-store.mjs` (判定は `asp-operation-core.mjs`) |
 | lock / health の I/O | `.claude/scripts/ads/affiliate-ops.mjs` |
 | afb 未提携案件の走査 | `.claude/scripts/ads/afb-scan.mjs` |
+| afb 承認済み案件の広告原稿取得 | `.claude/scripts/ads/afb-harvest.mjs --id <PID[,PID]>` |
 | もしも未提携案件の走査 | `.claude/scripts/ads/moshimo-scan.mjs` (stats47 で新規作成・移植元に無い) |
 | 走査の vertical 抽出語 (afb / もしも共通) | `.claude/scripts/ads/lib/asp-vertical-keywords.mjs` |
 | 3 ASP 横断の提携台帳 | `.claude/state/ads/affiliate-catalog.json` |
@@ -457,6 +458,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | ID 抽出は一覧行スコープに限定し、行数と一致することを確かめる | ページ全体の `a[href]` から拾うと**一覧行の外にあるページ共通リンクが混ざり超集合**になる。もしもは提携中・申請中の両ページに `promotion_id=7630 / 7556 / 170` の共通リンクがあり、2026-08-04 に提携中 32 行に対し ID 35 件を抽出、うち 2 件を「台帳に無い実機の提携」として**誤検出**した (両ページに同時に出る ID は論理的に一覧項目ではない、が発見の決め手)。config の `listScopeSelector` (もしも = `table a[href]`) で一覧スコープを明示し、ログの「一覧 N 件 / ID 累計 N 件」が**一致すること**を毎回確認する。afb は ID を `【PID:N】` の可視テキストから取るため本件は構造的に起きない |
 | 認証情報を env / config に置かない | 人間が手動ログイン → 永続プロファイル |
 | **afb はセッションを持ち越せない** | `sessionPersistsAcrossProcesses: false`。run のたびに `requiredlogin` へ落ちるので**毎回人間のログインが要る** (2026-08-21 実測: 180 秒待って一度も抜けなかった)。もしも・A8 は永続プロファイルでセッションが生きるため、無人で read-only 走査まで到達できる (同日 もしも実測: 提携中 39 行 / 申請中 37 行・SID 638943 assert ok)。**afb だけが構造的にオーナー工程**であり、3 ASP をまとめて「オーナー待ち」と扱わない |
+| **afb 原稿は PID 明示・完全コードだけ取得する** | `afb-harvest.mjs` は approved の PID を最大12件まで明示指定し、stats47 SID `959426` の read-back と原稿ページの PID/name binding を通す。300x250→text→他 canonical の順で選び、`visit.php` と `lead/` ピクセルが揃わないコードは保存しない。保存先は `.local/affiliate-harvest/afb/` で、SSOT登録・push・公開は別工程 |
 
 ### 役割分担
 
@@ -522,7 +524,7 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 | ranking 右レール | 1 → **2 枚** (`AffiliateAdSlot bannerLimit`) | categoryKey → vertical |
 | ranking 記事下 | ネイティブ 4 件の直後に **300x250 を 1 枚** (`position=ranking-end`) | tagKeys → vertical で 5 件解決し 5 件目を使う |
 | themes 末尾 | **300x250 を 1 枚** (`position=theme-end`) | relatedArticleTagKeys → 無ければ THEME_AFFILIATE_MAP |
-| ranking 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=ranking-incontent`)。既存 native 解決結果の先頭を使い、読了枠からは除外して本文内重複を防ぐ | tagKeys → 無ければ categoryKey → vertical |
+| ranking 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=ranking-incontent`)。既存 native 解決結果の先頭を使い、読了枠からは除外して本文内重複を防ぐ。検索意図との一致を確認できない個別ページは `ranking-incontent-affiliate-policy.ts` で抑止する | tagKeys → 無ければ categoryKey → vertical |
 | ranking 右レール (AdSense停止中) | 従来の最大2枚を、停止した上段 AdSense 枠へ**移設**。枚数は増やさず初期 viewability を改善する | categoryKey → vertical |
 | areas 県 本文中段 (AdSense停止中) | 横長バナーを **1 枚** (`position=area-content`)。在庫が無ければ空枠を作らない | `furusato` vertical |
 

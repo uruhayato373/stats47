@@ -64,27 +64,22 @@ export const ROADS_CATALOG: ThemeCatalog = {
       "componentType": "line-chart",
       "title": "道路実延長・高速道路延長の推移",
       "componentProps": {
-        "estatParams": [
+        "seriesRefs": [
           {
-            "statsDataId": "0000010108",
-            "cdCat01": "H711001"
+            "metricKey": "road-total-length-with-expressway",
+            "label": "道路実延長(高速含む)",
+            "colorRole": "population"
           },
           {
-            "statsDataId": "0000010108",
-            "cdCat01": "H7113"
+            "metricKey": "road-expressway-length",
+            "label": "高速道路延長",
+            "colorRole": "danger"
           }
-        ],
-        "labels": [
-          "道路実延長(高速含む)",
-          "高速道路延長"
-        ],
-        "seriesColors": [
-          "population",
-          "danger"
         ]
       },
       "relatedRankingKeys": [
-        "road-total-length-with-expressway"
+        "road-total-length-with-expressway",
+        "road-expressway-length"
       ],
       "sourceName": "社会・人口統計体系",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",

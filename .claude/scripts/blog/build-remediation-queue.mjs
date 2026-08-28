@@ -34,6 +34,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -186,6 +188,8 @@ if (week) {
     for (let i = 1; i < lines.length; i++) {
       const cols = lines[i].split(",");
       if (cols.length < 5) continue;
+      // GSC の #見出し行は独立ページではなく CTR を過小評価するため除外。
+      if (isAnchorRow(cols[0])) continue;
       if (!cols[0].includes("/blog/")) continue;
       const slug = cols[0].replace(/^https?:\/\/[^/]+\/blog\//, "").replace(/\/$/, "");
       const impressions = parseInt(cols[2], 10) || 0;

@@ -64,6 +64,11 @@ export const TOURISM_SET: IndicatorSet = {
       "rankingKey": "number-of-hotel-facilities",
       "shortLabel": "ホテル営業施設数",
       "role": "context"
+    },
+    {
+      "rankingKey": "number-of-hotel-rooms",
+      "shortLabel": "ホテル客室数",
+      "role": "context"
     }
   ],
   "keywords": [

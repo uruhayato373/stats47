@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const nuclearFamilyHouseholdsRatio: MetricConfig = {
   "key": "nuclear-family-households-ratio",
   "title": "核家族世帯割合",
+  "description": "一般世帯に占める、夫婦のみ・夫婦と子・ひとり親と子からなる核家族世帯の割合。",
   "unit": "％",
   "category": "population",
   "source": {

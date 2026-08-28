@@ -4,6 +4,8 @@ import path from 'node:path';
 import { listCategories } from '@stats47/data-configs/categories';
 import { describe, expect, it } from 'vitest';
 
+import { CATEGORY_BLOG_TAG_KEYS } from '@/config/category-blog-tag-keys';
+
 const PAGE = readFileSync(
   path.resolve(process.cwd(), 'src/app/category/[categoryKey]/page.tsx'),
   'utf8'
@@ -53,14 +55,7 @@ describe('category page featured ranking cards', () => {
   });
 
   it('全カテゴリに関連記事タグを明示する', () => {
-    const mapping =
-      PAGE.match(
-        /const CATEGORY_BLOG_TAG_KEYS:[\s\S]*?= \{([\s\S]*?)\n\};/
-      )?.[1] ?? '';
-    const mappedCategoryKeys = Array.from(
-      mapping.matchAll(/^\s{2}([a-z]+):/gm),
-      (match) => match[1]
-    ).sort();
+    const mappedCategoryKeys = Object.keys(CATEGORY_BLOG_TAG_KEYS).sort();
     const categoryKeys = listCategories()
       .map((category) => category.categoryKey)
       .sort();

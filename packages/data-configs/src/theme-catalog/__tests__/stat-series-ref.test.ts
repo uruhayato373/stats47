@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import type { ChartColorRole } from "../chart-color-role";
 import { THEME_CATALOGS } from "../index";
+import { buildPopulationPyramidSeriesRefs } from "../population-pyramid-deps";
 import {
   parseStatSeriesRefs,
   type StatSeriesRef,
@@ -101,7 +102,7 @@ describe("② 正常系は error を出さない", () => {
     { type: "kpi-card", props: {} }, // ranking 駆動 kpi-card は estatParams なしでも可
     { type: "markdown-section", props: { markdown: "本文" } },
     { type: "markdown-section", props: { displayMode: "faq", markdown: "### Q1: 質問\n\n回答" } },
-    { type: "pyramid-chart", props: {} },
+    { type: "pyramid-chart", props: { seriesRefs: buildPopulationPyramidSeriesRefs() } },
   ];
   for (const c of ok) {
     it(`${c.type} 正常`, () => {
@@ -232,5 +233,73 @@ describe("StatSeriesRef — line-chart の R2 参照移行契約", () => {
         estatParams: [{ statsDataId: "0003445758" }],
       }),
     ).toEqual([expect.stringContaining("seriesRefs")]);
+  });
+});
+
+describe("StatSeriesRef — 複合チャートの R2 参照移行契約", () => {
+  const refs = [
+    { metricKey: "active-job-opening-ratio" },
+    { metricKey: "unemployment-rate" },
+  ] satisfies StatSeriesRef[];
+
+  it("mixed-chart は column/line の typed refs だけで表せる", () => {
+    expect(
+      validateChartProps("mixed-chart", {
+        columnSeriesRefs: [refs[0]],
+        lineSeriesRefs: [refs[1]],
+      }),
+    ).toEqual([]);
+  });
+
+  it("composition-chart は typed refs だけで表せる", () => {
+    expect(validateChartProps("composition-chart", { seriesRefs: refs })).toEqual([]);
+  });
+
+  it("donut-chart は typed refs だけで表せる", () => {
+    expect(validateChartProps("donut-chart", { seriesRefs: refs, topN: 2 })).toEqual([]);
+  });
+
+  it.each(["cpi-profile", "cpi-heatmap"])("%s は typed refs だけで表せる", (type) => {
+    expect(validateChartProps(type, { seriesRefs: refs })).toEqual([]);
+    expect(
+      validateChartProps(type, { statsDataId: "legacy", seriesRefs: refs }),
+    ).not.toEqual([]);
+  });
+
+  it.each([
+    ["mixed-chart", { columnParams: [{ statsDataId: "X" }], columnSeriesRefs: [refs[0]], lineSeriesRefs: [refs[1]] }],
+    ["composition-chart", { statsDataId: "X", segments: [{ code: "A", label: "A" }], seriesRefs: refs }],
+    ["donut-chart", { statsDataId: "X", categories: [{ code: "A", label: "A", color: "series-1" }], seriesRefs: refs }],
+  ])("%s は raw recipe と typed refs の二重指定を拒否する", (type, props) => {
+    expect(validateChartProps(type, props)).not.toEqual([]);
+  });
+
+  it.each([
+    [
+      "mixed-chart",
+      {
+        columnParams: [{ statsDataId: "X" }],
+        lineParams: [{ statsDataId: "Y" }],
+        columnSeriesRefs: [refs[0]],
+      },
+    ],
+    [
+      "composition-chart",
+      {
+        statsDataId: "X",
+        segments: [{ code: "A", label: "A" }],
+        seriesRefs: [],
+      },
+    ],
+    [
+      "donut-chart",
+      {
+        statsDataId: "X",
+        categories: [{ code: "A", label: "A", color: "series-1" }],
+        seriesRefs: [],
+      },
+    ],
+  ])("%s は不完全なtyped refsとraw recipeの混在も拒否する", (type, props) => {
+    expect(validateChartProps(type, props)).not.toEqual([]);
   });
 });

@@ -1,4 +1,4 @@
-import { extractYearsFromStats } from "@stats47/estat-api/server";
+import { extractYearsFromStats } from "./extract-years-from-stats";
 
 import type { SunburstEstatParams } from "../types";
 import type { HierarchyData } from "../types/visualization";

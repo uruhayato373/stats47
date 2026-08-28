@@ -13,6 +13,7 @@ const PAGES = [
   { path: "/buzz-map", heading: null },
   { path: "/assets", heading: null },
   { path: "/svg", heading: null },
+  { path: "/research", heading: "調査カタログ" },
   { path: "/revenue", heading: "収益 (AdSense)" },
   { path: "/ads", heading: "アフィリエイト運用" },
   { path: "/dashboard", heading: "プロジェクト現況" },
@@ -30,7 +31,7 @@ function collectPageErrors(page: Page) {
   return errors;
 }
 
-test.describe("smoke: 5画面の疎通", () => {
+test.describe("smoke: 管理画面の疎通", () => {
   for (const { path } of PAGES) {
     test(`${path} は 200 で表示され console error が無い`, async ({ page }) => {
       const errors = collectPageErrors(page);
@@ -72,6 +73,9 @@ test.describe("smoke: 5画面の疎通", () => {
 
     await nav.getByRole("link", { name: "SVG カタログ", exact: true }).click();
     await expect(page).toHaveURL(/\/svg$/);
+
+    await nav.getByRole("link", { name: "調査カタログ", exact: true }).click();
+    await expect(page).toHaveURL(/\/research$/);
 
     await nav.getByRole("link", { name: "プロジェクト現況", exact: true }).click();
     await expect(page).toHaveURL(/\/dashboard$/);

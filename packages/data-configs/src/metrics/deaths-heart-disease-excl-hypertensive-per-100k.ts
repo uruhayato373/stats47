@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const deathsHeartDiseaseExclHypertensivePer100k: MetricConfig = {
   "key": "deaths-heart-disease-excl-hypertensive-per-100k",
   "title": "心疾患による死亡者数",
+  "description": "高血圧性疾患を除く心疾患による死亡者数を、人口10万人当たりで比較するための指標。",
   "unit": "人",
   "category": "socialsecurity",
   "source": {
