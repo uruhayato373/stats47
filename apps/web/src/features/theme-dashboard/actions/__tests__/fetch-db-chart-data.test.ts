@@ -109,6 +109,28 @@ describe("fetchDbChartDataAction — 地域コードごとの取得経路", () =
     expect(result && result.type === "line" ? result.data.lines[0]?.color : null).toBe("#123456");
   });
 
+  it("area=national は選択中の都道府県を参照せず全国系列を描画する", async () => {
+    readStatsValues.mockResolvedValueOnce(payload("fishery-species-catch-scallop", 123, "トン"));
+
+    const result = await fetchDbChartDataAction(
+      "line-chart",
+      {
+        seriesRefs: [
+          {
+            metricKey: "fishery-species-catch-scallop",
+            area: "national",
+            label: "ホタテガイ",
+          },
+        ],
+      },
+      "28000",
+    );
+
+    expect(result?.type).toBe("line");
+    expect(result?.contract.scopeLabel).toBe("47都道府県平均");
+    expect(result && result.type === "line" ? result.data.data[0]?.ホタテガイ : null).toBe(123);
+  });
+
   it.each([
     [
       "mixed-chart",
