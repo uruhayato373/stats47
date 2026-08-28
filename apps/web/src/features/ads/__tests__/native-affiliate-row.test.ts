@@ -15,7 +15,7 @@ import { resolve } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { isLandscapeBanner } from "../services/banner-geometry";
+import { isLandscapeBanner } from "../utils";
 
 const COMPONENTS_DIR = resolve(import.meta.dirname, "../components");
 
@@ -39,6 +39,12 @@ describe("isLandscapeBanner", () => {
 
 describe("NativeAffiliateRow の構造契約", () => {
   const src = readComponent("NativeAffiliateRow.tsx");
+
+  it("client-safe row から server service を import しない", () => {
+    expect(src).not.toMatch(/from ["']\.\.\/services["']/);
+    expect(src).not.toMatch(/from ["'][^"']*services\//);
+    expect(src).toMatch(/from ["']\.\.\/utils["']/);
+  });
 
   it("縦長を isLandscapeBanner で除外している", () => {
     // import の存在ではなく「適用」を見る (import だけ残してフィルタを外す退行を

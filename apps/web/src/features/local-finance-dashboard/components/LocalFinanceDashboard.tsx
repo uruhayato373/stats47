@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { PREFECTURE_LIST_2DIGIT as PREFECTURES } from "@stats47/area";
 import {
   Select,
   SelectContent,
@@ -29,9 +30,8 @@ import { SankeyFallback } from "@/components/charts/SankeyFallback";
 import {
   FinanceSankey,
   LOCAL_FINANCE_SOURCE_LINKS,
-} from "@/features/finance-flow/components/FinanceSankey";
-import type { FinanceFlowData } from "@/features/finance-flow/lib/types";
-import { PREFECTURES } from "@/features/migration-flow/lib/prefectures";
+  type FinanceFlowData,
+} from "@/features/finance-flow/client";
 
 import {
   parseCityFinanceCards,

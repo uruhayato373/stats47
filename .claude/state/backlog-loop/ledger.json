@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-27T08:06:07.673Z",
+  "updatedAt": "2026-08-28T02:02:01.379Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -773,6 +773,19 @@
           "costUsd": null,
           "gate": null,
           "evidence": "route.class が既に needs-owner (attempts=2, escalatedFrom=fable)。オーナー判断待ちのため触らず次へ",
+          "failReason": "needs-owner",
+          "followUps": []
+        },
+        {
+          "at": "2026-08-28T01:07:09.227Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "route.class は既に needs-owner (queue 側判定・attempts=3・escalatedFrom=fable)。オーナー判断待ちのため触らず次へ",
           "failReason": "needs-owner",
           "followUps": []
         }
@@ -2146,6 +2159,237 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-27T08:06:07.673Z"
+    },
+    "BACKLOG-LOOP-PHASE23-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "バックログ処理ループの学習 (Phase 2) と指標バックログ取り込み (Phase 3)",
+      "attempts": [
+        {
+          "at": "2026-08-28T01:07:13.698Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "Phase2(update-routing-policy.mjs+週次workflow+guards)とPhase3(indicator-expansion class新設+estat実在検証+config生成)は新規script/workflow/新classを跨ぐ多段実装。impl-largeでdraft PR経路が要るためCI日次runでは着手せずskip",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
+    },
+    "COCONALA-PRODUCT-FACTORY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "14テーマパックの商品化",
+      "attempts": [
+        {
+          "at": "2026-08-28T01:50:49.593Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run products:catalog --workspace packages/product-factory | npm run products:validate --workspace packages/product-factory -- --id P-14 | npm run products:note:validate --workspace packages/product-factory | npm run test:run --workspace packages/product-factory | npm run type-check --workspace packages/product-factory"
+            ],
+            "pass": true
+          },
+          "evidence": "14パックと14 note記事を決定導出。P-14代表dataset・PPTX/XLSX/PDF/PNG/CSVを生成しvalidator error 0。197 tests pass。P-01はlistedで出品判断済み",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T01:50:49.593Z"
+    },
+    "SCRIPTS-TYPECHECK-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": ".claude/scriptsを型検査に載せる",
+      "attempts": [
+        {
+          "at": "2026-08-28T01:50:49.748Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs | npm run type-check:scripts"
+            ],
+            "pass": true
+          },
+          "evidence": ".claude/scripts tsconfigを追加しTS/MTS全件を検査。KNOWN_UNCOVERED=0。coverage 4 testsおよび全scripts type-check pass。Windows用cross-envも適用",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T01:50:49.748Z"
+    },
+    "ESLINT-FEATURE-DEEP-IMPORT-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "feature deep import境界",
+      "attempts": [
+        {
+          "at": "2026-08-28T01:50:49.909Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run lint --workspace apps/web | npm run type-check --workspace apps/web"
+            ],
+            "pass": true
+          },
+          "evidence": "component overrideへfeature境界patternを共有し既存26違反を公開barrelへ移行。web lint error 0・web type-check pass",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T01:50:49.909Z"
+    },
+    "DATA-PATIENT-SURVEY-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "患者調査3指標の0件解消",
+      "attempts": [
+        {
+          "at": "2026-08-28T01:50:50.075Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl public R2 for three patient metrics | npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts --concurrency 25"
+            ],
+            "pass": true
+          },
+          "evidence": "公開app/stats 3指標は各47行・2023年。areaAxis cat03 seq-pref是正済み。active 2167キー監査で404=0 rowCount0=0 absolute staleness=0 recipe drift=0総合OK",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T01:50:50.075Z"
+    },
+    "MUSEUM-COUNT-AXIS-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "博物館系3指標の対象範囲是正",
+      "attempts": [
+        {
+          "at": "2026-08-28T01:50:50.227Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run packages/data-configs/src/__tests__/museum-facility-scope.test.ts | npm run validate:config --workspace packages/data-configs | npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts --concurrency 25"
+            ],
+            "pass": true
+          },
+          "evidence": "e-Stat 0003348770/0003348811を公式API照合。現行値は登録+相当のみなので3指標のtitle/subtitle/SEOに類似施設除外を明示。分布profile 3件登録・監査verified 66・profile violation 0・総合OK",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T01:50:50.227Z"
+    },
+    "CROSS-PAGE-DATA-SSOT-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-28T02:02:01.379Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts --require-all-editorial",
+              "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check",
+              "npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "R2 runs 33130521557/33130708270/33131308144。portfolio 83/83・r2-drift 0、taxonomy ratchet・公開3調査・本番6 chart readyを確認。CI 33129348114、deploy 33129802167、smoke 33130180263成功。",
+          "failReason": null,
+          "followUps": [
+            "CHART-LINEAGE-RESIDUAL-01",
+            "TILEMAP-LINEAGE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T02:02:01.379Z"
     }
   }
 }

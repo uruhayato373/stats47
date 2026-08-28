@@ -1,7 +1,8 @@
 "use server";
 
-import type { DepopulationMedicalPrefDetail } from "@/features/depopulation-medical/lib/types";
 import { loadDepopulationMedicalPrefDetail } from "@/features/depopulation-medical/server";
+
+import type { DepopulationMedicalPrefDetail } from "../lib/types";
 
 
 /**

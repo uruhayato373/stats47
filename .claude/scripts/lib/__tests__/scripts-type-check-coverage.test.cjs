@@ -51,13 +51,7 @@ function findScriptDirs(dir = ROOT, found = []) {
  * 型検査に載っていないと分かっているディレクトリ。**理由と実測を必ず書く。**
  * このリストは縮小専用 (下のラチェットが件数増加を落とす)。
  */
-const KNOWN_UNCOVERED = {
-  ".claude/scripts":
-    "agent / CI 用スクリプト 41 ファイル。2026-08-13 に計測したところ、compiler option を " +
-    "調整しても error 71 件 (TS7006 implicit any 39 / TS2339 21 ほか) 残る。lib/*.mjs の " +
-    "素 JS core を import する設計なので型付けの方針決めから要る。backlog: " +
-    ".claude/todo/backlog.md の SCRIPTS-TYPECHECK-01",
-};
+const KNOWN_UNCOVERED = {};
 
 /** include の glob がそのディレクトリを覆うか (使われている書式だけを解釈する) */
 function includeCovers(pattern, relDir) {
@@ -94,6 +88,7 @@ test("すべての scripts ディレクトリが型検査に載っている", ()
     const own = path.join(dir, "tsconfig.json");
     if (fs.existsSync(path.join(ROOT, own))) {
       const config = readJsonc(own);
+      const ownPosix = own.split(path.sep).join("/");
       const include = config.include ?? [];
       assert.ok(
         include.includes("**/*.ts"),
@@ -114,7 +109,7 @@ test("すべての scripts ディレクトリが型検査に載っている", ()
         );
       }
       assert.ok(
-        scriptsCheck.includes(own),
+        scriptsCheck.includes(ownPosix),
         `${own}: 存在するのに type-check:scripts から呼ばれていない = 実行されない`,
       );
       continue;
@@ -138,7 +133,7 @@ test("すべての scripts ディレクトリが型検査に載っている", ()
 
 // 免除リストは増やさない (減らすだけ)。増やせるなら「載せない」が既定になってしまう。
 test("KNOWN_UNCOVERED は縮小専用", () => {
-  const MAX = 1;
+  const MAX = 0;
   const count = Object.keys(KNOWN_UNCOVERED).length;
   assert.ok(
     count <= MAX,

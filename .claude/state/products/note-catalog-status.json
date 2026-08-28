@@ -1,517 +1,146 @@
 {
   "generatedNote": "note 展開の機械状態。draft は .local (git 管理外)。公開は人間承認後 (N4+)。この JSON は products:note:report で再生成する。",
   "totals": {
-    "products": 174,
-    "canonicalArticles": 55,
+    "products": 14,
+    "canonicalArticles": 14,
     "coverage": {
-      "assigned": 174,
-      "total": 174
+      "assigned": 14,
+      "total": 14
     },
     "dispositions": {
-      "bundle-member": 135,
-      "standalone-paid": 7,
-      "free-lead": 22,
-      "catalog-only": 10
+      "standalone-paid": 13,
+      "free-lead": 1
     },
     "validationOk": true,
     "errors": 0,
-    "warnings": 142,
-    "draftsGenerated": 55
+    "warnings": 3,
+    "draftsGenerated": 14
   },
   "articles": [
     {
-      "slug": "ppt-japan-map-assets",
-      "series": "prefecture-map-powerpoint",
+      "slug": "prefecture-population-household-pack",
+      "series": "regional-data-packs",
       "access": "paid",
-      "role": "how-to",
-      "priceJpy": 1980,
-      "memberCount": 6,
-      "draftGenerated": true
-    },
-    {
-      "slug": "ppt-ranking-chart-assets",
-      "series": "prefecture-map-powerpoint",
-      "access": "paid",
-      "role": "how-to",
-      "priceJpy": 1980,
-      "memberCount": 8,
-      "draftGenerated": true
-    },
-    {
-      "slug": "ppt-onepager-sns-assets",
-      "series": "prefecture-map-powerpoint",
-      "access": "paid",
-      "role": "how-to",
-      "priceJpy": 1980,
-      "memberCount": 4,
-      "draftGenerated": true
-    },
-    {
-      "slug": "ppt-data-explainer-deck",
-      "series": "prefecture-map-powerpoint",
-      "access": "paid",
-      "role": "pillar",
-      "priceJpy": 3980,
+      "role": "use-case",
+      "priceJpy": 4000,
       "memberCount": 1,
       "draftGenerated": true
     },
     {
-      "slug": "ppt-region-intro-deck",
-      "series": "prefecture-map-powerpoint",
+      "slug": "prefecture-income-wage-hiring-pack",
+      "series": "life-area-comparison",
       "access": "paid",
       "role": "use-case",
-      "priceJpy": 3980,
-      "memberCount": 2,
-      "draftGenerated": true
-    },
-    {
-      "slug": "ppt-market-proposal-deck",
-      "series": "prefecture-map-powerpoint",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 4980,
-      "memberCount": 4,
-      "draftGenerated": true
-    },
-    {
-      "slug": "ppt-relocation-hiring-deck",
-      "series": "prefecture-map-powerpoint",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 4980,
-      "memberCount": 2,
-      "draftGenerated": true
-    },
-    {
-      "slug": "ppt-tourism-demand-deck",
-      "series": "prefecture-map-powerpoint",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 4980,
+      "priceJpy": 5000,
       "memberCount": 1,
       "draftGenerated": true
     },
     {
-      "slug": "ppt-healthcare-education-deck",
-      "series": "prefecture-map-powerpoint",
+      "slug": "prefecture-tourism-lodging-pack",
+      "series": "business-location-analysis",
       "access": "paid",
       "role": "use-case",
-      "priceJpy": 4980,
-      "memberCount": 2,
-      "draftGenerated": true
-    },
-    {
-      "slug": "ppt-government-policy-deck",
-      "series": "prefecture-map-powerpoint",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 5980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "ppt-media-report-deck",
-      "series": "prefecture-map-powerpoint",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 4980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "ppt-seminar-research-deck",
-      "series": "prefecture-map-powerpoint",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 3980,
-      "memberCount": 2,
-      "draftGenerated": true
-    },
-    {
-      "slug": "excel-choropleth-map",
-      "series": "prefecture-excel-analysis",
-      "access": "paid",
-      "role": "pillar",
-      "priceJpy": 3980,
+      "priceJpy": 5000,
       "memberCount": 1,
       "draftGenerated": true
     },
     {
-      "slug": "excel-ranking-auto",
-      "series": "prefecture-excel-analysis",
+      "slug": "prefecture-municipal-finance-pack",
+      "series": "government-statistics-work",
       "access": "paid",
-      "role": "how-to",
-      "priceJpy": 2980,
+      "role": "use-case",
+      "priceJpy": 6000,
       "memberCount": 1,
       "draftGenerated": true
     },
     {
-      "slug": "excel-integrated-dashboard",
-      "series": "prefecture-excel-analysis",
+      "slug": "prefecture-healthcare-nursing-pack",
+      "series": "life-area-comparison",
       "access": "paid",
       "role": "use-case",
-      "priceJpy": 5980,
-      "memberCount": 3,
+      "priceJpy": 5000,
+      "memberCount": 1,
       "draftGenerated": true
     },
     {
-      "slug": "excel-gap-timeseries-analysis",
-      "series": "prefecture-excel-analysis",
+      "slug": "prefecture-education-childcare-pack",
+      "series": "statistics-education",
+      "access": "paid",
+      "role": "use-case",
+      "priceJpy": 5000,
+      "memberCount": 1,
+      "draftGenerated": true
+    },
+    {
+      "slug": "prefecture-migration-living-pack",
+      "series": "life-area-comparison",
+      "access": "paid",
+      "role": "use-case",
+      "priceJpy": 4500,
+      "memberCount": 1,
+      "draftGenerated": true
+    },
+    {
+      "slug": "prefecture-retail-trade-area-pack",
+      "series": "business-location-analysis",
+      "access": "paid",
+      "role": "use-case",
+      "priceJpy": 6000,
+      "memberCount": 1,
+      "draftGenerated": true
+    },
+    {
+      "slug": "prefecture-industry-economy-pack",
+      "series": "business-location-analysis",
+      "access": "paid",
+      "role": "use-case",
+      "priceJpy": 5000,
+      "memberCount": 1,
+      "draftGenerated": true
+    },
+    {
+      "slug": "prefecture-disaster-infrastructure-pack",
+      "series": "government-statistics-work",
+      "access": "paid",
+      "role": "use-case",
+      "priceJpy": 5000,
+      "memberCount": 1,
+      "draftGenerated": true
+    },
+    {
+      "slug": "prefecture-map-chart-assets-pack",
+      "series": "prefecture-map-powerpoint",
       "access": "paid",
       "role": "how-to",
-      "priceJpy": 3980,
-      "memberCount": 4,
+      "priceJpy": 4000,
+      "memberCount": 1,
       "draftGenerated": true
     },
     {
-      "slug": "excel-population-migration",
-      "series": "prefecture-excel-analysis",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 5980,
-      "memberCount": 2,
-      "draftGenerated": true
-    },
-    {
-      "slug": "excel-business-location",
-      "series": "prefecture-excel-analysis",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 7980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "excel-domain-comparison",
-      "series": "prefecture-excel-analysis",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 5980,
-      "memberCount": 5,
-      "draftGenerated": true
-    },
-    {
-      "slug": "excel-data-utilities",
-      "series": "prefecture-excel-analysis",
-      "access": "paid",
-      "role": "how-to",
-      "priceJpy": 3980,
-      "memberCount": 5,
-      "draftGenerated": true
-    },
-    {
-      "slug": "data-packs-basic",
+      "slug": "prefecture-all-in-one-pack",
       "series": "regional-data-packs",
       "access": "paid",
       "role": "pillar",
-      "priceJpy": 2980,
-      "memberCount": 1,
-      "draftGenerated": true
-    },
-    {
-      "slug": "data-packs-population-economy",
-      "series": "regional-data-packs",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 3980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "data-packs-living-infrastructure",
-      "series": "regional-data-packs",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 3980,
-      "memberCount": 4,
-      "draftGenerated": true
-    },
-    {
-      "slug": "data-packs-industry-tourism",
-      "series": "regional-data-packs",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 3980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "data-packs-government-safety",
-      "series": "regional-data-packs",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 3980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "data-packs-culture-demographics",
-      "series": "regional-data-packs",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 2980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "data-packs-advanced",
-      "series": "regional-data-packs",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 5980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "industry-retail-food-location",
-      "series": "business-location-analysis",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 7980,
-      "memberCount": 2,
-      "draftGenerated": true
-    },
-    {
-      "slug": "industry-service-location",
-      "series": "business-location-analysis",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 7980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "industry-tourism-realestate",
-      "series": "business-location-analysis",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 7980,
-      "memberCount": 2,
-      "draftGenerated": true
-    },
-    {
-      "slug": "industry-hiring-branch",
-      "series": "business-location-analysis",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 7980,
-      "memberCount": 1,
-      "draftGenerated": true
-    },
-    {
-      "slug": "industry-marketing-furusato",
-      "series": "business-location-analysis",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 5980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "industry-government-promotion",
-      "series": "business-location-analysis",
-      "access": "paid",
-      "role": "use-case",
       "priceJpy": 9800,
-      "memberCount": 2,
-      "draftGenerated": true
-    },
-    {
-      "slug": "industry-media-sns",
-      "series": "business-location-analysis",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 5980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "gov-estat-workflow",
-      "series": "government-statistics-work",
-      "access": "paid",
-      "role": "pillar",
-      "priceJpy": 5980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "gov-similar-municipality",
-      "series": "government-statistics-work",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 5980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "gov-kpi-ebpm",
-      "series": "government-statistics-work",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 9800,
-      "memberCount": 2,
-      "draftGenerated": true
-    },
-    {
-      "slug": "gov-presentation-decks",
-      "series": "government-statistics-work",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 5980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "gov-koho-visuals",
-      "series": "government-statistics-work",
-      "access": "paid",
-      "role": "how-to",
-      "priceJpy": 3980,
       "memberCount": 1,
       "draftGenerated": true
     },
     {
-      "slug": "gov-training-materials",
-      "series": "government-statistics-work",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 5980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "media-ranking-visuals",
-      "series": "media-data-visuals",
-      "access": "paid",
-      "role": "pillar",
-      "priceJpy": 2980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "media-video-social-visuals",
-      "series": "media-data-visuals",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 3980,
-      "memberCount": 4,
-      "draftGenerated": true
-    },
-    {
-      "slug": "media-editorial-toolkit",
-      "series": "media-data-visuals",
-      "access": "paid",
-      "role": "how-to",
-      "priceJpy": 3980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "edu-classroom-materials",
-      "series": "statistics-education",
-      "access": "paid",
-      "role": "pillar",
-      "priceJpy": 2980,
-      "memberCount": 4,
-      "draftGenerated": true
-    },
-    {
-      "slug": "edu-inquiry-worksheets",
-      "series": "statistics-education",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 1980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "edu-excel-stats-literacy",
-      "series": "statistics-education",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 1980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "life-relocation-comparison",
-      "series": "life-area-comparison",
-      "access": "paid",
-      "role": "pillar",
-      "priceJpy": 1980,
-      "memberCount": 4,
-      "draftGenerated": true
-    },
-    {
-      "slug": "life-family-career-comparison",
-      "series": "life-area-comparison",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 1980,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "life-retirement-weighting",
-      "series": "life-area-comparison",
-      "access": "paid",
-      "role": "use-case",
-      "priceJpy": 1980,
-      "memberCount": 2,
-      "draftGenerated": true
-    },
-    {
-      "slug": "service-map-chart-creation",
-      "series": "custom-analysis-services",
-      "access": "free",
-      "role": "use-case",
-      "priceJpy": 0,
-      "memberCount": 5,
-      "draftGenerated": true
-    },
-    {
-      "slug": "service-regional-report",
-      "series": "custom-analysis-services",
-      "access": "free",
-      "role": "use-case",
-      "priceJpy": 0,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "service-business-comparison",
-      "series": "custom-analysis-services",
-      "access": "free",
-      "role": "use-case",
-      "priceJpy": 0,
-      "memberCount": 3,
-      "draftGenerated": true
-    },
-    {
-      "slug": "service-dashboard-build",
-      "series": "custom-analysis-services",
-      "access": "free",
-      "role": "use-case",
-      "priceJpy": 0,
-      "memberCount": 4,
-      "draftGenerated": true
-    },
-    {
-      "slug": "license-guide",
-      "series": "license-guide",
-      "access": "free",
-      "role": "comparison",
-      "priceJpy": 0,
-      "memberCount": 10,
-      "draftGenerated": true
-    },
-    {
-      "slug": "free-samples",
+      "slug": "prefecture-free-trial-pack",
       "series": "free-samples",
       "access": "free",
       "role": "sample",
       "priceJpy": 0,
-      "memberCount": 7,
+      "memberCount": 1,
+      "draftGenerated": true
+    },
+    {
+      "slug": "prefecture-household-consumption-pack",
+      "series": "life-area-comparison",
+      "access": "paid",
+      "role": "use-case",
+      "priceJpy": 5000,
+      "memberCount": 1,
       "draftGenerated": true
     }
   ]

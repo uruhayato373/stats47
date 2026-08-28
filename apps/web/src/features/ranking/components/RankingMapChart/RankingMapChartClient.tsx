@@ -24,13 +24,13 @@ import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 
 import type { AreaType } from "@/features/area";
-import { MapFallback } from "@/features/map-visualization/components/MapFallback";
 import {
   filterMapDataPoints,
   getLeafletBorderColor,
+  MapFallback,
   rankingItemToMapConfig,
-} from "@/features/map-visualization/utils/ranking-map-adapters";
-import { useThemedLeafletTile } from "@/features/map-visualization/utils/use-themed-leaflet-tile";
+  useThemedLeafletTile,
+} from "@/features/map-visualization/client";
 
 import { useTheme } from "@/hooks/useTheme";
 

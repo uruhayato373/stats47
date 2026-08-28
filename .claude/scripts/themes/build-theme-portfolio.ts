@@ -23,7 +23,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog/index";
-import { CLIMATE_SET, LOCAL_FINANCE_CITY_SET } from "../../../packages/types/src/index";
+import { CLIMATE_SET } from "../../../packages/types/src/index";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -34,7 +34,6 @@ const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
 
 const LEGACY_SETS: Record<string, unknown> = {
   climate: CLIMATE_SET,
-  "local-finance-city": LOCAL_FINANCE_CITY_SET,
 };
 
 type MetricEntry = { role?: string; selection?: { surveyedAt?: string } };

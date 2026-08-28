@@ -1,13 +1,13 @@
 /**
  * duplication validator (仕様 §2-2・§13)。
- * 同一 productId の重複割当・slug 重複・series↔family 不整合を検出し、variant 乱立を防ぐ。
+ * 同一 productId の重複割当・slug 重複・series↔theme 不整合を検出する。
  */
 import type { NoteIssue } from "./types";
 import type { NoteArticlePlan } from "../types";
 import { CANONICAL_ARTICLES } from "../article-plan";
 import { NOTE_SERIES_REGISTRY } from "../series";
 import { ALL_PRODUCTS } from "../../../catalog/products";
-import type { ProductDefinition, ProductFamily } from "../../../catalog/types";
+import type { PackTheme, ProductDefinition } from "../../../catalog/types";
 
 export function checkDuplication(
   products: readonly ProductDefinition[] = ALL_PRODUCTS,
@@ -16,7 +16,7 @@ export function checkDuplication(
   const errors: NoteIssue[] = [];
   const warnings: NoteIssue[] = [];
 
-  const familyById = new Map<string, ProductFamily>(products.map((p) => [p.id, p.family]));
+  const themeById = new Map<string, PackTheme>(products.map((p) => [p.id, p.theme]));
 
   // 1. slug 重複 (canonicalSlug は記事の安定 ID なので記事間で一意)。
   const slugSeen = new Set<string>();
@@ -46,21 +46,21 @@ export function checkDuplication(
     }
   }
 
-  // 3. series↔family 整合 (記事 series が member の family を許容するか)。
+  // 3. series↔theme 整合 (記事 series が member の現行 pack theme を許容するか)。
   for (const article of articles) {
     const meta = NOTE_SERIES_REGISTRY[article.series];
     if (!meta) {
       errors.push({ code: "series-unknown", ref: article.slug, message: `未知の series: ${article.series}` });
       continue;
     }
-    const allowed = new Set<ProductFamily>(meta.families);
+    const allowed = new Set<PackTheme>(meta.themes);
     for (const pid of article.memberProductIds) {
-      const fam = familyById.get(pid);
-      if (fam && !allowed.has(fam)) {
+      const theme = themeById.get(pid);
+      if (theme && !allowed.has(theme)) {
         errors.push({
-          code: "series-family-mismatch",
+          code: "series-theme-mismatch",
           ref: article.slug,
-          message: `記事 ${article.slug} (series=${article.series}) が family=${fam} の商品 ${pid} を束ねている`,
+          message: `記事 ${article.slug} (series=${article.series}) が theme=${theme} の商品 ${pid} を束ねている`,
         });
       }
     }

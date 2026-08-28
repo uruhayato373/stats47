@@ -2,9 +2,9 @@
 
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 
-import type { DepopulationMedicalSummary } from "@/features/depopulation-medical/lib/types";
 import { loadDepopulationMedicalSummary } from "@/features/depopulation-medical/server";
 
+import type { DepopulationMedicalSummary } from "../lib/types";
 import type { TopoJSONTopology } from "@stats47/types";
 
 export interface DepopulationMedicalBase {

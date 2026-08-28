@@ -1,6 +1,6 @@
 /**
  * coverage validator (仕様 §2-1・§13)。
- * 174 商品すべてに disposition があり (未判定 0 件)、記事プランが実在商品だけを参照することを保証する。
+ * 現行14パックすべてに disposition があり、記事プランが実在商品だけを参照することを保証する。
  */
 import type { NoteIssue } from "./types";
 import type { NoteArticlePlan } from "../types";
@@ -39,7 +39,7 @@ export function checkCoverage(
     }
   }
 
-  // 全 174 商品が「ちょうど 1 記事」に属する (disposition 100%)。
+  // 全商品が「ちょうど 1 記事」に属する (disposition 100%)。
   for (const p of products) {
     const slugs = assignedTo.get(p.id);
     if (!slugs || slugs.length === 0) {

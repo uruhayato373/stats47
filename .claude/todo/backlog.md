@@ -238,220 +238,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 最後に、成果、変更ファイル、検証結果、既存問題、未完了、次のWPを簡潔に報告してください。
 ```
 
-### [CROSS-PAGE-DATA-SSOT-01] テーマ・ランキング・ブログのデータ／単位／配色SSOT統合
-
-タグ: [進行中] [起票:2026-08-13]
-
-- **owner**: Claude Code
-- **trigger**: Claude CodeへこのIDを指定したTask Capsuleを渡し、WP0から順番に実装する。
-- **目的**: テーマ、ランキング、ブログのチャートを、同じ `MetricConfig → 取得・変換 → R2 snapshot`
-  から読む構成に統一する。単位換算は取り込み時に一度だけ行い、配色は意味ロールから解決し、
-  取得・変換・監査の対象集合を同じ依存抽出器で決める。
-- **採用する最終形**:
-  `git TS (MetricConfig / ThemeCatalog / unit semantics / color roles) → build時検証 → e-Stat取得・変換 → R2 → 全ページ`。
-  本番 `apps/web` からe-Statを直接呼ばない。ThemeCatalogに生のe-Statパラメータ、倍率、色コードを持たせない。
-- **実測ベースライン (2026-08-13)**:
-  - ThemeCatalogは20テーマ・113 chart。87 chartが生の`estatParams`を持ち、`relatedRankingKeys`ありは3 chartだけ。
-  - ThemeCatalogのcolor系pathに生の色値179箇所・14色があり、webと`packages/visualization`にも別paletteがある。
-  - テーマの本番取得経路にe-Stat直呼びが残り、CPI等は規約で禁止済みの`cdArea`も送る。
-  - catalog validatorはerror 0 / warning 194。現行live監査は130 requestを検査するが、catalogから機械抽出した
-    期待集合158 requestのうち28 requestを列挙できず、population pyramidの34 category requestもcatalog外にある。
-  - unit SSOTとmirrorは一致し、unit test 32件、metric config 2,295件のerrorは0。ただし金額347 metricの監査は
-    mismatch 42 / unknown 300で、42件の是正は`MONEY-UNIT-SCALE-01`に分離済み。
-  - ranking値はactive 2,173件のshape violation 0まで回復したが、normalized artifact欠落1件、
-    既知のstale delivery 14件が残る。blog SVGは1,062枚中、lineage完備938、未復元124、provenance defect 23。
-- **WP0 再計測 (2026-08-13)**: pure collector `packages/data-configs/src/theme-catalog/baseline-collector.ts`
-  で実行時 THEME_CATALOGS から決定的に再計測。テスト `__tests__/baseline-collector.test.ts` が
-  shrink-only (生estatParams/生色) と grow-only (relatedRankingKeys) の ratchet で固定。
-  - 一致確認 (baseline 不変): themes 20 / charts 113 / 生estatParams chart 87 / relatedRankingKeys chart 3 /
-    生色 179箇所・14色。
-  - **migration 注意 (実測で確定)**: 社会・人口統計体系テーブル (statsDataId 000001020x) の cat01 コードは
-    `#A0160102` / `#D0210101` / `#F01201` のように **`#` 前置が e-Stat の実コード**。本番キャッシュで
-    STATUS 0・単一カテゴリに正しくフィルタされ distinct な値を返すことを 3 テーブルで確認済み
-    (foreign-residents 東京2020: 中国 1393.4 / 韓国 565.3 / 総数 3441.0)。**欠陥ではない**ので R2 移行時に
-    `#` を strip しない (charts が壊れる)。
-  - 本番 `apps/web` の `@stats47/estat-api` **直接値 import は 10 ファイル**
-    (`import type` の RankingChart / prefetch-theme-kpi と、インライン import 型のみの fetch-db-chart-data は
-    直呼びではない)。WP2 の境界 CI check の縮小対象。
-- **WP1 完了 (2026-08-13)**: `theme-catalog/stat-series-ref.ts` に目標参照モデル `StatSeriesRef`
-  (metricKey/year/area/label/colorRole・変換式なし) と `ChartColorRole` (WP5 拡張)、現行 componentProps の
-  chart 種別ごと discriminated-union 検証 `validateChartProps` (exhaustive・未知種別 error) を新設。
-  `validate-theme-catalog.ts` に `[chart-props]` として配線 (従来は union membership しか見ず必須フィールド
-  欠落を素通りしていた)。実データ 113 chart 誤検知 0・validate:catalog error 0・data-configs tsc 0。
-  全 9 componentType が StatSeriesRef で表せることを fixture 固定 (WP6 移行の受入基準)。テスト 22 件。
-- **WP2 境界ゲート先行 (2026-08-13)**: `.claude/scripts/lib/check-web-estat-imports.cjs` を新設し
-  `pr-quality-check.yml` に配線。本番 `apps/web` の e-Stat 直接値 import (現行 10) を **shrink-only
-  allowlist** で監視し、新規直呼びを CI で弾く (最終形 0)。値/型/インライン import の分類は文境界ガード付き
-  (テスト 12 件で誤検出両方向を固定)。**caller の R2 reader 移行本体 (allowlist 縮小) は WP6 で、
-  runtime e-Stat cache/action の削除も caller 0 後**。
-- **WP4 core (2026-08-13)**: 依存抽出の共通 collector `theme-catalog/chart-dependencies.ts`
-  (`collectChartDependencies` / `collectThemeDataDependencies`・exhaustive switch・**未知種別 throw**) を新設。
-  pyramid の 34 (年齢×性別) 依存は app fetch にハードコードされ catalog から列挙不能だったので、
-  SSOT `theme-catalog/population-pyramid-deps.ts` に移設し **app `fetch-population-pyramid.ts` と collector が共有**。
-  これで期待依存集合が完全列挙可能に (**総 258 / distinct 192 request**・旧 live 監査の 158＋列挙不能 28＋
-  pyramid 外を解消)。donut category / composition segment / CPI statsDataId / pyramid code の陰性対照をテスト固定
-  (theme-catalog テスト計 41)。apps/web tsc 0。
-- **WP4 完了 (2026-08-13)**: 三者一致を配線した。正典 `collectThemeDataDependenciesWithProvenance` から
-  機械生成する JSON 依存ミラー `.claude/scripts/audit/theme-chart-dependencies.generated.json`
-  (generator `generate-theme-dependency-mirror.ts --check`・unit-semantics と同型の二層 SSOT) を新設し、
-  素の node で走る live 監査 `theme-chart-live-audit.mjs` の母集団を**このミラー全件**へ切替えた
-  (旧: page-components から独自抽出 130 request → 新: 192 distinct・pyramid 34 を含む)。監査の成功条件を
-  「取れた分が成功」→「**期待集合=実集合かつ全件成功**」に変更 (limit 無し時 `coverageOk`)。
-  `pr-quality-check.yml` に Theme Dependency Mirror Gate を配線。ミラー破損で `--check` 落ち・restore で
-  緑を実測、live e-Stat 5 件 smoke で pyramid が初めて監査対象に入ることを確認。三者一致 =
-  validator (catalog well-formed) × generate:catalog --check (catalog==page-components JSON) ×
-  mirror gate (mirror==collector 出力) → 監査は mirror 全件。テスト計 44 (mirror parity + provenance 3)。
-  **残 (WP6): 全 192 request の live 全件緑は e-Stat 実照会が要る (read-only・cron が担う)**。
-- **survey taxonomy 横断 checkpoint (2026-08-22)**: `survey-taxonomy.ts` を共通 resolver とし、
-  ranking / ThemeCatalog 113 chart / 公開 blog chart を同じ survey master へ接続。master 80、ranking active
-  2,164 件中 1,924 解決 (88.91%)、theme は適用対象 89/89 解決 (100%)、blog は 1,087 chart 中
-  resolved 733 / unresolved 99 / missing-lineage 179 / not-applicable 76。週次全量監査・PR offline freshness・
-  shrink-only ratchet・双方向 UI / GA4 計測まで実装済み。blog lineage 再監査は 1,089 枚中 source+json 983 / neither 106、
-  source provenance defect 22。残件は推測で survey を付けず、本項目 WP6 と既存 lineage queue で縮小する。
-- **WP5 core (2026-08-13)**: 色 semantic role の SSOT `theme-catalog/chart-color-role.ts`
-  (`CHART_COLOR_ROLES` 20 role + web resolver `resolveChartColorCssVar` + static/SVG resolver
-  `resolveChartColorHex`)。両 resolver が同 role 集合を実装する parity をテスト固定
-  (`Record<ChartColorRole,string>` でコンパイル時 parity も保証)。`ChartColorRole` を本ファイルに一本化。
-- **WP5 完了 (2026-08-13)**: 生色 179→0 を移行した。**catalog (SSOT) は色 role・生成物 page-components は
-  解決済み hex** という二段構成にし、生成器 `transform.chartToPageComponent` が
-  `resolveComponentPropsColors` で色キー文脈の role → hex を解決する。移行は予約 8 色 → semantic role /
-  追加 6 色 → series-7..12 (role パレットを 14→20 に拡張)。**`generate:catalog --check` の golden diff が
-  byte 一致 = app側renderer入力のconfig回帰0を証明**（実ブラウザの描画回帰までは証明しない。179置換後にpage-components /
-  indicator-sets とも git diff 空）。生色の再混入は validator `[raw-color]` (error) と WP0 ratchet
-  (rawColorPlaces=0) が CI で弾く (mutation で発火・restore で緑を実測)。色キーの正典 (COLOR\_\*\_KEYS /
-  COLOR_VALUE_RE) を chart-color-role.ts に一本化し baseline collector と共有。web/static resolver parity
-  (WP5 core) 済。data-configs 508 test / tsc 0・apps/web tsc 0。
-  **レビュー指摘 2 点を是正 (2026-08-13)**: ① validator が未知 role (typo) を素通ししていた
-  (resolveComponentPropsColors が未知値を pass-through するため壊れた色文字列が焼き込まれる) →
-  `collectColorFieldViolations` + `[color-role]` error を追加し raw-color / unknown-role の両方を弾く
-  (mutation で発火実測)。② 逆写像 test が移行後の空 baseline を走査して空振り green になっていた →
-  移行前 14 色の固定 fixture で role→hex の hex 再現を閉じ、別途「live catalog の生色 0」を不変量として固定。
-  **owner 判断 (resolver 去就)**: 生成時 hex 解決を最終形とした結果 CSS resolver の consumer と
-  `--chart-<role>` token は 0 件。(A) done_when「web/static parity」節を満たすため保持し WP6/7 で CSS-var
-  追従 (テーマ追従チャート=新挙動・visual-gated) を採用 / (B) 削除して CSS-var 追従を別提案にする、の分岐。
-  現状は (A) で保持 (parity テストが採用時の一致を保証する契約)。
-- **WP3 core (2026-08-13)**: 単位比較 classifier `unit/unit-comparability.ts`
-  (`classifyUnitComparability` → same/convertible/incomparable+reason)。unit-semantics を正典に、
-  %/‰・分母あり/なし・両側指定した月額/年額 (period)・次元違い・解釈不能を理由付きで拒否するcoreを追加。
-- **WP3 classifier 是正 (2026-08-13・concurrent review 指摘)**: 再監査で見つけた取りこぼしを test-first で是正:
-  ① **分母が両方あって中身が違う** (人口10万対 vs 人口1万対) を hasDenominator boolean 一致だけで
-  「same/factor 1」にしていた → normalized の括弧内を比較し差があれば incomparable。
-  ② **片側だけ period** (monthly vs 不明) を素通しで same にしていた → 片側のみ提示は「同じ」と確認できず
-  incomparable に倒す。非空 fixture で両方向固定 (11 test green)。
-  ③ **公開 entry を追加** — `src/unit/index.ts` バレルを新設し `@stats47/data-configs/unit` から classifier を
-  公開 (既存の conversionFactor importer は後方互換・product-factory tsc 0)。
-  **残 (WP3 の別スコープ)**: SI 接頭 (km↔m=1000) と計数語 (件↔回) の誤 factor 1 は **parseUnit/unit-semantics
-  側の限界** (classifier は parseUnit の次元・スケールを信頼するだけ)。実測で active config に裸の SI 接頭単位は
-  0 件のため theoretical。修正は unit-semantics 正典 + 鏡再生成を伴うため別途 (必要な metric が出たら着手)。
-  **production consumer は WP6 の `WrittenStatsMeta` 焼き込み時に接続** (R2 再生成を伴うため remote-gated)。
-  **`sourceUnit`/`valueScale` の `WrittenStatsMeta` 焼き込み (取り込み時一回) と
-  consumer 二重変換の縮小 ratchet は R2 再生成を伴うため残 (WP6・`MONEY-UNIT-SCALE-01` 依存)**。
-- **WP6 wave 1 (2026-08-26)**: `kpi-lf-current-balance`を旧APIとR2で48地域比較し、値・年・unit・
-  欠測の差分0を確認して`seriesRefs`へ移行した。QG2 parser付きの共通R2 readerを使い、直API fallbackはない。
-  生参照chart 78→77、request 241→240、typed metric ref 6→7。data-configs 669 test、対象web test、
-  両package型検査、catalog / 生成物 / 依存mirror gateはgreen。地方財政の本番routeはbespoke dashboardなので、
-  このwaveはcatalog依存の移行でありroute本体のreader置換とは数えない。年度集合が一致しないline候補は移行しなかった。
-- **WP6/7 ローカル完了 checkpoint (2026-08-28)**: ThemeCatalog 20テーマ・107 chartを型付きR2参照へ移行し、
-  生`estatParams` 0 / 生色 0 / production e-Stat直呼び0。依存ミラーは192 distinct metricで、staged R2監査は
-  期待=実集合=成功192（部分地域17件はshape-gate SSOTどおりwarn-only）。金額348 metricはmismatch 0、ranking
-  active 2,167件は欠落・normalized欠落・stale・recipe drift 0。blog provenance defect 0、現行自動復元器の
-  auto-recoverable 0、手動残件99は`CHART-LINEAGE-RESIDUAL-01` 93件 / `TILEMAP-LINEAGE-01` 6件へ分離済み。
-  全25 package+scripts type-check、ThemeCatalog 138 test、web full build（SSG 1,350ページ）はgreen。
-  `docs:check`はerror 0・リンク悪化0、`docs:check:all`は本カード外の既存期限超過/未分類27 warningを
-  `--fail-on-warn`が拾うため非0（新規warning 0）。
-- **外部反映待ち (owner承認必須)**: git review/commit/push後、CI `data-refresh`で新規40 metric
-  を先行反映し、blog exact asset 30 keysだけを反映する。一括`.local/r2` pushは禁止。対象key・bytes・manifest
-  hash・rollback手順の機械正典は `.claude/state/data/cross-page-data-ssot-preflight.json`。R2 write直前に既存
-  23 objectを再取得してrollback bundleを作り、新規47 objectはrollback時にexact key deleteする。
-  R2実測→page-components sync→deploy→本番再監査がgreenになってからカード削除する。
-- **依存**:
-  - `MONEY-UNIT-SCALE-01`: `sourceUnit` / `valueScale` / 取り込みゲート / R2再生成を再利用し、同じ変換表を作らない。
-  - `RANKING-VALUES-PARTITION-INTEGRITY-01`: `MetricRecipe` / shape gate / configHash監査を再利用する。
-  - `CHART-LINEAGE-RESIDUAL-01`と`TILEMAP-LINEAGE-01`: blogの手動同定が必要な残件は各項目の停止条件を優先する。
-- **実装規律**:
-  - 既定はClaude Code単独、子agent 0。並行化する場合も同じworking treeのwriterを複数起動しない。
-  - 最初に失敗する契約test / mutation testを置き、そのtestが意図した欠陥で落ちることを確認してから実装する。
-  - 最終形はR2 snapshot参照へ一本化する。移行中だけ既存`estatParams`を読み、追加禁止・件数縮小のratchetを置く。
-  - 実データを推測で補完しない。SSOTから再現できないchartは直APIへ逃がさず、対象keyと不足軸を報告して停止する。
-- **実行順**:
-  1. **WP0 — ベースラインと境界testを固定**
-     - dirty worktreeを確認し、この項目と無関係な差分を編集・stageしない。
-     - 上記件数を再計測するpure collectorを先に作る。ThemeCatalogのchart種別ごとのdependency数、
-       生`estatParams`数、生色値数、本番e-Stat import/call数をtest fixtureへ固定する。
-     - 陰性対照としてdonutのcategory、CPIのtop-level params、pyramidの1 category、倍率、色ロールを1つずつ壊し、
-       対応するgateが落ちることを確認する。baselineは欠陥を許可する上限であり、新規追加を許すallowlistにしない。
-  2. **WP1 — chart data参照の型を単一定義化**
-     - `packages/data-configs`に、R2上のmetricを指す型付き`StatSeriesRef`を置く。最小フィールドは
-       `metricKey`、必要時の`year` / area selection、表示label、`colorRole`とし、データ変換式は参照側へ書かない。
-     - ThemeCatalogの各chart component propsを`Record<string, unknown>`任せにせず、chart種別ごとのdiscriminated unionで検証する。
-     - 時系列、複合軸、構成比、donut、CPI profile、population pyramidを同じ参照モデルで表せるかを
-       representative fixtureで先に確認する。既存metricで表せない系列は、git TSにMetricConfigまたは型付きderived recipeを追加し、
-       R2へ生成する。ランキング表示の必要がないmetricを無理に公開ランキング化しない。
-  3. **WP2 — 読み取りをR2へ統一し、本番e-Stat直呼びを廃止**
-     - `packages/stats-r2`の共通readerへ、metricKey / year / areaで値とmetaを読むAPIを置く。
-       theme、ranking、blogのadapterは同じreaderと同じ欠測規則を使う。
-     - `fetchEstatData.ts`、theme dashboard actions、indicator year、timeseries、population pyramid等のcallerを
-       chart種別ごとの小さいwaveで置換する。callerが0になってからruntime e-Stat cache / actionを削除する。
-     - `apps/web`のproduction sourceから`@stats47/estat-api`のvalue importまたはe-Stat endpoint呼び出しを検出したら
-       CIを失敗させる境界checkを追加する。CLI、取り込みscript、test fixtureは明示allowlistに限定する。
-  4. **WP3 — 単位と変換を取り込み時一回に固定**
-     - `MONEY-UNIT-SCALE-01`の`sourceUnit` / `valueScale`を先に完了し、`WrittenStatsMeta`へ
-       source unit、stored/display unit、適用scale、period semantics、recipe hashを焼く。
-     - readerとchart formatterはmeta / MetricConfigのunitを使う。chart propsの自由記述unit、consumer側の倍率、
-       `display.conversionFactor`による二重変換を新規禁止し、必要な互換処理は縮小ratchet下へ置く。
-     - 金額の10倍/1,000倍だけでなく、`%`対割合、人口10万対、月額対年額、分母違いのmutation testを追加する。
-       比較不能な系列は自動換算せず、共通unit classifierが理由付きで拒否する。
-  5. **WP4 — 依存抽出と監査母集団を共通化**
-     - `collectThemeDataDependencies`をpure coreとして一箇所に置き、catalog validator、snapshot generator、live/R2 auditが
-       同じ集合を使う。chart種別のswitchはexhaustiveにし、未知種別はskipせずerrorにする。
-     - donut、CPI、pyramidを含む全系列について、存在、year、area coverage、shape、unit、recipe/config hash、provenanceを検査する。
-       監査の成功条件は「取得できたrequestが成功」ではなく「期待集合と実集合が一致し、その全件が成功」とする。
-     - warning 194は一括抑制せず、selection provenance、sortOrder、primary orphan、重複を種類別に修正し、0または
-       根拠・期限付きallowlistへ縮小する。polarity未割当は推測で埋めず、配色に必要なものから根拠付きで確定する。
-  6. **WP5 — 配色をsemantic roleへ統一**
-     - 連続・発散choroplethは既存`color-scheme-policy.ts`を正典として維持する。
-       categorical / semantic chart用に`ChartColorRole`を共有型として追加し、ThemeCatalogはroleだけを保存する。
-     - webはCSS custom property、server/static SVGは決定的な固定値resolverを使う。両resolverが同じrole集合を実装するtestを置く。
-     - `ChartPalette.ts`、`packages/visualization`のpalette、各chart内のliteralは共通resolverのadapterへ縮約する。
-       地図ライブラリ、外部ブランド、生成済み静的asset等の例外は理由付き・file単位allowlistにする。
-     - ThemeCatalogの生色値179箇所を0へ移行し、raw color追加をCIで拒否する。視覚的な意味やコントラストを変える場合は
-       representative chartをlocalhostで比較し、意図しない色順・正負反転・凡例不一致がないことを確認する。
-  7. **WP6 — データとblog lineageを回復**
-     - normalized artifact欠落1件とstale delivery 14件を、既存refresh / sync経路で再生成できる状態へ直す。
-       dry-runと対象key一覧を先に出し、remote R2 writeは承認後に一回へまとめる。
-     - ThemeCatalog 87 chartを、line/KPI → mixed/composition → donut/CPI → pyramidの順でR2参照へ移行する。
-       各waveでlegacy件数が単調減少することと、表示値・年・unit・欠測注記のbefore/afterを確認する。
-     - blogは既存lineage復元scriptを使い、未復元124とprovenance defect 23を機械復元可能・手動同定・削除/差替え判断へ分類する。
-       SSOTに値がないものはSVGから逆算せず、既存の残件項目へ対象keyと次の調査だけを残す。
-  8. **WP7 — 最終gate、恒久文書、外部反映preflight**
-     - 関連package test、unit mutation、catalog validator、config/year/polarity、money unit、ranking integrity、blog lineage、
-       design-system/color gate、全package type-checkを実行する。runtime/SSG/R2 schemaに触るため最後にweb full buildも行う。
-     - 恒久化した境界だけをデータアーキテクチャ、unit semantics、theme catalog、metric config、R2設計の既存SSOTへ反映する。
-       一時的な監査全文や長い作業promptをdocsへ残さない。文書変更後は`docs:fix`、`docs:check`、`docs:check:all`を実行する。
-       既存の無関係なwarningだけが残る場合は勝手に直さず、開始時との差分が0であることと内容を報告する。
-     - 変更file、検証結果、legacy残数、R2対象key、rollbackをpreflightとして提示し、owner承認までcommit/PR/deploy/
-       workflow dispatch/R2 writeを実行しない。承認後も外部反映は一回にまとめ、反映後auditで閉じる。
-- **停止条件**:
-  - money unitの不一致が42件から大きく増える、または変換を一意に決められない。
-  - ThemeCatalogの期待dependency数が理由なく減る、未知chart種別が現れる、mutationでgateが落ちない。
-  - R2参照化で同じ指標・年・母集団を再現できず、公開値の意味を変える判断が必要になる。
-  - backward compatibleに読めないR2 schema変更、ユーザー差分との競合、secret不足、remote write/deployが必要になる。
-  - 上記では直API fallback、推測、allowlist拡大をせず、対象key・証拠・選択肢を提示してowner判断を待つ。
-- **完了条件**:
-  - production `apps/web`のe-Stat直呼び0、ThemeCatalogの生`estatParams`0、生色値0。
-  - 全chart dependencyが型付き参照から列挙され、期待集合=生成集合=監査集合。全chart種別の陰性対照が検知される。
-  - 単位換算は取り込み時一回で、scale-bearing active metricにsilent unknown / mismatchがない。
-    既存`MONEY-UNIT-SCALE-01`のR2実測条件も満たす。
-  - normalized artifact欠落0、stale delivery 0。blogの自動復元可能残件0、provenance defect 0。
-    手動判断残件は捏造せず、既存の個別IDへ根拠付きで分離されている。
-  - 色roleの共有型とweb/static resolverが一致し、新しいliteralをCIが拒否する。主要chartで色順、正負、凡例、contrastの回帰なし。
-  - 対象test、全type-check、web buildがgreenで、docs checksに新規error / warningがない。
-    外部反映後は同じ監査でR2実測まで確認する。
-- **正典**: `docs/01_技術設計/02_データアーキテクチャ.md` / `.claude/rules/estat-api.md` /
-  `.claude/rules/unit-semantics-standards.md` / `.claude/rules/theme-catalog-standards.md` /
-  `.claude/rules/metric-config-standards.md` / `.claude/rules/r2-storage-design.md` /
-  `packages/data-configs/src/unit/` / `packages/data-configs/src/color-scheme-policy.ts`
-
 ### [MUNICIPALITY-SCOPE-SEPARATION-01] 市区町村テーマ・ランキングを独立した地理スコープへ分離する
 
 タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run validate:municipalities --workspace=@stats47/data-configs] [起票:2026-08-20]
@@ -1101,25 +887,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **(b) の手順**: 両記事の本文は 2022年度 を論じているのに地図は 1988年 (live) を表示しており、再生成すると 1989年 に振れる (SSOT 照合が両年で同程度に一致するため)。どの年の地図が記事の主張に対応するかを人が決めてから `--mapping` で固定する。**確定するまで push しない**。
 - **完了条件**: 123 枚すべてが `lintTileGridQuality` + `lintSvgSize` を error 0 で通る。
 
-### [DATA-PATIENT-SURVEY-01] 患者調査 (0004026104) の取り込みが0件で3ページが更新不能
-
-タグ: [起票:2026-07-29]
-
-- **owner**: `data-ingester` (座標の実在検証は `estat-researcher`)
-- **問題**: `inpatient-rate-per-100k` / `outpatient-rate-per-100k` / `patient-receiving-rate-by-age` の正典 `app/stats/<key>/values.json` が rowCount 0 (generatedAt 2026-07-05)。observationが無く values/normalized writer の対象外になるため配信データを更新できない。3件とも isActive かつ sitemap 掲載済で、2026-05-22 の凍結値が現行値のように見え、`?norm=per_area` は 100 倍のまま。3件が `statsDataId` と `cdCat01` まで完全に同一座標を指しており、少なくとも2件は cdCat01 が誤りと考えられる。
-- **次**: `estat-researcher` で 0004026104 の cdCat01 一覧と各コードの意味を確認し、3 metric へ正しいコードを割り当てる。座標が正しいのに0件なら、その統計表が都道府県別の値を持たない可能性を検討する。
-- **完了条件**: 3件の `app/stats/<key>/values.json` が rowCount > 0 になり、sync-snapshots 後に `audit-ranking-data-integrity` の実在欠落と絶対鮮度違反が0件になること。
-- **機械検知**: 週次 `ranking-integrity-audit-weekly.yml` が実在と絶対鮮度でこの3件を検出し `ranking-alert` を起票するため、放置しても埋もれない。
-
-### [COCONALA-PRODUCT-FACTORY-01] 14テーマパックの商品化
-
-タグ: [起票:2026-07-18]
-
-- **owner**: Claude Code
-- **次**: Office実機検証を1商品ずつ行い、P-14に家計・消費の代表datasetを接続する。note channelは14パックから決定的に導出し、旧174商品前提を除去する。
-- **完了条件**: catalog、dataset、Office成果物、validatorが一致し、最初の1商品を出品判断できる。出品操作はユーザーが行う。
-- **正典**: `.claude/rules/coconala-product-standards.md` / `.claude/skills/product/build-coconala-product/`
-
 ### [THEME-PORTFOLIO-REMAINDER-01] テーマ分類・カタログの残工程
 
 タグ: [起票:2026-07-04]
@@ -1310,20 +1077,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **禁止**: push を速くするために検証や purge を削らない。差分判定を誤って
   **送るべきものを skip する**方が、全件送るより実害が大きい (stale 配信は 6 日間気づかれなかった)。
 
-### [SCRIPTS-TYPECHECK-01] `.claude/scripts` を型検査に載せる
-
-タグ: [起票:2026-08-13]
-
-- **owner**: uruhayato373
-- **背景**: 2026-08-13 に `scripts` ディレクトリ全件を型検査へ載せた際、`.claude/scripts` だけ
-  免除として残した。TS 41 ファイル、compiler option を調整しても error 71 件
-  (TS7006 implicit any 39 / TS2339 21 ほか)。素 JS の `lib/*.mjs` core を import する設計なので、
-  型付けの方針 (JSDoc で型を付ける / `.d.ts` を置く / core を TS 化する) を決めるところから要る。
-- **次**: 方針を 1 つ選び、まず 1 ドメイン (例 `ads`) で実証する。
-- **完了条件**: `.claude/scripts/tsconfig.json` が `type-check:scripts` に載り、
-  `scripts-type-check-coverage.test.cjs` の `KNOWN_UNCOVERED` が空になる。
-- **正典**: `.claude/rules/coding-standards.md`「CI が動かすスクリプトも型検査に載せる」
-
 ### [GINI-ALT-SOURCE-01] 等価可処分所得ジニ係数の代替出典
 
 - **owner**: estat-researcher
@@ -1430,14 +1183,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 4. 本番反映はユーザー承認後にまとめて1回行い、HTTP 200、年、単位、代表値を実測する。
 5. 完了した行は削除する。
 
-### [ESLINT-FEATURE-DEEP-IMPORT-01] features/\*/components で no-restricted-imports が実質無効
-
-タグ: [種類:改善] [起票:2026-08-04]
-
-**eslint の `no-restricted-imports` が features/\*/components 配下で実質無効**。`eslint.config.mjs:67` が `@/features/*/lib/*` 等の deep import を禁止しているが、同 174-221 の「ドメイン内Barrel強制」ブロックが `src/features/*/components/**` に対しルールを丸ごと上書きするため、**component ファイルからは他 feature の内部実装を自由に deep import できてしまう**。今回 1 件是正したが、他にも同型が残っている可能性。上書きブロックに元の patterns をマージすべきか要判断 (影響が全 feature に及ぶので別タスク)
-
-根拠・再現条件: `eslint.config.mjs` の 61-79 と 174-221 を読む。実例: `CommuteFlowSectionClient.tsx` が `@/features/migration-flow/lib/useFlowFocusPrefecture` を import しても lint が通っていた (2026-08-04 是正済)
-
 ### [MIGRATION-FLOW-WEEKLY-REOPEN-01] migration-flow-weekly の週次 IG 投稿が停止したまま (設計欠陥未修正)
 
 タグ: [種類:改善] [起票:2026-08-16]
@@ -1445,14 +1190,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 **migration-flow-weekly の schedule を停止したまま (投稿の設計欠陥は未修正)**。`post-instagram.ts:86-88` が gitignored な `.local/r2/sns/<slug>/instagram` を existsSync で要求するため、clean checkout の CI では構造的に必ず失敗する (2026-05-25 から 12 回連続失敗)。8/16 に schedule を削除して無言の失敗を止めたが、**週次の県ローテーション IG 投稿そのものが止まったまま**。再開するなら post-instagram-scheduled.yml と同じ「公開 R2 URL を IG Graph API に渡す」経路へ寄せるか、post step 前に R2 から pull する step を足す
 
 根拠・再現条件: `.github/workflows/migration-flow-weekly.yml` (冒頭コメントに経緯)。成功している手本 = `.claude/scripts/instagram/post-from-schedule.cjs` の `PUBLIC_R2_BASE` 経由
-
-### [MUSEUM-COUNT-AXIS-01] 博物館系 3 指標が類似施設を除外して実在県を 0 にしている
-
-タグ: [種類:不具合] [起票:2026-08-05]
-
-**博物館系 3 指標が「類似施設」を除外して実在県を 0 にしている**。`botanical-garden-count` は登録+相当の 10 館のみ集計だが同調査の博物館類似施設に植物園が 107 館・33 県ある。`zoo-count` は 35 館のみで類似施設の動物園 59 館・26 県を除外 (大分等が 0 表示)、`aquarium-count` は 38 館のみで類似施設 46 館・28 県を除外。cdCat の集計軸を見直すか、指標名を「登録博物館のみ」に改めるかの判断が要る
-
-根拠・再現条件: e-Stat 0003348811。値分布の検証キャンペーンで検出。未検証キューに残置
 
 ### [HEALTH-CHECKUP-RATE-RETIRE-01] health-checkup-rate-lifestyle-diseases が 2017 年以降 全国値 0%
 

@@ -2,17 +2,13 @@
  * note 商品展開ファクトリー — 型定義 (SSOT)
  *
  * 恒久仕様: .claude/rules/coconala-product-standards.md §9
- * 現在は旧174商品向けの legacy 実装。削除条件: .claude/todo/backlog.md の
- * COCONALA-PRODUCT-FACTORY-01 完了時に14パック由来の型へ置換する。
- *
  * 完全DBレス: mapping・article-plan・生成コードは git TS が SSOT。
  * 商品側は productId/version、note 側は slug/series を持ち、本ファイルの型で結合する。
  * .local/note-products/ の draft.md 等は派生物 (手編集を正典にしない・note.com へ投稿しない)。
  */
 
 /**
- * note シリーズ (投稿系統の中の商品テーマ束)。仕様 §4 の 9 シリーズ +
- * K=ライセンス説明 / L=無料サンプル の集約先。
+ * note シリーズ (投稿系統の中の商品テーマ束)。現行14パックを複数の読者用途へまとめる。
  */
 export type NoteProductSeries =
   | "prefecture-map-powerpoint" // A, B: 都道府県地図・PPT 図表
@@ -28,7 +24,7 @@ export type NoteProductSeries =
   | "free-samples"; // L: 無料サンプル記事
 
 /**
- * disposition (仕様 §3)。174 商品すべてに必須。
+ * disposition。現行商品すべてに必須。
  * - standalone-paid: 単独有料記事 (その記事の唯一の商品)
  * - bundle-member: テーマ記事・マガジンに束ねる (複数商品を 1 有料記事へ)
  * - free-lead: 無料解説からココナラ受注 / 有料商品へ誘導 (J サービス・L 無料サンプル)
@@ -81,7 +77,7 @@ export interface NoteArticlePlan {
   readonly access: NoteAccess;
   /** 提案価格 (円)。無料は 0。 */
   readonly priceJpy: number;
-  /** この記事が束ねる商品 ID 群 (1 件以上・全体で 174 を漏れなく覆う)。 */
+  /** この記事が束ねる商品 ID 群 (1 件以上・現行カタログを漏れなく覆う)。 */
   readonly memberProductIds: readonly string[];
   /** 送客先 stats47 パス。 */
   readonly stats47Targets: readonly string[];

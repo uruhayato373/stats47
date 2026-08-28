@@ -134,6 +134,7 @@ export function aggregateVariantMetrics(ga4Rows) {
  * @param {Array<object>} args.ads AFFILIATE_ADS (experimentId 付きエントリを variant 定義として読む)
  * @param {Array<object>} args.variantMetrics aggregateVariantMetrics の出力
  * @param {string} args.nowIso 現在時刻 (ISO)
+ * @param {{status?: string, reasons?: Array<string>} | null} [args.measurementGate] 計測可否ゲート
  * @returns {{active:Array, readyToDecide:Array, invalid:Array, inconclusive:Array, closed:Array}}
  */
 export function evaluateExperiments({ registry, ads, variantMetrics, nowIso, measurementGate = null }) {
