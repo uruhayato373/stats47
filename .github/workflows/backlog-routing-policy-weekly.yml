@@ -1,0 +1,66 @@
+name: 🧭 Backlog Routing Policy (weekly)
+
+# backlog-loop ledger の class×model 成功率と Claude usage 実測を週次評価する。
+# minSamples 未満は policy を変えず、変更時も develop への提案 commit まで。
+# agent frontmatter、日次件数、escalation ladder は自動変更しない。
+# 正典: .claude/rules/backlog-loop.md §3
+
+on:
+  schedule:
+    # 毎週月曜 JST 06:45 (= 日曜 21:45 UTC)。日次 GSC 後、整合監査の前。
+    - cron: "45 21 * * 0"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backlog-routing-policy-weekly
+  cancel-in-progress: false
+
+jobs:
+  evaluate:
+    name: Evaluate measured routing policy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+
+      - name: 🧭 Evaluate policy guards
+        run: node .claude/scripts/backlog-loop/update-routing-policy.mjs
+
+      - name: 🔒 Restrict generated diff
+        id: diff
+        shell: bash
+        run: |
+          mapfile -t CHANGED < <(git diff --name-only)
+          if [ "${#CHANGED[@]}" -eq 0 ]; then
+            echo "changed=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          for FILE in "${CHANGED[@]}"; do
+            case "$FILE" in
+              .claude/config/backlog-routing-policy.json|.claude/state/metrics/prompt-evals/*.json) ;;
+              *) echo "unexpected generated file: $FILE" >&2; exit 1 ;;
+            esac
+          done
+          echo "changed=1" >> "$GITHUB_OUTPUT"
+
+      - name: 📝 Commit measured proposal to develop
+        if: steps.diff.outputs.changed == '1'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/config/backlog-routing-policy.json .claude/state/metrics/prompt-evals/
+          git commit -m "chore(backlog): update measured routing policy [skip ci]"
+          git push origin HEAD:develop
