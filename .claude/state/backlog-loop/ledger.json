@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-27T08:06:07.673Z",
+  "updatedAt": "2026-08-28T01:07:13.698Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -773,6 +773,19 @@
           "costUsd": null,
           "gate": null,
           "evidence": "route.class が既に needs-owner (attempts=2, escalatedFrom=fable)。オーナー判断待ちのため触らず次へ",
+          "failReason": "needs-owner",
+          "followUps": []
+        },
+        {
+          "at": "2026-08-28T01:07:09.227Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "route.class は既に needs-owner (queue 側判定・attempts=3・escalatedFrom=fable)。オーナー判断待ちのため触らず次へ",
           "failReason": "needs-owner",
           "followUps": []
         }
@@ -2146,6 +2159,34 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-27T08:06:07.673Z"
+    },
+    "BACKLOG-LOOP-PHASE23-01": {
+      "class": "impl-large",
+      "status": "open",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "バックログ処理ループの学習 (Phase 2) と指標バックログ取り込み (Phase 3)",
+      "attempts": [
+        {
+          "at": "2026-08-28T01:07:13.698Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "Phase2(update-routing-policy.mjs+週次workflow+guards)とPhase3(indicator-expansion class新設+estat実在検証+config生成)は新規script/workflow/新classを跨ぐ多段実装。impl-largeでdraft PR経路が要るためCI日次runでは着手せずskip",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }
