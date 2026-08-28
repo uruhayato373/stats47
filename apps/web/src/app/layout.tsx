@@ -115,7 +115,7 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className="antialiased"
+        className="google-anno-skip antialiased"
         suppressHydrationWarning
       >
         <TopLoaderWrapper />
