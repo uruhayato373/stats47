@@ -285,61 +285,73 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
         "seriesRefs": [
           {
             "metricKey": "fishery-species-catch-scallop",
+            "area": "national",
             "label": "ホタテガイ",
             "colorRole": "population"
           },
           {
             "metricKey": "fishery-species-catch-japanese-squid",
+            "area": "national",
             "label": "スルメイカ",
             "colorRole": "series-6"
           },
           {
             "metricKey": "fishery-species-catch-tuna",
+            "area": "national",
             "label": "マグロ類",
             "colorRole": "special"
           },
           {
             "metricKey": "fishery-species-catch-bonito",
+            "area": "national",
             "label": "カツオ",
             "colorRole": "count"
           },
           {
             "metricKey": "fishery-species-catch-mackerel",
+            "area": "national",
             "label": "サバ類",
             "colorRole": "danger"
           },
           {
             "metricKey": "fishery-species-catch-pacific-saury",
+            "area": "national",
             "label": "サンマ",
             "colorRole": "improve"
           },
           {
             "metricKey": "fishery-species-catch-yellowtail",
+            "area": "national",
             "label": "ブリ類",
             "colorRole": "series-11"
           },
           {
             "metricKey": "fishery-species-catch-sardine",
+            "area": "national",
             "label": "イワシ類",
             "colorRole": "series-8"
           },
           {
             "metricKey": "fishery-species-catch-pollock",
+            "area": "national",
             "label": "スケトウダラ",
             "colorRole": "series-10"
           },
           {
             "metricKey": "fishery-species-catch-kelp",
+            "area": "national",
             "label": "コンブ類",
             "colorRole": "series-9"
           },
           {
             "metricKey": "fishery-species-catch-snow-crab",
+            "area": "national",
             "label": "ズワイガニ",
             "colorRole": "series-12"
           },
           {
             "metricKey": "fishery-species-catch-sea-bream",
+            "area": "national",
             "label": "タイ類",
             "colorRole": "female"
           }
@@ -376,16 +388,20 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "componentProps": {
         "seriesRefs": [
           {
-            "metricKey": "fishery-species-catch-sardine"
+            "metricKey": "fishery-species-catch-sardine",
+            "area": "national"
           },
           {
-            "metricKey": "fishery-species-catch-pacific-saury"
+            "metricKey": "fishery-species-catch-pacific-saury",
+            "area": "national"
           },
           {
-            "metricKey": "fishery-species-catch-scallop"
+            "metricKey": "fishery-species-catch-scallop",
+            "area": "national"
           },
           {
-            "metricKey": "fishery-species-catch-japanese-squid"
+            "metricKey": "fishery-species-catch-japanese-squid",
+            "area": "national"
           }
         ],
         "labels": [
