@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "dual-income-household-ratio",
+  "pair": "floor-area-per-dwelling-owner",
+  "pearsonR": 0.9014351313015879,
+  "partialRPopulation": 0.8373403276918367,
+  "unit": "％ × ｍ2",
+  "label": "共働き世帯割合 と 持ち家住宅の延べ面積 の関係",
+  "source": "r2:app/correlation/by-ranking-key/dual-income-household-ratio.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug dual-income-house-size --base dual-income-household-ratio --pair floor-area-per-dwelling-owner --data-name dual-income-floor-area-scatter"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "pachinko-shop-density-per-10k",
+  "year": "2025",
+  "unit": "軒",
+  "label": "パチンコ店舗数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/pachinko-shop-density-per-10k/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug pachinko-education-cost --keys pachinko-shop-density-per-10k --with-map",
+  "fetchedAt": "2026-08-28T07:56:47.966Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
