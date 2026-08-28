@@ -36,10 +36,10 @@ describe("deterministic render environment contract", () => {
     });
   });
 
-  it("repo内の固定fontをSVGへ埋め込み、入力内容は保持する", () => {
+  it("固定TTFを使うfont familyをSVGへ指定し、入力内容は保持する", () => {
     const svg = prepareSvgForDeterministicRender('<svg viewBox="0 0 10 10"><text>東京1</text></svg>');
-    expect(svg).toContain("font-family:'Stats47Render'");
-    expect(svg).toContain("data:font/woff2;base64,");
+    expect(svg).toContain("font-family:'Noto Sans JP'");
+    expect(svg).not.toContain("data:font/woff2;base64,");
     expect(svg).toContain("<text>東京1</text>");
     expect(createHash("sha256").update(svg).digest("hex")).toHaveLength(64);
   });

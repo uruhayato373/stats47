@@ -3,80 +3,80 @@
   "entries": [
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/barchart-landscape.png",
-      "beforeSha256": "c826723f8d6cfcfd2b533b2fc058005542617ab78f4c44a01870028687168c28",
-      "afterSha256": "a05010511449e63301cccc799f8a0b090e5d866c343878428e36079351f6b4cf",
-      "cause": "font ratio changed before render suite became blocking",
-      "causeRefs": ["c110462c6", "ac75323fe", "7c6896391"]
+      "beforeSha256": "a05010511449e63301cccc799f8a0b090e5d866c343878428e36079351f6b4cf",
+      "afterSha256": "f9c4bfb5b2940af828c0b7de9d948c55e452c90d0e6fae79d51ebe6234e4bfbc",
+      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
+      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/barchart-portrait.png",
-      "beforeSha256": "680a5225cd28c293c3371f21c113323065b84be250ba1989d0da7926b08dc16e",
-      "afterSha256": "aca2f2539864c836b9bdb8c48713eb28478835239e52f4b45fc6eccfa849971d",
-      "cause": "font ratio changed before render suite became blocking",
-      "causeRefs": ["c110462c6", "ac75323fe", "7c6896391"]
+      "beforeSha256": "aca2f2539864c836b9bdb8c48713eb28478835239e52f4b45fc6eccfa849971d",
+      "afterSha256": "4d9d4a4ca6d9a30b1ea3dc7fc871ca50bf3fd9922b66bd8886cacf22a548c224",
+      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
+      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/columnchart-landscape.png",
-      "beforeSha256": "d209724d20ddab6f2b73985a5f0bb224269f2d6f8824a439c5a6020c6faaacef",
-      "afterSha256": "cd44cf5ca44f4b47282c529687ab54dc332c8447222044ec7e459ddddcb95a47",
-      "cause": "margins axes and font changed after stale golden",
-      "causeRefs": ["c110462c6", "b72f04acf", "ac75323fe", "7c6896391"]
+      "beforeSha256": "cd44cf5ca44f4b47282c529687ab54dc332c8447222044ec7e459ddddcb95a47",
+      "afterSha256": "25f7bf9ca475fbf68bcbfd98a6425065347150e0751b53837e8d5e0f94edfa25",
+      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
+      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/columnchart-portrait.png",
-      "beforeSha256": "8112aeb611acf57e1190115f626d0508b24ed42e09615e54099ac39843ec4b96",
-      "afterSha256": "caf864e28e2ec757cc0e0806f7c4b5aaef5c8df14e309bad34458bd453f7e4d3",
-      "cause": "margins axes and font changed after stale golden",
-      "causeRefs": ["c110462c6", "b72f04acf", "ac75323fe", "7c6896391"]
+      "beforeSha256": "caf864e28e2ec757cc0e0806f7c4b5aaef5c8df14e309bad34458bd453f7e4d3",
+      "afterSha256": "6ca1c1d96fc0986541de17e0123b1422e7414d0605c47cd3a7323d2b8b2d9048",
+      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
+      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/d3barchartrace-landscape.png",
-      "beforeSha256": "2eac4b090d5b1eff2fc416eed825de8ae577d5973574b8095a76ab470a7328c0",
-      "afterSha256": "2789d468f46a16ece16b669f7a5c353c4ce6bb5d2c0638df6533178bb60192e7",
-      "cause": "deterministic embedded font rerasterized a previously tolerated sub-threshold difference",
-      "causeRefs": ["ac75323fe", "7c6896391"]
+      "beforeSha256": "2789d468f46a16ece16b669f7a5c353c4ce6bb5d2c0638df6533178bb60192e7",
+      "afterSha256": "86c4dc02166ff7f54c6d3f58e153de12824c555576af7000283846f5e8221943",
+      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
+      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/d3barchartrace-portrait.png",
-      "beforeSha256": "5a92f97944bc1e8585eedb1ab38ad887a63b2b76020ad615f53a7424834459cf",
-      "afterSha256": "31e9e8aca64d727f6e03a2de66101eb5736f66d514b23c91d10be9cfa505ea4e",
-      "cause": "deterministic embedded font rerasterized a previously tolerated sub-threshold difference",
-      "causeRefs": ["ac75323fe", "7c6896391"]
+      "beforeSha256": "31e9e8aca64d727f6e03a2de66101eb5736f66d514b23c91d10be9cfa505ea4e",
+      "afterSha256": "68fa9e9e7a1c20106b115f9da0baea83b81d939e55140d0db242321f5a8c2a79",
+      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
+      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/donutchart-square.png",
-      "beforeSha256": "3dac5410687a67543a5ebd3c109d1490df147e3e047963faebb724031089945c",
-      "afterSha256": "f12baa3adbd887e3735ad8926e44e2fc9493fabf31e46bb23fbcc4e41383852f",
-      "cause": "label font size and family changed after stale golden",
-      "causeRefs": ["c110462c6", "eeeaf1307", "ac75323fe", "7c6896391"]
+      "beforeSha256": "f12baa3adbd887e3735ad8926e44e2fc9493fabf31e46bb23fbcc4e41383852f",
+      "afterSha256": "a897a779fe6c05cb0848c429830a0b22c202a87cbd9fccc95cfe0311615e4356",
+      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
+      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/pyramidchart-landscape.png",
-      "beforeSha256": "6ddeac8e63c3914d18a29c78383d8bd1883144a4f6f5a1ae2e86b2201d4b05a3",
-      "afterSha256": "ceb3ddd1a4c1a372ddc4990a14e9e6d6528fa93b56f7973392cc65a3b202ac9d",
-      "cause": "Sharp raster engine upgraded then fixed font embedded",
-      "causeRefs": ["ac75323fe", "7c6896391"]
+      "beforeSha256": "ceb3ddd1a4c1a372ddc4990a14e9e6d6528fa93b56f7973392cc65a3b202ac9d",
+      "afterSha256": "37ae93a70d4e84a4d9cc5cd912fbf9503fa7337533b2343fc96f74a9175ff63e",
+      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
+      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/scatterplot-landscape.png",
-      "beforeSha256": "52fa2475a7ab0e1bd79a4e383baeb931e2de8d7a5f34f4092890863fdc5d9637",
-      "afterSha256": "bafd9844ff88d0e5e655aa8662e5290ab1d0651e0190b12c5a523520662a56b2",
-      "cause": "font ratio changed before render suite became blocking",
-      "causeRefs": ["b72f04acf", "ac75323fe", "7c6896391"]
+      "beforeSha256": "bafd9844ff88d0e5e655aa8662e5290ab1d0651e0190b12c5a523520662a56b2",
+      "afterSha256": "ddd9b8c4661b5fb26c8d035e8bf560591024739fe822205d27cfacbce9e28d8e",
+      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
+      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/sunburstchart-square.png",
-      "beforeSha256": "2baef91a53d4f948c3cb1ececa725760c0bece27dfffdea8a4948325aed5e217",
-      "afterSha256": "8bcde26b36dec2746e7ce08b0b73b7fdf72104a19fee4cdc9381af36381aeca9",
-      "cause": "deterministic embedded font rerasterized a previously tolerated sub-threshold difference",
-      "causeRefs": ["ac75323fe", "7c6896391"]
+      "beforeSha256": "8bcde26b36dec2746e7ce08b0b73b7fdf72104a19fee4cdc9381af36381aeca9",
+      "afterSha256": "1757b68c29f6efca05805f6fb300fe215a0146a29212fca866d8fa5b4c7a68f6",
+      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
+      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
     },
     {
       "path": "packages/visualization/src/shared/__tests__/__golden__/treemapchart-landscape.png",
-      "beforeSha256": "a37d3b316d0d78ed288cc33aedde010466bbbbd3fc5f26269609f1a3c7651943",
-      "afterSha256": "1c0acf4393a3d006b281441d37f798a6018a8b6a0f65f2e97a142f77347a009b",
-      "cause": "deterministic embedded font rerasterized a previously tolerated sub-threshold difference",
-      "causeRefs": ["ac75323fe", "7c6896391"]
+      "beforeSha256": "1c0acf4393a3d006b281441d37f798a6018a8b6a0f65f2e97a142f77347a009b",
+      "afterSha256": "6f52ce25b6800254d582ec92439ef9fd79dbbf8b2518de02a7007fb03b439cb0",
+      "cause": "replace OS-dependent Sharp/librsvg rasterization with resvg and pinned Noto Sans JP TTF after Linux CI dropped Japanese glyphs",
+      "causeRefs": ["PR-850/run-33220861485", "@resvg/resvg-js@2.6.2"]
     }
   ]
 }
