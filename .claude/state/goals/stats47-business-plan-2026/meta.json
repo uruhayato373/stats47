@@ -1,0 +1,48 @@
+{
+  "slug": "stats47-business-plan-2026",
+  "title": "stats47 2.0事業計画を継続実行可能な運用へ統合する",
+  "metric": "custom",
+  "improvement_skill": "business-plan-operate",
+  "status": "CLOSED-SUCCESS",
+  "created_at": "2026-08-28T00:00:00.000+09:00",
+  "updated_at": "2026-08-28T21:53:00.000+09:00",
+  "closed_at": "2026-08-28T21:53:00.000+09:00",
+  "close_reason": "25章の取込判断、企画在庫、管理画面、owner/skill、週次state、CI、既存文書統合と全検証ゲートが完了し、定義した実装終了条件を達成した",
+  "success_criteria": "25章の取込判断・100企画・30 X案・15 note商品を型付きSSOTで検証し、管理画面、owner/skill、週次state、CI、既存方針文書が同じ契約を読み、対象テスト・型・文書ゲートが成功する",
+  "abort_criteria": "8 cyclesでSSOTと管理画面の参照整合を成立させられない場合は、企画在庫を縮約して再定義する",
+  "max_cycles": 8,
+  "baseline": {
+    "date": "2026-08-28",
+    "value": "原案35ページはローカルDOCXのみ。25章の採用差分、100企画、管理画面、owner/skill、KPI計測契約が未接続",
+    "source": "/Users/minamidaisuke/Downloads/stats47_2_business_plan_2026.docx"
+  },
+  "md_path": ".claude/skills/management/goal/reference/goals/stats47-business-plan-2026-2026-08-28.md",
+  "cycles": [
+    {
+      "number": 1,
+      "status": "judged",
+      "hypothesis_ids": ["H1", "H2", "H3", "H4"],
+      "expected_effect": "原案の全量を既存SSOTへ適合し、管理画面とCIから継続実行・監査できる",
+      "expected_rationale": "型付きcatalog、derived state、既存ownerへの委譲、需要ゲートを単一の運用契約にする",
+      "proposed_at": "2026-08-28T00:00:00.000+09:00",
+      "pr": null,
+      "commit_hash": "4674d21cbe842d79b1f21fb0a8216194813dfa15",
+      "deployed_at": null,
+      "measurement_path": ".claude/state/business-plan/history/2026-08-28.json",
+      "measured_value": "25 decisions / 100 content / 30 X / 15 note / 4 pilot specs。data-configs 762 tests、admin 166 tests、全25 workspace type-check、admin production build、docs/CI/consistency gates PASS",
+      "measured_at": "2026-08-28T21:53:00.000+09:00",
+      "effect": "full",
+      "judgment_rationale": "このgoalの効果対象は市場成果ではなく継続実行可能な実装基盤。終了条件6項目を決定的validator、テスト、build、画面確認で全件満たした。市場反応は別途pilot計測し、未計測を成果として扱わない",
+      "judged_at": "2026-08-28T21:53:00.000+09:00",
+      "next_action": "閉鎖。H5の市場仮説は最初の4系列を需要ゲート順に実行し、週次・月次stateで継続判定する"
+    }
+  ],
+  "current_cycle": null,
+  "hypothesis_pool": [
+    "H1: 型付きcatalogと決定的validatorで原案・実装・ownerのドリフトを防げる",
+    "H2: 管理画面の読み取りミラーで方針と次の実行を同じ画面から判断できる",
+    "H3: 100企画を需要ゲート付き在庫にすれば一括量産せず4系列から検証できる",
+    "H4: 週次収益NSMと地域意思決定の先行指標を分ければ過大な効果主張を防げる",
+    "H5: 最初の分析系列が需要を得ればX・note・商品・B2Bへ同じ資産を再利用できる"
+  ]
+}

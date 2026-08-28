@@ -27,7 +27,10 @@ const NAV_GROUPS: readonly NavGroup[] = [
   },
   {
     title: "調査・設計",
-    items: [{ href: "/research", label: "調査カタログ" }],
+    items: [
+      { href: "/strategy", label: "方針・事業計画" },
+      { href: "/research", label: "調査カタログ" },
+    ],
   },
   {
     title: "収益",

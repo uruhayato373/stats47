@@ -22,7 +22,7 @@
 
 | agent | role | 派生元 |
 |---|---|---|
-| `strategy-advisor` | 週次 PDCA・NSM・批判的 review (knowledge / triage は分離) | 既存縮退 |
+| `strategy-advisor` | 週次 PDCA・NSM・事業計画SSOT/Go-Pivot-Stop・批判的 review (knowledge / triage は分離)。skill `/business-plan-operate` | 既存拡張 |
 | `backlog-processor` 🆕 | `.claude/todo/{05,06,01}` を分類して処理し、**機械ゲートを通ったものだけ**行削除する消化ループの主体。証拠は `.claude/state/backlog-loop/ledger.json` に残り、gate 無しの削除は verify が exit 1 で止める。04 は触らない (improvement-triage の排他 write)。正典 `.claude/rules/backlog-loop.md`、skill `/process-backlog` | 2026-08-17 新設 |
 | `backlog-solver-hard` 🆕 | backlog-loop の難物 (impl-large / indicator-expansion / sonnet が失敗した案件) を **1 起動 1 件**で解く。CI の run 本体は sonnet 固定なので、上位モデル (fable) は本 agent への委譲でのみ使う | 2026-08-17 新設 |
 | `todo-curator` 🆕 | `.claude/todo` の台帳を**整える** (消化ではない)。01 受信箱の triage、期限超過・鮮度切れの棚卸し提案、`todo-standards.md` の整合維持、台帳外に散った TODO の回収。**行削除はしない** (gate 証拠付きの backlog-loop CI が専権)、04 も触らない | 2026-08-18 新設 |

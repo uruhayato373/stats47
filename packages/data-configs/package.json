@@ -59,6 +59,11 @@
       "types": "./src/geo-scope/index.ts",
       "import": "./src/geo-scope/index.ts",
       "require": "./src/geo-scope/index.ts"
+    },
+    "./business-plan": {
+      "types": "./src/business-plan/index.ts",
+      "import": "./src/business-plan/index.ts",
+      "require": "./src/business-plan/index.ts"
     }
   },
   "scripts": {
@@ -80,7 +85,9 @@
     "type-check": "tsc --noEmit",
     "validate:polarity": "tsx scripts/validate-polarity.ts",
     "audit:money-unit-scale": "tsx scripts/audit-money-unit-scale.ts",
-    "validate:survey-master": "tsx scripts/ssds/validate-survey-master-coverage.ts"
+    "validate:survey-master": "tsx scripts/ssds/validate-survey-master-coverage.ts",
+    "validate:business-plan": "tsx scripts/validate-business-plan.ts",
+    "build:business-plan-state": "tsx scripts/build-business-plan-state.ts"
   },
   "dependencies": {
     "@stats47/area": "*",

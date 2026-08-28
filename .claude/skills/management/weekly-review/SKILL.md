@@ -19,6 +19,16 @@ primary_agent: strategy-advisor
 node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 ```
 
+同じ週次証拠として事業計画stateを検証・記録する。
+
+```bash
+npm run business-plan:check
+npm run business-plan:build-state -- --snapshot
+```
+
+`.claude/state/business-plan/latest.json` の `sourceFreshness`、`eventCounts`、`nextActions` を読み、
+未計測を0にせず、開始ゲート未達の施策を実行済みと扱わない。
+
 既存snapshotがあれば再生成しない。上書きが必要な根拠がある時だけ`--force`を使う。
 
 続けてGSC入力契約を検査する。
@@ -41,6 +51,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | 検索成長 | `npm run search-growth:status`、`npm run search-growth:next -- --limit 10` |
 | NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |
 | 計画差分 | `.claude/todo/weekly.md` |
+| 事業計画 | `.claude/state/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
 
 各snapshotの期間、取得日、freshnessを保持する。行が無い場合を推測の0へ変換せず、
 `not-measured` / `not-instrumented` / `insufficient-data`を区別する。
@@ -77,6 +88,7 @@ GSC/GA4は次の用途を混在させない。
 - 課題、繰り返しパターン、学び
 - 来週への申し送り
 - 参照したsnapshot / backlog ID / file
+- 事業計画のready/in-progress、開始ゲート、計測欠損、Go/Pivot/Stop判断
 
 恒久的な失敗知見だけを`/knowledge`へ渡す。改善施策statusの更新は`improvement-triage`へ渡す。
 `.claude/todo/weekly.md`はレビュー中に書き換えない。
@@ -101,6 +113,7 @@ FAILが残る場合はレビューを「完了」と報告せず、出力され�
 - 実測の無い数値・効果・完了を記録していない。
 - search-growth候補は最大3件で、未承認候補を`.claude/todo/improvements.md`へ自動追加していない。
 - current-weekの未完了項目を申し送りへ反映している。
+- 事業計画stateが当週に生成され、未計測・手動・部分計測を区別している。
 - GSC証拠がfreshで候補がある場合、approve/dismissが最低1件記録されている。
 - 保存先が`reference/reviews/YYYY-Www.md`である。
 

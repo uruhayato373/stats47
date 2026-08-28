@@ -15,6 +15,8 @@
     "docs:report": "node .claude/scripts/lib/check-docs-governance.cjs --json",
     "docs:check": "node .claude/scripts/lib/check-docs-governance.cjs && node .claude/scripts/lib/check-docs-links.cjs --baseline",
     "docs:check:all": "node --test .claude/scripts/lib/__tests__/check-docs-governance.test.cjs .claude/scripts/lib/__tests__/check-docs-links.test.cjs && node .claude/scripts/lib/check-docs-governance.cjs --fail-on-warn && node .claude/scripts/lib/check-docs-links.cjs --baseline --orphans",
+    "business-plan:check": "npm run validate:business-plan --workspace packages/data-configs",
+    "business-plan:build-state": "npm run build:business-plan-state --workspace packages/data-configs --",
     "theme:dashboard-catalog:check": "node .claude/scripts/themes/check-public-dashboard-catalog.mjs",
     "theme:dashboard-catalog:query": "node .claude/scripts/themes/check-public-dashboard-catalog.mjs --theme",
     "theme:dashboard-catalog:test": "node --test .claude/scripts/themes/__tests__/check-public-dashboard-catalog.test.mjs",

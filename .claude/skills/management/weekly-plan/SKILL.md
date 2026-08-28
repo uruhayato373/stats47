@@ -115,6 +115,10 @@ primary_agent: strategy-advisor
 
 ```
 調査項目:
+- **事業計画の実行state**: 先に `npm run business-plan:check` と
+  `npm run business-plan:build-state` を実行し、`.claude/state/business-plan/latest.json` の
+  `nextActions`・`sourceFreshness`・`eventCounts` を読む。`ready` / `in-progress` だけを候補にし、
+  `gated` をMustへ入れる場合はreadinessGateを満たす証拠を明記する。未計測は0へ変換しない。
 - **今月の月次計画（重点テーマ）**: `.claude/todo/monthly.md` の frontmatter `focus_themes` と「構成タスク」を Read
   ```bash
   cat .claude/todo/monthly.md 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
@@ -231,6 +235,7 @@ primary_agent: strategy-advisor
 3. **機会**: Track E のトレンド機会を評価。stats47 データとマッチするトレンドがあれば記事化・SNS投稿の優先度を上げる
 4. **リスク**: 放置すると悪化すること（技術的負債、トークン失効、コンテンツ枯渇）
 5. **タイミング**: 今週でなければ意味がないこと（季節性、ニュース連動）
+6. **事業計画ゲート**: 地域分析pilot、商品、B2B、Pro/AIの開始条件を満たしたか。売上目標は予測でなく仮説として扱う
 
 ### Phase 2.5: NSM 実験候補の提案
 

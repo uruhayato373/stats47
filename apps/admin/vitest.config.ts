@@ -22,6 +22,10 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./"),
+      "@stats47/data-configs/business-plan": path.resolve(
+        __dirname,
+        "../../packages/data-configs/src/business-plan/index.ts"
+      ),
       "server-only": path.resolve(__dirname, "./vitest.shims.ts"),
       "next/server": path.resolve(__dirname, "./vitest.shims.ts"),
     },
