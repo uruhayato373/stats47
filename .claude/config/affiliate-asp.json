@@ -54,6 +54,8 @@
       "_applyButtonLabelNote": "★実機で確定 (2026-07-28)。申請ページの可視ボタンは「このメディアで提携申請する」。単なる「提携申請する」も DOM に在るが**非表示** (モーダル用) なので exact 一致でも掴めず、常に「ボタンが無い」と報告されていた。",
       "applyPathPrefix": "/af/shop/promotion/affiliate/comprehension/apply?promotion_id=",
       "_applyPathNote": "★実機で確定 (2026-07-28)。`/af/shop/promotion/<id>` は 404 (移植元から引き継いだ誤りで、doboku-note でも実行されていなかった)。検索結果 HTML の実リンクから確認した。ページ見出しは「プロモーション 一括提携申請」だが、promotion_id を渡すと hidden input が 1 個だけの**単一申請フォーム**になる (lump[] は無い / action は .../apply/confirm)。見出しに引きずられて一括と誤認しないこと。",
+      "detailPathPrefix": "/af/shop/promotion/detail?promotion_id=",
+      "_detailPathNote": "一覧不在の状態確定は詳細ページ本文の単独行を読む。提携中=approved、申請中=applying、未申請/否認中=none、終了メッセージ=unavailable。見出し不在・複数状態・SID不一致は書かず停止する。",
       "confirmButtonLabel": "このメディアで提携する",
       "_confirmNote": "★実機で確定 (2026-07-28)。申請は **2 段階**。申請ページで「このメディアで提携申請する」を押すと `/apply/confirm` へ遷移し、そこで「このメディアで提携する」(申請ではなく**提携**) を押して初めて確定する。1 段目だけで止めると申請は成立しないが、確認ページにも「申請」の語が出るため文言判定では成功と誤認する。完了判定は文言ではなく**申請中一覧に当該案件が現れたか**で行う。",
       "bulkApplyLabel": "一括提携申請へ",

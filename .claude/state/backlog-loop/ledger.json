@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T02:37:28.215Z",
+  "updatedAt": "2026-08-28T03:12:50.666Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -2427,6 +2427,41 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-28T02:37:28.215Z"
+    },
+    "ASP-MOSHIMO-DRIFT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "もしもの提携状態ドリフト29件を確定する",
+      "attempts": [
+        {
+          "at": "2026-08-28T03:12:50.666Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --check .claude/scripts/ads/affiliate-status.mjs; node --test .claude/scripts/ads/__tests__/*.test.mjs",
+              "npm run docs:check",
+              "node .claude/scripts/ads/affiliate-status.mjs --asp moshimo"
+            ],
+            "pass": true
+          },
+          "evidence": "stats47 SID 638943を全ページで確認。提携中40行=40ID、申請中36行=36ID。詳細34件を30件none・4件unavailableへ、一覧8件をapprovedへ確定し、再走査でドリフト0。広告関連206テストとdocs:check合格。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T03:12:50.666Z"
     }
   }
 }

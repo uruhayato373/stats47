@@ -164,6 +164,49 @@ export function parseAfbBlocks(body, pattern) {
   return out;
 }
 
+/**
+ * もしものプロモーション詳細ページから現在状態を読む。
+ *
+ * ナビにも「申請中」「提携中」が常時表示されるため、本文の正確な見出し
+ * `プロモーション詳細` より後にある単独行だけを判定材料にする。
+ * 状態が無い／複数ある場合は推測せず fail-closed にする。
+ */
+export function parseMoshimoDetailStatus(body, anchor = "プロモーション詳細") {
+  const lines = String(body ?? "")
+    .split("\n")
+    .map((line) => line.trim());
+  const anchorIndex = lines.findIndex((line) => line === anchor);
+  if (anchorIndex < 0) {
+    return { ok: false, status: "unknown", rawStatus: null, reason: `本文見出し「${anchor}」が無い` };
+  }
+
+  const statusMap = {
+    提携中: "approved",
+    申請中: "applying",
+    未申請: "none",
+    否認中: "none",
+    "このプロモーションは終了しました。": "unavailable",
+  };
+  const candidates = [
+    ...new Set(lines.slice(anchorIndex + 1).filter((line) => Object.hasOwn(statusMap, line))),
+  ];
+  if (candidates.length !== 1) {
+    return {
+      ok: false,
+      status: "unknown",
+      rawStatus: candidates.length === 0 ? null : candidates.join(" / "),
+      reason: `本文状態が${candidates.length === 0 ? "無い" : "複数ある"}`,
+    };
+  }
+  const rawStatus = candidates[0];
+  return { ok: true, status: statusMap[rawStatus], rawStatus, reason: null };
+}
+
+/** 一覧不在でも、詳細で確定済みの負状態は再び review に戻さない。 */
+export function shouldReviewAbsentStatus(status) {
+  return !["none", "unavailable"].includes(status);
+}
+
 /** カタログの name が実質未補完か (null / 空 / 【PID:N】カテゴリ 形式)。 */
 export function isPlaceholderName(name) {
   if (!name) return true;

@@ -17,6 +17,7 @@
  *   node .claude/scripts/ads/affiliate-status.mjs                 # 全 ASP
  *   node .claude/scripts/ads/affiliate-status.mjs --asp moshimo   # 1 ASP だけ
  *   node .claude/scripts/ads/affiliate-status.mjs --write         # 実機の値でカタログを更新
+ *   node .claude/scripts/ads/affiliate-status.mjs --asp moshimo --verify-moshimo-details
  */
 import { readFileSync, writeFileSync, mkdirSync, appendFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
@@ -37,7 +38,9 @@ import {
   detectPhantomIds,
   isPlaceholderName,
   parseAfbBlocks,
+  parseMoshimoDetailStatus,
   pickIds,
+  shouldReviewAbsentStatus,
   zipNamesWithIds,
 } from "./lib/affiliate-status-core.mjs";
 
@@ -60,10 +63,11 @@ function knownNamesByAsp(aspName) {
 
 function parseArgs() {
   const a = process.argv.slice(2);
-  const o = { asps: null, write: false };
+  const o = { asps: null, write: false, verifyMoshimoDetails: false };
   for (let i = 0; i < a.length; i++) {
     if (a[i] === "--asp") o.asps = a[++i].split(",").map((s) => s.trim());
     else if (a[i] === "--write") o.write = true;
+    else if (a[i] === "--verify-moshimo-details") o.verifyMoshimoDetails = true;
   }
   return o;
 }
@@ -213,6 +217,74 @@ async function checkAsp(name, root, log) {
   }
 }
 
+/**
+ * もしもの一覧不在案件を、各プロモーション詳細ページで確定する。
+ * 全件の状態と stats47 SID を確定できるまで結果を返さず、途中失敗時は一切書かない。
+ */
+async function verifyMoshimoAbsentDetails(root, liveResult, candidates, log) {
+  if (candidates.length === 0) return [];
+  for (const key of ["partnered", "applying"]) {
+    const parity = liveResult.parity[key];
+    if (!parity?.ok) {
+      throw new Error(`もしも/${key}: 一覧行数と ID 数の一致を確認できないため詳細照合を停止`);
+    }
+  }
+
+  const asp = getAsp(root, "moshimo");
+  if (!asp.detailPathPrefix) throw new Error("もしも detailPathPrefix が未設定");
+  const isReady = asp.readyMarker
+    ? async (page) =>
+        !new RegExp(asp.reAuthPattern, "i").test(page.url()) &&
+        (await page.locator(asp.readyMarker).count().catch(() => 0)) > 0
+    : undefined;
+  const { ctx, page } = await openAsp(asp, { isReady, label: "moshimo-detail" });
+  try {
+    const confirmed = [];
+    for (const candidate of candidates) {
+      const site = await ensureTargetSite(page, asp, root, {
+        navigateTo: `${asp.detailPathPrefix}${encodeURIComponent(candidate.id)}`,
+      });
+      await page
+        .waitForFunction(
+          (anchor) =>
+            (document.body?.innerText ?? "")
+              .split("\n")
+              .some((line) => line.trim() === anchor),
+          asp.statusScopeAnchor,
+          { timeout: asp.browser.timeoutMs ?? 30000, polling: 500 },
+        )
+        .catch(() => {});
+      const parsed = parseMoshimoDetailStatus(
+        await visibleText(page, 200000),
+        asp.statusScopeAnchor,
+      );
+      if (!parsed.ok) {
+        throw new Error(
+          `もしも詳細 id=${candidate.id}: ${parsed.reason} (SID ${site.actualSiteId ?? "-"})`,
+        );
+      }
+      if (["approved", "applying"].includes(parsed.status)) {
+        throw new Error(
+          `もしも詳細 id=${candidate.id} は「${parsed.rawStatus}」だが一覧に無い。pagination/selector drift を確認`,
+        );
+      }
+      confirmed.push({
+        ...candidate,
+        actual: parsed.status,
+        rawStatus: parsed.rawStatus,
+        siteId: site.actualSiteId,
+        source: "detail",
+      });
+      log(
+        `  もしも/detail id=${candidate.id}: ${parsed.rawStatus} → ${parsed.status} (SID ${site.actualSiteId ?? "-"})`,
+      );
+    }
+    return confirmed;
+  } finally {
+    await ctx.close().catch(() => {});
+  }
+}
+
 async function main() {
   const opts = parseArgs();
   const root = loadAspConfig();
@@ -266,11 +338,11 @@ async function main() {
     }
   }
 
-  // ── カタログと突合 (doc 42 §8.4: **positive-only transition**)
+  // ── カタログと突合 (一覧は positive-only、負状態は明示指定時に詳細ページで確定)
   // 「一覧に無い = none」は廃止した (2026-07-29)。一覧に無いのは走査未完了 / ページ漏れ /
   // selector drift / 提携終了 / 却下のいずれでもあり得るため、**正の一致だけ**を書き込み、
   // 不在は review-needed / suspension-proposed として報告に留める (自動降格しない)。
-  const drift = []; // 書き込む正遷移
+  const drift = []; // 書き込む確定遷移
   const review = []; // 報告のみ (書き込まない)
   for (const [key, p] of Object.entries(catalog.programs ?? {})) {
     for (const [aspName, entry] of Object.entries(p.asps ?? {})) {
@@ -282,19 +354,32 @@ async function main() {
       if (inPartnered) {
         // 正の一致: applying (等) → approved。既に approved 以降なら no-op (registered/published を巻き戻さない)
         if (!["approved", "registered", "published"].includes(entry.status)) {
-          drift.push({ program: key, asp: aspName, catalog: entry.status, actual: "approved", id });
+          drift.push({ program: key, asp: aspName, catalog: entry.status, actual: "approved", id, source: "list" });
         }
       } else if (inApplying) {
         if (entry.status !== "applying" && !["registered", "published"].includes(entry.status)) {
-          drift.push({ program: key, asp: aspName, catalog: entry.status, actual: "applying", id });
+          drift.push({ program: key, asp: aspName, catalog: entry.status, actual: "applying", id, source: "list" });
         }
       } else {
         // 不在 = 負の証拠としては扱わない。状態別に報告だけする。
-        const kind = ["approved", "registered", "published"].includes(entry.status)
-          ? "suspension-proposed (提携終了の可能性 — 人が確認)"
-          : "review-needed (却下 or 走査漏れ — 人が確認)";
-        review.push({ program: key, asp: aspName, catalog: entry.status, id, kind });
+        if (shouldReviewAbsentStatus(entry.status)) {
+          const kind = ["approved", "registered", "published"].includes(entry.status)
+            ? "suspension-proposed (提携終了の可能性 — 人が確認)"
+            : "review-needed (却下 or 走査漏れ — 人が確認)";
+          review.push({ program: key, asp: aspName, catalog: entry.status, id, kind });
+        }
       }
+    }
+  }
+
+  if (opts.verifyMoshimoDetails) {
+    if (!live.moshimo) throw new Error("もしもの一覧を取得できていないため詳細照合を停止");
+    const targets = review.filter((item) => item.asp === "moshimo");
+    const confirmed = await verifyMoshimoAbsentDetails(root, live.moshimo, targets, log);
+    drift.push(...confirmed);
+    const confirmedIds = new Set(confirmed.map((item) => item.id));
+    for (let i = review.length - 1; i >= 0; i--) {
+      if (review[i].asp === "moshimo" && confirmedIds.has(review[i].id)) review.splice(i, 1);
     }
   }
 
@@ -304,9 +389,9 @@ async function main() {
     for (const [k, v] of Object.entries(failed)) console.log(`  - ${k}: ${v}`);
   }
   if (drift.length === 0) {
-    console.log(`正遷移なし (照合できた ASP: ${Object.keys(live).join(", ") || "なし"})`);
+    console.log(`確定遷移なし (照合できた ASP: ${Object.keys(live).join(", ") || "なし"})`);
   } else {
-    console.log(`正遷移 ${drift.length} 件:`);
+    console.log(`確定遷移 ${drift.length} 件:`);
     for (const d of drift) {
       console.log(`  - ${d.program} / ${d.asp}: "${d.catalog}" → "${d.actual}" (id=${d.id})`);
     }
@@ -315,12 +400,15 @@ async function main() {
       for (const d of drift) {
         const entry = catalog.programs[d.program].asps[d.asp];
         entry.status = d.actual;
-        (entry.history ??= []).push({ at, status: d.actual, note: "affiliate-status 実機一覧の正一致" });
+        const note = d.source === "detail"
+          ? `affiliate-status もしも詳細ページ「${d.rawStatus}」を確認 (SID ${d.siteId})`
+          : "affiliate-status 実機一覧の正一致";
+        (entry.history ??= []).push({ at, status: d.actual, note });
       }
       catalog.updatedAt = at;
       catalog.verifiedAt = at.slice(0, 10);
       writeFileSync(CATALOG, JSON.stringify(catalog, null, 2) + "\n", "utf-8");
-      console.log(`\n→ --write により正遷移をカタログへ反映しました (不在による降格はしない)`);
+      console.log(`\n→ --write により確定遷移をカタログへ反映しました`);
     } else {
       console.log(`\n→ 反映するなら --write を付けて再実行 (既定は read-only)`);
     }
