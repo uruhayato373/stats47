@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-27T04:12:03.922Z",
+  "generatedAt": "2026-08-28T06:28:35.436Z",
   "gscWeek": "2026-W34",
-  "auditGeneratedAt": "2026-08-27T04:12:03.895Z",
+  "auditGeneratedAt": "2026-08-28T06:28:35.412Z",
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "reviewTier": "GSC impressions 上位 30 件 = opus critic (tier2), 他 = sonnet (tier1)",
   "summary": {
