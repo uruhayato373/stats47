@@ -7,6 +7,20 @@ Google AdSense広告を表示するための技術ユーティリティ。設定
 > AdSense fallback、広告用の空カード・予約高を全ページで停止中。環境変数が `true` でも表示しない。
 > 再開判断後はこのスイッチだけを変更し、環境変数による本番制御へ戻す。
 
+## 広告インテントの恒久オプトアウト
+
+AdSense の「広告インテント」は既存本文を広告リンクへ置換するため、stats47 では使用しない。
+
+- AdSense 管理画面の `広告 > stats47.jp > 編集 > インテント重視のフォーマット` で
+  **広告インテントをオフ**に保つ。
+- `app/layout.tsx` と `app/global-error.tsx` の `<body>` に Google 公式の
+  `google-anno-skip` を付け、管理画面の設定が変わってもリンク・アンカー・チップを
+  全ページで挿入させない。
+- `tests/smoke/third-party-dom-injection.spec.ts` と
+  `src/lib/google-adsense/__tests__/ad-intents-opt-out-contract.test.ts` がこの契約を固定する。
+
+公式仕様: https://support.google.com/adsense/answer/13844047
+
 ## 概要
 
 このライブラリは以下の機能を提供します：
@@ -106,6 +120,7 @@ NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED=true
 ## 注意事項
 
 - 全体スイッチが `false` の間は、開発用プレースホルダーを含めて何も描画しない
+- AdSense を再開しても `google-anno-skip` は外さない（出典・本文の改変防止）
 - 開発環境（`NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED=false`）ではプレースホルダーを表示
 - 遅延ロード（Intersection Observer）により、パフォーマンスへの影響を最小化
 - AdBlock で広告がブロックされた場合は何も表示しない

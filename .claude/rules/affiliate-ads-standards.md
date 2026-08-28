@@ -540,14 +540,21 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 > ranking 右レールの文脈バナーも従来の下段位置へ戻す。ranking 本文中段へ回した先頭バナーは
 > 読了枠の解決結果へ戻し、同一バナーを欠落・二重表示させない。
 >
-> **★再開したら必ず本文書き換えの smoke を回す**:
+> **★AdSense の広告インテントは禁止**:
+> AdSense 管理画面の `広告 > stats47.jp > 編集 > インテント重視のフォーマット` で
+> 「広告インテント」をオフに保つ。加えて `app/layout.tsx` と `app/global-error.tsx` の
+> `<body>` に Google 公式の `google-anno-skip` を常設し、管理画面の設定が変わっても
+> リンク・アンカー・チップを全ページで挿入させない。この class は AdSense 再開時にも外さない。
+> 公式仕様: https://support.google.com/adsense/answer/13844047
+>
+> **★再開したら必ず本文書き換えの smoke も回す**:
 > `npx playwright test --config playwright.smoke.config.ts third-party-dom-injection`
 > (`apps/web/tests/smoke/third-party-dom-injection.spec.ts`)。
 > 2026-08-04 に**自動広告**が出典テキストの語を `href="#"` のリンクへ置き換えた
 > (「出典: 人口動態統計」の「統計」だけがリンク + アイコンになる)。出典の信頼性を損ない、
 > PR 表記の無い広告リンクが引用文の中に生まれる。オーナーが 2026-08-21 に自動広告の設定を
-> 解除したが、**停止中は自動広告が動かないので緑でも証拠にならない** — 再開後の実測だけが
-> 解決の根拠になる。再開時は AdSense 管理画面の自動広告が意図した設定かも併せて確認する。
+> 解除した。停止中の smoke が緑なだけでは証拠にならないため、静的契約テストで
+> `google-anno-skip` の常設を検査し、再開後は実ページでも再確認する。
 
 ### 5 チャネルの役割分担 (混ぜない)
 

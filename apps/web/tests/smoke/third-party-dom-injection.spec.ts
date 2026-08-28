@@ -13,7 +13,12 @@ import { expect, test } from "@playwright/test";
  *
  * ★出所は **AdSense の自動広告**。オーナーが 2026-08-21 に設定を解除した。
  *
- * ★**このテストは AdSense 停止中は緑になるが、それは証拠にならない**。
+ * ★`app/layout.tsx` と `app/global-error.tsx` の body は Google 公式の
+ *   `google-anno-skip` を常設する。これにより管理画面の設定が変わっても、
+ *   広告インテントのリンク・アンカー・チップを全ページで拒否する。
+ *   このテストは class の存在と、症状が出ていないことの両方を固定する。
+ *
+ * ★**AdSense 停止中に症状が出ないことだけでは証拠にならない**。
  *   2026-08-04 に捕捉 → **2026-08-16 に `ADSENSE_DISPLAY_ENABLED=false`** で
  *   `adsbygoogle.js` ごと停止 → 2026-08-21 の実測で再現せず、という順序で、
  *   「停止したから撃てなくなった」だけである。`ADSENSE_DISPLAY_ENABLED=true` に戻したあとの
@@ -49,6 +54,7 @@ test.describe("第三者スクリプトの本文書き換え", () => {
     test(`${path}: 本文が href="#" のリンクに置換されない`, async ({ page }) => {
       test.setTimeout(60_000);
       await page.goto(path, { waitUntil: "domcontentloaded" });
+      await expect(page.locator("body")).toHaveClass(/google-anno-skip/);
       await page.waitForTimeout(SETTLE_MS);
 
       const injected = await page.$$eval('a[href="#"]', (as) =>
