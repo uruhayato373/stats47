@@ -3,7 +3,7 @@ import { mkdtempSync, existsSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { ALL_PRODUCTS } from "../src/catalog/products";
-import { CANONICAL_ARTICLES } from "../src/channels/note/article-plan";
+import { buildCanonicalArticles, CANONICAL_ARTICLES } from "../src/channels/note/article-plan";
 import {
   NOTE_PRODUCT_MAPPINGS,
   buildNoteMappings,
@@ -16,7 +16,9 @@ import { renderDraft } from "../src/channels/note/generators/draft";
 import { buildNoteArticle } from "../src/channels/note/build/build-note";
 
 describe("note channel — mapping & coverage", () => {
-  it("covers all 174 products exactly once (disposition 100%)", () => {
+  it("covers all 14 packs exactly once (disposition 100%)", () => {
+    expect(ALL_PRODUCTS).toHaveLength(14);
+    expect(CANONICAL_ARTICLES).toHaveLength(14);
     expect(NOTE_PRODUCT_MAPPINGS.length).toBe(ALL_PRODUCTS.length);
     const counts = new Map<string, number>();
     for (const a of CANONICAL_ARTICLES) {
@@ -27,12 +29,12 @@ describe("note channel — mapping & coverage", () => {
     }
   });
 
-  it("validateNoteChannel is green (errors 0, coverage 174/174)", () => {
+  it("validateNoteChannel is green (errors 0, coverage 14/14)", () => {
     const v = validateNoteChannel();
     expect(v.errors).toEqual([]);
     expect(v.ok).toBe(true);
-    expect(v.coverage.assigned).toBe(174);
-    expect(v.coverage.total).toBe(174);
+    expect(v.coverage.assigned).toBe(14);
+    expect(v.coverage.total).toBe(14);
     expect(v.articleCount).toBe(CANONICAL_ARTICLES.length);
   });
 
@@ -41,21 +43,30 @@ describe("note channel — mapping & coverage", () => {
     expect(new Set(slugs).size).toBe(slugs.length);
   });
 
-  it("derives disposition deterministically from family + article", () => {
+  it("derives disposition deterministically from pack + article", () => {
     const byDisp: Record<string, number> = {};
     for (const m of NOTE_PRODUCT_MAPPINGS) byDisp[m.disposition] = (byDisp[m.disposition] ?? 0) + 1;
-    // K=license → catalog-only(10), L=entry + J=service → free-lead(7+15=22)
-    expect(byDisp["catalog-only"]).toBe(10);
-    expect(byDisp["free-lead"]).toBe(22);
+    expect(byDisp["catalog-only"] ?? 0).toBe(0);
+    expect(byDisp["free-lead"]).toBe(1);
     // 単独 member の有料記事 → standalone-paid
     const single = CANONICAL_ARTICLES.find((a) => a.access === "paid" && a.memberProductIds.length === 1);
     if (!single) throw new Error("no single-member paid article");
     const p = ALL_PRODUCTS.find((x) => x.id === single.memberProductIds[0])!;
-    expect(dispositionFor(p.family, single)).toBe("standalone-paid");
+    expect(dispositionFor(p, single)).toBe("standalone-paid");
   });
 
   it("rebuild is stable (same catalog + article-plan → same mappings)", () => {
-    expect(buildNoteMappings().length).toBe(174);
+    expect(buildNoteMappings()).toEqual(NOTE_PRODUCT_MAPPINGS);
+    expect(buildCanonicalArticles()).toEqual(CANONICAL_ARTICLES);
+  });
+
+  it("derives one canonical article from every pack without legacy product IDs", () => {
+    expect(CANONICAL_ARTICLES.map((a) => a.memberProductIds)).toEqual(
+      ALL_PRODUCTS.map((p) => [p.id]),
+    );
+    expect(CANONICAL_ARTICLES.flatMap((a) => a.memberProductIds)).toEqual(
+      ALL_PRODUCTS.map((p) => p.id),
+    );
   });
 });
 
@@ -90,7 +101,7 @@ describe("note channel — claims scanner", () => {
     expect(scanText("都道府県のデータを地図にまとめられます。", "x")).toEqual([]);
   });
 
-  it("all 55 article plans pass claims", () => {
+  it("all 14 article plans pass claims", () => {
     const v = validateNoteChannel();
     expect(v.errors.filter((e) => e.code === "banned-phrase" || e.code === "markdown-table")).toEqual([]);
   });
@@ -114,14 +125,14 @@ describe("note channel — draft generation", () => {
 
   it("builds a single article to a temp dir with all 7 files", () => {
     const outRoot = mkdtempSync(join(tmpdir(), "note-"));
-    const article = CANONICAL_ARTICLES.find((a) => a.slug === "ppt-data-explainer-deck")!;
+    const article = CANONICAL_ARTICLES.find((a) => a.access === "paid")!;
     const res = buildNoteArticle(article, ALL_PRODUCTS, { outRoot });
     for (const f of ["draft.md", "hashtags.txt", "attachments.json", "source-manifest.json", "product-links.json", "images-plan.json", "REVIEW.md"]) {
       expect(existsSync(join(res.outDir, f)), `missing ${f}`).toBe(true);
     }
     expect(readFileSync(join(res.outDir, "draft.md"), "utf8")).toContain("<!-- paid:start -->");
     // free article generates no paid attachments (attachments.json は空配列)
-    const freeArticle = CANONICAL_ARTICLES.find((a) => a.slug === "free-samples")!;
+    const freeArticle = CANONICAL_ARTICLES.find((a) => a.access === "free")!;
     const freeRes = buildNoteArticle(freeArticle, ALL_PRODUCTS, { outRoot });
     const att = JSON.parse(readFileSync(join(freeRes.outDir, "attachments.json"), "utf8"));
     expect(att.attachments).toEqual([]);

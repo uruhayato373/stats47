@@ -2,7 +2,8 @@ import type { MetricConfig } from "../types";
 
 export const botanicalGardenCount: MetricConfig = {
   "key": "botanical-garden-count",
-  "title": "植物園数",
+  "title": "登録・相当植物園数",
+  "subtitle": "登録博物館と博物館相当施設の合計（博物館類似施設を除く）",
   "unit": "館",
   "category": "educationsports",
   "source": {
@@ -49,7 +50,7 @@ export const botanicalGardenCount: MetricConfig = {
     ],
   },
   "groupKey": "museum-type-count",
-  "seoTitle": "植物園数ランキング都道府県【2015年】｜1位兵庫県（2館）",
-  "seoDescription": "2015年の植物園数の都道府県別ランキング。1位兵庫県（2館）、最下位沖縄県（0館）で地図やグラフで47都道府県を比較。",
+  "seoTitle": "登録・相当植物園数ランキング【2015年】｜1位兵庫県（2館）",
+  "seoDescription": "2015年の登録博物館・博物館相当施設に該当する植物園数を都道府県別に比較。博物館類似施設は含みません。",
   "isActive": true,
 };

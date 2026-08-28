@@ -5,7 +5,7 @@ import { ArrowRight, ListOrdered } from "lucide-react";
 
 import { SurfaceCard, SurfaceLinkCard } from "@/components/surface";
 
-import { readRankingItemsByCategory } from "@/features/ranking/lib/cached-category-items";
+import { readRankingItemsByCategory } from "@/features/ranking/server";
 
 interface RelatedRankingsGridProps {
   /** 現在表示中の rankingKey (除外用) */

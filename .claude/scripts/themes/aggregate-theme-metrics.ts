@@ -25,7 +25,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog/index";
-import { CLIMATE_SET, LOCAL_FINANCE_CITY_SET } from "../../../packages/types/src/index";
+import { CLIMATE_SET } from "../../../packages/types/src/index";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -40,7 +40,6 @@ const STALE_YEARS = 5; // latestDataYear がこれより古ければ stale-data
 
 const LEGACY_SETS: Record<string, { metrics?: { rankingKey?: string }[] }> = {
   climate: CLIMATE_SET as never,
-  "local-finance-city": LOCAL_FINANCE_CITY_SET as never,
 };
 
 // ---------- 窓の決定 (非重複 2 窓) ----------

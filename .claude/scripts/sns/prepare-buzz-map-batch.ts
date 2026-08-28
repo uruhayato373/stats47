@@ -160,7 +160,9 @@ async function main() {
     ideaId: e.ideaId as string,
     assetPlan: assetPlanForType(e.recommendedType ?? 'A'),
   }));
-  const capped = capVideos(withPlans, opts.maxVideos);
+  const capped = capVideos(withPlans, opts.maxVideos) as Array<
+    (typeof withPlans)[number] & { videoDeferred: boolean }
+  >;
 
   // 既 draft (posts.json read-only)
   const existingDrafts = new Set(
@@ -184,8 +186,10 @@ async function main() {
       { ...entry, recommendedType: entry.recommendedType ?? 'A', ideaId },
       { specExists, specId }
     );
-    const r2Keys = r2KeysFor(ideaId, assetPlan) as Record<string, string>;
-    const requiredKeys: string[] = Object.values(r2Keys);
+    const r2Keys = r2KeysFor(ideaId, assetPlan);
+    const requiredKeys = Object.values(r2Keys).filter(
+      (value): value is string => typeof value === 'string'
+    );
 
     // idempotency: R2 HEAD (dry-run でも読み取りは可) + posts.json 既 draft
     const existingR2 = new Set<string>();

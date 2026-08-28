@@ -18,8 +18,8 @@ import {
   filterMapDataPoints,
   getLeafletBorderColor,
   rankingItemToMapConfig,
-} from "@/features/map-visualization/utils/ranking-map-adapters";
-import { useThemedLeafletTile } from "@/features/map-visualization/utils/use-themed-leaflet-tile";
+  useThemedLeafletTile,
+} from "@/features/map-visualization/client";
 
 import { useTheme } from "@/hooks/useTheme";
 

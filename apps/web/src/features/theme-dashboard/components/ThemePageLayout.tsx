@@ -23,13 +23,16 @@ import { StatisticsScopeNav } from '@/components/navigation';
 import { loadPageComponents } from '@/components/stat-charts/server';
 import { prefetchThemeKpiData } from '@/components/stat-charts/services/prefetch-theme-kpi';
 
-import { InContentAdSlot, NativeAffiliateRow } from '@/features/ads';
+import {
+  InContentAdSlot,
+  isLandscapeBanner,
+  NativeAffiliateRow,
+} from '@/features/ads';
 import { THEME_AFFILIATE_MAP } from '@/features/ads/constants/affiliate-category';
 import {
   resolveAffiliateBanners,
   resolveAffiliateBannersByVertical,
 } from '@/features/ads/server';
-import { isLandscapeBanner } from '@/features/ads/services/banner-geometry';
 
 import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
 

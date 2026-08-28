@@ -21,8 +21,7 @@ import remarkGfm from "remark-gfm";
 
 import { SurfaceLinkCard, SurfaceSection } from "@/components/surface";
 
-import { BannerAd } from "@/features/ads";
-import { AffiliateTextAdList } from "@/features/ads/components/AffiliateTextAdList";
+import { AffiliateTextAdList, BannerAd } from "@/features/ads";
 import type { AffiliateCategory } from "@/features/ads/constants/affiliate-category";
 import { MANUAL_AD_DESKTOP_ONLY_CLASS } from "@/features/ads/constants/manual-ad-policy";
 

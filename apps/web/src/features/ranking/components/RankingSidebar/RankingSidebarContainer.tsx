@@ -3,7 +3,7 @@ import { isOk } from "@stats47/types";
 
 import type { AreaType } from "@/features/area";
 import { findCategoryByKey } from "@/features/category/server";
-import { readRankingItemsByCategory } from "@/features/ranking/lib/cached-category-items";
+import { readRankingItemsByCategory } from "@/features/ranking/server";
 
 import { RankingSidebarClient } from "./RankingSidebarClient";
 import { MAX_SIDEBAR_ITEMS, selectSidebarItems } from "./select-sidebar-items";

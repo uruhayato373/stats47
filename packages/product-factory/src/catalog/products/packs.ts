@@ -413,18 +413,17 @@ const RAW_PACKS: readonly Omit<ProductDefinition, "rankingKeys">[] = [
     jobToBeDone: "家計調査の消費支出・消費数量を品目横断でまとめて把握・比較する",
     formats: [...DATA_FORMATS],
     price: { minYen: 5000, maxYen: 12000, initialYen: 5000 },
-    dataMode: "sample",
+    dataMode: "fixed-year",
     metrics: [],
-    // 実データは pack snapshot (家計調査品目・基準年固定) が供給する。approved 化には
-    // 代表指標の git TS スナップショットを DATASET_REGISTRY に追加する (後段)。
-    datasets: [],
+    // 全指標は pack snapshot、販売内容の代表値は git TS の基準年固定 dataset が供給する。
+    datasets: ["beef-consumption-expenditure"],
     templateIds: [],
     licenseId: "single-corporate",
     supportLevel: "manual",
     compatibility: OFFICE_COMPAT,
     risk: "normal",
-    // 家計消費品目 (source.kind=kakei-chousa) を P-09 から分離。実データ接続済 (snapshot) だが
-    // 出品可能化 (approved) は代表 dataset 追加 + Office 実機検証後 (人間工程)。
+    // 家計消費品目 (source.kind=kakei-chousa) を P-09 から分離。代表 dataset は接続済み。
+    // 出品可能化 (approved) は Office 実機検証後 (人間工程)。
     status: "cataloged",
     sourceIds: ["P-09"],
   },
