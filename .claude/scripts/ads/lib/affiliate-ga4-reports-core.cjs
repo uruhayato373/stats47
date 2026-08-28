@@ -22,8 +22,6 @@ const REPORT_SPECS = Object.freeze({
   },
   pages: {
     tiers: [
-      ["eventName", "pagePath", "customEvent:ad_id", "customEvent:affiliate_vertical", "customEvent:link_position"],
-      ["eventName", "pagePath", "customEvent:affiliate_vertical", "customEvent:link_position"],
       ["eventName", "pagePath"],
       ["eventName"],
     ],
@@ -73,6 +71,22 @@ function derivePageType(pagePath) {
   );
 }
 
+function aggregatePageRows(rows) {
+  const pages = new Map();
+  for (const row of rows ?? []) {
+    const pagePath = row.pagePath || "(unset)";
+    const current = pages.get(pagePath) ?? { pagePath, impressions: 0, clicks: 0 };
+    current.impressions += Number(row.impressions) || 0;
+    current.clicks += Number(row.clicks) || 0;
+    pages.set(pagePath, current);
+  }
+  return [...pages.values()].map((row) => ({
+    ...row,
+    ctr: row.impressions > 0 ? row.clicks / row.impressions : null,
+    page_type: derivePageType(row.pagePath),
+  }));
+}
+
 async function fetchReportWithFallback(runReport, reportName, spec) {
   const failures = [];
   for (const dimensions of spec.tiers) {
@@ -82,10 +96,7 @@ async function fetchReportWithFallback(runReport, reportName, spec) {
       return {
         reportName,
         dimensions: dimensions.slice(1).map(shortName),
-        rows:
-          reportName === "pages"
-            ? pivoted.map((row) => ({ ...row, page_type: derivePageType(row.pagePath) }))
-            : pivoted,
+        rows: reportName === "pages" ? aggregatePageRows(pivoted) : pivoted,
         failures,
       };
     } catch (error) {
@@ -112,6 +123,7 @@ module.exports = {
   CLICK_EVENT,
   IMPRESSION_EVENT,
   REPORT_SPECS,
+  aggregatePageRows,
   derivePageType,
   fetchAllReports,
   fetchReportWithFallback,
