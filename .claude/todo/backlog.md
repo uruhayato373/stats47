@@ -23,13 +23,26 @@ updated: 2026-08-28
 
 ### [JAPAN-ZUE-CONTENT-PIPELINE-01] 日本国勢図会の全統計を一次資料化してサイト・記事・動画へ展開する
 
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-08-27]
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-08-27] [進行中]
 
 - **program owner**: `open-data-curator`。工程ownerは
   `docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md` §9。
-- **再開ポインタ**: `lastCompleted=WP1-source-vault` / `nextWorkPackage=WP1-inventory-pilot`。
-- **現状証拠**: ローカル2025/26年版はp.26–529の504 Markdown、表見出し721、図見出し200、
-  figure 201、transcript 13、scan PDF 13。全体は1,746ファイル・466MBで、`/books/`はGit対象外。
+- **再開ポインタ**: `lastCompleted=WP2-full-inventory` / `nextWorkPackage=WP3-primary-source-mapping`。
+- **現状証拠**: private bundle 6 parts / 480,666,655 bytesを照合・復元し、1,746 files、bundle SHA
+  `a14a45e9d6bdd29e49de0786bdb88f1080ffcff1c5cae739b62a1b2e881de02f`を再現。p.26–529の504ページは
+  欠番・重複0、実見出し904、候補1,429（table 769 / figure 202 / text-stat 458）。索引・出典注記に加えて
+  図の軸・系列・凡例説明117件を除去し、分割続表を統合した再抽出SHAは
+  `bc7f5f61bb7b9531156f53e96632a00e821a3792568f0f1c9520d234102e2b76`で安定。判断済みIDの付け替わりは0。
+  p.1–25（第1章「世界の国々」）はstats47の都道府県コンテンツ対象外としてscope exclusionに記録。
+  対象範囲のsource coverageは100%。出版社正誤表11件中、定量解釈へ影響する7件はcandidate到達監査green。
+  全候補は793 review groupに整理済みで、相互参照212件の参照先不明は0。直接出典447 group / 975候補のうち、
+  151 group / 473候補を56 survey IDへ完全一致で対応付け、曖昧一致・master外IDは0。
+  全1,429候補をmetric＋survey確認20件、surveyのみ確認453件、直接出典確認502件、周辺文脈確認454件へ
+  重複・欠落なく分類済み。既済29件を除く未確認1,400件の内訳は0 / 448 / 499 / 453件。
+  metric候補115件（同一survey制約対象209件）の自動確定は0で、最優先層20件はすべて人手判断済み。
+  判断29件は既存metric 8 / combined analysis 14 / context-only 6 / rights-hold 1、coverage 2.03%、lineage error 0。
+  p.26–65 pilotは107候補（table 40 / figure 16 / text-stat 51）。
+  figure 201、transcript 13、scan PDF 13。全体は1,746ファイルで、`/books/`はGit対象外。
   OCRは未校正で数値引用禁止。private Google DriveにはGit manifest 1件と90MiB以下のarchive part 6件を置き、
   すべて`shared:false`、合計480,666,655 bytesをreadback済み。Git manifestが全1,746ファイルのSHA-256を保持する。
 - **目的**: 書籍を公開taxonomyやデータ出典にせず、全定量項目を内部evidence inventoryへ登録する。
@@ -39,7 +52,7 @@ updated: 2026-08-28
   1. WP1 inventory pilot: p.26–65でtyped inventory、stable ID、extract/validate/coverageを実装し、
      代表10項目を選ぶ。別PCではGit manifestのpart名をGoogle Drive MCPで取得し、
      `npm run source-vault:japan-zue -- restore`で検証復元してから着手する。
-  2. WP2: 全504ページとp.1–25の有無を照合し、表・図・本文統計の母数を確定する。
+  2. WP2: stats47対象範囲をp.26–529と定義し、全ページの表・図・本文統計1,429候補の母数を確定する。
   3. WP3: 一次資料・利用条件・既存metric / survey / themeとの重複を全件照合する。
   4. WP4: 10項目を一次資料→local R2→Web配置までend-to-end実装する。
   5. WP5: 独自分析のmaster記事・通常動画briefを作り、既存EXP-006の上限内で派生案を作る。
@@ -57,276 +70,6 @@ updated: 2026-08-28
 - **外部変更境界**: remote R2 write、git push、PR、deploy、note / YouTube / Instagram / X公開は
   対象と検証結果を提示し、別途オーナー承認を得る。Drive source vaultの次revision追加・差し替えもこの境界に含む。
   YouTubeはEXP-006の6週間3本上限を増やさない。
-
-### [AFF-INTENT-FRICTION-PORTFOLIO-01] 低ハードル・高意図案件を二層で検証できるアフィリエイト基盤
-
-タグ: [収益化] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/ads/__tests__/*.test.mjs] [起票:2026-08-20]
-
-- **owner**: Claude Code Sonnet（通常実装は high。work package ごとに1回ずつ実行）
-- **再開ポインタ**: `nextWorkPackage=WP5-public-pilot-owner-gates` / `lastCompleted=WP4+WP5-WP6-local-framework`。各WPは完了条件の検証後にだけ
-  `lastCompleted`と`nextWorkPackage`を更新する。長い実行ログは残さず、検証コマンドと結果を1〜3行で記録する。
-- **目的**: 報酬単価中心の候補選定を、`vertical × discovery/decision × 行動負担 × 確定収益`で
-  検証できるポートフォリオへ改める。高単価案件は高意図ページに残し、低ハードル案件は別レーンで
-  一つずつ試す。枠数・クリック数の最大化を成果にしない。
-- **実測ベースライン (2026-08-20)**:
-  - 配信SSOTは260エントリ。A8 catalogは205案件（registered 120 / approved 25 / applied 44）、
-    報酬168・EPC178・確定率184案件に値があるが、成果条件・action type・frictionは無い。
-  - 3 ASP catalogは226案件、approved 74。approvedのEPC・確定率は0件で、rewardYenだけが主な経済情報。
-  - GA4は直近snapshotで12,020 viewable impression / 3 click。`measurementGate`は
-    `ga4-variant-dimension-missing`でblocked。取得器の最上位dimension tierが`ad_id`を取る代わりに
-    experiment/variantを含めないため、登録状況だけでなくquery設計も切り分ける必要がある。
-  - A8成果SSOTはsite-summaryならstats47単独、program-detailは口座横断。共用案件をstats47単独成果へ
-    配賦してはならない。`programIdMap`は広告SSOTの`mid=`から導出できるため二重手編集を解消できる。
-    現時点で`.claude/state/metrics/affiliate/{a8-results,a8-report-log}.json`は未生成。A8の既定期間は
-    年初から当月までの累計で、normalizerは単月でなければ月次recordsへ写さない。期間フォーム対応前に
-    CV・確定額を0または当月実績として扱わない。
-- **2026-08-28 WP0完了**: GA4の独立reportと実験guardに加え、A8実機で口座・全4レポートの月/日selectorを確定。
-  `--month 2026-08`の要求期間と4 CSVの実期間が完全一致し、normalize dry-runは104行・reject 0。
-  口座横断click 326 > site-summary 294を検出したためSSOT書込は止め、outcome gateは欠損/累計/超過/不足をblockedに固定。
-  広告script 216 test、web/admin type-check、operations validate、docs:check、consistency error 0がgreen。
-  `docs:check:all`は既存の期限超過等27 warningsを`--fail-on-warn`で検出（本WP起因の新規error/リンク悪化は0）。
-- **2026-08-28 WP1〜WP4・WP5/WP6ローカル枠組み完了**: 263 creativeを131 `programRef`へ結び、
-  全offerを推測なしの`pending-classification`として隔離。型付きprofile、登録gate、通常readerからの実験隔離、
-  GA4 schema v3独立report、A8 programRef join、二層portfolio、admin/単体HTML共通view model、週次artifact、
-  pilot実現可能性・readiness・verdict（勝者自動選択なし）を実装した。広告script 243、Web広告68、admin 11 test、
-  web/admin/scripts type-check、在庫サイズ、compliance、R2非書込export、docs:check、consistency error 0がgreen。
-  実stateはGA4 v2/variant欠損、A8成果のサイト分離不能、未分類131、既存実験1で正しくblocked。
-  公開pilot・成果成熟後の実判定は、これらのgateと案件/ページ/push承認が揃うまで未完了のためカードを維持する。
-- **依存・競合回避**:
-  - standalone Claude CodeとCodexを同じ作業ツリーで同時実行しない。開始時に対象fileがdirtyなら
-    別worktreeを作るか、現在の変更を所有者がcommitするまで停止する。`git add -A`は禁止。
-  - `ASP-CONTINUITY-01` Phase 2のeligibility / `targetRankingKeys` fail-closedを再利用し、同じgateを作らない。
-  - `AFF-IMPRESSION-ROUTING-01`と`blog-inbody-format`が未判定の間は公開pilotを開始しない。
-    基盤・read-only state・管理画面までは実装可。既存実験と同じページ/枠を同時変更しない。
-
-#### WP0 — 現行契約と計測断絶の固定
-
-1. `git status`、広告state、active experiments、A8結果の鮮度を取得し、同じコマンドで再現できるbaselineを残す。
-2. `fetch-affiliate-ga4.cjs`を広告別・実験別・ページ別の独立reportへ分ける設計をfixtureで固定する。
-   richest tierが先に成功してvariant内訳を隠す現在の構造を廃止する。標準`pagePath`からpage typeを
-   決定的に導出し、不要なcustom dimensionを増やさない。
-3. `manage-affiliate-experiment`の「95%有意」と`evidence-based-judgment`の「snapshot 1点へ統計的有意性を
-   導入しない」の不整合を解消する。採択は達成率・noise floor・sample/freshness/confound guardを使う。
-4. A8期間フォームの月レンジ/日レンジを推測で操作せず、`--probe-period`の観察結果からselector、要求期間、
-   CSVファイル名の実期間をfixture化する。成果SSOT未生成と累計期間を`outcomeGate=blocked`の理由として保持する。
-5. 現在のコードとrulesの配置表を突合する。とくに未commitのtheme/ranking末尾枠変更を推測で上書きしない。
-
-- **完了条件**: query fallback事故、variant欠落、旧schema混入、stale sourceを両方向fixtureで再現し、
-  WP1以降が読むbaseline、measurement gate、outcome gateが決定的になる。
-
-#### WP1 — 型付きoffer catalogとprogram参照
-
-1. `apps/web/scripts/affiliate-offer-profiles-data.ts`を、安定した人手判断だけを持つgit TS SSOTとして追加する。
-   最小fieldは`programRef`（`a8:<programId>`等）、`vertical`、`lane`、`actionType`、`frictionTier`、
-   `conversionCondition`、`personalDataLevel`、`humanContact`、`conditionSource`、`verifiedAt`、
-   `portfolioStatus`、`allowedPageTypes`。報酬・EPC・確定率など変動値は持たせない。
-2. `AffiliateAd`へ`programRef`を追加し、export時にoffer profileをjoinして配信snapshotへ必要最小限をdenormalizeする。
-   複数creative/placementへ成果条件を複製しない。
-3. A8の既存`programIdMap`/`mid=`からprogramRef候補を機械生成する。action/frictionは案件名から自動確定せず、
-   未確認を`unknown`として一覧化する。もしも/afbも識別子を推測しない。
-4. `affiliate-catalog.json`と`a8-catalog.json`は状態機械として維持し、offer catalogへ統合しない。
-   authored判断・運用状態・配信creativeの3責務をvalidatorで分離する。
-
-- **変更候補**: `apps/web/src/features/ads/types/index.ts`、`affiliate-ads-data.ts`、
-  `export-affiliate-ads-snapshot.ts`、新規`affiliate-offer-profiles-data.ts`、
-  `.claude/scripts/ads/lib/affiliate-offer-core.mjs`とtest。
-- **完了条件**: programRef一意性、参照先存在、vertical一致、成果条件の出典・日付、lane/friction整合を検査し、
-  `unknown`をdiscoveryへ流すmutation testが失敗する。既存広告の見た目と解決順は変えない。
-
-#### WP2 — 採用gate・候補生成・実験隔離
-
-1. `discovery`と`decision`を別キューにし、同じ重み付きscoreへ混ぜない。raw rewardだけで並べず、
-   文脈一致→条件確認済み→lane適合→確定EPC/確定率の順でPareto候補を提示する。値不明は0へ変換しない。
-2. discoveryはF0〜F2かつsensitive personal dataなし、decisionは`targetRankingKeys`または直接配置必須。
-   ブランド適合がreview/blocked、成果条件がstale/unknown、共用口座成果しかない案件はpilot不可。
-3. experiment variantを通常readerから除外し、実験対象外の枠へ漏らさない。target指定広告を非ranking文脈へ
-   出さないfail-closedは`ASP-CONTINUITY-01`のpure coreを利用する。
-4. agentは候補を1件提示するだけ。apply、winner反映、priority変更、公開は自動化しない。
-
-- **完了条件**: 高単価F4がthemeへ出ない、F1が文脈不一致で出ない、experiment variantが通常枠へ出ない、
-  unknownが候補上位にならないことをresolver/core testで固定する。
-
-#### WP3 — GA4・ASP成果・portfolio state
-
-1. GA4 snapshotをschema v3へ上げ、`overview`（ad/vertical/position）、`experiments`、`pages`を別配列で保持する。
-   各reportのdimension可用性を個別gateにし、一つのfallback成功で他の欠落を隠さない。
-2. A8のnormalized SSOTを`programRef`でjoinする。site-summaryはサイト総額、program-detailはaccount-wideと明記し、
-   shared案件は広告別勝敗から除外する。もしも/afb成果が未取得なら`unknown`理由を保持する。
-   A8収集器へ明示期間を追加し、要求期間とCSVファイル名の実期間が完全一致した単月データだけを月次成果へ
-   upsertする。期間不一致、累計、欠損はfail-closedとし、既存raw CSV/manifestはappend-onlyを維持する。
-3. `.claude/state/ads/affiliate-portfolio-latest.json`を生成する。program/offer/ad/placement別に
-   viewable imp、click、CTR、CV、確定率、確定額、確定収益/1,000 viewable imp、source/freshness/qualityを持つ。
-   これは派生stateであり手編集禁止。
-4. `affiliate-operations-latest.json`へportfolio gateとrecommendedActionsを追加する。stale、scope mismatch、
-   missing programRef、outcome unavailableを明示し、0へ丸めない。
-
-- **変更候補**: `fetch-affiliate-ga4.cjs`、`affiliate-operations-core.mjs`、
-  `build-affiliate-operations-state.ts`、新規`build-affiliate-portfolio-state.ts`、A8 report map生成/check、関連tests。
-- **完了条件**: 同一fixtureで広告別CTRと実験別CTRを同時取得でき、A8 shared/account-wideをstats47単独へ
-  誤配賦するmutationが落ちる。state schema validatorが欠損理由を要求する。
-
-#### WP4 — agent・skill・管理UI・自動化・文書
-
-1. `affiliate-manager`をoffer catalogの排他writer、`affiliate-operator`を成果条件・ASP条件の取得者、
-   `ga4-analyst`をGA4、`a8-report-collector`を成果CSV、`improvement-triage`をeffect判定として維持する。
-   `asp-scout`はaction/frictionを推測確定せず`pending-classification`を返す。
-2. 新skillを増やさず`affiliate-improvement`へ`portfolio/classify/next`を追加し、
-   `register-affiliate-banner`はprogramRefとoffer profileが無い新規active広告を拒否する。
-3. `apps/admin/app/ads`をread-onlyの運用入口にし、measurement gate、未分類、二層portfolio、実験、
-   確定収益、stale/unknownを表示する。単体HTML dashboardは同じpure view modelから生成し二重判定を持たない。
-4. 週次workflowはstate生成・候補提示まで。ASP申請、SSOT書換え、winner反映、push/deployを含めない。
-   workflow healthの対象にportfolio state freshnessを追加する。
-5. 恒久判断は収益化戦略/affiliate rules、反復手順はskills、機械値はstate、active施策はimprovementsに分離する。
-
-- **完了条件**: agent/skill consistency、dashboard/admin parity、workflow安全境界、automation inventory、
-  analytics event台帳、docs governanceがgreen。read-only UIから外部変更できない。
-
-#### WP5 — 公開pilot（別承認・1実験ずつ）
-
-1. 既存提携・既存配信中のA8案件から、成果条件を実機確認でき、stats47専用成果へjoinできる候補だけを使う。
-   health/高リスク金融/個人情報の重い案件は初回pilotから除外する。候補不足なら新規申請せず停止する。
-2. 検索需要と文脈があるranking/blogの一つを選ぶ。theme/category/homeへ新しい枠を足さない。
-   同じ位置で`discovery`対`decision`を比較し、各variantをexperiment専用に隔離する。
-3. UIは既存コンポーネントを再利用し、広告をカード化・複数段積み・クリック誘導しない。1 decision momentに
-   主CTAは一つ。mobileで追加表示しない。PR表記とASP creative規約を守る。
-4. registryへ期間、minimum sample、成果確定待ち、primary metric、UX guard、停止条件を事前固定する。
-   CTR勝者を収益勝者と扱わない。直近12,020 impression / 3 clickを基準に必要click/impと推定日数を先に算出し、
-   最大期間内に判定母数へ届かない場合は`not-feasible`として公開しない。
-
-- **開始gate**: measurement/portfolio ready、variant取得可、programRef coverage、A8成果fresh、既存同枠実験なし、
-  オーナーの案件・ページ・push承認。
-- **完了条件**: 対象test、web/admin type-check、SSGを含むweb build、compliance、主要routeのlocalhost目視がgreen。
-  deploy/R2/ASP操作はこのカードを承認と解釈せず、実行直前に別確認する。
-
-#### WP6 — 観測・判断・横展開
-
-1. 事前固定したsample・duration・outcome maturityに達するまで`effect/pending`。重複窓や別施策混入はconfounded。
-2. 主指標は確定収益/1,000 viewable imp。CTR、CVR、確定率、imp/pageview、engagement・内部回遊は説明/guard。
-3. 勝者は人間へ提示し、1ページ→同意図クラスタの順に拡大する。負け/判定不能でも自動停止・priority変更しない。
-4. 実験決着後はimprovement-logへ根拠を残し、active行と完了カードを規約どおり削除する。
-
-- **完了条件**: source、取得日、再現コマンド、before/after、guard、判定不能理由を持つverdictが生成され、
-  次の1実験だけがrecommendedActionになる。
-
-- **横断検証**:
-  `node --test .claude/scripts/ads/__tests__/*.test.mjs` / 広告関連vitest /
-  `npm run type-check --workspace apps/web` / `npm run type-check --workspace apps/admin` /
-  `npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json --check-size` /
-  `npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check` /
-  `npm run docs:fix` / `npm run docs:check` / `npm run docs:check:all`。WP5だけfull web buildを追加する。
-- **停止・禁止**: unknownの推測補完、rewardだけの自動採用、複数pilot同時開始、既存dirty差分のrestore、
-  外部ASP申請、GA4管理設定、R2 write、commit/push/deploy、winner/priority自動反映は、個別の明示承認なしに行わない。
-- **正典**: `docs/00_プロジェクト管理/02_収益化戦略.md` / `.claude/rules/affiliate-ads-standards.md` /
-  `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` /
-  `.claude/rules/evidence-based-judgment.md`。
-
-#### 別PC・新規セッションからの再開プロンプト
-
-次の短いpromptをClaude Code Sonnet（effort: high）へ貼る。詳細は本カードを正典として読み、prompt本文へ複製しない。
-
-```text
-CLAUDE.mdを読み、.claude/todo/backlog.md の AFF-INTENT-FRICTION-PORTFOLIO-01 を全文確認してください。
-再開ポインタの nextWorkPackage だけを対象に、計画の説明で止まらず、実装・対象テスト・型チェック・短い進捗記録まで完了してください。
-開始時に git status と対象ファイルの既存差分を確認し、他者のdirty変更と重なる場合は上書きせず停止してください。
-カード記載のagent/skill、変更候補、完了条件、停止条件、横断検証を守り、既存pure coreとSSOTを再利用してください。
-完了条件を実測できた場合だけ lastCompleted と nextWorkPackage を更新し、未検証を完了扱いしないでください。
-ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/priority反映は別の明示承認なしに実行しないでください。
-最後に、成果、変更ファイル、検証結果、既存問題、未完了、次のWPを簡潔に報告してください。
-```
-
-### [MUNICIPALITY-SCOPE-SEPARATION-01] 市区町村テーマ・ランキングを独立した地理スコープへ分離する
-
-タグ: [UI・UX] [種類:改善] [実行:別環境] [検証:npm run validate:municipalities --workspace=@stats47/data-configs] [起票:2026-08-20]
-
-- **owner**: Claude Code Sonnet 5 high（1 session = 1 work package、writerは同時に1体）
-- **再開ポインタ**: `nextWorkPackage=WP8-measurement` / `lastCompleted=WP7-remote-release` (2026-08-26)。WPのgateを満たした場合だけ更新する。
-  完了した作業の長文ログは残さず、変更path、検証、未検証、次の一手を3〜6行で追記する。
-- **WP1 完了 (2026-08-24)**: `packages/area/src/municipalities/` と
-  `packages/data-configs/src/geo-scope/{types,municipality-catalog}.ts` にscope・entity policy・公開判断SSOTを追加した。
-  現行マスタ1,913行から公開候補1,718、行政区除外194、`13100 特別区部`集約除外1を決定的に導出する。
-  active city metric 184件は全件availability理由を持ち、監査済みpilot 1件だけをpublishedにした。
-- **WP2〜WP6 ローカル完了 (2026-08-24)**: 専用R2 namespace、hub/theme/ranking、検索・県filter・50件paging、
-  city profile相互導線、known/410/redirect/sitemap/navigationを実装。対象93 test、lint、全25 package type-check、web buildはgreen。
-  `elderly-population-ratio` は2020年1,717有効値。分母人口0の双葉町0%をvaluePolicyで欠測相当へ除外した。
-- **WP5 blocked**: 個別東京23特別区の観測値が現R2/masterに無いため地方財政はdraft。県theme一覧から旧city themeを除き、
-  市区町村hubへ監査中表示と一時転送を置いた。推測値・行政区混入・0埋めは行わない。
-- **WP7 remote release完了 (2026-08-26)**: 専用R2の`item.json` / `values.json`と本番routeがHTTP 200。
-  `values.json`はschemaVersion 1、2020年度、1,717自治体（分母人口0の双葉町を除外）で、canonicalも
-  `/municipalities/ranking/elderly-population-ratio`に一致した。catalog監査は入力1,913 / 公開可能1,718 /
-  候補184 / 公開pilot 1でgreen。次は公開値やURLを変えず、28日/56日の専用prefix計測だけを行う。
-  pilot公開日を2026-08-24とし、28日判定は2026-09-21、56日判定は2026-10-19。GSCの表示回数・クリック、
-  GA4のlanding/engagement/市区町村導線eventをprefecture既存ページと混在させず専用URL prefixで比較する。
-- **WP0 完了 (2026-08-21)**: read-only 棚卸しを機械化した。
-  生成器 `.claude/scripts/municipalities/build-wp0-inventory.ts` /
-  出力 `.claude/state/municipalities/{wp0-inventory.json,LATEST.md}`。コード・R2・URL は未変更。
-  - metric: active 2,193 のうち **city-only 19 / both 165 = 候補 184 件** (カードの見立てと一致)。
-  - R2 `app/stats/<key>/cities.json`: **present 180 / absent 4 / undetermined 0** (184 件を実測)。
-    absent は家計費目 4 件 (`{culture-recreation,education,healthcare,housing}-cost-all-households`)。
-  - **★最大の発見: present 180 件のうち 178 件が政令市の「本体」と「行政区」を同じ payload に
-    同居させている**。entity 数は一律 1,913 = 自治体 1,719 + 行政区 194 で、素の件数だけ見ると
-    二重計上に気づけない (札幌市と札幌市中央区が同じ表に並ぶ)。WP1 の entity policy が機械的に落とす。
-  - entity 母集団: cities.json 1,913 行 / 自治体 1,719 / 行政区 194 / 政令市本体 21。
-    重複 code 0・親不明の行政区 0。行政区の `prefCode` は県ではなく**親の市コード**を指す (全件で確認)。
-  - **東京23特別区は個別 entity として存在しない** — cities.json は「特別区部」1 件 (13100) に
-    集約している。doc 44 の pilot 規則が言う「東京23特別区を含む財政主体監査」は現状のデータでは
-    満たせないので、WP1 でこの前提を先に決める。
-  - 鮮度: 最新年が 2015 年未満の artifact が **36 件** (最古 `crime-rate-per-1k` 2005)。
-  - URL 面: `/municipalities` 系 route は無し。公開 city allowlist は `stage-1-cities.ts` と
-    `sitemap.ts` の 2 箇所が読む。
-- **pilot 候補 (WP0 の結論・WP1 で確定する)**: `elderly-population-ratio` を第一候補にする。
-  2020 年・null 率 0・zero 率 0.0016 (3 件) で母集団が最も素直、定義が全自治体で一貫し、
-  財政主体の曖昧さが無い。`per-taxpayer-income` は 2023 年と新しく需要も見込めるが
-  **zero 率 8.9% (171 件) の説明が付いていない**ので、理由を確かめるまで pilot にしない。
-  `fiscal-strength-index` は地方財政なので pilot 規則により除外。
-- **目的**: `/themes/*` と `/ranking/*` を47都道府県に保ち、市区町村比較を
-  `/municipalities/{themes,ranking}/*` へ分離する。既存 `/areas/{pref}/cities/{city}` canonicalは維持する。
-- **根拠**: active MetricConfig 2,193件のうち市区町村候補は184件（city-only 19 / pref+city 165）だが、
-  現行ranking loaderはprefecture固定で、`rankingValuesKeyPath`はareaTypeを無視するためcity生成が県valuesを
-  上書きし得る。`/themes/local-finance/cities` は財政主体scope監査がblockedのままである。
-- **発見 (2026-08-21・本カードの対象外だがWP6で拾う)**: `/areas/{prefCode}/cities` (一覧パス) は
-  route fileが無いのに **HTTP 200** を返す。middlewareのareas判定が `seg[2] !== "cities"` で410対象から
-  除外する一方、Next側は `/areas/[areaCode]/[themeSlug]` が "cities" をthemeSlugとして拾うため、
-  not-found相当の中身を200で返すsoft 404になっている (noindexは付くので索引はされない)。47県ぶん存在するが
-  内部リンクが無く、GSC是正キューにも0件 = まだクロールされていない。WP6 (URL/SEO/計測) で404/410か
-  実ページかを決める。市区町村詳細側のsoft 404 (未公開cityコード) はGSC是正キューが49件pendingとして
-  既に追跡している (observe-after-fix 42 / noindex 7)。
-- **実行順**: doc 44の WP0〜WP8を順に進める。WP0 inventory → WP1 scope/entity/catalog →
-  WP2専用R2 snapshot/ranking core → WP3 pilot route → WP4 theme UX → WP5地方財政移行 →
-  WP6 URL/SEO/計測 → WP7承認付きrelease → WP8計測後の拡大。
-- **統合 (2026-08-21)**: 旧 `[CITY-PAGES-REVIVAL]` (市区町村ページの公開数を増やす・trigger待ち) を
-  受入条件を持つ本カードへ統合して削除した。現状の公開は `PHASE_1_SSG_CITIES` の **360市** のみ
-  (政令市20 + 中核市/県庁所在地60 + STAGE_3 280。sitemap shard 8 = city 360 + city-category 720 = 1,080 URL)。
-  それ以外の city コードは HTTP 200 + 「市区町村が見つかりません」= soft 404 (noindex 済)。公開数を
-  増やすかは WP8 (計測後の拡大) で pilot の 28日/56日判定を見てから決める。旧カードの trigger を引き継ぐ:
-  都道府県ページで検索・回遊の需要を実証し、city snapshot 欠損と thin-content 基準を解消した後。
-- **pilot規則**: WP0で値・entity・年度・検索需要を監査して一件だけ選ぶ。地方財政は、市・町・村・
-  東京23特別区を含み政令指定都市の行政区を除く財政主体監査が完了するまでpilotにしない。
-- **停止条件**: entity/年度/単位/母集団が不明、欠測と0を区別できない、県artifactへ差分が出る、
-  city canonicalやredirectと競合する、対象fileがdirtyで安全に統合できない、外部変更が必要になった時点で停止する。
-- **禁止**: 184候補の一括公開、queryだけの別canonical、行政区の自治体扱い、欠測0化、
-  `app/ranking/{key}`のcity上書き、個別city URL一括移行、`git add -A`、他者差分のrestore/reset。
-- **完了条件**: 市区町村hub/theme/rankingが専用catalog・R2・canonicalを持ち、公開entity policy、
-  検索/県filter/paging、city profile相互導線、known/sitemap/redirect、対象test/type-check/build/docs gateがgreen。
-  pilot公開後の28日/56日判定があり、remote R2・push・PR・deployの実行と承認が明示されている。
-- **正典**: `docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md` /
-  `docs/01_技術設計/03_情報設計.md` /
-  `.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-local-finance-city.md`
-- **別PC / 新しいClaude Code taskで使う再開prompt**:
-
-```xml
-<task>
-  <goal>backlogのMUNICIPALITY-SCOPE-SEPARATION-01を、nextWorkPackageの1件だけ実装してgateまで完了する。</goal>
-  <scope>doc 44で当該WPに指定されたpathと最小の関連test。次WP、remote R2、push、PR、deployは対象外。</scope>
-  <sources>CLAUDE.md、.claude/todo/backlog.mdの当該カード、docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md、同書が指定するSSOTを全文読む。</sources>
-  <done_when>当該WPのGateを満たし、決定的testを実行し、カードのlastCompleted/nextWorkPackageと短い証拠を更新する。</done_when>
-  <authorization>ローカルread/edit/test/dry-runのみ。外部write、git push、PR、deploy、既存差分の破棄は禁止。</authorization>
-</task>
-<output_format>最初に対象WPとdirty競合の有無を1段落、最後に変更・検証・未検証・次WPを各1〜3行で報告する。</output_format>
-
-開始時に git status --short --branch を確認する。新規cloneなら bash .claude/scripts/setup-memory-symlink.sh を
-一度実行する。同じworking treeで別writerが動いている、または対象pathがdirtyなら編集せず、別worktreeか
-所有者の整理を待つ。存在しないcommand/pathを推測せず、exportsと呼び出し元を読んでから実装する。
-```
 
 ### [QUALITY-GATE-COVERAGE-01] CI・テスト・監査の実効網羅性強化
 
@@ -658,95 +401,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
 - **正典**: `.claude/rules/blog-data-schema.md`
 
-### [GOOGLE-ADMIN-AUTOMATION-01] Google管理操作のAPI/UI境界整理とCI化
-
-タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run google-admin:test] [起票:2026-07-30]
-
-- **owner**: uruhayato373 (残りは GitHub Environment の作成と credential 登録の 2 手だけ)
-- **機械側は達成済**（2026-08-21 再実測）: `google-admin:test` 37 件 pass / `metrics:test` 76 件 pass /
-  `docs:check` errors 0。schedule は audit のみ（`0 20 * * 0`）、apply job は
-  `workflow_dispatch` かつ `mode=apply` のときだけ起動し `confirm_site` + `approval_token` を要求する。
-  workflow の `permissions: contents: read`（repo へ書かない）。
-- **2026-08-21 に修正した実バグ**: 週次 audit が毎回「AdSense ad units: 0 件 (error)」を出していたのは
-  **credential ではなく walk の実装欠陥**だった。このアカウントは content 用 `ca-pub-*` に加えて
-  AdSense for Search の `partner-pub-*` を持ち、後者は広告ユニットの概念が無く `adunits.list` が
-  NOT_FOUND を返す。`audit-adsense.mjs` に per-client の try/catch が無く、1 件の失敗で inventory 全体が
-  空になっていた。**同じ資格情報で `fetch-adsense-snapshot.mjs` は成功しており**（2026-08-16 の run で
-  実測・W33 の snapshot は保存済み）、あちらは 2026-08-04 に同じ欠陥を修正済みだった。判定を揃えるため
-  `collectAdUnits` を切り出し、失敗した client は `skippedClients` に残して**全滅のときだけ throw** する形にした。
-  CLI も一部 skip を出すようにし、欠けた件数が status=ok のまま黙って緑にならないようにした。
-- **カードの旧記述は stale だった**: 「AdSense weekly snapshot は最新 run でも別 project の OAuth client を
-  参照して全 job が error」は 2026-08-16 の実測と食い違う。AdSense account assert = ok /
-  GA4 link = ok / GSC = siteOwner で、**OAuth は復旧済み**。
-- **待っている成果**: custom dimension 7 件が `confirmed-absent`（`cta_id` / `content_id` / `target_type` /
-  `target_key` / `card_variant` / `slot` / `experiment_variant`）。台帳 `analytics-event-standards.md` の
-  ⏳要登録 と一致する。これが入るまで buzz-map の deep-click と home-featured の variant 別内訳は取れない。
-- **残るオーナー工程（順序が重要）**:
-  1. GitHub Environment `google-admin-production` を **required reviewer 付きで作る**（現状 `Preview` /
-     `Production` しか無い）。
-  2. `analytics.edit` を持つサービスアカウント鍵を **その Environment の secret** として
-     `GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON` に登録する。
-  - **★順序を逆にしない。** 存在しない Environment を参照する job は GitHub が実行時に
-    **保護ルール無しで自動作成**する。先に repo secret として鍵を登録すると、承認ゲートを通らずに
-    apply が走る状態になる。今は鍵がどこにも無いため apply は `admin-credential-missing` で
-    BLOCKED（二重の fail closed）で安全。
-- **完了条件**: `google-admin-production` が required reviewer 付きで存在し、鍵がその Environment の
-  secret として登録され、`mode=plan` → `mode=apply` で custom dimension 1 件を承認付きで作成できる。
-  `google-admin:test` / `metrics:test` / `docs:check` が exit 0。
-- **停止条件**: property/stream/account 不一致、inventory 取得不能、plan token 不一致、authored dimension
-  定義なし、quota 不明、外部 secret/role 変更が必要な時点で mutation を止める。
-- **禁止**: AdSense `adunits.create`/`patch` を利用可能と仮定しない（AdSense for Platforms 系の制限
-  プロジェクト向けで stats47 の利用権限は未証明）。`--force`、既存 dimension の archive/delete、
-  storageState の CI 持込、外部 secret の無承認変更を行わない。
-- **正典**: `.claude/scripts/google-admin/README.md`
-
 ## 🟡 中 — 2〜3ヶ月以内
-
-### [JAPAN-DERIVED-METRICS-01] /japan に derived レシピ由来の指標を足せるか判定する
-
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-08-21]
-
-- **owner**: Claude Code
-- **前提**: `/japan` (18テーマ・146指標) は 2026-08-20 に公開済み (PR #808 / #809)。GEO-SCOPE-SEPARATION-01 の
-  完了条件は全て満たして 2026-08-21 にカードを削除した。ここで扱うのは**公式全国値を採用できなかった残り**だけ。
-- **対象**: `unknown-non-estat` 9件 (external / kakei-chousa ソース)。e-Stat の全国行が無いため、
-  分子・分母を宣言して derived として組めるかを 1 件ずつ審査する。未採用テーマは
-  `consumer-prices` / `occupation-salary` の 2 件。
-- **対象外 (再調査しない)**: `verified-unsupported` 71件。2026-08-20 に実 e-Stat fetch で値レベル照合し、
-  全国行の値がプレースホルダ (`'-'` 等) = 公式全国値が存在しないと確定した。実測全文は
-  `.claude/state/geo-scope/wp6-expansion-verification.json`。
-- **停止条件**: 分子・分母の単位や母集団が揃わない、年次が一致しない、「47県から合成した値」を
-  公式全国値として出すことになる — いずれかに当たったら採用しない。
-- **完了条件**: 9件それぞれに採用/不採用の判定と根拠があり、採用分は `app/japan/<metric>/series.json` が
-  生成されて `/japan/<theme>` に実データで描画される。
-- **正典**: `docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md` /
-  `packages/data-configs/src/geo-scope/` / `.claude/rules/unit-semantics-standards.md`
-
-### [BACKLOG-LOOP-PERMISSION-01] backlog-loop が `.claude/todo/` を書き換えられない原因を確定する
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-08-21] [期日:2026-08-24]
-
-- **症状 (2026-08-20 run 32395252885)**: `permission_denials_count: 16`。セッションは
-  「Edit / Write / Bash の `>` と `sed -i` がすべて権限レベルで拒否された」と報告したが、
-  `.claude/settings.json` に該当する deny は無く `--allowedTools` にも `Write,Edit` が入っている。
-  **モデルの自己申告以外の証拠が無く原因を確定できていない。**
-- **★前提は解消していなかった (2026-08-21 実測)**: `9af614eb2` の summarizer は
-  `result.permission_denials_count` を読むが、**実行ログのファイルにはこのフィールドが無い**。
-  ai-content run 32404256626 は action の console 出力に `"permission_denials_count": 12` を
-  出しているのに、同じ run の Step Summary は `denials=null` で `[permission 拒否]` 節が
-  1 行も出ていない (`entry 種別` は `result:1` なので result エントリ自体は読めている)。
-  つまり **console と実行ログファイルで result の中身が違う**。artifact 化されていないので
-  ファイルの実体をこちらから見られず、フィールド名を推測で当てるべきではない。
-- **次 (改)**: summarizer に「`permission_denials_count` が無いときは result エントリの
-  キー名一覧を出す」診断を足す (キー名は秘密ではない)。次の run でフィールド名が判明したら
-  それを読む。**それまで `[permission 拒否]` 節が出ないことを「拒否ゼロ」と読まない。**
-- **次**: 修正後の run の Step Summary を読み、拒否された tool と対象を実測で名指しする。
-  Bash だけなら設計どおり (許可パターンは prefix 一致)。Edit / Write が拒否されているなら
-  `--permission-mode dontAsk` と `--allowedTools` の相互作用を疑う。
-- **完了条件**: 拒否の内訳を実測で示し、(a) 設定を直して書き込みが通る か
-  (b) 通せない理由を確定して needs-owner へ回す のどちらかまで到達する。
-- **禁止**: 回避のために `.github/` や `backlog-routing-policy.json` を触らない
-  (ループが自分の権限を広げる口になる)。
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
 
@@ -795,30 +450,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **停止条件 / 承認境界**: ゾーン全体 purge は本番のキャッシュを一斉に落とすので、
   恒久配線はオーナー承認を経てから。Cloudflare の設定変更も outward-facing。
 - 関連: `.claude/skills/db/sync-snapshots/SKILL.md` / `packages/r2-storage/src/scripts/{purge-worker-cache,purge-cache}.ts`
-
-### [SITEMAP-BLOG-ENTRIES-DRIFT-01] ブログ公開で sitemap-blog-entries が更新されない
-
-タグ: [起票:2026-08-17]
-
-- **owner**: Claude Code
-- **問題**: `apps/web/src/config/sitemap-blog-entries.ts` を**再生成する経路が
-  `sync-snapshots.yml` (手動 dispatch のみ) の `sync-ranking-keys` job にしかない**。
-  一方 `--check` は `pr-quality-check.yml` (main への全 PR) で走る。したがって
-  **ブログを公開しても sitemap は更新されず、次に main へ PR を出した人が必ず落ちる**。
-- **実測 (2026-08-17)**: PR #798 の Static Gates が
-  `❌ sitemap-blog-entries がコミット済みの内容と一致しません (R2: blog 430 / tag 60 / survey 73)`
-  で失敗。原因は当日の `blog-generate-daily` が公開した
-  `bread-consumption-expenditure-vs-site-area-per-dwelling`。checker のメッセージが言うとおり
-  「sitemap に載らない公開記事がある」状態が、誰かが main へ PR を出すまで検知されない。
-- **これは検知の穴でもある**: 公開から次の main PR までの間、新しい記事は sitemap に載らない。
-  `blog-auto-publish.yml` は R2 へ記事を出すが sitemap 生成物には触らない (grep 実測: 当該
-  スクリプトを参照するのは `sync-snapshots.yml` と `pr-quality-check.yml` の 2 つだけ)。
-- **次**: `blog-auto-publish.yml` の公開成功後に再生成 + commit-back を足すか、
-  日次 cron (`blog-remediation-daily.yml` 等) に寄せるかを決める。**`.github/` を触るので
-  人間の PR が要る** (`ACTIONS-EXPRESSION-INJECTION-01` と同じ制約)。
-- **完了条件**: 記事を 1 本公開したあと、main への PR を出さずに
-  `generate-sitemap-blog-entries.ts --check` が通ることを実測する。
-- **禁止**: `--check` を PR ゲートから外して回避しない (sitemap 欠落が見えなくなる)。
 
 ### [TILEMAP-LINEAGE-01] タイルマップの手動系譜残件
 
@@ -897,14 +528,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   ローカル不要**なので、着手するときは別 ID へ切り出してループに戻す。
 - 関連: [NOTE-CIRCULATION-CTA-01] (回遊/CTA の catalog 駆動)・`.claude/scripts/note/catalog/README.md`・`.claude/rules/sns-content-standards.md` §note
 
-### [BUZZ-MAP-FOLLOWUP-01] buzz-map投稿とdeep-click計測
-
-タグ: [起票:2026-07-18]
-
-- **owner**: Claude Code
-- **次**: 公開済みlandingとのexact matchを満たす素材だけを対象に、投稿→landing→deep clickを一つのUTM契約で測る。
-- **完了条件**: attribution欠損、重複投稿、landing不一致をgateで停止する。
-
 ### [MIGRATION-FLOW-PHASE23-01] 人口移動 月次/年次 workflowの生成ステップ未実装
 
 タグ: [起票:2026-08-01]
@@ -923,33 +546,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **次**: 既存697 metricの年次更新を先に行い、需要確認済みの中分類だけを第2弾へ追加する。
 - **完了条件**: 既存metricの年次更新を検証し、需要確認済みの追加候補だけが小バッチの投入判断に到達する。
 - **正典**: `.claude/skills/blog/draft-from-trend/reference/kakei-topic-catalog.md`
-
-### [BACKLOG-LOOP-PHASE23-01] バックログ処理ループの学習 (Phase 2) と指標バックログ取り込み (Phase 3)
-
-タグ: [起票:2026-08-17]
-
-- **owner**: Claude Code
-- **前提**: Phase 0 (分類・台帳・gate 突合) と Phase 1 (日次 CI `backlog-loop-daily.yml`) は
-  実装・マージ済み (PR #789)。実案件 2 件が実際にループを通っている
-  (`RANKING-ITEM-CITY-ONLY-01` = misconception-close / `SYNC-SNAPSHOTS-ALLORNOTHING-01` = impl-small)。
-  **schedule は default branch の workflow しか発火しない**ので、main に載るまで日次ループは動かない。
-- **次**: 下の 1 → 2 → 3 の順で進める。
-  1. **初回 3〜5 run を観測する。** 見るのは「宣言だけの削除 0」「許可外 diff 0」「分類の妥当性」。
-     これを満たすまで件数 (`LIMIT`) を上げない
-  2. **Phase 2 = routing policy の自動学習。** `update-routing-policy.mjs` + 週次 workflow。
-     ledger と `.claude/state/metrics/claude-usage/history.csv` の実測から class×model の成功率を出し、
-     `guards` (minSamples 8 / windowDays 28 / 昇降格しきい値) を通ったときだけ policy を書き換える。
-     実測が足りなければ**変更しない** (effect-verdict の「判定不能は pending に留める」と同じ思想)
-  3. **Phase 3 = 06 指標バックログの取り込み。** `indicator-expansion` class を足し、
-     estat 実在検証 → config 生成 → `validate:config` / `validate:years` を draft PR で通す
-- **完了条件**: policy 更新が minSamples ガードを通って 1 回成立し、その diff と
-  `.claude/state/metrics/prompt-evals/` の出力が残っている。
-- **禁止**: 実測が揃う前に件数を上げない (ai-content が limit 10 で timeout に当たり 0 件になった前例)。
-  escalation の梯子に opus を入れない (sonnet → fable → 人間)。
-  **リポジトリ全体の agent frontmatter `model:` を自動変更しない** — 実測を添えた提案 PR までで人間が承認する。
-  ループに `.github/` と routing policy を触らせない (verify の禁止パスを緩めない)。
-- **正典**: `.claude/rules/backlog-loop.md` / skill `/process-backlog` /
-  agent `backlog-processor`・`backlog-solver-hard`
 
 ### [ACTIONS-EXPRESSION-INJECTION-01] workflow の式インジェクション残 13 件
 
@@ -1025,26 +621,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **禁止**: push を速くするために検証や purge を削らない。差分判定を誤って
   **送るべきものを skip する**方が、全件送るより実害が大きい (stale 配信は 6 日間気づかれなかった)。
 
-### [GINI-ALT-SOURCE-01] 等価可処分所得ジニ係数の代替出典
-
-- **owner**: estat-researcher
-- **source**: 2026-08-05 の値分布検証 (退役した `gini-coefficient-disposable-income` の後継)
-- **背景**: SSDS 0000010112 の `L7501` は **e-Stat 自身が全 48 エリア・全年 "0" を返す**
-  (getStatsData で実測確認済み)。整数丸めで配信されておりジニ係数を取得できない。
-  config の軸選択は正しく cdCat 是正では直らないため、metric を退役 (isActive:false + GONE) した。
-- **次**: 全国家計構造調査 (旧・全国消費実態調査) の都道府県別ジニ係数表を e-Stat で探し、
-  小数が保持されている統計表があるか確認する。無ければ厚労省「所得再分配調査」も当たる。
-- **完了条件**: 47 県 × 小数値を持つ統計表の statsDataId と cdCat を確定し、上の候補表へ移す。
-- **禁止**: 整数丸めされた系列を「ジニ係数」として再投入しない (全県 0 に戻るだけ)。
-
-### [CLIMATE-SOURCE-01] 気候変動・猛暑・熱中症の都道府県比較
-
-- **owner**: open-data-curator
-- **source**: GitHub #538 / #640
-- **次**: 気象庁「日本の気候変動2025」素材集、地点別猛暑日、消防庁の都道府県別熱中症救急搬送を一次資料で確認し、47県比較できる1指標へ絞る。
-- **完了条件**: 定義、代表地点の採用規則、分母、年次、一次URLを確定し、既存の最高気温系metricとの非重複を確認して上の候補表へ移す。
-- **禁止**: 新聞記事・紙面転記値を観測値のSSOTにしない。
-
 ### [MINIMUM-WAGE-2026-01] 2026年度地域別最低賃金
 
 - **owner**: open-data-curator
@@ -1060,39 +636,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 - **正典**: `packages/data-configs/src/prefecture-statistics-catalog/README.md`
 - **次**: 各県ポータルを1巡し、複数県で反復する指標だけを、定義、単位、粒度、年次、一次出典付きで上の表へ追加する。
 - **完了条件**: 47県を確認し、既存metricとの非重複と全国比較可能性を検証する。
-
-### [SSDS-EDU-DIFFUSION-CODE-01] 教育普及度 2 指標の代替コード特定 (または退役)
-
-タグ: [起票:2026-08-16]
-
-- **owner**: estat-researcher
-- **trigger**: `expected-empty.ts` の期限 **2026-11-30** まで。期限を過ぎると allowlist が失効し
-  data-refresh が再び 0 件ゲートで落ちる。
-- **事実 (実測)**: `kindergarten-education-diffusion-rate` / `nursery-education-diffusion-rate` が
-  参照する SSDS 0000010205 の cat01 から `#E0910101` / `#E0910102` が消滅した。現行 59 コードに
-  該当なし・名称に「普及」を含むコードも 0 件・`#E091xxxx` の命名帯自体が現行カタログに無い。
-  同表の実在コード (`#E0110104`) は 1392 行を正常返却するので、表の廃止ではなく指標コードの改廃。
-- **次**: SSDS の指標コード改番履歴を追い、同義の後継コードがあれば config の cdCat01 を差し替える。
-  無ければ退役 (isActive:false + GONE + KNOWN/SITEMAP/INDEXABLE 再生成) へ切り替える。
-- **完了条件**: 代替コードで 47 県ぶんの値が取れることを dry-run で実測するか、退役の連動を
-  完了して `expected-empty.ts` から 2 エントリを削除する。
-- **注意**: 既存の配信データ (1,664 / 1,615 行) は生きているのでページは正常に見える。
-  「表示が正常＝データが更新されている」ではない。
-
-### [CONSTRUCTION-ORDER-ALT-01] 建設工事受注データの代替出典を採るか判断する
-
-タグ: [起票:2026-08-16]
-
-- **owner**: theme-designer
-- **背景**: 2026-08-16 に `construction-contract-*` 8 件 + `noise-regulation-rate` を退役した
-  (e-Stat 側で統計表が廃止・後継なし。詳細は `gone-ranking-keys.ts` の 2026-08-16 エントリ)。
-- **代替候補**: 「元請完成工事高」(業種別 × 都道府県別、statsDataId `0003126332` 2011-/`0003126364` -2010)。
-  ただし旧指標の「工事種類別 (住宅/道路/河川/下水道/港湾空港/災害復旧)」とは**軸が違う**
-  (契約業者の業種分類)。既存 `prime-contractor-completed-construction` (SSDS 0000010103) と
-  概念が重複する可能性もある。
-- **次**: 重複の有無を確認し、採るなら指標名・subtitle で「業種別」であることを明示して投入する。
-  採らないならこの項目を削除する。
-- **完了条件**: 採否を決め、採る場合は 47 県ぶんの取得を dry-run で実測する。
 
 ### [INDICATOR-CANDIDATES-01] 指標候補キュー (P1/P2 検証済み)
 
@@ -1112,6 +655,7 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 | high     | working-age-population-ratio       | population        | population-dynamics | 0000010201          | SSDS #A03502、2024。年齢構造の基礎比率                                | pending |
 | high     | juvenile-offenders-count           | safetyenvironment | safety              | 0000010111          | SSDS K4204、2023、47県。千人比は別calculated metricで扱う             | pending |
 | high     | average-job-tenure                 | laborwage         | labor-wages         | 0003426933          | 賃金構造基本統計 cat04=01,cat03=01、47県                              | pending |
+| high     | equivalized-disposable-income-gini | economy           | real-income         | 0003440743          | 全国家計構造調査2019表7-6、cat01=1（OECD新基準準拠）、47県・小数値   | pending |
 | high     | nursing-home-count                 | socialsecurity    | aging-society       | 0000010210          | SSDS #J022011、2023、既存4指標と非重複                                | pending |
 | high     | paid-nursing-home-count            | socialsecurity    | aging-society       | 0000010210          | SSDS #J02204、2023、47県                                              | pending |
 | high     | life-time-use-series               | laborwage         | living-housing      | 0000010113          | SSDS生活時間。sleep/housework/mealsのcdCat01確定後に個別keyへ分割する | pending |
@@ -1130,30 +674,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
 3. config validation、R2 snapshot生成、ranking item、KNOWN/sitemapの順で整合を取る。
 4. 本番反映はユーザー承認後にまとめて1回行い、HTTP 200、年、単位、代表値を実測する。
 5. 完了した行は削除する。
-
-### [MIGRATION-FLOW-WEEKLY-REOPEN-01] migration-flow-weekly の週次 IG 投稿が停止したまま (設計欠陥未修正)
-
-タグ: [種類:改善] [起票:2026-08-16]
-
-**migration-flow-weekly の schedule を停止したまま (投稿の設計欠陥は未修正)**。`post-instagram.ts:86-88` が gitignored な `.local/r2/sns/<slug>/instagram` を existsSync で要求するため、clean checkout の CI では構造的に必ず失敗する (2026-05-25 から 12 回連続失敗)。8/16 に schedule を削除して無言の失敗を止めたが、**週次の県ローテーション IG 投稿そのものが止まったまま**。再開するなら post-instagram-scheduled.yml と同じ「公開 R2 URL を IG Graph API に渡す」経路へ寄せるか、post step 前に R2 から pull する step を足す
-
-根拠・再現条件: `.github/workflows/migration-flow-weekly.yml` (冒頭コメントに経緯)。成功している手本 = `.claude/scripts/instagram/post-from-schedule.cjs` の `PUBLIC_R2_BASE` 経由
-
-### [HEALTH-CHECKUP-RATE-RETIRE-01] health-checkup-rate-lifestyle-diseases が 2017 年以降 全国値 0%
-
-タグ: [種類:不具合] [起票:2026-08-05]
-
-**`health-checkup-rate-lifestyle-diseases` は全国値も 2017 年以降 0.0%**。1997 年と 2008 年に定義・実施主体が変わり、いまの系列は保健所実施分のみ = 実際の受診率と別軸。ランキングとして意味を成していないので、代替出典 (特定健診の法定報告等) への差し替えか退役かの判断が要る
-
-根拠・再現条件: e-Stat 0000010209。未検証キューに残置
-
-### [PORT-PASSENGERS-MISSING-COASTAL-01] port-passengers-total から沿岸 13 県が消えている
-
-タグ: [種類:不具合] [起票:2026-08-05]
-
-**`port-passengers-total` から沿岸 13 県が消えている**。欠落 21 県のうち新潟・千葉・宮城・熊本等 13 県は沿岸県。新潟は 2009-19 年に約 300 万人を計上していたが 2020 年以降消失し、2021 年は 6 行しかない。他の港湾系 (39 行) と件数が違う理由が説明できず、集計軸か調査対象の変更を疑う
-
-根拠・再現条件: e-Stat 0003130737。R2 `app/stats/port-passengers-total/values.json` の年別行数を確認。未検証キューに残置
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
@@ -1273,14 +793,6 @@ gis 123 件 + `apps/web` type-check green。両呼び出し元 (`geoshape-servic
 - **trigger**: GSC、記事企画、テーマ欠測のいずれかで具体的な検索需要が確認できたとき。
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
-### [VALUE-DISTRIBUTION-UNVERIFIED-01] 値分布の未検証 2 件 (幼稚園費・鉄道投資) の裏取り
-
-タグ: [種類:改善] [起票:2026-08-05]
-
-**値分布の未検証 2 件は根拠を得られず保留**。`kindergarten-expenses-prefecture` は全国計=47県合計で欠損は無いが、非ゼロ 15 県 (長野 116 億等) が県立園費なのか私学助成なのか特定できず 0 の性質が不明。`general-project-investment-railway` は非ゼロ 25 府県が整備新幹線等と対応するものの静岡・広島・沖縄の 0 を裏付ける一次情報が未確認。推測で profile を書かず unverified のまま baseline に残している
-
-根拠・再現条件: `.claude/state/ranking/integrity-audit.json` の valueVerification.unverified。skill `/verify-value-distribution` で消化
-
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
 
 ### [GIT-HISTORY-SECRET-PURGE-01] Git履歴のAPIキーを扱う方針決定
@@ -1318,7 +830,7 @@ gis 123 件 + `apps/web` type-check green。両呼び出し元 (`geoshape-servic
 
 | 紐づけ先                                                                        | スクリプト                                                                                                                          |
 | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `MUNICIPALITY-SCOPE-SEPARATION-01` (旧 CITY-PAGES-REVIVAL を 2026-08-21 に統合) | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs`            |
+| `docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`      | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs`            |
 | `BLOG-SVG-LINEAGE-RESTORE-01` (in-progress)                                     | `blog/restore-{findings,ranking,scatter}-from-svg.mjs`                                                                              |
 | `NOTE-MAGAZINE-REORG-01` (in-progress)                                          | `note/{note-magazine,fetch-note-magazines,fetch-magazine-members}.mjs` / `note/probe-{create-form,magazine-create,magazine-ui}.mjs` |
 | `CHART-LINEAGE-RESIDUAL-01` (pending)                                           | `blog/resolve-scatter-axes.mjs`                                                                                                     |
