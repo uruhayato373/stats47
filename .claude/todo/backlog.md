@@ -1684,11 +1684,3 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
   衝突すると同じ失敗を繰り返す)。
 - **完了条件**: workflow が緑になる、または schedule が外れて横断ヘルスチェックの対象から消える。
 - **正典**: `.claude/rules/sns-content-standards.md` §5.5 (R2 素材保持ポリシー)
-
-### [KDP-PUBLISH-REMAINING-01] KDP 残り 22 冊を出すか出版をやめるかの方針決定
-
-タグ: [種類:意思決定] [実行:対話] [起票:2026-08-16]
-
-**KDP 残り 22 冊の出版が手動待ちになった**。日次 cron (`com.stats47.kdp-resume-daily`) を停止し KDP 出品は手動のみへ確定したため (規約 `.claude/rules/coconala-product-standards.md` §8)、`status != listed` の 22 冊は誰かが `/kdp-publish` を回さない限り進まない。1 冊ずつ承認して出すか、出版自体をやめるかの方針が要る
-
-根拠・再現条件: `.claude/config/kdp-listings.json` の status。skill `/kdp-publish`・agent `kdp-operator`。KDP は未公開 10 冊前後で作成数制限に当たるため一度に全部は出せない

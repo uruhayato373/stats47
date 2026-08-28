@@ -65,9 +65,8 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit      # 公開 (�
 6. **作成数制限に注意**: KDP は未公開 (下書き+レビュー中) が約 10 冊で新規作成を拒む
    (「本の作成数制限を超えました」)。多冊数は「10 冊 draft→verify→publish → 審査完了を
    待つ → 次の 10 冊」で分割する。審査状態と ASIN 回収は `--phase status`。
-   枠が空いたタイミングの拾い直しは launchd の再開ジョブ
-   (`scripts/scheduled/kdp-resume-daily.sh`・毎日 08:30/14:30/20:30) が行う。
-   全冊 listed になると no-op。停止は `launchctl unload ~/Library/LaunchAgents/com.stats47.kdp-resume-daily.plist`。
+   旧 launchd 再開ジョブ (`scripts/scheduled/kdp-resume-daily.sh`) は **2026-08-16 以降停止中**。
+   repo 内の script/plist は復旧用に保持するだけで、自動再登録しない。再開にはオーナーの新しい明示承認が必要。
 7. **公開**: オーナー承認後に `--phase publish --commit`。verify PASS の本だけ公開し、
    **本棚で status が「下書き」でなくなったこと**を read-back して初めて成功とする
    (文言 grep は「出版」がどのページにもあるので使わない)。成功時に `status:listed`+asin を書き戻し。

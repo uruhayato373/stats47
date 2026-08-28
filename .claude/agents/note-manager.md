@@ -25,9 +25,10 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 
 ## 担当範囲
 
-- 公開済み URL のトラッキング（`.claude/state/note-published-urls.json` の slug → URL / is_paid / published_at / updated_at）
+- 公開済み URL のトラッキング（git TS note-catalog の `status` / `noteUrl` / `publishedAt` を更新し、派生indexを再生成）
 - 公開ワークフロー（投稿確認 → state 記録 → メモリ更新）
 - 記事ステータスの把握（draft.md の `published:` frontmatter + state の有無で判定）
+- 管理画面 `/content/note` でcatalog / R2本文所在 / 公開状態 / 監査結果を突合確認
 
 ## 担当外（各スキルが担当）
 
@@ -42,8 +43,9 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 |---|---|---|
 | 記事 SSOT（本文・画像・ハッシュタグ） | **R2 `note/<vertical>/<slug>/`** | 公開済み + ドラフト全記事。復元: `restore-from-r2.sh <slug>` |
 | 編集時の作業域（ephemeral outbox） | `docs/31_note記事原稿/<vertical>/<slug>/` | push 後 CI が自動削除。git に長期保持しない |
-| 公開済み URL 対応表（真実源） | `.claude/state/note-published-urls.json` | slug → `{vertical, title, url, is_paid, r2_path, published_at, updated_at}` |
-| ドラフト一覧（真実源） | `.claude/state/note-draft-index.json` | slug → `{vertical, r2_path}` |
+| editorialメタ・公開URL（SSOT） | `.claude/scripts/note/catalog/data/<vertical>.ts` | status / noteUrl / publishedAt / magazine / isPaid |
+| 公開済みURL対応表（派生） | `.claude/state/note-published-urls.json` | catalogから生成。手編集しない |
+| ドラフト運用索引（補助） | `.claude/state/note-draft-index.json` | slug → `{vertical, r2_path, status}`。git TS catalog が記事集合のSSOT |
 
 > vertical は `koumuin-claude-code` / `koumuin-estat-claude-code` 等のサブディレクトリ。slug 直下に draft.md がある旧構成も許容。
 
@@ -60,21 +62,18 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 curl -s -o /dev/null -w "%{http_code}\n" -A "Mozilla/5.0 (compatible; Googlebot/2.1)" "https://note.com/stats47/n/<noteId>"
 ```
 
-### Step 2: state に記録（真実源）
+### Step 2: catalog SSOT に記録して派生indexを生成
 
-`.claude/state/note-published-urls.json` の `articles` に追記（新規）または `updated_at` を更新（update モード）。
-ドラフト管理中だった場合は **`.claude/state/note-draft-index.json` から slug を削除**する。
+該当する `.claude/scripts/note/catalog/data/<vertical>.ts` の記事を `status:"published"` にし、
+`noteUrl` と `publishedAt` を記録する。ドラフト運用索引に同slugがあれば削除し、次を実行する。
 
-```python
-import json
-p='.claude/state/note-published-urls.json'; d=json.load(open(p))
-d['articles']['<slug>']={
-  'vertical':'<vertical>','title':'<title>',
-  'url':'https://note.com/stats47/n/<noteId>',
-  'is_paid':<bool>,'price_jpy':<int>,'published_at':'YYYY-MM-DD'
-}  # update モードなら既存エントリに 'updated_at':'YYYY-MM-DD' を足す
-json.dump(d,open(p,'w'),ensure_ascii=False,indent=2)
+```bash
+npx tsx .claude/scripts/note/catalog/validate-note-catalog.ts
+npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply
+npm run audit:content-operations
 ```
+
+`.claude/state/note-published-urls.json` は生成物なので直接編集しない。
 
 ### Step 3: メモリ・進捗の更新（該当あれば）
 
@@ -98,11 +97,11 @@ json.dump(d,open(p,'w'),ensure_ascii=False,indent=2)
 ## 状態確認（DB クエリの代わり）
 
 ```bash
-# 公開済み一覧（update 日含む）
-python3 -c "import json;d=json.load(open('.claude/state/note-published-urls.json'))['articles'];[print(k,v.get('url'),'paid' if v.get('is_paid') else 'free','upd='+v.get('updated_at','-')) for k,v in d.items() if not k.startswith('_')]"
+# 公開・ドラフト状態をSSOTから確認
+npx tsx -e 'import {NOTE_ARTICLES} from "./.claude/scripts/note/catalog/index.ts"; for (const a of NOTE_ARTICLES) console.log(a.status,a.vertical,a.key,a.noteUrl??"-")'
 
-# ドラフト一覧 (note-draft-index.json が真実源)
-python3 -c "import json;d=json.load(open('.claude/state/note-draft-index.json'))['drafts'];[print(k,v.get('vertical'),v.get('r2_path','-')) for k,v in d.items()]"
+# 管理画面（SSOT監査を含む）
+npm run admin  # http://127.0.0.1:4747/content/note
 ```
 
 ## 一括公開時の注意
@@ -117,14 +116,16 @@ python3 -c "import json;d=json.load(open('.claude/state/note-draft-index.json'))
 |---|---|---|
 | 生成 | `/post-note-ranking` / `/write-note-section` | 完了後の状態把握（state 不要、draft.md が SSOT） |
 | 編集 | `/edit-note-draft` | 編集完了の確認（DB 更新は無い） |
-| 投稿 | `/publish-note` | 投稿完了後に state 記録 + メモリ更新 |
+| 投稿 | `/publish-note` | 投稿完了後にcatalog更新 + 派生index再生成 + メモリ更新 |
 
 ## 参照
 
 - `.claude/scripts/note/editor-helpers.sh` — エディタ操作の関数ライブラリ（process_article / do_update / ins_img / paid_setline / new_post_*）
 - `.claude/scripts/note/{prepare-article.cjs,build-body.cjs}` — Phase 0 / 本文生成
 - `.claude/skills/note/publish-note/references/{editor-operations.md,scheduling.md,update-mode.md}` — 詳細手順
-- `.claude/state/note-published-urls.json` — 公開済み URL の真実源
+- `.claude/scripts/note/catalog/` — editorialメタ・公開URLのgit TS SSOT
+- `.claude/state/note-published-urls.json` — catalogから生成する公開済みURL派生index
+- `http://127.0.0.1:4747/content/note` — note運用の読み取り専用ミラー
 - `.claude/rules/browser-use-cleanup.md` — 終了時の daemon 停止 + タブクローズ
 - auto memory `feedback_note_publish_automation.md` — paste 方式の確定知見
 

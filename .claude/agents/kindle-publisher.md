@@ -42,6 +42,8 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
   出ていた当時、epubcheck は全 32 冊で 0 error 0 warning だった（素の `<img>` 表紙は構文として
   妥当で、壊れるのはレイアウトだけ）。正典: `coconala-product-standards.md` §8。
 - 出品前チェック（各書籍 `.local/.../READINESS.md`）の整備とオーナーへの受け渡し。
+- `/content/kindle` でcatalog / manuscripts / `.local` EPUB・表紙 / KDP listingの集合と状態を確認し、
+  `npm run audit:content-operations` がerror 0であることを出品前の横断ゲートにする。
 
 ## 委譲
 
@@ -76,4 +78,5 @@ BEHAVIOR CONTRACT（命令）:
 
 - 規約: `.claude/rules/coconala-product-standards.md §8` / skill: `.claude/skills/product/build-kindle-book/SKILL.md`
 - 企画・市場判断: `.claude/rules/coconala-product-standards.md §8` / `packages/product-factory/src/channels/kindle/book-catalog.ts`
+- 運用ミラー: `http://127.0.0.1:4747/content/kindle` / 横断監査: `npm run audit:content-operations`
 - 品質基準（書き下ろし）: `.claude/rules/blog-quality-standards.md` / 実証判定: `.claude/rules/evidence-based-judgment.md`

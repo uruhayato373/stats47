@@ -349,9 +349,9 @@ https://stats47.jp/ranking/taxable-income-per-capita
 
 素材の目視確認 (動画再生)・caption 微調整・投稿/予約・メトリクス閲覧は
 **ローカル統合メディアコンソール** (`npm run admin` → http://127.0.0.1:4747/) で行える
-(skill `.claude/skills/ops/admin-console/SKILL.md`、実装 `apps/admin/` — 独立 Next.js App Router アプリ、
+(skill `.agents/skills/management/admin-console/SKILL.md`、実装 `apps/admin/` — 独立 Next.js App Router アプリ、
 localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装から完全移管、`sns:gallery` alias 廃止)。
-SNS 投稿は `/sns` セクション、OGP/リンクカード/note カバー・
+全チャネルの制作・公開状態は `/content`、X / Instagramの投稿操作は `/content/{x,instagram}` または共通 `/sns`、OGP/リンクカード/note カバー・
 記事内画像/動画 master は `/assets`、ブログ SVG カタログは `/svg`、**プロジェクト現況 (メトリクス・進捗キュー・
 改善バックログ TODO・STP 戦略) は `/dashboard`** で横断閲覧する
 (画像資産の列挙 collector は CI 静的ギャラリー `build-image-gallery.mjs` と `.claude/scripts/lib/gallery-collectors.mjs` を共用。
@@ -359,6 +359,11 @@ SNS 投稿は `/sns` セクション、OGP/リンクカード/note カバー・
 
 - **ギャラリー経由の投稿も台帳規約は同一**: posts.json への書込は `sns-posts-store.cjs` 経由のみ
   (server も同経路)。§1 の頻度リミットは残枠バッジ + ガードで enforce される
+- **コンテンツ運用画面は派生 read model**: `/content` はposts.json、note git TS catalog + R2本文、Kindle
+  book-catalog/manuscripts + kdp-listingsをライブ突合する。統合用の別SSOTや永続DBを作らない。
+  `npm run audit:content-operations` をPRでblocking実行し、個別制作物をTODOカードへ複製しない
+  (`K-Sx-xx` / `NOTE-ARTICLE-*` / `SNS-POST-*` 等の個別カードは監査error)。backlogには
+  システム不具合・自動化・チャネル横断の意思決定だけを置く
 - **draft レコード運用**: 未投稿素材は `status=draft` で台帳に登録して管理する (新 manifest は作らない)。
   R2 にあるが台帳に無い素材は画面の「R2 探索」(HEAD probe) → draft 登録で回収
 - **IG 予約の二重書込**: ギャラリーの「IG 予約登録」は schedule JSON + posts.json (scheduled) を

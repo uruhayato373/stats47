@@ -2,6 +2,11 @@ import { SummaryCards } from "@/components/home/summary-cards";
 
 const SECTIONS = [
   {
+    href: "/content",
+    title: "コンテンツ運用",
+    desc: "X・Instagram・note・Kindleの原稿、公開状態、次の作業、SSOT整合性",
+  },
+  {
     href: "/sns",
     title: "SNS",
     desc: "投稿・予約・caption・メトリクス (X / IG / note)",
@@ -66,7 +71,7 @@ export default function HomePage() {
           管理コンソール
         </h1>
         <p className="mt-1 text-sm text-console-muted">
-          ローカル専用 (127.0.0.1)。制作・収益・品質・運用を 1 画面で横断管理する。書き込みは SNS の投稿/予約とバズ地図の素材生成だけで、他は読み取り専用。
+          ローカル専用 (127.0.0.1)。制作・収益・品質・運用を 1 画面で横断管理する。書き込みは SNS の投稿/予約とバズ地図の素材生成だけで、note・Kindleを含む他画面は読み取り専用。
         </p>
       </div>
 

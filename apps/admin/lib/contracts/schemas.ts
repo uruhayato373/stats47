@@ -113,6 +113,60 @@ export const BuzzMapRegisterDraft = z.object({
 });
 export type BuzzMapRegisterDraftInput = z.infer<typeof BuzzMapRegisterDraft>;
 
+// ─── content operations source contracts (read-only) ─────────────
+
+export const ContentSocialPostsState = z.object({
+  posts: z.array(
+    z
+      .object({
+        platform: z.string(),
+        status: z.string(),
+      })
+      .passthrough(),
+  ),
+});
+
+export const ContentKdpListing = z
+  .object({
+    id: z.string().min(1),
+    title: z.string(),
+    subtitle: z.string().nullable().optional(),
+    status: z.string(),
+    priceYen: z.number().finite(),
+    asin: z.string().nullable().optional(),
+    draftId: z.string().nullable().optional(),
+    publishedAt: z.string().nullable().optional(),
+    epubPath: z.string(),
+    coverPath: z.string(),
+  })
+  .passthrough();
+
+export const ContentKdpListingsState = z.object({
+  listings: z.record(ContentKdpListing),
+});
+
+export const ContentKindleBuildState = z.object({
+  generatedAt: z.string().optional(),
+  books: z.array(
+    z
+      .object({
+        id: z.string().min(1),
+        status: z.string(),
+      })
+      .passthrough(),
+  ),
+});
+
+export const ContentNoteDraftIndex = z.object({
+  drafts: z.record(
+    z
+      .object({
+        status: z.string(),
+      })
+      .passthrough(),
+  ),
+});
+
 /**
  * query の limit パース (非負有限整数のみ。NaN/Infinity/負 → 不正)。
  * 返り値: 有効なら number、指定なしなら null、不正なら "invalid"。

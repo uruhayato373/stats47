@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-27T06:45:10.718Z",
+  "updatedAt": "2026-08-27T08:06:07.673Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -2111,6 +2111,41 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-27T06:19:34.603Z"
+    },
+    "KDP-PUBLISH-REMAINING-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-27T08:06:07.673Z",
+          "runId": null,
+          "model": "codex",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run audit:content-operations",
+              "npm run docs:check",
+              "GET /api/content"
+            ],
+            "pass": true
+          },
+          "evidence": "オーナー指示で個別コンテンツ管理へ移管。旧22冊固定カードを削除し、/contentはKDP SSOTから公開12・未公開20と判断pendingをライブ表示。監査errors=0、docs check green。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-27T08:06:07.673Z"
     }
   }
 }

@@ -62,6 +62,8 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit      # 公開 (�
    確認。warnings が残る間は公開しない。
 6. **公開**: オーナー承認後に `--commit`。成功時に `kdp-listings.json` を `status:listed`+asin に書き戻す。
    KDP 審査 (最大72時間) 後に販売開始。
+7. **横断確認**: `/content/kindle` でKDP状態と原稿・成果物を突合し、`npm run audit:content-operations`
+   のerrorが0であることを確認する。ASIN未採番は審査中warningとして保持し、公開失敗と混同しない。
 
 ## ガードレール
 
@@ -84,5 +86,6 @@ BEHAVIOR CONTRACT (命令): 結論先行。進捗の実証 (下書き保存/公�
 - 規約: `.claude/rules/coconala-product-standards.md §8` / skill: `.claude/skills/product/kdp-publish/SKILL.md`
 - スクリプト: `.claude/scripts/kdp/{login,capture-account,kdp-publish}.mjs` + `lib/kdp-{session,form}.mjs`
 - 出品 SoT: `.claude/config/kdp-listings.json` / アカウント: `.claude/config/kdp-account.json`
+- 運用ミラー: `http://127.0.0.1:4747/content/kindle` / 横断監査: `npm run audit:content-operations`
 - 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md` (`playwright-kdp-profile`)
 - 書籍生成・カタログ: `kindle-publisher` / 移植元: `coconala-operator`

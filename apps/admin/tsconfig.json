@@ -29,7 +29,8 @@
     ".next/dev/types/**/*.ts",
     ".next/types/**/*.ts",
     "next-env.d.ts",
-    ".local/next-e2e/types/**/*.ts"
+    ".local/next-e2e/types/**/*.ts",
+    ".local/next-admin-dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

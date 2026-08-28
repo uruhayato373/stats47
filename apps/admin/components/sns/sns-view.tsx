@@ -52,8 +52,8 @@ function sortKey(item: GalleryItem): string {
   return String(item.posted_at || item.scheduled_at || item.created_at || "");
 }
 
-export function SnsView() {
-  const [platform, setPlatform] = useState("");
+export function SnsView({ initialPlatform = "" }: { initialPlatform?: string }) {
+  const [platform, setPlatform] = useState(initialPlatform);
   const [status, setStatus] = useState("");
   const [query, setQuery] = useState("");
 

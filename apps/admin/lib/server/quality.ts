@@ -1,5 +1,6 @@
 import "server-only";
 
+import { contentOperations } from "./content-operations";
 import { cached, fileExists, readJson, TTL, wrap, type Wrapped } from "./state-io";
 
 /**
@@ -62,7 +63,34 @@ function q(
 }
 
 export function qualityQueues(): QualityQueue[] {
+  const content = contentOperations();
+  const contentQueue: QualityQueue =
+    typeof content === "object" && content !== null && "error" in content
+      ? {
+          key: "content-operations",
+          label: "コンテンツ運用SSOT",
+          file: "SNS / note / Kindle の各SSOT",
+          exists: false,
+          generatedAt: null,
+          total: null,
+          defects: null,
+          defectLabel: "不整合",
+          detail: "",
+          error: content.error,
+        }
+      : {
+          key: "content-operations",
+          label: "コンテンツ運用SSOT",
+          file: "SNS / note / Kindle の各SSOT",
+          exists: true,
+          generatedAt: content.generatedAt,
+          total: content.channels.reduce((sum, channel) => sum + channel.total, 0),
+          defects: content.audit.errors,
+          defectLabel: "エラー",
+          detail: `warn ${content.audit.warnings} / ${content.audit.status}`,
+        };
   return [
+    contentQueue,
     q(
       "blog-remediation",
       "ブログ品質 是正キュー",
