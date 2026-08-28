@@ -704,54 +704,6 @@ ASP申請、GA4管理画面変更、R2 write、commit、push、deploy、winner/p
   storageState の CI 持込、外部 secret の無承認変更を行わない。
 - **正典**: `.claude/scripts/google-admin/README.md`
 
-### [SOURCE-TEXT-LINK-INJECTION-01] 出典テキストが第三者スクリプトでリンクに置換される
-
-タグ: [収益化] [種類:不具合] [実行:ユーザー] [検証:npx playwright test --config playwright.smoke.config.ts third-party-dom-injection] [起票:2026-08-04]
-
-- **症状**: チャート footer の「出典: 人口動態統計」の「統計」だけが `href="#"` のリンク + アイコンに
-  なる (SSR HTML には無く hydration 後に出現)。本文でも「人口」「旅行ガイド、旅行記」が同様に置換される。
-  出典の信頼性を損ない、**PR 表記の無いアフィリエイトリンクが引用文の中に生まれる**。
-  証跡 = post-deploy smoke run 30876315662 の error-context.md (aria: `link "統計" /url: "#"`)。
-- **★出所は AdSense の自動広告。オーナーが 2026-08-21 に設定を解除した。**
-  私が同日「AdSense ではない」と書いたのは**測定時期を取り違えた誤り**だった。タイムラインが決定的:
-
-  | 日付       | 出来事                                                 | `adsbygoogle.js`     |
-  | ---------- | ------------------------------------------------------ | -------------------- |
-  | 2026-08-04 | smoke が `link "統計" /url: "#"` を捕捉                | **読み込まれていた** |
-  | 2026-08-16 | `ec944e50b feat(web): pause all AdSense display`       | 以降は読み込まれない |
-  | 2026-08-21 | 私の実測「AdSense は読み込まれていない」「再現しない」 | 読み込まれない       |
-
-  `AdSenseScript` は `ADSENSE_DISPLAY_ENABLED` が true のときだけ `adsbygoogle.js` を挿す。
-  **停止の 5 日後に観測して「犯人ではない」と結論した**が、実際は「停止したから撃てなくなった」
-  だけで、これは自動広告説を**支持する**自然実験だった。現在の状態から過去の事象を推論しない
-  (`evidence-based-judgment.md`)。
-  - A8 リンクマネージャーを疑ったのも取り下げる。公式仕様
-    (support.a8.net/as/linkmanager) は「**広告主サイトへのリンク**をアフィリエイトリンクに
-    置換する」URL 書き換えで、平文の断片をリンク化する機能ではない。
-
-- **2026-08-21 に再現しなかったのは AdSense が 8/16 に停止していたから**。
-  headless / headed × themes / blog / ranking を最大 36 秒スクロールして `#` リンクは 0 件。
-  **停止中の緑は「直った」ではなく「今は撃てない」**を意味する。
-- **完了済 (2026-08-21)**: post-deploy smoke に検知を追加した
-  (`apps/web/tests/smoke/third-party-dom-injection.spec.ts`)。自分たちのコードは `href="#"` を
-  一度も出力しないので、`#` リンクの存在がそのまま外部注入の証拠になる。
-  - **誤検知を 2 回踏んで是正した**。(1) Leaflet のズーム (`a.leaflet-control-zoom-in`)。
-    (2) **自分たちのフォールバック** — `md-content.tsx` の `source-link` /
-    `related-article-link` / banner は記事が href を書き忘れると `href={href ?? "#"}` を出す。
-    最初「自分たちは `#` を出力しない」と書いたのは誤りで、リテラル検索しかしていなかった。
-  - そこで**症状そのもの**で判定する形にした: 「文章の中の 1 語だけがリンクになる」=
-    **親に生のテキストノードが同居しているインラインの `#` リンク**。上の 2 種はどちらも
-    兄弟テキストを持たないので分離できる (兄弟「要素」を数えると Leaflet の + と − が
-    互いを兄弟テキストとみなして再び誤検知する — これも実測で踏んだ)。
-  - **両方向を実測**: 本番 3 ページで緑 / 本文へ `#` リンクを 1 本注入すると赤
-    (文脈つきの指摘文が出る)。緑であること自体が「今は起きていない」という観測になる。
-  - 副産物: hydration 前に append したリンクは React の再描画で消えるため、注入は
-    hydration 後にしか成立しない。settle は 12 秒。
-- **残り**: **AdSense を再開したとき**に再発しないことを確認する。停止中の緑は証拠にならないので、
-  再開手順に smoke の実行を紐づけた (`affiliate-ads-standards.md` §12)。自動広告の解除は
-  実施済みなので、再開後の smoke が緑なら解決とみなす。
-- **完了条件**: AdSense 再開後の post-deploy smoke で、出典・本文がリンク化されないことを示す。
-
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [JAPAN-DERIVED-METRICS-01] /japan に derived レシピ由来の指標を足せるか判定する
