@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "eval": "backlog-routing-policy",
+  "generatedAt": "2026-08-28T08:00:00.000Z",
+  "window": {
+    "since": "2026-07-31T08:00:00.000Z",
+    "until": "2026-08-28T08:00:00.000Z",
+    "days": 28
+  },
+  "sources": {
+    "ledger": ".claude/state/backlog-loop/ledger.json",
+    "usageHistory": ".claude/state/metrics/claude-usage/history.csv",
+    "policy": ".claude/config/backlog-routing-policy.json"
+  },
+  "guards": {
+    "minSamples": 8,
+    "windowDays": 28,
+    "promoteIfSuccessRate": 0.5,
+    "demoteIfSuccessRate": 0.85
+  },
+  "usage": {
+    "runs": 9,
+    "measuredTokenRuns": 9,
+    "errorRuns": 0,
+    "items": 18,
+    "turns": 505,
+    "durationMs": 4273703,
+    "costUsd": 84.1758071,
+    "averageCostUsdPerItem": 4.676433727777778,
+    "tokens": {
+      "input": 1010,
+      "output": 260584,
+      "cacheWrite": 3850913,
+      "cacheRead": 199774381
+    }
+  },
+  "observedClassModels": [
+    {
+      "class": "misconception-close",
+      "model": "fable",
+      "total": 1,
+      "completed": 1,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 1
+    },
+    {
+      "class": "impl-small",
+      "model": "fable",
+      "total": 1,
+      "completed": 1,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 1
+    },
+    {
+      "class": "impl-small",
+      "model": "opus",
+      "total": 3,
+      "completed": 3,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 1
+    },
+    {
+      "class": "misconception-close",
+      "model": "opus",
+      "total": 4,
+      "completed": 4,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 1
+    },
+    {
+      "class": "stale",
+      "model": "opus",
+      "total": 1,
+      "completed": 0,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 0
+    },
+    {
+      "class": "stale",
+      "model": "codex",
+      "total": 4,
+      "completed": 4,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 1
+    },
+    {
+      "class": "impl-small",
+      "model": "sonnet",
+      "total": 9,
+      "completed": 2,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 0.2222222222222222
+    },
+    {
+      "class": "impl-large",
+      "model": "sonnet",
+      "total": 7,
+      "completed": 0,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 0
+    },
+    {
+      "class": "impl-large",
+      "model": "gpt-5.6-sol",
+      "total": 11,
+      "completed": 6,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 0.5454545454545454
+    },
+    {
+      "class": "impl-small",
+      "model": "codex",
+      "total": 22,
+      "completed": 20,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 0.9090909090909091
+    },
+    {
+      "class": "impl-large",
+      "model": "codex",
+      "total": 9,
+      "completed": 4,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 0.4444444444444444
+    },
+    {
+      "class": "needs-owner",
+      "model": "sonnet",
+      "total": 3,
+      "completed": 0,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 0
+    },
+    {
+      "class": "needs-owner",
+      "model": "fable",
+      "total": 1,
+      "completed": 0,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 0
+    },
+    {
+      "class": "test-fix",
+      "model": "codex",
+      "total": 3,
+      "completed": 3,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 1
+    },
+    {
+      "class": "test-fix",
+      "model": "sonnet",
+      "total": 1,
+      "completed": 0,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 0
+    },
+    {
+      "class": "misconception-close",
+      "model": "codex",
+      "total": 8,
+      "completed": 8,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 1
+    },
+    {
+      "class": "impl-large",
+      "model": "gpt-5",
+      "total": 1,
+      "completed": 1,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 1
+    },
+    {
+      "class": "stale",
+      "model": "gpt-5.6-sol",
+      "total": 2,
+      "completed": 1,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 0.5
+    },
+    {
+      "class": "impl-small",
+      "model": "gpt-5.6-sol",
+      "total": 3,
+      "completed": 3,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 1
+    },
+    {
+      "class": "mechanical-gate",
+      "model": "codex",
+      "total": 2,
+      "completed": 2,
+      "costUsd": 0,
+      "turns": 0,
+      "successRate": 1
+    }
+  ],
+  "decisions": [
+    {
+      "class": "mechanical-gate",
+      "model": "sonnet",
+      "samples": 0,
+      "completed": 0,
+      "successRate": null,
+      "decision": "insufficient-sample",
+      "targetModel": "sonnet",
+      "policyChanged": false
+    },
+    {
+      "class": "test-fix",
+      "model": "sonnet",
+      "samples": 1,
+      "completed": 0,
+      "successRate": 0,
+      "decision": "insufficient-sample",
+      "targetModel": "sonnet",
+      "policyChanged": false
+    },
+    {
+      "class": "misconception-close",
+      "model": "sonnet",
+      "samples": 0,
+      "completed": 0,
+      "successRate": null,
+      "decision": "insufficient-sample",
+      "targetModel": "sonnet",
+      "policyChanged": false
+    },
+    {
+      "class": "impl-small",
+      "model": "sonnet",
+      "samples": 9,
+      "completed": 2,
+      "successRate": 0.2222222222222222,
+      "decision": "promote",
+      "targetModel": "fable",
+      "policyChanged": true
+    },
+    {
+      "class": "impl-large",
+      "model": "fable",
+      "samples": 0,
+      "completed": 0,
+      "successRate": null,
+      "decision": "insufficient-sample",
+      "targetModel": "fable",
+      "policyChanged": false
+    },
+    {
+      "class": "inbox-triage",
+      "model": "sonnet",
+      "samples": 0,
+      "completed": 0,
+      "successRate": null,
+      "decision": "insufficient-sample",
+      "targetModel": "sonnet",
+      "policyChanged": false
+    },
+    {
+      "class": "indicator-expansion",
+      "model": "fable",
+      "samples": 0,
+      "completed": 0,
+      "successRate": null,
+      "decision": "insufficient-sample",
+      "targetModel": "fable",
+      "policyChanged": false
+    }
+  ],
+  "policyUpdate": {
+    "changed": true,
+    "beforeVersion": 1,
+    "afterVersion": 2,
+    "changes": [
+      {
+        "class": "impl-small",
+        "from": "sonnet",
+        "to": "fable",
+        "samples": 9,
+        "completed": 2,
+        "successRate": 0.2222222222222222
+      }
+    ]
+  },
+  "limitations": [
+    "usage history is workflow-level and is not attributed to individual class-model attempts",
+    "ledger does not encode factual-error or scope-violation counts"
+  ]
+}
