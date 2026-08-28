@@ -1885,16 +1885,19 @@ export const AFFILIATE_OFFER_PROFILES: AffiliateOfferProfile[] = [
     "allowedVerticals": [
       "education"
     ],
-    "lane": "unknown",
-    "actionType": "unknown",
-    "frictionTier": "unknown",
-    "conversionCondition": null,
-    "personalDataLevel": "unknown",
-    "humanContact": "unknown",
-    "conditionSource": null,
-    "verifiedAt": null,
-    "portfolioStatus": "pending-classification",
-    "allowedPageTypes": []
+    "lane": "discovery",
+    "actionType": "free-registration",
+    "frictionTier": "F2",
+    "conversionCondition": "広告主を初めて利用するユーザーがアプリをインストールし、学校マッチング設定を完了",
+    "personalDataLevel": "basic",
+    "humanContact": "none",
+    "conditionSource": "https://media-console.a8.net/program/detail-partnered?programId=s00000026694001",
+    "verifiedAt": "2026-08-28",
+    "portfolioStatus": "pilot-ready",
+    "allowedPageTypes": [
+      "ranking",
+      "blog"
+    ]
   },
   {
     "programRef": "a8:s00000026954001",

@@ -1,22 +1,12 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-08-28T04:34:42.658Z",
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-28T07:34:08.112Z",
   "plan": null,
   "feasibility": null,
   "readiness": {
     "status": "blocked",
     "reasons": [
-      "offer-profile-unclassified:131",
-      "ga4-schema-unsupported(v2)",
-      "ga4-variant-dimension-missing",
-      "ga4-overview-report-missing",
-      "ga4-experiments-report-missing",
-      "ga4-pages-report-missing",
-      "a8-report-log-missing",
-      "a8-results-missing",
-      "a8-cross-check-unavailable",
-      "eligible-candidate-missing",
-      "existing-affiliate-experiment-active",
+      "eligible-lane-pair-missing",
       "pilot-plan-missing",
       "owner-approval-missing:offer",
       "owner-approval-missing:page",
@@ -25,48 +15,17 @@
     ]
   },
   "verdict": {
-    "status": "pending",
+    "status": "not-feasible",
     "reasons": [
-      "pilot-plan-missing",
-      "offer-profile-unclassified:131",
-      "ga4-schema-unsupported(v2)",
-      "ga4-variant-dimension-missing",
-      "ga4-overview-report-missing",
-      "ga4-experiments-report-missing",
-      "ga4-pages-report-missing",
-      "a8-report-log-missing",
-      "a8-results-missing",
-      "a8-cross-check-unavailable",
-      "eligible-candidate-missing",
-      "existing-affiliate-experiment-active",
-      "owner-approval-missing:offer",
-      "owner-approval-missing:page",
-      "owner-approval-missing:push",
-      "pilot-feasibility-missing",
-      "pilot-observation-missing"
+      "eligible-lane-pair-missing"
     ],
     "comparison": null,
     "winnerVariantId": null
   },
   "recommendedAction": {
-    "id": "resolve-pilot-start-gates",
+    "id": "classify-next-offer-for-lane-pair",
     "reasons": [
-      "offer-profile-unclassified:131",
-      "ga4-schema-unsupported(v2)",
-      "ga4-variant-dimension-missing",
-      "ga4-overview-report-missing",
-      "ga4-experiments-report-missing",
-      "ga4-pages-report-missing",
-      "a8-report-log-missing",
-      "a8-results-missing",
-      "a8-cross-check-unavailable",
-      "eligible-candidate-missing",
-      "existing-affiliate-experiment-active",
-      "pilot-plan-missing",
-      "owner-approval-missing:offer",
-      "owner-approval-missing:page",
-      "owner-approval-missing:push",
-      "pilot-feasibility-missing"
+      "eligible-lane-pair-missing"
     ]
   }
 }

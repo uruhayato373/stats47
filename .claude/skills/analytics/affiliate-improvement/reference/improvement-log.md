@@ -180,3 +180,22 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 - **訂正**: 過去ログの「`other`=vertical未解決ページ」という解釈は過大。最新ad_id/position内訳では
   fixed house bannerも意図的に`other`を送るため合成値である。`AFF-CATEGORY-MAP-01`は前提不成立として
   改善バックログから削除し、今後の写像漏れはplacement-mapの`unmapped.byReason`で判定する。
+
+---
+
+## blog-inbody-format 本文広告形式実験
+
+- **開始日**: 2026-08-04
+- **終了判断日**: 2026-08-28
+- **検証コマンド**: `npx tsx .claude/scripts/ads/build-affiliate-operations-state.ts`
+- **実測**: `.claude/state/ads/ga4-affiliate-2026-08-28.json`（generatedAt 2026-08-28T06:28:33.210Z）
+
+  | variant | viewable impression | click | CTR |
+  |---|---:|---:|---:|
+  | text | 2,683 | 0 | 0% |
+  | banner | 821 | 1 | 0.1218% |
+
+- **ガード**: 各variant 500 impression以上、24日経過（最小14日）、freshness/同時施策confoundなし。
+- **判定**: `ready-to-decide` の比較値を提示し、2026-08-28にオーナーが `banner` を採用。effectラベルは
+  本ログでは更新しない。code実験なので広告weightを変更せず、本文のslugハッシュ分岐と実験ID送信を撤去して
+  全記事をバナー固定へ変更した。

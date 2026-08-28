@@ -95,6 +95,13 @@ test("active experimentがあればpilot gateだけをblockedにする", () => {
   assert.ok(state.gates.pilot.reasons.includes("existing-affiliate-experiment-active"));
 });
 
+test("discoveryだけでは二層比較を開始せずpilot gateをblockedにする", () => {
+  const state = build();
+  assert.equal(state.gates.portfolio.status, "ready");
+  assert.equal(state.gates.pilot.status, "blocked");
+  assert.ok(state.gates.pilot.reasons.includes("eligible-lane-pair-missing"));
+});
+
 test("portfolio stateの欠損・10日超過をworkflow healthで検出する", () => {
   assert.equal(evaluateAffiliatePortfolioFreshness(null, "2026-08-28T00:00:00Z").status, "blocked");
   const stale = evaluateAffiliatePortfolioFreshness(
@@ -115,4 +122,25 @@ test("queue stateは除外profile本体を重複保存せず理由件数へ畳�
   assert.equal(queue.excluded.count, 1);
   assert.equal(queue.excluded.byReason["offer-profile-unclassified"], 1);
   assert.equal("profile" in queue.excluded, false);
+});
+
+test("未分類profileは可視化するが、別の有効候補までportfolio gateで止めない", () => {
+  const pending = {
+    ...profile,
+    programRef: "a8:s00000000000002",
+    lane: "unknown",
+    actionType: "unknown",
+    frictionTier: "unknown",
+    conversionCondition: null,
+    personalDataLevel: "unknown",
+    humanContact: "unknown",
+    conditionSource: null,
+    verifiedAt: null,
+    portfolioStatus: "pending-classification",
+    allowedPageTypes: [],
+  };
+  const state = build({ profiles: [profile, pending] });
+  assert.equal(state.gates.coverage.status, "blocked");
+  assert.ok(state.gates.coverage.reasons.includes("offer-profile-unclassified:1"));
+  assert.equal(state.gates.portfolio.status, "ready");
 });

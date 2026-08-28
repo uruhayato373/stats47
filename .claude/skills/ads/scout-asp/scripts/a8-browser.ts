@@ -27,6 +27,7 @@
 import { chromium, type BrowserContext, type Page } from "playwright";
 import * as path from "path";
 import * as fs from "fs";
+import { createHash } from "crypto";
 import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
@@ -67,6 +68,7 @@ function pickTargetSiteOption(options: string[]): string | null {
   return null;
 }
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-a8-debug");
+const OFFER_INSPECT_DIR = path.join(PROJECT_ROOT, ".local/a8-offer-inspect");
 const CATALOG_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/a8-catalog.json");
 const INVENTORY_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/inventory-latest.json");
 const ADS_DATA_PATH = path.join(PROJECT_ROOT, "apps/web/scripts/affiliate-ads-data.ts");
@@ -96,6 +98,7 @@ const A8 = {
     `${BASE}/program/list/partnered?pageNo=${pageNo}&pageSize=${pageSize}&sortKey=APPROVED_DATE&sortOrder=DESC`,
   applyingListUrl: `${BASE}/program/list/applying`, // 申込中 (審査待ち)
   detailNotPartneredUrl: (pid: string) => `${BASE}/program/detail-not-partnered?programId=${pid}`,
+  detailPartneredUrl: (pid: string) => `${BASE}/program/detail-partnered?programId=${pid}`,
   createLinkUrl: (pid: string) => `${BASE}/program/create-link?programId=${pid}`,
   // 検索結果カード = div.pgInner。内部: h3.pgName / p.ecName / div.pgStatus / div.pgDetail の labelInfo+labelValue。
   card: "div.pgInner",
@@ -243,6 +246,43 @@ function saveCatalog(cat: Catalog): void {
 
 function nowIso(): string {
   return new Date().toISOString();
+}
+
+/** 承認済み案件の成果条件をread-onlyで証拠化する。catalogや外部状態は変更しない。 */
+async function cmdInspectOffer(page: Page, ids: string[] | null): Promise<void> {
+  if (!ids || ids.length === 0) throw new Error("inspect-offer は --id <programId> が必須です");
+  fs.mkdirSync(OFFER_INSPECT_DIR, { recursive: true });
+  for (const programId of ids) {
+    if (!/^s\d{14}$/.test(programId)) throw new Error(`programId 形式不正: ${programId}`);
+    await page.goto(A8.detailPartneredUrl(programId), { waitUntil: "domcontentloaded" });
+    if (!(await isLoggedIn(page))) throw new Error(`A8 session expired: ${programId}`);
+    const bodyText = await page.locator("body").innerText();
+    const title = await page.title();
+    const observedAt = nowIso();
+    const sha256 = createHash("sha256").update(bodyText, "utf8").digest("hex");
+    const baseName = `${programId}-${observedAt.replace(/[:.]/g, "-")}`;
+    const textPath = path.join(OFFER_INSPECT_DIR, `${baseName}.txt`);
+    const metaPath = path.join(OFFER_INSPECT_DIR, `${baseName}.json`);
+    fs.writeFileSync(textPath, bodyText, "utf8");
+    fs.writeFileSync(metaPath, `${JSON.stringify({
+      schemaVersion: 1,
+      programId,
+      observedAt,
+      url: page.url(),
+      title,
+      scope: "account-program-terms",
+      bodyTextSha256: sha256,
+      textFile: path.basename(textPath),
+    }, null, 2)}\n`, "utf8");
+    const relevantLines = bodyText
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .filter((line) => /成果|報酬|条件|否認|キャンセル|再訪問|申込|購入|登録|予約|資料請求|ダウンロード|インストール/.test(line));
+    console.log(`🔎 ${programId}: ${title}`);
+    console.log(`   evidence: ${metaPath}`);
+    for (const line of relevantLines.slice(0, 40)) console.log(`   ${line.slice(0, 240)}`);
+  }
 }
 
 /** セッション失効を記録して正常終了 (パイプラインを止めない)。 */
@@ -891,9 +931,9 @@ async function main() {
   const ids: string[] | null =
     idArg >= 0 ? String(args[idArg + 1] ?? "").split(",").map((s) => s.trim()).filter(Boolean) : null;
 
-  if (!["scout", "apply", "check-approval", "harvest", "import-partnered"].includes(cmd)) {
+  if (!["scout", "apply", "check-approval", "harvest", "import-partnered", "inspect-offer"].includes(cmd)) {
     console.error(
-      "使い方: npx tsx a8-browser.ts <scout|apply|check-approval|harvest|import-partnered> [--dry-run] [--limit N] [--max N] [--id id1,id2]",
+      "使い方: npx tsx a8-browser.ts <scout|apply|check-approval|harvest|import-partnered|inspect-offer> [--dry-run] [--limit N] [--max N] [--id id1,id2]",
     );
     process.exit(1);
   }
@@ -929,6 +969,7 @@ async function main() {
         textOnly: args.includes("--text-only"),
       });
     else if (cmd === "import-partnered") await cmdImportPartnered(page);
+    else if (cmd === "inspect-offer") await cmdInspectOffer(page, ids);
   } catch (e) {
     console.error("エラー:", e);
     await saveScreenshot(page, `error-${cmd}`);

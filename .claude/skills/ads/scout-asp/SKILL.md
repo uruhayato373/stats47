@@ -57,6 +57,7 @@ A8.net の高単価案件を **scout → 申請 → コード取得 → SSOT 登
 | `register` | harvested を SSOT 追記 + 4 ゲート → registered (`append-affiliate-ads.ts --apply`)。commit/push は下記 |
 | `full` | scout → apply → check-approval → harvest → register を順に (**手動フル実行専用**) |
 | `status` | catalog の状態機械サマリ + pending-vertical 滞留を表示 |
+| `inspect-offer` | 承認済み案件の成果条件を read-only で取得し、`.local/a8-offer-inspect/` に本文・hash・URL・観測日時を保存。catalogやASP状態は変更しない |
 
 ## 週次 cron は full を呼ばない (2026-07-27 改訂)
 
@@ -118,6 +119,7 @@ npx tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts scout [--dry-run] [--
 npx tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts apply [--dry-run] [--max N]
 npx tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts check-approval [--dry-run]
 npx tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts harvest [--dry-run]
+npx tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts inspect-offer --id s00000000000000
 npx tsx .claude/scripts/ads/append-affiliate-ads.ts [--apply]     # register (既定 dry-run)
 node .claude/scripts/ads/check-a8-apply-budget.cjs                # 今週の申請残枠
 ```

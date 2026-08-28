@@ -134,3 +134,18 @@ test("現行gateから生成したstateは次の一手を1件だけ持つ", () =
   assert.equal(state.recommendedAction.id, "resolve-pilot-start-gates");
   assert.deepEqual(validateAffiliatePilotState(state), []);
 });
+
+test("比較レーン不足は公開せずnot-feasibleで終了し、次の分類だけを勧める", () => {
+  const state = buildAffiliatePilotState({
+    nowIso: "2026-08-28T00:00:00.000Z",
+    portfolio: { gates: { pilot: { status: "blocked", reasons: ["eligible-lane-pair-missing"] } } },
+    plan: null,
+    activeExperiments: [],
+    ownerApprovals: {},
+    feasibility: null,
+    observation: null,
+  });
+  assert.equal(state.verdict.status, "not-feasible");
+  assert.equal(state.recommendedAction.id, "classify-next-offer-for-lane-pair");
+  assert.deepEqual(validateAffiliatePilotState(state), []);
+});

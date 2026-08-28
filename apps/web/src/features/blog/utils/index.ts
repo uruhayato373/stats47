@@ -3,8 +3,6 @@
 // (eslint no-restricted-imports が個別パスを禁止している)。
 export { generateBlogMetadata } from "./generate-blog-metadata";
 export {
-  IN_BODY_AD_EXPERIMENT_ID,
-  pickInBodyAdFormat,
-  type InBodyAdFormat,
+  BLOG_IN_BODY_BANNER_COUNT,
   type InlineAffiliateBanner,
-} from "./in-body-ad-format";
+} from "./inline-affiliate-banner";
