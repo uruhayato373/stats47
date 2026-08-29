@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "convenience-store-count-commercial",
+  "year": "2024",
+  "unit": "店",
+  "label": "コンビニエンスストア店舗数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/convenience-store-count-commercial/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug convenience-store-count-commercial-prefecture-gap --keys convenience-store-count-commercial --data-name convenience-store-count-commercial-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-29T22:43:31.792Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

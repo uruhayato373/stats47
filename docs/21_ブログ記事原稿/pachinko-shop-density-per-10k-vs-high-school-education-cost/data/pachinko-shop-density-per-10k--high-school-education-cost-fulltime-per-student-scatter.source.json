@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "pachinko-shop-density-per-10k",
+  "pair": "high-school-education-cost-fulltime-per-student",
+  "pearsonR": 0.7494058799796861,
+  "partialRPopulation": 0.6768913637649595,
+  "unit": "軒 × 円",
+  "label": "パチンコ店舗数 と 高等学校教育費 の関係",
+  "source": "r2:app/correlation/by-ranking-key/pachinko-shop-density-per-10k.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug pachinko-shop-density-per-10k-vs-high-school-education-cost --base pachinko-shop-density-per-10k --pair high-school-education-cost-fulltime-per-student --data-name pachinko-shop-density-per-10k--high-school-education-cost-fulltime-per-student"
+}
