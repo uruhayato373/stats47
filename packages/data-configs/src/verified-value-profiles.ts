@@ -427,6 +427,24 @@ export const VERIFIED_VALUE_PROFILES: readonly VerifiedValueProfile[] = [
     sourceUrl: "https://www.e-stat.go.jp/dbview?sid=0003348770",
     verifiedAt: "2026-08-28",
   },
+  {
+    key: "kindergarten-expenses-prefecture",
+    zeroShareMax: 0.75,
+    rowCountMin: 47,
+    evidence:
+      "社会・人口統計体系 D3103116 は幼稚園費（都道府県財政）。2022年度の公開R2は47県すべてに行があり、32県が欠損でなく数値0",
+    sourceUrl: "https://www.e-stat.go.jp/koumoku/koumoku_teigi/D",
+    verifiedAt: "2026-08-28",
+  },
+  {
+    key: "general-project-investment-railway",
+    zeroShareMax: 0.55,
+    rowCountMin: 47,
+    evidence:
+      "社会・人口統計体系 D5211 は一般事業の鉄道投資（公営企業の軌道・地下鉄とは別区分、2006年で収集中止）。2006年度の公開R2は47県すべてに行があり、22県が数値0",
+    sourceUrl: "https://www.e-stat.go.jp/koumoku/koumoku_teigi/D",
+    verifiedAt: "2026-08-28",
+  },
   // 家計調査の品目 (県庁所在市・二人以上世帯・1 市あたり約 100 世帯の標本)。
   // 低頻度 / 高額 / 該当世帯が少数の品目は、標本にその世帯が出ないと 0 になる。
   // 全国平均が正であることを 1 件ずつ確認しており、欠損を 0 で埋めているのではない。

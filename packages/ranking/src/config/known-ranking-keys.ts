@@ -16,7 +16,7 @@
  *                 必ず git commit してからデプロイ。
  *
  * 最終生成日: 2026-08-28
- * 件数: 2167
+ * 件数: 2163
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -781,7 +781,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "hat-consumption-quantity",
   "health-center-expenses-prefecture",
   "health-checkup-consumption-expenditure",
-  "health-checkup-rate-lifestyle-diseases",
   "health-checkup-recipients",
   "health-consumables-consumption-expenditure",
   "health-insurance-premium-consumption-expenditure",
@@ -974,7 +973,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "kidney-failure-death-rate",
   "kindergarten-count-per-100k-3-5",
   "kindergarten-education-cost-per-student",
-  "kindergarten-education-diffusion-rate",
   "kindergarten-expenses-prefecture",
   "kindergarten-students-per-teacher",
   "kindergarten-teacher-annual-income",
@@ -1257,7 +1255,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "nurse-salary",
   "nursery-children-per-nursery-teacher",
   "nursery-count-per-100k-0-5",
-  "nursery-education-diffusion-rate",
   "nursery-teacher-annual-income",
   "nursery-utilization-rate",
   "nurses-general-hospital-per-100beds",
@@ -1516,7 +1513,6 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "port-count",
   "port-entry-vessel-count",
   "port-inbound-ships",
-  "port-passengers-total",
   "port-ships-tonnage",
   "port-vehicle-ferry",
   "post-office-count",

@@ -55,5 +55,5 @@ export const portPassengersTotal: MetricConfig = {
   ],
   "seoTitle": "港湾旅客数（港湾統計）ランキング都道府県【2023年】｜1位広島県（17,611,624人）",
   "seoDescription": "2023年の港湾旅客数（港湾統計）の都道府県別ランキング。1位広島県（17,611,624人）、最下位山形県（37,779人）で466.2倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

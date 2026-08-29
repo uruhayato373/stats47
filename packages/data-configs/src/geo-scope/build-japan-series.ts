@@ -1,9 +1,22 @@
 import { resolveJapanValue, type AreaValueRow } from "./resolve-japan-value";
-import { JAPAN_NATIONAL_AREA_CODE } from "./types";
+import {
+  JAPAN_DERIVED_ADDITIVE_RECIPE_KEY,
+  JAPAN_NATIONAL_AREA_CODE,
+  PREFECTURE_AREA_CODE_RE,
+} from "./types";
 import { parseUnit } from "../unit/unit-semantics";
 
 /** e-Stat から取得した 00000 (全国) 行の最小形。writer はこれだけを渡す (pure)。 */
 export interface EstatNationalRow {
+  yearCode: string;
+  yearName: string;
+  value: number | null;
+  unit?: string | null;
+}
+
+/** `app/stats/<metric>/values.json` の都道府県行から加算全国値を作るための最小形。 */
+export interface PrefectureSeriesSourceRow {
+  areaCode: string;
   yearCode: string;
   yearName: string;
   value: number | null;
@@ -78,6 +91,78 @@ export function buildJapanSeriesRows(
       continue;
     }
     rows.push({ yearCode, yearName, value: result.value, unit: expectedUnit });
+  }
+
+  return { ok: true, rows, rejectedYears };
+}
+
+/**
+ * 同一年の47都道府県実数を合計して `derived-additive` の全国系列を作る。
+ *
+ * 47コードの重複・単位不一致はartifact全体を停止する。欠測を含む年は0埋めせず
+ * rejectedYearsへ回す。47県の単純平均は作らず、呼び出し側が採用済みrecipeを
+ * 明示したmetricにだけ使う。
+ */
+export function buildDerivedAdditiveJapanSeriesRows(
+  prefectureRows: PrefectureSeriesSourceRow[],
+  expectedUnit: string,
+): BuildJapanSeriesResult {
+  if (prefectureRows.length === 0) {
+    return { ok: false, reason: "都道府県行が1件もない" };
+  }
+
+  const expectedNormalized = parseUnit(expectedUnit).normalized;
+  const mismatched = prefectureRows.find(
+    (row) => row.unit != null && parseUnit(row.unit).normalized !== expectedNormalized,
+  );
+  if (mismatched) {
+    return {
+      ok: false,
+      reason: `単位不一致: config.unit='${expectedUnit}' / source unit='${mismatched.unit}' (year=${mismatched.yearCode})`,
+    };
+  }
+
+  const byYear = new Map<string, PrefectureSeriesSourceRow[]>();
+  for (const row of prefectureRows) {
+    if (!PREFECTURE_AREA_CODE_RE.test(row.areaCode)) {
+      return {
+        ok: false,
+        reason: `都道府県コードではない行を含む: ${row.areaCode} (year=${row.yearCode})`,
+      };
+    }
+    const rows = byYear.get(row.yearCode) ?? [];
+    rows.push(row);
+    byYear.set(row.yearCode, rows);
+  }
+
+  const rows: JapanSeriesRowResult[] = [];
+  const rejectedYears: { yearCode: string; reason: string }[] = [];
+  for (const [yearCode, sourceRows] of [...byYear.entries()].sort(([a], [b]) =>
+    a.localeCompare(b),
+  )) {
+    const areaCodes = new Set(sourceRows.map((row) => row.areaCode));
+    if (areaCodes.size !== sourceRows.length) {
+      return { ok: false, reason: `${yearCode}: 都道府県コードが重複している` };
+    }
+    const yearNames = new Set(sourceRows.map((row) => row.yearName));
+    if (yearNames.size !== 1) {
+      return { ok: false, reason: `${yearCode}: yearName が一致しない` };
+    }
+
+    const result = resolveJapanValue(
+      sourceRows.map((row) => ({ areaCode: row.areaCode, value: row.value })),
+      { status: "derived-additive", recipeKey: JAPAN_DERIVED_ADDITIVE_RECIPE_KEY },
+    );
+    if (!result.ok) {
+      rejectedYears.push({ yearCode, reason: result.reason });
+      continue;
+    }
+    rows.push({
+      yearCode,
+      yearName: sourceRows[0].yearName,
+      value: result.value,
+      unit: expectedUnit,
+    });
   }
 
   return { ok: true, rows, rejectedYears };

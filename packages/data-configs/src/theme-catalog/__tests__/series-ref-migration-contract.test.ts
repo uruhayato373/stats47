@@ -45,8 +45,8 @@ function chartRefs(componentType: string, props: Record<string, unknown>) {
 }
 
 describe("CROSS-PAGE-DATA-SSOT-01 exact migration contract", () => {
-  it("55 chart の旧 request は参照先MetricConfigの取得条件と完全一致する", () => {
-    expect(migrationContract).toHaveLength(55);
+  it("54 chart の旧 request は参照先MetricConfigの取得条件と完全一致する", () => {
+    expect(migrationContract).toHaveLength(54);
     for (const row of migrationContract) {
       expect(row.rawRequestKeys, row.componentKey).toEqual(
         row.metricKeys.map(metricRequestKey),
@@ -66,7 +66,7 @@ describe("CROSS-PAGE-DATA-SSOT-01 exact migration contract", () => {
     }
   });
 
-  it("55 chart は明示した全国チャート以外area overrideなしのtyped refsだけを持つ", () => {
+  it("54 chart は明示した全国チャート以外area overrideなしのtyped refsだけを持つ", () => {
     for (const row of migrationContract) {
       const catalog = THEME_CATALOGS[row.themeKey as keyof typeof THEME_CATALOGS];
       const chart = catalog.charts.find((candidate) => candidate.componentKey === row.componentKey);

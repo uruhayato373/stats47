@@ -5,8 +5,8 @@
  * ★対象 metric 以外を書かない (doc 43 §7 WP3 step 3)。1 回の実行 = 1 metric。
  * ★sourceMode は呼び出し側が明示する (このスクリプトは official/derived を推測しない)。
  *   判定根拠は `.claude/state/geo-scope/wp0-inventory-*.json` を参照すること。
- * ★derived-additive/derived-ratio は今回未実装 (education-culture pilot は全て official)。
- *   実装するときは resolveJapanValue の該当分岐を年ごとに正しく呼ぶこと。
+ * ★derived-additive は `JAPAN_DERIVED_METRIC_DECISIONS` で採用済みのmetricだけを扱う。
+ *   derived-ratio は分子・分母の全国artifactが揃うまで拒否する。
  * ★既定は local write のみ (`.local/r2/app/japan/...`)。remote R2 push は別スクリプト
  *   (diff-push-r2.ts) + 別承認。このスクリプトは push しない。
  *
@@ -22,19 +22,27 @@
  * Usage:
  *   NEXT_PUBLIC_ESTAT_APP_ID=<id> npx tsx packages/stats-r2/src/scripts/generate-japan-series.ts \
  *     --metric library-count-per-million --source-mode official [--dry-run]
+ *   npx tsx packages/stats-r2/src/scripts/generate-japan-series.ts \
+ *     --metric railway-station-count --source-mode derived-additive --dry-run
  */
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { dirname, resolve } from "node:path";
 
 import { buildRecipe, getMetricConfig } from "@stats47/data-configs";
-import { buildJapanSeriesRows } from "@stats47/data-configs/geo-scope";
+import {
+  buildDerivedAdditiveJapanSeriesRows,
+  buildJapanSeriesRows,
+  getJapanDerivedMetricDecision,
+} from "@stats47/data-configs/geo-scope";
+import type { BuildJapanSeriesResult } from "@stats47/data-configs/geo-scope";
 import { convertToStatsSchema, formatStatsData } from "@stats47/estat-api";
 import type { EstatStatsDataResponse } from "@stats47/estat-api";
 
 import { R2_LOCAL_DIR, REPO_ROOT } from "./_lib";
-import { japanR2Key } from "../types";
-import type { JapanSeriesArtifact, JapanSourceMode } from "../types";
+import { parseStatsValuesPayload } from "../schemas";
+import { japanR2Key, statsR2Key } from "../types";
+import type { JapanSeriesArtifact, JapanSourceMode, StatsValuesPayload } from "../types";
 
 interface Args {
   metric?: string;
@@ -130,10 +138,44 @@ async function fetchEstatRaw(
 }
 
 const NATIONAL_AREA_CODE = "00000";
+const PUBLIC_R2 = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 
 export type GenerateOneResult =
   | { ok: true; metricKey: string; rows: number; rangeFrom: string; rangeTo: string; latestValue: number; latestUnit: string; outPath: string; artifact: JapanSeriesArtifact }
   | { ok: false; metricKey: string; reason: string };
+
+async function fetchWithProxy(url: string): Promise<Response> {
+  const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+  const dispatcher = proxyUrl
+    ? new (await import("undici")).ProxyAgent(proxyUrl)
+    : undefined;
+  const options: RequestInit & { dispatcher?: unknown } = {
+    signal: AbortSignal.timeout(30_000),
+  };
+  if (dispatcher) options.dispatcher = dispatcher;
+  return fetch(url, options);
+}
+
+async function readPrefectureStats(metricKey: string): Promise<StatsValuesPayload> {
+  const key = statsR2Key(metricKey, "prefecture");
+  const localPath = resolve(R2_LOCAL_DIR, key);
+  let raw: unknown;
+  if (existsSync(localPath)) {
+    raw = JSON.parse(readFileSync(localPath, "utf8")) as unknown;
+  } else {
+    const response = await fetchWithProxy(`${PUBLIC_R2}/${key}`);
+    if (!response.ok) throw new Error(`${key}: HTTP ${response.status}`);
+    raw = (await response.json()) as unknown;
+  }
+
+  const payload = parseStatsValuesPayload(raw);
+  if (payload.metricKey !== metricKey || payload.entityKind !== "prefecture") {
+    throw new Error(
+      `${key}: payload identity mismatch (${payload.metricKey}/${payload.entityKind})`,
+    );
+  }
+  return payload;
+}
 
 /**
  * 1 metric の日本全国 artifact を fetch+build する (CLI と batch verifier の共有コア)。
@@ -142,29 +184,62 @@ export type GenerateOneResult =
  */
 export async function generateOneMetric(
   metricKey: string,
-  opts: { write: boolean },
+  opts: { write: boolean; sourceMode?: JapanSourceMode },
 ): Promise<GenerateOneResult> {
   const config = getMetricConfig(metricKey);
   if (!config) return { ok: false, metricKey, reason: "metric config not found" };
-  if (config.source.kind !== "estat") {
-    return { ok: false, metricKey, reason: `unsupported source.kind: ${config.source.kind}` };
+  const sourceMode = opts.sourceMode ?? "official";
+  let built: BuildJapanSeriesResult;
+  let recipeHashInput: object;
+  let sourceId: string;
+
+  if (sourceMode === "official") {
+    if (config.source.kind !== "estat") {
+      return { ok: false, metricKey, reason: `officialでは扱えないsource.kind: ${config.source.kind}` };
+    }
+    const statsDataId = config.source.statsDataId;
+    const axes = axisParams(config as unknown as { source: Record<string, unknown> });
+    const response = await fetchEstatRaw(statsDataId, axes);
+    const formatted = formatStatsData(response);
+    const schema = formatted.values
+      .map(convertToStatsSchema)
+      .filter((row): row is NonNullable<typeof row> => row !== undefined);
+    const nationalRaw = schema
+      .filter((row) => row.areaCode === NATIONAL_AREA_CODE)
+      .map((row) => ({
+        yearCode: row.yearCode,
+        yearName: row.yearName,
+        value: row.value,
+        unit: row.unit,
+      }));
+    built = buildJapanSeriesRows(nationalRaw, config.unit);
+    recipeHashInput = { statsDataId, axes, areaCode: NATIONAL_AREA_CODE };
+    sourceId = statsDataId;
+  } else if (sourceMode === "derived-additive") {
+    const decision = getJapanDerivedMetricDecision(metricKey);
+    if (
+      !decision ||
+      decision.verdict !== "adopted" ||
+      decision.availability.status !== "derived-additive"
+    ) {
+      return {
+        ok: false,
+        metricKey,
+        reason: "derived-additiveとして採用済みの判断がない",
+      };
+    }
+    const source = await readPrefectureStats(decision.sourceMetricKey);
+    built = buildDerivedAdditiveJapanSeriesRows(source.rows, config.unit);
+    sourceId = statsR2Key(decision.sourceMetricKey, "prefecture");
+    recipeHashInput = {
+      recipeKey: decision.availability.recipeKey,
+      sourceMetricKey: decision.sourceMetricKey,
+      sourceConfigHash: source.meta.recipe?.configHash ?? null,
+    };
+  } else {
+    return { ok: false, metricKey, reason: "derived-ratioは未採用・未実装" };
   }
 
-  const statsDataId = config.source.statsDataId;
-  const cdCat01 = config.source.cdCat01;
-  const axes = axisParams(config as unknown as { source: Record<string, unknown> });
-
-  const response = await fetchEstatRaw(statsDataId, axes);
-  const formatted = formatStatsData(response);
-  const schema = formatted.values
-    .map(convertToStatsSchema)
-    .filter((s): s is NonNullable<typeof s> => s !== undefined);
-
-  const nationalRaw = schema
-    .filter((r) => r.areaCode === NATIONAL_AREA_CODE)
-    .map((r) => ({ yearCode: r.yearCode, yearName: r.yearName, value: r.value, unit: r.unit }));
-
-  const built = buildJapanSeriesRows(nationalRaw, config.unit);
   if (!built.ok) {
     return { ok: false, metricKey, reason: built.reason };
   }
@@ -178,13 +253,13 @@ export async function generateOneMetric(
     schemaVersion: 1,
     metricKey,
     geographyScope: "japan",
-    sourceMode: "official",
+    sourceMode,
     rows,
     meta: {
       generatedAt: new Date().toISOString(),
       configHash: recipe.configHash,
-      recipeHash: hash64(JSON.stringify({ statsDataId, axes, areaCode: NATIONAL_AREA_CODE })),
-      sourceId: config.source.statsDataId,
+      recipeHash: hash64(JSON.stringify(recipeHashInput)),
+      sourceId,
     },
   };
 
@@ -211,20 +286,23 @@ export async function generateOneMetric(
 async function main() {
   const args = parseArgs();
   if (!args.metric) {
-    console.error("使い方: --metric <key> --source-mode official [--dry-run]");
+    console.error(
+      "使い方: --metric <key> --source-mode <official|derived-additive> [--dry-run]",
+    );
     process.exit(1);
   }
-  if (args.sourceMode !== "official") {
-    // derived-additive/derived-ratio は resolveJapanValue の別分岐を年ごとに正しく
-    // 呼ぶ実装が要る (未実装)。誤って derived を official 扱いしないよう明示的に拒否する。
+  if (args.sourceMode !== "official" && args.sourceMode !== "derived-additive") {
     console.error(
-      `--source-mode '${args.sourceMode ?? "(未指定)"}' は未実装。現在 official のみ対応`,
+      `--source-mode '${args.sourceMode ?? "(未指定)"}' は未実装。official/derived-additiveのみ対応`,
     );
     process.exit(1);
   }
 
   console.log(`[fetch] metric=${args.metric}`);
-  const result = await generateOneMetric(args.metric, { write: false });
+  const result = await generateOneMetric(args.metric, {
+    write: false,
+    sourceMode: args.sourceMode,
+  });
   if (!result.ok) {
     console.error(`停止します (推測で埋めない): ${result.reason}`);
     process.exit(1);

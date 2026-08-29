@@ -3,8 +3,8 @@
   "totalRequests": 0,
   "distinctRequests": 0,
   "requests": [],
-  "totalMetricRefs": 267,
-  "distinctMetricRefs": 192,
+  "totalMetricRefs": 265,
+  "distinctMetricRefs": 190,
   "metrics": [
     {
       "metricKey": "accidental-deaths-per-100k",
@@ -269,14 +269,6 @@
       "themeKey": "healthcare",
       "componentKey": "theme-health-death-causes-donut",
       "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "deaths-lifestyle-diseases-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "cc33d21721ba59ec",
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-lifestyle-trend",
-      "componentType": "line-chart"
     },
     {
       "metricKey": "deaths-malignant-neoplasms-per-100k",
@@ -588,14 +580,6 @@
       "expectedConfigHash": "d7f892596eeb8a82",
       "themeKey": "healthcare",
       "componentKey": "theme-health-supply-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "health-checkup-rate-lifestyle-diseases",
-      "expectedUnit": "％",
-      "expectedConfigHash": "594f7e76ac816089",
-      "themeKey": "healthcare",
-      "componentKey": "theme-health-lifestyle-trend",
       "componentType": "line-chart"
     },
     {

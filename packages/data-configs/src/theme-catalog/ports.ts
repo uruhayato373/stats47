@@ -43,11 +43,6 @@ export const PORTS_CATALOG: ThemeCatalog = {
       "role": "context"
     },
     {
-      "rankingKey": "port-passengers-total",
-      "shortLabel": "港湾旅客数",
-      "role": "primary"
-    },
-    {
       "rankingKey": "passenger-ship-transport",
       "shortLabel": "旅客船輸送人員",
       "role": "context"
@@ -109,7 +104,7 @@ export const PORTS_CATALOG: ThemeCatalog = {
       summary:
         "港湾旅客数は船舶乗降人員の集計です。利用者の実人数や移動距離、航路数は示しません。",
       sourceKeys: ["mlit-port-statistics"],
-      relatedRankingKeys: ["port-passengers-total"],
+      relatedRankingKeys: ["passenger-ship-transport"],
       relatedThemeKeys: ["railway"],
     },
   ],

@@ -42,7 +42,7 @@ type SurveyRow = {
 function main(): void {
   const rows: SurveyRow[] = JSON.parse(readFileSync(SURVEYS_JSON, "utf-8"));
   const existing = new Map(rows.map((r) => [r.id, r]));
-  const now = "2026-08-22 00:00:00";
+  const now = "2026-08-28 00:00:00";
 
   let added = 0;
   let enriched = 0;

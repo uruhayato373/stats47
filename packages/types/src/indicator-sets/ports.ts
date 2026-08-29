@@ -46,11 +46,6 @@ export const PORTS_SET: IndicatorSet = {
       "role": "context"
     },
     {
-      "rankingKey": "port-passengers-total",
-      "shortLabel": "港湾旅客数",
-      "role": "primary"
-    },
-    {
       "rankingKey": "passenger-ship-transport",
       "shortLabel": "旅客船輸送人員",
       "role": "context"
