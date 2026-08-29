@@ -192,7 +192,6 @@ function parseArgs(argv: string[]): {
 function normalizeText(value: string): string {
   return value
     .normalize("NFKC")
-    .replace(/<[^>]+>/g, "")
     .replace(/[\s\p{P}\p{S}]+/gu, "")
     .toLowerCase();
 }

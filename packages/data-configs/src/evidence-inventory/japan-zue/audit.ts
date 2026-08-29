@@ -1,6 +1,5 @@
-import { createHash } from "node:crypto";
-
 import type { JapanZueCandidate, JapanZueEvidenceItem } from "../types";
+import { hash64 } from "../../recipe";
 
 export interface ExpressionMatch {
   publicId: string;
@@ -31,7 +30,7 @@ export function findExpressionMatches(
       if (!privateNormalized.includes(window)) continue;
       matches.push({
         publicId: entry.id,
-        fingerprint: createHash("sha256").update(window).digest("hex"),
+        fingerprint: hash64(window),
         windowLength,
       });
       break;
