@@ -1,4 +1,6 @@
 import { EventEmitter } from "node:events";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { join, resolve } from "node:path";
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -45,7 +47,7 @@ describe("startJob", () => {
 
   it("close(0) で status=success + exitCode=0", async () => {
     const { startJob, getJob } = await import("@/lib/server/jobs");
-    const r = startJob("test", "echo", ["hi"]);
+    const r = startJob("test", "npx", ["hi"]);
     expect("id" in r).toBe(true);
     if (!("id" in r)) return;
     const child = spawnMock.mock.results[0].value as FakeChild;
@@ -58,7 +60,7 @@ describe("startJob", () => {
 
   it("close(≠0) で status=failed", async () => {
     const { startJob, getJob } = await import("@/lib/server/jobs");
-    const r = startJob("test", "false", []);
+    const r = startJob("test", "npx", []);
     if (!("id" in r)) throw new Error("expected id");
     const child = spawnMock.mock.results[0].value as FakeChild;
     child.emit("close", 1);
@@ -68,7 +70,7 @@ describe("startJob", () => {
 
   it("error イベントで status=failed + log に spawn error", async () => {
     const { startJob, getJob } = await import("@/lib/server/jobs");
-    const r = startJob("test", "nonexistent-bin", []);
+    const r = startJob("test", "npx", []);
     if (!("id" in r)) throw new Error("expected id");
     const child = spawnMock.mock.results[0].value as FakeChild;
     child.emit("error", new Error("ENOENT"));
@@ -77,12 +79,20 @@ describe("startJob", () => {
     expect(job?.log.some((l) => l.includes("spawn error"))).toBe(true);
   });
 
+  it("npx 以外の実行ファイルを拒否して任意コマンドを起動しない", async () => {
+    const { startJob } = await import("@/lib/server/jobs");
+    const r = startJob("test", "sh" as "npx", ["-c", "whoami"]);
+
+    expect("error" in r).toBe(true);
+    expect(spawnMock).not.toHaveBeenCalled();
+  });
+
   it("同時実行 1: 実行中に 2 個目は { error }", async () => {
     const { startJob } = await import("@/lib/server/jobs");
-    const first = startJob("test", "sleep", ["10"]);
+    const first = startJob("test", "npx", ["sleep", "10"]);
     expect("id" in first).toBe(true);
     // first はまだ close していない (running)。
-    const second = startJob("test", "echo", ["x"]);
+    const second = startJob("test", "npx", ["echo", "x"]);
     expect("error" in second).toBe(true);
     // spawn は 1 回しか呼ばれない (2 個目は起動されない)。
     expect(spawnMock).toHaveBeenCalledTimes(1);
@@ -90,18 +100,18 @@ describe("startJob", () => {
 
   it("先行ジョブ完了後は次のジョブを起動できる", async () => {
     const { startJob, getJob } = await import("@/lib/server/jobs");
-    const first = startJob("test", "echo", ["1"]);
+    const first = startJob("test", "npx", ["echo", "1"]);
     if (!("id" in first)) throw new Error("expected id");
     (spawnMock.mock.results[0].value as FakeChild).emit("close", 0);
     expect(getJob(first.id)?.status).toBe("success");
-    const second = startJob("test", "echo", ["2"]);
+    const second = startJob("test", "npx", ["echo", "2"]);
     expect("id" in second).toBe(true);
     expect(spawnMock).toHaveBeenCalledTimes(2);
   });
 
   it("log は 500 行上限 (600 行流して先頭が捨てられる)", async () => {
     const { startJob, getJob } = await import("@/lib/server/jobs");
-    const r = startJob("test", "gen", []);
+    const r = startJob("test", "npx", ["gen"]);
     if (!("id" in r)) throw new Error("expected id");
     const child = spawnMock.mock.results[0].value as FakeChild;
     // 1 行ずつ 600 行を data として流す。
@@ -134,7 +144,7 @@ describe("startJob", () => {
 
   it("非 publish-x kind は exit0 でも gallery-state を更新しない", async () => {
     const { startJob } = await import("@/lib/server/jobs");
-    const r = startJob("regenerate:ogp-ranking", "sh", ["-c", "echo"]);
+    const r = startJob("regenerate:ogp-ranking", "npx", ["echo"]);
     if (!("id" in r)) throw new Error("expected id");
     (spawnMock.mock.results[0].value as FakeChild).emit("close", 0);
     expect(readGalleryState(root).lastPublishXSuccess).toBeUndefined();
@@ -142,11 +152,59 @@ describe("startJob", () => {
 
   it("globalThis singleton: 再 import してもジョブレジストリが維持される", async () => {
     const mod1 = await import("@/lib/server/jobs");
-    const r = mod1.startJob("test", "echo", ["x"]);
+    const r = mod1.startJob("test", "npx", ["echo", "x"]);
     if (!("id" in r)) throw new Error("expected id");
     // resetModules 後の再 import でも globalThis 経由で同じ registry を見る。
     vi.resetModules();
     const mod2 = await import("@/lib/server/jobs");
     expect(mod2.getJob(r.id)?.id).toBe(r.id);
+  });
+
+  it("複数stepをshellなしで順番に実行する", async () => {
+    const { startJobSteps, getJob } = await import("@/lib/server/jobs");
+    const plan = ".local/plan.json";
+    mkdirSync(join(root, ".local"), { recursive: true });
+    writeFileSync(join(root, plan), "{}\n");
+
+    const r = startJobSteps("regenerate:test", [
+      { cmd: "npx", args: ["tsx", "generate.ts"] },
+      { cmd: "npx", args: ["tsx", "push.ts", "--plan", plan], requiredFile: plan },
+    ]);
+    if (!("id" in r)) throw new Error("expected id");
+
+    expect(spawnMock).toHaveBeenNthCalledWith(
+      1,
+      "npx",
+      ["tsx", "generate.ts"],
+      expect.objectContaining({ cwd: resolve(process.cwd(), "../..") }),
+    );
+    (spawnMock.mock.results[0].value as FakeChild).emit("close", 0);
+    expect(spawnMock).toHaveBeenNthCalledWith(
+      2,
+      "npx",
+      ["tsx", "push.ts", "--plan", plan],
+      expect.objectContaining({ cwd: resolve(process.cwd(), "../..") }),
+    );
+    (spawnMock.mock.results[1].value as FakeChild).emit("close", 0);
+    expect(getJob(r.id)?.status).toBe("success");
+  });
+
+  it("requiredFileが無ければ次stepを起動せずfailedにする", async () => {
+    const { startJobSteps, getJob } = await import("@/lib/server/jobs");
+    const r = startJobSteps("regenerate:test", [
+      { cmd: "npx", args: ["tsx", "generate.ts"] },
+      {
+        cmd: "npx",
+        args: ["tsx", "push.ts", "--plan", ".local/missing.json"],
+        requiredFile: ".local/missing.json",
+      },
+    ]);
+    if (!("id" in r)) throw new Error("expected id");
+
+    (spawnMock.mock.results[0].value as FakeChild).emit("close", 0);
+
+    expect(spawnMock).toHaveBeenCalledTimes(1);
+    expect(getJob(r.id)?.status).toBe("failed");
+    expect(getJob(r.id)?.log.some((line) => line.includes("required file missing"))).toBe(true);
   });
 });
