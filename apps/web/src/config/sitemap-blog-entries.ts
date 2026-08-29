@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-08-29
- * 件数: blog 457 / tag 62 / survey 81
+ * 件数: blog 458 / tag 62 / survey 81
  */
 
 export interface SitemapBlogEntry {
@@ -389,6 +389,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "sea-bream-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "self-financing-ratio-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "semiconductor-electronics-regional-map", lastModified: "2026-03-06" },
+  { slug: "sex-ratio-total-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "shiga-food-culture", lastModified: "2026-07-10" },
   { slug: "shimane-food-culture", lastModified: "2026-07-10" },
   { slug: "shizuoka-food-culture", lastModified: "2026-07-10" },
