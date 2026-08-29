@@ -41,6 +41,9 @@ const BASELINE_PATH = path.resolve(
 const SCAN_ROOTS = [".claude", "docs", ".github", "apps", "packages"];
 const SCAN_FILES = ["CLAUDE.md"]; // ルート直下の単体ファイル
 const SCAN_EXTS = [".md", ".mdc", ".yml", ".yaml", ".json", ".cjs", ".mjs", ".js", ".ts"];
+// 完了時点の gate コマンドを保存する履歴。公開後に一時 outbox が消えるのは正常なので、
+// 現行ドキュメントへの導線としては扱わない。
+const HISTORICAL_EVIDENCE_FILES = new Set([".claude/state/backlog-loop/ledger.json"]);
 
 // `docs/<path>.md` を抽出。非貪欲で最初の .md まで、直後に \b (拡張子の部分列誤マッチ防止)。
 // 区切り文字 (空白・括弧・引用符・句読点・バックティック等) は path に含めない。
@@ -118,6 +121,7 @@ for (const f of scanFiles) {
   if (
     relativePath === SELF ||
     relativePath === BASELINE_REL ||
+    HISTORICAL_EVIDENCE_FILES.has(relativePath) ||
     relativePath.split("/").includes("__tests__")
   ) {
     continue;

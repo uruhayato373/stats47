@@ -98,6 +98,23 @@ test(".claude/worktrees 配下の別 checkout は走査しない", (t) => {
   ]);
 });
 
+test("backlog ledgerの完了時点コマンドは現行docs参照として走査しない", (t) => {
+  const fixture = createFixture();
+  t.after(() => fs.rmSync(fixture.fixtureRoot, { recursive: true, force: true }));
+
+  const ledgerDir = path.join(fixture.fixtureRoot, ".claude/state/backlog-loop");
+  fs.mkdirSync(ledgerDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(ledgerDir, "ledger.json"),
+    JSON.stringify({ command: "check docs/21_ブログ記事原稿/published/article.md" }),
+  );
+  fs.writeFileSync(path.join(fixture.fixtureRoot, "docs/missing-known.md"), "# restored\n");
+
+  const result = runChecker(fixture, ["--json"]);
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).broken, []);
+});
+
 test("別path segment末尾のdocsをルートdocs参照と誤認しない", (t) => {
   const fixture = createFixture();
   t.after(() => fs.rmSync(fixture.fixtureRoot, { recursive: true, force: true }));
