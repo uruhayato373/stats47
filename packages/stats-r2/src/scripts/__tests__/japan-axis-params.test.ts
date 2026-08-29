@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { axisParams } from "../generate-japan-series";
+import { axisParams, generateOneMetric } from "../generate-japan-series";
 
 /**
  * e-Stat の分類軸を**取りこぼさない**ことを固定する。
@@ -49,5 +49,33 @@ describe("axisParams — e-Stat 分類軸の取りこぼし防止", () => {
       },
     });
     expect(p).toEqual({ cdCat01: "1" });
+  });
+});
+
+describe("generateOneMetric — derived採用境界", () => {
+  it("不採用metricをderived-additiveとして生成しない", async () => {
+    const result = await generateOneMetric("laspeyres-index-prefecture", {
+      write: false,
+      sourceMode: "derived-additive",
+    });
+
+    expect(result).toEqual({
+      ok: false,
+      metricKey: "laspeyres-index-prefecture",
+      reason: "derived-additiveとして採用済みの判断がない",
+    });
+  });
+
+  it("未採用のderived-ratioを生成しない", async () => {
+    const result = await generateOneMetric("real-disposable-income", {
+      write: false,
+      sourceMode: "derived-ratio",
+    });
+
+    expect(result).toEqual({
+      ok: false,
+      metricKey: "real-disposable-income",
+      reason: "derived-ratioは未採用・未実装",
+    });
   });
 });

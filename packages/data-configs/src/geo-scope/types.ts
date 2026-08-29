@@ -41,5 +41,9 @@ export function isMunicipalityStatisticsScope(
 /** e-Stat の全国行 areaCode。 */
 export const JAPAN_NATIONAL_AREA_CODE = '00000';
 
+/** 47都道府県が完全に揃う年だけを加算する全国値recipe。 */
+export const JAPAN_DERIVED_ADDITIVE_RECIPE_KEY =
+  'sum-complete-prefecture-series-v1';
+
 /** 都道府県コード (01000〜47000)。 */
 export const PREFECTURE_AREA_CODE_RE = /^(0[1-9]|[1-3][0-9]|4[0-7])000$/;

@@ -10,7 +10,7 @@
  *
  * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28, 2026-W29, 2026-W30, 2026-W31, 2026-W32, 2026-W33, 2026-W34
  *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124 / 2026-W29: 1136 / 2026-W30: 1167 / 2026-W31: 1168 / 2026-W32: 1165 / 2026-W33: 1181 / 2026-W34: 1294
- * 和集合: 2167 キー (INDEXABLE +0 / KNOWN +663 / INDEXABLE 総数 336 / KNOWN 総数 2167)
+ * 和集合: 2163 キー (INDEXABLE +0 / KNOWN +663 / INDEXABLE 総数 336 / KNOWN 総数 2163)
  * 生成日: 2026-08-28
  *
  * 安全弁: url-policy.ts shouldIncludeInSitemap は本セットが空の場合 KNOWN 全件に
@@ -779,7 +779,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "hat-consumption-quantity",
   "health-center-expenses-prefecture",
   "health-checkup-consumption-expenditure",
-  "health-checkup-rate-lifestyle-diseases",
   "health-checkup-recipients",
   "health-consumables-consumption-expenditure",
   "health-insurance-premium-consumption-expenditure",
@@ -972,7 +971,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "kidney-failure-death-rate",
   "kindergarten-count-per-100k-3-5",
   "kindergarten-education-cost-per-student",
-  "kindergarten-education-diffusion-rate",
   "kindergarten-expenses-prefecture",
   "kindergarten-students-per-teacher",
   "kindergarten-teacher-annual-income",
@@ -1255,7 +1253,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "nurse-salary",
   "nursery-children-per-nursery-teacher",
   "nursery-count-per-100k-0-5",
-  "nursery-education-diffusion-rate",
   "nursery-teacher-annual-income",
   "nursery-utilization-rate",
   "nurses-general-hospital-per-100beds",
@@ -1514,7 +1511,6 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "port-count",
   "port-entry-vessel-count",
   "port-inbound-ships",
-  "port-passengers-total",
   "port-ships-tonnage",
   "port-vehicle-ferry",
   "post-office-count",

@@ -70,5 +70,5 @@ export const healthCheckupRateLifestyleDiseases: MetricConfig = {
   },
   "seoTitle": "生活習慣病健康診断受診率ランキング都道府県【2023年】｜1位福岡県（0.2％）",
   "seoDescription": "2023年の生活習慣病健康診断受診率の都道府県別ランキング。1位福岡県（0.2％）、最下位沖縄県（0％）で地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

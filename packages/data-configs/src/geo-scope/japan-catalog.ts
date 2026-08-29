@@ -1,11 +1,11 @@
 /**
  * `/japan` の git TS catalog (GEO-SCOPE-SEPARATION-01 WP4/WP6)。
  *
- * ★採用条件: `official-candidate` (00000 行が live-audit で存在確認済み) の中から、
+ * ★採用条件: official は `official-candidate` (00000 行が live-audit で存在確認済み) の中から、
  *   `generateOneMetric()` (実際の生成コアと同一ロジック) で値レベル照合し、
- *   `buildJapanSeriesRows` が実際に ≥1 件の有効な年を返した metric だけをここに追加する
- *   (doc 43 §4「official = e-Statの00000行を使う」+ WP4/WP6ゲート「official確認できた
- *   metricだけを採用」)。unsupported/unknownは載せない。
+ *   `buildJapanSeriesRows` が実際に ≥1 件の有効な年を返した metric だけを追加する。
+ *   derived は `JAPAN_DERIVED_METRIC_DECISIONS` で根拠・recipeを固定し、同じ生成器の
+ *   dry-runを通った採用分だけを追加する。unsupported/unknownは載せない。
  * ★既知の discontinuity (`health-checkup-rate-lifestyle-diseases` = 2017年以降 全国値 0%、
  *   `.claude/todo/backlog.md` `[HEALTH-CHECKUP-RATE-RETIRE-01]`) は値レベル照合を通っても
  *   意図的に除外する (doc 43 §11 停止条件: 「極端な不連続」)。
@@ -20,6 +20,8 @@
  * の metrics を live-audit と突合し official 候補を機械抽出) →
  * `packages/stats-r2/src/scripts/verify-japan-candidates.ts` (候補ごとに実 e-Stat fetch で
  * 値レベル検証)。詳細は `.claude/todo/backlog.md` の GEO-SCOPE-SEPARATION-01 WP6 完了note。
+ * 2026-08-28 に unknown-non-estat 9件を追加審査し、加算可能な4件を採用した。
+ * 判断SSOTは `japan-derived-metrics.ts`。
  */
 
 export interface JapanCatalogMetric {
@@ -122,6 +124,10 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       {
         metricKey: "fishery-output-value",
         shortLabel: "漁業産出額",
+      },
+      {
+        metricKey: "fishing-port-count-ksj",
+        shortLabel: "漁港数",
       },
     ],
   },
@@ -452,6 +458,8 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       { metricKey: "jr-passenger-transport", shortLabel: "JR輸送人員" },
       { metricKey: "private-railway-passenger-transport", shortLabel: "民鉄輸送人員" },
       { metricKey: "jr-freight-shipment", shortLabel: "JR貨物発送量" },
+      { metricKey: "railway-passengers", shortLabel: "鉄道駅乗降客数" },
+      { metricKey: "railway-station-count", shortLabel: "鉄道駅数" },
     ],
   },
   "real-income": {
@@ -642,6 +650,10 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
       {
         metricKey: "average-road-traffic-volume",
         shortLabel: "道路平均交通量",
+      },
+      {
+        metricKey: "roadside-station-count",
+        shortLabel: "道の駅数",
       },
     ],
   },

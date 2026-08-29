@@ -78,11 +78,6 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "role": "context"
     },
     {
-      "rankingKey": "health-checkup-rate-lifestyle-diseases",
-      "shortLabel": "健診受診率",
-      "role": "secondary"
-    },
-    {
       "rankingKey": "psychiatric-hospital-count-per-100k",
       "shortLabel": "精神科病院数",
       "role": "context"
@@ -156,41 +151,6 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "医療利用",
-      "sortOrder": 0
-    },
-    {
-      "componentKey": "theme-health-lifestyle-trend",
-      "componentType": "line-chart",
-      "title": "生活習慣病死亡率と健診受診率の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "deaths-lifestyle-diseases-per-100k"
-          },
-          {
-            "metricKey": "health-checkup-rate-lifestyle-diseases"
-          }
-        ],
-        "labels": [
-          "生活習慣病死亡率",
-          "健診受診率"
-        ],
-        "seriesColors": [
-          "danger",
-          "improve"
-        ]
-      },
-      "relatedRankingKeys": [
-        "deaths-lifestyle-diseases-per-100k",
-        "health-checkup-rate-lifestyle-diseases"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": null,
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "健康",
       "sortOrder": 0
     },
     {
