@@ -1,6 +1,76 @@
 {
-  "updated": "2026-06-22",
+  "updated": "2026-08-29",
   "drafts": {
+    "a-agricultural-employment-population": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-agricultural-employment-population",
+      "status": "draft"
+    },
+    "a-agricultural-output": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-agricultural-output",
+      "status": "draft"
+    },
+    "a-average-temperature": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-average-temperature",
+      "status": "draft"
+    },
+    "a-avg-propensity-to-consume-worker-households": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-avg-propensity-to-consume-worker-households",
+      "status": "draft"
+    },
+    "a-consumption-expenditure-multi-person-households-per-month": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-consumption-expenditure-multi-person-households-per-month",
+      "status": "draft"
+    },
+    "a-current-liabilities-balance-multi-person-households-per-household": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-current-liabilities-balance-multi-person-households-per-household",
+      "status": "draft"
+    },
+    "a-day-time-population": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-day-time-population",
+      "status": "draft"
+    },
+    "a-electricity-generation-capacity": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-electricity-generation-capacity",
+      "status": "draft"
+    },
+    "a-general-households": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-general-households",
+      "status": "draft"
+    },
+    "a-late-elderly-medical-expense-per-insured": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-late-elderly-medical-expense-per-insured",
+      "status": "draft"
+    },
+    "a-minimum-wage-by-region": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-minimum-wage-by-region",
+      "status": "draft"
+    },
+    "a-number-of-establishments-manufacturing": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-number-of-establishments-manufacturing",
+      "status": "draft"
+    },
+    "a-room-utilization-rate": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-room-utilization-rate",
+      "status": "draft"
+    },
+    "a-total-fertility-rate": {
+      "vertical": "stats47-note",
+      "r2_path": "note/stats47-note/a-total-fertility-rate",
+      "status": "draft"
+    },
     "A-laborwage-commute-time-prefecture": {
       "vertical": "stats47-note",
       "r2_path": "note/stats47-note/A-laborwage-commute-time-prefecture",
