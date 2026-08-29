@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "tuna-consumption-quantity",
+  "pair": "national-medical-expense-per-person",
+  "pearsonR": -0.6556568386066486,
+  "partialRPopulation": -0.6187129539371173,
+  "unit": "g × 千円",
+  "label": "まぐろ消費量 と 1人当たりの国民医療費 の関係",
+  "source": "r2:app/correlation/by-ranking-key/tuna-consumption-quantity.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug tuna-medical-expense --base tuna-consumption-quantity --pair national-medical-expense-per-person --data-name tuna-medical"
+}
