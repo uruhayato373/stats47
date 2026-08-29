@@ -3,15 +3,15 @@
   "gscWeek": "2026-W34",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
-    "total": 142,
+    "total": 143,
     "pending": 139,
     "inProgress": 2,
-    "done": 1,
+    "done": 2,
     "mustWritePending": 20,
     "byArchetype": {
       "B": 40,
       "D2": 29,
-      "A": 40,
+      "A": 41,
       "G": 15,
       "F": 15
     }
@@ -4143,6 +4143,33 @@
       "in_progress_at": "2026-07-09",
       "done_at": "2026-07-09",
       "published_slug": "vacant-housing-aging-correlation"
+    },
+    {
+      "topicKey": "reference-sex-ratio-total",
+      "archetype": "A",
+      "metricKeys": [
+        "sex-ratio-total"
+      ],
+      "label": "人口性比",
+      "source": "reference-inventory",
+      "scores": {
+        "queryGap": 0,
+        "seasonality": 0,
+        "surprise": 0.6,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "rankingUrl": "/ranking/sex-ratio-total",
+        "sourceInventory": ".claude/state/source-inventory/japan-zue/2025-26/inventory.json"
+      },
+      "suggestedTitle": "人口性比が100を超える県はなぜ少ないのか",
+      "combinedScore": 0.22,
+      "lane": "reference-expansion",
+      "status": "done",
+      "priority": null,
+      "in_progress_at": "2026-08-29",
+      "done_at": "2026-08-29",
+      "published_slug": "sex-ratio-total-prefecture-gap"
     }
   ]
 }
