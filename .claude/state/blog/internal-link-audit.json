@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-22T19:20:20.303Z",
+  "generatedAt": "2026-08-29T21:32:42.055Z",
   "site": "https://stats47.jp",
-  "articles": 434,
-  "totalLinks": 2626,
+  "articles": 459,
+  "totalLinks": 2751,
   "absoluteLinks": 129,
-  "uniqueLinks": 790,
+  "uniqueLinks": 810,
   "byType": {
     "areas": {
       "total": 47,
@@ -19,13 +19,54 @@
       "broken": 0
     },
     "ranking": {
-      "total": 543,
-      "broken": 0
+      "total": 562,
+      "broken": 4
     },
     "themes": {
-      "total": 10,
+      "total": 11,
       "broken": 0
     }
   },
-  "broken": []
+  "broken": [
+    {
+      "href": "/ranking/elderly-population-ratio",
+      "status": 410,
+      "title": "",
+      "ok": false,
+      "reason": "HTTP 410",
+      "referencedBy": [
+        "half-population-elderly-municipalities"
+      ]
+    },
+    {
+      "href": "/ranking/foreign-population-per-100k",
+      "status": 410,
+      "title": "",
+      "ok": false,
+      "reason": "HTTP 410",
+      "referencedBy": [
+        "foreign-resident-five-percent-municipalities"
+      ]
+    },
+    {
+      "href": "/ranking/population-density-habitable",
+      "status": 410,
+      "title": "",
+      "ok": false,
+      "reason": "HTTP 410",
+      "referencedBy": [
+        "population-density-urbanization"
+      ]
+    },
+    {
+      "href": "/ranking/prefectural-income-per-capita",
+      "status": 410,
+      "title": "",
+      "ok": false,
+      "reason": "HTTP 410",
+      "referencedBy": [
+        "ai-claude-code-pref-analysis"
+      ]
+    }
+  ]
 }
