@@ -4,7 +4,7 @@ import pixelmatch from "pixelmatch";
 import { PNG } from "pngjs";
 import sharp from "sharp";
 import { expect } from "vitest";
-import { prepareSvgForDeterministicRender } from "./render-test-contract";
+import { svgToPng } from "./svg-to-png";
 
 const GOLDEN_DIR = resolve(__dirname, "../__golden__");
 const ARTIFACT_DIR = resolve(process.env.RENDER_ARTIFACT_DIR ?? "/tmp/stats47-render-artifacts");
@@ -24,11 +24,13 @@ export async function compareWithGolden(
   if (!existsSync(GOLDEN_DIR)) mkdirSync(GOLDEN_DIR, { recursive: true });
   const goldenPath = resolve(GOLDEN_DIR, `${name}.png`);
 
-  // 実際のバッファを PNG に変換（SVG が渡された場合も考慮）
-  const source = actualBuffer.toString("utf8").startsWith("<svg")
-    ? Buffer.from(prepareSvgForDeterministicRender(actualBuffer.toString("utf8")))
-    : actualBuffer;
-  const actualPngBuffer = await sharp(source).resize(width, height).png().toBuffer();
+  // Sharp/librsvg は Linux で SVG 内の WOFF2 を解決せず日本語が欠落する。
+  // SVG は pinned TTF を直接渡せる resvg で描画し、OS font fallback を完全に無効化する。
+  // PNG 入力だけは従来どおり Sharp で正規化する。
+  const source = actualBuffer.toString("utf8");
+  const actualPngBuffer = source.startsWith("<svg")
+    ? await svgToPng(source, width, height)
+    : await sharp(actualBuffer).resize(width, height).png().toBuffer();
   
   // ゴールデン作成・更新モード
   if (UPDATE_GOLDEN || !existsSync(goldenPath)) {

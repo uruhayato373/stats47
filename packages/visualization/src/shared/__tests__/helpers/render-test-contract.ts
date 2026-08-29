@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
+import { createRequire } from "node:module";
 import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
 
 export const OPT_IN_RENDER_TEST_FILES = [
   "src/d3/components/BarChart/__tests__/BarChartImage.test.tsx",
@@ -23,23 +24,19 @@ export const DETERMINISTIC_RENDER_ENV = Object.freeze({
   devicePixelRatio: 1,
 });
 
+const moduleRequire = createRequire(import.meta.url);
+const notoSansJpRoot = dirname(
+  moduleRequire.resolve("@expo-google-fonts/noto-sans-jp/package.json"),
+);
+
 const FONT_ASSETS = [
   {
-    path: resolve(
-      __dirname,
-      "../../../../../../apps/remotion/public/buzz-map/fonts/noto-sans-jp-latin-400-normal.woff2",
-    ),
-    sha256: "058bfeaaa344201b26733e369258f948b4a8cf445a90300a1ac139cf625d779c",
-    unicodeRange:
-      "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD",
+    path: join(notoSansJpRoot, "400Regular/NotoSansJP_400Regular.ttf"),
+    sha256: "d930d5d52d15231c283089760f84584272ad5e37e14607ba0d19c798e7a9caec",
   },
   {
-    path: resolve(
-      __dirname,
-      "../../../../../../apps/remotion/public/buzz-map/fonts/noto-sans-jp-japanese-400-normal.woff2",
-    ),
-    sha256: "3b6390a57bcaa305baed97397c61e332701aee6bf312ad0ff8c16cab7d821922",
-    unicodeRange: "U+3000-30FF,U+31F0-31FF,U+3400-4DBF,U+4E00-9FFF,U+F900-FAFF,U+FF00-FFEF",
+    path: join(notoSansJpRoot, "700Bold/NotoSansJP_700Bold.ttf"),
+    sha256: "c5b7b9d6a6eb682b0d4e6bbb38509575fd2759a28f147daa74714d1359a7909e",
   },
 ] as const;
 
@@ -47,14 +44,14 @@ export function renderTestExcludes(optedIn: boolean): string[] {
   return optedIn ? [] : [...OPT_IN_RENDER_TEST_FILES];
 }
 
-function verifiedFontData(): Array<{ data: string; unicodeRange: string }> {
+export function deterministicRenderFontFiles(): string[] {
   return FONT_ASSETS.map((asset) => {
     const bytes = readFileSync(asset.path);
     const actual = createHash("sha256").update(bytes).digest("hex");
     if (actual !== asset.sha256) {
       throw new Error(`render font asset drift: ${asset.path} (${actual})`);
     }
-    return { data: bytes.toString("base64"), unicodeRange: asset.unicodeRange };
+    return asset.path;
   });
 }
 
@@ -69,7 +66,7 @@ export function assertDeterministicRenderEnvironment(): void {
       throw new Error(`render environment ${key} must be ${value}, got ${String(process.env[key])}`);
     }
   }
-  verifiedFontData();
+  deterministicRenderFontFiles();
 }
 
 export function installDeterministicDomEnvironment(): void {
@@ -98,12 +95,7 @@ export function installDeterministicDomEnvironment(): void {
 
 export function prepareSvgForDeterministicRender(svg: string): string {
   if (!svg.startsWith("<svg")) return svg;
-  const fontFaces = verifiedFontData()
-    .map(
-      ({ data, unicodeRange }) =>
-        `@font-face{font-family:'Stats47Render';src:url(data:font/woff2;base64,${data}) format('woff2');font-style:normal;font-weight:400;unicode-range:${unicodeRange};}`,
-    )
-    .join("");
-  const style = `<defs><style>${fontFaces}svg,text{font-family:'Stats47Render',sans-serif!important;}</style></defs>`;
+  deterministicRenderFontFiles();
+  const style = `<defs><style>svg,text{font-family:'Noto Sans JP',sans-serif!important;}</style></defs>`;
   return svg.replace(/<svg([^>]*)>/, `<svg$1>${style}`);
 }

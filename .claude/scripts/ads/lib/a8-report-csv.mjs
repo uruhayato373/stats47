@@ -213,6 +213,16 @@ export function resolveProgram(programRaw, programIdMap, programId = null) {
   return null;
 }
 
+/**
+ * allowlist で stats47 案件と確認できた A8 programId だけを安定参照へ変換する。
+ * programIdMap 未登録の ID を programRef に昇格させない（別サイト成果の混入防止）。
+ */
+export function resolveProgramRef(programRaw, programIdMap, programId = null) {
+  const normalizedId = typeof programId === "string" ? programId.trim() : "";
+  if (!normalizedId || !resolveProgram(programRaw, programIdMap, normalizedId)) return null;
+  return `a8:${normalizedId}`;
+}
+
 /** 合計行など、集計対象にしてはいけない行か。 */
 const isTotalRow = (v) => {
   const s = String(v ?? "").trim();
@@ -398,7 +408,7 @@ export const KEY = {
   monthly: (r) => r.month,
   daily: (r) => r.date,
   programPeriod: (r) => `${r.period ?? "current"}::${r.programId ?? r.programRaw}`,
-  results: (r) => `${r.month}::${r.program}`,
+  results: (r) => `${r.month}::${r.programRef ?? r.program}`,
 };
 
 /**
@@ -473,7 +483,8 @@ export function toResultsRecords(programRows, { singleMonth = null, sharedProgra
       month,
       program: r.program,
       programId: r.programId ?? null,
-      programRef: r.programId ? `a8:${r.programId}` : null,
+      programRef: r.programRef ?? (r.programId ? `a8:${r.programId}` : null),
+      scope: "account-wide",
       clicks: r.clicks ?? 0,
       conversions: r.conversions ?? 0,
       approved: r.approved ?? 0,

@@ -9,9 +9,8 @@ import {
 /**
  * ★環境依存のレンダリングテスト (2026-07-31)。
  *
- * golden PNG 比較は sharp でラスタライズしてピクセル差分を取るため、**インストール
- * されているフォントに依存**する。golden を生成したマシン以外では 500px の許容差を
- * 超えて落ちる (このコンテナで実測 11 件)。`Scatterplot.test.tsx` は幅を props で
+ * golden PNG 比較は resvg に固定TTFを直接渡してラスタライズし、OSフォントを読まない。
+ * `Scatterplot.test.tsx` は幅を props で
  * 渡さない経路で jsdom の clientWidth が 0 になり circle が 1 つも描かれない。
  *
  * これらは packages/* のテストが CI にも pre-commit にも配線されていなかった間、

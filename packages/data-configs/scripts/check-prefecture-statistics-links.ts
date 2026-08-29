@@ -1,6 +1,10 @@
 import { PREFECTURE_STATISTICS_CATALOG } from "../src/prefecture-statistics-catalog";
+import {
+  isAlertVerdict,
+  probeLinkWithRetry,
+  type LinkProbeTarget,
+} from "../src/link-audit/link-check-core";
 
-const REQUEST_TIMEOUT_MS = 15_000;
 const MAX_CONCURRENCY = 6;
 const resources = PREFECTURE_STATISTICS_CATALOG.flatMap((entry) =>
   entry.resources.map((resource) => ({
@@ -10,20 +14,17 @@ const resources = PREFECTURE_STATISTICS_CATALOG.flatMap((entry) =>
 );
 
 async function checkResource(resource: (typeof resources)[number]): Promise<string | null> {
-  try {
-    const response = await fetch(resource.url, {
-      redirect: "follow",
-      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-      headers: { "user-agent": "stats47-link-check/1.0" },
-    });
-    if (response.status >= 400 && response.status !== 403) {
-      return `${resource.prefectureName}: HTTP ${response.status} ${resource.url}`;
-    }
-    return null;
-  } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : String(error);
-    return `${resource.prefectureName}: ${message} ${resource.url}`;
-  }
+  const target: LinkProbeTarget = {
+    targetId: `prefecture-statistics:${resource.id}`,
+    label: resource.prefectureName,
+    url: resource.url,
+    verifiedAt: resource.lastVerifiedAt,
+    alertOwner: "open-data-curator",
+  };
+  const result = await probeLinkWithRetry(target, { userAgent: "stats47-link-check/2.0" });
+  return isAlertVerdict(result.verdict)
+    ? `[${result.verdict}] ${resource.prefectureName}: ${result.detail} ${resource.url} attempts=${result.attempts}`
+    : null;
 }
 
 async function main(): Promise<void> {

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T07:38:46.530Z",
+  "updatedAt": "2026-08-28T08:22:41.787Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -209,10 +209,10 @@
       "completedAt": "2026-08-17T12:55:52.716Z"
     },
     "GOOGLE-ADMIN-AUTOMATION-01": {
-      "class": "needs-owner",
-      "status": "open",
-      "sourceFile": null,
-      "title": null,
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "Google管理操作のAPI/UI境界整理とCI化",
       "attempts": [
         {
           "at": "2026-08-17T12:57:40.899Z",
@@ -226,6 +226,26 @@
           "evidence": "機械側の完了条件は実測で達成 (google-admin:test 33 pass / metrics:test 76 pass / docs:check exit 0 / schedule は audit のみ / mutation は environment: google-admin-production)。残るのは AdSense OAuth token 復旧・GitHub Environment 作成・GA4 admin credential 登録で全てオーナー工程。status を in-progress → blocked-owner-ap",
           "failReason": "needs-owner",
           "followUps": []
+        },
+        {
+          "at": "2026-08-28T06:18:40.810Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run google-admin:test",
+              "npm run metrics:test",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "protected Environmentとreviewerは存在、専用secretは未登録。37+82 tests green。オーナーがカード撤回し、未登録7 dimensionはanalytics台帳に残す。外部mutationなし。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -233,8 +253,14 @@
         "lastReason": null,
         "since": null
       },
-      "reclassifiedFrom": [],
-      "completedAt": null
+      "reclassifiedFrom": [
+        {
+          "from": "needs-owner",
+          "to": "stale",
+          "at": "2026-08-28T06:18:40.810Z"
+        }
+      ],
+      "completedAt": "2026-08-28T06:18:40.810Z"
     },
     "DATA-REFRESH-HEALTH-01": {
       "class": "misconception-close",
@@ -2190,7 +2216,7 @@
     },
     "BACKLOG-LOOP-PHASE23-01": {
       "class": "impl-large",
-      "status": "open",
+      "status": "completed",
       "sourceFile": ".claude/todo/backlog.md",
       "title": "バックログ処理ループの学習 (Phase 2) と指標バックログ取り込み (Phase 3)",
       "attempts": [
@@ -2206,6 +2232,65 @@
           "evidence": "Phase2(update-routing-policy.mjs+週次workflow+guards)とPhase3(indicator-expansion class新設+estat実在検証+config生成)は新規script/workflow/新classを跨ぐ多段実装。impl-largeでdraft PR経路が要るためCI日次runでは着手せずskip",
           "failReason": "class-needs-pr",
           "followUps": []
+        },
+        {
+          "at": "2026-08-28T08:15:55.797Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test:backlog-loop",
+              "npm run docs:check",
+              "node .claude/scripts/backlog-loop/verify-backlog-run.mjs --base d55bc9a167fa358eb5ab139d19541866652a2add"
+            ],
+            "pass": true
+          },
+          "evidence": "Phase2/3実装、policy実測更新、prompt-evals出力、83 tests/docs green。削除runはworkflow/policy禁止パスを含みverify赤のため、実装着地後の別runへ分離。",
+          "failReason": "protected-control-plane-changes-require-separate-removal-run",
+          "followUps": []
+        },
+        {
+          "at": "2026-08-28T08:16:09.703Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test:backlog-loop",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "訂正: 直前attemptはverifyをgate一覧に含めたが実際は赤。greenは83 tests/docsのみ。Phase2/3実装は完了、カード削除はcontrol-plane着地後の別runへ分離。",
+          "failReason": "verify-failed-protected-control-plane-paths",
+          "followUps": []
+        },
+        {
+          "at": "2026-08-28T08:22:41.787Z",
+          "runId": null,
+          "model": "fable",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run test:backlog-loop",
+              "node .claude/scripts/backlog-loop/update-routing-policy.mjs --dry-run --now 2026-08-28T00:00:00.000Z",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "実装を303356b9eで先に確定。policy v2、minSamples実測差分、prompt-evals、週次提案workflow、indicator-expansion=fable/hard-agent/draft-prを確認。83 tests・dry-run・docs green。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -2214,7 +2299,7 @@
         "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-28T08:22:41.787Z"
     },
     "COCONALA-PRODUCT-FACTORY-01": {
       "class": "impl-small",
@@ -2490,6 +2575,486 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-28T03:12:50.666Z"
+    },
+    "MUNICIPALITY-SCOPE-SEPARATION-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "市区町村テーマ・ランキングを独立した地理スコープへ分離する",
+      "attempts": [
+        {
+          "at": "2026-08-28T06:18:39.638Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run validate:municipalities --workspace=@stats47/data-configs",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "WP7公開済み。検証は入力1913・公開可能1718・候補184・公開pilot1でgreen。WP8判定日2026-09-21/10-19をdoc44へ移し、実装カードを閉鎖。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T06:18:39.638Z"
+    },
+    "JAPAN-DERIVED-METRICS-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "/japan に derived レシピ由来の指標を足せるか判定する",
+      "attempts": [
+        {
+          "at": "2026-08-28T06:18:42.457Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run packages/data-configs/src/geo-scope/__tests__/build-japan-series.test.ts packages/data-configs/src/geo-scope/__tests__/japan-derived-metrics.test.ts packages/data-configs/src/geo-scope/__tests__/japan-catalog.test.ts packages/stats-r2/src/scripts/__tests__/japan-axis-params.test.ts",
+              "npm run type-check --workspace=@stats47/data-configs",
+              "npm run type-check --workspace=@stats47/stats-r2"
+            ],
+            "pass": true
+          },
+          "evidence": "9候補を4採用/5不採用に固定。採用は47県完全年だけ加算し4件dry-run green。対象4 files/30 testsとdata-configs/stats-r2型検査green。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T06:18:42.457Z"
+    },
+    "MIGRATION-FLOW-WEEKLY-REOPEN-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "migration-flow-weekly の週次 IG 投稿が停止したまま",
+      "attempts": [
+        {
+          "at": "2026-08-28T06:18:43.828Z",
+          "runId": null,
+          "model": "none",
+          "effort": "none",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "rg -n MIGRATION-FLOW-IG-01 .claude/todo/backlog.md",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "同一停止事象と継続/停止判断は親カードMIGRATION-FLOW-IG-01が保持。再開カードは重複のため親へ統合し削除。workflow変更・投稿なし。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T06:18:43.828Z"
+    },
+    "VALUE-DISTRIBUTION-UNVERIFIED-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "値分布の未検証 2 件の裏取り",
+      "attempts": [
+        {
+          "at": "2026-08-28T06:18:45.194Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run src/__tests__/verified-value-profiles.test.ts --root packages/data-configs",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "e-Stat定義と公開R2を突合。幼稚園費は2022年47行/数値0が32、鉄道投資は2006年47行/数値0が22。profile追加後の対象scanは2/2 verified、8 tests green。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T06:18:45.194Z"
+    },
+    "BACKLOG-LOOP-PERMISSION-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-28T06:53:36.573Z",
+          "runId": null,
+          "model": "gpt-5.6-sol",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run view 32998730602 --json databaseId",
+              "status",
+              "conclusion",
+              "createdAt",
+              "updatedAt",
+              "workflowName",
+              "url",
+              "node --test .claude/scripts/lib/__tests__/summarize-claude-execution.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "後続の Backlog Loop Daily run 32998730602 が success。さらに github-actions[bot] commit 2deff5e5b が ledger を書き換えており、元の書込み不能症状は再現せず解消済み。summarizer 22 tests も pass。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T06:53:36.573Z"
+    },
+    "HEALTH-CHECKUP-RATE-RETIRE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-28T06:53:37.471Z",
+          "runId": null,
+          "model": "gpt-5.6-sol",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run validate:years --workspace=@stats47/data-configs",
+              "npm run validate:config --workspace=@stats47/data-configs",
+              "npm run validate:catalog --workspace=@stats47/data-configs",
+              "npx vitest run src/config/__tests__/ranking-key-consistency.test.ts --root apps/web",
+              "npm run type-check --workspace=@stats47/data-configs",
+              "npm run type-check --workspace apps/web"
+            ],
+            "pass": true
+          },
+          "evidence": "2023年値は47県中44県が0、公式式は保健所実施分/40歳以上人口で一般的な健診受診率ではないと確認。metricをinactive化しGONE登録、KNOWN/sitemap/theme/product生成参照を除去。対象validation/test/type-check pass。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T06:53:37.471Z"
+    },
+    "PORT-PASSENGERS-MISSING-COASTAL-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-28T06:53:38.609Z",
+          "runId": null,
+          "model": "gpt-5.6-sol",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run validate:years --workspace=@stats47/data-configs",
+              "npm run validate:config --workspace=@stats47/data-configs",
+              "npm run validate:catalog --workspace=@stats47/data-configs",
+              "npx vitest run src/config/__tests__/ranking-key-consistency.test.ts --root apps/web",
+              "npm run type-check --workspace=@stats47/data-configs",
+              "npm run type-check --workspace apps/web"
+            ],
+            "pass": true
+          },
+          "evidence": "公式2023 Excelで都道府県の計セルが空欄でも内訳値が存在するため、計区分だけの現metricが沿岸県を欠落させると確認。metricをinactive化しGONE登録、KNOWN/sitemap/theme/product生成参照を除去。対象validation/test/type-check pass。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T06:53:38.609Z"
+    },
+    "SSDS-EDU-DIFFUSION-CODE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "教育普及度 2 指標の代替コード特定 (または退役)",
+      "attempts": [
+        {
+          "at": "2026-08-28T07:28:48.090Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run validate:years --workspace=@stats47/data-configs",
+              "npm run validate:config --workspace=@stats47/data-configs",
+              "npm run type-check --workspace=@stats47/data-configs",
+              "npx vitest run src/config/__tests__/ranking-key-consistency.test.ts --root apps/web",
+              "npx vitest run src/__tests__/shape-gate.test.ts --root packages/data-configs"
+            ],
+            "pass": true
+          },
+          "evidence": "e-Statの2024年項目改定表で#E0910101/#E0910102は集約項目見直し・収集不可能により削除と確認。現行算式に後継なし。2 configをinactive化しGONE追加、KNOWN/SITEMAP/product packから除外、EXPECTED_EMPTYを削除。対象検証は全てpass。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T07:28:48.090Z"
+    },
+    "CONSTRUCTION-ORDER-ALT-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "建設工事受注データの代替出典を採るか判断する",
+      "attempts": [
+        {
+          "at": "2026-08-28T07:28:57.551Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "$s=Get-Content -Raw -LiteralPath packages/data-configs/src/metrics/prime-contractor-completed-construction.ts; if($s -notmatch 0000010103 -or $s -notmatch isActive){exit 1}; Write-Output verified"
+            ],
+            "pass": true
+          },
+          "evidence": "再現証拠: 既存prime-contractor-completed-constructionはSSDS 0000010103/C3304、isActive:true、2023年までを配信。コード読解・一次資料: 候補0003126332は業種別×施工都道府県、既存は業者所在都道府県で、旧工事種類別契約額の後継ではなく近接別軸。既存ページ需要も極小のため重複近接指標を追加しないと決定。",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-08-28T07:29:28.743Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "Select-String -Quiet -Path packages/data-configs/src/metrics/prime-contractor-completed-construction.ts -Pattern 0000010103"
+            ],
+            "pass": true
+          },
+          "evidence": "先行attemptのPowerShell引用を訂正。ここに記録したexact commandをexit 0で再実行済み。既存active指標の実在と一次資料の軸差を照合し、旧系列の代替にならない近接別軸は採用しない。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T07:29:28.743Z"
+    },
+    "GINI-ALT-SOURCE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "等価可処分所得ジニ係数の代替出典",
+      "attempts": [
+        {
+          "at": "2026-08-28T07:30:33.264Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node C:\\tmp\\stats47-mid-backlog-20260828\\verify-gini.cjs",
+              "rg -n equivalized-disposable-income-gini .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "e-Stat 2019年全国家計構造調査の第7-6表 statsDataId=0003440743、等価所得構成cat01=1（等価可処分所得・OECD新基準準拠）を確定。公式Excelで47県、値0.251〜0.332、0または欠損0件を実測し、INDICATOR-CANDIDATES-01のhighへ移動。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T07:30:33.264Z"
+    },
+    "SITEMAP-BLOG-ENTRIES-DRIFT-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "ブログ公開で sitemap-blog-entries が更新されない",
+      "attempts": [
+        {
+          "at": "2026-08-28T08:14:53.976Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx scripts/generate-sitemap-blog-entries.ts --check",
+              "gh run view 32973183584"
+            ],
+            "pass": true
+          },
+          "evidence": "blog-auto-publish後のrun 32973183584成功を確認。R2基準の再チェックも blog 433/tag 60/survey 81 で一致し、PRを介さない追随経路が実動済み。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T08:14:53.976Z"
+    },
+    "BUZZ-MAP-FOLLOWUP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "buzz-map投稿とdeep-click計測",
+      "attempts": [
+        {
+          "at": "2026-08-28T08:14:57.778Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/sns/lib/__tests__/buzz-map-*.test.mjs",
+              "npx tsc --noEmit --skipLibCheck -p .claude/scripts/tsconfig.json",
+              "npx tsx .claude/scripts/sns/prepare-buzz-map-batch.ts --limit 12 --json"
+            ],
+            "pass": true
+          },
+          "evidence": "landingのmetric/year/promise、重複、単一campaign+direct attributionをdraft直前に検証し、不一致を停止。110 tests・型・dry-runがgreen。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T08:14:57.778Z"
+    },
+    "CLIMATE-SOURCE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "気候変動・猛暑・熱中症の都道府県比較",
+      "attempts": [
+        {
+          "at": "2026-08-28T08:15:00.689Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run validate:open-data-catalog --workspace packages/data-configs",
+              "npm run type-check --workspace packages/data-configs",
+              "npm run check:open-data-links --workspace packages/data-configs",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "消防庁2025確定値÷2024人口×10万を採用。47県集計で代表地点不要、maximum-temperatureと健康被害結果で非重複。catalog/type/docs/link checker exit 0。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-28T08:15:00.689Z"
     }
   }
 }

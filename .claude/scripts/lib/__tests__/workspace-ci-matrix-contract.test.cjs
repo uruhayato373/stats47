@@ -17,6 +17,7 @@ const POLICY_BY_KIND = {
   lint: "lintPolicy",
 };
 const POLICY_KINDS = Object.keys(POLICY_BY_KIND);
+const SUPPLEMENTAL_CHECK_KINDS = new Set(["render-test"]);
 const IGNORED_DIRECTORIES = new Set([
   ".git",
   ".local",
@@ -222,7 +223,21 @@ function auditWorkspaceMatrix({ inventory, registry, workflow, rootManifest, vit
       }
     }
 
-    if (checks.some((check) => !POLICY_KINDS.includes(check.kind))) {
+    for (const check of checks.filter((candidate) => SUPPLEMENTAL_CHECK_KINDS.has(candidate.kind))) {
+      const step = stepBlocks(jobBlock(workflow, check.job)).find((candidate) =>
+        isBlockingStep(candidate, check),
+      );
+      if (!step) {
+        findings.push(`${label}_${check.kind.toUpperCase().replace("-", "_")}_NOT_BLOCKING`);
+      }
+      if (!required.has(check.job)) {
+        findings.push(`${label}_${check.kind.toUpperCase().replace("-", "_")}_NOT_REQUIRED`);
+      }
+    }
+
+    if (checks.some((check) =>
+      !POLICY_KINDS.includes(check.kind) && !SUPPLEMENTAL_CHECK_KINDS.has(check.kind)
+    )) {
       findings.push(`${label}_UNKNOWN_PR_CHECK`);
     }
   }
@@ -323,6 +338,27 @@ test("required jobの集約切断を検出する", () => {
     auditWorkspaceMatrix(fixtureInput({ workflow: fixtureWorkflow({ needs: "static-gates, type-check, build" }) }))
       .includes("A_TEST_NOT_REQUIRED"),
   );
+});
+
+test("補助render testもblockingかつrequiredなら受理する", () => {
+  const workspace = profile();
+  workspace.ciProfile.prChecks.push({
+    kind: "render-test",
+    job: "render",
+    command: "npm run test:render",
+  });
+  const workflow = `${fixtureWorkflow({ needs: "static-gates, type-check, test, build, render" })}\n  render:\n    steps:\n      - run: npm run test:render\n`;
+  assert.deepEqual(auditWorkspaceMatrix(fixtureInput({ workspace, workflow })), []);
+});
+
+test("未定義の補助check kindを検出する", () => {
+  const workspace = profile();
+  workspace.ciProfile.prChecks.push({
+    kind: "unknown-extra",
+    job: "test",
+    command: "npm run test:packages",
+  });
+  assert.ok(auditWorkspaceMatrix(fixtureInput({ workspace })).includes("A_UNKNOWN_PR_CHECK"));
 });
 
 test("inactive workspaceにPR checkが残ると検出する", () => {
