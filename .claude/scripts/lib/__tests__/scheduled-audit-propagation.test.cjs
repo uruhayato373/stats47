@@ -11,13 +11,14 @@ const PROVENANCE = path.join(ROOT, '.github/workflows/provenance-audit-weekly.ym
 const THEME = path.join(ROOT, '.github/workflows/theme-chart-audit-weekly.yml');
 
 const PROVENANCE_COMMANDS = [
-  'validate:config',
-  'validate:catalog',
-  'validate:area-databook',
-  'validate:prefecture-statistics',
-  'validate:open-data-catalog',
-  'check:prefecture-statistics-links',
-  'check:open-data-links',
+  'npm run validate:config',
+  'npm run validate:catalog',
+  'npm run validate:area-databook',
+  'npm run validate:prefecture-statistics',
+  'npm run validate:open-data-catalog',
+  'npm run check:prefecture-statistics-links',
+  'npm run check:open-data-links',
+  'node .claude/scripts/lib/check-japan-zue-evidence-inventory.mjs',
 ];
 
 function parse(source) {
@@ -35,7 +36,7 @@ function auditProvenance(source) {
   const errors = [];
   if (!check || typeof check.run !== 'string') return ['validator collector is missing'];
   for (const command of PROVENANCE_COMMANDS) {
-    const commandLine = check.run.split('\n').find((line) => line.includes(`npm run ${command}`));
+    const commandLine = check.run.split('\n').find((line) => line.includes(command));
     if (!commandLine) errors.push(`${command} is not executed`);
     else if (/\|\|\s*true/.test(commandLine)) errors.push(`${command} is fail-open`);
   }
@@ -89,7 +90,7 @@ test('[mutation] provenance validatorの|| true復活を検出する', () => {
     'npm run validate:catalog --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-catalog.log',
     'npm run validate:catalog --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-catalog.log || true',
   );
-  assert.ok(auditProvenance(mutated).includes('validate:catalog is fail-open'));
+  assert.ok(auditProvenance(mutated).includes('npm run validate:catalog is fail-open'));
 });
 
 test('[mutation] validator exit codeの未集約を検出する', () => {
