@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "cup-noodles-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "カップ麺消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/cup-noodles-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cup-noodles-consumption-expenditure-vs-fire-damage --keys cup-noodles-consumption-expenditure --data-name cup-noodles-consumption-expenditure-vs-fire-damage-prefecture-rankings",
+  "fetchedAt": "2026-08-29T07:24:47.246Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

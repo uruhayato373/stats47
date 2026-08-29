@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sex-ratio-total",
+  "year": "2024",
+  "unit": "（女=100）",
+  "label": "人口性比",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/sex-ratio-total/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tuna-consumption-quantity-vs-sex-ratio-total --keys sex-ratio-total --data-name sex-ratio-total-prefecture-rankings",
+  "fetchedAt": "2026-08-29T07:24:42.257Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

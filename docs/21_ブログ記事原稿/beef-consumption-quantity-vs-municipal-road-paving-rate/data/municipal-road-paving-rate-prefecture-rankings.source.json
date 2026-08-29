@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "municipal-road-paving-rate",
+  "year": "2023",
+  "unit": "％",
+  "label": "市町村道舗装率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/municipal-road-paving-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug beef-consumption-quantity-vs-municipal-road-paving-rate --keys municipal-road-paving-rate --data-name municipal-road-paving-rate-prefecture-rankings",
+  "fetchedAt": "2026-08-29T07:24:33.986Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

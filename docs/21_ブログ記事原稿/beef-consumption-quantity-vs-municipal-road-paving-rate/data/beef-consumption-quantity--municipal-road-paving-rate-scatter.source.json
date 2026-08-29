@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "beef-consumption-quantity",
+  "pair": "municipal-road-paving-rate",
+  "pearsonR": 0.6861681603336051,
+  "partialRPopulation": 0.6841608473878906,
+  "unit": "g × ％",
+  "label": "牛肉消費量 と 市町村道舗装率 の関係",
+  "source": "r2:app/correlation/by-ranking-key/beef-consumption-quantity.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug beef-consumption-quantity-vs-municipal-road-paving-rate --base beef-consumption-quantity --pair municipal-road-paving-rate --data-name beef-consumption-quantity--municipal-road-paving-rate"
+}

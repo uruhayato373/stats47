@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "tuna-consumption-quantity",
+  "pair": "sex-ratio-total",
+  "pearsonR": 0.6631680741804569,
+  "partialRPopulation": 0.6314428553250057,
+  "unit": "g × （女=100）",
+  "label": "まぐろ消費量 と 人口性比 の関係",
+  "source": "r2:app/correlation/by-ranking-key/tuna-consumption-quantity.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug tuna-consumption-quantity-vs-sex-ratio-total --base tuna-consumption-quantity --pair sex-ratio-total --data-name tuna-consumption-quantity--sex-ratio-total"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "average-weight-primary-school-fifth-grade-male",
+  "year": "2023",
+  "unit": "kg",
+  "label": "平均体重",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/average-weight-primary-school-fifth-grade-male/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tissue-paper-consumption-expenditure-vs-average-weight --keys average-weight-primary-school-fifth-grade-male --data-name average-weight-primary-school-fifth-grade-male-prefecture-rankings",
+  "fetchedAt": "2026-08-29T07:24:52.444Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "tissue-paper-consumption-expenditure",
+  "pair": "average-weight-primary-school-fifth-grade-male",
+  "pearsonR": 0.6664710088262479,
+  "partialRPopulation": 0.6642936920247766,
+  "unit": "円 × kg",
+  "label": "ティッシュペーパー消費支出額 と 平均体重 の関係",
+  "source": "r2:app/correlation/by-ranking-key/tissue-paper-consumption-expenditure.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug tissue-paper-consumption-expenditure-vs-average-weight --base tissue-paper-consumption-expenditure --pair average-weight-primary-school-fifth-grade-male --data-name tissue-paper-consumption-expenditure--average-weight-primary-school-fifth-grade-male"
+}

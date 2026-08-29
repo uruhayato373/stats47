@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "convenience-store-count-commercial",
+  "pair": "ratio-of-general-households-to-national",
+  "pearsonR": 0.992203415559699,
+  "partialRPopulation": 0.6152907311474605,
+  "unit": "店 × ％",
+  "label": "コンビニエンスストア店舗数 と 全国一般世帯に占める一般世帯割合 の関係",
+  "source": "r2:app/correlation/by-ranking-key/convenience-store-count-commercial.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug convenience-store-count-commercial-vs-ratio-of-general --base convenience-store-count-commercial --pair ratio-of-general-households-to-national --data-name convenience-store-count-commercial--ratio-of-general-households-to-national"
+}
