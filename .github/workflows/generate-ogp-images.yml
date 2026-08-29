@@ -77,8 +77,13 @@ jobs:
         run: |
           # FLAGS は配列で組む ("$FLAGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
           TYPE="${{ github.event.inputs.type }}"
-          FLAGS=(--max-generate 500)
-          if [ -n "${{ github.event.inputs.limit }}" ]; then FLAGS+=(--limit "${{ github.event.inputs.limit }}"); fi
+          LIMIT="${{ github.event.inputs.limit }}"
+          if ! [[ "$LIMIT" =~ ^[0-9]+$ ]] || [ "$LIMIT" -lt 1 ] || [ "$LIMIT" -gt 500 ]; then
+            echo "limit は1〜500の整数で指定してください: $LIMIT"
+            exit 1
+          fi
+          # limit と生成上限を同じ値に固定し、単件検証で候補だけでなく実生成件数も1件に抑える。
+          FLAGS=(--limit "$LIMIT" --max-generate "$LIMIT")
           if [ "$TYPE" = "blog" ]; then
             if [ -n "${{ github.event.inputs.slugs }}" ]; then
               FLAGS+=(--slug "${{ github.event.inputs.slugs }}")
