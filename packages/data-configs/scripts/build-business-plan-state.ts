@@ -62,7 +62,7 @@ const nextActions = BUSINESS_PLAN_2026.initiatives
   }));
 
 const state = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   generatedAt: new Date().toISOString(),
   catalogId: BUSINESS_PLAN_2026.id,
   catalogVersion: BUSINESS_PLAN_2026.version,
@@ -77,6 +77,10 @@ const state = {
     noteProducts: BUSINESS_PLAN_2026.noteProducts.length,
     metrics: BUSINESS_PLAN_2026.metrics.length,
     events: BUSINESS_PLAN_2026.events.length,
+    m1Routes: BUSINESS_PLAN_2026.m1.routes.length,
+    m1XPosts: BUSINESS_PLAN_2026.m1.xPosts.length,
+    m1NoteProducts: BUSINESS_PLAN_2026.m1.noteProducts.length,
+    m1Tasks: BUSINESS_PLAN_2026.m1.tasks.length,
   },
   statusCounts,
   eventCounts,

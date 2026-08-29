@@ -140,6 +140,93 @@ export interface BusinessPlanProductIdea {
   readonly status: BusinessPlanWorkStatus;
 }
 
+export interface BusinessPlanM1Route {
+  readonly path: string;
+  readonly title: string;
+  readonly status: BusinessPlanWorkStatus;
+  readonly searchVisibility: 'noindex' | 'index-gated';
+  readonly acceptance: readonly string[];
+}
+
+export interface BusinessPlanM1Analysis {
+  readonly id: string;
+  readonly contentId: string;
+  readonly slug: string;
+  readonly title: string;
+  readonly question: string;
+  readonly rankingKey?: string;
+  /** R2 配信用 snapshot。ランキングを直接読む分析では省略する。 */
+  readonly r2Key?: string;
+  readonly status: BusinessPlanWorkStatus;
+  readonly geography: 'prefecture';
+  readonly comparisonLimit: number;
+  readonly expectedObservationCount: number;
+  readonly dataVersion: string;
+  readonly evidenceCheckedAt: string;
+  readonly sourceName: string;
+  readonly sourceUrl: string;
+  readonly caveats: readonly string[];
+}
+
+export interface BusinessPlanM1XPost {
+  readonly id: string;
+  readonly contentKey: string;
+  readonly title: string;
+  readonly template:
+    | 'shock'
+    | 'versus'
+    | 'question'
+    | 'paradox'
+    | 'number'
+    | 'angle-experience'
+    | 'angle-howto';
+  readonly caption: string;
+  readonly scheduledAt: string;
+  readonly canonicalUrl: string;
+  readonly campaign: string;
+  readonly imageKind: 'ranking-card' | 'tile-map';
+  readonly mediaKey: string;
+  readonly metricKeys: readonly string[];
+  readonly status: BusinessPlanWorkStatus;
+}
+
+export interface BusinessPlanM1NoteProduct {
+  readonly id: string;
+  readonly articleKey: string;
+  readonly title: string;
+  readonly priceYen: number;
+  readonly sourceContentIds: readonly string[];
+  readonly readerOutcome: string;
+  readonly deliverables: readonly string[];
+  readonly status: BusinessPlanWorkStatus;
+  readonly readinessGate: string;
+}
+
+export interface BusinessPlanM1Task {
+  readonly id: string;
+  readonly workstream:
+    'site' | 'data' | 'x' | 'note' | 'measurement' | 'release';
+  readonly title: string;
+  readonly status: BusinessPlanWorkStatus;
+  readonly owner: string;
+  readonly deliverablePath: string;
+  readonly doneWhen: string;
+}
+
+export interface BusinessPlanM1ExecutionPlan {
+  readonly month: '2026-09';
+  readonly objective: string;
+  readonly routes: readonly BusinessPlanM1Route[];
+  /** 後方互換の初回分析。新規実装は analyses を参照する。 */
+  readonly analysis: BusinessPlanM1Analysis;
+  readonly analyses: readonly BusinessPlanM1Analysis[];
+  readonly xPosts: readonly BusinessPlanM1XPost[];
+  readonly noteProducts: readonly BusinessPlanM1NoteProduct[];
+  readonly eventIds: readonly string[];
+  readonly tasks: readonly BusinessPlanM1Task[];
+  readonly releaseGates: readonly string[];
+}
+
 export interface BusinessPlanCatalog {
   readonly id: string;
   readonly version: string;
@@ -158,4 +245,5 @@ export interface BusinessPlanCatalog {
   readonly contentOpportunities: readonly BusinessPlanContentOpportunity[];
   readonly xIdeas: readonly BusinessPlanChannelIdea[];
   readonly noteProducts: readonly BusinessPlanProductIdea[];
+  readonly m1: BusinessPlanM1ExecutionPlan;
 }

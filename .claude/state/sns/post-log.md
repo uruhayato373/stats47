@@ -3,10 +3,32 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**489 件** (最終更新: 2026-08-03)
+**511 件** (最終更新: 2026-08-10)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-08-10 | 📸 Instagram | ranking/sheets-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Db24rrIoBMw/) |
+| 2026-08-10 | 📸 Instagram | ranking/regular-cash-salary-female-pre2019 |  | [🔗](https://www.instagram.com/p/Db2LAa_oF-T/) |
+| 2026-08-09 | 📸 Instagram | ranking/physical-disability-rehabilitation-facility-residents-per-100k |  | [🔗](https://www.instagram.com/p/Db1pDRJmnk6/) |
+| 2026-08-09 | 📸 Instagram | ranking/air-fare-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Db0QZqLFuzc/) |
+| 2026-08-09 | 📸 Instagram | ranking/average-weight-primary-school-fifth-grade-female |  | [🔗](https://www.instagram.com/p/Dbzj5_pDsce/) |
+| 2026-08-08 | 📸 Instagram | ranking/municipal-general-administration-staff |  | [🔗](https://www.instagram.com/p/DbzD8KlICRK/) |
+| 2026-08-08 | 📸 Instagram | ranking/lipstick-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbxraEHoDTm/) |
+| 2026-08-08 | 📸 Instagram | ranking/new-graduate-scheduled-salary-university-male |  | [🔗](https://www.instagram.com/p/Dbw-Wr6li7c/) |
+| 2026-08-07 | 📸 Instagram | ranking/clam-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbwfnGrEWgZ/) |
+| 2026-08-07 | 📸 Instagram | ranking/female-part-time-hourly-wage |  | [🔗](https://www.instagram.com/p/DbvIqXDFCjv/) |
+| 2026-08-07 | 📸 Instagram | ranking/craft-materials-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbueiyCljni/) |
+| 2026-08-07 | 📸 Instagram | ranking/shochu-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbuIrKUkQHo/) |
+| 2026-08-06 | 📸 Instagram | ranking/total-assessed-land-area-ratio-field |  | [🔗](https://www.instagram.com/p/Dbsrp0xmyY7/) |
+| 2026-08-06 | 📸 Instagram | ranking/wakame-consumption-quantity |  | [🔗](https://www.instagram.com/p/Dbr_8JLnJKo/) |
+| 2026-08-06 | 📸 Instagram | ranking/recorded-media-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbrY8Q9n75M/) |
+| 2026-08-05 | 📸 Instagram | ranking/earthquake-retrofit-housing |  | [🔗](https://www.instagram.com/p/DbqGi4tkfE8/) |
+| 2026-08-05 | 📸 Instagram | ranking/other-household-durables-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dbpa0zRlSe1/) |
+| 2026-08-05 | 📸 Instagram | ranking/fruit-vegetable-juice-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dbo0tLVjO1K/) |
+| 2026-08-04 | 📸 Instagram | ranking/department-supermarket-count-per-100k |  | [🔗](https://www.instagram.com/p/Dbnh-8ymyjX/) |
+| 2026-08-04 | 📸 Instagram | ranking/social-increase |  | [🔗](https://www.instagram.com/p/Dbm2GGnG1Jg/) |
+| 2026-08-04 | 📸 Instagram | ranking/prefectural-income-growth-rate-h23 |  | [🔗](https://www.instagram.com/p/DbmQKr1mEU6/) |
+| 2026-08-03 | 📸 Instagram | ranking/foreign-resident-count-china-per-100k |  | [🔗](https://www.instagram.com/p/DblE1f8HKvm/) |
 | 2026-08-03 | 📸 Instagram | ranking/nuclear-power-plant-count |  | [🔗](https://www.instagram.com/p/DbkVhEEm2Bn/) |
 | 2026-08-03 | 📸 Instagram | ranking/police-expenses-prefecture |  | [🔗](https://www.instagram.com/p/DbjqhrCGqL8/) |
 | 2026-08-02 | 📸 Instagram | ranking/unmarried-ratio-male-30-34 |  | [🔗](https://www.instagram.com/p/DbiTNiHG5cJ/) |

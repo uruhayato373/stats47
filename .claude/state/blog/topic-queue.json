@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-23T11:15:35.877Z",
+  "generatedAt": "2026-08-29T07:27:53.868Z",
   "gscWeek": "2026-W34",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
@@ -198,73 +198,73 @@
       "priority": 5
     },
     {
-      "topicKey": "corr-local-allocation-tax-prefecture--total-area-excluding-northern-territories-and-takeshima",
+      "topicKey": "corr-cultivated-area--local-allocation-tax-prefecture",
       "archetype": "B",
       "metricKeys": [
         "local-allocation-tax-prefecture",
-        "total-area-excluding-northern-territories-and-takeshima"
+        "cultivated-area"
       ],
-      "label": "地方交付税 × 総面積 (r=0.80)",
+      "label": "地方交付税 × 耕地面積 (r=0.80)",
       "source": "correlation",
       "scores": {
         "queryGap": 0.7262686330777521,
         "seasonality": 0,
-        "surprise": 0.805,
+        "surprise": 0.802,
         "competitionGap": 0.8
       },
       "evidence": {
-        "pearsonR": 0.805,
-        "partialRPopulation": 0.804,
+        "pearsonR": 0.802,
+        "partialRPopulation": 0.802,
         "populationConfounded": false,
         "crossCategory": true,
         "categories": [
           "administrativefinancial",
-          "landweather"
+          "agriculture"
         ],
         "gscImp": 578,
         "rankingUrls": [
           "/ranking/local-allocation-tax-prefecture",
-          "/ranking/total-area-excluding-northern-territories-and-takeshima"
+          "/ranking/cultivated-area"
         ]
       },
-      "suggestedTitle": "地方交付税が多い県は総面積も多い?",
+      "suggestedTitle": "地方交付税が多い県は耕地面積も多い?",
       "combinedScore": 0.575,
       "lane": "must-write",
       "status": "pending",
       "priority": 6
     },
     {
-      "topicKey": "corr-local-allocation-tax-prefecture--total-area-including-northern-territories-and-takeshima",
+      "topicKey": "corr-agriculture-forestry-fisheries-expenses-prefecture--local-allocation-tax-prefecture",
       "archetype": "B",
       "metricKeys": [
         "local-allocation-tax-prefecture",
-        "total-area-including-northern-territories-and-takeshima"
+        "agriculture-forestry-fisheries-expenses-prefecture"
       ],
-      "label": "地方交付税 × 総面積 (r=0.80)",
+      "label": "地方交付税 × 農林水産業費 (r=0.79)",
       "source": "correlation",
       "scores": {
         "queryGap": 0.7262686330777521,
         "seasonality": 0,
-        "surprise": 0.804,
+        "surprise": 0.791,
         "competitionGap": 0.8
       },
       "evidence": {
-        "pearsonR": 0.804,
-        "partialRPopulation": 0.804,
+        "pearsonR": 0.791,
+        "partialRPopulation": 0.791,
         "populationConfounded": false,
         "crossCategory": true,
         "categories": [
           "administrativefinancial",
-          "landweather"
+          "agriculture"
         ],
         "gscImp": 578,
         "rankingUrls": [
           "/ranking/local-allocation-tax-prefecture",
-          "/ranking/total-area-including-northern-territories-and-takeshima"
+          "/ranking/agriculture-forestry-fisheries-expenses-prefecture"
         ]
       },
-      "suggestedTitle": "地方交付税が多い県は総面積も多い?",
-      "combinedScore": 0.575,
+      "suggestedTitle": "地方交付税が多い県は農林水産業費も多い?",
+      "combinedScore": 0.572,
       "lane": "must-write",
       "status": "pending",
       "priority": 7
@@ -711,42 +711,6 @@
       "priority": 21
     },
     {
-      "topicKey": "corr-actual-income-worker-households-per-month--real-disposable-income",
-      "archetype": "B",
-      "metricKeys": [
-        "real-disposable-income",
-        "actual-income-worker-households-per-month"
-      ],
-      "label": "実質可処分所得（物価補正後） × 実収入 (r=0.98)",
-      "source": "correlation",
-      "scores": {
-        "queryGap": 0.5990516901293393,
-        "seasonality": 0.3,
-        "surprise": 0.976,
-        "competitionGap": 0.8
-      },
-      "evidence": {
-        "pearsonR": 0.976,
-        "partialRPopulation": 0.981,
-        "populationConfounded": false,
-        "crossCategory": true,
-        "categories": [
-          "economy",
-          "administrativefinancial"
-        ],
-        "gscImp": 189,
-        "rankingUrls": [
-          "/ranking/real-disposable-income",
-          "/ranking/actual-income-worker-households-per-month"
-        ]
-      },
-      "suggestedTitle": "実質可処分所得が多い県は実収入も多い?",
-      "combinedScore": 0.64,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 22
-    },
-    {
       "topicKey": "corr-bank-personal-deposit--school-teacher-annual-income",
       "archetype": "B",
       "metricKeys": [
@@ -780,7 +744,7 @@
       "combinedScore": 0.637,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 23
+      "priority": 22
     },
     {
       "topicKey": "corr-resident-foreigner-north-america--school-teacher-annual-income",
@@ -816,7 +780,7 @@
       "combinedScore": 0.637,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 24
+      "priority": 23
     },
     {
       "topicKey": "corr-high-school-education-cost-fulltime-per-student--pachinko-shop-density-per-10k",
@@ -852,7 +816,7 @@
       "combinedScore": 0.603,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 25
+      "priority": 24
     },
     {
       "topicKey": "corr-real-disposable-income--taxpayer-ratio-per-pref-resident",
@@ -886,6 +850,42 @@
       },
       "suggestedTitle": "実質可処分所得が多い県は納税義務者も多い?",
       "combinedScore": 0.589,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 25
+    },
+    {
+      "topicKey": "corr-per-capita-social-welfare-expenditure-pref-municipal--real-disposable-income",
+      "archetype": "B",
+      "metricKeys": [
+        "real-disposable-income",
+        "per-capita-social-welfare-expenditure-pref-municipal"
+      ],
+      "label": "実質可処分所得（物価補正後） × 社会福祉費 (r=-0.69)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.5990516901293393,
+        "seasonality": 0.3,
+        "surprise": 0.694,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": -0.694,
+        "partialRPopulation": -0.684,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "economy",
+          "socialsecurity"
+        ],
+        "gscImp": 189,
+        "rankingUrls": [
+          "/ranking/real-disposable-income",
+          "/ranking/per-capita-social-welfare-expenditure-pref-municipal"
+        ]
+      },
+      "suggestedTitle": "実質可処分所得が多い県は社会福祉費が少ない?",
+      "combinedScore": 0.583,
       "lane": "opportunity",
       "status": "pending",
       "priority": 26
@@ -1809,7 +1809,7 @@
       "label": "和歌山県 の人口移動フロー (転出先/転入元)",
       "source": "migration-flow",
       "scores": {
-        "queryGap": 0.5379577793178324,
+        "queryGap": 0.5379577793178325,
         "seasonality": 0.3,
         "surprise": 0,
         "competitionGap": 1
@@ -2201,7 +2201,7 @@
       "label": "和歌山県 市区町村の財政格差 (決算カード)",
       "source": "finance-cards",
       "scores": {
-        "queryGap": 0.5379577793178324,
+        "queryGap": 0.5379577793178325,
         "seasonality": 0,
         "surprise": 0,
         "competitionGap": 1
@@ -2216,33 +2216,6 @@
       "lane": "opportunity",
       "status": "pending",
       "priority": 70
-    },
-    {
-      "topicKey": "gap-real-disposable-income",
-      "archetype": "A",
-      "metricKeys": [
-        "real-disposable-income"
-      ],
-      "label": "実質可処分所得（物価補正後）",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.5990516901293393,
-        "seasonality": 0.3,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 189,
-        "gscClicks": 8,
-        "gscPosition": 7.07,
-        "seasonLabel": "ボーナス・貯蓄",
-        "rankingUrl": "/ranking/real-disposable-income"
-      },
-      "suggestedTitle": "実質可処分所得が多い県はどこ",
-      "combinedScore": 0.385,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 71
     },
     {
       "topicKey": "finance-gap-08000",
@@ -2265,7 +2238,7 @@
       "combinedScore": 0.383,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 72
+      "priority": 71
     },
     {
       "topicKey": "finance-gap-16000",
@@ -2288,7 +2261,7 @@
       "combinedScore": 0.371,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 73
+      "priority": 72
     },
     {
       "topicKey": "finance-gap-45000",
@@ -2311,7 +2284,7 @@
       "combinedScore": 0.371,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 74
+      "priority": 73
     },
     {
       "topicKey": "finance-gap-39000",
@@ -2334,7 +2307,7 @@
       "combinedScore": 0.364,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 75
+      "priority": 74
     },
     {
       "topicKey": "finance-gap-47000",
@@ -2357,7 +2330,7 @@
       "combinedScore": 0.364,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 76
+      "priority": 75
     },
     {
       "topicKey": "finance-gap-09000",
@@ -2380,7 +2353,7 @@
       "combinedScore": 0.357,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 77
+      "priority": 76
     },
     {
       "topicKey": "finance-gap-27000",
@@ -2403,7 +2376,7 @@
       "combinedScore": 0.357,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 78
+      "priority": 77
     },
     {
       "topicKey": "finance-gap-37000",
@@ -2426,7 +2399,7 @@
       "combinedScore": 0.348,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 79
+      "priority": 78
     },
     {
       "topicKey": "gap-white-bread-consumption-quantity",
@@ -2453,7 +2426,7 @@
       "combinedScore": 0.344,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 80
+      "priority": 79
     },
     {
       "topicKey": "gap-toilet-paper-consumption-expenditure",
@@ -2480,7 +2453,7 @@
       "combinedScore": 0.343,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 81
+      "priority": 80
     },
     {
       "topicKey": "gap-avg-salary-police-prefecture",
@@ -2507,7 +2480,7 @@
       "combinedScore": 0.341,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 82
+      "priority": 81
     },
     {
       "topicKey": "gap-physical-therapist-annual-income",
@@ -2534,7 +2507,7 @@
       "combinedScore": 0.339,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 83
+      "priority": 82
     },
     {
       "topicKey": "finance-gap-11000",
@@ -2557,7 +2530,7 @@
       "combinedScore": 0.339,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 84
+      "priority": 83
     },
     {
       "topicKey": "finance-gap-35000",
@@ -2580,7 +2553,7 @@
       "combinedScore": 0.339,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 85
+      "priority": 84
     },
     {
       "topicKey": "gap-commute-by-bicycle",
@@ -2607,7 +2580,7 @@
       "combinedScore": 0.336,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 86
+      "priority": 85
     },
     {
       "topicKey": "gap-peach-consumption-quantity",
@@ -2634,7 +2607,7 @@
       "combinedScore": 0.335,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 87
+      "priority": 86
     },
     {
       "topicKey": "gap-commute-by-car",
@@ -2661,7 +2634,7 @@
       "combinedScore": 0.335,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 88
+      "priority": 87
     },
     {
       "topicKey": "gap-pickled-plum-consumption-quantity",
@@ -2688,7 +2661,7 @@
       "combinedScore": 0.332,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 89
+      "priority": 88
     },
     {
       "topicKey": "gap-swimming-pool-public",
@@ -2715,7 +2688,7 @@
       "combinedScore": 0.327,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 90
+      "priority": 89
     },
     {
       "topicKey": "gap-voluntary-car-insurance-rate-vehicle",
@@ -2742,7 +2715,7 @@
       "combinedScore": 0.326,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 91
+      "priority": 90
     },
     {
       "topicKey": "gap-main-road-paving-rate",
@@ -2769,7 +2742,7 @@
       "combinedScore": 0.319,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 92
+      "priority": 91
     },
     {
       "topicKey": "gap-annual-sunshine-duration",
@@ -2796,34 +2769,7 @@
       "combinedScore": 0.318,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 93
-    },
-    {
-      "topicKey": "gap-pachinko-shop-density-per-10k",
-      "archetype": "A",
-      "metricKeys": [
-        "pachinko-shop-density-per-10k"
-      ],
-      "label": "パチンコ店舗数",
-      "source": "gsc-gap",
-      "scores": {
-        "queryGap": 0.6238045856792324,
-        "seasonality": 0,
-        "surprise": 0,
-        "competitionGap": 0.5
-      },
-      "evidence": {
-        "gscImp": 235,
-        "gscClicks": 5,
-        "gscPosition": 8.38,
-        "seasonLabel": null,
-        "rankingUrl": "/ranking/pachinko-shop-density-per-10k"
-      },
-      "suggestedTitle": "パチンコ店舗が多い県はどこ",
-      "combinedScore": 0.318,
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 94
+      "priority": 92
     },
     {
       "topicKey": "gap-cut-flowers-consumption-expenditure",
@@ -2850,7 +2796,7 @@
       "combinedScore": 0.317,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 95
+      "priority": 93
     },
     {
       "topicKey": "gap-chinese-noodles-consumption-expenditure",
@@ -2877,7 +2823,7 @@
       "combinedScore": 0.317,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 96
+      "priority": 94
     },
     {
       "topicKey": "gap-croquette-consumption-expenditure",
@@ -2904,7 +2850,7 @@
       "combinedScore": 0.316,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 97
+      "priority": 95
     },
     {
       "topicKey": "gap-cake-consumption-expenditure",
@@ -2931,7 +2877,7 @@
       "combinedScore": 0.316,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 98
+      "priority": 96
     },
     {
       "topicKey": "gap-treatment-rate-hypertension-outpatient",
@@ -2958,7 +2904,7 @@
       "combinedScore": 0.316,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 99
+      "priority": 97
     },
     {
       "topicKey": "gap-campsite-public",
@@ -2985,7 +2931,7 @@
       "combinedScore": 0.315,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 100
+      "priority": 98
     },
     {
       "topicKey": "gap-shrimp-consumption-quantity",
@@ -3012,7 +2958,7 @@
       "combinedScore": 0.313,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 101
+      "priority": 99
     },
     {
       "topicKey": "gap-hamburger-consumption-expenditure",
@@ -3039,7 +2985,7 @@
       "combinedScore": 0.312,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 102
+      "priority": 100
     },
     {
       "topicKey": "gap-soy-sauce-consumption-expenditure",
@@ -3066,7 +3012,7 @@
       "combinedScore": 0.311,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 103
+      "priority": 101
     },
     {
       "topicKey": "gap-treatment-rate-mental-disorder-inpatient",
@@ -3093,7 +3039,7 @@
       "combinedScore": 0.31,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 104
+      "priority": 102
     },
     {
       "topicKey": "gap-airport-count",
@@ -3120,7 +3066,7 @@
       "combinedScore": 0.31,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 105
+      "priority": 103
     },
     {
       "topicKey": "gap-sports-participation-rate-swimming",
@@ -3147,7 +3093,7 @@
       "combinedScore": 0.309,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 106
+      "priority": 104
     },
     {
       "topicKey": "gap-chocolate-snack-consumption-expenditure",
@@ -3174,7 +3120,7 @@
       "combinedScore": 0.309,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 107
+      "priority": 105
     },
     {
       "topicKey": "gap-densely-populated-area",
@@ -3201,7 +3147,7 @@
       "combinedScore": 0.304,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 108
+      "priority": 106
     },
     {
       "topicKey": "gap-coffee-shop-consumption-expenditure",
@@ -3228,7 +3174,7 @@
       "combinedScore": 0.304,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 109
+      "priority": 107
     },
     {
       "topicKey": "gap-future-population-change-rate-2050",
@@ -3255,7 +3201,7 @@
       "combinedScore": 0.303,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 110
+      "priority": 108
     },
     {
       "topicKey": "gap-sports-spectating-consumption-expenditure",
@@ -3282,7 +3228,7 @@
       "combinedScore": 0.302,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 111
+      "priority": 109
     },
     {
       "topicKey": "gap-fishery-workers",
@@ -3309,7 +3255,7 @@
       "combinedScore": 0.3,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 112
+      "priority": 110
     },
     {
       "topicKey": "gap-new-hire-count",
@@ -3336,7 +3282,7 @@
       "combinedScore": 0.298,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 113
+      "priority": 111
     },
     {
       "topicKey": "gap-sewage-treatment-coverage-rate",
@@ -3363,7 +3309,7 @@
       "combinedScore": 0.298,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 114
+      "priority": 112
     },
     {
       "topicKey": "gap-treatment-rate-schizophrenia-inpatient",
@@ -3390,7 +3336,7 @@
       "combinedScore": 0.297,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 115
+      "priority": 113
     },
     {
       "topicKey": "gap-whitebait-consumption-quantity",
@@ -3417,7 +3363,7 @@
       "combinedScore": 0.297,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 116
+      "priority": 114
     },
     {
       "topicKey": "gap-manufacturing-industry-added-value",
@@ -3444,7 +3390,7 @@
       "combinedScore": 0.294,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 117
+      "priority": 115
     },
     {
       "topicKey": "gap-table-salt-consumption-quantity",
@@ -3471,7 +3417,7 @@
       "combinedScore": 0.294,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 118
+      "priority": 116
     },
     {
       "topicKey": "gap-flavor-seasoning-consumption-expenditure",
@@ -3498,7 +3444,7 @@
       "combinedScore": 0.293,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 119
+      "priority": 117
     },
     {
       "topicKey": "gap-bean-sprouts-consumption-quantity",
@@ -3525,7 +3471,7 @@
       "combinedScore": 0.291,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 120
+      "priority": 118
     },
     {
       "topicKey": "gap-taro-consumption-quantity",
@@ -3552,7 +3498,7 @@
       "combinedScore": 0.29,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 121
+      "priority": 119
     },
     {
       "topicKey": "gap-railway-station-count",
@@ -3579,7 +3525,7 @@
       "combinedScore": 0.29,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 122
+      "priority": 120
     },
     {
       "topicKey": "gap-convenience-store-sales-monthly",
@@ -3606,7 +3552,7 @@
       "combinedScore": 0.289,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 123
+      "priority": 121
     },
     {
       "topicKey": "gap-new-rental-starts",
@@ -3633,7 +3579,7 @@
       "combinedScore": 0.288,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 124
+      "priority": 122
     },
     {
       "topicKey": "gap-dam-count",
@@ -3660,7 +3606,7 @@
       "combinedScore": 0.287,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 125
+      "priority": 123
     },
     {
       "topicKey": "gap-other-cosmetics-consumption-expenditure",
@@ -3687,7 +3633,7 @@
       "combinedScore": 0.286,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 126
+      "priority": 124
     },
     {
       "topicKey": "gap-nuclear-power-plant-count",
@@ -3714,7 +3660,7 @@
       "combinedScore": 0.286,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 127
+      "priority": 125
     },
     {
       "topicKey": "gap-non-regular-employment-rate",
@@ -3741,7 +3687,7 @@
       "combinedScore": 0.285,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 128
+      "priority": 126
     },
     {
       "topicKey": "gap-pickled-plum-consumption-expenditure",
@@ -3768,7 +3714,7 @@
       "combinedScore": 0.283,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 129
+      "priority": 127
     },
     {
       "topicKey": "gap-tempura-fry-consumption-expenditure",
@@ -3795,7 +3741,7 @@
       "combinedScore": 0.282,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 130
+      "priority": 128
     },
     {
       "topicKey": "gap-consumer-price-difference-index-utilities",
@@ -3822,7 +3768,7 @@
       "combinedScore": 0.28,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 131
+      "priority": 129
     },
     {
       "topicKey": "gap-geothermal-power-plant-count",
@@ -3849,7 +3795,7 @@
       "combinedScore": 0.279,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 132
+      "priority": 130
     },
     {
       "topicKey": "gap-fabric-softener-consumption-expenditure",
@@ -3876,7 +3822,7 @@
       "combinedScore": 0.279,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 133
+      "priority": 131
     },
     {
       "topicKey": "gap-pear-consumption-expenditure",
@@ -3903,7 +3849,7 @@
       "combinedScore": 0.279,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 134
+      "priority": 132
     },
     {
       "topicKey": "gap-voluntary-car-insurance-rate-property",
@@ -3930,7 +3876,7 @@
       "combinedScore": 0.279,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 135
+      "priority": 133
     },
     {
       "topicKey": "gap-retail-sales-amount-by-prefecture",
@@ -3957,7 +3903,7 @@
       "combinedScore": 0.278,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 136
+      "priority": 134
     },
     {
       "topicKey": "gap-miscellaneous-school-students",
@@ -3984,7 +3930,7 @@
       "combinedScore": 0.278,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 137
+      "priority": 135
     },
     {
       "topicKey": "gap-major-lake-area",
@@ -4011,7 +3957,7 @@
       "combinedScore": 0.277,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 138
+      "priority": 136
     },
     {
       "topicKey": "gap-water-supply-population",
@@ -4036,6 +3982,60 @@
       },
       "suggestedTitle": "上水道給水人口が多い県はどこ",
       "combinedScore": 0.277,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 137
+    },
+    {
+      "topicKey": "gap-annual-clear-days",
+      "archetype": "A",
+      "metricKeys": [
+        "annual-clear-days"
+      ],
+      "label": "年間快晴日数",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.5044981494477399,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 82,
+        "gscClicks": 1,
+        "gscPosition": 9.35,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/annual-clear-days"
+      },
+      "suggestedTitle": "年間快晴日が多い県はどこ",
+      "combinedScore": 0.277,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 138
+    },
+    {
+      "topicKey": "gap-starting-salary-university",
+      "archetype": "A",
+      "metricKeys": [
+        "starting-salary-university"
+      ],
+      "label": "大卒初任給",
+      "source": "gsc-gap",
+      "scores": {
+        "queryGap": 0.5017133821171944,
+        "seasonality": 0,
+        "surprise": 0,
+        "competitionGap": 0.5
+      },
+      "evidence": {
+        "gscImp": 80,
+        "gscClicks": 2,
+        "gscPosition": 8.39,
+        "seasonLabel": null,
+        "rankingUrl": "/ranking/starting-salary-university"
+      },
+      "suggestedTitle": "大卒初任給が多い県はどこ",
+      "combinedScore": 0.276,
       "lane": "opportunity",
       "status": "pending",
       "priority": 139

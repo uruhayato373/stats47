@@ -40,7 +40,15 @@ function parseArgs(argv) {
   };
 }
 
-function buildUtmUrl(key, template) {
+function buildUtmUrl(item, key, template) {
+  if (item.canonicalUrl && item.campaign) {
+    return snsUtm.buildUtmUrl({
+      canonicalUrl: item.canonicalUrl,
+      platform: "x",
+      campaign: item.campaign,
+      variant: template,
+    });
+  }
   // 正典 util へ委譲 (ranking domain: campaign=<key> / content=<template>)。従来と同一出力。
   return snsUtm.buildUtmForDomain({
     domain: "ranking",
@@ -104,9 +112,12 @@ function main() {
       skipped++;
       continue;
     }
-    const utmUrl = buildUtmUrl(key, template);
+    const utmUrl = buildUtmUrl(it, key, template);
     const caption = cap.replace(/\{\{url\}\}/g, utmUrl);
-    const mediaPath = resolveMediaPath(it.imageKind || "ranking-card", key);
+    const mediaPath = resolveMediaPath(
+      it.imageKind || "ranking-card",
+      it.mediaKey || key,
+    );
 
     const record = {
       platform: "x",
@@ -120,7 +131,9 @@ function main() {
       status: "draft",
       scheduled_at: scheduledAt,
       template,
-      metric_keys: key,
+      metric_keys: Array.isArray(it.metricKeys)
+        ? it.metricKeys.join(",")
+        : it.metricKeys || key,
     };
 
     if (opts.dryRun) {

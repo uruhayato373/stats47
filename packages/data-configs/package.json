@@ -92,7 +92,8 @@
     "audit:money-unit-scale": "tsx scripts/audit-money-unit-scale.ts",
     "validate:survey-master": "tsx scripts/ssds/validate-survey-master-coverage.ts",
     "validate:business-plan": "tsx scripts/validate-business-plan.ts",
-    "build:business-plan-state": "tsx scripts/build-business-plan-state.ts"
+    "build:business-plan-state": "tsx scripts/build-business-plan-state.ts",
+    "export:business-plan-m1-x": "tsx scripts/export-business-plan-m1-x.ts"
   },
   "dependencies": {
     "@stats47/area": "*",

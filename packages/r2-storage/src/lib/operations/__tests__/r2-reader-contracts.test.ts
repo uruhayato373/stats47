@@ -29,6 +29,7 @@ const REQUIRED = [
   "area-profile",
   "area-databook",
   "correlations",
+  "geo-analysis",
 ];
 
 describe("public R2 reader contract inventory", () => {

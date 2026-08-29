@@ -1,17 +1,9 @@
 {
-  "hash": "2db138292006869361d23250c50bb8b0b314da09454cc2bf268a691a787e5a78",
-  "audited_at": "2026-08-29T07:10:51",
+  "hash": "40eb011548b3442c112c31726f17e1ed001c6cdda184e3ecf6301950fdbce7c3",
+  "audited_at": "2026-08-29T07:58:48",
   "files": [
-    ".agents/skills/area/databook-editorial/SKILL.md",
-    ".claude/rules/reference-source-standards.md",
-    ".claude/scripts/source-vault/__tests__/japan-zue-bundle.test.mjs",
-    ".claude/scripts/source-vault/__tests__/source-inventory.test.mjs",
-    ".claude/scripts/source-vault/__tests__/source-processing.test.mjs",
-    ".claude/scripts/source-vault/__tests__/source-vault.test.mjs",
-    ".claude/scripts/source-vault/source-inventory.mjs",
-    ".claude/scripts/source-vault/source-processing.mjs",
-    ".claude/scripts/source-vault/source-vault.mjs",
-    ".claude/skills/area/databook-editorial/SKILL.md",
-    "CLAUDE.md"
+    ".claude/rules/analytics-event-standards.md",
+    ".claude/scripts/note/catalog/data/stats47-note.ts",
+    ".claude/skills/sns/post-x-batch/scripts/register-drafts.cjs"
   ]
 }
