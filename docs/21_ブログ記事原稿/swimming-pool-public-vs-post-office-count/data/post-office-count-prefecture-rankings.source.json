@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "post-office-count",
+  "year": "2024",
+  "unit": "局",
+  "label": "郵便局数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/post-office-count/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug swimming-pool-public-vs-post-office-count --keys post-office-count --data-name post-office-count-prefecture-rankings",
+  "fetchedAt": "2026-08-29T22:45:43.742Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
