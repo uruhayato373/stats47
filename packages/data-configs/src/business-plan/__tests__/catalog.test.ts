@@ -59,7 +59,7 @@ describe('stats47 2.0事業計画カタログ', () => {
     });
   });
 
-  it('未実装イベントを計測済みや0に見せない', () => {
+  it('イベント台帳が実装・計測状況を正確に区別する', () => {
     const geo = BUSINESS_PLAN_2026.events.find(
       (item) => item.id === 'geo-view'
     );
@@ -67,8 +67,8 @@ describe('stats47 2.0事業計画カタログ', () => {
       (item) => item.id === 'data-download'
     );
     expect(geo).toMatchObject({
-      status: 'not-instrumented',
-      canonicalEvent: null,
+      status: 'partially-measured',
+      canonicalEvent: 'geo_analysis_view',
     });
     expect(download).toMatchObject({
       status: 'measured',
