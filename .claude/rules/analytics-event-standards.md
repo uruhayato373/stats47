@@ -31,7 +31,7 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 
 通常はオーナーが実施する。自動化経路は
 `.claude/scripts/google-admin/README.md`の承認付きGA4 Admin APIだけとし、
-`GOOGLE-ADMIN-AUTOMATION-01`完了前は新しい自動登録を行わない。
+protected Environment、専用credential、plan token、人間承認がすべて揃うまで新しい自動登録を行わない。
 PlaywrightはGSC linkとLibrary collectionのAPI非提供操作だけに使う。
 権限、既存dimension削除/置換、timezone、data retention等は常に対象外。
 
@@ -119,7 +119,7 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`を許可�
 > **2026-07-31 API監査**: GA4 Admin API `properties.customDimensions.list`を
 > `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`のread-only認証で実行し、live custom dimension 16件を取得した。
 > 台帳とのexact parameter突合で上表の7 parameterが未登録、その他の`❓要確認`は登録済みと確定した。
-> 実行層の恒久API化は`GOOGLE-ADMIN-AUTOMATION-01`で追跡する。
+> 実行層の恒久API契約は`.claude/scripts/google-admin/README.md`、登録待ちは本台帳で追跡する。
 >
 > ## ✅ 解消: `ad_impression` の衝突 → `affiliate_impression` へ改名 (2026-07-28)
 >
