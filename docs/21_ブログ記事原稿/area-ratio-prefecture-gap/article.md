@@ -11,7 +11,7 @@ tags:
   - 国土
   - 地理
 publishedAt: 2026-08-29
-published: false
+published: true
 ---
 
 ## 北海道だけで集計対象面積の21.03％を占めます

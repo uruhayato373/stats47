@@ -4,9 +4,11 @@
   "year": "2020",
   "unit": "万世帯",
   "label": "一般世帯数",
-  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出。万世帯表示で同値の徳島・佐賀・高知は丸め前実数で順位確定)",
   "source": "r2:app/ranking/general-households/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "rankingPrecisionSource": "https://www.stat.go.jp/data/nenkan/73nenkan/zenbun/jp73/book/book.pdf",
+  "rankingPrecisionNote": "総務省統計局『第73回日本統計年鑑』2-15の令和2年国勢調査実数で、高知314,330世帯・佐賀311,173世帯・徳島307,358世帯の順に確定",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug general-households-prefecture-gap --keys general-households --data-name general-households-prefecture-gap-prefecture-rankings",
   "fetchedAt": "2026-08-29T07:55:17.870Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"

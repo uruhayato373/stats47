@@ -1,4 +1,4 @@
-<!-- data-source: general-households-prefecture-gap-prefecture-rankings.json | generated: 2026-08-29T07:58:31.113Z -->
+<!-- data-source: general-households-prefecture-gap-prefecture-rankings.json | generated: 2026-08-29T10:52:05.896Z -->
 <svg width="1080" height="1350" viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="一般世帯数">
   <style>
     .svg-bg{fill:#ffffff}
@@ -58,13 +58,13 @@
   <rect x="48" y="826" width="984" height="82" rx="10" fill="#eff6ff"/>
   <circle cx="90" cy="864" r="22" fill="#1565c0"/>
   <text x="90" y="872" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">43</text>
-  <text x="132" y="872" font-size="30" font-weight="bold" fill="#1f2937">高知県</text>
+  <text x="132" y="872" font-size="30" font-weight="bold" fill="#1f2937">佐賀県</text>
   <text x="1008" y="872" text-anchor="end" font-size="28" font-weight="700" fill="#1565c0">31 万世帯</text>
   <rect x="132" y="878" width="30.914" height="16" rx="4" fill="#42a5f5" opacity="0.85"/>
   <rect x="48" y="920" width="984" height="82" rx="10" fill="#ffffff"/>
   <circle cx="90" cy="958" r="22" fill="#1565c0"/>
   <text x="90" y="966" text-anchor="middle" font-size="22" font-weight="bold" fill="#ffffff">44</text>
-  <text x="132" y="966" font-size="30" font-weight="bold" fill="#1f2937">佐賀県</text>
+  <text x="132" y="966" font-size="30" font-weight="bold" fill="#1f2937">徳島県</text>
   <text x="1008" y="966" text-anchor="end" font-size="28" font-weight="700" fill="#1565c0">31 万世帯</text>
   <rect x="132" y="972" width="30.914" height="16" rx="4" fill="#42a5f5" opacity="0.85"/>
   <rect x="48" y="1014" width="984" height="82" rx="10" fill="#eff6ff"/>

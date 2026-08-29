@@ -11,7 +11,7 @@ tags:
   - 高齢者
   - 医療
 publishedAt: 2026-08-29
-published: false
+published: true
 ---
 
 ## 1人あたり医療費にも県による違いがあります

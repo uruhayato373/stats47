@@ -297,24 +297,27 @@
     },
     {
       "rank": 42,
-      "areaName": "徳島県",
-      "pref": "徳島県",
-      "value": 31,
-      "areaCode": "36000"
-    },
-    {
-      "rank": 43,
       "areaName": "高知県",
       "pref": "高知県",
       "value": 31,
+      "rankingValue": 314330,
       "areaCode": "39000"
     },
     {
-      "rank": 44,
+      "rank": 43,
       "areaName": "佐賀県",
       "pref": "佐賀県",
       "value": 31,
+      "rankingValue": 311173,
       "areaCode": "41000"
+    },
+    {
+      "rank": 44,
+      "areaName": "徳島県",
+      "pref": "徳島県",
+      "value": 31,
+      "rankingValue": 307358,
+      "areaCode": "36000"
     },
     {
       "rank": 45,

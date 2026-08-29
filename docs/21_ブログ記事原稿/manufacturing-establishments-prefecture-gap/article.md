@@ -11,7 +11,7 @@ tags:
   - 事業所
   - 産業
 publishedAt: 2026-08-29
-published: false
+published: true
 ---
 
 ## 製造業の集積は「工場の大きさ」だけでは測れません
