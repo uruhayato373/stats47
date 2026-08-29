@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T00:40:45.069Z",
+  "updatedAt": "2026-08-29T09:28:54.082Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3096,6 +3096,222 @@
       },
       "reclassifiedFrom": [],
       "completedAt": null
+    },
+    "BLOG-REVIEW-HOUSEHOLD-LIABILITIES-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "家計負債記事の調査名・指標定義・構造分析を是正する",
+      "attempts": [
+        {
+          "at": "2026-08-29T09:27:02.552Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/household-liabilities-prefecture-gap/article.md",
+              "review-verdict:household-liabilities-prefecture-gap=PASS"
+            ],
+            "pass": true
+          },
+          "evidence": "quality-gate pass=true、review-verdict:household-liabilities-prefecture-gap=PASS。",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-08-29T09:27:24.486Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/household-liabilities-prefecture-gap/article.md",
+              "review-verdict:household-liabilities-prefecture-gap=PASS"
+            ],
+            "pass": true
+          },
+          "evidence": "quality-gate pass=true、review-verdict:household-liabilities-prefecture-gap=PASS。",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-08-29T09:28:54.021Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/household-liabilities-prefecture-gap/article.md",
+              "review-verdict:household-liabilities-prefecture-gap=PASS"
+            ],
+            "pass": true
+          },
+          "evidence": "quality-gate pass=true、review-verdict:household-liabilities-prefecture-gap=PASS。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-29T09:28:54.021Z"
+    },
+    "BLOG-REVIEW-LATE-ELDERLY-MEDICAL-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "後期高齢者医療費記事の要因分析・年度表記を是正する",
+      "attempts": [
+        {
+          "at": "2026-08-29T09:27:02.591Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/late-elderly-medical-expense-prefecture-gap/article.md",
+              "review-verdict:late-elderly-medical-expense-prefecture-gap=PASS"
+            ],
+            "pass": true
+          },
+          "evidence": "quality-gate pass=true、review-verdict:late-elderly-medical-expense-prefecture-gap=PASS。",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-08-29T09:27:24.526Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/late-elderly-medical-expense-prefecture-gap/article.md",
+              "review-verdict:late-elderly-medical-expense-prefecture-gap=PASS"
+            ],
+            "pass": true
+          },
+          "evidence": "quality-gate pass=true、review-verdict:late-elderly-medical-expense-prefecture-gap=PASS。",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-08-29T09:28:54.056Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/late-elderly-medical-expense-prefecture-gap/article.md",
+              "review-verdict:late-elderly-medical-expense-prefecture-gap=PASS"
+            ],
+            "pass": true
+          },
+          "evidence": "quality-gate pass=true、review-verdict:late-elderly-medical-expense-prefecture-gap=PASS。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-29T09:28:54.056Z"
+    },
+    "BLOG-REVIEW-MUNICIPALITY-COUNT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "市町村数記事の原因分析・東京都定義を是正する",
+      "attempts": [
+        {
+          "at": "2026-08-29T09:27:02.626Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/municipality-count-prefecture-gap/article.md",
+              "review-verdict:municipality-count-prefecture-gap=PASS"
+            ],
+            "pass": true
+          },
+          "evidence": "quality-gate pass=true、review-verdict:municipality-count-prefecture-gap=PASS。",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-08-29T09:27:24.555Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/municipality-count-prefecture-gap/article.md",
+              "review-verdict:municipality-count-prefecture-gap=PASS"
+            ],
+            "pass": true
+          },
+          "evidence": "quality-gate pass=true、review-verdict:municipality-count-prefecture-gap=PASS。",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-08-29T09:28:54.082Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/municipality-count-prefecture-gap/article.md",
+              "review-verdict:municipality-count-prefecture-gap=PASS"
+            ],
+            "pass": true
+          },
+          "evidence": "quality-gate pass=true、review-verdict:municipality-count-prefecture-gap=PASS。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-29T09:28:54.082Z"
     }
   }
 }

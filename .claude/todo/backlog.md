@@ -412,30 +412,6 @@ updated: 2026-08-29
 - **禁止**: 未確認の順位や、面積割合だけから行政・インフラへの因果を断定しない。
 - **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
 
-### [BLOG-REVIEW-HOUSEHOLD-LIABILITIES-01] 家計負債記事の調査名・指標定義・構造分析を是正する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/blog/quality-gate.mjs household-liabilities-prefecture-gap] [起票:2026-08-29] [Codex候補]
-
-- **次**: 基礎調査名を2019年全国家計構造調査へ直し、金融負債現在高の包含範囲を初出で示す。地域差の一要因を一次統計で実証し、接地できなければ仮説表現へ統一する。
-- **禁止**: 家計調査との混同や、図だけで住宅価格等との因果を断定しない。
-- **完了条件**: 指摘3件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
-
-### [BLOG-REVIEW-LATE-ELDERLY-MEDICAL-01] 後期高齢者医療費記事の要因分析・年度表記を是正する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/blog/quality-gate.mjs late-elderly-medical-expense-prefecture-gap] [起票:2026-08-29] [Codex候補]
-
-- **次**: 一次資料で上位・下位県の内訳または受診量を比較し、説明できる差を示す。接地できなければ型Aを外し、2023年度表記と原調査名へ統一する。
-- **禁止**: 候補要因の列挙を原因分析とせず、既存の読み違い防止を弱めない。
-- **完了条件**: 指摘2件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
-
-### [BLOG-REVIEW-MUNICIPALITY-COUNT-01] 市町村数記事の原因分析・東京都定義を是正する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/blog/quality-gate.mjs municipality-count-prefecture-gap] [起票:2026-08-29] [Codex候補]
-
-- **次**: 過去年または面積・人口との比較で現在数の差を検証し、説明から外れる県も扱う。東京都62の特別区包含と内訳を表章定義で明示する。
-- **禁止**: 合併史や地理を根拠なしに主因とせず、効率・品質への注意を削らない。
-- **完了条件**: 指摘2件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
-
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [REFERENCE-SOURCE-EXPANSION-01] Drive参考文献3資料をinventory化して既存SSOTへ展開する
