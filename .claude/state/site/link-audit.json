@@ -1,21 +1,61 @@
 {
-  "generatedAt": "2026-08-22T19:24:52.878Z",
+  "generatedAt": "2026-08-29T21:40:56.051Z",
   "origin": "https://stats47.jp",
   "mode": "per-route:10",
-  "pagesCrawled": 121,
-  "pagesKnown": 5584,
-  "uniqueTargets": 3361,
+  "pagesCrawled": 124,
+  "pagesKnown": 5635,
+  "uniqueTargets": 3452,
   "statusCount": {
-    "200": 3231,
+    "0": 1,
+    "200": 3316,
     "301": 10,
-    "410": 120
+    "410": 125
   },
-  "brokenCount": 125,
+  "brokenCount": 126,
   "brokenByRoute": {
-    "/areas/[c]/[theme]": 120,
-    "/ranking/[k]": 5
+    "/ranking/[k]": 5,
+    "/areas/[c]/[theme]": 121
   },
   "broken": [
+    {
+      "target": "/ranking/crime-rate-per-1k",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 10,
+      "from": [
+        "/areas/01000",
+        "/areas/10000",
+        "/areas/05000",
+        "/areas/15000",
+        "/areas/19000"
+      ]
+    },
+    {
+      "target": "/ranking/housing-floor-area",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 10,
+      "from": [
+        "/areas/01000",
+        "/areas/10000",
+        "/areas/05000",
+        "/areas/15000",
+        "/areas/19000"
+      ]
+    },
+    {
+      "target": "/areas/29000/living-housing",
+      "status": 0,
+      "kind": "http-0",
+      "title": "",
+      "refCount": 2,
+      "from": [
+        "/areas/29000",
+        "/areas/29000/local-economy"
+      ]
+    },
     {
       "target": "/areas/01100/climate",
       "status": 410,
@@ -1217,53 +1257,33 @@
       ]
     },
     {
-      "target": "/ranking/current-balance-ratio-city",
-      "status": 200,
-      "kind": "soft-404",
-      "title": "ランキングが見つかりません | 統計で見る都道府県",
+      "target": "/ranking/foreign-population-per-100k",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
       "refCount": 1,
       "from": [
-        "/category/administrativefinancial"
+        "/ranking"
       ]
     },
     {
-      "target": "/ranking/fiscal-strength-index",
-      "status": 200,
-      "kind": "soft-404",
-      "title": "ランキングが見つかりません | 統計で見る都道府県",
+      "target": "/ranking/manufacturing-net-value-added-private",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
       "refCount": 1,
       "from": [
-        "/category/administrativefinancial"
+        "/ranking"
       ]
     },
     {
-      "target": "/ranking/future-burden-ratio-city",
-      "status": 200,
-      "kind": "soft-404",
-      "title": "ランキングが見つかりません | 統計で見る都道府県",
+      "target": "/ranking/manufacturing-sales-private",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
       "refCount": 1,
       "from": [
-        "/category/administrativefinancial"
-      ]
-    },
-    {
-      "target": "/ranking/real-balance-ratio-city",
-      "status": 200,
-      "kind": "soft-404",
-      "title": "ランキングが見つかりません | 統計で見る都道府県",
-      "refCount": 1,
-      "from": [
-        "/category/administrativefinancial"
-      ]
-    },
-    {
-      "target": "/ranking/real-public-debt-service-ratio-city",
-      "status": 200,
-      "kind": "soft-404",
-      "title": "ランキングが見つかりません | 統計で見る都道府県",
-      "refCount": 1,
-      "from": [
-        "/category/administrativefinancial"
+        "/ranking"
       ]
     }
   ],
