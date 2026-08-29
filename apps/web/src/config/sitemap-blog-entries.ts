@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-08-29
- * 件数: blog 458 / tag 62 / survey 81
+ * 件数: blog 468 / tag 62 / survey 81
  */
 
 export interface SitemapBlogEntry {
@@ -103,6 +103,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "commercial-sales-productivity-gap", lastModified: "2026-03-09" },
   { slug: "communication-cost-burden", lastModified: "2026-03-06" },
   { slug: "consumer-price-regional-gap", lastModified: "2026-06-07" },
+  { slug: "convenience-store-count-commercial-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "convenience-store-count-commercial-vs-ratio-of-general", lastModified: "2026-08-29" },
   { slug: "convenience-store-density-map", lastModified: "2026-03-09" },
   { slug: "cpi-change-regional-pattern", lastModified: "2026-03-05" },
@@ -119,6 +120,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "dentist-income-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "depopulation-area-medical-facilities", lastModified: "2026-05-20" },
   { slug: "deposit-securities-prefecture-personality", lastModified: "2026-07-19" },
+  { slug: "designated-difficult-disease-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "development-history-place-name-map", lastModified: "2026-07-16" },
   { slug: "dining-out-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "disaster-damage-per-person-prefecture-gap", lastModified: "2026-05-17" },
@@ -190,6 +192,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "golf-participation-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "governor-election-turnout-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "green-tea-consumption-quantity", lastModified: "2026-06-07" },
+  { slug: "grilled-eel-consumption-expenditure-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "gunma-food-culture", lastModified: "2026-07-10" },
   { slug: "habitable-area-land-use", lastModified: "2026-03-09" },
   { slug: "half-population-elderly-municipalities", lastModified: "2026-07-16" },
@@ -328,10 +331,12 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "oyster-consumption-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "pachinko-education-cost", lastModified: "2026-08-28" },
   { slug: "pachinko-participation-prefecture-gap", lastModified: "2026-05-31" },
+  { slug: "pachinko-shop-density-per-10k-vs-high-school-education-cost", lastModified: "2026-08-29" },
   { slug: "park-green-space-gap", lastModified: "2026-03-09" },
   { slug: "passport-issuance-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "pasta-consumption-quantity", lastModified: "2026-06-07" },
   { slug: "paved-road-total-length", lastModified: "2026-06-07" },
+  { slug: "peach-consumption-quantity-vs-disaster-relief-expenses", lastModified: "2026-08-29" },
   { slug: "peach-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "per-capita-income-gap", lastModified: "2026-03-05" },
   { slug: "personal-computer-expenditure-ranking", lastModified: "2026-07-10" },
@@ -365,6 +370,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "public-phone-prefecture-vanishing", lastModified: "2026-03-29" },
   { slug: "purchasing-power-adjusted", lastModified: "2026-03-06" },
   { slug: "real-disposable-income-reversal", lastModified: "2026-07-20" },
+  { slug: "real-disposable-income-vs-taxpayer-ratio-per-pref-resident", lastModified: "2026-08-29" },
   { slug: "real-income-taxpayer", lastModified: "2026-08-28" },
   { slug: "recycling-rate-gap", lastModified: "2026-03-06" },
   { slug: "refrigerator-expenditure-ranking", lastModified: "2026-07-10" },
@@ -395,6 +401,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "shizuoka-food-culture", lastModified: "2026-07-10" },
   { slug: "shochu-consumption-prefecture-gap", lastModified: "2026-06-07" },
   { slug: "shochu-expenditure-vs-sake-ranking", lastModified: "2026-07-10" },
+  { slug: "shumai-consumption-expenditure-vs-main-household-ratio-main", lastModified: "2026-08-29" },
   { slug: "sixth-industry-direct-sales", lastModified: "2026-03-06" },
   { slug: "small-business-dominance-map", lastModified: "2026-03-09" },
   { slug: "smartphone-ownership-prefecture-gap", lastModified: "2026-05-31" },
@@ -415,6 +422,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "sunshine-solar-housing-correlation", lastModified: "2026-05-20" },
   { slug: "sushi-dining-consumption-expenditure", lastModified: "2026-06-07" },
   { slug: "sweet-potato-expenditure-ranking", lastModified: "2026-07-10" },
+  { slug: "swimming-pool-public-vs-post-office-count", lastModified: "2026-08-29" },
   { slug: "system-consultant-income-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "system-consultant-income-ranking", lastModified: "2026-06-02" },
   { slug: "taxi-driver-income-prefecture-gap", lastModified: "2026-05-31" },
@@ -422,6 +430,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "telework-rate-tokyo-gap", lastModified: "2026-05-29" },
   { slug: "temperature-extremes-map", lastModified: "2026-03-09" },
   { slug: "textbook-expenditure-ranking", lastModified: "2026-07-10" },
+  { slug: "tissue-paper-consumption-expenditure-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "tissue-paper-consumption-expenditure-vs-average-weight", lastModified: "2026-08-29" },
   { slug: "tobacco-expenditure-ranking", lastModified: "2026-07-09" },
   { slug: "tochigi-food-culture", lastModified: "2026-07-10" },
@@ -456,6 +465,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "vacant-housing-vs-aging", lastModified: "2026-07-12" },
   { slug: "vacant-housing-vs-land-price", lastModified: "2026-07-12" },
   { slug: "vacant-housing-vs-welfare-commissioner", lastModified: "2026-07-12" },
+  { slug: "voluntary-car-insurance-rate-bodily-injury-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "wage-vs-living-cost", lastModified: "2026-03-03" },
   { slug: "waiting-children-progress", lastModified: "2026-03-04" },
   { slug: "wakayama-food-culture", lastModified: "2026-07-10" },
