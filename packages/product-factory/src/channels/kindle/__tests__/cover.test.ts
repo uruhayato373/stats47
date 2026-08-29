@@ -2,14 +2,13 @@
  * カバーのタイポグラフィ・インク決定の不変量テスト。
  *
  * Kindle ストアの表紙は PC で 150×240px、スマホではさらに小さい。この寸法で読めるかは
- * 「主題を 1 行で最大級に置けているか」で決まる。2026-08-12 の実測では
- * ①字間を幅計算に入れておらず 8 文字で 3% 溢れて 2 行に割れた
- * ②白固定インクだったため明るい背景で主題がほぼ読めなかった
- * の 2 つが起きた。どちらも見た目にしか出ないので、ここで数値として固定する。
+ * 「主題を 1 行で最大級に置けているか」「背景画像と文字面を競合させないか」で決まる。
+ * 2026-08-30 の売れ筋実画面と既存32冊を比較し、上58%を明るい文字面、下42%を画像面に
+ * 分けた。どちらも見た目にしか出ないので、幅とピクセル位置をここで固定する。
  */
 import sharp from "sharp";
 import { describe, expect, it } from "vitest";
-import { mainTitleSize, resolveInk, splitTitle } from "../cover";
+import { buildCoverPng, mainTitleSize, splitTitle } from "../cover";
 
 /** 表紙の実寸 (cover.ts と同じ)。テスト内の期待値もこれを基準にする。 */
 const W = 1600;
@@ -22,7 +21,7 @@ function renderedWidth(main: string, fontSize: number): number {
   return main.length * fontSize * (1 + TRACKING_EM);
 }
 
-/** 単色の JPEG を作る (resolveInk の入力用)。 */
+/** 単色の JPEG を作る (文字面と画像面の分離テスト用)。 */
 async function solidJpeg(hex: string): Promise<Buffer> {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
@@ -118,43 +117,22 @@ describe("mainTitleSize — 主題が 1 行に収まる", () => {
   });
 });
 
-describe("resolveInk — 背景の明るさでインクを決める", () => {
-  it("★明るい背景では濃いインクにする (白固定だと主題が消える)", async () => {
-    const ink = await resolveInk(await solidJpeg("#f3ece0"), "#7fc4ff");
-    expect(ink.main).toBe("#0d1f3c");
-    expect(ink.main).not.toBe("#ffffff");
-  });
+describe("buildCoverPng — 明るい文字面と画像面を分離する", () => {
+  it("上58%は明るい文字面、下42%は背景画像を維持する", async () => {
+    const cover = await buildCoverPng({
+      title: "実質手取りの地図 — 住む県で変わる、暮らしのお金",
+      subtitle: "年収ランキングでは見えない47都道府県の家計",
+      series: "S1-issues",
+      author: "stats47",
+      backgroundJpeg: await solidJpeg("#040a14"),
+    });
+    const image = sharp(cover);
+    const top = await image.clone().extract({ left: 20, top: 20, width: 1, height: 1 }).raw().toBuffer();
+    const bottom = await image.clone().extract({ left: 20, top: 2500, width: 1, height: 1 }).raw().toBuffer();
 
-  it("暗い背景では白インクにする", async () => {
-    const ink = await resolveInk(await solidJpeg("#040a14"), "#7fc4ff");
-    expect(ink.main).toBe("#ffffff");
-  });
-
-  it("背景が無ければ白インク (シリーズ基調色の無地)", async () => {
-    const ink = await resolveInk(undefined, "#7fc4ff");
-    expect(ink.main).toBe("#ffffff");
-    expect(ink.sub).toBe("#7fc4ff");
-  });
-
-  it("壊れた画像でも落ちず暗背景の既定にフォールバックする", async () => {
-    const ink = await resolveInk(Buffer.from("not-an-image"), "#7fc4ff");
-    expect(ink.main).toBe("#ffffff");
-  });
-
-  it("判定は上部だけを見る (タイトルはそこにしか置かない)", async () => {
-    // 上 45% が明るく、下が真っ黒な背景 → 明るい判定になるべき
-    const top = await sharp({
-      create: { width: W, height: Math.round(2560 * 0.45), channels: 3, background: "#f5f0e6" },
-    })
-      .png()
-      .toBuffer();
-    const bg = await sharp({
-      create: { width: W, height: 2560, channels: 3, background: { r: 0, g: 0, b: 0 } },
-    })
-      .composite([{ input: top, top: 0, left: 0 }])
-      .jpeg()
-      .toBuffer();
-    const ink = await resolveInk(bg, "#7fc4ff");
-    expect(ink.main).toBe("#0d1f3c");
+    expect([...top.slice(0, 3)]).toEqual([242, 246, 250]);
+    expect(bottom[0]).toBeLessThan(15);
+    expect(bottom[1]).toBeLessThan(20);
+    expect(bottom[2]).toBeLessThan(30);
   });
 });
