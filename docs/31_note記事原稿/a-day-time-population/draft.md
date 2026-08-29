@@ -1,7 +1,10 @@
 ---
 title: "【2020年版】昼間人口が最も多い県は？ 1位は東京都｜都道府県ランキング"
 description: "東京都が16,315,279人で全国1位。最下位の鳥取県は552,505人。47都道府県の昼間人口を比較します。正式指標名は「昼間人口」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/n7a494830e01d"
 tags:
   - 都道府県ランキング
   - 昼間人口

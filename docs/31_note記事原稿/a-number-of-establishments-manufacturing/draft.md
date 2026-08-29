@@ -1,7 +1,10 @@
 ---
 title: "【2014年版・製造業】事業所数が最も多い県は？ 1位は東京都｜都道府県ランキング"
 description: "東京都が49,238所で全国1位。最下位の鳥取県は1,720所。47都道府県の事業所数を比較します。正式指標名は「事業所数」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/nf28da95897e0"
 tags:
   - 都道府県ランキング
   - 製造業

@@ -1,7 +1,10 @@
 ---
 title: "【2019年版】負債現在高が最も多い県は？ 1位は神奈川県｜都道府県ランキング"
 description: "神奈川県が9,304千円で全国1位。最下位の徳島県は3,472千円。47都道府県の負債現在高を比較します。正式指標名は「負債現在高」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/nbdbde1672cc0"
 tags:
   - 都道府県ランキング
   - 負債現在高

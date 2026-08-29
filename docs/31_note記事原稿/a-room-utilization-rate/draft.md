@@ -1,7 +1,10 @@
 ---
 title: "【2024年版】客室稼働率が最も高い県は？ 1位は東京都｜都道府県ランキング"
 description: "東京都が80.4％で全国1位。最下位の長野県は57.8％。47都道府県の客室稼働率を比較します。正式指標名は「客室稼働率」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/na895280512fc"
 tags:
   - 都道府県ランキング
   - 客室稼働率

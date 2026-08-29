@@ -1,7 +1,10 @@
 ---
 title: "【2023年版】後期高齢者医療費が最も多い県は？ 1位は福岡県｜都道府県ランキング"
 description: "福岡県が1,195,147円で全国1位。最下位の新潟県は775,287円。47都道府県の後期高齢者医療費を比較します。正式指標名は「後期高齢者医療費」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/ncd0aea7cd435"
 tags:
   - 都道府県ランキング
   - 後期高齢者

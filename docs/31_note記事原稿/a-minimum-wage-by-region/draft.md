@@ -1,7 +1,10 @@
 ---
 title: "【2024年版】地域別最低賃金が最も高い県は？ 1位は東京都｜都道府県ランキング"
 description: "東京都が1,163円で全国1位。最下位の秋田県は951円。47都道府県の地域別最低賃金を比較します。正式指標名は「地域別最低賃金」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/n2a465fecbdec"
 tags:
   - 都道府県ランキング
   - 最低賃金

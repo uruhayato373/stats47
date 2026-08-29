@@ -1,7 +1,10 @@
 ---
 title: "【2024年版】平均消費性向が最も高い県は？ 1位は鳥取県｜都道府県ランキング"
 description: "鳥取県が71.5％で全国1位。最下位の京都府は56.1％。47都道府県の平均消費性向を比較します。正式指標名は「平均消費性向」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/n76446d252957"
 tags:
   - 都道府県ランキング
   - 平均消費性向

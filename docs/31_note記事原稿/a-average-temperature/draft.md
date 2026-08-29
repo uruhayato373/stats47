@@ -1,7 +1,10 @@
 ---
 title: "【2024年版】年平均気温が最も高い県は？ 1位は沖縄県｜都道府県ランキング"
 description: "沖縄県が24.4℃で全国1位。最下位の北海道は10.5℃。47都道府県の年平均気温を比較します。正式指標名は「年平均気温」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/n97ddfadff36a"
 tags:
   - 都道府県ランキング
   - 年平均気温

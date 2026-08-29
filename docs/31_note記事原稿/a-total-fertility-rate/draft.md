@@ -1,7 +1,10 @@
 ---
 title: "【2023年版】合計特殊出生率が最も高い県は？ 1位は沖縄県｜都道府県ランキング"
 description: "沖縄県が1.6（人）で全国1位。最下位の東京都は0.99（人）。47都道府県の合計特殊出生率を比較します。正式指標名は「合計特殊出生率」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/nf4b16d26f6e8"
 tags:
   - 都道府県ランキング
   - 合計特殊出生率

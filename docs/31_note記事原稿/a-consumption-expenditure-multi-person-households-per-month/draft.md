@@ -1,7 +1,10 @@
 ---
 title: "【2024年版】最も消費支出が多い県は？ 1位は埼玉県｜都道府県ランキング"
 description: "埼玉県が357.9千円で全国1位。最下位の沖縄県は256.3千円。47都道府県の二人以上世帯の1か月の消費支出を比較します。正式指標名は「消費支出」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/n89f8035eb53d"
 tags:
   - 都道府県ランキング
   - 消費支出

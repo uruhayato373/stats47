@@ -1,7 +1,10 @@
 ---
 title: "【2023年版】発電電力量が最も多い県は？ 1位は千葉県｜都道府県ランキング"
 description: "千葉県が80,635,294Ｍｗｈで全国1位。最下位の埼玉県は537,679Ｍｗｈ。47都道府県の発電電力量を比較します。正式指標名は「発電電力量」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/n5b3dbb6c7cef"
 tags:
   - 都道府県ランキング
   - 発電電力量

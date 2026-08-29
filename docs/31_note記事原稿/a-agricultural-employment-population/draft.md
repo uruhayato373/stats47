@@ -1,7 +1,10 @@
 ---
 title: "【2014年版】農業就業人口が最も多い県は？ 1位は北海道｜都道府県ランキング"
 description: "北海道が96,557人で全国1位。最下位の東京都は10,986人。47都道府県の農業就業人口を比較します。正式指標名は「農業就業人口」です。"
-status: draft
+status: published
+published: true
+published_at: "2026-08-29"
+note_url: "https://note.com/stats47/n/n66a286b5211b"
 tags:
   - 都道府県ランキング
   - 農業就業人口
