@@ -21,6 +21,9 @@ import { shouldSkipRemoteR2Read } from "../utils/should-skip-remote-r2-read";
 function isSafeR2Key(key: string): boolean {
   if (typeof key !== "string" || key.length === 0) return false;
   if (key.includes("\0") || key.includes("\\")) return false;
+  // 公開URLへ組み込む key はパス文字だけに限定する。`?` / `#` / 空白 /
+  // 非ASCIIを許すと、オブジェクトパスではなくURLの別要素として解釈されうる。
+  if (!/^[a-z0-9._-]+(?:\/[a-z0-9._-]+)*$/i.test(key)) return false;
   // 絶対パス / プロトコル相対 (`/foo`, `//host`)
   if (key.startsWith("/")) return false;
   // スキーム付き URL (`http://`, `file:`, `data:` 等)
@@ -57,7 +60,13 @@ function getPublicR2Base(): string | null {
 }
 
 async function fetchFromPublicUrl(base: string, key: string): Promise<Buffer | null> {
-  const url = `${base}/${key.replace(/^\/+/, "")}`;
+  const baseUrl = new URL(base.endsWith("/") ? base : `${base}/`);
+  if (!["http:", "https:"].includes(baseUrl.protocol) || baseUrl.username || baseUrl.password) {
+    throw new Error("公開 R2 URL は認証情報を含まない http(s) URL である必要があります");
+  }
+  baseUrl.search = "";
+  baseUrl.hash = "";
+  const url = new URL(key, baseUrl).toString();
   const res = await fetch(url);
   if (res.status === 404) return null;
   if (!res.ok) {

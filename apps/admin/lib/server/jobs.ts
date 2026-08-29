@@ -1,6 +1,8 @@
 import "server-only";
 
 import { spawn } from "node:child_process";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 
 import { projectRoot } from "./project-root";
 import { saveGalleryState } from "./gallery-state";
@@ -40,6 +42,76 @@ function registry(): JobRegistry {
 
 const MAX_LOG_LINES = 500;
 
+export interface JobStep {
+  cmd: string;
+  args: string[];
+  requiredFile?: string;
+}
+
+function beginJob(
+  kind: string,
+  command: string,
+): { reg: JobRegistry; job: Job } | { error: string } {
+  const reg = registry();
+  if (reg.runningId !== null && reg.jobs.get(reg.runningId)?.status === "running") {
+    return { error: `別のジョブ (#${reg.runningId}) が実行中。完了を待ってください` };
+  }
+  const id = reg.seq++;
+  const job: Job = {
+    id,
+    kind,
+    cmd: command,
+    status: "running",
+    log: [],
+    startedAt: new Date().toISOString(),
+  };
+  reg.jobs.set(id, job);
+  reg.runningId = id;
+  return { reg, job };
+}
+
+function appendLog(job: Job, value: Buffer | string): void {
+  for (const line of String(value).split("\n")) if (line.trim()) job.log.push(line);
+  if (job.log.length > MAX_LOG_LINES) job.log.splice(0, job.log.length - MAX_LOG_LINES);
+}
+
+function finishJob(reg: JobRegistry, job: Job, code: number): void {
+  job.status = code === 0 ? "success" : "failed";
+  job.exitCode = code;
+  job.endedAt = new Date().toISOString();
+  if (reg.runningId === job.id) reg.runningId = null;
+  if (job.kind === "publish-x" && code === 0) {
+    saveGalleryState({ lastPublishXSuccess: job.endedAt });
+  }
+}
+
+function spawnStep(
+  reg: JobRegistry,
+  job: Job,
+  step: JobStep,
+  onSuccess: () => void,
+): void {
+  if (step.requiredFile && !existsSync(resolve(projectRoot(), step.requiredFile))) {
+    appendLog(job, `required file missing: ${step.requiredFile}`);
+    finishJob(reg, job, 1);
+    return;
+  }
+  const child = spawn(step.cmd, step.args, {
+    cwd: projectRoot(),
+    env: { ...process.env },
+  });
+  child.stdout.on("data", (value) => appendLog(job, value));
+  child.stderr.on("data", (value) => appendLog(job, value));
+  child.on("close", (code) => {
+    if (code === 0) onSuccess();
+    else finishJob(reg, job, code ?? 1);
+  });
+  child.on("error", (err) => {
+    appendLog(job, `spawn error: ${err.message}`);
+    finishJob(reg, job, 1);
+  });
+}
+
 /**
  * ジョブを起動する。実行中ジョブがあれば { error } (呼び元は 409)。
  * kind==="publish-x" かつ exit 0 で gallery-state の lastPublishXSuccess を更新する。
@@ -49,45 +121,33 @@ export function startJob(
   cmd: string,
   args: string[],
 ): { id: number } | { error: string } {
-  const reg = registry();
-  if (reg.runningId !== null && reg.jobs.get(reg.runningId)?.status === "running") {
-    return { error: `別のジョブ (#${reg.runningId}) が実行中。完了を待ってください` };
-  }
-  const id = reg.seq++;
-  const job: Job = {
-    id,
-    kind,
-    cmd: `${cmd} ${args.join(" ")}`,
-    status: "running",
-    log: [],
-    startedAt: new Date().toISOString(),
-  };
-  reg.jobs.set(id, job);
-  reg.runningId = id;
+  const started = beginJob(kind, `${cmd} ${args.join(" ")}`);
+  if ("error" in started) return started;
+  const { reg, job } = started;
+  spawnStep(reg, job, { cmd, args }, () => finishJob(reg, job, 0));
+  return { id: job.id };
+}
 
-  const child = spawn(cmd, args, { cwd: projectRoot(), env: { ...process.env } });
-  const append = (buf: Buffer | string) => {
-    for (const line of String(buf).split("\n")) if (line.trim()) job.log.push(line);
-    if (job.log.length > MAX_LOG_LINES) job.log.splice(0, job.log.length - MAX_LOG_LINES);
-  };
-  child.stdout.on("data", append);
-  child.stderr.on("data", append);
-  child.on("close", (code) => {
-    job.status = code === 0 ? "success" : "failed";
-    job.exitCode = code;
-    job.endedAt = new Date().toISOString();
-    if (reg.runningId === id) reg.runningId = null;
-    if (job.kind === "publish-x" && code === 0) {
-      saveGalleryState({ lastPublishXSuccess: job.endedAt });
+/** shellを経由せず、固定された複数コマンドを同じジョブとして直列実行する。 */
+export function startJobSteps(
+  kind: string,
+  steps: JobStep[],
+): { id: number } | { error: string } {
+  if (steps.length === 0) return { error: "実行stepがありません" };
+  const command = steps.map(({ cmd, args }) => `${cmd} ${args.join(" ")}`).join(" && ");
+  const started = beginJob(kind, command);
+  if ("error" in started) return started;
+  const { reg, job } = started;
+  const run = (index: number): void => {
+    const step = steps[index];
+    if (!step) {
+      finishJob(reg, job, 0);
+      return;
     }
-  });
-  child.on("error", (err) => {
-    job.status = "failed";
-    job.log.push(`spawn error: ${err.message}`);
-    job.endedAt = new Date().toISOString();
-    if (reg.runningId === id) reg.runningId = null;
-  });
-  return { id };
+    spawnStep(reg, job, step, () => run(index + 1));
+  };
+  run(0);
+  return { id: job.id };
 }
 
 /** 全ジョブの一覧 (log は末尾 3 行だけ)。旧 GET /api/jobs 相当。 */

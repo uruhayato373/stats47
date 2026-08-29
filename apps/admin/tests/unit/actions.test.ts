@@ -14,9 +14,9 @@ class FakeChild extends EventEmitter {
   stdout = new EventEmitter();
   stderr = new EventEmitter();
 }
-const spawnMock = vi.fn(() => new FakeChild());
+const spawnMock = vi.fn<(...args: unknown[]) => FakeChild>(() => new FakeChild());
 vi.mock("node:child_process", () => ({
-  spawn: (...args: unknown[]) => spawnMock(...(args as [])),
+  spawn: (...args: unknown[]) => spawnMock(...args),
 }));
 
 describe("actions guards", () => {
@@ -50,6 +50,10 @@ describe("actions guards", () => {
       const r = regenerate({ kind: "blog-thumbnails" });
       expect(r.status).toBe(202);
       expect(spawnMock).toHaveBeenCalledTimes(1);
+      expect(spawnMock.mock.calls[0]?.[0]).toBe("npx");
+      expect(spawnMock.mock.calls[0]?.[1]).toEqual(
+        expect.arrayContaining(["tsx", "apps/web/scripts/generate-blog-thumbnails-cloud.ts"]),
+      );
     });
   });
 

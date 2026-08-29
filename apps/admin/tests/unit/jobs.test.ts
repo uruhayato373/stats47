@@ -1,4 +1,6 @@
 import { EventEmitter } from "node:events";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -148,5 +150,53 @@ describe("startJob", () => {
     vi.resetModules();
     const mod2 = await import("@/lib/server/jobs");
     expect(mod2.getJob(r.id)?.id).toBe(r.id);
+  });
+
+  it("複数stepをshellなしで順番に実行する", async () => {
+    const { startJobSteps, getJob } = await import("@/lib/server/jobs");
+    const plan = ".local/plan.json";
+    mkdirSync(join(root, ".local"), { recursive: true });
+    writeFileSync(join(root, plan), "{}\n");
+
+    const r = startJobSteps("regenerate:test", [
+      { cmd: "npx", args: ["tsx", "generate.ts"] },
+      { cmd: "npx", args: ["tsx", "push.ts", "--plan", plan], requiredFile: plan },
+    ]);
+    if (!("id" in r)) throw new Error("expected id");
+
+    expect(spawnMock).toHaveBeenNthCalledWith(
+      1,
+      "npx",
+      ["tsx", "generate.ts"],
+      expect.objectContaining({ cwd: root }),
+    );
+    (spawnMock.mock.results[0].value as FakeChild).emit("close", 0);
+    expect(spawnMock).toHaveBeenNthCalledWith(
+      2,
+      "npx",
+      ["tsx", "push.ts", "--plan", plan],
+      expect.objectContaining({ cwd: root }),
+    );
+    (spawnMock.mock.results[1].value as FakeChild).emit("close", 0);
+    expect(getJob(r.id)?.status).toBe("success");
+  });
+
+  it("requiredFileが無ければ次stepを起動せずfailedにする", async () => {
+    const { startJobSteps, getJob } = await import("@/lib/server/jobs");
+    const r = startJobSteps("regenerate:test", [
+      { cmd: "npx", args: ["tsx", "generate.ts"] },
+      {
+        cmd: "npx",
+        args: ["tsx", "push.ts", "--plan", ".local/missing.json"],
+        requiredFile: ".local/missing.json",
+      },
+    ]);
+    if (!("id" in r)) throw new Error("expected id");
+
+    (spawnMock.mock.results[0].value as FakeChild).emit("close", 0);
+
+    expect(spawnMock).toHaveBeenCalledTimes(1);
+    expect(getJob(r.id)?.status).toBe("failed");
+    expect(getJob(r.id)?.log.some((line) => line.includes("required file missing"))).toBe(true);
   });
 });

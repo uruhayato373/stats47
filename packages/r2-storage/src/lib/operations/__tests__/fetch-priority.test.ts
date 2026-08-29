@@ -63,4 +63,20 @@ describe("fetchFromR2 read tier priority", () => {
     expect(mocks.s3Send).not.toHaveBeenCalled();
     expect(mocks.bindingGet).not.toHaveBeenCalled();
   });
+
+  it.each([
+    "app/stats/example/values.json?redirect=https://evil.example",
+    "app/stats/example/values.json#fragment",
+    "app/stats/日本語/values.json",
+    "app/stats/with space/values.json",
+  ])("公開URLのパスとして解釈できないR2 keyを拒否する: %s", async (key) => {
+    delete process.env.R2_ACCESS_KEY_ID;
+    delete process.env.R2_SECRET_ACCESS_KEY;
+    delete process.env.R2_S3_ENDPOINT;
+
+    const body = await fetchFromR2(key);
+
+    expect(body).toBeNull();
+    expect(globalThis.fetch).not.toHaveBeenCalled();
+  });
 });

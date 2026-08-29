@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T09:28:54.082Z",
+  "updatedAt": "2026-08-29T22:38:27.411Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3354,6 +3354,44 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-29T08:20:33.629Z"
+    },
+    "CODEQL-JS-BACKLOG-01": {
+      "class": "test-fix",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-29T22:38:27.411Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "VITE_CONFIG_NATIVE_IGNORE_WARNING=true npx vitest run apps/admin/tests/unit/jobs.test.ts apps/admin/tests/unit/actions.test.ts packages/r2-storage/src/lib/operations/__tests__/fetch-priority.test.ts",
+              "npm run test --workspace apps/admin",
+              "npx vitest run --project @stats47/r2-storage",
+              "npm run type-check --workspace apps/admin",
+              "npm run type-check --workspace @stats47/r2-storage",
+              "npm audit --json"
+            ],
+            "pass": true
+          },
+          "evidence": "R2 URL key 4種とadmin shell-free 3 fixtureが修正前RED→修正後GREEN。admin174、r2-storage55、両type-check、npm audit 0件。SARIFと実生成は外部実行未承認。",
+          "failReason": "Security Scan workflow dispatchとgallery実生成/R2反映が未承認のため完了条件の外部ゲート未実行",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "Security Scan workflow dispatchとgallery実生成/R2反映が未承認のため完了条件の外部ゲート未実行",
+        "since": "2026-08-29T22:38:27.411Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }
