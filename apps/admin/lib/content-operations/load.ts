@@ -121,6 +121,19 @@ function loadNoteOutbox(root: string) {
     });
 }
 
+function loadNoteGenerationBlockers(root: string) {
+  const rel = ".claude/state/content-operations/note-generation-blockers.json";
+  const raw = readOptionalJson(root, rel) as
+    | { blockers?: Record<string, { code?: string; message?: string; source?: string }> }
+    | null;
+  return Object.entries(raw?.blockers ?? {}).map(([rankingKey, blocker]) => ({
+    rankingKey,
+    code: blocker.code ?? "UNKNOWN",
+    message: blocker.message ?? "note生成ゲートで停止",
+    sourcePath: rel,
+  }));
+}
+
 /**
  * 各チャネルの既存SSOTを、管理画面専用の読み取りモデルへ正規化する。
  * ここには書き込みを置かない。公開状態の更新は各channel owner/skillだけが行う。
@@ -170,6 +183,7 @@ export function loadContentOperations(
       })),
       ...loadNoteOutbox(root),
     ],
+    noteBlockers: loadNoteGenerationBlockers(root),
     kindleBooks: KINDLE_BOOKS.map((book) => ({
       id: book.id,
       status: book.status,

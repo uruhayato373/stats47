@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "general-households",
+  "year": "2020",
+  "unit": "万世帯",
+  "label": "一般世帯数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/general-households/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug general-households-prefecture-gap --keys general-households --data-name general-households-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-29T07:55:17.870Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

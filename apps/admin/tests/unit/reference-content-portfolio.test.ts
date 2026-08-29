@@ -140,4 +140,31 @@ describe("reference content portfolio", () => {
       .toEqual(["site", "blog", "note"]);
     expect(result.summary.readySlots).toBe(0);
   });
+
+  it("note生成の決定的blockerをreadyではなくblockedとして表示する", () => {
+    const result = buildReferenceContentPortfolio(
+      fixture({
+        blogs: [],
+        kindleBooks: [],
+        noteBlockers: [
+          {
+            rankingKey: "sample-metric",
+            code: "ZERO_DENOMINATOR",
+            message: "最下位値が0のため倍率を計算できません",
+            sourcePath: ".claude/state/content-operations/note-generation-blockers.json",
+          },
+        ],
+      }),
+    );
+    const metric = result.units.find((unit) => unit.id === "metric:sample-metric")!;
+    const note = metric.channels.find((channel) => channel.channel === "note")!;
+
+    expect(note.stage).toBe("blocked");
+    expect(note.itemIds).toEqual(["ZERO_DENOMINATOR"]);
+    expect(result.summary.byChannel.note.blocked).toBe(1);
+    expect(result.summary.byChannel.note.ready).toBe(0);
+    expect(result.audit.findings).toContainEqual(
+      expect.objectContaining({ code: "REFERENCE_NOTE_GENERATION_BLOCKED" }),
+    );
+  });
 });
