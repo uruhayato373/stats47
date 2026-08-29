@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T08:22:41.787Z",
+  "updatedAt": "2026-08-29T00:40:45.069Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -812,6 +812,19 @@
           "costUsd": null,
           "gate": null,
           "evidence": "route.class は既に needs-owner (queue 側判定・attempts=3・escalatedFrom=fable)。オーナー判断待ちのため触らず次へ",
+          "failReason": "needs-owner",
+          "followUps": []
+        },
+        {
+          "at": "2026-08-29T00:40:36.999Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "queue が knownClass=needs-owner (route.apply=surface-only) と確定済み。オーナー実装カードでありCIでは削除・status変更不可。",
           "failReason": "needs-owner",
           "followUps": []
         }
@@ -3055,6 +3068,34 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-28T08:15:00.689Z"
+    },
+    "CHART-LINEAGE-RESIDUAL-01": {
+      "class": "indicator-expansion",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-29T00:40:45.069Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "残5件の律速は全てSSOT未投入/isActive:false指標のe-Stat実在確認・投入 (県民所得2021年度・国際協力ボランティア率・製造品出荷額算出式)。indicator-expansion classはdraft-pr前提でこのCI runでは着手しない。",
+          "failReason": "class-needs-pr",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }
