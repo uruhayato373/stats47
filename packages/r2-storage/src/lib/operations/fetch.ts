@@ -66,7 +66,13 @@ async function fetchFromPublicUrl(base: string, key: string): Promise<Buffer | n
   }
   baseUrl.search = "";
   baseUrl.hash = "";
-  const url = new URL(key, baseUrl).toString();
+  // URL path segment ごとに percent-encode する。key の allowlist と合わせて、
+  // 呼び出し元の値が origin / query / fragment を変更できないことを構造的に保証する。
+  const encodedKey = key
+    .split("/")
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+  const url = new URL(encodedKey, baseUrl).toString();
   const res = await fetch(url);
   if (res.status === 404) return null;
   if (!res.ok) {

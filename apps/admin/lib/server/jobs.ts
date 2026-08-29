@@ -43,7 +43,7 @@ function registry(): JobRegistry {
 const MAX_LOG_LINES = 500;
 
 export interface JobStep {
-  cmd: string;
+  cmd: "npx";
   args: string[];
   requiredFile?: string;
 }
@@ -91,13 +91,20 @@ function spawnStep(
   step: JobStep,
   onSuccess: () => void,
 ): void {
+  if (step.cmd !== "npx") {
+    appendLog(job, `unsupported executable: ${step.cmd}`);
+    finishJob(reg, job, 1);
+    return;
+  }
   if (step.requiredFile && !existsSync(resolve(projectRoot(), step.requiredFile))) {
     appendLog(job, `required file missing: ${step.requiredFile}`);
     finishJob(reg, job, 1);
     return;
   }
-  const child = spawn(step.cmd, step.args, {
-    cwd: projectRoot(),
+  const child = spawn("npx", step.args, {
+    // `npm run admin` は workspace cwd=apps/admin で起動する。環境変数由来の
+    // STATS47_PROJECT_ROOT をプロセス実行へ渡さず、固定階層からrepo rootへ戻る。
+    cwd: resolve(process.cwd(), "../.."),
     env: { ...process.env },
   });
   child.stdout.on("data", (value) => appendLog(job, value));
@@ -118,9 +125,10 @@ function spawnStep(
  */
 export function startJob(
   kind: string,
-  cmd: string,
+  cmd: "npx",
   args: string[],
 ): { id: number } | { error: string } {
+  if (cmd !== "npx") return { error: `unsupported executable: ${cmd}` };
   const started = beginJob(kind, `${cmd} ${args.join(" ")}`);
   if ("error" in started) return started;
   const { reg, job } = started;

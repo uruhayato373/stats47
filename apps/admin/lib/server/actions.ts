@@ -1,8 +1,6 @@
 import 'server-only';
 
-import path from 'node:path';
-
-import { projectRoot, R2_BASE } from './project-root';
+import { R2_BASE } from './project-root';
 import { startJob, startJobSteps, type JobStep } from './jobs';
 import { loadGalleryState } from './gallery-state';
 
@@ -13,9 +11,7 @@ import { loadGalleryState } from './gallery-state';
  */
 export type ActionResult<T = unknown> = { status: number; body: T };
 
-function publishXScript(): string {
-  return path.join(projectRoot(), '.claude/skills/sns/publish-x/publish-x.ts');
-}
+const PUBLISH_X_SCRIPT = '.claude/skills/sns/publish-x/publish-x.ts';
 
 // ─── publish-x ─────────────────────────────────────
 export interface PublishXInput {
@@ -57,7 +53,7 @@ export function publishX(body: PublishXInput): ActionResult {
       },
     };
   }
-  const args = ['tsx', publishXScript(), content_key];
+  const args = ['tsx', PUBLISH_X_SCRIPT, content_key];
   if (datetime && !immediate) args.push(datetime);
   args.push('--domain', domain);
   if (immediate) args.push('--immediate');
