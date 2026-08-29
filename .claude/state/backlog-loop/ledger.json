@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T22:38:27.411Z",
+  "updatedAt": "2026-08-29T23:22:31.719Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3357,7 +3357,7 @@
     },
     "CODEQL-JS-BACKLOG-01": {
       "class": "test-fix",
-      "status": "open",
+      "status": "completed",
       "sourceFile": null,
       "title": null,
       "attempts": [
@@ -3383,15 +3383,35 @@
           "evidence": "R2 URL key 4種とadmin shell-free 3 fixtureが修正前RED→修正後GREEN。admin174、r2-storage55、両type-check、npm audit 0件。SARIFと実生成は外部実行未承認。",
           "failReason": "Security Scan workflow dispatchとgallery実生成/R2反映が未承認のため完了条件の外部ゲート未実行",
           "followUps": []
+        },
+        {
+          "at": "2026-08-29T23:22:31.719Z",
+          "runId": "33280689110",
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run view 33280366413 --log",
+              "gh run view 33280689110 --log",
+              "curl -sSIL https://storage.stats47.jp/app/blog/cc-estat-18-cache-r2/ogp/ogp.png?verify=33280689110"
+            ],
+            "pass": true
+          },
+          "evidence": "Security Scan 33280366413はSARIF=0。OGP run 33280689110はcc-estat-18-cache-r2をgenerated=1、exact publisher bundle=1 asset=4。公開OGPはHTTP 200 image/png。",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
-        "lastReason": "Security Scan workflow dispatchとgallery実生成/R2反映が未承認のため完了条件の外部ゲート未実行",
-        "since": "2026-08-29T22:38:27.411Z"
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-29T23:22:31.719Z"
     }
   }
 }
