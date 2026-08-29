@@ -3312,6 +3312,48 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-29T09:28:54.082Z"
+    },
+    "JAPAN-ZUE-CONTENT-PIPELINE-01": {
+      "class": "impl-large",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "日本国勢図会の全統計を一次資料化してサイト・記事・動画へ展開する",
+      "attempts": [
+        {
+          "at": "2026-08-29T08:20:33.629Z",
+          "runId": null,
+          "model": "codex",
+          "effort": "high",
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run evidence:check",
+              "npm run type-check --workspace packages/data-configs",
+              "npm run test --workspace apps/admin",
+              "npm run build --workspace apps/admin",
+              "npm run source-vault:check",
+              "npm run docs:check",
+              "node .claude/scripts/lib/check-checker-wiring.cjs --baseline",
+              "node .claude/scripts/lib/audit-workflow-policy.cjs --strict",
+              "node .claude/scripts/lib/check-workspace-contract.cjs",
+              "git diff --check"
+            ],
+            "pass": true
+          },
+          "evidence": "Drive 6 parts/480666655 bytesとbundle SHA・1746 filesを再照合。504ページから継続12ページを統合した1416件を再抽出しresolution 100%、pilot 10/10、表図欠番0、表現一致0。新規metric/local R2、blog-note原稿、YouTube満枠fail-close、SNS lineage、版差分queue、PR/週次CI、admin /researchを実装。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-29T08:20:33.629Z"
     }
   }
 }

@@ -96,7 +96,17 @@
     "source-vault:inventory:check": "node .claude/scripts/source-vault/source-inventory.mjs check-all",
     "source-vault:ready": "node .claude/scripts/source-vault/source-processing.mjs readiness",
     "source-vault:check": "node .claude/scripts/source-vault/source-vault.mjs check-local && node .claude/scripts/source-vault/source-processing.mjs readiness --contract-only && node .claude/scripts/source-vault/source-inventory.mjs check-all",
-    "source-vault:test": "node --test .claude/scripts/source-vault/__tests__/*.test.mjs"
+    "source-vault:test": "node --test .claude/scripts/source-vault/__tests__/*.test.mjs",
+    "evidence:extract": "tsx packages/data-configs/scripts/evidence/japan-zue.ts extract",
+    "evidence:check": "node .claude/scripts/lib/check-japan-zue-evidence-inventory.mjs",
+    "evidence:resolve": "tsx packages/data-configs/scripts/evidence/japan-zue.ts resolve",
+    "evidence:validate": "tsx packages/data-configs/scripts/evidence/japan-zue.ts validate",
+    "evidence:coverage": "tsx packages/data-configs/scripts/evidence/japan-zue.ts coverage",
+    "evidence:expression-audit": "tsx packages/data-configs/scripts/evidence/japan-zue.ts expression-audit",
+    "evidence:diff": "tsx packages/data-configs/scripts/evidence/japan-zue.ts diff",
+    "evidence:pilot:data": "node .claude/scripts/data/fetch-japanese-instruction-students.mjs",
+    "evidence:pilot:data:write-local": "node .claude/scripts/data/fetch-japanese-instruction-students.mjs --write-local",
+    "evidence:test": "vitest run packages/data-configs/src/evidence-inventory/japan-zue/__tests__/*.test.ts && node --test .claude/scripts/data/__tests__/fetch-japanese-instruction-students.test.mjs"
   },
   "devDependencies": {
     "@types/shapefile": "^0.6.4",

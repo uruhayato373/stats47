@@ -1558,6 +1558,25 @@
     "updatedAt": "2026-08-22 00:00:00"
   },
   {
+    "id": "japanese-language-instruction-survey",
+    "sourceKind": "survey",
+    "externalId": null,
+    "parentSourceId": null,
+    "name": "日本語指導が必要な児童生徒の受入状況等に関する調査",
+    "organization": "文部科学省",
+    "url": "https://www.mext.go.jp/b_menu/toukei/chousa01/nihongo/1266536.htm?code=120401",
+    "description": "公立学校に在籍する日本語指導が必要な外国籍・日本国籍の児童生徒について、学校種別・都道府県別の在籍状況などを把握する調査。",
+    "attributionText": "文部科学省「日本語指導が必要な児童生徒の受入状況等に関する調査」",
+    "license": "政府標準利用規約",
+    "licenseUrl": "https://www.digital.go.jp/resources/open_data",
+    "baseUrl": null,
+    "linkTemplate": null,
+    "displayOrder": 85,
+    "isActive": true,
+    "createdAt": "2026-08-29 00:00:00",
+    "updatedAt": "2026-08-29 00:00:00"
+  },
+  {
     "id": "local-public-employee-salary",
     "sourceKind": "survey",
     "externalId": null,

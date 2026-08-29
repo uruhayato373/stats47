@@ -21,59 +21,6 @@ updated: 2026-08-29
 
 ## 🔴 高 — 今月中に着手したい
 
-### [JAPAN-ZUE-CONTENT-PIPELINE-01] 日本国勢図会の全統計を一次資料化してサイト・記事・動画へ展開する
-
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-08-27] [進行中]
-
-- **program owner**: `open-data-curator`。工程ownerは
-  `docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md` §9。
-- **再開ポインタ**: `lastCompleted=WP3-resolution-inventory+WP4-production-portfolio` /
-  `nextWorkPackage=WP4-channel-production`。管理コンソール`/content/references`が全資料を実在SSOTへ突合し、
-  重複排除した制作単位とチャネル別の統合済み・制作可能・停止を派生表示する。最新件数は同画面と
-  `npm run audit:content-operations`だけを正典とし、個別制作物の別TODOは作らない。
-- **現状証拠**: private bundle 6 parts / 480,666,655 bytesを照合・復元し、1,746 files、bundle SHA
-  `a14a45e9d6bdd29e49de0786bdb88f1080ffcff1c5cae739b62a1b2e881de02f`を再現。p.26–529の504ページは
-  欠番・重複0、実見出し904、候補1,429（table 769 / figure 202 / text-stat 458）。索引・出典注記に加えて
-  図の軸・系列・凡例説明117件を除去し、分割続表を統合した再抽出SHAは
-  `bc7f5f61bb7b9531156f53e96632a00e821a3792568f0f1c9520d234102e2b76`で安定。判断済みIDの付け替わりは0。
-  p.1–25（第1章「世界の国々」）はstats47の都道府県コンテンツ対象外としてscope exclusionに記録。
-  対象範囲のsource coverageは100%。出版社正誤表11件中、定量解釈へ影響する7件はcandidate到達監査green。
-  全候補は793 review groupに整理済みで、相互参照212件の参照先不明は0。直接出典447 group / 975候補のうち、
-  151 group / 473候補を56 survey IDへ完全一致で対応付け、曖昧一致・master外IDは0。
-  全1,429候補は`reuse-existing-metric` 34 / `context-only` 887 / `primary-source-unavailable` 431 /
-  `rights-hold` 77へ重複・欠落なく固定し、resolution coverage 100%、lineage error 0。公開へ進められる
-  921件と、一次資料・権利の解決まで停止する508件を機械的に分離済み。100%は全件公開ではなく、全候補へ
-  公開可否と再開条件を付与したことを表す。
-  p.26–65 pilotは107候補（table 40 / figure 16 / text-stat 51）。
-  figure 201、transcript 13、scan PDF 13。全体は1,746ファイルで、`/books/`はGit対象外。
-  OCRは未校正で数値引用禁止。private Google DriveにはGit manifest 1件と90MiB以下のarchive part 6件を置き、
-  すべて`shared:false`、合計480,666,655 bytesをreadback済み。Git manifestが全1,746ファイルのSHA-256を保持する。
-- **目的**: 書籍を公開taxonomyやデータ出典にせず、全定量項目を内部evidence inventoryへ登録する。
-  数値は一次資料から再取得し、既存Category / Theme / Tag、metric、surveyへ統合した後、
-  ranking / theme / area / japan / blog / note / YouTube通常動画 / Instagram / Xへ展開する。
-- **実行順**:
-  1. WP1 inventory pilot: p.26–65でtyped inventory、stable ID、extract/validate/coverageを実装し、
-     代表10項目を選ぶ。別PCではGit manifestのpart名をGoogle Drive MCPで取得し、
-     `npm run source-vault:japan-zue -- restore`で検証復元してから着手する。
-  2. WP2: stats47対象範囲をp.26–529と定義し、全ページの表・図・本文統計1,429候補の母数を確定する。
-  3. WP3: 一次資料・利用条件・既存metric / survey / themeとの重複を全件照合する。
-  4. WP4: 10項目を一次資料→local R2→Web配置までend-to-end実装する。
-  5. WP5: 独自分析のmaster記事・通常動画briefを作り、既存EXP-006の上限内で派生案を作る。
-  6. WP6–7: 全件をwave展開し、版更新・coverage・lineage監査を定常運用へ統合する。
-- **完了条件**:
-  - 全定量項目が一意なIDと解決結果を持ち、resolution coverageが100%。
-  - 公開候補100%に一次資料、年度、単位、地域粒度、rights判定があり、書籍値の直接投入が0。
-  - 新規metricがprovenance、unit、値分布、survey taxonomy、ThemeCatalogの既存gateを通る。
-  - 公開原稿・図表・動画が書籍文章・figure・章構成を模倣せず、独自の問いと分析を持つ。
-  - Web・記事・動画・派生投稿がmetricKeys / surveyIds / provenanceUrlsで追跡できる。
-  - 新版で追加・変更・削除された項目と影響先を機械列挙できる。
-- **停止条件**: 一次資料不明、利用条件不明、民間権利、OCR/原本不一致、年度・単位・地域粒度不一致では
-  `primary-source-unavailable`または`rights-hold`にして停止する。Drive itemの共有、part欠落、manifest / size / hash不一致、
-  公開R2へのsource配置でも停止する。推測値や書籍値で埋めない。
-- **外部変更境界**: remote R2 write、git push、PR、deploy、note / YouTube / Instagram / X公開は
-  対象と検証結果を提示し、別途オーナー承認を得る。Drive source vaultの次revision追加・差し替えもこの境界に含む。
-  YouTubeはEXP-006の6週間3本上限を増やさない。
-
 ### [QUALITY-GATE-COVERAGE-01] CI・テスト・監査の実効網羅性強化
 
 タグ: [起票:2026-08-13]

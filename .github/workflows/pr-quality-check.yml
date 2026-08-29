@@ -224,6 +224,12 @@ jobs:
           npm run source-vault:test
         continue-on-error: false
 
+      - name: 🗾 Japan Zue Evidence Inventory Gate
+        # private原本はCIへ持ち込まない。tracked candidate/item/summaryのhash同期、
+        # 1,428件の判定、pilot 10件の一次資料・単位・地域粒度・lineageを決定的に検査する。
+        run: node .claude/scripts/lib/check-japan-zue-evidence-inventory.mjs
+        continue-on-error: false
+
       - name: 🚧 Web e-Stat Import Boundary Guard
         # 本番 apps/web から e-Stat への推移的な値 import 到達を監視。
         # static/dynamic/re-export/require/wrapper/alias の新規 edge を PR base と比較して弾く。

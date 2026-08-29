@@ -153,15 +153,7 @@ export {
   type VerificationStatus,
   type Stats47Use,
 } from "./open-data-catalog";
-export {
-  CLAUDE_SKILLS_GUIDE_ADOPTIONS,
-  REFERENCE_SOURCE_POLICIES,
-  type EvidenceContentRole,
-  type EvidenceResolution,
-  type EvidenceSourceKey,
-  type InternalEvidenceAdoption,
-  type ReferenceSourcePolicy,
-} from "./evidence-inventory";
+export * from "./evidence-inventory";
 
 // コロプレス配色の決定規則 + 極性 SSOT (正典: .claude/rules/blog-svg-chart-standards.md §3)
 export {
