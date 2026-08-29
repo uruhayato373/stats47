@@ -187,7 +187,7 @@ export default async function Population2050AnalysisPage() {
             className="font-medium text-primary underline"
             href={spec.sourceUrl}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             一次資料を確認
           </a>

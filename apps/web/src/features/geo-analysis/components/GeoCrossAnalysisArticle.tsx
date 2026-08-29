@@ -114,7 +114,7 @@ export async function GeoCrossAnalysisArticle({ slug }: Props) {
           <a
             href={config.hazardMapUrl}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="ml-1 font-medium text-primary underline"
           >
             国のハザードマップポータル
@@ -295,7 +295,7 @@ export async function GeoCrossAnalysisArticle({ slug }: Props) {
                 className="font-medium text-primary underline"
                 href={source.url}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 {source.name}
               </a>{' '}
