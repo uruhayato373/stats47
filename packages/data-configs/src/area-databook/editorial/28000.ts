@@ -41,8 +41,8 @@ export const HYOGO_EDITORIAL: AreaEditorial = {
       municipality: "丹波市ほか丹波地域",
       description:
         "平安時代の「延喜式」にも貢進の記録が残る歴史ある栗の産地。江戸時代に尼崎の商人が売り歩いたことで全国にその名が広まり、盆地特有の昼夜の寒暖差が実の甘みを引き立てる丹波地域の代表銘柄。",
-      sourceUrl: "https://ja.wikipedia.org/wiki/%E4%B8%B9%E6%B3%A2%E6%A0%97",
-      accessedAt: "2026-07-18",
+      sourceUrl: "https://web.pref.hyogo.lg.jp/tnk07/oishitanba.html",
+      accessedAt: "2026-08-29",
     },
     {
       slug: "tamba-kuro-edamame",

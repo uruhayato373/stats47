@@ -1,15 +1,16 @@
 {
-  "hash": "fae72fa5e939bd2588be4be9fb5d814e083e81f5d64f1e01e0741aa081258ccb",
-  "audited_at": "2026-08-29T00:55:26",
+  "hash": "2db138292006869361d23250c50bb8b0b314da09454cc2bf268a691a787e5a78",
+  "audited_at": "2026-08-29T07:10:51",
   "files": [
     ".agents/skills/area/databook-editorial/SKILL.md",
-    ".claude/agents/area-curator.md",
-    ".claude/agents/area-databook-designer.md",
-    ".claude/rules/area-databook-standards.md",
-    ".claude/rules/data-provenance-standards.md",
     ".claude/rules/reference-source-standards.md",
     ".claude/scripts/source-vault/__tests__/japan-zue-bundle.test.mjs",
-    ".claude/scripts/source-vault/japan-zue-bundle.mjs",
+    ".claude/scripts/source-vault/__tests__/source-inventory.test.mjs",
+    ".claude/scripts/source-vault/__tests__/source-processing.test.mjs",
+    ".claude/scripts/source-vault/__tests__/source-vault.test.mjs",
+    ".claude/scripts/source-vault/source-inventory.mjs",
+    ".claude/scripts/source-vault/source-processing.mjs",
+    ".claude/scripts/source-vault/source-vault.mjs",
     ".claude/skills/area/databook-editorial/SKILL.md",
     "CLAUDE.md"
   ]

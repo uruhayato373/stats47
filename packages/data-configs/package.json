@@ -64,6 +64,11 @@
       "types": "./src/business-plan/index.ts",
       "import": "./src/business-plan/index.ts",
       "require": "./src/business-plan/index.ts"
+    },
+    "./evidence-inventory": {
+      "types": "./src/evidence-inventory/index.ts",
+      "import": "./src/evidence-inventory/index.ts",
+      "require": "./src/evidence-inventory/index.ts"
     }
   },
   "scripts": {

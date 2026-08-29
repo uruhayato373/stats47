@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "profile": "japan-zue",
+  "sourceKey": "japan-zue",
+  "edition": "2025-26",
+  "input": {
+    "pages": 504,
+    "scope": "p026-p529",
+    "sourceBundleFiles": 1746,
+    "internalFigureCount": 201
+  },
+  "itemCount": 1429,
+  "resolvedCount": 1429,
+  "resolutionCoverage": 1,
+  "actionableCount": 921,
+  "blockedCount": 508,
+  "byResolution": {
+    "context-only": 887,
+    "primary-source-unavailable": 431,
+    "reuse-existing-metric": 34,
+    "rights-hold": 77
+  },
+  "byKind": {
+    "table": 769,
+    "figure": 202,
+    "text-stat": 458
+  },
+  "publicOriginalReuse": "forbidden"
+}

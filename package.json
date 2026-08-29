@@ -87,9 +87,13 @@
     "search-growth:measure": "node .claude/scripts/search-growth/cli.mjs measure",
     "search-growth:all": "node .claude/scripts/search-growth/cli.mjs all",
     "search-growth:test": "node --test .claude/scripts/search-growth/__tests__/*.test.mjs",
-    "source-vault": "node .claude/scripts/source-vault/japan-zue-bundle.mjs",
-    "source-vault:japan-zue": "node .claude/scripts/source-vault/japan-zue-bundle.mjs",
-    "source-vault:check": "node .claude/scripts/source-vault/japan-zue-bundle.mjs check-local",
+    "source-vault": "node .claude/scripts/source-vault/source-vault.mjs",
+    "source-vault:japan-zue": "node .claude/scripts/source-vault/source-vault.mjs",
+    "source-vault:process": "node .claude/scripts/source-vault/source-processing.mjs",
+    "source-vault:inventory": "node .claude/scripts/source-vault/source-inventory.mjs",
+    "source-vault:inventory:check": "node .claude/scripts/source-vault/source-inventory.mjs check-all",
+    "source-vault:ready": "node .claude/scripts/source-vault/source-processing.mjs readiness",
+    "source-vault:check": "node .claude/scripts/source-vault/source-vault.mjs check-local && node .claude/scripts/source-vault/source-processing.mjs readiness --contract-only && node .claude/scripts/source-vault/source-inventory.mjs check-all",
     "source-vault:test": "node --test .claude/scripts/source-vault/__tests__/*.test.mjs"
   },
   "devDependencies": {

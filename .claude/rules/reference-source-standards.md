@@ -44,11 +44,17 @@ My Drive/
 ```text
 $TMPDIR/stats47-source-vault/
 ├── download/<sourceKey>/<edition>/r<N>/
-└── work/<sourceKey>/<edition>/<sourceRootName>/
+├── work/<sourceKey>/<edition>/<sourceRootName>/
+└── derived/<sourceKey>/<edition>/r<N>/
+    ├── processing-manifest.json
+    ├── transcripts/
+    ├── pages/
+    └── crops/
 ```
 
 - リポジトリ内の `/books/`、`/docs/books/`、`/.claude/pdfs/` は禁止する。`npm run source-vault:check` を
   pre-commit / PRで実行し、いずれかが存在すれば失敗させる。復元・OCR照合・bundle生成はOSの一時領域だけで行う。
+- `derived/`は文字抽出、OCR、ページ画像、内部照合cropだけを置く一時領域とし、復元したsource rootを変更しない。
 - 作業領域はSSOT、配信物、バックアップではない。作業終了後に削除でき、同じDrive bundleから再現できなければならない。
 - 原本、スキャン、OCR、抽出画像を Git、公開 R2、Web bundle、SNS 素材へ含めない。
 - 復元時に同名 directory があれば上書きせず停止する。
@@ -66,7 +72,13 @@ $TMPDIR/stats47-source-vault/
    ```
 
 5. stats47への調査・抽出は `work/` の復元物だけを読む。原本をrepoへコピーせず、成果は利用実装仕様書が指定する既存SSOTへ書く。
-6. 作業後は `download/` と `work/` の一時物を削除し、`npm run source-vault:check`でrepo内に資料が残っていないことを確認する。
+6. `npm run source-vault:process -- prepare --profile <profile>`でPDF inventoryを作り、明示ページだけを`extract`、
+   利用目的と一次資料再確認を宣言したspecだけを`crop`する。`npm run source-vault:ready`で全profileとPDF toolchainを検査する。
+7. 全ページ処理後に`npm run source-vault:inventory -- build --profile <profile>`を実行し、全候補に公開可能な接続先、
+   `primary-source-unavailable`、`rights-hold`、`not-applicable`のいずれかを付ける。`inventory.json`へOCR本文、
+   書籍値、画像、ローカルpathを保存してはならず、`npm run source-vault:inventory:check`でcoverage 100%を検証する。
+8. 作業後は`npm run source-vault:process -- cleanup --profile <profile>`で`download/`、`work/`、`derived/`を削除し、
+   `npm run source-vault:check`でrepo内に資料が残っていないことを確認する。
 
 ## 4. 利用実装仕様書の必須条件
 
@@ -103,6 +115,9 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
 - 数値、事実、表現は一次資料で検証する。書籍や二次資料の数値を観測値へ直接投入しない。
 - 新しい公開 taxonomy や保存層を資料ごとに作らず、既存の Category / Theme / Tag、metric、survey、R2、記事・SNS台帳へ写像する。
 - 一次資料を特定できない項目は `primary-source-unavailable`、利用条件が不明な項目は `rights-hold` として公開しない。
+- OCR、ページ画像、cropは候補発見と原本照合だけに使い、原文、数値列、元図、レイアウト、crop画像を公開SSOTへ移さない。
+- crop specは`internalUseOnly:true`、`publicOriginalReuse:"forbidden"`、出典ページ、用途、
+  `primarySourceRequired:true`を必須とし、欠ける場合は共通CLIが停止する。
 - 利用実装仕様書の更新は設計判断が変わった時だけ行い、実行履歴は backlog / state / 既存運用台帳へ置く。
 
 ## 6. 関連
@@ -111,5 +126,8 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
 - 観測値の出典: `.claude/rules/data-provenance-standards.md`
 - 文書配置: `.claude/rules/docs-vs-issues.md`
 - source vault 設定: `.claude/config/source-vault.json`
-- source vault CLI: `.claude/scripts/source-vault/japan-zue-bundle.mjs`
+- source vault CLI: `.claude/scripts/source-vault/source-vault.mjs`
+- OCR / page / crop CLI: `.claude/scripts/source-vault/source-processing.mjs`
+- evidence inventory CLI: `.claude/scripts/source-vault/source-inventory.mjs`
 - 実装例: `docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md`
+- その他3資料の実装契約: `docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md`

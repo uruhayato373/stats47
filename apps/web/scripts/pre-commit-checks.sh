@@ -75,15 +75,15 @@ if ! node "$GUARD_ROOT/.claude/scripts/lib/check-r2-route-ssg.cjs"; then
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
 
-# 2.1a private参考文献のローカル残存ガード
-# 原本・OCR・図はprivate Google Driveが保存正典。repo内books/・docs/books/・.claude/pdfs/の常設を拒否する。
-echo -e "${GREEN}📚 参考文献ローカル残存チェック...${NC}"
+# 2.1a private参考文献のローカル残存・利用契約ガード
+# repo内cacheを拒否し、全profileのmanifest・active利用仕様・非公開派生物契約・解決台帳100%を照合する。
+echo -e "${GREEN}📚 参考文献source vaultチェック...${NC}"
 if ! (cd "$GUARD_ROOT" && npm run source-vault:check > /dev/null 2>&1); then
-  echo -e "${RED}❌ repo内にbooks/・docs/books/・.claude/pdfs/のいずれかが残っています。Drive保存を検証後、OS一時領域だけを使ってください。${NC}"
+  echo -e "${RED}❌ 参考文献のrepo内残存、manifest、active利用仕様、または非公開派生物契約に違反があります。${NC}"
   echo -e "${YELLOW}💡 詳細: npm run source-vault:check${NC}"
   ERROR_COUNT=$((ERROR_COUNT + 1))
 else
-  echo -e "${GREEN}✅ 参考文献ローカル残存なし${NC}"
+  echo -e "${GREEN}✅ 参考文献source vault契約に適合${NC}"
 fi
 
 # 2.2 sync-snapshots の task ドリフト (2026-08-05 の calculated-stats 書き忘れの再発防止)

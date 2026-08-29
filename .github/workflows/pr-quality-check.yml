@@ -218,7 +218,7 @@ jobs:
         continue-on-error: false
 
       - name: 📚 Private Reference Source Guard
-        # 原本・OCR・図はprivate Google Driveだけに保全し、repo内の参考資料cache再混入を拒否する。
+        # repo内cacheを拒否し、全profileのmanifest・利用仕様・非公開派生物契約・解決台帳100%を照合する。
         run: |
           npm run source-vault:check
           npm run source-vault:test

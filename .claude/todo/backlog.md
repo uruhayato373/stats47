@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-28
+updated: 2026-08-29
 ---
 
 # バックログ (タスクマスタ)
@@ -27,7 +27,7 @@ updated: 2026-08-28
 
 - **program owner**: `open-data-curator`。工程ownerは
   `docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md` §9。
-- **再開ポインタ**: `lastCompleted=WP2-full-inventory` / `nextWorkPackage=WP3-primary-source-mapping`。
+- **再開ポインタ**: `lastCompleted=WP3-resolution-inventory` / `nextWorkPackage=WP4-release-and-publishing-selection`。
 - **現状証拠**: private bundle 6 parts / 480,666,655 bytesを照合・復元し、1,746 files、bundle SHA
   `a14a45e9d6bdd29e49de0786bdb88f1080ffcff1c5cae739b62a1b2e881de02f`を再現。p.26–529の504ページは
   欠番・重複0、実見出し904、候補1,429（table 769 / figure 202 / text-stat 458）。索引・出典注記に加えて
@@ -37,10 +37,10 @@ updated: 2026-08-28
   対象範囲のsource coverageは100%。出版社正誤表11件中、定量解釈へ影響する7件はcandidate到達監査green。
   全候補は793 review groupに整理済みで、相互参照212件の参照先不明は0。直接出典447 group / 975候補のうち、
   151 group / 473候補を56 survey IDへ完全一致で対応付け、曖昧一致・master外IDは0。
-  全1,429候補をmetric＋survey確認20件、surveyのみ確認453件、直接出典確認502件、周辺文脈確認454件へ
-  重複・欠落なく分類済み。既済29件を除く未確認1,400件の内訳は0 / 448 / 499 / 453件。
-  metric候補115件（同一survey制約対象209件）の自動確定は0で、最優先層20件はすべて人手判断済み。
-  判断29件は既存metric 8 / combined analysis 14 / context-only 6 / rights-hold 1、coverage 2.03%、lineage error 0。
+  全1,429候補は`reuse-existing-metric` 34 / `context-only` 887 / `primary-source-unavailable` 431 /
+  `rights-hold` 77へ重複・欠落なく固定し、resolution coverage 100%、lineage error 0。公開へ進められる
+  921件と、一次資料・権利の解決まで停止する508件を機械的に分離済み。100%は全件公開ではなく、全候補へ
+  公開可否と再開条件を付与したことを表す。
   p.26–65 pilotは107候補（table 40 / figure 16 / text-stat 51）。
   figure 201、transcript 13、scan PDF 13。全体は1,746ファイルで、`/books/`はGit対象外。
   OCRは未校正で数値引用禁止。private Google DriveにはGit manifest 1件と90MiB以下のarchive part 6件を置き、
@@ -402,6 +402,21 @@ updated: 2026-08-28
 - **正典**: `.claude/rules/blog-data-schema.md`
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [REFERENCE-SOURCE-EXPANSION-01] Drive参考文献3資料をinventory化して既存SSOTへ展開する
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:ready] [起票:2026-08-29]
+
+- **owner**: 全体は`open-data-curator`、2021都道府県DataBookは`area-curator`、Claudeスキル構築ガイドは`knowledge-curator`。
+- **現状証拠**: 全ページOCR・内部crop・解決台帳を完了。DataBook 8 PDF / 580ページは`combined-analysis` 61 /
+  `context-only` 19 / `not-applicable` 500、偏差値資料6 PDF / 103ページは`rights-hold` 103、Claudeガイド
+  1 PDF / 33ページは`context-only` 7 / `not-applicable` 26。3資料ともresolution coverage 100%。
+- **次**: DataBookの61候補は既存area/editorial責務で必要なwaveだけ実装する。偏差値資料は図表権利と一次資料の
+  両方が確定した項目だけholdを解除する。準備工程の再実行は不要。
+- **完了条件**: 3資料の全抽出候補がresolutionを持ち、公開候補100%で一次資料・年度・単位・地域粒度・rightsが
+  確定し、書籍値の直接投入、原文・元図・内部cropの公開が0である。
+- **停止条件**: 書誌・権利、Drive private状態、manifest/hash、一次資料、OCR原本照合のいずれかが未解決なら
+  `rights-hold`または`primary-source-unavailable`で停止する。remote R2、git push、PR、deploy、外部公開は別途承認。
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
 

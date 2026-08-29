@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "profile": "claude-skills-guide-2026",
+  "sourceKey": "claude-skills-guide",
+  "edition": "2026",
+  "input": {
+    "documents": 1,
+    "pages": 33,
+    "extractionComplete": true,
+    "internalCropCount": 1
+  },
+  "itemCount": 33,
+  "resolvedCount": 33,
+  "resolutionCoverage": 1,
+  "actionableCount": 7,
+  "blockedCount": 0,
+  "byResolution": {
+    "not-applicable": 26,
+    "context-only": 7
+  },
+  "byKind": {
+    "page": 33
+  },
+  "publicOriginalReuse": "forbidden"
+}

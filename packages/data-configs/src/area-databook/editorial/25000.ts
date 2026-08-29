@@ -23,8 +23,9 @@ export const SHIGA_EDITORIAL: AreaEditorial = {
       municipality: "琵琶湖",
       description:
         "琵琶湖にのみ生息する固有種で、2025年に独立種として正式に記載された。産卵期以外は湖内で生活し、刺身や塩焼きのほか、丸ごと炊き込んだ「あめのいおご飯」が郷土料理として親しまれている。",
-      sourceUrl: "https://ja.wikipedia.org/wiki/%E3%83%93%E3%83%AF%E3%83%9E%E3%82%B9",
-      accessedAt: "2026-07-18",
+      sourceUrl:
+        "https://www.pref.shiga.lg.jp/kensei/koho/e-shinbun/oshirase/348132.html",
+      accessedAt: "2026-08-29",
     },
     {
       slug: "nigorobuna",
@@ -32,8 +33,8 @@ export const SHIGA_EDITORIAL: AreaEditorial = {
       municipality: "琵琶湖",
       description:
         "琵琶湖固有の淡水魚で、県の伝統料理「鮒寿司」に最良とされる材料。ヨシ帯で産卵し2〜3年で成魚になるが、生息環境の悪化や外来魚の食害で漁獲量は往時の数十分の一まで減少している。",
-      sourceUrl: "https://ja.wikipedia.org/wiki/%E3%83%8B%E3%82%B4%E3%83%AD%E3%83%96%E3%83%8A",
-      accessedAt: "2026-07-18",
+      sourceUrl: "https://www.pref.shiga.lg.jp/biwako-system/study/step4/",
+      accessedAt: "2026-08-29",
     },
     {
       slug: "seta-shijimi",
@@ -59,8 +60,9 @@ export const SHIGA_EDITORIAL: AreaEditorial = {
       municipality: "東近江市",
       description:
         "鈴鹿山脈のふもと・東近江市政所地区で育つ銘茶で、室町時代に永源寺の僧が茶作りを奨励したのが起源とされる。「宇治は茶所、茶は政所」と茶摘み歌に歌われた歴史を持つが、生産農家は年々減少している。",
-      sourceUrl: "https://ja.wikipedia.org/wiki/%E6%94%BF%E6%89%80%E8%8C%B6",
-      accessedAt: "2026-07-18",
+      sourceUrl:
+        "https://www.city.higashiomi.shiga.jp/kids/shigashiomittedonnamachi/1006849.html",
+      accessedAt: "2026-08-29",
     },
     {
       slug: "hinona",

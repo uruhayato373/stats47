@@ -29,10 +29,12 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write, WebSearch, WebFetch
 SOURCE_MANIFEST=".claude/state/source-inventory/prefecture-databook/2021/source-bundle-manifest.json"
 SOURCE_DOWNLOAD_DIR="${TMPDIR%/}/stats47-source-vault/download/prefecture-databook/2021/r1"
 SOURCE_WORK_DIR="${TMPDIR%/}/stats47-source-vault/work/prefecture-databook/2021/2021都道府県DataBook"
+SOURCE_DERIVED_DIR="${TMPDIR%/}/stats47-source-vault/derived/prefecture-databook/2021/r1"
 npm run source-vault -- verify --manifest "$SOURCE_MANIFEST" --parts-dir "$SOURCE_DOWNLOAD_DIR"
 npm run source-vault -- restore --manifest "$SOURCE_MANIFEST" --parts-dir "$SOURCE_DOWNLOAD_DIR"
-# 対象分冊のページ数 (実コンテンツは 1 県 6 ページ × 県数 + 前付/巻末)
-pdfinfo "$SOURCE_WORK_DIR/2021都道府県DataBook 分冊版 <エリア>エリア.pdf" | rg '^Pages:'
+npm run source-vault:process -- prepare --profile prefecture-databook-2021
+# processing-manifest.jsonで対象PDFの安定ID・ページ数・text layerを確認
+jq '.documents[] | {id,path,pages,firstPageTextCharacters}' "$SOURCE_DERIVED_DIR/processing-manifest.json"
 # 既存 editorial 登録状況
 npx tsx packages/data-configs/scripts/validate-area-databook.ts | rg coverage
 ```
@@ -44,6 +46,23 @@ npx tsx packages/data-configs/scripts/validate-area-databook.ts | rg coverage
 - 特産品: 品名 + 産地市町村 (特産品マップの写真ラベル。**解説文・図案は抽出しない**)
 
 抽出結果は scratchpad に県別ドラフト (品名・産地のみ) として一旦置く。
+
+対象ページは共通CLIで明示抽出する。text layerが乏しいページは日本語OCRへfallbackし、地図内の小領域を
+目視照合するときだけ`crop-spec.template.json`をコピーしてbox・purpose・sourceRef・intendedStats47Useを記入する。
+
+```bash
+npm run source-vault:process -- extract \
+  --workspace "$SOURCE_DERIVED_DIR" \
+  --document "2021都道府県DataBook 分冊版 <エリア>エリア.pdf" \
+  --pages <県のページ範囲> --mode auto
+npm run source-vault:process -- crop \
+  --workspace "$SOURCE_DERIVED_DIR" \
+  --spec "$SOURCE_DERIVED_DIR/crop-spec.json"
+```
+
+生成されたpage imageとcropは内部照合専用で、editorial、R2、記事、SNSへコピーしない。
+全ページ処理を行ったrunではcleanup前に`npm run source-vault:inventory -- build --profile prefecture-databook-2021`を実行し、
+全ページに一次資料への接続または除外理由があることを確定する。
 
 > ⚠️ 書籍の解説文・写真・レイアウトは著作物。**品名と産地 (事実) だけ**を使う。解説は Stage 2 で独自に書く。
 
@@ -89,4 +108,5 @@ error 0 になるまで是正 (件数 5-9 / description 60-160 字 / sourceUrl h
 ## 完了報告 (area-curator の OUTPUT FORMAT に従う)
 
 editorial 進捗テーブル (areaCode / 特産品件数 / シンボル裏取り / validator) + 変更ファイル + 残課題。
-報告前に一時取得した`download/`と`work/`を削除し、`npm run source-vault:check`を通す。
+報告前に`npm run source-vault:process -- cleanup --profile prefecture-databook-2021`で
+`download/`・`work/`・`derived/`を削除し、`npm run source-vault:inventory:check`と`npm run source-vault:check`を通す。

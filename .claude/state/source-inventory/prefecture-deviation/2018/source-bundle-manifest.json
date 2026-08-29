@@ -2,23 +2,23 @@
   "schemaVersion": 1,
   "profile": "prefecture-deviation",
   "sourceKey": "prefecture-deviation",
-  "edition": "unknown",
+  "edition": "2018",
   "revision": 1,
   "sourceRootName": "47都道府県の偏差値",
   "storage": {
     "provider": "google-drive",
     "visibility": "private",
-    "folderPath": "参考文献/47都道府県の偏差値/版不明"
+    "folderPath": "参考文献/47都道府県の偏差値/2018年版"
   },
   "bundle": {
-    "fileName": "stats47-prefecture-deviation-unknown-r1.tar.gz",
+    "fileName": "stats47-prefecture-deviation-2018-r1.tar.gz",
     "format": "tar.gz",
     "bytes": 58638779,
     "sha256": "ddf7c780fcbae271fece115498ea8e0cb834fd733b6fd70f74599eccd3d7e1de",
     "parts": [
       {
         "index": 1,
-        "fileName": "stats47-prefecture-deviation-unknown-r1.tar.gz.part-001",
+        "fileName": "stats47-prefecture-deviation-2018-r1.tar.gz.part-001",
         "bytes": 58638779,
         "sha256": "ddf7c780fcbae271fece115498ea8e0cb834fd733b6fd70f74599eccd3d7e1de"
       }
