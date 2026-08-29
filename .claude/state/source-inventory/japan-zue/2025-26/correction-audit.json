@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "sourceKey": "japan-zue",
+  "edition": "2025-26",
+  "correctionCount": 11,
+  "quantitativeCorrectionCount": 7,
+  "impacted": [
+    {
+      "correctionId": "errata-p031-figure-2-4",
+      "candidateIds": [
+        "japan-zue-2025-26-p031-figure01"
+      ]
+    },
+    {
+      "correctionId": "errata-p160-table-12-1",
+      "candidateIds": [
+        "japan-zue-2025-26-p160-table01"
+      ]
+    },
+    {
+      "correctionId": "errata-p180-figure-15-5",
+      "candidateIds": [
+        "japan-zue-2025-26-p180-figure01"
+      ]
+    },
+    {
+      "correctionId": "errata-p186-body",
+      "candidateIds": [
+        "japan-zue-2025-26-p186-textstat01"
+      ]
+    },
+    {
+      "correctionId": "errata-p207-table-17-17",
+      "candidateIds": [
+        "japan-zue-2025-26-p207-table01"
+      ]
+    },
+    {
+      "correctionId": "errata-p232-table-19-4",
+      "candidateIds": [
+        "japan-zue-2025-26-p232-table01"
+      ]
+    },
+    {
+      "correctionId": "errata-p270-table-24-5",
+      "candidateIds": [
+        "japan-zue-2025-26-p270-table01"
+      ]
+    },
+    {
+      "correctionId": "errata-p275-table-24-8",
+      "candidateIds": [
+        "japan-zue-2025-26-p275-table01"
+      ]
+    },
+    {
+      "correctionId": "errata-p283-table-24-12",
+      "candidateIds": [
+        "japan-zue-2025-26-p282-table02"
+      ]
+    },
+    {
+      "correctionId": "errata-p295-table-24-44",
+      "candidateIds": [
+        "japan-zue-2025-26-p295-table03"
+      ]
+    },
+    {
+      "correctionId": "errata-p441-table-34-13",
+      "candidateIds": [
+        "japan-zue-2025-26-p441-table02"
+      ]
+    }
+  ],
+  "missingQuantitativeTargets": [],
+  "isClean": true
+}

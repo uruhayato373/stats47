@@ -59,6 +59,11 @@
       "types": "./src/geo-scope/index.ts",
       "import": "./src/geo-scope/index.ts",
       "require": "./src/geo-scope/index.ts"
+    },
+    "./evidence-inventory": {
+      "types": "./src/evidence-inventory/index.ts",
+      "import": "./src/evidence-inventory/index.ts",
+      "require": "./src/evidence-inventory/index.ts"
     }
   },
   "scripts": {

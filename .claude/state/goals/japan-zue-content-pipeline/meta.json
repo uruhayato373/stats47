@@ -1,0 +1,31 @@
+{
+  "slug": "japan-zue-content-pipeline",
+  "title": "日本国勢図会の全統計を一次資料化してマルチチャネル展開する",
+  "metric": "custom",
+  "improvement_skill": "(任意)",
+  "status": "ACTIVE",
+  "created_at": "2026-08-28T04:26:28.423Z",
+  "updated_at": "2026-08-28T07:16:59.258Z",
+  "closed_at": null,
+  "close_reason": null,
+  "success_criteria": "stats47対象範囲p.26–529の全定量項目の母数確定、resolution coverage 100%、公開候補の一次資料・rights・年度・単位・地域粒度欠落0、書籍/OCR/figureのruntime参照0、全媒体lineage追跡可能、版更新差分の機械列挙可能",
+  "abort_criteria": "オーナーが明示中止するか、法令・権利・source integrityの問題で継続不能な場合のみ。個別項目の一次資料不明・権利不明はfail-closed resolutionとして保持",
+  "max_cycles": 7,
+  "baseline": {
+    "date": "2026-08-28",
+    "value": "WP0とsource-vault完了、inventory未実装、local source未復元",
+    "source": ".claude/todo/backlog.md;docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md;.claude/state/source-inventory/japan-zue/2025-26/source-bundle-manifest.json"
+  },
+  "md_path": ".claude\\skills\\management\\goal\\reference\\goals\\japan-zue-content-pipeline-2026-08-28.md",
+  "cycles": [],
+  "current_cycle": null,
+  "hypothesis_pool": [
+    "WP1: typed inventoryと40ページpilot",
+    "WP2: 全504ページ母数確定",
+    "WP3: 一次資料と既存SSOT全件写像",
+    "WP4: 10項目end-to-end",
+    "WP5: master記事と動画brief",
+    "WP6: 全件wave展開",
+    "WP7: 定常監査統合"
+  ]
+}

@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "sourceKey": "japan-zue",
+  "edition": "2025-26",
+  "pageCoverage": {
+    "expectedStart": 26,
+    "expectedEnd": 529,
+    "expectedCount": 504,
+    "scannedCount": 504,
+    "missingPages": [],
+    "duplicatePages": []
+  },
+  "sourceScope": {
+    "requiredStart": 26,
+    "requiredEnd": 529,
+    "excludedRanges": [
+      {
+        "start": 1,
+        "end": 25,
+        "reason": "outside-stats47-prefecture-content-scope"
+      }
+    ],
+    "availableStart": 26,
+    "availableEnd": 529,
+    "missingPages": [],
+    "isComplete": true
+  },
+  "headingCounts": {
+    "table": 705,
+    "figure": 199,
+    "total": 904
+  },
+  "candidateCounts": {
+    "table": 769,
+    "figure": 202,
+    "textStat": 361,
+    "total": 1332
+  },
+  "ranges": [
+    {
+      "range": "01",
+      "pageStart": 26,
+      "pageEnd": 65,
+      "pagesScanned": 40,
+      "candidates": 87,
+      "table": 40,
+      "figure": 16,
+      "textStat": 31
+    },
+    {
+      "range": "02",
+      "pageStart": 66,
+      "pageEnd": 105,
+      "pagesScanned": 40,
+      "candidates": 97,
+      "table": 50,
+      "figure": 29,
+      "textStat": 18
+    },
+    {
+      "range": "03",
+      "pageStart": 106,
+      "pageEnd": 145,
+      "pagesScanned": 40,
+      "candidates": 137,
+      "table": 76,
+      "figure": 19,
+      "textStat": 42
+    },
+    {
+      "range": "04",
+      "pageStart": 146,
+      "pageEnd": 185,
+      "pagesScanned": 40,
+      "candidates": 121,
+      "table": 76,
+      "figure": 13,
+      "textStat": 32
+    },
+    {
+      "range": "05",
+      "pageStart": 186,
+      "pageEnd": 223,
+      "pagesScanned": 38,
+      "candidates": 116,
+      "table": 67,
+      "figure": 15,
+      "textStat": 34
+    },
+    {
+      "range": "06",
+      "pageStart": 224,
+      "pageEnd": 261,
+      "pagesScanned": 38,
+      "candidates": 108,
+      "table": 70,
+      "figure": 16,
+      "textStat": 22
+    },
+    {
+      "range": "07",
+      "pageStart": 262,
+      "pageEnd": 301,
+      "pagesScanned": 40,
+      "candidates": 100,
+      "table": 72,
+      "figure": 10,
+      "textStat": 18
+    },
+    {
+      "range": "08",
+      "pageStart": 302,
+      "pageEnd": 341,
+      "pagesScanned": 40,
+      "candidates": 60,
+      "table": 29,
+      "figure": 15,
+      "textStat": 16
+    },
+    {
+      "range": "09",
+      "pageStart": 342,
+      "pageEnd": 383,
+      "pagesScanned": 42,
+      "candidates": 120,
+      "table": 65,
+      "figure": 23,
+      "textStat": 32
+    },
+    {
+      "range": "10",
+      "pageStart": 384,
+      "pageEnd": 421,
+      "pagesScanned": 38,
+      "candidates": 120,
+      "table": 76,
+      "figure": 13,
+      "textStat": 31
+    },
+    {
+      "range": "11",
+      "pageStart": 422,
+      "pageEnd": 463,
+      "pagesScanned": 42,
+      "candidates": 128,
+      "table": 81,
+      "figure": 13,
+      "textStat": 34
+    },
+    {
+      "range": "12",
+      "pageStart": 464,
+      "pageEnd": 499,
+      "pagesScanned": 36,
+      "candidates": 100,
+      "table": 48,
+      "figure": 20,
+      "textStat": 32
+    },
+    {
+      "range": "13",
+      "pageStart": 500,
+      "pageEnd": 529,
+      "pagesScanned": 30,
+      "candidates": 38,
+      "table": 19,
+      "figure": 0,
+      "textStat": 19
+    }
+  ],
+  "unmatchedHeadings": [],
+  "unnumberedCandidateIds": [
+    "japan-zue-2025-26-p029-table02",
+    "japan-zue-2025-26-p072-table01",
+    "japan-zue-2025-26-p087-figure01",
+    "japan-zue-2025-26-p105-table01",
+    "japan-zue-2025-26-p106-table01",
+    "japan-zue-2025-26-p110-table01",
+    "japan-zue-2025-26-p110-table02",
+    "japan-zue-2025-26-p115-table01",
+    "japan-zue-2025-26-p115-table02",
+    "japan-zue-2025-26-p116-table01",
+    "japan-zue-2025-26-p116-table02",
+    "japan-zue-2025-26-p126-table01",
+    "japan-zue-2025-26-p131-table01",
+    "japan-zue-2025-26-p138-table01",
+    "japan-zue-2025-26-p140-table01",
+    "japan-zue-2025-26-p165-table01",
+    "japan-zue-2025-26-p178-table01",
+    "japan-zue-2025-26-p178-table02",
+    "japan-zue-2025-26-p179-table01",
+    "japan-zue-2025-26-p180-table01",
+    "japan-zue-2025-26-p249-table01",
+    "japan-zue-2025-26-p250-table01",
+    "japan-zue-2025-26-p255-table01",
+    "japan-zue-2025-26-p255-table02",
+    "japan-zue-2025-26-p273-table01",
+    "japan-zue-2025-26-p273-table02",
+    "japan-zue-2025-26-p276-table01",
+    "japan-zue-2025-26-p276-table02",
+    "japan-zue-2025-26-p276-table03",
+    "japan-zue-2025-26-p276-table04",
+    "japan-zue-2025-26-p276-table05",
+    "japan-zue-2025-26-p277-table01",
+    "japan-zue-2025-26-p277-table02",
+    "japan-zue-2025-26-p277-table03",
+    "japan-zue-2025-26-p277-table04",
+    "japan-zue-2025-26-p277-table05",
+    "japan-zue-2025-26-p277-table06",
+    "japan-zue-2025-26-p278-table01",
+    "japan-zue-2025-26-p278-table02",
+    "japan-zue-2025-26-p280-figure02",
+    "japan-zue-2025-26-p280-table01",
+    "japan-zue-2025-26-p282-table01",
+    "japan-zue-2025-26-p305-table01",
+    "japan-zue-2025-26-p306-table01",
+    "japan-zue-2025-26-p333-figure01",
+    "japan-zue-2025-26-p342-table02",
+    "japan-zue-2025-26-p349-table01",
+    "japan-zue-2025-26-p365-table01",
+    "japan-zue-2025-26-p369-table01",
+    "japan-zue-2025-26-p379-table01",
+    "japan-zue-2025-26-p379-table02",
+    "japan-zue-2025-26-p383-table01",
+    "japan-zue-2025-26-p387-table01",
+    "japan-zue-2025-26-p387-table02",
+    "japan-zue-2025-26-p416-table02",
+    "japan-zue-2025-26-p420-table01",
+    "japan-zue-2025-26-p420-table02",
+    "japan-zue-2025-26-p427-table01",
+    "japan-zue-2025-26-p449-table02",
+    "japan-zue-2025-26-p485-table02",
+    "japan-zue-2025-26-p509-table01",
+    "japan-zue-2025-26-p510-table01",
+    "japan-zue-2025-26-p511-table01",
+    "japan-zue-2025-26-p512-table01",
+    "japan-zue-2025-26-p513-table01",
+    "japan-zue-2025-26-p514-table01",
+    "japan-zue-2025-26-p515-table01",
+    "japan-zue-2025-26-p516-table01",
+    "japan-zue-2025-26-p517-table01",
+    "japan-zue-2025-26-p518-table01",
+    "japan-zue-2025-26-p519-table01",
+    "japan-zue-2025-26-p520-table01",
+    "japan-zue-2025-26-p522-table01",
+    "japan-zue-2025-26-p523-table01",
+    "japan-zue-2025-26-p524-table01",
+    "japan-zue-2025-26-p525-table01",
+    "japan-zue-2025-26-p526-table01",
+    "japan-zue-2025-26-p527-table01",
+    "japan-zue-2025-26-p528-table01"
+  ],
+  "duplicateItemNumbers": [
+    {
+      "kind": "table",
+      "itemNumber": "33-22",
+      "ids": [
+        "japan-zue-2025-26-p433-table01",
+        "japan-zue-2025-26-p455-table03"
+      ]
+    }
+  ],
+  "sequenceGaps": [
+    {
+      "kind": "table",
+      "chapter": 35,
+      "missingNumbers": [
+        22
+      ]
+    }
+  ],
+  "isPageCoverageClean": true,
+  "isSourceScopeComplete": true
+}

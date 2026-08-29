@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-28
+updated: 2026-08-29
 ---
 
 # バックログ (タスクマスタ)
@@ -27,21 +27,26 @@ updated: 2026-08-28
 
 - **program owner**: `open-data-curator`。工程ownerは
   `docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md` §9。
-- **再開ポインタ**: `lastCompleted=WP2-full-inventory` / `nextWorkPackage=WP3-primary-source-mapping`。
+- **再開ポインタ**: `lastCompleted=WP3-wave-p106-p145` / `nextWorkPackage=WP3-wave-p146-p185`。
 - **現状証拠**: private bundle 6 parts / 480,666,655 bytesを照合・復元し、1,746 files、bundle SHA
   `a14a45e9d6bdd29e49de0786bdb88f1080ffcff1c5cae739b62a1b2e881de02f`を再現。p.26–529の504ページは
-  欠番・重複0、実見出し904、候補1,429（table 769 / figure 202 / text-stat 458）。索引・出典注記に加えて
-  図の軸・系列・凡例説明117件を除去し、分割続表を統合した再抽出SHAは
-  `bc7f5f61bb7b9531156f53e96632a00e821a3792568f0f1c9520d234102e2b76`で安定。判断済みIDの付け替わりは0。
+  欠番・重複0、実見出し904、候補1,332（table 769 / figure 202 / text-stat 361）。索引・出典注記に加えて
+  図ブロック内の軸・系列・凡例・説明・転記本文、表整形メモ、表の行・列注記を除去し、分割続表を統合する
+  （除去件数はCLIが集計しないため未計上）。再抽出は`candidates.json`がbyte一致で安定し、sha256は
+  `00c1c0375f40c274cbcdaacb6e694d8f07c2fb318f546352333f4058aacd95d9`
+  （2026-08-29に`npm run evidence:extract -- --state-dir=<tmp>`で再現確認）。判断済みIDの付け替わりは0。
   p.1–25（第1章「世界の国々」）はstats47の都道府県コンテンツ対象外としてscope exclusionに記録。
   対象範囲のsource coverageは100%。出版社正誤表11件中、定量解釈へ影響する7件はcandidate到達監査green。
-  全候補は793 review groupに整理済みで、相互参照212件の参照先不明は0。直接出典447 group / 975候補のうち、
-  151 group / 473候補を56 survey IDへ完全一致で対応付け、曖昧一致・master外IDは0。
-  全1,429候補をmetric＋survey確認20件、surveyのみ確認453件、直接出典確認502件、周辺文脈確認454件へ
-  重複・欠落なく分類済み。既済29件を除く未確認1,400件の内訳は0 / 448 / 499 / 453件。
-  metric候補115件（同一survey制約対象209件）の自動確定は0で、最優先層20件はすべて人手判断済み。
-  判断29件は既存metric 8 / combined analysis 14 / context-only 6 / rights-hold 1、coverage 2.03%、lineage error 0。
-  p.26–65 pilotは107候補（table 40 / figure 16 / text-stat 51）。
+  全候補は813 review groupに整理済みで、相互参照208件の参照先不明は0。直接出典447 group / 882候補のうち、
+  151 group / 436候補を56 survey IDへ完全一致で対応付け、曖昧一致・master外IDは0。
+  全1,332候補をmetric＋survey確認18件、surveyのみ確認418件、直接出典確認446件、周辺文脈確認450件へ
+  重複・欠落なく分類済み。既済328件を除く未確認1,004件の内訳は0 / 289 / 368 / 347件。
+  metric候補110件（同一survey制約対象185件）の自動確定は0で、最優先層18件はすべて人手判断済み。
+  判断328件は既存metric 14 / combined analysis 174 / context-only 82 / primary-source-unavailable 3 / rights-hold 46 /
+  not-quantitative 9。定量項目1,323件中319件を解決し、decision coverage 24.62%、
+  定量項目resolution coverage 24.11%、lineage error 0。
+  p.26–65 pilotは87候補（table 40 / figure 16 / text-stat 31）、p.66–105の第2波は97候補、
+  p.106–145の第3波は137候補で、いずれも範囲内の未確認は0。次のp.146–185は121候補。
   figure 201、transcript 13、scan PDF 13。全体は1,746ファイルで、`/books/`はGit対象外。
   OCRは未校正で数値引用禁止。private Google DriveにはGit manifest 1件と90MiB以下のarchive part 6件を置き、
   すべて`shared:false`、合計480,666,655 bytesをreadback済み。Git manifestが全1,746ファイルのSHA-256を保持する。
@@ -50,9 +55,16 @@ updated: 2026-08-28
   ranking / theme / area / japan / blog / note / YouTube通常動画 / Instagram / Xへ展開する。
 - **実行順**:
   1. WP1 inventory pilot: p.26–65でtyped inventory、stable ID、extract/validate/coverageを実装し、
-     代表10項目を選ぶ。別PCではGit manifestのpart名をGoogle Drive MCPで取得し、
-     `npm run source-vault:japan-zue -- restore`で検証復元してから着手する。
-  2. WP2: stats47対象範囲をp.26–529と定義し、全ページの表・図・本文統計1,429候補の母数を確定する。
+     代表10項目を選ぶ。**別PCでの再開手順**: `books/`はgitignoreのためgitで届かない。Google Drive
+     `stats47-private-sources/japan-zue/2025-26`から6 parts（94MiB×5 + 8.8MiB）を手動downloadし、
+     `node .claude/scripts/source-vault/japan-zue-bundle.mjs restore --manifest
+     .claude/state/source-inventory/japan-zue/2025-26/source-bundle-manifest.json --parts-dir <download先>`
+     で1,746ファイルをSHA照合復元する（`--manifest`と`--parts-dir`は必須。省略時のparts既定は
+     `<tmpdir>/stats47-source-vault/japan-zue/2025-26/r1`）。復元後`evidence:validate`で
+     inventoryCountとlineage cleanを確認してから着手する。books/なしで動くCLIは
+     `validate` / `coverage` / `correction-audit`だけで、判断作業には本文mdが要る
+     （`candidates.json`はid・locator・SHAのみで本文を持たない）。
+  2. WP2: stats47対象範囲をp.26–529と定義し、全ページの表・図・本文統計1,332候補の母数を確定する。
   3. WP3: 一次資料・利用条件・既存metric / survey / themeとの重複を全件照合する。
   4. WP4: 10項目を一次資料→local R2→Web配置までend-to-end実装する。
   5. WP5: 独自分析のmaster記事・通常動画briefを作り、既存EXP-006の上限内で派生案を作る。

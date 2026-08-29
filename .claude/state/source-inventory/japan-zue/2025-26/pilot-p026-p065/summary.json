@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "sourceKey": "japan-zue",
+  "edition": "2025-26",
+  "sourceBundleSha256": "a14a45e9d6bdd29e49de0786bdb88f1080ffcff1c5cae739b62a1b2e881de02f",
+  "pageRange": {
+    "start": 26,
+    "end": 65
+  },
+  "pagesScanned": 40,
+  "candidateCount": 87,
+  "byKind": {
+    "table": 40,
+    "figure": 16,
+    "text-stat": 31
+  }
+}

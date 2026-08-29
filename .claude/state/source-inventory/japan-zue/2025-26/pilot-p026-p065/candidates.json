@@ -1,0 +1,1597 @@
+{
+  "schemaVersion": 1,
+  "sourceKey": "japan-zue",
+  "edition": "2025-26",
+  "sourceBundleSha256": "a14a45e9d6bdd29e49de0786bdb88f1080ffcff1c5cae739b62a1b2e881de02f",
+  "pageRange": {
+    "start": 26,
+    "end": 65
+  },
+  "pagesScanned": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65
+  ],
+  "candidates": [
+    {
+      "id": "japan-zue-2025-26-p026-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 26,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p026.md",
+        "lineStart": 15,
+        "lineEnd": 15
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "d6b26991bf7cce3b5d89b2fc82a1305e01bde8df125eeb41e9a73a26073d2be9"
+    },
+    {
+      "id": "japan-zue-2025-26-p026-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 26,
+        "kind": "figure",
+        "itemNumber": "2-1"
+      },
+      "locator": {
+        "markdownPath": "md/p026.md",
+        "lineStart": 19,
+        "lineEnd": 19
+      },
+      "detection": "figure-reference",
+      "contentSha256": "6f5f076121059763e51353b5edde4f117038b4c6290903476c67a7d0e8860e2b"
+    },
+    {
+      "id": "japan-zue-2025-26-p026-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 26,
+        "kind": "table",
+        "itemNumber": "2-1"
+      },
+      "locator": {
+        "markdownPath": "md/p026.md",
+        "lineStart": 25,
+        "lineEnd": 27
+      },
+      "detection": "markdown-table",
+      "contentSha256": "0f20b6f552bb571e43db7c68d3d912d69ea69147d272dc3c262adaef4532e6a7"
+    },
+    {
+      "id": "japan-zue-2025-26-p027-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 27,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p027.md",
+        "lineStart": 10,
+        "lineEnd": 10
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "0ec17eec909b51086a4b8eea2a2c3690a88b69cc0538d6a5e9c3428916fdcb8c"
+    },
+    {
+      "id": "japan-zue-2025-26-p027-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 27,
+        "kind": "table",
+        "itemNumber": "2-2"
+      },
+      "locator": {
+        "markdownPath": "md/p027.md",
+        "lineStart": 18,
+        "lineEnd": 60
+      },
+      "detection": "markdown-table",
+      "contentSha256": "0e2e8dc97303740b8772d75dcd6827082e9bf672e2c81c6d736cacc5daeb9675"
+    },
+    {
+      "id": "japan-zue-2025-26-p028-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 28,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p028.md",
+        "lineStart": 12,
+        "lineEnd": 12
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "25baa9a353edffb2dd6b069f27e038cbbcb73055dee56336e985d10d8df74685"
+    },
+    {
+      "id": "japan-zue-2025-26-p028-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 28,
+        "kind": "figure",
+        "itemNumber": "2-2"
+      },
+      "locator": {
+        "markdownPath": "md/p028.md",
+        "lineStart": 14,
+        "lineEnd": 14
+      },
+      "detection": "figure-reference",
+      "contentSha256": "2601f727e0520bb745e7ea36ff189058990a19b9d5d83a68a4d55b7cc3c4b172"
+    },
+    {
+      "id": "japan-zue-2025-26-p028-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 28,
+        "kind": "table",
+        "itemNumber": "2-3"
+      },
+      "locator": {
+        "markdownPath": "md/p028.md",
+        "lineStart": 23,
+        "lineEnd": 34
+      },
+      "detection": "markdown-table",
+      "contentSha256": "cce77f9141d13a0aebd08010d01990ff769f4f255a783de9b95c66667e925ef5"
+    },
+    {
+      "id": "japan-zue-2025-26-p028-table02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 28,
+        "kind": "table",
+        "itemNumber": "2-4"
+      },
+      "locator": {
+        "markdownPath": "md/p028.md",
+        "lineStart": 40,
+        "lineEnd": 48
+      },
+      "detection": "markdown-table",
+      "contentSha256": "fa2fb407f94bb35b5ea9f539ab28cd548ceae352c5392d4fd13776c0bb6732ee"
+    },
+    {
+      "id": "japan-zue-2025-26-p029-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 29,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p029.md",
+        "lineStart": 10,
+        "lineEnd": 10
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "8c7ecdc03581baa44069556f885f97e64c9f9aa753289c489a3fc359cb6ee250"
+    },
+    {
+      "id": "japan-zue-2025-26-p029-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 29,
+        "kind": "table",
+        "itemNumber": "2-5"
+      },
+      "locator": {
+        "markdownPath": "md/p029.md",
+        "lineStart": 14,
+        "lineEnd": 19
+      },
+      "detection": "markdown-table",
+      "contentSha256": "4f5916e5b55d60143768e10c9f8c65feb7692debd82356c1f8c409ce240c06ea"
+    },
+    {
+      "id": "japan-zue-2025-26-p029-textstat02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 29,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p029.md",
+        "lineStart": 24,
+        "lineEnd": 24
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "dcd1c49da7cc87e09d66141d03e68ab85b6404c645cf7230a8c8dd27c2b047bb"
+    },
+    {
+      "id": "japan-zue-2025-26-p029-table02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 29,
+        "kind": "table"
+      },
+      "locator": {
+        "markdownPath": "md/p029.md",
+        "lineStart": 30,
+        "lineEnd": 45
+      },
+      "detection": "markdown-table",
+      "contentSha256": "f2f6a314da6c3836687105782968d2a01f24f3ba36e1cad0df74f50e1fceb67e"
+    },
+    {
+      "id": "japan-zue-2025-26-p030-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 30,
+        "kind": "figure",
+        "itemNumber": "2-3"
+      },
+      "locator": {
+        "markdownPath": "md/p030.md",
+        "lineStart": 11,
+        "lineEnd": 11
+      },
+      "detection": "figure-reference",
+      "contentSha256": "b8f1241831dfa0b8052c3b4f3f2725a1acd66f1ee901283ac8cba47508a44729"
+    },
+    {
+      "id": "japan-zue-2025-26-p030-textstat02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 30,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p030.md",
+        "lineStart": 23,
+        "lineEnd": 23
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "05aaad0b1449cf350639719c6795821fa8deb7d92388237b25889372d4cdfdfb"
+    },
+    {
+      "id": "japan-zue-2025-26-p030-textstat03",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 30,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p030.md",
+        "lineStart": 25,
+        "lineEnd": 25
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "dfb3d7cfafc962a8b68cec4f61576611d4fce87fab869c6e1db239a18e8b0594"
+    },
+    {
+      "id": "japan-zue-2025-26-p030-textstat04",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 30,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p030.md",
+        "lineStart": 27,
+        "lineEnd": 27
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "0245c97d7e51a284aeee7227cccf6445a5ba4bfc916e7f9f04bfe03c23bbfe0c"
+    },
+    {
+      "id": "japan-zue-2025-26-p031-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 31,
+        "kind": "figure",
+        "itemNumber": "2-4"
+      },
+      "locator": {
+        "markdownPath": "md/p031.md",
+        "lineStart": 9,
+        "lineEnd": 9
+      },
+      "detection": "figure-reference",
+      "contentSha256": "8d9de4ce780c9572a832b589cbcd02d939d37e71057f2ee0e5dd788f31294120"
+    },
+    {
+      "id": "japan-zue-2025-26-p031-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 31,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p031.md",
+        "lineStart": 21,
+        "lineEnd": 21
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "acc4aa5a4ea911548b231fcf316c08fbb55d3e0bedcbdb764cc2ec17fa63955b"
+    },
+    {
+      "id": "japan-zue-2025-26-p031-textstat02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 31,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p031.md",
+        "lineStart": 31,
+        "lineEnd": 31
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "3facc9d3a3970c5067a18de87f3e14be7695f3b7f2ba26e04f0660049d9102bb"
+    },
+    {
+      "id": "japan-zue-2025-26-p031-textstat03",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 31,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p031.md",
+        "lineStart": 35,
+        "lineEnd": 35
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "c277b5e2cd71ee640d468d78201525646d130436984b5667cd39b815b652ec54"
+    },
+    {
+      "id": "japan-zue-2025-26-p032-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 32,
+        "kind": "figure",
+        "itemNumber": "2-5"
+      },
+      "locator": {
+        "markdownPath": "md/p032.md",
+        "lineStart": 11,
+        "lineEnd": 11
+      },
+      "detection": "figure-reference",
+      "contentSha256": "343eba886a9c3676ee62e02902d3c9c1217acbc0814e3ed0510876083cb01e2c"
+    },
+    {
+      "id": "japan-zue-2025-26-p033-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 33,
+        "kind": "table",
+        "itemNumber": "2-6"
+      },
+      "locator": {
+        "markdownPath": "md/p033.md",
+        "lineStart": 15,
+        "lineEnd": 41
+      },
+      "detection": "markdown-table",
+      "contentSha256": "9e65f62f8756613a387745806d2be1f4b10c7b7dd0b7cbcd0e866d35c4a4d433"
+    },
+    {
+      "id": "japan-zue-2025-26-p034-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 34,
+        "kind": "table",
+        "itemNumber": "2-7"
+      },
+      "locator": {
+        "markdownPath": "md/p034.md",
+        "lineStart": 15,
+        "lineEnd": 41
+      },
+      "detection": "markdown-table",
+      "contentSha256": "63946e1fd9490c57710c79de98fdf614b75f17cffbf0756507e2b29dae7ff7a9"
+    },
+    {
+      "id": "japan-zue-2025-26-p035-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 35,
+        "kind": "table",
+        "itemNumber": "2-8"
+      },
+      "locator": {
+        "markdownPath": "md/p035.md",
+        "lineStart": 15,
+        "lineEnd": 67
+      },
+      "detection": "markdown-table",
+      "contentSha256": "c78185b85f069efeaf410eb52cd2ae8866307ba4f3c6b76a67df6bafb4e79990"
+    },
+    {
+      "id": "japan-zue-2025-26-p036-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 2,
+        "page": 36,
+        "kind": "table",
+        "itemNumber": "2-9"
+      },
+      "locator": {
+        "markdownPath": "md/p036.md",
+        "lineStart": 15,
+        "lineEnd": 40
+      },
+      "detection": "markdown-table",
+      "contentSha256": "195db66bc8c852a41ca7998de5a92a88b4623c85a0df0610a4ada269d7ec259c"
+    },
+    {
+      "id": "japan-zue-2025-26-p037-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 37,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p037.md",
+        "lineStart": 12,
+        "lineEnd": 12
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "70abdd33986ad84aeb3f5bb9b1b97bb2f39fc5b8facd6aee2bf9c9627b1497d9"
+    },
+    {
+      "id": "japan-zue-2025-26-p037-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 37,
+        "kind": "figure",
+        "itemNumber": "3-1"
+      },
+      "locator": {
+        "markdownPath": "md/p037.md",
+        "lineStart": 14,
+        "lineEnd": 14
+      },
+      "detection": "figure-reference",
+      "contentSha256": "817cc136327f288412658d0d60321aaf9986a6fe6a47da1b5be0ee064bcbd3c7"
+    },
+    {
+      "id": "japan-zue-2025-26-p037-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 37,
+        "kind": "table",
+        "itemNumber": "3-1"
+      },
+      "locator": {
+        "markdownPath": "md/p037.md",
+        "lineStart": 23,
+        "lineEnd": 30
+      },
+      "detection": "markdown-table",
+      "contentSha256": "77fb1eb148875ec633c7bad174c5e7376f1d6de4ab29b2c3d664d19c3906a09d"
+    },
+    {
+      "id": "japan-zue-2025-26-p038-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 38,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p038.md",
+        "lineStart": 12,
+        "lineEnd": 12
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "c1c862eef1ba362f4319d88ddcfce86ec195ddff2df7efb7520b8e9cc89b04b1"
+    },
+    {
+      "id": "japan-zue-2025-26-p038-textstat02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 38,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p038.md",
+        "lineStart": 14,
+        "lineEnd": 14
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "f2979b91739a87a6aa4309d0647262066ef48e5eba03d90019e49041c9d66bb3"
+    },
+    {
+      "id": "japan-zue-2025-26-p038-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 38,
+        "kind": "figure",
+        "itemNumber": "3-2"
+      },
+      "locator": {
+        "markdownPath": "md/p038.md",
+        "lineStart": 16,
+        "lineEnd": 16
+      },
+      "detection": "figure-reference",
+      "contentSha256": "37668fd5eb1ca1a6a1c088cb7baf01054b54b9808e1620252cbb7ae31bfcb411"
+    },
+    {
+      "id": "japan-zue-2025-26-p038-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 38,
+        "kind": "table",
+        "itemNumber": "3-2"
+      },
+      "locator": {
+        "markdownPath": "md/p038.md",
+        "lineStart": 25,
+        "lineEnd": 39
+      },
+      "detection": "markdown-table",
+      "contentSha256": "4b4693716ad65c394e85b4fda2e7e01aaa1f12ddaeb02d22d2f174396d2e7169"
+    },
+    {
+      "id": "japan-zue-2025-26-p038-textstat04",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 38,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p038.md",
+        "lineStart": 43,
+        "lineEnd": 43
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "26ae8bcc81b8404b90da536ea4fa39061626bbab2f15bc7adcbf9e9820210aa5"
+    },
+    {
+      "id": "japan-zue-2025-26-p039-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 39,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p039.md",
+        "lineStart": 10,
+        "lineEnd": 10
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "074626bbae92edef1bf3032955e3a12a0c6cbe4937480db525a66a34fb427c86"
+    },
+    {
+      "id": "japan-zue-2025-26-p039-textstat02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 39,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p039.md",
+        "lineStart": 12,
+        "lineEnd": 12
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "693573ac11ed71ad81b4cec9f505d58b85ba96ee5eb802ec8a991d98da56ef2c"
+    },
+    {
+      "id": "japan-zue-2025-26-p039-textstat03",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 39,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p039.md",
+        "lineStart": 14,
+        "lineEnd": 14
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "ac8a84187b5a5c2d3626883568caaf137024d4cc795dac9a5a623918261b1349"
+    },
+    {
+      "id": "japan-zue-2025-26-p039-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 39,
+        "kind": "table",
+        "itemNumber": "3-3"
+      },
+      "locator": {
+        "markdownPath": "md/p039.md",
+        "lineStart": 18,
+        "lineEnd": 40
+      },
+      "detection": "markdown-table",
+      "contentSha256": "2a9d04edf04d5a6a9d3ad824de06382e8435ebd43ac5b1b648014a9d3c52e2b6"
+    },
+    {
+      "id": "japan-zue-2025-26-p040-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 40,
+        "kind": "table",
+        "itemNumber": "3-4"
+      },
+      "locator": {
+        "markdownPath": "md/p040.md",
+        "lineStart": 13,
+        "lineEnd": 19
+      },
+      "detection": "markdown-table",
+      "contentSha256": "17b8cacfc5d6b6bc8a0891a4ccba275af33394e3fb35044114dd793c5c05a006"
+    },
+    {
+      "id": "japan-zue-2025-26-p040-table02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 40,
+        "kind": "table",
+        "itemNumber": "3-5"
+      },
+      "locator": {
+        "markdownPath": "md/p040.md",
+        "lineStart": 25,
+        "lineEnd": 54
+      },
+      "detection": "markdown-table",
+      "contentSha256": "b10c3e62d88a5da2f96254adfbafa5f5c2a01dd74b25d67db86766d077af69dc"
+    },
+    {
+      "id": "japan-zue-2025-26-p041-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 41,
+        "kind": "figure",
+        "itemNumber": "3-3"
+      },
+      "locator": {
+        "markdownPath": "md/p041.md",
+        "lineStart": 9,
+        "lineEnd": 9
+      },
+      "detection": "figure-reference",
+      "contentSha256": "0a2cac9e153ac87124e074df731888991197ed6ff0eb47538d654aeb6a7c73dd"
+    },
+    {
+      "id": "japan-zue-2025-26-p041-figure02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 41,
+        "kind": "figure",
+        "itemNumber": "3-4"
+      },
+      "locator": {
+        "markdownPath": "md/p041.md",
+        "lineStart": 24,
+        "lineEnd": 24
+      },
+      "detection": "figure-reference",
+      "contentSha256": "a370698acb2269e12c4d9844e04ce48bd671e524b2c5944e231632308d3f99bf"
+    },
+    {
+      "id": "japan-zue-2025-26-p042-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 42,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p042.md",
+        "lineStart": 12,
+        "lineEnd": 12
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "8eca57cd2aa0ee3328aea4e41d150cf4947b17a5bffe149284fa05bd60670305"
+    },
+    {
+      "id": "japan-zue-2025-26-p042-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 42,
+        "kind": "table",
+        "itemNumber": "3-6"
+      },
+      "locator": {
+        "markdownPath": "md/p042.md",
+        "lineStart": 16,
+        "lineEnd": 25
+      },
+      "detection": "markdown-table",
+      "contentSha256": "02f23e4bdefb6ad3adec78d9d9989f61f14cbbaf4f41259aa28997ad34bc2a76"
+    },
+    {
+      "id": "japan-zue-2025-26-p042-table02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 42,
+        "kind": "table",
+        "itemNumber": "3-7"
+      },
+      "locator": {
+        "markdownPath": "md/p042.md",
+        "lineStart": 31,
+        "lineEnd": 42
+      },
+      "detection": "markdown-table",
+      "contentSha256": "ec322acc96b45b158b29136c38ae1e4fec3fc4fe188d9f6c8423267ea8788a2d"
+    },
+    {
+      "id": "japan-zue-2025-26-p043-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 43,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p043.md",
+        "lineStart": 10,
+        "lineEnd": 10
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "ff20862fb45ebdb4254faf6e5cf8e7030f4239bc364d762039acb0701a932d7b"
+    },
+    {
+      "id": "japan-zue-2025-26-p043-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 43,
+        "kind": "table",
+        "itemNumber": "3-8"
+      },
+      "locator": {
+        "markdownPath": "md/p043.md",
+        "lineStart": 16,
+        "lineEnd": 26
+      },
+      "detection": "markdown-table",
+      "contentSha256": "d94b39e547ac642c166f412af2efb8e1bb66139791e02a0696ad4eabf86447ba"
+    },
+    {
+      "id": "japan-zue-2025-26-p043-table02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 43,
+        "kind": "table",
+        "itemNumber": "3-9"
+      },
+      "locator": {
+        "markdownPath": "md/p043.md",
+        "lineStart": 32,
+        "lineEnd": 39
+      },
+      "detection": "markdown-table",
+      "contentSha256": "322036a5f8d792dd7ca5f84f4dc92f4d91f2d56a10ab8d2a0e871b6b2ec94d4d"
+    },
+    {
+      "id": "japan-zue-2025-26-p043-table03",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 43,
+        "kind": "table",
+        "itemNumber": "3-10"
+      },
+      "locator": {
+        "markdownPath": "md/p043.md",
+        "lineStart": 45,
+        "lineEnd": 52
+      },
+      "detection": "markdown-table",
+      "contentSha256": "c5d418a75ae943d7b9832ba3467444a306cd2c2a26249ca48a3efcbeee47727b"
+    },
+    {
+      "id": "japan-zue-2025-26-p044-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 44,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p044.md",
+        "lineStart": 12,
+        "lineEnd": 12
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "89eceef50c6bdc76bd8648bce5bf5bec59775d13cf8f4ed143b51aa20639e476"
+    },
+    {
+      "id": "japan-zue-2025-26-p044-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 44,
+        "kind": "figure",
+        "itemNumber": "3-5"
+      },
+      "locator": {
+        "markdownPath": "md/p044.md",
+        "lineStart": 14,
+        "lineEnd": 14
+      },
+      "detection": "figure-reference",
+      "contentSha256": "5f528e8fe3f1bc76fcbb0d1847e647d644adc6268e560b84618268e987225917"
+    },
+    {
+      "id": "japan-zue-2025-26-p044-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 44,
+        "kind": "table",
+        "itemNumber": "3-11"
+      },
+      "locator": {
+        "markdownPath": "md/p044.md",
+        "lineStart": 23,
+        "lineEnd": 40
+      },
+      "detection": "markdown-table",
+      "contentSha256": "fec0315169d1fa45ca6a46d7517bfc4a1237dd2d9be831e498acd7cfa5de7a8a"
+    },
+    {
+      "id": "japan-zue-2025-26-p045-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 45,
+        "kind": "table",
+        "itemNumber": "3-12"
+      },
+      "locator": {
+        "markdownPath": "md/p045.md",
+        "lineStart": 14,
+        "lineEnd": 22
+      },
+      "detection": "markdown-table",
+      "contentSha256": "536d269804ce81f213b95edfeac0c3b63f9c57b1de68e6a87557aa2722bbb5b1"
+    },
+    {
+      "id": "japan-zue-2025-26-p045-table02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 45,
+        "kind": "table",
+        "itemNumber": "3-13"
+      },
+      "locator": {
+        "markdownPath": "md/p045.md",
+        "lineStart": 28,
+        "lineEnd": 42
+      },
+      "detection": "markdown-table",
+      "contentSha256": "a72a5dee9e8057df46a9b21a61519f6b3663dd7c9d313c9f1d658d97935ad891"
+    },
+    {
+      "id": "japan-zue-2025-26-p046-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 46,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p046.md",
+        "lineStart": 13,
+        "lineEnd": 13
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "8ab1d28c682324d89b08d91c67203e432b4f4a271c4d4d4047342dcf69f15210"
+    },
+    {
+      "id": "japan-zue-2025-26-p046-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 46,
+        "kind": "figure",
+        "itemNumber": "3-6"
+      },
+      "locator": {
+        "markdownPath": "md/p046.md",
+        "lineStart": 15,
+        "lineEnd": 15
+      },
+      "detection": "figure-reference",
+      "contentSha256": "d9f8fa45d4c470662aed2e755412c398b936dbb58ce4a2bdbf0fc771c7f44091"
+    },
+    {
+      "id": "japan-zue-2025-26-p046-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 46,
+        "kind": "table",
+        "itemNumber": "3-14"
+      },
+      "locator": {
+        "markdownPath": "md/p046.md",
+        "lineStart": 25,
+        "lineEnd": 32
+      },
+      "detection": "markdown-table",
+      "contentSha256": "c425da0653a26da13cae935662d9134224a7bd282c7382d6222cb8fb7d5e3603"
+    },
+    {
+      "id": "japan-zue-2025-26-p047-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 47,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p047.md",
+        "lineStart": 11,
+        "lineEnd": 11
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "4d6188e5985ea864deae7635dab89974a0ce83797e02b1b2fac200f283a0b1ce"
+    },
+    {
+      "id": "japan-zue-2025-26-p047-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 47,
+        "kind": "figure",
+        "itemNumber": "3-7"
+      },
+      "locator": {
+        "markdownPath": "md/p047.md",
+        "lineStart": 15,
+        "lineEnd": 15
+      },
+      "detection": "figure-reference",
+      "contentSha256": "942642761d186ecebb8a09bb9b4a0a8fe5058b222c24ec4a5690d1a14c13cb91"
+    },
+    {
+      "id": "japan-zue-2025-26-p047-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 3,
+        "page": 47,
+        "kind": "table",
+        "itemNumber": "3-15"
+      },
+      "locator": {
+        "markdownPath": "md/p047.md",
+        "lineStart": 25,
+        "lineEnd": 35
+      },
+      "detection": "markdown-table",
+      "contentSha256": "8b6c9ff6d8702232ffddda3a2631919029d7c33b4a18f1d73f40566e4661daf7"
+    },
+    {
+      "id": "japan-zue-2025-26-p048-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 48,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p048.md",
+        "lineStart": 15,
+        "lineEnd": 15
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "f42cd2a84945b251d806acc8cae3eac2de67d87968ac4818746a956d5f79debe"
+    },
+    {
+      "id": "japan-zue-2025-26-p048-textstat02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 48,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p048.md",
+        "lineStart": 17,
+        "lineEnd": 17
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "d50168c862af0fe80c85d5a028414355a4814e1819fb3b87bc669ed58f60f14e"
+    },
+    {
+      "id": "japan-zue-2025-26-p048-textstat03",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 48,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p048.md",
+        "lineStart": 19,
+        "lineEnd": 19
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "5ae90929d178ebd10daaf92ecdcc8229dcfd30ccd06b56862863c7dee0547a96"
+    },
+    {
+      "id": "japan-zue-2025-26-p048-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 48,
+        "kind": "table",
+        "itemNumber": "4-1"
+      },
+      "locator": {
+        "markdownPath": "md/p048.md",
+        "lineStart": 23,
+        "lineEnd": 35
+      },
+      "detection": "markdown-table",
+      "contentSha256": "11870be5b6a6bb0e8457b4fa0a23c544e550f7188b79b2576edca87b149a513a"
+    },
+    {
+      "id": "japan-zue-2025-26-p049-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 49,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p049.md",
+        "lineStart": 11,
+        "lineEnd": 11
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "236164d7120955aeab3db964279808bf05e373c65128990a446a0fd68e3727fc"
+    },
+    {
+      "id": "japan-zue-2025-26-p049-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 49,
+        "kind": "table",
+        "itemNumber": "4-2"
+      },
+      "locator": {
+        "markdownPath": "md/p049.md",
+        "lineStart": 19,
+        "lineEnd": 68
+      },
+      "detection": "markdown-table",
+      "contentSha256": "7a44e89d54ed156783a89c03462d67f870d473359079631b12cfaa65f24eec00"
+    },
+    {
+      "id": "japan-zue-2025-26-p050-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 50,
+        "kind": "figure",
+        "itemNumber": "4-1"
+      },
+      "locator": {
+        "markdownPath": "md/p050.md",
+        "lineStart": 11,
+        "lineEnd": 11
+      },
+      "detection": "figure-reference",
+      "contentSha256": "4de2b8c46830cf254215056fbc8337f704d777158ec16650ca8dd229ebad6ecc"
+    },
+    {
+      "id": "japan-zue-2025-26-p050-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 50,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p050.md",
+        "lineStart": 23,
+        "lineEnd": 23
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "571c214e694d567aa8d1fff6935facc809eedadcb0d9b5f2ac38d8de16718423"
+    },
+    {
+      "id": "japan-zue-2025-26-p051-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 51,
+        "kind": "figure",
+        "itemNumber": "4-2"
+      },
+      "locator": {
+        "markdownPath": "md/p051.md",
+        "lineStart": 9,
+        "lineEnd": 9
+      },
+      "detection": "figure-reference",
+      "contentSha256": "4ec0d93669e3fb1551263790884af4ae2b090c8f30e5354ccf3c29c2a13d456a"
+    },
+    {
+      "id": "japan-zue-2025-26-p051-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 51,
+        "kind": "table",
+        "itemNumber": "4-3"
+      },
+      "locator": {
+        "markdownPath": "md/p051.md",
+        "lineStart": 19,
+        "lineEnd": 25
+      },
+      "detection": "markdown-table",
+      "contentSha256": "c42ad4a484559ef2f12c6f4afb961ceb6cbf9440319a6c9583a1103c4a300422"
+    },
+    {
+      "id": "japan-zue-2025-26-p051-table02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 51,
+        "kind": "table",
+        "itemNumber": "4-4"
+      },
+      "locator": {
+        "markdownPath": "md/p051.md",
+        "lineStart": 33,
+        "lineEnd": 82
+      },
+      "detection": "markdown-table",
+      "contentSha256": "2f6ccc747796277f55cb5103a6941d54120c50747def7378d1d9da98df72ee1c"
+    },
+    {
+      "id": "japan-zue-2025-26-p052-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 52,
+        "kind": "table",
+        "itemNumber": "4-5"
+      },
+      "locator": {
+        "markdownPath": "md/p052.md",
+        "lineStart": 15,
+        "lineEnd": 64
+      },
+      "detection": "markdown-table",
+      "contentSha256": "65e81bd372152e3ffc98d6120f6c525cbb8166efae92add3549a95d2ad69a166"
+    },
+    {
+      "id": "japan-zue-2025-26-p052-table02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 52,
+        "kind": "table",
+        "itemNumber": "4-6"
+      },
+      "locator": {
+        "markdownPath": "md/p052.md",
+        "lineStart": 70,
+        "lineEnd": 77
+      },
+      "detection": "markdown-table",
+      "contentSha256": "6294134dc5f80d7de143378b77d5d2b9f86213777ea258c62e7e8b611b85a234"
+    },
+    {
+      "id": "japan-zue-2025-26-p053-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 53,
+        "kind": "figure",
+        "itemNumber": "4-3"
+      },
+      "locator": {
+        "markdownPath": "md/p053.md",
+        "lineStart": 9,
+        "lineEnd": 9
+      },
+      "detection": "figure-reference",
+      "contentSha256": "df3138c1805746150b63362bb1a5414a8c65b1a33386510a8e91b639bf42e995"
+    },
+    {
+      "id": "japan-zue-2025-26-p053-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 53,
+        "kind": "table",
+        "itemNumber": "4-7"
+      },
+      "locator": {
+        "markdownPath": "md/p053.md",
+        "lineStart": 28,
+        "lineEnd": 46
+      },
+      "detection": "markdown-table",
+      "contentSha256": "9f0493b7cbe03f9b5965661c5de97608226af887a24d36b0c7ef623705f12b07"
+    },
+    {
+      "id": "japan-zue-2025-26-p054-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 54,
+        "kind": "table",
+        "itemNumber": "4-8"
+      },
+      "locator": {
+        "markdownPath": "md/p054.md",
+        "lineStart": 15,
+        "lineEnd": 64
+      },
+      "detection": "markdown-table",
+      "contentSha256": "2639d50c72cd15b027ff7b44ec58293a29c0458633c4f52fb29b1fb6c7c6952b"
+    },
+    {
+      "id": "japan-zue-2025-26-p054-table02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 54,
+        "kind": "table",
+        "itemNumber": "4-9"
+      },
+      "locator": {
+        "markdownPath": "md/p054.md",
+        "lineStart": 72,
+        "lineEnd": 121
+      },
+      "detection": "markdown-table",
+      "contentSha256": "e5a2c1396aace9470c444e602a0b4b021d7258caecdb5aff9f7c4f1a2b12b259"
+    },
+    {
+      "id": "japan-zue-2025-26-p054-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 54,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p054.md",
+        "lineStart": 125,
+        "lineEnd": 125
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "bb572ec2c58b2925c1f13c1a08334ff25909dba1cf233e677cee45b31bad8c1d"
+    },
+    {
+      "id": "japan-zue-2025-26-p055-figure01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 55,
+        "kind": "figure",
+        "itemNumber": "4-4"
+      },
+      "locator": {
+        "markdownPath": "md/p055.md",
+        "lineStart": 9,
+        "lineEnd": 9
+      },
+      "detection": "figure-reference",
+      "contentSha256": "a0efec3edebfcc474a0dcf7ebc60e3c6aa1dd4644cbbccadad5da1ebcb15207a"
+    },
+    {
+      "id": "japan-zue-2025-26-p055-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 55,
+        "kind": "table",
+        "itemNumber": "4-10"
+      },
+      "locator": {
+        "markdownPath": "md/p055.md",
+        "lineStart": 21,
+        "lineEnd": 70
+      },
+      "detection": "markdown-table",
+      "contentSha256": "39d1b6f7eda4b7de9a4aa11e7d8d4b18a2aaac3eeab0f7008d4a83438629173d"
+    },
+    {
+      "id": "japan-zue-2025-26-p056-textstat01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 56,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p056.md",
+        "lineStart": 13,
+        "lineEnd": 13
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "d16631d988c71b0ce0af69edcb8b0f1395f3ffed35afa40524101042ed00f0eb"
+    },
+    {
+      "id": "japan-zue-2025-26-p056-textstat02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 56,
+        "kind": "text-stat"
+      },
+      "locator": {
+        "markdownPath": "md/p056.md",
+        "lineStart": 15,
+        "lineEnd": 15
+      },
+      "detection": "quantitative-sentence",
+      "contentSha256": "e24b3ca94a1615fd6e0161098f40dff266e308aa7f6786c908d213571580c1a6"
+    },
+    {
+      "id": "japan-zue-2025-26-p056-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 56,
+        "kind": "table",
+        "itemNumber": "4-11"
+      },
+      "locator": {
+        "markdownPath": "md/p056.md",
+        "lineStart": 19,
+        "lineEnd": 29
+      },
+      "detection": "markdown-table",
+      "contentSha256": "e3e6a0c851c09eca01efa37a58727002c1909802988469300f267e7b1472dcd9"
+    },
+    {
+      "id": "japan-zue-2025-26-p056-table02",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 56,
+        "kind": "table",
+        "itemNumber": "4-12"
+      },
+      "locator": {
+        "markdownPath": "md/p056.md",
+        "lineStart": 37,
+        "lineEnd": 54
+      },
+      "detection": "markdown-table",
+      "contentSha256": "623a196aea5cf64de5ad3f82fdedad2ca972fa53059567bc64ad6207778107eb"
+    },
+    {
+      "id": "japan-zue-2025-26-p057-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 57,
+        "kind": "table",
+        "itemNumber": "4-13",
+        "continuationPages": [
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64
+        ]
+      },
+      "locator": {
+        "markdownPath": "md/p057.md",
+        "lineStart": 13,
+        "lineEnd": 138
+      },
+      "detection": "markdown-table",
+      "contentSha256": "ed5fb1e4932f177c6b919f18f3cedb7746f131e31b7f94b70eb428cea0900d79"
+    },
+    {
+      "id": "japan-zue-2025-26-p064-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 64,
+        "kind": "table",
+        "itemNumber": "4-14"
+      },
+      "locator": {
+        "markdownPath": "md/p064.md",
+        "lineStart": 32,
+        "lineEnd": 91
+      },
+      "detection": "markdown-table",
+      "contentSha256": "59a9d0a65b19ebb2078189a28974765fc1c42a83cbe89e09ad1949d1e3c1140d"
+    },
+    {
+      "id": "japan-zue-2025-26-p065-table01",
+      "source": {
+        "key": "japan-zue",
+        "edition": "2025-26",
+        "chapter": 4,
+        "page": 65,
+        "kind": "table",
+        "itemNumber": "4-15"
+      },
+      "locator": {
+        "markdownPath": "md/p065.md",
+        "lineStart": 13,
+        "lineEnd": 53
+      },
+      "detection": "markdown-table",
+      "contentSha256": "ff0e352eef271a262fe2702eac4f88fed3bf69fba4641cf6cda00268732e32ea"
+    }
+  ]
+}

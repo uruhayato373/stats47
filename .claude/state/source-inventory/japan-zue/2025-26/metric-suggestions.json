@@ -1,0 +1,1641 @@
+{
+  "schemaVersion": 1,
+  "sourceKey": "japan-zue",
+  "edition": "2025-26",
+  "candidateCount": 1332,
+  "sourceConstrainedCandidateCount": 185,
+  "suggestedCandidateCount": 110,
+  "highConfidenceCandidateCount": 0,
+  "suggestions": [
+    {
+      "candidateId": "japan-zue-2025-26-p030-textstat02",
+      "reviewGroupId": "japan-zue-review-677e875615d4cb0e691f7fa8c25d3bf8024b035c5a9e69a211e515f12ebbbd4d",
+      "matches": [
+        {
+          "metricKey": "average-temperature",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p030-textstat03",
+      "reviewGroupId": "japan-zue-review-677e875615d4cb0e691f7fa8c25d3bf8024b035c5a9e69a211e515f12ebbbd4d",
+      "matches": [
+        {
+          "metricKey": "average-temperature",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p031-textstat02",
+      "reviewGroupId": "japan-zue-review-3b1711c11b5e039e025e4f9a580cba9551117e1d76df1365545d8ee07fee1e33",
+      "matches": [
+        {
+          "metricKey": "average-temperature",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p038-textstat01",
+      "reviewGroupId": "japan-zue-review-d9c4d7c0efbe097a7550ab213d1f52bfb187887d7b80662eb0be712e49cded23",
+      "matches": [
+        {
+          "metricKey": "births",
+          "score": 0.92,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "death-count",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p038-textstat02",
+      "reviewGroupId": "japan-zue-review-7b7ca5cfe9af2df8f376e3a629e11f8897cfc80b965f442acf246be1b6b10271",
+      "matches": [
+        {
+          "metricKey": "births",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "death-count",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p038-textstat04",
+      "reviewGroupId": "japan-zue-review-0cc4203af36ed0488b5cba61b4e3f653551a17493e626b007b46d3fef3b602e4",
+      "matches": [
+        {
+          "metricKey": "total-fertility-rate",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p039-textstat01",
+      "reviewGroupId": "japan-zue-review-3c81b6f731d8376ab7bca78d16940258d6bcf195f348aaac9aaa3be5671cbf9d",
+      "matches": [
+        {
+          "metricKey": "total-fertility-rate",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p039-textstat02",
+      "reviewGroupId": "japan-zue-review-3c81b6f731d8376ab7bca78d16940258d6bcf195f348aaac9aaa3be5671cbf9d",
+      "matches": [
+        {
+          "metricKey": "births",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p042-textstat01",
+      "reviewGroupId": "japan-zue-review-25fb39bb062c7c142b1c90be30d8b62b612b7d92f807e2938f5c76f153dafae4",
+      "matches": [
+        {
+          "metricKey": "general-households",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "households",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "single-person-household-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p042-table01",
+      "reviewGroupId": "japan-zue-review-5bc122dbe3a264aebd761a8d74891e70761ca6eed71bd8ed59aa8620f84f9c3c",
+      "matches": [
+        {
+          "metricKey": "households",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p042-table02",
+      "reviewGroupId": "japan-zue-review-5bc122dbe3a264aebd761a8d74891e70761ca6eed71bd8ed59aa8620f84f9c3c",
+      "matches": [
+        {
+          "metricKey": "general-households",
+          "score": 0.92,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "households",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p043-textstat01",
+      "reviewGroupId": "japan-zue-review-f1f9fa28e407350811ce589285d8dbef7ed4d57f540e303cc8dbaeb53eb0d5a8",
+      "matches": [
+        {
+          "metricKey": "marriages",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p043-table02",
+      "reviewGroupId": "japan-zue-review-df565fbbae787ace300fd12b3be657e6a4ccc9b390091e349e10d2eaab2162e2",
+      "matches": [
+        {
+          "metricKey": "average-age-of-first-marriage-husband",
+          "score": 0.472,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "average-age-of-first-marriage-wife",
+          "score": 0.472,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p045-table02",
+      "reviewGroupId": "japan-zue-review-8e901aae3bc3912f996fc3d3d21e82556cdb19e753f88c79a5854afddbb9837f",
+      "matches": [
+        {
+          "metricKey": "japanese-population",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p046-textstat01",
+      "reviewGroupId": "japan-zue-review-ffa8b49a4f3ba64f0d20893fd0c6248a51f8823a048c54ce525908a3b8b01aad",
+      "matches": [
+        {
+          "metricKey": "births",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "projected-population-2020",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "projected-population-2025",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "projected-population-2030",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "projected-population-2035",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p046-table01",
+      "reviewGroupId": "japan-zue-review-5b21f66207234417154aa9c5a1b27abfbdc22c30c52b4cc60c190c3cfe93f65a",
+      "matches": [
+        {
+          "metricKey": "projected-population-2020",
+          "score": 0.62,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "projected-population-2025",
+          "score": 0.62,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "projected-population-2030",
+          "score": 0.62,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "projected-population-2035",
+          "score": 0.62,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "projected-population-2040",
+          "score": 0.62,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p048-textstat01",
+      "reviewGroupId": "japan-zue-review-f9261a91d2255269ee450e897521e098fbdf1ff66f48a7f8088e716999f99710",
+      "matches": [
+        {
+          "metricKey": "births",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "death-count",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p051-table02",
+      "reviewGroupId": "japan-zue-review-557829b4f46de7f890d124e169a97707897db37680055089a905ba0d521bfb4a",
+      "matches": [
+        {
+          "metricKey": "population-growth-rate",
+          "score": 0.546,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p052-table01",
+      "reviewGroupId": "japan-zue-review-35d76969b3bed6bb96ba8e98c9ba774bf48fde2048f2b6156cfdcad64db00321",
+      "matches": [
+        {
+          "metricKey": "sex-ratio-total",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p053-table01",
+      "reviewGroupId": "japan-zue-review-b4df681c837783a45983bfb8e7ebd289875d3379d859ddcb9d34a42ae7372437",
+      "matches": [
+        {
+          "metricKey": "day-time-population",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p054-table02",
+      "reviewGroupId": "japan-zue-review-0cc4203af36ed0488b5cba61b4e3f653551a17493e626b007b46d3fef3b602e4",
+      "matches": [
+        {
+          "metricKey": "total-fertility-rate",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p054-textstat01",
+      "reviewGroupId": "japan-zue-review-0cc4203af36ed0488b5cba61b4e3f653551a17493e626b007b46d3fef3b602e4",
+      "matches": [
+        {
+          "metricKey": "total-fertility-rate",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p055-table01",
+      "reviewGroupId": "japan-zue-review-b4df681c837783a45983bfb8e7ebd289875d3379d859ddcb9d34a42ae7372437",
+      "matches": [
+        {
+          "metricKey": "households",
+          "score": 0.92,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "average-persons-per-general-household",
+          "score": 0.695,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p068-textstat02",
+      "reviewGroupId": "japan-zue-review-826de08f297207fd4cb0c75bfabf4ebccf2c2e08a7b095ff5104f6320aa8e24f",
+      "matches": [
+        {
+          "metricKey": "minimum-wage-by-region",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p077-table01",
+      "reviewGroupId": "japan-zue-review-e5111a5b9b149e2816e680e92f83e496b378d8b9a8a5701a851cf72d572fe96d",
+      "matches": [
+        {
+          "metricKey": "minimum-wage-by-region",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p089-table02",
+      "reviewGroupId": "japan-zue-review-5f0cb6482ca801e36bfa30e78dfdd2a73d3da4e51c2926784c412b0254989921",
+      "matches": [
+        {
+          "metricKey": "gross-prefectural-product-expenditure-nominal-h27",
+          "score": 0.92,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "kenmin-shotoku-h27",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p100-table03",
+      "reviewGroupId": "japan-zue-review-53ef120bd491337774e4f6c14ab1014788ee0fd1a7b103863a184ee597d156ea",
+      "matches": [
+        {
+          "metricKey": "sole-proprietor-operating-profit",
+          "score": 0.449,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "sole-proprietor-sales",
+          "score": 0.421,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p119-textstat01",
+      "reviewGroupId": "japan-zue-review-076d6031355a4b14c28142550320f66854a5bfe5ef3a2479dd122dc7f7379b9f",
+      "matches": [
+        {
+          "metricKey": "electricity-generation-capacity",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p119-textstat02",
+      "reviewGroupId": "japan-zue-review-076d6031355a4b14c28142550320f66854a5bfe5ef3a2479dd122dc7f7379b9f",
+      "matches": [
+        {
+          "metricKey": "electricity-generation-capacity",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p120-table01",
+      "reviewGroupId": "japan-zue-review-87425c53925be6323ae417c32aefc5884da79af7edcc3a4dec9a1f676cc71105",
+      "matches": [
+        {
+          "metricKey": "nuclear-power-plant-count",
+          "score": 0.457,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p121-table02",
+      "reviewGroupId": "japan-zue-review-e3a78384494d8e424719e2d242468ce295d3480fb08d93f9f935db7057d681e0",
+      "matches": [
+        {
+          "metricKey": "electricity-generation-capacity",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p126-textstat02",
+      "reviewGroupId": "japan-zue-review-a2bae5d49ad76bdf2b2b84579864f60f92c268cbb293726b7ef38a72d4c6214a",
+      "matches": [
+        {
+          "metricKey": "electricity-generation-capacity",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p126-table01",
+      "reviewGroupId": "japan-zue-review-63f7b6e13de54b8ae7b760e5b8c75238775c3d560d6cf3f4eea523eaa43112de",
+      "matches": [
+        {
+          "metricKey": "electricity-generation-capacity",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p126-table02",
+      "reviewGroupId": "japan-zue-review-63f7b6e13de54b8ae7b760e5b8c75238775c3d560d6cf3f4eea523eaa43112de",
+      "matches": [
+        {
+          "metricKey": "electricity-generation-capacity",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p130-textstat01",
+      "reviewGroupId": "japan-zue-review-860b3318ba3070842ec9157cf815942fb40f141479eda866f7dc781728ea508a",
+      "matches": [
+        {
+          "metricKey": "agricultural-income-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p135-textstat01",
+      "reviewGroupId": "japan-zue-review-a407e6ed14fb77d2a6ecb300c598ee2daa7d3bfc43fe1bdf8ce7f3549cdbea4a",
+      "matches": [
+        {
+          "metricKey": "cultivated-land-area-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p135-table01",
+      "reviewGroupId": "japan-zue-review-5bb82f7532153eb39f50dfeddb92c56ca8a22c4b1203e884d59eb9d6a97c6fdd",
+      "matches": [
+        {
+          "metricKey": "cultivated-land-area-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p136-textstat02",
+      "reviewGroupId": "japan-zue-review-1af0845b23527f8f1043cbdc4e61664c5c611c8ab83419acd341baf971001806",
+      "matches": [
+        {
+          "metricKey": "cultivated-land-area-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p137-table01",
+      "reviewGroupId": "japan-zue-review-92a76dd0f040f356ec568690935254707046c87806947dd8f51dc86ec80687c3",
+      "matches": [
+        {
+          "metricKey": "cultivated-land-area-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "small-scale-farm-households",
+          "score": 0.478,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p138-textstat02",
+      "reviewGroupId": "japan-zue-review-85943da70c6070c86386cd28e8a0a29b10d940fa4ca61e7d6e94327425a5b960",
+      "matches": [
+        {
+          "metricKey": "agricultural-employment-population",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p139-table02",
+      "reviewGroupId": "japan-zue-review-2ddf155af5d89c97e613dd59b73b3fa2a62da1136928d560ec1562cbe6418435",
+      "matches": [
+        {
+          "metricKey": "sixth-industry-agriculture-sales",
+          "score": 0.57,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "sixth-industry-agriculture-entities",
+          "score": 0.497,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p151-textstat01",
+      "reviewGroupId": "japan-zue-review-1fa2054a4ed1d8999bfbcd07d3f97c2c57edd6e8cda6d13518e10bd45b1e9304",
+      "matches": [
+        {
+          "metricKey": "agricultural-farm-count",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p157-textstat01",
+      "reviewGroupId": "japan-zue-review-97cb17f1617b61ec87e94f4d0473ed9ed76ad5774e0f84de27ce42101cd0c13c",
+      "matches": [
+        {
+          "metricKey": "agricultural-farm-count",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p160-textstat01",
+      "reviewGroupId": "japan-zue-review-30be17b100cf1f4177f5229580408adc920401b51d09262e66f58e30683b0ee7",
+      "matches": [
+        {
+          "metricKey": "agricultural-output",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p166-table02",
+      "reviewGroupId": "japan-zue-review-3422a778c5a8dbf62fc95e428c242d7248a9fe532edae1c08d581beb73e02250",
+      "matches": [
+        {
+          "metricKey": "agricultural-output",
+          "score": 0.565,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "fishery-output-value",
+          "score": 0.565,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "marine-fishery-output-value",
+          "score": 0.465,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "marine-aquaculture-output",
+          "score": 0.427,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p170-textstat01",
+      "reviewGroupId": "japan-zue-review-12fa87ef2117c620db2faff42acc9dbae9d2f1620decc02db108a32e5af38d4f",
+      "matches": [
+        {
+          "metricKey": "employed-people-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p170-table01",
+      "reviewGroupId": "japan-zue-review-7f869ad47ec7cc8c2d9dc0102511935099f28bc7917b3e74c7ababd06c210a76",
+      "matches": [
+        {
+          "metricKey": "employed-people-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "fishery-output-value",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "marine-fishery-output-value",
+          "score": 0.446,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "fishery-workers",
+          "score": 0.425,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p171-table01",
+      "reviewGroupId": "japan-zue-review-d5abbe1fa8e35277725f8aa79f806157b18d8e31c025aa555ea8740357d6b8f6",
+      "matches": [
+        {
+          "metricKey": "fish-catch",
+          "score": 0.92,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "marine-fishery-catch",
+          "score": 0.92,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "inland-fishery-catch",
+          "score": 0.481,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p172-textstat01",
+      "reviewGroupId": "japan-zue-review-41e7218e3e225f76fb567e7065105e456d12002cfb12710598f5fcd62bf4e3e4",
+      "matches": [
+        {
+          "metricKey": "fish-catch",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p172-table01",
+      "reviewGroupId": "japan-zue-review-d5abbe1fa8e35277725f8aa79f806157b18d8e31c025aa555ea8740357d6b8f6",
+      "matches": [
+        {
+          "metricKey": "marine-aquaculture-harvest",
+          "score": 0.475,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "marine-aquaculture-output",
+          "score": 0.475,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p172-table02",
+      "reviewGroupId": "japan-zue-review-d5abbe1fa8e35277725f8aa79f806157b18d8e31c025aa555ea8740357d6b8f6",
+      "matches": [
+        {
+          "metricKey": "marine-fishery-aquaculture-output-value",
+          "score": 0.457,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p173-textstat01",
+      "reviewGroupId": "japan-zue-review-a83cf921f95493c90cb00270b7da8e4a0da26e440273dbb1a07a0637e330916f",
+      "matches": [
+        {
+          "metricKey": "fish-catch",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p180-table02",
+      "reviewGroupId": "japan-zue-review-8142d9f45239ea32cd6704e832e767c8faea0d99777831c12fe5a85fd4d98556",
+      "matches": [
+        {
+          "metricKey": "manufacturing-shipment-amount",
+          "score": 0.477,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "manufacturing-shipment",
+          "score": 0.458,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p249-figure01",
+      "reviewGroupId": "japan-zue-review-d50afa1866af7265b6322ea20bca10023395a2ed10dae4df7f747762b5115a7f",
+      "matches": [
+        {
+          "metricKey": "construction-industry-count",
+          "score": 0.442,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p249-table01",
+      "reviewGroupId": "japan-zue-review-6203c48b24b13e514291912bd23957771d1ba31db429cdda34f233fa1b14ea5e",
+      "matches": [
+        {
+          "metricKey": "construction-industry-count",
+          "score": 0.488,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p251-table02",
+      "reviewGroupId": "japan-zue-review-fd2c5acf71faa25bf189ea901b42334d6d9314f325d4be79b156e4d67dc14a25",
+      "matches": [
+        {
+          "metricKey": "construction-contract-river",
+          "score": 0.446,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "construction-contract-road",
+          "score": 0.446,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "construction-contract-sewerage",
+          "score": 0.429,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p255-table01",
+      "reviewGroupId": "japan-zue-review-c4a21ad4c89e1611b539c1da224471a59c489a0a62e5f9f3af3b0a2aae8ca24e",
+      "matches": [
+        {
+          "metricKey": "secondary-industry-employees-per-establishment-census",
+          "score": 0.514,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "tertiary-industry-employees-per-establishment-census",
+          "score": 0.514,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "secondary-industry-establishment-ratio-census",
+          "score": 0.497,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "tertiary-industry-establishment-ratio-census",
+          "score": 0.497,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p263-table01",
+      "reviewGroupId": "japan-zue-review-bbf2136226f41e53fbb125a4c4c538ac27e7dbc4c8208516849c7dc46bf3423b",
+      "matches": [
+        {
+          "metricKey": "convenience-store-sales",
+          "score": 0.532,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "convenience-store-sales-monthly",
+          "score": 0.523,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "convenience-store-count-commercial",
+          "score": 0.49,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p340-table01",
+      "reviewGroupId": "japan-zue-review-0ef7a066ac5caba50f10fdd37e7f60977962d6ea932d9b4711fdb0b2bf7458c7",
+      "matches": [
+        {
+          "metricKey": "cpi-change-rate-education",
+          "score": 0.556,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-food",
+          "score": 0.556,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-housing",
+          "score": 0.556,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-total",
+          "score": 0.556,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-miscellaneous",
+          "score": 0.53,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p341-figure02",
+      "reviewGroupId": "japan-zue-review-0ef7a066ac5caba50f10fdd37e7f60977962d6ea932d9b4711fdb0b2bf7458c7",
+      "matches": [
+        {
+          "metricKey": "cpi-change-rate-education",
+          "score": 0.584,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-food",
+          "score": 0.584,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-housing",
+          "score": 0.584,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-total",
+          "score": 0.584,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-miscellaneous",
+          "score": 0.556,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p341-table01",
+      "reviewGroupId": "japan-zue-review-d188e9ae0f2eab82b356cc38d1af756c9061f22478154bbd97cd3747311122cc",
+      "matches": [
+        {
+          "metricKey": "cpi-change-rate-education",
+          "score": 0.506,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-food",
+          "score": 0.506,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-housing",
+          "score": 0.506,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-total",
+          "score": 0.506,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "cpi-change-rate-miscellaneous",
+          "score": 0.484,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p343-table01",
+      "reviewGroupId": "japan-zue-review-5981c2bb7f327c104bb6c5af985ba5275ec84442886c2046dcb4e39f0b36c475",
+      "matches": [
+        {
+          "metricKey": "residential-land-price-change-rate",
+          "score": 0.508,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p363-table01",
+      "reviewGroupId": "japan-zue-review-26e6bc559fdb69320e85969c01dfaa59f04b51f76b9b17ae5fa17f4d2a809a19",
+      "matches": [
+        {
+          "metricKey": "bank-personal-deposit",
+          "score": 0.429,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "domestic-bank-deposit-balance",
+          "score": 0.429,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p365-table02",
+      "reviewGroupId": "japan-zue-review-af546bb5eb4d697fe1a06a534f07c1a5c26bfe75c554d1ad9c7219773a8be5a5",
+      "matches": [
+        {
+          "metricKey": "financial-assets-balance-multi-person-households",
+          "score": 0.457,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p374-table01",
+      "reviewGroupId": "japan-zue-review-4a66bea79696a30c3d3492e5167ef4316c3fa8797b3ae0ef25c05b227ff2959f",
+      "matches": [
+        {
+          "metricKey": "simple-life-insurance-contract-amount-per-contract",
+          "score": 0.443,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "private-life-insurance-contracts",
+          "score": 0.434,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "simple-life-insurance-contract-count",
+          "score": 0.434,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p379-table01",
+      "reviewGroupId": "japan-zue-review-ed9b1c249b99744ed9b14e816fc9056bca36b4ab4fea6e8909c00ba6d39a3395",
+      "matches": [
+        {
+          "metricKey": "final-energy-consumption",
+          "score": 0.477,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p379-table02",
+      "reviewGroupId": "japan-zue-review-51179b38c5456f56bcecfb0fc3e357c227a14115e241a4d49757a2e64d085aba",
+      "matches": [
+        {
+          "metricKey": "final-energy-consumption",
+          "score": 0.477,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p379-table03",
+      "reviewGroupId": "japan-zue-review-c5997f938ed42b1e61310a934ffad9cae50d44f674bcc8ccb84d95e002cb144b",
+      "matches": [
+        {
+          "metricKey": "air-cargo-transport",
+          "score": 0.42,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p383-table01",
+      "reviewGroupId": "japan-zue-review-9dbc05d292ffce790b3f2178476af24346989f4a1a941daeb1c5ec0911875732",
+      "matches": [
+        {
+          "metricKey": "air-cargo-transport",
+          "score": 0.546,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p384-textstat01",
+      "reviewGroupId": "japan-zue-review-ec5ad92f945a8c4f19346f40d1e22e10d62ddc363c29e288f72f145648ee503c",
+      "matches": [
+        {
+          "metricKey": "bus-operators",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p388-table03",
+      "reviewGroupId": "japan-zue-review-75af40168c830484551ac027d7b3947ad51dcafacdc36ea52d7df741dd8d286c",
+      "matches": [
+        {
+          "metricKey": "port-ships-tonnage",
+          "score": 0.554,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p393-table02",
+      "reviewGroupId": "japan-zue-review-a6c40af699e4b0b9f0a7a3f66db3df68170a8e3ef74dfd6c100c22de08e2c111",
+      "matches": [
+        {
+          "metricKey": "room-utilization-rate",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p395-table02",
+      "reviewGroupId": "japan-zue-review-5c8addfb905cb62c8c37fe30def6b7b89e9dc0b7dccbea4de3d344f3086fb8f5",
+      "matches": [
+        {
+          "metricKey": "mobile-phone-contract-count-per-1000",
+          "score": 0.42,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p418-figure02",
+      "reviewGroupId": "japan-zue-review-742b0569f418eaac05b3075637822ce1feaa26a1bf333194cc4f27ec3eff3292",
+      "matches": [
+        {
+          "metricKey": "consumption-expenditure-multi-person-households-per-month",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "disposable-income-worker-households",
+          "score": 0.525,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p419-textstat01",
+      "reviewGroupId": "japan-zue-review-1de0a570a7655996d2cc4a16f8c94365e32a15702f715b26b44da57683ef114c",
+      "matches": [
+        {
+          "metricKey": "actual-income-worker-households-per-month",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p420-textstat01",
+      "reviewGroupId": "japan-zue-review-df8cf04ed1beb06ee122443313b561f73a2886c97738939b94c896826fd5c28c",
+      "matches": [
+        {
+          "metricKey": "avg-propensity-to-consume-worker-households",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "consumption-expenditure-multi-person-households-per-month",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "dual-income-household-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "owner-occupied-housing-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p420-table01",
+      "reviewGroupId": "japan-zue-review-738a05c4d804fd933df1d1f020709bd6dd710493a22f11a790a6e9364c52ef87",
+      "matches": [
+        {
+          "metricKey": "consumption-expenditure-multi-person-households-per-month",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p420-table03",
+      "reviewGroupId": "japan-zue-review-31fc72633a3becd128af9162c7f383e74e4c13c2b2f06f6675a15c97027f056f",
+      "matches": [
+        {
+          "metricKey": "consumption-expenditure-multi-person-households-per-month",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p421-table01",
+      "reviewGroupId": "japan-zue-review-31fc72633a3becd128af9162c7f383e74e4c13c2b2f06f6675a15c97027f056f",
+      "matches": [
+        {
+          "metricKey": "consumption-expenditure-multi-person-households-per-month",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p422-textstat01",
+      "reviewGroupId": "japan-zue-review-e2f2a99613be2f5556be346c422c338d91f1b37c826a1cb9bcf0230cf2c7ee9a",
+      "matches": [
+        {
+          "metricKey": "consumption-expenditure-multi-person-households-per-month",
+          "score": 0.92,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "food-expenditure-ratio-multi-person-households",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p422-table01",
+      "reviewGroupId": "japan-zue-review-31fc72633a3becd128af9162c7f383e74e4c13c2b2f06f6675a15c97027f056f",
+      "matches": [
+        {
+          "metricKey": "disposable-income-worker-households",
+          "score": 0.592,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p423-table01",
+      "reviewGroupId": "japan-zue-review-31fc72633a3becd128af9162c7f383e74e4c13c2b2f06f6675a15c97027f056f",
+      "matches": [
+        {
+          "metricKey": "disposable-income-worker-households",
+          "score": 0.471,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p427-table01",
+      "reviewGroupId": "japan-zue-review-b51dcef3735db3132e2cadcc03d787f70ccb6d27464af1bd6dbdcf0879b93e83",
+      "matches": [
+        {
+          "metricKey": "food-expenditure-ratio-multi-person-households",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p429-textstat01",
+      "reviewGroupId": "japan-zue-review-58bcd0036a458ad5f9f11c297bc20e5906b2945c77fb4df43d9abe9a80d6e13f",
+      "matches": [
+        {
+          "metricKey": "vacant-housing-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p429-textstat02",
+      "reviewGroupId": "japan-zue-review-58bcd0036a458ad5f9f11c297bc20e5906b2945c77fb4df43d9abe9a80d6e13f",
+      "matches": [
+        {
+          "metricKey": "apartment-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p430-textstat01",
+      "reviewGroupId": "japan-zue-review-b1c47ea36fb2cfaa44019deb0770d4bb6adec8d78165f436da70f4a8c3078b83",
+      "matches": [
+        {
+          "metricKey": "apartment-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p431-table02",
+      "reviewGroupId": "japan-zue-review-1b8eab707988438af69b95cd2c8e20b23bc21f698cab8ea0658467e4926f02f1",
+      "matches": [
+        {
+          "metricKey": "sewerage-penetration-rate-pre2011",
+          "score": 0.593,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "sewerage-penetration-rate-2012on",
+          "score": 0.557,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p434-table01",
+      "reviewGroupId": "japan-zue-review-7ddb11144accadf9245ddd598cfa907b2fdaa81018b3fe6d634921c23c08d4a0",
+      "matches": [
+        {
+          "metricKey": "volunteer-activity-annual-participation-rate-10plus",
+          "score": 0.451,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "volunteer-activity-annual-participation-rate-15plus",
+          "score": 0.451,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p442-table01",
+      "reviewGroupId": "japan-zue-review-69783cd19922331b74ba86d43e8f577ea7cf3bbc3120e6800cff3cac69e87314",
+      "matches": [
+        {
+          "metricKey": "pharmacy-count-per-100k",
+          "score": 0.464,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p450-table02",
+      "reviewGroupId": "japan-zue-review-5b6353705609dc3f628e6c726ae69904567c9209d2942d5c1741ae4467d82e25",
+      "matches": [
+        {
+          "metricKey": "nursing-care-insurance-benefit",
+          "score": 0.738,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p452-textstat02",
+      "reviewGroupId": "japan-zue-review-db7cbc591b644318e1e2f3df6dfbadce059742c9ea5c3b92da9b87a1a7a4d314",
+      "matches": [
+        {
+          "metricKey": "births",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p454-textstat01",
+      "reviewGroupId": "japan-zue-review-d423a8fb24c20268a6db0fa3bf1b045d171fcab7675066936b468eab2993de27",
+      "matches": [
+        {
+          "metricKey": "dual-income-household-ratio",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p455-table02",
+      "reviewGroupId": "japan-zue-review-0a11397c64106f213a171ba18886cbb840dd83c54f870f8bb5d2b37c1faadb11",
+      "matches": [
+        {
+          "metricKey": "physical-disability-certificates-issued",
+          "score": 0.654,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "physical-disability-certificates-issued-per-1000",
+          "score": 0.547,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p457-table01",
+      "reviewGroupId": "japan-zue-review-d9eef20ed31810ec4fb1bb576e2d389140d00c680bea0ce22f73187f3cdfc7d3",
+      "matches": [
+        {
+          "metricKey": "households-on-public-assistance",
+          "score": 0.74,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "households-on-public-assistance-per-1000",
+          "score": 0.675,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "persons-on-public-assistance",
+          "score": 0.514,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "elderly-on-public-assistance-per-1000-65plus",
+          "score": 0.448,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "persons-on-public-assistance-per-1000",
+          "score": 0.439,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p458-table01",
+      "reviewGroupId": "japan-zue-review-c4895edfaaf013c71de017b57f963f80f5b0a2ad1977cd22b57217f54c912a00",
+      "matches": [
+        {
+          "metricKey": "crude-death-rate",
+          "score": 0.442,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p458-table02",
+      "reviewGroupId": "japan-zue-review-6dc71afb6d0e667d01e88dfb6ef8ae47beaafe93881cd2826f6230dbf97d64ca",
+      "matches": [
+        {
+          "metricKey": "infant-deaths",
+          "score": 0.837,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "infant-mortality-rate-per-1000-births",
+          "score": 0.837,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "neonatal-deaths",
+          "score": 0.442,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "neonatal-mortality-rate-per-1000-births",
+          "score": 0.442,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p462-table01",
+      "reviewGroupId": "japan-zue-review-45253420b37380c62eea7a7ffdcc1f086120b35c9304cd6e3991f0d3950a2567",
+      "matches": [
+        {
+          "metricKey": "national-medical-expense-total",
+          "score": 0.591,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "national-medical-expense-per-person",
+          "score": 0.475,
+          "sourceCompatible": true
+        },
+        {
+          "metricKey": "national-medical-expense-inpatient",
+          "score": 0.446,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p464-textstat01",
+      "reviewGroupId": "japan-zue-review-64e477bba979255427f8b54e942fd428a29374c603b34dbb1c09c46cc0ad91da",
+      "matches": [
+        {
+          "metricKey": "death-count",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p464-textstat02",
+      "reviewGroupId": "japan-zue-review-64e477bba979255427f8b54e942fd428a29374c603b34dbb1c09c46cc0ad91da",
+      "matches": [
+        {
+          "metricKey": "death-count",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p464-textstat03",
+      "reviewGroupId": "japan-zue-review-64e477bba979255427f8b54e942fd428a29374c603b34dbb1c09c46cc0ad91da",
+      "matches": [
+        {
+          "metricKey": "death-count",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p464-textstat04",
+      "reviewGroupId": "japan-zue-review-64e477bba979255427f8b54e942fd428a29374c603b34dbb1c09c46cc0ad91da",
+      "matches": [
+        {
+          "metricKey": "death-count",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p465-table01",
+      "reviewGroupId": "japan-zue-review-0cc4203af36ed0488b5cba61b4e3f653551a17493e626b007b46d3fef3b602e4",
+      "matches": [
+        {
+          "metricKey": "death-count",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p466-table01",
+      "reviewGroupId": "japan-zue-review-0cc4203af36ed0488b5cba61b4e3f653551a17493e626b007b46d3fef3b602e4",
+      "matches": [
+        {
+          "metricKey": "death-count",
+          "score": 0.92,
+          "sourceCompatible": true
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p467-table01",
+      "reviewGroupId": "japan-zue-review-01a41a16e7ad394b612ba4c52139ed3b57778a7717ca5e5d8d62a24f2cc934b0",
+      "matches": [
+        {
+          "metricKey": "average-life-expectancy-male",
+          "score": 0.565,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "average-life-expectancy-female-20",
+          "score": 0.427,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "average-life-expectancy-female-65",
+          "score": 0.427,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "life-expectancy-65-male",
+          "score": 0.427,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p474-table01",
+      "reviewGroupId": "japan-zue-review-2d00064fa75a96cfabef4a80f92d1d2a5504bfafda2d0bfc17e91135781d07bb",
+      "matches": [
+        {
+          "metricKey": "pollution-complaints-received-per-100k",
+          "score": 0.92,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p481-table01",
+      "reviewGroupId": "japan-zue-review-e6e04ddc2ad8d44ccf2b81ac4e68f385e3cd796347452a8f8d97d6e17627af3c",
+      "matches": [
+        {
+          "metricKey": "accident-death-30day",
+          "score": 0.616,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "traffic-accident-deaths-per-100k",
+          "score": 0.596,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "traffic-accident-deaths-per-100-accidents",
+          "score": 0.546,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "traffic-accident-casualties-per-population",
+          "score": 0.495,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p482-table03",
+      "reviewGroupId": "japan-zue-review-704d0ab135ce6ae2a1da3fdda663fc80b47a4b4dd713c72cbc8314735fecf205",
+      "matches": [
+        {
+          "metricKey": "annual-emergency-dispatches-per-1000",
+          "score": 0.755,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p526-table01",
+      "reviewGroupId": "japan-zue-review-4765a64172a628b9edb15de119dd63ab5c2259cd025b68526dad545fcd362224",
+      "matches": [
+        {
+          "metricKey": "manufacturing-shipment-amount",
+          "score": 0.584,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "manufacturing-shipment",
+          "score": 0.556,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "manufacturing-shipment-amount-per-employee",
+          "score": 0.484,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "manufacturing-shipment-amount-per-establishment",
+          "score": 0.484,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p527-table01",
+      "reviewGroupId": "japan-zue-review-46996e37127cfe829f5035846d3d111d85f39088d37ea07995190fd89a72f497",
+      "matches": [
+        {
+          "metricKey": "manufacturing-shipment-amount",
+          "score": 0.506,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "manufacturing-shipment",
+          "score": 0.484,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "manufacturing-shipment-amount-per-employee",
+          "score": 0.429,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "manufacturing-shipment-amount-per-establishment",
+          "score": 0.429,
+          "sourceCompatible": false
+        }
+      ]
+    },
+    {
+      "candidateId": "japan-zue-2025-26-p528-table01",
+      "reviewGroupId": "japan-zue-review-7d181e97b46d3e37f16d3e60de7bcb39d496ad12024a2ab2d8463ac121f6b3ea",
+      "matches": [
+        {
+          "metricKey": "manufacturing-shipment-amount",
+          "score": 0.584,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "manufacturing-shipment",
+          "score": 0.556,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "manufacturing-shipment-amount-per-employee",
+          "score": 0.484,
+          "sourceCompatible": false
+        },
+        {
+          "metricKey": "manufacturing-shipment-amount-per-establishment",
+          "score": 0.484,
+          "sourceCompatible": false
+        }
+      ]
+    }
+  ]
+}

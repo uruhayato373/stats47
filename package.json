@@ -86,7 +86,18 @@
     "search-growth:test": "node --test .claude/scripts/search-growth/__tests__/*.test.mjs",
     "source-vault": "node .claude/scripts/source-vault/japan-zue-bundle.mjs",
     "source-vault:japan-zue": "node .claude/scripts/source-vault/japan-zue-bundle.mjs",
-    "source-vault:test": "node --test .claude/scripts/source-vault/__tests__/*.test.mjs"
+    "source-vault:test": "node --test .claude/scripts/source-vault/__tests__/*.test.mjs",
+    "evidence:extract": "tsx .claude/scripts/evidence/japan-zue.ts extract",
+    "evidence:validate": "tsx .claude/scripts/evidence/japan-zue.ts validate",
+    "evidence:coverage": "tsx .claude/scripts/evidence/japan-zue.ts coverage",
+    "evidence:structure-audit": "tsx .claude/scripts/evidence/japan-zue.ts structure-audit",
+    "evidence:review-queue": "tsx .claude/scripts/evidence/japan-zue.ts review-queue",
+    "evidence:metric-suggestions": "tsx .claude/scripts/evidence/japan-zue.ts metric-suggestions",
+    "evidence:source-suggestions": "tsx .claude/scripts/evidence/japan-zue.ts source-suggestions",
+    "evidence:mapping-queue": "tsx .claude/scripts/evidence/japan-zue.ts mapping-queue",
+    "evidence:correction-audit": "tsx .claude/scripts/evidence/japan-zue.ts correction-audit",
+    "evidence:expression-audit": "tsx .claude/scripts/evidence/japan-zue.ts expression-audit",
+    "evidence:diff": "tsx .claude/scripts/evidence/japan-zue.ts diff"
   },
   "devDependencies": {
     "@types/shapefile": "^0.6.4",
