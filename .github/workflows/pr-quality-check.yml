@@ -217,6 +217,13 @@ jobs:
         run: node .claude/scripts/lib/check-r2-route-ssg.cjs
         continue-on-error: false
 
+      - name: 📚 Private Reference Source Guard
+        # 原本・OCR・図はprivate Google Driveだけに保全し、repo内の参考資料cache再混入を拒否する。
+        run: |
+          npm run source-vault:check
+          npm run source-vault:test
+        continue-on-error: false
+
       - name: 🚧 Web e-Stat Import Boundary Guard
         # 本番 apps/web から e-Stat への推移的な値 import 到達を監視。
         # static/dynamic/re-export/require/wrapper/alias の新規 edge を PR base と比較して弾く。

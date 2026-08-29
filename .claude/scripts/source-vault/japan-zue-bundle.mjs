@@ -23,6 +23,8 @@ const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(SCRIPT_DIR, "../../..");
 const PROFILE_CONFIG_PATH = path.join(PROJECT_ROOT, ".claude", "config", "source-vault.json");
 const DEFAULT_PART_SIZE_MIB = 90;
+let DRIVE_ROOT_FOLDER;
+let DRIVE_COLLECTION_FOLDER;
 let PROFILE_NAME;
 let SOURCE_KEY;
 let EDITION;
@@ -34,17 +36,42 @@ let DEFAULT_SOURCE;
 let DEFAULT_OUTPUT_DIR;
 let DRIVE_FOLDER_PATH;
 
+function sourceWorkPath(sourceKey, edition, sourceRootName) {
+  return path.join(
+    tmpdir(),
+    "stats47-source-vault",
+    "work",
+    sourceKey,
+    edition,
+    sourceRootName,
+  );
+}
+
 async function activateProfile(profileName) {
   const config = JSON.parse(await readFile(PROFILE_CONFIG_PATH, "utf8"));
   if (config.schemaVersion !== 1 || !config.profiles || typeof config.profiles !== "object") {
     throw new Error(`Invalid source vault config: ${PROFILE_CONFIG_PATH}`);
   }
+  if (config.driveRootFolder !== "stats47") {
+    throw new Error(`Source vault driveRootFolder must be stats47: ${PROFILE_CONFIG_PATH}`);
+  }
+  if (config.driveCollectionFolder !== "参考文献") {
+    throw new Error(`Source vault driveCollectionFolder must be 参考文献: ${PROFILE_CONFIG_PATH}`);
+  }
+  DRIVE_ROOT_FOLDER = config.driveRootFolder;
+  DRIVE_COLLECTION_FOLDER = config.driveCollectionFolder;
   PROFILE_NAME = profileName ?? config.defaultProfile;
   const profile = config.profiles[PROFILE_NAME];
   if (!profile) {
     throw new Error(`Unknown source vault profile: ${PROFILE_NAME}`);
   }
-  for (const field of ["sourceKey", "edition", "sourceRootName", "localPath", "driveFolderPath"]) {
+  for (const field of [
+    "sourceKey",
+    "edition",
+    "sourceRootName",
+    "driveSourceFolderName",
+    "driveEditionFolderName",
+  ]) {
     if (typeof profile[field] !== "string" || profile[field] === "") {
       throw new Error(`Invalid ${field} in source vault profile: ${PROFILE_NAME}`);
     }
@@ -56,24 +83,20 @@ async function activateProfile(profileName) {
     throw new Error(`Unsafe sourceKey or edition in source vault profile: ${PROFILE_NAME}`);
   }
   assertSafeFileName(profile.sourceRootName, "profile sourceRootName");
+  assertSafeFileName(profile.driveSourceFolderName, "profile driveSourceFolderName");
+  assertSafeFileName(profile.driveEditionFolderName, "profile driveEditionFolderName");
   SOURCE_KEY = profile.sourceKey;
   EDITION = profile.edition;
   REVISION = profile.revision;
   SOURCE_ROOT_NAME = profile.sourceRootName;
-  DRIVE_FOLDER_PATH = profile.driveFolderPath;
+  DRIVE_FOLDER_PATH = [
+    DRIVE_COLLECTION_FOLDER,
+    profile.driveSourceFolderName,
+    profile.driveEditionFolderName,
+  ].join("/");
   BUNDLE_FILE_NAME = `stats47-${SOURCE_KEY}-${EDITION}-r${REVISION}.tar.gz`;
   MANIFEST_FILE_NAME = `stats47-${SOURCE_KEY}-${EDITION}-r${REVISION}.manifest.json`;
-  DEFAULT_SOURCE = path.resolve(PROJECT_ROOT, profile.localPath);
-  const booksRoot = path.join(PROJECT_ROOT, "books");
-  const sourceRelative = path.relative(booksRoot, DEFAULT_SOURCE);
-  if (
-    sourceRelative === "" ||
-    sourceRelative.startsWith("..") ||
-    path.isAbsolute(sourceRelative) ||
-    path.basename(DEFAULT_SOURCE) !== SOURCE_ROOT_NAME
-  ) {
-    throw new Error(`Profile localPath must be a named child of books/: ${PROFILE_NAME}`);
-  }
+  DEFAULT_SOURCE = sourceWorkPath(SOURCE_KEY, EDITION, SOURCE_ROOT_NAME);
   DEFAULT_OUTPUT_DIR = path.join(
     tmpdir(),
     "stats47-source-vault",
@@ -88,10 +111,11 @@ function usage() {
   node .claude/scripts/source-vault/japan-zue-bundle.mjs create [options]
   node .claude/scripts/source-vault/japan-zue-bundle.mjs verify [options]
   node .claude/scripts/source-vault/japan-zue-bundle.mjs restore [options]
+  node .claude/scripts/source-vault/japan-zue-bundle.mjs check-local
 
 create options:
   --profile <name>     Source profile from .claude/config/source-vault.json (default: ${PROFILE_NAME})
-  --source <dir>       Source directory (default: books/${SOURCE_ROOT_NAME})
+  --source <dir>       Source directory (default: ${DEFAULT_SOURCE})
   --bundle <file>      Archive output (default: ${DEFAULT_OUTPUT_DIR}/${BUNDLE_FILE_NAME})
   --manifest <file>    Manifest output (default: ${DEFAULT_OUTPUT_DIR}/${MANIFEST_FILE_NAME})
   --parts-dir <dir>    Part output directory (default: bundle directory)
@@ -108,9 +132,24 @@ restore options:
   --manifest <file>    Required manifest
   --bundle <file>      Required archive
   --parts-dir <dir>    Use verified parts instead of --bundle
-  --target <dir>       Restore target (default: books/<manifest.sourceRootName>)
+  --target <dir>       Restore target (default: OS temp source work directory)
 
+Drive destination: ${DRIVE_ROOT_FOLDER}/${DRIVE_FOLDER_PATH}
 The bundle is private source material. Do not place it inside the Git repository.`;
+}
+
+async function checkLocalResidue() {
+  const forbidden = ["books", path.join("docs", "books"), path.join(".claude", "pdfs")];
+  const existing = [];
+  for (const relativePath of forbidden) {
+    if (await pathExists(path.join(PROJECT_ROOT, relativePath))) existing.push(relativePath);
+  }
+  if (existing.length > 0) {
+    throw new Error(
+      `Private reference material must not persist in the repository: ${existing.join(", ")}`,
+    );
+  }
+  return { clean: true, checkedPaths: ["books/", "docs/books/", ".claude/pdfs/"] };
 }
 
 function parseArgs(argv) {
@@ -315,6 +354,9 @@ async function readManifest(manifestPath) {
   ) {
     throw new Error(`Unsupported or invalid manifest: ${manifestPath}`);
   }
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(manifest.sourceKey) || !/^[a-z0-9][a-z0-9-]*$/.test(manifest.edition)) {
+    throw new Error(`Unsafe sourceKey or edition in manifest: ${manifestPath}`);
+  }
   assertSafeFileName(manifest.sourceRootName, "manifest sourceRootName");
   assertSafeFileName(manifest.bundle.fileName, "manifest bundle fileName");
   if (!Array.isArray(manifest.bundle.parts) || manifest.bundle.parts.length === 0) {
@@ -442,6 +484,7 @@ async function verifySource(sourcePath, manifest) {
 
 async function createBundle(options) {
   const sourcePath = path.resolve(options.source ?? DEFAULT_SOURCE);
+  assertOutsideRepository(sourcePath, "Source directory");
   const bundlePath = path.resolve(options.bundle ?? path.join(DEFAULT_OUTPUT_DIR, BUNDLE_FILE_NAME));
   const manifestPath = path.resolve(options.manifest ?? path.join(DEFAULT_OUTPUT_DIR, MANIFEST_FILE_NAME));
   const partsDir = path.resolve(options["parts-dir"] ?? path.dirname(bundlePath));
@@ -523,7 +566,10 @@ async function restore(options) {
   }
   const manifestPath = path.resolve(options.manifest);
   const manifest = await readManifest(manifestPath);
-  const targetPath = path.resolve(options.target ?? path.join(PROJECT_ROOT, "books", manifest.sourceRootName));
+  const targetPath = path.resolve(
+    options.target ?? sourceWorkPath(manifest.sourceKey, manifest.edition, manifest.sourceRootName),
+  );
+  assertOutsideRepository(targetPath, "Restore target");
   if (await pathExists(targetPath)) throw new Error(`Restore target already exists; refusing to overwrite: ${targetPath}`);
   let bundlePath;
   let removeAssembledBundle = false;
@@ -565,6 +611,7 @@ async function main() {
   if (command === "create") result = await createBundle(options);
   else if (command === "verify") result = await verify(options);
   else if (command === "restore") result = await restore(options);
+  else if (command === "check-local") result = await checkLocalResidue();
   else throw new Error(`Unknown command: ${command}\n${usage()}`);
 
   const printable = result.manifest

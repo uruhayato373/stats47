@@ -41,7 +41,8 @@ developer_instructions = """
 
 ## 責務 (県別ループ)
 
-1. **PDF 事実抽出**: `docs/books/` の該当分冊を Read (pages 指定) し、県ごとに {品名・産地市町村・
+1. **PDF 事実抽出**: `.claude/rules/reference-source-standards.md`に従ってprivate Drive bundleをOS一時領域へ
+   検証付きで復元し、該当分冊を Read (pages 指定) して県ごとに {品名・産地市町村・
    シンボル 5 種 (木/花/鳥/魚/歌)} のみを取り出す。**解説文・図案は抽出しない**。
 2. **web リサーチ**: 品目ごとに県公式サイト / 市町村 / JA / 農水省等を WebSearch/WebFetch し、
    60-160 字の独自解説 + sourceUrl + accessedAt を執筆。シンボルも県公式で裏取り。
@@ -70,7 +71,7 @@ export const KOCHI_EDITORIAL: AreaEditorial = {
 ## File Boundary
 
 - 編集: `packages/data-configs/src/area-databook/editorial/*.ts` のみ。
-- 読むのみ: 書籍 PDF / area-databook-standards.md / web (一次情報)。
+- 読むのみ: OS一時領域へ復元した書籍 PDF / area-databook-standards.md / web (一次情報)。
 - template (area-databook-designer) と編集ファイルが分離しているため並列起動で衝突しない。
 
 ## Output Contract

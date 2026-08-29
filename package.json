@@ -89,6 +89,7 @@
     "search-growth:test": "node --test .claude/scripts/search-growth/__tests__/*.test.mjs",
     "source-vault": "node .claude/scripts/source-vault/japan-zue-bundle.mjs",
     "source-vault:japan-zue": "node .claude/scripts/source-vault/japan-zue-bundle.mjs",
+    "source-vault:check": "node .claude/scripts/source-vault/japan-zue-bundle.mjs check-local",
     "source-vault:test": "node --test .claude/scripts/source-vault/__tests__/*.test.mjs"
   },
   "devDependencies": {

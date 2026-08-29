@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "profile": "prefecture-databook-2021",
+  "sourceKey": "prefecture-databook",
+  "edition": "2021",
+  "revision": 1,
+  "sourceRootName": "2021都道府県DataBook",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "folderPath": "参考文献/2021都道府県DataBook/2021年版"
+  },
+  "bundle": {
+    "fileName": "stats47-prefecture-databook-2021-r1.tar.gz",
+    "format": "tar.gz",
+    "bytes": 101902557,
+    "sha256": "3bf339b3fdcbdcecb83ef6db9d7ee1892b67d459e5193dafb8452b9708053d59",
+    "parts": [
+      {
+        "index": 1,
+        "fileName": "stats47-prefecture-databook-2021-r1.tar.gz.part-001",
+        "bytes": 94371840,
+        "sha256": "6f24140add8fa5400f69cb6d8fde50db41635d02634acca08ff426583177174d"
+      },
+      {
+        "index": 2,
+        "fileName": "stats47-prefecture-databook-2021-r1.tar.gz.part-002",
+        "bytes": 7530717,
+        "sha256": "b9bce29f3285331f666bdbea6fe6de9a49d12eb587a6ad7bb11dcedf02f6ef09"
+      }
+    ]
+  },
+  "fileCount": 15,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 0,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 8,
+    "auxiliary": 7
+  },
+  "createdAt": "2026-08-29T00:41:52.082Z",
+  "files": [
+    {
+      "path": "--48.png",
+      "bytes": 72951,
+      "sha256": "b5d010e3bf779d4efe890db50f09212d39927fadf5e9ad8229cda62068446f4a"
+    },
+    {
+      "path": "--55.png",
+      "bytes": 21639,
+      "sha256": "8f3e428de02bfb1e290faff50013633a3b92d57a2dc1ffcc01d4f99797b724eb"
+    },
+    {
+      "path": "--61.png",
+      "bytes": 48851,
+      "sha256": "28c222213d0f3178216de153a4a1129fbbc9f0138ff3aa10c280d489a78d6928"
+    },
+    {
+      "path": "--65.png",
+      "bytes": 54413,
+      "sha256": "68b972c0ec1cfb1fc6d9a85bc626d4e00e62fa4c9ee51565ebcf950ebd629dab"
+    },
+    {
+      "path": "--70.png",
+      "bytes": 54413,
+      "sha256": "68b972c0ec1cfb1fc6d9a85bc626d4e00e62fa4c9ee51565ebcf950ebd629dab"
+    },
+    {
+      "path": "--75.png",
+      "bytes": 54413,
+      "sha256": "68b972c0ec1cfb1fc6d9a85bc626d4e00e62fa4c9ee51565ebcf950ebd629dab"
+    },
+    {
+      "path": "--80.png",
+      "bytes": 54413,
+      "sha256": "68b972c0ec1cfb1fc6d9a85bc626d4e00e62fa4c9ee51565ebcf950ebd629dab"
+    },
+    {
+      "path": "2021都道府県DataBook 分冊版 関東エリア.pdf",
+      "bytes": 27415068,
+      "sha256": "95f17b64af813b449386f4ef2e58e71aa9425edd208fb874b966689c4719f0e2"
+    },
+    {
+      "path": "2021都道府県DataBook 分冊版 近畿エリア.pdf",
+      "bytes": 11059837,
+      "sha256": "ad0a1f862f10415d4e51808501d3790689bb49675242013d1a9adcef3f103992"
+    },
+    {
+      "path": "2021都道府県DataBook 分冊版 九州・沖縄エリア.pdf",
+      "bytes": 12885305,
+      "sha256": "50d636c8c7c1ff480f14926b4470eb0de68cb31335fd312e62e6c6af9a060f5e"
+    },
+    {
+      "path": "2021都道府県DataBook 分冊版 四国エリア.pdf",
+      "bytes": 12972375,
+      "sha256": "de238f8f00fde2d4ba92de43fff8bbd759d1e533d845ba6507f88d3585ff9717"
+    },
+    {
+      "path": "2021都道府県DataBook 分冊版 中国エリア.pdf",
+      "bytes": 10444830,
+      "sha256": "4b6ae5766cd7edb6dfaf27ec1a999c4bc75bb994660e633f0c1b66d7441ba726"
+    },
+    {
+      "path": "2021都道府県DataBook 分冊版 中部エリア.pdf",
+      "bytes": 9420470,
+      "sha256": "248cfc23e41e6779f67b227e601f7836a39a3b983c9ce5078bd996a37e40f1d3"
+    },
+    {
+      "path": "2021都道府県DataBook 分冊版 北海道・東北エリア.pdf",
+      "bytes": 27464037,
+      "sha256": "0550965761c63ce9c309076ff515ab264dc6ce19901cda23876e71199a22ab19"
+    },
+    {
+      "path": "2021都道府県DataBook 分冊版 北陸・甲信越エリア.pdf",
+      "bytes": 11755676,
+      "sha256": "7730d5f473cab0dbf8bb47a6234aa03a501057eca1bd33e0caf90744e8fbe75f"
+    }
+  ]
+}

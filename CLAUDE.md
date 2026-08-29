@@ -27,6 +27,7 @@
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
 - **レビューをタスクへ変換する**: 批判的レビュー / pre-mortem / 監査の全文を `docs/` に蓄積しない。未完了の対策だけを優先度・実行順・停止条件・完了条件付きで `.claude/todo/` へ統合する。恒久判断は既存の戦略文書・rules・コード近傍READMEへ、agent用の定期履歴は各skillの `reference/` へ、機械メトリクスは `.claude/state/metrics/` へ置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの機械アラートのみ → `.claude/rules/docs-vs-issues.md`
 - **文書作成・整理はガバナンスSSOTに従う**: 新規文書より既存SSOTへの統合を優先する。判断規則は`.claude/rules/docs-vs-issues.md`、機械契約は`.claude/config/docs-governance.json`。文書の作成・移動・削除後は`npm run docs:fix`と`npm run docs:check`を実行する。意味判断を伴う棚卸しは`/maintain-docs`
+- **参考文献は private Google Drive で保全し、利用実装仕様書を通して展開する**: 固定ルートは `stats47/参考文献/<資料名>/<版>/`。PDF、OCR、図、画像、文字起こしを完全bundleとして保全し、folder名は日本語を優先する。利用時だけ`$TMPDIR/stats47-source-vault/`へ検証付きで復元し、作業後に削除する。リポジトリ内の`books/`、`docs/books/`、`.claude/pdfs/`は`npm run source-vault:check`で禁止する。資料単位のactiveな利用実装仕様書で権利・一次資料・mapping・gateを定義してから既存SSOTへ反映する → `.claude/rules/reference-source-standards.md`
 - **完全 DB レスが正典** → `docs/01_技術設計/02_データアーキテクチャ.md`（doc 18 ハイブリッドは 2026-05-29 同日に superseded）。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
   - **Authored / 設定** (低volume・人手・型/review: テーマのチャート定義等) → **git TS が SSOT** → 生成スクリプトで R2 反映
   - **Authored / 運用** (page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes) → **git TS 定義が SSOT** → 生成スクリプトで R2 JSON（横断整合性はビルド時に検証）。手編集 JSON を SSOT にしない
@@ -93,6 +94,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `unit-semantics-standards.md` | 単位 (円/千円/％/人口10万対/月額年額) の解釈・換算・検証。**単位を扱うコードを書くとき必読** (正典=`packages/data-configs/src/unit/`、鏡=`.claude/scripts/lib/unit-semantics.mjs` は自動生成)。自前のスケール表を書かない |
 | `metric-config-standards.md` | metric config 作成・編集 (category 17 軸 / title・subtitle・note・description の役割 / validate:config) |
 | `data-provenance-standards.md` | データ出典・再現性 (再現性クラス A/A'/B/C/D / 手動抽出の provenance 9点セット / [provenance]・[calc-ref] lint / 定期監査 /audit-provenance / provenance-audit-weekly cron。非 e-Stat 投入・出典是正時必読) |
+| `reference-source-standards.md` | 書籍・PDF・白書等の参考文献を private Google Drive へ保全し、資料単位の利用実装仕様書を通して stats47 へ展開するとき |
 | `theme-catalog-standards.md` | テーマページの指標×チャート統合カタログ (ThemeCatalog SSOT / チャート選定文法 / selection provenance / generate:catalog・validate:catalog / theme-researcher・theme-designer) |
 | `survey-linkage-standards.md` | ranking↔統計調査の紐付け (surveys.json マスタ / provenance 辞書導出 / config.surveyId オーバーライド / 監査 /audit-survey-linkage / survey-curator) |
 | `branch-workflow.md` | PR・デプロイ作業・DB データ反映 |

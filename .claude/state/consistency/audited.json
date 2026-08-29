@@ -1,7 +1,16 @@
 {
-  "hash": "378465f9bee0c5a5104a91c30a0b6589d3a9c0a1d27c8371d80eae8f0b2e75a1",
-  "audited_at": "2026-08-28T12:53:31",
+  "hash": "fae72fa5e939bd2588be4be9fb5d814e083e81f5d64f1e01e0741aa081258ccb",
+  "audited_at": "2026-08-29T00:55:26",
   "files": [
-    ".claude/skills/management/goal/reference/goals/stats47-business-plan-2026-2026-08-28.md"
+    ".agents/skills/area/databook-editorial/SKILL.md",
+    ".claude/agents/area-curator.md",
+    ".claude/agents/area-databook-designer.md",
+    ".claude/rules/area-databook-standards.md",
+    ".claude/rules/data-provenance-standards.md",
+    ".claude/rules/reference-source-standards.md",
+    ".claude/scripts/source-vault/__tests__/japan-zue-bundle.test.mjs",
+    ".claude/scripts/source-vault/japan-zue-bundle.mjs",
+    ".claude/skills/area/databook-editorial/SKILL.md",
+    "CLAUDE.md"
   ]
 }

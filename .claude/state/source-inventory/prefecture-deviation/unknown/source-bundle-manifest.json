@@ -8,7 +8,7 @@
   "storage": {
     "provider": "google-drive",
     "visibility": "private",
-    "folderPath": "stats47-private-sources/prefecture-deviation/unknown"
+    "folderPath": "参考文献/47都道府県の偏差値/版不明"
   },
   "bundle": {
     "fileName": "stats47-prefecture-deviation-unknown-r1.tar.gz",

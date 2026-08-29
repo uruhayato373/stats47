@@ -46,7 +46,8 @@ model: sonnet
 
 ## 責務
 
-1. **書籍指標 → テンプレ encode**: `docs/books/2021 都道府県 Data Book` の章立て (食/県民力/世帯/気候/男女/
+1. **書籍指標 → テンプレ encode**: `.claude/rules/reference-source-standards.md`に従ってprivate Drive bundleを
+   OS一時領域へ検証付きで復元し、「2021 都道府県 Data Book」の章立て (食/県民力/世帯/気候/男女/
    地価/旅行者/学校施設/消費) を `DatabookSectionKind` のセクションに落とし、各指標を適切な blockType に割り当てる。
 2. **採否判断**: 47 県横並び可視化は不採用 (theme へ)。値+順位で県軸に閉じる指標のみ採用。data 経路 (焼き込み A /
    ライブ B) を `area-databook-standards.md` §2 で判定。ライブチャートは ≤ 12 に抑える。

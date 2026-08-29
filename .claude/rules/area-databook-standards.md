@@ -4,8 +4,10 @@
 **カタログ SSOT の単一ソース**。テンプレ・編集コンテンツ・チャートを設計/編集/監査する agent
 (`area-databook-designer` / `area-curator` / `chart-component-builder`) / 人間はこれに従う。
 
-> **背景 (2026-07-18)**: `docs/books/2021 都道府県 Data Book` (47 県 × 6 ページの固定テンプレ・全数値に
-> 全国順位) を設計図に、47 県同一 6 チャートだった area ページを ~130 指標の県データブックへ拡張する。
+> **背景 (2026-07-18)**: private Google Drive `stats47/参考文献/2021都道府県DataBook/2021年版/` の
+> source bundle (47 県 × 6 ページの固定テンプレ・全数値に全国順位) を設計図に、47 県同一 6 チャートだった
+> area ページを ~130 指標の県データブックへ拡張する。利用時だけ `.claude/rules/reference-source-standards.md` の
+> 共通手順でOS一時領域へ復元し、repo内へ原本を置かない。
 > 方式は `theme-catalog-standards.md` と同じ「rules に規約カタログ 1 ファイル、agent/skill は参照のみ」。
 > 本ファイルを恒久仕様の SSOT とする。
 
@@ -23,6 +25,8 @@
 | 比較欲求は `rankingLink` で theme/ranking へ回遊 | area ページ内で 47 県比較を完結させる |
 
 書籍の**指標選定・章立て (アイデア/事実) は参照可**。レイアウト・図案・文言・写真の**複製は禁止**。
+source bundle manifestは
+`.claude/state/source-inventory/prefecture-databook/2021/source-bundle-manifest.json`を正典とする。
 
 ---
 

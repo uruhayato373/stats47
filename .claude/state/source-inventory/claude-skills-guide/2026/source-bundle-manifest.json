@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "profile": "claude-skills-guide-2026",
+  "sourceKey": "claude-skills-guide",
+  "edition": "2026",
+  "revision": 1,
+  "sourceRootName": "Claudeスキル構築ガイド",
+  "storage": {
+    "provider": "google-drive",
+    "visibility": "private",
+    "folderPath": "参考文献/Claudeスキル構築ガイド/2026年版"
+  },
+  "bundle": {
+    "fileName": "stats47-claude-skills-guide-2026-r1.tar.gz",
+    "format": "tar.gz",
+    "bytes": 437956,
+    "sha256": "2db38d11518f55e1d00ecc1bdeb1512d6a877b3b993eac6d9ec4558b1b74eb1e",
+    "parts": [
+      {
+        "index": 1,
+        "fileName": "stats47-claude-skills-guide-2026-r1.tar.gz.part-001",
+        "bytes": 437956,
+        "sha256": "2db38d11518f55e1d00ecc1bdeb1512d6a877b3b993eac6d9ec4558b1b74eb1e"
+      }
+    ]
+  },
+  "fileCount": 1,
+  "componentCounts": {
+    "markdown": 0,
+    "figures": 0,
+    "pageImages": 0,
+    "ocrRaw": 0,
+    "transcripts": 0,
+    "pdfs": 1,
+    "auxiliary": 0
+  },
+  "createdAt": "2026-08-29T00:52:09.504Z",
+  "files": [
+    {
+      "path": "guide.pdf",
+      "bytes": 561652,
+      "sha256": "66cbcc06df9271e0bb59986582646f0c4c7c94697554f893f937a5a55cef736d"
+    }
+  ]
+}

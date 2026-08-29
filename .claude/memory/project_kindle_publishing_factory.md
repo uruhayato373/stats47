@@ -30,7 +30,7 @@ S1論点読み物12 + S2テーマ別データブック11 + S3地域別8 + S4ラ�
 家計・所得系ブログ9本 + 書き下ろし(はじめに/第0章/終章/出典) → 15章37図版。blog-critic PASS(原典curl裏取りで順位主張検証・常体修正)。review.md記録。
 
 ## 著作権・KDP規律 (data-provenance/pdf-book-survey と同一)
-参照書籍(docs/books 8冊+survey 7冊)からは論点・型のみ。文言/図案/編集構成は複製しない。数値はe-Stat/R2自社データ。自ブログ再利用は自己著作物。**KDPの「Web無料入手可能コンテンツ」規定に備え再構成+30%書き下ろし必須** (validator が newContentNote非空+fresh章を強制)。KU登録は当面見送り(販売のみ¥500-1000)。
+参照書籍(private Google Driveのsource bundle 8冊+survey 7冊)からは論点・型のみ。利用時はOS一時領域へ復元し、文言/図案/編集構成は複製しない。数値はe-Stat/R2自社データ。自ブログ再利用は自己著作物。**KDPの「Web無料入手可能コンテンツ」規定に備え再構成+30%書き下ろし必須** (validator が newContentNote非空+fresh章を強制)。KU登録は当面見送り(販売のみ¥500-1000)。
 
 ## ★KDP出品自動化 (2026-07-23・coconala-operatorから移植)
 旧「KDPは自動化しない」を撤回し、コナラと同じPlaywright自動化を移植。agent `kdp-operator` / skill `/kdp-publish` /

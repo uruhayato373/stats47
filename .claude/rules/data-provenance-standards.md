@@ -102,4 +102,5 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 - cron: `.github/workflows/provenance-audit-weekly.yml`
 - 手本 (blog lineage): `.claude/scripts/blog/build-lineage-queue.mjs` / `.claude/rules/blog-data-schema.md` §1.5/1.7
 - metric 構造: `.claude/rules/metric-config-standards.md` / e-Stat: `.claude/rules/estat-api.md`
+- 参考文献の保全・昇格条件: `.claude/rules/reference-source-standards.md`
 - 実証判定: `.claude/rules/evidence-based-judgment.md`
