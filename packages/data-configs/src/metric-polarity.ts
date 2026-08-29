@@ -121,6 +121,8 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "pneumonia-death-rate": { polarity: "higher-is-worse", evidence: "死亡は多いほど悪い (争いのない事象)" },
   // 凶悪犯認知件数
   "serious-crime-per-100k": { polarity: "higher-is-worse", evidence: "犯罪の認知件数は多いほど悪い (争いのない事象)" },
+  // 日本語指導が必要な児童生徒数
+  "students-requiring-japanese-instruction": { polarity: "neutral", evidence: "人数は支援需要の規模を示すが、児童生徒の多様性や受入状況にも左右され、大小を良し悪しと解釈しない" },
   // 交通事故死傷者数（高齢者） / 65歳以上
   "traffic-accident-casualties-elderly-65plus": { polarity: "higher-is-worse", evidence: "交通事故の発生・死傷は多いほど悪い (争いのない事象)" },
   // 交通事故死傷者数 / 事故100件当たり
@@ -200,7 +202,7 @@ export const EXCLUDED_FROM_SEED: ReadonlyArray<{ key: string; reason: string }> 
  * 極性が付いた metric を**減らさない**ための床。metric を消して分母が減るのは正常なので
  * 件数そのものではなく「収載件数」で見る。増やすときだけこの定数を上げる。
  */
-export const MIN_POLARITY_COVERAGE = 54;
+export const MIN_POLARITY_COVERAGE = 55;
 
 /** 極性を引く。未収載なら null (既定に化けない)。 */
 export function findMetricPolarity(key: string): PolarityEntry | null {
