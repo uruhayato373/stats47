@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedAt": "2026-08-27T23:50:04.773Z",
-  "masterSurveyCount": 83,
+  "masterSurveyCount": 84,
   "ranking": {
     "metrics": 2298,
     "activeMetrics": 2167,
@@ -2999,6 +2999,12 @@
     {
       "surveyId": "japan-post-statistics",
       "rankingCount": 3,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
+      "surveyId": "japanese-language-instruction-survey",
+      "rankingCount": 0,
       "themeKeys": [],
       "blogSlugs": []
     },

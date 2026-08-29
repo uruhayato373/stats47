@@ -1992,6 +1992,7 @@ import { stillbirths } from "./metrics/stillbirths";
 import { stomachMedicineConsumptionExpenditure } from "./metrics/stomach-medicine-consumption-expenditure";
 import { strawberryConsumptionExpenditure } from "./metrics/strawberry-consumption-expenditure";
 import { strawberryConsumptionQuantity } from "./metrics/strawberry-consumption-quantity";
+import { studentsRequiringJapaneseInstruction } from "./metrics/students-requiring-japanese-instruction";
 import { studyDeskChairConsumptionExpenditure } from "./metrics/study-desk-chair-consumption-expenditure";
 import { studyMaterialsConsumptionExpenditure } from "./metrics/study-materials-consumption-expenditure";
 import { studyParticipationRateAcademic } from "./metrics/study-participation-rate-academic";
@@ -4334,6 +4335,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "stomach-medicine-consumption-expenditure": stomachMedicineConsumptionExpenditure,
   "strawberry-consumption-expenditure": strawberryConsumptionExpenditure,
   "strawberry-consumption-quantity": strawberryConsumptionQuantity,
+  "students-requiring-japanese-instruction": studentsRequiringJapaneseInstruction,
   "study-desk-chair-consumption-expenditure": studyDeskChairConsumptionExpenditure,
   "study-materials-consumption-expenditure": studyMaterialsConsumptionExpenditure,
   "study-participation-rate-academic": studyParticipationRateAcademic,

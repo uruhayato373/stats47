@@ -64,6 +64,11 @@
       "types": "./src/business-plan/index.ts",
       "import": "./src/business-plan/index.ts",
       "require": "./src/business-plan/index.ts"
+    },
+    "./evidence-inventory": {
+      "types": "./src/evidence-inventory/index.ts",
+      "import": "./src/evidence-inventory/index.ts",
+      "require": "./src/evidence-inventory/index.ts"
     }
   },
   "scripts": {
@@ -87,7 +92,13 @@
     "audit:money-unit-scale": "tsx scripts/audit-money-unit-scale.ts",
     "validate:survey-master": "tsx scripts/ssds/validate-survey-master-coverage.ts",
     "validate:business-plan": "tsx scripts/validate-business-plan.ts",
-    "build:business-plan-state": "tsx scripts/build-business-plan-state.ts"
+    "build:business-plan-state": "tsx scripts/build-business-plan-state.ts",
+    "evidence:extract": "tsx scripts/evidence/japan-zue.ts extract",
+    "evidence:resolve": "tsx scripts/evidence/japan-zue.ts resolve",
+    "evidence:validate": "tsx scripts/evidence/japan-zue.ts validate",
+    "evidence:coverage": "tsx scripts/evidence/japan-zue.ts coverage",
+    "evidence:expression-audit": "tsx scripts/evidence/japan-zue.ts expression-audit",
+    "evidence:diff": "tsx scripts/evidence/japan-zue.ts diff"
   },
   "dependencies": {
     "@stats47/area": "*",
