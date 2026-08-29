@@ -1,17 +1,9 @@
 {
-  "hash": "3b6812569f49efa1df4dab87c45a5301fe7e677b3440ae0777d4fe57a2829479",
-  "audited_at": "2026-08-27T08:02:07",
+  "hash": "90f9c1138092e99ac72a2bcd6ff94f3f1289de028d16a9e8026e930236c3192a",
+  "audited_at": "2026-08-29T07:03:51",
   "files": [
-    ".agents/skills/management/admin-console/SKILL.md",
-    ".agents/skills/product/kdp-publish/SKILL.md",
-    ".claude/agents/README.md",
-    ".claude/agents/kdp-operator.md",
-    ".claude/agents/kindle-publisher.md",
-    ".claude/agents/note-manager.md",
-    ".claude/rules/sns-content-standards.md",
-    ".claude/scripts/content-operations/audit-content-operations.ts",
-    ".claude/skills/management/admin-console/SKILL.md",
-    ".claude/skills/product/kdp-publish/SKILL.md",
-    "CLAUDE.md"
+    ".claude/agents/ga4-analyst.md",
+    ".claude/rules/analytics-event-standards.md",
+    ".claude/scripts/google-admin/README.md"
   ]
 }
