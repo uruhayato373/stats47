@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-08-28
- * 件数: blog 439 / tag 61 / survey 81
+ * 最終生成日: 2026-08-29
+ * 件数: blog 449 / tag 61 / survey 81
  */
 
 export interface SitemapBlogEntry {
@@ -47,6 +47,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "barber-beauty-salon-regional-gap", lastModified: "2026-03-09" },
   { slug: "beef-consumption-prefecture-gap", lastModified: "2026-06-13" },
   { slug: "beef-consumption-quantity", lastModified: "2026-06-07" },
+  { slug: "beef-consumption-quantity-vs-municipal-road-paving-rate", lastModified: "2026-08-29" },
+  { slug: "beef-consumption-quantity-vs-unmarried-ratio-male-45-49", lastModified: "2026-08-29" },
   { slug: "beef-unmarried-ratio", lastModified: "2026-08-28" },
   { slug: "beer-vs-happoshu-shift", lastModified: "2026-07-10" },
   { slug: "birth-death-gap-decline", lastModified: "2026-03-04" },
@@ -100,10 +102,13 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "commercial-sales-productivity-gap", lastModified: "2026-03-09" },
   { slug: "communication-cost-burden", lastModified: "2026-03-06" },
   { slug: "consumer-price-regional-gap", lastModified: "2026-06-07" },
+  { slug: "convenience-store-count-commercial-vs-ratio-of-general", lastModified: "2026-08-29" },
   { slug: "convenience-store-density-map", lastModified: "2026-03-09" },
   { slug: "cpi-change-regional-pattern", lastModified: "2026-03-05" },
   { slug: "crab-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "crime-rate-regional-gap", lastModified: "2026-03-09" },
+  { slug: "cup-noodles-consumption-expenditure-vs-fire-damage", lastModified: "2026-08-29" },
+  { slug: "cup-noodles-consumption-expenditure-vs-secondary-activity", lastModified: "2026-08-29" },
   { slug: "cup-noodles-expenditure-ranking", lastModified: "2026-07-09" },
   { slug: "curry-roux-consumption-gap", lastModified: "2026-06-07" },
   { slug: "dairy-cattle-count", lastModified: "2026-06-14" },
@@ -256,6 +261,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "library-books-prefecture-gap", lastModified: "2026-06-10" },
   { slug: "library-museum-cultural-capital", lastModified: "2026-03-06" },
   { slug: "livable-prefecture-composite-ranking", lastModified: "2026-03-27" },
+  { slug: "local-allocation-tax-prefecture-vs-total-area-excluding", lastModified: "2026-08-29" },
   { slug: "local-debt-current-ratio-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "local-government-debt-burden", lastModified: "2026-06-07" },
   { slug: "local-tax-regional-gap", lastModified: "2026-03-05" },
@@ -344,6 +350,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "price-index-high-low-prefecture", lastModified: "2026-06-07" },
   { slug: "professor-income-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "psychiatric-bed-count-vs-elementary-school-count", lastModified: "2026-08-11" },
+  { slug: "psychiatric-bed-count-vs-neighborhood-park-count", lastModified: "2026-08-29" },
   { slug: "psychiatric-bed-count-vs-standard-fiscal-demand-municipality", lastModified: "2026-08-20" },
   { slug: "public-phone-count", lastModified: "2026-06-14" },
   { slug: "public-phone-count-gap", lastModified: "2026-06-07" },
@@ -383,6 +390,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "small-business-dominance-map", lastModified: "2026-03-09" },
   { slug: "smartphone-ownership-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "soba-udon-dining-consumption-expenditure", lastModified: "2026-06-21" },
+  { slug: "soba-udon-dining-consumption-expenditure-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "software-engineer-income-gap", lastModified: "2026-06-02" },
   { slug: "software-engineer-salary-prefecture-gap", lastModified: "2026-06-02" },
   { slug: "solar-panel-housing-prefecture-gap", lastModified: "2026-05-31" },
@@ -405,6 +413,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "telework-rate-tokyo-gap", lastModified: "2026-05-29" },
   { slug: "temperature-extremes-map", lastModified: "2026-03-09" },
   { slug: "textbook-expenditure-ranking", lastModified: "2026-07-10" },
+  { slug: "tissue-paper-consumption-expenditure-vs-average-weight", lastModified: "2026-08-29" },
   { slug: "tobacco-expenditure-ranking", lastModified: "2026-07-09" },
   { slug: "tochigi-food-culture", lastModified: "2026-07-10" },
   { slug: "tofu-consumption-prefecture-gap", lastModified: "2026-05-31" },
@@ -423,6 +432,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "tuna-consumption-quantity", lastModified: "2026-06-21" },
   { slug: "tuna-consumption-quantity-vs-annual-new-inpatients-general", lastModified: "2026-08-03" },
   { slug: "tuna-consumption-quantity-vs-national-medical-expense-per", lastModified: "2026-08-04" },
+  { slug: "tuna-consumption-quantity-vs-sex-ratio-total", lastModified: "2026-08-29" },
   { slug: "tuna-medical-expense", lastModified: "2026-08-28" },
   { slug: "tutoring-cost-university-advancement-gap", lastModified: "2026-07-26" },
   { slug: "udon-soba-food-culture-prefecture-map", lastModified: "2026-06-07" },
