@@ -1,0 +1,17 @@
+{
+  "slug": "a-current-liabilities-balance-multi-person-households-per-household",
+  "vertical": "stats47-note",
+  "kind": "ranking",
+  "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
+  "year": "2019",
+  "charts": [
+    "images/cover-1280x670.png",
+    "images/choropleth-map-1080x1080.png",
+    "images/chart-x-1200x630.png",
+    "images/boxplot-1200x630.png"
+  ],
+  "source": "r2:app/stats/current-liabilities-balance-multi-person-households-per-household/values.json",
+  "restore": "curl -sf https://storage.stats47.jp/app/stats/current-liabilities-balance-multi-person-households-per-household/values.json",
+  "generatedBy": "post-note-ranking",
+  "note": "データ本体は stats47 R2 が SSOT。本ファイルは復元マニフェスト（コピーではない）。"
+}

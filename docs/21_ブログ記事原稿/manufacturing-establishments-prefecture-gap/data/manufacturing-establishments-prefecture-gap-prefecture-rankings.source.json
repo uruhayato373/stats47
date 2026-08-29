@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "number-of-establishments-manufacturing",
+  "year": "2014",
+  "unit": "所",
+  "label": "事業所数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/number-of-establishments-manufacturing/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug manufacturing-establishments-prefecture-gap --keys number-of-establishments-manufacturing --data-name manufacturing-establishments-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-29T08:03:12.341Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

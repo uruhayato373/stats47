@@ -44,6 +44,13 @@ export interface ReferenceNoteSource {
   stats47Targets?: string[];
 }
 
+export interface ReferenceNoteBlocker {
+  rankingKey: string;
+  code: string;
+  message: string;
+  sourcePath: string;
+}
+
 export interface ReferenceKindleSource {
   id: string;
   status: string;
@@ -63,6 +70,7 @@ export interface ReferenceContentInput {
   metrics: ReferenceMetricSource[];
   blogs: ReferenceBlogSource[];
   notes: ReferenceNoteSource[];
+  noteBlockers?: ReferenceNoteBlocker[];
   kindleBooks: ReferenceKindleSource[];
   areas: ReferenceAreaSource[];
 }
@@ -208,6 +216,15 @@ export function buildReferenceContentPortfolio(
     const allNoteHits = input.notes.filter((note) =>
       note.stats47Targets?.includes(`/ranking/${key}`),
     );
+    const noteBlocker = input.noteBlockers?.find((blocker) => blocker.rankingKey === key);
+    if (noteBlocker) {
+      findings.push({
+        severity: "warning",
+        code: "REFERENCE_NOTE_GENERATION_BLOCKED",
+        itemId: key,
+        message: noteBlocker.message,
+      });
+    }
     const blogSlugs = new Set(blogHits.map((blog) => blog.slug));
     const kindleHits = input.kindleBooks.filter(
       (book) =>
@@ -244,15 +261,22 @@ export function buildReferenceContentPortfolio(
               ? "integrated"
               : noteDrafts.length > 0
                 ? "draft"
-                : siteReady
-                  ? "ready"
-                  : "blocked",
-            allNoteHits.map((note) => note.key),
+                : noteBlocker
+                  ? "blocked"
+                  : siteReady
+                    ? "ready"
+                    : "blocked",
+            [
+              ...allNoteHits.map((note) => note.key),
+              ...(noteBlocker ? [noteBlocker.code] : []),
+            ],
             noteHits.length > 0
               ? "stats47送客先を持つnote記事あり"
               : noteDrafts.length > 0
                 ? "stats47送客先を持つnote下書きあり"
-                : "既存metricからnoteランキング記事を制作可能",
+                : noteBlocker
+                  ? noteBlocker.message
+                  : "既存metricからnoteランキング記事を制作可能",
           )
         : coverage("note", "not-applicable", [], "inventory上のnote展開対象外"),
       kindleHits.length > 0
@@ -286,6 +310,7 @@ export function buildReferenceContentPortfolio(
       sourcePaths: unique([
         ...evidence.map(({ inventory }) => inventory.sourcePath),
         ...(metric ? [metric.sourcePath] : []),
+        ...(noteBlocker ? [noteBlocker.sourcePath] : []),
       ]),
     };
     units.push(unit);

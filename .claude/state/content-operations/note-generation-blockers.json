@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-29T08:49:10.756Z",
+  "blockers": {
+    "fishery-output-value": {
+      "code": "ZERO_DENOMINATOR",
+      "message": "最下位値が0のため上位/下位倍率を計算できません: fishery-output-value/2016",
+      "source": "r2:app/stats/fishery-output-value/values.json"
+    }
+  }
+}
