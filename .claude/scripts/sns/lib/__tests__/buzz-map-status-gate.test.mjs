@@ -86,6 +86,7 @@ function fullFacts(overrides = {}) {
     landingLive: true,
     captionComplete: true,
     noDuplicate: true,
+    attributionComplete: true,
     ...overrides,
   };
 }
@@ -116,6 +117,12 @@ test("isPostable: content_key 重複で不可", () => {
   const r = isPostable(fullFacts({ noDuplicate: false }));
   assert.equal(r.postable, false);
   assert.ok(r.reasons.some((x) => x.includes("重複")));
+});
+
+test("isPostable: UTM/attribution 契約が不完全なら不可", () => {
+  const r = isPostable(fullFacts({ attributionComplete: false }));
+  assert.equal(r.postable, false);
+  assert.ok(r.reasons.some((x) => x.includes("UTM/attribution")));
 });
 
 test("isPostable: 複数欠落は全て reasons に出る", () => {

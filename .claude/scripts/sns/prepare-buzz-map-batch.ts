@@ -26,7 +26,11 @@ import { createRequire } from 'node:module';
 
 import { selectBatch, isPostable } from './lib/buzz-map-router-core.mjs';
 import { verifyLandingContract } from './lib/buzz-map-contract-core.mjs';
-import { buildUtmUrl, utmCampaignFor } from './lib/buzz-map-utm-core.mjs';
+import {
+  buildUtmUrl,
+  utmCampaignFor,
+  validateAttributionContract,
+} from './lib/buzz-map-utm-core.mjs';
 import {
   assetPlanForType,
   compositionsForType,
@@ -80,6 +84,8 @@ interface CuratedEntry {
   landingStrategy?: string;
   primaryUrl?: string | null;
   metricKeys?: string[];
+  requiredYear?: string | null;
+  landingPromise?: string;
   aliasesOf?: string[];
 }
 
@@ -217,6 +223,9 @@ async function main() {
       status: entry.status,
       landing: entry.landingStrategy,
       primaryUrl: entry.primaryUrl ?? null,
+      metricKeys: entry.metricKeys ?? [],
+      requiredYear: entry.requiredYear ?? null,
+      landingPromise: entry.landingPromise ?? '',
       assets: {
         still: assetPlan.still,
         xVideo: assetPlan.xVideo,
@@ -284,6 +293,9 @@ interface ReportRow {
   steps: string[];
   primaryUrl: string | null;
   landing?: string;
+  metricKeys: string[];
+  requiredYear: string | null;
+  landingPromise: string;
 }
 
 function printReport(rows: ReportRow[], opts: ReturnType<typeof parseArgs>) {
@@ -490,7 +502,10 @@ async function applyBatch(
       : null;
     const caption =
       `${r.ideaId}（出典: e-Stat / 総務省統計）\n${utm ?? ''}`.trim();
-    const capCheck = captionComplete(caption, { sourceRequired: true });
+    const capCheck = captionComplete(caption, {
+      sourceRequired: true,
+      requiredYear: r.requiredYear ?? undefined,
+    });
 
     // 7. landing contract (verifyLandingContract → pass && live 200)。
     //    primaryUrl は catalog では相対 (/blog/...) なので絶対化してから渡す (fetch が相対を解釈できない)。
@@ -502,14 +517,22 @@ async function applyBatch(
     const contract = await verifyLandingContract({
       ideaId: r.ideaId,
       canonicalUrl: absLanding,
-      promise: '',
-      requiredMetricKeys: [],
+      promise: r.landingPromise,
+      requiredMetricKeys: r.metricKeys,
+      requiredYear: r.requiredYear ?? undefined,
       requiredTerms: [],
     });
 
     // 8. isPostable — 全条件 PASS のみ draft (X 側で登録。IG は既存 701-704 と衝突回避)
     const platform = 'x';
+    const attribution = 'direct';
     const noDuplicate = !existingDrafts.has(draftKey(platform, r.ideaId));
+    const attributionCheck = validateAttributionContract({
+      utmUrl: utm,
+      ideaId: r.ideaId,
+      platform,
+      attribution,
+    });
     const facts = {
       commercialUse: r.landing === 'blocked' ? 'blocked' : 'allowed',
       sensitivity: 'low',
@@ -520,6 +543,7 @@ async function applyBatch(
       landingLive: contract.liveStatus === 200,
       captionComplete: capCheck.complete,
       noDuplicate,
+      attributionComplete: attributionCheck.valid,
     };
     const postable = isPostable(facts);
     if (!postable.postable) {
@@ -540,7 +564,7 @@ async function applyBatch(
         template: `buzzmap-${r.type}`,
         utm_url: utm,
         // X は本文リンクで直接遷移 = direct (SNS CTR の分母に使える)
-        attribution: 'direct',
+        attribution,
       });
       inserted.push(row);
       existingDrafts.add(draftKey(platform, r.ideaId));

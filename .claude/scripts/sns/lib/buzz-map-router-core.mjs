@@ -292,6 +292,13 @@ export function findMachineDuplicate(idea, machineKeys) {
  * @param {{ eligible:boolean, autoPostable:boolean }} gate evaluateHardGate の結果
  */
 export function curatedToCatalogEntry(idea, scored, landing, gate) {
+  const years = [
+    ...new Set(
+      (idea?.dataRefs ?? [])
+        .map((ref) => ref?.year)
+        .filter((year) => typeof year === "string" && year.length > 0),
+    ),
+  ];
   return {
     metricKey: `curated:${idea.ideaId}`,
     source: "curated",
@@ -306,6 +313,8 @@ export function curatedToCatalogEntry(idea, scored, landing, gate) {
     recommendedType: idea.recommendedType,
     sourceKind: idea.sourceKind,
     metricKeys: idea.metricKeys,
+    requiredYear: years.length === 1 ? years[0] : null,
+    landingPromise: idea?.landingPlan?.landingPromise ?? "",
     feasibility: idea.feasibility,
     capability: idea.capability,
     commercialUse: idea.commercialUse,
@@ -399,7 +408,7 @@ export function resolveMergedStatus(prevStatus, matchedMachineStatuses = [], dra
  * @param {{
  *   commercialUse:string, sensitivity:string, specGenerated:boolean, renderChecked:boolean,
  *   r2Ok:boolean, landingContractPass:boolean, landingLive:boolean,
- *   captionComplete:boolean, noDuplicate:boolean
+ *   captionComplete:boolean, noDuplicate:boolean, attributionComplete:boolean
  * }} facts
  * @returns {{ postable:boolean, reasons:string[] }}
  */
@@ -414,6 +423,7 @@ export function isPostable(facts) {
   if (!facts?.landingLive) reasons.push("primary landing が live 200 でない");
   if (!facts?.captionComplete) reasons.push("caption に出典/年度/対象単位が不足");
   if (!facts?.noDuplicate) reasons.push("platform/domain/content_key が重複");
+  if (!facts?.attributionComplete) reasons.push("UTM/attribution 契約が不完全");
   return { postable: reasons.length === 0, reasons };
 }
 
