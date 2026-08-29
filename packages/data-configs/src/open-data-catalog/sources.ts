@@ -7,6 +7,7 @@ import { DIGITAL_AGENCY_ODS_DATASETS } from "./datasets/digital-agency-ods";
 import { MAFF_REGIONAL_DATASETS } from "./datasets/maff";
 import { JFLEC_DATASETS } from "./datasets/jflec";
 import { NIER_DATASETS } from "./datasets/nier";
+import { FDMA_HEATSTROKE_DATASETS } from "./datasets/fdma";
 
 /**
  * source カタログ (初期 13 source)。
@@ -18,6 +19,21 @@ import { NIER_DATASETS } from "./datasets/nier";
 const ids = (datasets: readonly { id: string }[]): readonly string[] => datasets.map((d) => d.id);
 
 export const OPEN_DATA_SOURCES: readonly OpenDataSource[] = [
+  {
+    id: "fdma-heatstroke",
+    name: "熱中症による救急搬送人員",
+    publisher: "総務省消防庁",
+    kind: "government-portal",
+    homepageUrl: "https://www.fdma.go.jp/disaster/heatstroke/",
+    catalogUrl: "https://www.fdma.go.jp/disaster/heatstroke/post4.html",
+    termsUrl: "https://www.fdma.go.jp/about/others/post3.html",
+    isOfficial: true,
+    status: "verified",
+    lastVerifiedAt: "2026-08-28",
+    datasetIds: ids(FDMA_HEATSTROKE_DATASETS),
+    notes:
+      "2008年以降の年次資料を公開。2025年確定値は5月1日-9月30日、47都道府県別。人口10万人当たり指標は2024年total-populationを分母に派生する。",
+  },
   {
     id: "mhlw-medical-info",
     name: "医療情報ネット オープンデータ",

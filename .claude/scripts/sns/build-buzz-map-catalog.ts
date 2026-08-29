@@ -118,6 +118,8 @@ interface CatalogEntry {
   recommendedType?: string;
   sourceKind?: string;
   metricKeys?: string[];
+  requiredYear?: string | null;
+  landingPromise?: string;
   feasibility?: string;
   commercialUse?: string;
   sensitivity?: string;

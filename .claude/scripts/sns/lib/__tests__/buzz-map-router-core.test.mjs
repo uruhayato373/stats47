@@ -43,7 +43,9 @@ function idea(overrides = {}) {
       themeSlug: "living-housing",
       articleSlug: null,
       monetizationVertical: "housing",
+      landingPromise: "空き家率のランキングを見る",
     },
+    dataRefs: [{ year: "2023", license: "allowed", id: "test" }],
     ...overrides,
   };
 }
@@ -237,5 +239,7 @@ test("curatedToCatalogEntry projects to catalog shape", () => {
   assert.equal(e.ideaId, "test-idea");
   assert.equal(e.landingStrategy, "existing-ranking");
   assert.equal(e.eligible, true);
+  assert.equal(e.requiredYear, "2023");
+  assert.equal(e.landingPromise, "空き家率のランキングを見る");
   assert.equal(e.status, "candidate");
 });
