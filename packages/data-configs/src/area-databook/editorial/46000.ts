@@ -13,8 +13,8 @@ export const KAGOSHIMA_EDITORIAL: AreaEditorial = {
     flower: "ミヤマキリシマ",
     bird: "ルリカケス",
     song: "鹿児島県民の歌",
-    sourceUrl: "http://www.pref.kagoshima.jp/pr/gaiyou/symbol/index.html",
-    accessedAt: "2026-07-18",
+    sourceUrl: "https://www.pref.kagoshima.jp/pr/gaiyou/symbol/index.html",
+    accessedAt: "2026-08-29",
   },
   specialties: [
     {

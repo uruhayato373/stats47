@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "profile": "prefecture-deviation",
+  "sourceKey": "prefecture-deviation",
+  "edition": "2018",
+  "input": {
+    "documents": 6,
+    "pages": 103,
+    "extractionComplete": true,
+    "internalCropCount": 1
+  },
+  "itemCount": 103,
+  "resolvedCount": 103,
+  "resolutionCoverage": 1,
+  "actionableCount": 0,
+  "blockedCount": 103,
+  "byResolution": {
+    "rights-hold": 103
+  },
+  "byKind": {
+    "page": 103
+  },
+  "publicOriginalReuse": "forbidden"
+}

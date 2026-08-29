@@ -68,7 +68,7 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
   }],
   ["L01", {
     dataId: "L01",
-    downloadUrlPattern: "https://nlftp.mlit.go.jp/ksj/gml/data/L01/L01-25/L01-25_GML.zip",
+    downloadUrlPattern: "https://nlftp.mlit.go.jp/ksj/gml/data/L01/L01-{VERSION}/L01-{VERSION}_GML.zip",
     geojsonDirInZip: "UTF-8/",
     propertyMap: {},
     simplifyOptions: { quantize: 1000000, simplifyQuantile: 0 },
@@ -152,7 +152,7 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
   }],
   ["A31b", {
     dataId: "A31b",
-    downloadUrlPattern: "https://nlftp.mlit.go.jp/ksj/gml/data/A31b/A31b-22/{PREF}_GML.zip",
+    downloadUrlPattern: "https://nlftp.mlit.go.jp/ksj/gml/data/A31b/A31b-{VERSION}/A31b-{VERSION}_20_{MESHCODE}_GEOJSON.zip",
     geojsonDirInZip: "",
     propertyMap: {},
     simplifyOptions: { quantize: 100000, simplifyQuantile: 0.01 },

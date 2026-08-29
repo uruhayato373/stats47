@@ -3,6 +3,7 @@ import {
   BUSINESS_PLAN_NOTE_PRODUCTS,
   BUSINESS_PLAN_X_IDEAS,
 } from './content-opportunities';
+import { BUSINESS_PLAN_M1 } from './m1';
 import type {
   BusinessPlanCatalog,
   BusinessPlanDecision,
@@ -83,6 +84,13 @@ export const BUSINESS_PLAN_DOCUMENTS: readonly BusinessPlanDocument[] = [
     path: '.claude/rules/gis-data.md',
     role: 'データセットの採用・ライセンス・R2パイプライン',
     owner: 'gis-curator',
+  },
+  {
+    id: 'geo-m1-implementation',
+    title: 'GeoAI事業M1実装仕様',
+    path: 'docs/02_実装計画/47_GeoAI事業M1実装仕様.md',
+    role: '2026年9月のサイト・X・note・計測・公開ゲート',
+    owner: 'strategy-advisor',
   },
 ];
 
@@ -512,38 +520,38 @@ export const BUSINESS_PLAN_EVENTS: readonly BusinessPlanEvent[] = [
   {
     id: 'geo-view',
     label: '地域分析閲覧',
-    canonicalEvent: null,
-    status: 'not-instrumented',
+    canonicalEvent: 'geo_analysis_view',
+    status: 'partially-measured',
     owner: 'ga4-analyst',
     implementationPath: 'apps/web/src/lib/analytics/events.ts',
-    note: '/geo実装時に route+analysis_id で追加する。',
+    note: 'コード実装済み。GA4カスタムディメンション登録と反映確認は未完了。',
   },
   {
     id: 'map-interaction',
     label: '地図操作',
-    canonicalEvent: null,
-    status: 'not-instrumented',
+    canonicalEvent: 'geo_map_interaction',
+    status: 'partially-measured',
     owner: 'ga4-analyst',
     implementationPath: 'apps/web/src/lib/analytics/events.ts',
-    note: '操作種別を決定的enumに限定する。',
+    note: '操作種別は決定的enum。GA4登録・反映確認までは部分計測。',
   },
   {
     id: 'region-search',
     label: '地域検索',
-    canonicalEvent: null,
-    status: 'not-instrumented',
+    canonicalEvent: 'geo_region_select',
+    status: 'partially-measured',
     owner: 'ga4-analyst',
     implementationPath: 'apps/web/src/lib/analytics/events.ts',
-    note: '検索語そのものは送らず地域コード等を使う。',
+    note: '検索語を送らず地域コードを使う。GA4登録・反映確認までは部分計測。',
   },
   {
     id: 'compare-add',
     label: '比較へ追加',
-    canonicalEvent: null,
-    status: 'not-instrumented',
+    canonicalEvent: 'geo_compare_add',
+    status: 'partially-measured',
     owner: 'ga4-analyst',
     implementationPath: 'apps/web/src/lib/analytics/events.ts',
-    note: '比較UI実装時に追加する。',
+    note: '比較数と地域コードを送る。GA4登録・反映確認までは部分計測。',
   },
   {
     id: 'data-download',
@@ -900,7 +908,7 @@ export const BUSINESS_PLAN_PILOT_SPECS: readonly BusinessPlanPilotSpec[] = [
 
 export const BUSINESS_PLAN_2026: BusinessPlanCatalog = {
   id: 'stats47-business-plan-2026',
-  version: '2026-08-28.1',
+  version: '2026-08-29.1',
   source: {
     title: 'stats47 2.0 超具体的 事業計画書',
     subtitle: 'GIS × AI × 地域データによるstats47事業拡張計画',
@@ -942,4 +950,5 @@ export const BUSINESS_PLAN_2026: BusinessPlanCatalog = {
   contentOpportunities: BUSINESS_PLAN_CONTENT_OPPORTUNITIES,
   xIdeas: BUSINESS_PLAN_X_IDEAS,
   noteProducts: BUSINESS_PLAN_NOTE_PRODUCTS,
+  m1: BUSINESS_PLAN_M1,
 };

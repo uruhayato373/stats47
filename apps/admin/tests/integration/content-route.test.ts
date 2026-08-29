@@ -54,5 +54,9 @@ describe("GET /api/content", () => {
     expect(json.kindle[0]).toMatchObject({ id: "K-S1-01", stage: "draft" });
     expect(json.note.length).toBeGreaterThan(0);
     expect(json.audit.errors).toBe(0);
+    expect(json.references).toMatchObject({
+      summary: { productionUnits: 0 },
+      audit: { status: "fail" },
+    });
   });
 });

@@ -7,6 +7,69 @@ function sendEvent(name: string, params: Record<string, unknown>): void {
   window.gtag('event', name, params);
 }
 
+// ─── Geo 地域分析 ──────────────────────────────────────────
+
+export interface GeoAnalysisEventParams {
+  analysisId: string;
+  analysisSlug: string;
+  geography: 'prefecture' | 'municipality' | 'mesh';
+  dataVersion: string;
+}
+
+function geoAnalysisPayload(
+  params: GeoAnalysisEventParams
+): Record<string, unknown> {
+  return {
+    analysis_id: params.analysisId,
+    analysis_slug: params.analysisSlug,
+    geography: params.geography,
+    data_version: params.dataVersion,
+  };
+}
+
+/** 地域分析ページを表示した。ページ mount につき1回、呼び出し側で送る。 */
+export function trackGeoAnalysisView(params: GeoAnalysisEventParams): void {
+  sendEvent('geo_analysis_view', geoAnalysisPayload(params));
+}
+
+/** 地図上で都道府県を選択または解除した。 */
+export function trackGeoMapInteraction(
+  params: GeoAnalysisEventParams & {
+    interactionType: 'select-prefecture' | 'clear-prefecture';
+    areaCode?: string;
+  }
+): void {
+  sendEvent('geo_map_interaction', {
+    ...geoAnalysisPayload(params),
+    interaction_type: params.interactionType,
+    ...(params.areaCode ? { area_code: params.areaCode } : {}),
+  });
+}
+
+/** 地域セレクトで都道府県を選んだ。検索語そのものは送らない。 */
+export function trackGeoRegionSelect(
+  params: GeoAnalysisEventParams & { areaCode: string }
+): void {
+  sendEvent('geo_region_select', {
+    ...geoAnalysisPayload(params),
+    area_code: params.areaCode,
+  });
+}
+
+/** 比較リストへ都道府県を追加した。 */
+export function trackGeoCompareAdd(
+  params: GeoAnalysisEventParams & {
+    areaCode: string;
+    comparisonSize: number;
+  }
+): void {
+  sendEvent('geo_compare_add', {
+    ...geoAnalysisPayload(params),
+    area_code: params.areaCode,
+    comparison_size: params.comparisonSize,
+  });
+}
+
 // ─── ファイルダウンロード ───────────────────────────────────
 
 /**

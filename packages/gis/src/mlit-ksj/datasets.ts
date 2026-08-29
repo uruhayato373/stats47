@@ -84,8 +84,8 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "A13", name: "森林地域", category: "land", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "agriculture", isRankingTarget: false },
   { dataId: "C23", name: "海岸線", category: "land", geometryType: "line", coverage: "prefecture", license: "non-commercial", stats47Category: null, isRankingTarget: false },
   { dataId: "G04-a", name: "標高・傾斜度3次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: null, isRankingTarget: false },
-  { dataId: "L01", name: "地価公示", category: "land", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "economy", isRankingTarget: false },
-  { dataId: "L02", name: "都道府県地価調査", category: "land", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "economy", isRankingTarget: false },
+  { dataId: "L01", name: "地価公示", category: "land", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "economy", isRankingTarget: false, latestVersion: "26" },
+  { dataId: "L02", name: "都道府県地価調査", category: "land", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "economy", isRankingTarget: false, latestVersion: "25" },
   { dataId: "L03-a", name: "土地利用3次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "cc-by-4.0", stats47Category: null, isRankingTarget: false },
   {
     dataId: "W01", name: "ダム", category: "land", geometryType: "point", coverage: "national", license: "non-commercial",
@@ -106,7 +106,7 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   { dataId: "A22", name: "豪雪地帯", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "commercial-ok", stats47Category: "landweather", isRankingTarget: false },
   { dataId: "A27", name: "小学校区", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "educationsports", isRankingTarget: false },
   { dataId: "A29", name: "用途地域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "infrastructure", isRankingTarget: false },
-  { dataId: "A31b", name: "洪水浸水想定区域", category: "policy", geometryType: "polygon", coverage: "mesh", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false },
+  { dataId: "A31b", name: "洪水浸水想定区域", category: "policy", geometryType: "polygon", coverage: "mesh", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "25" },
   { dataId: "A32", name: "中学校区", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "educationsports", isRankingTarget: false },
   { dataId: "A33", name: "土砂災害警戒区域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "safetyenvironment", isRankingTarget: false },
   { dataId: "A38", name: "医療圏", category: "policy", geometryType: "polygon", coverage: "national", license: "cc-by-4.0", stats47Category: "socialsecurity", isRankingTarget: false },
@@ -169,8 +169,8 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   },
   {
     dataId: "N02", name: "鉄道", category: "transport", geometryType: "line", coverage: "national", license: "cc-by-4.0",
-    stats47Category: "infrastructure", isRankingTarget: true, latestVersion: "24",
-    rankingConfig: [{ rankingKey: "railway-station-count", rankingName: "鉄道駅数", unit: "駅", categoryKey: "infrastructure", filenamePattern: "Station", yearCode: "2024", description: "国土数値情報に登録されている鉄道駅の都道府県別数" }],
+    stats47Category: "infrastructure", isRankingTarget: true, latestVersion: "25",
+    rankingConfig: [{ rankingKey: "railway-station-count", rankingName: "鉄道駅数", unit: "駅", categoryKey: "infrastructure", filenamePattern: "Station", yearCode: "2025", description: "国土数値情報に登録されている鉄道駅の都道府県別数" }],
   },
   // ranking 定義を外した (2026-08-17)。`expressway-junction-count` は metric config も
   // R2 データも存在せず、/ranking/expressway-junction-count は soft 404 を返していた
@@ -178,7 +178,7 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   // 状態なので、実態に合わせて落とす。作るなら metric config の新設から始める。
   { dataId: "N06", name: "高速道路時系列", category: "transport", geometryType: "line", coverage: "national", license: "cc-by-4.0-partial", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "20" },
   { dataId: "N07", name: "バスルート", category: "transport", geometryType: "line", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false },
-  { dataId: "S12", name: "駅別乗降客数", category: "transport", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false },
+  { dataId: "S12", name: "駅別乗降客数", category: "transport", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "25" },
 
   // ── 統計 ───────────────────────────────────────────────────
   { dataId: "mesh1000r6", name: "1kmメッシュ将来推計人口(R6)", category: "statistics", geometryType: "mesh", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "population", isRankingTarget: false },

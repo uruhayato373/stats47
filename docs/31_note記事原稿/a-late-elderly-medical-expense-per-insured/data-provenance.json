@@ -1,0 +1,17 @@
+{
+  "slug": "a-late-elderly-medical-expense-per-insured",
+  "vertical": "stats47-note",
+  "kind": "ranking",
+  "rankingKey": "late-elderly-medical-expense-per-insured",
+  "year": "2023",
+  "charts": [
+    "images/cover-1280x670.png",
+    "images/choropleth-map-1080x1080.png",
+    "images/chart-x-1200x630.png",
+    "images/boxplot-1200x630.png"
+  ],
+  "source": "r2:app/stats/late-elderly-medical-expense-per-insured/values.json",
+  "restore": "curl -sf https://storage.stats47.jp/app/stats/late-elderly-medical-expense-per-insured/values.json",
+  "generatedBy": "post-note-ranking",
+  "note": "データ本体は stats47 R2 が SSOT。本ファイルは復元マニフェスト（コピーではない）。"
+}

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-28",
+  "generatedAt": "2026-08-29",
   "linkage": {
-    "auditedAt": "2026-08-28",
-    "metrics": 2298,
-    "resolved": 2066,
+    "auditedAt": "2026-08-29",
+    "metrics": 2299,
+    "resolved": 2067,
     "unresolved": 232,
     "coveragePct": 89.9,
     "unresolvedByReason": {
@@ -1786,6 +1786,43 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 3
+    },
+    {
+      "surveyId": "japanese-language-instruction-survey",
+      "name": "日本語指導が必要な児童生徒の受入状況等に関する調査",
+      "organization": "文部科学省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "inactive-only",
+      "editorialStatus": "implemented",
+      "itemCount": 1,
+      "activeItemCount": 0,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": true,
+      "readerQuestionCount": 0,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "job-placement-statistics",

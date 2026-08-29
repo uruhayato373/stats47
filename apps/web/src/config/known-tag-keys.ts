@@ -9,8 +9,8 @@
  * 更新方法: `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
  * 更新タイミング: ブログ公開で R2 blog snapshot が変わった後。commit + デプロイで反映。
  *
- * 最終生成日: 2026-08-28
- * 件数: 870
+ * 最終生成日: 2026-08-29
+ * 件数: 879
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "1000世帯あたり",
@@ -313,6 +313,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "共働き",
   "兵庫県",
   "再生可能エネルギー",
+  "出生",
   "出生率",
   "刑法犯",
   "初任給",
@@ -399,6 +400,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "地方自治",
   "地方財政",
   "地方選挙",
+  "地理",
   "地産地消",
   "地震",
   "埼玉県",
@@ -476,6 +478,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "工業用水",
   "工業統計",
   "市区町村",
+  "市町村",
   "干ししいたけ",
   "干しのり",
   "平均寿命",
@@ -533,6 +536,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "昆布",
   "映画",
   "昼夜間人口",
+  "昼間人口",
   "晩婚化",
   "晴れ",
   "暖房費",
@@ -573,6 +577,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "歳入構成",
   "歳出",
   "歴史",
+  "死亡",
   "残業",
   "母子保健",
   "民生委員",
@@ -645,6 +650,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "生活費",
   "生涯学習",
   "生産性",
+  "産業",
   "産業構造",
   "産業構造変化",
   "男女差",
@@ -763,6 +769,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "豆腐",
   "豆腐消費量",
   "豚肉",
+  "負債",
   "財政",
   "財政健全化",
   "財政健全性",
@@ -808,6 +815,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "都市ガス",
   "都市公園",
   "都市化",
+  "都市圏",
   "都道府県",
   "都道府県ランキング",
   "都道府県別",
@@ -871,6 +879,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "高速道路",
   "高齢化",
   "高齢化率",
+  "高齢者",
   "魚介類",
   "魚種別漁獲量",
   "魚食文化",

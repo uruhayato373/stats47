@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "profile": "prefecture-databook-2021",
+  "sourceKey": "prefecture-databook",
+  "edition": "2021",
+  "input": {
+    "documents": 8,
+    "pages": 580,
+    "extractionComplete": true,
+    "internalCropCount": 1
+  },
+  "itemCount": 580,
+  "resolvedCount": 580,
+  "resolutionCoverage": 1,
+  "actionableCount": 80,
+  "blockedCount": 0,
+  "byResolution": {
+    "not-applicable": 500,
+    "context-only": 19,
+    "combined-analysis": 61
+  },
+  "byKind": {
+    "page": 580
+  },
+  "publicOriginalReuse": "forbidden"
+}

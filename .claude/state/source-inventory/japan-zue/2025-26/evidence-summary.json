@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "sourceKey": "japan-zue",
+  "edition": "2025-26",
+  "extractionVersion": 1,
+  "candidatesSha256": "74d1ae472384d7ad8f83c6c9a8691ec2b504b039fe8136d7a4439e6879a8bb92",
+  "counts": {
+    "table": 757,
+    "figure": 201,
+    "text-stat": 458,
+    "total": 1416
+  },
+  "resolutionCounts": {
+    "combined-analysis": 6,
+    "new-metric": 1,
+    "primary-source-unavailable": 1384,
+    "reuse-existing-metric": 3,
+    "rights-hold": 22
+  },
+  "resolutionCoverage": 1,
+  "primarySourceCoverage": 0.360169,
+  "rightsAllowedCount": 488,
+  "productionReadyCount": 9,
+  "publicCandidateCount": 10,
+  "pilotReadyCount": 10,
+  "manualOverrideCount": 10,
+  "metricMappedCount": 10,
+  "surveyMappedCount": 7,
+  "themeMappedCount": 5,
+  "blockers": {
+    "primarySourceUnavailable": 1384,
+    "rightsHold": 22,
+    "unreviewed": 0
+  },
+  "nextWave": [
+    "japan-zue-2025-26-p054-table02",
+    "japan-zue-2025-26-p071-figure01",
+    "japan-zue-2025-26-p077-table01",
+    "japan-zue-2025-26-p131-figure02",
+    "japan-zue-2025-26-p393-table02",
+    "japan-zue-2025-26-p436-table02",
+    "japan-zue-2025-26-p457-table01",
+    "japan-zue-2025-26-p458-table02",
+    "japan-zue-2025-26-p460-figure01",
+    "japan-zue-2025-26-p467-table01"
+  ]
+}

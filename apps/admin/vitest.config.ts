@@ -26,6 +26,10 @@ export default defineConfig({
         __dirname,
         "../../packages/data-configs/src/business-plan/index.ts"
       ),
+      "@stats47/data-configs/evidence-inventory": path.resolve(
+        __dirname,
+        "../../packages/data-configs/src/evidence-inventory/index.ts"
+      ),
       "server-only": path.resolve(__dirname, "./vitest.shims.ts"),
       "next/server": path.resolve(__dirname, "./vitest.shims.ts"),
     },

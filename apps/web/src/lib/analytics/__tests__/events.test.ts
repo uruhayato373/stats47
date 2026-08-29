@@ -13,6 +13,10 @@ import {
   trackNotFound,
   trackCtaClick,
   trackNavClick,
+  trackGeoAnalysisView,
+  trackGeoMapInteraction,
+  trackGeoRegionSelect,
+  trackGeoCompareAdd,
 } from "../events";
 
 describe("GA4 カスタムイベント", () => {
@@ -26,6 +30,52 @@ describe("GA4 カスタムイベント", () => {
 
   afterEach(() => {
     vi.unstubAllGlobals();
+  });
+
+  it("Geo分析の4イベントが共通識別子と決定的パラメータを送信する", () => {
+    const common = {
+      analysisId: "m1-analysis-population-2050",
+      analysisSlug: "2050-population",
+      geography: "prefecture" as const,
+      dataVersion: "2050",
+    };
+
+    trackGeoAnalysisView(common);
+    trackGeoMapInteraction({
+      ...common,
+      interactionType: "select-prefecture",
+      areaCode: "13000",
+    });
+    trackGeoRegionSelect({ ...common, areaCode: "27000" });
+    trackGeoCompareAdd({ ...common, areaCode: "01000", comparisonSize: 2 });
+
+    expect(mockGtag).toHaveBeenNthCalledWith(1, "event", "geo_analysis_view", {
+      analysis_id: "m1-analysis-population-2050",
+      analysis_slug: "2050-population",
+      geography: "prefecture",
+      data_version: "2050",
+    });
+    expect(mockGtag).toHaveBeenNthCalledWith(
+      2,
+      "event",
+      "geo_map_interaction",
+      expect.objectContaining({
+        interaction_type: "select-prefecture",
+        area_code: "13000",
+      })
+    );
+    expect(mockGtag).toHaveBeenNthCalledWith(
+      3,
+      "event",
+      "geo_region_select",
+      expect.objectContaining({ area_code: "27000" })
+    );
+    expect(mockGtag).toHaveBeenNthCalledWith(
+      4,
+      "event",
+      "geo_compare_add",
+      expect.objectContaining({ area_code: "01000", comparison_size: 2 })
+    );
   });
 
   it("trackCsvDownload がイベントを送信する", () => {

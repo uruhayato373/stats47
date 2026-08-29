@@ -1,19 +1,23 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-08-28T12:42:57.154Z",
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-29T09:14:49.611Z",
   "catalogId": "stats47-business-plan-2026",
-  "catalogVersion": "2026-08-28.1",
+  "catalogVersion": "2026-08-29.1",
   "sourceSha256": "04f678551e1395a2033d8d6e34e7b6029932792f61e9dd178aedaa690de510c8",
   "coverage": {
     "decisions": 25,
-    "documents": 10,
+    "documents": 11,
     "initiatives": 10,
     "pilotSpecs": 4,
     "contentOpportunities": 100,
     "xIdeas": 30,
     "noteProducts": 15,
     "metrics": 9,
-    "events": 12
+    "events": 12,
+    "m1Routes": 5,
+    "m1XPosts": 15,
+    "m1NoteProducts": 15,
+    "m1Tasks": 6
   },
   "statusCounts": {
     "adopted": 6,
@@ -21,18 +25,18 @@
     "deferred": 2
   },
   "eventCounts": {
-    "not-instrumented": 7,
+    "partially-measured": 5,
     "measured": 2,
-    "partially-measured": 1,
+    "not-instrumented": 3,
     "manual": 2
   },
   "sourceFreshness": {
-    "ga4": "2026-08-28T12:09:15.777Z",
-    "x": "2026-08-28T12:09:15.805Z",
-    "note": "2026-08-28T12:09:15.794Z",
-    "affiliate": "2026-08-28T12:09:15.771Z",
-    "products": "2026-08-28T12:09:15.807Z",
-    "ci": "2026-08-28T12:09:15.748Z"
+    "ga4": "2026-08-24T22:30:16.759Z",
+    "x": "2026-06-07T11:53:10.825Z",
+    "note": "2026-08-24T22:30:16.763Z",
+    "affiliate": "2026-08-28T12:03:01.409Z",
+    "products": "2026-08-28T12:03:01.412Z",
+    "ci": "2026-08-29T07:12:05.661Z"
   },
   "nextActions": [
     {

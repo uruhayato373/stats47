@@ -13,8 +13,8 @@ export const TOKUSHIMA_EDITORIAL: AreaEditorial = {
     flower: "すだちの花",
     bird: "シラサギ",
     song: "徳島県民の歌",
-    sourceUrl: "https://ja.wikipedia.org/wiki/徳島県",
-    accessedAt: "2026-07-18",
+    sourceUrl: "https://www.pref.tokushima.lg.jp/en/japanese/about/symbol/",
+    accessedAt: "2026-08-29",
   },
   specialties: [
     {
@@ -23,8 +23,9 @@ export const TOKUSHIMA_EDITORIAL: AreaEditorial = {
       municipality: "鳴門市",
       description:
         "大鳴門橋周辺の海岸沿いに広がるミネラル豊富な「銀砂」と呼ばれる砂地で栽培される小粒で色白ならっきょう。2008年に地域団体商標に登録され、シャキシャキとした食感が持ち味の鳴門ブランド野菜の代表格。",
-      sourceUrl: "https://ja.wikipedia.org/wiki/鳴門らっきょ",
-      accessedAt: "2026-07-18",
+      sourceUrl:
+        "https://www.pref.tokushima.lg.jp/japanese/specialty/Introduction/gourmet/fresh/",
+      accessedAt: "2026-08-29",
     },
     {
       slug: "awa-wasanbon-sugar",
@@ -32,8 +33,9 @@ export const TOKUSHIMA_EDITORIAL: AreaEditorial = {
       municipality: "上板町・阿波市",
       description:
         "阿讃山脈南麓の上板町と阿波市土成町だけで作られる希少な国産砂糖。「竹糖」という丈の低いサトウキビを原料に、押し舟による圧搾と「研ぎ」の手作業を繰り返す伝統製法で、上品な口どけを生み出す。",
-      sourceUrl: "https://ja.wikipedia.org/wiki/阿波和三盆糖",
-      accessedAt: "2026-07-18",
+      sourceUrl:
+        "https://www.pref.tokushima.lg.jp/kenseijoho/tokushimakennitsuite/tokushimakennosangyo/dentosangyo/wasanbon/",
+      accessedAt: "2026-08-29",
     },
     {
       slug: "cauliflower",
@@ -50,8 +52,9 @@ export const TOKUSHIMA_EDITORIAL: AreaEditorial = {
       municipality: "小松島市ほか",
       description:
         "徳島県の木にも選定されているヤマモモは、初夏を告げる県民の味覚。県下一の生産地は小松島市で、濃い赤紫色に熟した実は甘酸っぱく、生食のほかジャムやシロップ漬けにも加工され地域に親しまれている。",
-      sourceUrl: "https://ja.wikipedia.org/wiki/徳島県",
-      accessedAt: "2026-07-18",
+      sourceUrl:
+        "https://www.pref.tokushima.lg.jp/tafftsc/material/kyukajyuken/",
+      accessedAt: "2026-08-29",
     },
     {
       slug: "hamo",
@@ -68,8 +71,9 @@ export const TOKUSHIMA_EDITORIAL: AreaEditorial = {
       municipality: "徳島市・小松島市・神山町",
       description:
         "徳島県は全国に先駆けて菌床栽培を取り入れた産地で、生シイタケの生産量は全国1位。温暖な気候を活かした周年栽培により、肉厚で香り高いシイタケが年間を通じて安定して市場に出荷されている。",
-      sourceUrl: "https://ja.wikipedia.org/wiki/徳島県",
-      accessedAt: "2026-07-18",
+      sourceUrl:
+        "https://www.pref.tokushima.lg.jp/japanese/specialty/Introduction/gourmet/fresh/",
+      accessedAt: "2026-08-29",
     },
     {
       slug: "awa-bancha",
@@ -77,8 +81,9 @@ export const TOKUSHIMA_EDITORIAL: AreaEditorial = {
       municipality: "那賀町・上勝町ほか",
       description:
         "盛夏に摘んだ茶葉を大桶で乳酸発酵させ、天日に干して仕上げる独自製法の後発酵茶。中国雲南省の一部と並ぶ珍しい製法として知られ、酸味を帯びたまろやかな風味が那賀町・上勝町の山間部で受け継がれている。",
-      sourceUrl: "https://ja.wikipedia.org/wiki/徳島県",
-      accessedAt: "2026-07-18",
+      sourceUrl:
+        "https://www.pref.tokushima.lg.jp/japanese/specialty/Introduction/gourmet/tea_sake/",
+      accessedAt: "2026-08-29",
     },
     {
       slug: "yuzu",
@@ -86,8 +91,9 @@ export const TOKUSHIMA_EDITORIAL: AreaEditorial = {
       municipality: "那賀町・上勝町",
       description:
         "ユズの一大産地として知られる那賀町のブランド「木頭ゆず」は、山間の寒暖差が生む鮮やかな色合いと豊潤な香りが特徴。果汁・果皮とも加工品に利用され、薬味から菓子まで幅広く県内外で親しまれている。",
-      sourceUrl: "https://ja.wikipedia.org/wiki/徳島県",
-      accessedAt: "2026-07-18",
+      sourceUrl:
+        "https://www.pref.tokushima.lg.jp/shien/anan/5010529",
+      accessedAt: "2026-08-29",
     },
     {
       slug: "awabi",
@@ -95,8 +101,9 @@ export const TOKUSHIMA_EDITORIAL: AreaEditorial = {
       municipality: "阿南市・美波町・牟岐町・海陽町",
       description:
         "県南部の阿南市から海陽町にかけての沿岸は、エサとなるアラメなどの海藻が豊富な好漁場。海女や海士が素潜りで一つひとつ手作業で獲るアワビ類は、外洋に面した豊かな磯を象徴する海の幸として知られる。",
-      sourceUrl: "https://ja.wikipedia.org/wiki/徳島県",
-      accessedAt: "2026-07-18",
+      sourceUrl:
+        "https://www.pref.tokushima.lg.jp/japanese/specialty/Introduction/gourmet/meet_fish/",
+      accessedAt: "2026-08-29",
     },
   ],
 };

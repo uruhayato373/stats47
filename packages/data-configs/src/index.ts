@@ -153,6 +153,7 @@ export {
   type VerificationStatus,
   type Stats47Use,
 } from "./open-data-catalog";
+export * from "./evidence-inventory";
 
 // コロプレス配色の決定規則 + 極性 SSOT (正典: .claude/rules/blog-svg-chart-standards.md §3)
 export {

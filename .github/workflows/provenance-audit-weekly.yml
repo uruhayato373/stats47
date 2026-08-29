@@ -75,6 +75,10 @@ jobs:
           npm run check:open-data-links --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-open-data-links.log
           OPEN_DATA_LINK_RC="${PIPESTATUS[0]}"
           if [ "$OPEN_DATA_LINK_RC" -ne 0 ]; then ERROR_COUNT=$((ERROR_COUNT + 1)); fi
+          echo "=== Japan Zue evidence inventory ==="
+          node .claude/scripts/lib/check-japan-zue-evidence-inventory.mjs 2>&1 | tee /tmp/prov-japan-zue.log
+          JAPAN_ZUE_RC="${PIPESTATUS[0]}"
+          if [ "$JAPAN_ZUE_RC" -ne 0 ]; then ERROR_COUNT=$((ERROR_COUNT + 1)); fi
           # D クラス件数を state から拾う
           DCLASS=$(node -e "const d=require('./.claude/state/provenance/queue.json'); console.log((d.byClass&&d.byClass.D)||0)")
           echo "dclass=$DCLASS" >> "$GITHUB_OUTPUT"
@@ -107,7 +111,7 @@ jobs:
             echo "手動抽出 metric の provenance 欠落、または計算系の参照先 metric 不在の可能性があります。"
             echo ""
             echo '```'
-            grep -E "\[provenance\]|\[calc-ref\]|内訳|error" /tmp/prov-config.log | head -40
+            grep -E "\[provenance\]|\[calc-ref\]|内訳|error|drift|coverage" /tmp/prov-config.log /tmp/prov-japan-zue.log | head -40
             echo '```'
             echo ""
             echo "是正: /audit-provenance skill / 正典 .claude/rules/data-provenance-standards.md"

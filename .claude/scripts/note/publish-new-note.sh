@@ -3,11 +3,11 @@
 # 段階:  content(カバー/タイトル/本文/URLカード/画像) → 下書き保存 → screenshot
 #        --publish 指定時のみ 公開設定(タグ→全文無料ライン→投稿する)
 # 前提: prepare-article.cjs / build-body.cjs / カバー / hashtags 生成済み。account gate は呼び出し側 or 初回。
-# 使い方: bash publish-new-note.sh <slug> <vertical> [--publish]
+# 使い方: bash publish-new-note.sh <slug> <vertical> [--publish] [magazine表示名]
 set -uo pipefail
 export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH"
 ROOT=/Users/minamidaisuke/stats47
-SLUG="$1"; VERT="$2"; PUBLISH="${3:-}"
+SLUG="$1"; VERT="$2"; PUBLISH="${3:-}"; MAGAZINE="${4:-}"
 J="/tmp/note-data-$SLUG.json"
 ADIR="$ROOT/docs/31_note記事原稿/$VERT/$SLUG"
 [ -d "$ADIR" ] || ADIR="$ROOT/docs/31_note記事原稿/$SLUG"
@@ -70,6 +70,7 @@ GO=$(grep -oE '\[[0-9]+\]<button[^>]*>公開に進む|\[[0-9]+\]<button aria-lab
 # タグ
 TAGS=$(head -99 "$ADIR/hashtags.txt" 2>/dev/null | tr '\n' ' ')
 [ -n "$TAGS" ] && new_post_tags "$TAGS"
+[ -n "$MAGAZINE" ] && new_post_magazine "$MAGAZINE"
 # 全文無料ライン → 投稿する
 BU state 2>&1 > /tmp/ns.txt
 TRIAL=$(grep -oE '\[[0-9]+\]<button[^>]*>試し読みエリアを設定' /tmp/ns.txt | grep -oE '[0-9]+' | head -1)
@@ -80,6 +81,7 @@ if [ -n "$TRIAL" ]; then
 fi
 BU state 2>&1 > /tmp/ns.txt
 POST=$(grep -oE '\[[0-9]+\]<button[^>]*>投稿する|\[[0-9]+\]<button[^>]*>今すぐ公開' /tmp/ns.txt | grep -oE '[0-9]+' | head -1)
+[ -z "$POST" ] && POST=$(awk '/^\t+投稿する$|^\t+今すぐ公開$/{print prev} {prev=$0}' /tmp/ns.txt | grep -oE '\[[0-9]+\]<button' | grep -oE '[0-9]+' | head -1)
 [ -n "$POST" ] && { BU click "$POST" >/dev/null 2>&1; sleep 5; echo "    投稿する clicked"; } || echo "    [WARN] 投稿する 未検出"
 BU screenshot "/tmp/note-published-$SLUG.png" >/dev/null 2>&1
 BU eval "location.href" 2>&1 | grep -oE 'https://note.com/[^ ]+' | head -1

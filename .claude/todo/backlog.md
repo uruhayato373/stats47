@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-28
+updated: 2026-08-29
 ---
 
 # バックログ (タスクマスタ)
@@ -20,56 +20,6 @@ updated: 2026-08-28
 ```
 
 ## 🔴 高 — 今月中に着手したい
-
-### [JAPAN-ZUE-CONTENT-PIPELINE-01] 日本国勢図会の全統計を一次資料化してサイト・記事・動画へ展開する
-
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-08-27] [進行中]
-
-- **program owner**: `open-data-curator`。工程ownerは
-  `docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md` §9。
-- **再開ポインタ**: `lastCompleted=WP2-full-inventory` / `nextWorkPackage=WP3-primary-source-mapping`。
-- **現状証拠**: private bundle 6 parts / 480,666,655 bytesを照合・復元し、1,746 files、bundle SHA
-  `a14a45e9d6bdd29e49de0786bdb88f1080ffcff1c5cae739b62a1b2e881de02f`を再現。p.26–529の504ページは
-  欠番・重複0、実見出し904、候補1,429（table 769 / figure 202 / text-stat 458）。索引・出典注記に加えて
-  図の軸・系列・凡例説明117件を除去し、分割続表を統合した再抽出SHAは
-  `bc7f5f61bb7b9531156f53e96632a00e821a3792568f0f1c9520d234102e2b76`で安定。判断済みIDの付け替わりは0。
-  p.1–25（第1章「世界の国々」）はstats47の都道府県コンテンツ対象外としてscope exclusionに記録。
-  対象範囲のsource coverageは100%。出版社正誤表11件中、定量解釈へ影響する7件はcandidate到達監査green。
-  全候補は793 review groupに整理済みで、相互参照212件の参照先不明は0。直接出典447 group / 975候補のうち、
-  151 group / 473候補を56 survey IDへ完全一致で対応付け、曖昧一致・master外IDは0。
-  全1,429候補をmetric＋survey確認20件、surveyのみ確認453件、直接出典確認502件、周辺文脈確認454件へ
-  重複・欠落なく分類済み。既済29件を除く未確認1,400件の内訳は0 / 448 / 499 / 453件。
-  metric候補115件（同一survey制約対象209件）の自動確定は0で、最優先層20件はすべて人手判断済み。
-  判断29件は既存metric 8 / combined analysis 14 / context-only 6 / rights-hold 1、coverage 2.03%、lineage error 0。
-  p.26–65 pilotは107候補（table 40 / figure 16 / text-stat 51）。
-  figure 201、transcript 13、scan PDF 13。全体は1,746ファイルで、`/books/`はGit対象外。
-  OCRは未校正で数値引用禁止。private Google DriveにはGit manifest 1件と90MiB以下のarchive part 6件を置き、
-  すべて`shared:false`、合計480,666,655 bytesをreadback済み。Git manifestが全1,746ファイルのSHA-256を保持する。
-- **目的**: 書籍を公開taxonomyやデータ出典にせず、全定量項目を内部evidence inventoryへ登録する。
-  数値は一次資料から再取得し、既存Category / Theme / Tag、metric、surveyへ統合した後、
-  ranking / theme / area / japan / blog / note / YouTube通常動画 / Instagram / Xへ展開する。
-- **実行順**:
-  1. WP1 inventory pilot: p.26–65でtyped inventory、stable ID、extract/validate/coverageを実装し、
-     代表10項目を選ぶ。別PCではGit manifestのpart名をGoogle Drive MCPで取得し、
-     `npm run source-vault:japan-zue -- restore`で検証復元してから着手する。
-  2. WP2: stats47対象範囲をp.26–529と定義し、全ページの表・図・本文統計1,429候補の母数を確定する。
-  3. WP3: 一次資料・利用条件・既存metric / survey / themeとの重複を全件照合する。
-  4. WP4: 10項目を一次資料→local R2→Web配置までend-to-end実装する。
-  5. WP5: 独自分析のmaster記事・通常動画briefを作り、既存EXP-006の上限内で派生案を作る。
-  6. WP6–7: 全件をwave展開し、版更新・coverage・lineage監査を定常運用へ統合する。
-- **完了条件**:
-  - 全定量項目が一意なIDと解決結果を持ち、resolution coverageが100%。
-  - 公開候補100%に一次資料、年度、単位、地域粒度、rights判定があり、書籍値の直接投入が0。
-  - 新規metricがprovenance、unit、値分布、survey taxonomy、ThemeCatalogの既存gateを通る。
-  - 公開原稿・図表・動画が書籍文章・figure・章構成を模倣せず、独自の問いと分析を持つ。
-  - Web・記事・動画・派生投稿がmetricKeys / surveyIds / provenanceUrlsで追跡できる。
-  - 新版で追加・変更・削除された項目と影響先を機械列挙できる。
-- **停止条件**: 一次資料不明、利用条件不明、民間権利、OCR/原本不一致、年度・単位・地域粒度不一致では
-  `primary-source-unavailable`または`rights-hold`にして停止する。Drive itemの共有、part欠落、manifest / size / hash不一致、
-  公開R2へのsource配置でも停止する。推測値や書籍値で埋めない。
-- **外部変更境界**: remote R2 write、git push、PR、deploy、note / YouTube / Instagram / X公開は
-  対象と検証結果を提示し、別途オーナー承認を得る。Drive source vaultの次revision追加・差し替えもこの境界に含む。
-  YouTubeはEXP-006の6週間3本上限を増やさない。
 
 ### [QUALITY-GATE-COVERAGE-01] CI・テスト・監査の実効網羅性強化
 
@@ -401,7 +351,30 @@ updated: 2026-08-28
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
 - **正典**: `.claude/rules/blog-data-schema.md`
 
+### [BLOG-REVIEW-AREA-RATIO-01] 面積割合記事の除外定義・同率順位・構造分析を是正する
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/blog/quality-gate.mjs area-ratio-prefecture-gap] [起票:2026-08-29] [Codex候補]
+
+- **次**: #B01101の除外範囲をタイトル・description・定義・出典へ反映し、同率順位を未丸め値で確認する。上位・下位差は公的一次資料で実証し、接地できなければ検証論点へ限定する。
+- **禁止**: 未確認の順位や、面積割合だけから行政・インフラへの因果を断定しない。
+- **完了条件**: 指摘4件を解消し、独立blog-criticがPASS、quality gateがexit 0になる。
+
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [REFERENCE-SOURCE-EXPANSION-01] Drive参考文献3資料をinventory化して既存SSOTへ展開する
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:ready] [起票:2026-08-29]
+
+- **owner**: 全体は`open-data-curator`、2021都道府県DataBookは`area-curator`、Claudeスキル構築ガイドは`knowledge-curator`。
+- **現状証拠**: 全ページOCR・内部crop・解決台帳を完了。DataBook 8 PDF / 580ページは`combined-analysis` 61 /
+  `context-only` 19 / `not-applicable` 500、偏差値資料6 PDF / 103ページは`rights-hold` 103、Claudeガイド
+  1 PDF / 33ページは`context-only` 7 / `not-applicable` 26。3資料ともresolution coverage 100%。
+- **次**: DataBookの61候補は既存area/editorial責務で必要なwaveだけ実装する。偏差値資料は図表権利と一次資料の
+  両方が確定した項目だけholdを解除する。準備工程の再実行は不要。
+- **完了条件**: 3資料の全抽出候補がresolutionを持ち、公開候補100%で一次資料・年度・単位・地域粒度・rightsが
+  確定し、書籍値の直接投入、原文・元図・内部cropの公開が0である。
+- **停止条件**: 書誌・権利、Drive private状態、manifest/hash、一次資料、OCR原本照合のいずれかが未解決なら
+  `rights-hold`または`primary-source-unavailable`で停止する。remote R2、git push、PR、deploy、外部公開は別途承認。
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
 

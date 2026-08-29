@@ -68,8 +68,8 @@ export function qualityQueues(): QualityQueue[] {
     typeof content === "object" && content !== null && "error" in content
       ? {
           key: "content-operations",
-          label: "コンテンツ運用SSOT",
-          file: "SNS / note / Kindle の各SSOT",
+          label: "コンテンツ・参考文献展開SSOT",
+          file: "SNS / note / Kindle / source inventory の各SSOT",
           exists: false,
           generatedAt: null,
           total: null,
@@ -80,14 +80,19 @@ export function qualityQueues(): QualityQueue[] {
         }
       : {
           key: "content-operations",
-          label: "コンテンツ運用SSOT",
-          file: "SNS / note / Kindle の各SSOT",
+          label: "コンテンツ・参考文献展開SSOT",
+          file: "SNS / note / Kindle / source inventory の各SSOT",
           exists: true,
           generatedAt: content.generatedAt,
-          total: content.channels.reduce((sum, channel) => sum + channel.total, 0),
-          defects: content.audit.errors,
+          total:
+            content.channels.reduce((sum, channel) => sum + channel.total, 0) +
+            content.references.summary.productionUnits,
+          defects:
+            content.audit.errors +
+            content.references.audit.findings.filter((finding) => finding.severity === "error")
+              .length,
           defectLabel: "エラー",
-          detail: `warn ${content.audit.warnings} / ${content.audit.status}`,
+          detail: `content warn ${content.audit.warnings} / reference ${content.references.audit.status}`,
         };
   return [
     contentQueue,

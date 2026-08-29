@@ -75,6 +75,17 @@ if ! node "$GUARD_ROOT/.claude/scripts/lib/check-r2-route-ssg.cjs"; then
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
 
+# 2.1a private参考文献のローカル残存・利用契約ガード
+# repo内cacheを拒否し、全profileのmanifest・active利用仕様・非公開派生物契約・解決台帳100%を照合する。
+echo -e "${GREEN}📚 参考文献source vaultチェック...${NC}"
+if ! (cd "$GUARD_ROOT" && npm run source-vault:check > /dev/null 2>&1); then
+  echo -e "${RED}❌ 参考文献のrepo内残存、manifest、active利用仕様、または非公開派生物契約に違反があります。${NC}"
+  echo -e "${YELLOW}💡 詳細: npm run source-vault:check${NC}"
+  ERROR_COUNT=$((ERROR_COUNT + 1))
+else
+  echo -e "${GREEN}✅ 参考文献source vault契約に適合${NC}"
+fi
+
 # 2.2 sync-snapshots の task ドリフト (2026-08-05 の calculated-stats 書き忘れの再発防止)
 # run.sh に task を足しても動くので CI は緑のまま、task の存在と実行順を人と agent が
 # 読む面 (SKILL.md の task 表) だけが欠落する。両者を 1:1 に保つ。
@@ -86,7 +97,7 @@ if git diff --cached --name-only | grep -q "^.claude/skills/db/sync-snapshots/";
   fi
 fi
 
-# 2.1a ドキュメントガバナンス
+# 2.1b ドキュメントガバナンス
 # 文書の固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOT、
 # 削除・移動後の参照悪化を、文書関連差分があるcommitだけ検査する。
 STAGED_DOCS=$(git diff --cached --name-only --diff-filter=ACMRD | grep -E \
@@ -102,7 +113,7 @@ if [ -n "$STAGED_DOCS" ]; then
   fi
 fi
 
-# 2.1b file:// URL の文字列連結ガード
+# 2.1c file:// URL の文字列連結ガード
 # `file://${process.argv[1]}` は Windows で必ず不一致になり、ESM のエントリポイント
 # 判定なら main() が呼ばれないまま exit 0 で終わる (失敗ではなく無言の no-op)。
 STAGED_JS=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
@@ -117,7 +128,7 @@ if [ -n "$STAGED_JS" ]; then
   fi
 fi
 
-# 2.1b-2 dispatch request の main 反映順ガード
+# 2.1d dispatch request の main 反映順ガード
 # sync-snapshots の sync job は `ref: main` を checkout する。develop で config を直しただけの
 # 状態で dispatch すると **main の古い config で再生成され、しかも成功する** (R2 の
 # generatedAt も更新されるので失敗に見えない)。2026-08-17 に婚姻率・離婚率の seoTitle で
@@ -135,7 +146,7 @@ if [ -n "$STAGED_DISPATCH" ]; then
   fi
 fi
 
-# 2.1c import.meta.dirname ガード
+# 2.1e import.meta.dirname ガード
 # .ts は tsx が CJS 解決するため import.meta.dirname は undefined になる
 # (repo の package.json はどれも "type": "module" を持たない)。フォールバック無しだと
 # path.resolve が ERR_INVALID_ARG_TYPE で落ちる。2026-08-16 に purge-worker-cache.ts が

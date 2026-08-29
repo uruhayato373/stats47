@@ -75,6 +75,15 @@
       "missingBehavior": "no-data",
       "fallback": "empty/zero on 404; throw or Result error on corrupt/source unavailable",
       "owner": "snapshot-exporter"
+    },
+    {
+      "id": "geo-analysis",
+      "sourceFiles": ["apps/web/src/features/geo-analysis/lib/load-geo-analysis-snapshot.ts"],
+      "criticality": "high",
+      "runtimeParsers": ["parseGeoAnalysisSnapshot"],
+      "missingBehavior": "no-data",
+      "fallback": "preparation status on 404, corrupt snapshot, or source unavailable",
+      "owner": "gis-pipeline-runner"
     }
   ]
 }

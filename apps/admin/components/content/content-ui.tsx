@@ -4,6 +4,7 @@ import { Badge } from "@/components/ops/primitives";
 import type {
   ContentFindingDTO,
   ContentStageDTO,
+  ReferenceProductionStageDTO,
 } from "@/lib/contracts/types";
 
 const STAGE_LABEL: Record<ContentStageDTO, string> = {
@@ -24,6 +25,32 @@ export function StageBadge({ stage }: { stage: ContentStageDTO }) {
           ? "bad"
           : "neutral";
   return <Badge tone={tone}>{STAGE_LABEL[stage]}</Badge>;
+}
+
+const REFERENCE_STAGE_LABEL: Record<ReferenceProductionStageDTO, string> = {
+  integrated: "統合済み",
+  draft: "制作中",
+  ready: "制作可能",
+  blocked: "停止",
+  "not-applicable": "対象外",
+};
+
+export function ReferenceStageBadge({
+  stage,
+}: {
+  stage: ReferenceProductionStageDTO;
+}) {
+  const tone =
+    stage === "integrated"
+      ? "good"
+      : stage === "draft"
+        ? "warn"
+      : stage === "ready"
+        ? "info"
+        : stage === "blocked"
+          ? "bad"
+          : "neutral";
+  return <Badge tone={tone}>{REFERENCE_STAGE_LABEL[stage]}</Badge>;
 }
 
 export function ContentAuditPanel({

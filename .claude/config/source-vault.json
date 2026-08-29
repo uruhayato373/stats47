@@ -1,5 +1,7 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "driveRootFolder": "stats47",
+  "driveCollectionFolder": "参考文献",
   "defaultProfile": "japan-zue",
   "profiles": {
     "japan-zue": {
@@ -7,16 +9,111 @@
       "edition": "2025-26",
       "revision": 1,
       "sourceRootName": "日本国勢図絵",
-      "localPath": "books/日本国勢図絵",
-      "driveFolderPath": "stats47-private-sources/japan-zue/2025-26"
+      "driveSourceFolderName": "日本国勢図会",
+      "driveEditionFolderName": "2025・2026年版",
+      "manifestPath": ".claude/state/source-inventory/japan-zue/2025-26/source-bundle-manifest.json",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md",
+        "owner": "open-data-curator",
+        "ocrLanguages": ["jpn", "eng"],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": ["transcript", "page-image", "crop"],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "ranking",
+          "survey",
+          "theme",
+          "area",
+          "japan",
+          "blog",
+          "note",
+          "youtube",
+          "instagram",
+          "x"
+        ]
+      }
     },
     "prefecture-deviation": {
       "sourceKey": "prefecture-deviation",
-      "edition": "unknown",
+      "edition": "2018",
       "revision": 1,
       "sourceRootName": "47都道府県の偏差値",
-      "localPath": "books/47都道府県の偏差値",
-      "driveFolderPath": "stats47-private-sources/prefecture-deviation/unknown"
+      "driveSourceFolderName": "47都道府県の偏差値",
+      "driveEditionFolderName": "2018年版",
+      "manifestPath": ".claude/state/source-inventory/prefecture-deviation/2018/source-bundle-manifest.json",
+      "bibliography": {
+        "title": "47都道府県の偏差値",
+        "author": "久保哲朗",
+        "publisher": "小学館",
+        "published": "2018-02",
+        "isbn": "978-4-09-825317-3",
+        "verifiedAt": "https://ndlsearch.ndl.go.jp/books/R100000002-I028765909"
+      },
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "open-data-curator",
+        "ocrLanguages": ["jpn", "eng"],
+        "ocrRotationDegrees": 90,
+        "ocrPageSegmentationMode": 4,
+        "internalArtifacts": ["transcript", "page-image", "crop"],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "ranking",
+          "survey",
+          "theme",
+          "blog",
+          "note",
+          "instagram",
+          "x"
+        ]
+      }
+    },
+    "prefecture-databook-2021": {
+      "sourceKey": "prefecture-databook",
+      "edition": "2021",
+      "revision": 1,
+      "sourceRootName": "2021都道府県DataBook",
+      "driveSourceFolderName": "2021都道府県DataBook",
+      "driveEditionFolderName": "2021年版",
+      "manifestPath": ".claude/state/source-inventory/prefecture-databook/2021/source-bundle-manifest.json",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "area-curator",
+        "ocrLanguages": ["jpn", "eng"],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": ["transcript", "page-image", "crop"],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": [
+          "area",
+          "ranking",
+          "theme",
+          "blog",
+          "note",
+          "instagram",
+          "x"
+        ]
+      }
+    },
+    "claude-skills-guide-2026": {
+      "sourceKey": "claude-skills-guide",
+      "edition": "2026",
+      "revision": 1,
+      "sourceRootName": "Claudeスキル構築ガイド",
+      "driveSourceFolderName": "Claudeスキル構築ガイド",
+      "driveEditionFolderName": "2026年版",
+      "manifestPath": ".claude/state/source-inventory/claude-skills-guide/2026/source-bundle-manifest.json",
+      "processing": {
+        "usageSpecPath": "docs/02_実装計画/46_その他参考文献OCR・クロップ・stats47展開実装仕様.md",
+        "owner": "knowledge-curator",
+        "ocrLanguages": ["jpn", "eng"],
+        "ocrRotationDegrees": 0,
+        "ocrPageSegmentationMode": 6,
+        "internalArtifacts": ["transcript", "page-image", "crop"],
+        "publicOriginalReuse": "forbidden",
+        "stats47Targets": ["agent", "skill", "internal-documentation"]
+      }
     }
   }
 }

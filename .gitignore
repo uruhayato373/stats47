@@ -191,8 +191,9 @@ packages/database/seed/d1-seed.sql
 # 2026-07-03 セットアップ監査: API キー混入で追跡解除 (settings.json が共有側の正)
 .claude/settings.local.json
 
-# 市販書籍のローカル参照スキャン (著作権物・118MB。area-databook の設計参照専用でrepoに入れない)
+# 禁止path。source-vault:checkが存在を拒否し、ignoreは誤commitの最後の防波堤とする。
 docs/books/
-# 同上: 日本国勢図会のスキャン 13 件・244MB。
-# このリポジトリは public なので commit すると著作権物を公開配信することになる。
+# 禁止path。source-vault:checkが存在を拒否し、ignoreは誤commitの最後の防波堤とする。
 /books/
+# 同上。参考PDFをagent設定配下へ常設しない。
+/.claude/pdfs/

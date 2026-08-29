@@ -17,6 +17,7 @@
  * オプション:
  *   --stills-only   静止画のみ生成（動画スキップ）
  *   --videos-only   動画のみ生成（静止画スキップ）
+ *   --note-only     note用4枚だけ生成（動画は常にスキップ）
  *   --key <key>     特定のランキングキーのみ処理
  */
 
@@ -48,6 +49,7 @@ const BROWSER_RESTART_INTERVAL = 50;
 const args = process.argv.slice(2);
 const stillsOnly = args.includes("--stills-only");
 const videosOnly = args.includes("--videos-only");
+const noteOnly = args.includes("--note-only");
 const keyIdx = args.indexOf("--key");
 const targetKey = keyIdx !== -1 ? args[keyIdx + 1] : undefined;
 
@@ -330,7 +332,7 @@ function buildJobs(
     );
   }
 
-  if (!stillsOnly) {
+  if (!stillsOnly && !noteOnly) {
     // Videos
     jobs.push(
       {
@@ -398,10 +400,10 @@ async function renderVideoJob(
 
 async function main() {
   const mode = stillsOnly
-    ? "stills only"
+    ? noteOnly ? "note stills only" : "stills only"
     : videosOnly
       ? "videos only"
-      : "stills + videos";
+      : noteOnly ? "note stills only" : "stills + videos";
   console.log(`📱 SNS Batch Generator (${mode})`);
   console.log("======================================================\n");
 
@@ -478,7 +480,9 @@ async function main() {
         fs.mkdir(path.join(rankingDir, "note/images"), { recursive: true }),
       ]);
 
-      const jobs = buildJobs(rankingDir, props);
+      const jobs = buildJobs(rankingDir, props).filter(
+        (job) => !noteOnly || job.label.startsWith("note/"),
+      );
 
       for (const job of jobs) {
         // ブラウザ定期再起動

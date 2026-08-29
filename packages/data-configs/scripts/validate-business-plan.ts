@@ -66,10 +66,36 @@ if (BUSINESS_PLAN_2026.noteProducts.length !== 15) {
     `noteProducts: expected 15, got ${BUSINESS_PLAN_2026.noteProducts.length}`
   );
 }
+if (BUSINESS_PLAN_2026.m1.xPosts.length !== 15) {
+  errors.push(
+    `m1.xPosts: expected 15, got ${BUSINESS_PLAN_2026.m1.xPosts.length}`
+  );
+}
+if (BUSINESS_PLAN_2026.m1.noteProducts.length !== 15) {
+  errors.push(
+    `m1.noteProducts: expected 15, got ${BUSINESS_PLAN_2026.m1.noteProducts.length}`
+  );
+}
 
 unique(
   BUSINESS_PLAN_2026.decisions.map((item) => item.chapter),
   'decision.chapter'
+);
+unique(
+  BUSINESS_PLAN_2026.m1.xPosts.map((item) => item.id),
+  'm1.xPost.id'
+);
+unique(
+  BUSINESS_PLAN_2026.m1.xPosts.map((item) => item.contentKey),
+  'm1.xPost.contentKey'
+);
+unique(
+  BUSINESS_PLAN_2026.m1.noteProducts.map((item) => item.articleKey),
+  'm1.noteProduct.articleKey'
+);
+unique(
+  BUSINESS_PLAN_2026.m1.tasks.map((item) => item.id),
+  'm1.task.id'
 );
 unique(
   BUSINESS_PLAN_2026.documents.map((item) => item.id),
@@ -175,6 +201,37 @@ for (const pilot of BUSINESS_PLAN_2026.pilotSpecs) {
     errors.push(`pilot:${pilot.id}: status が不正です`);
   if (pilot.dataRefs.length === 0 || pilot.qualityGates.length === 0)
     errors.push(`pilot:${pilot.id}: dataRefs/qualityGates が空です`);
+}
+const eventIds = new Set(BUSINESS_PLAN_2026.events.map((event) => event.id));
+for (const eventId of BUSINESS_PLAN_2026.m1.eventIds) {
+  if (!eventIds.has(eventId))
+    errors.push(`m1.eventId が未定義です: ${eventId}`);
+}
+for (const task of BUSINESS_PLAN_2026.m1.tasks) {
+  referencedOwners.add(task.owner);
+  if (!BUSINESS_PLAN_WORK_STATUSES.includes(task.status)) {
+    errors.push(`m1.task:${task.id}: status が不正です`);
+  }
+}
+for (const route of BUSINESS_PLAN_2026.m1.routes) {
+  if (!route.path.startsWith('/geo'))
+    errors.push(`m1.route が /geo 配下ではありません: ${route.path}`);
+  if (!BUSINESS_PLAN_WORK_STATUSES.includes(route.status)) {
+    errors.push(`m1.route:${route.path}: status が不正です`);
+  }
+}
+for (const post of BUSINESS_PLAN_2026.m1.xPosts) {
+  if ((post.caption.match(/\{\{url\}\}/g) ?? []).length !== 1) {
+    errors.push(`m1.xPost:${post.id}: {{url}} は1個必要です`);
+  }
+  if (!BUSINESS_PLAN_WORK_STATUSES.includes(post.status)) {
+    errors.push(`m1.xPost:${post.id}: status が不正です`);
+  }
+}
+for (const product of BUSINESS_PLAN_2026.m1.noteProducts) {
+  if (!BUSINESS_PLAN_WORK_STATUSES.includes(product.status)) {
+    errors.push(`m1.noteProduct:${product.id}: status が不正です`);
+  }
 }
 for (const item of [
   ...BUSINESS_PLAN_2026.contentOpportunities,

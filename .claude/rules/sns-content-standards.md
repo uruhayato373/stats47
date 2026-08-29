@@ -351,7 +351,8 @@ https://stats47.jp/ranking/taxable-income-per-capita
 **ローカル統合メディアコンソール** (`npm run admin` → http://127.0.0.1:4747/) で行える
 (skill `.agents/skills/management/admin-console/SKILL.md`、実装 `apps/admin/` — 独立 Next.js App Router アプリ、
 localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装から完全移管、`sns:gallery` alias 廃止)。
-全チャネルの制作・公開状態は `/content`、X / Instagramの投稿操作は `/content/{x,instagram}` または共通 `/sns`、OGP/リンクカード/note カバー・
+全チャネルの制作・公開状態は `/content`、参考文献からサイト・ブログ・note・Kindleへの展開状況は
+`/content/references`、X / Instagramの投稿操作は `/content/{x,instagram}` または共通 `/sns`、OGP/リンクカード/note カバー・
 記事内画像/動画 master は `/assets`、ブログ SVG カタログは `/svg`、**プロジェクト現況 (メトリクス・進捗キュー・
 改善バックログ TODO・STP 戦略) は `/dashboard`** で横断閲覧する
 (画像資産の列挙 collector は CI 静的ギャラリー `build-image-gallery.mjs` と `.claude/scripts/lib/gallery-collectors.mjs` を共用。
@@ -360,7 +361,8 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
 - **ギャラリー経由の投稿も台帳規約は同一**: posts.json への書込は `sns-posts-store.cjs` 経由のみ
   (server も同経路)。§1 の頻度リミットは残枠バッジ + ガードで enforce される
 - **コンテンツ運用画面は派生 read model**: `/content` はposts.json、note git TS catalog + R2本文、Kindle
-  book-catalog/manuscripts + kdp-listingsをライブ突合する。統合用の別SSOTや永続DBを作らない。
+  book-catalog/manuscripts + kdp-listingsをライブ突合する。`/content/references`は解決済み参考文献inventoryを
+  metric / area単位へ重複排除し、各コンテンツSSOTの実在証跡と突合する。統合用の別SSOTや永続DBを作らない。
   `npm run audit:content-operations` をPRでblocking実行し、個別制作物をTODOカードへ複製しない
   (`K-Sx-xx` / `NOTE-ARTICLE-*` / `SNS-POST-*` 等の個別カードは監査error)。backlogには
   システム不具合・自動化・チャネル横断の意思決定だけを置く

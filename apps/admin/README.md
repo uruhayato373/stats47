@@ -1,6 +1,7 @@
 # apps/admin — 統合メディアコンソール (localhost 専用)
 
 stats47 のローカル統合メディアコンソール。X / Instagram / note / Kindle の原稿・公開状態、
+private Google Drive参考文献から既存コンテンツへの展開状況、
 SNS 投稿/予約、画像資産の欠落チェック/再生成、ブログ SVG、調査カタログ、事業方針、プロジェクト現況を横断管理する。
 2026-07-16 に旧 node:http + Vanilla JS 実装 (`.claude/scripts/gallery/`) から**完全移管** (旧実装は削除済み)。
 
@@ -26,6 +27,7 @@ PORT=5000 npm run admin    # ポート上書き
 | `/content/x` `/content/instagram` | 既存SNS投稿機能をチャネル別に初期絞り込みした専用画面 |
 | `/content/note` | note catalog (git TS)・R2本文所在・公開URL・公開準備状態の読み取り専用ミラー |
 | `/content/kindle` | Kindle catalog・manuscript・ローカルEPUB/表紙・KDP listingsの読み取り専用ミラー |
+| `/content/references` | 解決済み参考文献inventoryを既存metric・area・blog・note・Kindleへ突合した制作ポートフォリオ。権利保留・一次資料不明は制作対象外 |
 | `/sns` | 投稿台帳 (X/IG と YouTube 過去実績/pilot 記録)・素材再生・caption 編集・投稿/予約・残枠・IG 整合性警告。YouTube 投稿は Studio の人間工程 |
 | `/assets` | 画像/動画資産 11 タブ・欠落チェック (HEAD probe)・再生成 (whitelist 5 タブのみ) |
 | `/svg` | ブログ SVG 分類カタログ (手動ロード・10 分キャッシュ) |
@@ -57,6 +59,7 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 | SNS 投稿台帳 | `.claude/state/sns/posts.json` | **書込は `sns-posts-store.cjs` 経由のみ** (`lib/server/posts-store.ts` が createRequire でランタイムロード — webpack バンドル禁止: .cjs は `__dirname` 相対でパス解決するため) |
 | note編集メタ / 本文 | `.claude/scripts/note/catalog/` (git TS) / R2 `note/<vertical>/<slug>/` | `/content/note` は正規化表示のみ。`note-published-urls.json` は派生で手編集しない |
 | Kindle設計 / 原稿 / 出品 | `book-catalog.ts` / `manuscripts/<id>/` / `.claude/config/kdp-listings.json` | `/content/kindle` は突合表示のみ。EPUB/表紙は `.local` で存在確認 |
+| 参考文献展開 | `.claude/state/source-inventory/` + 既存コンテンツSSOT + `docs/{21_ブログ記事原稿,31_note記事原稿}/` | `/content/references` は実行時に重複排除して公開済み・制作中を突合。原本・OCR・crop・Drive IDは読まない |
 | IG 予約 | `.claude/state/instagram-w*-schedule.json` | schedule JSON + posts.json の**二重書込を同一処理で** |
 | ローカル素材 | `.local/r2/sns` / `.local/ogp-pilot` | `/media` `/pilot` で配信 (読み取り) |
 | X 成功時刻 | `.local/sns-gallery-state.json` | 7 日ガードの判定源 |
@@ -82,7 +85,7 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 ```bash
 npm run type-check --workspace=apps/admin
 npm run test --workspace=apps/admin        # Vitest unit + integration (実 SSOT に触れない fixture 方式)
-npm run audit:content-operations           # SNS / note / Kindle のSSOT横断監査 (errorで失敗)
+npm run audit:content-operations           # SNS / note / Kindle / 参考文献展開のSSOT横断監査 (errorで失敗)
 npm run build --workspace=apps/admin
 cd apps/admin && npx playwright test       # E2E (dev server を PORT=47470 で自動起動、破壊的操作は mock)
 ```

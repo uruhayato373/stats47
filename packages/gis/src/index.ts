@@ -25,3 +25,11 @@ export type {
   TopoJSONGeometryCollection,
   TopoJSONGeometry,
 } from "@stats47/types";
+
+export type {
+  GeoAnalysisMetricDefinition,
+  GeoAnalysisSnapshot,
+  GeoAnalysisSnapshotRow,
+  GeoAnalysisSource,
+  GeoAnalysisValueFormat,
+} from "./geo-analysis/snapshot";

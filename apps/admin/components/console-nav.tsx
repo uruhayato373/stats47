@@ -14,6 +14,7 @@ const NAV_GROUPS: readonly NavGroup[] = [
       { href: "/content/instagram", label: "Instagram" },
       { href: "/content/note", label: "note" },
       { href: "/content/kindle", label: "Kindle" },
+      { href: "/content/references", label: "参考文献展開" },
       { href: "/sns", label: "SNS" },
       { href: "/buzz-map", label: "バズ地図" },
     ],

@@ -268,7 +268,9 @@ new_post_cover_title(){
   echo "  cover+title set: $TITLE"
 }
 new_post_tags(){
-  # remove stray numeric chips, then add given tags one-by-one
+  # remove stray numeric chips, then add given tags one-by-one.
+  # note が受理しないタグ (例: ハイフンを含む #e-Stat) は入力欄に残る。
+  # 毎回 input を空にしてから入力し、未確定値も次のタグへ持ち越さない。
   BU state 2>&1 > /tmp/ns.txt
   for d in $(grep -B1 'aria-label=削除' /tmp/ns.txt | grep -oE '\[[0-9]+\]<span role=img aria-label=削除' | grep -oE '[0-9]+'); do :; done
   # delete chips that look like #<number>
@@ -282,13 +284,16 @@ new_post_tags(){
     BU click "$DELIDX" >/dev/null 2>&1; sleep 0.7
     guard=$((guard+1)); [ "$guard" -gt 6 ] && break
   done
-  local IDX=$(grep -oE "\[[0-9]+\]<input placeholder=ハッシュタグを追加する" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  local added=0 skipped=0
   for tag in $1; do
-    BU click "$IDX" >/dev/null 2>&1; sleep 0.4
-    BU type "$tag" >/dev/null 2>&1; sleep 0.6
-    BU keys Enter >/dev/null 2>&1; sleep 0.9
+    BU eval "(()=>{const i=document.querySelector('input[placeholder=\"ハッシュタグを追加する\"]');if(!i)return 'not-found';const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'');i.dispatchEvent(new Event('input',{bubbles:true}));i.focus();return 'ready'})()" >/dev/null 2>&1
+    BU type "$tag" >/dev/null 2>&1; sleep 0.35
+    BU keys Enter >/dev/null 2>&1; sleep 0.55
+    local LEFT
+    LEFT=$(BU eval "(()=>{const i=document.querySelector('input[placeholder=\"ハッシュタグを追加する\"]');if(!i)return 'missing';const v=i.value;if(v){const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'');i.dispatchEvent(new Event('input',{bubbles:true}));}return v})()" 2>&1 | sed -n 's/^result: //p' | head -1)
+    if [ -n "$LEFT" ]; then skipped=$((skipped+1)); else added=$((added+1)); fi
   done
-  echo "  tags added"
+  echo "  tags added=$added skipped=$skipped"
 }
 new_post_magazine(){
   local MAG="$1"
