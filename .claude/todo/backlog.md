@@ -27,7 +27,10 @@ updated: 2026-08-29
 
 - **program owner**: `open-data-curator`。工程ownerは
   `docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md` §9。
-- **再開ポインタ**: `lastCompleted=WP3-resolution-inventory` / `nextWorkPackage=WP4-release-and-publishing-selection`。
+- **再開ポインタ**: `lastCompleted=WP3-resolution-inventory+WP4-production-portfolio` /
+  `nextWorkPackage=WP4-channel-production`。管理コンソール`/content/references`が全資料を実在SSOTへ突合し、
+  重複排除した制作単位とチャネル別の統合済み・制作可能・停止を派生表示する。最新件数は同画面と
+  `npm run audit:content-operations`だけを正典とし、個別制作物の別TODOは作らない。
 - **現状証拠**: private bundle 6 parts / 480,666,655 bytesを照合・復元し、1,746 files、bundle SHA
   `a14a45e9d6bdd29e49de0786bdb88f1080ffcff1c5cae739b62a1b2e881de02f`を再現。p.26–529の504ページは
   欠番・重複0、実見出し904、候補1,429（table 769 / figure 202 / text-stat 458）。索引・出典注記に加えて

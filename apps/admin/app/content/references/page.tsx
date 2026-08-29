@@ -1,0 +1,217 @@
+import {
+  FilterLink,
+  ReferenceStageBadge,
+} from "@/components/content/content-ui";
+import {
+  ErrorNote,
+  PageHeading,
+  Section,
+  Stat,
+  Table,
+  Td,
+  Tr,
+} from "@/components/ops/primitives";
+import type {
+  ReferenceProductionChannelDTO,
+  ReferenceProductionKindDTO,
+  ReferenceProductionStageDTO,
+} from "@/lib/contracts/types";
+import { contentOperations } from "@/lib/server/content-operations";
+import { hasError } from "@/lib/server/state-io";
+
+export const dynamic = "force-dynamic";
+export const metadata = { title: "参考文献展開 — stats47 admin" };
+
+type Query = { kind?: string; stage?: string; channel?: string; q?: string; page?: string };
+const KINDS: ReferenceProductionKindDTO[] = ["metric", "area"];
+const STAGES: ReferenceProductionStageDTO[] = ["draft", "ready", "integrated", "blocked"];
+const CHANNELS: ReferenceProductionChannelDTO[] = ["site", "blog", "note", "kindle"];
+const CHANNEL_LABEL: Record<ReferenceProductionChannelDTO, string> = {
+  site: "サイト",
+  blog: "ブログ",
+  note: "note",
+  kindle: "Kindle",
+};
+
+function href(query: Query, patch: Partial<Query>) {
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries({ ...query, ...patch })) {
+    if (value) params.set(key, value);
+  }
+  const text = params.toString();
+  return text ? `/content/references?${text}` : "/content/references";
+}
+
+export default async function ReferenceContentPage({
+  searchParams,
+}: {
+  searchParams: Promise<Query>;
+}) {
+  const data = contentOperations();
+  const query = await searchParams;
+  if (hasError(data)) {
+    return (
+      <div className="space-y-4">
+        <PageHeading title="参考文献展開" source="source inventory + 各コンテンツSSOT" />
+        <ErrorNote error={data.error} />
+      </div>
+    );
+  }
+  const portfolio = data.references;
+  const kind = KINDS.includes(query.kind as ReferenceProductionKindDTO)
+    ? (query.kind as ReferenceProductionKindDTO)
+    : undefined;
+  const stage = STAGES.includes(query.stage as ReferenceProductionStageDTO)
+    ? (query.stage as ReferenceProductionStageDTO)
+    : undefined;
+  const channel = CHANNELS.includes(query.channel as ReferenceProductionChannelDTO)
+    ? (query.channel as ReferenceProductionChannelDTO)
+    : undefined;
+  const word = query.q?.trim().toLowerCase() ?? "";
+  const units = portfolio.units.filter((unit) => {
+    const selectedCoverage = channel
+      ? unit.channels.filter((entry) => entry.channel === channel)
+      : unit.channels;
+    return (
+      (!kind || unit.kind === kind) &&
+      (!stage || selectedCoverage.some((entry) => entry.stage === stage)) &&
+      (!word || `${unit.id} ${unit.label} ${unit.sourceKeys.join(" ")}`.toLowerCase().includes(word))
+    );
+  });
+  const pageSize = 20;
+  const pageCount = Math.max(1, Math.ceil(units.length / pageSize));
+  const requestedPage = Number.parseInt(query.page ?? "1", 10);
+  const currentPage = Number.isFinite(requestedPage)
+    ? Math.min(Math.max(requestedPage, 1), pageCount)
+    : 1;
+  const visibleUnits = units.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+  return (
+    <div className="space-y-8">
+      <PageHeading
+        title="参考文献展開"
+        source=".claude/state/source-inventory/ + metric / area / blog / note / Kindle SSOT"
+      >
+        <p className="text-xs text-console-muted">
+          原本・OCR・cropはprivate Google Driveのまま保持し、一次資料へ接続できた制作単位だけを表示します。
+          文脈候補は独立コンテンツへ水増しせず、権利保留と一次資料不明は制作キューへ入りません。
+        </p>
+      </PageHeading>
+
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-6">
+        <Stat label="参考文献候補" value={portfolio.summary.sourceItems} />
+        <Stat label="制作単位" value={portfolio.summary.productionUnits} tone="info" />
+        <Stat label="統合済み枠" value={portfolio.summary.integratedSlots} tone="good" />
+        <Stat label="制作中枠" value={portfolio.summary.draftSlots} tone="warn" />
+        <Stat label="制作可能枠" value={portfolio.summary.readySlots} tone="info" />
+        <Stat label="公開不可候補" value={portfolio.summary.blockedEvidence} tone="warn" />
+      </div>
+
+      <Section title="資料別の解決状況" count={portfolio.sources.length}>
+        <Table columns={["資料", "全候補", "制作根拠", "文脈", "停止", "対象外"]}>
+          {portfolio.sources.map((source) => (
+            <Tr key={`${source.sourceKey}-${source.edition}`}>
+              <Td>
+                <div className="font-medium">{source.sourceKey}</div>
+                <div className="font-mono text-[10px] text-console-muted">{source.edition}</div>
+              </Td>
+              <Td nowrap>{source.itemCount}</Td>
+              <Td nowrap>{source.productionEvidence}</Td>
+              <Td nowrap>{source.contextEvidence}</Td>
+              <Td nowrap>{source.blockedEvidence}</Td>
+              <Td nowrap>{source.notApplicable}</Td>
+            </Tr>
+          ))}
+        </Table>
+      </Section>
+
+      <div className="space-y-2">
+        <div className="flex flex-wrap gap-2">
+          <FilterLink href={href(query, { stage: undefined, page: undefined })} active={!stage}>全状態</FilterLink>
+          {STAGES.map((value) => (
+            <FilterLink key={value} href={href(query, { stage: value, page: undefined })} active={stage === value}>
+              {value}
+            </FilterLink>
+          ))}
+        </div>
+        <form className="flex flex-wrap gap-2" action="/content/references">
+          {stage ? <input type="hidden" name="stage" value={stage} /> : null}
+          <select name="kind" defaultValue={kind} aria-label="制作単位" className="h-8 rounded-md border border-console-border bg-console-card px-2 text-xs text-console-fg">
+            <option value="">全制作単位</option>
+            <option value="metric">指標</option>
+            <option value="area">地域</option>
+          </select>
+          <select name="channel" defaultValue={channel} aria-label="チャネル" className="h-8 rounded-md border border-console-border bg-console-card px-2 text-xs text-console-fg">
+            <option value="">全チャネル</option>
+            {CHANNELS.map((value) => <option key={value} value={value}>{CHANNEL_LABEL[value]}</option>)}
+          </select>
+          <input name="q" defaultValue={query.q} aria-label="制作単位を検索" placeholder="指標・地域・source key" className="h-8 w-56 rounded-md border border-console-border bg-console-card px-2 text-xs text-console-fg" />
+          <button className="rounded-md border border-console-border px-3 text-xs text-console-muted">絞り込む</button>
+        </form>
+      </div>
+
+      <Section title="制作ポートフォリオ" count={`${visibleUnits.length}/${units.length}`}>
+        <Table columns={["制作単位", "根拠", "サイト", "ブログ", "note", "Kindle", "次の作業"]}>
+          {visibleUnits.map((unit) => (
+            <Tr key={unit.id}>
+              <Td>
+                <div className="font-medium">{unit.label}</div>
+                <div className="font-mono text-[10px] text-console-muted">{unit.id}</div>
+              </Td>
+              <Td muted>
+                <div>{unit.sourceKeys.join(" / ")} · {unit.evidenceCount}件</div>
+                {unit.primarySourceUrls[0] ? (
+                  <a href={unit.primarySourceUrls[0]} target="_blank" rel="noreferrer" className="text-console-accent hover:underline">一次資料</a>
+                ) : null}
+              </Td>
+              {CHANNELS.map((value) => {
+                const coverage = unit.channels.find((entry) => entry.channel === value)!;
+                return (
+                  <Td key={value} nowrap>
+                    <ReferenceStageBadge stage={coverage.stage} />
+                    {coverage.itemIds.length > 0 ? (
+                      <div className="mt-1 max-w-36 whitespace-normal font-mono text-[9px] text-console-muted">
+                        {coverage.itemIds.slice(0, 3).join(" / ")}
+                        {coverage.itemIds.length > 3 ? ` +${coverage.itemIds.length - 3}` : ""}
+                      </div>
+                    ) : null}
+                  </Td>
+                );
+              })}
+              <Td>{unit.nextAction}</Td>
+            </Tr>
+          ))}
+        </Table>
+        {pageCount > 1 ? (
+          <div className="flex items-center justify-end gap-2 text-xs text-console-muted">
+            {currentPage > 1 ? (
+              <FilterLink href={href(query, { page: String(currentPage - 1) })} active={false}>前へ</FilterLink>
+            ) : null}
+            <span>{currentPage} / {pageCount}ページ</span>
+            {currentPage < pageCount ? (
+              <FilterLink href={href(query, { page: String(currentPage + 1) })} active={false}>次へ</FilterLink>
+            ) : null}
+          </div>
+        ) : null}
+      </Section>
+
+      <Section title="機械監査">
+        <div className="rounded-md border border-console-border bg-console-card p-3 text-xs text-console-muted">
+          <div className="font-semibold text-console-fg">{portfolio.audit.status.toUpperCase()}</div>
+          {portfolio.audit.findings.length === 0 ? (
+            <p className="mt-1">inventoryと既存SSOTの接続不整合はありません。</p>
+          ) : (
+            <ul className="mt-2 space-y-1">
+              {portfolio.audit.findings.map((finding) => (
+                <li key={`${finding.code}-${finding.itemId ?? "all"}`}>
+                  {finding.severity.toUpperCase()} {finding.code}
+                  {finding.itemId ? `/${finding.itemId}` : ""}: {finding.message}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </Section>
+    </div>
+  );
+}

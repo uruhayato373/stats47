@@ -119,6 +119,16 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
 - crop specは`internalUseOnly:true`、`publicOriginalReuse:"forbidden"`、出典ページ、用途、
   `primarySourceRequired:true`を必須とし、欠ける場合は共通CLIが停止する。
 - 利用実装仕様書の更新は設計判断が変わった時だけ行い、実行履歴は backlog / state / 既存運用台帳へ置く。
+- コンテンツ展開の進捗は管理コンソール`/content/references`で確認する。同画面は解決済みinventoryを
+  metric / area単位へ重複排除し、既存のblog / note / Kindle SSOTと実行時に突合する派生read modelである。
+  手編集の別台帳、資料候補1件ごとのTODO、Drive IDの保存を禁止する。
+- `context-only`は既存記事の分析文脈にだけ使い、単独の制作単位へ昇格しない。`rights-hold`、
+  `primary-source-unavailable`、`not-applicable`は制作キューへ入れない。metricまたはareaへの公開可能な接続を持つ
+  `reuse-existing-metric`、`new-metric`、`combined-analysis`だけを制作単位にする。
+- 制作状況は各チャネルSSOTの実在証跡で判定する。サイトはactive metricまたはarea editorial、ブログは公開記事内の
+  `/ranking/<key>`接続、noteはcatalogの`stats47Targets`、Kindleはbook catalogの`rankingKeys`または`blogSlug`を使う。
+  制作中はブログ`docs/21_ブログ記事原稿/`、note`docs/31_note記事原稿/`、Kindle catalogのstatusを読む。
+  推測による「制作中」「制作済み」判定は禁止する。
 
 ## 6. 関連
 

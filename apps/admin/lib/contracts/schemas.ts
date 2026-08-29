@@ -167,6 +167,48 @@ export const ContentNoteDraftIndex = z.object({
   ),
 });
 
+export const ContentReferenceInventory = z.object({
+  sourceKey: z.string(),
+  edition: z.string(),
+  items: z.array(
+    z
+      .object({
+        id: z.string(),
+        resolution: z.string(),
+        primarySource: z
+          .object({ url: z.string().optional() })
+          .passthrough()
+          .optional(),
+        mapping: z
+          .object({
+            metricKeys: z.array(z.string()).optional(),
+            areaCodes: z.array(z.string()).optional(),
+            contentRoles: z.array(z.string()).optional(),
+          })
+          .passthrough()
+          .optional(),
+      })
+      .passthrough(),
+  ),
+});
+
+export const ContentBlogIndex = z.object({
+  articles: z.array(
+    z
+      .object({
+        slug: z.string(),
+        title: z.string(),
+        filePath: z.string(),
+        published: z.boolean(),
+      })
+      .passthrough(),
+  ),
+});
+
+export const ContentPrefectures = z.array(
+  z.object({ prefCode: z.string(), prefName: z.string() }).passthrough(),
+);
+
 /**
  * query の limit パース (非負有限整数のみ。NaN/Infinity/負 → 不正)。
  * 返り値: 有効なら number、指定なしなら null、不正なら "invalid"。

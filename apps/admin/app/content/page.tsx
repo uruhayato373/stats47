@@ -2,7 +2,7 @@ import {
   ContentAuditPanel,
   StageBadge,
 } from "@/components/content/content-ui";
-import { ErrorNote, PageHeading, Section } from "@/components/ops/primitives";
+import { ErrorNote, PageHeading, Section, Stat } from "@/components/ops/primitives";
 import { contentOperations } from "@/lib/server/content-operations";
 import { hasError } from "@/lib/server/state-io";
 
@@ -60,6 +60,32 @@ export default function ContentPage() {
             </a>
           ))}
         </div>
+      </Section>
+
+      <Section title="参考文献からの展開">
+        <a
+          href="/content/references"
+          className="block rounded-md border border-console-border bg-console-card p-4 transition-colors hover:border-console-accent/60"
+        >
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h2 className="font-semibold text-console-fg">参考文献 制作ポートフォリオ</h2>
+              <p className="mt-1 text-xs text-console-muted">
+                Drive原本を複製せず、解決済みinventoryを既存のサイト・ブログ・note・Kindleへ突合します。
+              </p>
+            </div>
+            <span className="font-mono text-xl font-bold text-console-fg">
+              {data.references.summary.productionUnits}単位
+            </span>
+          </div>
+          <div className="mt-4 grid gap-2 sm:grid-cols-5">
+            <Stat label="統合済み" value={data.references.summary.integratedSlots} tone="good" />
+            <Stat label="制作中" value={data.references.summary.draftSlots} tone="warn" />
+            <Stat label="制作可能" value={data.references.summary.readySlots} tone="info" />
+            <Stat label="制作停止" value={data.references.summary.blockedSlots} tone="bad" />
+            <Stat label="公開不可の根拠候補" value={data.references.summary.blockedEvidence} tone="warn" />
+          </div>
+        </a>
       </Section>
 
       <Section title="判断待ち" count={data.decisions.filter((x) => x.status === "pending").length}>

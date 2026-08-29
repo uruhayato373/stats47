@@ -6,7 +6,9 @@ import type {
   ContentStageDTO,
   KindleContentDTO,
   NoteContentDTO,
+  ReferenceContentPortfolioDTO,
 } from "../contracts/types";
+import { buildReferenceContentPortfolio } from "./reference";
 
 export interface SourceSocialPost {
   platform: string;
@@ -66,6 +68,7 @@ export interface ContentOperationsInput {
     resumeCondition: string;
     source: string;
   };
+  references?: ReferenceContentPortfolioDTO;
 }
 
 const LABELS: Record<ContentChannelDTO, string> = {
@@ -395,5 +398,15 @@ export function buildContentOperations(
       };
       return stageOrder[a.stage] - stageOrder[b.stage] || a.title.localeCompare(b.title, "ja");
     }),
+    references:
+      input.references ??
+      buildReferenceContentPortfolio({
+        inventories: [],
+        metrics: [],
+        blogs: [],
+        notes: [],
+        kindleBooks: [],
+        areas: [],
+      }),
   };
 }

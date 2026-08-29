@@ -278,6 +278,77 @@ export interface NoteContentDTO {
   sourcePaths: string[];
 }
 
+export type ReferenceProductionKindDTO = "metric" | "area";
+export type ReferenceProductionChannelDTO = "site" | "blog" | "note" | "kindle";
+export type ReferenceProductionStageDTO =
+  | "integrated"
+  | "draft"
+  | "ready"
+  | "blocked"
+  | "not-applicable";
+
+export interface ReferenceChannelCoverageDTO {
+  channel: ReferenceProductionChannelDTO;
+  stage: ReferenceProductionStageDTO;
+  itemIds: string[];
+  detail: string;
+}
+
+export interface ReferenceProductionUnitDTO {
+  id: string;
+  kind: ReferenceProductionKindDTO;
+  label: string;
+  sourceKeys: string[];
+  evidenceCount: number;
+  primarySourceUrls: string[];
+  roles: string[];
+  channels: ReferenceChannelCoverageDTO[];
+  nextAction: string;
+  sourcePaths: string[];
+}
+
+export interface ReferenceSourceSummaryDTO {
+  sourceKey: string;
+  edition: string;
+  itemCount: number;
+  productionEvidence: number;
+  contextEvidence: number;
+  blockedEvidence: number;
+  notApplicable: number;
+  byResolution: Record<string, number>;
+  sourcePath: string;
+}
+
+export interface ReferenceContentPortfolioDTO {
+  summary: {
+    sourceItems: number;
+    productionEvidence: number;
+    contextEvidence: number;
+    blockedEvidence: number;
+    notApplicable: number;
+    productionUnits: number;
+    integratedSlots: number;
+    draftSlots: number;
+    readySlots: number;
+    blockedSlots: number;
+    byChannel: Record<
+      ReferenceProductionChannelDTO,
+      Record<ReferenceProductionStageDTO, number>
+    >;
+  };
+  audit: {
+    status: "pass" | "warn" | "fail";
+    findings: Array<{
+      severity: "error" | "warning";
+      code: string;
+      itemId: string | null;
+      message: string;
+    }>;
+  };
+  sources: ReferenceSourceSummaryDTO[];
+  units: ReferenceProductionUnitDTO[];
+}
+
 export interface ContentOperationsResponse {
   generatedAt: string;
   decisions: Array<{
@@ -297,6 +368,7 @@ export interface ContentOperationsResponse {
   channels: ContentChannelSummaryDTO[];
   kindle: KindleContentDTO[];
   note: NoteContentDTO[];
+  references: ReferenceContentPortfolioDTO;
 }
 
 // ─── buzz-map (gallery /buzz-map) ─────────────────────
