@@ -126,6 +126,7 @@ describe('reference content portfolio', () => {
       ['kindle', 'integrated'],
     ]);
     expect(metric.channels).toHaveLength(12);
+    expect(metric.nextAction).toBe('note記事を需要の高い順に制作へ送る');
     expect(result.contextGroups).toEqual([
       expect.objectContaining({
         sourceKey: 'book-a',

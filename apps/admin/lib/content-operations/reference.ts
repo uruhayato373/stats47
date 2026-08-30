@@ -125,6 +125,24 @@ export const REFERENCE_PRODUCTION_CHANNELS = [
   'x',
 ] as const satisfies readonly ReferenceProductionChannelDTO[];
 
+export const REFERENCE_PRODUCTION_CHANNEL_LABELS: Record<
+  ReferenceProductionChannelDTO,
+  string
+> = {
+  ranking: 'ランキング',
+  survey: '統計調査',
+  theme: 'テーマページ',
+  area: '都道府県ページ',
+  japan: '日本全体ページ',
+  world: '世界比較',
+  blog: 'ブログ記事',
+  note: 'note記事',
+  kindle: 'Kindle書籍',
+  youtube: 'YouTube動画',
+  instagram: 'Instagram投稿',
+  x: 'X投稿',
+};
+
 const STAGES: ReferenceProductionStageDTO[] = [
   'integrated',
   'draft',
@@ -179,11 +197,11 @@ function sourceSummary(inventory: SourceEvidenceInventory) {
 function nextAction(channels: ReferenceChannelCoverageDTO[]): string {
   const drafts = channels.filter((channel) => channel.stage === 'draft');
   if (drafts.length > 0) {
-    return `${drafts.map((channel) => channel.channel).join(' / ')} の下書きを品質ゲートまで進める`;
+    return `${drafts.map((channel) => REFERENCE_PRODUCTION_CHANNEL_LABELS[channel.channel]).join('・')}の下書きを品質確認まで進める`;
   }
   const ready = channels.filter((channel) => channel.stage === 'ready');
   if (ready.length > 0) {
-    return `${ready.map((channel) => channel.channel).join(' / ')} を需要順に既存制作フローへ送る`;
+    return `${ready.map((channel) => REFERENCE_PRODUCTION_CHANNEL_LABELS[channel.channel]).join('・')}を需要の高い順に制作へ送る`;
   }
   if (channels.some((channel) => channel.stage === 'blocked')) {
     return '停止理由を解消するまで公開しない';
@@ -294,7 +312,7 @@ function buildContextGroups(
         targetPaths,
         stage,
         detail: internalIntegrated
-          ? '公式仕様で再確認し、既存の内部SSOTへ統合済み'
+          ? '公式仕様で再確認し、既存の管理台帳へ反映済み'
           : targetPaths.length > 0
             ? '独立記事にはせず、対象面の定義・FAQ・考察・出典補強にだけ利用'
             : '具体的な既存接続先が確定するまで利用停止',
@@ -345,7 +363,7 @@ export function buildReferenceContentPortfolio(
         severity: 'error',
         code: 'REFERENCE_INVENTORY_MISSING',
         itemId: sourceKey,
-        message: '登録済み参考文献の解決済みinventoryがありません',
+        message: '登録済み参考文献の解決済み台帳がありません',
       });
     }
   }
@@ -372,7 +390,7 @@ export function buildReferenceContentPortfolio(
         severity: 'error',
         code: 'REFERENCE_CONTEXT_SOURCE_MISSING',
         itemId: item.id,
-        message: `${inventory.sourceKey}のcontext-onlyに一次資料URLがありません`,
+        message: `${inventory.sourceKey}の補強専用資料に一次資料へのリンクがありません`,
       });
     }
   }
@@ -395,14 +413,14 @@ export function buildReferenceContentPortfolio(
         severity: 'error',
         code: 'REFERENCE_METRIC_MISSING',
         itemId: key,
-        message: '参考文献から接続されたmetricがgit TSに存在しません',
+        message: '参考文献から接続された指標が指標管理台帳に存在しません',
       });
     } else if (!metric.active) {
       findings.push({
         severity: 'warning',
         code: 'REFERENCE_METRIC_INACTIVE',
         itemId: key,
-        message: '参考文献から接続されたmetricが非公開です',
+        message: '参考文献から接続された指標が非公開です',
       });
     }
 
@@ -423,7 +441,7 @@ export function buildReferenceContentPortfolio(
         severity: 'error',
         code: 'REFERENCE_SURVEY_MISSING',
         itemId: key,
-        message: `surveys.jsonに存在しない調査ID: ${missingSurveyIds.join(' / ')}`,
+        message: `統計調査管理台帳に存在しない調査IDがあります: ${missingSurveyIds.join(' / ')}`,
       });
     }
 
@@ -487,18 +505,18 @@ export function buildReferenceContentPortfolio(
             siteReady ? 'integrated' : 'blocked',
             metric ? [key] : [],
             siteReady
-              ? '既存ranking metricへ統合済み'
-              : '公開中のmetricが無いため停止'
+              ? '既存のランキング指標へ反映済み'
+              : '公開中の指標が無いため停止'
           )
-        : coverage('ranking', 'not-applicable', [], '都道府県ranking対象外'),
+        : coverage('ranking', 'not-applicable', [], '都道府県ランキング対象外'),
       surveyIds.length > 0
         ? coverage(
             'survey',
             missingSurveyIds.length === 0 ? 'integrated' : 'blocked',
             surveyIds,
             missingSurveyIds.length === 0
-              ? '登録済み統計調査へlineage接続済み'
-              : '統計調査マスタとの接続が未解決'
+              ? '登録済みの統計調査へ出典関係を接続済み'
+              : '統計調査管理台帳との接続が未解決'
           )
         : coverage('survey', 'not-applicable', [], '確定した統計調査IDなし'),
       roles.includes('theme')
@@ -513,12 +531,12 @@ export function buildReferenceContentPortfolio(
                 ? [themePlan.target]
                 : [],
             themeHits.length > 0
-              ? 'ThemeCatalogへ統合済み'
+              ? 'テーマ管理台帳へ反映済み'
               : themePlan
                 ? `テーマ企画を${themePlan.status === 'draft' ? '下書き保存済み' : '停止理由付きで保存済み'}`
                 : siteReady
-                  ? '既存ThemeCatalogへの採択判断が可能'
-                  : '公開中のmetricが無いため停止'
+                  ? '既存テーマへの採択判断が可能'
+                  : '公開中の指標が無いため停止'
           )
         : coverage('theme', 'not-applicable', [], 'テーマ展開対象外'),
       roles.includes('area')
@@ -527,8 +545,8 @@ export function buildReferenceContentPortfolio(
             siteReady ? 'ready' : 'blocked',
             siteReady ? [key] : [],
             siteReady
-              ? `${metric?.title ?? key}を県の優劣へ短絡せず、地域条件と既存指標で解釈するarea企画`
-              : '公開中のmetricが無いため停止'
+              ? `${metric?.title ?? key}を県の優劣へ短絡せず、地域条件と既存指標で解釈する都道府県ページ企画`
+              : '公開中の指標が無いため停止'
           )
         : coverage('area', 'not-applicable', [], '地域別解説対象外'),
       roles.includes('japan')
@@ -544,7 +562,7 @@ export function buildReferenceContentPortfolio(
               ? '日本全国時系列カタログへ統合済み'
               : siteReady
                 ? `${metric?.title ?? key}を都道府県順位と混在させず、全国時系列として検証する企画`
-                : '公開中のmetricが無いため停止'
+                : '公開中の指標が無いため停止'
           )
         : coverage('japan', 'not-applicable', [], '日本全国時系列対象外'),
       geoScopes.includes('world')
@@ -571,7 +589,7 @@ export function buildReferenceContentPortfolio(
             blogHits.length > 0
               ? 'ランキングへの内部リンクを持つ公開記事あり'
               : blogDrafts.length > 0
-                ? 'ランキングへの内部リンクを持つローカル下書きあり'
+                ? 'ランキングへの内部リンクを持つ非公開下書きあり'
                 : (blogMedia?.detail ??
                   `${metric?.title ?? key}の地域差を、定義・年度・関連指標をそろえて検証する記事企画`)
           )
@@ -592,14 +610,19 @@ export function buildReferenceContentPortfolio(
               ...(noteMedia?.itemIds ?? []),
             ],
             noteHits.length > 0
-              ? 'stats47送客先を持つnote記事あり'
+              ? 'stats47への案内先を持つnote記事あり'
               : noteDrafts.length > 0
-                ? 'stats47送客先を持つnote下書きあり'
+                ? 'stats47への案内先を持つnote下書きあり'
                 : (noteBlocker?.message ??
                   noteMedia?.detail ??
                   'note専用構成を制作可能')
           )
-        : coverage('note', 'not-applicable', [], 'inventory上のnote展開対象外'),
+        : coverage(
+            'note',
+            'not-applicable',
+            [],
+            '参考文献台帳上のnote展開対象外'
+          ),
       kindleHits.length > 0
         ? coverage(
             'kindle',
@@ -623,13 +646,13 @@ export function buildReferenceContentPortfolio(
               'youtube',
               'blocked',
               [],
-              'YouTube pilotの採択枠が無いため停止'
+              'YouTube試行企画の採択枠が無いため停止'
             )
           : coverage(
               'youtube',
               'not-applicable',
               [],
-              '通常動画マスター未採択'
+              '基礎となる通常動画が未採択'
             )),
       instagram ??
         (roles.includes('instagram')
@@ -637,18 +660,23 @@ export function buildReferenceContentPortfolio(
               'instagram',
               'blocked',
               [],
-              '通常動画マスター確定前は派生しない'
+              '基礎となる通常動画の確定前は派生しない'
             )
           : coverage(
               'instagram',
               'not-applicable',
               [],
-              'マスターコンテンツ未採択'
+              '基礎コンテンツが未採択'
             )),
       x ??
         (roles.includes('x')
-          ? coverage('x', 'blocked', [], '通常動画マスター確定前は派生しない')
-          : coverage('x', 'not-applicable', [], 'マスターコンテンツ未採択')),
+          ? coverage(
+              'x',
+              'blocked',
+              [],
+              '基礎となる通常動画の確定前は派生しない'
+            )
+          : coverage('x', 'not-applicable', [], '基礎コンテンツが未採択')),
     ];
 
     units.push({
@@ -689,7 +717,8 @@ export function buildReferenceContentPortfolio(
         severity: 'error',
         code: 'REFERENCE_AREA_EDITORIAL_MISSING',
         itemId: code,
-        message: '公式自治体資料へ接続された地域のarea editorialがありません',
+        message:
+          '公式自治体資料へ接続された地域に、都道府県ページの編集内容がありません',
       });
     }
     const channels = REFERENCE_PRODUCTION_CHANNELS.map((channel) =>
@@ -700,13 +729,13 @@ export function buildReferenceContentPortfolio(
             area?.editorialPath ? [code] : [],
             area?.editorialPath
               ? '県データブックの編集コンテンツへ統合済み'
-              : 'area editorialが無いため停止'
+              : '都道府県ページの編集内容が無いため確認待ち'
           )
         : coverage(
             channel,
             'not-applicable',
             [],
-            '自治体資料はareaページへ集約し、別チャネルへ重複展開しない'
+            '自治体資料は都道府県ページへ集約し、別の展開先へ重複して掲載しない'
           )
     );
     units.push({

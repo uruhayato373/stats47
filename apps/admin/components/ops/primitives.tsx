@@ -26,16 +26,18 @@ export function PageHeading({
 }
 
 export function Section({
+  id,
   title,
   count,
   children,
 }: {
+  id?: string;
   title: string;
   count?: number | string;
   children: ReactNode;
 }) {
   return (
-    <section className="space-y-2">
+    <section id={id} className="scroll-mt-6 space-y-2">
       <h2 className="text-sm font-bold text-console-fg">
         {title}
         {count !== undefined ? (

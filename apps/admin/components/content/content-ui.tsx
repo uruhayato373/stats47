@@ -28,11 +28,14 @@ export function StageBadge({ stage }: { stage: ContentStageDTO }) {
   return <Badge tone={tone}>{STAGE_LABEL[stage]}</Badge>;
 }
 
-const REFERENCE_STAGE_LABEL: Record<ReferenceProductionStageDTO, string> = {
-  integrated: '統合済み',
+export const REFERENCE_STAGE_LABELS: Record<
+  ReferenceProductionStageDTO,
+  string
+> = {
+  integrated: '反映済み',
   draft: '制作中',
-  ready: '企画済み',
-  blocked: '停止',
+  ready: '制作可能',
+  blocked: '確認待ち',
   'not-applicable': '対象外',
 };
 
@@ -51,7 +54,7 @@ export function ReferenceStageBadge({
           : stage === 'blocked'
             ? 'bad'
             : 'neutral';
-  return <Badge tone={tone}>{REFERENCE_STAGE_LABEL[stage]}</Badge>;
+  return <Badge tone={tone}>{REFERENCE_STAGE_LABELS[stage]}</Badge>;
 }
 
 export function ContentAuditPanel({
