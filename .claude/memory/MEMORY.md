@@ -1,5 +1,6 @@
 # Memory Index
 
+- [feedback_geo_mesh_evidence_integrity.md](feedback_geo_mesh_evidence_integrity.md) — Geo途中地図はメッシュコード境界・判定へ寄与する点・丸め前保存則で検証。都道府県bbox/表示値だけでは離島と境界で誤る
 - [project_business_plan_adaptation_contract.md](project_business_plan_adaptation_contract.md) — 外部事業計画は全面採用せず25章の適合差分を型付きSSOT化。管理画面・owner/skill・週次state・CIが同じcatalogを読み、DBレス逆行と未計測の成果扱いを拒否
 - [project_kindle_publishing_factory.md](project_kindle_publishing_factory.md) — Kindle出版ファクトリー(product-factory kindleチャネル)。EPUB3生成器(jszip)・32冊カタログ(S1論点/S2テーマ/S3地域/S4大全)・パイロットK-S1-01『実質手取りの地図』生成済(13章37図)。本文=既存ブログR2、SVG→PNG同梱、カバーsatori→sharp。30%書き下ろし必須(KDP Web公開規定)。KDPアップロードは人間工程。正典coconala-product-standards.md §8
 - [project_coconala_publish_automation.md](project_coconala_publish_automation.md) — ココナラ出品自動化(Playwright)をdoboku-noteから移植・稼働。★別アカウント(userId=1269384/IGWORKS)、account assertはuserId照合。コナラ10/11フォーム刷新の必須項目=価格value skew(表示×1.1)/タイトル25字/提供形式が保存時に制作物へ戻る/無料修正回数fix_limit公開時必須/公開済み画像差し替えは--image(全フィールド再適用)。★2026-07-23に13商品(P-01〜P-12/P-14・テーマ別データ集28〜2054指標・個別AI画像)公開。テーマ整合はlistingレベルで改名(観光カテゴリ=実運輸等)。scripts=.claude/scripts/coconala/、規約§6改訂

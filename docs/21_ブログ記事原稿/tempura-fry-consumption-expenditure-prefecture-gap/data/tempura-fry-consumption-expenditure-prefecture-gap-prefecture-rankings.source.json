@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "tempura-fry-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "天ぷら・フライ消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/tempura-fry-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tempura-fry-consumption-expenditure-prefecture-gap --keys tempura-fry-consumption-expenditure --data-name tempura-fry-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:39.743Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

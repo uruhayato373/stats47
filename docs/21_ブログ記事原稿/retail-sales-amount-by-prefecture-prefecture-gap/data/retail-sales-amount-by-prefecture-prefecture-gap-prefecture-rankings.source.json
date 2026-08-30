@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "retail-sales-amount-by-prefecture",
+  "year": "2021",
+  "unit": "百万円",
+  "label": "小売業年間商品販売額（経済センサス活動調査）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/retail-sales-amount-by-prefecture/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug retail-sales-amount-by-prefecture-prefecture-gap --keys retail-sales-amount-by-prefecture --data-name retail-sales-amount-by-prefecture-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:43.320Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

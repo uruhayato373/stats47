@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "school-teacher-annual-income",
+  "year": "2022",
+  "unit": "万円",
+  "label": "小中学校教員の平均年収",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/school-teacher-annual-income/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug school-teacher-annual-income-prefecture-gap --keys school-teacher-annual-income --with-map",
+  "fetchedAt": "2026-08-30T06:14:07.974Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

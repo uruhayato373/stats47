@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "new-rental-starts",
+  "year": "2024",
+  "unit": "戸",
+  "label": "着工新設貸家数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/new-rental-starts/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug new-rental-starts-prefecture-gap --keys new-rental-starts --data-name new-rental-starts-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:35.457Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

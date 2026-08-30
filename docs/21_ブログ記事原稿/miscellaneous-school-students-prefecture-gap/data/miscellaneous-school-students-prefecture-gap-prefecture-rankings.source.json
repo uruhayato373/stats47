@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "miscellaneous-school-students",
+  "year": "2024",
+  "unit": "人",
+  "label": "各種学校生徒数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/miscellaneous-school-students/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug miscellaneous-school-students-prefecture-gap --keys miscellaneous-school-students --data-name miscellaneous-school-students-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:44.027Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

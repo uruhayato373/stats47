@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "vacant-housing-rate",
+  "pair": "dependent-population-index",
+  "pearsonR": 0.7206412870218912,
+  "partialRPopulation": 0.5148496495657214,
+  "unit": "％ × 指数",
+  "label": "空き家率 と 従属人口指数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/vacant-housing-rate.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug vacant-housing-rate-vs-dependent-population-index --base vacant-housing-rate --pair dependent-population-index --data-name vacant-housing-rate--dependent-population-index"
+}

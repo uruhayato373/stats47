@@ -91,9 +91,10 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 2. ✅ **Type Check**: `npx tsc --noEmit --skipLibCheck`
    - 型エラーで失敗（continue-on-error: false）
 
-3. ✅ **Unit Tests with Coverage**: `npm run test:coverage`
+3. ✅ **Unit Tests with Coverage**: packages・web・admin unitと重要module別floor
    - テスト失敗で停止（continue-on-error: false）
    - カバレッジレポートをアーティファクトとしてアップロード
+   - `.claude/config/critical-module-coverage.json` が重要module floorの正典
 
 4. ✅ **Verify Build**: `npm run build`
    - ビルドエラーで失敗

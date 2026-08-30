@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "real-disposable-income",
+  "pair": "per-capita-social-welfare-expenditure-pref-municipal",
+  "pearsonR": -0.6940442644189712,
+  "partialRPopulation": -0.6839305994912573,
+  "unit": "円 × 千円",
+  "label": "実質可処分所得（物価補正後） と 社会福祉費 の関係",
+  "source": "r2:app/correlation/by-ranking-key/real-disposable-income.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug real-disposable-income-vs-per-capita-social-welfare --base real-disposable-income --pair per-capita-social-welfare-expenditure-pref-municipal --data-name real-disposable-income--per-capita-social-welfare-expenditure-pref-municipal"
+}

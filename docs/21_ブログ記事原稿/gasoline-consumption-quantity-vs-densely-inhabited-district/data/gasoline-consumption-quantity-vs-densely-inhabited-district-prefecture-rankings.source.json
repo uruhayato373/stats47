@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "gasoline-consumption-quantity",
+  "year": "2024",
+  "unit": "l",
+  "label": "ガソリン消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/gasoline-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug gasoline-consumption-quantity-vs-densely-inhabited-district --keys gasoline-consumption-quantity --data-name gasoline-consumption-quantity-vs-densely-inhabited-district-prefecture-rankings",
+  "fetchedAt": "2026-08-30T05:47:14.946Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

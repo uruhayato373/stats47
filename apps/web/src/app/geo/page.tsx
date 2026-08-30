@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { BUSINESS_PLAN_M1 } from '@stats47/data-configs/business-plan';
+import { GIS_DATASETS } from '@stats47/gis/mlit-ksj';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -13,7 +14,7 @@ import type { Metadata } from 'next';
 
 const title = '地域データ分析 | stats47';
 const description =
-  '将来人口、地価、洪水浸水想定、駅アクセスを地図と比較で読み解く、都道府県別の地域分析です。';
+  '複数のGISレイヤーを空間演算で重ね、将来人口、地価、洪水浸水想定、駅アクセスを地域の判断材料へ変えるGeoAI分析です。';
 
 const analysisDescriptions: Record<string, string> = {
   '2050-population':
@@ -47,11 +48,58 @@ export default function GeoPage() {
         items={[{ label: 'ホーム', href: '/' }, { label: '地域分析' }]}
       />
       <PageHeader
-        eyebrow="地域分析"
-        title="地域の変化を、地図と比較で読む"
-        description="ランキング1件だけでは分からない地域差を、問い・地図・比較・方法の順に確認します。検証済みデータのある分析だけを掲載します。"
-        stats="4分析 ・ すべて47都道府県 ・ 1kmメッシュ/GISから集計"
+        eyebrow="GeoAI 地域分析"
+        title="地図を重ねて、地域の次の判断をつくる"
+        description="GeoAIは都道府県順位の言い換えではありません。複数の地理レイヤーを決定的な空間演算で重ね、どこで何が重なるかを問い・地図・比較・方法の順に確認します。"
+        stats="4分析 ・ 5入力レイヤー ・ すべて47都道府県 ・ 1kmメッシュ/GISから集計"
       />
+
+      <div className="mb-8 grid gap-4 md:grid-cols-3">
+        <SurfaceCard className="p-5">
+          <p className="text-xs font-semibold text-primary">1. レイヤー</p>
+          <h3 className="mt-2 text-base font-bold">場所を持つデータを選ぶ</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            人口メッシュ、地点、駅、浸水ポリゴンなど、分析の問いに必要な地理データを組み合わせます。
+          </p>
+        </SurfaceCard>
+        <SurfaceCard className="p-5">
+          <p className="text-xs font-semibold text-primary">2. 空間演算</p>
+          <h3 className="mt-2 text-base font-bold">包含・距離・集約を計算する</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            中心点の包含判定、駅から800mの距離判定、県コード結合を決定的コードで再現します。
+          </p>
+        </SurfaceCard>
+        <SurfaceCard className="p-5">
+          <p className="text-xs font-semibold text-primary">3. 判断</p>
+          <h3 className="mt-2 text-base font-bold">地域差と限界を同時に読む</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            地図だけで結論にせず、47県比較、入力件数、出典、近似条件まで同じ記事で確かめられます。
+          </p>
+        </SurfaceCard>
+      </div>
+
+      <div className="mb-8 grid gap-4 md:grid-cols-2">
+        <SurfaceLinkCard href="/geo/compare" className="block border-primary/40 p-5">
+          <p className="text-xs font-semibold text-primary">都道府県を選ぶ</p>
+          <h3 className="mt-2 text-lg font-bold">1つの県を4つの問いで読む</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            2050年人口、住宅地価、浸水想定区域内人口、駅800m圏人口を同じ画面で横断します。
+          </p>
+          <span className="mt-4 inline-block text-sm font-medium text-primary">
+            あなたの県を比較する →
+          </span>
+        </SurfaceLinkCard>
+        <SurfaceLinkCard href="/geo/method" className="block p-5">
+          <p className="text-xs font-semibold text-primary">方法・説明責任</p>
+          <h3 className="mt-2 text-lg font-bold">地図が答えられないことも読む</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            地点集計、ポリゴン包含、800m距離判定と、それぞれの利用上の停止線を確認します。
+          </p>
+          <span className="mt-4 inline-block text-sm font-medium text-primary">
+            空間処理と限界を見る →
+          </span>
+        </SurfaceLinkCard>
+      </div>
 
       <SectionHeader
         title="地域分析の記事"
@@ -88,9 +136,47 @@ export default function GeoPage() {
         </SurfaceCard>
       </div>
 
+      <SectionHeader
+        title="ランキング・テーマとの違い"
+        description="同じ統計サイト内でも、答える問いと必要なデータ契約を分けています。"
+      />
+      <div className="grid gap-4 md:grid-cols-3">
+        <SurfaceCard className="p-5">
+          <h3 className="font-bold">ランキング</h3>
+          <p className="mt-2 text-sm text-muted-foreground">
+            1指標を47都道府県で比較し、「何位か」に答えます。
+          </p>
+        </SurfaceCard>
+        <SurfaceCard className="p-5">
+          <h3 className="font-bold">テーマ</h3>
+          <p className="mt-2 text-sm text-muted-foreground">
+            人口・医療・交通など、複数指標を同じ主題で横断します。
+          </p>
+        </SurfaceCard>
+        <SurfaceCard className="border-primary/40 p-5">
+          <h3 className="font-bold">GeoAI</h3>
+          <p className="mt-2 text-sm text-muted-foreground">
+            複数のGISレイヤーを重ね、「どこで重なるか」「距離条件を満たすか」から判断します。
+          </p>
+        </SurfaceCard>
+      </div>
+
+      <SurfaceCard className="mt-8 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="text-xs font-semibold text-primary">GISデータカタログ</p>
+          <h3 className="mt-1 text-lg font-bold">登録{GIS_DATASETS.length}データセットをライセンス別に管理</h3>
+          <p className="mt-2 text-sm text-muted-foreground">
+            取得済み、分析利用中、公開R2可、要ライセンス確認、ローカル限定を区別しています。
+          </p>
+        </div>
+        <Link className="shrink-0 text-sm font-medium text-primary underline" href="/geo/data-catalog">
+          データカタログを見る →
+        </Link>
+      </SurfaceCard>
+
       <p className="mt-6 text-xs text-muted-foreground">
         M1対象月: {BUSINESS_PLAN_M1.month}
-        。このハブは4分析・計測登録・thin-content監査を満たすまで検索indexとグローバルナビへの露出を行いません。{' '}
+        。直URLとSNSの着地ページとして利用できます。GA4カスタムディメンション登録・反映とthin-content監査を満たすまで、検索indexとグローバルナビへの露出は行いません。{' '}
         <Link className="underline" href="/about">
           stats47について
         </Link>

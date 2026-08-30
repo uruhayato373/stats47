@@ -371,23 +371,6 @@
   },
   {
     "themeKey": "healthcare",
-    "componentKey": "theme-health-lifestyle-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010209?cdCat01=#I06101",
-      "0000010209?cdCat01=#I13102"
-    ],
-    "metricKeys": [
-      "deaths-lifestyle-diseases-per-100k",
-      "health-checkup-rate-lifestyle-diseases"
-    ],
-    "units": [
-      "人",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "healthcare",
     "componentKey": "theme-health-diabetes-trend",
     "componentType": "line-chart",
     "rawRequestKeys": [

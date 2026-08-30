@@ -5,11 +5,11 @@ import path from "node:path";
 
 import { stateDir } from "./project-root";
 import { jstDateStr } from "./time";
-import { insert, query, type Post } from "./posts-store";
+import { query } from "./posts-store";
 
 /**
- * Instagram の schedule JSON (.claude/state/instagram-w*-schedule.json) 操作。
- * 旧 server.mjs の igScheduleFiles / igScheduleEntries / igConsistency / scheduleIg を忠実移植。
+ * Instagram の schedule JSON (.claude/state/instagram-w*-schedule.json) を読み取り、
+ * 投稿台帳との整合性を表示する。管理画面は読み取り専用であり、予約登録は行わない。
  */
 export interface IgScheduleEntry {
   date: string;
@@ -74,73 +74,4 @@ export function igConsistency(): {
         content_key: p.content_key,
       })),
   };
-}
-
-export interface ScheduleIgInput {
-  date: string;
-  time?: string;
-  type: string;
-  domain: string;
-  content_key: string;
-  caption?: string | null;
-}
-
-/**
- * IG 予約登録: schedule JSON への entry 追記と posts.json への scheduled insert を同一関数内で
- * 連続実行 (二重書込)。旧実装忠実:
- * - date/type/domain/content_key 必須
- * - date は YYYY-MM-DD
- * - 過去日 (JST 今日より前) は拒否
- * - 追記先はその date を含む週ファイル、無ければ最新ファイル
- * - 同一日に既に entry があれば拒否 (IG cron は 1 日 1 件)
- * 業務エラーは Error を throw (呼び元 route が 400 化)。
- */
-export function scheduleIg(input: ScheduleIgInput): { file: string; postId: number } {
-  const { date, time = "08:00", type, domain, content_key, caption } = input;
-  if (!date || !type || !domain || !content_key) {
-    throw new Error("date/type/domain/content_key は必須");
-  }
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error("date は YYYY-MM-DD");
-  if (date < jstDateStr()) throw new Error("過去日は指定不可");
-
-  const files = igScheduleFiles();
-  if (files.length === 0) throw new Error("instagram-w*-schedule.json が見つからない");
-
-  let target: string | null = null;
-  for (const f of files) {
-    try {
-      const entries: IgScheduleEntry[] = JSON.parse(fs.readFileSync(f, "utf-8"));
-      const dates = entries.map((e) => e.date).sort();
-      if (dates.length && date >= dates[0] && date <= dates[dates.length - 1]) {
-        target = f;
-        break;
-      }
-    } catch {
-      // skip
-    }
-  }
-  if (!target) target = files[files.length - 1];
-
-  const entries: IgScheduleEntry[] = JSON.parse(fs.readFileSync(target, "utf-8"));
-  if (entries.some((e) => e.date === date)) {
-    throw new Error(
-      `${date} には既に予約あり (${path.basename(target)})。IG cron は 1 日 1 件`,
-    );
-  }
-  entries.push({ date, time, type, domain, content_key });
-  entries.sort((a, b) => (a.date < b.date ? -1 : 1));
-  fs.writeFileSync(target, JSON.stringify(entries, null, 2) + "\n");
-
-  // posts.json にも scheduled を insert (SSOT へ反映)
-  const row: Post = insert({
-    platform: "instagram",
-    post_type: type,
-    domain,
-    content_key,
-    caption: caption ?? null,
-    status: "scheduled",
-    scheduled_at: `${date} ${time}:00`,
-    template: null,
-  });
-  return { file: path.basename(target), postId: row.id };
 }

@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "airport-count",
+  "pair": "general-project-investment-agriculture-forestry-fisheries",
+  "pearsonR": 0.7195427495962768,
+  "partialRPopulation": 0.7269506825598387,
+  "unit": "か所 × 千円",
+  "label": "空港数 と 一般事業投資額 の関係",
+  "source": "r2:app/correlation/by-ranking-key/airport-count.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug airport-count-vs-general-project-investment-agriculture --base airport-count --pair general-project-investment-agriculture-forestry-fisheries --data-name airport-count--general-project-investment-agriculture-forestry-fisheries"
+}

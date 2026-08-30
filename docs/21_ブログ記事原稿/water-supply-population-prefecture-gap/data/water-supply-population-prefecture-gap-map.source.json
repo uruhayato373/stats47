@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "water-supply-population",
+  "year": "2023",
+  "unit": "人",
+  "label": "上水道給水人口",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/water-supply-population/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug water-supply-population-prefecture-gap --keys water-supply-population --with-map",
+  "fetchedAt": "2026-08-30T06:14:45.446Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

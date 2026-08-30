@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "floor-area-per-dwelling-owner",
+  "year": "2023",
+  "unit": "ｍ2",
+  "label": "持ち家住宅の延べ面積",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/floor-area-per-dwelling-owner/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug dual-income-house-size --keys floor-area-per-dwelling-owner --data-name floor-area-per-dwelling-owner-prefecture-rankings",
+  "fetchedAt": "2026-08-28T07:38:03.388Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

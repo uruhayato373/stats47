@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "agriculture-forestry-fisheries-expenses-prefecture",
+  "year": "2022",
+  "unit": "千円",
+  "label": "農林水産業費",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/agriculture-forestry-fisheries-expenses-prefecture/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug local-allocation-tax-prefecture-vs-agriculture-forestry --keys agriculture-forestry-fisheries-expenses-prefecture --data-name agriculture-forestry-fisheries-expenses-prefecture-prefecture-rankings",
+  "fetchedAt": "2026-08-30T05:48:33.508Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

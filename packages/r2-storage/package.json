@@ -20,6 +20,11 @@
       "import": "./src/server.ts",
       "require": "./src/server.ts"
     },
+    "./tooling": {
+      "types": "./src/tooling.ts",
+      "import": "./src/tooling.ts",
+      "require": "./src/tooling.ts"
+    },
     "./image-pipeline": {
       "types": "./src/image-pipeline.ts",
       "import": "./src/image-pipeline.ts",
@@ -32,6 +37,7 @@
     "purge-cache": "tsx src/scripts/purge-cache.ts",
     "purge-worker-cache": "tsx src/scripts/purge-worker-cache.ts",
     "audit:incremental-cache": "tsx src/scripts/audit-incremental-cache.ts",
+    "gis:compress-topojson": "tsx src/scripts/compress-r2-topojson.ts",
     "db:pull": "tsx src/scripts/db-r2-sync.ts pull",
     "db:push": "tsx src/scripts/db-r2-sync.ts push"
   },

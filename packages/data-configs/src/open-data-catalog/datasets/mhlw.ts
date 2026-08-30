@@ -13,7 +13,7 @@ const LANDING =
   "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
 const SPEC_XLSX = "https://www.mhlw.go.jp/content/11121000/001306376.xlsx";
 const PDL_TERMS = "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0";
-const VERIFIED_AT = "2026-07-18";
+const VERIFIED_AT = "2026-08-30";
 
 const PDL_LICENSE = {
   name: "公共データ利用規約 (PDL 1.0)",
@@ -30,6 +30,7 @@ function medicalDataset(input: {
   existingMetricKeys: readonly string[];
   candidateMetricConcepts: readonly string[];
   notes: string;
+  downloadUrl: string;
 }): OpenDatasetDefinition {
   return {
     id: input.id,
@@ -37,15 +38,16 @@ function medicalDataset(input: {
     name: input.name,
     description: input.description,
     landingPageUrl: LANDING,
+    downloadUrl: input.downloadUrl,
     accessMethods: ["bulk-download"],
     formats: ["csv"],
     geographicLevels: ["point", "municipality", "prefecture"],
     hasGeometry: true,
     geometryTypes: ["point"],
     coverage: "all-japan",
-    timeCoverage: "2024-08〜2025-12 (約6ヶ月おきスナップショット)",
+    timeCoverage: "2024-08〜2026-06 (約6ヶ月おきスナップショット)",
     updateFrequency: "irregular",
-    latestPublishedAt: "2025-12-01",
+    latestPublishedAt: "2026-06-01",
     license: PDL_LICENSE,
     stats47Uses: ["map", "area", "research-only"],
     suggestedCategories: ["socialsecurity"],
@@ -70,7 +72,9 @@ export const MHLW_MEDICAL_DATASETS: readonly OpenDatasetDefinition[] = [
     existingMetricKeys: [],
     candidateMetricConcepts: ["診療科別の病院数 (県別集計)"],
     notes:
-      "定義書シート実測で存在確認。ZIP 直 URL は日付サフィックス付き (例 01-1_hospital_facility_info_YYYYMMDD.zip) で HTTP 到達未実測のため未登録",
+      "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認",
+    downloadUrl:
+      "https://www.mhlw.go.jp/content/11121000/01-1_hospital_facility_info_20260601.csv.zip",
   }),
   medicalDataset({
     id: "mhlw-medical-clinics",
@@ -78,7 +82,9 @@ export const MHLW_MEDICAL_DATASETS: readonly OpenDatasetDefinition[] = [
     description: "全国の一般診療所の施設情報 CSV。座標・行政コード・診療科目を含む。",
     existingMetricKeys: ["general-clinic-count", "general-clinic-count-per-100k"],
     candidateMetricConcepts: ["診療科別の診療所数 (県別集計)"],
-    notes: "定義書シートで存在確認。ZIP ファイル名は病院分からの類推のため downloadUrl 未登録",
+    notes: "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認",
+    downloadUrl:
+      "https://www.mhlw.go.jp/content/11121000/02-1_clinic_facility_info_20260601.csv.zip",
   }),
   medicalDataset({
     id: "mhlw-medical-dental-clinics",
@@ -86,7 +92,9 @@ export const MHLW_MEDICAL_DATASETS: readonly OpenDatasetDefinition[] = [
     description: "全国の歯科診療所の施設情報 CSV。座標・行政コードを含む。",
     existingMetricKeys: ["dental-clinic-count", "dental-clinic-count-per-100k"],
     candidateMetricConcepts: [],
-    notes: "定義書シートで存在確認。ZIP ファイル名は類推のため downloadUrl 未登録",
+    notes: "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認",
+    downloadUrl:
+      "https://www.mhlw.go.jp/content/11121000/03-1_dental_facility_info_20260601.csv.zip",
   }),
   medicalDataset({
     id: "mhlw-medical-maternity-homes",
@@ -94,7 +102,9 @@ export const MHLW_MEDICAL_DATASETS: readonly OpenDatasetDefinition[] = [
     description: "全国の助産所の施設情報 CSV。",
     existingMetricKeys: [],
     candidateMetricConcepts: ["助産所数 (県別集計)"],
-    notes: "定義書シート「助産所票」で存在確認。ZIP ファイル名は類推のため downloadUrl 未登録",
+    notes: "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認",
+    downloadUrl:
+      "https://www.mhlw.go.jp/content/11121000/04_maternity_home_20260601.csv.zip",
   }),
   medicalDataset({
     id: "mhlw-medical-pharmacies",
@@ -102,6 +112,8 @@ export const MHLW_MEDICAL_DATASETS: readonly OpenDatasetDefinition[] = [
     description: "全国の薬局の施設情報 CSV。座標・行政コード・ホームページアドレス列を含む。",
     existingMetricKeys: ["pharmacy-count-by-prefecture", "pharmacy-count-per-100k"],
     candidateMetricConcepts: [],
-    notes: "定義書シート「薬局票」で存在確認。ZIP ファイル名は類推のため downloadUrl 未登録",
+    notes: "2026-08-30に厚生労働省ページの2026年6月1日時点リンクとZIP到達を確認",
+    downloadUrl:
+      "https://www.mhlw.go.jp/content/11121000/05_pharmacy_20260601.csv.zip",
   }),
 ];

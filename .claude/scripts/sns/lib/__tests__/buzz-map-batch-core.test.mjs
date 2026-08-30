@@ -17,7 +17,11 @@ import {
   captionComplete,
   buildCandidatePlan,
 } from "../buzz-map-batch-core.mjs";
-import { buildUtmUrl, utmCampaignFor } from "../buzz-map-utm-core.mjs";
+import {
+  buildUtmUrl,
+  utmCampaignFor,
+  validateAttributionContract,
+} from "../buzz-map-utm-core.mjs";
 
 // ── §8.1 asset plan ─────────────────────────────────────────────────────────
 
@@ -216,6 +220,28 @@ test("buildUtmUrl: 未対応 platform / 空 variant を拒否", () => {
 
 test("utmCampaignFor: buzz-map-<ideaId>", () => {
   assert.equal(utmCampaignFor("natto-east-west-boundary"), "buzz-map-natto-east-west-boundary");
+});
+
+test("validateAttributionContract: 同一 campaign + direct だけ通す", () => {
+  const ideaId = "natto-east-west-boundary";
+  const utmUrl = buildUtmUrl({
+    canonicalUrl: "/ranking/natto",
+    platform: "x",
+    ideaId,
+    variant: "question-a",
+  });
+  assert.equal(
+    validateAttributionContract({ utmUrl, ideaId, platform: "x", attribution: "direct" }).valid,
+    true,
+  );
+  assert.equal(
+    validateAttributionContract({ utmUrl, ideaId: "other", platform: "x", attribution: "direct" }).valid,
+    false,
+  );
+  assert.equal(
+    validateAttributionContract({ utmUrl, ideaId, platform: "x", attribution: "profile" }).valid,
+    false,
+  );
 });
 
 // ── buildCandidatePlan (統合) ────────────────────────────────────────────────

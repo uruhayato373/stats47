@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "wholesale-annual-sales-amount",
+  "year": "2023",
+  "unit": "百万円",
+  "label": "卸売業年間商品販売額",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/wholesale-annual-sales-amount/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug wholesale-annual-sales-amount-prefecture-gap --keys wholesale-annual-sales-amount --with-map",
+  "fetchedAt": "2026-08-30T06:14:47.134Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

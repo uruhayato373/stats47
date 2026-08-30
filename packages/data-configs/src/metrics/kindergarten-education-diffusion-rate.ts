@@ -35,5 +35,5 @@ export const kindergartenEducationDiffusionRate: MetricConfig = {
   },
   "seoTitle": "教育普及度ランキング都道府県【2020年】｜1位千葉県（51.4％）",
   "seoDescription": "2020年の教育普及度の都道府県別ランキング。1位千葉県（51.4％）、最下位福井県（7.6％）で6.8倍の格差。地図やグラフで47都道府県を比較。",
-  "isActive": true,
+  "isActive": false,
 };

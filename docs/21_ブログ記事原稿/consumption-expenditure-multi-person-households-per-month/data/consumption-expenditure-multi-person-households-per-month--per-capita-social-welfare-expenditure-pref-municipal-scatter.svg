@@ -1,0 +1,101 @@
+<!-- data-source: consumption-expenditure-multi-person-households-per-month- -per-capita-social-welfare-expenditure-pref-municipal-scatter.json | generated: 2026-08-30T06:14:03.518Z -->
+<svg width="720" height="720" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="消費支出 と 社会福祉費 の関係">
+  <title>消費支出 と 社会福祉費 の関係</title>
+  
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="720" height="720" class="svg-bg"/>
+  <text x="360" y="22" text-anchor="middle" font-size="14" font-weight="bold" class="svg-title">消費支出 と 社会福祉費 の関係</text>
+  <!-- プロットエリア -->
+  <rect x="80" y="56" width="600" height="600" class="svg-plot svg-plot-border" stroke-width="1"/>
+  <!-- グリッド -->
+  <line x1="127.1" y1="56" x2="127.1" y2="656" class="svg-grid" stroke-width="1"/>
+  <text x="127.1" y="670" text-anchor="middle" font-size="8.5" class="svg-tick">260</text>
+  <line x1="234.5" y1="56" x2="234.5" y2="656" class="svg-grid" stroke-width="1"/>
+  <text x="234.5" y="670" text-anchor="middle" font-size="8.5" class="svg-tick">280</text>
+  <line x1="341.9" y1="56" x2="341.9" y2="656" class="svg-grid" stroke-width="1"/>
+  <text x="341.9" y="670" text-anchor="middle" font-size="8.5" class="svg-tick">300</text>
+  <line x1="449.3" y1="56" x2="449.3" y2="656" class="svg-grid" stroke-width="1"/>
+  <text x="449.3" y="670" text-anchor="middle" font-size="8.5" class="svg-tick">320</text>
+  <line x1="556.6" y1="56" x2="556.6" y2="656" class="svg-grid" stroke-width="1"/>
+  <text x="556.6" y="670" text-anchor="middle" font-size="8.5" class="svg-tick">340</text>
+  <line x1="664.0" y1="56" x2="664.0" y2="656" class="svg-grid" stroke-width="1"/>
+  <text x="664.0" y="670" text-anchor="middle" font-size="8.5" class="svg-tick">360</text>
+  <line x1="80" y1="634.1" x2="680" y2="634.1" class="svg-grid" stroke-width="1"/>
+  <text x="76" y="637.1" text-anchor="end" font-size="8.5" class="svg-tick">60</text>
+  <line x1="80" y1="465.0" x2="680" y2="465.0" class="svg-grid" stroke-width="1"/>
+  <text x="76" y="468.0" text-anchor="end" font-size="8.5" class="svg-tick">80</text>
+  <line x1="80" y1="296.0" x2="680" y2="296.0" class="svg-grid" stroke-width="1"/>
+  <text x="76" y="299.0" text-anchor="end" font-size="8.5" class="svg-tick">100</text>
+  <line x1="80" y1="127.0" x2="680" y2="127.0" class="svg-grid" stroke-width="1"/>
+  <text x="76" y="130.0" text-anchor="end" font-size="8.5" class="svg-tick">120</text>
+  <!-- 軸ラベル -->
+  <text x="380" y="698" text-anchor="middle" font-size="10" class="svg-axis">消費支出（千円）</text>
+  <text x="14" y="356" text-anchor="middle" font-size="10" class="svg-axis" transform="rotate(-90,14,356)">社会福祉費（千円）</text>
+  <!-- 回帰直線 -->
+  <line x1="80.0" y1="259.6" x2="680.0" y2="626.4" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 3" opacity="0.7"/>
+  <!-- ドット -->
+  <circle cx="264.0" cy="233.5" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>北海道：X=285.5 Y=107.4</title></circle>
+  <circle cx="132.0" cy="325.6" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>青森県：X=260.9 Y=96.5</title></circle>
+  <circle cx="413.8" cy="436.3" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>岩手県：X=313.4 Y=83.4</title></circle>
+  <circle cx="423.5" cy="545.3" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>宮城県：X=315.2 Y=70.5</title></circle>
+  <circle cx="212.5" cy="299.4" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>秋田県：X=275.9 Y=99.6</title></circle>
+  <circle cx="465.9" cy="518.3" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>山形県：X=323.1 Y=73.7</title></circle>
+  <circle cx="368.2" cy="520.8" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>福島県：X=304.9 Y=73.4</title></circle>
+  <circle cx="426.7" cy="530.9" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>茨城県：X=315.8 Y=72.2</title></circle>
+  <circle cx="503.5" cy="539.4" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>栃木県：X=330.1 Y=71.2</title></circle>
+  <circle cx="352.1" cy="545.3" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>群馬県：X=301.9 Y=70.5</title></circle>
+  <circle cx="652.7" cy="602.8" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>埼玉県：X=357.9 Y=63.7</title></circle>
+  <circle cx="540.0" cy="581.7" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>千葉県：X=336.9 Y=66.2</title></circle>
+  <circle cx="615.7" cy="389.0" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>東京都：X=351 Y=89</title></circle>
+  <circle cx="506.2" cy="567.3" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>神奈川県：X=330.6 Y=67.9</title></circle>
+  <circle cx="344.0" cy="542.8" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>新潟県：X=300.4 Y=70.8</title></circle>
+  <circle cx="514.2" cy="606.2" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>富山県：X=332.1 Y=63.3</title></circle>
+  <circle cx="420.3" cy="515.7" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>石川県：X=314.6 Y=74</title></circle>
+  <circle cx="404.2" cy="448.1" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>福井県：X=311.6 Y=82</title></circle>
+  <circle cx="374.1" cy="367.0" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>山梨県：X=306 Y=91.6</title></circle>
+  <circle cx="443.4" cy="458.3" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>長野県：X=318.9 Y=80.8</title></circle>
+  <circle cx="268.9" cy="538.6" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>岐阜県：X=286.4 Y=71.3</title></circle>
+  <circle cx="478.2" cy="614.6" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>静岡県：X=325.4 Y=62.3</title></circle>
+  <circle cx="389.7" cy="504.7" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>愛知県：X=308.9 Y=75.3</title></circle>
+  <circle cx="285.0" cy="498.8" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>三重県：X=289.4 Y=76</title></circle>
+  <circle cx="455.2" cy="457.4" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>滋賀県：X=321.1 Y=80.9</title></circle>
+  <circle cx="317.7" cy="346.7" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>京都府：X=295.5 Y=94</title></circle>
+  <circle cx="238.3" cy="314.6" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>大阪府：X=280.7 Y=97.8</title></circle>
+  <circle cx="235.6" cy="418.5" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>兵庫県：X=280.2 Y=85.5</title></circle>
+  <circle cx="439.1" cy="401.6" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>奈良県：X=318.1 Y=87.5</title></circle>
+  <circle cx="157.7" cy="213.2" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>和歌山県：X=265.7 Y=109.8</title></circle>
+  <circle cx="429.4" cy="329.8" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>鳥取県：X=316.3 Y=96</title></circle>
+  <circle cx="297.3" cy="375.4" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>島根県：X=291.7 Y=90.6</title></circle>
+  <circle cx="471.8" cy="492.1" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>岡山県：X=324.2 Y=76.8</title></circle>
+  <circle cx="336.0" cy="486.2" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>広島県：X=298.9 Y=77.5</title></circle>
+  <circle cx="293.6" cy="471.8" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>山口県：X=291 Y=79.2</title></circle>
+  <circle cx="278.0" cy="394.0" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>徳島県：X=288.1 Y=88.4</title></circle>
+  <circle cx="325.8" cy="484.5" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>香川県：X=297 Y=77.7</title></circle>
+  <circle cx="108.9" cy="344.2" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>愛媛県：X=256.6 Y=94.3</title></circle>
+  <circle cx="356.9" cy="223.3" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>高知県：X=302.8 Y=108.6</title></circle>
+  <circle cx="285.0" cy="402.5" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>福岡県：X=289.4 Y=87.4</title></circle>
+  <circle cx="302.2" cy="417.7" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>佐賀県：X=292.6 Y=85.6</title></circle>
+  <circle cx="182.4" cy="311.2" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>長崎県：X=270.3 Y=98.2</title></circle>
+  <circle cx="478.2" cy="409.2" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>熊本県：X=325.4 Y=86.6</title></circle>
+  <circle cx="314.5" cy="382.2" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>大分県：X=294.9 Y=89.8</title></circle>
+  <circle cx="178.7" cy="314.6" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>宮崎県：X=269.6 Y=97.8</title></circle>
+  <circle cx="316.1" cy="296.0" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>鹿児島県：X=295.2 Y=100</title></circle>
+  <circle cx="107.3" cy="97.4" r="4" fill="#64748b" fill-opacity="0.85" stroke="#475569" stroke-width="1"><title>沖縄県：X=256.3 Y=123.5</title></circle>
+</svg>

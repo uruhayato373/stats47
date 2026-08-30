@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node scripts/run-next.mjs dev",
     "build": "next build",
+    "lint": "eslint . --max-warnings 0",
     "start": "node scripts/run-next.mjs start",
     "type-check": "tsc --noEmit --skipLibCheck",
     "test": "vitest run --pool=threads --no-file-parallelism",

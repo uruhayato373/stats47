@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "consumption-expenditure-multi-person-households-per-month",
+  "pair": "per-capita-social-welfare-expenditure-pref-municipal",
+  "pearsonR": -0.6654146874030945,
+  "partialRPopulation": -0.6589804262641312,
+  "unit": "千円 × 千円",
+  "label": "消費支出 と 社会福祉費 の関係",
+  "source": "r2:app/correlation/by-ranking-key/consumption-expenditure-multi-person-households-per-month.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug consumption-expenditure-multi-person-households-per-month --base consumption-expenditure-multi-person-households-per-month --pair per-capita-social-welfare-expenditure-pref-municipal --data-name consumption-expenditure-multi-person-households-per-month--per-capita-social-welfare-expenditure-pref-municipal"
+}

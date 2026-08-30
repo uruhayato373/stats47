@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "physical-disability-rehabilitation-facility-residents",
+  "year": "2011",
+  "unit": "人",
+  "label": "身体障害者更生援護施設在所者数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/physical-disability-rehabilitation-facility-residents/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug airport-count-vs-physical-disability-rehabilitation --keys physical-disability-rehabilitation-facility-residents --data-name physical-disability-rehabilitation-facility-residents-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:04.014Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

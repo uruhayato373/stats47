@@ -1,6 +1,22 @@
 import { describe, expect, it } from "vitest";
 
-import { buildJapanSeriesRows } from "../build-japan-series";
+import {
+  buildDerivedAdditiveJapanSeriesRows,
+  buildJapanSeriesRows,
+} from "../build-japan-series";
+
+function prefectureRows(valueFor: (prefectureNumber: number) => number | null) {
+  return Array.from({ length: 47 }, (_, index) => {
+    const prefectureNumber = index + 1;
+    return {
+      areaCode: `${String(prefectureNumber).padStart(2, "0")}000`,
+      yearCode: "2024",
+      yearName: "2024年",
+      value: valueFor(prefectureNumber),
+      unit: "駅",
+    };
+  });
+}
 
 describe("buildJapanSeriesRows", () => {
   it("正常系: 実数値の年が全て rows に入る", () => {
@@ -111,5 +127,53 @@ describe("buildJapanSeriesRows", () => {
     if (result.ok) {
       expect(result.rows).toEqual([{ yearCode: "2020", yearName: "2020年", value: 10, unit: "館" }]);
     }
+  });
+});
+
+describe("buildDerivedAdditiveJapanSeriesRows", () => {
+  it("47都道府県の有限値を同一年で合計する", () => {
+    const result = buildDerivedAdditiveJapanSeriesRows(
+      prefectureRows((prefectureNumber) => prefectureNumber),
+      "駅",
+    );
+
+    expect(result).toEqual({
+      ok: true,
+      rows: [{ yearCode: "2024", yearName: "2024年", value: 1128, unit: "駅" }],
+      rejectedYears: [],
+    });
+  });
+
+  it("1県でも欠測ならその年を0埋めせず拒否する", () => {
+    const result = buildDerivedAdditiveJapanSeriesRows(
+      prefectureRows((prefectureNumber) => (prefectureNumber === 47 ? null : 1)),
+      "駅",
+    );
+
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.rows).toEqual([]);
+      expect(result.rejectedYears[0]?.reason).toContain("46/47");
+    }
+  });
+
+  it("都道府県コード重複はartifact全体を停止する", () => {
+    const rows = prefectureRows(() => 1);
+    rows[46] = { ...rows[46], areaCode: "01000" };
+
+    const result = buildDerivedAdditiveJapanSeriesRows(rows, "駅");
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.reason).toContain("重複");
+  });
+
+  it("単位不一致はartifact全体を停止する", () => {
+    const rows = prefectureRows(() => 1);
+    rows[0] = { ...rows[0], unit: "人" };
+
+    const result = buildDerivedAdditiveJapanSeriesRows(rows, "駅");
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.reason).toContain("単位不一致");
   });
 });

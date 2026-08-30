@@ -4,11 +4,19 @@ import path from "path";
 import react from "@vitejs/plugin-react";
 import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
+import criticalCoverage from "../../.claude/config/critical-module-coverage.json";
+
 // カバレッジ閾値 (回帰防止 floor) の単一ソース。pr-quality-check.yml のコメント step も
 // 同ファイルを読むため、ここと CI で値がドリフトしない。
 const coverageThresholds = JSON.parse(
   readFileSync(path.resolve(__dirname, "./coverage-thresholds.json"), "utf8"),
 ) as { lines: number; statements: number; functions: number; branches: number };
+
+const criticalThresholds = Object.fromEntries(
+  criticalCoverage.modules
+    .filter(({ workspace }) => workspace === "apps/web")
+    .map(({ module, floor }) => [module, floor]),
+);
 
 export default defineConfig({
   plugins: [react()],
@@ -56,9 +64,9 @@ export default defineConfig({
         "**/scripts/**",
         "**/.local/**",
         "**/public/**",
-        // App Router の結線コード (page/layout/route/OGP/sitemap) は SSG/ISR/R2 依存で
-        // unit テスト非対象。ページ遷移・API・SEO は E2E (Playwright) 担当 (tests/README.md)。
-        "src/app/**",
+        // App Router の結線ファイルだけを除外する。src/app 配下の再利用ロジックは
+        // coverage 対象に残し、ページ遷移・API・SEO の結線は E2E が担当する。
+        "src/app/**/{page,layout,loading,error,global-error,not-found,default,route,opengraph-image,twitter-image,sitemap,robots,manifest}.{ts,tsx}",
         "src/middleware.ts",
         "src/providers/**",
         "src/store/**",
@@ -70,6 +78,7 @@ export default defineConfig({
         statements: coverageThresholds.statements,
         functions: coverageThresholds.functions,
         branches: coverageThresholds.branches,
+        ...criticalThresholds,
       },
     },
   },

@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "campsite-public",
+  "pair": "road-expressway-length",
+  "pearsonR": 0.8172259635767078,
+  "partialRPopulation": 0.8158418609299434,
+  "unit": "施設 × km",
+  "label": "キャンプ場数（公共） と 道路実延長（高速道路） の関係",
+  "source": "r2:app/correlation/by-ranking-key/campsite-public.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug campsite-public-vs-road-expressway-length --base campsite-public --pair road-expressway-length --data-name campsite-public--road-expressway-length"
+}

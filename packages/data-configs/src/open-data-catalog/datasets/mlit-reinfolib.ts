@@ -197,7 +197,7 @@ export const MLIT_REINFOLIB_DATASETS: readonly OpenDatasetDefinition[] = [
     stats47Uses: ["map", "research-only"],
     suggestedCategories: ["construction"],
     existingMetricKeys: [],
-    existingGisDataIds: [],
+    existingGisDataIds: ["A09", "A55"],
     candidateMetricConcepts: [],
     verification: {
       status: "verified",

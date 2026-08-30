@@ -485,6 +485,7 @@ describe('image generation manifest status', () => {
         body,
         etag: '"manifest"',
         contentType: 'application/json',
+        contentEncoding: null,
         contentLength: body.byteLength,
         metadata: {
           'stats47-fingerprint': current.fingerprint,
@@ -497,6 +498,7 @@ describe('image generation manifest status', () => {
           ? {
               etag: '"asset"',
               contentType: asset.contentType,
+              contentEncoding: null,
               contentLength: asset.bytes,
               metadata: {
                 'stats47-sha256': asset.sha256,
@@ -517,6 +519,7 @@ describe('image generation manifest status', () => {
     vi.mocked(store.head).mockImplementationOnce(async () => ({
       etag: '"asset"',
       contentType: 'image/webp',
+      contentEncoding: null,
       contentLength: current.assets[0].bytes,
       metadata: {
         'stats47-sha256': 'f'.repeat(64),

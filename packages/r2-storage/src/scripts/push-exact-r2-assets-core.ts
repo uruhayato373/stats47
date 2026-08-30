@@ -1,12 +1,14 @@
 import { createHash } from 'node:crypto';
 import { lstatSync, readdirSync, readFileSync, realpathSync } from 'node:fs';
 import { extname, isAbsolute, relative, resolve, sep } from 'node:path';
+import { gzipSync } from 'node:zlib';
 
 import type { ImageObjectStore } from '../image-pipeline';
 
 const SHA256_METADATA_KEY = 'stats47-sha256';
 const SIZE_METADATA_KEY = 'stats47-size';
 const CONTENT_TYPE_METADATA_KEY = 'stats47-content-type';
+const CONTENT_ENCODING_METADATA_KEY = 'stats47-content-encoding';
 const CACHE_CONTROL = 'public, max-age=0, must-revalidate';
 
 const CONTENT_TYPES: Readonly<Record<string, string>> = {
@@ -19,7 +21,9 @@ const CONTENT_TYPES: Readonly<Record<string, string>> = {
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
   '.txt': 'text/plain; charset=utf-8',
+  '.topojson': 'application/json',
   '.webp': 'image/webp',
+  '.zip': 'application/zip',
 };
 
 export interface ExactAssetSelection {
@@ -35,6 +39,7 @@ export interface ExactAssetCandidate {
   sha256: string;
   size: number;
   contentType: string;
+  contentEncoding: string | null;
 }
 
 export interface ExactAssetPublishResult {
@@ -191,7 +196,11 @@ function candidateForKey(
   const extension = extname(key).toLowerCase();
   const contentType = CONTENT_TYPES[extension];
   if (!contentType) throw new Error(`MIMEを判定できないファイルです: ${key}`);
-  const body = readFileSync(realPath);
+  const sourceBody = readFileSync(realPath);
+  const contentEncoding = extension === '.topojson' ? 'gzip' : null;
+  const body = contentEncoding
+    ? gzipSync(sourceBody, { level: 9 })
+    : sourceBody;
   return {
     key,
     absolutePath: realPath,
@@ -199,6 +208,7 @@ function candidateForKey(
     sha256: createHash('sha256').update(body).digest('hex'),
     size: body.byteLength,
     contentType,
+    contentEncoding,
   };
 }
 
@@ -249,6 +259,7 @@ function metadataFor(candidate: ExactAssetCandidate): Record<string, string> {
     [SHA256_METADATA_KEY]: candidate.sha256,
     [SIZE_METADATA_KEY]: String(candidate.size),
     [CONTENT_TYPE_METADATA_KEY]: candidate.contentType,
+    [CONTENT_ENCODING_METADATA_KEY]: candidate.contentEncoding ?? 'identity',
   };
 }
 
@@ -259,10 +270,14 @@ function remoteMatches(
   return (
     remote?.contentLength === candidate.size &&
     remote.contentType?.toLowerCase() === candidate.contentType.toLowerCase() &&
+    (remote.contentEncoding?.toLowerCase() ?? null) ===
+      candidate.contentEncoding &&
     remote.metadata[SHA256_METADATA_KEY] === candidate.sha256 &&
     remote.metadata[SIZE_METADATA_KEY] === String(candidate.size) &&
     remote.metadata[CONTENT_TYPE_METADATA_KEY]?.toLowerCase() ===
-      candidate.contentType.toLowerCase()
+      candidate.contentType.toLowerCase() &&
+    remote.metadata[CONTENT_ENCODING_METADATA_KEY] ===
+      (candidate.contentEncoding ?? 'identity')
   );
 }
 
@@ -293,6 +308,9 @@ export async function publishExactR2Assets(options: {
       key: candidate.key,
       body: candidate.body,
       contentType: candidate.contentType,
+      ...(candidate.contentEncoding
+        ? { contentEncoding: candidate.contentEncoding }
+        : {}),
       cacheControl: CACHE_CONTROL,
       metadata: metadataFor(candidate),
       ...(before?.etag

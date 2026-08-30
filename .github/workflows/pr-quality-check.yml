@@ -652,10 +652,12 @@ jobs:
 
       - name: 🎯 Critical Pure Module Coverage
         # 全体率を上げるための除外ではなく、shape/unit/dependency/validator/recipe/value/R2 parserの
+        # shape/unit/dependency/validator/recipe/value/link/R2 parser/routeの
         # 実測module floorを個別に固定する。JSON/HTML成果物は保存せず、V8がメモリ上で判定する。
         run: |
-          (cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts --coverage --coverage.reporter=text-summary)
+          (cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts src/link-audit/__tests__/link-check-core.test.ts --coverage --coverage.reporter=text-summary)
           (cd packages/r2-storage && npx vitest run src/lib/operations/__tests__/snapshot-reader.test.ts --coverage --coverage.reporter=text-summary)
+          (cd apps/web && npx vitest run src/features/ranking/utils/__tests__/generate-meta-data.test.ts --coverage --coverage.reporter=text-summary --coverage.thresholds.lines=0 --coverage.thresholds.statements=0 --coverage.thresholds.functions=0 --coverage.thresholds.branches=0)
         continue-on-error: false
 
       # apps/admin は root の `test:packages` (`--project '@stats47/*'`) に含まれない。
@@ -739,7 +741,7 @@ jobs:
                 | Functions | ${functions}% | ${getBadge(parseFloat(functions), floor.functions)} |
                 | Branches | ${branches}% | ${getBadge(parseFloat(branches), floor.branches)} |
 
-                **Floor (回帰防止線・目標ではありません):** Lines ${floor.lines}% / Statements ${floor.statements}% / Functions ${floor.functions}% / Branches ${floor.branches}% — vitest が enforce (未達で CI 失敗)。分母はロジック層のみ (src/app 等 E2E 担当は除外)。
+                **Floor (回帰防止線・目標ではありません):** Lines ${floor.lines}% / Statements ${floor.statements}% / Functions ${floor.functions}% / Branches ${floor.branches}% — vitest が enforce (未達で CI 失敗)。src/app は結線ファイルだけを除外し、再利用ロジックは分母へ含める。
 
                 📥 [Download full coverage report](${workflowUrl})${fileList}
 
@@ -797,6 +799,10 @@ jobs:
           NODE_OPTIONS: '--max-old-space-size=4096'
         continue-on-error: false
 
+      - name: 🧹 Lint Admin Console
+        run: npm run lint --workspace=apps/admin
+        continue-on-error: false
+
       - name: 🧾 Audit Content Operations SSOT
         run: npm run audit:content-operations
         continue-on-error: false
@@ -804,10 +810,10 @@ jobs:
       - name: 🌐 Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: 🎭 Run Admin Desktop Smoke
-        # production buildをnext startで再利用し、11画面・ナビ・横幅をdesktopで検証する。
-        # 全6 spec / mobileは実データ依存を含むため、PRの最小安定経路には混ぜない。
-        run: npm run test:e2e --workspace=apps/admin -- --project=desktop tests/e2e/smoke.spec.ts
+      - name: 🎭 Run Admin Desktop Gates
+        # production buildをnext startで再利用し、18画面・ナビ・横幅に加えて
+        # 参考文献12チャネル・絞り込み・contextページ送りをdesktopで検証する。
+        run: npm run test:e2e --workspace=apps/admin -- --project=desktop tests/e2e/smoke.spec.ts tests/e2e/references.spec.ts
         env:
           CI: 'true'
           NODE_ENV: production

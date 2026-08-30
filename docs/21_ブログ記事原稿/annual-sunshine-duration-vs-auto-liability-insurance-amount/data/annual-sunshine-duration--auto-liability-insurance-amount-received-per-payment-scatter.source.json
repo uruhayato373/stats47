@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "annual-sunshine-duration",
+  "pair": "auto-liability-insurance-amount-received-per-payment",
+  "pearsonR": 0.7210315864798498,
+  "partialRPopulation": 0.6834021674207865,
+  "unit": "時間 × 万円",
+  "label": "年間日照時間 と 自動車損害賠償責任保険受取保険金額 の関係",
+  "source": "r2:app/correlation/by-ranking-key/annual-sunshine-duration.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug annual-sunshine-duration-vs-auto-liability-insurance-amount --base annual-sunshine-duration --pair auto-liability-insurance-amount-received-per-payment --data-name annual-sunshine-duration--auto-liability-insurance-amount-received-per-payment"
+}

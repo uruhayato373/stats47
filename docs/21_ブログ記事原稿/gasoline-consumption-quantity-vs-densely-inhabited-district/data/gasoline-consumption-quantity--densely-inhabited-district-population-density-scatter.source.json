@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "gasoline-consumption-quantity",
+  "pair": "densely-inhabited-district-population-density",
+  "pearsonR": -0.826341939225511,
+  "partialRPopulation": -0.6113146093407095,
+  "unit": "l × 人",
+  "label": "ガソリン消費量 と 人口集中地区人口密度 の関係",
+  "source": "r2:app/correlation/by-ranking-key/gasoline-consumption-quantity.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug gasoline-consumption-quantity-vs-densely-inhabited-district --base gasoline-consumption-quantity --pair densely-inhabited-district-population-density --data-name gasoline-consumption-quantity--densely-inhabited-district-population-density"
+}

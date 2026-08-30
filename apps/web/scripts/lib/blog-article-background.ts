@@ -103,9 +103,7 @@ function articleIntroduction(markdown: string): string {
       paragraph
         .replace(/^#{1,6}\s+.*$/gm, '')
         .replace(/^!\[[^\]]*\]\([^)]*\)$/gm, '')
-        // prompt context に HTML は不要。multi-character tag 除去は入れ子で不完全に
-        // なり得るため、構文解釈せず区切り文字そのものを除去する。
-        .replace(/[<>]/g, '')
+        .replace(/<[^>]+>/g, '')
         .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
         .replace(/[*_`>#]/g, '')
         .replace(/\s+/g, ' ')

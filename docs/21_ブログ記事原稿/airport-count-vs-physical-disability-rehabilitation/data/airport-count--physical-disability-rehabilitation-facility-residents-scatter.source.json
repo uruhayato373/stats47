@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "airport-count",
+  "pair": "physical-disability-rehabilitation-facility-residents",
+  "pearsonR": 0.6740058999775125,
+  "partialRPopulation": 0.6591080556824968,
+  "unit": "か所 × 人",
+  "label": "空港数 と 身体障害者更生援護施設在所者数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/airport-count.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug airport-count-vs-physical-disability-rehabilitation --base airport-count --pair physical-disability-rehabilitation-facility-residents --data-name airport-count--physical-disability-rehabilitation-facility-residents"
+}

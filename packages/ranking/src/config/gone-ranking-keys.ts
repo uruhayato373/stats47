@@ -54,8 +54,24 @@
  *   inpatient-rate-per-100k と同一値 (2023 高知 1,785 / 神奈川 665) で重複コンテンツだった。
  *   config は既に isActive:false だが R2 item.json が残っており本番は 200 で実タイトルを返していた
  *   (isActive:false ≠ 本番非公開)。生存キーは inpatient-rate-per-100k）
+ * 更新日: 2026-08-28（値分布の意味検証で成立しない2件を退役。
+ *   health-checkup-rate-lifestyle-diseases = 公式定義が保健所実施分だけで、2023年度は44/47県が0%。
+ *     一般的な健診受診率として比較できず、ランキング・テーマチャートから除外。
+ *   port-passengers-total = 2020年以降の都道府県合計セルが11→6→9→26県と欠落。2023年公式Excelでも
+ *     県合計が空欄なのに航路内訳だけ存在する県があり、cat02=100の合計セルだけでは沿岸県を網羅できない。
+ *     甲種・乙種港湾の航路内訳を県別再集計する派生系列へ置換するまで退役。）
+ * 更新日: 2026-08-28 追補（SSDS 教育普及度2件を退役。
+ *   #E0910101（幼稚園）/ #E0910102（保育所）は2024年の項目改定で「集約項目の見直し・
+ *   収集不可能」を理由に削除され、現行算式にも同義の後継項目がない。期限付き0件許可では
+ *   更新不能を解消できないため config isActive:false + KNOWN/SITEMAP再生成とセットで退役。）
  */
 export const GONE_RANKING_KEYS = new Set([
+  // 2026-08-28 退役 (SSDS 項目削除・後継なし)
+  "kindergarten-education-diffusion-rate",
+  "nursery-education-diffusion-rate",
+  // 2026-08-28 退役 (定義・欠落により都道府県ランキングとして成立しない)
+  "health-checkup-rate-lifestyle-diseases",
+  "port-passengers-total",
   // 2026-08-16 退役 (e-Stat 側で統計表が廃止・後継なし)
   "construction-contract-total",
   "construction-contract-housing",

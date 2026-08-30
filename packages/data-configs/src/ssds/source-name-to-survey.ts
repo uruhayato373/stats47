@@ -14,7 +14,7 @@
  *     割り当てる (未マッピングでも全 metric が必ず原典を 1 つ以上持つことを保証)。
  *
  * 出典 Excel: https://www.stat.go.jp/data/ssds/2.html (アクセス日 2026-06-02)
- * 追加原典の所管・公式 URL は各府省サイトで確認 (アクセス日 2026-08-22)。
+ * 追加原典の所管・公式 URL は各府省サイトで確認 (最終アクセス日 2026-08-28)。
  */
 
 /** 既存 survey マスタ (surveys.json) に存在する id への対応 */
@@ -50,6 +50,12 @@ export const KNOWN_SOURCE_TO_SURVEY: Record<string, string> = {
   労働災害動向調査報告: "workplace-accident-survey",
   地域別最低賃金の全国一覧: "minimum-wage",
   市町村税課税状況等の調: "local-tax",
+  消費者物価指数: "cpi-annual",
+  "漁業・養殖業生産統計": "fishery-aquaculture-production",
+  気象庁ウェブサイト: "weather-statistics",
+  作物統計: "crop-statistics",
+  野菜生産出荷統計: "crop-statistics",
+  建築着工統計調査報告: "housing-starts-statistics",
 };
 
 /**
@@ -164,6 +170,122 @@ export const PROPOSED_NEW_SURVEYS: Record<
     name: "地方公務員給与実態調査",
     organization: "総務省",
     url: "https://www.e-stat.go.jp/stat-search/files?layout=dataset&toukei=00200212",
+  },
+
+  // --- 日本国勢図会の一次資料照合で正式化した高頻度原典 ---
+  貿易統計: {
+    id: "trade-statistics",
+    name: "財務省貿易統計",
+    organization: "財務省関税局",
+    url: "https://www.customs.go.jp/toukei/info/",
+  },
+  生産動態統計: {
+    id: "current-production-statistics",
+    name: "経済産業省生産動態統計",
+    organization: "経済産業省",
+    url: "https://www.meti.go.jp/statistics/tyo/seidou/index.html",
+  },
+  食料需給表: {
+    id: "food-balance-sheet",
+    name: "食料需給表",
+    organization: "農林水産省",
+    url: "https://www.maff.go.jp/j/tokei/kouhyou/zyukyu/index.html",
+  },
+  経済構造実態調査: {
+    id: "economic-structure-survey",
+    name: "経済構造実態調査",
+    organization: "総務省・経済産業省",
+    url: "https://www.stat.go.jp/data/kkj/index.htm",
+  },
+  国際収支状況: {
+    id: "balance-of-payments",
+    name: "国際収支統計",
+    organization: "財務省・日本銀行",
+    url: "https://www.mof.go.jp/policy/international_policy/reference/balance_of_payments/index.htm",
+  },
+  労働力調査: {
+    id: "labour-force-survey",
+    name: "労働力調査",
+    organization: "総務省統計局",
+    url: "https://www.stat.go.jp/data/roudou/index.html",
+  },
+  法人企業統計調査: {
+    id: "corporate-enterprise-statistics",
+    name: "法人企業統計調査",
+    organization: "財務省",
+    url: "https://www.mof.go.jp/pri/reference/ssc/index.htm",
+  },
+  国民経済計算年次推計: {
+    id: "national-accounts",
+    name: "国民経済計算年次推計",
+    organization: "内閣府",
+    url: "https://www.esri.cao.go.jp/jp/sna/menu.html",
+  },
+  毎月勤労統計調査: {
+    id: "monthly-labour-survey",
+    name: "毎月勤労統計調査",
+    organization: "厚生労働省",
+    url: "https://www.mhlw.go.jp/toukei/list/30-1.html",
+  },
+  総合エネルギー統計: {
+    id: "comprehensive-energy-statistics",
+    name: "総合エネルギー統計",
+    organization: "資源エネルギー庁",
+    url: "https://www.enecho.meti.go.jp/statistics/total_energy/index.html",
+  },
+  鉄道輸送統計調査: {
+    id: "railway-transport-survey",
+    name: "鉄道輸送統計調査",
+    organization: "国土交通省",
+    url: "https://www.mlit.go.jp/k-toukei/tetudouyusou.html",
+  },
+  電力調査統計: {
+    id: "electric-power-statistics",
+    name: "電力調査統計",
+    organization: "資源エネルギー庁",
+    url: "https://www.enecho.meti.go.jp/statistics/electric_power/ep002/",
+  },
+  海外事業活動基本調査: {
+    id: "overseas-business-activities-survey",
+    name: "海外事業活動基本調査",
+    organization: "経済産業省",
+    url: "https://www.meti.go.jp/statistics/tyo/kaigaizi/",
+  },
+  社会保障費用統計: {
+    id: "social-security-cost-statistics",
+    name: "社会保障費用統計",
+    organization: "国立社会保障・人口問題研究所",
+    url: "https://www.ipss.go.jp/ss-cost/j/fsss-R05/fsss_R05.html",
+  },
+  生産農業所得統計: {
+    id: "agricultural-income-statistics",
+    name: "生産農業所得統計",
+    organization: "農林水産省",
+    url: "https://www.maff.go.jp/j/tokei/kouhyou/nougyou_sansyutu/index.html",
+  },
+  "小売物価統計調査（動向編）": {
+    id: "retail-price-dynamics-survey",
+    name: "小売物価統計調査（動向編）",
+    organization: "総務省統計局",
+    url: "https://www.stat.go.jp/data/kouri/doukou/",
+  },
+  "児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査結果": {
+    id: "student-guidance-issues-survey",
+    name: "児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査",
+    organization: "文部科学省",
+    url: "https://www.mext.go.jp/b_menu/toukei/chousa01/shidou/gaiyou/chousa/1267368.htm",
+  },
+  科学技術研究調査: {
+    id: "science-technology-research-survey",
+    name: "科学技術研究調査",
+    organization: "総務省統計局",
+    url: "https://www.stat.go.jp/data/kagaku/index.html",
+  },
+  "国民健康・栄養調査": {
+    id: "national-health-nutrition-survey",
+    name: "国民健康・栄養調査",
+    organization: "厚生労働省",
+    url: "https://www.mhlw.go.jp/bunya/kenkou/kenkou_eiyou_chousa.html",
   },
 };
 

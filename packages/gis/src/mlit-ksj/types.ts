@@ -34,7 +34,9 @@ export interface KsjSimplifyOptions {
 export interface KsjCodeConfig {
   dataId: string;
   /** ダウンロード URL テンプレート。{VERSION}/{PREF}/{MESHCODE} を含む */
-  downloadUrlPattern: string;
+  downloadUrlPattern?: string;
+  /** 公式ページのDownLd manifestから配布単位を決定的に選ぶデータセット。 */
+  officialPageDiscovery?: true;
   /** zip 内の GeoJSON 格納パス */
   geojsonDirInZip: string;
   /** KSJ 属性コード → 人間可読名 (例: { N02_001: "railwayType" }) */
@@ -79,6 +81,8 @@ export interface KsjPipelineOptions {
   dataId: string;
   version?: string;
   prefCode?: string;
+  /** 1次メッシュ単位で配布されるデータの4桁コード */
+  meshCode?: string;
   outputDir?: string;
   /** 既存の zip を再利用する */
   skipDownload?: boolean;
@@ -87,6 +91,8 @@ export interface KsjPipelineOptions {
 export interface KsjPipelineResult {
   dataId: string;
   version: string;
+  prefCode?: string;
+  meshCode?: string;
   outputFiles: Array<{
     path: string;
     sizeBytes: number;

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "dual-income-household-ratio",
+  "year": "2020",
+  "unit": "％",
+  "label": "共働き世帯割合",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/dual-income-household-ratio/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug dual-income-house-size --keys dual-income-household-ratio --with-map",
+  "fetchedAt": "2026-08-28T07:38:03.114Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

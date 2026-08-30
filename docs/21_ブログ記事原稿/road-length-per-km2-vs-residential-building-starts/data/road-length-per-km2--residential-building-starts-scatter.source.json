@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "road-length-per-km2",
+  "pair": "residential-building-starts",
+  "pearsonR": 0.868488376470931,
+  "partialRPopulation": 0.4924777512042793,
+  "unit": "km × 棟",
+  "label": "道路実延長 と 着工居住用建築物数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/road-length-per-km2.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug road-length-per-km2-vs-residential-building-starts --base road-length-per-km2 --pair residential-building-starts --data-name road-length-per-km2--residential-building-starts"
+}

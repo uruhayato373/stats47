@@ -12,20 +12,13 @@
 
 > **登録データセットの一覧は `datasets.ts` が真実源**。旧 doc 04 の自動生成表（`generate-docs.ts`）は
 > datasets.ts と重複するため 2026-07-12 に廃止。件数・構造の確認は下記で行う:
-> `npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run`
+> `npm run geo:check-data-catalog`
 
 ## 使い方
 
 ```bash
-# データセット一覧 (使い捨て SQLite の gis_datasets、status + 統計値マージ表示)
+# 登録データセット一覧 (git TS SSOT)
 npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts --list
-npx tsx packages/gis/src/mlit-ksj/scripts/list-datasets.ts
-npx tsx packages/gis/src/mlit-ksj/scripts/list-datasets.ts --status=imported
-npx tsx packages/gis/src/mlit-ksj/scripts/list-datasets.ts --status=available
-npx tsx packages/gis/src/mlit-ksj/scripts/list-datasets.ts --category=transport
-
-# datasets.ts (git TS SSOT) → 使い捨て SQLite を再 seed
-npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts
 
 # 単一データセット取得（全国）
 npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts N02
@@ -34,8 +27,18 @@ npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts N02
 npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts P04 --pref 13
 npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts P04 --all-prefs
 
+# 1次メッシュ配布（単区画 / 公式ページ掲載の全区画）
+npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts G04-a --mesh 5339
+npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts G04-a --all-meshes
+
 # カテゴリ内の全国データを一括取得
 npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts --category transport
+
+# 公式ページ探索型の公開利用可能29系統を一括取得・R2保存
+npm run acquire:public-ksj --workspace packages/gis -- --apply
+
+# 公式最新版の対象件数がSSOTと一致するか監査
+npm run audit:public-ksj-manifests --workspace packages/gis
 ```
 
 ## パイプライン処理
@@ -47,7 +50,7 @@ MLIT zip ダウンロード → /tmp/ に保存
   → プロパティ名リマップ（KSJ コード → 人間可読名）
   → TopoJSON 変換 + 簡略化（topojson-server + topojson-simplify）
   → .local/r2/gis/mlit-ksj/{dataId}/{version}/ に保存
-  → _meta.json 生成（出典・ライセンス・ファイル情報）
+  → _meta.json または _meta/{prefCode|meshCode}.json 生成（出典URL・版・件数）
   → /tmp/ クリーンアップ
 ```
 
@@ -58,9 +61,20 @@ MLIT zip ダウンロード → /tmp/ に保存
 ├── {dataId}/
 │   └── {version}/
 │       ├── _meta.json           # メタデータ
+│       ├── _meta/{scope}.json   # 県別・1次メッシュ別provenance
 │       ├── national.topojson    # 全国データ（ファイル1つの場合）
 │       ├── {元ファイル名}.topojson  # 複数ファイルの場合
 │       └── {prefCode}.topojson  # 県別データの場合
+│       └── {meshCode}.topojson  # 1次メッシュ配布の場合
+```
+
+公式ページ探索型はR2へ直接、次の単位で保存する。TopoJSONは転送時gzip、`manifest.json` は
+元zip URL・sha256・座標系変換・feature数を保持する。公式アーカイブ数とmanifest数が一致した場合だけ取得完了。
+
+```
+gis/mlit-ksj/{dataId}/{version}/{scope}/
+├── data.topojson
+└── manifest.json
 ```
 
 ## ジオメトリ型別の実装パターン
@@ -82,6 +96,7 @@ packages/gis/src/mlit-ksj/
 ├── property-map.ts    # KSJ 属性コード → 人間可読名マッピング（N02_001 → railwayType）
 ├── r2-path.ts         # R2 保存パス構築
 ├── downloader.ts      # zip ダウンロード・GeoJSON/Shapefile 抽出
+├── mesh-discovery.ts  # 公式詳細ページから配布1次メッシュコードを決定的に抽出
 ├── converter.ts       # GeoJSON → TopoJSON 変換（簡略化含む）
 ├── pipeline.ts        # オーケストレーター
 ├── prefecture-assign.ts # ★feature → 都道府県の帰属 (属性 → 空間結合。推測しない)
@@ -90,7 +105,8 @@ packages/gis/src/mlit-ksj/
 ├── adapters/
 │   └── fetch-ksj-from-local.ts  # ローカル R2 から TopoJSON 読み込み
 └── scripts/
-    ├── run-pipeline.ts          # パイプライン CLI。使い捨て SQLite (status='registered'/'imported') を読む
+    ├── run-pipeline.ts          # パイプライン CLI。datasets.tsを直接読む
+    ├── build-data-catalog.ts    # git TS + 実R2 + open-data-catalog → 取得カタログ
     ├── list-datasets.ts         # gis_datasets (使い捨て SQLite) 一覧 CLI (status 集計付き)
     ├── seed-from-registry.ts    # ★datasets.ts (git TS SSOT) → 使い捨て SQLite を決定的に UPSERT 再構築
     ├── seed-ksj-catalog.ts      # 候補 126 件 (ksj-catalog.json) を status='available' で SQLite に投入
@@ -125,7 +141,7 @@ packages/gis/src/mlit-ksj/
      isRankingTarget: false /* ranking 化するなら true + rankingConfig:[...] */ },
    ```
    - `name_en` は KSJ API 非提供のため不要（seed が空でセット・display 専用）
-   - build state (r2_version / file_count 等) は書かない（pipeline 実行で SQLite に再生成）
+   - 取得状態やfile_countは書かない（実R2一覧からカタログ生成時に導出）
 
 2. **registry.ts (`KSJ_CODE_CONFIG`) に技術設定を追加**:
    - `dataId`, `downloadUrlPattern`, `geojsonDirInZip`, `propertyMap`, `simplifyOptions`（省略可）
@@ -134,15 +150,16 @@ packages/gis/src/mlit-ksj/
 3. **property-map.ts** にプロパティマッピングを追加（任意）:
    - 属性定義の参照: https://nlftp.mlit.go.jp/ksj/gml/codelist/shape_property_table2.xlsx
 
-4. **使い捨て SQLite を git TS から再 seed**（手動 INSERT の代替）:
-   ```bash
-   npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts   # datasets.ts → SQLite に UPSERT
-   ```
-
-5. **パイプライン実行**（SQLite の build state が status='imported' に更新される）:
+4. **パイプライン実行**（取得状態はR2実体から後で導出する）:
    ```bash
    npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts {新DATA_ID}
+   # officialPageDiscovery の場合
+   npm run acquire:public-ksj --workspace packages/gis -- --data-id {新DATA_ID} --apply
+   npm run geo:check-data-catalog
    ```
+
+互換用の旧一覧scriptが必要な場合だけ `seed-from-registry.ts` で使い捨てSQLiteを再構築する。
+pipeline本体と取得完了判定には不要。
 
 ## ライセンスと出典表示
 
@@ -152,4 +169,4 @@ packages/gis/src/mlit-ksj/
 
 - **CC BY 4.0 / 商用可**: stats47 で自由に利用可能
 - **CC BY 4.0（一部制限）**: 個別に制限内容を確認
-- **非商用**: R2 に保存するが、公開可否は別途判断
+- **非商用**: public R2へ新規保存しない。ローカル利用に限定する

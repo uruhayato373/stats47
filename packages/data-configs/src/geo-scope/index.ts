@@ -1,17 +1,31 @@
 export type { JapanAvailability, StatisticsScope } from './types';
 export {
   JAPAN_NATIONAL_AREA_CODE,
+  JAPAN_DERIVED_ADDITIVE_RECIPE_KEY,
   PREFECTURE_AREA_CODE_RE,
   isMunicipalityStatisticsScope,
 } from './types';
 export { resolveJapanValue } from './resolve-japan-value';
 export type { AreaValueRow, JapanValueResult } from './resolve-japan-value';
-export { buildJapanSeriesRows } from './build-japan-series';
+export {
+  buildDerivedAdditiveJapanSeriesRows,
+  buildJapanSeriesRows,
+} from './build-japan-series';
 export type {
   BuildJapanSeriesResult,
   EstatNationalRow,
   JapanSeriesRowResult,
+  PrefectureSeriesSourceRow,
 } from './build-japan-series';
+export {
+  JAPAN_DERIVED_METRIC_DECISIONS,
+  getJapanDerivedMetricDecision,
+} from './japan-derived-metrics';
+export type {
+  AdoptedJapanDerivedMetricDecision,
+  JapanDerivedMetricDecision,
+  RejectedJapanDerivedMetricDecision,
+} from './japan-derived-metrics';
 export {
   JAPAN_CATALOGS,
   getJapanCatalogTheme,

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "consumer-price-difference-index-utilities",
+  "year": "2024",
+  "unit": "（全国=100）",
+  "label": "消費者物価地域差指数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/consumer-price-difference-index-utilities/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug consumer-price-difference-index-utilities-prefecture-gap --keys consumer-price-difference-index-utilities --data-name consumer-price-difference-index-utilities-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:40.406Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -12,6 +12,8 @@ export {
 } from "./adapters/fetch-ksj-from-local";
 export type { FetchKsjOptions } from "./adapters/fetch-ksj-from-local";
 export { getCodeConfig, listCodeConfigDataIds, KSJ_CODE_CONFIG } from "./registry";
+export { GIS_DATASETS, GIS_DATASETS_BY_ID } from "./datasets";
+export type { GisDatasetMeta, GisDatasetRankingConfig } from "./datasets";
 export { buildMlitKsjR2Path, buildMlitKsjLocalPath } from "./r2-path";
 export type { MlitKsjR2PathOptions } from "./r2-path";
 export type {

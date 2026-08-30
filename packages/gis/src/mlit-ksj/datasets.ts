@@ -70,6 +70,10 @@ export interface GisDatasetMeta {
   rankingConfig?: GisDatasetRankingConfig[];
   /** ranking 集計の基準バージョン (旧 RANKINGS.version)。pipeline download の {VERSION} 既定値 */
   latestVersion?: string;
+  /** 国土数値情報の公式データ詳細ページ。配布単位の自動検出にも使う。 */
+  sourcePageUrl?: string;
+  /** 候補カタログ側で別IDになっている場合のID。 */
+  candidateAliases?: readonly string[];
 }
 
 /**
@@ -80,19 +84,19 @@ export interface GisDatasetMeta {
  */
 export const GIS_DATASETS: GisDatasetMeta[] = [
   // ── 国土 (水・土地) ─────────────────────────────────────────
-  { dataId: "A12", name: "農業地域", category: "land", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "agriculture", isRankingTarget: false },
-  { dataId: "A13", name: "森林地域", category: "land", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "agriculture", isRankingTarget: false },
-  { dataId: "C23", name: "海岸線", category: "land", geometryType: "line", coverage: "prefecture", license: "non-commercial", stats47Category: null, isRankingTarget: false },
-  { dataId: "G04-a", name: "標高・傾斜度3次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: null, isRankingTarget: false },
+  { dataId: "A12", name: "農業地域", category: "land", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "agriculture", isRankingTarget: false, latestVersion: "15" },
+  { dataId: "A13", name: "森林地域", category: "land", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "agriculture", isRankingTarget: false, latestVersion: "15" },
+  { dataId: "C23", name: "海岸線", category: "land", geometryType: "line", coverage: "prefecture", license: "non-commercial", stats47Category: null, isRankingTarget: false, latestVersion: "06" },
+  { dataId: "G04-a", name: "標高・傾斜度3次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: null, isRankingTarget: false, latestVersion: "11", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-a.html" },
   { dataId: "L01", name: "地価公示", category: "land", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "economy", isRankingTarget: false, latestVersion: "26" },
   { dataId: "L02", name: "都道府県地価調査", category: "land", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "economy", isRankingTarget: false, latestVersion: "25" },
-  { dataId: "L03-a", name: "土地利用3次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "cc-by-4.0", stats47Category: null, isRankingTarget: false },
+  { dataId: "L03-a", name: "土地利用3次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "cc-by-4.0", stats47Category: null, isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-a-2022.html" },
   {
     dataId: "W01", name: "ダム", category: "land", geometryType: "point", coverage: "national", license: "non-commercial",
     stats47Category: null, isRankingTarget: true, latestVersion: "14",
     rankingConfig: [{ rankingKey: "dam-count", rankingName: "ダム数", unit: "か所", categoryKey: "infrastructure", yearCode: "2014", description: "国土数値情報に登録されているダムの都道府県別数" }],
   },
-  { dataId: "W05", name: "河川", category: "land", geometryType: "line", coverage: "prefecture", license: "non-commercial", stats47Category: null, isRankingTarget: false },
+  { dataId: "W05", name: "河川", category: "land", geometryType: "line", coverage: "prefecture", license: "non-commercial", stats47Category: null, isRankingTarget: false, latestVersion: "09" },
   {
     dataId: "W09", name: "湖沼", category: "land", geometryType: "polygon", coverage: "national", license: "commercial-ok",
     stats47Category: "landweather", isRankingTarget: true, latestVersion: "05",
@@ -100,18 +104,18 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   },
 
   // ── 政策区域 ───────────────────────────────────────────────
-  { dataId: "A10", name: "自然公園地域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "safetyenvironment", isRankingTarget: false },
-  { dataId: "A16", name: "DID人口集中地区", category: "policy", geometryType: "polygon", coverage: "national", license: "commercial-ok", stats47Category: "population", isRankingTarget: false },
-  { dataId: "A17", name: "過疎地域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "commercial-ok", stats47Category: "population", isRankingTarget: false },
-  { dataId: "A22", name: "豪雪地帯", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "commercial-ok", stats47Category: "landweather", isRankingTarget: false },
-  { dataId: "A27", name: "小学校区", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "educationsports", isRankingTarget: false },
-  { dataId: "A29", name: "用途地域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "infrastructure", isRankingTarget: false },
+  { dataId: "A10", name: "自然公園地域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "15" },
+  { dataId: "A16", name: "DID人口集中地区", category: "policy", geometryType: "polygon", coverage: "national", license: "commercial-ok", stats47Category: "population", isRankingTarget: false, latestVersion: "20" },
+  { dataId: "A17", name: "過疎地域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "commercial-ok", stats47Category: "population", isRankingTarget: false, latestVersion: "17" },
+  { dataId: "A22", name: "豪雪地帯", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "commercial-ok", stats47Category: "landweather", isRankingTarget: false, latestVersion: "16" },
+  { dataId: "A27", name: "小学校区", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "educationsports", isRankingTarget: false, latestVersion: "16" },
+  { dataId: "A29", name: "用途地域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "19" },
   { dataId: "A31b", name: "洪水浸水想定区域", category: "policy", geometryType: "polygon", coverage: "mesh", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "25" },
-  { dataId: "A32", name: "中学校区", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "educationsports", isRankingTarget: false },
-  { dataId: "A33", name: "土砂災害警戒区域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "safetyenvironment", isRankingTarget: false },
-  { dataId: "A38", name: "医療圏", category: "policy", geometryType: "polygon", coverage: "national", license: "cc-by-4.0", stats47Category: "socialsecurity", isRankingTarget: false },
-  { dataId: "A40", name: "津波浸水想定", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "safetyenvironment", isRankingTarget: false },
-  { dataId: "N03", name: "行政区域", category: "policy", geometryType: "polygon", coverage: "national", license: "cc-by-4.0", stats47Category: null, isRankingTarget: false },
+  { dataId: "A32", name: "中学校区", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "educationsports", isRankingTarget: false, latestVersion: "16" },
+  { dataId: "A33", name: "土砂災害警戒区域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "23" },
+  { dataId: "A38", name: "医療圏", category: "policy", geometryType: "polygon", coverage: "national", license: "cc-by-4.0", stats47Category: "socialsecurity", isRankingTarget: false, latestVersion: "20" },
+  { dataId: "A40", name: "津波浸水想定", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "23" },
+  { dataId: "N03", name: "行政区域", category: "policy", geometryType: "polygon", coverage: "national", license: "cc-by-4.0", stats47Category: null, isRankingTarget: false, latestVersion: "20250101" },
 
   // ── 施設 ───────────────────────────────────────────────────
   {
@@ -131,9 +135,9 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
       { rankingKey: "biomass-power-station-count", rankingName: "バイオマス発電施設数", unit: "か所", categoryKey: "energy", filenamePattern: "Biomass", yearCode: "2013", dedupeByProperties: ["P03_0002", "P03_0003"] },
     ],
   },
-  { dataId: "P04", name: "医療機関", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "socialsecurity", isRankingTarget: false },
-  { dataId: "P05", name: "市町村役場等・公的集会施設", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: null, isRankingTarget: false },
-  { dataId: "P11", name: "バス停留所", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false },
+  { dataId: "P04", name: "医療機関", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "socialsecurity", isRankingTarget: false, latestVersion: "20" },
+  { dataId: "P05", name: "市町村役場等・公的集会施設", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: null, isRankingTarget: false, latestVersion: "22" },
+  { dataId: "P11", name: "バス停留所", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "22" },
   {
     dataId: "P12", name: "観光資源", category: "facility", geometryType: "point", coverage: "national", license: "non-commercial",
     stats47Category: "tourism", isRankingTarget: true, latestVersion: "14",
@@ -143,20 +147,20 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
     // P12_001 で畳むと 19,140 feature → 17,254 登録対象になる。P12_001 は全国一意ではない。
     rankingConfig: [{ rankingKey: "tourism-resource-count", rankingName: "観光資源データ登録件数", unit: "件", categoryKey: "tourism", yearCode: "2014", description: "国土数値情報P12に収録された観光資源・観光地点の都道府県別登録件数（2014年9月30日時点。観光地の網羅数ではない）", dedupeByProperties: ["P12_001"] }],
   },
-  { dataId: "P13", name: "都市公園", category: "facility", geometryType: "polygon", coverage: "prefecture", license: "non-commercial", stats47Category: "infrastructure", isRankingTarget: false },
-  { dataId: "P14", name: "福祉施設", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "socialsecurity", isRankingTarget: false },
-  { dataId: "P17", name: "消防署", category: "facility", geometryType: "point", coverage: "prefecture", license: "non-commercial", stats47Category: "safetyenvironment", isRankingTarget: false },
-  { dataId: "P18", name: "警察署", category: "facility", geometryType: "point", coverage: "prefecture", license: "non-commercial", stats47Category: "safetyenvironment", isRankingTarget: false },
-  { dataId: "P29", name: "学校", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "educationsports", isRankingTarget: false },
+  { dataId: "P13", name: "都市公園", category: "facility", geometryType: "polygon", coverage: "prefecture", license: "non-commercial", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "11" },
+  { dataId: "P14", name: "福祉施設", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0-partial", stats47Category: "socialsecurity", isRankingTarget: false, latestVersion: "23" },
+  { dataId: "P17", name: "消防署", category: "facility", geometryType: "point", coverage: "prefecture", license: "non-commercial", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "12" },
+  { dataId: "P18", name: "警察署", category: "facility", geometryType: "point", coverage: "prefecture", license: "non-commercial", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "12" },
+  { dataId: "P29", name: "学校", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "educationsports", isRankingTarget: false, latestVersion: "23" },
   {
     dataId: "P35", name: "道の駅", category: "facility", geometryType: "point", coverage: "national", license: "non-commercial",
     stats47Category: "tourism", isRankingTarget: true, latestVersion: "18",
     rankingConfig: [{ rankingKey: "roadside-station-count", rankingName: "道の駅数", unit: "か所", categoryKey: "tourism", yearCode: "2018", description: "国土数値情報に登録されている道の駅の都道府県別数" }],
   },
-  { dataId: "P36", name: "高速バス停留所", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false },
+  { dataId: "P36", name: "高速バス停留所", category: "facility", geometryType: "point", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "23" },
 
   // ── 交通 ───────────────────────────────────────────────────
-  { dataId: "C02", name: "港湾", category: "transport", geometryType: "point", coverage: "national", license: "non-commercial", stats47Category: "infrastructure", isRankingTarget: false },
+  { dataId: "C02", name: "港湾", category: "transport", geometryType: "point", coverage: "national", license: "non-commercial", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "08" },
   {
     dataId: "C09", name: "漁港", category: "transport", geometryType: "point", coverage: "national", license: "non-commercial",
     stats47Category: "agriculture", isRankingTarget: true, latestVersion: "06",
@@ -177,11 +181,42 @@ export const GIS_DATASETS: GisDatasetMeta[] = [
   // (HTTP 200 + 「ランキングが見つかりません」)。実現しなかった計画が SSOT に残っていた
   // 状態なので、実態に合わせて落とす。作るなら metric config の新設から始める。
   { dataId: "N06", name: "高速道路時系列", category: "transport", geometryType: "line", coverage: "national", license: "cc-by-4.0-partial", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "20" },
-  { dataId: "N07", name: "バスルート", category: "transport", geometryType: "line", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false },
+  { dataId: "N07", name: "バスルート", category: "transport", geometryType: "line", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "22" },
   { dataId: "S12", name: "駅別乗降客数", category: "transport", geometryType: "point", coverage: "national", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "25" },
 
   // ── 統計 ───────────────────────────────────────────────────
-  { dataId: "mesh1000r6", name: "1kmメッシュ将来推計人口(R6)", category: "statistics", geometryType: "mesh", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "population", isRankingTarget: false },
+  { dataId: "mesh1000r6", name: "1kmメッシュ将来推計人口(R6)", category: "statistics", geometryType: "mesh", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "population", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html", candidateAliases: ["m1kr6"] },
+
+  // ── 2026-08-30 公式利用条件監査で公開・商用利用可能と確定した追加29件 ──
+  { dataId: "A03", name: "三大都市圏計画区域", category: "policy", geometryType: "polygon", coverage: "region", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "03", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A03.html" },
+  { dataId: "A09", name: "都市地域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "18", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A09.html" },
+  { dataId: "A18", name: "半島振興対策実施地域", category: "policy", geometryType: "polygon", coverage: "region", license: "cc-by-4.0", stats47Category: "population", isRankingTarget: false, latestVersion: "16", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A18-2016.html" },
+  { dataId: "A19", name: "離島振興対策実施地域", category: "policy", geometryType: "polygon", coverage: "region", license: "cc-by-4.0", stats47Category: "population", isRankingTarget: false, latestVersion: "17", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A19-2017.html" },
+  { dataId: "A23", name: "特殊土壌地帯", category: "policy", geometryType: "polygon", coverage: "region", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "16", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A23-2016.html" },
+  { dataId: "A24", name: "振興山村", category: "policy", geometryType: "polygon", coverage: "region", license: "cc-by-4.0", stats47Category: "population", isRankingTarget: false, latestVersion: "16", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A24-2016.html" },
+  { dataId: "A25", name: "特定農山村地域", category: "policy", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "agriculture", isRankingTarget: false, latestVersion: "16", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A25-2016.html" },
+  { dataId: "A30a5", name: "土砂災害・雪崩メッシュ", category: "policy", geometryType: "mesh", coverage: "mesh", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "11", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A30a5.html" },
+  { dataId: "A31a", name: "洪水浸水想定区域（河川単位）", category: "policy", geometryType: "polygon", coverage: "region", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31a-2024.html" },
+  { dataId: "A42", name: "歴史的風土保存区域", category: "policy", geometryType: "polygon", coverage: "national", license: "cc-by-4.0", stats47Category: "tourism", isRankingTarget: false, latestVersion: "18", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A42.html" },
+  { dataId: "A43", name: "伝統的建造物群保存地区", category: "policy", geometryType: "polygon", coverage: "national", license: "cc-by-4.0", stats47Category: "tourism", isRankingTarget: false, latestVersion: "18", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A43.html" },
+  { dataId: "A44", name: "歴史的風致維持向上計画の重点地区", category: "policy", geometryType: "polygon", coverage: "national", license: "cc-by-4.0", stats47Category: "tourism", isRankingTarget: false, latestVersion: "18", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A44.html" },
+  { dataId: "A45", name: "国有林野", category: "land", geometryType: "polygon", coverage: "prefecture", license: "cc-by-4.0", stats47Category: "agriculture", isRankingTarget: false, latestVersion: "19", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A45.html" },
+  { dataId: "A51", name: "雨水出水（内水）浸水想定区域", category: "policy", geometryType: "polygon", coverage: "region", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A51-2024.html" },
+  { dataId: "A52", name: "砂防指定地", category: "policy", geometryType: "polygon", coverage: "region", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "23", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A52-2023.html" },
+  { dataId: "A53", name: "多段階浸水想定", category: "policy", geometryType: "polygon", coverage: "region", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A53-2024.html" },
+  { dataId: "A54", name: "大規模盛土造成地", category: "land", geometryType: "polygon", coverage: "national", license: "cc-by-4.0", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "23", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A54-2023.html" },
+  { dataId: "A55", name: "都市計画決定情報", category: "policy", geometryType: "mixed", coverage: "prefecture", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A55-2022.html" },
+  { dataId: "G04-c", name: "標高・傾斜度4次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: "landweather", isRankingTarget: false, latestVersion: "11", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-c.html" },
+  { dataId: "G04-d", name: "標高・傾斜度5次メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: "landweather", isRankingTarget: false, latestVersion: "11", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-d.html" },
+  { dataId: "G08", name: "低位地帯", category: "land", geometryType: "polygon", coverage: "prefecture", license: "commercial-ok", stats47Category: "safetyenvironment", isRankingTarget: false, latestVersion: "15", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G08-2015.html" },
+  { dataId: "L03-b", name: "土地利用細分メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: "agriculture", isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-2021.html" },
+  { dataId: "L03-b-c", name: "土地利用詳細メッシュ", category: "land", geometryType: "mesh", coverage: "region", license: "commercial-ok", stats47Category: "agriculture", isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-c-2021.html" },
+  { dataId: "L03-b-u", name: "都市地域土地利用細分メッシュ", category: "land", geometryType: "mesh", coverage: "mesh", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-u-2021.html" },
+  { dataId: "N08", name: "空港時系列", category: "transport", geometryType: "mixed", coverage: "national", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "21", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N08-2021.html" },
+  { dataId: "S05-d", name: "貨物旅客地域流動量", category: "transport", geometryType: "line", coverage: "national", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "18", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S05-d-2018.html" },
+  { dataId: "S10a", name: "港湾間流通量・海上経路", category: "transport", geometryType: "line", coverage: "national", license: "commercial-ok", stats47Category: "infrastructure", isRankingTarget: false, latestVersion: "16", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S10a-2016.html" },
+  { dataId: "m250r6", name: "250mメッシュ別将来推計人口（R6国政局推計）", category: "statistics", geometryType: "mesh", coverage: "prefecture", license: "commercial-ok", stats47Category: "population", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh250r6.html" },
+  { dataId: "m500r6", name: "500mメッシュ別将来推計人口（R6国政局推計）", category: "statistics", geometryType: "mesh", coverage: "prefecture", license: "commercial-ok", stats47Category: "population", isRankingTarget: false, latestVersion: "24", sourcePageUrl: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh500r6.html" },
 ];
 
 /** dataId → メタ の索引 */

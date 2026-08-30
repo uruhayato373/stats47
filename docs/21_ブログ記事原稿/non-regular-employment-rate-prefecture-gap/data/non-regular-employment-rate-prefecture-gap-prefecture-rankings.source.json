@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "non-regular-employment-rate",
+  "year": "2022",
+  "unit": "%",
+  "label": "非正規雇用率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/non-regular-employment-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug non-regular-employment-rate-prefecture-gap --keys non-regular-employment-rate --data-name non-regular-employment-rate-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:38.311Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

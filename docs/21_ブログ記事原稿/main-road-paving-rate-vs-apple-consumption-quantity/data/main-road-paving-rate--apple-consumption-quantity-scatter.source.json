@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "main-road-paving-rate",
+  "pair": "apple-consumption-quantity",
+  "pearsonR": -0.6775365620490692,
+  "partialRPopulation": -0.6699701777607597,
+  "unit": "％ × g",
+  "label": "主要道路舗装率 と りんご消費量 の関係",
+  "source": "r2:app/correlation/by-ranking-key/main-road-paving-rate.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug main-road-paving-rate-vs-apple-consumption-quantity --base main-road-paving-rate --pair apple-consumption-quantity --data-name main-road-paving-rate--apple-consumption-quantity"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "airport-count",
+  "year": "2007",
+  "unit": "か所",
+  "label": "空港数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/airport-count/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug airport-count-vs-physical-disability-rehabilitation --keys airport-count --data-name airport-count-vs-physical-disability-rehabilitation-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:03.855Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -43,24 +43,3 @@ export async function apiGet<T>(path: string): Promise<T> {
   if (!res.ok) throw new ApiError(errorMessage(body, res.status), res.status);
   return body as T;
 }
-
-/** POST / PATCH / DELETE 等の書き込み系リクエスト。body はそのまま JSON.stringify する。 */
-export async function apiSend<T>(
-  path: string,
-  method: "POST" | "PATCH" | "DELETE" = "POST",
-  body?: unknown,
-): Promise<T> {
-  let res: Response;
-  try {
-    res = await fetch(path, {
-      method,
-      headers: body !== undefined ? { "content-type": "application/json" } : undefined,
-      body: body !== undefined ? JSON.stringify(body) : undefined,
-    });
-  } catch {
-    throw new ApiError("サーバーに接続できません。npm run dev --workspace=apps/admin を起動してください", 0);
-  }
-  const parsed = await parseJson(res);
-  if (!res.ok) throw new ApiError(errorMessage(parsed, res.status), res.status);
-  return parsed as T;
-}

@@ -6,7 +6,6 @@ import { Button, Input, cn } from "@stats47/components";
 
 import { apiGet, ApiError } from "@/lib/client/api-client";
 import { ErrorState, Loading } from "@/components/async-state";
-import { JobDialog } from "@/components/job-dialog";
 import type {
   IgConsistencyResponse,
   InventoryResponse,
@@ -14,7 +13,6 @@ import type {
   PostDTO,
 } from "@/lib/contracts/types";
 import { PostCard } from "./post-card";
-import { ToastPortal, useToast } from "./toast";
 
 // YouTube pilot は Studio で人間が投稿するため、管理画面からの新規投稿・予約は不可。
 // 過去実績と pilot 台帳を一覧・フィルタで閲覧する表示専用の選択肢として残す。
@@ -30,6 +28,15 @@ const STATUSES: Array<[string, string]> = [
   ["draft", "draft"],
   ["scheduled", "scheduled"],
   ["posted", "posted"],
+];
+
+const DOMAINS: Array<[string, string]> = [
+  ["", "全ドメイン"],
+  ["ranking", "ランキング"],
+  ["theme", "テーマ"],
+  ["area", "エリア"],
+  ["geo", "GeoAI"],
+  ["buzz-map", "バズ地図"],
 ];
 
 const MAX_VISIBLE = 200;
@@ -55,6 +62,7 @@ function sortKey(item: GalleryItem): string {
 export function SnsView({ initialPlatform = "" }: { initialPlatform?: string }) {
   const [platform, setPlatform] = useState(initialPlatform);
   const [status, setStatus] = useState("");
+  const [domain, setDomain] = useState("");
   const [query, setQuery] = useState("");
 
   const [inventory, setInventory] = useState<InventoryResponse | null>(null);
@@ -65,11 +73,6 @@ export function SnsView({ initialPlatform = "" }: { initialPlatform?: string }) 
   const [consistency, setConsistency] = useState<IgConsistencyResponse | null>(
     null,
   );
-
-  const [activeJob, setActiveJob] = useState<{ id: string; title: string } | null>(
-    null,
-  );
-  const { message, showToast } = useToast();
 
   const loadInventory = () => {
     setLoading(true);
@@ -112,6 +115,7 @@ export function SnsView({ initialPlatform = "" }: { initialPlatform?: string }) 
     ];
     if (platform) list = list.filter((x) => x.platform === platform);
     if (status) list = list.filter((x) => x.status === status);
+    if (domain) list = list.filter((x) => x.domain === domain);
     if (query) {
       list = list.filter(
         (x) =>
@@ -120,7 +124,7 @@ export function SnsView({ initialPlatform = "" }: { initialPlatform?: string }) 
       );
     }
     return [...list].sort((a, b) => sortKey(b).localeCompare(sortKey(a)));
-  }, [inventory, platform, status, query]);
+  }, [inventory, platform, status, domain, query]);
 
   const visible = items.slice(0, MAX_VISIBLE);
   const overflow = items.length - visible.length;
@@ -148,6 +152,12 @@ export function SnsView({ initialPlatform = "" }: { initialPlatform?: string }) 
             options={STATUSES}
             value={status}
             onChange={setStatus}
+            variant="chip"
+          />
+          <TabGroup
+            options={DOMAINS}
+            value={domain}
+            onChange={setDomain}
             variant="chip"
           />
           {limits ? (
@@ -214,8 +224,6 @@ export function SnsView({ initialPlatform = "" }: { initialPlatform?: string }) 
               <PostCard
                 key={`${item.platform}-${item.content_key}-${(item as PostDTO).id ?? i}`}
                 item={item}
-                onChanged={loadInventory}
-                onJobStarted={(jobId, title) => setActiveJob({ id: jobId, title })}
               />
             ))}
           </div>
@@ -227,20 +235,6 @@ export function SnsView({ initialPlatform = "" }: { initialPlatform?: string }) 
         </>
       )}
 
-      {activeJob ? (
-        <JobDialog
-          jobId={activeJob.id}
-          onClose={() => setActiveJob(null)}
-          onFinished={(finalStatus) => {
-            loadLimits();
-            showToast(
-              finalStatus === "success" ? "ジョブが完了しました" : "ジョブが失敗しました",
-            );
-          }}
-        />
-      ) : null}
-
-      <ToastPortal message={message} />
     </div>
   );
 }

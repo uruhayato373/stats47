@@ -441,6 +441,25 @@ export default function middleware(req: NextRequest) {
     return NextResponse.redirect(url, { status: 301 });
   }
 
+  // 初期Geo X下書きが使っていた一覧ハブURLを、投稿の約束に合う専用landingへ移す。
+  // UTMはそのまま保持し、投稿別の流入計測を壊さない。
+  if (pathname === '/geo') {
+    const campaign = req.nextUrl.searchParams.get('utm_campaign');
+    const content = req.nextUrl.searchParams.get('utm_content');
+    const landing =
+      campaign === 'geo-001' && content === 'angle-experience'
+        ? '/geo/compare'
+        : (campaign === 'geo-016' && content === 'angle-howto') ||
+            (campaign === 'geo-031' && content === 'shock')
+          ? '/geo/method'
+          : null;
+    if (landing) {
+      const url = new URL(landing, req.url);
+      url.search = req.nextUrl.search;
+      return NextResponse.redirect(url, 301);
+    }
+  }
+
   // --- Section 2: コンテンツタイプ別 Allowlist 判定 ---
   const cityRankingMatch = pathname.match(/^\/ranking\/([^/]+)$/);
   if (cityRankingMatch && req.nextUrl.searchParams.get('areaType') === 'city') {

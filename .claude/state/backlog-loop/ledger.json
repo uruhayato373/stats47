@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T23:22:31.719Z",
+  "updatedAt": "2026-08-30T19:29:07.812Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -825,6 +825,19 @@
           "costUsd": null,
           "gate": null,
           "evidence": "queue が knownClass=needs-owner (route.apply=surface-only) と確定済み。オーナー実装カードでありCIでは削除・status変更不可。",
+          "failReason": "needs-owner",
+          "followUps": []
+        },
+        {
+          "at": "2026-08-30T19:29:07.812Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "queue の route.class が既に needs-owner (5回試行後 escalatedFrom=fable)。QG0-QG8 の複数週にまたがる大型実装 (impl-large 相当) で、この run の対象外 (impl-large/indicator-expansion は着手しない)。ledger の既存 quarantine 判定を尊重し行削除・タグ変更は行わない。",
           "failReason": "needs-owner",
           "followUps": []
         }
@@ -3355,38 +3368,15 @@
       "reclassifiedFrom": [],
       "completedAt": "2026-08-29T08:20:33.629Z"
     },
-    "CODEQL-JS-BACKLOG-01": {
-      "class": "test-fix",
+    "BLOG-REVIEW-AREA-RATIO-01": {
+      "class": "impl-small",
       "status": "completed",
       "sourceFile": null,
       "title": null,
       "attempts": [
         {
-          "at": "2026-08-29T22:38:27.411Z",
+          "at": "2026-08-29T21:49:42.025Z",
           "runId": null,
-          "model": "sonnet",
-          "effort": null,
-          "outcome": "deferred",
-          "turns": null,
-          "costUsd": null,
-          "gate": {
-            "commands": [
-              "VITE_CONFIG_NATIVE_IGNORE_WARNING=true npx vitest run apps/admin/tests/unit/jobs.test.ts apps/admin/tests/unit/actions.test.ts packages/r2-storage/src/lib/operations/__tests__/fetch-priority.test.ts",
-              "npm run test --workspace apps/admin",
-              "npx vitest run --project @stats47/r2-storage",
-              "npm run type-check --workspace apps/admin",
-              "npm run type-check --workspace @stats47/r2-storage",
-              "npm audit --json"
-            ],
-            "pass": true
-          },
-          "evidence": "R2 URL key 4種とadmin shell-free 3 fixtureが修正前RED→修正後GREEN。admin174、r2-storage55、両type-check、npm audit 0件。SARIFと実生成は外部実行未承認。",
-          "failReason": "Security Scan workflow dispatchとgallery実生成/R2反映が未承認のため完了条件の外部ゲート未実行",
-          "followUps": []
-        },
-        {
-          "at": "2026-08-29T23:22:31.719Z",
-          "runId": "33280689110",
           "model": "sonnet",
           "effort": null,
           "outcome": "completed",
@@ -3394,13 +3384,11 @@
           "costUsd": null,
           "gate": {
             "commands": [
-              "gh run view 33280366413 --log",
-              "gh run view 33280689110 --log",
-              "curl -sSIL https://storage.stats47.jp/app/blog/cc-estat-18-cache-r2/ogp/ogp.png?verify=33280689110"
+              "node .claude/scripts/blog/quality-gate.mjs area-ratio-prefecture-gap"
             ],
             "pass": true
           },
-          "evidence": "Security Scan 33280366413はSARIF=0。OGP run 33280689110はcc-estat-18-cache-r2をgenerated=1、exact publisher bundle=1 asset=4。公開OGPはHTTP 200 image/png。",
+          "evidence": "公開R2本文で除外定義、同率順位、北海道・香川の一次資料接地、因果限定を確認。既存blog-critic verdict PASS、quality gate pass=true。",
           "failReason": null,
           "followUps": []
         }
@@ -3412,6 +3400,34 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-29T23:22:31.719Z"
+    },
+    "BLOG-REVIEW-AREA-RATIO-01": {
+      "class": "impl-small",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-30T19:29:03.650Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "curl https://storage.stats47.jp/... => Bash denied。node -e => denied。/tmp 配下の一時 script 実行も denied。既存 fetch-ranking-data-r2.mjs (ranking values 専用) は実行できたが article.md 取得手段が無い。quality-gate.mjs area-ratio-prefecture-gap => exit 2 'article not found: .local/r2/app/blog/area-ratio-pre",
+          "failReason": "network-unavailable: 本セッションの Bash permission で curl / node -e / .local 外への node script 実行が denied。R2 (storage.stats47.jp) の article.md / data/*.json を取得する手段が既存の許可済み script (.claude/scripts/blog/*.mjs) に無く、quality-gate.mjs も article-not-found (exit 2) で実行不能。既存記事の内容是正 + 独立 blog-critic レビューが完了条件のため、R2 fetch 可能な環境で再試行が必要。",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "network-unavailable: 本セッションの Bash permission で curl / node -e / .local 外への node script 実行が denied。R2 (storage.stats47.jp) の article.md / data/*.json を取得する手段が既存の許可済み script (.claude/scripts/blog/*.mjs) に無く、quality-gate.mjs も article-not-found (exit 2) で実行不能。既存記事の内容是正 + 独立 blog-critic レビューが完了条件のため、R2 fetch 可能な環境で再試行が必要。",
+        "since": "2026-08-30T19:29:03.650Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }

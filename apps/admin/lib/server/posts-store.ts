@@ -10,8 +10,7 @@ import { projectRoot } from "./project-root";
  * ★ webpack にバンドルさせない: `.cjs` は `__dirname` 相対で STORE_PATH
  * (.claude/state/sns/posts.json) を解決するため、bundle されると __dirname が
  * .next の出力先になり STORE_PATH が壊れる。createRequire で実行時に絶対パス require し、
- * webpack の静的解析対象から外す。かつ書込は必ずこの store 経由で行う (SSOT 規約:
- * data-storage.md の `.claude/` カテゴリ / sns-content-standards.md §3)。
+ * webpack の静的解析対象から外す。管理画面では読み取りメソッドだけを公開する。
  */
 export interface Post {
   id: number;
@@ -48,9 +47,6 @@ interface Store {
   STORE_PATH: string;
   loadAll(): Post[];
   query(predicate: (p: Post) => boolean): Post[];
-  getById(id: number): Post | null;
-  insert(record: Partial<Post>): Post;
-  updateById(id: number, patch: Partial<Post>): Post | null;
 }
 
 // .cjs を実行時の素の Node require で読み込む。`createRequire(...)(path)` や `require(path)` を
@@ -79,16 +75,4 @@ export function loadAll(): Post[] {
 
 export function query(predicate: (p: Post) => boolean): Post[] {
   return store().query(predicate);
-}
-
-export function getById(id: number): Post | null {
-  return store().getById(id);
-}
-
-export function insert(record: Partial<Post>): Post {
-  return store().insert(record);
-}
-
-export function updateById(id: number, patch: Partial<Post>): Post | null {
-  return store().updateById(id, patch);
 }

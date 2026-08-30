@@ -35,7 +35,12 @@ export function trackGeoAnalysisView(params: GeoAnalysisEventParams): void {
 /** 地図上で都道府県を選択または解除した。 */
 export function trackGeoMapInteraction(
   params: GeoAnalysisEventParams & {
-    interactionType: 'select-prefecture' | 'clear-prefecture';
+    interactionType:
+      | 'select-prefecture'
+      | 'clear-prefecture'
+      | 'stage-population'
+      | 'stage-overlap'
+      | 'stage-audit';
     areaCode?: string;
   }
 ): void {

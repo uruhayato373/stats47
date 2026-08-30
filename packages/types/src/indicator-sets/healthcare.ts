@@ -81,11 +81,6 @@ export const HEALTHCARE_SET: IndicatorSet = {
       "role": "context"
     },
     {
-      "rankingKey": "health-checkup-rate-lifestyle-diseases",
-      "shortLabel": "健診受診率",
-      "role": "secondary"
-    },
-    {
       "rankingKey": "psychiatric-hospital-count-per-100k",
       "shortLabel": "精神科病院数",
       "role": "context"

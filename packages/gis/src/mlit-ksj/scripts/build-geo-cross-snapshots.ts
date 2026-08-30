@@ -7,6 +7,7 @@ import { pipeline } from "node:stream/promises";
 import { Readable } from "node:stream";
 
 import { fetchPrefectures } from "@stats47/area";
+import { BUSINESS_PLAN_M1_GEO_ANALYSES } from "@stats47/data-configs/business-plan";
 import { feature as topologyFeature } from "topojson-client";
 import type {
   Feature,
@@ -25,7 +26,7 @@ import unzipper from "unzipper";
 import {
   coordinateBounds,
   geometryCenter,
-  haversineKilometers,
+  mesh1000BoundsFromCode,
   median,
   pointInMultiPolygon,
   rankAreaRows,
@@ -33,11 +34,27 @@ import {
   type Coordinate,
   type PopulationMeshPoint,
 } from "../../geo-analysis/geo-analysis-core";
+import {
+  assertStationAccessConservation,
+  calculateStationAccessibility,
+  stationsWithinRadiusOfMeshes,
+  type StationAccessPoint,
+} from "../../geo-analysis/station-access";
+import {
+  GEO_STATION_ACCESS_MANIFEST_KEY,
+  geoStationAccessPrefKey,
+} from "../../geo-analysis/snapshot";
 import type {
+  GeoAnalysisArtifactEvidence,
+  GeoAnalysisEvidenceManifest,
+  GeoAnalysisInputEvidence,
   GeoAnalysisMetricDefinition,
   GeoAnalysisSnapshot,
   GeoAnalysisSnapshotRow,
   GeoAnalysisSource,
+  GeoStationAccessMeshCell,
+  GeoStationAccessPrefDetail,
+  GeoStationAccessStation,
 } from "../../geo-analysis/snapshot";
 
 const R2_PUBLIC_BASE = (
@@ -47,11 +64,11 @@ const POPULATION_VERSION = "24";
 const LAND_PRICE_VERSION = "26";
 const STATION_VERSION = "25";
 const FLOOD_VERSION = "25";
-const ACCESS_RADIUS_KM = 0.8;
-const STATION_GRID_DEGREES = 0.02;
 const FLOOD_GRID_DEGREES = 0.01;
 const EXPECTED_FLOOD_FILES = 94;
+const LOCAL_R2_ROOT = path.resolve(".local/r2");
 const OUTPUT_ROOT = path.resolve(".local/r2/app/geo");
+const MAX_STATION_DETAIL_BYTES = 5_000_000;
 const FLOOD_SOURCE_ROOT = path.resolve(
   `.local/r2/gis/mlit-ksj/A31b/${FLOOD_VERSION}/source`,
 );
@@ -69,14 +86,22 @@ interface AreaAccumulator {
 }
 
 interface StationAccumulator {
+  id: string;
+  name: string;
   longitudeTotal: number;
   latitudeTotal: number;
   count: number;
 }
 
-interface StationPoint {
-  readonly longitude: number;
-  readonly latitude: number;
+interface InputJsonEvidence {
+  readonly key: string;
+  readonly sha256: string;
+  readonly bytes: number;
+}
+
+interface PassengerContextEvidence {
+  readonly inputs: GeoAnalysisInputEvidence[];
+  readonly outputs: GeoAnalysisArtifactEvidence[];
 }
 
 function assertOk(response: Response, url: string): Response {
@@ -86,12 +111,23 @@ function assertOk(response: Response, url: string): Response {
   return response;
 }
 
-async function fetchJson<T>(url: string): Promise<T> {
+async function fetchJsonWithEvidence<T>(
+  url: string,
+  key: string,
+): Promise<{ value: T; evidence: InputJsonEvidence }> {
   const response = assertOk(
     await fetch(url, { headers: { "User-Agent": "stats47-geo-analysis/1.0" } }),
     url,
   );
-  return (await response.json()) as T;
+  const bytes = Buffer.from(await response.arrayBuffer());
+  return {
+    value: JSON.parse(bytes.toString("utf8")) as T,
+    evidence: {
+      key,
+      sha256: createHash("sha256").update(bytes).digest("hex"),
+      bytes: bytes.byteLength,
+    },
+  };
 }
 
 function readTopology(filePath: string): Topology {
@@ -148,7 +184,9 @@ function flattenPositions(geometry: Geometry): Coordinate[] {
   return positions;
 }
 
-function polygonCenter(geometry: Geometry): Coordinate | null {
+function polygonBounds(
+  geometry: Geometry,
+): readonly [number, number, number, number] | null {
   const positions = flattenPositions(geometry);
   if (positions.length === 0) return null;
   let minLongitude = Number.POSITIVE_INFINITY;
@@ -161,37 +199,59 @@ function polygonCenter(geometry: Geometry): Coordinate | null {
     maxLongitude = Math.max(maxLongitude, longitude);
     maxLatitude = Math.max(maxLatitude, latitude);
   }
-  return [(minLongitude + maxLongitude) / 2, (minLatitude + maxLatitude) / 2];
+  return [minLongitude, minLatitude, maxLongitude, maxLatitude];
 }
 
-async function loadPopulationMeshes(): Promise<PopulationMeshPoint[]> {
+async function loadPopulationMeshes(): Promise<{
+  meshes: PopulationMeshPoint[];
+  inputs: GeoAnalysisInputEvidence[];
+}> {
   const records: PopulationMeshPoint[] = [];
+  const inputs: GeoAnalysisInputEvidence[] = [];
   for (const [index, prefecture] of fetchPrefectures().entries()) {
     const prefCode = prefecture.prefCode.slice(0, 2);
-    const url = `${R2_PUBLIC_BASE}/gis/mlit-ksj/mesh1000r6/${POPULATION_VERSION}/${prefCode}.topojson`;
-    const topology = await fetchJson<Topology>(url);
+    const key = `gis/mlit-ksj/mesh1000r6/${POPULATION_VERSION}/${prefCode}.topojson`;
+    const url = `${R2_PUBLIC_BASE}/${key}`;
+    const { value: topology, evidence } = await fetchJsonWithEvidence<Topology>(
+      url,
+      key,
+    );
+    inputs.push({
+      layerId: "ipss-population-mesh-1km",
+      datasetId: "mesh1000r6",
+      version: POPULATION_VERSION,
+      key: evidence.key,
+      sha256: evidence.sha256,
+      bytes: evidence.bytes,
+      geometry: "mesh",
+      role: "calculation-input",
+      usedInCalculation: true,
+    });
     const features = topologyToFeatures(topology);
     for (const current of features) {
       const meshId = stringProperty(current.properties, "MESH_ID");
       const population2020 = numberProperty(current.properties, "PTN_2020") ?? 0;
       const population2050 = numberProperty(current.properties, "PTN_2050") ?? 0;
       if (!meshId || (population2020 <= 0 && population2050 <= 0)) continue;
-      const center = current.geometry ? polygonCenter(current.geometry) : null;
-      if (!center) continue;
+      const bounds =
+        mesh1000BoundsFromCode(meshId) ??
+        (current.geometry ? polygonBounds(current.geometry) : null);
+      if (!bounds) continue;
       records.push({
         meshId,
         areaCode: prefecture.prefCode,
-        longitude: center[0],
-        latitude: center[1],
+        longitude: (bounds[0] + bounds[2]) / 2,
+        latitude: (bounds[1] + bounds[3]) / 2,
         population2020,
         population2050,
+        bounds,
       });
     }
     console.log(
       `人口メッシュ ${index + 1}/47 ${prefecture.prefName}: ${features.length} features`,
     );
   }
-  return records;
+  return { meshes: records, inputs };
 }
 
 function createAreaAccumulators(
@@ -247,12 +307,13 @@ function stationFeatureCenter(
   return geometryCenter(positions);
 }
 
-function loadStationPoints(): StationPoint[] {
-  const topology = readTopology(
-    path.resolve(
-      `.local/r2/gis/mlit-ksj/S12/${STATION_VERSION}/national.topojson`,
-    ),
-  );
+function loadStationPoints(): {
+  stations: StationAccessPoint[];
+  input: GeoAnalysisInputEvidence;
+} {
+  const key = `gis/mlit-ksj/S12/${STATION_VERSION}/national.topojson`;
+  const inputPath = path.resolve(`.local/r2/${key}`);
+  const topology = readTopology(inputPath);
   const features = topologyToFeatures(topology);
   const groups = new Map<string, StationAccumulator>();
   for (const current of features) {
@@ -269,59 +330,39 @@ function loadStationPoints(): StationPoint[] {
     const center = stationFeatureCenter(current.geometry);
     if (!center) continue;
     const previous = groups.get(groupCode) ?? {
+      id: groupCode,
+      name: stringProperty(current.properties, "stationName") ?? "駅名不明",
       longitudeTotal: 0,
       latitudeTotal: 0,
       count: 0,
     };
     groups.set(groupCode, {
+      id: previous.id,
+      name: previous.name,
       longitudeTotal: previous.longitudeTotal + center[0],
       latitudeTotal: previous.latitudeTotal + center[1],
       count: previous.count + 1,
     });
   }
-  return [...groups.values()].map((group) => ({
-    longitude: group.longitudeTotal / group.count,
-    latitude: group.latitudeTotal / group.count,
-  }));
-}
-
-function gridKey(longitude: number, latitude: number, size: number): string {
-  return `${Math.floor(longitude / size)}:${Math.floor(latitude / size)}`;
-}
-
-function markStationAccessibility(
-  meshes: readonly PopulationMeshPoint[],
-  stations: readonly StationPoint[],
-): void {
-  const stationGrid = new Map<string, StationPoint[]>();
-  for (const station of stations) {
-    const key = gridKey(station.longitude, station.latitude, STATION_GRID_DEGREES);
-    stationGrid.set(key, [...(stationGrid.get(key) ?? []), station]);
-  }
-  const neighborRadius = Math.ceil(
-    ACCESS_RADIUS_KM / (111 * STATION_GRID_DEGREES),
-  );
-  for (const mesh of meshes) {
-    const longitudeBin = Math.floor(mesh.longitude / STATION_GRID_DEGREES);
-    const latitudeBin = Math.floor(mesh.latitude / STATION_GRID_DEGREES);
-    let accessible = false;
-    for (let x = -neighborRadius; x <= neighborRadius && !accessible; x += 1) {
-      for (let y = -neighborRadius; y <= neighborRadius && !accessible; y += 1) {
-        const candidates = stationGrid.get(
-          `${longitudeBin + x}:${latitudeBin + y}`,
-        );
-        accessible =
-          candidates?.some(
-            (station) =>
-              haversineKilometers(
-                [mesh.longitude, mesh.latitude],
-                [station.longitude, station.latitude],
-              ) <= ACCESS_RADIUS_KM,
-          ) ?? false;
-      }
-    }
-    mesh.isStationAccessible = accessible;
-  }
+  return {
+    stations: [...groups.values()].map((group) => ({
+      id: group.id,
+      name: group.name,
+      longitude: group.longitudeTotal / group.count,
+      latitude: group.latitudeTotal / group.count,
+    })),
+    input: {
+      layerId: "ksj-s12-station-point",
+      datasetId: "S12",
+      version: STATION_VERSION,
+      key,
+      sha256: fileSha256(inputPath),
+      bytes: fs.statSync(inputPath).size,
+      geometry: "line",
+      role: "calculation-input",
+      usedInCalculation: true,
+    },
+  };
 }
 
 function floodPolygons(
@@ -342,7 +383,9 @@ function buildFloodMeshGrid(
 ): Map<string, PopulationMeshPoint[]> {
   const result = new Map<string, PopulationMeshPoint[]>();
   for (const mesh of meshes) {
-    const key = gridKey(mesh.longitude, mesh.latitude, FLOOD_GRID_DEGREES);
+    const key = `${Math.floor(mesh.longitude / FLOOD_GRID_DEGREES)}:${Math.floor(
+      mesh.latitude / FLOOD_GRID_DEGREES,
+    )}`;
     result.set(key, [...(result.get(key) ?? []), mesh]);
   }
   return result;
@@ -579,13 +622,324 @@ function createSnapshot(input: {
   };
 }
 
-function writeSnapshot(snapshot: GeoAnalysisSnapshot): string {
+function writeJsonArtifact(
+  key: string,
+  value: unknown,
+  recordCount: number,
+  pretty = false,
+  areaCode?: string,
+): GeoAnalysisArtifactEvidence {
+  const outputPath = path.join(LOCAL_R2_ROOT, key);
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  const body = `${JSON.stringify(value, null, pretty ? 2 : undefined)}\n`;
+  fs.writeFileSync(outputPath, body, "utf8");
+  const bytes = Buffer.byteLength(body);
+  return {
+    key,
+    sha256: createHash("sha256").update(body).digest("hex"),
+    bytes,
+    recordCount,
+    ...(areaCode ? { areaCode } : {}),
+  };
+}
+
+function writeSnapshot(
+  snapshot: GeoAnalysisSnapshot,
+): GeoAnalysisArtifactEvidence {
   const outputDirectory = path.join(OUTPUT_ROOT, snapshot.slug);
   fs.mkdirSync(outputDirectory, { recursive: true });
-  const outputPath = path.join(outputDirectory, "item.json");
-  fs.writeFileSync(outputPath, `${JSON.stringify(snapshot, null, 2)}\n`, "utf8");
-  console.log(`snapshot: ${outputPath}`);
-  return outputPath;
+  const key = `app/geo/${snapshot.slug}/item.json`;
+  const evidence = writeJsonArtifact(
+    key,
+    snapshot,
+    snapshot.rows.length,
+    true,
+  );
+  console.log(`snapshot: ${path.join(LOCAL_R2_ROOT, key)}`);
+  return evidence;
+}
+
+function quantizeCoordinate(value: number): number {
+  return Math.round(value * 1_000_000);
+}
+
+function stationAccessPrefDetail(
+  generatedAt: string,
+  areaCode: string,
+  areaName: string,
+  meshes: readonly PopulationMeshPoint[],
+  stations: readonly StationAccessPoint[],
+): GeoStationAccessPrefDetail {
+  const areaMeshes = meshes.filter((mesh) => mesh.areaCode === areaCode);
+  if (areaMeshes.length === 0) {
+    throw new Error(`${areaCode}: 人口メッシュがありません`);
+  }
+  const meshCells: GeoStationAccessMeshCell[] = areaMeshes.map((mesh) => {
+    if (!mesh.bounds) {
+      throw new Error(`${areaCode}: mesh bounds欠落 ${mesh.meshId}`);
+    }
+    return [
+      mesh.meshId,
+      quantizeCoordinate(mesh.bounds[0]),
+      quantizeCoordinate(mesh.bounds[1]),
+      quantizeCoordinate(mesh.bounds[2]),
+      quantizeCoordinate(mesh.bounds[3]),
+      mesh.population2020,
+      mesh.population2050,
+      mesh.isStationAccessible ? 1 : 0,
+    ];
+  });
+  const displayedStations: GeoStationAccessStation[] =
+    stationsWithinRadiusOfMeshes(areaMeshes, stations)
+    .map((station) => [
+      station.id,
+      station.name,
+      quantizeCoordinate(station.longitude),
+      quantizeCoordinate(station.latitude),
+    ]);
+  const accessible = meshCells.filter((mesh) => mesh[7] === 1);
+  const population2020 = meshCells.reduce((sum, mesh) => sum + mesh[5], 0);
+  const population2050 = meshCells.reduce((sum, mesh) => sum + mesh[6], 0);
+  const accessiblePopulation2020 = accessible.reduce(
+    (sum, mesh) => sum + mesh[5],
+    0,
+  );
+  const accessiblePopulation2050 = accessible.reduce(
+    (sum, mesh) => sum + mesh[6],
+    0,
+  );
+  return {
+    schemaVersion: 1,
+    slug: "population-station-access",
+    generatedAt,
+    areaCode,
+    areaName,
+    accessRadiusMeters: 800,
+    meshMethod: "center-point",
+    meshes: meshCells,
+    stations: displayedStations,
+    summary: {
+      meshCount: meshCells.length,
+      accessibleMeshCount: accessible.length,
+      displayedStationCount: displayedStations.length,
+      population2020,
+      population2050,
+      accessiblePopulation2020,
+      accessiblePopulation2050,
+      stationAccessShare2020:
+        population2020 > 0
+          ? round((accessiblePopulation2020 / population2020) * 100, 1)
+          : 0,
+      stationAccessShare2050:
+        population2050 > 0
+          ? round((accessiblePopulation2050 / population2050) * 100, 1)
+          : 0,
+    },
+  };
+}
+
+function writeStationAccessDetails(
+  generatedAt: string,
+  meshes: readonly PopulationMeshPoint[],
+  stations: readonly StationAccessPoint[],
+  snapshot: GeoAnalysisSnapshot,
+): Array<{
+  readonly detail: GeoStationAccessPrefDetail;
+  readonly evidence: GeoAnalysisArtifactEvidence;
+}> {
+  return fetchPrefectures().map((prefecture) => {
+    const detail = stationAccessPrefDetail(
+      generatedAt,
+      prefecture.prefCode,
+      prefecture.prefName,
+      meshes,
+      stations,
+    );
+    const aggregateRow = snapshot.rows.find(
+      (row) => row.areaCode === prefecture.prefCode,
+    );
+    if (!aggregateRow) {
+      throw new Error(`${prefecture.prefCode}: aggregate row欠落`);
+    }
+    assertStationAccessConservation(detail, aggregateRow);
+    const prefCode2 = prefecture.prefCode.slice(0, 2);
+    const evidence = writeJsonArtifact(
+      geoStationAccessPrefKey(prefCode2),
+      detail,
+      detail.meshes.length,
+      false,
+      prefecture.prefCode,
+    );
+    if (evidence.bytes > MAX_STATION_DETAIL_BYTES) {
+      throw new Error(
+        `${prefecture.prefCode}: 県別Geo artifactが上限超過 bytes=${evidence.bytes}`,
+      );
+    }
+    return { detail, evidence };
+  });
+}
+
+async function loadPassengerContextEvidence(): Promise<PassengerContextEvidence> {
+  const inputs: GeoAnalysisInputEvidence[] = [];
+  const outputs: GeoAnalysisArtifactEvidence[] = [];
+  for (const prefecture of fetchPrefectures()) {
+    const prefCode2 = prefecture.prefCode.slice(0, 2);
+    const key = `app/station-passengers/${prefCode2}/stations.json`;
+    const { value, evidence } = await fetchJsonWithEvidence<unknown>(
+      `${R2_PUBLIC_BASE}/${key}`,
+      key,
+    );
+    if (
+      typeof value !== "object" ||
+      value === null ||
+      !("stations" in value) ||
+      !Array.isArray(value.stations)
+    ) {
+      throw new Error(`${key}: 駅別乗降客数contextのschema不良`);
+    }
+    inputs.push({
+      layerId: "ksj-s12-passenger-context",
+      datasetId: "S12",
+      version: "2019-2023",
+      key,
+      sha256: evidence.sha256,
+      bytes: evidence.bytes,
+      geometry: "point",
+      role: "context-only",
+      usedInCalculation: false,
+    });
+    outputs.push({
+      key,
+      sha256: evidence.sha256,
+      bytes: evidence.bytes,
+      recordCount: value.stations.length,
+      areaCode: prefecture.prefCode,
+    });
+  }
+  return { inputs, outputs };
+}
+
+function stageOutputs(
+  details: readonly {
+    readonly detail: GeoStationAccessPrefDetail;
+    readonly evidence: GeoAnalysisArtifactEvidence;
+  }[],
+  count: (detail: GeoStationAccessPrefDetail) => number,
+): GeoAnalysisArtifactEvidence[] {
+  return details.map(({ detail, evidence }) => ({
+    ...evidence,
+    recordCount: count(detail),
+  }));
+}
+
+function writeStationAccessManifest(input: {
+  generatedAt: string;
+  populationInputs: readonly GeoAnalysisInputEvidence[];
+  stationInput: GeoAnalysisInputEvidence;
+  passengerContext: PassengerContextEvidence;
+  details: readonly {
+    readonly detail: GeoStationAccessPrefDetail;
+    readonly evidence: GeoAnalysisArtifactEvidence;
+  }[];
+  aggregate: GeoAnalysisArtifactEvidence;
+  stationGroups: number;
+  populatedMeshes: number;
+}): GeoAnalysisEvidenceManifest {
+  const definition = BUSINESS_PLAN_M1_GEO_ANALYSES.find(
+    (analysis) => analysis.slug === "population-station-access",
+  );
+  if (!definition) throw new Error("station access analysis定義がありません");
+  const populationOutputs = stageOutputs(input.details, (detail) => detail.meshes.length);
+  const stationOutputs = stageOutputs(input.details, (detail) => detail.stations.length);
+  const accessibleOutputs = stageOutputs(
+    input.details,
+    (detail) => detail.summary.accessibleMeshCount,
+  );
+  const manifest: GeoAnalysisEvidenceManifest = {
+    schemaVersion: 1,
+    slug: "population-station-access",
+    generatedAt: input.generatedAt,
+    definitionSha256: createHash("sha256")
+      .update(JSON.stringify(definition))
+      .digest("hex"),
+    inputs: [
+      ...input.populationInputs,
+      input.stationInput,
+      ...input.passengerContext.inputs,
+    ],
+    stages: [
+      {
+        id: "population-mesh",
+        label: "1km将来人口メッシュ",
+        kind: "source",
+        role: "calculation-input",
+        inputIds: ["ipss-population-mesh-1km"],
+        operation: "2020年・2050年人口とメッシュ境界を県別表示artifactへ変換",
+        outputKeyPattern: "app/geo/population-station-access/pref/{NN}.json#meshes",
+        outputs: populationOutputs,
+      },
+      {
+        id: "station-representative-points",
+        label: "駅グループ代表点",
+        kind: "spatial-operation",
+        role: "derived",
+        inputIds: ["ksj-s12-station-point"],
+        operation: "駅グループコードで重複をまとめ線形状の代表点を算出",
+        outputKeyPattern: "app/geo/population-station-access/pref/{NN}.json#stations",
+        outputs: stationOutputs,
+      },
+      {
+        id: "station-passenger-context",
+        label: "駅別乗降客数",
+        kind: "context",
+        role: "context-only",
+        inputIds: ["ksj-s12-passenger-context"],
+        operation: "背景理解の補助表示。駅800m圏人口の計算には使用しない",
+        outputKeyPattern: "app/station-passengers/{NN}/stations.json",
+        outputs: input.passengerContext.outputs,
+      },
+      {
+        id: "station-access-800m",
+        label: "駅800m圏メッシュ",
+        kind: "spatial-operation",
+        role: "derived",
+        inputIds: ["population-mesh", "station-representative-points"],
+        operation: "メッシュ中心点と駅代表点の大円距離が800m以内か判定",
+        outputKeyPattern: "app/geo/population-station-access/pref/{NN}.json#meshes[*][7]",
+        outputs: accessibleOutputs,
+      },
+      {
+        id: "prefecture-aggregate",
+        label: "都道府県別集計",
+        kind: "aggregate",
+        role: "aggregate",
+        inputIds: ["station-access-800m"],
+        operation: "圏内メッシュの2020年・2050年人口を47都道府県別に合計",
+        outputKeyPattern: "app/geo/population-station-access/item.json",
+        outputs: [input.aggregate],
+      },
+    ],
+    aggregate: input.aggregate,
+    quality: {
+      expectedAreas: 47,
+      detailAreas: input.details.length,
+      conservationChecks: input.details.length,
+      stationGroups: input.stationGroups,
+      populatedMeshes: input.populatedMeshes,
+      accessibleMeshes: input.details.reduce(
+        (sum, item) => sum + item.detail.summary.accessibleMeshCount,
+        0,
+      ),
+      maxDetailBytes: Math.max(...input.details.map((item) => item.evidence.bytes)),
+    },
+  };
+  writeJsonArtifact(
+    GEO_STATION_ACCESS_MANIFEST_KEY,
+    manifest,
+    manifest.stages.length,
+    true,
+  );
+  return manifest;
 }
 
 function buildLandPriceSnapshot(
@@ -811,31 +1165,64 @@ function buildFloodSnapshot(
 }
 
 async function main(): Promise<void> {
+  const stationAccessOnly = process.argv.includes("--station-access-only");
   const generatedAt = new Date().toISOString();
   console.log(`R2 input: ${R2_PUBLIC_BASE}`);
-  const meshes = await loadPopulationMeshes();
+  const { meshes, inputs: populationInputs } = await loadPopulationMeshes();
   if (meshes.length < 100_000) {
     throw new Error(`人口メッシュ件数が少なすぎます: ${meshes.length}`);
   }
 
-  const accumulators = createAreaAccumulators(meshes);
-  const landPricePointCount = loadLandPricePoints(accumulators);
-  writeSnapshot(
-    buildLandPriceSnapshot(generatedAt, accumulators, landPricePointCount),
-  );
+  let landPricePointCount = 0;
+  if (!stationAccessOnly) {
+    const accumulators = createAreaAccumulators(meshes);
+    landPricePointCount = loadLandPricePoints(accumulators);
+    writeSnapshot(
+      buildLandPriceSnapshot(generatedAt, accumulators, landPricePointCount),
+    );
+  }
 
-  const stationPoints = loadStationPoints();
+  const { stations: stationPoints, input: stationInput } = loadStationPoints();
   if (stationPoints.length < 5_000) {
     throw new Error(`駅グループ数が少なすぎます: ${stationPoints.length}`);
   }
-  markStationAccessibility(meshes, stationPoints);
-  writeSnapshot(buildStationSnapshot(generatedAt, meshes, stationPoints.length));
+  const stationAccessMeshes = calculateStationAccessibility(meshes, stationPoints);
+  const stationSnapshot = buildStationSnapshot(
+    generatedAt,
+    stationAccessMeshes,
+    stationPoints.length,
+  );
+  const stationAggregate = writeSnapshot(stationSnapshot);
+  const stationDetails = writeStationAccessDetails(
+    generatedAt,
+    stationAccessMeshes,
+    stationPoints,
+    stationSnapshot,
+  );
+  const passengerContext = await loadPassengerContextEvidence();
+  const stationManifest = writeStationAccessManifest({
+    generatedAt,
+    populationInputs,
+    stationInput,
+    passengerContext,
+    details: stationDetails,
+    aggregate: stationAggregate,
+    stationGroups: stationPoints.length,
+    populatedMeshes: stationAccessMeshes.length,
+  });
 
-  const floodCounts = await markFloodExposure(meshes);
-  writeSnapshot(buildFloodSnapshot(generatedAt, meshes, floodCounts));
+  if (stationAccessOnly) {
+    console.log(
+      `完了: meshes=${meshes.length} stations=${stationPoints.length} stationDetails=${stationManifest.quality.detailAreas}`,
+    );
+    return;
+  }
+
+  const floodCounts = await markFloodExposure(stationAccessMeshes);
+  writeSnapshot(buildFloodSnapshot(generatedAt, stationAccessMeshes, floodCounts));
 
   console.log(
-    `完了: meshes=${meshes.length} landPoints=${landPricePointCount} stations=${stationPoints.length} floodFiles=${floodCounts.files}`,
+    `完了: meshes=${meshes.length} landPoints=${landPricePointCount} stations=${stationPoints.length} stationDetails=${stationManifest.quality.detailAreas} floodFiles=${floodCounts.files}`,
   );
 }
 

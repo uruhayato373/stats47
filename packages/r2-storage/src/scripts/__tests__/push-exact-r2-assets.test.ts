@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { gunzipSync } from 'node:zlib';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
@@ -16,6 +17,7 @@ interface FakeObject {
   body: Buffer;
   etag: string;
   contentType: string;
+  contentEncoding?: string;
   metadata: Record<string, string>;
 }
 
@@ -41,6 +43,7 @@ function makeStore(initial: Record<string, FakeObject> = {}) {
           etag: value.etag,
           contentLength: value.body.byteLength,
           contentType: value.contentType,
+          contentEncoding: value.contentEncoding ?? null,
           metadata: value.metadata,
         }
       : null;
@@ -65,6 +68,7 @@ function makeStore(initial: Record<string, FakeObject> = {}) {
         body: options.body,
         etag: `"${++revision}"`,
         contentType: options.contentType,
+        contentEncoding: options.contentEncoding,
         metadata: options.metadata,
       });
     },
@@ -80,6 +84,7 @@ function exactMetadata(body: Buffer, contentType: string) {
     'stats47-sha256': createHash('sha256').update(body).digest('hex'),
     'stats47-size': String(body.byteLength),
     'stats47-content-type': contentType,
+    'stats47-content-encoding': 'identity',
   };
 }
 
@@ -178,6 +183,36 @@ describe('exact R2 asset publisher', () => {
     expect(objects.get(key)?.body).toEqual(body);
   });
 
+  it('TopoJSONを決定的にgzip圧縮しContent-Encoding付きでPUTする', async () => {
+    const root = makeRoot();
+    const key = 'gis/mlit-ksj/A42/national/data.topojson';
+    const source = Buffer.from(
+      JSON.stringify({
+        type: 'Topology',
+        objects: { example: { type: 'GeometryCollection', geometries: [] } },
+        arcs: Array.from({ length: 100 }, () => [[1, 2], [3, 4]]),
+      })
+    );
+    mkdirSync(join(root, '.local/r2/gis/mlit-ksj/A42/national'), {
+      recursive: true,
+    });
+    writeFileSync(join(root, '.local/r2', key), source);
+
+    const [candidate] = resolveExactAssetCandidates(root, {
+      keys: [key],
+      prefix: null,
+      extensions: [],
+    });
+    const { store, objects } = makeStore();
+    await publishExactR2Assets({ candidates: [candidate], store, dryRun: false });
+
+    expect(candidate.contentEncoding).toBe('gzip');
+    expect(candidate.size).toBeLessThan(source.byteLength);
+    expect(gunzipSync(candidate.body)).toEqual(source);
+    expect(objects.get(key)?.contentEncoding).toBe('gzip');
+    expect(objects.get(key)?.metadata['stats47-content-encoding']).toBe('gzip');
+  });
+
   it('dry-runは差分を検出してもPUTしない', async () => {
     const root = makeRoot();
     const key = 'app/blog/article-a/chart.svg';
@@ -232,6 +267,15 @@ describe('exact R2 asset publisher', () => {
   });
 
   it('複数keyと狭いprefix+extensionだけを決定的に列挙する', () => {
+    expect(
+      parseExactAssetArgs([
+        '--prefix',
+        'gis/mlit-ksj/G04-a/11',
+        '--extension',
+        'topojson,json',
+      ]).selection.extensions
+    ).toEqual(['.json', '.topojson']);
+
     const parsedKeys = parseExactAssetArgs([
       '--key',
       'app/blog/b/chart.svg,app/blog/a/chart.svg',

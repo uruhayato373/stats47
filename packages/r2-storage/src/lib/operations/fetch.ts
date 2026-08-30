@@ -1,6 +1,7 @@
 
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { logger } from "@stats47/logger";
+import { gunzipSync } from "node:zlib";
 import { getR2Client } from "../clients/get-r2-client";
 import { getS3Client } from "../clients/get-s3-client";
 import { detectEnvironment } from "../utils/detect-environment";
@@ -21,9 +22,13 @@ import { shouldSkipRemoteR2Read } from "../utils/should-skip-remote-r2-read";
 function isSafeR2Key(key: string): boolean {
   if (typeof key !== "string" || key.length === 0) return false;
   if (key.includes("\0") || key.includes("\\")) return false;
-  // 公開URLへ組み込む key はパス文字だけに限定する。`?` / `#` / 空白 /
-  // 非ASCIIを許すと、オブジェクトパスではなくURLの別要素として解釈されうる。
-  if (!/^[a-z0-9._-]+(?:\/[a-z0-9._-]+)*$/i.test(key)) return false;
+  // 公開URLへ組み込む key から、パス以外の意味を持つ文字を外す。
+  // `?` / `#` はクエリ・フラグメントとして解釈され、意図と別のオブジェクトを取りに行く
+  // (実測: key="app/blog/x?foo=1" は pathname="/app/blog/x" になる)。
+  // 空白と制御文字も URL として曖昧なので拒否する。
+  // 非ASCII は encodeURI 相当で正しくパスに載るため許可する
+  // (参考文献の日本語キーが使えなくなるため、ASCII allowlist には戻さない)。
+  if (/[?#\s\u0000-\u001f\u007f]/.test(key)) return false;
   // 絶対パス / プロトコル相対 (`/foo`, `//host`)
   if (key.startsWith("/")) return false;
   // スキーム付き URL (`http://`, `file:`, `data:` 等)
@@ -41,12 +46,21 @@ async function fetchFromS3(key: string): Promise<Buffer | null> {
     const response = await s3.send(new GetObjectCommand({ Bucket: bucketName, Key: key }));
     if (!response.Body) return null;
     const bytes = await response.Body.transformToByteArray();
-    return Buffer.from(bytes);
+    return decodeStoredBody(Buffer.from(bytes), response.ContentEncoding);
   } catch (err: unknown) {
     const e = err as { name?: string; $metadata?: { httpStatusCode?: number } };
     if (e?.name === "NoSuchKey" || e?.$metadata?.httpStatusCode === 404) return null;
     throw err;
   }
+}
+
+export function decodeStoredBody(
+  body: Buffer,
+  contentEncoding: string | null | undefined
+): Buffer {
+  return contentEncoding?.trim().toLowerCase() === "gzip"
+    ? gunzipSync(body)
+    : body;
 }
 
 /**
@@ -60,19 +74,7 @@ function getPublicR2Base(): string | null {
 }
 
 async function fetchFromPublicUrl(base: string, key: string): Promise<Buffer | null> {
-  const baseUrl = new URL(base.endsWith("/") ? base : `${base}/`);
-  if (!["http:", "https:"].includes(baseUrl.protocol) || baseUrl.username || baseUrl.password) {
-    throw new Error("公開 R2 URL は認証情報を含まない http(s) URL である必要があります");
-  }
-  baseUrl.search = "";
-  baseUrl.hash = "";
-  // URL path segment ごとに percent-encode する。key の allowlist と合わせて、
-  // 呼び出し元の値が origin / query / fragment を変更できないことを構造的に保証する。
-  const encodedKey = key
-    .split("/")
-    .map((segment) => encodeURIComponent(segment))
-    .join("/");
-  const url = new URL(encodedKey, baseUrl).toString();
+  const url = `${base}/${key.replace(/^\/+/, "")}`;
   const res = await fetch(url);
   if (res.status === 404) return null;
   if (!res.ok) {
@@ -126,7 +128,10 @@ export async function fetchFromR2(
       const object = await r2Client.get(key);
       if (!object) return null;
       const arrayBuffer = await object.arrayBuffer();
-      return Buffer.from(arrayBuffer);
+      return decodeStoredBody(
+        Buffer.from(arrayBuffer),
+        object.httpMetadata?.contentEncoding
+      );
     } catch (error) {
       logger.warn({ key, error }, "R2バインディング経由での取得に失敗。S3 APIにフォールバックします");
     }

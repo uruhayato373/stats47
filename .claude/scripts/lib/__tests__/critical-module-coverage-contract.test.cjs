@@ -14,9 +14,12 @@ const EXPECTED_IDS = new Set([
   "r2-runtime-parser",
   "metric-recipe",
   "value-verification",
+  "link-audit-core",
+  "ranking-route-metadata",
 ]);
-const DATA_COMMAND = "(cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts --coverage --coverage.reporter=text-summary)";
+const DATA_COMMAND = "(cd packages/data-configs && npx vitest run src/__tests__/shape-gate.test.ts src/__tests__/recipe.test.ts src/__tests__/value-verification.test.ts src/unit/__tests__/unit-comparability.test.ts src/theme-catalog/__tests__/chart-dependencies.test.ts src/theme-catalog/__tests__/stat-series-ref.test.ts src/link-audit/__tests__/link-check-core.test.ts --coverage --coverage.reporter=text-summary)";
 const R2_COMMAND = "(cd packages/r2-storage && npx vitest run src/lib/operations/__tests__/snapshot-reader.test.ts --coverage --coverage.reporter=text-summary)";
+const WEB_COMMAND = "(cd apps/web && npx vitest run src/features/ranking/utils/__tests__/generate-meta-data.test.ts --coverage --coverage.reporter=text-summary --coverage.thresholds.lines=0 --coverage.thresholds.statements=0 --coverage.thresholds.functions=0 --coverage.thresholds.branches=0)";
 const CONTRACT_COMMAND = "node --test .claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs";
 
 function jobBlock(text, jobId) {
@@ -95,7 +98,8 @@ function auditInventory(inventory, { exists, configText }) {
   }
   for (const workspace of new Set(inventory.modules.map((item) => item.workspace))) {
     const text = configText(workspace);
-    if (!text.includes("critical-module-coverage.json") || !text.includes("thresholds: criticalThresholds")) {
+    const hasThresholds = text.includes("thresholds: criticalThresholds") || text.includes("...criticalThresholds");
+    if (!text.includes("critical-module-coverage.json") || !hasThresholds) {
       findings.push(`${workspace}:VITEST_THRESHOLD_WIRING_MISSING`);
     }
   }
@@ -106,7 +110,7 @@ function auditWorkflow(text) {
   const findings = [];
   const steps = stepBlocks(jobBlock(text, "test"));
   const coverageStep = steps.find((step) => stepHasCommand(step, DATA_COMMAND) || stepHasCommand(step, R2_COMMAND));
-  if (!coverageStep || !stepHasCommand(coverageStep, DATA_COMMAND) || !stepHasCommand(coverageStep, R2_COMMAND) || isSoftFail(coverageStep)) {
+  if (!coverageStep || !stepHasCommand(coverageStep, DATA_COMMAND) || !stepHasCommand(coverageStep, R2_COMMAND) || !stepHasCommand(coverageStep, WEB_COMMAND) || isSoftFail(coverageStep)) {
     findings.push("CRITICAL_MODULE_COVERAGE_NOT_BLOCKING");
   }
   const contractStep = stepBlocks(jobBlock(text, "static-gates"))
@@ -122,7 +126,11 @@ function fixtureInventory() {
     version: 1,
     modules: [...EXPECTED_IDS].map((id, index) => ({
       id,
-      workspace: id === "r2-runtime-parser" ? "packages/r2-storage" : "packages/data-configs",
+      workspace: id === "r2-runtime-parser"
+        ? "packages/r2-storage"
+        : id === "ranking-route-metadata"
+          ? "apps/web"
+          : "packages/data-configs",
       module: `src/${id}.ts`,
       tests: [`src/${id}.test.ts`],
       floor: { lines: 80, branches: 70, functions: 75 },
@@ -132,7 +140,7 @@ function fixtureInventory() {
 }
 
 function healthyWorkflow({ soft = false, needs = "test" } = {}) {
-  return `name: fixture\non:\n  pull_request:\njobs:\n  static-gates:\n    steps:\n      - run: ${CONTRACT_COMMAND}\n        continue-on-error: false\n  test:\n    steps:\n      - name: critical coverage\n        run: |\n          ${DATA_COMMAND}\n          ${R2_COMMAND}\n        continue-on-error: ${soft}\n  quality-check:\n    needs: [static-gates, ${needs}]\n    steps:\n      - run: echo ok\n`;
+  return `name: fixture\non:\n  pull_request:\njobs:\n  static-gates:\n    steps:\n      - run: ${CONTRACT_COMMAND}\n        continue-on-error: false\n  test:\n    steps:\n      - name: critical coverage\n        run: |\n          ${DATA_COMMAND}\n          ${R2_COMMAND}\n          ${WEB_COMMAND}\n        continue-on-error: ${soft}\n  quality-check:\n    needs: [static-gates, ${needs}]\n    steps:\n      - run: echo ok\n`;
 }
 
 function fixtureEnvironment(inventory = fixtureInventory()) {
@@ -161,7 +169,7 @@ test("実inventory・Vitest config・PR workflowがcritical module coverage契�
   assert.deepEqual(auditWorkflow(workflow), []);
 });
 
-test("正常な7領域inventoryとblocking workflowを受理する", () => {
+test("正常な9領域inventoryとblocking workflowを受理する", () => {
   const inventory = fixtureInventory();
   assert.deepEqual(auditInventory(inventory, fixtureEnvironment(inventory)), []);
   assert.deepEqual(auditWorkflow(healthyWorkflow()), []);

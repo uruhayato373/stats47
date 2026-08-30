@@ -18,17 +18,39 @@ interface UnzipperFile {
   buffer(): Promise<Buffer>;
 }
 
+export function sanitizeArchiveBaseName(rawPath: string, fallbackIndex: number): string {
+  const rawBase = path.basename(rawPath, path.extname(rawPath));
+  const administrativeCode = rawBase.match(/^(\d{5})(?:_|$)/)?.[1];
+  if (administrativeCode) return administrativeCode;
+  const ascii = rawBase
+    .replace(/[^\x20-\x7e]/g, "-")
+    .replace(/[^A-Za-z0-9._~-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return ascii || `archive-entry-${String(fallbackIndex).padStart(4, "0")}`;
+}
+
 /**
  * ダウンロード URL を構築
  */
 export function buildDownloadUrl(
   def: Pick<KsjCodeConfig, "downloadUrlPattern">,
   version: string,
-  prefCode?: string
+  prefCode?: string,
+  meshCode?: string,
 ): string {
+  if (!def.downloadUrlPattern) {
+    throw new Error("downloadUrlPatternがない公式manifest取得型データセットです");
+  }
   let url = def.downloadUrlPattern.replace(/\{VERSION\}/g, version);
   if (prefCode) {
     url = url.replace(/\{PREF\}/g, prefCode);
+  }
+  if (meshCode) {
+    url = url.replace(/\{MESHCODE\}/g, meshCode);
+  }
+  const unresolved = url.match(/\{[A-Z]+\}/g);
+  if (unresolved) {
+    throw new Error(`ダウンロードURLに未解決の変数があります: ${unresolved.join(", ")}`);
   }
   return url;
 }
@@ -39,16 +61,16 @@ export function buildDownloadUrl(
 export async function downloadZip(
   url: string,
   dataId: string,
-  version: string
+  version: string,
+  scope?: string,
 ): Promise<string> {
-  const zipPath = `/tmp/mlit-ksj-${dataId}-${version}.zip`;
+  const suffix = scope ? `-${scope}` : "";
+  const zipPath = `/tmp/mlit-ksj-${dataId}-${version}${suffix}.zip`;
 
+  // 通常取得は常に公式URLから取り直す。中断時のpartial zipを正規データとして
+  // 再利用しない。明示的な再利用はpipelineの --skip-download だけが担う。
   if (fs.existsSync(zipPath)) {
-    const stat = fs.statSync(zipPath);
-    if (stat.size > 0) {
-      console.log(`  既存 zip を再利用: ${zipPath} (${formatBytes(stat.size)})`);
-      return zipPath;
-    }
+    fs.unlinkSync(zipPath);
   }
 
   console.log(`  ダウンロード中: ${url}`);
@@ -94,10 +116,11 @@ export async function extractGeoJson(
   }
 
   const geojsonFiles: string[] = [];
+  const usedOutputNames = new Set<string>();
 
   const directory = await unzipper.Open.file(zipPath);
 
-  for (const entry of directory.files) {
+  for (const [entryIndex, entry] of directory.files.entries()) {
     const entryPath = entry.path;
 
     // .geojson ファイルのみ対象
@@ -113,12 +136,20 @@ export async function extractGeoJson(
     if (!isInTargetDir && geojsonDirInZip !== "") continue;
     if (isShiftJis) continue;
 
-    const outputPath = path.join(extractDir, path.basename(entryPath));
+    const safeBase = sanitizeArchiveBaseName(entryPath, entryIndex);
+    let outputName = `${safeBase}.geojson`;
+    let duplicateIndex = 2;
+    while (usedOutputNames.has(outputName)) {
+      outputName = `${safeBase}-${duplicateIndex}.geojson`;
+      duplicateIndex += 1;
+    }
+    usedOutputNames.add(outputName);
+    const outputPath = path.join(extractDir, outputName);
     const content = await entry.buffer();
     fs.writeFileSync(outputPath, content);
     geojsonFiles.push(outputPath);
     console.log(
-      `  抽出: ${path.basename(entryPath)} (${formatBytes(content.length)})`
+      `  抽出: ${outputName} (${formatBytes(content.length)})`
     );
   }
 
@@ -172,12 +203,14 @@ async function extractAndConvertShapefile(
 
   const geojsonFiles: string[] = [];
 
-  for (const [baseName, files] of shpEntries) {
+  let shapeIndex = 0;
+  for (const [rawBaseName, files] of shpEntries) {
     const shpEntry = files.get(".shp");
     const dbfEntry = files.get(".dbf");
     if (!shpEntry || !dbfEntry) continue;
 
     // ファイルを /tmp に書き出す
+    const baseName = sanitizeArchiveBaseName(rawBaseName, shapeIndex++);
     const shpPath = path.join(extractDir, `${baseName}.shp`);
     const dbfPath = path.join(extractDir, `${baseName}.dbf`);
     fs.writeFileSync(shpPath, await shpEntry.buffer());

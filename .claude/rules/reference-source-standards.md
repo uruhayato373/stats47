@@ -120,7 +120,9 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
   `primarySourceRequired:true`を必須とし、欠ける場合は共通CLIが停止する。
 - 利用実装仕様書の更新は設計判断が変わった時だけ行い、実行履歴は backlog / state / 既存運用台帳へ置く。
 - コンテンツ展開の進捗は管理コンソール`/content/references`で確認する。同画面は解決済みinventoryを
-  metric / area単位へ重複排除し、既存のblog / note / Kindle SSOTと実行時に突合する派生read modelである。
+  metric / area単位へ重複排除し、ranking / survey / theme / area / japan / world / blog / note / Kindle /
+  YouTube / Instagram / X の既存SSOTと実行時に突合する派生read modelである。`context-only`は一次資料・役割・
+  地理粒度単位の補強プールとして全件を集約し、独立制作単位と混在させない。
   手編集の別台帳、資料候補1件ごとのTODO、Drive IDの保存を禁止する。
 - `context-only`は既存記事の分析文脈にだけ使い、単独の制作単位へ昇格しない。`rights-hold`、
   `primary-source-unavailable`、`not-applicable`は制作キューへ入れない。metricまたはareaへの公開可能な接続を持つ

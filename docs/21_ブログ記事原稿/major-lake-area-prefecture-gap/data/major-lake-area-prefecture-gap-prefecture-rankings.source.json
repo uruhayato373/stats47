@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "major-lake-area",
+  "year": "2024",
+  "unit": "ｈａ",
+  "label": "主要湖沼面積",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/major-lake-area/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug major-lake-area-prefecture-gap --keys major-lake-area --data-name major-lake-area-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:44.710Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

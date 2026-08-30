@@ -43,12 +43,36 @@ const releaseTone = {
   pass: "good",
   pending: "warn",
 } as const;
+const geoRoleLabel = {
+  baseline: "入口",
+  "cross-analysis": "空間横断",
+  method: "方法・限界",
+  decision: "意思決定",
+} as const;
+const geoRoleTone = {
+  baseline: "neutral",
+  "cross-analysis": "good",
+  method: "info",
+  decision: "warn",
+} as const;
 
 function postTone(status: string | null) {
   if (status === "posted") return "good" as const;
   if (status === "scheduled") return "info" as const;
   if (status === "draft") return "neutral" as const;
   return "bad" as const;
+}
+
+function gisStateTone(status: string) {
+  if (status === "acquired") return "good" as const;
+  if (status === "analysis-source") return "info" as const;
+  if (status === "ready-to-acquire" || status === "license-review") return "warn" as const;
+  return "neutral" as const;
+}
+
+function formatBytes(value: number): string {
+  if (value <= 0) return "—";
+  return `${(value / 1024 / 1024).toFixed(value >= 100 * 1024 * 1024 ? 0 : 1)} MB`;
 }
 
 function formatSchedule(value: string): string {
@@ -79,7 +103,7 @@ export default function StrategyPage() {
       >
         <p className="max-w-4xl text-sm text-console-muted">
           原案を実行可能な正典へ変換した読み取りビューです。売上・アクセス目標は予測ではなく仮説、
-          未計測は0ではありません。
+          未計測は0ではありません。編集・生成・予約・投稿は管理画面から実行せず、担当agent/skillだけが行います。
         </p>
       </PageHeading>
 
@@ -121,7 +145,7 @@ export default function StrategyPage() {
             <Stat
               label="X初回投稿"
               value={`${data.m1.x.registered}/${data.m1.x.planned}`}
-              sub={`draft ${data.m1.x.draft} / scheduled ${data.m1.x.scheduled} / posted ${data.m1.x.posted}`}
+              sub={`入口 ${data.m1.x.geoRoleCounts.baseline ?? 0} / 空間横断 ${data.m1.x.geoRoleCounts["cross-analysis"] ?? 0} / 方法 ${data.m1.x.geoRoleCounts.method ?? 0} / 意思決定 ${data.m1.x.geoRoleCounts.decision ?? 0}`}
               tone={data.m1.x.registered === data.m1.x.planned ? "good" : "warn"}
             />
           )}
@@ -168,7 +192,7 @@ export default function StrategyPage() {
         </div>
 
         <div className="mt-4">
-          <Table columns={["分析記事", "データ", "47県snapshot", "確認日", "状態"]}>
+          <Table columns={["分析記事", "分類", "入力レイヤー", "空間処理", "途中artifact", "配信metric", "47県snapshot", "状態"]}>
             {data.m1.analyses.map((analysis) => (
               <Tr key={analysis.id}>
                 <Td>
@@ -177,11 +201,50 @@ export default function StrategyPage() {
                     /geo/{analysis.slug}
                   </code>
                 </Td>
+                <Td nowrap>
+                  <Badge tone={analysis.analysisKind === "spatial-cross" ? "good" : "neutral"}>
+                    {analysis.analysisKind === "spatial-cross" ? "空間横断" : "入口"}
+                  </Badge>
+                </Td>
+                <Td>
+                  <div className="space-y-1 text-[10px] text-console-muted">
+                    {analysis.sourceLayers.map((layer) => (
+                      <div key={layer.id}>
+                        {layer.label} · {layer.geometry} · {layer.usedInCalculation ? "計算入力" : "補助のみ"}
+                      </div>
+                    ))}
+                  </div>
+                </Td>
+                <Td>
+                  <div className="space-y-1 text-[10px] text-console-muted">
+                    {analysis.spatialOperations.map((operation) => (
+                      <div key={operation}>{operation}</div>
+                    ))}
+                  </div>
+                </Td>
+                <Td>
+                  {analysis.evidenceManifestReady ? (
+                    <div className="space-y-1 text-[10px] text-console-muted">
+                      <Badge tone={analysis.conservationChecks === 47 ? "good" : "bad"}>
+                        {analysis.detailAreas}県 / 保存則{analysis.conservationChecks}件
+                      </Badge>
+                      {analysis.evidenceStages.map((stage) => (
+                        <div key={stage.id}>{stage.label} · {stage.role}</div>
+                      ))}
+                      <div>最大 {formatBytes(analysis.maxDetailBytes)}</div>
+                    </div>
+                  ) : (
+                    <Badge tone="neutral">県別artifactなし</Badge>
+                  )}
+                </Td>
                 <Td>
                   <Badge>{analysis.dataKind}</Badge>
                   <code className="mt-1 block text-[10px] text-console-muted">
                     {analysis.dataKey}
                   </code>
+                  <div className="mt-1 text-[10px] text-console-muted">
+                    {analysis.metricKeys.join(" / ")}
+                  </div>
                 </Td>
                 <Td nowrap>
                   <Badge tone={analysis.localSnapshotReady ? "good" : "bad"}>
@@ -190,7 +253,6 @@ export default function StrategyPage() {
                       : "ローカル未確認"}
                   </Badge>
                 </Td>
-                <Td nowrap muted>{analysis.evidenceCheckedAt}</Td>
                 <Td nowrap>
                   <Badge tone={workTone[analysis.status]}>
                     {businessPlanLabels.work[analysis.status]}
@@ -204,28 +266,122 @@ export default function StrategyPage() {
         <div className="mt-6">
           <div className="mb-2 flex items-center justify-between gap-3">
             <h3 className="text-[13px] font-bold text-console-fg">
-              X初回15投稿
+              GIS取得・ライセンスカタログ
+            </h3>
+            <a
+              href="http://localhost:3000/geo/data-catalog"
+              className="text-[11px] font-medium text-console-accent hover:underline"
+            >
+              サイト表示を確認 →
+            </a>
+          </div>
+          {hasError(data.gisCatalog) ? (
+            <ErrorNote error={data.gisCatalog.error} />
+          ) : (
+            <>
+              <div className="mb-3 grid gap-2 sm:grid-cols-2 xl:grid-cols-6">
+                <Stat label="公式候補" value={String(data.gisCatalog.summary.candidateCatalog)} />
+                <Stat label="stats47登録" value={String(data.gisCatalog.summary.registered)} />
+                <Stat
+                  label="R2取得"
+                  value={`${data.gisCatalog.summary.r2Acquired}/${data.gisCatalog.summary.registered}`}
+                  tone={data.gisCatalog.summary.registeredMissingR2 === 0 ? "good" : "warn"}
+                />
+                <Stat label="利用条件確認" value={String(data.gisCatalog.summary.licenseReview)} tone="warn" />
+                <Stat
+                  label="自動取得残"
+                  value={String(data.gisCatalog.summary.readyToAcquire)}
+                  tone={data.gisCatalog.summary.readyToAcquire === 0 ? "good" : "warn"}
+                />
+                <Stat
+                  label="公開条件不整合"
+                  value={String(data.gisCatalog.summary.complianceMismatches)}
+                  tone={data.gisCatalog.summary.complianceMismatches === 0 ? "good" : "warn"}
+                />
+              </div>
+              <Table columns={["ID・データ", "形状・範囲", "ライセンス", "取得状態", "R2実体", "GeoAI利用"]}>
+                {data.gisCatalog.items.filter((item) => item.registered).map((item) => (
+                  <Tr key={item.dataId}>
+                    <Td>
+                      <div className="font-medium">{item.name}</div>
+                      <code className="text-[10px] text-console-muted">{item.dataId}</code>
+                    </Td>
+                    <Td nowrap muted>{item.geometryType ?? "—"} / {item.coverage ?? "—"}</Td>
+                    <Td nowrap>{item.license ?? "未確認"}</Td>
+                    <Td nowrap>
+                      <Badge tone={gisStateTone(item.state)}>{item.state}</Badge>
+                    </Td>
+                    <Td nowrap muted>
+                      {item.r2.fileCount > 0
+                        ? `${item.r2.fileCount} files / ${formatBytes(item.r2.totalBytes)}`
+                        : "—"}
+                      {item.compliance.publicMirrorPolicyMismatch ? (
+                        <div className="text-[10px] font-semibold text-console-warn">公開条件要確認</div>
+                      ) : null}
+                    </Td>
+                    <Td>{item.usedInAnalyses.join(" / ") || "未使用"}</Td>
+                  </Tr>
+                ))}
+              </Table>
+            </>
+          )}
+        </div>
+
+        <div className="mt-6">
+          <div className="mb-2 flex items-center justify-between gap-3">
+            <h3 className="text-[13px] font-bold text-console-fg">
+              X初回15投稿 · Geo契約監査
             </h3>
             <Link
               href="/content/x"
               className="text-[11px] font-medium text-console-accent hover:underline"
             >
-              X運用画面で本文を確認 →
+              X読取画面で本文を確認 →
             </Link>
           </div>
           {hasError(data.m1.x) ? null : (
-            <Table columns={["投稿", "型", "予定（JST）", "画像", "台帳状態"]}>
-              {data.m1.x.posts.map((post, index) => (
+            <>
+            {data.m1.x.contractViolations.length > 0 ? (
+              <ErrorNote error={`Geo契約違反: ${data.m1.x.contractViolations.join(" / ")}`} />
+            ) : (
+              <p className="mb-2 text-[11px] text-console-good">
+                Geo契約 PASS — 入口3 / 空間横断9 / 方法2 / 意思決定1。ランキング画像の流用なし。
+              </p>
+            )}
+            <Table columns={["投稿", "Geo分類", "分析・空間処理", "主張metric", "着地", "予定（JST）", "画像", "台帳"]}>
+              {data.m1.x.posts.map((post) => (
                 <Tr key={post.contentKey}>
                   <Td>
-                    <div className="font-medium">
-                      {index + 1}. {post.title}
-                    </div>
+                    <div className="font-medium">{post.title}</div>
                     <code className="text-[10px] text-console-muted">
                       {post.contentKey}
                     </code>
                   </Td>
-                  <Td nowrap><Badge>{post.template}</Badge></Td>
+                  <Td nowrap>
+                    <Badge tone={geoRoleTone[post.geoRole]}>
+                      {geoRoleLabel[post.geoRole]}
+                    </Badge>
+                    <div className="mt-1 text-[10px] text-console-muted">{post.template}</div>
+                  </Td>
+                  <Td>
+                    <div className="text-[10px] text-console-muted">
+                      {post.sourceLayers.join(" × ")}
+                    </div>
+                    <div className="mt-1 text-[10px] text-console-fg">
+                      {post.spatialOperations.slice(0, 2).join(" → ")}
+                    </div>
+                  </Td>
+                  <Td>
+                    <code className="text-[10px] text-console-muted">{post.claimMetricKey}</code>
+                    <div className="mt-1">
+                      <Badge tone={post.geoContractOk ? "good" : "bad"}>
+                        {post.geoContractOk ? "契約PASS" : "契約違反"}
+                      </Badge>
+                    </div>
+                  </Td>
+                  <Td nowrap>
+                    <code className="text-[10px] text-console-muted">{post.canonicalUrl}</code>
+                  </Td>
                   <Td nowrap muted>{formatSchedule(post.scheduledAt)}</Td>
                   <Td nowrap>
                     <Badge tone={post.mediaReady ? "good" : "bad"}>
@@ -240,6 +396,7 @@ export default function StrategyPage() {
                 </Tr>
               ))}
             </Table>
+            </>
           )}
         </div>
 

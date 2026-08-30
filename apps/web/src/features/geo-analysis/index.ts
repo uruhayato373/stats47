@@ -1,5 +1,6 @@
 export { GeoAnalysisTracker } from './components/GeoAnalysisTracker';
 export { GeoCrossAnalysisArticle } from './components/GeoCrossAnalysisArticle';
+export { GeoDecisionExplorer } from './components/GeoDecisionExplorer';
 export { GeoPopulationExplorer } from './components/GeoPopulationExplorer';
 export { GeoCrossAnalysisExplorer } from './components/GeoCrossAnalysisExplorer';
 export {
@@ -7,6 +8,15 @@ export {
   type PopulationAnalysisRow,
   type PopulationAnalysisSummary,
 } from './lib/build-population-analysis';
+export {
+  buildGeoDecisionRows,
+  type GeoDecisionRow,
+} from './lib/build-geo-decision-rows';
+export { loadGeoAnalysisSnapshot } from './lib/load-geo-analysis-snapshot';
+export {
+  isGeoStationAccessView,
+  type GeoStationAccessView,
+} from './lib/geo-station-access-evidence';
 export {
   buildGeoMapModel,
   formatGeoValue,
