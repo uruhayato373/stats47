@@ -21,6 +21,13 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
   - **outbox 不変条件は二重で機構保証する (2026-06-21)**: ① `blog-auto-publish.yml` が公開した slug を即 `git rm` + commit-back。② `blog-remediation-daily.yml` (日次 JST 08:00) が `prune-published-outbox.mjs --apply` で「published:true かつ **R2 (正典) の article.md と内容が完全一致**」のドラフトを掃除。**広い `git add` (統合コミット等) で公開済みドラフトが出戻りしても翌日には自動で消える**。`published:false` の作業中ドラフトは保持。**内容一致を要求するのは安全装置**: brushup (既 live 記事の改稿) は docs/21 に published:true のまま新版を置き R2 には旧版が live なので、「存在」だけで消すと改稿中の新版を誤削除する (差分があれば保持)。docs/21 を消さず R2 を唯一の真実源に保つ設計 (transport は git・R2 直書きは creds 持つ CI 専用なので docs/21 は必要)。
 - **廃止 (2026-06-15)**: `docs/20_ブログ記事企画` 全体、`/plan-blog-{articles,trends,from-gsc,affiliate}` `/update-blog-plan` スキル、`blog-planner` agent、`fetch-article-data.mjs` (D1依存) / `generate-gsc-driven-plan.mjs` / `generate-brushup-queue.cjs` スクリプト。
 - **置換**: 企画 → `/draft-from-trend` の metric 選定に統合 / データ接地 → `fetch-ranking-data-r2.mjs` (R2直) / brushup キュー → `.claude/state/blog/remediation-queue.json` (`brushup-queue.md` は廃止)。
+- **ランキング以外の接地 (2026-08-30)**: `fetch-ranking-data-r2.mjs` は「1 metric = 47 県の 1 本のランキング」しか
+  接地できない。データの形が違う型は専用の接地器を使う。どれも同じ 3 点セット (§1.5) を出すので以降の工程は共通。
+  - 型G 移動フロー = `fetch-migration-flow.mjs` (R2 `app/stats/population-migration-inter-prefecture/migration-flow-<year>.json`)。
+    各行は **to 側の県から見た値** (net = その県の純増)。逆に読むと記事の主張が丸ごと反転する。
+  - 型F 市町村財政 = `fetch-municipal-finance.mjs` (`apps/web/public/finance-cards/`)。e-Stat に団体別の決算カードは無い
+    (`estat-api.md`) ため、この JSON が唯一の出どころ。
+  - 執筆プロンプト (型 F/G/E) = `build-article-prompt.mjs`。型 A〜D は `generate-blog-article.ts` が出す。
 - 新規記事の生成・公開はクラウド版でも完結する (git push → push トリガー CI が R2 反映。R2 直書きは CI 専用)。
 
 ## 1. data/\*.json 統一 schema (Phase B で実装、ここでは規約のみ宣言)

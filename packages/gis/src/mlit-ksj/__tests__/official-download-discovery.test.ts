@@ -83,4 +83,18 @@ describe('parseOfficialKsjArchives', () => {
     expect(result).toHaveLength(1);
     expect(result[0].datum).toBe('tokyo');
   });
+
+  it('GeoJSONが無い公式配布ではShapefileをGMLより優先する', () => {
+    const html = [
+      `<tr><td>北海道</td><td>世界測地系</td><a onclick="DownLd('2MB','A45-19_01_SHP.zip','/ksj/gml/data/A45/A45-19/A45-19_01_SHP.zip',this)"></a></tr>`,
+      `<tr><td>北海道</td><td>世界測地系</td><a onclick="DownLd('3MB','A45-19_01_GML.zip','/ksj/gml/data/A45/A45-19/A45-19_01_GML.zip',this)"></a></tr>`,
+    ].join('');
+    const result = parseOfficialKsjArchives({
+      dataId: 'A45',
+      sourcePageUrl: 'https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A45.html',
+      pageSource: html,
+    });
+    expect(result).toHaveLength(1);
+    expect(result[0]).toMatchObject({ format: 'shp', scope: '01' });
+  });
 });

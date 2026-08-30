@@ -128,6 +128,29 @@ node .Codex/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/<slug>/a
 - **完成記事の参考**: 公開済み良記事 (`curl -s https://storage.stats47.jp/app/blog/<slug>/article.md`、例 `health-life-expectancy-structure` / `sports-urban-paradox`)。
 - **1 回 1 記事**: バッチ化禁止。
 
+## ランキング以外の接地 (型G 移動フロー / 型F 市町村財政 / 型E テーマハブ)
+
+`fetch-ranking-data-r2.mjs` は「1 metric = 47 県の 1 本のランキング」しか接地できない。
+移動フロー (県のペア) と市町村財政 (県内の団体) はデータの形が違うので専用の接地器を使う。
+どちらも 3 点セット (json / source.json / svg) を出すので、以降の工程は他の型と同じ。
+
+```bash
+# 型G: 相手県別の純移動 + タイルマップ + 転入転出の推移
+node .claude/scripts/blog/fetch-migration-flow.mjs --slug <slug> --pref <5桁コード>
+
+# 型F: 県内市町村の財政力指数 + 実質公債費比率 + 推移
+node .claude/scripts/blog/fetch-municipal-finance.mjs --slug <slug> --pref <5桁コード>
+
+# 接地後に執筆プロンプトを組む (型 F/G/E。A〜D は generate-blog-article.ts が出す)
+node .claude/scripts/blog/build-article-prompt.mjs --slug <slug> --archetype <F|G|E> \
+  --title-hint "<参考の題>" --links "/areas/20000|長野県のデータ,..." \
+  [--source-links "<rankingKey>|<ラベル>"] [--figures "<file.svg>|<alt>,..."]
+```
+
+- 移動フローの各行は **to 側の県から見た値**である (net = その県の純増)。逆に読むと記事が反転する。
+- 市町村財政の数値は `apps/web/public/finance-cards/` だけから取る。e-Stat に団体別の決算カードは無い。
+- `build-article-prompt.mjs` は内部リンクが 3 本未満・図が実在しない・型が未対応なら書かずに止まる。
+
 ## 参照
 
 - **記事品質の正典: `.Codex/rules/blog-quality-standards.md`** (archetype A〜E / curiosity gap / callout / 内部リンク / source-link 配置 / 表禁止 / ですます / 図あたり字数)

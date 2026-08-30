@@ -99,6 +99,11 @@ function targetIds(args: string[]): string[] {
   return unique;
 }
 
+function argumentValue(args: string[], name: string): string | undefined {
+  const index = args.indexOf(name);
+  return index >= 0 ? args[index + 1] : undefined;
+}
+
 async function processArchive(options: {
   dataset: GisDatasetMeta;
   archive: KsjOfficialArchive;
@@ -295,7 +300,12 @@ async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const apply = args.includes('--apply');
   const ids = targetIds(args);
+  const scopeStart = argumentValue(args, '--scope-start');
+  const scopeEnd = argumentValue(args, '--scope-end');
   if (ids.length === 0) throw new Error('取得対象が0件です');
+  if ((scopeStart || scopeEnd) && ids.length !== 1) {
+    throw new Error('scope rangeは単一の--data-idにだけ指定できます');
+  }
   if (!args.includes('--data-id') && ids.length !== EXPECTED_PUBLIC_ACQUISITION_COUNT) {
     throw new Error(`全件取得対象は${EXPECTED_PUBLIC_ACQUISITION_COUNT}件である必要があります`);
   }
@@ -305,23 +315,30 @@ async function main(): Promise<void> {
   for (const dataId of ids) {
     const dataset = GIS_DATASETS_BY_ID.get(dataId);
     if (!dataset?.sourcePageUrl) throw new Error(`登録メタが不完全です: ${dataId}`);
-    const archives = await discoverOfficialKsjArchives({
+    const officialArchives = await discoverOfficialKsjArchives({
       dataId,
       sourcePageUrl: dataset.sourcePageUrl,
     });
     const expectedArchiveCount = PUBLIC_KSJ_EXPECTED_ARCHIVE_COUNTS.get(dataId);
-    if (expectedArchiveCount === undefined || archives.length !== expectedArchiveCount) {
+    if (expectedArchiveCount === undefined || officialArchives.length !== expectedArchiveCount) {
       throw new Error(
-        `公式アーカイブ数がSSOTと不一致です: ${dataId} expected=${expectedArchiveCount ?? 'undefined'} actual=${archives.length}`
+        `公式アーカイブ数がSSOTと不一致です: ${dataId} expected=${expectedArchiveCount ?? 'undefined'} actual=${officialArchives.length}`
       );
     }
-    if (new Set(archives.map((archive) => archive.scope)).size !== archives.length) {
+    if (new Set(officialArchives.map((archive) => archive.scope)).size !== officialArchives.length) {
       throw new Error(`R2 scopeが一意ではありません: ${dataId}`);
     }
-    if (archives[0]?.version !== dataset.latestVersion) {
+    if (officialArchives[0]?.version !== dataset.latestVersion) {
       throw new Error(
-        `latestVersionと公式manifestが不一致です: ${dataId} ${dataset.latestVersion} != ${archives[0]?.version}`
+        `latestVersionと公式manifestが不一致です: ${dataId} ${dataset.latestVersion} != ${officialArchives[0]?.version}`
       );
+    }
+    const archives = officialArchives.filter((archive) =>
+      (!scopeStart || archive.scope.localeCompare(scopeStart) >= 0) &&
+      (!scopeEnd || archive.scope.localeCompare(scopeEnd) <= 0)
+    );
+    if (archives.length === 0) {
+      throw new Error(`scope rangeの取得対象が0件です: ${scopeStart ?? '*'}..${scopeEnd ?? '*'}`);
     }
     plans.push({ dataset, archives });
   }
