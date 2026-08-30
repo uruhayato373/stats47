@@ -1,6 +1,6 @@
 ---
 name: project_kindle_publishing_factory
-description: Kindle出版ファクトリー(product-factory kindleチャネル)。EPUB3生成・32冊カタログ・パイロットK-S1-01生成済み。既存ブログ98記事を再構成、KDPアップロードは人間工程
+description: Kindle出版ファクトリー(product-factory kindleチャネル)。EPUB3生成・32冊カタログ・KDP自動出品・公開台帳を管理する
 metadata: 
   node_type: memory
   type: project
@@ -41,10 +41,16 @@ S1論点読み物12 + S2テーマ別データブック11 + S3地域別8 + S4ラ�
   draft-first + `--commit`(実公開)はオーナー承認。偽成功を報告しない。KU既定未登録。
 - **★KDPはReact SPAでDOM可変** → 初回`kdp-publish --id <id> --probe`で`.local/kdp-debug/probe-*.json`に構造dumpし
   `kdp-form.mjs`のlabelセレクタを実機調整(coconalaのdiscover相当)。kdp-formはtry/catchで未充填をwarningsに積み公開を止める。
+- **★生成AI申告は画面表示だけでは保存済みと判定できない** (2026-08-30 実測): 原稿・表紙の処理中に content → pricing 遷移が失敗し、その後 pricing を直接開くと、content画面ではAI選択値が見えてもサーバーの `data[generative_ai_questionnaire]` が未保存のままになる。出版POSTは汎用の「この項目は必須です」だけを表示する。対策は、ファイル処理中表示の消失を待つ → 処理後に確認checkboxをread-backして再投入 → contentの「保存して続行」でpricingへ遷移、の順を必須化する。既存下書きの補修では合格済みEPUB/表紙を再送しない。証拠: `.claude/scripts/kdp/lib/{kdp-flow,kdp-form}.mjs`、KDP `save-and-publish` 応答 (2026-08-30)。
+- **ASIN後追い回収は初回公開申請日を保持する**: `writeBackListing` は既存 `publishedAt` を上書きせず、未設定時だけ日付を入れる。
 - 書籍生成・カタログ=kindle-publisher、KDP出品操作=kdp-operatorに分離(coconala-product-manager/operatorと同型)。
 - 各書籍READINESS.mdにKindle Previewer確認〜アップロード手順を同梱。
 - 書き下ろし章の最終仕上げは article-writer→blog-critic の既存品質ゲート。
-- 需要ファースト: 1冊ずつmanuscript昇格→生成→人間がKDP公開→4週実測(KENP/販売)→良ければ横展開。S4ランキング大全は競合(とどラン書籍版)先行で最後発。
+- 需要ファースト: manuscript昇格→生成→オーナー明示承認後にKDP公開→4週実測(KENP/販売)→良ければ横展開。公開バッチはKDPの未公開タイトル上限を超えない。
+
+## 公開状態 (2026-08-30)
+
+32冊中22冊がKDP台帳`listed`。このうち10冊は2026-08-30にパイロット公開申請し、本棚read-back 10/10で「レビュー中」を確認した。残り10冊は需要比較用に`draft`のまま保持し、4週間の販売数・KENPを見て次の公開を判断する。ASIN未割当は審査中の正常状態として管理コンソールでwarning表示する。
 
 ## 正典
 `.claude/rules/coconala-product-standards.md §8` (product-factory同居) / 企画SSOT `packages/product-factory/src/channels/kindle/book-catalog.ts`。初期市場・書籍調査はGit履歴。関連: [[project_coconala_product_factory]] [[project_blog_remediation_loop]]
