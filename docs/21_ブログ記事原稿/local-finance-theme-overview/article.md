@@ -3,8 +3,8 @@ title: 財政3指標、東京は1位でも47位でもある
 seoTitle: "都道府県別 財政力指数・将来負担比率・経常収支比率ランキング【2022年度】"
 description: 都道府県の財政を財政力指数・将来負担比率・経常収支比率の3つの指標で見ると、東京都は財政力指数で1位、将来負担比率と経常収支比率では47位という、一見矛盾した順位になります。実データからその理由を読み解きます。
 slug: local-finance-theme-overview
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

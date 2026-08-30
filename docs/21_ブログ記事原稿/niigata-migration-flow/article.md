@@ -3,8 +3,8 @@ title: 新潟県の人口流出はなぜ止まらないのか
 seoTitle: "新潟県の人口移動データ 都道府県別の純移動と転入・転出の推移"
 description: 新潟県は東北の隣県からは人を得ていますが、関東圏との関係では一貫して純移動がマイナスです。住民基本台帳人口移動報告のデータから、新潟県の人口移動が悪化を続ける理由を読み解きます。
 slug: niigata-migration-flow
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

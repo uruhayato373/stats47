@@ -3,8 +3,8 @@ title: ダムの数と高速道路の長さは似ているのか
 seoTitle: "ダム数と高速道路実延長の相関 都道府県別データで見る関係"
 description: 北海道はダムも高速道路も1位です。ただし2位以下では両者の順位が食い違う県が目立ち、単純な相関では説明しきれない構造が見えてきます。
 slug: dam-count-vs-road-expressway-length
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

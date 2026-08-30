@@ -3,8 +3,8 @@ title: 和歌山県は北海道から人を得て大阪府に譲る
 seoTitle: "和歌山県の人口移動データ 都道府県別の純移動と転入・転出の推移"
 description: 和歌山県が最も多くの人を失っている相手は隣接する大阪府で、そのマイナス幅は東京都への値を大きく上回ります。住民基本台帳人口移動報告のデータから、和歌山県の人口移動が近畿の中心へと集中する様子を読み解きます。
 slug: wakayama-migration-flow
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

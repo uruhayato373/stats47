@@ -3,8 +3,8 @@ title: 茨城県はなぜ遠方の県から人を集めるのか
 seoTitle: "茨城県の人口移動データ 都道府県別の純移動と転入・転出の推移"
 description: 茨城県は隣接する福島県からは人を得ていますが、同じく隣接する栃木県・埼玉県・千葉県には人を明け渡しています。住民基本台帳人口移動報告のデータから、茨城県の純移動が方角によって分かれる様子を読み解きます。
 slug: ibaraki-migration-flow
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

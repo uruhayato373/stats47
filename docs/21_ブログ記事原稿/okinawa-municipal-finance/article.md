@@ -3,8 +3,8 @@ title: 沖縄41市町村、財政力はなぜここまで違うのか
 seoTitle: "沖縄県 市町村別 財政力指数と実質公債費比率のランキング【2024年度】"
 description: 同じ沖縄県内でも那覇市と離島の小さな村では、自分の力でまかなえる財政の割合が大きく異なります。41の市町村を財政力指数と実質公債費比率の両面から見ていきます。
 slug: okinawa-municipal-finance
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

@@ -3,8 +3,8 @@ title: 空港が多い県はなぜ風力発電も多いのか
 seoTitle: "空港数と風力発電施設数の相関 都道府県別データで見る関係"
 description: 北海道は空港数も風力発電施設数も全国1位です。ただし2位以下を見ていくと、この2つの指標はまったく別の理由で多くなっていることがわかります。
 slug: airport-count-vs-wind-power-plant-count-facility
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

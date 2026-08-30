@@ -3,8 +3,8 @@ title: ダムの数はなぜ岡山県が全国上位なのか
 seoTitle: "ダム数ランキング 都道府県別 国土数値情報でみる分布"
 description: 首都圏の水がめは首都圏の外にあります。ダムの数だけを都道府県別に並べると、水を使う場所と水をためる場所のずれが見えてきます。
 slug: dam-count-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

@@ -3,8 +3,8 @@ title: 道の駅の数はなぜ北海道が突出するのか
 seoTitle: "道の駅数ランキング 都道府県別 国土数値情報でみる分布"
 description: 東京都の道の駅は1か所しかありません。広い北海道と、道の駅を必要としない大都市の対比から、この施設が生まれた理由を読み解きます。
 slug: roadside-station-count-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

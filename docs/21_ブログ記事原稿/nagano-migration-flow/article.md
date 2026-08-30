@@ -3,8 +3,8 @@ title: 長野県はどこから人を集めているのか
 seoTitle: "長野県の人口移動データ 都道府県別の純移動と転入・転出の推移"
 description: 長野県は8つの県と陸で接する内陸県ですが、その隣接県のほとんどからは人を失っています。住民基本台帳人口移動報告の都道府県間データから、長野県がどの方向とつながっているのかを読み解きます。
 slug: nagano-migration-flow
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

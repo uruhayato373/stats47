@@ -3,8 +3,8 @@ title: 神奈川県は全国から人を得て東京都には譲る
 seoTitle: "神奈川県の人口移動データ 都道府県別の純移動と転入・転出の推移"
 description: 神奈川県は全国46都道府県のうち45県との間で純移動がプラスですが、唯一マイナスとなる相手が東京都です。住民基本台帳人口移動報告のデータから、神奈川県と東京都の非対称な関係を読み解きます。
 slug: kanagawa-migration-flow
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

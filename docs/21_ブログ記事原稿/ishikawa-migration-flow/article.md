@@ -3,8 +3,8 @@ title: 石川県はなぜ複数の都市圏に人を奪われるのか
 seoTitle: "石川県の人口移動データ 都道府県別の純移動と転入・転出の推移"
 description: 石川県は陸で接する3県すべてから人を得ていますが、遠く離れた3つの大都市圏に対してはそろって人を明け渡しています。住民基本台帳人口移動報告のデータから、石川県が複数方向に引かれる構図を読み解きます。
 slug: ishikawa-migration-flow
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

@@ -3,8 +3,8 @@ title: 高知県34市町村、なぜ借金比率がマイナスの町がある�
 seoTitle: "高知県 市町村別 財政力指数と実質公債費比率のランキング【2024年度】"
 description: 高知県の34市町村には、実質公債費比率がマイナスになる町が3つあります。財政力指数が最も高い高知市が借金返済の負担でも上位に入るなど、実データから見える意外な組み合わせを読み解きます。
 slug: kochi-municipal-finance
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

@@ -3,8 +3,8 @@ title: 湖沼の数はなぜ北海道だけ突出するのか
 seoTitle: "湖沼数ランキング 都道府県別 国土数値情報でみる分布"
 description: 湖が1つもない都道府県が、実は全国で1つだけあります。火山と山地が生んだ湖の数と、平野が広がる県の湖の少なさを見比べます。
 slug: lake-count-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

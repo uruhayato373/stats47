@@ -3,8 +3,8 @@ title: 鉄道3指標でみる県差、沖縄はなぜ特異なのか
 seoTitle: "都道府県別 鉄道駅数・乗降客数・JR輸送人員ランキング【2023-2024年】"
 description: 鉄道駅の数、駅の乗降客数、JR輸送人員という3つの指標を都道府県別に並べると、単純な東京一極集中では説明できない食い違いが見えてきます。とくに沖縄県は3つの指標でまったく違う顔を見せています。
 slug: railway-theme-overview
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

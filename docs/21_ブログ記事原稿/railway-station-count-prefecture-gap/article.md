@@ -3,8 +3,8 @@ title: 鉄道駅の数はなぜ北海道が上位に入るのか
 seoTitle: "鉄道駅数ランキング 都道府県別 国土数値情報でみる駅の分布"
 description: 同じ日本でも、駅がある場所は驚くほど偏っています。都市圏の外に大きな存在感を残す県が上位に食い込む理由を、鉄道駅数のデータから読み解きます。
 slug: railway-station-count-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

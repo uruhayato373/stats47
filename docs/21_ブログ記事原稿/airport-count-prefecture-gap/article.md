@@ -3,8 +3,8 @@ title: 空港ゼロの県はなぜ内陸に集中するのか
 seoTitle: "空港数ランキング 都道府県別 国土数値情報でみる分布"
 description: 空港が1つもない県が全国に10あります。その大半が内陸に集中している理由を、空港数のデータから読み解きます。
 slug: airport-count-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 

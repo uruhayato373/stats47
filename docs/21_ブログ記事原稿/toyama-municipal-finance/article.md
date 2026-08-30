@@ -3,8 +3,8 @@ title: 富山県15市町村、財政力はなぜここまで違うのか
 seoTitle: "富山県 市町村別 財政力指数と実質公債費比率のランキング【2024年度】"
 description: 富山県には15の市町村があり、財政力指数と実質公債費比率のどちらでも上位に入る町がある一方、財政力が弱くても借金の負担が軽い村もあります。実データから県内の財政の姿を読み解きます。
 slug: toyama-municipal-finance
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-30
+published: true
 tags: []
 ---
 
