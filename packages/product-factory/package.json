@@ -35,6 +35,7 @@
     "products:kindle:validate": "tsx src/channels/kindle/cli.ts validate",
     "products:kindle:generate": "tsx src/channels/kindle/cli.ts generate",
     "products:kindle:report": "tsx src/channels/kindle/cli.ts report",
+    "products:kindle:ingest-cover": "tsx scripts/ingest-cover-background.mts",
     "products:kindle:verify-epub": "tsx scripts/verify-epub.mts",
     "products:kindle:audit-facts": "tsx scripts/audit-book-facts.mts",
     "products:kindle:kdp-listings": "tsx src/channels/kindle/export-kdp-listings.ts",

@@ -47,6 +47,11 @@ export function localPilotDir(): string {
   return path.join(projectRoot(), ".local/ogp-pilot");
 }
 
+/** Kindle EPUB・表紙のローカル生成物。 */
+export function localKindleBooksDir(): string {
+  return path.join(projectRoot(), ".local/kindle-books");
+}
+
 /** .claude/state ディレクトリ (旧 STATE_DIR)。 */
 export function stateDir(): string {
   return path.join(projectRoot(), ".claude/state");

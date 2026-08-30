@@ -9,12 +9,15 @@ const BASELINE = process.env.MAINTENANCE_DEBT_BASELINE || path.join(ROOT, ".clau
 const SCAN_ROOTS = ["apps", "packages", ".claude", ".github"].map((item) => path.join(ROOT, item));
 const TEXT_EXT = /\.(?:[cm]?[jt]sx?|md|ya?ml|json|sh|css|scss)$/i;
 const EXCLUDED = new Set(["node_modules", ".next", ".local", "dist", "coverage", ".git", "state", "worktrees"]);
+// gitignore 済みの生成物ディレクトリは相対パスで除外する。名前 ("build") での一括除外は
+// packages/product-factory/src/build/ 等の tracked ソースまで走査から消すため使えない
+const EXCLUDED_PATHS = new Set(["apps/remotion/build"]);
 
 function rel(file) { return path.relative(ROOT, file).split(path.sep).join("/"); }
 function walk(dir) {
   if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    if (entry.isDirectory() && EXCLUDED.has(entry.name)) return [];
+    if (entry.isDirectory() && (EXCLUDED.has(entry.name) || EXCLUDED_PATHS.has(rel(path.join(dir, entry.name))))) return [];
     // ガードの baseline ファイル群は「debt の引用」であって debt ではない (自己参照検知の防止)
     if (!entry.isDirectory() && /-baseline\.json$/.test(entry.name)) return [];
     const file = path.join(dir, entry.name);

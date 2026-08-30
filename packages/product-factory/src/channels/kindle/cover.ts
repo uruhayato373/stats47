@@ -8,12 +8,18 @@ import sharp from "sharp";
 import { notoSansJpBytes } from "../../generators/jp-font";
 import type { BookSeries } from "./types";
 
-/** シリーズ別のカバー基調色 (帯・地色)。 */
-const SERIES_COLOR: Record<BookSeries, { bg: string; band: string; accent: string }> = {
-  "S1-issues": { bg: "#0f2540", band: "#1d6fb8", accent: "#7fc4ff" },
-  "S2-theme-databook": { bg: "#123524", band: "#1f8a4c", accent: "#8fe0ac" },
-  "S3-region": { bg: "#3a1f10", band: "#b8641d", accent: "#ffc38f" },
-  "S4-ranking-compendium": { bg: "#2a1230", band: "#7b3ea8", accent: "#d4a4ff" },
+/**
+ * シリーズ別のカバー色。
+ *
+ * Amazon ビジネス実用本の売れ筋30冊を 2026-08-30 に実画面で確認すると、全面写真より
+ * 「明るい文字面 + 大きな書名 + 1〜2色のアクセント」が主流だった。背景画像を全面に敷く
+ * 旧版はサムネイルで画像が先に立ったため、上58%を明るい文字面、下42%だけを画像にする。
+ */
+const SERIES_COLOR: Record<BookSeries, { bg: string; paper: string; ink: string; accent: string; meta: string }> = {
+  "S1-issues": { bg: "#0f2540", paper: "#f2f6fa", ink: "#10243a", accent: "#1769a6", meta: "#536779" },
+  "S2-theme-databook": { bg: "#123524", paper: "#f1f7f2", ink: "#153527", accent: "#217a49", meta: "#587064" },
+  "S3-region": { bg: "#3a1f10", paper: "#faf3ec", ink: "#3a251a", accent: "#a95317", meta: "#786458" },
+  "S4-ranking-compendium": { bg: "#2a1230", paper: "#f7f1f8", ink: "#321d38", accent: "#763798", meta: "#735f78" },
 };
 
 const W = 1600;
@@ -76,50 +82,8 @@ export function mainTitleSize(main: string): number {
   return Math.max(96, Math.min(220, ideal));
 }
 
-/**
- * 背景の**上部**(タイトルが載る領域) の明るさからインクを決める。
- *
- * 背景は明るい紙系も暗い夜景系もありうるので、白固定だと明るい背景で文字が消える
- * (2026-08-12 実測: クリーム地の候補で主題・続きがほぼ読めなかった)。
- * 判定は上 45% の平均輝度のみ — タイトルはそこにしか置かないため。
- */
-export async function resolveInk(
-  backgroundJpeg: Buffer | undefined,
-  fallbackAccent: string,
-): Promise<{ main: string; rest: string; sub: string; meta: string; band: string }> {
-  const DARK_BG = {
-    main: "#ffffff",
-    rest: "#e8f2ff",
-    sub: fallbackAccent,
-    meta: "#ffffff",
-    band: fallbackAccent,
-  };
-  if (!backgroundJpeg) return DARK_BG;
-  try {
-    const { data, info } = await sharp(backgroundJpeg)
-      .extract({ left: 0, top: 0, width: W, height: Math.round(H * 0.45) })
-      .resize(32, 32, { fit: "fill" })
-      .removeAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true });
-    let sum = 0;
-    const px = info.width * info.height;
-    for (let i = 0; i < data.length; i += info.channels) {
-      // Rec.709 相対輝度
-      sum += 0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2];
-    }
-    const mean = sum / px;
-    if (mean < 128) return DARK_BG;
-    // 明るい背景 = 濃紺インク。副題は可読性のため主題より一段薄い濃紺に留める。
-    return { main: "#0d1f3c", rest: "#173254", sub: "#3d5a7d", meta: "#0d1f3c", band: "#0d1f3c" };
-  } catch {
-    return DARK_BG;
-  }
-}
-
 export async function buildCoverPng(input: CoverInput): Promise<Buffer> {
   const c = SERIES_COLOR[input.series];
-  const ink = await resolveInk(input.backgroundJpeg, c.accent);
   const { main, rest } = splitTitle(input.title);
   const element = node(
     "div",
@@ -135,38 +99,34 @@ export async function buildCoverPng(input: CoverInput): Promise<Buffer> {
             backgroundSize: `${W}px ${H}px`,
           }
         : {}),
-      color: ink.meta,
+      color: c.ink,
       fontFamily: "NotoSansJP",
-      padding: "120px 110px",
-      // タイトルは上寄せ (space-between だと縦中央に落ち、上部に広い余白が残る)。
-      // 著者ブロックだけ marginTop:auto で下端へ押す。
+      // 文字面と画像面を明確に分離する。全面写真に文字を載せると、画像の明暗に依存し、
+      // Amazon の 150×240px サムネイルで書名より画像が勝つため。
       justifyContent: "flex-start",
     },
     [
-      // 上部: シリーズ帯
+      // 上58%: 明るい文字面。旧版の STATS47 BOOKS と上下の装飾線は情報価値がなく、
+      // 書名の面積を削っていたので置かない。
       node(
         "div",
-        { display: "flex", flexDirection: "column" },
-        [
-          node("div", { width: "220px", height: "14px", backgroundColor: ink.band, marginBottom: "48px" }),
-          node("div", { fontSize: "40px", color: ink.sub, letterSpacing: "0.2em" }, "STATS47 BOOKS"),
-        ],
-      ),
-      // 上寄せ: タイトル (背景の主役は下部にあるので、上半分をタイトルに使う)。
-      // 主題を最大級に 1 行で置き、続き・副題を段階的に小さくする。
-      // 均等な大きさで折り返すとサムネイル (150×240px) で全部潰れて読めない。
-      node(
-        "div",
-        { display: "flex", flexDirection: "column", marginTop: "120px" },
+        {
+          display: "flex",
+          flexDirection: "column",
+          width: "100%",
+          height: "1480px",
+          backgroundColor: c.paper,
+          padding: "126px 110px 92px",
+        },
         [
           node(
             "div",
             {
               fontSize: `${mainTitleSize(main)}px`,
               fontWeight: 700,
-              lineHeight: 1.2,
+              lineHeight: 1.15,
               letterSpacing: `${TITLE_TRACKING_EM}em`,
-              color: ink.main,
+              color: c.ink,
             },
             main,
           ),
@@ -174,26 +134,33 @@ export async function buildCoverPng(input: CoverInput): Promise<Buffer> {
             ? [
                 node(
                   "div",
-                  { fontSize: "62px", fontWeight: 700, lineHeight: 1.35, marginTop: "36px", color: ink.rest },
+                  { fontSize: "82px", fontWeight: 700, lineHeight: 1.3, marginTop: "44px", color: c.accent },
                   rest,
                 ),
               ]
             : []),
           ...(input.subtitle
-            ? [node("div", { fontSize: "44px", color: ink.sub, marginTop: "48px", lineHeight: 1.45 }, input.subtitle)]
+            ? [
+                node(
+                  "div",
+                  { fontSize: "72px", fontWeight: 700, color: c.ink, marginTop: "52px", lineHeight: 1.35 },
+                  input.subtitle,
+                ),
+              ]
             : []),
+          // 著者は KDP 必須情報。装飾線を使わず文字面の下端にまとめる。
+          node(
+            "div",
+            { display: "flex", flexDirection: "column", marginTop: "auto" },
+            [
+              node("div", { fontSize: "52px", fontWeight: 700, color: c.ink }, input.author),
+              node("div", { fontSize: "32px", color: c.meta, marginTop: "12px" }, "統計で見る都道府県"),
+            ],
+          ),
         ],
       ),
-      // 下部: 帯 + 著者 (marginTop:auto で下端へ)
-      node(
-        "div",
-        { display: "flex", flexDirection: "column", marginTop: "auto" },
-        [
-          node("div", { width: "100%", height: "6px", backgroundColor: ink.band, marginBottom: "40px" }),
-          node("div", { fontSize: "48px" }, input.author),
-          node("div", { fontSize: "34px", color: ink.sub, marginTop: "16px" }, "統計で見る都道府県"),
-        ],
-      ),
+      // 下42%: テーマ画像だけを見せる。文字を重ねず、タイトルとの競合を避ける。
+      node("div", { display: "flex", width: "100%", height: `${H - 1480}px` }),
     ],
   );
 

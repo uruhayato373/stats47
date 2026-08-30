@@ -33,6 +33,7 @@ import {
     startPerformanceMeasurement,
 } from "../utils/performanceMonitor";
 import { validateTopojson } from "../utils/topojson-converter";
+import { resolveLocalR2ObjectPath } from "../../utils/local-r2-path";
 
 import type { GeoshapeOptions } from "../types/geoshape-options";
 import type { MlitR2PathOptions } from "../../mlit/utils/mlit-r2-path";
@@ -50,7 +51,7 @@ function tryReadLocalMlitFile(options: MlitR2PathOptions): TopoJSONTopology | un
       const localR2 = path.join(dir, ".local", "r2");
       if (fs.existsSync(localR2)) {
         const relativePath = buildMlitR2Path(options);
-        const filePath = path.join(localR2, relativePath);
+        const filePath = resolveLocalR2ObjectPath(localR2, relativePath);
         if (fs.existsSync(filePath)) {
           return JSON.parse(fs.readFileSync(filePath, "utf-8"));
         }
@@ -77,7 +78,7 @@ function tryReadLocalGeoshapeFile(options: GeoshapeOptions): TopoJSONTopology | 
       const localR2 = path.join(dir, ".local", "r2");
       if (fs.existsSync(localR2)) {
         const relativePath = buildGeoshapeR2Path(options);
-        const filePath = path.join(localR2, relativePath);
+        const filePath = resolveLocalR2ObjectPath(localR2, relativePath);
         if (fs.existsSync(filePath)) {
           return JSON.parse(fs.readFileSync(filePath, "utf-8"));
         }

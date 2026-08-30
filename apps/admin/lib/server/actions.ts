@@ -1,9 +1,7 @@
 import 'server-only';
 
-import path from 'node:path';
-
-import { projectRoot, R2_BASE } from './project-root';
-import { startJob } from './jobs';
+import { R2_BASE } from './project-root';
+import { startJob, startJobSteps, type JobStep } from './jobs';
 import { loadGalleryState } from './gallery-state';
 
 /**
@@ -13,9 +11,7 @@ import { loadGalleryState } from './gallery-state';
  */
 export type ActionResult<T = unknown> = { status: number; body: T };
 
-function publishXScript(): string {
-  return path.join(projectRoot(), '.claude/skills/sns/publish-x/publish-x.ts');
-}
+const PUBLISH_X_SCRIPT = '.claude/skills/sns/publish-x/publish-x.ts';
 
 // ─── publish-x ─────────────────────────────────────
 export interface PublishXInput {
@@ -57,7 +53,7 @@ export function publishX(body: PublishXInput): ActionResult {
       },
     };
   }
-  const args = ['tsx', publishXScript(), content_key];
+  const args = ['tsx', PUBLISH_X_SCRIPT, content_key];
   if (datetime && !immediate) args.push(datetime);
   args.push('--domain', domain);
   if (immediate) args.push('--immediate');
@@ -70,24 +66,54 @@ export function publishX(body: PublishXInput): ActionResult {
 function ogpRegen(
   type: string,
   keys: string | null
-): { cmd: string; args: string[] } {
-  const keyArg = keys ? ` --key ${keys}` : '';
-  const gen = `npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-ogp-images.ts --type ${type} --max-generate 500${keyArg}`;
+): JobStep[] {
   const plan = `.local/image-generation-publish-plan-${type}.json`;
-  const push = `test -f ${plan} && npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan ${plan}`;
-  return { cmd: 'sh', args: ['-c', `${gen} && ${push}`] };
+  return [
+    {
+      cmd: 'npx',
+      args: [
+        'tsx',
+        '--tsconfig',
+        'apps/web/scripts/tsconfig.ogp.json',
+        'apps/web/scripts/generate-ogp-images.ts',
+        '--type',
+        type,
+        '--max-generate',
+        '500',
+        ...(keys ? ['--key', keys] : []),
+      ],
+    },
+    {
+      cmd: 'npx',
+      args: ['tsx', 'packages/r2-storage/src/scripts/push-generated-image-set.ts', '--plan', plan],
+      requiredFile: plan,
+    },
+  ];
 }
 
 const REGEN: Record<
   string,
-  (keys: string | null) => { cmd: string; args: string[] }
+  (keys: string | null) => JobStep[]
 > = {
   'blog-thumbnails': (keys) => {
-    const keyArg = keys ? ` --slug ${keys}` : '';
-    const gen = `npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --max-generate 500${keyArg}`;
     const plan = '.local/image-generation-publish-plan-blog.json';
-    const push = `test -f ${plan} && npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan ${plan}`;
-    return { cmd: 'sh', args: ['-c', `${gen} && ${push}`] };
+    return [
+      {
+        cmd: 'npx',
+        args: [
+          'tsx',
+          'apps/web/scripts/generate-blog-thumbnails-cloud.ts',
+          '--max-generate',
+          '500',
+          ...(keys ? ['--slug', keys] : []),
+        ],
+      },
+      {
+        cmd: 'npx',
+        args: ['tsx', 'packages/r2-storage/src/scripts/push-generated-image-set.ts', '--plan', plan],
+        requiredFile: plan,
+      },
+    ];
   },
   'ogp-ranking': (keys) => ogpRegen('ranking', keys),
   'ogp-ranking-cards': (keys) => ogpRegen('ranking-cards', keys),
@@ -115,8 +141,7 @@ export function regenerate(body: RegenerateInput): ActionResult {
       body: { error: 'keys は英数字・カンマ・ハイフンのみ (安全のため)' },
     };
   }
-  const { cmd, args } = REGEN[kind](keys);
-  const r = startJob(`regenerate:${kind}`, cmd, args);
+  const r = startJobSteps(`regenerate:${kind}`, REGEN[kind](keys));
   return 'error' in r ? { status: 409, body: r } : { status: 202, body: r };
 }
 

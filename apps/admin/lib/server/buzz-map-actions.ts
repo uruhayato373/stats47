@@ -1,12 +1,10 @@
 import 'server-only';
 
-import path from 'node:path';
-
 import { isPostable } from '../../../../.claude/scripts/sns/lib/buzz-map-router-core.mjs';
 // UTM は正典 sns-utm.cjs に一本化 (CP5)。gallery からも同じ util で組む。
 import snsUtm from '../../../../.claude/scripts/lib/sns-utm.cjs';
 
-import { projectRoot, R2_BASE } from './project-root';
+import { R2_BASE } from './project-root';
 
 const typedSnsUtm = snsUtm as unknown as {
   buildUtmForDomain: (p: {
@@ -53,10 +51,7 @@ function assertIdeaId(
 
 // ─── landing 再判定 (catalog 全体を rebuild) ─────────────
 export function routeLanding(): ActionResult {
-  const script = path.join(
-    projectRoot(),
-    '.claude/scripts/sns/build-buzz-map-catalog.ts'
-  );
+  const script = '.claude/scripts/sns/build-buzz-map-catalog.ts';
   const r = startJob('buzz-map:route-landing', 'npx', ['tsx', script]);
   return 'error' in r ? { status: 409, body: r } : { status: 202, body: r };
 }
@@ -107,7 +102,7 @@ export function generateSpec(body: GenerateSpecInput): ActionResult {
     };
   }
   if (!extraArgs.includes('--id')) extraArgs.push('--id', idea.id);
-  const script = path.join(projectRoot(), SPEC_HELPER_SCRIPT[helper]);
+  const script = SPEC_HELPER_SCRIPT[helper];
   const r = startJob(`buzz-map:generate-spec:${idea.id}`, 'npx', [
     'tsx',
     script,
@@ -122,15 +117,15 @@ type RenderKind = 'still' | 'preview' | 'full';
 function remotionArgs(
   ideaId: string,
   kind: RenderKind,
-  outAbs: string
+  outRel: string
 ): string[] {
   const specRel = `apps/remotion/src/features/buzz-map/specs/${ideaId}.json`;
   const args = [
     'remotion',
     'still',
-    'src/index.ts',
+    'apps/remotion/src/index.ts',
     'BuzzMap-Still-45',
-    outAbs,
+    outRel,
     `--props=${specRel}`,
   ];
   if (kind === 'preview') args.push('--frames=0-89', '--scale=0.5');
@@ -150,13 +145,11 @@ export function renderBuzzMap(body: {
       body: { error: 'kind は still | preview | full のいずれか' },
     };
   }
-  const remotionRoot = path.join(projectRoot(), 'apps/remotion');
   const outRel =
     kind === 'still'
-      ? `public/buzz-map/renders/${idea.id}-45.png`
-      : `public/buzz-map/renders/${idea.id}-${kind}.mp4`;
-  const outAbs = path.join(remotionRoot, outRel);
-  const args = remotionArgs(idea.id, kind, outAbs);
+      ? `apps/remotion/public/buzz-map/renders/${idea.id}-45.png`
+      : `apps/remotion/public/buzz-map/renders/${idea.id}-${kind}.mp4`;
+  const args = remotionArgs(idea.id, kind, outRel);
   const r = startJob(`buzz-map:render-${kind}:${idea.id}`, 'npx', args);
   return 'error' in r ? { status: 409, body: r } : { status: 202, body: r };
 }
@@ -165,10 +158,7 @@ export function renderBuzzMap(body: {
 export function pushBuzzMapR2(body: { ideaId?: string }): ActionResult {
   const idea = assertIdeaId(body.ideaId);
   if (!idea.ok) return { status: 400, body: { error: idea.error } };
-  const script = path.join(
-    projectRoot(),
-    'packages/r2-storage/src/scripts/push-exact-r2-assets.ts'
-  );
+  const script = 'packages/r2-storage/src/scripts/push-exact-r2-assets.ts';
   const args = [
     'tsx',
     script,

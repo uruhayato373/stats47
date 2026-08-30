@@ -20,6 +20,7 @@
 
 export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
   "K-S2-01": [
+    "total-fertility-rate", // 日本国勢図会 evidence — 合計特殊出生率 / 本文 1473字 / [insights,regionalAnalysis,faq]
     "deaths-hypertensive-diseases", // 高血圧性疾患による死亡者数 — 本文 2216字 / [insights,regionalAnalysis,faq]
     "marriages-per-total-population", // 婚姻率 — 本文 2011字 / [insights,regionalAnalysis,faq]
     "young-population-ratio", // 15歳未満人口割合 — 本文 2007字 / [insights,regionalAnalysis,faq]
@@ -52,6 +53,9 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "maternal-mortality-rate-per-100k-births", // 妊娠等による死亡率 — 本文 1694字 / [insights,regionalAnalysis,faq]
   ],
   "K-S2-02": [
+    "unemployment-rate", // 日本国勢図会 evidence — 完全失業率 / 本文 1510字 / [insights,regionalAnalysis,faq]
+    "active-job-opening-ratio", // 日本国勢図会 evidence — 有効求人倍率 / 本文 1433字 / [insights,regionalAnalysis,faq]
+    "minimum-wage-by-region", // 日本国勢図会 evidence — 地域別最低賃金 / 本文 1007字 / [regionalAnalysis,faq]
     "tertiary-industry-employees-per-establishment-census", // 第3次産業従業者数 — 本文 2185字 / [insights,regionalAnalysis,faq]
     "employed-people-ratio-tertiary", // 第3次産業就業者比率 — 本文 2157字 / [insights,regionalAnalysis,faq]
     "middle-aged-employment-rate-45plus", // 中高年齢者就職率 — 本文 2040字 / [insights,regionalAnalysis,faq]
@@ -145,6 +149,10 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "personnel-expenditure-ratio-pref-finance", // 人件費割合 — 本文 1452字 / [insights,regionalAnalysis,faq]
   ],
   "K-S2-05": [
+    "infant-mortality-rate-per-1000-births", // 日本国勢図会 evidence — 乳児死亡率 / 本文 1510字 / [insights,regionalAnalysis,faq]
+    "average-life-expectancy-male", // 日本国勢図会 evidence — 男性の平均余命 / 本文 1491字 / [insights,regionalAnalysis,faq]
+    "average-life-expectancy-female-20", // 日本国勢図会 evidence — 20歳女性の平均余命 / 本文 1446字 / [insights,regionalAnalysis,faq]
+    "infant-deaths", // 日本国勢図会 evidence — 乳児死亡数 / 本文 1153字 / [insights,regionalAnalysis,faq]
     "healthcare-expenditure-ratio-multi-person-households", // 保健医療費割合 — 本文 2261字 / [insights,regionalAnalysis,faq]
     "general-clinic-count", // 一般診療所数 — 本文 2160字 / [insights,regionalAnalysis,faq]
     "national-pension-enrollees-type3-per-1000-20-59", // 第3号国民年金被保険者数 — 本文 2083字 / [insights,regionalAnalysis,faq]
@@ -208,6 +216,8 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "public-hall-count", // 公民館数 — 本文 1817字 / [insights,regionalAnalysis,faq]
   ],
   "K-S2-07": [
+    "households-on-public-assistance-per-1000", // 日本国勢図会 evidence — 生活保護世帯千対 / 本文 1682字 / [insights,regionalAnalysis,faq]
+    "households-on-public-assistance", // 日本国勢図会 evidence — 生活保護実世帯数 / 本文 883字 / [insights,regionalAnalysis,faq]
     "cpi-change-rate-furniture", // 消費者物価指数変化率 — 本文 2097字 / [insights,regionalAnalysis,faq]
     "cpi-change-rate-transport-communication", // 消費者物価指数変化率 — 本文 2032字 / [insights,regionalAnalysis,faq]
     "nature-park-area-ratio", // 自然公園面積割合 — 本文 1954字 / [insights,regionalAnalysis,faq]
@@ -272,6 +282,7 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "neighborhood-commercial-area-ratio", // 近隣商業地域面積比率 — 本文 1488字 / [insights,regionalAnalysis,faq]
   ],
   "K-S2-09": [
+    "agricultural-output", // 日本国勢図会 evidence — 農業産出額 / 本文 1343字 / [insights,regionalAnalysis,faq]
     "other-consumption-expenditure-ratio-multi-person-households", // その他の消費支出割合 — 本文 2288字 / [insights,regionalAnalysis,faq]
     "per-capita-kenmin-shotoku-h17", // 1人当たり県民所得 — 本文 2233字 / [insights,regionalAnalysis,faq]
     "agriculture-forestry-fisheries-expenses-prefecture", // 農林水産業費 — 本文 1970字 / [insights,regionalAnalysis,faq]
@@ -653,3 +664,29 @@ export const BOOK_RANKING_KEYS: Readonly<Record<string, readonly string[]>> = {
     "horse-mackerel-consumption-quantity", // あじ消費量 — 本文 1383字 / 意外性 1.00
   ],
 };
+
+/**
+ * 『日本国勢図会』の論点を Kindle へ接続した結果。
+ * 書籍の本文・数値・図版は使わず、一次資料から取得した既存 metric と、数値監査を通った
+ * R2 ai-content だけを S2 データブックへ載せる。除外も理由付きで固定し、全件を無理に出版しない。
+ */
+export const JAPAN_ZUE_KINDLE_COVERAGE = {
+  included: {
+    "K-S2-01": ["total-fertility-rate"],
+    "K-S2-02": ["unemployment-rate", "active-job-opening-ratio", "minimum-wage-by-region"],
+    "K-S2-03": ["room-utilization-rate", "total-overnight-guests"],
+    "K-S2-05": [
+      "infant-mortality-rate-per-1000-births",
+      "average-life-expectancy-male",
+      "average-life-expectancy-female-20",
+      "infant-deaths",
+      "average-life-expectancy-female-65",
+    ],
+    "K-S2-07": ["households-on-public-assistance-per-1000", "households-on-public-assistance"],
+    "K-S2-09": ["agricultural-output"],
+  },
+  excluded: {
+    "general-hospital-bed-count-per-100k": "数値監査後の本文が180字で、600字ゲート未達",
+    "students-requiring-japanese-instruction": "isActive:false・公開R2未投入",
+  },
+} as const;

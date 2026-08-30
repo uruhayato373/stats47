@@ -10,7 +10,7 @@
  */
 import { describe, it, expect } from "vitest";
 import { METRICS_REGISTRY } from "@stats47/data-configs";
-import { BOOK_RANKING_KEYS } from "../book-ranking-keys";
+import { BOOK_RANKING_KEYS, JAPAN_ZUE_KINDLE_COVERAGE } from "../book-ranking-keys";
 import { KINDLE_BOOKS } from "../book-catalog";
 
 /** 値のスケールと config の unit が食い違っている統計表 (audit:money-unit-scale が報告する)。 */
@@ -73,5 +73,17 @@ describe("BOOK_RANKING_KEYS", () => {
   it("キー表を持つ書籍がカタログに実在する", () => {
     const known = new Set(KINDLE_BOOKS.map((b) => b.id));
     for (const [bookId] of entries) expect(known.has(bookId), `${bookId} がカタログに無い`).toBe(true);
+  });
+
+  it("★日本国勢図会の採択 metric は対象書籍に入り、除外 metric は入らない", () => {
+    for (const [bookId, required] of Object.entries(JAPAN_ZUE_KINDLE_COVERAGE.included)) {
+      const actual = new Set(BOOK_RANKING_KEYS[bookId] ?? []);
+      for (const key of required) expect(actual.has(key), `${bookId}: ${key} が未反映`).toBe(true);
+    }
+
+    const all = new Set(Object.values(BOOK_RANKING_KEYS).flat());
+    for (const key of Object.keys(JAPAN_ZUE_KINDLE_COVERAGE.excluded)) {
+      expect(all.has(key), `${key} は除外対象`).toBe(false);
+    }
   });
 });

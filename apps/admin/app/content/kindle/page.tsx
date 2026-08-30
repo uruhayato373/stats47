@@ -68,6 +68,47 @@ export default async function KindleContentPage({
         </form>
       </div>
 
+      <Section title="表紙一覧" count={books.filter((book) => book.hasCover).length}>
+        <p className="text-xs text-console-muted">表紙を選ぶと原寸画像を開きます。</p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+          {books.map((book) => (
+            <figure
+              key={book.id}
+              className="overflow-hidden rounded-md border border-console-border bg-console-card"
+            >
+              {book.hasCover ? (
+                <a
+                  href={`/kindle-cover/${book.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block aspect-[5/8] bg-console-bg"
+                  aria-label={`${book.title}の表紙を原寸で開く`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`/kindle-cover/${book.id}`}
+                    alt={`${book.title}の表紙`}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                </a>
+              ) : (
+                <div className="flex aspect-[5/8] items-center justify-center bg-console-bg text-xs text-console-muted">
+                  表紙なし
+                </div>
+              )}
+              <figcaption className="space-y-1 border-t border-console-border p-2">
+                <div className="font-mono text-[10px] text-console-muted">
+                  {book.id} · {book.series}
+                </div>
+                <div className="line-clamp-2 text-xs font-medium text-console-fg">{book.title}</div>
+                <StageBadge stage={book.stage} />
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </Section>
+
       <Section title="書籍" count={books.length}>
         <Table columns={["ID・書名", "状態", "原稿・成果物", "KDP", "次の作業"]}>
           {books.map((book) => (

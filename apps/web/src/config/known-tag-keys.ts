@@ -9,8 +9,8 @@
  * 更新方法: `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
  * 更新タイミング: ブログ公開で R2 blog snapshot が変わった後。commit + デプロイで反映。
  *
- * 最終生成日: 2026-08-29
- * 件数: 879
+ * 最終生成日: 2026-08-30
+ * 件数: 880
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "1000世帯あたり",
@@ -266,6 +266,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "人口動態",
   "人口密度",
   "人口当たり",
+  "人口性比",
   "人口構成",
   "人口構造",
   "人口比",
