@@ -178,7 +178,7 @@ jobs:
           gh workflow run publish-ai-content.yml --ref develop \
             -f keys="${{ steps.outcomes.outputs.passed_space }}"
           RUN_ID=""
-          for attempt in $(seq 1 30); do
+          for _ in $(seq 1 30); do
             RUN_ID=$(gh api --method GET \
               "repos/${GITHUB_REPOSITORY}/actions/workflows/publish-ai-content.yml/runs" \
               -f branch=develop -f event=workflow_dispatch -f per_page=20 \
