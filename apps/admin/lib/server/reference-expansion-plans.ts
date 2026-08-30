@@ -1,9 +1,7 @@
-import "server-only";
+// Read-only parser shared by the Next.js server and the content audit CLI.
 
 import fs from "node:fs";
 import path from "node:path";
-
-import { projectRoot } from "./project-root";
 
 export type ReferenceExpansionPlanStatus = "draft" | "blocked";
 
@@ -93,7 +91,7 @@ export function parseReferenceBlogDraft(
   };
 }
 
-export function referenceExpansionPlans(root = projectRoot()): ReferenceExpansionPlan[] {
+export function referenceExpansionPlans(root: string): ReferenceExpansionPlan[] {
   const plans: ReferenceExpansionPlan[] = [];
   const backlogRel = ".claude/todo/backlog.md";
   const backlog = path.join(root, backlogRel);

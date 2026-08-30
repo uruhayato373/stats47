@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 /**
  * 書込 / action body の検証スキーマ (Zod v3)。
@@ -7,7 +7,7 @@ import { z } from "zod";
  */
 
 /** 書込対象の platform enum (X / IG のみ。YouTube pilot は Studio 手動投稿)。 */
-export const WritePlatform = z.enum(["x", "instagram"]);
+export const WritePlatform = z.enum(['x', 'instagram']);
 
 /** PATCH /api/posts/:id — caption / scheduled_at のみ。厳密検証は server 側 updatePost が担う。 */
 export const PatchPost = z
@@ -81,12 +81,14 @@ export const ProbeR2 = z.object({
 export type ProbeR2Input = z.infer<typeof ProbeR2>;
 
 /** ideaId は英数字とハイフンのみ (catalog 実在 allowlist は server 側で追加検証)。 */
-const IdeaId = z.string().regex(/^[a-z0-9-]+$/, "ideaId は英数字とハイフンのみ");
+const IdeaId = z
+  .string()
+  .regex(/^[a-z0-9-]+$/, 'ideaId は英数字とハイフンのみ');
 
 /** POST /api/buzz-map/actions/generate-spec */
 export const BuzzMapGenerateSpec = z.object({
   ideaId: IdeaId,
-  helper: z.enum(["estat", "ksj", "gsi", "merge"]),
+  helper: z.enum(['estat', 'ksj', 'gsi', 'merge']),
   extraArgs: z.array(z.string()).optional(),
 });
 export type BuzzMapGenerateSpecInput = z.infer<typeof BuzzMapGenerateSpec>;
@@ -94,7 +96,7 @@ export type BuzzMapGenerateSpecInput = z.infer<typeof BuzzMapGenerateSpec>;
 /** POST /api/buzz-map/actions/render */
 export const BuzzMapRender = z.object({
   ideaId: IdeaId,
-  kind: z.enum(["still", "preview", "full"]),
+  kind: z.enum(['still', 'preview', 'full']),
 });
 export type BuzzMapRenderInput = z.infer<typeof BuzzMapRender>;
 
@@ -108,7 +110,7 @@ export type BuzzMapPushR2Input = z.infer<typeof BuzzMapPushR2>;
 /** POST /api/buzz-map/actions/register-draft */
 export const BuzzMapRegisterDraft = z.object({
   ideaId: IdeaId,
-  channel: z.enum(["x", "instagram"]),
+  channel: z.enum(['x', 'instagram']),
   confirm: z.literal(true),
 });
 export type BuzzMapRegisterDraftInput = z.infer<typeof BuzzMapRegisterDraft>;
@@ -122,7 +124,7 @@ export const ContentSocialPostsState = z.object({
         platform: z.string(),
         status: z.string(),
       })
-      .passthrough(),
+      .passthrough()
   ),
 });
 
@@ -138,7 +140,7 @@ export const ContentKdpListing = z
     publishedAt: z.string().nullable().optional(),
     lastSubmittedAt: z.string().nullable().optional(),
     salesStartedAt: z.string().nullable().optional(),
-    kdpStatus: z.enum(["draft", "in_review", "live", "unknown"]).optional(),
+    kdpStatus: z.enum(['draft', 'in_review', 'live', 'unknown']).optional(),
     kdpStatusLabel: z.string().nullable().optional(),
     kdpStatusCheckedAt: z.string().nullable().optional(),
     royaltyPlan: z.union([z.literal(35), z.literal(70)]).optional(),
@@ -160,7 +162,7 @@ export const ContentKindleBuildState = z.object({
         id: z.string().min(1),
         status: z.string(),
       })
-      .passthrough(),
+      .passthrough()
   ),
 });
 
@@ -171,27 +173,33 @@ export const ContentKindleArchiveState = z.object({
   prefix: z.string(),
   generatedAt: z.string(),
   books: z.record(
-    z.object({
-      id: z.string(),
-      version: z.string(),
-      latestRevision: z.string(),
-      revisions: z.array(
-        z.object({
-          revision: z.string(),
-          archivedAt: z.string(),
-          verifiedAt: z.string(),
-          remotePrefix: z.string(),
-          manifestSha256: z.string(),
-          files: z.array(
-            z.object({
-              name: z.string(),
-              plainSha256: z.string(),
-              plainSize: z.number().int().nonnegative(),
-            }).passthrough(),
-          ),
-        }).passthrough(),
-      ),
-    }).passthrough(),
+    z
+      .object({
+        id: z.string(),
+        version: z.string(),
+        latestRevision: z.string(),
+        revisions: z.array(
+          z
+            .object({
+              revision: z.string(),
+              archivedAt: z.string(),
+              verifiedAt: z.string(),
+              remotePrefix: z.string(),
+              manifestSha256: z.string(),
+              files: z.array(
+                z
+                  .object({
+                    name: z.string(),
+                    plainSha256: z.string(),
+                    plainSize: z.number().int().nonnegative(),
+                  })
+                  .passthrough()
+              ),
+            })
+            .passthrough()
+        ),
+      })
+      .passthrough()
   ),
 });
 
@@ -201,7 +209,7 @@ export const ContentNoteDraftIndex = z.object({
       .object({
         status: z.string(),
       })
-      .passthrough(),
+      .passthrough()
   ),
 });
 
@@ -214,19 +222,26 @@ export const ContentReferenceInventory = z.object({
         id: z.string(),
         resolution: z.string(),
         primarySource: z
-          .object({ url: z.string().optional() })
+          .object({
+            organization: z.string().optional(),
+            publicationOrDataset: z.string().optional(),
+            url: z.string().optional(),
+          })
           .passthrough()
           .optional(),
         mapping: z
           .object({
             metricKeys: z.array(z.string()).optional(),
             areaCodes: z.array(z.string()).optional(),
+            surveyIds: z.array(z.string()).optional(),
+            geoScopes: z.array(z.string()).optional(),
             contentRoles: z.array(z.string()).optional(),
+            internalFiles: z.array(z.string()).optional(),
           })
           .passthrough()
           .optional(),
       })
-      .passthrough(),
+      .passthrough()
   ),
 });
 
@@ -239,21 +254,21 @@ export const ContentBlogIndex = z.object({
         filePath: z.string(),
         published: z.boolean(),
       })
-      .passthrough(),
+      .passthrough()
   ),
 });
 
 export const ContentPrefectures = z.array(
-  z.object({ prefCode: z.string(), prefName: z.string() }).passthrough(),
+  z.object({ prefCode: z.string(), prefName: z.string() }).passthrough()
 );
 
 /**
  * query の limit パース (非負有限整数のみ。NaN/Infinity/負 → 不正)。
  * 返り値: 有効なら number、指定なしなら null、不正なら "invalid"。
  */
-export function parseLimit(raw: string | null): number | null | "invalid" {
-  if (raw === null || raw === "") return null;
+export function parseLimit(raw: string | null): number | null | 'invalid' {
+  if (raw === null || raw === '') return null;
   const n = Number(raw);
-  if (!Number.isFinite(n) || !Number.isInteger(n) || n < 0) return "invalid";
+  if (!Number.isFinite(n) || !Number.isInteger(n) || n < 0) return 'invalid';
   return n;
 }

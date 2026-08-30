@@ -112,11 +112,9 @@ export interface AssetsCheckResponse {
 // ─── official dashboard research catalog (/research) ───────────────
 
 export type DashboardPublisherTypeDTO =
-  | "national-government"
-  | "prefecture"
-  | "municipality";
+  'national-government' | 'prefecture' | 'municipality';
 
-export type DashboardVerificationStatusDTO = "verified" | "partial";
+export type DashboardVerificationStatusDTO = 'verified' | 'partial';
 
 export interface ResearchDashboardDTO {
   id: string;
@@ -162,7 +160,7 @@ export interface DashboardCatalogResponse {
     staleStories: number;
   };
   audit: {
-    status: "pass" | "warn" | "fail";
+    status: 'pass' | 'warn' | 'fail';
     errors: string[];
     warnings: string[];
   };
@@ -209,15 +207,10 @@ export interface ScheduleIgResponse {
 
 // ─── content operations (/content) ─────────────────────
 
-export type ContentChannelDTO = "x" | "instagram" | "note" | "kindle";
+export type ContentChannelDTO = 'x' | 'instagram' | 'note' | 'kindle';
 export type ContentStageDTO =
-  | "draft"
-  | "ready"
-  | "review"
-  | "scheduled"
-  | "published"
-  | "blocked";
-export type ContentFindingSeverityDTO = "error" | "warning";
+  'draft' | 'ready' | 'review' | 'scheduled' | 'published' | 'blocked';
+export type ContentFindingSeverityDTO = 'error' | 'warning';
 
 export interface ContentFindingDTO {
   severity: ContentFindingSeverityDTO;
@@ -257,12 +250,12 @@ export interface KindleContentDTO {
   publishedAt: string | null;
   lastSubmittedAt: string | null;
   salesStartedAt: string | null;
-  kdpStatus: "draft" | "in_review" | "live" | "unknown";
+  kdpStatus: 'draft' | 'in_review' | 'live' | 'unknown';
   kdpStatusLabel: string;
   kdpStatusCheckedAt: string | null;
   hasEpub: boolean;
   hasCover: boolean;
-  archiveStatus: "verified" | "remote-only" | "stale" | "missing";
+  archiveStatus: 'verified' | 'remote-only' | 'stale' | 'missing';
   archiveVersion: string | null;
   archiveRevision: string | null;
   archiveArchivedAt: string | null;
@@ -292,14 +285,22 @@ export interface NoteContentDTO {
   sourcePaths: string[];
 }
 
-export type ReferenceProductionKindDTO = "metric" | "area";
-export type ReferenceProductionChannelDTO = "site" | "blog" | "note" | "kindle";
+export type ReferenceProductionKindDTO = 'metric' | 'area';
+export type ReferenceProductionChannelDTO =
+  | 'ranking'
+  | 'survey'
+  | 'theme'
+  | 'area'
+  | 'japan'
+  | 'world'
+  | 'blog'
+  | 'note'
+  | 'kindle'
+  | 'youtube'
+  | 'instagram'
+  | 'x';
 export type ReferenceProductionStageDTO =
-  | "integrated"
-  | "draft"
-  | "ready"
-  | "blocked"
-  | "not-applicable";
+  'integrated' | 'draft' | 'ready' | 'blocked' | 'not-applicable';
 
 export interface ReferenceChannelCoverageDTO {
   channel: ReferenceProductionChannelDTO;
@@ -316,9 +317,27 @@ export interface ReferenceProductionUnitDTO {
   evidenceCount: number;
   primarySourceUrls: string[];
   roles: string[];
+  geoScopes: string[];
+  surveyIds: string[];
   channels: ReferenceChannelCoverageDTO[];
   nextAction: string;
   sourcePaths: string[];
+}
+
+export interface ReferenceContextGroupDTO {
+  id: string;
+  sourceKey: string;
+  label: string;
+  organization: string;
+  evidenceCount: number;
+  primarySourceUrl: string | null;
+  surveyIds: string[];
+  geoScopes: string[];
+  roles: string[];
+  internalFiles: string[];
+  targetPaths: string[];
+  stage: 'integrated' | 'ready' | 'blocked';
+  detail: string;
 }
 
 export interface ReferenceSourceSummaryDTO {
@@ -345,15 +364,19 @@ export interface ReferenceContentPortfolioDTO {
     draftSlots: number;
     readySlots: number;
     blockedSlots: number;
+    contextGroups: number;
+    contextIntegratedEvidence: number;
+    contextReadyEvidence: number;
+    contextBlockedEvidence: number;
     byChannel: Record<
       ReferenceProductionChannelDTO,
       Record<ReferenceProductionStageDTO, number>
     >;
   };
   audit: {
-    status: "pass" | "warn" | "fail";
+    status: 'pass' | 'warn' | 'fail';
     findings: Array<{
-      severity: "error" | "warning";
+      severity: 'error' | 'warning';
       code: string;
       itemId: string | null;
       message: string;
@@ -361,20 +384,21 @@ export interface ReferenceContentPortfolioDTO {
   };
   sources: ReferenceSourceSummaryDTO[];
   units: ReferenceProductionUnitDTO[];
+  contextGroups: ReferenceContextGroupDTO[];
 }
 
 export interface ContentOperationsResponse {
   generatedAt: string;
   decisions: Array<{
     channel: ContentChannelDTO;
-    status: "pending" | "decided";
+    status: 'pending' | 'decided';
     title: string;
     detail: string;
     resumeCondition: string;
     source: string;
   }>;
   audit: {
-    status: "pass" | "warn" | "fail";
+    status: 'pass' | 'warn' | 'fail';
     errors: number;
     warnings: number;
     findings: ContentFindingDTO[];

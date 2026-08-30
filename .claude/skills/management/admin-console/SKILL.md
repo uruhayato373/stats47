@@ -27,7 +27,7 @@ PORT=5000 npm run admin    # ポート変更
 | `/content/{x,instagram}` | SNSチャネル別 | `/sns` の共通コンポーネントをチャネル別に初期絞り込み。投稿/予約の書込契約も共通 |
 | `/content/note` | note運用 | git TS catalog + R2本文所在 + 公開URL/準備状態。読み取り専用 |
 | `/content/kindle` | Kindle運用 | book catalog + manuscripts + `.local` 成果物 + KDP listings。読み取り専用 |
-| `/content/references` | 参考文献展開 | 解決済みinventoryをmetric / areaへ重複排除し、site / blog / note / Kindleの実在証跡と突合。読み取り専用 |
+| `/content/references` | 参考文献展開 | 制作単位×12チャネルとcontext-only補強プールを、既存SSOTから全件派生。読み取り専用 |
 | `/sns` | SNS 投稿ギャラリー | X/IG 素材の動画再生・caption 編集・投稿/予約・メトリクス・残枠バッジ。YouTube は過去実績と pilot 台帳を表示するが、投稿は Studio の人間工程 |
 | `/assets` | 画像資産 | OGP / リンクカード(light/dark) / note カバー / note 記事内画像 / 動画 master。欠落チェック + 再生成 |
 | `/svg` | ブログ SVG カタログ | 記事内 SVG を 6 カタログ + table + unknown に機械分類して一覧 |
@@ -49,7 +49,7 @@ PORT=5000 npm run admin    # ポート変更
 | `GET /api/svg/catalog?limit&all` | ブログ SVG を fetch → 分類 (TTL 10 分キャッシュ) |
 | `GET /api/research/dashboard-catalog` | 公式ダッシュボード研究カタログ + 基本監査結果 (読み取り専用・TTL 60 秒) |
 | `GET /api/dashboard/summary` | プロジェクト現況の集約 JSON (state/md ライブ読み・TTL 60 秒、collector は `dashboard-data.mjs`) |
-| `GET /api/content` | 4チャネルの共通stage・note/Kindle詳細・参考文献展開ポートフォリオ・SSOT監査結果 (読み取り専用・TTL 60 秒) |
+| `GET /api/content` | 4運用チャネルの共通stage・note/Kindle詳細・参考文献12チャネル展開ポートフォリオ・SSOT監査結果 (読み取り専用・TTL 60 秒) |
 | `POST /api/actions/regenerate` | 再生成ジョブ (kind ホワイトリスト: blog-thumbnails / ogp-ranking / ogp-ranking-cards / ogp-areas / ogp-note-covers) |
 
 ## できること
@@ -69,7 +69,7 @@ PORT=5000 npm run admin    # ポート変更
 
 - 投稿台帳 SSOT は `.claude/state/sns/posts.json`。**書込は sns-posts-store.cjs 経由のみ** (server も同経路)
 - note は git TS catalog + R2本文、Kindleは book-catalog/manuscripts + kdp-listings がSSOT。`/content`用の新規台帳を作らない
-- 参考文献展開は `.claude/state/source-inventory/` と既存コンテンツSSOTを実行時に突合する派生read model。別台帳・Drive ID・原本/OCR/cropを保持しない
+- 参考文献展開は `.claude/state/source-inventory/` と既存コンテンツSSOTを実行時に突合する派生read model。制作可能単位は12チャネル、context-onlyは補強専用として全件集約し、別台帳・Drive ID・原本/OCR/cropを保持しない
 - `npm run audit:content-operations` は duplicate ID、公開証跡、catalog/listings集合差、draft索引孤児、個別制作物のTODO二重登録、参考文献inventoryとmetric/area接続を検査し、errorで失敗する。PRのadmin-qualityでblocking実行
 - 頻度リミット (§1) は画面の残枠バッジ + 各ガードで enforce
 - **R2 の投稿済み動画は30日で自動削除** (`cleanup-r2-sns-videos.yml` weekly)。再投稿したい場合は再レンダー

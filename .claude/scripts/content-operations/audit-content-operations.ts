@@ -1,6 +1,7 @@
 import path from "node:path";
 
 import { loadContentOperations } from "../../../apps/admin/lib/content-operations/load";
+import { REFERENCE_PRODUCTION_CHANNELS } from "../../../apps/admin/lib/content-operations/reference";
 
 const root = path.resolve(process.cwd());
 const result = loadContentOperations(root);
@@ -32,7 +33,7 @@ if (asJson) {
   console.log(
     `references: sources=${reference.sources.length} sourceItems=${reference.summary.sourceItems} units=${reference.summary.productionUnits} integrated=${reference.summary.integratedSlots} draft=${reference.summary.draftSlots} ready=${reference.summary.readySlots} blocked=${reference.summary.blockedSlots}`,
   );
-  for (const channel of ["site", "blog", "note", "kindle"] as const) {
+  for (const channel of REFERENCE_PRODUCTION_CHANNELS) {
     const summary = reference.summary.byChannel[channel];
     console.log(
       `reference/${channel}: integrated=${summary.integrated} draft=${summary.draft} ready=${summary.ready} blocked=${summary.blocked} not-applicable=${summary["not-applicable"]}`,
