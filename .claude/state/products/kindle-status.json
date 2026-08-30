@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T22:48:45.472Z",
+  "generatedAt": "2026-08-30T04:08:24.639Z",
   "total": 32,
   "bySeries": {
     "S1-issues": 12,
@@ -17,9 +17,7 @@
       "title": "実質手取りの地図 — 住む県で変わる、暮らしのお金",
       "status": "generated",
       "priceYen": 800,
-      "chapters": 13,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 13
     },
     {
       "id": "K-S1-02",
@@ -27,9 +25,7 @@
       "title": "消費量日本一の食卓 — 家計調査で読む47都道府県の食",
       "status": "generated",
       "priceYen": 800,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S1-03",
@@ -37,9 +33,7 @@
       "title": "人口減少と世帯の地図 — 未婚・単身・東京集中",
       "status": "generated",
       "priceYen": 800,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S1-04",
@@ -47,9 +41,7 @@
       "title": "健康と医療の地図 — 寿命・自殺・介護2040",
       "status": "generated",
       "priceYen": 800,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S1-05",
@@ -57,9 +49,7 @@
       "title": "教育と子育ての地図 — 教育費・進学率・待機児童",
       "status": "generated",
       "priceYen": 800,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S1-06",
@@ -67,9 +57,7 @@
       "title": "自治体財政の地図 — 財政力・借金・将来負担",
       "status": "generated",
       "priceYen": 800,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S1-07",
@@ -77,9 +65,7 @@
       "title": "観光とインバウンドの地図 — 宿泊・国籍・回復",
       "status": "generated",
       "priceYen": 800,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S1-08",
@@ -87,9 +73,7 @@
       "title": "エネルギーとインフラの地図 — 電力・再エネ・水道",
       "status": "generated",
       "priceYen": 800,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S1-09",
@@ -97,9 +81,7 @@
       "title": "産業と地域経済の地図 — 製造・中小・農林",
       "status": "generated",
       "priceYen": 800,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S1-10",
@@ -107,9 +89,7 @@
       "title": "安全と環境の地図 — 犯罪・労災・公害・防災",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S1-11",
@@ -117,9 +97,7 @@
       "title": "文化・スポーツ・余暇の地図",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S1-12",
@@ -127,9 +105,7 @@
       "title": "デジタル生活の地図 — 通信・PC・テレワーク",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S2-01",
@@ -137,9 +113,7 @@
       "title": "データで見る47都道府県 人口・世帯",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S2-02",
@@ -147,9 +121,7 @@
       "title": "データで見る47都道府県 所得・賃金・採用",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S2-03",
@@ -157,9 +129,7 @@
       "title": "データで見る47都道府県 観光・宿泊",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S2-04",
@@ -167,9 +137,7 @@
       "title": "データで見る47都道府県 自治体財政",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S2-05",
@@ -177,9 +145,7 @@
       "title": "データで見る47都道府県 医療・介護",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S2-06",
@@ -187,9 +153,7 @@
       "title": "データで見る47都道府県 教育・子育て",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S2-07",
@@ -197,9 +161,7 @@
       "title": "データで見る47都道府県 移住・生活",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S2-08",
@@ -207,9 +169,7 @@
       "title": "データで見る47都道府県 出店・商圏",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S2-09",
@@ -217,9 +177,7 @@
       "title": "データで見る47都道府県 産業・経済",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S2-10",
@@ -227,9 +185,7 @@
       "title": "データで見る47都道府県 防災・インフラ",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S2-11",
@@ -237,9 +193,7 @@
       "title": "データで見る47都道府県 家計・消費",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S3-01",
@@ -247,9 +201,7 @@
       "title": "北海道データブック — 統計で読む県の横顔",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S3-02",
@@ -257,9 +209,7 @@
       "title": "東北データブック — 統計で読む県の横顔",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S3-03",
@@ -267,9 +217,7 @@
       "title": "関東データブック — 統計で読む県の横顔",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S3-04",
@@ -277,9 +225,7 @@
       "title": "中部データブック — 統計で読む県の横顔",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S3-05",
@@ -287,9 +233,7 @@
       "title": "近畿データブック — 統計で読む県の横顔",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S3-06",
@@ -297,9 +241,7 @@
       "title": "中国データブック — 統計で読む県の横顔",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S3-07",
@@ -307,9 +249,7 @@
       "title": "四国データブック — 統計で読む県の横顔",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S3-08",
@@ -317,9 +257,7 @@
       "title": "九州・沖縄データブック — 統計で読む県の横顔",
       "status": "generated",
       "priceYen": 500,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     },
     {
       "id": "K-S4-01",
@@ -327,9 +265,7 @@
       "title": "47都道府県ランキング大全 — 意外な1位・最下位",
       "status": "generated",
       "priceYen": 1000,
-      "chapters": 8,
-      "asin": null,
-      "publishedAt": null
+      "chapters": 8
     }
   ]
 }

@@ -23,6 +23,8 @@ node .claude/scripts/kdp/kdp-batch.mjs --phase publish --commit     # ★公開 
 node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --probe       # フォーム構造を dump (セレクタ調整)
 node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01               # 下書き作成のみ (既定・安全)
 node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit      # 公開 (★実公開・要オーナー承認)
+node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --update      # 既刊の修正下書き（R2 archive一致必須）
+node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --update --commit # 修正版を再申請（要オーナー承認）
 ```
 
 `--id` は Kindle 書籍 ID (`K-S1-01` 等・KINDLE_BOOKS と一致)。`--ids A,B` でバッチの対象を絞れる。
@@ -71,6 +73,8 @@ node .claude/scripts/kdp/kdp-publish.mjs --id K-S1-01 --commit      # 公開 (�
    **本棚で status が「下書き」でなくなったこと**を read-back して初めて成功とする
    (文言 grep は「出版」がどのページにもあるので使わない)。成功時に `status:listed`+asin を書き戻し。
    ASIN 割当が遅れる本は `kdp-drafts.mjs` (一覧) で後追いする。
+8. **状態同期**: `--phase status`はASINの有無に関係なく`draft|in_review|live|unknown`、生表示、確認日時、販売開始日をlistingsへ保存する。
+9. **既刊修正**: 原稿/表紙SSOTを修正・再生成し、`kindle:archive --push`で新revisionを保全してから`--update`。archiveとローカル完成物のSHAが違えばKDPへ送らない。
 
 ## ガードレール
 

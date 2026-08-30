@@ -97,7 +97,7 @@ describe("content operations core", () => {
     );
   });
 
-  it("審査中ASINと回収スタブの公開日欠落はwarningに留める", () => {
+  it("審査中を公開済みと誤認せず、ASIN割当前でもreviewにする", () => {
     const input = fixture({
       kindleListings: [
         {
@@ -106,6 +106,14 @@ describe("content operations core", () => {
           draftId: "draft-1",
           publishedAt: "2026-08-27",
           asin: null,
+          kdpStatus: "in_review",
+          kdpStatusLabel: "レビュー中",
+          kdpStatusCheckedAt: "2026-08-30T00:00:00.000Z",
+          archiveVersion: "v1",
+          archiveRevision: "rev1",
+          archiveArchivedAt: "2026-08-30T00:00:00.000Z",
+          archiveVerifiedAt: "2026-08-30T00:00:00.000Z",
+          localArchiveRevision: "rev1",
         },
       ],
       noteArticles: [
@@ -120,9 +128,12 @@ describe("content operations core", () => {
 
     expect(result.audit.status).toBe("warn");
     expect(result.audit.errors).toBe(0);
-    expect(result.audit.findings.map((x) => x.code)).toEqual(
-      expect.arrayContaining(["KDP_ASIN_PENDING", "NOTE_PUBLISHED_AT_UNKNOWN"]),
-    );
+    expect(result.audit.findings.map((x) => x.code)).toContain("NOTE_PUBLISHED_AT_UNKNOWN");
+    expect(result.kindle[0]).toMatchObject({
+      stage: "review",
+      archiveStatus: "verified",
+      kdpStatus: "in_review",
+    });
   });
 
   it("build台帳とKDP listingの集合差を双方向で検出する", () => {

@@ -10,6 +10,7 @@ import {
   ContentBlogIndex,
   ContentKdpListingsState,
   ContentKindleBuildState,
+  ContentKindleArchiveState,
   ContentNoteDraftIndex,
   ContentPrefectures,
   ContentReferenceInventory,
@@ -151,6 +152,8 @@ export function loadContentOperations(
   const kindleBuild = ContentKindleBuildState.parse(
     readJson(root, ".claude/state/products/kindle-status.json"),
   );
+  const kindleArchivesRaw = readOptionalJson(root, ".claude/state/products/kindle-archives.json");
+  const kindleArchives = kindleArchivesRaw ? ContentKindleArchiveState.parse(kindleArchivesRaw) : null;
   const noteDraftIndex = ContentNoteDraftIndex.parse(
     readJson(root, ".claude/state/note-draft-index.json"),
   );
@@ -207,6 +210,21 @@ export function loadContentOperations(
     socialPosts: social.posts,
     kindleListings: Object.values(kdp.listings).map((listing) => ({
       ...listing,
+      ...(() => {
+        const archive = kindleArchives?.books[listing.id];
+        const revision = archive?.revisions.find((item) => item.revision === archive.latestRevision);
+        const markerRaw = readOptionalJson(
+          root,
+          `.local/kindle-books/${listing.id}/${archive?.version ?? "v1"}/.kindle-archive.json`,
+        ) as { revision?: string } | null;
+        return {
+          archiveVersion: archive?.version ?? null,
+          archiveRevision: archive?.latestRevision ?? null,
+          archiveArchivedAt: revision?.archivedAt ?? null,
+          archiveVerifiedAt: revision?.verifiedAt ?? null,
+          localArchiveRevision: markerRaw?.revision ?? null,
+        };
+      })(),
       hasEpub: fs.existsSync(path.join(root, listing.epubPath)),
       hasCover: fs.existsSync(path.join(root, listing.coverPath)),
       manuscriptCount: fileCount(

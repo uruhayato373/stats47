@@ -21,13 +21,25 @@ export interface SourceKindleListing {
   subtitle?: string | null;
   status: string;
   priceYen: number;
+  royaltyPlan?: number;
+  kuEnrolled?: boolean;
   asin?: string | null;
   draftId?: string | null;
   publishedAt?: string | null;
+  lastSubmittedAt?: string | null;
+  salesStartedAt?: string | null;
+  kdpStatus?: "draft" | "in_review" | "live" | "unknown";
+  kdpStatusLabel?: string | null;
+  kdpStatusCheckedAt?: string | null;
   epubPath: string;
   coverPath: string;
   hasEpub: boolean;
   hasCover: boolean;
+  archiveVersion?: string | null;
+  archiveRevision?: string | null;
+  archiveArchivedAt?: string | null;
+  archiveVerifiedAt?: string | null;
+  localArchiveRevision?: string | null;
   manuscriptCount: number;
 }
 
@@ -113,6 +125,7 @@ function summarize(
     total: stages.length,
     draft: count("draft"),
     ready: count("ready"),
+    review: count("review"),
     scheduled: count("scheduled"),
     published: count("published"),
     blocked: count("blocked"),
@@ -226,25 +239,63 @@ export function buildContentOperations(
         message: "listed ですが draftId または publishedAt がありません",
       });
     }
-    if (listing.status === "listed" && !listing.asin) {
+    if (listing.status === "listed" && !listing.kdpStatus) {
       findings.push({
         severity: "warning",
-        code: "KDP_ASIN_PENDING",
+        code: "KDP_OPERATIONAL_STATUS_MISSING",
         channel: "kindle",
         itemId: listing.id,
-        message: "listed ですがASIN未記録です（審査中なら正常）",
+        message: "KDP本棚の審査中/販売中状態が未同期です",
+      });
+    }
+    if (listing.kdpStatus === "live" && !listing.asin) {
+      findings.push({
+        severity: "error",
+        code: "KDP_LIVE_ASIN_MISSING",
+        channel: "kindle",
+        itemId: listing.id,
+        message: "販売中ですがASINがありません",
+      });
+    }
+    if (listing.status === "listed" && !listing.archiveRevision) {
+      findings.push({
+        severity: "error",
+        code: "KINDLE_ARCHIVE_MISSING",
+        channel: "kindle",
+        itemId: listing.id,
+        message: "KDP申請済みですがR2暗号化archiveがありません",
       });
     }
 
+    const kdpStatus = listing.kdpStatus ??
+      (listing.status === "listed" ? (listing.asin ? "live" : "in_review") : "draft");
+    const hasRemoteArchive = Boolean(listing.archiveRevision);
+    const archiveStatus = !hasRemoteArchive
+      ? "missing"
+      : !listing.localArchiveRevision
+        ? "remote-only"
+        : listing.localArchiveRevision === listing.archiveRevision
+          ? "verified"
+          : "stale";
     const stage: ContentStageDTO =
       listing.status === "listed"
-        ? "published"
-        : listing.hasEpub && listing.hasCover
+        ? kdpStatus === "live"
+          ? "published"
+          : kdpStatus === "in_review"
+            ? "review"
+            : "blocked"
+        : (listing.hasEpub && listing.hasCover) || hasRemoteArchive
           ? "ready"
           : "draft";
     const nextAction =
       stage === "published"
         ? "売上・KENPを計測"
+        : stage === "review"
+          ? "KDP審査結果を同期"
+        : archiveStatus === "remote-only"
+          ? "R2 archiveから完成物を復元"
+        : archiveStatus === "stale"
+          ? "修正版をR2 archiveへ追加"
         : input.kdpPolicy.mode === "paused"
           ? `出版保留: ${input.kdpPolicy.resumeCondition}`
         : stage === "ready"
@@ -260,11 +311,23 @@ export function buildContentOperations(
       listingStatus: listing.status,
       buildStatus: build?.status ?? null,
       priceYen: listing.priceYen,
+      royaltyPlan: listing.royaltyPlan ?? 70,
+      kuEnrolled: listing.kuEnrolled ?? false,
       asin: listing.asin ?? null,
       draftId: listing.draftId ?? null,
       publishedAt: listing.publishedAt ?? null,
+      lastSubmittedAt: listing.lastSubmittedAt ?? listing.publishedAt ?? null,
+      salesStartedAt: listing.salesStartedAt ?? null,
+      kdpStatus,
+      kdpStatusLabel: listing.kdpStatusLabel ?? (kdpStatus === "live" ? "販売中" : kdpStatus === "in_review" ? "レビュー中" : kdpStatus === "draft" ? "下書き" : "不明"),
+      kdpStatusCheckedAt: listing.kdpStatusCheckedAt ?? null,
       hasEpub: listing.hasEpub,
       hasCover: listing.hasCover,
+      archiveStatus,
+      archiveVersion: listing.archiveVersion ?? null,
+      archiveRevision: listing.archiveRevision ?? null,
+      archiveArchivedAt: listing.archiveArchivedAt ?? null,
+      archiveVerifiedAt: listing.archiveVerifiedAt ?? null,
       manuscriptCount: listing.manuscriptCount,
       nextAction,
       sourcePaths: [
@@ -393,8 +456,9 @@ export function buildContentOperations(
         ready: 0,
         draft: 1,
         blocked: 2,
-        scheduled: 3,
-        published: 4,
+        review: 3,
+        scheduled: 4,
+        published: 5,
       };
       return stageOrder[a.stage] - stageOrder[b.stage] || a.title.localeCompare(b.title, "ja");
     }),

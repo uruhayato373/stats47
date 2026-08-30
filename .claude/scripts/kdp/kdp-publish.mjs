@@ -16,9 +16,10 @@
  */
 import { writeFileSync } from "node:fs";
 import {
-  launchContext, waitForLogin, assertAccount, readListings, resolveAsset, shotPath, sleep,
+  ROOT, launchContext, waitForLogin, assertAccount, readListings, resolveAsset, shotPath, sleep,
 } from "./lib/kdp-session.mjs";
 import { ensureDraft, verifyDraft, publishDraft } from "./lib/kdp-flow.mjs";
+import { assertKindleAssetsArchived } from "./lib/kdp-archive-gate.mjs";
 
 const argv = process.argv.slice(2);
 const getArg = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };
@@ -26,11 +27,17 @@ const ID = getArg("--id");
 const COMMIT = argv.includes("--commit");
 const VERIFY = argv.includes("--verify");
 const PROBE = argv.includes("--probe");
+const UPDATE = argv.includes("--update");
 if (!ID) { console.error("--id <K-S1-01> required"); process.exit(1); }
 
 const listings = readListings();
 const lst = listings[ID];
 if (!lst) { console.error(`ABORT: kdp-listings.json に "${ID}" が無い (先に products:kindle:kdp-listings --apply)`); process.exit(1); }
+if (UPDATE && lst.status !== "listed") { console.error("ABORT: --update は既刊 (status=listed) 専用です"); process.exit(1); }
+if (!UPDATE && lst.status === "listed" && !VERIFY && !PROBE) {
+  console.error("ABORT: 既刊を修正する場合は --update を明示してください");
+  process.exit(1);
+}
 
 // 資産 (EPUB/カバー) の存在をブラウザ起動前に確認 (中断で orphan 下書きを残さない)。
 const epub = resolveAsset(lst.epubPath);
@@ -43,7 +50,16 @@ if (!lst.title?.trim()) { console.error("ABORT: title 空"); process.exit(1); }
 if (lst.keywords.length > 7) { console.error("ABORT: keywords は最大 7"); process.exit(1); }
 if (COMMIT && lst.kuEnrolled === undefined) { console.error("ABORT: kuEnrolled 未設定"); process.exit(1); }
 
-const MODE = PROBE ? "PROBE(構造dump)" : COMMIT ? "COMMIT(公開)" : VERIFY ? "VERIFY(検証のみ)" : "DRAFT(下書き)";
+if (COMMIT || UPDATE) {
+  const archive = assertKindleAssetsArchived(ROOT, ID);
+  if (!archive.ok) {
+    console.error(`ABORT: ${archive.reason}。先に Kindle archive --push を実行してください`);
+    process.exit(1);
+  }
+  console.log(`[prep] R2 archive revision=${archive.revision} verifiedAt=${archive.verifiedAt}`);
+}
+
+const MODE = PROBE ? "PROBE(構造dump)" : UPDATE ? `UPDATE(${COMMIT ? "再公開" : "修正下書き"})` : COMMIT ? "COMMIT(公開)" : VERIFY ? "VERIFY(検証のみ)" : "DRAFT(下書き)";
 console.log(`[prep] KDP ${MODE} id=${ID} "${lst.title}"`);
 
 const ctx = await launchContext({ headless: false });
@@ -96,6 +112,7 @@ try {
   const r = await ensureDraft(page, ID, lst, {
     epubAbs: epub.abs,
     coverAbs: cover.ok ? cover.abs : null,
+    forceAll: UPDATE,
     tag: "[kdp]",
   });
   await page.screenshot({ path: shotPath(`details-${ID}.png`) }).catch(() => {});

@@ -10,6 +10,7 @@ import type {
 const STAGE_LABEL: Record<ContentStageDTO, string> = {
   draft: "原稿・準備中",
   ready: "公開準備完了",
+  review: "KDP審査中",
   scheduled: "予約済み",
   published: "公開済み",
   blocked: "要対応",
@@ -19,7 +20,7 @@ export function StageBadge({ stage }: { stage: ContentStageDTO }) {
   const tone =
     stage === "published"
       ? "good"
-      : stage === "ready" || stage === "scheduled"
+      : stage === "ready" || stage === "review" || stage === "scheduled"
         ? "info"
         : stage === "blocked"
           ? "bad"

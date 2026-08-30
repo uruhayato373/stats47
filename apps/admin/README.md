@@ -26,7 +26,7 @@ PORT=5000 npm run admin    # ポート上書き
 | `/content` | X / Instagram / note / Kindle の制作・公開状態・次アクション・SSOT監査の横断サマリ |
 | `/content/x` `/content/instagram` | 既存SNS投稿機能をチャネル別に初期絞り込みした専用画面 |
 | `/content/note` | note catalog (git TS)・R2本文所在・公開URL・公開準備状態の読み取り専用ミラー |
-| `/content/kindle` | Kindle catalog・manuscript・ローカルEPUB/表紙・KDP listingsの読み取り専用ミラー |
+| `/content/kindle` | Kindle catalog・manuscript・ローカルEPUB/表紙・R2暗号化archive・KDPの下書き/審査中/販売中・価格/ロイヤリティ/KUの読み取り専用ミラー |
 | `/content/references` | 解決済み参考文献inventoryを既存metric・area・blog・note・Kindleへ突合した制作ポートフォリオ。権利保留・一次資料不明は制作対象外 |
 | `/sns` | 投稿台帳 (X/IG と YouTube 過去実績/pilot 記録)・素材再生・caption 編集・投稿/予約・残枠・IG 整合性警告。YouTube 投稿は Studio の人間工程 |
 | `/assets` | 画像/動画資産 11 タブ・欠落チェック (HEAD probe)・再生成 (whitelist 5 タブのみ) |
@@ -58,7 +58,7 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 |---|---|---|
 | SNS 投稿台帳 | `.claude/state/sns/posts.json` | **書込は `sns-posts-store.cjs` 経由のみ** (`lib/server/posts-store.ts` が createRequire でランタイムロード — webpack バンドル禁止: .cjs は `__dirname` 相対でパス解決するため) |
 | note編集メタ / 本文 | `.claude/scripts/note/catalog/` (git TS) / R2 `note/<vertical>/<slug>/` | `/content/note` は正規化表示のみ。`note-published-urls.json` は派生で手編集しない |
-| Kindle設計 / 原稿 / 出品 | `book-catalog.ts` / `manuscripts/<id>/` / `.claude/config/kdp-listings.json` | `/content/kindle` は突合表示のみ。EPUB/表紙は `.local` で存在確認 |
+| Kindle設計 / 原稿 / 出品 | `book-catalog.ts` / `manuscripts/<id>/` / `.claude/config/kdp-listings.json` / `.claude/state/products/kindle-archives.json` | `/content/kindle` は突合表示のみ。ローカル成果物とR2 revision、KDP状態を別々に表示 |
 | 参考文献展開 | `.claude/state/source-inventory/` + 既存コンテンツSSOT + `docs/{21_ブログ記事原稿,31_note記事原稿}/` | `/content/references` は実行時に重複排除して公開済み・制作中を突合。原本・OCR・crop・Drive IDは読まない |
 | IG 予約 | `.claude/state/instagram-w*-schedule.json` | schedule JSON + posts.json の**二重書込を同一処理で** |
 | ローカル素材 | `.local/r2/sns` / `.local/ogp-pilot` | `/media` `/pilot` で配信 (読み取り) |

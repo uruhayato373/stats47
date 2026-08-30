@@ -15,7 +15,7 @@
  *   - publish は verify を内蔵する: read-back 全項目 PASS の本だけ公開する
  *   - 公開済み (status=listed) はどの phase でも触らない
  */
-import { launchContext, waitForLogin, assertAccount, readListings, resolveAsset, writeBackListing, sleep } from "./lib/kdp-session.mjs";
+import { launchContext, waitForLogin, assertAccount, readListings, resolveAsset, writeBackKdpState, sleep } from "./lib/kdp-session.mjs";
 import { ensureDraft, verifyDraft, publishDraft, readBookshelfState } from "./lib/kdp-flow.mjs";
 
 const argv = process.argv.slice(2);
@@ -96,19 +96,21 @@ try {
           detail: r.ok ? (r.already ? "既に完成 (verify PASS)" : "下書き完成 (verify PASS)") : r.warnings.join(" / "),
         });
       } else if (PHASE === "status") {
-        // 公開後の後追い: 本棚の審査状態を読み、ASIN が割り当たっていれば listings に書き戻す。
+        // 公開後の後追い: ASIN未割当でも本棚の審査/販売状態をlistingsへ書き戻す。
         if (!lst.draftId) {
-          results.push({ id, ok: false, detail: "draftId なし" });
+          writeBackKdpState(id, { status: "未作成", asin: "" });
+          results.push({ id, ok: true, detail: "未作成" });
           continue;
         }
-        const shelf = await readBookshelfState(page, lst.draftId);
+        const shelf = await readBookshelfState(page, lst.draftId, {
+          asin: lst.asin || "",
+          title: lst.title || "",
+        });
         if (!shelf.found) {
           results.push({ id, ok: false, detail: "本棚に見つからず" });
           continue;
         }
-        if (shelf.asin && lst.status === "listed" && lst.asin !== shelf.asin) {
-          writeBackListing(id, shelf.asin);
-        }
+        writeBackKdpState(id, shelf);
         results.push({ id, ok: true, detail: `${shelf.status}${shelf.asin ? ` / ${shelf.asin}` : ""}` });
       } else {
         // publish: verify → PASS のみ公開。
@@ -136,7 +138,7 @@ try {
       break;
     }
     // 新規タイトルの連投は KDP 側の作成制限に当たる疑いがあるため間隔を空ける。
-    await sleep(15000);
+    await sleep(PHASE === "status" ? 1000 : 15000);
   }
 } finally {
   await ctx.close();

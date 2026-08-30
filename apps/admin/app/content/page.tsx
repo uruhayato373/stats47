@@ -45,6 +45,7 @@ export default function ContentPage() {
               </div>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {channel.ready > 0 ? <StageBadge stage="ready" /> : null}
+                {channel.review > 0 ? <StageBadge stage="review" /> : null}
                 {channel.scheduled > 0 ? <StageBadge stage="scheduled" /> : null}
                 {channel.published > 0 ? <StageBadge stage="published" /> : null}
                 {channel.draft > 0 ? <StageBadge stage="draft" /> : null}
@@ -52,6 +53,7 @@ export default function ContentPage() {
               </div>
               <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 text-[11px] text-console-muted">
                 <div>準備完了 {channel.ready}</div>
+                <div>審査中 {channel.review}</div>
                 <div>予約 {channel.scheduled}</div>
                 <div>公開 {channel.published}</div>
                 <div>準備中 {channel.draft}</div>

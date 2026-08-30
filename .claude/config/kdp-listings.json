@@ -64,7 +64,11 @@
       "draftId": "A1D19U5YVCZV0O",
       "status": "listed",
       "asin": "B0HF17SQ9N",
-      "publishedAt": "2026-08-13"
+      "publishedAt": "2026-08-13",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:03:52.056Z"
     },
     "K-S1-02": {
       "id": "K-S1-02",
@@ -128,7 +132,11 @@
       "draftId": "AVO8838RAAG8U",
       "status": "listed",
       "asin": "B0HF1N51T8",
-      "publishedAt": "2026-08-13"
+      "publishedAt": "2026-08-13",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:04:14.506Z"
     },
     "K-S1-03": {
       "id": "K-S1-03",
@@ -192,7 +200,11 @@
       "draftId": "A25RYVT5IC2UMM",
       "status": "listed",
       "asin": "B0HDYKVX6F",
-      "publishedAt": "2026-08-13"
+      "publishedAt": "2026-08-13",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:04:36.843Z"
     },
     "K-S1-04": {
       "id": "K-S1-04",
@@ -256,7 +268,11 @@
       "draftId": "A3NKJO61F4PFTI",
       "status": "listed",
       "asin": "B0HF1C5QZ6",
-      "publishedAt": "2026-08-13"
+      "publishedAt": "2026-08-13",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:04:58.362Z"
     },
     "K-S1-05": {
       "id": "K-S1-05",
@@ -320,7 +336,11 @@
       "draftId": "A35OGN7O5LSWPY",
       "status": "listed",
       "asin": "B0HF356WR9",
-      "publishedAt": "2026-08-16"
+      "publishedAt": "2026-08-16",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:05:19.195Z"
     },
     "K-S1-06": {
       "id": "K-S1-06",
@@ -384,7 +404,11 @@
       "draftId": "A3NI2STP0CJ20O",
       "status": "listed",
       "asin": "B0HF1XFXBY",
-      "publishedAt": "2026-08-13"
+      "publishedAt": "2026-08-13",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:05:40.753Z"
     },
     "K-S1-07": {
       "id": "K-S1-07",
@@ -448,7 +472,11 @@
       "draftId": "A1MX39POA70MGT",
       "status": "listed",
       "asin": "B0HDYG6DLX",
-      "publishedAt": "2026-08-13"
+      "publishedAt": "2026-08-13",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:06:01.603Z"
     },
     "K-S1-08": {
       "id": "K-S1-08",
@@ -512,7 +540,11 @@
       "draftId": "A1VVCMM09NW06F",
       "status": "listed",
       "asin": "B0HDYLY7WM",
-      "publishedAt": "2026-08-13"
+      "publishedAt": "2026-08-13",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:06:22.770Z"
     },
     "K-S1-09": {
       "id": "K-S1-09",
@@ -576,7 +608,11 @@
       "draftId": "A7VASEPR22DVW",
       "status": "listed",
       "asin": "B0HDYB4CBV",
-      "publishedAt": "2026-08-13"
+      "publishedAt": "2026-08-13",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:06:43.666Z"
     },
     "K-S1-10": {
       "id": "K-S1-10",
@@ -640,7 +676,11 @@
       "draftId": "A2QV2ULXW8GXID",
       "status": "listed",
       "asin": "B0HDZ45H6C",
-      "publishedAt": "2026-08-13"
+      "publishedAt": "2026-08-13",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:07:05.430Z"
     },
     "K-S1-11": {
       "id": "K-S1-11",
@@ -701,10 +741,13 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S1-11/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S1-11/v1/cover.jpg",
+      "draftId": "A3HMM993XMOE3Q",
       "status": "listed",
       "asin": null,
       "publishedAt": "2026-08-30",
-      "draftId": "A3HMM993XMOE3Q"
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-08-30T03:58:38.958Z"
     },
     "K-S1-12": {
       "id": "K-S1-12",
@@ -768,7 +811,11 @@
       "draftId": "AMH6ZZXN3T35Y",
       "status": "listed",
       "asin": "B0HG55D649",
-      "publishedAt": "2026-08-22"
+      "publishedAt": "2026-08-22",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:07:27.162Z"
     },
     "K-S2-01": {
       "id": "K-S2-01",
@@ -831,7 +878,11 @@
       "draftId": "A2UWQYBWVB2439",
       "status": "listed",
       "asin": "B0HG543VG9",
-      "publishedAt": "2026-08-22"
+      "publishedAt": "2026-08-22",
+      "salesStartedAt": "2026-08-30",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-08-30T04:07:47.801Z"
     },
     "K-S2-02": {
       "id": "K-S2-02",
@@ -891,10 +942,13 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-02/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-02/v1/cover.jpg",
+      "draftId": "A32HMMPXLT6UJ3",
       "status": "listed",
       "asin": null,
       "publishedAt": "2026-08-30",
-      "draftId": "A32HMMPXLT6UJ3"
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-08-30T03:59:20.683Z"
     },
     "K-S2-03": {
       "id": "K-S2-03",
@@ -954,10 +1008,13 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-03/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-03/v1/cover.jpg",
+      "draftId": "A1MRJ4KS2QZ4PR",
       "status": "listed",
       "asin": null,
       "publishedAt": "2026-08-30",
-      "draftId": "A1MRJ4KS2QZ4PR"
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-08-30T03:59:43.511Z"
     },
     "K-S2-04": {
       "id": "K-S2-04",
@@ -1019,7 +1076,10 @@
       "coverPath": ".local/kindle-books/K-S2-04/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "未作成",
+      "kdpStatusCheckedAt": "2026-08-30T03:59:44.654Z"
     },
     "K-S2-05": {
       "id": "K-S2-05",
@@ -1079,10 +1139,13 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-05/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-05/v1/cover.jpg",
+      "draftId": "AZ5VNVHXHI6NY",
       "status": "listed",
       "asin": null,
       "publishedAt": "2026-08-30",
-      "draftId": "AZ5VNVHXHI6NY"
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-08-30T04:00:05.671Z"
     },
     "K-S2-06": {
       "id": "K-S2-06",
@@ -1142,10 +1205,13 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-06/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-06/v1/cover.jpg",
+      "draftId": "A21I2G6CBLF42N",
       "status": "listed",
       "asin": null,
       "publishedAt": "2026-08-30",
-      "draftId": "A21I2G6CBLF42N"
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-08-30T04:00:22.331Z"
     },
     "K-S2-07": {
       "id": "K-S2-07",
@@ -1207,7 +1273,10 @@
       "coverPath": ".local/kindle-books/K-S2-07/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "未作成",
+      "kdpStatusCheckedAt": "2026-08-30T04:00:23.379Z"
     },
     "K-S2-08": {
       "id": "K-S2-08",
@@ -1269,7 +1338,10 @@
       "coverPath": ".local/kindle-books/K-S2-08/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "未作成",
+      "kdpStatusCheckedAt": "2026-08-30T04:00:23.404Z"
     },
     "K-S2-09": {
       "id": "K-S2-09",
@@ -1331,7 +1403,10 @@
       "coverPath": ".local/kindle-books/K-S2-09/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "未作成",
+      "kdpStatusCheckedAt": "2026-08-30T04:00:23.424Z"
     },
     "K-S2-10": {
       "id": "K-S2-10",
@@ -1393,7 +1468,10 @@
       "coverPath": ".local/kindle-books/K-S2-10/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "未作成",
+      "kdpStatusCheckedAt": "2026-08-30T04:00:23.462Z"
     },
     "K-S2-11": {
       "id": "K-S2-11",
@@ -1453,10 +1531,13 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S2-11/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S2-11/v1/cover.jpg",
+      "draftId": "A126L0E2Y812CH",
       "status": "listed",
       "asin": null,
       "publishedAt": "2026-08-30",
-      "draftId": "A126L0E2Y812CH"
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-08-30T04:00:45.593Z"
     },
     "K-S3-01": {
       "id": "K-S3-01",
@@ -1516,10 +1597,13 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-01/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S3-01/v1/cover.jpg",
+      "draftId": "AL56V7HCNM0QT",
       "status": "listed",
       "asin": null,
       "publishedAt": "2026-08-30",
-      "draftId": "AL56V7HCNM0QT"
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-08-30T04:00:59.603Z"
     },
     "K-S3-02": {
       "id": "K-S3-02",
@@ -1581,7 +1665,10 @@
       "coverPath": ".local/kindle-books/K-S3-02/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "未作成",
+      "kdpStatusCheckedAt": "2026-08-30T04:01:00.667Z"
     },
     "K-S3-03": {
       "id": "K-S3-03",
@@ -1641,10 +1728,13 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-03/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S3-03/v1/cover.jpg",
+      "draftId": "A3HPQ5HZOZJX78",
       "status": "listed",
       "asin": null,
       "publishedAt": "2026-08-30",
-      "draftId": "A3HPQ5HZOZJX78"
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-08-30T04:01:15.912Z"
     },
     "K-S3-04": {
       "id": "K-S3-04",
@@ -1706,7 +1796,10 @@
       "coverPath": ".local/kindle-books/K-S3-04/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "未作成",
+      "kdpStatusCheckedAt": "2026-08-30T04:01:16.939Z"
     },
     "K-S3-05": {
       "id": "K-S3-05",
@@ -1768,7 +1861,10 @@
       "coverPath": ".local/kindle-books/K-S3-05/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "未作成",
+      "kdpStatusCheckedAt": "2026-08-30T04:01:16.958Z"
     },
     "K-S3-06": {
       "id": "K-S3-06",
@@ -1830,7 +1926,10 @@
       "coverPath": ".local/kindle-books/K-S3-06/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "未作成",
+      "kdpStatusCheckedAt": "2026-08-30T04:01:16.975Z"
     },
     "K-S3-07": {
       "id": "K-S3-07",
@@ -1892,7 +1991,10 @@
       "coverPath": ".local/kindle-books/K-S3-07/v1/cover.jpg",
       "status": "draft",
       "asin": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "kdpStatus": "draft",
+      "kdpStatusLabel": "未作成",
+      "kdpStatusCheckedAt": "2026-08-30T04:01:16.980Z"
     },
     "K-S3-08": {
       "id": "K-S3-08",
@@ -1952,10 +2054,13 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S3-08/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S3-08/v1/cover.jpg",
+      "draftId": "A2I733T9F57QIE",
       "status": "listed",
       "asin": null,
       "publishedAt": "2026-08-30",
-      "draftId": "A2I733T9F57QIE"
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-08-30T04:01:34.338Z"
     },
     "K-S4-01": {
       "id": "K-S4-01",
@@ -2015,10 +2120,13 @@
       "kuEnrolled": false,
       "epubPath": ".local/kindle-books/K-S4-01/v1/book.epub",
       "coverPath": ".local/kindle-books/K-S4-01/v1/cover.jpg",
+      "draftId": "A2MYHW5B5W7BDK",
       "status": "listed",
       "asin": null,
       "publishedAt": "2026-08-30",
-      "draftId": "A2MYHW5B5W7BDK"
+      "kdpStatus": "in_review",
+      "kdpStatusLabel": "レビュー中",
+      "kdpStatusCheckedAt": "2026-08-30T04:01:47.501Z"
     }
   }
 }
