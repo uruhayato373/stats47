@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-08-30
- * 件数: blog 508 / tag 62 / survey 81
+ * 件数: blog 518 / tag 62 / survey 81
  */
 
 export interface SitemapBlogEntry {
@@ -326,6 +326,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "miso-consumption-quantity-prefecture-gap", lastModified: "2026-07-06" },
   { slug: "miyagi-food-culture", lastModified: "2026-07-10" },
   { slug: "miyazaki-food-culture", lastModified: "2026-07-10" },
+  { slug: "miyazaki-municipal-finance", lastModified: "2026-08-30" },
   { slug: "mobile-contracts-over-population", lastModified: "2026-03-06" },
   { slug: "mochi-consumption-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "movie-theater-expenditure-ranking", lastModified: "2026-07-10" },
@@ -335,6 +336,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "municipality-population-decline-tiers", lastModified: "2026-07-16" },
   { slug: "musical-instrument-expenditure-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "nagano-food-culture", lastModified: "2026-07-10" },
+  { slug: "nagano-migration-flow", lastModified: "2026-08-30" },
   { slug: "nagasaki-food-culture", lastModified: "2026-07-10" },
   { slug: "nara-food-culture", lastModified: "2026-07-10" },
   { slug: "national-pension-payment-rate-prefecture-gap", lastModified: "2026-08-30" },
@@ -344,6 +346,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "natto-production-vs-consumption", lastModified: "2026-07-19" },
   { slug: "natural-increase-rate-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "niigata-food-culture", lastModified: "2026-07-10" },
+  { slug: "niigata-migration-flow", lastModified: "2026-08-30" },
   { slug: "noodle-consumption-prefecture-character", lastModified: "2026-05-06" },
   { slug: "nurse-income-prefecture-gap", lastModified: "2026-06-13" },
   { slug: "nursing-care-shortage-2040", lastModified: "2026-03-04" },
@@ -351,6 +354,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "oita-food-culture", lastModified: "2026-07-10" },
   { slug: "okayama-food-culture", lastModified: "2026-07-10" },
   { slug: "okinawa-food-culture", lastModified: "2026-07-10" },
+  { slug: "okinawa-municipal-finance", lastModified: "2026-08-30" },
   { slug: "osaka-food-culture", lastModified: "2026-07-10" },
   { slug: "other-bread-consumption-quantity", lastModified: "2026-06-21" },
   { slug: "outpatient-rate-prefecture-gap", lastModified: "2026-05-17" },
@@ -399,6 +403,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "public-phone-count-gap", lastModified: "2026-06-07" },
   { slug: "public-phone-prefecture-vanishing", lastModified: "2026-03-29" },
   { slug: "purchasing-power-adjusted", lastModified: "2026-03-06" },
+  { slug: "railway-station-count-prefecture-gap", lastModified: "2026-08-30" },
+  { slug: "railway-theme-overview", lastModified: "2026-08-30" },
   { slug: "real-disposable-income-reversal", lastModified: "2026-07-20" },
   { slug: "real-disposable-income-vs-per-capita-social-welfare", lastModified: "2026-08-30" },
   { slug: "real-disposable-income-vs-taxpayer-ratio-per-pref-resident", lastModified: "2026-08-29" },
@@ -413,6 +419,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "road-infrastructure-density", lastModified: "2026-03-06" },
   { slug: "road-length-per-km2-vs-average-road-traffic-volume", lastModified: "2026-08-30" },
   { slug: "road-length-per-km2-vs-residential-building-starts", lastModified: "2026-08-30" },
+  { slug: "roadside-station-count-prefecture-gap", lastModified: "2026-08-30" },
+  { slug: "roadside-station-count-vs-forest-road-length", lastModified: "2026-08-30" },
   { slug: "roadside-station-prefecture-gap", lastModified: "2026-06-13" },
   { slug: "ryokan-vs-hotel-overnight-shift", lastModified: "2026-03-06" },
   { slug: "safe-driving-5-features", lastModified: "2026-03-04" },
@@ -477,6 +485,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "tottori-food-culture", lastModified: "2026-07-10" },
   { slug: "towns-villages-larger-than-cities", lastModified: "2026-07-16" },
   { slug: "toyama-food-culture", lastModified: "2026-07-10" },
+  { slug: "toyama-municipal-finance", lastModified: "2026-08-30" },
   { slug: "traffic-accident-deaths-regional-risk", lastModified: "2025-03-01" },
   { slug: "train-commuters-prefecture-gap", lastModified: "2026-06-13" },
   { slug: "travel-behavior-gender-gap", lastModified: "2026-03-06" },
@@ -509,6 +518,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "wage-vs-living-cost", lastModified: "2026-03-03" },
   { slug: "waiting-children-progress", lastModified: "2026-03-04" },
   { slug: "wakayama-food-culture", lastModified: "2026-07-10" },
+  { slug: "wakayama-migration-flow", lastModified: "2026-08-30" },
   { slug: "waste-management-recycling-gap", lastModified: "2026-03-06" },
   { slug: "water-infrastructure-crisis", lastModified: "2026-03-06" },
   { slug: "water-sewage-crisis", lastModified: "2026-03-06" },
