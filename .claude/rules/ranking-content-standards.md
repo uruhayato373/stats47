@@ -132,10 +132,11 @@ ai-content は「この ranking ページに解説を付けられるか」(ペ�
 
 ```
 R2 values.json + correlation + metric config
-  → 生成 (既定はローカル CLI npm run ai:gen。トークン規律は TOKEN-AICONTENT-01)
-  → 決定的 gate (audit-ai-content.mjs。落ちたら同じ prompt で再試行 --retries、既定 1 回)
-  → critic (ranking-content-critic) 監査 → review.md
-  → R2 app/ranking/<key>/ai-content.json (CI push: publish-ai-content.yml、develop push で発火)
+  → Gemini API structured JSON (author)
+  → 決定的 gate (audit-ai-content.mjs。落ちたら有界の全体再生成)
+  → 別リクエストの Gemini critic (REVISE なら指摘付きで 1 回再生成)
+  → outbox → publish-ai-content.yml を明示 dispatch
+  → R2 app/ranking/<key>/ai-content.json + CDN purge
 ```
 
 **公開までの受け渡しは 2 経路あり、実行環境で選ぶ** (混同すると生成物が公開に到達しない):
@@ -164,7 +165,7 @@ dispatch が skip され、**通過していた N-1 件も公開されずに捨�
 5 件中 4 件が PASS したのに 0 件公開・生成 $86 が無駄。`manufacturing-industry-added-value`
 が 47 県 commentary の定型重複で critic を通らず毎回バッチを道連れにしていた)。
 
-verify セマンティクス (日次 CI 廃止後は**対話セッションが同じ規律で回す**):
+verify セマンティクス (日次 CI と対話セッションの共通規律):
 
 - **通過分だけ publish する**。失敗キーは outbox (`data/ai-content-staging/<key>.json` /
   `docs/21_ブログ記事原稿/<slug>/`) を drop して次回生成へ繰り越す。
@@ -177,15 +178,36 @@ verify セマンティクス (日次 CI 廃止後は**対話セッションが�
 `.claude/state/ai-content/generation-failures.json` に積み、**3 回連続で失敗したキーを
 `build-ai-content-queue.mjs --next` が除外**する (doomed key が毎回バッチの 1 枠と生成
 コストを食い潰すのを防ぐ)。除外したキーは LATEST.md の「🚧 quarantine」節に理由付きで
-可視化し (黙って消さない)、一度でも PASS すればカウントを消して自動で復帰する。opus critic
-での再挑戦やプロンプト/データ是正が要る。blog は新規記事で同じ slug を再ピックしないため
+可視化し (黙って消さない)、一度でも PASS すればカウントを消して自動で復帰する。手動 agent
+での再是正やプロンプト/データ是正が要る。blog は新規記事で同じ slug を再ピックしないため
 quarantine は持たない。
 
 再発防止テスト: `.claude/scripts/ai-content/__tests__/generation-outcome.test.mjs`
-(quarantine の積み上げ・PASS でのリセット)。日次 workflow を対象にしていた
-`content-generation-routine.test.cjs` 側の検査は、workflow ごと 2026-08-21 に削除した。
+(quarantine の積み上げ・PASS でのリセット) / `packages/ai-content/src/services/__tests__/`
+(Gemini API・structured output・preflight・生成 0 件 gate)。
 
-### ★2026-08-21: 日次 CI を廃止し、月次目標 → 週次割当へ移した
+### ★2026-08-30: Gemini 無料枠の日次 CI を正典にする
+
+`ai-content-gemini-daily.yml` を日次 07:15 JST に実行する。既定 3 件、並列数 1、
+`gemini-3.7-flash` 固定で開始し、クォータ実測なしに件数を上げない。実行経路は次の通り。
+
+1. `build-ai-content-queue.mjs --scope all` で R2 から対象を再導出する。
+2. 極小の structured generateContent で preflight する。ListModels は失敗時の候補提示にしか使わない。
+3. author は response schema で FAQ 5 件・観測地域全件を固定する。既存の決定的監査に落ちた候補は公開しない。
+4. 生成と別の Gemini リクエストが意味品質を `PASS | REVISE` で審査する。`REVISE` は指摘付きで最大 1 回だけ全体再生成する。
+5. PASS 分だけ outbox へ書き、develop へコミットする。CI からの push は後続 workflow を発火しないため、`publish-ai-content.yml` を明示 dispatch し、run 成功まで待つ。
+6. 件数・通過率・author/critic リクエスト数・トークン数を `.claude/state/metrics/ai-content/` へ記録する。生成本文と prompt は記録しない。
+
+**無料運用のゲート**: `GEMINI_API_KEY` は課金を有効化していない専用 Google AI Studio
+project から発行する。API は認証・quota/billing エラーを返すが、キーの project で
+billing が OFF かどうかを応答から事前証明できない。コードでの「無料保証」は不可能なので、
+Secret 発行元の課金無効を人間が保証する。無料 tier の入出力は Google のサービス改善に
+使われ得るため、秘密・個人情報を prompt に入れない。ranking 公開観測値と公開用解説だけを扱う。
+
+Claude Code/OAuth を使う日次 CI は復活させない。Claude は Gemini 自動経路で 3 回
+quarantine に入った高流入 key など、例外的な手動是正にだけ使う。
+
+#### 履歴: 2026-08-21 に Claude 日次 CI を廃止した理由
 
 **`ai-content-generate-daily.yml` を削除した。** Claude Code を CI で無人実行する日次ループは
 対話セッションと同じ Pro/Max 利用枠を食う。歩留まりが崩れた時点で、枠だけ削って成果が出ない
@@ -200,7 +222,7 @@ quarantine は持たない。
 08-20 の run は `rate_limit_event: 1` を記録し、turns も cost も平常の 1/3 で途中終了した
 (最終メッセージ「I'll wait for it to complete before proceeding」)。
 
-**現在の運用**:
+**当時の暂定運用** (現在は 2026-08-30 の Gemini 日次 CI が正典):
 
 1. **月次計画 (`.claude/todo/monthly.md`) が月間の本数目標を持つ。** 対話セッションの
    1 件あたり消費は測っていないので、控えめに置いて翌月に実績で見直す。
@@ -214,13 +236,13 @@ quarantine は持たない。
    `audit-ai-content.mjs` を再実行する。CI の既定 `GITHUB_TOKEN` による push は
    後続 workflow を発火させないが、人間 / セッションからの push は発火する。
 
-**★critic PASS の機械強制は無くなった。** CI は `.local/ci/ai-content-reviews/<key>.json` の
+**当時は critic PASS の機械強制が無くなった。** CI は `.local/ci/ai-content-reviews/<key>.json` の
 `verdict == PASS` を照合していたが、これは CI 専用パスで publish 側に無い。blog と違い
 ai-content には `review.md` 相当の永続成果物が無い。**critic を通してから push すること**を
 `/generate-ai-content` の手順で担保する。機械の床 (`audit-ai-content.mjs`) は publish 側に
-残るので、捏造・NG ワード・欠落は引き続き止まる。
+残るので、捏造・NG ワード・欠落は引き続き止まった。現在は Gemini critic の PASS も生成スクリプト内で強制する。
 
-以下は撤去前の Gemini 運用の記録 (経緯として保持する)。
+以下は 2026-07-30〜07-31 の旧 Gemini 運用の記録。配送・429・preflight の教訓は現行実装に引き継ぐが、件数・モデルは上の現行契約が優先する。
 
 ### (撤去済) 全件量産の日次ループ (Gemini・2026-07-30〜2026-07-31)
 
@@ -358,13 +380,13 @@ node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 40 
 
 | 工程 | 担当 | 成果物 |
 |---|---|---|
-| 仕様・基準設計 / サンプル監査 / effect 判定 | Fable / improvement-triage | 仕様書・判定 |
-| パイプライン実装・factual gate | Opus | スクリプト |
-| 解説文生成・GSC 集計・内部リンク監査 | `ranking-content-author` (Sonnet/haiku) | ai-content.json・集計 |
-| 意味レビュー (重複/読者価値/トーン) | `ranking-content-critic` | review.md |
+| 仕様・基準設計 / effect 判定 | ranking-content-author / improvement-triage | 仕様・判定 |
+| 日次解説生成 | Gemini API author (`gemini-3.7-flash`) | ai-content.json 候補 |
+| 日次意味レビュー | 別リクエストの Gemini critic | PASS / REVISE JSON |
+| quarantine ・高流入キーの例外是正 | `ranking-content-author` + `ranking-content-critic` | ai-content.json・手動レビュー |
 | 数値照合・文字数床・リンク数 | 決定的スクリプト (audit-ai-content.mjs) | gate 結果 |
 
-- トークン原則: 1 ページ生成 = 1 call + critic batch (10 件単位)。
+- トークン原則: 1 ページ = author 1 call + critic 1 call。REVISE 時だけ最大 2 call を追加。
 
 ## リスクと対処
 

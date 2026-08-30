@@ -266,12 +266,12 @@ async function buildQueue(scope = "gsc") {
   const doneUnhealthy = done.filter((e) => e.dataBlockers?.length);
   const byReason = needs.reduce((acc, e) => ((acc[e.reason] = (acc[e.reason] ?? 0) + 1), acc), {});
 
-  // 2段 critic の tier 割り当て (機械化): GSC 流入上位 N 件の needs-regen を tier-2 (opus critic)、
-  // 残りは tier-1 (sonnet critic + 決定的ゲート)。author は常に sonnet (frontmatter 固定)。
-  // 設計正典: .claude/rules/model-prompting.md / .claude/skills/content/generate-ai-content/SKILL.md
-  const OPUS_REVIEW_TOP_N = 30;
+  // 自動経路は全件 Gemini author + 別リクエストの Gemini critic。
+  // GSC 流入上位 N 件だけ、自動失敗が続いたときの手動 agent 是正候補として機械表示する。
+  // Claude モデルは定期経路で使わない。
+  const MANUAL_ESCALATION_TOP_N = 30;
   needs.forEach((e, i) => {
-    e.reviewTier = i < OPUS_REVIEW_TOP_N ? "opus" : "sonnet";
+    e.reviewTier = i < MANUAL_ESCALATION_TOP_N ? "manual-escalation" : "gemini-auto";
   });
 
   const queue = {
@@ -298,7 +298,8 @@ async function buildQueue(scope = "gsc") {
       doneButUnhealthy: doneUnhealthy.length,
       doneImpressions: done.reduce((s, e) => s + e.impressions, 0),
       needsImpressions: needs.reduce((s, e) => s + e.impressions, 0),
-      opusReviewTier: needs.filter((e) => e.reviewTier === "opus").length,
+      manualEscalationTier: needs.filter((e) => e.reviewTier === "manual-escalation").length,
+      geminiDailyLimit: 3,
     },
     entries,
   };
@@ -409,7 +410,7 @@ function writeLatestMd(queue, progress = null) {
       ? [
           `## 🚧 quarantine — critic 常習不合格で自動生成を停止中 (${quarantined.size} 件)`,
           ``,
-          `\`--next\` から除外している。生成しても critic を通らないため。opus critic での再挑戦か、`,
+          `\`--next\` から除外している。生成しても critic を通らないため。手動 agent での再是正か、`,
           `プロンプト/データ側の是正が要る (直って PASS すれば自動で解除)。`,
           ``,
           `| key | 連続失敗 | 直近理由 | 最終失敗日 |`,
@@ -458,13 +459,11 @@ function writeLatestMd(queue, progress = null) {
     ``,
     `| impressions | key | reason | review | blockers |`,
     `|---|---|---|---|---|`,
-    ...top.map((e) => `| ${e.impressions} | ${e.rankingKey} | ${e.reason} | ${e.reviewTier === "opus" ? "🔴opus" : "sonnet"} | ${(e.blockers || []).join(",") || "-"} |`),
+    ...top.map((e) => `| ${e.impressions} | ${e.rankingKey} | ${e.reason} | ${e.reviewTier === "manual-escalation" ? "🟠手動是正候補" : "Gemini自動"} | ${(e.blockers || []).join(",") || "-"} |`),
     ``,
-    `> 生成 (author) は常に **sonnet** (frontmatter 固定・コストゲート)。critic は既定 **sonnet**、`,
-    `> \`review\` 列が 🔴opus の上位${queue.summary.opusReviewTier ?? 30}件 (高GSC流入) + tier-1 が REVISE した件だけ`,
-    `> \`model: opus\` を明示指定してエスカレーション審査 (2段 critic)。`,
-    `> 次バッチ: \`node .claude/scripts/ai-content/build-ai-content-queue.mjs --next 10\` で対象 key を取得 →`,
-    `> ranking-content-author を並列起動 → diff-push-r2 --prefix app/ranking → 本スクリプト再実行で done 反映。`,
+    `> 日次は **Gemini API** が author 生成 → 決定的監査 → 別リクエストの Gemini critic を通し、`,
+    `> 既定 ${queue.summary.geminiDailyLimit ?? 3}件を outbox 経由で R2 へ公開する。Claude は定期経路で使わない。`,
+    `> 🟠手動是正候補は GSC 流入上位${queue.summary.manualEscalationTier ?? 30}件。自動失敗が続いた場合だけ agent で是正する。`,
   ];
   writeFileSync(LATEST_MD, lines.join("\n") + "\n");
 }

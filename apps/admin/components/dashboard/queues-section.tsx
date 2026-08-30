@@ -32,9 +32,22 @@ export interface QueuesData {
       done: number;
       needsRegen: number;
       needsByReason?: { incomplete?: number; missing?: number; blocker?: number };
-      opusReviewTier?: string;
+      manualEscalationTier?: number;
+      geminiDailyLimit?: number;
     };
     topNeeds?: Array<{ rankingKey: string; impressions: number; reviewTier: string | null }>;
+    latestRun?: {
+      date?: string;
+      model?: string;
+      targets?: number;
+      passed?: number;
+      rejected?: number;
+      failed?: number;
+      total_tokens?: number;
+      quota_failures?: number;
+      preflight_requests?: number;
+      preflight_status?: string;
+    } | null;
   }>;
   topicQueue: Wrapped<{
     generatedAt?: string;
@@ -116,6 +129,7 @@ export function QueuesSection(d: QueuesData) {
   if (!hasError(d.aiContent) && d.aiContent.summary) {
     const s = d.aiContent.summary;
     const top = d.aiContent.topNeeds ?? [];
+    const run = d.aiContent.latestRun;
     cards.push(
       <QueueCard key="ai-content" title="🤖 ランキング ai-content" fresh={(d.aiContent.generatedAt ?? "").slice(0, 10)}>
         <ProgressBar
@@ -126,8 +140,17 @@ export function QueuesSection(d: QueuesData) {
         />
         <div className="text-[12px] text-console-muted">
           done {s.done} / needs-regen {num(s.needsRegen)} (incomplete {num(s.needsByReason?.incomplete)} / missing{" "}
-          {s.needsByReason?.missing ?? 0} / blocker {s.needsByReason?.blocker ?? 0})・opus 査読 {s.opusReviewTier}
+          {s.needsByReason?.missing ?? 0} / blocker {s.needsByReason?.blocker ?? 0})・Gemini 日次 {s.geminiDailyLimit ?? 3}件
         </div>
+        {run ? (
+          <div className="mt-1 text-[11px] text-console-muted">
+            直近 {run.date}: {run.model} / PASS {num(run.passed)} of {num(run.targets)} / REJECT {num(run.rejected)} / FAIL{" "}
+            {num(run.failed)} / token {num(run.total_tokens)} / quota停止 {num(run.quota_failures)}
+            {run.preflight_status ? ` / preflight ${run.preflight_status} (${num(run.preflight_requests)} req)` : ""}
+          </div>
+        ) : (
+          <div className="mt-1 text-[11px] text-console-muted">Gemini 定期 run は未観測</div>
+        )}
         {top.length > 0 ? (
           <div className="mt-2 overflow-x-auto">
           <table className="w-full text-xs">
@@ -153,7 +176,7 @@ export function QueuesSection(d: QueuesData) {
           </div>
         ) : null}
         <div className="mt-1.5 text-[10px] text-console-muted">
-          量産: ローカル <code className="rounded bg-console-bg px-1">npm run ai:gen -- --model claude-haiku</code> (セッション外)
+          定期量産: <code className="rounded bg-console-bg px-1">ai-content-gemini-daily.yml</code>・手動是正候補 {s.manualEscalationTier ?? 30}件
         </div>
       </QueueCard>,
     );

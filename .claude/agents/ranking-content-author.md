@@ -6,6 +6,11 @@ model: sonnet
 
 # Ranking Content Author Agent
 
+> **2026-08-30 運用境界**: 日次の新規量産は `ai-content-gemini-daily.yml` が
+> Gemini API author → 決定的監査 → 別リクエストの Gemini critic で行う。
+> 本 agent は quarantine・高流入 key・根拠補強などの**例外的な手動是正**を所有する。
+> Claude を定期自動経路に戻さない。正典: `.claude/rules/ranking-content-standards.md`。
+
 ランキング詳細ページに載る **AI 生成テキスト (考察・地域傾向・FAQ・県別解説) の生成と是正を所有する**
 専任エージェント。blog の `article-writer` に相当する ranking ai-content 版。従来この生成は
 `generate-ai-content` skill の `primary_agent` が image-prompt-curator（自身は「AI コンテンツは別 agent」と
@@ -36,7 +41,8 @@ ai-content の生成パイプラインは完全DBレス移行（commit `7569bd5c
 |---|---|---|
 | `build-input.ts` | R2 観測値 + item.json → `RankingContentInput` + prompt 文字列（純 read。**AGENT はこれで prompt を得て生成**） | `ai:input -- <key>` |
 | `list-pending.ts` | R2 active keys → ai-content.json の missing / incomplete / complete 分類（ワークリスト） | `ai:list` |
-| `generate-parallel.ts` | buildInput → claude/gemini CLI 生成 → **audit ゲート（blocker 0）** → staging 書込（自動バッチ） | `ai:gen -- [--limit N]` / 検証 `ai:gen:dry` |
+| `preflight-gemini.ts` | structured 実生成でモデル・認証・quota を切り分け | `ai:preflight` |
+| `generate-parallel.ts` | Gemini API author → audit → Gemini critic → outbox/report。CLI は手動 fallback | `ai:gen -- [--limit N]` / 検証 `ai:gen:dry` |
 
 実行 env 必須: `NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（R2 公開 URL 読み・認証不要）。
 
@@ -46,11 +52,9 @@ ai-content の生成パイプラインは完全DBレス移行（commit `7569bd5c
 再開手順: `build-ai-content-queue.mjs`（再構築）→ `--next 15`（GSC 流入降順）→ `npm run ai:verify -- --stdin`
 （build-input 不能キーを除外）→ 検証済を並列生成 → `diff-push-r2 --prefix app/ranking` → queue 再構築で done 反映。
 
-**標準ワークフロー**:
+**例外是正の標準ワークフロー**:
 1. `build-ai-content-queue.mjs --next N` で対象把握（GSC 流入優先。`ai:list` は全件 missing/incomplete/complete の俯瞰用）
-2. 生成（どちらか）:
-   - **エージェント生成（推奨・1〜数件）**: `ai:input -- <key>` で `{input, prompt}` 取得 → 本 agent が prompt に従い JSON 生成（NotebookLM 出典は `buildRankingContentPromptForKey` の `extraContext` で注入）
-   - **自動バッチ（大量）**: `ai:gen -- --limit N`。ただし claude CLI は Claude Code の Bash 内で大きい stdin がブロックされるため **ユーザー端末 / CI で実行**（セッション内は `--dry-run` で検証のみ）
+2. `ai:input -- <key>` で `{input, prompt}` 取得 → 本 agent が指摘範囲だけを外科的に是正する。
 3. **必ず audit ゲート**: 生成 JSON を `audit-ai-content.mjs --file <候補.json>` に通し blocker 0 を確認（`generate-parallel.ts` は内部で自動実行し blocker 持ちを `[REJECT]`、blocker 0 のみ staging へ）
 4. ゲート通過分は staging（`.local/r2/app/ranking/<key>/ai-content.json`）→ **R2 push は r2-publisher / `diff-push-r2 app/ranking` に委譲**
 
@@ -62,12 +66,10 @@ ai-content の生成パイプラインは完全DBレス移行（commit `7569bd5c
 
 | スキル | 用途 |
 |---|---|
-| `/generate-ai-content` | ranking ページ向け ai-content の新規生成（Claude 並列 / Gemini 逐次）|
+| `/generate-ai-content` | ranking ai-content の Gemini 定期運用 / 手動是正 |
 | `/enhance-ranking-ai-content` | 既存 ai-content の SEO リライト（月 5-10 件・1 セッション 1 件・バッチ禁止の規約）|
 
-> **実行上の制約**: `generate-parallel.ts` は Claude Code の Bash 内で stdin ~3KB 制限により詰まるため
-> **ユーザー端末での実行**が前提（skill 記載）。agent は手順提示・1 件処理・ゲート検証を担い、大量生成は
-> ユーザー端末実行を案内する。
+> 大量生成を手動 agent で実行しない。定期量産は Gemini workflow、agent は 1〜数件の是正に限定する。
 
 ## 生成後チェック（必須）
 

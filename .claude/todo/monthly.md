@@ -2,10 +2,10 @@
 title: 今月の重点
 type: monthly-plan
 month: 2026-08
-updated: 2026-08-24
+updated: 2026-08-30
 status: active
 focus_themes:
-  - 生成を無人ループから外し月次目標→週次割当で回す
+  - 課金無効Gemini APIの少量日次生成を品質ゲート付きで検証する
   - 公開中の誤値・欠測を解消する
 ---
 
@@ -70,7 +70,7 @@ GSCは重点テーマ数に含めない健康管理の床とし、検索施策�
 
 ## 今月の重点テーマ
 
-### 重点1: 生成を無人ループから外し、月次目標 → 週次割当で回す
+### 重点1: Claude 無人生成を廃止し、Gemini 無料枠の少量日次へ移行する
 
 - **なぜ変えたか (2026-08-21)**: 無人の日次ループは対話セッションと同じ Pro/Max 利用枠を食う。
   月初は「定着させる」方針だったが、歩留まりが崩れて**枠だけ削って成果が出ない**構図になった
@@ -86,34 +86,38 @@ GSCは重点テーマ数に含めない健康管理の床とし、検索施策�
   削除し、**量と時期を人が決める**運用へ移した。公開経路 (`publish-ai-content.yml` /
   `blog-auto-publish.yml`) と機械ゲートはそのまま残る。
 
+- **方針改定 (2026-08-30)**: Claude Code/OAuth の定期生成は復活させない。
+  課金無効の専用 Google AI Studio project の `GEMINI_API_KEY` で、`gemini-3.7-flash`
+  を既定 3 件/日・並列 1 で回す。author と critic は別 API リクエスト、公開は
+  決定的監査と critic PASS の両方を必須にする。無料 quota 実測前は件数を上げない。
+
 - **今月の本数目標**:
   - **blog: 月 17-19 本**。既存の `.claude/state/blog/seo-strategy.json` の `typeMix.perMonth`
     (B5 / D2 4 / A 3-4 / F3 / G 1-2 / C_E 1-2) をそのまま SSOT として使う。**新しい数値を作らない。**
     月初からの実績を差し引いた残りを、残り週で割って weekly の Must に置く。
-  - **ai-content: 週 5 件 (月 20 件) を上限**として始める。対話セッションの 1 件あたり消費は
-    **1 度も測っていない**ので、日次 CI の実測 (5 件で $79〜90) を手掛かりに控えめに置き、
-    9 月に実績で見直す。キューの残数 (needs-regen 1,895 件) は**目標ではなく在庫**として扱う。
+  - **ai-content: Gemini 既定 3 件/日**。キューの残数は**目標ではなく在庫**として扱う。
+    `.claude/state/metrics/ai-content/history.csv` の quota 失敗・通過率・トークンを 7 回以上観測してから件数を見直す。
 
 - **今月のゴール（月末に検証可能）**:
-  1. 日次生成 workflow が 2 つとも削除され、cron が発火していない
-  2. 週次計画に本数の Must が入り、その週の実績が weekly の振り返りに記録されている
-  3. 生成した分が push で公開経路に乗っている (publish workflow の run が push 発火で出ている)
+  1. Claude Code/OAuth の ai-content 日次 workflow は廃止のまま
+  2. `ai-content-gemini-daily.yml` が日次実行し、対象ありで生成 0 件なら必ず失敗する
+  3. 通過分が publish workflow の明示 dispatch で R2 まで届き、後続 run の成功を親 workflow が待つ
   4. outbox 滞留が 0 件
+  5. 通過率・リクエスト数・トークンが metrics に残る
 
 - **未達のときの扱い**: **翌週へ積み増さない。** Must が形骸化するため、足りなければ
   月次の目標側を下げてその根拠を書く。
 
 - **構成タスク**:
-  - 週次の Must に本数を置き、実績を weekly の振り返りに残す [S]（毎週）
+  - 週次レビューで Gemini の通過率・quota 失敗・outbox 滞留を確認する [S]（毎週）
   - `AICONTENT-DBLESS-REBUILD`: needs-regen の内訳で優先度を切り、全件量産を前提にしない
     件数設計へ改める [M]
   - ブログ品質是正キュー（`/brushup-blog --target queue`）を週次の枠に載せるか判断する [M]
 
-- **依存・ブロッカー**: Pro/Max 利用枠。対話セッションの消費が未知なので、実績を見るまで
-  週次の割当を増やさない。
+- **依存・ブロッカー**: 課金無効の専用 Gemini API key。無料 quota の実測が出るまで日次件数を増やさない。
 
 - **真実源リンク**: `backlog.md#AICONTENT-DBLESS-REBUILD` / `.claude/state/blog/seo-strategy.json` /
-  `.claude/state/metrics/claude-usage/`
+  `.claude/state/metrics/ai-content/`
 
 ### 重点2: 公開中の誤値・欠測を解消する
 

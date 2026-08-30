@@ -1,0 +1,203 @@
+name: 🤖 Ranking AI Content / Gemini daily
+
+# Claude API/OAuth の高額バッチを廃止し、Gemini API 無料枠で少量ずつ消化する定期ループ。
+# 生成と批評は別リクエスト。構造化JSON、既存機械監査、Gemini critic をすべて通過した
+# key だけ outbox に入れ、publish-ai-content.yml を明示 dispatch して R2 まで届ける。
+#
+# 無料運用の絶対条件:
+#   GEMINI_API_KEY は「課金設定の無い専用 Google AI Studio project」から発行する。
+#   コードから billing の ON/OFF は照合できないため、ここは Secret 所有者の運用ゲート。
+
+on:
+  schedule:
+    - cron: "15 22 * * *" # JST 07:15 (blog remediation 08:00 と分離)
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "生成件数 (1〜10、既定 3)"
+        required: false
+        default: "3"
+        type: string
+      dry_run:
+        description: "API/R2/git 書き込みを行わず対象選定と入力だけ検証"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: ai-content-gemini-daily
+  cancel-in-progress: false
+
+env:
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  GEMINI_TEXT_MODEL: ${{ vars.GEMINI_TEXT_MODEL || 'gemini-3.7-flash' }}
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 2
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📋 Rebuild queue and select targets
+        id: targets
+        shell: bash
+        run: |
+          set -euo pipefail
+          LIMIT="${{ inputs.limit || '3' }}"
+          if ! [[ "$LIMIT" =~ ^[0-9]+$ ]] || [ "$LIMIT" -lt 1 ] || [ "$LIMIT" -gt 10 ]; then
+            echo "::error::limit は 1〜10 の整数です: $LIMIT"
+            exit 1
+          fi
+          mkdir -p .local/ci
+          node .claude/scripts/ai-content/build-ai-content-queue.mjs --scope all
+          node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next "$LIMIT" \
+            > .local/ci/targets.txt
+          COUNT=$(sed '/^$/d' .local/ci/targets.txt | wc -l | tr -d ' ')
+          KEYS_CSV=$(paste -sd, .local/ci/targets.txt)
+          KEYS_SPACE=$(tr '\n' ' ' < .local/ci/targets.txt | xargs || true)
+          {
+            echo "count=$COUNT"
+            echo "keys_csv=$KEYS_CSV"
+            echo "keys_space=$KEYS_SPACE"
+          } >> "$GITHUB_OUTPUT"
+          echo "selected: ${KEYS_SPACE:-none}"
+
+      - name: 🚪 Gemini structured-output preflight
+        id: preflight
+        if: ${{ steps.targets.outputs.count != '0' && !inputs.dry_run }}
+        continue-on-error: true
+        run: |
+          npm run ai:preflight --workspace @stats47/ai-content -- \
+            --targets "${{ steps.targets.outputs.count }}" \
+            --report .local/ci/gemini-preflight.json
+
+      - name: ✍️ Generate, audit, and independently review
+        id: generate
+        if: ${{ steps.targets.outputs.count != '0' && (inputs.dry_run || steps.preflight.outcome == 'success') }}
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXTRA=()
+          if [ "${{ inputs.dry_run || false }}" = "true" ]; then EXTRA+=(--dry-run); fi
+          npm run ai:gen --workspace @stats47/ai-content -- \
+            --model gemini-api \
+            --critic gemini-api \
+            --concurrency 1 \
+            --keys "${{ steps.targets.outputs.keys_csv }}" \
+            --retries 1 \
+            --outbox \
+            --report .local/ci/gemini-run.json \
+            "${EXTRA[@]}"
+
+      - name: 📊 Record token usage and pass rate
+        if: ${{ always() && !inputs.dry_run && (hashFiles('.local/ci/gemini-run.json') != '' || hashFiles('.local/ci/gemini-preflight.json') != '') }}
+        run: |
+          ARGS=(--preflight-report .local/ci/gemini-preflight.json)
+          if [ -f .local/ci/gemini-run.json ]; then ARGS+=(--report .local/ci/gemini-run.json); fi
+          node .claude/scripts/ai-content/record-gemini-run.mjs \
+            "${ARGS[@]}" --run-id "${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
+      - name: 🧮 Update per-key failure/quarantine state
+        id: outcomes
+        if: ${{ always() && !inputs.dry_run && hashFiles('.local/ci/gemini-run.json') != '' }}
+        shell: bash
+        run: |
+          PASSED=$(node -e "const r=require('./.local/ci/gemini-run.json');console.log(r.results.filter(x=>x.status==='ok').map(x=>x.rankingKey).join(','))")
+          PASSED_SPACE=$(node -e "const r=require('./.local/ci/gemini-run.json');console.log(r.results.filter(x=>x.status==='ok').map(x=>x.rankingKey).join(' '))")
+          FAILED=$(node -e "const r=require('./.local/ci/gemini-run.json');console.log(r.results.filter(x=>x.status!=='ok').map(x=>x.rankingKey).join(','))")
+          echo "passed_space=$PASSED_SPACE" >> "$GITHUB_OUTPUT"
+          node .claude/scripts/ai-content/record-generation-outcome.mjs \
+            --state .claude/state/ai-content/generation-failures.json \
+            --passed "$PASSED" \
+            --failed "$FAILED" \
+            --reason gemini-daily
+
+      - name: 💾 Commit outbox and operational state
+        if: ${{ always() && !inputs.dry_run }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- .claude/state/ai-content .claude/state/metrics/ai-content data/ai-content-staging
+          if git diff --cached --quiet; then
+            echo "commit 対象なし"
+            exit 0
+          fi
+          git commit -m "chore(ai-content): Gemini daily outputs and metrics [skip ci]"
+          PUSHED=false
+          for attempt in 1 2 3; do
+            git fetch origin develop
+            git rebase origin/develop
+            if git push origin HEAD:develop; then PUSHED=true; break; fi
+            echo "push retry $attempt"
+            sleep 3
+          done
+          [ "$PUSHED" = true ] || { echo "::error::develop push failed"; exit 1; }
+
+      - name: 🛑 Enforce non-zero generation
+        if: ${{ steps.targets.outputs.count != '0' && steps.generate.outcome == 'failure' }}
+        run: |
+          echo "::error::対象があるのに監査通過の生成物が 0 件です"
+          exit 1
+
+      - name: 🛑 Enforce preflight success
+        if: ${{ steps.targets.outputs.count != '0' && !inputs.dry_run && steps.preflight.outcome == 'failure' }}
+        run: |
+          echo "::error::Gemini structured-output preflight に失敗しました"
+          exit 1
+
+      - name: 📤 Dispatch R2 publisher and wait for completion
+        if: ${{ steps.targets.outputs.count != '0' && !inputs.dry_run && steps.generate.outcome == 'success' && steps.outcomes.outputs.passed_space != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          STARTED=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          gh workflow run publish-ai-content.yml --ref develop \
+            -f keys="${{ steps.outcomes.outputs.passed_space }}"
+          RUN_ID=""
+          for attempt in $(seq 1 30); do
+            RUN_ID=$(gh api --method GET \
+              "repos/${GITHUB_REPOSITORY}/actions/workflows/publish-ai-content.yml/runs" \
+              -f branch=develop -f event=workflow_dispatch -f per_page=20 \
+              --jq ".workflow_runs | map(select(.created_at >= \"$STARTED\")) | first | .id // empty")
+            [ -n "$RUN_ID" ] && break
+            sleep 2
+          done
+          [ -n "$RUN_ID" ] || { echo "::error::publish-ai-content run を特定できません"; exit 1; }
+          echo "publisher run: $RUN_ID"
+          gh run watch "$RUN_ID" --exit-status
+
+      - name: 📝 Summary
+        if: always()
+        run: |
+          {
+            echo "- 対象: ${{ steps.targets.outputs.count || '0' }}"
+            echo "- keys: ${{ steps.targets.outputs.keys_space || 'なし' }}"
+            echo "- 生成step: ${{ steps.generate.outcome || 'skipped' }}"
+            echo "- PASS keys: ${{ steps.outcomes.outputs.passed_space || 'なし' }}"
+            echo "- model: ${GEMINI_TEXT_MODEL}"
+            echo "- 無料運用条件: GEMINI_API_KEY の project で billing が無効"
+          } >> "$GITHUB_STEP_SUMMARY"

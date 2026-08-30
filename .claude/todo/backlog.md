@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-08-29
+updated: 2026-08-30
 ---
 
 # バックログ (タスクマスタ)
@@ -290,13 +290,16 @@ updated: 2026-08-29
 
 タグ: [進行中] [起票:2026-06-01]
 
-- **owner**: Claude Code
-- **次**: 対話セッションで 3 件並列を続ける。2026-08-24 に 86 件試して生成 FAIL 0 / 公開 83 件
-  (CI の権威ゲートでも skip 0)。止まった 2 件は接地データ側の欠陥で
-  `AICONTENT-BUILDINPUT-ZEROFILL-01` が扱う。旧「次」が指していた
-  `CONTENT-ROUTINE-LIVE-VERIFY-01` はカードが現存せず、日次ループ
-  (`ai-content-generate-daily.yml`) も 2026-08-21 に削除済みなので無効。件数は月次計画が
-  目標を持ち週次が割り当てる。
+- **owner**: ranking-content-author
+- **次**: 課金を有効化していない専用 Google AI Studio project の `GEMINI_API_KEY` を確認して
+  `ai-content-gemini-daily.yml` を初回実走する。既定 3 件/日・並列 1 を維持し、7 run 以上の
+  通過率・quota 失敗・author/critic request・token を観測するまで件数を上げない。
+- **2026-08-30 checkpoint**: 高コストだった Claude Code/OAuth の自動量産を復活させず、
+  `gemini-3.7-flash` の structured author → 決定的監査 → 別リクエスト critic → 最大1回再生成 →
+  PASS分だけ outbox/publish という日次 CI を実装した。対象あり生成0件、Secret欠損、preflight、
+  develop push、publisher dispatch/run未確認を hard fail にし、本文を含まない集計を
+  `.claude/state/metrics/ai-content/`、キー別失敗を quarantine state に残す。旧対話3件並列は
+  quarantine / 高流入キーの手動例外是正だけに縮退した。
 - **2026-08-26 checkpoint**: R2公開後にactive 2,167件を全量再構築し、done 362 / needs 1,805
   （missing 198 / incomplete 1,548 / blocker 59）を確定。当日公開9件はすべて公開R2の決定的監査が
   blocker 0 / warn 0で、Googlebotの対象routeも200。上位5件

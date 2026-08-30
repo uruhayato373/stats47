@@ -9,6 +9,7 @@
 | PR Quality Check                                    | PR作成・更新 (main)                                | Lint、Type Check、Unit Test、共有チャートgolden render、Coverage、Build、Playwright E2E                                                                                                                          |
 | Deploy to Cloudflare Workers                        | Push (main)                                        | Build、認証確認、デプロイ、ヘルスチェック                                                                                                                                                                       |
 | Security Scan                                       | PR/Push、毎週日曜0時、手動                         | npm audit、CodeQL分析                                                                                                                                                                                           |
+| Ranking AI Content / Gemini (`ai-content-gemini-daily.yml`) | 毎日7時15分JST、手動 | 課金無効の専用 Gemini API key で既定3件を structured 生成。決定的監査 + 別リクエスト critic 通過分だけ publish workflow を明示 dispatch。件数・通過率・token を state へ記録 |
 | Backlog Loop Daily (`backlog-loop-daily.yml`)       | 毎日1時30分JST、手動、request push                 | .claude/todo の 05/01/06 を分類して処理し、**機械ゲートを通した証拠が台帳にあるものだけ**行削除する。verify が「行削除 ⇔ ledger の gate.pass」を突合し、宣言だけの完了を落とす                                     |
 | Backlog Routing Policy (`backlog-routing-policy-weekly.yml`) | 毎週月曜6時45分JST、手動 | ledger と Claude usage の直近28日実測を評価し、minSamples を満たす policy 差分と prompt-evals だけを develop へ提案する。agent frontmatter と日次件数は変更しない |
 | Regenerate Blog SVGs (`regenerate-blog-svgs.yml`)   | 手動                                               | `all` は既存JSONから全チャートを再描画。`scatter-canonical` は散布図を一次ソース照合後に正規化。`source-repair` は公開SVG・manifest・taxonomy・安全なkeyを検証し、既存`source.json`は期待SHA一致時だけCAS更新、欠落`source/data.json`は新規作成してblog調査索引も再生成。dry-run後、明示keyだけR2へ反映 |
@@ -45,6 +46,7 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 | `AUTH_SECRET`                | NextAuth認証シークレット                                                                                                                                        | 32文字以上のランダム文字列                                |
 | `WORKER_CACHE_PURGE_SECRET`  | R2公開後にWorkers Cacheを全体/tag purgeする内部APIのBearer認証。deploy時に同名Worker secretへ同期する                                                           | `openssl rand -hex 32`。Variable やログへ出さない         |
 | `CLAUDE_CODE_OAUTH_TOKEN`    | `backlog-loop-daily.yml` の Claude Code 認証。ローカルで `claude setup-token` を実行して発行し、Repository Secret に登録する | OAuth token。Variable やログへ出さない                    |
+| `GEMINI_API_KEY`              | ranking ai-content 日次生成。**課金無効の専用 Google AI Studio project** から発行する | API key。Variable・URL・ログへ出さない |
 
 ### Repository Variables
 
@@ -60,6 +62,7 @@ Repository Variables に置く。Workflow では前者を `secrets.*`、後者�
 | `NEXT_PUBLIC_ESTAT_APP_ID`        | e-Stat API アプリケーションID             |
 | `NEXT_PUBLIC_BASE_URL_PRODUCTION` | 本番環境URL（例: https://stats47.jp）     |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID`   | 本番環境 Google Analytics測定ID           |
+| `GEMINI_TEXT_MODEL`               | ranking ai-content の pinned text model。未設定は `gemini-3.7-flash`。提供終了時だけ preflight の候補を人が確認して更新 |
 
 移行中の `CLOUDFLARE_ZONE_ID` / `INSTAGRAM_BUSINESS_ACCOUNT_ID` /
 `GOOGLE_ADSENSE_CLIENT_ID` だけは、Variable 未登録時に同名の旧Secretへフォールバックする。

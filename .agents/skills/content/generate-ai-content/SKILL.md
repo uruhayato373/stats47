@@ -17,25 +17,19 @@ primary_agent: ranking-content-author
 > モデル選択とagent起動promptは `.Codex/rules/model-prompting.md` /
 > `.Codex/rules/agent-output-contract.md` を正典とする。
 
-## モデル運用ポリシー（★コストゲート・2026-07-03 確定）
+## モデル運用ポリシー（★コストゲート・2026-08-30）
 
-トークン消費を抑えつつ高流入ページの品質を守る **2段 critic** 設計。正典:
-`.Codex/rules/model-prompting.md`。
+定期量産は **Gemini API 無料枠**、agent は例外是正に限定する。
 
-| 役割 | モデル | 根拠 |
+| 役割 | 実行者 | 契約 |
 |---|---|---|
-| **author**（生成・全件） | **`sonnet` 固定**（frontmatter `model: sonnet`） | 最大の消費源。決定的ゲートが客観フロアを握るため sonnet で十分 |
-| ① 決定的ゲート `audit-ai-content.mjs` | — (スクリプト) | モデル非依存の砦（数値捏造 / 括弧羅列 / 重複） |
-| critic tier-1（意味レビュー） | **`sonnet` 既定**（frontmatter） | ルーブリック審査は sonnet で足りる |
-| critic tier-2（エスカレーション） | **`opus` 明示指定** | queue の `reviewTier:"opus"`（GSC流入**上位30件**）+ tier-1 が REVISE した件だけ |
+| author | `gemini-3.7-flash` API | structured JSON、既定3件/日、並列1 |
+| 決定的ゲート | `audit-ai-content.mjs` | blocker 0 のみ継続 |
+| critic | author と別リクエストの Gemini API | PASS / REVISE。最大1回再生成 |
+| 例外是正 | ranking-content-author / critic | quarantine や高流入 key だけ |
 
-**確実ゲート（公式仕様）**: subagent の model 解決順は `env > 起動時param > frontmatter > session`。
-`ranking-content-author` は frontmatter に `model: sonnet` を持つので、**起動時に `model` を渡さなければ
-必ず sonnet で走る**（param 省略が鉄則）。**author 起動時に `model: opus` を渡してはならない**（コストゲートの唯一の抜け穴）。
-opus を使うのは tier-2 critic を高流入キーに明示起動するときだけ。
-
-tier-2 対象キーは `build-ai-content-queue.mjs` が `remediation-queue.json` の各 needs entry に
-`reviewTier`（上位30=`opus` / 他=`sonnet`）を機械付与し、`LATEST.md` の「review」列（🔴opus）で確認できる。
+`GEMINI_API_KEY` は課金無効の専用 Google AI Studio project から発行する。
+無料 tier へは公開統計と公開用解説だけを送り、秘密・個人情報を入れない。
 
 ## データソース（DBレス）
 
@@ -48,19 +42,19 @@ tier-2 対象キーは `build-ai-content-queue.mjs` が `remediation-queue.json`
 
 R2 読み取り env（認証不要）: `NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`
 
-## パイプライン構成（3 スクリプト・すべて `packages/ai-content/src/scripts/`）
+## パイプライン構成（`packages/ai-content/src/scripts/`）
 
 | スクリプト | npm script | 役割 |
 |---|---|---|
 | `list-pending.ts` | `ai:list` | R2 active keys → missing / incomplete / complete を分類（ワークリスト） |
 | `build-input.ts` | `ai:input -- <key>` | R2 → `RankingContentInput` + prompt 文字列（純 read） |
-| `generate-parallel.ts` | `ai:gen -- [opts]` | 手動フォールバック: buildInput → ローカル CLI 生成 → **audit ゲート** → staging 書込 |
+| `preflight-gemini.ts` | `ai:preflight` | structured 実生成でモデル・認証・quota を切り分け |
+| `generate-parallel.ts` | `ai:gen -- [opts]` | Gemini author → audit → Gemini critic → outbox/report |
 
 ## クイックスタート
 
-> **日次量産の正典**は `.github/workflows/ai-content-generate-daily.yml`。Codex OAuth で
-> author → audit → 独立 critic → 対象全件照合 → publish dispatch まで実行する。
-> `generate-parallel.ts` はローカルの手動フォールバックであり、日次 workflow からは呼ばない。
+> **日次量産の正典**は `.github/workflows/ai-content-gemini-daily.yml`。
+> Gemini API で author → audit → 別リクエスト critic → publish dispatch まで実行する。
 
 > Codex の Bash から `generate-parallel.ts` の Codex CLI 子プロセスを起動しない。
 > 大きい stdin が詰まるため、対話セッションでは agent 生成、端末では CLI、日次は workflow と経路を混在させない。
@@ -74,15 +68,17 @@ NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.sta
 # 例: total 2093 | missing 1556 | incomplete 488 | complete 49
 ```
 
-### 2. 手動フォールバック生成（ユーザー端末）
+### 2. Gemini API 手動 dry-run / 少量実行
 
 ```bash
-# 未完を最初の 50 件だけ Codex 並列生成（audit ゲート通過分のみ staging へ）
+# API 課金なしの入力検証
 NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
   npm run ai:gen --workspace=@stats47/ai-content -- \
-  --model Codex-haiku --concurrency 3 --limit 50 \
-  >> /tmp/ai-content-gen.log 2>&1 &
-tail -f /tmp/ai-content-gen.log
+  --model gemini-api --critic gemini-api --concurrency 1 --limit 3 --dry-run
+
+# 実行は課金無効の専用キーでのみ
+GEMINI_API_KEY=... npm run ai:gen --workspace=@stats47/ai-content -- \
+  --model gemini-api --critic gemini-api --concurrency 1 --limit 3 --retries 1 --outbox
 ```
 
 ### 3. R2 反映（r2-publisher / diff-push-r2 に委譲）
@@ -96,14 +92,17 @@ tail -f /tmp/ai-content-gen.log
 
 | オプション | デフォルト | 説明 |
 |---|---|---|
-| `--model` | `Codex-haiku` | `Codex-haiku` / `Codex-sonnet` / `Codex-opus` / `gemini` |
-| `--concurrency` | `3` | 並列数 |
+| `--model` | `gemini-api` | 明示した手動 fallback に限り `claude-*` / `gemini` CLI も可 |
+| `--critic` | `gemini-api` | 手動診断に限り `none` も可。公開候補では無効化しない |
+| `--concurrency` | `1` | 無料 quota を守る直列実行 |
 | `--limit N` | 全件 | 処理件数上限 |
 | `--area` | `prefecture` | `prefecture` / `city` / `port` |
 | `--force` | false | complete も含め全 active key を再生成 |
 | `--keys k1,k2` | （pending 走査） | 対象 key を明示（pending 判定をスキップ） |
 | `--out <dir>` | `.local/r2` | staging 出力 dir |
 | `--dry-run` | false | **LLM を呼ばず** prompt 長と staging パスだけ出す（セッション内検証用・課金なし） |
+| `--outbox` | false | git 公開 outbox へ書込 |
+| `--report <file>` | なし | 成否・API request・token の JSON report |
 
 ## 手動で 1 件処理する場合（エージェント生成）
 
@@ -133,16 +132,16 @@ node .Codex/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
 
 ## Routine（日次 CI）
 
-`ai-content-generate-daily.yml` が次を一続きで実行する。
+`ai-content-gemini-daily.yml` が次を一続きで実行する。
 
 1. 全件キューを再構築し、needs-regen を `LIMIT` 件選ぶ (件数の SSOT は workflow。ここに数値を書かない)
 2. R2観測値から対象別 prompt を決定的に準備する
-3. 公式 Codex Base Action を OAuth 認証で起動し、author → audit → 独立 critic を回す
-4. shell step が対象全件の outbox・audit・critic PASS manifest を再照合する
+3. Gemini API がauthor → audit → 独立 critic を回す
+4. PASS 分だけ outbox へ書き、token / pass rate を metrics に記録する
 5. develop へ push し、`publish-ai-content.yml` を明示 dispatch する
 
-`CLAUDE_CODE_OAUTH_TOKEN` 未登録、対象あり生成0件、一部対象の欠落、gate / critic 不通過、
-push / dispatch 未確認はいずれも hard fail する。既定件数は1で、成功実測後にだけ増やす。
+`GEMINI_API_KEY` 未登録、対象あり生成0件、push / dispatch 未確認は hard fail。
+既定件数は3で、7 run 以上の quota 実測後にだけ見直す。
 
 ## 品質ゲート（必須）
 
@@ -165,7 +164,7 @@ per-key に critic agent を起動しない。以下の 3 点でセッション�
 2. **compact 読み**: critic は R2 JSON を生読みせず jq で実コンテンツのみ取得 (critic agent 定義に
    コマンド記載。実測 -22%)。
 3. **REVISE 再審査は `mode: delta`**: author が指摘フィールドのみ外科修正 → critic に前回指摘 +
-   修正フィールドを渡して delta 起動 (全文・正典の再読なし)。tier-2 opus エスカレーションも delta で行う。
+   修正フィールドを渡して delta 起動 (全文・正典の再読なし)。quarantine の手動是正だけに使う。
 
 ## エラーハンドリング
 
