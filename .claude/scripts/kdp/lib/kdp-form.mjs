@@ -391,11 +391,14 @@ export async function uploadKdpContent(page, { epubAbs, coverAbs, applyDrm = tru
       return false;
     }
   };
-  const epubOk = await setFile("data-assets-interior-file-upload-AjaxInput", epubAbs);
-  if (epubOk) {
-    log.push(`${tag} ✓ 原稿 (EPUB) アップロード開始`);
-    await sleep(12000);
-  } else warnings.push("原稿 (EPUB) の file input を特定できず (--probe で確認)");
+  let epubOk = false;
+  if (epubAbs) {
+    epubOk = await setFile("data-assets-interior-file-upload-AjaxInput", epubAbs);
+    if (epubOk) {
+      log.push(`${tag} ✓ 原稿 (EPUB) アップロード開始`);
+      await sleep(12000);
+    } else warnings.push("原稿 (EPUB) の file input を特定できず (--probe で確認)");
+  }
 
   // ── DRM と 生成 AI の開示 (どちらも必須。埋めないと pricing へ進めない) ──
   //   ★これは入力ではなく **Amazon への申告**。フォームを通すために事実と違う答えを選ばない。
@@ -495,22 +498,14 @@ export async function uploadKdpContent(page, { epubAbs, coverAbs, applyDrm = tru
     // ★まず**原稿の処理完了**を待つ。アップロード直後は「原稿をチェックしています…」で、
     //   表紙のセクションがまだ描画されない。新規作成の 1 回目だけここで空振りし、
     //   下書きを開き直した 2 回目は通るので、原因が見えにくい。
-    await page
-      .locator("text=/原稿チェックが完了しました|ファイルの処理が完了しました/")
-      .first()
-      .waitFor({ state: "visible", timeout: 180000 })
-      .catch(() => {});
-    await sleep(4000);
-
-    // ★まず**原稿の処理完了**を待つ。アップロード直後は「原稿をチェックしています…」で、
-    //   表紙のセクションがまだ描画されない。新規作成の 1 回目だけここで空振りし、
-    //   下書きを開き直した 2 回目は通るので原因が見えにくい (K-S1-02/03 で実測)。
-    await page
-      .locator("text=/原稿チェックが完了しました|ファイルの処理が完了しました/")
-      .first()
-      .waitFor({ state: "visible", timeout: 240000 })
-      .catch(() => {});
-    await sleep(4000);
+    if (epubOk) {
+      await page
+        .locator("text=/原稿チェックが完了しました|ファイルの処理が完了しました/")
+        .first()
+        .waitFor({ state: "visible", timeout: 240000 })
+        .catch(() => {});
+      await sleep(4000);
+    }
 
     // ★表紙のセクションは**原稿の処理が終わってから**描画される。
     //   新規作成の 1 回目はここが間に合わず、アップロードが静かに空振りしていた

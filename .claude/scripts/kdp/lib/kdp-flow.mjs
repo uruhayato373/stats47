@@ -158,16 +158,48 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, tag = "[kd
     return true;
   };
 
-  const runContent = async () => {
+  const runContent = async ({ uploadManuscript = true, uploadCover = true } = {}) => {
     const u = await uploadKdpContent(page, {
-      epubAbs,
-      coverAbs,
+      epubAbs: uploadManuscript ? epubAbs : null,
+      coverAbs: uploadCover ? coverAbs : null,
       applyDrm: lst.applyDrm !== false,
       ai: lst.aiDisclosure ?? null,
       tag,
     });
     u.log.forEach((l) => log("   ", l));
     warnings.push(...u.warnings);
+    // KDP は setInputFiles 後もしばらく原稿・表紙を非同期処理する。処理中に
+    // 「保存して続行」を押すと、入力が正しくても pricing へ進めない。
+    let processing = false;
+    for (let i = 0; i < 80; i++) {
+      processing = await page
+        .evaluate(() =>
+          [...document.querySelectorAll(".a-alert-content")].some(
+            (e) => e.offsetParent !== null && /ファイルを処理しています|原稿をチェックしています/.test(e.innerText || ""),
+          ),
+        )
+        .catch(() => false);
+      if (!processing) break;
+      if (i === 0) log(`${tag} KDP のファイル処理完了を待機`);
+      await sleep(3000);
+    }
+    if (processing) warnings.push("KDP のファイル処理が 4 分以内に完了せず");
+    // 原稿・表紙の処理完了時に、KDP が確認チェックを未選択へ戻す場合がある。
+    // 処理後の状態を read-back し、未選択の可視チェックだけを再投入する。
+    const confirmations = page.locator('div[role="checkbox"][aria-labelledby*="mdn-checkbox-label"]');
+    const confirmationCount = await confirmations.count();
+    for (let i = 0; i < confirmationCount; i++) {
+      const box = confirmations.nth(i);
+      if (!(await box.isVisible().catch(() => false))) continue;
+      if ((await box.getAttribute("aria-checked").catch(() => null)) !== "true") {
+        await box.click({ timeout: 15000 }).catch(() => {});
+        await sleep(1500);
+      }
+    }
+    const confirmationMissing = await page
+      .locator('div[role="checkbox"][aria-labelledby*="mdn-checkbox-label"][aria-checked="false"]')
+      .count();
+    if (confirmationMissing) warnings.push(`処理完了後の確認チェックが ${confirmationMissing} 件未選択`);
     const step = await goToNextKdpStep(page, "pricing", { tag });
     if (!step.ok) {
       warnings.push(`pricing へ進めず: ${(step.errors || []).join(" / ") || step.reason}`);
@@ -215,7 +247,9 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, tag = "[kd
     }
     if (!v.manuscript || !v.cover || !v.drm || !v.ai) {
       await gotoStep(page, lst.draftId, "content");
-      await runContent();
+      // 既に read-back 合格したファイルは再送しない。表紙だけの補修で EPUB を
+      // 再アップロードすると原稿変換が最初から始まり、表紙欄が再び閉じてしまう。
+      await runContent({ uploadManuscript: !v.manuscript, uploadCover: !v.cover });
     }
     if (!v.price || !v.royalty) {
       await gotoStep(page, lst.draftId, "pricing");

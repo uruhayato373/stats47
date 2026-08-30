@@ -101,7 +101,8 @@ export function writeBackListing(id, asin, today) {
     if (!j.listings || !j.listings[id]) return false;
     j.listings[id].status = "listed";
     if (asin) j.listings[id].asin = asin;
-    j.listings[id].publishedAt = today || new Date().toISOString().slice(0, 10);
+    // 審査後の ASIN 回収で、初回の公開申請日を上書きしない。
+    j.listings[id].publishedAt ||= today || new Date().toISOString().slice(0, 10);
     writeFileSync(LISTINGS_PATH, JSON.stringify(j, null, 2) + "\n");
     return true;
   } catch {
