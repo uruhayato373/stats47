@@ -189,7 +189,7 @@ quarantine は持たない。
 ### ★2026-08-30: Gemini 無料枠の日次 CI を正典にする
 
 `ai-content-gemini-daily.yml` を日次 07:15 JST に実行する。既定 3 件、並列数 1、
-`gemini-3.7-flash` 固定で開始し、クォータ実測なしに件数を上げない。実行経路は次の通り。
+`gemini-2.5-flash-lite` 固定で開始し、クォータ実測なしに件数を上げない。実行経路は次の通り。
 
 1. `build-ai-content-queue.mjs --scope all` で R2 から対象を再導出する。
 2. 極小の structured generateContent で preflight する。ListModels は失敗時の候補提示にしか使わない。
@@ -381,7 +381,7 @@ node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 40 
 | 工程 | 担当 | 成果物 |
 |---|---|---|
 | 仕様・基準設計 / effect 判定 | ranking-content-author / improvement-triage | 仕様・判定 |
-| 日次解説生成 | Gemini API author (`gemini-3.7-flash`) | ai-content.json 候補 |
+| 日次解説生成 | Gemini API author (`gemini-2.5-flash-lite`) | ai-content.json 候補 |
 | 日次意味レビュー | 別リクエストの Gemini critic | PASS / REVISE JSON |
 | quarantine ・高流入キーの例外是正 | `ranking-content-author` + `ranking-content-critic` | ai-content.json・手動レビュー |
 | 数値照合・文字数床・リンク数 | 決定的スクリプト (audit-ai-content.mjs) | gate 結果 |

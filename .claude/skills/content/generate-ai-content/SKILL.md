@@ -23,7 +23,7 @@ primary_agent: ranking-content-author
 
 | 役割 | 実行者 | 品質 / コスト契約 |
 |---|---|---|
-| author (日次) | `gemini-3.7-flash` API | structured JSON schema、既定 3件/日、並列 1 |
+| author (日次) | `gemini-2.5-flash-lite` API | structured JSON schema、既定 3件/日、並列 1 |
 | 決定的ゲート | `audit-ai-content.mjs` | 数値捏造・括弧羅列・重複・欠落は blocker |
 | critic (日次) | author と別リクエストの Gemini API | `PASS | REVISE`。REVISE は指摘付きで最大1回再生成 |
 | 例外是正 | `ranking-content-author` + `ranking-content-critic` | 3回連続失敗の quarantine や高流入 key だけ |

@@ -24,7 +24,7 @@ describe("generateContentText", () => {
   it("API key を URL に出さず structured JSON と usage を返す", async () => {
     const fetchImpl = vi.fn(async (_url: string | URL | Request, init?: RequestInit) => {
       const url = String(_url);
-      expect(url).toContain("gemini-3.7-flash:generateContent");
+      expect(url).toContain("gemini-2.5-flash-lite:generateContent");
       expect(url).not.toContain("secret-key");
       expect(new Headers(init?.headers).get("x-goog-api-key")).toBe("secret-key");
       const body = JSON.parse(String(init?.body));

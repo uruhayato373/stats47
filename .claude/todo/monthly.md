@@ -87,7 +87,7 @@ GSCは重点テーマ数に含めない健康管理の床とし、検索施策�
   `blog-auto-publish.yml`) と機械ゲートはそのまま残る。
 
 - **方針改定 (2026-08-30)**: Claude Code/OAuth の定期生成は復活させない。
-  課金無効の専用 Google AI Studio project の `GEMINI_API_KEY` で、`gemini-3.7-flash`
+  課金無効の専用 Google AI Studio project の `GEMINI_API_KEY` で、`gemini-2.5-flash-lite`
   を既定 3 件/日・並列 1 で回す。author と critic は別 API リクエスト、公開は
   決定的監査と critic PASS の両方を必須にする。無料 quota 実測前は件数を上げない。
 
