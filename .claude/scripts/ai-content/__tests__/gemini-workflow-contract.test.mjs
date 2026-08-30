@@ -7,7 +7,7 @@ const publisher = readFileSync(".github/workflows/publish-ai-content.yml", "utf8
 
 test("Gemini日次は少量・直列・structured preflight・独立criticを固定する", () => {
   assert.match(daily, /cron: "15 22 \* \* \*"/);
-  assert.match(daily, /GEMINI_TEXT_MODEL:.*gemini-3\.7-flash/);
+  assert.match(daily, /GEMINI_TEXT_MODEL:.*gemini-2\.5-flash-lite/);
   assert.match(daily, /default: "3"/);
   assert.match(daily, /--model gemini-api/);
   assert.match(daily, /--critic gemini-api/);
@@ -21,6 +21,7 @@ test("preflight失敗を記録してから赤にし、PASS keyだけpublisherへ
   assert.match(daily, /steps\.preflight\.outputs\.status == 'failure'/);
   assert.match(daily, /steps\.generate\.outputs\.status == 'failure'/);
   assert.doesNotMatch(daily, /continue-on-error:/);
+  assert.doesNotMatch(daily, /hashFiles\('\.local\/ci/);
   assert.match(daily, /results\.filter\(x=>x\.status==='ok'\)/);
   assert.match(daily, /-f keys="\$\{\{ steps\.outcomes\.outputs\.passed_space \}\}"/);
   assert.doesNotMatch(daily, /-f keys="\$\{\{ steps\.targets\.outputs\.keys_space \}\}"/);

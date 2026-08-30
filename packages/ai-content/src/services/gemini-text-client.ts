@@ -10,7 +10,7 @@ import type { GeminiJsonSchema } from "./gemini-content-schemas";
 const API_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 
 /** pinned model。提供終了は実生成 preflight が検出し、env で復旧する。 */
-export const GEMINI_TEXT_MODEL = "gemini-3.7-flash";
+export const GEMINI_TEXT_MODEL = "gemini-2.5-flash-lite";
 
 export function resolveTextModel(env: NodeJS.ProcessEnv = process.env): string {
   return env.GEMINI_TEXT_MODEL?.trim() || GEMINI_TEXT_MODEL;

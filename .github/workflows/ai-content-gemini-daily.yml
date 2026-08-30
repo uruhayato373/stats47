@@ -35,7 +35,7 @@ concurrency:
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-  GEMINI_TEXT_MODEL: ${{ vars.GEMINI_TEXT_MODEL || 'gemini-3.7-flash' }}
+  GEMINI_TEXT_MODEL: ${{ vars.GEMINI_TEXT_MODEL || 'gemini-2.5-flash-lite' }}
 
 jobs:
   generate:
@@ -118,7 +118,7 @@ jobs:
           fi
 
       - name: 📊 Record token usage and pass rate
-        if: ${{ always() && !inputs.dry_run && (hashFiles('.local/ci/gemini-run.json') != '' || hashFiles('.local/ci/gemini-preflight.json') != '') }}
+        if: ${{ always() && !inputs.dry_run && steps.targets.outputs.count != '0' }}
         run: |
           ARGS=(--preflight-report .local/ci/gemini-preflight.json)
           if [ -f .local/ci/gemini-run.json ]; then ARGS+=(--report .local/ci/gemini-run.json); fi
@@ -127,9 +127,11 @@ jobs:
 
       - name: 🧮 Update per-key failure/quarantine state
         id: outcomes
-        if: ${{ always() && !inputs.dry_run && hashFiles('.local/ci/gemini-run.json') != '' }}
+        if: ${{ always() && !inputs.dry_run && steps.generate.outputs.status != '' }}
         shell: bash
         run: |
+          set -euo pipefail
+          [ -f .local/ci/gemini-run.json ] || { echo "::error::gemini-run.json がありません"; exit 1; }
           PASSED=$(node -e "const r=require('./.local/ci/gemini-run.json');console.log(r.results.filter(x=>x.status==='ok').map(x=>x.rankingKey).join(','))")
           PASSED_SPACE=$(node -e "const r=require('./.local/ci/gemini-run.json');console.log(r.results.filter(x=>x.status==='ok').map(x=>x.rankingKey).join(' '))")
           FAILED=$(node -e "const r=require('./.local/ci/gemini-run.json');console.log(r.results.filter(x=>x.status!=='ok').map(x=>x.rankingKey).join(','))")
