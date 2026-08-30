@@ -1,0 +1,2 @@
+date,run_id,model,targets,passed,rejected,failed,skipped,author_requests,critic_requests,input_tokens,output_tokens,thinking_tokens,total_tokens,quota_failures,preflight_requests,preflight_status
+2026-08-30,33291544476-1,gemini-2.5-flash-lite,1,0,0,0,1,0,0,0,0,0,0,0,1,bad-request
