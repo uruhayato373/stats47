@@ -6,11 +6,10 @@ import "dotenv/config";
  * 旧版 (7569bd5c で削除) は D1 (`metrics` 読み + `upsertRankingAiContent` 書き) に依存していた。
  * 本版は **完全DBレス**:
  *   入力  : R2 観測値 + ranking item.json (build-input.ts)
- *   生成  : claude / gemini CLI を子プロセス起動 (旧 callAI を踏襲)
+ *   生成  : Gemini API 直接呼び出し (日次 CI) / claude・gemini CLI (手動フォールバック)
  *
- * ★Gemini API 直叩き (--model gemini-api) は 2026-07-31 に撤去した。日次 CI は本スクリプトの
- *   CLI 子プロセスではなく、公式 Claude Code Base Action を OAuth 認証で起動する。
- *   本スクリプトはユーザー端末からの手動フォールバックに残す。
+ * ★定期運用は --model gemini-api --critic gemini-api で、生成と意味レビューを
+ *   別リクエストに分離する。Claude は自動パスに使わず、例外的な手動是正だけに限定する。
  *   ゲート: 生成物を audit-ai-content.mjs に通し blocker 0 のものだけ採用 (★旧版に無かった品質ゲート)
  *   出力  : staging dir に AiContentSnapshotRow を書き出す (R2 直書きしない)
  *           → r2-publisher / diff-push-r2 が staging を app/ranking/<key>/ai-content.json へ push
@@ -21,9 +20,9 @@ import "dotenv/config";
  * CLI:
  *   NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
  *     tsx packages/ai-content/src/scripts/generate-parallel.ts \
- *       [--model claude-haiku|claude-sonnet|claude-opus|gemini] [--concurrency N] \
+ *       [--model gemini-api|claude-haiku|claude-sonnet|claude-opus|gemini] [--critic none|gemini-api] [--concurrency N] \
  *       [--limit N] [--area prefecture] [--force] [--out <dir>] [--dry-run] [--keys k1,k2] \
- *       [--retries N] [--outbox]
+ *       [--retries N] [--outbox] [--report <file>]
  *
  *   --dry-run : callAI を呼ばず、各 key の prompt 長と「書き込む予定の staging パス」だけ出す (LLM 課金なし)
  *   --keys    : 対象 key をカンマ区切りで明示 (pending 走査をスキップ)
@@ -54,6 +53,15 @@ import type { AreaType } from "@stats47/types";
 import { aiContentKeyPath, type AiContentSnapshotRow } from "../types/snapshot";
 import { buildRankingContentPromptForKey } from "./build-input";
 import { decideOutcome } from "../services/generation-outcome";
+import { buildAiContentResponseSchema } from "../services/gemini-content-schemas";
+import { reviewAiContentWithGemini } from "../services/gemini-content-critic";
+import {
+  GeminiTextError,
+  generateContentText,
+  resolveTextModel,
+  type GeminiQuotaDetails,
+  type GeminiTokenUsage,
+} from "../services/gemini-text-client";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // packages/ai-content/src/scripts → リポジトリルートは 4 つ上
@@ -65,6 +73,7 @@ const AUDIT_SCRIPT = path.join(
 
 interface Options {
   model: string;
+  critic: "none" | "gemini-api";
   concurrency: number;
   limit: number;
   areaType: AreaType;
@@ -76,6 +85,8 @@ interface Options {
   retries: number;
   /** true なら git 公開 outbox (data/ai-content-staging/<key>.json) へ書く (R2 creds 不要の公開経路) */
   outbox: boolean;
+  /** CI 用の機械可読 run report (本文は含めない) */
+  reportPath: string | null;
 }
 
 function parseArgs(): Options {
@@ -84,9 +95,14 @@ function parseArgs(): Options {
     const i = a.indexOf(flag);
     return i >= 0 ? a[i + 1] : undefined;
   };
-  return {
-    model: get("--model") ?? "claude-haiku",
-    concurrency: Number(get("--concurrency") ?? 3),
+  const critic = get("--critic") ?? "gemini-api";
+  if (critic !== "none" && critic !== "gemini-api") {
+    throw new Error(`--critic は none | gemini-api のどちらかです: ${critic}`);
+  }
+  const options: Options = {
+    model: get("--model") ?? "gemini-api",
+    critic,
+    concurrency: Number(get("--concurrency") ?? 1),
     limit: Number(get("--limit") ?? Infinity),
     areaType: (get("--area") ?? "prefecture") as AreaType,
     force: a.includes("--force"),
@@ -96,15 +112,43 @@ function parseArgs(): Options {
     keys: get("--keys")?.split(",").map((s) => s.trim()).filter(Boolean) ?? null,
     retries: Number(get("--retries") ?? 1),
     outbox: a.includes("--outbox"),
+    reportPath: get("--report") ?? null,
   };
+  if (!Number.isInteger(options.concurrency) || options.concurrency < 1) {
+    throw new Error("--concurrency は 1 以上の整数です");
+  }
+  if (!(options.limit === Infinity || (Number.isInteger(options.limit) && options.limit >= 0))) {
+    throw new Error("--limit は 0 以上の整数です");
+  }
+  if (!Number.isInteger(options.retries) || options.retries < 0 || options.retries > 3) {
+    throw new Error("--retries は 0〜3 の整数です");
+  }
+  if ((options.model === "gemini-api" || options.critic === "gemini-api") && !options.dryRun) {
+    if (!process.env.GEMINI_API_KEY?.trim()) {
+      throw new Error("GEMINI_API_KEY が未設定です");
+    }
+  }
+  return options;
 }
 
 // ============================================================
-// AI 呼び出し (旧 callAI を踏襲。NODE_OPTIONS / CLAUDECODE を子に渡さない)
+// AI 呼び出し (Gemini API が定期運用。CLI は手動フォールバック)
 // ============================================================
 
+interface ModelCallResult {
+  text: string;
+  attempts: number;
+  usage: GeminiTokenUsage;
+}
 
-function callAI(model: string, promptContent: string): Promise<string> {
+const ZERO_USAGE: GeminiTokenUsage = {
+  inputTokens: 0,
+  outputTokens: 0,
+  totalTokens: 0,
+  thinkingTokens: 0,
+};
+
+function callCli(model: string, promptContent: string): Promise<ModelCallResult> {
   return new Promise((resolve, reject) => {
     let cmd: string;
     let args: string[];
@@ -118,8 +162,6 @@ function callAI(model: string, promptContent: string): Promise<string> {
       cmd = "gemini";
       args = ["-p", "", "-o", "text"];
     }
-    // NODE_OPTIONS='--conditions react-server' は Bun ベースの claude CLI を壊す。
-    // CLAUDECODE=1 は Claude Code 内で大きい stdin をブロックする。両方を子から除去する。
     const { NODE_OPTIONS: _n, CLAUDECODE: _c, ...childEnv } = process.env;
     const proc = spawn(cmd, args, {
       stdio: ["pipe", "pipe", "pipe"],
@@ -130,15 +172,28 @@ function callAI(model: string, promptContent: string): Promise<string> {
     proc.stdout.on("data", (d: Buffer) => (stdout += d.toString()));
     proc.stderr.on("data", (d: Buffer) => (stderr += d.toString()));
     proc.on("close", (code) => {
-      if (code === 0) resolve(stdout);
-      else
-        reject(
-          new Error(`${model} CLI failed (code ${code}): ${stderr.slice(0, 300)}`),
-        );
+      if (code === 0) resolve({ text: stdout, attempts: 1, usage: { ...ZERO_USAGE } });
+      else reject(new Error(`${model} CLI failed (code ${code}): ${stderr.slice(0, 300)}`));
     });
     proc.on("error", (e) => reject(new Error(`spawn error: ${e.message}`)));
     proc.stdin.write(promptContent, "utf-8");
     proc.stdin.end();
+  });
+}
+
+async function callAI(options: {
+  model: string;
+  prompt: string;
+  responseJsonSchema: Record<string, unknown>;
+}): Promise<ModelCallResult> {
+  if (options.model !== "gemini-api") return callCli(options.model, options.prompt);
+  return generateContentText({
+    prompt: options.prompt,
+    apiKey: process.env.GEMINI_API_KEY ?? "",
+    model: resolveTextModel(),
+    responseJsonSchema: options.responseJsonSchema,
+    // 無料枠の日次上限を内部retryで消費しない。再生成は外側の有界loopだけ。
+    maxAttempts: 1,
   });
 }
 
@@ -222,16 +277,73 @@ interface Counters {
   rejected: number;
 }
 
+type ResultStatus = "ok" | "fail" | "skip" | "rejected";
+
+interface KeyResult {
+  rankingKey: string;
+  status: ResultStatus;
+  reason: string;
+  authorRequests: number;
+  criticRequests: number;
+  usage: GeminiTokenUsage;
+  quota?: GeminiQuotaDetails;
+}
+
+function addUsage(target: GeminiTokenUsage, usage: GeminiTokenUsage): void {
+  target.inputTokens += usage.inputTokens;
+  target.outputTokens += usage.outputTokens;
+  target.totalTokens += usage.totalTokens;
+  target.thinkingTokens += usage.thinkingTokens;
+}
+
+function pushResult(
+  results: KeyResult[],
+  rankingKey: string,
+  status: ResultStatus,
+  reason: string,
+  authorRequests: number,
+  criticRequests: number,
+  usage: GeminiTokenUsage,
+  quota?: GeminiQuotaDetails,
+): void {
+  results.push({
+    rankingKey,
+    status,
+    reason,
+    authorRequests,
+    criticRequests,
+    usage: { ...usage },
+    ...(quota ? { quota } : {}),
+  });
+}
+
+function criticRevisionPrompt(
+  originalPrompt: string,
+  issues: Array<{ section: string; severity: string; message: string }>,
+): string {
+  const feedback = issues
+    .filter((issue) => issue.severity !== "MINOR")
+    .slice(0, 8)
+    .map((issue) => `- [${issue.section}/${issue.severity}] ${issue.message}`)
+    .join("\n");
+  return `${originalPrompt}\n\n## 前回候補の独立レビュー指摘\n\n次の問題をすべて解消し、JSON 全体を再生成してください。\n${feedback}`;
+}
+
 async function processOne(
   rankingKey: string,
   opts: Options,
   counters: Counters,
+  results: KeyResult[],
 ): Promise<void> {
+  const usage = { ...ZERO_USAGE };
+  let authorRequests = 0;
+  let criticRequests = 0;
   try {
     const built = await buildRankingContentPromptForKey(rankingKey, opts.areaType);
     if (!built) {
       process.stdout.write(`[SKIP] ${rankingKey}: 入力なし (item/観測値が R2 に無い)\n`);
       counters.skip++;
+      pushResult(results, rankingKey, "skip", "missing-input", 0, 0, usage);
       return;
     }
     const { meta, prompt } = built;
@@ -244,6 +356,7 @@ async function processOne(
         `[DRY] ${rankingKey} (${meta.yearCode}): prompt ${prompt.length}字 → ${dest}\n`,
       );
       counters.ok++;
+      pushResult(results, rankingKey, "ok", "dry-run", 0, 0, usage);
       return;
     }
 
@@ -251,11 +364,18 @@ async function processOne(
     //   安いモデル (haiku / gemini) は JSON 崩れ・ルール違反を一定率で出すため、品質を
     //   下げる代わりに実行回数で払う。ゲートを緩めて通すことは絶対にしない。
     const maxAttempts = Math.max(1, opts.retries + 1);
-    let lastFailure: { kind: "parse" | "gate"; detail: string } | null = null;
+    let lastFailure: { kind: "parse" | "gate" | "critic"; detail: string } | null = null;
+    let authorPrompt = prompt;
 
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-      const raw = await callAI(opts.model, prompt);
-      const stripped = stripCodeFence(raw.trim());
+      const generated = await callAI({
+        model: opts.model,
+        prompt: authorPrompt,
+        responseJsonSchema: buildAiContentResponseSchema(meta.totalCount),
+      });
+      authorRequests += generated.attempts;
+      addUsage(usage, generated.usage);
+      const stripped = stripCodeFence(generated.text.trim());
       let parsed: {
         faq?: unknown;
         regionalAnalysis?: string;
@@ -297,27 +417,76 @@ async function processOne(
         continue;
       }
 
+      if (opts.critic === "gemini-api") {
+        const reviewed = await reviewAiContentWithGemini({
+          rankingKey,
+          candidate: parsed,
+          apiKey: process.env.GEMINI_API_KEY ?? "",
+          model: resolveTextModel(),
+          maxAttempts: 1,
+        });
+        criticRequests += reviewed.attempts;
+        addUsage(usage, reviewed.usage);
+        if (reviewed.verdict === "REVISE") {
+          const detail = reviewed.issues
+            .filter((issue) => issue.severity !== "MINOR")
+            .slice(0, 3)
+            .map((issue) => `${issue.section}:${issue.severity}`)
+            .join(" / ");
+          lastFailure = { kind: "critic", detail: detail || "semantic review" };
+          if (attempt < maxAttempts) {
+            authorPrompt = criticRevisionPrompt(prompt, reviewed.issues);
+            process.stdout.write(
+              `[RETRY ${attempt}/${maxAttempts}] ${rankingKey}: critic REVISE (${detail})\n`,
+            );
+          }
+          continue;
+        }
+      }
+
       const dest = opts.outbox ? writeOutbox(row) : writeStaging(opts.outDir, row);
       const note = attempt > 1 ? ` (attempt ${attempt})` : "";
       process.stdout.write(`[OK] ${rankingKey} (${meta.yearCode})${note} → ${dest}\n`);
       counters.ok++;
+      pushResult(results, rankingKey, "ok", "passed-all-gates", authorRequests, criticRequests, usage);
       return;
     }
 
     if (lastFailure?.kind === "parse") {
       process.stdout.write(`[FAIL] ${rankingKey}: JSON parse error (${maxAttempts} 回)\n`);
       counters.fail++;
+      pushResult(results, rankingKey, "fail", "json-parse", authorRequests, criticRequests, usage);
     } else {
       process.stdout.write(
-        `[REJECT] ${rankingKey}: audit blocker (${maxAttempts} 回) ${lastFailure?.detail ?? ""}\n`,
+        `[REJECT] ${rankingKey}: ${lastFailure?.kind ?? "gate"} (${maxAttempts} 回) ${lastFailure?.detail ?? ""}\n`,
       );
       counters.rejected++;
+      pushResult(
+        results,
+        rankingKey,
+        "rejected",
+        `${lastFailure?.kind ?? "gate"}:${lastFailure?.detail ?? "unknown"}`.slice(0, 500),
+        authorRequests,
+        criticRequests,
+        usage,
+      );
     }
   } catch (err) {
+    const geminiError = err instanceof GeminiTextError ? err : null;
     process.stdout.write(
       `[FAIL] ${rankingKey}: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}\n`,
     );
     counters.fail++;
+    pushResult(
+      results,
+      rankingKey,
+      "fail",
+      geminiError ? `gemini-${geminiError.classification}` : "generation-error",
+      authorRequests,
+      criticRequests,
+      usage,
+      geminiError?.quota,
+    );
   }
 }
 
@@ -357,11 +526,50 @@ async function collectPendingKeys(opts: Options): Promise<string[]> {
   return pending;
 }
 
+function writeRunReport(options: {
+  path: string;
+  opts: Options;
+  startedAt: string;
+  targets: number;
+  counters: Counters;
+  results: KeyResult[];
+}): void {
+  const usage = { ...ZERO_USAGE };
+  let authorRequests = 0;
+  let criticRequests = 0;
+  for (const result of options.results) {
+    addUsage(usage, result.usage);
+    authorRequests += result.authorRequests;
+    criticRequests += result.criticRequests;
+  }
+  const report = {
+    version: 1,
+    startedAt: options.startedAt,
+    completedAt: new Date().toISOString(),
+    model: options.opts.model,
+    resolvedModel: options.opts.model === "gemini-api" ? resolveTextModel() : options.opts.model,
+    critic: options.opts.critic,
+    dryRun: options.opts.dryRun,
+    targets: options.targets,
+    counters: options.counters,
+    requests: {
+      author: authorRequests,
+      critic: criticRequests,
+      total: authorRequests + criticRequests,
+    },
+    usage,
+    results: options.results,
+  };
+  mkdirSync(path.dirname(options.path), { recursive: true });
+  writeFileSync(options.path, `${JSON.stringify(report, null, 2)}\n`, "utf-8");
+}
+
 // ============================================================
 // main
 // ============================================================
 
 async function main() {
+  const startedAt = new Date().toISOString();
   const opts = parseArgs();
   const pending = await collectPendingKeys(opts);
   const targets = Number.isFinite(opts.limit)
@@ -380,20 +588,35 @@ async function main() {
   );
 
   const counters: Counters = { ok: 0, fail: 0, skip: 0, rejected: 0 };
+  const results: KeyResult[] = [];
   for (let i = 0; i < targets.length; i += opts.concurrency) {
     const batch = targets.slice(i, i + opts.concurrency);
-    await Promise.all(batch.map((k) => processOne(k, opts, counters)));
+    await Promise.all(batch.map((k) => processOne(k, opts, counters, results)));
   }
 
   process.stdout.write(
     `\n=== 完了: OK ${counters.ok} / REJECT ${counters.rejected} / FAIL ${counters.fail} / SKIP ${counters.skip} ===\n`,
   );
+  if (opts.reportPath) {
+    writeRunReport({
+      path: path.resolve(opts.reportPath),
+      opts,
+      startedAt,
+      targets: targets.length,
+      counters,
+      results,
+    });
+  }
   if (!opts.dryRun && counters.ok > 0) {
-    process.stdout.write(
-      `次: ${opts.outDir}/app/ranking/<key>/ai-content.json を R2 へ push\n` +
-        `   npx tsx packages/r2-storage/src/scripts/push-r2-wrangler.ts app/ranking --apply\n` +
-        `   (または diff-push-r2.ts --prefix app/ranking。両者とも .local/r2 を読む)\n`,
-    );
+    if (opts.outbox) {
+      process.stdout.write("次: outbox を develop へ push すると publish-ai-content.yml が R2 公開します\n");
+    } else {
+      process.stdout.write(
+        `次: ${opts.outDir}/app/ranking/<key>/ai-content.json を R2 へ push\n` +
+          `   npx tsx packages/r2-storage/src/scripts/push-r2-wrangler.ts app/ranking --apply\n` +
+          `   (または diff-push-r2.ts --prefix app/ranking。両者とも .local/r2 を読む)\n`,
+      );
+    }
   }
 
   // ★1 件も出せなかったら run を失敗させる (silent green の再発防止・2026-07-30)。

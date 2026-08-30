@@ -87,9 +87,20 @@ export function readAiContentQueue(root: string) {
         rankingKey: e.rankingKey,
         impressions: (e.impressions as number) ?? 0,
         reason: e.reason,
-        reviewTier: e.reviewTier ?? null,
+        reviewTier:
+          e.reviewTier === "opus"
+            ? "manual-escalation"
+            : e.reviewTier === "sonnet"
+              ? "gemini-auto"
+              : (e.reviewTier ?? null),
       }));
-    return { generatedAt: q.generatedAt, summary: q.summary, topNeeds: top };
+    let latestRun: Record<string, string | number> | null = null;
+    const historyPath = path.join(root, ".claude/state/metrics/ai-content/history.csv");
+    if (fs.existsSync(historyPath)) {
+      const runs = readCsv(historyPath);
+      latestRun = runs.at(-1) ?? null;
+    }
+    return { generatedAt: q.generatedAt, summary: q.summary, topNeeds: top, latestRun };
   });
 }
 

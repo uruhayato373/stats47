@@ -4,11 +4,10 @@ description: ランキングページ AI コンテンツ (考察 / 地域別の�
 model: sonnet
 ---
 
-> **モデル運用 (2段 critic)**: 既定は `sonnet` (tier-1・全件の意味フロア)。決定的ゲート
-> `audit-ai-content.mjs` が客観フロア (数値/重複/羅列) を握るため tier-1 は sonnet で十分。
-> **tier-2**: GSC 流入上位 (queue の `reviewTier: "opus"` = 上位30件) と tier-1 が REVISE 判定した
-> 件だけ、起動時に `model: opus` を明示指定してエスカレーション審査する。正典:
-> `.claude/rules/model-prompting.md` / `.claude/skills/content/generate-ai-content/SKILL.md`。
+> **2026-08-30 運用境界**: 日次全件の意味フロアは、author と別リクエストの
+> Gemini critic が機械強制する。本 agent は quarantine・高流入 key などの例外的な
+> 手動是正レビューに限定する。Claude を定期自動経路に戻さない。正典:
+> `.claude/rules/ranking-content-standards.md` / `.claude/skills/content/generate-ai-content/SKILL.md`。
 
 # Ranking Content Critic Agent
 

@@ -2,7 +2,7 @@
 title: 改善バックログ
 type: improvement-backlog
 created: 2026-06-06
-updated: 2026-08-24
+updated: 2026-08-30
 status: active
 ---
 
@@ -42,7 +42,7 @@ status: active
 | RANKING-KEYS-SYNC-01 | 2026-08-17 の実走で検証機会が到来し、欠陥を2つ検出した。(1) 生成スクリプトの一時障害で生きたキー `bath-soap-consumption-expenditure` を KNOWN/SITEMAP から落とす差分を commit していた → `d938d04cf` で是正済 (2) PR 作成ガードが `gh pr view` を使い CLOSED の #544 を拾い続けて PR が二度と作られず、同期が本番へ一度も届いていなかった → open 限定に是正 + 機械ガード追加。**残件**: 次回実走が是正後スクリプトで正しい差分を出し、PR が実際に作られることを確認する | pending | 2026-08-25 | claude | indexing |
 | SURVEY-LINKAGE-02 | 未分類241件から、provenance辞書で確実に回収できる50 statsDataIdを追加する | pending | 2026-08-31 | claude | content |
 | TOKEN-CONTENT-01 | コンテンツ制作の品質を落とさずトークン量が減ったか実測する。実測は2026-08-03開始で blog 2 run のみ (cost $12.07 / $25.01)。**標本不足で判定不能** — 日次1runで2週=約14run揃う時点まで延期 | effect/pending | 2026-08-19 | claude | cost |
-| TOKEN-AICONTENT-01 | ai-content生成の品質を落とさずトークン量が減ったか実測する。3 run実測で1件run $15.87 → 5件run $6.16/件 と件数増で単価が下がる兆候。**標本不足 (3 run) で確定せず**、約14run揃う時点で判定 | effect/pending | 2026-08-19 | claude | cost |
+| TOKEN-AICONTENT-01 | Claude自動生成の実測（5件run $79〜$90、生成0件run $87.31）をbaselineに、課金無効projectのGemini日次へ移行する。[target: API課金 -100%（$0）]。main反映後7 runでPASS率・preflight/quota停止・request/tokenと課金設定を照合し、品質ゲートを弱めず費用0か判定する | pending | 2026-09-07 | ranking-content-author | cost |
 | FUNNEL-CTA-01 | ranking末尾CTAのclickと遷移後行動を判定する。**判定不能 (ブロッカー: オーナー作業)** — `cta_id`/`content_id`/`target_type` のGA4カスタムディメンションが未登録 (2026-07-31 API監査で確定)。登録なしでは「遷移後行動」の内訳が取れない。Dueは登録+48h+4週で再設定する | effect/pending | 2026-09-09 | uruhayato373 | ga4 |
 | AFF-BLOG-TEXTLINK-01 | 本文内text linkとsidebarのCTRを比較し、furusato在庫欠損を別扱いで確認する | effect/pending | 2026-08-25 | claude | affiliate |
 | AFF-A8-REGISTER-01 | 追加18件のうち配信された案件をA8確定成果とCTRで4週判定する | effect/pending | 2026-08-25 | claude | affiliate |
