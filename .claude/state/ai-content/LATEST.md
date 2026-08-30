@@ -1,6 +1,6 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-08-30T04:04:17.298Z
+- 生成: 2026-08-30T04:08:22.463Z
 - GSC snapshot: 2026-W34 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 
