@@ -17,6 +17,7 @@ import type {
   ReferenceProductionStageDTO,
 } from "@/lib/contracts/types";
 import { contentOperations } from "@/lib/server/content-operations";
+import { referenceExpansionPlans } from "@/lib/server/reference-expansion-plans";
 import { hasError } from "@/lib/server/state-io";
 
 export const dynamic = "force-dynamic";
@@ -58,6 +59,9 @@ export default async function ReferenceContentPage({
     );
   }
   const portfolio = data.references;
+  const plans = referenceExpansionPlans();
+  const themePlans = plans.filter((plan) => plan.kind === "theme");
+  const blogDrafts = plans.filter((plan) => plan.kind === "blog");
   const kind = KINDS.includes(query.kind as ReferenceProductionKindDTO)
     ? (query.kind as ReferenceProductionKindDTO)
     : undefined;
@@ -120,6 +124,44 @@ export default async function ReferenceContentPage({
               <Td nowrap>{source.contextEvidence}</Td>
               <Td nowrap>{source.blockedEvidence}</Td>
               <Td nowrap>{source.notApplicable}</Td>
+            </Tr>
+          ))}
+        </Table>
+      </Section>
+
+      <Section title="企画・下書き" count={plans.length}>
+        <div className="mb-3 grid gap-3 sm:grid-cols-3">
+          <Stat label="テーマ企画" value={themePlans.length} tone="info" />
+          <Stat label="ブログ下書き" value={blogDrafts.length} tone="warn" />
+          <Stat
+            label="停止中"
+            value={plans.filter((plan) => plan.status === "blocked").length}
+            tone="warn"
+          />
+        </div>
+        <p className="mb-3 text-xs text-console-muted">
+          テーマ企画は実行バックログ、ブログはpublished:falseのarticle.mdがSSOTです。
+          参考文献は論点発見に限り、一次資料とR2観測値を接地するまで公開へ進めません。
+        </p>
+        <Table columns={["種別", "企画", "対象", "状態", "企画仮説", "保存先"]}>
+          {plans.map((plan) => (
+            <Tr key={plan.id}>
+              <Td nowrap>{plan.kind === "theme" ? "テーマ" : "ブログ"}</Td>
+              <Td>
+                <div className="font-medium">{plan.title}</div>
+                <div className="font-mono text-[10px] text-console-muted">{plan.id}</div>
+              </Td>
+              <Td muted>
+                <div className="font-mono text-[10px]">{plan.target}</div>
+                <div className="mt-1 max-w-64 text-[10px]">
+                  {plan.metricKeys.join(" / ")}
+                </div>
+              </Td>
+              <Td nowrap><ReferenceStageBadge stage={plan.status} /></Td>
+              <Td>{plan.summary}</Td>
+              <Td muted>
+                <div className="max-w-56 break-all font-mono text-[9px]">{plan.sourcePath}</div>
+              </Td>
             </Tr>
           ))}
         </Table>
