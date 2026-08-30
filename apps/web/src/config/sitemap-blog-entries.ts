@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-08-30
- * 件数: blog 478 / tag 62 / survey 81
+ * 件数: blog 488 / tag 62 / survey 81
  */
 
 export interface SitemapBlogEntry {
@@ -30,10 +30,12 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "agriculture-hokkaido-dominance", lastModified: "2026-06-13" },
   { slug: "ai-claude-code-pref-analysis", lastModified: "2026-06-13" },
   { slug: "aichi-food-culture", lastModified: "2026-07-10" },
+  { slug: "air-conditioner-consumption-quantity-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "akita-food-culture", lastModified: "2026-07-10" },
   { slug: "alcohol-prefecture-map", lastModified: "2026-03-04" },
   { slug: "allocation-tax-area", lastModified: "2026-08-28" },
   { slug: "annual-precipitation-rainy-season-gap", lastModified: "2026-06-07" },
+  { slug: "annual-sunshine-duration-vs-auto-liability-insurance-amount", lastModified: "2026-08-30" },
   { slug: "aomori-food-culture", lastModified: "2026-07-10" },
   { slug: "apple-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "area-ratio-prefecture-gap", lastModified: "2026-08-29" },
@@ -65,6 +67,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "bread-consumption-expenditure-vs-site-area-per-dwelling", lastModified: "2026-08-17" },
   { slug: "bread-vs-rice-expenditure", lastModified: "2026-07-10" },
   { slug: "butter-vs-margarine-expenditure", lastModified: "2026-07-10" },
+  { slug: "campsite-public-vs-paved-road-main-length", lastModified: "2026-08-30" },
+  { slug: "campsite-public-vs-road-expressway-length", lastModified: "2026-08-30" },
   { slug: "candy-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "car-ownership-household-prefecture-gap", lastModified: "2026-06-14" },
   { slug: "carbonated-drink-spending-prefecture-gap", lastModified: "2026-06-14" },
@@ -113,6 +117,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "crime-rate-regional-gap", lastModified: "2026-03-09" },
   { slug: "cup-noodles-consumption-expenditure-vs-fire-damage", lastModified: "2026-08-29" },
   { slug: "cup-noodles-consumption-expenditure-vs-secondary-activity", lastModified: "2026-08-29" },
+  { slug: "cup-noodles-consumption-expenditure-vs-sports-annual", lastModified: "2026-08-30" },
   { slug: "cup-noodles-expenditure-ranking", lastModified: "2026-07-09" },
   { slug: "curry-roux-consumption-gap", lastModified: "2026-06-07" },
   { slug: "dairy-cattle-count", lastModified: "2026-06-14" },
@@ -165,6 +170,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "fiscal-self-reliance-gap", lastModified: "2026-03-09" },
   { slug: "fishery-catch-aquaculture-shift", lastModified: "2026-03-06" },
   { slug: "fishery-species-prefecture-specialty", lastModified: "2026-04-25" },
+  { slug: "flood-affected-rivers-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "food-consumption-prefecture-battle", lastModified: "2026-03-16" },
   { slug: "food-price-regional-2026", lastModified: "2026-05-16" },
   { slug: "food-spending-pattern", lastModified: "2026-03-05" },
@@ -189,6 +195,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "garden-plants-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "gas-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "gasoline-car-society-map", lastModified: "2026-03-06" },
+  { slug: "gasoline-consumption-quantity-vs-densely-inhabited-district", lastModified: "2026-08-30" },
   { slug: "gasoline-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "general-bed-utilization-pressure-map", lastModified: "2026-03-29" },
   { slug: "general-hospital-bed-occupancy-rate", lastModified: "2026-06-14" },
@@ -275,9 +282,12 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "library-books-prefecture-gap", lastModified: "2026-06-10" },
   { slug: "library-museum-cultural-capital", lastModified: "2026-03-06" },
   { slug: "livable-prefecture-composite-ranking", lastModified: "2026-03-27" },
+  { slug: "local-allocation-tax-prefecture-vs-agriculture-forestry", lastModified: "2026-08-30" },
+  { slug: "local-allocation-tax-prefecture-vs-cultivated-area", lastModified: "2026-08-30" },
   { slug: "local-allocation-tax-prefecture-vs-total-area-excluding", lastModified: "2026-08-29" },
   { slug: "local-debt-current-ratio-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "local-government-debt-burden", lastModified: "2026-06-07" },
+  { slug: "local-tax-prefecture-vs-railway-passengers", lastModified: "2026-08-30" },
   { slug: "local-tax-regional-gap", lastModified: "2026-03-05" },
   { slug: "local-tax-revenue-gap", lastModified: "2026-03-09" },
   { slug: "long-commute-telework-potential", lastModified: "2026-06-02" },
