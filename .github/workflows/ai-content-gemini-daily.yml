@@ -89,7 +89,7 @@ jobs:
           set -euo pipefail
           if npm run ai:preflight --workspace @stats47/ai-content -- \
             --targets "${{ steps.targets.outputs.count }}" \
-            --report .local/ci/gemini-preflight.json; then
+            --report "$GITHUB_WORKSPACE/.local/ci/gemini-preflight.json"; then
             echo "status=success" >> "$GITHUB_OUTPUT"
           else
             echo "status=failure" >> "$GITHUB_OUTPUT"
@@ -110,7 +110,7 @@ jobs:
             --keys "${{ steps.targets.outputs.keys_csv }}" \
             --retries 1 \
             --outbox \
-            --report .local/ci/gemini-run.json \
+            --report "$GITHUB_WORKSPACE/.local/ci/gemini-run.json" \
             "${EXTRA[@]}"; then
             echo "status=success" >> "$GITHUB_OUTPUT"
           else
