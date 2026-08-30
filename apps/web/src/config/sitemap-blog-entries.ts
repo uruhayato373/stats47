@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-08-30
- * 件数: blog 488 / tag 62 / survey 81
+ * 件数: blog 498 / tag 62 / survey 81
  */
 
 export interface SitemapBlogEntry {
@@ -294,6 +294,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "low-birthweight-rate-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "low-cost-low-income-prefectures", lastModified: "2026-07-16" },
   { slug: "mackerel-expenditure-ranking", lastModified: "2026-07-10" },
+  { slug: "main-road-paving-rate-vs-apple-consumption-quantity", lastModified: "2026-08-30" },
   { slug: "mandarin-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "manufacturing-aichi-dominance", lastModified: "2026-03-03" },
   { slug: "manufacturing-establishments-prefecture-gap", lastModified: "2026-08-29" },
@@ -348,6 +349,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "oyster-consumption-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "pachinko-education-cost", lastModified: "2026-08-28" },
   { slug: "pachinko-participation-prefecture-gap", lastModified: "2026-05-31" },
+  { slug: "pachinko-shop-density-per-10k-vs-dependent-population-index", lastModified: "2026-08-30" },
   { slug: "pachinko-shop-density-per-10k-vs-high-school-education-cost", lastModified: "2026-08-29" },
   { slug: "park-green-space-gap", lastModified: "2026-03-09" },
   { slug: "passport-issuance-prefecture-gap", lastModified: "2026-05-31" },
@@ -388,6 +390,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "public-phone-prefecture-vanishing", lastModified: "2026-03-29" },
   { slug: "purchasing-power-adjusted", lastModified: "2026-03-06" },
   { slug: "real-disposable-income-reversal", lastModified: "2026-07-20" },
+  { slug: "real-disposable-income-vs-per-capita-social-welfare", lastModified: "2026-08-30" },
   { slug: "real-disposable-income-vs-taxpayer-ratio-per-pref-resident", lastModified: "2026-08-29" },
   { slug: "real-income-taxpayer", lastModified: "2026-08-28" },
   { slug: "recycling-rate-gap", lastModified: "2026-03-06" },
@@ -398,6 +401,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "rice-consumption-quantity-ranking", lastModified: "2026-07-10" },
   { slug: "rice-harvest-volume-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "road-infrastructure-density", lastModified: "2026-03-06" },
+  { slug: "road-length-per-km2-vs-average-road-traffic-volume", lastModified: "2026-08-30" },
+  { slug: "road-length-per-km2-vs-residential-building-starts", lastModified: "2026-08-30" },
   { slug: "roadside-station-prefecture-gap", lastModified: "2026-06-13" },
   { slug: "ryokan-vs-hotel-overnight-shift", lastModified: "2026-03-06" },
   { slug: "safe-driving-5-features", lastModified: "2026-03-04" },
@@ -419,6 +424,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "shizuoka-food-culture", lastModified: "2026-07-10" },
   { slug: "shochu-consumption-prefecture-gap", lastModified: "2026-06-07" },
   { slug: "shochu-expenditure-vs-sake-ranking", lastModified: "2026-07-10" },
+  { slug: "shumai-consumption-expenditure-vs-jr-freight-shipment", lastModified: "2026-08-30" },
   { slug: "shumai-consumption-expenditure-vs-main-household-ratio-main", lastModified: "2026-08-29" },
   { slug: "sixth-industry-direct-sales", lastModified: "2026-03-06" },
   { slug: "small-business-dominance-map", lastModified: "2026-03-09" },
@@ -441,6 +447,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "sushi-dining-consumption-expenditure", lastModified: "2026-06-07" },
   { slug: "sweet-potato-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "swimming-pool-public-vs-post-office-count", lastModified: "2026-08-29" },
+  { slug: "swimming-pool-public-vs-smoke-emission-facility-count", lastModified: "2026-08-30" },
+  { slug: "swimming-pool-public-vs-total-general-project-investment", lastModified: "2026-08-30" },
   { slug: "system-consultant-income-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "system-consultant-income-ranking", lastModified: "2026-06-02" },
   { slug: "taxi-driver-income-prefecture-gap", lastModified: "2026-05-31" },
@@ -481,6 +489,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "urban-parks-green-infrastructure", lastModified: "2026-03-06" },
   { slug: "vacant-house-crisis", lastModified: "2026-03-04" },
   { slug: "vacant-housing-aging-correlation", lastModified: "2026-07-09" },
+  { slug: "vacant-housing-rate-vs-dependent-population-index", lastModified: "2026-08-30" },
+  { slug: "vacant-housing-rate-vs-standard-price-change-rate-commercial", lastModified: "2026-08-30" },
   { slug: "vacant-housing-vs-aging", lastModified: "2026-07-12" },
   { slug: "vacant-housing-vs-land-price", lastModified: "2026-07-12" },
   { slug: "vacant-housing-vs-welfare-commissioner", lastModified: "2026-07-12" },
