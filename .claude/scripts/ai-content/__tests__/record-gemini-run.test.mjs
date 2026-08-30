@@ -10,7 +10,7 @@ const report = {
   version: 1,
   completedAt: "2026-08-30T01:00:00.000Z",
   model: "gemini-api",
-  resolvedModel: "gemini-3.7-flash",
+  resolvedModel: "gemini-2.5-flash-lite",
   targets: 3,
   counters: { ok: 2, rejected: 1, fail: 0, skip: 0 },
   requests: { author: 4, critic: 3, total: 7 },
@@ -33,7 +33,7 @@ test("history を run_id で upsert し LATEST を更新する", () => {
 
     const history = readFileSync(historyPath, "utf8").trim().split("\n");
     assert.equal(history.length, 2, "header + 1 run only");
-    assert.match(history[1], /123,gemini-3\.7-flash,3,3,0/);
+    assert.match(history[1], /123,gemini-2\.5-flash-lite,3,3,0/);
     assert.match(readFileSync(latestPath, "utf8"), /PASS: 3/);
     assert.doesNotMatch(readFileSync(latestPath, "utf8"), /prompt.*\{/);
   } finally {
@@ -50,7 +50,7 @@ test("preflight の quota 停止だけでも履歴へ記録する", () => {
       preflightReport: {
         version: 1,
         completedAt: "2026-08-30T02:00:00.000Z",
-        resolvedModel: "gemini-3.7-flash",
+        resolvedModel: "gemini-2.5-flash-lite",
         targets: 3,
         ok: false,
         classification: "rate-limit",

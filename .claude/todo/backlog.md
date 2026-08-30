@@ -295,7 +295,7 @@ updated: 2026-08-30
   `ai-content-gemini-daily.yml` を初回実走する。既定 3 件/日・並列 1 を維持し、7 run 以上の
   通過率・quota 失敗・author/critic request・token を観測するまで件数を上げない。
 - **2026-08-30 checkpoint**: 高コストだった Claude Code/OAuth の自動量産を復活させず、
-  `gemini-3.7-flash` の structured author → 決定的監査 → 別リクエスト critic → 最大1回再生成 →
+  `gemini-2.5-flash-lite` の structured author → 決定的監査 → 別リクエスト critic → 最大1回再生成 →
   PASS分だけ outbox/publish という日次 CI を実装した。対象あり生成0件、Secret欠損、preflight、
   develop push、publisher dispatch/run未確認を hard fail にし、本文を含まない集計を
   `.claude/state/metrics/ai-content/`、キー別失敗を quarantine state に残す。旧対話3件並列は
