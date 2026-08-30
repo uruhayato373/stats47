@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "hamburger-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "ハンバーガー消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/hamburger-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug hamburger-consumption-expenditure-prefecture-gap --keys hamburger-consumption-expenditure --data-name hamburger-consumption-expenditure-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:19.817Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

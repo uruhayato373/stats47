@@ -30,11 +30,20 @@ function temporaryDirectory(): string {
   return directory;
 }
 
-function makeStore(initial: Record<string, StoredImageObject> = {}): {
+type StoredImageFixture = Omit<StoredImageObject, 'contentEncoding'> & {
+  contentEncoding?: string | null;
+};
+
+function makeStore(initial: Record<string, StoredImageFixture> = {}): {
   store: ImageObjectStore;
   objects: Map<string, StoredImageObject>;
 } {
-  const objects = new Map(Object.entries(initial));
+  const objects = new Map<string, StoredImageObject>(
+    Object.entries(initial).map(([key, object]) => [
+      key,
+      { ...object, contentEncoding: object.contentEncoding ?? null },
+    ])
+  );
   const store: ImageObjectStore = {
     get: vi.fn(async (key) => objects.get(key) ?? null),
     head: vi.fn(async (key) => {
@@ -51,6 +60,7 @@ function makeStore(initial: Record<string, StoredImageObject> = {}): {
         body: Buffer.from(options.body),
         etag: `"${sha256(options.body).slice(0, 32)}"`,
         contentType: options.contentType,
+        contentEncoding: options.contentEncoding ?? null,
         contentLength: options.body.byteLength,
         metadata: { ...options.metadata },
       });

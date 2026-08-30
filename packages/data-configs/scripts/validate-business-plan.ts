@@ -7,6 +7,7 @@ import {
   BUSINESS_PLAN_DECISION_STATUSES,
   BUSINESS_PLAN_MEASUREMENT_STATUSES,
   BUSINESS_PLAN_WORK_STATUSES,
+  buildM1XCanonicalUrl,
 } from '../src/business-plan';
 
 const repoRoot = path.resolve(
@@ -88,6 +89,10 @@ unique(
 unique(
   BUSINESS_PLAN_2026.m1.xPosts.map((item) => item.contentKey),
   'm1.xPost.contentKey'
+);
+unique(
+  BUSINESS_PLAN_2026.m1.analyses.map((item) => item.id),
+  'm1.analysis.id'
 );
 unique(
   BUSINESS_PLAN_2026.m1.noteProducts.map((item) => item.articleKey),
@@ -220,12 +225,151 @@ for (const route of BUSINESS_PLAN_2026.m1.routes) {
     errors.push(`m1.route:${route.path}: status が不正です`);
   }
 }
+const m1Analyses = new Map(
+  BUSINESS_PLAN_2026.m1.analyses.map((analysis) => [analysis.id, analysis])
+);
+for (const analysis of BUSINESS_PLAN_2026.m1.analyses) {
+  if (analysis.sourceLayers.length === 0) {
+    errors.push(`m1.analysis:${analysis.id}: sourceLayers が空です`);
+  }
+  if (analysis.spatialOperations.length === 0) {
+    errors.push(`m1.analysis:${analysis.id}: spatialOperations が空です`);
+  }
+  if (!analysis.metricKeys.includes(analysis.primaryMetricKey)) {
+    errors.push(`m1.analysis:${analysis.id}: primaryMetricKey がmetricKeys外です`);
+  }
+  for (const layer of analysis.sourceLayers) {
+    if (
+      (layer.role === 'calculation-input' && !layer.usedInCalculation) ||
+      (layer.role === 'context-only' && layer.usedInCalculation)
+    ) {
+      errors.push(
+        `m1.analysis:${analysis.id}: layer ${layer.id} のroleとusedInCalculationが矛盾しています`
+      );
+    }
+  }
+  const calculationInputs = analysis.sourceLayers.filter(
+    (layer) => layer.role === 'calculation-input'
+  );
+  if (
+    analysis.analysisKind === 'spatial-cross' &&
+    (calculationInputs.length < 2 ||
+      calculationInputs.every((layer) => layer.geometry === 'prefecture'))
+  ) {
+    errors.push(
+      `m1.analysis:${analysis.id}: spatial-cross は複数レイヤーと空間geometryが必要です`
+    );
+  }
+  if (
+    Boolean(analysis.evidenceManifestKey) !==
+    Boolean(analysis.detailR2KeyPattern)
+  ) {
+    errors.push(
+      `m1.analysis:${analysis.id}: evidenceManifestKeyとdetailR2KeyPatternは同時に定義してください`
+    );
+  }
+}
+const geoRoleCounts = new Map<string, number>();
+const crossAnalysisCounts = new Map<string, number>();
 for (const post of BUSINESS_PLAN_2026.m1.xPosts) {
   if ((post.caption.match(/\{\{url\}\}/g) ?? []).length !== 1) {
     errors.push(`m1.xPost:${post.id}: {{url}} は1個必要です`);
   }
   if (!BUSINESS_PLAN_WORK_STATUSES.includes(post.status)) {
     errors.push(`m1.xPost:${post.id}: status が不正です`);
+  }
+  geoRoleCounts.set(post.geoRole, (geoRoleCounts.get(post.geoRole) ?? 0) + 1);
+  if (post.imageKind !== 'geo-insight-card') {
+    errors.push(`m1.xPost:${post.id}: Geo投稿にランキング画像を使えません`);
+  }
+  if (post.analysisIds.length === 0) {
+    errors.push(`m1.xPost:${post.id}: analysisIds が空です`);
+    continue;
+  }
+  const analyses = post.analysisIds
+    .map((analysisId) => m1Analyses.get(analysisId))
+    .filter((analysis) => analysis !== undefined);
+  if (analyses.length !== post.analysisIds.length) {
+    errors.push(`m1.xPost:${post.id}: 未定義analysisIdを参照しています`);
+  }
+  const availableMetricKeys = new Set(
+    analyses.flatMap((analysis) => analysis.metricKeys)
+  );
+  if (!availableMetricKeys.has(post.claimMetricKey)) {
+    errors.push(`m1.xPost:${post.id}: claimMetricKey が分析snapshot外です`);
+  }
+  if (!post.metricKeys.includes(post.claimMetricKey)) {
+    errors.push(`m1.xPost:${post.id}: claimMetricKey をmetricKeysへ含めてください`);
+  }
+  const primaryAnalysis = analyses[0];
+  const expectedUrl = buildM1XCanonicalUrl({
+    analysisCount: post.analysisIds.length,
+    geoRole: post.geoRole,
+    analysisSlug: primaryAnalysis?.slug ?? '',
+    highlightAreaCodes: post.visual.highlightAreaCodes,
+  });
+  if (post.canonicalUrl !== expectedUrl) {
+    errors.push(`m1.xPost:${post.id}: canonicalUrl が分析と一致しません`);
+  }
+  if (post.geoRole === 'baseline') {
+    if (
+      post.analysisIds.length !== 1 ||
+      primaryAnalysis?.analysisKind !== 'baseline' ||
+      !['baseline-choropleth', 'focus'].includes(post.visual.mapMode)
+    ) {
+      errors.push(`m1.xPost:${post.id}: baseline契約に違反しています`);
+    }
+  } else if (post.geoRole === 'cross-analysis') {
+    if (
+      post.analysisIds.length !== 1 ||
+      primaryAnalysis?.analysisKind !== 'spatial-cross' ||
+      post.visual.mapMode === 'baseline-choropleth'
+    ) {
+      errors.push(`m1.xPost:${post.id}: cross-analysis契約に違反しています`);
+    }
+    if (primaryAnalysis) {
+      crossAnalysisCounts.set(
+        primaryAnalysis.id,
+        (crossAnalysisCounts.get(primaryAnalysis.id) ?? 0) + 1
+      );
+    }
+  } else if (post.analysisIds.length < 2) {
+    errors.push(`m1.xPost:${post.id}: method/decision は複数分析が必要です`);
+  }
+  const expectedMediaPath = `.local/r2/sns/geo/${post.contentKey}/x/stills/${post.contentKey}.png`;
+  if (post.mediaPath !== expectedMediaPath) {
+    errors.push(`m1.xPost:${post.id}: mediaPath が規約外です`);
+  }
+  if (
+    post.visual.highlightAreaCodes.some((areaCode) => !/^\d{5}$/.test(areaCode))
+  ) {
+    errors.push(`m1.xPost:${post.id}: highlightAreaCodes は5桁コードです`);
+  }
+  if (
+    ['statement', 'method', 'layers'].includes(post.visual.panelKind) &&
+    (post.visual.panelItems?.length ?? 0) === 0
+  ) {
+    errors.push(`m1.xPost:${post.id}: panelItems が必要です`);
+  }
+}
+const expectedGeoRoleCounts = {
+  baseline: 3,
+  'cross-analysis': 9,
+  method: 2,
+  decision: 1,
+} as const;
+for (const [role, expected] of Object.entries(expectedGeoRoleCounts)) {
+  const actual = geoRoleCounts.get(role) ?? 0;
+  if (actual !== expected) {
+    errors.push(`m1.xPosts:${role}: expected ${expected}, got ${actual}`);
+  }
+}
+for (const analysis of BUSINESS_PLAN_2026.m1.analyses.filter(
+  (item) => item.analysisKind === 'spatial-cross'
+)) {
+  const actual = crossAnalysisCounts.get(analysis.id) ?? 0;
+  if (actual !== 3) {
+    errors.push(`m1.xPosts:${analysis.id}: cross投稿は3件必要です: ${actual}`);
   }
 }
 for (const product of BUSINESS_PLAN_2026.m1.noteProducts) {

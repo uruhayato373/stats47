@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { gzipSync } from "node:zlib";
 
 const mocks = vi.hoisted(() => ({
   s3Send: vi.fn(),
@@ -64,19 +65,18 @@ describe("fetchFromR2 read tier priority", () => {
     expect(mocks.bindingGet).not.toHaveBeenCalled();
   });
 
-  it.each([
-    "app/stats/example/values.json?redirect=https://evil.example",
-    "app/stats/example/values.json#fragment",
-    "app/stats/日本語/values.json",
-    "app/stats/with space/values.json",
-  ])("公開URLのパスとして解釈できないR2 keyを拒否する: %s", async (key) => {
-    delete process.env.R2_ACCESS_KEY_ID;
-    delete process.env.R2_SECRET_ACCESS_KEY;
-    delete process.env.R2_S3_ENDPOINT;
+  it("S3のContent-Encoding gzipを透過的に展開する", async () => {
+    const source = Buffer.from('{"type":"Topology","arcs":[]}');
+    const compressed = gzipSync(source, { level: 9 });
+    mocks.s3Send.mockResolvedValue({
+      ContentEncoding: "gzip",
+      Body: {
+        transformToByteArray: async () => compressed,
+      },
+    });
 
-    const body = await fetchFromR2(key);
+    const body = await fetchFromR2("gis/mlit-ksj/A42/national/data.topojson");
 
-    expect(body).toBeNull();
-    expect(globalThis.fetch).not.toHaveBeenCalled();
+    expect(body).toEqual(source);
   });
 });

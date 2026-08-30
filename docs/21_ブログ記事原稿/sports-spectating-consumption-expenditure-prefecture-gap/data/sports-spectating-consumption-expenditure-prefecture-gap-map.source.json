@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sports-spectating-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "スポーツ観覧料消費支出額",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/sports-spectating-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug sports-spectating-consumption-expenditure-prefecture-gap --keys sports-spectating-consumption-expenditure --with-map",
+  "fetchedAt": "2026-08-30T06:14:26.212Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

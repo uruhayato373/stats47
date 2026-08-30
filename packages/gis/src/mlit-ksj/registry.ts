@@ -327,6 +327,17 @@ export const KSJ_CODE_CONFIG = new Map<string, KsjCodeConfig>([
     propertyMap: {},
     simplifyOptions: { quantize: 10000, simplifyQuantile: 0.02 },
   }],
+  ...[
+    "A03", "A09", "A18", "A19", "A23", "A24", "A25", "A30a5", "A31a",
+    "A42", "A43", "A44", "A45", "A51", "A52", "A53", "A54", "A55",
+    "G04-c", "G04-d", "G08", "L03-b", "L03-b-c", "L03-b-u", "N08",
+    "S05-d", "S10a", "m250r6", "m500r6",
+  ].map((dataId): [string, KsjCodeConfig] => [dataId, {
+    dataId,
+    officialPageDiscovery: true,
+    geojsonDirInZip: "",
+    propertyMap: {},
+  }]),
 ]);
 
 export function getCodeConfig(dataId: string): KsjCodeConfig | null {

@@ -22,8 +22,9 @@ co_agents: [x-strategist, instagram-strategist, gis-curator]
 
 > **★バッチ量産の既定経路 (2026-07-17〜)**: 単発の下記工程に加え、**`npx tsx .claude/scripts/sns/prepare-buzz-map-batch.ts`**
 > (dry-run 既定・`--apply` で spec→render→R2→caption→**landing contract + isPostable ゲート通過分のみ** posts.json draft)
-> が選定〜draft を一括処理する。管理画面は **gallery `/buzz-map`** (`npm run admin` → 127.0.0.1:4747/buzz-map —
-> catalog 横断表示 + landing 再判定/レンダ/R2 push/draft 登録の分離 job)。ゲート仕様の正典 = `buzz-map-standards.md` §5。
+> が選定〜draft を一括処理する。管理画面は **read-only gallery `/buzz-map`**
+> (`npm run admin` → 127.0.0.1:4747/buzz-map — catalog横断表示・素材previewのみ)。
+> landing再判定/レンダ/R2 push/draft登録は本skillを実行するagentが担う。ゲート仕様の正典 = `buzz-map-standards.md` §5。
 
 | step | 内容 | 出力 |
 |---|---|---|
@@ -32,7 +33,7 @@ co_agents: [x-strategist, instagram-strategist, gis-curator]
 | 3. 目視 | 生成 PNG を Read で開きチェックリスト判定（下記） | — |
 | 4. 改善 | 崩れは spec 修正を優先して再レンダ。カードCSS/tokens の変更は standards §6 決定ログとセット | — |
 | 5. video | 型B: `--preview`（先頭90フレーム・半解像度）で試写 → OK なら本尺 MP4 | `.local/r2/sns/buzz-map/<id>/x/` |
-| 6. 台帳 | カタログ status を `build-buzz-map-catalog.ts --mark-spec\|--mark-generated\|--mark-posted <metricKey> --theme-id <id>` で更新 + standards §4 テーマ台帳に 1 行追加。投稿は既存フロー（posts.json draft、§2-9 登録は §2-10 ゲート）へ | — |
+| 6. 台帳 | agentがカタログ status を `build-buzz-map-catalog.ts --mark-spec\|--mark-generated\|--mark-posted <metricKey> --theme-id <id>` で更新 + standards §4 テーマ台帳に1行追加。管理画面は更新しない | — |
 
 ## 実行コマンド（apps/remotion で実行）
 

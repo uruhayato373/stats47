@@ -154,9 +154,28 @@ export interface BusinessPlanM1Analysis {
   readonly slug: string;
   readonly title: string;
   readonly question: string;
+  /** 単一指標の入口か、複数レイヤーから導く空間分析か。 */
+  readonly analysisKind: 'baseline' | 'spatial-cross';
+  /** 投稿・管理画面がランキングとの違いを機械判定する入力レイヤー。 */
+  readonly sourceLayers: readonly {
+    readonly id: string;
+    readonly label: string;
+    readonly geometry: 'prefecture' | 'mesh' | 'point' | 'polygon';
+    /** 計算に使う層か、説明用に並べるだけの補助層かを混在させない。 */
+    readonly role: 'calculation-input' | 'context-only';
+    readonly usedInCalculation: boolean;
+  }[];
+  /** 数値を導いた決定的処理。AIに計算・空間判定を委ねない。 */
+  readonly spatialOperations: readonly string[];
+  readonly primaryMetricKey: string;
+  /** snapshotで配信するmetric。投稿のclaimMetricKeyはこの集合外を参照できない。 */
+  readonly metricKeys: readonly string[];
   readonly rankingKey?: string;
   /** R2 配信用 snapshot。ランキングを直接読む分析では省略する。 */
   readonly r2Key?: string;
+  /** 入力SHA・途中artifact・集計値のlineage。細粒度地図を配信する分析で必須。 */
+  readonly evidenceManifestKey?: string;
+  readonly detailR2KeyPattern?: string;
   readonly status: BusinessPlanWorkStatus;
   readonly geography: 'prefecture';
   readonly comparisonLimit: number;
@@ -172,6 +191,12 @@ export interface BusinessPlanM1XPost {
   readonly id: string;
   readonly contentKey: string;
   readonly title: string;
+  /** 入口・複合分析・方法・意思決定を混在させない投稿クラス。 */
+  readonly geoRole: 'baseline' | 'cross-analysis' | 'method' | 'decision';
+  /** 投稿が根拠にする分析。複数指定は方法比較・横断導線だけに使う。 */
+  readonly analysisIds: readonly string[];
+  /** 地図の色と値パネルに使う、分析snapshot内の実在metric。 */
+  readonly claimMetricKey: string;
   readonly template:
     | 'shock'
     | 'versus'
@@ -184,9 +209,26 @@ export interface BusinessPlanM1XPost {
   readonly scheduledAt: string;
   readonly canonicalUrl: string;
   readonly campaign: string;
-  readonly imageKind: 'ranking-card' | 'tile-map';
+  readonly imageKind: 'ranking-card' | 'tile-map' | 'geo-insight-card';
   readonly mediaKey: string;
+  /** 投稿ごとに生成するローカルR2素材。register時はcatalog既定値より優先する。 */
+  readonly mediaPath: string;
   readonly metricKeys: readonly string[];
+  readonly visual: {
+    readonly description: string;
+    readonly mapMode:
+      | 'baseline-choropleth'
+      | 'derived-choropleth'
+      | 'focus';
+    readonly highlightAreaCodes: readonly string[];
+    readonly panelKind:
+      | 'selected-values'
+      | 'statement'
+      | 'method'
+      | 'layers';
+    readonly panelLabel: string;
+    readonly panelItems?: readonly string[];
+  };
   readonly status: BusinessPlanWorkStatus;
 }
 

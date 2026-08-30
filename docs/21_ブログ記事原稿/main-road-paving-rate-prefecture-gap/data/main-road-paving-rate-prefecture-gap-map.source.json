@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "main-road-paving-rate",
+  "year": "2023",
+  "unit": "％",
+  "label": "主要道路舗装率",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/main-road-paving-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug main-road-paving-rate-prefecture-gap --keys main-road-paving-rate --with-map",
+  "fetchedAt": "2026-08-30T06:14:13.461Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

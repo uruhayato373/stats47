@@ -1,5 +1,5 @@
 {
-  "_comment": "カバレッジの回帰防止 floor (目標値ではない)。閾値の単一ソース。vitest.config.ts と pr-quality-check.yml のコメント step が本ファイルを読む。分母はロジック層のみ (src/app 等 E2E 担当は vitest.config の coverage.exclude で除外)。Vitest 4 の AST ベース V8 remapping 移行後の実測 (2026-08-26: lines 36.04 / statements 34.93 / functions 32.65 / branches 29.97) に合わせ、branches のみ約5pt下へ再ベースラインした。カバレッジが十分上がったら手動で bump する (README 参照)。",
+  "_comment": "カバレッジの回帰防止 floor (目標値ではない)。閾値の単一ソース。vitest.config.ts と pr-quality-check.yml のコメント step が本ファイルを読む。分母はロジック層のみ (src/app は結線ファイルだけを除外し、同階層の再利用ロジックは含める)。Vitest 4 の AST ベース V8 remapping 移行後の実測 (2026-08-26: lines 36.04 / statements 34.93 / functions 32.65 / branches 29.97) に合わせ、branches のみ約5pt下へ再ベースラインした。カバレッジが十分上がったら手動で bump する (README 参照)。",
   "lines": 22,
   "statements": 22,
   "functions": 22,

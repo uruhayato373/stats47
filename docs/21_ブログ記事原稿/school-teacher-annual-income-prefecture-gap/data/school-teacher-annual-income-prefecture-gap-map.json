@@ -1,0 +1,232 @@
+{
+  "title": "小中学校教員の平均年収",
+  "subtitle": "2022年",
+  "label": "小中学校教員の平均年収",
+  "unit": "万円",
+  "year": "2022",
+  "rankingKey": "school-teacher-annual-income",
+  "source": "賃金構造基本統計調査",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "data": [
+    {
+      "pref": "千葉県",
+      "areaName": "千葉県",
+      "value": 885.89
+    },
+    {
+      "pref": "東京都",
+      "areaName": "東京都",
+      "value": 870.91
+    },
+    {
+      "pref": "兵庫県",
+      "areaName": "兵庫県",
+      "value": 849.66
+    },
+    {
+      "pref": "埼玉県",
+      "areaName": "埼玉県",
+      "value": 779.6
+    },
+    {
+      "pref": "高知県",
+      "areaName": "高知県",
+      "value": 758
+    },
+    {
+      "pref": "三重県",
+      "areaName": "三重県",
+      "value": 740.02
+    },
+    {
+      "pref": "神奈川県",
+      "areaName": "神奈川県",
+      "value": 735.67
+    },
+    {
+      "pref": "愛知県",
+      "areaName": "愛知県",
+      "value": 734.06
+    },
+    {
+      "pref": "秋田県",
+      "areaName": "秋田県",
+      "value": 703.2
+    },
+    {
+      "pref": "大阪府",
+      "areaName": "大阪府",
+      "value": 699.14
+    },
+    {
+      "pref": "奈良県",
+      "areaName": "奈良県",
+      "value": 696.07
+    },
+    {
+      "pref": "京都府",
+      "areaName": "京都府",
+      "value": 677.17
+    },
+    {
+      "pref": "北海道",
+      "areaName": "北海道",
+      "value": 674.61
+    },
+    {
+      "pref": "新潟県",
+      "areaName": "新潟県",
+      "value": 670.43
+    },
+    {
+      "pref": "熊本県",
+      "areaName": "熊本県",
+      "value": 665.51
+    },
+    {
+      "pref": "長野県",
+      "areaName": "長野県",
+      "value": 662.66
+    },
+    {
+      "pref": "富山県",
+      "areaName": "富山県",
+      "value": 662.41
+    },
+    {
+      "pref": "鳥取県",
+      "areaName": "鳥取県",
+      "value": 660.84
+    },
+    {
+      "pref": "福井県",
+      "areaName": "福井県",
+      "value": 656.96
+    },
+    {
+      "pref": "愛媛県",
+      "areaName": "愛媛県",
+      "value": 642.85
+    },
+    {
+      "pref": "静岡県",
+      "areaName": "静岡県",
+      "value": 641.85
+    },
+    {
+      "pref": "和歌山県",
+      "areaName": "和歌山県",
+      "value": 635.19
+    },
+    {
+      "pref": "福岡県",
+      "areaName": "福岡県",
+      "value": 634.89
+    },
+    {
+      "pref": "青森県",
+      "areaName": "青森県",
+      "value": 628.36
+    },
+    {
+      "pref": "香川県",
+      "areaName": "香川県",
+      "value": 619.82
+    },
+    {
+      "pref": "佐賀県",
+      "areaName": "佐賀県",
+      "value": 619.09
+    },
+    {
+      "pref": "群馬県",
+      "areaName": "群馬県",
+      "value": 611.27
+    },
+    {
+      "pref": "茨城県",
+      "areaName": "茨城県",
+      "value": 606.23
+    },
+    {
+      "pref": "宮城県",
+      "areaName": "宮城県",
+      "value": 597.59
+    },
+    {
+      "pref": "滋賀県",
+      "areaName": "滋賀県",
+      "value": 591.31
+    },
+    {
+      "pref": "岡山県",
+      "areaName": "岡山県",
+      "value": 584.23
+    },
+    {
+      "pref": "栃木県",
+      "areaName": "栃木県",
+      "value": 583.67
+    },
+    {
+      "pref": "鹿児島県",
+      "areaName": "鹿児島県",
+      "value": 581.75
+    },
+    {
+      "pref": "沖縄県",
+      "areaName": "沖縄県",
+      "value": 561.64
+    },
+    {
+      "pref": "山口県",
+      "areaName": "山口県",
+      "value": 545.36
+    },
+    {
+      "pref": "福島県",
+      "areaName": "福島県",
+      "value": 545.34
+    },
+    {
+      "pref": "広島県",
+      "areaName": "広島県",
+      "value": 532.95
+    },
+    {
+      "pref": "徳島県",
+      "areaName": "徳島県",
+      "value": 529.73
+    },
+    {
+      "pref": "岐阜県",
+      "areaName": "岐阜県",
+      "value": 524.6
+    },
+    {
+      "pref": "山梨県",
+      "areaName": "山梨県",
+      "value": 516.54
+    },
+    {
+      "pref": "島根県",
+      "areaName": "島根県",
+      "value": 514.58
+    },
+    {
+      "pref": "大分県",
+      "areaName": "大分県",
+      "value": 487.98
+    },
+    {
+      "pref": "宮崎県",
+      "areaName": "宮崎県",
+      "value": 481.06
+    },
+    {
+      "pref": "長崎県",
+      "areaName": "長崎県",
+      "value": 406.17
+    }
+  ]
+}

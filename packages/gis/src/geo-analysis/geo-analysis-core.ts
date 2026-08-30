@@ -7,8 +7,32 @@ export interface PopulationMeshPoint {
   readonly latitude: number;
   readonly population2020: number;
   readonly population2050: number;
+  readonly bounds?: readonly [west: number, south: number, east: number, north: number];
   floodDepthClass?: number;
   isStationAccessible?: boolean;
+}
+
+/** 8桁の第3次地域区画コードから約1kmメッシュ境界を復元する。 */
+export function mesh1000BoundsFromCode(
+  meshCode: string,
+): readonly [west: number, south: number, east: number, north: number] | null {
+  if (!/^\d{8}$/.test(meshCode)) return null;
+  const latitudeBand = Number(meshCode.slice(0, 2));
+  const longitudeBand = Number(meshCode.slice(2, 4));
+  const latitudeSecond = Number(meshCode[4]);
+  const longitudeSecond = Number(meshCode[5]);
+  const latitudeThird = Number(meshCode[6]);
+  const longitudeThird = Number(meshCode[7]);
+  const south =
+    latitudeBand / 1.5 +
+    latitudeSecond * (2 / 3 / 8) +
+    latitudeThird * (2 / 3 / 8 / 10);
+  const west =
+    100 +
+    longitudeBand +
+    longitudeSecond * (1 / 8) +
+    longitudeThird * (1 / 8 / 10);
+  return [west, south, west + 1 / 80, south + 1 / 120];
 }
 
 export interface RankedAreaRow {

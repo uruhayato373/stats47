@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "fishery-workers",
+  "year": "2023",
+  "unit": "人",
+  "label": "漁業就業者数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/fishery-workers/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fishery-workers-prefecture-gap --keys fishery-workers --with-map",
+  "fetchedAt": "2026-08-30T06:14:26.938Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

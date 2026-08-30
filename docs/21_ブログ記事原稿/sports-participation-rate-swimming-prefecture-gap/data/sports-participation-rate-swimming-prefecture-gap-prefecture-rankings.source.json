@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sports-participation-rate-swimming",
+  "year": "2021",
+  "unit": "％",
+  "label": "水泳の行動者率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/sports-participation-rate-swimming/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug sports-participation-rate-swimming-prefecture-gap --keys sports-participation-rate-swimming --data-name sports-participation-rate-swimming-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:22.637Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

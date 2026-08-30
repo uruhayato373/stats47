@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "manufacturing-industry-added-value",
+  "year": "2023",
+  "unit": "百万円",
+  "label": "製造業付加価値額",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/manufacturing-industry-added-value/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug manufacturing-industry-added-value-prefecture-gap --keys manufacturing-industry-added-value --with-map",
+  "fetchedAt": "2026-08-30T06:14:30.500Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

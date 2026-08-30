@@ -104,6 +104,8 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
 | `number` | 数値3つ以上を冒頭列挙→最大格差強調→ランキングURL | ranking-card | 150 | weekday-07-09 | 数字の羅列で驚かせる。通勤帯で保存 |
 | `angle-experience` | もし〇〇県に住んでいたら→感情描写→あなたの県は? | ranking-card | 150 | weekday-21-23 | 個人化・感情移入。返信誘発 |
 | `angle-howto` | このデータを使う3ステップ→試して | ranking-card | 160 | weekend-09-11 | 実用価値。週末に保存・試行 |
+| `theme-lens` | 1順位では見えない論点→複数指標を横断→テーマページ誘導 | theme-overview-card | 150 | weekday-18-20 | 複数指標を同じ主題で読む。テーマ集客専用 |
+| `area-profile` | 県名→固有のシンボル/特産→県データブック誘導 | area-profile-card | 150 | weekday-12-13 | 1県を多面的に読む。エリア集客専用 |
 | `quote-rt` | 引用元の主張を統計で肯定/否定/深掘り1-2文 | none | 140 | any | 引用RT (find-quote-rt 経由。バッチ対象外) |
 <!-- x-catalog:templates:end -->
 
@@ -238,11 +240,16 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
 | tile-map | 1080x1080 | Remotion `RankingX-ChoroplethMap` (render-sns-stills) | `.local/r2/sns/ranking/<key>/x/stills/choropleth-map-1200x630.png` | ★既知の不整合: ラベルは 1200x630 だが実 canvas 1080x1080。修正は別タスク |
 | scatter | 1200x630 | Remotion `CorrelationX-Scatter` (render-sns-stills) | `.local/r2/sns/correlation/<x>--<y>/x/stills/scatter-1200x630.png` | 相関散布図 (correlation domain のみ) |
 | compare | 1200x630 | Remotion `CompareX-Post` (render-sns-stills) | `.local/r2/sns/compare/<a>-vs-<b>/x/stills/comparison-1200x630.png` | 2地域比較 (compare domain のみ) |
+| geo-insight-card | 1080x1350 | Remotion `GeoX-InsightCard` (`/operate-geo-content`) | `.local/r2/sns/geo/<key>/x/stills/<key>.png` | Geo空間分析専用。地図主役・layer×operation・出典SHA必須 |
+| theme-overview-card | 1200x630 | theme Open Graph route (`/themes/<key>/opengraph-image`) | `.local/r2/sns/theme/<key>/x/stills/<key>.png` | テーマ専用。複数指標を束ねる着地ページの画像 |
+| area-profile-card | 1200x630 | area Open Graph asset (`app/areas/<code>/ogp/ogp.png`) | `.local/r2/sns/area/<key>/x/stills/<key>.png` | エリア専用。1県のデータブック着地画像 |
 | none | — | — | — | 画像なし (quote-rt 等テキスト投稿) |
 <!-- x-catalog:imagekinds:end -->
 
 - **量産の既定は `ranking-card`** (quick-still.ts で決定的・数秒生成)。tile-map/scatter/compare は
   Remotion レンダが要るため瞬発量産には重い (バッチは ranking-card を主軸に、多様性のため一部 tile-map)。
+- **Geoは一般量産の対象外**。`domain=geo`は`/operate-geo-content`だけで生成し、ranking-card/tile-mapを
+  流用しない。15件構成はbaseline 3 / spatial cross 9 / method 2 / decision 1を機械検証する。
 - SVG→PNG 変換は `.claude/scripts/lib/svg-to-png.cjs` に一本化 (sharp 失敗時は exit≠0 で確実化)。
 
 ### 2-10. カタログ改訂手順 (★人間承認ゲート)
@@ -295,6 +302,9 @@ SNS 投稿の stats47.jp リンクには UTM を付ける。note は付けない
 | ranking | `https://stats47.jp/ranking/<rankingKey>` |
 | compare | `https://stats47.jp/compare?areas=<areaA>,<areaB>&cat=<categoryKey>` |
 | correlation | `https://stats47.jp/correlation?x=<keyX>&y=<keyY>` |
+| geo | `https://stats47.jp/geo/<analysisSlug>`（複数分析の統合は`/geo`） |
+| theme | `https://stats47.jp/themes/<themeKey>` |
+| area | `https://stats47.jp/areas/<areaCode>` |
 
 ### パラメータ
 
@@ -302,7 +312,7 @@ SNS 投稿の stats47.jp リンクには UTM を付ける。note は付けない
 |---|---|
 | `utm_source` | `x` / `instagram` / `youtube` |
 | `utm_medium` | `social` |
-| `utm_campaign` | ranking: `<rankingKey>` / compare: `compare-<areaA>-vs-<areaB>` / correlation: `correlation-<keyX>--<keyY>` |
+| `utm_campaign` | ranking: `<rankingKey>` / compare: `compare-<areaA>-vs-<areaB>` / correlation: `correlation-<keyX>--<keyY>` / geo: `<analysis contentId>` / theme: `theme-<themeKey>` / area: `area-<areaCode>` |
 | `utm_content` | `<template>` (例: `shock`, `paradox`) |
 
 例:
@@ -323,9 +333,10 @@ https://stats47.jp/ranking/taxable-income-per-capita
 |---|---|---|---|---|
 | **X (量産)** | `post-x-batch` (候補選定→画像→執筆→lint→draft 登録) | quick-still (ranking-card) | `publish-x --from-queue` (ローカル) → `mark-sns-posted` | `update-sns-metrics` → `analyze-x-winning-patterns` |
 | **X (瞬発)** | `find-quote-rt` / `react-to-news` | (キャプション) | `publish-x` → `mark-sns-posted` | `update-sns-metrics` |
+| **X (Geo地域分析)** | `operate-geo-content` (問い・layer・operation・role契約) | `GeoX-InsightCard` → PNG/source SHA監査 → draft同期 | ユーザー明示時だけagentが`publish-x` | `update-sns-metrics` + Geo landing events |
 | **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) | `render-sns-stills` | `post-instagram` (GHA cron) → `record-posted.cjs` | `update-sns-metrics` |
 | **YouTube pilot** | EXP-006 の brief → `article-writer` が構成・台本・出典表 | NLE で通常動画を編集 (`chart-author` / Remotion は図表素材のみ) | 人間が事実確認 → YouTube Studio へ手動投稿 → `sns-posts-store.cjs` で記録 | Studio の 30秒維持率・平均視聴率・視聴数を14日後に手動記録 + GA4 YouTube UTM |
-| **buzz-map (X/IG 横断)** | curated catalog (`build-buzz-map-catalog.ts --next`・正典 `buzz-map-standards.md` §4-5) | `prepare-buzz-map-batch.ts` (dry-run 既定・landing contract+isPostable ゲート→R2→draft) / admin `/buzz-map` | 既存 guarded flow (`publish-x` / IG cron — draft からの昇格は人間判断) | `buzz-map-attribution.mjs` (campaign 別) → score 還流 |
+| **buzz-map (X/IG 横断)** | curated catalog (`build-buzz-map-catalog.ts --next`・正典 `buzz-map-standards.md` §4-5) | agentが`prepare-buzz-map-batch.ts` (landing contract+isPostable→R2→draft)を実行。adminは閲覧のみ | 既存 guarded flow (`publish-x` / IG cron — draft からの昇格は人間判断) | `buzz-map-attribution.mjs` (campaign 別) → score 還流 |
 
 - **buzz-map の deep-click 計測は要ユーザー操作 (GA4 custom dimension)**: `buzz-map-attribution.mjs` は
   session KPI (landing session / engagement / SNS CTR は attribution=direct のみ) を campaign 別に取得するが、
@@ -347,29 +358,30 @@ https://stats47.jp/ranking/taxable-income-per-capita
 
 ## 5.5 統合メディアコンソール (`/admin-console`) と R2 素材保持ポリシー
 
-素材の目視確認 (動画再生)・caption 微調整・投稿/予約・メトリクス閲覧は
-**ローカル統合メディアコンソール** (`npm run admin` → http://127.0.0.1:4747/) で行える
+素材・caption・投稿状態・メトリクス・Geo分析契約は
+**ローカル統合メディアコンソール** (`npm run admin` → http://127.0.0.1:4747/) で読み取れる。
+コンソールは完全read-onlyで、caption編集・draft登録・予約・即時投稿・dry-run・レンダ・R2 push・再生成を行わない
 (skill `.agents/skills/management/admin-console/SKILL.md`、実装 `apps/admin/` — 独立 Next.js App Router アプリ、
 localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装から完全移管、`sns:gallery` alias 廃止)。
 全チャネルの制作・公開状態は `/content`、参考文献からサイト・ブログ・note・Kindleへの展開状況は
-`/content/references`、X / Instagramの投稿操作は `/content/{x,instagram}` または共通 `/sns`、OGP/リンクカード/note カバー・
+`/content/references`、X / Instagramの投稿確認は `/content/{x,instagram}` または共通 `/sns`、Geo契約は`/strategy`、OGP/リンクカード/note カバー・
 記事内画像/動画 master は `/assets`、ブログ SVG カタログは `/svg`、**プロジェクト現況 (メトリクス・進捗キュー・
 改善バックログ TODO・STP 戦略) は `/dashboard`** で横断閲覧する
 (画像資産の列挙 collector は CI 静的ギャラリー `build-image-gallery.mjs` と `.claude/scripts/lib/gallery-collectors.mjs` を共用。
 現況 collector は `apps/admin/lib/server/dashboard.ts`、state/md を読み取り専用ミラーでライブ読み)。
 
-- **ギャラリー経由の投稿も台帳規約は同一**: posts.json への書込は `sns-posts-store.cjs` 経由のみ
-  (server も同経路)。§1 の頻度リミットは残枠バッジ + ガードで enforce される
+- **管理画面からは投稿しない**: posts.jsonへの書込、投稿、予約、素材生成はowner agent/skillだけが行う。
+  admin serverはread methodだけを公開し、API routeはGETだけに固定する。§1の残枠は表示し、enforceは投稿agentが担う
 - **コンテンツ運用画面は派生 read model**: `/content` はposts.json、note git TS catalog + R2本文、Kindle
   book-catalog/manuscripts + kdp-listingsをライブ突合する。`/content/references`は解決済み参考文献inventoryを
   metric / area単位へ重複排除し、各コンテンツSSOTの実在証跡と突合する。統合用の別SSOTや永続DBを作らない。
   `npm run audit:content-operations` をPRでblocking実行し、個別制作物をTODOカードへ複製しない
   (`K-Sx-xx` / `NOTE-ARTICLE-*` / `SNS-POST-*` 等の個別カードは監査error)。backlogには
   システム不具合・自動化・チャネル横断の意思決定だけを置く
-- **draft レコード運用**: 未投稿素材は `status=draft` で台帳に登録して管理する (新 manifest は作らない)。
-  R2 にあるが台帳に無い素材は画面の「R2 探索」(HEAD probe) → draft 登録で回収
-- **IG 予約の二重書込**: ギャラリーの「IG 予約登録」は schedule JSON + posts.json (scheduled) を
-  同一ハンドラで同時書込する。不整合は `GET /api/ig-consistency` が検出
+- **draft レコード運用**: 未投稿素材はagentがstore経由で`status=draft`として登録する (新 manifest は作らない)。
+  管理画面は未登録素材や不整合を表示するだけで回収処理を実行しない
+- **IG予約**: schedule JSON + posts.jsonの更新はinstagram-strategist側で実行する。
+  管理画面は`GET /api/ig-consistency`で不整合だけを表示する
 - **IG cron の schedule ファイルは自動選択** (2026-07-07〜): `post-from-schedule.cjs` は
   `instagram-w*-schedule.json` から当日エントリを含む週ファイルを自動選択する。
   旧実装は特定週固定で更新忘れ→ cron 空振り事故が実発生 (w20 期間に w19 を読み続け 1 ヶ月未投稿)

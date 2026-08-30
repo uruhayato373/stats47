@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "per-capita-fixed-asset-tax-pref-municipal",
+  "year": "2022",
+  "unit": "千円",
+  "label": "固定資産税",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/per-capita-fixed-asset-tax-pref-municipal/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug per-capita-fixed-asset-tax-pref-municipal-prefecture-gap --keys per-capita-fixed-asset-tax-pref-municipal --with-map",
+  "fetchedAt": "2026-08-30T06:14:47.869Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

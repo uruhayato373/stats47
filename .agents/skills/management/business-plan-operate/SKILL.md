@@ -48,7 +48,7 @@ primary_agent: strategy-advisor
 | 公開サイトIA・地域分析テンプレ | site-ux-manager |
 | GISメタ・データセット採用 | gis-curator / open-data-curator |
 | 観測値・変換・品質 | data-ingester / gis-pipeline-runner |
-| X / note | x-strategist / note-manager |
+| Geo X / note | x-strategist (`/operate-geo-content`) / note-manager |
 | Affiliate / 商品 | affiliate-manager / coconala-product-manager |
 | GA4・実測 | ga4-analyst / adsense-analyst |
 | デプロイ | devops-runner（ユーザー明示承認が必要） |

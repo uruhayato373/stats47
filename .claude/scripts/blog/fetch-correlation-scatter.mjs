@@ -22,6 +22,7 @@ const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const METRICS_DIR = path.join(PROJECT_ROOT, "packages/data-configs/src/metrics");
+const PREFECTURES_JSON = path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json");
 
 const args = process.argv.slice(2);
 const getArg = (flag, fallback = null) => {
@@ -38,6 +39,10 @@ if (!SLUG || !BASE || !PAIR) {
   process.exit(1);
 }
 const DATA_NAME = getArg("--data-name", `${BASE}--${PAIR}`);
+// --exclusion-reason: 47県に満たない散布図で「なぜその県が対象外か」を明示する。
+//   除外理由は指標の意味からしか決まらないので、スクリプトが推測して書くことはしない
+//   (excludedAreas を理由なしで書くと svg-lint がその場で error にする)。
+const EXCLUSION_REASON = getArg("--exclusion-reason", null);
 
 // metric config から title/unit を引く (regex 軽量読み。unit は values.json rows にもあるが config が正典)
 function metricMeta(key) {
@@ -83,6 +88,19 @@ async function main() {
     points,
   };
 
+  // 47県に満たない散布図は、欠損なのか構造的な対象外なのかを source.json で言い分ける。
+  // (内陸県に漁港が無い、のような対象外は正当だが、暗黙の欠損と区別が付かないため明示する)
+  const allPrefectures = JSON.parse(fs.readFileSync(PREFECTURES_JSON, "utf8")).map((p) => p.prefName);
+  const present = new Set(points.map((p) => p.label));
+  const excludedAreas = allPrefectures.filter((name) => !present.has(name));
+  if (excludedAreas.length > 0 && !EXCLUSION_REASON) {
+    console.error(
+      `[error] ${points.length} 点しかなく ${excludedAreas.length} 県が欠けている: ${excludedAreas.join("、")}\n` +
+        `        構造的な対象外なら --exclusion-reason "<理由>" で明示する。理由をスクリプトが推測して書くことはしない。`,
+    );
+    process.exit(1);
+  }
+
   const source = {
     kind: "correlation",
     base: BASE,
@@ -92,7 +110,10 @@ async function main() {
     unit: `${baseMeta.unit} × ${pair.unit || ""}`,
     label: scatter.title,
     source: `r2:app/correlation/by-ranking-key/${BASE}.json`,
-    restore: `node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug ${SLUG} --base ${BASE} --pair ${PAIR} --data-name ${DATA_NAME}`,
+    restore: `node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug ${SLUG} --base ${BASE} --pair ${PAIR} --data-name ${DATA_NAME}${EXCLUSION_REASON ? ` --exclusion-reason ${JSON.stringify(EXCLUSION_REASON)}` : ""}`,
+    ...(excludedAreas.length > 0
+      ? { excludedAreas, exclusionReason: EXCLUSION_REASON, expectedPointCount: points.length }
+      : {}),
   };
 
   const outDir = path.join(PROJECT_ROOT, BASE_DIR, SLUG, "data");

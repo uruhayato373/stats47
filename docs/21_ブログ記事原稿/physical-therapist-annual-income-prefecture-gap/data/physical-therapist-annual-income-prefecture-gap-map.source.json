@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "physical-therapist-annual-income",
+  "year": "2022",
+  "unit": "万円",
+  "label": "理学療法士等の平均年収",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/physical-therapist-annual-income/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug physical-therapist-annual-income-prefecture-gap --keys physical-therapist-annual-income --with-map",
+  "fetchedAt": "2026-08-30T06:14:11.091Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

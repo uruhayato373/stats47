@@ -220,9 +220,11 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
 - **landing router / contract**: 企画→着地の判定は `lib/buzz-map-router-core.mjs`（判定順: 既存ranking→既存blog→
   theme→新規、readiness は live 実測で確定）、SNS と landing の整合検証は `lib/buzz-map-contract-core.mjs`
   （live 200 / canonical クリーン / noindex なし / requiredTerms / metricKeys / 年次）。**contract pass 前の draft 登録は禁止**
-- **管理画面は gallery `/buzz-map`**（`npm run admin` → http://127.0.0.1:4747/buzz-map）: catalog 横断表示
-  (filter/score/evidence/landing/素材 preview) + 操作 job (landing 再判定/spec 生成/レンダ/R2 push/draft 登録 —
-  後ろ 2 つは確認ダイアログ + isPostable ゲート)。実投稿・予約は既存 `/sns` 画面に委ねる
+- **管理画面はread-only gallery `/buzz-map`**（`npm run admin` → http://127.0.0.1:4747/buzz-map）:
+  catalog横断表示 (filter/score/evidence/landing/素材preview) だけを提供する。landing再判定/spec生成/
+  レンダ/R2 push/draft登録/投稿/予約は管理画面から実行せず、`/buzz-map`と各配信skillのagentが担う
+- **Geo地域分析とは別ドメイン**: buzz-mapは分布を直感把握する地図カード。複数layerの空間演算と
+  意思決定説明を価値とするGeo投稿は`/operate-geo-content`の`GeoX-InsightCard`を使い、相互流用しない
 - **計測**: `buzz-map-attribution.mjs` が sessionCampaign `buzz-map-*` を campaign 別集計 → `buzz-map-attribution-latest.json` → score 還流入力
   (`buildScoreFeedback`・session 0 は加点 0)。**deep-click (cta_click の content_id/target_type) は GA4 管理画面で
   custom dimension (イベントスコープ) の登録が必要**（affiliate と同手順・未登録の間は session KPI のみ）

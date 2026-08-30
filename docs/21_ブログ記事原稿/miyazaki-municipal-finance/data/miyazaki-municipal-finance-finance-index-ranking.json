@@ -1,0 +1,221 @@
+{
+  "title": "宮崎県の市町村別 財政力指数",
+  "subtitle": "2024年度",
+  "label": "財政力指数",
+  "unit": "",
+  "year": "2024",
+  "source": "総務省 地方財政状況調査 (決算カード)",
+  "palette": "blue",
+  "decimalPlaces": 2,
+  "generatedBy": "fetch-municipal-finance.mjs",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "木城町",
+      "pref": "木城町",
+      "value": 0.75,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 2,
+      "areaName": "宮崎市",
+      "pref": "宮崎市",
+      "value": 0.69,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 3,
+      "areaName": "日向市",
+      "pref": "日向市",
+      "value": 0.56,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 4,
+      "areaName": "都城市",
+      "pref": "都城市",
+      "value": 0.55,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 5,
+      "areaName": "延岡市",
+      "pref": "延岡市",
+      "value": 0.53,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 6,
+      "areaName": "高鍋町",
+      "pref": "高鍋町",
+      "value": 0.53,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 7,
+      "areaName": "三股町",
+      "pref": "三股町",
+      "value": 0.45,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 8,
+      "areaName": "国富町",
+      "pref": "国富町",
+      "value": 0.45,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 9,
+      "areaName": "新富町",
+      "pref": "新富町",
+      "value": 0.45,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 10,
+      "areaName": "川南町",
+      "pref": "川南町",
+      "value": 0.45,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 11,
+      "areaName": "門川町",
+      "pref": "門川町",
+      "value": 0.42,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 12,
+      "areaName": "日南市",
+      "pref": "日南市",
+      "value": 0.4,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 13,
+      "areaName": "小林市",
+      "pref": "小林市",
+      "value": 0.39,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 14,
+      "areaName": "西都市",
+      "pref": "西都市",
+      "value": 0.39,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 15,
+      "areaName": "えびの市",
+      "pref": "えびの市",
+      "value": 0.36,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 16,
+      "areaName": "串間市",
+      "pref": "串間市",
+      "value": 0.32,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 17,
+      "areaName": "都農町",
+      "pref": "都農町",
+      "value": 0.3,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 18,
+      "areaName": "高原町",
+      "pref": "高原町",
+      "value": 0.27,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 19,
+      "areaName": "綾町",
+      "pref": "綾町",
+      "value": 0.27,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 20,
+      "areaName": "諸塚村",
+      "pref": "諸塚村",
+      "value": 0.27,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 21,
+      "areaName": "高千穂町",
+      "pref": "高千穂町",
+      "value": 0.25,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 22,
+      "areaName": "美郷町",
+      "pref": "美郷町",
+      "value": 0.19,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 23,
+      "areaName": "椎葉村",
+      "pref": "椎葉村",
+      "value": 0.18,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 24,
+      "areaName": "日之影町",
+      "pref": "日之影町",
+      "value": 0.17,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 25,
+      "areaName": "五ケ瀬町",
+      "pref": "五ケ瀬町",
+      "value": 0.15,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 26,
+      "areaName": "西米良村",
+      "pref": "西米良村",
+      "value": 0.14,
+      "label": "財政力指数",
+      "unit": ""
+    }
+  ]
+}

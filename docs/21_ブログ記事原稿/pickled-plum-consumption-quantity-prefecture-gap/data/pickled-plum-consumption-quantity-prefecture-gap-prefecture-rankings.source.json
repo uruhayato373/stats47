@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "pickled-plum-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "梅干し消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/pickled-plum-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug pickled-plum-consumption-quantity-prefecture-gap --keys pickled-plum-consumption-quantity --data-name pickled-plum-consumption-quantity-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:12.741Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

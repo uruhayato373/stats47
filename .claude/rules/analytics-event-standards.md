@@ -104,6 +104,9 @@ npm run google-admin:audit-api
 | `geo_map_interaction` | `trackGeoMapInteraction` | 上記共通4項目 / `interaction_type` / `area_code` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
 | `geo_region_select` | `trackGeoRegionSelect` | 上記共通4項目 / `area_code` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
 | `geo_compare_add` | `trackGeoCompareAdd` | 上記共通4項目 / `area_code` / `comparison_size` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
+
+`geo_map_interaction.interaction_type`は県地図の`select-prefecture` / `clear-prefecture`に加え、
+Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`を許可する。自由入力値は送らない。
 | `year_change` / `area_type_change` | `trackYear*` / `trackAreaType*` | `ranking_key` ほか（分析頻度低・登録は任意） | 任意 | ranking |
 | `search` | `trackSearch` | `search_term` は GA4 推奨イベント標準（要否×） | 要否× | 検索 |
 | `share` | `trackShare` | `method` / `content_type` / `item_id` は GA4 標準（要否×） | 要否× | 共有 |

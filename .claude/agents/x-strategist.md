@@ -22,6 +22,8 @@ X (Twitter) アカウント「統計で見る都道府県 | stats47」の投稿�
 | スキル | 用途 |
 |---|---|
 | `/post-x-batch` | **X 定型投稿の量産 (主力)**。候補選定→画像→執筆→lint→draft 登録の 5 フェーズ。週次 14-21 本 |
+| `/operate-geo-content` | **Geo専用投稿**。空間分析契約→Geo専用画像→出典SHA→draft同期。一般ランキング量産へ混ぜない |
+| `/operate-site-x-drafts` | **サイト集客投稿**。theme/areaの実在着地→専用OGP→SHA/URL/lint→draft登録。Geo・rankingとは分離 |
 | `/post-x` | X 投稿を 1 本生成 (post-x-batch の N=1 ラッパー) |
 | `/publish-x` | Playwright で X 予約/即時投稿。`--from-queue` で draft キューを消化 (ローカル専用) |
 | `/fetch-x-data` | X API v2 からメトリクス取得（インプレッション・いいね・RT） |
@@ -32,7 +34,9 @@ X (Twitter) アカウント「統計で見る都道府県 | stats47」の投稿�
 
 ## 週次量産ループ (★本エージェントのオーナーシップ)
 
-X の主戦は**ランキング定型のストック量産**。以下を週次で回す (頻度・型・画像は §1/§2 が SSOT):
+X の主戦は**ランキング定型のストック量産**。Geo投稿はこのループの対象外で、
+`.agents/skills/sns/operate-geo-content/SKILL.md` の専用フローだけを使う。
+以下を週次で回す (頻度・型・画像は §1/§2 が SSOT):
 
 ```
 ① 生成 (クラウド可): /post-x-batch --count <14-21>
@@ -174,6 +178,8 @@ category → template の割付は §2-8 相性表。post-x-batch の select-can
 | シナリオ | フロー |
 |---|---|
 | **量産 (主力)** | `/post-x-batch --count 14-21`（候補選定→画像→執筆→lint→draft）→ x-strategist（draft 確認）→ ローカル `/publish-x --from-queue`（予約）→ `promote-scheduled-x`（posted 昇格） |
+| **Geo地域分析** | `/operate-geo-content`（3/9/2/1契約→Geo専用render→SHA監査→draft同期）→ ユーザー明示時のみ `/publish-x` |
+| **テーマ・エリア集客** | `/operate-site-x-drafts`（catalog→landing/画像監査→caption lint→draft）→ ユーザー明示時のみ `/publish-x` |
 | トレンド連動投稿 | x-strategist（トレンド検知 + データマッチング）→ `/react-to-news`（quick-still）→ `/publish-x`（即時投稿） |
 | 引用 RT | `/find-quote-rt`（候補検索 + 照合）→ x-strategist（候補選定）→ `/publish-x --quote-url`（引用 RT 投稿、opt-in 動画添付）→ sns-metrics-sync（記録は publish-x が INSERT、後日 metrics） |
 | 週次運用 | `/sns-weekly-plan`（strategy-advisor 起点）→ `/post-x-batch`（量産）→ ローカル `/publish-x --from-queue` |
@@ -183,6 +189,7 @@ category → template の割付は §2-8 相性表。post-x-batch の select-can
 ## OGP・画像生成の役割分担
 
 - **X 投稿のデータ画像（ランキング・比較・BCR）** → sns-renderer の Remotion レンダリング
+- **Geo地域分析（複数レイヤー×空間演算）** → `/operate-geo-content` の `GeoX-InsightCard`。ranking-card/buzz-mapの単純流用は禁止
 - **X バナー・プロフィール固定画像・ブランド素材** → `/image-prompt` スキル（`--use-case x-banner` で 3:1 自動適用）
 - **バズ地図カード（日本地図×統計）** → sns-renderer の `/buzz-map` が生成（型・仕様の SSOT は `.claude/rules/buzz-map-standards.md`）。本エージェントは co-owner として X 配信を担うが、**buzz-map を X 画像カタログ (§2-9 image_kind) に載せる改訂は §2-10 の人間承認ゲート経由**（未実施。現状 buzz-map は IG draft 在庫のみ）
 - **stats47 サイトの OGP** → 本エージェントは触らない（blog-editor / seo-auditor の領分）

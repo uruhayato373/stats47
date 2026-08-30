@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "airport-count",
+  "pair": "wind-power-plant-count-facility",
+  "pearsonR": 0.6573950890484175,
+  "partialRPopulation": 0.6598356173924952,
+  "unit": "か所 × か所",
+  "label": "空港数 と 風力発電施設数（施設ベース） の関係",
+  "source": "r2:app/correlation/by-ranking-key/airport-count.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug airport-count-vs-wind-power-plant-count-facility --base airport-count --pair wind-power-plant-count-facility --data-name airport-count--wind-power-plant-count-facility"
+}

@@ -78,6 +78,54 @@ describe('middleware Workers Cache headers', () => {
   });
 });
 
+describe('Geo X旧ハブURLのlanding移行', () => {
+  const originalNext = NextResponse.next;
+
+  beforeAll(() => {
+    NextResponse.next = () => new NextResponse();
+  });
+
+  afterAll(() => {
+    NextResponse.next = originalNext;
+  });
+
+  function request(query: string): NextRequest {
+    const nextRequest = new NextRequest(`https://stats47.jp/geo?${query}`);
+    Object.defineProperty(nextRequest, 'nextUrl', {
+      value: new URL(nextRequest.url),
+    });
+    return nextRequest;
+  }
+
+  test('意思決定投稿を1県4問比較へUTM付きで移す', () => {
+    const response = middleware(
+      request(
+        'utm_source=x&utm_medium=social&utm_campaign=geo-001&utm_content=angle-experience',
+      ),
+    );
+
+    expect(response.status).toBe(301);
+    expect(response.headers.get('location')).toBe(
+      'https://stats47.jp/geo/compare?utm_source=x&utm_medium=social&utm_campaign=geo-001&utm_content=angle-experience',
+    );
+  });
+
+  test('方法投稿を方法・限界ページへ移す', () => {
+    const response = middleware(
+      request(
+        'utm_source=x&utm_medium=social&utm_campaign=geo-016&utm_content=angle-howto',
+      ),
+    );
+
+    expect(response.status).toBe(301);
+    expect(response.headers.get('location')).toContain('/geo/method?');
+  });
+
+  test('通常のGeoハブ閲覧はリダイレクトしない', () => {
+    expect(middleware(request('utm_source=internal')).status).not.toBe(301);
+  });
+});
+
 describe('/japan の未登録スラッグは 410 (GEO-SCOPE-SEPARATION-01 WP5)', () => {
   const originalNext = NextResponse.next;
 

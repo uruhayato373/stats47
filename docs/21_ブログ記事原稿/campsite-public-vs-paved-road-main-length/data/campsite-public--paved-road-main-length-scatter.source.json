@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "campsite-public",
+  "pair": "paved-road-main-length",
+  "pearsonR": 0.819705474328394,
+  "partialRPopulation": 0.8170178694507475,
+  "unit": "施設 × km",
+  "label": "キャンプ場数（公共） と 舗装道路実延長（主要道路） の関係",
+  "source": "r2:app/correlation/by-ranking-key/campsite-public.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug campsite-public-vs-paved-road-main-length --base campsite-public --pair paved-road-main-length --data-name campsite-public--paved-road-main-length"
+}

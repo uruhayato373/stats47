@@ -32,11 +32,15 @@ Cell content: ≤ 12 words each. No prose before/after.
 - `.claude/rules/gis-data.md` と `packages/gis/src/mlit-ksj/README.md` の維持 (規約・モジュール設計/使い方)
 - **buzz-map (SNS 日本地図カード) への供給**: `datasets.ts` の `geometryType` (point/line/polygon/mesh) が buzz-map カタログの `renderClass`/`capability` 導出の入力になる (point→型C 点プロット / line→型D 線ネットワーク / polygon→型A 面塗り)。geometryType を正しく保つことが buzz-map の型分類の精度を決める。消費側の正典・カバレッジ表は `.claude/rules/buzz-map-standards.md` §4 (型 SSOT は §1)。KSJ 点/線データの spec 化は sns-renderer の `build-buzz-map-spec-ksj.ts`
   - **例外: R2 `gis/gsi-pni/` は KSJ ではない**。国土地理院 地名情報 (buzz-map の gsi レーン用の全国地名点) で、`datasets.ts` の管理外・`fetch-gsi-place-names.ts` (sns-renderer 領域) が取得・生成する。gis-curator は関与しない (gis/ 名前空間に居るが KSJ pipeline とは無関係)
+- **Geo地域分析への供給**: 公式データセットのgeometry・版・出典・coverageを確認し、
+  `geo-analysis-curator`へ渡す。分析のlayer role・stage・lineage・canonicalは同agentが所有する。
+  数値集計・交差・距離判定は決定的コードへ渡し、本agentやLLMは計算しない。
 
 ## 検証 (必須)
 
 ```bash
 npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # 件数・ranking 統合
+npm run geo:check-data-catalog                                               # URL・版・alias・実R2
 npx tsc --noEmit -p packages/gis/tsconfig.json                              # 型
 ```
 
@@ -47,6 +51,7 @@ npx tsc --noEmit -p packages/gis/tsconfig.json                              # �
 - e-Stat / MLIT DPF 探索 → `estat-researcher`
 - e-Stat 観測値投入 → `data-ingester`
 - snapshot 派生 → `snapshot-exporter`
+- Geo分析定義・途中artifact・lineage・保存則 → `geo-analysis-curator`
 
 ## 必読 rules
 
@@ -58,7 +63,8 @@ npx tsc --noEmit -p packages/gis/tsconfig.json                              # �
 ## 原則
 
 - **ローカル SQLite に手動 INSERT しない**。メタは必ず `datasets.ts` を編集して再 seed で反映する。
-- build state (r2_version / file_count / converted_at 等) は SSOT に持たない (pipeline が再生成)。
+- build state (version / file_count / bytes 等) はSSOTに持たず、実R2一覧からカタログ生成時に導出する。
+- 公式ページ探索型の期待アーカイブ数は `official-policy.ts` に固定し、R2完了manifest数との一致で完了判定する。
 - `name_en` は KSJ API 非提供のため空でよい (display 専用)。
 - 登録データセット一覧は `datasets.ts` (git TS) が真実源。手編集の生成表を SSOT にしない (旧 doc 04/generate-docs は 2026-07-12 廃止)。
 

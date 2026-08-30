@@ -6,7 +6,6 @@ import { Input, cn } from "@stats47/components";
 
 import { apiGet, ApiError } from "@/lib/client/api-client";
 import { ErrorState, Loading } from "@/components/async-state";
-import { JobDialog } from "@/components/job-dialog";
 import type { BuzzMapCatalogResponse, BuzzMapEntryDTO } from "@/lib/contracts/types";
 import { BuzzMapCard } from "./buzz-map-card";
 import { BuzzMapSummary } from "./buzz-map-summary";
@@ -58,8 +57,6 @@ export function BuzzMapView() {
   const [license, setLicense] = useState("");
   const [category, setCategory] = useState("");
   const [query, setQuery] = useState("");
-
-  const [activeJob, setActiveJob] = useState<{ id: string; title: string } | null>(null);
 
   const load = () => {
     setLoading(true);
@@ -168,8 +165,6 @@ export function BuzzMapView() {
               <BuzzMapCard
                 key={entry.ideaId || entry.metricKey}
                 entry={entry}
-                onChanged={load}
-                onJobStarted={(jobId, title) => setActiveJob({ id: jobId, title })}
               />
             ))}
           </div>
@@ -181,13 +176,6 @@ export function BuzzMapView() {
         </>
       )}
 
-      {activeJob ? (
-        <JobDialog
-          jobId={activeJob.id}
-          onClose={() => setActiveJob(null)}
-          onFinished={() => load()}
-        />
-      ) : null}
     </div>
   );
 }

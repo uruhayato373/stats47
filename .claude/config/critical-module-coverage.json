@@ -57,6 +57,22 @@
       "tests": ["src/__tests__/value-verification.test.ts"],
       "floor": { "lines": 100, "branches": 97.91, "functions": 100 },
       "measuredAt": "69c9521c34e79e86516871c9e0a2fd19059afba8"
+    },
+    {
+      "id": "link-audit-core",
+      "workspace": "packages/data-configs",
+      "module": "src/link-audit/link-check-core.ts",
+      "tests": ["src/link-audit/__tests__/link-check-core.test.ts"],
+      "floor": { "lines": 100, "branches": 93.75, "functions": 66.66 },
+      "measuredAt": "386c98abeeabd6441a4ebfe2f6f72b7a5027ae8c"
+    },
+    {
+      "id": "ranking-route-metadata",
+      "workspace": "apps/web",
+      "module": "src/features/ranking/utils/generate-meta-data.ts",
+      "tests": ["src/features/ranking/utils/__tests__/generate-meta-data.test.ts"],
+      "floor": { "lines": 100, "branches": 80, "functions": 100 },
+      "measuredAt": "386c98abeeabd6441a4ebfe2f6f72b7a5027ae8c"
     }
   ]
 }

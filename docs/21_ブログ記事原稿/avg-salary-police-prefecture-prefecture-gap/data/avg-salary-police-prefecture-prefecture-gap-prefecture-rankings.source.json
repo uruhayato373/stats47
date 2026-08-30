@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "avg-salary-police-prefecture",
+  "year": "2024",
+  "unit": "円",
+  "label": "警察職 平均給与月額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/avg-salary-police-prefecture/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug avg-salary-police-prefecture-prefecture-gap --keys avg-salary-police-prefecture --data-name avg-salary-police-prefecture-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T06:14:10.373Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

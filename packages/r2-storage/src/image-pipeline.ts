@@ -10,6 +10,7 @@ export interface StoredImageObject {
   body: Buffer;
   etag: string | null;
   contentType: string | null;
+  contentEncoding: string | null;
   contentLength: number | null;
   metadata: Record<string, string>;
 }
@@ -21,6 +22,7 @@ export interface ImageObjectStore {
     key: string;
     body: Buffer;
     contentType: string;
+    contentEncoding?: string;
     cacheControl: string;
     metadata: Record<string, string>;
     ifMatch?: string;
@@ -57,6 +59,7 @@ export function createS3ImageObjectStore(
           body: Buffer.from(await result.Body.transformToByteArray()),
           etag: result.ETag ?? null,
           contentType: result.ContentType ?? null,
+          contentEncoding: result.ContentEncoding ?? null,
           contentLength: result.ContentLength ?? null,
           metadata: result.Metadata ?? {},
         };
@@ -73,6 +76,7 @@ export function createS3ImageObjectStore(
         return {
           etag: result.ETag ?? null,
           contentType: result.ContentType ?? null,
+          contentEncoding: result.ContentEncoding ?? null,
           contentLength: result.ContentLength ?? null,
           metadata: result.Metadata ?? {},
         };
@@ -88,6 +92,7 @@ export function createS3ImageObjectStore(
           Key: options.key,
           Body: options.body,
           ContentType: options.contentType,
+          ContentEncoding: options.contentEncoding,
           CacheControl: options.cacheControl,
           Metadata: options.metadata,
           IfMatch: options.ifMatch,

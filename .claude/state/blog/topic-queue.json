@@ -3900,6 +3900,94 @@
       "lane": "experiment",
       "status": "pending",
       "priority": 0
+    },
+    {
+      "topicKey": "gap-lake-count",
+      "archetype": "A",
+      "metricKeys": [
+        "lake-count"
+      ],
+      "label": "湖沼数",
+      "suggestedTitle": "湖沼が多い県はどこ",
+      "source": "gis-ksj",
+      "scores": {},
+      "evidence": {
+        "note": "国土数値情報(KSJ)由来の指標を使う実験バッチ"
+      },
+      "combinedScore": 0.5,
+      "lane": "experiment",
+      "status": "pending"
+    },
+    {
+      "topicKey": "gap-roadside-station-count",
+      "archetype": "A",
+      "metricKeys": [
+        "roadside-station-count"
+      ],
+      "label": "道の駅数",
+      "suggestedTitle": "道の駅が多い県はどこ",
+      "source": "gis-ksj",
+      "scores": {},
+      "evidence": {
+        "note": "国土数値情報(KSJ)由来の指標を使う実験バッチ"
+      },
+      "combinedScore": 0.5,
+      "lane": "experiment",
+      "status": "pending"
+    },
+    {
+      "topicKey": "corr-roadside-station-count--forest-road-length",
+      "archetype": "B",
+      "metricKeys": [
+        "roadside-station-count",
+        "forest-road-length"
+      ],
+      "label": "道の駅数 × 林道延長 (r=0.91)",
+      "suggestedTitle": "道の駅が多い県は林道も長い?",
+      "source": "gis-ksj",
+      "scores": {},
+      "evidence": {
+        "note": "国土数値情報(KSJ)由来の指標を使う実験バッチ"
+      },
+      "combinedScore": 0.5,
+      "lane": "experiment",
+      "status": "pending"
+    },
+    {
+      "topicKey": "corr-dam-count--road-expressway-length",
+      "archetype": "B",
+      "metricKeys": [
+        "dam-count",
+        "road-expressway-length"
+      ],
+      "label": "ダム数 × 高速道路実延長 (r=0.69)",
+      "suggestedTitle": "ダムが多い県は高速道路も長い?",
+      "source": "gis-ksj",
+      "scores": {},
+      "evidence": {
+        "note": "国土数値情報(KSJ)由来の指標を使う実験バッチ"
+      },
+      "combinedScore": 0.5,
+      "lane": "experiment",
+      "status": "pending"
+    },
+    {
+      "topicKey": "corr-airport-count--wind-power-plant-count-facility",
+      "archetype": "B",
+      "metricKeys": [
+        "airport-count",
+        "wind-power-plant-count-facility"
+      ],
+      "label": "空港数 × 風力発電施設数 (r=0.66)",
+      "suggestedTitle": "空港が多い県は風力発電施設も多い?",
+      "source": "gis-ksj",
+      "scores": {},
+      "evidence": {
+        "note": "国土数値情報(KSJ)由来の指標を使う実験バッチ"
+      },
+      "combinedScore": 0.5,
+      "lane": "experiment",
+      "status": "pending"
     }
   ]
 }

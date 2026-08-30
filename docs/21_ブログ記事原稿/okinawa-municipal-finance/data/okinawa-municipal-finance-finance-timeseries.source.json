@@ -1,0 +1,15 @@
+{
+  "kind": "manual",
+  "prefCode": "47000",
+  "prefName": "沖縄県",
+  "year": "2024",
+  "sourceName": "総務省 地方財政状況調査 (決算カード)",
+  "source": "https://www.soumu.go.jp/iken/zaisei/card.html",
+  "upstream": "repo:apps/web/public/finance-cards/cities/47.json",
+  "restore": "node .claude/scripts/blog/fetch-municipal-finance.mjs --slug okinawa-municipal-finance --pref 47000 --year 2024 --from-year 2020 --data-name okinawa-municipal-finance",
+  "generatedBy": "fetch-municipal-finance.mjs",
+  "fetchedAt": "2026-08-30T08:04:10.261Z",
+  "label": "沖縄県の財政力指数の推移",
+  "unit": "",
+  "transform": "2020〜2024 年度。各年に観測できた団体の最大 / 中央値 / 最小"
+}

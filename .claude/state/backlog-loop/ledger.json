@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T23:22:31.719Z",
+  "updatedAt": "2026-08-29T21:49:42.025Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3355,38 +3355,15 @@
       "reclassifiedFrom": [],
       "completedAt": "2026-08-29T08:20:33.629Z"
     },
-    "CODEQL-JS-BACKLOG-01": {
-      "class": "test-fix",
+    "BLOG-REVIEW-AREA-RATIO-01": {
+      "class": "impl-small",
       "status": "completed",
       "sourceFile": null,
       "title": null,
       "attempts": [
         {
-          "at": "2026-08-29T22:38:27.411Z",
+          "at": "2026-08-29T21:49:42.025Z",
           "runId": null,
-          "model": "sonnet",
-          "effort": null,
-          "outcome": "deferred",
-          "turns": null,
-          "costUsd": null,
-          "gate": {
-            "commands": [
-              "VITE_CONFIG_NATIVE_IGNORE_WARNING=true npx vitest run apps/admin/tests/unit/jobs.test.ts apps/admin/tests/unit/actions.test.ts packages/r2-storage/src/lib/operations/__tests__/fetch-priority.test.ts",
-              "npm run test --workspace apps/admin",
-              "npx vitest run --project @stats47/r2-storage",
-              "npm run type-check --workspace apps/admin",
-              "npm run type-check --workspace @stats47/r2-storage",
-              "npm audit --json"
-            ],
-            "pass": true
-          },
-          "evidence": "R2 URL key 4種とadmin shell-free 3 fixtureが修正前RED→修正後GREEN。admin174、r2-storage55、両type-check、npm audit 0件。SARIFと実生成は外部実行未承認。",
-          "failReason": "Security Scan workflow dispatchとgallery実生成/R2反映が未承認のため完了条件の外部ゲート未実行",
-          "followUps": []
-        },
-        {
-          "at": "2026-08-29T23:22:31.719Z",
-          "runId": "33280689110",
           "model": "sonnet",
           "effort": null,
           "outcome": "completed",
@@ -3394,13 +3371,11 @@
           "costUsd": null,
           "gate": {
             "commands": [
-              "gh run view 33280366413 --log",
-              "gh run view 33280689110 --log",
-              "curl -sSIL https://storage.stats47.jp/app/blog/cc-estat-18-cache-r2/ogp/ogp.png?verify=33280689110"
+              "node .claude/scripts/blog/quality-gate.mjs area-ratio-prefecture-gap"
             ],
             "pass": true
           },
-          "evidence": "Security Scan 33280366413はSARIF=0。OGP run 33280689110はcc-estat-18-cache-r2をgenerated=1、exact publisher bundle=1 asset=4。公開OGPはHTTP 200 image/png。",
+          "evidence": "公開R2本文で除外定義、同率順位、北海道・香川の一次資料接地、因果限定を確認。既存blog-critic verdict PASS、quality gate pass=true。",
           "failReason": null,
           "followUps": []
         }
@@ -3411,7 +3386,7 @@
         "since": null
       },
       "reclassifiedFrom": [],
-      "completedAt": "2026-08-29T23:22:31.719Z"
+      "completedAt": "2026-08-29T21:49:42.025Z"
     }
   }
 }

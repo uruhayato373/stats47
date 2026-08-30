@@ -1,3 +1,6 @@
+
+import type { ReactNode } from 'react';
+
 import Link from 'next/link';
 
 import {
@@ -21,9 +24,14 @@ import {
   type GeoCrossAnalysisSlug,
 } from '../lib/geo-cross-analysis';
 import { loadGeoAnalysisSnapshot } from '../lib/load-geo-analysis-snapshot';
+import { loadGeoStationAccessManifest } from '../lib/load-geo-station-access-evidence';
+
 
 import { GeoAnalysisTracker } from './GeoAnalysisTracker';
 import { GeoCrossAnalysisExplorer } from './GeoCrossAnalysisExplorer';
+import { GeoStationAccessEvidenceExplorer } from './GeoStationAccessEvidenceExplorer';
+
+import type { GeoStationAccessView } from '../lib/geo-station-access-evidence';
 
 const inputCountLabels: Record<string, string> = {
   residentialLandPricePoints: '住宅地標準地点',
@@ -36,14 +44,26 @@ const inputCountLabels: Record<string, string> = {
 
 interface Props {
   slug: GeoCrossAnalysisSlug;
+  initialPrefCode?: string;
+  initialStage?: GeoStationAccessView;
+  contextLayer?: ReactNode;
 }
 
-export async function GeoCrossAnalysisArticle({ slug }: Props) {
+export async function GeoCrossAnalysisArticle({
+  slug,
+  initialPrefCode = '13',
+  initialStage = 'population',
+  contextLayer,
+}: Props) {
   const config = GEO_CROSS_ANALYSIS_CONFIGS[slug];
   const spec = BUSINESS_PLAN_M1_GEO_ANALYSES.find(
     (analysis) => analysis.slug === slug
   );
   const snapshot = await loadGeoAnalysisSnapshot(slug);
+  const stationAccessManifest =
+    slug === 'population-station-access'
+      ? await loadGeoStationAccessManifest()
+      : null;
 
   if (!spec || !snapshot) {
     return (
@@ -177,6 +197,16 @@ export async function GeoCrossAnalysisArticle({ slug }: Props) {
         </SurfaceCard>
       </div>
 
+      {stationAccessManifest ? (
+        <GeoStationAccessEvidenceExplorer
+          analysisId={spec.id}
+          dataVersion={snapshot.dataVersion}
+          initialPrefCode={initialPrefCode}
+          initialView={initialStage}
+          manifest={stationAccessManifest}
+        />
+      ) : null}
+
       <GeoCrossAnalysisExplorer
         analysisId={spec.id}
         comparisonLimit={spec.comparisonLimit}
@@ -306,6 +336,17 @@ export async function GeoCrossAnalysisArticle({ slug }: Props) {
           ))}
         </ul>
       </SurfaceSection>
+
+      {contextLayer ? (
+        <SurfaceSection className="mt-6">
+          <SectionHeader
+            title="補助レイヤー：駅別乗降客数"
+            description="駅の利用規模を理解するための別データです。駅800m圏や人口比率の計算入力には使用していません。"
+            hideRule
+          />
+          {contextLayer}
+        </SurfaceSection>
+      ) : null}
 
       <SurfaceSection className="mt-6">
         <SectionHeader title="関連する地域分析" hideRule />

@@ -1,0 +1,285 @@
+{
+  "title": "高知県の市町村別 実質公債費比率",
+  "subtitle": "2024年度",
+  "label": "実質公債費比率",
+  "unit": "％",
+  "year": "2024",
+  "source": "総務省 地方財政状況調査 (決算カード)",
+  "palette": "red",
+  "decimalPlaces": 1,
+  "generatedBy": "fetch-municipal-finance.mjs",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "土佐清水市",
+      "pref": "土佐清水市",
+      "value": 16.2,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 2,
+      "areaName": "中土佐町",
+      "pref": "中土佐町",
+      "value": 14,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 3,
+      "areaName": "三原村",
+      "pref": "三原村",
+      "value": 13.8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 4,
+      "areaName": "黒潮町",
+      "pref": "黒潮町",
+      "value": 13,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 5,
+      "areaName": "大川村",
+      "pref": "大川村",
+      "value": 12.9,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 6,
+      "areaName": "高知市",
+      "pref": "高知市",
+      "value": 12.6,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 7,
+      "areaName": "東洋町",
+      "pref": "東洋町",
+      "value": 12.5,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 8,
+      "areaName": "須崎市",
+      "pref": "須崎市",
+      "value": 12.4,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 9,
+      "areaName": "土佐市",
+      "pref": "土佐市",
+      "value": 12.1,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 10,
+      "areaName": "四万十市",
+      "pref": "四万十市",
+      "value": 10.9,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 11,
+      "areaName": "宿毛市",
+      "pref": "宿毛市",
+      "value": 10.5,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 12,
+      "areaName": "越知町",
+      "pref": "越知町",
+      "value": 10.3,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 13,
+      "areaName": "本山町",
+      "pref": "本山町",
+      "value": 10.2,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 14,
+      "areaName": "南国市",
+      "pref": "南国市",
+      "value": 9.6,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 15,
+      "areaName": "大月町",
+      "pref": "大月町",
+      "value": 9.6,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 16,
+      "areaName": "日高村",
+      "pref": "日高村",
+      "value": 9.3,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 17,
+      "areaName": "室戸市",
+      "pref": "室戸市",
+      "value": 9.2,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 18,
+      "areaName": "馬路村",
+      "pref": "馬路村",
+      "value": 9.1,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 19,
+      "areaName": "いの町",
+      "pref": "いの町",
+      "value": 8.9,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 20,
+      "areaName": "安田町",
+      "pref": "安田町",
+      "value": 8.8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 21,
+      "areaName": "香美市",
+      "pref": "香美市",
+      "value": 8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 22,
+      "areaName": "芸西村",
+      "pref": "芸西村",
+      "value": 8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 23,
+      "areaName": "土佐町",
+      "pref": "土佐町",
+      "value": 7.7,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 24,
+      "areaName": "四万十町",
+      "pref": "四万十町",
+      "value": 7.1,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 25,
+      "areaName": "佐川町",
+      "pref": "佐川町",
+      "value": 6.9,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 26,
+      "areaName": "田野町",
+      "pref": "田野町",
+      "value": 6.5,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 27,
+      "areaName": "梼原町",
+      "pref": "梼原町",
+      "value": 6.3,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 28,
+      "areaName": "安芸市",
+      "pref": "安芸市",
+      "value": 5.5,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 29,
+      "areaName": "奈半利町",
+      "pref": "奈半利町",
+      "value": 5.2,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 30,
+      "areaName": "香南市",
+      "pref": "香南市",
+      "value": 5.1,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 31,
+      "areaName": "大豊町",
+      "pref": "大豊町",
+      "value": 4.2,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 32,
+      "areaName": "北川村",
+      "pref": "北川村",
+      "value": -0.1,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 33,
+      "areaName": "仁淀川町",
+      "pref": "仁淀川町",
+      "value": -2.3,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 34,
+      "areaName": "津野町",
+      "pref": "津野町",
+      "value": -7.4,
+      "label": "実質公債費比率",
+      "unit": "％"
+    }
+  ]
+}

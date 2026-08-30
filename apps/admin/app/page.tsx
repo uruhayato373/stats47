@@ -9,17 +9,17 @@ const SECTIONS = [
   {
     href: "/sns",
     title: "SNS",
-    desc: "投稿・予約・caption・メトリクス (X / IG / note)",
+    desc: "投稿状態・caption・Geo分類・メトリクスの読み取りビュー",
   },
   {
     href: "/buzz-map",
     title: "バズ地図",
-    desc: "日本地図 × 統計カードの企画キューと素材生成",
+    desc: "日本地図 × 統計カードの企画キューと素材プレビュー",
   },
   {
     href: "/assets",
     title: "画像資産",
-    desc: "OGP・リンクカード・note カバー・記事内画像/動画の閲覧と欠落チェック",
+    desc: "OGP・リンクカード・note カバー・記事内画像/動画の閲覧",
   },
   {
     href: "/svg",
@@ -76,7 +76,7 @@ export default function HomePage() {
           管理コンソール
         </h1>
         <p className="mt-1 text-sm text-console-muted">
-          ローカル専用 (127.0.0.1)。制作・収益・品質・運用を 1 画面で横断管理する。書き込みは SNS の投稿/予約とバズ地図の素材生成だけで、note・Kindleを含む他画面は読み取り専用。
+          ローカル専用 (127.0.0.1)・完全読み取り専用。制作・収益・品質・運用・Geo契約を横断確認し、実行は担当agent/skillだけが行う。
         </p>
       </div>
 

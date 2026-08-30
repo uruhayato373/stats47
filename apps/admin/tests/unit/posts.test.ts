@@ -4,16 +4,10 @@ import path from "node:path";
 
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import {
-  cleanupFixtureRoot,
-  makeFixtureRoot,
-  readPosts,
-  type SeedPost,
-} from "../helpers/fixture-root";
+import { cleanupFixtureRoot, makeFixtureRoot, type SeedPost } from "../helpers/fixture-root";
 
 /**
- * posts.ts (filterPosts / updatePost / createDraft) と project-root.ts の検証。
- * fixture root を差し込んで実 SSOT に触れずに読み書きする。
+ * 読み取り専用 posts.ts (filterPosts) と project-root.ts の検証。
  */
 describe("posts server", () => {
   let root: string;
@@ -62,71 +56,6 @@ describe("posts server", () => {
     });
   });
 
-  describe("updatePost", () => {
-    const seed: SeedPost[] = [
-      { id: 10, platform: "x", status: "posted", domain: "ranking", content_key: "k", caption: "old" },
-    ];
-
-    it("caption を更新して 200 相当 (ok)", async () => {
-      const { updatePost } = await load({ posts: seed });
-      const r = updatePost(10, { caption: "new" });
-      expect(r.ok).toBe(true);
-      if (r.ok) expect(r.post.caption).toBe("new");
-      // fixture posts.json が実際に更新される。
-      expect(readPosts(root).find((p) => p.id === 10)?.caption).toBe("new");
-    });
-
-    it("scheduled_at: null を許可する", async () => {
-      const { updatePost } = await load({ posts: seed });
-      const r = updatePost(10, { scheduled_at: null });
-      expect(r.ok).toBe(true);
-    });
-
-    it("caption/scheduled_at 以外のキーを 400", async () => {
-      const { updatePost } = await load({ posts: seed });
-      const r = updatePost(10, { status: "deleted" });
-      expect(r.ok).toBe(false);
-      if (!r.ok) expect(r.code).toBe(400);
-      // 実データは変更されない。
-      expect(readPosts(root).find((p) => p.id === 10)?.status).toBe("posted");
-    });
-
-    it("空 patch を 400", async () => {
-      const { updatePost } = await load({ posts: seed });
-      const r = updatePost(10, {});
-      expect(r.ok).toBe(false);
-      if (!r.ok) expect(r.code).toBe(400);
-    });
-
-    it("不在 id を 404", async () => {
-      const { updatePost } = await load({ posts: seed });
-      const r = updatePost(999, { caption: "x" });
-      expect(r.ok).toBe(false);
-      if (!r.ok) expect(r.code).toBe(404);
-    });
-  });
-
-  describe("createDraft", () => {
-    it("必須 3 フィールドで status=draft を強制して insert", async () => {
-      const { createDraft } = await load({ posts: [] });
-      const r = createDraft({
-        platform: "x",
-        domain: "ranking",
-        content_key: "new-draft",
-        // status を渡す口は無い (型で不可)。insert 側で draft 固定。
-      });
-      expect(r.ok).toBe(true);
-      if (r.ok) expect(r.post.status).toBe("draft");
-      expect(readPosts(root).find((p) => p.content_key === "new-draft")?.status).toBe("draft");
-    });
-
-    it("必須欠落を 400", async () => {
-      const { createDraft } = await load({ posts: [] });
-      const r = createDraft({ platform: "x", domain: "", content_key: "k" } as never);
-      expect(r.ok).toBe(false);
-      if (!r.ok) expect(r.code).toBe(400);
-    });
-  });
 });
 
 describe("projectRoot 検証", () => {

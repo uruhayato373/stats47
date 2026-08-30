@@ -9,8 +9,8 @@
  *   **ファイルを rename すると grep が何にもマッチしなくなり、対応するゲートが
  *   無言で無効化される**。commit は緑のまま通り、壊れたのは検査の側なので誰も気づけない。
  *
- *   実例: image-pipeline policy ゲートは `apps/admin/lib/server/(actions|buzz-map-actions).ts`
- *   を trigger に持つ。apps/admin → apps/admin の改名でこれが死ぬところだった。
+ *   実例: image-pipeline policy ゲートは実際の publisher を trigger に持つ。
+ *   publisher の移動時に trigger を更新し忘れるとゲートが死ぬところだった。
  *   同種のゲートは他にも 9 本ある (docs governance / dispatch freshness / unit semantics 等)。
  *
  *   `image-pipeline-source-policy.test.ts` は実ファイルを読むので**ファイル移動自体**は
@@ -148,15 +148,13 @@ test('pre-commit のトリガー regex に埋まった具体パスがすべて�
   );
 });
 
-test('image-pipeline ゲートの trigger に管理画面の publisher が含まれている', () => {
-  // 改名のたびに落ちるのが正しい。落ちたら trigger を新パスへ直す。
+test('image-pipeline ゲートの trigger に現行の buzz-map publisher が含まれている', () => {
+  // 管理画面は read-only。書き込みを担う CLI の移動時に落ちるのが正しい。
   const shell = fs.readFileSync(SHELL, 'utf8');
   const paths = collectGuardPaths(shell);
-  const publishers = paths.filter((p) => /lib\/server\/(actions|buzz-map-actions)\.ts$/.test(p));
-  assert.equal(publishers.length, 2, `管理画面の publisher 2 本が trigger に無い: ${paths.join(', ')}`);
-  for (const p of publishers) {
-    assert.ok(fs.existsSync(path.join(ROOT, p)), `${p} が実在しない`);
-  }
+  const publisher = '.claude/scripts/sns/prepare-buzz-map-batch.ts';
+  assert.ok(paths.includes(publisher), `現行 publisher が trigger に無い: ${paths.join(', ')}`);
+  assert.ok(fs.existsSync(path.join(ROOT, publisher)), `${publisher} が実在しない`);
 });
 
 // ── ゲート自体の検証 (全 PASS が「何も見ていない」と区別できるように) ──────
@@ -174,8 +172,8 @@ test('[mutation] 存在しないパスを trigger に混ぜると検出する', 
 
 test('[mutation] 交替 (a|b) の片側だけが壊れても検出する', () => {
   const shell = fs.readFileSync(SHELL, 'utf8').replace(
-    '(actions|buzz-map-actions)',
-    '(actions|buzz-map-actions-RENAMED)',
+    'prepare-buzz-map-batch\\.ts',
+    'prepare-buzz-map-batch-RENAMED\\.ts',
   );
   const missing = collectGuardPaths(shell).filter(
     (p) => !(p in ALLOWED_ABSENT) && !fs.existsSync(path.join(ROOT, p)),

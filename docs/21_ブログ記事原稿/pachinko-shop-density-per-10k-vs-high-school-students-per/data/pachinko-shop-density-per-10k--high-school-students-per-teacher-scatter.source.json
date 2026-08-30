@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "pachinko-shop-density-per-10k",
+  "pair": "high-school-students-per-teacher",
+  "pearsonR": -0.7564447940643291,
+  "partialRPopulation": -0.677758167733134,
+  "unit": "軒 × 人",
+  "label": "パチンコ店舗数 と 高等学校生徒数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/pachinko-shop-density-per-10k.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug pachinko-shop-density-per-10k-vs-high-school-students-per --base pachinko-shop-density-per-10k --pair high-school-students-per-teacher --data-name pachinko-shop-density-per-10k--high-school-students-per-teacher"
+}

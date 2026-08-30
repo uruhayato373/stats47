@@ -2,7 +2,7 @@
 
 `.claude/agents/` に定義されたサブエージェント群。Agent tool の `subagent_type` または直接起動で利用する。
 
-**現在54体（READMEを除く実ファイル数）**。ドメイン × フェーズで責務を分け、各agentに
+**現在61体（READMEを除く実ファイル数）**。ドメイン × フェーズで責務を分け、各agentに
 `name` / `description` / `model` / `Output Contract`を必須化している。件数とprompt契約は
 `check-agent-skill-consistency.cjs`が機械検査する。
 
@@ -44,7 +44,8 @@
 | `ranking-publisher` 🆕 | ranking 公開多段 (generate-ranking-items / KNOWN・SITEMAP・INDEXABLE 再生成 / deploy / purge / 本番実測) のオーケストレーション。観測値=data-ingester、push=r2-publisher、deploy=devops-runner に委譲 | 2026-06-21 新設 |
 | `ranking-expander` 🆕 | SSDS ランキング拡充ループ (計測ゲート付き需要ファースト): 候補キュレーション + config 生成 (gen-ssds-configs) + キュー状態管理 (build-expansion-queue)。投入=data-ingester、公開=ranking-publisher、計測=gsc-analyst に委譲。skill `/expand-rankings`。旧 expand-indicators 再構築 | 2026-07-12 新設 |
 | `gis-curator` 🆕 | KSJ GIS メタ SSOT (datasets.ts / registry.ts) 管理・dataset lifecycle・メタ整合。完全DBレス (git TS=SSOT)。pipeline は gis-pipeline-runner、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
-| `gis-pipeline-runner` 🆕 | KSJ GIS パイプライン実行 (seed → download → TopoJSON → R2 → build state)。SSOT 編集は gis-curator、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
+| `gis-pipeline-runner` 🆕 | KSJ GIS取得 (download → TopoJSON+provenance → 実R2監査)。全県/全1次メッシュ対応。SSOT編集はgis-curator、pushはr2-publisherへ委譲 | 2026-06-21 新設 (GIS DBレス化) |
+| `geo-analysis-curator` 🆕 | Geo分析の入力/補助レイヤー境界、空間演算stage、lineage manifest、保存則、canonical着地を一元管理。skill `/build-geo-analysis`。原典メタ=gis-curator、取得=gis-pipeline-runner、push=r2-publisherへ委譲 | 2026-08-30 新設 |
 | `survey-curator` 🆕 | ranking↔統計調査の紐付けメタ SSOT (surveys.json / provenance 辞書 / config.surveyId) 管理・監査 (/audit-survey-linkage)・未分類回収 + survey 編集情報 (survey-editorial.ts) + **survey ポートフォリオ管理** (75 survey の需要/在庫/編集品質評価・編集ハブ化の優先順位・実験台帳。真実源 `.claude/state/surveys/{portfolio,experiments}.json`、validator `.claude/scripts/surveys/validate-survey-portfolio.ts`、skill `/manage-survey-portfolio`)。正典 survey-linkage-standards.md + survey-content-standards.md + surveyポートフォリオ運用.md。投入=data-ingester、push=r2-publisher、公開=ranking-publisher、計測=gsc/ga4-analyst、effect=improvement-triage に委譲 | 2026-07-06 新設 → 2026-07-13 ポートフォリオ管理へ拡張 |
 
 ## Tier 3: Content - Blog / Note / Ranking (9 体)
@@ -70,9 +71,9 @@
 
 | agent | role | 派生元 |
 |---|---|---|
-| `x-strategist` | X 投稿・キャプション・引用RT・分析 (`/post-x` `/publish-x` `/find-quote-rt` `/react-to-news`) | 既存 |
+| `x-strategist` | X 投稿・キャプション・引用RT・分析。ランキング=`/post-x-batch`、theme/area=`/operate-site-x-drafts`、Geo=`/operate-geo-content`で分離 | 既存拡張 |
 | `instagram-strategist` | IG 投稿・カルーセル・リール (主力。`/generate-instagram-schedule` `/post-ig-6angles` `/post-instagram`) | 既存 |
-| `sns-renderer` | Remotion レンダリング入口 (静止画/動画=`/render-sns-stills`、BCR=`/bar-chart-race --step render`、バズ地図=`/buzz-map`、`/preview-remotion`=プレビュー専用) | 既存縮退 |
+| `sns-renderer` | Remotion入口。一般静止画/BCR/バズ地図に加え、Geo=`/operate-geo-content`の専用composition+SHA監査 | 既存縮退 |
 | `sns-metrics-sync` | メトリクス同期・posted 印付け・週次レポート (caption 生成は各 strategist に返上) | sns-renderer + 各 strategist 分離 |
 | `trend-scout` | SNS 競合の定点観測 (`/competitor-scan`) + X バズ投稿の型・画像リサーチ (`/x-viral-research`) も担当 | 既存拡張 |
 | `strategy-advisor` | SNS 週次運用ルーチン (`/sns-weekly-plan`) の orchestrator | 既存拡張 |
@@ -149,6 +150,8 @@
 | SNS 週次運用 | strategy-advisor (/sns-weekly-plan) → sns-metrics-sync (先週計測) → trend-scout (題材) → x/instagram-strategist (生成・予約) |
 | トレンド → IG リール | trend-scout → sns-renderer (/bar-chart-race --step render) → instagram-strategist |
 | バズ地図 → SNS | gis-curator (KSJ geometryType) / data-ingester (e-Stat 観測値) → sns-renderer (/buzz-map 型A〜E 生成+R2) → x/instagram-strategist (配信。draft 止まりが既定) |
+| Geo地域分析 → サイト/X | gis-curator (原典メタ) → gis-pipeline-runner (取得・変換) → geo-analysis-curator (`/build-geo-analysis`: 途中artifact+lineage+保存則+サイト) → `/operate-geo-content` (Geo専用render+SHA監査+draft) → 明示時だけr2-publisher/x-strategistが配信 |
+| テーマ・エリア → X | theme/area git TS catalog → `/operate-site-x-drafts` (landing+OGP+SHA+caption lint+draft) → 明示時だけx-strategistが配信 |
 | SNS 競合調査 | trend-scout (`/competitor-scan`) → skill reference、未完了策は改善バックログ |
 | コード変更 → デプロイ | code-reviewer → scopeにUI/testを含む時だけ対応reviewerを1体追加 → devops-runner |
 | テーマダッシュボード設計 | theme-designer → data-ingester → theme-component-builder → ui-reviewer |

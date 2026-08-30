@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "airport-count",
+  "year": "2007",
+  "unit": "か所",
+  "label": "空港数",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/airport-count/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug airport-count-prefecture-gap --keys airport-count --with-map",
+  "fetchedAt": "2026-08-30T07:58:06.581Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

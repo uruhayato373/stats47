@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "flood-affected-rivers",
+  "year": "2014",
+  "unit": "延数",
+  "label": "水害被災河川・海岸数（一般資産等）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/flood-affected-rivers/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug flood-affected-rivers-prefecture-gap --keys flood-affected-rivers --data-name flood-affected-rivers-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T05:47:10.171Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

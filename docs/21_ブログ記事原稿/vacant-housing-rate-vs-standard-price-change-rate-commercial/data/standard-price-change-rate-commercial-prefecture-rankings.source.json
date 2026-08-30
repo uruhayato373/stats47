@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "standard-price-change-rate-commercial",
+  "year": "2024",
+  "unit": "％",
+  "label": "標準価格対前年平均変動率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/standard-price-change-rate-commercial/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug vacant-housing-rate-vs-standard-price-change-rate-commercial --keys standard-price-change-rate-commercial --data-name standard-price-change-rate-commercial-prefecture-rankings",
+  "fetchedAt": "2026-08-30T05:47:27.714Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

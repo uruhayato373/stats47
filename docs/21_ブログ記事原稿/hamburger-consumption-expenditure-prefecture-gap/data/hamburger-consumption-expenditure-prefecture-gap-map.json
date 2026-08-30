@@ -1,0 +1,247 @@
+{
+  "title": "ハンバーガー消費支出額",
+  "subtitle": "2024年",
+  "label": "ハンバーガー消費支出額",
+  "unit": "円",
+  "year": "2024",
+  "rankingKey": "hamburger-consumption-expenditure",
+  "source": "家計調査",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "data": [
+    {
+      "pref": "大分県",
+      "areaName": "大分県",
+      "value": 9724
+    },
+    {
+      "pref": "熊本県",
+      "areaName": "熊本県",
+      "value": 8692
+    },
+    {
+      "pref": "沖縄県",
+      "areaName": "沖縄県",
+      "value": 8439
+    },
+    {
+      "pref": "高知県",
+      "areaName": "高知県",
+      "value": 8417
+    },
+    {
+      "pref": "大阪府",
+      "areaName": "大阪府",
+      "value": 8045
+    },
+    {
+      "pref": "徳島県",
+      "areaName": "徳島県",
+      "value": 7877
+    },
+    {
+      "pref": "埼玉県",
+      "areaName": "埼玉県",
+      "value": 7844
+    },
+    {
+      "pref": "愛知県",
+      "areaName": "愛知県",
+      "value": 7742
+    },
+    {
+      "pref": "鹿児島県",
+      "areaName": "鹿児島県",
+      "value": 7507
+    },
+    {
+      "pref": "鳥取県",
+      "areaName": "鳥取県",
+      "value": 7459
+    },
+    {
+      "pref": "富山県",
+      "areaName": "富山県",
+      "value": 7419
+    },
+    {
+      "pref": "広島県",
+      "areaName": "広島県",
+      "value": 7246
+    },
+    {
+      "pref": "栃木県",
+      "areaName": "栃木県",
+      "value": 7073
+    },
+    {
+      "pref": "東京都",
+      "areaName": "東京都",
+      "value": 7068
+    },
+    {
+      "pref": "佐賀県",
+      "areaName": "佐賀県",
+      "value": 6933
+    },
+    {
+      "pref": "岡山県",
+      "areaName": "岡山県",
+      "value": 6905
+    },
+    {
+      "pref": "滋賀県",
+      "areaName": "滋賀県",
+      "value": 6887
+    },
+    {
+      "pref": "山梨県",
+      "areaName": "山梨県",
+      "value": 6886
+    },
+    {
+      "pref": "宮崎県",
+      "areaName": "宮崎県",
+      "value": 6874
+    },
+    {
+      "pref": "岐阜県",
+      "areaName": "岐阜県",
+      "value": 6590
+    },
+    {
+      "pref": "神奈川県",
+      "areaName": "神奈川県",
+      "value": 6447
+    },
+    {
+      "pref": "島根県",
+      "areaName": "島根県",
+      "value": 6437
+    },
+    {
+      "pref": "奈良県",
+      "areaName": "奈良県",
+      "value": 6391
+    },
+    {
+      "pref": "千葉県",
+      "areaName": "千葉県",
+      "value": 6371
+    },
+    {
+      "pref": "群馬県",
+      "areaName": "群馬県",
+      "value": 6303
+    },
+    {
+      "pref": "静岡県",
+      "areaName": "静岡県",
+      "value": 6257
+    },
+    {
+      "pref": "和歌山県",
+      "areaName": "和歌山県",
+      "value": 6104
+    },
+    {
+      "pref": "石川県",
+      "areaName": "石川県",
+      "value": 5999
+    },
+    {
+      "pref": "新潟県",
+      "areaName": "新潟県",
+      "value": 5938
+    },
+    {
+      "pref": "三重県",
+      "areaName": "三重県",
+      "value": 5903
+    },
+    {
+      "pref": "京都府",
+      "areaName": "京都府",
+      "value": 5774
+    },
+    {
+      "pref": "宮城県",
+      "areaName": "宮城県",
+      "value": 5755
+    },
+    {
+      "pref": "香川県",
+      "areaName": "香川県",
+      "value": 5698
+    },
+    {
+      "pref": "山口県",
+      "areaName": "山口県",
+      "value": 5548
+    },
+    {
+      "pref": "山形県",
+      "areaName": "山形県",
+      "value": 5437
+    },
+    {
+      "pref": "福岡県",
+      "areaName": "福岡県",
+      "value": 5327
+    },
+    {
+      "pref": "茨城県",
+      "areaName": "茨城県",
+      "value": 5029
+    },
+    {
+      "pref": "愛媛県",
+      "areaName": "愛媛県",
+      "value": 5022
+    },
+    {
+      "pref": "福井県",
+      "areaName": "福井県",
+      "value": 4909
+    },
+    {
+      "pref": "兵庫県",
+      "areaName": "兵庫県",
+      "value": 4650
+    },
+    {
+      "pref": "北海道",
+      "areaName": "北海道",
+      "value": 4544
+    },
+    {
+      "pref": "岩手県",
+      "areaName": "岩手県",
+      "value": 4419
+    },
+    {
+      "pref": "福島県",
+      "areaName": "福島県",
+      "value": 4323
+    },
+    {
+      "pref": "青森県",
+      "areaName": "青森県",
+      "value": 4228
+    },
+    {
+      "pref": "長野県",
+      "areaName": "長野県",
+      "value": 4201
+    },
+    {
+      "pref": "長崎県",
+      "areaName": "長崎県",
+      "value": 3831
+    },
+    {
+      "pref": "秋田県",
+      "areaName": "秋田県",
+      "value": 2875
+    }
+  ]
+}

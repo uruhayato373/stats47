@@ -48,6 +48,56 @@ interface BusinessPlanState {
   measurementWarning: string;
 }
 
+interface GisCatalogState {
+  generatedAt: string;
+  summary: {
+    candidateCatalog: number;
+    unionCatalog: number;
+    registered: number;
+    r2Acquired: number;
+    registeredMissingR2: number;
+    analysisSources: number;
+    readyToAcquire: number;
+    licenseReview: number;
+    localOnly: number;
+    sourceUrlComplete: number;
+    complianceMismatches: number;
+    totalR2Bytes: number;
+  };
+  items: Array<{
+    dataId: string;
+    name: string;
+    geometryType: string | null;
+    coverage: string | null;
+    license: string | null;
+    registered: boolean;
+    publicationPolicy: string;
+    state: string;
+    usedInAnalyses: string[];
+    compliance: {
+      publicMirrorPolicyMismatch: boolean;
+    };
+    r2: {
+      versions: string[];
+      fileCount: number;
+      totalBytes: number;
+    };
+  }>;
+}
+
+interface GeoEvidenceManifestState {
+  schemaVersion: number;
+  stages: Array<{ id: string; label: string; role: string }>;
+  quality: {
+    detailAreas: number;
+    conservationChecks: number;
+    stationGroups: number;
+    populatedMeshes: number;
+    accessibleMeshes: number;
+    maxDetailBytes: number;
+  };
+}
+
 export interface BusinessPlanDocumentView {
   id: string;
   title: string;
@@ -65,6 +115,7 @@ export interface BusinessPlanDocumentDetail extends BusinessPlanDocumentView {
 export interface BusinessPlanAdminData {
   catalog: typeof BUSINESS_PLAN_2026;
   state: Wrapped<BusinessPlanState>;
+  gisCatalog: Wrapped<GisCatalogState>;
   documents: Wrapped<BusinessPlanDocumentView[]>;
   counts: {
     readyContent: number;
@@ -82,6 +133,21 @@ export interface BusinessPlanAdminData {
       localSnapshotReady: boolean;
       expectedObservationCount: number;
       evidenceCheckedAt: string;
+      analysisKind: "baseline" | "spatial-cross";
+      sourceLayers: Array<{
+        id: string;
+        label: string;
+        geometry: string;
+        role: "calculation-input" | "context-only";
+        usedInCalculation: boolean;
+      }>;
+      spatialOperations: string[];
+      metricKeys: string[];
+      evidenceManifestReady: boolean;
+      evidenceStages: Array<{ id: string; label: string; role: string }>;
+      detailAreas: number;
+      conservationChecks: number;
+      maxDetailBytes: number;
     }>;
     routes: Array<{
       path: string;
@@ -97,10 +163,19 @@ export interface BusinessPlanAdminData {
       scheduled: number;
       posted: number;
       missingContentKeys: string[];
+      geoRoleCounts: Record<string, number>;
+      contractViolations: string[];
       posts: Array<{
         contentKey: string;
         title: string;
         template: string;
+        geoRole: "baseline" | "cross-analysis" | "method" | "decision";
+        analysisIds: string[];
+        claimMetricKey: string;
+        canonicalUrl: string;
+        sourceLayers: string[];
+        spatialOperations: string[];
+        geoContractOk: boolean;
         scheduledAt: string;
         registryStatus: string | null;
         mediaPath: string | null;
@@ -164,6 +239,9 @@ export function businessPlanAdminData(): BusinessPlanAdminData {
   const state = wrap(() =>
     readJson<BusinessPlanState>(".claude/state/business-plan/latest.json")
   );
+  const gisCatalog = wrap(() =>
+    readJson<GisCatalogState>(".local/r2/app/geo/data-catalog/items.json")
+  );
   const m1ContentKeys = new Set(
     BUSINESS_PLAN_2026.m1.xPosts.map((post) => post.contentKey)
   );
@@ -179,6 +257,35 @@ export function businessPlanAdminData(): BusinessPlanAdminData {
       posts.map((post) => [post.content_key as string, post]),
     );
     const registered = new Set(postByContentKey.keys());
+    const analysesById = new Map(
+      BUSINESS_PLAN_2026.m1.analyses.map((analysis) => [analysis.id, analysis]),
+    );
+    const geoRoleCounts = BUSINESS_PLAN_2026.m1.xPosts.reduce<Record<string, number>>(
+      (counts, post) => {
+        counts[post.geoRole] = (counts[post.geoRole] ?? 0) + 1;
+        return counts;
+      },
+      {},
+    );
+    const contractViolations: string[] = [];
+    for (const planned of BUSINESS_PLAN_2026.m1.xPosts) {
+      const analyses = planned.analysisIds
+        .map((analysisId) => analysesById.get(analysisId))
+        .filter((analysis) => analysis !== undefined);
+      const metrics = new Set(analyses.flatMap((analysis) => analysis.metricKeys));
+      if (analyses.length !== planned.analysisIds.length) {
+        contractViolations.push(`${planned.contentKey}: analysis未定義`);
+      }
+      if (!metrics.has(planned.claimMetricKey)) {
+        contractViolations.push(`${planned.contentKey}: metric未定義`);
+      }
+      if (
+        planned.geoRole === "cross-analysis" &&
+        (analyses.length !== 1 || analyses[0]?.analysisKind !== "spatial-cross")
+      ) {
+        contractViolations.push(`${planned.contentKey}: 空間横断分析ではない`);
+      }
+    }
     return {
       planned: BUSINESS_PLAN_2026.m1.xPosts.length,
       registered: registered.size,
@@ -188,13 +295,33 @@ export function businessPlanAdminData(): BusinessPlanAdminData {
       missingContentKeys: BUSINESS_PLAN_2026.m1.xPosts
         .map((post) => post.contentKey)
         .filter((key) => !registered.has(key)),
+      geoRoleCounts,
+      contractViolations,
       posts: BUSINESS_PLAN_2026.m1.xPosts.map((planned) => {
         const registeredPost = postByContentKey.get(planned.contentKey);
         const mediaPath = registeredPost?.media_path ?? null;
+        const analyses = planned.analysisIds
+          .map((analysisId) => analysesById.get(analysisId))
+          .filter((analysis) => analysis !== undefined);
+        const sourceLayers = [
+          ...new Set(analyses.flatMap((analysis) => analysis.sourceLayers.map((layer) => layer.label))),
+        ];
+        const spatialOperations = [
+          ...new Set(analyses.flatMap((analysis) => analysis.spatialOperations)),
+        ];
         return {
           contentKey: planned.contentKey,
           title: planned.title,
           template: registeredPost?.template ?? planned.template,
+          geoRole: planned.geoRole,
+          analysisIds: [...planned.analysisIds],
+          claimMetricKey: planned.claimMetricKey,
+          canonicalUrl: planned.canonicalUrl,
+          sourceLayers,
+          spatialOperations,
+          geoContractOk: !contractViolations.some((violation) =>
+            violation.startsWith(`${planned.contentKey}:`),
+          ),
           scheduledAt: registeredPost?.scheduled_at ?? planned.scheduledAt,
           registryStatus: registeredPost?.status ?? null,
           mediaPath,
@@ -227,19 +354,37 @@ export function businessPlanAdminData(): BusinessPlanAdminData {
     .map((id) => BUSINESS_PLAN_2026.events.find((event) => event.id === id))
     .filter((event) => event !== undefined);
 
-  const analyses = BUSINESS_PLAN_2026.m1.analyses.map((analysis) => ({
-    id: analysis.id,
-    slug: analysis.slug,
-    title: analysis.title,
-    status: analysis.status,
-    dataKey: analysis.r2Key ?? analysis.rankingKey ?? "未設定",
-    dataKind: analysis.r2Key ? ("geo-snapshot" as const) : ("ranking" as const),
-    localSnapshotReady: analysis.r2Key
-      ? fileExists(`.local/r2/${analysis.r2Key}`)
-      : Boolean(analysis.rankingKey),
-    expectedObservationCount: analysis.expectedObservationCount,
-    evidenceCheckedAt: analysis.evidenceCheckedAt,
-  }));
+  const analyses = BUSINESS_PLAN_2026.m1.analyses.map((analysis) => {
+    const manifestPath = analysis.evidenceManifestKey
+      ? `.local/r2/${analysis.evidenceManifestKey}`
+      : null;
+    const manifest =
+      manifestPath && fileExists(manifestPath)
+        ? readJson<GeoEvidenceManifestState>(manifestPath)
+        : null;
+    return {
+      id: analysis.id,
+      slug: analysis.slug,
+      title: analysis.title,
+      status: analysis.status,
+      dataKey: analysis.r2Key ?? analysis.rankingKey ?? "未設定",
+      dataKind: analysis.r2Key ? ("geo-snapshot" as const) : ("ranking" as const),
+      localSnapshotReady: analysis.r2Key
+        ? fileExists(`.local/r2/${analysis.r2Key}`)
+        : Boolean(analysis.rankingKey),
+      expectedObservationCount: analysis.expectedObservationCount,
+      evidenceCheckedAt: analysis.evidenceCheckedAt,
+      analysisKind: analysis.analysisKind,
+      sourceLayers: analysis.sourceLayers.map((layer) => ({ ...layer })),
+      spatialOperations: [...analysis.spatialOperations],
+      metricKeys: [...analysis.metricKeys],
+      evidenceManifestReady: manifest !== null,
+      evidenceStages: manifest?.stages ?? [],
+      detailAreas: manifest?.quality.detailAreas ?? 0,
+      conservationChecks: manifest?.quality.conservationChecks ?? 0,
+      maxDetailBytes: manifest?.quality.maxDetailBytes ?? 0,
+    };
+  });
   const routes = BUSINESS_PLAN_2026.m1.routes.map((route) => ({
     path: route.path,
     title: route.title,
@@ -258,6 +403,7 @@ export function businessPlanAdminData(): BusinessPlanAdminData {
     !("error" in x) &&
     x.registered === x.planned &&
     x.missingContentKeys.length === 0 &&
+    x.contractViolations.length === 0 &&
     x.posts.every((post) => post.registryStatus !== null && post.mediaReady);
   const noteReady =
     m1NoteArticles.length === BUSINESS_PLAN_2026.m1.noteProducts.length;
@@ -273,6 +419,7 @@ export function businessPlanAdminData(): BusinessPlanAdminData {
   return {
     catalog: BUSINESS_PLAN_2026,
     state,
+    gisCatalog,
     documents,
     counts: {
       readyContent: BUSINESS_PLAN_2026.contentOpportunities.filter(

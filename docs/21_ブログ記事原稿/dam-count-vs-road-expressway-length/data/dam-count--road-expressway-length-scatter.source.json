@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "dam-count",
+  "pair": "road-expressway-length",
+  "pearsonR": 0.6919049616164107,
+  "partialRPopulation": 0.7118916861484993,
+  "unit": "か所 × km",
+  "label": "ダム数 と 道路実延長（高速道路） の関係",
+  "source": "r2:app/correlation/by-ranking-key/dam-count.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug dam-count-vs-road-expressway-length --base dam-count --pair road-expressway-length --data-name dam-count--road-expressway-length"
+}

@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 
-import { Badge, Button, cn } from "@stats47/components";
+import { Badge, cn } from "@stats47/components";
 
-import { apiSend, ApiError } from "@/lib/client/api-client";
 import { MediaPreview } from "@/components/media-preview";
 import type { BuzzMapEntryDTO } from "@/lib/contracts/types";
 
@@ -32,19 +31,12 @@ function fmtScoreBreakdown(breakdown: Record<string, number> | undefined): strin
 
 export function BuzzMapCard({
   entry,
-  onChanged,
-  onJobStarted,
 }: {
   entry: BuzzMapEntryDTO;
-  onChanged: () => void;
-  onJobStarted: (jobId: string, title: string) => void;
 }) {
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [showBreakdown, setShowBreakdown] = useState(false);
 
   const ideaId = entry.ideaId;
-  const disabledNoIdea = !ideaId;
 
   const mediaCandidates = entry.r2AssetBaseUrl
     ? [
@@ -55,28 +47,6 @@ export function BuzzMapCard({
         },
       ]
     : [];
-
-  const runAction = async (
-    path: string,
-    body: Record<string, unknown>,
-    title: string,
-    expectsJob = true,
-  ) => {
-    setBusy(true);
-    setError(null);
-    try {
-      const r = await apiSend<{ id?: string | number; reasons?: string[] }>(path, "POST", body);
-      if (expectsJob && r.id !== undefined) {
-        onJobStarted(String(r.id), title);
-      } else {
-        onChanged();
-      }
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : String(e));
-    } finally {
-      setBusy(false);
-    }
-  };
 
   const primaryUrl = entry.primaryUrl
     ? entry.primaryUrl.startsWith("http")
@@ -200,158 +170,9 @@ export function BuzzMapCard({
           </span>
         </div>
 
-        <div className="flex flex-wrap gap-1.5 pt-1">
-          <Button
-            type="button"
-            size="sm"
-            variant="outline"
-            className="h-7 px-2 text-[11px]"
-            disabled={busy}
-            onClick={() =>
-              void runAction(
-                "/api/buzz-map/actions/route-landing",
-                {},
-                "buzz-map: landing 再判定 (catalog rebuild)",
-              )
-            }
-          >
-            landing 再判定
-          </Button>
-          <Button
-            type="button"
-            size="sm"
-            variant="outline"
-            className="h-7 px-2 text-[11px]"
-            disabled
-            title="Phase 3 で配線予定"
-          >
-            blog draft 生成 (Phase 3)
-          </Button>
-          <Button
-            type="button"
-            size="sm"
-            variant="outline"
-            className="h-7 px-2 text-[11px]"
-            disabled
-            title="Phase 3 で配線予定"
-          >
-            theme 拡張計画 (Phase 3)
-          </Button>
-          <Button
-            type="button"
-            size="sm"
-            variant="outline"
-            className="h-7 px-2 text-[11px]"
-            disabled={busy || disabledNoIdea}
-            onClick={() => {
-              const helper = window.prompt(
-                "spec helper (estat | ksj | gsi | merge):",
-                entry.sourceKind === "estat"
-                  ? "estat"
-                  : entry.sourceKind === "ksj" || entry.sourceKind === "mlit-dpf"
-                    ? "ksj"
-                    : entry.sourceKind === "gsi"
-                      ? "gsi"
-                      : "estat",
-              );
-              if (!helper) return;
-              void runAction(
-                "/api/buzz-map/actions/generate-spec",
-                { ideaId, helper },
-                `buzz-map: generate-spec (${ideaId})`,
-              );
-            }}
-          >
-            spec 生成
-          </Button>
-          <Button
-            type="button"
-            size="sm"
-            variant="outline"
-            className="h-7 px-2 text-[11px]"
-            disabled={busy || disabledNoIdea}
-            onClick={() =>
-              void runAction(
-                "/api/buzz-map/actions/render",
-                { ideaId, kind: "still" },
-                `buzz-map: render still (${ideaId})`,
-              )
-            }
-          >
-            静止画生成
-          </Button>
-          <Button
-            type="button"
-            size="sm"
-            variant="outline"
-            className="h-7 px-2 text-[11px]"
-            disabled={busy || disabledNoIdea}
-            onClick={() =>
-              void runAction(
-                "/api/buzz-map/actions/render",
-                { ideaId, kind: "preview" },
-                `buzz-map: render preview (${ideaId})`,
-              )
-            }
-          >
-            動画preview
-          </Button>
-          <Button
-            type="button"
-            size="sm"
-            variant="outline"
-            className="h-7 px-2 text-[11px]"
-            disabled={busy || disabledNoIdea}
-            onClick={() => {
-              if (!window.confirm(`本尺動画をレンダします (時間がかかります): ${ideaId}`)) return;
-              void runAction(
-                "/api/buzz-map/actions/render",
-                { ideaId, kind: "full" },
-                `buzz-map: render full (${ideaId})`,
-              );
-            }}
-          >
-            本尺動画生成
-          </Button>
-          <Button
-            type="button"
-            size="sm"
-            variant="destructive"
-            className="h-7 px-2 text-[11px]"
-            disabled={busy || disabledNoIdea}
-            onClick={() => {
-              if (!window.confirm(`R2 へ push します: sns/buzz-map/${ideaId}`)) return;
-              void runAction(
-                "/api/buzz-map/actions/push-r2",
-                { ideaId, confirm: true },
-                `buzz-map: push-r2 (${ideaId})`,
-              );
-            }}
-          >
-            R2 push
-          </Button>
-          <Button
-            type="button"
-            size="sm"
-            className="h-7 px-2 text-[11px]"
-            disabled={busy || disabledNoIdea}
-            onClick={() => {
-              const channel = window.prompt("投稿チャネル (x | instagram):", "x");
-              if (channel !== "x" && channel !== "instagram") return;
-              if (!window.confirm(`draft 登録します: ${channel} / ${ideaId}`)) return;
-              void runAction(
-                "/api/buzz-map/actions/register-draft",
-                { ideaId, channel, confirm: true },
-                "",
-                false,
-              );
-            }}
-          >
-            draft 登録
-          </Button>
+        <div className="rounded-md border border-console-border bg-console-bg px-2 py-1.5 text-[11px] text-console-muted">
+          spec生成・render・R2反映・draft登録は担当agent/skillから実行します。
         </div>
-
-        {error ? <p className="text-[11px] text-console-bad">{error}</p> : null}
       </div>
     </div>
   );

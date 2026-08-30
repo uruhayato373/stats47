@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "shumai-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "しゅうまい消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/shumai-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug shumai-consumption-expenditure-vs-jr-freight-shipment --keys shumai-consumption-expenditure --data-name shumai-consumption-expenditure-vs-jr-freight-shipment-prefecture-rankings",
+  "fetchedAt": "2026-08-30T05:47:26.286Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

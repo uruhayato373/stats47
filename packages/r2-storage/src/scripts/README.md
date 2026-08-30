@@ -66,6 +66,10 @@ npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
 # idea等の十分狭いprefixでは拡張子も必須
 npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
   --prefix sns/buzz-map/example --extension png,mp4
+
+# GIS TopoJSON + provenance metadata
+npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
+  --prefix gis/mlit-ksj/G04-a/11 --extension topojson,json
 ```
 
 対象は`.local/r2`配下だけ。空・広域prefix・候補0件・staging外参照を拒否し、

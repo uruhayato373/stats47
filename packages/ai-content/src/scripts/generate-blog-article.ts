@@ -98,6 +98,8 @@ interface TopicEntry {
   suggestedTitle: string;
   status: string;
   lane: string;
+  /** 47 県に満たない散布図で、対象外の県がなぜ対象外かを宣言する (§blog-svg-chart-standards §6-3) */
+  exclusionReason?: string;
 }
 
 function log(msg: string) {
@@ -366,9 +368,13 @@ async function main() {
         counters.rejected++;
         continue;
       }
+      // 海に面していない県のように構造的に対象外の地域があるペアは 47 点に満たない。
+      // その理由は指標の意味からしか決まらないので、トピック側の宣言だけを通す
+      // (無いまま流すと接地スクリプトが fail-closed で止まる)。
       const scatter = run("node", [
         ".claude/scripts/blog/fetch-correlation-scatter.mjs",
         "--slug", slug, "--base", aKey, "--pair", bKey,
+        ...(topic.exclusionReason ? ["--exclusion-reason", topic.exclusionReason] : []),
       ]);
       if (!scatter.ok) {
         log(`[reject] 散布図の接地に失敗 (相関 snapshot に無い): ${scatter.stderr.trim().slice(0, 160)}`);

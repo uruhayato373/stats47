@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "commute-by-bicycle",
+  "year": "2020",
+  "unit": "人",
+  "label": "自宅外通勤・通学者数（自転車）",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/commute-by-bicycle/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug commute-by-bicycle-prefecture-gap --keys commute-by-bicycle --with-map",
+  "fetchedAt": "2026-08-30T06:14:12.012Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

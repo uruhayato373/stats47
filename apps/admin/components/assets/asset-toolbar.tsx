@@ -2,7 +2,7 @@
 
 import { Button } from "@stats47/components";
 
-/** 旧 UI (assets.html .toolbar) の検索・件数・全件・再読込・欠落チェック・再生成ツールバー。 */
+/** 画像資産を絞り込み・再読込する読み取り専用ツールバー。 */
 export function AssetToolbar({
   query,
   onQueryChange,
@@ -11,10 +11,6 @@ export function AssetToolbar({
   all,
   onAllChange,
   onReload,
-  onCheck,
-  checking,
-  onRegenerate,
-  showRegenerate,
   count,
 }: {
   query: string;
@@ -24,10 +20,6 @@ export function AssetToolbar({
   all: boolean;
   onAllChange: (value: boolean) => void;
   onReload: () => void;
-  onCheck: () => void;
-  checking: boolean;
-  onRegenerate: () => void;
-  showRegenerate: boolean;
   count: string;
 }) {
   return (
@@ -62,14 +54,6 @@ export function AssetToolbar({
       <Button type="button" variant="outline" size="sm" onClick={onReload}>
         読込
       </Button>
-      <Button type="button" variant="outline" size="sm" onClick={onCheck} disabled={checking}>
-        {checking ? "チェック中..." : "⚠ 欠落チェック"}
-      </Button>
-      {showRegenerate ? (
-        <Button type="button" size="sm" onClick={onRegenerate}>
-          ♻ 再生成
-        </Button>
-      ) : null}
       <span className="text-console-muted">{count}</span>
     </div>
   );

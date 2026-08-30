@@ -12,7 +12,6 @@ function source(path: string): string {
 describe('generated image source policy', () => {
   const buzzMapPublishers = [
     '.claude/scripts/sns/prepare-buzz-map-batch.ts',
-    'apps/admin/lib/server/buzz-map-actions.ts',
   ] as const;
 
   it.each(buzzMapPublishers)(

@@ -23,6 +23,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 | `/render-sns-stills` | SNS 用静止画・動画を Remotion で生成（静止画/動画一般の正典入口） |
 | `/bar-chart-race --step render` | BCR 動画を一括レンダリング（Instagram/TikTok/X）。BCR の正典入口 |
 | `/buzz-map` | 日本地図×統計のバズカードを spec 駆動で生成→目視→改善。buzz-map ドメインの正典入口。**型 (A〜E) の一覧・仕様は再列挙せず `.claude/rules/buzz-map-standards.md` §1 を SSOT とする**（型A二値/型B時系列/型C点/型D線ネットワーク/型E合成）。データ源=5 レーン（e-Stat muni/pref、KSJ、DPF、**GSI 地名情報**）。spec ヘルパー: e-Stat=`build-buzz-map-spec.ts` / KSJ・DPF=`build-buzz-map-spec-ksj.ts` / **GSI 地名=`build-buzz-map-spec-gsi.ts`（全国地名点は `fetch-gsi-place-names.ts` で R2 `gis/gsi-pni/` に取得済・以後は再取得不要）** / 型E 合成=`merge-buzz-map-specs.ts`。co-agent: X 配信=x-strategist、IG 配信=instagram-strategist、ジオデータ (KSJ 点/線)=gis-curator |
+| `/operate-geo-content` | Geo地域分析X画像を`GeoX-InsightCard`で生成し、画像・観測値SHAとレイヤー契約を監査。ranking-card/buzz-mapとの混在禁止 |
 | `/preview-remotion` | プレビューデータを Remotion Studio に設定。`--type` で対象を選択（ranking / bar-chart-race / comparison / correlation / area-profile / blog）。**プレビュー専用（レンダしない）** |
 
 ## 前提条件
@@ -41,6 +42,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 ## 出力先
 
 - `.local/r2/sns/ranking/<rankingKey>/{tiktok/,instagram/,x/}` — レンダリング済みメディア
+- `.local/r2/sns/geo/<contentKey>/x/stills/<contentKey>.png` — Geo専用静止画。隣接`source.json`に出典・レイヤー・演算・SHAを記録
 - buzz-map: `.local/r2/sns/buzz-map/<id>/instagram/{stills/slide-1-cover-1080x1350.png,reel.mp4,caption.txt}`（IG は R2 公開 URL 前提。`BuzzMap-Still-45`=4:5 静止画 / `BuzzMap-Reel-916`=9:16 リール）→ `diff-push-r2 --prefix sns/buzz-map` → posts.json draft 登録。X は従来どおり `x/stills/`
 
 ## OGP・画像生成の役割分担

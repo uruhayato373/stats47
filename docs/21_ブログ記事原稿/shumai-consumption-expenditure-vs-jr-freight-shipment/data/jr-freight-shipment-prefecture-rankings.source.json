@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "jr-freight-shipment",
+  "year": "2023",
+  "unit": "トン",
+  "label": "ＪＲ貨物発送量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/jr-freight-shipment/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug shumai-consumption-expenditure-vs-jr-freight-shipment --keys jr-freight-shipment --data-name jr-freight-shipment-prefecture-rankings",
+  "fetchedAt": "2026-08-30T05:47:26.450Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

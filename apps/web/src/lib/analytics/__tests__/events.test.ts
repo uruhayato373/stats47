@@ -48,6 +48,11 @@ describe("GA4 カスタムイベント", () => {
     });
     trackGeoRegionSelect({ ...common, areaCode: "27000" });
     trackGeoCompareAdd({ ...common, areaCode: "01000", comparisonSize: 2 });
+    trackGeoMapInteraction({
+      ...common,
+      interactionType: "stage-overlap",
+      areaCode: "13000",
+    });
 
     expect(mockGtag).toHaveBeenNthCalledWith(1, "event", "geo_analysis_view", {
       analysis_id: "m1-analysis-population-2050",
@@ -75,6 +80,12 @@ describe("GA4 カスタムイベント", () => {
       "event",
       "geo_compare_add",
       expect.objectContaining({ area_code: "01000", comparison_size: 2 })
+    );
+    expect(mockGtag).toHaveBeenNthCalledWith(
+      5,
+      "event",
+      "geo_map_interaction",
+      expect.objectContaining({ interaction_type: "stage-overlap" })
     );
   });
 

@@ -31,6 +31,8 @@ import { BUZZ_MAP_RATIOS, BUZZ_MAP_REEL_DEFAULTS } from './features/buzz-map/tok
 import { ChoroplethMapStillPreview } from './features/ranking-x/previews/ChoroplethMapStillPreview';
 import { RankingBoxplotPreview } from './features/ranking-x/previews/RankingBoxplotPreview';
 import { RankingChartXPreview } from './features/ranking-x/previews/RankingChartXPreview';
+import { GeoInsightCardPreview } from './features/geo-x/previews/GeoInsightCardPreview';
+import type { GeoInsightCardProps } from './features/geo-x/GeoInsightCard';
 // ranking-youtube
 import { ThumbnailPreview } from './features/ranking-youtube/previews/ThumbnailPreview';
 import { RankingNormalPreview } from './features/ranking-youtube/previews/RankingNormalPreview';
@@ -102,6 +104,37 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
+      <Folder name="GeoAI">
+        <Folder name="X">
+          <Composition<any, GeoInsightCardProps>
+            id="GeoX-InsightCard"
+            component={GeoInsightCardPreview}
+            width={BUZZ_MAP_RATIOS['45'].width}
+            height={BUZZ_MAP_RATIOS['45'].height}
+            fps={1}
+            durationInFrames={1}
+            defaultProps={{
+              title: '人口増が見込まれるのは東京だけ',
+              description: '47都道府県を同じ色尺度で比較します。',
+              geoRole: 'baseline' as const,
+              analysisLabel: '2050年将来人口',
+              layerLabels: ['都道府県別将来人口［prefecture］'],
+              operationLabels: ['2020年基準の2050年増減率を算出'],
+              sourceLabels: ['国立社会保障・人口問題研究所'],
+              metricLabel: '2050年人口増減率',
+              metricUnit: '%',
+              metricFormat: 'signedPercent2',
+              mapMode: 'baseline-choropleth' as const,
+              highlightAreaCodes: ['13000'],
+              panelKind: 'statement' as const,
+              panelLabel: '2020年 → 2050年',
+              panelItems: ['人口増加：1都', '人口減少：46道府県'],
+              allEntries: [],
+            }}
+          />
+        </Folder>
+      </Folder>
+
       <Folder name="Ranking">
         <Folder name="X">
           {/* X用チャート (1200x630) */}

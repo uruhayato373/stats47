@@ -9,52 +9,36 @@
  *   npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts --list
  */
 
-import * as fs from "node:fs";
-import * as path from "node:path";
-import Database from "better-sqlite3";
-
 import { runKsjPipeline } from "../pipeline";
+import { GIS_DATASETS, GIS_DATASETS_BY_ID } from "../datasets";
+import { discoverMeshCodes } from "../mesh-discovery";
 import type { KsjPipelineResult } from "../types";
 
-const LOCAL_D1_PATH =
-  "packages/database/.data/stats47.sqlite";
-
 interface DatasetMeta {
-  data_id: string;
+  dataId: string;
   name: string;
   category: string;
   coverage: string;
 }
 
-/** D1 から category 別の登録済み (status='registered'|'imported') データセットを取得 */
+/** git TS SSOTからカテゴリ別データセットを取得 */
 function fetchDatasetsByCategory(category: string): DatasetMeta[] {
-  const projectRoot = findProjectRoot();
-  const dbPath = path.join(projectRoot, LOCAL_D1_PATH);
-  const db = new Database(dbPath, { readonly: true });
-  const rows = db
-    .prepare(
-      `SELECT data_id, name, category, coverage
-       FROM gis_datasets
-       WHERE category = ? AND status IN ('registered', 'imported')
-       ORDER BY data_id`,
-    )
-    .all(category) as DatasetMeta[];
-  db.close();
-  return rows;
+  return GIS_DATASETS
+    .filter((item) => item.category === category)
+    .map(({ dataId, name, category: itemCategory, coverage }) => ({
+      dataId,
+      name,
+      category: itemCategory,
+      coverage,
+    }));
 }
 
-/** D1 から指定 dataId のメタを取得 */
+/** git TS SSOTから指定dataIdのメタを取得 */
 function fetchDatasetMeta(dataId: string): DatasetMeta | null {
-  const projectRoot = findProjectRoot();
-  const dbPath = path.join(projectRoot, LOCAL_D1_PATH);
-  const db = new Database(dbPath, { readonly: true });
-  const row = db
-    .prepare(
-      `SELECT data_id, name, category, coverage FROM gis_datasets WHERE data_id = ?`,
-    )
-    .get(dataId) as DatasetMeta | undefined;
-  db.close();
-  return row ?? null;
+  const item = GIS_DATASETS_BY_ID.get(dataId);
+  return item
+    ? { dataId: item.dataId, name: item.name, category: item.category, coverage: item.coverage }
+    : null;
 }
 
 function printHelp() {
@@ -67,6 +51,8 @@ KSJ データパイプライン
 オプション:
   --pref <code>       都道府県コード（県別データの場合）
   --all-prefs         県別データの全47都道府県を一括取得
+  --mesh <code>       1次メッシュコード（メッシュ配布データの場合）
+  --all-meshes        公式ページ掲載の全1次メッシュを一括取得
   --version <v>       バージョン指定（デフォルト: latestVersion）
   --skip-download     既存 zip を再利用
   --category <cat>    カテゴリ内の全国データセットを一括取得
@@ -76,56 +62,17 @@ KSJ データパイプライン
   run-pipeline.ts N02                    # 鉄道（全国）
   run-pipeline.ts P04 --pref 13          # 医療機関（東京）
   run-pipeline.ts P04 --all-prefs        # 医療機関（全47都道府県）
+  run-pipeline.ts G04-a --all-meshes     # 標高・傾斜度（全1次メッシュ）
   run-pipeline.ts --category transport   # 交通カテゴリの全国データ一括
   run-pipeline.ts --list                 # データセット一覧
 `);
 }
 
 function printList() {
-  // D1 gis_datasets を真実源とする。registry.ts 単独表示が必要な場合は別途
-  // --list-registry オプションを追加する想定 (Phase 2 以降)。
-  const projectRoot = findProjectRoot();
-  const dbPath = path.join(projectRoot, LOCAL_D1_PATH);
-  if (!fs.existsSync(dbPath)) {
-    console.error(`ローカル D1 SQLite が見つかりません: ${dbPath}`);
-    process.exit(1);
-  }
-
-  interface Row {
-    data_id: string;
-    name: string;
-    geometry_type: string;
-    coverage: string;
-    license: string;
-    status: string;
-    r2_version: string | null;
-  }
-
-  const db = new Database(dbPath, { readonly: true });
-  const rows = db
-    .prepare(
-      `SELECT data_id, name, geometry_type, coverage, license, status, r2_version
-       FROM gis_datasets
-       ORDER BY status, category, data_id`,
-    )
-    .all() as Row[];
-  db.close();
-
-  const statusCounts: Record<string, number> = {
-    available: 0,
-    registered: 0,
-    imported: 0,
-    deprecated: 0,
-  };
-  for (const r of rows) statusCounts[r.status] = (statusCounts[r.status] ?? 0) + 1;
-
-  console.log("\nKSJ データセット一覧 (D1: gis_datasets):\n");
-  console.log(
-    `  状態: available ${statusCounts.available} / registered ${statusCounts.registered} / imported ${statusCounts.imported} / deprecated ${statusCounts.deprecated} (計 ${rows.length})\n`,
-  );
+  const rows = [...GIS_DATASETS].sort((a, b) => a.dataId.localeCompare(b.dataId));
+  console.log("\nKSJ データセット一覧 (git TS: datasets.ts):\n");
   console.log(
     "  " +
-      "状態".padEnd(10) +
       "ID".padEnd(12) +
       "名前".padEnd(16) +
       "型".padEnd(10) +
@@ -136,24 +83,10 @@ function printList() {
   console.log("  " + "-".repeat(90));
   for (const r of rows) {
     console.log(
-      `  ${r.status.padEnd(10)} ${r.data_id.padEnd(12)} ${r.name.padEnd(14)} ${r.geometry_type.padEnd(10)} ${r.coverage.padEnd(14)} ${(r.r2_version ?? "—").padEnd(12)} ${r.license}`,
+      `  ${r.dataId.padEnd(12)} ${r.name.padEnd(14)} ${r.geometryType.padEnd(10)} ${r.coverage.padEnd(14)} ${(r.latestVersion ?? "—").padEnd(12)} ${r.license}`,
     );
   }
   console.log("");
-}
-
-function findProjectRoot(): string {
-  let dir = __dirname;
-  for (let i = 0; i < 10; i++) {
-    if (fs.existsSync(path.join(dir, "package.json"))) {
-      const pkg = JSON.parse(
-        fs.readFileSync(path.join(dir, "package.json"), "utf-8"),
-      );
-      if (pkg.workspaces || pkg.name === "stats47") return dir;
-    }
-    dir = path.dirname(dir);
-  }
-  throw new Error("Could not find project root");
 }
 
 function printResult(result: KsjPipelineResult) {
@@ -187,12 +120,12 @@ async function runCategory(category: string) {
 
   for (const def of nationalDatasets) {
     try {
-      const result = await runKsjPipeline({ dataId: def.data_id });
+      const result = await runKsjPipeline({ dataId: def.dataId });
       results.push(result);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
-      console.error(`  [SKIP] ${def.data_id} (${def.name}): ${msg}\n`);
-      errors.push({ dataId: def.data_id, error: msg });
+      console.error(`  [SKIP] ${def.dataId} (${def.name}): ${msg}\n`);
+      errors.push({ dataId: def.dataId, error: msg });
     }
   }
 
@@ -217,17 +150,17 @@ async function runCategory(category: string) {
   console.log(`  合計サイズ: ${(totalSize / 1024 / 1024).toFixed(1)}MB`);
 }
 
-async function runAllPrefs(dataId: string, skipDownload: boolean) {
+async function runAllPrefs(dataId: string, version: string | undefined, skipDownload: boolean) {
   const def = fetchDatasetMeta(dataId);
   if (!def) {
     console.error(
-      `D1 gis_datasets に ${dataId} がありません。seed-from-registry.ts を実行してください。`,
+      `datasets.ts に ${dataId} がありません。`,
     );
     process.exit(1);
   }
-  if (def.coverage !== "prefecture" && def.coverage !== "mesh") {
+  if (def.coverage !== "prefecture") {
     console.error(
-      `${dataId} は全国データセットです。--all-prefs は県別・メッシュデータのみ対応。`,
+      `${dataId} は県別配布データではありません。メッシュ配布は --all-meshes を指定してください。`,
     );
     process.exit(1);
   }
@@ -242,6 +175,7 @@ async function runAllPrefs(dataId: string, skipDownload: boolean) {
     try {
       const result = await runKsjPipeline({
         dataId,
+        version,
         prefCode,
         skipDownload,
       });
@@ -269,6 +203,44 @@ async function runAllPrefs(dataId: string, skipDownload: boolean) {
   console.log(`  合計サイズ: ${(totalSize / 1024 / 1024).toFixed(1)}MB`);
 }
 
+async function runAllMeshes(dataId: string, versionArg: string | undefined, skipDownload: boolean) {
+  const meta = GIS_DATASETS_BY_ID.get(dataId);
+  if (!meta || meta.coverage !== "mesh" || !meta.latestVersion) {
+    throw new Error(`${dataId} は登録済みメッシュ配布データではありません。`);
+  }
+  const version = versionArg ?? meta.latestVersion;
+  if (!meta.sourcePageUrl) {
+    throw new Error(`${dataId} に sourcePageUrl がありません。`);
+  }
+  const meshCodes = await discoverMeshCodes({
+    dataId,
+    version,
+    sourcePageUrl: meta.sourcePageUrl,
+  });
+  console.log(`\n全1次メッシュ取得: ${dataId} (${meta.name}) ${meshCodes.length}区画\n`);
+  const results: KsjPipelineResult[] = [];
+  const errors: Array<{ meshCode: string; error: string }> = [];
+  for (const meshCode of meshCodes) {
+    try {
+      results.push(await runKsjPipeline({ dataId, version, meshCode, skipDownload }));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error(`  [FAIL] ${meshCode}: ${message}\n`);
+      errors.push({ meshCode, error: message });
+    }
+  }
+  const totalSize = results.reduce(
+    (sum, result) => sum + result.outputFiles.reduce((fileSum, file) => fileSum + file.sizeBytes, 0),
+    0,
+  );
+  console.log(`\n=== 全1次メッシュ取得結果 ===`);
+  console.log(`  成功: ${results.length}/${meshCodes.length}`);
+  console.log(`  合計サイズ: ${(totalSize / 1024 / 1024).toFixed(1)}MB`);
+  if (errors.length > 0) {
+    throw new Error(`${dataId}: ${errors.length}区画の取得に失敗しました。`);
+  }
+}
+
 async function main() {
   const args = process.argv.slice(2);
 
@@ -291,20 +263,27 @@ async function main() {
   const dataId = args[0];
   const prefIdx = args.indexOf("--pref");
   const prefCode = prefIdx >= 0 ? args[prefIdx + 1] : undefined;
+  const meshIdx = args.indexOf("--mesh");
+  const meshCode = meshIdx >= 0 ? args[meshIdx + 1] : undefined;
   const versionIdx = args.indexOf("--version");
   const version = versionIdx >= 0 ? args[versionIdx + 1] : undefined;
   const skipDownload = args.includes("--skip-download");
   const allPrefs = args.includes("--all-prefs");
+  const allMeshes = args.includes("--all-meshes");
 
   if (allPrefs) {
-    await runAllPrefs(dataId, skipDownload);
+    await runAllPrefs(dataId, version, skipDownload);
+    return;
+  }
+  if (allMeshes) {
+    await runAllMeshes(dataId, version, skipDownload);
     return;
   }
 
   const def = fetchDatasetMeta(dataId);
   if (!def) {
     console.error(
-      `D1 gis_datasets に ${dataId} がありません。seed-from-registry.ts を実行してください。`,
+      `datasets.ts に ${dataId} がありません。`,
     );
     process.exit(1);
   }
@@ -314,11 +293,18 @@ async function main() {
     );
     process.exit(1);
   }
+  if (def.coverage === "mesh" && !meshCode) {
+    console.error(
+      `エラー: ${dataId} (${def.name}) は1次メッシュ配布です。--mesh <code> または --all-meshes を指定してください。`,
+    );
+    process.exit(1);
+  }
 
   const result = await runKsjPipeline({
     dataId,
     version,
     prefCode,
+    meshCode,
     skipDownload,
   });
 
