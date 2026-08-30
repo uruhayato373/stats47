@@ -174,6 +174,33 @@ function normalizeUsage(response: GeminiResponse): GeminiTokenUsage {
   };
 }
 
+/** generateContent の responseSchema は protobuf enum の大文字 type を要求する。 */
+function toGenerateContentResponseSchema(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(toGenerateContentResponseSchema);
+  if (!value || typeof value !== "object") return value;
+  return Object.fromEntries(
+    Object.entries(value)
+      // Schema protobuf に無い JSON Schema 専用フィールドは送らない。
+      .filter(([key]) => key !== "additionalProperties")
+      .map(([key, child]) => [
+        key,
+        key === "type" && typeof child === "string"
+          ? child.toUpperCase()
+          : ["minItems", "maxItems", "minProperties", "maxProperties", "minLength", "maxLength"].includes(key) &&
+              typeof child === "number"
+            ? String(child)
+            : toGenerateContentResponseSchema(child),
+      ]),
+  );
+}
+
+function structuredOutputConfig(schema?: GeminiJsonSchema): Record<string, unknown> {
+  return {
+    responseMimeType: "application/json",
+    ...(schema ? { responseSchema: toGenerateContentResponseSchema(schema) } : {}),
+  };
+}
+
 export async function generateContentText(
   options: GenerateTextOptions,
 ): Promise<GenerateTextResult> {
@@ -198,12 +225,7 @@ export async function generateContentText(
         body: JSON.stringify({
           contents: [{ parts: [{ text: options.prompt }] }],
           generationConfig: {
-            responseFormat: {
-              text: {
-                mimeType: "application/json",
-                ...(options.responseJsonSchema ? { schema: options.responseJsonSchema } : {}),
-              },
-            },
+            ...structuredOutputConfig(options.responseJsonSchema),
             maxOutputTokens: options.maxOutputTokens ?? DEFAULT_MAX_OUTPUT_TOKENS,
             temperature: options.temperature ?? 0.4,
           },

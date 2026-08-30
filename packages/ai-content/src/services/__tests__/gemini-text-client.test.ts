@@ -21,22 +21,38 @@ const okBody = {
 afterEach(() => vi.restoreAllMocks());
 
 describe("generateContentText", () => {
-  it("API key を URL に出さず structured JSON と usage を返す", async () => {
+  it("generateContent は responseSchema 形式と大文字 schema type を使う", async () => {
     const fetchImpl = vi.fn(async (_url: string | URL | Request, init?: RequestInit) => {
       const url = String(_url);
       expect(url).toContain("gemini-2.5-flash-lite:generateContent");
       expect(url).not.toContain("secret-key");
       expect(new Headers(init?.headers).get("x-goog-api-key")).toBe("secret-key");
       const body = JSON.parse(String(init?.body));
-      expect(body.generationConfig.responseFormat.text.mimeType).toBe("application/json");
-      expect(body.generationConfig.responseFormat.text.schema).toEqual({ type: "object" });
+      expect(body.generationConfig.responseMimeType).toBe("application/json");
+      expect(body.generationConfig.responseSchema).toEqual({
+        type: "OBJECT",
+        properties: {
+          items: {
+            type: "ARRAY",
+            minItems: "1",
+            items: { type: "STRING" },
+          },
+        },
+      });
+      expect(body.generationConfig.responseFormat).toBeUndefined();
       return new Response(JSON.stringify(okBody), { status: 200 });
     });
 
     const result = await generateContentText({
       prompt: "test",
       apiKey: "secret-key",
-      responseJsonSchema: { type: "object" },
+      responseJsonSchema: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          items: { type: "array", minItems: 1, items: { type: "string" } },
+        },
+      },
       fetchImpl: fetchImpl as typeof fetch,
     });
 
