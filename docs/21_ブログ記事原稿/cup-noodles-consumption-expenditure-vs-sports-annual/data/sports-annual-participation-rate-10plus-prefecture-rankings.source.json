@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sports-annual-participation-rate-10plus",
+  "year": "2021",
+  "unit": "％",
+  "label": "スポーツの年間行動者率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/sports-annual-participation-rate-10plus/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cup-noodles-consumption-expenditure-vs-sports-annual --keys sports-annual-participation-rate-10plus --data-name sports-annual-participation-rate-10plus-prefecture-rankings",
+  "fetchedAt": "2026-08-30T05:46:52.227Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

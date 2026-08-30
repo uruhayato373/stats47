@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "auto-liability-insurance-amount-received-per-payment",
+  "year": "2023",
+  "unit": "万円",
+  "label": "自動車損害賠償責任保険受取保険金額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/auto-liability-insurance-amount-received-per-payment/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug annual-sunshine-duration-vs-auto-liability-insurance-amount --keys auto-liability-insurance-amount-received-per-payment --data-name auto-liability-insurance-amount-received-per-payment-prefecture-rankings",
+  "fetchedAt": "2026-08-30T05:47:24.676Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
