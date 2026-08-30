@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "voter-turnout-house-single",
+  "year": "2021",
+  "unit": "％",
+  "label": "衆議院議員選挙投票率（小選挙区）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/voter-turnout-house-single/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug voter-turnout-house-single-prefecture-gap --keys voter-turnout-house-single --data-name voter-turnout-house-single-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T03:28:03.829Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

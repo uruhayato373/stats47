@@ -471,6 +471,27 @@
       ]
     },
     {
+      "name": "KDP_PROFILE_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "KINDLE_ARCHIVE_BUCKET",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "KINDLE_ARCHIVE_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "LOCAL_DB_PATH",
       "visibility": "server",
       "contexts": [
