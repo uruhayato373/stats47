@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-08-30
- * 件数: blog 498 / tag 62 / survey 81
+ * 件数: blog 508 / tag 62 / survey 81
  */
 
 export interface SitemapBlogEntry {
@@ -31,6 +31,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "ai-claude-code-pref-analysis", lastModified: "2026-06-13" },
   { slug: "aichi-food-culture", lastModified: "2026-07-10" },
   { slug: "air-conditioner-consumption-quantity-prefecture-gap", lastModified: "2026-08-30" },
+  { slug: "airport-count-prefecture-gap", lastModified: "2026-08-30" },
+  { slug: "airport-count-vs-wind-power-plant-count-facility", lastModified: "2026-08-30" },
   { slug: "akita-food-culture", lastModified: "2026-07-10" },
   { slug: "alcohol-prefecture-map", lastModified: "2026-03-04" },
   { slug: "allocation-tax-area", lastModified: "2026-08-28" },
@@ -122,6 +124,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "curry-roux-consumption-gap", lastModified: "2026-06-07" },
   { slug: "dairy-cattle-count", lastModified: "2026-06-14" },
   { slug: "dairy-cattle-hokkaido-monopoly", lastModified: "2026-06-02" },
+  { slug: "dam-count-prefecture-gap", lastModified: "2026-08-30" },
+  { slug: "dam-count-vs-road-expressway-length", lastModified: "2026-08-30" },
   { slug: "day-time-population-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "delivery-fee-consumption-expenditure-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "dental-checkup-persons-per-1000-prefecture-gap", lastModified: "2026-08-30" },
@@ -233,6 +237,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "housing-cost-livability-trend", lastModified: "2026-03-06" },
   { slug: "hyogo-food-culture", lastModified: "2026-07-10" },
   { slug: "ibaraki-food-culture", lastModified: "2026-07-10" },
+  { slug: "ibaraki-migration-flow", lastModified: "2026-08-30" },
   { slug: "icecream-consumption-expenditure", lastModified: "2026-06-21" },
   { slug: "ict-digital-divide-composite-analysis", lastModified: "2026-03-06" },
   { slug: "ict-media-consumption-gender-gap", lastModified: "2026-03-06" },
@@ -261,16 +266,19 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "instant-noodles-consumption-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "international-cooperation-volunteer-map", lastModified: "2026-03-06" },
   { slug: "ishikawa-food-culture", lastModified: "2026-07-10" },
+  { slug: "ishikawa-migration-flow", lastModified: "2026-08-30" },
   { slug: "it-establishments-prefecture", lastModified: "2026-06-02" },
   { slug: "it-industry-concentration", lastModified: "2026-06-02" },
   { slug: "iwate-food-culture", lastModified: "2026-07-10" },
   { slug: "kagawa-food-culture", lastModified: "2026-07-10" },
   { slug: "kagoshima-food-culture", lastModified: "2026-07-10" },
   { slug: "kanagawa-food-culture", lastModified: "2026-07-10" },
+  { slug: "kanagawa-migration-flow", lastModified: "2026-08-30" },
   { slug: "katsuobushi-expenditure-ranking", lastModified: "2026-07-09" },
   { slug: "kawa-gawa-river-place-name-map", lastModified: "2026-07-17" },
   { slug: "kei-car-density-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "kochi-food-culture", lastModified: "2026-07-10" },
+  { slug: "kochi-municipal-finance", lastModified: "2026-08-30" },
   { slug: "konbu-consumption-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "konbu-consumption-quantity", lastModified: "2026-06-07" },
   { slug: "konnyaku-expenditure-ranking", lastModified: "2026-07-10" },
@@ -278,6 +286,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "koumuin-claude-code-estat-automation", lastModified: "2026-05-20" },
   { slug: "kumamoto-food-culture", lastModified: "2026-07-10" },
   { slug: "kyoto-food-culture", lastModified: "2026-07-11" },
+  { slug: "lake-count-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "late-elderly-medical-expense-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "library-books-prefecture-gap", lastModified: "2026-06-10" },
   { slug: "library-museum-cultural-capital", lastModified: "2026-03-06" },
@@ -286,6 +295,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "local-allocation-tax-prefecture-vs-cultivated-area", lastModified: "2026-08-30" },
   { slug: "local-allocation-tax-prefecture-vs-total-area-excluding", lastModified: "2026-08-29" },
   { slug: "local-debt-current-ratio-prefecture-gap", lastModified: "2026-05-17" },
+  { slug: "local-finance-theme-overview", lastModified: "2026-08-30" },
   { slug: "local-government-debt-burden", lastModified: "2026-06-07" },
   { slug: "local-tax-prefecture-vs-railway-passengers", lastModified: "2026-08-30" },
   { slug: "local-tax-regional-gap", lastModified: "2026-03-05" },
