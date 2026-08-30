@@ -84,22 +84,26 @@ jobs:
       - name: 🚪 Gemini structured-output preflight
         id: preflight
         if: ${{ steps.targets.outputs.count != '0' && !inputs.dry_run }}
-        continue-on-error: true
+        shell: bash
         run: |
-          npm run ai:preflight --workspace @stats47/ai-content -- \
+          set -euo pipefail
+          if npm run ai:preflight --workspace @stats47/ai-content -- \
             --targets "${{ steps.targets.outputs.count }}" \
-            --report .local/ci/gemini-preflight.json
+            --report .local/ci/gemini-preflight.json; then
+            echo "status=success" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=failure" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: ✍️ Generate, audit, and independently review
         id: generate
-        if: ${{ steps.targets.outputs.count != '0' && (inputs.dry_run || steps.preflight.outcome == 'success') }}
-        continue-on-error: true
+        if: ${{ steps.targets.outputs.count != '0' && (inputs.dry_run || steps.preflight.outputs.status == 'success') }}
         shell: bash
         run: |
           set -euo pipefail
           EXTRA=()
           if [ "${{ inputs.dry_run || false }}" = "true" ]; then EXTRA+=(--dry-run); fi
-          npm run ai:gen --workspace @stats47/ai-content -- \
+          if npm run ai:gen --workspace @stats47/ai-content -- \
             --model gemini-api \
             --critic gemini-api \
             --concurrency 1 \
@@ -107,7 +111,11 @@ jobs:
             --retries 1 \
             --outbox \
             --report .local/ci/gemini-run.json \
-            "${EXTRA[@]}"
+            "${EXTRA[@]}"; then
+            echo "status=success" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=failure" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: 📊 Record token usage and pass rate
         if: ${{ always() && !inputs.dry_run && (hashFiles('.local/ci/gemini-run.json') != '' || hashFiles('.local/ci/gemini-preflight.json') != '') }}
@@ -156,19 +164,19 @@ jobs:
           [ "$PUSHED" = true ] || { echo "::error::develop push failed"; exit 1; }
 
       - name: 🛑 Enforce non-zero generation
-        if: ${{ steps.targets.outputs.count != '0' && steps.generate.outcome == 'failure' }}
+        if: ${{ steps.targets.outputs.count != '0' && steps.generate.outputs.status == 'failure' }}
         run: |
           echo "::error::対象があるのに監査通過の生成物が 0 件です"
           exit 1
 
       - name: 🛑 Enforce preflight success
-        if: ${{ steps.targets.outputs.count != '0' && !inputs.dry_run && steps.preflight.outcome == 'failure' }}
+        if: ${{ steps.targets.outputs.count != '0' && !inputs.dry_run && steps.preflight.outputs.status == 'failure' }}
         run: |
           echo "::error::Gemini structured-output preflight に失敗しました"
           exit 1
 
       - name: 📤 Dispatch R2 publisher and wait for completion
-        if: ${{ steps.targets.outputs.count != '0' && !inputs.dry_run && steps.generate.outcome == 'success' && steps.outcomes.outputs.passed_space != '' }}
+        if: ${{ steps.targets.outputs.count != '0' && !inputs.dry_run && steps.generate.outputs.status == 'success' && steps.outcomes.outputs.passed_space != '' }}
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -196,7 +204,7 @@ jobs:
           {
             echo "- 対象: ${{ steps.targets.outputs.count || '0' }}"
             echo "- keys: ${{ steps.targets.outputs.keys_space || 'なし' }}"
-            echo "- 生成step: ${{ steps.generate.outcome || 'skipped' }}"
+            echo "- 生成step: ${{ steps.generate.outputs.status || 'skipped' }}"
             echo "- PASS keys: ${{ steps.outcomes.outputs.passed_space || 'なし' }}"
             echo "- model: ${GEMINI_TEXT_MODEL}"
             echo "- 無料運用条件: GEMINI_API_KEY の project で billing が無効"
