@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "commute-by-car",
+  "year": "2020",
+  "unit": "人",
+  "label": "自宅外通勤・通学者数（自家用車）",
+  "transform": "all47 (choropleth・値は ranking と同一)",
+  "source": "r2:app/ranking/commute-by-car/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug commute-by-car-prefecture-gap --keys commute-by-car --with-map",
+  "fetchedAt": "2026-08-30T03:27:50.202Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

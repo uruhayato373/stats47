@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "households-on-public-assistance-per-1000",
+  "year": "2023",
+  "unit": "世帯",
+  "label": "生活保護被保護実世帯数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/households-on-public-assistance-per-1000/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug households-on-public-assistance-per-1000-prefecture-gap --keys households-on-public-assistance-per-1000 --data-name households-on-public-assistance-per-1000-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T03:28:08.625Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

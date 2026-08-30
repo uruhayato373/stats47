@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "university-new-graduates-unemployment-rate",
+  "year": "2023",
+  "unit": "％",
+  "label": "大学新規卒業者の無業者率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/university-new-graduates-unemployment-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug university-new-graduates-unemployment-rate-prefecture-gap --keys university-new-graduates-unemployment-rate --data-name university-new-graduates-unemployment-rate-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-08-30T03:28:26.099Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
