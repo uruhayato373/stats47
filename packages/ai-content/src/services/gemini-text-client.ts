@@ -174,6 +174,43 @@ function normalizeUsage(response: GeminiResponse): GeminiTokenUsage {
   };
 }
 
+/** generateContent の 2.x responseSchema は protobuf enum の大文字 type を要求する。 */
+function toGemini2ResponseSchema(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(toGemini2ResponseSchema);
+  if (!value || typeof value !== "object") return value;
+  return Object.fromEntries(
+    Object.entries(value)
+      // Gemini 2.x の Schema protobuf に無い JSON Schema 専用フィールドは送らない。
+      .filter(([key]) => key !== "additionalProperties")
+      .map(([key, child]) => [
+        key,
+        key === "type" && typeof child === "string"
+          ? child.toUpperCase()
+          : ["minItems", "maxItems", "minProperties", "maxProperties", "minLength", "maxLength"].includes(key) &&
+              typeof child === "number"
+            ? String(child)
+            : toGemini2ResponseSchema(child),
+      ]),
+  );
+}
+
+function structuredOutputConfig(model: string, schema?: GeminiJsonSchema): Record<string, unknown> {
+  if (model.startsWith("gemini-2.")) {
+    return {
+      responseMimeType: "application/json",
+      ...(schema ? { responseSchema: toGemini2ResponseSchema(schema) } : {}),
+    };
+  }
+  return {
+    responseFormat: {
+      text: {
+        mimeType: "application/json",
+        ...(schema ? { schema } : {}),
+      },
+    },
+  };
+}
+
 export async function generateContentText(
   options: GenerateTextOptions,
 ): Promise<GenerateTextResult> {
@@ -198,12 +235,7 @@ export async function generateContentText(
         body: JSON.stringify({
           contents: [{ parts: [{ text: options.prompt }] }],
           generationConfig: {
-            responseFormat: {
-              text: {
-                mimeType: "application/json",
-                ...(options.responseJsonSchema ? { schema: options.responseJsonSchema } : {}),
-              },
-            },
+            ...structuredOutputConfig(model, options.responseJsonSchema),
             maxOutputTokens: options.maxOutputTokens ?? DEFAULT_MAX_OUTPUT_TOKENS,
             temperature: options.temperature ?? 0.4,
           },

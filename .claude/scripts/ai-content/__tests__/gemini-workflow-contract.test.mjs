@@ -17,6 +17,8 @@ test("Gemini日次は少量・直列・structured preflight・独立criticを固
 
 test("preflight失敗を記録してから赤にし、PASS keyだけpublisherへ渡す", () => {
   assert.match(daily, /--preflight-report \.local\/ci\/gemini-preflight\.json/);
+  assert.match(daily, /--report "\$GITHUB_WORKSPACE\/\.local\/ci\/gemini-preflight\.json"/);
+  assert.match(daily, /--report "\$GITHUB_WORKSPACE\/\.local\/ci\/gemini-run\.json"/);
   assert.match(daily, /Enforce preflight success/);
   assert.match(daily, /steps\.preflight\.outputs\.status == 'failure'/);
   assert.match(daily, /steps\.generate\.outputs\.status == 'failure'/);
