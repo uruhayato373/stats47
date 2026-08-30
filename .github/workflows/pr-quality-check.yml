@@ -797,6 +797,10 @@ jobs:
           NODE_OPTIONS: '--max-old-space-size=4096'
         continue-on-error: false
 
+      - name: 🧹 Lint Admin Console
+        run: npm run lint --workspace=apps/admin
+        continue-on-error: false
+
       - name: 🧾 Audit Content Operations SSOT
         run: npm run audit:content-operations
         continue-on-error: false
@@ -804,10 +808,10 @@ jobs:
       - name: 🌐 Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: 🎭 Run Admin Desktop Smoke
-        # production buildをnext startで再利用し、11画面・ナビ・横幅をdesktopで検証する。
-        # 全6 spec / mobileは実データ依存を含むため、PRの最小安定経路には混ぜない。
-        run: npm run test:e2e --workspace=apps/admin -- --project=desktop tests/e2e/smoke.spec.ts
+      - name: 🎭 Run Admin Desktop Gates
+        # production buildをnext startで再利用し、18画面・ナビ・横幅に加えて
+        # 参考文献12チャネル・絞り込み・contextページ送りをdesktopで検証する。
+        run: npm run test:e2e --workspace=apps/admin -- --project=desktop tests/e2e/smoke.spec.ts tests/e2e/references.spec.ts
         env:
           CI: 'true'
           NODE_ENV: production

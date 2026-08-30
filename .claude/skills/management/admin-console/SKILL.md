@@ -70,7 +70,7 @@ PORT=5000 npm run admin    # ポート変更
 - 投稿台帳 SSOT は `.claude/state/sns/posts.json`。**書込は sns-posts-store.cjs 経由のみ** (server も同経路)
 - note は git TS catalog + R2本文、Kindleは book-catalog/manuscripts + kdp-listings がSSOT。`/content`用の新規台帳を作らない
 - 参考文献展開は `.claude/state/source-inventory/` と既存コンテンツSSOTを実行時に突合する派生read model。制作可能単位は12チャネル、context-onlyは補強専用として全件集約し、別台帳・Drive ID・原本/OCR/cropを保持しない
-- `npm run audit:content-operations` は duplicate ID、公開証跡、catalog/listings集合差、draft索引孤児、個別制作物のTODO二重登録、参考文献inventoryとmetric/area接続を検査し、errorで失敗する。PRのadmin-qualityでblocking実行
+- `npm run audit:content-operations` は duplicate ID、公開証跡、catalog/listings集合差、draft索引孤児、個別制作物のTODO二重登録、参考文献inventoryとmetric/area接続を検査し、errorで失敗する。PRのadmin-qualityはbuild + lint + audit + 参考文献E2Eをblocking実行
 - 頻度リミット (§1) は画面の残枠バッジ + 各ガードで enforce
 - **R2 の投稿済み動画は30日で自動削除** (`cleanup-r2-sns-videos.yml` weekly)。再投稿したい場合は再レンダー
 - IG の予約は 1 日 1 件 (cron 仕様)。同日重複は登録時に拒否される

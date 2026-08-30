@@ -1,6 +1,6 @@
 ---
 name: admin-console
-description: 統合メディア管理コンソール (ローカル) を起動する。X/Instagram/note/Kindleの原稿・公開状態・次アクションとSSOT監査、SNS投稿/予約/caption/メトリクス、画像資産、SVG、調査、収益、品質、TODOを横断確認する。Use when user says "管理画面", "メディアコンソール", "admin", "投稿管理画面", "コンテンツ管理", "Kindle管理", "note管理", "画像資産を確認", "SNSギャラリー"。
+description: 統合メディア管理コンソール (ローカル) を起動する。X/Instagram/note/Kindleの原稿・公開状態・参考文献の展開状況・次アクションとSSOT監査、SNS投稿/予約/caption/メトリクス、画像資産、SVG、調査、収益、品質、TODOを横断確認する。Use when user says "管理画面", "メディアコンソール", "admin", "投稿管理画面", "コンテンツ管理", "参考文献管理", "Kindle管理", "note管理", "画像資産を確認", "SNSギャラリー"。
 primary_agent: sns-metrics-sync
 co_agents: [note-manager, kindle-publisher, kdp-operator]
 ---
@@ -69,7 +69,8 @@ PORT=5000 npm run admin    # ポート変更
 
 - 投稿台帳 SSOT は `.claude/state/sns/posts.json`。**書込は sns-posts-store.cjs 経由のみ** (server も同経路)
 - note は git TS catalog + R2本文、Kindleは book-catalog/manuscripts + kdp-listings がSSOT。`/content`用の新規台帳を作らない
-- `npm run audit:content-operations` は duplicate ID、公開証跡、catalog/listings集合差、draft索引孤児、個別制作物のTODO二重登録を検査し、errorで失敗する。PRのadmin-qualityでblocking実行
+- 参考文献展開は `.claude/state/source-inventory/` と既存コンテンツSSOTを実行時に突合する派生read model。制作可能単位は12チャネル、context-onlyは補強専用として全件集約し、別台帳・Drive ID・原本/OCR/cropを保持しない
+- `npm run audit:content-operations` は duplicate ID、公開証跡、catalog/listings集合差、draft索引孤児、個別制作物のTODO二重登録、参考文献inventoryとmetric/area接続を検査し、errorで失敗する。PRのadmin-qualityはbuild + lint + audit + 参考文献E2Eをblocking実行
 - 頻度リミット (§1) は画面の残枠バッジ + 各ガードで enforce
 - **R2 の投稿済み動画は30日で自動削除** (`cleanup-r2-sns-videos.yml` weekly)。再投稿したい場合は再レンダー
 - IG の予約は 1 日 1 件 (cron 仕様)。同日重複は登録時に拒否される
@@ -87,7 +88,7 @@ PORT=5000 npm run admin    # ポート変更
 
 ## 関連
 
-- 実装: `apps/admin/` (Next.js App Router。app/=17画面+API、lib/content-operations/=正規化・監査、README に構成・ガード詳細)
+- 実装: `apps/admin/` (Next.js App Router。app/=18画面+API、lib/content-operations/=正規化・監査、README に構成・ガード詳細)
 - 共有 collector: `.claude/scripts/lib/gallery-collectors.mjs` / SVG 分類: `.claude/scripts/lib/svg-classify.mjs`
 - CI 静的ギャラリー (collector 共用): `.claude/scripts/ogp/build-image-gallery.mjs` (`--audit` 週次ゲート)
 - 台帳ストア: `.claude/scripts/lib/sns-posts-store.cjs`

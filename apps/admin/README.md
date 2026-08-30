@@ -84,10 +84,11 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 
 ```bash
 npm run type-check --workspace=apps/admin
-npm run test --workspace=apps/admin        # Vitest unit + integration (実 SSOT に触れない fixture 方式)
+npm run lint --workspace=apps/admin        # Next / TypeScript / hooks lint（生成物は除外）
+npm run test --workspace=apps/admin        # Vitest unit fixture + 実SSOTのread-only integration
 npm run audit:content-operations           # SNS / note / Kindle / 参考文献展開のSSOT横断監査 (errorで失敗)
 npm run build --workspace=apps/admin
-cd apps/admin && npx playwright test       # E2E (dev server を PORT=47470 で自動起動、破壊的操作は mock)
+cd apps/admin && npx playwright test       # desktop/mobile E2E。参考文献の12チャネル・filter・ページ送りも検証
 ```
 
 生成先は通常dev=`.local/next-admin-dev`、E2E=`.local/next-e2e`、build/start=`.next` に分離する。
