@@ -47,6 +47,8 @@
 | `/ports/[portCode]` (廃止)                | `app/port-statistics/by-port/[code].json`                                       | 港湾別統計。`/ports` 廃止に伴い同様に旧ルート・削除対象 (`retired-port-statistics`)。port 統計は `/themes/ports` 側で扱う                                                                                        |
 | `/gis-cross/depopulation-medical`         | `app/gis-cross/depopulation-medical/{summary.json,pref/[NN].json}`              | 過疎×医療 掛け合わせ (サマリ + 県別詳細)                                                                                                                                                                        |
 | `/gis-cross/sunshine-map`                 | `app/gis-cross/sunshine-map/{raster.png,meta.json}`                             | 日照地図ラスター + メタ                                                                                                                                                                                         |
+| `/geo/[analysisSlug]`                     | `app/geo/[slug]/item.json`                                                      | Geo分析の最終集計（47都道府県等）                                                                                                                                                                               |
+| `/geo/[analysisSlug]/[NN]/[stage]` または `?pref=[NN]&stage=*` | `app/geo/[slug]/{manifest.json,pref/[NN].json}`                | 入力→空間演算→検算のlineageと県別途中artifact。県単位で遅延読込                                                                                                                                                 |
 | 内部計算データ（URL なし）                | `app/correlation/by-ranking-key/[key].json`                                     | 相関データ（例外）                                                                                                                                                                                              |
 | **観測値ストア** (Phase 6 で D1 から移行) | `app/stats/<metric>/values.json` (都道府県)                                     | 47 県 × 全年                                                                                                                                                                                                    |
 | 同上                                      | `app/stats/<metric>/cities.json`                                                | 市区町村 × 全年                                                                                                                                                                                                 |
@@ -62,6 +64,7 @@
 | `ges/`       | Google Earth Studio 動画出力                 | URL なし、非 Web アプリデータ        |
 | `sns/`       | SNS サムネイル / 投稿用素材                  | Web アプリの fetch 対象外            |
 | `video/`     | web 埋め込み用 master 動画 + メタ    | `/archive-remotion-output` で集約    |
+| `archive/kindle-encrypted/` | KDPへ送信したEPUB・表紙・metadata・reviewの版別AES-256-GCM暗号化bundle | 配信用URLに対応しない別PC復元・rollback用。平文禁止、Git台帳=`.claude/state/products/kindle-archives.json` |
 
 ## 生成画像の差分反映契約
 
@@ -124,6 +127,7 @@ objectはPUTしない。mtime・ローカルcache・`app/blog`等の広域prefix
 | `app/**` | 本番配信データ (SSOT / snapshot)。§「URL → R2 キーパス対応表」参照 |
 | `gis/` / `ges/` / `video/` / `note/` | 正規保持 (§「ルート直下に置くもの」) |
 | `staging/image-cache/` | AI 背景の再課金防止 cache (`ogp-image-standards.md` §5)。無期限 |
+| `archive/kindle-encrypted/` | KDP送信版の復元・rollback証跡。manifest署名とplain/cipher SHAが一致するrevisionを保持 |
 | `sns/` (投稿済み動画を除く) | 投稿予定・draft の素材 |
 
 ### 削除ポリシー (削除してよいもの)

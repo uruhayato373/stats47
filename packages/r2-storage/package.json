@@ -28,6 +28,7 @@
   },
   "scripts": {
     "type-check": "tsc --noEmit",
+    "kindle:archive": "tsx src/scripts/kindle-archive.ts",
     "purge-cache": "tsx src/scripts/purge-cache.ts",
     "purge-worker-cache": "tsx src/scripts/purge-worker-cache.ts",
     "audit:incremental-cache": "tsx src/scripts/audit-incremental-cache.ts",

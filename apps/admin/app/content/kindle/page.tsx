@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "Kindle運用 — stats47 admin" };
 
 type Query = { stage?: string; q?: string };
-const STAGES = ["ready", "draft", "published"] as const;
+const STAGES = ["ready", "draft", "review", "published", "blocked"] as const;
 
 function filterHref(stage?: string) {
   return stage ? `/content/kindle?stage=${stage}` : "/content/kindle";
@@ -41,7 +41,7 @@ export default async function KindleContentPage({
     <div className="space-y-8">
       <PageHeading
         title="Kindle運用"
-        source="book-catalog.ts / manuscripts / kindle-status.json / kdp-listings.json / .local EPUB"
+        source="book-catalog.ts / manuscripts / kdp-listings.json / kindle-archives.json / .local EPUB"
       >
         <p className="text-xs text-console-muted">
           書籍設計・原稿・ローカル成果物・KDP公開状態を突合します。公開操作は /kdp-publish とオーナー承認のままです。
@@ -122,11 +122,14 @@ export default async function KindleContentPage({
               <Td nowrap muted>
                 <div>原稿 {book.manuscriptCount}章</div>
                 <div>EPUB {book.hasEpub ? "あり" : "なし"} / 表紙 {book.hasCover ? "あり" : "なし"}</div>
+                <div>R2 {book.archiveStatus}{book.archiveRevision ? ` · ${book.archiveRevision}` : ""}</div>
               </Td>
               <Td muted>
-                <div>{book.listingStatus} · ¥{book.priceYen.toLocaleString("ja-JP")}</div>
-                <div className="font-mono text-[11px]">ASIN {book.asin ?? "審査中/未公開"}</div>
-                <div className="text-[11px]">{book.publishedAt ?? "—"}</div>
+                <div>{book.kdpStatusLabel} · ¥{book.priceYen.toLocaleString("ja-JP")}</div>
+                <div>{book.royaltyPlan}% · KU {book.kuEnrolled ? "登録" : "未登録"}</div>
+                <div className="font-mono text-[11px]">ASIN {book.asin ?? "割当待ち"}</div>
+                <div className="text-[11px]">申請 {book.lastSubmittedAt ?? "—"} / 販売確認 {book.salesStartedAt ?? "—"}</div>
+                <div className="text-[11px]">状態確認 {book.kdpStatusCheckedAt ?? "未同期"}</div>
               </Td>
               <Td>{book.nextAction}</Td>
             </Tr>

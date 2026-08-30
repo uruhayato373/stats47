@@ -143,7 +143,7 @@ export async function verifyDraft(page, lst, { tag = "[verify]" } = {}) {
  * - draftId 無し → new/details からフル充填。
  * - draftId あり → verify して**欠けたステップだけ**やり直す。
  */
-export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, tag = "[kdp]", log = console.log } = {}) {
+export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, forceAll = false, tag = "[kdp]", log = console.log } = {}) {
   const warnings = [];
 
   const runDetails = async () => {
@@ -158,16 +158,48 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, tag = "[kd
     return true;
   };
 
-  const runContent = async () => {
+  const runContent = async ({ uploadManuscript = true, uploadCover = true } = {}) => {
     const u = await uploadKdpContent(page, {
-      epubAbs,
-      coverAbs,
+      epubAbs: uploadManuscript ? epubAbs : null,
+      coverAbs: uploadCover ? coverAbs : null,
       applyDrm: lst.applyDrm !== false,
       ai: lst.aiDisclosure ?? null,
       tag,
     });
     u.log.forEach((l) => log("   ", l));
     warnings.push(...u.warnings);
+    // KDP は setInputFiles 後もしばらく原稿・表紙を非同期処理する。処理中に
+    // 「保存して続行」を押すと、入力が正しくても pricing へ進めない。
+    let processing = false;
+    for (let i = 0; i < 80; i++) {
+      processing = await page
+        .evaluate(() =>
+          [...document.querySelectorAll(".a-alert-content")].some(
+            (e) => e.offsetParent !== null && /ファイルを処理しています|原稿をチェックしています/.test(e.innerText || ""),
+          ),
+        )
+        .catch(() => false);
+      if (!processing) break;
+      if (i === 0) log(`${tag} KDP のファイル処理完了を待機`);
+      await sleep(3000);
+    }
+    if (processing) warnings.push("KDP のファイル処理が 4 分以内に完了せず");
+    // 原稿・表紙の処理完了時に、KDP が確認チェックを未選択へ戻す場合がある。
+    // 処理後の状態を read-back し、未選択の可視チェックだけを再投入する。
+    const confirmations = page.locator('div[role="checkbox"][aria-labelledby*="mdn-checkbox-label"]');
+    const confirmationCount = await confirmations.count();
+    for (let i = 0; i < confirmationCount; i++) {
+      const box = confirmations.nth(i);
+      if (!(await box.isVisible().catch(() => false))) continue;
+      if ((await box.getAttribute("aria-checked").catch(() => null)) !== "true") {
+        await box.click({ timeout: 15000 }).catch(() => {});
+        await sleep(1500);
+      }
+    }
+    const confirmationMissing = await page
+      .locator('div[role="checkbox"][aria-labelledby*="mdn-checkbox-label"][aria-checked="false"]')
+      .count();
+    if (confirmationMissing) warnings.push(`処理完了後の確認チェックが ${confirmationMissing} 件未選択`);
     const step = await goToNextKdpStep(page, "pricing", { tag });
     if (!step.ok) {
       warnings.push(`pricing へ進めず: ${(step.errors || []).join(" / ") || step.reason}`);
@@ -205,6 +237,14 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, tag = "[kd
       warnings.push("下書き ID を取得できず (URL が new のまま)");
     }
   } else {
+    if (forceAll) {
+      log(`${tag} 既刊更新: Details / Content / Pricing を全再投入`);
+      await gotoStep(page, lst.draftId, "details");
+      if (await runDetails()) {
+        await runContent({ uploadManuscript: true, uploadCover: true });
+        await runPricing();
+      }
+    } else {
     // 既存: verify → 欠けたステップだけ。
     const v = await verifyDraft(page, lst, { tag });
     if (v.ok) return { ok: true, warnings: [], already: true };
@@ -215,11 +255,14 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, tag = "[kd
     }
     if (!v.manuscript || !v.cover || !v.drm || !v.ai) {
       await gotoStep(page, lst.draftId, "content");
-      await runContent();
+      // 既に read-back 合格したファイルは再送しない。表紙だけの補修で EPUB を
+      // 再アップロードすると原稿変換が最初から始まり、表紙欄が再び閉じてしまう。
+      await runContent({ uploadManuscript: !v.manuscript, uploadCover: !v.cover });
     }
     if (!v.price || !v.royalty) {
       await gotoStep(page, lst.draftId, "pricing");
       await runPricing();
+    }
     }
   }
 
@@ -233,22 +276,40 @@ export async function ensureDraft(page, id, lst, { epubAbs, coverAbs, tag = "[kd
 }
 
 /** 本棚からその本の行を読む (status 文言 + ASIN)。 */
-export async function readBookshelfState(page, draftId) {
+export async function readBookshelfState(page, draftId, { asin = "", title = "" } = {}) {
   await page.goto(`${BASE}/bookshelf`, { waitUntil: "domcontentloaded", timeout: 60000 });
   try {
     await page.waitForLoadState("networkidle", { timeout: 20000 });
   } catch {}
   await sleep(8000);
-  return page.evaluate((id) => {
-    const STATUS = /下書き|出版準備中|レビュー中|審査中|処理中|販売中|出版済み/;
+  const direct = page.locator(`a[href*="/title-setup/kindle/${draftId}/"]`);
+  if ((await direct.count().catch(() => 0)) === 0 && (asin || title)) {
+    const query = asin || title;
+    const box = page.locator('input[type="search"], input[placeholder*="検索"], #podbookshelf-search-input').first();
+    if (await box.count()) {
+      await box.fill(query, { timeout: 10000 });
+      await box.press("Enter").catch(() => {});
+      await sleep(8000);
+    }
+  }
+  return page.evaluate(({ id, expectedAsin }) => {
+    const STATUS = /変更内容をレビュー中|変更のレビュー中|出版準備中|公開準備中|レビュー中|審査中|処理中|販売中|出版済み|ライブ|下書き/;
     const link = document.querySelector(`a[href*="/title-setup/kindle/${id}/"]`);
-    if (!link) return { found: false };
+    let row = link;
+    if (!row && expectedAsin) {
+      row = [...document.querySelectorAll("tr, [role=row], article, li, div")]
+        .filter((element) => {
+          const text = element.innerText || "";
+          return text.includes(expectedAsin) && STATUS.test(text);
+        })
+        .sort((a, b) => (a.innerText || "").length - (b.innerText || "").length)[0] || null;
+    }
+    if (!row) return { found: false };
     // ★行コンテナは「status 文言が現れるまで」遡って決める (2026-08-13 の偽成功から)。
     //   リンク数で判定していた旧実装は status を含まない子要素で止まり、
     //   rowText が「¥800 JPY」だけになって isDraft=false → **下書きのままの本を
     //   「公開確定」と誤報した** (K-S1-05)。status が読めない行は不明として扱い、
     //   呼び出し側 (publishDraft) は成功と言わない。
-    let row = link;
     for (let i = 0; i < 14 && row?.parentElement; i++) {
       if (STATUS.test(row.innerText || "")) break;
       row = row.parentElement;
@@ -263,7 +324,7 @@ export async function readBookshelfState(page, draftId) {
       asin: (text.match(/\bB0[A-Z0-9]{8}\b/) || [])[0] || "",
       rowText: text.slice(0, 200),
     };
-  }, draftId);
+  }, { id: draftId, expectedAsin: asin });
 }
 
 /**
@@ -321,7 +382,7 @@ export async function publishDraft(page, id, lst, { tag = "[publish]", log = con
     return { ok: false, reason: "本棚の status を読めず (公開確定と言えない・手動確認要)", shelf };
   }
   // 公開が確定してから listings を listed に更新。ASIN は割当まで空のことがある。
-  writeBackListing(id, shelf.asin || null);
+  writeBackListing(id, shelf.asin || null, undefined, shelf.status);
   log(`${tag} ✅ 公開確定 (本棚 status=${shelf.status}${shelf.asin ? ` / asin=${shelf.asin}` : " / ASIN 割当待ち"})`);
   return { ok: true, status: shelf.status, asin: shelf.asin };
 }

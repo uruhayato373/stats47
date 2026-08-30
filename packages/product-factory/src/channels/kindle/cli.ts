@@ -118,8 +118,6 @@ function runReport(): number {
       status: b.status,
       priceYen: b.priceYen,
       chapters: b.chapters.length,
-      asin: b.asin ?? null,
-      publishedAt: b.publishedAt ?? null,
     })),
   };
   writeFileSync(STATUS_PATH, JSON.stringify(payload, null, 2) + "\n");

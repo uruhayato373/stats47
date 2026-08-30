@@ -22,14 +22,17 @@
 import { chromium } from "playwright";
 import { execFileSync } from "node:child_process";
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from "node:fs";
-import { join, dirname } from "node:path";
+import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { mergeKdpOperationalState } from "./kdp-status.mjs";
 
 // このファイル: .claude/scripts/kdp/lib/kdp-session.mjs → repo root は 4 つ上。
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
 
 // ★プロファイルは本体チェックアウト固定 (worktree 分裂で「毎回ログイン」になるのを防ぐ)。
-const PROFILE_ROOT = "/Users/minamidaisuke/stats47";
+const PROFILE_ROOT = process.env.KDP_PROFILE_ROOT
+  ? resolve(process.env.KDP_PROFILE_ROOT)
+  : ROOT;
 export const PROFILE = join(PROFILE_ROOT, ".local/playwright-kdp-profile");
 
 export const ACCOUNT_PATH = join(ROOT, ".claude/config/kdp-account.json");
@@ -95,13 +98,32 @@ export function writeBackDraftId(id, draftId) {
   }
 }
 
-export function writeBackListing(id, asin, today) {
+export function writeBackListing(id, asin, today, shelfStatus = "レビュー中") {
   try {
     const j = JSON.parse(readFileSync(LISTINGS_PATH, "utf8"));
     if (!j.listings || !j.listings[id]) return false;
-    j.listings[id].status = "listed";
-    if (asin) j.listings[id].asin = asin;
-    j.listings[id].publishedAt = today || new Date().toISOString().slice(0, 10);
+    const checkedAt = new Date().toISOString();
+    j.listings[id] = mergeKdpOperationalState(
+      { ...j.listings[id], status: "listed" },
+      { status: shelfStatus, asin },
+      checkedAt,
+    );
+    // 審査後の ASIN 回収で、初回の公開申請日を上書きしない。
+    j.listings[id].publishedAt ||= today || new Date().toISOString().slice(0, 10);
+    j.listings[id].lastSubmittedAt = today || new Date().toISOString().slice(0, 10);
+    writeFileSync(LISTINGS_PATH, JSON.stringify(j, null, 2) + "\n");
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** 本棚read-backの状態を毎回保存する。ASINが未割当でも審査中/販売中を区別できる。 */
+export function writeBackKdpState(id, shelf, checkedAt = new Date().toISOString()) {
+  try {
+    const j = JSON.parse(readFileSync(LISTINGS_PATH, "utf8"));
+    if (!j.listings || !j.listings[id]) return false;
+    j.listings[id] = mergeKdpOperationalState(j.listings[id], shelf, checkedAt);
     writeFileSync(LISTINGS_PATH, JSON.stringify(j, null, 2) + "\n");
     return true;
   } catch {

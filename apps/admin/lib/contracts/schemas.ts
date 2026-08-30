@@ -136,6 +136,13 @@ export const ContentKdpListing = z
     asin: z.string().nullable().optional(),
     draftId: z.string().nullable().optional(),
     publishedAt: z.string().nullable().optional(),
+    lastSubmittedAt: z.string().nullable().optional(),
+    salesStartedAt: z.string().nullable().optional(),
+    kdpStatus: z.enum(["draft", "in_review", "live", "unknown"]).optional(),
+    kdpStatusLabel: z.string().nullable().optional(),
+    kdpStatusCheckedAt: z.string().nullable().optional(),
+    royaltyPlan: z.union([z.literal(35), z.literal(70)]).optional(),
+    kuEnrolled: z.boolean().optional(),
     epubPath: z.string(),
     coverPath: z.string(),
   })
@@ -154,6 +161,37 @@ export const ContentKindleBuildState = z.object({
         status: z.string(),
       })
       .passthrough(),
+  ),
+});
+
+export const ContentKindleArchiveState = z.object({
+  schemaVersion: z.literal(1),
+  archiveFormat: z.string(),
+  bucket: z.string(),
+  prefix: z.string(),
+  generatedAt: z.string(),
+  books: z.record(
+    z.object({
+      id: z.string(),
+      version: z.string(),
+      latestRevision: z.string(),
+      revisions: z.array(
+        z.object({
+          revision: z.string(),
+          archivedAt: z.string(),
+          verifiedAt: z.string(),
+          remotePrefix: z.string(),
+          manifestSha256: z.string(),
+          files: z.array(
+            z.object({
+              name: z.string(),
+              plainSha256: z.string(),
+              plainSize: z.number().int().nonnegative(),
+            }).passthrough(),
+          ),
+        }).passthrough(),
+      ),
+    }).passthrough(),
   ),
 });
 

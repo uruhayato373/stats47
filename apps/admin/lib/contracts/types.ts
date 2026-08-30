@@ -213,6 +213,7 @@ export type ContentChannelDTO = "x" | "instagram" | "note" | "kindle";
 export type ContentStageDTO =
   | "draft"
   | "ready"
+  | "review"
   | "scheduled"
   | "published"
   | "blocked";
@@ -233,6 +234,7 @@ export interface ContentChannelSummaryDTO {
   total: number;
   draft: number;
   ready: number;
+  review: number;
   scheduled: number;
   published: number;
   blocked: number;
@@ -248,11 +250,23 @@ export interface KindleContentDTO {
   listingStatus: string;
   buildStatus: string | null;
   priceYen: number;
+  royaltyPlan: number;
+  kuEnrolled: boolean;
   asin: string | null;
   draftId: string | null;
   publishedAt: string | null;
+  lastSubmittedAt: string | null;
+  salesStartedAt: string | null;
+  kdpStatus: "draft" | "in_review" | "live" | "unknown";
+  kdpStatusLabel: string;
+  kdpStatusCheckedAt: string | null;
   hasEpub: boolean;
   hasCover: boolean;
+  archiveStatus: "verified" | "remote-only" | "stale" | "missing";
+  archiveVersion: string | null;
+  archiveRevision: string | null;
+  archiveArchivedAt: string | null;
+  archiveVerifiedAt: string | null;
   manuscriptCount: number;
   nextAction: string;
   sourcePaths: string[];

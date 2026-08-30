@@ -2,7 +2,7 @@
  * KDP 出品内容 SSOT (.claude/config/kdp-listings.json) を KINDLE_BOOKS から生成する。
  * coconala-listings.json と同じ役割: ブラウザ自動化 (kdp-operator) が読む出品内容 (title/description/
  * keywords/price/epubPath 等) と公開状態 (status/asin) の一元 SoT。既存エントリの status/asin/
- * publishedAt は保持 (upsert)。カテゴリは kdp-category.ts が SSOT なので毎回生成する。
+ * publishedAt / KDP運用状態は保持 (upsert)。カテゴリは kdp-category.ts が SSOT なので毎回生成する。
  *
  * CLI: npm run products:kindle:kdp-listings --workspace=@stats47/product-factory [-- --apply]
  * 既定は dry-run (差分表示のみ)。--apply で書き込む。
@@ -88,6 +88,11 @@ interface KdpListing {
   draftId?: string;
   asin: string | null;
   publishedAt: string | null;
+  lastSubmittedAt?: string | null;
+  salesStartedAt?: string | null;
+  kdpStatus?: "draft" | "in_review" | "live" | "unknown";
+  kdpStatusLabel?: string | null;
+  kdpStatusCheckedAt?: string | null;
 }
 
 /**
@@ -169,6 +174,11 @@ function main(): void {
       status: prev?.status ?? "draft",
       asin: prev?.asin ?? null,
       publishedAt: prev?.publishedAt ?? null,
+      ...(prev?.lastSubmittedAt ? { lastSubmittedAt: prev.lastSubmittedAt } : {}),
+      ...(prev?.salesStartedAt ? { salesStartedAt: prev.salesStartedAt } : {}),
+      ...(prev?.kdpStatus ? { kdpStatus: prev.kdpStatus } : {}),
+      ...(prev?.kdpStatusLabel ? { kdpStatusLabel: prev.kdpStatusLabel } : {}),
+      ...(prev?.kdpStatusCheckedAt ? { kdpStatusCheckedAt: prev.kdpStatusCheckedAt } : {}),
     };
     void coverPath;
     generatedCount += 1;
