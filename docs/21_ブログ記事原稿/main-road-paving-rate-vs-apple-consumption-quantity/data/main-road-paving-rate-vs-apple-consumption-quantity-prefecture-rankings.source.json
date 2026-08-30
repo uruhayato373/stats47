@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "main-road-paving-rate",
+  "year": "2023",
+  "unit": "％",
+  "label": "主要道路舗装率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/main-road-paving-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug main-road-paving-rate-vs-apple-consumption-quantity --keys main-road-paving-rate --data-name main-road-paving-rate-vs-apple-consumption-quantity-prefecture-rankings",
+  "fetchedAt": "2026-08-30T05:52:44.268Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

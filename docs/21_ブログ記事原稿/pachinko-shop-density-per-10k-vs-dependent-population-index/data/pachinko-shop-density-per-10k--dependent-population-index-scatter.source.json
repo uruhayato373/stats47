@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "pachinko-shop-density-per-10k",
+  "pair": "dependent-population-index",
+  "pearsonR": 0.7308305110587267,
+  "partialRPopulation": 0.6430477319740634,
+  "unit": "軒 × 指数",
+  "label": "パチンコ店舗数 と 従属人口指数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/pachinko-shop-density-per-10k.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug pachinko-shop-density-per-10k-vs-dependent-population-index --base pachinko-shop-density-per-10k --pair dependent-population-index --data-name pachinko-shop-density-per-10k--dependent-population-index"
+}

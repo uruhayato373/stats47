@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "dependent-population-index",
+  "year": "2022",
+  "unit": "指数",
+  "label": "従属人口指数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/dependent-population-index/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug pachinko-shop-density-per-10k-vs-dependent-population-index --keys dependent-population-index --data-name dependent-population-index-prefecture-rankings",
+  "fetchedAt": "2026-08-30T05:47:22.267Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
