@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-08-29
- * 件数: blog 468 / tag 62 / survey 81
+ * 最終生成日: 2026-08-30
+ * 件数: blog 478 / tag 62 / survey 81
  */
 
 export interface SitemapBlogEntry {
@@ -43,6 +43,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "avg-height-high-school-2nd-male-vs-fish-pickled-consumption", lastModified: "2026-08-05" },
   { slug: "avg-height-high-school-2nd-male-vs-floor-area-new-owner", lastModified: "2026-08-09" },
   { slug: "avg-height-high-school-2nd-male-vs-rice-cracker-consumption", lastModified: "2026-08-10" },
+  { slug: "avg-salary-admin-prefecture-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "banana-consumption-quantity", lastModified: "2026-06-21" },
   { slug: "bank-deposit-balance-shikoku-anomaly", lastModified: "2026-05-29" },
   { slug: "barber-beauty-salon-regional-gap", lastModified: "2026-03-09" },
@@ -102,6 +103,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "commercial-land-price-trend", lastModified: "2026-03-09" },
   { slug: "commercial-sales-productivity-gap", lastModified: "2026-03-09" },
   { slug: "communication-cost-burden", lastModified: "2026-03-06" },
+  { slug: "commute-by-car-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "consumer-price-regional-gap", lastModified: "2026-06-07" },
   { slug: "convenience-store-count-commercial-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "convenience-store-count-commercial-vs-ratio-of-general", lastModified: "2026-08-29" },
@@ -116,6 +118,8 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "dairy-cattle-count", lastModified: "2026-06-14" },
   { slug: "dairy-cattle-hokkaido-monopoly", lastModified: "2026-06-02" },
   { slug: "day-time-population-prefecture-gap", lastModified: "2026-08-29" },
+  { slug: "delivery-fee-consumption-expenditure-prefecture-gap", lastModified: "2026-08-30" },
+  { slug: "dental-checkup-persons-per-1000-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "dental-hygienist-income-prefecture-gap", lastModified: "2026-06-13" },
   { slug: "dentist-income-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "depopulation-area-medical-facilities", lastModified: "2026-05-20" },
@@ -136,6 +140,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "dual-income-household-ratio-vs-tatami-per-dwelling-owner", lastModified: "2026-08-16" },
   { slug: "dual-income-reversal", lastModified: "2026-03-09" },
   { slug: "earthquake-insurance-prefecture-gap", lastModified: "2026-05-16" },
+  { slug: "earthquake-renovation-rate-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "education-cost-per-child", lastModified: "2026-03-09" },
   { slug: "education-expenses-gap", lastModified: "2026-03-05" },
   { slug: "ehime-food-culture", lastModified: "2026-07-10" },
@@ -217,6 +222,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "household-spending-before-after-inflation", lastModified: "2026-03-16" },
   { slug: "household-spending-prefecture-gap", lastModified: "2026-06-07" },
   { slug: "household-structure-transformation", lastModified: "2026-03-05" },
+  { slug: "households-on-public-assistance-per-1000-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "housing-cost-livability-trend", lastModified: "2026-03-06" },
   { slug: "hyogo-food-culture", lastModified: "2026-07-10" },
   { slug: "ibaraki-food-culture", lastModified: "2026-07-10" },
@@ -310,6 +316,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "nagano-food-culture", lastModified: "2026-07-10" },
   { slug: "nagasaki-food-culture", lastModified: "2026-07-10" },
   { slug: "nara-food-culture", lastModified: "2026-07-10" },
+  { slug: "national-pension-payment-rate-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "natto-child-weight-correlation", lastModified: "2026-07-12" },
   { slug: "natto-consumption-east-west-divide", lastModified: "2026-03-29" },
   { slug: "natto-consumption-expenditure", lastModified: "2026-06-14" },
@@ -340,6 +347,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "peach-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "per-capita-income-gap", lastModified: "2026-03-05" },
   { slug: "personal-computer-expenditure-ranking", lastModified: "2026-07-10" },
+  { slug: "pet-food-consumption-expenditure-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "pharma-medical-device-production-map", lastModified: "2026-03-06" },
   { slug: "pharmacist-income-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "pharmacy-count-prefecture-ranking", lastModified: "2026-06-07" },
@@ -458,6 +466,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "unemployment-tertiary-industry-link", lastModified: "2026-05-17" },
   { slug: "unhealthy-period-gender-prefecture-gap", lastModified: "2026-07-20" },
   { slug: "university-advancement-capacity", lastModified: "2026-03-09" },
+  { slug: "university-new-graduates-unemployment-rate-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "unmarried-rate-40years-crisis", lastModified: "2026-03-06" },
   { slug: "urban-parks-green-infrastructure", lastModified: "2026-03-06" },
   { slug: "vacant-house-crisis", lastModified: "2026-03-04" },
@@ -466,6 +475,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "vacant-housing-vs-land-price", lastModified: "2026-07-12" },
   { slug: "vacant-housing-vs-welfare-commissioner", lastModified: "2026-07-12" },
   { slug: "voluntary-car-insurance-rate-bodily-injury-prefecture-gap", lastModified: "2026-08-29" },
+  { slug: "voter-turnout-house-single-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "wage-vs-living-cost", lastModified: "2026-03-03" },
   { slug: "waiting-children-progress", lastModified: "2026-03-04" },
   { slug: "wakayama-food-culture", lastModified: "2026-07-10" },
