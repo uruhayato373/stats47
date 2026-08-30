@@ -1,0 +1,13 @@
+pagePath,nav_surface,nav_label,eventCount
+/survey/city-planning-survey,survey_ranking,industrial-and-semi-industrial-area-ratio,1
+/survey/city-planning-survey,survey_ranking,industrial-exclusive-area-ratio,1
+/survey/city-planning-survey,survey_ranking,urban-planning-area,1
+/survey/household-survey,survey_ranking,actual-income-worker-households-per-month,1
+/survey/household-survey,survey_ranking,consumption-expenditure-multi-person-households-per-month,1
+/survey/kakei-chousa,survey_ranking,bread-consumption-expenditure,1
+/survey/local-gov-staffing-survey,survey_ranking,prefectural-general-administration-staff,1
+/survey/prefectural-accounts,survey_ranking,gdp-growth-rate-pref-h23,1
+/survey/school-basic-survey,survey_ranking,miscellaneous-school-count,1
+/survey/social-education-survey,survey_ranking,library-count-per-million,1
+/survey/urban-park-survey,survey_ranking,urban-park-area-per-person,1
+/survey/urban-park-survey,survey_ranking,urban-parks-area,1
