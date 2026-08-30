@@ -22,6 +22,13 @@ import { shouldSkipRemoteR2Read } from "../utils/should-skip-remote-r2-read";
 function isSafeR2Key(key: string): boolean {
   if (typeof key !== "string" || key.length === 0) return false;
   if (key.includes("\0") || key.includes("\\")) return false;
+  // 公開URLへ組み込む key から、パス以外の意味を持つ文字を外す。
+  // `?` / `#` はクエリ・フラグメントとして解釈され、意図と別のオブジェクトを取りに行く
+  // (実測: key="app/blog/x?foo=1" は pathname="/app/blog/x" になる)。
+  // 空白と制御文字も URL として曖昧なので拒否する。
+  // 非ASCII は encodeURI 相当で正しくパスに載るため許可する
+  // (参考文献の日本語キーが使えなくなるため、ASCII allowlist には戻さない)。
+  if (/[?#\s\u0000-\u001f\u007f]/.test(key)) return false;
   // 絶対パス / プロトコル相対 (`/foo`, `//host`)
   if (key.startsWith("/")) return false;
   // スキーム付き URL (`http://`, `file:`, `data:` 等)
