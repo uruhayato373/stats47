@@ -2,3 +2,4 @@ date,run_id,model,targets,passed,rejected,failed,skipped,author_requests,critic_
 2026-08-30,33291544476-1,gemini-2.5-flash-lite,1,0,0,0,1,0,0,0,0,0,0,0,1,bad-request
 2026-08-30,33291694546-1,gemini-flash-lite-latest,1,0,0,0,1,0,0,0,0,0,0,0,1,bad-request
 2026-08-30,33291927140-1,gemini-flash-lite-latest,1,0,0,0,1,0,0,0,0,0,0,1,1,billing
+2026-08-30,33292220601-1,gemini-3.7-flash,1,0,0,0,1,0,0,0,0,0,0,1,1,billing
