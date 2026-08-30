@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T23:22:31.719Z",
+  "updatedAt": "2026-08-30T19:29:07.812Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -825,6 +825,19 @@
           "costUsd": null,
           "gate": null,
           "evidence": "queue が knownClass=needs-owner (route.apply=surface-only) と確定済み。オーナー実装カードでありCIでは削除・status変更不可。",
+          "failReason": "needs-owner",
+          "followUps": []
+        },
+        {
+          "at": "2026-08-30T19:29:07.812Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "queue の route.class が既に needs-owner (5回試行後 escalatedFrom=fable)。QG0-QG8 の複数週にまたがる大型実装 (impl-large 相当) で、この run の対象外 (impl-large/indicator-expansion は着手しない)。ledger の既存 quarantine 判定を尊重し行削除・タグ変更は行わない。",
           "failReason": "needs-owner",
           "followUps": []
         }
@@ -3412,6 +3425,34 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-29T23:22:31.719Z"
+    },
+    "BLOG-REVIEW-AREA-RATIO-01": {
+      "class": "impl-small",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-30T19:29:03.650Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "curl https://storage.stats47.jp/... => Bash denied。node -e => denied。/tmp 配下の一時 script 実行も denied。既存 fetch-ranking-data-r2.mjs (ranking values 専用) は実行できたが article.md 取得手段が無い。quality-gate.mjs area-ratio-prefecture-gap => exit 2 'article not found: .local/r2/app/blog/area-ratio-pre",
+          "failReason": "network-unavailable: 本セッションの Bash permission で curl / node -e / .local 外への node script 実行が denied。R2 (storage.stats47.jp) の article.md / data/*.json を取得する手段が既存の許可済み script (.claude/scripts/blog/*.mjs) に無く、quality-gate.mjs も article-not-found (exit 2) で実行不能。既存記事の内容是正 + 独立 blog-critic レビューが完了条件のため、R2 fetch 可能な環境で再試行が必要。",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "network-unavailable: 本セッションの Bash permission で curl / node -e / .local 外への node script 実行が denied。R2 (storage.stats47.jp) の article.md / data/*.json を取得する手段が既存の許可済み script (.claude/scripts/blog/*.mjs) に無く、quality-gate.mjs も article-not-found (exit 2) で実行不能。既存記事の内容是正 + 独立 blog-critic レビューが完了条件のため、R2 fetch 可能な環境で再試行が必要。",
+        "since": "2026-08-30T19:29:03.650Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": null
     }
   }
 }
