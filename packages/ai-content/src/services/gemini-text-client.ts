@@ -174,13 +174,13 @@ function normalizeUsage(response: GeminiResponse): GeminiTokenUsage {
   };
 }
 
-/** generateContent の 2.x responseSchema は protobuf enum の大文字 type を要求する。 */
-function toGemini2ResponseSchema(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(toGemini2ResponseSchema);
+/** generateContent の responseSchema は protobuf enum の大文字 type を要求する。 */
+function toGenerateContentResponseSchema(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(toGenerateContentResponseSchema);
   if (!value || typeof value !== "object") return value;
   return Object.fromEntries(
     Object.entries(value)
-      // Gemini 2.x の Schema protobuf に無い JSON Schema 専用フィールドは送らない。
+      // Schema protobuf に無い JSON Schema 専用フィールドは送らない。
       .filter(([key]) => key !== "additionalProperties")
       .map(([key, child]) => [
         key,
@@ -189,25 +189,15 @@ function toGemini2ResponseSchema(value: unknown): unknown {
           : ["minItems", "maxItems", "minProperties", "maxProperties", "minLength", "maxLength"].includes(key) &&
               typeof child === "number"
             ? String(child)
-            : toGemini2ResponseSchema(child),
+            : toGenerateContentResponseSchema(child),
       ]),
   );
 }
 
-function structuredOutputConfig(model: string, schema?: GeminiJsonSchema): Record<string, unknown> {
-  if (model.startsWith("gemini-2.")) {
-    return {
-      responseMimeType: "application/json",
-      ...(schema ? { responseSchema: toGemini2ResponseSchema(schema) } : {}),
-    };
-  }
+function structuredOutputConfig(schema?: GeminiJsonSchema): Record<string, unknown> {
   return {
-    responseFormat: {
-      text: {
-        mimeType: "application/json",
-        ...(schema ? { schema } : {}),
-      },
-    },
+    responseMimeType: "application/json",
+    ...(schema ? { responseSchema: toGenerateContentResponseSchema(schema) } : {}),
   };
 }
 
@@ -235,7 +225,7 @@ export async function generateContentText(
         body: JSON.stringify({
           contents: [{ parts: [{ text: options.prompt }] }],
           generationConfig: {
-            ...structuredOutputConfig(model, options.responseJsonSchema),
+            ...structuredOutputConfig(options.responseJsonSchema),
             maxOutputTokens: options.maxOutputTokens ?? DEFAULT_MAX_OUTPUT_TOKENS,
             temperature: options.temperature ?? 0.4,
           },

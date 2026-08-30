@@ -21,7 +21,7 @@ const okBody = {
 afterEach(() => vi.restoreAllMocks());
 
 describe("generateContentText", () => {
-  it("Gemini 2.x は responseSchema 形式と大文字 schema type を使う", async () => {
+  it("generateContent は responseSchema 形式と大文字 schema type を使う", async () => {
     const fetchImpl = vi.fn(async (_url: string | URL | Request, init?: RequestInit) => {
       const url = String(_url);
       expect(url).toContain("gemini-2.5-flash-lite:generateContent");
@@ -60,26 +60,6 @@ describe("generateContentText", () => {
       text: '{"ok":true}',
       attempts: 1,
       usage: { inputTokens: 12, outputTokens: 4, totalTokens: 20, thinkingTokens: 4 },
-    });
-  });
-
-  it("Gemini 3.x は responseFormat structured JSON 形式を使う", async () => {
-    const fetchImpl = vi.fn(async (_url: string | URL | Request, init?: RequestInit) => {
-      const body = JSON.parse(String(init?.body));
-      expect(body.generationConfig.responseFormat.text.mimeType).toBe("application/json");
-      expect(body.generationConfig.responseFormat.text.schema).toEqual({
-        type: "object",
-      });
-      expect(body.generationConfig.responseMimeType).toBeUndefined();
-      return new Response(JSON.stringify(okBody), { status: 200 });
-    });
-
-    await generateContentText({
-      prompt: "test",
-      apiKey: "key",
-      model: "gemini-3.7-flash",
-      responseJsonSchema: { type: "object" },
-      fetchImpl: fetchImpl as typeof fetch,
     });
   });
 
