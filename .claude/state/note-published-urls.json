@@ -627,6 +627,18 @@
       "status": "r2_ready",
       "price_jpy": 2980
     },
+    "d-geo-station-access-analysis": {
+      "vertical": "stats47-note",
+      "title": "駅代表点から直線800m×2050年人口｜47都道府県を再現",
+      "url": "https://note.com/stats47/n/n041e38af8fb5",
+      "is_paid": true,
+      "published_at": "2026-09-01",
+      "r2_path": "note/stats47-note/d-geo-station-access-analysis",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 2980
+    },
     "koumuin-gis-01-depopulation-medical": {
       "vertical": "koumuin-gis",
       "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
