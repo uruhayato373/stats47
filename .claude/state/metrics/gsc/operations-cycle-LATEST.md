@@ -1,27 +1,31 @@
-# GSC Operations Cycle — 2026-W34
+# GSC Operations Cycle — 2026-W35
 
-**Status**: WARN / **Stage**: monitor / **Generated**: 2026-08-24T11:54:19.167Z
+**Status**: FAIL / **Stage**: monitor / **Generated**: 2026-08-31T18:04:24.353Z
 
-計測週: 2026-W34 / 次週計画: 2026-W35 / 月次: 2026-08
+計測週: 2026-W35 / 次週計画: 2026-W36 / 月次: 2026-09
 
 | Check | Result | Evidence |
 |---|---|---|
-| snapshot-period | PASS | 2026-W34 finalized7d coverage complete |
-| snapshot-freshness | PASS | latest=2026-W34, expected>=2026-W34 |
-| effect-verdict | PASS | 2026-W34 verdict 7件を記録済み |
+| snapshot-period | PASS | 2026-W35 finalized7d coverage complete |
+| snapshot-freshness | PASS | latest=2026-W35, expected>=2026-W35 |
+| effect-verdict | PASS | 2026-W35 verdict 7件を記録済み |
 | effect-target-ratchet | WARN | 既知の過去欠落 7件（新規欠落0） |
 | effect-backlog-reconciliation | PASS | 確定 verdict と active 一覧の不整合0 |
-| search-growth-freshness | PASS | week=2026-W35, age=0d |
-| search-growth-sources | PASS | gsc/coverage/inspection は利用可能 |
-| search-growth-decision | PASS | 2026-W34 の承認/却下 1件（必要 1件以上） |
-| url-inspection-freshness | PASS | latest=2026-08-23, age=1d |
-| weekly-review | PASS | 2026-W34 review の search-growth 節=あり |
-| weekly-plan | PASS | plan=2026-W35, expected=2026-W35 |
-| monthly-plan | PASS | month=2026-08, GSC運用サイクル節=あり |
-| monthly-review-coverage | PASS | 直近4週レビュー 4/4（必要 3以上） |
+| search-growth-freshness | PASS | week=2026-W35, age=2d |
+| search-growth-sources | FAIL | stale/missing: inspection |
+| search-growth-decision | PASS | 証拠不足または候補0のため判断を強制しない |
+| url-inspection-freshness | PASS | latest=2026-08-31, age=1d |
+| weekly-review | FAIL | 2026-W35 review が無い |
+| weekly-plan | FAIL | plan=2026-W35, expected=2026-W36 |
+| monthly-plan | FAIL | month=2026-08, GSC運用サイクル節=あり |
+| monthly-review-coverage | PASS | 直近4週レビュー 3/4（必要 3以上） |
 
 ## 次のアクション
 
 - **effect-target-ratchet**: 既知7件は推測で補わず、週次で終了または再計測を判断
+- **search-growth-sources**: npm run search-growth:collect && npm run search-growth:all
+- **weekly-review**: /weekly-review 2026-W35
+- **weekly-plan**: /weekly-plan 2026-W36
+- **monthly-plan**: /monthly-plan 2026-09
 
 _SSOT: `.claude/config/gsc-operations-cycle.json`_
