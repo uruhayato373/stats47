@@ -3,8 +3,8 @@ title: 理学療法士の年収はなぜ近畿4県に集中するのか
 seoTitle: "理学療法士等の平均年収ランキング｜近畿4県が上位を独占"
 description: 東京都に次ぐ上位4県が、すべて近畿地方の県で占められています。この記事では2022年の理学療法士等の平均年収を都道府県別に比較し、近畿圏に高年収の県が集中する理由と、地方圏で年収が伸び悩む背景を読み解きます。
 slug: physical-therapist-annual-income-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

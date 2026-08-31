@@ -3,8 +3,8 @@ title: 道路密度と地方特例交付金は連動するのか
 seoTitle: "道路実延長と地方特例交付金の相関｜都道府県データで検証"
 description: 道路が張り巡らされた県ほど、国からの交付金も多いのでしょうか。この記事では2023年の道路実延長と2022年の地方特例交付金を都道府県別に比較し、見かけの相関の裏にある人口規模という真因を読み解きます。
 slug: road-length-per-km2-vs-local-special-grant-prefecture
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

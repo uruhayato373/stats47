@@ -3,8 +3,8 @@ title: 梅干し消費量はなぜ和歌山県が圧倒的か
 seoTitle: "梅干し消費量ランキング都道府県別｜産地和歌山の突出ぶり"
 description: 同じ梅干しでも、食卓に上る量は県によってまったく違います。この記事では2024年の梅干し消費量を都道府県別に比較し、産地の和歌山県が突出して多い理由と、寒冷地でも消費が伸びる背景を読み解きます。
 slug: pickled-plum-consumption-quantity-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

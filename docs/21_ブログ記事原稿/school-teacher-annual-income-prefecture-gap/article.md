@@ -3,8 +3,8 @@ title: 小中学校教員の年収はなぜ千葉が最高か
 seoTitle: "小中学校教員の平均年収ランキング｜1位は東京都でなく千葉県"
 description: 首都圏で最も年収が高いのは東京都ではありません。この記事では2022年の小中学校教員の平均年収を都道府県別に比較し、千葉県が東京都を上回って1位になっている理由と、地方圏で年収が下がる背景を読み解きます。
 slug: school-teacher-annual-income-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

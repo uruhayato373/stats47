@@ -3,8 +3,8 @@ title: 汚水処理人口普及率はなぜ水洗化率と一致しないのか
 seoTitle: "汚水処理人口普及率と水洗化人口比率の相関｜都道府県データ"
 description: 家庭の排水がきちんと処理されている県ほど、水洗トイレを使う人も多いのでしょうか。この記事では汚水処理人口普及率と水洗化人口比率を都道府県別に比較し、強い相関の裏にある小さなズレを読み解きます。
 slug: sewage-treatment-coverage-rate-vs-flush-toilet-population
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 
