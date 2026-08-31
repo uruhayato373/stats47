@@ -14939,6 +14939,9 @@ export const JAPAN_ZUE_EVIDENCE_ITEMS_0: readonly JapanZueEvidenceItem[] = [
       "metricKeys": [
         "agricultural-output"
       ],
+      "surveyIds": [
+        "agricultural-income-statistics"
+      ],
       "categoryKey": "agriculture",
       "geoScopes": [
         "prefecture-set"
