@@ -848,6 +848,10 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
+      - name: 🧪 Run Remotion Unit Tests
+        run: npm run test --workspace=apps/remotion
+        continue-on-error: false
+
       - name: 🎬 Bundle Remotion compositions
         # TypeScriptだけでは拾えないcomposition import・webpack・asset解決を検証する。
         # Chromium/font/media依存の動画renderはPRへ混ぜず、決定的なbundle境界だけをblockingにする。

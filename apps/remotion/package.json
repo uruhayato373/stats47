@@ -11,6 +11,7 @@
     "pipeline:migration-flow": "tsx scripts/pipeline/render-migration-flow.ts",
     "render:business-plan-m1-x-geo": "tsx scripts/pipeline/render-business-plan-m1-x-geo.ts",
     "audit:business-plan-m1-x-geo": "tsx scripts/pipeline/audit-business-plan-m1-x-geo.ts",
+    "test": "vitest run --config vitest.config.mts",
     "test:geo-x-layout": "vitest run --config vitest.config.mts",
     "type-check": "tsc --noEmit"
   },
