@@ -3,8 +3,8 @@ title: 汚水処理と下水道、なぜ差が開く県が?
 seoTitle: "汚水処理人口普及率と下水道普及率の関係｜47都道府県データ"
 description: 同じ「汚水をきれいにする指標」なのに順位が入れ替わる県があります。汚水処理人口普及率と下水道普及率の関係を都道府県データで確かめます。
 slug: sewage-treatment-coverage-rate-vs-sewerage-penetration-rate
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

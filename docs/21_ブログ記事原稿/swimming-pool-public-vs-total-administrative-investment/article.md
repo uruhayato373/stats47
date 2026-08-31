@@ -3,8 +3,8 @@ title: 公共プールが多い県は行政投資も多い?
 seoTitle: "水泳プール数（公共）と行政総投資額の関係｜47都道府県データ"
 description: プールの数は本当にお金の使い方を映す鏡なのでしょうか。公共の水泳プール数と行政総投資額の関係を都道府県データで確かめます。
 slug: swimming-pool-public-vs-total-administrative-investment
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

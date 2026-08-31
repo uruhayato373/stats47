@@ -3,8 +3,8 @@ title: 高血圧の通院率、なぜ長崎と石川で差?
 seoTitle: "高血圧性疾患の受療率（外来）ランキング｜47都道府県データ2023"
 description: 通院のしやすさが表れる数字かもしれません。高血圧性疾患の受療率が県ごとにどう違うのかを、患者調査のデータから読み解きます。
 slug: treatment-rate-hypertension-outpatient-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 
