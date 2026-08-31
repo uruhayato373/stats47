@@ -131,6 +131,10 @@ unique(
   'geoContent.contentId'
 );
 unique(
+  BUSINESS_PLAN_2026.geoContentLifecycle.map((item) => item.launch.order),
+  'geoContent.launch.order'
+);
+unique(
   BUSINESS_PLAN_2026.xIdeas.map((item) => item.id),
   'xIdea.id'
 );
@@ -223,6 +227,17 @@ for (const content of BUSINESS_PLAN_2026.geoContentLifecycle) {
   }
   if (content.publicationGates.length < 5) {
     errors.push(`geoContent:${content.contentId}: publicationGates が不足しています`);
+  }
+  if (
+    content.launch.order < 1 ||
+    content.launch.borrowedPatterns.length < 2 ||
+    content.launch.surfaceOrder.length < 4 ||
+    content.launch.reusableOutputs.length < 4 ||
+    content.launch.evaluationWindowDays !== 28 ||
+    !content.launch.successGate ||
+    !content.launch.stopCondition
+  ) {
+    errors.push(`geoContent:${content.contentId}: launch plan が不十分です`);
   }
 }
 for (const pilot of BUSINESS_PLAN_2026.pilotSpecs) {

@@ -909,7 +909,7 @@ export const BUSINESS_PLAN_PILOT_SPECS: readonly BusinessPlanPilotSpec[] = [
 
 export const BUSINESS_PLAN_2026: BusinessPlanCatalog = {
   id: 'stats47-business-plan-2026',
-  version: '2026-08-31.1',
+  version: '2026-09-01.1',
   source: {
     title: 'stats47 2.0 超具体的 事業計画書',
     subtitle: 'GIS × AI × 地域データによるstats47事業拡張計画',
