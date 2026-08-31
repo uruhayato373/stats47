@@ -70,6 +70,7 @@ MLIT zip ダウンロード → /tmp/ に保存
 
 公式ページ探索型はR2へ直接、次の単位で保存する。TopoJSONは転送時gzip、`manifest.json` は
 元zip URL・sha256・座標系変換・feature数を保持する。公式アーカイブ数とmanifest数が一致した場合だけ取得完了。
+再実行ではmanifest宣言objectを照合し、欠損scopeは全再取得、manifest外の旧・partial objectはexact削除する。
 
 ```
 gis/mlit-ksj/{dataId}/{version}/{scope}/
@@ -97,6 +98,7 @@ packages/gis/src/mlit-ksj/
 ├── r2-path.ts         # R2 保存パス構築
 ├── downloader.ts      # zip ダウンロード・GeoJSON/Shapefile 抽出
 ├── mesh-discovery.ts  # 公式詳細ページから配布1次メッシュコードを決定的に抽出
+├── published-scope.ts # manifest commit markerとR2 scope完全性の純関数
 ├── converter.ts       # GeoJSON → TopoJSON 変換（簡略化含む）
 ├── pipeline.ts        # オーケストレーター
 ├── prefecture-assign.ts # ★feature → 都道府県の帰属 (属性 → 空間結合。推測しない)

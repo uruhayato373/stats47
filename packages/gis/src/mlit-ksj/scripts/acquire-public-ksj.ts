@@ -15,6 +15,7 @@ import {
   assertR2WriteAllowed,
   createS3ImageObjectStoreFromEnv,
   deleteMultipleFromR2,
+  fetchFromR2AsJson,
   listFromR2,
   publishExactR2Assets,
   resolveExactAssetCandidates,
@@ -39,6 +40,10 @@ import {
   PUBLIC_KSJ_EXPECTED_ARCHIVE_COUNTS,
   UNREGISTERED_KSJ_OFFICIAL_POLICY,
 } from '../official-policy';
+import {
+  inspectPublishedScope,
+  type PublishedScopeManifest,
+} from '../published-scope';
 import { getCodeConfig } from '../registry';
 import type { KsjGeometryType, KsjSimplifyOptions } from '../types';
 import { streamGeoJsonFeatureBatches } from '../stream-geojson';
@@ -113,9 +118,42 @@ async function processArchive(options: {
   const scope = safeSegment(archive.scope);
   const prefix = `gis/mlit-ksj/${dataset.dataId}/${archive.version}/${scope}`;
   const manifestKey = `${prefix}/manifest.json`;
-  if (remoteKeys.has(manifestKey)) return 'skipped';
+  let staleKeys = [...remoteKeys].filter((key) => key.startsWith(`${prefix}/`));
+  if (remoteKeys.has(manifestKey)) {
+    let manifest: PublishedScopeManifest | null;
+    try {
+      manifest = await fetchFromR2AsJson<PublishedScopeManifest>(manifestKey);
+    } catch (error) {
+      if (!(error instanceof SyntaxError)) throw error;
+      manifest = null;
+    }
+    const inspection = inspectPublishedScope({
+      prefix,
+      manifestKey,
+      manifest,
+      remoteKeys,
+    });
+    if (inspection.action === 'skip') {
+      if (inspection.staleKeys.length === 0) return 'skipped';
+      const deletion = await deleteMultipleFromR2(inspection.staleKeys);
+      if (
+        deletion.errors.length > 0 ||
+        deletion.deleted.length !== inspection.staleKeys.length
+      ) {
+        throw new Error(
+          `manifest外objectの削除に失敗しました: ${prefix} deleted=${deletion.deleted.length}/${inspection.staleKeys.length}`
+        );
+      }
+      for (const key of inspection.staleKeys) remoteKeys.delete(key);
+      console.log(
+        `  manifest外objectを整理: ${inspection.staleKeys.length} objects`
+      );
+      return 'skipped';
+    }
+    staleKeys = inspection.deleteKeys;
+    console.log(`  scopeを再取得: ${inspection.reason}`);
+  }
 
-  const staleKeys = [...remoteKeys].filter((key) => key.startsWith(`${prefix}/`));
   if (staleKeys.length > 0) {
     const deletion = await deleteMultipleFromR2(staleKeys);
     if (deletion.errors.length > 0 || deletion.deleted.length !== staleKeys.length) {

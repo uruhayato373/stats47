@@ -90,6 +90,7 @@ npm run check:data-catalog --workspace packages/gis
 
 各公式アーカイブにつき `data.topojson` と `manifest.json` をR2へ保存する。完了判定は
 `official-policy.ts` の期待アーカイブ数とR2 `manifest.json` 数の一致であり、部分アップロードは未完了。
+再実行時はmanifest宣言objectを照合し、欠損scopeを全再取得、manifest外objectをexact削除して収束させる。
 
 ## 出力先
 
