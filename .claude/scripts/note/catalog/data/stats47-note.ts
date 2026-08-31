@@ -21,7 +21,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     status: "draft",
     r2Path: "note/stats47-note/d-geo-ipss-municipality-map",
     r2Body: false,
-    stats47Targets: ["/ranking/future-population-change-rate-2050"],
+    stats47Targets: ["/geo/2050-population", "/geo/method"],
   },
   {
     key: "d-geo-region-code-checklist",
@@ -34,7 +34,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     status: "draft",
     r2Path: "note/stats47-note/d-geo-region-code-checklist",
     r2Body: false,
-    stats47Targets: ["/ranking/future-population-change-rate-2050"],
+    stats47Targets: ["/geo", "/geo/method"],
   },
   {
     key: "d-geo-flood-population-mesh",
@@ -47,6 +47,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     status: "draft",
     r2Path: "note/stats47-note/d-geo-flood-population-mesh",
     r2Body: false,
+    stats47Targets: ["/geo/population-flood-risk", "/geo/method"],
   },
   {
     key: "d-geo-ksj-qgis-guide",
@@ -71,7 +72,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     status: "draft",
     r2Path: "note/stats47-note/d-geo-land-price-future-population",
     r2Body: false,
-    stats47Targets: ["/ranking/future-population-change-rate-2050"],
+    stats47Targets: ["/geo/population-land-price", "/geo/method"],
   },
   {
     key: "d-geo-x-ogp-map-automation",
@@ -120,6 +121,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     status: "draft",
     r2Path: "note/stats47-note/d-geo-data-quality-management",
     r2Body: false,
+    stats47Targets: ["/geo/data-catalog", "/geo/method"],
   },
   {
     key: "d-geo-station-access-analysis",
@@ -132,6 +134,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     status: "draft",
     r2Path: "note/stats47-note/d-geo-station-access-analysis",
     r2Body: false,
+    stats47Targets: ["/geo/population-station-access", "/geo/method"],
   },
   {
     key: "d-geo-trade-area-analysis",
@@ -192,6 +195,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     status: "draft",
     r2Path: "note/stats47-note/d-geo-analysis-template-compendium",
     r2Body: false,
+    stats47Targets: ["/geo", "/geo/compare", "/geo/method"],
   },
   {
     key: "A-laborwage-commute-time-prefecture",

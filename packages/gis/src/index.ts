@@ -37,6 +37,12 @@ export type {
   GeoAnalysisSource,
   GeoAnalysisStageEvidence,
   GeoAnalysisStageKind,
+  GeoAnalysisPrefDetail,
+  GeoFloodMeshCell,
+  GeoFloodPrefDetail,
+  GeoLandPricePoint,
+  GeoLandPricePrefDetail,
+  GeoPopulationMeshCell,
   GeoStationAccessMeshCell,
   GeoStationAccessPrefDetail,
   GeoStationAccessStation,
@@ -45,5 +51,15 @@ export type {
 
 export {
   GEO_STATION_ACCESS_MANIFEST_KEY,
+  geoAnalysisManifestKey,
+  geoAnalysisPrefKey,
   geoStationAccessPrefKey,
 } from "./geo-analysis/snapshot";
+
+export {
+  assertFloodConservation,
+  assertLandPriceConservation,
+  buildFloodPrefDetail,
+  buildLandPricePrefDetail,
+  type LandPriceDetailPointInput,
+} from "./geo-analysis/content-details";

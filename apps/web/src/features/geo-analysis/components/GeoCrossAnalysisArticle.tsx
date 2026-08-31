@@ -23,11 +23,12 @@ import {
   GEO_CROSS_ANALYSIS_CONFIGS,
   type GeoCrossAnalysisSlug,
 } from '../lib/geo-cross-analysis';
+import { loadGeoAnalysisManifest } from '../lib/load-geo-analysis-evidence';
 import { loadGeoAnalysisSnapshot } from '../lib/load-geo-analysis-snapshot';
 import { loadGeoStationAccessManifest } from '../lib/load-geo-station-access-evidence';
 
-
 import { GeoAnalysisTracker } from './GeoAnalysisTracker';
+import { GeoContentPublicationSection } from './GeoContentPublicationSection';
 import { GeoCrossAnalysisExplorer } from './GeoCrossAnalysisExplorer';
 import { GeoStationAccessEvidenceExplorer } from './GeoStationAccessEvidenceExplorer';
 
@@ -59,13 +60,15 @@ export async function GeoCrossAnalysisArticle({
   const spec = BUSINESS_PLAN_M1_GEO_ANALYSES.find(
     (analysis) => analysis.slug === slug
   );
-  const snapshot = await loadGeoAnalysisSnapshot(slug);
-  const stationAccessManifest =
+  const [snapshot, evidenceManifest, stationAccessManifest] = await Promise.all([
+    loadGeoAnalysisSnapshot(slug),
+    loadGeoAnalysisManifest(slug),
     slug === 'population-station-access'
-      ? await loadGeoStationAccessManifest()
-      : null;
+      ? loadGeoStationAccessManifest()
+      : Promise.resolve(null),
+  ]);
 
-  if (!spec || !snapshot) {
+  if (!spec || !snapshot || !evidenceManifest) {
     return (
       <PageShell>
         <Breadcrumbs
@@ -347,6 +350,12 @@ export async function GeoCrossAnalysisArticle({
           {contextLayer}
         </SurfaceSection>
       ) : null}
+
+      <GeoContentPublicationSection
+        slug={slug}
+        prefCode2={initialPrefCode}
+        manifest={evidenceManifest}
+      />
 
       <SurfaceSection className="mt-6">
         <SectionHeader title="関連する地域分析" hideRule />

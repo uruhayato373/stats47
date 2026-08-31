@@ -115,11 +115,98 @@ export interface GeoAnalysisEvidenceManifest {
     readonly expectedAreas: 47;
     readonly detailAreas: number;
     readonly conservationChecks: number;
-    readonly stationGroups: number;
+    readonly sourceRecords: number;
+    readonly derivedRecords: number;
+    readonly stationGroups?: number;
     readonly populatedMeshes: number;
-    readonly accessibleMeshes: number;
+    readonly accessibleMeshes?: number;
+    readonly exposedMeshes?: number;
     readonly maxDetailBytes: number;
   };
+}
+
+/** [meshId, westE6, southE6, eastE6, northE6, population2020, population2050] */
+export type GeoPopulationMeshCell = readonly [
+  meshId: string,
+  westE6: number,
+  southE6: number,
+  eastE6: number,
+  northE6: number,
+  population2020: number,
+  population2050: number,
+];
+
+/** [pointId, longitudeE6, latitudeE6, priceYenPerM2, changePercent] */
+export type GeoLandPricePoint = readonly [
+  pointId: string,
+  longitudeE6: number,
+  latitudeE6: number,
+  priceYenPerM2: number,
+  changePercent: number | null,
+];
+
+export interface GeoLandPricePrefDetail {
+  readonly schemaVersion: 1;
+  readonly slug: "population-land-price";
+  readonly generatedAt: string;
+  readonly areaCode: string;
+  readonly areaName: string;
+  readonly meshes: readonly GeoPopulationMeshCell[];
+  readonly landPricePoints: readonly GeoLandPricePoint[];
+  readonly summary: {
+    readonly meshCount: number;
+    readonly pointCount: number;
+    readonly population2020: number;
+    readonly population2050: number;
+    readonly medianResidentialLandPrice: number;
+    readonly medianLandPriceChange: number;
+    readonly populationChangeRate: number;
+  };
+}
+
+/** 最後の要素は想定最大規模の浸水深区分。0は今回入力で包含されなかったことだけを表す。 */
+export type GeoFloodMeshCell = readonly [
+  meshId: string,
+  westE6: number,
+  southE6: number,
+  eastE6: number,
+  northE6: number,
+  population2020: number,
+  population2050: number,
+  floodDepthClass: number,
+];
+
+export interface GeoFloodPrefDetail {
+  readonly schemaVersion: 1;
+  readonly slug: "population-flood-risk";
+  readonly generatedAt: string;
+  readonly areaCode: string;
+  readonly areaName: string;
+  readonly meshMethod: "center-point";
+  readonly meshes: readonly GeoFloodMeshCell[];
+  readonly summary: {
+    readonly meshCount: number;
+    readonly exposedMeshCount: number;
+    readonly population2020: number;
+    readonly population2050: number;
+    readonly exposedPopulation2020: number;
+    readonly exposedPopulation2050: number;
+    readonly floodExposureShare2020: number;
+    readonly floodExposureShare2050: number;
+  };
+}
+
+export type GeoAnalysisPrefDetail =
+  | GeoLandPricePrefDetail
+  | GeoFloodPrefDetail
+  | GeoStationAccessPrefDetail;
+
+export function geoAnalysisManifestKey(slug: string): string {
+  return `app/geo/${slug}/manifest.json`;
+}
+
+export function geoAnalysisPrefKey(slug: string, prefCode2: string): string {
+  return `app/geo/${slug}/pref/${prefCode2}.json`;
 }
 
 /**
@@ -172,5 +259,5 @@ export const GEO_STATION_ACCESS_MANIFEST_KEY =
   "app/geo/population-station-access/manifest.json";
 
 export function geoStationAccessPrefKey(prefCode2: string): string {
-  return `app/geo/population-station-access/pref/${prefCode2}.json`;
+  return geoAnalysisPrefKey("population-station-access", prefCode2);
 }

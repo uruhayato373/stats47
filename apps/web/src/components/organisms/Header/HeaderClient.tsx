@@ -38,7 +38,7 @@ type NavItem = {
 };
 
 // nav 並び順は情報設計 (docs/01_技術設計/07) + ベンチマーク §3.1 に沿う:
-// ランキング → カテゴリ → 都道府県 → (テーマ dropdown) → 統計ブログ。
+// ランキング → 都道府県 → 市区町村 → (テーマ dropdown) → 地域分析 → 統計ブログ。
 // 「都道府県」は stats47 固有価値なので primary nav の上位に置く。
 // テーマ dropdown は下の render で 都道府県 と 統計ブログ の間に挿入する。
 const NAV_ITEMS_BEFORE_THEME: NavItem[] = [
@@ -60,6 +60,11 @@ const NAV_ITEMS_BEFORE_THEME: NavItem[] = [
 ];
 
 const NAV_ITEMS_AFTER_THEME: NavItem[] = [
+  {
+    key: 'geo',
+    href: '/geo',
+    label: '地域分析',
+  },
   {
     key: 'blog',
     href: '/blog',
@@ -184,7 +189,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
           </Link>
         </div>
 
-        {/* 中央: デスクトップナビ (ランキング → 都道府県 → テーマ → 統計ブログ) */}
+        {/* 中央: デスクトップナビ (ランキング → 都道府県 → 市区町村 → テーマ → 地域分析 → 統計ブログ) */}
         <nav className="hidden h-full items-center gap-1 lg:flex">
           {NAV_ITEMS_BEFORE_THEME.slice(0, 1).map(renderNavLink)}
 
@@ -308,7 +313,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
 
           {NAV_ITEMS_BEFORE_THEME.slice(1).map(renderNavLink)}
 
-          {/* テーマ メガメニュー (都道府県 と 統計ブログ の間。category は内部利用に降格) */}
+          {/* テーマ メガメニュー (市区町村 と 地域分析 の間。category は内部利用に降格) */}
           {themes.length > 0 && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

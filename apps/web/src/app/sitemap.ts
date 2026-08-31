@@ -86,6 +86,14 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: `${BASE_URL}/ranking`, changeFrequency: 'weekly', priority: 0.8 },
   { url: `${BASE_URL}/areas`, changeFrequency: 'weekly', priority: 0.8 },
   { url: `${BASE_URL}/themes`, changeFrequency: 'weekly', priority: 0.8 },
+  { url: `${BASE_URL}/geo`, changeFrequency: 'weekly', priority: 0.8 },
+  { url: `${BASE_URL}/geo/2050-population`, changeFrequency: 'monthly', priority: 0.7 },
+  { url: `${BASE_URL}/geo/population-land-price`, changeFrequency: 'monthly', priority: 0.7 },
+  { url: `${BASE_URL}/geo/population-flood-risk`, changeFrequency: 'monthly', priority: 0.7 },
+  { url: `${BASE_URL}/geo/population-station-access`, changeFrequency: 'monthly', priority: 0.7 },
+  { url: `${BASE_URL}/geo/compare`, changeFrequency: 'monthly', priority: 0.6 },
+  { url: `${BASE_URL}/geo/method`, changeFrequency: 'monthly', priority: 0.5 },
+  { url: `${BASE_URL}/geo/data-catalog`, changeFrequency: 'weekly', priority: 0.5 },
   // /gis-cross/* (廃止 2026-05-29) → /themes に統合。各ページは middleware で 301 転送:
   //  migration-flow → /themes/population-dynamics, depopulation-medical → /themes/healthcare,
   //  sunshine-map → /themes/climate, hub → /themes。テーマ URL は THEME_PAGES に含まれる。

@@ -18,6 +18,7 @@ import {
   BookOpen,
   Building2,
   Home,
+  Map,
   MapPin,
   Search,
   TrendingUp,
@@ -40,7 +41,7 @@ interface MobileNavDrawerClientProps {
 }
 
 // 並び順・ラベルは desktop ヘッダー (HeaderClient) に揃える:
-// ホーム → ランキング → 都道府県 → 統計ブログ → 地域間比較 → 検索。
+// ホーム → ランキング → 都道府県 → 市区町村 → 地域分析 → 統計ブログ → 地域間比較 → 検索。
 // ラベルは surface 間で nav_label が割れないよう desktop と一致させる
 // (「地域の特徴」→「都道府県」/「ブログ」→「統計ブログ」)。
 const NAV_LINKS = [
@@ -69,6 +70,12 @@ const NAV_LINKS = [
     icon: Building2,
     color:
       'bg-indigo-100 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400',
+  },
+  {
+    href: '/geo',
+    label: '地域分析',
+    icon: Map,
+    color: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-400',
   },
   {
     href: '/blog',

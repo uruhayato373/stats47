@@ -43,6 +43,11 @@ const releaseTone = {
   pass: "good",
   pending: "warn",
 } as const;
+const lifecycleTone = {
+  ready: "good",
+  draft: "info",
+  gated: "warn",
+} as const;
 const geoRoleLabel = {
   baseline: "入口",
   "cross-analysis": "空間横断",
@@ -93,6 +98,9 @@ export default function StrategyPage() {
     .sort((a, b) => (a.pilotOrder ?? 99) - (b.pilotOrder ?? 99));
   const pilotSpecs = new Map(
     catalog.pilotSpecs.map((spec) => [spec.contentId, spec])
+  );
+  const noteProductById = new Map(
+    data.m1.note.products.map((product) => [product.id, product])
   );
 
   return (
@@ -260,6 +268,65 @@ export default function StrategyPage() {
                 </Td>
               </Tr>
             ))}
+          </Table>
+        </div>
+
+        <div className="mt-6">
+          <div className="mb-2">
+            <h3 className="text-[13px] font-bold text-console-fg">
+              Geoコンテンツ公開ライフサイクル
+            </h3>
+            <p className="mt-1 text-[11px] text-console-muted">
+              1分析をcanonical・テーマ・都道府県・ブログ・SNS・販売物へ接続。無料は結論と検証データ、有料は再現手順と加工済み成果物です。
+            </p>
+          </div>
+          <Table columns={["分析", "無料canonical・データ", "テーマ・県別", "解説記事", "SNS", "販売物", "公開ゲート"]}>
+            {catalog.geoContentLifecycle.map((content) => {
+              const noteProduct = noteProductById.get(content.paid.productId);
+              return (
+                <Tr key={content.contentId}>
+                  <Td>
+                    <div className="font-medium">{content.title}</div>
+                    <code className="text-[10px] text-console-muted">{content.contentId}</code>
+                  </Td>
+                  <Td>
+                    <Badge tone={lifecycleTone[content.free.status]}>{content.free.status}</Badge>
+                    <code className="mt-1 block text-[10px] text-console-muted">{content.free.canonicalPath}</code>
+                    <code className="block text-[10px] text-console-muted">{content.free.dataPath}</code>
+                  </Td>
+                  <Td>
+                    <div className="text-[10px] text-console-muted">{content.themeKeys.join(" / ")}</div>
+                    <code className="mt-1 block text-[10px] text-console-muted">{content.free.areaPathPattern}</code>
+                  </Td>
+                  <Td>
+                    <Badge tone={lifecycleTone[content.editorial.status]}>{content.editorial.status}</Badge>
+                    <code className="mt-1 block text-[10px] text-console-muted">{content.editorial.blogPath}</code>
+                    <div className="mt-1 text-[10px] text-console-muted">{content.editorial.suggestedTitle}</div>
+                  </Td>
+                  <Td>
+                    <Badge tone={lifecycleTone[content.social.status]}>{content.social.status}</Badge>
+                    <code className="mt-1 block text-[10px] text-console-muted">{content.social.canonicalPolicy}</code>
+                  </Td>
+                  <Td>
+                    <Badge tone={noteProduct?.hasBody ? "good" : lifecycleTone[content.paid.status]}>
+                      {noteProduct?.hasBody ? "本文あり" : content.paid.status}
+                    </Badge>
+                    <div className="mt-1 text-[10px] text-console-muted">
+                      {content.paid.productId} · {content.paid.priceYen.toLocaleString("ja-JP")}円
+                    </div>
+                    <div className="mt-1 text-[10px] text-console-muted">{content.paid.readerOutcome}</div>
+                  </Td>
+                  <Td>
+                    <Badge tone={content.publicationGates.length >= 5 ? "good" : "warn"}>
+                      {content.publicationGates.length}条件
+                    </Badge>
+                    <div className="mt-1 text-[10px] text-console-muted">
+                      {content.publicationGates.at(-1)}
+                    </div>
+                  </Td>
+                </Tr>
+              );
+            })}
           </Table>
         </div>
 

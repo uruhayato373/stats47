@@ -34,7 +34,6 @@ export const metadata: Metadata = {
   title: `${spec.title} | stats47地域分析`,
   description,
   alternates: { canonical: path },
-  robots: { index: false, follow: true },
 };
 
 function signed(value: number): string {

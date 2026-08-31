@@ -23,10 +23,10 @@
   },
   "typeMix": {
     "note": "今月の型配分 SSOT。blog-quality-standards.md の型定義を前提に、winning-patterns 実測と4週後clicks中央値で四半期ごとに見直す。",
-    "revisedAt": "2026-07-05",
-    "perMonth": { "B": 5, "D2": 4, "A": "3-4", "F": 3, "G": "1-2", "C_E": "1-2" },
-    "seasonalAdjust": "1-3月は G を +1 (引越し・移住シーズン)。E ハブは隔月1本まで",
-    "rationale": "winning-patterns robust (hasMap/hasScatter +15.4%) + 勝ちクラスタ D2 系 CTR 7-17%"
+    "revisedAt": "2026-08-31",
+    "perMonth": { "B": 5, "D2": 4, "A": "3-4", "F": 3, "G": "1-2", "H": 2, "C_E": "1-2" },
+    "seasonalAdjust": "1-3月は G を +1 (引越し・移住シーズン)。E ハブは隔月1本まで。Hは47県artifact・保存則PASS済みだけを投入",
+    "rationale": "winning-patterns robust (hasMap/hasScatter +15.4%) + 勝ちクラスタ D2 系 CTR 7-17% + Geo canonicalを記事・テーマ・県別・販売物へ再利用"
   },
   "competitorBenchmark": {
     "note": "競合実測の詳細は memory project_competitor_indicator_benchmark / project_competitor_riskmap_jp",

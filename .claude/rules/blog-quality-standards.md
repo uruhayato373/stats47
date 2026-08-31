@@ -408,9 +408,9 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 
 「SVG はあるが薄い」「callout が定型で不自然」を根治するには、**記事タイプごとに「章構成・目安字数・必須の
 分析視点」を固定**する。これにより機械フロア (図あたり字数・H2数) と意味レビュー (型ごとの分析視点を critic が
-審査) の両面で品質を底上げできる。記事は下記 8 型のいずれか 1 つを選び、その章構成と必須分析視点に従う。
+審査) の両面で品質を底上げできる。記事は下記 9 型のいずれか 1 つを選び、その章構成と必須分析視点に従う。
 
-**frontmatter に `archetype: A|B|C|D|D2|E|F|G` を宣言する** (任意だが推奨)。gate は型別の字数床を強制しない (普遍の
+**frontmatter に `archetype: A|B|C|D|D2|E|F|G|H` を宣言する** (任意だが推奨)。gate は型別の字数床を強制しない (普遍の
 図あたり字数で担保) が、blog-critic が宣言された型の **必須分析視点が満たされているか** を意味審査する。宣言が
 無い場合 critic は本文から型を推定して審査する。
 
@@ -424,6 +424,7 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 | **E 網羅ハブ** | カテゴリ/テーマ送客 | 1,800-2,400 | 代表 2-3 指標を束ねハブ誘導 (薄くなりがち。**乱発禁止**) |
 | **F 市区町村内格差** (★2026-07-05 新設) | 決算カード等の市区町村粒度。todo-ran/uub が持たない**最大の差別化資産** | 2,400-3,200 | **県内の市町村間格差**を類似団体平均と対比 + 財政・人口構造の真因 |
 | **G 移動フロー** (★2026-07-05 新設) | 県間人口移動 (migration-flow)。転出入クエリは 1-3 月に季節需要 | 2,400-3,000 | **どこから来てどこへ去るか**の方向性 + 年齢構造・東京圏/地方圏の非対称性 |
+| **H Geo空間横断** (★2026-08-31 新設) | 人口メッシュ×地価地点、洪水ポリゴン、駅距離など、複数GISレイヤーの決定的空間演算 | 2,400-3,200 | **入力レイヤー→空間演算→県別途中artifact→集計**を辿り、保存則・近似条件・因果でないことを同じ記事で説明 |
 
 ### 型ポートフォリオ (月次ミックス・2026-07-05 改訂)
 
@@ -465,6 +466,11 @@ winner 中央値 550 字/図 — 書きすぎも負けプロファイル)。
 - **G 移動フロー**: ①「◯◯県の人はどこへ移住する?」フック → ②転出先/転入元 上位 SVG → ③年齢別・男女別の偏り →
   ④東京圏一極集中・U ターン等の構造解釈 + `[!WARNING]` 住民基本台帳ベースの限界 (実移動との乖離) →
   ⑤関連 `/ranking/{key}` (転入超過数等)。データ: R2 `app/stats/population-migration-inter-prefecture/migration-flow-<year>.json`
+- **H Geo空間横断**: ①「2つの地図を重ねると何が見えるか」の問い → ②canonical Geo分析の47県結果 →
+  ③計算入力レイヤーと空間演算を図解 → ④代表県の途中artifactで入力から集計まで追跡 →
+  ⑤`[!WARNING]` 中心点包含・直線距離・推計年などの限界と保存則 → ⑥`/geo/{analysis}`・`/geo/method`・関連テーマへ誘導。
+  データは R2 `app/geo/{analysis}/item.json` と同じprefixの `manifest.json` / `pref/{NN}.json` のみを使う。
+  **有料導線では結論を隠さず、再現手順・辞書・テンプレート・加工済み成果物を販売する**。
 
 ### callout の正しい使い方 (機械的反復を排除)
 
@@ -572,6 +578,7 @@ GSC 実測と是正ループ (`blog-remediation-loop.md`) で品質を上げる�
 |---|---|---|
 | A / C / D / D2 / F / G | ランキング + タイルマップ (2 枚) | `fetch-ranking-data-r2.mjs --with-map` |
 | **B (相関)** | 指標A ランキング + 指標B ランキング + **散布図** (3 枚) | 上記 + `fetch-correlation-scatter.mjs` |
+| **H (Geo空間横断)** | 県別派生値地図 + 入力/演算/出力lineage図 + 代表県途中artifact (2-3枚) | `app/geo/{analysis}/{item,manifest,pref/{NN}}.json` |
 
 型B に散布図が要るのは、2 指標の関係を論じる記事に主指標だけの図を貼っても問いに答えられない
 から (2026-07-31 に dry-run で実際にその形になることを確認し、散布図の接地を通してから解禁した)。
@@ -631,7 +638,7 @@ Must が形骸化するため、足りなければ月次の目標側を下げる
 | SVG: choropleth 凡例 / findings パリティ / tile-grid 不変量 | 機械 | blocker | `lintChoroplethLegend` 他 |
 | **SVG: 型を判別できる basename (`chart-1` 禁止)** | 機械 | blocker | `MEANINGLESS_BASENAME_RE` |
 | SVG: canonical suffix 命名 (`-ranking` 等) の全面遵守 | **critic** | — | 既存負債 14.9%。`-quintile` 等の正当名を巻き込むため gate 不可 |
-| 記事アーキタイプ (A/B/C/D/D2/E/F/G) の必須分析視点 | **critic** | — | 型は宣言できるが「視点を満たしたか」は意味判断 |
+| 記事アーキタイプ (A/B/C/D/D2/E/F/G/H) の必須分析視点 | **critic** | — | 型は宣言できるが「視点を満たしたか」は意味判断 |
 | 読者価値・冗長・図表重複・curiosity gap の真正性 | **critic** | — | review.md verdict PASS が公開の必須条件 |
 | critic レビュー通過 (review.md PASS) | 機械 | blocker | `hasCriticPass` |
 

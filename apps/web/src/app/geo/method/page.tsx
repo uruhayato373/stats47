@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   description:
     '人口メッシュ、地価地点、洪水ポリゴン、駅代表点をどう重ね、何を判定できないのかを分析別に説明します。',
   alternates: { canonical: '/geo/method' },
-  robots: { index: false, follow: true },
 };
 
 const crossAnalyses = BUSINESS_PLAN_M1_GEO_ANALYSES.filter(
