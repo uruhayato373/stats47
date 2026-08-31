@@ -3,8 +3,8 @@ title: 漁業就業者はなぜ北海道に集中するのか
 seoTitle: "漁業就業者数ランキング都道府県別｜北海道と内陸8県を比較"
 description: 同じ日本でも、海に漁に出る人の数は県によってまったく違います。この記事では2023年の漁業就業者数を都道府県別に比較し、北海道が突出して多い理由と、内陸8県で就業者がゼロになる背景を読み解きます。
 slug: fishery-workers-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

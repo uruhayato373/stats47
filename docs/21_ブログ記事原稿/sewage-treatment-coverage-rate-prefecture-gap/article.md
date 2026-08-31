@@ -3,8 +3,8 @@ title: 汚水処理人口普及率はなぜ徳島が最下位か
 seoTitle: "汚水処理人口普及率ランキング｜東京都と徳島県の差"
 description: 家庭の排水がどこまできれいに処理されているかは、住む県によって大きく異なります。この記事では2023年の汚水処理人口普及率を都道府県別に比較し、東京都や滋賀県が上位を占める理由と、四国で普及率が低い背景を読み解きます。
 slug: sewage-treatment-coverage-rate-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

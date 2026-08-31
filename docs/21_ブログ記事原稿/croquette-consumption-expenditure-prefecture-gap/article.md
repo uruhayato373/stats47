@@ -3,8 +3,8 @@ title: コロッケ支出額、なぜ北陸勢が上位独占なのか
 seoTitle: "コロッケ消費支出額ランキング 都道府県別データで見る地域差"
 description: コロッケの消費支出額は福井県が突出して高く、北陸地方が上位を占める理由を家計調査のデータから探ります。
 slug: croquette-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 
