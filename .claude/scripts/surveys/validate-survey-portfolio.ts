@@ -151,12 +151,25 @@ function validateEditorial() {
 
   if (masterSurveys.length < MIN_REQUIRED_MASTER_COUNT)
     v("S8", `survey master が ${masterSurveys.length} 件 (最低 ${MIN_REQUIRED_MASTER_COUNT} 件)`);
-  const missing = masterSurveys.map((survey) => survey.id)
+
+  const membership = activeRankingKeysBySurvey();
+
+  // editorial は「同じ調査に属する問いを束ねて ranking へ送る」ためのハブ本文なので、
+  // 都道府県 ranking を 1 本も持たない調査には書きようがない。readerQuestions は
+  // 当該調査の active ranking に所属する rankingKey を要求するため、埋めれば必ず落ちる。
+  //
+  // 実測 (2026-08-31): 日本全体系列 (geo-scope) 用に sync-survey-master が追加した 19 件が
+  // itemCount 0 のまま全件要求に引っかかり、CI を止めていた。これらは都道府県 ranking を
+  // 持たないのが正常な状態で、editorial の欠落ではない。
+  // --require-all-editorial は「master 全件の実装を要求する」ための明示フラグなので、
+  // このときだけは除外せず全件を対象にする (移行完了の確認に使う)。
+  const editorialTargets = requireAllEditorial
+    ? masterSurveys
+    : masterSurveys.filter((survey) => (membership.get(survey.id)?.size ?? 0) > 0);
+  const missing = editorialTargets.map((survey) => survey.id)
     .filter((surveyId) => !getSurveyEditorialContent(surveyId));
   if (missing.length > 0)
     v("S8", `editorial 未実装 ${missing.length} 件: ${missing.join(",")}`);
-
-  const membership = activeRankingKeysBySurvey();
   const fingerprints: Array<{ surveyId: string; grams: Set<string> }> = [];
   for (const { surveyId, content } of implemented) {
     const summarySentences = sentenceCount(content.summary);
