@@ -3,8 +3,8 @@ title: ケーキ支出額、埼玉と福井で4千円差
 seoTitle: "ケーキ消費支出額ランキング 都道府県別データで見る地域差"
 description: ケーキにいくら使うかは住む県によって違い、家計調査のデータから消費の地域差とその背景を確かめます。
 slug: cake-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

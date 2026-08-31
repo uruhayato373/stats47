@@ -3,8 +3,8 @@ title: 中華麺、なぜ東北勢が上位を独占するのか
 seoTitle: "中華麺消費支出額ランキング 都道府県別データで見る地域差"
 description: ラーメンや焼きそばに使う中華麺の消費支出額は東北地方で突出して高く、その理由を家計調査のデータから探ります。
 slug: chinese-noodles-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 
