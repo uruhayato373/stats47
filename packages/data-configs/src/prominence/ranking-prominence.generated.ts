@@ -471,7 +471,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "educationsports",
     "categoryName": "教育・文化・スポーツ",
-    "count": 257,
+    "count": 255,
     "representatives": [
       {
         "rankingKey": "swimming-pool-public",
@@ -600,7 +600,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "socialsecurity",
     "categoryName": "社会保障・衛生",
-    "count": 246,
+    "count": 245,
     "representatives": [
       {
         "rankingKey": "psychiatric-bed-count",
@@ -662,7 +662,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "infrastructure",
     "categoryName": "社会基盤施設",
-    "count": 48,
+    "count": 47,
     "representatives": [
       {
         "rankingKey": "main-road-paving-rate",
