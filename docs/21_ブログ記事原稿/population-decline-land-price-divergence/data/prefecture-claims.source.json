@@ -1,9 +1,0 @@
-{
-  "schemaVersion": 1,
-  "sourceType": "r2-geo-analysis",
-  "sourceKey": "app/geo/population-land-price/item.json",
-  "label": "人口・住宅地価の都道府県別集計",
-  "retrievedAt": "2026-09-01",
-  "dataVersion": "2020-2050",
-  "sourceSha256": "330f06459e09a936b3037423e225ab01b5a992dacc88dfc87bf5e1ea7450e795"
-}
