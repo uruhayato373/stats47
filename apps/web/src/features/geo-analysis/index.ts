@@ -3,6 +3,8 @@ export { GeoCrossAnalysisArticle } from './components/GeoCrossAnalysisArticle';
 export { GeoDecisionExplorer } from './components/GeoDecisionExplorer';
 export { GeoPopulationExplorer } from './components/GeoPopulationExplorer';
 export { GeoCrossAnalysisExplorer } from './components/GeoCrossAnalysisExplorer';
+export { GeoContentPublicationSection } from './components/GeoContentPublicationSection';
+export { AreaGeoInsightsSection } from './components/AreaGeoInsightsSection';
 export {
   buildPopulationAnalysis,
   type PopulationAnalysisRow,
@@ -13,6 +15,13 @@ export {
   type GeoDecisionRow,
 } from './lib/build-geo-decision-rows';
 export { loadGeoAnalysisSnapshot } from './lib/load-geo-analysis-snapshot';
+export {
+  geoAnalysisPublicDataUrl,
+  loadGeoAnalysisManifest,
+  loadGeoAnalysisPrefDetail,
+  parseGeoAnalysisManifest,
+  parseGeoAnalysisPrefDetail,
+} from './lib/load-geo-analysis-evidence';
 export {
   isGeoStationAccessView,
   type GeoStationAccessView,

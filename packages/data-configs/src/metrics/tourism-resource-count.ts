@@ -22,6 +22,7 @@ export const tourismResourceCount: MetricConfig = {
     "displayName": "国土交通省「国土数値情報（観光資源）」／加工：stats47",
     "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P12-v2_2.html",
   },
+  "surveyId": "mlit-ksj",
   "entities": [
     "prefecture",
   ],

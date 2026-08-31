@@ -9,6 +9,7 @@ describe('stats47 2.0事業計画カタログ', () => {
     expect(BUSINESS_PLAN_2026.xIdeas).toHaveLength(30);
     expect(BUSINESS_PLAN_2026.noteProducts).toHaveLength(15);
     expect(BUSINESS_PLAN_2026.pilotSpecs).toHaveLength(4);
+    expect(BUSINESS_PLAN_2026.geoContentLifecycle).toHaveLength(4);
 
     for (const items of [
       BUSINESS_PLAN_2026.contentOpportunities,
@@ -16,6 +17,23 @@ describe('stats47 2.0事業計画カタログ', () => {
       BUSINESS_PLAN_2026.noteProducts,
     ]) {
       expect(new Set(items.map((item) => item.id)).size).toBe(items.length);
+    }
+  });
+
+  it('各Geo分析を無料・編集・SNS・有料の公開経路へ接続する', () => {
+    const analysisIds = new Set(
+      BUSINESS_PLAN_2026.m1.analyses.map((analysis) => analysis.id)
+    );
+    for (const content of BUSINESS_PLAN_2026.geoContentLifecycle) {
+      expect(analysisIds.has(content.analysisId)).toBe(true);
+      expect(content.free.canonicalPath).toBe(`/geo/${content.analysisSlug}`);
+      expect(content.editorial.topicKey).toBe(`geo:${content.analysisSlug}`);
+      expect(content.editorial.blogPath).toBe(
+        `/blog/${content.editorial.blogSlug}`
+      );
+      expect(content.themeKeys.length).toBeGreaterThan(0);
+      expect(content.paid.priceYen).toBeGreaterThan(0);
+      expect(content.publicationGates.length).toBeGreaterThanOrEqual(5);
     }
   });
 

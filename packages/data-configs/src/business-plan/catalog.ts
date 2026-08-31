@@ -3,6 +3,7 @@ import {
   BUSINESS_PLAN_NOTE_PRODUCTS,
   BUSINESS_PLAN_X_IDEAS,
 } from './content-opportunities';
+import { BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE } from './geo-content-lifecycle';
 import { BUSINESS_PLAN_M1 } from './m1';
 import type {
   BusinessPlanCatalog,
@@ -908,7 +909,7 @@ export const BUSINESS_PLAN_PILOT_SPECS: readonly BusinessPlanPilotSpec[] = [
 
 export const BUSINESS_PLAN_2026: BusinessPlanCatalog = {
   id: 'stats47-business-plan-2026',
-  version: '2026-08-29.1',
+  version: '2026-08-31.1',
   source: {
     title: 'stats47 2.0 超具体的 事業計画書',
     subtitle: 'GIS × AI × 地域データによるstats47事業拡張計画',
@@ -948,6 +949,7 @@ export const BUSINESS_PLAN_2026: BusinessPlanCatalog = {
   initiatives: BUSINESS_PLAN_INITIATIVES,
   pilotSpecs: BUSINESS_PLAN_PILOT_SPECS,
   contentOpportunities: BUSINESS_PLAN_CONTENT_OPPORTUNITIES,
+  geoContentLifecycle: BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE,
   xIdeas: BUSINESS_PLAN_X_IDEAS,
   noteProducts: BUSINESS_PLAN_NOTE_PRODUCTS,
   m1: BUSINESS_PLAN_M1,

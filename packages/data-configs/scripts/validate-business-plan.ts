@@ -127,6 +127,10 @@ unique(
   'content.id'
 );
 unique(
+  BUSINESS_PLAN_2026.geoContentLifecycle.map((item) => item.contentId),
+  'geoContent.contentId'
+);
+unique(
   BUSINESS_PLAN_2026.xIdeas.map((item) => item.id),
   'xIdea.id'
 );
@@ -198,6 +202,29 @@ for (const initiative of BUSINESS_PLAN_2026.initiatives) {
 const contentIds = new Set(
   BUSINESS_PLAN_2026.contentOpportunities.map((item) => item.id)
 );
+const m1AnalysisIds = new Set(
+  BUSINESS_PLAN_2026.m1.analyses.map((analysis) => analysis.id)
+);
+for (const content of BUSINESS_PLAN_2026.geoContentLifecycle) {
+  if (!contentIds.has(content.contentId)) {
+    errors.push(`geoContent:${content.contentId}: content opportunity が未定義です`);
+  }
+  if (!m1AnalysisIds.has(content.analysisId)) {
+    errors.push(`geoContent:${content.contentId}: analysis が未定義です`);
+  }
+  if (content.free.canonicalPath !== `/geo/${content.analysisSlug}`) {
+    errors.push(`geoContent:${content.contentId}: canonicalPath がslugと不一致です`);
+  }
+  if (content.themeKeys.length === 0) {
+    errors.push(`geoContent:${content.contentId}: themeKeys が空です`);
+  }
+  if (content.paid.priceYen <= 0 || content.paid.deliverables.length === 0) {
+    errors.push(`geoContent:${content.contentId}: 有料価値の定義が不十分です`);
+  }
+  if (content.publicationGates.length < 5) {
+    errors.push(`geoContent:${content.contentId}: publicationGates が不足しています`);
+  }
+}
 for (const pilot of BUSINESS_PLAN_2026.pilotSpecs) {
   referencedOwners.add(pilot.owner);
   if (!contentIds.has(pilot.contentId))

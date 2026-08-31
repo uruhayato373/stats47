@@ -1955,5 +1955,43 @@
     "isActive": true,
     "createdAt": "2026-08-28 00:00:00",
     "updatedAt": "2026-08-28 00:00:00"
+  },
+  {
+    "id": "mlit-ksj",
+    "sourceKind": "survey",
+    "externalId": null,
+    "parentSourceId": null,
+    "name": "国土数値情報",
+    "organization": "国土交通省",
+    "url": "https://nlftp.mlit.go.jp/ksj/index.html",
+    "description": "国土交通省が整備する国土に関する地理空間情報。ダム、空港、鉄道駅、道の駅、湖沼などの位置情報を都道府県別に集計して指標化している。",
+    "attributionText": "国土数値情報（国土交通省）を加工して作成",
+    "license": null,
+    "licenseUrl": null,
+    "baseUrl": null,
+    "linkTemplate": null,
+    "displayOrder": 0,
+    "isActive": true,
+    "createdAt": "2026-08-31 00:00:00",
+    "updatedAt": "2026-08-31 00:00:00"
+  },
+  {
+    "id": "forestry-statistics-handbook",
+    "sourceKind": "survey",
+    "externalId": null,
+    "parentSourceId": null,
+    "name": "森林・林業統計要覧",
+    "organization": "林野庁",
+    "url": "https://www.rinya.maff.go.jp/j/kikaku/toukei/youran_mokuzi.html",
+    "description": "林野庁が公表する森林・林業に関する統計の総覧。林道延長や森林面積などを収録し、社会・人口統計体系の原典としても参照される。",
+    "attributionText": null,
+    "license": null,
+    "licenseUrl": null,
+    "baseUrl": null,
+    "linkTemplate": null,
+    "displayOrder": 0,
+    "isActive": true,
+    "createdAt": "2026-08-31 00:00:00",
+    "updatedAt": "2026-08-31 00:00:00"
   }
 ]

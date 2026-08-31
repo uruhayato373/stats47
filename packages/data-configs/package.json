@@ -94,6 +94,7 @@
     "validate:business-plan": "tsx scripts/validate-business-plan.ts",
     "build:business-plan-state": "tsx scripts/build-business-plan-state.ts",
     "export:business-plan-m1-x": "tsx scripts/export-business-plan-m1-x.ts",
+    "export:geo-content-pipeline": "tsx scripts/export-geo-content-pipeline.ts",
     "build:site-acquisition-x": "tsx scripts/build-site-acquisition-x.ts build",
     "audit:site-acquisition-x": "tsx scripts/build-site-acquisition-x.ts audit",
     "evidence:extract": "tsx scripts/evidence/japan-zue.ts extract",

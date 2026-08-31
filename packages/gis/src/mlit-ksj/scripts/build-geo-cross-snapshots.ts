@@ -24,6 +24,13 @@ import type { GeometryObject, Topology } from "topojson-specification";
 import unzipper from "unzipper";
 
 import {
+  assertFloodConservation,
+  assertLandPriceConservation,
+  buildFloodPrefDetail,
+  buildLandPricePrefDetail,
+  type LandPriceDetailPointInput,
+} from "../../geo-analysis/content-details";
+import {
   coordinateBounds,
   geometryCenter,
   mesh1000BoundsFromCode,
@@ -42,6 +49,8 @@ import {
 } from "../../geo-analysis/station-access";
 import {
   GEO_STATION_ACCESS_MANIFEST_KEY,
+  geoAnalysisManifestKey,
+  geoAnalysisPrefKey,
   geoStationAccessPrefKey,
 } from "../../geo-analysis/snapshot";
 import type {
@@ -52,6 +61,8 @@ import type {
   GeoAnalysisSnapshot,
   GeoAnalysisSnapshotRow,
   GeoAnalysisSource,
+  GeoFloodPrefDetail,
+  GeoLandPricePrefDetail,
   GeoStationAccessMeshCell,
   GeoStationAccessPrefDetail,
   GeoStationAccessStation,
@@ -68,7 +79,7 @@ const FLOOD_GRID_DEGREES = 0.01;
 const EXPECTED_FLOOD_FILES = 94;
 const LOCAL_R2_ROOT = path.resolve(".local/r2");
 const OUTPUT_ROOT = path.resolve(".local/r2/app/geo");
-const MAX_STATION_DETAIL_BYTES = 5_000_000;
+const MAX_GEO_DETAIL_BYTES = 5_000_000;
 const FLOOD_SOURCE_ROOT = path.resolve(
   `.local/r2/gis/mlit-ksj/A31b/${FLOOD_VERSION}/source`,
 );
@@ -277,27 +288,51 @@ function createAreaAccumulators(
 
 function loadLandPricePoints(
   accumulators: Map<string, AreaAccumulator>,
-): number {
-  const topology = readTopology(
-    path.resolve(
-      `.local/r2/gis/mlit-ksj/L01/${LAND_PRICE_VERSION}/national.topojson`,
-    ),
-  );
+): { points: LandPriceDetailPointInput[]; input: GeoAnalysisInputEvidence } {
+  const key = `gis/mlit-ksj/L01/${LAND_PRICE_VERSION}/national.topojson`;
+  const inputPath = path.resolve(`.local/r2/${key}`);
+  const topology = readTopology(inputPath);
   const features = topologyToFeatures(topology);
-  let accepted = 0;
-  for (const current of features) {
+  const points: LandPriceDetailPointInput[] = [];
+  for (const [index, current] of features.entries()) {
     if (stringProperty(current.properties, "L01_002") !== "000") continue;
     const municipalityCode = stringProperty(current.properties, "L01_001");
     const price = numberProperty(current.properties, "L01_008");
     const priceChange = numberProperty(current.properties, "L01_009");
     if (!municipalityCode || price === null || price <= 0) continue;
+    if (!current.geometry) continue;
+    const center = geometryCenter(flattenPositions(current.geometry));
+    if (!center) continue;
     const accumulator = accumulators.get(`${municipalityCode.slice(0, 2)}000`);
     if (!accumulator) continue;
     accumulator.residentialPrices.push(price);
     if (priceChange !== null) accumulator.residentialPriceChanges.push(priceChange);
-    accepted += 1;
+    points.push({
+      id: `${municipalityCode}-${stringProperty(current.properties, "L01_003") ?? index + 1}`,
+      areaCode: `${municipalityCode.slice(0, 2)}000`,
+      longitude: center[0],
+      latitude: center[1],
+      price,
+      change: priceChange,
+    });
   }
-  return accepted;
+  if (new Set(points.map((point) => point.id)).size !== points.length) {
+    throw new Error("住宅地地価地点IDが重複しています");
+  }
+  return {
+    points,
+    input: {
+      layerId: "ksj-l01-residential-land-price",
+      datasetId: "L01",
+      version: LAND_PRICE_VERSION,
+      key,
+      sha256: fileSha256(inputPath),
+      bytes: fs.statSync(inputPath).size,
+      geometry: "point",
+      role: "calculation-input",
+      usedInCalculation: true,
+    },
+  };
 }
 
 function stationFeatureCenter(
@@ -467,7 +502,13 @@ async function loadFloodUrls(): Promise<string[]> {
 
 async function markFloodExposure(
   populationMeshes: readonly PopulationMeshPoint[],
-): Promise<{ files: number; features: number; matchedFeatures: number }> {
+): Promise<{
+  files: number;
+  features: number;
+  matchedFeatures: number;
+  inputs: GeoAnalysisInputEvidence[];
+  sourceOutputs: GeoAnalysisArtifactEvidence[];
+}> {
   const byFirstMesh = new Map<string, PopulationMeshPoint[]>();
   for (const mesh of populationMeshes) {
     const firstMesh = mesh.meshId.slice(0, 4);
@@ -484,6 +525,8 @@ async function markFloodExposure(
   }> = [];
   let featureCount = 0;
   let matchedFeatureCount = 0;
+  const inputs: GeoAnalysisInputEvidence[] = [];
+  const sourceOutputs: GeoAnalysisArtifactEvidence[] = [];
 
   for (const [index, url] of urls.entries()) {
     const firstMesh = url.match(/_([0-9]{4})_GEOJSON\.zip$/)?.[1];
@@ -497,12 +540,6 @@ async function markFloodExposure(
       bytes: zipStat.size,
       sha256: fileSha256(zipPath),
     });
-    const candidates = byFirstMesh.get(firstMesh) ?? [];
-    if (candidates.length === 0) {
-      console.log(`洪水 ${index + 1}/${urls.length} ${firstMesh}: 人口メッシュなし`);
-      continue;
-    }
-
     const archive = await unzipper.Open.file(zipPath);
     const entry = archive.files.find((current: { path: string }) =>
       current.path.endsWith(`A31b-20-25_20_${firstMesh}.geojson`),
@@ -512,7 +549,29 @@ async function markFloodExposure(
       (await entry.buffer()).toString("utf8"),
     ) as FeatureCollection<Polygon | MultiPolygon, NumericProperties>;
     featureCount += collection.features.length;
-    matchedFeatureCount += applyFloodFeatures(collection, candidates);
+    const objectKey = `gis/mlit-ksj/A31b/${FLOOD_VERSION}/source/${firstMesh}.zip`;
+    const sha256 = fileSha256(zipPath);
+    inputs.push({
+      layerId: "ksj-a31b-flood-polygon",
+      datasetId: "A31b",
+      version: FLOOD_VERSION,
+      key: objectKey,
+      sha256,
+      bytes: zipStat.size,
+      geometry: "polygon",
+      role: "calculation-input",
+      usedInCalculation: true,
+    });
+    sourceOutputs.push({
+      key: objectKey,
+      sha256,
+      bytes: zipStat.size,
+      recordCount: collection.features.length,
+    });
+    const candidates = byFirstMesh.get(firstMesh) ?? [];
+    if (candidates.length > 0) {
+      matchedFeatureCount += applyFloodFeatures(collection, candidates);
+    }
     console.log(
       `洪水 ${index + 1}/${urls.length} ${firstMesh}: ${collection.features.length} features / ${candidates.length} populated meshes`,
     );
@@ -541,6 +600,8 @@ async function markFloodExposure(
     files: urls.length,
     features: featureCount,
     matchedFeatures: matchedFeatureCount,
+    inputs,
+    sourceOutputs,
   };
 }
 
@@ -770,7 +831,7 @@ function writeStationAccessDetails(
       false,
       prefecture.prefCode,
     );
-    if (evidence.bytes > MAX_STATION_DETAIL_BYTES) {
+    if (evidence.bytes > MAX_GEO_DETAIL_BYTES) {
       throw new Error(
         `${prefecture.prefCode}: 県別Geo artifactが上限超過 bytes=${evidence.bytes}`,
       );
@@ -819,12 +880,12 @@ async function loadPassengerContextEvidence(): Promise<PassengerContextEvidence>
   return { inputs, outputs };
 }
 
-function stageOutputs(
+function stageOutputs<T>(
   details: readonly {
-    readonly detail: GeoStationAccessPrefDetail;
+    readonly detail: T;
     readonly evidence: GeoAnalysisArtifactEvidence;
   }[],
-  count: (detail: GeoStationAccessPrefDetail) => number,
+  count: (detail: T) => number,
 ): GeoAnalysisArtifactEvidence[] {
   return details.map(({ detail, evidence }) => ({
     ...evidence,
@@ -924,6 +985,17 @@ function writeStationAccessManifest(input: {
       expectedAreas: 47,
       detailAreas: input.details.length,
       conservationChecks: input.details.length,
+      sourceRecords:
+        input.populatedMeshes +
+        input.stationGroups +
+        input.passengerContext.outputs.reduce(
+          (sum, output) => sum + output.recordCount,
+          0,
+        ),
+      derivedRecords: input.details.reduce(
+        (sum, item) => sum + item.detail.summary.accessibleMeshCount,
+        0,
+      ),
       stationGroups: input.stationGroups,
       populatedMeshes: input.populatedMeshes,
       accessibleMeshes: input.details.reduce(
@@ -935,6 +1007,260 @@ function writeStationAccessManifest(input: {
   };
   writeJsonArtifact(
     GEO_STATION_ACCESS_MANIFEST_KEY,
+    manifest,
+    manifest.stages.length,
+    true,
+  );
+  return manifest;
+}
+
+function writeLandPriceDetails(input: {
+  generatedAt: string;
+  meshes: readonly PopulationMeshPoint[];
+  points: readonly LandPriceDetailPointInput[];
+  snapshot: GeoAnalysisSnapshot;
+}): Array<{
+  readonly detail: GeoLandPricePrefDetail;
+  readonly evidence: GeoAnalysisArtifactEvidence;
+}> {
+  return fetchPrefectures().map((prefecture) => {
+    const detail = buildLandPricePrefDetail({
+      generatedAt: input.generatedAt,
+      areaCode: prefecture.prefCode,
+      areaName: prefecture.prefName,
+      meshes: input.meshes,
+      points: input.points,
+    });
+    const aggregateRow = input.snapshot.rows.find(
+      (row) => row.areaCode === prefecture.prefCode,
+    );
+    if (!aggregateRow) throw new Error(`${prefecture.prefCode}: aggregate row欠落`);
+    assertLandPriceConservation(detail, aggregateRow);
+    const evidence = writeJsonArtifact(
+      geoAnalysisPrefKey("population-land-price", prefecture.prefCode.slice(0, 2)),
+      detail,
+      detail.meshes.length + detail.landPricePoints.length,
+      false,
+      prefecture.prefCode,
+    );
+    if (evidence.bytes > MAX_GEO_DETAIL_BYTES) {
+      throw new Error(`${prefecture.prefCode}: 地価detail上限超過 bytes=${evidence.bytes}`);
+    }
+    return { detail, evidence };
+  });
+}
+
+function writeLandPriceManifest(input: {
+  generatedAt: string;
+  populationInputs: readonly GeoAnalysisInputEvidence[];
+  landPriceInput: GeoAnalysisInputEvidence;
+  details: readonly {
+    readonly detail: GeoLandPricePrefDetail;
+    readonly evidence: GeoAnalysisArtifactEvidence;
+  }[];
+  aggregate: GeoAnalysisArtifactEvidence;
+}): GeoAnalysisEvidenceManifest {
+  const definition = BUSINESS_PLAN_M1_GEO_ANALYSES.find(
+    (analysis) => analysis.slug === "population-land-price",
+  );
+  if (!definition) throw new Error("land price analysis定義がありません");
+  const manifest: GeoAnalysisEvidenceManifest = {
+    schemaVersion: 1,
+    slug: "population-land-price",
+    generatedAt: input.generatedAt,
+    definitionSha256: createHash("sha256")
+      .update(JSON.stringify(definition))
+      .digest("hex"),
+    inputs: [...input.populationInputs, input.landPriceInput],
+    stages: [
+      {
+        id: "population-mesh",
+        label: "1km将来人口メッシュ",
+        kind: "source",
+        role: "calculation-input",
+        inputIds: ["ipss-population-mesh-1km"],
+        operation: "2020年・2050年人口とメッシュ境界を県別artifactへ変換",
+        outputKeyPattern: "app/geo/population-land-price/pref/{NN}.json#meshes",
+        outputs: stageOutputs(input.details, (detail) => detail.meshes.length),
+      },
+      {
+        id: "residential-land-price-points",
+        label: "住宅地の地価公示地点",
+        kind: "source",
+        role: "calculation-input",
+        inputIds: ["ksj-l01-residential-land-price"],
+        operation: "用途区分000の地点・価格・変動率を県別artifactへ変換",
+        outputKeyPattern:
+          "app/geo/population-land-price/pref/{NN}.json#landPricePoints",
+        outputs: stageOutputs(
+          input.details,
+          (detail) => detail.landPricePoints.length,
+        ),
+      },
+      {
+        id: "prefecture-aggregate",
+        label: "都道府県別集計",
+        kind: "aggregate",
+        role: "aggregate",
+        inputIds: ["population-mesh", "residential-land-price-points"],
+        operation: "人口合計と住宅地地点の中央値を同じ都道府県コードで結合",
+        outputKeyPattern: "app/geo/population-land-price/item.json",
+        outputs: [input.aggregate],
+      },
+    ],
+    aggregate: input.aggregate,
+    quality: {
+      expectedAreas: 47,
+      detailAreas: input.details.length,
+      conservationChecks: input.details.length,
+      sourceRecords: input.details.reduce(
+        (sum, item) =>
+          sum + item.detail.meshes.length + item.detail.landPricePoints.length,
+        0,
+      ),
+      derivedRecords: input.details.length,
+      populatedMeshes: input.details.reduce(
+        (sum, item) => sum + item.detail.meshes.length,
+        0,
+      ),
+      maxDetailBytes: Math.max(...input.details.map((item) => item.evidence.bytes)),
+    },
+  };
+  writeJsonArtifact(
+    geoAnalysisManifestKey(manifest.slug),
+    manifest,
+    manifest.stages.length,
+    true,
+  );
+  return manifest;
+}
+
+function writeFloodDetails(input: {
+  generatedAt: string;
+  meshes: readonly PopulationMeshPoint[];
+  snapshot: GeoAnalysisSnapshot;
+}): Array<{
+  readonly detail: GeoFloodPrefDetail;
+  readonly evidence: GeoAnalysisArtifactEvidence;
+}> {
+  return fetchPrefectures().map((prefecture) => {
+    const detail = buildFloodPrefDetail({
+      generatedAt: input.generatedAt,
+      areaCode: prefecture.prefCode,
+      areaName: prefecture.prefName,
+      meshes: input.meshes,
+    });
+    const aggregateRow = input.snapshot.rows.find(
+      (row) => row.areaCode === prefecture.prefCode,
+    );
+    if (!aggregateRow) throw new Error(`${prefecture.prefCode}: aggregate row欠落`);
+    assertFloodConservation(detail, aggregateRow);
+    const evidence = writeJsonArtifact(
+      geoAnalysisPrefKey("population-flood-risk", prefecture.prefCode.slice(0, 2)),
+      detail,
+      detail.meshes.length,
+      false,
+      prefecture.prefCode,
+    );
+    if (evidence.bytes > MAX_GEO_DETAIL_BYTES) {
+      throw new Error(`${prefecture.prefCode}: 洪水detail上限超過 bytes=${evidence.bytes}`);
+    }
+    return { detail, evidence };
+  });
+}
+
+function writeFloodManifest(input: {
+  generatedAt: string;
+  populationInputs: readonly GeoAnalysisInputEvidence[];
+  floodInputs: readonly GeoAnalysisInputEvidence[];
+  floodSourceOutputs: readonly GeoAnalysisArtifactEvidence[];
+  details: readonly {
+    readonly detail: GeoFloodPrefDetail;
+    readonly evidence: GeoAnalysisArtifactEvidence;
+  }[];
+  aggregate: GeoAnalysisArtifactEvidence;
+}): GeoAnalysisEvidenceManifest {
+  const definition = BUSINESS_PLAN_M1_GEO_ANALYSES.find(
+    (analysis) => analysis.slug === "population-flood-risk",
+  );
+  if (!definition) throw new Error("flood analysis定義がありません");
+  const exposedMeshes = input.details.reduce(
+    (sum, item) => sum + item.detail.summary.exposedMeshCount,
+    0,
+  );
+  const manifest: GeoAnalysisEvidenceManifest = {
+    schemaVersion: 1,
+    slug: "population-flood-risk",
+    generatedAt: input.generatedAt,
+    definitionSha256: createHash("sha256")
+      .update(JSON.stringify(definition))
+      .digest("hex"),
+    inputs: [...input.populationInputs, ...input.floodInputs],
+    stages: [
+      {
+        id: "population-mesh",
+        label: "1km将来人口メッシュ",
+        kind: "source",
+        role: "calculation-input",
+        inputIds: ["ipss-population-mesh-1km"],
+        operation: "2020年・2050年人口とメッシュ境界を県別artifactへ変換",
+        outputKeyPattern: "app/geo/population-flood-risk/pref/{NN}.json#meshes",
+        outputs: stageOutputs(input.details, (detail) => detail.meshes.length),
+      },
+      {
+        id: "flood-maximum-polygons",
+        label: "想定最大規模の洪水浸水想定区域",
+        kind: "source",
+        role: "calculation-input",
+        inputIds: ["ksj-a31b-flood-polygon"],
+        operation: "一次メッシュ別の公式GeoJSONを展開してポリゴンを検証",
+        outputKeyPattern: "gis/mlit-ksj/A31b/25/source/{mesh}.zip",
+        outputs: input.floodSourceOutputs,
+      },
+      {
+        id: "flood-center-point-containment",
+        label: "浸水想定区域内の人口メッシュ",
+        kind: "spatial-operation",
+        role: "derived",
+        inputIds: ["population-mesh", "flood-maximum-polygons"],
+        operation: "人口メッシュ中心点の洪水ポリゴン包含判定",
+        outputKeyPattern:
+          "app/geo/population-flood-risk/pref/{NN}.json#meshes[*][7]",
+        outputs: stageOutputs(
+          input.details,
+          (detail) => detail.summary.exposedMeshCount,
+        ),
+      },
+      {
+        id: "prefecture-aggregate",
+        label: "都道府県別集計",
+        kind: "aggregate",
+        role: "aggregate",
+        inputIds: ["flood-center-point-containment"],
+        operation: "区域内メッシュの2020年・2050年人口を47都道府県別に合計",
+        outputKeyPattern: "app/geo/population-flood-risk/item.json",
+        outputs: [input.aggregate],
+      },
+    ],
+    aggregate: input.aggregate,
+    quality: {
+      expectedAreas: 47,
+      detailAreas: input.details.length,
+      conservationChecks: input.details.length,
+      sourceRecords:
+        input.details.reduce((sum, item) => sum + item.detail.meshes.length, 0) +
+        input.floodSourceOutputs.reduce((sum, output) => sum + output.recordCount, 0),
+      derivedRecords: exposedMeshes,
+      populatedMeshes: input.details.reduce(
+        (sum, item) => sum + item.detail.meshes.length,
+        0,
+      ),
+      exposedMeshes,
+      maxDetailBytes: Math.max(...input.details.map((item) => item.evidence.bytes)),
+    },
+  };
+  writeJsonArtifact(
+    geoAnalysisManifestKey(manifest.slug),
     manifest,
     manifest.stages.length,
     true,
@@ -1176,10 +1502,27 @@ async function main(): Promise<void> {
   let landPricePointCount = 0;
   if (!stationAccessOnly) {
     const accumulators = createAreaAccumulators(meshes);
-    landPricePointCount = loadLandPricePoints(accumulators);
-    writeSnapshot(
-      buildLandPriceSnapshot(generatedAt, accumulators, landPricePointCount),
+    const landPrice = loadLandPricePoints(accumulators);
+    landPricePointCount = landPrice.points.length;
+    const landPriceSnapshot = buildLandPriceSnapshot(
+      generatedAt,
+      accumulators,
+      landPricePointCount,
     );
+    const landPriceAggregate = writeSnapshot(landPriceSnapshot);
+    const landPriceDetails = writeLandPriceDetails({
+      generatedAt,
+      meshes,
+      points: landPrice.points,
+      snapshot: landPriceSnapshot,
+    });
+    writeLandPriceManifest({
+      generatedAt,
+      populationInputs,
+      landPriceInput: landPrice.input,
+      details: landPriceDetails,
+      aggregate: landPriceAggregate,
+    });
   }
 
   const { stations: stationPoints, input: stationInput } = loadStationPoints();
@@ -1219,7 +1562,25 @@ async function main(): Promise<void> {
   }
 
   const floodCounts = await markFloodExposure(stationAccessMeshes);
-  writeSnapshot(buildFloodSnapshot(generatedAt, stationAccessMeshes, floodCounts));
+  const floodSnapshot = buildFloodSnapshot(
+    generatedAt,
+    stationAccessMeshes,
+    floodCounts,
+  );
+  const floodAggregate = writeSnapshot(floodSnapshot);
+  const floodDetails = writeFloodDetails({
+    generatedAt,
+    meshes: stationAccessMeshes,
+    snapshot: floodSnapshot,
+  });
+  writeFloodManifest({
+    generatedAt,
+    populationInputs,
+    floodInputs: floodCounts.inputs,
+    floodSourceOutputs: floodCounts.sourceOutputs,
+    details: floodDetails,
+    aggregate: floodAggregate,
+  });
 
   console.log(
     `完了: meshes=${meshes.length} landPoints=${landPricePointCount} stations=${stationPoints.length} stationDetails=${stationManifest.quality.detailAreas} floodFiles=${floodCounts.files}`,

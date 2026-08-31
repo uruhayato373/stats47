@@ -7,7 +7,7 @@ const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
 const WORKFLOW = path.join(ROOT, ".github/workflows/pr-quality-check.yml");
 const ADMIN_JOB = "admin-quality";
 const BUILD_COMMAND = "npm run build --workspace=apps/admin";
-const E2E_COMMAND = "npm run test:e2e --workspace=apps/admin -- --project=desktop tests/e2e/smoke.spec.ts";
+const E2E_COMMAND = "npm run test:e2e --workspace=apps/admin -- --project=desktop tests/e2e/smoke.spec.ts tests/e2e/references.spec.ts";
 
 function jobBlock(text, jobId) {
   const lines = text.split(/\r?\n/);

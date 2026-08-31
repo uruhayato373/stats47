@@ -105,6 +105,10 @@ async function main() {
     kind: "correlation",
     base: BASE,
     pair: PAIR,
+    // survey 解決の参照抽出は xKey / yKey を見る (base / pair という名前は見ない)。
+    // 2026-08-31 に相関散布図 3 件が missing-lineage になっていたのはこれが理由。
+    xKey: BASE,
+    yKey: PAIR,
     pearsonR: pair.pearsonR,
     partialRPopulation: pair.partialRPopulation ?? null,
     unit: `${baseMeta.unit} × ${pair.unit || ""}`,

@@ -90,9 +90,10 @@ model: sonnet
 | A 単一指標深掘り | 3-4 | metric active + 新規登録分 | 「◯◯ 都道府県 ランキング」 |
 | F 市区町村内格差 | 3 | `apps/web/public/finance-cards/` (決算カード + 類似団体平均) | 「◯◯市 財政」「△△県 市町村 比較」 |
 | G 移動フロー | 1-2 | R2 migration-flow (1-3 月は +1) | 「◯◯県 転出先」「移住 統計」 |
+| H Geo空間横断 | 2 | R2 Geo aggregate + manifest + 47県途中artifact | 「人口 地価 関係」「洪水 人口」「駅近 人口」 |
 | C 時系列 / E ハブ | 1-2 | 統計公表イベント連動 / 内部リンク集約 (E は隔月 1 まで) | — |
 
-立ち上げ順: 第 1 月は **D2 (勝ち実績の複製・最低リスク) と B (素材既存)** 中心、F/G はデータ変換テンプレ整備後の第 2 月から本格投入。
+立ち上げ順: 第 1 月は **D2 (勝ち実績の複製・最低リスク) と B (素材既存)** 中心、F/G はデータ変換テンプレ整備後の第 2 月から本格投入。HはGeo pipelineの公開ゲートを通った候補だけを月2本まで投入する。
 
 ### ネタ選定 (topic-queue) の要点
 真実源 = `.claude/state/blog/topic-queue.json` (`build-topic-queue.mjs` 生成・remediation-queue 同型)。

@@ -39,6 +39,7 @@ import {
 } from "@/features/area-profile";
 import { getAreaProfileAction } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
+import { AreaGeoInsightsSection } from "@/features/geo-analysis";
 
 import {
     ADSENSE_DISPLAY_ENABLED,
@@ -171,6 +172,11 @@ export default async function AreaProfilePage({ params }: PageProps) {
                     {/* 県データブック (値+全国順位 + 特産品 + 推移チャート)。
                         databook 未生成の県は従来チャート表示にフォールバックする。 */}
                     <AreaDatabookSection
+                        areaCode={areaCode}
+                        areaName={profile.areaName}
+                    />
+
+                    <AreaGeoInsightsSection
                         areaCode={areaCode}
                         areaName={profile.areaName}
                     />

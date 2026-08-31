@@ -6,7 +6,8 @@ primary_agent: r2-publisher
 co_agents: [instagram-strategist]
 ---
 
-R2 への push (書き込み) を実行する。**R2 書き込みは CI / クラウド専用** で、ローカルからは原則行わない。
+R2 への push (書き込み) を実行する。remote R2 が唯一の真実源であり、認証済みのローカル / CI の
+どちらからも限定対象を直接反映できる。
 
 ## ★ 生成画像 bundle (OGP 等) は対象外
 
@@ -17,22 +18,22 @@ exact plan (`.local/image-generation-publish-plan-<type>.json`) を、
 (正典: `.claude/rules/ogp-image-standards.md` §5.0)。manifest を持たない資産 (blog SVG / buzz-map 等) は
 `push-exact-r2-assets.ts` (明示 key のみ)。
 
-## ★ R2 書き込みは CI / クラウド専用
+## ★ R2 書き込みはローカル / CIの両方から可能
 
-完全DBレス運用では SSOT は git TS と R2。R2 反映 (push) は **レビュー済みの git 状態から CI が行う**。
-ローカルからの誤 push を防ぐため、push 系スクリプト (`diff-push-r2.ts` / `push-r2-wrangler.ts` /
-`db:push` / `delete-r2-prefix.ts` / `r2-cleanup-orphans.ts`) は `_assert-ci-write` ガードで
-**CI 外では停止**する (`CI` / `GITHUB_ACTIONS` 未設定かつ `ALLOW_LOCAL_R2_WRITE` 未設定時)。
+完全DBレス運用では SSOT は git TS と R2。`_assert-ci-write.ts` はローカル実行を停止せず、
+書き込み通知を1行出す。ローカル実行には `.env.local` の R2 S3 creds、CIには対応するsecretが必要。
+対象はexact keyか十分狭いprefixに限定し、広域prefixの反映や任意削除を行わない。
 
 ローカルの R2 **読み取り**は公開 URL 経由で認証不要 (`R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`)。
 
-## 手順 (GitHub Actions で実行)
+## 手順
 
 1. push する対象を判断する:
    - 配信 snapshot 全般 (page-components / blog / master / area / port 等) → `sync-snapshots.yml`
    - blog 公開 → `publish-blog.yml`
    - e-Stat → R2 観測値の更新 → `data-refresh.yml`
-2. workflow を起動する:
+   - KSJ GIS → `/fetch-mlit-ksj` のmanifest-last exact publish
+2. 通常の反映は対応workflowを起動する:
    ```bash
    gh workflow run sync-snapshots.yml -f only=<task>     # 1 task (例: page-components)
    gh workflow run sync-snapshots.yml                    # 全 task
@@ -42,18 +43,19 @@ exact plan (`.local/image-generation-publish-plan-<type>.json`) を、
    （`gh auth login` 済みなら `! gh workflow run …` でこのセッションから直接起動できる）
 3. 完了したら run の結果を報告して終了（CDN キャッシュは ISR/TTL で更新。必要時のみ `/purge-cdn`）。
 
-## ローカルから push したい場合 (非推奨)
+## ローカルからpushする場合
 
-緊急時のみ。`gh` / CI が使えない状況に限る:
+S3認証済みならCIと同じpublisherを使用できる。最初にdry-runまたは限定prefixで対象を確認する:
 
 ```bash
 # 事前に R2 S3 認証 (R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY) が必要
-ALLOW_LOCAL_R2_WRITE=1 npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix <prefix>
+npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix <prefix> --dry-run
+npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix <prefix>
 # S3 鍵なしで wrangler 経由 (要 `wrangler login`):
-ALLOW_LOCAL_R2_WRITE=1 npx tsx packages/r2-storage/src/scripts/push-r2-wrangler.ts app/<prefix> --apply
+npx tsx packages/r2-storage/src/scripts/push-r2-wrangler.ts app/<prefix> --apply
 ```
 
-ガードを外さない限り上記は `⛔ … ローカルから実行できません` で停止する。
+ローカル実行時の警告は意図確認であり、失敗ではない。資格情報不足・publisherの対象検証・反映後監査はhard failにする。
 
 ## R2 キーのマッピング
 

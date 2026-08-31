@@ -19,7 +19,7 @@ primary_agent: trend-scout
 ## 用途
 
 - 「今週どの記事を書くか」を決めたいとき (must-write レーン優先)
-- 型ミックス (B 相関 / D2 食品 / A 深掘り / F 市区町村 / G 移動) のバランスを見たいとき
+- 型ミックス (B 相関 / D2 食品 / A 深掘り / F 市区町村 / G 移動 / H Geo空間横断) のバランスを見たいとき
 
 ## 手順
 
@@ -40,8 +40,8 @@ node .claude/scripts/blog/build-topic-queue.mjs --next 5   # pending 上位 5 �
 ```
 
 各エントリの `archetype` / `label` / `combinedScore` / `evidence` (gscImp・pearsonR 等) / `suggestedTitle` を
-テーブルで提示する。**型が B に偏っていたら**、下位の D2/F/G を意図的に混ぜて週の型ミックスを整える
-(戦略 §3 の月次ミックス: B 5 / D2 4 / A 3-4 / F 3 / G 1-2)。
+テーブルで提示する。**型が B に偏っていたら**、下位の D2/F/G/H を意図的に混ぜて週の型ミックスを整える
+(戦略 §3 の月次ミックス: B 5 / D2 4 / A 3-4 / F 3 / G 1-2 / H 2)。
 
 ### Step 3: 生産へ橋渡し
 
@@ -52,7 +52,7 @@ node .claude/scripts/blog/build-topic-queue.mjs --mark-in-progress <topicKey>
 /draft-from-trend --from queue     # キュー先頭の pending を 1 本生産 (下記) / または metricKeys を直接渡す
 ```
 
-- 1 回 1 記事。B 型は 2 metric (metricKeys) を相関記事に、F/G は決算カード/migration データを使う。
+- 1 回 1 記事。B 型は 2 metric (metricKeys) を相関記事に、F/G は決算カード/migration データ、HはGeo pipelineのaggregate・manifest・47県途中artifactを使う。
 - 公開まで進んだら done にする (published slug を記録):
 
 ```bash

@@ -14,6 +14,8 @@ describe('getActiveHeaderNav', () => {
     ['/municipalities/ranking/example', 'municipalities'],
     ['/themes', 'themes'],
     ['/themes/population-dynamics', 'themes'],
+    ['/geo', 'geo'],
+    ['/geo/population-flood-risk', 'geo'],
     ['/blog', 'blog'],
     ['/blog/population-change', 'blog'],
   ] as const)('%s は %s だけをアクティブにする', (pathname, expected) => {
@@ -27,6 +29,7 @@ describe('getActiveHeaderNav', () => {
     '/category-other',
     '/areas-old',
     '/themes-old',
+    '/geography',
     '/blogger',
   ])('%s は主要ナビをアクティブにしない', (pathname) => {
     expect(getActiveHeaderNav(pathname)).toBeNull();

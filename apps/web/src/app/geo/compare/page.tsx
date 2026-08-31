@@ -24,7 +24,6 @@ export const metadata: Metadata = {
   description:
     '都道府県を1つ選び、2050年人口、住宅地価、洪水浸水想定区域内人口、駅800m圏人口を同じ画面で比較します。',
   alternates: { canonical: '/geo/compare' },
-  robots: { index: false, follow: true },
 };
 
 export default async function GeoComparePage({ searchParams }: PageProps) {

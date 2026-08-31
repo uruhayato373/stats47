@@ -27,6 +27,7 @@
     "geo:audit-analysis": "tsx packages/gis/src/mlit-ksj/scripts/audit-geo-analysis-artifacts.ts",
     "geo:build-data-catalog": "npm run build:data-catalog --workspace packages/gis",
     "geo:check-data-catalog": "npm run check:data-catalog --workspace packages/gis",
+    "geo:export-content-pipeline": "npm run export:geo-content-pipeline --workspace packages/data-configs",
     "theme:dashboard-catalog:check": "node .claude/scripts/themes/check-public-dashboard-catalog.mjs",
     "theme:dashboard-catalog:query": "node .claude/scripts/themes/check-public-dashboard-catalog.mjs --theme",
     "theme:dashboard-catalog:test": "node --test .claude/scripts/themes/__tests__/check-public-dashboard-catalog.test.mjs",

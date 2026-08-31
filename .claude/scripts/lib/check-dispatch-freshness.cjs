@@ -24,13 +24,12 @@
  * 2. `origin/main...origin/develop` の差分に**生成の入力になりうるパス**が含まれるか
  * 3. 両方成立したら error。`acknowledgedMainLag` で明示的に上書きできる
  *
- * ## 入力パスを広めに取る理由
+ * ## 入力パスの絞り込み
  *
- * task ごとに「その generator が読むファイル」を厳密に列挙すると、transitive import を
- * 追い切れず**取りこぼす** (取りこぼしは「安全だ」と嘘をつく方向の誤りで最も危険)。
- * そこで**生成に関わりうるソース木**を広く取り、明らかに無関係な木 (docs / state / tests) だけを
- * 除外する。実測では現在の `origin/main...origin/develop` 5 ファイルはすべて除外側に入り、
- * 通常運用では黙っている。
+ * workflow が `npx tsx <path>` / `bash <path>` で実行する静的なスクリプトを抽出できる場合は、
+ * そのスクリプトが属する `packages/<name>` / `apps/<name>` だけを見る。動的パス、repo 直下の
+ * スクリプト、抽出不能な command が一つでもあれば、取りこぼしを避けるため従来の広い判定へ
+ * フォールバックする。
  *
  * I/O を持つのは CLI 部分だけ。判定は純関数。テスト: `__tests__/check-dispatch-freshness.test.cjs`
  * 正典: `.claude/skills/db/sync-snapshots/SKILL.md` / `.claude/rules/branch-workflow.md`
@@ -58,10 +57,74 @@ const IRRELEVANT_PATTERNS = [
 
 /** 生成の入力になりうるか */
 function isRelevantPath(file) {
+  return isRelevantPathForPrefixes(file, RELEVANT_PREFIXES);
+}
+
+function isRelevantPathForPrefixes(file, prefixes) {
   const f = String(file ?? '');
-  if (!RELEVANT_PREFIXES.some((p) => f.startsWith(p))) return false;
+  if (!(prefixes ?? []).some((p) => f.startsWith(p))) return false;
   if (IRRELEVANT_PATTERNS.some((re) => re.test(f))) return false;
   return true;
+}
+
+function shellTokens(value) {
+  return [...String(value ?? '').matchAll(/"[^"]*"|'[^']*'|[^\s;&|()]+/g)].map((m) =>
+    m[0].replace(/^(['"])(.*)\1$/, '$2'),
+  );
+}
+
+function staticScriptPathFromTokens(tokens) {
+  const optionsWithValue = new Set(['--tsconfig', '--project', '--require', '-r']);
+  for (let index = 0; index < tokens.length; index += 1) {
+    const token = tokens[index];
+    if (token.startsWith('-')) {
+      if (optionsWithValue.has(token)) index += 1;
+      continue;
+    }
+    if (token.includes('$') || !/[./]/.test(token)) return null;
+    return token.replace(/^\.\//, '');
+  }
+  return null;
+}
+
+/** workflow 内で直接実行される静的 script path を抽出する。 */
+function extractWorkflowScriptPaths(workflowSource) {
+  const paths = [];
+  let complete = true;
+
+  for (const rawLine of String(workflowSource ?? '').split(/\r?\n/)) {
+    const line = rawLine.trimStart();
+    if (!line || line.startsWith('#')) continue;
+
+    for (const match of line.matchAll(/\bnpx\s+tsx\s+([^#\r\n]+)/g)) {
+      const scriptPath = staticScriptPathFromTokens(shellTokens(match[1]));
+      if (scriptPath) paths.push(scriptPath);
+      else complete = false;
+    }
+    for (const match of line.matchAll(/\bbash\s+([^#\r\n]+)/g)) {
+      const scriptPath = staticScriptPathFromTokens(shellTokens(match[1]));
+      if (scriptPath) paths.push(scriptPath);
+      else complete = false;
+    }
+  }
+
+  return { paths: [...new Set(paths)], complete };
+}
+
+function packagePrefixForScript(scriptPath) {
+  const normalized = String(scriptPath ?? '').replace(/\\/g, '/').replace(/^\.\//, '');
+  const match = normalized.match(/^(packages|apps)\/([^/]+)\//);
+  return match ? `${match[1]}/${match[2]}/` : null;
+}
+
+function relevantPrefixesForWorkflow(workflowSource) {
+  if (typeof workflowSource !== 'string') return RELEVANT_PREFIXES;
+  const extracted = extractWorkflowScriptPaths(workflowSource);
+  if (!extracted.complete || extracted.paths.length === 0) return RELEVANT_PREFIXES;
+
+  const prefixes = extracted.paths.map(packagePrefixForScript);
+  if (prefixes.some((prefix) => prefix === null)) return RELEVANT_PREFIXES;
+  return [...new Set(prefixes)];
 }
 
 /**
@@ -71,11 +134,15 @@ function isRelevantPath(file) {
  * @param {object} params.request  request JSON
  * @param {boolean} params.mainPinned  dispatch 先が main を checkout するか
  * @param {string[]} params.divergedPaths  origin/main...origin/develop の差分パス
+ * @param {string} [params.workflowSource] workflow YAML。未指定・抽出不能なら広い判定へ戻す
  * @returns {{ok: boolean, code?: string, workflow: string, blockingPaths: string[], message?: string}}
  */
-function evaluateRequest({ request, mainPinned, divergedPaths }) {
+function evaluateRequest({ request, mainPinned, divergedPaths, workflowSource }) {
   const workflow = String(request?.workflow ?? '(unknown)');
-  const blockingPaths = (divergedPaths ?? []).filter(isRelevantPath);
+  const relevantPrefixes = relevantPrefixesForWorkflow(workflowSource);
+  const blockingPaths = (divergedPaths ?? []).filter((file) =>
+    isRelevantPathForPrefixes(file, relevantPrefixes),
+  );
 
   if (!mainPinned) {
     return { ok: true, workflow, blockingPaths: [] };
@@ -106,7 +173,7 @@ function evaluateRequest({ request, mainPinned, divergedPaths }) {
 /**
  * request ファイル全体を判定する。request は単体オブジェクトか配列。
  */
-function checkDispatchFreshness({ requests, mainPinnedWorkflows, divergedPaths }) {
+function checkDispatchFreshness({ requests, mainPinnedWorkflows, divergedPaths, workflowSources }) {
   const list = Array.isArray(requests) ? requests : [requests];
   const pinned = new Set(mainPinnedWorkflows ?? []);
   const results = list
@@ -116,6 +183,7 @@ function checkDispatchFreshness({ requests, mainPinnedWorkflows, divergedPaths }
         request,
         mainPinned: pinned.has(String(request.workflow ?? '')),
         divergedPaths,
+        workflowSource: workflowSources?.[String(request.workflow ?? '')],
       }),
     );
   return { ok: results.every((r) => r.ok), results };
@@ -131,6 +199,8 @@ function isMainPinnedWorkflow(root, workflowFile) {
 module.exports = {
   RELEVANT_PREFIXES,
   isRelevantPath,
+  extractWorkflowScriptPaths,
+  relevantPrefixesForWorkflow,
   evaluateRequest,
   checkDispatchFreshness,
   isMainPinnedWorkflow,
@@ -175,11 +245,18 @@ if (require.main === module) {
   const mainPinnedWorkflows = list
     .map((r) => String(r?.workflow ?? ''))
     .filter((w) => w && isMainPinnedWorkflow(root, w));
+  const workflowSources = Object.fromEntries(
+    mainPinnedWorkflows.map((workflow) => [
+      workflow,
+      fs.readFileSync(path.join(root, '.github/workflows', workflow), 'utf8'),
+    ]),
+  );
 
   const { ok, results } = checkDispatchFreshness({
     requests,
     mainPinnedWorkflows,
     divergedPaths,
+    workflowSources,
   });
 
   if (ok) {

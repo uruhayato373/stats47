@@ -21,6 +21,7 @@ export default defineConfig({
       'packages/utils/vitest.config.ts',
       'packages/visualization/vitest.config.ts',
       'apps/admin/vitest.config.ts',
+      'apps/remotion/vitest.config.mts',
       'apps/web/vitest.config.ts',
     ],
     globals: true,

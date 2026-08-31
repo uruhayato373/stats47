@@ -18,6 +18,7 @@ export const portCount: MetricConfig = {
     "displayName": "国土交通省港湾局",
     "url": "https://www.mlit.go.jp/kowan/",
   },
+  "surveyId": "mlit-ksj",
   "entities": [
     "prefecture",
   ],

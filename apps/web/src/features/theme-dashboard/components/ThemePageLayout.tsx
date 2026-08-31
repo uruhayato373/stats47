@@ -50,6 +50,7 @@ import { PrefectureSelect } from './PrefectureSelect';
 import { ThemeAreaHeader } from './ThemeAreaHeader';
 import { ThemeDashboardClient } from './ThemeDashboardClient';
 import { ThemeEvidenceTopicsSection } from './ThemeEvidenceTopicsSection';
+import { ThemeGeoInsightsSection } from './ThemeGeoInsightsSection';
 import { ThemeHero } from './ThemeHero';
 import { ThemePrefectureProvider } from './ThemePrefectureContext';
 import { ThemeRelatedArticles } from './ThemeRelatedArticles';
@@ -456,6 +457,12 @@ export async function ThemePageLayout({
               </>
             );
           })()}
+
+          <ThemeGeoInsightsSection
+            themeKey={theme.themeKey}
+            areaCode={areaContext?.areaCode}
+            areaName={areaContext?.areaName}
+          />
 
           <ThemeEvidenceTopicsSection themeKey={theme.themeKey} />
 

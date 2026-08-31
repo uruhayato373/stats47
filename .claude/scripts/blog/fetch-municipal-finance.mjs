@@ -139,7 +139,10 @@ function main() {
     prefCode: PREF,
     prefName: SELF,
     year: YEAR,
-    sourceName: "総務省 地方財政状況調査 (決算カード)",
+    // survey 解決は surveys.json の name と突き合わせるので、正式名をそのまま書く。
+    // 「総務省 地方財政状況調査 (決算カード)」のように organization や通称を混ぜると
+    // 辞書に当たらず unresolved になる (2026-08-31 に 12 chart が該当した)。
+    sourceName: "地方財政状況調査",
     source: "https://www.soumu.go.jp/iken/zaisei/card.html",
     upstream: `repo:apps/web/public/finance-cards/cities/${PREF.slice(0, 2)}.json`,
     restore: `node .claude/scripts/blog/fetch-municipal-finance.mjs --slug ${SLUG} --pref ${PREF} --year ${YEAR} --from-year ${FROM_YEAR} --data-name ${DATA_NAME}`,

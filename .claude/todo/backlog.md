@@ -693,28 +693,6 @@ updated: 2026-08-30
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
-### [DISPATCH-FRESHNESS-PRECISION-01] main 反映順チェックの入力パス判定を workflow ごとに絞る
-
-タグ: [起票:2026-08-17]
-
-- **owner**: Claude Code
-- **前提**: `check-dispatch-freshness.cjs` (2026-08-17 新設) は「main pinned な workflow へ
-  dispatch するとき `origin/main...origin/develop` に生成の入力になりうるパスの差分があれば止める」。
-  入力パスは `packages/**` / `apps/*/scripts/**` / sync-snapshots の `run.sh` を**広く**取っている。
-  transitive import を追い切れず取りこぼすくらいなら広く取る、という判断 (取りこぼしは
-  「安全だ」と嘘をつく方向の誤りなので避けた)。
-- **課題**: `apps/web/scripts/` には生成器 (`export-*.ts`) と開発ツール (`pre-commit-checks.sh`) が
-  同居するため、後者の変更だけでも発火する。実際 `purge-cdn.yml` の dispatch で
-  `pre-commit-checks.sh` を理由に止まり、`acknowledgedMainLag` で上書きした
-  (purge-cdn が main から動かすのは `purge-cache.ts` だけ)。**上書きが常態化するとチェックが形骸化する**。
-- **次**: workflow ファイルから **その job が実際に実行するスクリプト** (`npx tsx <path>` /
-  `bash <path>`) を機械抽出し、そのスクリプトが属するパッケージだけを入力パスにする。
-  抽出できなかった workflow は現行の広い判定へフォールバックする (安全側)。
-- **完了条件**: `purge-cdn.yml` の dispatch が `acknowledgedMainLag` なしで通り、
-  かつ 2026-08-17 の事故検体 (sync-snapshots × data-configs 差分) では従来どおり止まる。
-  両方向をテストで固定する。
-- 関連: `.claude/scripts/lib/check-dispatch-freshness.cjs` / `.claude/skills/db/sync-snapshots/SKILL.md`
-
 ### [BUILD-PERF-PHASE34] CI cacheと型検査重複の実験
 
 タグ: [起票:2026-07-12]
@@ -744,14 +722,6 @@ updated: 2026-08-30
 
 - **owner**: Claude Code
 - **trigger**: 既存GIS素材と検索需要が一致する単一pilotを選べたとき。
-
-### [AUTO-ALERT-CLOSE-01] 古い自動アラートIssueの整理
-
-タグ: [起票:2026-05-16]
-
-- **owner**: Claude Code
-- **trigger**: open alertが運用判断を阻害する件数まで再蓄積したとき。
-- **制約**: 同種alertが直近3日継続中ならcloseしない。dry-runを先に行う。
 
 ### [CLOUDFLARE-INVOICE-01] 請求書PDFと予測値の突合
 

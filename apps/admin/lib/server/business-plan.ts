@@ -154,7 +154,7 @@ export interface BusinessPlanAdminData {
       title: string;
       status: BusinessPlanWorkStatus;
       implemented: boolean;
-      searchVisibility: "noindex" | "index-gated";
+      searchVisibility: "noindex" | "index-gated" | "index";
     }>;
     x: Wrapped<{
       planned: number;

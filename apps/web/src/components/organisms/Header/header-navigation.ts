@@ -4,6 +4,7 @@ export type HeaderNavKey =
   | 'areas'
   | 'municipalities'
   | 'themes'
+  | 'geo'
   | 'blog';
 
 const ROUTES: ReadonlyArray<{
@@ -15,6 +16,7 @@ const ROUTES: ReadonlyArray<{
   { key: 'areas', root: '/areas' },
   { key: 'municipalities', root: '/municipalities' },
   { key: 'themes', root: '/themes' },
+  { key: 'geo', root: '/geo' },
   { key: 'blog', root: '/blog' },
 ];
 

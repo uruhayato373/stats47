@@ -21,6 +21,7 @@ export const fishingPortCount: MetricConfig = {
     "displayName": "国土数値情報（漁港）",
     "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C09.html",
   },
+  "surveyId": "mlit-ksj",
   "entities": [
     "prefecture",
   ],

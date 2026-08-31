@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30T19:29:07.812Z",
+  "updatedAt": "2026-08-31T08:23:50.590Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3370,39 +3370,6 @@
     },
     "BLOG-REVIEW-AREA-RATIO-01": {
       "class": "impl-small",
-      "status": "completed",
-      "sourceFile": null,
-      "title": null,
-      "attempts": [
-        {
-          "at": "2026-08-29T21:49:42.025Z",
-          "runId": null,
-          "model": "sonnet",
-          "effort": null,
-          "outcome": "completed",
-          "turns": null,
-          "costUsd": null,
-          "gate": {
-            "commands": [
-              "node .claude/scripts/blog/quality-gate.mjs area-ratio-prefecture-gap"
-            ],
-            "pass": true
-          },
-          "evidence": "公開R2本文で除外定義、同率順位、北海道・香川の一次資料接地、因果限定を確認。既存blog-critic verdict PASS、quality gate pass=true。",
-          "failReason": null,
-          "followUps": []
-        }
-      ],
-      "quarantine": {
-        "failCount": 0,
-        "lastReason": null,
-        "since": null
-      },
-      "reclassifiedFrom": [],
-      "completedAt": "2026-08-29T23:22:31.719Z"
-    },
-    "BLOG-REVIEW-AREA-RATIO-01": {
-      "class": "impl-small",
       "status": "open",
       "sourceFile": null,
       "title": null,
@@ -3419,15 +3386,115 @@
           "evidence": "curl https://storage.stats47.jp/... => Bash denied。node -e => denied。/tmp 配下の一時 script 実行も denied。既存 fetch-ranking-data-r2.mjs (ranking values 専用) は実行できたが article.md 取得手段が無い。quality-gate.mjs area-ratio-prefecture-gap => exit 2 'article not found: .local/r2/app/blog/area-ratio-pre",
           "failReason": "network-unavailable: 本セッションの Bash permission で curl / node -e / .local 外への node script 実行が denied。R2 (storage.stats47.jp) の article.md / data/*.json を取得する手段が既存の許可済み script (.claude/scripts/blog/*.mjs) に無く、quality-gate.mjs も article-not-found (exit 2) で実行不能。既存記事の内容是正 + 独立 blog-critic レビューが完了条件のため、R2 fetch 可能な環境で再試行が必要。",
           "followUps": []
+        },
+        {
+          "at": "2026-08-31T08:20:51.726Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/article-factual-check.mjs .local/r2/app/blog/area-ratio-prefecture-gap/article.md; npx tsx .claude/scripts/blog/generate-article-charts.ts --slug area-ratio-prefecture-gap --base .local/r2/app/blog --validate; node .claude/scripts/blog/quality-gate.mjs area-ratio-prefecture-gap"
+            ],
+            "pass": true
+          },
+          "evidence": "#B01101除外定義、GSI元面積による丸め同値順位、北海道・香川の一次資料接地、未確認因果の限定を反映。factual warning 0、SVG error 0、独立blog-critic PASS、quality gate pass。",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-08-31T08:23:50.590Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": null,
+          "failReason": "記事・data・独立review・quality gateは完了したが、backlog verifyが正規アウトボックス docs/21_ブログ記事原稿 を許可パス外として拒否。安全規約に従いカードを戻し、成果物は未公開のまま保持。",
+          "followUps": []
         }
       ],
       "quarantine": {
         "failCount": 1,
-        "lastReason": "network-unavailable: 本セッションの Bash permission で curl / node -e / .local 外への node script 実行が denied。R2 (storage.stats47.jp) の article.md / data/*.json を取得する手段が既存の許可済み script (.claude/scripts/blog/*.mjs) に無く、quality-gate.mjs も article-not-found (exit 2) で実行不能。既存記事の内容是正 + 独立 blog-critic レビューが完了条件のため、R2 fetch 可能な環境で再試行が必要。",
-        "since": "2026-08-30T19:29:03.650Z"
+        "lastReason": "記事・data・独立review・quality gateは完了したが、backlog verifyが正規アウトボックス docs/21_ブログ記事原稿 を許可パス外として拒否。安全規約に従いカードを戻し、成果物は未公開のまま保持。",
+        "since": "2026-08-31T08:23:50.590Z"
       },
       "reclassifiedFrom": [],
-      "completedAt": null
+      "completedAt": "2026-08-31T08:20:51.726Z"
+    },
+    "DISPATCH-FRESHNESS-PRECISION-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-31T08:20:51.521Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node -c .claude/scripts/lib/check-dispatch-freshness.cjs; node --test .claude/scripts/lib/__tests__/check-dispatch-freshness.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "purge-cdn実workflowでapps/web開発ツール差分は通過、packages/r2-storage差分は停止。sync-snapshots×data-configs事故検体も停止し、専用10テストgreen。抽出不能・動的pathは広い判定へfallback。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-31T08:20:51.521Z"
+    },
+    "AUTO-ALERT-CLOSE-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-08-31T08:20:51.628Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh issue list --state open --label auto-generated --limit 100 --json number",
+              "title",
+              "updatedAt",
+              "url; rg -l -i 'gh issue close|close.*recover|recovered.*close' .github/workflows"
+            ],
+            "pass": true
+          },
+          "evidence": "dry-runでopen 11件を確認し、3日前より古い更新は0件。全件が制約の直近3日継続中に該当するためclose 0件。回復時close実装も15 workflowで確認し、古い未回収Issueは再現しなかった。",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-08-31T08:20:51.628Z"
     }
   }
 }

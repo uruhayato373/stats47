@@ -148,10 +148,11 @@ for (const a of NOTE_ARTICLES) {
   if (a.isPaid && (!a.priceJpy || a.priceJpy <= 0))
     warns.push(`${a.key}: isPaid=true だが priceJpy 未設定`);
 
-  // 7. stats47Targets の ranking キー実在 (warn)
+  // 7. ranking target のキー実在 (warn)。Geo/テーマ/area等の公開面はこの検査の責務外。
   if (a.stats47Targets && knownKeys.size) {
     for (const t of a.stats47Targets) {
-      const key = t.replace(/^\/ranking\//, "").replace(/^\//, "").split(/[/?#]/)[0];
+      if (!t.startsWith("/ranking/")) continue;
+      const key = t.replace(/^\/ranking\//, "").split(/[/?#]/)[0];
       if (!knownKeys.has(key))
         warns.push(`${a.key}: stats47Targets "${t}" は KNOWN_RANKING_KEYS に不在`);
     }

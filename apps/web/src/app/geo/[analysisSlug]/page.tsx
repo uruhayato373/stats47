@@ -29,7 +29,6 @@ export async function generateMetadata({
     title: `${config.shortTitle} | stats47地域分析`,
     description: config.description,
     alternates: { canonical: `/geo/${analysisSlug}` },
-    robots: { index: false, follow: true },
   };
 }
 

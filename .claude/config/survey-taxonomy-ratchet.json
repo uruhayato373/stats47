@@ -2,19 +2,19 @@
   "schemaVersion": 1,
   "maxStateAgeDays": 10,
   "ranking": {
-    "minActiveResolved": 1944,
-    "minActiveCoveragePct": 89.71
+    "minActiveResolved": 1961,
+    "minActiveCoveragePct": 90.66
   },
   "theme": {
-    "minResolvedCharts": 83,
+    "minResolvedCharts": 82,
     "minCoveragePct": 100,
     "maxMissingLineageCharts": 0
   },
   "blog": {
-    "minCharts": 1088,
-    "minResolvedCharts": 767,
-    "minCoveragePct": 76.17,
-    "maxUnresolvedCharts": 91,
-    "maxMissingLineageCharts": 149
+    "minCharts": 1309,
+    "minResolvedCharts": 938,
+    "minCoveragePct": 76.32,
+    "maxUnresolvedCharts": 103,
+    "maxMissingLineageCharts": 188
   }
 }

@@ -100,7 +100,6 @@ export const metadata: Metadata = {
   description:
     'stats47 GeoAIで管理する国土数値情報と政府オープンデータの取得、分析利用、公開条件を確認できます。',
   alternates: { canonical: '/geo/data-catalog' },
-  robots: { index: false, follow: true },
 };
 
 function fallbackCatalog(): GeoDataCatalog {

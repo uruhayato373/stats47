@@ -1,6 +1,9 @@
 import Link from 'next/link';
 
-import { BUSINESS_PLAN_M1 } from '@stats47/data-configs/business-plan';
+import {
+  BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE,
+  BUSINESS_PLAN_M1,
+} from '@stats47/data-configs/business-plan';
 import { GIS_DATASETS } from '@stats47/gis/mlit-ksj';
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
@@ -38,7 +41,6 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: '/geo' },
-  robots: { index: false, follow: true },
 };
 
 export default function GeoPage() {
@@ -76,6 +78,36 @@ export default function GeoPage() {
             地図だけで結論にせず、47県比較、入力件数、出典、近似条件まで同じ記事で確かめられます。
           </p>
         </SurfaceCard>
+      </div>
+
+      <SectionHeader
+        title="1つの分析を、無料記事から再現用の販売物までつなぐ"
+        description="同じR2 artifactを正典にして、テーマ・都道府県・ブログ・SNS・有料の実務資料へ展開します。結論と検証データは無料、再現手順と加工済み成果物を有料に分けます。"
+      />
+      <div className="grid gap-4 md:grid-cols-2">
+        {BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE.map((content) => (
+          <SurfaceCard key={content.contentId} className="p-5">
+            <p className="text-xs font-semibold text-primary">
+              {content.contentId} ・ {content.themeKeys.length}テーマへ接続
+            </p>
+            <h3 className="mt-2 text-base font-bold">{content.title}</h3>
+            <ol className="mt-3 space-y-1 text-sm text-muted-foreground">
+              <li>1. 無料分析: {content.free.canonicalPath}</li>
+              <li>2. 県別読解: {content.free.areaPathPattern}</li>
+              <li>3. 解説記事: {content.editorial.blogPath}</li>
+              <li>4. SNS: canonicalへ誘導</li>
+              <li>
+                5. 実務パック: {content.paid.productId}（{content.paid.priceYen.toLocaleString('ja-JP')}円）
+              </li>
+            </ol>
+            <Link
+              className="mt-4 inline-block text-sm font-medium text-primary underline"
+              href={content.free.canonicalPath}
+            >
+              分析と公開経路を見る →
+            </Link>
+          </SurfaceCard>
+        ))}
       </div>
 
       <div className="mb-8 grid gap-4 md:grid-cols-2">
@@ -176,7 +208,7 @@ export default function GeoPage() {
 
       <p className="mt-6 text-xs text-muted-foreground">
         M1対象月: {BUSINESS_PLAN_M1.month}
-        。直URLとSNSの着地ページとして利用できます。GA4カスタムディメンション登録・反映とthin-content監査を満たすまで、検索indexとグローバルナビへの露出は行いません。{' '}
+        。直URL・検索・グローバルナビ・SNSの共通着地として公開し、全分析で47県の結果と計算根拠を確認できます。{' '}
         <Link className="underline" href="/about">
           stats47について
         </Link>

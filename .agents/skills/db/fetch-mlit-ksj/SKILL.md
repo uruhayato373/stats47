@@ -80,6 +80,18 @@ npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts L03-a --all-meshes
 npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts --category transport
 ```
 
+### 公式ページ探索型の公開対象を全件取得
+
+```bash
+npm run audit:public-ksj-manifests --workspace packages/gis
+npm run acquire:public-ksj --workspace packages/gis -- --apply
+npm run check:data-catalog --workspace packages/gis
+```
+
+各公式アーカイブにつき `data.topojson` と `manifest.json` をR2へ保存する。完了判定は
+`official-policy.ts` の期待アーカイブ数とR2 `manifest.json` 数の一致であり、部分アップロードは未完了。
+再実行時はmanifest宣言objectを照合し、欠損scopeを全再取得、manifest外objectをexact削除して収束させる。
+
 ## 出力先
 
 ```
@@ -122,7 +134,7 @@ MLIT zip ダウンロード → /tmp/ に保存
 ## 留意事項
 
 - 非商用データはローカル取得と公開を分離し、新規public R2反映を止める
-- 完了判定は `npm run geo:check-data-catalog`（実R2 42/42、URL・版・alias）
+- 完了判定は `npm run geo:check-data-catalog`（公式アーカイブ数 = R2完了manifest数、URL・版・alias）
 - 大容量データ（N03 行政区域 ~600MB）はダウンロードに時間がかかる
 - GeoJSON 非同梱の古いデータセットは ogr2ogr（GDAL）が必要（`brew install gdal`）
 - 一時ファイルは /tmp/ に作成し、パイプライン完了後に自動削除される

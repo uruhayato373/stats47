@@ -50,6 +50,10 @@ const QUEUE_PATH = path.join(PROJECT_ROOT, ".claude/state/blog/topic-queue.json"
 const SEASONALITY_PATH = path.join(__dirname, "data", "seasonality-table.json");
 const METRICS_DIR = path.join(PROJECT_ROOT, "packages/data-configs/src/metrics");
 const PREFS_PATH = path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json");
+const GEO_CONTENT_PIPELINE_PATH = path.join(
+  PROJECT_ROOT,
+  ".local/r2/app/geo/content-pipeline/items.json",
+);
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 
 const MUST_WRITE_IMP = 300; // 週 imp がこれ以上ある未記事化テーマは must-write
@@ -58,10 +62,10 @@ const MIN_GAP_IMP = 50; // gsc-gap 候補の下限 imp
 // 機序の書けないノイズ相関が多く blog-critic REVISE の温床だった (例 豚肉消費量×労災給付 r=-0.62)
 const CORR_MIN_R = 0.65;
 const WEIGHTS = { queryGap: 0.35, seasonality: 0.25, surprise: 0.2, competitionGap: 0.2 };
-const COMPETITION_GAP = { F: 1.0, G: 1.0, B: 0.8, D2: 0.6, A: 0.5 };
+const COMPETITION_GAP = { F: 1.0, G: 1.0, H: 1.0, B: 0.8, D2: 0.6, A: 0.5 };
 // pending はスコア上位のみ保持 (肥大防止。in-progress/done は無条件保持)。
 // 型別上限で B 一色を防ぎ、型ポートフォリオ (blog-seo-strategist.md §戦略コンテキスト) に沿った候補ミックスを保つ
-const MAX_PENDING_BY_ARCHETYPE = { B: 60, A: 40, D2: 40, F: 15, G: 15 };
+const MAX_PENDING_BY_ARCHETYPE = { B: 60, A: 40, D2: 40, F: 15, G: 15, H: 10 };
 const MAX_PAIRS_PER_BASE = 2; // B型: 同一 base metric からの相関ペアは上位 2 件まで (near-duplicate 防止)
 // 倫理的にセンシティブな指標を B型「意外な関係」クリックベイトの軸にしない (ブランド毀損防止)。
 // 中絶・自殺・死因等を軽い相関ネタにするのは不適切。metric key の部分一致で B候補から除外する。
@@ -473,6 +477,40 @@ for (const { prefCode, prefName } of prefs) {
       suggestedTitle: `${prefName}の人はどこへ移住する`,
     });
   }
+}
+
+// ── (e) H Geo空間横断: lineage・47県artifact・保存則を満たした分析だけを記事候補へ ──
+try {
+  const geoPipeline = JSON.parse(fs.readFileSync(GEO_CONTENT_PIPELINE_PATH, "utf8"));
+  for (const item of geoPipeline.items || []) {
+    if (!item.publicationReady) continue;
+    if (coverage.some((article) => article.slug === item.editorial.blogSlug)) continue;
+    candidates.push({
+      topicKey: item.editorial.topicKey,
+      archetype: "H",
+      metricKeys: item.metricKeys || [],
+      label: item.title,
+      source: "geo-content-pipeline",
+      scores: {
+        queryGap: 0,
+        seasonality: 0,
+        surprise: item.analysisKind === "spatial-cross" ? 0.9 : 0.5,
+        competitionGap: COMPETITION_GAP.H,
+      },
+      evidence: {
+        canonicalUrl: item.free.canonicalPath,
+        manifestKey: item.evidence?.manifestKey ?? null,
+        detailAreas: item.evidence?.quality?.detailAreas ?? 47,
+        conservationChecks: item.evidence?.quality?.conservationChecks ?? 47,
+        spatialOperations: item.spatialOperations || [],
+        themeKeys: item.themeKeys || [],
+        paidProductId: item.paid.productId,
+      },
+      suggestedTitle: item.editorial.suggestedTitle,
+    });
+  }
+} catch (error) {
+  console.error(`[warn] Geo content pipeline が読めない (${error.message}) — H候補をスキップ`);
 }
 
 // ── combined スコア + lane ──────────────────────────────────────────────────

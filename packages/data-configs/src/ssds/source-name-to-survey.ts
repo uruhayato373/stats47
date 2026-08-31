@@ -30,6 +30,14 @@ export const KNOWN_SOURCE_TO_SURVEY: Record<string, string> = {
   病院報告: "hospital-report",
   県民経済計算年報: "prefectural-accounts",
   地方財政統計年報: "local-finance",
+  // 決算カードの原典名。同ファイル内のコメントが「地方財政状況調査 (= 地方財政統計年報)」と
+  // 同一視しているとおり同じ調査で、表記だけが違う。ブログの市町村財政記事が
+  // sourceName に正式名を書くため、こちらの表記も引けるようにする (2026-08-31)。
+  地方財政状況調査: "local-finance",
+  // 国土数値情報 (国土交通省)。ダム・空港・鉄道駅などを都道府県別に集計した指標の原典。
+  国土数値情報: "mlit-ksj",
+  // 林野庁の統計総覧。SSDS の C3114 (林道延長) 等の原典で、合成 id のままだと配信から外れる。
+  "森林・林業統計要覧": "forestry-statistics-handbook",
   社会教育調査報告書: "social-education-survey",
   賃金構造基本統計調査報告: "wage-structure-survey",
   就業構造基本調査報告: "employment-structure-survey",

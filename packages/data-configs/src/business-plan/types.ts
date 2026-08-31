@@ -124,6 +124,52 @@ export interface BusinessPlanContentOpportunity {
   readonly pilotOrder?: number;
 }
 
+export type BusinessPlanGeoContentSurfaceStatus =
+  | 'ready'
+  | 'draft'
+  | 'gated';
+
+/**
+ * 1つのGeo分析を無料閲覧だけで終わらせず、記事・テーマ・県・SNS・有料再利用物へ
+ * 接続する公開ライフサイクル。数値の正典は常にcanonical Geo分析とR2 artifactに置く。
+ */
+export interface BusinessPlanGeoContentLifecycle {
+  readonly contentId: string;
+  readonly analysisId: string;
+  readonly analysisSlug: string;
+  readonly title: string;
+  readonly themeKeys: readonly string[];
+  readonly free: {
+    readonly canonicalPath: string;
+    readonly dataPath: string;
+    readonly methodPath: '/geo/method';
+    readonly areaPathPattern: '/areas/{NN}';
+    readonly status: BusinessPlanGeoContentSurfaceStatus;
+  };
+  readonly editorial: {
+    readonly topicKey: string;
+    readonly blogSlug: string;
+    readonly blogPath: string;
+    readonly suggestedTitle: string;
+    readonly status: BusinessPlanGeoContentSurfaceStatus;
+  };
+  readonly social: {
+    readonly campaign: string;
+    readonly canonicalPolicy: string;
+    readonly status: BusinessPlanGeoContentSurfaceStatus;
+  };
+  readonly paid: {
+    readonly productId: string;
+    readonly articleKey: string;
+    readonly channel: 'note';
+    readonly priceYen: number;
+    readonly readerOutcome: string;
+    readonly deliverables: readonly string[];
+    readonly status: BusinessPlanGeoContentSurfaceStatus;
+  };
+  readonly publicationGates: readonly string[];
+}
+
 export interface BusinessPlanChannelIdea {
   readonly id: string;
   readonly title: string;
@@ -144,7 +190,7 @@ export interface BusinessPlanM1Route {
   readonly path: string;
   readonly title: string;
   readonly status: BusinessPlanWorkStatus;
-  readonly searchVisibility: 'noindex' | 'index-gated';
+  readonly searchVisibility: 'noindex' | 'index-gated' | 'index';
   readonly acceptance: readonly string[];
 }
 
@@ -285,6 +331,7 @@ export interface BusinessPlanCatalog {
   readonly initiatives: readonly BusinessPlanInitiative[];
   readonly pilotSpecs: readonly BusinessPlanPilotSpec[];
   readonly contentOpportunities: readonly BusinessPlanContentOpportunity[];
+  readonly geoContentLifecycle: readonly BusinessPlanGeoContentLifecycle[];
   readonly xIdeas: readonly BusinessPlanChannelIdea[];
   readonly noteProducts: readonly BusinessPlanProductIdea[];
   readonly m1: BusinessPlanM1ExecutionPlan;

@@ -9,6 +9,8 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const {
   isRelevantPath,
@@ -32,17 +34,51 @@ const INCIDENT_DIVERGED = [
   'packages/ranking/src/config/gone-ranking-keys.ts',
 ];
 
+const ROOT = path.resolve(__dirname, '../../../..');
+const PURGE_WORKFLOW_SOURCE = fs.readFileSync(
+  path.join(ROOT, '.github/workflows/purge-cdn.yml'),
+  'utf8',
+);
+const SYNC_WORKFLOW_SOURCE = fs.readFileSync(
+  path.join(ROOT, '.github/workflows/sync-snapshots.yml'),
+  'utf8',
+);
+
 test('★2026-08-17 の事故を再現して止める', () => {
   const r = evaluateRequest({
     request: INCIDENT_REQUEST,
     mainPinned: true,
     divergedPaths: INCIDENT_DIVERGED,
+    workflowSource: SYNC_WORKFLOW_SOURCE,
   });
   assert.equal(r.ok, false, 'あの日の手順が通ってしまう — この検査の存在理由そのもの');
   assert.equal(r.code, 'MAIN_LAG');
   assert.equal(r.blockingPaths.length, 3);
   // 「何をすれば直るか」が出ないと次の人が同じところで止まる
   assert.match(r.message, /develop→main/);
+});
+
+test('purge-cdn は実行package外の apps/web 開発ツール差分で止めない', () => {
+  const r = evaluateRequest({
+    request: { workflow: 'purge-cdn.yml' },
+    mainPinned: true,
+    divergedPaths: ['apps/web/scripts/pre-commit-checks.sh'],
+    workflowSource: PURGE_WORKFLOW_SOURCE,
+  });
+
+  assert.equal(r.ok, true, 'purge-cache.ts と無関係な差分で acknowledgedMainLag が必要になる');
+});
+
+test('purge-cdn は実行packageの差分なら従来どおり止める', () => {
+  const r = evaluateRequest({
+    request: { workflow: 'purge-cdn.yml' },
+    mainPinned: true,
+    divergedPaths: ['packages/r2-storage/src/lib/operations/delete.ts'],
+    workflowSource: PURGE_WORKFLOW_SOURCE,
+  });
+
+  assert.equal(r.ok, false);
+  assert.deepEqual(r.blockingPaths, ['packages/r2-storage/src/lib/operations/delete.ts']);
 });
 
 test('main pinned でない workflow は対象外', () => {
