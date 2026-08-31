@@ -21,6 +21,29 @@ updated: 2026-08-30
 
 ## 🔴 高 — 今月中に着手したい
 
+### [BLOG-PUBLISH-THUMBNAIL-GUARD-01] 背景1件の欠落で公開run全体が止まるのを per-slug skip にする
+
+タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:背景の無い slug を1件混ぜても他 slug が公開されること] [起票:2026-08-31]
+
+- **owner**: Claude Code
+- **症状**: `blog-auto-publish.yml` の「Gate + Stage + Publish each slug」は `set -e` の下で
+  `npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "$SLUG"` をガードなしに呼ぶ。
+  記事固有背景が無い slug で例外が出ると **ループごと停止し、後続 slug が 1 件も公開されない**。
+  run 33446804723 で実測: 20 件中 1 件目 (`airport-count-vs-general-project-investment-agriculture`)
+  の `記事固有背景がありません` で全体が exit 1 になり、公開 0 件。
+- **同じステップ内で非対称になっている**: ci-factual-gate と quality-gate は
+  `if ! ...; then SKIPPED=...; continue; fi` で該当 slug だけ飛ばす作りなのに、thumbnail 生成と
+  それ以降 (`push-generated-image-set` / `diff-push-r2`) にはこの扱いが無い。
+- **影響が滞留として現れている**: reconcile (`select-republish-slugs.mjs`) は現在 24 件を返すが、
+  そのうち少なくとも 24 件が背景未生成で、先頭で止まるため**どれも公開されない**。
+  背景待ちの記事が 1 件でもあると、背景が揃っている記事まで巻き添えで止まる構造。
+- **完了条件**: 背景が無い slug は SKIPPED に積んで次へ進み、他 slug が公開されること。
+  **背景の無い slug を 1 件混ぜた状態で run を通し、他が公開されることを実測する**
+  (全 PASS は「何も見ていない」と区別がつかない)。
+- **注意**: skip にしても「公開されない」事実は変わらないので、Step Summary と
+  `SKIPPED` に理由 (背景未生成) が残ることまでを条件に含める。黙って飛ばすと滞留が見えなくなる。
+- **関連**: `QUALITY-GATE-COVERAGE-01` / `CHART-VALIDATE-GATE-01`
+
 ### [CHART-VALIDATE-GATE-01] ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す
 
 タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:.github/workflows/generate-article-charts.yml の run で検出 slug 数 > 0] [起票:2026-08-31]
