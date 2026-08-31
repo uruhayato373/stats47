@@ -23,8 +23,10 @@ const YAML = require('yaml');
 const ROOT = path.resolve(__dirname, '..', '..', '..', '..');
 const WORKFLOW = '.github/workflows/backlog-loop-daily.yml';
 
-// workflow 側の immutable pin と同じ commit を指す。更新時にテストも追従させる。
-const ACTION_SHA = 'd0287e81bb2e7a297a825f8634e1403af70c4e93';
+// 検査したいのは「可変 tag ではなく 40 桁の commit SHA でピン留めされていること」であって、
+// 特定の SHA 値そのものではない。値を直書きすると dependabot が pin を更新するたびに
+// このテストが落ち (2026-08-31 に実際に落ちた)、二重管理になる。
+const ACTION_SHA_PATTERN = '[0-9a-f]{40}';
 
 function read(rel) {
   return fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -42,7 +44,11 @@ function assertOrdered(source, labels) {
 test('base action は SHA 固定で OAuth / MCP / full-output の安全契約を満たす', () => {
   const source = read(WORKFLOW);
   assert.doesNotThrow(() => YAML.parse(source));
-  assert.match(source, new RegExp(`anthropics/claude-code-base-action@${ACTION_SHA}`));
+  assert.match(
+    source,
+    new RegExp(`anthropics/claude-code-base-action@${ACTION_SHA_PATTERN}(?![0-9a-f])`),
+    'base action が 40 桁 commit SHA でピン留めされていない (tag や branch 参照は不可)'
+  );
   assert.match(source, /claude_code_oauth_token:.*CLAUDE_CODE_OAUTH_TOKEN/);
   assert.match(source, /show_full_output: "false"/);
   assert.match(source, /"disableAllHooks": true/);
