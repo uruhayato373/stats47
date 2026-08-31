@@ -3,8 +3,8 @@ title: 食パン消費量、なぜ関西が上位独占?
 seoTitle: "食パン消費量ランキング｜47都道府県データ2024"
 description: パン食文化が根づく地域は関東ではなく関西でした。食パン消費量の都道府県差を家計調査のデータから読み解きます。
 slug: white-bread-consumption-quantity-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

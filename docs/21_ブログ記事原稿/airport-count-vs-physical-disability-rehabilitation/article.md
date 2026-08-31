@@ -3,8 +3,8 @@ title: 空港数と福祉施設在所者数は連動する?
 seoTitle: "空港数と身体障害者更生援護施設在所者数の関係を都道府県データで検証"
 description: 空港が多い北海道は福祉施設の在所者数も全国最多で、この記事では両指標の相関と背景をデータから読み解きます。
 slug: airport-count-vs-physical-disability-rehabilitation
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

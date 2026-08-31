@@ -3,8 +3,8 @@ title: トイレットペーパー、青森と沖縄が突出
 seoTitle: "トイレットペーパー消費支出額ランキング｜47都道府県データ2024"
 description: 気候も文化も正反対の2県が首位を分け合います。トイレットペーパー消費支出額の都道府県差を家計調査のデータから読み解きます。
 slug: toilet-paper-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

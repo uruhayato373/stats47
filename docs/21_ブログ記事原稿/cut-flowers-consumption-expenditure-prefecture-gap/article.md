@@ -3,8 +3,8 @@ title: 切り花支出、福島が2位の1.4倍で独走
 seoTitle: "切り花消費支出額ランキング 都道府県別データで見る地域差"
 description: 切り花にかける支出額は福島県が突出して多く、2位以下と大きく差をつける理由を家計調査のデータから探ります。
 slug: cut-flowers-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

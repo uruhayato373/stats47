@@ -3,8 +3,8 @@ title: 水泳をする人が多い県、なぜ東京と長野?
 seoTitle: "水泳の行動者率ランキング｜47都道府県データで見る地域差"
 description: 泳ぐ人の割合は都会も山国も上位に入ります。水泳の行動者率が県ごとにどう違うのかを、社会生活基本調査のデータから読み解きます。
 slug: sports-participation-rate-swimming-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

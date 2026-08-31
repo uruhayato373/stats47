@@ -3,8 +3,8 @@ title: 警察職の給与、東京と長野で14万円差
 seoTitle: "警察職 平均給与月額ランキング 都道府県別データで見る地域差"
 description: 同じ警察官という仕事でも、勤務する都道府県によって平均給与月額には大きな開きがあり、その理由を地域データから探ります。
 slug: avg-salary-police-prefecture-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 

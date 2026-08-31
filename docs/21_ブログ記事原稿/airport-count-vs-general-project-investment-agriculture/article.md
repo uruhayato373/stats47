@@ -3,8 +3,8 @@ title: 空港数と農林水産投資に関係はある?
 seoTitle: "空港数と一般事業投資額の相関を都道府県データで検証"
 description: 空港が多い北海道は農林水産業への投資額も突出して大きく、この記事では空港数と一般事業投資額の関係をデータで確かめます。
 slug: airport-count-vs-general-project-investment-agriculture
-publishedAt: 未定
-published: false
+publishedAt: 2026-08-31
+published: true
 tags: []
 ---
 
