@@ -1,0 +1,16 @@
+{
+  "kind": "ranking",
+  "rankingKey": "area-ratio-of-total",
+  "year": "2023",
+  "unit": "％",
+  "label": "面積割合",
+  "transform": "all47; 表示値が同じ場合は国土地理院の元面積で順位を確定; svg-builder が上位5+下位5を抽出",
+  "source": "r2:app/ranking/area-ratio-of-total/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "tieBreakSource": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO/backnumber/GSI-menseki20231001.pdf",
+  "tieBreakRule": "2023年10月1日時点の都道府県面積km2を降順。佐賀2440.68 > 神奈川2416.32、福井4190.54 > 石川4186.20、徳島4146.99 > 長崎4131.05",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug area-ratio-prefecture-gap --keys area-ratio-of-total --data-name area-ratio-prefecture-gap-prefecture-rankings; then reapply GSI tie-break verification",
+  "fetchedAt": "2026-08-29T08:13:07.292Z",
+  "verifiedAt": "2026-08-31",
+  "generatedBy": "fetch-ranking-data-r2.mjs + GSI tie-break verification"
+}
