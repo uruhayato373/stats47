@@ -15,7 +15,7 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-08-28
+ * 最終生成日: 2026-08-31
  * 件数: 2163
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
