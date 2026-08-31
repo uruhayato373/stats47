@@ -2,6 +2,8 @@
   "kind": "correlation",
   "base": "airport-count",
   "pair": "general-project-investment-agriculture-forestry-fisheries",
+  "xKey": "airport-count",
+  "yKey": "general-project-investment-agriculture-forestry-fisheries",
   "pearsonR": 0.7195427495962768,
   "partialRPopulation": 0.7269506825598387,
   "unit": "か所 × 千円",

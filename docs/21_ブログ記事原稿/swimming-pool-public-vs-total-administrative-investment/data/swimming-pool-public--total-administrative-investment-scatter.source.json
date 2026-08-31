@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "swimming-pool-public",
+  "pair": "total-administrative-investment",
+  "xKey": "swimming-pool-public",
+  "yKey": "total-administrative-investment",
+  "pearsonR": 0.8879394262539893,
+  "partialRPopulation": 0.7150799763910635,
+  "unit": "施設 × 千円",
+  "label": "水泳プール数（公共） と 行政総投資額 の関係",
+  "source": "r2:app/correlation/by-ranking-key/swimming-pool-public.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug swimming-pool-public-vs-total-administrative-investment --base swimming-pool-public --pair total-administrative-investment --data-name swimming-pool-public--total-administrative-investment"
+}

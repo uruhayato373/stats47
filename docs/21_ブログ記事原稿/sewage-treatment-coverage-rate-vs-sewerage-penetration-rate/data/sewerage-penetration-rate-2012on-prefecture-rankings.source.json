@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "sewerage-penetration-rate-2012on",
+  "year": "2021",
+  "unit": "％",
+  "label": "下水道普及率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/sewerage-penetration-rate-2012on/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug sewage-treatment-coverage-rate-vs-sewerage-penetration-rate --keys sewerage-penetration-rate-2012on --data-name sewerage-penetration-rate-2012on-prefecture-rankings",
+  "fetchedAt": "2026-08-31T21:13:27.586Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

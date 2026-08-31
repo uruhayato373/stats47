@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "sewage-treatment-coverage-rate",
+  "pair": "sewerage-penetration-rate-2012on",
+  "xKey": "sewage-treatment-coverage-rate",
+  "yKey": "sewerage-penetration-rate-2012on",
+  "pearsonR": 0.9441301789486809,
+  "partialRPopulation": 0.9314823887698486,
+  "unit": "％ × ％",
+  "label": "汚水処理人口普及率 と 下水道普及率 の関係",
+  "source": "r2:app/correlation/by-ranking-key/sewage-treatment-coverage-rate.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug sewage-treatment-coverage-rate-vs-sewerage-penetration-rate --base sewage-treatment-coverage-rate --pair sewerage-penetration-rate-2012on --data-name sewage-treatment-coverage-rate--sewerage-penetration-rate-2012on"
+}
