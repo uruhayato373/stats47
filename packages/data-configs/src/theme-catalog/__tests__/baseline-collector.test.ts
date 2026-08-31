@@ -16,8 +16,13 @@ import type { CatalogChart, ThemeCatalog } from '../types';
  *      ②が無いと ① の lock は「何も見ていない緑」と区別がつかない。
  *
  * 実測 (2026-08-24, THEME_CATALOGS 実行時オブジェクト):
- *   themes 20 / charts 107 / rawEstatParams chart 22 / raw request 39 /
- *   relatedRankingKeys chart 83 /
+ *   themes 20 / charts 106 / rawEstatParams chart 22 / raw request 39 /
+ *   relatedRankingKeys chart 82 /
+ *
+ * 2026-08-31 更新: `22619988d feat(geo-scope)` が healthcare の
+ * `theme-health-lifestyle-trend` (line-chart) を意図的に削除した。対になる指標
+ * `health-checkup-rate-lifestyle-diseases` も isActive:false になり本番は 410 を返す
+ * (実測)。chart の削除が正しく、baseline の更新だけが漏れていた。
  *   rawColorPlaces 0 / distinctColors 0。
  *
  * ※ `#` 前置の e-Stat コード (`#A0160102` 等) は 社会・人口統計体系テーブルの**実コード**で
@@ -29,11 +34,11 @@ import type { CatalogChart, ThemeCatalog } from '../types';
 /** 実測で確定したベースライン。移行で動いたらここを更新する (shrink/grow の向きを守る)。 */
 const BASELINE = {
   themes: 20,
-  charts: 107,
+  charts: 106,
   chartsWithRawEstatParams: 22,
   rawEstatRequests: 39,
   // markdown-section 24 件を除く全 data-bound component が指標ハブを持つ。
-  chartsWithRelatedRankingKeys: 83,
+  chartsWithRelatedRankingKeys: 82,
   // WP5 完了: 生色を color role へ全移行 (179 → 0)。以後 ratchet は「生色 0」を強制する。
   rawColorPlaces: 0,
   distinctColors: 0,
@@ -49,7 +54,7 @@ describe('baseline lock (ratchet)', () => {
 
   it('componentType ごとの chart 数を固定する (chart 種別内訳の baseline)', () => {
     expect(live.chartsByType).toEqual({
-      'line-chart': 62,
+      'line-chart': 61,
       'mixed-chart': 3,
       'composition-chart': 4,
       'donut-chart': 6,
@@ -75,7 +80,7 @@ describe('baseline lock (ratchet)', () => {
     );
   });
 
-  it('markdown以外の全83 componentが relatedRankingKeys を持つ', () => {
+  it('markdown以外の全82 componentが relatedRankingKeys を持つ', () => {
     expect(live.chartsWithRelatedRankingKeys).toBe(
       BASELINE.chartsWithRelatedRankingKeys
     );
