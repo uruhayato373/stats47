@@ -2587,6 +2587,85 @@ const SURVEY_EDITORIAL_CONTENT = {
       'NTT東日本・NTT西日本の報告に基づく系列です。制度や公衆電話の区分変更をまたぐ長期比較では、同じ対象範囲か確認してください。',
     ],
   },
+  'mlit-ksj': {
+    summary:
+      '国土数値情報は、国土交通省が整備する国土に関する地理空間情報です。ダムや空港、鉄道駅、道の駅、湖沼などの位置情報を都道府県別に集計し、地形やインフラの地域差を比較できます。',
+    whatYouCanLearn: [
+      'ダム・湖沼など地形と水系に関わる施設の分布',
+      '空港・鉄道駅・港湾といった交通拠点の地域差',
+      '道の駅や観光資源など、道路利用と観光に関わる施設の広がり',
+      '発電施設の種類別（水力・火力・風力・地熱など）の立地の偏り',
+    ],
+    readerQuestions: [
+      { question: 'ダムが多い都道府県は？', rankingKey: 'dam-count' },
+      { question: '鉄道駅が多い都道府県は？', rankingKey: 'railway-station-count' },
+      { question: '道の駅が多い都道府県は？', rankingKey: 'roadside-station-count' },
+      { question: '空港が多い都道府県は？', rankingKey: 'airport-count' },
+      { question: '湖沼が多い都道府県は？', rankingKey: 'lake-count' },
+    ],
+    caveats: [
+      '各データには整備時点があり、指標ごとに年が異なります。最新の姿とは限らないため、必ず年を確認してください。',
+      '地図に登録されている件数であり、実在するすべてを数えた値とは限りません。網羅性を前提にした比較は避けてください。',
+      '件数は規模を表しません。ダム1か所あたりの貯水量や駅1つあたりの乗降客数は、この指標からは分かりません。',
+    ],
+  },
+  'forestry-statistics-handbook': {
+    summary:
+      '森林・林業統計要覧は、林野庁が公表する森林と林業に関する統計の総覧です。林道の延長や人工造林の面積から、森林の管理と整備の地域差を比較できます。',
+    whatYouCanLearn: [
+      '林道延長から見た森林へのアクセス基盤の地域差',
+      '人工造林面積から見た森林整備の規模',
+      '山地を多く抱える県と平野が広がる県の対比',
+    ],
+    readerQuestions: [
+      { question: '林道が長い都道府県は？', rankingKey: 'forest-road-length' },
+      { question: '人工造林の面積が広い都道府県は？', rankingKey: 'artificial-forest-area' },
+    ],
+    caveats: [
+      '林道延長や造林面積は県の面積に強く影響されます。面積あたりに直すと順位が入れ替わることがあります。',
+      '林道は林業と森林管理のための道路で、一般の通行を前提とした道路統計とは対象が異なります。',
+    ],
+  },
+  'economic-structure-survey': {
+    summary:
+      '経済構造実態調査は、製造業と商業を中心に事業所の活動を捉える基幹統計です。製造品出荷額や年間商品販売額から、産業構造の地域差を比較できます。',
+    whatYouCanLearn: [
+      '製造品出荷額と付加価値額から見た工業の集積',
+      '事業所数・従業者数と、1事業所あたり・1人あたりの生産性の違い',
+      '卸売業と小売業を含む商業販売額の地域差',
+      '出荷額の大きさと生産性が一致しない県の存在',
+    ],
+    readerQuestions: [
+      { question: '製造品出荷額が多い都道府県は？', rankingKey: 'manufacturing-shipment-amount' },
+      { question: '製造業の付加価値額が多い都道府県は？', rankingKey: 'manufacturing-industry-added-value' },
+      { question: '従業者1人あたりの出荷額が多い都道府県は？', rankingKey: 'manufacturing-shipment-amount-per-employee' },
+      { question: '商業の年間商品販売額が多い都道府県は？', rankingKey: 'annual-sales-amount' },
+      { question: '卸売業の販売額が多い都道府県は？', rankingKey: 'wholesale-annual-sales-amount' },
+    ],
+    caveats: [
+      '出荷額は生産の規模を表し、もうけの大きさではありません。利益に近い姿を見るには付加価値額をあわせて確認してください。',
+      '卸売業の販売額は同じ商品が複数回計上されることがあり、最終消費の規模とは一致しません。',
+      '事業所単位の集計のため、本社が別の県にある場合でも工場のある県に計上されます。企業の所在地とは異なります。',
+    ],
+  },
+  'agricultural-income-statistics': {
+    summary:
+      '生産農業所得統計は、農林水産省が都道府県別に農業の産出額と所得を推計する統計です。農業産出額や土地生産性から、農業の規模と効率の地域差を比較できます。',
+    whatYouCanLearn: [
+      '農業産出額から見た農業の規模の地域差',
+      '就業者1人あたりの産出額から見た労働生産性',
+      '耕地1ヘクタールあたりの産出額から見た土地生産性',
+    ],
+    readerQuestions: [
+      { question: '農業産出額が多い都道府県は？', rankingKey: 'agricultural-output' },
+      { question: '就業者1人あたりの農業産出額が多い都道府県は？', rankingKey: 'agricultural-output-per-employed-person' },
+      { question: '土地生産性が高い都道府県は？', rankingKey: 'land-productivity-per-ha' },
+    ],
+    caveats: [
+      '産出額は販売額に近い概念で、経費を引いた農業所得とは別の指標です。もうけの大きさと混同しないでください。',
+      '規模が大きい県が効率も高いとは限りません。産出額と生産性は別の軸として読んでください。',
+    ],
+  },
 } as const satisfies Record<string, SurveyEditorialContent>;
 
 export function getSurveyEditorialContent(

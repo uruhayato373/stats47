@@ -77,7 +77,7 @@ const CHANGE_TYPE = new Set(["editorial-hub", "linkage", "title-meta", "structur
 const HARD_CANDIDATES = new Set(["merge-candidate", "retire-candidate"]);
 const MIN_CTR_IMPRESSIONS = 100;
 const MAX_STATE_AGE_DAYS = Number(process.env.SURVEY_STATE_MAX_AGE_DAYS ?? 35);
-const EDITORIAL_COUNT_RATCHET = 84;
+const EDITORIAL_COUNT_RATCHET = 88;
 const MIN_REQUIRED_MASTER_COUNT = 80;
 const MAX_EDITORIAL_SIMILARITY = 0.88;
 
