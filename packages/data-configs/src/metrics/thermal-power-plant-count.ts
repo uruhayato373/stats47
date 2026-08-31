@@ -20,6 +20,7 @@ export const thermalPowerPlantCount: MetricConfig = {
     "displayName": "国土数値情報",
     "url": "https://nlftp.mlit.go.jp/ksj/index.html",
   },
+  "surveyId": "mlit-ksj",
   "entities": [
     "prefecture",
   ],
