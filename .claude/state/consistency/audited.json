@@ -1,10 +1,8 @@
 {
-  "hash": "fc995eca5d2fac79f1e44b0e8fac5c053cd7a789b422a963dbd1a8a6ad673fc0",
-  "audited_at": "2026-08-30T23:13:30",
+  "hash": "dec1ad15cf9eaa5040e692dee29d351239cdaa48ec2abab0e6c3f02cc6e3eb2f",
+  "audited_at": "2026-08-31T20:28:25",
   "files": [
-    ".agents/skills/db/fetch-mlit-ksj/SKILL.md",
-    ".agents/skills/db/push-r2/SKILL.md",
-    ".claude/skills/db/fetch-mlit-ksj/SKILL.md",
-    ".claude/skills/db/push-r2/SKILL.md"
+    ".claude/skills/blog/trends-snapshots/trends-all-2026-09-01.md",
+    ".claude/skills/sns/competitor-scan/reference/reports/2026-09-01.md"
   ]
 }
