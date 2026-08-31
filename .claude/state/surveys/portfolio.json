@@ -4,16 +4,16 @@
   "linkage": {
     "auditedAt": "2026-08-31",
     "metrics": 2299,
-    "resolved": 2067,
-    "unresolved": 232,
-    "coveragePct": 89.9,
+    "resolved": 2087,
+    "unresolved": 212,
+    "coveragePct": 90.8,
     "unresolvedByReason": {
       "estat-uncovered": 78,
-      "ssds-synthetic-only": 117,
-      "external": 37
+      "ssds-synthetic-only": 113,
+      "external": 21
     },
     "uncoveredStatsDataIds": 48,
-    "orphanSurveys": 19,
+    "orphanSurveys": 17,
     "badOverrides": 0
   },
   "surveys": [
@@ -126,16 +126,16 @@
       "name": "生産農業所得統計",
       "organization": "農林水産省",
       "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
-      "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "implemented",
+      "itemCount": 4,
+      "activeItemCount": 3,
       "liveItemCount": null,
       "latestDataYear": null,
       "unresolvedItemCount": null,
-      "orphanStatus": true,
-      "editorialContentExists": false,
-      "readerQuestionCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": true,
+      "readerQuestionCount": 3,
       "relatedArticleCount": null,
       "gscSnapshotRef": null,
       "ga4SnapshotRef": null,
@@ -1145,16 +1145,16 @@
       "name": "経済構造実態調査",
       "organization": "総務省・経済産業省",
       "lifecycleStatus": "observe",
-      "linkageStatus": "orphan",
-      "editorialStatus": "fallback",
-      "itemCount": 0,
-      "activeItemCount": 0,
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "implemented",
+      "itemCount": 11,
+      "activeItemCount": 11,
       "liveItemCount": null,
       "latestDataYear": null,
       "unresolvedItemCount": null,
-      "orphanStatus": true,
-      "editorialContentExists": false,
-      "readerQuestionCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": true,
+      "readerQuestionCount": 5,
       "relatedArticleCount": null,
       "gscSnapshotRef": null,
       "ga4SnapshotRef": null,
@@ -1614,6 +1614,43 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 7
+    },
+    {
+      "surveyId": "forestry-statistics-handbook",
+      "name": "森林・林業統計要覧",
+      "organization": "林野庁",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "implemented",
+      "itemCount": 2,
+      "activeItemCount": 2,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": true,
+      "readerQuestionCount": 2,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "freight-regional-flow-survey",
@@ -2774,6 +2811,43 @@
       "lastReviewedAt": null,
       "nextReviewAt": "2026-10-01",
       "liveItemCount": 1
+    },
+    {
+      "surveyId": "mlit-ksj",
+      "name": "国土数値情報",
+      "organization": "国土交通省",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "r2-drift",
+      "editorialStatus": "implemented",
+      "itemCount": 16,
+      "activeItemCount": 16,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": false,
+      "editorialContentExists": true,
+      "readerQuestionCount": 5,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "ga4": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        },
+        "internalNav": {
+          "status": "insufficient-data",
+          "windowDays": 0
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
     },
     {
       "surveyId": "monthly-labour-survey",
