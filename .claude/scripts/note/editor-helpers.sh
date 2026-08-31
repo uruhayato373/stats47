@@ -45,6 +45,46 @@ ins_img(){
   echo "  [OK] $H <- $(basename "$IMG") (anchor=$ANCHOR)"
 }
 
+# ---- 商品ファイル挿入: 有料本文中のアンカー直後へZIPを添付 ----
+# note の「ファイル」メニューを使い、アップロード後にファイル名が本文へ出たことまで確認する。
+ins_file(){
+  local H="$1" FILE="$2"
+  if [ ! -f "$FILE" ]; then echo "  [FAIL] attachment missing: $FILE"; return 1; fi
+  local BYTES=$(stat -f%z "$FILE" 2>/dev/null || stat -c%s "$FILE" 2>/dev/null)
+  if [ "${BYTES:-0}" -gt 52428800 ]; then echo "  [FAIL] attachment exceeds note 50MB: $FILE"; return 1; fi
+  local ESC=$(printf '%s' "$H" | sed "s/'/%27/g")
+  local R=$(BU eval "(function(){const e=document.querySelector('[contenteditable=true]');if(!e)return 'no-editor';const w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);let t,hit=null;const target=decodeURIComponent('$ESC');while((t=w.nextNode())){if(t.textContent&&t.textContent.trim().startsWith(target)){hit=t;break;}}if(!hit)return 'not-found';(hit.parentElement||e).scrollIntoView({block:'center'});return 'scrolled';})();" 2>&1 | grep -oiE "scrolled|not-found|no-editor" | head -1)
+  if [ "$R" != "scrolled" ]; then echo "  [FAIL] attachment anchor scroll failed ($R): $H"; return 1; fi
+  sleep 1.2
+  BU state 2>&1 > /tmp/ns.txt
+  local ANCHOR=$(awk -v h="$H" '
+    index($0,h){found=1; next}
+    found && /\[[0-9]+\]<p id=/ {match($0,/\[[0-9]+\]/); print substr($0,RSTART+1,RLENGTH-2); exit}
+    ' /tmp/ns.txt)
+  if [ -z "$ANCHOR" ]; then echo "  [FAIL] attachment paragraph not found after: $H"; return 1; fi
+  BU click "$ANCHOR" >/dev/null 2>&1; sleep 0.4
+  BU keys Home >/dev/null 2>&1; sleep 0.3
+  BU keys Enter >/dev/null 2>&1; sleep 0.4
+  BU keys ArrowUp >/dev/null 2>&1; sleep 0.5
+  BU state 2>&1 > /tmp/ns.txt
+  local MENU=$(grep -oE "\[[0-9]+\]<button aria-label=メニューを開く" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  [ -n "$MENU" ] || { echo "  [FAIL] attachment menu not found"; return 1; }
+  BU click "$MENU" >/dev/null 2>&1; sleep 1
+  BU state 2>&1 > /tmp/ns.txt
+  local FB=$(awk '/^\t*ファイル\s*$/{print prev; exit} {prev=$0}' /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  [ -n "$FB" ] || { echo "  [FAIL] file menu item not found"; return 1; }
+  BU click "$FB" >/dev/null 2>&1; sleep 1.5
+  BU state 2>&1 > /tmp/ns.txt
+  local UP=$(grep -oE "\[[0-9]+\]<input type=file" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  [ -n "$UP" ] || { echo "  [FAIL] file upload input not found"; return 1; }
+  BU upload "$UP" "$FILE" >/dev/null 2>&1 || { echo "  [FAIL] attachment upload command failed"; return 1; }
+  sleep 5
+  BU state 2>&1 > /tmp/ns.txt
+  local NAME=$(basename "$FILE")
+  if ! grep -qF "$NAME" /tmp/ns.txt; then echo "  [FAIL] uploaded attachment not visible: $NAME"; return 1; fi
+  echo "  [OK] $H <- $NAME (${BYTES} bytes)"
+}
+
 # ---- アフィリエイトバナーID → A8.net トラッキングURL マッピング ----
 get_affiliate_url(){
   case "$1" in
@@ -98,48 +138,29 @@ paid_setline(){
   BU click "$PUB" >/dev/null 2>&1; sleep 3
   BU state 2>&1 > /tmp/ps.txt
   if ! grep -qE "有料エリア設定" /tmp/ps.txt; then echo "  [WARN] no 有料エリア設定 (free?)"; return 2; fi
+  paid_setline_from_settings "$HEAD" "$SHOT"
+}
+
+# ---- 新規公開設定画面から有料ラインを置く（公開に進むクリック済み） ----
+paid_setline_from_settings(){
+  local HEAD="$1" SHOT="$2"
+  BU state 2>&1 > /tmp/ps.txt
   local SET=$(awk '/^\t*有料エリア設定\s*$/{print prev} {prev=$0}' /tmp/ps.txt | grep -oE "\[[0-9]+\]" | grep -oE "[0-9]+" | head -1)
+  [ -n "$SET" ] || { echo "  [FAIL] 有料エリア設定 not found"; return 1; }
   BU click "$SET" >/dev/null 2>&1; sleep 2.5
   local HSTRIP=$(printf '%s' "$HEAD" | tr -d '\140')
   local ESC=$(printf '%s' "$HSTRIP" | sed "s/'/%27/g")
-  BU eval "(function(){const root=document.querySelector('[contenteditable=false][role=textbox]');if(!root)return 'no-root';const norm=s=>(s||'').replace(/[\s　\140]/g,'');const target=norm(decodeURIComponent('$ESC'));const els=root.querySelectorAll('h1,h2,h3,h4,p,li');for(const el of els){if(norm(el.textContent).includes(target)){el.scrollIntoView({block:'center'});return 'scrolled';}}return 'not-found';})();" 2>&1 | grep -iE "scrolled|not-found|no-root" | sed 's/^/  /'
+  # 同名の説明文ではなく、H1-H4見出しと完全一致する位置だけを対象にする。
+  local CLICKED=$(BU eval "(function(){const norm=s=>(s||'').replace(/[\s　\140#]/g,'');const target=norm(decodeURIComponent('$ESC'));const all=[];(function deep(r){r.querySelectorAll('*').forEach(e=>{all.push(e);if(e.shadowRoot)deep(e.shadowRoot);});})(document);const hidx=all.findIndex(e=>/^H[1-4]$/.test(e.tagName)&&norm(e.textContent)===target);if(hidx<0)return 'heading-nf';for(let i=hidx;i>=0&&i>hidx-300;i--){const e=all[i];if(e.tagName==='BUTTON'&&(e.textContent||'').trim()==='ラインをこの場所に変更'){e.click();return 'clicked';}}return 'button-nf';})();" 2>&1)
+  echo "$CLICKED" | grep -q "clicked" || { echo "  [FAIL] paid heading line not found for: $HEAD ($CLICKED)"; return 1; }
   sleep 1.5
-  BU state 2>&1 > /tmp/ps.txt
-  local BTN=$(HEAD="$HEAD" python3 - << 'PY'
-import os,re
-head=os.environ['HEAD']
-norm=lambda s:re.sub(r'[\s　`#]','',s)
-ht=norm(head)
-lines=open('/tmp/ps.txt',encoding='utf-8').read().split('\n')
-hidx=None
-for i,l in enumerate(lines):
-    if ht and ht in norm(l):
-        hidx=i
-if hidx is None:
-    print(''); raise SystemExit
-for j in range(hidx-1, max(hidx-4,-1), -1):
-    m=re.search(r'\[(\d+)\]<button',lines[j])
-    if m:
-        print(m.group(1)); break
-else:
-    print('')
-PY
-)
-  if [ -z "$BTN" ]; then
-    # フォールバック: 有料境界見出しが inline link/code を含むと a11y state の単行テキスト照合が
-    # 外れる（2026-07-10 に #06/#07 で発生）。DOM 側で H1-4 を直接探し、その直前の
-    # 「ラインをこの場所に変更」ボタンを eval-click する（Shadow-DOM 貫通）。
-    local FB=$(BU eval "(function(){var norm=function(s){return (s||'').replace(/[\s　\140#]/g,'');};var target=norm(decodeURIComponent('$ESC'));var all=[];(function deep(r){r.querySelectorAll('*').forEach(function(e){all.push(e);if(e.shadowRoot)deep(e.shadowRoot);});})(document);var hidx=-1;for(var i=0;i<all.length;i++){var el=all[i];if(/^H[1-4]$/.test(el.tagName)&&norm(el.textContent).indexOf(target)>=0){hidx=i;break;}}if(hidx<0)return 'heading-nf';for(var j=hidx;j>=0&&j>hidx-200;j--){var b=all[j];if(b.tagName==='BUTTON'&&(b.textContent||'').trim()==='ラインをこの場所に変更'){b.click();return 'clicked';}}return 'btn-nf';})();" 2>&1)
-    if echo "$FB" | grep -q "clicked"; then
-      sleep 1.5; BU screenshot "$SHOT" >/dev/null 2>&1
-      echo "  [OK] line set before: $HEAD (DOM fallback) shot=$SHOT"
-      return 0
-    fi
-    echo "  [WARN] line button not found for: $HEAD (fallback=$FB)"; return 1
-  fi
-  BU click "$BTN" >/dev/null 2>&1; sleep 1.5
+  # browser-use state はviewport外の見出しを省略するため、DOM順序を直接検証する。
+  local VERIFIED=$(BU eval "(function(){const norm=s=>(s||'').replace(/[\s　\140#]/g,'');const target=norm(decodeURIComponent('$ESC'));const all=[];(function deep(r){r.querySelectorAll('*').forEach(e=>{all.push(e);if(e.shadowRoot)deep(e.shadowRoot);});})(document);const i=all.findIndex(e=>e.id==='paywall-line');if(i<0||all[i].getAttribute('aria-pressed')!=='true')return 'line-invalid';const nearby=all.slice(i+1,i+13);const j=nearby.findIndex(e=>/^H[1-4]$/.test(e.tagName));if(j<0||norm(nearby[j].textContent)!==target)return 'heading-mismatch';const leaked=nearby.slice(0,j).some(e=>(/^H[1-4]$/.test(e.tagName)||['P','LI','FIGURE','BLOCKQUOTE'].includes(e.tagName))&&norm(e.textContent));return leaked?'content-before-heading':'verified';})();" 2>&1)
+  echo "$VERIFIED" | grep -q "verified" || { echo "  [FAIL] paid line is not immediately before heading: $HEAD ($VERIFIED)"; return 1; }
+  BU eval "(function(){const all=[];(function deep(r){r.querySelectorAll('*').forEach(e=>{all.push(e);if(e.shadowRoot)deep(e.shadowRoot);});})(document);const line=all.find(e=>e.id==='paywall-line');if(line)line.scrollIntoView({block:'center'});return line?'scrolled':'nf';})();" >/dev/null 2>&1
+  sleep 1
   BU screenshot "$SHOT" >/dev/null 2>&1
-  echo "  [OK] line set before: $HEAD (btn=$BTN) shot=$SHOT"
+  echo "  [OK] paid line set before: $HEAD shot=$SHOT"
 }
 
 # ---- 更新確定: 「更新する」→「記事が公開されました」確認→ note-published-urls.json に updated_at 記録 ----
@@ -160,11 +181,12 @@ do_update(){
   if grep -qE "記事が公開されました" /tmp/ps.txt; then
     SLUG="$SLUG" python3 - << 'PY'
 import json,os
+from datetime import date
 slug=os.environ['SLUG']
 p='.claude/state/note-published-urls.json'
 d=json.load(open(p))
 if slug in d['articles']:
-    d['articles'][slug]['updated_at']='2026-06-16'
+    d['articles'][slug]['updated_at']=date.today().isoformat()
     json.dump(d,open(p,'w'),ensure_ascii=False,indent=2)
     print('  [PUBLISHED] %s  updated_at recorded'%slug)
 else:
@@ -189,6 +211,8 @@ process_article(){
   BU open "https://editor.note.com/notes/$NOTEID/edit" >/dev/null 2>&1; sleep 6
   BU state 2>&1 > /tmp/ns.txt
   if ! grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then echo "  [FAIL] editor not loaded for $SLUG"; return 1; fi
+  # contenteditable全選択だけではnon-editable添付figureが残ることがある。先に個別Rangeで削除する。
+  BU eval "(function(){const e=document.querySelector('[contenteditable=true]');if(!e)return 'no-editor';const figs=[...e.querySelectorAll('figure[embedded-service=attachment]')];for(const target of figs){const r=document.createRange();r.selectNode(target);const s=window.getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('delete');}if(figs.length)e.dispatchEvent(new InputEvent('input',{bubbles:true,inputType:'deleteContent'}));return 'attachments-removed:'+figs.length;})();" >/dev/null 2>&1
   BU eval "(function(){const e=document.querySelector('[contenteditable=true]');e.focus();const r=document.createRange();r.selectNodeContents(e);const s=window.getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('delete');return 'c';})();" >/dev/null 2>&1
   local BODY="/tmp/note-body-$SLUG.txt"
   BU eval "window.__nb='';'init'" >/dev/null 2>&1
@@ -210,23 +234,32 @@ process_article(){
     BU keys Enter >/dev/null 2>&1; sleep 4
   done < /tmp/urls.txt
   local NIMG=$(jq -r '.imgRefs | length' "$J")
-  for i in $(seq 0 $((NIMG-1))); do
-    local FILE=$(jq -r ".imgRefs[$i].file" "$J" | sed 's/\.svg$/.png/')
-    local HEAD=$(jq -r ".imgRefs[$i].afterHeading" "$J")
-    ins_img "$HEAD" "$ADIR/$FILE"
-  done
+  if [ "$NIMG" -gt 0 ]; then
+    for i in $(seq 0 $((NIMG-1))); do
+      local FILE=$(jq -r ".imgRefs[$i].file" "$J" | sed 's/\.svg$/.png/')
+      local HEAD=$(jq -r ".imgRefs[$i].afterHeading" "$J")
+      ins_img "$HEAD" "$ADIR/$FILE"
+    done
+  fi
   # Phase 5.5: アフィリエイトバナー（画像+リンク）
   local NAFF=$(jq -r '.affiliateBanners | length' "$J" 2>/dev/null || echo "0")
-  for i in $(seq 0 $((NAFF-1))); do
-    local AFF_ID=$(jq -r ".affiliateBanners[$i].id" "$J")
-    local AFF_ANCHOR=$(jq -r ".affiliateBanners[$i].anchor" "$J")
-    local AFF_PNG="/Users/minamidaisuke/stats47/.claude/assets/affiliate-banners/${AFF_ID}.png"
-    local AFF_URL
-    AFF_URL=$(get_affiliate_url "$AFF_ID")
-    if [ -z "$AFF_URL" ]; then echo "  [WARN] unknown affiliate id: $AFF_ID"; continue; fi
-    if [ ! -f "$AFF_PNG" ]; then echo "  [WARN] banner image missing: $AFF_PNG"; continue; fi
-    ins_img_with_link "$AFF_ANCHOR" "$AFF_PNG" "$AFF_URL"
-  done
+  if [ "$NAFF" -gt 0 ]; then
+    for i in $(seq 0 $((NAFF-1))); do
+      local AFF_ID=$(jq -r ".affiliateBanners[$i].id" "$J")
+      local AFF_ANCHOR=$(jq -r ".affiliateBanners[$i].anchor" "$J")
+      local AFF_PNG="/Users/minamidaisuke/stats47/.claude/assets/affiliate-banners/${AFF_ID}.png"
+      local AFF_URL
+      AFF_URL=$(get_affiliate_url "$AFF_ID")
+      if [ -z "$AFF_URL" ]; then echo "  [WARN] unknown affiliate id: $AFF_ID"; continue; fi
+      if [ ! -f "$AFF_PNG" ]; then echo "  [WARN] banner image missing: $AFF_PNG"; continue; fi
+      ins_img_with_link "$AFF_ANCHOR" "$AFF_PNG" "$AFF_URL"
+    done
+  fi
+  local ATTACHMENT=$(jq -r '.productAttachment.path // empty' "$J")
+  if [ -n "$ATTACHMENT" ]; then
+    local ATTACHMENT_ANCHOR=$(jq -r '.productAttachment.afterHeading' "$J")
+    ins_file "$ATTACHMENT_ANCHOR" "$ATTACHMENT" || return 1
+  fi
   local FULLHEAD=$(jq -r '.segmentsPaid[0].content' "$J" | head -1 | sed 's/^#* *//')
   paid_setline "$FULLHEAD" "/tmp/note-publish-$SLUG.png"
 }

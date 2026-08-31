@@ -1,6 +1,6 @@
 ---
 name: project_note_update_mode_learnings
-description: note --update 実機の学び。do_update/paid_setline のバグ(eval-click要)・browser-use temp profile セッション管理・git-race並行(covers git show 取り出し)・WARN false negative。★2026-07-11 に editor-helpers.sh へ backport 済 (commit cbc0f1d2)・cover 生成器も develop merge 済 (c0b8f1f6)。実機 note 再テストは未
+description: note --update/new実機の学び。paid_setlineは同名本文でなくH1-H4完全一致と隣接gateが必須。do_update eval-click・browser-use temp profile・WARN false negativeも記録。
 metadata: 
   node_type: memory
   type: project
@@ -12,7 +12,7 @@ metadata:
 **→ 2026-07-11 に全て canonical へ backport 済 (commit `cbc0f1d2`): do_update の eval-click / paid_setline の
 DOM fallback / WARN 緩和。edit 版アイキャッチ差替も editor-operations.md Phase 2-edit に追記。cover 生成器・
 背景アセット・カバー PNG も develop へ cherry-pick 済 (`c0b8f1f6`)。** 下記スニペットは今後の参照/再発時用に保持。
-**⚠️ 実機 (note ログイン) での再テストは未実施** — 次回 `/publish-note --update` で bug2 fallback を実証すること。
+**2026-09-01 に新規有料Geo商品で実機再テスト済み。** H1-H4完全一致の境界設定、価格、ZIP添付、公開後の有料本文非露出と所有者ダウンロード表示を確認した。
 
 ## editor-helpers.sh の backport 修正 (★2026-07-11 反映済)
 
@@ -28,6 +28,15 @@ DOM fallback / WARN 緩和。edit 版アイキャッチ差替も editor-operatio
    // hIdx から後方最初の button(textContent==='ラインをこの場所に変更') を click
    ```
    今回 #06/#07 で失敗→この方式で解決。境界は必ず公開ページ curl で `grep -c "有料セクション 1"` == 0 (非露出) を確認。
+
+4. **有料見出しと同じ語を無料本文で説明すると、stateの文字列検索は先の段落へ誤配置する**（2026-09-01、`商品ファイルのダウンロード`）。初回screenshotで無料説明段落の直前にラインが置かれたため公開を停止した。原因は`h1,h2,h3,h4,p,li`の最初の部分一致とa11y stateの先行一致。対策は次の3点を決定的gateにする。
+   - deep DOMで**H1-H4だけ**を走査し、正規化後の見出しテキストが**完全一致**する要素を取る
+   - その直前の`ラインをこの場所に変更`だけをclickする
+   - viewport外を省略する`state`ではなく、deep DOM順で`id=paywall-line`が`pressed=true`、次の実コンテンツが対象H1-H4であることを検証し、screenshotで目視する。空の`P/BR`と境界UIだけは間に入る場合がある
+
+   正典実装は`.claude/scripts/note/editor-helpers.sh`の`paid_setline_from_settings`。公開後は非ログインHTMLにZIP名が無いこと、所有者画面にZIP名・容量・ダウンロードボタンがあることまで確認する。
+
+5. **update時の本文全消去だけでは旧添付が残る場合がある**（2026-09-01、Geo商品ZIP差し替え）。新ZIPを挿入して更新すると、所有者画面に新4.18KBと旧3.88KBの2件が表示された。対策は公開後に`[embedded-service=attachment]`の件数・ファイル名・容量を必ず検査し、重複時は編集画面で旧`figure[embedded-service=attachment]`だけをRange選択して削除→境界再設定→再更新する。非ログインHTMLの非露出だけでは重複を検出できない。
 
 3. **WARN false negative**: `更新する` クリック後に「記事が公開されました/シェアして」モーダル検出が timing で外れることがある(更新自体は成功)。→ 成功未確認は**エディタ再オープンでライブ確認**(#13/estat01/estat11 は実際は成功していた)。
 

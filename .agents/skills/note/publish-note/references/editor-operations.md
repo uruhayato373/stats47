@@ -417,6 +417,30 @@ sleep 3
 
 **4箇所すべてについてこの手順を繰り返す。画像ファイルが存在しないセクションはスキップ。**
 
+## Phase 5.5: 商品ZIPの挿入（ダウンロード商品だけ）
+
+frontmatterに次を置く。
+
+```yaml
+product_archive: ".local/geo-products/<articleKey>/<articleKey>.zip"
+product_attachment_after: "商品ファイルのダウンロード"
+```
+
+`prepare-article.cjs`が`.local/geo-products/`配下のZIP、50MB以下、`is_paid:true`、見出し指定を検証する。
+本文paste後、`ins_file <見出し> <ZIP絶対パス>`でその見出し直後へ添付し、state上にファイル名と
+「ダウンロード」が表示されることを確認する。添付できない記事は有料設定へ進めない。
+
+公開・更新後は所有者画面の`[embedded-service=attachment]`を数え、対象ZIPが**1件だけ**で容量も一致することを確認する。
+updateで本文を全消去しても旧添付が残る場合があるため、2件あれば編集画面で旧`figure[embedded-service=attachment]`だけを削除して再更新する。非ログインHTMLにZIP名・attachment keyが無いことも確認する。
+
+新規有料記事は次の二段階で確定する。
+
+```bash
+bash .Codex/scripts/note/publish-new-note.sh <slug> <vertical> --prepare-publish
+# /tmp/note-ready-<slug>.png を目視
+bash .Codex/scripts/note/publish-new-note.sh <slug> <vertical> --commit-publish
+```
+
 ## Phase 6: 下書き保存
 
 ```bash

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "r2-geo-analysis",
+  "sourceKey": "app/geo/population-station-access/item.json",
+  "detailKeyPattern": "app/geo/population-station-access/pref/{NN}.json",
+  "label": "駅800m圏と将来人口の都道府県別集計",
+  "retrievedAt": "2026-09-01",
+  "dataVersion": "2020-2050",
+  "sourceSha256": "f3e461732daa8138a7563af3aa61f37f23fae4c1508d8817f148d9b2ffe2e75d"
+}

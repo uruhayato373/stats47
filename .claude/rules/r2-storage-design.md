@@ -22,6 +22,14 @@
 - 新規に R2 書き込みスクリプトを追加する場合は **先頭で `assertR2WriteAllowed()` を呼ぶ**こと（通知のため）。
 - 詳細: `.claude/rules/local-environment.md` の「R2 読み書き」。
 
+### 有料noteの非公開保存
+
+- 配信用bucket `stats47` の `note/<vertical>/<slug>/` は、無料記事の本文または有料記事の販売メタ `public.json` だけを置く。
+- 有料本文、画像、商品ZIP、検証manifestはprivate bucket `stats47-private` の同一prefixへ置く。公開custom domainを設定しない。
+- writerは `.claude/scripts/note/publish-paid-note-private-r2.ts`、reader/復元は `restore-paid-note-private-r2.ts` に限定する。全objectをSHA-256とbytesで検証する。
+- note catalogの `r2Body:true` はprivate保存の検証後だけ設定し、派生stateでは `r2_access:"private"` とする。
+- `sync-note-r2.yml` と `sync-note-r2.mjs` は有料記事を公開R2へ書こうとした時点でfail-closedに停止する。
+
 ## URL → R2 キーパス 対応表
 
 | URL パターン                              | R2 キー                                                                         | データ内容                                                                                                                                                                                                      |

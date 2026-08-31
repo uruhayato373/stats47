@@ -1492,11 +1492,32 @@ function buildFloodSnapshot(
 
 async function main(): Promise<void> {
   const stationAccessOnly = process.argv.includes("--station-access-only");
+  const floodOnly = process.argv.includes("--flood-only");
+  if (stationAccessOnly && floodOnly) {
+    throw new Error("--station-access-only と --flood-only は同時に指定できません");
+  }
   const generatedAt = new Date().toISOString();
   console.log(`R2 input: ${R2_PUBLIC_BASE}`);
   const { meshes, inputs: populationInputs } = await loadPopulationMeshes();
   if (meshes.length < 100_000) {
     throw new Error(`人口メッシュ件数が少なすぎます: ${meshes.length}`);
+  }
+
+  if (floodOnly) {
+    const floodCounts = await markFloodExposure(meshes);
+    const floodSnapshot = buildFloodSnapshot(generatedAt, meshes, floodCounts);
+    const floodAggregate = writeSnapshot(floodSnapshot);
+    const floodDetails = writeFloodDetails({ generatedAt, meshes, snapshot: floodSnapshot });
+    writeFloodManifest({
+      generatedAt,
+      populationInputs,
+      floodInputs: floodCounts.inputs,
+      floodSourceOutputs: floodCounts.sourceOutputs,
+      details: floodDetails,
+      aggregate: floodAggregate,
+    });
+    console.log(`完了: meshes=${meshes.length} floodFiles=${floodCounts.files}`);
+    return;
   }
 
   let landPricePointCount = 0;

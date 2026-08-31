@@ -103,7 +103,8 @@ node .Codex/scripts/note/generate-note-hashtags.mjs --slug <slug>
    （存在しない場合は先に `bash .Codex/scripts/note/restore-from-r2.sh <slug>` で R2 から復元する）
 3. Chrome **Profile 5** で `note.com/stats47` にログイン済み
 4. **有料記事の場合**: frontmatter に `is_paid: true` と `price_jpy: <数値>` を必ず記載。本文には有料境界の目印として `ここから先は有料部分:` 行を入れる（Phase 0 が free/paid に分割するために必要）
-5. **予約投稿**: note プレミアム加入アカウントでのみ可能（通常アカウントでは「日時の設定」が押せない、2026-05-18 確認）
+5. **ダウンロード商品の場合**: `product_archive` に `.local/geo-products/` 配下の50MB以下のZIP、`product_attachment_after` に有料本文内の見出しを指定する。`prepare-article.cjs` はパス・拡張子・容量・有料設定をfail-closedで検証する
+6. **予約投稿**: note プレミアム加入アカウントでのみ可能（通常アカウントでは「日時の設定」が押せない、2026-05-18 確認）
 
 ## browser-use 共通設定
 
@@ -162,6 +163,7 @@ end tell' 2>/dev/null || true
   Phase 3: タイトル入力
   Phase 4: 本文入力（一括 ClipboardEvent paste）→ Phase 4-3: URL カード化（自動）
   Phase 5: 挿絵の挿入（目次経由、画像が揃っている場合）
+  Phase 5.5: 商品ZIPを指定見出し直後へ添付し、本文上のファイル名を検証
   Phase 6: 下書き保存
   Phase 7: 公開設定（有料価格→有料境界→タグ→予約/即時。有料は最終投稿のみ手動確定）
   Phase 8: 確認スクリーンショット
@@ -207,6 +209,9 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 - **Phase 4**: 全セグメントを 1 つの文字列に連結し **1 回だけ** ClipboardEvent paste（`type` は markdown 変換しない。連続 paste 不可）。本文は `window.__nb` に**チャンク分割注入**してから paste 発火する（一括 eval は大きい本文で daemon ペイロード上限に当たりタイムアウト）。
 - **Phase 4-3（URL カード化・自動）**: paste 後に plain text の URL 行を OGP リンクカードへ自動変換する。各 URL の text node を eval(Selection API) で発見 → 行末にキャレット → 実 Enter キー送出 → 4 秒待機（既知の手動レシピを自動再現）。詳細・フォールバックは [references/editor-operations.md](references/editor-operations.md) §4-3。**初回 live で 1 記事のカード化を検証**（DOM 変更時はカード要素セレクタを更新）
 - **Phase 5**: 目次からセクションにジャンプし、見出し直後にメニューから画像挿入
+- **Phase 5.5（商品添付）**: `product_archive` がある場合だけ`ins_file`を使う。指定見出し直後へZIPを置き、ファイル名・容量・本文表示を確認する。添付失敗時は有料記事を公開しない
+- **Phase 8.5（有料原稿保全）**: 公開済み有料原稿はpublic Git/R2へcommitしない。catalog派生stateを生成後、`npx tsx .claude/scripts/note/publish-paid-note-private-r2.ts <slug> --commit`で完全原稿を`stats47-private`へ保存し、公開R2には販売メタ`public.json`だけを置く。private実体検証後にcatalogの`r2Body:true`へ進める
+- **有料原稿の復元**: `bash .claude/scripts/note/restore-from-r2.sh <slug>`。派生stateの`r2_access:private`を検出し、private R2から全ファイルをSHA-256検証して復元する
 
 ### Phase 7: 公開設定（有料設定・タグ・予約投稿）
 
@@ -223,7 +228,7 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
   ```
   `hashtags.txt` が無い場合は投稿を中断し `generate-note-hashtags.mjs` を先に実行する。
 - 「公開に進む」→ タグ入力（上記 Phase 7-Tags）→ マガジン追加 → 日時設定 → 投稿
-- ★**エディタ操作の実体は関数ライブラリ `.Codex/scripts/note/editor-helpers.sh`**（`source` して `process_article`（update）/ `new_post_cover_title`+`ins_img`+`new_post_tags`+`new_post_magazine`+`paid_setline`（新規）/ `do_update`）。手書きせずこれを使う。詳細は [references/editor-operations.md](references/editor-operations.md)「実機検証済 update バッチ運用メモ」
+- ★**エディタ操作の実体は関数ライブラリ `.Codex/scripts/note/editor-helpers.sh`**（`source` して `process_article`（update）/ `new_post_cover_title`+`ins_img`+`ins_file`+`new_post_tags`+`new_post_magazine`+`paid_setline_from_settings`（新規）/ `do_update`）。新規有料記事は`publish-new-note.sh ... --prepare-publish`で境界 screenshot まで進め、エージェントが目視してから同じセッションで`--commit-publish`を実行する。手書きせずこれを使う
 - 予約日時が指定されていない場合でも Phase 7 で**即時公開**が可能（「今すぐ公開」ボタンをクリック）。日時設定をスキップして直接「今すぐ公開」を選ぶ
 - 日時も即時公開も有料設定も不要な場合（下書き保存のみ）は Phase 7 全体をスキップ
 

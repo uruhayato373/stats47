@@ -12,8 +12,9 @@ name: 📝 Sync Note Articles to R2
 #
 # 何をするか:
 #   1. 公開済み (note-published-urls.json) + ドラフト (note-draft-index.json) を確認
-#   2. r2_path 未記録 && docs/31 に存在するものを R2 にアップロード
-#   3. 各 index に r2_path を追記
+#   2. 無料publishedは r2_body:false、draftは r2_path 未記録のものをR2へアップロード
+#      有料本文はpublic R2禁止。ローカルのpublish-paid-note-private-r2.tsでprivate R2へ保存する
+#   3. 各 index に R2 実体反映済みを記録
 #   4. docs/31 から削除 (git rm) → commit-back
 #
 # 復元 (更新時):
@@ -75,10 +76,15 @@ jobs:
             const fs=require('fs');
             const pub=JSON.parse(fs.readFileSync('.claude/state/note-published-urls.json','utf8'));
             const dft=JSON.parse(fs.readFileSync('.claude/state/note-draft-index.json','utf8'));
-            const pubPending=Object.entries(pub.articles).filter(([k,v])=>!k.startsWith('_')&&!v.r2_path&&(
+            const pubPending=Object.entries(pub.articles).filter(([k,v])=>!k.startsWith('_')&&v.r2_body===false&&(
               fs.existsSync('docs/31_note記事原稿/'+v.vertical+'/'+k)||
               fs.existsSync('docs/31_note記事原稿/'+k)
             ));
+            const paidPending=pubPending.filter(([,v])=>v.is_paid===true);
+            if(paidPending.length){
+              console.error('paid note cannot enter public R2 sync: '+paidPending.map(([k])=>k).join(','));
+              process.exit(1);
+            }
             const dftPending=Object.entries(dft.drafts).filter(([k,v])=>!v.r2_path&&(
               v.vertical==='stats47-note'
                 ? fs.existsSync('docs/31_note記事原稿/'+k)
@@ -94,12 +100,14 @@ jobs:
         run: echo "同期対象なし — スキップ"
 
       - name: 📤 Sync published articles to R2
+        id: sync_published
         if: |
           steps.check.outputs.pending_count != '0' &&
           (github.event_name == 'push' || github.event.inputs.dry_run == 'false')
         run: DRY_RUN=false node .claude/scripts/note/sync-note-r2.mjs
 
       - name: 📤 Sync draft articles to R2
+        id: sync_drafts
         if: |
           steps.check.outputs.pending_count != '0' &&
           (github.event_name == 'push' || github.event.inputs.dry_run == 'false')
@@ -109,26 +117,16 @@ jobs:
         if: |
           steps.check.outputs.pending_count != '0' &&
           (github.event_name == 'push' || github.event.inputs.dry_run == 'false')
+        env:
+          PUBLISHED_DELETE_PATHS: ${{ steps.sync_published.outputs.delete_paths }}
+          DRAFT_DELETE_PATHS: ${{ steps.sync_drafts.outputs.draft_delete_paths }}
         run: |
-          node -e "
-            const fs=require('fs');
-            const pub=JSON.parse(fs.readFileSync('.claude/state/note-published-urls.json','utf8'));
-            const dft=JSON.parse(fs.readFileSync('.claude/state/note-draft-index.json','utf8'));
-            const allArticles=[
-              ...Object.entries(pub.articles).filter(([k])=>!k.startsWith('_')).map(([k,v])=>({slug:k,info:v})),
-              ...Object.entries(dft.drafts).map(([k,v])=>({slug:k,info:v}))
-            ];
-            let count=0;
-            for(const {slug,info} of allArticles){
-              if(!info.r2_path) continue;
-              const v=info.vertical;
-              const nested='docs/31_note記事原稿/'+(v&&v!=='stats47-note'?v+'/':'')+slug;
-              const top='docs/31_note記事原稿/'+slug;
-              const target=fs.existsSync(nested)?nested:(fs.existsSync(top)?top:null);
-              if(target){ console.log(target); count++; }
-            }
-            if(count===0) console.log('__none__');
-          " | while IFS= read -r dir; do
+          node - <<'NODE' | while IFS= read -r dir; do
+          const parse = (value) => value ? JSON.parse(value) : [];
+          const paths = [...parse(process.env.PUBLISHED_DELETE_PATHS), ...parse(process.env.DRAFT_DELETE_PATHS)];
+          if (paths.length === 0) console.log('__none__');
+          else for (const value of [...new Set(paths)]) console.log(value);
+          NODE
             [ "$dir" = "__none__" ] && break
             echo "  git rm: $dir"
             git rm -r -q "$dir"

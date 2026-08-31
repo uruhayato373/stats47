@@ -49,6 +49,9 @@ X の UI は頻繁に変わるため、セレクタが壊れていると **予�
 | **--caption** | - | - | 任意キャプションファイルパス（`--media` または `--quote-url` と併用） |
 | **--quote-url** | - | - | **引用RTモード**。引用元ツイート URL を caption 末尾に付与し X が引用カードを生成。`--media` は opt-in（無指定ならテキストのみ）。成功時 `post_type='quote_rt'` で sns_posts へ INSERT |
 | **--skip-db** | - | - | DB 更新をスキップ（rankingKey 紐付けの無い任意動画用） |
+| **--from-queue** | - | - | 予約日時付きdraftを予約。`--filter-domain` / `--content-prefix`で対象を限定可能 |
+| **--filter-domain** | - | - | queueをdomain完全一致で限定（例: `geo`） |
+| **--content-prefix** | - | - | queueをcontent key前方一致で限定（例: `geo-001-x-`） |
 
 **複数投稿の例:**
 ```bash

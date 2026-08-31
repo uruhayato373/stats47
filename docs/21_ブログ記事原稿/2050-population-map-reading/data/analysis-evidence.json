@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "slug": "2050-population-map-reading",
+  "rankingKey": "future-population-change-rate-2050",
+  "year": "2050",
+  "unit": "％",
+  "source": "https://storage.stats47.jp/app/ranking/future-population-change-rate-2050/values.json",
+  "sourceSha256": "244d68bb363dc9d89eba56976620dfac017bc50031d9bd2d01db713ed7c1e843",
+  "derivedFacts": {
+    "prefectureCount": 47,
+    "positivePrefectureCount": 1,
+    "negativePrefectureCount": 46,
+    "medianRank": 24,
+    "medianAreaName": "三重県",
+    "medianValue": -23.9,
+    "atOrBelowMinus20Count": 37,
+    "atOrBelowMinus30Count": 11,
+    "topBottomPointGap": 44.09
+  },
+  "calculation": {
+    "positivePrefectureCount": "count(value > 0)",
+    "negativePrefectureCount": "count(value < 0)",
+    "median": "47件をrank順に並べた24番目",
+    "thresholdCounts": "count(value <= threshold)",
+    "topBottomPointGap": "2.5 - (-41.59)"
+  }
+}

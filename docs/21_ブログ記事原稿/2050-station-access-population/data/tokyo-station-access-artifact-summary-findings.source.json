@@ -1,0 +1,10 @@
+{
+  "kind": "derived",
+  "source": "r2:app/geo/population-station-access/pref/13.json",
+  "formula": "summary・meshes[]・stations[] の件数、人口、比率、保持項目を要約",
+  "year": "2020-2050",
+  "unit": "人・%",
+  "label": "東京都の駅800m圏人口を途中データで追う",
+  "sourceSha256": "32f14987c0b6b59bbe4edd40f02dafa95e1556825bb61be1f6047edde64fb7bc",
+  "note": "canonical prefecture artifactのみから生成。人口は四捨五入"
+}

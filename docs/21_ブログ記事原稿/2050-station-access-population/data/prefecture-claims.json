@@ -1,0 +1,133 @@
+[
+  {
+    "areaName": "東京都",
+    "value": 70.8,
+    "rank": 1,
+    "label": "2050年駅800m圏人口比率",
+    "unit": "%"
+  },
+  {
+    "areaName": "東京都",
+    "value": 69.5,
+    "label": "2020年駅800m圏人口比率",
+    "unit": "%"
+  },
+  {
+    "areaName": "東京都",
+    "value": 10196427,
+    "label": "2050年駅800m圏人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "東京都",
+    "value": 2.5,
+    "label": "2050年人口増減率",
+    "unit": "%"
+  },
+  {
+    "areaName": "東京都",
+    "value": 692,
+    "label": "駅800m圏メッシュ数",
+    "unit": "メッシュ"
+  },
+  {
+    "areaName": "東京都",
+    "value": 1611,
+    "label": "人口メッシュ数",
+    "unit": "メッシュ"
+  },
+  {
+    "areaName": "東京都",
+    "value": 680,
+    "label": "表示駅数",
+    "unit": "駅"
+  },
+  {
+    "areaName": "大阪府",
+    "value": 65.8,
+    "rank": 2,
+    "label": "2050年駅800m圏人口比率",
+    "unit": "%"
+  },
+  {
+    "areaName": "大阪府",
+    "value": 64.2,
+    "label": "2020年駅800m圏人口比率",
+    "unit": "%"
+  },
+  {
+    "areaName": "大阪府",
+    "value": 5671173,
+    "label": "2020年駅800m圏人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "大阪府",
+    "value": 4776713,
+    "label": "2050年駅800m圏人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "大阪府",
+    "value": -17.8,
+    "label": "2050年人口増減率",
+    "unit": "%"
+  },
+  {
+    "areaName": "京都府",
+    "value": 55,
+    "rank": 3,
+    "label": "2050年駅800m圏人口比率",
+    "unit": "%"
+  },
+  {
+    "areaName": "京都府",
+    "value": 52.9,
+    "label": "2020年駅800m圏人口比率",
+    "unit": "%"
+  },
+  {
+    "areaName": "茨城県",
+    "value": 15.6,
+    "rank": 46,
+    "label": "2050年駅800m圏人口比率",
+    "unit": "%"
+  },
+  {
+    "areaName": "茨城県",
+    "value": 350446,
+    "label": "2050年駅800m圏人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "沖縄県",
+    "value": 11.2,
+    "rank": 47,
+    "label": "2050年駅800m圏人口比率",
+    "unit": "%"
+  },
+  {
+    "areaName": "沖縄県",
+    "value": 12.1,
+    "label": "2020年駅800m圏人口比率",
+    "unit": "%"
+  },
+  {
+    "areaName": "沖縄県",
+    "value": 155551,
+    "label": "2050年駅800m圏人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "沖縄県",
+    "value": 21,
+    "label": "駅800m圏メッシュ数",
+    "unit": "メッシュ"
+  },
+  {
+    "areaName": "沖縄県",
+    "value": 19,
+    "label": "表示駅数",
+    "unit": "駅"
+  }
+]

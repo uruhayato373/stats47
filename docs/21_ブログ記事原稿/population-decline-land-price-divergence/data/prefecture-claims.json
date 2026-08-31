@@ -1,0 +1,116 @@
+[
+  {
+    "areaName": "東京都",
+    "value": 407000,
+    "rank": 1,
+    "label": "住宅地の地価中央値",
+    "unit": "円/㎡"
+  },
+  {
+    "areaName": "東京都",
+    "value": 5.7,
+    "label": "対前年変動率中央値",
+    "unit": "%"
+  },
+  {
+    "areaName": "東京都",
+    "value": 2.5,
+    "label": "2050年人口増減率",
+    "unit": "%"
+  },
+  {
+    "areaName": "沖縄県",
+    "value": 120000,
+    "rank": 6,
+    "label": "住宅地の地価中央値",
+    "unit": "円/㎡"
+  },
+  {
+    "areaName": "沖縄県",
+    "value": 6.1,
+    "label": "対前年変動率中央値",
+    "unit": "%"
+  },
+  {
+    "areaName": "沖縄県",
+    "value": -5.21,
+    "label": "2050年人口増減率",
+    "unit": "%"
+  },
+  {
+    "areaName": "大阪府",
+    "value": 145000,
+    "rank": 3,
+    "label": "住宅地の地価中央値",
+    "unit": "円/㎡"
+  },
+  {
+    "areaName": "大阪府",
+    "value": 2.3,
+    "label": "対前年変動率中央値",
+    "unit": "%"
+  },
+  {
+    "areaName": "大阪府",
+    "value": -17.82,
+    "label": "2050年人口増減率",
+    "unit": "%"
+  },
+  {
+    "areaName": "大分県",
+    "value": 43200,
+    "rank": 17,
+    "label": "住宅地の地価中央値",
+    "unit": "円/㎡"
+  },
+  {
+    "areaName": "大分県",
+    "value": 2.4,
+    "label": "対前年変動率中央値",
+    "unit": "%"
+  },
+  {
+    "areaName": "大分県",
+    "value": -25.14,
+    "label": "2050年人口増減率",
+    "unit": "%"
+  },
+  {
+    "areaName": "長崎県",
+    "value": 38000,
+    "rank": 24,
+    "label": "住宅地の地価中央値",
+    "unit": "円/㎡"
+  },
+  {
+    "areaName": "長崎県",
+    "value": 1.4,
+    "label": "対前年変動率中央値",
+    "unit": "%"
+  },
+  {
+    "areaName": "長崎県",
+    "value": -33.8,
+    "label": "2050年人口増減率",
+    "unit": "%"
+  },
+  {
+    "areaName": "秋田県",
+    "value": 16150,
+    "rank": 47,
+    "label": "住宅地の地価中央値",
+    "unit": "円/㎡"
+  },
+  {
+    "areaName": "秋田県",
+    "value": 0,
+    "label": "対前年変動率中央値",
+    "unit": "%"
+  },
+  {
+    "areaName": "秋田県",
+    "value": -41.59,
+    "label": "2050年人口増減率",
+    "unit": "%"
+  }
+]

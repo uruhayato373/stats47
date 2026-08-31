@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 公開済み note 記事を R2 に同期し、docs/31 から削除する。
+ * note-catalogで r2Body:false の公開済み記事を R2 に同期する。
  *
  * 使い方:
  *   node .claude/scripts/note/sync-note-r2.mjs              # dry-run
@@ -57,9 +57,17 @@ const errors = []
 
 for (const [slug, info] of Object.entries(articles)) {
   if (slug.startsWith('_')) continue
-  if (info.r2_path) {
+  // r2_path はcatalogが公開前から予約する。実体の有無は r2_body だけで判定する。
+  if (info.r2_body !== false) {
     // 既に r2_path が記録済み = 同期完了
     skipped.push(slug)
+    continue
+  }
+
+  if (info.is_paid === true) {
+    const message = `${slug}: paid article must use publish-paid-note-private-r2.ts; public R2 sync is forbidden`
+    console.error(`  ❌ ${message}`)
+    errors.push({ slug, error: message })
     continue
   }
 
@@ -98,8 +106,10 @@ for (const [slug, info] of Object.entries(articles)) {
         { stdio: 'inherit', cwd: ROOT }
       )
 
-      // 4. note-published-urls.json に r2_path を記録
+      // 4. 派生indexへR2実体反映済みを記録（catalogは後続commitでr2Body:trueへ昇格）
       info.r2_path = r2Prefix
+      info.r2_body = true
+      info.status = 'r2_ready'
     } else {
       const files = listFiles(srcDir)
       console.log(`  files:  ${files.length} 件 (${files.slice(0, 3).join(', ')}${files.length > 3 ? '...' : ''})`)

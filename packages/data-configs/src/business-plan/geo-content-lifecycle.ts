@@ -24,7 +24,7 @@ const CONTENT_DEFINITIONS = {
         '3本の空間横断分析を束ねる基準記事',
         '都道府県別の入口カード',
         '推計値の限界を説明するデータリテラシー投稿',
-        '市区町村地図の再現パック',
+        '都道府県地図データの再現パック',
       ],
       evaluationWindowDays: 28,
       successGate:

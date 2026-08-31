@@ -150,7 +150,7 @@
 | SNS 週次運用 | strategy-advisor (/sns-weekly-plan) → sns-metrics-sync (先週計測) → trend-scout (題材) → x/instagram-strategist (生成・予約) |
 | トレンド → IG リール | trend-scout → sns-renderer (/bar-chart-race --step render) → instagram-strategist |
 | バズ地図 → SNS | gis-curator (KSJ geometryType) / data-ingester (e-Stat 観測値) → sns-renderer (/buzz-map 型A〜E 生成+R2) → x/instagram-strategist (配信。draft 止まりが既定) |
-| Geo地域分析 → サイト/X | gis-curator (原典メタ) → gis-pipeline-runner (取得・変換) → geo-analysis-curator (`/build-geo-analysis`: 途中artifact+lineage+保存則+サイト) → `/operate-geo-content` (Geo専用render+SHA監査+draft) → 明示時だけr2-publisher/x-strategistが配信 |
+| Geo地域分析 → サイト/ブログ/X/note | gis-curator (原典メタ) → gis-pipeline-runner (取得・変換) → geo-analysis-curator (`/build-geo-analysis`: 途中artifact+lineage+保存則+サイト) → `/publish-geo-portfolio` (カタログ順にblog/X/noteを統合) → 各ownerが明示時だけ配信 |
 | テーマ・エリア → X | theme/area git TS catalog → `/operate-site-x-drafts` (landing+OGP+SHA+caption lint+draft) → 明示時だけx-strategistが配信 |
 | SNS 競合調査 | trend-scout (`/competitor-scan`) → skill reference、未完了策は改善バックログ |
 | コード変更 → デプロイ | code-reviewer → scopeにUI/testを含む時だけ対応reviewerを1体追加 → devops-runner |

@@ -147,6 +147,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | 文書作成・整理・陳腐化監査 | `.claude/skills/management/maintain-docs/SKILL.md` (`/maintain-docs`) |
 | エージェントチーム構成 (Tier 0/1/2) | `.claude/agents/README.md` |
 | Geo分析生成・途中artifact監査 | `.claude/skills/gis/build-geo-analysis/SKILL.md` (`/build-geo-analysis`) |
+| Geo企画のサイト・ブログ・X・note一括公開 | `.claude/skills/gis/publish-geo-portfolio/SKILL.md` (`/publish-geo-portfolio`) |
 | 画像プロンプトカタログ (43 種) | `.claude/skills/image-prompt/reference/catalog.md` |
 | ブログ背景のCodex画像生成 | `.claude/skills/blog/generate-blog-images/SKILL.md` (`/generate-blog-images`) |
 

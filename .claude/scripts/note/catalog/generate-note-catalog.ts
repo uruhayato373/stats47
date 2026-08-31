@@ -36,6 +36,7 @@ for (const a of published) {
     published_at: a.publishedAt || "",
     r2_path: a.r2Path,
     r2_body: hasBody,
+    r2_access: hasBody ? (a.isPaid ? "private" : "public") : "none",
     status: hasBody ? "r2_ready" : "note_only",
   };
   if (a.priceJpy && a.priceJpy > 0) entry.price_jpy = a.priceJpy;

@@ -1,0 +1,11 @@
+{
+  "kind": "derived",
+  "source": "r2:app/geo/population-station-access/item.json",
+  "formula": "rows[].values.stationAccessShare2050",
+  "year": "2050",
+  "unit": "%",
+  "label": "2050年駅800m圏人口比率",
+  "verifiedMatchRate": 1,
+  "sourceSha256": "f3e461732daa8138a7563af3aa61f37f23fae4c1508d8817f148d9b2ffe2e75d",
+  "note": "canonical Geo aggregateの47都道府県値を変換。SVGから逆復元していない"
+}

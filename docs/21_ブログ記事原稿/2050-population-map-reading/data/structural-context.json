@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "purpose": "将来人口増減率の上位・下位に見える人口動態の構造を補助的に読む",
+  "caveat": "2024年の単年観測であり、2050年推計の直接入力や因果効果ではない",
+  "sources": [
+    {
+      "metricKey": "moving-in-excess-rate",
+      "label": "転入超過率",
+      "year": "2024",
+      "unit": "％",
+      "source": "https://storage.stats47.jp/app/ranking/moving-in-excess-rate/values.json",
+      "sourceSha256": "592009a63b0597da991ccc9bbba6aca8fdb8c9647eb0d630f9ab7fe422585727",
+      "values": [
+        { "rank": 1, "areaCode": "13000", "areaName": "東京都", "value": 0.56 },
+        { "rank": 2, "areaCode": "11000", "areaName": "埼玉県", "value": 0.30 },
+        { "rank": 3, "areaCode": "14000", "areaName": "神奈川県", "value": 0.29 },
+        { "rank": 5, "areaCode": "12000", "areaName": "千葉県", "value": 0.13 },
+        { "rank": 13, "areaCode": "47000", "areaName": "沖縄県", "value": -0.10 },
+        { "rank": 36, "areaCode": "05000", "areaName": "秋田県", "value": -0.37 },
+        { "rank": 42, "areaCode": "42000", "areaName": "長崎県", "value": -0.40 },
+        { "rank": 45, "areaCode": "03000", "areaName": "岩手県", "value": -0.43 },
+        { "rank": 46, "areaCode": "02000", "areaName": "青森県", "value": -0.45 },
+        { "rank": 47, "areaCode": "39000", "areaName": "高知県", "value": -0.48 }
+      ]
+    },
+    {
+      "metricKey": "natural-increase-rate",
+      "label": "自然増減率",
+      "year": "2024",
+      "unit": "‰",
+      "source": "https://storage.stats47.jp/app/ranking/natural-increase-rate/values.json",
+      "sourceSha256": "ab206dac9ff5a3ad1da42490241750e0706c2b83e7a2bc4816c0ebdf4f954ca8",
+      "values": [
+        { "rank": 1, "areaCode": "47000", "areaName": "沖縄県", "value": -2.3 },
+        { "rank": 2, "areaCode": "13000", "areaName": "東京都", "value": -3.7 },
+        { "rank": 5, "areaCode": "14000", "areaName": "神奈川県", "value": -5.2 },
+        { "rank": 6, "areaCode": "11000", "areaName": "埼玉県", "value": -5.9 },
+        { "rank": 9, "areaCode": "12000", "areaName": "千葉県", "value": -6.2 },
+        { "rank": 34, "areaCode": "42000", "areaName": "長崎県", "value": -10.1 },
+        { "rank": 44, "areaCode": "39000", "areaName": "高知県", "value": -12.4 },
+        { "rank": 45, "areaCode": "03000", "areaName": "岩手県", "value": -12.7 },
+        { "rank": 46, "areaCode": "02000", "areaName": "青森県", "value": -13.0 },
+        { "rank": 47, "areaCode": "05000", "areaName": "秋田県", "value": -15.6 }
+      ]
+    }
+  ]
+}

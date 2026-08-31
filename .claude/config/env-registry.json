@@ -224,6 +224,13 @@
       ]
     },
     {
+      "name": "DRAFT_DELETE_PATHS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "ENV_REGISTRY_PATH",
       "visibility": "server",
       "contexts": [
@@ -711,6 +718,13 @@
       ]
     },
     {
+      "name": "PUBLISHED_DELETE_PATHS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "PLAYWRIGHT_TEST_BASE_URL",
       "visibility": "server",
       "contexts": [
@@ -783,6 +797,13 @@
     },
     {
       "name": "R2_DEV_GATEWAY_UPSTREAM",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_PRIVATE_BUCKET_NAME",
       "visibility": "server",
       "contexts": [
         "process"
