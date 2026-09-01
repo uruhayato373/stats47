@@ -33,7 +33,7 @@ describe('binMunicipalityValues', () => {
     const body = Array.from({ length: 99 }, (_, i) => i + 1);
     const rows = makeRows([...body, 1_000_000]);
     const dist = binMunicipalityValues(rows)!;
-    const overflow = dist.bins.at(-1)!;
+    const overflow = dist.bins[dist.bins.length - 1];
     expect(overflow.isOverflow).toBe(true);
     expect(overflow.count).toBeGreaterThanOrEqual(1);
     // 本体側 (非overflow) に 2 つ以上のビンへ分散している
@@ -90,7 +90,7 @@ describe('binMunicipalityValues', () => {
     expect(sum).toBe(5);
     expect(dist.bins[0].x0).toBe(-10);
     // max=10 が取りこぼされない
-    const last = dist.bins.at(-1)!;
+    const last = dist.bins[dist.bins.length - 1];
     expect(last.count).toBeGreaterThanOrEqual(1);
   });
 

@@ -216,6 +216,14 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`を許可�
 > 週次 GA4 snapshot は Japan-only の `survey_ranking` を `survey-navigation.csv` に保存し、
 > survey portfolio の `metrics.internalNav.rankingOutboundClicks` を非重複56日で集計する。
 >
+> **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
+> 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
+> 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を
+> 追加した。登録済み `nav_surface` / `nav_label` の**値追加**で新しい custom dimension は無い。
+> 呼び出し元は `MunicipalityCityMapClient` / `TrackedMunicipalityThemeCard`
+> (`apps/web/src/features/municipalities/components/`)。地図・ヒストグラムの hover は
+> 計測しない (新 dimension 登録 = owner 工程が要るため。クリック導線で回遊判定は成立する)。
+>
 > **nav_surface の値追加 (2026-08-24・evidence lens)**: ThemeCatalog の白書・統計論点から
 > ranking / theme / tag へ進む内部導線に `theme_evidence` を追加した。登録済みの
 > `nav_surface` / `nav_label` を使う値追加で、新しい custom dimension は無い。公式資料への外部リンクは

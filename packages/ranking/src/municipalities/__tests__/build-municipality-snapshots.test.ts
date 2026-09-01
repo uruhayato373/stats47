@@ -97,6 +97,12 @@ describe('buildMunicipalityRankingSnapshots', () => {
       expect.objectContaining({ areaCode: '01100', rank: 1, value: 30 }),
       expect.objectContaining({ areaCode: '01202', rank: 1, value: 30 }),
     ]);
+    // 焼き込んだ分布のビン合計 = valueCount (テーマカードのミニチャート入力)
+    const distSum = (result.item.distribution ?? []).reduce(
+      (acc, bin) => acc + bin.count,
+      0
+    );
+    expect(distSum).toBe(result.item.valueCount);
   });
 
   it('e-Statのplaceholderダッシュ unitはconfigのunitへ倒し、実unitは行側を優先する', () => {
