@@ -12,9 +12,11 @@ interface Props extends ComponentProps<typeof SurfaceLinkCard> {
 
 /**
  * テーマ一覧カードのクリックを nav_click (surface=municipalities_theme) で計測する薄いラッパ。
+ * カード枠は描画せず SurfaceLinkCard に委譲する (命名は TrackedPortalCategoryLink と同型 —
+ * card census の対象たる新規カード枠ではないため *Link)。
  * 台帳: .claude/rules/analytics-event-standards.md (登録済み nav_surface の値追加)。
  */
-export function TrackedMunicipalityThemeCard({
+export function TrackedMunicipalityThemeLink({
   label,
   href,
   onClick,
