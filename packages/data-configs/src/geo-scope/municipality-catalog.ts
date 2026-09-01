@@ -40,6 +40,50 @@ export const MUNICIPALITY_METRIC_AVAILABILITY: Readonly<
     // 双葉町は2020年国勢調査人口が0で比率を定義できない。取得値0を欠測相当として除外する。
     valuePolicy: { minExclusive: 0, maxInclusive: 100 },
   },
+  // ---- 第1拡充バッチ (2026-09-01 公開・人手品質判断の根拠は各コメント) ----
+  // 共通根拠: expansion-survey (2026-09-01) で machine-clean (1,913 entity・重複0・unknownCode 0)。
+  // 公開R2 cities.json の最新年 top/bottom 5 を常識照合済み (特別区部9,733,276人・豊島区23,182人/km²等)。
+  // 双葉町 (07546・2020国勢調査人口0) は count系=実値0を保持 / 比率系=元データが null で既に除外済み。
+  'total-population': {
+    status: 'published',
+    entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+    comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+    // 双葉町の0人は2020国勢調査の実値 (避難指示)。除外しない。
+  },
+  'population-density-per-km2-inhabitable-area': {
+    status: 'published',
+    entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+    comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+    // 人口0の団体は密度0が定義どおり成立するため除外しない。
+    // 類似キー population-density-habitable は同一値 (min/max 完全一致) の重複のため公開しない。
+    valuePolicy: { minInclusive: 0 },
+  },
+  'young-population-ratio': {
+    status: 'published',
+    entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+    comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+    // 0%は「子どもが1人もいない団体」として実在しうるため包含下限。0/0 (双葉町) は元データ null。
+    valuePolicy: { minInclusive: 0, maxInclusive: 100 },
+  },
+  'production-age-population-ratio': {
+    status: 'published',
+    entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+    comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+    valuePolicy: { minInclusive: 0, maxInclusive: 100 },
+  },
+  households: {
+    status: 'published',
+    entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+    comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+  },
+  'moving-in-excess-rate': {
+    status: 'published',
+    entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+    comparisonModes: ['ranking', 'prefecture-filter', 'municipality-search'],
+    // e-Stat #A05307 (無印=外国人含む総数) を実メタで確認済み。負値は転出超過の実値
+    // (2020最小 浪江町 -14.98%) のため下限は設けない。
+  },
+  // ---- 第1拡充バッチここまで ----
   'fiscal-strength-index': {
     status: 'unknown',
     reason: '財政主体、東京23特別区、行政区、0と欠測の監査が完了していないため',
@@ -70,6 +114,21 @@ export const MUNICIPALITY_THEME_CATALOGS: Readonly<
     title: '市区町村の高齢化',
     metricKeys: ['elderly-population-ratio'],
     defaultMetricKey: 'elderly-population-ratio',
+    entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
+    status: 'active',
+  },
+  population: {
+    slug: 'population',
+    title: '市区町村の人口',
+    metricKeys: [
+      'total-population',
+      'population-density-per-km2-inhabitable-area',
+      'young-population-ratio',
+      'production-age-population-ratio',
+      'households',
+      'moving-in-excess-rate',
+    ],
+    defaultMetricKey: 'total-population',
     entityPolicyKey: STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY,
     status: 'active',
   },

@@ -79,8 +79,18 @@ describe('municipality geo scope and catalog', () => {
     expect(MUNICIPALITY_THEME_CATALOGS['local-finance'].status).toBe('draft');
     expect([...KNOWN_MUNICIPALITY_RANKING_KEYS]).toEqual([
       'elderly-population-ratio',
+      // 第1拡充バッチ (2026-09-01)
+      'total-population',
+      'population-density-per-km2-inhabitable-area',
+      'young-population-ratio',
+      'production-age-population-ratio',
+      'households',
+      'moving-in-excess-rate',
     ]);
-    expect([...KNOWN_MUNICIPALITY_THEME_SLUGS]).toEqual(['aging-society']);
+    expect([...KNOWN_MUNICIPALITY_THEME_SLUGS]).toEqual([
+      'aging-society',
+      'population',
+    ]);
     expect(
       KNOWN_MUNICIPALITY_RANKING_KEYS.has(
         'culture-recreation-cost-all-households'

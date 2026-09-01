@@ -51,7 +51,7 @@ declare -a TASKS=(
   #   射影するだけだから (逆順だと計算型が 1 年前のまま配信される)。
   "calculated-stats|packages/ranking/src/scripts/generate-calculated-stats.ts"
   "ranking-values|packages/ranking/src/scripts/generate-ranking-values.ts"
-  "municipality-ranking|packages/ranking/src/scripts/generate-municipality-ranking.ts"
+  "municipality-ranking|packages/ranking/src/scripts/generate-municipality-ranking.ts --all-published"
   "ranking-normalized-values|packages/ranking/src/scripts/generate-ranking-normalized-values.ts"
   "item-seo-refresh|packages/ranking/src/scripts/refresh-item-seo.ts --apply"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"

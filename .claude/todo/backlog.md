@@ -741,13 +741,19 @@ updated: 2026-08-30
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
-### [MUNI-RANKING-EXPANSION-01] 市区町村ランキングの段②拡充 (調査済み・WP8 判定待ち)
+### [MUNI-RANKING-EXPANSION-01] 市区町村ランキングの段②拡充 (第1バッチ実施済み・以降は実測待ち)
 
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-01]
 
 - **owner**: Claude Code (選定・監査) + オーナー (published 昇格の承認)
-- **trigger (どちらかを満たすまで着手しない)**: doc 44 WP8 の pilot 28日実測 verdict (2026-09 下旬目安) が
-  拡充 go、またはオーナーの明示承認
+- **第1バッチ (2026-09-01 オーナー承認・実施済み)**: census 系 6 key
+  (total-population / population-density-per-km2-inhabitable-area / young-population-ratio /
+  production-age-population-ratio / households / moving-in-excess-rate) + テーマ `population` を
+  published 昇格。品質判断の根拠は catalog コメントと expansion-survey。副産物:
+  moving-in-excess-rate の subtitle 誤り (「外国人移動者」→「外国人移動者を含む」) を是正
+- **第2バッチ以降の trigger**: 第1バッチ公開 28 日後 (2026-09-29 目安) の GSC/GA4 実測 +
+  doc 44 WP8 verdict、またはオーナーの明示承認。needs-review 39 (stale 36 等) と
+  SSDS 未使用 733 はその後
 - **調査結果 (2026-09-01 段①完了・SSOT = `.claude/state/municipalities/expansion-survey.json`)**:
   - 既存 R2 候補 184 件の機械監査: **publish-candidate 139** / needs-review 39 (stale 36・null/zero-heavy 2・
     極端%値 2) / catalog 判定済み 6。全 180 artifact の値分布 (定数/負値/値域) まで検査済み・fetch 失敗 0
