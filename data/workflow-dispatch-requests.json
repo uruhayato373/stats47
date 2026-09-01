@@ -1,7 +1,0 @@
-{
-  "workflow": "sync-snapshots.yml",
-  "inputs": { "only": "municipality-ranking" },
-  "ref": "develop",
-  "reason": "市区町村ランキング全量公開 (171 key) のR2生成。deploy (#879) 完了後の実行",
-  "requestedAt": "2026-09-01T05:05:00Z"
-}
