@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -16,16 +18,23 @@ import {
   readMunicipalityRankingItem,
   readMunicipalityRankingValues,
 } from '@stats47/ranking/server';
+import { formatValueWithPrecision } from '@stats47/utils';
 import { ChevronDown } from 'lucide-react';
 
+
+import { DistributionHistogram } from '@/components/charts/DistributionHistogram';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
+import { SectionHeader } from '@/components/section';
+
 
 import {
   MunicipalityRankingViewTracker,
+  binMunicipalityValues,
   filterMunicipalityRanking,
   municipalityLeafName,
 } from '@/features/municipalities';
+import { MunicipalityRankingMapSection } from '@/features/municipalities/server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 import { UrlPolicy } from '@/lib/url-policy';
@@ -132,13 +141,20 @@ export default async function MunicipalityRankingPage({
     page: requestedPage,
     pageSize: 50,
   });
-  const sortedValues = [...snapshot.values].sort((a, b) => a.value - b.value);
-  const median = sortedValues[Math.floor((sortedValues.length - 1) / 2)]?.value;
-  const minimum = sortedValues[0]?.value;
-  const maximum = sortedValues.at(-1)?.value;
-  const numberFormat = new Intl.NumberFormat('ja-JP', {
-    maximumFractionDigits: 1,
+  const distribution = binMunicipalityValues(snapshot.values, {
+    prefectureCode: prefectureCode || undefined,
   });
+  const median = distribution?.median;
+  const minimum = distribution?.min;
+  const maximum = distribution?.max;
+  const prefName = prefectureCode
+    ? fetchPrefectures().find((p) => p.prefCode === prefectureCode)?.prefName
+    : undefined;
+  // 小数桁はデータセット全体から 1 度だけ解決した precision で揃える
+  // (max 単独指定だと 44.0 が 44 になり同じ表内で桁が混ざる。blog-svg-chart-standards §数値の桁揃え)
+  const precision = distribution?.precision ?? 0;
+  const formatValue = (value: number) =>
+    formatValueWithPrecision(value, precision);
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Dataset',
@@ -199,7 +215,7 @@ export default async function MunicipalityRankingPage({
           >
             <p className="text-xs text-muted-foreground">{label}</p>
             <p className="mt-1 text-lg font-semibold tabular-nums">
-              {typeof value === 'number' ? numberFormat.format(value) : '—'}
+              {typeof value === 'number' ? formatValue(value) : '—'}
               <span className="ml-0.5 text-xs font-normal text-muted-foreground">
                 {snapshot.unit}
               </span>
@@ -207,6 +223,48 @@ export default async function MunicipalityRankingPage({
           </div>
         ))}
       </section>
+
+      {distribution && (
+        <section aria-label="全国分布" className="mt-5">
+          <SectionHeader
+            title="全国分布"
+            action={prefName ? `縦線 = ${prefName}の各自治体` : undefined}
+            hideRule
+            className="mb-0"
+          />
+          <div className="mt-2 border border-border p-2">
+            <DistributionHistogram
+              bins={distribution.bins}
+              median={distribution.median}
+              precision={distribution.precision}
+              unit={snapshot.unit}
+              prefLabel={prefName}
+              prefValues={distribution.prefValues}
+              ariaLabel={`${municipalityRankingDisplayTitle(item)}の全国分布ヒストグラム`}
+            />
+          </div>
+          {!prefectureCode && (
+            <p className="mt-1 text-xs text-muted-foreground">
+              都道府県で絞り込むと、県内の分布地図を表示します。
+            </p>
+          )}
+        </section>
+      )}
+
+      {prefectureCode && (
+        <Suspense
+          fallback={
+            <div className="mt-5 h-72 animate-pulse bg-muted/40" aria-hidden />
+          }
+        >
+          <MunicipalityRankingMapSection
+            rankingKey={item.rankingKey}
+            unit={snapshot.unit}
+            prefectureCode={prefectureCode}
+            values={snapshot.values}
+          />
+        </Suspense>
+      )}
 
       <form
         method="get"
@@ -307,7 +365,7 @@ export default async function MunicipalityRankingPage({
                     )}
                   </TableCell>
                   <TableCell className="text-right tabular-nums">
-                    {numberFormat.format(row.value)} {snapshot.unit}
+                    {formatValue(row.value)} {snapshot.unit}
                   </TableCell>
                 </TableRow>
               );

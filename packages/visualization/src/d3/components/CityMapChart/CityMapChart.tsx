@@ -63,6 +63,12 @@ export interface CityMapChartProps {
   onCityClick?: (areaCode: string) => void;
   /** 選択中の市区町村コード */
   selectedCityCode?: string;
+  /**
+   * 投影フィット (fitExtent) の計算から除外する市区町村コード。
+   * 東京の小笠原諸島のような遠隔離島を含む県で本土が極小になるのを防ぐ。
+   * 描画からは除外しない (離島はキャンバス外に描かれ、パン/ズームで到達できる)。
+   */
+  fitExcludeCodes?: string[];
 }
 
 export function CityMapChart({
@@ -72,6 +78,7 @@ export function CityMapChart({
   unit = "",
   onCityClick,
   selectedCityCode,
+  fitExcludeCodes,
 }: CityMapChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const { showTooltip, updateTooltipPosition, hideTooltip } = useD3Tooltip();
@@ -189,13 +196,20 @@ export function CityMapChart({
     const svg = d3Module.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    // Projection: fitExtent で自動フィット
+    // Projection: fitExtent で自動フィット。fitExcludeCodes は fit 計算からだけ外す
+    // (全 feature が除外対象なら従来どおり全体で fit する)
+    const fitExclude = new Set(fitExcludeCodes ?? []);
+    const fitCandidates =
+      fitExclude.size > 0
+        ? geojson.filter((f) => !fitExclude.has(f.properties.cityCode))
+        : geojson;
+    const fitFeatures = fitCandidates.length > 0 ? fitCandidates : geojson;
     const projection = d3Module.geoMercator().fitExtent(
       [
         [PADDING, PADDING],
         [VIEWBOX_WIDTH - PADDING, VIEWBOX_HEIGHT - PADDING - 40],
       ],
-      { type: "FeatureCollection", features: geojson } as any
+      { type: "FeatureCollection", features: fitFeatures } as any
     );
 
     const pathGenerator = d3Module.geoPath().projection(projection);
@@ -280,6 +294,7 @@ export function CityMapChart({
     selectedCityCode,
     data,
     unit,
+    fitExcludeCodes,
     showTooltip,
     updateTooltipPosition,
     hideTooltip,
