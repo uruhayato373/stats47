@@ -1,7 +1,0 @@
-{
-  "workflow": "sync-snapshots.yml",
-  "inputs": { "only": "municipality-ranking" },
-  "ref": "develop",
-  "reason": "市区町村第1拡充バッチ6 keyのR2反映 (app/municipalities/ranking/<key>/{item,values}.json)。deployの前提",
-  "requestedAt": "2026-09-01T02:55:00Z"
-}
