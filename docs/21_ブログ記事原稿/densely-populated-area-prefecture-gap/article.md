@@ -3,8 +3,8 @@ title: 人口集中地区面積、北海道はなぜ5位なのか
 seoTitle: "人口集中地区面積ランキング 都道府県別 2020年版 東京都1位・北海道5位"
 description: 人口密度の高さではあまり語られない北海道が、人口集中地区面積では全国5位に入るのはなぜでしょうか。都道府県別の人口集中地区面積データから、面積の大きさと都市化の関係を読み解きます。
 slug: densely-populated-area-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 

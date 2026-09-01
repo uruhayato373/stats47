@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 94,
+    "pending": 93,
     "inProgress": 2,
-    "done": 22,
+    "done": 23,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 16,
-      "A": 38,
+      "A": 37,
       "F": 12,
       "G": 9
     }
@@ -1984,8 +1984,10 @@
       "suggestedTitle": "人口集中地区面積が多い県はどこ",
       "combinedScore": 0.308,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 69
+      "status": "done",
+      "priority": 69,
+      "done_at": "2026-09-01",
+      "published_slug": "densely-populated-area-prefecture-gap"
     },
     {
       "topicKey": "gap-sports-spectating-consumption-expenditure",
