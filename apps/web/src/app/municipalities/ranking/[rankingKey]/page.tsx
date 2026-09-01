@@ -23,6 +23,7 @@ import { ChevronDown } from 'lucide-react';
 import { DistributionHistogram } from '@/components/charts/DistributionHistogram';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
+import { SectionHeader } from '@/components/section';
 
 
 import {
@@ -221,14 +222,12 @@ export default async function MunicipalityRankingPage({
 
       {distribution && (
         <section aria-label="全国分布" className="mt-5">
-          <div className="flex items-baseline justify-between gap-4">
-            <h2 className="text-sm font-semibold">全国分布</h2>
-            {prefName && (
-              <p className="text-xs text-muted-foreground">
-                縦線 = {prefName}の各自治体
-              </p>
-            )}
-          </div>
+          <SectionHeader
+            title="全国分布"
+            action={prefName ? `縦線 = ${prefName}の各自治体` : undefined}
+            hideRule
+            className="mb-0"
+          />
           <div className="mt-2 border border-border p-2">
             <DistributionHistogram
               bins={distribution.bins}
