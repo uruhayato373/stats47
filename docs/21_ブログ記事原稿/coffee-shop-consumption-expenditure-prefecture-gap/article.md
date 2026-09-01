@@ -3,8 +3,8 @@ title: 喫茶代3.5倍差はなぜ?東京と青森
 seoTitle: "喫茶代消費支出額ランキング｜1位東京都15,566円・最下位青森県4,432円 都道府県別2024年"
 description: 同じ日本でも、喫茶店で使うお金は住む県で3.5倍も違います。この記事では2024年の家計調査データから、喫茶代消費支出額の都道府県差とその背景を明らかにします。
 slug: coffee-shop-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 

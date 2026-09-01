@@ -4,13 +4,13 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 105,
+    "pending": 104,
     "inProgress": 2,
-    "done": 11,
+    "done": 12,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
-      "D2": 25,
+      "D2": 24,
       "A": 40,
       "F": 12,
       "G": 9
@@ -1868,8 +1868,10 @@
       "suggestedTitle": "喫茶代消費量 日本一はどこ",
       "combinedScore": 0.309,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 65
+      "status": "done",
+      "priority": 65,
+      "done_at": "2026-09-01",
+      "published_slug": "coffee-shop-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "gap-hamburger-consumption-expenditure",
