@@ -134,6 +134,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |
 | `HubSankey` | `@/components/charts/HubSankey` | 焦点 hub 型 Sankey（左ノード群 → 中央 → 右ノード群）。財政フロー / 人口移動フロー / 通勤フローで共有。`chrome`（`card`=自前カード枠 + SVG 内に title/subtitle/footer を描く / `bare`=枠と SVG 内テキストを持たず `ChartPanel` に委ねる）と `usableHeight`（ノード列の高さ = 縦横比。既定 616 は 1 カラム用、2 カラムは 340）で見た目を切り替える |
 | `DistributionHistogram` | `@/components/charts/DistributionHistogram` | 全国分布ヒストグラム（市区町村ランキング 1,718 自治体用）。**サーバー側でビン化済みの集計配列**（`binMunicipalityValues`、右裾は overflow ビンへ畳む）だけを受け取り、生の観測行は受け取らない。選択都道府県は基線上のラグ（縦ティック）で重ねる（全国と地域は件数スケールが 2 桁違うため棒の重ね描きは不可視になる）。中央値の破線・`useD3Tooltip`（ビン範囲 + 全国/県の件数）付き |
+| `MiniDistributionBars` | `@/components/charts/MiniDistributionBars` | カード内埋め込みの分布スパークバー（市区町村テーマ一覧カード用）。item.json に**焼き込み済みの分布ビン**（builder が `binMunicipalityValues` で生成）を描くだけの装飾チャート。カード全体がリンクのため**非インタラクティブ・aria-hidden**（tooltip をリンク内に置かない。数値情報はカードのテキストが持つ） |
 
 #### カードフレームの役割分担（★重複と誤判定しないこと）
 

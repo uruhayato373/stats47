@@ -11,6 +11,17 @@ export const MunicipalityRankingItemSnapshotSchema = z.object({
   rankingKey: z.string().min(1),
   title: z.string().min(1),
   subtitle: z.string().min(1).optional(),
+  distribution: z
+    .array(
+      z.object({
+        x0: z.number(),
+        x1: z.number(),
+        count: z.number().int().nonnegative(),
+        isOverflow: z.boolean(),
+        isUnderflow: z.boolean(),
+      })
+    )
+    .optional(),
   description: z.string(),
   unit: z.string(),
   latestYear: z.object({

@@ -1,4 +1,5 @@
 export * from './components/MunicipalityRankingViewTracker';
+export * from './components/TrackedMunicipalityThemeLink';
 export * from './lib/filter-municipality-ranking';
 export * from './lib/bin-municipality-values';
 // MunicipalityRankingMapSection はこの barrel に載せない — @stats47/gis/server (server-only) を

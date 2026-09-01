@@ -3,7 +3,10 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 
+import { trackNavClick } from '@/lib/analytics/events';
+
 import type { TopoJSONTopology } from '@stats47/types';
+
 
 const CityMapChart = dynamic(
   () =>
@@ -68,7 +71,18 @@ export function MunicipalityCityMapClient({
       fitExcludeCodes={fitExcludeCodes}
       onCityClick={(areaCode) => {
         const href = hrefByCode[areaCode];
-        if (href) router.push(href);
+        if (!href) return;
+        try {
+          trackNavClick({
+            label:
+              points.find((p) => p.areaCode === areaCode)?.areaName ?? areaCode,
+            href,
+            surface: 'municipalities_map',
+          });
+        } catch {
+          // 計測失敗で遷移を止めない
+        }
+        router.push(href);
       }}
     />
   );

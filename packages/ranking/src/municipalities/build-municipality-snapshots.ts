@@ -1,5 +1,7 @@
 import type { MunicipalityEntityPolicy } from '@stats47/area';
 
+import { binMunicipalityValues } from './bin-municipality-values';
+
 import type {
   MunicipalityRankingItemSnapshot,
   MunicipalityRankingValue,
@@ -159,6 +161,17 @@ export function buildMunicipalityRankingSnapshots({
       valueCount: values.length,
       excludedEntityCount,
       source: { name: metric.source.displayName, url: metric.source.url },
+      // テーマ一覧カードのミニチャート用。20 ビン + 裾の underflow/overflow 畳み
+      // (ランキングページのヒストグラムと同じ純関数)。countInPref は item に持たない。
+      distribution: (
+        binMunicipalityValues(values, { binCount: 20 })?.bins ?? []
+      ).map((bin) => ({
+        x0: bin.x0,
+        x1: bin.x1,
+        count: bin.count,
+        isOverflow: bin.isOverflow,
+        isUnderflow: bin.isUnderflow,
+      })),
     },
     values: {
       schemaVersion: 1,

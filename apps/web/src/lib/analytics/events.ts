@@ -267,7 +267,11 @@ export type NavSurface =
   | 'survey_ranking'
   | 'survey_theme'
   | 'survey_blog'
-  | 'survey_category';
+  | 'survey_category'
+  // 市区町村ランキングの県内地図 (自治体クリック→市区町村ページ) / テーマ一覧カード
+  // (2026-09-01 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
+  | 'municipalities_map'
+  | 'municipalities_theme';
 
 export function trackNavClick(params: {
   label: string;

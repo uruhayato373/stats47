@@ -25,6 +25,20 @@ export interface MunicipalityRankingItemSnapshot {
   valueCount: number;
   excludedEntityCount: number;
   source: { name: string; url: string };
+  /**
+   * 全国分布のビン (テーマ一覧カードのミニチャート用に焼き込む)。
+   * builder が binMunicipalityValues (binCount 20・pref なし) から count 系だけを写す。
+   * 旧 snapshot には無い (optional で後方互換)。
+   */
+  distribution?: MunicipalityItemDistributionBin[];
+}
+
+export interface MunicipalityItemDistributionBin {
+  x0: number;
+  x1: number;
+  count: number;
+  isOverflow: boolean;
+  isUnderflow: boolean;
 }
 
 export interface MunicipalityRankingValuesSnapshot {
