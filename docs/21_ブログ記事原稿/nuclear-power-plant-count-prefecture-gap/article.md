@@ -3,8 +3,8 @@ title: "原子力発電所はなぜ33県で0か所なのか"
 seoTitle: "原子力発電所数ランキング2013｜1位福井県4か所・33都道府県が0か所"
 description: "原子力発電所は全国にまんべんなく分布しているわけではありません。国土数値情報の2013年データから、なぜ福井県や青森県に集中し、33の都道府県には1つも立地していないのかを地理と歴史の面から読み解きます。"
 slug: nuclear-power-plant-count-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 
