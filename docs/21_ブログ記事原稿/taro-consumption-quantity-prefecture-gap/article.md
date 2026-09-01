@@ -3,8 +3,8 @@ title: さといも消費量、山形はなぜ沖縄の9.6倍も食べるのか
 seoTitle: "さといも消費量ランキング2024｜1位山形2368g・沖縄の9.6倍"
 description: 同じ日本国内でも、さといもをどれだけ食べるかは県によって大きく違います。山形県は年間2,368グラムを消費する一方、沖縄県は247グラムにとどまり、その差は9.6倍にのぼります。2024年の家計調査データから、上位と下位の分布と、その背景にある食文化・気候の違いを読み解きます。
 slug: taro-consumption-quantity-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 
