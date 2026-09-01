@@ -21,6 +21,29 @@ updated: 2026-08-30
 
 ## 🔴 高 — 今月中に着手したい
 
+### [BLOG-PUBLISH-THUMBNAIL-GUARD-01] 背景1件の欠落で公開run全体が止まるのを per-slug skip にする
+
+タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:背景の無い slug を1件混ぜても他 slug が公開されること] [起票:2026-08-31]
+
+- **owner**: Claude Code
+- **症状**: `blog-auto-publish.yml` の「Gate + Stage + Publish each slug」は `set -e` の下で
+  `npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "$SLUG"` をガードなしに呼ぶ。
+  記事固有背景が無い slug で例外が出ると **ループごと停止し、後続 slug が 1 件も公開されない**。
+  run 33446804723 で実測: 20 件中 1 件目 (`airport-count-vs-general-project-investment-agriculture`)
+  の `記事固有背景がありません` で全体が exit 1 になり、公開 0 件。
+- **同じステップ内で非対称になっている**: ci-factual-gate と quality-gate は
+  `if ! ...; then SKIPPED=...; continue; fi` で該当 slug だけ飛ばす作りなのに、thumbnail 生成と
+  それ以降 (`push-generated-image-set` / `diff-push-r2`) にはこの扱いが無い。
+- **影響が滞留として現れている**: reconcile (`select-republish-slugs.mjs`) は現在 24 件を返すが、
+  そのうち少なくとも 24 件が背景未生成で、先頭で止まるため**どれも公開されない**。
+  背景待ちの記事が 1 件でもあると、背景が揃っている記事まで巻き添えで止まる構造。
+- **完了条件**: 背景が無い slug は SKIPPED に積んで次へ進み、他 slug が公開されること。
+  **背景の無い slug を 1 件混ぜた状態で run を通し、他が公開されることを実測する**
+  (全 PASS は「何も見ていない」と区別がつかない)。
+- **注意**: skip にしても「公開されない」事実は変わらないので、Step Summary と
+  `SKIPPED` に理由 (背景未生成) が残ることまでを条件に含める。黙って飛ばすと滞留が見えなくなる。
+- **関連**: `QUALITY-GATE-COVERAGE-01` / `CHART-VALIDATE-GATE-01`
+
 ### [CHART-VALIDATE-GATE-01] ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す
 
 タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:.github/workflows/generate-article-charts.yml の run で検出 slug 数 > 0] [起票:2026-08-31]
@@ -717,6 +740,72 @@ updated: 2026-08-30
 5. 完了した行は削除する。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
+
+### [MUNI-RANKING-EXPANSION-01] 市区町村ランキングの段②拡充 (第1バッチ実施済み・以降は実測待ち)
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-01]
+
+- **owner**: Claude Code (選定・監査) + オーナー (published 昇格の承認)
+- **第1バッチ (2026-09-01 オーナー承認・実施済み)**: census 系 6 key
+  (total-population / population-density-per-km2-inhabitable-area / young-population-ratio /
+  production-age-population-ratio / households / moving-in-excess-rate) + テーマ `population` を
+  published 昇格。品質判断の根拠は catalog コメントと expansion-survey。副産物:
+  moving-in-excess-rate の subtitle 誤り (「外国人移動者」→「外国人移動者を含む」) を是正
+- **第2バッチ以降の trigger**: 第1バッチ公開 28 日後 (2026-09-29 目安) の GSC/GA4 実測 +
+  doc 44 WP8 verdict、またはオーナーの明示承認。needs-review 39 (stale 36 等) と
+  SSDS 未使用 733 はその後
+- **調査結果 (2026-09-01 段①完了・SSOT = `.claude/state/municipalities/expansion-survey.json`)**:
+  - 既存 R2 候補 184 件の機械監査: **publish-candidate 139** / needs-review 39 (stale 36・null/zero-heavy 2・
+    極端%値 2) / catalog 判定済み 6。全 180 artifact の値分布 (定数/負値/値域) まで検査済み・fetch 失敗 0
+  - SSDS 市区町村系の未使用指標 **733 件** (全 901 中。同じ 1,913 団体軸・既存 pipeline で投入可能) を
+    code/name/unit 付きで列挙済み (`ssdsUntapped`)
+  - 非 SSDS は `.claude/state/estat-city-discovery.json` (2026-05-17・3,361 表) が全量列挙済み
+- **実行規律 (doc 44 準拠)**:
+  - `MUNICIPALITY_METRIC_AVAILABILITY` への published 追記は**人手品質判断のみ** — publish-candidate 139 は
+    機械 clean であって公開承認ではない (fiscal-strength-index が機械 clean でも意味的監査未了の実例)
+  - 小バッチ (数 key) → 実測 → 次バッチ。184 候補一括公開は禁止事項
+  - 選定は SSDS 未使用 733 より先に**既存 R2 済み 139** から (投入コストゼロ)
+- **完了条件**: 第1バッチの key 選定 → entityPolicy/valuePolicy の人手監査 → catalog 追記 → WP 手順で
+  R2/known/sitemap 整合 → 本番実測 200
+- **関連**: doc 44 WP8 / `MUNI-AI-CONTENT-01`
+
+### [MUNI-AI-CONTENT-01] 市区町村ランキング用 ai-content を別契約で新設する
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-08-31]
+
+- **owner**: Claude Code (ranking-content-author 系の拡張として)
+- **trigger (3 つすべて満たすまで着手しない)**:
+  1. doc 44 WP8 の実測判断で公開 municipality ranking key が増えること (目安 10 key 以上。現在 1)
+  2. `/municipalities/ranking/<key>` ページが解説を描画する設計になること (現状 item.json の
+     title/description のみで、解説スロットが無い = 消費者不在)
+  3. オーナーが市区町村面のコンテンツ投資を承認すること
+- **設計要点 (着手時の前提。正典 = `ranking-content-standards.md` §スコープ境界)**:
+  - namespace は `app/municipalities/ranking/<key>/ai-content.json` (県版 `app/ranking/` と混ぜない)
+  - スキーマは県版の流用禁止。1,717 自治体に「県別解説 47 件」の相当物は成立しないため、
+    上位/下位の要約・県別分布・母集団と除外自治体 (entityPolicy / valuePolicy) の説明・FAQ で構成する
+  - 監査は `app/municipalities/ranking/<key>/values.json` (cities.json 由来・1,717 entity) と
+    突合する専用実装。県版の EXPECTED_PREF_COUNT=47 / thin 40 / 7 地方区分は持ち込まない
+  - 共有するのは原理のみ: 数値突合 (number-audit の設計)・author/critic 分離・outbox → push → CI 公開
+- **完了条件**: pilot key 1 件で生成 → 専用監査 blocker 0 → critic PASS → ページ描画まで通し、
+  誤値を注入して監査が発火することを実測する
+- **関連**: doc 44 (`docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`) WP8 / `JAPAN-COMMENTARY-01`
+
+### [JAPAN-COMMENTARY-01] /japan の時系列解説は別コンテンツ型として要否から判断する
+
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-08-31]
+
+- **owner**: Claude Code (theme-designer / strategy-advisor と協働)
+- **trigger**: `/japan/*` の GSC 実測で流入が付き、解説の読者価値を検証する意味が出たとき
+  (doc 43 は「最低コンテンツ基準を満たす slug だけ active」— 需要実測が先)
+- **決めること**: ランキング ai-content の派生では作らない (正典 `ranking-content-standards.md`
+  §スコープ境界)。`/japan` の契約は `app/japan/<metric>/series.json` = 公式全国値の時系列で、
+  1位/最下位/県別解説の形が構造的に当てはまらない。候補は (a) theme の evidenceTopics /
+  markdown-section の系譜で人手キュレーション、(b) 時系列専用の生成契約を新設、(c) 作らない。
+  要否そのものから判断する
+- **完了条件**: 採否の判断が実測根拠つきで記録され、採用時は設計が別 backlog として起票されること
+- **関連**: doc 43 (`docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md`) / `MUNI-AI-CONTENT-01`
+
+
 
 ### [BUILD-PERF-PHASE34] CI cacheと型検査重複の実験
 

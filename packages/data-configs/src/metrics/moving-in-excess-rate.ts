@@ -3,7 +3,9 @@ import type { MetricConfig } from "../types";
 export const movingInExcessRate: MetricConfig = {
   "key": "moving-in-excess-rate",
   "title": "転入超過率",
-  "subtitle": "外国人移動者",
+  // e-Stat #A05307 は無印の総数系 (外国人含む)。#A05301 (日本人移動者) との区別。
+  // 旧 subtitle「外国人移動者」は外国人限定の系列と誤読させるため 2026-09-01 に是正。
+  "subtitle": "外国人移動者を含む",
   "unit": "％",
   "category": "population",
   "source": {

@@ -1,0 +1,9166 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-09-01T02:04:13.447Z",
+ "purpose": "段①調査 (read-only): 市区町村ページ拡充の意思決定材料。公開判断そのものではない (doc 44 — MUNICIPALITY_METRIC_AVAILABILITY への published 昇格は人手品質判断のみ)",
+ "method": {
+  "classification": "wp0-inventory.json の artifact 品質統計 (重複/unknownCode/nullRate/zeroRate/年カバレッジ) + 公開R2 app/stats/<key>/cities.json の最新年値分布 (定数/負値/値域) を機械判定。閾値は shape-gate / value-health と同思想 (zero-heavy>=0.9, null-heavy>=0.5, stale<2015, partial-coverage<800団体)",
+  "untappedSsds": "e-Stat getMetaInfo (0000020201..0211 / 0000020301..0311 の22表) の cat01 全列挙から、registry cityActive metric の pin 済み cdCat01 (175コード) を除外",
+  "regen": "wp0 は npx tsx .claude/scripts/municipalities/build-wp0-inventory.ts。本ファイルの値分布・untapped は同手順で再導出可能 (公開R2 + e-Stat metaInfo のみ・認証不要はR2側)"
+ },
+ "summary": {
+  "candidates": 184,
+  "verdicts": {
+   "needs-review": 39,
+   "publish-candidate": 139,
+   "already-unknown": 5,
+   "already-published": 1
+  },
+  "ssdsUniverse": {
+   "tables": 22,
+   "indicatorsTotal": 901,
+   "base": 834,
+   "ratio": 67,
+   "untapped": 733,
+   "usedCat01Codes": 175
+  },
+  "nonSsdsDiscovery": {
+   "asOf": "2026-05-17",
+   "totalTables": 3361,
+   "note": ".claude/state/estat-city-discovery.json (市区町村area軸を持つ全statsDataId)。主な調査: 住宅・土地統計993 / 国勢調査592 / 就業構造387 / 作物統計320 / 人口動態290 / 漁業センサス239 / 地域保健142 / 経済センサス224"
+  }
+ },
+ "classification": [
+  {
+   "key": "abandoned-cultivated-land-area",
+   "title": "耕地放棄面積",
+   "unit": "ｈａ",
+   "category": "agriculture",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0544,
+   "zeroRate": 0.0177,
+   "min": 0,
+   "max": 3013,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "agricultural-output",
+   "title": "農業産出額",
+   "unit": "百万円",
+   "category": "agriculture",
+   "bucket": "both",
+   "latestYear": "2006",
+   "entitiesLatest": 1912,
+   "nullRate": 0.1025,
+   "zeroRate": 0.0029,
+   "min": 0,
+   "max": 72440,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2006"
+   ]
+  },
+  {
+   "key": "annual-sales-amount-per-employee",
+   "title": "商業年間商品販売額",
+   "unit": "万円",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0094,
+   "zeroRate": 0.0053,
+   "min": 0,
+   "max": 27321,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "annual-sales-amount-per-establishment",
+   "title": "商業年間商品販売額",
+   "unit": "百万円",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0094,
+   "zeroRate": 0.0053,
+   "min": 0,
+   "max": 7844.1,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "annual-sales-amount",
+   "title": "商業年間商品販売額",
+   "unit": "百万円",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0089,
+   "zeroRate": 0.0058,
+   "min": 0,
+   "max": 168563606,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "births",
+   "title": "出生数",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0042,
+   "min": 0,
+   "max": 62460,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "civil-engineering-expense-municipal",
+   "title": "土木費",
+   "unit": "千円",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 12189,
+   "max": 372774196,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "commute-by-bicycle",
+   "title": "自宅外通勤・通学者数（自転車）",
+   "unit": "人",
+   "category": "tourism",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0021,
+   "min": 0,
+   "max": 498941,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "commute-by-bus",
+   "title": "自宅外通勤・通学者数（乗合バス）",
+   "unit": "人",
+   "category": "tourism",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0131,
+   "min": 0,
+   "max": 93055,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "commute-by-car",
+   "title": "自宅外通勤・通学者数（自家用車）",
+   "unit": "人",
+   "category": "tourism",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 351689,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "commute-by-motorcycle",
+   "title": "自宅外通勤・通学者数（オートバイ）",
+   "unit": "人",
+   "category": "tourism",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0225,
+   "min": 0,
+   "max": 48285,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "commute-by-train",
+   "title": "自宅外通勤・通学者数（鉄道・電車）",
+   "unit": "人",
+   "category": "tourism",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0314,
+   "min": 0,
+   "max": 2067888,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "commute-on-foot",
+   "title": "自宅外通勤・通学者数（徒歩）",
+   "unit": "人",
+   "category": "tourism",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 347752,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "commuter-ratio-from-other-municipalities",
+   "title": "他市区町村からの通勤者比率",
+   "unit": "％",
+   "category": "laborwage",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 0.2,
+   "max": 2788.6,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "extreme-percent: 都心区・飛島村級の昼夜間比/流入比は1000%超が実在しうる。単位と定義の人手確認が要る"
+   ]
+  },
+  {
+   "key": "commuter-ratio-to-other-municipalities",
+   "title": "他市区町村への通勤者比率",
+   "unit": "％",
+   "category": "laborwage",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.001,
+   "min": 0,
+   "max": 81.9,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "commuters-total",
+   "title": "自宅外通勤・通学者数",
+   "unit": "人",
+   "category": "tourism",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 3973407,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "crime-rate-per-1k",
+   "title": "刑法犯認知件数（人口千人当たり）",
+   "unit": "件",
+   "category": "safetyenvironment",
+   "bucket": "city-only",
+   "latestYear": "2005",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0335,
+   "min": 0,
+   "max": 191.03,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2005"
+   ]
+  },
+  {
+   "key": "criminal-recognition-count",
+   "title": "刑法犯認知件数",
+   "unit": "件",
+   "category": "safetyenvironment",
+   "bucket": "both",
+   "latestYear": "2008",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0073,
+   "zeroRate": 0.0047,
+   "min": 0,
+   "max": 153218,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2008"
+   ]
+  },
+  {
+   "key": "cultivated-area",
+   "title": "耕地面積",
+   "unit": "ｈａ",
+   "category": "agriculture",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.1014,
+   "zeroRate": 0.0012,
+   "min": 0,
+   "max": 63200,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "culture-recreation-cost-all-households",
+   "title": "教養娯楽費（全世帯）",
+   "unit": "円",
+   "category": "economy",
+   "bucket": "both",
+   "latestYear": null,
+   "entitiesLatest": null,
+   "nullRate": null,
+   "zeroRate": null,
+   "min": null,
+   "max": null,
+   "verdict": "already-unknown",
+   "blockers": [
+    "absent-artifact"
+   ],
+   "warns": []
+  },
+  {
+   "key": "current-balance-ratio-city",
+   "title": "経常収支比率（市町村財政）",
+   "unit": "％",
+   "category": "administrativefinancial",
+   "bucket": "city-only",
+   "latestYear": "2021",
+   "entitiesLatest": 1742,
+   "nullRate": 0,
+   "zeroRate": 0,
+   "min": 46.8,
+   "max": 118.9,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "day-time-population-ratio",
+   "title": "昼夜間人口比率",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 67.1,
+   "max": 1355.4,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "extreme-percent: 都心区・飛島村級の昼夜間比/流入比は1000%超が実在しうる。単位と定義の人手確認が要る"
+   ]
+  },
+  {
+   "key": "day-time-population",
+   "title": "昼間人口",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0,
+   "min": 205,
+   "max": 12346348,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "death-count",
+   "title": "死亡数",
+   "unit": "人",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 90507,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "densely-inhabited-district-population-density",
+   "title": "人口集中地区人口密度",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.4856,
+   "zeroRate": 0,
+   "min": 1025.2,
+   "max": 23182.1,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "densely-inhabited-district-population",
+   "title": "人口集中地区人口",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.4856,
+   "zeroRate": 0,
+   "min": 5015,
+   "max": 9733276,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "densely-populated-area-change-rate",
+   "title": "人口集中地区面積の変化率",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.4903,
+   "zeroRate": 0.1005,
+   "min": -46.36,
+   "max": 190.72,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "densely-populated-area",
+   "title": "人口集中地区面積",
+   "unit": "ｋｍ2",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.4856,
+   "zeroRate": 0,
+   "min": 0.68,
+   "max": 627.53,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "dental-clinic-count",
+   "title": "歯科診療所数",
+   "unit": "施設",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0419,
+   "min": 0,
+   "max": 8263,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "dentists-in-medical-facilities",
+   "title": "歯科医師数",
+   "unit": "人",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0413,
+   "min": 0,
+   "max": 13530,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "department-store-count-per-100k",
+   "title": "百貨店数",
+   "unit": "店",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2006",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0157,
+   "zeroRate": 0.5226,
+   "min": 0,
+   "max": 32.54,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2006"
+   ]
+  },
+  {
+   "key": "department-supermarket-count-per-100k",
+   "title": "百貨店、総合スーパー数",
+   "unit": "店",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2021",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.6953,
+   "min": 0,
+   "max": 28.56,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "department-supermarket-count",
+   "title": "百貨店、総合スーパー数",
+   "unit": "店",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2021",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.6954,
+   "min": 0,
+   "max": 86,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "divorces",
+   "title": "離婚件数",
+   "unit": "組",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0209,
+   "min": 0,
+   "max": 14273,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "earthquake-retrofit-housing",
+   "title": "耐震工事をした住宅数（持ち家）",
+   "unit": "住宅",
+   "category": "construction",
+   "bucket": "both",
+   "latestYear": "2008",
+   "entitiesLatest": 1913,
+   "nullRate": 0.3419,
+   "zeroRate": 0,
+   "min": 10,
+   "max": 55930,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2008"
+   ]
+  },
+  {
+   "key": "education-cost-all-households",
+   "title": "教育費",
+   "unit": "円",
+   "category": "economy",
+   "bucket": "both",
+   "latestYear": null,
+   "entitiesLatest": null,
+   "nullRate": null,
+   "zeroRate": null,
+   "min": null,
+   "max": null,
+   "verdict": "already-unknown",
+   "blockers": [
+    "absent-artifact"
+   ],
+   "warns": []
+  },
+  {
+   "key": "education-expense-municipal",
+   "title": "教育費",
+   "unit": "千円",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 64316,
+   "max": 648453031,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "elderly-couple-only-household-ratio",
+   "title": "高齢夫婦のみの世帯の割合",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 1.88,
+   "max": 31.51,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "elderly-population-ratio",
+   "title": "65歳以上人口割合",
+   "unit": "％",
+   "category": "population",
+   "bucket": "city-only",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0016,
+   "min": 0,
+   "max": 65.239,
+   "verdict": "already-published",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "elderly-workers-ratio",
+   "title": "高齢就業者割合",
+   "unit": "％",
+   "category": "laborwage",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 13.92,
+   "max": 81.51,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "elementary-school-children-count",
+   "title": "小学校児童数",
+   "unit": "人",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.022,
+   "min": 0,
+   "max": 410306,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "elementary-school-count-per-100km2-habitable",
+   "title": "小学校数",
+   "unit": "校",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.022,
+   "min": 0,
+   "max": 242.29,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "elementary-school-count",
+   "title": "小学校数",
+   "unit": "校",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.022,
+   "min": 0,
+   "max": 848,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "elementary-school-teachers",
+   "title": "小学校教員数",
+   "unit": "人",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.022,
+   "min": 0,
+   "max": 23882,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "employed-people-ratio-primary",
+   "title": "第1次産業就業者比率",
+   "unit": "％",
+   "category": "laborwage",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 0.02,
+   "max": 75.62,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "employed-people-ratio-secondary",
+   "title": "第2次産業就業者比率",
+   "unit": "％",
+   "category": "laborwage",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 1.74,
+   "max": 52.5,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "employed-people-ratio-tertiary",
+   "title": "第3次産業就業者比率",
+   "unit": "％",
+   "category": "laborwage",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 20.67,
+   "max": 96.12,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "employed-people-ratio",
+   "title": "就業者比率",
+   "unit": "％",
+   "category": "laborwage",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 89.365,
+   "max": 100,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "fiscal-strength-index",
+   "title": "財政力指数",
+   "unit": "指数",
+   "category": "administrativefinancial",
+   "bucket": "city-only",
+   "latestYear": "2021",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.1019,
+   "min": 0,
+   "max": 2.1,
+   "verdict": "already-unknown",
+   "blockers": [],
+   "warns": [
+    "catalog-unknown: 財政主体・特別区・行政区・0と欠測の監査未了"
+   ]
+  },
+  {
+   "key": "foreign-population-per-100k",
+   "title": "外国人人口（人口10万人当たり）",
+   "unit": "人",
+   "category": "international",
+   "bucket": "city-only",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0037,
+   "min": 0,
+   "max": 18991.7,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "foreign-resident-count-per-100k",
+   "title": "外国人人口",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0021,
+   "min": 0,
+   "max": 18991.7,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "foreign-resident-count",
+   "title": "外国人人口",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0026,
+   "min": 0,
+   "max": 403171,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "foreign-resident-population",
+   "title": "住民基本台帳人口（外国人）",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.001,
+   "min": 0,
+   "max": 605506,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "forest-area",
+   "title": "林野面積",
+   "unit": "ｈａ",
+   "category": "landweather",
+   "bucket": "both",
+   "latestYear": "2019",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.078,
+   "min": 0,
+   "max": 190332,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "future-burden-ratio-city",
+   "title": "将来負担比率（市町村財政）",
+   "unit": "％",
+   "category": "administrativefinancial",
+   "bucket": "city-only",
+   "latestYear": "2021",
+   "entitiesLatest": 925,
+   "nullRate": 0,
+   "zeroRate": 0,
+   "min": 0.1,
+   "max": 274,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "garbage-collection-population",
+   "title": "ごみ計画収集人口",
+   "unit": "人",
+   "category": "safetyenvironment",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 161,
+   "max": 9632837,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "garbage-final-disposal",
+   "title": "ごみ最終処分量",
+   "unit": "t",
+   "category": "safetyenvironment",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.1014,
+   "zeroRate": 0.0541,
+   "min": 0,
+   "max": 182692,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "garbage-total-output",
+   "title": "ごみ総排出量",
+   "unit": "t",
+   "category": "safetyenvironment",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.1014,
+   "zeroRate": 0,
+   "min": 62,
+   "max": 2977747,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "general-clinic-count-per-100k",
+   "title": "一般診療所数",
+   "unit": "施設",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0016,
+   "min": 0,
+   "max": 987.7,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "general-clinic-count-per-100km2",
+   "title": "一般診療所数",
+   "unit": "施設",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0016,
+   "min": 0,
+   "max": 7620,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "general-clinic-count",
+   "title": "一般診療所数",
+   "unit": "施設",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0016,
+   "min": 0,
+   "max": 11628,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "general-hospital-count-per-100k",
+   "title": "一般病院数",
+   "unit": "施設",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.2429,
+   "min": 0,
+   "max": 77.1,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "general-hospital-count-per-100km2",
+   "title": "一般病院数",
+   "unit": "施設",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.2475,
+   "min": 0,
+   "max": 203.1,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "general-hospital-count",
+   "title": "一般病院数",
+   "unit": "施設",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.2475,
+   "min": 0,
+   "max": 410,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "general-hospital-per-100k",
+   "title": "一般病院数（人口10万人当たり）",
+   "unit": "施設",
+   "category": "socialsecurity",
+   "bucket": "city-only",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.2441,
+   "min": 0,
+   "max": 77.1,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "habitable-area-ratio",
+   "title": "可住地面積割合",
+   "unit": "％",
+   "category": "landweather",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0,
+   "min": 1.7,
+   "max": 100,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "habitable-area",
+   "title": "可住地面積",
+   "unit": "ｈａ",
+   "category": "landweather",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0,
+   "min": 128,
+   "max": 80301,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "healthcare-cost-all-households",
+   "title": "保健医療費（全世帯）",
+   "unit": "円",
+   "category": "economy",
+   "bucket": "both",
+   "latestYear": null,
+   "entitiesLatest": null,
+   "nullRate": null,
+   "zeroRate": null,
+   "min": null,
+   "max": null,
+   "verdict": "already-unknown",
+   "blockers": [
+    "absent-artifact"
+   ],
+   "warns": []
+  },
+  {
+   "key": "high-school-count-per-100km2-habitable",
+   "title": "高等学校数",
+   "unit": "校",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.248,
+   "min": 0,
+   "max": 247.93,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "high-school-count",
+   "title": "高等学校数",
+   "unit": "校",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.2478,
+   "min": 0,
+   "max": 307,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "households",
+   "title": "世帯数",
+   "unit": "世帯",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 5215850,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "housing-cost-all-households",
+   "title": "住居費（全世帯）",
+   "unit": "円",
+   "category": "economy",
+   "bucket": "both",
+   "latestYear": null,
+   "entitiesLatest": null,
+   "nullRate": null,
+   "zeroRate": null,
+   "min": null,
+   "max": null,
+   "verdict": "already-unknown",
+   "blockers": [
+    "absent-artifact"
+   ],
+   "warns": []
+  },
+  {
+   "key": "housing-floor-area",
+   "title": "1住宅当たり延べ面積",
+   "unit": "m²",
+   "category": "construction",
+   "bucket": "city-only",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.3576,
+   "min": 0,
+   "max": 211.42,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "industrial-land-price",
+   "title": "標準価格（工業地）",
+   "unit": "円/m2",
+   "category": "miningindustry",
+   "bucket": "city-only",
+   "latestYear": "2005",
+   "entitiesLatest": 1912,
+   "nullRate": 0.7772,
+   "zeroRate": 0,
+   "min": 3800,
+   "max": 270000,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "null-heavy:0.7772",
+    "stale:2005"
+   ]
+  },
+  {
+   "key": "integrated-kindergarten-enrollment",
+   "title": "幼保連携型認定こども園在園者数",
+   "unit": "人",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.3706,
+   "min": 0,
+   "max": 20552,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "intellectual-disability-support-facility-capacity",
+   "title": "知的障害者援護施設定員数",
+   "unit": "人",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2011",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0183,
+   "zeroRate": 0.6853,
+   "min": 0,
+   "max": 1198,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2011"
+   ]
+  },
+  {
+   "key": "intellectual-disability-support-facility-residents",
+   "title": "知的障害者援護施設在所者数",
+   "unit": "人",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2011",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0183,
+   "zeroRate": 0.6858,
+   "min": 0,
+   "max": 1078,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2011"
+   ]
+  },
+  {
+   "key": "japanese-movers-in",
+   "title": "転入者数",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0,
+   "min": 12,
+   "max": 605194,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "japanese-movers-out",
+   "title": "転出者数",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0,
+   "min": 14,
+   "max": 550852,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "japanese-population",
+   "title": "日本人人口",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 9084294,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "junior-high-school-count-per-100km2-habitable",
+   "title": "中学校数",
+   "unit": "校",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0272,
+   "min": 0,
+   "max": 239.15,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "junior-high-school-count",
+   "title": "中学校数",
+   "unit": "校",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0272,
+   "min": 0,
+   "max": 518,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "junior-high-school-students-count",
+   "title": "中学校生徒数",
+   "unit": "人",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0277,
+   "min": 0,
+   "max": 205712,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "junior-high-school-teachers",
+   "title": "中学校教員数",
+   "unit": "人",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0277,
+   "min": 0,
+   "max": 13113,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "kei-car-count",
+   "title": "軽自動車等台数",
+   "unit": "台",
+   "category": "tourism",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 158,
+   "max": 864867,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "large-retail-store-count-per-100k",
+   "title": "大型小売店数",
+   "unit": "店",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2006",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0157,
+   "zeroRate": 0.256,
+   "min": 0,
+   "max": 232.18,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2006"
+   ]
+  },
+  {
+   "key": "library-count-per-million",
+   "title": "図書館数",
+   "unit": "館",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2021",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.2058,
+   "min": 0,
+   "max": 5917.2,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "major-lake-area",
+   "title": "主要湖沼面積",
+   "unit": "ｈａ",
+   "category": "landweather",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.9373,
+   "min": 0,
+   "max": 18193,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "zero-heavy:0.9373"
+   ]
+  },
+  {
+   "key": "manufacturing-employees",
+   "title": "製造業従業者数",
+   "unit": "人",
+   "category": "miningindustry",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0078,
+   "min": 0,
+   "max": 149281,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "manufacturing-establishments",
+   "title": "製造業事業所数",
+   "unit": "事業所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0078,
+   "min": 0,
+   "max": 12197,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "manufacturing-net-value-added-private",
+   "title": "純付加価値額（製造業）",
+   "unit": "百万円",
+   "category": "miningindustry",
+   "bucket": "city-only",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0465,
+   "zeroRate": 0.0022,
+   "min": -4923,
+   "max": 2900142,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "manufacturing-sales-private",
+   "title": "売上金額（製造業）",
+   "unit": "百万円",
+   "category": "miningindustry",
+   "bucket": "city-only",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0434,
+   "zeroRate": 0.0016,
+   "min": 0,
+   "max": 14791622,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "manufacturing-shipment-amount",
+   "title": "製造品出荷額等",
+   "unit": "百万円",
+   "category": "miningindustry",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0298,
+   "zeroRate": 0.0081,
+   "min": 0,
+   "max": 20527151,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "manufacturing-shipment",
+   "title": "製造品出荷額等",
+   "unit": "百万円",
+   "category": "miningindustry",
+   "bucket": "city-only",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0387,
+   "min": 0,
+   "max": 16814436,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "marriages",
+   "title": "婚姻件数",
+   "unit": "組",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0052,
+   "min": 0,
+   "max": 56920,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "moped-count",
+   "title": "原動機付自転車台数",
+   "unit": "台",
+   "category": "tourism",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 11,
+   "max": 300871,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "motorcycle-count",
+   "title": "二輪の小型自動車台数",
+   "unit": "台",
+   "category": "tourism",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0.0029,
+   "min": 0,
+   "max": 107142,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "movers-in",
+   "title": "転入者数",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0,
+   "min": 14,
+   "max": 715115,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "movers-out",
+   "title": "転出者数",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0,
+   "min": 16,
+   "max": 656311,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "moving-in-excess-rate-japanese",
+   "title": "転入超過率",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0073,
+   "min": -15.65,
+   "max": 3.46,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "moving-in-excess-rate",
+   "title": "転入超過率",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0084,
+   "min": -14.98,
+   "max": 3.21,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "moving-in-rate-japanese",
+   "title": "転入率",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 0.91,
+   "max": 19.64,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "moving-in-rate",
+   "title": "転入率",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 0.95,
+   "max": 20.11,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "moving-out-rate-japanese",
+   "title": "転出率",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 1.39,
+   "max": 31.48,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "moving-out-rate",
+   "title": "転出率",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 1.39,
+   "max": 31.72,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "municipal-bonds-outstanding",
+   "title": "地方債",
+   "unit": "千円",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0.0115,
+   "min": 0,
+   "max": 142108096,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "municipal-general-administration-staff",
+   "title": "一般行政部門職員数",
+   "unit": "人",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 13,
+   "max": 56108,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "municipal-resident-tax",
+   "title": "市町村民税",
+   "unit": "千円",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 987,
+   "nullRate": 0.1733,
+   "zeroRate": 0,
+   "min": 107523,
+   "max": 1121962317,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "national-health-insurance-benefits",
+   "title": "国民健康保険給付金額",
+   "unit": "千円",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.1239,
+   "zeroRate": 0,
+   "min": 25074,
+   "max": 609162386,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "new-condo-starts",
+   "title": "着工新設分譲住宅数",
+   "unit": "戸",
+   "category": "construction",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 987,
+   "nullRate": 0,
+   "zeroRate": 0.0517,
+   "min": 0,
+   "max": 34143,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "new-housing-floor-area",
+   "title": "着工新設住宅床面積",
+   "unit": "m2",
+   "category": "construction",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 987,
+   "nullRate": 0,
+   "zeroRate": 0,
+   "min": 130,
+   "max": 6516603,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "new-housing-starts",
+   "title": "着工新設住宅戸数",
+   "unit": "戸",
+   "category": "construction",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 987,
+   "nullRate": 0,
+   "zeroRate": 0,
+   "min": 1,
+   "max": 103736,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "new-owner-occupied-starts",
+   "title": "着工新設持家数",
+   "unit": "戸",
+   "category": "construction",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 987,
+   "nullRate": 0,
+   "zeroRate": 0.001,
+   "min": 0,
+   "max": 8256,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "new-rental-starts",
+   "title": "着工新設貸家数",
+   "unit": "戸",
+   "category": "construction",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 987,
+   "nullRate": 0,
+   "zeroRate": 0.0385,
+   "min": 0,
+   "max": 60972,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "nuclear-family-household-count",
+   "title": "核家族世帯数",
+   "unit": "世帯",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 2218797,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "nuclear-family-households-ratio",
+   "title": "核家族世帯割合",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 3.63,
+   "max": 75.9,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "number-of-commercial-employees-wholesale-retail",
+   "title": "商業従業者数",
+   "unit": "人",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2021",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 1332336,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "number-of-establishments-agriculture-forestry-fisheries",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0283,
+   "min": 0,
+   "max": 273,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-agriculture-forestry",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0351,
+   "min": 0,
+   "max": 259,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-construction",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0031,
+   "min": 0,
+   "max": 29817,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-economic-census-basic-survey",
+   "title": "事業所数",
+   "unit": "事業所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.001,
+   "min": 0,
+   "max": 526748,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-education-learning-support",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0037,
+   "min": 0,
+   "max": 14474,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-establishment-corporate-statistics",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2006",
+   "entitiesLatest": 1912,
+   "nullRate": 0.0115,
+   "zeroRate": 0,
+   "min": 28,
+   "max": 557107,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2006"
+   ]
+  },
+  {
+   "key": "number-of-establishments-finance-insurance",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0466,
+   "min": 0,
+   "max": 9540,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-fisheries",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.6,
+   "min": 0,
+   "max": 79,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-information-communication",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.1932,
+   "min": 0,
+   "max": 20414,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-manufacturing",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0031,
+   "min": 0,
+   "max": 41641,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-medical-welfare",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0031,
+   "min": 0,
+   "max": 36309,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-mining-quarrying-gravel-extraction",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.5869,
+   "min": 0,
+   "max": 84,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-real-estate-leasing",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0429,
+   "min": 0,
+   "max": 50044,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-transport-post",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.012,
+   "min": 0,
+   "max": 14060,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "number-of-establishments-wholesale-retail",
+   "title": "事業所数",
+   "unit": "所",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0021,
+   "min": 0,
+   "max": 126805,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "nursing-welfare-facility-count-per-100k-65plus",
+   "title": "介護老人福祉施設数",
+   "unit": "所",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2015",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0031,
+   "zeroRate": 0.0818,
+   "min": 0,
+   "max": 2439,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "outflow-commuter-student-population",
+   "title": "流出人口（他県で従業・通学している人口）",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.022,
+   "min": 0,
+   "max": 472718,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "owner-occupied-housing-ratio",
+   "title": "持ち家比率",
+   "unit": "％",
+   "category": "construction",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.3576,
+   "zeroRate": 0,
+   "min": 12.4,
+   "max": 97.4,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "penal-code-offenses-recognized-per-1000",
+   "title": "刑法犯認知件数",
+   "unit": "件",
+   "category": "safetyenvironment",
+   "bucket": "both",
+   "latestYear": "2005",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0314,
+   "zeroRate": 0.0022,
+   "min": 0,
+   "max": 191.03,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2005"
+   ]
+  },
+  {
+   "key": "per-taxpayer-income",
+   "title": "納税義務者1人当たり課税所得",
+   "unit": "千円",
+   "category": "economy",
+   "bucket": "city-only",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0894,
+   "min": 0,
+   "max": 13968,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "per-taxpayer-taxable-income",
+   "title": "課税対象所得",
+   "unit": "千円",
+   "category": "economy",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 2447.9,
+   "max": 17808,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "pharmacist-count",
+   "title": "薬剤師数",
+   "unit": "人",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.057,
+   "min": 0,
+   "max": 42159,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "physical-disability-rehabilitation-facility-capacity",
+   "title": "身体障害者更生援護施設定員数",
+   "unit": "人",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2011",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0183,
+   "zeroRate": 0.8845,
+   "min": 0,
+   "max": 421,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2011"
+   ]
+  },
+  {
+   "key": "physical-disability-rehabilitation-facility-residents",
+   "title": "身体障害者更生援護施設在所者数",
+   "unit": "人",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2011",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0183,
+   "zeroRate": 0.886,
+   "min": 0,
+   "max": 347,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2011"
+   ]
+  },
+  {
+   "key": "physicians-in-medical-facilities",
+   "title": "医師数",
+   "unit": "人",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0157,
+   "min": 0,
+   "max": 38752,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "population-density-habitable",
+   "title": "人口密度（可住地面積1km²当たり）",
+   "unit": "人",
+   "category": "population",
+   "bucket": "city-only",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0016,
+   "min": 0,
+   "max": 23182.1,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "population-density-per-km2-inhabitable-area",
+   "title": "可住地面積１km2当たり人口密度",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 23182.1,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "production-age-population-ratio",
+   "title": "15～64歳人口割合",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 31.749,
+   "max": 89.02,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "psychiatric-hospital-count",
+   "title": "精神科病院数",
+   "unit": "施設",
+   "category": "socialsecurity",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.6761,
+   "min": 0,
+   "max": 26,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "public-assistance-expense-municipal",
+   "title": "扶助費",
+   "unit": "千円",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 2149,
+   "max": 1422479179,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "public-hall-count-per-million",
+   "title": "公民館数",
+   "unit": "館",
+   "category": "educationsports",
+   "bucket": "both",
+   "latestYear": "2021",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.2283,
+   "min": 0,
+   "max": 29342.7,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "ratio-65-plus",
+   "title": "65歳以上人口割合",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 10.272,
+   "max": 65.239,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "ratio-never-married-15-plus",
+   "title": "未婚者割合",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 13.44221,
+   "max": 44.6595,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "real-balance-ratio-city",
+   "title": "実質収支比率（市町村財政）",
+   "unit": "％",
+   "category": "administrativefinancial",
+   "bucket": "city-only",
+   "latestYear": "2021",
+   "entitiesLatest": 1718,
+   "nullRate": 0,
+   "zeroRate": 0,
+   "min": 0.1,
+   "max": 64.4,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "real-public-debt-service-ratio-city",
+   "title": "実質公債費比率（市町村財政）",
+   "unit": "％",
+   "category": "administrativefinancial",
+   "bucket": "city-only",
+   "latestYear": "2021",
+   "entitiesLatest": 1742,
+   "nullRate": 0,
+   "zeroRate": 0.0046,
+   "min": -7.2,
+   "max": 68.3,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "restaurant-count-per-1000",
+   "title": "飲食店数",
+   "unit": "店",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2006",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0157,
+   "zeroRate": 0.0021,
+   "min": 0,
+   "max": 100.51,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2006"
+   ]
+  },
+  {
+   "key": "retail-store-count-alt",
+   "title": "小売店数",
+   "unit": "店",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2021",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 65655,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "retail-store-count-per-1000",
+   "title": "小売店数",
+   "unit": "店",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2006",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0157,
+   "zeroRate": 0,
+   "min": 2.93,
+   "max": 86.65,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2006"
+   ]
+  },
+  {
+   "key": "retail-store-count",
+   "title": "小売店数",
+   "unit": "店",
+   "category": "commercial",
+   "bucket": "both",
+   "latestYear": "2021",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 65655,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "retail-stores-per",
+   "title": "小売店数",
+   "unit": "店",
+   "category": "commercial",
+   "bucket": "city-only",
+   "latestYear": "2006",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0157,
+   "min": 0,
+   "max": 86.65,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2006"
+   ]
+  },
+  {
+   "key": "sales-amount-private",
+   "title": "売上金額",
+   "unit": "百万円",
+   "category": "economy",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0,
+   "min": 148,
+   "max": 460145172,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "sanitation-expense-municipal",
+   "title": "衛生費",
+   "unit": "千円",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 56917,
+   "max": 460745733,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "secondary-employed-people-ratio-tertiary",
+   "title": "第2次・第3次産業就業者比率",
+   "unit": "％",
+   "category": "laborwage",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 24.06,
+   "max": 98.9,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "single-father-households",
+   "title": "父子世帯数",
+   "unit": "世帯",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0377,
+   "min": 0,
+   "max": 3825,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "single-mother-households",
+   "title": "母子世帯数",
+   "unit": "世帯",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0031,
+   "min": 0,
+   "max": 34893,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "single-person-household-old-population-ratio",
+   "title": "65歳以上世帯員の単独世帯の割合",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 4.51,
+   "max": 35.28,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "single-person-households",
+   "title": "単独世帯数",
+   "unit": "世帯",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 2786593,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "solar-power-housing",
+   "title": "太陽光を利用した発電機器のある住宅数",
+   "unit": "戸",
+   "category": "construction",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.3576,
+   "zeroRate": 0,
+   "min": 10,
+   "max": 63800,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "standard-fiscal-demand-municipality",
+   "title": "基準財政需要額",
+   "unit": "千円",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0.1019,
+   "zeroRate": 0,
+   "min": 280415,
+   "max": 766065375,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "standard-fiscal-revenue-municipality",
+   "title": "基準財政収入額",
+   "unit": "千円",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0.1019,
+   "zeroRate": 0,
+   "min": 31479,
+   "max": 727536870,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "taxpayer-count-equal",
+   "title": "納税義務者数",
+   "unit": "人",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 110,
+   "max": 5650976,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "taxpayer-count-income",
+   "title": "納税義務者数",
+   "unit": "人",
+   "category": "economy",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 101,
+   "max": 5229011,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "total-area-excluding-northern-territories-and-takeshima",
+   "title": "総面積",
+   "unit": "ｈａ",
+   "category": "landweather",
+   "bucket": "both",
+   "latestYear": "2024",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0,
+   "min": 347,
+   "max": 217761,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "total-area-prefecture-ratio",
+   "title": "総面積（都道府県面積に占める割合）",
+   "unit": "％",
+   "category": "landweather",
+   "bucket": "city-only",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.001,
+   "min": 0,
+   "max": 29.23,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "total-assessed-land-area",
+   "title": "評価総地積",
+   "unit": "ｍ2",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.1014,
+   "zeroRate": 0,
+   "min": 1266315,
+   "max": 887088495,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "total-population",
+   "title": "総人口",
+   "unit": "人",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 9733276,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "traffic-accident-count-per-population",
+   "title": "交通事故発生件数",
+   "unit": "件",
+   "category": "safetyenvironment",
+   "bucket": "both",
+   "latestYear": "2005",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0204,
+   "zeroRate": 0.008,
+   "min": 0,
+   "max": 4550.2,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2005"
+   ]
+  },
+  {
+   "key": "traffic-accident-count",
+   "title": "交通事故発生件数",
+   "unit": "件",
+   "category": "safetyenvironment",
+   "bucket": "both",
+   "latestYear": "2009",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0073,
+   "zeroRate": 0.009,
+   "min": 0,
+   "max": 38980,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2009"
+   ]
+  },
+  {
+   "key": "traffic-accident-per-100k",
+   "title": "交通事故発生件数（人口10万人当たり）",
+   "unit": "件",
+   "category": "safetyenvironment",
+   "bucket": "city-only",
+   "latestYear": "2005",
+   "entitiesLatest": 1913,
+   "nullRate": 0,
+   "zeroRate": 0.0282,
+   "min": 0,
+   "max": 4550.2,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2005"
+   ]
+  },
+  {
+   "key": "unemployment-rate",
+   "title": "完全失業率",
+   "unit": "％",
+   "category": "laborwage",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0005,
+   "min": 0,
+   "max": 10.6,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "urban-planning-area",
+   "title": "都市計画区域指定面積",
+   "unit": "ha",
+   "category": "infrastructure",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0.2107,
+   "min": 0,
+   "max": 72645,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "vacant-housing-ratio",
+   "title": "空き家比率",
+   "unit": "％",
+   "category": "construction",
+   "bucket": "both",
+   "latestYear": "2023",
+   "entitiesLatest": 1913,
+   "nullRate": 0.3576,
+   "zeroRate": 0,
+   "min": 3.58,
+   "max": 70.38,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "welfare-expense-municipal",
+   "title": "民生費",
+   "unit": "千円",
+   "category": "administrativefinancial",
+   "bucket": "both",
+   "latestYear": "2022",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0894,
+   "zeroRate": 0,
+   "min": 45511,
+   "max": 2281349873,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "wholesale-annual-sales-amount",
+   "title": "卸売業年間商品販売額",
+   "unit": "百万円",
+   "category": "economy",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.045,
+   "zeroRate": 0.0432,
+   "min": 0,
+   "max": 153157460,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "woodland-area",
+   "title": "森林面積",
+   "unit": "ｈａ",
+   "category": "agriculture",
+   "bucket": "both",
+   "latestYear": "2019",
+   "entitiesLatest": 1913,
+   "nullRate": 0.001,
+   "zeroRate": 0.0785,
+   "min": 0,
+   "max": 189417,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  },
+  {
+   "key": "workers-agriculture-forestry-fishery",
+   "title": "従業者数",
+   "unit": "人",
+   "category": "economy",
+   "bucket": "both",
+   "latestYear": "2014",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0.0283,
+   "min": 0,
+   "max": 2344,
+   "verdict": "needs-review",
+   "blockers": [],
+   "warns": [
+    "stale:2014"
+   ]
+  },
+  {
+   "key": "young-population-ratio",
+   "title": "15歳未満人口割合",
+   "unit": "％",
+   "category": "population",
+   "bucket": "both",
+   "latestYear": "2020",
+   "entitiesLatest": 1913,
+   "nullRate": 0.0016,
+   "zeroRate": 0,
+   "min": 0.118,
+   "max": 23.457,
+   "verdict": "publish-candidate",
+   "blockers": [],
+   "warns": []
+  }
+ ],
+ "ssdsTableCounts": [
+  {
+   "id": "0000020101",
+   "title": "Ａ　人口・世帯",
+   "cat01": 134,
+   "area": 3818,
+   "time": 45
+  },
+  {
+   "id": "0000020102",
+   "title": "Ｂ　自然環境",
+   "cat01": 9,
+   "area": 3813,
+   "time": 45
+  },
+  {
+   "id": "0000020103",
+   "title": "Ｃ　経済基盤",
+   "cat01": 199,
+   "area": 3818,
+   "time": 45
+  },
+  {
+   "id": "0000020104",
+   "title": "Ｄ　行政基盤",
+   "cat01": 87,
+   "area": 3816,
+   "time": 45
+  },
+  {
+   "id": "0000020105",
+   "title": "Ｅ　教育",
+   "cat01": 22,
+   "area": 3810,
+   "time": 45
+  },
+  {
+   "id": "0000020106",
+   "title": "Ｆ　労働",
+   "cat01": 65,
+   "area": 3806,
+   "time": 9
+  },
+  {
+   "id": "0000020107",
+   "title": "Ｇ　文化・スポーツ",
+   "cat01": 2,
+   "area": 3753,
+   "time": 11
+  },
+  {
+   "id": "0000020108",
+   "title": "Ｈ　居住",
+   "cat01": 232,
+   "area": 3816,
+   "time": 45
+  },
+  {
+   "id": "0000020109",
+   "title": "Ｉ　健康・医療",
+   "cat01": 21,
+   "area": 3813,
+   "time": 44
+  },
+  {
+   "id": "0000020110",
+   "title": "Ｊ　福祉・社会保障",
+   "cat01": 61,
+   "area": 3817,
+   "time": 44
+  },
+  {
+   "id": "0000020111",
+   "title": "Ｋ　安全",
+   "cat01": 2,
+   "area": 3789,
+   "time": 30
+  },
+  {
+   "id": "0000020201",
+   "title": "Ａ　人口・世帯",
+   "cat01": 134,
+   "area": 1913,
+   "time": 45
+  },
+  {
+   "id": "0000020202",
+   "title": "Ｂ　自然環境",
+   "cat01": 9,
+   "area": 1913,
+   "time": 45
+  },
+  {
+   "id": "0000020203",
+   "title": "Ｃ　経済基盤",
+   "cat01": 199,
+   "area": 1913,
+   "time": 45
+  },
+  {
+   "id": "0000020204",
+   "title": "Ｄ　行政基盤",
+   "cat01": 87,
+   "area": 1913,
+   "time": 45
+  },
+  {
+   "id": "0000020205",
+   "title": "Ｅ　教育",
+   "cat01": 22,
+   "area": 1913,
+   "time": 45
+  },
+  {
+   "id": "0000020206",
+   "title": "Ｆ　労働",
+   "cat01": 65,
+   "area": 1913,
+   "time": 9
+  },
+  {
+   "id": "0000020207",
+   "title": "Ｇ　文化・スポーツ",
+   "cat01": 2,
+   "area": 1913,
+   "time": 11
+  },
+  {
+   "id": "0000020208",
+   "title": "Ｈ　居住",
+   "cat01": 232,
+   "area": 1913,
+   "time": 45
+  },
+  {
+   "id": "0000020209",
+   "title": "Ｉ　健康・医療",
+   "cat01": 21,
+   "area": 1913,
+   "time": 44
+  },
+  {
+   "id": "0000020210",
+   "title": "Ｊ　福祉・社会保障",
+   "cat01": 61,
+   "area": 1913,
+   "time": 44
+  },
+  {
+   "id": "0000020211",
+   "title": "Ｋ　安全",
+   "cat01": 2,
+   "area": 1913,
+   "time": 30
+  },
+  {
+   "id": "0000020301",
+   "title": "Ａ　人口・世帯",
+   "cat01": 26,
+   "area": 1913,
+   "time": 11
+  },
+  {
+   "id": "0000020302",
+   "title": "Ｂ　自然環境",
+   "cat01": 2,
+   "area": 1913,
+   "time": 44
+  },
+  {
+   "id": "0000020303",
+   "title": "Ｃ　経済基盤",
+   "cat01": 2,
+   "area": 1913,
+   "time": 14
+  },
+  {
+   "id": "0000020304",
+   "title": "Ｄ　行政基盤",
+   "cat01": 4,
+   "area": 1913,
+   "time": 40
+  },
+  {
+   "id": "0000020305",
+   "title": "Ｅ　教育",
+   "cat01": 3,
+   "area": 1913,
+   "time": 44
+  },
+  {
+   "id": "0000020306",
+   "title": "Ｆ　労働",
+   "cat01": 9,
+   "area": 1913,
+   "time": 9
+  },
+  {
+   "id": "0000020307",
+   "title": "Ｇ　文化・スポーツ",
+   "cat01": 2,
+   "area": 1913,
+   "time": 11
+  },
+  {
+   "id": "0000020308",
+   "title": "Ｈ　居住",
+   "cat01": 11,
+   "area": 1913,
+   "time": 20
+  },
+  {
+   "id": "0000020309",
+   "title": "Ｉ　健康・医療",
+   "cat01": 4,
+   "area": 1913,
+   "time": 44
+  },
+  {
+   "id": "0000020310",
+   "title": "Ｊ　福祉・社会保障",
+   "cat01": 2,
+   "area": 1913,
+   "time": 5
+  },
+  {
+   "id": "0000020311",
+   "title": "Ｋ　安全",
+   "cat01": 2,
+   "area": 1913,
+   "time": 6
+  }
+ ],
+ "ssdsUntapped": [
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2201",
+   "name": "J2201_保護施設数（詳細票）（医療保護施設を除く）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2221",
+   "name": "J2221_保護施設数（基本票）（医療保護施設を除く）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2301",
+   "name": "J2301_老人福祉施設数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230111",
+   "name": "J230111_養護老人ホーム数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230112",
+   "name": "J230112_養護老人ホーム定員数（詳細票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230113",
+   "name": "J230113_養護老人ホーム在所者数（詳細票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230121",
+   "name": "J230121_介護老人福祉施設数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230124",
+   "name": "J230124_介護老人福祉施設定員数（詳細票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230127",
+   "name": "J230127_介護老人福祉施設数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230128",
+   "name": "J230128_介護老人福祉施設定員数（基本票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230131",
+   "name": "J230131_軽費老人ホーム数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230132",
+   "name": "J230132_軽費老人ホーム定員数（詳細票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230133",
+   "name": "J230133_軽費老人ホーム在所者数（詳細票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230141",
+   "name": "J230141_老人福祉センター数",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230191",
+   "name": "J230191_老人介護支援センター数",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230211",
+   "name": "J230211_老人憩の家数",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230221",
+   "name": "J230221_有料老人ホーム数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230222",
+   "name": "J230222_有料老人ホーム定員数（詳細票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230223",
+   "name": "J230223_有料老人ホーム在所者数（詳細票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2303",
+   "name": "J2303_その他の社会福祉施設等数",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2304",
+   "name": "J2304_老人福祉施設数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230411",
+   "name": "J230411_養護老人ホーム数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230412",
+   "name": "J230412_養護老人ホーム定員数（基本票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230421",
+   "name": "J230421_有料老人ホーム数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230422",
+   "name": "J230422_有料老人ホーム定員数（基本票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230431",
+   "name": "J230431_軽費老人ホーム数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J230432",
+   "name": "J230432_軽費老人ホーム定員数（基本票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J232101",
+   "name": "J232101_老人ホーム数",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2401",
+   "name": "J2401_身体障害者更生援護施設数",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2501",
+   "name": "J2501_児童福祉施設等数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J250204",
+   "name": "J250204_児童福祉施設等数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2503",
+   "name": "J2503_保育所等数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J250301",
+   "name": "J250301_公営保育所等数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J250302",
+   "name": "J250302_保育所等数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J250303",
+   "name": "J250303_公営保育所等数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2506",
+   "name": "J2506_保育所等在所児数（詳細票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J250604",
+   "name": "J250604_公営保育所等在所児数（詳細票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2545",
+   "name": "J2545_幼保連携型認定こども園在所児数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2546",
+   "name": "J2546_保育所型認定こども園在所児数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2641",
+   "name": "J2641_へき地保育所数",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2642",
+   "name": "J2642_へき地保育所在所児数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2701",
+   "name": "J2701_知的障害者援護施設数",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2801",
+   "name": "J2801_母子・父子福祉施設数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2804",
+   "name": "J2804_母子・父子福祉施設数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2901",
+   "name": "J2901_障害者支援施設等数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2902",
+   "name": "J2902_精神障害者社会復帰施設数",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2903",
+   "name": "J2903_身体障害者社会参加支援施設数",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2904",
+   "name": "J2904_婦人保護施設数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2905",
+   "name": "J2905_障害者支援施設等数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J2906",
+   "name": "J2906_婦人保護施設数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J4101",
+   "name": "J4101_国民健康保険被保険者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J4102",
+   "name": "J4102_国民健康保険給付件数",
+   "unit": "件"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J4104",
+   "name": "J4104_国民健康保険医療費件数（診療費）",
+   "unit": "件"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J4106",
+   "name": "J4106_国民健康保険被保険者受診率（1000人当たり）",
+   "unit": "‐"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J4107",
+   "name": "J4107_国民健康保険被保険者1人当たり診療費",
+   "unit": "円"
+  },
+  {
+   "table": "0000020210",
+   "category": "J福祉・社会保障",
+   "series": "基礎",
+   "code": "J4109",
+   "name": "J4109_国民健康保険医療費金額（診療費）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A110101",
+   "name": "A110101_総人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A110102",
+   "name": "A110102_総人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A110201",
+   "name": "A110201_日本人人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A110202",
+   "name": "A110202_日本人人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1231",
+   "name": "A1231_年齢中位数",
+   "unit": "歳"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1301",
+   "name": "A1301_15歳未満人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A130101",
+   "name": "A130101_15歳未満人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A130102",
+   "name": "A130102_15歳未満人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1302",
+   "name": "A1302_15～64歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A130201",
+   "name": "A130201_15～64歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A130202",
+   "name": "A130202_15～64歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1303",
+   "name": "A1303_65歳以上人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A130301",
+   "name": "A130301_65歳以上人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A130302",
+   "name": "A130302_65歳以上人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1401",
+   "name": "A1401_3歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140101",
+   "name": "A140101_3歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140102",
+   "name": "A140102_3歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1402",
+   "name": "A1402_4歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140201",
+   "name": "A140201_4歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140202",
+   "name": "A140202_4歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1403",
+   "name": "A1403_5歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140301",
+   "name": "A140301_5歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140302",
+   "name": "A140302_5歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1404",
+   "name": "A1404_0～3歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140401",
+   "name": "A140401_0～3歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140402",
+   "name": "A140402_0～3歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1405",
+   "name": "A1405_0～5歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140501",
+   "name": "A140501_0～5歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140502",
+   "name": "A140502_0～5歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1406",
+   "name": "A1406_0～15歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140601",
+   "name": "A140601_0～15歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140602",
+   "name": "A140602_0～15歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1407",
+   "name": "A1407_0～17歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140701",
+   "name": "A140701_0～17歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140702",
+   "name": "A140702_0～17歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1408",
+   "name": "A1408_3～5歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140801",
+   "name": "A140801_3～5歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140802",
+   "name": "A140802_3～5歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1409",
+   "name": "A1409_6～11歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140901",
+   "name": "A140901_6～11歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A140902",
+   "name": "A140902_6～11歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1410",
+   "name": "A1410_10～13歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141001",
+   "name": "A141001_10～13歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141002",
+   "name": "A141002_10～13歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1411",
+   "name": "A1411_12～14歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141101",
+   "name": "A141101_12～14歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141102",
+   "name": "A141102_12～14歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1412",
+   "name": "A1412_14～19歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141201",
+   "name": "A141201_14～19歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141202",
+   "name": "A141202_14～19歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1413",
+   "name": "A1413_15～17歳人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141301",
+   "name": "A141301_15～17歳人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141302",
+   "name": "A141302_15～17歳人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1414",
+   "name": "A1414_15歳以上人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141401",
+   "name": "A141401_15歳以上人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141402",
+   "name": "A141402_15歳以上人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1415",
+   "name": "A1415_40歳以上人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141501",
+   "name": "A141501_40歳以上人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141502",
+   "name": "A141502_40歳以上人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1416",
+   "name": "A1416_60歳以上人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141601",
+   "name": "A141601_60歳以上人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141602",
+   "name": "A141602_60歳以上人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1417",
+   "name": "A1417_70歳以上人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141701",
+   "name": "A141701_70歳以上人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141702",
+   "name": "A141702_70歳以上人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1418",
+   "name": "A1418_80歳以上人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141801",
+   "name": "A141801_80歳以上人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141802",
+   "name": "A141802_80歳以上人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1419",
+   "name": "A1419_75歳以上人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141901",
+   "name": "A141901_75歳以上人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A141902",
+   "name": "A141902_75歳以上人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A1420",
+   "name": "A1420_85歳以上人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A142001",
+   "name": "A142001_85歳以上人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A142002",
+   "name": "A142002_85歳以上人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A161001",
+   "name": "A161001_未婚者割合（15歳以上人口）",
+   "unit": "％"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A180101",
+   "name": "A180101_人口集中地区人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A180102",
+   "name": "A180102_人口集中地区人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A191001",
+   "name": "A191001_将来推計人口（2020年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A191002",
+   "name": "A191002_将来推計人口（2025年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A191003",
+   "name": "A191003_将来推計人口（2030年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A191004",
+   "name": "A191004_将来推計人口（2035年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A191005",
+   "name": "A191005_将来推計人口（2040年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A191006",
+   "name": "A191006_将来推計人口（2045年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A191007",
+   "name": "A191007_将来推計人口（2050年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A2101",
+   "name": "A2101_住民基本台帳人口（日本人）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A210101",
+   "name": "A210101_住民基本台帳人口（日本人）（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A210102",
+   "name": "A210102_住民基本台帳人口（日本人）（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A2301",
+   "name": "A2301_住民基本台帳人口（総数）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A6101",
+   "name": "A6101_従業も通学もしていない人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A6102",
+   "name": "A6102_自市区町村で従業・通学している人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A6103",
+   "name": "A6103_流出人口（県内他市区町村で従業・通学している人口）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A6105",
+   "name": "A6105_流入人口（県内他市区町村に常住している人口）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A6106",
+   "name": "A6106_流入人口（他県に常住している人口）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A710101",
+   "name": "A710101_一般世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A710102",
+   "name": "A710102_施設等の世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A710201",
+   "name": "A710201_一般世帯人員数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A710202",
+   "name": "A710202_施設等の世帯人員数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A7103",
+   "name": "A7103_住民基本台帳世帯数（日本人）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A810101",
+   "name": "A810101_親族のみの世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A810103",
+   "name": "A810103_核家族以外の世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A810104",
+   "name": "A810104_非親族を含む世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A811102",
+   "name": "A811102_65歳以上の世帯員のいる核家族世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A8201",
+   "name": "A8201_夫65歳以上、妻60歳以上の夫婦のみの世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A8301",
+   "name": "A8301_65歳以上世帯員の単独世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A830101",
+   "name": "A830101_65歳以上世帯員の単独世帯数（男）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A830102",
+   "name": "A830102_65歳以上世帯員の単独世帯数（女）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A840101",
+   "name": "A840101_母子世帯数（子供が1人）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A840102",
+   "name": "A840102_母子世帯数（子供が2人）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A840103",
+   "name": "A840103_母子世帯数（子供が3人以上）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A850101",
+   "name": "A850101_父子世帯数（子供が1人）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A850102",
+   "name": "A850102_父子世帯数（子供が2人）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020201",
+   "category": "A人口・世帯",
+   "series": "基礎",
+   "code": "A850103",
+   "name": "A850103_父子世帯数（子供が3人以上）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020202",
+   "category": "B自然環境",
+   "series": "基礎",
+   "code": "B1102",
+   "name": "B1102_総面積（北方地域及び竹島を含む）",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020202",
+   "category": "B自然環境",
+   "series": "基礎",
+   "code": "B1107",
+   "name": "B1107_森林以外の草生地面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020202",
+   "category": "B自然環境",
+   "series": "基礎",
+   "code": "B120103",
+   "name": "B120103_評価総地積（宅地）",
+   "unit": "ｍ2"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C120110",
+   "name": "C120110_課税対象所得",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2104",
+   "name": "C2104_第2次産業事業所数（事業所・企業統計調査結果）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2105",
+   "name": "C2105_第3次産業事業所数（事業所・企業統計調査結果）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210701",
+   "name": "C210701_事業所数（公務を除く）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210705",
+   "name": "C210705_事業所数（非農林漁業）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210706",
+   "name": "C210706_事業所数（非農林漁業（公務を除く））",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210710",
+   "name": "C210710_事業所数（電気・ガス・熱供給・水道業）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210714",
+   "name": "C210714_事業所数（卸売業）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210715",
+   "name": "C210715_事業所数（小売業）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210718",
+   "name": "C210718_事業所数（学術研究、専門・技術サービス業）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210719",
+   "name": "C210719_事業所数（宿泊業、飲食サービス業）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210720",
+   "name": "C210720_事業所数（生活関連サービス業、娯楽業）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210723",
+   "name": "C210723_事業所数（複合サービス事業）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210724",
+   "name": "C210724_事業所数（サービス業（他に分類されないもの））",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210725",
+   "name": "C210725_事業所数（公務（他に分類されるものを除く））",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2108",
+   "name": "C2108_事業所数（民営）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210801",
+   "name": "C210801_事業所数（民営）従業者1～4人",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210802",
+   "name": "C210802_事業所数（民営）従業者5～9人",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210803",
+   "name": "C210803_事業所数（民営）従業者10～29人",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210804",
+   "name": "C210804_事業所数（民営）従業者30～49人",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210805",
+   "name": "C210805_事業所数（民営）従業者50～99人",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210820",
+   "name": "C210820_事業所数（民営）（個人事業所）（経済センサス‐基礎調査及び活動調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210821",
+   "name": "C210821_事業所数（民営）（法人事業所）（経済センサス‐基礎調査及び活動調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210822",
+   "name": "C210822_事業所数（民営）（会社事業所）（経済センサス‐基礎調査及び活動調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210823",
+   "name": "C210823_事業所数（民営）（会社以外の法人）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210831",
+   "name": "C210831_事業所数（民営）（農林漁業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210832",
+   "name": "C210832_事業所数（民営）（農業、林業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210833",
+   "name": "C210833_事業所数（民営）（漁業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210834",
+   "name": "C210834_事業所数（民営）（非農林漁業（公務を除く））",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210835",
+   "name": "C210835_事業所数（民営）（鉱業、採石業、砂利採取業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210836",
+   "name": "C210836_事業所数（民営）（建設業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210837",
+   "name": "C210837_事業所数（民営）（製造業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210838",
+   "name": "C210838_事業所数（民営）（電気・ガス・熱供給・水道業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210839",
+   "name": "C210839_事業所数（民営）（情報通信業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210840",
+   "name": "C210840_事業所数（民営）（運輸業、郵便業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210841",
+   "name": "C210841_事業所数（民営）（卸売業、小売業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210842",
+   "name": "C210842_事業所数（民営）（卸売業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210843",
+   "name": "C210843_事業所数（民営）（小売業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210844",
+   "name": "C210844_事業所数（民営）（金融業、保険業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210845",
+   "name": "C210845_事業所数（民営）（不動産業、物品賃貸業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210846",
+   "name": "C210846_事業所数（民営）（学術研究、専門・技術サービス業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210847",
+   "name": "C210847_事業所数（民営）（宿泊業、飲食サービス業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210848",
+   "name": "C210848_事業所数（民営）（生活関連サービス業、娯楽業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210849",
+   "name": "C210849_事業所数（民営）（教育、学習支援業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210850",
+   "name": "C210850_事業所数（民営）（医療、福祉）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210851",
+   "name": "C210851_事業所数（民営）（複合サービス事業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210852",
+   "name": "C210852_事業所数（民営）（サービス業（他に分類されないもの））",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2109",
+   "name": "C2109_事業所数（国・地方公共団体）（経済センサス‐基礎調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210901",
+   "name": "C210901_事業所数（国）（経済センサス‐基礎調査結果）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210902",
+   "name": "C210902_事業所数（地方公共団体）（経済センサス‐基礎調査結果）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210903",
+   "name": "C210903_事業所数（都道府県）（経済センサス‐基礎調査結果）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C210904",
+   "name": "C210904_事業所数（市町村）（経済センサス‐基礎調査結果）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2110",
+   "name": "C2110_第1次産業事業所数（経済センサス‐基礎調査結果）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2111",
+   "name": "C2111_第2次産業事業所数（経済センサス‐基礎調査結果）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2112",
+   "name": "C2112_第3次産業事業所数（経済センサス‐基礎調査結果）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2201",
+   "name": "C2201_従業者数（事業所・企業統計調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2204",
+   "name": "C2204_第2次産業従業者数（事業所・企業統計調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2205",
+   "name": "C2205_第3次産業従業者数（事業所・企業統計調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2207",
+   "name": "C2207_従業者数（経済センサス‐基礎調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220701",
+   "name": "C220701_従業者数（公務を除く）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220703",
+   "name": "C220703_従業者数（農業、林業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220704",
+   "name": "C220704_従業者数（漁業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220705",
+   "name": "C220705_従業者数（非農林漁業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220706",
+   "name": "C220706_従業者数（非農林漁業（公務を除く））",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220707",
+   "name": "C220707_従業者数（鉱業、採石業、砂利採取業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220708",
+   "name": "C220708_従業者数（建設業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220709",
+   "name": "C220709_従業者数（製造業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220710",
+   "name": "C220710_従業者数（電気・ガス・熱供給・水道業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220711",
+   "name": "C220711_従業者数（情報通信業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220712",
+   "name": "C220712_従業者数（運輸業、郵便業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220713",
+   "name": "C220713_従業者数（卸売業、小売業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220714",
+   "name": "C220714_従業者数（卸売業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220715",
+   "name": "C220715_従業者数（小売業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220716",
+   "name": "C220716_従業者数（金融業、保険業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220717",
+   "name": "C220717_従業者数（不動産業、物品賃貸業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220718",
+   "name": "C220718_従業者数（学術研究、専門・技術サービス業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220719",
+   "name": "C220719_従業者数（宿泊業、飲食サービス業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220720",
+   "name": "C220720_従業者数（生活関連サービス業、娯楽業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220721",
+   "name": "C220721_従業者数（教育、学習支援業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220722",
+   "name": "C220722_従業者数（医療、福祉）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220723",
+   "name": "C220723_従業者数（複合サービス事業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220724",
+   "name": "C220724_従業者数（サービス業（他に分類されないもの））",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220725",
+   "name": "C220725_従業者数（公務（他に分類されるものを除く））",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2208",
+   "name": "C2208_従業者数（民営）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220801",
+   "name": "C220801_従業者数（民営）従業者1～4人",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220802",
+   "name": "C220802_従業者数（民営）従業者5～9人",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220803",
+   "name": "C220803_従業者数（民営）従業者10～29人",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220804",
+   "name": "C220804_従業者数（民営）従業者30～49人",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220805",
+   "name": "C220805_従業者数（民営）従業者50～99人",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220820",
+   "name": "C220820_従業者数（民営）（個人事業所）（経済センサス‐活動調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220821",
+   "name": "C220821_従業者数（民営）（法人事業所）（経済センサス‐活動調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220822",
+   "name": "C220822_従業者数（民営）（会社事業所）（経済センサス‐活動調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220823",
+   "name": "C220823_従業者数（民営）（会社以外の法人）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220831",
+   "name": "C220831_従業者数（民営）（農林漁業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220832",
+   "name": "C220832_従業者数（民営）（農業、林業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220833",
+   "name": "C220833_従業者数（民営）（漁業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220834",
+   "name": "C220834_従業者数（民営）（非農林漁業（公務を除く））",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220835",
+   "name": "C220835_従業者数（民営）（鉱業、採石業、砂利採取業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220836",
+   "name": "C220836_従業者数（民営）（建設業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220837",
+   "name": "C220837_従業者数（民営）（製造業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220838",
+   "name": "C220838_従業者数（民営）（電気・ガス・熱供給・水道業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220839",
+   "name": "C220839_従業者数（民営）（情報通信業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220840",
+   "name": "C220840_従業者数（民営）（運輸業、郵便業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220841",
+   "name": "C220841_従業者数（民営）（卸売業、小売業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220842",
+   "name": "C220842_従業者数（民営）（卸売業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220843",
+   "name": "C220843_従業者数（民営）（小売業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220844",
+   "name": "C220844_従業者数（民営）（金融業、保険業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220845",
+   "name": "C220845_従業者数（民営）（不動産業、物品賃貸業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220846",
+   "name": "C220846_従業者数（民営）（学術研究、専門・技術サービス業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220847",
+   "name": "C220847_従業者数（民営）（宿泊業、飲食サービス業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220848",
+   "name": "C220848_従業者数（民営）（生活関連サービス業、娯楽業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220849",
+   "name": "C220849_従業者数（民営）（教育、学習支援業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220850",
+   "name": "C220850_従業者数（民営）（医療、福祉）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220851",
+   "name": "C220851_従業者数（民営）（複合サービス事業）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220852",
+   "name": "C220852_従業者数（民営）（サービス業（他に分類されないもの））",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2209",
+   "name": "C2209_従業者数（国・地方公共団体）（経済センサス‐基礎調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220901",
+   "name": "C220901_従業者数（国）（経済センサス‐基礎調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220902",
+   "name": "C220902_従業者数（地方公共団体）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220903",
+   "name": "C220903_従業者数（都道府県）（経済センサス‐基礎調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C220904",
+   "name": "C220904_従業者数（市町村）（経済センサス‐基礎調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2210",
+   "name": "C2210_第1次産業従業者数（経済センサス‐基礎調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2211",
+   "name": "C2211_第2次産業従業者数（経済センサス‐基礎調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C2212",
+   "name": "C2212_第3次産業従業者数（経済センサス‐基礎調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C310201",
+   "name": "C310201_農家数（販売農家）",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C310202",
+   "name": "C310202_農家数（自給的農家）",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C310211",
+   "name": "C310211_専業農家数（販売農家）",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C310212",
+   "name": "C310212_兼業農家数（販売農家）",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C350102",
+   "name": "C350102_小売業年間商品販売額",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C3502",
+   "name": "C3502_商業事業所数（卸売業＋小売業）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C350201",
+   "name": "C350201_卸売業事業所数",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C350202",
+   "name": "C350202_小売業事業所数",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C350301",
+   "name": "C350301_卸売業従業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C350302",
+   "name": "C350302_小売業従業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C5401",
+   "name": "C5401_標準価格（平均価格）（住宅地）",
+   "unit": "円／ｍ2"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C5403",
+   "name": "C5403_標準価格（平均価格）（商業地）",
+   "unit": "円／ｍ2"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610101",
+   "name": "C610101_売上金額（民営）（農林漁業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610104",
+   "name": "C610104_売上金額（民営）（非農林漁業（公務を除く））",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610105",
+   "name": "C610105_売上金額（民営）（鉱業、採石業、砂利採取業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610106",
+   "name": "C610106_売上金額（民営）（建設業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610108",
+   "name": "C610108_売上金額（民営）（電気・ガス・熱供給・水道業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610109",
+   "name": "C610109_売上金額（民営）（情報通信業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610110",
+   "name": "C610110_売上金額（民営）（運輸業、郵便業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610111",
+   "name": "C610111_売上金額（民営）（卸売業、小売業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610114",
+   "name": "C610114_売上金額（民営）（金融業、保険業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610115",
+   "name": "C610115_売上金額（民営）（不動産業、物品賃貸業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610116",
+   "name": "C610116_売上金額（民営）（学術研究、専門・技術サービス業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610117",
+   "name": "C610117_売上金額（民営）（宿泊業、飲食サービス業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610118",
+   "name": "C610118_売上金額（民営）（生活関連サービス業、娯楽業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610119",
+   "name": "C610119_売上金額（民営）（教育、学習支援業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610120",
+   "name": "C610120_売上金額（民営）（医療、福祉）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610121",
+   "name": "C610121_売上金額（民営）（複合サービス事業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C610122",
+   "name": "C610122_売上金額（民営）（サービス業（他に分類されないもの））",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620101",
+   "name": "C620101_純付加価値額（民営）（農林漁業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620105",
+   "name": "C620105_純付加価値額（民営）（鉱業、採石業、砂利採取業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620106",
+   "name": "C620106_純付加価値額（民営）（建設業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620108",
+   "name": "C620108_純付加価値額（民営）（電気・ガス・熱供給・水道業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620109",
+   "name": "C620109_純付加価値額（民営）（情報通信業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620110",
+   "name": "C620110_純付加価値額（民営）（運輸業、郵便業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620111",
+   "name": "C620111_純付加価値額（民営）（卸売業、小売業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620114",
+   "name": "C620114_純付加価値額（民営）（金融業、保険業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620115",
+   "name": "C620115_純付加価値額（民営）（不動産業、物品賃貸業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620116",
+   "name": "C620116_純付加価値額（民営）（学術研究、専門・技術サービス業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620117",
+   "name": "C620117_純付加価値額（民営）（宿泊業、飲食サービス業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620118",
+   "name": "C620118_純付加価値額（民営）（生活関連サービス業、娯楽業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620119",
+   "name": "C620119_純付加価値額（民営）（教育、学習支援業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620120",
+   "name": "C620120_純付加価値額（民営）（医療、福祉）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620121",
+   "name": "C620121_純付加価値額（民営）（複合サービス事業）",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020203",
+   "category": "C経済基盤",
+   "series": "基礎",
+   "code": "C620122",
+   "name": "C620122_純付加価値額（民営）（サービス業（他に分類されないもの））",
+   "unit": "百万円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D2204",
+   "name": "D2204_公債費比率（市町村財政）",
+   "unit": "％"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D2209",
+   "name": "D2209_一般財源（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D2210",
+   "name": "D2210_投資的経費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D2213",
+   "name": "D2213_標準財政規模（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D2214",
+   "name": "D2214_実質赤字比率（市町村財政）",
+   "unit": "％"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D2215",
+   "name": "D2215_連結実質赤字比率（市町村財政）",
+   "unit": "％"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3201",
+   "name": "D3201_歳入決算総額（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320101",
+   "name": "D320101_地方税（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320102",
+   "name": "D320102_地方譲与税（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320103",
+   "name": "D320103_利子割交付金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320104",
+   "name": "D320104_ゴルフ場利用税交付金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320105",
+   "name": "D320105_特別地方消費税交付金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320106",
+   "name": "D320106_自動車取得税交付金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320107",
+   "name": "D320107_軽油引取税交付金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320108",
+   "name": "D320108_地方交付税（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320109",
+   "name": "D320109_交通安全対策特別交付金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320110",
+   "name": "D320110_分担金及び負担金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320111",
+   "name": "D320111_使用料（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320113",
+   "name": "D320113_国庫支出金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320115",
+   "name": "D320115_県支出金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320116",
+   "name": "D320116_財産収入（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320117",
+   "name": "D320117_寄附金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320118",
+   "name": "D320118_繰入金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320119",
+   "name": "D320119_繰越金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320120",
+   "name": "D320120_諸収入（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320122",
+   "name": "D320122_地方特例交付金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320123",
+   "name": "D320123_地方消費税交付金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320124",
+   "name": "D320124_自動車税環境性能割交付金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3202",
+   "name": "D3202_自主財源額（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203",
+   "name": "D3203_歳出決算総額（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320301",
+   "name": "D320301_議会費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320302",
+   "name": "D320302_総務費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203031",
+   "name": "D3203031_社会福祉費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203032",
+   "name": "D3203032_老人福祉費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203033",
+   "name": "D3203033_児童福祉費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203034",
+   "name": "D3203034_生活保護費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203035",
+   "name": "D3203035_災害救助費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203042",
+   "name": "D3203042_保健衛生費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203043",
+   "name": "D3203043_保健所費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203044",
+   "name": "D3203044_清掃費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320305",
+   "name": "D320305_労働費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203051",
+   "name": "D3203051_失業対策費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320306",
+   "name": "D320306_農林水産業費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320307",
+   "name": "D320307_商工費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203082",
+   "name": "D3203082_道路橋りょう費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203085",
+   "name": "D3203085_都市計画費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203086",
+   "name": "D3203086_住宅費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320309",
+   "name": "D320309_消防費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203102",
+   "name": "D3203102_小学校費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203103",
+   "name": "D3203103_中学校費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203104",
+   "name": "D3203104_高等学校費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203105",
+   "name": "D3203105_特別支援学校費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203106",
+   "name": "D3203106_幼稚園費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203107",
+   "name": "D3203107_社会教育費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3203108",
+   "name": "D3203108_保健体育費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320311",
+   "name": "D320311_災害復旧費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320312",
+   "name": "D320312_公債費（市町村財政）（目的別歳出内訳）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320401",
+   "name": "D320401_人件費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320402",
+   "name": "D320402_物件費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320403",
+   "name": "D320403_維持補修費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320405",
+   "name": "D320405_補助費等（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320406",
+   "name": "D320406_普通建設事業費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320407",
+   "name": "D320407_災害復旧事業費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320408",
+   "name": "D320408_失業対策事業費（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320409",
+   "name": "D320409_公債費（市町村財政）（性質別歳出内訳）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320410",
+   "name": "D320410_積立金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320411",
+   "name": "D320411_投資及び出資金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D320412",
+   "name": "D320412_貸付金（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D3205",
+   "name": "D3205_地方債現在高（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D420202",
+   "name": "D420202_固定資産税（市町村税）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D430103",
+   "name": "D430103_市町村税徴収決定済額",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020204",
+   "category": "D行政基盤",
+   "series": "基礎",
+   "code": "D430203",
+   "name": "D430203_市町村税収納済額",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E1101",
+   "name": "E1101_幼稚園数",
+   "unit": "園"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E1501",
+   "name": "E1501_幼稚園在園者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E3901",
+   "name": "E3901_義務教育学校数",
+   "unit": "校"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E3902",
+   "name": "E3902_義務教育学校前期課程学級数",
+   "unit": "学級"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E3903",
+   "name": "E3903_義務教育学校後期課程学級数",
+   "unit": "学級"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E3904",
+   "name": "E3904_義務教育学校教員数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E3905",
+   "name": "E3905_義務教育学校前期課程児童数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E3906",
+   "name": "E3906_義務教育学校後期課程生徒数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E4501",
+   "name": "E4501_高等学校生徒数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E9101",
+   "name": "E9101_最終学歴人口（卒業者総数）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E9102",
+   "name": "E9102_最終学歴人口（小学校・中学校）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E9103",
+   "name": "E9103_最終学歴人口（高校・旧中）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E9105",
+   "name": "E9105_最終学歴人口（短大・高専）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020205",
+   "category": "E教育",
+   "series": "基礎",
+   "code": "E9106",
+   "name": "E9106_最終学歴人口（大学・大学院）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1101",
+   "name": "F1101_労働力人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F110101",
+   "name": "F110101_労働力人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F110102",
+   "name": "F110102_労働力人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1102",
+   "name": "F1102_就業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F110201",
+   "name": "F110201_就業者数（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F110202",
+   "name": "F110202_就業者数（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1103",
+   "name": "F1103_就業者数・主に仕事",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1104",
+   "name": "F1104_就業者数・家事のほか仕事",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1105",
+   "name": "F1105_就業者数・通学のかたわら仕事",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1106",
+   "name": "F1106_就業者数・休業者",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1107",
+   "name": "F1107_完全失業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F110701",
+   "name": "F110701_完全失業者数（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F110702",
+   "name": "F110702_完全失業者数（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1108",
+   "name": "F1108_非労働力人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F110801",
+   "name": "F110801_非労働力人口（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F110802",
+   "name": "F110802_非労働力人口（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1109",
+   "name": "F1109_非労働力人口・家事",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1110",
+   "name": "F1110_非労働力人口・通学",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1111",
+   "name": "F1111_非労働力人口・その他",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1301",
+   "name": "F1301_農林漁業者",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1302",
+   "name": "F1302_農林漁業雇用者",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1303",
+   "name": "F1303_会社団体役員",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1304",
+   "name": "F1304_商店主",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1305",
+   "name": "F1305_工場主",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1306",
+   "name": "F1306_サービス・その他の事業主",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1307",
+   "name": "F1307_専門職業者",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1308",
+   "name": "F1308_技術者",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1309",
+   "name": "F1309_教員・宗教家",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1310",
+   "name": "F1310_文筆家・芸術家・芸能家",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1311",
+   "name": "F1311_管理職",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1312",
+   "name": "F1312_事務職",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1313",
+   "name": "F1313_販売人",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1314",
+   "name": "F1314_技能者",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1315",
+   "name": "F1315_労務作業者",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1316",
+   "name": "F1316_個人サービス人",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1317",
+   "name": "F1317_保安職",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F1318",
+   "name": "F1318_内職者",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2116",
+   "name": "F2116_就業者数（65歳以上）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2201",
+   "name": "F2201_第1次産業就業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2211",
+   "name": "F2211_第2次産業就業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2221",
+   "name": "F2221_第3次産業就業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2401",
+   "name": "F2401_雇用者数（国勢調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2402",
+   "name": "F2402_役員数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2403",
+   "name": "F2403_雇人のある業主数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2404",
+   "name": "F2404_雇人のない業主数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2405",
+   "name": "F2405_家族従業者数（国勢調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2406",
+   "name": "F2406_自営業主及び家族従業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2409",
+   "name": "F2409_雇用者数（正規の職員・従業員）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2410",
+   "name": "F2410_雇用者数（労働者派遣事業所の派遣社員）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2411",
+   "name": "F2411_雇用者数（パート・アルバイト・その他）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2701",
+   "name": "F2701_自市区町村で従業している就業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F270101",
+   "name": "F270101_自市区町村で従業している就業者数（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F270102",
+   "name": "F270102_自市区町村で従業している就業者数（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2702",
+   "name": "F2702_県内他市区町村で従業している就業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F270201",
+   "name": "F270201_県内他市区町村で従業している就業者数（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F270202",
+   "name": "F270202_県内他市区町村で従業している就業者数（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2703",
+   "name": "F2703_他県で従業している就業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F270301",
+   "name": "F270301_他県で従業している就業者数（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F270302",
+   "name": "F270302_他県で従業している就業者数（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2705",
+   "name": "F2705_他市区町村への通勤者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F270501",
+   "name": "F270501_他市区町村への通勤者数（男）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F270502",
+   "name": "F270502_他市区町村への通勤者数（女）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2801",
+   "name": "F2801_従業地による就業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2802",
+   "name": "F2802_他県に常住している就業者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020206",
+   "category": "F労働",
+   "series": "基礎",
+   "code": "F2803",
+   "name": "F2803_他市区町村からの通勤者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020207",
+   "category": "G文化・スポーツ",
+   "series": "基礎",
+   "code": "G1201",
+   "name": "G1201_公民館数",
+   "unit": "館"
+  },
+  {
+   "table": "0000020207",
+   "category": "G文化・スポーツ",
+   "series": "基礎",
+   "code": "G1401",
+   "name": "G1401_図書館数",
+   "unit": "館"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1100",
+   "name": "H1100_総住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1101",
+   "name": "H1101_居住世帯あり住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1102",
+   "name": "H1102_居住世帯なし住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H110201",
+   "name": "H110201_一時現在者のみ住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H110202",
+   "name": "H110202_空き家数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H110203",
+   "name": "H110203_建築中住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1201",
+   "name": "H1201_専用住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1203",
+   "name": "H1203_店舗その他の併用住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1310",
+   "name": "H1310_持ち家数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1320",
+   "name": "H1320_借家数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1321",
+   "name": "H1321_公営・都市再生機構（ＵＲ）・公社の借家数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H132101",
+   "name": "H132101_公営の借家数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H132102",
+   "name": "H132102_都市再生機構（ＵＲ）・公社の借家数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1322",
+   "name": "H1322_民営借家数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1323",
+   "name": "H1323_給与住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1401",
+   "name": "H1401_一戸建住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H140101",
+   "name": "H140101_一戸建住宅数（木造）",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H140102",
+   "name": "H140102_一戸建住宅数（非木造）",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1402",
+   "name": "H1402_長屋建住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H140201",
+   "name": "H140201_長屋建住宅数（木造）",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H140202",
+   "name": "H140202_長屋建住宅数（非木造）",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1403",
+   "name": "H1403_共同住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H140301",
+   "name": "H140301_共同住宅数（木造）",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H140302",
+   "name": "H140302_共同住宅数（非木造）",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H140330",
+   "name": "H140330_高齢者対応型共同住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1404",
+   "name": "H1404_その他の建て方住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1501",
+   "name": "H1501_木造住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H150101",
+   "name": "H150101_木造（防火木造を除く）住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H150102",
+   "name": "H150102_防火木造住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1502",
+   "name": "H1502_非木造住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1504",
+   "name": "H1504_鉄筋・鉄骨コンクリート造住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1505",
+   "name": "H1505_その他の構造住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1506",
+   "name": "H1506_鉄骨造住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1604",
+   "name": "H1604_1951～1960年建築住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1605",
+   "name": "H1605_1961～1970年建築住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1612",
+   "name": "H1612_1971～1980年建築住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1613",
+   "name": "H1613_1981～1990年建築住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1615",
+   "name": "H1615_1960年以前建築住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1616",
+   "name": "H1616_1970年以前建築住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1619",
+   "name": "H1619_1991～2000年建築住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1620",
+   "name": "H1620_2001～2005年建築住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1621",
+   "name": "H1621_2006～2008年9月建築住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1622",
+   "name": "H1622_2006～2010年建築住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1623",
+   "name": "H1623_2011～2013年9月建築住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1624",
+   "name": "H1624_2011～2015年建築住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1625",
+   "name": "H1625_2016～2018年9月建築住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1626",
+   "name": "H1626_2016～2020年建築住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1627",
+   "name": "H1627_2021～2023年9月建築住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1804",
+   "name": "H1804_着工新設給与住宅数",
+   "unit": "戸・件"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H1810",
+   "name": "H1810_着工新設持家・分譲住宅数",
+   "unit": "戸・件"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2101",
+   "name": "H2101_居住室の畳数5.9畳以下住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2102",
+   "name": "H2102_居住室の畳数6.0～11.9畳住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2103",
+   "name": "H2103_居住室の畳数12.0～17.9畳住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2104",
+   "name": "H2104_居住室の畳数18.0～23.9畳住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2105",
+   "name": "H2105_居住室の畳数24.0～29.9畳住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2106",
+   "name": "H2106_居住室の畳数30.0～35.9畳住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2107",
+   "name": "H2107_居住室の畳数36.0～47.9畳住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2108",
+   "name": "H2108_居住室の畳数48.0畳以上住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2110",
+   "name": "H2110_1住宅当たり居住室数",
+   "unit": "室"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H211010",
+   "name": "H211010_1住宅当たり居住室数（持ち家）",
+   "unit": "室"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H211020",
+   "name": "H211020_1住宅当たり居住室数（借家）",
+   "unit": "室"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2120",
+   "name": "H2120_1住宅当たり居住室の畳数",
+   "unit": "畳"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H212010",
+   "name": "H212010_1住宅当たり居住室の畳数（持ち家）",
+   "unit": "畳"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H212020",
+   "name": "H212020_1住宅当たり居住室の畳数（借家）",
+   "unit": "畳"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2130",
+   "name": "H2130_1住宅当たり延べ面積",
+   "unit": "ｍ2"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H213010",
+   "name": "H213010_1住宅当たり延べ面積（持ち家）",
+   "unit": "ｍ2"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H213020",
+   "name": "H213020_1住宅当たり延べ面積（借家）",
+   "unit": "ｍ2"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2201",
+   "name": "H2201_水洗トイレのある住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2230",
+   "name": "H2230_高齢者等用設備住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2250",
+   "name": "H2250_自動火災感知設備あり住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H227004",
+   "name": "H227004_2009年以降における住宅の耐震改修工事をした持ち家総数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H227005",
+   "name": "H227005_2014年以降における住宅の耐震改修工事をした持ち家総数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H227006",
+   "name": "H227006_2019年以降における住宅の耐震改修工事をした持ち家総数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2280",
+   "name": "H2280_太陽熱を利用した温水機器等のある住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2282",
+   "name": "H2282_二重以上のサッシ又は複層ガラスの窓のある住宅数",
+   "unit": "戸"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2283",
+   "name": "H2283_オートロック式の共同住宅に住む普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2284",
+   "name": "H2284_オートロック式の共同住宅に住む主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2500",
+   "name": "H2500_着工居住用建築物床面積",
+   "unit": "ｍ2"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2601",
+   "name": "H2601_着工新設持家床面積",
+   "unit": "ｍ2"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2602",
+   "name": "H2602_着工新設分譲住宅床面積",
+   "unit": "ｍ2"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2603",
+   "name": "H2603_着工新設貸家床面積",
+   "unit": "ｍ2"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2604",
+   "name": "H2604_着工新設給与住宅床面積",
+   "unit": "ｍ2"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2900",
+   "name": "H2900_最寄りの保育所までの距離が100ｍ未満の住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2901",
+   "name": "H2901_最寄りの保育所までの距離が100～200ｍ未満の住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2902",
+   "name": "H2902_最寄りの保育所までの距離が200～500ｍ未満の住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2903",
+   "name": "H2903_最寄りの保育所までの距離が500～1000ｍ未満の住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2904",
+   "name": "H2904_最寄りの保育所までの距離が1000ｍ以上の住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2905",
+   "name": "H2905_最寄りの保育所までの距離が100m未満の住宅に住んでいる普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2906",
+   "name": "H2906_最寄りの保育所までの距離が100～200m未満の住宅に住んでいる普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2907",
+   "name": "H2907_最寄りの保育所までの距離が200～500m未満の住宅に住んでいる普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2908",
+   "name": "H2908_最寄りの保育所までの距離が500～1000m未満の住宅に住んでいる普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2909",
+   "name": "H2909_最寄りの保育所までの距離が1000m以上の住宅に住んでいる普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2910",
+   "name": "H2910_最寄りの老人デイサービスセンターまでの距離が250ｍ未満の住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2911",
+   "name": "H2911_最寄りの老人デイサービスセンターまでの距離が250～500ｍ未満の住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2912",
+   "name": "H2912_最寄りの老人デイサービスセンターまでの距離が500～1000ｍ未満の住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2913",
+   "name": "H2913_最寄りの老人デイサービスセンターまでの距離が1000～2000ｍ未満の住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2914",
+   "name": "H2914_最寄りの老人デイサービスセンターまでの距離が2000ｍ以上の住宅数",
+   "unit": "住宅"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2915",
+   "name": "H2915_最寄りの老人デイサービスセンターまでの距離が250m未満の住宅に住んでいる普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2916",
+   "name": "H2916_最寄りの老人デイサービスセンターまでの距離が250～500m未満の住宅に住んでいる普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2917",
+   "name": "H2917_最寄りの老人デイサービスセンターまでの距離が500～1000m未満の住宅に住んでいる普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2918",
+   "name": "H2918_最寄りの老人デイサービスセンターまでの距離が1000～2000m未満の住宅に住んでいる普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2919",
+   "name": "H2919_最寄りの老人デイサービスセンターまでの距離が2000m以上の住宅に住んでいる普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2920",
+   "name": "H2920_最寄りの保育所までの距離が100m未満の住宅に住んでいる主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2921",
+   "name": "H2921_最寄りの保育所までの距離が100～200m未満の住宅に住んでいる主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2922",
+   "name": "H2922_最寄りの保育所までの距離が200～500m未満の住宅に住んでいる主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2923",
+   "name": "H2923_最寄りの保育所までの距離が500～1000m未満の住宅に住んでいる主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2924",
+   "name": "H2924_最寄りの保育所までの距離が1000m以上の住宅に住んでいる主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2930",
+   "name": "H2930_最寄りの老人デイサービスセンターまでの距離が250m未満の住宅に住んでいる主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2931",
+   "name": "H2931_最寄りの老人デイサービスセンターまでの距離が250～500m未満の住宅に住んでいる主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2932",
+   "name": "H2932_最寄りの老人デイサービスセンターまでの距離が500～1000m未満の住宅に住んでいる主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2933",
+   "name": "H2933_最寄りの老人デイサービスセンターまでの距離が1000～2000m未満の住宅に住んでいる主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H2934",
+   "name": "H2934_最寄りの老人デイサービスセンターまでの距離が2000m以上の住宅に住んでいる主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3100",
+   "name": "H3100_総世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3110",
+   "name": "H3110_普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3111",
+   "name": "H3111_主世帯数（住宅・土地統計調査結果）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H311110",
+   "name": "H311110_65歳以上の世帯員のいる主世帯数（住宅・土地統計調査結果）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3120",
+   "name": "H3120_準世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3210",
+   "name": "H3210_住宅に住む一般世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3211",
+   "name": "H3211_主世帯数（一般世帯）（国勢調査結果）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3220",
+   "name": "H3220_住宅以外に住む一般世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3300",
+   "name": "H3300_総世帯人員",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3310",
+   "name": "H3310_普通世帯人員",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3311",
+   "name": "H3311_主世帯人員（住宅・土地統計調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3312",
+   "name": "H3312_住宅に同居の普通世帯人員",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3313",
+   "name": "H3313_住宅以外の建物に居住の普通世帯人員",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3314",
+   "name": "H3314_住宅以外の建物に居住の世帯人員",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3320",
+   "name": "H3320_準世帯人員",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3410",
+   "name": "H3410_住宅に住む一般世帯人員",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3411",
+   "name": "H3411_主世帯人員（一般世帯）（国勢調査結果）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3420",
+   "name": "H3420_住宅以外に住む一般世帯人員",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3510",
+   "name": "H3510_1世帯当たり居住室数（普通世帯）",
+   "unit": "室"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3511",
+   "name": "H3511_1世帯当たり居住室数（主世帯）",
+   "unit": "室"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H351101",
+   "name": "H351101_1世帯当たり居住室数（持ち家・主世帯）",
+   "unit": "室"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H351102",
+   "name": "H351102_1世帯当たり居住室数（借家・主世帯）",
+   "unit": "室"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3520",
+   "name": "H3520_1世帯当たり畳数（普通世帯）",
+   "unit": "畳"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3521",
+   "name": "H3521_1世帯当たり畳数（主世帯）",
+   "unit": "畳"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H352101",
+   "name": "H352101_1世帯当たり畳数（持ち家・主世帯）",
+   "unit": "畳"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H352102",
+   "name": "H352102_1世帯当たり畳数（借家・主世帯）",
+   "unit": "畳"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3730",
+   "name": "H3730_最低居住面積水準以上の主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H3740",
+   "name": "H3740_誘導居住面積水準以上の主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H4104",
+   "name": "H4104_専用住宅の1畳当たり家賃",
+   "unit": "円"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H5501",
+   "name": "H5501_し尿処理人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H5507",
+   "name": "H5507_総人口（非水洗化人口＋水洗化人口）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H550701",
+   "name": "H550701_非水洗化人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H5508",
+   "name": "H5508_水洗化率（浄化槽人口）",
+   "unit": "％"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H5509",
+   "name": "H5509_し尿処理量（し尿＋浄化槽汚泥＋自家処理量）",
+   "unit": "ｋｌ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H5601",
+   "name": "H5601_ごみ処理人口",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H560901",
+   "name": "H560901_ごみ総排出量（計画収集量）",
+   "unit": "ｔ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H560902",
+   "name": "H560902_ごみ総排出量（直接搬入量）",
+   "unit": "ｔ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H560903",
+   "name": "H560903_ごみ総排出量（自家処理量）",
+   "unit": "ｔ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H560904",
+   "name": "H560904_ごみ総排出量（集団回収量）",
+   "unit": "ｔ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H5610",
+   "name": "H5610_1人1日当たりの排出量",
+   "unit": "ｇ/人日"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H5612",
+   "name": "H5612_ごみ処理量（総量）",
+   "unit": "ｔ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H561201",
+   "name": "H561201_ごみ処理量（直接資源化）",
+   "unit": "ｔ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H5613",
+   "name": "H5613_中間処理後再生利用量",
+   "unit": "ｔ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H5614",
+   "name": "H5614_ごみのリサイクル率",
+   "unit": "％"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H6101",
+   "name": "H6101_小売店数（事業所・企業統計調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H6102",
+   "name": "H6102_飲食店数（事業所・企業統計調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H6103",
+   "name": "H6103_大型小売店数（事業所・企業統計調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H6104",
+   "name": "H6104_百貨店、総合スーパー数（事業所・企業統計調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H613001",
+   "name": "H613001_各種商品小売店数",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H613002",
+   "name": "H613002_織物・衣服・身の回り品小売店数（経済センサス‐基礎調査及び活動調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H613003",
+   "name": "H613003_飲食料品小売店数（経済センサス-基礎調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H613004",
+   "name": "H613004_機械器具小売店数",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H613005",
+   "name": "H613005_その他の小売店数",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H613006",
+   "name": "H613006_無店舗小売店数",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H6131",
+   "name": "H6131_飲食店数（経済センサス-基礎調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H6132",
+   "name": "H6132_大型小売店数（経済センサス‐基礎調査及び活動調査結果）",
+   "unit": "事業所"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H6201",
+   "name": "H6201_小売業売場面積",
+   "unit": "ｍ2"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H720901",
+   "name": "H720901_原動機付自転車台数（50ｃｃ以下）",
+   "unit": "台"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H720902",
+   "name": "H720902_原動機付自転車台数（50ｃｃ超90ｃｃ以下）",
+   "unit": "台"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H720903",
+   "name": "H720903_原動機付自転車台数（90ｃｃ超）",
+   "unit": "台"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H720904",
+   "name": "H720904_原動機付自転車台数（ミニカー）",
+   "unit": "台"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H720905",
+   "name": "H720905_原動機付自転車台数（特定小型）",
+   "unit": "台"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H7210",
+   "name": "H7210_軽自動車及び小型特殊自動車台数",
+   "unit": "台"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H721001",
+   "name": "H721001_二輪車台数（側車付のものを含む）",
+   "unit": "台"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H721002",
+   "name": "H721002_三輪車台数",
+   "unit": "台"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H730104",
+   "name": "H730104_自宅外通勤・通学者数（勤め先・学校のバス）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H730108",
+   "name": "H730108_自宅外通勤・通学者数（利用交通手段が2種類）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H730109",
+   "name": "H730109_自宅外通勤・通学者数（利用交通手段が3種類以上）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H730112",
+   "name": "H730112_自宅外通勤・通学者数（ハイヤー・タクシー）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H730113",
+   "name": "H730113_自宅外通勤・通学者数（その他）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H7302",
+   "name": "H7302_自市区町村内通勤・通学者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H7303",
+   "name": "H7303_県内他市区町村への通勤・通学者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H7304",
+   "name": "H7304_他県への通勤・通学者数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H7401",
+   "name": "H7401_家計を主に支える者が雇用者である普通世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H740101",
+   "name": "H740101_家計を主に支える者が雇用者である普通世帯数（通勤時間30分未満）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H740102",
+   "name": "H740102_家計を主に支える者が雇用者である普通世帯数（通勤時間30～60分未満）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H740103",
+   "name": "H740103_家計を主に支える者が雇用者である普通世帯数（通勤時間60～90分未満）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H740104",
+   "name": "H740104_家計を主に支える者が雇用者である普通世帯数（通勤時間90分以上）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H7405",
+   "name": "H7405_家計を主に支える者が雇用者である主世帯数",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H740501",
+   "name": "H740501_家計を主に支える者が雇用者である主世帯数（通勤時間30分未満）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H740502",
+   "name": "H740502_家計を主に支える者が雇用者である主世帯数（通勤時間30分～1時間未満）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H740503",
+   "name": "H740503_家計を主に支える者が雇用者である主世帯数（通勤時間1時間～1時間30分未満）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H740504",
+   "name": "H740504_家計を主に支える者が雇用者である主世帯数（通勤時間1時間30分以上）",
+   "unit": "世帯"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H7701",
+   "name": "H7701_テレビ放送受信契約数",
+   "unit": "‐"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H770101",
+   "name": "H770101_衛星放送受信契約数",
+   "unit": "‐"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H8102",
+   "name": "H8102_市街化調整区域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H8103",
+   "name": "H8103_市街化区域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H8104",
+   "name": "H8104_用途地域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H810401",
+   "name": "H810401_住居専用地域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H810402",
+   "name": "H810402_住居地域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H810403",
+   "name": "H810403_近隣商業地域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H810404",
+   "name": "H810404_商業地域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H810405",
+   "name": "H810405_準工業地域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H810406",
+   "name": "H810406_工業地域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H810407",
+   "name": "H810407_工業専用地域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H810408",
+   "name": "H810408_商業・近隣商業地域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020208",
+   "category": "H居住",
+   "series": "基礎",
+   "code": "H810409",
+   "name": "H810409_工業・準工業地域面積",
+   "unit": "ｈａ"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I1101",
+   "name": "I1101_平均余命（0歳）（男）",
+   "unit": "年"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I1102",
+   "name": "I1102_平均余命（0歳）（女）",
+   "unit": "年"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I5101",
+   "name": "I5101_病院数",
+   "unit": "施設"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I510150",
+   "name": "I510150_療養病床を有する病院数",
+   "unit": "施設"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I510201",
+   "name": "I510201_有床一般診療所数",
+   "unit": "施設"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I5211",
+   "name": "I5211_病院病床数",
+   "unit": "床"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I5212",
+   "name": "I5212_一般診療所病床数",
+   "unit": "床"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I5501",
+   "name": "I5501_介護老人保健施設数（詳細票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I5502",
+   "name": "I5502_介護老人保健施設定員数（詳細票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I5511",
+   "name": "I5511_介護老人保健施設数（基本票）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I5512",
+   "name": "I5512_介護老人保健施設定員数（基本票）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I6101",
+   "name": "I6101_医療施設医師数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I6201",
+   "name": "I6201_医療施設歯科医師数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020209",
+   "category": "I健康・医療",
+   "series": "基礎",
+   "code": "I6310",
+   "name": "I6310_薬局・医療施設薬剤師数",
+   "unit": "人"
+  },
+  {
+   "table": "0000020310",
+   "category": "J福祉・社会保障",
+   "series": "指標",
+   "code": "#J02206",
+   "name": "#J02206_介護老人福祉施設（基本票）（65歳以上人口10万人当たり）",
+   "unit": "所"
+  },
+  {
+   "table": "0000020301",
+   "category": "A人口・世帯",
+   "series": "指標",
+   "code": "#A01302",
+   "name": "#A01302_昼夜間人口比率",
+   "unit": "％"
+  },
+  {
+   "table": "0000020301",
+   "category": "A人口・世帯",
+   "series": "指標",
+   "code": "#A0191001",
+   "name": "#A0191001_将来推計人口（2020年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020301",
+   "category": "A人口・世帯",
+   "series": "指標",
+   "code": "#A0191002",
+   "name": "#A0191002_将来推計人口（2025年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020301",
+   "category": "A人口・世帯",
+   "series": "指標",
+   "code": "#A0191003",
+   "name": "#A0191003_将来推計人口（2030年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020301",
+   "category": "A人口・世帯",
+   "series": "指標",
+   "code": "#A0191004",
+   "name": "#A0191004_将来推計人口（2035年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020301",
+   "category": "A人口・世帯",
+   "series": "指標",
+   "code": "#A0191005",
+   "name": "#A0191005_将来推計人口（2040年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020301",
+   "category": "A人口・世帯",
+   "series": "指標",
+   "code": "#A0191006",
+   "name": "#A0191006_将来推計人口（2045年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020301",
+   "category": "A人口・世帯",
+   "series": "指標",
+   "code": "#A0191007",
+   "name": "#A0191007_将来推計人口（2050年）",
+   "unit": "人"
+  },
+  {
+   "table": "0000020301",
+   "category": "A人口・世帯",
+   "series": "指標",
+   "code": "#A03504",
+   "name": "#A03504_15歳未満人口割合",
+   "unit": "％"
+  },
+  {
+   "table": "0000020301",
+   "category": "A人口・世帯",
+   "series": "指標",
+   "code": "#A03505",
+   "name": "#A03505_15～64歳人口割合",
+   "unit": "％"
+  },
+  {
+   "table": "0000020301",
+   "category": "A人口・世帯",
+   "series": "指標",
+   "code": "#A05101",
+   "name": "#A05101_人口増減率",
+   "unit": "％"
+  },
+  {
+   "table": "0000020304",
+   "category": "D行政基盤",
+   "series": "指標",
+   "code": "#D02213",
+   "name": "#D02213_標準財政規模（市町村財政）",
+   "unit": "千円"
+  },
+  {
+   "table": "0000020304",
+   "category": "D行政基盤",
+   "series": "指標",
+   "code": "#D02214",
+   "name": "#D02214_実質赤字比率（市町村財政）",
+   "unit": "％"
+  },
+  {
+   "table": "0000020304",
+   "category": "D行政基盤",
+   "series": "指標",
+   "code": "#D02215",
+   "name": "#D02215_連結実質赤字比率（市町村財政）",
+   "unit": "％"
+  },
+  {
+   "table": "0000020308",
+   "category": "H居住",
+   "series": "指標",
+   "code": "#H06127",
+   "name": "#H06127_小売店数（人口千人当たり）",
+   "unit": "店"
+  },
+  {
+   "table": "0000020308",
+   "category": "H居住",
+   "series": "指標",
+   "code": "#H06130",
+   "name": "#H06130_飲食店数（人口千人当たり）",
+   "unit": "店"
+  },
+  {
+   "table": "0000020308",
+   "category": "H居住",
+   "series": "指標",
+   "code": "#H06131",
+   "name": "#H06131_大型小売店数（人口10万人当たり）",
+   "unit": "店"
+  }
+ ]
+}

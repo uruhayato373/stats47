@@ -52,14 +52,23 @@ describe('ranking key と metric entities の境界', () => {
   });
 
   it('県rankingと市区町村rankingのknown集合を混在させない', () => {
+    // city 専用 metric は県 KNOWN に入らない
     expect(KNOWN_RANKING_KEYS.has('elderly-population-ratio')).toBe(false);
     expect(
       KNOWN_MUNICIPALITY_RANKING_KEYS.has('elderly-population-ratio')
     ).toBe(true);
-    expect(
-      [...KNOWN_MUNICIPALITY_RANKING_KEYS].filter((key) =>
-        KNOWN_RANKING_KEYS.has(key)
-      )
-    ).toEqual([]);
+    // 第1拡充バッチ (2026-09-01) 以降、entities に prefecture+city を両方持つ metric は
+    // 両 namespace に同 key で公開される (middleware の /ranking/<key>?areaType=city →
+    // /municipalities/ranking/<key> 301 はこの重複を前提に設計されている)。
+    // 不変量は「重複してよいのは両 entity 対応 metric だけ」に更新する。
+    const metricsByKey = new Map(listAllMetrics().map((m) => [m.key, m]));
+    const overlap = [...KNOWN_MUNICIPALITY_RANKING_KEYS].filter((key) =>
+      KNOWN_RANKING_KEYS.has(key)
+    );
+    for (const key of overlap) {
+      const metric = metricsByKey.get(key);
+      expect(metric?.entities).toContain('prefecture');
+      expect(metric?.entities).toContain('city');
+    }
   });
 });

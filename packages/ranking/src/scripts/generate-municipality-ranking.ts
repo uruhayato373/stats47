@@ -42,8 +42,11 @@ async function writeSnapshot(
   await writeFile(target, body, 'utf8');
 }
 
-async function main(): Promise<void> {
-  const rankingKey = argValue('--key') ?? 'elderly-population-ratio';
+async function generateForKey(
+  rankingKey: string,
+  r2Base: string,
+  outputRoot: string
+): Promise<void> {
   if (!KNOWN_MUNICIPALITY_RANKING_KEYS.has(rankingKey)) {
     throw new Error(`municipality ranking is not published: ${rankingKey}`);
   }
@@ -69,11 +72,6 @@ async function main(): Promise<void> {
     );
   }
 
-  const r2Base = (
-    argValue('--source-base') ??
-    process.env.R2_PUBLIC_FETCH_URL ??
-    'http://127.0.0.1:4777'
-  ).replace(/\/$/, '');
   const response = await fetch(
     `${r2Base}/app/stats/${encodeURIComponent(rankingKey)}/cities.json`
   );
@@ -112,9 +110,6 @@ async function main(): Promise<void> {
     );
   }
 
-  const outputRoot = path.resolve(
-    argValue('--output-root') ?? path.join(REPO_ROOT, '.local', 'r2')
-  );
   await writeSnapshot(
     outputRoot,
     municipalityRankingItemKeyPath(rankingKey),
@@ -142,6 +137,26 @@ async function main(): Promise<void> {
       2
     )
   );
+}
+
+async function main(): Promise<void> {
+  const r2Base = (
+    argValue('--source-base') ??
+    process.env.R2_PUBLIC_FETCH_URL ??
+    'http://127.0.0.1:4777'
+  ).replace(/\/$/, '');
+  const outputRoot = path.resolve(
+    argValue('--output-root') ?? path.join(REPO_ROOT, '.local', 'r2')
+  );
+
+  // --all-published: 公開済み全 key を生成 (sync-snapshots の municipality-ranking task 用)。
+  // 1 key でも失敗したら exit≠0 (部分成功で push させない)。
+  const keys = process.argv.includes('--all-published')
+    ? [...KNOWN_MUNICIPALITY_RANKING_KEYS].sort()
+    : [argValue('--key') ?? 'elderly-population-ratio'];
+  for (const rankingKey of keys) {
+    await generateForKey(rankingKey, r2Base, outputRoot);
+  }
 }
 
 main().catch((error: unknown) => {
