@@ -9,6 +9,7 @@
 
 import { useCallback, useRef } from 'react';
 
+import { formatValueWithPrecision } from '@stats47/utils';
 import { useD3Tooltip } from '@stats47/visualization';
 
 export interface DistributionHistogramBin {
@@ -23,6 +24,8 @@ export interface DistributionHistogramBin {
 interface Props {
   bins: DistributionHistogramBin[];
   median: number;
+  /** データセット全体から解決済みの小数桁 (resolveValuePrecision の結果) */
+  precision: number;
   unit: string;
   /** 選択地域のラベル (例: 神奈川県)。未選択時は undefined */
   prefLabel?: string;
@@ -47,13 +50,8 @@ const MEDIAN_STROKE = 'hsl(var(--foreground))';
 const LABEL_FILL = 'hsl(var(--muted-foreground))';
 const AXIS_STROKE = 'hsl(var(--border))';
 
-const compactFormat = new Intl.NumberFormat('ja-JP', {
-  notation: 'compact',
-  maximumFractionDigits: 1,
-});
-const fullFormat = new Intl.NumberFormat('ja-JP', {
-  maximumFractionDigits: 1,
-});
+// 軸端・ビン範囲のスケールラベル。既定丸め (有効 2 桁: 46万 / 2.3万) で十分
+const compactFormat = new Intl.NumberFormat('ja-JP', { notation: 'compact' });
 
 /** 値 → x 座標。ビンは等幅スロットで並べ、overflow ビン内は中央に置く */
 function valueToX(value: number, bins: DistributionHistogramBin[]): number {
@@ -84,6 +82,7 @@ function binRangeLabel(bin: DistributionHistogramBin, unit: string): string {
 export function DistributionHistogram({
   bins,
   median,
+  precision,
   unit,
   prefLabel,
   prefValues = [],
@@ -180,7 +179,7 @@ export function DistributionHistogram({
         fontSize={10}
         fill={LABEL_FILL}
       >
-        中央値 {fullFormat.format(median)}
+        中央値 {formatValueWithPrecision(median, precision)}
         {unit}
       </text>
 

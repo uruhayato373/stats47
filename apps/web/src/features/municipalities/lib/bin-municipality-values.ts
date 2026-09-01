@@ -1,3 +1,5 @@
+import { resolveValuePrecision } from '@stats47/utils';
+
 import type { MunicipalityRankingValue } from '@stats47/ranking/types';
 
 export interface MunicipalityDistributionBin {
@@ -20,6 +22,12 @@ export interface MunicipalityDistribution {
   min: number;
   median: number;
   max: number;
+  /**
+   * データセット全体から 1 度だけ解決した小数桁 (resolveValuePrecision)。
+   * 値の表示は formatValueWithPrecision(value, precision) で揃える
+   * (blog-svg-chart-standards §数値の桁揃え)。
+   */
+  precision: number;
   total: number;
   /** 選択都道府県の自治体数 (未選択時は 0) */
   prefTotal: number;
@@ -52,6 +60,7 @@ export function binMunicipalityValues(
   const prefectureCode = options.prefectureCode ?? '';
 
   const sorted = values.map((v) => v.value).sort((a, b) => a - b);
+  const precision = resolveValuePrecision(sorted);
   const min = sorted[0];
   const max = sorted[sorted.length - 1];
   // page.tsx の「分布の要点」と同じ下側中央値 (表示値を一致させる)
@@ -78,6 +87,7 @@ export function binMunicipalityValues(
       min,
       median,
       max,
+      precision,
       total: values.length,
       prefTotal: prefValues.length,
       prefValues,
@@ -152,6 +162,7 @@ export function binMunicipalityValues(
     min,
     median,
     max,
+    precision,
     total: values.length,
     prefTotal: prefValues.length,
     prefValues,

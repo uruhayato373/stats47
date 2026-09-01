@@ -23,6 +23,9 @@ describe('binMunicipalityValues', () => {
     expect(dist!.max).toBe(10);
     // 下側中央値 (偶数件は下側): sorted[floor((10-1)/2)] = sorted[4] = 5
     expect(dist!.median).toBe(5);
+    // 整数データセットは precision 0、小数を含むと桁が付く (表示揃えの入力)
+    expect(dist!.precision).toBe(0);
+    expect(binMunicipalityValues(makeRows([1.5, 2, 3]))!.precision).toBeGreaterThan(0);
   });
 
   it('強い右歪みではoverflowビンに裾を畳み、本体の分布が潰れない', () => {
