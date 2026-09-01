@@ -3,8 +3,8 @@ title: 統合失調症の入院受療率はなぜ西日本に集中するのか
 seoTitle: "統合失調症の受療率(入院)ランキング 1位鹿児島県266人・最下位滋賀県55人 47都道府県2023年"
 description: 同じ病気でも、住んでいる県によって入院して治療を受けている人の数はこれほど違うのでしょうか。患者調査に基づく統合失調症の入院受療率を都道府県別に見ると、西日本と都市部で大きな差が生まれています。
 slug: treatment-rate-schizophrenia-inpatient-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 

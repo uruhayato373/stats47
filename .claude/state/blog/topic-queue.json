@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 92,
+    "pending": 91,
     "inProgress": 2,
-    "done": 24,
+    "done": 25,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 16,
-      "A": 36,
+      "A": 35,
       "F": 12,
       "G": 9
     }
@@ -2156,8 +2156,10 @@
       "suggestedTitle": "統合失調症の受療が多い県はどこ",
       "combinedScore": 0.301,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 75
+      "status": "done",
+      "priority": 75,
+      "done_at": "2026-09-01",
+      "published_slug": "treatment-rate-schizophrenia-inpatient-prefecture-gap"
     },
     {
       "topicKey": "gap-bean-sprouts-consumption-quantity",
