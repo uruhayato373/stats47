@@ -3,8 +3,8 @@ title: もやし消費量1位山形、沖縄の3倍差
 seoTitle: "もやし消費量ランキング｜1位山形10,288g・47位沖縄3,399g 47都道府県2024年"
 description: 同じ日本でも、もやしの消費量には大きな地域差があります。家計調査の2024年データから、山形県と沖縄県のあいだで見えてきた差の正体を掘り下げます。
 slug: bean-sprouts-consumption-quantity-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 
