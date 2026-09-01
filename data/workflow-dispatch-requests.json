@@ -1,0 +1,7 @@
+{
+  "workflow": "sync-snapshots.yml",
+  "inputs": { "only": "municipality-ranking" },
+  "ref": "develop",
+  "reason": "fiscal-strength-index の placeholder unit「‐」→「指数」是正の R2 反映 (builder 修正は #882 で main 反映済み)",
+  "requestedAt": "2026-09-01T07:33:00Z"
+}
