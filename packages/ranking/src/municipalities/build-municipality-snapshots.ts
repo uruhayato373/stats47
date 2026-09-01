@@ -6,6 +6,14 @@ import type {
   MunicipalityRankingValuesSnapshot,
 } from '../types/municipality-snapshot';
 
+const PLACEHOLDER_UNITS: ReadonlySet<string> = new Set([
+  '-',
+  '\u2010', // ‐
+  '\u2212', // −
+  '\u2015', // ―
+  '\u2014', // —
+]);
+
 export interface MunicipalityStatsRow {
   areaCode: string;
   areaName: string;
@@ -125,7 +133,12 @@ export function buildMunicipalityRankingSnapshots({
 
   const firstLatestRow = latestRows[0];
   const yearName = firstLatestRow?.yearName ?? latestYearCode;
-  const unit = firstLatestRow?.unit || metric.unit;
+  // e-Stat 由来の行 unit を優先するが、placeholder ダッシュ (財政力指数などの無次元指標で
+  // e-Stat が「‐」を返す) は unit ではないので config の unit へ倒す
+  // (metric-config-standards が config 側の「‐」を lint error で禁じているため config が信頼できる)。
+  const rowUnit = firstLatestRow?.unit?.trim() ?? '';
+  const unit =
+    rowUnit && !PLACEHOLDER_UNITS.has(rowUnit) ? rowUnit : metric.unit;
   const excludedEntityCount = entityPolicy.entities.filter(
     (entity) => entity.disposition !== 'publishable'
   ).length;

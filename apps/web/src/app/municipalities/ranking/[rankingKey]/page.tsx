@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -18,14 +20,18 @@ import {
 } from '@stats47/ranking/server';
 import { ChevronDown } from 'lucide-react';
 
+import { DistributionHistogram } from '@/components/charts/DistributionHistogram';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
 
+
 import {
   MunicipalityRankingViewTracker,
+  binMunicipalityValues,
   filterMunicipalityRanking,
   municipalityLeafName,
 } from '@/features/municipalities';
+import { MunicipalityRankingMapSection } from '@/features/municipalities/server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 import { UrlPolicy } from '@/lib/url-policy';
@@ -132,10 +138,15 @@ export default async function MunicipalityRankingPage({
     page: requestedPage,
     pageSize: 50,
   });
-  const sortedValues = [...snapshot.values].sort((a, b) => a.value - b.value);
-  const median = sortedValues[Math.floor((sortedValues.length - 1) / 2)]?.value;
-  const minimum = sortedValues[0]?.value;
-  const maximum = sortedValues.at(-1)?.value;
+  const distribution = binMunicipalityValues(snapshot.values, {
+    prefectureCode: prefectureCode || undefined,
+  });
+  const median = distribution?.median;
+  const minimum = distribution?.min;
+  const maximum = distribution?.max;
+  const prefName = prefectureCode
+    ? fetchPrefectures().find((p) => p.prefCode === prefectureCode)?.prefName
+    : undefined;
   const numberFormat = new Intl.NumberFormat('ja-JP', {
     maximumFractionDigits: 1,
   });
@@ -207,6 +218,49 @@ export default async function MunicipalityRankingPage({
           </div>
         ))}
       </section>
+
+      {distribution && (
+        <section aria-label="全国分布" className="mt-5">
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 className="text-sm font-semibold">全国分布</h2>
+            {prefName && (
+              <p className="text-xs text-muted-foreground">
+                縦線 = {prefName}の各自治体
+              </p>
+            )}
+          </div>
+          <div className="mt-2 border border-border p-2">
+            <DistributionHistogram
+              bins={distribution.bins}
+              median={distribution.median}
+              unit={snapshot.unit}
+              prefLabel={prefName}
+              prefValues={distribution.prefValues}
+              ariaLabel={`${municipalityRankingDisplayTitle(item)}の全国分布ヒストグラム`}
+            />
+          </div>
+          {!prefectureCode && (
+            <p className="mt-1 text-xs text-muted-foreground">
+              都道府県で絞り込むと、県内の分布地図を表示します。
+            </p>
+          )}
+        </section>
+      )}
+
+      {prefectureCode && (
+        <Suspense
+          fallback={
+            <div className="mt-5 h-72 animate-pulse bg-muted/40" aria-hidden />
+          }
+        >
+          <MunicipalityRankingMapSection
+            rankingKey={item.rankingKey}
+            unit={snapshot.unit}
+            prefectureCode={prefectureCode}
+            values={snapshot.values}
+          />
+        </Suspense>
+      )}
 
       <form
         method="get"
