@@ -11,6 +11,7 @@ export const generalClinicCount: MetricConfig = {
     "statsDataId": "0000010109",
     "cdCat01": "I5102",
     "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
   },
   "entities": [
     "prefecture",
