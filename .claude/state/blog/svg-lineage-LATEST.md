@@ -1,15 +1,15 @@
 # ブログSVGデータ系譜 復元キュー (LATEST)
 
-棚卸し対象: 433 記事 / SVG 1090 枚
+棚卸し対象: 522 記事 / SVG 1316 枚
 
 ## 系譜の整備状況
-- ✅ both (json+source・系譜完全): **991** (91%)
+- ✅ both (json+source・系譜完全): **1217** (92%)
 - 🟡 jsonOnly (再生成可・出典無): **0** (0%)
-- 🔴 neither (元データ消失・再生成不可): **99** (9%)
+- 🔴 neither (元データ消失・再生成不可): **99** (8%)
 - 🤖 現行ranking自動復元器で確証可能: **0**
 
 ## 復元手法別 (restoreMethod)
-- `done`: 991
+- `done`: 1217
 - `manual`: 41
 - `ssot-restore-new`: 34
 - `ssot-restore`: 24

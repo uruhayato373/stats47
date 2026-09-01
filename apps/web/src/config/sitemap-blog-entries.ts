@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-08-31
- * 件数: blog 518 / tag 62 / survey 85
+ * 件数: blog 522 / tag 62 / survey 85
  */
 
 export interface SitemapBlogEntry {
@@ -23,6 +23,9 @@ export interface SitemapTagEntry {
 }
 
 export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
+  { slug: "2050-population-flood-exposure", lastModified: "2026-09-01" },
+  { slug: "2050-population-map-reading", lastModified: "2026-09-01" },
+  { slug: "2050-station-access-population", lastModified: "2026-09-01" },
   { slug: "abortion-rate-prefecture-gap", lastModified: "2026-05-17" },
   { slug: "accommodation-expenditure-ranking", lastModified: "2026-07-09" },
   { slug: "aging-rate-akita-vs-okinawa", lastModified: "2026-03-09" },
@@ -381,6 +384,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "piano-ownership-prefecture-gap", lastModified: "2026-06-02" },
   { slug: "police-officer-density-vs-crime-gap", lastModified: "2026-05-29" },
   { slug: "pollution-complaints-regional-map", lastModified: "2026-03-09" },
+  { slug: "population-decline-land-price-divergence", lastModified: "2026-09-01" },
   { slug: "population-density-urbanization", lastModified: "2026-03-09" },
   { slug: "population-migration-tokyo-concentration", lastModified: "2026-03-05" },
   { slug: "pork-consumption-expenditure", lastModified: "2026-06-21" },
@@ -555,7 +559,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "エンゲル係数", lastModified: "2026-07-11" },
   { tagKey: "テレワーク", lastModified: "2026-06-02" },
   { tagKey: "人口", lastModified: "2026-08-29" },
-  { tagKey: "人口減少", lastModified: "2026-08-29" },
+  { tagKey: "人口減少", lastModified: "2026-09-01" },
   { tagKey: "住宅", lastModified: "2026-08-29" },
   { tagKey: "健康", lastModified: "2026-08-28" },
   { tagKey: "共働き", lastModified: "2026-08-28" },

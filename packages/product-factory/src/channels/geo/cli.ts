@@ -121,7 +121,67 @@ function limitations(item: PipelineItem): string {
   return '推計値は将来実績を保証せず、都道府県集計を市区町村・個別地点へ外挿できません。';
 }
 
-function readme(item: PipelineItem): string {
+interface StationStageSummary {
+  stationGroups: number;
+  prefectureStationOccurrences: number;
+  uniqueDisplayedStationGroups: number;
+  crossPrefectureExtraOccurrences: number;
+  undisplayedStationGroups: number;
+}
+
+function stationStageSummary(aggregate: Record<string, unknown>): StationStageSummary {
+  const dataQuality = aggregate.dataQuality;
+  if (typeof dataQuality !== 'object' || dataQuality === null) {
+    throw new Error('station aggregate dataQuality missing');
+  }
+  const inputCounts = (dataQuality as Record<string, unknown>).inputCounts;
+  if (typeof inputCounts !== 'object' || inputCounts === null) {
+    throw new Error('station aggregate inputCounts missing');
+  }
+  const stationGroups = Number((inputCounts as Record<string, unknown>).stationGroups);
+  if (!Number.isInteger(stationGroups) || stationGroups <= 0) {
+    throw new Error(`stationGroups invalid: ${stationGroups}`);
+  }
+
+  const detailDir = path.join(repoRoot, '.local/r2/app/geo/population-station-access/pref');
+  const detailFiles = fs.readdirSync(detailDir).filter((name) => /^\d{2}\.json$/.test(name)).sort();
+  if (detailFiles.length !== 47) {
+    throw new Error(`station detail count must be 47: ${detailFiles.length}`);
+  }
+  const stationIds: string[] = [];
+  for (const name of detailFiles) {
+    const detail = JSON.parse(fs.readFileSync(path.join(detailDir, name), 'utf8')) as { stations?: unknown[] };
+    if (!Array.isArray(detail.stations)) throw new Error(`${name}: stations missing`);
+    for (const station of detail.stations) {
+      if (!Array.isArray(station) || typeof station[0] !== 'string') {
+        throw new Error(`${name}: station tuple invalid`);
+      }
+      stationIds.push(station[0]);
+    }
+  }
+  const uniqueDisplayedStationGroups = new Set(stationIds).size;
+  if (uniqueDisplayedStationGroups > stationGroups) {
+    throw new Error('displayed station groups exceed national input');
+  }
+  return {
+    stationGroups,
+    prefectureStationOccurrences: stationIds.length,
+    uniqueDisplayedStationGroups,
+    crossPrefectureExtraOccurrences: stationIds.length - uniqueDisplayedStationGroups,
+    undisplayedStationGroups: stationGroups - uniqueDisplayedStationGroups,
+  };
+}
+
+function stationCountExplanation(item: PipelineItem, aggregate: Record<string, unknown>): string {
+  if (item.analysisSlug !== 'population-station-access') return '';
+  const summary = stationStageSummary(aggregate);
+  return `## 駅グループ件数の意味\n\n` +
+    `- 全国入力の ${summary.stationGroups.toLocaleString('ja-JP')} は、距離判定前に駅グループコードで重複をまとめたユニーク駅グループ数です。\n` +
+    `- 47県の途中artifactにある \`stations\` は、当該県の人口メッシュ判定に寄与した表示用部分集合です。合計 ${summary.prefectureStationOccurrences.toLocaleString('ja-JP')} 件、ユニーク ${summary.uniqueDisplayedStationGroups.toLocaleString('ja-JP')} 駅グループです。\n` +
+    `- 県境をまたいで表示される重複分が ${summary.crossPrefectureExtraOccurrences.toLocaleString('ja-JP')} 件あり、人口メッシュ中心点から直線800m以内にない ${summary.undisplayedStationGroups.toLocaleString('ja-JP')} 駅グループは県別表示に現れません。都道府県別駅数ではありません。\n\n`;
+}
+
+function readme(item: PipelineItem, aggregate: Record<string, unknown>): string {
   const layers = item.sourceLayers.map((layer) => `- ${layer.label}（${layer.geometry} / ${layer.role}）`).join('\n');
   return `# ${item.title} 再現・記事制作パック\n\n` +
     `販売予定価格: ${item.paid.priceYen.toLocaleString('ja-JP')}円\n\n` +
@@ -129,6 +189,7 @@ function readme(item: PipelineItem): string {
     `## 無料で確認できる結論\n\n- https://stats47.jp${item.free.canonicalPath}\n- https://stats47.jp${item.free.methodPath}\n\n` +
     `## 同梱物\n\n- analysis.csv: 47都道府県の加工済み集計\n- analysis.json: 集計の機械可読版\n- DATA-DICTIONARY.md: 指標・入力・演算の辞書\n- MANIFEST.json: 他の同梱4ファイルのSHA-256と参照元\n\n` +
     `## 入力レイヤー\n\n${layers}\n\n` +
+    stationCountExplanation(item, aggregate) +
     `## 利用上の注意\n\nこの商品は公開データの結論を隠して販売するものではありません。再現可能な加工済みデータ、辞書、検証経路を提供します。各一次資料の利用条件と出典表示は購入者側の二次利用でも維持してください。${limitations(item)}\n`;
 }
 
@@ -256,10 +317,13 @@ function dictionary(item: PipelineItem, aggregate: Record<string, unknown>): str
     : '- evidence: 都道府県ランキングの出典情報を参照';
   const reproduction = item.analysisSlug === 'population-flood-risk'
     ? `## 決定的な空間演算の再実行\n\n次の公開commitを固定して実行します。人口47入力と洪水94入力を取得・照合し、メッシュ中心点のpoint-in-polygon、県別途中artifact、47県aggregate、保存則監査を順に実行します。\n\n- repository: https://github.com/uruhayato373/stats47\n- verified revision: \`${gitRevision}\`\n- working directory: clone後の \`stats47/\`\n\n\`\`\`bash\ngit clone https://github.com/uruhayato373/stats47.git\ncd stats47\ngit checkout ${gitRevision}\nnpm ci\nnpm run geo:build-flood-analysis\nnpm run geo:export-content-pipeline\nnpm run products:geo:generate --workspace packages/product-factory -- --article-key ${item.paid.articleKey}\nnpm run products:geo:validate --workspace packages/product-factory\n\`\`\`\n\n実装: \`packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts\`\n\n`
-    : '';
+    : item.analysisSlug === 'population-station-access'
+      ? `## 決定的な空間演算の再実行\n\n次の公開commitを固定して実行します。\`geo:build-station-access\` は人口47入力に加え、S12全国TopoJSONがなければ公開R2から取得し、bytesとSHA-256を固定値で照合してから駅代表点、大円距離800m判定、県別途中artifact、47県aggregate、保存則監査を生成します。\n\n- repository: https://github.com/uruhayato373/stats47\n- verified revision: \`${gitRevision}\`\n- working directory: clone後の \`stats47/\`\n- S12 input URL: ${remoteBase}/gis/mlit-ksj/S12/25/national.topojson\n- S12 expected bytes: 10,639,010\n- S12 expected SHA-256: \`3e69811eee825cc1346ff17340f5ee224562478f71879f7b34d0da6fc7d49fc9\`\n\n\`\`\`bash\ngit clone https://github.com/uruhayato373/stats47.git\ncd stats47\ngit checkout ${gitRevision}\nnpm ci\nnpm run geo:build-station-access\nnpm run geo:export-content-pipeline\nnpm run products:geo:generate --workspace packages/product-factory -- --article-key ${item.paid.articleKey}\nnpm run products:geo:validate --workspace packages/product-factory\n\`\`\`\n\n実装: \`packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts\`\n\n`
+      : '';
   return `# データ辞書\n\n## 指標定義\n\n| キー | 表示名 | 定義・時点・集計法 | 単位 | 表示形式 |\n|---|---|---|---|---|\n${metrics}\n\n` +
     `## 行の識別子\n\n- \`areaCode\`: 5桁の都道府県コード\n- \`areaName\`: 都道府県名\n- \`rank\`: 主指標を降順で並べた順位（同値処理はanalysis.jsonの生成結果に従う）\n\n` +
     `## 空間演算\n\n${item.spatialOperations.length > 0 ? item.spatialOperations.map((op) => `- ${op}`).join('\n') : '- 単一指標の都道府県集計（空間横断ではありません）'}\n\n` +
+    stationCountExplanation(item, aggregate) +
     reproduction +
     `## 検証経路\n\n- canonical: https://stats47.jp${item.free.canonicalPath}\n- method: https://stats47.jp${item.free.methodPath}\n${evidenceLines}\n`;
 }
@@ -279,7 +343,7 @@ async function generate(item: PipelineItem): Promise<ProductManifest> {
   const dir = path.join(outputRoot, item.paid.articleKey);
   fs.mkdirSync(dir, { recursive: true });
   const payloads = new Map<string, string>([
-    ['README.md', readme(item)],
+    ['README.md', readme(item, aggregate.value)],
     ['DATA-DICTIONARY.md', dictionary(item, aggregate.value)],
     ['analysis.csv', toCsv(rows)],
     ['analysis.json', `${JSON.stringify(aggregate.value, null, 2)}\n`],
@@ -346,6 +410,15 @@ async function validate(items: PipelineItem[]): Promise<void> {
     if (fs.existsSync(readmePath) && fs.readFileSync(readmePath, 'utf8').includes('市区町村')) {
       failures.push(`${item.paid.articleKey}: 47都道府県商品に市区町村表記があります`);
     }
+    if (item.analysisSlug === 'population-station-access' && fs.existsSync(readmePath)) {
+      const body = fs.readFileSync(readmePath, 'utf8');
+      for (const forbidden of ['駅徒歩圏', '駅数との違い']) {
+        if (body.includes(forbidden)) failures.push(`${item.paid.articleKey}: READMEに誤認表現 ${forbidden}`);
+      }
+      for (const required of ['直線800m判定', '全国入力の 9,080', '都道府県別駅数ではありません']) {
+        if (!body.includes(required)) failures.push(`${item.paid.articleKey}: README missing ${required}`);
+      }
+    }
     const dictionaryPath = path.join(dir, 'DATA-DICTIONARY.md');
     if (fs.existsSync(dictionaryPath)) {
       const body = fs.readFileSync(dictionaryPath, 'utf8');
@@ -354,6 +427,17 @@ async function validate(items: PipelineItem[]): Promise<void> {
       }
       if (item.evidence?.manifestKey && !body.includes(`${remoteBase}/${item.evidence.manifestKey}`)) {
         failures.push(`${item.paid.articleKey}: dictionary evidence URL missing`);
+      }
+      if (item.analysisSlug === 'population-station-access') {
+        for (const required of [
+          'repository: https://github.com/uruhayato373/stats47',
+          'verified revision:',
+          'npm run geo:build-station-access',
+          'S12 expected SHA-256',
+          '県別途中artifact',
+        ]) {
+          if (!body.includes(required)) failures.push(`${item.paid.articleKey}: dictionary missing ${required}`);
+        }
       }
     }
 
