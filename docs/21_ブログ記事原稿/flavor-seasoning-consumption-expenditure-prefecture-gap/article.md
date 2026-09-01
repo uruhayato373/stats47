@@ -3,8 +3,8 @@ title: 風味調味料消費額はなぜ九州に集中するのか
 seoTitle: "風味調味料消費支出額ランキング｜都道府県別の地域差 2024年"
 description: 同じ日本でも、風味調味料への年間支出額は都道府県で大きく異なります。家計調査2024年のデータから、九州各県が上位に並ぶ理由と、東北・北陸で支出が伸び悩む背景を読み解きます。
 slug: flavor-seasoning-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 
