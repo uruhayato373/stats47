@@ -42,10 +42,38 @@ async function writeSnapshot(
   await writeFile(target, body, 'utf8');
 }
 
+/**
+ * published 集合内で title が衝突する key → 表示用 subtitle。
+ * 衝突しない title に「総数」等のノイズ subtitle を付けないため、衝突時だけ返す。
+ * 衝突しているのに subtitle が無い/注釈(※)しか無い場合は throw
+ * (同一 <title> のページを 2 枚作らない — fail-closed)。
+ */
+function buildSubtitleForCollisions(): Map<string, string> {
+  const titleCount = new Map<string, number>();
+  for (const key of KNOWN_MUNICIPALITY_RANKING_KEYS) {
+    const title = getMetricConfig(key)?.title;
+    if (title) titleCount.set(title, (titleCount.get(title) ?? 0) + 1);
+  }
+  const result = new Map<string, string>();
+  for (const key of KNOWN_MUNICIPALITY_RANKING_KEYS) {
+    const metric = getMetricConfig(key);
+    if (!metric || (titleCount.get(metric.title) ?? 0) <= 1) continue;
+    const subtitle = metric.subtitle?.trim();
+    if (!subtitle || subtitle.startsWith('※')) {
+      throw new Error(
+        `title collision without distinguishing subtitle: ${key} (${metric.title})`
+      );
+    }
+    result.set(key, subtitle);
+  }
+  return result;
+}
+
 async function generateForKey(
   rankingKey: string,
   r2Base: string,
-  outputRoot: string
+  outputRoot: string,
+  subtitleByKey: ReadonlyMap<string, string>
 ): Promise<void> {
   if (!KNOWN_MUNICIPALITY_RANKING_KEYS.has(rankingKey)) {
     throw new Error(`municipality ranking is not published: ${rankingKey}`);
@@ -89,6 +117,7 @@ async function generateForKey(
     metric: {
       key: metric.key,
       title: metric.title,
+      subtitle: subtitleByKey.get(rankingKey) ?? null,
       description: metric.description,
       unit: metric.unit,
       source: {
@@ -154,8 +183,9 @@ async function main(): Promise<void> {
   const keys = process.argv.includes('--all-published')
     ? [...KNOWN_MUNICIPALITY_RANKING_KEYS].sort()
     : [argValue('--key') ?? 'elderly-population-ratio'];
+  const subtitleByKey = buildSubtitleForCollisions();
   for (const rankingKey of keys) {
-    await generateForKey(rankingKey, r2Base, outputRoot);
+    await generateForKey(rankingKey, r2Base, outputRoot, subtitleByKey);
   }
 }
 

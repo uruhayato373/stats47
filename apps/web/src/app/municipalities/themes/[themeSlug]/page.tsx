@@ -86,7 +86,9 @@ export default async function MunicipalityThemePage({
               href={`/municipalities/ranking/${item.rankingKey}`}
               className="block"
             >
-              <h3 className="font-semibold text-foreground">{item.title}</h3>
+              <h3 className="font-semibold text-foreground">
+                {item.subtitle ? `${item.title}（${item.subtitle}）` : item.title}
+              </h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 {item.description}
               </p>

@@ -40,6 +40,15 @@ type SearchParams = Record<string, string | string[] | undefined>;
 
 export const dynamic = 'force-dynamic';
 
+// subtitle は generator が「published 集合内で title が衝突するときだけ」焼き込む。
+// 在るときは title と併記しないと同一 <title> のページが複数できる (事業所数×業種 等)。
+function municipalityRankingDisplayTitle(item: {
+  title: string;
+  subtitle?: string;
+}): string {
+  return item.subtitle ? `${item.title}（${item.subtitle}）` : item.title;
+}
+
 function first(value: string | string[] | undefined): string {
   return Array.isArray(value) ? (value[0] ?? '') : (value ?? '');
 }
@@ -67,8 +76,9 @@ export async function generateMetadata({
   if (!KNOWN_MUNICIPALITY_RANKING_KEYS.has(rankingKey)) return {};
   const item = await readMunicipalityRankingItem(rankingKey);
   if (!item) return {};
-  const title = `${item.title} 市区町村ランキング【${item.latestYear.yearName}】`;
-  const description = `${item.title}を${item.valueCount.toLocaleString('ja-JP')}市区町村で比較。自治体名検索と都道府県絞り込みに対応しています。`;
+  const displayTitle = municipalityRankingDisplayTitle(item);
+  const title = `${displayTitle} 市区町村ランキング【${item.latestYear.yearName}】`;
+  const description = `${displayTitle}を${item.valueCount.toLocaleString('ja-JP')}市区町村で比較。自治体名検索と都道府県絞り込みに対応しています。`;
   return {
     title,
     description,
@@ -132,7 +142,7 @@ export default async function MunicipalityRankingPage({
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Dataset',
-    name: `${item.title} 市区町村ランキング`,
+    name: `${municipalityRankingDisplayTitle(item)} 市区町村ランキング`,
     temporalCoverage: snapshot.yearCode,
     spatialCoverage: '日本の市区町村',
     distribution: {
@@ -163,13 +173,13 @@ export default async function MunicipalityRankingPage({
         items={[
           { label: 'ホーム', href: '/' },
           { label: '市区町村', href: '/municipalities' },
-          { label: item.title },
+          { label: municipalityRankingDisplayTitle(item) },
         ]}
       />
       <StatisticsScopeNav current="municipalities" />
       <PageHeader
         eyebrow="市区町村ランキング"
-        title={item.title}
+        title={municipalityRankingDisplayTitle(item)}
         description={item.description}
         stats={`${snapshot.yearName}・${snapshot.count.toLocaleString('ja-JP')}自治体`}
       />

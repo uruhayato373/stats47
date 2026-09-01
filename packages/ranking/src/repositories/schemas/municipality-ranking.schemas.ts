@@ -10,6 +10,7 @@ export const MunicipalityRankingItemSnapshotSchema = z.object({
   generatedAt: z.string().min(1),
   rankingKey: z.string().min(1),
   title: z.string().min(1),
+  subtitle: z.string().min(1).optional(),
   description: z.string(),
   unit: z.string(),
   latestYear: z.object({

@@ -741,33 +741,29 @@ updated: 2026-08-30
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
-### [MUNI-RANKING-EXPANSION-01] 市区町村ランキングの段②拡充 (第1バッチ実施済み・以降は実測待ち)
+### [MUNI-RANKING-EXPANSION-01] 市区町村ランキング拡充 (全量公開 2026-09-01 実施済み・残は SSDS 未使用分)
 
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-01]
 
-- **owner**: Claude Code (選定・監査) + オーナー (published 昇格の承認)
-- **第1バッチ (2026-09-01 オーナー承認・実施済み)**: census 系 6 key
-  (total-population / population-density-per-km2-inhabitable-area / young-population-ratio /
-  production-age-population-ratio / households / moving-in-excess-rate) + テーマ `population` を
-  published 昇格。品質判断の根拠は catalog コメントと expansion-survey。副産物:
-  moving-in-excess-rate の subtitle 誤り (「外国人移動者」→「外国人移動者を含む」) を是正
-- **第2バッチ以降の trigger**: 第1バッチ公開 28 日後 (2026-09-29 目安) の GSC/GA4 実測 +
-  doc 44 WP8 verdict、またはオーナーの明示承認。needs-review 39 (stale 36 等) と
-  SSDS 未使用 733 はその後
-- **調査結果 (2026-09-01 段①完了・SSOT = `.claude/state/municipalities/expansion-survey.json`)**:
-  - 既存 R2 候補 184 件の機械監査: **publish-candidate 139** / needs-review 39 (stale 36・null/zero-heavy 2・
-    極端%値 2) / catalog 判定済み 6。全 180 artifact の値分布 (定数/負値/値域) まで検査済み・fetch 失敗 0
-  - SSDS 市区町村系の未使用指標 **733 件** (全 901 中。同じ 1,913 団体軸・既存 pipeline で投入可能) を
-    code/name/unit 付きで列挙済み (`ssdsUntapped`)
-  - 非 SSDS は `.claude/state/estat-city-discovery.json` (2026-05-17・3,361 表) が全量列挙済み
-- **実行規律 (doc 44 準拠)**:
-  - `MUNICIPALITY_METRIC_AVAILABILITY` への published 追記は**人手品質判断のみ** — publish-candidate 139 は
-    機械 clean であって公開承認ではない (fiscal-strength-index が機械 clean でも意味的監査未了の実例)
-  - 小バッチ (数 key) → 実測 → 次バッチ。184 候補一括公開は禁止事項
-  - 選定は SSDS 未使用 733 より先に**既存 R2 済み 139** から (投入コストゼロ)
-- **完了条件**: 第1バッチの key 選定 → entityPolicy/valuePolicy の人手監査 → catalog 追記 → WP 手順で
-  R2/known/sitemap 整合 → 本番実測 200
-- **関連**: doc 44 WP8 / `MUNI-AI-CONTENT-01`
+- **owner**: Claude Code (選定・監査) + オーナー (公開承認)
+- **実施済み (2026-09-01)**:
+  - 第1バッチ 6 key + テーマ population (オーナー承認・本番実測済み)
+  - **全量公開 (オーナー指示「公開できるものは全て公開したい」)**: 候補 184 のうち **171 key + 19 テーマ**を
+    published 昇格。除外 13 の理由は catalog の unsupported/unknown エントリが正典
+    (cities.json 不在 4 / 値完全一致の重複 7 / 品質監査未了 2 = industrial-land-price・major-lake-area)。
+    fiscal-strength-index の unknown は「0 = 194 行政区 + 特別区部のみ」の実測で解消。
+    同名 title の系列は item snapshot の `subtitle` でページ title を区別 (generator が衝突未解決を throw)。
+    副産物: moving-in-excess-rate の subtitle 誤り是正 + SSDS 系 10 config の displayName/url 補記
+- **残り (次の拡充はここから)**:
+  1. 品質監査未了 2 件 (industrial-land-price / major-lake-area) の要否判断
+  2. **SSDS 未使用 733 指標** (`expansion-survey.json` の `ssdsUntapped`・同じ 1,913 団体軸) —
+     e-Stat から `page-data-batch --kind city` で cities.json を作れば同じ pipeline で公開可能。
+     metric config 新設が要るため data-ingester 系の作業
+  3. 非 SSDS 3,361 表 (`.claude/state/estat-city-discovery.json`) — 表ごとに軸 pin 設計が要る長尾
+- **計測**: 公開 28 日後 (2026-09-29 目安) に GSC/GA4 で市区町村面の実測。pilot の 9/21 判定は
+  confounded (doc 44 記録済み)
+- **関連**: doc 44 WP8 / `MUNI-AI-CONTENT-01` (公開 key が 10 を超えたため trigger 1 は成立。
+  trigger 2=解説スロット・3=オーナー承認 は未成立)
 
 ### [MUNI-AI-CONTENT-01] 市区町村ランキング用 ai-content を別契約で新設する
 

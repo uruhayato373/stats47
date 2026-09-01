@@ -18,6 +18,8 @@ export interface MunicipalityStatsRow {
 export interface MunicipalityMetricSnapshotConfig {
   key: string;
   title: string;
+  /** title 衝突時の表示用限定子 (呼び出し側が衝突判定してから渡す) */
+  subtitle?: string | null;
   description?: string | null;
   unit: string;
   source: { displayName: string; url: string };
@@ -134,6 +136,7 @@ export function buildMunicipalityRankingSnapshots({
       generatedAt,
       rankingKey: metric.key,
       title: metric.title,
+      ...(metric.subtitle ? { subtitle: metric.subtitle } : {}),
       description:
         metric.description ?? `${metric.title}を市区町村別に比較します。`,
       unit,
