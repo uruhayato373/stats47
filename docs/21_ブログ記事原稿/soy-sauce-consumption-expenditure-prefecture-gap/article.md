@@ -3,8 +3,8 @@ title: しょう油消費額1位はなぜ山形なのか
 seoTitle: "しょう油消費支出額ランキング｜1位山形3,288円・最下位沖縄1,399円 2024年"
 description: 同じ東北地方でも、山形県は1位で青森県は最下位という差が生まれています。しょう油消費支出額の47都道府県データから、食文化と地理が作る地域差の正体を探ります。
 slug: soy-sauce-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 
