@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 91,
+    "pending": 90,
     "inProgress": 2,
-    "done": 25,
+    "done": 26,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 16,
-      "A": 35,
+      "A": 34,
       "F": 12,
       "G": 9
     }
@@ -2382,8 +2382,10 @@
       "suggestedTitle": "コンビニエンスストア販売が多い県はどこ",
       "combinedScore": 0.292,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 83
+      "status": "done",
+      "priority": 83,
+      "done_at": "2026-09-01",
+      "published_slug": "convenience-store-sales-monthly-prefecture-gap"
     },
     {
       "topicKey": "gap-manufacturing-industry-added-value",

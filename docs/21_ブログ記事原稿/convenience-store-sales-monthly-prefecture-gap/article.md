@@ -3,8 +3,8 @@ title: コンビニ販売額、東京はなぜ鳥取の39倍なのか
 seoTitle: "コンビニエンスストア販売額ランキング 都道府県別 2024年"
 description: 同じコンビニでも、県が変われば売上の規模はこれほど違います。東京都と鳥取県の間には約39倍もの開きがあり、この記事ではその背景にある人口と店舗網の構造を読み解きます。
 slug: convenience-store-sales-monthly-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 
