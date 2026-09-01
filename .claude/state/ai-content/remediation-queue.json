@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-08-31T00:38:24.640Z",
+  "generatedAt": "2026-09-01T01:46:57.477Z",
   "gscSnapshot": "2026-W35",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
-    "total": 2167,
+    "total": 2163,
     "done": 371,
-    "needsRegen": 1796,
+    "needsRegen": 1792,
     "needsByReason": {
-      "incomplete": 1540,
+      "incomplete": 1536,
       "missing": 197,
       "blocker": 59
     },
@@ -17,7 +17,7 @@
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
     "doneImpressions": 55293,
-    "needsImpressions": 6757,
+    "needsImpressions": 6746,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -7701,21 +7701,6 @@
       "reviewTier": "gemini-auto"
     },
     {
-      "rankingKey": "health-checkup-rate-lifestyle-diseases",
-      "impressions": 8,
-      "clicks": 1,
-      "position": 6.63,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "gemini-auto"
-    },
-    {
       "rankingKey": "hobby-participation-rate-classical-music",
       "impressions": 8,
       "clicks": 1,
@@ -11940,22 +11925,6 @@
         "paren-number",
         "paren-number",
         "missing-pref-commentary"
-      ],
-      "reviewTier": "gemini-auto"
-    },
-    {
-      "rankingKey": "port-passengers-total",
-      "impressions": 3,
-      "clicks": 0,
-      "position": 3.67,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "dataWarns": [
-        "thin-coverage"
       ],
       "reviewTier": "gemini-auto"
     },
@@ -23128,22 +23097,6 @@
       "reviewTier": "gemini-auto"
     },
     {
-      "rankingKey": "kindergarten-education-diffusion-rate",
-      "impressions": 0,
-      "clicks": 0,
-      "position": 0,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "faq-speculation",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "gemini-auto"
-    },
-    {
       "rankingKey": "kindergarten-students-per-teacher",
       "impressions": 0,
       "clicks": 0,
@@ -24713,20 +24666,6 @@
       "reason": "incomplete",
       "blockers": [
         "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "gemini-auto"
-    },
-    {
-      "rankingKey": "nursery-education-diffusion-rate",
-      "impressions": 0,
-      "clicks": 0,
-      "position": 0,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
         "paren-number",
         "paren-number",
         "missing-pref-commentary"

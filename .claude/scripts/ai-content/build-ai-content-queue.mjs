@@ -47,6 +47,7 @@
  *       .claude/todo/backlog.md [AICONTENT-DBLESS-REBUILD]
  */
 
+import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -363,6 +364,26 @@ function appendHistory(queue) {
   return { perDay, etaDays, remaining: s.needsRegen, history: same.length, sinceDate: first.date };
 }
 
+/**
+ * 市区町村ランキングの公開キー数 (git TS SSOT: KNOWN_MUNICIPALITY_RANKING_KEYS)。
+ * このキューは都道府県 (app/ranking) 専用で、市区町村は対象外 — その事実を LATEST.md に
+ * 明示するためだけに数える。件数はスコープ境界の表示であって処理対象ではない。
+ * 素の node からは TS を import できないので tsx eval で実モジュールを読む。
+ * 取れなければ null (「不明」表示) にする — 黙って 0 と書くと「対象が無い」と誤読される。
+ */
+function countPublishedMunicipalityKeys() {
+  try {
+    const out = execSync(
+      `npx tsx -e "import('@stats47/data-configs/geo-scope').then(m => { const k = m.KNOWN_MUNICIPALITY_RANKING_KEYS ?? m.default?.KNOWN_MUNICIPALITY_RANKING_KEYS; console.log(k.size); })"`,
+      { cwd: ROOT, encoding: "utf8", timeout: 120_000, stdio: ["ignore", "pipe", "ignore"] },
+    ).trim();
+    const n = Number(out.split("\n").pop());
+    return Number.isInteger(n) && n >= 0 ? n : null;
+  } catch {
+    return null;
+  }
+}
+
 function writeLatestMd(queue, progress = null) {
   const s = queue.summary;
   const top = queue.entries.filter((e) => e.status === "needs-regen").slice(0, 20);
@@ -377,12 +398,14 @@ function writeLatestMd(queue, progress = null) {
   );
   const failureState = loadFailureState(FAILURES_JSON);
   const quarantined = quarantinedKeys(failureState);
+  const municipalityKeyCount = countPublishedMunicipalityKeys();
   const lines = [
     `# ranking ai-content 是正キュー (LATEST)`,
     ``,
     `- 生成: ${queue.generatedAt}`,
     `- GSC snapshot: ${queue.gscSnapshot} / スコープ: ${queue.scope}`,
     `- done 判定: ${queue.doneCriteria}`,
+    `- スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 ${municipalityKeyCount ?? "不明"} key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)`,
     ``,
     `## サマリ (${queue.scopeKind === "all" ? "active ranking 全件" : "GSC流入 /ranking/ ページ"} ${s.total} 件)`,
     ``,

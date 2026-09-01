@@ -741,6 +741,44 @@ updated: 2026-08-30
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
+### [MUNI-AI-CONTENT-01] 市区町村ランキング用 ai-content を別契約で新設する
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-08-31]
+
+- **owner**: Claude Code (ranking-content-author 系の拡張として)
+- **trigger (3 つすべて満たすまで着手しない)**:
+  1. doc 44 WP8 の実測判断で公開 municipality ranking key が増えること (目安 10 key 以上。現在 1)
+  2. `/municipalities/ranking/<key>` ページが解説を描画する設計になること (現状 item.json の
+     title/description のみで、解説スロットが無い = 消費者不在)
+  3. オーナーが市区町村面のコンテンツ投資を承認すること
+- **設計要点 (着手時の前提。正典 = `ranking-content-standards.md` §スコープ境界)**:
+  - namespace は `app/municipalities/ranking/<key>/ai-content.json` (県版 `app/ranking/` と混ぜない)
+  - スキーマは県版の流用禁止。1,717 自治体に「県別解説 47 件」の相当物は成立しないため、
+    上位/下位の要約・県別分布・母集団と除外自治体 (entityPolicy / valuePolicy) の説明・FAQ で構成する
+  - 監査は `app/municipalities/ranking/<key>/values.json` (cities.json 由来・1,717 entity) と
+    突合する専用実装。県版の EXPECTED_PREF_COUNT=47 / thin 40 / 7 地方区分は持ち込まない
+  - 共有するのは原理のみ: 数値突合 (number-audit の設計)・author/critic 分離・outbox → push → CI 公開
+- **完了条件**: pilot key 1 件で生成 → 専用監査 blocker 0 → critic PASS → ページ描画まで通し、
+  誤値を注入して監査が発火することを実測する
+- **関連**: doc 44 (`docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`) WP8 / `JAPAN-COMMENTARY-01`
+
+### [JAPAN-COMMENTARY-01] /japan の時系列解説は別コンテンツ型として要否から判断する
+
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-08-31]
+
+- **owner**: Claude Code (theme-designer / strategy-advisor と協働)
+- **trigger**: `/japan/*` の GSC 実測で流入が付き、解説の読者価値を検証する意味が出たとき
+  (doc 43 は「最低コンテンツ基準を満たす slug だけ active」— 需要実測が先)
+- **決めること**: ランキング ai-content の派生では作らない (正典 `ranking-content-standards.md`
+  §スコープ境界)。`/japan` の契約は `app/japan/<metric>/series.json` = 公式全国値の時系列で、
+  1位/最下位/県別解説の形が構造的に当てはまらない。候補は (a) theme の evidenceTopics /
+  markdown-section の系譜で人手キュレーション、(b) 時系列専用の生成契約を新設、(c) 作らない。
+  要否そのものから判断する
+- **完了条件**: 採否の判断が実測根拠つきで記録され、採用時は設計が別 backlog として起票されること
+- **関連**: doc 43 (`docs/02_実装計画/43_地理スコープ分離・日本統計基盤実装仕様.md`) / `MUNI-AI-CONTENT-01`
+
+
+
 ### [BUILD-PERF-PHASE34] CI cacheと型検査重複の実験
 
 タグ: [起票:2026-07-12]
