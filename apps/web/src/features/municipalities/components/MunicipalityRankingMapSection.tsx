@@ -3,6 +3,8 @@ import { getMetricConfig, resolveColorScheme } from '@stats47/data-configs';
 import { fetchMunicipalityTopology } from '@stats47/gis/server';
 
 
+import { SectionHeader } from '@/components/section';
+
 import { UrlPolicy } from '@/lib/url-policy';
 
 import { municipalityLeafName } from '../lib/filter-municipality-ranking';
@@ -92,7 +94,7 @@ export async function MunicipalityRankingMapSection({
 
   return (
     <section aria-label={`${prefName}の分布地図`} className="mt-5">
-      <h2 className="text-sm font-semibold">{prefName}の分布地図</h2>
+      <SectionHeader title={`${prefName}の分布地図`} hideRule className="mb-0" />
       <div className="mt-2 border border-border p-2">
         <MunicipalityCityMapClient
           topology={topology}
