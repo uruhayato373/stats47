@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-31T08:23:50.590Z",
+  "updatedAt": "2026-09-01T19:45:05.145Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3495,6 +3495,113 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-08-31T08:20:51.628Z"
+    },
+    "BLOG-PUBLISH-THUMBNAIL-GUARD-01": {
+      "class": "needs-owner",
+      "status": "open",
+      "sourceFile": null,
+      "title": "背景1件の欠落で公開run全体が止まるのを per-slug skip にする",
+      "attempts": [
+        {
+          "at": "2026-09-01T19:43:27.734Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cut -d/ -f2/f3 field extraction check",
+              "git status --porcelain quotepath check (別カードの補強実測)"
+            ],
+            "pass": false
+          },
+          "evidence": "blog-auto-publish.ymlのthumbnail生成～diff-push-r2を既存gate(ci-factual-gate/quality-gate)と同じif!/continueパターンでガードしslug単位skipに変更済み。POSIX仕様上if条件で消費した非zero終了はerrexitを発火させないことは確立済み挙動。だがsandboxがset -e/for/if/bash<script>の実行自体を拒否するため、多slugループの実動作を本セッションでは再現できず。次のPRの実CI runで背景欠落slugを含む公開を観測してか",
+          "failReason": "sandbox が set-e/for/if/bash<script>/npm の実行を全て拒否し、workflow の多slugループを再現するテストが実行不能",
+          "followUps": []
+        },
+        {
+          "at": "2026-09-01T19:44:56.930Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "誤って .github/workflows/{blog-auto-publish,generate-article-charts}.yml を編集し gate 相当の実測(cut -d/でのfield index確認・git status --porcelainでのquotepath既定挙動確認)まで行ったが、backlog-loop.md の禁止パスに抵触すると気づき両ファイルを編集前の内容へ手動で復元した(git diff --stat で .github/ 配下の差分が0であることを確認済み)。修正方針自体はfable-solver-hard等、人",
+          "failReason": "完了条件を満たす修正は .github/workflows/blog-auto-publish.yml の編集を要するが、これは backlog-loop.md の FORBIDDEN_PATH_PATTERNS (ループが自分の権限を広げる口になるため恒久禁止)。前回の記録(class=impl-small/outcome=deferred)は誤分類だったため本エントリで上書き。ワークフロー変更は人間のPRで行うこと。",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "sandbox が set-e/for/if/bash<script>/npm の実行を全て拒否し、workflow の多slugループを再現するテストが実行不能",
+        "since": "2026-09-01T19:43:27.734Z"
+      },
+      "reclassifiedFrom": [
+        {
+          "from": "impl-small",
+          "to": "needs-owner",
+          "at": "2026-09-01T19:44:56.930Z"
+        }
+      ],
+      "completedAt": null
+    },
+    "CHART-VALIDATE-GATE-01": {
+      "class": "needs-owner",
+      "status": "open",
+      "sourceFile": null,
+      "title": "ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す",
+      "attempts": [
+        {
+          "at": "2026-09-01T19:43:39.333Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "deferred",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "echo <path> | cut -d/ -f2 (誤:フォルダ名)",
+              "echo <path> | cut -d/ -f3 (正:slug)",
+              "git status --porcelain (quotepath既定挙動の実機確認)"
+            ],
+            "pass": false
+          },
+          "evidence": "generate-article-charts.ymlの3点を修正: git fetch --depth=1 削除(checkoutのfetch-depth:0と衝突しmerge-base解決を阻害)、awk抽出を$2→$3(実機でcut -d/ -f2='21_ブログ記事原稿'誤/-f3='slug'正を確認)、git diffに-c core.quotepath=false追加(git status --porcelainで既定は非ASCIIパスが\"付き八進エスケープになることを実機確認、awk正規表現が一致しなくなる原因)。実PR runでの検出数",
+          "failReason": "検証条件が実PRでのCI run観測(検出slug数>0)を要求するが、本sandboxはgh/PR発火・bash<script>実行を許可しない",
+          "followUps": []
+        },
+        {
+          "at": "2026-09-01T19:45:05.145Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "skipped",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "誤って .github/workflows/generate-article-charts.yml を編集し(depth=1削除・awk $2→$3・quotepath=false追加)、field index誤りと quotepath既定挙動を実機コマンドで確認したが、backlog-loop.md の禁止パスに抵触すると気づき編集前の内容へ手動で復元した(git diff --stat で .github/ 配下の差分が0であることを確認済み)。3点の原因特定と修正内容は本記録に残すので、人間承認PRで適用する際の参考にすること。",
+          "failReason": "完了条件を満たす修正は .github/workflows/generate-article-charts.yml の編集を要するが、これは backlog-loop.md の FORBIDDEN_PATH_PATTERNS (ワークフローの無人書き換え禁止)。前回の記録(class=impl-small/outcome=deferred)は誤分類だったため本エントリで上書き。ワークフロー変更は人間のPRで行うこと。",
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": "検証条件が実PRでのCI run観測(検出slug数>0)を要求するが、本sandboxはgh/PR発火・bash<script>実行を許可しない",
+        "since": "2026-09-01T19:43:39.333Z"
+      },
+      "reclassifiedFrom": [
+        {
+          "from": "impl-small",
+          "to": "needs-owner",
+          "at": "2026-09-01T19:45:05.145Z"
+        }
+      ],
+      "completedAt": null
     }
   }
 }
