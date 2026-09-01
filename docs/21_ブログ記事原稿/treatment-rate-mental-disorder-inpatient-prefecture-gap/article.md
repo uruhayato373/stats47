@@ -3,8 +3,8 @@ title: 精神疾患の入院受療率、なぜ九州に集中するのか
 seoTitle: "精神及び行動の障害の受療率（入院）ランキング 都道府県別 2023年"
 description: 精神及び行動の障害で入院している患者の受療率には、都道府県で4倍近い開きがあります。最も高い鹿児島県と最も低い神奈川県の違いを、医療提供体制の観点から読み解きます。
 slug: treatment-rate-mental-disorder-inpatient-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 
