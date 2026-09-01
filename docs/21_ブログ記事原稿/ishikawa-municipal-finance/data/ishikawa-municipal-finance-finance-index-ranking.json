@@ -1,0 +1,165 @@
+{
+  "title": "石川県の市町村別 財政力指数",
+  "subtitle": "2024年度",
+  "label": "財政力指数",
+  "unit": "",
+  "year": "2024",
+  "source": "総務省 地方財政状況調査 (決算カード)",
+  "palette": "blue",
+  "decimalPlaces": 2,
+  "generatedBy": "fetch-municipal-finance.mjs",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "金沢市",
+      "pref": "金沢市",
+      "value": 0.85,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 2,
+      "areaName": "野々市市",
+      "pref": "野々市市",
+      "value": 0.78,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 3,
+      "areaName": "小松市",
+      "pref": "小松市",
+      "value": 0.65,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 4,
+      "areaName": "能美市",
+      "pref": "能美市",
+      "value": 0.64,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 5,
+      "areaName": "白山市",
+      "pref": "白山市",
+      "value": 0.62,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 6,
+      "areaName": "津幡町",
+      "pref": "津幡町",
+      "value": 0.55,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 7,
+      "areaName": "加賀市",
+      "pref": "加賀市",
+      "value": 0.54,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 8,
+      "areaName": "志賀町",
+      "pref": "志賀町",
+      "value": 0.53,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 9,
+      "areaName": "川北町",
+      "pref": "川北町",
+      "value": 0.51,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 10,
+      "areaName": "内灘町",
+      "pref": "内灘町",
+      "value": 0.5,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 11,
+      "areaName": "七尾市",
+      "pref": "七尾市",
+      "value": 0.45,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 12,
+      "areaName": "かほく市",
+      "pref": "かほく市",
+      "value": 0.42,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 13,
+      "areaName": "羽咋市",
+      "pref": "羽咋市",
+      "value": 0.4,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 14,
+      "areaName": "宝達志水町",
+      "pref": "宝達志水町",
+      "value": 0.35,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 15,
+      "areaName": "中能登町",
+      "pref": "中能登町",
+      "value": 0.3,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 16,
+      "areaName": "穴水町",
+      "pref": "穴水町",
+      "value": 0.27,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 17,
+      "areaName": "輪島市",
+      "pref": "輪島市",
+      "value": 0.24,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 18,
+      "areaName": "珠洲市",
+      "pref": "珠洲市",
+      "value": 0.22,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 19,
+      "areaName": "能登町",
+      "pref": "能登町",
+      "value": 0.19,
+      "label": "財政力指数",
+      "unit": ""
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "title": "新潟県の市町村別 財政力指数",
+  "subtitle": "2024年度",
+  "label": "財政力指数",
+  "unit": "",
+  "year": "2024",
+  "source": "総務省 地方財政状況調査 (決算カード)",
+  "palette": "blue",
+  "decimalPlaces": 2,
+  "generatedBy": "fetch-municipal-finance.mjs",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "刈羽村",
+      "pref": "刈羽村",
+      "value": 1.45,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 2,
+      "areaName": "聖籠町",
+      "pref": "聖籠町",
+      "value": 1.07,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 3,
+      "areaName": "湯沢町",
+      "pref": "湯沢町",
+      "value": 0.9,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 4,
+      "areaName": "新潟市",
+      "pref": "新潟市",
+      "value": 0.64,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 5,
+      "areaName": "柏崎市",
+      "pref": "柏崎市",
+      "value": 0.64,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 6,
+      "areaName": "燕市",
+      "pref": "燕市",
+      "value": 0.6,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 7,
+      "areaName": "長岡市",
+      "pref": "長岡市",
+      "value": 0.59,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 8,
+      "areaName": "上越市",
+      "pref": "上越市",
+      "value": 0.57,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 9,
+      "areaName": "三条市",
+      "pref": "三条市",
+      "value": 0.55,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 10,
+      "areaName": "小千谷市",
+      "pref": "小千谷市",
+      "value": 0.52,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 11,
+      "areaName": "見附市",
+      "pref": "見附市",
+      "value": 0.52,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 12,
+      "areaName": "新発田市",
+      "pref": "新発田市",
+      "value": 0.49,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 13,
+      "areaName": "糸魚川市",
+      "pref": "糸魚川市",
+      "value": 0.48,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 14,
+      "areaName": "胎内市",
+      "pref": "胎内市",
+      "value": 0.44,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 15,
+      "areaName": "妙高市",
+      "pref": "妙高市",
+      "value": 0.43,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 16,
+      "areaName": "五泉市",
+      "pref": "五泉市",
+      "value": 0.43,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 17,
+      "areaName": "阿賀野市",
+      "pref": "阿賀野市",
+      "value": 0.43,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 18,
+      "areaName": "南魚沼市",
+      "pref": "南魚沼市",
+      "value": 0.42,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 19,
+      "areaName": "加茂市",
+      "pref": "加茂市",
+      "value": 0.41,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 20,
+      "areaName": "弥彦村",
+      "pref": "弥彦村",
+      "value": 0.38,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 21,
+      "areaName": "田上町",
+      "pref": "田上町",
+      "value": 0.36,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 22,
+      "areaName": "村上市",
+      "pref": "村上市",
+      "value": 0.34,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 23,
+      "areaName": "十日町市",
+      "pref": "十日町市",
+      "value": 0.33,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 24,
+      "areaName": "魚沼市",
+      "pref": "魚沼市",
+      "value": 0.28,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 25,
+      "areaName": "津南町",
+      "pref": "津南町",
+      "value": 0.26,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 26,
+      "areaName": "佐渡市",
+      "pref": "佐渡市",
+      "value": 0.24,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 27,
+      "areaName": "出雲崎町",
+      "pref": "出雲崎町",
+      "value": 0.22,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 28,
+      "areaName": "関川村",
+      "pref": "関川村",
+      "value": 0.21,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 29,
+      "areaName": "阿賀町",
+      "pref": "阿賀町",
+      "value": 0.2,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 30,
+      "areaName": "粟島浦村",
+      "pref": "粟島浦村",
+      "value": 0.09,
+      "label": "財政力指数",
+      "unit": ""
+    }
+  ]
+}

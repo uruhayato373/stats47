@@ -4,16 +4,16 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 114,
+    "pending": 105,
     "inProgress": 2,
-    "done": 2,
+    "done": 11,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 25,
       "A": 40,
-      "G": 15,
-      "F": 15
+      "F": 12,
+      "G": 9
     }
   },
   "queue": [
@@ -732,8 +732,10 @@
       "suggestedTitle": "長野県の人はどこへ移住する",
       "combinedScore": 0.52,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 21
+      "status": "done",
+      "priority": 21,
+      "done_at": "2026-09-01",
+      "published_slug": "nagano-migration-flow"
     },
     {
       "topicKey": "corr-airport-count--general-project-investment-agriculture-forestry-fisheries",
@@ -829,8 +831,10 @@
       "suggestedTitle": "神奈川県の人はどこへ移住する",
       "combinedScore": 0.489,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 24
+      "status": "done",
+      "priority": 24,
+      "done_at": "2026-09-01",
+      "published_slug": "kanagawa-migration-flow"
     },
     {
       "topicKey": "migration-15000",
@@ -854,8 +858,10 @@
       "suggestedTitle": "新潟県の人はどこへ移住する",
       "combinedScore": 0.468,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 25
+      "status": "done",
+      "priority": 25,
+      "done_at": "2026-09-01",
+      "published_slug": "niigata-migration-flow"
     },
     {
       "topicKey": "migration-17000",
@@ -879,8 +885,10 @@
       "suggestedTitle": "石川県の人はどこへ移住する",
       "combinedScore": 0.468,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 26
+      "status": "done",
+      "priority": 26,
+      "done_at": "2026-09-01",
+      "published_slug": "ishikawa-migration-flow"
     },
     {
       "topicKey": "migration-08000",
@@ -904,8 +912,10 @@
       "suggestedTitle": "茨城県の人はどこへ移住する",
       "combinedScore": 0.445,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 27
+      "status": "done",
+      "priority": 27,
+      "done_at": "2026-09-01",
+      "published_slug": "ibaraki-migration-flow"
     },
     {
       "topicKey": "finance-gap-20000",
@@ -977,8 +987,10 @@
       "suggestedTitle": "和歌山県の人はどこへ移住する",
       "combinedScore": 0.435,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 30
+      "status": "done",
+      "priority": 30,
+      "done_at": "2026-09-01",
+      "published_slug": "wakayama-migration-flow"
     },
     {
       "topicKey": "migration-39000",
@@ -1365,8 +1377,10 @@
       "suggestedTitle": "高知県 財政が厳しい市町村",
       "combinedScore": 0.36,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 46
+      "status": "done",
+      "priority": 46,
+      "done_at": "2026-09-01",
+      "published_slug": "kochi-municipal-finance"
     },
     {
       "topicKey": "finance-gap-16000",
@@ -1388,8 +1402,10 @@
       "suggestedTitle": "富山県 財政が厳しい市町村",
       "combinedScore": 0.354,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 47
+      "status": "done",
+      "priority": 47,
+      "done_at": "2026-09-01",
+      "published_slug": "toyama-municipal-finance"
     },
     {
       "topicKey": "finance-gap-38000",
@@ -1534,8 +1550,10 @@
       "suggestedTitle": "沖縄県 財政が厳しい市町村",
       "combinedScore": 0.348,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 53
+      "status": "done",
+      "priority": 53,
+      "done_at": "2026-09-01",
+      "published_slug": "okinawa-municipal-finance"
     },
     {
       "topicKey": "gap-toilet-paper-consumption-expenditure",

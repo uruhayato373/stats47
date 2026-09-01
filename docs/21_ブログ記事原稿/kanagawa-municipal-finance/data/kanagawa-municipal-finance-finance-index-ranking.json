@@ -1,0 +1,277 @@
+{
+  "title": "神奈川県の市町村別 財政力指数",
+  "subtitle": "2024年度",
+  "label": "財政力指数",
+  "unit": "",
+  "year": "2024",
+  "source": "総務省 地方財政状況調査 (決算カード)",
+  "palette": "blue",
+  "decimalPlaces": 2,
+  "generatedBy": "fetch-municipal-finance.mjs",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "箱根町",
+      "pref": "箱根町",
+      "value": 1.3,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 2,
+      "areaName": "厚木市",
+      "pref": "厚木市",
+      "value": 1.18,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 3,
+      "areaName": "寒川町",
+      "pref": "寒川町",
+      "value": 1.12,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 4,
+      "areaName": "鎌倉市",
+      "pref": "鎌倉市",
+      "value": 1.1,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 5,
+      "areaName": "藤沢市",
+      "pref": "藤沢市",
+      "value": 1.08,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 6,
+      "areaName": "川崎市",
+      "pref": "川崎市",
+      "value": 1.06,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 7,
+      "areaName": "海老名市",
+      "pref": "海老名市",
+      "value": 1.06,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 8,
+      "areaName": "愛川町",
+      "pref": "愛川町",
+      "value": 0.97,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 9,
+      "areaName": "横浜市",
+      "pref": "横浜市",
+      "value": 0.95,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 10,
+      "areaName": "平塚市",
+      "pref": "平塚市",
+      "value": 0.95,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 11,
+      "areaName": "大和市",
+      "pref": "大和市",
+      "value": 0.93,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 12,
+      "areaName": "伊勢原市",
+      "pref": "伊勢原市",
+      "value": 0.92,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 13,
+      "areaName": "小田原市",
+      "pref": "小田原市",
+      "value": 0.9,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 14,
+      "areaName": "茅ヶ崎市",
+      "pref": "茅ヶ崎市",
+      "value": 0.9,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 15,
+      "areaName": "中井町",
+      "pref": "中井町",
+      "value": 0.9,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 16,
+      "areaName": "綾瀬市",
+      "pref": "綾瀬市",
+      "value": 0.86,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 17,
+      "areaName": "相模原市",
+      "pref": "相模原市",
+      "value": 0.83,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 18,
+      "areaName": "座間市",
+      "pref": "座間市",
+      "value": 0.82,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 19,
+      "areaName": "開成町",
+      "pref": "開成町",
+      "value": 0.82,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 20,
+      "areaName": "葉山町",
+      "pref": "葉山町",
+      "value": 0.79,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 21,
+      "areaName": "逗子市",
+      "pref": "逗子市",
+      "value": 0.78,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 22,
+      "areaName": "秦野市",
+      "pref": "秦野市",
+      "value": 0.78,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 23,
+      "areaName": "南足柄市",
+      "pref": "南足柄市",
+      "value": 0.77,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 24,
+      "areaName": "横須賀市",
+      "pref": "横須賀市",
+      "value": 0.74,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 25,
+      "areaName": "大磯町",
+      "pref": "大磯町",
+      "value": 0.73,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 26,
+      "areaName": "清川村",
+      "pref": "清川村",
+      "value": 0.73,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 27,
+      "areaName": "大井町",
+      "pref": "大井町",
+      "value": 0.69,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 28,
+      "areaName": "湯河原町",
+      "pref": "湯河原町",
+      "value": 0.63,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 29,
+      "areaName": "二宮町",
+      "pref": "二宮町",
+      "value": 0.62,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 30,
+      "areaName": "松田町",
+      "pref": "松田町",
+      "value": 0.55,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 31,
+      "areaName": "三浦市",
+      "pref": "三浦市",
+      "value": 0.54,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 32,
+      "areaName": "山北町",
+      "pref": "山北町",
+      "value": 0.49,
+      "label": "財政力指数",
+      "unit": ""
+    },
+    {
+      "rank": 33,
+      "areaName": "真鶴町",
+      "pref": "真鶴町",
+      "value": 0.38,
+      "label": "財政力指数",
+      "unit": ""
+    }
+  ]
+}

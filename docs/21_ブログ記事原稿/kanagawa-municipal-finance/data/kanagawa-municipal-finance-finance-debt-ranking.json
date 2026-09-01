@@ -1,0 +1,277 @@
+{
+  "title": "神奈川県の市町村別 実質公債費比率",
+  "subtitle": "2024年度",
+  "label": "実質公債費比率",
+  "unit": "％",
+  "year": "2024",
+  "source": "総務省 地方財政状況調査 (決算カード)",
+  "palette": "red",
+  "decimalPlaces": 1,
+  "generatedBy": "fetch-municipal-finance.mjs",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "真鶴町",
+      "pref": "真鶴町",
+      "value": 13.3,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 2,
+      "areaName": "三浦市",
+      "pref": "三浦市",
+      "value": 11.8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 3,
+      "areaName": "山北町",
+      "pref": "山北町",
+      "value": 11.4,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 4,
+      "areaName": "箱根町",
+      "pref": "箱根町",
+      "value": 10.9,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 5,
+      "areaName": "横浜市",
+      "pref": "横浜市",
+      "value": 9.2,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 6,
+      "areaName": "川崎市",
+      "pref": "川崎市",
+      "value": 8.4,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 7,
+      "areaName": "湯河原町",
+      "pref": "湯河原町",
+      "value": 8.3,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 8,
+      "areaName": "開成町",
+      "pref": "開成町",
+      "value": 7,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 9,
+      "areaName": "伊勢原市",
+      "pref": "伊勢原市",
+      "value": 6.7,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 10,
+      "areaName": "寒川町",
+      "pref": "寒川町",
+      "value": 6.7,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 11,
+      "areaName": "松田町",
+      "pref": "松田町",
+      "value": 6.6,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 12,
+      "areaName": "横須賀市",
+      "pref": "横須賀市",
+      "value": 6.2,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 13,
+      "areaName": "逗子市",
+      "pref": "逗子市",
+      "value": 5.9,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 14,
+      "areaName": "二宮町",
+      "pref": "二宮町",
+      "value": 5.8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 15,
+      "areaName": "海老名市",
+      "pref": "海老名市",
+      "value": 5.5,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 16,
+      "areaName": "藤沢市",
+      "pref": "藤沢市",
+      "value": 5.3,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 17,
+      "areaName": "大和市",
+      "pref": "大和市",
+      "value": 4.9,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 18,
+      "areaName": "平塚市",
+      "pref": "平塚市",
+      "value": 4.8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 19,
+      "areaName": "茅ヶ崎市",
+      "pref": "茅ヶ崎市",
+      "value": 4.8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 20,
+      "areaName": "小田原市",
+      "pref": "小田原市",
+      "value": 4.3,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 21,
+      "areaName": "大磯町",
+      "pref": "大磯町",
+      "value": 4.3,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 22,
+      "areaName": "厚木市",
+      "pref": "厚木市",
+      "value": 3.7,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 23,
+      "areaName": "南足柄市",
+      "pref": "南足柄市",
+      "value": 3.2,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 24,
+      "areaName": "相模原市",
+      "pref": "相模原市",
+      "value": 2.9,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 25,
+      "areaName": "座間市",
+      "pref": "座間市",
+      "value": 2.5,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 26,
+      "areaName": "鎌倉市",
+      "pref": "鎌倉市",
+      "value": 2.1,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 27,
+      "areaName": "秦野市",
+      "pref": "秦野市",
+      "value": 1.5,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 28,
+      "areaName": "綾瀬市",
+      "pref": "綾瀬市",
+      "value": 1.4,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 29,
+      "areaName": "愛川町",
+      "pref": "愛川町",
+      "value": 1.4,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 30,
+      "areaName": "中井町",
+      "pref": "中井町",
+      "value": -0.2,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 31,
+      "areaName": "清川村",
+      "pref": "清川村",
+      "value": -0.8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 32,
+      "areaName": "大井町",
+      "pref": "大井町",
+      "value": -1.7,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 33,
+      "areaName": "葉山町",
+      "pref": "葉山町",
+      "value": -2.5,
+      "label": "実質公債費比率",
+      "unit": "％"
+    }
+  ]
+}

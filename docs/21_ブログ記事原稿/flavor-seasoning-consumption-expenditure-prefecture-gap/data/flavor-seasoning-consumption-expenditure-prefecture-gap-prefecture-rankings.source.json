@@ -8,6 +8,6 @@
   "source": "r2:app/ranking/flavor-seasoning-consumption-expenditure/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug flavor-seasoning-consumption-expenditure-prefecture-gap --keys flavor-seasoning-consumption-expenditure --data-name flavor-seasoning-consumption-expenditure-prefecture-gap-prefecture-rankings",
-  "fetchedAt": "2026-08-30T06:14:31.916Z",
+  "fetchedAt": "2026-09-01T23:04:25.340Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }
