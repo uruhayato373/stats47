@@ -7,9 +7,11 @@ import {
 import { readMunicipalityRankingItem } from '@stats47/ranking/server';
 import { ChartNoAxesColumnIncreasing } from 'lucide-react';
 
+import { MiniDistributionBars } from '@/components/charts/MiniDistributionBars';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
-import { SurfaceLinkCard } from '@/components/surface';
+
+import { TrackedMunicipalityThemeCard } from '@/features/municipalities';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -81,9 +83,12 @@ export default async function MunicipalityThemePage({
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {items.map((item) => (
-            <SurfaceLinkCard
+            <TrackedMunicipalityThemeCard
               key={item.rankingKey}
               href={`/municipalities/ranking/${item.rankingKey}`}
+              label={
+                item.subtitle ? `${item.title}（${item.subtitle}）` : item.title
+              }
               className="block"
             >
               <h3 className="font-semibold text-foreground">
@@ -92,6 +97,12 @@ export default async function MunicipalityThemePage({
               <p className="mt-1 text-sm text-muted-foreground">
                 {item.description}
               </p>
+              {item.distribution && item.distribution.length > 0 && (
+                <MiniDistributionBars
+                  bins={item.distribution}
+                  className="mt-3"
+                />
+              )}
               <p className="mt-2 text-sm text-muted-foreground">
                 {item.latestYear.yearName}・
                 {item.valueCount.toLocaleString('ja-JP')}自治体
@@ -100,7 +111,7 @@ export default async function MunicipalityThemePage({
                 <ChartNoAxesColumnIncreasing className="size-4" aria-hidden />
                 ランキング
               </p>
-            </SurfaceLinkCard>
+            </TrackedMunicipalityThemeCard>
           ))}
         </div>
       )}
