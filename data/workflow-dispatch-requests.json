@@ -1,7 +1,0 @@
-{
-  "workflow": "sync-snapshots.yml",
-  "inputs": { "only": "municipality-ranking" },
-  "ref": "develop",
-  "reason": "市区町村第1バッチ6 keyのR2生成 (deploy後。sync-snapshotsはmainをcheckoutするのでこの順序)",
-  "requestedAt": "2026-09-01T04:16:00Z"
-}
