@@ -3,8 +3,8 @@ title: 製造業付加価値額は愛知が沖縄の94倍
 seoTitle: "製造業付加価値額ランキング2023年｜1位愛知16,257,929百万円・47位沖縄173,044百万円"
 description: 同じ日本国内でも、製造業が生み出す付加価値には最大94倍という開きがあります。この記事では、愛知・静岡・大阪など上位県と沖縄・高知など下位県の違いを、地理的な分布と産業の集積構造から読み解きます。
 slug: manufacturing-industry-added-value-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 

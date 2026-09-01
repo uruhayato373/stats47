@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 88,
+    "pending": 87,
     "inProgress": 2,
-    "done": 28,
+    "done": 29,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 15,
-      "A": 33,
+      "A": 32,
       "F": 12,
       "G": 9
     }
@@ -2415,8 +2415,10 @@
       "suggestedTitle": "製造業付加価値が多い県はどこ",
       "combinedScore": 0.291,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 84
+      "status": "done",
+      "priority": 84,
+      "done_at": "2026-09-01",
+      "published_slug": "manufacturing-industry-added-value-prefecture-gap"
     },
     {
       "topicKey": "gap-tempura-fry-consumption-expenditure",
