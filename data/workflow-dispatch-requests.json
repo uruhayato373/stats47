@@ -1,0 +1,7 @@
+{
+  "workflow": "sync-snapshots.yml",
+  "inputs": { "only": "municipality-ranking" },
+  "ref": "develop",
+  "reason": "テーマカード分布ミニチャート用 distribution 焼き込みの R2 反映 (builder 変更は #887 で main 反映済み)",
+  "requestedAt": "2026-09-01T21:52:00Z"
+}
