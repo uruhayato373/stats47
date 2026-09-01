@@ -3,8 +3,8 @@ title: しらす干し消費量、なぜ和歌山が全国1位?
 seoTitle: "しらす干し消費量ランキング｜1位和歌山1073g・最下位宮崎76g (2024年)"
 description: 同じしらす干しでも、住む県によって年間の消費量はおよそ14倍も違います。この記事では家計調査の実データをもとに、なぜ和歌山県や京都府で消費が突出して多く、九州の多くの県で少ないのかを、産地・漁場・食文化の観点から読み解きます。
 slug: whitebait-consumption-quantity-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 
