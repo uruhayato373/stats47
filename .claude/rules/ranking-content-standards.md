@@ -11,6 +11,40 @@ critic (`ranking-content-critic`) / 人間はこれに従う。2026-07-12 に旧
 > memory `project_ai_content_remediation_queue`) と backlog (AICONTENT-02 / RANK-WAVE) が持つ。
 > 本 rule は「どう構成し・どの品質床で・どう生成するか」の運用正典。
 
+## スコープ境界 — 本パイプラインは 47 都道府県ランキング専用 (★2026-08-31 宣言)
+
+地理スコープの分離 (doc 43 = 全国 `/japan`、doc 44 = 市区町村 `/municipalities`) 以降、
+ランキングページは **全国 / 都道府県 / 市区町村の 3 面**になった。本 rule と ai-content
+パイプライン (queue / build-input / prompt / audit / critic / publish) が扱うのは
+**都道府県 (`/ranking/<key>` → `app/ranking/<key>/ai-content.json`) だけ**である。
+
+| 面 | 配信 namespace | ai-content |
+|---|---|---|
+| 都道府県 `/ranking/<key>` | `app/ranking/<key>/` | **本パイプラインの対象** |
+| 市区町村 `/municipalities/ranking/<key>` | `app/municipalities/ranking/<key>/` | 対象外 (backlog `MUNI-AI-CONTENT-01`) |
+| 全国 `/japan/<themeSlug>` | `app/japan/<metric>/series.json` | 対象外 (backlog `JAPAN-COMMENTARY-01`) |
+
+パイプライン内の「47 件」「7 地方区分」「`prefectureCommentary`」「thin 閾値 40 県」
+「`app/ranking/` パス固定」等 (2026-08-31 棚卸しで約 35 箇所) は**欠陥ではなく、
+都道府県ドメインへ正しく特化した検査・スキーマ**である。パラメータ化して他レベルへ
+流用してはならない:
+
+- **市区町村** (1,717 自治体) では「47 件ちょうど」「40 県未満は thin」「7 地方ブロック」の
+  どれも成立せず、全自治体の個別解説も量的に成立しない。必要なのは別スキーマ
+  (上位/下位要約・県別分布・母集団と除外自治体の説明) と、`cities.json` 由来の values と
+  突合する**専用監査**である。解禁条件と設計要点は `MUNI-AI-CONTENT-01` に固定した
+- **全国** はそもそもランキングではない (`series.json` = 公式全国値の時系列。doc 43 は
+  「`/themes` と同じコンテンツの URL 違いにしない」を明記)。要るとすれば時系列解説という
+  第三のコンテンツ型で、本パイプラインの派生では作らない
+
+レベルをまたいで**共有してよいのは原理だけ**: 数値の実データ突合 (number-audit の設計)、
+author / critic の分離、outbox → develop push → CI 再検証の公開機構。実装・スキーマ・
+閾値は共有しない (誤検知や検査の緩みを生む一般化は `unit-semantics-standards.md` §3 の
+禁止事項と同型)。
+
+機械側の可視化: `build-ai-content-queue.mjs` が LATEST.md 冒頭に市区町村の公開 key 数と
+「対象外」を明示する (key が増えても黙って見えない状態を防ぐ)。
+
 ## 層別処方の原則 (全ページ一律にしない)
 
 GSC 表示のあるランキングは全キーの ~40% で、imp の大半は Head 層 (imp≥50) に集中しかつ CTR が最低、という偏りがある。

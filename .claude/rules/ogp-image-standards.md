@@ -313,6 +313,16 @@ Codex built-in imagegenで固有背景を生成してから画像bundleを作る
   # catalog / JPEG形式・寸法 / orphanを検査
   npm run check:blog-images
 
+  # ★未公開ドラフト (docs/21 outbox) は --article でローカル本文を渡す。
+  #   request-article / ingest-article は既定で R2 の app/blog/<slug>/article.md を読むため、
+  #   まだ公開していない記事では HTTP 404 で落ちる。公開には背景が要り、背景生成には
+  #   公開済み本文が要る、という循環になるので outbox の記事は必ず --article を付ける。
+  npm run blog-images:codex -- request-article \
+    --slug <slug> --article "docs/21_ブログ記事原稿/<slug>/article.md"
+  npm run blog-images:codex -- ingest-article \
+    --slug <slug> --article "docs/21_ブログ記事原稿/<slug>/article.md" \
+    --input <generated_image_path> --prompt-hash <prompt_hash>
+
   # Codex catalog 登録済み slug のローカル目視 (Gemini/API/R2書込なし)
   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts \
     --slug a,b --out-dir .local/codex-ogp-pilot
