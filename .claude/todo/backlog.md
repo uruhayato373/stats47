@@ -741,6 +741,28 @@ updated: 2026-08-30
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
+### [MUNI-RANKING-EXPANSION-01] 市区町村ランキングの段②拡充 (調査済み・WP8 判定待ち)
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-01]
+
+- **owner**: Claude Code (選定・監査) + オーナー (published 昇格の承認)
+- **trigger (どちらかを満たすまで着手しない)**: doc 44 WP8 の pilot 28日実測 verdict (2026-09 下旬目安) が
+  拡充 go、またはオーナーの明示承認
+- **調査結果 (2026-09-01 段①完了・SSOT = `.claude/state/municipalities/expansion-survey.json`)**:
+  - 既存 R2 候補 184 件の機械監査: **publish-candidate 139** / needs-review 39 (stale 36・null/zero-heavy 2・
+    極端%値 2) / catalog 判定済み 6。全 180 artifact の値分布 (定数/負値/値域) まで検査済み・fetch 失敗 0
+  - SSDS 市区町村系の未使用指標 **733 件** (全 901 中。同じ 1,913 団体軸・既存 pipeline で投入可能) を
+    code/name/unit 付きで列挙済み (`ssdsUntapped`)
+  - 非 SSDS は `.claude/state/estat-city-discovery.json` (2026-05-17・3,361 表) が全量列挙済み
+- **実行規律 (doc 44 準拠)**:
+  - `MUNICIPALITY_METRIC_AVAILABILITY` への published 追記は**人手品質判断のみ** — publish-candidate 139 は
+    機械 clean であって公開承認ではない (fiscal-strength-index が機械 clean でも意味的監査未了の実例)
+  - 小バッチ (数 key) → 実測 → 次バッチ。184 候補一括公開は禁止事項
+  - 選定は SSDS 未使用 733 より先に**既存 R2 済み 139** から (投入コストゼロ)
+- **完了条件**: 第1バッチの key 選定 → entityPolicy/valuePolicy の人手監査 → catalog 追記 → WP 手順で
+  R2/known/sitemap 整合 → 本番実測 200
+- **関連**: doc 44 WP8 / `MUNI-AI-CONTENT-01`
+
 ### [MUNI-AI-CONTENT-01] 市区町村ランキング用 ai-content を別契約で新設する
 
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-08-31]
