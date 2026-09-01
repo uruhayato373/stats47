@@ -4,13 +4,13 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 104,
+    "pending": 101,
     "inProgress": 2,
-    "done": 12,
+    "done": 15,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
-      "D2": 24,
+      "D2": 21,
       "A": 40,
       "F": 12,
       "G": 9
@@ -1897,8 +1897,10 @@
       "suggestedTitle": "ハンバーガー消費量 日本一はどこ",
       "combinedScore": 0.309,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 66
+      "status": "done",
+      "priority": 66,
+      "done_at": "2026-09-01",
+      "published_slug": "hamburger-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "gap-shrimp-consumption-quantity",
@@ -1924,8 +1926,10 @@
       "suggestedTitle": "えび消費量 日本一はどこ",
       "combinedScore": 0.309,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 67
+      "status": "done",
+      "priority": 67,
+      "done_at": "2026-09-01",
+      "published_slug": "shrimp-consumption-quantity-prefecture-gap"
     },
     {
       "topicKey": "gap-chocolate-snack-consumption-expenditure",
@@ -1951,8 +1955,10 @@
       "suggestedTitle": "チョコレート菓子消費量 日本一はどこ",
       "combinedScore": 0.309,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 68
+      "status": "done",
+      "priority": 68,
+      "done_at": "2026-09-01",
+      "published_slug": "chocolate-snack-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "gap-densely-populated-area",

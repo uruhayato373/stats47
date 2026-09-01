@@ -3,8 +3,8 @@ title: ハンバーガー消費、大分が3.4倍差で1位
 seoTitle: "ハンバーガー消費支出額ランキング｜大分県が1位、九州・沖縄が上位独占の理由"
 description: 同じ日本でもハンバーガーへの支出額は県で3.4倍も違います。大分県はなぜ全国トップなのか、九州・沖縄勢が上位を占める背景をデータで読み解きます。
 slug: hamburger-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 

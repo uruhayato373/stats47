@@ -3,8 +3,8 @@ title: "チョコレート菓子支出、山形はなぜ全国トップなのか
 seoTitle: "チョコレート菓子消費支出額ランキング｜1位山形3700円・最下位群馬1656円 2024年"
 description: "同じ日本でも、チョコレート菓子への年間支出額は住む県によって2倍以上の開きがあります。家計調査2024年のデータで1位山形県3700円、最下位群馬県1656円という差がなぜ生まれるのかを、地理・気候・食文化の視点から読み解きます。"
 slug: chocolate-snack-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 
