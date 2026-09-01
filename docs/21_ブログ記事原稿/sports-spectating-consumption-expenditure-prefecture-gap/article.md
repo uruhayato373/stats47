@@ -3,8 +3,8 @@ title: スポーツ観覧支出、なぜ広島県が1位なのか
 seoTitle: "スポーツ観覧料消費支出額ランキング｜1位は広島県4,783円 2024年"
 description: 同じ日本国内でも、スポーツを見るためにお金を使う県と使わない県では100倍近い差があります。家計調査のスポーツ観覧料消費支出額から、なぜ広島県や栃木県で支出が突出して多いのか、プロ球団の本拠地や競技場の立地との関係を読み解きます。
 slug: sports-spectating-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 

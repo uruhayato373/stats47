@@ -4,13 +4,13 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 99,
+    "pending": 98,
     "inProgress": 2,
-    "done": 17,
+    "done": 18,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
-      "D2": 19,
+      "D2": 18,
       "A": 40,
       "F": 12,
       "G": 9
@@ -2011,8 +2011,10 @@
       "suggestedTitle": "スポーツ観覧料消費量 日本一はどこ",
       "combinedScore": 0.307,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 70
+      "status": "done",
+      "priority": 70,
+      "done_at": "2026-09-01",
+      "published_slug": "sports-spectating-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "gap-soy-sauce-consumption-expenditure",
