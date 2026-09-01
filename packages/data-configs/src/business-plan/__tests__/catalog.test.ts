@@ -34,7 +34,15 @@ describe('stats47 2.0事業計画カタログ', () => {
       expect(content.themeKeys.length).toBeGreaterThan(0);
       expect(content.paid.priceYen).toBeGreaterThan(0);
       expect(content.publicationGates.length).toBeGreaterThanOrEqual(5);
+      expect(content.launch.borrowedPatterns.length).toBeGreaterThanOrEqual(2);
+      expect(content.launch.reusableOutputs.length).toBeGreaterThanOrEqual(4);
+      expect(content.launch.evaluationWindowDays).toBe(28);
     }
+    expect(
+      BUSINESS_PLAN_2026.geoContentLifecycle
+        .map((content) => content.launch.order)
+        .sort((a, b) => a - b)
+    ).toEqual([1, 2, 3, 4]);
   });
 
   it('最初の4系列だけを実行可能にし、残りを一括量産しない', () => {

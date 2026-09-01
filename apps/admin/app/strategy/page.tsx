@@ -288,6 +288,10 @@ export default function StrategyPage() {
                   <Td>
                     <div className="font-medium">{content.title}</div>
                     <code className="text-[10px] text-console-muted">{content.contentId}</code>
+                    <div className="mt-1 text-[10px] text-console-muted">
+                      公開順 #{content.launch.order} · {content.launch.role}
+                    </div>
+                    <div className="mt-1 text-[10px] text-console-muted">{content.launch.audience}</div>
                   </Td>
                   <Td>
                     <Badge tone={lifecycleTone[content.free.status]}>{content.free.status}</Badge>
@@ -322,6 +326,9 @@ export default function StrategyPage() {
                     </Badge>
                     <div className="mt-1 text-[10px] text-console-muted">
                       {content.publicationGates.at(-1)}
+                    </div>
+                    <div className="mt-1 text-[10px] text-console-muted">
+                      評価 {content.launch.evaluationWindowDays}日 · {content.launch.stopCondition}
                     </div>
                   </Td>
                 </Tr>

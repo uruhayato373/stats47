@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generated_by": "generate-note-catalog.ts",
-    "generated_at": "2026-08-29",
+    "generated_at": "2026-08-31",
     "source": "note-catalog git TS SSOT (.claude/scripts/note/catalog/)",
     "note": "このファイルは派生インデックス。真実源は note-catalog の data/*.ts。手編集しない。"
   },
@@ -14,6 +14,7 @@
       "published_at": "2026-05-20",
       "r2_path": "note/koumuin-claude-code/00-claude-code-intro-for-public-servants",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "00-estat-claude-code-intro": {
@@ -24,6 +25,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/00-estat-claude-code-intro",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "01-claude-code-setup-complete": {
@@ -34,6 +36,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/01-claude-code-setup-complete",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -45,6 +48,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/01-estat-api-key-setup",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -56,6 +60,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/02-internal-network-workarounds",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "02-search-estat-statsdataid": {
@@ -66,6 +71,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/02-search-estat-statsdataid",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -77,6 +83,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/03-fetch-prefecture-ranking",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "03-it-dept-security-doc": {
@@ -87,6 +94,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/03-it-dept-security-doc",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -98,6 +106,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/04-excel-download-and-parse",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -109,6 +118,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/04-meeting-minutes-30min-to-5min",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "05-assembly-answer-prompts": {
@@ -119,6 +129,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/05-assembly-answer-prompts",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -130,6 +141,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/05-pandas-duckdb-derived-metrics",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -141,6 +153,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/06-ordinance-revision-review",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -152,6 +165,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/06-prefecture-code-and-merge",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -163,6 +177,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/07-official-doc-skills",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -174,6 +189,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/07-year-on-year-diff",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -185,6 +201,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/08-benchmark-table-5min",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "08-proposal-doc-checklist-20": {
@@ -195,6 +212,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/08-proposal-doc-checklist-20",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -206,6 +224,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/09-assembly-chart-generation",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -217,6 +236,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/09-assembly-question-points",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "10-ai-without-personal-info": {
@@ -227,6 +247,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/10-ai-without-personal-info",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "10-claude-skills-routinize": {
@@ -237,6 +258,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/10-claude-skills-routinize",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -248,6 +270,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/11-hooks-personal-info-masking",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -259,6 +282,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/11-mcp-sqlite-search",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -270,6 +294,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/12-audit-ready-settings",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -281,6 +306,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/koumuin-claude-code/13-ollama-offline-local-llm",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -292,6 +318,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/koumuin-claude-code/14-excel-budget-aggregation",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "15-data-preprocessing-intro": {
@@ -302,6 +329,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/koumuin-claude-code/15-data-preprocessing-intro",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -313,6 +341,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/koumuin-claude-code/16-subsidy-doc-consistency",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -324,6 +353,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/koumuin-claude-code/17-year-on-year-analysis",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -335,6 +365,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/koumuin-claude-code/18-pr-magazine-rewrite",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -346,6 +377,7 @@
       "published_at": "2026-06-16",
       "r2_path": "note/koumuin-claude-code/19-faq-auto-generation",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "20-complaint-reply-patterns": {
@@ -356,6 +388,7 @@
       "published_at": "2026-06-16",
       "r2_path": "note/koumuin-claude-code/20-complaint-reply-patterns",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -367,6 +400,7 @@
       "published_at": "2026-06-16",
       "r2_path": "note/koumuin-claude-code/21-disaster-sns-multilang",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -378,6 +412,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/31-claude-code-how-to-ask",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "32-claude-skills-getting-started": {
@@ -388,6 +423,7 @@
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/32-claude-skills-getting-started",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-agricultural-employment-population": {
@@ -398,6 +434,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-agricultural-employment-population",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-agricultural-output": {
@@ -408,6 +445,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-agricultural-output",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-average-temperature": {
@@ -418,6 +456,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-average-temperature",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-avg-propensity-to-consume-worker-households": {
@@ -428,6 +467,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-avg-propensity-to-consume-worker-households",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-consumption-expenditure-multi-person-households-per-month": {
@@ -438,6 +478,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-consumption-expenditure-multi-person-households-per-month",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-current-liabilities-balance-multi-person-households-per-household": {
@@ -448,6 +489,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-current-liabilities-balance-multi-person-households-per-household",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-day-time-population": {
@@ -458,6 +500,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-day-time-population",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-electricity-generation-capacity": {
@@ -468,6 +511,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-electricity-generation-capacity",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-general-households": {
@@ -478,6 +522,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-general-households",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-late-elderly-medical-expense-per-insured": {
@@ -488,6 +533,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-late-elderly-medical-expense-per-insured",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-maximum-temperature": {
@@ -498,6 +544,7 @@
       "published_at": "2026-08-03",
       "r2_path": "note/stats47-note/a-maximum-temperature",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-minimum-wage-by-region": {
@@ -508,6 +555,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-minimum-wage-by-region",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-number-of-establishments-manufacturing": {
@@ -518,6 +566,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-number-of-establishments-manufacturing",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-room-utilization-rate": {
@@ -528,6 +577,7 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-room-utilization-rate",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-total-fertility-rate": {
@@ -538,7 +588,56 @@
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-total-fertility-rate",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
+    },
+    "d-geo-flood-population-mesh": {
+      "vertical": "stats47-note",
+      "title": "洪水浸水想定区域×2050年人口｜47都道府県・8,235メッシュを再現",
+      "url": "https://note.com/stats47/n/nfe50fb61efc0",
+      "is_paid": true,
+      "published_at": "2026-09-01",
+      "r2_path": "note/stats47-note/d-geo-flood-population-mesh",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 2980
+    },
+    "d-geo-ipss-prefecture-map": {
+      "vertical": "stats47-note",
+      "title": "47都道府県の将来人口データを地図用に整える手順｜コード・辞書・検算付き",
+      "url": "https://note.com/stats47/n/n137cfc540d23",
+      "is_paid": true,
+      "published_at": "2026-09-01",
+      "r2_path": "note/stats47-note/d-geo-ipss-prefecture-map",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 1980
+    },
+    "d-geo-land-price-future-population": {
+      "vertical": "stats47-note",
+      "title": "人口減少×住宅地価格を再現できるデータにする｜47都道府県CSV・lineage・検算",
+      "url": "https://note.com/stats47/n/n23a2071a016f",
+      "is_paid": true,
+      "published_at": "2026-09-01",
+      "r2_path": "note/stats47-note/d-geo-land-price-future-population",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 2980
+    },
+    "d-geo-station-access-analysis": {
+      "vertical": "stats47-note",
+      "title": "駅代表点から直線800m×2050年人口｜47都道府県を再現",
+      "url": "https://note.com/stats47/n/n041e38af8fb5",
+      "is_paid": true,
+      "published_at": "2026-09-01",
+      "r2_path": "note/stats47-note/d-geo-station-access-analysis",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 2980
     },
     "koumuin-gis-01-depopulation-medical": {
       "vertical": "koumuin-gis",
@@ -548,6 +647,7 @@
       "published_at": "2026-06-06",
       "r2_path": "note/koumuin-gis/koumuin-gis-01-depopulation-medical",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "paid-n0135c75ca76c": {
@@ -558,6 +658,7 @@
       "published_at": "2025-12-16",
       "r2_path": "note/stats47-note/n0135c75ca76c",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -569,6 +670,7 @@
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/n02da130aae01",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -580,6 +682,7 @@
       "published_at": "2025-12-18",
       "r2_path": "note/stats47-note/n0642ad7f7fdd",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -591,6 +694,7 @@
       "published_at": "2026-01-15",
       "r2_path": "note/stats47-note/n066d8687ef00",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -602,6 +706,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/n143a9f6a0050",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -613,6 +718,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/n2207f3039fd3",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -624,6 +730,7 @@
       "published_at": "2025-12-19",
       "r2_path": "note/stats47-note/n2406ded99484",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -635,6 +742,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/n2c2df066e865",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -646,6 +754,7 @@
       "published_at": "2025-12-16",
       "r2_path": "note/stats47-note/n2d43e8cd6054",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -657,6 +766,7 @@
       "published_at": "2026-03-13",
       "r2_path": "note/stats47-note/n2ed31d721531",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -668,6 +778,7 @@
       "published_at": "2026-01-13",
       "r2_path": "note/stats47-note/n317c673b1e81",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -679,6 +790,7 @@
       "published_at": "2025-12-18",
       "r2_path": "note/stats47-note/n44bedb732274",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -690,6 +802,7 @@
       "published_at": "2025-12-10",
       "r2_path": "note/stats47-note/n48a11cea7b31",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -701,6 +814,7 @@
       "published_at": "2025-12-19",
       "r2_path": "note/stats47-note/n4b8346d9c17b",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -712,6 +826,7 @@
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/n66ffb10aa41b",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -723,6 +838,7 @@
       "published_at": "2026-01-20",
       "r2_path": "note/stats47-note/n67de9d45c426",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -734,6 +850,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/n68eafab07946",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -745,6 +862,7 @@
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/n7290144784d4",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -756,6 +874,7 @@
       "published_at": "2025-12-18",
       "r2_path": "note/stats47-note/n772ff041af18",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -767,6 +886,7 @@
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/n79fefdbd4d4c",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -778,6 +898,7 @@
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/n823d76c5cbac",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -789,6 +910,7 @@
       "published_at": "2026-01-14",
       "r2_path": "note/stats47-note/n82a4168eaa19",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -800,6 +922,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/n8558c1a6503a",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -811,6 +934,7 @@
       "published_at": "2025-12-16",
       "r2_path": "note/stats47-note/n925aa92c4ee4",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -822,6 +946,7 @@
       "published_at": "2026-03-13",
       "r2_path": "note/stats47-note/n92b846280d1a",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 500
     },
@@ -833,6 +958,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/koumuin-claude-code/n9f666946d105",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -844,6 +970,7 @@
       "published_at": "2025-12-19",
       "r2_path": "note/stats47-note/na16afa534c77",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -855,6 +982,7 @@
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/na76caacd17c3",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -866,6 +994,7 @@
       "published_at": "2026-01-14",
       "r2_path": "note/stats47-note/naa6eba6efec2",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -877,6 +1006,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/naf942acdbe59",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -888,6 +1018,7 @@
       "published_at": "2025-12-16",
       "r2_path": "note/stats47-note/nafcc04dcd988",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -899,6 +1030,7 @@
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/nb17d039bc1aa",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -910,6 +1042,7 @@
       "published_at": "2025-12-09",
       "r2_path": "note/stats47-note/nb216c5776aab",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -921,6 +1054,7 @@
       "published_at": "2026-01-15",
       "r2_path": "note/stats47-note/nb3c79a94e53a",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -932,6 +1066,7 @@
       "published_at": "2025-12-22",
       "r2_path": "note/stats47-note/nb8f3e05d244b",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -943,6 +1078,7 @@
       "published_at": "2025-12-11",
       "r2_path": "note/stats47-note/nba8bf272cc2b",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -954,6 +1090,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/nbead1fe772c7",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -965,6 +1102,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/ncab0d7b04228",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -976,6 +1114,7 @@
       "published_at": "2026-01-13",
       "r2_path": "note/stats47-note/ncf695ba6eb35",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -987,6 +1126,7 @@
       "published_at": "2026-01-08",
       "r2_path": "note/stats47-note/nd2fd5adb4bed",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -998,6 +1138,7 @@
       "published_at": "2025-12-18",
       "r2_path": "note/stats47-note/nd54b2958dc0e",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -1009,6 +1150,7 @@
       "published_at": "2026-01-20",
       "r2_path": "note/stats47-note/nd5edff320928",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -1020,6 +1162,7 @@
       "published_at": "2026-01-13",
       "r2_path": "note/stats47-note/nead1c21768b5",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -1031,6 +1174,7 @@
       "published_at": "2025-12-15",
       "r2_path": "note/stats47-note/neecba2a1752d",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -1042,6 +1186,7 @@
       "published_at": "2025-12-16",
       "r2_path": "note/stats47-note/nef7e875ba364",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -1053,6 +1198,7 @@
       "published_at": "2025-12-22",
       "r2_path": "note/stats47-note/nefecfbe76bd2",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -1064,6 +1210,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/nf0c82ce9cee0",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -1075,6 +1222,7 @@
       "published_at": "2025-12-16",
       "r2_path": "note/koumuin-gis/nf80da34b28c3",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -1086,6 +1234,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/nfd3ab8213e1f",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -1097,6 +1246,7 @@
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/nfe2c65e669a8",
       "r2_body": true,
+      "r2_access": "private",
       "status": "r2_ready",
       "price_jpy": 200
     },
@@ -1108,6 +1258,7 @@
       "published_at": "2026-03-13",
       "r2_path": "note/stats47-note/n023501038bd5",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n026bb22ad4eb": {
@@ -1118,6 +1269,7 @@
       "published_at": "2026-04-12",
       "r2_path": "note/stats47-note/n026bb22ad4eb",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n03844512d58a": {
@@ -1128,6 +1280,7 @@
       "published_at": "2026-03-18",
       "r2_path": "note/stats47-note/n03844512d58a",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n03e45e40d3a7": {
@@ -1138,6 +1291,7 @@
       "published_at": "2025-12-05",
       "r2_path": "note/stats47-note/n03e45e40d3a7",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n04c2737daf2c": {
@@ -1148,6 +1302,7 @@
       "published_at": "2026-04-13",
       "r2_path": "note/stats47-note/n04c2737daf2c",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n04d95ae14bc1": {
@@ -1158,6 +1313,7 @@
       "published_at": "2026-03-12",
       "r2_path": "note/stats47-note/n04d95ae14bc1",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n0654ddf27920": {
@@ -1168,6 +1324,7 @@
       "published_at": "2026-04-07",
       "r2_path": "note/stats47-note/n0654ddf27920",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n08eb33492a93": {
@@ -1178,6 +1335,7 @@
       "published_at": "2026-03-26",
       "r2_path": "note/stats47-note/n08eb33492a93",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n0b7373c9648a": {
@@ -1188,6 +1346,7 @@
       "published_at": "2026-03-25",
       "r2_path": "note/stats47-note/n0b7373c9648a",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n0e8fd0068d4e": {
@@ -1198,6 +1357,7 @@
       "published_at": "2026-01-21",
       "r2_path": "note/stats47-note/n0e8fd0068d4e",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n144d350fc14e": {
@@ -1208,6 +1368,7 @@
       "published_at": "2026-03-18",
       "r2_path": "note/stats47-note/n144d350fc14e",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n14f716fcd76d": {
@@ -1218,6 +1379,7 @@
       "published_at": "2026-03-26",
       "r2_path": "note/stats47-note/n14f716fcd76d",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n15ee88b5169d": {
@@ -1228,6 +1390,7 @@
       "published_at": "2026-01-22",
       "r2_path": "note/stats47-note/n15ee88b5169d",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n1649910097fb": {
@@ -1238,6 +1401,7 @@
       "published_at": "2026-04-01",
       "r2_path": "note/stats47-note/n1649910097fb",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n16950238dfd8": {
@@ -1248,6 +1412,7 @@
       "published_at": "2025-12-19",
       "r2_path": "note/stats47-note/n16950238dfd8",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n1b943c7d414d": {
@@ -1258,6 +1423,7 @@
       "published_at": "2026-04-07",
       "r2_path": "note/stats47-note/n1b943c7d414d",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n1e63abcfba72": {
@@ -1268,6 +1434,7 @@
       "published_at": "2026-02-02",
       "r2_path": "note/stats47-note/n1e63abcfba72",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n218588ef2f67": {
@@ -1278,6 +1445,7 @@
       "published_at": "2026-01-22",
       "r2_path": "note/stats47-note/n218588ef2f67",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n21cb13582fe6": {
@@ -1288,6 +1456,7 @@
       "published_at": "2026-03-17",
       "r2_path": "note/stats47-note/n21cb13582fe6",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n24b5000d587f": {
@@ -1298,6 +1467,7 @@
       "published_at": "2026-02-02",
       "r2_path": "note/stats47-note/n24b5000d587f",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n250b7aab145f": {
@@ -1308,6 +1478,7 @@
       "published_at": "2026-03-24",
       "r2_path": "note/stats47-note/n250b7aab145f",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n279776fbbbb1": {
@@ -1318,6 +1489,7 @@
       "published_at": "2026-03-20",
       "r2_path": "note/stats47-note/n279776fbbbb1",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n27cb4242cb67": {
@@ -1328,6 +1500,7 @@
       "published_at": "2026-04-10",
       "r2_path": "note/stats47-note/n27cb4242cb67",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n285e0ba282d0": {
@@ -1338,6 +1511,7 @@
       "published_at": "2026-04-08",
       "r2_path": "note/stats47-note/n285e0ba282d0",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n28943c36410a": {
@@ -1348,6 +1522,7 @@
       "published_at": "2026-04-09",
       "r2_path": "note/stats47-note/n28943c36410a",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n2b4298e9ac07": {
@@ -1358,6 +1533,7 @@
       "published_at": "2026-01-20",
       "r2_path": "note/stats47-note/n2b4298e9ac07",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n361a963fb079": {
@@ -1368,6 +1544,7 @@
       "published_at": "2026-04-02",
       "r2_path": "note/stats47-note/n361a963fb079",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n36624f1c4134": {
@@ -1378,6 +1555,7 @@
       "published_at": "2026-04-11",
       "r2_path": "note/stats47-note/n36624f1c4134",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n3908e5981967": {
@@ -1388,6 +1566,7 @@
       "published_at": "2026-03-18",
       "r2_path": "note/stats47-note/n3908e5981967",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n391d3ef70d29": {
@@ -1398,6 +1577,7 @@
       "published_at": "2026-02-09",
       "r2_path": "note/stats47-note/n391d3ef70d29",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n3a4efa70c02a": {
@@ -1408,6 +1588,7 @@
       "published_at": "2026-03-04",
       "r2_path": "note/stats47-note/n3a4efa70c02a",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n3a94353f31aa": {
@@ -1418,6 +1599,7 @@
       "published_at": "2026-03-22",
       "r2_path": "note/stats47-note/n3a94353f31aa",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n3e67c2f80ec1": {
@@ -1428,6 +1610,7 @@
       "published_at": "2026-03-31",
       "r2_path": "note/stats47-note/n3e67c2f80ec1",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n3e69a23bb946": {
@@ -1438,6 +1621,7 @@
       "published_at": "2026-03-19",
       "r2_path": "note/stats47-note/n3e69a23bb946",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n3f65c01be9a8": {
@@ -1448,6 +1632,7 @@
       "published_at": "2026-01-26",
       "r2_path": "note/stats47-note/n3f65c01be9a8",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n46a8eb03072b": {
@@ -1458,6 +1643,7 @@
       "published_at": "2026-03-11",
       "r2_path": "note/stats47-note/n46a8eb03072b",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n48dff1df249f": {
@@ -1468,6 +1654,7 @@
       "published_at": "2026-03-02",
       "r2_path": "note/stats47-note/n48dff1df249f",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n4d38db115f82": {
@@ -1478,6 +1665,7 @@
       "published_at": "2026-04-07",
       "r2_path": "note/stats47-note/n4d38db115f82",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n4dae901ea3e8": {
@@ -1488,6 +1676,7 @@
       "published_at": "2026-01-21",
       "r2_path": "note/stats47-note/n4dae901ea3e8",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n4e1e67f70686": {
@@ -1498,6 +1687,7 @@
       "published_at": "2026-03-22",
       "r2_path": "note/stats47-note/n4e1e67f70686",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n5158c5766a07": {
@@ -1508,6 +1698,7 @@
       "published_at": "2026-02-10",
       "r2_path": "note/stats47-note/n5158c5766a07",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n51f946877627": {
@@ -1518,6 +1709,7 @@
       "published_at": "2026-04-11",
       "r2_path": "note/stats47-note/n51f946877627",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n523b6fbeabdf": {
@@ -1528,6 +1720,7 @@
       "published_at": "2026-03-19",
       "r2_path": "note/stats47-note/n523b6fbeabdf",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n55cd6de6a733": {
@@ -1538,6 +1731,7 @@
       "published_at": "2026-04-02",
       "r2_path": "note/stats47-note/n55cd6de6a733",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n567416b632f6": {
@@ -1548,6 +1742,7 @@
       "published_at": "2026-03-12",
       "r2_path": "note/stats47-note/n567416b632f6",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n578b6e871067": {
@@ -1558,6 +1753,7 @@
       "published_at": "2026-04-13",
       "r2_path": "note/stats47-note/n578b6e871067",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n581a1409b2c9": {
@@ -1568,6 +1764,7 @@
       "published_at": "2026-03-29",
       "r2_path": "note/stats47-note/n581a1409b2c9",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n583a06d171e1": {
@@ -1578,6 +1775,7 @@
       "published_at": "2026-03-30",
       "r2_path": "note/stats47-note/n583a06d171e1",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n5867882dd7ab": {
@@ -1588,6 +1786,7 @@
       "published_at": "2026-04-12",
       "r2_path": "note/stats47-note/n5867882dd7ab",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n598a096ecbff": {
@@ -1598,6 +1797,7 @@
       "published_at": "2026-04-10",
       "r2_path": "note/stats47-note/n598a096ecbff",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n5ced125edb74": {
@@ -1608,6 +1808,7 @@
       "published_at": "2026-03-21",
       "r2_path": "note/stats47-note/n5ced125edb74",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n5ddcfb6bf233": {
@@ -1618,6 +1819,7 @@
       "published_at": "2026-03-24",
       "r2_path": "note/stats47-note/n5ddcfb6bf233",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n5f183fcf5b97": {
@@ -1628,6 +1830,7 @@
       "published_at": "2026-03-12",
       "r2_path": "note/stats47-note/n5f183fcf5b97",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n6305d990f2d2": {
@@ -1638,6 +1841,7 @@
       "published_at": "2026-04-01",
       "r2_path": "note/stats47-note/n6305d990f2d2",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n67729e8be7c4": {
@@ -1648,6 +1852,7 @@
       "published_at": "2026-03-19",
       "r2_path": "note/stats47-note/n67729e8be7c4",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n68f5e09c8d62": {
@@ -1658,6 +1863,7 @@
       "published_at": "2026-03-18",
       "r2_path": "note/stats47-note/n68f5e09c8d62",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n6f8a367906d1": {
@@ -1668,6 +1874,7 @@
       "published_at": "2026-03-29",
       "r2_path": "note/stats47-note/n6f8a367906d1",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n724eab276711": {
@@ -1678,6 +1885,7 @@
       "published_at": "2026-04-12",
       "r2_path": "note/stats47-note/n724eab276711",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n73a4d300e045": {
@@ -1688,6 +1896,7 @@
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/n73a4d300e045",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n765fc88c67ef": {
@@ -1698,6 +1907,7 @@
       "published_at": "2026-04-12",
       "r2_path": "note/stats47-note/n765fc88c67ef",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n7ea3a816d39b": {
@@ -1708,6 +1918,7 @@
       "published_at": "2026-03-24",
       "r2_path": "note/stats47-note/n7ea3a816d39b",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n7ff099157abd": {
@@ -1718,6 +1929,7 @@
       "published_at": "2026-03-23",
       "r2_path": "note/stats47-note/n7ff099157abd",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n80e58a01f660": {
@@ -1728,6 +1940,7 @@
       "published_at": "2026-03-11",
       "r2_path": "note/stats47-note/n80e58a01f660",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n827191af8c1c": {
@@ -1738,6 +1951,7 @@
       "published_at": "2026-05-10",
       "r2_path": "note/stats47-note/n827191af8c1c",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n863f429319ca": {
@@ -1748,6 +1962,7 @@
       "published_at": "2026-05-10",
       "r2_path": "note/stats47-note/n863f429319ca",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n88d2a55a9e36": {
@@ -1758,6 +1973,7 @@
       "published_at": "2026-03-24",
       "r2_path": "note/stats47-note/n88d2a55a9e36",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n8df3cf170cf4": {
@@ -1768,6 +1984,7 @@
       "published_at": "2026-03-26",
       "r2_path": "note/stats47-note/n8df3cf170cf4",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n91e82ac3b13c": {
@@ -1778,6 +1995,7 @@
       "published_at": "",
       "r2_path": "note/stats47-note/n91e82ac3b13c",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n93a6656b2096": {
@@ -1788,6 +2006,7 @@
       "published_at": "2026-03-04",
       "r2_path": "note/stats47-note/n93a6656b2096",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n97bd102186c6": {
@@ -1798,6 +2017,7 @@
       "published_at": "2026-03-20",
       "r2_path": "note/stats47-note/n97bd102186c6",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n991a75be91ce": {
@@ -1808,6 +2028,7 @@
       "published_at": "2026-04-11",
       "r2_path": "note/stats47-note/n991a75be91ce",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n99561600d4fe": {
@@ -1818,6 +2039,7 @@
       "published_at": "2026-01-20",
       "r2_path": "note/stats47-note/n99561600d4fe",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n99f53e7a1f33": {
@@ -1828,6 +2050,7 @@
       "published_at": "2026-02-10",
       "r2_path": "note/stats47-note/n99f53e7a1f33",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-n9dcb0680cea6": {
@@ -1838,6 +2061,7 @@
       "published_at": "2026-04-08",
       "r2_path": "note/stats47-note/n9dcb0680cea6",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-na21015ac366d": {
@@ -1848,6 +2072,7 @@
       "published_at": "2026-03-24",
       "r2_path": "note/koumuin-gis/na21015ac366d",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-na25ccb15a6cb": {
@@ -1858,6 +2083,7 @@
       "published_at": "2026-04-09",
       "r2_path": "note/stats47-note/na25ccb15a6cb",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-na2720854b1d9": {
@@ -1868,6 +2094,7 @@
       "published_at": "2026-03-25",
       "r2_path": "note/stats47-note/na2720854b1d9",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-naa474d085c7b": {
@@ -1878,6 +2105,7 @@
       "published_at": "2026-03-21",
       "r2_path": "note/stats47-note/naa474d085c7b",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nabd65a1c893d": {
@@ -1888,6 +2116,7 @@
       "published_at": "2026-03-23",
       "r2_path": "note/stats47-note/nabd65a1c893d",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nafc693255794": {
@@ -1898,6 +2127,7 @@
       "published_at": "2026-04-11",
       "r2_path": "note/stats47-note/nafc693255794",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nb16c0b751d01": {
@@ -1908,6 +2138,7 @@
       "published_at": "2026-04-12",
       "r2_path": "note/stats47-note/nb16c0b751d01",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nb2d65c42c28b": {
@@ -1918,6 +2149,7 @@
       "published_at": "2026-03-29",
       "r2_path": "note/stats47-note/nb2d65c42c28b",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nb90f2342ebd8": {
@@ -1928,6 +2160,7 @@
       "published_at": "2026-03-27",
       "r2_path": "note/stats47-note/nb90f2342ebd8",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nbedecc99f3a3": {
@@ -1938,6 +2171,7 @@
       "published_at": "2026-04-09",
       "r2_path": "note/stats47-note/nbedecc99f3a3",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nbf1373427ca3": {
@@ -1948,6 +2182,7 @@
       "published_at": "2026-04-13",
       "r2_path": "note/stats47-note/nbf1373427ca3",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nc0e7474b34e1": {
@@ -1958,6 +2193,7 @@
       "published_at": "2026-03-23",
       "r2_path": "note/stats47-note/nc0e7474b34e1",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nc18fa33ec65e": {
@@ -1968,6 +2204,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/koumuin-claude-code/nc18fa33ec65e",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nc60f702445f8": {
@@ -1978,6 +2215,7 @@
       "published_at": "2026-03-26",
       "r2_path": "note/stats47-note/nc60f702445f8",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ncaddeaf3e2ff": {
@@ -1988,6 +2226,7 @@
       "published_at": "2026-03-29",
       "r2_path": "note/stats47-note/ncaddeaf3e2ff",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ncbed56eb7c3d": {
@@ -1998,6 +2237,7 @@
       "published_at": "2025-12-11",
       "r2_path": "note/stats47-note/ncbed56eb7c3d",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ncf6086199c7d": {
@@ -2008,6 +2248,7 @@
       "published_at": "2026-03-29",
       "r2_path": "note/stats47-note/ncf6086199c7d",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nd5f8b5072cdb": {
@@ -2018,6 +2259,7 @@
       "published_at": "2026-03-30",
       "r2_path": "note/stats47-note/nd5f8b5072cdb",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nda04ec118c93": {
@@ -2028,6 +2270,7 @@
       "published_at": "2026-03-25",
       "r2_path": "note/stats47-note/nda04ec118c93",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ndc600ddb7c44": {
@@ -2038,6 +2281,7 @@
       "published_at": "2026-02-02",
       "r2_path": "note/stats47-note/ndc600ddb7c44",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nddd927386fce": {
@@ -2048,6 +2292,7 @@
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/nddd927386fce",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nded2d34fc978": {
@@ -2058,6 +2303,7 @@
       "published_at": "2026-03-13",
       "r2_path": "note/stats47-note/nded2d34fc978",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ne0d53bfef7ed": {
@@ -2068,6 +2314,7 @@
       "published_at": "2026-03-11",
       "r2_path": "note/stats47-note/ne0d53bfef7ed",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ne31a2574e231": {
@@ -2078,6 +2325,7 @@
       "published_at": "2026-03-12",
       "r2_path": "note/stats47-note/ne31a2574e231",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ne3cdb7819c41": {
@@ -2088,6 +2336,7 @@
       "published_at": "2026-03-27",
       "r2_path": "note/stats47-note/ne3cdb7819c41",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ne4a6ec30706a": {
@@ -2098,6 +2347,7 @@
       "published_at": "2026-04-08",
       "r2_path": "note/stats47-note/ne4a6ec30706a",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ne5b9d2b01255": {
@@ -2108,6 +2358,7 @@
       "published_at": "2026-04-01",
       "r2_path": "note/stats47-note/ne5b9d2b01255",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ne62fa955bcff": {
@@ -2118,6 +2369,7 @@
       "published_at": "2026-03-23",
       "r2_path": "note/stats47-note/ne62fa955bcff",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ne82a6c83ed45": {
@@ -2128,6 +2380,7 @@
       "published_at": "2025-12-19",
       "r2_path": "note/stats47-note/ne82a6c83ed45",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ne85980349fda": {
@@ -2138,6 +2391,7 @@
       "published_at": "2026-04-10",
       "r2_path": "note/stats47-note/ne85980349fda",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nead586305cdb": {
@@ -2148,6 +2402,7 @@
       "published_at": "2026-04-08",
       "r2_path": "note/stats47-note/nead586305cdb",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-ned30a382334d": {
@@ -2158,6 +2413,7 @@
       "published_at": "2026-03-29",
       "r2_path": "note/stats47-note/ned30a382334d",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nefd814b49c5d": {
@@ -2168,6 +2424,7 @@
       "published_at": "2026-03-19",
       "r2_path": "note/stats47-note/nefd814b49c5d",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nf0c533293f5b": {
@@ -2178,6 +2435,7 @@
       "published_at": "2026-03-28",
       "r2_path": "note/stats47-note/nf0c533293f5b",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nf0fc2a7eb326": {
@@ -2188,6 +2446,7 @@
       "published_at": "2026-03-28",
       "r2_path": "note/stats47-note/nf0fc2a7eb326",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nf1a5abab3d5e": {
@@ -2198,6 +2457,7 @@
       "published_at": "2026-04-09",
       "r2_path": "note/stats47-note/nf1a5abab3d5e",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nf5b4ced7a736": {
@@ -2208,6 +2468,7 @@
       "published_at": "2026-05-10",
       "r2_path": "note/stats47-note/nf5b4ced7a736",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nf962c6702b93": {
@@ -2218,6 +2479,7 @@
       "published_at": "2025-12-09",
       "r2_path": "note/stats47-note/nf962c6702b93",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nfa4057b9b8de": {
@@ -2228,6 +2490,7 @@
       "published_at": "2026-04-10",
       "r2_path": "note/stats47-note/nfa4057b9b8de",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nfbdfd99fee1b": {
@@ -2238,6 +2501,7 @@
       "published_at": "2026-04-01",
       "r2_path": "note/stats47-note/nfbdfd99fee1b",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "recovered-nfe69996fb5c9": {
@@ -2248,6 +2512,7 @@
       "published_at": "2026-02-09",
       "r2_path": "note/stats47-note/nfe69996fb5c9",
       "r2_body": true,
+      "r2_access": "public",
       "status": "r2_ready"
     }
   }

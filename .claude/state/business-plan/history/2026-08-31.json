@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-31T20:20:42.019Z",
+  "catalogId": "stats47-business-plan-2026",
+  "catalogVersion": "2026-09-01.1",
+  "sourceSha256": "04f678551e1395a2033d8d6e34e7b6029932792f61e9dd178aedaa690de510c8",
+  "coverage": {
+    "decisions": 25,
+    "documents": 11,
+    "initiatives": 10,
+    "pilotSpecs": 4,
+    "contentOpportunities": 100,
+    "xIdeas": 30,
+    "noteProducts": 15,
+    "metrics": 9,
+    "events": 12,
+    "m1Routes": 7,
+    "m1XPosts": 15,
+    "m1NoteProducts": 15,
+    "m1Tasks": 6
+  },
+  "statusCounts": {
+    "adopted": 6,
+    "adapted": 17,
+    "deferred": 2
+  },
+  "eventCounts": {
+    "partially-measured": 5,
+    "measured": 2,
+    "not-instrumented": 3,
+    "manual": 2
+  },
+  "sourceFreshness": {
+    "ga4": "2026-08-30T22:04:10.719Z",
+    "x": "2026-06-07T11:53:10.825Z",
+    "note": "2026-08-31T00:16:10.254Z",
+    "affiliate": "2026-08-28T12:03:01.409Z",
+    "products": "2026-08-30T04:08:24.661Z",
+    "ci": "2026-08-31T09:49:54.447Z"
+  },
+  "nextActions": [
+    {
+      "id": "bp-foundation",
+      "title": "方針・企画・KPIの統合SSOT",
+      "owner": "strategy-advisor",
+      "gate": "25章・100企画・30 X案・15商品が参照整合を通る"
+    },
+    {
+      "id": "geo-pilot-1",
+      "title": "人口×将来人口シリーズ",
+      "owner": "article-writer",
+      "gate": "地域コード・年度・単位・provenanceゲートPASS"
+    }
+  ],
+  "measurementWarning": "未計測・手動・部分計測を0として扱わない。GA4イベントはコード・登録台帳・反映確認の3点が揃って初めてmeasuredとする。"
+}

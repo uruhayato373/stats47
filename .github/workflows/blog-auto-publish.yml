@@ -15,7 +15,8 @@ name: 📤 Blog Auto-Publish (develop → R2)
 #   - published:true の docs/21 記事だけが対象 (作業中ドラフト published:false は無視)
 #   - publish 前に ci-factual-gate (数値捏造) + quality-gate (構造・薄さ) を再検証し、
 #     落ちた slug はスキップ (R2 に到達させない)
-#   - 1 回の実行で公開する上限を MAX_PUBLISH 件にクランプ (爆発半径の限定)
+#   - 1 回の実行で公開する件数の上限は撤廃 (2026-08-31 オーナー判断)。公開対象は
+#     published:true かつゲートを通ったものだけなので、件数ではなくゲートが爆発半径を限定する
 #
 # 手動公開 (1 slug 指定) は従来どおり publish-blog.yml を使う。
 
@@ -29,7 +30,7 @@ on:
   # Phase 2 (2026-06-02): develop に article.md が push されたら自動公開。
   # 外部連携トークンは workflow_dispatch を起動できない (actions:write なし → 403) ため、
   # push を公開トリガーにして「クラウド / web 実行環境でも publish が git push だけで完結」させる。
-  # published:true の判定・factual/quality ゲート・MAX_PUBLISH クランプは下流ステップで担保。
+  # published:true の判定・factual/quality ゲートは下流ステップで担保 (件数上限は無し)。
   push:
     branches: [develop]
     paths:
@@ -50,7 +51,6 @@ env:
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
   CLOUDFLARE_R2_BUCKET_NAME: stats47
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  MAX_PUBLISH: '10'
   # 公開後の CDN ピンポイントパージ用 (purge-cache.ts --urls)
   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
   CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
@@ -118,13 +118,13 @@ jobs:
               echo "skip (not found / published!=true): $slug"
             fi
           done
-          SLUGS=$(echo "$SLUGS" | xargs -n1 2>/dev/null | head -n "${MAX_PUBLISH}" | xargs || true)
+          SLUGS=$(echo "$SLUGS" | xargs || true)
           echo "slugs=$SLUGS" >> "$GITHUB_OUTPUT"
-          echo "検出: ${COUNT} 件 (上限 ${MAX_PUBLISH} に丸め) → ${SLUGS:-なし}"
+          echo "検出: ${COUNT} 件 (件数上限なし) → ${SLUGS:-なし}"
           {
             echo "### Auto-publish 対象"
             echo "- published 記事: ${COUNT} 件"
-            echo "- 公開対象 (上限 ${MAX_PUBLISH}): ${SLUGS:-なし}"
+            echo "- 公開対象 (${COUNT} 件・件数上限なし): ${SLUGS:-なし}"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: 🚪 Gate + Stage + Publish each slug

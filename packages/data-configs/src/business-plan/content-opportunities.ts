@@ -209,7 +209,7 @@ export const BUSINESS_PLAN_X_IDEAS: readonly BusinessPlanChannelIdea[] =
   }));
 
 const NOTE_PRODUCTS = [
-  [2, 'IPSS将来人口を市区町村地図にする', 1980],
+  [2, 'IPSS将来人口を都道府県地図データにする', 1980],
   [2, '地域コード結合の完全チェックリスト', 980],
   [3, '洪水×人口メッシュ分析', 2980],
   [3, '国土数値情報をQGISで扱う', 1980],

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "road-length-per-km2",
+  "year": "2023",
+  "unit": "km",
+  "label": "道路実延長",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/road-length-per-km2/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug road-length-per-km2-vs-local-special-grant-prefecture --keys road-length-per-km2 --data-name road-length-per-km2-vs-local-special-grant-prefecture-prefecture-rankings",
+  "fetchedAt": "2026-08-31T21:13:29.722Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

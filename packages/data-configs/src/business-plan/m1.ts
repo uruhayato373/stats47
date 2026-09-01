@@ -585,7 +585,7 @@ export const BUSINESS_PLAN_M1_X_POSTS: readonly BusinessPlanM1XPost[] = [
 ];
 
 const NOTE_KEYS = [
-  'd-geo-ipss-municipality-map',
+  'd-geo-ipss-prefecture-map',
   'd-geo-region-code-checklist',
   'd-geo-flood-population-mesh',
   'd-geo-ksj-qgis-guide',
@@ -603,16 +603,16 @@ const NOTE_KEYS = [
 ] as const;
 
 const NOTE_OUTCOMES = [
-  'IPSSの将来人口を地域コードで結合し、誤読を避けた地図を再現できる',
+  'IPSSの将来人口を47都道府県コード付きで比較し、地図用データとして再利用できる',
   '県・市区町村コードの欠落、桁、境界変更を公開前に検査できる',
   '洪水ポリゴンと人口メッシュの重なりを再現可能な手順で集計できる',
   '国土数値情報をQGISで読み込み、CRSと属性を検証できる',
-  '地価地点と将来人口を混同せず市区町村単位で比較できる',
+  '地価地点と将来人口を混同せず都道府県単位で比較できる',
   '1つの地図からX画像とOGPを規約どおり派生できる',
   '人口に対する医療アクセスを距離定義つきで分析できる',
   '用途に応じてGeoPackage、Parquet、PMTilesを選べる',
   'provenance、単位、分布、coverageの品質ゲートを構築できる',
-  '駅徒歩圏と将来人口を結合し、駅数との違いを説明できる',
+  '駅代表点と1km人口メッシュ中心の直線800m判定による47都道府県集計を検算・再利用できる',
   '人口、競合、アクセスを使った基礎商圏分析を再現できる',
   'POIデータの利用条件を確認し、公開可否を判断できる',
   '自然言語の条件を検証可能な地域フィルタJSONへ変換できる',

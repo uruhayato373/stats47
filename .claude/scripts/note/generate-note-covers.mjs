@@ -1,18 +1,19 @@
 #!/usr/bin/env node
 /**
- * note ドラフトのカバー SVG (1280×670) を一括生成する。
+ * note ドラフトのカバー SVG + PNG (1280×670) を一括生成する。
  * stats47-note / koumuin-* シリーズ全般に対応した汎用版。
  *
  * Usage:
  *   node .claude/scripts/note/generate-note-covers.mjs [--slug <slug>] [--all]
  *
- * 出力: docs/31_note記事原稿/<vertical>/<slug>/images/cover-1280x670.svg
+ * 出力: docs/31_note記事原稿/<vertical>/<slug>/images/cover-1280x670.{svg,png}
  * (存在しない場合は先に restore-from-r2.sh で復元する)
  */
 
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '../../..');
@@ -231,7 +232,7 @@ function resolveSlugDir(draftRoot, vertical, slug) {
   return path.join(draftRoot, vertical, slug);
 }
 
-function processSlug(slug, info, draftRoot) {
+async function processSlug(slug, info, draftRoot) {
   const { vertical } = info;
   const slugDir = resolveSlugDir(draftRoot, vertical, slug);
 
@@ -251,8 +252,9 @@ function processSlug(slug, info, draftRoot) {
   const series = detectSeries(slug);
   const vertThemes = THEMES[vertical] || THEMES['stats47-note'];
   const theme = vertThemes[series] || vertThemes['default'];
-  const eyebrow = getEyebrow(vertical, series, slug);
-  const label = theme.labelText;
+  const isGeoProduct = vertical === 'stats47-note' && slug.startsWith('d-geo-');
+  const eyebrow = isGeoProduct ? 'GIS再現データ' : getEyebrow(vertical, series, slug);
+  const label = isGeoProduct ? 'GEO DATA PACK' : theme.labelText;
   const footerText = theme.footerText;
 
   const svg = makeCoverSvg({ title, eyebrow, label, footerText, theme });
@@ -261,9 +263,26 @@ function processSlug(slug, info, draftRoot) {
   fs.mkdirSync(imagesDir, { recursive: true });
   const outPath = path.join(imagesDir, 'cover-1280x670.svg');
   fs.writeFileSync(outPath, svg, 'utf8');
+  const pngPath = path.join(imagesDir, 'cover-1280x670.png');
+  await sharp(Buffer.from(svg)).png().toFile(pngPath);
 
-  console.log(`  OK: ${slug} → ${outPath.replace(PROJECT_ROOT, '')}`);
+  console.log(`  OK: ${slug} → ${outPath.replace(PROJECT_ROOT, '')} + PNG`);
   return { status: 'ok', slug };
+}
+
+function discoverDraftInfo(slug, draftRoot) {
+  const direct = path.join(draftRoot, slug, 'draft.md');
+  const candidates = [direct];
+  if (fs.existsSync(draftRoot)) {
+    for (const vertical of fs.readdirSync(draftRoot)) {
+      candidates.push(path.join(draftRoot, vertical, slug, 'draft.md'));
+    }
+  }
+  const draftPath = candidates.find((candidate) => fs.existsSync(candidate));
+  if (!draftPath) return null;
+  const content = fs.readFileSync(draftPath, 'utf8');
+  const vertical = content.match(/^vertical:\s*["']?(.+?)["']?\s*$/m)?.[1] ?? 'stats47-note';
+  return { vertical };
 }
 
 // ============================================================
@@ -284,13 +303,15 @@ const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
 const drafts = indexData.drafts || {};
 const draftRoot = path.join(PROJECT_ROOT, 'docs/31_note記事原稿');
 
-const targets = targetSlug ? { [targetSlug]: drafts[targetSlug] } : drafts;
+const targets = targetSlug
+  ? { [targetSlug]: drafts[targetSlug] ?? discoverDraftInfo(targetSlug, draftRoot) }
+  : drafts;
 
 console.log(`=== カバー SVG 生成 (対象: ${Object.keys(targets).length}件) ===`);
 const results = [];
 for (const [slug, info] of Object.entries(targets)) {
   if (!info) { console.log(`  NOT FOUND: ${slug}`); continue; }
-  results.push(processSlug(slug, info, draftRoot));
+  results.push(await processSlug(slug, info, draftRoot));
 }
 
 const ok = results.filter(r => r.status === 'ok').length;

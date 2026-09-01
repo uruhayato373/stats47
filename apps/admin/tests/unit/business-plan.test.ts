@@ -92,14 +92,14 @@ describe("business plan admin server", () => {
     expect(result.m1.note).toMatchObject({
       planned: 15,
       registered: 15,
-      withBody: 0,
+      withBody: 4,
     });
     expect(result.m1.note.products).toHaveLength(15);
     expect(result.m1.note.products[0]).toMatchObject({
-      articleKey: "d-geo-ipss-municipality-map",
+      articleKey: "d-geo-ipss-prefecture-map",
       priceYen: 1980,
-      hasBody: false,
-      catalogStatus: "draft",
+      hasBody: true,
+      catalogStatus: "published",
     });
     expect(result.m1.events).toEqual({
       planned: 4,

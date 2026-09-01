@@ -66,6 +66,14 @@ for (const [slug, info] of Object.entries(drafts)) {
     continue
   }
 
+  const draftPath = join(srcDir, 'draft.md')
+  if (existsSync(draftPath) && /^is_paid:\s*true\s*$/m.test(readFileSync(draftPath, 'utf8'))) {
+    const message = `${slug}: paid draft must not be uploaded to public R2`
+    console.error(`  ❌ ${message}`)
+    errors.push({ slug, error: message })
+    continue
+  }
+
   const r2Prefix = `note/${vertical}/${slug}`
   const r2StagingDir = join(LOCAL_R2, 'note', vertical, slug)
 
@@ -124,6 +132,7 @@ if (synced.length > 0) {
 if (process.env.GITHUB_OUTPUT) {
   const fs2 = await import('fs')
   fs2.appendFileSync(process.env.GITHUB_OUTPUT, `draft_synced_count=${synced.length}\n`)
+  fs2.appendFileSync(process.env.GITHUB_OUTPUT, `draft_delete_paths=${JSON.stringify(synced.map(s => relative(ROOT, s.srcDir)))}\n`)
 }
 
 if (errors.length > 0) process.exit(1)

@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "road-length-per-km2",
+  "pair": "local-special-grant-prefecture",
+  "xKey": "road-length-per-km2",
+  "yKey": "local-special-grant-prefecture",
+  "pearsonR": 0.8661433106889992,
+  "partialRPopulation": 0.4982947591443847,
+  "unit": "km × 千円",
+  "label": "道路実延長 と 地方特例交付金 の関係",
+  "source": "r2:app/correlation/by-ranking-key/road-length-per-km2.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug road-length-per-km2-vs-local-special-grant-prefecture --base road-length-per-km2 --pair local-special-grant-prefecture --data-name road-length-per-km2--local-special-grant-prefecture"
+}

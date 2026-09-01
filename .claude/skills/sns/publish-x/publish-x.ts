@@ -10,7 +10,7 @@
  *   --domain ranking|compare|correlation|blog (デフォルト: ranking)
  *   --immediate  予約ではなく即時投稿（⚠️ 明示指定が必要、デフォルトは予約）
  *   --dry-run    実投稿せずセレクタ検出まで確認（初回必須）
- *   --from-queue [--limit N]
+ *   --from-queue [--limit N] [--filter-domain geo] [--content-prefix geo-001-x-]
  *                posts.json の X draft (status=draft, scheduled_at 付き) を scheduled_at 昇順で
  *                読み込み予約投稿する。check-x-post-budget のハード上限を超える分はスキップ。
  *                media 不在なら quick-still --require-png で決定的に再生成 (クラウド生成→ローカル
@@ -98,6 +98,8 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean; fromQueue?: boo
   let quoteUrl: string | null = null;
   let fromQueue = false;
   let limit = Infinity;
+  let filterDomain: string | null = null;
+  let contentPrefix: string | null = null;
   const pairs: { key: string; date: string | null }[] = [];
 
   let i = 0;
@@ -113,6 +115,10 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean; fromQueue?: boo
       fromQueue = true;
     } else if (args[i] === "--limit") {
       limit = Number(args[++i]);
+    } else if (args[i] === "--filter-domain") {
+      filterDomain = args[++i];
+    } else if (args[i] === "--content-prefix") {
+      contentPrefix = args[++i];
     } else if (args[i] === "--media") {
       customMedia = args[++i];
     } else if (args[i] === "--caption") {
@@ -145,7 +151,9 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean; fromQueue?: boo
           p.status === "draft" &&
           p.post_type !== "quote_rt" &&
           p.scheduled_at &&
-          !p.deleted_at,
+          !p.deleted_at &&
+          (!filterDomain || String(p.domain || "ranking") === filterDomain) &&
+          (!contentPrefix || String(p.content_key || "").startsWith(contentPrefix)),
       )
       .sort((a: Record<string, unknown>, b: Record<string, unknown>) =>
         String(a.scheduled_at).localeCompare(String(b.scheduled_at)),
@@ -942,8 +950,10 @@ async function main() {
     }
     const ok = results.filter((r) => r.success).length;
     console.log(`\n合計: ${ok}/${results.length} 件完了`);
+    if (ok !== results.length) process.exitCode = 1;
   } catch (error) {
     console.error("エラー:", error);
+    process.exitCode = 1;
   } finally {
     await page.waitForTimeout(5000);
     await context.close();

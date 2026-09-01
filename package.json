@@ -23,6 +23,7 @@
     "x:build-site-acquisition": "npm run build:site-acquisition-x --workspace packages/data-configs",
     "x:audit-site-acquisition": "npm run audit:site-acquisition-x --workspace packages/data-configs",
     "geo:build-cross-analysis": "tsx packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts && npm run geo:audit-analysis",
+    "geo:build-flood-analysis": "tsx packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts --flood-only && npm run geo:audit-analysis",
     "geo:build-station-access": "tsx packages/gis/src/mlit-ksj/scripts/build-geo-cross-snapshots.ts --station-access-only && npm run geo:audit-analysis",
     "geo:audit-analysis": "tsx packages/gis/src/mlit-ksj/scripts/audit-geo-analysis-artifacts.ts",
     "geo:build-data-catalog": "npm run build:data-catalog --workspace packages/gis",

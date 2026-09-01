@@ -1,24 +1,21 @@
-# GSC Operations Cycle — 2026-W34
+# GSC Operations Cycle — 2026-W35
 
-**Status**: WARN / **Stage**: monitor / **Generated**: 2026-08-24T11:54:19.167Z
+**Status**: WARN / **Stage**: review / **Generated**: 2026-08-31T20:25:05.647Z
 
-計測週: 2026-W34 / 次週計画: 2026-W35 / 月次: 2026-08
+計測週: 2026-W35 / 次週計画: 2026-W36 / 月次: 2026-09
 
 | Check | Result | Evidence |
 |---|---|---|
-| snapshot-period | PASS | 2026-W34 finalized7d coverage complete |
-| snapshot-freshness | PASS | latest=2026-W34, expected>=2026-W34 |
-| effect-verdict | PASS | 2026-W34 verdict 7件を記録済み |
+| snapshot-period | PASS | 2026-W35 finalized7d coverage complete |
+| snapshot-freshness | PASS | latest=2026-W35, expected>=2026-W35 |
+| effect-verdict | PASS | 2026-W35 verdict 7件を記録済み |
 | effect-target-ratchet | WARN | 既知の過去欠落 7件（新規欠落0） |
 | effect-backlog-reconciliation | PASS | 確定 verdict と active 一覧の不整合0 |
-| search-growth-freshness | PASS | week=2026-W35, age=0d |
+| search-growth-freshness | PASS | week=2026-W36, age=1d |
 | search-growth-sources | PASS | gsc/coverage/inspection は利用可能 |
-| search-growth-decision | PASS | 2026-W34 の承認/却下 1件（必要 1件以上） |
-| url-inspection-freshness | PASS | latest=2026-08-23, age=1d |
-| weekly-review | PASS | 2026-W34 review の search-growth 節=あり |
-| weekly-plan | PASS | plan=2026-W35, expected=2026-W35 |
-| monthly-plan | PASS | month=2026-08, GSC運用サイクル節=あり |
-| monthly-review-coverage | PASS | 直近4週レビュー 4/4（必要 3以上） |
+| search-growth-decision | PASS | 2026-W35 の承認/却下 2件（必要 1件以上） |
+| url-inspection-freshness | PASS | latest=2026-08-31, age=1d |
+| weekly-review | PASS | 2026-W35 review の search-growth 節=あり |
 
 ## 次のアクション
 

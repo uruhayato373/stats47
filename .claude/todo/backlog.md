@@ -21,6 +21,31 @@ updated: 2026-08-30
 
 ## 🔴 高 — 今月中に着手したい
 
+### [CHART-VALIDATE-GATE-01] ブログチャート検証ゲートが全 PR で 0 件しか見ていないのを直す
+
+タグ: [エージェント・SSOT] [種類:不具合] [実行:機械] [検証:.github/workflows/generate-article-charts.yml の run で検出 slug 数 > 0] [起票:2026-08-31]
+
+- **owner**: Claude Code
+- **症状**: `generate-article-charts.yml` の PR ゲートが、記事を何本追加しても
+  空の結果表を出して success で終わる。PR #872 (ブログ 20 本追加) の run 33444223980 で実測。
+  ログに `fatal: origin/develop...HEAD: no merge base` が出て検出 slug が 0 件になり、
+  ループが 1 回も回らないまま `FAIL=0` で通っている。
+- **原因は 3 つあり、どれか 1 つを直しても 0 件のまま**:
+  1. `git fetch origin "$base" --depth=1` が shallow ref を作るため 3 点ドット diff に
+     merge base が無い。`actions/checkout` は `fetch-depth: 0` なので、この `--depth=1` を
+     外せば解決する。
+  2. `awk -F/ '{print $2}'` がフォルダ名 (`21_ブログ記事原稿`) を出しており slug ではない。
+     パスは `docs/21_ブログ記事原稿/<slug>/...` なので `$3` が正しい。
+  3. git が非 ASCII パスをクォートするため行頭が `"` になり `/^docs\/21_/` が一致しない。
+     `git -c core.quotepath=false diff` が要る。
+- **実測**: 3 つを直した検出は PR #872 の 20 slug を過不足なく返す。その 20 件に対して
+  `generate-article-charts.ts --slug <s> --validate` を実行すると全件 OK なので、
+  この修正で既存の記事が赤くなることはない。
+- **完了条件**: ブログ記事を含む PR で、結果表に対象 slug が行として並ぶこと。
+  あわせて**壊れたチャートを 1 件混ぜて実際に赤くなることを実測する** (全 PASS は
+  「何も見ていない」と区別がつかないため。`unit-semantics-standards.md` §4.5)。
+- **関連**: `QUALITY-GATE-COVERAGE-01` (CI の実効網羅性の親項目)
+
 ### [QUALITY-GATE-COVERAGE-01] CI・テスト・監査の実効網羅性強化
 
 タグ: [起票:2026-08-13]

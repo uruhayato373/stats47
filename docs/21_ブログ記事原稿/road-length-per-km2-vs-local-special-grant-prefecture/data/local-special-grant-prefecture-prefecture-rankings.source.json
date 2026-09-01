@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "local-special-grant-prefecture",
+  "year": "2022",
+  "unit": "千円",
+  "label": "地方特例交付金",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/local-special-grant-prefecture/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug road-length-per-km2-vs-local-special-grant-prefecture --keys local-special-grant-prefecture --data-name local-special-grant-prefecture-prefecture-rankings",
+  "fetchedAt": "2026-08-31T21:13:30.363Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

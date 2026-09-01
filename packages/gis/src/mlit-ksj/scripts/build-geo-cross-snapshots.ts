@@ -74,6 +74,10 @@ const R2_PUBLIC_BASE = (
 const POPULATION_VERSION = "24";
 const LAND_PRICE_VERSION = "26";
 const STATION_VERSION = "25";
+const STATION_INPUT_KEY = `gis/mlit-ksj/S12/${STATION_VERSION}/national.topojson`;
+const STATION_INPUT_BYTES = 10_639_010;
+const STATION_INPUT_SHA256 =
+  "3e69811eee825cc1346ff17340f5ee224562478f71879f7b34d0da6fc7d49fc9";
 const FLOOD_VERSION = "25";
 const FLOOD_GRID_DEGREES = 0.01;
 const EXPECTED_FLOOD_FILES = 94;
@@ -146,6 +150,47 @@ function readTopology(filePath: string): Topology {
     throw new Error(`GIS入力がありません: ${filePath}`);
   }
   return JSON.parse(fs.readFileSync(filePath, "utf8")) as Topology;
+}
+
+async function ensureStationInput(): Promise<void> {
+  const inputPath = path.join(LOCAL_R2_ROOT, STATION_INPUT_KEY);
+  if (fs.existsSync(inputPath)) {
+    const bytes = fs.readFileSync(inputPath);
+    const actualSha256 = createHash("sha256").update(bytes).digest("hex");
+    if (
+      bytes.byteLength !== STATION_INPUT_BYTES ||
+      actualSha256 !== STATION_INPUT_SHA256
+    ) {
+      throw new Error(
+        `S12入力のbytes/SHA-256が不一致です: bytes=${bytes.byteLength} sha256=${actualSha256}`,
+      );
+    }
+    return;
+  }
+
+  const url = `${R2_PUBLIC_BASE}/${STATION_INPUT_KEY}`;
+  const response = assertOk(
+    await fetch(url, { headers: { "User-Agent": "stats47-geo-analysis/1.0" } }),
+    url,
+  );
+  const bytes = Buffer.from(await response.arrayBuffer());
+  const actualSha256 = createHash("sha256").update(bytes).digest("hex");
+  if (
+    bytes.byteLength !== STATION_INPUT_BYTES ||
+    actualSha256 !== STATION_INPUT_SHA256
+  ) {
+    throw new Error(
+      `取得したS12入力のbytes/SHA-256が不一致です: bytes=${bytes.byteLength} sha256=${actualSha256}`,
+    );
+  }
+  JSON.parse(bytes.toString("utf8"));
+  fs.mkdirSync(path.dirname(inputPath), { recursive: true });
+  const temporaryPath = `${inputPath}.${process.pid}.tmp`;
+  fs.writeFileSync(temporaryPath, bytes);
+  fs.renameSync(temporaryPath, inputPath);
+  console.log(
+    `S12 input fetched: ${STATION_INPUT_KEY} bytes=${bytes.byteLength} sha256=${actualSha256}`,
+  );
 }
 
 function topologyToFeatures(topology: Topology): JsonFeature[] {
@@ -346,7 +391,7 @@ function loadStationPoints(): {
   stations: StationAccessPoint[];
   input: GeoAnalysisInputEvidence;
 } {
-  const key = `gis/mlit-ksj/S12/${STATION_VERSION}/national.topojson`;
+  const key = STATION_INPUT_KEY;
   const inputPath = path.resolve(`.local/r2/${key}`);
   const topology = readTopology(inputPath);
   const features = topologyToFeatures(topology);
@@ -1492,11 +1537,32 @@ function buildFloodSnapshot(
 
 async function main(): Promise<void> {
   const stationAccessOnly = process.argv.includes("--station-access-only");
+  const floodOnly = process.argv.includes("--flood-only");
+  if (stationAccessOnly && floodOnly) {
+    throw new Error("--station-access-only と --flood-only は同時に指定できません");
+  }
   const generatedAt = new Date().toISOString();
   console.log(`R2 input: ${R2_PUBLIC_BASE}`);
   const { meshes, inputs: populationInputs } = await loadPopulationMeshes();
   if (meshes.length < 100_000) {
     throw new Error(`人口メッシュ件数が少なすぎます: ${meshes.length}`);
+  }
+
+  if (floodOnly) {
+    const floodCounts = await markFloodExposure(meshes);
+    const floodSnapshot = buildFloodSnapshot(generatedAt, meshes, floodCounts);
+    const floodAggregate = writeSnapshot(floodSnapshot);
+    const floodDetails = writeFloodDetails({ generatedAt, meshes, snapshot: floodSnapshot });
+    writeFloodManifest({
+      generatedAt,
+      populationInputs,
+      floodInputs: floodCounts.inputs,
+      floodSourceOutputs: floodCounts.sourceOutputs,
+      details: floodDetails,
+      aggregate: floodAggregate,
+    });
+    console.log(`完了: meshes=${meshes.length} floodFiles=${floodCounts.files}`);
+    return;
   }
 
   let landPricePointCount = 0;
@@ -1525,6 +1591,7 @@ async function main(): Promise<void> {
     });
   }
 
+  await ensureStationInput();
   const { stations: stationPoints, input: stationInput } = loadStationPoints();
   if (stationPoints.length < 5_000) {
     throw new Error(`駅グループ数が少なすぎます: ${stationPoints.length}`);

@@ -2,6 +2,8 @@
   "kind": "correlation",
   "base": "airport-count",
   "pair": "physical-disability-rehabilitation-facility-residents",
+  "xKey": "airport-count",
+  "yKey": "physical-disability-rehabilitation-facility-residents",
   "pearsonR": 0.6740058999775125,
   "partialRPopulation": 0.6591080556824968,
   "unit": "か所 × 人",

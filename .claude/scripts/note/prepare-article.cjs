@@ -40,6 +40,35 @@ const fmF = (k) => {
 const title = fmF("title");
 const isPaid = fmF("is_paid") === "true";
 const priceJpy = parseInt(fmF("price_jpy") || "0", 10);
+const productArchiveField = fmF("product_archive");
+const productAttachmentAfter = fmF("product_attachment_after");
+let productAttachment = null;
+if (productArchiveField) {
+  const archivePath = path.resolve(projectRoot, productArchiveField);
+  const productRoot = path.join(projectRoot, ".local/geo-products") + path.sep;
+  if (!archivePath.startsWith(productRoot) || path.extname(archivePath).toLowerCase() !== ".zip") {
+    console.error("ERROR: product_archive must be a ZIP under .local/geo-products");
+    process.exit(1);
+  }
+  if (!fs.existsSync(archivePath)) {
+    console.error("ERROR: product_archive not found: " + productArchiveField);
+    process.exit(1);
+  }
+  if (fs.statSync(archivePath).size > 50 * 1024 * 1024) {
+    console.error("ERROR: product_archive exceeds note 50MB limit: " + productArchiveField);
+    process.exit(1);
+  }
+  if (!isPaid || !productAttachmentAfter) {
+    console.error("ERROR: product_archive requires is_paid=true and product_attachment_after");
+    process.exit(1);
+  }
+  productAttachment = {
+    path: archivePath,
+    name: path.basename(archivePath),
+    afterHeading: productAttachmentAfter,
+    bytes: fs.statSync(archivePath).size,
+  };
+}
 let body = raw.replace(/^---\n[\s\S]*?\n---\n*/, "");
 // 画像参照の位置（直前見出し）を控える
 const imgRefs = []; let lastH = "";
@@ -86,9 +115,9 @@ const segments = seg(body);
 const segmentsPaid = isPaid ? seg(bodyPaid) : [];
 const out = {
   slug, articleDir, articleFile, title, isPaid, priceJpy, segments, segmentsPaid, imgRefs,
-  affiliateBanners,
+  affiliateBanners, productAttachment,
   urlCount: segments.filter((s) => s.type === "url").length,
   paidHead: isPaid && segmentsPaid[0] ? segmentsPaid[0].content.slice(0, 24) : "",
 };
 fs.writeFileSync("/tmp/note-data-" + slug + ".json", JSON.stringify(out, null, 2));
-console.log(JSON.stringify({ title: title.slice(0, 40), isPaid, priceJpy, segs: segments.length, urls: out.urlCount, imgs: imgRefs.map((r) => r.file), affiliates: affiliateBanners.map((a) => a.id), paidHead: out.paidHead, pipeTable: /\n\|.*\|.*\n\|[-: ]+\|/.test(body) }));
+console.log(JSON.stringify({ title: title.slice(0, 40), isPaid, priceJpy, segs: segments.length, urls: out.urlCount, imgs: imgRefs.map((r) => r.file), affiliates: affiliateBanners.map((a) => a.id), attachment: productAttachment?.name ?? null, paidHead: out.paidHead, pipeTable: /\n\|.*\|.*\n\|[-: ]+\|/.test(body) }));

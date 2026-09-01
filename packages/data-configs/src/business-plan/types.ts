@@ -129,6 +129,27 @@ export type BusinessPlanGeoContentSurfaceStatus =
   | 'draft'
   | 'gated';
 
+export type BusinessPlanGeoLaunchRole =
+  | 'commercial-lead'
+  | 'public-utility'
+  | 'decision-support'
+  | 'evidence-hub';
+
+export interface BusinessPlanGeoLaunchPlan {
+  readonly order: number;
+  readonly role: BusinessPlanGeoLaunchRole;
+  readonly audience: string;
+  readonly readerJob: string;
+  readonly promise: string;
+  readonly hook: string;
+  readonly borrowedPatterns: readonly string[];
+  readonly surfaceOrder: readonly string[];
+  readonly reusableOutputs: readonly string[];
+  readonly evaluationWindowDays: 28;
+  readonly successGate: string;
+  readonly stopCondition: string;
+}
+
 /**
  * 1つのGeo分析を無料閲覧だけで終わらせず、記事・テーマ・県・SNS・有料再利用物へ
  * 接続する公開ライフサイクル。数値の正典は常にcanonical Geo分析とR2 artifactに置く。
@@ -139,6 +160,7 @@ export interface BusinessPlanGeoContentLifecycle {
   readonly analysisSlug: string;
   readonly title: string;
   readonly themeKeys: readonly string[];
+  readonly launch: BusinessPlanGeoLaunchPlan;
   readonly free: {
     readonly canonicalPath: string;
     readonly dataPath: string;

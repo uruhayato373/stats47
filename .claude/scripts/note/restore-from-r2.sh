@@ -29,8 +29,12 @@ const slug='$SLUG';
 
 if(pub.articles[slug]){
   const a=pub.articles[slug];
+  if(a.is_paid===true && a.r2_access==='private'){
+    console.log(JSON.stringify({vertical:a.vertical, r2_path:a.r2_path, status:'published', access:'private'}));
+    process.exit(0);
+  }
   const r2=a.r2_path||('note/'+a.vertical+'/'+slug);
-  console.log(JSON.stringify({vertical:a.vertical, r2_path:r2, status:'published'}));
+  console.log(JSON.stringify({vertical:a.vertical, r2_path:r2, status:'published', access:'public'}));
 } else if(dft.drafts[slug]){
   const d=dft.drafts[slug];
   const r2=d.r2_path||('note/'+d.vertical+'/'+slug);
@@ -44,6 +48,11 @@ if(pub.articles[slug]){
 VERTICAL=$(echo "$LOOKUP" | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); console.log(d.vertical)")
 R2_PATH=$(echo "$LOOKUP" | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); console.log(d.r2_path)")
 STATUS=$(echo "$LOOKUP" | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); console.log(d.status)")
+ACCESS=$(echo "$LOOKUP" | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); console.log(d.access||'public')")
+
+if [ "$ACCESS" = "private" ]; then
+  exec npx tsx "$SCRIPT_DIR/restore-paid-note-private-r2.ts" "$SLUG"
+fi
 
 echo "▶ 復元: $SLUG"
 echo "  status:   $STATUS"
