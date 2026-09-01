@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 96,
+    "pending": 95,
     "inProgress": 2,
-    "done": 20,
+    "done": 21,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 16,
-      "A": 40,
+      "A": 39,
       "F": 12,
       "G": 9
     }
@@ -2096,8 +2096,10 @@
       "suggestedTitle": "国民年金保険料全額免除が多い県はどこ",
       "combinedScore": 0.303,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 73
+      "status": "done",
+      "priority": 73,
+      "done_at": "2026-09-01",
+      "published_slug": "national-pension-full-exemption-rate-prefecture-gap"
     },
     {
       "topicKey": "gap-fishery-species-catch-sardine",

@@ -3,8 +3,8 @@ title: 年金保険料の免除率、沖縄はなぜ突出?
 seoTitle: "国民年金保険料全額免除割合ランキング 都道府県別 沖縄41％・神奈川19％の差"
 description: 同じ国民年金制度なのに、全額免除を受けている割合は県によって2倍以上違います。沖縄県が41％で1位、神奈川県が19％で最下位という差はどこから生まれるのかを都道府県別データで見ていきます。
 slug: national-pension-full-exemption-rate-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-01
+published: true
 tags: []
 ---
 
