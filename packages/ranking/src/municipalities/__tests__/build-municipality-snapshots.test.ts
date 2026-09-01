@@ -99,6 +99,43 @@ describe('buildMunicipalityRankingSnapshots', () => {
     ]);
   });
 
+  it('e-Statのplaceholderダッシュ unitはconfigのunitへ倒し、実unitは行側を優先する', () => {
+    const base = {
+      metric: { ...metric, unit: '指数' },
+      entityPolicy: policy,
+      generatedAt: '2026-09-01T00:00:00.000Z',
+    };
+    // 財政力指数型: 行 unit が「‐」(U+2010) → config の「指数」を採用
+    const placeholder = buildMunicipalityRankingSnapshots({
+      ...base,
+      rows: [
+        {
+          areaCode: '01100',
+          areaName: '札幌市',
+          yearCode: '2020',
+          value: 1.2,
+          unit: '\u2010',
+        },
+      ],
+    });
+    expect(placeholder.item.unit).toBe('指数');
+    expect(placeholder.values.unit).toBe('指数');
+    // 実 unit を持つ行はそのまま行側を優先 (従来挙動)
+    const real = buildMunicipalityRankingSnapshots({
+      ...base,
+      rows: [
+        {
+          areaCode: '01100',
+          areaName: '札幌市',
+          yearCode: '2020',
+          value: 1.2,
+          unit: '人',
+        },
+      ],
+    });
+    expect(real.item.unit).toBe('人');
+  });
+
   it('最新年の自治体コード重複を拒否する', () => {
     expect(() =>
       buildMunicipalityRankingSnapshots({
