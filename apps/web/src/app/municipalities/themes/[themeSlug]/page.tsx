@@ -11,7 +11,7 @@ import { MiniDistributionBars } from '@/components/charts/MiniDistributionBars';
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { StatisticsScopeNav } from '@/components/navigation';
 
-import { TrackedMunicipalityThemeCard } from '@/features/municipalities';
+import { TrackedMunicipalityThemeLink } from '@/features/municipalities';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -83,7 +83,7 @@ export default async function MunicipalityThemePage({
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {items.map((item) => (
-            <TrackedMunicipalityThemeCard
+            <TrackedMunicipalityThemeLink
               key={item.rankingKey}
               href={`/municipalities/ranking/${item.rankingKey}`}
               label={
@@ -111,7 +111,7 @@ export default async function MunicipalityThemePage({
                 <ChartNoAxesColumnIncreasing className="size-4" aria-hidden />
                 ランキング
               </p>
-            </TrackedMunicipalityThemeCard>
+            </TrackedMunicipalityThemeLink>
           ))}
         </div>
       )}
