@@ -3,8 +3,8 @@ title: "登山・ハイキング率、山より都会が上位という謎"
 seoTitle: "登山・ハイキングの行動者率ランキング 都道府県別2021年"
 description: "山がちな地域ほど登山者が多いとは限りません。社会生活基本調査の登山・ハイキングの行動者率で1位となったのは山地の少ない東京都で、最下位は沖縄県という意外な結果が明らかになりました。"
 slug: sports-participation-rate-hiking-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
