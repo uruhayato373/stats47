@@ -3,8 +3,8 @@ title: 下水道普及率、なぜ東京と徳島で差が開くのか
 seoTitle: "下水道処理人口普及率ランキング｜都道府県別2023年データ"
 description: 同じ日本でも、住む県によって下水道の普及率には大きな差があります。2023年のデータでは1位と47位の間に約5倍の開きがあり、その背景には人口密度や地形、整備の歴史が関係しています。
 slug: sewerage-coverage-rate-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

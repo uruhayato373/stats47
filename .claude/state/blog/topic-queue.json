@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 77,
+    "pending": 76,
     "inProgress": 2,
-    "done": 39,
+    "done": 40,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 12,
-      "A": 25,
+      "A": 24,
       "F": 12,
       "G": 9
     }
@@ -2861,8 +2861,10 @@
       "suggestedTitle": "下水道処理人口が多い県はどこ",
       "combinedScore": 0.278,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 100
+      "status": "done",
+      "priority": 100,
+      "done_at": "2026-09-02",
+      "published_slug": "sewerage-coverage-rate-prefecture-gap"
     },
     {
       "topicKey": "gap-fabric-softener-consumption-expenditure",
