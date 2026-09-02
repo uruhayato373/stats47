@@ -3,8 +3,8 @@ title: 公共キャンプ場、なぜ北海道が突出して多いのか
 seoTitle: "公共キャンプ場数ランキング|都道府県別の施設数 2021年"
 description: 公共キャンプ場の数は都道府県によって大きく異なり、1位の北海道は134施設あるのに対し、47位の奈良県はわずか3施設しかありません。この記事では地理条件や自治体の政策の違いから、その差が生まれる理由を探ります。
 slug: campsite-public-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
