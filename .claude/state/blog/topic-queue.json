@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 70,
+    "pending": 69,
     "inProgress": 2,
-    "done": 46,
+    "done": 47,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 10,
-      "A": 20,
+      "A": 19,
       "F": 12,
       "G": 9
     }
@@ -2618,8 +2618,10 @@
       "suggestedTitle": "将来人口増減が多い県はどこ",
       "combinedScore": 0.286,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 91
+      "status": "done",
+      "priority": 91,
+      "done_at": "2026-09-02",
+      "published_slug": "future-population-change-rate-2050-prefecture-gap"
     },
     {
       "topicKey": "gap-sausage-consumption-quantity",

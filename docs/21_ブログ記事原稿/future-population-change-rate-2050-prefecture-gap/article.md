@@ -3,8 +3,8 @@ title: 2050年、人口が増える県は東京だけ?
 seoTitle: "将来人口増減率ランキング2050年｜都道府県別の増加率・減少率を徹底比較"
 description: 2050年になっても人口が増える都道府県は、全国でたったひとつしかありません。将来人口増減率のランキングから、47都道府県に広がる人口減少の地域差を読み解きます。
 slug: future-population-change-rate-2050-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
