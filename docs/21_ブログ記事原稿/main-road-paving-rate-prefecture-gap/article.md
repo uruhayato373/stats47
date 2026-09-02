@@ -3,8 +3,8 @@ title: 主要道路舗装率100％の県が4つもあるのはなぜか
 seoTitle: "主要道路舗装率ランキング｜1位高知県・佐賀県・宮崎県・鹿児島県100％、最下位岩手県92.1％ (2023年)"
 description: 道路は舗装されているのが当たり前に思えますが、県によって主要道路の舗装率には差があります。高知県など4県が100％を達成した理由と、岩手県が92.1％にとどまる理由を、地形と気候から読み解きます。
 slug: main-road-paving-rate-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
