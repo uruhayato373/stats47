@@ -4,16 +4,16 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 60,
+    "pending": 35,
     "inProgress": 2,
-    "done": 56,
-    "mustWritePending": 13,
+    "done": 81,
+    "mustWritePending": 7,
     "byArchetype": {
-      "B": 19,
-      "D2": 9,
-      "A": 19,
+      "B": 8,
+      "A": 12,
       "G": 5,
-      "F": 8
+      "F": 8,
+      "D2": 2
     }
   },
   "queue": [
@@ -158,8 +158,10 @@
       "suggestedTitle": "水泳プールが多い県は一般事業総投資も多い?",
       "combinedScore": 0.57,
       "lane": "must-write",
-      "status": "pending",
-      "priority": 4
+      "status": "done",
+      "priority": 4,
+      "done_at": "2026-09-02",
+      "published_slug": "swimming-pool-public-vs-total-general-project-investment"
     },
     {
       "topicKey": "corr-swimming-pool-public--total-administrative-investment",
@@ -194,8 +196,10 @@
       "suggestedTitle": "水泳プールが多い県は行政総投資も多い?",
       "combinedScore": 0.566,
       "lane": "must-write",
-      "status": "pending",
-      "priority": 5
+      "status": "done",
+      "priority": 5,
+      "done_at": "2026-09-02",
+      "published_slug": "swimming-pool-public-vs-total-administrative-investment"
     },
     {
       "topicKey": "corr-local-allocation-tax-prefecture--marine-fishery-output-value",
@@ -266,8 +270,10 @@
       "suggestedTitle": "ガソリンが多い県は人口集中地区人口が少ない?",
       "combinedScore": 0.559,
       "lane": "must-write",
-      "status": "pending",
-      "priority": 7
+      "status": "done",
+      "priority": 7,
+      "done_at": "2026-09-02",
+      "published_slug": "gasoline-consumption-quantity-vs-densely-inhabited-district"
     },
     {
       "topicKey": "corr-densely-inhabited-district-population-density--gasoline-consumption-quantity",
@@ -302,8 +308,10 @@
       "suggestedTitle": "ガソリンが多い県は人口集中地区人口密度が少ない?",
       "combinedScore": 0.556,
       "lane": "must-write",
-      "status": "pending",
-      "priority": 8
+      "status": "done",
+      "priority": 8,
+      "done_at": "2026-09-02",
+      "published_slug": "gasoline-consumption-quantity-vs-densely-inhabited-district"
     },
     {
       "topicKey": "corr-high-school-students-per-teacher--pachinko-shop-density-per-10k",
@@ -401,8 +409,10 @@
       "suggestedTitle": "食パン消費量 日本一はどこ",
       "combinedScore": 0.35,
       "lane": "must-write",
-      "status": "pending",
-      "priority": 11
+      "status": "done",
+      "priority": 11,
+      "done_at": "2026-09-02",
+      "published_slug": "white-bread-consumption-quantity-prefecture-gap"
     },
     {
       "topicKey": "gap-abortion-rate",
@@ -455,8 +465,10 @@
       "suggestedTitle": "高血圧性疾患の受療が多い県はどこ",
       "combinedScore": 0.333,
       "lane": "must-write",
-      "status": "pending",
-      "priority": 13
+      "status": "done",
+      "priority": 13,
+      "done_at": "2026-09-02",
+      "published_slug": "treatment-rate-hypertension-outpatient-prefecture-gap"
     },
     {
       "topicKey": "corr-bank-personal-deposit--school-teacher-annual-income",
@@ -563,8 +575,10 @@
       "suggestedTitle": "汚水処理人口が多い県は下水道も多い?",
       "combinedScore": 0.562,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 16
+      "status": "done",
+      "priority": 16,
+      "done_at": "2026-09-02",
+      "published_slug": "sewage-treatment-coverage-rate-vs-sewerage-penetration-rate"
     },
     {
       "topicKey": "corr-local-tax-prefecture--railway-passengers",
@@ -599,8 +613,10 @@
       "suggestedTitle": "地方税が多い県は鉄道駅 乗降客も多い?",
       "combinedScore": 0.561,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 17
+      "status": "done",
+      "priority": 17,
+      "done_at": "2026-09-02",
+      "published_slug": "local-tax-prefecture-vs-railway-passengers"
     },
     {
       "topicKey": "corr-residential-building-starts--road-length-per-km2",
@@ -635,8 +651,10 @@
       "suggestedTitle": "道路実延長が多い県は着工居住用建築物も多い?",
       "combinedScore": 0.558,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 18
+      "status": "done",
+      "priority": 18,
+      "done_at": "2026-09-02",
+      "published_slug": "road-length-per-km2-vs-residential-building-starts"
     },
     {
       "topicKey": "corr-local-special-grant-prefecture--road-length-per-km2",
@@ -671,8 +689,10 @@
       "suggestedTitle": "道路実延長が多い県は地方特例交付金も多い?",
       "combinedScore": 0.558,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 19
+      "status": "done",
+      "priority": 19,
+      "done_at": "2026-09-02",
+      "published_slug": "road-length-per-km2-vs-local-special-grant-prefecture"
     },
     {
       "topicKey": "corr-flush-toilet-population-ratio--sewage-treatment-coverage-rate",
@@ -707,8 +727,10 @@
       "suggestedTitle": "汚水処理人口が多い県は水洗化人口も多い?",
       "combinedScore": 0.535,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 20
+      "status": "done",
+      "priority": 20,
+      "done_at": "2026-09-02",
+      "published_slug": "sewage-treatment-coverage-rate-vs-flush-toilet-population"
     },
     {
       "topicKey": "migration-20000",
@@ -770,8 +792,10 @@
       "suggestedTitle": "空港が多い県は一般事業投資も多い?",
       "combinedScore": 0.515,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 22
+      "status": "done",
+      "priority": 22,
+      "done_at": "2026-09-02",
+      "published_slug": "airport-count-vs-general-project-investment-agriculture"
     },
     {
       "topicKey": "corr-airport-count--physical-disability-rehabilitation-facility-residents",
@@ -806,8 +830,10 @@
       "suggestedTitle": "空港が多い県は身体障害者更生援護施設在所者も多い?",
       "combinedScore": 0.506,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 23
+      "status": "done",
+      "priority": 23,
+      "done_at": "2026-09-02",
+      "published_slug": "airport-count-vs-physical-disability-rehabilitation"
     },
     {
       "topicKey": "migration-14000",
@@ -1251,8 +1277,10 @@
       "suggestedTitle": "小中学校教員の平均年収が多い県はどこ",
       "combinedScore": 0.395,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 40
+      "status": "done",
+      "priority": 40,
+      "done_at": "2026-09-02",
+      "published_slug": "school-teacher-annual-income-prefecture-gap"
     },
     {
       "topicKey": "finance-gap-15000",
@@ -1493,8 +1521,10 @@
       "suggestedTitle": "警察職 平均給与月が多い県はどこ",
       "combinedScore": 0.351,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 50
+      "status": "done",
+      "priority": 50,
+      "done_at": "2026-09-02",
+      "published_slug": "avg-salary-police-prefecture-prefecture-gap"
     },
     {
       "topicKey": "gap-physical-therapist-annual-income",
@@ -1520,8 +1550,10 @@
       "suggestedTitle": "理学療法士等の平均年収が多い県はどこ",
       "combinedScore": 0.348,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 51
+      "status": "done",
+      "priority": 51,
+      "done_at": "2026-09-02",
+      "published_slug": "physical-therapist-annual-income-prefecture-gap"
     },
     {
       "topicKey": "finance-gap-31000",
@@ -1595,8 +1627,10 @@
       "suggestedTitle": "トイレットペーパー消費量 日本一はどこ",
       "combinedScore": 0.345,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 54
+      "status": "done",
+      "priority": 54,
+      "done_at": "2026-09-02",
+      "published_slug": "toilet-paper-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "finance-gap-09000",
@@ -1645,8 +1679,10 @@
       "suggestedTitle": "ケーキ消費量 日本一はどこ",
       "combinedScore": 0.34,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 56
+      "status": "done",
+      "priority": 56,
+      "done_at": "2026-09-02",
+      "published_slug": "cake-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "finance-gap-11000",
@@ -1695,8 +1731,10 @@
       "suggestedTitle": "梅干し消費量 日本一はどこ",
       "combinedScore": 0.332,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 58
+      "status": "done",
+      "priority": 58,
+      "done_at": "2026-09-02",
+      "published_slug": "pickled-plum-consumption-quantity-prefecture-gap"
     },
     {
       "topicKey": "gap-cut-flowers-consumption-expenditure",
@@ -1722,8 +1760,10 @@
       "suggestedTitle": "切り花消費量 日本一はどこ",
       "combinedScore": 0.32,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 59
+      "status": "done",
+      "priority": 59,
+      "done_at": "2026-09-02",
+      "published_slug": "cut-flowers-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "gap-chinese-noodles-consumption-expenditure",
@@ -1749,8 +1789,10 @@
       "suggestedTitle": "中華麺消費量 日本一はどこ",
       "combinedScore": 0.318,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 60
+      "status": "done",
+      "priority": 60,
+      "done_at": "2026-09-02",
+      "published_slug": "chinese-noodles-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "gap-croquette-consumption-expenditure",
@@ -1776,8 +1818,10 @@
       "suggestedTitle": "コロッケ消費量 日本一はどこ",
       "combinedScore": 0.317,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 61
+      "status": "done",
+      "priority": 61,
+      "done_at": "2026-09-02",
+      "published_slug": "croquette-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "gap-fishery-workers",
@@ -1803,8 +1847,10 @@
       "suggestedTitle": "漁業就業者が多い県はどこ",
       "combinedScore": 0.315,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 62
+      "status": "done",
+      "priority": 62,
+      "done_at": "2026-09-02",
+      "published_slug": "fishery-workers-prefecture-gap"
     },
     {
       "topicKey": "gap-sports-participation-rate-swimming",
@@ -1830,8 +1876,10 @@
       "suggestedTitle": "水泳の行動者が多い県はどこ",
       "combinedScore": 0.313,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 63
+      "status": "done",
+      "priority": 63,
+      "done_at": "2026-09-02",
+      "published_slug": "sports-participation-rate-swimming-prefecture-gap"
     },
     {
       "topicKey": "gap-sewage-treatment-coverage-rate",
@@ -1857,8 +1905,10 @@
       "suggestedTitle": "汚水処理人口が多い県はどこ",
       "combinedScore": 0.313,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 64
+      "status": "done",
+      "priority": 64,
+      "done_at": "2026-09-02",
+      "published_slug": "sewage-treatment-coverage-rate-prefecture-gap"
     },
     {
       "topicKey": "gap-coffee-shop-consumption-expenditure",
