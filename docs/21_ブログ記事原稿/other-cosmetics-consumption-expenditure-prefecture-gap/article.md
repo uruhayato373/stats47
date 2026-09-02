@@ -3,8 +3,8 @@ title: 他の化粧品、なぜ岡山が1位で香川が最下位か
 seoTitle: "他の化粧品消費支出額ランキング｜1位岡山27,760円・47位香川9,369円 47都道府県2024"
 description: 同じ日本国内でも、化粧品への支出額はこれほど違います。2024年の他の化粧品消費支出額で1位の岡山県は27,760円、47位の香川県は9,369円と大きな開きがあり、この記事ではその地理的な広がりと背景を読み解きます。
 slug: other-cosmetics-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

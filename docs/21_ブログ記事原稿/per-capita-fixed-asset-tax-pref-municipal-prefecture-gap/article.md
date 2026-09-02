@@ -3,8 +3,8 @@ title: 固定資産税、東京都はなぜ突出して高いのか
 seoTitle: "一人当たり固定資産税ランキング｜1位東京都120.2千円・最下位54千円 2.2倍差 都道府県2022年"
 description: 同じ日本に住んでいても、都道府県によって一人当たりの固定資産税額には大きな開きがあります。1位の東京都は120.2千円で、最下位の長崎県・奈良県の54千円とは2.2倍の差です。この記事では、どの県が高く、どの県が低いのか、そしてその背景にある地価や産業構造の違いをデータから読み解きます。
 slug: per-capita-fixed-asset-tax-pref-municipal-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

@@ -3,8 +3,8 @@ title: 小売販売額は東京と鳥取で33倍の差
 seoTitle: "小売業年間商品販売額ランキング2021年｜都道府県別 東京と鳥取で33倍の差"
 description: 小売業の年間商品販売額は都道府県ごとに大きく異なります。全国1位と最下位の間には数十倍もの開きがあり、商業がどこに集中しているかが見えてきます。上位と下位の顔ぶれから、その背景を読み解きます。
 slug: retail-sales-amount-by-prefecture-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

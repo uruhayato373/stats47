@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 81,
+    "pending": 78,
     "inProgress": 2,
-    "done": 35,
+    "done": 38,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
-      "D2": 13,
-      "A": 28,
+      "D2": 12,
+      "A": 26,
       "F": 12,
       "G": 9
     }
@@ -2473,8 +2473,10 @@
       "suggestedTitle": "他の化粧品消費量 日本一はどこ",
       "combinedScore": 0.289,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 86
+      "status": "done",
+      "priority": 86,
+      "done_at": "2026-09-02",
+      "published_slug": "other-cosmetics-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "gap-pear-consumption-expenditure",
@@ -2913,8 +2915,10 @@
       "suggestedTitle": "固定資産税が多い県はどこ",
       "combinedScore": 0.276,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 102
+      "status": "done",
+      "priority": 102,
+      "done_at": "2026-09-02",
+      "published_slug": "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap"
     },
     {
       "topicKey": "gap-fishery-species-catch-scallop",
@@ -3077,8 +3081,10 @@
       "suggestedTitle": "小売業年間商品販売が多い県はどこ",
       "combinedScore": 0.271,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 108
+      "status": "done",
+      "priority": 108,
+      "done_at": "2026-09-02",
+      "published_slug": "retail-sales-amount-by-prefecture-prefecture-gap"
     },
     {
       "topicKey": "gap-library-lending-books",
