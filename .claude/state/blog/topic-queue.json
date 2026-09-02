@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 72,
+    "pending": 70,
     "inProgress": 2,
-    "done": 44,
+    "done": 46,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
-      "D2": 11,
-      "A": 21,
+      "D2": 10,
+      "A": 20,
       "F": 12,
       "G": 9
     }
@@ -2589,8 +2589,10 @@
       "suggestedTitle": "気分障害が多い県はどこ",
       "combinedScore": 0.287,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 90
+      "status": "done",
+      "priority": 90,
+      "done_at": "2026-09-02",
+      "published_slug": "treatment-rate-mood-disorder-outpatient-prefecture-gap"
     },
     {
       "topicKey": "gap-future-population-change-rate-2050",
@@ -2894,8 +2896,10 @@
       "suggestedTitle": "柔軟仕上剤消費量 日本一はどこ",
       "combinedScore": 0.277,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 101
+      "status": "done",
+      "priority": 101,
+      "done_at": "2026-09-02",
+      "published_slug": "fabric-softener-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "gap-per-capita-fixed-asset-tax-pref-municipal",

@@ -3,8 +3,8 @@ title: 柔軟仕上剤消費支出、栃木が1位で奈良の1.9倍
 seoTitle: "柔軟仕上剤消費支出額ランキング 都道府県別2024年 栃木1位・奈良47位"
 description: 同じ日本の家庭でも、柔軟仕上剤にかける金額は住む県で大きく違います。1位栃木県の年間消費支出額は47位奈良県の約1.9倍にのぼり、この記事では地域差の背景を気候や洗濯習慣から読み解きます。
 slug: fabric-softener-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
