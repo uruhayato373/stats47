@@ -3,8 +3,8 @@ title: 財政力1位の箱根町はなぜ借金比率も上位なのか
 seoTitle: "神奈川県33市町村の財政力指数・実質公債費比率ランキング 2024年度決算カード"
 description: 同じ神奈川県内なのに、財政力指数は箱根町の1.3から真鶴町の0.38までばらつきます。財政力が高い町ほど借金の重さが軽いとは限らない理由を、33市町村の決算データから読み解きます。
 slug: kanagawa-municipal-finance
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

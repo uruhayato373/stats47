@@ -4,15 +4,15 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 65,
+    "pending": 64,
     "inProgress": 2,
-    "done": 51,
+    "done": 52,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 9,
       "A": 19,
-      "F": 12,
+      "F": 11,
       "G": 6
     }
   },
@@ -1193,8 +1193,10 @@
       "suggestedTitle": "神奈川県 財政が厳しい市町村",
       "combinedScore": 0.414,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 38
+      "status": "done",
+      "priority": 38,
+      "done_at": "2026-09-02",
+      "published_slug": "kanagawa-municipal-finance"
     },
     {
       "topicKey": "migration-11000",
