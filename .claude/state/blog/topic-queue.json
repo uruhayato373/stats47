@@ -4,16 +4,16 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 69,
+    "pending": 68,
     "inProgress": 2,
-    "done": 47,
+    "done": 48,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 10,
       "A": 19,
       "F": 12,
-      "G": 9
+      "G": 8
     }
   },
   "queue": [
@@ -962,8 +962,10 @@
       "suggestedTitle": "大阪府の人はどこへ移住する",
       "combinedScore": 0.445,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 29
+      "status": "done",
+      "priority": 29,
+      "done_at": "2026-09-02",
+      "published_slug": "osaka-migration-flow"
     },
     {
       "topicKey": "migration-30000",

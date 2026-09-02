@@ -3,8 +3,8 @@ title: 大阪府から人はどこへ移っていくのか
 seoTitle: "大阪府の人口移動｜転入・転出の相手県ランキング (2025年)"
 description: 大阪府は近隣県から人を集めながら、東京圏へは人を送り出すという矛盾した動きを同時に抱えています。住民基本台帳ベースの2025年データで、その行き先を県ごとに追いました。
 slug: osaka-migration-flow
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
