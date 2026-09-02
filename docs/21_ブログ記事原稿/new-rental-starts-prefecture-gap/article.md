@@ -3,8 +3,8 @@ title: 貸家着工戸数、東京都と高知県で137倍の差
 seoTitle: "着工新設貸家数ランキング 都道府県別2024年数値比較"
 description: 住む場所によって、新しく建てられる賃貸住宅の数には驚くほどの差があります。着工新設貸家数の全国データを都道府県別に比較すると、最も多い東京都と最も少ない高知県ではおよそ137倍の開きがあり、人口や都市の集積度合いが色濃く表れています。上位県と下位県の特徴を地理の視点から読み解きます。
 slug: new-rental-starts-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
