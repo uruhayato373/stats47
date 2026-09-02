@@ -4,16 +4,16 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 63,
+    "pending": 62,
     "inProgress": 2,
-    "done": 53,
+    "done": 54,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 9,
       "A": 19,
       "G": 6,
-      "F": 10
+      "F": 9
     }
   },
   "queue": [
@@ -1295,8 +1295,10 @@
       "suggestedTitle": "石川県 財政が厳しい市町村",
       "combinedScore": 0.393,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 42
+      "status": "done",
+      "priority": 42,
+      "done_at": "2026-09-02",
+      "published_slug": "ishikawa-municipal-finance"
     },
     {
       "topicKey": "finance-gap-08000",
