@@ -3,8 +3,8 @@ title: 新潟の市町村、財政力はなぜここまで違うか
 seoTitle: "新潟県 市町村別 財政力指数ランキング｜1位刈羽村1.45・30位粟島浦村0.09 実質公債費比率も比較 2024年度決算"
 description: 同じ新潟県内の市町村でも、財政の体力は大きく分かれています。刈羽村と粟島浦村の開きはどこから生まれるのか、実質公債費比率もあわせて読み解きます。
 slug: niigata-municipal-finance
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

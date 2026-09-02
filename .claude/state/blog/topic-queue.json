@@ -4,16 +4,16 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 61,
+    "pending": 60,
     "inProgress": 2,
-    "done": 55,
+    "done": 56,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 9,
       "A": 19,
       "G": 5,
-      "F": 9
+      "F": 8
     }
   },
   "queue": [
@@ -1274,8 +1274,10 @@
       "suggestedTitle": "新潟県 財政が厳しい市町村",
       "combinedScore": 0.393,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 41
+      "status": "done",
+      "priority": 41,
+      "done_at": "2026-09-02",
+      "published_slug": "niigata-municipal-finance"
     },
     {
       "topicKey": "finance-gap-17000",
