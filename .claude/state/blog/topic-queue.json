@@ -4,14 +4,14 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 84,
+    "pending": 83,
     "inProgress": 2,
-    "done": 32,
+    "done": 33,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 15,
-      "A": 29,
+      "A": 28,
       "F": 12,
       "G": 9
     }
@@ -2527,8 +2527,10 @@
       "suggestedTitle": "非正規雇用が多い県はどこ",
       "combinedScore": 0.288,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 88
+      "status": "done",
+      "priority": 88,
+      "done_at": "2026-09-02",
+      "published_slug": "non-regular-employment-rate-prefecture-gap"
     },
     {
       "topicKey": "gap-new-rental-starts",
