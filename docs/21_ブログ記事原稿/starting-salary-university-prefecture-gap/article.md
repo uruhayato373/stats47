@@ -3,8 +3,8 @@ title: 大卒初任給1位は秋田｜なぜ東京より高い？
 seoTitle: "大卒初任給ランキング2023年｜1位秋田267.7千円・47位鳥取202.4千円の格差"
 description: 大卒の初任給がもっとも高いのは、東京でも大阪でもなく秋田県です。267.7千円の秋田県と202.4千円の鳥取県では、初任給に65.3千円もの差があります。この記事では地理と産業構造から、その理由を読み解きます。
 slug: starting-salary-university-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
