@@ -3,8 +3,8 @@ title: 光熱・水道費はなぜ北海道が突出して高いのか
 seoTitle: "消費者物価地域差指数（光熱・水道）ランキング 都道府県別 2024年"
 description: 同じ日本でも光熱・水道にかかるお金の重さは県でまるで違います。北海道はなぜ全国で最も高くなり、大阪はなぜ最も低くなるのかをデータで確かめます。
 slug: consumer-price-difference-index-utilities-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

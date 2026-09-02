@@ -3,8 +3,8 @@ title: 地熱発電施設が8県に偏るのはなぜか
 seoTitle: "地熱発電施設数ランキング｜都道府県別になぜ8県に集中するのか (2013年)"
 description: 47都道府県のうち39県で地熱発電施設がゼロという指標があります。国土数値情報の2013年データから、なぜ大分県・鹿児島県・岩手県・秋田県など特定の8県だけに施設が集中するのかを、火山帯の分布から読み解きます。
 slug: geothermal-power-plant-count-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 
