@@ -8,6 +8,6 @@
   "source": "r2:app/ranking/nuclear-power-plant-count/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug nuclear-power-plant-count-prefecture-gap --keys nuclear-power-plant-count --with-map",
-  "fetchedAt": "2026-08-30T06:14:37.619Z",
+  "fetchedAt": "2026-09-01T23:04:05.882Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }

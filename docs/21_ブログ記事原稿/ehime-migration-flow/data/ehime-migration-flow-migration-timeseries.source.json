@@ -1,0 +1,16 @@
+{
+  "kind": "derived",
+  "metricKey": "population-migration-inter-prefecture",
+  "prefCode": "38000",
+  "prefName": "愛媛県",
+  "year": "2025",
+  "unit": "人",
+  "source": "r2:app/stats/population-migration-inter-prefecture/migration-flow-<year>.json",
+  "upstream": "住民基本台帳人口移動報告 (e-Stat) → R2 app/stats",
+  "restore": "node .claude/scripts/blog/fetch-migration-flow.mjs --slug ehime-migration-flow --pref 38000 --year 2025 --from-year 2020 --data-name ehime-migration-flow",
+  "generatedBy": "fetch-migration-flow.mjs",
+  "fetchedAt": "2026-09-01T23:03:54.309Z",
+  "label": "愛媛県の転入・転出の推移",
+  "formula": "各年の 46 相手県について inflow / outflow を合計",
+  "transform": "2020〜2025 年"
+}

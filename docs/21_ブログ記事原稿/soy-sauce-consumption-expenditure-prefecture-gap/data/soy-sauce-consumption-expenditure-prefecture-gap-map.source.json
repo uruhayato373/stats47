@@ -8,6 +8,6 @@
   "source": "r2:app/ranking/soy-sauce-consumption-expenditure/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug soy-sauce-consumption-expenditure-prefecture-gap --keys soy-sauce-consumption-expenditure --with-map",
-  "fetchedAt": "2026-08-30T06:14:20.509Z",
+  "fetchedAt": "2026-09-01T23:03:31.538Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }

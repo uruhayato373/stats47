@@ -1,0 +1,405 @@
+<!-- data-source: kochi-migration-flow-migration-map.json | generated: 2026-09-01T23:03:52.179Z -->
+<svg width="720" height="720" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-label="高知県と各県の人口移動 (純移動)">
+  <title>高知県と各県の人口移動 (純移動)</title>
+  <desc>2025年</desc>
+  <text x="22" y="46" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="19" font-weight="bold" fill="#6e7d94">高知県と各県の人口移動 (純移動)</text>
+  <text x="22" y="66" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="12" fill="#6e7d94">2025年</text>
+  <rect x="22" y="113" width="15" height="15" rx="2" fill="rgb(5, 48, 97)" stroke="#ffffff" stroke-width="1"/>
+  <text x="46" y="126" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="600" fill="#6e7d94">1. 愛媛県</text>
+  <text x="157.8" y="126" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="700" fill="#6e7d94" text-anchor="end">85</text>
+  <text x="162.8" y="126" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="13" fill="#6e7d94">人</text>
+  <rect x="22" y="143" width="15" height="15" rx="2" fill="rgb(12, 61, 114)" stroke="#ffffff" stroke-width="1"/>
+  <text x="46" y="156" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="600" fill="#6e7d94">2. 北海道</text>
+  <text x="157.8" y="156" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="700" fill="#6e7d94" text-anchor="end">67</text>
+  <text x="162.8" y="156" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="13" fill="#6e7d94">人</text>
+  <rect x="22" y="173" width="15" height="15" rx="2" fill="rgb(31, 96, 159)" stroke="#ffffff" stroke-width="1"/>
+  <text x="46" y="186" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="600" fill="#6e7d94">3. 福島県</text>
+  <text x="157.8" y="186" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="700" fill="#6e7d94" text-anchor="end">14</text>
+  <text x="162.8" y="186" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="13" fill="#6e7d94">人</text>
+  <g aria-label="群馬県 -14人">
+    <title>群馬県：-14人</title>
+    <rect x="579.0" y="327.0" width="39" height="39" rx="3" fill="rgb(43, 114, 175)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="598.5" y="346.0" font-size="11" font-weight="700">群馬</tspan>
+      <tspan x="598.5" y="356.5" font-size="9" font-weight="600">-14人</tspan>
+    </text>
+  </g>
+  <g aria-label="埼玉県 -121人">
+    <title>埼玉県：-121人</title>
+    <rect x="621.0" y="369.0" width="39" height="39" rx="3" fill="rgb(119, 179, 213)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="388.0" font-size="11" font-weight="700">埼玉</tspan>
+      <tspan x="640.5" y="398.5" font-size="9" font-weight="600">-121人</tspan>
+    </text>
+  </g>
+  <g aria-label="千葉県 -115人">
+    <title>千葉県：-115人</title>
+    <rect x="663.0" y="369.0" width="39" height="81" rx="3" fill="rgb(113, 176, 211)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="409.0" font-size="11" font-weight="700">千葉</tspan>
+      <tspan x="682.5" y="419.5" font-size="9" font-weight="600">-115人</tspan>
+    </text>
+  </g>
+  <g aria-label="東京都 -473人">
+    <title>東京都：-473人</title>
+    <rect x="621.0" y="411.0" width="39" height="39" rx="3" fill="rgb(236, 149, 120)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="430.0" font-size="11" font-weight="700">東京</tspan>
+      <tspan x="640.5" y="440.5" font-size="9" font-weight="600">-473人</tspan>
+    </text>
+  </g>
+  <g aria-label="神奈川県 -186人">
+    <title>神奈川県：-186人</title>
+    <rect x="621.0" y="453.0" width="39" height="39" rx="3" fill="rgb(177, 213, 231)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="472.0" font-size="11" font-weight="700">神奈川</tspan>
+      <tspan x="640.5" y="482.5" font-size="9" font-weight="600">-186人</tspan>
+    </text>
+  </g>
+  <g aria-label="新潟県 -3人">
+    <title>新潟県：-3人</title>
+    <rect x="537.0" y="285.0" width="81" height="39" rx="3" fill="rgb(38, 107, 170)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="577.5" y="304.0" font-size="11" font-weight="700">新潟</tspan>
+      <tspan x="577.5" y="314.5" font-size="9" font-weight="600">-3人</tspan>
+    </text>
+  </g>
+  <g aria-label="富山県 0人">
+    <title>富山県：0人</title>
+    <rect x="495.0" y="285.0" width="39" height="39" rx="3" fill="rgb(37, 105, 168)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="514.5" y="304.0" font-size="11" font-weight="700">富山</tspan>
+      <tspan x="514.5" y="314.5" font-size="9" font-weight="600">0人</tspan>
+    </text>
+  </g>
+  <g aria-label="石川県 3人">
+    <title>石川県：3人</title>
+    <rect x="453.0" y="285.0" width="39" height="39" rx="3" fill="rgb(36, 103, 166)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="304.0" font-size="11" font-weight="700">石川</tspan>
+      <tspan x="472.5" y="314.5" font-size="9" font-weight="600">3人</tspan>
+    </text>
+  </g>
+  <g aria-label="福井県 -1人">
+    <title>福井県：-1人</title>
+    <rect x="453.0" y="327.0" width="39" height="39" rx="3" fill="rgb(38, 106, 169)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="346.0" font-size="11" font-weight="700">福井</tspan>
+      <tspan x="472.5" y="356.5" font-size="9" font-weight="600">-1人</tspan>
+    </text>
+  </g>
+  <g aria-label="山梨県 -6人">
+    <title>山梨県：-6人</title>
+    <rect x="579.0" y="369.0" width="39" height="39" rx="3" fill="rgb(40, 109, 171)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="598.5" y="388.0" font-size="11" font-weight="700">山梨</tspan>
+      <tspan x="598.5" y="398.5" font-size="9" font-weight="600">-6人</tspan>
+    </text>
+  </g>
+  <g aria-label="長野県 -46人">
+    <title>長野県：-46人</title>
+    <rect x="537.0" y="327.0" width="39" height="81" rx="3" fill="rgb(59, 133, 188)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="556.5" y="367.0" font-size="11" font-weight="700">長野</tspan>
+      <tspan x="556.5" y="377.5" font-size="9" font-weight="600">-46人</tspan>
+    </text>
+  </g>
+  <g aria-label="岐阜県 -14人">
+    <title>岐阜県：-14人</title>
+    <rect x="495.0" y="327.0" width="39" height="81" rx="3" fill="rgb(43, 114, 175)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="514.5" y="367.0" font-size="11" font-weight="700">岐阜</tspan>
+      <tspan x="514.5" y="377.5" font-size="9" font-weight="600">-14人</tspan>
+    </text>
+  </g>
+  <g aria-label="静岡県 -15人">
+    <title>静岡県：-15人</title>
+    <rect x="537.0" y="411.0" width="81" height="39" rx="3" fill="rgb(44, 115, 176)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="577.5" y="430.0" font-size="11" font-weight="700">静岡</tspan>
+      <tspan x="577.5" y="440.5" font-size="9" font-weight="600">-15人</tspan>
+    </text>
+  </g>
+  <g aria-label="愛知県 -92人">
+    <title>愛知県：-92人</title>
+    <rect x="495.0" y="411.0" width="39" height="39" rx="3" fill="rgb(93, 162, 203)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="514.5" y="430.0" font-size="11" font-weight="700">愛知</tspan>
+      <tspan x="514.5" y="440.5" font-size="9" font-weight="600">-92人</tspan>
+    </text>
+  </g>
+  <g aria-label="三重県 -36人">
+    <title>三重県：-36人</title>
+    <rect x="453.0" y="411.0" width="39" height="81" rx="3" fill="rgb(54, 127, 184)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="451.0" font-size="11" font-weight="700">三重</tspan>
+      <tspan x="472.5" y="461.5" font-size="9" font-weight="600">-36人</tspan>
+    </text>
+  </g>
+  <g aria-label="滋賀県 -30人">
+    <title>滋賀県：-30人</title>
+    <rect x="453.0" y="369.0" width="39" height="39" rx="3" fill="rgb(51, 124, 182)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="388.0" font-size="11" font-weight="700">滋賀</tspan>
+      <tspan x="472.5" y="398.5" font-size="9" font-weight="600">-30人</tspan>
+    </text>
+  </g>
+  <g aria-label="京都府 -105人">
+    <title>京都府：-105人</title>
+    <rect x="369.0" y="369.0" width="81" height="39" rx="3" fill="rgb(104, 170, 207)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="409.5" y="388.0" font-size="11" font-weight="700">京都</tspan>
+      <tspan x="409.5" y="398.5" font-size="9" font-weight="600">-105人</tspan>
+    </text>
+  </g>
+  <g aria-label="大阪府 -688人">
+    <title>大阪府：-688人</title>
+    <rect x="369.0" y="411.0" width="39" height="39" rx="3" fill="rgb(103, 0, 31)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="388.5" y="430.0" font-size="11" font-weight="700">大阪</tspan>
+      <tspan x="388.5" y="440.5" font-size="9" font-weight="600">-688人</tspan>
+    </text>
+  </g>
+  <g aria-label="兵庫県 -254人">
+    <title>兵庫県：-254人</title>
+    <rect x="327.0" y="369.0" width="39" height="81" rx="3" fill="rgb(222, 235, 242)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="346.5" y="409.0" font-size="11" font-weight="700">兵庫</tspan>
+      <tspan x="346.5" y="419.5" font-size="9" font-weight="600">-254人</tspan>
+    </text>
+  </g>
+  <g aria-label="奈良県 -59人">
+    <title>奈良県：-59人</title>
+    <rect x="411.0" y="411.0" width="39" height="39" rx="3" fill="rgb(67, 141, 192)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="430.5" y="430.0" font-size="11" font-weight="700">奈良</tspan>
+      <tspan x="430.5" y="440.5" font-size="9" font-weight="600">-59人</tspan>
+    </text>
+  </g>
+  <g aria-label="和歌山県 -1人">
+    <title>和歌山県：-1人</title>
+    <rect x="369.0" y="453.0" width="81" height="39" rx="3" fill="rgb(38, 106, 169)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="409.5" y="472.0" font-size="11" font-weight="700">和歌山</tspan>
+      <tspan x="409.5" y="482.5" font-size="9" font-weight="600">-1人</tspan>
+    </text>
+  </g>
+  <g aria-label="鳥取県 -27人">
+    <title>鳥取県：-27人</title>
+    <rect x="285.0" y="369.0" width="39" height="39" rx="3" fill="rgb(49, 122, 181)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="388.0" font-size="11" font-weight="700">鳥取</tspan>
+      <tspan x="304.5" y="398.5" font-size="9" font-weight="600">-27人</tspan>
+    </text>
+  </g>
+  <g aria-label="島根県 -42人">
+    <title>島根県：-42人</title>
+    <rect x="243.0" y="369.0" width="39" height="39" rx="3" fill="rgb(57, 131, 187)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="262.5" y="388.0" font-size="11" font-weight="700">島根</tspan>
+      <tspan x="262.5" y="398.5" font-size="9" font-weight="600">-42人</tspan>
+    </text>
+  </g>
+  <g aria-label="岡山県 -132人">
+    <title>岡山県：-132人</title>
+    <rect x="285.0" y="411.0" width="39" height="39" rx="3" fill="rgb(129, 186, 216)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="430.0" font-size="11" font-weight="700">岡山</tspan>
+      <tspan x="304.5" y="440.5" font-size="9" font-weight="600">-132人</tspan>
+    </text>
+  </g>
+  <g aria-label="広島県 -96人">
+    <title>広島県：-96人</title>
+    <rect x="243.0" y="411.0" width="39" height="39" rx="3" fill="rgb(96, 164, 204)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="262.5" y="430.0" font-size="11" font-weight="700">広島</tspan>
+      <tspan x="262.5" y="440.5" font-size="9" font-weight="600">-96人</tspan>
+    </text>
+  </g>
+  <g aria-label="山口県 -25人">
+    <title>山口県：-25人</title>
+    <rect x="201.0" y="369.0" width="39" height="81" rx="3" fill="rgb(48, 121, 180)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="220.5" y="409.0" font-size="11" font-weight="700">山口</tspan>
+      <tspan x="220.5" y="419.5" font-size="9" font-weight="600">-25人</tspan>
+    </text>
+  </g>
+  <g aria-label="徳島県 -56人">
+    <title>徳島県：-56人</title>
+    <rect x="285.0" y="537.0" width="39" height="39" rx="3" fill="rgb(65, 140, 191)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="556.0" font-size="11" font-weight="700">徳島</tspan>
+      <tspan x="304.5" y="566.5" font-size="9" font-weight="600">-56人</tspan>
+    </text>
+  </g>
+  <g aria-label="香川県 -251人">
+    <title>香川県：-251人</title>
+    <rect x="285.0" y="495.0" width="39" height="39" rx="3" fill="rgb(221, 234, 242)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="514.0" font-size="11" font-weight="700">香川</tspan>
+      <tspan x="304.5" y="524.5" font-size="9" font-weight="600">-251人</tspan>
+    </text>
+  </g>
+  <g aria-label="愛媛県 85人">
+    <title>愛媛県：85人</title>
+    <rect x="243.0" y="495.0" width="39" height="39" rx="3" fill="rgb(5, 48, 97)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="262.5" y="514.0" font-size="11" font-weight="700">愛媛</tspan>
+      <tspan x="262.5" y="524.5" font-size="9" font-weight="600">85人</tspan>
+    </text>
+  </g>
+  <g aria-label="福岡県 -115人">
+    <title>福岡県：-115人</title>
+    <rect x="159.0" y="453.0" width="39" height="39" rx="3" fill="rgb(113, 176, 211)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="178.5" y="472.0" font-size="11" font-weight="700">福岡</tspan>
+      <tspan x="178.5" y="482.5" font-size="9" font-weight="600">-115人</tspan>
+    </text>
+  </g>
+  <g aria-label="佐賀県 -2人">
+    <title>佐賀県：-2人</title>
+    <rect x="117.0" y="453.0" width="39" height="39" rx="3" fill="rgb(38, 107, 169)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="472.0" font-size="11" font-weight="700">佐賀</tspan>
+      <tspan x="136.5" y="482.5" font-size="9" font-weight="600">-2人</tspan>
+    </text>
+  </g>
+  <g aria-label="長崎県 -3人">
+    <title>長崎県：-3人</title>
+    <rect x="117.0" y="495.0" width="39" height="39" rx="3" fill="rgb(38, 107, 170)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="514.0" font-size="11" font-weight="700">長崎</tspan>
+      <tspan x="136.5" y="524.5" font-size="9" font-weight="600">-3人</tspan>
+    </text>
+  </g>
+  <g aria-label="熊本県 -3人">
+    <title>熊本県：-3人</title>
+    <rect x="117.0" y="537.0" width="39" height="39" rx="3" fill="rgb(38, 107, 170)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="556.0" font-size="11" font-weight="700">熊本</tspan>
+      <tspan x="136.5" y="566.5" font-size="9" font-weight="600">-3人</tspan>
+    </text>
+  </g>
+  <g aria-label="大分県 -12人">
+    <title>大分県：-12人</title>
+    <rect x="159.0" y="495.0" width="39" height="39" rx="3" fill="rgb(42, 113, 174)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="178.5" y="514.0" font-size="11" font-weight="700">大分</tspan>
+      <tspan x="178.5" y="524.5" font-size="9" font-weight="600">-12人</tspan>
+    </text>
+  </g>
+  <g aria-label="宮崎県 8人">
+    <title>宮崎県：8人</title>
+    <rect x="159.0" y="537.0" width="39" height="39" rx="3" fill="rgb(34, 100, 163)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="178.5" y="556.0" font-size="11" font-weight="700">宮崎</tspan>
+      <tspan x="178.5" y="566.5" font-size="9" font-weight="600">8人</tspan>
+    </text>
+  </g>
+  <g aria-label="鹿児島県 -19人">
+    <title>鹿児島県：-19人</title>
+    <rect x="117.0" y="579.0" width="81" height="39" rx="3" fill="rgb(45, 117, 178)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="157.5" y="598.0" font-size="11" font-weight="700">鹿児島</tspan>
+      <tspan x="157.5" y="608.5" font-size="9" font-weight="600">-19人</tspan>
+    </text>
+  </g>
+  <g aria-label="沖縄県 -9人">
+    <title>沖縄県：-9人</title>
+    <rect x="117.0" y="663.0" width="39" height="39" rx="3" fill="rgb(41, 111, 173)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="682.0" font-size="11" font-weight="700">沖縄</tspan>
+      <tspan x="136.5" y="692.5" font-size="9" font-weight="600">-9人</tspan>
+    </text>
+  </g>
+  <g aria-label="北海道 67人">
+    <title>北海道：67人</title>
+    <rect x="621.0" y="33.0" width="81" height="81" rx="3" fill="rgb(12, 61, 114)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="661.5" y="73.0" font-size="11" font-weight="700">北海道</tspan>
+      <tspan x="661.5" y="83.5" font-size="9" font-weight="600">67人</tspan>
+    </text>
+  </g>
+  <g aria-label="青森県 -20人">
+    <title>青森県：-20人</title>
+    <rect x="621.0" y="159.0" width="81" height="39" rx="3" fill="rgb(46, 118, 178)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="661.5" y="178.0" font-size="11" font-weight="700">青森</tspan>
+      <tspan x="661.5" y="188.5" font-size="9" font-weight="600">-20人</tspan>
+    </text>
+  </g>
+  <g aria-label="岩手県 6人">
+    <title>岩手県：6人</title>
+    <rect x="663.0" y="201.0" width="39" height="39" rx="3" fill="rgb(35, 102, 164)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="220.0" font-size="11" font-weight="700">岩手</tspan>
+      <tspan x="682.5" y="230.5" font-size="9" font-weight="600">6人</tspan>
+    </text>
+  </g>
+  <g aria-label="宮城県 -15人">
+    <title>宮城県：-15人</title>
+    <rect x="663.0" y="243.0" width="39" height="39" rx="3" fill="rgb(44, 115, 176)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="262.0" font-size="11" font-weight="700">宮城</tspan>
+      <tspan x="682.5" y="272.5" font-size="9" font-weight="600">-15人</tspan>
+    </text>
+  </g>
+  <g aria-label="秋田県 -4人">
+    <title>秋田県：-4人</title>
+    <rect x="621.0" y="201.0" width="39" height="39" rx="3" fill="rgb(39, 108, 170)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="220.0" font-size="11" font-weight="700">秋田</tspan>
+      <tspan x="640.5" y="230.5" font-size="9" font-weight="600">-4人</tspan>
+    </text>
+  </g>
+  <g aria-label="山形県 4人">
+    <title>山形県：4人</title>
+    <rect x="621.0" y="243.0" width="39" height="39" rx="3" fill="rgb(35, 103, 166)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="262.0" font-size="11" font-weight="700">山形</tspan>
+      <tspan x="640.5" y="272.5" font-size="9" font-weight="600">4人</tspan>
+    </text>
+  </g>
+  <g aria-label="福島県 14人">
+    <title>福島県：14人</title>
+    <rect x="621.0" y="285.0" width="81" height="39" rx="3" fill="rgb(31, 96, 159)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="661.5" y="304.0" font-size="11" font-weight="700">福島</tspan>
+      <tspan x="661.5" y="314.5" font-size="9" font-weight="600">14人</tspan>
+    </text>
+  </g>
+  <g aria-label="茨城県 -4人">
+    <title>茨城県：-4人</title>
+    <rect x="663.0" y="327.0" width="39" height="39" rx="3" fill="rgb(39, 108, 170)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="346.0" font-size="11" font-weight="700">茨城</tspan>
+      <tspan x="682.5" y="356.5" font-size="9" font-weight="600">-4人</tspan>
+    </text>
+  </g>
+  <g aria-label="栃木県 -10人">
+    <title>栃木県：-10人</title>
+    <rect x="621.0" y="327.0" width="39" height="39" rx="3" fill="rgb(41, 112, 173)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="346.0" font-size="11" font-weight="700">栃木</tspan>
+      <tspan x="640.5" y="356.5" font-size="9" font-weight="600">-10人</tspan>
+    </text>
+  </g>
+  <defs>
+    <linearGradient id="choropleth-lg" x1="0" x2="1">
+      <stop offset="0%" stop-color="rgb(103, 0, 31)"/>
+      <stop offset="25%" stop-color="rgb(228, 130, 104)"/>
+      <stop offset="50%" stop-color="rgb(242, 239, 238)"/>
+      <stop offset="75%" stop-color="rgb(107, 172, 208)"/>
+      <stop offset="100%" stop-color="rgb(5, 48, 97)"/>
+    </linearGradient>
+    <filter id="txt-halo-dark" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+  <text x="446" y="678" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="11" fill="#6e7d94" text-anchor="end">転出超過</text>
+  <rect x="452" y="670" width="200" height="11" rx="2" fill="url(#choropleth-lg)"/>
+  <text x="658" y="678" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="11" fill="#6e7d94">転入超過</text>
+  <text x="452" y="694" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="10" fill="#6e7d94">-688人</text>
+  <text x="552" y="694" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="10" fill="#6e7d94" text-anchor="middle">-302人</text>
+  <text x="652" y="694" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="10" fill="#6e7d94" text-anchor="end">85人</text>
+</svg>

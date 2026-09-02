@@ -8,6 +8,6 @@
   "source": "r2:app/ranking/shrimp-consumption-quantity/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug shrimp-consumption-quantity-prefecture-gap --keys shrimp-consumption-quantity --data-name shrimp-consumption-quantity-prefecture-gap-prefecture-rankings",
-  "fetchedAt": "2026-08-30T06:14:19.123Z",
+  "fetchedAt": "2026-09-01T23:03:11.749Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }

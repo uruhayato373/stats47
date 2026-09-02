@@ -8,6 +8,6 @@
   "source": "r2:app/ranking/treatment-rate-schizophrenia-inpatient/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug treatment-rate-schizophrenia-inpatient-prefecture-gap --keys treatment-rate-schizophrenia-inpatient --with-map",
-  "fetchedAt": "2026-08-30T06:14:29.075Z",
+  "fetchedAt": "2026-09-01T23:03:50.260Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }

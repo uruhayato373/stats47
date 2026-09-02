@@ -1,0 +1,15 @@
+{
+  "kind": "manual",
+  "prefCode": "20000",
+  "prefName": "長野県",
+  "year": "2024",
+  "sourceName": "地方財政状況調査",
+  "source": "https://www.soumu.go.jp/iken/zaisei/card.html",
+  "upstream": "repo:apps/web/public/finance-cards/cities/20.json",
+  "restore": "node .claude/scripts/blog/fetch-municipal-finance.mjs --slug nagano-municipal-finance --pref 20000 --year 2024 --from-year 2020 --data-name nagano-municipal-finance",
+  "generatedBy": "fetch-municipal-finance.mjs",
+  "fetchedAt": "2026-09-01T23:03:58.682Z",
+  "label": "長野県の市町村別 財政力指数",
+  "unit": "",
+  "transform": "2024 年度の fiscalIndex を降順に並べる (77 団体)"
+}

@@ -1,0 +1,165 @@
+{
+  "title": "石川県の市町村別 実質公債費比率",
+  "subtitle": "2024年度",
+  "label": "実質公債費比率",
+  "unit": "％",
+  "year": "2024",
+  "source": "総務省 地方財政状況調査 (決算カード)",
+  "palette": "red",
+  "decimalPlaces": 1,
+  "generatedBy": "fetch-municipal-finance.mjs",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "珠洲市",
+      "pref": "珠洲市",
+      "value": 16.3,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 2,
+      "areaName": "中能登町",
+      "pref": "中能登町",
+      "value": 15.8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 3,
+      "areaName": "輪島市",
+      "pref": "輪島市",
+      "value": 15.4,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 4,
+      "areaName": "七尾市",
+      "pref": "七尾市",
+      "value": 13.2,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 5,
+      "areaName": "かほく市",
+      "pref": "かほく市",
+      "value": 12.7,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 6,
+      "areaName": "小松市",
+      "pref": "小松市",
+      "value": 10.8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 7,
+      "areaName": "白山市",
+      "pref": "白山市",
+      "value": 10.6,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 8,
+      "areaName": "内灘町",
+      "pref": "内灘町",
+      "value": 8.9,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 9,
+      "areaName": "穴水町",
+      "pref": "穴水町",
+      "value": 8.8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 10,
+      "areaName": "加賀市",
+      "pref": "加賀市",
+      "value": 8.2,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 11,
+      "areaName": "志賀町",
+      "pref": "志賀町",
+      "value": 7.7,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 12,
+      "areaName": "宝達志水町",
+      "pref": "宝達志水町",
+      "value": 7.6,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 13,
+      "areaName": "津幡町",
+      "pref": "津幡町",
+      "value": 7.4,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 14,
+      "areaName": "川北町",
+      "pref": "川北町",
+      "value": 7,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 15,
+      "areaName": "羽咋市",
+      "pref": "羽咋市",
+      "value": 6.6,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 16,
+      "areaName": "野々市市",
+      "pref": "野々市市",
+      "value": 6.1,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 17,
+      "areaName": "能美市",
+      "pref": "能美市",
+      "value": 4.5,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 18,
+      "areaName": "能登町",
+      "pref": "能登町",
+      "value": 3.8,
+      "label": "実質公債費比率",
+      "unit": "％"
+    },
+    {
+      "rank": 19,
+      "areaName": "金沢市",
+      "pref": "金沢市",
+      "value": 3.4,
+      "label": "実質公債費比率",
+      "unit": "％"
+    }
+  ]
+}
