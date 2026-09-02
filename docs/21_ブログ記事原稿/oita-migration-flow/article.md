@@ -3,8 +3,8 @@ title: 大分県はなぜ福岡県へ人が流出するのか
 seoTitle: "大分県の人口移動2025｜転出超過1位は福岡県、転入超過1位は宮崎県"
 description: "大分県から最も人が出ていくのは東京都ではなく、隣接する福岡県です。1,261人という最大の転出超過を起点に、宮崎県や四国4県から人を集める大分県の人口移動の向きを、都道府県別の純移動データから読み解きます。"
 slug: oita-migration-flow
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

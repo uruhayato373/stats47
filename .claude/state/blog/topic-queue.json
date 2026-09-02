@@ -4,15 +4,15 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 62,
+    "pending": 61,
     "inProgress": 2,
-    "done": 54,
+    "done": 55,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
       "D2": 9,
       "A": 19,
-      "G": 6,
+      "G": 5,
       "F": 9
     }
   },
@@ -1097,8 +1097,10 @@
       "suggestedTitle": "大分県の人はどこへ移住する",
       "combinedScore": 0.429,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 34
+      "status": "done",
+      "priority": 34,
+      "done_at": "2026-09-02",
+      "published_slug": "oita-migration-flow"
     },
     {
       "topicKey": "migration-31000",
