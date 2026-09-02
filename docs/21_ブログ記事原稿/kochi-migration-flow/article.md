@@ -3,8 +3,8 @@ title: 高知県の転出超過、なぜ4年で最大に
 seoTitle: "高知県の人口移動2025｜転出超過の推移と都道府県別の純移動ランキング"
 description: 高知県から出ていく人は、いったいどこへ向かっているのでしょうか。愛媛県や北海道からは人を集める一方、大阪府や東京都へは大きく流出している非対称な構図を、都道府県別の純移動データから読み解きます。
 slug: kochi-migration-flow
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 archetype: G
 ---

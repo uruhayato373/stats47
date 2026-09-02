@@ -3,8 +3,8 @@ title: "天ぷら・フライ支出、新潟がトップ｜内陸奈良はなぜ
 seoTitle: "天ぷら・フライ消費支出額ランキング｜1位新潟18,925円・47位奈良9,752円 47都道府県2024年"
 description: "同じ「天ぷら・フライ」でも支出額は都道府県で大きく異なります。1位新潟県18,925円は47位奈良県9,752円のおよそ1.94倍です。ランキング図と地図から地域差の理由を読み解きます。"
 slug: tempura-fry-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-09-02
+published: true
 tags: []
 ---
 

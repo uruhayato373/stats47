@@ -4,16 +4,16 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 118,
-    "pending": 68,
+    "pending": 66,
     "inProgress": 2,
-    "done": 48,
+    "done": 50,
     "mustWritePending": 13,
     "byArchetype": {
       "B": 19,
-      "D2": 10,
+      "D2": 9,
       "A": 19,
       "F": 12,
-      "G": 8
+      "G": 7
     }
   },
   "queue": [
@@ -1016,8 +1016,10 @@
       "suggestedTitle": "高知県の人はどこへ移住する",
       "combinedScore": 0.435,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 31
+      "status": "done",
+      "priority": 31,
+      "done_at": "2026-09-02",
+      "published_slug": "kochi-migration-flow"
     },
     {
       "topicKey": "migration-16000",
@@ -2448,8 +2450,10 @@
       "suggestedTitle": "天ぷら消費量 日本一はどこ",
       "combinedScore": 0.291,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 85
+      "status": "done",
+      "priority": 85,
+      "done_at": "2026-09-02",
+      "published_slug": "tempura-fry-consumption-expenditure-prefecture-gap"
     },
     {
       "topicKey": "gap-other-cosmetics-consumption-expenditure",
